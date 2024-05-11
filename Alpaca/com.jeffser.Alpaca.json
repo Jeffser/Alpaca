@@ -1,0 +1,51 @@
+{
+    "id" : "com.jeffser.Alpaca",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "46",
+    "sdk" : "org.gnome.Sdk",
+    "command" : "alpaca",
+    "finish-args" : [
+        "--share=network",
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--device=dri",
+        "--socket=wayland"
+    ],
+    "cleanup" : [
+        "/include",
+        "/lib/pkgconfig",
+        "/man",
+        "/share/doc",
+        "/share/gtk-doc",
+        "/share/man",
+        "/share/pkgconfig",
+        "*.la",
+        "*.a"
+    ],
+    "modules" : [
+    	{
+		"name": "requests",
+		"buildsystem": "simple",
+		"build-options": {
+		  "build-args": [
+		    "--share=network"
+		  ]
+		},
+		"build-commands": [
+		    "pip3 install --prefix=/app --no-cache-dir requests"
+		]
+	    },
+        {
+            "name" : "alpaca",
+            "builddir" : true,
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "file:///home/tentri/Documents/Projects"
+                }
+            ]
+        }
+
+    ]
+}
