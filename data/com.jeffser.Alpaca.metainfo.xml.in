@@ -35,7 +35,7 @@
   <screenshots>
     <screenshot type="default">
       <image>https://jeffser.com/images/alpaca/screenie1.png</image>
-      <caption>Login into an Ollama instance</caption>
+      <caption>Welcome dialog</caption>
     </screenshot>
     <screenshot>
       <image>https://jeffser.com/images/alpaca/screenie2.png</image>
@@ -46,13 +46,29 @@
       <caption>Managing models</caption>
     </screenshot>
   </screenshots>
-  <content_rating type="oars-1.1">
-    <content_attribute id="money-purchasing">mild</content_attribute>
-  </content_rating>
+  <content_rating type="oars-1.1" />
   <url type="bugtracker">https://github.com/Jeffser/Alpaca/issues</url>
   <url type="homepage">https://github.com/Jeffser/Alpaca</url>
   <url type="donation">https://github.com/sponsors/Jeffser</url>
   <releases>
+    <release version="0.2.0" date="2024-05-14">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.2.0</url>
+      <description>
+        <p>0.2.0</p>
+        <p>Big Update</p>
+        <p>New Features</p>
+        <ul>
+          <li>Restore chat after closing the app</li>
+	        <li>A button to clear the chat</li>
+          <li>Fixed multiple bugs involving how messages are shown</li>
+          <li>Added welcome dialog</li>
+          <li>More stability</li>
+        </ul>
+        <p>
+          Please report any errors to the issues page, thank you.
+        </p>
+      </description>
+    </release>
     <release version="0.1.2" date="2024-05-13">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.1.2</url>
       <description>

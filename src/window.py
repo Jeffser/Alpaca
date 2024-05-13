@@ -20,7 +20,7 @@
 import gi
 gi.require_version("Soup", "3.0")
 from gi.repository import Adw, Gtk, GLib
-import json, requests, threading
+import json, requests, threading, os
 from datetime import datetime
 from .connection_handler import simple_get, simple_delete, stream_post, stream_post_fake
 from .available_models import available_models
@@ -32,12 +32,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
     #Variables
     ollama_url = None
     local_models = []
-    messages_history = []
+    #In the future I will at multiple chats, for now I'll save it like this so that past chats don't break in the future
+    current_chat_id="0"
+    chats = {"chats": {"0": {"messages": []}}}
 
     #Elements
     bot_message : Gtk.TextBuffer = None
+    connection_dialog = Gtk.Template.Child()
+    connection_carousel = Gtk.Template.Child()
+    connection_previous_button = Gtk.Template.Child()
+    connection_next_button = Gtk.Template.Child()
+    connection_url_entry = Gtk.Template.Child()
     overlay = Gtk.Template.Child()
     chat_container = Gtk.Template.Child()
+    chat_window = Gtk.Template.Child()
     message_entry = Gtk.Template.Child()
     send_button = Gtk.Template.Child()
     model_drop_down = Gtk.Template.Child()
@@ -58,7 +66,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
         self.overlay.add_toast(toast)
 
-    def show_message(self, msg:str, bot:bool):
+    def show_message(self, msg:str, bot:bool, footer:str=None):
         message_text = Gtk.TextView(
             editable=False,
             focusable=False,
@@ -71,6 +79,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
         message_buffer = message_text.get_buffer()
         message_buffer.insert(message_buffer.get_end_iter(), msg)
+        if footer is not None: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer))
+
         message_box = Adw.Bin(
             child=message_text,
             css_classes=["card" if bot else None]
@@ -88,87 +98,79 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.local_models.append(model["name"])
             self.model_drop_down.set_selected(0)
             return
-        #IF IT CONTINUES THEN THERE WAS EN ERROR
+        else:
+            self.show_toast(response['text'])
+            self.show_connection_dialog(True)
+
+    def verify_connection(self):
+        response = simple_get(self.ollama_url)
+        if response['status'] == 'ok':
+            if "Ollama is running" in response['text']:
+                with open("server.conf", "w+") as f: f.write(self.ollama_url)
+                self.message_entry.grab_focus_without_selecting()
+                self.update_list_local_models()
+                return True
+            else:
+                response = {"status": "error", "text": f"Unexpected response from {self.ollama_url} : {response['text']}"}
         self.show_toast(response['text'])
-        self.show_connection_dialog()
+        return False
 
     def dialog_response(self, dialog, task):
         self.ollama_url = dialog.get_extra_child().get_text()
         if dialog.choose_finish(task) == "login":
-            response = simple_get(self.ollama_url)
-            if response['status'] == 'ok':
-                if "Ollama is running" in response['text']:
-                    self.message_entry.grab_focus_without_selecting()
-                    self.update_list_local_models()
-                    return
-                else:
-                    response = {"status": "error", "text": f"Unexpected response from {self.ollama_url} : {response['text']}"}
-            #IF IT CONTINUES THEN THERE WAS EN ERROR
-            self.show_toast(response['text'])
-            self.show_connection_dialog()
+            self.verify_connection()
         else:
             self.destroy()
 
-    def show_connection_dialog(self):
-        dialog = Adw.AlertDialog(
-            heading="Login",
-            body="Please enter the Ollama instance URL",
-            close_response="cancel"
-        )
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("login", "Login")
-        dialog.set_response_appearance("login", Adw.ResponseAppearance.SUGGESTED)
-
-        entry = Gtk.Entry(text="http://localhost:11434") #FOR TESTING PURPOSES
-        dialog.set_extra_child(entry)
-
-        dialog.choose(parent = self, cancellable = None, callback = self.dialog_response)
-
     def update_bot_message(self, data):
         if data['done']:
-            try:
-                api_datetime = data['created_at']
-                api_datetime = api_datetime[:-4] + api_datetime[-1]
-                formated_datetime = datetime.strptime(api_datetime, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%Y/%m/%d %H:%M")
-                text = f"\n\n<small>{data['model']}\t|\t{formated_datetime}</small>"
-                GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
-            except Exception as e: print(e)
+            formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
+            text = f"\n\n<small>{data['model']}\t|\t{formated_datetime}</small>"
+            GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
+            vadjustment = self.chat_window.get_vadjustment()
+            GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
+            self.save_history()
             self.bot_message = None
         else:
             if self.bot_message is None:
                 GLib.idle_add(self.show_message, data['message']['content'], True)
-                self.messages_history.append({
+                self.chats["chats"][self.current_chat_id]["messages"].append({
                     "role": "assistant",
+                    "model": data['model'],
+                    "date": datetime.now().strftime("%Y/%m/%d %H:%M"),
                     "content": data['message']['content']
                 })
             else:
-                GLib.idle_add(self.bot_message.insert_at_cursor, data['message']['content'], len(data['message']['content']))
-                self.messages_history[-1]['content'] += data['message']['content']
-            #else: GLib.idle_add(self.bot_message.insert, self.bot_message.get_end_iter(), data['message']['content'])
+                GLib.idle_add(self.bot_message.insert, self.bot_message.get_end_iter(), data['message']['content'])
+                self.chats["chats"][self.current_chat_id]["messages"][-1]['content'] += data['message']['content']
 
     def send_message(self):
         current_model = self.model_drop_down.get_selected_item()
         if current_model is None:
             GLib.idle_add(self.show_toast, "Please pull a model")
             return
-        self.messages_history.append({
+        formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
+        self.chats["chats"][self.current_chat_id]["messages"].append({
             "role": "user",
+            "model": "User",
+            "date": formated_datetime,
             "content": self.message_entry.get_text()
         })
         data = {
             "model": current_model.get_string(),
-            "messages": self.messages_history
+            "messages": self.chats["chats"][self.current_chat_id]["messages"]
         }
         GLib.idle_add(self.message_entry.set_sensitive, False)
         GLib.idle_add(self.send_button.set_sensitive, False)
-        GLib.idle_add(self.show_message, self.message_entry.get_text(), False)
+        GLib.idle_add(self.show_message, self.message_entry.get_text(), False, f"\n\n<small>{formated_datetime}</small>")
+        self.save_history()
         GLib.idle_add(self.message_entry.get_buffer().set_text, "", 0)
         response = stream_post(f"{self.ollama_url}/api/chat", data=json.dumps(data), callback=self.update_bot_message)
         GLib.idle_add(self.send_button.set_sensitive, True)
         GLib.idle_add(self.message_entry.set_sensitive, True)
         if response['status'] == 'error':
             self.show_toast(f"{response['text']}")
-            self.show_connection_dialog()
+            self.show_connection_dialog(True)
 
     def send_button_activate(self, button):
         if not self.message_entry.get_text(): return
@@ -193,7 +195,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             else:
                 self.show_toast(response['text'])
                 self.manage_models_dialog.close()
-                self.show_connection_dialog()
+                self.show_connection_dialog(True)
 
     def pull_model_update(self, data):
         try:
@@ -220,7 +222,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             else:
                 GLib.idle_add(self.show_toast, response['text'])
                 GLib.idle_add(self.manage_models_dialog.close)
-                GLib.idle_add(self.show_connection_dialog)
+                GLib.idle_add(self.show_connection_dialog, True)
 
 
     def pull_model_start(self, dialog, task, model_name, button):
@@ -230,7 +232,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def model_action_button_activate(self, button, model_name):
         action = list(set(button.get_css_classes()) & set(["delete", "pull"]))[0]
-        print(f"action: {action}")
         dialog = Adw.AlertDialog(
             heading=f"{action.capitalize()} Model",
             body=f"Are you sure you want to {action} '{model_name}'?",
@@ -267,6 +268,75 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.manage_models_dialog.present(self)
         self.update_list_available_models()
 
+    def connection_carousel_page_changed(self, carousel, index):
+        if index == 0: self.connection_previous_button.set_sensitive(False)
+        else: self.connection_previous_button.set_sensitive(True)
+        if index == carousel.get_n_pages()-1: self.connection_next_button.set_label("Connect")
+        else: self.connection_next_button.set_label("Next")
+
+    def connection_previous_button_activate(self, button):
+        self.connection_carousel.scroll_to(self.connection_carousel.get_nth_page(self.connection_carousel.get_position()-1), True)
+
+    def connection_next_button_activate(self, button):
+        if button.get_label() == "Next": self.connection_carousel.scroll_to(self.connection_carousel.get_nth_page(self.connection_carousel.get_position()+1), True)
+        else:
+            self.ollama_url = self.connection_url_entry.get_text()
+            if self.verify_connection():
+                self.connection_dialog.force_close()
+            else:
+                show_connection_dialog(True)
+
+    def show_connection_dialog(self, error:bool=False):
+        self.connection_carousel.scroll_to(self.connection_carousel.get_nth_page(self.connection_carousel.get_n_pages()-1),False)
+        if error: self.connection_url_entry.set_css_classes(["error"])
+        else: self.connection_url_entry.set_css_classes([])
+        self.connection_dialog.present(self)
+
+    def clear_conversation(self):
+        for widget in list(self.chat_container): self.chat_container.remove(widget)
+        self.chats["chats"][self.current_chat_id]["messages"] = []
+
+    def clear_conversation_dialog_response(self, dialog, task):
+        if dialog.choose_finish(task) == "empty":
+            self.clear_conversation()
+            self.save_history()
+
+    def clear_conversation_dialog(self):
+        if self.bot_message is not None:
+            self.show_toast("Conversation cannot be cleared while receiving a message")
+            return
+        dialog = Adw.AlertDialog(
+            heading=f"Clear Conversation",
+            body=f"Are you sure you want to clear the conversation?",
+            close_response="cancel"
+        )
+        dialog.add_response("cancel", "Cancel")
+        dialog.add_response("empty", "Empty")
+        dialog.set_response_appearance("empty", Adw.ResponseAppearance.DESTRUCTIVE)
+        dialog.choose(
+            parent = self,
+            cancellable = None,
+            callback = self.clear_conversation_dialog_response
+        )
+
+    def save_history(self):
+        with open("chats.json", "w+") as f:
+            json.dump(self.chats, f, indent=4)
+
+    def load_history(self):
+        if os.path.exists("chats.json"):
+            self.clear_conversation()
+            try:
+                with open("chats.json", "r") as f:
+                    self.chats = json.load(f)
+            except Exception as e:
+                self.chats = {"chats": {"0": {"messages": []}}}
+            for message in self.chats['chats'][self.current_chat_id]['messages']:
+                if message['role'] == 'user':
+                    self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>")
+                else:
+                    self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>")
+                    self.bot_message = None
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -274,8 +344,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.send_button.connect("clicked", self.send_button_activate)
         self.set_default_widget(self.send_button)
         self.message_entry.set_activates_default(self.send_button)
-        self.message_entry.set_text("Hi") #FOR TESTING PURPOSES
-        self.show_connection_dialog()
+        self.connection_carousel.connect("page-changed", self.connection_carousel_page_changed)
+        self.connection_previous_button.connect("clicked", self.connection_previous_button_activate)
+        self.connection_next_button.connect("clicked", self.connection_next_button_activate)
+        self.connection_url_entry.connect("changed", lambda entry: entry.set_css_classes([]))
+        self.connection_dialog.connect("close-attempt", lambda dialog: self.destroy())
+        self.load_history()
+        if os.path.exists("server.conf"):
+            with open("server.conf", "r") as f:
+                self.ollama_url = f.read()
+            if self.verify_connection() is False: self.show_connection_dialog()
+        else: self.connection_dialog.present(self)
+
 
 
 

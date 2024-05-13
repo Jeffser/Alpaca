@@ -33,8 +33,9 @@ class AlpacaApplication(Adw.Application):
         super().__init__(application_id='com.jeffser.Alpaca',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
+        self.create_action('clear', lambda *_: AlpacaWindow.clear_conversation_dialog(self.props.active_window), ['<primary>e'])
+        self.create_action('reconnect', lambda *_: AlpacaWindow.show_connection_dialog(self.props.active_window), ['<primary>r'])
         self.create_action('about', self.on_about_action)
-        self.create_action('preferences', self.on_preferences_action)
 
     def do_activate(self):
         win = self.props.active_window
@@ -47,15 +48,12 @@ class AlpacaApplication(Adw.Application):
             application_name='Alpaca',
             application_icon='com.jeffser.Alpaca',
             developer_name='Jeffry Samuel Eduarte Rojas',
-            version='0.1.2',
+            version='0.2.0',
             developers=['Jeffser https://jeffser.com'],
             designers=['Jeffser https://jeffser.com'],
             copyright='© 2024 Jeffser',
             issue_url='https://github.com/Jeffser/Alpaca/issues')
         about.present()
-
-    def on_preferences_action(self, widget, _):
-        print('app.preferences action activated')
 
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
