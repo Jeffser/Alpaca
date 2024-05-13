@@ -27,8 +27,8 @@ from .available_models import available_models
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
+    config_dir = os.path.join(os.getenv("XDG_CONFIG_HOME"), "/", os.path.expanduser("~/.var/app/com.jeffser.Alpaca/config"))
     __gtype_name__ = 'AlpacaWindow'
-
     #Variables
     ollama_url = None
     local_models = []
@@ -106,7 +106,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         response = simple_get(self.ollama_url)
         if response['status'] == 'ok':
             if "Ollama is running" in response['text']:
-                with open("server.conf", "w+") as f: f.write(self.ollama_url)
+                with open(os.path.join(self.config_dir, "server.conf"), "w+") as f: f.write(self.ollama_url)
                 self.message_entry.grab_focus_without_selecting()
                 self.update_list_local_models()
                 return True
@@ -320,14 +320,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
 
     def save_history(self):
-        with open("chats.json", "w+") as f:
+        with open(os.path.join(self.config_dir, "chats.json"), "w+") as f:
             json.dump(self.chats, f, indent=4)
 
     def load_history(self):
-        if os.path.exists("chats.json"):
+        if os.path.exists(os.path.join(self.config_dir, "chats.json")):
             self.clear_conversation()
             try:
-                with open("chats.json", "r") as f:
+                with open(os.path.join(self.config_dir, "chats.json"), "r") as f:
                     self.chats = json.load(f)
             except Exception as e:
                 self.chats = {"chats": {"0": {"messages": []}}}
@@ -350,8 +350,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.connection_url_entry.connect("changed", lambda entry: entry.set_css_classes([]))
         self.connection_dialog.connect("close-attempt", lambda dialog: self.destroy())
         self.load_history()
-        if os.path.exists("server.conf"):
-            with open("server.conf", "r") as f:
+        if os.path.exists(os.path.join(self.config_dir, "server.conf")):
+            with open(os.path.join(self.config_dir, "server.conf"), "r") as f:
                 self.ollama_url = f.read()
             if self.verify_connection() is False: self.show_connection_dialog()
         else: self.connection_dialog.present(self)
