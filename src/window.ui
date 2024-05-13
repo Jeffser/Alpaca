@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+  <template class="AlpacaWindow" parent="AdwApplicationWindow">
+    <property name="resizable">True</property>
+    <property name="content">
+      <object class="AdwToastOverlay" id="overlay">
+        <child>
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar" id="header_bar">
+                <property name="title-widget">
+                  <object class="GtkBox">
+                    <property name="orientation">0</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkDropDown" id="model_drop_down">
+                        <property name="enable-search">true</property>
+                        <property name="model">
+                          <object class="GtkStringList" id="model_string_list">
+                            <items>
+                            </items>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="manage_models_button">
+                        <property name="tooltip-text" translatable="yes">Manage models</property>
+                        <child>
+                          <object class="AdwButtonContent">
+                            <property name="icon-name">package-x-generic-symbolic</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+
+                </property>
+                <child type="end">
+                  <object class="GtkMenuButton">
+                    <property name="primary">True</property>
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Menu</property>
+                    <property name="menu-model">primary_menu</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <property name="content">
+              <object class="GtkBox"><!--ACTUAL CONTENT-->
+
+                <property name="orientation">1</property>
+                <property name="margin-start">24</property>
+                <property name="margin-end">24</property>
+                <property name="margin-bottom">24</property>
+                <property name="vexpand">true</property>
+                <property name="hexpand">true</property>
+
+                <child>
+                  <object class="GtkScrolledWindow" id="chat_window">
+                    <property name="margin-bottom">12</property>
+                    <property name="has-frame">true</property>
+                    <property name="propagate-natural-height">true</property>
+                    <property name="min-content-width">500</property>
+                    <property name="min-content-height">600</property>
+                    <property name="kinetic-scrolling">1</property>
+                    <property name="vexpand">true</property>
+                    <style>
+                      <class name="undershoot-top"/>
+                      <class name="undershoot-bottom"/>
+                      <class name="card"/>
+                    </style>
+                    <child>
+                      <object class="GtkBox" id="chat_container">
+                        <property name="orientation">1</property>
+                        <property name="homogeneous">false</property>
+                        <property name="hexpand">false</property>
+                        <property name="vexpand">true</property>
+                        <property name="spacing">12</property>
+                        <property name="margin-top">12</property>
+                        <property name="margin-bottom">12</property>
+                        <property name="margin-start">12</property>
+                        <property name="margin-end">12</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">0</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkEntry" id="message_entry">
+                        <property name="hexpand">true</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="send_button">
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
+                        <child>
+                          <object class="AdwButtonContent">
+                            <property name="label" translatable="true">Send</property>
+                            <property name="icon-name">send-to-symbolic</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+              </object><!--END OF CONTENT-->
+            </property>
+          </object>
+        </child>
+      </object>
+    </property>
+    <object class="AdwDialog" id="pull_model_dialog">
+      <property name="can-close">false</property>
+      <property name="width-request">400</property>
+      <child>
+        <object class="AdwToolbarView">
+          <child>
+            <object class="AdwStatusPage" id="pull_model_status_page">
+              <property name="hexpand">true</property>
+              <property name="vexpand">true</property>
+              <property name="margin-top">24</property>
+              <property name="margin-bottom">24</property>
+              <property name="margin-start">24</property>
+              <property name="margin-end">24</property>
+              <property name="title" translatable="yes">Pulling Model</property>
+              <child>
+                <object class="GtkProgressBar" id="pull_model_progress_bar">
+                  <property name="show-text">true</property>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+    <object class="AdwDialog" id="manage_models_dialog">
+      <property name="can-close">true</property>
+      <property name="width-request">400</property>
+      <property name="height-request">600</property>
+      <child>
+        <object class="AdwToolbarView">
+          <child type="top">
+            <object class="AdwHeaderBar">
+              <property name="title-widget">
+                <object class="AdwWindowTitle">
+                  <property name="title">Manage models</property>
+                </object>
+              </property>
+            </object>
+          </child>
+          <child>
+            <object class="GtkBox">
+              <property name="hexpand">true</property>
+              <property name="vexpand">true</property>
+              <property name="margin-top">0</property>
+              <property name="margin-bottom">24</property>
+              <property name="margin-start">24</property>
+              <property name="margin-end">24</property>
+              <child>
+                <object class="GtkScrolledWindow">
+                  <property name="hexpand">true</property>
+                  <property name="vexpand">true</property>
+                  <child>
+                    <object class="GtkListBox" id="model_list_box">
+                      <property name="selection-mode">none</property>
+                      <style>
+                        <class name="boxed-list"/>
+                      </style>
+                    </object>
+                  </child>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+  </template>
+  <menu id="primary_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Preferences</attribute>
+        <attribute name="action">app.preferences</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+        <attribute name="action">win.show-help-overlay</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_About Alpaca</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>
