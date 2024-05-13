@@ -23,18 +23,6 @@
         "*.a"
     ],
     "modules" : [
-    	{
-		"name": "requests",
-		"buildsystem": "simple",
-		"build-options": {
-		  "build-args": [
-		    "--share=network"
-		  ]
-		},
-		"build-commands": [
-		    "pip3 install --prefix=/app --no-cache-dir requests"
-		]
-	    },
         {
             "name" : "alpaca",
             "builddir" : true,
@@ -42,10 +30,11 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "https://github.com/Jeffser/Alpaca.git"
+                    "url" : "https://github.com/Jeffser/Alpaca.git",
+                    "branch": "main"
                 }
             ]
-        }
-
+        },
+	"python3-requests.json"
     ]
 }
