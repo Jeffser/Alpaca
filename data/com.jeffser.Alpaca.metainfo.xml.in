@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-	<id>com.jeffser.Alpaca.desktop</id>
+	<id>com.jeffser.Alpaca</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
+  <launchable type="desktop-id">com.jeffser.Alpaca.desktop</launchable>
+  <name>Alpaca</name>
+  <summary>An Ollama client</summary>
 	<description>
-	  <p>No description</p>
+	  <p>Made with GTK4 and Adwaita.</p>
+    <p>Features</p>
+	  <ul>
+	    <li>Talk to multiple models in the same conversation</li>
+	    <li>Pull and delete models from the app</li>
+	  </ul>
 	</description>
+  <developer id="tld.vendor">
+    <name>Jeffry Samuel Eduarte Rojas</name>
+  </developer>
+  <provides>
+    <binary>alpaca</binary>
+  </provides>
+  <icon type="stock">com.jeffser.Alpaca</icon>
+  <branding>
+    <color type="primary" scheme_preference="light">#ff00ff</color>
+    <color type="primary" scheme_preference="dark">#993d3d</color>
+  </branding>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://jeffser.com/images/alpaca/screenie1.png</image>
+      <caption>Login into an Ollama instance</caption>
+    </screenshot>
+    <screenshot type="default">
+      <image>https://jeffser.com/images/alpaca/screenie2.png</image>
+      <caption>A conversation involving multiple models</caption>
+    </screenshot>
+    <screenshot type="default">
+      <image>https://jeffser.com/images/alpaca/screenie3.png</image>
+      <caption>Managing models</caption>
+    </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.1">
+    <content_attribute id="money-purchasing">mild</content_attribute>
+  </content_rating>
+  <url type="bugtracker">https://github.com/Jeffser/Alpaca/issues</url>
+  <url type="homepage">https://github.com/Jeffser/Alpaca</url>
+  <url type="donation">https://github.com/sponsors/Jeffser</url>
 </component>

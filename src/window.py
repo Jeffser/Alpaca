@@ -67,6 +67,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             margin_bottom=12,
             margin_start=12,
             margin_end=12,
+            css_classes=["flat"]
         )
         message_buffer = message_text.get_buffer()
         message_buffer.insert(message_buffer.get_end_iter(), msg)
