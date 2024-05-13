@@ -8,12 +8,12 @@
   <summary>An Ollama client</summary>
 	<description>
 	  <p>Made with GTK4 and Adwaita.</p>
-    <p><b>Features</b></p>
+    <p>Features</p>
 	  <ul>
 	    <li>Talk to multiple models in the same conversation</li>
 	    <li>Pull and delete models from the app</li>
 	  </ul>
-    <p><b>Disclaimer</b></p>
+    <p>Disclaimer</p>
 	  <p>This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any models.</p>
 	</description>
   <developer id="tld.vendor">
@@ -47,4 +47,21 @@
   <url type="bugtracker">https://github.com/Jeffser/Alpaca/issues</url>
   <url type="homepage">https://github.com/Jeffser/Alpaca</url>
   <url type="donation">https://github.com/sponsors/Jeffser</url>
+  <releases>
+    <release version="0.1.1" date="2024-05-12">
+      <url type="details"></url>
+      <description>
+        <p>0.1.1 Stable Release</p>
+        <p>This is the first public version of Alpaca</p>
+        <p>Features</p>
+        <ul>
+          <li>Talk to multiple models in the same conversation</li>
+	        <li>Pull and delete models from the app</li>
+        </ul>
+        <p>
+          Please report any errors to the issues page, thank you.
+        </p>
+      </description>
+    </release>
+  </releases>
 </component>

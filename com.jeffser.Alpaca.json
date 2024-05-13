@@ -23,6 +23,7 @@
         "*.a"
     ],
     "modules" : [
+    	"python3-requests.json",
         {
             "name" : "alpaca",
             "builddir" : true,
@@ -31,10 +32,9 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/Jeffser/Alpaca.git",
-                    "branch": "main"
+                    "tag": "0.1.1"
                 }
             ]
-        },
-	"python3-requests.json"
+        }
     ]
 }
