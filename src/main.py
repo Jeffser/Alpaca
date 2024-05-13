@@ -47,7 +47,7 @@ class AlpacaApplication(Adw.Application):
             application_name='Alpaca',
             application_icon='com.jeffser.Alpaca',
             developer_name='Jeffry Samuel Eduarte Rojas',
-            version='0.1.1',
+            version='0.1.2',
             developers=['Jeffser https://jeffser.com'],
             designers=['Jeffser https://jeffser.com'],
             copyright='© 2024 Jeffser',
