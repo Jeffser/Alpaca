@@ -47,9 +47,11 @@ class AlpacaApplication(Adw.Application):
             application_name='Alpaca',
             application_icon='com.jeffser.Alpaca',
             developer_name='Jeffry Samuel Eduarte Rojas',
-            version='0.1.0',
-            developers=['Jeffser'],
-            copyright='© 2024 Jeffser')
+            version='0.1.1',
+            developers=['Jeffser https://jeffser.com'],
+            designers=['Jeffser https://jeffser.com'],
+            copyright='© 2024 Jeffser',
+            issue_url='https://github.com/Jeffser/Alpaca/issues')
         about.present()
 
     def on_preferences_action(self, widget, _):
