@@ -2,6 +2,10 @@
 
 An [Ollama](https://github.com/ollama/ollama) client made with GTK4 and Adwaita.
 
+## Disclaimer
+
+This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any models.
+
 ## ‼️I NEED AN ICON‼️
 I'm not a graphic designer, it would mean the world to me if someone could make a [GNOME icon](https://developer.gnome.org/hig/guidelines/app-icons.html) for this app.
 
