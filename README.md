@@ -1,16 +1,20 @@
+<img src="https://jeffser.com/images/alpaca/logo.svg">
+
 # Alpaca
 
 An [Ollama](https://github.com/ollama/ollama) client made with GTK4 and Adwaita.
 
-## Disclaimer
 
-This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any models.
 
-## ‼️I NEED AN ICON‼️
-I'm not a graphic designer, it would mean the world to me if someone could make a [GNOME icon](https://developer.gnome.org/hig/guidelines/app-icons.html) for this app.
 
-## ⚠️THIS IS UNDER DEVELOPMENT⚠️
-This is my first GTK4 / Adwaita / Python app, so it might crash and some features are still under development, please report any errors if you can, thank you!
+
+---
+
+> [!WARNING]
+> This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any models.
+
+> [!important]
+> This is my first GTK4 / Adwaita / Python app, so it might crash and some features are still under development, please report any errors if you can, thank you!
 
 ## Features!
 - Talk to multiple models in the same conversation
@@ -22,9 +26,9 @@ This is my first GTK4 / Adwaita / Python app, so it might crash and some feature
 - Image / document recognition
 
 ## Screenies
-![Screenshot from 2024-05-12 19-58-28](https://github.com/Jeffser/Alpaca/assets/69224322/e28df5c9-6419-4800-bbbc-38821f096922)
-![Screenshot from 2024-05-12 20-01-08](https://github.com/Jeffser/Alpaca/assets/69224322/c4083864-8c39-40e6-83b6-aff9d62183ca)
-![Screenshot from 2024-05-12 20-01-31](https://github.com/Jeffser/Alpaca/assets/69224322/76deb8a2-13a5-480a-b99d-4de40159c229)
+Login to Ollama instance             |  Chatting with models        |  Managing models
+:-------------------------:|:-------------------------:|:-------------------------:
+![Screenshot from 2024-05-12 19-58-28](https://github.com/Jeffser/Alpaca/assets/69224322/e28df5c9-6419-4800-bbbc-38821f096922)  |  ![Screenshot from 2024-05-12 20-01-08](https://github.com/Jeffser/Alpaca/assets/69224322/c4083864-8c39-40e6-83b6-aff9d62183ca)  |  ![Screenshot from 2024-05-12 20-01-31](https://github.com/Jeffser/Alpaca/assets/69224322/76deb8a2-13a5-480a-b99d-4de40159c229)
 
 ## Preview
 1. Clone repo using Gnome Builder
