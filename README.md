@@ -17,6 +17,11 @@ This is my first GTK4 / Adwaita / Python app, so it might crash and some feature
 - Multiple conversations
 - Image / document recognition
 
+## Screenies
+![Screenshot from 2024-05-12 19-58-28](https://github.com/Jeffser/Alpaca/assets/69224322/e28df5c9-6419-4800-bbbc-38821f096922)
+![Screenshot from 2024-05-12 20-01-08](https://github.com/Jeffser/Alpaca/assets/69224322/c4083864-8c39-40e6-83b6-aff9d62183ca)
+![Screenshot from 2024-05-12 20-01-31](https://github.com/Jeffser/Alpaca/assets/69224322/76deb8a2-13a5-480a-b99d-4de40159c229)
+
 ## Preview
 1. Clone repo using Gnome Builder
 2. Press the `run` button
