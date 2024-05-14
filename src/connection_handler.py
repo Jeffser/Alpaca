@@ -7,9 +7,9 @@ def simple_get(connection_url:str) -> dict:
         if response.status_code == 200:
             return {"status": "ok", "text": response.text, "status_code": response.status_code}
         else:
-            return {"status": "error", "text": f"Failed to connect to {connection_url}. Status code: {response.status_code}", "status_code": response.status_code}
+            return {"status": "error", "status_code": response.status_code}
     except Exception as e:
-        return {"status": "error", "text": f"An error occurred while trying to connect to {connection_url}", "status_code": 0}
+        return {"status": "error", "status_code": 0}
 
 def simple_delete(connection_url:str, data) -> dict:
     try:
@@ -19,7 +19,7 @@ def simple_delete(connection_url:str, data) -> dict:
         else:
             return {"status": "error", "text": "Failed to delete", "status_code": response.status_code}
     except Exception as e:
-        return {"status": "error", "text": f"An error occurred while trying to connect to {connection_url}", "status_code": 0}
+        return {"status": "error", "status_code": 0}
 
 def stream_post(connection_url:str, data, callback:callable) -> dict:
     try:
@@ -31,11 +31,11 @@ def stream_post(connection_url:str, data, callback:callable) -> dict:
             for line in response.iter_lines():
                 if line:
                     callback(json.loads(line.decode("utf-8")))
-            return {"status": "ok", "text": "All good", "status_code": response.status_code}
+            return {"status": "ok", "status_code": response.status_code}
         else:
-            return {"status": "error", "text": "Error posting data", "status_code": response.status_code}
+            return {"status": "error", "status_code": response.status_code}
     except Exception as e:
-        return {"status": "error", "text": f"An error occurred while trying to connect to {connection_url}", "status_code": 0}
+        return {"status": "error", "status_code": 0}
 
 
 from time import sleep
@@ -58,4 +58,4 @@ def stream_post_fake(connection_url:str, data, callback:callable) -> dict:
         sleep(.1)
         data = {"status": msg}
         callback(data)
-    return {"status": "ok", "text": "All good", "status_code": 200}
+    return {"status": "ok", "status_code": 200}
