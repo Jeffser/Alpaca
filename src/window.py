@@ -368,6 +368,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
 
     def closing_connection_dialog(self, dialog):
+        if self.ollama_url is None: self.destroy()
+        if self.ollama_url == self.connection_url_entry.get_text():
+            self.connection_dialog.force_close()
+            if self.ollama_url is None or self.verify_connection() == False:
+                self.show_connection_dialog(True)
+                self.show_toast("error", 1, self.connection_overlay)
+            return
         dialog = Adw.AlertDialog(
             heading=f"Save Changes?",
             body=f"Do you want to save the URL change?",
