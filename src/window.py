@@ -361,6 +361,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if result == "cancel": return
         if result == "save":
             self.ollama_url = self.connection_url_entry.get_text()
+        elif result == "discard" and self.ollama_url is None: self.destroy()
         self.connection_dialog.force_close()
         if self.ollama_url is None or self.verify_connection() == False:
             self.show_connection_dialog(True)
@@ -368,23 +369,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
 
     def closing_connection_dialog(self, dialog):
-        if self.get_visible() == False:
-            self.destroy()
-        else:
-            dialog = Adw.AlertDialog(
-                heading=f"Save Changes?",
-                body=f"Do you want to save the URL change?",
-                close_response="cancel"
-            )
-            dialog.add_response("cancel", "Cancel")
-            dialog.add_response("discard", "Discard")
-            dialog.add_response("save", "Save")
-            dialog.set_response_appearance("discard", Adw.ResponseAppearance.DESTRUCTIVE)
-            dialog.set_response_appearance("save", Adw.ResponseAppearance.SUGGESTED)
-            dialog.choose(
-                parent = self,
-                cancellable = None,
-                callback = self.closing_connection_dialog_response
+        dialog = Adw.AlertDialog(
+            heading=f"Save Changes?",
+            body=f"Do you want to save the URL change?",
+            close_response="cancel"
+        )
+        dialog.add_response("cancel", "Cancel")
+        dialog.add_response("discard", "Discard")
+        dialog.add_response("save", "Save")
+        dialog.set_response_appearance("discard", Adw.ResponseAppearance.DESTRUCTIVE)
+        dialog.set_response_appearance("save", Adw.ResponseAppearance.SUGGESTED)
+        dialog.choose(
+            parent = self,
+            cancellable = None,
+            callback = self.closing_connection_dialog_response
         )
 
     def __init__(self, **kwargs):
