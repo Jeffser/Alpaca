@@ -24,6 +24,7 @@ An [Ollama](https://github.com/ollama/ollama) client made with GTK4 and Adwaita.
 - Multiple conversations
 - Image / document recognition
 - Notifications
+- Code highlighting
 
 ## Screenies
 Login to Ollama instance             |  Chatting with models        |  Managing models
@@ -35,10 +36,9 @@ Login to Ollama instance             |  Chatting with models        |  Managing 
 2. Press the `run` button
 
 ## Instalation
-1. Clone repo using Gnome Builder
-2. Build the app using the `build` button
-3. Prepare the file using the `install` button (it doesn't actually install it, idk)
-4. Then press the `export` button, it will export a `com.jeffser.Alpaca.flatpak` file, you can install it just by opening it
+1. Go to the `releases` page
+2. Download the latest flatpak package
+3. Open it
 
 ## Usage
 - You'll need an Ollama instance, I recommend using the [Docker image](https://ollama.com/blog/ollama-is-now-available-as-an-official-docker-image)
