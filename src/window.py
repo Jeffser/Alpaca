@@ -18,7 +18,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import gi
-gi.require_version("Soup", "3.0")
 from gi.repository import Adw, Gtk, GLib
 import json, requests, threading, os
 from datetime import datetime
