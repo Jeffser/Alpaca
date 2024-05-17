@@ -18,8 +18,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import gi
-from gi.repository import Adw, Gtk, GLib
-import json, requests, threading, os
+gi.require_version('GtkSource', '5')
+from gi.repository import Adw, Gtk, GLib, GtkSource
+import json, requests, threading, os, re, markdown
 from datetime import datetime
 from .connection_handler import simple_get, simple_delete, stream_post, stream_post_fake
 from .available_models import available_models
@@ -37,6 +38,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     #Elements
     bot_message : Gtk.TextBuffer = None
+    bot_message_box : Gtk.Box = None
+    bot_message_view : Gtk.TextView = None
     connection_dialog = Gtk.Template.Child()
     connection_carousel = Gtk.Template.Child()
     connection_previous_button = Gtk.Template.Child()
@@ -98,19 +101,24 @@ class AlpacaWindow(Adw.ApplicationWindow):
             margin_bottom=12,
             margin_start=12,
             margin_end=12,
+            hexpand=True,
             css_classes=["flat"]
         )
         message_buffer = message_text.get_buffer()
         message_buffer.insert(message_buffer.get_end_iter(), msg)
         if footer is not None: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer))
 
-        message_box = Adw.Bin(
-            child=message_text,
-            css_classes=["card" if bot else None]
+        message_box = Gtk.Box(
+            orientation=1,
+            css_classes=[None if bot else "card"]
         )
+        message_box.append(message_text)
         message_text.set_valign(Gtk.Align.CENTER)
         self.chat_container.append(message_box)
-        if bot: self.bot_message = message_buffer
+        if bot:
+            self.bot_message = message_buffer
+            self.bot_message_view = message_text
+            self.bot_message_box = message_box
 
     def update_list_local_models(self):
         self.local_models = []
@@ -137,32 +145,90 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 return True
         return False
 
+    def add_code_blocks(self):
+        print('a')
+        text = self.bot_message.get_text(self.bot_message.get_start_iter(), self.bot_message.get_end_iter(), True)
+        GLib.idle_add(self.bot_message_view.get_parent().remove, self.bot_message_view)
+        # Define a regular expression pattern to match code blocks
+        code_block_pattern = re.compile(r'```(\w+)\n(.*?)\n```', re.DOTALL)
+        parts = []
+        pos = 0
+        for match in code_block_pattern.finditer(text):
+            start, end = match.span()
+            if pos < start:
+                normal_text = text[pos:start]
+                parts.append({"type": "normal", "text": normal_text.strip()})
+            language = match.group(1)
+            code_text = match.group(2)
+            parts.append({"type": "code", "text": code_text, "language": language})
+            pos = end
+        # Extract any remaining normal text after the last code block
+        if pos < len(text):
+            normal_text = text[pos:]
+            if normal_text.strip():
+                parts.append({"type": "normal", "text": normal_text.strip()})
+        for part in parts:
+            if part['type'] == 'normal':
+                message_text = Gtk.TextView(
+                    editable=False,
+                    focusable=False,
+                    wrap_mode= Gtk.WrapMode.WORD,
+                    margin_top=12,
+                    margin_bottom=12,
+                    margin_start=12,
+                    margin_end=12,
+                    hexpand=True,
+                    css_classes=["flat"]
+                )
+                message_buffer = message_text.get_buffer()
+                message_buffer.insert(message_buffer.get_end_iter(), part['text'])
+                self.bot_message_box.append(message_text)
+            else:
+                language = GtkSource.LanguageManager.get_default().get_language(part['language'])
+                buffer = GtkSource.Buffer.new_with_language(language)
+                buffer.set_text(part['text'])
+                buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('classic-dark'))
+                source_view = GtkSource.View(
+                    auto_indent=True, indent_width=4, buffer=buffer, show_line_numbers=True
+                )
+                source_view.get_style_context().add_class("card")
+                self.bot_message_box.append(source_view)
+        self.bot_message = None
+        self.bot_message_box = None
+
     def update_bot_message(self, data):
         if data['done']:
             formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
-            text = f"\n\n<small>{data['model']}\t|\t{formated_datetime}</small>"
+            text = f"\n<small>{data['model']}\t|\t{formated_datetime}</small>"
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
             vadjustment = self.chat_window.get_vadjustment()
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
             self.save_history()
-            self.bot_message = None
         else:
-            if self.bot_message is None:
-                GLib.idle_add(self.show_message, data['message']['content'], True)
+            if self.chats["chats"][self.current_chat_id]["messages"][-1]['role'] == "user":
                 self.chats["chats"][self.current_chat_id]["messages"].append({
                     "role": "assistant",
                     "model": data['model'],
                     "date": datetime.now().strftime("%Y/%m/%d %H:%M"),
-                    "content": data['message']['content']
+                    "content": ''
                 })
-            else:
-                GLib.idle_add(self.bot_message.insert, self.bot_message.get_end_iter(), data['message']['content'])
-                self.chats["chats"][self.current_chat_id]["messages"][-1]['content'] += data['message']['content']
+            GLib.idle_add(self.bot_message.insert, self.bot_message.get_end_iter(), data['message']['content'])
+            self.chats["chats"][self.current_chat_id]["messages"][-1]['content'] += data['message']['content']
 
-    def send_message(self):
+    def run_message(self, messages, model):
+        response = stream_post(f"{self.ollama_url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=self.update_bot_message)
+        GLib.idle_add(self.add_code_blocks)
+        GLib.idle_add(self.send_button.set_sensitive, True)
+        GLib.idle_add(self.message_entry.set_sensitive,  True)
+        if response['status'] == 'error':
+            GLib.idle_add(self.show_toast, 'error', 1, self.connection_overlay)
+            GLib.idle_add(self.show_connection_dialog, True)
+
+    def send_message(self, button):
+        if not self.message_entry.get_text(): return
         current_model = self.model_drop_down.get_selected_item()
         if current_model is None:
-            GLib.idle_add(self.show_toast, "info", 0, self.main_overlay)
+            self.show_toast("info", 0, self.main_overlay)
             return
         formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
         self.chats["chats"][self.current_chat_id]["messages"].append({
@@ -175,21 +241,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             "model": current_model.get_string(),
             "messages": self.chats["chats"][self.current_chat_id]["messages"]
         }
-        GLib.idle_add(self.message_entry.set_sensitive, False)
-        GLib.idle_add(self.send_button.set_sensitive, False)
-        GLib.idle_add(self.show_message, self.message_entry.get_text(), False, f"\n\n<small>{formated_datetime}</small>")
-        self.save_history()
-        GLib.idle_add(self.message_entry.get_buffer().set_text, "", 0)
-        response = stream_post(f"{self.ollama_url}/api/chat", data=json.dumps(data), callback=self.update_bot_message)
-        GLib.idle_add(self.send_button.set_sensitive, True)
-        GLib.idle_add(self.message_entry.set_sensitive, True)
-        if response['status'] == 'error':
-            GLib.idle_add(self.show_toast, 'error', 1, self.connection_overlay)
-            GLib.idle_add(self.show_connection_dialog, True)
-
-    def send_button_activate(self, button):
-        if not self.message_entry.get_text(): return
-        thread = threading.Thread(target=self.send_message)
+        self.message_entry.set_sensitive(False)
+        self.send_button.set_sensitive(False)
+        self.show_message(self.message_entry.get_text(), False, f"\n\n<small>{formated_datetime}</small>")
+        self.message_entry.get_buffer().set_text("", 0)
+        self.show_message("", True)
+        thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
         thread.start()
 
     def delete_model(self, dialog, task, model_name, button):
@@ -235,7 +292,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 GLib.idle_add(self.show_toast, "error", 4, self.connection_overlay)
                 GLib.idle_add(self.manage_models_dialog.close)
                 GLib.idle_add(self.show_connection_dialog, True)
-                print("pull fail")
 
 
     def pull_model_start(self, dialog, task, model_name, button):
@@ -353,6 +409,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>")
                 else:
                     self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>")
+                    self.add_code_blocks()
                     self.bot_message = None
 
     def closing_connection_dialog_response(self, dialog, task):
@@ -393,10 +450,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        GtkSource.init()
         self.manage_models_button.connect("clicked", self.manage_models_button_activate)
-        self.send_button.connect("clicked", self.send_button_activate)
+        self.send_button.connect("clicked", self.send_message)
         self.set_default_widget(self.send_button)
         self.message_entry.set_activates_default(self.send_button)
+        self.message_entry.set_text("Could you give me a hello world for python?")
         self.connection_carousel.connect("page-changed", self.connection_carousel_page_changed)
         self.connection_previous_button.connect("clicked", self.connection_previous_button_activate)
         self.connection_next_button.connect("clicked", self.connection_next_button_activate)
@@ -408,7 +467,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.ollama_url = f.read()
             if self.verify_connection() is False: self.show_connection_dialog(True)
         else: self.connection_dialog.present(self)
-        self.show_toast("funny", True, self.manage_models_overlay)
 
 
 
