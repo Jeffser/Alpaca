@@ -216,7 +216,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     css_classes=["flat"]
                 )
                 message_buffer = message_text.get_buffer()
-                message_buffer.insert(message_buffer.get_end_iter(), part['text'])
+                if part['text'].split("\n")[-1] == parts[-1]['text'].split("\n")[-1]:
+                    footer = "\n<small>" + part['text'].split('\n')[-1] + "</small>"
+                    part['text'] = '\n'.join(part['text'].split("\n")[:-1])
+                    message_buffer.insert(message_buffer.get_end_iter(), part['text'])
+                    message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer))
+                else:
+                    message_buffer.insert(message_buffer.get_end_iter(), part['text'])
                 self.bot_message_box.append(message_text)
             else:
                 language = GtkSource.LanguageManager.get_default().get_language(part['language'])
