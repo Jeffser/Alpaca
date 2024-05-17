@@ -67,8 +67,6 @@
                     <property name="kinetic-scrolling">1</property>
                     <property name="vexpand">true</property>
                     <style>
-                      <class name="undershoot-top"/>
-                      <class name="undershoot-bottom"/>
                       <class name="card"/>
                     </style>
                     <child>
@@ -92,19 +90,54 @@
                     <property name="orientation">0</property>
                     <property name="spacing">12</property>
                     <child>
-                      <object class="GtkEntry" id="message_entry">
-                        <property name="hexpand">true</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="send_button">
+                      <object class="GtkScrolledWindow">
                         <style>
-                          <class name="suggested-action"/>
+                          <class name="card"/>
+                          <class name="view"/>
                         </style>
                         <child>
-                          <object class="AdwButtonContent">
-                            <property name="label" translatable="true">Send</property>
-                            <property name="icon-name">send-to-symbolic</property>
+                          <object class="GtkTextView" id="message_text_view">
+                            <property name="wrap-mode">word</property>
+                            <property name="margin-top">6</property>
+                            <property name="margin-bottom">6</property>
+                            <property name="margin-start">6</property>
+                            <property name="margin-end">6</property>
+                            <property name="hexpand">true</property>
+                            <style>
+                              <class name="view"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">1</property>
+                        <property name="spacing">12</property>
+                        <child>
+                          <object class="GtkButton" id="send_button">
+                            <style>
+                              <class name="suggested-action"/>
+                            </style>
+                            <child>
+                              <object class="AdwButtonContent">
+                                <property name="label" translatable="true">Send</property>
+                                <property name="icon-name">send-to-symbolic</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="image_button">
+                            <property name="sensitive">false</property>
+                            <property name="tooltip-text" translatable="true">Requires model 'llava' to be selected</property>
+                            <child>
+                              <object class="AdwButtonContent">
+                                <property name="label" translatable="true">Image</property>
+                                <property name="icon-name">image-x-generic-symbolic</property>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -323,4 +356,14 @@
       </item>
     </section>
   </menu>
+
+  <object class="GtkFileFilter" id="file_filter_image">
+    <mime-types>
+      <mime-type>image/svg+xml</mime-type>
+      <mime-type>image/png</mime-type>
+      <mime-type>image/jpeg</mime-type>
+      <mime-type>image/webp</mime-type>
+      <mime-type>image/gif</mime-type>
+    </mime-types>
+  </object>
 </interface>

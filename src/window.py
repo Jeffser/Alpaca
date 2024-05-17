@@ -19,8 +19,11 @@
 
 import gi
 gi.require_version('GtkSource', '5')
-from gi.repository import Adw, Gtk, GLib, GtkSource
-import json, requests, threading, os, re, markdown
+gi.require_version('GdkPixbuf', '2.0')
+from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
+import json, requests, threading, os, re, base64
+from io import BytesIO
+from PIL import Image
 from datetime import datetime
 from .connection_handler import simple_get, simple_delete, stream_post, stream_post_fake
 from .available_models import available_models
@@ -35,6 +38,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     #In the future I will at multiple chats, for now I'll save it like this so that past chats don't break in the future
     current_chat_id="0"
     chats = {"chats": {"0": {"messages": []}}}
+    attached_image = {"path": None, "base64": None}
 
     #Elements
     bot_message : Gtk.TextBuffer = None
@@ -51,8 +55,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     connection_overlay = Gtk.Template.Child()
     chat_container = Gtk.Template.Child()
     chat_window = Gtk.Template.Child()
-    message_entry = Gtk.Template.Child()
+    message_text_view = Gtk.Template.Child()
     send_button = Gtk.Template.Child()
+    image_button = Gtk.Template.Child()
+    file_filter_image = Gtk.Template.Child()
     model_drop_down = Gtk.Template.Child()
     model_string_list = Gtk.Template.Child()
 
@@ -70,7 +76,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             "Failed to connect to server",
             "Could not list local models",
             "Could not delete model",
-            "Could not pull model"
+            "Could not pull model",
+            "Cannot open image"
         ],
         "info": [
             "Please select a model before chatting",
@@ -92,7 +99,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
         overlay.add_toast(toast)
 
-    def show_message(self, msg:str, bot:bool, footer:str=None):
+    def show_message(self, msg:str, bot:bool, footer:str=None, image_base64:str=None):
         message_text = Gtk.TextView(
             editable=False,
             focusable=False,
@@ -112,13 +119,41 @@ class AlpacaWindow(Adw.ApplicationWindow):
             orientation=1,
             css_classes=[None if bot else "card"]
         )
-        message_box.append(message_text)
         message_text.set_valign(Gtk.Align.CENTER)
         self.chat_container.append(message_box)
+
+        if image_base64 is not None:
+            image_data = base64.b64decode(image_base64)
+            loader = GdkPixbuf.PixbufLoader.new()
+            loader.write(image_data)
+            loader.close()
+
+            pixbuf = loader.get_pixbuf()
+            texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+
+            image = Gtk.Image.new_from_paintable(texture)
+            image.set_size_request(360, 360)
+            message_box.append(image)
+
+        message_box.append(message_text)
+
         if bot:
             self.bot_message = message_buffer
             self.bot_message_view = message_text
             self.bot_message_box = message_box
+
+    def verify_if_image_can_be_used(self, pspec=None, user_data=None):
+        if self.model_drop_down.get_selected_item() == None: return True
+        selected = self.model_drop_down.get_selected_item().get_string().split(":")[0]
+        if selected in ['llava']:
+            self.image_button.set_sensitive(True)
+            return True
+        else:
+            self.image_button.set_sensitive(False)
+            self.image_button.set_css_classes([])
+            self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
+            self.attached_image = {"path": None, "base64": None}
+            return False
 
     def update_list_local_models(self):
         self.local_models = []
@@ -130,6 +165,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.model_string_list.append(model["name"])
                 self.local_models.append(model["name"])
             self.model_drop_down.set_selected(0)
+            self.verify_if_image_can_be_used()
             return
         else:
             self.show_connection_dialog(True)
@@ -140,13 +176,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if response['status'] == 'ok':
             if "Ollama is running" in response['text']:
                 with open(os.path.join(self.config_dir, "server.conf"), "w+") as f: f.write(self.ollama_url)
-                self.message_entry.grab_focus_without_selecting()
+                #self.message_text_view.grab_focus_without_selecting()
                 self.update_list_local_models()
                 return True
         return False
 
     def add_code_blocks(self):
-        print('a')
         text = self.bot_message.get_text(self.bot_message.get_start_iter(), self.bot_message.get_end_iter(), True)
         GLib.idle_add(self.bot_message_view.get_parent().remove, self.bot_message_view)
         # Define a regular expression pattern to match code blocks
@@ -181,7 +216,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     css_classes=["flat"]
                 )
                 message_buffer = message_text.get_buffer()
-                message_buffer.insert(message_buffer.get_end_iter(), part['text'])
+                message_buffer.insert(message_buffer.get_end_iter(), f"\n\n{part['text']}" if part['text'] == parts[-1]['text'] else part['text'])
                 self.bot_message_box.append(message_text)
             else:
                 language = GtkSource.LanguageManager.get_default().get_language(part['language'])
@@ -219,13 +254,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
         response = stream_post(f"{self.ollama_url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=self.update_bot_message)
         GLib.idle_add(self.add_code_blocks)
         GLib.idle_add(self.send_button.set_sensitive, True)
-        GLib.idle_add(self.message_entry.set_sensitive,  True)
+        GLib.idle_add(self.image_button.set_sensitive, True)
+        GLib.idle_add(self.image_button.set_css_classes, [])
+        GLib.idle_add(self.image_button.get_child().set_icon_name, "image-x-generic-symbolic")
+        self.attached_image = {"path": None, "base64": None}
+        GLib.idle_add(self.message_text_view.set_sensitive,  True)
         if response['status'] == 'error':
             GLib.idle_add(self.show_toast, 'error', 1, self.connection_overlay)
             GLib.idle_add(self.show_connection_dialog, True)
 
     def send_message(self, button):
-        if not self.message_entry.get_text(): return
+        if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
         current_model = self.model_drop_down.get_selected_item()
         if current_model is None:
             self.show_toast("info", 0, self.main_overlay)
@@ -235,16 +274,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
             "role": "user",
             "model": "User",
             "date": formated_datetime,
-            "content": self.message_entry.get_text()
+            "content": self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
         })
         data = {
             "model": current_model.get_string(),
             "messages": self.chats["chats"][self.current_chat_id]["messages"]
         }
-        self.message_entry.set_sensitive(False)
+        if self.verify_if_image_can_be_used() and self.attached_image["base64"] is not None:
+            data["messages"][-1]["images"] = [self.attached_image["base64"]]
+        self.message_text_view.set_sensitive(False)
         self.send_button.set_sensitive(False)
-        self.show_message(self.message_entry.get_text(), False, f"\n\n<small>{formated_datetime}</small>")
-        self.message_entry.get_buffer().set_text("", 0)
+        self.image_button.set_sensitive(False)
+        self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"])
+        self.message_text_view.get_buffer().set_text("", 0)
         self.show_message("", True)
         thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
         thread.start()
@@ -323,7 +365,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 title = model_name,
                 subtitle = model_description,
             )
-            model_name += ":latest"
+            if ":" not in model_name: model_name += ":latest"
             button = Gtk.Button(
                 icon_name = "folder-download-symbolic" if model_name not in self.local_models else "user-trash-symbolic",
                 vexpand = False,
@@ -334,7 +376,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.model_list_box.append(model)
 
     def manage_models_button_activate(self, button):
-
         self.manage_models_dialog.present(self)
         self.update_list_available_models()
 
@@ -406,7 +447,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.chats = {"chats": {"0": {"messages": []}}}
             for message in self.chats['chats'][self.current_chat_id]['messages']:
                 if message['role'] == 'user':
-                    self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>")
+                    self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>", message['images'][0])
                 else:
                     self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>")
                     self.add_code_blocks()
@@ -448,14 +489,68 @@ class AlpacaWindow(Adw.ApplicationWindow):
             callback = self.closing_connection_dialog_response
         )
 
+    def load_image(self, file_dialog, result):
+        try: file = file_dialog.open_finish(result)
+        except: return
+        try:
+            self.attached_image["path"] = file.get_path()
+            '''with open(self.attached_image["path"], "rb") as image_file:
+                self.attached_image["base64"] = base64.b64encode(image_file.read()).decode("utf-8")'''
+            with Image.open(self.attached_image["path"]) as img:
+                width, height = img.size
+                max_size = 240
+                if width > height:
+                    new_width = max_size
+                    new_height = int((max_size / width) * height)
+                else:
+                    new_height = max_size
+                    new_width = int((max_size / height) * width)
+                resized_img = img.resize((new_width, new_height), Image.LANCZOS)
+                with BytesIO() as output:
+                    resized_img.save(output, format="JPEG")
+                    image_data = output.getvalue()
+                self.attached_image["base64"] = base64.b64encode(image_data).decode("utf-8")
+
+            self.image_button.set_css_classes(["destructive-action"])
+            self.image_button.get_child().set_icon_name("edit-delete-symbolic")
+        except Exception as e:
+            print(e)
+            self.show_toast("error", 5, self.main_overlay)
+
+    def remove_image(self, dialog, task):
+        if dialog.choose_finish(task) == 'remove':
+            self.image_button.set_css_classes([])
+            self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
+            self.attached_image = {"path": None, "base64": None}
+
+    def open_image(self, button):
+        if "destructive-action" in button.get_css_classes():
+            dialog = Adw.AlertDialog(
+                heading=f"Remove Image?",
+                body=f"Are you sure you want to remove image?",
+                close_response="cancel"
+            )
+            dialog.add_response("cancel", "Cancel")
+            dialog.add_response("remove", "Remove")
+            dialog.set_response_appearance("remove", Adw.ResponseAppearance.DESTRUCTIVE)
+            dialog.choose(
+                parent = self,
+                cancellable = None,
+                callback = self.remove_image
+            )
+        else:
+            file_dialog = Gtk.FileDialog(default_filter=self.file_filter_image)
+            file_dialog.open(self, None, self.load_image)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
         self.manage_models_button.connect("clicked", self.manage_models_button_activate)
         self.send_button.connect("clicked", self.send_message)
+        self.image_button.connect("clicked", self.open_image)
         self.set_default_widget(self.send_button)
-        self.message_entry.set_activates_default(self.send_button)
-        self.message_entry.set_text("Could you give me a hello world for python?")
+        self.model_drop_down.connect("notify", self.verify_if_image_can_be_used)
+        #self.message_text_view.set_activates_default(self.send_button)
         self.connection_carousel.connect("page-changed", self.connection_carousel_page_changed)
         self.connection_previous_button.connect("clicked", self.connection_previous_button_activate)
         self.connection_next_button.connect("clicked", self.connection_next_button_activate)

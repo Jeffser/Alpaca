@@ -57,6 +57,20 @@
 		}
 	    ]
 	},
+	{
+            "name": "python3-pillow",
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"pillow\" --no-build-isolation"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/ef/43/c50c17c5f7d438e836c169e343695534c38c77f60e7c90389bd77981bc21/pillow-10.3.0.tar.gz",
+                    "sha256": "9d2455fbf44c914840c793e89aa82d0e1763a14253a000743719ae5946814b2d"
+                }
+            ]
+        },
         {
             "name" : "alpaca",
             "builddir" : true,
