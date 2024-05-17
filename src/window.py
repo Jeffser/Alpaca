@@ -216,7 +216,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     css_classes=["flat"]
                 )
                 message_buffer = message_text.get_buffer()
-                message_buffer.insert(message_buffer.get_end_iter(), f"\n\n{part['text']}" if part['text'] == parts[-1]['text'] else part['text'])
+                message_buffer.insert(message_buffer.get_end_iter(), part['text'])
                 self.bot_message_box.append(message_text)
             else:
                 language = GtkSource.LanguageManager.get_default().get_language(part['language'])
