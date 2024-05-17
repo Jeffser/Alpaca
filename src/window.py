@@ -447,7 +447,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.chats = {"chats": {"0": {"messages": []}}}
             for message in self.chats['chats'][self.current_chat_id]['messages']:
                 if message['role'] == 'user':
-                    self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>", message['images'][0])
+                    self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>", message['images'][0] if 'images' in message and len(message['images']) > 0 else None)
                 else:
                     self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>")
                     self.add_code_blocks()
