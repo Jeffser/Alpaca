@@ -1,0 +1,90 @@
+{
+  "id" : "com.jeffser.Alpaca",
+  "runtime" : "org.gnome.Platform",
+  "runtime-version" : "46",
+  "runtime-commit" : "3bf66877ef1d26e24e3d3eb92e5ac2cda7d286cebe7c479c307a4370ab7b443e",
+  "sdk" : "org.gnome.Sdk",
+  "sdk-commit" : "d47ee07fb0df4a655a392bb1ca632c68525e2a42297919d2b68431fef4a7cf8d",
+  "command" : "alpaca",
+  "modules" : [
+    {
+      "name" : "python3-requests",
+      "buildsystem" : "simple",
+      "sources" : [
+        {
+          "url" : "https://files.pythonhosted.org/packages/ba/06/a07f096c664aeb9f01624f858c3add0a4e913d6c96257acb4fce61e7de14/certifi-2024.2.2-py3-none-any.whl",
+          "sha256" : "dc383c07b76109f368f6106eee2b593b04a011ea4d55f652c6ca24a754d1cdd1",
+          "type" : "file"
+        },
+        {
+          "url" : "https://files.pythonhosted.org/packages/63/09/c1bc53dab74b1816a00d8d030de5bf98f724c52c1635e07681d312f20be8/charset-normalizer-3.3.2.tar.gz",
+          "sha256" : "f30c3cb33b24454a82faecaf01b19c18562b1e89558fb6c56de4d9118a032fd5",
+          "type" : "file"
+        },
+        {
+          "url" : "https://files.pythonhosted.org/packages/e5/3e/741d8c82801c347547f8a2a06aa57dbb1992be9e948df2ea0eda2c8b79e8/idna-3.7-py3-none-any.whl",
+          "sha256" : "82fee1fc78add43492d3a1898bfa6d8a904cc97d8427f683ed8e798d07761aa0",
+          "type" : "file"
+        },
+        {
+          "url" : "https://files.pythonhosted.org/packages/70/8e/0e2d847013cb52cd35b38c009bb167a1a26b2ce6cd6965bf26b47bc0bf44/requests-2.31.0-py3-none-any.whl",
+          "sha256" : "58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f",
+          "type" : "file"
+        },
+        {
+          "url" : "https://files.pythonhosted.org/packages/a2/73/a68704750a7679d0b6d3ad7aa8d4da8e14e151ae82e6fee774e6e0d05ec8/urllib3-2.2.1-py3-none-any.whl",
+          "sha256" : "450b20ec296a467077128bff42b73080516e71b56ff59a60a02bef2232c4fa9d",
+          "type" : "file"
+        }
+      ],
+      "build-commands" : [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"requests\" --no-build-isolation"
+      ]
+    },
+    {
+      "name" : "python3-pillow",
+      "buildsystem" : "simple",
+      "sources" : [
+        {
+          "url" : "https://files.pythonhosted.org/packages/ef/43/c50c17c5f7d438e836c169e343695534c38c77f60e7c90389bd77981bc21/pillow-10.3.0.tar.gz",
+          "sha256" : "9d2455fbf44c914840c793e89aa82d0e1763a14253a000743719ae5946814b2d",
+          "type" : "file"
+        }
+      ],
+      "build-commands" : [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"pillow\" --no-build-isolation"
+      ]
+    },
+    {
+      "name" : "alpaca",
+      "buildsystem" : "meson",
+      "builddir" : true,
+      "sources" : [
+        {
+          "url" : "file:///home/tentri/Documents/Alpaca",
+          "commit" : "8ddce304b220cbdb020053b84e707b0b26060695",
+          "type" : "git"
+        }
+      ]
+    }
+  ],
+  "cleanup" : [
+    "/include",
+    "/lib/pkgconfig",
+    "/man",
+    "/share/doc",
+    "/share/gtk-doc",
+    "/share/man",
+    "/share/pkgconfig",
+    "*.la",
+    "*.a"
+  ],
+  "finish-args" : [
+    "--share=network",
+    "--share=ipc",
+    "--socket=fallback-x11",
+    "--device=dri",
+    "--socket=wayland"
+  ],
+  "source-date-epoch" : 1716060688
+}

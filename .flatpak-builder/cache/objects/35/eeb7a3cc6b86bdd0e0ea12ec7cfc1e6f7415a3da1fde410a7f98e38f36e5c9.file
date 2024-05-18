@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.jeffser.Alpaca</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <launchable type="desktop-id">com.jeffser.Alpaca.desktop</launchable>
+  <name>Alpaca</name>
+  <summary>An Ollama client</summary>
+  <description>
+    <p>Chat with multiple AI models</p>
+    <p>An Ollama client</p>
+    <p>Features</p>
+    <ul>
+      <li>Talk to multiple models in the same conversation</li>
+      <li>Pull and delete models from the app</li>
+    </ul>
+    <p>Disclaimer</p>
+    <p xml:lang="ru">Отказ от ответственности</p>
+    <p>This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any models.</p>
+  </description>
+  <developer id="tld.vendor">
+    <name>Jeffry Samuel Eduarte Rojas</name>
+  </developer>
+  <provides>
+    <binary>alpaca</binary>
+  </provides>
+  <icon type="stock">com.jeffser.Alpaca</icon>
+  <categories>
+    <category>Utility</category>
+    <category>Development</category>
+    <category>Chat</category>
+  </categories>
+  <branding>
+    <color type="primary" scheme_preference="light">#8cdef5</color>
+    <color type="primary" scheme_preference="dark">#0f2b78</color>
+  </branding>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://jeffser.com/images/alpaca/screenie1.png</image>
+      <caption>Welcome dialog</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://jeffser.com/images/alpaca/screenie2.png</image>
+      <caption>A conversation involving multiple models</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://jeffser.com/images/alpaca/screenie3.png</image>
+      <caption>Managing models</caption>
+    </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.1"/>
+  <url type="bugtracker">https://github.com/Jeffser/Alpaca/issues</url>
+  <url type="homepage">https://github.com/Jeffser/Alpaca</url>
+  <url type="donation">https://github.com/sponsors/Jeffser</url>
+  <releases>
+    <release version="0.4.0" date="2024-05-17">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.4.0</url>
+      <description>
+        <p>Big Update</p>
+        <ul>
+          <li>Added code highlighting</li>
+          <li>Added image recognition (llava model)</li>
+          <li>Added multiline prompt</li>
+          <li>Fixed some small bugs</li>
+          <li>General optimization</li>
+        </ul>
+        <p>
+          Please report any errors to the issues page, thank you.
+        </p>
+      </description>
+    </release>
+    <release version="0.3.0" date="2024-05-16">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.3.0</url>
+      <description>
+        <p>Fixes and features</p>
+        <ul>
+          <li>Russian translation (thanks github/alexkdeveloper)</li>
+          <li>Fixed: Cannot close app on first setup</li>
+          <li>Fixed: Brand colors for Flathub</li>
+          <li>Fixed: App description</li>
+          <li>Fixed: Only show 'save changes dialog' when you actually change the url</li>
+        </ul>
+        <p>
+          Please report any errors to the issues page, thank you.
+        </p>
+      </description>
+    </release>
+    <release version="0.2.2" date="2024-05-14">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.2.2</url>
+      <description>
+        <p>0.2.2 Bug fixes</p>
+        <ul>
+          <li>Toast messages appearing behind dialogs</li>
+          <li>Local model list not updating when changing servers</li>
+          <li>Closing the setup dialog closes the whole app</li>
+        </ul>
+        <p>
+          Please report any errors to the issues page, thank you.
+        </p>
+      </description>
+    </release>
+    <release version="0.2.1" date="2024-05-14">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.2.1</url>
+      <description>
+        <p>0.2.1 Data saving fix</p>
+        <p>The app didn't save the config files and chat history to the right directory, this is now fixed</p>
+        <p>
+          Please report any errors to the issues page, thank you.
+        </p>
+      </description>
+    </release>
+    <release version="0.2.0" date="2024-05-14">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.2.0</url>
+      <description>
+        <p>0.2.0</p>
+        <p>Big Update</p>
+        <p>New Features</p>
+        <ul>
+          <li>Restore chat after closing the app</li>
+          <li>A button to clear the chat</li>
+          <li>Fixed multiple bugs involving how messages are shown</li>
+          <li>Added welcome dialog</li>
+          <li>More stability</li>
+        </ul>
+        <p>
+          Please report any errors to the issues page, thank you.
+        </p>
+      </description>
+    </release>
+    <release version="0.1.2" date="2024-05-13">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.1.2</url>
+      <description>
+        <p>0.1.2 Quick fixes</p>
+        <p>This release fixes some metadata needed to have a proper Flatpak application</p>
+      </description>
+    </release>
+    <release version="0.1.1" date="2024-05-12">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.1.1</url>
+      <description>
+        <p>0.1.1 Stable Release</p>
+        <p>This is the first public version of Alpaca</p>
+        <p>Features</p>
+        <ul>
+          <li>Talk to multiple models in the same conversation</li>
+          <li>Pull and delete models from the app</li>
+        </ul>
+        <p>
+          Please report any errors to the issues page, thank you.
+        </p>
+      </description>
+    </release>
+  </releases>
+</component>

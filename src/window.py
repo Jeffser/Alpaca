@@ -64,7 +64,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     manage_models_button = Gtk.Template.Child()
     manage_models_dialog = Gtk.Template.Child()
-    model_list_box = Gtk.Template.Child()
+    available_model_list_box = Gtk.Template.Child()
+    local_model_list_box = Gtk.Template.Child()
 
     pull_model_dialog = Gtk.Template.Child()
     pull_model_status_page = Gtk.Template.Child()
@@ -303,18 +304,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
         thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
         thread.start()
 
-    def delete_model(self, dialog, task, model_name, button):
+    def delete_model(self, dialog, task, model_name):
         if dialog.choose_finish(task) == "delete":
             response = simple_delete(self.ollama_url + "/api/delete", data={"name": model_name})
+            self.update_list_local_models()
+            self.update_list_available_models()
             if response['status'] == 'ok':
-                button.set_icon_name("folder-download-symbolic")
-                button.set_css_classes(["accent", "pull"])
                 self.show_toast("good", 0, self.manage_models_overlay)
-                for i in range(self.model_string_list.get_n_items()):
-                    if self.model_string_list.get_string(i) == model_name:
-                        self.model_string_list.remove(i)
-                        self.model_drop_down.set_selected(0)
-                        break
             else:
                 self.show_toast("error", 3, self.connection_overlay)
                 self.manage_models_dialog.close()
@@ -330,17 +326,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 GLib.idle_add(self.pull_model_progress_bar.set_fraction, 0.0)
         except Exception as e: print(e)
 
-    def pull_model(self, dialog, task, model_name, button):
+    def pull_model(self, dialog, task, model_name, tag):
         if dialog.choose_finish(task) == "pull":
-            data = {"name":model_name}
+            data = {"name":f"{model_name}:{tag}"}
+
             GLib.idle_add(self.pull_model_dialog.present, self.manage_models_dialog)
             response = stream_post(f"{self.ollama_url}/api/pull", data=json.dumps(data), callback=self.pull_model_update)
 
+            GLib.idle_add(self.update_list_local_models)
+            GLib.idle_add(self.update_list_available_models)
             GLib.idle_add(self.pull_model_dialog.force_close)
             if response['status'] == 'ok':
-                GLib.idle_add(button.set_icon_name, "user-trash-symbolic")
-                GLib.idle_add(button.set_css_classes, ["error", "delete"])
-                GLib.idle_add(self.model_string_list.append, model_name)
                 GLib.idle_add(self.show_toast, "good", 1, self.manage_models_overlay)
             else:
                 GLib.idle_add(self.show_toast, "error", 4, self.connection_overlay)
@@ -348,9 +344,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 GLib.idle_add(self.show_connection_dialog, True)
 
 
-    def pull_model_start(self, dialog, task, model_name, button):
-        self.pull_model_status_page.set_description(model_name)
-        thread = threading.Thread(target=self.pull_model, args=(dialog, task, model_name, button))
+    def pull_model_start(self, dialog, task, model_name, tag_drop_down):
+        tag = tag_drop_down.get_selected_item().get_string()
+        self.pull_model_status_page.set_description(f"{model_name}:{tag}")
+        thread = threading.Thread(target=self.pull_model, args=(dialog, task, model_name, tag))
         thread.start()
 
     def model_action_button_activate(self, button, model_name):
@@ -370,27 +367,81 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.delete_model(dialog, task, model_name, button) if action == "delete" else self.pull_model_start(dialog, task, model_name,button)
         )
 
+    def model_delete_button_activate(self, model_name):
+        dialog = Adw.AlertDialog(
+            heading="Delete Model",
+            body=f"Are you sure you want to delete '{model_name}'?",
+            close_response="cancel"
+        )
+        dialog.add_response("cancel", "Cancel")
+        dialog.add_response("delete", "Delete")
+        dialog.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
+        dialog.choose(
+            parent = self.manage_models_dialog,
+            cancellable = None,
+            callback = lambda dialog, task, model_name = model_name: self.delete_model(dialog, task, model_name)
+        )
+
+    def model_pull_button_activate(self, model_name):
+        tag_list = Gtk.StringList()
+        for tag in available_models[model_name]['tags']:
+            tag_list.append(tag)
+        tag_drop_down = Gtk.DropDown(
+            enable_search=True,
+            model=tag_list
+        )
+        dialog = Adw.AlertDialog(
+            heading="Pull Model",
+            body=f"Please select a tag to pull '{model_name}'",
+            extra_child=tag_drop_down,
+            close_response="cancel"
+        )
+        dialog.add_response("cancel", "Cancel")
+        dialog.add_response("pull", "Pull")
+        dialog.set_response_appearance("pull", Adw.ResponseAppearance.SUGGESTED)
+        dialog.choose(
+            parent = self.manage_models_dialog,
+            cancellable = None,
+            callback = lambda dialog, task, model_name = model_name, tag_drop_down = tag_drop_down: self.pull_model_start(dialog, task, model_name, tag_drop_down)
+        )
+
     def update_list_available_models(self):
-        self.model_list_box.remove_all()
-        for model_name, model_description in available_models.items():
+        self.local_model_list_box.remove_all()
+        self.available_model_list_box.remove_all()
+        for model_name in self.local_models:
             model = Adw.ActionRow(
-                title = model_name,
-                subtitle = model_description,
+                title = model_name.split(":")[0],
+                subtitle = model_name.split(":")[1]
             )
-            if ":" not in model_name: model_name += ":latest"
             button = Gtk.Button(
-                icon_name = "folder-download-symbolic" if model_name not in self.local_models else "user-trash-symbolic",
+                icon_name = "user-trash-symbolic",
                 vexpand = False,
                 valign = 3,
-                css_classes = ["accent", "pull"] if model_name not in self.local_models else ["error", "delete"])
-            button.connect("clicked", lambda button=button, model_name=model_name: self.model_action_button_activate(button, model_name))
+                css_classes = ["error", "delete"]
+            )
+            button.connect("clicked", lambda button=button, model_name=model_name: self.model_delete_button_activate(model_name))
             model.add_suffix(button)
-            self.model_list_box.append(model)
+            self.local_model_list_box.append(model)
 
-    def manage_models_button_activate(self, button):
-        self.manage_models_dialog.present(self)
+        for name, model_info in available_models.items():
+            model = Adw.ActionRow(
+                title = name,
+                subtitle = model_info['description'],
+            )
+            button = Gtk.Button(
+                icon_name = "folder-download-symbolic",
+                vexpand = False,
+                valign = 3,
+                css_classes = ["accent", "pull"]
+            )
+            button.connect("clicked", lambda button=button, model_name=name: self.model_pull_button_activate(model_name))
+            model.add_suffix(button)
+            self.available_model_list_box.append(model)
+
+    def manage_models_button_activate(self, button=None):
+        self.update_list_local_models()
         self.update_list_available_models()
-
+        self.manage_models_dialog.present(self)
 
     def connection_carousel_page_changed(self, carousel, index):
         if index == 0: self.connection_previous_button.set_sensitive(False)

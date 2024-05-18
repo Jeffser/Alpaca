@@ -199,7 +199,7 @@
                 </object>
               </child>
               <child>
-                <object class="GtkBox">
+                <object class="GtkScrolledWindow">
                   <property name="hexpand">true</property>
                   <property name="vexpand">true</property>
                   <property name="margin-top">0</property>
@@ -207,11 +207,22 @@
                   <property name="margin-start">24</property>
                   <property name="margin-end">24</property>
                   <child>
-                    <object class="GtkScrolledWindow">
-                      <property name="hexpand">true</property>
-                      <property name="vexpand">true</property>
+                    <object class="GtkBox">
+                      <property name="orientation">1</property>
+                      <property name="spacing">12</property>
                       <child>
-                        <object class="GtkListBox" id="model_list_box">
+                        <object class="GtkListBox" id="local_model_list_box">
+                          <property name="selection-mode">none</property>
+                          <style>
+                            <class name="boxed-list"/>
+                          </style>
+                        </object>
+                      </child>
+                      <child>
+                        <object class="GtkSeparator"></object>
+                      </child>
+                      <child>
+                        <object class="GtkListBox" id="available_model_list_box">
                           <property name="selection-mode">none</property>
                           <style>
                             <class name="boxed-list"/>

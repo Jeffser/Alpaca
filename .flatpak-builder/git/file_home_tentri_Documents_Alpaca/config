@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+[remote "origin"]
+	url = file:///home/tentri/Documents/Alpaca
+	fetch = +refs/*:refs/*
+[transfer]
+	fsckObjects = 1
+[lfs]
+	repositoryformatversion = 0
