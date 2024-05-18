@@ -19,12 +19,13 @@ An [Ollama](https://github.com/ollama/ollama) client made with GTK4 and Adwaita.
 ## Features!
 - Talk to multiple models in the same conversation
 - Pull and delete models from the app
+- Image recognition
+- Code highlighting
 
 ## Future features!
 - Multiple conversations
-- Image / document recognition
+- Document recognition
 - Notifications
-- Code highlighting
 
 ## Screenies
 Login to Ollama instance             |  Chatting with models        |  Managing models
