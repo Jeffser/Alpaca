@@ -244,7 +244,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def update_bot_message(self, data):
         vadjustment = self.chat_window.get_vadjustment()
-        if vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size(): GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
+        if vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
+            GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if data['done']:
             formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
             text = f"\n<small>{data['model']}\t|\t{formated_datetime}</small>"
