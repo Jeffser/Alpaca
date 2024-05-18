@@ -133,6 +133,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             image = Gtk.Image.new_from_paintable(texture)
             image.set_size_request(360, 360)
+            image.set_margin_top(10)
+            image.set_margin_start(10)
+            image.set_margin_end(10)
+            image.set_hexpand(False)
+            image.set_css_classes(["flat"])
             message_box.append(image)
 
         message_box.append(message_text)
