@@ -71,6 +71,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     pull_model_status_page = Gtk.Template.Child()
     pull_model_progress_bar = Gtk.Template.Child()
 
+    loading_spinner = None
+
     toast_messages = {
         "error": [
             "An error occurred",
@@ -99,6 +101,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
             timeout=2
         )
         overlay.add_toast(toast)
+
+    def add_chat_loading_spinner(self):
+        if self.loading_spinner is None:
+            self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
+            self.chat_container.append(self.loading_spinner)
+        else:
+            self.chat_container.remove(self.loading_spinner)
+            self.loading_spinner = None
 
     def show_message(self, msg:str, bot:bool, footer:str=None, image_base64:str=None):
         message_text = Gtk.TextView(
@@ -223,7 +233,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 )
                 message_buffer = message_text.get_buffer()
                 if part['text'].split("\n")[-1] == parts[-1]['text'].split("\n")[-1]:
-                    footer = "\n<small>" + part['text'].split('\n')[-1] + "</small>"
+                    footer = "\n\n<small>" + part['text'].split('\n')[-1] + "</small>"
                     part['text'] = '\n'.join(part['text'].split("\n")[:-1])
                     message_buffer.insert(message_buffer.get_end_iter(), part['text'])
                     message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer))
@@ -254,6 +264,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.save_history()
         else:
             if self.chats["chats"][self.current_chat_id]["messages"][-1]['role'] == "user":
+                GLib.idle_add(self.chat_container.remove, self.loading_spinner)
+                self.loading_spinner = None
                 self.chats["chats"][self.current_chat_id]["messages"].append({
                     "role": "assistant",
                     "model": data['model'],
@@ -301,6 +313,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"])
         self.message_text_view.get_buffer().set_text("", 0)
         self.show_message("", True)
+        self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
+        self.chat_container.append(self.loading_spinner)
         thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
         thread.start()
 
