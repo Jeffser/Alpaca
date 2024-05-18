@@ -102,13 +102,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
         overlay.add_toast(toast)
 
-    def add_chat_loading_spinner(self):
-        if self.loading_spinner is None:
-            self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
-            self.chat_container.append(self.loading_spinner)
-        else:
-            self.chat_container.remove(self.loading_spinner)
-            self.loading_spinner = None
+    def show_notification(self, title:str, body:str, only_when_focus:bool, icon:Gio.ThemedIcon=None):
+        if only_when_focus==False or self.is_active()==False:
+            notification = Gio.Notification.new(title)
+            notification.set_body(body)
+            if icon: notification.set_icon(icon)
+            self.get_application().send_notification(None, notification)
 
     def show_message(self, msg:str, bot:bool, footer:str=None, image_base64:str=None):
         message_text = Gtk.TextView(
@@ -351,8 +350,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(self.update_list_available_models)
             GLib.idle_add(self.pull_model_dialog.force_close)
             if response['status'] == 'ok':
+                GLib.idle_add(self.show_notification, "Task Complete", f"Model '{model_name}:{tag}' pulled successfully.", True, Gio.ThemedIcon.new("emblem-ok-symbolic"))
                 GLib.idle_add(self.show_toast, "good", 1, self.manage_models_overlay)
             else:
+                GLib.idle_add(self.show_notification, "Pull Model Error", f"Failed to pull model '{model_name}:{tag}' due to network error.", True, Gio.ThemedIcon.new("dialog-error-symbolic"))
                 GLib.idle_add(self.show_toast, "error", 4, self.connection_overlay)
                 GLib.idle_add(self.manage_models_dialog.close)
                 GLib.idle_add(self.show_connection_dialog, True)
