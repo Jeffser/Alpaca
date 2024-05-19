@@ -91,6 +91,7 @@
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkScrolledWindow">
+                        <property name="has-frame">true</property>
                         <style>
                           <class name="card"/>
                           <class name="view"/>
