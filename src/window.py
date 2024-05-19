@@ -68,9 +68,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     local_model_list_box = Gtk.Template.Child()
     available_model_list_box = Gtk.Template.Child()
 
-    pull_model_status_page = Gtk.Template.Child()
-    pull_model_progress_bar = Gtk.Template.Child()
-
     chat_list_box = Gtk.Template.Child()
     add_chat_button = Gtk.Template.Child()
 
