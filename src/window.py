@@ -271,6 +271,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 source_view = GtkSource.View(
                     auto_indent=True, indent_width=4, buffer=buffer, show_line_numbers=True
                 )
+                source_view.set_editable(False)
                 source_view.get_style_context().add_class("card")
                 self.bot_message_box.append(source_view)
         self.bot_message = None
