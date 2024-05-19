@@ -4,18 +4,34 @@
   <requires lib="Adw" version="1.0"/>
   <template class="AlpacaWindow" parent="AdwApplicationWindow">
     <property name="resizable">True</property>
-    <property name="width-request">600</property>
-    <property name="height-request">800</property>
+    <property name="width-request">350</property>
+    <property name="height-request">500</property>
     <property name="default-width">1300</property>
     <property name="default-height">800</property>
-    <!--
-    <property name="min-content-width">500</property>
-    <property name="min-content-height">600</property>
-    -->
     <child>
       <object class="AdwBreakpoint">
         <condition>max-width: 800sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
+      </object>
+    </child>
+    <child>
+    </child>
+    <child>
+      <object class="AdwBreakpoint">
+        <condition>max-width: 500sp</condition>
+        <setter object="split_view_overlay" property="collapsed">true</setter>
+        <setter object="connection_dialog" property="width-request">400</setter>
+        <setter object="connection_dialog" property="height-request">400</setter>
+        <setter object="manage_models_dialog" property="width-request">400</setter>
+      </object>
+    </child>
+    <child>
+      <object class="AdwBreakpoint">
+        <condition>max-width: 400sp</condition>
+        <setter object="split_view_overlay" property="collapsed">true</setter>
+        <setter object="connection_dialog" property="width-request">300</setter>
+        <setter object="connection_dialog" property="height-request">300</setter>
+        <setter object="manage_models_dialog" property="width-request">300</setter>
       </object>
     </child>
     <property name="content">
@@ -138,8 +154,6 @@
                         <property name="margin-bottom">12</property>
                         <property name="has-frame">true</property>
                         <property name="propagate-natural-height">true</property>
-                        <property name="min-content-width">500</property>
-                        <property name="min-content-height">600</property>
                         <property name="kinetic-scrolling">1</property>
                         <property name="vexpand">true</property>
                         <style>

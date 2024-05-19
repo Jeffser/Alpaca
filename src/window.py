@@ -146,7 +146,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             texture = Gdk.Texture.new_for_pixbuf(pixbuf)
 
             image = Gtk.Image.new_from_paintable(texture)
-            image.set_size_request(360, 360)
+            image.set_size_request(240, 240)
             image.set_margin_top(10)
             image.set_margin_start(10)
             image.set_margin_end(10)
@@ -461,7 +461,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 icon_name = "user-trash-symbolic",
                 vexpand = False,
                 valign = 3,
-                css_classes = ["error", "delete"]
+                css_classes = ["error"]
             )
             button.connect("clicked", lambda button=button, model_name=model_name: self.model_delete_button_activate(model_name))
             model.add_suffix(button)
@@ -476,7 +476,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 icon_name = "folder-download-symbolic",
                 vexpand = False,
                 valign = 3,
-                css_classes = ["accent", "pull"]
+                css_classes = ["accent"]
             )
             button.connect("clicked", lambda button=button, model_name=name: self.model_pull_button_activate(model_name))
             model.add_suffix(button)
