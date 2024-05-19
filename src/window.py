@@ -246,7 +246,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     part['text'] = '\n'.join(part['text'].split("\n")[:-1])
 
                 part['text'] = part['text'].replace("\n* ", "\n• ")
-                part['text'] = GLib.markup_escape_text(part['text'])
+                #part['text'] = GLib.markup_escape_text(part['text'])
                 part['text'] = code_pattern.sub(r'<tt>\1</tt>', part['text'])
                 part['text'] = bold_pattern.sub(r'<b>\1</b>', part['text'])
                 part['text'] = h1_pattern.sub(r'<span size="x-large">\1</span>', part['text'])
@@ -562,7 +562,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]: self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
                     if len(list(self.chats["chats"].keys())) == 0: self.chats["chats"]["New chat"] = {"messages": []}
             except Exception as e:
-                self.chats = {"chats": {"New chat": {"messages": [], "current_model": None}}, "selected_chat": "New chat"}
+                self.chats = {"chats": {"New chat": {"messages": []}}, "selected_chat": "New chat"}
             self.load_history_into_chat()
 
     def closing_connection_dialog_response(self, dialog, task):
@@ -774,22 +774,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if name==self.chats["selected_chat"]: self.chat_list_box.select_row(chat)
 
     def chat_changed(self, listbox, row):
-        if row and row.get_title() != self.chats["selected_chat"]:
+        if row or row.get_title() != self.chats["selected_chat"]:
             self.chats["selected_chat"] = row.get_title()
-            if "current_model" not in self.chats["chats"][self.chats["selected_chat"]] or self.chats["chats"][self.chats["selected_chat"]]["current_model"] not in self.local_models:
-                self.chats["chats"][self.chats["selected_chat"]]["current_model"] = self.model_drop_down.get_selected_item().get_string()
-                self.save_history()
-            else:
-                for i in range(self.model_string_list.get_n_items()):
-                    if self.model_string_list.get_string(i) == self.chats["chats"][self.chats["selected_chat"]]["current_model"]:
-                        self.model_drop_down.set_selected(i)
-                        break
             self.load_history_into_chat()
+        if len(self.chats["chats"][self.chats["selected_chat"]]["messages"]) > 0:
+            for i in range(self.model_string_list.get_n_items()):
+                if self.model_string_list.get_string(i) == self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]["model"]:
+                    self.model_drop_down.set_selected(i)
+                    break
+
 
     def selected_model_changed(self, pspec=None, user_data=None):
         self.verify_if_image_can_be_used()
-        self.chats["chats"][self.chats["selected_chat"]]["current_model"] = self.model_drop_down.get_selected_item().get_string()
-        self.save_history()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -808,9 +804,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.connection_url_entry.connect("changed", lambda entry: entry.set_css_classes([]))
         self.connection_dialog.connect("close-attempt", self.closing_connection_dialog)
         self.load_history()
-        self.update_chat_list()
         if os.path.exists(os.path.join(self.config_dir, "server.conf")):
             with open(os.path.join(self.config_dir, "server.conf"), "r") as f:
                 self.ollama_url = f.read()
             if self.verify_connection() is False: self.show_connection_dialog(True)
         else: self.connection_dialog.present(self)
+        self.update_chat_list()
