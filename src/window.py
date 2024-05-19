@@ -35,11 +35,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     #Variables
     ollama_url = None
     local_models = []
-    #In the future I will at multiple chats, for now I'll save it like this so that past chats don't break in the future
-    chats = {"chats": {"0": {"messages": []}}, "selected_chat": "0"}
+    chats = {"chats": {"New Chat": {"messages": []}}, "selected_chat": "New Chat"}
     attached_image = {"path": None, "base64": None}
 
     #Elements
+    shortcut_window : Gtk.ShortcutsWindow  = Gtk.Template.Child()
     bot_message : Gtk.TextBuffer = None
     bot_message_box : Gtk.Box = None
     bot_message_view : Gtk.TextView = None
@@ -87,7 +87,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         ],
         "info": [
             "Please select a model before chatting",
-            "Conversation cannot be cleared while receiving a message"
+            "Chat cannot be cleared while receiving a message"
         ],
         "good": [
             "Model deleted successfully",
@@ -115,7 +115,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def show_message(self, msg:str, bot:bool, footer:str=None, image_base64:str=None):
         message_text = Gtk.TextView(
             editable=False,
-            focusable=False,
+            focusable=True,
             wrap_mode= Gtk.WrapMode.WORD,
             margin_top=12,
             margin_bottom=12,
@@ -229,7 +229,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if part['type'] == 'normal':
                 message_text = Gtk.TextView(
                     editable=False,
-                    focusable=False,
+                    focusable=True,
                     wrap_mode= Gtk.WrapMode.WORD,
                     margin_top=12,
                     margin_bottom=12,
@@ -315,7 +315,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(self.show_toast, 'error', 1, self.connection_overlay)
             GLib.idle_add(self.show_connection_dialog, True)
 
-    def send_message(self, button):
+    def send_message(self, button=None):
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
         current_model = self.model_drop_down.get_selected_item()
         if current_model is None:
@@ -512,22 +512,22 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else: self.connection_url_entry.set_css_classes([])
         self.connection_dialog.present(self)
 
-    def clear_conversation(self):
+    def clear_chat(self):
         for widget in list(self.chat_container): self.chat_container.remove(widget)
         self.chats["chats"][self.chats["selected_chat"]]["messages"] = []
 
-    def clear_conversation_dialog_response(self, dialog, task):
+    def clear_chat_dialog_response(self, dialog, task):
         if dialog.choose_finish(task) == "empty":
-            self.clear_conversation()
+            self.clear_chat()
             self.save_history()
 
-    def clear_conversation_dialog(self):
+    def clear_chat_dialog(self):
         if self.bot_message is not None:
             self.show_toast("info", 1, self.main_overlay)
             return
         dialog = Adw.AlertDialog(
-            heading=f"Clear Conversation",
-            body=f"Are you sure you want to clear the conversation?",
+            heading=f"Clear Chat",
+            body=f"Are you sure you want to clear the chat?",
             close_response="cancel"
         )
         dialog.add_response("cancel", "Cancel")
@@ -536,7 +536,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         dialog.choose(
             parent = self,
             cancellable = None,
-            callback = self.clear_conversation_dialog_response
+            callback = self.clear_chat_dialog_response
         )
 
     def save_history(self):
@@ -555,7 +555,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def load_history(self):
         if os.path.exists(os.path.join(self.config_dir, "chats.json")):
-            self.clear_conversation()
+            self.clear_chat()
             try:
                 with open(os.path.join(self.config_dir, "chats.json"), "r") as f:
                     self.chats = json.load(f)
@@ -754,7 +754,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 css_classes = ["card"]
             )
             button_delete = Gtk.Button(
-                icon_name = "edit-delete-symbolic",
+                icon_name = "user-trash-symbolic",
                 vexpand = False,
                 valign = 3,
                 css_classes = ["error", "flat"]
@@ -783,13 +783,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
                         self.model_drop_down.set_selected(i)
                         break
 
-
     def selected_model_changed(self, pspec=None, user_data=None):
         self.verify_if_image_can_be_used()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
+
+        self.set_help_overlay(self.shortcut_window)
+        self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
+        self.get_application().create_action('send', lambda *_: self.send_message(self), ['<primary>Return'])
+
         self.manage_models_button.connect("clicked", self.manage_models_button_activate)
         self.send_button.connect("clicked", self.send_message)
         self.image_button.connect("clicked", self.open_image)
