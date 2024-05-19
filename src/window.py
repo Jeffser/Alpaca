@@ -36,8 +36,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     ollama_url = None
     local_models = []
     #In the future I will at multiple chats, for now I'll save it like this so that past chats don't break in the future
-    current_chat_id="0"
-    chats = {"chats": {"0": {"messages": []}}}
+    chats = {"chats": {"0": {"messages": []}}, "selected_chat": "0"}
     attached_image = {"path": None, "base64": None}
 
     #Elements
@@ -71,6 +70,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     pull_model_status_page = Gtk.Template.Child()
     pull_model_progress_bar = Gtk.Template.Child()
 
+    chat_list_box = Gtk.Template.Child()
+    add_chat_button = Gtk.Template.Child()
+
     loading_spinner = None
 
     toast_messages = {
@@ -80,7 +82,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             "Could not list local models",
             "Could not delete model",
             "Could not pull model",
-            "Cannot open image"
+            "Cannot open image",
+            "Cannot delete chat because it's the only one left"
         ],
         "info": [
             "Please select a model before chatting",
@@ -287,17 +290,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
             self.save_history()
         else:
-            if self.chats["chats"][self.current_chat_id]["messages"][-1]['role'] == "user":
+            if self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]['role'] == "user":
                 GLib.idle_add(self.chat_container.remove, self.loading_spinner)
                 self.loading_spinner = None
-                self.chats["chats"][self.current_chat_id]["messages"].append({
+                self.chats["chats"][self.chats["selected_chat"]]["messages"].append({
                     "role": "assistant",
                     "model": data['model'],
                     "date": datetime.now().strftime("%Y/%m/%d %H:%M"),
                     "content": ''
                 })
             GLib.idle_add(self.bot_message.insert, self.bot_message.get_end_iter(), data['message']['content'])
-            self.chats["chats"][self.current_chat_id]["messages"][-1]['content'] += data['message']['content']
+            self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]['content'] += data['message']['content']
 
     def run_message(self, messages, model):
         response = stream_post(f"{self.ollama_url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=self.update_bot_message)
@@ -319,7 +322,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.show_toast("info", 0, self.main_overlay)
             return
         formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
-        self.chats["chats"][self.current_chat_id]["messages"].append({
+        self.chats["chats"][self.chats["selected_chat"]]["messages"].append({
             "role": "user",
             "model": "User",
             "date": formated_datetime,
@@ -327,7 +330,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         })
         data = {
             "model": current_model.get_string(),
-            "messages": self.chats["chats"][self.current_chat_id]["messages"]
+            "messages": self.chats["chats"][self.chats["selected_chat"]]["messages"]
         }
         if self.verify_if_image_can_be_used() and self.attached_image["base64"] is not None:
             data["messages"][-1]["images"] = [self.attached_image["base64"]]
@@ -511,7 +514,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def clear_conversation(self):
         for widget in list(self.chat_container): self.chat_container.remove(widget)
-        self.chats["chats"][self.current_chat_id]["messages"] = []
+        self.chats["chats"][self.chats["selected_chat"]]["messages"] = []
 
     def clear_conversation_dialog_response(self, dialog, task):
         if dialog.choose_finish(task) == "empty":
@@ -540,21 +543,27 @@ class AlpacaWindow(Adw.ApplicationWindow):
         with open(os.path.join(self.config_dir, "chats.json"), "w+") as f:
             json.dump(self.chats, f, indent=4)
 
+    def load_history_into_chat(self):
+        for widget in list(self.chat_container): self.chat_container.remove(widget)
+        for message in self.chats['chats'][self.chats["selected_chat"]]['messages']:
+            if message['role'] == 'user':
+                self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>", message['images'][0] if 'images' in message and len(message['images']) > 0 else None)
+            else:
+                self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>")
+                self.add_code_blocks()
+                self.bot_message = None
+
     def load_history(self):
         if os.path.exists(os.path.join(self.config_dir, "chats.json")):
             self.clear_conversation()
             try:
                 with open(os.path.join(self.config_dir, "chats.json"), "r") as f:
                     self.chats = json.load(f)
+                    if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]: self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
+                    if len(list(self.chats["chats"].keys())) == 0: self.chats["chats"]["New chat"] = {"messages": []}
             except Exception as e:
-                self.chats = {"chats": {"0": {"messages": []}}}
-            for message in self.chats['chats'][self.current_chat_id]['messages']:
-                if message['role'] == 'user':
-                    self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>", message['images'][0] if 'images' in message and len(message['images']) > 0 else None)
-                else:
-                    self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>")
-                    self.add_code_blocks()
-                    self.bot_message = None
+                self.chats = {"chats": {"New chat": {"messages": [], "current_model": None}}, "selected_chat": "New chat"}
+            self.load_history_into_chat()
 
     def closing_connection_dialog_response(self, dialog, task):
         result = dialog.choose_finish(task)
@@ -617,7 +626,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.image_button.set_css_classes(["destructive-action"])
             self.image_button.get_child().set_icon_name("edit-delete-symbolic")
         except Exception as e:
-            print(e)
             self.show_toast("error", 5, self.main_overlay)
 
     def remove_image(self, dialog, task):
@@ -645,14 +653,154 @@ class AlpacaWindow(Adw.ApplicationWindow):
             file_dialog = Gtk.FileDialog(default_filter=self.file_filter_image)
             file_dialog.open(self, None, self.load_image)
 
+    def chat_delete(self, dialog, task, chat_name):
+        if dialog.choose_finish(task) == "delete":
+            del self.chats['chats'][chat_name]
+            #self.save_history()
+            self.update_chat_list()
+
+    def chat_delete_dialog(self, chat_name):
+        if len(self.chats['chats'])==1:
+            self.show_toast("error", 6, self.main_overlay)
+            return
+        dialog = Adw.AlertDialog(
+            heading=f"Delete Chat",
+            body=f"Are you sure you want to delete '{chat_name}'?",
+            close_response="cancel"
+        )
+        dialog.add_response("cancel", "Cancel")
+        dialog.add_response("delete", "Delete")
+        dialog.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
+        dialog.choose(
+            parent = self,
+            cancellable = None,
+            callback = lambda dialog, task, chat_name=chat_name: self.chat_delete(dialog, task, chat_name)
+        )
+    def chat_rename(self, dialog=None, task=None, old_chat_name:str="", entry=None):
+        if not entry: return
+        new_chat_name = entry.get_text()
+        if old_chat_name == new_chat_name: return
+        if new_chat_name and (not task or dialog.choose_finish(task) == "rename"):
+            dialog.force_close()
+            if new_chat_name in self.chats["chats"]: self.chat_rename_dialog(old_chat_name, f"The name '{new_chat_name}' is already in use", True)
+            else:
+                self.chats["chats"][new_chat_name] = self.chats["chats"][old_chat_name]
+                del self.chats["chats"][old_chat_name]
+                self.save_history()
+                self.update_chat_list()
+
+
+    def chat_rename_dialog(self, chat_name:str, body:str, error:bool=False):
+        entry = Gtk.Entry(
+            css_classes = ["error"] if error else None
+        )
+        dialog = Adw.AlertDialog(
+            heading=f"Rename Chat",
+            body=body,
+            extra_child=entry,
+            close_response="cancel"
+        )
+        entry.connect("activate", lambda entry, dialog=dialog, old_chat_name=chat_name: self.chat_rename(dialog=dialog, old_chat_name=old_chat_name, entry=entry))
+        dialog.add_response("cancel", "Cancel")
+        dialog.add_response("rename", "Rename")
+        dialog.set_response_appearance("rename", Adw.ResponseAppearance.SUGGESTED)
+        dialog.choose(
+            parent = self,
+            cancellable = None,
+            callback = lambda dialog, task, old_chat_name=chat_name, entry=entry: self.chat_rename(dialog=dialog, task=task, old_chat_name=old_chat_name, entry=entry)
+        )
+
+    def chat_new(self, dialog=None, task=None, entry=None):
+        if not entry: return
+        chat_name = entry.get_text()
+        if chat_name and (not task or dialog.choose_finish(task) == "create"):
+            dialog.force_close()
+            if chat_name in self.chats["chats"]: self.chat_new_dialog(f"The name '{chat_name}' is already in use", True)
+            else:
+                self.chats["chats"][chat_name] = {"messages": []}
+                self.chats["selected_chat"] = chat_name
+                self.save_history()
+                self.update_chat_list()
+                self.load_history_into_chat()
+
+    def chat_new_dialog(self, body:str, error:bool=False):
+        entry = Gtk.Entry(
+            css_classes = ["error"] if error else None
+        )
+        dialog = Adw.AlertDialog(
+            heading=f"Create Chat",
+            body=body,
+            extra_child=entry,
+            close_response="cancel"
+        )
+        entry.connect("activate", lambda entry, dialog=dialog: self.chat_new(dialog=dialog, entry=entry))
+        dialog.add_response("cancel", "Cancel")
+        dialog.add_response("create", "Create")
+        dialog.set_response_appearance("rename", Adw.ResponseAppearance.SUGGESTED)
+        dialog.choose(
+            parent = self,
+            cancellable = None,
+            callback = lambda dialog, task, entry=entry: self.chat_new(dialog=dialog, task=task, entry=entry)
+        )
+
+    def update_chat_list(self):
+        self.chat_list_box.remove_all()
+        for name, content in self.chats['chats'].items():
+            chat = Adw.ActionRow(
+                title = name,
+                margin_top = 6,
+                margin_start = 6,
+                margin_end = 6,
+                css_classes = ["card"]
+            )
+            button_delete = Gtk.Button(
+                icon_name = "edit-delete-symbolic",
+                vexpand = False,
+                valign = 3,
+                css_classes = ["error", "flat"]
+            )
+            button_delete.connect("clicked", lambda button, chat_name=name: self.chat_delete_dialog(chat_name=chat_name))
+            button_rename = Gtk.Button(
+                icon_name = "document-edit-symbolic",
+                vexpand = False,
+                valign = 3,
+                css_classes = ["accent", "flat"]
+            )
+            button_rename.connect("clicked", lambda button, chat_name=name: self.chat_rename_dialog(chat_name=chat_name, body=f"Renaming '{chat_name}'", error=False))
+
+            chat.add_suffix(button_delete)
+            chat.add_suffix(button_rename)
+            self.chat_list_box.append(chat)
+            if name==self.chats["selected_chat"]: self.chat_list_box.select_row(chat)
+
+    def chat_changed(self, listbox, row):
+        if row and row.get_title() != self.chats["selected_chat"]:
+            self.chats["selected_chat"] = row.get_title()
+            if "current_model" not in self.chats["chats"][self.chats["selected_chat"]] or self.chats["chats"][self.chats["selected_chat"]]["current_model"] not in self.local_models:
+                self.chats["chats"][self.chats["selected_chat"]]["current_model"] = self.model_drop_down.get_selected_item().get_string()
+                self.save_history()
+            else:
+                for i in range(self.model_string_list.get_n_items()):
+                    if self.model_string_list.get_string(i) == self.chats["chats"][self.chats["selected_chat"]]["current_model"]:
+                        self.model_drop_down.set_selected(i)
+                        break
+            self.load_history_into_chat()
+
+    def selected_model_changed(self, pspec=None, user_data=None):
+        self.verify_if_image_can_be_used()
+        self.chats["chats"][self.chats["selected_chat"]]["current_model"] = self.model_drop_down.get_selected_item().get_string()
+        self.save_history()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
         self.manage_models_button.connect("clicked", self.manage_models_button_activate)
         self.send_button.connect("clicked", self.send_message)
         self.image_button.connect("clicked", self.open_image)
+        self.add_chat_button.connect("clicked", lambda button : self.chat_new_dialog("Enter name for new chat", False))
         self.set_default_widget(self.send_button)
-        self.model_drop_down.connect("notify", self.verify_if_image_can_be_used)
+        self.model_drop_down.connect("notify", self.selected_model_changed)
+        self.chat_list_box.connect("row-selected", self.chat_changed)
         #self.message_text_view.set_activates_default(self.send_button)
         self.connection_carousel.connect("page-changed", self.connection_carousel_page_changed)
         self.connection_previous_button.connect("clicked", self.connection_previous_button_activate)
@@ -660,12 +808,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.connection_url_entry.connect("changed", lambda entry: entry.set_css_classes([]))
         self.connection_dialog.connect("close-attempt", self.closing_connection_dialog)
         self.load_history()
+        self.update_chat_list()
         if os.path.exists(os.path.join(self.config_dir, "server.conf")):
             with open(os.path.join(self.config_dir, "server.conf"), "r") as f:
                 self.ollama_url = f.read()
             if self.verify_connection() is False: self.show_connection_dialog(True)
         else: self.connection_dialog.present(self)
-
-
-
-

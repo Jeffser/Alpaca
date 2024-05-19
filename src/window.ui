@@ -4,150 +4,228 @@
   <requires lib="Adw" version="1.0"/>
   <template class="AlpacaWindow" parent="AdwApplicationWindow">
     <property name="resizable">True</property>
+    <property name="width-request">600</property>
+    <property name="height-request">800</property>
+    <property name="default-width">1300</property>
+    <property name="default-height">800</property>
+    <!--
+    <property name="min-content-width">500</property>
+    <property name="min-content-height">600</property>
+    -->
+    <child>
+      <object class="AdwBreakpoint">
+        <condition>max-width: 800sp</condition>
+        <setter object="split_view_overlay" property="collapsed">true</setter>
+      </object>
+    </child>
     <property name="content">
       <object class="AdwToastOverlay" id="main_overlay">
         <child>
-          <object class="AdwToolbarView">
-            <child type="top">
-              <object class="AdwHeaderBar" id="header_bar">
-                <property name="title-widget">
+          <object class="AdwOverlaySplitView" id="split_view_overlay">
+            <property name="show-sidebar" bind-source="show_sidebar_button" bind-property="active" bind-flags="sync-create"/>
+            <property name="sidebar">
+              <object class="GtkBox">
+                <property name="spacing">12</property>
+                <property name="margin-top">12</property>
+                <property name="margin-bottom">12</property>
+                <property name="margin-start">12</property>
+                <property name="margin-end">12</property>
+                <property name="orientation">1</property>
+                <child>
                   <object class="GtkBox">
-                    <property name="orientation">0</property>
                     <property name="spacing">12</property>
                     <child>
-                      <object class="GtkDropDown" id="model_drop_down">
-                        <property name="enable-search">true</property>
-                        <property name="model">
-                          <object class="GtkStringList" id="model_string_list">
-                            <items>
-                            </items>
-                          </object>
-                        </property>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Chats</property>
+                        <property name="hexpand">true</property>
+                        <property name="halign">1</property>
+                        <style>
+                          <class name="title-1"/>
+                        </style>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkButton" id="manage_models_button">
-                        <property name="tooltip-text" translatable="yes">Manage models</property>
+                      <object class="GtkButton" id="add_chat_button">
+                        <property name="tooltip-text" translatable="yes">New chat</property>
+                        <style>
+                          <class name="flat"/>
+                        </style>
                         <child>
                           <object class="AdwButtonContent">
-                            <property name="icon-name">package-x-generic-symbolic</property>
+                            <property name="icon-name">tab-new-symbolic</property>
                           </object>
                         </child>
                       </object>
                     </child>
                   </object>
-                </property>
-                <child type="end">
-                  <object class="GtkMenuButton">
-                    <property name="primary">True</property>
-                    <property name="icon-name">open-menu-symbolic</property>
-                    <property name="tooltip-text" translatable="yes">Menu</property>
-                    <property name="menu-model">primary_menu</property>
+                </child>
+                <child>
+                  <object class="GtkScrolledWindow">
+                    <property name="vexpand">true</property>
+                    <property name="hexpand">true</property>
+                    <child>
+                      <object class="GtkListBox" id="chat_list_box">
+
+                        <property name="selection-mode">single</property>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
-            </child>
-            <property name="content">
-              <object class="GtkBox"><!--ACTUAL CONTENT-->
-
-                <property name="orientation">1</property>
-                <property name="margin-start">24</property>
-                <property name="margin-end">24</property>
-                <property name="margin-bottom">24</property>
-                <property name="vexpand">true</property>
-                <property name="hexpand">true</property>
-
-                <child>
-                  <object class="GtkScrolledWindow" id="chat_window">
-                    <property name="margin-bottom">12</property>
-                    <property name="has-frame">true</property>
-                    <property name="propagate-natural-height">true</property>
-                    <property name="min-content-width">500</property>
-                    <property name="min-content-height">600</property>
-                    <property name="kinetic-scrolling">1</property>
-                    <property name="vexpand">true</property>
-                    <style>
-                      <class name="card"/>
-                    </style>
-                    <child>
-                      <object class="GtkBox" id="chat_container">
-                        <property name="orientation">1</property>
-                        <property name="homogeneous">false</property>
-                        <property name="hexpand">false</property>
-                        <property name="vexpand">true</property>
+            </property>
+            <child>
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar" id="header_bar">
+                    <child type="start">
+                      <object class="GtkToggleButton" id="show_sidebar_button">
+                        <property name="icon-name">sidebar-show-symbolic</property>
+                        <property name="tooltip-text" translatable="true">Toggle Sidebar</property>
+                        <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
+                      </object>
+                    </child>
+                    <property name="title-widget">
+                      <object class="GtkBox">
+                        <property name="orientation">0</property>
                         <property name="spacing">12</property>
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
+                        <child>
+                          <object class="GtkDropDown" id="model_drop_down">
+                            <property name="enable-search">true</property>
+                            <property name="model">
+                              <object class="GtkStringList" id="model_string_list">
+                                <items>
+                                </items>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="manage_models_button">
+                            <property name="tooltip-text" translatable="yes">Manage models</property>
+                            <child>
+                              <object class="AdwButtonContent">
+                                <property name="icon-name">package-x-generic-symbolic</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </property>
+                    <child type="end">
+                      <object class="GtkMenuButton">
+                        <property name="primary">True</property>
+                        <property name="icon-name">open-menu-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Menu</property>
+                        <property name="menu-model">primary_menu</property>
                       </object>
                     </child>
                   </object>
                 </child>
+                <property name="content">
+                  <object class="GtkBox"><!--ACTUAL CONTENT-->
+                    <property name="orientation">1</property>
+                    <property name="margin-start">24</property>
+                    <property name="margin-end">24</property>
+                    <property name="margin-bottom">24</property>
+                    <property name="vexpand">true</property>
+                    <property name="hexpand">true</property>
 
-                <child>
-                  <object class="GtkBox">
-                    <property name="orientation">0</property>
-                    <property name="spacing">12</property>
                     <child>
-                      <object class="GtkScrolledWindow">
+                      <object class="GtkScrolledWindow" id="chat_window">
+                        <property name="margin-bottom">12</property>
                         <property name="has-frame">true</property>
+                        <property name="propagate-natural-height">true</property>
+                        <property name="min-content-width">500</property>
+                        <property name="min-content-height">600</property>
+                        <property name="kinetic-scrolling">1</property>
+                        <property name="vexpand">true</property>
                         <style>
                           <class name="card"/>
-                          <class name="view"/>
                         </style>
                         <child>
-                          <object class="GtkTextView" id="message_text_view">
-                            <property name="wrap-mode">word</property>
-                            <property name="margin-top">6</property>
-                            <property name="margin-bottom">6</property>
-                            <property name="margin-start">6</property>
-                            <property name="margin-end">6</property>
-                            <property name="hexpand">true</property>
-                            <style>
-                              <class name="view"/>
-                            </style>
+                          <object class="GtkBox" id="chat_container">
+                            <property name="orientation">1</property>
+                            <property name="homogeneous">false</property>
+                            <property name="hexpand">false</property>
+                            <property name="vexpand">true</property>
+                            <property name="spacing">12</property>
+                            <property name="margin-top">12</property>
+                            <property name="margin-bottom">12</property>
+                            <property name="margin-start">12</property>
+                            <property name="margin-end">12</property>
                           </object>
                         </child>
                       </object>
-
                     </child>
+
                     <child>
                       <object class="GtkBox">
-                        <property name="orientation">1</property>
+                        <property name="orientation">0</property>
                         <property name="spacing">12</property>
                         <child>
-                          <object class="GtkButton" id="send_button">
+                          <object class="GtkScrolledWindow">
+                            <property name="has-frame">true</property>
                             <style>
-                              <class name="suggested-action"/>
+                              <class name="card"/>
+                              <class name="view"/>
                             </style>
                             <child>
-                              <object class="AdwButtonContent">
-                                <property name="label" translatable="true">Send</property>
-                                <property name="icon-name">send-to-symbolic</property>
+                              <object class="GtkTextView" id="message_text_view">
+                                <property name="wrap-mode">word</property>
+                                <property name="margin-top">6</property>
+                                <property name="margin-bottom">6</property>
+                                <property name="margin-start">6</property>
+                                <property name="margin-end">6</property>
+                                <property name="hexpand">true</property>
+                                <style>
+                                  <class name="view"/>
+                                </style>
                               </object>
                             </child>
                           </object>
+
                         </child>
                         <child>
-                          <object class="GtkButton" id="image_button">
-                            <property name="sensitive">false</property>
-                            <property name="tooltip-text" translatable="true">Requires model 'llava' to be selected</property>
+                          <object class="GtkBox">
+                            <property name="orientation">1</property>
+                            <property name="spacing">12</property>
                             <child>
-                              <object class="AdwButtonContent">
-                                <property name="label" translatable="true">Image</property>
-                                <property name="icon-name">image-x-generic-symbolic</property>
+                              <object class="GtkButton" id="send_button">
+                                <style>
+                                  <class name="suggested-action"/>
+                                </style>
+                                <child>
+                                  <object class="AdwButtonContent">
+                                    <property name="label" translatable="true">Send</property>
+                                    <property name="icon-name">send-to-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="image_button">
+                                <property name="sensitive">false</property>
+                                <property name="tooltip-text" translatable="true">Requires model 'llava' to be selected</property>
+                                <child>
+                                  <object class="AdwButtonContent">
+                                    <property name="label" translatable="true">Image</property>
+                                    <property name="icon-name">image-x-generic-symbolic</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
                         </child>
                       </object>
                     </child>
-                  </object>
-                </child>
 
-              </object><!--END OF CONTENT-->
-            </property>
+                  </object><!--END OF CONTENT-->
+                </property>
+              </object>
+            </child>
           </object>
         </child>
       </object>
@@ -220,7 +298,11 @@
                         </object>
                       </child>
                       <child>
-                        <object class="GtkSeparator"></object>
+                        <object class="GtkSeparator">
+                          <style>
+                            <class name="spacer"/>
+                          </style>
+                        </object>
                       </child>
                       <child>
                         <object class="GtkListBox" id="available_model_list_box">
@@ -355,7 +437,7 @@
   <menu id="primary_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">_Clear Conversation</attribute>
+        <attribute name="label" translatable="yes">_Clear Chat</attribute>
         <attribute name="action">app.clear</attribute>
       </item>
       <item>
@@ -368,7 +450,6 @@
       </item>
     </section>
   </menu>
-
   <object class="GtkFileFilter" id="file_filter_image">
     <mime-types>
       <mime-type>image/svg+xml</mime-type>
