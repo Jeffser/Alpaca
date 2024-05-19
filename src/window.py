@@ -217,6 +217,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             normal_text = text[pos:]
             if normal_text.strip():
                 parts.append({"type": "normal", "text": normal_text.strip()})
+        bold_pattern = re.compile(r'\*\*(.*?)\*\*') #**text**
+        code_pattern = re.compile(r'`(.*?)`') #`text`
         for part in parts:
             if part['type'] == 'normal':
                 message_text = Gtk.TextView(
@@ -231,13 +233,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     css_classes=["flat"]
                 )
                 message_buffer = message_text.get_buffer()
+
+                footer = None
                 if part['text'].split("\n")[-1] == parts[-1]['text'].split("\n")[-1]:
                     footer = "\n\n<small>" + part['text'].split('\n')[-1] + "</small>"
                     part['text'] = '\n'.join(part['text'].split("\n")[:-1])
-                    message_buffer.insert(message_buffer.get_end_iter(), part['text'])
-                    message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer))
-                else:
-                    message_buffer.insert(message_buffer.get_end_iter(), part['text'])
+
+                part['text'] = code_pattern.sub(r'<tt>\1</tt>', part['text'])
+                part['text'] = bold_pattern.sub(r'<b>\1</b>', part['text'])
+                message_buffer.insert_markup(message_buffer.get_end_iter(), part['text'], len(part['text']))
+                #message_buffer.insert(message_buffer.get_end_iter(), part['text'])
+
+                if footer: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer))
+
                 self.bot_message_box.append(message_text)
             else:
                 language = GtkSource.LanguageManager.get_default().get_language(part['language'])
