@@ -656,7 +656,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def chat_delete(self, dialog, task, chat_name):
         if dialog.choose_finish(task) == "delete":
             del self.chats['chats'][chat_name]
-            #self.save_history()
+            self.save_history()
             self.update_chat_list()
 
     def chat_delete_dialog(self, chat_name):
@@ -774,14 +774,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if name==self.chats["selected_chat"]: self.chat_list_box.select_row(chat)
 
     def chat_changed(self, listbox, row):
-        if row or row.get_title() != self.chats["selected_chat"]:
+        if row and row.get_title() != self.chats["selected_chat"]:
             self.chats["selected_chat"] = row.get_title()
             self.load_history_into_chat()
-        if len(self.chats["chats"][self.chats["selected_chat"]]["messages"]) > 0:
-            for i in range(self.model_string_list.get_n_items()):
-                if self.model_string_list.get_string(i) == self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]["model"]:
-                    self.model_drop_down.set_selected(i)
-                    break
+            if len(self.chats["chats"][self.chats["selected_chat"]]["messages"]) > 0:
+                for i in range(self.model_string_list.get_n_items()):
+                    if self.model_string_list.get_string(i) == self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]["model"]:
+                        self.model_drop_down.set_selected(i)
+                        break
 
 
     def selected_model_changed(self, pspec=None, user_data=None):
