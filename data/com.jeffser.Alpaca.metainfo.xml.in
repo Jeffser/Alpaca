@@ -52,6 +52,27 @@
   <url type="homepage">https://github.com/Jeffser/Alpaca</url>
   <url type="donation">https://github.com/sponsors/Jeffser</url>
   <releases>
+    <release version="0.5.0" date="2024-05-19">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.5.0</url>
+      <description>
+        <p>Really Big Update</p>
+        <ul>
+          <li>Added multiple chats support!</li>
+          <li>Added Pango Markup support (bold, list, title, subtitle, monospace)</li>
+          <li>Added autoscroll if the user is at the bottom of the chat</li>
+          <li>Added support for multiple tags on a single model</li>
+          <li>Added better model management dialog</li>
+          <li>Added loading spinner when sending message</li>
+          <li>Added notifications if app is not active and a model pull finishes</li>
+          <li>Added new symbolic icon</li>
+          <li>Added frame to message textview widget</li>
+          <li>Fixed "code blocks shouldn't be editable"</li>
+        </ul>
+        <p>
+          Please report any errors to the issues page, thank you.
+        </p>
+      </description>
+    </release>
     <release version="0.4.0" date="2024-05-17">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.4.0</url>
       <description>
