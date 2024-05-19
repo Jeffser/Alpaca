@@ -245,35 +245,6 @@
       </object>
     </property>
 
-    <object class="AdwDialog" id="pull_model_dialog">
-      <property name="can-close">false</property>
-      <property name="width-request">400</property>
-      <child>
-        <object class="AdwToastOverlay" id="pull_overlay">
-          <child>
-            <object class="AdwToolbarView">
-              <child>
-                <object class="AdwStatusPage" id="pull_model_status_page">
-                  <property name="hexpand">true</property>
-                  <property name="vexpand">true</property>
-                  <property name="margin-top">24</property>
-                  <property name="margin-bottom">24</property>
-                  <property name="margin-start">24</property>
-                  <property name="margin-end">24</property>
-                  <property name="title" translatable="yes">Pulling Model</property>
-                  <child>
-                    <object class="GtkProgressBar" id="pull_model_progress_bar">
-                      <property name="show-text">true</property>
-                    </object>
-                  </child>
-                </object>
-              </child>
-            </object>
-          </child>
-        </object>
-      </child>
-    </object>
-
     <object class="AdwDialog" id="manage_models_dialog">
       <property name="can-close">true</property>
       <property name="width-request">400</property>
@@ -303,6 +274,21 @@
                     <object class="GtkBox">
                       <property name="orientation">1</property>
                       <property name="spacing">12</property>
+                      <child>
+                        <object class="GtkListBox" id="pulling_model_list_box">
+                          <property name="selection-mode">none</property>
+                          <style>
+                            <class name="boxed-list"/>
+                          </style>
+                        </object>
+                      </child>
+                      <child>
+                        <object class="GtkSeparator">
+                          <style>
+                            <class name="spacer"/>
+                          </style>
+                        </object>
+                      </child>
                       <child>
                         <object class="GtkListBox" id="local_model_list_box">
                           <property name="selection-mode">none</property>
