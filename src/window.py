@@ -217,8 +217,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
             normal_text = text[pos:]
             if normal_text.strip():
                 parts.append({"type": "normal", "text": normal_text.strip()})
-        bold_pattern = re.compile(r'\*\*(.*?)\*\*') #**text**
-        code_pattern = re.compile(r'`(.*?)`') #`text`
+        bold_pattern = re.compile(r'\*\*(.*?)\*\*') #"**text**"
+        code_pattern = re.compile(r'`(.*?)`') #"`text`"
+        h1_pattern = re.compile(r'^#\s(.*)$') #"# text"
+        h2_pattern = re.compile(r'^##\s(.*)$') #"## text"
+        markup_pattern = re.compile(r'<(b|u|tt|span.*)>(.*?)<\/(b|u|tt|span)>') #heh butt span, I'm so funny
         for part in parts:
             if part['type'] == 'normal':
                 message_text = Gtk.TextView(
@@ -239,10 +242,23 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     footer = "\n\n<small>" + part['text'].split('\n')[-1] + "</small>"
                     part['text'] = '\n'.join(part['text'].split("\n")[:-1])
 
+                part['text'] = part['text'].replace("\n* ", "\n• ")
+                part['text'] = GLib.markup_escape_text(part['text'])
                 part['text'] = code_pattern.sub(r'<tt>\1</tt>', part['text'])
                 part['text'] = bold_pattern.sub(r'<b>\1</b>', part['text'])
-                message_buffer.insert_markup(message_buffer.get_end_iter(), part['text'], len(part['text']))
-                #message_buffer.insert(message_buffer.get_end_iter(), part['text'])
+                part['text'] = h1_pattern.sub(r'<span size="x-large">\1</span>', part['text'])
+                part['text'] = h2_pattern.sub(r'<span size="large">\1</span>', part['text'])
+
+                position = 0
+                for match in markup_pattern.finditer(part['text']):
+                    start, end = match.span()
+                    if position < start:
+                        message_buffer.insert(message_buffer.get_end_iter(), part['text'][position:start])
+                    message_buffer.insert_markup(message_buffer.get_end_iter(), match.group(0), len(match.group(0)))
+                    position = end
+
+                if position < len(part['text']):
+                    message_buffer.insert(message_buffer.get_end_iter(), part['text'][position:])
 
                 if footer: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer))
 
