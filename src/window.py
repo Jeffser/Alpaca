@@ -319,6 +319,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         response = stream_post(f"{self.ollama_url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=self.update_bot_message)
         GLib.idle_add(self.add_code_blocks)
         GLib.idle_add(self.send_button.set_sensitive, True)
+        GLib.idle_add(self.chat_list_box.set_sensitive, True)
+        GLib.idle_add(self.add_chat_button.set_sensitive, True)
         GLib.idle_add(self.image_button.set_sensitive, True)
         GLib.idle_add(self.image_button.set_css_classes, [])
         GLib.idle_add(self.image_button.get_child().set_icon_name, "image-x-generic-symbolic")
@@ -349,6 +351,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             data["messages"][-1]["images"] = [self.attached_image["base64"]]
         self.message_text_view.set_sensitive(False)
         self.send_button.set_sensitive(False)
+        self.chat_list_box.set_sensitive(False)
+        self.add_chat_button.set_sensitive(False)
         self.image_button.set_sensitive(False)
         self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"])
         self.message_text_view.get_buffer().set_text("", 0)

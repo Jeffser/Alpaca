@@ -44,7 +44,7 @@ class AlpacaApplication(Adw.Application):
         win.present()
 
     def on_about_action(self, widget, _):
-        about = Adw.AboutWindow(transient_for=self.props.active_window,
+        about = Adw.AboutDialog(#transient_for=self.props.active_window,
             application_name='Alpaca',
             application_icon='com.jeffser.Alpaca',
             developer_name='Jeffry Samuel Eduarte Rojas',
@@ -54,7 +54,7 @@ class AlpacaApplication(Adw.Application):
             translator_credits='Alex K (Russian) https://github.com/alexkdeveloper',
             copyright='© 2024 Jeffser',
             issue_url='https://github.com/Jeffser/Alpaca/issues')
-        about.present()
+        about.present(parent=self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
