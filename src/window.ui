@@ -150,7 +150,6 @@
                     <child>
                       <object class="GtkScrolledWindow" id="chat_window">
                         <property name="margin-bottom">12</property>
-                        <property name="has-frame">true</property>
                         <property name="propagate-natural-height">true</property>
                         <property name="kinetic-scrolling">1</property>
                         <property name="vexpand">true</property>
@@ -264,26 +263,21 @@
                 <object class="GtkScrolledWindow">
                   <property name="hexpand">true</property>
                   <property name="vexpand">true</property>
-                  <property name="margin-top">0</property>
-                  <property name="margin-bottom">24</property>
-                  <property name="margin-start">24</property>
-                  <property name="margin-end">24</property>
                   <child>
                     <object class="GtkBox">
+                      <property name="margin-start">12</property>
+                      <property name="margin-end">12</property>
+                      <property name="margin-top">12</property>
+                      <property name="margin-bottom">12</property>
                       <property name="orientation">1</property>
                       <property name="spacing">12</property>
                       <child>
                         <object class="GtkListBox" id="pulling_model_list_box">
+                          <property name="visible">false</property>
                           <property name="selection-mode">none</property>
                           <style>
                             <class name="boxed-list"/>
-                          </style>
-                        </object>
-                      </child>
-                      <child>
-                        <object class="GtkSeparator">
-                          <style>
-                            <class name="spacer"/>
+                            <class name="card"/>
                           </style>
                         </object>
                       </child>
@@ -292,13 +286,7 @@
                           <property name="selection-mode">none</property>
                           <style>
                             <class name="boxed-list"/>
-                          </style>
-                        </object>
-                      </child>
-                      <child>
-                        <object class="GtkSeparator">
-                          <style>
-                            <class name="spacer"/>
+                            <class name="card"/>
                           </style>
                         </object>
                       </child>

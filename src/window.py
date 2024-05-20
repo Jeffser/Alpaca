@@ -186,6 +186,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.model_string_list.remove(i)
         if response['status'] == 'ok':
             self.local_model_list_box.remove_all()
+            if len(json.loads(response['text'])['models']) == 0:
+                self.local_model_list_box.set_visible(False)
+            else:
+                self.local_model_list_box.set_visible(True)
             for model in json.loads(response['text'])['models']:
                 model_row = Adw.ActionRow(
                     title = model["name"].split(":")[0],
@@ -408,23 +412,29 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if model_name in list(self.pulling_models.keys()):
             GLib.idle_add(self.pulling_models[model_name].set_subtitle, data['status'] + (f" | {round(data['completed'] / data['total'] * 100, 2)}%" if 'completed' in data and 'total' in data else ""))
         else:
+            if len(list(self.pulling_models.keys())) == 0:
+                GLib.idle_add(self.pulling_model_list_box.set_visible, False)
             sys.exit()
 
     def pull_model(self, model_name, tag):
         data = {"name":f"{model_name}:{tag}"}
         response = stream_post(f"{self.ollama_url}/api/pull", data=json.dumps(data), callback=lambda data, model_name=f"{model_name}:{tag}": self.pull_model_update(data, model_name))
         GLib.idle_add(self.update_list_local_models)
+
         if response['status'] == 'ok':
             GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(f"{model_name}:{tag}"), True, Gio.ThemedIcon.new("emblem-ok-symbolic"))
             GLib.idle_add(self.show_toast, "good", 1, self.manage_models_overlay)
             GLib.idle_add(self.pulling_models[f"{model_name}:{tag}"].get_parent().remove, self.pulling_models[f"{model_name}:{tag}"])
             del self.pulling_models[f"{model_name}:{tag}"]
-
         else:
             GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(f"{model_name}:{tag}"), True, Gio.ThemedIcon.new("dialog-error-symbolic"))
             GLib.idle_add(self.show_toast, "error", 4, self.connection_overlay)
+            GLib.idle_add(self.pulling_models[f"{model_name}:{tag}"].get_parent().remove, self.pulling_models[f"{model_name}:{tag}"])
+            del self.pulling_models[f"{model_name}:{tag}"]
             GLib.idle_add(self.manage_models_dialog.close)
             GLib.idle_add(self.show_connection_dialog, True)
+        if len(list(self.pulling_models.keys())) == 0:
+            GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
     def stop_pull_model(self, dialog, task, model_name):
         if dialog.choose_finish(task) == "stop":
@@ -452,6 +462,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if f"{model_name}:{tag}" in list(self.pulling_models.keys()): return ##TODO add message: 'already being pulled'
             if f"{model_name}:{tag}" in self.local_models: return ##TODO add message 'already pulled'
             #self.pull_model_status_page.set_description(f"{model_name}:{tag}")
+            self.pulling_model_list_box.set_visible(True)
             model_row = Adw.ActionRow(
                 title = f"{model_name}:{tag}",
                 subtitle = ""
