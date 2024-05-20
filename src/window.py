@@ -21,7 +21,7 @@ import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
-import json, requests, threading, os, re, base64, sys
+import json, requests, threading, os, re, base64, sys, gettext, locale
 from io import BytesIO
 from PIL import Image
 from datetime import datetime
@@ -32,11 +32,19 @@ from .available_models import available_models
 class AlpacaWindow(Adw.ApplicationWindow):
     config_dir = os.path.join(os.getenv("XDG_CONFIG_HOME"), "/", os.path.expanduser("~/.var/app/com.jeffser.Alpaca/config"))
     __gtype_name__ = 'AlpacaWindow'
+
+    localedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'locale')
+
+    locale.setlocale(locale.LC_ALL, '')
+    gettext.bindtextdomain('com.jeffser.Alpaca', localedir)
+    gettext.textdomain('com.jeffser.Alpaca')
+    _ = gettext.gettext
+
     #Variables
     ollama_url = None
     local_models = []
     pulling_models = {}
-    chats = {"chats": {"New Chat": {"messages": []}}, "selected_chat": "New Chat"}
+    chats = {"chats": {_("New Chat"): {"messages": []}}, "selected_chat": "New Chat"}
     attached_image = {"path": None, "base64": None}
     first_time_setup = False
 
@@ -75,21 +83,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     toast_messages = {
         "error": [
-            "An error occurred",
-            "Failed to connect to server",
-            "Could not list local models",
-            "Could not delete model",
-            "Could not pull model",
-            "Cannot open image",
-            "Cannot delete chat because it's the only one left"
+            _("An error occurred"),
+            _("Failed to connect to server"),
+            _("Could not list local models"),
+            _("Could not delete model"),
+            _("Could not pull model"),
+            _("Cannot open image"),
+            _("Cannot delete chat because it's the only one left")
         ],
         "info": [
-            "Please select a model before chatting",
-            "Chat cannot be cleared while receiving a message"
+            _("Please select a model before chatting"),
+            _("Chat cannot be cleared while receiving a message")
         ],
         "good": [
-            "Model deleted successfully",
-            "Model pulled successfully"
+            _("Model deleted successfully"),
+            _("Model pulled successfully")
         ]
     }
 
@@ -407,13 +415,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
         response = stream_post(f"{self.ollama_url}/api/pull", data=json.dumps(data), callback=lambda data, model_name=f"{model_name}:{tag}": self.pull_model_update(data, model_name))
         GLib.idle_add(self.update_list_local_models)
         if response['status'] == 'ok':
-            GLib.idle_add(self.show_notification, "Task Complete", f"Model '{model_name}:{tag}' pulled successfully.", True, Gio.ThemedIcon.new("emblem-ok-symbolic"))
+            GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(f"{model_name}:{tag}"), True, Gio.ThemedIcon.new("emblem-ok-symbolic"))
             GLib.idle_add(self.show_toast, "good", 1, self.manage_models_overlay)
             GLib.idle_add(self.pulling_models[f"{model_name}:{tag}"].get_parent().remove, self.pulling_models[f"{model_name}:{tag}"])
             del self.pulling_models[f"{model_name}:{tag}"]
 
         else:
-            GLib.idle_add(self.show_notification, "Pull Model Error", f"Failed to pull model '{model_name}:{tag}' due to network error.", True, Gio.ThemedIcon.new("dialog-error-symbolic"))
+            GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(f"{model_name}:{tag}"), True, Gio.ThemedIcon.new("dialog-error-symbolic"))
             GLib.idle_add(self.show_toast, "error", 4, self.connection_overlay)
             GLib.idle_add(self.manage_models_dialog.close)
             GLib.idle_add(self.show_connection_dialog, True)
@@ -425,12 +433,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def stop_pull_model_dialog(self, model_name):
         dialog = Adw.AlertDialog(
-            heading="Stop Model",
-            body=f"Are you sure you want to stop pulling '{model_name}'?",
+            heading=_("Stop Model"),
+            body=_("Are you sure you want to stop pulling '{}'?").format(model_name),
             close_response="cancel"
         )
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("stop", "Stop")
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("stop", _("Stop"))
         dialog.set_response_appearance("stop", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.choose(
             parent = self.manage_models_dialog,
@@ -463,12 +471,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def model_delete_button_activate(self, model_name):
         dialog = Adw.AlertDialog(
-            heading="Delete Model",
-            body=f"Are you sure you want to delete '{model_name}'?",
+            heading=_("Delete Model"),
+            body=_("Are you sure you want to delete '{}'?").format(model_name),
             close_response="cancel"
         )
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("delete", "Delete")
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("delete", _("Delete"))
         dialog.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.choose(
             parent = self.manage_models_dialog,
@@ -485,13 +493,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             model=tag_list
         )
         dialog = Adw.AlertDialog(
-            heading="Pull Model",
-            body=f"Please select a tag to pull '{model_name}'",
+            heading=_("Pull Model"),
+            body=_("Please select a tag to pull '{}'").format(model_name),
             extra_child=tag_drop_down,
             close_response="cancel"
         )
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("pull", "Pull")
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("pull", _("Pull"))
         dialog.set_response_appearance("pull", Adw.ResponseAppearance.SUGGESTED)
         dialog.choose(
             parent = self.manage_models_dialog,
@@ -551,7 +559,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.chats["chats"][self.chats["selected_chat"]]["messages"] = []
 
     def clear_chat_dialog_response(self, dialog, task):
-        if dialog.choose_finish(task) == "empty":
+        if dialog.choose_finish(task) == "clear":
             self.clear_chat()
             self.save_history()
 
@@ -560,13 +568,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.show_toast("info", 1, self.main_overlay)
             return
         dialog = Adw.AlertDialog(
-            heading=f"Clear Chat",
-            body=f"Are you sure you want to clear the chat?",
+            heading=_("Clear Chat"),
+            body=_("Are you sure you want to clear the chat?"),
             close_response="cancel"
         )
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("empty", "Empty")
-        dialog.set_response_appearance("empty", Adw.ResponseAppearance.DESTRUCTIVE)
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("clear", _("Clear"))
+        dialog.set_response_appearance("clear", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.choose(
             parent = self,
             cancellable = None,
@@ -621,13 +629,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             else: self.first_time_setup = False
             return
         dialog = Adw.AlertDialog(
-            heading=f"Save Changes?",
-            body=f"Do you want to save the URL change?",
+            heading=_("Save Changes?"),
+            body=_("Do you want to save the URL change?"),
             close_response="cancel"
         )
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("discard", "Discard")
-        dialog.add_response("save", "Save")
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("discard", _("Discard"))
+        dialog.add_response("save", _("Save"))
         dialog.set_response_appearance("discard", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.set_response_appearance("save", Adw.ResponseAppearance.SUGGESTED)
         dialog.choose(
@@ -641,8 +649,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         except: return
         try:
             self.attached_image["path"] = file.get_path()
-            '''with open(self.attached_image["path"], "rb") as image_file:
-                self.attached_image["base64"] = base64.b64encode(image_file.read()).decode("utf-8")'''
             with Image.open(self.attached_image["path"]) as img:
                 width, height = img.size
                 max_size = 240
@@ -672,12 +678,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def open_image(self, button):
         if "destructive-action" in button.get_css_classes():
             dialog = Adw.AlertDialog(
-                heading=f"Remove Image?",
-                body=f"Are you sure you want to remove image?",
+                heading=_("Remove Image?"),
+                body=_("Are you sure you want to remove image?"),
                 close_response="cancel"
             )
-            dialog.add_response("cancel", "Cancel")
-            dialog.add_response("remove", "Remove")
+            dialog.add_response("cancel", _("Cancel"))
+            dialog.add_response("remove", _("Remove"))
             dialog.set_response_appearance("remove", Adw.ResponseAppearance.DESTRUCTIVE)
             dialog.choose(
                 parent = self,
@@ -699,12 +705,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.show_toast("error", 6, self.main_overlay)
             return
         dialog = Adw.AlertDialog(
-            heading=f"Delete Chat",
-            body=f"Are you sure you want to delete '{chat_name}'?",
+            heading=_("Delete Chat"),
+            body=_("Are you sure you want to delete '{}'?").format(chat_name),
             close_response="cancel"
         )
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("delete", "Delete")
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("delete", _("Delete"))
         dialog.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.choose(
             parent = self,
@@ -730,14 +736,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
             css_classes = ["error"] if error else None
         )
         dialog = Adw.AlertDialog(
-            heading=f"Rename Chat",
+            heading=_("Rename Chat"),
             body=body,
             extra_child=entry,
             close_response="cancel"
         )
         entry.connect("activate", lambda entry, dialog=dialog, old_chat_name=chat_name: self.chat_rename(dialog=dialog, old_chat_name=old_chat_name, entry=entry))
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("rename", "Rename")
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("rename", _("Rename"))
         dialog.set_response_appearance("rename", Adw.ResponseAppearance.SUGGESTED)
         dialog.choose(
             parent = self,
@@ -750,7 +756,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         chat_name = entry.get_text()
         if chat_name and (not task or dialog.choose_finish(task) == "create"):
             dialog.force_close()
-            if chat_name in self.chats["chats"]: self.chat_new_dialog(f"The name '{chat_name}' is already in use", True)
+            if chat_name in self.chats["chats"]: self.chat_new_dialog(_("The name '{}' is already in use").format(chat_name), True)
             else:
                 self.chats["chats"][chat_name] = {"messages": []}
                 self.chats["selected_chat"] = chat_name
@@ -763,14 +769,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
             css_classes = ["error"] if error else None
         )
         dialog = Adw.AlertDialog(
-            heading=f"Create Chat",
+            heading=_("Create Chat"),
             body=body,
             extra_child=entry,
             close_response="cancel"
         )
         entry.connect("activate", lambda entry, dialog=dialog: self.chat_new(dialog=dialog, entry=entry))
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("create", "Create")
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("create", _("Create"))
         dialog.set_response_appearance("rename", Adw.ResponseAppearance.SUGGESTED)
         dialog.choose(
             parent = self,
