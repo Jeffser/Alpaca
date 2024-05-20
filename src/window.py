@@ -21,7 +21,7 @@ import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
-import json, requests, threading, os, re, base64, sys, gettext, locale
+import json, requests, threading, os, re, base64, sys, gettext, locale, webbrowser
 from io import BytesIO
 from PIL import Image
 from datetime import datetime
@@ -511,17 +511,24 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.available_model_list_box.remove_all()
         for name, model_info in available_models.items():
             model = Adw.ActionRow(
-                title = name,
-                subtitle = model_info['description'],
+                title = name
             )
-            button = Gtk.Button(
+            link_button = Gtk.Button(
+                icon_name = "web-browser-symbolic",
+                vexpand = False,
+                valign = 3,
+                css_classes = ["success"]
+            )
+            pull_button = Gtk.Button(
                 icon_name = "folder-download-symbolic",
                 vexpand = False,
                 valign = 3,
                 css_classes = ["accent"]
             )
-            button.connect("clicked", lambda button=button, model_name=name: self.model_pull_button_activate(model_name))
-            model.add_suffix(button)
+            link_button.connect("clicked", lambda button=link_button, link=model_info["url"]: webbrowser.open(link))
+            pull_button.connect("clicked", lambda button=pull_button, model_name=name: self.model_pull_button_activate(model_name))
+            model.add_suffix(link_button)
+            model.add_suffix(pull_button)
             self.available_model_list_box.append(model)
 
     def manage_models_button_activate(self, button=None):
