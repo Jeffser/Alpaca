@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-19 19:42-0600\n"
+"POT-Creation-Date: 2024-05-19 21:11-0600\n"
 "PO-Revision-Date: 2024-05-19 19:44-0600\n"
 "Last-Translator: Jeffry Samuel Eduarte Rojas <jeffrysamuer@gmail.com>\n"
 "Language-Team: Spanish <es@tp.org.es>\n"
@@ -57,8 +57,8 @@ msgid ""
 "models."
 msgstr ""
 "Este proyecto no está afiliado del todo con Ollama, no soy responsable por "
-"cualquier daño a tu dispositivo o software causado por correr codigo proveido por"
-"cualquier modelo."
+"cualquier daño a tu dispositivo o software causado por correr codigo "
+"proveido por cualquier modelo."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:21
 msgid "Jeffry Samuel Eduarte Rojas"
@@ -86,11 +86,14 @@ msgstr "Añadido soporte para multiples chats!"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:61
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
-msgstr "Añadido soporte para Pango Markup (negrita, lista, titulo, subtitulo, monoespaciado)"
+msgstr ""
+"Añadido soporte para Pango Markup (negrita, lista, titulo, subtitulo, "
+"monoespaciado)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:62
 msgid "Added autoscroll if the user is at the bottom of the chat"
-msgstr "Añadido autoscroll si el usuario se encuentra en la parte inferior del chat"
+msgstr ""
+"Añadido autoscroll si el usuario se encuentra en la parte inferior del chat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:63
 msgid "Added support for multiple tags on a single model"
@@ -106,7 +109,9 @@ msgstr "Añadido spinner de carga cuando se envia un mensaje"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:66
 msgid "Added notifications if app is not active and a model pull finishes"
-msgstr "Añadidas notificaciones si la aplicación no está activa y la descarga de un modelo finaliza"
+msgstr ""
+"Añadidas notificaciones si la aplicación no está activa y la descarga de un "
+"modelo finaliza"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:67
 msgid "Added new symbolic icon"
@@ -177,7 +182,8 @@ msgstr "Arreglado: Descripción de aplicación"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Fixed: Only show 'save changes dialog' when you actually change the url"
-msgstr "Arreglado: Solo mostrar el dialogo 'guardar cambios' cuando se cambia el url"
+msgstr ""
+"Arreglado: Solo mostrar el dialogo 'guardar cambios' cuando se cambia el url"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "0.2.2 Bug fixes"
@@ -189,7 +195,8 @@ msgstr "Mensajes toast apareciendo detrás de dialogos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid "Local model list not updating when changing servers"
-msgstr "Lista de modelos locales no es actualizada cuando se cambia el servidor"
+msgstr ""
+"Lista de modelos locales no es actualizada cuando se cambia el servidor"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Closing the setup dialog closes the whole app"
@@ -204,8 +211,8 @@ msgid ""
 "The app didn't save the config files and chat history to the right "
 "directory, this is now fixed"
 msgstr ""
-"La aplicación no guardaba los archivos de configuración o los chats en el directorio "
-"correcto, esto ahora ha sido arreglado"
+"La aplicación no guardaba los archivos de configuración o los chats en el "
+"directorio correcto, esto ahora ha sido arreglado"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:135
 msgid "0.2.0"
@@ -243,7 +250,8 @@ msgstr "0.1.2 Arreglos rápidos"
 msgid ""
 "This release fixes some metadata needed to have a proper Flatpak application"
 msgstr ""
-"Esta versión arregla metadatos necesarios para tener un aplicación de Flatpak justa"
+"Esta versión arregla metadatos necesarios para tener un aplicación de "
+"Flatpak justa"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:160
 msgid "0.1.1 Stable Release"
@@ -253,7 +261,7 @@ msgstr "0.1.1"
 msgid "This is the first public version of Alpaca"
 msgstr "Esta es la primera versión publica de Alpaca"
 
-#: src/window.py:47
+#: src/window.py:47 src/window.py:758
 msgid "New Chat"
 msgstr "Nuevo Chat"
 
@@ -327,7 +335,7 @@ msgstr "¿Estás seguro de que quieres parar la descarga de '{}'?"
 
 #: src/window.py:440 src/window.py:478 src/window.py:501 src/window.py:575
 #: src/window.py:636 src/window.py:685 src/window.py:712 src/window.py:745
-#: src/window.py:778
+#: src/window.py:785
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -411,15 +419,15 @@ msgstr "Renombrar Chat"
 msgid "Rename"
 msgstr "Renombrar"
 
-#: src/window.py:759
+#: src/window.py:766
 msgid "The name '{}' is already in use"
 msgstr "El nombre '{}' ya está en uso"
 
-#: src/window.py:772
+#: src/window.py:779
 msgid "Create Chat"
 msgstr "Crear Chat"
 
-#: src/window.py:779
+#: src/window.py:786
 msgid "Create"
 msgstr "Crear"
 
@@ -435,7 +443,7 @@ msgstr "Nuevo chat"
 msgid "Toggle Sidebar"
 msgstr "Alternar barra de lado"
 
-#: src/window.ui:122
+#: src/window.ui:122 src/window.ui:259
 msgid "Manage models"
 msgstr "Gestionar modelos"
 
@@ -472,8 +480,9 @@ msgid ""
 "To get started, please ensure you have an Ollama instance set up. You can "
 "either run Ollama locally on your machine or connect to a remote instance."
 msgstr ""
-"Para iniciar, por favor asegurate de tener una instancia de Ollama funcional. Puedes "
-"correr Ollama localmente o conectarte a una instancia remota."
+"Para iniciar, por favor asegurate de tener una instancia de Ollama "
+"funcional. Puedes correr Ollama localmente o conectarte a una instancia "
+"remota."
 
 #: src/window.ui:389
 msgid "Ollama Website"
@@ -485,9 +494,10 @@ msgid ""
 "software resulting from the execution of code generated by an AI model. "
 "Please exercise caution and review the code carefully before running it."
 msgstr ""
-"Alpaca y sus desarrolladores no son responsables por cualquier daño a dispositivos o "
-"software resultados por la ejecución de codigo generado por un modelo de IA. "
-"Por favor sea precavido y revise el codigo cuidadosamente antes de correrlo"
+"Alpaca y sus desarrolladores no son responsables por cualquier daño a "
+"dispositivos o software resultados por la ejecución de codigo generado por "
+"un modelo de IA. Por favor sea precavido y revise el codigo cuidadosamente "
+"antes de correrlo"
 
 #: src/window.ui:418
 msgid "Setup"
@@ -499,9 +509,9 @@ msgid ""
 "default ports, you can use the default URL. Otherwise, please enter the URL "
 "of your Ollama instance."
 msgstr ""
-"Si estás corriendo una instancia local de Ollama y no modificaste los puertos "
-"por defecto, puedes usar la URL por defecto. De otra forma, por favor ingresa la URL "
-"de tu instancia de Ollama"
+"Si estás corriendo una instancia local de Ollama y no modificaste los "
+"puertos por defecto, puedes usar la URL por defecto. De otra forma, por "
+"favor ingresa la URL de tu instancia de Ollama"
 
 #: src/window.ui:443
 msgid "Change Server"
