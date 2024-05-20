@@ -3,28 +3,41 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-19 21:53-0600\n"
-"PO-Revision-Date: 2024-05-19 14:59+0800\n"
+"PO-Revision-Date: 2024-05-20 16:59+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Poedit-Basepath: ../src\n"
 "X-Poedit-SearchPath-0: .\n"
 
+#: gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Общие"
+
+#: gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Показывать комбинации клавиш"
+
+#: gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Выйти"
+
 #: data/com.jeffser.Alpaca.desktop.in:3
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
-#, fuzzy
 msgid "Alpaca"
-msgstr "_О Программе"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 #: data/com.jeffser.Alpaca.metainfo.xml.in:11
-#, fuzzy
 msgid "An Ollama client"
-msgstr "Веб-сайт Ollama"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:10
 msgid "Chat with multiple AI models"
@@ -45,15 +58,8 @@ msgstr ""
 msgid "Pull and delete models from the app"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:17 src/window.ui:405
-msgid "Disclaimer"
-msgstr "Отказ от ответственности"
-
 #: data/com.jeffser.Alpaca.metainfo.xml.in:18
-msgid ""
-"This project is not affiliated at all with Ollama, I'm not responsible for "
-"any damages to your device or software caused by running code given by any "
-"models."
+msgid "This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any models."
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:21
@@ -69,9 +75,8 @@ msgid "A conversation involving multiple models"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:47
-#, fuzzy
 msgid "Managing models"
-msgstr "Управление моделями"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:58
 msgid "Quick Fix"
@@ -119,9 +124,7 @@ msgid "Better translation support"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:77
-msgid ""
-"User can now leave chat name empty when creating a new one, it will add a "
-"placeholder name"
+msgid "User can now leave chat name empty when creating a new one, it will add a placeholder name"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:78
@@ -246,9 +249,7 @@ msgid "0.2.1 Data saving fix"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:157
-msgid ""
-"The app didn't save the config files and chat history to the right "
-"directory, this is now fixed"
+msgid "The app didn't save the config files and chat history to the right directory, this is now fixed"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:166
@@ -256,9 +257,8 @@ msgid "0.2.0"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:168
-#, fuzzy
 msgid "New Features"
-msgstr "Новый чат"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:170
 msgid "Restore chat after closing the app"
@@ -285,8 +285,7 @@ msgid "0.1.2 Quick fixes"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:185
-msgid ""
-"This release fixes some metadata needed to have a proper Flatpak application"
+msgid "This release fixes some metadata needed to have a proper Flatpak application"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:191
@@ -297,323 +296,288 @@ msgstr ""
 msgid "This is the first public version of Alpaca"
 msgstr ""
 
-#: src/window.py:47 src/window.py:758
-#, fuzzy
+#: window.py:47
 msgid "New Chat"
-msgstr "Новый чат"
+msgstr "Новый Чат"
 
-#: src/window.py:86
+#: window.py:86
 msgid "An error occurred"
-msgstr ""
+msgstr "Произошла ошибка"
 
-#: src/window.py:87
+#: window.py:87
 msgid "Failed to connect to server"
-msgstr ""
+msgstr "Не удалось подключиться к серверу"
 
-#: src/window.py:88
+#: window.py:88
 msgid "Could not list local models"
-msgstr ""
+msgstr "Не удалось перечислить локальные модели"
 
-#: src/window.py:89
+#: window.py:89
 msgid "Could not delete model"
-msgstr ""
+msgstr "Не удалось удалить модель"
 
-#: src/window.py:90
+#: window.py:90
 msgid "Could not pull model"
-msgstr ""
+msgstr "Не удалось извлечь модель"
 
-#: src/window.py:91
+#: window.py:91
 msgid "Cannot open image"
-msgstr ""
+msgstr "Не удается открыть изображение"
 
-#: src/window.py:92
+#: window.py:92
 msgid "Cannot delete chat because it's the only one left"
-msgstr ""
+msgstr "Не удается удалить чат, потому что он единственный оставшийся"
 
-#: src/window.py:95
+#: window.py:95
 msgid "Please select a model before chatting"
-msgstr ""
+msgstr "Пожалуйста, выберите модель перед началом общения"
 
-#: src/window.py:96
+#: window.py:96
 msgid "Chat cannot be cleared while receiving a message"
-msgstr ""
+msgstr "Чат не может быть удален при получении сообщения"
 
-#: src/window.py:99
+#: window.py:99
 msgid "Model deleted successfully"
-msgstr ""
+msgstr "Модель успешно удалена"
 
-#: src/window.py:100
+#: window.py:100
 msgid "Model pulled successfully"
-msgstr ""
+msgstr "Модель успешно извлечена"
 
-#: src/window.py:418
+#: window.py:418
 msgid "Task Complete"
-msgstr ""
+msgstr "Задача выполнена"
 
-#: src/window.py:418
+#: window.py:418
 msgid "Model '{}' pulled successfully."
-msgstr ""
+msgstr "Модель '{}' успешно извлечена."
 
-#: src/window.py:424
-#, fuzzy
+#: window.py:424
 msgid "Pull Model Error"
-msgstr "Вытягивающая модель"
+msgstr "Ошибка Извлечения Модели"
 
-#: src/window.py:424
+#: window.py:424
 msgid "Failed to pull model '{}' due to network error."
-msgstr ""
+msgstr "Не удалось извлечь модель '{}' из-за сетевой ошибки."
 
-#: src/window.py:436
+#: window.py:436
 msgid "Stop Model"
-msgstr ""
+msgstr "Остановить Модель"
 
-#: src/window.py:437
+#: window.py:437
 msgid "Are you sure you want to stop pulling '{}'?"
-msgstr ""
+msgstr "Вы уверены, что хотите прекратить извлечение '{}'?"
 
-#: src/window.py:440 src/window.py:478 src/window.py:501 src/window.py:575
-#: src/window.py:636 src/window.py:685 src/window.py:712 src/window.py:745
-#: src/window.py:785
+#: window.py:440 window.py:478 window.py:501 window.py:575 window.py:636
+#: window.py:685 window.py:712 window.py:745 window.py:778
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
-#: src/window.py:441
+#: window.py:441
 msgid "Stop"
-msgstr ""
+msgstr "Стоп"
 
-#: src/window.py:474
+#: window.py:474
 msgid "Delete Model"
-msgstr ""
+msgstr "Удалить Модель"
 
-#: src/window.py:475 src/window.py:709
+#: window.py:475 window.py:709
 msgid "Are you sure you want to delete '{}'?"
-msgstr ""
+msgstr "Вы уверены, что хотите удалить '{}'?"
 
-#: src/window.py:479 src/window.py:713
+#: window.py:479 window.py:713
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
-#: src/window.py:496
-#, fuzzy
+#: window.py:496
 msgid "Pull Model"
-msgstr "Вытягивающая модель"
+msgstr "Извлечение модели"
 
-#: src/window.py:497
+#: window.py:497
 msgid "Please select a tag to pull '{}'"
-msgstr ""
+msgstr "Пожалуйста, выберите тег для извлечения '{}'"
 
-#: src/window.py:502
+#: window.py:502
 msgid "Pull"
-msgstr ""
+msgstr "Извлечение"
 
-#: src/window.py:571 src/window.ui:439
-#, fuzzy
+#: window.py:571 window.ui:439
 msgid "Clear Chat"
-msgstr "_Очистить чат"
+msgstr "Очистить Чат"
 
-#: src/window.py:572
+#: window.py:572
 msgid "Are you sure you want to clear the chat?"
-msgstr ""
+msgstr "Вы уверены, что хотите очистить чат?"
 
-#: src/window.py:576
-#, fuzzy
+#: window.py:576
 msgid "Clear"
-msgstr "_Очистить чат"
+msgstr "Очистить"
 
-#: src/window.py:632
+#: window.py:632
 msgid "Save Changes"
-msgstr ""
+msgstr "Сохранить Изменения"
 
-#: src/window.py:633
+#: window.py:633
 msgid "Do you want to save the URL change?"
-msgstr ""
+msgstr "Хотите сохранить изменение URL?"
 
-#: src/window.py:637
-#, fuzzy
+#: window.py:637
 msgid "Discard"
-msgstr "Отказ от ответственности"
+msgstr "Отказаться"
 
-#: src/window.py:638
+#: window.py:638
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
-#: src/window.py:681
+#: window.py:681
 msgid "Remove Image"
-msgstr ""
+msgstr "Удалить Изображение"
 
-#: src/window.py:682
+#: window.py:682
 msgid "Are you sure you want to remove image?"
-msgstr ""
+msgstr "Вы уверены, что хотите удалить изображение?"
 
-#: src/window.py:686
+#: window.py:686
 msgid "Remove"
-msgstr ""
+msgstr "Удалить"
 
-#: src/window.py:708
-#, fuzzy
+#: window.py:708
 msgid "Delete Chat"
-msgstr "_Очистить чат"
+msgstr "Удалить Чат"
 
-#: src/window.py:739
-#, fuzzy
+#: window.py:739
 msgid "Rename Chat"
-msgstr "_Очистить чат"
+msgstr "Переименовать Чат"
 
-#: src/window.py:746
+#: window.py:746
 msgid "Rename"
-msgstr ""
+msgstr "Переименовать"
 
-#: src/window.py:766
+#: window.py:759
 msgid "The name '{}' is already in use"
-msgstr ""
+msgstr "Имя '{}' уже используется"
 
-#: src/window.py:779
-#, fuzzy
+#: window.py:772
 msgid "Create Chat"
-msgstr "_Очистить чат"
+msgstr "Создать Чат"
 
-#: src/window.py:786
+#: window.py:779
 msgid "Create"
-msgstr ""
+msgstr "Создать"
 
-#: src/window.ui:55
+#: window.ui:55
 msgid "Chats"
 msgstr "Чаты"
 
-#: src/window.ui:65
+#: window.ui:65
 msgid "New chat"
 msgstr "Новый чат"
 
-#: src/window.ui:101
+#: window.ui:101
 msgid "Toggle Sidebar"
 msgstr "Переключение боковой панели"
 
-#: src/window.ui:122 src/window.ui:259
+#: window.ui:122
 msgid "Manage models"
 msgstr "Управление моделями"
 
-#: src/window.ui:136
+#: window.ui:136
 msgid "Menu"
 msgstr "Меню"
 
-#: src/window.ui:215
+#: window.ui:215
 msgid "Send"
 msgstr "Отправить"
 
-#: src/window.ui:224
+#: window.ui:224
 msgid "Requires model 'llava' to be selected"
 msgstr "Требуется выбрать модель \"llava\""
 
-#: src/window.ui:227
+#: window.ui:227
 msgid "Image"
 msgstr "Изображение"
 
-#: src/window.ui:344
+#: window.ui:344
 msgid "Previous"
 msgstr "Предыдущий"
 
-#: src/window.ui:359
+#: window.ui:359
 msgid "Next"
 msgstr "Следующий"
 
-#: src/window.ui:385
+#: window.ui:385
 msgid "Welcome to Alpaca"
 msgstr "Добро пожаловать в Alpaca"
 
-#: src/window.ui:386
-msgid ""
-"To get started, please ensure you have an Ollama instance set up. You can "
-"either run Ollama locally on your machine or connect to a remote instance."
-msgstr ""
-"Для начала, пожалуйста, убедитесь, что у вас настроен экземпляр Ollama. Вы "
-"можете либо запустить Ollama локально на своем компьютере, либо подключиться "
-"к удаленному экземпляру."
+#: window.ui:386
+msgid "To get started, please ensure you have an Ollama instance set up. You can either run Ollama locally on your machine or connect to a remote instance."
+msgstr "Для начала, пожалуйста, убедитесь, что у вас настроен экземпляр Ollama. Вы можете либо запустить Ollama локально на своем компьютере, либо подключиться к удаленному экземпляру."
 
-#: src/window.ui:389
+#: window.ui:389
 msgid "Ollama Website"
 msgstr "Веб-сайт Ollama"
 
-#: src/window.ui:406
-msgid ""
-"Alpaca and its developers are not liable for any damages to devices or "
-"software resulting from the execution of code generated by an AI model. "
-"Please exercise caution and review the code carefully before running it."
+#: window.ui:405
+msgid "Disclaimer"
 msgstr ""
-"Alpaca и ее разработчики не несут ответственности за любой ущерб, "
-"причиненный устройствам или программному обеспечению в результате выполнения "
-"кода, сгенерированного с помощью модели искусственного интеллекта. "
-"Пожалуйста, будьте осторожны и внимательно ознакомьтесь с кодом перед его "
-"запуском."
 
-#: src/window.ui:418
+#: window.ui:406
+msgid "Alpaca and its developers are not liable for any damages to devices or software resulting from the execution of code generated by an AI model. Please exercise caution and review the code carefully before running it."
+msgstr "Alpaca и ее разработчики не несут ответственности за любой ущерб, причиненный устройствам или программному обеспечению в результате выполнения кода, сгенерированного с помощью модели искусственного интеллекта. Пожалуйста, будьте осторожны и внимательно ознакомьтесь с кодом перед его запуском."
+
+#: window.ui:418
 msgid "Setup"
 msgstr "Установка"
 
-#: src/window.ui:419
-msgid ""
-"If you are running an Ollama instance locally and haven't modified the "
-"default ports, you can use the default URL. Otherwise, please enter the URL "
-"of your Ollama instance."
-msgstr ""
-"Если вы запускаете локальный экземпляр Ollama и не изменили порты по "
-"умолчанию, вы можете использовать URL-адрес по умолчанию. В противном "
-"случае, пожалуйста, введите URL-адрес вашего экземпляра Ollama."
+#: window.ui:419
+msgid "If you are running an Ollama instance locally and haven't modified the default ports, you can use the default URL. Otherwise, please enter the URL of your Ollama instance."
+msgstr "Если вы запускаете локальный экземпляр Ollama и не изменили порты по умолчанию, вы можете использовать URL-адрес по умолчанию. В противном случае, пожалуйста, введите URL-адрес вашего экземпляра Ollama."
 
-#: src/window.ui:443
-#, fuzzy
+#: window.ui:443
 msgid "Change Server"
-msgstr "_Изменить Сервер"
+msgstr "Изменить Сервер"
 
-#: src/window.ui:447
-#, fuzzy
+#: window.ui:447
 msgid "Keyboard Shortcuts"
-msgstr "Показывать ярлыки"
+msgstr "Комбинации Клавиш"
 
-#: src/window.ui:451
-#, fuzzy
+#: window.ui:451
 msgid "About Alpaca"
-msgstr "_О Программе"
+msgstr "О Программе"
 
-#: src/window.ui:473
-#, fuzzy
+#: window.ui:473
 msgid "General"
 msgstr "Общие"
 
-#: src/window.ui:477
+#: window.ui:477
 msgid "Close application"
-msgstr ""
+msgstr "Закрыть приложение"
 
-#: src/window.ui:483
-#, fuzzy
+#: window.ui:483
 msgid "Clear chat"
-msgstr "_Очистить чат"
+msgstr "Очистить чат"
 
-#: src/window.ui:489
-#, fuzzy
+#: window.ui:489
 msgid "Change server"
-msgstr "_Изменить Сервер"
+msgstr "Изменить Сервер"
 
-#: src/window.ui:495
-#, fuzzy
+#: window.ui:495
 msgid "Show shortcuts window"
-msgstr "Показывать ярлыки"
+msgstr "Показать окно комбинаций клавиш"
 
-#: src/window.ui:502
+#: window.ui:502
 msgid "Editor"
-msgstr ""
+msgstr "Редактор"
 
-#: src/window.ui:506
+#: window.ui:506
 msgid "Copy"
-msgstr ""
+msgstr "Копировать"
 
-#: src/window.ui:512
+#: window.ui:512
 msgid "Paste"
-msgstr ""
+msgstr "Вставить"
 
-#: src/window.ui:518
+#: window.ui:518
 msgid "Send Message"
 msgstr ""
 
-#~ msgctxt "shortcut window"
-#~ msgid "Quit"
-#~ msgstr "Выйти"
