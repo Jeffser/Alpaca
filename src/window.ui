@@ -256,7 +256,7 @@
                 <object class="AdwHeaderBar">
                   <property name="title-widget">
                     <object class="AdwWindowTitle">
-                      <property name="title">Manage models</property>
+                      <property name="title" translatable="yes">Manage models</property>
                     </object>
                   </property>
                 </object>
@@ -436,19 +436,19 @@
   <menu id="primary_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">_Clear Chat</attribute>
+        <attribute name="label" translatable="yes">Clear Chat</attribute>
         <attribute name="action">app.clear</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">_Change Server</attribute>
+        <attribute name="label" translatable="yes">Change Server</attribute>
         <attribute name="action">app.reconnect</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+        <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">_About Alpaca</attribute>
+        <attribute name="label" translatable="yes">About Alpaca</attribute>
         <attribute name="action">app.about</attribute>
       </item>
     </section>

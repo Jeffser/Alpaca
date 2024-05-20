@@ -1,30 +1,31 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-19 21:24-0600\n"
-"PO-Revision-Date: 2024-05-19 14:59+0800\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: ru_RU\n"
+"POT-Creation-Date: 2024-05-19 21:30-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
-"X-Poedit-Basepath: ../src\n"
-"X-Poedit-SearchPath-0: .\n"
 
 #: data/com.jeffser.Alpaca.desktop.in:3
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
-#, fuzzy
 msgid "Alpaca"
-msgstr "_О Программе"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 #: data/com.jeffser.Alpaca.metainfo.xml.in:11
-#, fuzzy
 msgid "An Ollama client"
-msgstr "Веб-сайт Ollama"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:10
 msgid "Chat with multiple AI models"
@@ -47,7 +48,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:17 src/window.ui:405
 msgid "Disclaimer"
-msgstr "Отказ от ответственности"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:18
 msgid ""
@@ -69,9 +70,8 @@ msgid "A conversation involving multiple models"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:47
-#, fuzzy
 msgid "Managing models"
-msgstr "Управление моделями"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:72
 msgid "Really Big Update"
@@ -207,9 +207,8 @@ msgid "0.2.0"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:151
-#, fuzzy
 msgid "New Features"
-msgstr "Новый чат"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:153
 msgid "Restore chat after closing the app"
@@ -249,9 +248,8 @@ msgid "This is the first public version of Alpaca"
 msgstr ""
 
 #: src/window.py:47 src/window.py:758
-#, fuzzy
 msgid "New Chat"
-msgstr "Новый чат"
+msgstr ""
 
 #: src/window.py:86
 msgid "An error occurred"
@@ -306,9 +304,8 @@ msgid "Model '{}' pulled successfully."
 msgstr ""
 
 #: src/window.py:424
-#, fuzzy
 msgid "Pull Model Error"
-msgstr "Вытягивающая модель"
+msgstr ""
 
 #: src/window.py:424
 msgid "Failed to pull model '{}' due to network error."
@@ -345,9 +342,8 @@ msgid "Delete"
 msgstr ""
 
 #: src/window.py:496
-#, fuzzy
 msgid "Pull Model"
-msgstr "Вытягивающая модель"
+msgstr ""
 
 #: src/window.py:497
 msgid "Please select a tag to pull '{}'"
@@ -358,18 +354,16 @@ msgid "Pull"
 msgstr ""
 
 #: src/window.py:571 src/window.ui:439
-#, fuzzy
 msgid "Clear Chat"
-msgstr "_Очистить чат"
+msgstr ""
 
 #: src/window.py:572
 msgid "Are you sure you want to clear the chat?"
 msgstr ""
 
 #: src/window.py:576
-#, fuzzy
 msgid "Clear"
-msgstr "_Очистить чат"
+msgstr ""
 
 #: src/window.py:632
 msgid "Save Changes"
@@ -380,9 +374,8 @@ msgid "Do you want to save the URL change?"
 msgstr ""
 
 #: src/window.py:637
-#, fuzzy
 msgid "Discard"
-msgstr "Отказ от ответственности"
+msgstr ""
 
 #: src/window.py:638
 msgid "Save"
@@ -401,14 +394,12 @@ msgid "Remove"
 msgstr ""
 
 #: src/window.py:708
-#, fuzzy
 msgid "Delete Chat"
-msgstr "_Очистить чат"
+msgstr ""
 
 #: src/window.py:739
-#, fuzzy
 msgid "Rename Chat"
-msgstr "_Очистить чат"
+msgstr ""
 
 #: src/window.py:746
 msgid "Rename"
@@ -419,9 +410,8 @@ msgid "The name '{}' is already in use"
 msgstr ""
 
 #: src/window.py:779
-#, fuzzy
 msgid "Create Chat"
-msgstr "_Очистить чат"
+msgstr ""
 
 #: src/window.py:786
 msgid "Create"
@@ -429,60 +419,57 @@ msgstr ""
 
 #: src/window.ui:55
 msgid "Chats"
-msgstr "Чаты"
+msgstr ""
 
 #: src/window.ui:65
 msgid "New chat"
-msgstr "Новый чат"
+msgstr ""
 
 #: src/window.ui:101
 msgid "Toggle Sidebar"
-msgstr "Переключение боковой панели"
+msgstr ""
 
 #: src/window.ui:122 src/window.ui:259
 msgid "Manage models"
-msgstr "Управление моделями"
+msgstr ""
 
 #: src/window.ui:136
 msgid "Menu"
-msgstr "Меню"
+msgstr ""
 
 #: src/window.ui:215
 msgid "Send"
-msgstr "Отправить"
+msgstr ""
 
 #: src/window.ui:224
 msgid "Requires model 'llava' to be selected"
-msgstr "Требуется выбрать модель \"llava\""
+msgstr ""
 
 #: src/window.ui:227
 msgid "Image"
-msgstr "Изображение"
+msgstr ""
 
 #: src/window.ui:344
 msgid "Previous"
-msgstr "Предыдущий"
+msgstr ""
 
 #: src/window.ui:359
 msgid "Next"
-msgstr "Следующий"
+msgstr ""
 
 #: src/window.ui:385
 msgid "Welcome to Alpaca"
-msgstr "Добро пожаловать в Alpaca"
+msgstr ""
 
 #: src/window.ui:386
 msgid ""
 "To get started, please ensure you have an Ollama instance set up. You can "
 "either run Ollama locally on your machine or connect to a remote instance."
 msgstr ""
-"Для начала, пожалуйста, убедитесь, что у вас настроен экземпляр Ollama. Вы "
-"можете либо запустить Ollama локально на своем компьютере, либо подключиться "
-"к удаленному экземпляру."
 
 #: src/window.ui:389
 msgid "Ollama Website"
-msgstr "Веб-сайт Ollama"
+msgstr ""
 
 #: src/window.ui:406
 msgid ""
@@ -490,15 +477,10 @@ msgid ""
 "software resulting from the execution of code generated by an AI model. "
 "Please exercise caution and review the code carefully before running it."
 msgstr ""
-"Alpaca и ее разработчики не несут ответственности за любой ущерб, "
-"причиненный устройствам или программному обеспечению в результате выполнения "
-"кода, сгенерированного с помощью модели искусственного интеллекта. "
-"Пожалуйста, будьте осторожны и внимательно ознакомьтесь с кодом перед его "
-"запуском."
 
 #: src/window.ui:418
 msgid "Setup"
-msgstr "Установка"
+msgstr ""
 
 #: src/window.ui:419
 msgid ""
@@ -506,48 +488,38 @@ msgid ""
 "default ports, you can use the default URL. Otherwise, please enter the URL "
 "of your Ollama instance."
 msgstr ""
-"Если вы запускаете локальный экземпляр Ollama и не изменили порты по "
-"умолчанию, вы можете использовать URL-адрес по умолчанию. В противном "
-"случае, пожалуйста, введите URL-адрес вашего экземпляра Ollama."
 
 #: src/window.ui:443
-#, fuzzy
 msgid "Change Server"
-msgstr "_Изменить Сервер"
+msgstr ""
 
 #: src/window.ui:447
-#, fuzzy
 msgid "Keyboard Shortcuts"
-msgstr "Показывать ярлыки"
+msgstr ""
 
 #: src/window.ui:451
-#, fuzzy
 msgid "About Alpaca"
-msgstr "_О Программе"
+msgstr ""
 
 #: src/window.ui:473
-#, fuzzy
 msgid "General"
-msgstr "Общие"
+msgstr ""
 
 #: src/window.ui:477
 msgid "Close application"
 msgstr ""
 
 #: src/window.ui:483
-#, fuzzy
 msgid "Clear chat"
-msgstr "_Очистить чат"
+msgstr ""
 
 #: src/window.ui:489
-#, fuzzy
 msgid "Change server"
-msgstr "_Изменить Сервер"
+msgstr ""
 
 #: src/window.ui:495
-#, fuzzy
 msgid "Show shortcuts window"
-msgstr "Показывать ярлыки"
+msgstr ""
 
 #: src/window.ui:502
 msgid "Editor"
@@ -564,7 +536,3 @@ msgstr ""
 #: src/window.ui:518
 msgid "Send Message"
 msgstr ""
-
-#~ msgctxt "shortcut window"
-#~ msgid "Quit"
-#~ msgstr "Выйти"

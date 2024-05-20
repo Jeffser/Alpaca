@@ -629,7 +629,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             else: self.first_time_setup = False
             return
         dialog = Adw.AlertDialog(
-            heading=_("Save Changes?"),
+            heading=_("Save Changes"),
             body=_("Do you want to save the URL change?"),
             close_response="cancel"
         )
@@ -678,7 +678,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def open_image(self, button):
         if "destructive-action" in button.get_css_classes():
             dialog = Adw.AlertDialog(
-                heading=_("Remove Image?"),
+                heading=_("Remove Image"),
                 body=_("Are you sure you want to remove image?"),
                 close_response="cancel"
             )
@@ -754,7 +754,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def chat_new(self, dialog=None, task=None, entry=None):
         if not entry: return
         chat_name = entry.get_text()
-        if chat_name and (not task or dialog.choose_finish(task) == "create"):
+        if not chat_name:
+            chat_name=_("New Chat")
+            if chat_name in self.chats["chats"]:
+                for i in range(len(list(self.chats["chats"].keys()))):
+                    if chat_name + f" {i+1}" not in self.chats["chats"]:
+                        chat_name += f" {i+1}"
+                        break
+        if not task or dialog.choose_finish(task) == "create":
             dialog.force_close()
             if chat_name in self.chats["chats"]: self.chat_new_dialog(_("The name '{}' is already in use").format(chat_name), True)
             else:
