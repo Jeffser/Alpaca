@@ -629,7 +629,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             else: self.first_time_setup = False
             return
         dialog = Adw.AlertDialog(
-            heading=_("Save Changes?"),
+            heading=_("Save Changes"),
             body=_("Do you want to save the URL change?"),
             close_response="cancel"
         )
@@ -678,7 +678,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def open_image(self, button):
         if "destructive-action" in button.get_css_classes():
             dialog = Adw.AlertDialog(
-                heading=_("Remove Image?"),
+                heading=_("Remove Image"),
                 body=_("Are you sure you want to remove image?"),
                 close_response="cancel"
             )
