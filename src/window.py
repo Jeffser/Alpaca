@@ -294,6 +294,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.bot_message_box = None
 
     def update_bot_message(self, data):
+        if self.bot_message is None:
+            self.save_history()
+            sys.exit()
         vadjustment = self.chat_window.get_vadjustment()
         if vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
@@ -318,49 +321,69 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def run_message(self, messages, model):
         response = stream_post(f"{self.ollama_url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=self.update_bot_message)
         GLib.idle_add(self.add_code_blocks)
-        GLib.idle_add(self.send_button.set_sensitive, True)
+        GLib.idle_add(self.send_button.set_css_classes, ["suggested-action"])
+        GLib.idle_add(self.send_button.get_child().set_label, "Send")
+        GLib.idle_add(self.send_button.get_child().set_icon_name, "send-to-symbolic")
         GLib.idle_add(self.chat_list_box.set_sensitive, True)
         GLib.idle_add(self.add_chat_button.set_sensitive, True)
-        GLib.idle_add(self.image_button.set_sensitive, True)
+        if self.verify_if_image_can_be_used(): GLib.idle_add(self.image_button.set_sensitive, True)
         GLib.idle_add(self.image_button.set_css_classes, [])
         GLib.idle_add(self.image_button.get_child().set_icon_name, "image-x-generic-symbolic")
         self.attached_image = {"path": None, "base64": None}
-        GLib.idle_add(self.message_text_view.set_sensitive,  True)
+        GLib.idle_add(self.message_text_view.set_sensitive, True)
         if response['status'] == 'error':
             GLib.idle_add(self.show_toast, 'error', 1, self.connection_overlay)
             GLib.idle_add(self.show_connection_dialog, True)
 
     def send_message(self, button=None):
-        if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
-        current_model = self.model_drop_down.get_selected_item()
-        if current_model is None:
-            self.show_toast("info", 0, self.main_overlay)
-            return
-        formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
-        self.chats["chats"][self.chats["selected_chat"]]["messages"].append({
-            "role": "user",
-            "model": "User",
-            "date": formated_datetime,
-            "content": self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-        })
-        data = {
-            "model": current_model.get_string(),
-            "messages": self.chats["chats"][self.chats["selected_chat"]]["messages"]
-        }
-        if self.verify_if_image_can_be_used() and self.attached_image["base64"] is not None:
-            data["messages"][-1]["images"] = [self.attached_image["base64"]]
-        self.message_text_view.set_sensitive(False)
-        self.send_button.set_sensitive(False)
-        self.chat_list_box.set_sensitive(False)
-        self.add_chat_button.set_sensitive(False)
-        self.image_button.set_sensitive(False)
-        self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"])
-        self.message_text_view.get_buffer().set_text("", 0)
-        self.show_message("", True)
-        self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
-        self.chat_container.append(self.loading_spinner)
-        thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
-        thread.start()
+        if button and self.bot_message: #STOP BUTTON
+            if self.loading_spinner: self.chat_container.remove(self.loading_spinner)
+            if self.verify_if_image_can_be_used(): self.image_button.set_sensitive(True)
+            self.image_button.set_css_classes([])
+            self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
+            self.attached_image = {"path": None, "base64": None}
+            self.chat_list_box.set_sensitive(True)
+            self.add_chat_button.set_sensitive(True)
+            self.message_text_view.set_sensitive(True)
+            self.send_button.set_css_classes(["suggested-action"])
+            self.send_button.get_child().set_label("Send")
+            self.send_button.get_child().set_icon_name("send-to-symbolic")
+            self.bot_message = None
+            self.bot_message_box = None
+            self.bot_message_view = None
+        else:
+            if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
+            current_model = self.model_drop_down.get_selected_item()
+            if current_model is None:
+                self.show_toast("info", 0, self.main_overlay)
+                return
+            formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
+            self.chats["chats"][self.chats["selected_chat"]]["messages"].append({
+                "role": "user",
+                "model": "User",
+                "date": formated_datetime,
+                "content": self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
+            })
+            data = {
+                "model": current_model.get_string(),
+                "messages": self.chats["chats"][self.chats["selected_chat"]]["messages"]
+            }
+            if self.verify_if_image_can_be_used() and self.attached_image["base64"] is not None:
+                data["messages"][-1]["images"] = [self.attached_image["base64"]]
+            self.message_text_view.set_sensitive(False)
+            self.send_button.set_css_classes(["destructive-action"])
+            self.send_button.get_child().set_label("Stop")
+            self.send_button.get_child().set_icon_name("edit-delete-symbolic")
+            self.chat_list_box.set_sensitive(False)
+            self.add_chat_button.set_sensitive(False)
+            self.image_button.set_sensitive(False)
+            self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"])
+            self.message_text_view.get_buffer().set_text("", 0)
+            self.show_message("", True)
+            self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
+            self.chat_container.append(self.loading_spinner)
+            thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
+            thread.start()
 
     def delete_model(self, dialog, task, model_name):
         if dialog.choose_finish(task) == "delete":
