@@ -98,7 +98,7 @@
                     <child type="start">
                       <object class="GtkToggleButton" id="show_sidebar_button">
                         <property name="icon-name">sidebar-show-symbolic</property>
-                        <property name="tooltip-text" translatable="true">Toggle Sidebar</property>
+                        <property name="tooltip-text" translatable="yes">Toggle Sidebar</property>
                         <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
                       </object>
                     </child>
@@ -212,7 +212,7 @@
                                 </style>
                                 <child>
                                   <object class="AdwButtonContent">
-                                    <property name="label" translatable="true">Send</property>
+                                    <property name="label" translatable="yes">Send</property>
                                     <property name="icon-name">send-to-symbolic</property>
                                   </object>
                                 </child>
@@ -221,10 +221,10 @@
                             <child>
                               <object class="GtkButton" id="image_button">
                                 <property name="sensitive">false</property>
-                                <property name="tooltip-text" translatable="true">Requires model 'llava' to be selected</property>
+                                <property name="tooltip-text" translatable="yes">Requires model 'llava' to be selected</property>
                                 <child>
                                   <object class="AdwButtonContent">
-                                    <property name="label" translatable="true">Image</property>
+                                    <property name="label" translatable="yes">Image</property>
                                     <property name="icon-name">image-x-generic-symbolic</property>
                                   </object>
                                 </child>
@@ -386,7 +386,7 @@
                       <property name="description" translatable="yes">To get started, please ensure you have an Ollama instance set up. You can either run Ollama locally on your machine or connect to a remote instance.</property>
                       <child>
                         <object class="GtkLinkButton">
-                          <property name="label" translatable="true">Ollama Website</property>
+                          <property name="label" translatable="yes">Ollama Website</property>
                           <property name="uri">https://ollama.com/</property>
                           <property name="margin-top">12</property>
                         </object>
