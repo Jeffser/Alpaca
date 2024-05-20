@@ -30,7 +30,7 @@ from .available_models import available_models
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
-    config_dir = os.path.join(os.getenv("XDG_CONFIG_HOME"), "/", os.path.expanduser("~/.var/app/com.jeffser.Alpaca/config"))
+    config_dir = os.getenv("XDG_CONFIG_HOME")
     __gtype_name__ = 'AlpacaWindow'
 
     localedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'locale')
