@@ -21,7 +21,7 @@ import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
-import json, requests, threading, os, re, base64
+import json, requests, threading, os, re, base64, sys, gettext, locale
 from io import BytesIO
 from PIL import Image
 from datetime import datetime
@@ -32,14 +32,24 @@ from .available_models import available_models
 class AlpacaWindow(Adw.ApplicationWindow):
     config_dir = os.path.join(os.getenv("XDG_CONFIG_HOME"), "/", os.path.expanduser("~/.var/app/com.jeffser.Alpaca/config"))
     __gtype_name__ = 'AlpacaWindow'
+
+    localedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'locale')
+
+    locale.setlocale(locale.LC_ALL, '')
+    gettext.bindtextdomain('com.jeffser.Alpaca', localedir)
+    gettext.textdomain('com.jeffser.Alpaca')
+    _ = gettext.gettext
+
     #Variables
     ollama_url = None
     local_models = []
-    #In the future I will at multiple chats, for now I'll save it like this so that past chats don't break in the future
-    chats = {"chats": {"0": {"messages": []}}, "selected_chat": "0"}
+    pulling_models = {}
+    chats = {"chats": {_("New Chat"): {"messages": []}}, "selected_chat": "New Chat"}
     attached_image = {"path": None, "base64": None}
+    first_time_setup = False
 
     #Elements
+    shortcut_window : Gtk.ShortcutsWindow  = Gtk.Template.Child()
     bot_message : Gtk.TextBuffer = None
     bot_message_box : Gtk.Box = None
     bot_message_view : Gtk.TextView = None
@@ -49,7 +59,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     connection_next_button = Gtk.Template.Child()
     connection_url_entry = Gtk.Template.Child()
     main_overlay = Gtk.Template.Child()
-    pull_overlay = Gtk.Template.Child()
     manage_models_overlay = Gtk.Template.Child()
     connection_overlay = Gtk.Template.Child()
     chat_container = Gtk.Template.Child()
@@ -63,12 +72,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     manage_models_button = Gtk.Template.Child()
     manage_models_dialog = Gtk.Template.Child()
-    available_model_list_box = Gtk.Template.Child()
+    pulling_model_list_box = Gtk.Template.Child()
     local_model_list_box = Gtk.Template.Child()
-
-    pull_model_dialog = Gtk.Template.Child()
-    pull_model_status_page = Gtk.Template.Child()
-    pull_model_progress_bar = Gtk.Template.Child()
+    available_model_list_box = Gtk.Template.Child()
 
     chat_list_box = Gtk.Template.Child()
     add_chat_button = Gtk.Template.Child()
@@ -77,21 +83,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     toast_messages = {
         "error": [
-            "An error occurred",
-            "Failed to connect to server",
-            "Could not list local models",
-            "Could not delete model",
-            "Could not pull model",
-            "Cannot open image",
-            "Cannot delete chat because it's the only one left"
+            _("An error occurred"),
+            _("Failed to connect to server"),
+            _("Could not list local models"),
+            _("Could not delete model"),
+            _("Could not pull model"),
+            _("Cannot open image"),
+            _("Cannot delete chat because it's the only one left")
         ],
         "info": [
-            "Please select a model before chatting",
-            "Conversation cannot be cleared while receiving a message"
+            _("Please select a model before chatting"),
+            _("Chat cannot be cleared while receiving a message")
         ],
         "good": [
-            "Model deleted successfully",
-            "Model pulled successfully"
+            _("Model deleted successfully"),
+            _("Model pulled successfully")
         ]
     }
 
@@ -115,7 +121,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def show_message(self, msg:str, bot:bool, footer:str=None, image_base64:str=None):
         message_text = Gtk.TextView(
             editable=False,
-            focusable=False,
+            focusable=True,
             wrap_mode= Gtk.WrapMode.WORD,
             margin_top=12,
             margin_bottom=12,
@@ -145,7 +151,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             texture = Gdk.Texture.new_for_pixbuf(pixbuf)
 
             image = Gtk.Image.new_from_paintable(texture)
-            image.set_size_request(360, 360)
+            image.set_size_request(240, 240)
             image.set_margin_top(10)
             image.set_margin_start(10)
             image.set_margin_end(10)
@@ -179,7 +185,22 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for i in range(self.model_string_list.get_n_items() -1, -1, -1):
             self.model_string_list.remove(i)
         if response['status'] == 'ok':
+            self.local_model_list_box.remove_all()
             for model in json.loads(response['text'])['models']:
+                model_row = Adw.ActionRow(
+                    title = model["name"].split(":")[0],
+                    subtitle = model["name"].split(":")[1]
+                )
+                button = Gtk.Button(
+                    icon_name = "user-trash-symbolic",
+                    vexpand = False,
+                    valign = 3,
+                    css_classes = ["error"]
+                )
+                button.connect("clicked", lambda button=button, model_name=model["name"]: self.model_delete_button_activate(model_name))
+                model_row.add_suffix(button)
+                self.local_model_list_box.append(model_row)
+
                 self.model_string_list.append(model["name"])
                 self.local_models.append(model["name"])
             self.model_drop_down.set_selected(0)
@@ -229,7 +250,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if part['type'] == 'normal':
                 message_text = Gtk.TextView(
                     editable=False,
-                    focusable=False,
+                    focusable=True,
                     wrap_mode= Gtk.WrapMode.WORD,
                     margin_top=12,
                     margin_bottom=12,
@@ -281,6 +302,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.bot_message_box = None
 
     def update_bot_message(self, data):
+        if self.bot_message is None:
+            self.save_history()
+            sys.exit()
         vadjustment = self.chat_window.get_vadjustment()
         if vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
@@ -305,51 +329,74 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def run_message(self, messages, model):
         response = stream_post(f"{self.ollama_url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=self.update_bot_message)
         GLib.idle_add(self.add_code_blocks)
-        GLib.idle_add(self.send_button.set_sensitive, True)
-        GLib.idle_add(self.image_button.set_sensitive, True)
+        GLib.idle_add(self.send_button.set_css_classes, ["suggested-action"])
+        GLib.idle_add(self.send_button.get_child().set_label, "Send")
+        GLib.idle_add(self.send_button.get_child().set_icon_name, "send-to-symbolic")
+        GLib.idle_add(self.chat_list_box.set_sensitive, True)
+        GLib.idle_add(self.add_chat_button.set_sensitive, True)
+        if self.verify_if_image_can_be_used(): GLib.idle_add(self.image_button.set_sensitive, True)
         GLib.idle_add(self.image_button.set_css_classes, [])
         GLib.idle_add(self.image_button.get_child().set_icon_name, "image-x-generic-symbolic")
         self.attached_image = {"path": None, "base64": None}
-        GLib.idle_add(self.message_text_view.set_sensitive,  True)
+        GLib.idle_add(self.message_text_view.set_sensitive, True)
         if response['status'] == 'error':
             GLib.idle_add(self.show_toast, 'error', 1, self.connection_overlay)
             GLib.idle_add(self.show_connection_dialog, True)
 
-    def send_message(self, button):
-        if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
-        current_model = self.model_drop_down.get_selected_item()
-        if current_model is None:
-            self.show_toast("info", 0, self.main_overlay)
-            return
-        formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
-        self.chats["chats"][self.chats["selected_chat"]]["messages"].append({
-            "role": "user",
-            "model": "User",
-            "date": formated_datetime,
-            "content": self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-        })
-        data = {
-            "model": current_model.get_string(),
-            "messages": self.chats["chats"][self.chats["selected_chat"]]["messages"]
-        }
-        if self.verify_if_image_can_be_used() and self.attached_image["base64"] is not None:
-            data["messages"][-1]["images"] = [self.attached_image["base64"]]
-        self.message_text_view.set_sensitive(False)
-        self.send_button.set_sensitive(False)
-        self.image_button.set_sensitive(False)
-        self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"])
-        self.message_text_view.get_buffer().set_text("", 0)
-        self.show_message("", True)
-        self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
-        self.chat_container.append(self.loading_spinner)
-        thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
-        thread.start()
+    def send_message(self, button=None):
+        if button and self.bot_message: #STOP BUTTON
+            if self.loading_spinner: self.chat_container.remove(self.loading_spinner)
+            if self.verify_if_image_can_be_used(): self.image_button.set_sensitive(True)
+            self.image_button.set_css_classes([])
+            self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
+            self.attached_image = {"path": None, "base64": None}
+            self.chat_list_box.set_sensitive(True)
+            self.add_chat_button.set_sensitive(True)
+            self.message_text_view.set_sensitive(True)
+            self.send_button.set_css_classes(["suggested-action"])
+            self.send_button.get_child().set_label("Send")
+            self.send_button.get_child().set_icon_name("send-to-symbolic")
+            self.bot_message = None
+            self.bot_message_box = None
+            self.bot_message_view = None
+        else:
+            if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
+            current_model = self.model_drop_down.get_selected_item()
+            if current_model is None:
+                self.show_toast("info", 0, self.main_overlay)
+                return
+            formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
+            self.chats["chats"][self.chats["selected_chat"]]["messages"].append({
+                "role": "user",
+                "model": "User",
+                "date": formated_datetime,
+                "content": self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
+            })
+            data = {
+                "model": current_model.get_string(),
+                "messages": self.chats["chats"][self.chats["selected_chat"]]["messages"]
+            }
+            if self.verify_if_image_can_be_used() and self.attached_image["base64"] is not None:
+                data["messages"][-1]["images"] = [self.attached_image["base64"]]
+            self.message_text_view.set_sensitive(False)
+            self.send_button.set_css_classes(["destructive-action"])
+            self.send_button.get_child().set_label("Stop")
+            self.send_button.get_child().set_icon_name("edit-delete-symbolic")
+            self.chat_list_box.set_sensitive(False)
+            self.add_chat_button.set_sensitive(False)
+            self.image_button.set_sensitive(False)
+            self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"])
+            self.message_text_view.get_buffer().set_text("", 0)
+            self.show_message("", True)
+            self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
+            self.chat_container.append(self.loading_spinner)
+            thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
+            thread.start()
 
     def delete_model(self, dialog, task, model_name):
         if dialog.choose_finish(task) == "delete":
             response = simple_delete(self.ollama_url + "/api/delete", data={"name": model_name})
             self.update_list_local_models()
-            self.update_list_available_models()
             if response['status'] == 'ok':
                 self.show_toast("good", 0, self.manage_models_overlay)
             else:
@@ -357,67 +404,79 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.manage_models_dialog.close()
                 self.show_connection_dialog(True)
 
-    def pull_model_update(self, data):
-        try:
-            GLib.idle_add(self.pull_model_progress_bar.set_text, data['status'])
-            if 'completed' in data:
-                if 'total' in data: GLib.idle_add(self.pull_model_progress_bar.set_fraction, data['completed'] / data['total'])
-                else: GLib.idle_add(self.pull_model_progress_bar.set_fraction, 1.0)
-            else:
-                GLib.idle_add(self.pull_model_progress_bar.set_fraction, 0.0)
-        except Exception as e: print(e)
+    def pull_model_update(self, data, model_name):
+        if model_name in list(self.pulling_models.keys()):
+            GLib.idle_add(self.pulling_models[model_name].set_subtitle, data['status'] + (f" | {round(data['completed'] / data['total'] * 100, 2)}%" if 'completed' in data and 'total' in data else ""))
+        else:
+            sys.exit()
 
-    def pull_model(self, dialog, task, model_name, tag):
-        if dialog.choose_finish(task) == "pull":
-            data = {"name":f"{model_name}:{tag}"}
+    def pull_model(self, model_name, tag):
+        data = {"name":f"{model_name}:{tag}"}
+        response = stream_post(f"{self.ollama_url}/api/pull", data=json.dumps(data), callback=lambda data, model_name=f"{model_name}:{tag}": self.pull_model_update(data, model_name))
+        GLib.idle_add(self.update_list_local_models)
+        if response['status'] == 'ok':
+            GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(f"{model_name}:{tag}"), True, Gio.ThemedIcon.new("emblem-ok-symbolic"))
+            GLib.idle_add(self.show_toast, "good", 1, self.manage_models_overlay)
+            GLib.idle_add(self.pulling_models[f"{model_name}:{tag}"].get_parent().remove, self.pulling_models[f"{model_name}:{tag}"])
+            del self.pulling_models[f"{model_name}:{tag}"]
 
-            GLib.idle_add(self.pull_model_dialog.present, self.manage_models_dialog)
-            response = stream_post(f"{self.ollama_url}/api/pull", data=json.dumps(data), callback=self.pull_model_update)
+        else:
+            GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(f"{model_name}:{tag}"), True, Gio.ThemedIcon.new("dialog-error-symbolic"))
+            GLib.idle_add(self.show_toast, "error", 4, self.connection_overlay)
+            GLib.idle_add(self.manage_models_dialog.close)
+            GLib.idle_add(self.show_connection_dialog, True)
 
-            GLib.idle_add(self.update_list_local_models)
-            GLib.idle_add(self.update_list_available_models)
-            GLib.idle_add(self.pull_model_dialog.force_close)
-            if response['status'] == 'ok':
-                GLib.idle_add(self.show_notification, "Task Complete", f"Model '{model_name}:{tag}' pulled successfully.", True, Gio.ThemedIcon.new("emblem-ok-symbolic"))
-                GLib.idle_add(self.show_toast, "good", 1, self.manage_models_overlay)
-            else:
-                GLib.idle_add(self.show_notification, "Pull Model Error", f"Failed to pull model '{model_name}:{tag}' due to network error.", True, Gio.ThemedIcon.new("dialog-error-symbolic"))
-                GLib.idle_add(self.show_toast, "error", 4, self.connection_overlay)
-                GLib.idle_add(self.manage_models_dialog.close)
-                GLib.idle_add(self.show_connection_dialog, True)
+    def stop_pull_model(self, dialog, task, model_name):
+        if dialog.choose_finish(task) == "stop":
+            GLib.idle_add(self.pulling_models[model_name].get_parent().remove, self.pulling_models[model_name])
+            del self.pulling_models[model_name]
 
-
-    def pull_model_start(self, dialog, task, model_name, tag_drop_down):
-        tag = tag_drop_down.get_selected_item().get_string()
-        self.pull_model_status_page.set_description(f"{model_name}:{tag}")
-        thread = threading.Thread(target=self.pull_model, args=(dialog, task, model_name, tag))
-        thread.start()
-
-    def model_action_button_activate(self, button, model_name):
-        action = list(set(button.get_css_classes()) & set(["delete", "pull"]))[0]
+    def stop_pull_model_dialog(self, model_name):
         dialog = Adw.AlertDialog(
-            heading=f"{action.capitalize()} Model",
-            body=f"Are you sure you want to {action} '{model_name}'?",
+            heading=_("Stop Model"),
+            body=_("Are you sure you want to stop pulling '{}'?").format(model_name),
             close_response="cancel"
         )
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response(action, action.capitalize())
-        dialog.set_response_appearance(action, Adw.ResponseAppearance.DESTRUCTIVE if action == "delete" else Adw.ResponseAppearance.SUGGESTED)
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("stop", _("Stop"))
+        dialog.set_response_appearance("stop", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.choose(
             parent = self.manage_models_dialog,
             cancellable = None,
-            callback = lambda dialog, task, model_name = model_name, button = button:
-                self.delete_model(dialog, task, model_name, button) if action == "delete" else self.pull_model_start(dialog, task, model_name,button)
+            callback = lambda dialog, task, model_name = model_name: self.stop_pull_model(dialog, task, model_name)
         )
+
+    def pull_model_start(self, dialog, task, model_name, tag_drop_down):
+        if dialog.choose_finish(task) == "pull":
+            tag = tag_drop_down.get_selected_item().get_string()
+            if f"{model_name}:{tag}" in list(self.pulling_models.keys()): return ##TODO add message: 'already being pulled'
+            if f"{model_name}:{tag}" in self.local_models: return ##TODO add message 'already pulled'
+            #self.pull_model_status_page.set_description(f"{model_name}:{tag}")
+            model_row = Adw.ActionRow(
+                title = f"{model_name}:{tag}",
+                subtitle = ""
+            )
+            thread = threading.Thread(target=self.pull_model, args=(model_name, tag))
+            self.pulling_models[f"{model_name}:{tag}"] = model_row
+            button = Gtk.Button(
+                icon_name = "media-playback-stop-symbolic",
+                vexpand = False,
+                valign = 3,
+                css_classes = ["error"]
+            )
+            button.connect("clicked", lambda button, model_name=f"{model_name}:{tag}" : self.stop_pull_model_dialog(model_name))
+            model_row.add_suffix(button)
+            self.pulling_model_list_box.append(model_row)
+            thread.start()
 
     def model_delete_button_activate(self, model_name):
         dialog = Adw.AlertDialog(
-            heading="Delete Model",
-            body=f"Are you sure you want to delete '{model_name}'?",
+            heading=_("Delete Model"),
+            body=_("Are you sure you want to delete '{}'?").format(model_name),
             close_response="cancel"
         )
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("delete", "Delete")
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("delete", _("Delete"))
         dialog.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.choose(
             parent = self.manage_models_dialog,
@@ -434,13 +493,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             model=tag_list
         )
         dialog = Adw.AlertDialog(
-            heading="Pull Model",
-            body=f"Please select a tag to pull '{model_name}'",
+            heading=_("Pull Model"),
+            body=_("Please select a tag to pull '{}'").format(model_name),
             extra_child=tag_drop_down,
             close_response="cancel"
         )
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("pull", "Pull")
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("pull", _("Pull"))
         dialog.set_response_appearance("pull", Adw.ResponseAppearance.SUGGESTED)
         dialog.choose(
             parent = self.manage_models_dialog,
@@ -449,23 +508,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
 
     def update_list_available_models(self):
-        self.local_model_list_box.remove_all()
         self.available_model_list_box.remove_all()
-        for model_name in self.local_models:
-            model = Adw.ActionRow(
-                title = model_name.split(":")[0],
-                subtitle = model_name.split(":")[1]
-            )
-            button = Gtk.Button(
-                icon_name = "user-trash-symbolic",
-                vexpand = False,
-                valign = 3,
-                css_classes = ["error", "delete"]
-            )
-            button.connect("clicked", lambda button=button, model_name=model_name: self.model_delete_button_activate(model_name))
-            model.add_suffix(button)
-            self.local_model_list_box.append(model)
-
         for name, model_info in available_models.items():
             model = Adw.ActionRow(
                 title = name,
@@ -475,7 +518,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 icon_name = "folder-download-symbolic",
                 vexpand = False,
                 valign = 3,
-                css_classes = ["accent", "pull"]
+                css_classes = ["accent"]
             )
             button.connect("clicked", lambda button=button, model_name=name: self.model_pull_button_activate(model_name))
             model.add_suffix(button)
@@ -483,7 +526,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def manage_models_button_activate(self, button=None):
         self.update_list_local_models()
-        self.update_list_available_models()
         self.manage_models_dialog.present(self)
 
     def connection_carousel_page_changed(self, carousel, index):
@@ -512,31 +554,31 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else: self.connection_url_entry.set_css_classes([])
         self.connection_dialog.present(self)
 
-    def clear_conversation(self):
+    def clear_chat(self):
         for widget in list(self.chat_container): self.chat_container.remove(widget)
         self.chats["chats"][self.chats["selected_chat"]]["messages"] = []
 
-    def clear_conversation_dialog_response(self, dialog, task):
-        if dialog.choose_finish(task) == "empty":
-            self.clear_conversation()
+    def clear_chat_dialog_response(self, dialog, task):
+        if dialog.choose_finish(task) == "clear":
+            self.clear_chat()
             self.save_history()
 
-    def clear_conversation_dialog(self):
+    def clear_chat_dialog(self):
         if self.bot_message is not None:
             self.show_toast("info", 1, self.main_overlay)
             return
         dialog = Adw.AlertDialog(
-            heading=f"Clear Conversation",
-            body=f"Are you sure you want to clear the conversation?",
+            heading=_("Clear Chat"),
+            body=_("Are you sure you want to clear the chat?"),
             close_response="cancel"
         )
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("empty", "Empty")
-        dialog.set_response_appearance("empty", Adw.ResponseAppearance.DESTRUCTIVE)
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("clear", _("Clear"))
+        dialog.set_response_appearance("clear", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.choose(
             parent = self,
             cancellable = None,
-            callback = self.clear_conversation_dialog_response
+            callback = self.clear_chat_dialog_response
         )
 
     def save_history(self):
@@ -555,7 +597,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def load_history(self):
         if os.path.exists(os.path.join(self.config_dir, "chats.json")):
-            self.clear_conversation()
+            self.clear_chat()
             try:
                 with open(os.path.join(self.config_dir, "chats.json"), "r") as f:
                     self.chats = json.load(f)
@@ -578,21 +620,22 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
 
     def closing_connection_dialog(self, dialog):
-        if self.ollama_url is None: self.destroy()
+        if self.ollama_url is None or self.first_time_setup: self.destroy()
         if self.ollama_url == self.connection_url_entry.get_text():
             self.connection_dialog.force_close()
             if self.ollama_url is None or self.verify_connection() == False:
                 self.show_connection_dialog(True)
                 self.show_toast("error", 1, self.connection_overlay)
+            else: self.first_time_setup = False
             return
         dialog = Adw.AlertDialog(
-            heading=f"Save Changes?",
-            body=f"Do you want to save the URL change?",
+            heading=_("Save Changes?"),
+            body=_("Do you want to save the URL change?"),
             close_response="cancel"
         )
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("discard", "Discard")
-        dialog.add_response("save", "Save")
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("discard", _("Discard"))
+        dialog.add_response("save", _("Save"))
         dialog.set_response_appearance("discard", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.set_response_appearance("save", Adw.ResponseAppearance.SUGGESTED)
         dialog.choose(
@@ -606,8 +649,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         except: return
         try:
             self.attached_image["path"] = file.get_path()
-            '''with open(self.attached_image["path"], "rb") as image_file:
-                self.attached_image["base64"] = base64.b64encode(image_file.read()).decode("utf-8")'''
             with Image.open(self.attached_image["path"]) as img:
                 width, height = img.size
                 max_size = 240
@@ -637,12 +678,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def open_image(self, button):
         if "destructive-action" in button.get_css_classes():
             dialog = Adw.AlertDialog(
-                heading=f"Remove Image?",
-                body=f"Are you sure you want to remove image?",
+                heading=_("Remove Image?"),
+                body=_("Are you sure you want to remove image?"),
                 close_response="cancel"
             )
-            dialog.add_response("cancel", "Cancel")
-            dialog.add_response("remove", "Remove")
+            dialog.add_response("cancel", _("Cancel"))
+            dialog.add_response("remove", _("Remove"))
             dialog.set_response_appearance("remove", Adw.ResponseAppearance.DESTRUCTIVE)
             dialog.choose(
                 parent = self,
@@ -664,12 +705,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.show_toast("error", 6, self.main_overlay)
             return
         dialog = Adw.AlertDialog(
-            heading=f"Delete Chat",
-            body=f"Are you sure you want to delete '{chat_name}'?",
+            heading=_("Delete Chat"),
+            body=_("Are you sure you want to delete '{}'?").format(chat_name),
             close_response="cancel"
         )
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("delete", "Delete")
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("delete", _("Delete"))
         dialog.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
         dialog.choose(
             parent = self,
@@ -695,14 +736,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
             css_classes = ["error"] if error else None
         )
         dialog = Adw.AlertDialog(
-            heading=f"Rename Chat",
+            heading=_("Rename Chat"),
             body=body,
             extra_child=entry,
             close_response="cancel"
         )
         entry.connect("activate", lambda entry, dialog=dialog, old_chat_name=chat_name: self.chat_rename(dialog=dialog, old_chat_name=old_chat_name, entry=entry))
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("rename", "Rename")
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("rename", _("Rename"))
         dialog.set_response_appearance("rename", Adw.ResponseAppearance.SUGGESTED)
         dialog.choose(
             parent = self,
@@ -715,7 +756,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         chat_name = entry.get_text()
         if chat_name and (not task or dialog.choose_finish(task) == "create"):
             dialog.force_close()
-            if chat_name in self.chats["chats"]: self.chat_new_dialog(f"The name '{chat_name}' is already in use", True)
+            if chat_name in self.chats["chats"]: self.chat_new_dialog(_("The name '{}' is already in use").format(chat_name), True)
             else:
                 self.chats["chats"][chat_name] = {"messages": []}
                 self.chats["selected_chat"] = chat_name
@@ -728,14 +769,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
             css_classes = ["error"] if error else None
         )
         dialog = Adw.AlertDialog(
-            heading=f"Create Chat",
+            heading=_("Create Chat"),
             body=body,
             extra_child=entry,
             close_response="cancel"
         )
         entry.connect("activate", lambda entry, dialog=dialog: self.chat_new(dialog=dialog, entry=entry))
-        dialog.add_response("cancel", "Cancel")
-        dialog.add_response("create", "Create")
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.add_response("create", _("Create"))
         dialog.set_response_appearance("rename", Adw.ResponseAppearance.SUGGESTED)
         dialog.choose(
             parent = self,
@@ -754,7 +795,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 css_classes = ["card"]
             )
             button_delete = Gtk.Button(
-                icon_name = "edit-delete-symbolic",
+                icon_name = "user-trash-symbolic",
                 vexpand = False,
                 valign = 3,
                 css_classes = ["error", "flat"]
@@ -783,19 +824,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
                         self.model_drop_down.set_selected(i)
                         break
 
-
-    def selected_model_changed(self, pspec=None, user_data=None):
-        self.verify_if_image_can_be_used()
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
+
+        self.set_help_overlay(self.shortcut_window)
+        self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
+        self.get_application().create_action('send', lambda *_: self.send_message(self), ['<primary>Return'])
+
         self.manage_models_button.connect("clicked", self.manage_models_button_activate)
         self.send_button.connect("clicked", self.send_message)
         self.image_button.connect("clicked", self.open_image)
         self.add_chat_button.connect("clicked", lambda button : self.chat_new_dialog("Enter name for new chat", False))
         self.set_default_widget(self.send_button)
-        self.model_drop_down.connect("notify", self.selected_model_changed)
+        self.model_drop_down.connect("notify", self.verify_if_image_can_be_used)
         self.chat_list_box.connect("row-selected", self.chat_changed)
         #self.message_text_view.set_activates_default(self.send_button)
         self.connection_carousel.connect("page-changed", self.connection_carousel_page_changed)
@@ -808,5 +850,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             with open(os.path.join(self.config_dir, "server.conf"), "r") as f:
                 self.ollama_url = f.read()
             if self.verify_connection() is False: self.show_connection_dialog(True)
-        else: self.connection_dialog.present(self)
+        else:
+            self.first_time_setup = True
+            self.connection_dialog.present(self)
+        self.update_list_available_models()
         self.update_chat_list()

@@ -4,18 +4,34 @@
   <requires lib="Adw" version="1.0"/>
   <template class="AlpacaWindow" parent="AdwApplicationWindow">
     <property name="resizable">True</property>
-    <property name="width-request">600</property>
-    <property name="height-request">800</property>
+    <property name="width-request">350</property>
+    <property name="height-request">500</property>
     <property name="default-width">1300</property>
     <property name="default-height">800</property>
-    <!--
-    <property name="min-content-width">500</property>
-    <property name="min-content-height">600</property>
-    -->
     <child>
       <object class="AdwBreakpoint">
         <condition>max-width: 800sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
+      </object>
+    </child>
+    <child>
+    </child>
+    <child>
+      <object class="AdwBreakpoint">
+        <condition>max-width: 500sp</condition>
+        <setter object="split_view_overlay" property="collapsed">true</setter>
+        <setter object="connection_dialog" property="width-request">400</setter>
+        <setter object="connection_dialog" property="height-request">400</setter>
+        <setter object="manage_models_dialog" property="width-request">400</setter>
+      </object>
+    </child>
+    <child>
+      <object class="AdwBreakpoint">
+        <condition>max-width: 400sp</condition>
+        <setter object="split_view_overlay" property="collapsed">true</setter>
+        <setter object="connection_dialog" property="width-request">300</setter>
+        <setter object="connection_dialog" property="height-request">300</setter>
+        <setter object="manage_models_dialog" property="width-request">300</setter>
       </object>
     </child>
     <property name="content">
@@ -65,7 +81,6 @@
                     <property name="hexpand">true</property>
                     <child>
                       <object class="GtkListBox" id="chat_list_box">
-
                         <property name="selection-mode">single</property>
                         <style>
                           <class name="boxed-list"/>
@@ -83,7 +98,7 @@
                     <child type="start">
                       <object class="GtkToggleButton" id="show_sidebar_button">
                         <property name="icon-name">sidebar-show-symbolic</property>
-                        <property name="tooltip-text" translatable="true">Toggle Sidebar</property>
+                        <property name="tooltip-text" translatable="yes">Toggle Sidebar</property>
                         <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
                       </object>
                     </child>
@@ -138,8 +153,6 @@
                         <property name="margin-bottom">12</property>
                         <property name="has-frame">true</property>
                         <property name="propagate-natural-height">true</property>
-                        <property name="min-content-width">500</property>
-                        <property name="min-content-height">600</property>
                         <property name="kinetic-scrolling">1</property>
                         <property name="vexpand">true</property>
                         <style>
@@ -199,7 +212,7 @@
                                 </style>
                                 <child>
                                   <object class="AdwButtonContent">
-                                    <property name="label" translatable="true">Send</property>
+                                    <property name="label" translatable="yes">Send</property>
                                     <property name="icon-name">send-to-symbolic</property>
                                   </object>
                                 </child>
@@ -208,10 +221,10 @@
                             <child>
                               <object class="GtkButton" id="image_button">
                                 <property name="sensitive">false</property>
-                                <property name="tooltip-text" translatable="true">Requires model 'llava' to be selected</property>
+                                <property name="tooltip-text" translatable="yes">Requires model 'llava' to be selected</property>
                                 <child>
                                   <object class="AdwButtonContent">
-                                    <property name="label" translatable="true">Image</property>
+                                    <property name="label" translatable="yes">Image</property>
                                     <property name="icon-name">image-x-generic-symbolic</property>
                                   </object>
                                 </child>
@@ -230,35 +243,6 @@
         </child>
       </object>
     </property>
-
-    <object class="AdwDialog" id="pull_model_dialog">
-      <property name="can-close">false</property>
-      <property name="width-request">400</property>
-      <child>
-        <object class="AdwToastOverlay" id="pull_overlay">
-          <child>
-            <object class="AdwToolbarView">
-              <child>
-                <object class="AdwStatusPage" id="pull_model_status_page">
-                  <property name="hexpand">true</property>
-                  <property name="vexpand">true</property>
-                  <property name="margin-top">24</property>
-                  <property name="margin-bottom">24</property>
-                  <property name="margin-start">24</property>
-                  <property name="margin-end">24</property>
-                  <property name="title" translatable="yes">Pulling Model</property>
-                  <child>
-                    <object class="GtkProgressBar" id="pull_model_progress_bar">
-                      <property name="show-text">true</property>
-                    </object>
-                  </child>
-                </object>
-              </child>
-            </object>
-          </child>
-        </object>
-      </child>
-    </object>
 
     <object class="AdwDialog" id="manage_models_dialog">
       <property name="can-close">true</property>
@@ -289,6 +273,21 @@
                     <object class="GtkBox">
                       <property name="orientation">1</property>
                       <property name="spacing">12</property>
+                      <child>
+                        <object class="GtkListBox" id="pulling_model_list_box">
+                          <property name="selection-mode">none</property>
+                          <style>
+                            <class name="boxed-list"/>
+                          </style>
+                        </object>
+                      </child>
+                      <child>
+                        <object class="GtkSeparator">
+                          <style>
+                            <class name="spacer"/>
+                          </style>
+                        </object>
+                      </child>
                       <child>
                         <object class="GtkListBox" id="local_model_list_box">
                           <property name="selection-mode">none</property>
@@ -387,7 +386,7 @@
                       <property name="description" translatable="yes">To get started, please ensure you have an Ollama instance set up. You can either run Ollama locally on your machine or connect to a remote instance.</property>
                       <child>
                         <object class="GtkLinkButton">
-                          <property name="label" translatable="true">Ollama Website</property>
+                          <property name="label" translatable="yes">Ollama Website</property>
                           <property name="uri">https://ollama.com/</property>
                           <property name="margin-top">12</property>
                         </object>
@@ -445,6 +444,10 @@
         <attribute name="action">app.reconnect</attribute>
       </item>
       <item>
+        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+        <attribute name="action">win.show-help-overlay</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">_About Alpaca</attribute>
         <attribute name="action">app.about</attribute>
       </item>
@@ -458,5 +461,66 @@
       <mime-type>image/webp</mime-type>
       <mime-type>image/gif</mime-type>
     </mime-types>
+  </object>
+  <object class="GtkShortcutsWindow" id="shortcut_window">
+    <property name="modal">1</property>
+    <child>
+      <object class="GtkShortcutsSection">
+        <property name="section-name">shortcuts</property>
+        <property name="max-height">10</property>
+        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="title" translatable="yes">General</property>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;Q</property>
+                <property name="title" translatable="yes">Close application</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;E</property>
+                <property name="title" translatable="yes">Clear chat</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;R</property>
+                <property name="title" translatable="yes">Change server</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;slash</property>
+                <property name="title" translatable="yes">Show shortcuts window</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="title" translatable="yes">Editor</property>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;C</property>
+                <property name="title" translatable="yes">Copy</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;V</property>
+                <property name="title" translatable="yes">Paste</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;Return</property>
+                <property name="title" translatable="yes">Send Message</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
   </object>
 </interface>

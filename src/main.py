@@ -33,7 +33,7 @@ class AlpacaApplication(Adw.Application):
         super().__init__(application_id='com.jeffser.Alpaca',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
-        self.create_action('clear', lambda *_: AlpacaWindow.clear_conversation_dialog(self.props.active_window), ['<primary>e'])
+        self.create_action('clear', lambda *_: AlpacaWindow.clear_chat_dialog(self.props.active_window), ['<primary>e'])
         self.create_action('reconnect', lambda *_: AlpacaWindow.show_connection_dialog(self.props.active_window), ['<primary>r'])
         self.create_action('about', self.on_about_action)
 
@@ -44,7 +44,7 @@ class AlpacaApplication(Adw.Application):
         win.present()
 
     def on_about_action(self, widget, _):
-        about = Adw.AboutWindow(transient_for=self.props.active_window,
+        about = Adw.AboutDialog(#transient_for=self.props.active_window,
             application_name='Alpaca',
             application_icon='com.jeffser.Alpaca',
             developer_name='Jeffry Samuel Eduarte Rojas',
@@ -54,7 +54,7 @@ class AlpacaApplication(Adw.Application):
             translator_credits='Alex K (Russian) https://github.com/alexkdeveloper',
             copyright='© 2024 Jeffser',
             issue_url='https://github.com/Jeffser/Alpaca/issues')
-        about.present()
+        about.present(parent=self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
