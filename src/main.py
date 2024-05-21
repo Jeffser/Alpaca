@@ -34,7 +34,7 @@ class AlpacaApplication(Adw.Application):
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('clear', lambda *_: AlpacaWindow.clear_chat_dialog(self.props.active_window), ['<primary>e'])
-        self.create_action('reconnect', lambda *_: AlpacaWindow.show_connection_dialog(self.props.active_window), ['<primary>r'])
+        self.create_action('preferences', lambda *_: AlpacaWindow.show_preferences_dialog(self.props.active_window), ['<primary>p'])
         self.create_action('about', self.on_about_action)
 
     def do_activate(self):

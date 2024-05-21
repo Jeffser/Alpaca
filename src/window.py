@@ -45,8 +45,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     #Variables
     ollama_url = None
     remote_url = None
-    run_local = True
-    local_ollama_ports = 11435
+    run_remote = False
+    local_ollama_port = 11435
     local_ollama_instance = None
     local_models = []
     pulling_models = {}
@@ -55,6 +55,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     first_time_setup = False
 
     #Elements
+    preferences_dialog = Gtk.Template.Child()
     shortcut_window : Gtk.ShortcutsWindow  = Gtk.Template.Child()
     bot_message : Gtk.TextBuffer = None
     bot_message_box : Gtk.Box = None
@@ -86,6 +87,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     loading_spinner = None
 
+    remote_connection_switch = Gtk.Template.Child()
+    remote_connection_entry = Gtk.Template.Child()
+
     toast_messages = {
         "error": [
             _("An error occurred"),
@@ -94,7 +98,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             _("Could not delete model"),
             _("Could not pull model"),
             _("Cannot open image"),
-            _("Cannot delete chat because it's the only one left")
+            _("Cannot delete chat because it's the only one left"),
+            _("There was an error with the local Ollama instance, so it has been reset")
         ],
         "info": [
             _("Please select a model before chatting"),
@@ -216,7 +221,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.verify_if_image_can_be_used()
             return
         else:
-            self.show_welcome_dialog(True)
+            #self.show_welcome_dialog(True)
             self.show_toast("error", 2, self.connection_overlay)
 
     def verify_connection(self):
@@ -224,7 +229,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if response['status'] == 'ok':
             if "Ollama is running" in response['text']:
                 with open(os.path.join(self.config_dir, "server.json"), "w+") as f:
-                    json.dump({'remote_url': self.remote_url, 'run_local': self.run_local, 'local_ports': self.local_ollama_ports}, f)
+                    json.dump({'remote_url': self.remote_url, 'run_remote': self.run_remote, 'local_port': self.local_ollama_port}, f)
                 #self.message_text_view.grab_focus_without_selecting()
                 self.update_list_local_models()
                 return True
@@ -351,7 +356,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GLib.idle_add(self.message_text_view.set_sensitive, True)
         if response['status'] == 'error':
             GLib.idle_add(self.show_toast, 'error', 1, self.connection_overlay)
-            GLib.idle_add(self.show_welcome_dialog, True)
+            #GLib.idle_add(self.show_welcome_dialog, True)
 
     def send_message(self, button=None):
         if button and self.bot_message: #STOP BUTTON
@@ -412,7 +417,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             else:
                 self.show_toast("error", 3, self.connection_overlay)
                 self.manage_models_dialog.close()
-                self.show_welcome_dialog(True)
+                #self.show_welcome_dialog(True)
 
     def pull_model_update(self, data, model_name):
         if model_name in list(self.pulling_models.keys()):
@@ -438,7 +443,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(self.pulling_models[f"{model_name}:{tag}"].get_parent().remove, self.pulling_models[f"{model_name}:{tag}"])
             del self.pulling_models[f"{model_name}:{tag}"]
             GLib.idle_add(self.manage_models_dialog.close)
-            GLib.idle_add(self.show_welcome_dialog, True)
+            #GLib.idle_add(self.show_welcome_dialog, True)
         if len(list(self.pulling_models.keys())) == 0:
             GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
@@ -567,12 +572,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if self.verify_connection():
                 self.welcome_dialog.force_close()
             else:
-                self.show_welcome_dialog(True)
+                #self.show_welcome_dialog(True)
                 self.show_toast("error", 1, self.connection_overlay)
-
-    def show_welcome_dialog(self, error:bool=False):
-        self.connection_carousel.scroll_to(self.connection_carousel.get_nth_page(self.connection_carousel.get_n_pages()-1),False)
-        self.welcome_dialog.present(self)
 
     def clear_chat(self):
         for widget in list(self.chat_container): self.chat_container.remove(widget)
@@ -814,18 +815,54 @@ class AlpacaWindow(Adw.ApplicationWindow):
                         self.model_drop_down.set_selected(i)
                         break
 
-    def run_ollama_instance(self):
-        print("Running Ollama...")
-        p = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, 'OLLAMA_HOST': f"127.0.0.1:{self.local_ollama_ports}", "HOME": self.data_dir}, stdout=subprocess.PIPE)
-        for line in iter(p.stdout.readline, b''):
-            print(line)
-        p.stdout.close()
-        p.wait()
+    def show_preferences_dialog(self):
+        self.preferences_dialog.present(self)
+
+    def start_instance(self):
+        self.ollama_instance = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, 'OLLAMA_HOST': f"127.0.0.1:{self.local_ollama_port}", "HOME": self.data_dir}, stdout=subprocess.PIPE)
+
+    def stop_instance(self):
+        self.ollama_instance.kill()
+
+    def reset_instance(self):
+        if self.ollama_instance is not None:
+            self.stop_instance()
+        self.start_instance()
+
+    def connection_error(self, overlay):
+        if self.run_remote:
+            self.preferences_dialog.present(self)
+            self.remote_connection_entry.set_css_classes(["error"])
+            self.show_toast("error", 1, overlay)
+        else:
+            self.reset_instance()
+            self.show_toast("error", 7, overlay)
+
+    def connection_switched(self, pspec, user_data):
+        new_value = self.remote_connection_switch.get_active()
+        if new_value != self.run_remote:
+            self.run_remote = new_value
+            if self.run_remote:
+                self.stop_instance()
+                if self.verify_connection() == False: self.connection_error(self.preferences_dialog)
+            else:
+                self.start_instance()
+                sleep(1)
+                if self.verify_connection() == False: self.connection_error(self.preferences_dialog)
+        self.update_list_available_models()
+        self.update_list_local_models()
+
+    def change_remote_url(self, entry):
+        self.remote_url = entry.get_text()
+        if self.run_remote:
+            self.ollama_url = self.remote_url
+            if self.verify_connection() == False:
+                entry.set_css_classes(["error"])
+                self.show_toast("error", 1, self.preferences_dialog)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
-        self.ollama_instance = threading.Thread(target=self.run_ollama_instance)
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.get_application().create_action('send', lambda *_: self.send_message(self), ['<primary>Return'])
@@ -839,25 +876,27 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.connection_carousel.connect("page-changed", self.connection_carousel_page_changed)
         self.connection_previous_button.connect("clicked", self.connection_previous_button_activate)
         self.connection_next_button.connect("clicked", self.connection_next_button_activate)
-        self.load_history()
+        #Preferences
+        self.remote_connection_entry.connect("entry-activated", lambda entry : entry.set_css_classes([]))
+        self.remote_connection_entry.connect("apply", self.change_remote_url)
+        self.remote_connection_switch.connect("notify", self.connection_switched)
         if os.path.exists(os.path.join(self.config_dir, "server.json")):
             with open(os.path.join(self.config_dir, "server.json"), "r") as f:
                 data = json.load(f)
-                self.run_local = data['run_local']
-                self.local_ollama_ports = data['local_ports']
-                if self.run_local:
-                    self.ollama_instance.start()
-                    sleep(.1)
-                    self.ollama_url = f"http://127.0.0.1:{self.local_ollama_ports}"
-                else:
+                self.run_remote = data['run_remote']
+                self.local_ollama_port = data['local_port']
+                if self.run_remote:
                     self.remote_url = data['remote_url']
                     self.ollama_url = data['remote_url']
-            if self.verify_connection() is False: self.show_welcome_dialog(True)
+                else:
+                    self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
+                    self.start_instance()
+            #if self.verify_connection() is False: self.show_welcome_dialog()
         else:
-            self.ollama_instance.start()
-            sleep(.1)
-            self.ollama_url = f"http://127.0.0.1:{self.local_ollama_ports}"
+            self.start_instance()
+            self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
             self.first_time_setup = True
             self.welcome_dialog.present(self)
         self.update_list_available_models()
+        self.load_history()
         self.update_chat_list()

@@ -5,7 +5,7 @@
   <template class="AlpacaWindow" parent="AdwApplicationWindow">
     <property name="resizable">True</property>
     <property name="width-request">350</property>
-    <property name="height-request">500</property>
+    <property name="height-request">700</property>
     <property name="default-width">1300</property>
     <property name="default-height">800</property>
     <child>
@@ -20,18 +20,10 @@
       <object class="AdwBreakpoint">
         <condition>max-width: 500sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
-        <setter object="welcome_dialog" property="width-request">400</setter>
-        <setter object="welcome_dialog" property="height-request">400</setter>
-        <setter object="manage_models_dialog" property="width-request">400</setter>
-      </object>
-    </child>
-    <child>
-      <object class="AdwBreakpoint">
-        <condition>max-width: 400sp</condition>
-        <setter object="split_view_overlay" property="collapsed">true</setter>
         <setter object="welcome_dialog" property="width-request">300</setter>
         <setter object="welcome_dialog" property="height-request">300</setter>
         <setter object="manage_models_dialog" property="width-request">300</setter>
+        <setter object="preferences_dialog" property="width-request">300</setter>
       </object>
     </child>
     <property name="content">
@@ -242,6 +234,36 @@
       </object>
     </property>
 
+    <object class="AdwPreferencesDialog" id="preferences_dialog">
+      <property name="can-close">true</property>
+      <property name="width-request">400</property>
+      <property name="height-request">600</property>
+      <property name="title" translatable="yes">Preferences</property>
+      <child>
+        <object class="AdwPreferencesPage" id="connection_page">
+          <property name="title" translatable="yes">Connection</property>
+          <property name="icon-name">insert-link-symbolic</property>
+          <child>
+            <object class="AdwPreferencesGroup">
+              <property name="title" translatable="yes">Remote Connection</property>
+              <property name="description" translatable="yes">Manage a remote connection to Ollama</property>
+              <child>
+                <object class="AdwSwitchRow" id="remote_connection_switch">
+                  <property name="title" translatable="yes">Use remote connection</property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwEntryRow" id="remote_connection_entry">
+                  <property name="title" translatable="yes">URL of remote instance</property>
+                  <property name="show-apply-button">true</property>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+
     <object class="AdwDialog" id="manage_models_dialog">
       <property name="can-close">true</property>
       <property name="width-request">400</property>
@@ -316,10 +338,6 @@
         <object class="AdwToastOverlay" id="connection_overlay">
           <child>
             <object class="AdwToolbarView">
-              <child type="top">
-                <object class="AdwHeaderBar">
-                </object>
-              </child>
               <child type="bottom">
                 <object class="GtkActionBar">
                   <property name="hexpand">true</property>
@@ -409,8 +427,8 @@
         <attribute name="action">app.clear</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Change Server</attribute>
-        <attribute name="action">app.reconnect</attribute>
+        <attribute name="label" translatable="yes">Preferences</attribute>
+        <attribute name="action">app.preferences</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
@@ -454,8 +472,8 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;R</property>
-                <property name="title" translatable="yes">Change server</property>
+                <property name="accelerator">&lt;ctrl&gt;P</property>
+                <property name="title" translatable="yes">Preferences</property>
               </object>
             </child>
             <child>
