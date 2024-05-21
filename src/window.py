@@ -21,7 +21,8 @@ import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
-import json, requests, threading, os, re, base64, sys, gettext, locale, webbrowser
+import json, requests, threading, os, re, base64, sys, gettext, locale, webbrowser, subprocess
+from time import sleep
 from io import BytesIO
 from PIL import Image
 from datetime import datetime
@@ -31,6 +32,7 @@ from .available_models import available_models
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
     config_dir = os.getenv("XDG_CONFIG_HOME")
+    data_dir = os.getenv("XDG_DATA_HOME")
     __gtype_name__ = 'AlpacaWindow'
 
     localedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'locale')
@@ -42,6 +44,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     #Variables
     ollama_url = None
+    remote_url = None
+    run_local = True
+    local_ollama_ports = 11435
+    local_ollama_instance = None
     local_models = []
     pulling_models = {}
     chats = {"chats": {_("New Chat"): {"messages": []}}, "selected_chat": "New Chat"}
@@ -53,11 +59,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     bot_message : Gtk.TextBuffer = None
     bot_message_box : Gtk.Box = None
     bot_message_view : Gtk.TextView = None
-    connection_dialog = Gtk.Template.Child()
+    welcome_dialog = Gtk.Template.Child()
     connection_carousel = Gtk.Template.Child()
     connection_previous_button = Gtk.Template.Child()
     connection_next_button = Gtk.Template.Child()
-    connection_url_entry = Gtk.Template.Child()
     main_overlay = Gtk.Template.Child()
     manage_models_overlay = Gtk.Template.Child()
     connection_overlay = Gtk.Template.Child()
@@ -211,14 +216,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.verify_if_image_can_be_used()
             return
         else:
-            self.show_connection_dialog(True)
+            self.show_welcome_dialog(True)
             self.show_toast("error", 2, self.connection_overlay)
 
     def verify_connection(self):
         response = simple_get(self.ollama_url)
         if response['status'] == 'ok':
             if "Ollama is running" in response['text']:
-                with open(os.path.join(self.config_dir, "server.conf"), "w+") as f: f.write(self.ollama_url)
+                with open(os.path.join(self.config_dir, "server.json"), "w+") as f:
+                    json.dump({'remote_url': self.remote_url, 'run_local': self.run_local, 'local_ports': self.local_ollama_ports}, f)
                 #self.message_text_view.grab_focus_without_selecting()
                 self.update_list_local_models()
                 return True
@@ -345,7 +351,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GLib.idle_add(self.message_text_view.set_sensitive, True)
         if response['status'] == 'error':
             GLib.idle_add(self.show_toast, 'error', 1, self.connection_overlay)
-            GLib.idle_add(self.show_connection_dialog, True)
+            GLib.idle_add(self.show_welcome_dialog, True)
 
     def send_message(self, button=None):
         if button and self.bot_message: #STOP BUTTON
@@ -397,7 +403,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
             thread.start()
 
-    def delete_model(self, dialog, task, model_name):
+    def delete_modethreadl(self, dialog, task, model_name):
         if dialog.choose_finish(task) == "delete":
             response = simple_delete(self.ollama_url + "/api/delete", data={"name": model_name})
             self.update_list_local_models()
@@ -406,7 +412,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             else:
                 self.show_toast("error", 3, self.connection_overlay)
                 self.manage_models_dialog.close()
-                self.show_connection_dialog(True)
+                self.show_welcome_dialog(True)
 
     def pull_model_update(self, data, model_name):
         if model_name in list(self.pulling_models.keys()):
@@ -432,7 +438,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(self.pulling_models[f"{model_name}:{tag}"].get_parent().remove, self.pulling_models[f"{model_name}:{tag}"])
             del self.pulling_models[f"{model_name}:{tag}"]
             GLib.idle_add(self.manage_models_dialog.close)
-            GLib.idle_add(self.show_connection_dialog, True)
+            GLib.idle_add(self.show_welcome_dialog, True)
         if len(list(self.pulling_models.keys())) == 0:
             GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
@@ -558,19 +564,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def connection_next_button_activate(self, button):
         if button.get_label() == "Next": self.connection_carousel.scroll_to(self.connection_carousel.get_nth_page(self.connection_carousel.get_position()+1), True)
         else:
-            self.ollama_url = self.connection_url_entry.get_text()
             if self.verify_connection():
-                self.connection_dialog.force_close()
+                self.welcome_dialog.force_close()
             else:
-                self.show_connection_dialog(True)
+                self.show_welcome_dialog(True)
                 self.show_toast("error", 1, self.connection_overlay)
 
-    def show_connection_dialog(self, error:bool=False):
+    def show_welcome_dialog(self, error:bool=False):
         self.connection_carousel.scroll_to(self.connection_carousel.get_nth_page(self.connection_carousel.get_n_pages()-1),False)
-        if self.ollama_url is not None: self.connection_url_entry.set_text(self.ollama_url)
-        if error: self.connection_url_entry.set_css_classes(["error"])
-        else: self.connection_url_entry.set_css_classes([])
-        self.connection_dialog.present(self)
+        self.welcome_dialog.present(self)
 
     def clear_chat(self):
         for widget in list(self.chat_container): self.chat_container.remove(widget)
@@ -624,43 +626,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             except Exception as e:
                 self.chats = {"chats": {"New chat": {"messages": []}}, "selected_chat": "New chat"}
             self.load_history_into_chat()
-
-    def closing_connection_dialog_response(self, dialog, task):
-        result = dialog.choose_finish(task)
-        if result == "cancel": return
-        if result == "save":
-            self.ollama_url = self.connection_url_entry.get_text()
-        elif result == "discard" and self.ollama_url is None: self.destroy()
-        self.connection_dialog.force_close()
-        if self.ollama_url is None or self.verify_connection() == False:
-            self.show_connection_dialog(True)
-            self.show_toast("error", 1, self.connection_overlay)
-
-
-    def closing_connection_dialog(self, dialog):
-        if self.ollama_url is None or self.first_time_setup: self.destroy()
-        if self.ollama_url == self.connection_url_entry.get_text():
-            self.connection_dialog.force_close()
-            if self.ollama_url is None or self.verify_connection() == False:
-                self.show_connection_dialog(True)
-                self.show_toast("error", 1, self.connection_overlay)
-            else: self.first_time_setup = False
-            return
-        dialog = Adw.AlertDialog(
-            heading=_("Save Changes"),
-            body=_("Do you want to save the URL change?"),
-            close_response="cancel"
-        )
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("discard", _("Discard"))
-        dialog.add_response("save", _("Save"))
-        dialog.set_response_appearance("discard", Adw.ResponseAppearance.DESTRUCTIVE)
-        dialog.set_response_appearance("save", Adw.ResponseAppearance.SUGGESTED)
-        dialog.choose(
-            parent = self,
-            cancellable = None,
-            callback = self.closing_connection_dialog_response
-        )
 
     def load_image(self, file_dialog, result):
         try: file = file_dialog.open_finish(result)
@@ -849,14 +814,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
                         self.model_drop_down.set_selected(i)
                         break
 
+    def run_ollama_instance(self):
+        print("Running Ollama...")
+        p = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, 'OLLAMA_HOST': f"127.0.0.1:{self.local_ollama_ports}", "HOME": self.data_dir}, stdout=subprocess.PIPE)
+        for line in iter(p.stdout.readline, b''):
+            print(line)
+        p.stdout.close()
+        p.wait()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
-
+        self.ollama_instance = threading.Thread(target=self.run_ollama_instance)
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.get_application().create_action('send', lambda *_: self.send_message(self), ['<primary>Return'])
-
         self.manage_models_button.connect("clicked", self.manage_models_button_activate)
         self.send_button.connect("clicked", self.send_message)
         self.image_button.connect("clicked", self.open_image)
@@ -864,19 +836,28 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.set_default_widget(self.send_button)
         self.model_drop_down.connect("notify", self.verify_if_image_can_be_used)
         self.chat_list_box.connect("row-selected", self.chat_changed)
-        #self.message_text_view.set_activates_default(self.send_button)
         self.connection_carousel.connect("page-changed", self.connection_carousel_page_changed)
         self.connection_previous_button.connect("clicked", self.connection_previous_button_activate)
         self.connection_next_button.connect("clicked", self.connection_next_button_activate)
-        self.connection_url_entry.connect("changed", lambda entry: entry.set_css_classes([]))
-        self.connection_dialog.connect("close-attempt", self.closing_connection_dialog)
         self.load_history()
-        if os.path.exists(os.path.join(self.config_dir, "server.conf")):
-            with open(os.path.join(self.config_dir, "server.conf"), "r") as f:
-                self.ollama_url = f.read()
-            if self.verify_connection() is False: self.show_connection_dialog(True)
+        if os.path.exists(os.path.join(self.config_dir, "server.json")):
+            with open(os.path.join(self.config_dir, "server.json"), "r") as f:
+                data = json.load(f)
+                self.run_local = data['run_local']
+                self.local_ollama_ports = data['local_ports']
+                if self.run_local:
+                    self.ollama_instance.start()
+                    sleep(.1)
+                    self.ollama_url = f"http://127.0.0.1:{self.local_ollama_ports}"
+                else:
+                    self.remote_url = data['remote_url']
+                    self.ollama_url = data['remote_url']
+            if self.verify_connection() is False: self.show_welcome_dialog(True)
         else:
+            self.ollama_instance.start()
+            sleep(.1)
+            self.ollama_url = f"http://127.0.0.1:{self.local_ollama_ports}"
             self.first_time_setup = True
-            self.connection_dialog.present(self)
+            self.welcome_dialog.present(self)
         self.update_list_available_models()
         self.update_chat_list()
