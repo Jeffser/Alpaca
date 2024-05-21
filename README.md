@@ -28,7 +28,7 @@ An [Ollama](https://github.com/ollama/ollama) client made with GTK4 and Adwaita.
 - Document recognition
 - Import / Export chats
 - Delete / Edit messages
-- Snap Package
+- Snap Package (maybe)
 
 ## Screenies
 Login to Ollama instance             |  Chatting with models        |  Managing models
