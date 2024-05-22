@@ -52,6 +52,32 @@
                       </object>
                     </child>
                     <child>
+                      <object class="GtkButton" id="import_chat_button">
+                        <property name="tooltip-text" translatable="yes">Import chat</property>
+                        <style>
+                          <class name="flat"/>
+                        </style>
+                        <child>
+                          <object class="AdwButtonContent">
+                            <property name="icon-name">document-open-symbolic</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="export_chat_button">
+                        <property name="tooltip-text" translatable="yes">Export chat</property>
+                        <style>
+                          <class name="flat"/>
+                        </style>
+                        <child>
+                          <object class="AdwButtonContent">
+                            <property name="icon-name">folder-download-symbolic</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkButton" id="add_chat_button">
                         <property name="tooltip-text" translatable="yes">New chat</property>
                         <style>
@@ -233,7 +259,6 @@
         </child>
       </object>
     </property>
-
     <object class="AdwPreferencesDialog" id="preferences_dialog">
       <property name="can-close">true</property>
       <property name="width-request">400</property>
@@ -241,7 +266,7 @@
       <property name="title" translatable="yes">Preferences</property>
       <child>
         <object class="AdwPreferencesPage" id="connection_page">
-          <property name="title" translatable="yes">Connection</property>
+          <property name="title" translatable="yes">General</property>
           <property name="icon-name">insert-link-symbolic</property>
           <child>
             <object class="AdwPreferencesGroup">
@@ -256,6 +281,17 @@
                 <object class="AdwEntryRow" id="remote_connection_entry">
                   <property name="title" translatable="yes">URL of remote instance</property>
                   <property name="show-apply-button">true</property>
+                </object>
+              </child>
+            </object>
+          </child>
+          <child>
+            <object class="AdwPreferencesGroup">
+              <property name="title" translatable="yes">Behavior</property>
+              <property name="description" translatable="yes">Manage Alpaca's Behavior</property>
+              <child>
+                <object class="AdwSwitchRow" id="background_switch">
+                  <property name="title" translatable="yes">Run in background</property>
                 </object>
               </child>
             </object>
@@ -447,6 +483,11 @@
       <mime-type>image/jpeg</mime-type>
       <mime-type>image/webp</mime-type>
       <mime-type>image/gif</mime-type>
+    </mime-types>
+  </object>
+  <object class="GtkFileFilter" id="file_filter_json">
+    <mime-types>
+      <mime-type>application/json</mime-type>
     </mime-types>
   </object>
   <object class="GtkShortcutsWindow" id="shortcut_window">

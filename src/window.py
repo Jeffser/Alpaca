@@ -43,8 +43,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     _ = gettext.gettext
 
     #Variables
-    ollama_url = None
-    remote_url = None
+    run_on_background = False
+    ollama_url = ""
+    remote_url = ""
     run_remote = False
     local_ollama_port = 11435
     local_ollama_instance = None
@@ -73,6 +74,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     send_button = Gtk.Template.Child()
     image_button = Gtk.Template.Child()
     file_filter_image = Gtk.Template.Child()
+    file_filter_json = Gtk.Template.Child()
     model_drop_down = Gtk.Template.Child()
     model_string_list = Gtk.Template.Child()
 
@@ -84,9 +86,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     chat_list_box = Gtk.Template.Child()
     add_chat_button = Gtk.Template.Child()
+    export_chat_button = Gtk.Template.Child()
+    import_chat_button = Gtk.Template.Child()
 
     loading_spinner = None
 
+    background_switch = Gtk.Template.Child()
     remote_connection_switch = Gtk.Template.Child()
     remote_connection_entry = Gtk.Template.Child()
 
@@ -109,7 +114,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         ],
         "good": [
             _("Model deleted successfully"),
-            _("Model pulled successfully")
+            _("Model pulled successfully"),
+            _("Chat exported successfully"),
+            _("Chat imported successfully")
         ]
     }
 
@@ -231,7 +238,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if response['status'] == 'ok':
             if "Ollama is running" in response['text']:
                 with open(os.path.join(self.config_dir, "server.json"), "w+") as f:
-                    json.dump({'remote_url': self.remote_url, 'run_remote': self.run_remote, 'local_port': self.local_ollama_port}, f)
+                    json.dump({'remote_url': self.remote_url, 'run_remote': self.run_remote, 'local_port': self.local_ollama_port, 'run_on_background': self.run_on_background}, f)
                 #self.message_text_view.grab_focus_without_selecting()
                 self.update_list_local_models()
                 return True
@@ -350,6 +357,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GLib.idle_add(self.send_button.get_child().set_label, "Send")
         GLib.idle_add(self.send_button.get_child().set_icon_name, "send-to-symbolic")
         GLib.idle_add(self.chat_list_box.set_sensitive, True)
+        GLib.idle_add(self.export_chat_button.set_sensitive, True)
+        GLib.idle_add(self.import_chat_button.set_sensitive, True)
         GLib.idle_add(self.add_chat_button.set_sensitive, True)
         if self.verify_if_image_can_be_used(): GLib.idle_add(self.image_button.set_sensitive, True)
         GLib.idle_add(self.image_button.set_css_classes, [])
@@ -369,6 +378,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.attached_image = {"path": None, "base64": None}
             self.chat_list_box.set_sensitive(True)
             self.add_chat_button.set_sensitive(True)
+            self.export_chat_button.set_sensitive(True)
+            self.import_chat_button.set_sensitive(True)
             self.message_text_view.set_sensitive(True)
             self.send_button.set_css_classes(["suggested-action"])
             self.send_button.get_child().set_label("Send")
@@ -401,6 +412,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.send_button.get_child().set_icon_name("edit-delete-symbolic")
             self.chat_list_box.set_sensitive(False)
             self.add_chat_button.set_sensitive(False)
+            self.export_chat_button.set_sensitive(False)
+            self.import_chat_button.set_sensitive(False)
             self.image_button.set_sensitive(False)
             self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"])
             self.message_text_view.get_buffer().set_text("", 0)
@@ -826,6 +839,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def start_instance(self):
         self.ollama_instance = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, 'OLLAMA_HOST': f"127.0.0.1:{self.local_ollama_port}", "HOME": self.data_dir}, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        sleep(1)
         while True:
             err = self.ollama_instance.stderr.readline()
             if err == '' and self.ollama_instance.poll() is not None:
@@ -836,10 +850,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def stop_instance(self):
         self.ollama_instance.kill()
 
-    def reset_instance(self):
-        if self.ollama_instance is not None:
-            self.stop_instance()
-        self.start_instance()
+    def restart_instance(self):
+        if self.ollama_instance is not None: self.stop_instance()
+        start_instance(self)
 
     def connection_error(self):
         if self.run_remote:
@@ -847,10 +860,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.remote_connection_entry.set_css_classes(["error"])
             self.show_toast("error", 1, self.preferences_dialog)
         else:
-            self.reset_instance()
+            self.restart_instance()
             self.show_toast("error", 7, self.main_overlay)
 
-    def connection_switched(self, pspec, user_data):
+    def connection_switched(self):
         new_value = self.remote_connection_switch.get_active()
         if new_value != self.run_remote:
             self.run_remote = new_value
@@ -871,6 +884,48 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 entry.set_css_classes(["error"])
                 self.show_toast("error", 1, self.preferences_dialog)
 
+    def on_replace_contents(self, file, result):
+        file.replace_contents_finish(result)
+        self.show_toast("good", 2, self.main_overlay)
+
+    def on_export_current_chat(self, file_dialog, result):
+        file = file_dialog.save_finish(result)
+        data_to_export = {self.chats["selected_chat"]: self.chats["chats"][self.chats["selected_chat"]]}
+        file.replace_contents_async(
+            json.dumps(data_to_export, indent=4).encode("UTF-8"),
+            etag=None,
+            make_backup=False,
+            flags=Gio.FileCreateFlags.NONE,
+            cancellable=None,
+            callback=self.on_replace_contents
+        )
+
+    def export_current_chat(self):
+        file_dialog = Gtk.FileDialog(initial_name=f"{self.chats['selected_chat']}.json")
+        file_dialog.save(parent=self, cancellable=None, callback=self.on_export_current_chat)
+
+    def on_chat_imported(self, file_dialog, result):
+        file = file_dialog.open_finish(result)
+        stream = file.read(None)
+        data_stream = Gio.DataInputStream.new(stream)
+        data, _ = data_stream.read_until('\0', None)
+        data = json.loads(data)
+        chat_name = list(data.keys())[0]
+        chat_content = data[chat_name]
+        self.chats['chats'][chat_name] = chat_content
+        self.update_chat_list()
+        self.save_history()
+        self.show_toast("good", 3, self.main_overlay)
+
+    def import_chat(self):
+        file_dialog = Gtk.FileDialog(default_filter=self.file_filter_json)
+        file_dialog.open(self, None, self.on_chat_imported)
+
+    def switch_run_on_background(self):
+        self.run_on_background = self.background_switch.get_active()
+        self.set_hide_on_close(self.run_on_background)
+        self.verify_connection()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
@@ -887,27 +942,37 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.connection_carousel.connect("page-changed", self.connection_carousel_page_changed)
         self.connection_previous_button.connect("clicked", self.connection_previous_button_activate)
         self.connection_next_button.connect("clicked", self.connection_next_button_activate)
+
+        self.export_chat_button.connect("clicked", lambda button : self.export_current_chat())
+        self.import_chat_button.connect("clicked", lambda button : self.import_chat())
         #Preferences
         self.remote_connection_entry.connect("entry-activated", lambda entry : entry.set_css_classes([]))
         self.remote_connection_entry.connect("apply", self.change_remote_url)
-        self.remote_connection_switch.connect("notify", self.connection_switched)
+        self.remote_connection_switch.connect("notify", lambda pspec, user_data : self.connection_switched())
+        self.background_switch.connect("notify", lambda pspec, user_data : self.switch_run_on_background())
         if os.path.exists(os.path.join(self.config_dir, "server.json")):
             with open(os.path.join(self.config_dir, "server.json"), "r") as f:
                 data = json.load(f)
                 self.run_remote = data['run_remote']
                 self.local_ollama_port = data['local_port']
+                self.remote_url = data['remote_url']
+                self.run_on_background = data['run_on_background']
+                self.background_switch.set_active(self.run_on_background)
+                self.set_hide_on_close(self.run_on_background)
+                self.remote_connection_entry.set_text(self.remote_url)
                 if self.run_remote:
-                    self.remote_url = data['remote_url']
+                    self.remote_connection_switch.set_active(True)
                     self.ollama_url = data['remote_url']
                 else:
+                    self.remote_connection_switch.set_active(False)
                     self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
                     self.start_instance()
-            if self.verify_connection() is False: self.connection_error()
         else:
             self.start_instance()
             self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
             self.first_time_setup = True
             self.welcome_dialog.present(self)
+        if self.verify_connection() is False: self.connection_error()
         self.update_list_available_models()
         self.load_history()
         self.update_chat_list()

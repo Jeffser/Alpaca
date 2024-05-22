@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-20 19:15-0600\n"
+"POT-Creation-Date: 2024-05-21 22:07-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Pull and delete models from the app"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:16 src/window.ui:392
+#: data/com.jeffser.Alpaca.metainfo.xml.in:16 src/window.ui:436
 msgid "Disclaimer"
 msgstr ""
 
@@ -325,292 +325,306 @@ msgstr ""
 msgid "This is the first public version of Alpaca"
 msgstr ""
 
-#: src/window.py:47 src/window.py:776
+#: src/window.py:53 src/window.py:753
 msgid "New Chat"
 msgstr ""
 
-#: src/window.py:86
+#: src/window.py:98
 msgid "An error occurred"
 msgstr ""
 
-#: src/window.py:87
+#: src/window.py:99
 msgid "Failed to connect to server"
 msgstr ""
 
-#: src/window.py:88
+#: src/window.py:100
 msgid "Could not list local models"
 msgstr ""
 
-#: src/window.py:89
+#: src/window.py:101
 msgid "Could not delete model"
 msgstr ""
 
-#: src/window.py:90
+#: src/window.py:102
 msgid "Could not pull model"
 msgstr ""
 
-#: src/window.py:91
+#: src/window.py:103
 msgid "Cannot open image"
 msgstr ""
 
-#: src/window.py:92
+#: src/window.py:104
 msgid "Cannot delete chat because it's the only one left"
 msgstr ""
 
-#: src/window.py:95
+#: src/window.py:105
+msgid "There was an error with the local Ollama instance, so it has been reset"
+msgstr ""
+
+#: src/window.py:108
 msgid "Please select a model before chatting"
 msgstr ""
 
-#: src/window.py:96
+#: src/window.py:109
 msgid "Chat cannot be cleared while receiving a message"
 msgstr ""
 
-#: src/window.py:99
+#: src/window.py:110
+msgid "That tag is already being pulled"
+msgstr ""
+
+#: src/window.py:111
+msgid "That tag has been pulled alreay"
+msgstr ""
+
+#: src/window.py:114
 msgid "Model deleted successfully"
 msgstr ""
 
-#: src/window.py:100
+#: src/window.py:115
 msgid "Model pulled successfully"
 msgstr ""
 
-#: src/window.py:425
+#: src/window.py:116
+msgid "Chat exported successfully"
+msgstr ""
+
+#: src/window.py:117
+msgid "Chat imported successfully"
+msgstr ""
+
+#: src/window.py:443
 msgid "Task Complete"
 msgstr ""
 
-#: src/window.py:425
+#: src/window.py:443
 msgid "Model '{}' pulled successfully."
 msgstr ""
 
-#: src/window.py:430
+#: src/window.py:448
 msgid "Pull Model Error"
 msgstr ""
 
-#: src/window.py:430
+#: src/window.py:448
 msgid "Failed to pull model '{}' due to network error."
 msgstr ""
 
-#: src/window.py:446
+#: src/window.py:464
 msgid "Stop Model"
 msgstr ""
 
-#: src/window.py:447
+#: src/window.py:465
 msgid "Are you sure you want to stop pulling '{}'?"
 msgstr ""
 
-#: src/window.py:450 src/window.py:489 src/window.py:512 src/window.py:593
-#: src/window.py:654 src/window.py:703 src/window.py:730 src/window.py:763
-#: src/window.py:803
+#: src/window.py:468 src/window.py:511 src/window.py:534 src/window.py:607
+#: src/window.py:680 src/window.py:707 src/window.py:740 src/window.py:780
 msgid "Cancel"
 msgstr ""
 
-#: src/window.py:451
+#: src/window.py:469
 msgid "Stop"
 msgstr ""
 
-#: src/window.py:485
+#: src/window.py:507
 msgid "Delete Model"
 msgstr ""
 
-#: src/window.py:486 src/window.py:727
+#: src/window.py:508 src/window.py:704
 msgid "Are you sure you want to delete '{}'?"
 msgstr ""
 
-#: src/window.py:490 src/window.py:731
+#: src/window.py:512 src/window.py:708
 msgid "Delete"
 msgstr ""
 
-#: src/window.py:507
+#: src/window.py:529
 msgid "Pull Model"
 msgstr ""
 
-#: src/window.py:508
+#: src/window.py:530
 msgid "Please select a tag to pull '{}'"
 msgstr ""
 
-#: src/window.py:513
+#: src/window.py:535
 msgid "Pull"
 msgstr ""
 
-#: src/window.py:589 src/window.ui:426
+#: src/window.py:603 src/window.ui:452
 msgid "Clear Chat"
 msgstr ""
 
-#: src/window.py:590
+#: src/window.py:604
 msgid "Are you sure you want to clear the chat?"
 msgstr ""
 
-#: src/window.py:594
+#: src/window.py:608
 msgid "Clear"
 msgstr ""
 
-#: src/window.py:650
-msgid "Save Changes"
-msgstr ""
-
-#: src/window.py:651
-msgid "Do you want to save the URL change?"
-msgstr ""
-
-#: src/window.py:655
-msgid "Discard"
-msgstr ""
-
-#: src/window.py:656
-msgid "Save"
-msgstr ""
-
-#: src/window.py:699
+#: src/window.py:676
 msgid "Remove Image"
 msgstr ""
 
-#: src/window.py:700
+#: src/window.py:677
 msgid "Are you sure you want to remove image?"
 msgstr ""
 
-#: src/window.py:704
+#: src/window.py:681
 msgid "Remove"
 msgstr ""
 
-#: src/window.py:726
+#: src/window.py:703
 msgid "Delete Chat"
 msgstr ""
 
-#: src/window.py:757
+#: src/window.py:734
 msgid "Rename Chat"
 msgstr ""
 
-#: src/window.py:764
+#: src/window.py:741
 msgid "Rename"
 msgstr ""
 
-#: src/window.py:784
+#: src/window.py:761
 msgid "The name '{}' is already in use"
 msgstr ""
 
-#: src/window.py:797
+#: src/window.py:774
 msgid "Create Chat"
 msgstr ""
 
-#: src/window.py:804
+#: src/window.py:781
 msgid "Create"
 msgstr ""
 
-#: src/window.ui:54
+#: src/window.ui:46
 msgid "Chats"
 msgstr ""
 
-#: src/window.ui:64
+#: src/window.ui:56
+msgid "Import chat"
+msgstr ""
+
+#: src/window.ui:69
+msgid "Export chat"
+msgstr ""
+
+#: src/window.ui:82
 msgid "New chat"
 msgstr ""
 
-#: src/window.ui:100
+#: src/window.ui:118
 msgid "Toggle Sidebar"
 msgstr ""
 
-#: src/window.ui:121 src/window.ui:257
+#: src/window.ui:139 src/window.ui:305
 msgid "Manage models"
 msgstr ""
 
-#: src/window.ui:135
+#: src/window.ui:153
 msgid "Menu"
 msgstr ""
 
-#: src/window.ui:213
+#: src/window.ui:231
 msgid "Send"
 msgstr ""
 
-#: src/window.ui:222
+#: src/window.ui:240
 msgid "Requires model 'llava' to be selected"
 msgstr ""
 
-#: src/window.ui:225
+#: src/window.ui:243
 msgid "Image"
 msgstr ""
 
-#: src/window.ui:331
+#: src/window.ui:267 src/window.ui:456 src/window.ui:507
+msgid "Preferences"
+msgstr ""
+
+#: src/window.ui:270
+msgid "Connection"
+msgstr ""
+
+#: src/window.ui:274
+msgid "Remote Connection"
+msgstr ""
+
+#: src/window.ui:275
+msgid "Manage a remote connection to Ollama"
+msgstr ""
+
+#: src/window.ui:278
+msgid "Use remote connection"
+msgstr ""
+
+#: src/window.ui:283
+msgid "URL of remote instance"
+msgstr ""
+
+#: src/window.ui:375
 msgid "Previous"
 msgstr ""
 
-#: src/window.ui:346
+#: src/window.ui:390
 msgid "Next"
 msgstr ""
 
-#: src/window.ui:372
+#: src/window.ui:416
 msgid "Welcome to Alpaca"
 msgstr ""
 
-#: src/window.ui:373
-msgid ""
-"To get started, please ensure you have an Ollama instance set up. You can "
-"either run Ollama locally on your machine or connect to a remote instance."
+#: src/window.ui:417
+msgid "Powered by Ollama"
 msgstr ""
 
-#: src/window.ui:376
+#: src/window.ui:420
 msgid "Ollama Website"
 msgstr ""
 
-#: src/window.ui:393
+#: src/window.ui:437
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
 "Please exercise caution and review the code carefully before running it."
 msgstr ""
 
-#: src/window.ui:405
-msgid "Setup"
-msgstr ""
-
-#: src/window.ui:406
-msgid ""
-"If you are running an Ollama instance locally and haven't modified the "
-"default ports, you can use the default URL. Otherwise, please enter the URL "
-"of your Ollama instance."
-msgstr ""
-
-#: src/window.ui:430
-msgid "Change Server"
-msgstr ""
-
-#: src/window.ui:434
+#: src/window.ui:460
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: src/window.ui:438
+#: src/window.ui:464
 msgid "About Alpaca"
 msgstr ""
 
-#: src/window.ui:460
+#: src/window.ui:491
 msgid "General"
 msgstr ""
 
-#: src/window.ui:464
+#: src/window.ui:495
 msgid "Close application"
 msgstr ""
 
-#: src/window.ui:470
+#: src/window.ui:501
 msgid "Clear chat"
 msgstr ""
 
-#: src/window.ui:476
-msgid "Change server"
-msgstr ""
-
-#: src/window.ui:482
+#: src/window.ui:513
 msgid "Show shortcuts window"
 msgstr ""
 
-#: src/window.ui:489
+#: src/window.ui:520
 msgid "Editor"
 msgstr ""
 
-#: src/window.ui:493
+#: src/window.ui:524
 msgid "Copy"
 msgstr ""
 
-#: src/window.ui:499
+#: src/window.ui:530
 msgid "Paste"
 msgstr ""
 
-#: src/window.ui:505
+#: src/window.ui:536
 msgid "Send Message"
 msgstr ""
