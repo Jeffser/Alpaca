@@ -171,9 +171,6 @@
                         <property name="propagate-natural-height">true</property>
                         <property name="kinetic-scrolling">1</property>
                         <property name="vexpand">true</property>
-                        <style>
-                          <class name="card"/>
-                        </style>
                         <child>
                           <object class="GtkBox" id="chat_container">
                             <property name="orientation">1</property>
