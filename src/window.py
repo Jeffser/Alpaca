@@ -223,7 +223,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.verify_if_image_can_be_used()
             return
         else:
-            #self.show_welcome_dialog(True)
+            self.connection_error()
             self.show_toast("error", 2, self.connection_overlay)
 
     def verify_connection(self):
@@ -358,7 +358,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GLib.idle_add(self.message_text_view.set_sensitive, True)
         if response['status'] == 'error':
             GLib.idle_add(self.show_toast, 'error', 1, self.connection_overlay)
-            #GLib.idle_add(self.show_welcome_dialog, True)
+            GLib.idle_add(self.connection_error)
 
     def send_message(self, button=None):
         if button and self.bot_message: #STOP BUTTON
@@ -410,7 +410,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
             thread.start()
 
-    def delete_modethreadl(self, dialog, task, model_name):
+    def delete_model(self, dialog, task, model_name):
         if dialog.choose_finish(task) == "delete":
             response = simple_delete(self.ollama_url + "/api/delete", data={"name": model_name})
             self.update_list_local_models()
@@ -419,7 +419,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             else:
                 self.show_toast("error", 3, self.connection_overlay)
                 self.manage_models_dialog.close()
-                #self.show_welcome_dialog(True)
+                self.connection_error()
 
     def pull_model_update(self, data, model_name):
         if model_name in list(self.pulling_models.keys()):
@@ -445,7 +445,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(self.pulling_models[f"{model_name}:{tag}"].get_parent().remove, self.pulling_models[f"{model_name}:{tag}"])
             del self.pulling_models[f"{model_name}:{tag}"]
             GLib.idle_add(self.manage_models_dialog.close)
-            #GLib.idle_add(self.show_welcome_dialog, True)
+            GLib.idle_add(self.connection_error)
         if len(list(self.pulling_models.keys())) == 0:
             GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
@@ -578,7 +578,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if self.verify_connection():
                 self.welcome_dialog.force_close()
             else:
-                #self.show_welcome_dialog(True)
+                self.connection_error()
                 self.show_toast("error", 1, self.connection_overlay)
 
     def clear_chat(self):
@@ -826,6 +826,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def start_instance(self):
         self.ollama_instance = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, 'OLLAMA_HOST': f"127.0.0.1:{self.local_ollama_port}", "HOME": self.data_dir}, stdout=subprocess.PIPE)
+        sleep(5)
 
     def stop_instance(self):
         self.ollama_instance.kill()
@@ -835,14 +836,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.stop_instance()
         self.start_instance()
 
-    def connection_error(self, overlay):
+    def connection_error(self):
         if self.run_remote:
             self.preferences_dialog.present(self)
             self.remote_connection_entry.set_css_classes(["error"])
-            self.show_toast("error", 1, overlay)
+            self.show_toast("error", 1, self.preferences_dialog)
         else:
             self.reset_instance()
-            self.show_toast("error", 7, overlay)
+            self.show_toast("error", 7, self.main_overlay)
 
     def connection_switched(self, pspec, user_data):
         new_value = self.remote_connection_switch.get_active()
@@ -850,11 +851,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.run_remote = new_value
             if self.run_remote:
                 self.stop_instance()
-                if self.verify_connection() == False: self.connection_error(self.preferences_dialog)
+                if self.verify_connection() == False: self.connection_error()
             else:
                 self.start_instance()
-                sleep(1)
-                if self.verify_connection() == False: self.connection_error(self.preferences_dialog)
+                if self.verify_connection() == False: self.connection_error()
         self.update_list_available_models()
         self.update_list_local_models()
 
@@ -897,7 +897,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 else:
                     self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
                     self.start_instance()
-            #if self.verify_connection() is False: self.show_welcome_dialog()
+            if self.verify_connection() is False: self.connection_error()
         else:
             self.start_instance()
             self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
