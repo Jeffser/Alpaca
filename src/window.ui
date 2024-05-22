@@ -168,14 +168,14 @@
                     <child>
                       <object class="GtkScrolledWindow" id="chat_window">
                         <property name="margin-bottom">12</property>
-                        <property name="propagate-natural-height">true</property>
-                        <property name="kinetic-scrolling">1</property>
+                        <property name="propagate-natural-height">false</property>
+                        <property name="kinetic-scrolling">true</property>
                         <property name="vexpand">true</property>
                         <child>
                           <object class="GtkBox" id="chat_container">
                             <property name="orientation">1</property>
                             <property name="homogeneous">false</property>
-                            <property name="hexpand">false</property>
+                            <property name="hexpand">true</property>
                             <property name="vexpand">true</property>
                             <property name="spacing">12</property>
                             <property name="margin-top">12</property>

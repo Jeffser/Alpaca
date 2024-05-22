@@ -158,7 +158,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             css_classes=[None if bot else "card"]
         )
         message_text.set_valign(Gtk.Align.CENTER)
-        self.chat_container.append(message_box)
+
 
         if image_base64 is not None:
             image_data = base64.b64decode(image_base64)
@@ -179,6 +179,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             message_box.append(image)
 
         message_box.append(message_text)
+        self.chat_container.append(message_box)
 
         if bot:
             self.bot_message = message_buffer
@@ -415,11 +416,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.export_chat_button.set_sensitive(False)
             self.import_chat_button.set_sensitive(False)
             self.image_button.set_sensitive(False)
+
             self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"])
             self.message_text_view.get_buffer().set_text("", 0)
-            self.show_message("", True)
             self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
             self.chat_container.append(self.loading_spinner)
+            self.show_message("", True)
+
+            vadjustment = self.chat_window.get_vadjustment()
+            vadjustment.set_value(vadjustment.get_upper())
             thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
             thread.start()
 
@@ -838,7 +843,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.preferences_dialog.present(self)
 
     def start_instance(self):
-        self.ollama_instance = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, 'OLLAMA_HOST': f"127.0.0.1:{self.local_ollama_port}", "HOME": self.data_dir}, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        self.ollama_instance = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, 'OLLAMA_HOST': f"127.0.0.1:{self.local_ollama_port}", "HOME": self.data_dir}, stderr=subprocess.PIPE, text=True)
         sleep(1)
         while True:
             err = self.ollama_instance.stderr.readline()
