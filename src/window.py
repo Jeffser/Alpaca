@@ -789,7 +789,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 margin_top = 6,
                 margin_start = 6,
                 margin_end = 6,
-                css_classes = ["card"]
+                css_classes = ["background"]
             )
             button_delete = Gtk.Button(
                 icon_name = "user-trash-symbolic",
@@ -825,8 +825,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.preferences_dialog.present(self)
 
     def start_instance(self):
-        self.ollama_instance = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, 'OLLAMA_HOST': f"127.0.0.1:{self.local_ollama_port}", "HOME": self.data_dir}, stdout=subprocess.PIPE)
-        sleep(5)
+        self.ollama_instance = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, 'OLLAMA_HOST': f"127.0.0.1:{self.local_ollama_port}", "HOME": self.data_dir}, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        while True:
+            err = self.ollama_instance.stderr.readline()
+            if err == '' and self.ollama_instance.poll() is not None:
+                break
+            if 'msg="inference compute"' in err: #Ollama outputs a line with this when it finishes loading, yeah
+                break
 
     def stop_instance(self):
         self.ollama_instance.kill()
