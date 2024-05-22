@@ -103,7 +103,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         ],
         "info": [
             _("Please select a model before chatting"),
-            _("Chat cannot be cleared while receiving a message")
+            _("Chat cannot be cleared while receiving a message"),
+            _("That tag is already being pulled"),
+            _("That tag has been pulled alreay")
         ],
         "good": [
             _("Model deleted successfully"),
@@ -470,8 +472,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def pull_model_start(self, dialog, task, model_name, tag_drop_down):
         if dialog.choose_finish(task) == "pull":
             tag = tag_drop_down.get_selected_item().get_string()
-            if f"{model_name}:{tag}" in list(self.pulling_models.keys()): return ##TODO add message: 'already being pulled'
-            if f"{model_name}:{tag}" in self.local_models: return ##TODO add message 'already pulled'
+            if f"{model_name}:{tag}" in list(self.pulling_models.keys()):
+                self.show_toast("info", 3, self.manage_models_overlay)
+                return
+            if f"{model_name}:{tag}" in self.local_models:
+                self.show_toast("info", 4, self.manage_models_overlay)
+                return
             #self.pull_model_status_page.set_description(f"{model_name}:{tag}")
             self.pulling_model_list_box.set_visible(True)
             model_row = Adw.ActionRow(
