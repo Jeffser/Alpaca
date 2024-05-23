@@ -381,7 +381,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GLib.idle_add(self.image_button.set_css_classes, [])
         GLib.idle_add(self.image_button.get_child().set_icon_name, "image-x-generic-symbolic")
         self.attached_image = {"path": None, "base64": None}
-        GLib.idle_add(self.message_text_view.set_sensitive, True)
+        # GLib.idle_add(self.message_text_view.set_sensitive, True)
         if response['status'] == 'error':
             GLib.idle_add(self.show_toast, 'error', 1, self.connection_overlay)
             GLib.idle_add(self.connection_error)
@@ -397,7 +397,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.add_chat_button.set_sensitive(True)
             self.export_chat_button.set_sensitive(True)
             self.import_chat_button.set_sensitive(True)
-            self.message_text_view.set_sensitive(True)
+            # self.message_text_view.set_sensitive(True)
             self.send_button.set_css_classes(["suggested-action"])
             self.send_button.get_child().set_label("Send")
             self.send_button.get_child().set_icon_name("send-to-symbolic")
@@ -423,7 +423,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             }
             if self.verify_if_image_can_be_used() and self.attached_image["base64"] is not None:
                 data["messages"][-1]["images"] = [self.attached_image["base64"]]
-            self.message_text_view.set_sensitive(False)
+            # self.message_text_view.set_sensitive(False)
             self.send_button.set_css_classes(["destructive-action"])
             self.send_button.get_child().set_label("Stop")
             self.send_button.get_child().set_icon_name("edit-delete-symbolic")
