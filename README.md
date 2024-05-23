@@ -35,6 +35,9 @@ Login to Ollama instance             |  Chatting with models        |  Managing 
 :-------------------------:|:-------------------------:|:-------------------------:
 ![Screenshot from 2024-05-12 19-58-28](https://jeffser.com/images/alpaca/screenie1.png)  |  ![Screenshot from 2024-05-12 20-01-08](https://jeffser.com/images/alpaca/screenie2.png)  |  ![Screenshot from 2024-05-12 20-01-31](https://jeffser.com/images/alpaca/screenie3.png)
 
+## Thanks
+So, apparently there's people who like something I did, that's cool. I mean really, this is the first big project I've made and there's still a lot of stuff I want to add, I wanted to thank all of you that have reported issues and enhancements to the app, I appreciate it a lot.
+
 ## Preview
 1. Clone repo using Gnome Builder
 2. Press the `run` button
