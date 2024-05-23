@@ -4,7 +4,7 @@
   <requires lib="Adw" version="1.0"/>
   <template class="AlpacaWindow" parent="AdwApplicationWindow">
     <property name="resizable">True</property>
-    <property name="width-request">350</property>
+    <property name="width-request">360</property>
     <property name="height-request">700</property>
     <property name="default-width">1300</property>
     <property name="default-height">800</property>
@@ -20,10 +20,9 @@
       <object class="AdwBreakpoint">
         <condition>max-width: 500sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
-        <setter object="welcome_dialog" property="width-request">300</setter>
-        <setter object="welcome_dialog" property="height-request">300</setter>
-        <setter object="manage_models_dialog" property="width-request">300</setter>
-        <setter object="preferences_dialog" property="width-request">300</setter>
+        <setter object="welcome_dialog" property="width-request">360</setter>
+        <setter object="manage_models_dialog" property="width-request">360</setter>
+        <setter object="preferences_dialog" property="width-request">360</setter>
       </object>
     </child>
     <property name="content">

@@ -881,12 +881,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def connection_switched(self):
         new_value = self.remote_connection_switch.get_active()
+
+
         if new_value != self.run_remote:
             self.run_remote = new_value
             if self.run_remote:
-                self.stop_instance()
+                self.ollama_url = self.remote_url
                 if self.verify_connection() == False: self.connection_error()
+                else: self.stop_instance()
             else:
+                self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
                 self.start_instance()
                 if self.verify_connection() == False: self.connection_error()
         self.update_list_available_models()
