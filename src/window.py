@@ -1014,7 +1014,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
               opacity: 0;
               transition: opacity .05s;
             }
-            .chat_row:hover button, .chat_row:selected button {
+            .chat_row:hover button {
               opacity: 1;
             }
         """)
