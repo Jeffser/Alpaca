@@ -1,20 +1,15 @@
-<img src="https://jeffser.com/images/alpaca/logo.svg">
+<p align="center"><img src="https://jeffser.com/images/alpaca/logo.svg"></p>
 
 # Alpaca
 
-An [Ollama](https://github.com/ollama/ollama) client made with GTK4 and Adwaita.
+<a href='https://flathub.org/apps/com.jeffser.Alpaca'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
 
-
-
-
+Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can manage and chat with multiple models, Alpaca provides an easy and begginer friendly way of interacting with local AI, everything is open source and powered by Ollama.
 
 ---
 
 > [!WARNING]
-> This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any models.
-
-> [!important]
-> This is my first GTK4 / Adwaita / Python app, so it might crash and some features are still under development, please report any errors if you can, thank you!
+> This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any AI models.
 
 ## Features!
 - Talk to multiple models in the same conversation
