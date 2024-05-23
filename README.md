@@ -31,7 +31,9 @@ Login to Ollama instance             |  Chatting with models        |  Managing 
 ![Screenshot from 2024-05-12 19-58-28](https://jeffser.com/images/alpaca/screenie1.png)  |  ![Screenshot from 2024-05-12 20-01-08](https://jeffser.com/images/alpaca/screenie2.png)  |  ![Screenshot from 2024-05-12 20-01-31](https://jeffser.com/images/alpaca/screenie3.png)
 
 ## Thanks
-[Not-a-dev-stein](https://github.com/not-a-dev-stein) for their help with requesting a new icon and bug reports
+- [Not-a-dev-stein](https://github.com/not-a-dev-stein) for their help with requesting a new icon and bug reports
+- [TylerLaBree](https://github.com/TylerLaBree) for their requests and ideas
+- [Alexkdeveloper](https://github.com/alexkdeveloper) for their help translating the app to Russian
 
 ## Preview
 1. Clone repo using Gnome Builder
