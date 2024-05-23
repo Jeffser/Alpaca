@@ -112,7 +112,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             _("Please select a model before chatting"),
             _("Chat cannot be cleared while receiving a message"),
             _("That tag is already being pulled"),
-            _("That tag has been pulled alreay")
+            _("That tag has been pulled already")
         ],
         "good": [
             _("Model deleted successfully"),
