@@ -32,6 +32,7 @@ alpaca_sources = [
   'window.py',
   'connection_handler.py',
   'available_models.py',
+  'style.css'
 ]
 
 install_data(alpaca_sources, install_dir: moduledir)

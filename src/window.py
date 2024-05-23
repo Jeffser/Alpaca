@@ -33,6 +33,8 @@ from .available_models import available_models
 class AlpacaWindow(Adw.ApplicationWindow):
     config_dir = os.getenv("XDG_CONFIG_HOME")
     data_dir = os.getenv("XDG_DATA_HOME")
+    app_dir = os.getenv("FLATPAK_DEST")
+
     __gtype_name__ = 'AlpacaWindow'
 
     localedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'locale')
@@ -147,7 +149,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             margin_start=12,
             margin_end=12,
             hexpand=True,
-            css_classes=["flat"]
+            css_classes=["flat"],
         )
         message_buffer = message_text.get_buffer()
         message_buffer.insert(message_buffer.get_end_iter(), msg)
@@ -155,6 +157,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         message_box = Gtk.Box(
             orientation=1,
+            halign='fill',
             css_classes=[None if bot else "card"]
         )
         message_text.set_valign(Gtk.Align.CENTER)
@@ -331,7 +334,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.save_history()
             sys.exit()
         vadjustment = self.chat_window.get_vadjustment()
-        if vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
+        if self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]['role'] == "user" or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if data['done']:
             formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
@@ -802,12 +805,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def update_chat_list(self):
         self.chat_list_box.remove_all()
         for name, content in self.chats['chats'].items():
-            chat = Adw.ActionRow(
-                title = name,
-                margin_top = 6,
-                margin_start = 6,
-                margin_end = 6,
-                css_classes = ["background"]
+            chat_content = Gtk.Box(
+                spacing = 12,
+            )
+            chat_row = Gtk.ListBoxRow(
+                css_classes = ["chat_row"],
+                height_request = 45,
+                child=chat_content,
+                name = name
+            )
+            chat_label = Gtk.Label(
+                label=name,
+                hexpand=True,
+                halign=1
             )
             button_delete = Gtk.Button(
                 icon_name = "user-trash-symbolic",
@@ -824,14 +834,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
             )
             button_rename.connect("clicked", lambda button, chat_name=name: self.chat_rename_dialog(chat_name=chat_name, body=f"Renaming '{chat_name}'", error=False))
 
-            chat.add_suffix(button_delete)
-            chat.add_suffix(button_rename)
-            self.chat_list_box.append(chat)
-            if name==self.chats["selected_chat"]: self.chat_list_box.select_row(chat)
+            chat_content.append(chat_label)
+            chat_content.append(button_delete)
+            chat_content.append(button_rename)
+            self.chat_list_box.append(chat_row)
+            if name==self.chats["selected_chat"]: self.chat_list_box.select_row(chat_row)
 
     def chat_changed(self, listbox, row):
-        if row and row.get_title() != self.chats["selected_chat"]:
-            self.chats["selected_chat"] = row.get_title()
+        if row and row.get_name() != self.chats["selected_chat"]:
+            self.chats["selected_chat"] = row.get_name()
             self.load_history_into_chat()
             if len(self.chats["chats"][self.chats["selected_chat"]]["messages"]) > 0:
                 for i in range(self.model_string_list.get_n_items()):
@@ -934,6 +945,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
+        #CSS
+        css_provider = Gtk.CssProvider()
+        css_provider.load_from_path(os.path.join(self.app_dir, "share/Alpaca/alpaca/style.css"))
+        display = Gdk.Display.get_default()
+        Gtk.StyleContext.add_provider_for_display(
+            display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
+
+
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.get_application().create_action('send', lambda *_: self.send_message(self), ['<primary>Return'])

@@ -168,7 +168,7 @@
                     <child>
                       <object class="GtkScrolledWindow" id="chat_window">
                         <property name="margin-bottom">12</property>
-                        <property name="propagate-natural-height">false</property>
+                        <property name="propagate-natural-height">true</property>
                         <property name="kinetic-scrolling">true</property>
                         <property name="vexpand">true</property>
                         <child>
@@ -470,6 +470,13 @@
       <item>
         <attribute name="label" translatable="yes">About Alpaca</attribute>
         <attribute name="action">app.about</attribute>
+      </item>
+    </section>
+  </menu>
+  <menu id="chat_context_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Remove</attribute>
       </item>
     </section>
   </menu>
