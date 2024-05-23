@@ -1002,8 +1002,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.set_hide_on_close(self.run_on_background)
                 self.remote_connection_entry.set_text(self.remote_url)
                 if self.run_remote:
-                    self.remote_connection_switch.set_active(True)
                     self.ollama_url = data['remote_url']
+                    self.remote_connection_switch.set_active(True)
                 else:
                     self.remote_connection_switch.set_active(False)
                     self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
