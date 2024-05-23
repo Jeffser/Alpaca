@@ -8,6 +8,7 @@
     <property name="height-request">700</property>
     <property name="default-width">1300</property>
     <property name="default-height">800</property>
+    <property name="title">Alpaca</property>
     <child>
       <object class="AdwBreakpoint">
         <condition>max-width: 800sp</condition>
@@ -31,67 +32,49 @@
           <object class="AdwOverlaySplitView" id="split_view_overlay">
             <property name="show-sidebar" bind-source="show_sidebar_button" bind-property="active" bind-flags="sync-create"/>
             <property name="sidebar">
-              <object class="GtkBox">
-                <property name="spacing">12</property>
-                <property name="orientation">1</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="margin-top">12</property>
-                    <property name="margin-start">12</property>
-                    <property name="margin-end">12</property>
-                    <property name="spacing">12</property>
-                    <child>
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <child type="start">
                       <object class="GtkButton" id="add_chat_button">
                         <property name="tooltip-text" translatable="yes">New chat</property>
+                        <property name="icon-name">tab-new-symbolic</property>
                         <style>
                           <class name="flat"/>
                         </style>
-                        <child>
-                          <object class="AdwButtonContent">
-                            <property name="icon-name">tab-new-symbolic</property>
-                          </object>
-                        </child>
                       </object>
                     </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="no">Alpaca</property>
-                        <property name="hexpand">true</property>
-                        <property name="halign">3</property>
-                        <style>
-                          <class name="title-4"/>
-                        </style>
-                      </object>
-                    </child>
-                    <child>
+                    <!-- <child> -->
+                    <!--   <object class="GtkLabel"> -->
+                    <!--     <property name="label" translatable="no">Alpaca</property> -->
+                    <!--     <property name="hexpand">true</property> -->
+                    <!--     <property name="halign">3</property> -->
+                    <!--     <style> -->
+                    <!--       <class name="title-4"/> -->
+                    <!--     </style> -->
+                    <!--   </object> -->
+                    <!-- </child> -->
+                    <child type="end">
                       <object class="GtkButton" id="import_chat_button">
                         <property name="tooltip-text" translatable="yes">Import chat</property>
+                        <property name="icon-name">document-open-symbolic</property>
                         <style>
                           <class name="flat"/>
                         </style>
-                        <child>
-                          <object class="AdwButtonContent">
-                            <property name="icon-name">document-open-symbolic</property>
-                          </object>
-                        </child>
                       </object>
                     </child>
-                    <child>
+                    <child type="end">
                       <object class="GtkButton" id="export_chat_button">
                         <property name="tooltip-text" translatable="yes">Export chat</property>
+                        <property name="icon-name">folder-download-symbolic</property>
                         <style>
                           <class name="flat"/>
                         </style>
-                        <child>
-                          <object class="AdwButtonContent">
-                            <property name="icon-name">folder-download-symbolic</property>
-                          </object>
-                        </child>
                       </object>
                     </child>
                   </object>
                 </child>
-                <child>
+                <property name="content">
                   <object class="GtkScrolledWindow">
                     <property name="vexpand">true</property>
                     <property name="hexpand">true</property>
@@ -104,7 +87,7 @@
                       </object>
                     </child>
                   </object>
-                </child>
+                </property>
               </object>
             </property>
             <child>
