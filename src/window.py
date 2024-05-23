@@ -995,35 +995,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
-        #CSS
-        css_provider = Gtk.CssProvider()
-        css_provider.load_from_data(b"""
-            .chat_row:not(:selected) {
-
-            }
-            .chat_row:not(:selected):hover {
-
-            }
-            .chat_row box.header {
-              font-size: 14px;
-            }
-            .chat_row box {
-              margin: 0;
-            }
-            .chat_row button {
-              opacity: 0;
-              transition: opacity .05s;
-            }
-            .chat_row:hover button {
-              opacity: 1;
-            }
-        """)
-        display = Gdk.Display.get_default()
-        Gtk.StyleContext.add_provider_for_display(
-            display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-        )
-
-
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.get_application().create_action('send', lambda *_: self.send_message(self), ['<primary>Return'])
