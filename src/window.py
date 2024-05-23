@@ -155,13 +155,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
         message_buffer.insert(message_buffer.get_end_iter(), msg)
         if footer is not None: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer))
 
+        delete_button = Gtk.Button(
+            icon_name = "user-trash-symbolic",
+            css_classes = ["flat", "circular"],
+            valign="end",
+            halign="end",
+            margin_bottom=6,
+            margin_end=6
+        )
+
         message_box = Gtk.Box(
             orientation=1,
             halign='fill',
             css_classes=[None if bot else "card"]
         )
         message_text.set_valign(Gtk.Align.CENTER)
-
 
         if image_base64 is not None:
             image_data = base64.b64decode(image_base64)
@@ -182,7 +190,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
             message_box.append(image)
 
         message_box.append(message_text)
-        self.chat_container.append(message_box)
+        message_overlay = Gtk.Overlay()
+        message_overlay.set_child(message_box)
+        #message_overlay.add_overlay(delete_button)
+        # I don't have the energy right now to do this :)
+        self.chat_container.append(message_overlay)
 
         if bot:
             self.bot_message = message_buffer
