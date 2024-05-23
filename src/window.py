@@ -817,7 +817,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.chat_list_box.remove_all()
         for name, content in self.chats['chats'].items():
             chat_content = Gtk.Box(
-                spacing = 12,
+                spacing = 6,
             )
             chat_row = Gtk.ListBoxRow(
                 css_classes = ["chat_row"],
