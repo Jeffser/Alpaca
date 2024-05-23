@@ -884,11 +884,46 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.ollama_instance is not None: self.stop_instance()
         start_instance(self)
 
+    def reconnect_remote(self, dialog, task=None, entry=None):
+        response = dialog.choose_finish(task)
+        if not task or response == "connect":
+            self.ollama_url = entry.get_text()
+            self.remote_url = self.ollama_url
+            if self.verify_connection() == False: self.connection_error()
+            else:
+                dialog.force_close()
+        elif response == "local":
+            self.run_remote = False
+            self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
+            self.start_instance()
+            if self.verify_connection() == False: self.connection_error()
+            else:
+                self.remote_connection_switch.set_active(False)
+                dialog.force_close()
+        elif response == "close":
+            self.destroy()
+
     def connection_error(self):
         if self.run_remote:
-            self.preferences_dialog.present(self)
-            self.remote_connection_entry.set_css_classes(["error"])
-            self.show_toast("error", 1, self.preferences_dialog)
+            entry = Gtk.Entry(
+                css_classes = ["error"],
+                text = self.ollama_url
+            )
+            dialog = Adw.AlertDialog(
+                heading=_("Connection Error"),
+                body=_("The remote instance has disconnected"),
+                extra_child=entry
+            )
+            entry.connect("activate", lambda entry, dialog=dialog: self.reconnect_remote(dialog=dialog, entry=entry))
+            dialog.add_response("close", _("Close Alpaca"))
+            dialog.add_response("local", _("Use local instance"))
+            dialog.add_response("remote", _("Connect"))
+            dialog.set_response_appearance("remote", Adw.ResponseAppearance.SUGGESTED)
+            dialog.choose(
+                parent = self,
+                cancellable = None,
+                callback = lambda dialog, task, entry=entry: self.reconnect_remote(dialog=dialog, task=task, entry=entry)
+            )
         else:
             self.restart_instance()
             self.show_toast("error", 7, self.main_overlay)
@@ -1013,7 +1048,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
             self.first_time_setup = True
             self.welcome_dialog.present(self)
-        if self.verify_connection() is False: self.connection_error()
+        if self.verify_connection() is False and self.run_remote == False: self.connection_error()
         self.update_list_available_models()
         self.load_history()
         self.update_chat_list()
