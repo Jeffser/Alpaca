@@ -807,7 +807,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         entry.connect("activate", lambda entry, dialog=dialog: self.chat_new(dialog=dialog, entry=entry))
         dialog.add_response("cancel", _("Cancel"))
         dialog.add_response("create", _("Create"))
-        dialog.set_response_appearance("rename", Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_response_appearance("create", Adw.ResponseAppearance.SUGGESTED)
         dialog.choose(
             parent = self,
             cancellable = None,
