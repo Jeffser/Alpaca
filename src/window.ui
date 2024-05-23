@@ -158,18 +158,16 @@
                 <property name="content">
                   <object class="GtkBox"><!--ACTUAL CONTENT-->
                     <property name="orientation">1</property>
-                    <property name="margin-start">24</property>
-                    <property name="margin-end">24</property>
-                    <property name="margin-bottom">24</property>
                     <property name="vexpand">true</property>
                     <property name="hexpand">true</property>
-
                     <child>
                       <object class="GtkScrolledWindow" id="chat_window">
-                        <property name="margin-bottom">12</property>
                         <property name="propagate-natural-height">true</property>
                         <property name="kinetic-scrolling">true</property>
                         <property name="vexpand">true</property>
+                        <style>
+                          <class name="undershoot-bottom"/>
+                        </style>
                         <child>
                           <object class="GtkBox" id="chat_container">
                             <property name="orientation">1</property>
@@ -190,24 +188,32 @@
                       <object class="GtkBox">
                         <property name="orientation">0</property>
                         <property name="spacing">12</property>
+                        <property name="margin-top">12</property>
+                        <property name="margin-bottom">12</property>
+                        <property name="margin-start">12</property>
+                        <property name="margin-end">12</property>
                         <child>
-                          <object class="GtkScrolledWindow">
-                            <property name="has-frame">true</property>
+                          <object class="GtkBox">
                             <style>
-                              <class name="card"/>
-                              <class name="view"/>
+                              <class name="message-input"/>
                             </style>
                             <child>
-                              <object class="GtkTextView" id="message_text_view">
-                                <property name="wrap-mode">word</property>
-                                <property name="margin-top">12</property>
-                                <property name="margin-bottom">12</property>
+                              <object class="GtkScrolledWindow">
                                 <property name="margin-start">12</property>
                                 <property name="margin-end">12</property>
-                                <property name="hexpand">true</property>
-                                <style>
-                                  <class name="view"/>
-                                </style>
+
+                                <child>
+                                  <object class="GtkTextView" id="message_text_view">
+                                    <property name="wrap-mode">word</property>
+                                    <property name="top-margin">6</property>
+                                    <property name="bottom-margin">6</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="hexpand">true</property>
+                                    <style>
+                                      <class name="message-text-view"/>
+                                    </style>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
