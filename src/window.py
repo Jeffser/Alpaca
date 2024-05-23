@@ -855,6 +855,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def start_instance(self):
         self.ollama_instance = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, 'OLLAMA_HOST': f"127.0.0.1:{self.local_ollama_port}", "HOME": self.data_dir}, stderr=subprocess.PIPE, text=True)
+        print("Starting Alpaca's Ollama instance...")
         sleep(1)
         while True:
             err = self.ollama_instance.stderr.readline()
@@ -862,9 +863,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 break
             if 'msg="inference compute"' in err: #Ollama outputs a line with this when it finishes loading, yeah
                 break
+        print("Started Alpaca's Ollama instance")
 
     def stop_instance(self):
         self.ollama_instance.kill()
+        print("Stopped Alpaca's Ollama instance")
 
     def restart_instance(self):
         if self.ollama_instance is not None: self.stop_instance()
@@ -881,8 +884,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def connection_switched(self):
         new_value = self.remote_connection_switch.get_active()
-
-
         if new_value != self.run_remote:
             self.run_remote = new_value
             if self.run_remote:
