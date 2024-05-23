@@ -158,86 +158,104 @@
                 <property name="content">
                   <object class="GtkBox"><!--ACTUAL CONTENT-->
                     <property name="orientation">1</property>
-                    <property name="margin-start">24</property>
-                    <property name="margin-end">24</property>
-                    <property name="margin-bottom">24</property>
                     <property name="vexpand">true</property>
                     <property name="hexpand">true</property>
-
                     <child>
                       <object class="GtkScrolledWindow" id="chat_window">
-                        <property name="margin-bottom">12</property>
                         <property name="propagate-natural-height">true</property>
                         <property name="kinetic-scrolling">true</property>
                         <property name="vexpand">true</property>
+                        <style>
+                          <class name="undershoot-bottom"/>
+                        </style>
                         <child>
-                          <object class="GtkBox" id="chat_container">
-                            <property name="orientation">1</property>
-                            <property name="homogeneous">false</property>
-                            <property name="hexpand">true</property>
-                            <property name="vexpand">true</property>
-                            <property name="spacing">12</property>
-                            <property name="margin-top">12</property>
-                            <property name="margin-bottom">12</property>
-                            <property name="margin-start">12</property>
-                            <property name="margin-end">12</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <child>
-                      <object class="GtkBox">
-                        <property name="orientation">0</property>
-                        <property name="spacing">12</property>
-                        <child>
-                          <object class="GtkScrolledWindow">
-                            <property name="has-frame">true</property>
-                            <style>
-                              <class name="card"/>
-                              <class name="view"/>
-                            </style>
+                          <object class="AdwClamp">
+                            <property name="maximum-size">1000</property>
+                            <property name="tightening-threshold">800</property>
                             <child>
-                              <object class="GtkTextView" id="message_text_view">
-                                <property name="wrap-mode">word</property>
+                              <object class="GtkBox" id="chat_container">
+                                <property name="orientation">1</property>
+                                <property name="homogeneous">false</property>
+                                <property name="hexpand">true</property>
+                                <property name="vexpand">true</property>
+                                <property name="spacing">12</property>
                                 <property name="margin-top">12</property>
                                 <property name="margin-bottom">12</property>
                                 <property name="margin-start">12</property>
                                 <property name="margin-end">12</property>
-                                <property name="hexpand">true</property>
-                                <style>
-                                  <class name="view"/>
-                                </style>
                               </object>
                             </child>
                           </object>
-
                         </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="orientation">1</property>
-                            <property name="spacing">12</property>
-                            <child>
-                              <object class="GtkButton" id="send_button">
-                                <style>
-                                  <class name="suggested-action"/>
-                                </style>
-                                <child>
-                                  <object class="AdwButtonContent">
-                                    <property name="label" translatable="yes">Send</property>
-                                    <property name="icon-name">send-to-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="AdwClamp">
+                        <property name="maximum-size">1000</property>
+                        <property name="tightening-threshold">800</property>
+                      <child>
+                        <object class="GtkBox">
+                          <property name="orientation">0</property>
+                          <property name="spacing">12</property>
+                          <property name="margin-top">12</property>
+                          <property name="margin-bottom">12</property>
+                          <property name="margin-start">12</property>
+                          <property name="margin-end">12</property>
+                          <child>
+                            <object class="GtkBox">
+                              <style>
+                                <class name="message-input"/>
+                              </style>
+                              <child>
+                                <object class="GtkScrolledWindow">
+                                  <property name="margin-start">12</property>
+                                  <property name="margin-end">12</property>
+
+                                  <child>
+                                    <object class="GtkTextView" id="message_text_view">
+                                      <property name="wrap-mode">word</property>
+                                      <property name="top-margin">6</property>
+                                      <property name="bottom-margin">6</property>
+                                      <property name="margin-end">12</property>
+                                      <property name="hexpand">true</property>
+                                      <style>
+                                        <class name="message-text-view"/>
+                                      </style>
+                                    </object>
+                                  </child>
+                                </object>
+                              </child>
+                            </object>
+
                             </child>
                             <child>
-                              <object class="GtkButton" id="image_button">
-                                <property name="sensitive">false</property>
-                                <property name="tooltip-text" translatable="yes">Requires model 'llava' to be selected</property>
+                              <object class="GtkBox">
+                                <property name="orientation">1</property>
+                                <property name="spacing">12</property>
                                 <child>
-                                  <object class="AdwButtonContent">
-                                    <property name="label" translatable="yes">Image</property>
-                                    <property name="icon-name">image-x-generic-symbolic</property>
+                                  <object class="GtkButton" id="send_button">
+                                    <style>
+                                      <class name="suggested-action"/>
+                                    </style>
+                                    <child>
+                                      <object class="AdwButtonContent">
+                                        <property name="label" translatable="yes">Send</property>
+                                        <property name="icon-name">send-to-symbolic</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="image_button">
+                                    <property name="sensitive">false</property>
+                                    <property name="tooltip-text" translatable="yes">Requires model 'llava' to be selected</property>
+                                    <child>
+                                      <object class="AdwButtonContent">
+                                        <property name="label" translatable="yes">Image</property>
+                                        <property name="icon-name">image-x-generic-symbolic</property>
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
                               </object>
@@ -246,6 +264,7 @@
                         </child>
                       </object>
                     </child>
+
 
                   </object><!--END OF CONTENT-->
                 </property>
