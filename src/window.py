@@ -650,9 +650,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 with open(os.path.join(self.config_dir, "chats.json"), "r") as f:
                     self.chats = json.load(f)
                     if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]: self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
-                    if len(list(self.chats["chats"].keys())) == 0: self.chats["chats"]["New chat"] = {"messages": []}
+                    if len(list(self.chats["chats"].keys())) == 0: self.chats["chats"]["New Chat"] = {"messages": []}
             except Exception as e:
-                self.chats = {"chats": {"New chat": {"messages": []}}, "selected_chat": "New chat"}
+                self.chats = {"chats": {"New Chat": {"messages": []}}, "selected_chat": "New Chat"}
             self.load_history_into_chat()
 
     def load_image(self, file_dialog, result):
@@ -710,11 +710,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             del self.chats['chats'][chat_name]
             self.save_history()
             self.update_chat_list()
+            if len(self.chats['chats'])==0:
+                self.chat_new()
 
     def chat_delete_dialog(self, chat_name):
-        if len(self.chats['chats'])==1:
-            self.show_toast("error", 6, self.main_overlay)
-            return
         dialog = Adw.AlertDialog(
             heading=_("Delete Chat"),
             body=_("Are you sure you want to delete '{}'?").format(chat_name),
@@ -741,7 +740,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.save_history()
                 self.update_chat_list()
 
-
     def chat_rename_dialog(self, chat_name:str, body:str, error:bool=False):
         entry = Gtk.Entry(
             css_classes = ["error"] if error else None
@@ -763,8 +761,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
 
     def chat_new(self, dialog=None, task=None, entry=None):
-        if not entry: return
-        chat_name = entry.get_text()
+        #if not entry: return
+        chat_name = None
+        if entry is not None: chat_name = entry.get_text()
         if not chat_name:
             chat_name=_("New Chat")
             if chat_name in self.chats["chats"]:
@@ -773,7 +772,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                         chat_name += f" {i+1}"
                         break
         if not task or dialog.choose_finish(task) == "create":
-            dialog.force_close()
+            if dialog is not None: dialog.force_close()
             if chat_name in self.chats["chats"]: self.chat_new_dialog(_("The name '{}' is already in use").format(chat_name), True)
             else:
                 self.chats["chats"][chat_name] = {"messages": []}
