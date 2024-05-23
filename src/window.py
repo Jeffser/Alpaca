@@ -194,6 +194,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         message_overlay.set_child(message_box)
         #message_overlay.add_overlay(delete_button)
         # I don't have the energy right now to do this :)
+        ## TODO IDEA: I could count which message it is I'm trying to delete, that way I could get the position on the list, this is probably the best approach, good luck me from the future.
         self.chat_container.append(message_overlay)
 
         if bot:
@@ -995,7 +996,27 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GtkSource.init()
         #CSS
         css_provider = Gtk.CssProvider()
-        css_provider.load_from_path(os.path.join(self.app_dir, "share/Alpaca/alpaca/style.css"))
+        css_provider.load_from_data(b"""
+            .chat_row:not(:selected) {
+
+            }
+            .chat_row:not(:selected):hover {
+
+            }
+            .chat_row box.header {
+              font-size: 14px;
+            }
+            .chat_row box {
+              margin: 0;
+            }
+            .chat_row button {
+              opacity: 0;
+              transition: opacity .05s;
+            }
+            .chat_row:hover button, .chat_row:selected button {
+              opacity: 1;
+            }
+        """)
         display = Gdk.Display.get_default()
         Gtk.StyleContext.add_provider_for_display(
             display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
