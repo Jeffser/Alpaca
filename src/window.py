@@ -891,6 +891,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if not task or response == "remote":
             self.ollama_url = entry.get_text()
             self.remote_url = self.ollama_url
+            self.remote_connection_entry.set_text(self.remote_url)
             if self.verify_connection() == False: self.connection_error()
         elif response == "local":
             self.run_remote = False
