@@ -41,12 +41,25 @@
                     <property name="margin-end">12</property>
                     <property name="spacing">12</property>
                     <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">Chats</property>
-                        <property name="hexpand">true</property>
-                        <property name="halign">1</property>
+                      <object class="GtkButton" id="add_chat_button">
+                        <property name="tooltip-text" translatable="yes">New chat</property>
                         <style>
-                          <class name="title-1"/>
+                          <class name="flat"/>
+                        </style>
+                        <child>
+                          <object class="AdwButtonContent">
+                            <property name="icon-name">tab-new-symbolic</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="no">Alpaca</property>
+                        <property name="hexpand">true</property>
+                        <property name="halign">3</property>
+                        <style>
+                          <class name="title-4"/>
                         </style>
                       </object>
                     </child>
@@ -72,19 +85,6 @@
                         <child>
                           <object class="AdwButtonContent">
                             <property name="icon-name">folder-download-symbolic</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="add_chat_button">
-                        <property name="tooltip-text" translatable="yes">New chat</property>
-                        <style>
-                          <class name="flat"/>
-                        </style>
-                        <child>
-                          <object class="AdwButtonContent">
-                            <property name="icon-name">tab-new-symbolic</property>
                           </object>
                         </child>
                       </object>
