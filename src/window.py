@@ -886,20 +886,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def reconnect_remote(self, dialog, task=None, entry=None):
         response = dialog.choose_finish(task)
-        if not task or response == "connect":
+        dialog.force_close()
+        if not task or response == "remote":
             self.ollama_url = entry.get_text()
             self.remote_url = self.ollama_url
             if self.verify_connection() == False: self.connection_error()
-            else:
-                dialog.force_close()
         elif response == "local":
             self.run_remote = False
             self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
             self.start_instance()
             if self.verify_connection() == False: self.connection_error()
-            else:
-                self.remote_connection_switch.set_active(False)
-                dialog.force_close()
+            else: self.remote_connection_switch.set_active(False)
         elif response == "close":
             self.destroy()
 
