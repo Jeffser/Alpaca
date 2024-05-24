@@ -1006,7 +1006,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.get_application().create_action('send', lambda *_: self.send_message(self), ['Return'])
-        #self.get_application().create_action('new_line', lambda *_: self.message_text_view.get_buffer().insert_at_cursor("\n", len("\n")), ['<shift>Return'])
         self.manage_models_button.connect("clicked", self.manage_models_button_activate)
         self.send_button.connect("clicked", self.send_message)
         self.image_button.connect("clicked", self.open_image)
