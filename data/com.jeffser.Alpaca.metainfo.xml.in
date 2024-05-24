@@ -31,6 +31,12 @@
     <category>Development</category>
     <category>Chat</category>
   </categories>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+  <recommends>
+    <control>keyboard</control>
+  </recommends>
   <branding>
     <color type="primary" scheme_preference="light">#8cdef5</color>
     <color type="primary" scheme_preference="dark">#0f2b78</color>
