@@ -19,10 +19,11 @@ Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can man
 - Multiple conversations
 - Notifications
 - Import / Export chats
+- Delete messages
 
 ## Future features!
 - Document recognition
-- Delete / Edit messages
+- Edit messages
 - Snap Package (maybe)
 
 ## Screenies
