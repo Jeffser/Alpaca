@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import logging
 import sys
 import gi
 
@@ -25,6 +26,8 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
 from .window import AlpacaWindow
+
+logger = logging.getLogger(__name__)
 
 class AlpacaApplication(Adw.Application):
     """The main application singleton class."""
@@ -65,5 +68,7 @@ class AlpacaApplication(Adw.Application):
 
 
 def main(version):
+    logging.basicConfig(level=logging.DEBUG)
+
     app = AlpacaApplication()
     return app.run(sys.argv)
