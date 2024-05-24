@@ -212,7 +212,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def verify_if_image_can_be_used(self, pspec=None, user_data=None):
         if self.model_drop_down.get_selected_item() == None: return True
         selected = self.model_drop_down.get_selected_item().get_string().split(":")[0]
-        if selected in ['llava']:
+        if selected in ['llava', 'bakllava', 'moondream', 'llava-llama3']:
             self.image_button.set_sensitive(True)
             return True
         else:
@@ -576,7 +576,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.available_model_list_box.remove_all()
         for name, model_info in available_models.items():
             model = Adw.ActionRow(
-                title = name
+                title = name,
+                subtitle = "Image recognition" if model_info["image"] else None
             )
             link_button = Gtk.Button(
                 icon_name = "web-browser-symbolic",
