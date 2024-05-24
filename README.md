@@ -30,13 +30,6 @@ Login to Ollama instance             |  Chatting with models        |  Managing 
 :-------------------------:|:-------------------------:|:-------------------------:
 ![Screenshot from 2024-05-12 19-58-28](https://jeffser.com/images/alpaca/screenie1.png)  |  ![Screenshot from 2024-05-12 20-01-08](https://jeffser.com/images/alpaca/screenie2.png)  |  ![Screenshot from 2024-05-12 20-01-31](https://jeffser.com/images/alpaca/screenie3.png)
 
-## Thanks
-- [Not-a-dev-stein](https://github.com/not-a-dev-stein) for their help with requesting a new icon and bug reports
-- [TylerLaBree](https://github.com/TylerLaBree) for their requests and ideas
-- [Alexkdeveloper](https://github.com/alexkdeveloper) for their help translating the app to Russian
-- [Imbev](https://github.com/imbev) for their reports and suggestions
-- [Nokse](https://github.com/Nokse22) for their contributions to the UI
-
 ## Preview
 1. Clone repo using Gnome Builder
 2. Press the `run` button
@@ -45,6 +38,15 @@ Login to Ollama instance             |  Chatting with models        |  Managing 
 1. Go to the `releases` page
 2. Download the latest flatpak package
 3. Open it
+
+---
+
+## Thanks
+- [not-a-dev-stein](https://github.com/not-a-dev-stein) for their help with requesting a new icon, bug reports and the translation to Brazilian Portuguese
+- [TylerLaBree](https://github.com/TylerLaBree) for their requests and ideas
+- [Alexkdeveloper](https://github.com/alexkdeveloper) for their help translating the app to Russian
+- [Imbev](https://github.com/imbev) for their reports and suggestions
+- [Nokse](https://github.com/Nokse22) for their contributions to the UI
 
 ## About forks
 If you want to fork this... I mean, I think it would be better if you start from scratch, my code isn't well documented at all, but if you really want to, please give me some credit, that's all I ask for... And maybe a donation (joke)
