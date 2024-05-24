@@ -537,7 +537,13 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;Return</property>
+                <property name="accelerator">&lt;shift&gt;Return</property>
+                <property name="title" translatable="yes">Insert new line</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">Return</property>
                 <property name="title" translatable="yes">Send Message</property>
               </object>
             </child>
