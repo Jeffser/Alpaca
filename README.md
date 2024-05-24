@@ -34,6 +34,7 @@ Login to Ollama instance             |  Chatting with models        |  Managing 
 - [Not-a-dev-stein](https://github.com/not-a-dev-stein) for their help with requesting a new icon and bug reports
 - [TylerLaBree](https://github.com/TylerLaBree) for their requests and ideas
 - [Alexkdeveloper](https://github.com/alexkdeveloper) for their help translating the app to Russian
+- [Imbev](https://github.com/imbev) for their reports and suggestions
 
 ## Preview
 1. Clone repo using Gnome Builder
