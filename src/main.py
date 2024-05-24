@@ -51,7 +51,7 @@ class AlpacaApplication(Adw.Application):
             version='0.7.1',
             developers=['Jeffser https://jeffser.com'],
             designers=['Jeffser https://jeffser.com'],
-            translator_credits='Alex K (Russian) https://github.com/alexkdeveloper\nJeffser (Spanish) https://jeffser.com',
+            translator_credits='Alex K (Russian) https://github.com/alexkdeveloper\nJeffser (Spanish) https://jeffser.com\nDaimar Stein (Brazilian Portuguese) https://github.com/not-a-dev-stein',
             copyright='© 2024 Jeffser\n© 2024 Ollama',
             issue_url='https://github.com/Jeffser/Alpaca/issues')
         about.present(parent=self.props.active_window)
