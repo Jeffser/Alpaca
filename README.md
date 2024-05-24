@@ -35,6 +35,7 @@ Login to Ollama instance             |  Chatting with models        |  Managing 
 - [TylerLaBree](https://github.com/TylerLaBree) for their requests and ideas
 - [Alexkdeveloper](https://github.com/alexkdeveloper) for their help translating the app to Russian
 - [Imbev](https://github.com/imbev) for their reports and suggestions
+- [Nokse](https://github.com/Nokse22) for their contributions to the UI
 
 ## Preview
 1. Clone repo using Gnome Builder
