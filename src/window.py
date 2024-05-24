@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import logging
 import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
@@ -28,6 +29,8 @@ from PIL import Image
 from datetime import datetime
 from .connection_handler import simple_get, simple_delete, stream_post, stream_post_fake
 from .available_models import available_models
+
+logger = logging.getLogger(__name__)
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
@@ -124,6 +127,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     }
 
     def show_toast(self, message_type:str, message_id:int, overlay):
+        logger.debug(f"Showing toast: {self.toast_messages[message_type][message_id]}")
         if message_type not in self.toast_messages or message_id > len(self.toast_messages[message_type] or message_id < 0):
             message_type = "error"
             message_id = 0
@@ -134,6 +138,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         overlay.add_toast(toast)
 
     def show_notification(self, title:str, body:str, only_when_focus:bool, icon:Gio.ThemedIcon=None):
+        log_repr = {'title': title, 'body': body}
+        logger.debug(f"Showing notification: {log_repr}")
         if only_when_focus==False or self.is_active()==False:
             notification = Gio.Notification.new(title)
             notification.set_body(body)
@@ -142,12 +148,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def delete_message(self, message_element):
         message_index = self.current_chat_elements.index(message_element)
+        logger.debug(f"Deleting message: {self.chats['chats'][self.chats['selected_chat']]['messages'][message_index]}")
         del self.chats["chats"][self.chats["selected_chat"]]["messages"][message_index]
         self.chat_container.remove(message_element)
         del self.current_chat_elements[message_index]
         self.save_history()
 
     def show_message(self, msg:str, bot:bool, footer:str=None, image_base64:str=None):
+        log_repr = {'msg':msg, 'bot':bot, 'footer':footer, 'image_base64':image_base64}
+        logger.debug(f"Showing message: {log_repr}")
         message_text = Gtk.TextView(
             editable=False,
             focusable=True,
@@ -211,6 +220,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.bot_message_box = message_box
 
     def verify_if_image_can_be_used(self, pspec=None, user_data=None):
+        logger.debug(f"Verifying if image can be used")
         if self.model_drop_down.get_selected_item() == None: return True
         selected = self.model_drop_down.get_selected_item().get_string().split(":")[0]
         if selected in ['llava']:
@@ -224,6 +234,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             return False
 
     def update_list_local_models(self):
+        logger.debug("Updating list of local models")
         self.local_models = []
         response = simple_get(self.ollama_url + "/api/tags")
         for i in range(self.model_string_list.get_n_items() -1, -1, -1):
@@ -259,6 +270,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.show_toast("error", 2, self.connection_overlay)
 
     def verify_connection(self):
+        logger.debug("Verifying connection")
         response = simple_get(self.ollama_url)
         if response['status'] == 'ok':
             if "Ollama is running" in response['text']:
@@ -270,6 +282,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         return False
 
     def add_code_blocks(self):
+        logger.debug("Adding code blocks")
         text = self.bot_message.get_text(self.bot_message.get_start_iter(), self.bot_message.get_end_iter(), True)
         GLib.idle_add(self.bot_message_view.get_parent().remove, self.bot_message_view)
         # Define a regular expression pattern to match code blocks
@@ -376,6 +389,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]['content'] += data['message']['content']
 
     def run_message(self, messages, model):
+        logger.debug(f"Running message: {messages}, {model}")
         response = stream_post(f"{self.ollama_url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=self.update_bot_message)
         GLib.idle_add(self.add_code_blocks)
         GLib.idle_add(self.send_button.set_css_classes, ["suggested-action"])
@@ -395,6 +409,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(self.connection_error)
 
     def send_message(self, button=None):
+        logger.debug("Send/Stop button has been clicked")
         if button and self.bot_message: #STOP BUTTON
             if self.loading_spinner: self.chat_container.remove(self.loading_spinner)
             if self.verify_if_image_can_be_used(): self.image_button.set_sensitive(True)
@@ -472,6 +487,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             sys.exit()
 
     def pull_model(self, model_name, tag):
+        log_repr = {"model_name":model_name, "tag":tag}
+        logger.debug(f"Pulling model: {log_repr}")
         data = {"name":f"{model_name}:{tag}"}
         response = stream_post(f"{self.ollama_url}/api/pull", data=json.dumps(data), callback=lambda data, model_name=f"{model_name}:{tag}": self.pull_model_update(data, model_name))
         GLib.idle_add(self.update_list_local_models)
@@ -492,11 +509,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
     def stop_pull_model(self, dialog, task, model_name):
+        logger.debug(f"Stopping model pull: {model_name}")
         if dialog.choose_finish(task) == "stop":
             GLib.idle_add(self.pulling_models[model_name].get_parent().remove, self.pulling_models[model_name])
             del self.pulling_models[model_name]
 
     def stop_pull_model_dialog(self, model_name):
+        logger.debug(f"Confirming stop of model pull: {model_name}")
         dialog = Adw.AlertDialog(
             heading=_("Stop Model"),
             body=_("Are you sure you want to stop pulling '{}'?").format(model_name),
@@ -540,6 +559,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             thread.start()
 
     def model_delete_button_activate(self, model_name):
+        logger.debug(f"Confirming model delete: {model_name}")
         dialog = Adw.AlertDialog(
             heading=_("Delete Model"),
             body=_("Are you sure you want to delete '{}'?").format(model_name),
@@ -555,6 +575,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
 
     def model_pull_button_activate(self, model_name):
+        logger.debug(f"Showing model tags for model: {model_name}")
         tag_list = Gtk.StringList()
         for tag in available_models[model_name]['tags']:
             tag_list.append(tag)
@@ -602,6 +623,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.available_model_list_box.append(model)
 
     def manage_models_button_activate(self, button=None):
+        logger.debug("Manage Models button has been clicked")
         self.update_list_local_models()
         self.manage_models_dialog.present(self)
 
@@ -612,9 +634,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else: self.connection_next_button.set_label("Next")
 
     def connection_previous_button_activate(self, button):
+        logger.debug("Connection Previous button has been clicked")
         self.connection_carousel.scroll_to(self.connection_carousel.get_nth_page(self.connection_carousel.get_position()-1), True)
 
     def connection_next_button_activate(self, button):
+        logger.debug("Connection Next button has been clicked")
         if button.get_label() == "Next": self.connection_carousel.scroll_to(self.connection_carousel.get_nth_page(self.connection_carousel.get_position()+1), True)
         else:
             if self.verify_connection():
@@ -624,6 +648,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.show_toast("error", 1, self.connection_overlay)
 
     def clear_chat(self):
+        logger.debug("Clearing chat")
         for widget in list(self.chat_container): self.chat_container.remove(widget)
         self.chats["chats"][self.chats["selected_chat"]]["messages"] = []
 
@@ -633,6 +658,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.save_history()
 
     def clear_chat_dialog(self):
+        logger.debug("Confirming chat clear")
         if self.bot_message is not None:
             self.show_toast("info", 1, self.main_overlay)
             return
@@ -651,6 +677,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
 
     def save_history(self):
+        logger.debug("Saving history")
         with open(os.path.join(self.config_dir, "chats.json"), "w+") as f:
             json.dump(self.chats, f, indent=4)
 
@@ -665,6 +692,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.bot_message = None
 
     def load_history(self):
+        logger.debug("Loading history")
         if os.path.exists(os.path.join(self.config_dir, "chats.json")):
             self.clear_chat()
             try:
@@ -677,6 +705,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.load_history_into_chat()
 
     def load_image(self, file_dialog, result):
+        logger.debug(f"Loading image")
         try: file = file_dialog.open_finish(result)
         except: return
         try:
@@ -702,6 +731,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.show_toast("error", 5, self.main_overlay)
 
     def remove_image(self, dialog, task):
+        logger.debug("Removing image")
         if dialog.choose_finish(task) == 'remove':
             self.image_button.set_css_classes([])
             self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
@@ -709,6 +739,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def open_image(self, button):
         if "destructive-action" in button.get_css_classes():
+            logger.debug("Confirming image removal")
             dialog = Adw.AlertDialog(
                 heading=_("Remove Image"),
                 body=_("Are you sure you want to remove image?"),
@@ -727,6 +758,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             file_dialog.open(self, None, self.load_image)
 
     def chat_delete(self, dialog, task, chat_name):
+        logger.debug(f"Deleting chat: {chat_name}")
         if dialog.choose_finish(task) == "delete":
             del self.chats['chats'][chat_name]
             self.save_history()
@@ -735,6 +767,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.chat_new()
 
     def chat_delete_dialog(self, chat_name):
+        logger.debug(f"Confirming chat deletion: {chat_name}")
         dialog = Adw.AlertDialog(
             heading=_("Delete Chat"),
             body=_("Are you sure you want to delete '{}'?").format(chat_name),
@@ -823,6 +856,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
 
     def update_chat_list(self):
+        logger.debug("Updating chat list")
         self.chat_list_box.remove_all()
         for name, content in self.chats['chats'].items():
             chat_content = Gtk.Box(
@@ -871,11 +905,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
                         break
 
     def show_preferences_dialog(self):
+        logger.debug("Showing preferences dialog")
         self.preferences_dialog.present(self)
 
     def start_instance(self):
+        logger.debug("Starting Alpaca's Ollama instance")
         self.ollama_instance = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, 'OLLAMA_HOST': f"127.0.0.1:{self.local_ollama_port}", "HOME": self.data_dir}, stderr=subprocess.PIPE, text=True)
-        print("Starting Alpaca's Ollama instance...")
         sleep(1)
         while True:
             err = self.ollama_instance.stderr.readline()
@@ -883,13 +918,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 break
             if 'msg="inference compute"' in err: #Ollama outputs a line with this when it finishes loading, yeah
                 break
-        print("Started Alpaca's Ollama instance")
 
     def stop_instance(self):
+        logger.debug("Stopping Alpaca's Ollama instance")
         self.ollama_instance.kill()
-        print("Stopped Alpaca's Ollama instance")
 
     def restart_instance(self):
+        logger.debug("Restarting Alpaca's Ollama instance")
         if self.ollama_instance is not None: self.stop_instance()
         start_instance(self)
 
@@ -936,6 +971,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.show_toast("error", 7, self.main_overlay)
 
     def connection_switched(self):
+        logger.debug("Remote connection switch has been toggled")
         new_value = self.remote_connection_switch.get_active()
         if new_value != self.run_remote:
             self.run_remote = new_value
@@ -951,6 +987,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.update_list_local_models()
 
     def change_remote_url(self, entry):
+        logger.debug("Changing remote url")
         self.remote_url = entry.get_text()
         if self.run_remote:
             self.ollama_url = self.remote_url
@@ -975,6 +1012,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
 
     def export_current_chat(self):
+        logger.debug("Exporting current chat")
         file_dialog = Gtk.FileDialog(initial_name=f"{self.chats['selected_chat']}.json")
         file_dialog.save(parent=self, cancellable=None, callback=self.on_export_current_chat)
 
@@ -992,10 +1030,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.show_toast("good", 3, self.main_overlay)
 
     def import_chat(self):
+        logger.debug("Importing chat")
         file_dialog = Gtk.FileDialog(default_filter=self.file_filter_json)
         file_dialog.open(self, None, self.on_chat_imported)
 
     def switch_run_on_background(self):
+        logger.debug("Run on background switch has been toggled")
         self.run_on_background = self.background_switch.get_active()
         self.set_hide_on_close(self.run_on_background)
         self.verify_connection()
@@ -1045,6 +1085,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.start_instance()
             self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
             self.first_time_setup = True
+            logger.debug("Showing welcome dialog")
             self.welcome_dialog.present(self)
         if self.verify_connection() is False and self.run_remote == False: self.connection_error()
         self.update_list_available_models()
