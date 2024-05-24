@@ -53,6 +53,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     local_ollama_instance = None
     local_models = []
     pulling_models = {}
+    current_chat_elements = [] #Used for deleting
     chats = {"chats": {_("New Chat"): {"messages": []}}, "selected_chat": "New Chat"}
     attached_image = {"path": None, "base64": None}
     first_time_setup = False
@@ -139,6 +140,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if icon: notification.set_icon(icon)
             self.get_application().send_notification(None, notification)
 
+    def delete_message(self, message_element):
+        message_index = self.current_chat_elements.index(message_element)
+        del self.chats["chats"][self.chats["selected_chat"]]["messages"][message_index]
+        self.chat_container.remove(message_element)
+        del self.current_chat_elements[message_index]
+        self.save_history()
+
     def show_message(self, msg:str, bot:bool, footer:str=None, image_base64:str=None):
         message_text = Gtk.TextView(
             editable=False,
@@ -157,7 +165,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         delete_button = Gtk.Button(
             icon_name = "user-trash-symbolic",
-            css_classes = ["flat", "circular"],
+            css_classes = ["flat", "circular", "delete-message-button"],
             valign="end",
             halign="end",
             margin_bottom=6,
@@ -190,12 +198,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             message_box.append(image)
 
         message_box.append(message_text)
-        message_overlay = Gtk.Overlay()
-        message_overlay.set_child(message_box)
-        #message_overlay.add_overlay(delete_button)
-        # I don't have the energy right now to do this :)
-        ## TODO IDEA: I could count which message it is I'm trying to delete, that way I could get the position on the list, this is probably the best approach, good luck me from the future.
-        self.chat_container.append(message_overlay)
+        self.current_chat_elements.append(Gtk.Overlay(css_classes=["message"]))
+        self.current_chat_elements[-1].set_child(message_box)
+
+        delete_button.connect("clicked", lambda button, element=self.current_chat_elements[-1]: self.delete_message(element))
+        self.current_chat_elements[-1].add_overlay(delete_button)
+        self.chat_container.append(self.current_chat_elements[-1])
 
         if bot:
             self.bot_message = message_buffer
