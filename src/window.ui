@@ -222,7 +222,7 @@
                                 <child>
                                   <object class="GtkButton" id="image_button">
                                     <property name="sensitive">false</property>
-                                    <property name="tooltip-text" translatable="yes">Requires model 'llava' to be selected</property>
+                                    <property name="tooltip-text" translatable="yes">Only available on selected models</property>
                                     <child>
                                       <object class="AdwButtonContent">
                                         <property name="label" translatable="yes">Image</property>
