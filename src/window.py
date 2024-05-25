@@ -112,7 +112,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             _("Please select a model before chatting"),
             _("Chat cannot be cleared while receiving a message"),
             _("That tag is already being pulled"),
-            _("That tag has been pulled already")
+            _("That tag has been pulled already"),
+            _("Code copied to the clipboard")
         ],
         "good": [
             _("Model deleted successfully"),
@@ -121,6 +122,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             _("Chat imported successfully")
         ]
     }
+
+    style_manager = Adw.StyleManager()
 
     def show_toast(self, message_type:str, message_id:int, overlay):
         if message_type not in self.toast_messages or message_id > len(self.toast_messages[message_type] or message_id < 0):
@@ -174,7 +177,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         message_box = Gtk.Box(
             orientation=1,
             halign='fill',
-            css_classes=[None if bot else "card"]
+            css_classes=[None if bot else "card"],
+            margin_start=0 if bot else 50,
         )
         message_text.set_valign(Gtk.Align.CENTER)
 
@@ -301,8 +305,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     wrap_mode= Gtk.WrapMode.WORD,
                     margin_top=12,
                     margin_bottom=12,
-                    margin_start=12,
-                    margin_end=12,
                     hexpand=True,
                     css_classes=["flat"]
                 )
@@ -310,7 +312,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
                 footer = None
                 if part['text'].split("\n")[-1] == parts[-1]['text'].split("\n")[-1]:
-                    footer = "\n\n<small>" + part['text'].split('\n')[-1] + "</small>"
+                    footer = "\n<small>" + part['text'].split('\n')[-1] + "</small>"
                     part['text'] = '\n'.join(part['text'].split("\n")[:-1])
 
                 part['text'] = part['text'].replace("\n* ", "\n• ")
@@ -336,17 +338,50 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.bot_message_box.append(message_text)
             else:
                 language = GtkSource.LanguageManager.get_default().get_language(part['language'])
-                buffer = GtkSource.Buffer.new_with_language(language)
+                if language:
+                    buffer = GtkSource.Buffer.new_with_language(language)
+                else:
+                    buffer = GtkSource.Buffer()
                 buffer.set_text(part['text'])
-                buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('classic-dark'))
+                if self.style_manager.get_dark():
+                    source_style = GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark')
+                else:
+                    source_style = GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita')
+                buffer.set_style_scheme(source_style)
                 source_view = GtkSource.View(
-                    auto_indent=True, indent_width=4, buffer=buffer, show_line_numbers=True
+                    auto_indent=True, indent_width=4, buffer=buffer, show_line_numbers=True,
+                    top_margin=6, bottom_margin=6, left_margin=12, right_margin=12
                 )
                 source_view.set_editable(False)
-                source_view.get_style_context().add_class("card")
-                self.bot_message_box.append(source_view)
+                code_block_box = Gtk.Box(css_classes=["card"], orientation=1, overflow=1)
+                title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=3)
+                title_box.append(Gtk.Label(label=language.get_name() if language else part['language'], hexpand=True, xalign=0))
+                copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"])
+                copy_button.connect("clicked", self.on_copy_code_clicked, buffer)
+                title_box.append(copy_button)
+                code_block_box.append(title_box)
+                code_block_box.append(Gtk.Separator())
+                code_block_box.append(source_view)
+                self.bot_message_box.append(code_block_box)
+                self.style_manager.connect("notify::dark", self.on_theme_changed, buffer)
         self.bot_message = None
         self.bot_message_box = None
+
+    def on_theme_changed(self, manager, dark, buffer):
+        print(buffer)
+        if manager.get_dark():
+            source_style = GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark')
+        else:
+            source_style = GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita')
+        buffer.set_style_scheme(source_style)
+
+    def on_copy_code_clicked(self, btn, text_buffer):
+        clipboard = Gdk.Display().get_default().get_clipboard()
+        start = text_buffer.get_start_iter()
+        end = text_buffer.get_end_iter()
+        text = text_buffer.get_text(start, end, False)
+        clipboard.set(text)
+        self.show_toast("info", 4, self.main_overlay)
 
     def update_bot_message(self, data):
         if self.bot_message is None:
