@@ -368,7 +368,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.bot_message_box = None
 
     def on_theme_changed(self, manager, dark, buffer):
-        print(buffer)
         if manager.get_dark():
             source_style = GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark')
         else:
