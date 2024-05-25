@@ -686,13 +686,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     new_width = int((max_size / height) * width)
                 resized_img = img.resize((new_width, new_height), Image.LANCZOS)
                 with BytesIO() as output:
-                    resized_img.save(output, format="JPEG")
+                    resized_img.save(output, format="PNG")
                     image_data = output.getvalue()
                 self.attached_image["base64"] = base64.b64encode(image_data).decode("utf-8")
 
             self.image_button.set_css_classes(["destructive-action"])
             self.image_button.get_child().set_icon_name("edit-delete-symbolic")
         except Exception as e:
+            print(e)
             self.show_toast("error", 5, self.main_overlay)
 
     def remove_image(self, dialog, task):
