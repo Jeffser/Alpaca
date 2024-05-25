@@ -693,7 +693,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.image_button.set_css_classes(["destructive-action"])
             self.image_button.get_child().set_icon_name("edit-delete-symbolic")
         except Exception as e:
-            print(e)
             self.show_toast("error", 5, self.main_overlay)
 
     def remove_image(self, dialog, task):
