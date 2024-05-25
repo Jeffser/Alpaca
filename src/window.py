@@ -65,12 +65,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     bot_message_box : Gtk.Box = None
     bot_message_view : Gtk.TextView = None
     welcome_dialog = Gtk.Template.Child()
-    connection_carousel = Gtk.Template.Child()
-    connection_previous_button = Gtk.Template.Child()
-    connection_next_button = Gtk.Template.Child()
+    welcome_carousel = Gtk.Template.Child()
+    welcome_previous_button = Gtk.Template.Child()
+    welcome_next_button = Gtk.Template.Child()
     main_overlay = Gtk.Template.Child()
     manage_models_overlay = Gtk.Template.Child()
-    connection_overlay = Gtk.Template.Child()
     chat_container = Gtk.Template.Child()
     chat_window = Gtk.Template.Child()
     message_text_view = Gtk.Template.Child()
@@ -213,7 +212,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def verify_if_image_can_be_used(self, pspec=None, user_data=None):
         if self.model_drop_down.get_selected_item() == None: return True
         selected = self.model_drop_down.get_selected_item().get_string().split(":")[0]
-        if selected in ['llava']:
+        if selected in ['llava', 'bakllava', 'moondream', 'llava-llama3']:
             self.image_button.set_sensitive(True)
             return True
         else:
@@ -256,7 +255,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             return
         else:
             self.connection_error()
-            self.show_toast("error", 2, self.connection_overlay)
 
     def verify_connection(self):
         response = simple_get(self.ollama_url)
@@ -391,7 +389,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.attached_image = {"path": None, "base64": None}
         # GLib.idle_add(self.message_text_view.set_sensitive, True)
         if response['status'] == 'error':
-            GLib.idle_add(self.show_toast, 'error', 1, self.connection_overlay)
             GLib.idle_add(self.connection_error)
 
     def send_message(self, button=None):
@@ -459,7 +456,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if response['status'] == 'ok':
                 self.show_toast("good", 0, self.manage_models_overlay)
             else:
-                self.show_toast("error", 3, self.connection_overlay)
                 self.manage_models_dialog.close()
                 self.connection_error()
 
@@ -483,7 +479,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             del self.pulling_models[f"{model_name}:{tag}"]
         else:
             GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(f"{model_name}:{tag}"), True, Gio.ThemedIcon.new("dialog-error-symbolic"))
-            GLib.idle_add(self.show_toast, "error", 4, self.connection_overlay)
             GLib.idle_add(self.pulling_models[f"{model_name}:{tag}"].get_parent().remove, self.pulling_models[f"{model_name}:{tag}"])
             del self.pulling_models[f"{model_name}:{tag}"]
             GLib.idle_add(self.manage_models_dialog.close)
@@ -581,7 +576,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.available_model_list_box.remove_all()
         for name, model_info in available_models.items():
             model = Adw.ActionRow(
-                title = name
+                title = name,
+                subtitle = "Image recognition" if model_info["image"] else None
             )
             link_button = Gtk.Button(
                 icon_name = "web-browser-symbolic",
@@ -605,23 +601,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.update_list_local_models()
         self.manage_models_dialog.present(self)
 
-    def connection_carousel_page_changed(self, carousel, index):
-        if index == 0: self.connection_previous_button.set_sensitive(False)
-        else: self.connection_previous_button.set_sensitive(True)
-        if index == carousel.get_n_pages()-1: self.connection_next_button.set_label("Connect")
-        else: self.connection_next_button.set_label("Next")
+    def welcome_carousel_page_changed(self, carousel, index):
+        if index == 0: self.welcome_previous_button.set_sensitive(False)
+        else: self.welcome_previous_button.set_sensitive(True)
+        if index == carousel.get_n_pages()-1: self.welcome_next_button.set_label("Connect")
+        else: self.welcome_next_button.set_label("Next")
 
-    def connection_previous_button_activate(self, button):
-        self.connection_carousel.scroll_to(self.connection_carousel.get_nth_page(self.connection_carousel.get_position()-1), True)
+    def welcome_previous_button_activate(self, button):
+        self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()-1), True)
 
-    def connection_next_button_activate(self, button):
-        if button.get_label() == "Next": self.connection_carousel.scroll_to(self.connection_carousel.get_nth_page(self.connection_carousel.get_position()+1), True)
+    def welcome_next_button_activate(self, button):
+        if button.get_label() == "Next": self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
-            if self.verify_connection():
-                self.welcome_dialog.force_close()
-            else:
+            self.welcome_dialog.force_close()
+            if not self.verify_connection():
                 self.connection_error()
-                self.show_toast("error", 1, self.connection_overlay)
 
     def clear_chat(self):
         for widget in list(self.chat_container): self.chat_container.remove(widget)
@@ -692,7 +686,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     new_width = int((max_size / height) * width)
                 resized_img = img.resize((new_width, new_height), Image.LANCZOS)
                 with BytesIO() as output:
-                    resized_img.save(output, format="JPEG")
+                    resized_img.save(output, format="PNG")
                     image_data = output.getvalue()
                 self.attached_image["base64"] = base64.b64encode(image_data).decode("utf-8")
 
@@ -1013,9 +1007,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.set_default_widget(self.send_button)
         self.model_drop_down.connect("notify", self.verify_if_image_can_be_used)
         self.chat_list_box.connect("row-selected", self.chat_changed)
-        self.connection_carousel.connect("page-changed", self.connection_carousel_page_changed)
-        self.connection_previous_button.connect("clicked", self.connection_previous_button_activate)
-        self.connection_next_button.connect("clicked", self.connection_next_button_activate)
+        self.welcome_carousel.connect("page-changed", self.welcome_carousel_page_changed)
+        self.welcome_previous_button.connect("clicked", self.welcome_previous_button_activate)
+        self.welcome_next_button.connect("clicked", self.welcome_next_button_activate)
 
         self.export_chat_button.connect("clicked", lambda button : self.export_current_chat())
         self.import_chat_button.connect("clicked", lambda button : self.import_chat())

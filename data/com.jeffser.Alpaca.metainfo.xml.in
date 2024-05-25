@@ -44,7 +44,7 @@
   <screenshots>
     <screenshot type="default">
       <image>https://jeffser.com/images/alpaca/screenie1.png</image>
-      <caption>Welcome dialog</caption>
+      <caption>A conversation showing code highlight</caption>
     </screenshot>
     <screenshot>
       <image>https://jeffser.com/images/alpaca/screenie2.png</image>
@@ -60,6 +60,31 @@
   <url type="homepage">https://github.com/Jeffser/Alpaca</url>
   <url type="donation">https://github.com/sponsors/Jeffser</url>
   <releases>
+    <release version="0.8.1" date="2024-05-24">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.8.1</url>
+      <description>
+        <p>Quick fix</p>
+        <ul>
+          <li>Updated Spanish translation</li>
+          <li>Added compatibility for PNG</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.8.0" date="2024-05-24">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.8.0</url>
+      <description>
+        <p>New Update</p>
+        <ul>
+          <li>Updated model list</li>
+          <li>Added image recognition to more models</li>
+          <li>Added Brazilian Portuguese translation (Thanks Daimaar Stein)</li>
+          <li>Refined the general UI (Thanks Nokse22)</li>
+          <li>Added 'delete message' feature</li>
+          <li>Added metadata so that software distributors know that the app is compatible with mobile</li>
+          <li>Changed 'send' shortcut to just the return/enter key (to add a new line use shift+return)</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.1" date="2024-05-23">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.7.1</url>
       <description>
