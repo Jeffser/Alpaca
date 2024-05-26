@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-26 00:53-0600\n"
+"POT-Creation-Date: 2024-05-26 00:57-0600\n"
 "PO-Revision-Date: 2024-05-23 23:29-0600\n"
 "Last-Translator: Daimar Stein <daimarstein@pm.me>\n"
 "Language-Team: \n"
@@ -94,10 +94,9 @@ msgid "Managing models"
 msgstr "Gerenciando modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:69
-#: data/com.jeffser.Alpaca.metainfo.xml.in:80
 #, fuzzy
-msgid "Quick fix"
-msgstr "Consertos Rápidos"
+msgid "Nice Update"
+msgstr "Nova Atualização"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:71
 #, fuzzy
@@ -112,6 +111,11 @@ msgstr "Otimização geral"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:73
 msgid "Metadata fixes"
 msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:80
+#, fuzzy
+msgid "Quick fix"
+msgstr "Consertos Rápidos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:82
 #, fuzzy
@@ -611,11 +615,11 @@ msgstr "Conversa importada com sucesso"
 
 #: src/window.py:129
 msgid "Upload image"
-msgstr ""
+msgstr "Enviar Imagem"
 
 #: src/window.py:133 src/window.ui:231
 msgid "Only available on selected models"
-msgstr ""
+msgstr "Disponível apenas em modelos selecionados"
 
 #: src/window.py:542
 msgid "Task Complete"
