@@ -413,7 +413,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
                 footer = None
                 if part['text'].split("\n")[-1] == parts[-1]['text'].split("\n")[-1]:
-                    footer = "\n<small>" + part['text'].split('\n')[-1] + "</small>"
+                    footer = "\n\n<small>" + part['text'].split('\n')[-1] + "</small>"
                     part['text'] = '\n'.join(part['text'].split("\n")[:-1])
 
                 part['text'] = part['text'].replace("\n* ", "\n• ")
