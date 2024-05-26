@@ -359,7 +359,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.verify_if_image_can_be_used()
             return
         else:
-            print("huh 2")
             self.connection_error()
 
     def verify_connection(self):
@@ -603,7 +602,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.available_model_list_box.append(model)
 
     def save_history(self):
-        print("Saving...")
         with open(os.path.join(self.config_dir, "chats.json"), "w+") as f:
             json.dump(self.chats, f, indent=4)
 
