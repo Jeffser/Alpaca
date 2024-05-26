@@ -194,8 +194,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def welcome_carousel_page_changed(self, carousel, index):
         if index == 0: self.welcome_previous_button.set_sensitive(False)
         else: self.welcome_previous_button.set_sensitive(True)
-        if index == carousel.get_n_pages()-1: self.welcome_next_button.set_label("Connect")
-        else: self.welcome_next_button.set_label("Next")
+        if index == carousel.get_n_pages()-1: self.welcome_next_button.set_label(_("Close"))
+        else: self.welcome_next_button.set_label(_("Next"))
 
     @Gtk.Template.Callback()
     def welcome_previous_button_activate(self, button):
@@ -236,6 +236,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if self.verify_connection() == False:
                 entry.set_css_classes(["error"])
                 self.show_toast("error", 1, self.preferences_dialog)
+
+    @Gtk.Template.Callback()
+    def pull_featured_model(self, button):
+        action_row = button.get_parent().get_parent().get_parent()
+        button.get_parent().remove(button)
+        model = f"{action_row.get_title().lower()}:latest"
+        action_row.set_subtitle(_("Pulling in the background..."))
+        spinner = Gtk.Spinner()
+        spinner.set_spinning(True)
+        action_row.add_suffix(spinner)
+        action_row.set_sensitive(False)
+        self.pull_model(model)
+
 
     def show_toast(self, message_type:str, message_id:int, overlay):
         if message_type not in self.toast_messages or message_id > len(self.toast_messages[message_type] or message_id < 0):
