@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-26 00:53-0600\n"
+"POT-Creation-Date: 2024-05-26 14:41-0600\n"
 "PO-Revision-Date: 2024-05-19 19:44-0600\n"
 "Last-Translator: Jeffry Samuel Eduarte Rojas <jeffrysamuer@gmail.com>\n"
 "Language-Team: Spanish <es@tp.org.es>\n"
@@ -98,10 +98,9 @@ msgid "Managing models"
 msgstr "Gestionando modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:69
-#: data/com.jeffser.Alpaca.metainfo.xml.in:80
 #, fuzzy
-msgid "Quick fix"
-msgstr "Arreglo rápido"
+msgid "Nice Update"
+msgstr "Buena Actualización"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:71
 #, fuzzy
@@ -116,6 +115,11 @@ msgstr "Optimización general"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:73
 msgid "Metadata fixes"
 msgstr "Correciones de metadata"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:80
+#, fuzzy
+msgid "Quick fix"
+msgstr "Arreglo rápido"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:82
 #, fuzzy
@@ -532,7 +536,7 @@ msgstr "0.1.1"
 msgid "This is the first public version of Alpaca"
 msgstr "Esta es la primera versión publica de Alpaca"
 
-#: src/window.py:54 src/window.py:624 src/window.py:626
+#: src/window.py:54 src/window.py:637 src/window.py:639
 msgid "New Chat"
 msgstr "Nuevo Chat"
 
@@ -617,19 +621,32 @@ msgstr "Subir imagen"
 msgid "Only available on selected models"
 msgstr "Solo disponible en modelos especificos"
 
-#: src/window.py:542
+#: src/window.py:197
+msgid "Close"
+msgstr ""
+
+#: src/window.py:198 src/window.ui:393
+msgid "Next"
+msgstr "Siguiente"
+
+#: src/window.py:245
+#, fuzzy
+msgid "Pulling in the background..."
+msgstr "Ejecutar en el fondo"
+
+#: src/window.py:555
 msgid "Task Complete"
 msgstr "Tarea completada"
 
-#: src/window.py:542
+#: src/window.py:555
 msgid "Model '{}' pulled successfully."
 msgstr "El modelo '{}' fue descargado exitosamente"
 
-#: src/window.py:547
+#: src/window.py:560
 msgid "Pull Model Error"
 msgstr "Error Descargando Modelo"
 
-#: src/window.py:547
+#: src/window.py:560
 msgid "Failed to pull model '{}' due to network error."
 msgstr "No se pudo descargar el modelo '{}' debido a un error de red"
 
@@ -665,11 +682,11 @@ msgstr "Enviar"
 msgid "Image"
 msgstr "Imagen"
 
-#: src/window.ui:258 src/window.ui:458 src/window.ui:516
+#: src/window.ui:258 src/window.ui:546 src/window.ui:604
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: src/window.ui:261 src/window.ui:500
+#: src/window.ui:261 src/window.ui:588
 msgid "General"
 msgstr "General"
 
@@ -705,10 +722,6 @@ msgstr "Ejecutar en el fondo"
 msgid "Previous"
 msgstr "Anterior"
 
-#: src/window.ui:393
-msgid "Next"
-msgstr "Siguiente"
-
 #: src/window.ui:420
 msgid "Welcome to Alpaca"
 msgstr "Bienvenido a Alpaca"
@@ -732,51 +745,79 @@ msgstr ""
 "un modelo de IA. Por favor sea precavido y revise el codigo cuidadosamente "
 "antes de correrlo"
 
-#: src/window.ui:454
+#: src/window.ui:452
+#, fuzzy
+msgid "Featured Models"
+msgstr "Funcionalidades"
+
+#: src/window.ui:453
+msgid ""
+"Alpaca works locally on your device, to start chatting you'll need an AI "
+"model, you can either pull models from this list or the 'Manage Models' menu "
+"later."
+msgstr ""
+
+#: src/window.ui:463
+msgid "Built by Meta"
+msgstr ""
+
+#: src/window.ui:480
+msgid "Built by Google DeepMind"
+msgstr ""
+
+#: src/window.ui:497
+msgid "Built by Microsoft"
+msgstr ""
+
+#: src/window.ui:514
+msgid "Multimodal AI with image recognition"
+msgstr ""
+
+#: src/window.ui:542
 msgid "Clear Chat"
 msgstr "Limpiar Chat"
 
-#: src/window.ui:462
+#: src/window.ui:550
 msgid "Keyboard Shortcuts"
 msgstr "Atajos de Teclado"
 
-#: src/window.ui:466
+#: src/window.ui:554
 msgid "About Alpaca"
 msgstr "Sobre Alpaca"
 
-#: src/window.ui:474
+#: src/window.ui:562
 msgid "Remove"
 msgstr "Remover"
 
-#: src/window.ui:504
+#: src/window.ui:592
 msgid "Close application"
 msgstr "Cerrar aplicación"
 
-#: src/window.ui:510
+#: src/window.ui:598
 msgid "Clear chat"
 msgstr "Limpiar chat"
 
-#: src/window.ui:522
+#: src/window.ui:610
 msgid "Show shortcuts window"
 msgstr "Mostrar ventana de atajos"
 
-#: src/window.ui:529
+#: src/window.ui:617
 msgid "Editor"
 msgstr "Editor"
 
-#: src/window.ui:533
+#: src/window.ui:621
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/window.ui:539
+#: src/window.ui:627
 msgid "Paste"
 msgstr "Pegar"
 
-#: src/window.ui:545
+#: src/window.ui:633
 msgid "Insert new line"
 msgstr "Saltar línea"
 
-#: src/window.ui:551
+#: src/window.ui:639
 msgid "Send Message"
 msgstr "Enviar Mensaje"
 
