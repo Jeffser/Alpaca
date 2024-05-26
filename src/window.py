@@ -603,6 +603,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.available_model_list_box.append(model)
 
     def save_history(self):
+        print("Saving...")
         with open(os.path.join(self.config_dir, "chats.json"), "w+") as f:
             json.dump(self.chats, f, indent=4)
 
@@ -618,14 +619,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def load_history(self):
         if os.path.exists(os.path.join(self.config_dir, "chats.json")):
-            self.clear_chat()
             try:
                 with open(os.path.join(self.config_dir, "chats.json"), "r") as f:
                     self.chats = json.load(f)
                     if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]: self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
-                    if len(list(self.chats["chats"].keys())) == 0: self.chats["chats"]["New Chat"] = {"messages": []}
+                    if len(list(self.chats["chats"].keys())) == 0: self.chats["chats"][_("New Chat")] = {"messages": []}
             except Exception as e:
-                self.chats = {"chats": {"New Chat": {"messages": []}}, "selected_chat": "New Chat"}
+                self.chats = {"chats": {_("New Chat"): {"messages": []}}, "selected_chat": _("New Chat")}
             self.load_history_into_chat()
 
     def load_image(self, file_dialog, result):
