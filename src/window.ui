@@ -36,7 +36,7 @@
                     <child type="start">
                       <object class="GtkButton" id="add_chat_button">
                         <property name="tooltip-text" translatable="yes">New chat</property>
-                        <property name="icon-name">tab-new-symbolic</property>
+                        <property name="icon-name">chat-message-new-symbolic</property>
                         <style>
                           <class name="flat"/>
                         </style>
@@ -68,6 +68,7 @@
                     <property name="hexpand">true</property>
                     <child>
                       <object class="GtkListBox" id="chat_list_box">
+                        <signal name="row-selected" handler="chat_changed"/>
                         <property name="selection-mode">single</property>
                         <style>
                           <class name="navigation-sidebar"></class>
@@ -95,6 +96,7 @@
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkDropDown" id="model_drop_down">
+                            <signal name="notify" handler="verify_if_image_can_be_used"/>
                             <property name="enable-search">true</property>
                             <property name="model">
                               <object class="GtkStringList" id="model_string_list">
@@ -106,6 +108,7 @@
                         </child>
                         <child>
                           <object class="GtkButton" id="manage_models_button">
+                            <signal name="clicked" handler="manage_models_button_activate"/>
                             <property name="tooltip-text" translatable="yes">Manage models</property>
                             <child>
                               <object class="AdwButtonContent">
@@ -209,6 +212,7 @@
                                 <property name="spacing">12</property>
                                 <child>
                                   <object class="GtkButton" id="send_button">
+                                    <signal name="clicked" handler="send_message"/>
                                     <style>
                                       <class name="suggested-action"/>
                                     </style>
@@ -222,6 +226,7 @@
                                 </child>
                                 <child>
                                   <object class="GtkButton" id="image_button">
+                                    <signal name="clicked" handler="open_image"/>
                                     <property name="sensitive">false</property>
                                     <property name="tooltip-text" translatable="yes">Only available on selected models</property>
                                     <child>
@@ -266,6 +271,7 @@
               </child>
               <child>
                 <object class="AdwEntryRow" id="remote_connection_entry">
+                  <signal name="apply" handler="change_remote_url"/>
                   <property name="title" translatable="yes">URL of remote instance</property>
                   <property name="show-apply-button">true</property>
                 </object>
@@ -367,6 +373,7 @@
               <property name="margin-bottom">5</property>
               <child type="start">
                 <object class="GtkButton" id="welcome_previous_button">
+                  <signal name="clicked" handler="welcome_previous_button_activate"/>
                   <property name="tooltip-text" translatable="yes">Previous</property>
                   <property name="label">Previous</property>
                   <property name="sensitive">false</property>
@@ -382,6 +389,7 @@
               </child>
               <child type="end">
                 <object class="GtkButton" id="welcome_next_button">
+                  <signal name="clicked" handler="welcome_next_button_activate"/>
                   <property name="tooltip-text" translatable="yes">Next</property>
                   <property name="label">Next</property>
                   <style>
@@ -394,6 +402,7 @@
 
           <child>
             <object class="AdwCarousel" id="welcome_carousel">
+              <signal name="page-changed" handler="welcome_carousel_page_changed"/>
               <property name="hexpand">true</property>
               <property name="vexpand">true</property>
               <property name="allow-long-swipes">true</property>

@@ -1,6 +1,8 @@
 # connectionhandler.py
 import json, requests
 
+url = None
+
 def simple_get(connection_url:str) -> dict:
     try:
         response = requests.get(connection_url)
@@ -37,25 +39,3 @@ def stream_post(connection_url:str, data, callback:callable) -> dict:
     except Exception as e:
         return {"status": "error", "status_code": 0}
 
-
-from time import sleep
-def stream_post_fake(connection_url:str, data, callback:callable) -> dict:
-    data = {
-        "status": "pulling manifest"
-    }
-    callback(data)
-    for i in range(2):
-        for a in range(11):
-            sleep(.1)
-            data = {
-              "status": f"downloading digestname {i}",
-              "digest": f"digestname {i}",
-              "total": 500,
-              "completed": a * 50
-            }
-            callback(data)
-    for msg in ["verifying sha256 digest", "writting manifest", "removing any unused layers", "success"]:
-        sleep(.1)
-        data = {"status": msg}
-        callback(data)
-    return {"status": "ok", "status_code": 200}

@@ -26,8 +26,8 @@ from time import sleep
 from io import BytesIO
 from PIL import Image
 from datetime import datetime
-from .connection_handler import simple_get, simple_delete, stream_post, stream_post_fake
 from .available_models import available_models
+from . import dialogs, local_instance, connection_handler
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
@@ -46,17 +46,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     #Variables
     run_on_background = False
-    ollama_url = ""
     remote_url = ""
     run_remote = False
-    local_ollama_port = 11435
-    local_ollama_instance = None
     local_models = []
     pulling_models = {}
     current_chat_elements = [] #Used for deleting
     chats = {"chats": {_("New Chat"): {"messages": []}}, "selected_chat": "New Chat"}
     attached_image = {"path": None, "base64": None}
-    first_time_setup = False
 
     #Elements
     preferences_dialog = Gtk.Template.Child()
@@ -80,7 +76,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_drop_down = Gtk.Template.Child()
     model_string_list = Gtk.Template.Child()
 
-    manage_models_button = Gtk.Template.Child()
     manage_models_dialog = Gtk.Template.Child()
     pulling_model_list_box = Gtk.Template.Child()
     local_model_list_box = Gtk.Template.Child()
@@ -213,6 +208,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.bot_message_view = message_text
             self.bot_message_box = message_box
 
+    @Gtk.Template.Callback()
     def verify_if_image_can_be_used(self, pspec=None, user_data=None):
         if self.model_drop_down.get_selected_item() == None: return True
         selected = self.model_drop_down.get_selected_item().get_string().split(":")[0]
@@ -228,7 +224,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def update_list_local_models(self):
         self.local_models = []
-        response = simple_get(self.ollama_url + "/api/tags")
+        response = connection_handler.simple_get(connection_handler.url + "/api/tags")
         for i in range(self.model_string_list.get_n_items() -1, -1, -1):
             self.model_string_list.remove(i)
         if response['status'] == 'ok':
@@ -248,7 +244,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     valign = 3,
                     css_classes = ["error"]
                 )
-                button.connect("clicked", lambda button=button, model_name=model["name"]: self.model_delete_button_activate(model_name))
+                button.connect("clicked", lambda button=button, model_name=model["name"]: dialogs.delete_model(self, model_name))
                 model_row.add_suffix(button)
                 self.local_model_list_box.append(model_row)
 
@@ -258,15 +254,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.verify_if_image_can_be_used()
             return
         else:
+            print("huh 2")
             self.connection_error()
 
     def verify_connection(self):
-        response = simple_get(self.ollama_url)
+        response = connection_handler.simple_get(connection_handler.url)
         if response['status'] == 'ok':
             if "Ollama is running" in response['text']:
                 with open(os.path.join(self.config_dir, "server.json"), "w+") as f:
-                    json.dump({'remote_url': self.remote_url, 'run_remote': self.run_remote, 'local_port': self.local_ollama_port, 'run_on_background': self.run_on_background}, f)
-                #self.message_text_view.grab_focus_without_selecting()
+                    json.dump({'remote_url': self.remote_url, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background}, f)
                 self.update_list_local_models()
                 return True
         return False
@@ -408,7 +404,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]['content'] += data['message']['content']
 
     def run_message(self, messages, model):
-        response = stream_post(f"{self.ollama_url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=self.update_bot_message)
+        response = connection_handler.stream_post(f"{connection_handler.url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=self.update_bot_message)
         GLib.idle_add(self.add_code_blocks)
         GLib.idle_add(self.send_button.set_css_classes, ["suggested-action"])
         GLib.idle_add(self.send_button.get_child().set_label, "Send")
@@ -425,6 +421,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if response['status'] == 'error':
             GLib.idle_add(self.connection_error)
 
+    @Gtk.Template.Callback()
     def send_message(self, button=None):
         if button and self.bot_message: #STOP BUTTON
             if self.loading_spinner: self.chat_container.remove(self.loading_spinner)
@@ -483,16 +480,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
             thread.start()
 
-    def delete_model(self, dialog, task, model_name):
-        if dialog.choose_finish(task) == "delete":
-            response = simple_delete(self.ollama_url + "/api/delete", data={"name": model_name})
-            self.update_list_local_models()
-            if response['status'] == 'ok':
-                self.show_toast("good", 0, self.manage_models_overlay)
-            else:
-                self.manage_models_dialog.close()
-                self.connection_error()
-
     def pull_model_update(self, data, model_name):
         if model_name in list(self.pulling_models.keys()):
             GLib.idle_add(self.pulling_models[model_name].set_subtitle, data['status'] + (f" | {round(data['completed'] / data['total'] * 100, 2)}%" if 'completed' in data and 'total' in data else ""))
@@ -501,110 +488,48 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 GLib.idle_add(self.pulling_model_list_box.set_visible, False)
             sys.exit()
 
-    def pull_model(self, model_name, tag):
-        data = {"name":f"{model_name}:{tag}"}
-        response = stream_post(f"{self.ollama_url}/api/pull", data=json.dumps(data), callback=lambda data, model_name=f"{model_name}:{tag}": self.pull_model_update(data, model_name))
+    def pull_model_process(self, model):
+        data = {"name":model}
+        response = connection_handler.stream_post(f"{connection_handler.url}/api/pull", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
         GLib.idle_add(self.update_list_local_models)
 
         if response['status'] == 'ok':
-            GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(f"{model_name}:{tag}"), True, Gio.ThemedIcon.new("emblem-ok-symbolic"))
+            GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model), True, Gio.ThemedIcon.new("emblem-ok-symbolic"))
             GLib.idle_add(self.show_toast, "good", 1, self.manage_models_overlay)
-            GLib.idle_add(self.pulling_models[f"{model_name}:{tag}"].get_parent().remove, self.pulling_models[f"{model_name}:{tag}"])
-            del self.pulling_models[f"{model_name}:{tag}"]
+            GLib.idle_add(self.pulling_models[model].get_parent().remove, self.pulling_models[model])
+            del self.pulling_models[model]
         else:
-            GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(f"{model_name}:{tag}"), True, Gio.ThemedIcon.new("dialog-error-symbolic"))
-            GLib.idle_add(self.pulling_models[f"{model_name}:{tag}"].get_parent().remove, self.pulling_models[f"{model_name}:{tag}"])
-            del self.pulling_models[f"{model_name}:{tag}"]
+            GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(model), True, Gio.ThemedIcon.new("dialog-error-symbolic"))
+            GLib.idle_add(self.pulling_models[model].get_parent().remove, self.pulling_models[model])
+            del self.pulling_models[model]
             GLib.idle_add(self.manage_models_dialog.close)
             GLib.idle_add(self.connection_error)
         if len(list(self.pulling_models.keys())) == 0:
             GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
-    def stop_pull_model(self, dialog, task, model_name):
-        if dialog.choose_finish(task) == "stop":
-            GLib.idle_add(self.pulling_models[model_name].get_parent().remove, self.pulling_models[model_name])
-            del self.pulling_models[model_name]
-
-    def stop_pull_model_dialog(self, model_name):
-        dialog = Adw.AlertDialog(
-            heading=_("Stop Model"),
-            body=_("Are you sure you want to stop pulling '{}'?").format(model_name),
-            close_response="cancel"
+    def pull_model(self, model):
+        if model in list(self.pulling_models.keys()):
+            self.show_toast("info", 3, self.manage_models_overlay)
+            return
+        if model in self.local_models:
+            self.show_toast("info", 4, self.manage_models_overlay)
+            return
+        self.pulling_model_list_box.set_visible(True)
+        model_row = Adw.ActionRow(
+            title = model
         )
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("stop", _("Stop"))
-        dialog.set_response_appearance("stop", Adw.ResponseAppearance.DESTRUCTIVE)
-        dialog.choose(
-            parent = self.manage_models_dialog,
-            cancellable = None,
-            callback = lambda dialog, task, model_name = model_name: self.stop_pull_model(dialog, task, model_name)
+        thread = threading.Thread(target=self.pull_model_process, kwargs={"model": model})
+        self.pulling_models[model] = model_row
+        button = Gtk.Button(
+            icon_name = "media-playback-stop-symbolic",
+            vexpand = False,
+            valign = 3,
+            css_classes = ["error"]
         )
-
-    def pull_model_start(self, dialog, task, model_name, tag_drop_down):
-        if dialog.choose_finish(task) == "pull":
-            tag = tag_drop_down.get_selected_item().get_string()
-            if f"{model_name}:{tag}" in list(self.pulling_models.keys()):
-                self.show_toast("info", 3, self.manage_models_overlay)
-                return
-            if f"{model_name}:{tag}" in self.local_models:
-                self.show_toast("info", 4, self.manage_models_overlay)
-                return
-            #self.pull_model_status_page.set_description(f"{model_name}:{tag}")
-            self.pulling_model_list_box.set_visible(True)
-            model_row = Adw.ActionRow(
-                title = f"{model_name}:{tag}",
-                subtitle = ""
-            )
-            thread = threading.Thread(target=self.pull_model, args=(model_name, tag))
-            self.pulling_models[f"{model_name}:{tag}"] = model_row
-            button = Gtk.Button(
-                icon_name = "media-playback-stop-symbolic",
-                vexpand = False,
-                valign = 3,
-                css_classes = ["error"]
-            )
-            button.connect("clicked", lambda button, model_name=f"{model_name}:{tag}" : self.stop_pull_model_dialog(model_name))
-            model_row.add_suffix(button)
-            self.pulling_model_list_box.append(model_row)
-            thread.start()
-
-    def model_delete_button_activate(self, model_name):
-        dialog = Adw.AlertDialog(
-            heading=_("Delete Model"),
-            body=_("Are you sure you want to delete '{}'?").format(model_name),
-            close_response="cancel"
-        )
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("delete", _("Delete"))
-        dialog.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
-        dialog.choose(
-            parent = self.manage_models_dialog,
-            cancellable = None,
-            callback = lambda dialog, task, model_name = model_name: self.delete_model(dialog, task, model_name)
-        )
-
-    def model_pull_button_activate(self, model_name):
-        tag_list = Gtk.StringList()
-        for tag in available_models[model_name]['tags']:
-            tag_list.append(tag)
-        tag_drop_down = Gtk.DropDown(
-            enable_search=True,
-            model=tag_list
-        )
-        dialog = Adw.AlertDialog(
-            heading=_("Pull Model"),
-            body=_("Please select a tag to pull '{}'").format(model_name),
-            extra_child=tag_drop_down,
-            close_response="cancel"
-        )
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("pull", _("Pull"))
-        dialog.set_response_appearance("pull", Adw.ResponseAppearance.SUGGESTED)
-        dialog.choose(
-            parent = self.manage_models_dialog,
-            cancellable = None,
-            callback = lambda dialog, task, model_name = model_name, tag_drop_down = tag_drop_down: self.pull_model_start(dialog, task, model_name, tag_drop_down)
-        )
+        button.connect("clicked", lambda button, model_name=model : dialogs.stop_pull_model(self, model_name))
+        model_row.add_suffix(button)
+        self.pulling_model_list_box.append(model_row)
+        thread.start()
 
     def update_list_available_models(self):
         self.available_model_list_box.remove_all()
@@ -626,57 +551,34 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 css_classes = ["accent"]
             )
             link_button.connect("clicked", lambda button=link_button, link=model_info["url"]: webbrowser.open(link))
-            pull_button.connect("clicked", lambda button=pull_button, model_name=name: self.model_pull_button_activate(model_name))
+            pull_button.connect("clicked", lambda button=pull_button, model_name=name: dialogs.pull_model(self, model_name))
             model.add_suffix(link_button)
             model.add_suffix(pull_button)
             self.available_model_list_box.append(model)
 
+    @Gtk.Template.Callback()
     def manage_models_button_activate(self, button=None):
         self.update_list_local_models()
         self.manage_models_dialog.present(self)
 
+    @Gtk.Template.Callback()
     def welcome_carousel_page_changed(self, carousel, index):
         if index == 0: self.welcome_previous_button.set_sensitive(False)
         else: self.welcome_previous_button.set_sensitive(True)
         if index == carousel.get_n_pages()-1: self.welcome_next_button.set_label("Connect")
         else: self.welcome_next_button.set_label("Next")
 
+    @Gtk.Template.Callback()
     def welcome_previous_button_activate(self, button):
         self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()-1), True)
 
+    @Gtk.Template.Callback()
     def welcome_next_button_activate(self, button):
         if button.get_label() == "Next": self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
             self.welcome_dialog.force_close()
             if not self.verify_connection():
                 self.connection_error()
-
-    def clear_chat(self):
-        for widget in list(self.chat_container): self.chat_container.remove(widget)
-        self.chats["chats"][self.chats["selected_chat"]]["messages"] = []
-
-    def clear_chat_dialog_response(self, dialog, task):
-        if dialog.choose_finish(task) == "clear":
-            self.clear_chat()
-            self.save_history()
-
-    def clear_chat_dialog(self):
-        if self.bot_message is not None:
-            self.show_toast("info", 1, self.main_overlay)
-            return
-        dialog = Adw.AlertDialog(
-            heading=_("Clear Chat"),
-            body=_("Are you sure you want to clear the chat?"),
-            close_response="cancel"
-        )
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("clear", _("Clear"))
-        dialog.set_response_appearance("clear", Adw.ResponseAppearance.DESTRUCTIVE)
-        dialog.choose(
-            parent = self,
-            cancellable = None,
-            callback = self.clear_chat_dialog_response
-        )
 
     def save_history(self):
         with open(os.path.join(self.config_dir, "chats.json"), "w+") as f:
@@ -729,165 +631,107 @@ class AlpacaWindow(Adw.ApplicationWindow):
         except Exception as e:
             self.show_toast("error", 5, self.main_overlay)
 
-    def remove_image(self, dialog, task):
-        if dialog.choose_finish(task) == 'remove':
-            self.image_button.set_css_classes([])
-            self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
-            self.attached_image = {"path": None, "base64": None}
+    def remove_image(self):
+        self.image_button.set_css_classes([])
+        self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
+        self.attached_image = {"path": None, "base64": None}
 
+    @Gtk.Template.Callback()
     def open_image(self, button):
         if "destructive-action" in button.get_css_classes():
-            dialog = Adw.AlertDialog(
-                heading=_("Remove Image"),
-                body=_("Are you sure you want to remove image?"),
-                close_response="cancel"
-            )
-            dialog.add_response("cancel", _("Cancel"))
-            dialog.add_response("remove", _("Remove"))
-            dialog.set_response_appearance("remove", Adw.ResponseAppearance.DESTRUCTIVE)
-            dialog.choose(
-                parent = self,
-                cancellable = None,
-                callback = self.remove_image
-            )
+            dialogs.remove_image(self)
         else:
             file_dialog = Gtk.FileDialog(default_filter=self.file_filter_image)
             file_dialog.open(self, None, self.load_image)
 
-    def chat_delete(self, dialog, task, chat_name):
-        if dialog.choose_finish(task) == "delete":
-            del self.chats['chats'][chat_name]
-            self.save_history()
-            self.update_chat_list()
-            if len(self.chats['chats'])==0:
-                self.chat_new()
+    def generate_numbered_chat_name(self, chat_name) -> str:
+        if chat_name in self.chats["chats"]:
+            for i in range(len(list(self.chats["chats"].keys()))):
+                if chat_name + f" {i+1}" not in self.chats["chats"]:
+                    chat_name += f" {i+1}"
+                    break
+        return chat_name
 
-    def chat_delete_dialog(self, chat_name):
-        dialog = Adw.AlertDialog(
-            heading=_("Delete Chat"),
-            body=_("Are you sure you want to delete '{}'?").format(chat_name),
-            close_response="cancel"
-        )
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("delete", _("Delete"))
-        dialog.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
-        dialog.choose(
-            parent = self,
-            cancellable = None,
-            callback = lambda dialog, task, chat_name=chat_name: self.chat_delete(dialog, task, chat_name)
-        )
-    def chat_rename(self, dialog=None, task=None, old_chat_name:str="", entry=None):
-        if not entry: return
-        new_chat_name = entry.get_text()
-        if old_chat_name == new_chat_name: return
-        if new_chat_name and (not task or dialog.choose_finish(task) == "rename"):
-            dialog.force_close()
-            if new_chat_name in self.chats["chats"]: self.chat_rename_dialog(old_chat_name, f"The name '{new_chat_name}' is already in use", True)
-            else:
-                self.chats["chats"][new_chat_name] = self.chats["chats"][old_chat_name]
-                del self.chats["chats"][old_chat_name]
-                self.save_history()
-                self.update_chat_list()
+    def clear_chat(self):
+        for widget in list(self.chat_container): self.chat_container.remove(widget)
+        self.chats["chats"][self.chats["selected_chat"]]["messages"] = []
+        self.save_history()
 
-    def chat_rename_dialog(self, chat_name:str, body:str, error:bool=False):
-        entry = Gtk.Entry(
-            css_classes = ["error"] if error else None
-        )
-        dialog = Adw.AlertDialog(
-            heading=_("Rename Chat"),
-            body=body,
-            extra_child=entry,
-            close_response="cancel"
-        )
-        entry.connect("activate", lambda entry, dialog=dialog, old_chat_name=chat_name: self.chat_rename(dialog=dialog, old_chat_name=old_chat_name, entry=entry))
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("rename", _("Rename"))
-        dialog.set_response_appearance("rename", Adw.ResponseAppearance.SUGGESTED)
-        dialog.choose(
-            parent = self,
-            cancellable = None,
-            callback = lambda dialog, task, old_chat_name=chat_name, entry=entry: self.chat_rename(dialog=dialog, task=task, old_chat_name=old_chat_name, entry=entry)
-        )
+    def delete_chat(self, chat_name):
+        del self.chats['chats'][chat_name]
+        self.save_history()
+        self.update_chat_list()
+        if len(self.chats['chats'])==0:
+            self.chat_new()
 
-    def chat_new(self, dialog=None, task=None, entry=None):
-        #if not entry: return
-        chat_name = None
-        if entry is not None: chat_name = entry.get_text()
-        if not chat_name:
-            chat_name=_("New Chat")
-            if chat_name in self.chats["chats"]:
-                for i in range(len(list(self.chats["chats"].keys()))):
-                    if chat_name + f" {i+1}" not in self.chats["chats"]:
-                        chat_name += f" {i+1}"
-                        break
-        if not task or dialog.choose_finish(task) == "create":
-            if dialog is not None: dialog.force_close()
-            if chat_name in self.chats["chats"]: self.chat_new_dialog(_("The name '{}' is already in use").format(chat_name), True)
-            else:
-                self.chats["chats"][chat_name] = {"messages": []}
-                self.chats["selected_chat"] = chat_name
-                self.save_history()
-                self.update_chat_list()
-                self.load_history_into_chat()
+    def rename_chat(self, old_chat_name, new_chat_name, label_element):
+        new_chat_name = self.generate_numbered_chat_name(new_chat_name)
+        self.chats["chats"][new_chat_name] = self.chats["chats"][old_chat_name]
+        del self.chats["chats"][old_chat_name]
+        label_element.set_label(new_chat_name)
+        self.save_history()
 
-    def chat_new_dialog(self, body:str, error:bool=False):
-        entry = Gtk.Entry(
-            css_classes = ["error"] if error else None
+    def new_chat(self, chat_name):
+        chat_name = self.generate_numbered_chat_name(chat_name)
+        self.chats["chats"][chat_name] = {"messages": []}
+        self.chats["selected_chat"] = chat_name
+        self.save_history()
+        self.new_chat_element(chat_name)
+
+    def stop_pull_model(self, model_name):
+        self.pulling_models[model_name].get_parent().remove(self.pulling_models[model_name])
+        del self.pulling_models[model_name]
+
+    def delete_model(self, model_name):
+        response = connection_handler.simple_delete(connection_handler.url + "/api/delete", data={"name": model_name})
+        self.update_list_local_models()
+        if response['status'] == 'ok':
+            self.show_toast("good", 0, self.manage_models_overlay)
+        else:
+            self.manage_models_dialog.close()
+            self.connection_error()
+
+    def new_chat_element(self, chat_name):
+        chat_content = Gtk.Box(
+            spacing=6
         )
-        dialog = Adw.AlertDialog(
-            heading=_("Create Chat"),
-            body=body,
-            extra_child=entry,
-            close_response="cancel"
+        chat_row = Gtk.ListBoxRow(
+            css_classes = ["chat_row"],
+            height_request = 45,
+            child = chat_content,
+            name = chat_name
         )
-        entry.connect("activate", lambda entry, dialog=dialog: self.chat_new(dialog=dialog, entry=entry))
-        dialog.add_response("cancel", _("Cancel"))
-        dialog.add_response("create", _("Create"))
-        dialog.set_response_appearance("rename", Adw.ResponseAppearance.SUGGESTED)
-        dialog.choose(
-            parent = self,
-            cancellable = None,
-            callback = lambda dialog, task, entry=entry: self.chat_new(dialog=dialog, task=task, entry=entry)
+        chat_label = Gtk.Label(
+            label=chat_name,
+            hexpand=True,
+            halign=1
         )
+        button_delete = Gtk.Button(
+            icon_name = "user-trash-symbolic",
+            vexpand = False,
+            valign = 3,
+            css_classes = ["error", "flat"]
+        )
+        button_delete.connect("clicked", lambda button, chat_name=chat_name: dialogs.delete_chat(self, chat_name))
+        button_rename = Gtk.Button(
+            icon_name = "document-edit-symbolic",
+            vexpand = False,
+            valign = 3,
+            css_classes = ["accent", "flat"]
+        )
+        button_rename.connect("clicked", lambda button, chat_name=chat_name, label_element=chat_label: dialogs.rename_chat(self, chat_name, label_element))
+        chat_content.append(chat_label)
+        chat_content.append(button_delete)
+        chat_content.append(button_rename)
+        self.chat_list_box.append(chat_row)
+        if chat_name==self.chats["selected_chat"]: self.chat_list_box.select_row(chat_row)
 
     def update_chat_list(self):
         self.chat_list_box.remove_all()
         for name, content in self.chats['chats'].items():
-            chat_content = Gtk.Box(
-                spacing = 6,
-            )
-            chat_row = Gtk.ListBoxRow(
-                css_classes = ["chat_row"],
-                height_request = 45,
-                child=chat_content,
-                name = name
-            )
-            chat_label = Gtk.Label(
-                label=name,
-                hexpand=True,
-                halign=1
-            )
-            button_delete = Gtk.Button(
-                icon_name = "user-trash-symbolic",
-                vexpand = False,
-                valign = 3,
-                css_classes = ["error", "flat"]
-            )
-            button_delete.connect("clicked", lambda button, chat_name=name: self.chat_delete_dialog(chat_name=chat_name))
-            button_rename = Gtk.Button(
-                icon_name = "document-edit-symbolic",
-                vexpand = False,
-                valign = 3,
-                css_classes = ["accent", "flat"]
-            )
-            button_rename.connect("clicked", lambda button, chat_name=name: self.chat_rename_dialog(chat_name=chat_name, body=f"Renaming '{chat_name}'", error=False))
+            self.new_chat_element(name)
 
-            chat_content.append(chat_label)
-            chat_content.append(button_delete)
-            chat_content.append(button_rename)
-            self.chat_list_box.append(chat_row)
-            if name==self.chats["selected_chat"]: self.chat_list_box.select_row(chat_row)
-
+    @Gtk.Template.Callback()
     def chat_changed(self, listbox, row):
         if row and row.get_name() != self.chats["selected_chat"]:
             self.chats["selected_chat"] = row.get_name()
@@ -901,66 +745,24 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def show_preferences_dialog(self):
         self.preferences_dialog.present(self)
 
-    def start_instance(self):
-        self.ollama_instance = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, 'OLLAMA_HOST': f"127.0.0.1:{self.local_ollama_port}", "HOME": self.data_dir}, stderr=subprocess.PIPE, text=True)
-        print("Starting Alpaca's Ollama instance...")
-        sleep(1)
-        while True:
-            err = self.ollama_instance.stderr.readline()
-            if err == '' and self.ollama_instance.poll() is not None:
-                break
-            if 'msg="inference compute"' in err: #Ollama outputs a line with this when it finishes loading, yeah
-                break
-        print("Started Alpaca's Ollama instance")
+    def connect_remote(self, url):
+        connection_handler.url = url
+        self.remote_url = connection_handler.url
+        self.remote_connection_entry.set_text(self.remote_url)
+        if self.verify_connection() == False: self.connection_error()
 
-    def stop_instance(self):
-        self.ollama_instance.kill()
-        print("Stopped Alpaca's Ollama instance")
-
-    def restart_instance(self):
-        if self.ollama_instance is not None: self.stop_instance()
-        start_instance(self)
-
-    def reconnect_remote(self, dialog, task=None, entry=None):
-        response = dialog.choose_finish(task)
-        dialog.force_close()
-        if not task or response == "remote":
-            self.ollama_url = entry.get_text()
-            self.remote_url = self.ollama_url
-            self.remote_connection_entry.set_text(self.remote_url)
-            if self.verify_connection() == False: self.connection_error()
-        elif response == "local":
-            self.run_remote = False
-            self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
-            self.start_instance()
-            if self.verify_connection() == False: self.connection_error()
-            else: self.remote_connection_switch.set_active(False)
-        elif response == "close":
-            self.destroy()
+    def connect_local(self):
+        self.run_remote = False
+        connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
+        local_instance.start(self.data_dir)
+        if self.verify_connection() == False: self.connection_error()
+        else: self.remote_connection_switch.set_active(False)
 
     def connection_error(self):
         if self.run_remote:
-            entry = Gtk.Entry(
-                css_classes = ["error"],
-                text = self.ollama_url
-            )
-            dialog = Adw.AlertDialog(
-                heading=_("Connection Error"),
-                body=_("The remote instance has disconnected"),
-                extra_child=entry
-            )
-            entry.connect("activate", lambda entry, dialog=dialog: self.reconnect_remote(dialog=dialog, entry=entry))
-            dialog.add_response("close", _("Close Alpaca"))
-            dialog.add_response("local", _("Use local instance"))
-            dialog.add_response("remote", _("Connect"))
-            dialog.set_response_appearance("remote", Adw.ResponseAppearance.SUGGESTED)
-            dialog.choose(
-                parent = self,
-                cancellable = None,
-                callback = lambda dialog, task, entry=entry: self.reconnect_remote(dialog=dialog, task=task, entry=entry)
-            )
+            dialogs.reconnect_remote(self)
         else:
-            self.restart_instance()
+            local_instance.restart()
             self.show_toast("error", 7, self.main_overlay)
 
     def connection_switched(self):
@@ -968,20 +770,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if new_value != self.run_remote:
             self.run_remote = new_value
             if self.run_remote:
-                self.ollama_url = self.remote_url
+                connection_handler.url = self.remote_url
                 if self.verify_connection() == False: self.connection_error()
-                else: self.stop_instance()
+                else: local_instance.stop(self)
             else:
-                self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
-                self.start_instance()
+                connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
+                local_instance.start(self.data_dir)
                 if self.verify_connection() == False: self.connection_error()
-        self.update_list_available_models()
-        self.update_list_local_models()
+            self.update_list_available_models()
 
+    @Gtk.Template.Callback()
     def change_remote_url(self, entry):
         self.remote_url = entry.get_text()
         if self.run_remote:
-            self.ollama_url = self.remote_url
+            connection_handler.url = self.remote_url
             if self.verify_connection() == False:
                 entry.set_css_classes(["error"])
                 self.show_toast("error", 1, self.preferences_dialog)
@@ -1033,46 +835,36 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GtkSource.init()
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
+        self.get_application().create_action('clear', lambda *_: dialogs.clear_chat(self), ['<primary>e'])
         self.get_application().create_action('send', lambda *_: self.send_message(self), ['Return'])
-        self.manage_models_button.connect("clicked", self.manage_models_button_activate)
-        self.send_button.connect("clicked", self.send_message)
-        self.image_button.connect("clicked", self.open_image)
-        self.add_chat_button.connect("clicked", lambda button : self.chat_new_dialog("Enter name for new chat", False))
-        self.set_default_widget(self.send_button)
-        self.model_drop_down.connect("notify", self.verify_if_image_can_be_used)
-        self.chat_list_box.connect("row-selected", self.chat_changed)
-        self.welcome_carousel.connect("page-changed", self.welcome_carousel_page_changed)
-        self.welcome_previous_button.connect("clicked", self.welcome_previous_button_activate)
-        self.welcome_next_button.connect("clicked", self.welcome_next_button_activate)
+        self.add_chat_button.connect("clicked", lambda button : dialogs.new_chat(self))
 
         self.export_chat_button.connect("clicked", lambda button : self.export_current_chat())
         self.import_chat_button.connect("clicked", lambda button : self.import_chat())
-        #Preferences
+
         self.remote_connection_entry.connect("entry-activated", lambda entry : entry.set_css_classes([]))
-        self.remote_connection_entry.connect("apply", self.change_remote_url)
         self.remote_connection_switch.connect("notify", lambda pspec, user_data : self.connection_switched())
         self.background_switch.connect("notify", lambda pspec, user_data : self.switch_run_on_background())
         if os.path.exists(os.path.join(self.config_dir, "server.json")):
             with open(os.path.join(self.config_dir, "server.json"), "r") as f:
                 data = json.load(f)
                 self.run_remote = data['run_remote']
-                self.local_ollama_port = data['local_port']
+                local_instance.port = data['local_port']
                 self.remote_url = data['remote_url']
                 self.run_on_background = data['run_on_background']
                 self.background_switch.set_active(self.run_on_background)
                 self.set_hide_on_close(self.run_on_background)
                 self.remote_connection_entry.set_text(self.remote_url)
                 if self.run_remote:
-                    self.ollama_url = data['remote_url']
+                    connection_handler.url = data['remote_url']
                     self.remote_connection_switch.set_active(True)
                 else:
                     self.remote_connection_switch.set_active(False)
-                    self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
-                    self.start_instance()
+                    connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
+                    local_instance.start(self.data_dir)
         else:
-            self.start_instance()
-            self.ollama_url = f"http://127.0.0.1:{self.local_ollama_port}"
-            self.first_time_setup = True
+            local_instance.start(self.data_dir)
+            connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
             self.welcome_dialog.present(self)
         if self.verify_connection() is False and self.run_remote == False: self.connection_error()
         self.update_list_available_models()

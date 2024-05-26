@@ -31,7 +31,9 @@ alpaca_sources = [
   'main.py',
   'window.py',
   'connection_handler.py',
-  'available_models.py'
+  'available_models.py',
+  'dialogs.py',
+  'local_instance.py'
 ]
 
 install_data(alpaca_sources, install_dir: moduledir)

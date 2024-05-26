@@ -33,7 +33,6 @@ class AlpacaApplication(Adw.Application):
         super().__init__(application_id='com.jeffser.Alpaca',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
-        self.create_action('clear', lambda *_: AlpacaWindow.clear_chat_dialog(self.props.active_window), ['<primary>e'])
         self.create_action('preferences', lambda *_: AlpacaWindow.show_preferences_dialog(self.props.active_window), ['<primary>p'])
         self.create_action('about', self.on_about_action)
 
