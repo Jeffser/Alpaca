@@ -126,9 +126,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         selected = self.model_drop_down.get_selected_item().get_string().split(":")[0]
         if selected in ['llava', 'bakllava', 'moondream', 'llava-llama3']:
             self.image_button.set_sensitive(True)
+            self.image_button.set_tooltip_text(_("Upload image"))
             return True
         else:
             self.image_button.set_sensitive(False)
+            self.image_button.set_tooltip_text(_("Only available on selected models"))
             self.image_button.set_css_classes([])
             self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
             self.attached_image = {"path": None, "base64": None}
@@ -763,7 +765,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.run_remote:
             dialogs.reconnect_remote(self)
         else:
-            local_instance.restart()
+            local_instance.stop()
+            local_instance.start(self.data_dir)
             self.show_toast("error", 7, self.main_overlay)
 
     def connection_switched(self):
@@ -773,7 +776,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if self.run_remote:
                 connection_handler.url = self.remote_url
                 if self.verify_connection() == False: self.connection_error()
-                else: local_instance.stop(self)
+                else: local_instance.stop()
             else:
                 connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
                 local_instance.start(self.data_dir)

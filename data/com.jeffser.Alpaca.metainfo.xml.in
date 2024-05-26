@@ -5,15 +5,16 @@
 	<project_license>GPL-3.0-or-later</project_license>
   <launchable type="desktop-id">com.jeffser.Alpaca.desktop</launchable>
   <name>Alpaca</name>
-  <summary>Chat with local AI models</summary>
+  <summary>Chat with local AI models powered by Ollama</summary>
 	<description>
     <p>An Ollama client</p>
     <p>Features</p>
 	  <ul>
+	    <li>Built in Ollama instance</li>
 	    <li>Talk to multiple models in the same conversation</li>
 	    <li>Pull and delete models from the app</li>
 	    <li>Have multiple conversations</li>
-	    <li>Image recognition (Only available with LLaVA Model)</li>
+	    <li>Image recognition (Only available with compatible models)</li>
 	    <li>Import and export chats</li>
 	  </ul>
     <p>Disclaimer</p>
@@ -36,6 +37,8 @@
   </requires>
   <recommends>
     <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
   </recommends>
   <branding>
     <color type="primary" scheme_preference="light">#8cdef5</color>
