@@ -182,8 +182,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.chat_container.append(self.loading_spinner)
             self.show_message("", True)
 
-            vadjustment = self.chat_window.get_vadjustment()
-            vadjustment.set_value(vadjustment.get_upper())
             thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
             thread.start()
 
@@ -464,6 +462,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 code_block_box.append(source_view)
                 self.bot_message_box.append(code_block_box)
                 self.style_manager.connect("notify::dark", self.on_theme_changed, buffer)
+        vadjustment = self.chat_window.get_vadjustment()
+        vadjustment.set_value(vadjustment.get_upper())
         self.bot_message = None
         self.bot_message_box = None
 
