@@ -686,9 +686,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def new_chat(self, chat_name):
         chat_name = self.generate_numbered_chat_name(chat_name)
         self.chats["chats"][chat_name] = {"messages": []}
-        self.chats["selected_chat"] = chat_name
+        #self.chats["selected_chat"] = chat_name
         self.save_history()
-        self.new_chat_element(chat_name)
+        self.new_chat_element(chat_name, True)
 
     def stop_pull_model(self, model_name):
         self.pulling_models[model_name].get_parent().remove(self.pulling_models[model_name])
@@ -703,7 +703,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.manage_models_dialog.close()
             self.connection_error()
 
-    def new_chat_element(self, chat_name):
+    def new_chat_element(self, chat_name:str, select:bool):
         chat_content = Gtk.Box(
             spacing=6
         )
@@ -736,12 +736,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         chat_content.append(button_delete)
         chat_content.append(button_rename)
         self.chat_list_box.append(chat_row)
-        if chat_name==self.chats["selected_chat"]: self.chat_list_box.select_row(chat_row)
+        if select: self.chat_list_box.select_row(chat_row)
 
     def update_chat_list(self):
         self.chat_list_box.remove_all()
         for name, content in self.chats['chats'].items():
-            self.new_chat_element(name)
+            self.new_chat_element(name, self.chats["selected_chat"] == name)
 
     def show_preferences_dialog(self):
         self.preferences_dialog.present(self)
