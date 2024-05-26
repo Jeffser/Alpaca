@@ -260,8 +260,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
         overlay.add_toast(toast)
 
-    def show_notification(self, title:str, body:str, only_when_focus:bool, icon:Gio.ThemedIcon=None):
-        if only_when_focus==False or self.is_active()==False:
+    def show_notification(self, title:str, body:str, only_when_unfocus:bool, icon:Gio.ThemedIcon=None):
+        if not only_when_unfocus or (only_when_unfocus and self.is_active()==False):
             notification = Gio.Notification.new(title)
             notification.set_body(body)
             if icon: notification.set_icon(icon)
