@@ -120,6 +120,123 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     style_manager = Adw.StyleManager()
 
+    @Gtk.Template.Callback()
+    def verify_if_image_can_be_used(self, pspec=None, user_data=None):
+        if self.model_drop_down.get_selected_item() == None: return True
+        selected = self.model_drop_down.get_selected_item().get_string().split(":")[0]
+        if selected in ['llava', 'bakllava', 'moondream', 'llava-llama3']:
+            self.image_button.set_sensitive(True)
+            return True
+        else:
+            self.image_button.set_sensitive(False)
+            self.image_button.set_css_classes([])
+            self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
+            self.attached_image = {"path": None, "base64": None}
+            return False
+
+    @Gtk.Template.Callback()
+    def send_message(self, button=None):
+        if button and self.bot_message: #STOP BUTTON
+            if self.loading_spinner: self.chat_container.remove(self.loading_spinner)
+            if self.verify_if_image_can_be_used(): self.image_button.set_sensitive(True)
+            self.image_button.set_css_classes([])
+            self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
+            self.attached_image = {"path": None, "base64": None}
+            self.toggle_ui_sensitive(True)
+            self.send_button.set_css_classes(["suggested-action"])
+            self.send_button.get_child().set_label("Send")
+            self.send_button.get_child().set_icon_name("send-to-symbolic")
+            self.bot_message = None
+            self.bot_message_box = None
+            self.bot_message_view = None
+        else:
+            if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
+            current_model = self.model_drop_down.get_selected_item()
+            if current_model is None:
+                self.show_toast("info", 0, self.main_overlay)
+                return
+            formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
+            self.chats["chats"][self.chats["selected_chat"]]["messages"].append({
+                "role": "user",
+                "model": "User",
+                "date": formated_datetime,
+                "content": self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
+            })
+            data = {
+                "model": current_model.get_string(),
+                "messages": self.chats["chats"][self.chats["selected_chat"]]["messages"]
+            }
+            if self.verify_if_image_can_be_used() and self.attached_image["base64"] is not None:
+                data["messages"][-1]["images"] = [self.attached_image["base64"]]
+            self.send_button.set_css_classes(["destructive-action"])
+            self.send_button.get_child().set_label("Stop")
+            self.send_button.get_child().set_icon_name("edit-delete-symbolic")
+            self.toggle_ui_sensitive(False)
+            self.image_button.set_sensitive(False)
+
+            self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"])
+            self.message_text_view.get_buffer().set_text("", 0)
+            self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
+            self.chat_container.append(self.loading_spinner)
+            self.show_message("", True)
+
+            vadjustment = self.chat_window.get_vadjustment()
+            vadjustment.set_value(vadjustment.get_upper())
+            thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
+            thread.start()
+
+    @Gtk.Template.Callback()
+    def manage_models_button_activate(self, button=None):
+        self.update_list_local_models()
+        self.manage_models_dialog.present(self)
+
+    @Gtk.Template.Callback()
+    def welcome_carousel_page_changed(self, carousel, index):
+        if index == 0: self.welcome_previous_button.set_sensitive(False)
+        else: self.welcome_previous_button.set_sensitive(True)
+        if index == carousel.get_n_pages()-1: self.welcome_next_button.set_label("Connect")
+        else: self.welcome_next_button.set_label("Next")
+
+    @Gtk.Template.Callback()
+    def welcome_previous_button_activate(self, button):
+        self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()-1), True)
+
+    @Gtk.Template.Callback()
+    def welcome_next_button_activate(self, button):
+        if button.get_label() == "Next": self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
+        else:
+            self.welcome_dialog.force_close()
+            if not self.verify_connection():
+                self.connection_error()
+
+    @Gtk.Template.Callback()
+    def open_image(self, button):
+        if "destructive-action" in button.get_css_classes():
+            dialogs.remove_image(self)
+        else:
+            file_dialog = Gtk.FileDialog(default_filter=self.file_filter_image)
+            file_dialog.open(self, None, self.load_image)
+
+    @Gtk.Template.Callback()
+    def chat_changed(self, listbox, row):
+        if row and row.get_name() != self.chats["selected_chat"]:
+            self.chats["selected_chat"] = row.get_name()
+            self.load_history_into_chat()
+            if len(self.chats["chats"][self.chats["selected_chat"]]["messages"]) > 0:
+                for i in range(self.model_string_list.get_n_items()):
+                    if self.model_string_list.get_string(i) == self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]["model"]:
+                        self.model_drop_down.set_selected(i)
+                        break
+
+    @Gtk.Template.Callback()
+    def change_remote_url(self, entry):
+        self.remote_url = entry.get_text()
+        if self.run_remote:
+            connection_handler.url = self.remote_url
+            if self.verify_connection() == False:
+                entry.set_css_classes(["error"])
+                self.show_toast("error", 1, self.preferences_dialog)
+
     def show_toast(self, message_type:str, message_id:int, overlay):
         if message_type not in self.toast_messages or message_id > len(self.toast_messages[message_type] or message_id < 0):
             message_type = "error"
@@ -207,20 +324,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.bot_message = message_buffer
             self.bot_message_view = message_text
             self.bot_message_box = message_box
-
-    @Gtk.Template.Callback()
-    def verify_if_image_can_be_used(self, pspec=None, user_data=None):
-        if self.model_drop_down.get_selected_item() == None: return True
-        selected = self.model_drop_down.get_selected_item().get_string().split(":")[0]
-        if selected in ['llava', 'bakllava', 'moondream', 'llava-llama3']:
-            self.image_button.set_sensitive(True)
-            return True
-        else:
-            self.image_button.set_sensitive(False)
-            self.image_button.set_css_classes([])
-            self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
-            self.attached_image = {"path": None, "base64": None}
-            return False
 
     def update_list_local_models(self):
         self.local_models = []
@@ -421,57 +524,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if response['status'] == 'error':
             GLib.idle_add(self.connection_error)
 
-    @Gtk.Template.Callback()
-    def send_message(self, button=None):
-        if button and self.bot_message: #STOP BUTTON
-            if self.loading_spinner: self.chat_container.remove(self.loading_spinner)
-            if self.verify_if_image_can_be_used(): self.image_button.set_sensitive(True)
-            self.image_button.set_css_classes([])
-            self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
-            self.attached_image = {"path": None, "base64": None}
-            self.toggle_ui_sensitive(True)
-            self.send_button.set_css_classes(["suggested-action"])
-            self.send_button.get_child().set_label("Send")
-            self.send_button.get_child().set_icon_name("send-to-symbolic")
-            self.bot_message = None
-            self.bot_message_box = None
-            self.bot_message_view = None
-        else:
-            if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
-            current_model = self.model_drop_down.get_selected_item()
-            if current_model is None:
-                self.show_toast("info", 0, self.main_overlay)
-                return
-            formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
-            self.chats["chats"][self.chats["selected_chat"]]["messages"].append({
-                "role": "user",
-                "model": "User",
-                "date": formated_datetime,
-                "content": self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-            })
-            data = {
-                "model": current_model.get_string(),
-                "messages": self.chats["chats"][self.chats["selected_chat"]]["messages"]
-            }
-            if self.verify_if_image_can_be_used() and self.attached_image["base64"] is not None:
-                data["messages"][-1]["images"] = [self.attached_image["base64"]]
-            self.send_button.set_css_classes(["destructive-action"])
-            self.send_button.get_child().set_label("Stop")
-            self.send_button.get_child().set_icon_name("edit-delete-symbolic")
-            self.toggle_ui_sensitive(False)
-            self.image_button.set_sensitive(False)
-
-            self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"])
-            self.message_text_view.get_buffer().set_text("", 0)
-            self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
-            self.chat_container.append(self.loading_spinner)
-            self.show_message("", True)
-
-            vadjustment = self.chat_window.get_vadjustment()
-            vadjustment.set_value(vadjustment.get_upper())
-            thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
-            thread.start()
-
     def pull_model_update(self, data, model_name):
         if model_name in list(self.pulling_models.keys()):
             GLib.idle_add(self.pulling_models[model_name].set_subtitle, data['status'] + (f" | {round(data['completed'] / data['total'] * 100, 2)}%" if 'completed' in data and 'total' in data else ""))
@@ -548,30 +600,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             model.add_suffix(pull_button)
             self.available_model_list_box.append(model)
 
-    @Gtk.Template.Callback()
-    def manage_models_button_activate(self, button=None):
-        self.update_list_local_models()
-        self.manage_models_dialog.present(self)
-
-    @Gtk.Template.Callback()
-    def welcome_carousel_page_changed(self, carousel, index):
-        if index == 0: self.welcome_previous_button.set_sensitive(False)
-        else: self.welcome_previous_button.set_sensitive(True)
-        if index == carousel.get_n_pages()-1: self.welcome_next_button.set_label("Connect")
-        else: self.welcome_next_button.set_label("Next")
-
-    @Gtk.Template.Callback()
-    def welcome_previous_button_activate(self, button):
-        self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()-1), True)
-
-    @Gtk.Template.Callback()
-    def welcome_next_button_activate(self, button):
-        if button.get_label() == "Next": self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
-        else:
-            self.welcome_dialog.force_close()
-            if not self.verify_connection():
-                self.connection_error()
-
     def save_history(self):
         with open(os.path.join(self.config_dir, "chats.json"), "w+") as f:
             json.dump(self.chats, f, indent=4)
@@ -627,14 +655,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.image_button.set_css_classes([])
         self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
         self.attached_image = {"path": None, "base64": None}
-
-    @Gtk.Template.Callback()
-    def open_image(self, button):
-        if "destructive-action" in button.get_css_classes():
-            dialogs.remove_image(self)
-        else:
-            file_dialog = Gtk.FileDialog(default_filter=self.file_filter_image)
-            file_dialog.open(self, None, self.load_image)
 
     def generate_numbered_chat_name(self, chat_name) -> str:
         if chat_name in self.chats["chats"]:
@@ -723,17 +743,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for name, content in self.chats['chats'].items():
             self.new_chat_element(name)
 
-    @Gtk.Template.Callback()
-    def chat_changed(self, listbox, row):
-        if row and row.get_name() != self.chats["selected_chat"]:
-            self.chats["selected_chat"] = row.get_name()
-            self.load_history_into_chat()
-            if len(self.chats["chats"][self.chats["selected_chat"]]["messages"]) > 0:
-                for i in range(self.model_string_list.get_n_items()):
-                    if self.model_string_list.get_string(i) == self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]["model"]:
-                        self.model_drop_down.set_selected(i)
-                        break
-
     def show_preferences_dialog(self):
         self.preferences_dialog.present(self)
 
@@ -770,15 +779,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 local_instance.start(self.data_dir)
                 if self.verify_connection() == False: self.connection_error()
             self.update_list_available_models()
-
-    @Gtk.Template.Callback()
-    def change_remote_url(self, entry):
-        self.remote_url = entry.get_text()
-        if self.run_remote:
-            connection_handler.url = self.remote_url
-            if self.verify_connection() == False:
-                entry.set_css_classes(["error"])
-                self.show_toast("error", 1, self.preferences_dialog)
 
     def on_replace_contents(self, file, result):
         file.replace_contents_finish(result)
