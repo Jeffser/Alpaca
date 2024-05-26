@@ -41,6 +41,20 @@ Login to Ollama instance             |  Chatting with models        |  Managing 
 2. Download the latest flatpak package
 3. Open it
 
+## Ollama session tips
+
+### Migrate Ollama session to Alpaca's integrated session
+For now Alpaca doesn't offer a way to do this from the GUI but it's really simple, when you are using Ollama it creates a folder in the home directory called `.ollama`, you just need to move that folder to `~/.var/app/com.jeffser.Alpaca/data/`
+
+### Change the port of the integrated Ollama instance
+Go to `~/.var/app/com.jeffser.Alpaca/config/server.json` and change the `"local_port"` value, by default it is `11435`.
+
+### Backup all the chats
+The chat data is located in `~/.var/app/com.jeffser.Alpaca/config/chats.json` you can copy that file wherever you want to.
+
+### Force showing the welcome dialog
+To do that you just need to delete the file `~/.var/app/com.jeffser.Alpaca/config/server.json`, this won't affect your saved chats or models.
+
 ---
 
 ## Thanks
