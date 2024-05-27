@@ -148,13 +148,13 @@ def delete_model(self, model_name):
 
 def pull_model_response(self, dialog, task, model_name, tag_drop_down):
     if dialog.choose_finish(task) == "pull":
-        model = f"{model_name}:{tag_drop_down.get_selected_item().get_string()}"
+        model = f"{model_name}:{tag_drop_down.get_selected_item().get_string().split(' | ')[0]}"
         self.pull_model(model)
 
 def pull_model(self, model_name):
     tag_list = Gtk.StringList()
     for tag in available_models[model_name]['tags']:
-        tag_list.append(tag)
+        tag_list.append(f"{tag[0]} | {tag[1]}")
     tag_drop_down = Gtk.DropDown(
         enable_search=True,
         model=tag_list

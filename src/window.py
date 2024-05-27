@@ -540,7 +540,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def pull_model_update(self, data, model_name):
         if model_name in list(self.pulling_models.keys()):
-            GLib.idle_add(self.pulling_models[model_name].set_subtitle, data['status'] + (f" | {round(data['completed'] / data['total'] * 100, 2)}%" if 'completed' in data and 'total' in data else ""))
+            GLib.idle_add(self.pulling_models[model_name]['row'].set_subtitle, data['status'])
+            if 'completed' in data and 'total' in data: GLib.idle_add(self.pulling_models[model_name]['progress_bar'].set_fraction, (data['completed'] / data['total']))
+            else: GLib.idle_add(self.pulling_models[model_name]['progress_bar'].pulse)
         else:
             if len(list(self.pulling_models.keys())) == 0:
                 GLib.idle_add(self.pulling_model_list_box.set_visible, False)
@@ -577,7 +579,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             title = model
         )
         thread = threading.Thread(target=self.pull_model_process, kwargs={"model": model})
-        self.pulling_models[model] = model_row
+        progress_bar = Gtk.ProgressBar(
+            valign = 3,
+            show_text = True
+        )
         button = Gtk.Button(
             icon_name = "media-playback-stop-symbolic",
             vexpand = False,
@@ -585,7 +590,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             css_classes = ["error"]
         )
         button.connect("clicked", lambda button, model_name=model : dialogs.stop_pull_model(self, model_name))
+        model_row.add_suffix(progress_bar)
         model_row.add_suffix(button)
+        self.pulling_models[model] = {"row": model_row, "progress_bar": progress_bar}
         self.pulling_model_list_box.append(model_row)
         thread.start()
 
@@ -699,12 +706,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def new_chat(self, chat_name):
         chat_name = self.generate_numbered_chat_name(chat_name)
         self.chats["chats"][chat_name] = {"messages": []}
-        #self.chats["selected_chat"] = chat_name
         self.save_history()
         self.new_chat_element(chat_name, True)
 
     def stop_pull_model(self, model_name):
-        self.pulling_models[model_name].get_parent().remove(self.pulling_models[model_name])
+        self.pulling_models[model_name]['row'].get_parent().remove(self.pulling_models[model_name]['row'])
         del self.pulling_models[model_name]
 
     def delete_model(self, model_name):
