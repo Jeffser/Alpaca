@@ -546,7 +546,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             if len(list(self.pulling_models.keys())) == 0:
                 GLib.idle_add(self.pulling_model_list_box.set_visible, False)
-            sys.exit()
 
     def pull_model_process(self, model):
         data = {"name":model}
@@ -556,11 +555,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if response['status'] == 'ok':
             GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model), True, Gio.ThemedIcon.new("emblem-ok-symbolic"))
             GLib.idle_add(self.show_toast, "good", 1, self.manage_models_overlay)
-            GLib.idle_add(self.pulling_models[model].get_parent().remove, self.pulling_models[model])
+            GLib.idle_add(self.pulling_models[model]['overlay'].get_parent().get_parent().remove, self.pulling_models[model]['overlay'].get_parent())
             del self.pulling_models[model]
         else:
             GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(model), True, Gio.ThemedIcon.new("dialog-error-symbolic"))
-            GLib.idle_add(self.pulling_models[model].get_parent().remove, self.pulling_models[model])
+            GLib.idle_add(self.pulling_models[model]['overlay'].get_parent().get_parent().remove, self.pulling_models[model]['overlay'].get_parent())
             del self.pulling_models[model]
             GLib.idle_add(self.manage_models_dialog.close)
             GLib.idle_add(self.connection_error)
@@ -579,9 +578,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             title = model
         )
         thread = threading.Thread(target=self.pull_model_process, kwargs={"model": model})
+        overlay = Gtk.Overlay()
         progress_bar = Gtk.ProgressBar(
-            valign = 3,
-            show_text = True
+            valign = 2,
+            show_text = False,
+            margin_start = 10,
+            margin_end = 10,
+            css_classes = ["osd", "horizontal", "bottom"]
         )
         button = Gtk.Button(
             icon_name = "media-playback-stop-symbolic",
@@ -590,10 +593,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             css_classes = ["error"]
         )
         button.connect("clicked", lambda button, model_name=model : dialogs.stop_pull_model(self, model_name))
-        model_row.add_suffix(progress_bar)
+        #model_row.add_suffix(progress_bar)
         model_row.add_suffix(button)
-        self.pulling_models[model] = {"row": model_row, "progress_bar": progress_bar}
-        self.pulling_model_list_box.append(model_row)
+        self.pulling_models[model] = {"row": model_row, "progress_bar": progress_bar, "overlay": overlay}
+        overlay.set_child(model_row)
+        overlay.add_overlay(progress_bar)
+        self.pulling_model_list_box.append(overlay)
         thread.start()
 
     def update_list_available_models(self):
@@ -710,7 +715,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.new_chat_element(chat_name, True)
 
     def stop_pull_model(self, model_name):
-        self.pulling_models[model_name]['row'].get_parent().remove(self.pulling_models[model_name]['row'])
+        self.pulling_models[model_name]['overlay'].get_parent().get_parent().remove(self.pulling_models[model_name]['overlay'].get_parent())
         del self.pulling_models[model_name]
 
     def delete_model(self, model_name):
