@@ -21,3 +21,7 @@ def stop():
     if instance: instance.kill()
     print("Stopped Alpaca's Ollama instance")
 
+def reset(data_dir):
+    stop()
+    sleep(1)
+    start(data_dir)

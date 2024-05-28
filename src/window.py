@@ -787,8 +787,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.run_remote:
             dialogs.reconnect_remote(self)
         else:
-            local_instance.stop()
-            local_instance.start(self.data_dir)
+            local_instance.reset(self.data_dir)
             self.show_toast("error", 7, self.main_overlay)
 
     def connection_switched(self):
