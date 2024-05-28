@@ -75,7 +75,7 @@ def rename_chat(self, chat_name:str, label_element):
         callback = lambda dialog, task, old_chat_name=chat_name, entry=entry, label_element=label_element: rename_chat_response(self, dialog, task, old_chat_name, entry, label_element)
     )
 
-# NEW CHAT | WORKS
+# NEW CHAT | WORKS | UNUSED REASON: The 'Add Chat' button now creates a chat without a name AKA "New Chat"
 
 def new_chat_response(self, dialog, task, entry):
     chat_name = _("New Chat")

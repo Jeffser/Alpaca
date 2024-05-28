@@ -708,8 +708,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         label_element.set_label(new_chat_name)
         self.save_history()
 
-    def new_chat(self, chat_name):
-        chat_name = self.generate_numbered_chat_name(chat_name)
+    def new_chat(self):
+        chat_name = self.generate_numbered_chat_name(_("New Chat"))
         self.chats["chats"][chat_name] = {"messages": []}
         self.save_history()
         self.new_chat_element(chat_name, True)
@@ -854,7 +854,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.get_application().create_action('clear', lambda *_: dialogs.clear_chat(self), ['<primary>e'])
         self.get_application().create_action('send', lambda *_: self.send_message(self), ['Return'])
-        self.add_chat_button.connect("clicked", lambda button : dialogs.new_chat(self))
+        self.add_chat_button.connect("clicked", lambda button : self.new_chat())
 
         self.export_chat_button.connect("clicked", lambda button : self.export_current_chat())
         self.import_chat_button.connect("clicked", lambda button : self.import_chat())
