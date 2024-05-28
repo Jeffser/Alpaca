@@ -63,6 +63,16 @@
   <url type="homepage">https://github.com/Jeffser/Alpaca</url>
   <url type="donation">https://github.com/sponsors/Jeffser</url>
   <releases>
+    <release version="0.8.8" date="2024-05-28">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.8.8</url>
+      <description>
+        <p>The fix</p>
+        <ul>
+          <li>Fixed: Ollama instance keeps running on the background even when it is disabled</li>
+          <li>Fixed: Can't pull models on the integrated instance</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.8.7" date="2024-05-27">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.8.7</url>
       <description>
