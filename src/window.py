@@ -785,7 +785,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def connection_error(self):
         if self.run_remote:
-            dialogs.reconnect_remote(self)
+            dialogs.reconnect_remote(self, connection_handler.url)
         else:
             local_instance.reset(self.data_dir)
             self.show_toast("error", 7, self.main_overlay)

@@ -206,10 +206,10 @@ def reconnect_remote_response(self, dialog, task, entry):
     elif response == "close":
         self.destroy()
 
-def reconnect_remote(self):
+def reconnect_remote(self, current_url):
     entry = Gtk.Entry(
         css_classes = ["error"],
-        text = self.ollama_url
+        text = current_url
     )
     dialog = Adw.AlertDialog(
         heading=_("Connection Error"),
