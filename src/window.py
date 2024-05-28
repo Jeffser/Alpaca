@@ -32,7 +32,6 @@ from . import dialogs, local_instance, connection_handler
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
     config_dir = os.getenv("XDG_CONFIG_HOME")
-    data_dir = os.getenv("XDG_DATA_HOME")
     app_dir = os.getenv("FLATPAK_DEST")
 
     __gtype_name__ = 'AlpacaWindow'
@@ -249,6 +248,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
         action_row.set_sensitive(False)
         self.pull_model(model)
 
+    @Gtk.Template.Callback()
+    def closing_app(self, user_data):
+        if self.get_hide_on_close():
+            print("Hiding app...")
+        else:
+            print("Closing app...")
+            local_instance.stop()
 
     def show_toast(self, message_type:str, message_id:int, overlay):
         if message_type not in self.toast_messages or message_id > len(self.toast_messages[message_type] or message_id < 0):
@@ -779,7 +785,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def connect_local(self):
         self.run_remote = False
         connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
-        local_instance.start(self.data_dir)
+        local_instance.start()
         if self.verify_connection() == False: self.connection_error()
         else: self.remote_connection_switch.set_active(False)
 
@@ -787,7 +793,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.run_remote:
             dialogs.reconnect_remote(self, connection_handler.url)
         else:
-            local_instance.reset(self.data_dir)
+            local_instance.reset()
             self.show_toast("error", 7, self.main_overlay)
 
     def connection_switched(self):
@@ -800,7 +806,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 else: local_instance.stop()
             else:
                 connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
-                local_instance.start(self.data_dir)
+                local_instance.start()
                 if self.verify_connection() == False: self.connection_error()
             self.update_list_available_models()
 
@@ -877,9 +883,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 else:
                     self.remote_connection_switch.set_active(False)
                     connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
-                    local_instance.start(self.data_dir)
+                    local_instance.start()
         else:
-            local_instance.start(self.data_dir)
+            local_instance.start()
             connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
             self.welcome_dialog.present(self)
         if self.verify_connection() is False and self.run_remote == False: self.connection_error()
