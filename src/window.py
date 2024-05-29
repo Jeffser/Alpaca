@@ -574,10 +574,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def pull_model(self, model):
         if model in list(self.pulling_models.keys()):
-            self.show_toast("info", 3, self.manage_models_overlay)
+            self.show_toast("info", 2, self.manage_models_overlay)
             return
         if model in self.local_models:
-            self.show_toast("info", 4, self.manage_models_overlay)
+            self.show_toast("info", 3, self.manage_models_overlay)
             return
         self.pulling_model_list_box.set_visible(True)
         model_row = Adw.ActionRow(
