@@ -130,7 +130,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             self.image_button.set_sensitive(False)
             self.image_button.set_tooltip_text(_("Only available on selected models"))
-            self.image_button.set_css_classes([])
+            self.image_button.set_css_classes(["circular"])
             self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
             self.attached_image = {"path": None, "base64": None}
             return False
@@ -140,7 +140,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if button and self.bot_message: #STOP BUTTON
             if self.loading_spinner: self.chat_container.remove(self.loading_spinner)
             if self.verify_if_image_can_be_used(): self.image_button.set_sensitive(True)
-            self.image_button.set_css_classes([])
+            self.image_button.set_css_classes(["circular"])
             self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
             self.attached_image = {"path": None, "base64": None}
             self.toggle_ui_sensitive(True)
@@ -429,7 +429,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
                 footer = None
                 if part['text'].split("\n")[-1] == parts[-1]['text'].split("\n")[-1]:
-                    footer = "\n\n<small>" + part['text'].split('\n')[-1] + "</small>"
+                    footer = "\n<small>" + part['text'].split('\n')[-1] + "</small>"
                     part['text'] = '\n'.join(part['text'].split("\n")[:-1])
 
                 part['text'] = part['text'].replace("\n* ", "\n• ")
@@ -538,7 +538,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GLib.idle_add(self.send_button.get_child().set_icon_name, "send-to-symbolic")
         GLib.idle_add(self.toggle_ui_sensitive, True)
         if self.verify_if_image_can_be_used(): GLib.idle_add(self.image_button.set_sensitive, True)
-        GLib.idle_add(self.image_button.set_css_classes, [])
+        GLib.idle_add(self.image_button.set_css_classes, ["circular"])
         GLib.idle_add(self.image_button.get_child().set_icon_name, "image-x-generic-symbolic")
         self.attached_image = {"path": None, "base64": None}
         if response['status'] == 'error':
@@ -677,13 +677,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     image_data = output.getvalue()
                 self.attached_image["base64"] = base64.b64encode(image_data).decode("utf-8")
 
-            self.image_button.set_css_classes(["destructive-action"])
+            self.image_button.set_css_classes(["destructive-action", "circular"])
             self.image_button.get_child().set_icon_name("edit-delete-symbolic")
         except Exception as e:
             self.show_toast("error", 5, self.main_overlay)
 
     def remove_image(self):
-        self.image_button.set_css_classes([])
+        self.image_button.set_css_classes(["circular"])
         self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
         self.attached_image = {"path": None, "base64": None}
 
@@ -705,7 +705,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.save_history()
         self.update_chat_list()
         if len(self.chats['chats'])==0:
-            self.chat_new()
+            self.new_chat()
 
     def rename_chat(self, old_chat_name, new_chat_name, label_element):
         new_chat_name = self.generate_numbered_chat_name(new_chat_name)

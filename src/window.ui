@@ -181,61 +181,61 @@
                           <property name="margin-start">12</property>
                           <property name="margin-end">12</property>
                           <child>
+                            <object class="GtkButton" id="image_button">
+                              <signal name="clicked" handler="open_image"/>
+                              <property name="vexpand">false</property>
+                              <property name="valign">3</property>
+                              <property name="sensitive">false</property>
+                              <property name="tooltip-text" translatable="yes">Only available on selected models</property>
+                              <child>
+                                <object class="AdwButtonContent">
+                                  <property name="icon-name">image-x-generic-symbolic</property>
+                                </object>
+                              </child>
+                            </object>
+                          </child>
+                          <child>
                             <object class="GtkBox">
                               <style>
+                                <class name="card"/>
                                 <class name="message-input"/>
                               </style>
                               <child>
                                 <object class="GtkScrolledWindow">
                                   <property name="margin-start">12</property>
                                   <property name="margin-end">12</property>
-
+                                  <style>
+                                    <class name="message-input"/>
+                                    <class name="undershoot-bottom"/>
+                                    <class name="undershoot-top"/>
+                                  </style>
                                   <child>
                                     <object class="GtkTextView" id="message_text_view">
                                       <property name="wrap-mode">word</property>
                                       <property name="top-margin">6</property>
                                       <property name="bottom-margin">6</property>
-                                      <property name="margin-end">12</property>
                                       <property name="hexpand">true</property>
                                       <style>
-                                        <class name="message-text-view"/>
+                                        <class name="message-input"/>
                                       </style>
                                     </object>
                                   </child>
                                 </object>
                               </child>
                             </object>
-
                             </child>
                             <child>
-                              <object class="GtkBox">
-                                <property name="orientation">1</property>
-                                <property name="spacing">12</property>
+                              <object class="GtkButton" id="send_button">
+                                <signal name="clicked" handler="send_message"/>
+                                <property name="vexpand">false</property>
+                                <property name="valign">3</property>
+                                <style>
+                                  <class name="suggested-action"/>
+                                  <class name="circular"/>
+                                </style>
                                 <child>
-                                  <object class="GtkButton" id="send_button">
-                                    <signal name="clicked" handler="send_message"/>
-                                    <style>
-                                      <class name="suggested-action"/>
-                                    </style>
-                                    <child>
-                                      <object class="AdwButtonContent">
-                                        <property name="label" translatable="yes">Send</property>
-                                        <property name="icon-name">send-to-symbolic</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkButton" id="image_button">
-                                    <signal name="clicked" handler="open_image"/>
-                                    <property name="sensitive">false</property>
-                                    <property name="tooltip-text" translatable="yes">Only available on selected models</property>
-                                    <child>
-                                      <object class="AdwButtonContent">
-                                        <property name="label" translatable="yes">Image</property>
-                                        <property name="icon-name">image-x-generic-symbolic</property>
-                                      </object>
-                                    </child>
+                                  <object class="AdwButtonContent">
+                                    <property name="icon-name">send-to-symbolic</property>
                                   </object>
                                 </child>
                               </object>
@@ -646,4 +646,5 @@
     </child>
   </object>
 </interface>
+
 
