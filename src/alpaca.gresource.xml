@@ -3,7 +3,10 @@
   <gresource prefix="/com/jeffser/Alpaca">
     <file>style.css</file>
     <file>style-dark.css</file>
+    <file alias="icons/scalable/status/library-symbolic.svg">icons/library-symbolic.svg</file>
     <file alias="icons/scalable/status/paper-plane-symbolic.svg">icons/paper-plane-symbolic.svg</file>
+    <file alias="icons/scalable/status/globe-symbolic.svg">icons/globe-symbolic.svg</file>
+    <file alias="icons/scalable/status/controls-big-symbolic.svg">icons/controls-big-symbolic.svg</file>
     <file preprocess="xml-stripblanks">window.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
   </gresource>

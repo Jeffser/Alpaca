@@ -50,7 +50,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_tweaks = {"temperature": 0.7, "seed": 0, "keep_alive": 5}
     local_models = []
     pulling_models = {}
-    current_chat_elements = [] #Used for deleting
     chats = {"chats": {_("New Chat"): {"messages": []}}, "selected_chat": "New Chat"}
     attached_image = {"path": None, "base64": None}
 
@@ -284,11 +283,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.get_application().send_notification(None, notification)
 
     def delete_message(self, message_element):
-        message_index = self.current_chat_elements.index(message_element)
-        del self.chats["chats"][self.chats["selected_chat"]]["messages"][message_index]
-        self.chat_container.remove(message_element)
-        del self.current_chat_elements[message_index]
-        self.save_history()
+        message_index = int(message_element.get_name())
+        if message_index < len(self.chats["chats"][self.chats["selected_chat"]]["messages"]):
+            self.chats["chats"][self.chats["selected_chat"]]["messages"][message_index] = None
+            self.chat_container.remove(message_element)
+            self.save_history()
 
     def show_message(self, msg:str, bot:bool, footer:str=None, image_base64:str=None):
         message_text = Gtk.TextView(
@@ -342,12 +341,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             message_box.append(image)
 
         message_box.append(message_text)
-        self.current_chat_elements.append(Gtk.Overlay(css_classes=["message"]))
-        self.current_chat_elements[-1].set_child(message_box)
+        overlay = Gtk.Overlay(css_classes=["message"], name=str(len(self.chats["chats"][self.chats["selected_chat"]]["messages"])-1))
+        overlay.set_child(message_box)
 
-        delete_button.connect("clicked", lambda button, element=self.current_chat_elements[-1]: self.delete_message(element))
-        self.current_chat_elements[-1].add_overlay(delete_button)
-        self.chat_container.append(self.current_chat_elements[-1])
+        delete_button.connect("clicked", lambda button, element=overlay: self.delete_message(element))
+        overlay.add_overlay(delete_button)
+        self.chat_container.append(overlay)
 
         if bot:
             self.bot_message = message_buffer
@@ -630,7 +629,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 subtitle = "Image recognition" if model_info["image"] else None
             )
             link_button = Gtk.Button(
-                icon_name = "web-browser-symbolic",
+                icon_name = "globe-symbolic",
                 vexpand = False,
                 valign = 3,
                 css_classes = ["success"]
@@ -654,12 +653,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def load_history_into_chat(self):
         for widget in list(self.chat_container): self.chat_container.remove(widget)
         for message in self.chats['chats'][self.chats["selected_chat"]]['messages']:
-            if message['role'] == 'user':
-                self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>", message['images'][0] if 'images' in message and len(message['images']) > 0 else None)
-            else:
-                self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>")
-                self.add_code_blocks()
-                self.bot_message = None
+            if message:
+                if message['role'] == 'user':
+                    self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>", message['images'][0] if 'images' in message and len(message['images']) > 0 else None)
+                else:
+                    self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>")
+                    self.add_code_blocks()
+                    self.bot_message = None
 
     def load_history(self):
         if os.path.exists(os.path.join(self.config_dir, "chats.json")):
@@ -668,6 +668,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     self.chats = json.load(f)
                     if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]: self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
                     if len(list(self.chats["chats"].keys())) == 0: self.chats["chats"][_("New Chat")] = {"messages": []}
+                    for chat_name, content in self.chats['chats'].items():
+                        for i, content in enumerate(content['messages']):
+                            if not content: del self.chats['chats'][chat_name]['messages'][i]
             except Exception as e:
                 self.chats = {"chats": {_("New Chat"): {"messages": []}}, "selected_chat": _("New Chat")}
             self.load_history_into_chat()
