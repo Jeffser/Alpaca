@@ -746,8 +746,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         chat_label = Gtk.Label(
             label=chat_name,
             hexpand=True,
-            halign=1
+            halign=0,
+            wrap=True,
+            ellipsize=3,
+            wrap_mode=2
         )
+
         button_delete = Gtk.Button(
             icon_name = "user-trash-symbolic",
             vexpand = False,
