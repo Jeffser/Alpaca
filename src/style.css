@@ -1,10 +1,7 @@
 .message-input {
-  background-color: rgba(0,0,0,0);
-}
-
-.message-text-view {
   background-color: #EBEBEB;
 }
+
 .chat_row box.header {
   font-size: 14px;
 }
@@ -13,7 +10,6 @@
 }
 .chat_row button {
   opacity: 0;
-  display: none;
   transition: opacity .05s;
 }
 .chat_row:hover button {
