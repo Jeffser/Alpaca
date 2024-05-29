@@ -749,7 +749,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             halign=0,
             wrap=True,
             ellipsize=3,
-            wrap_mode=2
+            wrap_mode=2,
+            xalign=0
         )
 
         button_delete = Gtk.Button(

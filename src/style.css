@@ -13,6 +13,7 @@
 }
 .chat_row button {
   opacity: 0;
+  display: none;
   transition: opacity .05s;
 }
 .chat_row:hover button {
