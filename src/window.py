@@ -862,6 +862,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GtkSource.init()
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
+        self.get_application().create_action('new_chat', lambda *_: self.new_chat(), ['<primary>n'])
         self.get_application().create_action('clear', lambda *_: dialogs.clear_chat(self), ['<primary>e'])
         self.get_application().create_action('send', lambda *_: self.send_message(self), ['Return'])
         self.add_chat_button.connect("clicked", lambda button : self.new_chat())
