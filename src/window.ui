@@ -240,6 +240,23 @@
                                 </child>
                               </object>
                             </child>
+                            <child>
+                              <object class="GtkButton" id="stop_button">
+                                <signal name="clicked" handler="stop_message"/>
+                                <property name="vexpand">false</property>
+                                <property name="valign">3</property>
+                                <property name="visible">false</property>
+                                <style>
+                                  <class name="destructive-action"/>
+                                  <class name="circular"/>
+                                </style>
+                                <child>
+                                  <object class="AdwButtonContent">
+                                    <property name="icon-name">edit-delete-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
