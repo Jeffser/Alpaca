@@ -47,6 +47,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     run_on_background = False
     remote_url = ""
     run_remote = False
+    model_tweaks = {"temperature": 0.7, "seed": 0, "keep_alive": 5}
     local_models = []
     pulling_models = {}
     current_chat_elements = [] #Used for deleting
@@ -54,6 +55,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     attached_image = {"path": None, "base64": None}
 
     #Elements
+    temperature_spin = Gtk.Template.Child()
+    seed_spin = Gtk.Template.Child()
+    keep_alive_spin = Gtk.Template.Child()
     preferences_dialog = Gtk.Template.Child()
     shortcut_window : Gtk.ShortcutsWindow  = Gtk.Template.Child()
     bot_message : Gtk.TextBuffer = None
@@ -165,7 +169,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             })
             data = {
                 "model": current_model.get_string(),
-                "messages": self.chats["chats"][self.chats["selected_chat"]]["messages"]
+                "messages": self.chats["chats"][self.chats["selected_chat"]]["messages"],
+                "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
+                "keep_alive": f"{self.model_tweaks['keep_alive']}m"
             }
             if self.verify_if_image_can_be_used() and self.attached_image["base64"] is not None:
                 data["messages"][-1]["images"] = [self.attached_image["base64"]]
@@ -255,6 +261,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             print("Closing app...")
             local_instance.stop()
+
+    @Gtk.Template.Callback()
+    def model_spin_changed(self, spin):
+        value = spin.get_value()
+        if spin.get_name() != "temperature": value = round(value)
+        else: value = round(value, 1)
+        if self.model_tweaks[spin.get_name()] is not None and self.model_tweaks[spin.get_name()] != value:
+            self.model_tweaks[spin.get_name()] = value
+            print(self.model_tweaks)
+            self.save_server_config()
 
     def show_toast(self, message_type:str, message_id:int, overlay):
         if message_type not in self.toast_messages or message_id > len(self.toast_messages[message_type] or message_id < 0):
@@ -378,12 +394,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             self.connection_error()
 
+    def save_server_config(self):
+        with open(os.path.join(self.config_dir, "server.json"), "w+") as f:
+            json.dump({'remote_url': self.remote_url, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background, 'model_tweaks': self.model_tweaks}, f)
+
     def verify_connection(self):
         response = connection_handler.simple_get(connection_handler.url)
         if response['status'] == 'ok':
             if "Ollama is running" in response['text']:
-                with open(os.path.join(self.config_dir, "server.json"), "w+") as f:
-                    json.dump({'remote_url': self.remote_url, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background}, f)
+                self.save_server_config()
                 self.update_list_local_models()
                 return True
         return False
@@ -543,6 +562,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.attached_image = {"path": None, "base64": None}
         if response['status'] == 'error':
             GLib.idle_add(self.connection_error)
+            print(response)
 
     def pull_model_update(self, data, model_name):
         if model_name in list(self.pulling_models.keys()):
@@ -882,6 +902,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 local_instance.port = data['local_port']
                 self.remote_url = data['remote_url']
                 self.run_on_background = data['run_on_background']
+                #Model Tweaks
+                if "model_tweaks" in data: self.model_tweaks = data['model_tweaks']
+                self.temperature_spin.set_value(data['model_tweaks']['temperature'])
+                self.seed_spin.set_value(data['model_tweaks']['seed'])
+                self.keep_alive_spin.set_value(data['model_tweaks']['keep_alive'])
+
                 self.background_switch.set_active(self.run_on_background)
                 self.set_hide_on_close(self.run_on_background)
                 self.remote_connection_entry.set_text(self.remote_url)

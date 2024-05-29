@@ -292,7 +292,7 @@
           </child>
         </object>
       </child>
-      <!--<child>
+      <child>
         <object class="AdwPreferencesPage" id="model_page">
           <property name="title" translatable="yes">Advanced Model Settings</property>
           <property name="icon-name">preferences-system-symbolic</property>
@@ -300,10 +300,56 @@
             <object class="AdwPreferencesGroup">
               <property name="title" translatable="yes">Model Tweaks</property>
               <property name="description" translatable="yes">Manage the behavior of the AI models</property>
+              <child>
+                <object class="AdwSpinRow" id="temperature_spin">
+                  <signal name="changed" handler="model_spin_changed"/>
+                  <property name="name">temperature</property>
+                  <property name="title" translatable="yes">Temperature</property>
+                  <property name="subtitle" translatable="yes">The temperature of the model. Increasing the temperature will make the model answer more creatively. (Default: 0.8)</property>
+                  <property name="digits">1</property>
+                  <property name="adjustment">
+                    <object class="GtkAdjustment">
+                      <property name="lower">0</property>
+                      <property name="upper">1</property>
+                      <property name="step-increment">0.1</property>
+                    </object>
+                  </property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwSpinRow" id="seed_spin">
+                  <signal name="changed" handler="model_spin_changed"/>
+                  <property name="name">seed</property>
+                  <property name="title">Seed</property>
+                  <property name="subtitle">Sets the random number seed to use for generation. Setting this to a specific number will make the model generate the same text for the same prompt. (Default: 0 (random))</property>
+                  <property name="adjustment">
+                    <object class="GtkAdjustment">
+                      <property name="lower">0</property>
+                      <property name="upper">999999</property>
+                      <property name="step-increment">1</property>
+                    </object>
+                  </property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwSpinRow" id="keep_alive_spin">
+                  <signal name="changed" handler="model_spin_changed"/>
+                  <property name="name">keep_alive</property>
+                  <property name="title">Keep Alive Time</property>
+                  <property name="subtitle">Controls how long the model will stay loaded into memory following the request in minutes (default: 5)</property>
+                  <property name="adjustment">
+                    <object class="GtkAdjustment">
+                      <property name="lower">0</property>
+                      <property name="upper">999999</property>
+                      <property name="step-increment">1</property>
+                    </object>
+                  </property>
+                </object>
+              </child>
             </object>
           </child>
         </object>
-      </child>-->
+      </child>
     </object>
 
     <object class="AdwDialog" id="manage_models_dialog">
