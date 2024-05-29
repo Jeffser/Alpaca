@@ -225,7 +225,7 @@
                                 </style>
                                 <child>
                                   <object class="AdwButtonContent">
-                                    <property name="icon-name">send-to-symbolic</property>
+                                    <property name="icon-name">paper-plane-symbolic</property>
                                   </object>
                                 </child>
                               </object>
@@ -267,7 +267,7 @@
       <child>
         <object class="AdwPreferencesPage" id="general_page">
           <property name="title" translatable="yes">General</property>
-          <property name="icon-name">insert-link-symbolic</property>
+          <property name="icon-name">preferences-system-symbolic</property>
           <child>
             <object class="AdwPreferencesGroup">
               <property name="title" translatable="yes">Remote Connection</property>
@@ -302,7 +302,7 @@
       <child>
         <object class="AdwPreferencesPage" id="model_page">
           <property name="title" translatable="yes">Advanced Model Settings</property>
-          <property name="icon-name">preferences-system-symbolic</property>
+          <property name="icon-name">preferences-other-symbolic</property>
           <child>
             <object class="AdwPreferencesGroup">
               <property name="title" translatable="yes">Model Tweaks</property>
