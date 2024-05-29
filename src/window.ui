@@ -44,21 +44,11 @@
                       </object>
                     </child>
                     <child type="end">
-                      <object class="GtkButton" id="import_chat_button">
-                        <property name="tooltip-text" translatable="yes">Import chat</property>
-                        <property name="icon-name">document-open-symbolic</property>
-                        <style>
-                          <class name="flat"/>
-                        </style>
-                      </object>
-                    </child>
-                    <child type="end">
-                      <object class="GtkButton" id="export_chat_button">
-                        <property name="tooltip-text" translatable="yes">Export chat</property>
-                        <property name="icon-name">folder-download-symbolic</property>
-                        <style>
-                          <class name="flat"/>
-                        </style>
+                      <object class="GtkMenuButton" id="chats_menu_button">
+                        <property name="direction">1</property>
+                        <property name="halign">3</property>
+                        <property name="menu-model">chats_button_menu</property>
+                        <property name="icon-name">view-more-symbolic</property>
                       </object>
                     </child>
                   </object>
@@ -113,7 +103,7 @@
                             <property name="tooltip-text" translatable="yes">Manage models</property>
                             <child>
                               <object class="AdwButtonContent">
-                                <property name="icon-name">package-x-generic-symbolic</property>
+                                <property name="icon-name">view-more-horizontal-symbolic</property>
                               </object>
                             </child>
                           </object>
@@ -632,10 +622,15 @@
       </item>
     </section>
   </menu>
-  <menu id="chat_context_menu">
+  <menu id="chats_button_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Remove</attribute>
+        <attribute name="label" translatable="yes">Export current chat</attribute>
+        <attribute name="action">app.export_current_chat</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Import chat</attribute>
+        <attribute name="action">app.import_chat</attribute>
       </item>
     </section>
   </menu>
