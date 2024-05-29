@@ -712,6 +712,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.chats["chats"][new_chat_name] = self.chats["chats"][old_chat_name]
         del self.chats["chats"][old_chat_name]
         label_element.set_label(new_chat_name)
+        label_element.get_parent().set_name(new_chat_name)
         self.save_history()
 
     def new_chat(self):
@@ -766,7 +767,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             valign = 3,
             css_classes = ["accent", "flat"]
         )
-        button_rename.connect("clicked", lambda button, chat_name=chat_name, label_element=chat_label: dialogs.rename_chat(self, chat_name, label_element))
+        chat_content.set_name(chat_name)
+        button_rename.connect("clicked", lambda button, label_element=chat_label: dialogs.rename_chat(self, label_element))
         chat_content.append(chat_label)
         chat_content.append(button_delete)
         chat_content.append(button_rename)

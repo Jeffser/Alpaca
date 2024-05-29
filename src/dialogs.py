@@ -57,7 +57,8 @@ def rename_chat_response(self, dialog, task, old_chat_name, entry, label_element
     if new_chat_name and (task is None or dialog.choose_finish(task) == "rename"):
         self.rename_chat(old_chat_name, new_chat_name, label_element)
 
-def rename_chat(self, chat_name:str, label_element):
+def rename_chat(self, label_element):
+    chat_name = label_element.get_parent().get_name()
     entry = Gtk.Entry()
     dialog = Adw.AlertDialog(
         heading=_("Rename Chat"),
