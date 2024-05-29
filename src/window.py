@@ -136,7 +136,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.image_button.set_sensitive(False)
             self.image_button.set_tooltip_text(_("Only available on selected models"))
             self.image_button.set_css_classes(["circular"])
-            self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
             self.attached_image = {"path": None, "base64": None}
             return False
 
@@ -145,7 +144,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.loading_spinner: self.chat_container.remove(self.loading_spinner)
         if self.verify_if_image_can_be_used(): self.image_button.set_sensitive(True)
         self.image_button.set_css_classes(["circular"])
-        self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
         self.attached_image = {"path": None, "base64": None}
         self.toggle_ui_sensitive(True)
         self.switch_send_stop_button()
@@ -558,7 +556,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GLib.idle_add(self.toggle_ui_sensitive, True)
         if self.verify_if_image_can_be_used(): GLib.idle_add(self.image_button.set_sensitive, True)
         GLib.idle_add(self.image_button.set_css_classes, ["circular"])
-        GLib.idle_add(self.image_button.get_child().set_icon_name, "image-x-generic-symbolic")
         self.attached_image = {"path": None, "base64": None}
         if response['status'] == 'error':
             GLib.idle_add(self.connection_error)
@@ -698,13 +695,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.attached_image["base64"] = base64.b64encode(image_data).decode("utf-8")
 
             self.image_button.set_css_classes(["destructive-action", "circular"])
-            self.image_button.get_child().set_icon_name("edit-delete-symbolic")
         except Exception as e:
             self.show_toast("error", 5, self.main_overlay)
 
     def remove_image(self):
         self.image_button.set_css_classes(["circular"])
-        self.image_button.get_child().set_icon_name("image-x-generic-symbolic")
         self.attached_image = {"path": None, "base64": None}
 
     def generate_numbered_chat_name(self, chat_name) -> str:
