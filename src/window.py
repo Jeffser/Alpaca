@@ -896,7 +896,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             local_instance.start()
             connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
             self.welcome_dialog.present(self)
-        if self.verify_connection() is False and self.run_remote == False: self.connection_error()
+        if self.verify_connection() is False: self.connection_error()
         self.update_list_available_models()
         self.load_history()
         self.update_chat_list()
