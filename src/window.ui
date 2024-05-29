@@ -258,7 +258,7 @@
       <property name="height-request">600</property>
       <property name="title" translatable="yes">Preferences</property>
       <child>
-        <object class="AdwPreferencesPage" id="connection_page">
+        <object class="AdwPreferencesPage" id="general_page">
           <property name="title" translatable="yes">General</property>
           <property name="icon-name">insert-link-symbolic</property>
           <child>
@@ -292,6 +292,18 @@
           </child>
         </object>
       </child>
+      <!--<child>
+        <object class="AdwPreferencesPage" id="model_page">
+          <property name="title" translatable="yes">Advanced Model Settings</property>
+          <property name="icon-name">preferences-system-symbolic</property>
+          <child>
+            <object class="AdwPreferencesGroup">
+              <property name="title" translatable="yes">Model Tweaks</property>
+              <property name="description" translatable="yes">Manage the behavior of the AI models</property>
+            </object>
+          </child>
+        </object>
+      </child>-->
     </object>
 
     <object class="AdwDialog" id="manage_models_dialog">
