@@ -327,8 +327,8 @@
                 <object class="AdwSpinRow" id="seed_spin">
                   <signal name="changed" handler="model_spin_changed"/>
                   <property name="name">seed</property>
-                  <property name="title">Seed</property>
-                  <property name="subtitle">Sets the random number seed to use for generation. Setting this to a specific number will make the model generate the same text for the same prompt. (Default: 0 (random))</property>
+                  <property name="title" translatable="yes">Seed</property>
+                  <property name="subtitle" translatable="yes">Sets the random number seed to use for generation. Setting this to a specific number will make the model generate the same text for the same prompt. (Default: 0 (random))</property>
                   <property name="adjustment">
                     <object class="GtkAdjustment">
                       <property name="lower">0</property>
@@ -342,8 +342,8 @@
                 <object class="AdwSpinRow" id="keep_alive_spin">
                   <signal name="changed" handler="model_spin_changed"/>
                   <property name="name">keep_alive</property>
-                  <property name="title">Keep Alive Time</property>
-                  <property name="subtitle">Controls how long the model will stay loaded into memory following the request in minutes (default: 5)</property>
+                  <property name="title" translatable="yes">Keep Alive Time</property>
+                  <property name="subtitle" translatable="yes">Controls how long the model will stay loaded into memory following the request in minutes (default: 5)</property>
                   <property name="adjustment">
                     <object class="GtkAdjustment">
                       <property name="lower">0</property>
