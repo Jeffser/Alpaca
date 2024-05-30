@@ -1,4 +1,4 @@
-project('Alpaca',
+project('Alpaca', 'c',
           version: '0.9.1',
     meson_version: '>= 0.62.0',
   default_options: [ 'warning_level=2', 'werror=false', ],
@@ -6,6 +6,7 @@ project('Alpaca',
 
 i18n = import('i18n')
 gnome = import('gnome')
+application_id = 'com.jeffser.Alpaca'
 
 subdir('data')
 subdir('src')

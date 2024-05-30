@@ -26,6 +26,15 @@ configure_file(
   install_mode: 'r-xr-xr-x'
 )
 
+configure_file(
+  input: 'alpaca_search_provider.in',
+  output: 'alpaca_search_provider',
+  configuration: conf,
+  install: true,
+  install_dir: get_option('bindir'),
+  install_mode: 'r-xr-xr-x'
+)
+
 alpaca_sources = [
   '__init__.py',
   'main.py',

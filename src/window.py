@@ -920,9 +920,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.run_on_background = data['run_on_background']
                 #Model Tweaks
                 if "model_tweaks" in data: self.model_tweaks = data['model_tweaks']
-                self.temperature_spin.set_value(data['model_tweaks']['temperature'])
-                self.seed_spin.set_value(data['model_tweaks']['seed'])
-                self.keep_alive_spin.set_value(data['model_tweaks']['keep_alive'])
+                self.temperature_spin.set_value(self.model_tweaks['model_tweaks']['temperature'])
+                self.seed_spin.set_value(self.model_tweaks['model_tweaks']['seed'])
+                self.keep_alive_spin.set_value(self.model_tweaks['model_tweaks']['keep_alive'])
 
                 self.background_switch.set_active(self.run_on_background)
                 self.set_hide_on_close(self.run_on_background)
