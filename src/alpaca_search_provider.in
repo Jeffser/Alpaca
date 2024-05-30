@@ -11,7 +11,19 @@ class SearchProvider:
     def __init__(self):
         print("ALPACA __init__")
         self.connection = Gio.bus_get_sync(Gio.BusType.SESSION, None)
-        self.connection.register_object(DBUS_OBJECT_PATH, self.get_interface_info(), None, self.handle_method_call, None)
+        if not self.connection:
+            print("ALPACA Failed to get D-Bus connection")
+            return
+
+        print("ALPACA D-Bus connection obtained")
+
+        interface_info = self.get_interface_info()
+        self.registration_id = self.connection.register_object(DBUS_OBJECT_PATH, interface_info, self.handle_method_call, None)
+
+        if self.registration_id > 0:
+            print(f"ALPACA Object registered with ID: {self.registration_id}")
+        else:
+            print("ALPACA Failed to register object")
 
     def get_interface_info(self):
         print("ALPACA get_interface_info")
@@ -56,9 +68,9 @@ class SearchProvider:
         print("ALPACA handle_get_initial_result_set")
         terms = parameters.unpack()[0]
         print(f"Initial search terms: {terms}")
-        results = []
+        results = ["result1", "result2"]
         if "Alpaca" in terms:
-            results.append("placeholder_result")
+            results.append("alpaca_placeholder_result")
         print(f"Returning results: {results}")
         invocation.return_value(GLib.Variant("(as)", [results]))
 
@@ -66,9 +78,9 @@ class SearchProvider:
         print("ALPACA handle_get_subsearch_result_set")
         previous_results, terms = parameters.unpack()
         print(f"Subsearch terms: {terms}, previous results: {previous_results}")
-        results = []
+        results = ["result3", "result4"]
         if "Alpaca" in terms:
-            results.append("sub_placeholder_result")
+            results.append("sub_alpaca_placeholder_result")
         print(f"Returning subsearch results: {results}")
         invocation.return_value(GLib.Variant("(as)", [results]))
 
@@ -91,6 +103,9 @@ class SearchProvider:
 
 if __name__ == "__main__":
     provider = SearchProvider()
-    loop = GLib.MainLoop()
-    loop.run()
-
+    if provider.registration_id > 0:
+        loop = GLib.MainLoop()
+        print("ALPACA Running main loop")
+        loop.run()
+    else:
+        print("ALPACA Failed to start main loop due to object registration failure")
