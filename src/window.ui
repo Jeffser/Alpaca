@@ -346,7 +346,7 @@
                   <property name="subtitle" translatable="yes">Controls how long the model will stay loaded into memory following the request in minutes (default: 5)</property>
                   <property name="adjustment">
                     <object class="GtkAdjustment">
-                      <property name="lower">0</property>
+                      <property name="lower">-1</property>
                       <property name="upper">999999</property>
                       <property name="step-increment">1</property>
                     </object>
@@ -722,5 +722,3 @@
     </child>
   </object>
 </interface>
-
-
