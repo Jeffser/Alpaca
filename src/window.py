@@ -109,7 +109,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             _("Chat cannot be cleared while receiving a message"),
             _("That tag is already being pulled"),
             _("That tag has been pulled already"),
-            _("Code copied to the clipboard")
+            _("Code copied to the clipboard"),
+            _("Message copied to the clipboard")
         ],
         "good": [
             _("Model deleted successfully"),
@@ -174,11 +175,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.toggle_ui_sensitive(False)
         self.image_button.set_sensitive(False)
 
-        self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"])
+        self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"], id=len(self.chats["chats"][self.chats["selected_chat"]]["messages"])-1)
         self.message_text_view.get_buffer().set_text("", 0)
         self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
         self.chat_container.append(self.loading_spinner)
-        self.show_message("", True)
+        self.show_message("", True, id=len(self.chats["chats"][self.chats["selected_chat"]]["messages"]))
 
         thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
         thread.start()
@@ -289,7 +290,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.chat_container.remove(message_element)
             self.save_history()
 
-    def show_message(self, msg:str, bot:bool, footer:str=None, image_base64:str=None):
+    def copy_message(self, message_element):
+        message_index = int(message_element.get_name())
+        print(message_index)
+        clipboard = Gdk.Display().get_default().get_clipboard()
+        clipboard.set(self.chats["chats"][self.chats["selected_chat"]]["messages"][message_index]["content"])
+        self.show_toast("info", 5, self.main_overlay)
+
+    def show_message(self, msg:str, bot:bool, footer:str=None, image_base64:str=None, id:int=-1):
         message_text = Gtk.TextView(
             editable=False,
             focusable=True,
@@ -308,10 +316,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
         delete_button = Gtk.Button(
             icon_name = "user-trash-symbolic",
             css_classes = ["flat", "circular", "delete-message-button"],
-            valign="end",
-            halign="end",
+
+        )
+        copy_button = Gtk.Button(
+            icon_name = "edit-copy-symbolic",
+            css_classes = ["flat", "circular", "delete-message-button"],
+        )
+
+        button_container = Gtk.Box(
+            orientation=0,
+            spacing=6,
+            margin_end=6,
             margin_bottom=6,
-            margin_end=6
+            valign="end",
+            halign="end"
         )
 
         message_box = Gtk.Box(
@@ -341,11 +359,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
             message_box.append(image)
 
         message_box.append(message_text)
-        overlay = Gtk.Overlay(css_classes=["message"], name=str(len(self.chats["chats"][self.chats["selected_chat"]]["messages"])-1))
+        overlay = Gtk.Overlay(css_classes=["message"], name=id)
         overlay.set_child(message_box)
 
         delete_button.connect("clicked", lambda button, element=overlay: self.delete_message(element))
-        overlay.add_overlay(delete_button)
+        copy_button.connect("clicked", lambda button, element=overlay: self.copy_message(element))
+        button_container.append(delete_button)
+        button_container.append(copy_button)
+        overlay.add_overlay(button_container)
         self.chat_container.append(overlay)
 
         if bot:
@@ -652,12 +673,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def load_history_into_chat(self):
         for widget in list(self.chat_container): self.chat_container.remove(widget)
-        for message in self.chats['chats'][self.chats["selected_chat"]]['messages']:
+        for i, message in enumerate(self.chats['chats'][self.chats["selected_chat"]]['messages']):
             if message:
                 if message['role'] == 'user':
-                    self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>", message['images'][0] if 'images' in message and len(message['images']) > 0 else None)
+                    self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>", message['images'][0] if 'images' in message and len(message['images']) > 0 else None, id=i)
                 else:
-                    self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>")
+                    self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>", id=i)
                     self.add_code_blocks()
                     self.bot_message = None
 
