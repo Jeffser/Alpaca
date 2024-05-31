@@ -16,9 +16,15 @@ class SearchProvider:
             return
 
         print("ALPACA D-Bus connection obtained")
-
         interface_info = self.get_interface_info()
-        self.registration_id = self.connection.register_object(DBUS_OBJECT_PATH, interface_info, self.handle_method_call, None)
+
+        self.registration_id = self.connection.register_object(
+            DBUS_OBJECT_PATH,
+            interface_info,
+            self.handle_method_call,
+            None,
+            None
+        )
 
         if self.registration_id > 0:
             print(f"ALPACA Object registered with ID: {self.registration_id}")
@@ -28,28 +34,38 @@ class SearchProvider:
     def get_interface_info(self):
         print("ALPACA get_interface_info")
         xml = """
-        <node>
-            <interface name='org.gnome.Shell.SearchProvider2'>
-                <method name='GetInitialResultSet'>
-                    <arg type='as' name='terms' direction='in'/>
-                    <arg type='as' name='results' direction='out'/>
-                </method>
-                <method name='GetSubsearchResultSet'>
-                    <arg type='as' name='previous_results' direction='in'/>
-                    <arg type='as' name='terms' direction='in'/>
-                    <arg type='as' name='results' direction='out'/>
-                </method>
-                <method name='GetResultMetas'>
-                    <arg type='as' name='identifiers' direction='in'/>
-                    <arg type='a{sv}' name='metas' direction='out'/>
-                </method>
-                <method name='ActivateResult'>
-                    <arg type='s' name='identifier' direction='in'/>
-                    <arg type='as' name='terms' direction='in'/>
-                    <arg type='i' name='timestamp' direction='in'/>
-                </method>
-            </interface>
-        </node>
+		<node>
+		  <interface name="org.gnome.Shell.SearchProvider2">
+
+		    <method name="GetInitialResultSet">
+		      <arg type="as" name="terms" direction="in" />
+		      <arg type="as" name="results" direction="out" />
+		    </method>
+
+		    <method name="GetSubsearchResultSet">
+		      <arg type="as" name="previous_results" direction="in" />
+		      <arg type="as" name="terms" direction="in" />
+		      <arg type="as" name="results" direction="out" />
+		    </method>
+
+		    <method name="GetResultMetas">
+		      <arg type="as" name="identifiers" direction="in" />
+		      <arg type="aa{sv}" name="metas" direction="out" />
+		    </method>
+
+		    <method name="ActivateResult">
+		      <arg type="s" name="identifier" direction="in" />
+		      <arg type="as" name="terms" direction="in" />
+		      <arg type="u" name="timestamp" direction="in" />
+		    </method>
+
+		    <method name="LaunchSearch">
+		      <arg type="as" name="terms" direction="in" />
+		      <arg type="u" name="timestamp" direction="in" />
+		    </method>
+
+		  </interface>
+		</node>
         """
         return Gio.DBusNodeInfo.new_for_xml(xml).interfaces[0]
 
