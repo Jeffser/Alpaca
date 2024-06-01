@@ -33,6 +33,7 @@ from . import dialogs, local_instance, connection_handler
 class AlpacaWindow(Adw.ApplicationWindow):
     config_dir = os.getenv("XDG_CONFIG_HOME")
     app_dir = os.getenv("FLATPAK_DEST")
+    cache_dir = os.getenv("XDG_CACHE_HOME")
 
     __gtype_name__ = 'AlpacaWindow'
 
@@ -54,6 +55,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     attached_image = {"path": None, "base64": None}
 
     #Elements
+    create_model_base = Gtk.Template.Child()
+    create_model_name = Gtk.Template.Child()
+    create_model_system = Gtk.Template.Child()
+    create_model_template = Gtk.Template.Child()
+    create_model_dialog = Gtk.Template.Child()
     temperature_spin = Gtk.Template.Child()
     seed_spin = Gtk.Template.Child()
     keep_alive_spin = Gtk.Template.Child()
@@ -76,6 +82,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     image_button = Gtk.Template.Child()
     file_filter_image = Gtk.Template.Child()
     file_filter_json = Gtk.Template.Child()
+    file_filter_gguf = Gtk.Template.Child()
     model_drop_down = Gtk.Template.Child()
     model_string_list = Gtk.Template.Child()
 
@@ -163,9 +170,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             "date": formated_datetime,
             "content": self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
         })
+        messages_to_send = []
+        for message in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
+            if message: messages_to_send.append(message)
         data = {
             "model": current_model.get_string(),
-            "messages": self.chats["chats"][self.chats["selected_chat"]]["messages"],
+            "messages": messages_to_send,
             "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
             "keep_alive": f"{self.model_tweaks['keep_alive']}m"
         }
@@ -263,8 +273,79 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else: value = round(value, 1)
         if self.model_tweaks[spin.get_name()] is not None and self.model_tweaks[spin.get_name()] != value:
             self.model_tweaks[spin.get_name()] = value
-            print(self.model_tweaks)
             self.save_server_config()
+
+    @Gtk.Template.Callback()
+    def create_model_start(self, button):
+        base = self.create_model_base.get_subtitle()
+        name = self.create_model_name.get_text()
+        system = self.create_model_system.get_text()
+        template = self.create_model_template.get_text()
+        if "/" in base:
+            modelfile = f"FROM {base}\nSYSTEM {system}\nTEMPLATE {template}"
+        else:
+            modelfile = f"FROM {base}\nSYSTEM {system}"
+        self.pulling_model_list_box.set_visible(True)
+        model_row = Adw.ActionRow(
+            title = name
+        )
+        thread = threading.Thread(target=self.pull_model_process, kwargs={"model": name, "modelfile": modelfile})
+        overlay = Gtk.Overlay()
+        progress_bar = Gtk.ProgressBar(
+            valign = 2,
+            show_text = False,
+            margin_start = 10,
+            margin_end = 10,
+            css_classes = ["osd", "horizontal", "bottom"]
+        )
+        button = Gtk.Button(
+            icon_name = "media-playback-stop-symbolic",
+            vexpand = False,
+            valign = 3,
+            css_classes = ["error"]
+        )
+        button.connect("clicked", lambda button, model_name=name : dialogs.stop_pull_model(self, model_name))
+        model_row.add_suffix(button)
+        self.pulling_models[name] = {"row": model_row, "progress_bar": progress_bar, "overlay": overlay}
+        overlay.set_child(model_row)
+        overlay.add_overlay(progress_bar)
+        self.pulling_model_list_box.append(overlay)
+        self.create_model_dialog.close()
+        self.manage_models_dialog.present(self)
+        thread.start()
+
+
+    def check_alphanumeric(self, editable, text, length, position):
+        new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '_']])
+        if new_text != text: editable.stop_emission_by_name("insert-text")
+
+    def create_model(self, model:str, file:bool):
+        name = ""
+        system = ""
+        template = ""
+        if not file:
+            response = connection_handler.simple_post(f"{connection_handler.url}/api/show", json.dumps({"name": model}))
+            if 'text' in response:
+                data = json.loads(response['text'])
+
+                for line in data['modelfile'].split('\n'):
+                    if line.startswith('SYSTEM'):
+                        system = line[len('SYSTEM'):].strip()
+                    elif line.startswith('TEMPLATE'):
+                        template = line[len('TEMPLATE'):].strip()
+                self.create_model_template.set_sensitive(False)
+                name = model.split(':')[0]
+        else:
+            self.create_model_template.set_sensitive(True)
+            template = '"""{{ if .System }}<|start_header_id|>system<|end_header_id|>\n\n{{ .System }}<|eot_id|>{{ end }}{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>\n\n{{ .Prompt }}<|eot_id|>{{ end }}<|start_header_id|>assistant<|end_header_id|>\n{{ .Response }}<|eot_id|>"""'
+            name = model.split("/")[-1].split(".")[0]
+        self.create_model_base.set_subtitle(model)
+        self.create_model_name.set_text(name)
+        self.create_model_system.set_text(system)
+        self.create_model_template.set_text(template)
+        self.manage_models_dialog.close()
+        self.create_model_dialog.present(self)
+
 
     def show_toast(self, message_type:str, message_id:int, overlay):
         if message_type not in self.toast_messages or message_id > len(self.toast_messages[message_type] or message_id < 0):
@@ -292,7 +373,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def copy_message(self, message_element):
         message_index = int(message_element.get_name())
-        print(message_index)
         clipboard = Gdk.Display().get_default().get_clipboard()
         clipboard.set(self.chats["chats"][self.chats["selected_chat"]]["messages"][message_index]["content"])
         self.show_toast("info", 5, self.main_overlay)
@@ -376,7 +456,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def update_list_local_models(self):
         self.local_models = []
-        response = connection_handler.simple_get(connection_handler.url + "/api/tags")
+        response = connection_handler.simple_get(f"{connection_handler.url}/api/tags")
         for i in range(self.model_string_list.get_n_items() -1, -1, -1):
             self.model_string_list.remove(i)
         if response['status'] == 'ok':
@@ -575,9 +655,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.verify_if_image_can_be_used(): GLib.idle_add(self.image_button.set_sensitive, True)
         GLib.idle_add(self.image_button.set_css_classes, ["circular"])
         self.attached_image = {"path": None, "base64": None}
+        if self.loading_spinner:
+            GLib.idle_add(self.chat_container.remove, self.loading_spinner)
+            self.loading_spinner = None
         if response['status'] == 'error':
             GLib.idle_add(self.connection_error)
-            print(response)
 
     def pull_model_update(self, data, model_name):
         if model_name in list(self.pulling_models.keys()):
@@ -588,9 +670,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if len(list(self.pulling_models.keys())) == 0:
                 GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
-    def pull_model_process(self, model):
-        data = {"name":model}
-        response = connection_handler.stream_post(f"{connection_handler.url}/api/pull", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
+    def pull_model_process(self, model, modelfile):
+        response = {}
+        if modelfile:
+            data = {"name": model, "modelfile": modelfile}
+            response = connection_handler.stream_post(f"{connection_handler.url}/api/create", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
+        else:
+            data = {"name": model}
+            response = connection_handler.stream_post(f"{connection_handler.url}/api/pull", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
         GLib.idle_add(self.update_list_local_models)
 
         if response['status'] == 'ok':
@@ -618,7 +705,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         model_row = Adw.ActionRow(
             title = model
         )
-        thread = threading.Thread(target=self.pull_model_process, kwargs={"model": model})
+        thread = threading.Thread(target=self.pull_model_process, kwargs={"model": model, "modelfile": None})
         overlay = Gtk.Overlay()
         progress_bar = Gtk.ProgressBar(
             valign = 2,
@@ -634,7 +721,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             css_classes = ["error"]
         )
         button.connect("clicked", lambda button, model_name=model : dialogs.stop_pull_model(self, model_name))
-        #model_row.add_suffix(progress_bar)
         model_row.add_suffix(button)
         self.pulling_models[model] = {"row": model_row, "progress_bar": progress_bar, "overlay": overlay}
         overlay.set_child(model_row)
@@ -763,7 +849,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         del self.pulling_models[model_name]
 
     def delete_model(self, model_name):
-        response = connection_handler.simple_delete(connection_handler.url + "/api/delete", data={"name": model_name})
+        response = connection_handler.simple_delete(f"{connection_handler.url}/api/delete", data={"name": model_name})
         self.update_list_local_models()
         if response['status'] == 'ok':
             self.show_toast("good", 0, self.manage_models_overlay)
@@ -906,8 +992,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.get_application().create_action('send', lambda *_: self.send_message(self), ['Return'])
         self.get_application().create_action('export_current_chat', lambda *_: self.export_current_chat())
         self.get_application().create_action('import_chat', lambda *_: self.import_chat())
+        self.get_application().create_action('create_model_from_existing', lambda *_: dialogs.create_model_from_existing(self))
+        self.get_application().create_action('create_model_from_file', lambda *_: dialogs.create_model_from_file(self))
         self.add_chat_button.connect("clicked", lambda button : self.new_chat())
 
+        self.create_model_name.get_delegate().connect("insert-text", self.check_alphanumeric)
         self.remote_connection_entry.connect("entry-activated", lambda entry : entry.set_css_classes([]))
         self.remote_connection_switch.connect("notify", lambda pspec, user_data : self.connection_switched())
         self.background_switch.connect("notify", lambda pspec, user_data : self.switch_run_on_background())

@@ -196,7 +196,7 @@ def remove_image(self):
         callback = lambda dialog, task: remove_image_response(self, dialog, task)
     )
 
-# RECONNECT REMOTE |
+# RECONNECT REMOTE | WORKS
 
 def reconnect_remote_response(self, dialog, task, entry):
     response = dialog.choose_finish(task)
@@ -227,3 +227,43 @@ def reconnect_remote(self, current_url):
         cancellable = None,
         callback = lambda dialog, task, entry=entry: reconnect_remote_response(self, dialog, task, entry)
     )
+
+# CREATE MODEL |
+
+def create_model_from_existing_response(self, dialog, task, dropdown):
+    model = dropdown.get_selected_item().get_string()
+    if dialog.choose_finish(task) == 'accept' and model:
+        self.create_model(model, False)
+
+def create_model_from_existing(self):
+    string_list = Gtk.StringList()
+    for model in self.local_models:
+        string_list.append(model)
+
+    dropdown = Gtk.DropDown()
+    dropdown.set_model(string_list)
+    dialog = Adw.AlertDialog(
+        heading=_("Select Model"),
+        body=_("This model will be used as the base for the new model"),
+        extra_child=dropdown
+    )
+    dialog.add_response("cancel", _("Cancel"))
+    dialog.add_response("accept", _("Accept"))
+    dialog.set_response_appearance("accept", Adw.ResponseAppearance.SUGGESTED)
+    dialog.choose(
+        parent = self,
+        cancellable = None,
+        callback = lambda dialog, task, dropdown=dropdown: create_model_from_existing_response(self, dialog, task, dropdown)
+    )
+
+def create_model_from_file_response(self, file_dialog, result):
+    try: file = file_dialog.open_finish(result)
+    except: return
+    try:
+        self.create_model(file.get_path(), True)
+    except Exception as e:
+        self.show_toast("error", 5, self.main_overlay) ##TODO NEW ERROR MESSAGE
+
+def create_model_from_file(self):
+    file_dialog = Gtk.FileDialog(default_filter=self.file_filter_gguf)
+    file_dialog.open(self, None, lambda file_dialog, result: create_model_from_file_response(self, file_dialog, result))

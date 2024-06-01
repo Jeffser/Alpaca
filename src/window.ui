@@ -47,7 +47,7 @@
                       <object class="GtkMenuButton" id="chats_menu_button">
                         <property name="direction">1</property>
                         <property name="halign">3</property>
-                        <property name="menu-model">chats_button_menu</property>
+                        <property name="menu-model">chats_menu</property>
                         <property name="icon-name">view-more-symbolic</property>
                       </object>
                     </child>
@@ -359,6 +359,127 @@
       </child>
     </object>
 
+    <object class="AdwDialog" id="create_model_dialog">
+      <property name="can-close">true</property>
+      <property name="width-request">400</property>
+      <property name="height-request">600</property>
+      <child>
+        <object class="AdwToastOverlay" id="create_model_overlay">
+          <child>
+            <object class="AdwToolbarView">
+              <child type="bottom">
+                <object class="GtkActionBar">
+                  <property name="revealed">true</property>
+                  <child type="end">
+                    <object class="GtkButton">
+                      <property name="label" translatable="yes">Create</property>
+                      <signal name="clicked" handler="create_model_start"/>
+                      <style>
+                        <class name="suggested-action" />
+                      </style>
+                    </object>
+                  </child>
+                </object>
+              </child>
+              <child type="top">
+                <object class="AdwHeaderBar">
+                  <property name="title-widget">
+                    <object class="AdwWindowTitle">
+                      <property name="title" translatable="yes">Create model</property>
+                    </object>
+                  </property>
+                </object>
+              </child>
+              <child>
+                <object class="GtkScrolledWindow">
+                  <property name="vexpand">true</property>
+                  <property name="hexpand">true</property>
+                  <child>
+                    <object class="GtkBox">
+                      <property name="margin-start">12</property>
+                      <property name="margin-end">12</property>
+                      <property name="margin-top">12</property>
+                      <property name="margin-bottom">12</property>
+                      <property name="orientation">1</property>
+                      <property name="spacing">12</property>
+                      <child>
+                        <object class="GtkListBox">
+                          <style>
+                            <class name="boxed-list"/>
+                            <class name="card"/>
+                          </style>
+                          <property name="selection-mode">none</property>
+                          <child>
+                            <object class="AdwActionRow" id="create_model_base">
+                              <property name="title" translatable="yes">Base</property>
+                              <property name="subtitle"></property>
+                              <style>
+                                <class name="property"/>
+                              </style>
+                            </object>
+                          </child>
+                        </object>
+                      </child>
+                      <child>
+                        <object class="GtkListBox">
+                          <style>
+                            <class name="boxed-list"/>
+                            <class name="card"/>
+                          </style>
+                          <property name="selection-mode">none</property>
+                          <child>
+                            <object class="AdwEntryRow" id="create_model_name">
+                              <property name="title" translatable="yes">Name</property>
+                              <property name="input-purpose">alpha</property>
+                            </object>
+                          </child>
+                          <child>
+                            <object class="AdwEntryRow" id="create_model_system">
+                              <property name="title" translatable="yes">Context</property>
+                              <property name="input-purpose">alpha</property>
+                            </object>
+                          </child>
+                        </object>
+                      </child>
+                      <child>
+                        <object class="GtkListBox">
+                          <style>
+                            <class name="boxed-list"/>
+                            <class name="card"/>
+                          </style>
+                          <property name="selection-mode">none</property>
+                          <child>
+                            <object class="AdwEntryRow" id="create_model_template">
+                              <property name="title" translatable="yes">Template</property>
+                              <property name="input-purpose">alpha</property>
+                            </object>
+                          </child>
+                          <child>
+                            <object class="GtkLabel">
+                              <property name="label" translatable="yes">Some models require a specific template. Please visit the model's website for more information if you're unsure.</property>
+                              <property name="margin-start">12</property>
+                              <property name="margin-end">12</property>
+                              <property name="margin-top">12</property>
+                              <property name="margin-bottom">12</property>
+                              <property name="halign">1</property>
+                              <property name="wrap">true</property>
+                              <style>
+                                <class name="caption"/>
+                              </style>
+                            </object>
+                          </child>
+                        </object>
+                      </child>
+                    </object>
+                  </child>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+
     <object class="AdwDialog" id="manage_models_dialog">
       <property name="can-close">true</property>
       <property name="width-request">400</property>
@@ -369,6 +490,14 @@
             <object class="AdwToolbarView">
               <child type="top">
                 <object class="AdwHeaderBar">
+                  <child type="start">
+                    <object class="GtkMenuButton">
+                      <property name="primary">True</property>
+                      <property name="icon-name">list-add-symbolic</property>
+                      <property name="tooltip-text" translatable="yes">Create model</property>
+                      <property name="menu-model">create_model_menu</property>
+                    </object>
+                  </child>
                   <property name="title-widget">
                     <object class="AdwWindowTitle">
                       <property name="title" translatable="yes">Manage models</property>
@@ -622,7 +751,7 @@
       </item>
     </section>
   </menu>
-  <menu id="chats_button_menu">
+  <menu id="chats_menu">
     <section>
       <item>
         <attribute name="label" translatable="yes">Export current chat</attribute>
@@ -631,6 +760,18 @@
       <item>
         <attribute name="label" translatable="yes">Import chat</attribute>
         <attribute name="action">app.import_chat</attribute>
+      </item>
+    </section>
+  </menu>
+  <menu id="create_model_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">From existing model</attribute>
+        <attribute name="action">app.create_model_from_existing</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">From GGUF file (Testing)</attribute>
+        <attribute name="action">app.create_model_from_file</attribute>
       </item>
     </section>
   </menu>
@@ -647,6 +788,11 @@
     <mime-types>
       <mime-type>application/json</mime-type>
     </mime-types>
+  </object>
+  <object class="GtkFileFilter" id="file_filter_gguf">
+    <suffixes>
+      <suffix>gguf</suffix>
+    </suffixes>
   </object>
   <object class="GtkShortcutsWindow" id="shortcut_window">
     <property name="modal">1</property>
