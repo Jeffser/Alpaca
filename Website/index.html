@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpaca</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header id="header">
+        <div class="logo">
+            <img src="assets/Alpaca.svg" alt="Alpaca logo">
+            <h1>Alpaca</h1>
+        </div>
+        <div class="link">
+            <a class="github hover" href='https://github.com/Jeffser/Alpaca' target="_blank">Github<img class="redirect"
+                    src="assets/arrow.svg"></a>
+            <a class="hover" href='https://flathub.org/apps/com.jeffser.Alpaca' target="_blank">
+                <img id="logo" alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en' />
+            </a>
+        </div>
+    </header>
+    <main>
+        <div class="hero margin">
+            <div class="logo">
+                <img src="assets/Alpaca.svg" alt="Alpaca logo">
+                <h1>Alpaca</h1>
+            </div>
+            <div class="link yay">
+                <a class="hover" href='https://flathub.org/apps/com.jeffser.Alpaca' target="_blank">
+                    <img id="logo" alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en' /></a>
+                <a class="github hover" href='https://github.com/Jeffser/Alpaca' target="_blank">Browse code on Github
+                    <img class="redirect" src="assets/arrow.svg"></a>
+            </div>
+        </div>
+        <div class="image" id="targetElement">
+            <h2 class="margin">An Ollama client made with GTK4 and Libadwaita</h2>
+            <ul class="margin">
+                <li>Built in Ollama instance</li>
+                <li>Talk to multiple models in the same conversation</li>
+                <li>Pull and delete models from the app</li>
+                <li>Have multiple conversations</li>
+                <li>Image recognition (Only available with compatible models)</li>
+                <li>Import and export chats</li>
+            </ul>
+            <h2>Screenshot</h2>
+            <section id="image-carousel" class="splide" aria-label="Screenshots">
+                <div class="splide__track">
+                      <ul class="splide__list">
+                          <li class="splide__slide">
+                              <img src="assets/1.png" alt="">
+                          </li>
+                          <li class="splide__slide">
+                              <img src="assets/2.png" alt="">
+                          </li>
+                          <li class="splide__slide">
+                              <img src="assets/3.png" alt="">
+                          </li>
+                      </ul>
+                </div>
+              </section>
+        </div>
+    </main>
+
+    <footer>
+        This project is not affiliated with Ollama<br>
+        &copy; The Alpaca Team - <a href='https://github.com/Jeffser/Alpaca' target="_blank">Github</a>
+    </footer>
+</body>
+
+</html>
