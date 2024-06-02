@@ -2,9 +2,10 @@
 #
 # Translate guideline :
 #
-# English	French
-# to chat	discuter
-# a chat	une discussion
+# English	  French
+# to chat	  discuter
+# a chat	  une discussion
+# template  template
 #
 #
 msgid ""
@@ -12,7 +13,7 @@ msgstr ""
 "Project-Id-Version: 0.8.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-01 00:15-0600\n"
-"PO-Revision-Date: 2024-05-30 13:42+0200\n"
+"PO-Revision-Date: 2024-06-02 12:54+0200\n"
 "Last-Translator: Louis Chauvet-Villaret <louischauvet0@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -104,29 +105,32 @@ msgstr "Mise à jour majeure"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:71
 msgid "Added: Support for GGUF models (experimental)"
-msgstr ""
+msgstr "Ajouté : support des modèles GGUF (éxpérimental)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:72
-#, fuzzy
 msgid "Added: Support for customization and creation of models"
-msgstr "Ajouté : support de plusieurs tag sur un seul modèle"
+msgstr "Ajouté : support de la personnalisation et création de modèles"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:73
 msgid "Fixed: Icons don't appear on non Gnome systems"
 msgstr ""
+"Résolu : certains icônes n'apparaissait pas sur les systèmes ne fonctionnant "
+"pas avec le bureau Gnome"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:74
 msgid "Update Ollama to v0.1.39"
-msgstr ""
+msgstr "Mise à jour vers Ollama 0.1.39"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:81
 msgid "Fix"
-msgstr ""
+msgstr "Résolution de bogue"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:83
 msgid ""
 "Fixed: app didn't open if models tweaks wasn't present in the config files"
 msgstr ""
+"Résolu : l'application ne s'ouvrait pas si les ajustements de modèles "
+"n'étaient pas présents dans les fichiers de configuration"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Changed multiple icons (paper airplane for the send button)"
@@ -839,7 +843,7 @@ msgid ""
 "answer more creatively. (Default: 0.8)"
 msgstr ""
 "La température du modèle. Augmenter la température engendrera des réponses "
-"plus créatives."
+"plus créatives. (défaut : 0.8)"
 
 #: src/window.ui:330
 msgid "Seed"
@@ -856,9 +860,8 @@ msgstr ""
 "(aléatoire))"
 
 #: src/window.ui:345
-#, fuzzy
 msgid "Keep Alive Time"
-msgstr "Temps "
+msgstr "Temps en mémoire"
 
 #: src/window.ui:346
 msgid ""
@@ -866,39 +869,39 @@ msgid ""
 "request in minutes (default: 5)"
 msgstr ""
 "Contrôlez combien de temps le modèle va rester chargé en mémoire suivant le "
-"temps demandé en minutes (défaut : 5)"
+"temps demandé en minutes. (défaut : 5)"
 
 #: src/window.ui:375
 msgid "Create"
-msgstr ""
+msgstr "Créer"
 
 #: src/window.ui:388 src/window.ui:497
-#, fuzzy
 msgid "Create model"
-msgstr "Modèles recommandés"
+msgstr "Créer un modèle"
 
 #: src/window.ui:414
 msgid "Base"
-msgstr ""
+msgstr "Base"
 
 #: src/window.ui:432
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: src/window.ui:438
 msgid "Context"
-msgstr ""
+msgstr "Contexte"
 
 #: src/window.ui:453
-#, fuzzy
 msgid "Template"
-msgstr "Température"
+msgstr "Template"
 
 #: src/window.ui:459
 msgid ""
 "Some models require a specific template. Please visit the model's website "
 "for more information if you're unsure."
 msgstr ""
+"Certain modèle requiert un template spécifique. Merci de visiter le site du "
+"modèle pour plus d'information."
 
 #: src/window.ui:572
 msgid "Previous"
