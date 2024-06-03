@@ -28,7 +28,7 @@ Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can man
 - Snap Package (maybe)
 
 ## Screenies
-Login to Ollama instance             |  Chatting with models        |  Managing models
+Code highlighting             |  Chatting with models        |  Managing models
 :-------------------------:|:-------------------------:|:-------------------------:
 ![Screenshot from 2024-05-12 19-58-28](https://jeffser.com/images/alpaca/screenie1.png)  |  ![Screenshot from 2024-05-12 20-01-08](https://jeffser.com/images/alpaca/screenie2.png)  |  ![Screenshot from 2024-05-12 20-01-31](https://jeffser.com/images/alpaca/screenie3.png)
 
