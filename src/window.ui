@@ -367,11 +367,23 @@
               <property name="title" translatable="yes">Ollama Overrides</property>
               <property name="description" translatable="yes">Manage the arguments used on Ollama, any changes on this page only applies to the integrated instance, the instance will restart if you make changes</property>
               <child>
-                <object class="AdwComboRow" id="gfx_combo">
+                <object class="AdwComboRow" id="override_HSA_OVERRIDE_GFX_VERSION">
                   <signal name="notify" handler="override_changed"/>
                   <property name="name">HSA_OVERRIDE_GFX_VERSION</property>
                   <property name="title" translatable="no">AMD Radeon GFX</property>
                   <property name="subtitle" translatable="yes">HSA_OVERRIDE_GFX_VERSION</property>
+                  <child type="prefix">
+                    <object class="GtkButton">
+                      <signal name="clicked" handler="link_button_handler"/>
+                      <property name="name">https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides</property>
+                      <property name="vexpand">false</property>
+                      <property name="valign">3</property>
+                      <property name="icon-name">globe-symbolic</property>
+                      <style>
+                        <class name="success"/>
+                      </style>
+                    </object>
+                  </child>
                   <property name="model">
                     <object class="GtkStringList">
                       <items>

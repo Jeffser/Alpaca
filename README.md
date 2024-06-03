@@ -56,7 +56,7 @@ The chat data is located in `~/.var/app/com.jeffser.Alpaca/config/chats.json` yo
 To do that you just need to delete the file `~/.var/app/com.jeffser.Alpaca/config/server.json`, this won't affect your saved chats or models.
 
 ### Add/Change environment variables for Ollama
-You can change anything except `$HOME` and `$OLLAMA_HOST`, to do this go to `~/.var/app/com.jeffser.Alpaca/config/server.json` and change `ollama_overrides` accordingly, some overrides are available to change on the GUI
+You can change anything except `$HOME` and `$OLLAMA_HOST`, to do this go to `~/.var/app/com.jeffser.Alpaca/config/server.json` and change `ollama_overrides` accordingly, some overrides are available to change on the GUI.
 
 ---
 

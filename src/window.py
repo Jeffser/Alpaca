@@ -54,6 +54,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     chats = {"chats": {_("New Chat"): {"messages": []}}, "selected_chat": "New Chat"}
     attached_image = {"path": None, "base64": None}
 
+    #Override elements
+    override_HSA_OVERRIDE_GFX_VERSION = Gtk.Template.Child()
+
     #Elements
     create_model_base = Gtk.Template.Child()
     create_model_name = Gtk.Template.Child()
@@ -324,6 +327,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if value: local_instance.overrides[name] = value
         self.save_server_config()
         if not self.run_remote: local_instance.reset()
+
+    @Gtk.Template.Callback()
+    def link_button_handler(self, button):
+        webbrowser.open(button.get_name())
 
     def check_alphanumeric(self, editable, text, length, position):
         new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '_']])
@@ -1024,6 +1031,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.keep_alive_spin.set_value(self.model_tweaks['keep_alive'])
                 #Overrides
                 if "ollama_overrides" in data: local_instance.overrides = data['ollama_overrides']
+                for override, element in {"HSA_OVERRIDE_GFX_VERSION": self.override_HSA_OVERRIDE_GFX_VERSION}.items():
+                    if override and override in local_instance.overrides:
+                        model = element.get_model()
+                        for i in range(model.get_n_items()):
+                            if model.get_string(i) == local_instance.overrides[override]:
+                                element.set_selected(i)
+
 
                 self.background_switch.set_active(self.run_on_background)
                 self.set_hide_on_close(self.run_on_background)
