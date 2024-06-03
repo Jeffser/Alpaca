@@ -314,6 +314,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.manage_models_dialog.present(self)
         thread.start()
 
+    @Gtk.Template.Callback()
+    def override_changed(self, dropdown, pspec):
+        if str(pspec) != "<GParamUInt 'selected'>": return #Great code
+        name = dropdown.get_name()
+        value = dropdown.get_selected_item().get_string() if dropdown.get_selected() != 0 else None
+        if (not value and name not in local_instance.overrides) or (value and value in local_instance.overrides and local_instance.overrides[name] == value): return
+        if not value: del local_instance.overrides[name]
+        if value: local_instance.overrides[name] = value
+        self.save_server_config()
+        if not self.run_remote: local_instance.reset()
 
     def check_alphanumeric(self, editable, text, length, position):
         new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '_']])
@@ -490,7 +500,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def save_server_config(self):
         with open(os.path.join(self.config_dir, "server.json"), "w+") as f:
-            json.dump({'remote_url': self.remote_url, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background, 'model_tweaks': self.model_tweaks}, f)
+            json.dump({'remote_url': self.remote_url, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background, 'model_tweaks': self.model_tweaks, 'ollama_overrides': local_instance.overrides}, f)
 
     def verify_connection(self):
         response = connection_handler.simple_get(connection_handler.url)
@@ -1012,6 +1022,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.temperature_spin.set_value(self.model_tweaks['temperature'])
                 self.seed_spin.set_value(self.model_tweaks['seed'])
                 self.keep_alive_spin.set_value(self.model_tweaks['keep_alive'])
+                #Overrides
+                if "ollama_overrides" in data: local_instance.overrides = data['ollama_overrides']
 
                 self.background_switch.set_active(self.run_on_background)
                 self.set_hide_on_close(self.run_on_background)

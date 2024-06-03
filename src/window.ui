@@ -358,6 +358,44 @@
           </child>
         </object>
       </child>
+      <child>
+        <object class="AdwPreferencesPage" id="instance_page">
+          <property name="title" translatable="yes">Ollama Instance</property>
+          <property name="icon-name">brain-augemnted-symbolic</property>
+          <child>
+            <object class="AdwPreferencesGroup">
+              <property name="title" translatable="yes">Ollama Overrides</property>
+              <property name="description" translatable="yes">Manage the arguments used on Ollama, any changes on this page only applies to the integrated instance, the instance will restart if you make changes</property>
+              <child>
+                <object class="AdwComboRow" id="gfx_combo">
+                  <signal name="notify" handler="override_changed"/>
+                  <property name="name">HSA_OVERRIDE_GFX_VERSION</property>
+                  <property name="title" translatable="no">AMD Radeon GFX</property>
+                  <property name="subtitle" translatable="yes">HSA_OVERRIDE_GFX_VERSION</property>
+                  <property name="model">
+                    <object class="GtkStringList">
+                      <items>
+                        <item translatable="yes">(Do not override)</item>
+                        <item>gfx900</item>
+                        <item>gfx906</item>
+                        <item>gfx908</item>
+                        <item>gfx90a</item>
+                        <item>gfx940</item>
+                        <item>gfx941</item>
+                        <item>gfx942</item>
+                        <item>gfx1030</item>
+                        <item>gfx1100</item>
+                        <item>gfx1101</item>
+                        <item>gfx1102</item>
+                      </items>
+                    </object>
+                  </property>
+                </object>
+              </child>
+          </object>
+          </child>
+        </object>
+      </child>
     </object>
 
     <object class="AdwDialog" id="create_model_dialog">
