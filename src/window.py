@@ -57,6 +57,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     #Override elements
     override_HSA_OVERRIDE_GFX_VERSION = Gtk.Template.Child()
+    override_CUDA_VISIBLE_DEVICES = Gtk.Template.Child()
+    override_HIP_VISIBLE_DEVICES = Gtk.Template.Child()
 
     #Elements
     create_model_base = Gtk.Template.Child()
@@ -1190,7 +1192,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.keep_alive_spin.set_value(self.model_tweaks['keep_alive'])
                 #Overrides
                 if "ollama_overrides" in data: local_instance.overrides = data['ollama_overrides']
-                for override, element in {"HSA_OVERRIDE_GFX_VERSION": self.override_HSA_OVERRIDE_GFX_VERSION}.items():
+                for element in [
+                        self.override_HSA_OVERRIDE_GFX_VERSION,
+                        self.override_CUDA_VISIBLE_DEVICES,
+                        self.override_HIP_VISIBLE_DEVICES]:
+                    override = element.get_name()
                     if override in local_instance.overrides:
                         element.set_text(local_instance.overrides[override])
 
