@@ -920,7 +920,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def new_chat(self):
         chat_name = self.generate_numbered_name(_("New Chat"), self.chats["chats"].keys())
-        self.chats["chats"][chat_name] = {"messages": []}
+        self.chats["chats"][chat_name] = {"messages": {}}
         self.save_history()
         self.new_chat_element(chat_name, True)
 
@@ -1038,7 +1038,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             with tarfile.open(tar_path, "w") as tar:
                 tar.add(json_path, arcname="data.json")
                 directory = os.path.join(self.data_dir, "chats", self.chats['selected_chat'])
-                tar.add(directory, arcname=os.path.basename(directory))
+                if os.path.exists(directory) and os.path.isdir(directory):
+                    tar.add(directory, arcname=os.path.basename(directory))
 
             with open(tar_path, "rb") as tar:
                 tar_content = tar.read()
@@ -1082,9 +1083,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                             new_chat_name = self.generate_numbered_name(chat_name, list(self.chats['chats'].keys()))
                             self.chats['chats'][new_chat_name] = chat_content
                             src_path = os.path.join(temp_dir, chat_name)
-                            print(src_path)
-                            print(os.path.exists(src_path))
-                            print(os.path.isdir(src_path))
                             if os.path.exists(src_path) and os.path.isdir(src_path):
                                 dest_path = os.path.join(self.data_dir, "chats", new_chat_name)
                                 shutil.copytree(src_path, dest_path)
