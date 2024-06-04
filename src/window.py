@@ -186,6 +186,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             shutil.copy(content['path'], os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name))
             content["button"].get_parent().remove(content["button"])
         self.attachments = {}
+        self.attachment_box.set_visible(False)
 
             #{"path": file_path, "type": file_type, "content": content}
 
