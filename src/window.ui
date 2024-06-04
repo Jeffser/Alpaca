@@ -391,11 +391,11 @@
               <property name="title" translatable="yes">Ollama Overrides</property>
               <property name="description" translatable="yes">Manage the arguments used on Ollama, any changes on this page only applies to the integrated instance, the instance will restart if you make changes</property>
               <child>
-                <object class="AdwComboRow" id="override_HSA_OVERRIDE_GFX_VERSION">
-                  <signal name="notify" handler="override_changed"/>
+                <object class="AdwEntryRow" id="override_HSA_OVERRIDE_GFX_VERSION">
+                  <signal name="apply" handler="override_changed"/>
                   <property name="name">HSA_OVERRIDE_GFX_VERSION</property>
-                  <property name="title" translatable="no">AMD Radeon GFX</property>
-                  <property name="subtitle" translatable="yes">HSA_OVERRIDE_GFX_VERSION</property>
+                  <property name="title" translatable="no">HSA_OVERRIDE_GFX_VERSION</property>
+                  <property name="show-apply-button">true</property>
                   <child type="prefix">
                     <object class="GtkButton">
                       <signal name="clicked" handler="link_button_handler"/>
@@ -408,27 +408,49 @@
                       </style>
                     </object>
                   </child>
-                  <property name="model">
-                    <object class="GtkStringList">
-                      <items>
-                        <item translatable="yes">(Do not override)</item>
-                        <item>gfx900</item>
-                        <item>gfx906</item>
-                        <item>gfx908</item>
-                        <item>gfx90a</item>
-                        <item>gfx940</item>
-                        <item>gfx941</item>
-                        <item>gfx942</item>
-                        <item>gfx1030</item>
-                        <item>gfx1100</item>
-                        <item>gfx1101</item>
-                        <item>gfx1102</item>
-                      </items>
-                    </object>
-                  </property>
                 </object>
               </child>
-          </object>
+              <child>
+                <object class="AdwEntryRow" id="override_CUDA_VISIBLE_DEVICES">
+                  <signal name="apply" handler="override_changed"/>
+                  <property name="name">CUDA_VISIBLE_DEVICES</property>
+                  <property name="title" translatable="no">CUDA_VISIBLE_DEVICES</property>
+                  <property name="show-apply-button">true</property>
+                  <child type="prefix">
+                    <object class="GtkButton">
+                      <signal name="clicked" handler="link_button_handler"/>
+                      <property name="name">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection</property>
+                      <property name="vexpand">false</property>
+                      <property name="valign">3</property>
+                      <property name="icon-name">globe-symbolic</property>
+                      <style>
+                        <class name="success"/>
+                      </style>
+                    </object>
+                  </child>
+                </object>
+              </child>
+              <child>
+                <object class="AdwEntryRow" id="override_HIP_VISIBLE_DEVICES">
+                  <signal name="apply" handler="override_changed"/>
+                  <property name="name">HIP_VISIBLE_DEVICES</property>
+                  <property name="title" translatable="no">HIP_VISIBLE_DEVICES</property>
+                  <property name="show-apply-button">true</property>
+                  <child type="prefix">
+                    <object class="GtkButton">
+                      <signal name="clicked" handler="link_button_handler"/>
+                      <property name="name">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection-1</property>
+                      <property name="vexpand">false</property>
+                      <property name="valign">3</property>
+                      <property name="icon-name">globe-symbolic</property>
+                      <style>
+                        <class name="success"/>
+                      </style>
+                    </object>
+                  </child>
+                </object>
+              </child>
+            </object>
           </child>
         </object>
       </child>

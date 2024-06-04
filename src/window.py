@@ -332,13 +332,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         thread.start()
 
     @Gtk.Template.Callback()
-    def override_changed(self, dropdown, pspec):
-        if str(pspec) != "<GParamUInt 'selected'>": return #Great code
-        name = dropdown.get_name()
-        value = dropdown.get_selected_item().get_string() if dropdown.get_selected() != 0 else None
+    def override_changed(self, entry):
+        name = entry.get_name()
+        value = entry.get_text()
         if (not value and name not in local_instance.overrides) or (value and value in local_instance.overrides and local_instance.overrides[name] == value): return
         if not value: del local_instance.overrides[name]
-        if value: local_instance.overrides[name] = value
+        else: local_instance.overrides[name] = value
         self.save_server_config()
         if not self.run_remote: local_instance.reset()
 
@@ -1192,11 +1191,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 #Overrides
                 if "ollama_overrides" in data: local_instance.overrides = data['ollama_overrides']
                 for override, element in {"HSA_OVERRIDE_GFX_VERSION": self.override_HSA_OVERRIDE_GFX_VERSION}.items():
-                    if override and override in local_instance.overrides:
-                        model = element.get_model()
-                        for i in range(model.get_n_items()):
-                            if model.get_string(i) == local_instance.overrides[override]:
-                                element.set_selected(i)
+                    if override in local_instance.overrides:
+                        element.set_text(local_instance.overrides[override])
 
 
                 self.background_switch.set_active(self.run_on_background)
