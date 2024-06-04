@@ -15,6 +15,7 @@ Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can man
 - Talk to multiple models in the same conversation
 - Pull and delete models from the app
 - Image recognition
+- Document recognition (plain text files)
 - Code highlighting
 - Multiple conversations
 - Notifications
@@ -22,7 +23,6 @@ Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can man
 - Delete messages
 
 ## Future features!
-- Document recognition (Probably only Markdown because it's really easy for AI to read)
 - YouTube recognition (Ask questions about a YouTube video using the transcript)
 - Edit messages
 - Snap Package (maybe)
@@ -50,7 +50,7 @@ For now Alpaca doesn't offer a way to do this from the GUI but it's really simpl
 Go to `~/.var/app/com.jeffser.Alpaca/config/server.json` and change the `"local_port"` value, by default it is `11435`.
 
 ### Backup all the chats
-The chat data is located in `~/.var/app/com.jeffser.Alpaca/config/chats.json` you can copy that file wherever you want to.
+The chat data is located in `~/.var/app/com.jeffser.Alpaca/data/chats` you can copy that directory wherever you want to.
 
 ### Force showing the welcome dialog
 To do that you just need to delete the file `~/.var/app/com.jeffser.Alpaca/config/server.json`, this won't affect your saved chats or models.
