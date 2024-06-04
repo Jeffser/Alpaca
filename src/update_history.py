@@ -34,4 +34,5 @@ def update(self):
     with open(os.path.join(self.data_dir, "chats", "chats.json"), "w+") as f:
         json.dump(new_data, f, indent=6)
 
+    os.remove(os.path.join(self.config_dir, "chats.json"))
 
