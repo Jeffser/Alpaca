@@ -1,6 +1,6 @@
 # window.py
 #
-# Copyright 2024 Unknown
+# Copyright 2024 Jeffser
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,17 +21,18 @@ import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
-import json, requests, threading, os, re, base64, sys, gettext, locale, webbrowser, subprocess
+import json, requests, threading, os, re, base64, sys, gettext, locale, webbrowser, subprocess, uuid, shutil, tarfile, tempfile
 from time import sleep
 from io import BytesIO
 from PIL import Image
 from datetime import datetime
 from .available_models import available_models
-from . import dialogs, local_instance, connection_handler
+from . import dialogs, local_instance, connection_handler, update_history
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
     config_dir = os.getenv("XDG_CONFIG_HOME")
+    data_dir = os.getenv("XDG_DATA_HOME")
     app_dir = os.getenv("FLATPAK_DEST")
     cache_dir = os.getenv("XDG_CACHE_HOME")
 
@@ -51,8 +52,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_tweaks = {"temperature": 0.7, "seed": 0, "keep_alive": 5}
     local_models = []
     pulling_models = {}
-    chats = {"chats": {_("New Chat"): {"messages": []}}, "selected_chat": "New Chat"}
-    attached_image = {"path": None, "base64": None}
+    chats = {"chats": {_("New Chat"): {"messages": {}}}, "selected_chat": "New Chat"}
+    attachments = {}
 
     #Override elements
     override_HSA_OVERRIDE_GFX_VERSION = Gtk.Template.Child()
@@ -71,6 +72,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     bot_message : Gtk.TextBuffer = None
     bot_message_box : Gtk.Box = None
     bot_message_view : Gtk.TextView = None
+    file_preview_dialog = Gtk.Template.Child()
+    file_preview_text_view = Gtk.Template.Child()
     welcome_dialog = Gtk.Template.Child()
     welcome_carousel = Gtk.Template.Child()
     welcome_previous_button = Gtk.Template.Child()
@@ -82,10 +85,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
     message_text_view = Gtk.Template.Child()
     send_button = Gtk.Template.Child()
     stop_button = Gtk.Template.Child()
-    image_button = Gtk.Template.Child()
+    chats_menu_button = Gtk.Template.Child()
+    attachment_container = Gtk.Template.Child()
+    attachment_box = Gtk.Template.Child()
     file_filter_image = Gtk.Template.Child()
-    file_filter_json = Gtk.Template.Child()
+    file_filter_tar = Gtk.Template.Child()
     file_filter_gguf = Gtk.Template.Child()
+    file_filter_text = Gtk.Template.Child()
     model_drop_down = Gtk.Template.Child()
     model_string_list = Gtk.Template.Child()
 
@@ -112,7 +118,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             _("Could not pull model"),
             _("Cannot open image"),
             _("Cannot delete chat because it's the only one left"),
-            _("There was an error with the local Ollama instance, so it has been reset")
+            _("There was an error with the local Ollama instance, so it has been reset"),
+            _("Image recognition is only available on specific models")
         ],
         "info": [
             _("Please select a model before chatting"),
@@ -137,22 +144,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.model_drop_down.get_selected_item() == None: return True
         selected = self.model_drop_down.get_selected_item().get_string().split(":")[0]
         if selected in ['llava', 'bakllava', 'moondream', 'llava-llama3']:
-            self.image_button.set_sensitive(True)
-            self.image_button.set_tooltip_text(_("Upload image"))
+            for name, content in self.attachments.items():
+                if content['type'] == 'image':
+                    content['button'].set_css_classes(["flat"])
             return True
         else:
-            self.image_button.set_sensitive(False)
-            self.image_button.set_tooltip_text(_("Only available on selected models"))
-            self.image_button.set_css_classes(["circular"])
-            self.attached_image = {"path": None, "base64": None}
+            for name, content in self.attachments.items():
+                if content['type'] == 'image':
+                    content['button'].set_css_classes(["flat", "error"])
             return False
 
     @Gtk.Template.Callback()
     def stop_message(self, button=None):
         if self.loading_spinner: self.chat_container.remove(self.loading_spinner)
-        if self.verify_if_image_can_be_used(): self.image_button.set_sensitive(True)
-        self.image_button.set_css_classes(["circular"])
-        self.attached_image = {"path": None, "base64": None}
         self.toggle_ui_sensitive(True)
         self.switch_send_stop_button()
         self.bot_message = None
@@ -161,40 +165,58 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def send_message(self, button=None):
+        if self.bot_message: return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
         current_model = self.model_drop_down.get_selected_item()
         if current_model is None:
             self.show_toast("info", 0, self.main_overlay)
             return
+        id = self.generate_uuid()
+
+        attached_images = []
+        attached_files = {}
+        can_use_images = self.verify_if_image_can_be_used()
+        for name, content in self.attachments.items():
+            if content["type"] == 'image' and can_use_images: attached_images.append(name)
+            else: attached_files[name] = content['type']
+            if not os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id)):
+                os.makedirs(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id))
+            shutil.copy(content['path'], os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name))
+            content["button"].get_parent().remove(content["button"])
+        self.attachments = {}
+
+            #{"path": file_path, "type": file_type, "content": content}
+
         formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
-        self.chats["chats"][self.chats["selected_chat"]]["messages"].append({
+
+        self.chats["chats"][self.chats["selected_chat"]]["messages"][id] = {
             "role": "user",
             "model": "User",
             "date": formated_datetime,
             "content": self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-        })
-        messages_to_send = []
-        for message in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
-            if message: messages_to_send.append(message)
+        }
+        if len(attached_images) > 0:
+            self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['images'] = attached_images
+        if len(attached_files.keys()) > 0:
+            self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['files'] = attached_files
         data = {
             "model": current_model.get_string(),
-            "messages": messages_to_send,
+            "messages": self.convert_history_to_ollama(),
             "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
             "keep_alive": f"{self.model_tweaks['keep_alive']}m"
         }
-        if self.verify_if_image_can_be_used() and self.attached_image["base64"] is not None:
-            data["messages"][-1]["images"] = [self.attached_image["base64"]]
         self.switch_send_stop_button()
         self.toggle_ui_sensitive(False)
-        self.image_button.set_sensitive(False)
 
-        self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", self.attached_image["base64"], id=len(self.chats["chats"][self.chats["selected_chat"]]["messages"])-1)
+        #self.attachments[name] = {"path": file_path, "type": file_type, "content": content}
+        self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", attached_images, attached_files, id=id)
         self.message_text_view.get_buffer().set_text("", 0)
         self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
         self.chat_container.append(self.loading_spinner)
-        self.show_message("", True, id=len(self.chats["chats"][self.chats["selected_chat"]]["messages"]))
+        bot_id=self.generate_uuid()
+        self.show_message("", True, id=bot_id)
 
-        thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model']))
+        thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], bot_id))
         thread.start()
 
     @Gtk.Template.Callback()
@@ -222,21 +244,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.connection_error()
 
     @Gtk.Template.Callback()
-    def open_image(self, button):
-        if "destructive-action" in button.get_css_classes():
-            dialogs.remove_image(self)
-        else:
-            file_dialog = Gtk.FileDialog(default_filter=self.file_filter_image)
-            file_dialog.open(self, None, self.load_image)
-
-    @Gtk.Template.Callback()
     def chat_changed(self, listbox, row):
         if row and row.get_name() != self.chats["selected_chat"]:
             self.chats["selected_chat"] = row.get_name()
             self.load_history_into_chat()
-            if len(self.chats["chats"][self.chats["selected_chat"]]["messages"]) > 0:
+            if len(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()) > 0:
                 for i in range(self.model_string_list.get_n_items()):
-                    if self.model_string_list.get_string(i) == self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]["model"]:
+                    if self.model_string_list.get_string(i) == self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]:
                         self.model_drop_down.set_selected(i)
                         break
 
@@ -382,19 +396,49 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.get_application().send_notification(None, notification)
 
     def delete_message(self, message_element):
-        message_index = int(message_element.get_name())
-        if message_index < len(self.chats["chats"][self.chats["selected_chat"]]["messages"]):
-            self.chats["chats"][self.chats["selected_chat"]]["messages"][message_index] = None
-            self.chat_container.remove(message_element)
-            self.save_history()
+        id = message_element.get_name()
+        del self.chats["chats"][self.chats["selected_chat"]]["messages"][id]
+        self.chat_container.remove(message_element)
+        if os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id)):
+            print("deleting " + id)
+            shutil.rmtree(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id))
+        self.save_history()
 
     def copy_message(self, message_element):
-        message_index = int(message_element.get_name())
+        id = message_element.get_name()
         clipboard = Gdk.Display().get_default().get_clipboard()
-        clipboard.set(self.chats["chats"][self.chats["selected_chat"]]["messages"][message_index]["content"])
+        clipboard.set(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["content"])
         self.show_toast("info", 5, self.main_overlay)
 
-    def show_message(self, msg:str, bot:bool, footer:str=None, image_base64:str=None, id:int=-1):
+    def preview_file(self, file_path, file_type):
+        content = self.get_content_of_file(file_path, file_type)
+        buffer = self.file_preview_text_view.get_buffer()
+        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+        buffer.insert(buffer.get_start_iter(), content, len(content))
+        self.file_preview_dialog.set_title(os.path.basename(file_path))
+        self.file_preview_dialog.present(self)
+
+    def convert_history_to_ollama(self):
+        messages = []
+        for id, message in self.chats["chats"][self.chats["selected_chat"]]["messages"].items():
+            new_message = message.copy()
+            if 'files' in message and len(message['files']) > 0:
+                del new_message['files']
+                new_message['content'] = ''
+                for name, file_type in message['files'].items():
+                    file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
+                    new_message['content'] += f"```[{name}]\n{self.get_content_of_file(file_path, file_type)}\n```"
+                new_message['content'] += message['content']
+            if 'images' in message and len(message['images']) > 0:
+                new_message['images'] = []
+                for name in message['images']:
+                    file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
+                    new_message['images'].append(self.get_content_of_file(file_path, 'image'))
+            messages.append(new_message)
+        return messages
+
+
+    def show_message(self, msg:str, bot:bool, footer:str=None, images:list=None, files:dict=None, id:str=None):
         message_text = Gtk.TextView(
             editable=False,
             focusable=True,
@@ -437,23 +481,63 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
         message_text.set_valign(Gtk.Align.CENTER)
 
-        if image_base64 is not None:
-            image_data = base64.b64decode(image_base64)
-            loader = GdkPixbuf.PixbufLoader.new()
-            loader.write(image_data)
-            loader.close()
+        if images and len(images) > 0:
+            image_container = Gtk.Box(
+                orientation=0,
+                spacing=12
+            )
+            image_scroller = Gtk.ScrolledWindow(
+                margin_top=10,
+                margin_start=10,
+                margin_end=10,
+                hexpand=True,
+                height_request = 240,
+                child=image_container
+            )
+            for image in images:
+                image_data = base64.b64decode(self.get_content_of_file(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image), "image"))
+                loader = GdkPixbuf.PixbufLoader.new()
+                loader.write(image_data)
+                loader.close()
+                pixbuf = loader.get_pixbuf()
+                texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+                image = Gtk.Image.new_from_paintable(texture)
+                image.set_size_request(240, 240)
+                image.set_hexpand(False)
+                image.set_css_classes(["flat"])
+                image_container.append(image)
+            message_box.append(image_scroller)
 
-            pixbuf = loader.get_pixbuf()
-            texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+        if files and len(files) > 0:
+            file_container = Gtk.Box(
+                orientation=0,
+                spacing=12
+            )
+            file_scroller = Gtk.ScrolledWindow(
+                margin_top=10,
+                margin_start=10,
+                margin_end=10,
+                hexpand=True,
+                child=file_container
+            )
+            for name, file_type in files.items():
+                shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
 
-            image = Gtk.Image.new_from_paintable(texture)
-            image.set_size_request(240, 240)
-            image.set_margin_top(10)
-            image.set_margin_start(10)
-            image.set_margin_end(10)
-            image.set_hexpand(False)
-            image.set_css_classes(["flat"])
-            message_box.append(image)
+                button_content = Adw.ButtonContent(
+                    label=shown_name,
+                    icon_name="document-text-symbolic"
+                )
+                button = Gtk.Button(
+                    vexpand=False,
+                    valign=3,
+                    name=name,
+                    css_classes=["flat"],
+                    tooltip_text=name,
+                    child=button_content
+                )
+                button.connect("clicked", lambda button, file_path=os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name), file_type=file_type: self.preview_file(file_path, file_type))
+                file_container.append(button)
+            message_box.append(file_scroller)
 
         message_box.append(message_text)
         overlay = Gtk.Overlay(css_classes=["message"], name=id)
@@ -507,7 +591,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def save_server_config(self):
         with open(os.path.join(self.config_dir, "server.json"), "w+") as f:
-            json.dump({'remote_url': self.remote_url, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background, 'model_tweaks': self.model_tweaks, 'ollama_overrides': local_instance.overrides}, f)
+            json.dump({'remote_url': self.remote_url, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background, 'model_tweaks': self.model_tweaks, 'ollama_overrides': local_instance.overrides}, f, indent=6)
 
     def verify_connection(self):
         response = connection_handler.simple_get(connection_handler.url)
@@ -631,12 +715,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         clipboard.set(text)
         self.show_toast("info", 4, self.main_overlay)
 
-    def update_bot_message(self, data):
+    def update_bot_message(self, data, id):
         if self.bot_message is None:
             self.save_history()
             sys.exit()
         vadjustment = self.chat_window.get_vadjustment()
-        if self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]['role'] == "user" or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
+        if (id in self.chats["chats"][self.chats["selected_chat"]]["messages"] and self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['role'] == "user") or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if data['done']:
             formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
@@ -644,34 +728,31 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
             self.save_history()
         else:
-            if self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]['role'] == "user":
+            if id not in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
                 GLib.idle_add(self.chat_container.remove, self.loading_spinner)
                 self.loading_spinner = None
-                self.chats["chats"][self.chats["selected_chat"]]["messages"].append({
+                self.chats["chats"][self.chats["selected_chat"]]["messages"][id] = {
                     "role": "assistant",
                     "model": data['model'],
                     "date": datetime.now().strftime("%Y/%m/%d %H:%M"),
                     "content": ''
-                })
+                }
             GLib.idle_add(self.bot_message.insert, self.bot_message.get_end_iter(), data['message']['content'])
-            self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]['content'] += data['message']['content']
+            self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['content'] += data['message']['content']
 
     def toggle_ui_sensitive(self, status):
-        for element in [self.chat_list_box, self.add_chat_button]:
+        for element in [self.chat_list_box, self.add_chat_button, self.chats_menu_button]:
             element.set_sensitive(status)
 
     def switch_send_stop_button(self):
         self.stop_button.set_visible(self.send_button.get_visible())
         self.send_button.set_visible(not self.send_button.get_visible())
 
-    def run_message(self, messages, model):
-        response = connection_handler.stream_post(f"{connection_handler.url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=self.update_bot_message)
+    def run_message(self, messages, model, id):
+        response = connection_handler.stream_post(f"{connection_handler.url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=lambda data, id=id: self.update_bot_message(data, id))
         GLib.idle_add(self.add_code_blocks)
         GLib.idle_add(self.switch_send_stop_button)
         GLib.idle_add(self.toggle_ui_sensitive, True)
-        if self.verify_if_image_can_be_used(): GLib.idle_add(self.image_button.set_sensitive, True)
-        GLib.idle_add(self.image_button.set_css_classes, ["circular"])
-        self.attached_image = {"path": None, "base64": None}
         if self.loading_spinner:
             GLib.idle_add(self.chat_container.remove, self.loading_spinner)
             self.loading_spinner = None
@@ -771,69 +852,46 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.available_model_list_box.append(model)
 
     def save_history(self):
-        with open(os.path.join(self.config_dir, "chats.json"), "w+") as f:
+        with open(os.path.join(self.data_dir, "chats", "chats.json"), "w+") as f:
             json.dump(self.chats, f, indent=4)
 
     def load_history_into_chat(self):
         for widget in list(self.chat_container): self.chat_container.remove(widget)
-        for i, message in enumerate(self.chats['chats'][self.chats["selected_chat"]]['messages']):
+        for key, message in self.chats['chats'][self.chats["selected_chat"]]['messages'].items():
             if message:
                 if message['role'] == 'user':
-                    self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>", message['images'][0] if 'images' in message and len(message['images']) > 0 else None, id=i)
+                    self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, id=key)
                 else:
-                    self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>", id=i)
+                    self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>", id=key)
                     self.add_code_blocks()
                     self.bot_message = None
 
     def load_history(self):
-        if os.path.exists(os.path.join(self.config_dir, "chats.json")):
+        if os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
             try:
-                with open(os.path.join(self.config_dir, "chats.json"), "r") as f:
+                with open(os.path.join(self.data_dir, "chats", "chats.json"), "r") as f:
                     self.chats = json.load(f)
                     if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]: self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
-                    if len(list(self.chats["chats"].keys())) == 0: self.chats["chats"][_("New Chat")] = {"messages": []}
-                    for chat_name, content in self.chats['chats'].items():
-                        for i, content in enumerate(content['messages']):
-                            if not content: del self.chats['chats'][chat_name]['messages'][i]
+                    if len(list(self.chats["chats"].keys())) == 0: self.chats["chats"][_("New Chat")] = {"messages": {}}
             except Exception as e:
-                self.chats = {"chats": {_("New Chat"): {"messages": []}}, "selected_chat": _("New Chat")}
+                self.chats = {"chats": {_("New Chat"): {"messages": {}}}, "selected_chat": _("New Chat")}
             self.load_history_into_chat()
 
-    def load_image(self, file_dialog, result):
-        try: file = file_dialog.open_finish(result)
-        except: return
-        try:
-            self.attached_image["path"] = file.get_path()
-            with Image.open(self.attached_image["path"]) as img:
-                width, height = img.size
-                max_size = 240
-                if width > height:
-                    new_width = max_size
-                    new_height = int((max_size / width) * height)
+    def generate_numbered_name(self, chat_name:str, compare_list:list) -> str:
+        if chat_name in compare_list:
+            for i in range(len(compare_list)):
+                if "." in chat_name:
+                    if f"{'.'.join(chat_name.split('.')[:-1])} {i+1}.{chat_name.split('.')[-1]}" not in compare_list:
+                        chat_name = f"{'.'.join(chat_name.split('.')[:-1])} {i+1}.{chat_name.split('.')[-1]}"
+                        break
                 else:
-                    new_height = max_size
-                    new_width = int((max_size / height) * width)
-                resized_img = img.resize((new_width, new_height), Image.LANCZOS)
-                with BytesIO() as output:
-                    resized_img.save(output, format="PNG")
-                    image_data = output.getvalue()
-                self.attached_image["base64"] = base64.b64encode(image_data).decode("utf-8")
-
-            self.image_button.set_css_classes(["destructive-action", "circular"])
-        except Exception as e:
-            self.show_toast("error", 5, self.main_overlay)
-
-    def remove_image(self):
-        self.image_button.set_css_classes(["circular"])
-        self.attached_image = {"path": None, "base64": None}
-
-    def generate_numbered_chat_name(self, chat_name) -> str:
-        if chat_name in self.chats["chats"]:
-            for i in range(len(list(self.chats["chats"].keys()))):
-                if chat_name + f" {i+1}" not in self.chats["chats"]:
-                    chat_name += f" {i+1}"
-                    break
+                    if  f"{chat_name} {i+1}" not in compare_list:
+                        chat_name = f"{chat_name} {i+1}"
+                        break
         return chat_name
+
+    def generate_uuid(self) -> str:
+        return f"{datetime.today().strftime('%Y%m%d%H%M%S%f')}{uuid.uuid4().hex}"
 
     def clear_chat(self):
         for widget in list(self.chat_container): self.chat_container.remove(widget)
@@ -842,21 +900,25 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def delete_chat(self, chat_name):
         del self.chats['chats'][chat_name]
+        if os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'])):
+            shutil.rmtree(os.path.join(self.data_dir, "chats", self.chats['selected_chat']))
         self.save_history()
         self.update_chat_list()
         if len(self.chats['chats'])==0:
             self.new_chat()
 
     def rename_chat(self, old_chat_name, new_chat_name, label_element):
-        new_chat_name = self.generate_numbered_chat_name(new_chat_name)
+        new_chat_name = self.generate_numbered_name(new_chat_name, self.chats["chats"].keys())
         self.chats["chats"][new_chat_name] = self.chats["chats"][old_chat_name]
         del self.chats["chats"][old_chat_name]
+        if os.path.exists(os.path.join(self.data_dir, "chats", old_chat_name)):
+            shutil.move(os.path.join(self.data_dir, "chats", old_chat_name), os.path.join(self.data_dir, "chats", new_chat_name))
         label_element.set_label(new_chat_name)
         label_element.get_parent().set_name(new_chat_name)
         self.save_history()
 
     def new_chat(self):
-        chat_name = self.generate_numbered_chat_name(_("New Chat"))
+        chat_name = self.generate_numbered_name(_("New Chat"), self.chats["chats"].keys())
         self.chats["chats"][chat_name] = {"messages": []}
         self.save_history()
         self.new_chat_element(chat_name, True)
@@ -963,35 +1025,76 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def on_export_current_chat(self, file_dialog, result):
         file = file_dialog.save_finish(result)
-        data_to_export = {self.chats["selected_chat"]: self.chats["chats"][self.chats["selected_chat"]]}
-        file.replace_contents_async(
-            json.dumps(data_to_export, indent=4).encode("UTF-8"),
-            etag=None,
-            make_backup=False,
-            flags=Gio.FileCreateFlags.NONE,
-            cancellable=None,
-            callback=self.on_replace_contents
-        )
+        if not file: return
+        json_data = json.dumps({self.chats["selected_chat"]: self.chats["chats"][self.chats["selected_chat"]]}, indent=4).encode("UTF-8")
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            json_path = os.path.join(temp_dir, "data.json")
+            with open(json_path, "wb") as json_file:
+                json_file.write(json_data)
+
+            tar_path = os.path.join(temp_dir, f"{self.chats['selected_chat']}")
+            with tarfile.open(tar_path, "w") as tar:
+                tar.add(json_path, arcname="data.json")
+                directory = os.path.join(self.data_dir, "chats", self.chats['selected_chat'])
+                tar.add(directory, arcname=os.path.basename(directory))
+
+            with open(tar_path, "rb") as tar:
+                tar_content = tar.read()
+
+            file.replace_contents_async(
+                tar_content,
+                etag=None,
+                make_backup=False,
+                flags=Gio.FileCreateFlags.NONE,
+                cancellable=None,
+                callback=self.on_replace_contents
+            )
 
     def export_current_chat(self):
-        file_dialog = Gtk.FileDialog(initial_name=f"{self.chats['selected_chat']}.json")
+        file_dialog = Gtk.FileDialog(initial_name=f"{self.chats['selected_chat']}.tar")
         file_dialog.save(parent=self, cancellable=None, callback=self.on_export_current_chat)
 
     def on_chat_imported(self, file_dialog, result):
         file = file_dialog.open_finish(result)
+        if not file: return
         stream = file.read(None)
         data_stream = Gio.DataInputStream.new(stream)
-        data, _ = data_stream.read_until('\0', None)
-        data = json.loads(data)
-        chat_name = list(data.keys())[0]
-        chat_content = data[chat_name]
-        self.chats['chats'][chat_name] = chat_content
+        tar_content = data_stream.read_bytes(1024 * 1024, None)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            tar_filename = os.path.join(temp_dir, "imported_chat.tar")
+
+            with open(tar_filename, "wb") as tar_file:
+                tar_file.write(tar_content.get_data())
+
+            with tarfile.open(tar_filename, "r") as tar:
+                tar.extractall(path=temp_dir)
+                chat_name = None
+                chat_content = None
+                for member in tar.getmembers():
+                    if member.name == "data.json":
+                        json_filepath = os.path.join(temp_dir, member.name)
+                        with open(json_filepath, "r") as json_file:
+                            data = json.load(json_file)
+                        for chat_name, chat_content in data.items():
+                            new_chat_name = self.generate_numbered_name(chat_name, list(self.chats['chats'].keys()))
+                            self.chats['chats'][new_chat_name] = chat_content
+                            src_path = os.path.join(temp_dir, chat_name)
+                            print(src_path)
+                            print(os.path.exists(src_path))
+                            print(os.path.isdir(src_path))
+                            if os.path.exists(src_path) and os.path.isdir(src_path):
+                                dest_path = os.path.join(self.data_dir, "chats", new_chat_name)
+                                shutil.copytree(src_path, dest_path)
+
+
         self.update_chat_list()
         self.save_history()
         self.show_toast("good", 3, self.main_overlay)
 
     def import_chat(self):
-        file_dialog = Gtk.FileDialog(default_filter=self.file_filter_json)
+        file_dialog = Gtk.FileDialog(default_filter=self.file_filter_tar)
         file_dialog.open(self, None, self.on_chat_imported)
 
     def switch_run_on_background(self):
@@ -999,9 +1102,64 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.set_hide_on_close(self.run_on_background)
         self.verify_connection()
 
+    def get_content_of_file(self, file_path, file_type):
+        if file_type == 'image':
+            try:
+                with Image.open(file_path) as img:
+                    width, height = img.size
+                    max_size = 240
+                    if width > height:
+                        new_width = max_size
+                        new_height = int((max_size / width) * height)
+                    else:
+                        new_height = max_size
+                        new_width = int((max_size / height) * width)
+                    resized_img = img.resize((new_width, new_height), Image.LANCZOS)
+                    with BytesIO() as output:
+                        resized_img.save(output, format="PNG")
+                        image_data = output.getvalue()
+                    return base64.b64encode(image_data).decode("utf-8")
+            except Exception as e:
+                self.show_toast("error", 5, self.main_overlay)
+        elif file_type == 'plain_text':
+            with open(file_path, 'r') as f:
+                return f.read()
+
+    def remove_attached_file(self, button):
+        del self.attachments[button.get_name()]
+        button.get_parent().remove(button)
+        if len(self.attachments) == 0: self.attachment_box.set_visible(False)
+
+    def attach_file(self, file_path, file_type):
+        name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
+        content = self.get_content_of_file(file_path, file_type)
+
+        shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
+
+        button_content = Adw.ButtonContent(
+            label=shown_name,
+            icon_name={"image": "image-x-generic-symbolic", "plain_text": "document-text-symbolic"}[file_type]
+        )
+        button = Gtk.Button(
+            vexpand=True,
+            valign=3,
+            name=name,
+            css_classes=["flat"],
+            tooltip_text=name,
+            child=button_content
+        )
+
+        self.attachments[name] = {"path": file_path, "type": file_type, "content": content, "button": button}
+        button.connect("clicked", lambda button: dialogs.remove_attached_file(self, button))
+        self.attachment_container.append(button)
+        self.attachment_box.set_visible(True)
+
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
+        if os.path.exists(os.path.join(self.config_dir, "chats.json")) and not os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
+            update_history.update(self)
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.get_application().create_action('new_chat', lambda *_: self.new_chat(), ['<primary>n'])
@@ -1011,6 +1169,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.get_application().create_action('import_chat', lambda *_: self.import_chat())
         self.get_application().create_action('create_model_from_existing', lambda *_: dialogs.create_model_from_existing(self))
         self.get_application().create_action('create_model_from_file', lambda *_: dialogs.create_model_from_file(self))
+        self.get_application().create_action('attach_image', lambda *_: dialogs.attach_file(self, self.file_filter_image, "image"))
+        self.get_application().create_action('attach_plain_text', lambda *_: dialogs.attach_file(self, self.file_filter_text, "plain_text"))
         self.add_chat_button.connect("clicked", lambda button : self.new_chat())
 
         self.create_model_name.get_delegate().connect("insert-text", self.check_alphanumeric)

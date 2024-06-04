@@ -177,14 +177,14 @@ def pull_model(self, model_name):
 
 # REMOVE IMAGE | WORKS
 
-def remove_image_response(self, dialog, task):
+def remove_attached_file_response(self, dialog, task, button):
     if dialog.choose_finish(task) == 'remove':
-        self.remove_image()
+        self.remove_attached_file(button)
 
-def remove_image(self):
+def remove_attached_file(self, button):
     dialog = Adw.AlertDialog(
-        heading=_("Remove Image"),
-        body=_("Are you sure you want to remove image?"),
+        heading=_("Remove File"),
+        body=_("Are you sure you want to remove file?"),
         close_response="cancel"
     )
     dialog.add_response("cancel", _("Cancel"))
@@ -193,7 +193,7 @@ def remove_image(self):
     dialog.choose(
         parent = self,
         cancellable = None,
-        callback = lambda dialog, task: remove_image_response(self, dialog, task)
+        callback = lambda dialog, task, button=button: remove_attached_file_response(self, dialog, task, button)
     )
 
 # RECONNECT REMOTE | WORKS
@@ -228,7 +228,7 @@ def reconnect_remote(self, current_url):
         callback = lambda dialog, task, entry=entry: reconnect_remote_response(self, dialog, task, entry)
     )
 
-# CREATE MODEL |
+# CREATE MODEL | WORKS
 
 def create_model_from_existing_response(self, dialog, task, dropdown):
     model = dropdown.get_selected_item().get_string()
@@ -267,3 +267,18 @@ def create_model_from_file_response(self, file_dialog, result):
 def create_model_from_file(self):
     file_dialog = Gtk.FileDialog(default_filter=self.file_filter_gguf)
     file_dialog.open(self, None, lambda file_dialog, result: create_model_from_file_response(self, file_dialog, result))
+
+# FILE CHOOSER | WORKS
+
+def attach_file_response(self, file_dialog, result, file_type):
+    try: file = file_dialog.open_finish(result)
+    except: return
+    self.attach_file(file.get_path(), file_type)
+
+
+def attach_file(self, filter, file_type):
+    if file_type == 'image' and not self.verify_if_image_can_be_used():
+        self.show_toast('error', 8, self.main_overlay)
+        return
+    file_dialog = Gtk.FileDialog(default_filter=filter)
+    file_dialog.open(self, None, lambda file_dialog, result, file_type=file_type: attach_file_response(self, file_dialog, result, file_type))
