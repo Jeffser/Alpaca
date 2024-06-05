@@ -414,11 +414,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def preview_file(self, file_path, file_type):
         content = self.get_content_of_file(file_path, file_type)
-        buffer = self.file_preview_text_view.get_buffer()
-        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-        buffer.insert(buffer.get_start_iter(), content, len(content))
-        self.file_preview_dialog.set_title(os.path.basename(file_path))
-        self.file_preview_dialog.present(self)
+        if content:
+            buffer = self.file_preview_text_view.get_buffer()
+            buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+            buffer.insert(buffer.get_start_iter(), content, len(content))
+            self.file_preview_dialog.set_title(os.path.basename(file_path))
+            self.file_preview_dialog.present(self)
 
     def convert_history_to_ollama(self):
         messages = []
@@ -429,13 +430,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 new_message['content'] = ''
                 for name, file_type in message['files'].items():
                     file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
-                    new_message['content'] += f"```[{name}]\n{self.get_content_of_file(file_path, file_type)}\n```"
+                    file_data = self.get_content_of_file(file_path, file_type)
+                    if file_data: new_message['content'] += f"```[{name}]\n{file_data}\n```"
                 new_message['content'] += message['content']
             if 'images' in message and len(message['images']) > 0:
                 new_message['images'] = []
                 for name in message['images']:
                     file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
-                    new_message['images'].append(self.get_content_of_file(file_path, 'image'))
+                    image_data = self.get_content_of_file(file_path, 'image')
+                    if image_data: new_message['images'].append(image_data)
             messages.append(new_message)
         return messages
 
@@ -497,8 +500,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 child=image_container
             )
             for image in images:
-                if os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image)):
-                    image_data = base64.b64decode(self.get_content_of_file(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image), "image"))
+                raw_data = self.get_content_of_file(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image), "image")
+                if raw_data:
+                    image_data = base64.b64decode(raw_data)
                     loader = GdkPixbuf.PixbufLoader.new()
                     loader.write(image_data)
                     loader.close()
@@ -1104,6 +1108,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.verify_connection()
 
     def get_content_of_file(self, file_path, file_type):
+        if not os.path.exists(file_path) return None
         if file_type == 'image':
             try:
                 with Image.open(file_path) as img:
@@ -1134,26 +1139,26 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def attach_file(self, file_path, file_type):
         name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
         content = self.get_content_of_file(file_path, file_type)
+        if content:
+            shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
 
-        shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
+            button_content = Adw.ButtonContent(
+                label=shown_name,
+                icon_name={"image": "image-x-generic-symbolic", "plain_text": "document-text-symbolic"}[file_type]
+            )
+            button = Gtk.Button(
+                vexpand=True,
+                valign=3,
+                name=name,
+                css_classes=["flat"],
+                tooltip_text=name,
+                child=button_content
+            )
 
-        button_content = Adw.ButtonContent(
-            label=shown_name,
-            icon_name={"image": "image-x-generic-symbolic", "plain_text": "document-text-symbolic"}[file_type]
-        )
-        button = Gtk.Button(
-            vexpand=True,
-            valign=3,
-            name=name,
-            css_classes=["flat"],
-            tooltip_text=name,
-            child=button_content
-        )
-
-        self.attachments[name] = {"path": file_path, "type": file_type, "content": content, "button": button}
-        button.connect("clicked", lambda button: dialogs.remove_attached_file(self, button))
-        self.attachment_container.append(button)
-        self.attachment_box.set_visible(True)
+            self.attachments[name] = {"path": file_path, "type": file_type, "content": content, "button": button}
+            button.connect("clicked", lambda button: dialogs.remove_attached_file(self, button))
+            self.attachment_container.append(button)
+            self.attachment_box.set_visible(True)
 
 
     def __init__(self, **kwargs):
