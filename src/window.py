@@ -1108,7 +1108,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.verify_connection()
 
     def get_content_of_file(self, file_path, file_type):
-        if not os.path.exists(file_path) return None
+        if not os.path.exists(file_path): return None
         if file_type == 'image':
             try:
                 with Image.open(file_path) as img:
