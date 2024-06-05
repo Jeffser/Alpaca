@@ -1163,10 +1163,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
+        if not os.path.exists(os.path.join(self.data_dir, "chats")):
+            os.makedirs(os.path.join(self.data_dir, "chats"))
         if os.path.exists(os.path.join(self.config_dir, "chats.json")) and not os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
             update_history.update(self)
-        elif not os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
-            self.save_history()
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.get_application().create_action('new_chat', lambda *_: self.new_chat(), ['<primary>n'])
