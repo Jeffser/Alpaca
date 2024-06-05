@@ -497,17 +497,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 child=image_container
             )
             for image in images:
-                image_data = base64.b64decode(self.get_content_of_file(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image), "image"))
-                loader = GdkPixbuf.PixbufLoader.new()
-                loader.write(image_data)
-                loader.close()
-                pixbuf = loader.get_pixbuf()
-                texture = Gdk.Texture.new_for_pixbuf(pixbuf)
-                image = Gtk.Image.new_from_paintable(texture)
-                image.set_size_request(240, 240)
-                image.set_hexpand(False)
-                image.set_css_classes(["flat"])
-                image_container.append(image)
+                if os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image)):
+                    image_data = base64.b64decode(self.get_content_of_file(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image), "image"))
+                    loader = GdkPixbuf.PixbufLoader.new()
+                    loader.write(image_data)
+                    loader.close()
+                    pixbuf = loader.get_pixbuf()
+                    texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+                    image = Gtk.Image.new_from_paintable(texture)
+                    image.set_size_request(240, 240)
+                    image.set_hexpand(False)
+                    image.set_css_classes(["flat"])
+                    image_container.append(image)
             message_box.append(image_scroller)
 
         if files and len(files) > 0:
@@ -1215,6 +1216,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
             self.welcome_dialog.present(self)
         if self.verify_connection() is False: self.connection_error()
+        print(connection_handler.url)
         self.update_list_available_models()
         self.load_history()
         self.update_chat_list()
