@@ -402,7 +402,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         del self.chats["chats"][self.chats["selected_chat"]]["messages"][id]
         self.chat_container.remove(message_element)
         if os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id)):
-            print("deleting " + id)
             shutil.rmtree(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id))
         self.save_history()
 
@@ -1166,6 +1165,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GtkSource.init()
         if os.path.exists(os.path.join(self.config_dir, "chats.json")) and not os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
             update_history.update(self)
+        elif not os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
+            self.save_history()
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.get_application().create_action('new_chat', lambda *_: self.new_chat(), ['<primary>n'])
@@ -1221,7 +1222,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
             self.welcome_dialog.present(self)
         if self.verify_connection() is False: self.connection_error()
-        print(connection_handler.url)
         self.update_list_available_models()
         self.load_history()
         self.update_chat_list()
