@@ -270,15 +270,24 @@ def create_model_from_file(self):
 
 # FILE CHOOSER | WORKS
 
-def attach_file_response(self, file_dialog, result, file_type):
+def attach_file_response(self, file_dialog, result):
+    file_types = {
+        "plain_text": ["txt", "md", "html", "css", "js", "py", "java", "json", "xml"],
+        "image": ["png", "jpeg", "jpg", "webp", "gif"],
+        "pdf": ["pdf"],
+        "docx": ["docx"]
+    }
     try: file = file_dialog.open_finish(result)
     except: return
-    self.attach_file(file.get_path(), file_type)
-
-
-def attach_file(self, filter, file_type):
+    extension = file.get_path().split(".")[-1]
+    file_type = next(key for key, value in file_types.items() if extension in value)
+    if not file_type: return
     if file_type == 'image' and not self.verify_if_image_can_be_used():
         self.show_toast('error', 8, self.main_overlay)
         return
+    self.attach_file(file.get_path(), file_type)
+
+
+def attach_file(self, filter):
     file_dialog = Gtk.FileDialog(default_filter=filter)
-    file_dialog.open(self, None, lambda file_dialog, result, file_type=file_type: attach_file_response(self, file_dialog, result, file_type))
+    file_dialog.open(self, None, lambda file_dialog, result: attach_file_response(self, file_dialog, result))

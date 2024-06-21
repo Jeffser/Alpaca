@@ -189,9 +189,7 @@
                                 <property name="orientation">0</property>
                                 <property name="spacing">12</property>
                                 <child>
-                                  <object class="GtkMenuButton" id="attachment_button">
-                                    <property name="menu-model">attachment_menu</property>
-                                    <property name="direction">0</property>
+                                  <object class="GtkButton" id="attachment_button">
                                     <property name="vexpand">false</property>
                                     <property name="valign">3</property>
                                     <property name="tooltip-text" translatable="yes">Attach file</property>
@@ -903,21 +901,8 @@
       </item>
     </section>
   </menu>
-  <menu id="attachment_menu">
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">Plain text file</attribute>
-        <attribute name="action">app.attach_plain_text</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Image</attribute>
-        <attribute name="action">app.attach_image</attribute>
-      </item>
-    </section>
-  </menu>
-  <object class="GtkFileFilter" id="file_filter_text">
+  <object class="GtkFileFilter" id="file_filter_attachments">
     <suffixes>
-      <suffix></suffix>
       <suffix>txt</suffix>
       <suffix>md</suffix>
       <suffix>html</suffix>
@@ -927,16 +912,13 @@
       <suffix>java</suffix>
       <suffix>json</suffix>
       <suffix>xml</suffix>
+      <suffix>pdf</suffix>
+      <suffix>docx</suffix>
+      <suffix>png</suffix>
+      <suffix>jpeg</suffix>
+      <suffix>webp</suffix>
+      <suffix>gif</suffix>
     </suffixes>
-  </object>
-  <object class="GtkFileFilter" id="file_filter_image">
-    <mime-types>
-      <mime-type>image/svg+xml</mime-type>
-      <mime-type>image/png</mime-type>
-      <mime-type>image/jpeg</mime-type>
-      <mime-type>image/webp</mime-type>
-      <mime-type>image/gif</mime-type>
-    </mime-types>
   </object>
   <object class="GtkFileFilter" id="file_filter_tar">
     <mime-types>

@@ -21,10 +21,11 @@ import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
-import json, requests, threading, os, re, base64, sys, gettext, locale, webbrowser, subprocess, uuid, shutil, tarfile, tempfile
+import json, requests, threading, os, re, base64, sys, gettext, locale, webbrowser, subprocess, uuid, shutil, tarfile, tempfile, docx
 from time import sleep
 from io import BytesIO
 from PIL import Image
+from pypdf import PdfReader
 from datetime import datetime
 from .available_models import available_models
 from . import dialogs, local_instance, connection_handler, update_history
@@ -90,10 +91,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     chats_menu_button = Gtk.Template.Child()
     attachment_container = Gtk.Template.Child()
     attachment_box = Gtk.Template.Child()
-    file_filter_image = Gtk.Template.Child()
     file_filter_tar = Gtk.Template.Child()
     file_filter_gguf = Gtk.Template.Child()
-    file_filter_text = Gtk.Template.Child()
+    file_filter_attachments = Gtk.Template.Child()
+    attachment_button = Gtk.Template.Child()
     model_drop_down = Gtk.Template.Child()
     model_string_list = Gtk.Template.Child()
 
@@ -1129,6 +1130,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
         elif file_type == 'plain_text':
             with open(file_path, 'r') as f:
                 return f.read()
+        elif file_type == 'pdf':
+            reader = PdfReader(file_path)
+            if len(reader.pages) == 0: return None
+            text = ""
+            for i, page in enumerate(reader.pages):
+                text += f"\n- Page {i}\n{page.extract_text()}\n"
+            return text
+        elif file_type == 'docx':
+            document = docx.Document(file_path)
+            if len(document.paragraphs) == 0: return None
+            text = ""
+            for paragraph in document.paragraphs:
+                text += f"{paragraph.text}\n"
+            return text
 
     def remove_attached_file(self, button):
         del self.attachments[button.get_name()]
@@ -1143,7 +1158,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             button_content = Adw.ButtonContent(
                 label=shown_name,
-                icon_name={"image": "image-x-generic-symbolic", "plain_text": "document-text-symbolic"}[file_type]
+                icon_name={
+                    "image": "image-x-generic-symbolic",
+                    "plain_text": "document-text-symbolic",
+                    "pdf": "document-text-symbolic",
+                    "docx": "document-text-symbolic"
+                }[file_type]
             )
             button = Gtk.Button(
                 vexpand=True,
@@ -1176,10 +1196,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.get_application().create_action('import_chat', lambda *_: self.import_chat())
         self.get_application().create_action('create_model_from_existing', lambda *_: dialogs.create_model_from_existing(self))
         self.get_application().create_action('create_model_from_file', lambda *_: dialogs.create_model_from_file(self))
-        self.get_application().create_action('attach_image', lambda *_: dialogs.attach_file(self, self.file_filter_image, "image"))
-        self.get_application().create_action('attach_plain_text', lambda *_: dialogs.attach_file(self, self.file_filter_text, "plain_text"))
         self.add_chat_button.connect("clicked", lambda button : self.new_chat())
-
+        self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
         self.create_model_name.get_delegate().connect("insert-text", self.check_alphanumeric)
         self.remote_connection_entry.connect("entry-activated", lambda entry : entry.set_css_classes([]))
         self.remote_connection_switch.connect("notify", lambda pspec, user_data : self.connection_switched())
