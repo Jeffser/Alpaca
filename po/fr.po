@@ -6,21 +6,22 @@
 # to chat	  discuter
 # a chat	  une discussion
 # template  template
-#
+# Louis Chauvet-Villaret <louischauvet0@gmail.com>, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.8.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-04 20:09-0600\n"
-"PO-Revision-Date: 2024-06-02 12:54+0200\n"
+"PO-Revision-Date: 2024-06-05 11:06+0200\n"
 "Last-Translator: Louis Chauvet-Villaret <louischauvet0@gmail.com>\n"
-"Language-Team: \n"
+"Language-Team: French\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Gtranslator 46.1\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: data/com.jeffser.Alpaca.desktop.in:3
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
@@ -64,7 +65,7 @@ msgstr "Reconnaissance d'image (modèles compatibles)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:18
 msgid "Plain text documents recognition"
-msgstr ""
+msgstr "Reconnaissance de documents en texte brut"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:19
 msgid "Import and export chats"
@@ -111,6 +112,10 @@ msgid ""
 "the new version. I apologize if this caused any corruption in your chat "
 "history. This should be the only time such a transition is needed."
 msgstr ""
+"Résolu : il y avait quelques erreurs lors de la transition de l'ancienne "
+"version des discussions vers la nouvelle. Nous nous excusons si cela a "
+"corrompu votre historique de discussion. Cela devrait être la seule fois "
+"qu'une telle modification ait lieu."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:77
 #: data/com.jeffser.Alpaca.metainfo.xml.in:229
@@ -118,21 +123,19 @@ msgid "Huge Update"
 msgstr "Mise à jour majeure"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:79
-#, fuzzy
 msgid "Added: Support for plain text files"
-msgstr "Ajouté : support de la personnalisation et création de modèles"
+msgstr "Ajouté : support des documents de type texte brut"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:80
 msgid "Added: New backend system for storing messages"
-msgstr ""
+msgstr "Ajouté : nouveau système en arrière-plan de sauvegarde des messages"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:81
 #, fuzzy
 msgid "Added: Support for changing Ollama's overrides"
-msgstr "Ajouté : support de la personnalisation et création de modèles"
+msgstr "Ajouté : support pour changer les paramètres d'Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:82
-#, fuzzy
 msgid "General Optimization"
 msgstr "Optimisation générale"
 
@@ -154,8 +157,8 @@ msgstr "Ajouté : support de la personnalisation et création de modèles"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Fixed: Icons don't appear on non Gnome systems"
 msgstr ""
-"Résolu : certains icônes n'apparaissait pas sur les systèmes ne fonctionnant "
-"pas avec le bureau Gnome"
+"Résolu : certaines icônes n'apparaissait pas sur les systèmes ne "
+"fonctionnant pas avec le bureau Gnome"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Update Ollama to v0.1.39"
@@ -724,9 +727,8 @@ msgstr ""
 "réinitialisée"
 
 #: src/window.py:124
-#, fuzzy
 msgid "Image recognition is only available on specific models"
-msgstr "Reconnaissance d'image (modèles compatibles)"
+msgstr "La reconnaissance d'image est seulement disponible sur certains modèles"
 
 #: src/window.py:127
 msgid "Please select a model before chatting"
@@ -749,9 +751,8 @@ msgid "Code copied to the clipboard"
 msgstr "Code copié dans le presse-papier"
 
 #: src/window.py:132
-#, fuzzy
 msgid "Message copied to the clipboard"
-msgstr "Code copié dans le presse-papier"
+msgstr "Message copié dans le presse-papier"
 
 #: src/window.py:135
 msgid "Model deleted successfully"
@@ -783,7 +784,7 @@ msgstr "Téléchargement en arrière-plan..."
 
 #: src/window.py:788
 msgid "Task Complete"
-msgstr "Tache terminée"
+msgstr "Tâche terminée"
 
 #: src/window.py:788
 msgid "Model '{}' pulled successfully."
@@ -816,10 +817,9 @@ msgstr "Menu"
 
 #: src/window.ui:197
 msgid "Attach file"
-msgstr ""
+msgstr "Ajouter un fichier"
 
 #: src/window.ui:243
-#, fuzzy
 msgid "Send message"
 msgstr "Envoyer le message"
 
@@ -861,7 +861,7 @@ msgstr "Exécution en arrière-plan"
 
 #: src/window.ui:329
 msgid "Model"
-msgstr ""
+msgstr "Modèle"
 
 #: src/window.ui:333
 msgid "Model Tweaks"
@@ -910,20 +910,23 @@ msgstr ""
 "temps demandé en minutes. (défaut : 5)"
 
 #: src/window.ui:387
-#, fuzzy
 msgid "Ollama Instance"
-msgstr "Ollama pré-intégré"
+msgstr "Instance d'Ollama"
 
+# What is override ???
 #: src/window.ui:391
 #, fuzzy
 msgid "Ollama Overrides"
-msgstr "Site web d'Ollama"
+msgstr "Paramètres d'Ollama"
 
 #: src/window.ui:392
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes"
 msgstr ""
+"Gérer les arguments utilisés par Ollama. Tous les changements sur cette page "
+"s'appliquent seulement à l'instance intégré. L'instance va redémarrer si "
+"vous effectuez des changements."
 
 #: src/window.ui:472
 msgid "Create"
@@ -954,7 +957,7 @@ msgid ""
 "Some models require a specific template. Please visit the model's website "
 "for more information if you're unsure."
 msgstr ""
-"Certain modèle requiert un template spécifique. Merci de visiter le site du "
+"Certains modèles requièrent un format spécifique. Merci de visiter le site du "
 "modèle pour plus d'information."
 
 #: src/window.ui:700
@@ -981,8 +984,8 @@ msgid ""
 msgstr ""
 "Alpaca et ses développeurs ne sont pas responsables des dommages causés à "
 "votre appareil ou vos logiciels suite à l'exécution de code généré par un "
-"modèle. Merci de faire attention et de relire attentivement le code avant de "
-"l'exécuter."
+"modèle. Merci de faire attention et de relire attentivement le code avant "
+"de l'exécuter."
 
 #: src/window.ui:775
 msgid "Featured Models"
@@ -1036,15 +1039,15 @@ msgstr "Importer une discussion"
 
 #: src/window.ui:897
 msgid "From existing model"
-msgstr ""
+msgstr "Depuis un modèle existant"
 
 #: src/window.ui:901
 msgid "From GGUF file (Testing)"
-msgstr ""
+msgstr "Depuis un fichier GGUF (Instable)"
 
 #: src/window.ui:909
 msgid "Plain text file"
-msgstr ""
+msgstr "Fichier texte brut"
 
 #: src/window.ui:913
 msgid "Image"
@@ -1086,7 +1089,7 @@ msgstr "Envoyer le message"
 #~ msgstr "Charger une image"
 
 #~ msgid "Only available on selected models"
-#~ msgstr "Non-disponible sur ce modèle"
+#~ msgstr "Disponible uniquement sur certains modèles"
 
 #~ msgid "Advanced Model Settings"
 #~ msgstr "Paramètres avancés"
