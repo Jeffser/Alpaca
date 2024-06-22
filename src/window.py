@@ -21,7 +21,7 @@ import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
-import json, requests, threading, os, re, base64, sys, gettext, locale, webbrowser, subprocess, uuid, shutil, tarfile, tempfile, docx
+import json, requests, threading, os, re, base64, sys, gettext, locale, webbrowser, subprocess, uuid, shutil, tarfile, tempfile #, docx
 from time import sleep
 from io import BytesIO
 from PIL import Image
@@ -1137,13 +1137,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             for i, page in enumerate(reader.pages):
                 text += f"\n- Page {i}\n{page.extract_text()}\n"
             return text
-        elif file_type == 'docx':
-            document = docx.Document(file_path)
-            if len(document.paragraphs) == 0: return None
-            text = ""
-            for paragraph in document.paragraphs:
-                text += f"{paragraph.text}\n"
-            return text
+        #elif file_type == 'docx':
+            #document = docx.Document(file_path)
+            #if len(document.paragraphs) == 0: return None
+            #text = ""
+            #for paragraph in document.paragraphs:
+                #text += f"{paragraph.text}\n"
+            #return text
 
     def remove_attached_file(self, button):
         del self.attachments[button.get_name()]
@@ -1162,7 +1162,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     "image": "image-x-generic-symbolic",
                     "plain_text": "document-text-symbolic",
                     "pdf": "document-text-symbolic",
-                    "docx": "document-text-symbolic"
+                    #"docx": "document-text-symbolic"
                 }[file_type]
             )
             button = Gtk.Button(
