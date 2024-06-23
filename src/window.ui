@@ -860,6 +860,12 @@
   <menu id="primary_menu">
     <section>
       <item>
+        <attribute name="label" translatable="yes">Import chat</attribute>
+        <attribute name="action">app.import_chat</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
         <attribute name="label" translatable="yes">Preferences</attribute>
         <attribute name="action">app.preferences</attribute>
       </item>
@@ -882,10 +888,6 @@
       <item>
         <attribute name="label" translatable="yes">Export current chat</attribute>
         <attribute name="action">app.export_current_chat</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Import chat</attribute>
-        <attribute name="action">app.import_chat</attribute>
       </item>
     </section>
   </menu>
