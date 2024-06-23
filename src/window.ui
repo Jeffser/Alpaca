@@ -211,8 +211,10 @@
                                     </style>
                                     <child>
                                       <object class="GtkScrolledWindow">
-                                        <property name="margin-start">12</property>
-                                        <property name="margin-end">12</property>
+                                        <property name="max-content-height">300</property>
+                                        <property name="margin-start">15</property>
+                                        <property name="margin-end">15</property>
+                                        <property name="propagate-natural-height">true</property>
                                         <style>
                                           <class name="message-input"/>
                                           <class name="undershoot-bottom"/>
@@ -221,8 +223,8 @@
                                         <child>
                                           <object class="GtkTextView" id="message_text_view">
                                             <property name="wrap-mode">word</property>
-                                            <property name="top-margin">6</property>
-                                            <property name="bottom-margin">6</property>
+                                            <property name="top-margin">18</property>
+                                            <property name="bottom-margin">18</property>
                                             <property name="hexpand">true</property>
                                             <style>
                                               <class name="message-input"/>
