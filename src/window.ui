@@ -46,11 +46,11 @@
                       </object>
                     </child>
                     <child type="end">
-                      <object class="GtkMenuButton" id="chats_menu_button">
-                        <property name="direction">1</property>
-                        <property name="halign">3</property>
-                        <property name="menu-model">chats_menu</property>
-                        <property name="icon-name">view-more-symbolic</property>
+                      <object class="GtkMenuButton">
+                        <property name="primary">True</property>
+                        <property name="icon-name">open-menu-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Menu</property>
+                        <property name="menu-model">primary_menu</property>
                       </object>
                     </child>
                   </object>
@@ -113,11 +113,11 @@
                       </object>
                     </property>
                     <child type="end">
-                      <object class="GtkMenuButton">
-                        <property name="primary">True</property>
-                        <property name="icon-name">open-menu-symbolic</property>
-                        <property name="tooltip-text" translatable="yes">Menu</property>
-                        <property name="menu-model">primary_menu</property>
+                      <object class="GtkMenuButton" id="chats_menu_button">
+                        <property name="direction">1</property>
+                        <property name="halign">3</property>
+                        <property name="menu-model">chats_menu</property>
+                        <property name="icon-name">view-more-symbolic</property>
                       </object>
                     </child>
                   </object>
@@ -860,10 +860,6 @@
   <menu id="primary_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Clear Chat</attribute>
-        <attribute name="action">app.clear</attribute>
-      </item>
-      <item>
         <attribute name="label" translatable="yes">Preferences</attribute>
         <attribute name="action">app.preferences</attribute>
       </item>
@@ -879,6 +875,10 @@
   </menu>
   <menu id="chats_menu">
     <section>
+      <item>
+        <attribute name="label" translatable="yes">Clear Chat</attribute>
+        <attribute name="action">app.clear</attribute>
+      </item>
       <item>
         <attribute name="label" translatable="yes">Export current chat</attribute>
         <attribute name="action">app.export_current_chat</attribute>
