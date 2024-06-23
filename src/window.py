@@ -170,7 +170,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def send_message(self, button=None):
         if self.bot_message: return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
-        current_model = self.model_drop_down.get_selected_item()
+        current_model = self.model_drop_down.get_selected_item().get_string()
+        current_model = current_model.replace(' (', ':')[:-1]
         if current_model is None:
             self.show_toast("info", 0, self.main_overlay)
             return
@@ -204,7 +205,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if len(attached_files.keys()) > 0:
             self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['files'] = attached_files
         data = {
-            "model": current_model.get_string(),
+            "model": current_model,
             "messages": self.convert_history_to_ollama(),
             "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
             "keep_alive": f"{self.model_tweaks['keep_alive']}m"
@@ -588,7 +589,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 model_row.add_suffix(button)
                 self.local_model_list_box.append(model_row)
 
-                self.model_string_list.append(model["name"])
+                self.model_string_list.append(f"{model['name'].split(':')[0]} ({model['name'].split(':')[1]})")
                 self.local_models.append(model["name"])
             self.model_drop_down.set_selected(0)
             self.verify_if_image_can_be_used()
