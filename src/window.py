@@ -757,7 +757,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if data['done']:
             formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
-            text = f"\n<small>{data['model']}\t|\t{formated_datetime}</small>"
+            text = f"\n<small>{data['model']}\t{formated_datetime}</small>"
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
             self.save_history()
         else:
