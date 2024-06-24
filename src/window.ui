@@ -91,6 +91,7 @@
                           <object class="GtkDropDown" id="model_drop_down">
                             <signal name="notify" handler="verify_if_image_can_be_used"/>
                             <property name="enable-search">true</property>
+                            <property name="tooltip-text">Select model</property>
                             <property name="model">
                               <object class="GtkStringList" id="model_string_list">
                                 <items>
@@ -207,26 +208,18 @@
                                   <object class="GtkBox">
                                     <style>
                                       <class name="card"/>
-                                      <class name="message-input"/>
+                                      <class name="view"/>
                                     </style>
                                     <child>
                                       <object class="GtkScrolledWindow">
                                         <property name="margin-start">12</property>
                                         <property name="margin-end">12</property>
-                                        <style>
-                                          <class name="message-input"/>
-                                          <class name="undershoot-bottom"/>
-                                          <class name="undershoot-top"/>
-                                        </style>
                                         <child>
                                           <object class="GtkTextView" id="message_text_view">
                                             <property name="wrap-mode">word</property>
                                             <property name="top-margin">6</property>
                                             <property name="bottom-margin">6</property>
                                             <property name="hexpand">true</property>
-                                            <style>
-                                              <class name="message-input"/>
-                                            </style>
                                           </object>
                                         </child>
                                       </object>
@@ -788,6 +781,7 @@
                               <property name="vexpand">false</property>
                               <property name="icon-name">folder-download-symbolic</property>
                               <property name="valign">3</property>
+                              <property name="tooltip-text">Pull 'Llama3 (latest)'</property>
                               <style>
                                 <class name="accent"/>
                               </style>
@@ -805,6 +799,7 @@
                               <property name="vexpand">false</property>
                               <property name="icon-name">folder-download-symbolic</property>
                               <property name="valign">3</property>
+                              <property name="tooltip-text">Pull 'Gemma (latest)'</property>
                               <style>
                                 <class name="accent"/>
                               </style>
@@ -822,6 +817,7 @@
                               <property name="vexpand">false</property>
                               <property name="icon-name">folder-download-symbolic</property>
                               <property name="valign">3</property>
+                              <property name="tooltip-text">Pull 'Phi3 (latest)'</property>
                               <style>
                                 <class name="accent"/>
                               </style>
@@ -839,6 +835,7 @@
                               <property name="vexpand">false</property>
                               <property name="icon-name">folder-download-symbolic</property>
                               <property name="valign">3</property>
+                              <property name="tooltip-text">Pull 'Llava (latest)'</property>
                               <style>
                                 <class name="accent"/>
                               </style>
