@@ -981,27 +981,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             child = chat_box,
             name = chat_name
         )
-
-
-        """
-        button_delete = Gtk.Button(
-            icon_name = "user-trash-symbolic",
-            vexpand = False,
-            valign = 3,
-            css_classes = ["error", "flat"]
-        )
-        button_delete.connect("clicked", lambda button, chat_name=chat_name: dialogs.delete_chat(self, chat_name))
-        button_rename = Gtk.Button(
-            icon_name = "document-edit-symbolic",
-            vexpand = False,
-            valign = 3,
-            css_classes = ["accent", "flat"]
-        )
-
-        button_rename.connect("clicked", lambda button, label_element=chat_label: dialogs.rename_chat(self, label_element))
-        chat_content.append(button_delete)
-        chat_content.append(button_rename)
-        """
         gesture = Gtk.GestureClick(button=3)
         gesture.connect("pressed", lambda gesture, n_press, x, y, chat_label=chat_label, popover=popover : self.chat_click_handler(gesture, n_press, x, y, chat_label, popover))
         chat_row.add_controller(gesture)
