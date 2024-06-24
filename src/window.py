@@ -560,7 +560,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     valign=3,
                     name=name,
                     css_classes=["flat"],
-                    tooltip_text=name,
+                    tooltip_text=name if file_type != 'youtube' else yt.title,
                     child=button_content
                 )
                 if file_type == 'youtube':

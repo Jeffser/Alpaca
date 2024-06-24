@@ -856,7 +856,7 @@
         <attribute name="action">app.import_chat</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Clear Chat</attribute>
+        <attribute name="label" translatable="yes">Clear chat</attribute>
         <attribute name="action">app.clear</attribute>
       </item>
       <item>
@@ -864,7 +864,7 @@
         <attribute name="action">app.preferences</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
+        <attribute name="label" translatable="yes">Keyboard shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
       </item>
       <item>
@@ -965,7 +965,7 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;ctrl&gt;N</property>
-                <property name="title" translatable="yes">New Chat</property>
+                <property name="title" translatable="yes">New chat</property>
               </object>
             </child>
             <child>
