@@ -46,11 +46,11 @@
                       </object>
                     </child>
                     <child type="end">
-                      <object class="GtkMenuButton" id="chats_menu_button">
-                        <property name="direction">1</property>
-                        <property name="halign">3</property>
-                        <property name="menu-model">chats_menu</property>
-                        <property name="icon-name">view-more-symbolic</property>
+                      <object class="GtkMenuButton">
+                        <property name="primary">True</property>
+                        <property name="icon-name">open-menu-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Menu</property>
+                        <property name="menu-model">primary_menu</property>
                       </object>
                     </child>
                   </object>
@@ -114,12 +114,7 @@
                       </object>
                     </property>
                     <child type="end">
-                      <object class="GtkMenuButton">
-                        <property name="primary">True</property>
-                        <property name="icon-name">open-menu-symbolic</property>
-                        <property name="tooltip-text" translatable="yes">Menu</property>
-                        <property name="menu-model">primary_menu</property>
-                      </object>
+
                     </child>
                   </object>
                 </child>
@@ -857,6 +852,10 @@
   <menu id="primary_menu">
     <section>
       <item>
+        <attribute name="label" translatable="yes">Import chat</attribute>
+        <attribute name="action">app.import_chat</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">Clear Chat</attribute>
         <attribute name="action">app.clear</attribute>
       </item>
@@ -871,14 +870,6 @@
       <item>
         <attribute name="label" translatable="yes">About Alpaca</attribute>
         <attribute name="action">app.about</attribute>
-      </item>
-    </section>
-  </menu>
-  <menu id="chats_menu">
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">Import chat</attribute>
-        <attribute name="action">app.import_chat</attribute>
       </item>
     </section>
   </menu>
@@ -951,6 +942,12 @@
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;ctrl&gt;Q</property>
                 <property name="title" translatable="yes">Close application</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;I</property>
+                <property name="title" translatable="yes">Import chat</property>
               </object>
             </child>
             <child>

@@ -88,7 +88,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     message_text_view = Gtk.Template.Child()
     send_button = Gtk.Template.Child()
     stop_button = Gtk.Template.Child()
-    chats_menu_button = Gtk.Template.Child()
     attachment_container = Gtk.Template.Child()
     attachment_box = Gtk.Template.Child()
     file_filter_tar = Gtk.Template.Child()
@@ -753,7 +752,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['content'] += data['message']['content']
 
     def toggle_ui_sensitive(self, status):
-        for element in [self.chat_list_box, self.add_chat_button, self.chats_menu_button]:
+        for element in [self.chat_list_box, self.add_chat_button]:
             element.set_sensitive(status)
 
     def switch_send_stop_button(self):
@@ -1229,7 +1228,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.get_application().create_action('new_chat', lambda *_: self.new_chat(), ['<primary>n'])
         self.get_application().create_action('clear', lambda *_: dialogs.clear_chat(self), ['<primary>e'])
         self.get_application().create_action('send', lambda *_: self.send_message(self), ['Return'])
-        self.get_application().create_action('import_chat', lambda *_: self.import_chat())
+        self.get_application().create_action('import_chat', lambda *_: self.import_chat(), ['<primary>i'])
         self.get_application().create_action('create_model_from_existing', lambda *_: dialogs.create_model_from_existing(self))
         self.get_application().create_action('create_model_from_file', lambda *_: dialogs.create_model_from_file(self))
         self.get_application().create_action('delete_chat', self.chat_actions)
