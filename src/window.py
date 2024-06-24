@@ -22,6 +22,7 @@ gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
 import json, requests, threading, os, re, base64, sys, gettext, locale, webbrowser, subprocess, uuid, shutil, tarfile, tempfile #, docx
+from pytube import YouTube
 from time import sleep
 from io import BytesIO
 from PIL import Image
@@ -122,7 +123,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             _("Cannot open image"),
             _("Cannot delete chat because it's the only one left"),
             _("There was an error with the local Ollama instance, so it has been reset"),
-            _("Image recognition is only available on specific models")
+            _("Image recognition is only available on specific models"),
+            _("This video does not have any transcriptions"),
+            _("This video is not available")
         ],
         "info": [
             _("Please select a model before chatting"),
@@ -182,10 +185,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
         can_use_images = self.verify_if_image_can_be_used()
         for name, content in self.attachments.items():
             if content["type"] == 'image' and can_use_images: attached_images.append(name)
-            else: attached_files[name] = content['type']
+            else:
+                if content["type"] == 'youtube':
+                    attached_files[content['path']] = content['type']
+                else:
+                    attached_files[name] = content['type']
             if not os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id)):
                 os.makedirs(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id))
-            shutil.copy(content['path'], os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name))
+            if content["type"] != 'youtube':
+                shutil.copy(content['path'], os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name))
             content["button"].get_parent().remove(content["button"])
         self.attachments = {}
         self.attachment_box.set_visible(False)
@@ -420,7 +428,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             buffer = self.file_preview_text_view.get_buffer()
             buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
             buffer.insert(buffer.get_start_iter(), content, len(content))
-            self.file_preview_dialog.set_title(os.path.basename(file_path))
+            if file_type == 'youtube':
+                self.file_preview_dialog.set_title(YouTube(file_path).title)
+            else:
+                self.file_preview_dialog.set_title(os.path.basename(file_path))
             self.file_preview_dialog.present(self)
 
     def convert_history_to_ollama(self):
@@ -431,7 +442,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 del new_message['files']
                 new_message['content'] = ''
                 for name, file_type in message['files'].items():
-                    file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
+                    if file_type == 'youtube':
+                        file_path = name
+                    else:
+                        file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
                     file_data = self.get_content_of_file(file_path, file_type)
                     if file_data: new_message['content'] += f"```[{name}]\n{file_data}\n```"
                 new_message['content'] += message['content']
@@ -531,11 +545,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 child=file_container
             )
             for name, file_type in files.items():
-                shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
+                if file_type == 'youtube':
+                    yt = YouTube(name)
+                    shown_name=yt.title[:20] + (yt.title[20:] and '..')
+                else:
+                    shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
 
                 button_content = Adw.ButtonContent(
                     label=shown_name,
-                    icon_name="document-text-symbolic"
+                    icon_name="play-symbolic" if file_type=='youtube' else "document-text-symbolic"
                 )
                 button = Gtk.Button(
                     vexpand=False,
@@ -545,7 +563,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     tooltip_text=name,
                     child=button_content
                 )
-                button.connect("clicked", lambda button, file_path=os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name), file_type=file_type: self.preview_file(file_path, file_type))
+                if file_type == 'youtube':
+                    file_path = name
+                else:
+                    file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
+                button.connect("clicked", lambda button, file_path=file_path, file_type=file_type: self.preview_file(file_path, file_type))
                 file_container.append(button)
             message_box.append(file_scroller)
 
@@ -1112,7 +1134,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.verify_connection()
 
     def get_content_of_file(self, file_path, file_type):
-        if not os.path.exists(file_path): return None
+        if file_type != 'youtube' and not os.path.exists(file_path): return None
         if file_type == 'image':
             try:
                 with Image.open(file_path) as img:
@@ -1141,6 +1163,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             for i, page in enumerate(reader.pages):
                 text += f"\n- Page {i}\n{page.extract_text()}\n"
             return text
+        elif file_type == 'youtube':
+            yt = YouTube(file_path)
+            text = "{}\n{}\n\n".format(yt.title, yt.author)
+            for event in yt.captions[file_path.split('&caption_lang=')[1]].json_captions['events']:
+                text += "{}\n".format(event['segs'][0]['utf8'].replace('\n', '\\n'))
+            return text
         #elif file_type == 'docx':
             #document = docx.Document(file_path)
             #if len(document.paragraphs) == 0: return None
@@ -1155,17 +1183,23 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if len(self.attachments) == 0: self.attachment_box.set_visible(False)
 
     def attach_file(self, file_path, file_type):
-        name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
+        if file_type == "youtube":
+            name = YouTube(file_path).title
+        else:
+            name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
         content = self.get_content_of_file(file_path, file_type)
         if content:
-            shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
-
+            if file_type == "youtube":
+                shown_name=name[:20] + (name[20:] and '..')
+            else:
+                shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
             button_content = Adw.ButtonContent(
                 label=shown_name,
                 icon_name={
                     "image": "image-x-generic-symbolic",
                     "plain_text": "document-text-symbolic",
                     "pdf": "document-text-symbolic",
+                    "youtube": "play-symbolic",
                     #"docx": "document-text-symbolic"
                 }[file_type]
             )
@@ -1195,6 +1229,22 @@ class AlpacaWindow(Adw.ApplicationWindow):
         elif action_name == 'export_chat':
             self.export_chat(chat_name)
 
+    def text_received(self, clipboard, result):
+        text = clipboard.read_text_finish(result)
+        #Check if text is a Youtube URL
+        youtube_regex = re.compile(
+            r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/'
+            r'(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
+        if youtube_regex.match(text):
+            try:
+                yt = YouTube(text)
+                dialogs.youtube_caption(self, yt.title, text, yt.captions)
+            except Exception as e:
+                self.show_toast("error", 10, self.main_overlay)
+
+    def on_clipboard_paste(self, textview):
+        clipboard = Gdk.Display.get_default().get_clipboard()
+        clipboard.read_text_async(None, self.text_received)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -1214,6 +1264,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.get_application().create_action('delete_chat', self.chat_actions)
         self.get_application().create_action('rename_chat', self.chat_actions)
         self.get_application().create_action('export_chat', self.chat_actions)
+        self.message_text_view.connect("paste-clipboard", self.on_clipboard_paste)
         self.add_chat_button.connect("clicked", lambda button : self.new_chat())
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
         self.create_model_name.get_delegate().connect("insert-text", self.check_alphanumeric)

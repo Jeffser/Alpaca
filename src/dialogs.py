@@ -182,8 +182,8 @@ def remove_attached_file_response(self, dialog, task, button):
 
 def remove_attached_file(self, button):
     dialog = Adw.AlertDialog(
-        heading=_("Remove File"),
-        body=_("Are you sure you want to remove file?"),
+        heading=_("Remove Attachment"),
+        body=_("Are you sure you want to remove attachment?"),
         close_response="cancel"
     )
     dialog.add_response("cancel", _("Cancel"))
@@ -290,3 +290,40 @@ def attach_file_response(self, file_dialog, result):
 def attach_file(self, filter):
     file_dialog = Gtk.FileDialog(default_filter=filter)
     file_dialog.open(self, None, lambda file_dialog, result: attach_file_response(self, file_dialog, result))
+
+
+# YouTube caption |
+
+def youtube_caption_response(self, dialog, task, video_url, caption_drop_down):
+    if dialog.choose_finish(task) == "accept":
+        buffer = self.message_text_view.get_buffer()
+        text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).replace(video_url, "")
+        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+        buffer.insert(buffer.get_start_iter(), text, len(text))
+        self.attach_file("{}&caption_lang={}".format(video_url, caption_drop_down.get_selected_item().get_string().split(' | ')[1]), 'youtube')
+
+def youtube_caption(self, video_title, video_url, captions):
+    if len(captions) == 0:
+        self.show_toast("error", 9, self.main_overlay)
+        return
+    caption_list = Gtk.StringList()
+    for caption in captions: caption_list.append("{} | {}".format(caption.name, caption.code))
+    caption_drop_down = Gtk.DropDown(
+        enable_search=True,
+        model=caption_list
+    )
+    dialog = Adw.AlertDialog(
+        heading=_("Attach YouTube Video"),
+        body=_("{}\n\nPlease select a transcript to include").format(video_title),
+        extra_child=caption_drop_down,
+        close_response="cancel"
+    )
+    dialog.add_response("cancel", _("Cancel"))
+    dialog.add_response("accept", _("Accept"))
+    dialog.set_response_appearance("accept", Adw.ResponseAppearance.SUGGESTED)
+    dialog.choose(
+        parent = self,
+        cancellable = None,
+        callback = lambda dialog, task, video_url = video_url, caption_drop_down = caption_drop_down: youtube_caption_response(self, dialog, task, video_url, caption_drop_down)
+    )
+

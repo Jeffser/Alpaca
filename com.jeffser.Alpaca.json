@@ -85,6 +85,20 @@
 		}
 	    ]
 	},
+	{
+	    "name": "python3-pytube",
+	    "buildsystem": "simple",
+	    "build-commands": [
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"pytube\" --no-build-isolation"
+	    ],
+	    "sources": [
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/51/64/bcf8632ed2b7a36bbf84a0544885ffa1d0b4bcf25cc0903dba66ec5fdad9/pytube-15.0.0-py3-none-any.whl",
+		    "sha256": "07b9904749e213485780d7eb606e5e5b8e4341aa4dccf699160876da00e12d78"
+		}
+	    ]
+	},
         {
             "name": "ollama",
             "buildsystem": "simple",
