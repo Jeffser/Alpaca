@@ -1,16 +1,3 @@
-.chat_row box.header {
-  font-size: 14px;
-}
-.chat_row box {
-  margin: 0;
-}
-.chat_row button {
-  opacity: 0;
-  transition: opacity .05s;
-}
-.chat_row:hover button {
-  opacity: 1;
-}
 .message .delete-message-button {
   opacity: 0;
   transition: opacity .05s;

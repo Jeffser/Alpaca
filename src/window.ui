@@ -877,12 +877,24 @@
   <menu id="chats_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Export current chat</attribute>
-        <attribute name="action">app.export_current_chat</attribute>
-      </item>
-      <item>
         <attribute name="label" translatable="yes">Import chat</attribute>
         <attribute name="action">app.import_chat</attribute>
+      </item>
+    </section>
+  </menu>
+  <menu id="right_click_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Delete chat</attribute>
+        <attribute name="action">app.delete_chat</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Rename chat</attribute>
+        <attribute name="action">app.rename_chat</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Export chat</attribute>
+        <attribute name="action">app.export_chat</attribute>
       </item>
     </section>
   </menu>

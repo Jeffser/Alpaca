@@ -97,6 +97,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     attachment_button = Gtk.Template.Child()
     model_drop_down = Gtk.Template.Child()
     model_string_list = Gtk.Template.Child()
+    right_click_menu = Gtk.Template.Child()
 
     manage_models_dialog = Gtk.Template.Child()
     pulling_model_list_box = Gtk.Template.Child()
@@ -926,7 +927,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if os.path.exists(os.path.join(self.data_dir, "chats", old_chat_name)):
             shutil.move(os.path.join(self.data_dir, "chats", old_chat_name), os.path.join(self.data_dir, "chats", new_chat_name))
         label_element.set_label(new_chat_name)
-        label_element.get_parent().set_name(new_chat_name)
+        label_element.get_parent().get_parent().set_name(new_chat_name)
         self.save_history()
 
     def new_chat(self):
@@ -948,16 +949,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.manage_models_dialog.close()
             self.connection_error()
 
+    def chat_click_handler(self, gesture, n_press, x, y, chat_label, popover):
+        self.right_clicked_chat_label = chat_label
+        position = Gdk.Rectangle()
+        position.x = x
+        position.y = y
+        popover.set_pointing_to(position)
+        popover.popup()
+
     def new_chat_element(self, chat_name:str, select:bool):
-        chat_content = Gtk.Box(
-            spacing=6
-        )
-        chat_row = Gtk.ListBoxRow(
-            css_classes = ["chat_row"],
-            height_request = 45,
-            child = chat_content,
-            name = chat_name
-        )
+        chat_box = Gtk.Box()
         chat_label = Gtk.Label(
             label=chat_name,
             hexpand=True,
@@ -967,7 +968,22 @@ class AlpacaWindow(Adw.ApplicationWindow):
             wrap_mode=2,
             xalign=0
         )
+        chat_box.append(chat_label)
+        popover = Gtk.PopoverMenu(
+            menu_model=self.right_click_menu,
+            has_arrow=False,
+            halign=1
+        )
+        chat_box.append(popover)
+        chat_row = Gtk.ListBoxRow(
+            css_classes = ["chat_row"],
+            height_request = 45,
+            child = chat_box,
+            name = chat_name
+        )
 
+
+        """
         button_delete = Gtk.Button(
             icon_name = "user-trash-symbolic",
             vexpand = False,
@@ -981,11 +997,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
             valign = 3,
             css_classes = ["accent", "flat"]
         )
-        chat_content.set_name(chat_name)
+
         button_rename.connect("clicked", lambda button, label_element=chat_label: dialogs.rename_chat(self, label_element))
-        chat_content.append(chat_label)
         chat_content.append(button_delete)
         chat_content.append(button_rename)
+        """
+        gesture = Gtk.GestureClick(button=3)
+        gesture.connect("pressed", lambda gesture, n_press, x, y, chat_label=chat_label, popover=popover : self.chat_click_handler(gesture, n_press, x, y, chat_label, popover))
+        chat_row.add_controller(gesture)
+
         self.chat_list_box.append(chat_row)
         if select: self.chat_list_box.select_row(chat_row)
 
@@ -1035,20 +1055,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
         file.replace_contents_finish(result)
         self.show_toast("good", 2, self.main_overlay)
 
-    def on_export_current_chat(self, file_dialog, result):
+    def on_export_chat(self, file_dialog, result, chat_name):
         file = file_dialog.save_finish(result)
         if not file: return
-        json_data = json.dumps({self.chats["selected_chat"]: self.chats["chats"][self.chats["selected_chat"]]}, indent=4).encode("UTF-8")
+        json_data = json.dumps({chat_name: self.chats["chats"][chat_name]}, indent=4).encode("UTF-8")
 
         with tempfile.TemporaryDirectory() as temp_dir:
             json_path = os.path.join(temp_dir, "data.json")
             with open(json_path, "wb") as json_file:
                 json_file.write(json_data)
 
-            tar_path = os.path.join(temp_dir, f"{self.chats['selected_chat']}")
+            tar_path = os.path.join(temp_dir, chat_name)
             with tarfile.open(tar_path, "w") as tar:
                 tar.add(json_path, arcname="data.json")
-                directory = os.path.join(self.data_dir, "chats", self.chats['selected_chat'])
+                directory = os.path.join(self.data_dir, "chats", chat_name)
                 if os.path.exists(directory) and os.path.isdir(directory):
                     tar.add(directory, arcname=os.path.basename(directory))
 
@@ -1064,9 +1084,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 callback=self.on_replace_contents
             )
 
-    def export_current_chat(self):
-        file_dialog = Gtk.FileDialog(initial_name=f"{self.chats['selected_chat']}.tar")
-        file_dialog.save(parent=self, cancellable=None, callback=self.on_export_current_chat)
+    def export_chat(self, chat_name):
+        file_dialog = Gtk.FileDialog(initial_name=f"{chat_name}.tar")
+        file_dialog.save(parent=self, cancellable=None, callback=lambda file_dialog, result, chat_name=chat_name: self.on_export_chat(file_dialog, result, chat_name))
 
     def on_chat_imported(self, file_dialog, result):
         file = file_dialog.open_finish(result)
@@ -1184,6 +1204,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.attachment_container.append(button)
             self.attachment_box.set_visible(True)
 
+    def chat_actions(self, action, user_data):
+        action_name = action.get_name()
+        chat_label = self.right_clicked_chat_label
+        chat_name = chat_label.get_parent().get_parent().get_name()
+        self.right_clicked_chat_label = None
+        if action_name == 'delete_chat':
+            dialogs.delete_chat(self, chat_name)
+        elif action_name == 'rename_chat':
+            dialogs.rename_chat(self, chat_name, chat_label)
+        elif action_name == 'export_chat':
+            self.export_chat(chat_name)
+
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -1197,10 +1229,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.get_application().create_action('new_chat', lambda *_: self.new_chat(), ['<primary>n'])
         self.get_application().create_action('clear', lambda *_: dialogs.clear_chat(self), ['<primary>e'])
         self.get_application().create_action('send', lambda *_: self.send_message(self), ['Return'])
-        self.get_application().create_action('export_current_chat', lambda *_: self.export_current_chat())
         self.get_application().create_action('import_chat', lambda *_: self.import_chat())
         self.get_application().create_action('create_model_from_existing', lambda *_: dialogs.create_model_from_existing(self))
         self.get_application().create_action('create_model_from_file', lambda *_: dialogs.create_model_from_file(self))
+        self.get_application().create_action('delete_chat', self.chat_actions)
+        self.get_application().create_action('rename_chat', self.chat_actions)
+        self.get_application().create_action('export_chat', self.chat_actions)
         self.add_chat_button.connect("clicked", lambda button : self.new_chat())
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
         self.create_model_name.get_delegate().connect("insert-text", self.check_alphanumeric)
