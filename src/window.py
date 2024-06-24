@@ -921,6 +921,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def rename_chat(self, old_chat_name, new_chat_name, label_element):
         new_chat_name = self.generate_numbered_name(new_chat_name, self.chats["chats"].keys())
+        if self.chats["selected_chat"] == old_chat_name: self.chats["selected_chat"] = new_chat_name
         self.chats["chats"][new_chat_name] = self.chats["chats"][old_chat_name]
         del self.chats["chats"][old_chat_name]
         if os.path.exists(os.path.join(self.data_dir, "chats", old_chat_name)):
