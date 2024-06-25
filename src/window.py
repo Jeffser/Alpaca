@@ -148,7 +148,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def verify_if_image_can_be_used(self, pspec=None, user_data=None):
         if self.model_drop_down.get_selected_item() == None: return True
-        selected = self.model_drop_down.get_selected_item().get_string().split(":")[0]
+        selected = self.model_drop_down.get_selected_item().get_string().split(" (")[0]
         if selected in ['llava', 'bakllava', 'moondream', 'llava-llama3']:
             for name, content in self.attachments.items():
                 if content['type'] == 'image':
@@ -1246,6 +1246,24 @@ class AlpacaWindow(Adw.ApplicationWindow):
         clipboard = Gdk.Display.get_default().get_clipboard()
         clipboard.read_text_async(None, self.text_received)
 
+    def on_model_dropdown_setup(self, factory, list_item):
+        label = Gtk.Label()
+        label.set_ellipsize(2)
+        label.set_xalign(0)
+        list_item.set_child(label)
+
+    def on_model_dropdown_bind(self, factory, list_item):
+        label = list_item.get_child()
+        item = list_item.get_item()
+        label.set_text(item.get_string())
+        label.set_tooltip_text(item.get_string())
+
+    def setup_model_dropdown(self):
+        factory = Gtk.SignalListItemFactory()
+        factory.connect("setup", self.on_model_dropdown_setup)
+        factory.connect("bind", self.on_model_dropdown_bind)
+        self.model_drop_down.set_factory(factory)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
@@ -1271,6 +1289,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.remote_connection_entry.connect("entry-activated", lambda entry : entry.set_css_classes([]))
         self.remote_connection_switch.connect("notify", lambda pspec, user_data : self.connection_switched())
         self.background_switch.connect("notify", lambda pspec, user_data : self.switch_run_on_background())
+        self.setup_model_dropdown()
         if os.path.exists(os.path.join(self.config_dir, "server.json")):
             with open(os.path.join(self.config_dir, "server.json"), "r") as f:
                 data = json.load(f)
