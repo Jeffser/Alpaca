@@ -79,7 +79,7 @@
                     <child type="start">
                       <object class="GtkToggleButton" id="show_sidebar_button">
                         <property name="icon-name">sidebar-show-symbolic</property>
-                        <property name="tooltip-text" translatable="yes">Toggle Sidebar</property>
+                        <property name="tooltip-text" translatable="yes">Toggle sidebar</property>
                         <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
                       </object>
                     </child>
@@ -117,7 +117,7 @@
                       <object class="GtkMenuButton">
                         <property name="primary">False</property>
                         <property name="icon-name">open-menu-symbolic</property>
-                        <property name="tooltip-text" translatable="yes">Chat Menu</property>
+                        <property name="tooltip-text" translatable="yes">Chat menu</property>
                         <property name="menu-model">secondary_menu</property>
                       </object>
                     </child>

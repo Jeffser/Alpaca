@@ -940,6 +940,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.update_chat_list()
         if len(self.chats['chats'])==0:
             self.new_chat()
+        if self.chats['selected_chat'] == chat_name:
+            self.chat_list_box.select_row(self.chat_list_box.get_row_at_index(0))
 
     def rename_chat(self, old_chat_name, new_chat_name, label_element):
         new_chat_name = self.generate_numbered_name(new_chat_name, self.chats["chats"].keys())
