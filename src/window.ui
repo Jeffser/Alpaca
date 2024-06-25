@@ -114,7 +114,12 @@
                       </object>
                     </property>
                     <child type="end">
-
+                      <object class="GtkMenuButton">
+                        <property name="primary">False</property>
+                        <property name="icon-name">open-menu-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Chat Menu</property>
+                        <property name="menu-model">secondary_menu</property>
+                      </object>
                     </child>
                   </object>
                 </child>
@@ -855,10 +860,8 @@
         <attribute name="label" translatable="yes">Import chat</attribute>
         <attribute name="action">app.import_chat</attribute>
       </item>
-      <item>
-        <attribute name="label" translatable="yes">Clear chat</attribute>
-        <attribute name="action">app.clear</attribute>
-      </item>
+    </section>
+    <section>
       <item>
         <attribute name="label" translatable="yes">Preferences</attribute>
         <attribute name="action">app.preferences</attribute>
@@ -872,6 +875,20 @@
         <attribute name="action">app.about</attribute>
       </item>
     </section>
+  </menu>
+  <menu id="secondary_menu">
+    <item>
+      <attribute name="label" translatable="yes">Rename chat</attribute>
+      <attribute name="action">app.rename_chat</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Export chat</attribute>
+      <attribute name="action">app.export_chat</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Clear chat</attribute>
+      <attribute name="action">app.clear</attribute>
+    </item>
   </menu>
   <menu id="right_click_menu">
     <section>

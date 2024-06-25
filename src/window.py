@@ -971,16 +971,22 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.manage_models_dialog.close()
             self.connection_error()
 
-    def chat_click_handler(self, gesture, n_press, x, y, chat_label, popover):
-        self.right_clicked_chat_label = chat_label
+    def chat_click_handler(self, gesture, n_press, x, y):
+        chat_row = gesture.get_widget()
+        popover = Gtk.PopoverMenu(
+            menu_model=self.right_click_menu,
+            has_arrow=False,
+            halign=1,
+        )
+        self.right_clicked_chat_row = chat_row
         position = Gdk.Rectangle()
         position.x = x
         position.y = y
+        popover.set_parent(chat_row.get_child())
         popover.set_pointing_to(position)
         popover.popup()
 
     def new_chat_element(self, chat_name:str, select:bool):
-        chat_box = Gtk.Box()
         chat_label = Gtk.Label(
             label=chat_name,
             hexpand=True,
@@ -990,21 +996,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
             wrap_mode=2,
             xalign=0
         )
-        chat_box.append(chat_label)
-        popover = Gtk.PopoverMenu(
-            menu_model=self.right_click_menu,
-            has_arrow=False,
-            halign=1
-        )
-        chat_box.append(popover)
         chat_row = Gtk.ListBoxRow(
             css_classes = ["chat_row"],
             height_request = 45,
-            child = chat_box,
+            child = chat_label,
             name = chat_name
         )
+
         gesture = Gtk.GestureClick(button=3)
-        gesture.connect("pressed", lambda gesture, n_press, x, y, chat_label=chat_label, popover=popover : self.chat_click_handler(gesture, n_press, x, y, chat_label, popover))
+        gesture.connect("released", self.chat_click_handler)
         chat_row.add_controller(gesture)
 
         self.chat_list_box.append(chat_row)
@@ -1219,13 +1219,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def chat_actions(self, action, user_data):
         action_name = action.get_name()
-        chat_label = self.right_clicked_chat_label
-        chat_name = chat_label.get_parent().get_parent().get_name()
-        self.right_clicked_chat_label = None
+        if self.right_clicked_chat_row:
+            chat_row = self.right_clicked_chat_row
+        else:
+            chat_row = self.chat_list_box.get_selected_row()
+        chat_name = chat_row.get_name()
+        self.right_clicked_chat_row = None
         if action_name == 'delete_chat':
             dialogs.delete_chat(self, chat_name)
         elif action_name == 'rename_chat':
-            dialogs.rename_chat(self, chat_name, chat_label)
+            dialogs.rename_chat(self, chat_name, chat_row.get_child())
         elif action_name == 'export_chat':
             self.export_chat(chat_name)
 
