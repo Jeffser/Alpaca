@@ -40,10 +40,10 @@ alpaca_sources = [
   'main.py',
   'window.py',
   'connection_handler.py',
-  'available_models.py',
   'dialogs.py',
   'local_instance.py',
-  'update_history.py'
+  'update_history.py',
+  'available_models.json'
 ]
 
 install_data(alpaca_sources, install_dir: moduledir)

@@ -28,7 +28,6 @@ from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
 from datetime import datetime
-from .available_models import available_models
 from . import dialogs, local_instance, connection_handler, update_history
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
@@ -48,6 +47,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     _ = gettext.gettext
 
     #Variables
+    available_models = None
     run_on_background = False
     remote_url = ""
     run_remote = False
@@ -861,10 +861,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def update_list_available_models(self):
         self.available_model_list_box.remove_all()
-        for name, model_info in available_models.items():
+        for name, model_info in self.available_models.items():
             model = Adw.ActionRow(
                 title = name,
-                subtitle = "Image recognition" if model_info["image"] else None
+                subtitle = (_("(Image recognition capable)\n") if model_info["image"] else "") + model_info['description']
             )
             link_button = Gtk.Button(
                 icon_name = "globe-symbolic",
@@ -1271,6 +1271,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
+        with open('/app/share/Alpaca/alpaca/available_models.json', 'r') as f:
+            self.available_models = json.load(f)
         if not os.path.exists(os.path.join(self.data_dir, "chats")):
             os.makedirs(os.path.join(self.data_dir, "chats"))
         if os.path.exists(os.path.join(self.config_dir, "chats.json")) and not os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
