@@ -97,7 +97,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     attachment_button = Gtk.Template.Child()
     model_drop_down = Gtk.Template.Child()
     model_string_list = Gtk.Template.Child()
-    right_click_menu = Gtk.Template.Child()
+    chat_right_click_menu = Gtk.Template.Child()
 
     manage_models_dialog = Gtk.Template.Child()
     pulling_model_list_box = Gtk.Template.Child()
@@ -477,12 +477,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         delete_button = Gtk.Button(
             icon_name = "user-trash-symbolic",
-            css_classes = ["flat", "circular", "delete-message-button"],
+            css_classes = ["flat", "circular"],
             tooltip_text = _("Remove message")
         )
         copy_button = Gtk.Button(
             icon_name = "edit-copy-symbolic",
-            css_classes = ["flat", "circular", "delete-message-button"],
+            css_classes = ["flat", "circular"],
             tooltip_text = _("Copy message")
         )
 
@@ -498,8 +498,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         message_box = Gtk.Box(
             orientation=1,
             halign='fill',
-            css_classes=[None if bot else "card"],
-            margin_start=0 if bot else 50,
+            css_classes=[None if bot else "card"]
         )
         message_text.set_valign(Gtk.Align.CENTER)
 
@@ -976,7 +975,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def chat_click_handler(self, gesture, n_press, x, y):
         chat_row = gesture.get_widget()
         popover = Gtk.PopoverMenu(
-            menu_model=self.right_click_menu,
+            menu_model=self.chat_right_click_menu,
             has_arrow=False,
             halign=1,
         )
