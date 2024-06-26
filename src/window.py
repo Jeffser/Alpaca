@@ -102,6 +102,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     manage_models_carousel = Gtk.Template.Child()
     manage_models_title = Gtk.Template.Child()
     create_model_button = Gtk.Template.Child()
+    manage_models_back_button = Gtk.Template.Child()
 
     manage_models_dialog = Gtk.Template.Child()
     pulling_model_list_box = Gtk.Template.Child()
@@ -238,9 +239,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def manage_models_button_activate(self, button=None):
-        self.manage_models_carousel.scroll_to(self.manage_models_carousel.get_nth_page(0), False)
+        self.manage_models_carousel.scroll_to(self.manage_models_carousel.get_nth_page(0), True)
         self.manage_models_title.set_title(_("Manage Models"))
         self.create_model_button.set_visible(True)
+        self.manage_models_back_button.set_visible(False)
         self.update_list_local_models()
         self.manage_models_dialog.present(self)
 
@@ -869,12 +871,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def confirm_pull_model(self, model_name):
         self.manage_models_title.set_title(_("Manage Models"))
         self.create_model_button.set_visible(True)
+        self.manage_models_back_button.set_visible(False)
         self.manage_models_carousel.scroll_to(self.manage_models_carousel.get_nth_page(0), True)
         self.pull_model(model_name)
 
     def list_available_model_tags(self, model_name):
-        self.manage_models_title.set_title(model_name)
+        self.manage_models_title.set_title(model_name.capitalize())
         self.create_model_button.set_visible(False)
+        self.manage_models_back_button.set_visible(True)
         self.model_tag_list_box.remove_all()
         tags = self.available_models[model_name]['tags']
         for tag_data in tags:

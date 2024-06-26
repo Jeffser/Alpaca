@@ -579,11 +579,22 @@
               <child type="top">
                 <object class="AdwHeaderBar">
                   <child type="start">
-                    <object class="GtkMenuButton" id="create_model_button">
-                      <property name="primary">True</property>
-                      <property name="icon-name">list-add-symbolic</property>
-                      <property name="tooltip-text" translatable="yes">Create Model</property>
-                      <property name="menu-model">create_model_menu</property>
+                    <object class="GtkBox">
+                      <child>
+                        <object class="GtkMenuButton" id="create_model_button">
+                          <property name="primary">True</property>
+                          <property name="icon-name">list-add-symbolic</property>
+                          <property name="tooltip-text" translatable="yes">Create Model</property>
+                          <property name="menu-model">create_model_menu</property>
+                        </object>
+                      </child>
+                      <child>
+                        <object class="GtkButton" id="manage_models_back_button">
+                          <property name="icon-name">step-back-symbolic</property>
+                          <property name="tooltip-text" translatable="yes">Back</property>
+                          <signal name="clicked" handler="manage_models_button_activate"/>
+                        </object>
+                      </child>
                     </object>
                   </child>
                   <property name="title-widget">
