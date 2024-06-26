@@ -38,7 +38,7 @@
                   <object class="AdwHeaderBar">
                     <child type="start">
                       <object class="GtkButton" id="add_chat_button">
-                        <property name="tooltip-text" translatable="yes">New chat</property>
+                        <property name="tooltip-text" translatable="yes">New Chat</property>
                         <property name="icon-name">chat-message-new-symbolic</property>
                         <style>
                           <class name="flat"/>
@@ -79,7 +79,7 @@
                     <child type="start">
                       <object class="GtkToggleButton" id="show_sidebar_button">
                         <property name="icon-name">sidebar-show-symbolic</property>
-                        <property name="tooltip-text" translatable="yes">Toggle sidebar</property>
+                        <property name="tooltip-text" translatable="yes">Toggle Sidebar</property>
                         <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
                       </object>
                     </child>
@@ -91,7 +91,7 @@
                           <object class="GtkDropDown" id="model_drop_down">
                             <signal name="notify" handler="verify_if_image_can_be_used"/>
                             <property name="enable-search">true</property>
-                            <property name="tooltip-text">Select model</property>
+                            <property name="tooltip-text">Select Model</property>
                             <property name="model">
                               <object class="GtkStringList" id="model_string_list">
                                 <items>
@@ -103,7 +103,7 @@
                         <child>
                           <object class="GtkButton" id="manage_models_button">
                             <signal name="clicked" handler="manage_models_button_activate"/>
-                            <property name="tooltip-text" translatable="yes">Manage models</property>
+                            <property name="tooltip-text" translatable="yes">Manage Models</property>
                             <child>
                               <object class="AdwButtonContent">
                                 <property name="icon-name">library-symbolic</property>
@@ -117,7 +117,7 @@
                       <object class="GtkMenuButton">
                         <property name="primary">False</property>
                         <property name="icon-name">view-more-symbolic</property>
-                        <property name="tooltip-text" translatable="yes">Chat menu</property>
+                        <property name="tooltip-text" translatable="yes">Chat Menu</property>
                         <property name="menu-model">secondary_menu</property>
                       </object>
                     </child>
@@ -193,7 +193,7 @@
                                   <object class="GtkButton" id="attachment_button">
                                     <property name="vexpand">false</property>
                                     <property name="valign">3</property>
-                                    <property name="tooltip-text" translatable="yes">Attach file</property>
+                                    <property name="tooltip-text" translatable="yes">Attach File</property>
                                     <style>
                                       <class name="circular"/>
                                     </style>
@@ -231,7 +231,7 @@
                                       <signal name="clicked" handler="send_message"/>
                                       <property name="vexpand">false</property>
                                       <property name="valign">3</property>
-                                      <property name="tooltip-text" translatable="yes">Send message</property>
+                                      <property name="tooltip-text" translatable="yes">Send Message</property>
                                       <style>
                                         <class name="suggested-action"/>
                                         <class name="circular"/>
@@ -582,7 +582,7 @@
                     <object class="GtkMenuButton" id="create_model_button">
                       <property name="primary">True</property>
                       <property name="icon-name">list-add-symbolic</property>
-                      <property name="tooltip-text" translatable="yes">Create model</property>
+                      <property name="tooltip-text" translatable="yes">Create Model</property>
                       <property name="menu-model">create_model_menu</property>
                     </object>
                   </child>

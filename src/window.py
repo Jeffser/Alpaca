@@ -340,7 +340,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             vexpand = False,
             valign = 3,
             css_classes = ["error"],
-            tooltip_text = _("Stop creating '{}'").format(name)
+            tooltip_text = _("Stop Creating '{}'").format(name)
         )
         button.connect("clicked", lambda button, model_name=name : dialogs.stop_pull_model(self, model_name))
         model_row.add_suffix(button)
@@ -485,12 +485,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         delete_button = Gtk.Button(
             icon_name = "user-trash-symbolic",
             css_classes = ["flat", "circular"],
-            tooltip_text = _("Remove message")
+            tooltip_text = _("Remove Message")
         )
         copy_button = Gtk.Button(
             icon_name = "edit-copy-symbolic",
             css_classes = ["flat", "circular"],
-            tooltip_text = _("Copy message")
+            tooltip_text = _("Copy Message")
         )
 
         button_container = Gtk.Box(
@@ -614,7 +614,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     vexpand = False,
                     valign = 3,
                     css_classes = ["error"],
-                    tooltip_text = _("Remove '{}'").format(model["name"])
+                    tooltip_text = _("Remove '{}'").format(model["name"].capitalize())
                 )
                 button.connect("clicked", lambda button=button, model_name=model["name"]: dialogs.delete_model(self, model_name))
                 model_row.add_suffix(button)
@@ -726,7 +726,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 code_block_box = Gtk.Box(css_classes=["card"], orientation=1, overflow=1)
                 title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=3)
                 title_box.append(Gtk.Label(label=language.get_name() if language else part['language'], hexpand=True, xalign=0))
-                copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy message"))
+                copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
                 copy_button.connect("clicked", self.on_copy_code_clicked, buffer)
                 title_box.append(copy_button)
                 code_block_box.append(title_box)
@@ -856,7 +856,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             vexpand = False,
             valign = 3,
             css_classes = ["error"],
-            tooltip_text = _("Stop pulling '{}'").format(model)
+            tooltip_text = _("Stop Pulling '{}'").format(model.capitalize())
         )
         button.connect("clicked", lambda button, model_name=model : dialogs.stop_pull_model(self, model_name))
         model_row.add_suffix(button)
@@ -887,7 +887,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     icon_name = "folder-download-symbolic",
                     vexpand = False,
                     valign = 3,
-                    tooltip_text = _("Pull '{} ({})'").format(model_name, tag_data[0])
+                    tooltip_text = _("Pull '{} ({})'").format(model_name.capitalize, tag_data[0])
                 )
                 pull_button.connect("clicked", lambda button, model_name=f"{model_name}:{tag_data[0]}" : self.confirm_pull_model(model_name))
                 tag_row.add_suffix(pull_button)
@@ -911,7 +911,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 icon_name = "folder-download-symbolic",
                 vexpand = False,
                 valign = 3,
-                tooltip_text = _("Pull '{}'").format(name)
+                tooltip_text = _("Pull '{}'").format(name.capitalize())
             )
             link_button.connect("clicked", lambda button=link_button, link=model_info["url"]: webbrowser.open(link))
             pull_button.connect("clicked", lambda button=pull_button, model_name=name: self.list_available_model_tags(model_name))
