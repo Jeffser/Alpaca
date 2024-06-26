@@ -891,7 +891,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     icon_name = "folder-download-symbolic",
                     vexpand = False,
                     valign = 3,
-                    tooltip_text = _("Pull '{} ({})'").format(model_name.capitalize, tag_data[0])
+                    tooltip_text = _("Pull '{} ({})'").format(model_name.capitalize(), tag_data[0])
                 )
                 pull_button.connect("clicked", lambda button, model_name=f"{model_name}:{tag_data[0]}" : self.confirm_pull_model(model_name))
                 tag_row.add_suffix(pull_button)
@@ -912,7 +912,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 tooltip_text = model_info["url"]
             )
             pull_button = Gtk.Button(
-                icon_name = "folder-download-symbolic",
+                icon_name = "step-over-symbolic",
                 vexpand = False,
                 valign = 3,
                 tooltip_text = _("Pull '{}'").format(name.capitalize())
