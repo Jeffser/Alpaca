@@ -836,8 +836,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.show_toast("info", 3, self.manage_models_overlay)
             return
         self.pulling_model_list_box.set_visible(True)
+        #self.pulling_model_list_box.connect('row_selected', lambda list_box, row: dialogs.stop_pull_model(self, row.get_name()) if row else None) #It isn't working for some reason
         model_row = Adw.ActionRow(
-            title = model
+            title = model,
+            name = model
         )
         thread = threading.Thread(target=self.pull_model_process, kwargs={"model": model, "modelfile": None})
         overlay = Gtk.Overlay()
@@ -1224,7 +1226,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if file_type == "youtube":
                 shown_name=name[:20] + (name[20:] and '..')
             else:
-                shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
+                shown_name=name
+                #shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
             button_content = Adw.ButtonContent(
                 label=shown_name,
                 icon_name={
@@ -1243,7 +1246,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 tooltip_text=name,
                 child=button_content
             )
-
+            lab = Gtk.Label(
+                label="funny"
+            )
+            print(type(button.get_label()))
+            button.set_label(lab)
             self.attachments[name] = {"path": file_path, "type": file_type, "content": content, "button": button}
             button.connect("clicked", lambda button: dialogs.remove_attached_file(self, button))
             self.attachment_container.append(button)

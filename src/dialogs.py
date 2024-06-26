@@ -110,6 +110,7 @@ def stop_pull_model_response(self, dialog, task, model_name):
         self.stop_pull_model(model_name)
 
 def stop_pull_model(self, model_name):
+    #self.pulling_model_list_box.unselect_all()
     dialog = Adw.AlertDialog(
         heading=_("Stop Model"),
         body=_("Are you sure you want to stop pulling '{}'?").format(model_name),
