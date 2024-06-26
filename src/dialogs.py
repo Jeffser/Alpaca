@@ -274,11 +274,12 @@ def youtube_caption_response(self, dialog, task, video_url, caption_drop_down):
 
         yt = YouTube(video_url)
         text = "{}\n{}\n{}\n\n".format(yt.title, yt.author, yt.watch_url)
-        for event in yt.captions[caption_drop_down.get_selected_item().get_string().split(' | ')[1]].json_captions['events']:
+        selected_caption = caption_drop_down.get_selected_item().get_string()
+        for event in yt.captions[selected_caption.split(' | ')[1]].json_captions['events']:
             text += "{}\n".format(event['segs'][0]['utf8'].replace('\n', '\\n'))
         if not os.path.exists('/tmp/alpaca/youtube'):
             os.makedirs('/tmp/alpaca/youtube')
-        file_path = os.path.join('/tmp/alpaca/youtube', self.generate_numbered_name(yt.title, os.listdir('/tmp/alpaca/youtube')))
+        file_path = os.path.join('/tmp/alpaca/youtube', f'{yt.title} ({selected_caption.split(" | ")[0]})')
         with open(file_path, 'w+') as f:
             f.write(text)
         self.attach_file(file_path, 'youtube')
