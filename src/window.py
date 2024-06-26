@@ -98,6 +98,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_drop_down = Gtk.Template.Child()
     model_string_list = Gtk.Template.Child()
     chat_right_click_menu = Gtk.Template.Child()
+    model_tag_list_box = Gtk.Template.Child()
+    manage_models_carousel = Gtk.Template.Child()
+    manage_models_title = Gtk.Template.Child()
+    create_model_button = Gtk.Template.Child()
 
     manage_models_dialog = Gtk.Template.Child()
     pulling_model_list_box = Gtk.Template.Child()
@@ -234,6 +238,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def manage_models_button_activate(self, button=None):
+        self.manage_models_carousel.scroll_to(self.manage_models_carousel.get_nth_page(0), False)
+        self.manage_models_title.set_title(_("Manage Models"))
+        self.create_model_button.set_visible(True)
         self.update_list_local_models()
         self.manage_models_dialog.present(self)
 
@@ -859,6 +866,34 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.pulling_model_list_box.append(overlay)
         thread.start()
 
+    def confirm_pull_model(self, model_name):
+        self.manage_models_title.set_title(_("Manage Models"))
+        self.create_model_button.set_visible(True)
+        self.manage_models_carousel.scroll_to(self.manage_models_carousel.get_nth_page(0), True)
+        self.pull_model(model_name)
+
+    def list_available_model_tags(self, model_name):
+        self.manage_models_title.set_title(model_name)
+        self.create_model_button.set_visible(False)
+        self.model_tag_list_box.remove_all()
+        tags = self.available_models[model_name]['tags']
+        for tag_data in tags:
+            if f"{model_name}:{tag_data[0]}" not in self.local_models:
+                tag_row = Adw.ActionRow(
+                    title = tag_data[0],
+                    subtitle = tag_data[1]
+                )
+                pull_button = Gtk.Button(
+                    icon_name = "folder-download-symbolic",
+                    vexpand = False,
+                    valign = 3,
+                    tooltip_text = _("Pull '{} ({})'").format(model_name, tag_data[0])
+                )
+                pull_button.connect("clicked", lambda button, model_name=f"{model_name}:{tag_data[0]}" : self.confirm_pull_model(model_name))
+                tag_row.add_suffix(pull_button)
+                self.model_tag_list_box.append(tag_row)
+        self.manage_models_carousel.scroll_to(self.manage_models_carousel.get_nth_page(1), True)
+
     def update_list_available_models(self):
         self.available_model_list_box.remove_all()
         for name, model_info in self.available_models.items():
@@ -870,7 +905,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 icon_name = "globe-symbolic",
                 vexpand = False,
                 valign = 3,
-                tooltip_text = _("Visit '{}' website").format(name)
+                tooltip_text = model_info["url"]
             )
             pull_button = Gtk.Button(
                 icon_name = "folder-download-symbolic",
@@ -879,7 +914,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 tooltip_text = _("Pull '{}'").format(name)
             )
             link_button.connect("clicked", lambda button=link_button, link=model_info["url"]: webbrowser.open(link))
-            pull_button.connect("clicked", lambda button=pull_button, model_name=name: dialogs.pull_model(self, model_name))
+            pull_button.connect("clicked", lambda button=pull_button, model_name=name: self.list_available_model_tags(model_name))
             model.add_suffix(link_button)
             model.add_suffix(pull_button)
             self.available_model_list_box.append(model)

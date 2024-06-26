@@ -143,36 +143,6 @@ def delete_model(self, model_name):
         callback = lambda dialog, task, model_name = model_name: delete_model_response(self, dialog, task, model_name)
     )
 
-# PULL MODEL | WORKS
-
-def pull_model_response(self, dialog, task, model_name, tag_drop_down):
-    if dialog.choose_finish(task) == "pull":
-        model = f"{model_name}:{tag_drop_down.get_selected_item().get_string().split(' | ')[0]}"
-        self.pull_model(model)
-
-def pull_model(self, model_name):
-    tag_list = Gtk.StringList()
-    for tag in self.available_models[model_name]['tags']:
-        tag_list.append(f"{tag[0]} | {tag[1]}")
-    tag_drop_down = Gtk.DropDown(
-        enable_search=True,
-        model=tag_list
-    )
-    dialog = Adw.AlertDialog(
-        heading=_("Pull Model"),
-        body=_("Please select a tag to pull '{}'").format(model_name),
-        extra_child=tag_drop_down,
-        close_response="cancel"
-    )
-    dialog.add_response("cancel", _("Cancel"))
-    dialog.add_response("pull", _("Pull"))
-    dialog.set_response_appearance("pull", Adw.ResponseAppearance.SUGGESTED)
-    dialog.choose(
-        parent = self.manage_models_dialog,
-        cancellable = None,
-        callback = lambda dialog, task, model_name = model_name, tag_drop_down = tag_drop_down: pull_model_response(self, dialog, task, model_name, tag_drop_down)
-    )
-
 # REMOVE IMAGE | WORKS
 
 def remove_attached_file_response(self, dialog, task, button):

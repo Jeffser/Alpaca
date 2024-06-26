@@ -473,7 +473,7 @@
                 <object class="AdwHeaderBar">
                   <property name="title-widget">
                     <object class="AdwWindowTitle">
-                      <property name="title" translatable="yes">Create model</property>
+                      <property name="title" translatable="yes">Create Model</property>
                     </object>
                   </property>
                 </object>
@@ -579,7 +579,7 @@
               <child type="top">
                 <object class="AdwHeaderBar">
                   <child type="start">
-                    <object class="GtkMenuButton">
+                    <object class="GtkMenuButton" id="create_model_button">
                       <property name="primary">True</property>
                       <property name="icon-name">list-add-symbolic</property>
                       <property name="tooltip-text" translatable="yes">Create model</property>
@@ -587,48 +587,74 @@
                     </object>
                   </child>
                   <property name="title-widget">
-                    <object class="AdwWindowTitle">
-                      <property name="title" translatable="yes">Manage models</property>
+                    <object class="AdwWindowTitle" id="manage_models_title">
+                      <property name="title" translatable="yes">Manage Models</property>
                     </object>
                   </property>
                 </object>
               </child>
               <child>
-                <object class="GtkScrolledWindow">
-                  <property name="hexpand">true</property>
-                  <property name="vexpand">true</property>
+                <object class= "AdwCarousel" id="manage_models_carousel">
+                  <property name="halign">0</property>
+                  <property name="valign">0</property>
+                  <property name="allow-long-swipes">true</property>
+                  <property name="allow-scroll-wheel">true</property>
+                  <property name="spacing">12</property>
                   <child>
-                    <object class="GtkBox">
-                      <property name="margin-start">12</property>
-                      <property name="margin-end">12</property>
-                      <property name="margin-top">12</property>
-                      <property name="margin-bottom">12</property>
-                      <property name="orientation">1</property>
-                      <property name="spacing">12</property>
+                    <object class="GtkScrolledWindow">
+                      <property name="hexpand">true</property>
+                      <property name="vexpand">true</property>
                       <child>
-                        <object class="GtkListBox" id="pulling_model_list_box">
-                          <property name="visible">false</property>
+                        <object class="GtkBox">
+                          <property name="margin-start">12</property>
+                          <property name="margin-end">12</property>
+                          <property name="margin-top">12</property>
+                          <property name="margin-bottom">12</property>
+                          <property name="orientation">1</property>
+                          <property name="spacing">12</property>
+                          <child>
+                            <object class="GtkListBox" id="pulling_model_list_box">
+                              <property name="visible">false</property>
+                              <property name="selection-mode">none</property>
+                              <style>
+                                <class name="boxed-list"/>
+                                <class name="card"/>
+                              </style>
+                            </object>
+                          </child>
+                          <child>
+                            <object class="GtkListBox" id="local_model_list_box">
+                              <property name="selection-mode">none</property>
+                              <style>
+                                <class name="boxed-list"/>
+                                <class name="card"/>
+                              </style>
+                            </object>
+                          </child>
+                          <child>
+                            <object class="GtkListBox" id="available_model_list_box">
+                              <property name="selection-mode">none</property>
+                              <style>
+                                <class name="boxed-list"/>
+                              </style>
+                            </object>
+                          </child>
+                        </object>
+                      </child>
+                    </object>
+                  </child>
+                  <child>
+                    <object class="GtkScrolledWindow">
+                      <child>
+                        <object class="GtkListBox" id="model_tag_list_box">
+                          <property name="margin-start">12</property>
+                          <property name="margin-end">12</property>
+                          <property name="margin-top">12</property>
+                          <property name="margin-bottom">12</property>
                           <property name="selection-mode">none</property>
                           <style>
                             <class name="boxed-list"/>
                             <class name="card"/>
-                          </style>
-                        </object>
-                      </child>
-                      <child>
-                        <object class="GtkListBox" id="local_model_list_box">
-                          <property name="selection-mode">none</property>
-                          <style>
-                            <class name="boxed-list"/>
-                            <class name="card"/>
-                          </style>
-                        </object>
-                      </child>
-                      <child>
-                        <object class="GtkListBox" id="available_model_list_box">
-                          <property name="selection-mode">none</property>
-                          <style>
-                            <class name="boxed-list"/>
                           </style>
                         </object>
                       </child>
