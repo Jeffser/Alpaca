@@ -21,7 +21,7 @@ import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
-import json, requests, threading, os, re, base64, sys, gettext, locale, webbrowser, subprocess, uuid, shutil, tarfile, tempfile #, docx
+import json, requests, threading, os, re, base64, sys, gettext, locale, subprocess, uuid, shutil, tarfile, tempfile #, docx
 from time import sleep
 from io import BytesIO
 from PIL import Image
@@ -103,6 +103,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     manage_models_title = Gtk.Template.Child()
     create_model_button = Gtk.Template.Child()
     manage_models_back_button = Gtk.Template.Child()
+    file_preview_open_button = Gtk.Template.Child()
 
     manage_models_dialog = Gtk.Template.Child()
     pulling_model_list_box = Gtk.Template.Child()
@@ -363,7 +364,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def link_button_handler(self, button):
-        webbrowser.open(button.get_name())
+        os.system(f'xdg-open "{button.get_name()}"')
 
     def check_alphanumeric(self, editable, text, length, position):
         new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '_']])
@@ -436,8 +437,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             buffer.insert(buffer.get_start_iter(), content, len(content))
             if file_type == 'youtube':
                 self.file_preview_dialog.set_title(content.split('\n')[0])
+                self.file_preview_open_button.set_name(content.split('\n')[2])
             else:
                 self.file_preview_dialog.set_title(os.path.basename(file_path))
+                self.file_preview_open_button.set_name(file_path)
             self.file_preview_dialog.present(self)
 
     def convert_history_to_ollama(self):
@@ -910,7 +913,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 valign = 3,
                 tooltip_text = _("Pull '{}'").format(name.capitalize())
             )
-            link_button.connect("clicked", lambda button=link_button, link=model_info["url"]: webbrowser.open(link))
+            link_button.connect("clicked", lambda button=link_button, link=model_info["url"]: os.system(f'xdg-open "{link}"'))
             pull_button.connect("clicked", lambda button=pull_button, model_name=name: self.list_available_model_tags(model_name))
             model.add_suffix(link_button)
             model.add_suffix(pull_button)

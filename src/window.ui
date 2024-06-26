@@ -391,6 +391,7 @@
                     <object class="GtkButton">
                       <signal name="clicked" handler="link_button_handler"/>
                       <property name="name">https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides</property>
+                      <property name="tooltip-text">https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides</property>
                       <property name="vexpand">false</property>
                       <property name="valign">3</property>
                       <property name="icon-name">globe-symbolic</property>
@@ -411,6 +412,7 @@
                     <object class="GtkButton">
                       <signal name="clicked" handler="link_button_handler"/>
                       <property name="name">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection</property>
+                      <property name="tooltip-text">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection</property>
                       <property name="vexpand">false</property>
                       <property name="valign">3</property>
                       <property name="icon-name">globe-symbolic</property>
@@ -431,6 +433,7 @@
                     <object class="GtkButton">
                       <signal name="clicked" handler="link_button_handler"/>
                       <property name="name">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection-1</property>
+                      <property name="tooltip-text">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection-1</property>
                       <property name="vexpand">false</property>
                       <property name="valign">3</property>
                       <property name="icon-name">globe-symbolic</property>
@@ -688,6 +691,15 @@
         <object class="AdwToolbarView">
           <child type="top">
             <object class="AdwHeaderBar">
+              <child type="start">
+                <object class="GtkButton" id="file_preview_open_button">
+                  <signal name="clicked" handler="link_button_handler"/>
+                  <property name="tooltip-text" translatable="yes">Open with Default App</property>
+                  <property name="vexpand">false</property>
+                  <property name="valign">3</property>
+                  <property name="icon-name">share-symbolic</property>
+                </object>
+              </child>
             </object>
           </child>
           <child>
