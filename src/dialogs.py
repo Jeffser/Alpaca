@@ -263,7 +263,7 @@ def attach_file(self, filter):
     file_dialog.open(self, None, lambda file_dialog, result: attach_file_response(self, file_dialog, result))
 
 
-# YouTube caption |
+# YouTube caption | WORKS
 
 def youtube_caption_response(self, dialog, task, video_url, caption_drop_down):
     if dialog.choose_finish(task) == "accept":

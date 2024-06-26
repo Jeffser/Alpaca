@@ -75,6 +75,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     bot_message : Gtk.TextBuffer = None
     bot_message_box : Gtk.Box = None
     bot_message_view : Gtk.TextView = None
+    bot_message_button_container : Gtk.TextView = None
     file_preview_dialog = Gtk.Template.Child()
     file_preview_text_view = Gtk.Template.Child()
     welcome_dialog = Gtk.Template.Child()
@@ -172,6 +173,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.bot_message = None
         self.bot_message_box = None
         self.bot_message_view = None
+        self.bot_message_button_container = None
 
     @Gtk.Template.Callback()
     def send_message(self, button=None):
@@ -582,6 +584,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.bot_message = message_buffer
             self.bot_message_view = message_text
             self.bot_message_box = message_box
+            self.bot_message_button_container = button_container
 
     def update_list_local_models(self):
         self.local_models = []
@@ -756,6 +759,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             text = f"\n<small>{data['model']}\t{formated_datetime}</small>"
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
             self.save_history()
+            GLib.idle_add(self.bot_message_button_container.set_visible, True)
         else:
             if id not in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
                 GLib.idle_add(self.chat_container.remove, self.loading_spinner)
@@ -778,6 +782,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.send_button.set_visible(not self.send_button.get_visible())
 
     def run_message(self, messages, model, id):
+        self.bot_message_button_container.set_visible(False)
         response = connection_handler.stream_post(f"{connection_handler.url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=lambda data, id=id: self.update_bot_message(data, id))
         GLib.idle_add(self.add_code_blocks)
         GLib.idle_add(self.switch_send_stop_button)
