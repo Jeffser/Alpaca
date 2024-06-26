@@ -898,8 +898,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.available_model_list_box.remove_all()
         for name, model_info in self.available_models.items():
             model = Adw.ActionRow(
-                title = name,
-                subtitle = (_("(Image recognition capable)\n") if model_info["image"] else "") + model_info['description']
+                title = f"<b>{name.capitalize()}</b> <small>by {model_info['author']}</small>",
+                subtitle = f"<small>" + (_("(Image recognition capable)\n") if model_info["image"] else "") + f"{model_info['description']}</small>"
             )
             link_button = Gtk.Button(
                 icon_name = "globe-symbolic",

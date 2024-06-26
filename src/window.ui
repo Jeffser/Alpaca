@@ -116,7 +116,7 @@
                     <child type="end">
                       <object class="GtkMenuButton">
                         <property name="primary">False</property>
-                        <property name="icon-name">open-menu-symbolic</property>
+                        <property name="icon-name">view-more-symbolic</property>
                         <property name="tooltip-text" translatable="yes">Chat menu</property>
                         <property name="menu-model">secondary_menu</property>
                       </object>
@@ -597,8 +597,9 @@
                 <object class= "AdwCarousel" id="manage_models_carousel">
                   <property name="halign">0</property>
                   <property name="valign">0</property>
-                  <property name="allow-long-swipes">true</property>
-                  <property name="allow-scroll-wheel">true</property>
+                  <property name="allow-long-swipes">false</property>
+                  <property name="allow-scroll-wheel">false</property>
+                  <property name="allow-mouse-drag">false</property>
                   <property name="spacing">12</property>
                   <child>
                     <object class="GtkScrolledWindow">
