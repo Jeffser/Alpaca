@@ -831,7 +831,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def pull_model(self, model):
         if model in list(self.pulling_models.keys()):
-            self.show_toast("info", 2, self.manage_models_overlay)
             return
         if model in self.local_models:
             self.show_toast("info", 3, self.manage_models_overlay)
@@ -865,6 +864,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         thread.start()
 
     def confirm_pull_model(self, model_name):
+        self.model_tag_list_box.unselect_all()
         self.manage_models_title.set_title(_("Manage Models"))
         self.create_model_button.set_visible(True)
         self.manage_models_back_button.set_visible(False)
@@ -872,16 +872,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.pull_model(model_name)
 
     def list_available_model_tags(self, model_name):
+        self.available_model_list_box.unselect_all()
         self.manage_models_title.set_title(model_name.capitalize())
         self.create_model_button.set_visible(False)
         self.manage_models_back_button.set_visible(True)
+        self.model_tag_list_box.connect('row_selected', lambda list_box, row: self.confirm_pull_model(row.get_name()) if row else None)
         self.model_tag_list_box.remove_all()
         tags = self.available_models[model_name]['tags']
         for tag_data in tags:
             if f"{model_name}:{tag_data[0]}" not in self.local_models:
                 tag_row = Adw.ActionRow(
                     title = tag_data[0],
-                    subtitle = tag_data[1]
+                    subtitle = tag_data[1],
+                    name = f"{model_name}:{tag_data[0]}"
                 )
                 pull_button = Gtk.Button(
                     icon_name = "folder-download-symbolic",
@@ -895,11 +898,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.manage_models_carousel.scroll_to(self.manage_models_carousel.get_nth_page(1), True)
 
     def update_list_available_models(self):
+        self.available_model_list_box.connect('row_selected', lambda list_box, row: self.list_available_model_tags(row.get_name()) if row else None)
         self.available_model_list_box.remove_all()
         for name, model_info in self.available_models.items():
             model = Adw.ActionRow(
                 title = f"<b>{name.capitalize()}</b> <small>by {model_info['author']}</small>",
-                subtitle = f"<small>" + (_("(Image recognition capable)\n") if model_info["image"] else "") + f"{model_info['description']}</small>"
+                subtitle = f"<small>" + (_("(Image recognition capable)\n") if model_info["image"] else "") + f"{model_info['description']}</small>",
+                name = name
             )
             link_button = Gtk.Button(
                 icon_name = "globe-symbolic",
