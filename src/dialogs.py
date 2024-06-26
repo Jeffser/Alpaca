@@ -1,6 +1,8 @@
 # dialogs.py
 
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
+import os
+from pytube import YouTube
 
 # CLEAR CHAT | WORKS
 
@@ -269,9 +271,22 @@ def youtube_caption_response(self, dialog, task, video_url, caption_drop_down):
         text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).replace(video_url, "")
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
         buffer.insert(buffer.get_start_iter(), text, len(text))
-        self.attach_file("{}&caption_lang={}".format(video_url, caption_drop_down.get_selected_item().get_string().split(' | ')[1]), 'youtube')
 
-def youtube_caption(self, video_title, video_url, captions):
+        yt = YouTube(video_url)
+        text = "{}\n{}\n{}\n\n".format(yt.title, yt.author, yt.watch_url)
+        for event in yt.captions[caption_drop_down.get_selected_item().get_string().split(' | ')[1]].json_captions['events']:
+            text += "{}\n".format(event['segs'][0]['utf8'].replace('\n', '\\n'))
+        if not os.path.exists('/tmp/alpaca/youtube'):
+            os.makedirs('/tmp/alpaca/youtube')
+        file_path = os.path.join('/tmp/alpaca/youtube', self.generate_numbered_name(yt.title, os.listdir('/tmp/alpaca/youtube')))
+        with open(file_path, 'w+') as f:
+            f.write(text)
+        self.attach_file(file_path, 'youtube')
+
+def youtube_caption(self, video_url):
+    yt = YouTube(video_url)
+    video_title = yt.title
+    captions = yt.captions
     if len(captions) == 0:
         self.show_toast("error", 9, self.main_overlay)
         return

@@ -22,7 +22,6 @@ gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
 import json, requests, threading, os, re, base64, sys, gettext, locale, webbrowser, subprocess, uuid, shutil, tarfile, tempfile #, docx
-from pytube import YouTube
 from time import sleep
 from io import BytesIO
 from PIL import Image
@@ -191,14 +190,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for name, content in self.attachments.items():
             if content["type"] == 'image' and can_use_images: attached_images.append(name)
             else:
-                if content["type"] == 'youtube':
-                    attached_files[content['path']] = content['type']
-                else:
-                    attached_files[name] = content['type']
+                attached_files[name] = content['type']
             if not os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id)):
                 os.makedirs(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id))
-            if content["type"] != 'youtube':
-                shutil.copy(content['path'], os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name))
+            shutil.copy(content['path'], os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name))
             content["button"].get_parent().remove(content["button"])
         self.attachments = {}
         self.attachment_box.set_visible(False)
@@ -438,7 +433,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
             buffer.insert(buffer.get_start_iter(), content, len(content))
             if file_type == 'youtube':
-                self.file_preview_dialog.set_title(YouTube(file_path).title)
+                self.file_preview_dialog.set_title(content.split('\n')[0])
             else:
                 self.file_preview_dialog.set_title(os.path.basename(file_path))
             self.file_preview_dialog.present(self)
@@ -451,10 +446,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 del new_message['files']
                 new_message['content'] = ''
                 for name, file_type in message['files'].items():
-                    if file_type == 'youtube':
-                        file_path = name
-                    else:
-                        file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
+                    file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
                     file_data = self.get_content_of_file(file_path, file_type)
                     if file_data: new_message['content'] += f"```[{name}]\n{file_data}\n```"
                 new_message['content'] += message['content']
@@ -554,8 +546,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             )
             for name, file_type in files.items():
                 if file_type == 'youtube':
-                    yt = YouTube(name)
-                    shown_name=yt.title[:20] + (yt.title[20:] and '..')
+                    shown_name=name[:20] + (name[20:] and '..')
                 else:
                     shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
 
@@ -568,13 +559,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     valign=3,
                     name=name,
                     css_classes=["flat"],
-                    tooltip_text=name if file_type != 'youtube' else yt.title,
+                    tooltip_text=name,
                     child=button_content
                 )
-                if file_type == 'youtube':
-                    file_path = name
-                else:
-                    file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
+                file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
                 button.connect("clicked", lambda button, file_path=file_path, file_type=file_type: self.preview_file(file_path, file_type))
                 file_container.append(button)
             message_box.append(file_scroller)
@@ -1174,7 +1162,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.verify_connection()
 
     def get_content_of_file(self, file_path, file_type):
-        if file_type != 'youtube' and not os.path.exists(file_path): return None
+        if not os.path.exists(file_path): return None
         if file_type == 'image':
             try:
                 with Image.open(file_path) as img:
@@ -1193,7 +1181,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     return base64.b64encode(image_data).decode("utf-8")
             except Exception as e:
                 self.show_toast("error", 5, self.main_overlay)
-        elif file_type == 'plain_text':
+        elif file_type == 'plain_text' or file_type == 'youtube':
             with open(file_path, 'r') as f:
                 return f.read()
         elif file_type == 'pdf':
@@ -1202,12 +1190,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             text = ""
             for i, page in enumerate(reader.pages):
                 text += f"\n- Page {i}\n{page.extract_text()}\n"
-            return text
-        elif file_type == 'youtube':
-            yt = YouTube(file_path)
-            text = "{}\n{}\n\n".format(yt.title, yt.author)
-            for event in yt.captions[file_path.split('&caption_lang=')[1]].json_captions['events']:
-                text += "{}\n".format(event['segs'][0]['utf8'].replace('\n', '\\n'))
             return text
         #elif file_type == 'docx':
             #document = docx.Document(file_path)
@@ -1223,10 +1205,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if len(self.attachments) == 0: self.attachment_box.set_visible(False)
 
     def attach_file(self, file_path, file_type):
-        if file_type == "youtube":
-            name = YouTube(file_path).title
-        else:
-            name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
+        name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
         content = self.get_content_of_file(file_path, file_type)
         if content:
             if file_type == "youtube":
@@ -1280,8 +1259,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             r'(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
         if youtube_regex.match(text):
             try:
-                yt = YouTube(text)
-                dialogs.youtube_caption(self, yt.title, text, yt.captions)
+                dialogs.youtube_caption(self, text)
             except Exception as e:
                 self.show_toast("error", 10, self.main_overlay)
 
