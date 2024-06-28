@@ -208,7 +208,7 @@
                                   <object class="GtkBox">
                                     <style>
                                       <class name="card"/>
-                                      <class name="view"/>
+                                      <class name="viewa"/>
                                     </style>
                                     <child>
                                       <object class="GtkScrolledWindow">
@@ -216,6 +216,9 @@
                                         <property name="margin-end">12</property>
                                         <child>
                                           <object class="GtkTextView" id="message_text_view">
+                                            <style>
+                                              <class name="message_text_view" />
+                                            </style>
                                             <property name="wrap-mode">word</property>
                                             <property name="top-margin">6</property>
                                             <property name="bottom-margin">6</property>
