@@ -231,6 +231,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], bot_id))
         thread.start()
+        if len(data['messages']) == 1:
+            generate_title_thread = threading.Thread(target=self.generate_chat_title, args=(data['messages'][0], self.chat_list_box.get_selected_row().get_child()))
+            generate_title_thread.start()
 
     @Gtk.Template.Callback()
     def manage_models_button_activate(self, button=None):
@@ -457,6 +460,24 @@ class AlpacaWindow(Adw.ApplicationWindow):
             messages.append(new_message)
         return messages
 
+    def generate_chat_title(self, message, label_element):
+        prompt = f"""
+Generate a title following these rules:
+    - The title should be based on the prompt at the end
+    - Keep it in the same language as the prompt
+    - The title needs to be less than 30 characters
+    - Use only alphanumeric characters
+    - Just write the title, nothing else
+
+```PROMPT
+{message}
+```"""
+        current_model = self.model_drop_down.get_selected_item().get_string()
+        current_model = current_model.replace(' (', ':')[:-1]
+        response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps({"model": current_model, "prompt": prompt, "stream": False}))
+        new_chat_name = json.loads(response['text'])["response"].replace('"', '').replace("'", "")
+        new_chat_name = self.generate_numbered_name(new_chat_name, self.chats["chats"].keys())
+        self.rename_chat(label_element.get_parent().get_name(), new_chat_name, label_element)
 
     def show_message(self, msg:str, bot:bool, footer:str=None, images:list=None, files:dict=None, id:str=None):
         message_text = Gtk.TextView(
