@@ -289,17 +289,17 @@
           <property name="icon-name">preferences-system-symbolic</property>
           <child>
             <object class="AdwPreferencesGroup">
-              <property name="title" translatable="yes">Remote Connection</property>
-              <property name="description" translatable="yes">Manage a remote connection to Ollama</property>
+              <!--<property name="title" translatable="yes">Remote Connection</property>
+              <property name="description" translatable="yes">Manage a remote connection to Ollama</property>-->
               <child>
                 <object class="AdwSwitchRow" id="remote_connection_switch">
-                  <property name="title" translatable="yes">Use remote connection</property>
+                  <property name="title" translatable="yes">Use Remote Connection to Ollama</property>
                 </object>
               </child>
               <child>
                 <object class="AdwEntryRow" id="remote_connection_entry">
                   <signal name="apply" handler="change_remote_url"/>
-                  <property name="title" translatable="yes">URL of remote instance</property>
+                  <property name="title" translatable="yes">URL of Remote Instance</property>
                   <property name="show-apply-button">true</property>
                 </object>
               </child>
@@ -307,11 +307,11 @@
           </child>
           <child>
             <object class="AdwPreferencesGroup">
-              <property name="title" translatable="yes">Behavior</property>
-              <property name="description" translatable="yes">Manage Alpaca's Behavior</property>
+              <!--<property name="title" translatable="yes">Behavior</property>
+              <property name="description" translatable="yes">Manage Alpaca's Behavior</property>-->
               <child>
                 <object class="AdwSwitchRow" id="background_switch">
-                  <property name="title" translatable="yes">Run in background</property>
+                  <property name="title" translatable="yes">Run In Background</property>
                 </object>
               </child>
             </object>
@@ -324,8 +324,8 @@
           <property name="icon-name">preferences-other-symbolic</property>
           <child>
             <object class="AdwPreferencesGroup">
-              <property name="title" translatable="yes">Model Tweaks</property>
-              <property name="description" translatable="yes">Manage the behavior of the AI models</property>
+              <!--<property name="title" translatable="yes">Model Tweaks</property>
+              <property name="description" translatable="yes">Manage the behavior of the AI models</property>-->
               <child>
                 <object class="AdwSpinRow" id="temperature_spin">
                   <signal name="changed" handler="model_spin_changed"/>
@@ -362,7 +362,7 @@
                   <signal name="changed" handler="model_spin_changed"/>
                   <property name="name">keep_alive</property>
                   <property name="title" translatable="yes">Keep Alive Time</property>
-                  <property name="subtitle" translatable="yes">Controls how long the model will stay loaded into memory following the request in minutes (default: 5)</property>
+                  <property name="subtitle" translatable="yes">Controls how long the model will stay loaded into memory following the request in minutes (Default: 5)</property>
                   <property name="adjustment">
                     <object class="GtkAdjustment">
                       <property name="lower">-1</property>
@@ -383,7 +383,7 @@
           <child>
             <object class="AdwPreferencesGroup">
               <property name="title" translatable="yes">Ollama Overrides</property>
-              <property name="description" translatable="yes">Manage the arguments used on Ollama, any changes on this page only applies to the integrated instance, the instance will restart if you make changes</property>
+              <property name="description" translatable="yes">Manage the arguments used on Ollama, any changes on this page only applies to the integrated instance, the instance will restart if you make changes.</property>
               <child>
                 <object class="AdwEntryRow" id="override_HSA_OVERRIDE_GFX_VERSION">
                   <signal name="apply" handler="override_changed"/>
@@ -968,7 +968,7 @@
         <attribute name="action">app.create_model_from_existing</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">From GGUF file (Testing)</attribute>
+        <attribute name="label" translatable="yes">From GGUF file (Experimental)</attribute>
         <attribute name="action">app.create_model_from_file</attribute>
       </item>
     </section>

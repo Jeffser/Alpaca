@@ -877,14 +877,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     subtitle = tag_data[1],
                     name = f"{model_name}:{tag_data[0]}"
                 )
-                pull_button = Gtk.Button(
-                    icon_name = "folder-download-symbolic",
-                    vexpand = False,
-                    valign = 3,
-                    tooltip_text = _("Pull '{} ({})'").format(model_name.capitalize(), tag_data[0])
-                )
-                pull_button.connect("clicked", lambda button, model_name=f"{model_name}:{tag_data[0]}" : self.confirm_pull_model(model_name))
-                #tag_row.add_suffix(pull_button)
+                tag_row.add_suffix(Gtk.Image.new_from_icon_name("folder-download-symbolic"))
                 self.model_tag_list_box.append(tag_row)
 
     def update_list_available_models(self):
@@ -902,16 +895,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 valign = 3,
                 tooltip_text = model_info["url"]
             )
-            pull_button = Gtk.Button(
-                icon_name = "step-over-symbolic",
-                vexpand = False,
-                valign = 3,
-                tooltip_text = _("Pull '{}'").format(name.capitalize())
-            )
             link_button.connect("clicked", lambda button=link_button, link=model_info["url"]: os.system(f'xdg-open "{link}"'))
-            pull_button.connect("clicked", lambda button=pull_button, model_name=name: self.list_available_model_tags(model_name))
             model.add_suffix(link_button)
-            #model.add_suffix(pull_button)
+            model.add_suffix(Gtk.Image.new_from_icon_name("go-next"))
             self.available_model_list_box.append(model)
 
     def save_history(self):
@@ -934,8 +920,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             try:
                 with open(os.path.join(self.data_dir, "chats", "chats.json"), "r") as f:
                     self.chats = json.load(f)
-                    if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]: self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
                     if len(list(self.chats["chats"].keys())) == 0: self.chats["chats"][_("New Chat")] = {"messages": {}}
+                    if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]: self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
+                    if "order" not in self.chats:
+                        self.chats["order"] = []
+                        for chat_name in self.chats["chats"].keys():
+                            self.chats["order"].append(chat_name)
             except Exception as e:
                 self.chats = {"chats": {_("New Chat"): {"messages": {}}}, "selected_chat": _("New Chat")}
             self.load_history_into_chat()
