@@ -934,11 +934,11 @@
   <menu id="secondary_menu">
     <item>
       <attribute name="label" translatable="yes">Rename chat</attribute>
-      <attribute name="action">app.rename_chat</attribute>
+      <attribute name="action">app.rename_current_chat</attribute>
     </item>
     <item>
       <attribute name="label" translatable="yes">Export chat</attribute>
-      <attribute name="action">app.export_chat</attribute>
+      <attribute name="action">app.export_current_chat</attribute>
     </item>
     <item>
       <attribute name="label" translatable="yes">Clear chat</attribute>

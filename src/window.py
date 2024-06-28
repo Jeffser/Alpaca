@@ -953,6 +953,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def delete_chat(self, chat_name):
         del self.chats['chats'][chat_name]
+        self.chats['order'].remove(chat_name)
         if os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'])):
             shutil.rmtree(os.path.join(self.data_dir, "chats", self.chats['selected_chat']))
         self.save_history()
@@ -966,6 +967,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         new_chat_name = self.generate_numbered_name(new_chat_name, self.chats["chats"].keys())
         if self.chats["selected_chat"] == old_chat_name: self.chats["selected_chat"] = new_chat_name
         self.chats["chats"][new_chat_name] = self.chats["chats"][old_chat_name]
+        self.chats["order"][self.chats["order"].index(old_chat_name)] = new_chat_name
         del self.chats["chats"][old_chat_name]
         if os.path.exists(os.path.join(self.data_dir, "chats", old_chat_name)):
             shutil.move(os.path.join(self.data_dir, "chats", old_chat_name), os.path.join(self.data_dir, "chats", new_chat_name))
@@ -976,8 +978,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def new_chat(self):
         chat_name = self.generate_numbered_name(_("New Chat"), self.chats["chats"].keys())
         self.chats["chats"][chat_name] = {"messages": {}}
+        self.chats["order"].insert(0, chat_name)
         self.save_history()
-        self.new_chat_element(chat_name, True)
+        self.new_chat_element(chat_name, True, False)
 
     def stop_pull_model(self, model_name):
         self.pulling_models[model_name]['overlay'].get_parent().get_parent().remove(self.pulling_models[model_name]['overlay'].get_parent())
@@ -999,7 +1002,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             has_arrow=False,
             halign=1,
         )
-        self.right_clicked_chat_row = chat_row
+        self.selected_chat_row = chat_row
         position = Gdk.Rectangle()
         position.x = x
         position.y = y
@@ -1007,7 +1010,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         popover.set_pointing_to(position)
         popover.popup()
 
-    def new_chat_element(self, chat_name:str, select:bool):
+    def new_chat_element(self, chat_name:str, select:bool, append:bool):
         chat_label = Gtk.Label(
             label=chat_name,
             hexpand=True,
@@ -1028,13 +1031,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
         gesture.connect("released", self.chat_click_handler)
         chat_row.add_controller(gesture)
 
-        self.chat_list_box.append(chat_row)
+        if append: self.chat_list_box.append(chat_row)
+        else: self.chat_list_box.prepend(chat_row)
         if select: self.chat_list_box.select_row(chat_row)
 
     def update_chat_list(self):
         self.chat_list_box.remove_all()
-        for name, content in self.chats['chats'].items():
-            self.new_chat_element(name, self.chats["selected_chat"] == name)
+        for name in self.chats['order']:
+            if name in self.chats['chats'].keys():
+                self.new_chat_element(name, self.chats["selected_chat"] == name, True)
 
     def show_preferences_dialog(self):
         self.preferences_dialog.present(self)
@@ -1235,19 +1240,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.attachment_box.set_visible(True)
 
     def chat_actions(self, action, user_data):
-        action_name = action.get_name()
-        if self.right_clicked_chat_row:
-            chat_row = self.right_clicked_chat_row
-        else:
-            chat_row = self.chat_list_box.get_selected_row()
+        chat_row = self.selected_chat_row
         chat_name = chat_row.get_name()
-        self.right_clicked_chat_row = None
+        action_name = action.get_name()
         if action_name == 'delete_chat':
             dialogs.delete_chat(self, chat_name)
-        elif action_name == 'rename_chat':
+        elif action_name in ('rename_chat', 'rename_current_chat'):
             dialogs.rename_chat(self, chat_name, chat_row.get_child())
-        elif action_name == 'export_chat':
+        elif action_name in ('export_chat', 'export_current_chat'):
             self.export_chat(chat_name)
+
+    def current_chat_actions(self, action, user_data):
+        self.selected_chat_row = self.chat_list_box.get_selected_row()
+        self.chat_actions(action, user_data)
 
     def text_received(self, clipboard, result):
         text = clipboard.read_text_finish(result)
@@ -1302,7 +1307,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.get_application().create_action('create_model_from_file', lambda *_: dialogs.create_model_from_file(self))
         self.get_application().create_action('delete_chat', self.chat_actions)
         self.get_application().create_action('rename_chat', self.chat_actions)
+        self.get_application().create_action('rename_current_chat', self.current_chat_actions, ['F2'])
         self.get_application().create_action('export_chat', self.chat_actions)
+        self.get_application().create_action('export_current_chat', self.current_chat_actions)
         self.message_text_view.connect("paste-clipboard", self.on_clipboard_paste)
         self.add_chat_button.connect("clicked", lambda button : self.new_chat())
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
