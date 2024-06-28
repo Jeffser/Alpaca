@@ -101,6 +101,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_tag_list_box = Gtk.Template.Child()
     navigation_view_manage_models = Gtk.Template.Child()
     file_preview_open_button = Gtk.Template.Child()
+    secondary_menu_button = Gtk.Template.Child()
 
     manage_models_dialog = Gtk.Template.Child()
     pulling_model_list_box = Gtk.Template.Child()
@@ -791,7 +792,7 @@ Generate a title following these rules:
             self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['content'] += data['message']['content']
 
     def toggle_ui_sensitive(self, status):
-        for element in [self.chat_list_box, self.add_chat_button]:
+        for element in [self.chat_list_box, self.add_chat_button, self.secondary_menu_button]:
             element.set_sensitive(status)
 
     def switch_send_stop_button(self):
@@ -1328,7 +1329,7 @@ Generate a title following these rules:
         self.get_application().create_action('create_model_from_file', lambda *_: dialogs.create_model_from_file(self))
         self.get_application().create_action('delete_chat', self.chat_actions)
         self.get_application().create_action('rename_chat', self.chat_actions)
-        self.get_application().create_action('rename_current_chat', self.current_chat_actions, ['F2'])
+        self.get_application().create_action('rename_current_chat', self.current_chat_actions)
         self.get_application().create_action('export_chat', self.chat_actions)
         self.get_application().create_action('export_current_chat', self.current_chat_actions)
         self.message_text_view.connect("paste-clipboard", self.on_clipboard_paste)

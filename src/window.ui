@@ -114,7 +114,7 @@
                       </object>
                     </property>
                     <child type="end">
-                      <object class="GtkMenuButton">
+                      <object class="GtkMenuButton" id="secondary_menu_button">
                         <property name="primary">False</property>
                         <property name="icon-name">view-more-symbolic</property>
                         <property name="tooltip-text" translatable="yes">Chat Menu</property>
