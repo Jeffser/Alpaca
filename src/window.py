@@ -99,10 +99,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_string_list = Gtk.Template.Child()
     chat_right_click_menu = Gtk.Template.Child()
     model_tag_list_box = Gtk.Template.Child()
-    manage_models_carousel = Gtk.Template.Child()
-    manage_models_title = Gtk.Template.Child()
-    create_model_button = Gtk.Template.Child()
-    manage_models_back_button = Gtk.Template.Child()
+    navigation_view_manage_models = Gtk.Template.Child()
     file_preview_open_button = Gtk.Template.Child()
 
     manage_models_dialog = Gtk.Template.Child()
@@ -237,10 +234,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def manage_models_button_activate(self, button=None):
-        self.manage_models_carousel.scroll_to(self.manage_models_carousel.get_nth_page(0), True)
-        self.manage_models_title.set_title(_("Manage Models"))
-        self.create_model_button.set_visible(True)
-        self.manage_models_back_button.set_visible(False)
         self.update_list_local_models()
         self.manage_models_dialog.present(self)
 
@@ -866,18 +859,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
         thread.start()
 
     def confirm_pull_model(self, model_name):
+        self.navigation_view_manage_models.pop()
         self.model_tag_list_box.unselect_all()
-        self.manage_models_title.set_title(_("Manage Models"))
-        self.create_model_button.set_visible(True)
-        self.manage_models_back_button.set_visible(False)
-        self.manage_models_carousel.scroll_to(self.manage_models_carousel.get_nth_page(0), True)
         self.pull_model(model_name)
 
     def list_available_model_tags(self, model_name):
+        self.navigation_view_manage_models.push_by_tag('model_tags_page')
+        self.navigation_view_manage_models.find_page('model_tags_page').set_title(model_name.capitalize())
         self.available_model_list_box.unselect_all()
-        self.manage_models_title.set_title(model_name.capitalize())
-        self.create_model_button.set_visible(False)
-        self.manage_models_back_button.set_visible(True)
         self.model_tag_list_box.connect('row_selected', lambda list_box, row: self.confirm_pull_model(row.get_name()) if row else None)
         self.model_tag_list_box.remove_all()
         tags = self.available_models[model_name]['tags']
@@ -895,9 +884,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     tooltip_text = _("Pull '{} ({})'").format(model_name.capitalize(), tag_data[0])
                 )
                 pull_button.connect("clicked", lambda button, model_name=f"{model_name}:{tag_data[0]}" : self.confirm_pull_model(model_name))
-                tag_row.add_suffix(pull_button)
+                #tag_row.add_suffix(pull_button)
                 self.model_tag_list_box.append(tag_row)
-        self.manage_models_carousel.scroll_to(self.manage_models_carousel.get_nth_page(1), True)
 
     def update_list_available_models(self):
         self.available_model_list_box.connect('row_selected', lambda list_box, row: self.list_available_model_tags(row.get_name()) if row else None)
@@ -923,7 +911,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             link_button.connect("clicked", lambda button=link_button, link=model_info["url"]: os.system(f'xdg-open "{link}"'))
             pull_button.connect("clicked", lambda button=pull_button, model_name=name: self.list_available_model_tags(model_name))
             model.add_suffix(link_button)
-            model.add_suffix(pull_button)
+            #model.add_suffix(pull_button)
             self.available_model_list_box.append(model)
 
     def save_history(self):
