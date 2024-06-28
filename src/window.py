@@ -466,7 +466,7 @@ Generate a title following these rules:
     - The title should be based on the prompt at the end
     - Keep it in the same language as the prompt
     - The title needs to be less than 30 characters
-    - Use only alphanumeric characters
+    - Use only alphanumeric characters and spaces
     - Just write the title, nothing else
 
 ```PROMPT
