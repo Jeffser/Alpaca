@@ -921,7 +921,7 @@ Generate a title following these rules:
         for name, model_info in self.available_models.items():
             model = Adw.ActionRow(
                 title = "<b>{}</b> <small>by {}</small>".format(name.capitalize(), model_info['author']),
-                subtitle = "<span foreground='white'><a href='{}'>{}</a></span>".format(model_info["url"], _("Visit website")),
+                subtitle = "<a href='{}'>{}</a>".format(model_info["url"], _("Website")),
                 #("<b>Image recognition capable</b>\n" if model_info["image"] else "") +
                 #title = f"<b>{name.capitalize()}</b> <small>by {model_info['author']}</small>",
                 #subtitle = f"<small>" + (_("(Image recognition capable)\n") if model_info["image"] else "") + f"{model_info['description']}</small>",
