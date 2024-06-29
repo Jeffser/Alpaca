@@ -604,6 +604,24 @@
                               <property name="menu-model">create_model_menu</property>
                             </object>
                           </child>
+                          <child type="start">
+                            <object class="GtkToggleButton" id="model_search_button">
+                              <property name="icon-name">edit-find-symbolic</property>
+                              <property name="tooltip-text" translatable="yes">Search Model</property>
+                              <signal name="clicked" handler="model_search_toggle"/>
+                            </object>
+                          </child>
+                        </object>
+                      </child>
+                      <child type="top">
+                        <object class="GtkSearchBar" id="model_searchbar">
+                          <child>
+                            <object class="GtkSearchEntry" id="searchentry">
+                              <signal name="search-changed" handler="model_search_changed"/>
+                              <property name="search-delay">100</property>
+                              <property name="placeholder-text" translatable="true">Search models</property>
+                            </object>
+                          </child>
                         </object>
                       </child>
                       <property name="content">

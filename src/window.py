@@ -103,6 +103,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     navigation_view_manage_models = Gtk.Template.Child()
     file_preview_open_button = Gtk.Template.Child()
     secondary_menu_button = Gtk.Template.Child()
+    model_searchbar = Gtk.Template.Child()
 
     manage_models_dialog = Gtk.Template.Child()
     pulling_model_list_box = Gtk.Template.Child()
@@ -375,6 +376,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def link_button_handler(self, button):
         os.system(f'xdg-open "{button.get_name()}"')
+
+    @Gtk.Template.Callback()
+    def model_search_toggle(self, button):
+        self.model_searchbar.set_search_mode(button.get_active())
+        self.pulling_model_list_box.set_visible(not button.get_active() and len(self.pulling_models) > 0)
+        self.local_model_list_box.set_visible(not button.get_active())
+        print(button.get_active())
+
+    @Gtk.Template.Callback()
+    def model_search_changed(self, entry):
+        for i in range(len(self.available_models.keys())):
+            row = self.available_model_list_box.get_row_at_index(i)
+            row.set_visible(re.search(entry.get_text(), row.get_title(), re.IGNORECASE))
 
     def check_alphanumeric(self, editable, text, length, position):
         new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '_']])
