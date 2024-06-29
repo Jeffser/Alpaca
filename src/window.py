@@ -179,7 +179,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.bot_message: return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
         current_model = self.model_drop_down.get_selected_item().get_string()
-        current_model = current_model.replace(' (', ':')[:-1]
+        current_model = current_model.replace(' (', ':')[:-1].lower()
         if current_model is None:
             self.show_toast("info", 0, self.main_overlay)
             return
@@ -624,14 +624,14 @@ Generate a title following these rules:
                     icon_name = "user-trash-symbolic",
                     vexpand = False,
                     valign = 3,
-                    css_classes = ["error"],
+                    css_classes = ["error", "circular"],
                     tooltip_text = _("Remove '{} ({})'").format(model["name"].split(":")[0].capitalize(), model["name"].split(":")[1])
                 )
                 button.connect("clicked", lambda button=button, model_name=model["name"]: dialogs.delete_model(self, model_name))
                 model_row.add_suffix(button)
                 self.local_model_list_box.append(model_row)
 
-                self.model_string_list.append(f"{model['name'].split(':')[0]} ({model['name'].split(':')[1]})")
+                self.model_string_list.append(f"{model['name'].split(':')[0].capitalize()} ({model['name'].split(':')[1]})")
                 self.local_models.append(model["name"])
             self.model_drop_down.set_selected(0)
             self.verify_if_image_can_be_used()
@@ -853,7 +853,7 @@ Generate a title following these rules:
         self.pulling_model_list_box.set_visible(True)
         #self.pulling_model_list_box.connect('row_selected', lambda list_box, row: dialogs.stop_pull_model(self, row.get_name()) if row else None) #It isn't working for some reason
         model_row = Adw.ActionRow(
-            title = "<b>{}</b> <small>({})</small>".format(model.split(":")[0].capitalize(), model.split(":")[1]),
+            title = "<b>{}</b> <small>{}</small>".format(model.split(":")[0].capitalize(), model.split(":")[1]),
             name = model
         )
         thread = threading.Thread(target=self.pull_model_process, kwargs={"model": model, "modelfile": None})
@@ -869,7 +869,7 @@ Generate a title following these rules:
             icon_name = "media-playback-stop-symbolic",
             vexpand = False,
             valign = 3,
-            css_classes = ["error"],
+            css_classes = ["error", "circular"],
             tooltip_text = _("Stop Pulling '{}'").format(model.capitalize())
         )
         button.connect("clicked", lambda button, model_name=model : dialogs.stop_pull_model(self, model_name))
@@ -907,14 +907,17 @@ Generate a title following these rules:
         self.available_model_list_box.remove_all()
         for name, model_info in self.available_models.items():
             model = Adw.ActionRow(
-                title = f"<b>{name.capitalize()}</b> <small>by {model_info['author']}</small>",
-                subtitle = f"<small>" + (_("(Image recognition capable)\n") if model_info["image"] else "") + f"{model_info['description']}</small>",
+                title = f"<b>{name.capitalize()}</b>",
+                subtitle = model_info['author'],
+                #title = f"<b>{name.capitalize()}</b> <small>by {model_info['author']}</small>",
+                #subtitle = f"<small>" + (_("(Image recognition capable)\n") if model_info["image"] else "") + f"{model_info['description']}</small>",
                 name = name
             )
             link_button = Gtk.Button(
                 icon_name = "globe-symbolic",
                 vexpand = False,
                 valign = 3,
+                css_classes = ["circular"],
                 tooltip_text = model_info["url"]
             )
             link_button.connect("clicked", lambda button=link_button, link=model_info["url"]: os.system(f'xdg-open "{link}"'))
