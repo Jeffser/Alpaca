@@ -303,6 +303,13 @@
                   <property name="show-apply-button">true</property>
                 </object>
               </child>
+              <child>
+                <object class="AdwEntryRow" id="remote_bearer_token_entry">
+                  <signal name="apply" handler="change_remote_bearer_token"/>
+                  <property name="title" translatable="yes">Bearer Token (Optional)</property>
+                  <property name="show-apply-button">true</property>
+                </object>
+              </child>
             </object>
           </child>
           <child>
@@ -311,7 +318,7 @@
               <property name="description" translatable="yes">Manage Alpaca's Behavior</property>-->
               <child>
                 <object class="AdwSwitchRow" id="background_switch">
-                  <property name="title" translatable="yes">Run In Background</property>
+                  <property name="title" translatable="yes">Run Alpaca In Background</property>
                 </object>
               </child>
             </object>
