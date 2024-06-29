@@ -617,7 +617,7 @@ Generate a title following these rules:
                 self.local_model_list_box.set_visible(True)
             for model in json.loads(response['text'])['models']:
                 model_row = Adw.ActionRow(
-                    title = model["name"].split(":")[0],
+                    title = "<b>{}</b>".format(model["name"].split(":")[0].capitalize()),
                     subtitle = model["name"].split(":")[1]
                 )
                 button = Gtk.Button(
@@ -625,7 +625,7 @@ Generate a title following these rules:
                     vexpand = False,
                     valign = 3,
                     css_classes = ["error"],
-                    tooltip_text = _("Remove '{}'").format(model["name"].capitalize())
+                    tooltip_text = _("Remove '{} ({})'").format(model["name"].split(":")[0].capitalize(), model["name"].split(":")[1])
                 )
                 button.connect("clicked", lambda button=button, model_name=model["name"]: dialogs.delete_model(self, model_name))
                 model_row.add_suffix(button)
@@ -853,7 +853,7 @@ Generate a title following these rules:
         self.pulling_model_list_box.set_visible(True)
         #self.pulling_model_list_box.connect('row_selected', lambda list_box, row: dialogs.stop_pull_model(self, row.get_name()) if row else None) #It isn't working for some reason
         model_row = Adw.ActionRow(
-            title = model,
+            title = "<b>{}</b> <small>({})</small>".format(model.split(":")[0].capitalize(), model.split(":")[1]),
             name = model
         )
         thread = threading.Thread(target=self.pull_model_process, kwargs={"model": model, "modelfile": None})
