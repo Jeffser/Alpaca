@@ -920,21 +920,14 @@ Generate a title following these rules:
         self.available_model_list_box.remove_all()
         for name, model_info in self.available_models.items():
             model = Adw.ActionRow(
-                title = f"<b>{name.capitalize()}</b>",
-                subtitle = model_info['author'],
+                title = "<b>{}</b> <small>by {}</small>".format(name.capitalize(), model_info['author']),
+                subtitle = "<span foreground='white'><a href='{}'>{}</a></span>".format(model_info["url"], _("Visit website")),
+                #("<b>Image recognition capable</b>\n" if model_info["image"] else "") +
                 #title = f"<b>{name.capitalize()}</b> <small>by {model_info['author']}</small>",
                 #subtitle = f"<small>" + (_("(Image recognition capable)\n") if model_info["image"] else "") + f"{model_info['description']}</small>",
                 name = name
             )
-            link_button = Gtk.Button(
-                icon_name = "globe-symbolic",
-                vexpand = False,
-                valign = 3,
-                css_classes = ["circular"],
-                tooltip_text = model_info["url"]
-            )
-            link_button.connect("clicked", lambda button=link_button, link=model_info["url"]: os.system(f'xdg-open "{link}"'))
-            model.add_suffix(link_button)
+            if model_info["image"]: model.add_suffix(Gtk.Image.new_from_icon_name("image-x-generic-symbolic"))
             model.add_suffix(Gtk.Image.new_from_icon_name("go-next"))
             self.available_model_list_box.append(model)
 
