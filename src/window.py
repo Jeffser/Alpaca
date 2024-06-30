@@ -54,7 +54,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_tweaks = {"temperature": 0.7, "seed": 0, "keep_alive": 5}
     local_models = []
     pulling_models = {}
-    chats = {"chats": {_("New Chat"): {"messages": {}}}, "selected_chat": "New Chat"}
+    chats = {"chats": {_("New Chat"): {"messages": {}}}, "selected_chat": "New Chat", "order": []}
     attachments = {}
 
     #Override elements
@@ -495,7 +495,7 @@ Generate a title following these rules:
     - Keep it in the same language as the prompt
     - The title needs to be less than 30 characters
     - Use only alphanumeric characters and spaces
-    - Just write the title, nothing else
+    - Just write the title, NOTHING ELSE
 
 ```PROMPT
 {message['content']}
@@ -981,8 +981,13 @@ Generate a title following these rules:
                         for chat_name in self.chats["chats"].keys():
                             self.chats["order"].append(chat_name)
             except Exception as e:
-                self.chats = {"chats": {_("New Chat"): {"messages": {}}}, "selected_chat": _("New Chat")}
-            self.load_history_into_chat()
+                self.chats = {"chats": {}, "selected_chat": None, "order": []}
+                self.new_chat()
+        else:
+            self.chats = {"chats": {}, "selected_chat": None, "order": []}
+            self.new_chat()
+        self.load_history_into_chat()
+
 
     def generate_numbered_name(self, chat_name:str, compare_list:list) -> str:
         if chat_name in compare_list:
@@ -1135,7 +1140,6 @@ Generate a title following these rules:
                 connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
                 local_instance.start()
                 if self.verify_connection() == False: self.connection_error()
-            self.update_list_available_models()
 
     def on_replace_contents(self, file, result):
         file.replace_contents_finish(result)
