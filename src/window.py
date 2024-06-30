@@ -433,8 +433,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
         overlay.add_toast(toast)
 
-    def show_notification(self, title:str, body:str, only_when_unfocus:bool, icon:Gio.ThemedIcon=None):
-        if not only_when_unfocus or (only_when_unfocus and self.is_active()==False):
+    def show_notification(self, title:str, body:str, icon:Gio.ThemedIcon=None):
+        if not self.is_active():
             notification = Gio.Notification.new(title)
             notification.set_body(body)
             if icon: notification.set_icon(icon)
@@ -807,6 +807,7 @@ Generate a title following these rules:
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
             self.save_history()
             GLib.idle_add(self.bot_message_button_container.set_visible, True)
+            GLib.idle_add(self.show_notification, _("Message Received"), _("New message from '{}'").format(self.chats["selected_chat"]), Gio.ThemedIcon.new("emblem-ok-symbolic"))
         else:
             if id not in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
                 GLib.idle_add(self.chat_container.remove, self.loading_spinner)
@@ -860,12 +861,12 @@ Generate a title following these rules:
         GLib.idle_add(self.update_list_local_models)
 
         if response['status'] == 'ok':
-            GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model), True, Gio.ThemedIcon.new("emblem-ok-symbolic"))
+            GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model), Gio.ThemedIcon.new("emblem-ok-symbolic"))
             GLib.idle_add(self.show_toast, "good", 1, self.manage_models_overlay)
             GLib.idle_add(self.pulling_models[model]['overlay'].get_parent().get_parent().remove, self.pulling_models[model]['overlay'].get_parent())
             del self.pulling_models[model]
         else:
-            GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(model), True, Gio.ThemedIcon.new("dialog-error-symbolic"))
+            GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(model), Gio.ThemedIcon.new("dialog-error-symbolic"))
             GLib.idle_add(self.pulling_models[model]['overlay'].get_parent().get_parent().remove, self.pulling_models[model]['overlay'].get_parent())
             del self.pulling_models[model]
             GLib.idle_add(self.manage_models_dialog.close)
