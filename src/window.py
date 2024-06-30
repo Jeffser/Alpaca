@@ -237,7 +237,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], bot_id))
         thread.start()
         if len(data['messages']) == 1:
-            generate_title_thread = threading.Thread(target=self.generate_chat_title, args=(data['messages'][0], self.chat_list_box.get_selected_row().get_child()))
+            generate_title_thread = threading.Thread(target=self.generate_chat_title, args=(data['messages'][0]['content'], self.chat_list_box.get_selected_row().get_child(), data['messages'][0]['images']))
             generate_title_thread.start()
 
     @Gtk.Template.Callback()
@@ -488,7 +488,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             messages.append(new_message)
         return messages
 
-    def generate_chat_title(self, message, label_element):
+    def generate_chat_title(self, message, label_element, images):
         prompt = f"""
 Generate a title following these rules:
     - The title should be based on the prompt at the end
@@ -502,9 +502,10 @@ Generate a title following these rules:
 ```"""
         current_model = self.model_drop_down.get_selected_item().get_string()
         current_model = current_model.replace(' (', ':')[:-1].lower()
-        response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps({"model": current_model, "prompt": prompt, "stream": False}))
-        new_chat_name = json.loads(response['text'])["response"].replace('"', '').replace("'", "")
-        new_chat_name = self.generate_numbered_name(new_chat_name, self.chats["chats"].keys())
+        data = {"model": current_model, "prompt": prompt, "stream": False}
+        if images: data["images"] = images
+        response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps(data))
+        new_chat_name = json.loads(response['text'])["response"].lstrip().rstrip().replace('"', '').replace("'", "").capitalize()
         self.rename_chat(label_element.get_parent().get_name(), new_chat_name, label_element)
 
     def show_message(self, msg:str, bot:bool, footer:str=None, images:list=None, files:dict=None, id:str=None):
@@ -1023,6 +1024,7 @@ Generate a title following these rules:
         del self.chats["chats"][old_chat_name]
         if os.path.exists(os.path.join(self.data_dir, "chats", old_chat_name)):
             shutil.move(os.path.join(self.data_dir, "chats", old_chat_name), os.path.join(self.data_dir, "chats", new_chat_name))
+        label_element.set_tooltip_text(new_chat_name)
         label_element.set_label(new_chat_name)
         label_element.get_parent().get_parent().set_name(new_chat_name)
         self.save_history()
@@ -1065,6 +1067,7 @@ Generate a title following these rules:
     def new_chat_element(self, chat_name:str, select:bool, append:bool):
         chat_label = Gtk.Label(
             label=chat_name,
+            tooltip_text=chat_name,
             hexpand=True,
             halign=0,
             wrap=True,
@@ -1284,10 +1287,6 @@ Generate a title following these rules:
                 tooltip_text=name,
                 child=button_content
             )
-            lab = Gtk.Label(
-                label="funny"
-            )
-            button.set_label(lab)
             self.attachments[name] = {"path": file_path, "type": file_type, "content": content, "button": button}
             button.connect("clicked", lambda button: dialogs.remove_attached_file(self, button))
             self.attachment_container.append(button)
