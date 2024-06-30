@@ -238,7 +238,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], bot_id))
         thread.start()
         if len(data['messages']) == 1:
-            generate_title_thread = threading.Thread(target=self.generate_chat_title, args=(data['messages'][0]['content'], self.chat_list_box.get_selected_row().get_child(), data['messages'][0]['images']))
+            generate_title_thread = threading.Thread(target=self.generate_chat_title, args=(data['messages'][0], self.chat_list_box.get_selected_row().get_child()))
             generate_title_thread.start()
 
     @Gtk.Template.Callback()
@@ -489,7 +489,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             messages.append(new_message)
         return messages
 
-    def generate_chat_title(self, message, label_element, images):
+    def generate_chat_title(self, message, label_element):
         prompt = f"""
 Generate a title following these rules:
     - The title should be based on the prompt at the end
@@ -499,12 +499,12 @@ Generate a title following these rules:
     - Just write the title, nothing else
 
 ```PROMPT
-{message}
+{message['content']}
 ```"""
         current_model = self.model_drop_down.get_selected_item().get_string()
         current_model = current_model.replace(' (', ':')[:-1].lower()
         data = {"model": current_model, "prompt": prompt, "stream": False}
-        if images: data["images"] = images
+        if 'images' in message: data["images"] = message['images']
         response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps(data))
         new_chat_name = json.loads(response['text'])["response"].lstrip().rstrip().replace('"', '').replace("'", "").title()
         self.rename_chat(label_element.get_parent().get_name(), new_chat_name, label_element)

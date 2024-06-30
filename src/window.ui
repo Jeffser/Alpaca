@@ -90,6 +90,7 @@
                         <child>
                           <object class="GtkDropDown" id="model_drop_down">
                             <signal name="notify" handler="verify_if_image_can_be_used"/>
+                            <property name="width-request">150</property>
                             <property name="enable-search">true</property>
                             <property name="tooltip-text">Select Model</property>
                             <property name="model">
