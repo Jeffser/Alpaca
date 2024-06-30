@@ -156,8 +156,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def verify_if_image_can_be_used(self, pspec=None, user_data=None):
         if self.model_drop_down.get_selected_item() == None: return True
-        selected = self.model_drop_down.get_selected_item().get_string().split(" (")[0]
-        if selected in ['llava', 'bakllava', 'moondream', 'llava-llama3']:
+        selected = self.model_drop_down.get_selected_item().get_string().split(" (")[0].lower()
+        if selected in [key for key, value in self.available_models.items() if value["image"]]:
             for name, content in self.attachments.items():
                 if content['type'] == 'image':
                     content['button'].set_css_classes(["flat"])
@@ -501,7 +501,7 @@ Generate a title following these rules:
 {message}
 ```"""
         current_model = self.model_drop_down.get_selected_item().get_string()
-        current_model = current_model.replace(' (', ':')[:-1]
+        current_model = current_model.replace(' (', ':')[:-1].lower()
         response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps({"model": current_model, "prompt": prompt, "stream": False}))
         new_chat_name = json.loads(response['text'])["response"].replace('"', '').replace("'", "")
         new_chat_name = self.generate_numbered_name(new_chat_name, self.chats["chats"].keys())
