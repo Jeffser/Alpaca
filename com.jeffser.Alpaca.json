@@ -86,6 +86,35 @@
 	    ]
 	},
 	{
+	    "name": "python3-docx2python",
+	    "buildsystem": "simple",
+	    "build-commands": [
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"docx2python\" --no-build-isolation"
+	    ],
+	    "sources": [
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/2a/13/9b36c57b9f0b8c1c7b200f7a715c6ccd64de5b4222283032eaf74efc3111/docx2python-2.10.1-py3-none-any.whl",
+		    "sha256": "2a140da0224dbcfe20324b67d59bd235b84c9ea03788e128f98c0a96c4ee9d8e"
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/63/f7/ffbb6d2eb67b80a45b8a0834baa5557a14a5ffce0979439e7cd7f0c4055b/lxml-5.2.2.tar.gz",
+		    "sha256": "bb2dc4898180bea79863d5487e5f9c7c34297414bad54bcd0f0852aee9cfdb87"
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/a0/e2/a2e5dffdfe89ea328bd04f1411dc6df2f44560fff1335d4f2b8acaa57ea8/paragraphs-0.2.1-py3-none-any.whl",
+		    "sha256": "c28dc3cb72c9028871ab22ce57c42f2e3e1a0403332d87abd238c77427e07582"
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/26/9f/ad63fc0248c5379346306f8668cda6e2e2e9c95e01216d2b8ffd9ff037d0/typing_extensions-4.12.2-py3-none-any.whl",
+		    "sha256": "04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d"
+		}
+	    ]
+	},
+	{
 	    "name": "python3-pytube",
 	    "buildsystem": "simple",
 	    "build-commands": [
