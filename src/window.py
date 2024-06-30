@@ -1304,21 +1304,37 @@ Generate a title following these rules:
         self.selected_chat_row = self.chat_list_box.get_selected_row()
         self.chat_actions(action, user_data)
 
-    def text_received(self, clipboard, result):
-        text = clipboard.read_text_finish(result)
-        #Check if text is a Youtube URL
-        youtube_regex = re.compile(
-            r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/'
-            r'(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
-        if youtube_regex.match(text):
-            try:
-                dialogs.youtube_caption(self, text)
-            except Exception as e:
-                self.show_toast("error", 10, self.main_overlay)
+    def cb_text_received(self, clipboard, result):
+        try:
+            text = clipboard.read_text_finish(result)
+            #Check if text is a Youtube URL
+            youtube_regex = re.compile(
+                r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/'
+                r'(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
+            if youtube_regex.match(text):
+                try:
+                    dialogs.youtube_caption(self, text)
+                except Exception as e:
+                    self.show_toast("error", 10, self.main_overlay)
+        except Exception as e: 'huh'
+
+    def cb_image_received(self, clipboard, result):
+        try:
+            texture = clipboard.read_texture_finish(result)
+            if texture:
+                pixbuf = Gdk.pixbuf_get_from_texture(texture)
+                if not os.path.exists('/tmp/alpaca/images/'):
+                    os.makedirs('/tmp/alpaca/images/')
+                image_name = self.generate_numbered_name('image.png', os.listdir('/tmp/alpaca/images'))
+                pixbuf.savev('/tmp/alpaca/images/{}'.format(image_name), "png", [], [])
+                self.attach_file('/tmp/alpaca/images/{}'.format(image_name), 'image')
+        except Exception as e: 'huh'
 
     def on_clipboard_paste(self, textview):
         clipboard = Gdk.Display.get_default().get_clipboard()
-        clipboard.read_text_async(None, self.text_received)
+        clipboard.read_text_async(None, self.cb_text_received)
+        clipboard.read_texture_async(None, self.cb_image_received)
+
 
     def on_model_dropdown_setup(self, factory, list_item):
         label = Gtk.Label()
