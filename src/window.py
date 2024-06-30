@@ -104,6 +104,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     file_preview_open_button = Gtk.Template.Child()
     secondary_menu_button = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
+    model_link_button = Gtk.Template.Child()
 
     manage_models_dialog = Gtk.Template.Child()
     pulling_model_list_box = Gtk.Template.Child()
@@ -382,7 +383,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.model_searchbar.set_search_mode(button.get_active())
         self.pulling_model_list_box.set_visible(not button.get_active() and len(self.pulling_models) > 0)
         self.local_model_list_box.set_visible(not button.get_active())
-        print(button.get_active())
 
     @Gtk.Template.Callback()
     def model_search_changed(self, entry):
@@ -915,6 +915,8 @@ Generate a title following these rules:
     def list_available_model_tags(self, model_name):
         self.navigation_view_manage_models.push_by_tag('model_tags_page')
         self.navigation_view_manage_models.find_page('model_tags_page').set_title(model_name.capitalize())
+        self.model_link_button.set_name(self.available_models[model_name]['url'])
+        self.model_link_button.set_tooltip_text(self.available_models[model_name]['url'])
         self.available_model_list_box.unselect_all()
         self.model_tag_list_box.connect('row_selected', lambda list_box, row: self.confirm_pull_model(row.get_name()) if row else None)
         self.model_tag_list_box.remove_all()
@@ -935,14 +937,19 @@ Generate a title following these rules:
         for name, model_info in self.available_models.items():
             model = Adw.ActionRow(
                 title = "<b>{}</b> <small>by {}</small>".format(name.capitalize(), model_info['author']),
-                subtitle = "<a href='{}'>{}</a>".format(model_info["url"], _("Website")),
+                subtitle = model_info["description"],
                 #("<b>Image recognition capable</b>\n" if model_info["image"] else "") +
                 #title = f"<b>{name.capitalize()}</b> <small>by {model_info['author']}</small>",
                 #subtitle = f"<small>" + (_("(Image recognition capable)\n") if model_info["image"] else "") + f"{model_info['description']}</small>",
                 name = name
             )
-            if model_info["image"]: model.add_suffix(Gtk.Image.new_from_icon_name("image-x-generic-symbolic"))
-            model.add_suffix(Gtk.Image.new_from_icon_name("go-next"))
+            if model_info["image"]:
+                image_icon = Gtk.Image.new_from_icon_name("image-x-generic-symbolic")
+                image_icon.set_margin_start(5)
+                model.add_suffix(image_icon)
+            next_icon = Gtk.Image.new_from_icon_name("go-next")
+            next_icon.set_margin_start(5)
+            model.add_suffix(next_icon)
             self.available_model_list_box.append(model)
 
     def save_history(self):
@@ -1280,7 +1287,6 @@ Generate a title following these rules:
             lab = Gtk.Label(
                 label="funny"
             )
-            print(type(button.get_label()))
             button.set_label(lab)
             self.attachments[name] = {"path": file_path, "type": file_type, "content": content, "button": button}
             button.connect("clicked", lambda button: dialogs.remove_attached_file(self, button))

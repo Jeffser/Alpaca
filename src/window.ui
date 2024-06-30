@@ -594,6 +594,7 @@
                   <property name="title" translatable="yes">Manage Models</property>
                   <property name="child">
                     <object class="AdwToolbarView">
+                      <property name="height-request">140</property>
                       <child type="top">
                         <object class="AdwHeaderBar">
                           <child type="start">
@@ -615,6 +616,7 @@
                       </child>
                       <child type="top">
                         <object class="GtkSearchBar" id="model_searchbar">
+                          <property name="key-capture-widget">AlpacaWindow</property>
                           <child>
                             <object class="GtkSearchEntry" id="searchentry">
                               <signal name="search-changed" handler="model_search_changed"/>
@@ -676,7 +678,14 @@
                   <property name="child">
                     <object class="AdwToolbarView">
                       <child type="top">
-                        <object class="AdwHeaderBar"/>
+                        <object class="AdwHeaderBar">
+                          <child type="start">
+                            <object class="GtkButton" id="model_link_button">
+                              <signal name="clicked" handler="link_button_handler"/>
+                              <property name="icon-name">globe-symbolic</property>
+                            </object>
+                          </child>
+                        </object>
                       </child>
                       <property name="content">
                         <object class="GtkScrolledWindow">
@@ -937,7 +946,7 @@
   <menu id="primary_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Import chat</attribute>
+        <attribute name="label" translatable="yes">Import Chat</attribute>
         <attribute name="action">app.import_chat</attribute>
       </item>
     </section>
@@ -947,7 +956,7 @@
         <attribute name="action">app.preferences</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Keyboard shortcuts</attribute>
+        <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
       </item>
       <item>
@@ -958,30 +967,30 @@
   </menu>
   <menu id="secondary_menu">
     <item>
-      <attribute name="label" translatable="yes">Rename chat</attribute>
+      <attribute name="label" translatable="yes">Rename Chat</attribute>
       <attribute name="action">app.rename_current_chat</attribute>
     </item>
     <item>
-      <attribute name="label" translatable="yes">Export chat</attribute>
+      <attribute name="label" translatable="yes">Export Chat</attribute>
       <attribute name="action">app.export_current_chat</attribute>
     </item>
     <item>
-      <attribute name="label" translatable="yes">Clear chat</attribute>
+      <attribute name="label" translatable="yes">Clear Chat</attribute>
       <attribute name="action">app.clear</attribute>
     </item>
   </menu>
   <menu id="chat_right_click_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Delete chat</attribute>
+        <attribute name="label" translatable="yes">Delete Chat</attribute>
         <attribute name="action">app.delete_chat</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Rename chat</attribute>
+        <attribute name="label" translatable="yes">Rename Chat</attribute>
         <attribute name="action">app.rename_chat</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Export chat</attribute>
+        <attribute name="label" translatable="yes">Export Chat</attribute>
         <attribute name="action">app.export_chat</attribute>
       </item>
     </section>
@@ -989,11 +998,11 @@
   <menu id="create_model_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">From existing model</attribute>
+        <attribute name="label" translatable="yes">From Existing Model</attribute>
         <attribute name="action">app.create_model_from_existing</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">From GGUF file (Experimental)</attribute>
+        <attribute name="label" translatable="yes">From GGUF File (Experimental)</attribute>
         <attribute name="action">app.create_model_from_file</attribute>
       </item>
     </section>
