@@ -22,7 +22,6 @@ gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
 import json, requests, threading, os, re, base64, sys, gettext, locale, subprocess, uuid, shutil, tarfile, tempfile
-from docx2python import docx2python
 from time import sleep
 from io import BytesIO
 from PIL import Image
@@ -1249,11 +1248,6 @@ Generate a title following these rules:
             for i, page in enumerate(reader.pages):
                 text += f"\n- Page {i}\n{page.extract_text()}\n"
             return text
-        elif file_type == 'docx':
-            text = None
-            with docx2python(file_path) as document:
-                text = document.text
-            return text
 
     def remove_attached_file(self, button):
         del self.attachments[button.get_name()]
@@ -1275,8 +1269,7 @@ Generate a title following these rules:
                     "image": "image-x-generic-symbolic",
                     "plain_text": "document-text-symbolic",
                     "pdf": "document-text-symbolic",
-                    "youtube": "play-symbolic",
-                    "docx": "document-text-symbolic"
+                    "youtube": "play-symbolic"
                 }[file_type]
             )
             button = Gtk.Button(

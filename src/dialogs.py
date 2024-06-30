@@ -245,8 +245,7 @@ def attach_file_response(self, file_dialog, result):
     file_types = {
         "plain_text": ["txt", "md", "html", "css", "js", "py", "java", "json", "xml"],
         "image": ["png", "jpeg", "jpg", "webp", "gif"],
-        "pdf": ["pdf"],
-        "docx": ["docx"]
+        "pdf": ["pdf"]
     }
     try: file = file_dialog.open_finish(result)
     except: return
