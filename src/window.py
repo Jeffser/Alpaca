@@ -46,6 +46,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     _ = gettext.gettext
 
     #Variables
+    editing_message = None
     available_models = None
     run_on_background = False
     remote_url = ""
@@ -142,7 +143,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             _("That tag is already being pulled"),
             _("That tag has been pulled already"),
             _("Code copied to the clipboard"),
-            _("Message copied to the clipboard")
+            _("Message copied to the clipboard"),
+            _("Message edited successfully")
         ],
         "good": [
             _("Model deleted successfully"),
@@ -181,6 +183,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def send_message(self, button=None):
+        if self.editing_message:
+            self.editing_message["button_container"].set_visible(True)
+            self.editing_message["text_view"].set_css_classes(["flat"])
+            self.editing_message["text_view"].set_editable(False)
+            buffer = self.editing_message["text_view"].get_buffer()
+            text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).rstrip('\n')
+            footer = "<small>" + self.editing_message["footer"] + "</small>"
+            buffer.insert_markup(buffer.get_end_iter(), footer, len(footer))
+            self.chats["chats"][self.chats["selected_chat"]]["messages"][self.editing_message["id"]]["content"] = text
+            self.editing_message = None
+            self.save_history()
+            self.show_toast("info", 6, self.main_overlay)
+
         if self.bot_message: return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
         current_model = self.model_drop_down.get_selected_item().get_string()
@@ -463,6 +478,25 @@ class AlpacaWindow(Adw.ApplicationWindow):
         clipboard.set(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["content"])
         self.show_toast("info", 5, self.main_overlay)
 
+    def edit_message(self, message_element, text_view, button_container):
+        if self.editing_message: self.send_message()
+
+        button_container.set_visible(False)
+        id = message_element.get_name()
+
+        text_buffer = text_view.get_buffer()
+        end_iter = text_buffer.get_end_iter()
+        start_iter = end_iter.copy()
+        start_iter.backward_line()
+        start_iter.backward_char()
+        footer = text_buffer.get_text(start_iter, end_iter, False)
+        text_buffer.delete(start_iter, end_iter)
+
+        text_view.set_editable(True)
+        text_view.set_css_classes(["view"])
+
+        self.editing_message = {"text_view": text_view, "id": id, "button_container": button_container, "footer": footer}
+
     def preview_file(self, file_path, file_type):
         content = self.get_content_of_file(file_path, file_type)
         if content:
@@ -543,6 +577,11 @@ Generate a title following these rules:
             icon_name = "edit-copy-symbolic",
             css_classes = ["flat", "circular"],
             tooltip_text = _("Copy Message")
+        )
+        edit_button = Gtk.Button(
+            icon_name = "edit-symbolic",
+            css_classes = ["flat", "circular"],
+            tooltip_text = _("Edit Message")
         )
 
         button_container = Gtk.Box(
@@ -634,8 +673,10 @@ Generate a title following these rules:
 
         delete_button.connect("clicked", lambda button, element=overlay: self.delete_message(element))
         copy_button.connect("clicked", lambda button, element=overlay: self.copy_message(element))
+        edit_button.connect("clicked", lambda button, element=overlay, textview=message_text, button_container=button_container: self.edit_message(element, textview, button_container))
         button_container.append(delete_button)
         button_container.append(copy_button)
+        if not bot: button_container.append(edit_button)
         overlay.add_overlay(button_container)
         self.chat_container.append(overlay)
 
