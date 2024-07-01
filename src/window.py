@@ -196,7 +196,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.save_history()
             self.show_toast("info", 6, self.main_overlay)
 
-        if self.bot_message: return
+        if self.bot_message or self.get_focus() not in (self.message_text_view, self.send_button): return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
         current_chat_row = self.chat_list_box.get_selected_row()
         self.chat_list_box.unselect_all()
@@ -514,6 +514,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if file_type == 'youtube':
                 self.file_preview_dialog.set_title(content.split('\n')[0])
                 self.file_preview_open_button.set_name(content.split('\n')[2])
+            elif file_type == 'website':
+                self.file_preview_open_button.set_name(content.split('\n')[0])
             else:
                 self.file_preview_dialog.set_title(os.path.basename(file_path))
                 self.file_preview_open_button.set_name(file_path)
@@ -545,7 +547,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 Generate a title following these rules:
     - The title should be based on the prompt at the end
     - Keep it in the same language as the prompt
-    - The title needs to be less than 4 words
+    - The title needs to be less than 30 characters
     - Use only alphanumeric characters and spaces
     - Just write the title, NOTHING ELSE
 
@@ -558,6 +560,7 @@ Generate a title following these rules:
         if 'images' in message: data["images"] = message['images']
         response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps(data))
         new_chat_name = json.loads(response['text'])["response"].lstrip().rstrip().replace('"', '').replace("'", "").title()
+        new_chat_name = new_chat_name[:30] + (new_chat_name[30:] and '...')
         self.rename_chat(label_element.get_name(), new_chat_name, label_element)
 
     def show_message(self, msg:str, bot:bool, footer:str=None, images:list=None, files:dict=None, id:str=None):
@@ -660,7 +663,12 @@ Generate a title following these rules:
             for name, file_type in files.items():
                 button_content = Adw.ButtonContent(
                     label=name,
-                    icon_name="play-symbolic" if file_type=='youtube' else "document-text-symbolic"
+                    icon_name={
+                        "plain_text": "document-text-symbolic",
+                        "pdf": "document-text-symbolic",
+                        "youtube": "play-symbolic",
+                        "website": "globe-symbolic"
+                    }[file_type]
                 )
                 button = Gtk.Button(
                     vexpand=False,
@@ -671,7 +679,6 @@ Generate a title following these rules:
                     child=button_content
                 )
                 file_path = os.path.join(self.data_dir, "chats", "{selected_chat}", id, name)
-                print(file_path)
                 button.connect("clicked", lambda button, file_path=file_path, file_type=file_type: self.preview_file(file_path, file_type))
                 file_container.append(button)
             message_box.append(file_scroller)
@@ -1308,7 +1315,7 @@ Generate a title following these rules:
                     return base64.b64encode(image_data).decode("utf-8")
             except Exception as e:
                 self.show_toast("error", 5, self.main_overlay)
-        elif file_type == 'plain_text' or file_type == 'youtube':
+        elif file_type == 'plain_text' or file_type == 'youtube' or file_type == 'website':
             with open(file_path, 'r') as f:
                 return f.read()
         elif file_type == 'pdf':
@@ -1334,7 +1341,8 @@ Generate a title following these rules:
                     "image": "image-x-generic-symbolic",
                     "plain_text": "document-text-symbolic",
                     "pdf": "document-text-symbolic",
-                    "youtube": "play-symbolic"
+                    "youtube": "play-symbolic",
+                    "website": "globe-symbolic"
                 }[file_type]
             )
             button = Gtk.Button(
@@ -1372,11 +1380,20 @@ Generate a title following these rules:
             youtube_regex = re.compile(
                 r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/'
                 r'(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
+            url_regex = re.compile(
+                r'http[s]?://'
+                r'(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|'
+                r'(?:%[0-9a-fA-F][0-9a-fA-F]))+'
+                r'(?:\\:[0-9]{1,5})?'
+                r'(?:/[^\\s]*)?'
+            )
             if youtube_regex.match(text):
                 try:
                     dialogs.youtube_caption(self, text)
                 except Exception as e:
                     self.show_toast("error", 10, self.main_overlay)
+            elif url_regex.match(text):
+                dialogs.attach_website(self, text)
         except Exception as e: 'huh'
 
     def cb_image_received(self, clipboard, result):

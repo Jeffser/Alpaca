@@ -99,6 +99,20 @@
 		}
 	    ]
 	},
+	{
+	    "name": "python3-html2text",
+	    "buildsystem": "simple",
+	    "build-commands": [
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"html2text\" --no-build-isolation"
+	    ],
+	    "sources": [
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/1a/43/e1d53588561e533212117750ee79ad0ba02a41f52a08c1df3396bd466c05/html2text-2024.2.26.tar.gz",
+		    "sha256": "05f8e367d15aaabc96415376776cdd11afd5127a77fce6e36afc60c563ca2c32"
+		}
+	    ]
+	},
         {
             "name": "ollama",
             "buildsystem": "simple",

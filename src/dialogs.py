@@ -3,6 +3,8 @@
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
 import os
 from pytube import YouTube
+from html2text import html2text
+from . import connection_handler
 
 # CLEAR CHAT | WORKS
 
@@ -312,3 +314,35 @@ def youtube_caption(self, video_url):
         callback = lambda dialog, task, video_url = video_url, caption_drop_down = caption_drop_down: youtube_caption_response(self, dialog, task, video_url, caption_drop_down)
     )
 
+# Website extraction |
+
+def attach_website_response(self, dialog, task, url):
+    if dialog.choose_finish(task) == "accept":
+        html = connection_handler.simple_get(url)['text']
+        md = html2text(html)
+        buffer = self.message_text_view.get_buffer()
+        textview_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).replace(url, "")
+        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+        buffer.insert(buffer.get_start_iter(), textview_text, len(textview_text))
+        if not os.path.exists('/tmp/alpaca/websites/'):
+            os.makedirs('/tmp/alpaca/websites/')
+        md_name = self.generate_numbered_name('website.md', os.listdir('/tmp/alpaca/websites'))
+        file_path = os.path.join('/tmp/alpaca/websites/', md_name)
+        with open(file_path, 'w+') as f:
+            f.write('{}\n\n{}'.format(url, md))
+        self.attach_file(file_path, 'website')
+
+def attach_website(self, url):
+    dialog = Adw.AlertDialog(
+        heading=_("Attach Website (Experimental)"),
+        body=_("Are you sure you want to attach\n'{}'?").format(url),
+        close_response="cancel"
+    )
+    dialog.add_response("cancel", _("Cancel"))
+    dialog.add_response("accept", _("Accept"))
+    dialog.set_response_appearance("accept", Adw.ResponseAppearance.SUGGESTED)
+    dialog.choose(
+        parent = self,
+        cancellable = None,
+        callback = lambda dialog, task, url=url: attach_website_response(self, dialog, task, url)
+    )
