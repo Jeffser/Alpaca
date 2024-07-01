@@ -399,7 +399,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def link_button_handler(self, button):
-        os.system(f'xdg-open "{button.get_name()}"')
+        os.system(f'xdg-open "{button.get_name()}"'.replace("{selected_chat}", self.chats["selected_chat"]))
 
     @Gtk.Template.Callback()
     def model_search_toggle(self, button):
@@ -505,6 +505,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.editing_message = {"text_view": text_view, "id": id, "button_container": button_container, "footer": footer}
 
     def preview_file(self, file_path, file_type):
+        file_path = file_path.replace("{selected_chat}", self.chats["selected_chat"])
         content = self.get_content_of_file(file_path, file_type)
         if content:
             buffer = self.file_preview_text_view.get_buffer()
@@ -637,7 +638,7 @@ Generate a title following these rules:
                     button = Gtk.Button(
                         child=image_texture,
                         css_classes=["flat", "chat_image_button"],
-                        name=path,
+                        name=os.path.join(self.data_dir, "chats", "{selected_chat}", id, image),
                         tooltip_text=os.path.basename(path)
                     )
                     button.connect('clicked', self.link_button_handler)
@@ -669,7 +670,8 @@ Generate a title following these rules:
                     tooltip_text=name,
                     child=button_content
                 )
-                file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
+                file_path = os.path.join(self.data_dir, "chats", "{selected_chat}", id, name)
+                print(file_path)
                 button.connect("clicked", lambda button, file_path=file_path, file_type=file_type: self.preview_file(file_path, file_type))
                 file_container.append(button)
             message_box.append(file_scroller)
