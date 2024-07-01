@@ -503,7 +503,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 Generate a title following these rules:
     - The title should be based on the prompt at the end
     - Keep it in the same language as the prompt
-    - The title needs to be less than 30 characters
+    - The title needs to be less than 4 words
     - Use only alphanumeric characters and spaces
     - Just write the title, NOTHING ELSE
 
