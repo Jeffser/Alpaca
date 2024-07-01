@@ -198,6 +198,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         if self.bot_message: return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
+        current_chat_row = self.chat_list_box.get_selected_row()
+        self.chat_list_box.unselect_all()
+        self.chat_list_box.remove(current_chat_row)
+        self.chat_list_box.prepend(current_chat_row)
+        self.chat_list_box.select_row(self.chat_list_box.get_row_at_index(0))
+        self.chats['order'].remove(self.chats['selected_chat'])
+        self.chats['order'].insert(0, self.chats['selected_chat'])
         current_model = self.model_drop_down.get_selected_item().get_string()
         current_model = current_model.replace(' (', ':')[:-1].lower()
         if current_model is None:
@@ -282,8 +289,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def chat_changed(self, listbox, row):
-        if row and row.get_name() != self.chats["selected_chat"]:
-            self.chats["selected_chat"] = row.get_name()
+        if row and row.get_child().get_name() != self.chats["selected_chat"]:
+            self.chats["selected_chat"] = row.get_child().get_name()
             self.load_history_into_chat()
             if len(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()) > 0:
                 for i in range(self.model_string_list.get_n_items()):
@@ -550,7 +557,7 @@ Generate a title following these rules:
         if 'images' in message: data["images"] = message['images']
         response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps(data))
         new_chat_name = json.loads(response['text'])["response"].lstrip().rstrip().replace('"', '').replace("'", "").title()
-        self.rename_chat(label_element.get_parent().get_name(), new_chat_name, label_element)
+        self.rename_chat(label_element.get_name(), new_chat_name, label_element)
 
     def show_message(self, msg:str, bot:bool, footer:str=None, images:list=None, files:dict=None, id:str=None):
         message_text = Gtk.TextView(
@@ -1089,7 +1096,7 @@ Generate a title following these rules:
             shutil.move(os.path.join(self.data_dir, "chats", old_chat_name), os.path.join(self.data_dir, "chats", new_chat_name))
         label_element.set_tooltip_text(new_chat_name)
         label_element.set_label(new_chat_name)
-        label_element.get_parent().get_parent().set_name(new_chat_name)
+        label_element.set_name(new_chat_name)
         self.save_history()
 
     def new_chat(self):
@@ -1131,6 +1138,7 @@ Generate a title following these rules:
         chat_label = Gtk.Label(
             label=chat_name,
             tooltip_text=chat_name,
+            name=chat_name,
             hexpand=True,
             halign=0,
             wrap=True,
@@ -1141,8 +1149,7 @@ Generate a title following these rules:
         chat_row = Gtk.ListBoxRow(
             css_classes = ["chat_row"],
             height_request = 45,
-            child = chat_label,
-            name = chat_name
+            child = chat_label
         )
 
         gesture = Gtk.GestureClick(button=3)
@@ -1343,7 +1350,7 @@ Generate a title following these rules:
 
     def chat_actions(self, action, user_data):
         chat_row = self.selected_chat_row
-        chat_name = chat_row.get_name()
+        chat_name = chat_row.get_child().get_name()
         action_name = action.get_name()
         if action_name == 'delete_chat':
             dialogs.delete_chat(self, chat_name)
