@@ -575,7 +575,8 @@ Generate a title following these rules:
                 child=image_container
             )
             for image in images:
-                raw_data = self.get_content_of_file(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image), "image")
+                path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image)
+                raw_data = self.get_content_of_file(path, "image")
                 if raw_data:
                     image_data = base64.b64decode(raw_data)
                     loader = GdkPixbuf.PixbufLoader.new()
@@ -583,11 +584,16 @@ Generate a title following these rules:
                     loader.close()
                     pixbuf = loader.get_pixbuf()
                     texture = Gdk.Texture.new_for_pixbuf(pixbuf)
-                    image = Gtk.Image.new_from_paintable(texture)
-                    image.set_size_request(240, 240)
-                    image.set_hexpand(False)
-                    image.set_css_classes(["flat"])
-                    image_container.append(image)
+                    image_texture = Gtk.Image.new_from_paintable(texture)
+                    image_texture.set_size_request(240, 240)
+                    button = Gtk.Button(
+                        child=image_texture,
+                        css_classes=["flat", "chat_image_button"],
+                        name=path,
+                        tooltip_text=os.path.basename(path)
+                    )
+                    button.connect('clicked', self.link_button_handler)
+                    image_container.append(button)
             message_box.append(image_scroller)
 
         if files and len(files) > 0:
