@@ -386,9 +386,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def model_search_changed(self, entry):
-        for i in range(len(self.available_models.keys())):
+        for i, key in enumerate(self.available_models.keys()):
             row = self.available_model_list_box.get_row_at_index(i)
-            row.set_visible(re.search(entry.get_text(), row.get_title(), re.IGNORECASE))
+            row.set_visible(re.search(entry.get_text(), '{} {} {}'.format(row.get_title(), (_("image") if self.available_models[key]['image'] else " "), row.get_subtitle()), re.IGNORECASE))
 
     def check_alphanumeric(self, editable, text, length, position):
         new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '_']])
