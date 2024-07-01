@@ -260,7 +260,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], bot_id))
         thread.start()
         if len(data['messages']) == 1:
-            generate_title_thread = threading.Thread(target=self.generate_chat_title, args=(data['messages'][0], self.chat_list_box.get_selected_row().get_child()))
+            generate_title_thread = threading.Thread(target=self.generate_chat_title, args=(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), self.chat_list_box.get_selected_row().get_child()))
             generate_title_thread.start()
 
     @Gtk.Template.Callback()
