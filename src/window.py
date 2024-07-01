@@ -842,9 +842,12 @@ Generate a title following these rules:
 
     def pull_model_update(self, data, model_name):
         if model_name in list(self.pulling_models.keys()):
-            GLib.idle_add(self.pulling_models[model_name]['row'].set_subtitle, data['status'])
-            if 'completed' in data and 'total' in data: GLib.idle_add(self.pulling_models[model_name]['progress_bar'].set_fraction, (data['completed'] / data['total']))
-            else: GLib.idle_add(self.pulling_models[model_name]['progress_bar'].pulse)
+            if 'completed' in data and 'total' in data:
+                GLib.idle_add(self.pulling_models[model_name]['row'].set_subtitle, '<tt>{}%</tt>\t{}'.format(round(data['completed'] / data['total'] * 100, 2), data['status'].capitalize()))
+                GLib.idle_add(self.pulling_models[model_name]['progress_bar'].set_fraction, (data['completed'] / data['total']))
+            else:
+                GLib.idle_add(self.pulling_models[model_name]['row'].set_subtitle, '{}'.format(data['status'].capitalize()))
+                GLib.idle_add(self.pulling_models[model_name]['progress_bar'].pulse)
         else:
             if len(list(self.pulling_models.keys())) == 0:
                 GLib.idle_add(self.pulling_model_list_box.set_visible, False)
