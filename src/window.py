@@ -1383,12 +1383,15 @@ Generate a title following these rules:
         try:
             texture = clipboard.read_texture_finish(result)
             if texture:
-                pixbuf = Gdk.pixbuf_get_from_texture(texture)
-                if not os.path.exists('/tmp/alpaca/images/'):
-                    os.makedirs('/tmp/alpaca/images/')
-                image_name = self.generate_numbered_name('image.png', os.listdir('/tmp/alpaca/images'))
-                pixbuf.savev('/tmp/alpaca/images/{}'.format(image_name), "png", [], [])
-                self.attach_file('/tmp/alpaca/images/{}'.format(image_name), 'image')
+                if self.verify_if_image_can_be_used():
+                    pixbuf = Gdk.pixbuf_get_from_texture(texture)
+                    if not os.path.exists('/tmp/alpaca/images/'):
+                        os.makedirs('/tmp/alpaca/images/')
+                    image_name = self.generate_numbered_name('image.png', os.listdir('/tmp/alpaca/images'))
+                    pixbuf.savev('/tmp/alpaca/images/{}'.format(image_name), "png", [], [])
+                    self.attach_file('/tmp/alpaca/images/{}'.format(image_name), 'image')
+                else:
+                    self.show_toast('error', 8, self.main_overlay)
         except Exception as e: 'huh'
 
     def on_clipboard_paste(self, textview):
