@@ -664,6 +664,15 @@
                                   </style>
                                 </object>
                               </child>
+                              <child>
+                                <object class="AdwStatusPage" id="no_results_page">
+                                  <property name="visible">false</property>
+                                  <property name="vexpand">true</property>
+                                  <property name="icon-name">edit-find-symbolic</property>
+                                  <property name="title" translatable="yes">No Models Found</property>
+                                  <property name="description" translatable="yes">Try a different search</property>
+                                </object>
+                              </child>
                             </object>
                           </child>
                         </object>

@@ -104,6 +104,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     file_preview_open_button = Gtk.Template.Child()
     secondary_menu_button = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
+    no_results_page = Gtk.Template.Child()
     model_link_button = Gtk.Template.Child()
 
     manage_models_dialog = Gtk.Template.Child()
@@ -386,9 +387,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def model_search_changed(self, entry):
+        results = 0
         for i, key in enumerate(self.available_models.keys()):
             row = self.available_model_list_box.get_row_at_index(i)
             row.set_visible(re.search(entry.get_text(), '{} {} {}'.format(row.get_title(), (_("image") if self.available_models[key]['image'] else " "), row.get_subtitle()), re.IGNORECASE))
+            if row.get_visible(): results += 1
+        if entry.get_text() and results == 0:
+            self.available_model_list_box.set_visible(False)
+            self.no_results_page.set_visible(True)
+        else:
+            self.available_model_list_box.set_visible(True)
+            self.no_results_page.set_visible(False)
+
 
     def check_alphanumeric(self, editable, text, length, position):
         new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '_']])
