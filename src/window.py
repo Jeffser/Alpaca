@@ -564,7 +564,8 @@ Generate a title following these rules:
         if images and len(images) > 0:
             image_container = Gtk.Box(
                 orientation=0,
-                spacing=12
+                spacing=12,
+                visible=False
             )
             image_scroller = Gtk.ScrolledWindow(
                 margin_top=10,
@@ -578,6 +579,7 @@ Generate a title following these rules:
                 path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image)
                 raw_data = self.get_content_of_file(path, "image")
                 if raw_data:
+                    image_container.set_visible(True)
                     image_data = base64.b64decode(raw_data)
                     loader = GdkPixbuf.PixbufLoader.new()
                     loader.write(image_data)
