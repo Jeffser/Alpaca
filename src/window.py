@@ -611,13 +611,8 @@ Generate a title following these rules:
                 child=file_container
             )
             for name, file_type in files.items():
-                if file_type == 'youtube':
-                    shown_name=name[:20] + (name[20:] and '..')
-                else:
-                    shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
-
                 button_content = Adw.ButtonContent(
-                    label=shown_name,
+                    label=name,
                     icon_name="play-symbolic" if file_type=='youtube' else "document-text-symbolic"
                 )
                 button = Gtk.Button(
@@ -1283,13 +1278,8 @@ Generate a title following these rules:
         name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
         content = self.get_content_of_file(file_path, file_type)
         if content:
-            if file_type == "youtube":
-                shown_name=name[:20] + (name[20:] and '..')
-            else:
-                shown_name=name
-                #shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
             button_content = Adw.ButtonContent(
-                label=shown_name,
+                label=name,
                 icon_name={
                     "image": "image-x-generic-symbolic",
                     "plain_text": "document-text-symbolic",
