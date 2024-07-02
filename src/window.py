@@ -1014,8 +1014,8 @@ Generate a title following these rules:
         self.available_model_list_box.remove_all()
         for name, model_info in self.available_models.items():
             model = Adw.ActionRow(
-                title = "<b>{}</b> <small>by {}</small>".format(name.capitalize(), model_info['author']),
-                subtitle = model_info["description"],
+                title = "<b>{}{}</b> <small>by {}</small>".format('🖼 ' if model_info["image"] else '', name.capitalize(), model_info['author']),
+                subtitle = model_info["description"], # + ("\n\n<span foreground='white' background='black' line_height='1.5'> Image Recognition </span>" if model_info["image"] else ""),
                 #("<b>Image recognition capable</b>\n" if model_info["image"] else "") +
                 #title = f"<b>{name.capitalize()}</b> <small>by {model_info['author']}</small>",
                 #subtitle = f"<small>" + (_("(Image recognition capable)\n") if model_info["image"] else "") + f"{model_info['description']}</small>",
@@ -1024,7 +1024,7 @@ Generate a title following these rules:
             if model_info["image"]:
                 image_icon = Gtk.Image.new_from_icon_name("image-x-generic-symbolic")
                 image_icon.set_margin_start(5)
-                model.add_suffix(image_icon)
+                #model.add_suffix(image_icon)
             next_icon = Gtk.Image.new_from_icon_name("go-next")
             next_icon.set_margin_start(5)
             model.add_suffix(next_icon)
