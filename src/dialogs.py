@@ -114,8 +114,8 @@ def stop_pull_model_response(self, dialog, task, model_name):
 def stop_pull_model(self, model_name):
     #self.pulling_model_list_box.unselect_all()
     dialog = Adw.AlertDialog(
-        heading=_("Stop Model"),
-        body=_("Are you sure you want to stop pulling '{}'?").format(model_name),
+        heading=_("Stop Download"),
+        body=_("Are you sure you want to stop pulling '{} ({})'?").format(model_name.split(":")[0].capitalize(), model_name.split(":")[1]),
         close_response="cancel"
     )
     dialog.add_response("cancel", _("Cancel"))

@@ -975,7 +975,7 @@ Generate a title following these rules:
             vexpand = False,
             valign = 3,
             css_classes = ["error", "circular"],
-            tooltip_text = _("Stop Pulling '{}'").format(model.capitalize())
+            tooltip_text = _("Stop Pulling '{} ({})'").format(model.split(':')[0].capitalize(), model.split(':')[1])
         )
         button.connect("clicked", lambda button, model_name=model : dialogs.stop_pull_model(self, model_name))
         model_row.add_suffix(button)
