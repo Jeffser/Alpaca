@@ -17,7 +17,7 @@ def clear_chat(self):
         self.show_toast("info", 1, self.main_overlay)
         return
     dialog = Adw.AlertDialog(
-        heading=_("Clear Chat"),
+        heading=_("Clear Chat?"),
         body=_("Are you sure you want to clear the chat?"),
         close_response="cancel"
     )
@@ -38,7 +38,7 @@ def delete_chat_response(self, dialog, task, chat_name):
 
 def delete_chat(self, chat_name):
     dialog = Adw.AlertDialog(
-        heading=_("Delete Chat"),
+        heading=_("Delete Chat?"),
         body=_("Are you sure you want to delete '{}'?").format(chat_name),
         close_response="cancel"
     )
@@ -63,7 +63,7 @@ def rename_chat_response(self, dialog, task, old_chat_name, entry, label_element
 def rename_chat(self, chat_name, label_element):
     entry = Gtk.Entry()
     dialog = Adw.AlertDialog(
-        heading=_("Rename Chat"),
+        heading=_("Rename Chat?"),
         body=_("Renaming '{}'").format(chat_name),
         extra_child=entry,
         close_response="cancel"
@@ -90,7 +90,7 @@ def new_chat_response(self, dialog, task, entry):
 def new_chat(self):
     entry = Gtk.Entry()
     dialog = Adw.AlertDialog(
-        heading=_("Create Chat"),
+        heading=_("Create Chat?"),
         body=_("Enter name for new chat"),
         extra_child=entry,
         close_response="cancel"
@@ -114,7 +114,7 @@ def stop_pull_model_response(self, dialog, task, model_name):
 def stop_pull_model(self, model_name):
     #self.pulling_model_list_box.unselect_all()
     dialog = Adw.AlertDialog(
-        heading=_("Stop Download"),
+        heading=_("Stop Download?"),
         body=_("Are you sure you want to stop pulling '{} ({})'?").format(model_name.split(":")[0].capitalize(), model_name.split(":")[1]),
         close_response="cancel"
     )
@@ -135,7 +135,7 @@ def delete_model_response(self, dialog, task, model_name):
 
 def delete_model(self, model_name):
     dialog = Adw.AlertDialog(
-        heading=_("Delete Model"),
+        heading=_("Delete Model?"),
         body=_("Are you sure you want to delete '{}'?").format(model_name),
         close_response="cancel"
     )
@@ -156,7 +156,7 @@ def remove_attached_file_response(self, dialog, task, button):
 
 def remove_attached_file(self, button):
     dialog = Adw.AlertDialog(
-        heading=_("Remove Attachment"),
+        heading=_("Remove Attachment?"),
         body=_("Are you sure you want to remove attachment?"),
         close_response="cancel"
     )
@@ -300,7 +300,7 @@ def youtube_caption(self, video_url):
         model=caption_list
     )
     dialog = Adw.AlertDialog(
-        heading=_("Attach YouTube Video"),
+        heading=_("Attach YouTube Video?"),
         body=_("{}\n\nPlease select a transcript to include").format(video_title),
         extra_child=caption_drop_down,
         close_response="cancel"
@@ -334,7 +334,7 @@ def attach_website_response(self, dialog, task, url):
 
 def attach_website(self, url):
     dialog = Adw.AlertDialog(
-        heading=_("Attach Website (Experimental)"),
+        heading=_("Attach Website? (Experimental)"),
         body=_("Are you sure you want to attach\n'{}'?").format(url),
         close_response="cancel"
     )
