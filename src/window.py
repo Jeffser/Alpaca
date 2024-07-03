@@ -205,6 +205,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.chat_list_box.select_row(self.chat_list_box.get_row_at_index(0))
         self.chats['order'].remove(self.chats['selected_chat'])
         self.chats['order'].insert(0, self.chats['selected_chat'])
+        self.save_history()
         current_model = self.model_drop_down.get_selected_item().get_string()
         current_model = current_model.replace(' (', ':')[:-1].lower()
         if current_model is None:
@@ -300,6 +301,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     if self.model_string_list.get_string(i) == self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]:
                         self.model_drop_down.set_selected(i)
                         break
+            self.save_history()
 
     @Gtk.Template.Callback()
     def change_remote_url(self, entry):
@@ -871,7 +873,7 @@ Generate a title following these rules:
             self.save_history()
             sys.exit()
         vadjustment = self.chat_window.get_vadjustment()
-        if (id in self.chats["chats"][self.chats["selected_chat"]]["messages"] and self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['role'] == "user") or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
+        if self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]['role'] == "user" or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if data['done']:
             formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
