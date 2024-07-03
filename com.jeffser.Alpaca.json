@@ -85,6 +85,34 @@
 		}
 	    ]
 	},
+	{
+	    "name": "python3-pytube",
+	    "buildsystem": "simple",
+	    "build-commands": [
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"pytube\" --no-build-isolation"
+	    ],
+	    "sources": [
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/51/64/bcf8632ed2b7a36bbf84a0544885ffa1d0b4bcf25cc0903dba66ec5fdad9/pytube-15.0.0-py3-none-any.whl",
+		    "sha256": "07b9904749e213485780d7eb606e5e5b8e4341aa4dccf699160876da00e12d78"
+		}
+	    ]
+	},
+	{
+	    "name": "python3-html2text",
+	    "buildsystem": "simple",
+	    "build-commands": [
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"html2text\" --no-build-isolation"
+	    ],
+	    "sources": [
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/1a/43/e1d53588561e533212117750ee79ad0ba02a41f52a08c1df3396bd466c05/html2text-2024.2.26.tar.gz",
+		    "sha256": "05f8e367d15aaabc96415376776cdd11afd5127a77fce6e36afc60c563ca2c32"
+		}
+	    ]
+	},
         {
             "name": "ollama",
             "buildsystem": "simple",
@@ -94,16 +122,16 @@
             "sources": [
             	{
             		"type": "file",
-            		"url": "https://github.com/ollama/ollama/releases/download/v0.1.39/ollama-linux-amd64",
-            		"sha256": "4d19be355842a6297c93ab5ada139fe396126736bf3c3882a879dc245dffe3af",
+            		"url": "https://github.com/ollama/ollama/releases/download/v0.1.48/ollama-linux-amd64",
+            		"sha256": "7641b21e9d0822ba44e494f5ed3d3796d9e9fcdf4dbb66064f8c34c865bbec0b",
 		    	"only-arches": [
 		    		"x86_64"
 		    	]
             	},
             	{
             		"type": "file",
-            		"url": "https://github.com/ollama/ollama/releases/download/v0.1.39/ollama-linux-arm64",
-            		"sha256": "60ec2d36928c11d6c6d84fe91451308a46aafaedbdba44664e5a6080009ce097",
+            		"url": "https://github.com/ollama/ollama/releases/download/v0.1.48/ollama-linux-arm64",
+            		"sha256": "8ccaea237c3ef2a34d0cc00d8a89ffb1179d5c49211b6cbdf80d8d88e3f0add6",
 		    	"only-arches": [
 		    		"aarch64"
 		    	]

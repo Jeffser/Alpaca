@@ -21,13 +21,12 @@ import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
-import json, requests, threading, os, re, base64, sys, gettext, locale, webbrowser, subprocess, uuid, shutil, tarfile, tempfile #, docx
+import json, requests, threading, os, re, base64, sys, gettext, locale, subprocess, uuid, shutil, tarfile, tempfile
 from time import sleep
 from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
 from datetime import datetime
-from .available_models import available_models
 from . import dialogs, local_instance, connection_handler, update_history
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
@@ -47,13 +46,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
     _ = gettext.gettext
 
     #Variables
+    editing_message = None
+    available_models = None
     run_on_background = False
     remote_url = ""
+    remote_bearer_token = ""
     run_remote = False
     model_tweaks = {"temperature": 0.7, "seed": 0, "keep_alive": 5}
     local_models = []
     pulling_models = {}
-    chats = {"chats": {_("New Chat"): {"messages": {}}}, "selected_chat": "New Chat"}
+    chats = {"chats": {_("New Chat"): {"messages": {}}}, "selected_chat": "New Chat", "order": []}
     attachments = {}
 
     #Override elements
@@ -75,6 +77,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     bot_message : Gtk.TextBuffer = None
     bot_message_box : Gtk.Box = None
     bot_message_view : Gtk.TextView = None
+    bot_message_button_container : Gtk.TextView = None
     file_preview_dialog = Gtk.Template.Child()
     file_preview_text_view = Gtk.Template.Child()
     welcome_dialog = Gtk.Template.Child()
@@ -88,7 +91,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     message_text_view = Gtk.Template.Child()
     send_button = Gtk.Template.Child()
     stop_button = Gtk.Template.Child()
-    chats_menu_button = Gtk.Template.Child()
     attachment_container = Gtk.Template.Child()
     attachment_box = Gtk.Template.Child()
     file_filter_tar = Gtk.Template.Child()
@@ -97,6 +99,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
     attachment_button = Gtk.Template.Child()
     model_drop_down = Gtk.Template.Child()
     model_string_list = Gtk.Template.Child()
+    chat_right_click_menu = Gtk.Template.Child()
+    model_tag_list_box = Gtk.Template.Child()
+    navigation_view_manage_models = Gtk.Template.Child()
+    file_preview_open_button = Gtk.Template.Child()
+    secondary_menu_button = Gtk.Template.Child()
+    model_searchbar = Gtk.Template.Child()
+    no_results_page = Gtk.Template.Child()
+    model_link_button = Gtk.Template.Child()
 
     manage_models_dialog = Gtk.Template.Child()
     pulling_model_list_box = Gtk.Template.Child()
@@ -111,6 +121,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     background_switch = Gtk.Template.Child()
     remote_connection_switch = Gtk.Template.Child()
     remote_connection_entry = Gtk.Template.Child()
+    remote_bearer_token_entry = Gtk.Template.Child()
 
     toast_messages = {
         "error": [
@@ -122,7 +133,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             _("Cannot open image"),
             _("Cannot delete chat because it's the only one left"),
             _("There was an error with the local Ollama instance, so it has been reset"),
-            _("Image recognition is only available on specific models")
+            _("Image recognition is only available on specific models"),
+            _("This video does not have any transcriptions"),
+            _("This video is not available")
         ],
         "info": [
             _("Please select a model before chatting"),
@@ -130,7 +143,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             _("That tag is already being pulled"),
             _("That tag has been pulled already"),
             _("Code copied to the clipboard"),
-            _("Message copied to the clipboard")
+            _("Message copied to the clipboard"),
+            _("Message edited successfully")
         ],
         "good": [
             _("Model deleted successfully"),
@@ -145,8 +159,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def verify_if_image_can_be_used(self, pspec=None, user_data=None):
         if self.model_drop_down.get_selected_item() == None: return True
-        selected = self.model_drop_down.get_selected_item().get_string().split(":")[0]
-        if selected in ['llava', 'bakllava', 'moondream', 'llava-llama3']:
+        selected = self.model_drop_down.get_selected_item().get_string().split(" (")[0].lower()
+        if selected in [key for key, value in self.available_models.items() if value["image"]]:
             for name, content in self.attachments.items():
                 if content['type'] == 'image':
                     content['button'].set_css_classes(["flat"])
@@ -165,12 +179,34 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.bot_message = None
         self.bot_message_box = None
         self.bot_message_view = None
+        self.bot_message_button_container = None
 
     @Gtk.Template.Callback()
     def send_message(self, button=None):
-        if self.bot_message: return
+        if self.editing_message:
+            self.editing_message["button_container"].set_visible(True)
+            self.editing_message["text_view"].set_css_classes(["flat"])
+            self.editing_message["text_view"].set_editable(False)
+            buffer = self.editing_message["text_view"].get_buffer()
+            text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).rstrip('\n')
+            footer = "<small>" + self.editing_message["footer"] + "</small>"
+            buffer.insert_markup(buffer.get_end_iter(), footer, len(footer))
+            self.chats["chats"][self.chats["selected_chat"]]["messages"][self.editing_message["id"]]["content"] = text
+            self.editing_message = None
+            self.save_history()
+            self.show_toast("info", 6, self.main_overlay)
+
+        if self.bot_message or self.get_focus() not in (self.message_text_view, self.send_button): return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
-        current_model = self.model_drop_down.get_selected_item()
+        current_chat_row = self.chat_list_box.get_selected_row()
+        self.chat_list_box.unselect_all()
+        self.chat_list_box.remove(current_chat_row)
+        self.chat_list_box.prepend(current_chat_row)
+        self.chat_list_box.select_row(self.chat_list_box.get_row_at_index(0))
+        self.chats['order'].remove(self.chats['selected_chat'])
+        self.chats['order'].insert(0, self.chats['selected_chat'])
+        current_model = self.model_drop_down.get_selected_item().get_string()
+        current_model = current_model.replace(' (', ':')[:-1].lower()
         if current_model is None:
             self.show_toast("info", 0, self.main_overlay)
             return
@@ -181,7 +217,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         can_use_images = self.verify_if_image_can_be_used()
         for name, content in self.attachments.items():
             if content["type"] == 'image' and can_use_images: attached_images.append(name)
-            else: attached_files[name] = content['type']
+            else:
+                attached_files[name] = content['type']
             if not os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id)):
                 os.makedirs(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id))
             shutil.copy(content['path'], os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name))
@@ -204,7 +241,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if len(attached_files.keys()) > 0:
             self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['files'] = attached_files
         data = {
-            "model": current_model.get_string(),
+            "model": current_model,
             "messages": self.convert_history_to_ollama(),
             "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
             "keep_alive": f"{self.model_tweaks['keep_alive']}m"
@@ -213,7 +250,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.toggle_ui_sensitive(False)
 
         #self.attachments[name] = {"path": file_path, "type": file_type, "content": content}
-        self.show_message(self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False), False, f"\n\n<small>{formated_datetime}</small>", attached_images, attached_files, id=id)
+        raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
+        self.show_message(raw_message, False, f"\n\n<small>{formated_datetime}</small>", attached_images, attached_files, id=id)
         self.message_text_view.get_buffer().set_text("", 0)
         self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
         self.chat_container.append(self.loading_spinner)
@@ -222,6 +260,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], bot_id))
         thread.start()
+        if len(data['messages']) == 1:
+            message_data = data["messages"][0].copy()
+            message_data['content'] = raw_message
+            generate_title_thread = threading.Thread(target=self.generate_chat_title, args=(message_data, self.chat_list_box.get_selected_row().get_child()))
+            generate_title_thread.start()
 
     @Gtk.Template.Callback()
     def manage_models_button_activate(self, button=None):
@@ -249,8 +292,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def chat_changed(self, listbox, row):
-        if row and row.get_name() != self.chats["selected_chat"]:
-            self.chats["selected_chat"] = row.get_name()
+        if row and row.get_child().get_name() != self.chats["selected_chat"]:
+            self.chats["selected_chat"] = row.get_child().get_name()
             self.load_history_into_chat()
             if len(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()) > 0:
                 for i in range(self.model_string_list.get_n_items()):
@@ -262,6 +305,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def change_remote_url(self, entry):
         self.remote_url = entry.get_text()
         if self.run_remote:
+            connection_handler.url = self.remote_url
+            if self.verify_connection() == False:
+                entry.set_css_classes(["error"])
+                self.show_toast("error", 1, self.preferences_dialog)
+
+    @Gtk.Template.Callback()
+    def change_remote_bearer_token(self, entry):
+        self.remote_bearer_token = entry.get_text()
+        self.save_server_config()
+        return
+        if self.remote_url and self.run_remote:
             connection_handler.url = self.remote_url
             if self.verify_connection() == False:
                 entry.set_css_classes(["error"])
@@ -323,7 +377,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             icon_name = "media-playback-stop-symbolic",
             vexpand = False,
             valign = 3,
-            css_classes = ["error"]
+            css_classes = ["error"],
+            tooltip_text = _("Stop Creating '{}'").format(name)
         )
         button.connect("clicked", lambda button, model_name=name : dialogs.stop_pull_model(self, model_name))
         model_row.add_suffix(button)
@@ -347,7 +402,28 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def link_button_handler(self, button):
-        webbrowser.open(button.get_name())
+        os.system(f'xdg-open "{button.get_name()}"'.replace("{selected_chat}", self.chats["selected_chat"]))
+
+    @Gtk.Template.Callback()
+    def model_search_toggle(self, button):
+        self.model_searchbar.set_search_mode(button.get_active())
+        self.pulling_model_list_box.set_visible(not button.get_active() and len(self.pulling_models) > 0)
+        self.local_model_list_box.set_visible(not button.get_active())
+
+    @Gtk.Template.Callback()
+    def model_search_changed(self, entry):
+        results = 0
+        for i, key in enumerate(self.available_models.keys()):
+            row = self.available_model_list_box.get_row_at_index(i)
+            row.set_visible(re.search(entry.get_text(), '{} {} {}'.format(row.get_title(), (_("image") if self.available_models[key]['image'] else " "), row.get_subtitle()), re.IGNORECASE))
+            if row.get_visible(): results += 1
+        if entry.get_text() and results == 0:
+            self.available_model_list_box.set_visible(False)
+            self.no_results_page.set_visible(True)
+        else:
+            self.available_model_list_box.set_visible(True)
+            self.no_results_page.set_visible(False)
+
 
     def check_alphanumeric(self, editable, text, length, position):
         new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '_']])
@@ -391,8 +467,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
         overlay.add_toast(toast)
 
-    def show_notification(self, title:str, body:str, only_when_unfocus:bool, icon:Gio.ThemedIcon=None):
-        if not only_when_unfocus or (only_when_unfocus and self.is_active()==False):
+    def show_notification(self, title:str, body:str, icon:Gio.ThemedIcon=None):
+        if not self.is_active():
             notification = Gio.Notification.new(title)
             notification.set_body(body)
             if icon: notification.set_icon(icon)
@@ -412,13 +488,40 @@ class AlpacaWindow(Adw.ApplicationWindow):
         clipboard.set(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["content"])
         self.show_toast("info", 5, self.main_overlay)
 
+    def edit_message(self, message_element, text_view, button_container):
+        if self.editing_message: self.send_message()
+
+        button_container.set_visible(False)
+        id = message_element.get_name()
+
+        text_buffer = text_view.get_buffer()
+        end_iter = text_buffer.get_end_iter()
+        start_iter = end_iter.copy()
+        start_iter.backward_line()
+        start_iter.backward_char()
+        footer = text_buffer.get_text(start_iter, end_iter, False)
+        text_buffer.delete(start_iter, end_iter)
+
+        text_view.set_editable(True)
+        text_view.set_css_classes(["view"])
+
+        self.editing_message = {"text_view": text_view, "id": id, "button_container": button_container, "footer": footer}
+
     def preview_file(self, file_path, file_type):
+        file_path = file_path.replace("{selected_chat}", self.chats["selected_chat"])
         content = self.get_content_of_file(file_path, file_type)
         if content:
             buffer = self.file_preview_text_view.get_buffer()
             buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
             buffer.insert(buffer.get_start_iter(), content, len(content))
-            self.file_preview_dialog.set_title(os.path.basename(file_path))
+            if file_type == 'youtube':
+                self.file_preview_dialog.set_title(content.split('\n')[0])
+                self.file_preview_open_button.set_name(content.split('\n')[2])
+            elif file_type == 'website':
+                self.file_preview_open_button.set_name(content.split('\n')[0])
+            else:
+                self.file_preview_dialog.set_title(os.path.basename(file_path))
+                self.file_preview_open_button.set_name(file_path)
             self.file_preview_dialog.present(self)
 
     def convert_history_to_ollama(self):
@@ -442,6 +545,26 @@ class AlpacaWindow(Adw.ApplicationWindow):
             messages.append(new_message)
         return messages
 
+    def generate_chat_title(self, message, label_element):
+        prompt = f"""
+Generate a title following these rules:
+    - The title should be based on the prompt at the end
+    - Keep it in the same language as the prompt
+    - The title needs to be less than 30 characters
+    - Use only alphanumeric characters and spaces
+    - Just write the title, NOTHING ELSE
+
+```PROMPT
+{message['content']}
+```"""
+        current_model = self.model_drop_down.get_selected_item().get_string()
+        current_model = current_model.replace(' (', ':')[:-1].lower()
+        data = {"model": current_model, "prompt": prompt, "stream": False}
+        if 'images' in message: data["images"] = message['images']
+        response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps(data))
+        new_chat_name = json.loads(response['text'])["response"].lstrip().rstrip().replace('"', '').replace("'", "").title()
+        new_chat_name = new_chat_name[:30] + (new_chat_name[30:] and '...')
+        self.rename_chat(label_element.get_name(), new_chat_name, label_element)
 
     def show_message(self, msg:str, bot:bool, footer:str=None, images:list=None, files:dict=None, id:str=None):
         message_text = Gtk.TextView(
@@ -461,12 +584,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         delete_button = Gtk.Button(
             icon_name = "user-trash-symbolic",
-            css_classes = ["flat", "circular", "delete-message-button"],
-
+            css_classes = ["flat", "circular"],
+            tooltip_text = _("Remove Message")
         )
         copy_button = Gtk.Button(
             icon_name = "edit-copy-symbolic",
-            css_classes = ["flat", "circular", "delete-message-button"],
+            css_classes = ["flat", "circular"],
+            tooltip_text = _("Copy Message")
+        )
+        edit_button = Gtk.Button(
+            icon_name = "edit-symbolic",
+            css_classes = ["flat", "circular"],
+            tooltip_text = _("Edit Message")
         )
 
         button_container = Gtk.Box(
@@ -481,15 +610,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
         message_box = Gtk.Box(
             orientation=1,
             halign='fill',
-            css_classes=[None if bot else "card"],
-            margin_start=0 if bot else 50,
+            css_classes=[None if bot else "card"]
         )
         message_text.set_valign(Gtk.Align.CENTER)
 
         if images and len(images) > 0:
             image_container = Gtk.Box(
                 orientation=0,
-                spacing=12
+                spacing=12,
+                visible=False
             )
             image_scroller = Gtk.ScrolledWindow(
                 margin_top=10,
@@ -500,19 +629,26 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 child=image_container
             )
             for image in images:
-                raw_data = self.get_content_of_file(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image), "image")
+                path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image)
+                raw_data = self.get_content_of_file(path, "image")
                 if raw_data:
+                    image_container.set_visible(True)
                     image_data = base64.b64decode(raw_data)
                     loader = GdkPixbuf.PixbufLoader.new()
                     loader.write(image_data)
                     loader.close()
                     pixbuf = loader.get_pixbuf()
                     texture = Gdk.Texture.new_for_pixbuf(pixbuf)
-                    image = Gtk.Image.new_from_paintable(texture)
-                    image.set_size_request(240, 240)
-                    image.set_hexpand(False)
-                    image.set_css_classes(["flat"])
-                    image_container.append(image)
+                    image_texture = Gtk.Image.new_from_paintable(texture)
+                    image_texture.set_size_request(240, 240)
+                    button = Gtk.Button(
+                        child=image_texture,
+                        css_classes=["flat", "chat_image_button"],
+                        name=os.path.join(self.data_dir, "chats", "{selected_chat}", id, image),
+                        tooltip_text=os.path.basename(path)
+                    )
+                    button.connect('clicked', self.link_button_handler)
+                    image_container.append(button)
             message_box.append(image_scroller)
 
         if files and len(files) > 0:
@@ -528,11 +664,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 child=file_container
             )
             for name, file_type in files.items():
-                shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
-
                 button_content = Adw.ButtonContent(
-                    label=shown_name,
-                    icon_name="document-text-symbolic"
+                    label=name,
+                    icon_name={
+                        "plain_text": "document-text-symbolic",
+                        "pdf": "document-text-symbolic",
+                        "youtube": "play-symbolic",
+                        "website": "globe-symbolic"
+                    }[file_type]
                 )
                 button = Gtk.Button(
                     vexpand=False,
@@ -542,7 +681,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     tooltip_text=name,
                     child=button_content
                 )
-                button.connect("clicked", lambda button, file_path=os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name), file_type=file_type: self.preview_file(file_path, file_type))
+                file_path = os.path.join(self.data_dir, "chats", "{selected_chat}", id, name)
+                button.connect("clicked", lambda button, file_path=file_path, file_type=file_type: self.preview_file(file_path, file_type))
                 file_container.append(button)
             message_box.append(file_scroller)
 
@@ -552,8 +692,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         delete_button.connect("clicked", lambda button, element=overlay: self.delete_message(element))
         copy_button.connect("clicked", lambda button, element=overlay: self.copy_message(element))
+        edit_button.connect("clicked", lambda button, element=overlay, textview=message_text, button_container=button_container: self.edit_message(element, textview, button_container))
         button_container.append(delete_button)
         button_container.append(copy_button)
+        if not bot: button_container.append(edit_button)
         overlay.add_overlay(button_container)
         self.chat_container.append(overlay)
 
@@ -561,6 +703,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.bot_message = message_buffer
             self.bot_message_view = message_text
             self.bot_message_box = message_box
+            self.bot_message_button_container = button_container
 
     def update_list_local_models(self):
         self.local_models = []
@@ -575,20 +718,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.local_model_list_box.set_visible(True)
             for model in json.loads(response['text'])['models']:
                 model_row = Adw.ActionRow(
-                    title = model["name"].split(":")[0],
+                    title = "<b>{}</b>".format(model["name"].split(":")[0].capitalize()),
                     subtitle = model["name"].split(":")[1]
                 )
                 button = Gtk.Button(
                     icon_name = "user-trash-symbolic",
                     vexpand = False,
                     valign = 3,
-                    css_classes = ["error"]
+                    css_classes = ["error", "circular"],
+                    tooltip_text = _("Remove '{} ({})'").format(model["name"].split(":")[0].capitalize(), model["name"].split(":")[1])
                 )
                 button.connect("clicked", lambda button=button, model_name=model["name"]: dialogs.delete_model(self, model_name))
                 model_row.add_suffix(button)
                 self.local_model_list_box.append(model_row)
 
-                self.model_string_list.append(model["name"])
+                self.model_string_list.append(f"{model['name'].split(':')[0].capitalize()} ({model['name'].split(':')[1]})")
                 self.local_models.append(model["name"])
             self.model_drop_down.set_selected(0)
             self.verify_if_image_can_be_used()
@@ -598,7 +742,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def save_server_config(self):
         with open(os.path.join(self.config_dir, "server.json"), "w+") as f:
-            json.dump({'remote_url': self.remote_url, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background, 'model_tweaks': self.model_tweaks, 'ollama_overrides': local_instance.overrides}, f, indent=6)
+            json.dump({'remote_url': self.remote_url, 'remote_bearer_token': self.remote_bearer_token, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background, 'model_tweaks': self.model_tweaks, 'ollama_overrides': local_instance.overrides}, f, indent=6)
 
     def verify_connection(self):
         response = connection_handler.simple_get(connection_handler.url)
@@ -694,7 +838,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 code_block_box = Gtk.Box(css_classes=["card"], orientation=1, overflow=1)
                 title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=3)
                 title_box.append(Gtk.Label(label=language.get_name() if language else part['language'], hexpand=True, xalign=0))
-                copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"])
+                copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
                 copy_button.connect("clicked", self.on_copy_code_clicked, buffer)
                 title_box.append(copy_button)
                 code_block_box.append(title_box)
@@ -731,9 +875,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if data['done']:
             formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
-            text = f"\n<small>{data['model']}\t|\t{formated_datetime}</small>"
+            text = f"\n<small>{data['model']}\t{formated_datetime}</small>"
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
             self.save_history()
+            GLib.idle_add(self.bot_message_button_container.set_visible, True)
+            GLib.idle_add(self.show_notification, _("Message Received"), _("New message from '{}'").format(self.chats["selected_chat"]), Gio.ThemedIcon.new("emblem-ok-symbolic"))
         else:
             if id not in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
                 GLib.idle_add(self.chat_container.remove, self.loading_spinner)
@@ -748,7 +894,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['content'] += data['message']['content']
 
     def toggle_ui_sensitive(self, status):
-        for element in [self.chat_list_box, self.add_chat_button, self.chats_menu_button]:
+        for element in [self.chat_list_box, self.add_chat_button, self.secondary_menu_button]:
             element.set_sensitive(status)
 
     def switch_send_stop_button(self):
@@ -756,6 +902,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.send_button.set_visible(not self.send_button.get_visible())
 
     def run_message(self, messages, model, id):
+        self.bot_message_button_container.set_visible(False)
         response = connection_handler.stream_post(f"{connection_handler.url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=lambda data, id=id: self.update_bot_message(data, id))
         GLib.idle_add(self.add_code_blocks)
         GLib.idle_add(self.switch_send_stop_button)
@@ -768,9 +915,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def pull_model_update(self, data, model_name):
         if model_name in list(self.pulling_models.keys()):
-            GLib.idle_add(self.pulling_models[model_name]['row'].set_subtitle, data['status'])
-            if 'completed' in data and 'total' in data: GLib.idle_add(self.pulling_models[model_name]['progress_bar'].set_fraction, (data['completed'] / data['total']))
-            else: GLib.idle_add(self.pulling_models[model_name]['progress_bar'].pulse)
+            if 'completed' in data and 'total' in data:
+                GLib.idle_add(self.pulling_models[model_name]['row'].set_subtitle, '<tt>{}%</tt>\t{}'.format(round(data['completed'] / data['total'] * 100, 2), data['status'].capitalize()))
+                GLib.idle_add(self.pulling_models[model_name]['progress_bar'].set_fraction, (data['completed'] / data['total']))
+            else:
+                GLib.idle_add(self.pulling_models[model_name]['row'].set_subtitle, '{}'.format(data['status'].capitalize()))
+                GLib.idle_add(self.pulling_models[model_name]['progress_bar'].pulse)
         else:
             if len(list(self.pulling_models.keys())) == 0:
                 GLib.idle_add(self.pulling_model_list_box.set_visible, False)
@@ -786,12 +936,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GLib.idle_add(self.update_list_local_models)
 
         if response['status'] == 'ok':
-            GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model), True, Gio.ThemedIcon.new("emblem-ok-symbolic"))
+            GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model), Gio.ThemedIcon.new("emblem-ok-symbolic"))
             GLib.idle_add(self.show_toast, "good", 1, self.manage_models_overlay)
             GLib.idle_add(self.pulling_models[model]['overlay'].get_parent().get_parent().remove, self.pulling_models[model]['overlay'].get_parent())
             del self.pulling_models[model]
         else:
-            GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(model), True, Gio.ThemedIcon.new("dialog-error-symbolic"))
+            GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(model), Gio.ThemedIcon.new("dialog-error-symbolic"))
             GLib.idle_add(self.pulling_models[model]['overlay'].get_parent().get_parent().remove, self.pulling_models[model]['overlay'].get_parent())
             del self.pulling_models[model]
             GLib.idle_add(self.manage_models_dialog.close)
@@ -801,14 +951,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def pull_model(self, model):
         if model in list(self.pulling_models.keys()):
-            self.show_toast("info", 2, self.manage_models_overlay)
             return
         if model in self.local_models:
             self.show_toast("info", 3, self.manage_models_overlay)
             return
         self.pulling_model_list_box.set_visible(True)
+        #self.pulling_model_list_box.connect('row_selected', lambda list_box, row: dialogs.stop_pull_model(self, row.get_name()) if row else None) #It isn't working for some reason
         model_row = Adw.ActionRow(
-            title = model
+            title = "<b>{}</b> <small>{}</small>".format(model.split(":")[0].capitalize(), model.split(":")[1]),
+            name = model
         )
         thread = threading.Thread(target=self.pull_model_process, kwargs={"model": model, "modelfile": None})
         overlay = Gtk.Overlay()
@@ -823,7 +974,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             icon_name = "media-playback-stop-symbolic",
             vexpand = False,
             valign = 3,
-            css_classes = ["error"]
+            css_classes = ["error", "circular"],
+            tooltip_text = _("Stop Pulling '{} ({})'").format(model.split(':')[0].capitalize(), model.split(':')[1])
         )
         button.connect("clicked", lambda button, model_name=model : dialogs.stop_pull_model(self, model_name))
         model_row.add_suffix(button)
@@ -833,29 +985,49 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.pulling_model_list_box.append(overlay)
         thread.start()
 
+    def confirm_pull_model(self, model_name):
+        self.navigation_view_manage_models.pop()
+        self.model_tag_list_box.unselect_all()
+        self.pull_model(model_name)
+
+    def list_available_model_tags(self, model_name):
+        self.navigation_view_manage_models.push_by_tag('model_tags_page')
+        self.navigation_view_manage_models.find_page('model_tags_page').set_title(model_name.capitalize())
+        self.model_link_button.set_name(self.available_models[model_name]['url'])
+        self.model_link_button.set_tooltip_text(self.available_models[model_name]['url'])
+        self.available_model_list_box.unselect_all()
+        self.model_tag_list_box.connect('row_selected', lambda list_box, row: self.confirm_pull_model(row.get_name()) if row else None)
+        self.model_tag_list_box.remove_all()
+        tags = self.available_models[model_name]['tags']
+        for tag_data in tags:
+            if f"{model_name}:{tag_data[0]}" not in self.local_models:
+                tag_row = Adw.ActionRow(
+                    title = tag_data[0],
+                    subtitle = tag_data[1],
+                    name = f"{model_name}:{tag_data[0]}"
+                )
+                tag_row.add_suffix(Gtk.Image.new_from_icon_name("folder-download-symbolic"))
+                self.model_tag_list_box.append(tag_row)
+
     def update_list_available_models(self):
+        self.available_model_list_box.connect('row_selected', lambda list_box, row: self.list_available_model_tags(row.get_name()) if row else None)
         self.available_model_list_box.remove_all()
-        for name, model_info in available_models.items():
+        for name, model_info in self.available_models.items():
             model = Adw.ActionRow(
-                title = name,
-                subtitle = "Image recognition" if model_info["image"] else None
+                title = "<b>{}{}</b> <small>by {}</small>".format('🖼 ' if model_info["image"] else '', name.capitalize(), model_info['author']),
+                subtitle = model_info["description"], # + ("\n\n<span foreground='white' background='black' line_height='1.5'> Image Recognition </span>" if model_info["image"] else ""),
+                #("<b>Image recognition capable</b>\n" if model_info["image"] else "") +
+                #title = f"<b>{name.capitalize()}</b> <small>by {model_info['author']}</small>",
+                #subtitle = f"<small>" + (_("(Image recognition capable)\n") if model_info["image"] else "") + f"{model_info['description']}</small>",
+                name = name
             )
-            link_button = Gtk.Button(
-                icon_name = "globe-symbolic",
-                vexpand = False,
-                valign = 3,
-                css_classes = ["success"]
-            )
-            pull_button = Gtk.Button(
-                icon_name = "folder-download-symbolic",
-                vexpand = False,
-                valign = 3,
-                css_classes = ["accent"]
-            )
-            link_button.connect("clicked", lambda button=link_button, link=model_info["url"]: webbrowser.open(link))
-            pull_button.connect("clicked", lambda button=pull_button, model_name=name: dialogs.pull_model(self, model_name))
-            model.add_suffix(link_button)
-            model.add_suffix(pull_button)
+            if model_info["image"]:
+                image_icon = Gtk.Image.new_from_icon_name("image-x-generic-symbolic")
+                image_icon.set_margin_start(5)
+                #model.add_suffix(image_icon)
+            next_icon = Gtk.Image.new_from_icon_name("go-next")
+            next_icon.set_margin_start(5)
+            model.add_suffix(next_icon)
             self.available_model_list_box.append(model)
 
     def save_history(self):
@@ -878,11 +1050,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
             try:
                 with open(os.path.join(self.data_dir, "chats", "chats.json"), "r") as f:
                     self.chats = json.load(f)
-                    if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]: self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
                     if len(list(self.chats["chats"].keys())) == 0: self.chats["chats"][_("New Chat")] = {"messages": {}}
+                    if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]: self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
+                    if "order" not in self.chats:
+                        self.chats["order"] = []
+                        for chat_name in self.chats["chats"].keys():
+                            self.chats["order"].append(chat_name)
             except Exception as e:
-                self.chats = {"chats": {_("New Chat"): {"messages": {}}}, "selected_chat": _("New Chat")}
-            self.load_history_into_chat()
+                self.chats = {"chats": {}, "selected_chat": None, "order": []}
+                self.new_chat()
+        else:
+            self.chats = {"chats": {}, "selected_chat": None, "order": []}
+            self.new_chat()
+        self.load_history_into_chat()
+
 
     def generate_numbered_name(self, chat_name:str, compare_list:list) -> str:
         if chat_name in compare_list:
@@ -907,28 +1088,35 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def delete_chat(self, chat_name):
         del self.chats['chats'][chat_name]
+        self.chats['order'].remove(chat_name)
         if os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'])):
             shutil.rmtree(os.path.join(self.data_dir, "chats", self.chats['selected_chat']))
         self.save_history()
         self.update_chat_list()
         if len(self.chats['chats'])==0:
             self.new_chat()
+        if self.chats['selected_chat'] == chat_name:
+            self.chat_list_box.select_row(self.chat_list_box.get_row_at_index(0))
 
     def rename_chat(self, old_chat_name, new_chat_name, label_element):
         new_chat_name = self.generate_numbered_name(new_chat_name, self.chats["chats"].keys())
+        if self.chats["selected_chat"] == old_chat_name: self.chats["selected_chat"] = new_chat_name
         self.chats["chats"][new_chat_name] = self.chats["chats"][old_chat_name]
+        self.chats["order"][self.chats["order"].index(old_chat_name)] = new_chat_name
         del self.chats["chats"][old_chat_name]
         if os.path.exists(os.path.join(self.data_dir, "chats", old_chat_name)):
             shutil.move(os.path.join(self.data_dir, "chats", old_chat_name), os.path.join(self.data_dir, "chats", new_chat_name))
+        label_element.set_tooltip_text(new_chat_name)
         label_element.set_label(new_chat_name)
-        label_element.get_parent().set_name(new_chat_name)
+        label_element.set_name(new_chat_name)
         self.save_history()
 
     def new_chat(self):
         chat_name = self.generate_numbered_name(_("New Chat"), self.chats["chats"].keys())
         self.chats["chats"][chat_name] = {"messages": {}}
+        self.chats["order"].insert(0, chat_name)
         self.save_history()
-        self.new_chat_element(chat_name, True)
+        self.new_chat_element(chat_name, True, False)
 
     def stop_pull_model(self, model_name):
         self.pulling_models[model_name]['overlay'].get_parent().get_parent().remove(self.pulling_models[model_name]['overlay'].get_parent())
@@ -943,18 +1131,26 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.manage_models_dialog.close()
             self.connection_error()
 
-    def new_chat_element(self, chat_name:str, select:bool):
-        chat_content = Gtk.Box(
-            spacing=6
+    def chat_click_handler(self, gesture, n_press, x, y):
+        chat_row = gesture.get_widget()
+        popover = Gtk.PopoverMenu(
+            menu_model=self.chat_right_click_menu,
+            has_arrow=False,
+            halign=1,
         )
-        chat_row = Gtk.ListBoxRow(
-            css_classes = ["chat_row"],
-            height_request = 45,
-            child = chat_content,
-            name = chat_name
-        )
+        self.selected_chat_row = chat_row
+        position = Gdk.Rectangle()
+        position.x = x
+        position.y = y
+        popover.set_parent(chat_row.get_child())
+        popover.set_pointing_to(position)
+        popover.popup()
+
+    def new_chat_element(self, chat_name:str, select:bool, append:bool):
         chat_label = Gtk.Label(
             label=chat_name,
+            tooltip_text=chat_name,
+            name=chat_name,
             hexpand=True,
             halign=0,
             wrap=True,
@@ -962,32 +1158,25 @@ class AlpacaWindow(Adw.ApplicationWindow):
             wrap_mode=2,
             xalign=0
         )
+        chat_row = Gtk.ListBoxRow(
+            css_classes = ["chat_row"],
+            height_request = 45,
+            child = chat_label
+        )
 
-        button_delete = Gtk.Button(
-            icon_name = "user-trash-symbolic",
-            vexpand = False,
-            valign = 3,
-            css_classes = ["error", "flat"]
-        )
-        button_delete.connect("clicked", lambda button, chat_name=chat_name: dialogs.delete_chat(self, chat_name))
-        button_rename = Gtk.Button(
-            icon_name = "document-edit-symbolic",
-            vexpand = False,
-            valign = 3,
-            css_classes = ["accent", "flat"]
-        )
-        chat_content.set_name(chat_name)
-        button_rename.connect("clicked", lambda button, label_element=chat_label: dialogs.rename_chat(self, label_element))
-        chat_content.append(chat_label)
-        chat_content.append(button_delete)
-        chat_content.append(button_rename)
-        self.chat_list_box.append(chat_row)
+        gesture = Gtk.GestureClick(button=3)
+        gesture.connect("released", self.chat_click_handler)
+        chat_row.add_controller(gesture)
+
+        if append: self.chat_list_box.append(chat_row)
+        else: self.chat_list_box.prepend(chat_row)
         if select: self.chat_list_box.select_row(chat_row)
 
     def update_chat_list(self):
         self.chat_list_box.remove_all()
-        for name, content in self.chats['chats'].items():
-            self.new_chat_element(name, self.chats["selected_chat"] == name)
+        for name in self.chats['order']:
+            if name in self.chats['chats'].keys():
+                self.new_chat_element(name, self.chats["selected_chat"] == name, True)
 
     def show_preferences_dialog(self):
         self.preferences_dialog.present(self)
@@ -1000,6 +1189,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def connect_local(self):
         self.run_remote = False
+        connection_handler.bearer_token = None
         connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
         local_instance.start()
         if self.verify_connection() == False: self.connection_error()
@@ -1017,33 +1207,34 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if new_value != self.run_remote:
             self.run_remote = new_value
             if self.run_remote:
+                connection_handler.bearer_token = self.remote_bearer_token
                 connection_handler.url = self.remote_url
                 if self.verify_connection() == False: self.connection_error()
                 else: local_instance.stop()
             else:
+                connection_handler.bearer_token = None
                 connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
                 local_instance.start()
                 if self.verify_connection() == False: self.connection_error()
-            self.update_list_available_models()
 
     def on_replace_contents(self, file, result):
         file.replace_contents_finish(result)
         self.show_toast("good", 2, self.main_overlay)
 
-    def on_export_current_chat(self, file_dialog, result):
+    def on_export_chat(self, file_dialog, result, chat_name):
         file = file_dialog.save_finish(result)
         if not file: return
-        json_data = json.dumps({self.chats["selected_chat"]: self.chats["chats"][self.chats["selected_chat"]]}, indent=4).encode("UTF-8")
+        json_data = json.dumps({chat_name: self.chats["chats"][chat_name]}, indent=4).encode("UTF-8")
 
         with tempfile.TemporaryDirectory() as temp_dir:
             json_path = os.path.join(temp_dir, "data.json")
             with open(json_path, "wb") as json_file:
                 json_file.write(json_data)
 
-            tar_path = os.path.join(temp_dir, f"{self.chats['selected_chat']}")
+            tar_path = os.path.join(temp_dir, chat_name)
             with tarfile.open(tar_path, "w") as tar:
                 tar.add(json_path, arcname="data.json")
-                directory = os.path.join(self.data_dir, "chats", self.chats['selected_chat'])
+                directory = os.path.join(self.data_dir, "chats", chat_name)
                 if os.path.exists(directory) and os.path.isdir(directory):
                     tar.add(directory, arcname=os.path.basename(directory))
 
@@ -1059,9 +1250,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 callback=self.on_replace_contents
             )
 
-    def export_current_chat(self):
-        file_dialog = Gtk.FileDialog(initial_name=f"{self.chats['selected_chat']}.tar")
-        file_dialog.save(parent=self, cancellable=None, callback=self.on_export_current_chat)
+    def export_chat(self, chat_name):
+        file_dialog = Gtk.FileDialog(initial_name=f"{chat_name}.tar")
+        file_dialog.save(parent=self, cancellable=None, callback=lambda file_dialog, result, chat_name=chat_name: self.on_export_chat(file_dialog, result, chat_name))
 
     def on_chat_imported(self, file_dialog, result):
         file = file_dialog.open_finish(result)
@@ -1127,7 +1318,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     return base64.b64encode(image_data).decode("utf-8")
             except Exception as e:
                 self.show_toast("error", 5, self.main_overlay)
-        elif file_type == 'plain_text':
+        elif file_type == 'plain_text' or file_type == 'youtube' or file_type == 'website':
             with open(file_path, 'r') as f:
                 return f.read()
         elif file_type == 'pdf':
@@ -1137,13 +1328,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             for i, page in enumerate(reader.pages):
                 text += f"\n- Page {i}\n{page.extract_text()}\n"
             return text
-        #elif file_type == 'docx':
-            #document = docx.Document(file_path)
-            #if len(document.paragraphs) == 0: return None
-            #text = ""
-            #for paragraph in document.paragraphs:
-                #text += f"{paragraph.text}\n"
-            #return text
 
     def remove_attached_file(self, button):
         del self.attachments[button.get_name()]
@@ -1154,15 +1338,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
         name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
         content = self.get_content_of_file(file_path, file_type)
         if content:
-            shown_name='.'.join(name.split(".")[:-1])[:20] + (name[20:] and '..') + f".{name.split('.')[-1]}"
-
             button_content = Adw.ButtonContent(
-                label=shown_name,
+                label=name,
                 icon_name={
                     "image": "image-x-generic-symbolic",
                     "plain_text": "document-text-symbolic",
                     "pdf": "document-text-symbolic",
-                    #"docx": "document-text-symbolic"
+                    "youtube": "play-symbolic",
+                    "website": "globe-symbolic"
                 }[file_type]
             )
             button = Gtk.Button(
@@ -1173,16 +1356,93 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 tooltip_text=name,
                 child=button_content
             )
-
             self.attachments[name] = {"path": file_path, "type": file_type, "content": content, "button": button}
             button.connect("clicked", lambda button: dialogs.remove_attached_file(self, button))
             self.attachment_container.append(button)
             self.attachment_box.set_visible(True)
 
+    def chat_actions(self, action, user_data):
+        chat_row = self.selected_chat_row
+        chat_name = chat_row.get_child().get_name()
+        action_name = action.get_name()
+        if action_name == 'delete_chat':
+            dialogs.delete_chat(self, chat_name)
+        elif action_name in ('rename_chat', 'rename_current_chat'):
+            dialogs.rename_chat(self, chat_name, chat_row.get_child())
+        elif action_name in ('export_chat', 'export_current_chat'):
+            self.export_chat(chat_name)
+
+    def current_chat_actions(self, action, user_data):
+        self.selected_chat_row = self.chat_list_box.get_selected_row()
+        self.chat_actions(action, user_data)
+
+    def cb_text_received(self, clipboard, result):
+        try:
+            text = clipboard.read_text_finish(result)
+            #Check if text is a Youtube URL
+            youtube_regex = re.compile(
+                r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/'
+                r'(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
+            url_regex = re.compile(
+                r'http[s]?://'
+                r'(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|'
+                r'(?:%[0-9a-fA-F][0-9a-fA-F]))+'
+                r'(?:\\:[0-9]{1,5})?'
+                r'(?:/[^\\s]*)?'
+            )
+            if youtube_regex.match(text):
+                try:
+                    dialogs.youtube_caption(self, text)
+                except Exception as e:
+                    self.show_toast("error", 10, self.main_overlay)
+            elif url_regex.match(text):
+                dialogs.attach_website(self, text)
+        except Exception as e: 'huh'
+
+    def cb_image_received(self, clipboard, result):
+        try:
+            texture = clipboard.read_texture_finish(result)
+            if texture:
+                if self.verify_if_image_can_be_used():
+                    pixbuf = Gdk.pixbuf_get_from_texture(texture)
+                    if not os.path.exists('/tmp/alpaca/images/'):
+                        os.makedirs('/tmp/alpaca/images/')
+                    image_name = self.generate_numbered_name('image.png', os.listdir('/tmp/alpaca/images'))
+                    pixbuf.savev('/tmp/alpaca/images/{}'.format(image_name), "png", [], [])
+                    self.attach_file('/tmp/alpaca/images/{}'.format(image_name), 'image')
+                else:
+                    self.show_toast('error', 8, self.main_overlay)
+        except Exception as e: 'huh'
+
+    def on_clipboard_paste(self, textview):
+        clipboard = Gdk.Display.get_default().get_clipboard()
+        clipboard.read_text_async(None, self.cb_text_received)
+        clipboard.read_texture_async(None, self.cb_image_received)
+
+
+    def on_model_dropdown_setup(self, factory, list_item):
+        label = Gtk.Label()
+        label.set_ellipsize(2)
+        label.set_xalign(0)
+        list_item.set_child(label)
+
+    def on_model_dropdown_bind(self, factory, list_item):
+        label = list_item.get_child()
+        item = list_item.get_item()
+        label.set_text(item.get_string())
+        label.set_tooltip_text(item.get_string())
+
+    def setup_model_dropdown(self):
+        factory = Gtk.SignalListItemFactory()
+        factory.connect("setup", self.on_model_dropdown_setup)
+        factory.connect("bind", self.on_model_dropdown_bind)
+        self.model_drop_down.set_factory(factory)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
+        with open('/app/share/Alpaca/alpaca/available_models.json', 'r') as f:
+            self.available_models = json.load(f)
         if not os.path.exists(os.path.join(self.data_dir, "chats")):
             os.makedirs(os.path.join(self.data_dir, "chats"))
         if os.path.exists(os.path.join(self.config_dir, "chats.json")) and not os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
@@ -1192,22 +1452,29 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.get_application().create_action('new_chat', lambda *_: self.new_chat(), ['<primary>n'])
         self.get_application().create_action('clear', lambda *_: dialogs.clear_chat(self), ['<primary>e'])
         self.get_application().create_action('send', lambda *_: self.send_message(self), ['Return'])
-        self.get_application().create_action('export_current_chat', lambda *_: self.export_current_chat())
-        self.get_application().create_action('import_chat', lambda *_: self.import_chat())
+        self.get_application().create_action('import_chat', lambda *_: self.import_chat(), ['<primary>i'])
         self.get_application().create_action('create_model_from_existing', lambda *_: dialogs.create_model_from_existing(self))
         self.get_application().create_action('create_model_from_file', lambda *_: dialogs.create_model_from_file(self))
+        self.get_application().create_action('delete_chat', self.chat_actions)
+        self.get_application().create_action('rename_chat', self.chat_actions)
+        self.get_application().create_action('rename_current_chat', self.current_chat_actions)
+        self.get_application().create_action('export_chat', self.chat_actions)
+        self.get_application().create_action('export_current_chat', self.current_chat_actions)
+        self.message_text_view.connect("paste-clipboard", self.on_clipboard_paste)
         self.add_chat_button.connect("clicked", lambda button : self.new_chat())
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
         self.create_model_name.get_delegate().connect("insert-text", self.check_alphanumeric)
         self.remote_connection_entry.connect("entry-activated", lambda entry : entry.set_css_classes([]))
         self.remote_connection_switch.connect("notify", lambda pspec, user_data : self.connection_switched())
         self.background_switch.connect("notify", lambda pspec, user_data : self.switch_run_on_background())
+        self.setup_model_dropdown()
         if os.path.exists(os.path.join(self.config_dir, "server.json")):
             with open(os.path.join(self.config_dir, "server.json"), "r") as f:
                 data = json.load(f)
                 self.run_remote = data['run_remote']
                 local_instance.port = data['local_port']
                 self.remote_url = data['remote_url']
+                self.remote_bearer_token = data['remote_bearer_token'] if 'remote_bearer_token' in data else ''
                 self.run_on_background = data['run_on_background']
                 #Model Tweaks
                 if "model_tweaks" in data: self.model_tweaks = data['model_tweaks']
@@ -1228,10 +1495,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.background_switch.set_active(self.run_on_background)
                 self.set_hide_on_close(self.run_on_background)
                 self.remote_connection_entry.set_text(self.remote_url)
+                self.remote_bearer_token_entry.set_text(self.remote_bearer_token)
                 if self.run_remote:
-                    connection_handler.url = data['remote_url']
+                    connection_handler.bearer_token = self.remote_bearer_token
+                    connection_handler.url = self.remote_url
                     self.remote_connection_switch.set_active(True)
                 else:
+                    connection_handler.bearer_token = None
                     self.remote_connection_switch.set_active(False)
                     connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
                     local_instance.start()

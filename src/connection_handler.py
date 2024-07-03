@@ -2,10 +2,19 @@
 import json, requests
 
 url = None
+bearer_token = None
+
+def get_headers(include_json:bool) -> dict:
+    headers = {}
+    if include_json:
+        headers["Content-Type"] = "application/json"
+    if bearer_token:
+        headers["Authorization"] = "Bearer {}".format(bearer_token)
+    return headers if len(headers.keys()) > 0 else None
 
 def simple_get(connection_url:str) -> dict:
     try:
-        response = requests.get(connection_url)
+        response = requests.get(connection_url, headers=get_headers(False))
         if response.status_code == 200:
             return {"status": "ok", "text": response.text, "status_code": response.status_code}
         else:
@@ -15,10 +24,7 @@ def simple_get(connection_url:str) -> dict:
 
 def simple_post(connection_url:str, data) -> dict:
     try:
-        headers = {
-            "Content-Type": "application/json"
-        }
-        response = requests.post(connection_url, headers=headers, data=data, stream=False)
+        response = requests.post(connection_url, headers=get_headers(True), data=data, stream=False)
         if response.status_code == 200:
             return {"status": "ok", "text": response.text, "status_code": response.status_code}
         else:
@@ -28,7 +34,7 @@ def simple_post(connection_url:str, data) -> dict:
 
 def simple_delete(connection_url:str, data) -> dict:
     try:
-        response = requests.delete(connection_url, json=data)
+        response = requests.delete(connection_url, headers=get_headers(False), json=data)
         if response.status_code == 200:
             return {"status": "ok", "status_code": response.status_code}
         else:
@@ -38,10 +44,7 @@ def simple_delete(connection_url:str, data) -> dict:
 
 def stream_post(connection_url:str, data, callback:callable) -> dict:
     try:
-        headers = {
-            "Content-Type": "application/json"
-        }
-        response = requests.post(connection_url, headers=headers, data=data, stream=True)
+        response = requests.post(connection_url, headers=get_headers(True), data=data, stream=True)
         if response.status_code == 200:
             for line in response.iter_lines():
                 if line:

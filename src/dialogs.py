@@ -1,7 +1,10 @@
 # dialogs.py
 
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
-from .available_models import available_models
+import os
+from pytube import YouTube
+from html2text import html2text
+from . import connection_handler
 
 # CLEAR CHAT | WORKS
 
@@ -14,7 +17,7 @@ def clear_chat(self):
         self.show_toast("info", 1, self.main_overlay)
         return
     dialog = Adw.AlertDialog(
-        heading=_("Clear Chat"),
+        heading=_("Clear Chat?"),
         body=_("Are you sure you want to clear the chat?"),
         close_response="cancel"
     )
@@ -35,7 +38,7 @@ def delete_chat_response(self, dialog, task, chat_name):
 
 def delete_chat(self, chat_name):
     dialog = Adw.AlertDialog(
-        heading=_("Delete Chat"),
+        heading=_("Delete Chat?"),
         body=_("Are you sure you want to delete '{}'?").format(chat_name),
         close_response="cancel"
     )
@@ -57,11 +60,10 @@ def rename_chat_response(self, dialog, task, old_chat_name, entry, label_element
     if new_chat_name and (task is None or dialog.choose_finish(task) == "rename"):
         self.rename_chat(old_chat_name, new_chat_name, label_element)
 
-def rename_chat(self, label_element):
-    chat_name = label_element.get_parent().get_name()
+def rename_chat(self, chat_name, label_element):
     entry = Gtk.Entry()
     dialog = Adw.AlertDialog(
-        heading=_("Rename Chat"),
+        heading=_("Rename Chat?"),
         body=_("Renaming '{}'").format(chat_name),
         extra_child=entry,
         close_response="cancel"
@@ -88,7 +90,7 @@ def new_chat_response(self, dialog, task, entry):
 def new_chat(self):
     entry = Gtk.Entry()
     dialog = Adw.AlertDialog(
-        heading=_("Create Chat"),
+        heading=_("Create Chat?"),
         body=_("Enter name for new chat"),
         extra_child=entry,
         close_response="cancel"
@@ -110,9 +112,10 @@ def stop_pull_model_response(self, dialog, task, model_name):
         self.stop_pull_model(model_name)
 
 def stop_pull_model(self, model_name):
+    #self.pulling_model_list_box.unselect_all()
     dialog = Adw.AlertDialog(
-        heading=_("Stop Model"),
-        body=_("Are you sure you want to stop pulling '{}'?").format(model_name),
+        heading=_("Stop Download?"),
+        body=_("Are you sure you want to stop pulling '{} ({})'?").format(model_name.split(":")[0].capitalize(), model_name.split(":")[1]),
         close_response="cancel"
     )
     dialog.add_response("cancel", _("Cancel"))
@@ -132,7 +135,7 @@ def delete_model_response(self, dialog, task, model_name):
 
 def delete_model(self, model_name):
     dialog = Adw.AlertDialog(
-        heading=_("Delete Model"),
+        heading=_("Delete Model?"),
         body=_("Are you sure you want to delete '{}'?").format(model_name),
         close_response="cancel"
     )
@@ -145,36 +148,6 @@ def delete_model(self, model_name):
         callback = lambda dialog, task, model_name = model_name: delete_model_response(self, dialog, task, model_name)
     )
 
-# PULL MODEL | WORKS
-
-def pull_model_response(self, dialog, task, model_name, tag_drop_down):
-    if dialog.choose_finish(task) == "pull":
-        model = f"{model_name}:{tag_drop_down.get_selected_item().get_string().split(' | ')[0]}"
-        self.pull_model(model)
-
-def pull_model(self, model_name):
-    tag_list = Gtk.StringList()
-    for tag in available_models[model_name]['tags']:
-        tag_list.append(f"{tag[0]} | {tag[1]}")
-    tag_drop_down = Gtk.DropDown(
-        enable_search=True,
-        model=tag_list
-    )
-    dialog = Adw.AlertDialog(
-        heading=_("Pull Model"),
-        body=_("Please select a tag to pull '{}'").format(model_name),
-        extra_child=tag_drop_down,
-        close_response="cancel"
-    )
-    dialog.add_response("cancel", _("Cancel"))
-    dialog.add_response("pull", _("Pull"))
-    dialog.set_response_appearance("pull", Adw.ResponseAppearance.SUGGESTED)
-    dialog.choose(
-        parent = self.manage_models_dialog,
-        cancellable = None,
-        callback = lambda dialog, task, model_name = model_name, tag_drop_down = tag_drop_down: pull_model_response(self, dialog, task, model_name, tag_drop_down)
-    )
-
 # REMOVE IMAGE | WORKS
 
 def remove_attached_file_response(self, dialog, task, button):
@@ -183,8 +156,8 @@ def remove_attached_file_response(self, dialog, task, button):
 
 def remove_attached_file(self, button):
     dialog = Adw.AlertDialog(
-        heading=_("Remove File"),
-        body=_("Are you sure you want to remove file?"),
+        heading=_("Remove Attachment?"),
+        body=_("Are you sure you want to remove attachment?"),
         close_response="cancel"
     )
     dialog.add_response("cancel", _("Cancel"))
@@ -274,8 +247,7 @@ def attach_file_response(self, file_dialog, result):
     file_types = {
         "plain_text": ["txt", "md", "html", "css", "js", "py", "java", "json", "xml"],
         "image": ["png", "jpeg", "jpg", "webp", "gif"],
-        "pdf": ["pdf"],
-        "docx": ["docx"]
+        "pdf": ["pdf"]
     }
     try: file = file_dialog.open_finish(result)
     except: return
@@ -291,3 +263,86 @@ def attach_file_response(self, file_dialog, result):
 def attach_file(self, filter):
     file_dialog = Gtk.FileDialog(default_filter=filter)
     file_dialog.open(self, None, lambda file_dialog, result: attach_file_response(self, file_dialog, result))
+
+
+# YouTube caption | WORKS
+
+def youtube_caption_response(self, dialog, task, video_url, caption_drop_down):
+    if dialog.choose_finish(task) == "accept":
+        buffer = self.message_text_view.get_buffer()
+        text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).replace(video_url, "")
+        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+        buffer.insert(buffer.get_start_iter(), text, len(text))
+
+        yt = YouTube(video_url)
+        text = "{}\n{}\n{}\n\n".format(yt.title, yt.author, yt.watch_url)
+        selected_caption = caption_drop_down.get_selected_item().get_string()
+        for event in yt.captions[selected_caption.split(' | ')[1]].json_captions['events']:
+            text += "{}\n".format(event['segs'][0]['utf8'].replace('\n', '\\n'))
+        if not os.path.exists('/tmp/alpaca/youtube'):
+            os.makedirs('/tmp/alpaca/youtube')
+        file_path = os.path.join('/tmp/alpaca/youtube', f'{yt.title} ({selected_caption.split(" | ")[0]})')
+        with open(file_path, 'w+') as f:
+            f.write(text)
+        self.attach_file(file_path, 'youtube')
+
+def youtube_caption(self, video_url):
+    yt = YouTube(video_url)
+    video_title = yt.title
+    captions = yt.captions
+    if len(captions) == 0:
+        self.show_toast("error", 9, self.main_overlay)
+        return
+    caption_list = Gtk.StringList()
+    for caption in captions: caption_list.append("{} | {}".format(caption.name, caption.code))
+    caption_drop_down = Gtk.DropDown(
+        enable_search=True,
+        model=caption_list
+    )
+    dialog = Adw.AlertDialog(
+        heading=_("Attach YouTube Video?"),
+        body=_("{}\n\nPlease select a transcript to include").format(video_title),
+        extra_child=caption_drop_down,
+        close_response="cancel"
+    )
+    dialog.add_response("cancel", _("Cancel"))
+    dialog.add_response("accept", _("Accept"))
+    dialog.set_response_appearance("accept", Adw.ResponseAppearance.SUGGESTED)
+    dialog.choose(
+        parent = self,
+        cancellable = None,
+        callback = lambda dialog, task, video_url = video_url, caption_drop_down = caption_drop_down: youtube_caption_response(self, dialog, task, video_url, caption_drop_down)
+    )
+
+# Website extraction |
+
+def attach_website_response(self, dialog, task, url):
+    if dialog.choose_finish(task) == "accept":
+        html = connection_handler.simple_get(url)['text']
+        md = html2text(html)
+        buffer = self.message_text_view.get_buffer()
+        textview_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).replace(url, "")
+        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+        buffer.insert(buffer.get_start_iter(), textview_text, len(textview_text))
+        if not os.path.exists('/tmp/alpaca/websites/'):
+            os.makedirs('/tmp/alpaca/websites/')
+        md_name = self.generate_numbered_name('website.md', os.listdir('/tmp/alpaca/websites'))
+        file_path = os.path.join('/tmp/alpaca/websites/', md_name)
+        with open(file_path, 'w+') as f:
+            f.write('{}\n\n{}'.format(url, md))
+        self.attach_file(file_path, 'website')
+
+def attach_website(self, url):
+    dialog = Adw.AlertDialog(
+        heading=_("Attach Website? (Experimental)"),
+        body=_("Are you sure you want to attach\n'{}'?").format(url),
+        close_response="cancel"
+    )
+    dialog.add_response("cancel", _("Cancel"))
+    dialog.add_response("accept", _("Accept"))
+    dialog.set_response_appearance("accept", Adw.ResponseAppearance.SUGGESTED)
+    dialog.choose(
+        parent = self,
+        cancellable = None,
+        callback = lambda dialog, task, url=url: attach_website_response(self, dialog, task, url)
+    )

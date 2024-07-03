@@ -38,7 +38,7 @@
                   <object class="AdwHeaderBar">
                     <child type="start">
                       <object class="GtkButton" id="add_chat_button">
-                        <property name="tooltip-text" translatable="yes">New chat</property>
+                        <property name="tooltip-text" translatable="yes">New Chat</property>
                         <property name="icon-name">chat-message-new-symbolic</property>
                         <style>
                           <class name="flat"/>
@@ -46,11 +46,11 @@
                       </object>
                     </child>
                     <child type="end">
-                      <object class="GtkMenuButton" id="chats_menu_button">
-                        <property name="direction">1</property>
-                        <property name="halign">3</property>
-                        <property name="menu-model">chats_menu</property>
-                        <property name="icon-name">view-more-symbolic</property>
+                      <object class="GtkMenuButton">
+                        <property name="primary">True</property>
+                        <property name="icon-name">open-menu-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Menu</property>
+                        <property name="menu-model">primary_menu</property>
                       </object>
                     </child>
                   </object>
@@ -90,7 +90,9 @@
                         <child>
                           <object class="GtkDropDown" id="model_drop_down">
                             <signal name="notify" handler="verify_if_image_can_be_used"/>
+                            <property name="width-request">150</property>
                             <property name="enable-search">true</property>
+                            <property name="tooltip-text">Select Model</property>
                             <property name="model">
                               <object class="GtkStringList" id="model_string_list">
                                 <items>
@@ -102,7 +104,7 @@
                         <child>
                           <object class="GtkButton" id="manage_models_button">
                             <signal name="clicked" handler="manage_models_button_activate"/>
-                            <property name="tooltip-text" translatable="yes">Manage models</property>
+                            <property name="tooltip-text" translatable="yes">Manage Models</property>
                             <child>
                               <object class="AdwButtonContent">
                                 <property name="icon-name">library-symbolic</property>
@@ -113,11 +115,11 @@
                       </object>
                     </property>
                     <child type="end">
-                      <object class="GtkMenuButton">
-                        <property name="primary">True</property>
-                        <property name="icon-name">open-menu-symbolic</property>
-                        <property name="tooltip-text" translatable="yes">Menu</property>
-                        <property name="menu-model">primary_menu</property>
+                      <object class="GtkMenuButton" id="secondary_menu_button">
+                        <property name="primary">False</property>
+                        <property name="icon-name">view-more-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Chat Menu</property>
+                        <property name="menu-model">secondary_menu</property>
                       </object>
                     </child>
                   </object>
@@ -192,7 +194,7 @@
                                   <object class="GtkButton" id="attachment_button">
                                     <property name="vexpand">false</property>
                                     <property name="valign">3</property>
-                                    <property name="tooltip-text" translatable="yes">Attach file</property>
+                                    <property name="tooltip-text" translatable="yes">Attach File</property>
                                     <style>
                                       <class name="circular"/>
                                     </style>
@@ -207,13 +209,13 @@
                                   <object class="GtkBox">
                                     <style>
                                       <class name="card"/>
-                                      <class name="message-input"/>
+                                      <class name="viewa"/>
                                     </style>
                                     <child>
                                       <object class="GtkScrolledWindow">
                                         <property name="max-content-height">300</property>
-                                        <property name="margin-start">15</property>
-                                        <property name="margin-end">15</property>
+                                        <property name="margin-start">12</property>
+                                        <property name="margin-end">12</property>
                                         <property name="propagate-natural-height">true</property>
                                         <style>
                                           <class name="message-input"/>
@@ -222,13 +224,13 @@
                                         </style>
                                         <child>
                                           <object class="GtkTextView" id="message_text_view">
+                                            <style>
+                                              <class name="message_text_view" />
+                                            </style>
                                             <property name="wrap-mode">word</property>
                                             <property name="top-margin">18</property>
                                             <property name="bottom-margin">18</property>
                                             <property name="hexpand">true</property>
-                                            <style>
-                                              <class name="message-input"/>
-                                            </style>
                                           </object>
                                         </child>
                                       </object>
@@ -240,7 +242,7 @@
                                       <signal name="clicked" handler="send_message"/>
                                       <property name="vexpand">false</property>
                                       <property name="valign">3</property>
-                                      <property name="tooltip-text" translatable="yes">Send message</property>
+                                      <property name="tooltip-text" translatable="yes">Send Message</property>
                                       <style>
                                         <class name="suggested-action"/>
                                         <class name="circular"/>
@@ -295,17 +297,24 @@
           <property name="icon-name">preferences-system-symbolic</property>
           <child>
             <object class="AdwPreferencesGroup">
-              <property name="title" translatable="yes">Remote Connection</property>
-              <property name="description" translatable="yes">Manage a remote connection to Ollama</property>
+              <!--<property name="title" translatable="yes">Remote Connection</property>
+              <property name="description" translatable="yes">Manage a remote connection to Ollama</property>-->
               <child>
                 <object class="AdwSwitchRow" id="remote_connection_switch">
-                  <property name="title" translatable="yes">Use remote connection</property>
+                  <property name="title" translatable="yes">Use Remote Connection to Ollama</property>
                 </object>
               </child>
               <child>
                 <object class="AdwEntryRow" id="remote_connection_entry">
                   <signal name="apply" handler="change_remote_url"/>
-                  <property name="title" translatable="yes">URL of remote instance</property>
+                  <property name="title" translatable="yes">URL of Remote Instance</property>
+                  <property name="show-apply-button">true</property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwEntryRow" id="remote_bearer_token_entry">
+                  <signal name="apply" handler="change_remote_bearer_token"/>
+                  <property name="title" translatable="yes">Bearer Token (Optional)</property>
                   <property name="show-apply-button">true</property>
                 </object>
               </child>
@@ -313,11 +322,11 @@
           </child>
           <child>
             <object class="AdwPreferencesGroup">
-              <property name="title" translatable="yes">Behavior</property>
-              <property name="description" translatable="yes">Manage Alpaca's Behavior</property>
+              <!--<property name="title" translatable="yes">Behavior</property>
+              <property name="description" translatable="yes">Manage Alpaca's Behavior</property>-->
               <child>
                 <object class="AdwSwitchRow" id="background_switch">
-                  <property name="title" translatable="yes">Run in background</property>
+                  <property name="title" translatable="yes">Run Alpaca In Background</property>
                 </object>
               </child>
             </object>
@@ -330,8 +339,8 @@
           <property name="icon-name">preferences-other-symbolic</property>
           <child>
             <object class="AdwPreferencesGroup">
-              <property name="title" translatable="yes">Model Tweaks</property>
-              <property name="description" translatable="yes">Manage the behavior of the AI models</property>
+              <!--<property name="title" translatable="yes">Model Tweaks</property>
+              <property name="description" translatable="yes">Manage the behavior of the AI models</property>-->
               <child>
                 <object class="AdwSpinRow" id="temperature_spin">
                   <signal name="changed" handler="model_spin_changed"/>
@@ -368,7 +377,7 @@
                   <signal name="changed" handler="model_spin_changed"/>
                   <property name="name">keep_alive</property>
                   <property name="title" translatable="yes">Keep Alive Time</property>
-                  <property name="subtitle" translatable="yes">Controls how long the model will stay loaded into memory following the request in minutes (default: 5)</property>
+                  <property name="subtitle" translatable="yes">Controls how long the model will stay loaded into memory following the request in minutes (Default: 5)</property>
                   <property name="adjustment">
                     <object class="GtkAdjustment">
                       <property name="lower">-1</property>
@@ -389,7 +398,7 @@
           <child>
             <object class="AdwPreferencesGroup">
               <property name="title" translatable="yes">Ollama Overrides</property>
-              <property name="description" translatable="yes">Manage the arguments used on Ollama, any changes on this page only applies to the integrated instance, the instance will restart if you make changes</property>
+              <property name="description" translatable="yes">Manage the arguments used on Ollama, any changes on this page only applies to the integrated instance, the instance will restart if you make changes.</property>
               <child>
                 <object class="AdwEntryRow" id="override_HSA_OVERRIDE_GFX_VERSION">
                   <signal name="apply" handler="override_changed"/>
@@ -400,6 +409,7 @@
                     <object class="GtkButton">
                       <signal name="clicked" handler="link_button_handler"/>
                       <property name="name">https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides</property>
+                      <property name="tooltip-text">https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides</property>
                       <property name="vexpand">false</property>
                       <property name="valign">3</property>
                       <property name="icon-name">globe-symbolic</property>
@@ -420,6 +430,7 @@
                     <object class="GtkButton">
                       <signal name="clicked" handler="link_button_handler"/>
                       <property name="name">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection</property>
+                      <property name="tooltip-text">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection</property>
                       <property name="vexpand">false</property>
                       <property name="valign">3</property>
                       <property name="icon-name">globe-symbolic</property>
@@ -440,6 +451,7 @@
                     <object class="GtkButton">
                       <signal name="clicked" handler="link_button_handler"/>
                       <property name="name">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection-1</property>
+                      <property name="tooltip-text">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection-1</property>
                       <property name="vexpand">false</property>
                       <property name="valign">3</property>
                       <property name="icon-name">globe-symbolic</property>
@@ -482,7 +494,7 @@
                 <object class="AdwHeaderBar">
                   <property name="title-widget">
                     <object class="AdwWindowTitle">
-                      <property name="title" translatable="yes">Create model</property>
+                      <property name="title" translatable="yes">Create Model</property>
                     </object>
                   </property>
                 </object>
@@ -584,65 +596,133 @@
       <child>
         <object class="AdwToastOverlay" id="manage_models_overlay">
           <child>
-            <object class="AdwToolbarView">
-              <child type="top">
-                <object class="AdwHeaderBar">
-                  <child type="start">
-                    <object class="GtkMenuButton">
-                      <property name="primary">True</property>
-                      <property name="icon-name">list-add-symbolic</property>
-                      <property name="tooltip-text" translatable="yes">Create model</property>
-                      <property name="menu-model">create_model_menu</property>
-                    </object>
-                  </child>
-                  <property name="title-widget">
-                    <object class="AdwWindowTitle">
-                      <property name="title" translatable="yes">Manage models</property>
+            <object class="AdwNavigationView" id="navigation_view_manage_models">
+              <child>
+                <object class="AdwNavigationPage">
+                  <property name="title" translatable="yes">Manage Models</property>
+                  <property name="child">
+                    <object class="AdwToolbarView">
+                      <property name="height-request">140</property>
+                      <child type="top">
+                        <object class="AdwHeaderBar">
+                          <child type="start">
+                            <object class="GtkMenuButton" id="create_model_button">
+                              <property name="primary">True</property>
+                              <property name="icon-name">list-add-symbolic</property>
+                              <property name="tooltip-text" translatable="yes">Create Model</property>
+                              <property name="menu-model">create_model_menu</property>
+                            </object>
+                          </child>
+                          <child type="start">
+                            <object class="GtkToggleButton" id="model_search_button">
+                              <property name="icon-name">edit-find-symbolic</property>
+                              <property name="tooltip-text" translatable="yes">Search Model</property>
+                              <signal name="clicked" handler="model_search_toggle"/>
+                            </object>
+                          </child>
+                        </object>
+                      </child>
+                      <child type="top">
+                        <object class="GtkSearchBar" id="model_searchbar">
+                          <property name="key-capture-widget">AlpacaWindow</property>
+                          <child>
+                            <object class="GtkSearchEntry" id="searchentry">
+                              <signal name="search-changed" handler="model_search_changed"/>
+                              <property name="search-delay">100</property>
+                              <property name="placeholder-text" translatable="true">Search models</property>
+                            </object>
+                          </child>
+                        </object>
+                      </child>
+                      <property name="content">
+                        <object class="GtkScrolledWindow">
+                          <property name="hexpand">true</property>
+                          <property name="vexpand">true</property>
+                          <child>
+                            <object class="GtkBox">
+                              <property name="margin-start">12</property>
+                              <property name="margin-end">12</property>
+                              <property name="margin-top">12</property>
+                              <property name="margin-bottom">12</property>
+                              <property name="orientation">1</property>
+                              <property name="spacing">12</property>
+                              <child>
+                                <object class="GtkListBox" id="pulling_model_list_box">
+                                  <property name="visible">false</property>
+                                  <property name="selection-mode">none</property>
+                                  <style>
+                                    <class name="boxed-list"/>
+                                  </style>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="GtkListBox" id="local_model_list_box">
+                                  <property name="selection-mode">none</property>
+                                  <style>
+                                    <class name="boxed-list"/>
+                                  </style>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="GtkListBox" id="available_model_list_box">
+                                  <property name="selection-mode">single</property>
+                                  <style>
+                                    <class name="boxed-list"/>
+                                  </style>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="AdwStatusPage" id="no_results_page">
+                                  <property name="visible">false</property>
+                                  <property name="vexpand">true</property>
+                                  <property name="icon-name">edit-find-symbolic</property>
+                                  <property name="title" translatable="yes">No Models Found</property>
+                                  <property name="description" translatable="yes">Try a different search</property>
+                                </object>
+                              </child>
+                            </object>
+                          </child>
+                        </object>
+                      </property>
                     </object>
                   </property>
                 </object>
               </child>
               <child>
-                <object class="GtkScrolledWindow">
-                  <property name="hexpand">true</property>
-                  <property name="vexpand">true</property>
-                  <child>
-                    <object class="GtkBox">
-                      <property name="margin-start">12</property>
-                      <property name="margin-end">12</property>
-                      <property name="margin-top">12</property>
-                      <property name="margin-bottom">12</property>
-                      <property name="orientation">1</property>
-                      <property name="spacing">12</property>
-                      <child>
-                        <object class="GtkListBox" id="pulling_model_list_box">
-                          <property name="visible">false</property>
-                          <property name="selection-mode">none</property>
-                          <style>
-                            <class name="boxed-list"/>
-                            <class name="card"/>
-                          </style>
+                <object class="AdwNavigationPage">
+                  <property name="title">MODEL</property>
+                  <property name="tag">model_tags_page</property>
+                  <property name="child">
+                    <object class="AdwToolbarView">
+                      <child type="top">
+                        <object class="AdwHeaderBar">
+                          <child type="start">
+                            <object class="GtkButton" id="model_link_button">
+                              <signal name="clicked" handler="link_button_handler"/>
+                              <property name="icon-name">globe-symbolic</property>
+                            </object>
+                          </child>
                         </object>
                       </child>
-                      <child>
-                        <object class="GtkListBox" id="local_model_list_box">
-                          <property name="selection-mode">none</property>
-                          <style>
-                            <class name="boxed-list"/>
-                            <class name="card"/>
-                          </style>
+                      <property name="content">
+                        <object class="GtkScrolledWindow">
+                          <child>
+                            <object class="GtkListBox" id="model_tag_list_box">
+                              <property name="valign">1</property>
+                              <property name="margin-start">12</property>
+                              <property name="margin-end">12</property>
+                              <property name="margin-top">12</property>
+                              <property name="margin-bottom">12</property>
+                              <property name="selection-mode">single</property>
+                              <style>
+                                <class name="boxed-list"/>
+                              </style>
+                            </object>
+                          </child>
                         </object>
-                      </child>
-                      <child>
-                        <object class="GtkListBox" id="available_model_list_box">
-                          <property name="selection-mode">none</property>
-                          <style>
-                            <class name="boxed-list"/>
-                          </style>
-                        </object>
-                      </child>
+                      </property>
                     </object>
-                  </child>
+                  </property>
                 </object>
               </child>
             </object>
@@ -659,6 +739,15 @@
         <object class="AdwToolbarView">
           <child type="top">
             <object class="AdwHeaderBar">
+              <child type="start">
+                <object class="GtkButton" id="file_preview_open_button">
+                  <signal name="clicked" handler="link_button_handler"/>
+                  <property name="tooltip-text" translatable="yes">Open with Default App</property>
+                  <property name="vexpand">false</property>
+                  <property name="valign">3</property>
+                  <property name="icon-name">share-symbolic</property>
+                </object>
+              </child>
             </object>
           </child>
           <child>
@@ -669,8 +758,16 @@
               <property name="margin-bottom">12</property>
               <property name="margin-start">12</property>
               <property name="margin-end">12</property>
+              <style>
+                <class name="card" />
+                <class name="view" />
+              </style>
               <child>
                 <object class="GtkTextView" id="file_preview_text_view">
+                  <property name="margin-top">12</property>
+                  <property name="margin-bottom">12</property>
+                  <property name="margin-start">12</property>
+                  <property name="margin-end">12</property>
                   <property name="hexpand">true</property>
                   <property name="vexpand">true</property>
                   <property name="editable">false</property>
@@ -790,6 +887,7 @@
                               <property name="vexpand">false</property>
                               <property name="icon-name">folder-download-symbolic</property>
                               <property name="valign">3</property>
+                              <property name="tooltip-text">Pull 'Llama3 (latest)'</property>
                               <style>
                                 <class name="accent"/>
                               </style>
@@ -799,7 +897,7 @@
                       </child>
                       <child>
                         <object class="AdwActionRow">
-                          <property name="title" translatable="no">Gemma</property>
+                          <property name="title" translatable="no">Gemma2</property>
                           <property name="subtitle" translatable="yes">Built by Google DeepMind</property>
                           <child type="suffix">
                             <object class="GtkButton">
@@ -807,6 +905,7 @@
                               <property name="vexpand">false</property>
                               <property name="icon-name">folder-download-symbolic</property>
                               <property name="valign">3</property>
+                              <property name="tooltip-text">Pull 'Gemma 2 (latest)'</property>
                               <style>
                                 <class name="accent"/>
                               </style>
@@ -824,6 +923,7 @@
                               <property name="vexpand">false</property>
                               <property name="icon-name">folder-download-symbolic</property>
                               <property name="valign">3</property>
+                              <property name="tooltip-text">Pull 'Phi3 (latest)'</property>
                               <style>
                                 <class name="accent"/>
                               </style>
@@ -841,6 +941,7 @@
                               <property name="vexpand">false</property>
                               <property name="icon-name">folder-download-symbolic</property>
                               <property name="valign">3</property>
+                              <property name="tooltip-text">Pull 'Llava (latest)'</property>
                               <style>
                                 <class name="accent"/>
                               </style>
@@ -862,9 +963,11 @@
   <menu id="primary_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Clear Chat</attribute>
-        <attribute name="action">app.clear</attribute>
+        <attribute name="label" translatable="yes">Import Chat</attribute>
+        <attribute name="action">app.import_chat</attribute>
       </item>
+    </section>
+    <section>
       <item>
         <attribute name="label" translatable="yes">Preferences</attribute>
         <attribute name="action">app.preferences</attribute>
@@ -879,26 +982,44 @@
       </item>
     </section>
   </menu>
-  <menu id="chats_menu">
+  <menu id="secondary_menu">
+    <item>
+      <attribute name="label" translatable="yes">Rename Chat</attribute>
+      <attribute name="action">app.rename_current_chat</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Export Chat</attribute>
+      <attribute name="action">app.export_current_chat</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Clear Chat</attribute>
+      <attribute name="action">app.clear</attribute>
+    </item>
+  </menu>
+  <menu id="chat_right_click_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Export current chat</attribute>
-        <attribute name="action">app.export_current_chat</attribute>
+        <attribute name="label" translatable="yes">Delete Chat</attribute>
+        <attribute name="action">app.delete_chat</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Import chat</attribute>
-        <attribute name="action">app.import_chat</attribute>
+        <attribute name="label" translatable="yes">Rename Chat</attribute>
+        <attribute name="action">app.rename_chat</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Export Chat</attribute>
+        <attribute name="action">app.export_chat</attribute>
       </item>
     </section>
   </menu>
   <menu id="create_model_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">From existing model</attribute>
+        <attribute name="label" translatable="yes">From Existing Model</attribute>
         <attribute name="action">app.create_model_from_existing</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">From GGUF file (Testing)</attribute>
+        <attribute name="label" translatable="yes">From GGUF File (Experimental)</attribute>
         <attribute name="action">app.create_model_from_file</attribute>
       </item>
     </section>
@@ -917,6 +1038,7 @@
       <suffix>pdf</suffix>
       <suffix>png</suffix>
       <suffix>jpeg</suffix>
+      <suffix>jpg</suffix>
       <suffix>webp</suffix>
       <suffix>gif</suffix>
     </suffixes>
@@ -948,6 +1070,12 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;I</property>
+                <property name="title" translatable="yes">Import chat</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;ctrl&gt;E</property>
                 <property name="title" translatable="yes">Clear chat</property>
               </object>
@@ -961,7 +1089,7 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;ctrl&gt;N</property>
-                <property name="title" translatable="yes">New Chat</property>
+                <property name="title" translatable="yes">New chat</property>
               </object>
             </child>
             <child>

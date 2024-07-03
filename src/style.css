@@ -1,24 +1,6 @@
-.message-input {
-  background-color: #EBEBEB;
+.message_text_view {
+  background-color: rgba(0,0,0,0);
 }
-
-.chat_row box.header {
-  font-size: 14px;
-}
-.chat_row box {
-  margin: 0;
-}
-.chat_row button {
-  opacity: 0;
-  transition: opacity .05s;
-}
-.chat_row:hover button {
-  opacity: 1;
-}
-.message .delete-message-button {
-  opacity: 0;
-  transition: opacity .05s;
-}
-.message:hover .delete-message-button {
-  opacity: 1;
+.chat_image_button {
+  padding: 0;
 }
