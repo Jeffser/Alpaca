@@ -20,7 +20,7 @@ def start():
 def stop():
     global instance
     if instance:
-        instance.kill()
+        instance.terminate()
         instance.wait()
         instance = None
         print("Stopped Alpaca's Ollama instance")
