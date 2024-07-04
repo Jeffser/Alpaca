@@ -743,7 +743,7 @@ Generate a title following these rules:
                 self.local_model_list_box.set_visible(True)
             for model in json.loads(response['text'])['models']:
                 model_row = Adw.ActionRow(
-                    title = "<b>{}</b>".format(model["name"].split(":")[0].capitalize()),
+                    title = "<b>{}</b>".format(model["name"].split(":")[0].replace("-", " ").title()),
                     subtitle = model["name"].split(":")[1]
                 )
                 button = Gtk.Button(
@@ -751,13 +751,13 @@ Generate a title following these rules:
                     vexpand = False,
                     valign = 3,
                     css_classes = ["error", "circular"],
-                    tooltip_text = _("Remove '{} ({})'").format(model["name"].split(":")[0].capitalize(), model["name"].split(":")[1])
+                    tooltip_text = _("Remove '{} ({})'").format(model["name"].split(":")[0].replace('-', ' ').title(), model["name"].split(":")[1])
                 )
                 button.connect("clicked", lambda button=button, model_name=model["name"]: dialogs.delete_model(self, model_name))
                 model_row.add_suffix(button)
                 self.local_model_list_box.append(model_row)
 
-                self.model_string_list.append(f"{model['name'].split(':')[0].capitalize()} ({model['name'].split(':')[1]})")
+                self.model_string_list.append(f"{model['name'].split(':')[0].replace('-', ' ').title()} ({model['name'].split(':')[1]})")
                 self.local_models.append(model["name"])
             self.model_drop_down.set_selected(0)
             self.verify_if_image_can_be_used()
@@ -985,7 +985,7 @@ Generate a title following these rules:
         self.pulling_model_list_box.set_visible(True)
         #self.pulling_model_list_box.connect('row_selected', lambda list_box, row: dialogs.stop_pull_model(self, row.get_name()) if row else None) #It isn't working for some reason
         model_row = Adw.ActionRow(
-            title = "<b>{}</b> <small>{}</small>".format(model.split(":")[0].capitalize(), model.split(":")[1]),
+            title = "<b>{}</b> <small>{}</small>".format(model.split(":")[0].replace("-", " ").title(), model.split(":")[1]),
             name = model
         )
         thread = threading.Thread(target=self.pull_model_process, kwargs={"model": model, "modelfile": None})
@@ -1002,7 +1002,7 @@ Generate a title following these rules:
             vexpand = False,
             valign = 3,
             css_classes = ["error", "circular"],
-            tooltip_text = _("Stop Pulling '{} ({})'").format(model.split(':')[0].capitalize(), model.split(':')[1])
+            tooltip_text = _("Stop Pulling '{} ({})'").format(model.split(':')[0].replace('-', ' ').title(), model.split(':')[1])
         )
         button.connect("clicked", lambda button, model_name=model : dialogs.stop_pull_model(self, model_name))
         model_row.add_suffix(button)
@@ -1041,7 +1041,7 @@ Generate a title following these rules:
         self.available_model_list_box.remove_all()
         for name, model_info in self.available_models.items():
             model = Adw.ActionRow(
-                title = "<b>{}{}</b> <small>by {}</small>".format('🖼 ' if model_info["image"] else '', name.capitalize(), model_info['author']),
+                title = "<b>{}{}</b> <small>by {}</small>".format('🖼 ' if model_info["image"] else '', name.replace("-", " ").title(), model_info['author']),
                 subtitle = model_info["description"], # + ("\n\n<span foreground='white' background='black' line_height='1.5'> Image Recognition </span>" if model_info["image"] else ""),
                 #("<b>Image recognition capable</b>\n" if model_info["image"] else "") +
                 #title = f"<b>{name.capitalize()}</b> <small>by {model_info['author']}</small>",
