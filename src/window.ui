@@ -209,18 +209,13 @@
                                   <object class="GtkBox">
                                     <style>
                                       <class name="card"/>
-                                      <class name="viewa"/>
                                     </style>
                                     <child>
                                       <object class="GtkScrolledWindow">
                                         <property name="max-content-height">150</property>
-                                        <property name="margin-start">10</property>
-                                        <property name="margin-end">10</property>
                                         <property name="propagate-natural-height">true</property>
                                         <style>
-                                          <class name="message-input"/>
-                                          <class name="undershoot-bottom"/>
-                                          <class name="undershoot-top"/>
+                                          <class name="message_input_scroll_window"/>
                                         </style>
                                         <child>
                                           <object class="GtkTextView" id="message_text_view">

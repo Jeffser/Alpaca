@@ -904,7 +904,11 @@ Generate a title following these rules:
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
             self.save_history()
             GLib.idle_add(self.bot_message_button_container.set_visible, True)
-            GLib.idle_add(self.show_notification, _("Message Received"), _("New message from '{}'").format(self.chats["selected_chat"]), Gio.ThemedIcon.new("emblem-ok-symbolic"))
+
+            #Notification
+            first_paragraph = self.bot_message.get_text(self.bot_message.get_start_iter(), self.bot_message.get_end_iter(), False).split("\n")[0]
+            print(self.chats["selected_chat"] + "\n\n" + first_paragraph[:100] + (first_paragraph[100:] and '...'))
+            GLib.idle_add(self.show_notification, self.chats["selected_chat"], first_paragraph[:100] + (first_paragraph[100:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
         else:
             if id not in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
                 GLib.idle_add(self.chat_container.remove, self.loading_spinner)
