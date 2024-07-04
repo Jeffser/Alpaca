@@ -291,11 +291,9 @@
       <child>
         <object class="AdwPreferencesPage" id="general_page">
           <property name="title" translatable="yes">General</property>
-          <property name="icon-name">preferences-system-symbolic</property>
+          <property name="icon-name">settings-symbolic</property>
           <child>
             <object class="AdwPreferencesGroup">
-              <!--<property name="title" translatable="yes">Remote Connection</property>
-              <property name="description" translatable="yes">Manage a remote connection to Ollama</property>-->
               <child>
                 <object class="AdwSwitchRow" id="remote_connection_switch">
                   <property name="title" translatable="yes">Use Remote Connection to Ollama</property>
@@ -319,8 +317,6 @@
           </child>
           <child>
             <object class="AdwPreferencesGroup">
-              <!--<property name="title" translatable="yes">Behavior</property>
-              <property name="description" translatable="yes">Manage Alpaca's Behavior</property>-->
               <child>
                 <object class="AdwSwitchRow" id="background_switch">
                   <property name="title" translatable="yes">Run Alpaca In Background</property>
@@ -328,16 +324,8 @@
               </child>
             </object>
           </child>
-        </object>
-      </child>
-      <child>
-        <object class="AdwPreferencesPage" id="model_page">
-          <property name="title" translatable="yes">Model</property>
-          <property name="icon-name">preferences-other-symbolic</property>
           <child>
             <object class="AdwPreferencesGroup">
-              <!--<property name="title" translatable="yes">Model Tweaks</property>
-              <property name="description" translatable="yes">Manage the behavior of the AI models</property>-->
               <child>
                 <object class="AdwSpinRow" id="temperature_spin">
                   <signal name="changed" handler="model_spin_changed"/>
