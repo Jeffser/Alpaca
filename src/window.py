@@ -896,7 +896,7 @@ Generate a title following these rules:
             self.save_history()
             sys.exit()
         vadjustment = self.chat_window.get_vadjustment()
-        if self.chats["chats"][self.chats["selected_chat"]]["messages"][-1]['role'] == "user" or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
+        if vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if data['done']:
             formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")

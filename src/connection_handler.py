@@ -45,9 +45,11 @@ def simple_delete(connection_url:str, data) -> dict:
 def stream_post(connection_url:str, data, callback:callable) -> dict:
     try:
         response = requests.post(connection_url, headers=get_headers(True), data=data, stream=True)
+        print(response)
         if response.status_code == 200:
             for line in response.iter_lines():
                 if line:
+                    print(line.decode("utf-8"))
                     callback(json.loads(line.decode("utf-8")))
             return {"status": "ok", "status_code": response.status_code}
         else:
