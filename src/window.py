@@ -619,8 +619,7 @@ Generate a title following these rules:
         if images and len(images) > 0:
             image_container = Gtk.Box(
                 orientation=0,
-                spacing=12,
-                visible=False
+                spacing=12
             )
             image_scroller = Gtk.ScrolledWindow(
                 margin_top=10,
@@ -634,7 +633,7 @@ Generate a title following these rules:
                 path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image)
                 raw_data = self.get_content_of_file(path, "image")
                 if raw_data:
-                    image_container.set_visible(True)
+                    #image_container.set_visible(True)
                     image_data = base64.b64decode(raw_data)
                     loader = GdkPixbuf.PixbufLoader.new()
                     loader.write(image_data)
@@ -650,7 +649,31 @@ Generate a title following these rules:
                         tooltip_text=os.path.basename(path)
                     )
                     button.connect('clicked', self.link_button_handler)
-                    image_container.append(button)
+                else:
+                    image_texture = Gtk.Image.new_from_icon_name("image-missing-symbolic")
+                    image_texture.set_icon_size(2)
+                    image_texture.set_vexpand(True)
+                    image_texture.set_pixel_size(120)
+                    image_label = Gtk.Label(
+                        label=_("Missing Image"),
+                    )
+                    image_box = Gtk.Box(
+                        spacing=10,
+                        orientation=1,
+                        margin_top=10,
+                        margin_bottom=10,
+                        margin_start=10,
+                        margin_end=10
+                    )
+                    image_box.append(image_texture)
+                    image_box.append(image_label)
+                    image_box.set_size_request(220, 220)
+                    button = Gtk.Button(
+                        child=image_box,
+                        css_classes=["flat", "chat_image_button"],
+                        tooltip_text=_("Missing image")
+                    )
+                image_container.append(button)
             message_box.append(image_scroller)
 
         if files and len(files) > 0:
