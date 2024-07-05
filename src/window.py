@@ -186,6 +186,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.editing_message:
             self.editing_message["button_container"].set_visible(True)
             self.editing_message["text_view"].set_css_classes(["flat"])
+            self.editing_message["text_view"].set_cursor_visible(False)
             self.editing_message["text_view"].set_editable(False)
             buffer = self.editing_message["text_view"].get_buffer()
             text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).rstrip('\n')
@@ -506,6 +507,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         text_view.set_editable(True)
         text_view.set_css_classes(["view", "editing_message_textview"])
+        text_view.set_cursor_visible(True)
 
         self.editing_message = {"text_view": text_view, "id": id, "button_container": button_container, "footer": footer}
 
@@ -578,6 +580,7 @@ Generate a title following these rules:
             margin_start=12,
             margin_end=12,
             hexpand=True,
+            cursor_visible=False,
             css_classes=["flat"],
         )
         message_buffer = message_text.get_buffer()
