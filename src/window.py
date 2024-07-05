@@ -505,7 +505,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         text_buffer.delete(start_iter, end_iter)
 
         text_view.set_editable(True)
-        text_view.set_css_classes(["view"])
+        text_view.set_css_classes(["view", "editing_message_textview"])
 
         self.editing_message = {"text_view": text_view, "id": id, "button_container": button_container, "footer": footer}
 
