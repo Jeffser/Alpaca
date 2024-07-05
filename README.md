@@ -20,12 +20,9 @@ Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can man
 - Multiple conversations
 - Notifications
 - Import / Export chats
-- Delete messages
-
-## Future features!
+- Delete / Edit messages
 - YouTube recognition (Ask questions about a YouTube video using the transcript)
-- Edit messages
-- Snap Package (maybe)
+- Website recognition (Ask questions about a certain question by parsing the url)
 
 ## Screenies
 Code highlighting             |  Chatting with models        |  Managing models
