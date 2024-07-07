@@ -27,7 +27,7 @@ from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
 from datetime import datetime
-from . import dialogs, local_instance, connection_handler, update_history
+from . import dialogs, local_instance, connection_handler, update_history, available_models_descriptions
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
@@ -1045,7 +1045,7 @@ Generate a title following these rules:
         for name, model_info in self.available_models.items():
             model = Adw.ActionRow(
                 title = "<b>{}{}</b> <small>by {}</small>".format('🖼 ' if model_info["image"] else '', name.replace("-", " ").title(), model_info['author']),
-                subtitle = model_info["description"], # + ("\n\n<span foreground='white' background='black' line_height='1.5'> Image Recognition </span>" if model_info["image"] else ""),
+                subtitle = available_models_descriptions.descriptions[name], # + ("\n\n<span foreground='white' background='black' line_height='1.5'> Image Recognition </span>" if model_info["image"] else ""),
                 #("<b>Image recognition capable</b>\n" if model_info["image"] else "") +
                 #title = f"<b>{name.capitalize()}</b> <small>by {model_info['author']}</small>",
                 #subtitle = f"<small>" + (_("(Image recognition capable)\n") if model_info["image"] else "") + f"{model_info['description']}</small>",

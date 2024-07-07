@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
-"Report-Msgid-Bugs-To: https://github.com/Jeffser/Alpaca\n"
-"POT-Creation-Date: 2024-07-02 18:21-0600\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-07 16:04-0600\n"
 "PO-Revision-Date: 2024-07-06 15:45+0200\n"
 "Last-Translator: Louis Chauvet-Villaret <louischauvet0@gmail.com>\n"
 "Language-Team: French\n"
@@ -66,7 +66,7 @@ msgstr "Reconnaissance de documents en texte brut"
 msgid "Import and export chats"
 msgstr "Importez et exportez les discussions"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:21 src/window.ui:853
+#: data/com.jeffser.Alpaca.metainfo.xml.in:21 src/window.ui:860
 msgid "Disclaimer"
 msgstr "Avertissement"
 
@@ -703,7 +703,7 @@ msgstr "Version stable"
 msgid "This is the first public version of Alpaca"
 msgstr "Première version publique d'Alpaca"
 
-#: src/window.py:58 src/window.py:1053 src/window.py:1115 src/window.ui:41
+#: src/window.py:58 src/window.py:1083 src/window.py:1145 src/window.ui:41
 msgid "New Chat"
 msgstr "Nouvelle discussion"
 
@@ -798,68 +798,68 @@ msgstr "Discussion exportée avec succès"
 msgid "Chat imported successfully"
 msgstr "Discussion importée avec succès"
 
-#: src/window.py:278
+#: src/window.py:280
 msgid "Close"
 msgstr "Fermer"
 
-#: src/window.py:279 src/window.ui:806
+#: src/window.py:281 src/window.ui:813
 msgid "Next"
 msgstr "Suivant"
 
-#: src/window.py:329
+#: src/window.py:332
 msgid "Pulling in the background..."
 msgstr "Téléchargement en arrière-plan..."
 
-#: src/window.py:381
+#: src/window.py:384
 msgid "Stop Creating '{}'"
 msgstr "Arrêter de créer '{}'"
 
-#: src/window.py:418
+#: src/window.py:421
 msgid "image"
 msgstr "Image"
 
-#: src/window.py:588
+#: src/window.py:593
 msgid "Remove Message"
 msgstr "Supprimer le message"
 
-#: src/window.py:593 src/window.py:841
+#: src/window.py:598 src/window.py:869
 msgid "Copy Message"
 msgstr "Copier le message"
 
-#: src/window.py:598
+#: src/window.py:603
 msgid "Edit Message"
 msgstr "Modifier le message"
 
-#: src/window.py:729
+#: src/window.py:661
+msgid "Missing Image"
+msgstr ""
+
+#: src/window.py:677
+msgid "Missing image"
+msgstr ""
+
+#: src/window.py:757
 msgid "Remove '{} ({})'"
 msgstr "Supprimer '{} ({})'"
 
-#: src/window.py:882
-msgid "Message Received"
-msgstr "Message reçu"
-
-#: src/window.py:882
-msgid "New message from '{}'"
-msgstr "Nouveau message depuis '{}'"
-
-#: src/window.py:939
+#: src/window.py:969
 msgid "Task Complete"
 msgstr "Tâche terminée"
 
-#: src/window.py:939
+#: src/window.py:969
 msgid "Model '{}' pulled successfully."
 msgstr "Modèle '{}' téléchargé avec succès."
 
-#: src/window.py:944
+#: src/window.py:974
 msgid "Pull Model Error"
 msgstr "Erreur de téléchargement du modèle"
 
-#: src/window.py:944
+#: src/window.py:974
 msgid "Failed to pull model '{}' due to network error."
 msgstr ""
 "Échec du téléchargement du modèle '{}' à cause d'une erreur de connexion"
 
-#: src/window.py:978
+#: src/window.py:1008
 msgid "Stop Pulling '{} ({})'"
 msgstr "Arrêter de télécharger '{} ({})'"
 
@@ -871,7 +871,7 @@ msgstr "Menu"
 msgid "Toggle Sidebar"
 msgstr "Basculer la barre latérale"
 
-#: src/window.ui:107 src/window.ui:595
+#: src/window.ui:107 src/window.ui:587
 msgid "Manage Models"
 msgstr "Gérer les modèles"
 
@@ -883,29 +883,29 @@ msgstr "Menu des discussions"
 msgid "Attach File"
 msgstr "Ajouter un fichier"
 
-#: src/window.ui:238 src/window.ui:1120
+#: src/window.ui:242 src/window.ui:1127
 msgid "Send Message"
 msgstr "Envoyer le message"
 
-#: src/window.ui:286 src/window.ui:965 src/window.ui:1079
+#: src/window.ui:290 src/window.ui:972 src/window.ui:1086
 msgid "Preferences"
 msgstr "Préférences"
 
-#: src/window.ui:289 src/window.ui:1057
+#: src/window.ui:293 src/window.ui:1064
 msgid "General"
 msgstr "Général"
 
-#: src/window.ui:297
+#: src/window.ui:299
 msgid "Use Remote Connection to Ollama"
 msgstr "Utiliser une connexion à distance d'Ollama"
 
-#: src/window.ui:303
+#: src/window.ui:305
 msgid "URL of Remote Instance"
 msgstr "URL de la connexion distante"
 
 # I don't really know how to translate "Bearer Token"
 # I search for it but they don't translate it
-#: src/window.ui:310
+#: src/window.ui:312
 msgid "Bearer Token (Optional)"
 msgstr "Bearer Token (Optionnel)"
 
@@ -913,15 +913,11 @@ msgstr "Bearer Token (Optionnel)"
 msgid "Run Alpaca In Background"
 msgstr "Exécuter Alpaca en arrière-plan"
 
-#: src/window.ui:331
-msgid "Model"
-msgstr "Modèle"
-
-#: src/window.ui:341
+#: src/window.ui:333
 msgid "Temperature"
 msgstr "Température"
 
-#: src/window.ui:342
+#: src/window.ui:334
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
@@ -929,11 +925,11 @@ msgstr ""
 "La température du modèle. Augmenter la température engendrera des réponses "
 "plus créatives. (défaut : 0.8)"
 
-#: src/window.ui:357
+#: src/window.ui:349
 msgid "Seed"
 msgstr "Graine"
 
-#: src/window.ui:358
+#: src/window.ui:350
 msgid ""
 "Sets the random number seed to use for generation. Setting this to a "
 "specific number will make the model generate the same text for the same "
@@ -943,11 +939,11 @@ msgstr ""
 "spécifique induira une même réponse pour un même prompt. (défaut : 0 "
 "(aléatoire))"
 
-#: src/window.ui:372
+#: src/window.ui:364
 msgid "Keep Alive Time"
 msgstr "Temps en mémoire"
 
-#: src/window.ui:373
+#: src/window.ui:365
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
@@ -955,16 +951,16 @@ msgstr ""
 "Gérer la durée en minutes durant laquelle le modèle reste chargé en mémoire "
 "(défaut : 5)"
 
-#: src/window.ui:389
+#: src/window.ui:381
 msgid "Ollama Instance"
 msgstr "Instance d'Ollama"
 
 # What is override ???
-#: src/window.ui:393
+#: src/window.ui:385
 msgid "Ollama Overrides"
 msgstr "Paramètres d'Ollama"
 
-#: src/window.ui:394
+#: src/window.ui:386
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
@@ -973,31 +969,31 @@ msgstr ""
 "s'appliquent seulement à l'instance intégré. L'instance va redémarrer si "
 "vous effectuez des changements."
 
-#: src/window.ui:477
+#: src/window.ui:469
 msgid "Create"
 msgstr "Créer"
 
-#: src/window.ui:490 src/window.ui:605
+#: src/window.ui:482 src/window.ui:597
 msgid "Create Model"
 msgstr "Créer un modèle"
 
-#: src/window.ui:516
+#: src/window.ui:508
 msgid "Base"
 msgstr "Base"
 
-#: src/window.ui:534
+#: src/window.ui:526
 msgid "Name"
 msgstr "Nom"
 
-#: src/window.ui:540
+#: src/window.ui:532
 msgid "Context"
 msgstr "Contexte"
 
-#: src/window.ui:555
+#: src/window.ui:547
 msgid "Template"
 msgstr "Template"
 
-#: src/window.ui:561
+#: src/window.ui:553
 msgid ""
 "Some models require a specific template. Please visit the model's website "
 "for more information if you're unsure."
@@ -1005,39 +1001,45 @@ msgstr ""
 "Certains modèles requièrent un format spécifique. Merci de visiter le site "
 "du modèle pour plus d'information."
 
-#: src/window.ui:612
+#: src/window.ui:604
 msgid "Search Model"
 msgstr "Chercher un modèle"
 
-#: src/window.ui:672
+#: src/window.ui:664
 msgid "No Models Found"
 msgstr "Aucun modèle trouvé"
 
-#: src/window.ui:673
+#: src/window.ui:665
 msgid "Try a different search"
 msgstr "Essayez une recherche différente"
 
-#: src/window.ui:738
+#: src/window.ui:708
+msgid ""
+"By downloading this model you accept the license agreement available on the "
+"model's website."
+msgstr ""
+
+#: src/window.ui:745
 msgid "Open with Default App"
 msgstr "Ouvrir avec l'application par défaut"
 
-#: src/window.ui:790
+#: src/window.ui:797
 msgid "Previous"
 msgstr "Précédent"
 
-#: src/window.ui:833
+#: src/window.ui:840
 msgid "Welcome to Alpaca"
 msgstr "Bienvenue sur Alpaca"
 
-#: src/window.ui:834
+#: src/window.ui:841
 msgid "Powered by Ollama"
 msgstr "Fonctionne grâce à Ollama"
 
-#: src/window.ui:837
+#: src/window.ui:844
 msgid "Ollama Website"
 msgstr "Site web d'Ollama"
 
-#: src/window.ui:854
+#: src/window.ui:861
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -1048,11 +1050,11 @@ msgstr ""
 "modèle. Merci de faire attention et de relire attentivement le code avant de "
 "l'exécuter."
 
-#: src/window.ui:865
+#: src/window.ui:872
 msgid "Featured Models"
 msgstr "Modèles recommandés"
 
-#: src/window.ui:866
+#: src/window.ui:873
 msgid ""
 "Alpaca works locally on your device, to start chatting you'll need an AI "
 "model, you can either pull models from this list or the 'Manage Models' menu "
@@ -1062,93 +1064,102 @@ msgstr ""
 "vous aurez besoin d'un modèle d'IA, vous pouvez télécharger un modèle soit "
 "depuis cette liste soit depuis le menu 'Gérer les modèles' plus tard."
 
-#: src/window.ui:876
+#: src/window.ui:883
 msgid "Built by Meta"
 msgstr "Développé par Meta"
 
-#: src/window.ui:894
+#: src/window.ui:901
 msgid "Built by Google DeepMind"
 msgstr "Développé par Google DeepMind"
 
-#: src/window.ui:912
+#: src/window.ui:919
 msgid "Built by Microsoft"
 msgstr "Développé par Microsoft"
 
-#: src/window.ui:930
+#: src/window.ui:937
 msgid "Multimodal AI with image recognition"
 msgstr "IA multimodale avec reconnaissance d'image"
 
-#: src/window.ui:959
+#: src/window.ui:966
 msgid "Import Chat"
 msgstr "Importer une discussion"
 
-#: src/window.ui:969
+#: src/window.ui:976
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis claviers"
 
-#: src/window.ui:973
+#: src/window.ui:980
 msgid "About Alpaca"
 msgstr "À propos d'Alpaca"
 
-#: src/window.ui:980 src/window.ui:999
+#: src/window.ui:987 src/window.ui:1006
 msgid "Rename Chat"
 msgstr "Renommer la discussion"
 
-#: src/window.ui:984 src/window.ui:1003
+#: src/window.ui:991 src/window.ui:1010
 msgid "Export Chat"
 msgstr "Exporter la discussion"
 
-#: src/window.ui:988
+#: src/window.ui:995
 msgid "Clear Chat"
 msgstr "Supprimer la discussion"
 
-#: src/window.ui:995
+#: src/window.ui:1002
 msgid "Delete Chat"
 msgstr "Supprimer la discussion"
 
-#: src/window.ui:1011
+#: src/window.ui:1018
 msgid "From Existing Model"
 msgstr "Depuis un modèle existant"
 
-#: src/window.ui:1015
+#: src/window.ui:1022
 msgid "From GGUF File (Experimental)"
 msgstr "Depuis un fichier GGUF (Experimental)"
 
-#: src/window.ui:1061
+#: src/window.ui:1068
 msgid "Close application"
 msgstr "Fermer l'application"
 
-#: src/window.ui:1067
+#: src/window.ui:1074
 msgid "Import chat"
 msgstr "Importer une discussion"
 
-#: src/window.ui:1073
+#: src/window.ui:1080
 msgid "Clear chat"
 msgstr "Supprimer la discussion"
 
-#: src/window.ui:1085
+#: src/window.ui:1092
 msgid "New chat"
 msgstr "Nouvelle discussion"
 
-#: src/window.ui:1091
+#: src/window.ui:1098
 msgid "Show shortcuts window"
 msgstr "Voir les raccourcis clavier"
 
-#: src/window.ui:1098
+#: src/window.ui:1105
 msgid "Editor"
 msgstr "Éditeur"
 
-#: src/window.ui:1102
+#: src/window.ui:1109
 msgid "Copy"
 msgstr "Copier"
 
-#: src/window.ui:1108
+#: src/window.ui:1115
 msgid "Paste"
 msgstr "Coller"
 
-#: src/window.ui:1114
+#: src/window.ui:1121
 msgid "Insert new line"
 msgstr "Ajouter une ligne"
+
+#~ msgid "Message Received"
+#~ msgstr "Message reçu"
+
+#~ msgid "New message from '{}'"
+#~ msgstr "Nouveau message depuis '{}'"
+
+#~ msgid "Model"
+#~ msgstr "Modèle"
 
 #~ msgid "Send message"
 #~ msgstr "Envoyer le message"
