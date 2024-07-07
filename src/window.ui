@@ -107,7 +107,7 @@
                             <property name="tooltip-text" translatable="yes">Manage Models</property>
                             <child>
                               <object class="AdwButtonContent">
-                                <property name="icon-name">library-symbolic</property>
+                                <property name="icon-name">folder-download-symbolic</property>
                               </object>
                             </child>
                           </object>
@@ -691,17 +691,32 @@
                       </child>
                       <property name="content">
                         <object class="GtkScrolledWindow">
+                          <property name="vexpand">true</property>
                           <child>
-                            <object class="GtkListBox" id="model_tag_list_box">
-                              <property name="valign">1</property>
+                            <object class="GtkBox">
+                              <property name="orientation">1</property>
+                              <property name="spacing">12</property>
                               <property name="margin-start">12</property>
                               <property name="margin-end">12</property>
                               <property name="margin-top">12</property>
                               <property name="margin-bottom">12</property>
-                              <property name="selection-mode">single</property>
-                              <style>
-                                <class name="boxed-list"/>
-                              </style>
+                              <child>
+                                <object class="GtkLabel">
+                                  <property name="justify">2</property>
+                                  <property name="wrap">true</property>
+                                  <property name="wrap-mode">0</property>
+                                  <property name="label" translatable="yes">By downloading this model you accept the license agreement available on the model's website.</property>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="GtkListBox" id="model_tag_list_box">
+                                  <property name="valign">1</property>
+                                  <property name="selection-mode">single</property>
+                                  <style>
+                                    <class name="boxed-list"/>
+                                  </style>
+                                </object>
+                              </child>
                             </object>
                           </child>
                         </object>
