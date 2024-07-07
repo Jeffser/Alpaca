@@ -11,6 +11,6 @@ msgmerge --no-fuzzy-matching -U po/fr.po po/alpaca.pot
 echo "Updating Brazilian Portuguese"
 msgmerge --no-fuzzy-matching -U po/pt_BR.po po/alpaca.pot
 echo "Updating Norwegian"
-msgmerge --no-fuzzy-matching -U po/nb.po po/alpaca.pot
+msgmerge --no-fuzzy-matching -U po/nb_NO.po po/alpaca.pot
 echo "Updating Bengali"
 msgmerge --no-fuzzy-matching -U po/bn.po po/alpaca.pot
