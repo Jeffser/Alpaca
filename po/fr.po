@@ -13,15 +13,15 @@ msgstr ""
 "Project-Id-Version: 0.8.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-02 18:21-0600\n"
-"PO-Revision-Date: 2024-06-25 14:19+0200\n"
-"Last-Translator: Louis Chauvet <louischauvet0@gmail.com>\n"
+"PO-Revision-Date: 2024-07-06 15:45+0200\n"
+"Last-Translator: Louis Chauvet-Villaret <louischauvet0@gmail.com>\n"
 "Language-Team: French\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Gtranslator 46.1\n"
 
 #: data/com.jeffser.Alpaca.desktop.in:3
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
@@ -111,6 +111,8 @@ msgid ""
 "Removed DOCX compatibility temporally due to error with python-lxml "
 "dependency"
 msgstr ""
+"Modification : Suppression de la compatibilité des documents .docx à cause "
+"d'une erreur avec la dépendance python-lxml"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:77
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
@@ -751,11 +753,11 @@ msgstr ""
 
 #: src/window.py:137
 msgid "This video does not have any transcriptions"
-msgstr ""
+msgstr "Cette vidéo n'a aucune transcription"
 
 #: src/window.py:138
 msgid "This video is not available"
-msgstr ""
+msgstr "Cette vidéo n'est pas disponible"
 
 #: src/window.py:141
 msgid "Please select a model before chatting"
@@ -782,9 +784,8 @@ msgid "Message copied to the clipboard"
 msgstr "Message copié dans le presse-papier"
 
 #: src/window.py:147
-#, fuzzy
 msgid "Message edited successfully"
-msgstr "Modèle supprimé avec succès"
+msgstr "Message édité avec succès"
 
 #: src/window.py:150
 msgid "Model deleted successfully"
@@ -816,40 +817,35 @@ msgstr "Téléchargement en arrière-plan..."
 
 #: src/window.py:381
 msgid "Stop Creating '{}'"
-msgstr ""
+msgstr "Arrêter de créer '{}'"
 
 #: src/window.py:418
-#, fuzzy
 msgid "image"
 msgstr "Image"
 
 #: src/window.py:588
-#, fuzzy
 msgid "Remove Message"
-msgstr "Envoyer le message"
+msgstr "Supprimer le message"
 
 #: src/window.py:593 src/window.py:841
-#, fuzzy
 msgid "Copy Message"
-msgstr "Envoyer le message"
+msgstr "Copier le message"
 
 #: src/window.py:598
-#, fuzzy
 msgid "Edit Message"
-msgstr "Envoyer le message"
+msgstr "Modifier le message"
 
 #: src/window.py:729
 msgid "Remove '{} ({})'"
-msgstr ""
+msgstr "Supprimer '{} ({})'"
 
 #: src/window.py:882
 msgid "Message Received"
-msgstr ""
+msgstr "Message reçu"
 
 #: src/window.py:882
-#, fuzzy
 msgid "New message from '{}'"
-msgstr "Changement : nouveau design de la barre de message"
+msgstr "Nouveau message depuis '{}'"
 
 #: src/window.py:939
 msgid "Task Complete"
@@ -870,7 +866,7 @@ msgstr ""
 
 #: src/window.py:978
 msgid "Stop Pulling '{} ({})'"
-msgstr ""
+msgstr "Arrêter de télécharger '{} ({})'"
 
 #: src/window.ui:52
 msgid "Menu"
@@ -881,17 +877,14 @@ msgid "Toggle Sidebar"
 msgstr "Basculer la barre latérale"
 
 #: src/window.ui:107 src/window.ui:595
-#, fuzzy
 msgid "Manage Models"
-msgstr "Gestion des modèles"
+msgstr "Gérer les modèles"
 
 #: src/window.ui:121
-#, fuzzy
 msgid "Chat Menu"
-msgstr "Menu"
+msgstr "Menu des discussions"
 
 #: src/window.ui:197
-#, fuzzy
 msgid "Attach File"
 msgstr "Ajouter un fichier"
 
@@ -908,23 +901,22 @@ msgid "General"
 msgstr "Général"
 
 #: src/window.ui:297
-#, fuzzy
 msgid "Use Remote Connection to Ollama"
-msgstr "Gérer une connexion à distance d'Ollama"
+msgstr "Utiliser une connexion à distance d'Ollama"
 
 #: src/window.ui:303
-#, fuzzy
 msgid "URL of Remote Instance"
-msgstr "URL de l'instance distante"
+msgstr "URL de la connexion distante"
 
+# I don't really know how to translate "Bearer Token"
+# I search for it but they don't translate it
 #: src/window.ui:310
 msgid "Bearer Token (Optional)"
-msgstr ""
+msgstr "Bearer Token (Optionnel)"
 
 #: src/window.ui:322
-#, fuzzy
 msgid "Run Alpaca In Background"
-msgstr "Exécution en arrière-plan"
+msgstr "Exécuter Alpaca en arrière-plan"
 
 #: src/window.ui:331
 msgid "Model"
@@ -961,13 +953,12 @@ msgid "Keep Alive Time"
 msgstr "Temps en mémoire"
 
 #: src/window.ui:373
-#, fuzzy
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
 msgstr ""
-"Contrôlez combien de temps le modèle va rester chargé en mémoire suivant le "
-"temps demandé en minutes. (défaut : 5)"
+"Gérer la durée en minutes durant laquelle le modèle reste chargé en mémoire "
+"(défaut : 5)"
 
 #: src/window.ui:389
 msgid "Ollama Instance"
@@ -979,12 +970,11 @@ msgid "Ollama Overrides"
 msgstr "Paramètres d'Ollama"
 
 #: src/window.ui:394
-#, fuzzy
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
 msgstr ""
-"Gérer les arguments utilisés par Ollama. Tous les changements sur cette page "
+"Gérer les arguments d'Ollama. Tous les changements sur cette page "
 "s'appliquent seulement à l'instance intégré. L'instance va redémarrer si "
 "vous effectuez des changements."
 
@@ -993,7 +983,6 @@ msgid "Create"
 msgstr "Créer"
 
 #: src/window.ui:490 src/window.ui:605
-#, fuzzy
 msgid "Create Model"
 msgstr "Créer un modèle"
 
@@ -1022,21 +1011,20 @@ msgstr ""
 "du modèle pour plus d'information."
 
 #: src/window.ui:612
-#, fuzzy
 msgid "Search Model"
-msgstr "Modèles recommandés"
+msgstr "Chercher un modèle"
 
 #: src/window.ui:672
 msgid "No Models Found"
-msgstr ""
+msgstr "Aucun modèle trouvé"
 
 #: src/window.ui:673
 msgid "Try a different search"
-msgstr ""
+msgstr "Essayez une recherche différente"
 
 #: src/window.ui:738
 msgid "Open with Default App"
-msgstr ""
+msgstr "Ouvrir avec l'application par défaut"
 
 #: src/window.ui:790
 msgid "Previous"
@@ -1096,7 +1084,6 @@ msgid "Multimodal AI with image recognition"
 msgstr "IA multimodale avec reconnaissance d'image"
 
 #: src/window.ui:959
-#, fuzzy
 msgid "Import Chat"
 msgstr "Importer une discussion"
 
@@ -1109,33 +1096,28 @@ msgid "About Alpaca"
 msgstr "À propos d'Alpaca"
 
 #: src/window.ui:980 src/window.ui:999
-#, fuzzy
 msgid "Rename Chat"
-msgstr "Supprimer la discussion"
+msgstr "Renommer la discussion"
 
 #: src/window.ui:984 src/window.ui:1003
-#, fuzzy
 msgid "Export Chat"
-msgstr "Importer une discussion"
+msgstr "Exporter la discussion"
 
 #: src/window.ui:988
 msgid "Clear Chat"
 msgstr "Supprimer la discussion"
 
 #: src/window.ui:995
-#, fuzzy
 msgid "Delete Chat"
 msgstr "Supprimer la discussion"
 
 #: src/window.ui:1011
-#, fuzzy
 msgid "From Existing Model"
 msgstr "Depuis un modèle existant"
 
 #: src/window.ui:1015
-#, fuzzy
 msgid "From GGUF File (Experimental)"
-msgstr "Depuis un fichier GGUF (Instable)"
+msgstr "Depuis un fichier GGUF (Experimental)"
 
 #: src/window.ui:1061
 msgid "Close application"
