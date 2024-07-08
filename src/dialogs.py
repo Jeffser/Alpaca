@@ -14,7 +14,7 @@ def clear_chat_response(self, dialog, task):
 
 def clear_chat(self):
     if self.bot_message is not None:
-        self.show_toast("info", 1, self.main_overlay)
+        self.show_toast(_("Chat cannot be cleared while receiving a message"), self.main_overlay)
         return
     dialog = Adw.AlertDialog(
         heading=_("Clear Chat?"),
@@ -235,7 +235,7 @@ def create_model_from_file_response(self, file_dialog, result):
     try:
         self.create_model(file.get_path(), True)
     except Exception as e:
-        self.show_toast("error", 5, self.main_overlay) ##TODO NEW ERROR MESSAGE
+        self.show_toast(_("An error occurred while creating the model"), self.main_overlay)
 
 def create_model_from_file(self):
     file_dialog = Gtk.FileDialog(default_filter=self.file_filter_gguf)
@@ -255,7 +255,7 @@ def attach_file_response(self, file_dialog, result):
     file_type = next(key for key, value in file_types.items() if extension in value)
     if not file_type: return
     if file_type == 'image' and not self.verify_if_image_can_be_used():
-        self.show_toast('error', 8, self.main_overlay)
+        self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
         return
     self.attach_file(file.get_path(), file_type)
 
@@ -291,7 +291,7 @@ def youtube_caption(self, video_url):
     video_title = yt.title
     captions = yt.captions
     if len(captions) == 0:
-        self.show_toast("error", 9, self.main_overlay)
+        self.show_toast(_("This video does not have any transcriptions"), self.main_overlay)
         return
     caption_list = Gtk.StringList()
     for caption in captions: caption_list.append("{} | {}".format(caption.name, caption.code))

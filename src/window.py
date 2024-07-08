@@ -123,37 +123,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     remote_connection_entry = Gtk.Template.Child()
     remote_bearer_token_entry = Gtk.Template.Child()
 
-    toast_messages = {
-        "error": [
-            _("An error occurred"),
-            _("Failed to connect to server"),
-            _("Could not list local models"),
-            _("Could not delete model"),
-            _("Could not pull model"),
-            _("Cannot open image"),
-            _("Cannot delete chat because it's the only one left"),
-            _("There was an error with the local Ollama instance, so it has been reset"),
-            _("Image recognition is only available on specific models"),
-            _("This video does not have any transcriptions"),
-            _("This video is not available")
-        ],
-        "info": [
-            _("Please select a model before chatting"),
-            _("Chat cannot be cleared while receiving a message"),
-            _("That tag is already being pulled"),
-            _("That tag has been pulled already"),
-            _("Code copied to the clipboard"),
-            _("Message copied to the clipboard"),
-            _("Message edited successfully")
-        ],
-        "good": [
-            _("Model deleted successfully"),
-            _("Model pulled successfully"),
-            _("Chat exported successfully"),
-            _("Chat imported successfully")
-        ]
-    }
-
     style_manager = Adw.StyleManager()
 
     @Gtk.Template.Callback()
@@ -195,7 +164,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.chats["chats"][self.chats["selected_chat"]]["messages"][self.editing_message["id"]]["content"] = text
             self.editing_message = None
             self.save_history()
-            self.show_toast("info", 6, self.main_overlay)
+            self.show_toast(_("Message edited successfully"), self.main_overlay)
 
         if self.bot_message or self.get_focus() not in (self.message_text_view, self.send_button): return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
@@ -210,7 +179,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         current_model = self.model_drop_down.get_selected_item().get_string()
         current_model = current_model.replace(' (', ':')[:-1].lower()
         if current_model is None:
-            self.show_toast("info", 0, self.main_overlay)
+            self.show_toast(_("Please select a model before chatting"), self.main_overlay)
             return
         id = self.generate_uuid()
 
@@ -311,7 +280,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             connection_handler.url = self.remote_url
             if self.verify_connection() == False:
                 entry.set_css_classes(["error"])
-                self.show_toast("error", 1, self.preferences_dialog)
+                self.show_toast(_("Failed to connect to server"), self.preferences_dialog)
 
     @Gtk.Template.Callback()
     def change_remote_bearer_token(self, entry):
@@ -322,7 +291,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             connection_handler.url = self.remote_url
             if self.verify_connection() == False:
                 entry.set_css_classes(["error"])
-                self.show_toast("error", 1, self.preferences_dialog)
+                self.show_toast(_("Failed to connect to server"), self.preferences_dialog)
 
     @Gtk.Template.Callback()
     def pull_featured_model(self, button):
@@ -460,12 +429,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.create_model_dialog.present(self)
 
 
-    def show_toast(self, message_type:str, message_id:int, overlay):
-        if message_type not in self.toast_messages or message_id > len(self.toast_messages[message_type] or message_id < 0):
-            message_type = "error"
-            message_id = 0
+    def show_toast(self, message:str, overlay):
         toast = Adw.Toast(
-            title=self.toast_messages[message_type][message_id],
+            title=message,
             timeout=2
         )
         overlay.add_toast(toast)
@@ -489,7 +455,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         id = message_element.get_name()
         clipboard = Gdk.Display().get_default().get_clipboard()
         clipboard.set(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["content"])
-        self.show_toast("info", 5, self.main_overlay)
+        self.show_toast(_("Message copied to the clipboard"), self.main_overlay)
 
     def edit_message(self, message_element, text_view, button_container):
         if self.editing_message: self.send_message()
@@ -892,7 +858,7 @@ Generate a title following these rules:
         end = text_buffer.get_end_iter()
         text = text_buffer.get_text(start, end, False)
         clipboard.set(text)
-        self.show_toast("info", 4, self.main_overlay)
+        self.show_toast(_("Code copied to the clipboard"), self.main_overlay)
 
     def update_bot_message(self, data, id):
         if self.bot_message is None:
@@ -980,10 +946,7 @@ Generate a title following these rules:
             GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
     def pull_model(self, model):
-        if model in list(self.pulling_models.keys()):
-            return
-        if model in self.local_models:
-            self.show_toast("info", 3, self.manage_models_overlay)
+        if model in list(self.pulling_models.keys()) or model in self.local_models:
             return
         self.pulling_model_list_box.set_visible(True)
         #self.pulling_model_list_box.connect('row_selected', lambda list_box, row: dialogs.stop_pull_model(self, row.get_name()) if row else None) #It isn't working for some reason
@@ -1153,7 +1116,7 @@ Generate a title following these rules:
         response = connection_handler.simple_delete(f"{connection_handler.url}/api/delete", data={"name": model_name})
         self.update_list_local_models()
         if response['status'] == 'ok':
-            self.show_toast("good", 0, self.manage_models_overlay)
+            self.show_toast(_("Model deleted successfully"), self.manage_models_overlay)
         else:
             self.manage_models_dialog.close()
             self.connection_error()
@@ -1227,7 +1190,7 @@ Generate a title following these rules:
             dialogs.reconnect_remote(self, connection_handler.url)
         else:
             local_instance.reset()
-            self.show_toast("error", 7, self.main_overlay)
+            self.show_toast(_("There was an error with the local Ollama instance, so it has been reset"), self.main_overlay)
 
     def connection_switched(self):
         new_value = self.remote_connection_switch.get_active()
@@ -1246,7 +1209,7 @@ Generate a title following these rules:
 
     def on_replace_contents(self, file, result):
         file.replace_contents_finish(result)
-        self.show_toast("good", 2, self.main_overlay)
+        self.show_toast(_("Chat exported successfully"), self.main_overlay)
 
     def on_export_chat(self, file_dialog, result, chat_name):
         file = file_dialog.save_finish(result)
@@ -1314,7 +1277,7 @@ Generate a title following these rules:
 
         self.update_chat_list()
         self.save_history()
-        self.show_toast("good", 3, self.main_overlay)
+        self.show_toast(_("Chat imported successfully"), self.main_overlay)
 
     def import_chat(self):
         file_dialog = Gtk.FileDialog(default_filter=self.file_filter_tar)
@@ -1344,7 +1307,7 @@ Generate a title following these rules:
                         image_data = output.getvalue()
                     return base64.b64encode(image_data).decode("utf-8")
             except Exception as e:
-                self.show_toast("error", 5, self.main_overlay)
+                self.show_toast(_("Cannot open image"), self.main_overlay)
         elif file_type == 'plain_text' or file_type == 'youtube' or file_type == 'website':
             with open(file_path, 'r') as f:
                 return f.read()
@@ -1421,7 +1384,7 @@ Generate a title following these rules:
                 try:
                     dialogs.youtube_caption(self, text)
                 except Exception as e:
-                    self.show_toast("error", 10, self.main_overlay)
+                    self.show_toast(_("This video is not available"), self.main_overlay)
             elif url_regex.match(text):
                 dialogs.attach_website(self, text)
         except Exception as e: 'huh'
@@ -1438,7 +1401,7 @@ Generate a title following these rules:
                     pixbuf.savev('/tmp/alpaca/images/{}'.format(image_name), "png", [], [])
                     self.attach_file('/tmp/alpaca/images/{}'.format(image_name), 'image')
                 else:
-                    self.show_toast('error', 8, self.main_overlay)
+                    self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
         except Exception as e: 'huh'
 
     def on_clipboard_paste(self, textview):
