@@ -1044,11 +1044,8 @@ Generate a title following these rules:
         self.available_model_list_box.remove_all()
         for name, model_info in self.available_models.items():
             model = Adw.ActionRow(
-                title = "<b>{}{}</b> <small>by {}</small>".format('🖼 ' if model_info["image"] else '', name.replace("-", " ").title(), model_info['author']),
-                subtitle = available_models_descriptions.descriptions[name], # + ("\n\n<span foreground='white' background='black' line_height='1.5'> Image Recognition </span>" if model_info["image"] else ""),
-                #("<b>Image recognition capable</b>\n" if model_info["image"] else "") +
-                #title = f"<b>{name.capitalize()}</b> <small>by {model_info['author']}</small>",
-                #subtitle = f"<small>" + (_("(Image recognition capable)\n") if model_info["image"] else "") + f"{model_info['description']}</small>",
+                title = "<b>{}</b> <small>by {}</small>".format(name.replace("-", " ").title(), model_info['author']),
+                subtitle = available_models_descriptions.descriptions[name] + ("\n\n<b>{}</b>".format(_("Image Recognition")) if model_info['image'] else ""),
                 name = name
             )
             if model_info["image"]:
