@@ -152,10 +152,10 @@ def delete_model(self, model_name):
 
 def remove_attached_file_response(self, dialog, task, name):
     if dialog.choose_finish(task) == 'remove':
+        self.file_preview_dialog.close()
         self.remove_attached_file(name)
 
 def remove_attached_file(self, name):
-    self.file_preview_dialog.close()
     dialog = Adw.AlertDialog(
         heading=_("Remove Attachment?"),
         body=_("Are you sure you want to remove attachment?"),

@@ -84,6 +84,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     bot_message_button_container : Gtk.TextView = None
     file_preview_dialog = Gtk.Template.Child()
     file_preview_text_view = Gtk.Template.Child()
+    file_preview_image = Gtk.Template.Child()
     welcome_dialog = Gtk.Template.Child()
     welcome_carousel = Gtk.Template.Child()
     welcome_previous_button = Gtk.Template.Child()
@@ -498,17 +499,33 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             self.file_preview_remove_button.set_visible(False)
         if content:
-            buffer = self.file_preview_text_view.get_buffer()
-            buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-            buffer.insert(buffer.get_start_iter(), content, len(content))
-            if file_type == 'youtube':
-                self.file_preview_dialog.set_title(content.split('\n')[0])
-                self.file_preview_open_button.set_name(content.split('\n')[2])
-            elif file_type == 'website':
-                self.file_preview_open_button.set_name(content.split('\n')[0])
-            else:
+            if file_type == 'image':
+                self.file_preview_image.set_visible(True)
+                self.file_preview_text_view.set_visible(False)
+                image_data = base64.b64decode(content)
+                loader = GdkPixbuf.PixbufLoader.new()
+                loader.write(image_data)
+                loader.close()
+                pixbuf = loader.get_pixbuf()
+                texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+                self.file_preview_image.set_from_paintable(texture)
+                self.file_preview_image.set_size_request(240, 240)
                 self.file_preview_dialog.set_title(os.path.basename(file_path))
                 self.file_preview_open_button.set_name(file_path)
+            else:
+                self.file_preview_image.set_visible(False)
+                self.file_preview_text_view.set_visible(True)
+                buffer = self.file_preview_text_view.get_buffer()
+                buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+                buffer.insert(buffer.get_start_iter(), content, len(content))
+                if file_type == 'youtube':
+                    self.file_preview_dialog.set_title(content.split('\n')[0])
+                    self.file_preview_open_button.set_name(content.split('\n')[2])
+                elif file_type == 'website':
+                    self.file_preview_open_button.set_name(content.split('\n')[0])
+                else:
+                    self.file_preview_dialog.set_title(os.path.basename(file_path))
+                    self.file_preview_open_button.set_name(file_path)
             self.file_preview_dialog.present(self)
 
     def convert_history_to_ollama(self):

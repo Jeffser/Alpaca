@@ -773,14 +773,24 @@
                 <class name="view"/>
               </style>
               <child>
-                <object class="GtkTextView" id="file_preview_text_view">
-                  <property name="margin-top">12</property>
-                  <property name="margin-bottom">12</property>
-                  <property name="margin-start">12</property>
-                  <property name="margin-end">12</property>
-                  <property name="hexpand">true</property>
-                  <property name="vexpand">true</property>
-                  <property name="editable">false</property>
+                <object class="GtkBox">
+                  <child>
+                    <object class="GtkTextView" id="file_preview_text_view">
+                      <property name="margin-top">12</property>
+                      <property name="margin-bottom">12</property>
+                      <property name="margin-start">12</property>
+                      <property name="margin-end">12</property>
+                      <property name="hexpand">true</property>
+                      <property name="vexpand">true</property>
+                      <property name="editable">false</property>
+                    </object>
+                  </child>
+                  <child>
+                    <object class="GtkImage" id="file_preview_image">
+                      <property name="hexpand">true</property>
+                      <property name="vexpand">true</property>
+                    </object>
+                  </child>
                 </object>
               </child>
             </object>
