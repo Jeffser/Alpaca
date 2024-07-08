@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-07 20:43-0600\n"
+"POT-Creation-Date: 2024-07-07 20:45-0600\n"
 "PO-Revision-Date: 2024-07-06 15:45+0200\n"
 "Last-Translator: Louis Chauvet-Villaret <louischauvet0@gmail.com>\n"
 "Language-Team: French\n"
@@ -703,7 +703,8 @@ msgstr "Version stable"
 msgid "This is the first public version of Alpaca"
 msgstr "Première version publique d'Alpaca"
 
-#: src/window.py:58 src/window.py:1042 src/window.py:1104 src/window.ui:41
+#: src/window.py:58 src/window.py:1042 src/window.py:1104 src/dialogs.py:84
+#: src/window.ui:41
 msgid "New Chat"
 msgstr "Nouvelle discussion"
 
@@ -822,299 +823,10 @@ msgstr "Impossible d'ouvrir l'image"
 msgid "This video is not available"
 msgstr "Cette vidéo n'est pas disponible"
 
-#: src/window.py:1403
+#: src/window.py:1403 src/dialogs.py:258
 msgid "Image recognition is only available on specific models"
 msgstr ""
 "La reconnaissance d'image est seulement disponible sur certains modèles"
-
-#: src/window.ui:52
-msgid "Menu"
-msgstr "Menu"
-
-#: src/window.ui:82
-msgid "Toggle Sidebar"
-msgstr "Basculer la barre latérale"
-
-#: src/window.ui:107 src/window.ui:587
-msgid "Manage Models"
-msgstr "Gérer les modèles"
-
-#: src/window.ui:121
-msgid "Chat Menu"
-msgstr "Menu des discussions"
-
-#: src/window.ui:197
-msgid "Attach File"
-msgstr "Ajouter un fichier"
-
-#: src/window.ui:242 src/window.ui:1127
-msgid "Send Message"
-msgstr "Envoyer le message"
-
-#: src/window.ui:290 src/window.ui:972 src/window.ui:1086
-msgid "Preferences"
-msgstr "Préférences"
-
-#: src/window.ui:293 src/window.ui:1064
-msgid "General"
-msgstr "Général"
-
-#: src/window.ui:299
-msgid "Use Remote Connection to Ollama"
-msgstr "Utiliser une connexion à distance d'Ollama"
-
-#: src/window.ui:305
-msgid "URL of Remote Instance"
-msgstr "URL de la connexion distante"
-
-# I don't really know how to translate "Bearer Token"
-# I search for it but they don't translate it
-#: src/window.ui:312
-msgid "Bearer Token (Optional)"
-msgstr "Bearer Token (Optionnel)"
-
-#: src/window.ui:322
-msgid "Run Alpaca In Background"
-msgstr "Exécuter Alpaca en arrière-plan"
-
-#: src/window.ui:333
-msgid "Temperature"
-msgstr "Température"
-
-#: src/window.ui:334
-msgid ""
-"The temperature of the model. Increasing the temperature will make the model "
-"answer more creatively. (Default: 0.8)"
-msgstr ""
-"La température du modèle. Augmenter la température engendrera des réponses "
-"plus créatives. (défaut : 0.8)"
-
-#: src/window.ui:349
-msgid "Seed"
-msgstr "Graine"
-
-#: src/window.ui:350
-msgid ""
-"Sets the random number seed to use for generation. Setting this to a "
-"specific number will make the model generate the same text for the same "
-"prompt. (Default: 0 (random))"
-msgstr ""
-"Choisissez le nombre aléatoire utilisé pour la génération. Mettre une valeur "
-"spécifique induira une même réponse pour un même prompt. (défaut : 0 "
-"(aléatoire))"
-
-#: src/window.ui:364
-msgid "Keep Alive Time"
-msgstr "Temps en mémoire"
-
-#: src/window.ui:365
-msgid ""
-"Controls how long the model will stay loaded into memory following the "
-"request in minutes (Default: 5)"
-msgstr ""
-"Gérer la durée en minutes durant laquelle le modèle reste chargé en mémoire "
-"(défaut : 5)"
-
-#: src/window.ui:381
-msgid "Ollama Instance"
-msgstr "Instance d'Ollama"
-
-# What is override ???
-#: src/window.ui:385
-msgid "Ollama Overrides"
-msgstr "Paramètres d'Ollama"
-
-#: src/window.ui:386
-msgid ""
-"Manage the arguments used on Ollama, any changes on this page only applies "
-"to the integrated instance, the instance will restart if you make changes."
-msgstr ""
-"Gérer les arguments d'Ollama. Tous les changements sur cette page "
-"s'appliquent seulement à l'instance intégré. L'instance va redémarrer si "
-"vous effectuez des changements."
-
-#: src/window.ui:469
-msgid "Create"
-msgstr "Créer"
-
-#: src/window.ui:482 src/window.ui:597
-msgid "Create Model"
-msgstr "Créer un modèle"
-
-#: src/window.ui:508
-msgid "Base"
-msgstr "Base"
-
-#: src/window.ui:526
-msgid "Name"
-msgstr "Nom"
-
-#: src/window.ui:532
-msgid "Context"
-msgstr "Contexte"
-
-#: src/window.ui:547
-msgid "Template"
-msgstr "Template"
-
-#: src/window.ui:553
-msgid ""
-"Some models require a specific template. Please visit the model's website "
-"for more information if you're unsure."
-msgstr ""
-"Certains modèles requièrent un format spécifique. Merci de visiter le site "
-"du modèle pour plus d'information."
-
-#: src/window.ui:604
-msgid "Search Model"
-msgstr "Chercher un modèle"
-
-#: src/window.ui:664
-msgid "No Models Found"
-msgstr "Aucun modèle trouvé"
-
-#: src/window.ui:665
-msgid "Try a different search"
-msgstr "Essayez une recherche différente"
-
-#: src/window.ui:708
-msgid ""
-"By downloading this model you accept the license agreement available on the "
-"model's website."
-msgstr ""
-
-#: src/window.ui:745
-msgid "Open with Default App"
-msgstr "Ouvrir avec l'application par défaut"
-
-#: src/window.ui:797
-msgid "Previous"
-msgstr "Précédent"
-
-#: src/window.ui:840
-msgid "Welcome to Alpaca"
-msgstr "Bienvenue sur Alpaca"
-
-#: src/window.ui:841
-msgid "Powered by Ollama"
-msgstr "Fonctionne grâce à Ollama"
-
-#: src/window.ui:844
-msgid "Ollama Website"
-msgstr "Site web d'Ollama"
-
-#: src/window.ui:861
-msgid ""
-"Alpaca and its developers are not liable for any damages to devices or "
-"software resulting from the execution of code generated by an AI model. "
-"Please exercise caution and review the code carefully before running it."
-msgstr ""
-"Alpaca et ses développeurs ne sont pas responsables des dommages causés à "
-"votre appareil ou vos logiciels suite à l'exécution de code généré par un "
-"modèle. Merci de faire attention et de relire attentivement le code avant de "
-"l'exécuter."
-
-#: src/window.ui:872
-msgid "Featured Models"
-msgstr "Modèles recommandés"
-
-#: src/window.ui:873
-msgid ""
-"Alpaca works locally on your device, to start chatting you'll need an AI "
-"model, you can either pull models from this list or the 'Manage Models' menu "
-"later."
-msgstr ""
-"Alpaca fonctionne localement sur votre ordinateur, pour commencer à discuter "
-"vous aurez besoin d'un modèle d'IA, vous pouvez télécharger un modèle soit "
-"depuis cette liste soit depuis le menu 'Gérer les modèles' plus tard."
-
-#: src/window.ui:883
-msgid "Built by Meta"
-msgstr "Développé par Meta"
-
-#: src/window.ui:901
-msgid "Built by Google DeepMind"
-msgstr "Développé par Google DeepMind"
-
-#: src/window.ui:919
-msgid "Built by Microsoft"
-msgstr "Développé par Microsoft"
-
-#: src/window.ui:937
-msgid "Multimodal AI with image recognition"
-msgstr "IA multimodale avec reconnaissance d'image"
-
-#: src/window.ui:966
-msgid "Import Chat"
-msgstr "Importer une discussion"
-
-#: src/window.ui:976
-msgid "Keyboard Shortcuts"
-msgstr "Raccourcis claviers"
-
-#: src/window.ui:980
-msgid "About Alpaca"
-msgstr "À propos d'Alpaca"
-
-#: src/window.ui:987 src/window.ui:1006
-msgid "Rename Chat"
-msgstr "Renommer la discussion"
-
-#: src/window.ui:991 src/window.ui:1010
-msgid "Export Chat"
-msgstr "Exporter la discussion"
-
-#: src/window.ui:995
-msgid "Clear Chat"
-msgstr "Supprimer la discussion"
-
-#: src/window.ui:1002
-msgid "Delete Chat"
-msgstr "Supprimer la discussion"
-
-#: src/window.ui:1018
-msgid "From Existing Model"
-msgstr "Depuis un modèle existant"
-
-#: src/window.ui:1022
-msgid "From GGUF File (Experimental)"
-msgstr "Depuis un fichier GGUF (Experimental)"
-
-#: src/window.ui:1068
-msgid "Close application"
-msgstr "Fermer l'application"
-
-#: src/window.ui:1074
-msgid "Import chat"
-msgstr "Importer une discussion"
-
-#: src/window.ui:1080
-msgid "Clear chat"
-msgstr "Supprimer la discussion"
-
-#: src/window.ui:1092
-msgid "New chat"
-msgstr "Nouvelle discussion"
-
-#: src/window.ui:1098
-msgid "Show shortcuts window"
-msgstr "Voir les raccourcis clavier"
-
-#: src/window.ui:1105
-msgid "Editor"
-msgstr "Éditeur"
-
-#: src/window.ui:1109
-msgid "Copy"
-msgstr "Copier"
-
-#: src/window.ui:1115
-msgid "Paste"
-msgstr "Coller"
-
-#: src/window.ui:1121
-msgid "Insert new line"
-msgstr "Ajouter une ligne"
 
 #: src/available_models_descriptions.py:2
 msgid "Google Gemma 2 is now available in 2 sizes, 9B and 27B."
@@ -1621,6 +1333,442 @@ msgid ""
 "use cases."
 msgstr ""
 
+#: src/dialogs.py:17
+msgid "Chat cannot be cleared while receiving a message"
+msgstr "La discussion ne peut pas être supprimé pendant la génératio"
+
+#: src/dialogs.py:20
+msgid "Clear Chat?"
+msgstr ""
+
+#: src/dialogs.py:21
+msgid "Are you sure you want to clear the chat?"
+msgstr ""
+
+#: src/dialogs.py:24 src/dialogs.py:45 src/dialogs.py:72 src/dialogs.py:99
+#: src/dialogs.py:121 src/dialogs.py:142 src/dialogs.py:163 src/dialogs.py:223
+#: src/dialogs.py:308 src/dialogs.py:346
+msgid "Cancel"
+msgstr ""
+
+#: src/dialogs.py:25
+msgid "Clear"
+msgstr ""
+
+#: src/dialogs.py:41
+msgid "Delete Chat?"
+msgstr ""
+
+#: src/dialogs.py:42 src/dialogs.py:139
+msgid "Are you sure you want to delete '{}'?"
+msgstr ""
+
+#: src/dialogs.py:46 src/dialogs.py:143
+msgid "Delete"
+msgstr ""
+
+#: src/dialogs.py:66
+msgid "Rename Chat?"
+msgstr ""
+
+#: src/dialogs.py:67
+msgid "Renaming '{}'"
+msgstr ""
+
+#: src/dialogs.py:73
+msgid "Rename"
+msgstr ""
+
+#: src/dialogs.py:93
+msgid "Create Chat?"
+msgstr ""
+
+#: src/dialogs.py:94
+msgid "Enter name for new chat"
+msgstr ""
+
+#: src/dialogs.py:100 src/window.ui:469
+msgid "Create"
+msgstr "Créer"
+
+#: src/dialogs.py:117
+msgid "Stop Download?"
+msgstr ""
+
+#: src/dialogs.py:118
+msgid "Are you sure you want to stop pulling '{} ({})'?"
+msgstr ""
+
+#: src/dialogs.py:122
+msgid "Stop"
+msgstr ""
+
+#: src/dialogs.py:138
+msgid "Delete Model?"
+msgstr ""
+
+#: src/dialogs.py:159
+msgid "Remove Attachment?"
+msgstr ""
+
+#: src/dialogs.py:160
+msgid "Are you sure you want to remove attachment?"
+msgstr ""
+
+#: src/dialogs.py:164
+msgid "Remove"
+msgstr "Supprimer"
+
+#: src/dialogs.py:189
+msgid "Connection Error"
+msgstr ""
+
+#: src/dialogs.py:190
+msgid "The remote instance has disconnected"
+msgstr ""
+
+#: src/dialogs.py:194
+msgid "Close Alpaca"
+msgstr ""
+
+#: src/dialogs.py:195
+msgid "Use local instance"
+msgstr ""
+
+#: src/dialogs.py:196
+msgid "Connect"
+msgstr ""
+
+#: src/dialogs.py:219
+msgid "Select Model"
+msgstr ""
+
+#: src/dialogs.py:220
+msgid "This model will be used as the base for the new model"
+msgstr ""
+
+#: src/dialogs.py:224 src/dialogs.py:309 src/dialogs.py:347
+msgid "Accept"
+msgstr ""
+
+#: src/dialogs.py:238
+msgid "An error occurred while creating the model"
+msgstr ""
+
+#: src/dialogs.py:294
+msgid "This video does not have any transcriptions"
+msgstr "Cette vidéo n'a aucune transcription"
+
+#: src/dialogs.py:303
+msgid "Attach YouTube Video?"
+msgstr ""
+
+#: src/dialogs.py:304
+msgid ""
+"{}\n"
+"\n"
+"Please select a transcript to include"
+msgstr ""
+
+#: src/dialogs.py:337
+msgid "An error occurred while extracting text from the website"
+msgstr ""
+
+#: src/dialogs.py:342
+msgid "Attach Website? (Experimental)"
+msgstr ""
+
+#: src/dialogs.py:343
+msgid ""
+"Are you sure you want to attach\n"
+"'{}'?"
+msgstr ""
+
+#: src/window.ui:52
+msgid "Menu"
+msgstr "Menu"
+
+#: src/window.ui:82
+msgid "Toggle Sidebar"
+msgstr "Basculer la barre latérale"
+
+#: src/window.ui:107 src/window.ui:587
+msgid "Manage Models"
+msgstr "Gérer les modèles"
+
+#: src/window.ui:121
+msgid "Chat Menu"
+msgstr "Menu des discussions"
+
+#: src/window.ui:197
+msgid "Attach File"
+msgstr "Ajouter un fichier"
+
+#: src/window.ui:242 src/window.ui:1127
+msgid "Send Message"
+msgstr "Envoyer le message"
+
+#: src/window.ui:290 src/window.ui:972 src/window.ui:1086
+msgid "Preferences"
+msgstr "Préférences"
+
+#: src/window.ui:293 src/window.ui:1064
+msgid "General"
+msgstr "Général"
+
+#: src/window.ui:299
+msgid "Use Remote Connection to Ollama"
+msgstr "Utiliser une connexion à distance d'Ollama"
+
+#: src/window.ui:305
+msgid "URL of Remote Instance"
+msgstr "URL de la connexion distante"
+
+# I don't really know how to translate "Bearer Token"
+# I search for it but they don't translate it
+#: src/window.ui:312
+msgid "Bearer Token (Optional)"
+msgstr "Bearer Token (Optionnel)"
+
+#: src/window.ui:322
+msgid "Run Alpaca In Background"
+msgstr "Exécuter Alpaca en arrière-plan"
+
+#: src/window.ui:333
+msgid "Temperature"
+msgstr "Température"
+
+#: src/window.ui:334
+msgid ""
+"The temperature of the model. Increasing the temperature will make the model "
+"answer more creatively. (Default: 0.8)"
+msgstr ""
+"La température du modèle. Augmenter la température engendrera des réponses "
+"plus créatives. (défaut : 0.8)"
+
+#: src/window.ui:349
+msgid "Seed"
+msgstr "Graine"
+
+#: src/window.ui:350
+msgid ""
+"Sets the random number seed to use for generation. Setting this to a "
+"specific number will make the model generate the same text for the same "
+"prompt. (Default: 0 (random))"
+msgstr ""
+"Choisissez le nombre aléatoire utilisé pour la génération. Mettre une valeur "
+"spécifique induira une même réponse pour un même prompt. (défaut : 0 "
+"(aléatoire))"
+
+#: src/window.ui:364
+msgid "Keep Alive Time"
+msgstr "Temps en mémoire"
+
+#: src/window.ui:365
+msgid ""
+"Controls how long the model will stay loaded into memory following the "
+"request in minutes (Default: 5)"
+msgstr ""
+"Gérer la durée en minutes durant laquelle le modèle reste chargé en mémoire "
+"(défaut : 5)"
+
+#: src/window.ui:381
+msgid "Ollama Instance"
+msgstr "Instance d'Ollama"
+
+# What is override ???
+#: src/window.ui:385
+msgid "Ollama Overrides"
+msgstr "Paramètres d'Ollama"
+
+#: src/window.ui:386
+msgid ""
+"Manage the arguments used on Ollama, any changes on this page only applies "
+"to the integrated instance, the instance will restart if you make changes."
+msgstr ""
+"Gérer les arguments d'Ollama. Tous les changements sur cette page "
+"s'appliquent seulement à l'instance intégré. L'instance va redémarrer si "
+"vous effectuez des changements."
+
+#: src/window.ui:482 src/window.ui:597
+msgid "Create Model"
+msgstr "Créer un modèle"
+
+#: src/window.ui:508
+msgid "Base"
+msgstr "Base"
+
+#: src/window.ui:526
+msgid "Name"
+msgstr "Nom"
+
+#: src/window.ui:532
+msgid "Context"
+msgstr "Contexte"
+
+#: src/window.ui:547
+msgid "Template"
+msgstr "Template"
+
+#: src/window.ui:553
+msgid ""
+"Some models require a specific template. Please visit the model's website "
+"for more information if you're unsure."
+msgstr ""
+"Certains modèles requièrent un format spécifique. Merci de visiter le site "
+"du modèle pour plus d'information."
+
+#: src/window.ui:604
+msgid "Search Model"
+msgstr "Chercher un modèle"
+
+#: src/window.ui:664
+msgid "No Models Found"
+msgstr "Aucun modèle trouvé"
+
+#: src/window.ui:665
+msgid "Try a different search"
+msgstr "Essayez une recherche différente"
+
+#: src/window.ui:708
+msgid ""
+"By downloading this model you accept the license agreement available on the "
+"model's website."
+msgstr ""
+
+#: src/window.ui:745
+msgid "Open with Default App"
+msgstr "Ouvrir avec l'application par défaut"
+
+#: src/window.ui:797
+msgid "Previous"
+msgstr "Précédent"
+
+#: src/window.ui:840
+msgid "Welcome to Alpaca"
+msgstr "Bienvenue sur Alpaca"
+
+#: src/window.ui:841
+msgid "Powered by Ollama"
+msgstr "Fonctionne grâce à Ollama"
+
+#: src/window.ui:844
+msgid "Ollama Website"
+msgstr "Site web d'Ollama"
+
+#: src/window.ui:861
+msgid ""
+"Alpaca and its developers are not liable for any damages to devices or "
+"software resulting from the execution of code generated by an AI model. "
+"Please exercise caution and review the code carefully before running it."
+msgstr ""
+"Alpaca et ses développeurs ne sont pas responsables des dommages causés à "
+"votre appareil ou vos logiciels suite à l'exécution de code généré par un "
+"modèle. Merci de faire attention et de relire attentivement le code avant de "
+"l'exécuter."
+
+#: src/window.ui:872
+msgid "Featured Models"
+msgstr "Modèles recommandés"
+
+#: src/window.ui:873
+msgid ""
+"Alpaca works locally on your device, to start chatting you'll need an AI "
+"model, you can either pull models from this list or the 'Manage Models' menu "
+"later."
+msgstr ""
+"Alpaca fonctionne localement sur votre ordinateur, pour commencer à discuter "
+"vous aurez besoin d'un modèle d'IA, vous pouvez télécharger un modèle soit "
+"depuis cette liste soit depuis le menu 'Gérer les modèles' plus tard."
+
+#: src/window.ui:883
+msgid "Built by Meta"
+msgstr "Développé par Meta"
+
+#: src/window.ui:901
+msgid "Built by Google DeepMind"
+msgstr "Développé par Google DeepMind"
+
+#: src/window.ui:919
+msgid "Built by Microsoft"
+msgstr "Développé par Microsoft"
+
+#: src/window.ui:937
+msgid "Multimodal AI with image recognition"
+msgstr "IA multimodale avec reconnaissance d'image"
+
+#: src/window.ui:966
+msgid "Import Chat"
+msgstr "Importer une discussion"
+
+#: src/window.ui:976
+msgid "Keyboard Shortcuts"
+msgstr "Raccourcis claviers"
+
+#: src/window.ui:980
+msgid "About Alpaca"
+msgstr "À propos d'Alpaca"
+
+#: src/window.ui:987 src/window.ui:1006
+msgid "Rename Chat"
+msgstr "Renommer la discussion"
+
+#: src/window.ui:991 src/window.ui:1010
+msgid "Export Chat"
+msgstr "Exporter la discussion"
+
+#: src/window.ui:995
+msgid "Clear Chat"
+msgstr "Supprimer la discussion"
+
+#: src/window.ui:1002
+msgid "Delete Chat"
+msgstr "Supprimer la discussion"
+
+#: src/window.ui:1018
+msgid "From Existing Model"
+msgstr "Depuis un modèle existant"
+
+#: src/window.ui:1022
+msgid "From GGUF File (Experimental)"
+msgstr "Depuis un fichier GGUF (Experimental)"
+
+#: src/window.ui:1068
+msgid "Close application"
+msgstr "Fermer l'application"
+
+#: src/window.ui:1074
+msgid "Import chat"
+msgstr "Importer une discussion"
+
+#: src/window.ui:1080
+msgid "Clear chat"
+msgstr "Supprimer la discussion"
+
+#: src/window.ui:1092
+msgid "New chat"
+msgstr "Nouvelle discussion"
+
+#: src/window.ui:1098
+msgid "Show shortcuts window"
+msgstr "Voir les raccourcis clavier"
+
+#: src/window.ui:1105
+msgid "Editor"
+msgstr "Éditeur"
+
+#: src/window.ui:1109
+msgid "Copy"
+msgstr "Copier"
+
+#: src/window.ui:1115
+msgid "Paste"
+msgstr "Coller"
+
+#: src/window.ui:1121
+msgid "Insert new line"
+msgstr "Ajouter une ligne"
+
 #~ msgid "An error occurred"
 #~ msgstr "Une erreur est survenue"
 
@@ -1636,12 +1784,6 @@ msgstr ""
 #~ msgid "Cannot delete chat because it's the only one left"
 #~ msgstr ""
 #~ "Vous ne pouvez pas supprimer la discussion car c'est la seule restante"
-
-#~ msgid "This video does not have any transcriptions"
-#~ msgstr "Cette vidéo n'a aucune transcription"
-
-#~ msgid "Chat cannot be cleared while receiving a message"
-#~ msgstr "La discussion ne peut pas être supprimé pendant la génératio"
 
 #~ msgid "That tag is already being pulled"
 #~ msgstr "Ce tag est déjà en train d'être téléchargé"
@@ -1696,9 +1838,6 @@ msgstr ""
 
 #~ msgid "Advanced Model Settings"
 #~ msgstr "Paramètres avancés"
-
-#~ msgid "Remove"
-#~ msgstr "Supprimer"
 
 #~ msgid "Send"
 #~ msgstr "Envoyer"
