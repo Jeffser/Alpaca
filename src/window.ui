@@ -744,10 +744,18 @@
               <child type="start">
                 <object class="GtkButton" id="file_preview_open_button">
                   <signal name="clicked" handler="link_button_handler"/>
-                  <property name="tooltip-text" translatable="yes">Open with Default App</property>
+                  <property name="tooltip-text" translatable="yes">Open With Default App</property>
                   <property name="vexpand">false</property>
                   <property name="valign">3</property>
                   <property name="icon-name">share-symbolic</property>
+                </object>
+              </child>
+              <child type="start">
+                <object class="GtkButton" id="file_preview_remove_button">
+                  <property name="tooltip-text" translatable="yes">Remove Attachment</property>
+                  <property name="vexpand">false</property>
+                  <property name="valign">3</property>
+                  <property name="icon-name">user-trash-symbolic</property>
                 </object>
               </child>
             </object>

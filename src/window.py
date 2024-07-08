@@ -107,6 +107,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_tag_list_box = Gtk.Template.Child()
     navigation_view_manage_models = Gtk.Template.Child()
     file_preview_open_button = Gtk.Template.Child()
+    file_preview_remove_button = Gtk.Template.Child()
     secondary_menu_button = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
     no_results_page = Gtk.Template.Child()
@@ -488,9 +489,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         self.editing_message = {"text_view": text_view, "id": id, "button_container": button_container, "footer": footer}
 
-    def preview_file(self, file_path, file_type):
+    def preview_file(self, file_path, file_type, presend_name):
         file_path = file_path.replace("{selected_chat}", self.chats["selected_chat"])
         content = self.get_content_of_file(file_path, file_type)
+        if presend_name:
+            self.file_preview_remove_button.set_visible(True)
+            self.file_preview_remove_button.connect('clicked', lambda button, name=presend_name : dialogs.remove_attached_file(self, name))
+        else:
+            self.file_preview_remove_button.set_visible(False)
         if content:
             buffer = self.file_preview_text_view.get_buffer()
             buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
@@ -688,7 +694,7 @@ Generate a title following these rules:
                     child=button_content
                 )
                 file_path = os.path.join(self.data_dir, "chats", "{selected_chat}", id, name)
-                button.connect("clicked", lambda button, file_path=file_path, file_type=file_type: self.preview_file(file_path, file_type))
+                button.connect("clicked", lambda button, file_path=file_path, file_type=file_type: self.preview_file(file_path, file_type, None))
                 file_container.append(button)
             message_box.append(file_scroller)
 
@@ -1330,17 +1336,18 @@ Generate a title following these rules:
                 text += f"\n- Page {i}\n{page.extract_text()}\n"
             return text
 
-    def remove_attached_file(self, button):
-        del self.attachments[button.get_name()]
+    def remove_attached_file(self, name):
+        button = self.attachments[name]['button']
         button.get_parent().remove(button)
+        del self.attachments[name]
         if len(self.attachments) == 0: self.attachment_box.set_visible(False)
 
     def attach_file(self, file_path, file_type):
-        name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
+        file_name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
         content = self.get_content_of_file(file_path, file_type)
         if content:
             button_content = Adw.ButtonContent(
-                label=name,
+                label=file_name,
                 icon_name={
                     "image": "image-x-generic-symbolic",
                     "plain_text": "document-text-symbolic",
@@ -1352,13 +1359,14 @@ Generate a title following these rules:
             button = Gtk.Button(
                 vexpand=True,
                 valign=3,
-                name=name,
+                name=file_name,
                 css_classes=["flat"],
-                tooltip_text=name,
+                tooltip_text=file_name,
                 child=button_content
             )
-            self.attachments[name] = {"path": file_path, "type": file_type, "content": content, "button": button}
-            button.connect("clicked", lambda button: dialogs.remove_attached_file(self, button))
+            self.attachments[file_name] = {"path": file_path, "type": file_type, "content": content, "button": button}
+            #button.connect("clicked", lambda button: dialogs.remove_attached_file(self, button))
+            button.connect("clicked", lambda button : self.preview_file(file_path, file_type, file_name))
             self.attachment_container.append(button)
             self.attachment_box.set_visible(True)
 

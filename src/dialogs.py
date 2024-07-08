@@ -150,11 +150,12 @@ def delete_model(self, model_name):
 
 # REMOVE IMAGE | WORKS
 
-def remove_attached_file_response(self, dialog, task, button):
+def remove_attached_file_response(self, dialog, task, name):
     if dialog.choose_finish(task) == 'remove':
-        self.remove_attached_file(button)
+        self.remove_attached_file(name)
 
-def remove_attached_file(self, button):
+def remove_attached_file(self, name):
+    self.file_preview_dialog.close()
     dialog = Adw.AlertDialog(
         heading=_("Remove Attachment?"),
         body=_("Are you sure you want to remove attachment?"),
@@ -166,7 +167,7 @@ def remove_attached_file(self, button):
     dialog.choose(
         parent = self,
         cancellable = None,
-        callback = lambda dialog, task, button=button: remove_attached_file_response(self, dialog, task, button)
+        callback = lambda dialog, task, name=name: remove_attached_file_response(self, dialog, task, name)
     )
 
 # RECONNECT REMOTE | WORKS
