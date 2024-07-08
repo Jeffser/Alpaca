@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-07 19:39-0600\n"
+"POT-Creation-Date: 2024-07-07 20:43-0600\n"
 "PO-Revision-Date: 2024-07-07 15:12-0600\n"
 "Last-Translator: (YOUR NAME) <(YOUR EMAIL OPTIONAL)>\n"
 "Language-Team: Bengali\n"
@@ -667,166 +667,126 @@ msgstr "0.1.1 Stable Release"
 msgid "This is the first public version of Alpaca"
 msgstr "This is the first public version of Alpaca"
 
-#: src/window.py:58 src/window.py:1080 src/window.py:1142 src/window.ui:41
+#: src/window.py:58 src/window.py:1042 src/window.py:1104 src/window.ui:41
 msgid "New Chat"
 msgstr "New Chat"
 
-#: src/window.py:128
-msgid "An error occurred"
-msgstr "An error occurred"
+#: src/window.py:167
+msgid "Message edited successfully"
+msgstr "Message edited successfully"
 
-#: src/window.py:129
+#: src/window.py:182
+msgid "Please select a model before chatting"
+msgstr "Please select a model before chatting"
+
+#: src/window.py:249
+msgid "Close"
+msgstr "Close"
+
+#: src/window.py:250 src/window.ui:813
+msgid "Next"
+msgstr "Next"
+
+#: src/window.py:283 src/window.py:294
 msgid "Failed to connect to server"
 msgstr "Failed to connect to server"
 
-#: src/window.py:130
-msgid "Could not list local models"
-msgstr "Could not list local models"
+#: src/window.py:301
+msgid "Pulling in the background..."
+msgstr "Pulling in the background..."
 
-#: src/window.py:131
-msgid "Could not delete model"
-msgstr "Could not delete model"
+#: src/window.py:353
+msgid "Stop Creating '{}'"
+msgstr "Stop Creating '{}'"
 
-#: src/window.py:132
-msgid "Could not pull model"
-msgstr "Could not pull model"
+#: src/window.py:390
+msgid "image"
+msgstr "image"
 
-#: src/window.py:133
-msgid "Cannot open image"
-msgstr "Cannot open image"
+#: src/window.py:458
+msgid "Message copied to the clipboard"
+msgstr "Message copied to the clipboard"
 
-#: src/window.py:134
-msgid "Cannot delete chat because it's the only one left"
-msgstr "Cannot delete chat because it's the only one left"
+#: src/window.py:559
+msgid "Remove Message"
+msgstr "Remove Message"
 
-#: src/window.py:135
+#: src/window.py:564 src/window.py:835
+msgid "Copy Message"
+msgstr "Copy Message"
+
+#: src/window.py:569
+msgid "Edit Message"
+msgstr "Edit Message"
+
+#: src/window.py:627
+msgid "Missing Image"
+msgstr ""
+
+#: src/window.py:643
+msgid "Missing image"
+msgstr ""
+
+#: src/window.py:723
+msgid "Remove '{} ({})'"
+msgstr "Remove '{} ({})'"
+
+#: src/window.py:861
+msgid "Code copied to the clipboard"
+msgstr "Code copied to the clipboard"
+
+#: src/window.py:934
+msgid "Task Complete"
+msgstr "Task Complete"
+
+#: src/window.py:934
+msgid "Model '{}' pulled successfully."
+msgstr "Model '{}' pulled successfully."
+
+#: src/window.py:939
+msgid "Pull Model Error"
+msgstr "Pull Model Error"
+
+#: src/window.py:939
+msgid "Failed to pull model '{}' due to network error."
+msgstr "Failed to pull model '{}' due to network error."
+
+#: src/window.py:970
+msgid "Stop Pulling '{} ({})'"
+msgstr "Stop Pulling '{} ({})'"
+
+#: src/window.py:1010
+msgid "Image Recognition"
+msgstr ""
+
+#: src/window.py:1118
+msgid "Model deleted successfully"
+msgstr "Model deleted successfully"
+
+#: src/window.py:1192
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr ""
 "There was an error with the local Ollama instance, so it has been reset"
 
-#: src/window.py:136
-msgid "Image recognition is only available on specific models"
-msgstr "Image recognition is only available on specific models"
-
-#: src/window.py:137
-msgid "This video does not have any transcriptions"
-msgstr "This video does not have any transcriptions"
-
-#: src/window.py:138
-msgid "This video is not available"
-msgstr "This video is not available"
-
-#: src/window.py:141
-msgid "Please select a model before chatting"
-msgstr "Please select a model before chatting"
-
-#: src/window.py:142
-msgid "Chat cannot be cleared while receiving a message"
-msgstr "Chat cannot be cleared while receiving a message"
-
-#: src/window.py:143
-msgid "That tag is already being pulled"
-msgstr "That tag is already being pulled"
-
-#: src/window.py:144
-msgid "That tag has been pulled already"
-msgstr "That tag has been pulled already"
-
-#: src/window.py:145
-msgid "Code copied to the clipboard"
-msgstr "Code copied to the clipboard"
-
-#: src/window.py:146
-msgid "Message copied to the clipboard"
-msgstr "Message copied to the clipboard"
-
-#: src/window.py:147
-msgid "Message edited successfully"
-msgstr "Message edited successfully"
-
-#: src/window.py:150
-msgid "Model deleted successfully"
-msgstr "Model deleted successfully"
-
-#: src/window.py:151
-msgid "Model pulled successfully"
-msgstr "Model pulled successfully"
-
-#: src/window.py:152
+#: src/window.py:1211
 msgid "Chat exported successfully"
 msgstr "Chat exported successfully"
 
-#: src/window.py:153
+#: src/window.py:1279
 msgid "Chat imported successfully"
 msgstr "Chat imported successfully"
 
-#: src/window.py:280
-msgid "Close"
-msgstr "Close"
+#: src/window.py:1309
+msgid "Cannot open image"
+msgstr "Cannot open image"
 
-#: src/window.py:281 src/window.ui:813
-msgid "Next"
-msgstr "Next"
+#: src/window.py:1386
+msgid "This video is not available"
+msgstr "This video is not available"
 
-#: src/window.py:332
-msgid "Pulling in the background..."
-msgstr "Pulling in the background..."
-
-#: src/window.py:384
-msgid "Stop Creating '{}'"
-msgstr "Stop Creating '{}'"
-
-#: src/window.py:421
-msgid "image"
-msgstr "image"
-
-#: src/window.py:593
-msgid "Remove Message"
-msgstr "Remove Message"
-
-#: src/window.py:598 src/window.py:869
-msgid "Copy Message"
-msgstr "Copy Message"
-
-#: src/window.py:603
-msgid "Edit Message"
-msgstr "Edit Message"
-
-#: src/window.py:661
-msgid "Missing Image"
-msgstr ""
-
-#: src/window.py:677
-msgid "Missing image"
-msgstr ""
-
-#: src/window.py:757
-msgid "Remove '{} ({})'"
-msgstr "Remove '{} ({})'"
-
-#: src/window.py:969
-msgid "Task Complete"
-msgstr "Task Complete"
-
-#: src/window.py:969
-msgid "Model '{}' pulled successfully."
-msgstr "Model '{}' pulled successfully."
-
-#: src/window.py:974
-msgid "Pull Model Error"
-msgstr "Pull Model Error"
-
-#: src/window.py:974
-msgid "Failed to pull model '{}' due to network error."
-msgstr "Failed to pull model '{}' due to network error."
-
-#: src/window.py:1008
-msgid "Stop Pulling '{} ({})'"
-msgstr "Stop Pulling '{} ({})'"
-
-#: src/window.py:1048
-msgid "Image Recognition"
-msgstr ""
+#: src/window.py:1403
+msgid "Image recognition is only available on specific models"
+msgstr "Image recognition is only available on specific models"
 
 #: src/window.ui:52
 msgid "Menu"
@@ -1616,6 +1576,36 @@ msgid ""
 "A robust conversational model designed to be used for both chat and instruct "
 "use cases."
 msgstr ""
+
+#~ msgid "An error occurred"
+#~ msgstr "An error occurred"
+
+#~ msgid "Could not list local models"
+#~ msgstr "Could not list local models"
+
+#~ msgid "Could not delete model"
+#~ msgstr "Could not delete model"
+
+#~ msgid "Could not pull model"
+#~ msgstr "Could not pull model"
+
+#~ msgid "Cannot delete chat because it's the only one left"
+#~ msgstr "Cannot delete chat because it's the only one left"
+
+#~ msgid "This video does not have any transcriptions"
+#~ msgstr "This video does not have any transcriptions"
+
+#~ msgid "Chat cannot be cleared while receiving a message"
+#~ msgstr "Chat cannot be cleared while receiving a message"
+
+#~ msgid "That tag is already being pulled"
+#~ msgstr "That tag is already being pulled"
+
+#~ msgid "That tag has been pulled already"
+#~ msgstr "That tag has been pulled already"
+
+#~ msgid "Model pulled successfully"
+#~ msgstr "Model pulled successfully"
 
 #~ msgid "Message Received"
 #~ msgstr "Message Received"

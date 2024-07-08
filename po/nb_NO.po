@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-07 19:39-0600\n"
+"POT-Creation-Date: 2024-07-07 20:43-0600\n"
 "PO-Revision-Date: 2024-07-02 18:24-0600\n"
 "Last-Translator: Niklas Opsahl Halvorsen\n"
 "Language-Team: Norwegian\n"
@@ -666,165 +666,125 @@ msgstr "0.1.1 Stabil utgivelse"
 msgid "This is the first public version of Alpaca"
 msgstr "Dette er den første offentlige versjonen av Alpaca"
 
-#: src/window.py:58 src/window.py:1080 src/window.py:1142 src/window.ui:41
+#: src/window.py:58 src/window.py:1042 src/window.py:1104 src/window.ui:41
 msgid "New Chat"
 msgstr "Ny samtale"
 
-#: src/window.py:128
-msgid "An error occurred"
-msgstr "Et problem dukket opp"
-
-#: src/window.py:129
-msgid "Failed to connect to server"
-msgstr "Feilet tilkobling til server"
-
-#: src/window.py:130
-msgid "Could not list local models"
-msgstr "Kunne ikke liste lokale modeller"
-
-#: src/window.py:131
-msgid "Could not delete model"
-msgstr "Kunne ikke slette modell"
-
-#: src/window.py:132
-msgid "Could not pull model"
-msgstr "Kunne ikke laste ned modell"
-
-#: src/window.py:133
-msgid "Cannot open image"
-msgstr "Kan ikke åpne bilde"
-
-#: src/window.py:134
-msgid "Cannot delete chat because it's the only one left"
-msgstr "Kan ikke slette samtale fordi det er bare en igjen"
-
-#: src/window.py:135
-msgid "There was an error with the local Ollama instance, so it has been reset"
-msgstr "Det var et problem med lokal Ollama instans, så den har fått omstart"
-
-#: src/window.py:136
-msgid "Image recognition is only available on specific models"
-msgstr "Bildetolkning er bare tilgjengelig på enkelte modeller"
-
-#: src/window.py:137
-msgid "This video does not have any transcriptions"
-msgstr "Denne videoen har ingen transkripsjon"
-
-#: src/window.py:138
-msgid "This video is not available"
-msgstr "Denne videoen er ikke tilgjengelig"
-
-#: src/window.py:141
-msgid "Please select a model before chatting"
-msgstr "Velg en modell før samtalen"
-
-#: src/window.py:142
-msgid "Chat cannot be cleared while receiving a message"
-msgstr "Samtale kan ikke renses mens melding blir mottatt"
-
-#: src/window.py:143
-msgid "That tag is already being pulled"
-msgstr "Denne taggen er allerede under nedlasting"
-
-#: src/window.py:144
-msgid "That tag has been pulled already"
-msgstr "Denne taggen er allerede nedlastet"
-
-#: src/window.py:145
-msgid "Code copied to the clipboard"
-msgstr "Kode kopiert til utklippstavle"
-
-#: src/window.py:146
-msgid "Message copied to the clipboard"
-msgstr "Melding kopiert til utklippstavle"
-
-#: src/window.py:147
+#: src/window.py:167
 msgid "Message edited successfully"
 msgstr "Melding suksessfullt redigert"
 
-#: src/window.py:150
-msgid "Model deleted successfully"
-msgstr "Modell suksessfullt slettet"
+#: src/window.py:182
+msgid "Please select a model before chatting"
+msgstr "Velg en modell før samtalen"
 
-#: src/window.py:151
-msgid "Model pulled successfully"
-msgstr "Modell suksessfullt nedlastet"
-
-#: src/window.py:152
-msgid "Chat exported successfully"
-msgstr "Samtale suksessfullt eksportert"
-
-#: src/window.py:153
-msgid "Chat imported successfully"
-msgstr "Samtale suksessfullt importert"
-
-#: src/window.py:280
+#: src/window.py:249
 msgid "Close"
 msgstr "Lukk"
 
-#: src/window.py:281 src/window.ui:813
+#: src/window.py:250 src/window.ui:813
 msgid "Next"
 msgstr "Neste"
 
-#: src/window.py:332
+#: src/window.py:283 src/window.py:294
+msgid "Failed to connect to server"
+msgstr "Feilet tilkobling til server"
+
+#: src/window.py:301
 msgid "Pulling in the background..."
 msgstr "Nedlaster i bakgrunnen..."
 
-#: src/window.py:384
+#: src/window.py:353
 msgid "Stop Creating '{}'"
 msgstr "Stopp skaping '{}'"
 
-#: src/window.py:421
+#: src/window.py:390
 msgid "image"
 msgstr "bilde"
 
-#: src/window.py:593
+#: src/window.py:458
+msgid "Message copied to the clipboard"
+msgstr "Melding kopiert til utklippstavle"
+
+#: src/window.py:559
 msgid "Remove Message"
 msgstr "Fjern Melding"
 
-#: src/window.py:598 src/window.py:869
+#: src/window.py:564 src/window.py:835
 msgid "Copy Message"
 msgstr "Kopier Melding"
 
-#: src/window.py:603
+#: src/window.py:569
 msgid "Edit Message"
 msgstr "Rediger Melding"
 
-#: src/window.py:661
+#: src/window.py:627
 msgid "Missing Image"
 msgstr ""
 
-#: src/window.py:677
+#: src/window.py:643
 msgid "Missing image"
 msgstr ""
 
-#: src/window.py:757
+#: src/window.py:723
 msgid "Remove '{} ({})'"
 msgstr "Fjern '{} ({})'"
 
-#: src/window.py:969
+#: src/window.py:861
+msgid "Code copied to the clipboard"
+msgstr "Kode kopiert til utklippstavle"
+
+#: src/window.py:934
 msgid "Task Complete"
 msgstr "Oppgave Ferdig"
 
-#: src/window.py:969
+#: src/window.py:934
 msgid "Model '{}' pulled successfully."
 msgstr "Modell '{}' suksessfullt nedlasted."
 
-#: src/window.py:974
+#: src/window.py:939
 msgid "Pull Model Error"
 msgstr "Problem med modell nedlasting"
 
-#: src/window.py:974
+#: src/window.py:939
 msgid "Failed to pull model '{}' due to network error."
 msgstr "Mislykkes nedlasting av modell '{}' grunnet av nettverks feil."
 
-#: src/window.py:1008
+#: src/window.py:970
 msgid "Stop Pulling '{} ({})'"
 msgstr "Stopp Nedlasting '{} ({})'"
 
-#: src/window.py:1048
+#: src/window.py:1010
 msgid "Image Recognition"
 msgstr ""
+
+#: src/window.py:1118
+msgid "Model deleted successfully"
+msgstr "Modell suksessfullt slettet"
+
+#: src/window.py:1192
+msgid "There was an error with the local Ollama instance, so it has been reset"
+msgstr "Det var et problem med lokal Ollama instans, så den har fått omstart"
+
+#: src/window.py:1211
+msgid "Chat exported successfully"
+msgstr "Samtale suksessfullt eksportert"
+
+#: src/window.py:1279
+msgid "Chat imported successfully"
+msgstr "Samtale suksessfullt importert"
+
+#: src/window.py:1309
+msgid "Cannot open image"
+msgstr "Kan ikke åpne bilde"
+
+#: src/window.py:1386
+msgid "This video is not available"
+msgstr "Denne videoen er ikke tilgjengelig"
+
+#: src/window.py:1403
+msgid "Image recognition is only available on specific models"
+msgstr "Bildetolkning er bare tilgjengelig på enkelte modeller"
 
 #: src/window.ui:52
 msgid "Menu"
@@ -1612,6 +1572,36 @@ msgid ""
 "A robust conversational model designed to be used for both chat and instruct "
 "use cases."
 msgstr ""
+
+#~ msgid "An error occurred"
+#~ msgstr "Et problem dukket opp"
+
+#~ msgid "Could not list local models"
+#~ msgstr "Kunne ikke liste lokale modeller"
+
+#~ msgid "Could not delete model"
+#~ msgstr "Kunne ikke slette modell"
+
+#~ msgid "Could not pull model"
+#~ msgstr "Kunne ikke laste ned modell"
+
+#~ msgid "Cannot delete chat because it's the only one left"
+#~ msgstr "Kan ikke slette samtale fordi det er bare en igjen"
+
+#~ msgid "This video does not have any transcriptions"
+#~ msgstr "Denne videoen har ingen transkripsjon"
+
+#~ msgid "Chat cannot be cleared while receiving a message"
+#~ msgstr "Samtale kan ikke renses mens melding blir mottatt"
+
+#~ msgid "That tag is already being pulled"
+#~ msgstr "Denne taggen er allerede under nedlasting"
+
+#~ msgid "That tag has been pulled already"
+#~ msgstr "Denne taggen er allerede nedlastet"
+
+#~ msgid "Model pulled successfully"
+#~ msgstr "Modell suksessfullt nedlastet"
 
 #~ msgid "Message Received"
 #~ msgstr "Melding Mottatt"
