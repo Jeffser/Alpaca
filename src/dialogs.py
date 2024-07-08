@@ -318,19 +318,24 @@ def youtube_caption(self, video_url):
 
 def attach_website_response(self, dialog, task, url):
     if dialog.choose_finish(task) == "accept":
-        html = connection_handler.simple_get(url)['text']
-        md = html2text(html)
-        buffer = self.message_text_view.get_buffer()
-        textview_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).replace(url, "")
-        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-        buffer.insert(buffer.get_start_iter(), textview_text, len(textview_text))
-        if not os.path.exists('/tmp/alpaca/websites/'):
-            os.makedirs('/tmp/alpaca/websites/')
-        md_name = self.generate_numbered_name('website.md', os.listdir('/tmp/alpaca/websites'))
-        file_path = os.path.join('/tmp/alpaca/websites/', md_name)
-        with open(file_path, 'w+') as f:
-            f.write('{}\n\n{}'.format(url, md))
-        self.attach_file(file_path, 'website')
+        response = connection_handler.simple_get(url)
+        if response.status_code == 200:
+            html = response.text
+            md = html2text(html)
+            buffer = self.message_text_view.get_buffer()
+            textview_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).replace(url, "")
+            buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+            buffer.insert(buffer.get_start_iter(), textview_text, len(textview_text))
+            if not os.path.exists('/tmp/alpaca/websites/'):
+                os.makedirs('/tmp/alpaca/websites/')
+            md_name = self.generate_numbered_name('website.md', os.listdir('/tmp/alpaca/websites'))
+            file_path = os.path.join('/tmp/alpaca/websites/', md_name)
+            with open(file_path, 'w+') as f:
+                f.write('{}\n\n{}'.format(url, md))
+            self.attach_file(file_path, 'website')
+        else:
+            self.show_toast(_("An error occurred while extracting text from the website"), self.main_overlay)
+
 
 def attach_website(self, url):
     dialog = Adw.AlertDialog(

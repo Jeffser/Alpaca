@@ -407,8 +407,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         template = ""
         if not file:
             response = connection_handler.simple_post(f"{connection_handler.url}/api/show", json.dumps({"name": model}))
-            if 'text' in response:
-                data = json.loads(response['text'])
+            if response.status_code == 200:
+                data = json.loads(response.text)
 
                 for line in data['modelfile'].split('\n'):
                     if line.startswith('SYSTEM'):
@@ -532,7 +532,7 @@ Generate a title following these rules:
         data = {"model": current_model, "prompt": prompt, "stream": False}
         if 'images' in message: data["images"] = message['images']
         response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps(data))
-        new_chat_name = json.loads(response['text'])["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').title()
+        new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').title()
         new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
         self.rename_chat(label_element.get_name(), new_chat_name, label_element)
 
@@ -704,13 +704,13 @@ Generate a title following these rules:
         response = connection_handler.simple_get(f"{connection_handler.url}/api/tags")
         for i in range(self.model_string_list.get_n_items() -1, -1, -1):
             self.model_string_list.remove(i)
-        if response['status'] == 'ok':
+        if response.status_code == 200:
             self.local_model_list_box.remove_all()
-            if len(json.loads(response['text'])['models']) == 0:
+            if len(json.loads(response.text)['models']) == 0:
                 self.local_model_list_box.set_visible(False)
             else:
                 self.local_model_list_box.set_visible(True)
-            for model in json.loads(response['text'])['models']:
+            for model in json.loads(response.text)['models']:
                 model_row = Adw.ActionRow(
                     title = "<b>{}</b>".format(model["name"].split(":")[0].replace("-", " ").title()),
                     subtitle = model["name"].split(":")[1]
@@ -740,8 +740,8 @@ Generate a title following these rules:
 
     def verify_connection(self):
         response = connection_handler.simple_get(connection_handler.url)
-        if response['status'] == 'ok':
-            if "Ollama is running" in response['text']:
+        if response.status_code == 200:
+            if "Ollama is running" in response.text:
                 self.save_server_config()
                 self.update_list_local_models()
                 return True
@@ -906,7 +906,7 @@ Generate a title following these rules:
         if self.loading_spinner:
             GLib.idle_add(self.chat_container.remove, self.loading_spinner)
             self.loading_spinner = None
-        if response['status'] == 'error':
+        if response.status_code != 200:
             GLib.idle_add(self.connection_error)
 
     def pull_model_update(self, data, model_name):
@@ -922,7 +922,6 @@ Generate a title following these rules:
                 GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
     def pull_model_process(self, model, modelfile):
-        response = {}
         if modelfile:
             data = {"name": model, "modelfile": modelfile}
             response = connection_handler.stream_post(f"{connection_handler.url}/api/create", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
@@ -931,7 +930,7 @@ Generate a title following these rules:
             response = connection_handler.stream_post(f"{connection_handler.url}/api/pull", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
         GLib.idle_add(self.update_list_local_models)
 
-        if response['status'] == 'ok':
+        if response.status_code == 200:
             GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model), Gio.ThemedIcon.new("emblem-ok-symbolic"))
             GLib.idle_add(self.show_toast, "good", 1, self.manage_models_overlay)
             GLib.idle_add(self.pulling_models[model]['overlay'].get_parent().get_parent().remove, self.pulling_models[model]['overlay'].get_parent())
@@ -1115,7 +1114,7 @@ Generate a title following these rules:
     def delete_model(self, model_name):
         response = connection_handler.simple_delete(f"{connection_handler.url}/api/delete", data={"name": model_name})
         self.update_list_local_models()
-        if response['status'] == 'ok':
+        if response.status_code == 200:
             self.show_toast(_("Model deleted successfully"), self.manage_models_overlay)
         else:
             self.manage_models_dialog.close()
