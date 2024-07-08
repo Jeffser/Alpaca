@@ -1473,53 +1473,53 @@ msgstr "El chat no puede ser limpiado mientras se recibe un mensaje"
 
 #: src/dialogs.py:20
 msgid "Clear Chat?"
-msgstr ""
+msgstr "¿Limpiar Chat?"
 
 #: src/dialogs.py:21
 msgid "Are you sure you want to clear the chat?"
-msgstr ""
+msgstr "¿Estás seguro de que quieres limpiar el chat?"
 
 #: src/dialogs.py:24 src/dialogs.py:45 src/dialogs.py:72 src/dialogs.py:99
 #: src/dialogs.py:121 src/dialogs.py:142 src/dialogs.py:163 src/dialogs.py:223
 #: src/dialogs.py:308 src/dialogs.py:346
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: src/dialogs.py:25
 msgid "Clear"
-msgstr ""
+msgstr "Limpiar"
 
 #: src/dialogs.py:41
 msgid "Delete Chat?"
-msgstr ""
+msgstr "¿Eliminar Chat?"
 
 #: src/dialogs.py:42 src/dialogs.py:139
 msgid "Are you sure you want to delete '{}'?"
-msgstr ""
+msgstr "¿Estás seguro de que quieres eliminar '{}'?"
 
 #: src/dialogs.py:46 src/dialogs.py:143
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 #: src/dialogs.py:66
 msgid "Rename Chat?"
-msgstr ""
+msgstr "¿Renombrar Chat?"
 
 #: src/dialogs.py:67
 msgid "Renaming '{}'"
-msgstr ""
+msgstr "Renombrando '{}'"
 
 #: src/dialogs.py:73
 msgid "Rename"
-msgstr ""
+msgstr "Renombrar"
 
 #: src/dialogs.py:93
 msgid "Create Chat?"
-msgstr ""
+msgstr "¿Crear Chat?"
 
 #: src/dialogs.py:94
 msgid "Enter name for new chat"
-msgstr ""
+msgstr "Ingrese el nombre para el nuevo chat"
 
 #: src/dialogs.py:100 src/window.ui:469
 msgid "Create"
@@ -1527,67 +1527,67 @@ msgstr "Crear"
 
 #: src/dialogs.py:117
 msgid "Stop Download?"
-msgstr ""
+msgstr "¿Parar Descarga?"
 
 #: src/dialogs.py:118
 msgid "Are you sure you want to stop pulling '{} ({})'?"
-msgstr ""
+msgstr "¿Estás seguro de que quieres parar la descarga de '{} ({})'?"
 
 #: src/dialogs.py:122
 msgid "Stop"
-msgstr ""
+msgstr "Parar"
 
 #: src/dialogs.py:138
 msgid "Delete Model?"
-msgstr ""
+msgstr "¿Eliminar Modelo?"
 
 #: src/dialogs.py:159
 msgid "Remove Attachment?"
-msgstr ""
+msgstr "¿Remover Adjunto?"
 
 #: src/dialogs.py:160
 msgid "Are you sure you want to remove attachment?"
-msgstr ""
+msgstr "¿Estás seguro de que quieres remover el adjunto?"
 
 #: src/dialogs.py:164
 msgid "Remove"
-msgstr ""
+msgstr "Remover"
 
 #: src/dialogs.py:189
 msgid "Connection Error"
-msgstr ""
+msgstr "Error de conexión"
 
 #: src/dialogs.py:190
 msgid "The remote instance has disconnected"
-msgstr ""
+msgstr "La instancia remota se ha desconectado"
 
 #: src/dialogs.py:194
 msgid "Close Alpaca"
-msgstr ""
+msgstr "Cerrar Alpaca"
 
 #: src/dialogs.py:195
 msgid "Use local instance"
-msgstr ""
+msgstr "Usar instancia local"
 
 #: src/dialogs.py:196
 msgid "Connect"
-msgstr ""
+msgstr "Conectar"
 
 #: src/dialogs.py:219
 msgid "Select Model"
-msgstr ""
+msgstr "Selecciona el Modelo"
 
 #: src/dialogs.py:220
 msgid "This model will be used as the base for the new model"
-msgstr ""
+msgstr "Este modelo será usado como base para el nuevo modelo"
 
 #: src/dialogs.py:224 src/dialogs.py:309 src/dialogs.py:347
 msgid "Accept"
-msgstr ""
+msgstr "Aceptar"
 
 #: src/dialogs.py:238
 msgid "An error occurred while creating the model"
-msgstr ""
+msgstr "Ha ocurrido un error mientras se creaba el modelo"
 
 #: src/dialogs.py:294
 msgid "This video does not have any transcriptions"
@@ -1595,7 +1595,7 @@ msgstr "Este video no tiene transcripciones"
 
 #: src/dialogs.py:303
 msgid "Attach YouTube Video?"
-msgstr ""
+msgstr "¿Adjuntar Video de YouTube?"
 
 #: src/dialogs.py:304
 msgid ""
@@ -1603,20 +1603,25 @@ msgid ""
 "\n"
 "Please select a transcript to include"
 msgstr ""
+"{}\n"
+"\n"
+"Por favor selecciona la transcripción ha incluir"
 
 #: src/dialogs.py:337
 msgid "An error occurred while extracting text from the website"
-msgstr ""
+msgstr "Ha ocurrido un error mientras se extraía texto del sitio web"
 
 #: src/dialogs.py:342
 msgid "Attach Website? (Experimental)"
-msgstr ""
+msgstr "¿Adjuntar Sitio Web? (Experimental)"
 
 #: src/dialogs.py:343
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
 msgstr ""
+"¿Estás seguro de que quieres adjuntar\n"
+"'{}'?"
 
 #: src/window.ui:52
 msgid "Menu"
