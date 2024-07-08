@@ -1315,119 +1315,119 @@ msgstr ""
 #: src/dialogs.py:121 src/dialogs.py:142 src/dialogs.py:163 src/dialogs.py:223
 #: src/dialogs.py:308 src/dialogs.py:346
 msgid "Cancel"
-msgstr ""
+msgstr "বাতিল করুন"
 
 #: src/dialogs.py:25
 msgid "Clear"
-msgstr ""
+msgstr "পরিষ্কার করুন"
 
 #: src/dialogs.py:41
 msgid "Delete Chat?"
-msgstr ""
+msgstr "চ্যাট মুছে ফেলুন?"
 
 #: src/dialogs.py:42 src/dialogs.py:139
 msgid "Are you sure you want to delete '{}'?"
-msgstr ""
+msgstr "আপনি কি নিশ্চিত যে আপনি '{}' মুছে ফেলতে চান?"
 
 #: src/dialogs.py:46 src/dialogs.py:143
 msgid "Delete"
-msgstr ""
+msgstr "মুছে ফেলুন"
 
 #: src/dialogs.py:66
 msgid "Rename Chat?"
-msgstr ""
+msgstr "চ্যাট পুনর্নামকরণ করুন?"
 
 #: src/dialogs.py:67
 msgid "Renaming '{}'"
-msgstr ""
+msgstr "'{}' পুনর্নামকরণ করা হচ্ছে"
 
 #: src/dialogs.py:73
 msgid "Rename"
-msgstr ""
+msgstr "পুনর্নামকরণ করুন"
 
 #: src/dialogs.py:93
 msgid "Create Chat?"
-msgstr ""
+msgstr "নতুন চ্যাট তৈরি করুন?"
 
 #: src/dialogs.py:94
 msgid "Enter name for new chat"
-msgstr ""
+msgstr "নতুন চ্যাটের জন্য নাম লিখুন"
 
 #: src/dialogs.py:100 src/window.ui:469
 msgid "Create"
-msgstr "Create"
+msgstr "তৈরি করুন"
 
 #: src/dialogs.py:117
 msgid "Stop Download?"
-msgstr ""
+msgstr "ডাউনলোড বন্ধ করুন?"
 
 #: src/dialogs.py:118
 msgid "Are you sure you want to stop pulling '{} ({})'?"
-msgstr ""
+msgstr "আপনি কি নিশ্চিত যে আপনি '{}' ({}) টানা বন্ধ করতে চান?"
 
 #: src/dialogs.py:122
 msgid "Stop"
-msgstr ""
+msgstr "বন্ধ করুন"
 
 #: src/dialogs.py:138
 msgid "Delete Model?"
-msgstr ""
+msgstr "মডেল মুছে ফেলুন?"
 
 #: src/dialogs.py:159
 msgid "Remove Attachment?"
-msgstr ""
+msgstr "সংযুক্তি মুছে ফেলুন?"
 
 #: src/dialogs.py:160
 msgid "Are you sure you want to remove attachment?"
-msgstr ""
+msgstr "আপনি কি নিশ্চিত যে আপনি সংযুক্তি মুছে ফেলতে চান?"
 
 #: src/dialogs.py:164
 msgid "Remove"
-msgstr ""
+msgstr "মুছে ফেলুন"
 
 #: src/dialogs.py:189
 msgid "Connection Error"
-msgstr ""
+msgstr "সংযোগ ত্রুটি"
 
 #: src/dialogs.py:190
 msgid "The remote instance has disconnected"
-msgstr ""
+msgstr "দূরবর্তী ইনস্ট্যান্সটি সংযোগ বিচ্ছিন্ন হয়েছে"
 
 #: src/dialogs.py:194
 msgid "Close Alpaca"
-msgstr ""
+msgstr "আলপাকা বন্ধ করুন"
 
 #: src/dialogs.py:195
 msgid "Use local instance"
-msgstr ""
+msgstr "স্থানীয় ইনস্ট্যান্স ব্যবহার করুন"
 
 #: src/dialogs.py:196
 msgid "Connect"
-msgstr ""
+msgstr "সংযোগ করুন"
 
 #: src/dialogs.py:219
 msgid "Select Model"
-msgstr ""
+msgstr "মডেল নির্বাচন করুন"
 
 #: src/dialogs.py:220
 msgid "This model will be used as the base for the new model"
-msgstr ""
+msgstr "নতুন মডেলের জন্য এই মডেলটি ভিত্তি হিসাবে ব্যবহার করা হবে"
 
 #: src/dialogs.py:224 src/dialogs.py:309 src/dialogs.py:347
 msgid "Accept"
-msgstr ""
+msgstr "গ্রহণ করুন"
 
 #: src/dialogs.py:238
 msgid "An error occurred while creating the model"
-msgstr ""
+msgstr "মডেল তৈরি করার সময় একটি ত্রুটি ঘটেছে"
 
 #: src/dialogs.py:294
 msgid "This video does not have any transcriptions"
-msgstr "This video does not have any transcriptions"
+msgstr "এই ভিডিওতে কোন লিপ্যন্তর নেই"
 
 #: src/dialogs.py:303
 msgid "Attach YouTube Video?"
-msgstr ""
+msgstr "ইউটিউব ভিডিও সংযুক্ত করুন?"
 
 #: src/dialogs.py:304
 msgid ""
@@ -1435,84 +1435,88 @@ msgid ""
 "\n"
 "Please select a transcript to include"
 msgstr ""
+"{}\n"
+"\n"
+"অন্তর্ভুক্ত করার জন্য একটি লিপ্যন্তর নির্বাচন করুন"
 
 #: src/dialogs.py:337
 msgid "An error occurred while extracting text from the website"
-msgstr ""
+msgstr "ওয়েবসাইট থেকে টেক্সট নিষ্কাশনের সময় একটি ত্রুটি ঘটেছে"
 
 #: src/dialogs.py:342
 msgid "Attach Website? (Experimental)"
-msgstr ""
+msgstr "ওয়েবসাইট সংযুক্ত করুন? (পরীক্ষামূলক)"
 
 #: src/dialogs.py:343
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
 msgstr ""
+"আপনি কি নিশ্চিত যে আপনি সংযুক্ত করতে চান\n"
+"'{}'?"
 
 #: src/window.ui:52
 msgid "Menu"
-msgstr "Menu"
+msgstr "মেনু"
 
 #: src/window.ui:82
 msgid "Toggle Sidebar"
-msgstr "Toggle Sidebar"
+msgstr "সাইডবার টগল করুন"
 
 #: src/window.ui:107 src/window.ui:587
 msgid "Manage Models"
-msgstr "Manage Models"
+msgstr "মডেল পরিচালনা করুন"
 
 #: src/window.ui:121
 msgid "Chat Menu"
-msgstr "Chat Menu"
+msgstr "চ্যাট মেনু"
 
 #: src/window.ui:197
 msgid "Attach File"
-msgstr "Attach File"
+msgstr "ফাইল সংযুক্ত করুন"
 
 #: src/window.ui:242 src/window.ui:1127
 msgid "Send Message"
-msgstr "Send Message"
+msgstr "বার্তা পাঠান"
 
 #: src/window.ui:290 src/window.ui:972 src/window.ui:1086
 msgid "Preferences"
-msgstr "Preferences"
+msgstr "পছন্দ"
 
 #: src/window.ui:293 src/window.ui:1064
 msgid "General"
-msgstr "General"
+msgstr "সাধারণ"
 
 #: src/window.ui:299
 msgid "Use Remote Connection to Ollama"
-msgstr "Use Remote Connection to Ollama"
+msgstr "অল্লামায় দূরবর্তী সংযোগ ব্যবহার করুন"
 
 #: src/window.ui:305
 msgid "URL of Remote Instance"
-msgstr "URL of Remote Instance"
+msgstr "দূরবর্তী ইনস্ট্যান্সের URL"
 
 #: src/window.ui:312
 msgid "Bearer Token (Optional)"
-msgstr "Bearer Token (Optional)"
+msgstr "বিয়ারার টোকেন (ঐচ্ছিক)"
 
 #: src/window.ui:322
 msgid "Run Alpaca In Background"
-msgstr "Run Alpaca In Background"
+msgstr "আলপাকা পটভূমিতে চালান"
 
 #: src/window.ui:333
 msgid "Temperature"
-msgstr "Temperature"
+msgstr "তাপমাত্রা"
 
 #: src/window.ui:334
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
 msgstr ""
-"The temperature of the model. Increasing the temperature will make the model "
-"answer more creatively. (Default: 0.8)"
+"মডেলের তাপমাত্রা। তাপমাত্রা বাড়ানো হলে মডেল আরও সৃজনশীলভাবে উত্তর দেবে। (ডিফল্ট: ০.৮)"
 
 #: src/window.ui:349
 msgid "Seed"
-msgstr "Seed"
+msgstr "বীজ"
 
 #: src/window.ui:350
 msgid ""
@@ -1520,103 +1524,102 @@ msgid ""
 "specific number will make the model generate the same text for the same "
 "prompt. (Default: 0 (random))"
 msgstr ""
-"Sets the random number seed to use for generation. Setting this to a "
-"specific number will make the model generate the same text for the same "
-"prompt. (Default: 0 (random))"
+"জন্মের জন্য ব্যবহার করার জন্য র্যান্ডম নম্বার সীড সেট করে। এই নির্দিষ্ট সংখ্যায় "
+"সেট করলে মডেল একই প্রম্পটের জন্য একই টেক্সট জন্ম দেবে। (ডিফল্ট: ০ (এলোমেলোভাবে))"
 
 #: src/window.ui:364
 msgid "Keep Alive Time"
-msgstr "Keep Alive Time"
+msgstr "জীবিত সময়"
 
 #: src/window.ui:365
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
 msgstr ""
-"Controls how long the model will stay loaded into memory following the "
-"request in minutes (Default: 5)"
+"অনুরোধের পরে মিনিটে মেমরিতে মডেল কতক্ষণ থাকবে তা নিয়ন্ত্রণ করে (ডিফল্ট: ৫)"
 
 #: src/window.ui:381
 msgid "Ollama Instance"
-msgstr "Ollama Instance"
+msgstr "অল্লামা ইনস্ট্যান্স"
 
 #: src/window.ui:385
 msgid "Ollama Overrides"
-msgstr "Ollama Overrides"
+msgstr "ওল্লামা ওভাররাইড"
 
 #: src/window.ui:386
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
 msgstr ""
-"Manage the arguments used on Ollama, any changes on this page only applies "
-"to the integrated instance, the instance will restart if you make changes."
+"ওল্লামাতে ব্যবহৃত আর্গুমেন্টগুলি পরিচালনা করুন, এই পৃষ্ঠায় যেকোনো পরিবর্তন শুধুমাত্র প্রযোজ্য হবে"
+"সমন্বিত উদাহরণে, আপনি পরিবর্তন করলে উদাহরণটি পুনরায় চালু হবে।"
 
 #: src/window.ui:482 src/window.ui:597
 msgid "Create Model"
-msgstr "Create Model"
+msgstr "মডেল তৈরি করুন"
 
 #: src/window.ui:508
 msgid "Base"
-msgstr "Base"
+msgstr "ভিত্তি"
 
 #: src/window.ui:526
 msgid "Name"
-msgstr "Name"
+msgstr "নাম"
 
 #: src/window.ui:532
 msgid "Context"
-msgstr "Context"
+msgstr "প্রসঙ্গ"
 
 #: src/window.ui:547
 msgid "Template"
-msgstr "Template"
+msgstr "টেমপ্লেট"
 
 #: src/window.ui:553
 msgid ""
 "Some models require a specific template. Please visit the model's website "
 "for more information if you're unsure."
 msgstr ""
-"Some models require a specific template. Please visit the model's website "
-"for more information if you're unsure."
+"কিছু মডেল নির্দিষ্ট টেমপ্লেট প্রয়োজন। আপনি অনিশ্চিত হলে আরও তথ্যের জন্য "
+"মডেলের ওয়েবসাইট পরিদর্শন করুন।"
 
 #: src/window.ui:604
 msgid "Search Model"
-msgstr "Search Model"
+msgstr "মডেল খুঁজুন"
 
 #: src/window.ui:664
 msgid "No Models Found"
-msgstr "No Models Found"
+msgstr "কোন মডেল পাওয়া যায়নি"
 
 #: src/window.ui:665
 msgid "Try a different search"
-msgstr "Try a different search"
+msgstr "ভিন্ন খোঁজ চেষ্টা করুন"
 
 #: src/window.ui:708
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
 msgstr ""
+"এই মডেলটি ডাউনলোড করার মাধ্যমে আপনি মডেলের ওয়েবসাইটে উপলব্ধ লাইসেন্স চুক্তি গ্রহণ করেন।"
 
 #: src/window.ui:745
 msgid "Open with Default App"
-msgstr "Open with Default App"
+msgstr "ডিফল্ট অ্যাপে খুলুন"
 
 #: src/window.ui:797
 msgid "Previous"
-msgstr "Previous"
+msgstr "পূর্ববর্তী"
 
 #: src/window.ui:840
 msgid "Welcome to Alpaca"
-msgstr "Welcome to Alpaca"
+msgstr "আলপাকায় স্বাগতম"
 
 #: src/window.ui:841
 msgid "Powered by Ollama"
-msgstr "Powered by Ollama"
+msgstr "ওল্লামা দ্বারা সক্ষম"
 
 #: src/window.ui:844
 msgid "Ollama Website"
-msgstr "Ollama Website"
+msgstr "ওল্লামা ওয়েবসাইট"
 
 #: src/window.ui:861
 msgid ""
@@ -1624,13 +1627,13 @@ msgid ""
 "software resulting from the execution of code generated by an AI model. "
 "Please exercise caution and review the code carefully before running it."
 msgstr ""
-"Alpaca and its developers are not liable for any damages to devices or "
-"software resulting from the execution of code generated by an AI model. "
-"Please exercise caution and review the code carefully before running it."
+"আলপাকা এবং এর বিকাশকারীরা ডিভাইসগুলির কোনও ক্ষতির জন্য দায়ী নয় বা "
+"একটি এআই মডেল দ্বারা উত্পন্ন কোড কার্যকর করার ফলে সফ্টওয়্যার।"
+"অনুগ্রহ করে সতর্কতা অবলম্বন করুন এবং কোডটি চালানোর আগে সাবধানে পর্যালোচনা করুন।"
 
 #: src/window.ui:872
 msgid "Featured Models"
-msgstr "Featured Models"
+msgstr "ফিচার্ড মডেলস"
 
 #: src/window.ui:873
 msgid ""
@@ -1638,9 +1641,9 @@ msgid ""
 "model, you can either pull models from this list or the 'Manage Models' menu "
 "later."
 msgstr ""
-"Alpaca works locally on your device, to start chatting you'll need an AI "
-"model, you can either pull models from this list or the 'Manage Models' menu "
-"later."
+"আলপাকা আপনার ডিভাইসে স্থানীয়ভাবে কাজ করে, চ্যাটিং শুরু করতে আপনাকে একটি এআই "
+"মডেল প্রয়োজন, আপনি এই তালিকা থেকে মডেল টানতে পারেন বা পরে 'মডেল পরিচালনা' "
+"মেনুতে।"
 
 #: src/window.ui:883
 msgid "Built by Meta"
