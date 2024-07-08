@@ -1402,11 +1402,11 @@ Generate a title following these rules:
             if texture:
                 if self.verify_if_image_can_be_used():
                     pixbuf = Gdk.pixbuf_get_from_texture(texture)
-                    if not os.path.exists(os.path.join(self.cache_dir, 'tmp/alpaca/images/')):
-                        os.makedirs(os.path.join(self.cache_dir, 'tmp/alpaca/images/'))
-                    image_name = self.generate_numbered_name('image.png', os.listdir(os.path.join(self.cache_dir, os.path.join(self.cache_dir, 'tmp/alpaca/images'))))
-                    pixbuf.savev(os.path.join(self.cache_dir, 'tmp/alpaca/images/{}'.format(image_name)), "png", [], [])
-                    self.attach_file(os.path.join(self.cache_dir, 'tmp/alpaca/images/{}'.format(image_name)), 'image')
+                    if not os.path.exists(os.path.join(self.cache_dir, 'tmp/images/')):
+                        os.makedirs(os.path.join(self.cache_dir, 'tmp/images/'))
+                    image_name = self.generate_numbered_name('image.png', os.listdir(os.path.join(self.cache_dir, os.path.join(self.cache_dir, 'tmp/images'))))
+                    pixbuf.savev(os.path.join(self.cache_dir, 'tmp/images/{}'.format(image_name)), "png", [], [])
+                    self.attach_file(os.path.join(self.cache_dir, 'tmp/images/{}'.format(image_name)), 'image')
                 else:
                     self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
         except Exception as e: 'huh'
