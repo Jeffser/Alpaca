@@ -495,7 +495,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         content = self.get_content_of_file(file_path, file_type)
         if presend_name:
             self.file_preview_remove_button.set_visible(True)
-            self.file_preview_remove_button.connect('clicked', lambda button, name=presend_name : dialogs.remove_attached_file(self, name))
+            self.file_preview_remove_button.set_name(presend_name)
         else:
             self.file_preview_remove_button.set_visible(False)
         if content:
@@ -635,25 +635,19 @@ Generate a title following these rules:
             )
             for image in images:
                 path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image)
-                raw_data = self.get_content_of_file(path, "image")
-                if raw_data:
-                    #image_container.set_visible(True)
-                    image_data = base64.b64decode(raw_data)
-                    loader = GdkPixbuf.PixbufLoader.new()
-                    loader.write(image_data)
-                    loader.close()
-                    pixbuf = loader.get_pixbuf()
-                    texture = Gdk.Texture.new_for_pixbuf(pixbuf)
-                    image_texture = Gtk.Image.new_from_paintable(texture)
-                    image_texture.set_size_request(240, 240)
+                try:
+                    if not os.path.isfile(path):
+                        raise FileNotFoundError("'{}' was not found or is a directory".format(path))
+                    image_element = Gtk.Image.new_from_file(path)
+                    image_element.set_size_request(240, 240)
                     button = Gtk.Button(
-                        child=image_texture,
+                        child=image_element,
                         css_classes=["flat", "chat_image_button"],
                         name=os.path.join(self.data_dir, "chats", "{selected_chat}", id, image),
                         tooltip_text=os.path.basename(path)
                     )
-                    button.connect('clicked', self.link_button_handler)
-                else:
+                    button.connect("clicked", lambda button, file_path=path: self.preview_file(file_path, 'image', None))
+                except Exception as e:
                     image_texture = Gtk.Image.new_from_icon_name("image-missing-symbolic")
                     image_texture.set_icon_size(2)
                     image_texture.set_vexpand(True)
@@ -677,6 +671,7 @@ Generate a title following these rules:
                         css_classes=["flat", "chat_image_button"],
                         tooltip_text=_("Missing image")
                     )
+                    button.connect("clicked", lambda button : self.show_toast(_("Missing image"), self.main_overlay))
                 image_container.append(button)
             message_box.append(image_scroller)
 
@@ -1489,6 +1484,7 @@ Generate a title following these rules:
         self.get_application().create_action('export_chat', self.chat_actions)
         self.get_application().create_action('export_current_chat', self.current_chat_actions)
         self.message_text_view.connect("paste-clipboard", self.on_clipboard_paste)
+        self.file_preview_remove_button.connect('clicked', lambda button : dialogs.remove_attached_file(self, button.get_name()))
         self.add_chat_button.connect("clicked", lambda button : self.new_chat())
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
         self.create_model_name.get_delegate().connect("insert-text", self.check_alphanumeric)
