@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-07 20:45-0600\n"
 "PO-Revision-Date: 2024-07-07 15:12-0600\n"
-"Last-Translator: (YOUR NAME) <(YOUR EMAIL OPTIONAL)>\n"
+"Last-Translator: (aritra saha) <(capsaicin@tuta.io)>\n"
 "Language-Team: Bengali\n"
 "Language: bn\n"
 "MIME-Version: 1.0\n"
@@ -788,11 +788,11 @@ msgstr "নির্দিষ্ট মডেলগুলিতে ছবি স
 
 #: src/available_models_descriptions.py:2
 msgid "Google Gemma 2 is now available in 2 sizes, 9B and 27B."
-msgstr "গুগল জেমা 2 এখন 2 আকারে উপলব্ধ, 9B এবং 27B."
+msgstr "গুগল Gemma 2 এখন 2 আকারে উপলব্ধ, 9B এবং 27B."
 
 #: src/available_models_descriptions.py:3
 msgid "Meta Llama 3: The most capable openly available LLM to date"
-msgstr "মেটা ল্লামা 3: এখন পর্যন্ত সবচেয়ে ক্ষমতাসম্পন্ন উন্মুক্তভাবে উপলব্ধ LLM"
+msgstr "মেটা Llama 3: এখন পর্যন্ত সবচেয়ে ক্ষমতাসম্পন্ন উন্মুক্তভাবে উপলব্ধ LLM"
 
 #: src/available_models_descriptions.py:4
 msgid "Qwen2 is a new series of large language models from Alibaba group"
@@ -841,18 +841,25 @@ msgid ""
 "generation, natural language understanding, mathematical reasoning, and "
 "instruction following."
 msgstr ""
+"কোডজেমা হল একটি শক্তিশালী, হালকা মডেলের সংগ্রহ যা কোড সম্পূর্ণকরণ, কোড উৎপাদন, "
+"প্রাকৃতিক ভাষা বোঝাপড়া, গাণিতিক যুক্তি এবং নির্দেশনা অনুসরণের মতো বিভিন্ন কোডিং কাজ "
+"করতে পারে।"
 
 #: src/available_models_descriptions.py:11
 msgid ""
 "Command R is a Large Language Model optimized for conversational interaction "
 "and long context tasks."
 msgstr ""
+"কমান্ড R হল একটি বৃহৎ ভাষা মডেল যা কথোপকথন ইন্টারঅ্যাকশন এবং দীর্ঘ প্রসঙ্গ কাজের জন্য "
+"অপ্টিমাইজ করা হয়েছে।"
 
 #: src/available_models_descriptions.py:12
 msgid ""
 "Command R+ is a powerful, scalable large language model purpose-built to "
 "excel at real-world enterprise use cases."
 msgstr ""
+"কমান্ড R+ হল একটি শক্তিশালী, স্কেলেবল বৃহৎ ভাষা মডেল যা বাস্তব বিশ্বের উদ্যোগ ব্যবহার ক্ষেত্রে "
+"উৎকর্ষ করার জন্য তৈরি করা হয়েছে।"
 
 #: src/available_models_descriptions.py:13
 msgid ""
@@ -860,194 +867,238 @@ msgid ""
 "a vision encoder and Vicuna for general-purpose visual and language "
 "understanding. Updated to version 1.6."
 msgstr ""
+"🌋 LLaVA হল একটি নতুন এন্ড-টু-এন্ড ট্রেন্ড বৃহৎ বহুমাধ্যম মডেল যা সাধারণ উদ্দেশ্যে "
+"দৃশ্য ও ভাষা বোঝাপড়ার জন্য একটি দৃশ্য এনকোডার এবং Vicuna কে সংযুক্ত করে। ১.৬ "
+"সংস্করণে আপডেট করা হয়েছে।"
 
 #: src/available_models_descriptions.py:14
 msgid ""
 "Gemma is a family of lightweight, state-of-the-art open models built by "
 "Google DeepMind. Updated to version 1.1"
 msgstr ""
+"জেমা হল গুগল ডিপমাইন্ড দ্বারা নির্মিত হালকা, স্টেট-অফ-দি-আর্ট ওপেন মডেলের একটি পরিবার। "
+"সংস্করণ ১.১ এ আপডেট করা হয়েছে।"
 
 #: src/available_models_descriptions.py:15
 msgid ""
 "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
 "0.5B to 110B parameters"
 msgstr ""
+"কুয়েন ১.৫ হল আলিবাবা ক্লাউড দ্বারা নির্মিত বড় ভাষা মডেলের একটি সিরিজ, ০.৫বি থেকে ১১০বি "
+"প্যারামিটার পর্যন্ত বিস্তৃত।"
 
 #: src/available_models_descriptions.py:16
 msgid ""
 "Llama 2 is a collection of foundation language models ranging from 7B to 70B "
 "parameters."
 msgstr ""
+"ল্লামা ২ হল ৭বি থেকে ৭০বি প্যারামিটার পর্যন্ত বিস্তৃত ফাউন্ডেশন ভাষা মডেলের একটি সংগ্রহ।"
 
 #: src/available_models_descriptions.py:17
 msgid ""
 "A large language model that can use text prompts to generate and discuss "
 "code."
 msgstr ""
+"একটি বড় ভাষা মডেল যা টেক্সট প্রম্পটগুলি ব্যবহার করে কোড জেনারেট এবং আলোচনা করতে পারে।"
 
 #: src/available_models_descriptions.py:18
 msgid ""
 "Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
 "experts models that excels at coding tasks. Created by Eric Hartford."
 msgstr ""
+"অনসেন্সর্ড, ৮x৭b এবং ৮x২২b ফাইন-টিউনড মডেলগুলি মিক্সট্রাল বিশেষজ্ঞ মডেলগুলির উপর "
+"ভিত্তি করে যা কোডিং টাস্কগুলিতে উত্তম। এরিক হার্টফোর্ড দ্বারা তৈরি।"
 
 #: src/available_models_descriptions.py:19
 msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
-msgstr ""
+msgstr "জর্জ সাং এবং জ্যারাড হোপ দ্বারা অনসেন্সর্ড ল্লামা ২ মডেল।"
 
 #: src/available_models_descriptions.py:20
 msgid ""
 "DeepSeek Coder is a capable coding model trained on two trillion code and "
 "natural language tokens."
 msgstr ""
+"ডিপসীক কোডার হল দুই ট্রিলিয়ন কোড এবং প্রাকৃতিক ভাষা টোকেনগুলির উপর প্রশিক্ষিত একটি সক্ষম কোডিং মডেল।"
 
 #: src/available_models_descriptions.py:21
 msgid ""
 "A high-performing open embedding model with a large token context window."
 msgstr ""
+"একটি উচ্চ-পারফর্মিং ওপেন এম্বেডিং মডেল বড় টোকেন কন্টেক্সট উইন্ডো সহ।"
 
 #: src/available_models_descriptions.py:22
 msgid ""
 "Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
 "outstanding reasoning and language understanding capabilities."
 msgstr ""
+"ফাই-২: মাইক্রোসফট রিসার্চ দ্বারা একটি ২.৭বি ভাষা মডেল যা অসাধারণ যুক্তি এবং ভাষা বোঝার ক্ষমতা প্রদর্শন করে।"
 
 #: src/available_models_descriptions.py:23
 msgid ""
 "The uncensored Dolphin model based on Mistral that excels at coding tasks. "
 "Updated to version 2.8."
 msgstr ""
+"মিস্ট্রাল ভিত্তিক অনসেন্সর্ড ডলফিন মডেল যা কোডিং কাজে সমৃদ্ধ। 2.8 সংস্করণে আপডেট করা হয়েছে"
 
 #: src/available_models_descriptions.py:24
 msgid ""
 "Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
 "Mistral 7B model using the OpenOrca dataset."
 msgstr ""
+"মিস্ট্রাল ওপেনঅরকা হল 7 বিলিয়ন প্যারামিটার মডেল, মিস্ট্রাল 7B মডেলের উপরে ওপেনঅরকা ডেটাসেট ব্যবহার করে সূক্ষ্ম-টিউন করা হয়েছে"
 
 #: src/available_models_descriptions.py:25
 msgid ""
 "A general-purpose model ranging from 3 billion parameters to 70 billion, "
 "suitable for entry-level hardware."
 msgstr ""
+"এন্ট্রি-লেভেল হার্ডওয়্যারের জন্য উপযুক্ত 3 বিলিয়ন থেকে 70 বিলিয়ন প্যারামিটার পর্যন্ত সাধারণ-উদ্দেশ্য মডেল"
 
 #: src/available_models_descriptions.py:26
 msgid "State-of-the-art large embedding model from mixedbread.ai"
 msgstr ""
+"মিক্সডব্রেড.এআই থেকে সর্বাধুনিক বড় এম্বেডিং মডেল"
 
 #: src/available_models_descriptions.py:27
 msgid ""
 "Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on "
 "Llama 3 that has a variety of instruction, conversational, and coding skills."
 msgstr ""
+"ডলফিন 2.9 হল এরিক হার্টফোর্ড কর্তৃক ল্লামা 3 এর উপর ভিত্তি করে 8B এবং 70B আকারের "
+"নতুন মডেল যা নির্দেশনা, কনভার্সেশনাল এবং কোডিং দক্ষতার বিভিন্ন রকম আছে"
 
 #: src/available_models_descriptions.py:28
 msgid ""
 "StarCoder2 is the next generation of transparently trained open code LLMs "
 "that comes in three sizes: 3B, 7B and 15B parameters."
 msgstr ""
+"স্টারকোডার2 হল স্বচ্ছভাবে প্রশিক্ষিত ওপেন কোড LLMs এর পরবর্তী প্রজন্ম যা 3B, 7B এবং 15B "
+"প্যারামিটারের তিনটি আকারে আসে"
 
 #: src/available_models_descriptions.py:29
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
 msgstr ""
+"ল্লামা 2 ভিত্তিক মডেল চীনা ডায়ালগ দক্ষতা উন্নত করার জন্য সূক্ষ্ম-টিউন করা হয়েছে"
 
 #: src/available_models_descriptions.py:30
 msgid ""
 "Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
 "that are trained to act as helpful assistants."
 msgstr ""
+"জেফির হল মিস্ট্রাল এবং মিক্সট্রাল মডেলের সূক্ষ্ম-টিউন সংস্করণের একটি সিরিজ যা সহায়ক সহকারী "
+"হিসাবে কাজ করার জন্য প্রশিক্ষিত"
 
 #: src/available_models_descriptions.py:31
 msgid "Yi 1.5 is a high-performing, bilingual language model."
-msgstr ""
+msgstr "ইয়ি 1.5 হল একটি উচ্চ-পারফর্মিং, দ্বিভাষিক ভাষা মডেল"
 
 #: src/available_models_descriptions.py:32
 msgid ""
 "The powerful family of models by Nous Research that excels at scientific "
 "discussion and coding tasks."
 msgstr ""
+"নাউস রিসার্চ কর্তৃক পরিবারের শক্তিশালী মডেল যা বৈজ্ঞানিক আলোচনা এবং কোডিং কাজে সমৃদ্ধ"
 
 #: src/available_models_descriptions.py:33
 msgid ""
 "General use chat model based on Llama and Llama 2 with 2K to 16K context "
 "sizes."
 msgstr ""
+"ল্লামা এবং ল্লামা 2 এর উপর ভিত্তি করে 2K থেকে 16K প্রসঙ্গ আকারের সাথে সাধারণ ব্যবহার চ্যাট মডেল"
 
 #: src/available_models_descriptions.py:34
 msgid ""
 "Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
 "Llama 2 uncensored by Eric Hartford."
 msgstr ""
+"উইজার্ড ভিকুনা আনসেন্সর্ড হল এরিক হার্টফোর্ড দ্বারা ল্লামা ২ আনসেন্সর্ড ভিত্তিক ৭বি, ১৩বি এবং "
+"৩০বি প্যারামিটার মডেল।"
 
 #: src/available_models_descriptions.py:35
 msgid ""
 "The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
 "model on 3 trillion tokens."
 msgstr ""
+"টাইনি লামা প্রকল্প হল 3 ট্রিলিয়ন টোকেনে একটি কম্প্যাক্ট 1.1B লামা মডেল প্রশিক্ষণের একটি উন্মুক্ত উদ্যোগ।"
 
 #: src/available_models_descriptions.py:36
 msgid ""
 "State of the art large language model from Microsoft AI with improved "
 "performance on complex chat, multilingual, reasoning and agent use cases."
 msgstr ""
+"মাইক্রোসফট এআই থেকে জটিল চ্যাট, বহুভাষিক, যুক্তি এবং এজেন্ট ব্যবহারের ক্ষেত্রে উন্নত "
+"পারফরম্যান্সসহ সর্বাধুনিক বড় ভাষা মডেল।"
 
 #: src/available_models_descriptions.py:37
 msgid ""
 "StarCoder is a code generation model trained on 80+ programming languages."
 msgstr ""
+"স্টারকোডার হল ৮০+ প্রোগ্রামিং ভাষায় প্রশিক্ষিত একটি কোড জেনারেশন মডেল।"
 
 #: src/available_models_descriptions.py:38
 msgid ""
 "Codestral is Mistral AI’s first-ever code model designed for code generation "
 "tasks."
 msgstr ""
+"কোডেস্ট্রাল হল মিস্ট্রাল এআই-এর প্রথম কোড মডেল যা কোড জেনারেশন টাস্কগুলির জন্য ডিজাইন করা হয়েছে।"
 
 #: src/available_models_descriptions.py:39
 msgid ""
 "A family of open-source models trained on a wide variety of data, surpassing "
 "ChatGPT on various benchmarks. Updated to version 3.5-0106."
 msgstr ""
+"একটি ওপেন-সোর্স মডেল পরিবার যা বিস্তৃত তথ্যের উপর প্রশিক্ষিত, বিভিন্ন বেঞ্চমার্কে "
+"চ্যাটজিপিটিকে ছাড়িয়ে গেছে। সংস্করণ ৩.৫-০১০৬ এ আপডেট করা হয়েছে।"
 
 #: src/available_models_descriptions.py:40
 msgid ""
 "An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
 "by Eric Hartford and based on TinyLlama."
 msgstr ""
+"এরিক হার্টফোর্ড দ্বারা নতুন ডলফিন ২.৮ ডেটাসেটের উপর প্রশিক্ষিত একটি পরীক্ষামূলক ১.১বি "
+"প্যারামিটার মডেল, যা টিনিল্লামা ভিত্তিক।"
 
 #: src/available_models_descriptions.py:41
 msgid ""
 "OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
 "open datasets."
 msgstr ""
+"ওপেনহার্মিস ২.৫ হল টেকনিউম দ্বারা মিস্ট্রালের উপর ফুলি ওপেন ডেটাসেটসহ ৭বি মডেল যা "
+"ফাইন-টিউনড করা হয়েছে।"
 
 #: src/available_models_descriptions.py:42
 msgid "State-of-the-art code generation model"
-msgstr ""
+msgstr "সর্বাধুনিক কোড জেনারেশন মডেল"
 
 #: src/available_models_descriptions.py:43
 msgid ""
 "Stable Code 3B is a coding model with instruct and code completion variants "
 "on par with models such as Code Llama 7B that are 2.5x larger."
 msgstr ""
+"স্টেবল কোড ৩বি হল একটি কোডিং মডেল যা ইন্সট্রাক্ট এবং কোড সম্পূর্ণ ভ্যারিয়েন্টসহ, "
+"যা কোড ল্লামা ৭বির মতো মডেলগুলির সমান যা ২.৫গুণ বড়।"
 
 #: src/available_models_descriptions.py:44
 msgid ""
 "A fine-tuned model based on Mistral with good coverage of domain and "
 "language."
 msgstr ""
+"মিস্ট্রালের উপর ভিত্তি করে একটি ফাইন-টিউনড মডেল যা ডোমেন এবং ভাষার ভাল কভারেজ আছে।"
 
 #: src/available_models_descriptions.py:45
 msgid "Model focused on math and logic problems"
-msgstr ""
+msgstr "গণিত ও যুক্তি সমস্যার উপর ফোকাসকৃত মডেল"
 
 #: src/available_models_descriptions.py:46
 msgid ""
 "CodeQwen1.5 is a large language model pretrained on a large amount of code "
 "data."
 msgstr ""
+"কোডকুইন ১.৫ হল একটি বড় ভাষা মডেল যা বড় পরিমাণের কোড ডেটার উপর প্রিট্রেনড।"
 
 #: src/available_models_descriptions.py:47
 msgid "Code generation model based on Code Llama."
-msgstr ""
+msgstr "কোড ল্লামার উপর ভিত্তি করে কোড জেনারেশন মডেল"
 
 #: src/available_models_descriptions.py:48
 msgid ""
@@ -1055,32 +1106,41 @@ msgid ""
 "trained on multilingual data in English, Spanish, German, Italian, French, "
 "Portuguese, and Dutch."
 msgstr ""
+"স্টেবল এলএম ২ হল একটি সর্বাধুনিক ১.৬বি এবং ১২বি প্যারামিটার ভাষা মডেল যা ইংরেজি, স্প্যানিশ, জার্মান, ইতালীয়, ফরাসি, পর্তুগিজ এবং ডাচ ভাষায় বহুভাষিক ডেটার উপর প্রশিক্ষিত।"
+
 
 #: src/available_models_descriptions.py:49
 msgid ""
 "A 7B and 15B uncensored variant of the Dolphin model family that excels at "
 "coding, based on StarCoder2."
 msgstr ""
+"স্টারকোডার ২ ভিত্তিক ডলফিন মডেল পরিবারের একটি ৭বি এবং ১৫বি আনসেন্সর্ড ভ্যারিয়েন্ট যা কোডিংয়ে উৎকৃষ্ট।"
 
 #: src/available_models_descriptions.py:50
 msgid "Embedding models on very large sentence level datasets."
 msgstr ""
+"অত্যন্ত বড় বাক্য স্তরের ডেটাসেটগুলিতে এম্বেডিং মডেলসমূহ।"
 
 #: src/available_models_descriptions.py:51
 msgid "General use models based on Llama and Llama 2 from Nous Research."
 msgstr ""
+"নাউস রিসার্চ থেকে ল্লামা এবং ল্লামা ২ ভিত্তিক সাধারণ ব্যবহারের মডেলসমূহ।"
 
 #: src/available_models_descriptions.py:52
 msgid ""
 "Starling is a large language model trained by reinforcement learning from AI "
 "feedback focused on improving chatbot helpfulness."
 msgstr ""
+"স্টার্লিং হল এআই ফিডব্যাক থেকে শক্তি শিক্ষা দ্বারা প্রশিক্ষিত একটি বড় ভাষা মডেল, "
+"যা চ্যাটবট সহায়তাকে উন্নত করার উপর ফোকাস করে।"
 
 #: src/available_models_descriptions.py:53
 msgid ""
 "SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
 "generation tasks"
 msgstr ""
+"এসকিউএলকোডার হল স্টারকোডারে এসকিউএল জেনারেশন টাস্কের জন্য ফাইন-টিউনড একটি "
+"কোড কমপ্লিশন মডেল।"
 
 #: src/available_models_descriptions.py:54
 msgid ""
@@ -1088,98 +1148,120 @@ msgid ""
 "Meta's Llama 2 models. The model is designed to excel particularly in "
 "reasoning."
 msgstr ""
+"অরকা ২ হল মাইক্রোসফট রিসার্চ দ্বারা নির্মিত, এবং মেটার ল্লামা ২ মডেলের একটি "
+"ফাইন-টিউনড সংস্করণ। মডেলটি বিশেষত যুক্তি প্রদানে উৎকৃষ্ট হওয়ার জন্য ডিজাইন করা হয়েছে।"
 
 #: src/available_models_descriptions.py:55
 msgid ""
 "This model extends LLama-3 8B's context length from 8k to over 1m tokens."
 msgstr ""
+"এই মডেলটি এলএলএমএ-৩ ৮বি এর কন্টেক্সট দৈর্ঘ্য ৮কে থেকে ১ম টোকেন পর্যন্ত বাড়িয়েছে।"
 
 #: src/available_models_descriptions.py:56
 msgid "An advanced language model crafted with 2 trillion bilingual tokens."
 msgstr ""
+"২ ট্রিলিয়ন দ্বিভাষিক টোকেন দিয়ে তৈরি করা একটি উন্নত ভাষা মডেল।"
 
 #: src/available_models_descriptions.py:57
 msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
 msgstr ""
+"ল্লামা ২ এর একটি সম্প্রসারণ যা ১২৮কে টোকেন পর্যন্ত কন্টেক্সট সমর্থন করে।"
 
 #: src/available_models_descriptions.py:58
 msgid ""
 "A model from NVIDIA based on Llama 3 that excels at conversational question "
 "answering (QA) and retrieval-augmented generation (RAG)."
 msgstr ""
+"এনভিডিয়া থেকে ল্লামা ৩ ভিত্তিক একটি মডেল যা কনভার্সেশনাল প্রশ্ন উত্তর (কিউএ) এবং "
+"রিট্রিভাল-অগমেন্টেড জেনারেশন (র‍্যাগ) এ উৎকৃষ্ট।"
 
 #: src/available_models_descriptions.py:59
 msgid ""
 "A compact, yet powerful 10.7B large language model designed for single-turn "
 "conversation."
 msgstr ""
+"একটি কমপ্যাক্ট, কিন্তু শক্তিশালী ১০.৭বি লার্জ ল্যাঙ্গুয়েজ মডেল যা সিঙ্গল-টার্ন কনভার্সেশনের জন্য ডিজাইন করা হয়েছে।"
 
 #: src/available_models_descriptions.py:60
 msgid ""
 "Conversational model based on Llama 2 that performs competitively on various "
 "benchmarks."
 msgstr ""
+"ল্লামা ২ ভিত্তিক একটি কনভার্সেশনাল মডেল যা বিভিন্ন বেঞ্চমার্কে প্রতিযোগিতামূলকভাবে পারফর্ম করে।"
 
 #: src/available_models_descriptions.py:61
 msgid "A family of open foundation models by IBM for Code Intelligence"
 msgstr ""
+"আইবিএম দ্বারা কোড ইন্টেলিজেন্সের জন্য ওপেন ফাউন্ডেশন মডেলের একটি পরিবার।"
 
 #: src/available_models_descriptions.py:62
 msgid ""
 "2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
 "model by Microsoft Research."
 msgstr ""
+"এরিক হার্টফোর্ড দ্বারা ২.৭বি আনসেন্সর্ড ডলফিন মডেল, মাইক্রোসফট রিসার্চ দ্বারা ফাই(phi) ভাষা মডেলের উপর ভিত্তি করে।"
 
 #: src/available_models_descriptions.py:63
 msgid "General use model based on Llama 2."
 msgstr ""
+"ল্লামা ২(llama 2) ভিত্তিক সাধারণ ব্যবহারের মডেল।"
 
 #: src/available_models_descriptions.py:64
 msgid ""
 "A companion assistant trained in philosophy, psychology, and personal "
 "relationships. Based on Mistral."
 msgstr ""
+"দর্শন, মনোবিজ্ঞান এবং ব্যক্তিগত সম্পর্কে প্রশিক্ষিত একটি সহযোগী সহায়ক। মিস্ট্রালের উপর ভিত্তি করে।"
 
 #: src/available_models_descriptions.py:65
 msgid ""
 "Llama 2 based model fine tuned on an Orca-style dataset. Originally called "
 "Free Willy."
 msgstr ""
+"অরকা-স্টাইল ডেটাসেটে ফাইন-টিউনড ল্লামা ২ ভিত্তিক মডেল। মূলত ফ্রি উইলি নামে পরিচিত ছিল।"
 
 #: src/available_models_descriptions.py:66
 msgid ""
 "BakLLaVA is a multimodal model consisting of the Mistral 7B base model "
 "augmented with the LLaVA architecture."
 msgstr ""
+"বাকএলএভিএ(BakLLaVA) হল মিস্ট্রাল ৭বি বেস মডেল এবং এলএলভিএ আর্কিটেকচার দ্বারা "
+"সম্প্রসারিত একটি মাল্টিমোডাল মডেল।"
 
 #: src/available_models_descriptions.py:67
 msgid ""
 "A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
 "benchmarks."
 msgstr ""
+"এল্লামা ৩ ইন্সট্রাক্ট থেকে ফাইন-টিউনড এলএলভিএ মডেল, বেশ কয়েকটি বেঞ্চমার্কে উন্নত স্কোর সহ।"
 
 #: src/available_models_descriptions.py:68
 msgid "Uncensored version of Wizard LM model"
 msgstr ""
+"উইজার্ড এলএম মডেলের আনসেন্সর্ড সংস্করণ।"
 
 #: src/available_models_descriptions.py:69
 msgid ""
 "Fine-tuned Llama 2 model to answer medical questions based on an open source "
 "medical dataset."
 msgstr ""
+"ওপেন সোর্স মেডিক্যাল ডেটাসেট ভিত্তিক মেডিক্যাল প্রশ্নের উত্তর দেওয়ার জন্য ল্লামা ২ মডেল ফাইন-টিউনড।"
 
 #: src/available_models_descriptions.py:70
 msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
 msgstr ""
+"নাউস রিসার্চ থেকে নাউস হার্মিস ২ মডেল, এখন মিক্সট্রাল উপর প্রশিক্ষিত।"
 
 #: src/available_models_descriptions.py:71
 msgid "An extension of Mistral to support context windows of 64K or 128K."
 msgstr ""
+"মিস্ট্রালের একটি সম্প্রসারণ, ৬৪কে বা ১২৮কে কন্টেক্সট উইন্ডোগুলির সমর্থন করার জন্য।"
 
 #: src/available_models_descriptions.py:72
 msgid ""
 "A suite of text embedding models by Snowflake, optimized for performance."
 msgstr ""
+"স্নোফ্লেক(Snowflake) দ্বারা পারফরম্যান্সের জন্য অপ্টিমাইজড টেক্সট এম্বেডিং মডেলের একটি স্যুট।"
 
 #: src/available_models_descriptions.py:73
 msgid ""
@@ -1187,31 +1269,36 @@ msgid ""
 "language understanding and domain-specific knowledge, particularly in "
 "programming and mathematics."
 msgstr ""
+"প্রোগ্রামিং এবং গণিতে বিশেষত সাধারণ ভাষা বোঝাপড়া এবং ডোমেইন-স্পেসিফিক জ্ঞান একত্রিত করার জন্য ল্লামা ২ এর একটি সম্প্রসারণ।"
 
 #: src/available_models_descriptions.py:74
 msgid "Great code generation model based on Llama2."
 msgstr ""
+"ল্লামা২ ভিত্তিক একটি দুর্দান্ত কোড জেনারেশন মডেল।"
 
 #: src/available_models_descriptions.py:75
 msgid ""
 "Open-source medical large language model adapted from Llama 2 to the medical "
 "domain."
 msgstr ""
+"ল্লামা ২ থেকে মেডিক্যাল ডোমেইনে অভিযোজিত ওপেন-সোর্স মেডিক্যাল লার্জ ল্যাঙ্গুয়েজ মডেল।"
 
 #: src/available_models_descriptions.py:76
 msgid ""
 "moondream2 is a small vision language model designed to run efficiently on "
 "edge devices."
 msgstr ""
+"মুন্ড্রিম ২ হল এজ ডিভাইসে দক্ষতার সাথে চলার জন্য ডিজাইন করা একটি ছোট ভিশন ল্যাঙ্গুয়েজ মডেল।"
 
 #: src/available_models_descriptions.py:77
 msgid "Uncensored Llama2 based model with support for a 16K context window."
-msgstr ""
+msgstr "১৬কে কন্টেক্সট উইন্ডোর জন্য সমর্থনসহ আনসেন্সর্ড ল্লামা২ ভিত্তিক মডেল।"
 
 #: src/available_models_descriptions.py:78
 msgid ""
 "Nexus Raven is a 13B instruction tuned model for function calling tasks."
 msgstr ""
+"নেক্সাস রেভেন হল ১৩বি ইন্সট্রাকশন টিউনড মডেল ফাংশন কলিং টাস্কের জন্য।"
 
 #: src/available_models_descriptions.py:79
 msgid ""
@@ -1219,97 +1306,113 @@ msgid ""
 "instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
 "with open-source code snippets."
 msgstr ""
+"🎩 ম্যাজিকোডার হল ৭বি প্যারামিটার মডেলের একটি পরিবার যা OSS-Instruct "
+"ব্যবহার করে ৭৫কে সিন্থেটিক ইন্সট্রাকশন ডেটাতে প্রশিক্ষিত, LLMs কে ওপেন-সোর্স "
+"কোড স্নিপেটস দিয়ে আলোকিত করার একটি নতুন পদ্ধতি।"
 
 #: src/available_models_descriptions.py:80
 msgid "A strong, economical, and efficient Mixture-of-Experts language model."
-msgstr ""
+msgstr "একটি শক্তিশালী, অর্থনৈতিক এবং দক্ষ মিক্সচার-অফ-এক্সপার্টস ভাষা মডেল।"
 
 #: src/available_models_descriptions.py:81
 msgid ""
 "A lightweight chat model allowing accurate, and responsive output without "
 "requiring high-end hardware."
 msgstr ""
+"হালকা চ্যাট মডেল যা সঠিক এবং সাড়া প্রদান করে উচ্চ-মানের হার্ডওয়্যার ছাড়াই।"
 
 #: src/available_models_descriptions.py:82
 msgid ""
 "A high-performing code instruct model created by merging two existing code "
 "models."
 msgstr ""
+"দুটি বিদ্যমান কোড মডেল একত্রিত করে তৈরি করা একটি উচ্চ-পারফর্মিং কোড ইন্সট্রাক্ট মডেল।"
 
 #: src/available_models_descriptions.py:83
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
 msgstr ""
+"ফাই ৩(Phi 3) মিনি থেকে ফাইন-টিউন করা একটি নতুন ছোট এলএলভিএ মডেল।"
 
 #: src/available_models_descriptions.py:84
 msgid ""
 "MistralLite is a fine-tuned model based on Mistral with enhanced "
 "capabilities of processing long contexts."
 msgstr ""
+"মিস্ট্রাললাইট হল মিস্ট্রাল ভিত্তিক একটি ফাইন-টিউন মডেল যা দীর্ঘ প্রসঙ্গ প্রক্রিয়াকরণের উন্নত ক্ষমতা রয়েছে।"
 
 #: src/available_models_descriptions.py:85
 msgid ""
 "Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
 "MelodysDreamj."
 msgstr ""
+"উইজার্ড ভিকুনা হল মেলোডিসড্রিমজ দ্বারা প্রশিক্ষিত এলমা ২ ভিত্তিক ১৩বি প্যারামিটার মডেল।"
 
 #: src/available_models_descriptions.py:86
 msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
 msgstr ""
+"মাদারডাক এবং নাম্বারস স্টেশন দ্বারা তৈরি করা ৭বি প্যারামিটার টেক্সট-টু-এসকিউএল মডেল।"
 
 #: src/available_models_descriptions.py:87
 msgid ""
 "A language model created by combining two fine-tuned Llama 2 70B models into "
 "one."
 msgstr ""
+"দুটি ফাইন-টিউন এলমা ২ ৭০বি মডেলকে একত্রিত করে তৈরি করা একটি ভাষা মডেল।"
 
 #: src/available_models_descriptions.py:88
 msgid ""
 "MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
 "interleaving the model with itself."
 msgstr ""
+"মেগা ডলফিন-২.২-১২০বি হল ডলফিন-২.২-৭০বি এর একটি রূপান্তর যা মডেলটিকে নিজের সাথে "
+"ইন্টারলিভিং করে তৈরি করা হয়েছে।"
 
 #: src/available_models_descriptions.py:89
 msgid ""
 "Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
 "Designed for chat and code generation."
 msgstr ""
+"ওপেন অরকা ওপেনচ্যাট মডেল এবং গ্যারেজ-বিএআইন্ড প্ল্যাটিপাস ২ মডেলের সংমিশ্রণ। চ্যাট এবং "
+"কোড উৎপাদনের জন্য ডিজাইন করা হয়েছে।"
 
 #: src/available_models_descriptions.py:90
 msgid ""
 "A top-performing mixture of experts model, fine-tuned with high-quality data."
 msgstr ""
+"উচ্চ-পারফর্মিং বিশেষজ্ঞ মডেলের একটি মিশ্রণ, উচ্চ-মানের ডেটার সাথে ফাইন-টিউন করা হয়েছে।"
 
 #: src/available_models_descriptions.py:91
 msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
 msgstr ""
+"জেফির উপর ভিত্তি করে উচ্চ-মানের ডেটার সাথে ফাইন-টিউন করা ৭বি চ্যাট মডেল।"
 
 #: src/available_models_descriptions.py:92
 msgid "DBRX is an open, general-purpose LLM created by Databricks."
 msgstr ""
+"ডিবিআরএক্স হল ড্যাটাব্রিক্স(Databricks) দ্বারা তৈরি করা একটি ওপেন, সাধারণ উদ্দেশ্যে বৃহৎ ভাষা মডেল।"
 
 #: src/available_models_descriptions.py:93
 msgid ""
 "Falcon2 is an 11B parameters causal decoder-only model built by TII and "
 "trained over 5T tokens."
 msgstr ""
+"ফ্যালকন2 হল টিআইআই দ্বারা নির্মিত এবং ৫টি টোকেনের উপর প্রশিক্ষিত ১১বি প্যারামিটার "
+"কার্যকারণ শুধুমাত্র-ডিকোডার মডেল।"
 
 #: src/available_models_descriptions.py:94
 msgid ""
 "A robust conversational model designed to be used for both chat and instruct "
 "use cases."
 msgstr ""
-
-#: src/dialogs.py:17
-msgid "Chat cannot be cleared while receiving a message"
-msgstr "Chat cannot be cleared while receiving a message"
+"চ্যাট এবং নির্দেশনা উভয় ব্যবহার ক্ষেত্রের জন্য ডিজাইন করা একটি শক্তিশালী কথোপকথন মডেল।"
 
 #: src/dialogs.py:20
 msgid "Clear Chat?"
-msgstr ""
+msgstr "চ্যাট পরিষ্কার করুন?"
 
 #: src/dialogs.py:21
 msgid "Are you sure you want to clear the chat?"
-msgstr ""
+msgstr "আপনি কি নিশ্চিত যে আপনি চ্যাটটি পরিষ্কার করতে চান?"
 
 #: src/dialogs.py:24 src/dialogs.py:45 src/dialogs.py:72 src/dialogs.py:99
 #: src/dialogs.py:121 src/dialogs.py:142 src/dialogs.py:163 src/dialogs.py:223
