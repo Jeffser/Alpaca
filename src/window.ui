@@ -64,7 +64,7 @@
                         <signal name="row-selected" handler="chat_changed"/>
                         <property name="selection-mode">single</property>
                         <style>
-                          <class name="navigation-sidebar"></class>
+                          <class name="navigation-sidebar"/>
                         </style>
                       </object>
                     </child>
@@ -220,7 +220,7 @@
                                         <child>
                                           <object class="GtkTextView" id="message_text_view">
                                             <style>
-                                              <class name="message_text_view" />
+                                              <class name="message_text_view"/>
                                             </style>
                                             <property name="wrap-mode">word</property>
                                             <property name="margin-start">10</property>
@@ -469,7 +469,7 @@
                       <property name="label" translatable="yes">Create</property>
                       <signal name="clicked" handler="create_model_start"/>
                       <style>
-                        <class name="suggested-action" />
+                        <class name="suggested-action"/>
                       </style>
                     </object>
                   </child>
@@ -506,7 +506,7 @@
                           <child>
                             <object class="AdwActionRow" id="create_model_base">
                               <property name="title" translatable="yes">Base</property>
-                              <property name="subtitle"></property>
+                              <property name="subtitle"/>
                               <style>
                                 <class name="property"/>
                               </style>
@@ -761,8 +761,8 @@
               <property name="margin-start">12</property>
               <property name="margin-end">12</property>
               <style>
-                <class name="card" />
-                <class name="view" />
+                <class name="card"/>
+                <class name="view"/>
               </style>
               <child>
                 <object class="GtkTextView" id="file_preview_text_view">
@@ -872,7 +872,10 @@
                   <property name="margin-start">12</property>
                   <property name="margin-end">12</property>
                   <property name="title" translatable="yes">Featured Models</property>
-                  <property name="description" translatable="yes">Alpaca works locally on your device, to start chatting you'll need an AI model, you can either pull models from this list or the 'Manage Models' menu later.</property>
+                  <property name="description" translatable="yes">Alpaca works locally on your device, to start chatting you'll need an AI model, you can either pull models from this list or the 'Manage Models' menu later.
+
+By downloading any model you accept their license agreement available on the model's website.
+                  </property>
                   <child>
                     <object class="GtkListBox">
                       <property name="selection-mode">none</property>
@@ -883,6 +886,16 @@
                         <object class="AdwActionRow">
                           <property name="title" translatable="no">Llama3</property>
                           <property name="subtitle" translatable="yes">Built by Meta</property>
+                          <child type="suffix">
+                            <object class="GtkButton">
+                              <signal name="clicked" handler="link_button_handler"/>
+                              <property name="vexpand">false</property>
+                              <property name="icon-name">globe-symbolic</property>
+                              <property name="valign">3</property>
+                              <property name="name">https://ollama.com/library/llama3</property>
+                              <property name="tooltip-text">https://ollama.com/library/llama3</property>
+                            </object>
+                          </child>
                           <child type="suffix">
                             <object class="GtkButton">
                               <signal name="clicked" handler="pull_featured_model"/>
@@ -903,6 +916,16 @@
                           <property name="subtitle" translatable="yes">Built by Google DeepMind</property>
                           <child type="suffix">
                             <object class="GtkButton">
+                              <signal name="clicked" handler="link_button_handler"/>
+                              <property name="vexpand">false</property>
+                              <property name="icon-name">globe-symbolic</property>
+                              <property name="valign">3</property>
+                              <property name="name">https://ollama.com/library/gemma2</property>
+                              <property name="tooltip-text">https://ollama.com/library/gemma2</property>
+                            </object>
+                          </child>
+                          <child type="suffix">
+                            <object class="GtkButton">
                               <signal name="clicked" handler="pull_featured_model"/>
                               <property name="vexpand">false</property>
                               <property name="icon-name">folder-download-symbolic</property>
@@ -921,6 +944,16 @@
                           <property name="subtitle" translatable="yes">Built by Microsoft</property>
                           <child type="suffix">
                             <object class="GtkButton">
+                              <signal name="clicked" handler="link_button_handler"/>
+                              <property name="vexpand">false</property>
+                              <property name="icon-name">globe-symbolic</property>
+                              <property name="valign">3</property>
+                              <property name="name">https://ollama.com/library/phi3</property>
+                              <property name="tooltip-text">https://ollama.com/library/phi3</property>
+                            </object>
+                          </child>
+                          <child type="suffix">
+                            <object class="GtkButton">
                               <signal name="clicked" handler="pull_featured_model"/>
                               <property name="vexpand">false</property>
                               <property name="icon-name">folder-download-symbolic</property>
@@ -937,6 +970,16 @@
                         <object class="AdwActionRow">
                           <property name="title" translatable="no">Llava</property>
                           <property name="subtitle" translatable="yes">Multimodal AI with image recognition</property>
+                          <child type="suffix">
+                            <object class="GtkButton">
+                              <signal name="clicked" handler="link_button_handler"/>
+                              <property name="vexpand">false</property>
+                              <property name="icon-name">globe-symbolic</property>
+                              <property name="valign">3</property>
+                              <property name="name">https://ollama.com/library/llava</property>
+                              <property name="tooltip-text">https://ollama.com/library/llava</property>
+                            </object>
+                          </child>
                           <child type="suffix">
                             <object class="GtkButton">
                               <signal name="clicked" handler="pull_featured_model"/>
@@ -1135,3 +1178,4 @@
     </child>
   </object>
 </interface>
+
