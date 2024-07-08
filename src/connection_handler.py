@@ -22,4 +22,9 @@ def simple_delete(connection_url:str, data) -> dict:
     return requests.delete(connection_url, headers=get_headers(False), json=data)
 
 def stream_post(connection_url:str, data, callback:callable) -> dict:
-    return requests.post(connection_url, headers=get_headers(True), data=data, stream=True)
+    response = requests.post(connection_url, headers=get_headers(True), data=data, stream=True)
+    if response.status_code == 200:
+        for line in response.iter_lines():
+            if line:
+                callback(json.loads(line.decode("utf-8")))
+    return response

@@ -156,7 +156,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def send_message(self, button=None):
+        self.logger.debug('Starting message action')
         if self.editing_message:
+            self.logger.debug('Started message editing')
             self.editing_message["button_container"].set_visible(True)
             self.editing_message["text_view"].set_css_classes(["flat"])
             self.editing_message["text_view"].set_cursor_visible(False)
@@ -172,6 +174,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         if self.bot_message or self.get_focus() not in (self.message_text_view, self.send_button): return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
+        self.logger.debug('Sending message')
         current_chat_row = self.chat_list_box.get_selected_row()
         self.chat_list_box.unselect_all()
         self.chat_list_box.remove(current_chat_row)
@@ -541,6 +544,7 @@ Generate a title following these rules:
         self.rename_chat(label_element.get_name(), new_chat_name, label_element)
 
     def show_message(self, msg:str, bot:bool, footer:str=None, images:list=None, files:dict=None, id:str=None):
+        self.logger.debug('Showing {} message'.format('bot' if bot else 'user'))
         message_text = Gtk.TextView(
             editable=False,
             focusable=True,
@@ -1398,11 +1402,11 @@ Generate a title following these rules:
             if texture:
                 if self.verify_if_image_can_be_used():
                     pixbuf = Gdk.pixbuf_get_from_texture(texture)
-                    if not os.path.exists('/tmp/alpaca/images/'):
-                        os.makedirs('/tmp/alpaca/images/')
-                    image_name = self.generate_numbered_name('image.png', os.listdir('/tmp/alpaca/images'))
-                    pixbuf.savev('/tmp/alpaca/images/{}'.format(image_name), "png", [], [])
-                    self.attach_file('/tmp/alpaca/images/{}'.format(image_name), 'image')
+                    if not os.path.exists(os.path.join(self.cache_dir, 'tmp/alpaca/images/')):
+                        os.makedirs(os.path.join(self.cache_dir, 'tmp/alpaca/images/'))
+                    image_name = self.generate_numbered_name('image.png', os.listdir(os.path.join(self.cache_dir, os.path.join(self.cache_dir, 'tmp/alpaca/images'))))
+                    pixbuf.savev(os.path.join(self.cache_dir, 'tmp/alpaca/images/{}'.format(image_name)), "png", [], [])
+                    self.attach_file(os.path.join(self.cache_dir, 'tmp/alpaca/images/{}'.format(image_name)), 'image')
                 else:
                     self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
         except Exception as e: 'huh'
