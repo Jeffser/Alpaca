@@ -253,8 +253,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def welcome_carousel_page_changed(self, carousel, index):
         if index == 0: self.welcome_previous_button.set_sensitive(False)
         else: self.welcome_previous_button.set_sensitive(True)
-        if index == carousel.get_n_pages()-1: self.welcome_next_button.set_label(_("Close"))
-        else: self.welcome_next_button.set_label(_("Next"))
+        if index == carousel.get_n_pages()-1:
+            self.welcome_next_button.set_label(_("Close"))
+            self.welcome_next_button.set_tooltip_text(_("Close"))
+        else:
+            self.welcome_next_button.set_label(_("Next"))
+            self.welcome_next_button.set_tooltip_text(_("Next"))
 
     @Gtk.Template.Callback()
     def welcome_previous_button_activate(self, button):
