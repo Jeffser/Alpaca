@@ -232,10 +232,13 @@ def create_model_from_existing(self):
 
 def create_model_from_file_response(self, file_dialog, result):
     try: file = file_dialog.open_finish(result)
-    except: return
+    except:
+        self.logger.error(e)
+        return
     try:
         self.create_model(file.get_path(), True)
     except Exception as e:
+        self.logger.error(e)
         self.show_toast(_("An error occurred while creating the model"), self.main_overlay)
 
 def create_model_from_file(self):
@@ -251,7 +254,9 @@ def attach_file_response(self, file_dialog, result):
         "pdf": ["pdf"]
     }
     try: file = file_dialog.open_finish(result)
-    except: return
+    except:
+        self.logger.error(e)
+        return
     extension = file.get_path().split(".")[-1]
     file_type = next(key for key, value in file_types.items() if extension in value)
     if not file_type: return

@@ -158,9 +158,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def send_message(self, button=None):
-        self.logger.debug('Starting message action')
         if self.editing_message:
-            self.logger.debug('Started message editing')
             self.editing_message["button_container"].set_visible(True)
             self.editing_message["text_view"].set_css_classes(["flat"])
             self.editing_message["text_view"].set_cursor_visible(False)
@@ -176,7 +174,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         if self.bot_message or self.get_focus() not in (self.message_text_view, self.send_button): return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
-        self.logger.debug('Sending message')
         current_chat_row = self.chat_list_box.get_selected_row()
         self.chat_list_box.unselect_all()
         self.chat_list_box.remove(current_chat_row)
@@ -571,7 +568,6 @@ Generate a title following these rules:
         self.rename_chat(label_element.get_name(), new_chat_name, label_element)
 
     def show_message(self, msg:str, bot:bool, footer:str=None, images:list=None, files:dict=None, id:str=None):
-        self.logger.debug('Showing {} message'.format('bot' if bot else 'user'))
         message_text = Gtk.TextView(
             editable=False,
             focusable=True,
@@ -648,6 +644,7 @@ Generate a title following these rules:
                     )
                     button.connect("clicked", lambda button, file_path=path: self.preview_file(file_path, 'image', None))
                 except Exception as e:
+                    self.logger.error(e)
                     image_texture = Gtk.Image.new_from_icon_name("image-missing-symbolic")
                     image_texture.set_icon_size(2)
                     image_texture.set_vexpand(True)
@@ -1076,6 +1073,7 @@ Generate a title following these rules:
                         for chat_name in self.chats["chats"].keys():
                             self.chats["order"].append(chat_name)
             except Exception as e:
+                self.logger.error(e)
                 self.chats = {"chats": {}, "selected_chat": None, "order": []}
                 self.new_chat()
         else:
@@ -1336,6 +1334,7 @@ Generate a title following these rules:
                         image_data = output.getvalue()
                     return base64.b64encode(image_data).decode("utf-8")
             except Exception as e:
+                self.logger.error(e)
                 self.show_toast(_("Cannot open image"), self.main_overlay)
         elif file_type == 'plain_text' or file_type == 'youtube' or file_type == 'website':
             with open(file_path, 'r') as f:
@@ -1415,10 +1414,12 @@ Generate a title following these rules:
                 try:
                     dialogs.youtube_caption(self, text)
                 except Exception as e:
+                    self.logger.error(e)
                     self.show_toast(_("This video is not available"), self.main_overlay)
             elif url_regex.match(text):
                 dialogs.attach_website(self, text)
-        except Exception as e: 'huh'
+        except Exception as e:
+            self.logger.error(e)
 
     def cb_image_received(self, clipboard, result):
         try:
@@ -1460,11 +1461,9 @@ Generate a title following these rules:
         self.model_drop_down.set_factory(factory)
 
     def __init__(self, **kwargs):
-        self.logger.debug('Starting window')
         super().__init__(**kwargs)
         GtkSource.init()
         with open('/app/share/Alpaca/alpaca/available_models.json', 'r') as f:
-            self.logger.debug('Loading available_models')
             self.available_models = json.load(f)
         if not os.path.exists(os.path.join(self.data_dir, "chats")):
             os.makedirs(os.path.join(self.data_dir, "chats"))
