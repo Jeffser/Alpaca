@@ -27,7 +27,7 @@ from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
 from datetime import datetime
-from . import dialogs, local_instance, connection_handler, update_history, available_models_descriptions
+from . import dialogs, local_instance, connection_handler, available_models_descriptions
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
@@ -1468,8 +1468,6 @@ Generate a title following these rules:
             self.available_models = json.load(f)
         if not os.path.exists(os.path.join(self.data_dir, "chats")):
             os.makedirs(os.path.join(self.data_dir, "chats"))
-        if os.path.exists(os.path.join(self.config_dir, "chats.json")) and not os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
-            update_history.update(self)
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.get_application().create_action('new_chat', lambda *_: self.new_chat(), ['<primary>n'])
