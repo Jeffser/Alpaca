@@ -21,7 +21,7 @@ import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
-import json, requests, threading, os, re, base64, sys, gettext, locale, subprocess, uuid, shutil, tarfile, tempfile
+import json, requests, threading, os, re, base64, sys, gettext, locale, subprocess, uuid, shutil, tarfile, tempfile, logging
 from time import sleep
 from io import BytesIO
 from PIL import Image
@@ -44,6 +44,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     gettext.bindtextdomain('com.jeffser.Alpaca', localedir)
     gettext.textdomain('com.jeffser.Alpaca')
     _ = gettext.gettext
+
+    logger = logging.getLogger(__name__)
+    logging.basicConfig(format="%(levelname)s\t[%(filename)s | %(funcName)s] %(message)s")
+    logger.setLevel(logging.ERROR)
 
     #Variables
     editing_message = None
@@ -1428,9 +1432,11 @@ Generate a title following these rules:
         self.model_drop_down.set_factory(factory)
 
     def __init__(self, **kwargs):
+        self.logger.debug('Starting window')
         super().__init__(**kwargs)
         GtkSource.init()
         with open('/app/share/Alpaca/alpaca/available_models.json', 'r') as f:
+            self.logger.debug('Loading available_models')
             self.available_models = json.load(f)
         if not os.path.exists(os.path.join(self.data_dir, "chats")):
             os.makedirs(os.path.join(self.data_dir, "chats"))
