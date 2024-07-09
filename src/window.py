@@ -27,7 +27,7 @@ from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
 from datetime import datetime
-from . import dialogs, local_instance, connection_handler, update_history, available_models_descriptions
+from . import dialogs, local_instance, connection_handler, available_models_descriptions
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
@@ -84,6 +84,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     bot_message_button_container : Gtk.TextView = None
     file_preview_dialog = Gtk.Template.Child()
     file_preview_text_view = Gtk.Template.Child()
+    file_preview_image = Gtk.Template.Child()
     welcome_dialog = Gtk.Template.Child()
     welcome_carousel = Gtk.Template.Child()
     welcome_previous_button = Gtk.Template.Child()
@@ -107,6 +108,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_tag_list_box = Gtk.Template.Child()
     navigation_view_manage_models = Gtk.Template.Child()
     file_preview_open_button = Gtk.Template.Child()
+    file_preview_remove_button = Gtk.Template.Child()
     secondary_menu_button = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
     no_results_page = Gtk.Template.Child()
@@ -156,9 +158,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def send_message(self, button=None):
-        self.logger.debug('Starting message action')
         if self.editing_message:
-            self.logger.debug('Started message editing')
             self.editing_message["button_container"].set_visible(True)
             self.editing_message["text_view"].set_css_classes(["flat"])
             self.editing_message["text_view"].set_cursor_visible(False)
@@ -174,7 +174,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         if self.bot_message or self.get_focus() not in (self.message_text_view, self.send_button): return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
-        self.logger.debug('Sending message')
         current_chat_row = self.chat_list_box.get_selected_row()
         self.chat_list_box.unselect_all()
         self.chat_list_box.remove(current_chat_row)
@@ -253,8 +252,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def welcome_carousel_page_changed(self, carousel, index):
         if index == 0: self.welcome_previous_button.set_sensitive(False)
         else: self.welcome_previous_button.set_sensitive(True)
-        if index == carousel.get_n_pages()-1: self.welcome_next_button.set_label(_("Close"))
-        else: self.welcome_next_button.set_label(_("Next"))
+        if index == carousel.get_n_pages()-1:
+            self.welcome_next_button.set_label(_("Close"))
+            self.welcome_next_button.set_tooltip_text(_("Close"))
+        else:
+            self.welcome_next_button.set_label(_("Next"))
+            self.welcome_next_button.set_tooltip_text(_("Next"))
 
     @Gtk.Template.Callback()
     def welcome_previous_button_activate(self, button):
@@ -484,21 +487,42 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         self.editing_message = {"text_view": text_view, "id": id, "button_container": button_container, "footer": footer}
 
-    def preview_file(self, file_path, file_type):
+    def preview_file(self, file_path, file_type, presend_name):
         file_path = file_path.replace("{selected_chat}", self.chats["selected_chat"])
         content = self.get_content_of_file(file_path, file_type)
+        if presend_name:
+            self.file_preview_remove_button.set_visible(True)
+            self.file_preview_remove_button.set_name(presend_name)
+        else:
+            self.file_preview_remove_button.set_visible(False)
         if content:
-            buffer = self.file_preview_text_view.get_buffer()
-            buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-            buffer.insert(buffer.get_start_iter(), content, len(content))
-            if file_type == 'youtube':
-                self.file_preview_dialog.set_title(content.split('\n')[0])
-                self.file_preview_open_button.set_name(content.split('\n')[2])
-            elif file_type == 'website':
-                self.file_preview_open_button.set_name(content.split('\n')[0])
-            else:
+            if file_type == 'image':
+                self.file_preview_image.set_visible(True)
+                self.file_preview_text_view.set_visible(False)
+                image_data = base64.b64decode(content)
+                loader = GdkPixbuf.PixbufLoader.new()
+                loader.write(image_data)
+                loader.close()
+                pixbuf = loader.get_pixbuf()
+                texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+                self.file_preview_image.set_from_paintable(texture)
+                self.file_preview_image.set_size_request(240, 240)
                 self.file_preview_dialog.set_title(os.path.basename(file_path))
                 self.file_preview_open_button.set_name(file_path)
+            else:
+                self.file_preview_image.set_visible(False)
+                self.file_preview_text_view.set_visible(True)
+                buffer = self.file_preview_text_view.get_buffer()
+                buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+                buffer.insert(buffer.get_start_iter(), content, len(content))
+                if file_type == 'youtube':
+                    self.file_preview_dialog.set_title(content.split('\n')[0])
+                    self.file_preview_open_button.set_name(content.split('\n')[2])
+                elif file_type == 'website':
+                    self.file_preview_open_button.set_name(content.split('\n')[0])
+                else:
+                    self.file_preview_dialog.set_title(os.path.basename(file_path))
+                    self.file_preview_open_button.set_name(file_path)
             self.file_preview_dialog.present(self)
 
     def convert_history_to_ollama(self):
@@ -544,7 +568,6 @@ Generate a title following these rules:
         self.rename_chat(label_element.get_name(), new_chat_name, label_element)
 
     def show_message(self, msg:str, bot:bool, footer:str=None, images:list=None, files:dict=None, id:str=None):
-        self.logger.debug('Showing {} message'.format('bot' if bot else 'user'))
         message_text = Gtk.TextView(
             editable=False,
             focusable=True,
@@ -608,25 +631,20 @@ Generate a title following these rules:
             )
             for image in images:
                 path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image)
-                raw_data = self.get_content_of_file(path, "image")
-                if raw_data:
-                    #image_container.set_visible(True)
-                    image_data = base64.b64decode(raw_data)
-                    loader = GdkPixbuf.PixbufLoader.new()
-                    loader.write(image_data)
-                    loader.close()
-                    pixbuf = loader.get_pixbuf()
-                    texture = Gdk.Texture.new_for_pixbuf(pixbuf)
-                    image_texture = Gtk.Image.new_from_paintable(texture)
-                    image_texture.set_size_request(240, 240)
+                try:
+                    if not os.path.isfile(path):
+                        raise FileNotFoundError("'{}' was not found or is a directory".format(path))
+                    image_element = Gtk.Image.new_from_file(path)
+                    image_element.set_size_request(240, 240)
                     button = Gtk.Button(
-                        child=image_texture,
+                        child=image_element,
                         css_classes=["flat", "chat_image_button"],
                         name=os.path.join(self.data_dir, "chats", "{selected_chat}", id, image),
                         tooltip_text=os.path.basename(path)
                     )
-                    button.connect('clicked', self.link_button_handler)
-                else:
+                    button.connect("clicked", lambda button, file_path=path: self.preview_file(file_path, 'image', None))
+                except Exception as e:
+                    self.logger.error(e)
                     image_texture = Gtk.Image.new_from_icon_name("image-missing-symbolic")
                     image_texture.set_icon_size(2)
                     image_texture.set_vexpand(True)
@@ -650,6 +668,7 @@ Generate a title following these rules:
                         css_classes=["flat", "chat_image_button"],
                         tooltip_text=_("Missing image")
                     )
+                    button.connect("clicked", lambda button : self.show_toast(_("Missing image"), self.main_overlay))
                 image_container.append(button)
             message_box.append(image_scroller)
 
@@ -684,7 +703,7 @@ Generate a title following these rules:
                     child=button_content
                 )
                 file_path = os.path.join(self.data_dir, "chats", "{selected_chat}", id, name)
-                button.connect("clicked", lambda button, file_path=file_path, file_type=file_type: self.preview_file(file_path, file_type))
+                button.connect("clicked", lambda button, file_path=file_path, file_type=file_type: self.preview_file(file_path, file_type, None))
                 file_container.append(button)
             message_box.append(file_scroller)
 
@@ -876,8 +895,9 @@ Generate a title following these rules:
         if id not in self.chats["chats"][self.chats["selected_chat"]]["messages"] or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if data['done']:
-            formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
-            text = f"\n<small>{data['model']}\t{formated_datetime}</small>"
+            date = datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["date"], '%Y/%m/%d %H:%M:%S')
+            formated_date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), date.year, date.month, date.day, date.hour, date.minute, date.second).format("%c")
+            text = f"\n\n<small>{data['model'].split(':')[0].replace('-', ' ').title()} ({data['model'].split(':')[1]})\t\t{formated_date}</small>"
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
             self.save_history()
             GLib.idle_add(self.bot_message_button_container.set_visible, True)
@@ -891,7 +911,7 @@ Generate a title following these rules:
                 self.chats["chats"][self.chats["selected_chat"]]["messages"][id] = {
                     "role": "assistant",
                     "model": data['model'],
-                    "date": datetime.now().strftime("%Y/%m/%d %H:%M"),
+                    "date": datetime.now().strftime("%Y/%m/%d %H:%M:%S"),
                     "content": ''
                 }
             GLib.idle_add(self.bot_message.insert, self.bot_message.get_end_iter(), data['message']['content'])
@@ -1035,10 +1055,12 @@ Generate a title following these rules:
         for widget in list(self.chat_container): self.chat_container.remove(widget)
         for key, message in self.chats['chats'][self.chats["selected_chat"]]['messages'].items():
             if message:
+                date = datetime.strptime(message['date'] + (":00" if message['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S')
+                formated_date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), date.year, date.month, date.day, date.hour, date.minute, date.second).format("%c")
                 if message['role'] == 'user':
-                    self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, id=key)
+                    self.show_message(message['content'], False, f"\n\n<small>{formated_date}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, id=key)
                 else:
-                    self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>", id=key)
+                    self.show_message(message['content'], True, f"\n\n<small>{message['model'].split(':')[0].replace('-', ' ').title()} ({message['model'].split(':')[1]})\n{formated_date}</small>", id=key)
                     self.add_code_blocks()
                     self.bot_message = None
 
@@ -1054,6 +1076,7 @@ Generate a title following these rules:
                         for chat_name in self.chats["chats"].keys():
                             self.chats["order"].append(chat_name)
             except Exception as e:
+                self.logger.error(e)
                 self.chats = {"chats": {}, "selected_chat": None, "order": []}
                 self.new_chat()
         else:
@@ -1314,6 +1337,7 @@ Generate a title following these rules:
                         image_data = output.getvalue()
                     return base64.b64encode(image_data).decode("utf-8")
             except Exception as e:
+                self.logger.error(e)
                 self.show_toast(_("Cannot open image"), self.main_overlay)
         elif file_type == 'plain_text' or file_type == 'youtube' or file_type == 'website':
             with open(file_path, 'r') as f:
@@ -1326,17 +1350,18 @@ Generate a title following these rules:
                 text += f"\n- Page {i}\n{page.extract_text()}\n"
             return text
 
-    def remove_attached_file(self, button):
-        del self.attachments[button.get_name()]
+    def remove_attached_file(self, name):
+        button = self.attachments[name]['button']
         button.get_parent().remove(button)
+        del self.attachments[name]
         if len(self.attachments) == 0: self.attachment_box.set_visible(False)
 
     def attach_file(self, file_path, file_type):
-        name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
+        file_name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
         content = self.get_content_of_file(file_path, file_type)
         if content:
             button_content = Adw.ButtonContent(
-                label=name,
+                label=file_name,
                 icon_name={
                     "image": "image-x-generic-symbolic",
                     "plain_text": "document-text-symbolic",
@@ -1348,13 +1373,14 @@ Generate a title following these rules:
             button = Gtk.Button(
                 vexpand=True,
                 valign=3,
-                name=name,
+                name=file_name,
                 css_classes=["flat"],
-                tooltip_text=name,
+                tooltip_text=file_name,
                 child=button_content
             )
-            self.attachments[name] = {"path": file_path, "type": file_type, "content": content, "button": button}
-            button.connect("clicked", lambda button: dialogs.remove_attached_file(self, button))
+            self.attachments[file_name] = {"path": file_path, "type": file_type, "content": content, "button": button}
+            #button.connect("clicked", lambda button: dialogs.remove_attached_file(self, button))
+            button.connect("clicked", lambda button : self.preview_file(file_path, file_type, file_name))
             self.attachment_container.append(button)
             self.attachment_box.set_visible(True)
 
@@ -1391,10 +1417,12 @@ Generate a title following these rules:
                 try:
                     dialogs.youtube_caption(self, text)
                 except Exception as e:
+                    self.logger.error(e)
                     self.show_toast(_("This video is not available"), self.main_overlay)
             elif url_regex.match(text):
                 dialogs.attach_website(self, text)
-        except Exception as e: 'huh'
+        except Exception as e:
+            self.logger.error(e)
 
     def cb_image_received(self, clipboard, result):
         try:
@@ -1436,16 +1464,12 @@ Generate a title following these rules:
         self.model_drop_down.set_factory(factory)
 
     def __init__(self, **kwargs):
-        self.logger.debug('Starting window')
         super().__init__(**kwargs)
         GtkSource.init()
         with open('/app/share/Alpaca/alpaca/available_models.json', 'r') as f:
-            self.logger.debug('Loading available_models')
             self.available_models = json.load(f)
         if not os.path.exists(os.path.join(self.data_dir, "chats")):
             os.makedirs(os.path.join(self.data_dir, "chats"))
-        if os.path.exists(os.path.join(self.config_dir, "chats.json")) and not os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
-            update_history.update(self)
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.get_application().create_action('new_chat', lambda *_: self.new_chat(), ['<primary>n'])
@@ -1460,6 +1484,7 @@ Generate a title following these rules:
         self.get_application().create_action('export_chat', self.chat_actions)
         self.get_application().create_action('export_current_chat', self.current_chat_actions)
         self.message_text_view.connect("paste-clipboard", self.on_clipboard_paste)
+        self.file_preview_remove_button.connect('clicked', lambda button : dialogs.remove_attached_file(self, button.get_name()))
         self.add_chat_button.connect("clicked", lambda button : self.new_chat())
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
         self.create_model_name.get_delegate().connect("insert-text", self.check_alphanumeric)

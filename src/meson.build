@@ -42,7 +42,6 @@ alpaca_sources = [
   'connection_handler.py',
   'dialogs.py',
   'local_instance.py',
-  'update_history.py',
   'available_models.json',
   'available_models_descriptions.py'
 ]
