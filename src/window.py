@@ -895,8 +895,9 @@ Generate a title following these rules:
         if id not in self.chats["chats"][self.chats["selected_chat"]]["messages"] or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if data['done']:
-            formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
-            text = f"\n<small>{data['model']}\t{formated_datetime}</small>"
+            date = datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["date"], '%Y/%m/%d %H:%M:%S')
+            formated_date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), date.year, date.month, date.day, date.hour, date.minute, date.second).format("%c")
+            text = f"\n\n<small>{data['model'].split(':')[0].replace('-', ' ').title()} ({data['model'].split(':')[1]})\t\t{formated_date}</small>"
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
             self.save_history()
             GLib.idle_add(self.bot_message_button_container.set_visible, True)
@@ -910,7 +911,7 @@ Generate a title following these rules:
                 self.chats["chats"][self.chats["selected_chat"]]["messages"][id] = {
                     "role": "assistant",
                     "model": data['model'],
-                    "date": datetime.now().strftime("%Y/%m/%d %H:%M"),
+                    "date": datetime.now().strftime("%Y/%m/%d %H:%M:%S"),
                     "content": ''
                 }
             GLib.idle_add(self.bot_message.insert, self.bot_message.get_end_iter(), data['message']['content'])
@@ -1054,10 +1055,12 @@ Generate a title following these rules:
         for widget in list(self.chat_container): self.chat_container.remove(widget)
         for key, message in self.chats['chats'][self.chats["selected_chat"]]['messages'].items():
             if message:
+                date = datetime.strptime(message['date'] + (":00" if message['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S')
+                formated_date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), date.year, date.month, date.day, date.hour, date.minute, date.second).format("%c")
                 if message['role'] == 'user':
-                    self.show_message(message['content'], False, f"\n\n<small>{message['date']}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, id=key)
+                    self.show_message(message['content'], False, f"\n\n<small>{formated_date}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, id=key)
                 else:
-                    self.show_message(message['content'], True, f"\n\n<small>{message['model']}\t|\t{message['date']}</small>", id=key)
+                    self.show_message(message['content'], True, f"\n\n<small>{message['model'].split(':')[0].replace('-', ' ').title()} ({message['model'].split(':')[1]})\n{formated_date}</small>", id=key)
                     self.add_code_blocks()
                     self.bot_message = None
 
