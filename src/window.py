@@ -897,7 +897,7 @@ Generate a title following these rules:
         if data['done']:
             date = datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["date"], '%Y/%m/%d %H:%M:%S')
             formated_date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), date.year, date.month, date.day, date.hour, date.minute, date.second).format("%c")
-            text = f"\n\n<small>{data['model'].split(':')[0].replace('-', ' ').title()} ({data['model'].split(':')[1]})\t\t{formated_date}</small>"
+            text = f"\n\n<small>{data['model'].split(':')[0].replace('-', ' ').title()} ({data['model'].split(':')[1]})\n{formated_date}</small>"
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
             self.save_history()
             GLib.idle_add(self.bot_message_button_container.set_visible, True)
