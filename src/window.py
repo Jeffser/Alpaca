@@ -1347,7 +1347,7 @@ Generate a title following these rules:
             if len(reader.pages) == 0: return None
             text = ""
             for i, page in enumerate(reader.pages):
-                text += f"\n- Page {i}\n{page.extract_text()}\n"
+                text += f"\n- Page {i}\n{page.extract_text(extraction_mode='layout', layout_mode_space_vertically=False)}\n"
             return text
 
     def remove_attached_file(self, name):
