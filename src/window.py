@@ -1114,8 +1114,8 @@ Generate a title following these rules:
     def delete_chat(self, chat_name):
         del self.chats['chats'][chat_name]
         self.chats['order'].remove(chat_name)
-        if os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'])):
-            shutil.rmtree(os.path.join(self.data_dir, "chats", self.chats['selected_chat']))
+        if os.path.exists(os.path.join(self.data_dir, "chats", chat_name)):
+            shutil.rmtree(os.path.join(self.data_dir, "chats", chat_name))
         self.save_history()
         self.update_chat_list()
         if len(self.chats['chats'])==0:
