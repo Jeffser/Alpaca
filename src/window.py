@@ -205,7 +205,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             #{"path": file_path, "type": file_type, "content": content}
 
-        formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
+        formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 
         self.chats["chats"][self.chats["selected_chat"]]["messages"][id] = {
             "role": "user",
@@ -887,6 +887,13 @@ Generate a title following these rules:
         clipboard.set(text)
         self.show_toast(_("Code copied to the clipboard"), self.main_overlay)
 
+    def generate_datetime_format(self, dt:datetime) -> str:
+        date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
+        current_date = GLib.DateTime.new_now_local()
+        if date.format("%Y/%m/%d") == current_date.format("%Y/%m/%d"): return date.format("%H:%M %p")
+        elif date.format("%Y") == current_date.format("%Y"): return date.format("%b %d, %H:%M %p")
+        else: return date.format("%b %d %Y, %H:%M %p")
+
     def update_bot_message(self, data, id):
         if self.bot_message is None:
             self.save_history()
@@ -895,8 +902,7 @@ Generate a title following these rules:
         if id not in self.chats["chats"][self.chats["selected_chat"]]["messages"] or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if data['done']:
-            date = datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["date"], '%Y/%m/%d %H:%M:%S')
-            formated_date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), date.year, date.month, date.day, date.hour, date.minute, date.second).format("%c")
+            formated_date = self.generate_datetime_format(datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["date"], '%Y/%m/%d %H:%M:%S'))
             text = f"\n\n<small>{data['model'].split(':')[0].replace('-', ' ').title()} ({data['model'].split(':')[1]})\n{formated_date}</small>"
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
             self.save_history()
@@ -1055,8 +1061,7 @@ Generate a title following these rules:
         for widget in list(self.chat_container): self.chat_container.remove(widget)
         for key, message in self.chats['chats'][self.chats["selected_chat"]]['messages'].items():
             if message:
-                date = datetime.strptime(message['date'] + (":00" if message['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S')
-                formated_date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), date.year, date.month, date.day, date.hour, date.minute, date.second).format("%c")
+                formated_date = self.generate_datetime_format(datetime.strptime(message['date'] + (":00" if message['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
                 if message['role'] == 'user':
                     self.show_message(message['content'], False, f"\n\n<small>{formated_date}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, id=key)
                 else:
