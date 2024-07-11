@@ -205,12 +205,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             #{"path": file_path, "type": file_type, "content": content}
 
-        formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+        current_datetime = datetime.now()
 
         self.chats["chats"][self.chats["selected_chat"]]["messages"][id] = {
             "role": "user",
             "model": "User",
-            "date": formated_datetime,
+            "date": current_datetime.strftime("%Y/%m/%d %H:%M:%S"),
             "content": self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
         }
         if len(attached_images) > 0:
@@ -228,7 +228,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         #self.attachments[name] = {"path": file_path, "type": file_type, "content": content}
         raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-        self.show_message(raw_message, False, f"\n\n<small>{formated_datetime}</small>", attached_images, attached_files, id=id)
+        formated_date = self.generate_datetime_format(current_datetime)
+        self.show_message(raw_message, False, f"\n\n<small>{formated_date}</small>", attached_images, attached_files, id=id)
         self.message_text_view.get_buffer().set_text("", 0)
         self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
         self.chat_container.append(self.loading_spinner)
