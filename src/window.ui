@@ -14,6 +14,7 @@
       <object class="AdwBreakpoint">
         <condition>max-width: 800sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
+        <setter object="show_sidebar_button" property="visible">true</setter>
       </object>
     </child>
     <child>
@@ -22,6 +23,7 @@
       <object class="AdwBreakpoint">
         <condition>max-width: 500sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
+        <setter object="show_sidebar_button" property="visible">true</setter>
         <setter object="welcome_dialog" property="width-request">360</setter>
         <setter object="manage_models_dialog" property="width-request">360</setter>
         <setter object="create_model_dialog" property="width-request">360</setter>
@@ -78,6 +80,7 @@
                   <object class="AdwHeaderBar" id="header_bar">
                     <child type="start">
                       <object class="GtkToggleButton" id="show_sidebar_button">
+                        <property name="visible">false</property>
                         <property name="icon-name">sidebar-show-symbolic</property>
                         <property name="tooltip-text" translatable="yes">Toggle Sidebar</property>
                         <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
@@ -107,7 +110,7 @@
                             <property name="tooltip-text" translatable="yes">Manage Models</property>
                             <child>
                               <object class="AdwButtonContent">
-                                <property name="icon-name">folder-download-symbolic</property>
+                                <property name="icon-name">brain-augemnted-symbolic</property>
                               </object>
                             </child>
                           </object>

@@ -205,12 +205,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             #{"path": file_path, "type": file_type, "content": content}
 
-        formated_datetime = datetime.now().strftime("%Y/%m/%d %H:%M")
+        current_datetime = datetime.now()
 
         self.chats["chats"][self.chats["selected_chat"]]["messages"][id] = {
             "role": "user",
             "model": "User",
-            "date": formated_datetime,
+            "date": current_datetime.strftime("%Y/%m/%d %H:%M:%S"),
             "content": self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
         }
         if len(attached_images) > 0:
@@ -228,7 +228,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         #self.attachments[name] = {"path": file_path, "type": file_type, "content": content}
         raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-        self.show_message(raw_message, False, f"\n\n<small>{formated_datetime}</small>", attached_images, attached_files, id=id)
+        formated_date = self.generate_datetime_format(current_datetime)
+        self.show_message(raw_message, False, f"\n\n<small>{formated_date}</small>", attached_images, attached_files, id=id)
         self.message_text_view.get_buffer().set_text("", 0)
         self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
         self.chat_container.append(self.loading_spinner)
@@ -887,6 +888,13 @@ Generate a title following these rules:
         clipboard.set(text)
         self.show_toast(_("Code copied to the clipboard"), self.main_overlay)
 
+    def generate_datetime_format(self, dt:datetime) -> str:
+        date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
+        current_date = GLib.DateTime.new_now_local()
+        if date.format("%Y/%m/%d") == current_date.format("%Y/%m/%d"): return date.format("%H:%M %p")
+        elif date.format("%Y") == current_date.format("%Y"): return date.format("%b %d, %H:%M %p")
+        else: return date.format("%b %d %Y, %H:%M %p")
+
     def update_bot_message(self, data, id):
         if self.bot_message is None:
             self.save_history()
@@ -895,9 +903,8 @@ Generate a title following these rules:
         if id not in self.chats["chats"][self.chats["selected_chat"]]["messages"] or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if data['done']:
-            date = datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["date"], '%Y/%m/%d %H:%M:%S')
-            formated_date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), date.year, date.month, date.day, date.hour, date.minute, date.second).format("%c")
-            text = f"\n\n<small>{data['model'].split(':')[0].replace('-', ' ').title()} ({data['model'].split(':')[1]})\t\t{formated_date}</small>"
+            formated_date = self.generate_datetime_format(datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["date"], '%Y/%m/%d %H:%M:%S'))
+            text = f"\n\n<small>{data['model'].split(':')[0].replace('-', ' ').title()} ({data['model'].split(':')[1]})\n{formated_date}</small>"
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
             self.save_history()
             GLib.idle_add(self.bot_message_button_container.set_visible, True)
@@ -1055,8 +1062,7 @@ Generate a title following these rules:
         for widget in list(self.chat_container): self.chat_container.remove(widget)
         for key, message in self.chats['chats'][self.chats["selected_chat"]]['messages'].items():
             if message:
-                date = datetime.strptime(message['date'] + (":00" if message['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S')
-                formated_date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), date.year, date.month, date.day, date.hour, date.minute, date.second).format("%c")
+                formated_date = self.generate_datetime_format(datetime.strptime(message['date'] + (":00" if message['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
                 if message['role'] == 'user':
                     self.show_message(message['content'], False, f"\n\n<small>{formated_date}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, id=key)
                 else:
@@ -1109,8 +1115,8 @@ Generate a title following these rules:
     def delete_chat(self, chat_name):
         del self.chats['chats'][chat_name]
         self.chats['order'].remove(chat_name)
-        if os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'])):
-            shutil.rmtree(os.path.join(self.data_dir, "chats", self.chats['selected_chat']))
+        if os.path.exists(os.path.join(self.data_dir, "chats", chat_name)):
+            shutil.rmtree(os.path.join(self.data_dir, "chats", chat_name))
         self.save_history()
         self.update_chat_list()
         if len(self.chats['chats'])==0:
@@ -1347,7 +1353,7 @@ Generate a title following these rules:
             if len(reader.pages) == 0: return None
             text = ""
             for i, page in enumerate(reader.pages):
-                text += f"\n- Page {i}\n{page.extract_text()}\n"
+                text += f"\n- Page {i}\n{page.extract_text(extraction_mode='layout', layout_mode_space_vertically=False)}\n"
             return text
 
     def remove_attached_file(self, name):
