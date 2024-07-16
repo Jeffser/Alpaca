@@ -29,6 +29,10 @@ from pypdf import PdfReader
 from datetime import datetime
 from . import dialogs, local_instance, connection_handler, available_models_descriptions
 
+
+logger = logging.getLogger(__name__)
+
+
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
     config_dir = os.getenv("XDG_CONFIG_HOME")
@@ -44,10 +48,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     gettext.bindtextdomain('com.jeffser.Alpaca', localedir)
     gettext.textdomain('com.jeffser.Alpaca')
     _ = gettext.gettext
-
-    logger = logging.getLogger(__name__)
-    logging.basicConfig(format="%(levelname)s\t[%(filename)s | %(funcName)s] %(message)s")
-    logger.setLevel(logging.ERROR)
 
     #Variables
     editing_message = None
@@ -319,9 +319,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
         if self.get_hide_on_close():
-            print("Hiding app...")
+            logger.info("Hiding app...")
         else:
-            print("Closing app...")
+            logger.info("Closing app...")
             local_instance.stop()
 
     @Gtk.Template.Callback()

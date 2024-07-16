@@ -18,6 +18,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import sys
+import logging
+import requests
 import gi
 
 gi.require_version('Gtk', '4.0')
@@ -64,5 +66,9 @@ class AlpacaApplication(Adw.Application):
 
 
 def main(version):
+    logging.basicConfig(
+        format="%(levelname)s\t[%(filename)s | %(funcName)s] %(message)s",
+        level=logging.INFO
+    )
     app = AlpacaApplication()
     return app.run(sys.argv)
