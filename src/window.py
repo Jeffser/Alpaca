@@ -133,6 +133,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def verify_if_image_can_be_used(self, pspec=None, user_data=None):
+        logger.debug("Verifying if image can be used")
         if self.model_drop_down.get_selected_item() == None: return True
         selected = self.model_drop_down.get_selected_item().get_string().split(" (")[0].lower()
         if selected in [key for key, value in self.available_models.items() if value["image"]]:
