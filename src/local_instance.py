@@ -18,10 +18,12 @@ def start():
     params["HOME"] = data_dir
     instance = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, **params}, stderr=subprocess.PIPE, text=True)
     logger.info("Starting Alpaca's Ollama instance...")
+    logger.debug(params)
     sleep(1)
     logger.info("Started Alpaca's Ollama instance")
 
 def stop():
+    logger.info("Stopping Alpaca's Ollama instance")
     global instance
     if instance:
         instance.terminate()
@@ -30,6 +32,7 @@ def stop():
         logger.info("Stopped Alpaca's Ollama instance")
 
 def reset():
+    logger.info("Resetting Alpaca's Ollama instance")
     stop()
     sleep(1)
     start()

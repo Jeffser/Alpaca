@@ -246,11 +246,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def manage_models_button_activate(self, button=None):
+        logger.debug(f"Managing models")
         self.update_list_local_models()
         self.manage_models_dialog.present(self)
 
     @Gtk.Template.Callback()
     def welcome_carousel_page_changed(self, carousel, index):
+        logger.debug("Showing welcome carousel")
         if index == 0: self.welcome_previous_button.set_sensitive(False)
         else: self.welcome_previous_button.set_sensitive(True)
         if index == carousel.get_n_pages()-1:
@@ -274,6 +276,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def chat_changed(self, listbox, row):
+        logger.debug("Changing selected chat")
         if row and row.get_child().get_name() != self.chats["selected_chat"]:
             self.chats["selected_chat"] = row.get_child().get_name()
             self.load_history_into_chat()
@@ -287,6 +290,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def change_remote_url(self, entry):
         self.remote_url = entry.get_text()
+        logger.debug(f"Changing remote url: {self.remote_url}")
         if self.run_remote:
             connection_handler.url = self.remote_url
             if self.verify_connection() == False:
@@ -441,6 +445,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
 
     def show_toast(self, message:str, overlay):
+        logger.info(message)
         toast = Adw.Toast(
             title=message,
             timeout=2
@@ -449,12 +454,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def show_notification(self, title:str, body:str, icon:Gio.ThemedIcon=None):
         if not self.is_active():
+            logger.info(f"{title}, {body}")
             notification = Gio.Notification.new(title)
             notification.set_body(body)
             if icon: notification.set_icon(icon)
             self.get_application().send_notification(None, notification)
 
     def delete_message(self, message_element):
+        logger.debug("Deleting message")
         id = message_element.get_name()
         del self.chats["chats"][self.chats["selected_chat"]]["messages"][id]
         self.chat_container.remove(message_element)
@@ -463,12 +470,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.save_history()
 
     def copy_message(self, message_element):
+        logger.debug("Copying message")
         id = message_element.get_name()
         clipboard = Gdk.Display().get_default().get_clipboard()
         clipboard.set(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["content"])
         self.show_toast(_("Message copied to the clipboard"), self.main_overlay)
 
     def edit_message(self, message_element, text_view, button_container):
+        logger.debug("Editing message")
         if self.editing_message: self.send_message()
 
         button_container.set_visible(False)
@@ -489,6 +498,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.editing_message = {"text_view": text_view, "id": id, "button_container": button_container, "footer": footer}
 
     def preview_file(self, file_path, file_type, presend_name):
+        logger.debug(f"Previewing file: {file_path}")
         file_path = file_path.replace("{selected_chat}", self.chats["selected_chat"])
         content = self.get_content_of_file(file_path, file_type)
         if presend_name:
@@ -548,6 +558,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         return messages
 
     def generate_chat_title(self, message, label_element):
+        logger.debug("Generating chat title")
         prompt = f"""
 Generate a title following these rules:
     - The title should be based on the prompt at the end
@@ -728,6 +739,7 @@ Generate a title following these rules:
             self.bot_message_button_container = button_container
 
     def update_list_local_models(self):
+        logger.debug("Updating list of local models")
         self.local_models = []
         response = connection_handler.simple_get(f"{connection_handler.url}/api/tags")
         for i in range(self.model_string_list.get_n_items() -1, -1, -1):
@@ -874,6 +886,7 @@ Generate a title following these rules:
         self.bot_message_box = None
 
     def on_theme_changed(self, manager, dark, buffer):
+        logger.debug("Theme changed")
         if manager.get_dark():
             source_style = GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark')
         else:
@@ -881,6 +894,7 @@ Generate a title following these rules:
         buffer.set_style_scheme(source_style)
 
     def on_copy_code_clicked(self, btn, text_buffer):
+        logger.debug("Copying code")
         clipboard = Gdk.Display().get_default().get_clipboard()
         start = text_buffer.get_start_iter()
         end = text_buffer.get_end_iter()
@@ -933,6 +947,7 @@ Generate a title following these rules:
         self.send_button.set_visible(not self.send_button.get_visible())
 
     def run_message(self, messages, model, id):
+        logger.debug("Running message")
         self.bot_message_button_container.set_visible(False)
         response = connection_handler.stream_post(f"{connection_handler.url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=lambda data, id=id: self.update_bot_message(data, id))
         GLib.idle_add(self.add_code_blocks)
@@ -980,6 +995,7 @@ Generate a title following these rules:
             GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
     def pull_model(self, model):
+        logger.info("Pulling model")
         if model in list(self.pulling_models.keys()) or model in self.local_models:
             return
         self.pulling_model_list_box.set_visible(True)
@@ -1013,11 +1029,13 @@ Generate a title following these rules:
         thread.start()
 
     def confirm_pull_model(self, model_name):
+        logger.debug("Confirming pull model")
         self.navigation_view_manage_models.pop()
         self.model_tag_list_box.unselect_all()
         self.pull_model(model_name)
 
     def list_available_model_tags(self, model_name):
+        logger.debug("Listing available model tags")
         self.navigation_view_manage_models.push_by_tag('model_tags_page')
         self.navigation_view_manage_models.find_page('model_tags_page').set_title(model_name.capitalize())
         self.model_link_button.set_name(self.available_models[model_name]['url'])
@@ -1037,6 +1055,7 @@ Generate a title following these rules:
                 self.model_tag_list_box.append(tag_row)
 
     def update_list_available_models(self):
+        logger.debug("Updating list of available models")
         self.available_model_list_box.connect('row_selected', lambda list_box, row: self.list_available_model_tags(row.get_name()) if row else None)
         self.available_model_list_box.remove_all()
         for name, model_info in self.available_models.items():
@@ -1055,6 +1074,7 @@ Generate a title following these rules:
             self.available_model_list_box.append(model)
 
     def save_history(self):
+        logger.debug("Saving history")
         with open(os.path.join(self.data_dir, "chats", "chats.json"), "w+") as f:
             json.dump(self.chats, f, indent=4)
 
@@ -1071,6 +1091,7 @@ Generate a title following these rules:
                     self.bot_message = None
 
     def load_history(self):
+        logger.debug("Loading history")
         if os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
             try:
                 with open(os.path.join(self.data_dir, "chats", "chats.json"), "r") as f:
@@ -1108,11 +1129,13 @@ Generate a title following these rules:
         return f"{datetime.today().strftime('%Y%m%d%H%M%S%f')}{uuid.uuid4().hex}"
 
     def clear_chat(self):
+        logger.info("Clearing chat")
         for widget in list(self.chat_container): self.chat_container.remove(widget)
         self.chats["chats"][self.chats["selected_chat"]]["messages"] = []
         self.save_history()
 
     def delete_chat(self, chat_name):
+        logger.info("Deleting chat")
         del self.chats['chats'][chat_name]
         self.chats['order'].remove(chat_name)
         if os.path.exists(os.path.join(self.data_dir, "chats", chat_name)):
@@ -1125,6 +1148,7 @@ Generate a title following these rules:
             self.chat_list_box.select_row(self.chat_list_box.get_row_at_index(0))
 
     def rename_chat(self, old_chat_name, new_chat_name, label_element):
+        logger.info(f"Renaming chat \"{old_chat_name}\" -> \"{new_chat_name}\"")
         new_chat_name = self.generate_numbered_name(new_chat_name, self.chats["chats"].keys())
         if self.chats["selected_chat"] == old_chat_name: self.chats["selected_chat"] = new_chat_name
         self.chats["chats"][new_chat_name] = self.chats["chats"][old_chat_name]
@@ -1145,10 +1169,12 @@ Generate a title following these rules:
         self.new_chat_element(chat_name, True, False)
 
     def stop_pull_model(self, model_name):
+        logger.debug("Stopping model pull")
         self.pulling_models[model_name]['overlay'].get_parent().get_parent().remove(self.pulling_models[model_name]['overlay'].get_parent())
         del self.pulling_models[model_name]
 
     def delete_model(self, model_name):
+        logger.debug("Deleting model")
         response = connection_handler.simple_delete(f"{connection_handler.url}/api/delete", data={"name": model_name})
         self.update_list_local_models()
         if response.status_code == 200:
@@ -1205,15 +1231,18 @@ Generate a title following these rules:
                 self.new_chat_element(name, self.chats["selected_chat"] == name, True)
 
     def show_preferences_dialog(self):
+        logger.debug("Showing preferences dialog")
         self.preferences_dialog.present(self)
 
     def connect_remote(self, url):
+        logger.debug(f"Connecting to remote: {url}")
         connection_handler.url = url
         self.remote_url = connection_handler.url
         self.remote_connection_entry.set_text(self.remote_url)
         if self.verify_connection() == False: self.connection_error()
 
     def connect_local(self):
+        logger.debug("Connecting to Alpaca's Ollama instance")
         self.run_remote = False
         connection_handler.bearer_token = None
         connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
@@ -1222,6 +1251,7 @@ Generate a title following these rules:
         else: self.remote_connection_switch.set_active(False)
 
     def connection_error(self):
+        logger.error("Connection error")
         if self.run_remote:
             dialogs.reconnect_remote(self, connection_handler.url)
         else:
@@ -1229,6 +1259,7 @@ Generate a title following these rules:
             self.show_toast(_("There was an error with the local Ollama instance, so it has been reset"), self.main_overlay)
 
     def connection_switched(self):
+        logger.debug("Connection switched")
         new_value = self.remote_connection_switch.get_active()
         if new_value != self.run_remote:
             self.run_remote = new_value
@@ -1277,6 +1308,7 @@ Generate a title following these rules:
             )
 
     def export_chat(self, chat_name):
+        logger.info("Exporting chat")
         file_dialog = Gtk.FileDialog(initial_name=f"{chat_name}.tar")
         file_dialog.save(parent=self, cancellable=None, callback=lambda file_dialog, result, chat_name=chat_name: self.on_export_chat(file_dialog, result, chat_name))
 
@@ -1316,10 +1348,12 @@ Generate a title following these rules:
         self.show_toast(_("Chat imported successfully"), self.main_overlay)
 
     def import_chat(self):
+        logger.info("Importing chat")
         file_dialog = Gtk.FileDialog(default_filter=self.file_filter_tar)
         file_dialog.open(self, None, self.on_chat_imported)
 
     def switch_run_on_background(self):
+        logger.debug("Switching run on background")
         self.run_on_background = self.background_switch.get_active()
         self.set_hide_on_close(self.run_on_background)
         self.verify_connection()
@@ -1357,12 +1391,14 @@ Generate a title following these rules:
             return text
 
     def remove_attached_file(self, name):
+        logger.debug("Removing attached file")
         button = self.attachments[name]['button']
         button.get_parent().remove(button)
         del self.attachments[name]
         if len(self.attachments) == 0: self.attachment_box.set_visible(False)
 
     def attach_file(self, file_path, file_type):
+        logger.debug(f"Attaching file: {file_path}")
         file_name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
         content = self.get_content_of_file(file_path, file_type)
         if content:
@@ -1446,6 +1482,7 @@ Generate a title following these rules:
         except Exception as e: 'huh'
 
     def on_clipboard_paste(self, textview):
+        logger.debug("Pasting from clipboard")
         clipboard = Gdk.Display.get_default().get_clipboard()
         clipboard.read_text_async(None, self.cb_text_received)
         clipboard.read_texture_async(None, self.cb_image_received)
