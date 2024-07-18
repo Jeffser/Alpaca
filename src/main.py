@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import sys
+import logging
 import gi
 
 gi.require_version('Gtk', '4.0')
@@ -25,6 +26,10 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw, GLib
 from .window import AlpacaWindow
+
+
+logger = logging.getLogger(__name__)
+
 
 class AlpacaApplication(Adw.Application):
     """The main application singleton class."""
@@ -35,6 +40,7 @@ class AlpacaApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('preferences', lambda *_: AlpacaWindow.show_preferences_dialog(self.props.active_window), ['<primary>p'])
         self.create_action('about', self.on_about_action)
+        self.version = '0.9.6.1'
 
     def do_activate(self):
         win = self.props.active_window
@@ -47,12 +53,14 @@ class AlpacaApplication(Adw.Application):
             application_name='Alpaca',
             application_icon='com.jeffser.Alpaca',
             developer_name='Jeffry Samuel Eduarte Rojas',
-            version='0.9.6.1',
+            version=self.version,
             developers=['Jeffser https://jeffser.com'],
             designers=['Jeffser https://jeffser.com', 'Tobias Bernard (App Icon) https://tobiasbernard.com/'],
-            translator_credits='Alex K (Russian) https://github.com/alexkdeveloper\nJeffser (Spanish) https://jeffser.com\nDaimar Stein (Brazilian Portuguese) https://github.com/not-a-dev-stein\nLouis Chauvet-Villaret (French) https://github.com/loulou64490\nCounterFlow64 (Norwegian) https://github.com/CounterFlow64',
+            translator_credits='Alex K (Russian) https://github.com/alexkdeveloper\nJeffser (Spanish) https://jeffser.com\nDaimar Stein (Brazilian Portuguese) https://github.com/not-a-dev-stein\nLouis Chauvet-Villaret (French) https://github.com/loulou64490\nCounterFlow64 (Norwegian) https://github.com/CounterFlow64\nAritra Saha (Bengali) https://github.com/olumolu',
             copyright='© 2024 Jeffser\n© 2024 Ollama',
-            issue_url='https://github.com/Jeffser/Alpaca/issues')
+            issue_url='https://github.com/Jeffser/Alpaca/issues',
+            license_type=3,
+            website="https://jeffser.com/alpaca")
         about.present(parent=self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
@@ -64,5 +72,10 @@ class AlpacaApplication(Adw.Application):
 
 
 def main(version):
+    logging.basicConfig(
+        format="%(levelname)s\t[%(filename)s | %(funcName)s] %(message)s",
+        level=logging.INFO
+    )
     app = AlpacaApplication()
+    logger.info(f"Alpaca version: {app.version}")
     return app.run(sys.argv)
