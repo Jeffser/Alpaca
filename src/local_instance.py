@@ -1,6 +1,10 @@
 # local_instance.py
 import subprocess, os, threading
 from time import sleep
+from logging import getLogger
+
+
+logger = getLogger(__name__)
 
 instance = None
 port = 11435
@@ -13,19 +17,22 @@ def start():
     params["OLLAMA_HOST"] = f"127.0.0.1:{port}" # You can't change this directly sorry :3
     params["HOME"] = data_dir
     instance = subprocess.Popen(["/app/bin/ollama", "serve"], env={**os.environ, **params}, stderr=subprocess.PIPE, text=True)
-    print("Starting Alpaca's Ollama instance...")
+    logger.info("Starting Alpaca's Ollama instance...")
+    logger.debug(params)
     sleep(1)
-    print("Started Alpaca's Ollama instance")
+    logger.info("Started Alpaca's Ollama instance")
 
 def stop():
+    logger.info("Stopping Alpaca's Ollama instance")
     global instance
     if instance:
         instance.terminate()
         instance.wait()
         instance = None
-        print("Stopped Alpaca's Ollama instance")
+        logger.info("Stopped Alpaca's Ollama instance")
 
 def reset():
+    logger.info("Resetting Alpaca's Ollama instance")
     stop()
     sleep(1)
     start()
