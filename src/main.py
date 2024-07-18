@@ -58,7 +58,9 @@ class AlpacaApplication(Adw.Application):
             designers=['Jeffser https://jeffser.com', 'Tobias Bernard (App Icon) https://tobiasbernard.com/'],
             translator_credits='Alex K (Russian) https://github.com/alexkdeveloper\nJeffser (Spanish) https://jeffser.com\nDaimar Stein (Brazilian Portuguese) https://github.com/not-a-dev-stein\nLouis Chauvet-Villaret (French) https://github.com/loulou64490\nCounterFlow64 (Norwegian) https://github.com/CounterFlow64\nAritra Saha (Bengali) https://github.com/olumolu',
             copyright='© 2024 Jeffser\n© 2024 Ollama',
-            issue_url='https://github.com/Jeffser/Alpaca/issues')
+            issue_url='https://github.com/Jeffser/Alpaca/issues',
+            license_type=3,
+            website="https://jeffser.com/alpaca")
         about.present(parent=self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
