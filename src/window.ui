@@ -617,7 +617,7 @@
                             <object class="GtkSearchEntry" id="searchentry">
                               <signal name="search-changed" handler="model_search_changed"/>
                               <property name="search-delay">100</property>
-                              <property name="placeholder-text" translatable="true">Search models</property>
+                              <property name="placeholder-text" translatable="yes">Search models</property>
                             </object>
                           </child>
                         </object>
