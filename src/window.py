@@ -983,7 +983,7 @@ Generate a title following these rules:
 
         if response.status_code == 200:
             GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model), Gio.ThemedIcon.new("emblem-ok-symbolic"))
-            GLib.idle_add(self.show_toast, "good", 1, self.manage_models_overlay)
+            GLib.idle_add(self.show_toast, _("Model '{}' pulled successfully.").format(model), self.manage_models_overlay)
             GLib.idle_add(self.pulling_models[model]['overlay'].get_parent().get_parent().remove, self.pulling_models[model]['overlay'].get_parent())
             del self.pulling_models[model]
         else:

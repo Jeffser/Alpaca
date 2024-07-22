@@ -14,3 +14,5 @@ echo "Updating Norwegian"
 msgmerge --no-fuzzy-matching -U po/nb_NO.po po/alpaca.pot
 echo "Updating Bengali"
 msgmerge --no-fuzzy-matching -U po/bn.po po/alpaca.pot
+echo "Updating Simplified Chinese"
+msgmerge --no-fuzzy-matching -U po/zh_CN.po po/alpaca.pot
