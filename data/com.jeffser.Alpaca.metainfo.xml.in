@@ -17,6 +17,9 @@
 	    <li>Image recognition (Only available with compatible models)</li>
 	    <li>Plain text documents recognition</li>
 	    <li>Import and export chats</li>
+	    <li>Append YouTube transcripts to the prompt</li>
+	    <li>Append text from a website to the prompt</li>
+	    <li>PDF recognition</li>
 	  </ul>
     <p>Disclaimer</p>
 	  <p>This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any models.</p>
@@ -61,9 +64,58 @@
   </screenshots>
   <content_rating type="oars-1.1" />
   <url type="bugtracker">https://github.com/Jeffser/Alpaca/issues</url>
-  <url type="homepage">https://github.com/Jeffser/Alpaca</url>
+  <url type="homepage">https://jeffser.com/alpaca/</url>
   <url type="donation">https://github.com/sponsors/Jeffser</url>
+  <url type="translate">https://github.com/Jeffser/Alpaca/discussions/153</url>
+  <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
+  <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="1.0.0" date="2024-07-22">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.0</url>
+      <description>
+        <p>Stable Release</p>
+        <p>The new icon was made by Tobias Bernard over the Gnome Gitlab, thanks for the great icon!</p>
+        <p>Features and fixes</p>
+        <ul>
+          <li>Better model selector</li>
+          <li>Model manager redesign</li>
+          <li>Better tag selector when pulling a model</li>
+          <li>Model search</li>
+          <li>Added support for bearer tokens on remote instances</li>
+          <li>Preferences dialog redesign</li>
+          <li>Added context menus to interact with a chat</li>
+          <li>Redesigned primary and secondary menus</li>
+          <li>YouTube integration: Paste the URL of a video with a transcript and it will be added to the prompt</li>
+          <li>Website integration (Experimental): Extract the text from the body of a website by adding it's URL to the prompt</li>
+          <li>Chat title generation</li>
+          <li>Auto resizing of message entry</li>
+          <li>Chat notifications</li>
+          <li>Added indicator when an image is missing</li>
+          <li>Auto rearrange the order of chats when a message is received</li>
+          <li>Redesigned file preview dialog</li>
+          <li>Credited new contributors</li>
+          <li>Better stability and optimization</li>
+          <li>Edit messages to change the context of a conversation</li>
+          <li>Added disclaimers when pulling models</li>
+          <li>Preview files before sending a message</li>
+          <li>Better format for date and time on messages</li>
+          <li>Error and debug logging on terminal</li>
+          <li>Auto-hiding sidebar button</li>
+          <li>Various UI tweaks</li>
+        </ul>
+        <p>Translations</p>
+        <p>These are all the available translations on 1.0.0, thanks to all the contributors!</p>
+        <ul>
+          <li>Russian: Alex K</li>
+          <li>Spanish: Jeffser</li>
+          <li>Brazilian Portuguese: Daimar Stein</li>
+          <li>French: Louis Chauvet-Villaret</li>
+          <li>Norwegian: CounterFlow64</li>
+          <li>Bengali: Aritra Saha</li>
+          <li>Simplified Chinese: Yuehao Sui</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.9.6.1" date="2024-06-22">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/0.9.6.1</url>
       <description>

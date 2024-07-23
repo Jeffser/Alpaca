@@ -40,7 +40,7 @@ class AlpacaApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('preferences', lambda *_: AlpacaWindow.show_preferences_dialog(self.props.active_window), ['<primary>p'])
         self.create_action('about', self.on_about_action)
-        self.version = '0.9.6.1'
+        self.version = '1.0.0'
 
     def do_activate(self):
         win = self.props.active_window
@@ -54,6 +54,7 @@ class AlpacaApplication(Adw.Application):
             application_icon='com.jeffser.Alpaca',
             developer_name='Jeffry Samuel Eduarte Rojas',
             version=self.version,
+            support_url="https://github.com/Jeffser/Alpaca/discussions/155",
             developers=['Jeffser https://jeffser.com'],
             designers=['Jeffser https://jeffser.com', 'Tobias Bernard (App Icon) https://tobiasbernard.com/'],
             translator_credits='Alex K (Russian) https://github.com/alexkdeveloper\nJeffser (Spanish) https://jeffser.com\nDaimar Stein (Brazilian Portuguese) https://github.com/not-a-dev-stein\nLouis Chauvet-Villaret (French) https://github.com/loulou64490\nCounterFlow64 (Norwegian) https://github.com/CounterFlow64\nAritra Saha (Bengali) https://github.com/olumolu\nYuehao Sui (Simplified Chinese) https://github.com/8ar10der',
@@ -61,6 +62,7 @@ class AlpacaApplication(Adw.Application):
             issue_url='https://github.com/Jeffser/Alpaca/issues',
             license_type=3,
             website="https://jeffser.com/alpaca")
+        about.add_acknowledgement_section("Backers", ["a", "b"])
         about.present(parent=self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
