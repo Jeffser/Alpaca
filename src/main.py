@@ -62,7 +62,6 @@ class AlpacaApplication(Adw.Application):
             issue_url='https://github.com/Jeffser/Alpaca/issues',
             license_type=3,
             website="https://jeffser.com/alpaca")
-        about.add_acknowledgement_section("Backers", ["a", "b"])
         about.present(parent=self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
