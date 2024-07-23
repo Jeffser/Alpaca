@@ -657,7 +657,7 @@ Generate a title following these rules:
                     )
                     button.connect("clicked", lambda button, file_path=path: self.preview_file(file_path, 'image', None))
                 except Exception as e:
-                    self.logger.error(e)
+                    logger.error(e)
                     image_texture = Gtk.Image.new_from_icon_name("image-missing-symbolic")
                     image_texture.set_icon_size(2)
                     image_texture.set_vexpand(True)
@@ -1104,7 +1104,7 @@ Generate a title following these rules:
                         for chat_name in self.chats["chats"].keys():
                             self.chats["order"].append(chat_name)
             except Exception as e:
-                self.logger.error(e)
+                logger.error(e)
                 self.chats = {"chats": {}, "selected_chat": None, "order": []}
                 self.new_chat()
         else:
@@ -1378,7 +1378,7 @@ Generate a title following these rules:
                         image_data = output.getvalue()
                     return base64.b64encode(image_data).decode("utf-8")
             except Exception as e:
-                self.logger.error(e)
+                logger.error(e)
                 self.show_toast(_("Cannot open image"), self.main_overlay)
         elif file_type == 'plain_text' or file_type == 'youtube' or file_type == 'website':
             with open(file_path, 'r') as f:
@@ -1460,12 +1460,12 @@ Generate a title following these rules:
                 try:
                     dialogs.youtube_caption(self, text)
                 except Exception as e:
-                    self.logger.error(e)
+                    logger.error(e)
                     self.show_toast(_("This video is not available"), self.main_overlay)
             elif url_regex.match(text):
                 dialogs.attach_website(self, text)
         except Exception as e:
-            self.logger.error(e)
+            logger.error(e)
 
     def cb_image_received(self, clipboard, result):
         try:
