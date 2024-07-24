@@ -782,13 +782,11 @@ Generate a title following these rules:
             json.dump({'remote_url': self.remote_url, 'remote_bearer_token': self.remote_bearer_token, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background, 'model_tweaks': self.model_tweaks, 'ollama_overrides': local_instance.overrides}, f, indent=6)
 
     def verify_connection(self):
-        response = connection_handler.simple_get(connection_handler.url)
+        response = connection_handler.simple_get(f"{connection_handler.url}/api/tags")
         if response.status_code == 200:
-            if "Ollama is running" in response.text:
-                self.save_server_config()
-                self.update_list_local_models()
-                return True
-        return False
+            self.save_server_config()
+            self.update_list_local_models()
+        return response.status_code == 200
 
     def add_code_blocks(self):
         text = self.bot_message.get_text(self.bot_message.get_start_iter(), self.bot_message.get_end_iter(), True)
