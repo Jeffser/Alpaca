@@ -10,7 +10,6 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-        "--filesystem=/usr/lib/rocm",
         "--env=LD_LIBRARY_PATH=/usr/lib/rocm/lib:/usr/lib:/usr/lib64",
     	"--env=ROCM_PATH=/usr/lib/rocm"
     ],
