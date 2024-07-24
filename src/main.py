@@ -40,7 +40,7 @@ class AlpacaApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('preferences', lambda *_: AlpacaWindow.show_preferences_dialog(self.props.active_window), ['<primary>p'])
         self.create_action('about', self.on_about_action)
-        self.version = '1.0.0'
+        self.version = '1.0.1'
 
     def do_activate(self):
         win = self.props.active_window

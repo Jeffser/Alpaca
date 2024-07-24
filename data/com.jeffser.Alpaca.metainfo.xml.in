@@ -78,6 +78,16 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="1.0.1" date="2024-06-23">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.1</url>
+      <description>
+        <p>Fixes</p>
+        <ul>
+          <li>Models with '-' in their names didn't work properly, this is now fixed</li>
+          <li>Better connection check for Ollama</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.0" date="2024-07-22">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.0</url>
       <description>
