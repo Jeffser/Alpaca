@@ -9,9 +9,7 @@
         "--share=ipc",
         "--socket=fallback-x11",
         "--device=dri",
-        "--socket=wayland",
-        "--env=LD_LIBRARY_PATH=/usr/lib/rocm/lib:/usr/lib:/usr/lib64",
-    	"--env=ROCM_PATH=/usr/lib/rocm"
+        "--socket=wayland"
     ],
     "cleanup" : [
         "/include",
