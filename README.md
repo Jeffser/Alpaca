@@ -25,8 +25,8 @@ Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can man
 - Website recognition (Ask questions about a certain question by parsing the url)
 
 ## Screenies
-Code highlighting             |  Chatting with models        |  Managing models
-:-------------------------:|:-------------------------:|:-------------------------:
+Chatting with a model | Image recognition |  Code highlighting
+:--------------------:|:-----------------:|:----------------------:
 ![Screenshot from 2024-05-12 19-58-28](https://jeffser.com/images/alpaca/screenie1.png)  |  ![Screenshot from 2024-05-12 20-01-08](https://jeffser.com/images/alpaca/screenie2.png)  |  ![Screenshot from 2024-05-12 20-01-31](https://jeffser.com/images/alpaca/screenie3.png)
 
 ## Preview
