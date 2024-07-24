@@ -34,13 +34,13 @@ logger = logging.getLogger(__name__)
 class AlpacaApplication(Adw.Application):
     """The main application singleton class."""
 
-    def __init__(self):
+    def __init__(self, version):
         super().__init__(application_id='com.jeffser.Alpaca',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('preferences', lambda *_: AlpacaWindow.show_preferences_dialog(self.props.active_window), ['<primary>p'])
         self.create_action('about', self.on_about_action)
-        self.version = '1.0.1'
+        self.version = version
 
     def do_activate(self):
         win = self.props.active_window
@@ -77,6 +77,6 @@ def main(version):
         format="%(levelname)s\t[%(filename)s | %(funcName)s] %(message)s",
         level=logging.INFO
     )
-    app = AlpacaApplication()
+    app = AlpacaApplication(version)
     logger.info(f"Alpaca version: {app.version}")
     return app.run(sys.argv)
