@@ -78,7 +78,22 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
-    <release version="1.0.1" date="2024-06-23">
+    <release version="1.0.2" date="2024-07-29">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.2</url>
+      <description>
+        <p>Fixes</p>
+        <ul>
+          <li>Models with capital letters on their tag don't work</li>
+          <li>Ollama fails to launch on some systems</li>
+          <li>YouTube transcripts are not being saved in the right TMP directory</li>
+        </ul>
+        <p>New</p>
+        <ul>
+          <li>Debug messages are now shown on the 'About Alpaca' dialog</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.1" date="2024-07-23">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.1</url>
       <description>
         <p>Fixes</p>
