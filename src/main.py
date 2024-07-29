@@ -20,6 +20,7 @@
 import sys
 import logging
 import gi
+import os
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
@@ -61,7 +62,8 @@ class AlpacaApplication(Adw.Application):
             copyright='© 2024 Jeffser\n© 2024 Ollama',
             issue_url='https://github.com/Jeffser/Alpaca/issues',
             license_type=3,
-            website="https://jeffser.com/alpaca")
+            website="https://jeffser.com/alpaca",
+            debug_info=open(os.path.join(os.getenv("XDG_DATA_HOME"), 'tmp.log'), 'r').read())
         about.present(parent=self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
@@ -73,9 +75,16 @@ class AlpacaApplication(Adw.Application):
 
 
 def main(version):
+    if os.path.isfile(os.path.join(os.getenv("XDG_DATA_HOME"), 'tmp.log')):
+        os.remove(os.path.join(os.getenv("XDG_DATA_HOME"), 'tmp.log'))
+    if os.path.isdir(os.path.join(os.getenv("XDG_CACHE_HOME"), 'tmp')):
+        os.system('rm -rf ' + os.path.join(os.getenv("XDG_CACHE_HOME"), "tmp/*"))
+    else:
+        os.mkdir(os.path.join(os.getenv("XDG_CACHE_HOME"), 'tmp'))
     logging.basicConfig(
         format="%(levelname)s\t[%(filename)s | %(funcName)s] %(message)s",
-        level=logging.INFO
+        level=logging.INFO,
+        handlers=[logging.FileHandler(filename=os.path.join(os.getenv("XDG_DATA_HOME"), 'tmp.log')), logging.StreamHandler(stream=sys.stdout)]
     )
     app = AlpacaApplication(version)
     logger.info(f"Alpaca version: {app.version}")

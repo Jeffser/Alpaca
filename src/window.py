@@ -575,7 +575,6 @@ Generate a title following these rules:
         current_model = current_model.replace(' (', ':').replace(' ', '-')[:-1].lower()
         data = {"model": current_model, "prompt": prompt, "stream": False}
         if 'images' in message: data["images"] = message['images']
-        print(current_model)
         response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps(data))
 
         new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').title()
