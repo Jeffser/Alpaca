@@ -183,8 +183,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.chats['order'].remove(self.chats['selected_chat'])
         self.chats['order'].insert(0, self.chats['selected_chat'])
         self.save_history()
-        current_model = self.model_drop_down.get_selected_item().get_string()
-        current_model = current_model.replace(' (', ':').replace(' ', '-')[:-1].lower()
+        current_model = self.model_drop_down.get_selected_item().get_string().split(' (')
+        current_model = '{}:{}'.format(current_model[0].replace(' ', '-').lower(), current_model[1][:-1])
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
             return
@@ -571,8 +571,8 @@ Generate a title following these rules:
 ```PROMPT
 {message['content']}
 ```"""
-        current_model = self.model_drop_down.get_selected_item().get_string()
-        current_model = current_model.replace(' (', ':').replace(' ', '-')[:-1].lower()
+        current_model = self.model_drop_down.get_selected_item().get_string().split(' (')
+        current_model = '{}:{}'.format(current_model[0].replace(' ', '-').lower(), current_model[1][:-1])
         data = {"model": current_model, "prompt": prompt, "stream": False}
         if 'images' in message: data["images"] = message['images']
         response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps(data))
