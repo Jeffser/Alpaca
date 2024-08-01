@@ -1593,7 +1593,7 @@ Generate a title following these rules:
 
                 #Support dialog
                 if 'show_support' not in data or data['show_support']:
-                    if random.randint(0, 99) == 0:
+                    if random.randint(0, 49) == 0:
                         dialogs.support(self)
                 if 'show_support' in data: self.show_support = data['show_support']
                 self.background_switch.set_active(self.run_on_background)
