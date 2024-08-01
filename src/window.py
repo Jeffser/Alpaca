@@ -885,7 +885,7 @@ Generate a title following these rules:
                 source_view.set_editable(False)
                 code_block_box = Gtk.Box(css_classes=["card"], orientation=1, overflow=1)
                 title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=3)
-                title_box.append(Gtk.Label(label=language.get_name() if language else "Code Block", hexpand=True, xalign=0))
+                title_box.append(Gtk.Label(label=language.get_name() if language else _("Code Block"), hexpand=True, xalign=0))
                 copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
                 copy_button.connect("clicked", self.on_copy_code_clicked, buffer)
                 title_box.append(copy_button)
