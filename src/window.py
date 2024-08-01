@@ -1069,7 +1069,7 @@ Generate a title following these rules:
     def list_available_model_tags(self, model_name):
         logger.debug("Listing available model tags")
         self.navigation_view_manage_models.push_by_tag('model_tags_page')
-        self.navigation_view_manage_models.find_page('model_tags_page').set_title(model_name.capitalize())
+        self.navigation_view_manage_models.find_page('model_tags_page').set_title(model_name.replace("-", " ").title())
         self.model_link_button.set_name(self.available_models[model_name]['url'])
         self.model_link_button.set_tooltip_text(self.available_models[model_name]['url'])
         self.available_model_list_box.unselect_all()
