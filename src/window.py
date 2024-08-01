@@ -44,7 +44,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     localedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'locale')
 
-    locale.setlocale(locale.LC_ALL, '')
     gettext.bindtextdomain('com.jeffser.Alpaca', localedir)
     gettext.textdomain('com.jeffser.Alpaca')
     _ = gettext.gettext
