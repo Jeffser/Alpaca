@@ -172,26 +172,38 @@ def remove_attached_file(self, name):
 
 # RECONNECT REMOTE | WORKS
 
-def reconnect_remote_response(self, dialog, task, entry):
+def reconnect_remote_response(self, dialog, task, url_entry, bearer_entry):
     response = dialog.choose_finish(task)
     if not task or response == "remote":
-        self.connect_remote(entry.get_text())
+        self.connect_remote(url_entry.get_text(), bearer_entry.get_text())
     elif response == "local":
         self.connect_local()
     elif response == "close":
         self.destroy()
 
-def reconnect_remote(self, current_url):
-    entry = Gtk.Entry(
+def reconnect_remote(self, current_url, current_bearer_token):
+    entry_url = Gtk.Entry(
         css_classes = ["error"],
-        text = current_url
+        text = current_url,
+        placeholder_text = "URL"
     )
+    entry_bearer_token = Gtk.Entry(
+        css_classes = ["error"] if current_bearer_token else None,
+        text = current_bearer_token,
+        placeholder_text = "Bearer Token (Optional)"
+    )
+    container = Gtk.Box(
+        orientation = 1,
+        spacing = 10
+    )
+    container.append(entry_url)
+    container.append(entry_bearer_token)
     dialog = Adw.AlertDialog(
         heading=_("Connection Error"),
         body=_("The remote instance has disconnected"),
-        extra_child=entry
+        extra_child=container
     )
-    entry.connect("activate", lambda entry, dialog: reconnect_remote_response(self, dialog, None, entry))
+    #entry.connect("activate", lambda entry, dialog: reconnect_remote_response(self, dialog, None, entry))
     dialog.add_response("close", _("Close Alpaca"))
     dialog.add_response("local", _("Use local instance"))
     dialog.add_response("remote", _("Connect"))
@@ -199,7 +211,7 @@ def reconnect_remote(self, current_url):
     dialog.choose(
         parent = self,
         cancellable = None,
-        callback = lambda dialog, task, entry=entry: reconnect_remote_response(self, dialog, task, entry)
+        callback = lambda dialog, task, url_entry=entry_url, bearer_entry=entry_bearer_token: reconnect_remote_response(self, dialog, task, url_entry, bearer_entry)
     )
 
 # CREATE MODEL | WORKS

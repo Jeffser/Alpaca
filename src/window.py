@@ -290,6 +290,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def change_remote_url(self, entry):
+        if not entry.get_text().startswith("http"):
+            entry.set_text("http://{}".format(entry.get_text()))
+            return
         self.remote_url = entry.get_text()
         logger.debug(f"Changing remote url: {self.remote_url}")
         if self.run_remote:
@@ -1234,9 +1237,10 @@ Generate a title following these rules:
         logger.debug("Showing preferences dialog")
         self.preferences_dialog.present(self)
 
-    def connect_remote(self, url):
+    def connect_remote(self, url, bearer_token):
         logger.debug(f"Connecting to remote: {url}")
         connection_handler.url = url
+        connection_handler.bearer_token = bearer_token
         self.remote_url = connection_handler.url
         self.remote_connection_entry.set_text(self.remote_url)
         if self.verify_connection() == False: self.connection_error()
@@ -1253,7 +1257,7 @@ Generate a title following these rules:
     def connection_error(self):
         logger.error("Connection error")
         if self.run_remote:
-            dialogs.reconnect_remote(self, connection_handler.url)
+            dialogs.reconnect_remote(self, connection_handler.url, connection_handler.bearer_token)
         else:
             local_instance.reset()
             self.show_toast(_("There was an error with the local Ollama instance, so it has been reset"), self.main_overlay)
