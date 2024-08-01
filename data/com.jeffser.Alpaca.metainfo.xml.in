@@ -78,6 +78,24 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="1.0.3" date="2024-08-01">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.3</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Bearer Token entry on connection error dialog</li>
+          <li>Small appearance changes</li>
+          <li>Compatibility with code blocks without explicit language</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Date format for Simplified Chinese translation</li>
+          <li>Bug with unsupported localizations</li>
+          <li>Min height being to large to be used on mobile</li>
+          <li>Remote connection checker bug</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.2" date="2024-07-29">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.2</url>
       <description>
