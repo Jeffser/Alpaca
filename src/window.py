@@ -806,6 +806,16 @@ Generate a title following these rules:
             code_text = match.group(2)
             parts.append({"type": "code", "text": code_text, "language": language})
             pos = end
+        # Match code blocks without language
+        no_lang_code_block_pattern = re.compile(r'`\n(.*?)\n`', re.DOTALL)
+        for match in no_lang_code_block_pattern.finditer(text):
+            start, end = match.span()
+            if pos < start:
+                normal_text = text[pos:start]
+                parts.append({"type": "normal", "text": normal_text.strip()})
+            code_text = match.group(1)
+            parts.append({"type": "code", "text": code_text, "language": None})
+            pos = end
         # Extract any remaining normal text after the last code block
         if pos < len(text):
             normal_text = text[pos:]
@@ -856,8 +866,9 @@ Generate a title following these rules:
 
                 self.bot_message_box.append(message_text)
             else:
-                language = GtkSource.LanguageManager.get_default().get_language(part['language'])
-                if language:
+                language = None
+                if part['language']:
+                    language = GtkSource.LanguageManager.get_default().get_language(part['language'])
                     buffer = GtkSource.Buffer.new_with_language(language)
                 else:
                     buffer = GtkSource.Buffer()
@@ -874,7 +885,7 @@ Generate a title following these rules:
                 source_view.set_editable(False)
                 code_block_box = Gtk.Box(css_classes=["card"], orientation=1, overflow=1)
                 title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=3)
-                title_box.append(Gtk.Label(label=language.get_name() if language else part['language'], hexpand=True, xalign=0))
+                title_box.append(Gtk.Label(label=language.get_name() if language else "Code Block", hexpand=True, xalign=0))
                 copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
                 copy_button.connect("clicked", self.on_copy_code_clicked, buffer)
                 title_box.append(copy_button)
