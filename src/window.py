@@ -825,7 +825,7 @@ Generate a title following these rules:
             if normal_text.strip():
                 parts.append({"type": "normal", "text": normal_text.strip()})
         bold_pattern = re.compile(r'\*\*(.*?)\*\*') #"**text**"
-        code_pattern = re.compile(r'`(.*?)`') #"`text`"
+        code_pattern = re.compile(r'`([^`\n]*?)`') #"`text`"
         h1_pattern = re.compile(r'^#\s(.*)$') #"# text"
         h2_pattern = re.compile(r'^##\s(.*)$') #"## text"
         markup_pattern = re.compile(r'<(b|u|tt|span.*)>(.*?)<\/(b|u|tt|span)>') #heh butt span, I'm so funny
@@ -872,6 +872,7 @@ Generate a title following these rules:
                 language = None
                 if part['language']:
                     language = GtkSource.LanguageManager.get_default().get_language(part['language'])
+                if language:
                     buffer = GtkSource.Buffer.new_with_language(language)
                 else:
                     buffer = GtkSource.Buffer()
