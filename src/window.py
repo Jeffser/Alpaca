@@ -28,7 +28,7 @@ from PIL import Image
 from pypdf import PdfReader
 from datetime import datetime
 from . import dialogs, local_instance, connection_handler, available_models_descriptions
-
+from .table_widget import TableWidget
 
 logger = logging.getLogger(__name__)
 
@@ -820,6 +820,16 @@ Generate a title following these rules:
             code_text = match.group(1)
             parts.append({"type": "code", "text": code_text, "language": None})
             pos = end
+        # Match tables
+        table_pattern = re.compile(r'((\r?\n){2}|^)([^\r\n]*\|[^\r\n]*(\r?\n)?)+(?=(\r?\n){2}|$)', re.MULTILINE)
+        for match in table_pattern.finditer(text):
+            start, end = match.span()
+            if pos < start:
+                normal_text = text[pos:start]
+                parts.append({"type": "normal", "text": normal_text.strip()})
+            table_text = match.group(0)
+            parts.append({"type": "table", "text": table_text})
+            pos = end
         # Extract any remaining normal text after the last code block
         if pos < len(text):
             normal_text = text[pos:]
@@ -869,7 +879,7 @@ Generate a title following these rules:
                 if footer: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer.encode('utf-8')))
 
                 self.bot_message_box.append(message_text)
-            else:
+            elif part['type'] == 'code':
                 language = None
                 if part['language']:
                     language = GtkSource.LanguageManager.get_default().get_language(part['language'])
@@ -899,6 +909,9 @@ Generate a title following these rules:
                 code_block_box.append(source_view)
                 self.bot_message_box.append(code_block_box)
                 self.style_manager.connect("notify::dark", self.on_theme_changed, buffer)
+            elif part['type'] == 'table':
+                table = TableWidget(part['text'])
+                self.bot_message_box.append(table)
         vadjustment = self.chat_window.get_vadjustment()
         vadjustment.set_value(vadjustment.get_upper())
         self.bot_message = None
