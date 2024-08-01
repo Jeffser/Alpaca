@@ -21,7 +21,7 @@ import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
-import json, requests, threading, os, re, base64, sys, gettext, locale, subprocess, uuid, shutil, tarfile, tempfile, logging
+import json, requests, threading, os, re, base64, sys, gettext, locale, subprocess, uuid, shutil, tarfile, tempfile, logging, random
 from time import sleep
 from io import BytesIO
 from PIL import Image
@@ -60,6 +60,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     pulling_models = {}
     chats = {"chats": {_("New Chat"): {"messages": {}}}, "selected_chat": "New Chat", "order": []}
     attachments = {}
+    show_support = True
 
     #Override elements
     override_HSA_OVERRIDE_GFX_VERSION = Gtk.Template.Child()
@@ -780,7 +781,7 @@ Generate a title following these rules:
 
     def save_server_config(self):
         with open(os.path.join(self.config_dir, "server.json"), "w+") as f:
-            json.dump({'remote_url': self.remote_url, 'remote_bearer_token': self.remote_bearer_token, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background, 'model_tweaks': self.model_tweaks, 'ollama_overrides': local_instance.overrides}, f, indent=6)
+            json.dump({'remote_url': self.remote_url, 'remote_bearer_token': self.remote_bearer_token, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background, 'model_tweaks': self.model_tweaks, 'ollama_overrides': local_instance.overrides, 'show_support': self.show_support}, f, indent=6)
 
     def verify_connection(self):
         try:
@@ -1577,7 +1578,11 @@ Generate a title following these rules:
                     if override in local_instance.overrides:
                         element.set_text(local_instance.overrides[override])
 
-
+                #Support dialog
+                if 'show_support' not in data or data['show_support']:
+                    if random.randint(0, 99) == 0:
+                        dialogs.support(self)
+                if 'show_support' in data: self.show_support = data['show_support']
                 self.background_switch.set_active(self.run_on_background)
                 self.set_hide_on_close(self.run_on_background)
                 self.remote_connection_entry.set_text(self.remote_url)
