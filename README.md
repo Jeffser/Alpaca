@@ -22,7 +22,7 @@ Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can man
 - Import / Export chats
 - Delete / Edit messages
 - YouTube recognition (Ask questions about a YouTube video using the transcript)
-- Website recognition (Ask questions about a certain question by parsing the url)
+- Website recognition (Ask questions about a certain website by parsing the url)
 
 ## Screenies
 Chatting with a model | Image recognition |  Code highlighting
