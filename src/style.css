@@ -12,3 +12,7 @@
   border-radius: 5px;
   padding: 5px;
 }
+.chat_row:selected {
+	background: mix(@theme_bg_color, @theme_selected_bg_color, 0.3);
+	color: mix(@window_fg_color, @theme_selected_bg_color, 0.5);
+}
