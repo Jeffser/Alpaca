@@ -166,7 +166,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             buffer = self.editing_message["text_view"].get_buffer()
             text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).rstrip('\n')
             footer = "<small>" + self.editing_message["footer"] + "</small>"
-            buffer.insert_markup(buffer.get_end_iter(), footer, len(footer))
+            buffer.insert_markup(buffer.get_end_iter(), footer, len(footer.encode('utf-8')))
             self.chats["chats"][self.chats["selected_chat"]]["messages"][self.editing_message["id"]]["content"] = text
             self.editing_message = None
             self.save_history()
@@ -228,7 +228,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         #self.attachments[name] = {"path": file_path, "type": file_type, "content": content}
         raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-        formated_date = self.generate_datetime_format(current_datetime)
+        formated_date = GLib.markup_escape_text(self.generate_datetime_format(current_datetime))
         self.show_message(raw_message, False, f"\n\n<small>{formated_date}</small>", attached_images, attached_files, id=id)
         self.message_text_view.get_buffer().set_text("", 0)
         self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
@@ -598,7 +598,7 @@ Generate a title following these rules:
         )
         message_buffer = message_text.get_buffer()
         message_buffer.insert(message_buffer.get_end_iter(), msg)
-        if footer is not None: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer))
+        if footer is not None: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer.encode('utf-8')))
 
         delete_button = Gtk.Button(
             icon_name = "user-trash-symbolic",
@@ -859,13 +859,13 @@ Generate a title following these rules:
                     start, end = match.span()
                     if position < start:
                         message_buffer.insert(message_buffer.get_end_iter(), part['text'][position:start])
-                    message_buffer.insert_markup(message_buffer.get_end_iter(), match.group(0), len(match.group(0)))
+                    message_buffer.insert_markup(message_buffer.get_end_iter(), match.group(0), len(match.group(0).encode('utf-8')))
                     position = end
 
                 if position < len(part['text']):
                     message_buffer.insert(message_buffer.get_end_iter(), part['text'][position:])
 
-                if footer: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer))
+                if footer: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer.encode('utf-8')))
 
                 self.bot_message_box.append(message_text)
             else:
@@ -934,9 +934,9 @@ Generate a title following these rules:
         if id not in self.chats["chats"][self.chats["selected_chat"]]["messages"] or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if data['done']:
-            formated_date = self.generate_datetime_format(datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["date"], '%Y/%m/%d %H:%M:%S'))
-            text = f"\n\n<small>{data['model'].split(':')[0].replace('-', ' ').title()} ({data['model'].split(':')[1]})\n{formated_date}</small>"
-            GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text))
+            formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["date"], '%Y/%m/%d %H:%M:%S')))
+            text = f"\n\n{data['model'].split(':')[0].replace('-', ' ').title()} ({data['model'].split(':')[1]})\n<small>{formated_date}</small>"
+            GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text.encode('utf-8')))
             self.save_history()
             GLib.idle_add(self.bot_message_button_container.set_visible, True)
             #Notification
@@ -1099,11 +1099,11 @@ Generate a title following these rules:
         for widget in list(self.chat_container): self.chat_container.remove(widget)
         for key, message in self.chats['chats'][self.chats["selected_chat"]]['messages'].items():
             if message:
-                formated_date = self.generate_datetime_format(datetime.strptime(message['date'] + (":00" if message['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
+                formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(message['date'] + (":00" if message['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S')))
                 if message['role'] == 'user':
                     self.show_message(message['content'], False, f"\n\n<small>{formated_date}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, id=key)
                 else:
-                    self.show_message(message['content'], True, f"\n\n<small>{message['model'].split(':')[0].replace('-', ' ').title()} ({message['model'].split(':')[1]})\n{formated_date}</small>", id=key)
+                    self.show_message(message['content'], True, f"\n\n{message['model'].split(':')[0].replace('-', ' ').title()} ({message['model'].split(':')[1]})\n<small>{formated_date}</small>", id=key)
                     self.add_code_blocks()
                     self.bot_message = None
 
