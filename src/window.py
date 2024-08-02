@@ -282,8 +282,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.chats["selected_chat"] = row.get_child().get_name()
             self.load_history_into_chat()
             if len(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()) > 0:
+                last_model_used = self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]
+                last_model_used = "{} ({})".format(last_model_used.split(":")[0].replace("-", " ").title(), last_model_used.split(":")[1])
                 for i in range(self.model_string_list.get_n_items()):
-                    if self.model_string_list.get_string(i) == self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]:
+                    if self.model_string_list.get_string(i) == last_model_used:
                         self.model_drop_down.set_selected(i)
                         break
             self.save_history()
@@ -773,7 +775,6 @@ Generate a title following these rules:
 
                 self.model_string_list.append(f"{model['name'].split(':')[0].replace('-', ' ').title()} ({model['name'].split(':')[1]})")
                 self.local_models.append(model["name"])
-            self.model_drop_down.set_selected(0)
             self.verify_if_image_can_be_used()
             return
         else:
@@ -1134,6 +1135,14 @@ Generate a title following these rules:
                         self.chats["order"] = []
                         for chat_name in self.chats["chats"].keys():
                             self.chats["order"].append(chat_name)
+                    if len(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()) > 0:
+                        last_model_used = self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]
+                        last_model_used = "{} ({})".format(last_model_used.split(":")[0].replace("-", " ").title(), last_model_used.split(":")[1])
+                        print('huh')
+                        for i in range(self.model_string_list.get_n_items()):
+                            if self.model_string_list.get_string(i) == last_model_used:
+                                self.model_drop_down.set_selected(i)
+                                break
             except Exception as e:
                 logger.error(e)
                 self.chats = {"chats": {}, "selected_chat": None, "order": []}
