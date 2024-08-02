@@ -580,7 +580,7 @@ Generate a title following these rules:
         if 'images' in message: data["images"] = message['images']
         response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps(data))
 
-        new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title()
+        new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').replace('\'S', '\'s').title()
         new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
         self.rename_chat(label_element.get_name(), new_chat_name, label_element)
 
