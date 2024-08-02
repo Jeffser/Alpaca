@@ -135,7 +135,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def verify_if_image_can_be_used(self, pspec=None, user_data=None):
         logger.debug("Verifying if image can be used")
         if self.model_drop_down.get_selected_item() == None: return True
-        selected = self.model_drop_down.get_selected_item().get_string().split(" (")[0].lower()
+        selected = self.convert_model_name(self.model_drop_down.get_selected_item().get_string(), 1).split(":")[0]
         if selected in [key for key, value in self.available_models.items() if value["image"]]:
             for name, content in self.attachments.items():
                 if content['type'] == 'image':
@@ -183,8 +183,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.chats['order'].remove(self.chats['selected_chat'])
         self.chats['order'].insert(0, self.chats['selected_chat'])
         self.save_history()
-        current_model = self.model_drop_down.get_selected_item().get_string().split(' (')
-        current_model = '{}:{}'.format(current_model[0].replace(' ', '-').lower(), current_model[1][:-1])
+        current_model = self.convert_model_name(self.model_drop_down.get_selected_item().get_string(), 1)
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
             return
@@ -283,7 +282,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.load_history_into_chat()
             if len(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()) > 0:
                 last_model_used = self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]
-                last_model_used = "{} ({})".format(last_model_used.split(":")[0].replace("-", " ").title(), last_model_used.split(":")[1])
+                last_model_used = self.convert_model_name(last_model_used, 0)
                 for i in range(self.model_string_list.get_n_items()):
                     if self.model_string_list.get_string(i) == last_model_used:
                         self.model_drop_down.set_selected(i)
@@ -417,6 +416,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.available_model_list_box.set_visible(True)
             self.no_results_page.set_visible(False)
 
+    def convert_model_name(self, name:str, mode:int) -> str: # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag
+        if mode == 0: return "{} ({})".format(name.split(":")[0].replace("-", " ").title(), name.split(":")[1])
+        if mode == 1: return "{}:{}".format(name.split(" (")[0].replace(" ", "-").lower(), name.split(" (")[1][:-1])
 
     def check_alphanumeric(self, editable, text, length, position):
         new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '_']])
@@ -576,8 +578,7 @@ Generate a title following these rules:
 ```PROMPT
 {message['content']}
 ```"""
-        current_model = self.model_drop_down.get_selected_item().get_string().split(' (')
-        current_model = '{}:{}'.format(current_model[0].replace(' ', '-').lower(), current_model[1][:-1])
+        current_model = self.convert_model_name(self.model_drop_down.get_selected_item().get_string(), 1)
         data = {"model": current_model, "prompt": prompt, "stream": False}
         if 'images' in message: data["images"] = message['images']
         response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps(data))
@@ -758,24 +759,25 @@ Generate a title following these rules:
             else:
                 self.local_model_list_box.set_visible(True)
             for model in json.loads(response.text)['models']:
+                model_name = self.convert_model_name(model["name"], 0)
                 model_row = Adw.ActionRow(
-                    title = "<b>{}</b>".format(model["name"].split(":")[0].replace("-", " ").title()),
-                    subtitle = model["name"].split(":")[1]
+                    title = "<b>{}</b>".format(model_name.split(" (")[0]),
+                    subtitle = model_name.split(" (")[1][:-1]
                 )
                 button = Gtk.Button(
                     icon_name = "user-trash-symbolic",
                     vexpand = False,
                     valign = 3,
                     css_classes = ["error", "circular"],
-                    tooltip_text = _("Remove '{} ({})'").format(model["name"].split(":")[0].replace('-', ' ').title(), model["name"].split(":")[1])
+                    tooltip_text = _("Remove '{}'").format(model_name)
                 )
                 button.connect("clicked", lambda button=button, model_name=model["name"]: dialogs.delete_model(self, model_name))
                 model_row.add_suffix(button)
                 self.local_model_list_box.append(model_row)
 
-                self.model_string_list.append(f"{model['name'].split(':')[0].replace('-', ' ').title()} ({model['name'].split(':')[1]})")
+                self.model_string_list.append(model_name)
                 self.local_models.append(model["name"])
-            self.verify_if_image_can_be_used()
+            #self.verify_if_image_can_be_used()
             return
         else:
             self.connection_error()
@@ -951,7 +953,7 @@ Generate a title following these rules:
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if data['done']:
             formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["date"], '%Y/%m/%d %H:%M:%S')))
-            text = f"\n\n{data['model'].split(':')[0].replace('-', ' ').title()} ({data['model'].split(':')[1]})\n<small>{formated_date}</small>"
+            text = f"\n\n{self.convert_model_name(data['model'], 0)}\n<small>{formated_date}</small>"
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text.encode('utf-8')))
             self.save_history()
             GLib.idle_add(self.bot_message_button_container.set_visible, True)
@@ -1033,8 +1035,9 @@ Generate a title following these rules:
             return
         self.pulling_model_list_box.set_visible(True)
         #self.pulling_model_list_box.connect('row_selected', lambda list_box, row: dialogs.stop_pull_model(self, row.get_name()) if row else None) #It isn't working for some reason
+        model_name = self.convert_model_name(model, 0)
         model_row = Adw.ActionRow(
-            title = "<b>{}</b> <small>{}</small>".format(model.split(":")[0].replace("-", " ").title(), model.split(":")[1]),
+            title = "<b>{}</b> <small>{}</small>".format(model_name.split(" (")[0], model_name.split(" (")[1][:-1]),
             name = model
         )
         thread = threading.Thread(target=self.pull_model_process, kwargs={"model": model, "modelfile": None})
@@ -1051,7 +1054,7 @@ Generate a title following these rules:
             vexpand = False,
             valign = 3,
             css_classes = ["error", "circular"],
-            tooltip_text = _("Stop Pulling '{} ({})'").format(model.split(':')[0].replace('-', ' ').title(), model.split(':')[1])
+            tooltip_text = _("Stop Pulling '{}'").format(model_name)
         )
         button.connect("clicked", lambda button, model_name=model : dialogs.stop_pull_model(self, model_name))
         model_row.add_suffix(button)
@@ -1119,7 +1122,7 @@ Generate a title following these rules:
                 if message['role'] == 'user':
                     self.show_message(message['content'], False, f"\n\n<small>{formated_date}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, id=key)
                 else:
-                    self.show_message(message['content'], True, f"\n\n{message['model'].split(':')[0].replace('-', ' ').title()} ({message['model'].split(':')[1]})\n<small>{formated_date}</small>", id=key)
+                    self.show_message(message['content'], True, f"\n\n{self.convert_model_name(message['model'], 0)}\n<small>{formated_date}</small>", id=key)
                     self.add_code_blocks()
                     self.bot_message = None
 
@@ -1137,8 +1140,7 @@ Generate a title following these rules:
                             self.chats["order"].append(chat_name)
                     if len(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()) > 0:
                         last_model_used = self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]
-                        last_model_used = "{} ({})".format(last_model_used.split(":")[0].replace("-", " ").title(), last_model_used.split(":")[1])
-                        print('huh')
+                        last_model_used = self.convert_model_name(last_model_used, 0)
                         for i in range(self.model_string_list.get_n_items()):
                             if self.model_string_list.get_string(i) == last_model_used:
                                 self.model_drop_down.set_selected(i)
