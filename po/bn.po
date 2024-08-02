@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0.0\n"
+"Project-Id-Version: 1.0.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-01 14:36-0600\n"
 "PO-Revision-Date: 2024-07-18 15:12-0600\n"
@@ -67,15 +67,15 @@ msgstr "আমদানি এবং রপ্তানি চ্যাট"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:20
 msgid "Append YouTube transcripts to the prompt"
-msgstr ""
+msgstr "প্রোম্পটে ইউটিউব ট্রান্সক্রিপ্ট যোগ করুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:21
 msgid "Append text from a website to the prompt"
-msgstr ""
+msgstr "ওয়েবসাইট থেকে টেক্সট প্রোম্পটে যোগ করুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:22
 msgid "PDF recognition"
-msgstr ""
+msgstr "পিডিএফ স্বীকৃতি"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:883
 msgid "Disclaimer"
@@ -96,304 +96,310 @@ msgstr "জেফরি স্যামুয়েল এডুয়ার্�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:54
 msgid "A normal conversation with an AI Model"
-msgstr ""
+msgstr "এআই মডেলের সাথে একটি সাধারণ কথোপকথন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:58
 msgid "A conversation involving image recognition"
-msgstr ""
+msgstr "চিত্র স্বীকৃতি জড়িত একটি কথোপকথন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:62
 msgid "A conversation showing code highlighting"
-msgstr ""
+msgstr "কোড হাইলাইটিং দেখানো একটি কথোপকথন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:66
 msgid "A conversation involving a YouTube video transcript"
-msgstr ""
+msgstr "ইউটিউব ভিডিও ট্রান্সক্রিপ্ট জড়িত একটি কথোপকথন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:70
 msgid "Multiple models being downloaded"
-msgstr ""
+msgstr "একাধিক মডেল ডাউনলোড হচ্ছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:86
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "New"
-msgstr ""
+msgstr "নতুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "Added table rendering (Thanks Nokse)"
-msgstr ""
+msgstr "নকসের ধন্যবাদ, টেবিল রেন্ডারিং যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 #: data/com.jeffser.Alpaca.metainfo.xml.in:118
 #: data/com.jeffser.Alpaca.metainfo.xml.in:134
 msgid "Fixes"
-msgstr ""
+msgstr "সংশোধন করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Made support dialog more common"
-msgstr ""
+msgstr "সাপোর্ট ডায়ালগকে আরও সাধারণ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Bearer Token entry on connection error dialog"
-msgstr ""
+msgstr "কনেকশন এরর ডায়ালগে বিয়ারার টোকেন এন্ট্রি"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Small appearance changes"
-msgstr ""
+msgstr "ছোট আকারের পরিবর্তন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Compatibility with code blocks without explicit language"
-msgstr ""
+msgstr "স্পষ্ট ভাষা ছাড়া কোড ব্লকগুলির সাথে সামঞ্জস্য"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Rare, optional and dismissible support dialog"
-msgstr ""
+msgstr "বিরল, ঐচ্ছিক এবং বাতিলযোগ্য সাপোর্ট ডায়ালগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Date format for Simplified Chinese translation"
-msgstr ""
+msgstr "সরলীকৃত চাইনিজ অনুবাদের জন্য তারিখ ফরম্যাট"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:109
 msgid "Bug with unsupported localizations"
-msgstr ""
+msgstr "অসমর্থিত স্থানীয়করণের সাথে বাগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
 msgid "Min height being too large to be used on mobile"
-msgstr ""
+msgstr "মোবাইলে ব্যবহারের জন্য ন্যূনতম উচ্চতা খুব বড়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "Remote connection checker bug"
-msgstr ""
+msgstr "রিমোট কনেকশন চেকার বাগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
 msgid "Models with capital letters on their tag don't work"
-msgstr ""
+msgstr "তাদের ট্যাগে বড় হাতের অক্ষর থাকা মডেলগুলি কাজ করে না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:121
 msgid "Ollama fails to launch on some systems"
-msgstr ""
+msgstr "কিছু সিস্টেমে Ollama চালু করতে ব্যর্থ হয়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
 msgid "YouTube transcripts are not being saved in the right TMP directory"
-msgstr ""
+msgstr "ইউটিউব ট্রান্সক্রিপ্টগুলি সঠিক TMP ডিরেক্টরিতে সংরক্ষিত হচ্ছে না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:126
 msgid "Debug messages are now shown on the 'About Alpaca' dialog"
-msgstr ""
+msgstr "ডিবাগ বার্তাগুলি এখন 'About Alpaca' ডায়ালগে দেখানো হচ্ছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:127
 msgid "Updated Ollama to v0.3.0 (new models)"
-msgstr ""
+msgstr "Ollama আপডেট করা হয়েছে v0.3.0 (নতুন মডেল)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:136
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
-msgstr ""
+msgstr "তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:137
 msgid "Better connection check for Ollama"
-msgstr ""
+msgstr "ওল্লামা এর জন্য ভাল কনেকশন চেক"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:144
 msgid "Stable Release"
-msgstr ""
+msgstr "স্থিতিশীল রিলিজ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:145
 msgid ""
 "The new icon was made by Tobias Bernard over the Gnome Gitlab, thanks for "
 "the great icon!"
 msgstr ""
+"টোবিয়াস বার্নার্ড দ্বারা নতুন আইকনটি জিনোম গিটল্যাব এর উপরে তৈরি করা হয়েছে, "
+"দুর্দান্ত আইকনের জন্য ধন্যবাদ!"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:146
 msgid "Features and fixes"
-msgstr ""
+msgstr "বৈশিষ্ট্য এবং সংশোধন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:148
 msgid "Updated Ollama instance to 0.2.8"
-msgstr ""
+msgstr "অল্লামা ইনস্ট্যান্স ০.২.৮ এ আপডেট করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:149
 msgid "Better model selector"
-msgstr ""
+msgstr "আরও ভালো মডেল নির্বাচক"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:150
 msgid "Model manager redesign"
-msgstr ""
+msgstr "মডেল ম্যানেজার পুনঃনকশা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:151
 msgid "Better tag selector when pulling a model"
-msgstr ""
+msgstr "মডেল টানার সময় আরও ভালো ট্যাগ নির্বাচক"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:152
 msgid "Model search"
-msgstr ""
+msgstr "মডেল অনুসন্ধান"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:153
 msgid "Added support for bearer tokens on remote instances"
-msgstr ""
+msgstr "দূরবর্তী ইনস্ট্যান্সে বেয়ারার টোকেনের জন্য সমর্থন যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:154
 msgid "Preferences dialog redesign"
-msgstr ""
+msgstr "পছন্দ ডায়ালগ পুনঃনকশা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:155
 msgid "Added context menus to interact with a chat"
-msgstr ""
+msgstr "চ্যাটের সাথে ইন্টারঅ্যাক্ট করার জন্য সংক্ষিপ্ত মেনু যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:156
 msgid "Redesigned primary and secondary menus"
-msgstr ""
+msgstr "প্রাথমিক এবং গৌণ মেনু পুনঃনকশা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:157
 msgid ""
 "YouTube integration: Paste the URL of a video with a transcript and it will "
 "be added to the prompt"
 msgstr ""
+"ইউটিউব একীকরণ: একটি লিপি সহ ভিডিওর ইউআরএল পেস্ট করুন এবং এটি প্রম্পটে যোগ করা হবে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:158
 msgid ""
 "Website integration (Experimental): Extract the text from the body of a "
 "website by adding it's URL to the prompt"
 msgstr ""
+"ওয়েবসাইট একীকরণ (পরীক্ষামূলক): প্রম্পটে ইউআরএল যোগ করে ওয়েবসাইটের শরীর থেকে "
+"পাঠ্য নির্যাস করুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:159
 msgid "Chat title generation"
-msgstr ""
+msgstr "চ্যাট শিরোনাম উৎপাদন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:160
 msgid "Auto resizing of message entry"
-msgstr ""
+msgstr "বার্তা প্রবেশের স্বয়ংক্রিয় আকার পরিবর্তন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:161
 msgid "Chat notifications"
-msgstr ""
+msgstr "চ্যাট বিজ্ঞপ্তি"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:162
 msgid "Added indicator when an image is missing"
-msgstr ""
+msgstr "একটি ছবি অনুপস্থিত থাকলে সূচক যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:163
 msgid "Auto rearrange the order of chats when a message is received"
-msgstr ""
+msgstr "একটি বার্তা প্রাপ্ত হলে চ্যাটের ক্রম স্বয়ংক্রিয় পুনর্বিন্যাস"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:164
 msgid "Redesigned file preview dialog"
-msgstr ""
+msgstr "ফাইল পূর্বরূপ ডায়ালগ পুনঃনকশা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:165
 msgid "Credited new contributors"
-msgstr ""
+msgstr "নতুন অবদানকারীদের কৃতিত্ব দেওয়া হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:166
 msgid "Better stability and optimization"
-msgstr ""
+msgstr "আরও ভালো স্থিতিশীলতা এবং অপ্টিমাইজেশন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:167
 msgid "Edit messages to change the context of a conversation"
-msgstr ""
+msgstr "কনভার্সেশনের প্রসঙ্গ পরিবর্তন করার জন্য বার্তা সম্পাদনা করুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:168
 msgid "Added disclaimers when pulling models"
-msgstr ""
+msgstr "মডেল টানার সময় দাবি যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:169
 msgid "Preview files before sending a message"
-msgstr ""
+msgstr "বার্তা পাঠানোর আগে ফাইল পূর্বরূপ দেখুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:170
 msgid "Better format for date and time on messages"
-msgstr ""
+msgstr "বার্তায় তারিখ এবং সময়ের জন্য আরও ভালো ফরম্যাট"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:171
 msgid "Error and debug logging on terminal"
-msgstr ""
+msgstr "টার্মিনালে ত্রুটি এবং ডিবাগ লগিং"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:172
 msgid "Auto-hiding sidebar button"
-msgstr ""
+msgstr "সাইডবার বাটন স্বয়ংক্রিয় লুকানো"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:173
 msgid "Various UI tweaks"
-msgstr ""
+msgstr "বিভিন্ন ইউআই টুইকস"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:175
 msgid "New Models"
-msgstr ""
+msgstr "নতুন মডেল"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:177
 msgid "Gemma2"
-msgstr ""
+msgstr "জেমা 2"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:178
 msgid "GLM4"
-msgstr ""
+msgstr "জিএলএম 4"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:179
 msgid "Codegeex4"
-msgstr ""
+msgstr "কোডজিক্স 4"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:180
 msgid "InternLM2"
-msgstr ""
+msgstr "ইন্টার্নএলএম 2"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:181
 msgid "Llama3-groq-tool-use"
-msgstr ""
+msgstr "ল্লামা 3-গ্রোক-টুল-ব্যবহার"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:182
 msgid "Mathstral"
-msgstr ""
+msgstr "ম্যাথস্ট্রাল"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:183
 msgid "Mistral-nemo"
-msgstr ""
+msgstr "মিস্ট্রাল-নেমো"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:184
 msgid "Firefunction-v2"
-msgstr ""
+msgstr "ফায়ারফাংশন-ভি 2"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:185
 msgid "Nuextract"
-msgstr ""
+msgstr "নুএক্সট্র্যাক্ট"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:187
 msgid "Translations"
-msgstr ""
+msgstr "অনুবাদ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:188
 msgid ""
 "These are all the available translations on 1.0.0, thanks to all the "
 "contributors!"
 msgstr ""
+"এগুলি 1.0.0 এর উপলব্ধ সমস্ত অনুবাদ, সমস্ত অবদানকারীদের ধন্যবাদ!"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:190
 msgid "Russian: Alex K"
-msgstr ""
+msgstr "রাশিয়ান: আলেক্স কে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:191
 msgid "Spanish: Jeffser"
-msgstr ""
+msgstr "স্প্যানিশ: জেফসার"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:192
 msgid "Brazilian Portuguese: Daimar Stein"
-msgstr ""
+msgstr "ব্রাজিলিয়ান পর্তুগিজ: ডাইমার স্টাইন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:193
 msgid "French: Louis Chauvet-Villaret"
-msgstr ""
+msgstr "ফ্রেন্চ: লুই শাভে-ভিলারেট"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:194
 msgid "Norwegian: CounterFlow64"
-msgstr ""
+msgstr "নরওয়েজিয়ান: কাউন্টারফ্লো 64"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:195
 msgid "Bengali: Aritra Saha"
-msgstr ""
+msgstr "বাংলা: অরিত্র সাহা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:196
 msgid "Simplified Chinese: Yuehao Sui"
-msgstr ""
+msgstr "সরলীকৃত চাইনিজ: ইউহাও সুই"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:203
 #: data/com.jeffser.Alpaca.metainfo.xml.in:252
@@ -1097,6 +1103,7 @@ msgid ""
 "Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and "
 "405B parameter sizes."
 msgstr ""
+"ল্লামা 3.1 হল মেটা থেকে নতুন স্টেট-অফ-দ্য-আর্ট মডেল, 8B, 70B এবং 405B প্যারামিটার আকারে উপলব্ধ।"
 
 #: src/available_models_descriptions.py:3
 msgid "Google Gemma 2 is now available in 2 sizes, 9B and 27B."
@@ -1107,6 +1114,7 @@ msgid ""
 "A state-of-the-art 12B model with 128k context length, built by Mistral AI "
 "in collaboration with NVIDIA."
 msgstr ""
+"একটি স্টেট-অফ-দ্য-আর্ট 12B মডেল, 128k কনটেক্সট দৈর্ঘ্য, মিস্ট্রাল এআই এবং এনভিডিয়ার সহযোগিতায় নির্মিত।"
 
 #: src/available_models_descriptions.py:5
 msgid ""
@@ -1114,6 +1122,8 @@ msgid ""
 "capable in code generation, mathematics, and reasoning with 128k context "
 "window and support for dozens of languages."
 msgstr ""
+"মিস্ট্রাল লার্জ 2 হল মিস্ট্রালের নতুন ফ্ল্যাগশিপ মডেল, যা কোড জেনারেশন, গণিত এবং যুক্তির ক্ষেত্রে "
+"উল্লেখযোগ্যভাবে আরও ক্ষমতাসম্পন্ন, 128k কনটেক্সট উইন্ডো এবং ডজনখানি ভাষার সমর্থন সহ।"
 
 #: src/available_models_descriptions.py:6
 msgid "Qwen2 is a new series of large language models from Alibaba group"
@@ -2160,6 +2170,11 @@ msgid ""
 "model's website.\n"
 "                  "
 msgstr ""
+"আলপাকা আপনার ডিভাইসে স্থানীয়ভাবে কাজ করে, চ্যাটিং শুরু করতে আপনার একটি এআই মডেল প্রয়োজন, "
+"আপনি এই তালিকা থেকে মডেল টানতে পারেন বা পরে 'মডেল ব্যবস্থাপনা' মেনু থেকে।\n"
+"\n"
+"যে কোনও মডেল ডাউনলোড করার মাধ্যমে আপনি তাদের লাইসেন্স চুক্তি গ্রহণ করছেন যা মডেলের ওয়েবসাইটে উপলব্ধ।\n"
+"                  "
 
 #: src/window.ui:909
 msgid "Built by Meta"
