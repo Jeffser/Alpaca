@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-21 18:18-0600\n"
+"POT-Creation-Date: 2024-08-01 14:36-0600\n"
 "PO-Revision-Date: 2024-07-06 15:45+0200\n"
 "Last-Translator: Louis Chauvet-Villaret <louischauvet0@gmail.com>\n"
 "Language-Team: French\n"
@@ -32,7 +32,7 @@ msgid "An Ollama client"
 msgstr "Un client pour Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:11
-#: data/com.jeffser.Alpaca.metainfo.xml.in:416
+#: data/com.jeffser.Alpaca.metainfo.xml.in:549
 msgid "Features"
 msgstr "Fonctionnalités"
 
@@ -41,12 +41,12 @@ msgid "Built in Ollama instance"
 msgstr "Ollama pré-intégré"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:14
-#: data/com.jeffser.Alpaca.metainfo.xml.in:418
+#: data/com.jeffser.Alpaca.metainfo.xml.in:551
 msgid "Talk to multiple models in the same conversation"
 msgstr "Discutez avec plusieurs modèles dans un même discussion"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:15
-#: data/com.jeffser.Alpaca.metainfo.xml.in:419
+#: data/com.jeffser.Alpaca.metainfo.xml.in:552
 msgid "Pull and delete models from the app"
 msgstr "Gestion des modèles depuis l'application"
 
@@ -66,11 +66,23 @@ msgstr "Reconnaissance de documents en texte brut"
 msgid "Import and export chats"
 msgstr "Importez et exportez les discussions"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:21 src/window.ui:883
+#: data/com.jeffser.Alpaca.metainfo.xml.in:20
+msgid "Append YouTube transcripts to the prompt"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:21
+msgid "Append text from a website to the prompt"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:22
+msgid "PDF recognition"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:883
 msgid "Disclaimer"
 msgstr "Avertissement"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:22
+#: data/com.jeffser.Alpaca.metainfo.xml.in:25
 msgid ""
 "This project is not affiliated at all with Ollama, I'm not responsible for "
 "any damages to your device or software caused by running code given by any "
@@ -80,28 +92,317 @@ msgstr ""
 "responsable des dommages causés à votre appareil ou vos logiciels suite à "
 "l'exécution de code donné par un modèle."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:25
+#: data/com.jeffser.Alpaca.metainfo.xml.in:28
 msgid "Jeffry Samuel Eduarte Rojas"
 msgstr "Jeffry Samuel Eduarte Rojas"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:51
-msgid "A conversation showing code highlight"
-msgstr "Code avec coloration syntaxique"
+#: data/com.jeffser.Alpaca.metainfo.xml.in:54
+msgid "A normal conversation with an AI Model"
+msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:55
-msgid "A conversation involving multiple models"
-msgstr "Utilisation de plusieurs modèles"
+#: data/com.jeffser.Alpaca.metainfo.xml.in:58
+msgid "A conversation involving image recognition"
+msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:59
-msgid "Managing models"
-msgstr "Gestion des modèles"
+#: data/com.jeffser.Alpaca.metainfo.xml.in:62
+msgid "A conversation showing code highlighting"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:66
+msgid "A conversation involving a YouTube video transcript"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:70
-#: data/com.jeffser.Alpaca.metainfo.xml.in:119
+msgid "Multiple models being downloaded"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:86
+#: data/com.jeffser.Alpaca.metainfo.xml.in:99
+#: data/com.jeffser.Alpaca.metainfo.xml.in:124
+msgid "New"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:88
+msgid "Added table rendering (Thanks Nokse)"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:90
+#: data/com.jeffser.Alpaca.metainfo.xml.in:106
+#: data/com.jeffser.Alpaca.metainfo.xml.in:118
+#: data/com.jeffser.Alpaca.metainfo.xml.in:134
+msgid "Fixes"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:92
+msgid "Made support dialog more common"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:101
+msgid "Bearer Token entry on connection error dialog"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:102
+msgid "Small appearance changes"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:103
+msgid "Compatibility with code blocks without explicit language"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:104
+msgid "Rare, optional and dismissible support dialog"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:108
+msgid "Date format for Simplified Chinese translation"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:109
+msgid "Bug with unsupported localizations"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:110
+msgid "Min height being too large to be used on mobile"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:111
+msgid "Remote connection checker bug"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:120
+msgid "Models with capital letters on their tag don't work"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:121
+msgid "Ollama fails to launch on some systems"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:122
+msgid "YouTube transcripts are not being saved in the right TMP directory"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:126
+msgid "Debug messages are now shown on the 'About Alpaca' dialog"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:127
+msgid "Updated Ollama to v0.3.0 (new models)"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:136
+msgid "Models with '-' in their names didn't work properly, this is now fixed"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:137
+msgid "Better connection check for Ollama"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:144
+msgid "Stable Release"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:145
+msgid ""
+"The new icon was made by Tobias Bernard over the Gnome Gitlab, thanks for "
+"the great icon!"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:146
+msgid "Features and fixes"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:148
+msgid "Updated Ollama instance to 0.2.8"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:149
+msgid "Better model selector"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:150
+msgid "Model manager redesign"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:151
+msgid "Better tag selector when pulling a model"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:152
+msgid "Model search"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:153
+msgid "Added support for bearer tokens on remote instances"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:154
+msgid "Preferences dialog redesign"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:155
+msgid "Added context menus to interact with a chat"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:156
+msgid "Redesigned primary and secondary menus"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:157
+msgid ""
+"YouTube integration: Paste the URL of a video with a transcript and it will "
+"be added to the prompt"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:158
+msgid ""
+"Website integration (Experimental): Extract the text from the body of a "
+"website by adding it's URL to the prompt"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:159
+msgid "Chat title generation"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:160
+msgid "Auto resizing of message entry"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:161
+msgid "Chat notifications"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:162
+msgid "Added indicator when an image is missing"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:163
+msgid "Auto rearrange the order of chats when a message is received"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:164
+msgid "Redesigned file preview dialog"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:165
+msgid "Credited new contributors"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:166
+msgid "Better stability and optimization"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:167
+msgid "Edit messages to change the context of a conversation"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:168
+msgid "Added disclaimers when pulling models"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:169
+msgid "Preview files before sending a message"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:170
+msgid "Better format for date and time on messages"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:171
+msgid "Error and debug logging on terminal"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:172
+msgid "Auto-hiding sidebar button"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:173
+msgid "Various UI tweaks"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:175
+msgid "New Models"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:177
+msgid "Gemma2"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:178
+msgid "GLM4"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:179
+msgid "Codegeex4"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:180
+msgid "InternLM2"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:181
+msgid "Llama3-groq-tool-use"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:182
+msgid "Mathstral"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:183
+msgid "Mistral-nemo"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:184
+msgid "Firefunction-v2"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:185
+msgid "Nuextract"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:187
+msgid "Translations"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:188
+msgid ""
+"These are all the available translations on 1.0.0, thanks to all the "
+"contributors!"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:190
+msgid "Russian: Alex K"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:191
+msgid "Spanish: Jeffser"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:192
+msgid "Brazilian Portuguese: Daimar Stein"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:193
+msgid "French: Louis Chauvet-Villaret"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:194
+msgid "Norwegian: CounterFlow64"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:195
+msgid "Bengali: Aritra Saha"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:196
+msgid "Simplified Chinese: Yuehao Sui"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:203
+#: data/com.jeffser.Alpaca.metainfo.xml.in:252
 msgid "Fix"
 msgstr "Résolution de bogue"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:71
+#: data/com.jeffser.Alpaca.metainfo.xml.in:204
 msgid ""
 "Removed DOCX compatibility temporally due to error with python-lxml "
 "dependency"
@@ -109,32 +410,32 @@ msgstr ""
 "Modification : Suppression de la compatibilité des documents .docx à cause "
 "d'une erreur avec la dépendance python-lxml"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:77
-#: data/com.jeffser.Alpaca.metainfo.xml.in:107
-#: data/com.jeffser.Alpaca.metainfo.xml.in:128
-#: data/com.jeffser.Alpaca.metainfo.xml.in:333
-#: data/com.jeffser.Alpaca.metainfo.xml.in:390
+#: data/com.jeffser.Alpaca.metainfo.xml.in:210
+#: data/com.jeffser.Alpaca.metainfo.xml.in:240
+#: data/com.jeffser.Alpaca.metainfo.xml.in:261
+#: data/com.jeffser.Alpaca.metainfo.xml.in:466
+#: data/com.jeffser.Alpaca.metainfo.xml.in:523
 msgid "Big Update"
 msgstr "Mise à jour majeure"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:79
+#: data/com.jeffser.Alpaca.metainfo.xml.in:212
 msgid "Added compatibility for PDF"
 msgstr "Ajouté : compatibilité pour les documents PDF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:80
+#: data/com.jeffser.Alpaca.metainfo.xml.in:213
 msgid "Added compatibility for DOCX"
 msgstr "Ajouté : compatibilité pour les documents Word (.docx)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:81
+#: data/com.jeffser.Alpaca.metainfo.xml.in:214
 msgid "Merged 'file attachment' menu into one button"
 msgstr "Changement : fusion du menu \"ajouter un fichier\" en un unique bouton"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:88
-#: data/com.jeffser.Alpaca.metainfo.xml.in:281
+#: data/com.jeffser.Alpaca.metainfo.xml.in:221
+#: data/com.jeffser.Alpaca.metainfo.xml.in:414
 msgid "Quick Fix"
 msgstr "Petite correction de bogues"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:89
+#: data/com.jeffser.Alpaca.metainfo.xml.in:222
 msgid ""
 "There were some errors when transitioning from the old version of chats to "
 "the new version. I apologize if this caused any corruption in your chat "
@@ -145,197 +446,197 @@ msgstr ""
 "corrompu votre historique de discussion. Cela devrait être la seule fois "
 "qu'une telle modification ait lieu."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:95
-#: data/com.jeffser.Alpaca.metainfo.xml.in:247
+#: data/com.jeffser.Alpaca.metainfo.xml.in:228
+#: data/com.jeffser.Alpaca.metainfo.xml.in:380
 msgid "Huge Update"
 msgstr "Mise à jour majeure"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:97
+#: data/com.jeffser.Alpaca.metainfo.xml.in:230
 msgid "Added: Support for plain text files"
 msgstr "Ajouté : support des documents de type texte brut"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:98
+#: data/com.jeffser.Alpaca.metainfo.xml.in:231
 msgid "Added: New backend system for storing messages"
 msgstr "Ajouté : nouveau système en arrière-plan de sauvegarde des messages"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:99
+#: data/com.jeffser.Alpaca.metainfo.xml.in:232
 msgid "Added: Support for changing Ollama's overrides"
 msgstr "Ajouté : support pour changer les paramètres d'Ollama"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:100
+#: data/com.jeffser.Alpaca.metainfo.xml.in:233
 msgid "General Optimization"
 msgstr "Optimisation générale"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:109
+#: data/com.jeffser.Alpaca.metainfo.xml.in:242
 msgid "Added: Support for GGUF models (experimental)"
 msgstr "Ajouté : support des modèles GGUF (éxpérimental)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:110
+#: data/com.jeffser.Alpaca.metainfo.xml.in:243
 msgid "Added: Support for customization and creation of models"
 msgstr "Ajouté : support de la personnalisation et création de modèles"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:111
+#: data/com.jeffser.Alpaca.metainfo.xml.in:244
 msgid "Fixed: Icons don't appear on non Gnome systems"
 msgstr ""
 "Résolu : certaines icônes n'apparaissait pas sur les systèmes ne "
 "fonctionnant pas avec le bureau Gnome"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:112
+#: data/com.jeffser.Alpaca.metainfo.xml.in:245
 msgid "Update Ollama to v0.1.39"
 msgstr "Mise à jour vers Ollama 0.1.39"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:121
+#: data/com.jeffser.Alpaca.metainfo.xml.in:254
 msgid ""
 "Fixed: app didn't open if models tweaks wasn't present in the config files"
 msgstr ""
 "Résolu : l'application ne s'ouvrait pas si les ajustements de modèles "
 "n'étaient pas présents dans les fichiers de configuration"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:130
+#: data/com.jeffser.Alpaca.metainfo.xml.in:263
 msgid "Changed multiple icons (paper airplane for the send button)"
 msgstr "Changement : plusieurs icônes (avion en papier pour envoyer)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:131
+#: data/com.jeffser.Alpaca.metainfo.xml.in:264
 msgid "Combined export / import chat buttons into a menu"
 msgstr "Changement : bouton d'import et export des discussions combiné"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:132
+#: data/com.jeffser.Alpaca.metainfo.xml.in:265
 msgid "Added 'model tweaks' (temperature, seed, keep_alive)"
 msgstr "Ajouté :  options de modèle (temperature, seed, keep_alive)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:133
+#: data/com.jeffser.Alpaca.metainfo.xml.in:266
 msgid "Fixed send / stop button"
 msgstr "Résolu : bouton envoyer / stopper"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:134
+#: data/com.jeffser.Alpaca.metainfo.xml.in:267
 msgid "Fixed app not checking if remote connection works when starting"
 msgstr ""
 "Résolu : l'application ne vérifiait si la connexion à distance fonctionnait "
 "au démarrage"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:141
+#: data/com.jeffser.Alpaca.metainfo.xml.in:274
 msgid "Daily Update"
 msgstr "Mise à jour quotidienne"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:143
+#: data/com.jeffser.Alpaca.metainfo.xml.in:276
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
 msgstr ""
 "Résolu : ajout de point de suspension sur les noms des discussions pour ne "
 "pas changer la position des boutons"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:144
+#: data/com.jeffser.Alpaca.metainfo.xml.in:277
 msgid "New shortcut for creating a chat (CTRL+N)"
 msgstr "Ajouté : nouveau raccourci pour créer un chat (Ctrl+N)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:145
+#: data/com.jeffser.Alpaca.metainfo.xml.in:278
 msgid "New message entry design"
 msgstr "Changement : nouveau design de la barre de message"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:146
+#: data/com.jeffser.Alpaca.metainfo.xml.in:279
 msgid "Fixed: Can't rename the same chat multiple times"
 msgstr "Résolu : impossible de renommer la même discussion plusieurs fois"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:153
+#: data/com.jeffser.Alpaca.metainfo.xml.in:286
 msgid "The fix"
 msgstr "Correction de bogues"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:155
+#: data/com.jeffser.Alpaca.metainfo.xml.in:288
 msgid ""
 "Fixed: Ollama instance keeps running on the background even when it is "
 "disabled"
 msgstr ""
 "Résolu : Ollama continuait de s'exécuter en arrière plan même étant désactivé"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:156
+#: data/com.jeffser.Alpaca.metainfo.xml.in:289
 msgid "Fixed: Can't pull models on the integrated instance"
 msgstr "Résolu : impossible de télécharger les modèles sur l'instance locale"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:163
+#: data/com.jeffser.Alpaca.metainfo.xml.in:296
 msgid "Quick tweaks"
 msgstr "Petites ajustements"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:165
+#: data/com.jeffser.Alpaca.metainfo.xml.in:298
 msgid "Added progress bar to models that are being pulled"
 msgstr "Ajouté : barre de progression sur les modèles en téléchargement"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:166
+#: data/com.jeffser.Alpaca.metainfo.xml.in:299
 msgid "Added size to tags when pulling a model"
 msgstr "Ajouté : taille des tags de modèle avant le téléchargement"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:167
+#: data/com.jeffser.Alpaca.metainfo.xml.in:300
 msgid "General optimizations on the background"
 msgstr "Optimisations générales en arrière-plan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:174
+#: data/com.jeffser.Alpaca.metainfo.xml.in:307
 msgid "Quick fixes"
 msgstr "Petites corrections de bogues"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:176
+#: data/com.jeffser.Alpaca.metainfo.xml.in:309
 msgid "Fixed: Scroll when message is received"
 msgstr "Résolu : défilement lors de la réception d'un message"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:177
+#: data/com.jeffser.Alpaca.metainfo.xml.in:310
 msgid "Fixed: Content doesn't change when creating a new chat"
 msgstr ""
 "Résolu : Le contenu ne change pas lors de la création d'un nouveau chat"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:178
+#: data/com.jeffser.Alpaca.metainfo.xml.in:311
 msgid "Added 'Featured Models' page on welcome dialog"
 msgstr "Ajouté : page 'Modèles Suggérés' sur la fenêtre de dialogue d'accueil"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:185
+#: data/com.jeffser.Alpaca.metainfo.xml.in:318
 msgid "Nice Update"
 msgstr "Mise à jour sympa"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:187
+#: data/com.jeffser.Alpaca.metainfo.xml.in:320
 msgid "UI tweaks (Thanks Nokse22)"
 msgstr "Modification : ajustement de l'interface utilisateur (merci à Nokse22)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:188
+#: data/com.jeffser.Alpaca.metainfo.xml.in:321
 msgid "General optimizations"
 msgstr "Optimisations générales"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:189
+#: data/com.jeffser.Alpaca.metainfo.xml.in:322
 msgid "Metadata fixes"
 msgstr "Résolu : métadonnées"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:196
+#: data/com.jeffser.Alpaca.metainfo.xml.in:329
 msgid "Quick fix"
 msgstr "Petite correction de bogue"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:198
+#: data/com.jeffser.Alpaca.metainfo.xml.in:331
 msgid "Updated Spanish translation"
 msgstr "Modification : mise à jour de la traduction Espagnol"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:199
+#: data/com.jeffser.Alpaca.metainfo.xml.in:332
 msgid "Added compatibility for PNG"
 msgstr "Ajouté : compatibilité pour les images PNG"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:206
+#: data/com.jeffser.Alpaca.metainfo.xml.in:339
 msgid "New Update"
 msgstr "Mise à jour"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:208
+#: data/com.jeffser.Alpaca.metainfo.xml.in:341
 msgid "Updated model list"
 msgstr "Modification : Liste des modèles mise à jour"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:209
+#: data/com.jeffser.Alpaca.metainfo.xml.in:342
 msgid "Added image recognition to more models"
 msgstr "Ajouté : reconnaissance d'image à plus de modèles"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:210
+#: data/com.jeffser.Alpaca.metainfo.xml.in:343
 msgid "Added Brazilian Portuguese translation (Thanks Daimaar Stein)"
 msgstr "Ajouté : traduction en Portugais Brésilien (merci à Daimaar Stein)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:211
+#: data/com.jeffser.Alpaca.metainfo.xml.in:344
 msgid "Refined the general UI (Thanks Nokse22)"
 msgstr "Modification : peaufinage de l'interface utilisateur (merci à Nokse22)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:212
+#: data/com.jeffser.Alpaca.metainfo.xml.in:345
 msgid "Added 'delete message' feature"
 msgstr "Ajouté : option 'supprimer le message'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:213
+#: data/com.jeffser.Alpaca.metainfo.xml.in:346
 msgid ""
 "Added metadata so that software distributors know that the app is compatible "
 "with mobile"
@@ -343,7 +644,7 @@ msgstr ""
 "Ajouté : métadonnées pour que les distributeurs de logiciels sachent que "
 "l'application est compatible avec les téléphones"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:214
+#: data/com.jeffser.Alpaca.metainfo.xml.in:347
 msgid ""
 "Changed 'send' shortcut to just the return/enter key (to add a new line use "
 "shift+return)"
@@ -351,113 +652,113 @@ msgstr ""
 "Changement : remplacement du raccourci 'envoyer' en une simple touche retour/"
 "entrée (pour ajouter une nouvelle ligne, utiliser shift+retour)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:221
+#: data/com.jeffser.Alpaca.metainfo.xml.in:354
 msgid "Bug Fixes"
 msgstr "Correction de bogues"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:223
+#: data/com.jeffser.Alpaca.metainfo.xml.in:356
 msgid "Fixed: Minor spelling mistake"
 msgstr "Résolu : petite faute d'orthographe"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:224
+#: data/com.jeffser.Alpaca.metainfo.xml.in:357
 msgid "Added 'mobile' as a supported form factor"
 msgstr "Ajouté : mise en page 'mobile'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:225
+#: data/com.jeffser.Alpaca.metainfo.xml.in:358
 msgid "Fixed: 'Connection Error' dialog not working properly"
 msgstr ""
 "Résolu : La boîte de dialogue « Erreur de connexion » ne fonctionnait pas "
 "correctement"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:226
+#: data/com.jeffser.Alpaca.metainfo.xml.in:359
 msgid "Fixed: App might freeze randomly on startup"
 msgstr "Résolu : L'application pouvait se bloquer aléatoirement au démarrage"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:227
+#: data/com.jeffser.Alpaca.metainfo.xml.in:360
 msgid "Changed 'chats' label on sidebar for 'Alpaca'"
 msgstr ""
 "Changement : remplacement du titre 'chats' de la barre latéral par 'Alpaca'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:234
+#: data/com.jeffser.Alpaca.metainfo.xml.in:367
 msgid "Cool Update"
 msgstr "Mise à jour sympa"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:236
+#: data/com.jeffser.Alpaca.metainfo.xml.in:369
 msgid "Better design for chat window"
 msgstr "Modification : meilleur design pour de fenêtre de discussion"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:237
+#: data/com.jeffser.Alpaca.metainfo.xml.in:370
 msgid "Better design for chat sidebar"
 msgstr "Modification : meilleur design pour de la barre latérale"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:238
+#: data/com.jeffser.Alpaca.metainfo.xml.in:371
 msgid "Fixed remote connections"
 msgstr "Résolu : connexions à distance"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:239
+#: data/com.jeffser.Alpaca.metainfo.xml.in:372
 msgid "Fixed Ollama restarting in loop"
 msgstr "Résolu : Ollama redémarrait en boucle"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:240
+#: data/com.jeffser.Alpaca.metainfo.xml.in:373
 msgid "Other cool backend stuff"
 msgstr "Autre trucs sympa en arrière-plan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:249
+#: data/com.jeffser.Alpaca.metainfo.xml.in:382
 msgid "Added Ollama as part of Alpaca, Ollama will run in a sandbox"
 msgstr "Ajouté : Ollama intégré à Alpaca dans un bac à sable"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:250
+#: data/com.jeffser.Alpaca.metainfo.xml.in:383
 msgid "Added option to connect to remote instances (how it worked before)"
 msgstr ""
 "Ajouté : option pour se connecter à des instances distantes (comme cela "
 "fonctionnait précédemment)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:251
+#: data/com.jeffser.Alpaca.metainfo.xml.in:384
 msgid "Added option to import and export chats"
 msgstr "Ajouté : option pour importer et exporter les discussions"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:252
+#: data/com.jeffser.Alpaca.metainfo.xml.in:385
 msgid "Added option to run Alpaca with Ollama in the background"
 msgstr "Ajouté : option pour exécuter Alpaca avec Ollama en arrière-plan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:253
+#: data/com.jeffser.Alpaca.metainfo.xml.in:386
 msgid "Added preferences dialog"
 msgstr "Ajouté : boite de dialogue des préférences"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:254
+#: data/com.jeffser.Alpaca.metainfo.xml.in:387
 msgid "Changed the welcome dialog"
 msgstr "Changement : boite de dialogue de bienvenue"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:256
-#: data/com.jeffser.Alpaca.metainfo.xml.in:273
-#: data/com.jeffser.Alpaca.metainfo.xml.in:285
-#: data/com.jeffser.Alpaca.metainfo.xml.in:304
-#: data/com.jeffser.Alpaca.metainfo.xml.in:325
-#: data/com.jeffser.Alpaca.metainfo.xml.in:341
-#: data/com.jeffser.Alpaca.metainfo.xml.in:357
-#: data/com.jeffser.Alpaca.metainfo.xml.in:371
-#: data/com.jeffser.Alpaca.metainfo.xml.in:381
-#: data/com.jeffser.Alpaca.metainfo.xml.in:399
-#: data/com.jeffser.Alpaca.metainfo.xml.in:421
+#: data/com.jeffser.Alpaca.metainfo.xml.in:389
+#: data/com.jeffser.Alpaca.metainfo.xml.in:406
+#: data/com.jeffser.Alpaca.metainfo.xml.in:418
+#: data/com.jeffser.Alpaca.metainfo.xml.in:437
+#: data/com.jeffser.Alpaca.metainfo.xml.in:458
+#: data/com.jeffser.Alpaca.metainfo.xml.in:474
+#: data/com.jeffser.Alpaca.metainfo.xml.in:490
+#: data/com.jeffser.Alpaca.metainfo.xml.in:504
+#: data/com.jeffser.Alpaca.metainfo.xml.in:514
+#: data/com.jeffser.Alpaca.metainfo.xml.in:532
+#: data/com.jeffser.Alpaca.metainfo.xml.in:554
 msgid "Please report any errors to the issues page, thank you."
 msgstr ""
 "Merci de reporter n'importe quel problèmes sur la page 'issues' du GitHub."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:264
+#: data/com.jeffser.Alpaca.metainfo.xml.in:397
 msgid "Yet Another Daily Update"
 msgstr "Mise à jour quotidienne"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:266
+#: data/com.jeffser.Alpaca.metainfo.xml.in:399
 msgid "Added better UI for 'Manage Models' dialog"
 msgstr ""
 "Ajouté : une meilleure interface utilisateur pour la boite de dialogue "
 "'Gestion des modèles'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:267
+#: data/com.jeffser.Alpaca.metainfo.xml.in:400
 msgid "Added better UI for the chat sidebar"
 msgstr "Ajouté : meilleure interface utilisateur pour la barre latérale"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:268
+#: data/com.jeffser.Alpaca.metainfo.xml.in:401
 msgid ""
 "Replaced model description with a button to open Ollama's website for the "
 "model"
@@ -465,50 +766,50 @@ msgstr ""
 "Changement : remplacement de la description du modèle par un bouton pour "
 "ouvrir le site web Ollama pour le modèle"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:269
+#: data/com.jeffser.Alpaca.metainfo.xml.in:402
 msgid "Added myself to the credits as the spanish translator"
 msgstr "Ajouté : moi-même aux crédits en tant que traducteur espagnol"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:270
+#: data/com.jeffser.Alpaca.metainfo.xml.in:403
 msgid "Using XDG properly to get config folder"
 msgstr ""
 "Modification : utilisation de XDG correctement pour avoir un dossier de "
 "configuration"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:271
+#: data/com.jeffser.Alpaca.metainfo.xml.in:404
 msgid "Update for translations"
 msgstr "Mise à jour concernant les traductions"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:283
+#: data/com.jeffser.Alpaca.metainfo.xml.in:416
 msgid "The last update had some mistakes in the description of the update"
 msgstr "La dernière mise à jour avait quelques erreurs dans sa description"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:293
+#: data/com.jeffser.Alpaca.metainfo.xml.in:426
 msgid "Another Daily Update"
 msgstr "Mise à jour quotidienne"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:295
+#: data/com.jeffser.Alpaca.metainfo.xml.in:428
 msgid "Added full Spanish translation"
 msgstr "Ajouté : traduction complète Espagnol"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:296
+#: data/com.jeffser.Alpaca.metainfo.xml.in:429
 msgid "Added support for background pulling of multiple models"
 msgstr ""
 "Ajouté : support pour le téléchargement de plusieurs modèles en arrière-plan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:297
+#: data/com.jeffser.Alpaca.metainfo.xml.in:430
 msgid "Added interrupt button"
 msgstr "Ajouté : bouton d'interruptions"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:298
+#: data/com.jeffser.Alpaca.metainfo.xml.in:431
 msgid "Added basic shortcuts"
 msgstr "Ajouté : raccourcis claviers simples"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:299
+#: data/com.jeffser.Alpaca.metainfo.xml.in:432
 msgid "Better translation support"
 msgstr "Ajouté : meilleur support des traductions"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:300
+#: data/com.jeffser.Alpaca.metainfo.xml.in:433
 msgid ""
 "User can now leave chat name empty when creating a new one, it will add a "
 "placeholder name"
@@ -516,181 +817,181 @@ msgstr ""
 "Ajouté : l'utilisateur peut maintenant quitter une discussion vide quand il "
 "en crée un nouvelle, cela va ajouter un nom de remplacement"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:301
+#: data/com.jeffser.Alpaca.metainfo.xml.in:434
 msgid "Better scalling for different window sizes"
 msgstr "Résolu : meilleure mise à l'échelle pour différente taille de fenêtre"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:302
+#: data/com.jeffser.Alpaca.metainfo.xml.in:435
 msgid "Fixed: Can't close app if first time setup fails"
 msgstr ""
 "Résolu : impossible de fermer l'application si la première configuration "
 "échouait"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:312
+#: data/com.jeffser.Alpaca.metainfo.xml.in:445
 msgid "Really Big Update"
 msgstr "Mise à jour majeure"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:314
+#: data/com.jeffser.Alpaca.metainfo.xml.in:447
 msgid "Added multiple chats support!"
 msgstr "Ajouté : support de plusieurs discussions"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:315
+#: data/com.jeffser.Alpaca.metainfo.xml.in:448
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
 msgstr ""
 "Ajouté : support de Pango Markup (gras, liste, titre, sous-titre, chasse-"
 "fixe)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:316
+#: data/com.jeffser.Alpaca.metainfo.xml.in:449
 msgid "Added autoscroll if the user is at the bottom of the chat"
 msgstr ""
 "Ajouté : défilement automatique si l'utilisateur est en haut d'une discussion"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:317
+#: data/com.jeffser.Alpaca.metainfo.xml.in:450
 msgid "Added support for multiple tags on a single model"
 msgstr "Ajouté : support de plusieurs tag sur un seul modèle"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:318
+#: data/com.jeffser.Alpaca.metainfo.xml.in:451
 msgid "Added better model management dialog"
 msgstr "Ajouté : meilleure boite de dialogue pour la gestion des modèles"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:319
+#: data/com.jeffser.Alpaca.metainfo.xml.in:452
 msgid "Added loading spinner when sending message"
 msgstr "Ajouté : icône de chargement lors de l'envoie d'un message"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:320
+#: data/com.jeffser.Alpaca.metainfo.xml.in:453
 msgid "Added notifications if app is not active and a model pull finishes"
 msgstr ""
 "Ajouté : notification si l'application n'est pas active et que le "
 "téléchargement d'un modèle est en cours"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:321
+#: data/com.jeffser.Alpaca.metainfo.xml.in:454
 msgid "Added new symbolic icon"
 msgstr "Ajouté : nouveau icônes symboliques"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:322
+#: data/com.jeffser.Alpaca.metainfo.xml.in:455
 msgid "Added frame to message textview widget"
 msgstr "Ajouté : cadre pour le widget des messages"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:323
+#: data/com.jeffser.Alpaca.metainfo.xml.in:456
 msgid "Fixed \"code blocks shouldn't be editable\""
 msgstr "Résolu : 'les blocs de codes ne devraient pas être édité'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:335
+#: data/com.jeffser.Alpaca.metainfo.xml.in:468
 msgid "Added code highlighting"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:336
+#: data/com.jeffser.Alpaca.metainfo.xml.in:469
 msgid "Added image recognition (llava model)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:337
+#: data/com.jeffser.Alpaca.metainfo.xml.in:470
 msgid "Added multiline prompt"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:338
+#: data/com.jeffser.Alpaca.metainfo.xml.in:471
 msgid "Fixed some small bugs"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:339
+#: data/com.jeffser.Alpaca.metainfo.xml.in:472
 msgid "General optimization"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:349
+#: data/com.jeffser.Alpaca.metainfo.xml.in:482
 msgid "Fixes and features"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:351
+#: data/com.jeffser.Alpaca.metainfo.xml.in:484
 msgid "Russian translation (thanks github/alexkdeveloper)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:352
+#: data/com.jeffser.Alpaca.metainfo.xml.in:485
 msgid "Fixed: Cannot close app on first setup"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:353
+#: data/com.jeffser.Alpaca.metainfo.xml.in:486
 msgid "Fixed: Brand colors for Flathub"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:354
+#: data/com.jeffser.Alpaca.metainfo.xml.in:487
 msgid "Fixed: App description"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:355
+#: data/com.jeffser.Alpaca.metainfo.xml.in:488
 msgid "Fixed: Only show 'save changes dialog' when you actually change the url"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:365
+#: data/com.jeffser.Alpaca.metainfo.xml.in:498
 msgid "0.2.2 Bug fixes"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:367
+#: data/com.jeffser.Alpaca.metainfo.xml.in:500
 msgid "Toast messages appearing behind dialogs"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:368
+#: data/com.jeffser.Alpaca.metainfo.xml.in:501
 msgid "Local model list not updating when changing servers"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:369
+#: data/com.jeffser.Alpaca.metainfo.xml.in:502
 msgid "Closing the setup dialog closes the whole app"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:379
+#: data/com.jeffser.Alpaca.metainfo.xml.in:512
 msgid "0.2.1 Data saving fix"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:380
+#: data/com.jeffser.Alpaca.metainfo.xml.in:513
 msgid ""
 "The app didn't save the config files and chat history to the right "
 "directory, this is now fixed"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:389
+#: data/com.jeffser.Alpaca.metainfo.xml.in:522
 msgid "0.2.0"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:391
+#: data/com.jeffser.Alpaca.metainfo.xml.in:524
 msgid "New Features"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:393
+#: data/com.jeffser.Alpaca.metainfo.xml.in:526
 msgid "Restore chat after closing the app"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:394
+#: data/com.jeffser.Alpaca.metainfo.xml.in:527
 msgid "A button to clear the chat"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:395
+#: data/com.jeffser.Alpaca.metainfo.xml.in:528
 msgid "Fixed multiple bugs involving how messages are shown"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:396
+#: data/com.jeffser.Alpaca.metainfo.xml.in:529
 msgid "Added welcome dialog"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:397
+#: data/com.jeffser.Alpaca.metainfo.xml.in:530
 msgid "More stability"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:407
+#: data/com.jeffser.Alpaca.metainfo.xml.in:540
 msgid "0.1.2 Quick fixes"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:408
+#: data/com.jeffser.Alpaca.metainfo.xml.in:541
 msgid ""
 "This release fixes some metadata needed to have a proper Flatpak application"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:414
+#: data/com.jeffser.Alpaca.metainfo.xml.in:547
 msgid "0.1.1 Stable Release"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:415
+#: data/com.jeffser.Alpaca.metainfo.xml.in:548
 msgid "This is the first public version of Alpaca"
 msgstr ""
 
-#: src/window.py:62 src/window.py:1100 src/window.py:1166 src/dialogs.py:84
+#: src/window.py:61 src/window.py:1131 src/window.py:1197 src/dialogs.py:84
 #: src/window.ui:43
 msgid "New Chat"
 msgstr ""
@@ -711,147 +1012,160 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/window.py:299 src/window.py:310
+#: src/window.py:302 src/window.py:313
 msgid "Failed to connect to server"
 msgstr ""
 
-#: src/window.py:317
+#: src/window.py:320
 msgid "Pulling in the background..."
 msgstr ""
 
-#: src/window.py:369
+#: src/window.py:372
 msgid "Stop Creating '{}'"
 msgstr ""
 
-#: src/window.py:406
+#: src/window.py:409
 msgid "image"
 msgstr ""
 
-#: src/window.py:478
+#: src/window.py:481
 msgid "Message copied to the clipboard"
 msgstr ""
 
-#: src/window.py:603
+#: src/window.py:607
 msgid "Remove Message"
 msgstr ""
 
-#: src/window.py:608 src/window.py:876
+#: src/window.py:612 src/window.py:904
 msgid "Copy Message"
 msgstr ""
 
-#: src/window.py:613
+#: src/window.py:617
 msgid "Edit Message"
 msgstr ""
 
-#: src/window.py:666
+#: src/window.py:670
 msgid "Missing Image"
 msgstr ""
 
-#: src/window.py:682 src/window.py:684
+#: src/window.py:686 src/window.py:688
 msgid "Missing image"
 msgstr ""
 
-#: src/window.py:764
+#: src/window.py:768
 msgid "Remove '{} ({})'"
 msgstr ""
 
-#: src/window.py:904
+#: src/window.py:903
+msgid "Code Block"
+msgstr ""
+
+#: src/window.py:935
 msgid "Code copied to the clipboard"
 msgstr ""
 
-#: src/window.py:985
+#: src/window.py:1016
 msgid "Task Complete"
 msgstr ""
 
-#: src/window.py:985 src/window.py:986
+#: src/window.py:1016 src/window.py:1017
 msgid "Model '{}' pulled successfully."
 msgstr ""
 
-#: src/window.py:990
+#: src/window.py:1021
 msgid "Pull Model Error"
 msgstr ""
 
-#: src/window.py:990
+#: src/window.py:1021
 msgid "Failed to pull model '{}' due to network error."
 msgstr ""
 
-#: src/window.py:1022
+#: src/window.py:1053
 msgid "Stop Pulling '{} ({})'"
 msgstr ""
 
-#: src/window.py:1065
+#: src/window.py:1096
 msgid "Image Recognition"
 msgstr ""
 
-#: src/window.py:1182
+#: src/window.py:1213
 msgid "Model deleted successfully"
 msgstr ""
 
-#: src/window.py:1260
+#: src/window.py:1292
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr ""
 
-#: src/window.py:1280
+#: src/window.py:1312
 msgid "Chat exported successfully"
 msgstr ""
 
-#: src/window.py:1349
+#: src/window.py:1381
 msgid "Chat imported successfully"
 msgstr ""
 
-#: src/window.py:1382
+#: src/window.py:1414
 msgid "Cannot open image"
 msgstr ""
 
-#: src/window.py:1464
+#: src/window.py:1496
 msgid "This video is not available"
 msgstr ""
 
-#: src/window.py:1482 src/dialogs.py:264
+#: src/window.py:1514 src/dialogs.py:276
 msgid "Image recognition is only available on specific models"
 msgstr ""
 
 #: src/available_models_descriptions.py:2
-msgid "Google Gemma 2 is now available in 2 sizes, 9B and 27B."
+msgid ""
+"Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and "
+"405B parameter sizes."
 msgstr ""
 
 #: src/available_models_descriptions.py:3
-msgid "Meta Llama 3: The most capable openly available LLM to date"
+msgid "Google Gemma 2 is now available in 2 sizes, 9B and 27B."
 msgstr ""
 
 #: src/available_models_descriptions.py:4
-msgid "Qwen2 is a new series of large language models from Alibaba group"
+msgid ""
+"A state-of-the-art 12B model with 128k context length, built by Mistral AI "
+"in collaboration with NVIDIA."
 msgstr ""
 
 #: src/available_models_descriptions.py:5
+msgid ""
+"Mistral Large 2 is Mistral's new flagship model that is significantly more "
+"capable in code generation, mathematics, and reasoning with 128k context "
+"window and support for dozens of languages."
+msgstr ""
+
+#: src/available_models_descriptions.py:6
+msgid "Qwen2 is a new series of large language models from Alibaba group"
+msgstr ""
+
+#: src/available_models_descriptions.py:7
 msgid ""
 "An open-source Mixture-of-Experts code language model that achieves "
 "performance comparable to GPT4-Turbo in code-specific tasks."
 msgstr ""
 
-#: src/available_models_descriptions.py:6
+#: src/available_models_descriptions.py:8
 msgid ""
 "Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art "
 "open models by Microsoft."
 msgstr ""
 
-#: src/available_models_descriptions.py:7
-msgid ""
-"Aya 23, released by Cohere, is a new family of state-of-the-art, "
-"multilingual models that support 23 languages."
-msgstr ""
-
-#: src/available_models_descriptions.py:8
+#: src/available_models_descriptions.py:9
 msgid "The 7B model released by Mistral AI, updated to version 0.3."
 msgstr ""
 
-#: src/available_models_descriptions.py:9
+#: src/available_models_descriptions.py:10
 msgid ""
 "A set of Mixture of Experts (MoE) model with open weights by Mistral AI in "
 "8x7b and 8x22b parameter sizes."
 msgstr ""
 
-#: src/available_models_descriptions.py:10
+#: src/available_models_descriptions.py:11
 msgid ""
 "CodeGemma is a collection of powerful, lightweight models that can perform a "
 "variety of coding tasks like fill-in-the-middle code completion, code "
@@ -859,63 +1173,57 @@ msgid ""
 "instruction following."
 msgstr ""
 
-#: src/available_models_descriptions.py:11
+#: src/available_models_descriptions.py:12
 msgid ""
 "Command R is a Large Language Model optimized for conversational interaction "
 "and long context tasks."
 msgstr ""
 
-#: src/available_models_descriptions.py:12
+#: src/available_models_descriptions.py:13
 msgid ""
 "Command R+ is a powerful, scalable large language model purpose-built to "
 "excel at real-world enterprise use cases."
 msgstr ""
 
-#: src/available_models_descriptions.py:13
+#: src/available_models_descriptions.py:14
 msgid ""
 "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines "
 "a vision encoder and Vicuna for general-purpose visual and language "
 "understanding. Updated to version 1.6."
 msgstr ""
 
-#: src/available_models_descriptions.py:14
+#: src/available_models_descriptions.py:15
+msgid "Meta Llama 3: The most capable openly available LLM to date"
+msgstr ""
+
+#: src/available_models_descriptions.py:16
 msgid ""
 "Gemma is a family of lightweight, state-of-the-art open models built by "
 "Google DeepMind. Updated to version 1.1"
 msgstr ""
 
-#: src/available_models_descriptions.py:15
+#: src/available_models_descriptions.py:17
 msgid ""
 "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
 "0.5B to 110B parameters"
 msgstr ""
 
-#: src/available_models_descriptions.py:16
+#: src/available_models_descriptions.py:18
 msgid ""
 "Llama 2 is a collection of foundation language models ranging from 7B to 70B "
 "parameters."
 msgstr ""
 
-#: src/available_models_descriptions.py:17
+#: src/available_models_descriptions.py:19
 msgid ""
 "A large language model that can use text prompts to generate and discuss "
 "code."
 msgstr ""
 
-#: src/available_models_descriptions.py:18
+#: src/available_models_descriptions.py:20
 msgid ""
 "Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
 "experts models that excels at coding tasks. Created by Eric Hartford."
-msgstr ""
-
-#: src/available_models_descriptions.py:19
-msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
-msgstr ""
-
-#: src/available_models_descriptions.py:20
-msgid ""
-"DeepSeek Coder is a capable coding model trained on two trillion code and "
-"natural language tokens."
 msgstr ""
 
 #: src/available_models_descriptions.py:21
@@ -924,31 +1232,31 @@ msgid ""
 msgstr ""
 
 #: src/available_models_descriptions.py:22
+msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
+msgstr ""
+
+#: src/available_models_descriptions.py:23
 msgid ""
 "Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
 "outstanding reasoning and language understanding capabilities."
 msgstr ""
 
-#: src/available_models_descriptions.py:23
+#: src/available_models_descriptions.py:24
+msgid ""
+"DeepSeek Coder is a capable coding model trained on two trillion code and "
+"natural language tokens."
+msgstr ""
+
+#: src/available_models_descriptions.py:25
 msgid ""
 "The uncensored Dolphin model based on Mistral that excels at coding tasks. "
 "Updated to version 2.8."
 msgstr ""
 
-#: src/available_models_descriptions.py:24
-msgid ""
-"Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
-"Mistral 7B model using the OpenOrca dataset."
-msgstr ""
-
-#: src/available_models_descriptions.py:25
+#: src/available_models_descriptions.py:26
 msgid ""
 "A general-purpose model ranging from 3 billion parameters to 70 billion, "
 "suitable for entry-level hardware."
-msgstr ""
-
-#: src/available_models_descriptions.py:26
-msgid "State-of-the-art large embedding model from mixedbread.ai"
 msgstr ""
 
 #: src/available_models_descriptions.py:27
@@ -958,19 +1266,19 @@ msgid ""
 msgstr ""
 
 #: src/available_models_descriptions.py:28
+msgid "State-of-the-art large embedding model from mixedbread.ai"
+msgstr ""
+
+#: src/available_models_descriptions.py:29
 msgid ""
 "StarCoder2 is the next generation of transparently trained open code LLMs "
 "that comes in three sizes: 3B, 7B and 15B parameters."
 msgstr ""
 
-#: src/available_models_descriptions.py:29
-msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
-msgstr ""
-
 #: src/available_models_descriptions.py:30
 msgid ""
-"Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
-"that are trained to act as helpful assistants."
+"Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
+"Mistral 7B model using the OpenOrca dataset."
 msgstr ""
 
 #: src/available_models_descriptions.py:31
@@ -979,278 +1287,275 @@ msgstr ""
 
 #: src/available_models_descriptions.py:32
 msgid ""
-"The powerful family of models by Nous Research that excels at scientific "
-"discussion and coding tasks."
+"Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
+"that are trained to act as helpful assistants."
 msgstr ""
 
 #: src/available_models_descriptions.py:33
+msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
+msgstr ""
+
+#: src/available_models_descriptions.py:34
+msgid ""
+"A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
+"benchmarks."
+msgstr ""
+
+#: src/available_models_descriptions.py:35
 msgid ""
 "General use chat model based on Llama and Llama 2 with 2K to 16K context "
 "sizes."
 msgstr ""
 
-#: src/available_models_descriptions.py:34
+#: src/available_models_descriptions.py:36
 msgid ""
-"Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
-"Llama 2 uncensored by Eric Hartford."
+"The powerful family of models by Nous Research that excels at scientific "
+"discussion and coding tasks."
 msgstr ""
 
-#: src/available_models_descriptions.py:35
+#: src/available_models_descriptions.py:37
 msgid ""
 "The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
 "model on 3 trillion tokens."
 msgstr ""
 
-#: src/available_models_descriptions.py:36
-msgid ""
-"State of the art large language model from Microsoft AI with improved "
-"performance on complex chat, multilingual, reasoning and agent use cases."
-msgstr ""
-
-#: src/available_models_descriptions.py:37
-msgid ""
-"StarCoder is a code generation model trained on 80+ programming languages."
-msgstr ""
-
 #: src/available_models_descriptions.py:38
+msgid ""
+"Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
+"Llama 2 uncensored by Eric Hartford."
+msgstr ""
+
+#: src/available_models_descriptions.py:39
 msgid ""
 "Codestral is Mistral AI’s first-ever code model designed for code generation "
 "tasks."
 msgstr ""
 
-#: src/available_models_descriptions.py:39
+#: src/available_models_descriptions.py:40
+msgid ""
+"StarCoder is a code generation model trained on 80+ programming languages."
+msgstr ""
+
+#: src/available_models_descriptions.py:41
+msgid ""
+"State of the art large language model from Microsoft AI with improved "
+"performance on complex chat, multilingual, reasoning and agent use cases."
+msgstr ""
+
+#: src/available_models_descriptions.py:42
 msgid ""
 "A family of open-source models trained on a wide variety of data, surpassing "
 "ChatGPT on various benchmarks. Updated to version 3.5-0106."
 msgstr ""
 
-#: src/available_models_descriptions.py:40
+#: src/available_models_descriptions.py:43
+msgid ""
+"Aya 23, released by Cohere, is a new family of state-of-the-art, "
+"multilingual models that support 23 languages."
+msgstr ""
+
+#: src/available_models_descriptions.py:44
 msgid ""
 "An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
 "by Eric Hartford and based on TinyLlama."
 msgstr ""
 
-#: src/available_models_descriptions.py:41
+#: src/available_models_descriptions.py:45
 msgid ""
 "OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
 "open datasets."
 msgstr ""
 
-#: src/available_models_descriptions.py:42
+#: src/available_models_descriptions.py:46
 msgid "State-of-the-art code generation model"
 msgstr ""
 
-#: src/available_models_descriptions.py:43
+#: src/available_models_descriptions.py:47
 msgid ""
 "Stable Code 3B is a coding model with instruct and code completion variants "
 "on par with models such as Code Llama 7B that are 2.5x larger."
 msgstr ""
 
-#: src/available_models_descriptions.py:44
-msgid ""
-"A fine-tuned model based on Mistral with good coverage of domain and "
-"language."
-msgstr ""
-
-#: src/available_models_descriptions.py:45
-msgid "Model focused on math and logic problems"
-msgstr ""
-
-#: src/available_models_descriptions.py:46
+#: src/available_models_descriptions.py:48
 msgid ""
 "CodeQwen1.5 is a large language model pretrained on a large amount of code "
 "data."
 msgstr ""
 
-#: src/available_models_descriptions.py:47
-msgid "Code generation model based on Code Llama."
+#: src/available_models_descriptions.py:49
+msgid "Model focused on math and logic problems"
 msgstr ""
 
-#: src/available_models_descriptions.py:48
+#: src/available_models_descriptions.py:50
+msgid ""
+"A fine-tuned model based on Mistral with good coverage of domain and "
+"language."
+msgstr ""
+
+#: src/available_models_descriptions.py:51
 msgid ""
 "Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model "
 "trained on multilingual data in English, Spanish, German, Italian, French, "
 "Portuguese, and Dutch."
 msgstr ""
 
-#: src/available_models_descriptions.py:49
+#: src/available_models_descriptions.py:52
+msgid "A family of open foundation models by IBM for Code Intelligence"
+msgstr ""
+
+#: src/available_models_descriptions.py:53
+msgid "Embedding models on very large sentence level datasets."
+msgstr ""
+
+#: src/available_models_descriptions.py:54
+msgid "Code generation model based on Code Llama."
+msgstr ""
+
+#: src/available_models_descriptions.py:55
 msgid ""
 "A 7B and 15B uncensored variant of the Dolphin model family that excels at "
 "coding, based on StarCoder2."
 msgstr ""
 
-#: src/available_models_descriptions.py:50
-msgid "Embedding models on very large sentence level datasets."
-msgstr ""
-
-#: src/available_models_descriptions.py:51
+#: src/available_models_descriptions.py:56
 msgid "General use models based on Llama and Llama 2 from Nous Research."
 msgstr ""
 
-#: src/available_models_descriptions.py:52
-msgid ""
-"Starling is a large language model trained by reinforcement learning from AI "
-"feedback focused on improving chatbot helpfulness."
-msgstr ""
-
-#: src/available_models_descriptions.py:53
+#: src/available_models_descriptions.py:57
 msgid ""
 "SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
 "generation tasks"
 msgstr ""
 
-#: src/available_models_descriptions.py:54
+#: src/available_models_descriptions.py:58
+msgid ""
+"This model extends LLama-3 8B's context length from 8k to over 1m tokens."
+msgstr ""
+
+#: src/available_models_descriptions.py:59
+msgid ""
+"Starling is a large language model trained by reinforcement learning from AI "
+"feedback focused on improving chatbot helpfulness."
+msgstr ""
+
+#: src/available_models_descriptions.py:60
+msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
+msgstr ""
+
+#: src/available_models_descriptions.py:61
+msgid ""
+"Conversational model based on Llama 2 that performs competitively on various "
+"benchmarks."
+msgstr ""
+
+#: src/available_models_descriptions.py:62
+msgid "An advanced language model crafted with 2 trillion bilingual tokens."
+msgstr ""
+
+#: src/available_models_descriptions.py:63
+msgid ""
+"A model from NVIDIA based on Llama 3 that excels at conversational question "
+"answering (QA) and retrieval-augmented generation (RAG)."
+msgstr ""
+
+#: src/available_models_descriptions.py:64
 msgid ""
 "Orca 2 is built by Microsoft research, and are a fine-tuned version of "
 "Meta's Llama 2 models. The model is designed to excel particularly in "
 "reasoning."
 msgstr ""
 
-#: src/available_models_descriptions.py:55
-msgid ""
-"This model extends LLama-3 8B's context length from 8k to over 1m tokens."
+#: src/available_models_descriptions.py:65
+msgid "General use model based on Llama 2."
 msgstr ""
 
-#: src/available_models_descriptions.py:56
-msgid "An advanced language model crafted with 2 trillion bilingual tokens."
-msgstr ""
-
-#: src/available_models_descriptions.py:57
-msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
-msgstr ""
-
-#: src/available_models_descriptions.py:58
-msgid ""
-"A model from NVIDIA based on Llama 3 that excels at conversational question "
-"answering (QA) and retrieval-augmented generation (RAG)."
-msgstr ""
-
-#: src/available_models_descriptions.py:59
+#: src/available_models_descriptions.py:66
 msgid ""
 "A compact, yet powerful 10.7B large language model designed for single-turn "
 "conversation."
 msgstr ""
 
-#: src/available_models_descriptions.py:60
-msgid ""
-"Conversational model based on Llama 2 that performs competitively on various "
-"benchmarks."
-msgstr ""
-
-#: src/available_models_descriptions.py:61
-msgid "A family of open foundation models by IBM for Code Intelligence"
-msgstr ""
-
-#: src/available_models_descriptions.py:62
-msgid ""
-"2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
-"model by Microsoft Research."
-msgstr ""
-
-#: src/available_models_descriptions.py:63
-msgid "General use model based on Llama 2."
-msgstr ""
-
-#: src/available_models_descriptions.py:64
+#: src/available_models_descriptions.py:67
 msgid ""
 "A companion assistant trained in philosophy, psychology, and personal "
 "relationships. Based on Mistral."
 msgstr ""
 
-#: src/available_models_descriptions.py:65
+#: src/available_models_descriptions.py:68
+msgid ""
+"2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
+"model by Microsoft Research."
+msgstr ""
+
+#: src/available_models_descriptions.py:69
 msgid ""
 "Llama 2 based model fine tuned on an Orca-style dataset. Originally called "
 "Free Willy."
 msgstr ""
 
-#: src/available_models_descriptions.py:66
+#: src/available_models_descriptions.py:70
+msgid ""
+"moondream2 is a small vision language model designed to run efficiently on "
+"edge devices."
+msgstr ""
+
+#: src/available_models_descriptions.py:71
 msgid ""
 "BakLLaVA is a multimodal model consisting of the Mistral 7B base model "
 "augmented with the LLaVA architecture."
 msgstr ""
 
-#: src/available_models_descriptions.py:67
-msgid ""
-"A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
-"benchmarks."
-msgstr ""
-
-#: src/available_models_descriptions.py:68
+#: src/available_models_descriptions.py:72
 msgid "Uncensored version of Wizard LM model"
 msgstr ""
 
-#: src/available_models_descriptions.py:69
+#: src/available_models_descriptions.py:73
+msgid ""
+"A suite of text embedding models by Snowflake, optimized for performance."
+msgstr ""
+
+#: src/available_models_descriptions.py:74
+msgid "A strong, economical, and efficient Mixture-of-Experts language model."
+msgstr ""
+
+#: src/available_models_descriptions.py:75
 msgid ""
 "Fine-tuned Llama 2 model to answer medical questions based on an open source "
 "medical dataset."
 msgstr ""
 
-#: src/available_models_descriptions.py:70
-msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
-msgstr ""
-
-#: src/available_models_descriptions.py:71
+#: src/available_models_descriptions.py:76
 msgid "An extension of Mistral to support context windows of 64K or 128K."
 msgstr ""
 
-#: src/available_models_descriptions.py:72
-msgid ""
-"A suite of text embedding models by Snowflake, optimized for performance."
-msgstr ""
-
-#: src/available_models_descriptions.py:73
+#: src/available_models_descriptions.py:77
 msgid ""
 "An expansion of Llama 2 that specializes in integrating both general "
 "language understanding and domain-specific knowledge, particularly in "
 "programming and mathematics."
 msgstr ""
 
-#: src/available_models_descriptions.py:74
-msgid "Great code generation model based on Llama2."
+#: src/available_models_descriptions.py:78
+msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
 msgstr ""
 
-#: src/available_models_descriptions.py:75
+#: src/available_models_descriptions.py:79
 msgid ""
 "Open-source medical large language model adapted from Llama 2 to the medical "
 "domain."
 msgstr ""
 
-#: src/available_models_descriptions.py:76
-msgid ""
-"moondream2 is a small vision language model designed to run efficiently on "
-"edge devices."
-msgstr ""
-
-#: src/available_models_descriptions.py:77
-msgid "Uncensored Llama2 based model with support for a 16K context window."
-msgstr ""
-
-#: src/available_models_descriptions.py:78
-msgid ""
-"Nexus Raven is a 13B instruction tuned model for function calling tasks."
-msgstr ""
-
-#: src/available_models_descriptions.py:79
-msgid ""
-"🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic "
-"instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
-"with open-source code snippets."
-msgstr ""
-
 #: src/available_models_descriptions.py:80
-msgid "A strong, economical, and efficient Mixture-of-Experts language model."
+msgid "Great code generation model based on Llama2."
 msgstr ""
 
 #: src/available_models_descriptions.py:81
 msgid ""
-"A lightweight chat model allowing accurate, and responsive output without "
-"requiring high-end hardware."
+"Nexus Raven is a 13B instruction tuned model for function calling tasks."
 msgstr ""
 
 #: src/available_models_descriptions.py:82
-msgid ""
-"A high-performing code instruct model created by merging two existing code "
-"models."
+msgid "Uncensored Llama2 based model with support for a 16K context window."
 msgstr ""
 
 #: src/available_models_descriptions.py:83
@@ -1259,61 +1564,122 @@ msgstr ""
 
 #: src/available_models_descriptions.py:84
 msgid ""
+"A versatile model for AI software development scenarios, including code "
+"completion."
+msgstr ""
+
+#: src/available_models_descriptions.py:85
+msgid ""
+"A strong multi-lingual general language model with competitive performance "
+"to Llama 3."
+msgstr ""
+
+#: src/available_models_descriptions.py:86
+msgid ""
+"🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic "
+"instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
+"with open-source code snippets."
+msgstr ""
+
+#: src/available_models_descriptions.py:87
+msgid ""
+"A lightweight chat model allowing accurate, and responsive output without "
+"requiring high-end hardware."
+msgstr ""
+
+#: src/available_models_descriptions.py:88
+msgid ""
+"A high-performing code instruct model created by merging two existing code "
+"models."
+msgstr ""
+
+#: src/available_models_descriptions.py:89
+msgid ""
 "MistralLite is a fine-tuned model based on Mistral with enhanced "
 "capabilities of processing long contexts."
 msgstr ""
 
-#: src/available_models_descriptions.py:85
+#: src/available_models_descriptions.py:90
 msgid ""
 "Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
 "MelodysDreamj."
 msgstr ""
 
-#: src/available_models_descriptions.py:86
+#: src/available_models_descriptions.py:91
 msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
 msgstr ""
 
-#: src/available_models_descriptions.py:87
-msgid ""
-"A language model created by combining two fine-tuned Llama 2 70B models into "
-"one."
-msgstr ""
-
-#: src/available_models_descriptions.py:88
+#: src/available_models_descriptions.py:92
 msgid ""
 "MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
 "interleaving the model with itself."
 msgstr ""
 
-#: src/available_models_descriptions.py:89
+#: src/available_models_descriptions.py:93
+msgid ""
+"A language model created by combining two fine-tuned Llama 2 70B models into "
+"one."
+msgstr ""
+
+#: src/available_models_descriptions.py:94
+msgid ""
+"A top-performing mixture of experts model, fine-tuned with high-quality data."
+msgstr ""
+
+#: src/available_models_descriptions.py:95
 msgid ""
 "Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
 "Designed for chat and code generation."
 msgstr ""
 
-#: src/available_models_descriptions.py:90
-msgid ""
-"A top-performing mixture of experts model, fine-tuned with high-quality data."
-msgstr ""
-
-#: src/available_models_descriptions.py:91
-msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
-msgstr ""
-
-#: src/available_models_descriptions.py:92
-msgid "DBRX is an open, general-purpose LLM created by Databricks."
-msgstr ""
-
-#: src/available_models_descriptions.py:93
+#: src/available_models_descriptions.py:96
 msgid ""
 "Falcon2 is an 11B parameters causal decoder-only model built by TII and "
 "trained over 5T tokens."
 msgstr ""
 
-#: src/available_models_descriptions.py:94
+#: src/available_models_descriptions.py:97
+msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
+msgstr ""
+
+#: src/available_models_descriptions.py:98
+msgid "DBRX is an open, general-purpose LLM created by Databricks."
+msgstr ""
+
+#: src/available_models_descriptions.py:99
+msgid ""
+"InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
+"outstanding reasoning capability."
+msgstr ""
+
+#: src/available_models_descriptions.py:100
 msgid ""
 "A robust conversational model designed to be used for both chat and instruct "
 "use cases."
+msgstr ""
+
+#: src/available_models_descriptions.py:101
+msgid ""
+"A series of models from Groq that represent a significant advancement in "
+"open-source AI capabilities for tool use/function calling."
+msgstr ""
+
+#: src/available_models_descriptions.py:102
+msgid ""
+"MathΣtral: a 7B model designed for math reasoning and scientific discovery "
+"by Mistral AI."
+msgstr ""
+
+#: src/available_models_descriptions.py:103
+msgid ""
+"An open weights function calling model based on Llama 3, competitive with "
+"GPT-4o function calling capabilities."
+msgstr ""
+
+#: src/available_models_descriptions.py:104
+msgid ""
+"A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
+"information extraction, based on Phi-3."
 msgstr ""
 
 #: src/dialogs.py:17
@@ -1329,8 +1695,8 @@ msgid "Are you sure you want to clear the chat?"
 msgstr ""
 
 #: src/dialogs.py:24 src/dialogs.py:45 src/dialogs.py:72 src/dialogs.py:99
-#: src/dialogs.py:121 src/dialogs.py:142 src/dialogs.py:164 src/dialogs.py:224
-#: src/dialogs.py:314 src/dialogs.py:352
+#: src/dialogs.py:121 src/dialogs.py:142 src/dialogs.py:164 src/dialogs.py:236
+#: src/dialogs.py:326 src/dialogs.py:364
 msgid "Cancel"
 msgstr ""
 
@@ -1402,69 +1768,89 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: src/dialogs.py:190
+#: src/dialogs.py:202
 msgid "Connection Error"
 msgstr ""
 
-#: src/dialogs.py:191
+#: src/dialogs.py:203
 msgid "The remote instance has disconnected"
 msgstr ""
 
-#: src/dialogs.py:195
+#: src/dialogs.py:207
 msgid "Close Alpaca"
 msgstr ""
 
-#: src/dialogs.py:196
+#: src/dialogs.py:208
 msgid "Use local instance"
 msgstr ""
 
-#: src/dialogs.py:197
+#: src/dialogs.py:209
 msgid "Connect"
 msgstr ""
 
-#: src/dialogs.py:220
+#: src/dialogs.py:232
 msgid "Select Model"
 msgstr ""
 
-#: src/dialogs.py:221
+#: src/dialogs.py:233
 msgid "This model will be used as the base for the new model"
 msgstr ""
 
-#: src/dialogs.py:225 src/dialogs.py:315 src/dialogs.py:353
+#: src/dialogs.py:237 src/dialogs.py:327 src/dialogs.py:365
 msgid "Accept"
 msgstr ""
 
-#: src/dialogs.py:242
+#: src/dialogs.py:254
 msgid "An error occurred while creating the model"
 msgstr ""
 
-#: src/dialogs.py:300
+#: src/dialogs.py:312
 msgid "This video does not have any transcriptions"
 msgstr ""
 
-#: src/dialogs.py:309
+#: src/dialogs.py:321
 msgid "Attach YouTube Video?"
 msgstr ""
 
-#: src/dialogs.py:310
+#: src/dialogs.py:322
 msgid ""
 "{}\n"
 "\n"
 "Please select a transcript to include"
 msgstr ""
 
-#: src/dialogs.py:343
+#: src/dialogs.py:355
 msgid "An error occurred while extracting text from the website"
 msgstr ""
 
-#: src/dialogs.py:348
+#: src/dialogs.py:360
 msgid "Attach Website? (Experimental)"
 msgstr ""
 
-#: src/dialogs.py:349
+#: src/dialogs.py:361
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
+msgstr ""
+
+#: src/dialogs.py:379
+msgid "Thank you!"
+msgstr ""
+
+#: src/dialogs.py:386 src/dialogs.py:393
+msgid "Support"
+msgstr ""
+
+#: src/dialogs.py:387
+msgid "Are you enjoying Alpaca? Consider sponsoring the project!"
+msgstr ""
+
+#: src/dialogs.py:390
+msgid "Don't show again"
+msgstr ""
+
+#: src/dialogs.py:392
+msgid "Later"
 msgstr ""
 
 #: src/window.ui:54
@@ -1741,3 +2127,12 @@ msgstr ""
 #: src/window.ui:1187
 msgid "Insert new line"
 msgstr ""
+
+#~ msgid "A conversation showing code highlight"
+#~ msgstr "Code avec coloration syntaxique"
+
+#~ msgid "A conversation involving multiple models"
+#~ msgstr "Utilisation de plusieurs modèles"
+
+#~ msgid "Managing models"
+#~ msgstr "Gestion des modèles"

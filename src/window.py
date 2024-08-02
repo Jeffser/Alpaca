@@ -28,7 +28,7 @@ from PIL import Image
 from pypdf import PdfReader
 from datetime import datetime
 from . import dialogs, local_instance, connection_handler, available_models_descriptions
-
+from .table_widget import TableWidget
 
 logger = logging.getLogger(__name__)
 
@@ -580,7 +580,7 @@ Generate a title following these rules:
         if 'images' in message: data["images"] = message['images']
         response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps(data))
 
-        new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').title()
+        new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title()
         new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
         self.rename_chat(label_element.get_name(), new_chat_name, label_element)
 
@@ -820,6 +820,16 @@ Generate a title following these rules:
             code_text = match.group(1)
             parts.append({"type": "code", "text": code_text, "language": None})
             pos = end
+        # Match tables
+        table_pattern = re.compile(r'((\r?\n){2}|^)([^\r\n]*\|[^\r\n]*(\r?\n)?)+(?=(\r?\n){2}|$)', re.MULTILINE)
+        for match in table_pattern.finditer(text):
+            start, end = match.span()
+            if pos < start:
+                normal_text = text[pos:start]
+                parts.append({"type": "normal", "text": normal_text.strip()})
+            table_text = match.group(0)
+            parts.append({"type": "table", "text": table_text})
+            pos = end
         # Extract any remaining normal text after the last code block
         if pos < len(text):
             normal_text = text[pos:]
@@ -869,7 +879,7 @@ Generate a title following these rules:
                 if footer: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer.encode('utf-8')))
 
                 self.bot_message_box.append(message_text)
-            else:
+            elif part['type'] == 'code':
                 language = None
                 if part['language']:
                     language = GtkSource.LanguageManager.get_default().get_language(part['language'])
@@ -899,6 +909,9 @@ Generate a title following these rules:
                 code_block_box.append(source_view)
                 self.bot_message_box.append(code_block_box)
                 self.style_manager.connect("notify::dark", self.on_theme_changed, buffer)
+            elif part['type'] == 'table':
+                table = TableWidget(part['text'])
+                self.bot_message_box.append(table)
         vadjustment = self.chat_window.get_vadjustment()
         vadjustment.set_value(vadjustment.get_upper())
         self.bot_message = None
@@ -1056,7 +1069,7 @@ Generate a title following these rules:
     def list_available_model_tags(self, model_name):
         logger.debug("Listing available model tags")
         self.navigation_view_manage_models.push_by_tag('model_tags_page')
-        self.navigation_view_manage_models.find_page('model_tags_page').set_title(model_name.capitalize())
+        self.navigation_view_manage_models.find_page('model_tags_page').set_title(model_name.replace("-", " ").title())
         self.model_link_button.set_name(self.available_models[model_name]['url'])
         self.model_link_button.set_tooltip_text(self.available_models[model_name]['url'])
         self.available_model_list_box.unselect_all()
@@ -1580,7 +1593,7 @@ Generate a title following these rules:
 
                 #Support dialog
                 if 'show_support' not in data or data['show_support']:
-                    if random.randint(0, 99) == 0:
+                    if random.randint(0, 49) == 0:
                         dialogs.support(self)
                 if 'show_support' in data: self.show_support = data['show_support']
                 self.background_switch.set_active(self.run_on_background)

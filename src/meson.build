@@ -43,7 +43,8 @@ alpaca_sources = [
   'dialogs.py',
   'local_instance.py',
   'available_models.json',
-  'available_models_descriptions.py'
+  'available_models_descriptions.py',
+  'table_widget.py'
 ]
 
 install_data(alpaca_sources, install_dir: moduledir)

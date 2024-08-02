@@ -59,7 +59,7 @@ You can change anything except `$HOME` and `$OLLAMA_HOST`, to do this go to `~/.
 - [TylerLaBree](https://github.com/TylerLaBree) for their requests and ideas
 - [Alexkdeveloper](https://github.com/alexkdeveloper) for their help translating the app to Russian
 - [Imbev](https://github.com/imbev) for their reports and suggestions
-- [Nokse](https://github.com/Nokse22) for their contributions to the UI
+- [Nokse](https://github.com/Nokse22) for their contributions to the UI and table rendering
 - [Louis Chauvet-Villaret](https://github.com/loulou64490) for their suggestions and help translating the app to French
 - [CounterFlow64](https://github.com/CounterFlow64) for their help translating the app to Norwegian
 
