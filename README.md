@@ -62,6 +62,8 @@ You can change anything except `$HOME` and `$OLLAMA_HOST`, to do this go to `~/.
 - [Nokse](https://github.com/Nokse22) for their contributions to the UI and table rendering
 - [Louis Chauvet-Villaret](https://github.com/loulou64490) for their suggestions and help translating the app to French
 - [CounterFlow64](https://github.com/CounterFlow64) for their help translating the app to Norwegian
+- [Yuehao Sui](https://github.com/8ar10der) for their help translating the app to Simplified Chinese
+- [Aleksana](https://github.com/Aleksanaa) for her help with better handling of directories
 
 ## About forks
 If you want to fork this... I mean, I think it would be better if you start from scratch, my code isn't well documented at all, but if you really want to, please give me some credit, that's all I ask for... And maybe a donation (joke)
