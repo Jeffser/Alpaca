@@ -1023,7 +1023,7 @@ msgstr "下一页"
 
 #: src/window.py:303 src/window.py:314
 msgid "Failed to connect to server"
-msgstr "无法与服务器连接"
+msgstr "无法连接服务器"
 
 #: src/window.py:321
 msgid "Pulling in the background..."
@@ -1055,7 +1055,7 @@ msgstr "编辑消息"
 
 #: src/window.py:620
 msgid "Regenerate Message"
-msgstr ""
+msgstr "重新生成消息"
 
 #: src/window.py:673
 msgid "Missing Image"
@@ -1067,11 +1067,11 @@ msgstr "无图像"
 
 #: src/window.py:773
 msgid "Remove '{}'"
-msgstr ""
+msgstr "移除 '{}'"
 
 #: src/window.py:907
 msgid "Code Block"
-msgstr ""
+msgstr "代码块"
 
 #: src/window.py:939
 msgid "Code copied to the clipboard"
@@ -1079,7 +1079,7 @@ msgstr "代码已复制到剪切板"
 
 #: src/window.py:999
 msgid "Regenerate Response"
-msgstr ""
+msgstr "重新生成回复"
 
 #: src/window.py:1066
 msgid "Task Complete"
@@ -1091,15 +1091,15 @@ msgstr "成功拉取模型 '{}'"
 
 #: src/window.py:1069 src/window.py:1072
 msgid "Pull Model Error"
-msgstr "拉取模型遇到错误"
+msgstr "拉取模型中遇到错误"
 
 #: src/window.py:1069
 msgid "Failed to pull model '{}': {}"
-msgstr ""
+msgstr "拉取 '{}': {} 模型失败"
 
 #: src/window.py:1070
 msgid "Error pulling '{}': {}"
-msgstr ""
+msgstr "拉取 '{}': {} 中发生错误"
 
 #: src/window.py:1072
 msgid "Failed to pull model '{}' due to network error."
@@ -1107,11 +1107,11 @@ msgstr "由于网络错误，拉取模型 '{}' 失败"
 
 #: src/window.py:1073
 msgid "Error pulling '{}'"
-msgstr ""
+msgstr "拉取 '{}' 中遇到错误"
 
 #: src/window.py:1106
 msgid "Stop Pulling '{}'"
-msgstr ""
+msgstr "停止拉取 '{}'"
 
 #: src/window.py:1149
 msgid "Image Recognition"
@@ -1150,6 +1150,8 @@ msgid ""
 "Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and "
 "405B parameter sizes."
 msgstr ""
+"Llama 3.1 是新的来自 Meta 的先进模型，提供 8B, 70B, 和 "
+"405B 参数量。"
 
 #: src/available_models_descriptions.py:3
 msgid "Google Gemma 2 is now available in 2 sizes, 9B and 27B."
@@ -1160,6 +1162,8 @@ msgid ""
 "A state-of-the-art 12B model with 128k context length, built by Mistral AI "
 "in collaboration with NVIDIA."
 msgstr ""
+"一个具有 128k 上下文长度的先进模型，由 Mistral AI "
+"与 NVIDIA 合作开发。"
 
 #: src/available_models_descriptions.py:5
 msgid ""
@@ -1167,6 +1171,8 @@ msgid ""
 "capable in code generation, mathematics, and reasoning with 128k context "
 "window and support for dozens of languages."
 msgstr ""
+"Mistral Large 2 是 Mistral 的新的旗舰模型，在代码生成、数学运算和逻辑推理"
+"方面具有显著优势，带有 128k 的上下文长度并支持多种语言。"
 
 #: src/available_models_descriptions.py:6
 msgid "Qwen2 is a new series of large language models from Alibaba group"
@@ -1233,7 +1239,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:15
 msgid "Meta Llama 3: The most capable openly available LLM to date"
-msgstr "Meta Llama 3：迄今能力最强的开放式 LLM"
+msgstr "Meta Llama 3：迄今能力最强的开源大模型"
 
 #: src/available_models_descriptions.py:16
 msgid ""
@@ -1257,7 +1263,7 @@ msgstr "Llama 2 是一组基础语言模型，参数从 7B 到 70B 不等。"
 msgid ""
 "A large language model that can use text prompts to generate and discuss "
 "code."
-msgstr "大型语言模型，可使用文本提示生成和讨论代码。"
+msgstr "大语言模型，可使用文本提示生成和讨论代码。"
 
 #: src/available_models_descriptions.py:20
 msgid ""
@@ -1568,7 +1574,7 @@ msgstr ""
 msgid ""
 "moondream2 is a small vision language model designed to run efficiently on "
 "edge devices."
-msgstr "moondream2 是一个小型视觉语言模型，设计用于在边缘设备上高效运行。"
+msgstr "moondream2 是一个小型视觉语言模型，被设计用于在边缘设备上高效运行。"
 
 #: src/available_models_descriptions.py:71
 msgid ""
@@ -1619,7 +1625,7 @@ msgstr "开源医疗大型语言模型，由 Llama 2 改编而来，适用于医
 
 #: src/available_models_descriptions.py:80
 msgid "Great code generation model based on Llama2."
-msgstr "基于 Llama2 的优秀代码生成模型"
+msgstr "基于 Llama2 的优秀的代码生成模型"
 
 #: src/available_models_descriptions.py:81
 msgid ""
@@ -1632,19 +1638,22 @@ msgstr "基于 Llama2 的无删减模型，支持 16K 上下文窗口。"
 
 #: src/available_models_descriptions.py:83
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
-msgstr "从 Phi 3 Mini 微调而来的新型小型 LLaVA 模型。"
+msgstr "新的从 Phi 3 Mini 微调而来的小型 LLaVA 模型。"
 
 #: src/available_models_descriptions.py:84
 msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
 msgstr ""
+"功能丰富的，适合应用于 AI 辅助开发的模型，包括代码补全。"
+""
 
 #: src/available_models_descriptions.py:85
 msgid ""
 "A strong multi-lingual general language model with competitive performance "
 "to Llama 3."
-msgstr ""
+msgstr "强大的多语言的通用模型，在性能上较 Llama 3 有竞争力。"
+""
 
 #: src/available_models_descriptions.py:86
 msgid ""
@@ -1695,7 +1704,7 @@ msgstr ""
 msgid ""
 "A language model created by combining two fine-tuned Llama 2 70B models into "
 "one."
-msgstr "语言模型由两个经过微调的 Llama 2 70B 模型合并而成。"
+msgstr "由两个经过微调的 Llama 2 70B 模型合并而成的语言模型。"
 
 #: src/available_models_descriptions.py:94
 msgid ""
@@ -1886,7 +1895,7 @@ msgstr "创建模型时发生错误"
 
 #: src/dialogs.py:269
 msgid "Pull Model"
-msgstr ""
+msgstr "拉取模型"
 
 #: src/dialogs.py:270
 msgid ""
@@ -1930,27 +1939,27 @@ msgstr ""
 
 #: src/dialogs.py:400
 msgid "Thank you!"
-msgstr ""
+msgstr "谢谢！"
 
 #: src/dialogs.py:403
 msgid "Visit Alpaca's website if you change your mind!"
-msgstr ""
+msgstr "如果你改变注意了，请访问 Alpaca 的主页！"
 
 #: src/dialogs.py:409 src/dialogs.py:416
 msgid "Support"
-msgstr ""
+msgstr "支持"
 
 #: src/dialogs.py:410
 msgid "Are you enjoying Alpaca? Consider sponsoring the project!"
-msgstr ""
+msgstr "你喜欢 Alpaca 吗？考虑赞助这个项目！"
 
 #: src/dialogs.py:413
 msgid "Don't show again"
-msgstr ""
+msgstr "不再显示"
 
 #: src/dialogs.py:415
 msgid "Later"
-msgstr ""
+msgstr "稍后"
 
 #: src/window.ui:51
 msgid "Menu"
@@ -2096,11 +2105,11 @@ msgstr ""
 
 #: src/window.ui:763
 msgid "Open With Default App"
-msgstr ""
+msgstr "用默认应用打开"
 
 #: src/window.ui:771
 msgid "Remove Attachment"
-msgstr ""
+msgstr "移除附件"
 
 #: src/window.ui:833
 msgid "Previous"
@@ -2112,7 +2121,7 @@ msgstr "欢迎来到 Alpaca"
 
 #: src/window.ui:877
 msgid "Powered by Ollama"
-msgstr "由 Ollama 助力"
+msgstr "基于 Ollama"
 
 #: src/window.ui:880
 msgid "Ollama Website"
@@ -2188,15 +2197,15 @@ msgstr "删除聊天"
 
 #: src/window.ui:1097
 msgid "From Existing Model"
-msgstr "基于现有模型"
+msgstr "从现有模型"
 
 #: src/window.ui:1101
 msgid "From GGUF File"
-msgstr ""
+msgstr "从 GGUF 文件"
 
 #: src/window.ui:1105
 msgid "From Name"
-msgstr ""
+msgstr "从名称"
 
 #: src/window.ui:1151
 msgid "Close application"
