@@ -224,7 +224,7 @@ def create_model_from_existing_response(self, dialog, task, dropdown):
 def create_model_from_existing(self):
     string_list = Gtk.StringList()
     for model in self.local_models:
-        string_list.append(model)
+        string_list.append(self.convert_model_name(model, 0))
 
     dropdown = Gtk.DropDown()
     dropdown.set_model(string_list)
@@ -257,6 +257,27 @@ def create_model_from_file(self):
     file_dialog = Gtk.FileDialog(default_filter=self.file_filter_gguf)
     file_dialog.open(self, None, lambda file_dialog, result: create_model_from_file_response(self, file_dialog, result))
 
+def create_model_from_name_response(self, dialog, task, entry):
+    model = entry.get_text().lower().strip()
+    if dialog.choose_finish(task) == 'accept' and model:
+        self.pull_model(model)
+
+def create_model_from_name(self):
+    entry = Gtk.Entry()
+    entry.get_delegate().connect("insert-text", self.check_alphanumeric)
+    dialog = Adw.AlertDialog(
+        heading=_("Pull Model"),
+        body=_("Input the name of the model in this format\nname:tag"),
+        extra_child=entry
+    )
+    dialog.add_response("cancel", _("Cancel"))
+    dialog.add_response("accept", _("Accept"))
+    dialog.set_response_appearance("accept", Adw.ResponseAppearance.SUGGESTED)
+    dialog.choose(
+        parent = self,
+        cancellable = None,
+        callback = lambda dialog, task, entry=entry: create_model_from_name_response(self, dialog, task, entry)
+    )
 # FILE CHOOSER | WORKS
 
 def attach_file_response(self, file_dialog, result):

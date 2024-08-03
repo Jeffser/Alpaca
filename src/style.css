@@ -1,14 +1,8 @@
-.message_input_scroll_window junction {
-  box-shadow: none;
-  border: none;
-  background: blue;
-}
-
 .message_input_scroll_window > * {
     box-shadow: none;
     border-width: 0;
 }
-.message_text_view {
+.message_text_view, .modelfile_textview {
   background-color: rgba(0,0,0,0);
 }
 .chat_image_button {

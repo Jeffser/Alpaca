@@ -71,8 +71,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     create_model_base = Gtk.Template.Child()
     create_model_name = Gtk.Template.Child()
     create_model_system = Gtk.Template.Child()
-    create_model_template = Gtk.Template.Child()
-    create_model_dialog = Gtk.Template.Child()
+    create_model_modelfile = Gtk.Template.Child()
     temperature_spin = Gtk.Template.Child()
     seed_spin = Gtk.Template.Child()
     keep_alive_spin = Gtk.Template.Child()
@@ -344,19 +343,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def create_model_start(self, button):
-        base = self.create_model_base.get_subtitle()
-        name = self.create_model_name.get_text()
-        system = self.create_model_system.get_text()
-        template = self.create_model_template.get_text()
-        if "/" in base:
-            modelfile = f"FROM {base}\nSYSTEM {system}\nTEMPLATE {template}"
-        else:
-            modelfile = f"FROM {base}\nSYSTEM {system}"
+        name = self.create_model_name.get_text().lower().replace(":", "")
+        modelfile_buffer = self.create_model_modelfile.get_buffer()
+        modelfile_raw = modelfile_buffer.get_text(modelfile_buffer.get_start_iter(), modelfile_buffer.get_end_iter(), False)
+        modelfile = ["FROM {}".format(self.create_model_base.get_subtitle()), "SYSTEM {}".format(self.create_model_system.get_text())]
+        for line in modelfile_raw.split('\n'):
+            if not line.startswith('SYSTEM') and not line.startswith('FROM'):
+                modelfile.append(line)
         self.pulling_model_list_box.set_visible(True)
         model_row = Adw.ActionRow(
             title = name
         )
-        thread = threading.Thread(target=self.pull_model_process, kwargs={"model": name, "modelfile": modelfile})
+        thread = threading.Thread(target=self.pull_model_process, kwargs={"model": name, "modelfile": '\n'.join(modelfile)})
         overlay = Gtk.Overlay()
         progress_bar = Gtk.ProgressBar(
             valign = 2,
@@ -378,7 +376,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         overlay.set_child(model_row)
         overlay.add_overlay(progress_bar)
         self.pulling_model_list_box.append(overlay)
-        self.create_model_dialog.close()
+        self.navigation_view_manage_models.pop()
         self.manage_models_dialog.present(self)
         thread.start()
 
@@ -421,36 +419,32 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if mode == 1: return "{}:{}".format(name.split(" (")[0].replace(" ", "-").lower(), name.split(" (")[1][:-1])
 
     def check_alphanumeric(self, editable, text, length, position):
-        new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '_']])
+        new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '.', ':']])
         if new_text != text: editable.stop_emission_by_name("insert-text")
 
     def create_model(self, model:str, file:bool):
-        name = ""
-        system = ""
-        template = ""
+        modelfile_buffer = self.create_model_modelfile.get_buffer()
+        modelfile_buffer.delete(modelfile_buffer.get_start_iter(), modelfile_buffer.get_end_iter())
+        self.create_model_system.set_text('')
         if not file:
-            response = connection_handler.simple_post(f"{connection_handler.url}/api/show", json.dumps({"name": model}))
+            response = connection_handler.simple_post(f"{connection_handler.url}/api/show", json.dumps({"name": self.convert_model_name(model, 1)}))
             if response.status_code == 200:
                 data = json.loads(response.text)
-
+                modelfile = []
                 for line in data['modelfile'].split('\n'):
                     if line.startswith('SYSTEM'):
-                        system = line[len('SYSTEM'):].strip()
-                    elif line.startswith('TEMPLATE'):
-                        template = line[len('TEMPLATE'):].strip()
-                self.create_model_template.set_sensitive(False)
-                name = model.split(':')[0]
+                        self.create_model_system.set_text(line[len('SYSTEM'):].strip())
+                    if not line.startswith('SYSTEM') and not line.startswith('FROM') and not line.startswith('#'):
+                        modelfile.append(line)
+                self.create_model_name.set_text(self.convert_model_name(model, 1).split(':')[0] + "-custom")
+                modelfile_buffer.insert(modelfile_buffer.get_start_iter(), '\n'.join(modelfile), len('\n'.join(modelfile).encode('utf-8')))
+            else:
+                ##TODO ERROR MESSAGE
+                return
         else:
-            self.create_model_template.set_sensitive(True)
-            template = '"""{{ if .System }}<|start_header_id|>system<|end_header_id|>\n\n{{ .System }}<|eot_id|>{{ end }}{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>\n\n{{ .Prompt }}<|eot_id|>{{ end }}<|start_header_id|>assistant<|end_header_id|>\n{{ .Response }}<|eot_id|>"""'
-            name = model.split("/")[-1].split(".")[0]
-        self.create_model_base.set_subtitle(model)
-        self.create_model_name.set_text(name)
-        self.create_model_system.set_text(system)
-        self.create_model_template.set_text(template)
-        self.manage_models_dialog.close()
-        self.create_model_dialog.present(self)
-
+            self.create_model_name.set_text(model.split("/")[-1].split(".")[0])
+        self.create_model_base.set_subtitle(self.convert_model_name(model, 1))
+        self.navigation_view_manage_models.push_by_tag('model_create_page')
 
     def show_toast(self, message:str, overlay):
         logger.info(message)
@@ -995,6 +989,9 @@ Generate a title following these rules:
             GLib.idle_add(self.connection_error)
 
     def pull_model_update(self, data, model_name):
+        if 'error' in data:
+            self.pulling_models[model_name]['error'] = data['error']
+            return
         if model_name in list(self.pulling_models.keys()):
             if 'completed' in data and 'total' in data:
                 GLib.idle_add(self.pulling_models[model_name]['row'].set_subtitle, '<tt>{}%</tt>'.format(round(data['completed'] / data['total'] * 100, 2)))
@@ -1015,24 +1012,26 @@ Generate a title following these rules:
             response = connection_handler.stream_post(f"{connection_handler.url}/api/pull", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
         GLib.idle_add(self.update_list_local_models)
 
-        if response.status_code == 200:
+        if response.status_code == 200 and 'error' not in self.pulling_models[model]:
             GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model), Gio.ThemedIcon.new("emblem-ok-symbolic"))
             GLib.idle_add(self.show_toast, _("Model '{}' pulled successfully.").format(model), self.manage_models_overlay)
-            GLib.idle_add(self.pulling_models[model]['overlay'].get_parent().get_parent().remove, self.pulling_models[model]['overlay'].get_parent())
-            del self.pulling_models[model]
+        elif response.status_code == 200 and self.pulling_models[model]['error']:
+            GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}': {}").format(model, self.pulling_models[model]['error']), Gio.ThemedIcon.new("dialog-error-symbolic"))
+            GLib.idle_add(self.show_toast, _("Error pulling '{}': {}").format(model, self.pulling_models[model]['error']), self.manage_models_overlay)
         else:
             GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(model), Gio.ThemedIcon.new("dialog-error-symbolic"))
-            GLib.idle_add(self.pulling_models[model]['overlay'].get_parent().get_parent().remove, self.pulling_models[model]['overlay'].get_parent())
-            del self.pulling_models[model]
+            GLib.idle_add(self.show_toast, _("Error pulling '{}'").format(model), self.manage_models_overlay)
             GLib.idle_add(self.manage_models_dialog.close)
             GLib.idle_add(self.connection_error)
+
+        GLib.idle_add(self.pulling_models[model]['overlay'].get_parent().get_parent().remove, self.pulling_models[model]['overlay'].get_parent())
+        del self.pulling_models[model]
         if len(list(self.pulling_models.keys())) == 0:
             GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
     def pull_model(self, model):
+        if model in list(self.pulling_models.keys()) or model in self.local_models or ":" not in model: return
         logger.info("Pulling model")
-        if model in list(self.pulling_models.keys()) or model in self.local_models:
-            return
         self.pulling_model_list_box.set_visible(True)
         #self.pulling_model_list_box.connect('row_selected', lambda list_box, row: dialogs.stop_pull_model(self, row.get_name()) if row else None) #It isn't working for some reason
         model_name = self.convert_model_name(model, 0)
@@ -1565,6 +1564,7 @@ Generate a title following these rules:
         self.get_application().create_action('import_chat', lambda *_: self.import_chat(), ['<primary>i'])
         self.get_application().create_action('create_model_from_existing', lambda *_: dialogs.create_model_from_existing(self))
         self.get_application().create_action('create_model_from_file', lambda *_: dialogs.create_model_from_file(self))
+        self.get_application().create_action('create_model_from_name', lambda *_: dialogs.create_model_from_name(self))
         self.get_application().create_action('delete_chat', self.chat_actions)
         self.get_application().create_action('rename_chat', self.chat_actions)
         self.get_application().create_action('rename_current_chat', self.current_chat_actions)

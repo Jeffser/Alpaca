@@ -24,7 +24,6 @@
         <setter object="split_view_overlay" property="collapsed">true</setter>
         <setter object="welcome_dialog" property="width-request">360</setter>
         <setter object="manage_models_dialog" property="width-request">360</setter>
-        <setter object="create_model_dialog" property="width-request">360</setter>
         <setter object="preferences_dialog" property="width-request">360</setter>
         <setter object="file_preview_dialog" property="width-request">360</setter>
       </object>
@@ -454,127 +453,6 @@
       </child>
     </object>
 
-    <object class="AdwDialog" id="create_model_dialog">
-      <property name="can-close">true</property>
-      <property name="width-request">400</property>
-      <property name="height-request">600</property>
-      <child>
-        <object class="AdwToastOverlay" id="create_model_overlay">
-          <child>
-            <object class="AdwToolbarView">
-              <child type="bottom">
-                <object class="GtkActionBar">
-                  <property name="revealed">true</property>
-                  <child type="end">
-                    <object class="GtkButton">
-                      <property name="label" translatable="yes">Create</property>
-                      <signal name="clicked" handler="create_model_start"/>
-                      <style>
-                        <class name="suggested-action"/>
-                      </style>
-                    </object>
-                  </child>
-                </object>
-              </child>
-              <child type="top">
-                <object class="AdwHeaderBar">
-                  <property name="title-widget">
-                    <object class="AdwWindowTitle">
-                      <property name="title" translatable="yes">Create Model</property>
-                    </object>
-                  </property>
-                </object>
-              </child>
-              <child>
-                <object class="GtkScrolledWindow">
-                  <property name="vexpand">true</property>
-                  <property name="hexpand">true</property>
-                  <child>
-                    <object class="GtkBox">
-                      <property name="margin-start">12</property>
-                      <property name="margin-end">12</property>
-                      <property name="margin-top">12</property>
-                      <property name="margin-bottom">12</property>
-                      <property name="orientation">1</property>
-                      <property name="spacing">12</property>
-                      <child>
-                        <object class="GtkListBox">
-                          <style>
-                            <class name="boxed-list"/>
-                            <class name="card"/>
-                          </style>
-                          <property name="selection-mode">none</property>
-                          <child>
-                            <object class="AdwActionRow" id="create_model_base">
-                              <property name="title" translatable="yes">Base</property>
-                              <property name="subtitle"/>
-                              <style>
-                                <class name="property"/>
-                              </style>
-                            </object>
-                          </child>
-                        </object>
-                      </child>
-                      <child>
-                        <object class="GtkListBox">
-                          <style>
-                            <class name="boxed-list"/>
-                            <class name="card"/>
-                          </style>
-                          <property name="selection-mode">none</property>
-                          <child>
-                            <object class="AdwEntryRow" id="create_model_name">
-                              <property name="title" translatable="yes">Name</property>
-                              <property name="input-purpose">alpha</property>
-                            </object>
-                          </child>
-                          <child>
-                            <object class="AdwEntryRow" id="create_model_system">
-                              <property name="title" translatable="yes">Context</property>
-                              <property name="input-purpose">alpha</property>
-                            </object>
-                          </child>
-                        </object>
-                      </child>
-                      <child>
-                        <object class="GtkListBox">
-                          <style>
-                            <class name="boxed-list"/>
-                            <class name="card"/>
-                          </style>
-                          <property name="selection-mode">none</property>
-                          <child>
-                            <object class="AdwEntryRow" id="create_model_template">
-                              <property name="title" translatable="yes">Template</property>
-                              <property name="input-purpose">alpha</property>
-                            </object>
-                          </child>
-                          <child>
-                            <object class="GtkLabel">
-                              <property name="label" translatable="yes">Some models require a specific template. Please visit the model's website for more information if you're unsure.</property>
-                              <property name="margin-start">12</property>
-                              <property name="margin-end">12</property>
-                              <property name="margin-top">12</property>
-                              <property name="margin-bottom">12</property>
-                              <property name="halign">1</property>
-                              <property name="wrap">true</property>
-                              <style>
-                                <class name="caption"/>
-                              </style>
-                            </object>
-                          </child>
-                        </object>
-                      </child>
-                    </object>
-                  </child>
-                </object>
-              </child>
-            </object>
-          </child>
-        </object>
-      </child>
-    </object>
-
     <object class="AdwDialog" id="manage_models_dialog">
       <property name="can-close">true</property>
       <property name="width-request">400</property>
@@ -717,6 +595,143 @@
                                   <property name="selection-mode">single</property>
                                   <style>
                                     <class name="boxed-list"/>
+                                  </style>
+                                </object>
+                              </child>
+                            </object>
+                          </child>
+                        </object>
+                      </property>
+                    </object>
+                  </property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwNavigationPage">
+                  <property name="title" translatable="yes">Create Model</property>
+                  <property name="tag">model_create_page</property>
+                  <property name="child">
+                    <object class="AdwToolbarView">
+                      <child type="top">
+                        <object class="AdwHeaderBar">
+                          <child type="start">
+                            <object class="GtkButton">
+                              <signal name="clicked" handler="link_button_handler"/>
+                              <property name="icon-name">globe-symbolic</property>
+                            </object>
+                          </child>
+                        </object>
+                      </child>
+                      <property name="content">
+                        <object class="GtkScrolledWindow">
+                          <property name="vexpand">true</property>
+                          <property name="hexpand">true</property>
+                          <child>
+                            <object class="GtkBox">
+                              <property name="margin-start">12</property>
+                              <property name="margin-end">12</property>
+                              <property name="margin-top">12</property>
+                              <property name="margin-bottom">12</property>
+                              <property name="orientation">1</property>
+                              <property name="spacing">12</property>
+                              <child>
+                                <object class="GtkListBox">
+                                  <style>
+                                    <class name="boxed-list"/>
+                                    <class name="card"/>
+                                  </style>
+                                  <property name="selection-mode">none</property>
+                                  <child>
+                                    <object class="AdwActionRow" id="create_model_base">
+                                      <property name="title" translatable="yes">Base</property>
+                                      <property name="sensitive">false</property>
+                                      <property name="subtitle"/>
+                                      <style>
+                                        <class name="property"/>
+                                      </style>
+                                    </object>
+                                  </child>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="GtkListBox">
+                                  <style>
+                                    <class name="boxed-list"/>
+                                    <class name="card"/>
+                                  </style>
+                                  <property name="selection-mode">none</property>
+                                  <child>
+                                    <object class="AdwEntryRow" id="create_model_name">
+                                      <property name="title" translatable="yes">Name</property>
+                                      <property name="input-purpose">alpha</property>
+                                    </object>
+                                  </child>
+                                  <child>
+                                    <object class="AdwEntryRow" id="create_model_system">
+                                      <property name="title" translatable="yes">Context</property>
+                                      <property name="input-purpose">alpha</property>
+                                    </object>
+                                  </child>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="GtkListBox">
+                                  <style>
+                                    <class name="boxed-list"/>
+                                    <class name="card"/>
+                                  </style>
+                                  <property name="selection-mode">none</property>
+                                  <child>
+                                    <object class="GtkBox">
+                                      <property name="height-request">140</property>
+                                      <property name="margin-top">10</property>
+                                      <property name="margin-bottom">10</property>
+                                      <property name="margin-start">10</property>
+                                      <property name="margin-end">10</property>
+                                      <style>
+                                        <class name="card"/>
+                                      </style>
+                                      <child>
+                                        <object class="GtkScrolledWindow">
+                                          <property name="margin-start">10</property>
+                                          <property name="margin-end">10</property>
+                                          <child>
+                                            <object class="GtkTextView" id="create_model_modelfile">
+                                              <style>
+                                                <class name="modelfile_textview"/>
+                                              </style>
+                                              <property name="wrap-mode">word</property>
+                                              <property name="top-margin">10</property>
+                                              <property name="bottom-margin">10</property>
+                                              <property name="hexpand">true</property>
+                                            </object>
+                                          </child>
+                                        </object>
+                                      </child>
+                                    </object>
+                                  </child>
+                                  <child>
+                                    <object class="GtkLabel">
+                                      <property name="label" translatable="yes">Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) instructions automatically. Please visit the model's website or Ollama documentation for more information if you're unsure.</property>
+                                      <property name="margin-top">10</property>
+                                      <property name="margin-bottom">10</property>
+                                      <property name="margin-start">10</property>
+                                      <property name="margin-end">10</property>
+                                      <property name="halign">1</property>
+                                      <property name="wrap">true</property>
+                                      <style>
+                                        <class name="caption"/>
+                                      </style>
+                                    </object>
+                                  </child>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="GtkButton">
+                                  <property name="label" translatable="yes">Create</property>
+                                  <signal name="clicked" handler="create_model_start"/>
+                                  <style>
+                                    <class name="suggested-action"/>
                                   </style>
                                 </object>
                               </child>
@@ -1083,8 +1098,12 @@ By downloading any model you accept their license agreement available on the mod
         <attribute name="action">app.create_model_from_existing</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">From GGUF File (Experimental)</attribute>
+        <attribute name="label" translatable="yes">From GGUF File</attribute>
         <attribute name="action">app.create_model_from_file</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">From Name</attribute>
+        <attribute name="action">app.create_model_from_name</attribute>
       </item>
     </section>
   </menu>
