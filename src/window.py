@@ -68,6 +68,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     override_HIP_VISIBLE_DEVICES = Gtk.Template.Child()
 
     #Elements
+    regenerate_button : Gtk.Button = None
     create_model_base = Gtk.Template.Child()
     create_model_name = Gtk.Template.Child()
     create_model_system = Gtk.Template.Child()
@@ -613,6 +614,11 @@ Generate a title following these rules:
             css_classes = ["flat", "circular"],
             tooltip_text = _("Edit Message")
         )
+        regenerate_button = Gtk.Button(
+            icon_name = "update-symbolic",
+            css_classes = ["flat", "circular"],
+            tooltip_text = _("Regenerate Message")
+        )
 
         button_container = Gtk.Box(
             orientation=0,
@@ -728,9 +734,10 @@ Generate a title following these rules:
         delete_button.connect("clicked", lambda button, element=overlay: self.delete_message(element))
         copy_button.connect("clicked", lambda button, element=overlay: self.copy_message(element))
         edit_button.connect("clicked", lambda button, element=overlay, textview=message_text, button_container=button_container: self.edit_message(element, textview, button_container))
+        regenerate_button.connect('clicked', lambda button, id=id, bot_message_box=message_box, bot_message_button_container=button_container : self.regenerate_message(id, bot_message_box, bot_message_button_container))
         button_container.append(delete_button)
         button_container.append(copy_button)
-        if not bot: button_container.append(edit_button)
+        button_container.append(regenerate_button if bot else edit_button)
         overlay.add_overlay(button_container)
         self.chat_container.append(overlay)
 
@@ -955,15 +962,9 @@ Generate a title following these rules:
             first_paragraph = self.bot_message.get_text(self.bot_message.get_start_iter(), self.bot_message.get_end_iter(), False).split("\n")[0]
             GLib.idle_add(self.show_notification, self.chats["selected_chat"], first_paragraph[:100] + (first_paragraph[100:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
         else:
-            if id not in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
+            if not self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["content"] and self.loading_spinner:
                 GLib.idle_add(self.chat_container.remove, self.loading_spinner)
                 self.loading_spinner = None
-                self.chats["chats"][self.chats["selected_chat"]]["messages"][id] = {
-                    "role": "assistant",
-                    "model": data['model'],
-                    "date": datetime.now().strftime("%Y/%m/%d %H:%M:%S"),
-                    "content": ''
-                }
             GLib.idle_add(self.bot_message.insert, self.bot_message.get_end_iter(), data['message']['content'])
             self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['content'] += data['message']['content']
 
@@ -978,15 +979,64 @@ Generate a title following these rules:
     def run_message(self, messages, model, id):
         logger.debug("Running message")
         self.bot_message_button_container.set_visible(False)
-        response = connection_handler.stream_post(f"{connection_handler.url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=lambda data, id=id: self.update_bot_message(data, id))
-        GLib.idle_add(self.add_code_blocks)
-        GLib.idle_add(self.switch_send_stop_button)
-        GLib.idle_add(self.toggle_ui_sensitive, True)
-        if self.loading_spinner:
-            GLib.idle_add(self.chat_container.remove, self.loading_spinner)
-            self.loading_spinner = None
-        if response.status_code != 200:
+        self.chats["chats"][self.chats["selected_chat"]]["messages"][id] = {
+            "role": "assistant",
+            "model": model,
+            "date": datetime.now().strftime("%Y/%m/%d %H:%M:%S"),
+            "content": ''
+        }
+        if self.regenerate_button:
+            GLib.idle_add(self.chat_container.remove, self.regenerate_button)
+        try:
+            response = connection_handler.stream_post(f"{connection_handler.url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=lambda data, id=id: self.update_bot_message(data, id))
+            if response.status_code != 200: raise Exception('Network Error')
+            GLib.idle_add(self.add_code_blocks)
+        except Exception as e:
             GLib.idle_add(self.connection_error)
+            self.regenerate_button = Gtk.Button(
+                child=Adw.ButtonContent(
+                    icon_name='update-symbolic',
+                    label=_('Regenerate Response')
+                ),
+                css_classes=["suggested-action"],
+                halign=3
+            )
+            GLib.idle_add(self.chat_container.append, self.regenerate_button)
+            self.regenerate_button.connect('clicked', lambda button, id=id, bot_message_box=self.bot_message_box, bot_message_button_container=self.bot_message_button_container : self.regenerate_message(id, bot_message_box, bot_message_button_container))
+        finally:
+            GLib.idle_add(self.switch_send_stop_button)
+            GLib.idle_add(self.toggle_ui_sensitive, True)
+            if self.loading_spinner:
+                GLib.idle_add(self.chat_container.remove, self.loading_spinner)
+                self.loading_spinner = None
+
+    def regenerate_message(self, id, bot_message_box, bot_message_button_container):
+        self.bot_message_button_container = bot_message_button_container
+        self.bot_message_view = Gtk.TextView(
+            editable=False,
+            focusable=True,
+            wrap_mode= Gtk.WrapMode.WORD,
+            margin_top=12,
+            margin_bottom=12,
+            hexpand=True,
+            css_classes=["flat"]
+        )
+        self.bot_message = self.bot_message_view.get_buffer()
+        for widget in list(bot_message_box): bot_message_box.remove(widget)
+        bot_message_box.append(self.bot_message_view)
+        history = self.convert_history_to_ollama()[:list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()).index(id)]
+        if id in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
+            del self.chats["chats"][self.chats["selected_chat"]]["messages"][id]
+        data = {
+            "model": self.convert_model_name(self.model_drop_down.get_selected_item().get_string(), 1),
+            "messages": history,
+            "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
+            "keep_alive": f"{self.model_tweaks['keep_alive']}m"
+        }
+        self.switch_send_stop_button()
+        self.toggle_ui_sensitive(False)
+        thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], id))
+        thread.start()
 
     def pull_model_update(self, data, model_name):
         if 'error' in data:
