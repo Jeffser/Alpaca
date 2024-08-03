@@ -29,20 +29,21 @@ from pypdf import PdfReader
 from datetime import datetime
 from . import dialogs, local_instance, connection_handler, available_models_descriptions
 from .table_widget import TableWidget
+from .internal import config_dir, data_dir, cache_dir, source_dir
 
 logger = logging.getLogger(__name__)
 
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
-    config_dir = os.getenv("XDG_CONFIG_HOME")
-    data_dir = os.getenv("XDG_DATA_HOME")
     app_dir = os.getenv("FLATPAK_DEST")
-    cache_dir = os.getenv("XDG_CACHE_HOME")
+    config_dir = config_dir
+    data_dir = data_dir
+    cache_dir = cache_dir
 
     __gtype_name__ = 'AlpacaWindow'
 
-    localedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'locale')
+    localedir = os.path.join(source_dir, 'locale')
 
     gettext.bindtextdomain('com.jeffser.Alpaca', localedir)
     gettext.textdomain('com.jeffser.Alpaca')
@@ -1602,7 +1603,7 @@ Generate a title following these rules:
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
-        with open('/app/share/Alpaca/alpaca/available_models.json', 'r') as f:
+        with open(os.path.join(source_dir, 'available_models.json'), 'r') as f:
             self.available_models = json.load(f)
         if not os.path.exists(os.path.join(self.data_dir, "chats")):
             os.makedirs(os.path.join(self.data_dir, "chats"))
