@@ -27,6 +27,7 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw, GLib
 from .window import AlpacaWindow
+from .internal import cache_dir, data_dir
 
 
 logger = logging.getLogger(__name__)
@@ -63,7 +64,7 @@ class AlpacaApplication(Adw.Application):
             issue_url='https://github.com/Jeffser/Alpaca/issues',
             license_type=3,
             website="https://jeffser.com/alpaca",
-            debug_info=open(os.path.join(os.getenv("XDG_DATA_HOME"), 'tmp.log'), 'r').read())
+            debug_info=open(os.path.join(data_dir, 'tmp.log'), 'r').read())
         about.present(parent=self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
@@ -75,16 +76,16 @@ class AlpacaApplication(Adw.Application):
 
 
 def main(version):
-    if os.path.isfile(os.path.join(os.getenv("XDG_DATA_HOME"), 'tmp.log')):
-        os.remove(os.path.join(os.getenv("XDG_DATA_HOME"), 'tmp.log'))
-    if os.path.isdir(os.path.join(os.getenv("XDG_CACHE_HOME"), 'tmp')):
-        os.system('rm -rf ' + os.path.join(os.getenv("XDG_CACHE_HOME"), "tmp/*"))
+    if os.path.isfile(os.path.join(data_dir, 'tmp.log')):
+        os.remove(os.path.join(data_dir, 'tmp.log'))
+    if os.path.isdir(os.path.join(cache_dir, 'tmp')):
+        os.system('rm -rf ' + os.path.join(cache_dir, "tmp/*"))
     else:
-        os.mkdir(os.path.join(os.getenv("XDG_CACHE_HOME"), 'tmp'))
+        os.mkdir(os.path.join(cache_dir, 'tmp'))
     logging.basicConfig(
         format="%(levelname)s\t[%(filename)s | %(funcName)s] %(message)s",
         level=logging.INFO,
-        handlers=[logging.FileHandler(filename=os.path.join(os.getenv("XDG_DATA_HOME"), 'tmp.log')), logging.StreamHandler(stream=sys.stdout)]
+        handlers=[logging.FileHandler(filename=os.path.join(data_dir, 'tmp.log')), logging.StreamHandler(stream=sys.stdout)]
     )
     app = AlpacaApplication(version)
     logger.info(f"Alpaca version: {app.version}")

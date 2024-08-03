@@ -44,7 +44,8 @@ alpaca_sources = [
   'local_instance.py',
   'available_models.json',
   'available_models_descriptions.py',
-  'table_widget.py'
+  'table_widget.py',
+  'internal.py'
 ]
 
 install_data(alpaca_sources, install_dir: moduledir)
