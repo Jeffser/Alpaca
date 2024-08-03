@@ -32,6 +32,17 @@ from .internal import cache_dir, data_dir
 
 logger = logging.getLogger(__name__)
 
+translators = [
+    'Alex K (Russian) https://github.com/alexkdeveloper',
+    'Jeffry Samuel (Spanish) https://github.com/jeffser',
+    'Louis Chauvet-Villaret (French) https://github.com/loulou64490',
+    'Théo FORTIN (French) https://github.com/topiga',
+    'Daimar Stein (Brazilian Portuguese) https://github.com/not-a-dev-stein',
+    'CounterFlow64 (Norwegian) https://github.com/CounterFlow64',
+    'Aritra Saha (Bengali) https://github.com/olumolu',
+    'Yuehao Sui (Simplified Chinese) https://github.com/8ar10der',
+    'Aleksana (Simplified Chinese) https://github.com/Aleksanaa'
+]
 
 class AlpacaApplication(Adw.Application):
     """The main application singleton class."""
@@ -59,7 +70,7 @@ class AlpacaApplication(Adw.Application):
             support_url="https://github.com/Jeffser/Alpaca/discussions/155",
             developers=['Jeffser https://jeffser.com'],
             designers=['Jeffser https://jeffser.com', 'Tobias Bernard (App Icon) https://tobiasbernard.com/'],
-            translator_credits='Alex K (Russian) https://github.com/alexkdeveloper\nJeffser (Spanish) https://jeffser.com\nDaimar Stein (Brazilian Portuguese) https://github.com/not-a-dev-stein\nLouis Chauvet-Villaret (French) https://github.com/loulou64490\nCounterFlow64 (Norwegian) https://github.com/CounterFlow64\nAritra Saha (Bengali) https://github.com/olumolu\nYuehao Sui (Simplified Chinese) https://github.com/8ar10der',
+            translator_credits='\n'.join(translators),
             copyright='© 2024 Jeffser\n© 2024 Ollama',
             issue_url='https://github.com/Jeffser/Alpaca/issues',
             license_type=3,
