@@ -399,6 +399,8 @@ def support_response(self, dialog, task):
     elif res == 'support':
         self.show_toast(_("Thank you!"), self.main_overlay)
         os.system('xdg-open https://github.com/sponsors/Jeffser')
+    elif res == 'nope':
+        self.show_toast(_("Visit Alpaca's website if you change your mind!"), self.main_overlay)
     self.show_support = False
     self.save_server_config()
 
