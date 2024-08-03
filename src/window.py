@@ -952,7 +952,7 @@ Generate a title following these rules:
         vadjustment = self.chat_window.get_vadjustment()
         if id not in self.chats["chats"][self.chats["selected_chat"]]["messages"] or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
-        if data['done']:
+        if 'done' in data and data['done']:
             formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["date"], '%Y/%m/%d %H:%M:%S')))
             text = f"\n\n{self.convert_model_name(data['model'], 0)}\n<small>{formated_date}</small>"
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text.encode('utf-8')))
