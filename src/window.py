@@ -68,6 +68,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     override_HIP_VISIBLE_DEVICES = Gtk.Template.Child()
 
     #Elements
+    split_view_overlay = Gtk.Template.Child()
     regenerate_button : Gtk.Button = None
     create_model_base = Gtk.Template.Child()
     create_model_name = Gtk.Template.Child()
@@ -1622,6 +1623,7 @@ Generate a title following these rules:
         self.get_application().create_action('rename_current_chat', self.current_chat_actions)
         self.get_application().create_action('export_chat', self.chat_actions)
         self.get_application().create_action('export_current_chat', self.current_chat_actions)
+        self.get_application().create_action('toggle_sidebar', lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9'])
         self.message_text_view.connect("paste-clipboard", self.on_clipboard_paste)
         self.file_preview_remove_button.connect('clicked', lambda button : dialogs.remove_attached_file(self, button.get_name()))
         self.add_chat_button.connect("clicked", lambda button : self.new_chat())

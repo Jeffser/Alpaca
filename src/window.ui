@@ -1135,7 +1135,7 @@ By downloading any model you accept their license agreement available on the mod
             <property name="title" translatable="yes">General</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;Q</property>
+                <property name="accelerator">&lt;ctrl&gt;W</property>
                 <property name="title" translatable="yes">Close application</property>
               </object>
             </child>
@@ -1153,7 +1153,7 @@ By downloading any model you accept their license agreement available on the mod
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;P</property>
+                <property name="accelerator">&lt;ctrl&gt;comma</property>
                 <property name="title" translatable="yes">Preferences</property>
               </object>
             </child>
@@ -1167,6 +1167,12 @@ By downloading any model you accept their license agreement available on the mod
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;ctrl&gt;slash</property>
                 <property name="title" translatable="yes">Show shortcuts window</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">F9</property>
+                <property name="title" translatable="yes">Toggle sidebar</property>
               </object>
             </child>
           </object>
