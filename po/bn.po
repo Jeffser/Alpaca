@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0.4\n"
+"Project-Id-Version: 1.0.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-03 00:42-0600\n"
 "PO-Revision-Date: 2024-07-18 15:12-0600\n"
@@ -123,19 +123,19 @@ msgstr "নতুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "Regenerate any response, even if they are incomplete"
-msgstr ""
+msgstr "সম্পূর্ণ না হলেও যে কোনও উত্তর পুনরুত্পাদন করুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:89
 msgid "Support for pulling models by name:tag"
-msgstr ""
+msgstr "নাম:ট্যাগ দ্বারা মডেল টানার জন্য সহায়তা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Stable support for GGUF model files"
-msgstr ""
+msgstr "GGUF মডেল ফাইলের জন্য স্থিতিশীল সহায়তা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Restored sidebar toggle button"
-msgstr ""
+msgstr "সাইডবার টগল বোতাম পুনরুদ্ধার করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
@@ -147,27 +147,27 @@ msgstr "সংশোধন করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Reverted back to standard styles"
-msgstr ""
+msgstr "মানক শৈলীতে ফিরে আসা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Fixed generated titles having \"'S\" for some reason"
-msgstr ""
+msgstr "কোনও কারণে \"'S\" থাকা উত্পাদিত শিরোনামগুলি সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Changed min width for model dropdown"
-msgstr ""
+msgstr "মডেল ড্রপডাউনের জন্য সর্বনিম্ন প্রস্থ পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Changed message entry shadow"
-msgstr ""
+msgstr "বার্তা প্রবেশ ছায়া পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "The last model used is now restored when the user changes chat"
-msgstr ""
+msgstr "ব্যবহারকারী চ্যাট পরিবর্তন করলে সর্বশেষ ব্যবহৃত মডেলটি এখন পুনরুদ্ধার করা হয়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Better check for message finishing"
-msgstr ""
+msgstr "বার্তা সমাপ্তির জন্য উন্নত পরীক্ষা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:109
 msgid "Added table rendering (Thanks Nokse)"
@@ -181,10 +181,11 @@ msgstr "সাপোর্ট ডায়ালগকে আরও সাধা
 msgid ""
 "Dialog title on tag chooser when downloading models didn't display properly"
 msgstr ""
+"মডেল ডাউনলোড করার সময় ট্যাগ চয়সারের ডায়ালগ শিরোনাম সঠিকভাবে প্রদর্শিত হয়নি"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Prevent chat generation from generating a title with multiple lines"
-msgstr ""
+msgstr "একাধিক লাইন সহ শিরোনাম তৈরি করা থেকে চ্যাট জেনারেশন বন্ধ করুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Bearer Token entry on connection error dialog"
@@ -1079,7 +1080,7 @@ msgstr "বার্তা সম্পাদনা করুন"
 
 #: src/window.py:620
 msgid "Regenerate Message"
-msgstr ""
+msgstr "বার্তা পুনরুত্পাদন করুন"
 
 #: src/window.py:673
 msgid "Missing Image"
@@ -1091,11 +1092,11 @@ msgstr "ছবি খুঁজে পাওয়া যায়নি"
 
 #: src/window.py:773
 msgid "Remove '{}'"
-msgstr ""
+msgstr "'{}' অপসারণ করুন"
 
 #: src/window.py:907
 msgid "Code Block"
-msgstr ""
+msgstr "কোড ব্লক"
 
 #: src/window.py:939
 msgid "Code copied to the clipboard"
@@ -1103,7 +1104,7 @@ msgstr "ক্লিপবোর্ডে কোড কপি করা হয�
 
 #: src/window.py:999
 msgid "Regenerate Response"
-msgstr ""
+msgstr "উত্তর পুনরুত্পাদন করুন"
 
 #: src/window.py:1066
 msgid "Task Complete"
@@ -1119,11 +1120,11 @@ msgstr "মডেল পুল ত্রুটি"
 
 #: src/window.py:1069
 msgid "Failed to pull model '{}': {}"
-msgstr ""
+msgstr "মডেল '{}' পুল করা ব্যর্থ: {}"
 
 #: src/window.py:1070
 msgid "Error pulling '{}': {}"
-msgstr ""
+msgstr "'{}' পুল করার ত্রুটি: {}"
 
 #: src/window.py:1072
 msgid "Failed to pull model '{}' due to network error."
@@ -1131,11 +1132,11 @@ msgstr "নেটওয়ার্ক ত্রুটির কারণে ম
 
 #: src/window.py:1073
 msgid "Error pulling '{}'"
-msgstr ""
+msgstr "'{}' পুল করার ত্রুটি"
 
 #: src/window.py:1106
 msgid "Stop Pulling '{}'"
-msgstr ""
+msgstr "'{}' পুল করা বন্ধ করুন"
 
 #: src/window.py:1149
 msgid "Image Recognition"
@@ -1836,6 +1837,8 @@ msgid ""
 "InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
 "outstanding reasoning capability."
 msgstr ""
+"InternLM2.5 হল ৭বি প্যারামিটার মডেল যা ব্যবহারিক দৃশ্যপটের জন্য তৈরি করা হয়েছে এবং উল্লেখযোগ্য "
+"যুক্তি ক্ষমতা রয়েছে।"
 
 #: src/available_models_descriptions.py:100
 msgid ""
@@ -1850,28 +1853,34 @@ msgid ""
 "A series of models from Groq that represent a significant advancement in "
 "open-source AI capabilities for tool use/function calling."
 msgstr ""
+"Groq থেকে একটি মডেল সিরিজ যা টুল ব্যবহার/ফাংশন কলিংয়ের জন্য ওপেন-সোর্স AI ক্ষমতায় "
+"উল্লেখযোগ্য অগ্রগতি প্রতিনিধিত্ব করে।"
 
 #: src/available_models_descriptions.py:102
 msgid ""
 "MathΣtral: a 7B model designed for math reasoning and scientific discovery "
 "by Mistral AI."
 msgstr ""
+"MathΣtral: Mistral AI দ্বারা গণিত যুক্তি এবং বৈজ্ঞানিক আবিষ্কারের জন্য ৭বি মডেল ডিজাইন করা হয়েছে।"
 
 #: src/available_models_descriptions.py:103
 msgid ""
 "An open weights function calling model based on Llama 3, competitive with "
 "GPT-4o function calling capabilities."
 msgstr ""
+"Llama 3 এর উপর ভিত্তি করে ওপেন ওজন ফাংশন কলিং মডেল, GPT-4o ফাংশন কলিং ক্ষমতার "
+"সাথে প্রতিযোগিতামূলক।"
 
 #: src/available_models_descriptions.py:104
 msgid ""
 "A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
 "information extraction, based on Phi-3."
 msgstr ""
+"তথ্য নির্যাসের জন্য ব্যক্তিগত উচ্চ-মানের সিন্থেটিক ডাটাসেটের উপর ফাইন-টিউন করা ৩.৮বি মডেল, Phi-3 এর উপর ভিত্তি করে।"
 
 #: src/dialogs.py:17
 msgid "Chat cannot be cleared while receiving a message"
-msgstr ""
+msgstr "বার্তা প্রাপ্তির সময় চ্যাট পরিষ্কার করা যায়না"
 
 #: src/dialogs.py:20
 msgid "Clear Chat?"
@@ -1993,13 +2002,15 @@ msgstr "মডেল তৈরি করার সময় একটি ত্�
 
 #: src/dialogs.py:269
 msgid "Pull Model"
-msgstr ""
+msgstr "মডেল পুল করুন"
 
 #: src/dialogs.py:270
 msgid ""
 "Input the name of the model in this format\n"
 "name:tag"
 msgstr ""
+"এই ফরম্যাটে মডেলের নাম ইনপুট করুন\n"
+"নাম:ট্যাগ"
 
 #: src/dialogs.py:333
 msgid "This video does not have any transcriptions"
@@ -2037,27 +2048,27 @@ msgstr ""
 
 #: src/dialogs.py:400
 msgid "Thank you!"
-msgstr ""
+msgstr "ধন্যবাদ!"
 
 #: src/dialogs.py:403
 msgid "Visit Alpaca's website if you change your mind!"
-msgstr ""
+msgstr "আপনি আপনার মন পরিবর্তন করলে Alpaca এর ওয়েবসাইট ভিজিট করুন!"
 
 #: src/dialogs.py:409 src/dialogs.py:416
 msgid "Support"
-msgstr ""
+msgstr "সহায়তা"
 
 #: src/dialogs.py:410
 msgid "Are you enjoying Alpaca? Consider sponsoring the project!"
-msgstr ""
+msgstr "আপনি কি Alpaca উপভোগ করছেন? প্রকল্পটি স্পনসর করার কথা বিবেচনা করুন!"
 
 #: src/dialogs.py:413
 msgid "Don't show again"
-msgstr ""
+msgstr "আর দেখাবেন না"
 
 #: src/dialogs.py:415
 msgid "Later"
-msgstr ""
+msgstr "পরে"
 
 #: src/window.ui:51
 msgid "Menu"
@@ -2204,14 +2215,15 @@ msgid ""
 "instructions automatically. Please visit the model's website or Ollama "
 "documentation for more information if you're unsure."
 msgstr ""
+"কিছু মডেল মডেলফাইল প্রয়োজন, আলপাকা FROM এবং SYSTEM (কন্টেক্সট) নির্দেশাবলী স্বয়ংক্রিয়ভাবে পূরণ করে। আপনি অনিশ্চিত হলে মডেলের ওয়েবসাইট বা ওল্লামা ডকুমেন্টেশন ভিজিট করুন আরও তথ্যের জন্য।"
 
 #: src/window.ui:763
 msgid "Open With Default App"
-msgstr ""
+msgstr "ডিফল্ট অ্যাপের সাথে খুলুন"
 
 #: src/window.ui:771
 msgid "Remove Attachment"
-msgstr ""
+msgstr "সংযুক্তি অপসারণ করুন"
 
 #: src/window.ui:833
 msgid "Previous"
@@ -2311,11 +2323,11 @@ msgstr "বিদ্যমান মডেল থেকে"
 
 #: src/window.ui:1101
 msgid "From GGUF File"
-msgstr ""
+msgstr "GGUF ফাইল থেকে"
 
 #: src/window.ui:1105
 msgid "From Name"
-msgstr ""
+msgstr "নাম থেকে"
 
 #: src/window.ui:1151
 msgid "Close application"
