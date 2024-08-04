@@ -391,32 +391,3 @@ def attach_website(self, url):
         callback = lambda dialog, task, url=url: attach_website_response(self, dialog, task, url)
     )
 
-# Begging for money :3
-
-def support_response(self, dialog, task):
-    res = dialog.choose_finish(task)
-    if res == 'later': return
-    elif res == 'support':
-        self.show_toast(_("Thank you!"), self.main_overlay)
-        os.system('xdg-open https://github.com/sponsors/Jeffser')
-    elif res == 'nope':
-        self.show_toast(_("Visit Alpaca's website if you change your mind!"), self.main_overlay)
-    self.show_support = False
-    self.save_server_config()
-
-def support(self):
-    dialog = Adw.AlertDialog(
-        heading=_("Support"),
-        body=_("Are you enjoying Alpaca? Consider sponsoring the project!"),
-        close_response="nope"
-    )
-    dialog.add_response("nope", _("Don't show again"))
-    dialog.set_response_appearance("nope", Adw.ResponseAppearance.DESTRUCTIVE)
-    dialog.add_response("later", _("Later"))
-    dialog.add_response("support", _("Support"))
-    dialog.set_response_appearance("support", Adw.ResponseAppearance.SUGGESTED)
-    dialog.choose(
-        parent = self,
-        cancellable = None,
-        callback = lambda dialog, task: support_response(self, dialog, task)
-    )
