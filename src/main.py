@@ -76,6 +76,7 @@ class AlpacaApplication(Adw.Application):
             license_type=3,
             website="https://jeffser.com/alpaca",
             debug_info=open(os.path.join(data_dir, 'tmp.log'), 'r').read())
+        about.add_link("Become a Sponsor", "https://github.com/sponsors/Jeffser")
         about.present(parent=self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
