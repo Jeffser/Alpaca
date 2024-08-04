@@ -5,7 +5,7 @@
   <template class="AlpacaWindow" parent="AdwApplicationWindow">
     <signal name="close-request" handler="closing_app"/>
     <property name="resizable">True</property>
-    <property name="width-request">360</property>
+    <property name="width-request">400</property>
     <property name="height-request">400</property>
     <property name="default-width">1300</property>
     <property name="default-height">800</property>
@@ -14,18 +14,6 @@
       <object class="AdwBreakpoint">
         <condition>max-width: 800sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
-      </object>
-    </child>
-    <child>
-    </child>
-    <child>
-      <object class="AdwBreakpoint">
-        <condition>max-width: 500sp</condition>
-        <setter object="split_view_overlay" property="collapsed">true</setter>
-        <setter object="welcome_dialog" property="width-request">360</setter>
-        <setter object="manage_models_dialog" property="width-request">360</setter>
-        <setter object="preferences_dialog" property="width-request">360</setter>
-        <setter object="file_preview_dialog" property="width-request">360</setter>
       </object>
     </child>
     <property name="content">
@@ -89,7 +77,7 @@
                         <child>
                           <object class="GtkDropDown" id="model_drop_down">
                             <signal name="notify" handler="verify_if_image_can_be_used"/>
-                            <property name="width-request">175</property>
+                            <property name="width-request">200</property>
                             <property name="enable-search">true</property>
                             <property name="tooltip-text">Select Model</property>
                             <property name="model">
