@@ -613,9 +613,10 @@ Generate a title following these rules:
             margin_start=12,
             margin_end=12,
             hexpand=True,
-            cursor_visible=False,
             css_classes=["flat"],
         )
+        if not bot:
+            message_text.update_property([4, 7, 1], [_("User message"), True, msg])
         message_buffer = message_text.get_buffer()
         message_buffer.insert(message_buffer.get_end_iter(), msg)
         if footer is not None:
@@ -684,6 +685,7 @@ Generate a title following these rules:
                         name=os.path.join(self.data_dir, "chats", "{selected_chat}", message_id, image),
                         tooltip_text=_("Image")
                     )
+                    image_element.update_property([4], [_("Image")])
                     button.connect("clicked", lambda button, file_path=path: self.preview_file(file_path, 'image', None))
                 except Exception as e:
                     logger.error(e)
@@ -710,6 +712,7 @@ Generate a title following these rules:
                         css_classes=["flat", "chat_image_button"],
                         tooltip_text=_("Missing Image")
                     )
+                    image_texture.update_property([4], [_("Missing image")])
                     button.connect("clicked", lambda button : self.show_toast(_("Missing image"), self.main_overlay))
                 image_container.append(button)
             message_box.append(image_scroller)
@@ -903,6 +906,7 @@ Generate a title following these rules:
 
                 if footer: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer.encode('utf-8')))
 
+                message_text.update_property([4, 7, 1], [_("Response message"), False, message_buffer.get_text(message_buffer.get_start_iter(), message_buffer.get_end_iter(), False)])
                 self.bot_message_box.append(message_text)
             elif part['type'] == 'code':
                 language = None
@@ -922,6 +926,7 @@ Generate a title following these rules:
                     auto_indent=True, indent_width=4, buffer=buffer, show_line_numbers=True,
                     top_margin=6, bottom_margin=6, left_margin=12, right_margin=12
                 )
+                source_view.update_property([4], [_("{}Code Block").format('{} '.format(language.get_name()) if language else "")])
                 source_view.set_editable(False)
                 code_block_box = Gtk.Box(css_classes=["card"], orientation=1, overflow=1)
                 title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=3)
@@ -1162,7 +1167,9 @@ Generate a title following these rules:
                     subtitle = tag_data[1],
                     name = f"{model_name}:{tag_data[0]}"
                 )
-                tag_row.add_suffix(Gtk.Image.new_from_icon_name("folder-download-symbolic"))
+                download_icon = Gtk.Image.new_from_icon_name("folder-download-symbolic")
+                tag_row.add_suffix(download_icon)
+                download_icon.update_property([4], [_("Download {}:{}").format(model_name, tag_data[0])])
                 self.model_tag_list_box.append(tag_row)
 
     def update_list_available_models(self):
@@ -1175,12 +1182,9 @@ Generate a title following these rules:
                 subtitle = available_models_descriptions.descriptions[name] + ("\n\n<b>{}</b>".format(_("Image Recognition")) if model_info['image'] else ""),
                 name = name
             )
-            if model_info["image"]:
-                image_icon = Gtk.Image.new_from_icon_name("image-x-generic-symbolic")
-                image_icon.set_margin_start(5)
-                #model.add_suffix(image_icon)
             next_icon = Gtk.Image.new_from_icon_name("go-next")
             next_icon.set_margin_start(5)
+            next_icon.update_property([4], [_("Enter download menu for {}").format(name.replace("-", ""))])
             model.add_suffix(next_icon)
             self.available_model_list_box.append(model)
 
@@ -1613,7 +1617,8 @@ Generate a title following these rules:
                     self.attach_file(os.path.join(self.cache_dir, 'tmp/images/{}'.format(image_name)), 'image')
                 else:
                     self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
-        except Exception as e: 'huh'
+        except Exception as e:
+            pass
 
     def on_clipboard_paste(self, textview):
         logger.debug("Pasting from clipboard")

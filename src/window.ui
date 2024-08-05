@@ -215,6 +215,10 @@
                                             <property name="top-margin">10</property>
                                             <property name="bottom-margin">10</property>
                                             <property name="hexpand">true</property>
+                                            <property name="input-hints">spellcheck</property>
+                                            <accessibility>
+                                              <property name="label" translatable="yes">Message text box</property>
+                                            </accessibility>
                                           </object>
                                         </child>
                                       </object>
@@ -442,6 +446,9 @@
     </object>
 
     <object class="AdwDialog" id="manage_models_dialog">
+      <accessibility>
+        <property name="label" translatable="yes">Manage models dialog</property>
+      </accessibility>
       <property name="can-close">true</property>
       <property name="width-request">400</property>
       <property name="height-request">600</property>
@@ -476,12 +483,18 @@
                       </child>
                       <child type="top">
                         <object class="GtkSearchBar" id="model_searchbar">
+                          <accessibility>
+                            <property name="label" translatable="yes">Model search bar</property>
+                          </accessibility>
                           <property name="key-capture-widget">AlpacaWindow</property>
                           <child>
                             <object class="GtkSearchEntry" id="searchentry">
                               <signal name="search-changed" handler="model_search_changed"/>
                               <property name="search-delay">100</property>
                               <property name="placeholder-text" translatable="yes">Search models</property>
+                              <accessibility>
+                                <property name="label" translatable="yes">Search models</property>
+                              </accessibility>
                             </object>
                           </child>
                         </object>
@@ -738,6 +751,9 @@
     </object>
 
     <object class="AdwDialog" id="file_preview_dialog">
+      <accessibility>
+        <property name="label" translatable="yes">File preview dialog</property>
+      </accessibility>
       <property name="can-close">true</property>
       <property name="width-request">400</property>
       <property name="height-request">600</property>
