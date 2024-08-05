@@ -6,8 +6,8 @@ import os
 import logging
 from pytube import YouTube
 from html2text import html2text
-from . import connection_handler
 from gi.repository import Adw, Gtk
+from . import connection_handler
 
 logger = logging.getLogger(__name__)
 # CLEAR CHAT | WORKS
@@ -307,8 +307,8 @@ def attach_file_response(self, file_dialog, result):
         return
     self.attach_file(file.get_path(), file_type)
 
-def attach_file(self, filter):
-    file_dialog = Gtk.FileDialog(default_filter=filter)
+def attach_file(self, file_filter):
+    file_dialog = Gtk.FileDialog(default_filter=file_filter)
     file_dialog.open(self, None, lambda file_dialog, result: attach_file_response(self, file_dialog, result))
 
 # YouTube caption | WORKS

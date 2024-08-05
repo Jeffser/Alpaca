@@ -1,3 +1,8 @@
+#table_widget
+"""
+Handles the table widget shown in chat responses
+"""
+
 import gi
 from gi.repository import Adw
 from gi.repository import Gtk, GObject, Gio

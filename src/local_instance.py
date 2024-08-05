@@ -1,5 +1,10 @@
 # local_instance.py
-import subprocess, os, threading
+"""
+Handles running, stopping and resetting the integrated Ollama instance
+"""
+import subprocess
+import os
+import threading
 from time import sleep
 from logging import getLogger
 from .internal import data_dir, cache_dir
@@ -39,4 +44,3 @@ def reset():
     stop()
     sleep(1)
     start()
-

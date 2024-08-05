@@ -16,7 +16,9 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-
+"""
+Main script run at launch, handles actions, about dialog and the app itself (not the window)
+"""
 import sys
 import logging
 import gi
