@@ -4,7 +4,6 @@ Handles running, stopping and resetting the integrated Ollama instance
 """
 import subprocess
 import os
-import threading
 from time import sleep
 from logging import getLogger
 from .internal import data_dir, cache_dir
@@ -19,7 +18,7 @@ overrides = {}
 def start():
     if not os.path.isdir(os.path.join(cache_dir, 'tmp/ollama')):
         os.mkdir(os.path.join(cache_dir, 'tmp/ollama'))
-    global instance, overrides
+    global instance
     params = overrides.copy()
     params["OLLAMA_HOST"] = f"127.0.0.1:{port}" # You can't change this directly sorry :3
     params["HOME"] = data_dir

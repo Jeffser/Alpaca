@@ -19,17 +19,19 @@
 """
 Handles the main window
 """
-
-import gi
-gi.require_version('GtkSource', '5')
-gi.require_version('GdkPixbuf', '2.0')
-from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
 import json, requests, threading, os, re, base64, sys, gettext, locale, subprocess, uuid, shutil, tarfile, tempfile, logging, random
 from time import sleep
 from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
 from datetime import datetime
+
+import gi
+gi.require_version('GtkSource', '5')
+gi.require_version('GdkPixbuf', '2.0')
+
+from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
+
 from . import dialogs, local_instance, connection_handler, available_models_descriptions
 from .table_widget import TableWidget
 from .internal import config_dir, data_dir, cache_dir, source_dir

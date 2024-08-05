@@ -1,4 +1,4 @@
-#table_widget
+#table_widget.py
 """
 Handles the table widget shown in chat responses
 """
