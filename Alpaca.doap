@@ -1,40 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+<Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:foaf="http://xmlns.com/foaf/0.1/"
-         xmlns:doap="http://usefulinc.com/ns/doap#">
+         xmlns:gnome="http://api.gnome.org/doap-extensions#"
+         xmlns="http://usefulinc.com/ns/doap#">
 
-  <doap:Project rdf:about="https://github.com/Jeffser/Alpaca">
-    <doap:name>Alpaca</doap:name>
-    <doap:homepage rdf:resource="https://jeffser.com/alpaca/"/>
-    <doap:description>An Ollama client made with GTK4 and Adwaita.</doap:description>
-    <doap:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2024-05-12</doap:created>
-    <doap:license rdf:resource="https://opensource.org/license/gpl-3-0"/>
-    <doap:programming-language>Python</doap:programming-language>
-    <doap:repository>
-      <doap:GitRepository>
-        <doap:browse rdf:resource="https://github.com/Jeffser/Alpaca"/>
-        <doap:location rdf:resource="https://github.com/Jeffser/Alpaca.git"/>
-      </doap:GitRepository>
-    </doap:repository>
+  <name xml:lang="en">Alpaca</name>
+  <shortdesc xml:lang="en">An Ollama client made with GTK4 and Adwaita</shortdesc>
+  <homepage rdf:resource="https://jeffser.com/alpaca" />
+  <bug-database rdf:resource="https://github.com/Jeffser/Alpaca/issues"/>
+  <programming-language>Python</programming-language>
 
-    <doap:platform>GTK 4</doap:platform>
-    <doap:platform>Libadwaita</doap:platform>
+  <platform>GTK 4</platform>
+  <platform>Libadwaita</platform>
 
-    <doap:maintainer>
-      <foaf:Person>
-        <foaf:name>Jeffry Samuel</foaf:name>
-        <foaf:mbox rdf:resource="mailto:jeffrysamuer@gmail.com"/>
-      </foaf:Person>
-    </doap:maintainer>
-
-    <doap:developer>
-      <foaf:Person>
-        <foaf:name>Jeffry Samuel</foaf:name>
-        <foaf:mbox rdf:resource="mailto:jeffrysamuer@gmail.com"/>
-      </foaf:Person>
-    </doap:developer>
-
-  </doap:Project>
-
-</rdf:RDF>
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>Jeffry Samuel</foaf:name>
+      <foaf:mbox rdf:resource="mailto:jeffrysamuer@gmail.com"/>
+      <foaf:account>
+        <foaf:OnlineAccount>
+          <foaf:accountServiceHomepage rdf:resource="https://github.com"/>
+          <foaf:accountName>jeffser</foaf:accountName>
+        </foaf:OnlineAccount>
+      </foaf:account>
+      <foaf:account>
+        <foaf:OnlineAccount>
+          <foaf:accountServiceHomepage rdf:resource="https://gitlab.gnome.org"/>
+          <foaf:accountName>jeffser</foaf:accountName>
+        </foaf:OnlineAccount>
+      </foaf:account>
+    </foaf:Person>
+  </maintainer>
+</Project>
