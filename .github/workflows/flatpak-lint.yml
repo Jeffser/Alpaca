@@ -19,6 +19,10 @@ jobs:
       - name: Install GNOME SDK 46
         run: |
           flatpak install --user flathub org.gnome.Sdk//46 -y
+
+      - name: Install Flatpak Builder
+        run: |
+          flatpak install --user flathub org.flatpak.Builder -y
       
       - name: Checkout code
         uses: actions/checkout@v2
