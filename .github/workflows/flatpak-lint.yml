@@ -1,0 +1,30 @@
+# .github/workflows/flatpak-lint.yml
+name: Flatpak Lint
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Flatpak and Flatpak Builder
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y flatpak flatpak-builder
+          
+          # Add the Flathub repository
+          flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+          # Add the GNOME runtime repository
+          flatpak remote-add --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Lint Flatpak Manifest
+        run: |
+          flatpak run org.flatpak.Builder --force-clean --sandbox --user --install --install-deps-from=flathub --ccache --mirror-screenshots-url=https://dl.flathub.org/media/ --repo=repo builddir com.jeffser.Alpaca.json
+          flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest com.jeffser.Alpaca.json
+          flatpak run --command=flatpak-builder-lint org.flatpak.Builder repo repo
