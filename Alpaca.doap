@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:doap="http://usefulinc.com/ns/doap#">
+
+  <doap:Project rdf:about="https://github.com/Jeffser/Alpaca/blob/main/README.md">
+    <doap:name>Alpaca</doap:name>
+    <doap:homepage rdf:resource="https://jeffser.com/alpaca/"/>
+    <doap:description>An Ollama client made with GTK4 and Adwaita.</doap:description>
+    <doap:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2024-05-12</doap:created>
+    <doap:license rdf:resource="https://opensource.org/license/gpl-3-0"/>
+    <doap:programming-language>Python</doap:programming-language>
+    <doap:repository>
+      <doap:GitRepository>
+        <doap:browse rdf:resource="https://github.com/Jeffser/Alpaca"/>
+        <doap:location rdf:resource="https://github.com/Jeffser/Alpaca.git"/>
+      </doap:GitRepository>
+    </doap:repository>
+
+    <doap:maintainer>
+      <foaf:Person>
+        <foaf:name>Jeffry Samuel</foaf:name>
+        <foaf:mbox rdf:resource="mailto:jeffrysamuer@gmail.com"/>
+      </foaf:Person>
+    </doap:maintainer>
+
+    <doap:developer>
+      <foaf:Person>
+        <foaf:name>Jeffry Samuel</foaf:name>
+        <foaf:mbox rdf:resource="mailto:jeffrysamuer@gmail.com"/>
+      </foaf:Person>
+    </doap:developer>
+
+  </doap:Project>
+
+</rdf:RDF>
