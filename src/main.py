@@ -52,7 +52,7 @@ class AlpacaApplication(Adw.Application):
     def __init__(self, version):
         super().__init__(application_id='com.jeffser.Alpaca',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
-        self.create_action('quit', lambda *_: self.quit(), ['<primary>w'])
+        self.create_action('quit', lambda *_: self.quit(), ['<primary>w', '<primary>q'])
         self.create_action('preferences', lambda *_: AlpacaWindow.show_preferences_dialog(self.props.active_window), ['<primary>comma'])
         self.create_action('about', self.on_about_action)
         self.version = version
