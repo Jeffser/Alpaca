@@ -11,6 +11,9 @@ Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can man
 > [!WARNING]
 > This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any AI models.
 
+> [!IMPORTANT]
+> Please be aware that [GNOME Code of Conduct](https://conduct.gnome.org) applies to Alpaca before interacting with this repository.
+
 ## Features!
 
 - Talk to multiple models in the same conversation

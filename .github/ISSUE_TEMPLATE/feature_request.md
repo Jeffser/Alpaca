@@ -6,7 +6,7 @@ labels: enhancement
 assignees: ''
 
 ---
-
+<!--Please be aware that GNOME Code of Conduct applies to Alpaca, https://conduct.gnome.org/-->
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
