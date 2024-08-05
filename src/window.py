@@ -427,18 +427,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.available_model_list_box.set_visible(True)
             self.no_results_page.set_visible(False)
 
-    def manage_models_button_activate(self, button=None):
-        logger.debug(f"Managing models")
-        self.update_list_local_models()
-        if len(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()) > 0:
-            last_model_used = self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]
-            last_model_used = self.convert_model_name(last_model_used, 0)
-            for i in range(self.model_string_list.get_n_items()):
-                if self.model_string_list.get_string(i) == last_model_used:
-                    self.model_drop_down.set_selected(i)
-                    break
-        self.manage_models_dialog.present(self)
-
     def convert_model_name(self, name:str, mode:int) -> str: # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag
         if mode == 0:
             return "{} ({})".format(name.split(":")[0].replace("-", " ").title(), name.split(":")[1])
@@ -1680,7 +1668,7 @@ Generate a title following these rules:
         self.get_application().create_action('export_chat', self.chat_actions)
         self.get_application().create_action('export_current_chat', self.current_chat_actions)
         self.get_application().create_action('toggle_sidebar', lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9'])
-        self.get_application().create_action('manage_models', lambda *_: self.manage_models_button_activate(), ['<primary>m'])
+        self.get_application().create_action('manage_models', lambda *_: self.manage_models_dialog.present(self), ['<primary>m'])
         self.message_text_view.connect("paste-clipboard", self.on_clipboard_paste)
         self.file_preview_remove_button.connect('clicked', lambda button : dialogs.remove_attached_file(self, button.get_name()))
         self.add_chat_button.connect("clicked", lambda button : self.new_chat())
