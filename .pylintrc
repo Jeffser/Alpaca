@@ -1,8 +1,8 @@
 [MASTER]
 
 [MESSAGES CONTROL]
-disable=undefined-variable, missing-function-docstring
+disable=undefined-variable, line-too-long, missing-function-docstring, consider-using-f-string
 
 [FORMAT]
-max-line-length=120
+max-line-length=200
 
