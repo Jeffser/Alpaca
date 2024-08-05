@@ -17,7 +17,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y flatpak flatpak-builder
-          flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+          flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     
       - name: Checkout code
         uses: actions/checkout@v2
@@ -32,10 +32,10 @@ jobs:
 
       - name: Build Flatpak
         run: |
-          flatpak-builder --force-clean --repo=repo builddir ./com.jeffser.Alpaca.json
+          flatpak-builder --user --force-clean --repo=repo builddir ./com.jeffser.Alpaca.json
           
       - name: Upload Flatpak Artifact
         uses: actions/upload-artifact@v2
         with:
           name: flatpak-package
-          path: /
+          path: /build
