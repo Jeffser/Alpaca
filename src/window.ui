@@ -530,7 +530,7 @@
                               </child>
                               <child>
                                 <object class="GtkListBox" id="available_model_list_box">
-                                  <property name="selection-mode">single</property>
+                                  <property name="selection-mode">none</property>
                                   <style>
                                     <class name="boxed-list"/>
                                   </style>
@@ -593,7 +593,7 @@
                               <child>
                                 <object class="GtkListBox" id="model_tag_list_box">
                                   <property name="valign">1</property>
-                                  <property name="selection-mode">single</property>
+                                  <property name="selection-mode">none</property>
                                   <style>
                                     <class name="boxed-list"/>
                                   </style>

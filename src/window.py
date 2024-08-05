@@ -1157,7 +1157,6 @@ Generate a title following these rules:
         self.model_link_button.set_name(self.available_models[model_name]['url'])
         self.model_link_button.set_tooltip_text(self.available_models[model_name]['url'])
         self.available_model_list_box.unselect_all()
-        self.model_tag_list_box.connect('row_selected', lambda list_box, row: self.confirm_pull_model(row.get_name()) if row else None)
         self.model_tag_list_box.remove_all()
         tags = self.available_models[model_name]['tags']
         for tag_data in tags:
@@ -1170,11 +1169,21 @@ Generate a title following these rules:
                 download_icon = Gtk.Image.new_from_icon_name("folder-download-symbolic")
                 tag_row.add_suffix(download_icon)
                 download_icon.update_property([4], [_("Download {}:{}").format(model_name, tag_data[0])])
+
+                gesture_click = Gtk.GestureClick.new()
+                gesture_click.connect("pressed", lambda *_, name=f"{model_name}:{tag_data[0]}" : self.confirm_pull_model(name))
+
+                event_controller_key = Gtk.EventControllerKey.new()
+                event_controller_key.connect("key-pressed", lambda controller, key, *_, name=f"{model_name}:{tag_data[0]}" : self.confirm_pull_model(name) if key in (Gdk.KEY_space, Gdk.KEY_Return) else None)
+
+                tag_row.add_controller(gesture_click)
+                tag_row.add_controller(event_controller_key)
+
                 self.model_tag_list_box.append(tag_row)
+        return True
 
     def update_list_available_models(self):
         logger.debug("Updating list of available models")
-        self.available_model_list_box.connect('row_selected', lambda list_box, row: self.list_available_model_tags(row.get_name()) if row else None)
         self.available_model_list_box.remove_all()
         for name, model_info in self.available_models.items():
             model = Adw.ActionRow(
@@ -1186,6 +1195,15 @@ Generate a title following these rules:
             next_icon.set_margin_start(5)
             next_icon.update_property([4], [_("Enter download menu for {}").format(name.replace("-", ""))])
             model.add_suffix(next_icon)
+
+            gesture_click = Gtk.GestureClick.new()
+            gesture_click.connect("pressed", lambda *_, name=name : self.list_available_model_tags(name))
+
+            event_controller_key = Gtk.EventControllerKey.new()
+            event_controller_key.connect("key-pressed", lambda controller, key, *_, name=name : self.list_available_model_tags(name) if key in (Gdk.KEY_space, Gdk.KEY_Return) else None)
+
+            model.add_controller(gesture_click)
+            model.add_controller(event_controller_key)
             self.available_model_list_box.append(model)
 
     def save_history(self):
