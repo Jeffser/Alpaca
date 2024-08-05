@@ -1,0 +1,35 @@
+# .github/workflows/flatpak-build.yml
+name: Flatpak Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get the latest commit ID
+        id: get_commit_id
+        run: echo "COMMIT_ID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Update Flatpak Manifest
+        run: |
+          sed -i "s/\"commit\" : \".*\"/\"commit\" : \"${COMMIT_ID}\"/" path/to/your/manifest.json
+
+      - name: Build Flatpak
+        run: |
+          flatpak-builder --force-clean --repo=repo builddir path/to/your/manifest.json
+          
+      - name: Upload Flatpak Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: flatpak-package
+          path: path/to/your/builddir
