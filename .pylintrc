@@ -1,7 +1,5 @@
 [MASTER]
 
-[TYPECHECK]
-ignored-classes=_
-
-[BASIC]
-dummy-variables-rgx=_,dummy
+[MESSAGES CONTROL]
+# Disable the undefined-variable warning
+disable=undefined-variable
