@@ -17,9 +17,6 @@ jobs:
           # Add the Flathub repository
           flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-          # Add the GNOME runtime repository
-          flatpak remote-add --if-not-exists --user gnome https://sdk.gnome.org/gnome.flatpakrepo
-
       - name: Checkout code
         uses: actions/checkout@v2
 
