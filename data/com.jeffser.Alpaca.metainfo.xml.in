@@ -80,6 +80,28 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="1.0.6" date="2024-08-04">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.6</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Changed shortcuts to standards</li>
+          <li>Moved 'Manage Models' button to primary menu</li>
+          <li>Stable support for GGUF model files</li>
+          <li>General optimizations</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Better handling of enter key (important for Japanese input)</li>
+          <li>Removed sponsor dialog</li>
+          <li>Added sponsor link in about dialog</li>
+          <li>Changed window and elements dimensions</li>
+          <li>Selected model changes when entering model manager</li>
+          <li>Better image tooltips</li>
+          <li>GGUF Support</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.5" date="2024-08-02">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.5</url>
       <description>
