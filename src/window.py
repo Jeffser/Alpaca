@@ -73,6 +73,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     #Elements
     split_view_overlay = Gtk.Template.Child()
     regenerate_button : Gtk.Button = None
+    selected_chat_row : Gtk.ListBoxRow = None
     create_model_base = Gtk.Template.Child()
     create_model_name = Gtk.Template.Child()
     create_model_system = Gtk.Template.Child()
@@ -969,7 +970,7 @@ Generate a title following these rules:
         current_date = GLib.DateTime.new_now_local()
         if date.format("%Y/%m/%d") == current_date.format("%Y/%m/%d"):
             return date.format("%H:%M %p")
-        elif date.format("%Y") == current_date.format("%Y"):
+        if date.format("%Y") == current_date.format("%Y"):
             return date.format("%b %d, %H:%M %p")
         return date.format("%b %d %Y, %H:%M %p")
 
@@ -1072,7 +1073,7 @@ Generate a title following these rules:
         if 'error' in data:
             self.pulling_models[model_name]['error'] = data['error']
             return
-        if model_name in list(self.pulling_models.keys()):
+        if model_name in self.pulling_models.keys():
             if 'completed' in data and 'total' in data:
                 GLib.idle_add(self.pulling_models[model_name]['row'].set_subtitle, '<tt>{}%</tt>'.format(round(data['completed'] / data['total'] * 100, 2)))
                 GLib.idle_add(self.pulling_models[model_name]['progress_bar'].set_fraction, (data['completed'] / data['total']))
@@ -1110,7 +1111,7 @@ Generate a title following these rules:
             GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
     def pull_model(self, model):
-        if model in list(self.pulling_models.keys()) or model in self.local_models or ":" not in model:
+        if model in self.pulling_models.keys() or model in self.local_models or ":" not in model:
             return
         logger.info("Pulling model")
         self.pulling_model_list_box.set_visible(True)
