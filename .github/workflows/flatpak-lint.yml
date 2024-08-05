@@ -14,14 +14,20 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y flatpak flatpak-builder
           
-          # Add the Flathub repository
           flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
+      - name: Install GNOME SDK 46
+        run: |
+          flatpak install --user gnome org.gnome.Sdk//46 -y
+      
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Lint Flatpak Manifest
+      - name: Install Flatpak
         run: |
           flatpak run org.flatpak.Builder --force-clean --sandbox --user --install --install-deps-from=flathub --ccache --mirror-screenshots-url=https://dl.flathub.org/media/ --repo=repo builddir com.jeffser.Alpaca.json
+
+      - name: Lint Flatpak Manifest
+        run: |
           flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest com.jeffser.Alpaca.json
           flatpak run --command=flatpak-builder-lint org.flatpak.Builder repo repo
