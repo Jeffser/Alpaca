@@ -1564,7 +1564,7 @@ Generate a title following these rules:
         chat_row = self.selected_chat_row
         chat_name = chat_row.get_child().get_name()
         action_name = action.get_name()
-        if action_name == 'delete_chat':
+        if action_name in ('delete_chat', 'delete_current_chat'):
             dialogs.delete_chat(self, chat_name)
         elif action_name in ('rename_chat', 'rename_current_chat'):
             dialogs.rename_chat(self, chat_name, chat_row.get_child())
@@ -1663,6 +1663,7 @@ Generate a title following these rules:
         self.get_application().create_action('create_model_from_file', lambda *_: dialogs.create_model_from_file(self))
         self.get_application().create_action('create_model_from_name', lambda *_: dialogs.create_model_from_name(self))
         self.get_application().create_action('delete_chat', self.chat_actions)
+        self.get_application().create_action('delete_current_chat', self.current_chat_actions)
         self.get_application().create_action('rename_chat', self.chat_actions)
         self.get_application().create_action('rename_current_chat', self.current_chat_actions)
         self.get_application().create_action('export_chat', self.chat_actions)

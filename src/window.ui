@@ -1055,6 +1055,10 @@ By downloading any model you accept their license agreement available on the mod
   </menu>
   <menu id="secondary_menu">
     <item>
+      <attribute name="label" translatable="yes">Delete Chat</attribute>
+      <attribute name="action">app.delete_current_chat</attribute>
+    </item>
+    <item>
       <attribute name="label" translatable="yes">Rename Chat</attribute>
       <attribute name="action">app.rename_current_chat</attribute>
     </item>
