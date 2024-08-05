@@ -6,7 +6,7 @@ labels: bug
 assignees: ''
 
 ---
-
+<!--Please be aware that GNOME Code of Conduct applies to Alpaca, https://conduct.gnome.org/-->
 **Describe the bug**
 A clear and concise description of what the bug is.
 
