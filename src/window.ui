@@ -12,13 +12,14 @@
     <property name="title">Alpaca</property>
     <child>
       <object class="AdwBreakpoint">
-        <condition>max-width: 800sp</condition>
+        <condition>max-width: 690sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
       </object>
     </child>
     <property name="content">
           <object class="AdwOverlaySplitView" id="split_view_overlay">
             <property name="show-sidebar" bind-source="show_sidebar_button" bind-property="active" bind-flags="sync-create"/>
+            <property name="sidebar-width-fraction">0.4</property>
             <property name="sidebar">
               <object class="AdwToolbarView">
                 <child type="top">
