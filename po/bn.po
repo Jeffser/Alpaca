@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0.6\n"
+"Project-Id-Version: 1.0.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-04 22:57-0600\n"
 "PO-Revision-Date: 2024-07-18 15:12-0600\n"
@@ -124,11 +124,11 @@ msgstr "নতুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "Changed shortcuts to standards"
-msgstr ""
+msgstr "স্ট্যান্ডার্ডের সাথে শর্টকাট পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:89
 msgid "Moved 'Manage Models' button to primary menu"
-msgstr ""
+msgstr "প্রাথমিক মেনুতে 'মডেল ব্যবস্থাপনা' বাটন স্থানান্তর করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
@@ -151,31 +151,31 @@ msgstr "সংশোধন করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Better handling of enter key (important for Japanese input)"
-msgstr ""
+msgstr "জাপানি ইনপুটের জন্য এন্টার কীর উন্নত হ্যান্ডলিং"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Removed sponsor dialog"
-msgstr ""
+msgstr "স্পনসর ডায়ালগ সরানো হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added sponsor link in about dialog"
-msgstr ""
+msgstr "সম্পর্কে ডায়ালগে স্পনসর লিংক যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Changed window and elements dimensions"
-msgstr ""
+msgstr "উইন্ডো এবং উপাদানগুলির মাত্রা পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Selected model changes when entering model manager"
-msgstr ""
+msgstr "মডেল ম্যানেজারে প্রবেশ করার সময় নির্বাচিত মডেল পরিবর্তন করা হয়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Better image tooltips"
-msgstr ""
+msgstr "চিত্র টুলটিপস উন্নত করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "GGUF Support"
-msgstr ""
+msgstr "GGUF সমর্থন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
 msgid "Regenerate any response, even if they are incomplete"
@@ -1124,7 +1124,7 @@ msgstr "বার্তা পুনরুত্পাদন করুন"
 
 #: src/window.py:697
 msgid "Image"
-msgstr ""
+msgstr "চিত্র"
 
 #: src/window.py:707 src/window.py:723
 msgid "Missing Image"
@@ -1192,7 +1192,7 @@ msgstr "মডেল সফলভাবে মুছে ফেলা হয়�
 
 #: src/window.py:1398
 msgid "There was an error with the local Ollama instance, so it has been reset"
-msgstr "স্থানীয় Ollama ইনস্ট্যান্সে একটি ত্রুটি ছিল, তাই এটি রিসেট করা হয়েছে"
+msgstr "স্থানীয় ওল্লামা ইনস্ট্যান্সে একটি ত্রুটি ছিল, তাই এটি রিসেট করা হয়েছে"
 
 #: src/window.py:1421
 msgid "Chat exported successfully"
@@ -1777,12 +1777,14 @@ msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
 msgstr ""
+"এআই সফটওয়্যার উন্নয়ন দৃশ্যকল্পের জন্য বহুমুখী মডেল, কোড সম্পূর্ণতা সহ।"
 
 #: src/available_models_descriptions.py:85
 msgid ""
 "A strong multi-lingual general language model with competitive performance "
 "to Llama 3."
 msgstr ""
+"ল্লামা ৩ এর সাথে প্রতিযোগিতামূলক কর্মক্ষমতা সহ একটি শক্তিশালী বহুভাষী সাধারণ ভাষা মডেল।"
 
 #: src/available_models_descriptions.py:86
 msgid ""
@@ -2375,11 +2377,11 @@ msgstr "শর্টকাট উইন্ডো দেখান"
 
 #: src/window.ui:1179
 msgid "Manage models"
-msgstr ""
+msgstr "মডেল ব্যবস্থাপনা"
 
 #: src/window.ui:1185
 msgid "Toggle sidebar"
-msgstr ""
+msgstr "সাইডবার টগল"
 
 #: src/window.ui:1192
 msgid "Editor"
