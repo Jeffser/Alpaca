@@ -441,7 +441,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             return "{}:{}".format(name.split(" (")[0].replace(" ", "-").lower(), name.split(" (")[1][:-1])
 
     def check_alphanumeric(self, editable, text, length, position):
-        new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '.', ':']])
+        new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '.', ':', '_']])
         if new_text != text:
             editable.stop_emission_by_name("insert-text")
 
@@ -464,9 +464,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             else:
                 ##TODO ERROR MESSAGE
                 return
+            self.create_model_base.set_subtitle(self.convert_model_name(model, 1))
         else:
-            self.create_model_name.set_text(model.split("/")[-1].split(".")[0])
-        self.create_model_base.set_subtitle(self.convert_model_name(model, 1))
+            self.create_model_name.set_text(os.path.splitext(os.path.basename(model))[0])
+            self.create_model_base.set_subtitle(model)
         self.navigation_view_manage_models.push_by_tag('model_create_page')
 
     def show_toast(self, message:str, overlay):
@@ -1646,6 +1647,10 @@ Generate a title following these rules:
         factory.connect("bind", self.on_model_dropdown_bind)
         self.model_drop_down.set_factory(factory)
 
+    def handle_enter_key(self):
+        self.send_message()
+        return True
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
@@ -1654,7 +1659,7 @@ Generate a title following these rules:
         if not os.path.exists(os.path.join(self.data_dir, "chats")):
             os.makedirs(os.path.join(self.data_dir, "chats"))
         key_controller = Gtk.EventControllerKey.new()
-        key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: self.send_message() if keyval==Gdk.KEY_Return else None)
+        key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: self.handle_enter_key() if keyval==Gdk.KEY_Return else None)
         self.message_text_view.add_controller(key_controller)
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
