@@ -1,15 +1,19 @@
 # connection_handler.py
-import json, requests
+"""
+Handles requests to remote and integrated instances of Ollama
+"""
+import json
+import requests
 #OK=200 response.status_code
-url = None
-bearer_token = None
+URL = None
+BEARER_TOKEN = None
 
 def get_headers(include_json:bool) -> dict:
     headers = {}
     if include_json:
         headers["Content-Type"] = "application/json"
-    if bearer_token:
-        headers["Authorization"] = "Bearer {}".format(bearer_token)
+    if BEARER_TOKEN:
+        headers["Authorization"] = "Bearer {}".format(BEARER_TOKEN)
     return headers if len(headers.keys()) > 0 else None
 
 def simple_get(connection_url:str) -> dict:

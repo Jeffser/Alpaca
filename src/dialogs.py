@@ -1,10 +1,13 @@
 # dialogs.py
-
-from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
-import os, logging
+"""
+Handles UI dialogs
+"""
+import os
+import logging
 from pytube import YouTube
 from html2text import html2text
 from . import connection_handler
+from gi.repository import Adw, Gtk
 
 logger = logging.getLogger(__name__)
 # CLEAR CHAT | WORKS
