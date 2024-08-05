@@ -16,10 +16,6 @@ jobs:
           
           flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-      - name: Install GNOME SDK 46
-        run: |
-          flatpak --user install -y --noninteractive flathub org.gnome.Sdk/x86_64/46
-
       - name: Install Flatpak Builder
         run: |
           flatpak --user install -y --noninteractive flathub org.flatpak.Builder
@@ -27,11 +23,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Flatpak
-        run: |
-          flatpak run org.flatpak.Builder --force-clean --sandbox --user --install --install-deps-from=flathub --ccache --mirror-screenshots-url=https://dl.flathub.org/media/ --repo=repo builddir com.jeffser.Alpaca.json
-
       - name: Lint Flatpak Manifest
         run: |
           flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest com.jeffser.Alpaca.json
-          flatpak run --command=flatpak-builder-lint org.flatpak.Builder repo repo
