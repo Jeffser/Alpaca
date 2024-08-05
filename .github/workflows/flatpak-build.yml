@@ -22,7 +22,7 @@ jobs:
 
       - name: Update Flatpak Manifest
         run: |
-          sed -i 's|"url" : "file:///home/tentri/Documents/Alpaca" : "https://github.com/Jeffser/Alpaca"|g' ./com.jeffser.Alpaca.json
+          sed -i 's|"url" : "file:///home/tentri/Documents/Alpaca"|"url" : "https://github.com/Jeffser/Alpaca"|g' ./com.jeffser.Alpaca.json
 
       - name: Build Flatpak
         run: |
