@@ -785,7 +785,7 @@ Generate a title following these rules:
             self.connection_error()
 
     def save_server_config(self):
-        with open(os.path.join(self.config_dir, "server.json"), "w+") as f:
+        with open(os.path.join(self.config_dir, "server.json"), "w+", encoding="utf-8") as f:
             json.dump({'remote_url': self.remote_url, 'remote_bearer_token': self.remote_bearer_token, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background, 'model_tweaks': self.model_tweaks, 'ollama_overrides': local_instance.overrides}, f, indent=6)
 
     def verify_connection(self):
@@ -1161,7 +1161,7 @@ Generate a title following these rules:
 
     def save_history(self):
         logger.debug("Saving history")
-        with open(os.path.join(self.data_dir, "chats", "chats.json"), "w+") as f:
+        with open(os.path.join(self.data_dir, "chats", "chats.json"), "w+", encoding="utf-8") as f:
             json.dump(self.chats, f, indent=4)
 
     def load_history_into_chat(self):
@@ -1180,7 +1180,7 @@ Generate a title following these rules:
         logger.debug("Loading history")
         if os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
             try:
-                with open(os.path.join(self.data_dir, "chats", "chats.json"), "r") as f:
+                with open(os.path.join(self.data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
                     self.chats = json.load(f)
                     if len(list(self.chats["chats"].keys())) == 0: self.chats["chats"][_("New Chat")] = {"messages": {}}
                     if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]: self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
@@ -1379,7 +1379,7 @@ Generate a title following these rules:
 
         with tempfile.TemporaryDirectory() as temp_dir:
             json_path = os.path.join(temp_dir, "data.json")
-            with open(json_path, "wb") as json_file:
+            with open(json_path, "wb", encoding="utf-8") as json_file:
                 json_file.write(json_data)
 
             tar_path = os.path.join(temp_dir, chat_name)
@@ -1389,7 +1389,7 @@ Generate a title following these rules:
                 if os.path.exists(directory) and os.path.isdir(directory):
                     tar.add(directory, arcname=os.path.basename(directory))
 
-            with open(tar_path, "rb") as tar:
+            with open(tar_path, "rb", encoding="utf-8") as tar:
                 tar_content = tar.read()
 
             file.replace_contents_async(
@@ -1416,7 +1416,7 @@ Generate a title following these rules:
         with tempfile.TemporaryDirectory() as temp_dir:
             tar_filename = os.path.join(temp_dir, "imported_chat.tar")
 
-            with open(tar_filename, "wb") as tar_file:
+            with open(tar_filename, "wb", encoding="utf-8") as tar_file:
                 tar_file.write(tar_content.get_data())
 
             with tarfile.open(tar_filename, "r") as tar:
@@ -1426,7 +1426,7 @@ Generate a title following these rules:
                 for member in tar.getmembers():
                     if member.name == "data.json":
                         json_filepath = os.path.join(temp_dir, member.name)
-                        with open(json_filepath, "r") as json_file:
+                        with open(json_filepath, "r", encoding="utf-8") as json_file:
                             data = json.load(json_file)
                         for chat_name, chat_content in data.items():
                             new_chat_name = self.generate_numbered_name(chat_name, list(self.chats['chats'].keys()))
@@ -1474,7 +1474,7 @@ Generate a title following these rules:
                 logger.error(e)
                 self.show_toast(_("Cannot open image"), self.main_overlay)
         elif file_type == 'plain_text' or file_type == 'youtube' or file_type == 'website':
-            with open(file_path, 'r') as f:
+            with open(file_path, 'r', encoding="utf-8") as f:
                 return f.read()
         elif file_type == 'pdf':
             reader = PdfReader(file_path)
@@ -1603,7 +1603,7 @@ Generate a title following these rules:
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
-        with open(os.path.join(source_dir, 'available_models.json'), 'r') as f:
+        with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
             self.available_models = json.load(f)
         if not os.path.exists(os.path.join(self.data_dir, "chats")):
             os.makedirs(os.path.join(self.data_dir, "chats"))
@@ -1634,7 +1634,7 @@ Generate a title following these rules:
         self.background_switch.connect("notify", lambda pspec, user_data : self.switch_run_on_background())
         self.setup_model_dropdown()
         if os.path.exists(os.path.join(self.config_dir, "server.json")):
-            with open(os.path.join(self.config_dir, "server.json"), "r") as f:
+            with open(os.path.join(self.config_dir, "server.json"), "r", encoding="utf-8") as f:
                 data = json.load(f)
                 self.run_remote = data['run_remote']
                 local_instance.port = data['local_port']

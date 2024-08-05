@@ -58,9 +58,11 @@ def delete_chat(self, chat_name):
 # RENAME CHAT | WORKS
 
 def rename_chat_response(self, dialog, task, old_chat_name, entry, label_element):
-    if not entry: return
+    if not entry:
+        return
     new_chat_name = entry.get_text()
-    if old_chat_name == new_chat_name: return
+    if old_chat_name == new_chat_name:
+        return
     if new_chat_name and (task is None or dialog.choose_finish(task) == "rename"):
         self.rename_chat(old_chat_name, new_chat_name, label_element)
 
@@ -86,7 +88,8 @@ def rename_chat(self, chat_name, label_element):
 
 def new_chat_response(self, dialog, task, entry):
     chat_name = _("New Chat")
-    if entry is not None and entry.get_text() != "": chat_name = entry.get_text()
+    if entry is not None and entry.get_text() != "":
+        chat_name = entry.get_text()
     if chat_name and (task is None or dialog.choose_finish(task) == "create"):
         self.new_chat(chat_name)
 
@@ -247,15 +250,15 @@ def create_model_from_existing(self):
     )
 
 def create_model_from_file_response(self, file_dialog, result):
-    try: file = file_dialog.open_finish(result)
-    except:
-        logger.error(e)
-        return
     try:
-        self.create_model(file.get_path(), True)
+        file = file_dialog.open_finish(result)
+        try:
+            self.create_model(file.get_path(), True)
+        except Exception as e:
+            logger.error(e)
+            self.show_toast(_("An error occurred while creating the model"), self.main_overlay)
     except Exception as e:
         logger.error(e)
-        self.show_toast(_("An error occurred while creating the model"), self.main_overlay)
 
 def create_model_from_file(self):
     file_dialog = Gtk.FileDialog(default_filter=self.file_filter_gguf)
@@ -290,23 +293,23 @@ def attach_file_response(self, file_dialog, result):
         "image": ["png", "jpeg", "jpg", "webp", "gif"],
         "pdf": ["pdf"]
     }
-    try: file = file_dialog.open_finish(result)
-    except:
+    try:
+        file = file_dialog.open_finish(result)
+    except Exception as e:
         logger.error(e)
         return
     extension = file.get_path().split(".")[-1]
     file_type = next(key for key, value in file_types.items() if extension in value)
-    if not file_type: return
+    if not file_type:
+        return
     if file_type == 'image' and not self.verify_if_image_can_be_used():
         self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
         return
     self.attach_file(file.get_path(), file_type)
 
-
 def attach_file(self, filter):
     file_dialog = Gtk.FileDialog(default_filter=filter)
     file_dialog.open(self, None, lambda file_dialog, result: attach_file_response(self, file_dialog, result))
-
 
 # YouTube caption | WORKS
 
@@ -325,7 +328,7 @@ def youtube_caption_response(self, dialog, task, video_url, caption_drop_down):
         if not os.path.exists(os.path.join(self.cache_dir, 'tmp/youtube')):
             os.makedirs(os.path.join(self.cache_dir, 'tmp/youtube'))
         file_path = os.path.join(os.path.join(self.cache_dir, 'tmp/youtube'), f'{yt.title} ({selected_caption.split(" | ")[0]})')
-        with open(file_path, 'w+') as f:
+        with open(file_path, 'w+', encoding="utf-8") as f:
             f.write(text)
         self.attach_file(file_path, 'youtube')
 
@@ -337,7 +340,8 @@ def youtube_caption(self, video_url):
         self.show_toast(_("This video does not have any transcriptions"), self.main_overlay)
         return
     caption_list = Gtk.StringList()
-    for caption in captions: caption_list.append("{} | {}".format(caption.name, caption.code))
+    for caption in captions:
+        caption_list.append("{} | {}".format(caption.name, caption.code))
     caption_drop_down = Gtk.DropDown(
         enable_search=True,
         model=caption_list
@@ -373,7 +377,7 @@ def attach_website_response(self, dialog, task, url):
                 os.makedirs('/tmp/alpaca/websites/')
             md_name = self.generate_numbered_name('website.md', os.listdir('/tmp/alpaca/websites'))
             file_path = os.path.join('/tmp/alpaca/websites/', md_name)
-            with open(file_path, 'w+') as f:
+            with open(file_path, 'w+', encoding="utf-8") as f:
                 f.write('{}\n\n{}'.format(url, md))
             self.attach_file(file_path, 'website')
         else:
@@ -394,4 +398,3 @@ def attach_website(self, url):
         cancellable = None,
         callback = lambda dialog, task, url=url: attach_website_response(self, dialog, task, url)
     )
-
