@@ -77,7 +77,7 @@
                         <child>
                           <object class="GtkDropDown" id="model_drop_down">
                             <signal name="notify" handler="verify_if_image_can_be_used"/>
-                            <property name="width-request">200</property>
+                            <property name="width-request">260</property>
                             <property name="enable-search">true</property>
                             <property name="tooltip-text">Select Model</property>
                             <property name="model">
@@ -88,7 +88,7 @@
                             </property>
                           </object>
                         </child>
-                        <child>
+                        <!--<child>
                           <object class="GtkButton" id="manage_models_button">
                             <signal name="clicked" handler="manage_models_button_activate"/>
                             <property name="tooltip-text" translatable="yes">Manage Models</property>
@@ -98,7 +98,7 @@
                               </object>
                             </child>
                           </object>
-                        </child>
+                        </child>-->
                       </object>
                     </property>
                     <child type="end">
@@ -1033,6 +1033,10 @@ By downloading any model you accept their license agreement available on the mod
         <attribute name="label" translatable="yes">Import Chat</attribute>
         <attribute name="action">app.import_chat</attribute>
       </item>
+      <item>
+        <attribute name="label" translatable="yes">Manage Models</attribute>
+        <attribute name="action">app.manage_models</attribute>
+      </item>
     </section>
     <section>
       <item>
@@ -1167,6 +1171,12 @@ By downloading any model you accept their license agreement available on the mod
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;ctrl&gt;slash</property>
                 <property name="title" translatable="yes">Show shortcuts window</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;M</property>
+                <property name="title" translatable="yes">Manage models</property>
               </object>
             </child>
             <child>
