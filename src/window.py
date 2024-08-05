@@ -257,6 +257,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def manage_models_button_activate(self, button=None):
         logger.debug(f"Managing models")
         self.update_list_local_models()
+        if len(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()) > 0:
+            last_model_used = self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]
+            last_model_used = self.convert_model_name(last_model_used, 0)
+            for i in range(self.model_string_list.get_n_items()):
+                if self.model_string_list.get_string(i) == last_model_used:
+                    self.model_drop_down.set_selected(i)
+                    break
         self.manage_models_dialog.present(self)
 
     @Gtk.Template.Callback()
@@ -392,7 +399,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         overlay.add_overlay(progress_bar)
         self.pulling_model_list_box.append(overlay)
         self.navigation_view_manage_models.pop()
-        self.manage_models_dialog.present(self)
         thread.start()
 
     @Gtk.Template.Callback()
