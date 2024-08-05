@@ -28,6 +28,8 @@ def start():
     logger.debug(params)
     sleep(1)
     logger.info("Started Alpaca's Ollama instance")
+    v_str = subprocess.check_output("ollama -v", shell=True).decode('utf-8')
+    logger.info('Ollama version: {}'.format(v_str.split('client version is ')[1].strip()))
 
 def stop():
     logger.info("Stopping Alpaca's Ollama instance")
