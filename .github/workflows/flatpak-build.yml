@@ -22,11 +22,11 @@ jobs:
 
       - name: Update Flatpak Manifest
         run: |
-          sed -i "s/\"commit\" : \".*\"/\"commit\" : \"${COMMIT_ID}\"/" path/to/your/manifest.json
+          sed -i 's|"url" : "file:///home/tentri/Documents/Alpaca" : "https://github.com/Jeffser/Alpaca"|g' ./com.jeffser.Alpaca.json
 
       - name: Build Flatpak
         run: |
-          flatpak-builder --force-clean --repo=repo builddir path/to/your/manifest.json
+          flatpak-builder --force-clean --repo=repo builddir ./com.jeffser.Alpaca.json
           
       - name: Upload Flatpak Artifact
         uses: actions/upload-artifact@v2
