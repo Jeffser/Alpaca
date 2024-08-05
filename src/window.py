@@ -661,7 +661,7 @@ Generate a title following these rules:
                         child=image_element,
                         css_classes=["flat", "chat_image_button"],
                         name=os.path.join(self.data_dir, "chats", "{selected_chat}", id, image),
-                        tooltip_text=os.path.basename(path)
+                        tooltip_text=_("Image")
                     )
                     button.connect("clicked", lambda button, file_path=path: self.preview_file(file_path, 'image', None))
                 except Exception as e:
@@ -687,7 +687,7 @@ Generate a title following these rules:
                     button = Gtk.Button(
                         child=image_box,
                         css_classes=["flat", "chat_image_button"],
-                        tooltip_text=_("Missing image")
+                        tooltip_text=_("Missing Image")
                     )
                     button.connect("clicked", lambda button : self.show_toast(_("Missing image"), self.main_overlay))
                 image_container.append(button)
