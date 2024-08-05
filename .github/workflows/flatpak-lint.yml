@@ -18,7 +18,7 @@ jobs:
 
       - name: Install GNOME SDK 46
         run: |
-          flatpak install --user gnome org.gnome.Sdk//46 -y
+          flatpak install --user flathub org.gnome.Sdk//46 -y
       
       - name: Checkout code
         uses: actions/checkout@v2
