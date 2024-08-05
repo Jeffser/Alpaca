@@ -38,7 +38,6 @@ from .internal import config_dir, data_dir, cache_dir, source_dir
 
 logger = logging.getLogger(__name__)
 
-
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
     app_dir = os.getenv("FLATPAK_DEST")
@@ -140,7 +139,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def verify_if_image_can_be_used(self, pspec=None, user_data=None):
         logger.debug("Verifying if image can be used")
-        if self.model_drop_down.get_selected_item() == None: return True
+        if self.model_drop_down.get_selected_item() == None:
+            return True
         selected = self.convert_model_name(self.model_drop_down.get_selected_item().get_string(), 1).split(":")[0]
         if selected in [key for key, value in self.available_models.items() if value["image"]]:
             for name, content in self.attachments.items():
@@ -155,7 +155,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def stop_message(self, button=None):
-        if self.loading_spinner: self.chat_container.remove(self.loading_spinner)
+        if self.loading_spinner:
+            self.chat_container.remove(self.loading_spinner)
         self.toggle_ui_sensitive(True)
         self.switch_send_stop_button()
         self.bot_message = None
@@ -179,8 +180,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.save_history()
             self.show_toast(_("Message edited successfully"), self.main_overlay)
 
-        if self.bot_message or self.get_focus() not in (self.message_text_view, self.send_button): return
-        if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False): return
+        if self.bot_message or self.get_focus() not in (self.message_text_view, self.send_button):
+            return
+        if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False):
+            return
         current_chat_row = self.chat_list_box.get_selected_row()
         self.chat_list_box.unselect_all()
         self.chat_list_box.remove(current_chat_row)
@@ -193,18 +196,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
             return
-        id = self.generate_uuid()
+        message_id = self.generate_uuid()
 
         attached_images = []
         attached_files = {}
         can_use_images = self.verify_if_image_can_be_used()
         for name, content in self.attachments.items():
-            if content["type"] == 'image' and can_use_images: attached_images.append(name)
+            if content["type"] == 'image' and can_use_images:
+                attached_images.append(name)
             else:
                 attached_files[name] = content['type']
-            if not os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id)):
-                os.makedirs(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id))
-            shutil.copy(content['path'], os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name))
+            if not os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id)):
+                os.makedirs(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id))
+            shutil.copy(content['path'], os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id, name))
             content["button"].get_parent().remove(content["button"])
         self.attachments = {}
         self.attachment_box.set_visible(False)
@@ -213,16 +217,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         current_datetime = datetime.now()
 
-        self.chats["chats"][self.chats["selected_chat"]]["messages"][id] = {
+        self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id] = {
             "role": "user",
             "model": "User",
             "date": current_datetime.strftime("%Y/%m/%d %H:%M:%S"),
             "content": self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
         }
         if len(attached_images) > 0:
-            self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['images'] = attached_images
+            self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]['images'] = attached_images
         if len(attached_files.keys()) > 0:
-            self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['files'] = attached_files
+            self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]['files'] = attached_files
         data = {
             "model": current_model,
             "messages": self.convert_history_to_ollama(),
@@ -235,12 +239,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         #self.attachments[name] = {"path": file_path, "type": file_type, "content": content}
         raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
         formated_date = GLib.markup_escape_text(self.generate_datetime_format(current_datetime))
-        self.show_message(raw_message, False, f"\n\n<small>{formated_date}</small>", attached_images, attached_files, id=id)
+        self.show_message(raw_message, False, f"\n\n<small>{formated_date}</small>", attached_images, attached_files, message_id=message_id)
         self.message_text_view.get_buffer().set_text("", 0)
         self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
         self.chat_container.append(self.loading_spinner)
         bot_id=self.generate_uuid()
-        self.show_message("", True, id=bot_id)
+        self.show_message("", True, message_id=bot_id)
 
         thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], bot_id))
         thread.start()
@@ -259,8 +263,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def welcome_carousel_page_changed(self, carousel, index):
         logger.debug("Showing welcome carousel")
-        if index == 0: self.welcome_previous_button.set_sensitive(False)
-        else: self.welcome_previous_button.set_sensitive(True)
+        if index == 0:
+            self.welcome_previous_button.set_sensitive(False)
+        else:
+            self.welcome_previous_button.set_sensitive(True)
         if index == carousel.get_n_pages()-1:
             self.welcome_next_button.set_label(_("Close"))
             self.welcome_next_button.set_tooltip_text(_("Close"))
@@ -274,7 +280,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def welcome_next_button_activate(self, button):
-        if button.get_label() == "Next": self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
+        if button.get_label() == "Next":
+            self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
             self.welcome_dialog.force_close()
             if not self.verify_connection():
@@ -342,8 +349,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def model_spin_changed(self, spin):
         value = spin.get_value()
-        if spin.get_name() != "temperature": value = round(value)
-        else: value = round(value, 1)
+        if spin.get_name() != "temperature":
+            value = round(value)
+        else:
+            value = round(value, 1)
         if self.model_tweaks[spin.get_name()] is not None and self.model_tweaks[spin.get_name()] != value:
             self.model_tweaks[spin.get_name()] = value
             self.save_server_config()
@@ -391,11 +400,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def override_changed(self, entry):
         name = entry.get_name()
         value = entry.get_text()
-        if (not value and name not in local_instance.overrides) or (value and value in local_instance.overrides and local_instance.overrides[name] == value): return
-        if not value: del local_instance.overrides[name]
-        else: local_instance.overrides[name] = value
+        if (not value and name not in local_instance.overrides) or (value and value in local_instance.overrides and local_instance.overrides[name] == value):
+            return
+        if not value:
+            del local_instance.overrides[name]
+        else:
+            local_instance.overrides[name] = value
         self.save_server_config()
-        if not self.run_remote: local_instance.reset()
+        if not self.run_remote:
+            local_instance.reset()
 
     @Gtk.Template.Callback()
     def link_button_handler(self, button):
@@ -413,7 +426,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for i, key in enumerate(self.available_models.keys()):
             row = self.available_model_list_box.get_row_at_index(i)
             row.set_visible(re.search(entry.get_text(), '{} {} {}'.format(row.get_title(), (_("image") if self.available_models[key]['image'] else " "), row.get_subtitle()), re.IGNORECASE))
-            if row.get_visible(): results += 1
+            if row.get_visible():
+                results += 1
         if entry.get_text() and results == 0:
             self.available_model_list_box.set_visible(False)
             self.no_results_page.set_visible(True)
@@ -422,12 +436,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.no_results_page.set_visible(False)
 
     def convert_model_name(self, name:str, mode:int) -> str: # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag
-        if mode == 0: return "{} ({})".format(name.split(":")[0].replace("-", " ").title(), name.split(":")[1])
-        if mode == 1: return "{}:{}".format(name.split(" (")[0].replace(" ", "-").lower(), name.split(" (")[1][:-1])
+        if mode == 0:
+            return "{} ({})".format(name.split(":")[0].replace("-", " ").title(), name.split(":")[1])
+        if mode == 1:
+            return "{}:{}".format(name.split(" (")[0].replace(" ", "-").lower(), name.split(" (")[1][:-1])
 
     def check_alphanumeric(self, editable, text, length, position):
         new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '.', ':']])
-        if new_text != text: editable.stop_emission_by_name("insert-text")
+        if new_text != text:
+            editable.stop_emission_by_name("insert-text")
 
     def create_model(self, model:str, file:bool):
         modelfile_buffer = self.create_model_modelfile.get_buffer()
@@ -466,31 +483,33 @@ class AlpacaWindow(Adw.ApplicationWindow):
             logger.info(f"{title}, {body}")
             notification = Gio.Notification.new(title)
             notification.set_body(body)
-            if icon: notification.set_icon(icon)
+            if icon:
+                notification.set_icon(icon)
             self.get_application().send_notification(None, notification)
 
     def delete_message(self, message_element):
         logger.debug("Deleting message")
-        id = message_element.get_name()
-        del self.chats["chats"][self.chats["selected_chat"]]["messages"][id]
+        message_id = message_element.get_name()
+        del self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]
         self.chat_container.remove(message_element)
-        if os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id)):
-            shutil.rmtree(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id))
+        if os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id)):
+            shutil.rmtree(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id))
         self.save_history()
 
     def copy_message(self, message_element):
         logger.debug("Copying message")
-        id = message_element.get_name()
+        message_id = message_element.get_name()
         clipboard = Gdk.Display().get_default().get_clipboard()
-        clipboard.set(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["content"])
+        clipboard.set(self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]["content"])
         self.show_toast(_("Message copied to the clipboard"), self.main_overlay)
 
     def edit_message(self, message_element, text_view, button_container):
         logger.debug("Editing message")
-        if self.editing_message: self.send_message()
+        if self.editing_message:
+            self.send_message()
 
         button_container.set_visible(False)
-        id = message_element.get_name()
+        message_id = message_element.get_name()
 
         text_buffer = text_view.get_buffer()
         end_iter = text_buffer.get_end_iter()
@@ -504,7 +523,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         text_view.set_css_classes(["view", "editing_message_textview"])
         text_view.set_cursor_visible(True)
 
-        self.editing_message = {"text_view": text_view, "id": id, "button_container": button_container, "footer": footer}
+        self.editing_message = {"text_view": text_view, "id": message_id, "button_container": button_container, "footer": footer}
 
     def preview_file(self, file_path, file_type, presend_name):
         logger.debug(f"Previewing file: {file_path}")
@@ -547,22 +566,24 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def convert_history_to_ollama(self):
         messages = []
-        for id, message in self.chats["chats"][self.chats["selected_chat"]]["messages"].items():
+        for message_id, message in self.chats["chats"][self.chats["selected_chat"]]["messages"].items():
             new_message = message.copy()
             if 'files' in message and len(message['files']) > 0:
                 del new_message['files']
                 new_message['content'] = ''
                 for name, file_type in message['files'].items():
-                    file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
+                    file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id, name)
                     file_data = self.get_content_of_file(file_path, file_type)
-                    if file_data: new_message['content'] += f"```[{name}]\n{file_data}\n```"
+                    if file_data:
+                        new_message['content'] += f"```[{name}]\n{file_data}\n```"
                 new_message['content'] += message['content']
             if 'images' in message and len(message['images']) > 0:
                 new_message['images'] = []
                 for name in message['images']:
-                    file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, name)
+                    file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id, name)
                     image_data = self.get_content_of_file(file_path, 'image')
-                    if image_data: new_message['images'].append(image_data)
+                    if image_data:
+                        new_message['images'].append(image_data)
             messages.append(new_message)
         return messages
 
@@ -581,14 +602,15 @@ Generate a title following these rules:
 ```"""
         current_model = self.convert_model_name(self.model_drop_down.get_selected_item().get_string(), 1)
         data = {"model": current_model, "prompt": prompt, "stream": False}
-        if 'images' in message: data["images"] = message['images']
+        if 'images' in message:
+            data["images"] = message['images']
         response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps(data))
 
         new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
         new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
         self.rename_chat(label_element.get_name(), new_chat_name, label_element)
 
-    def show_message(self, msg:str, bot:bool, footer:str=None, images:list=None, files:dict=None, id:str=None):
+    def show_message(self, msg:str, bot:bool, footer:str=None, images:list=None, files:dict=None, message_id:str=None):
         message_text = Gtk.TextView(
             editable=False,
             focusable=True,
@@ -603,7 +625,8 @@ Generate a title following these rules:
         )
         message_buffer = message_text.get_buffer()
         message_buffer.insert(message_buffer.get_end_iter(), msg)
-        if footer is not None: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer.encode('utf-8')))
+        if footer is not None:
+            message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer.encode('utf-8')))
 
         delete_button = Gtk.Button(
             icon_name = "user-trash-symbolic",
@@ -656,7 +679,7 @@ Generate a title following these rules:
                 child=image_container
             )
             for image in images:
-                path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], id, image)
+                path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id, image)
                 try:
                     if not os.path.isfile(path):
                         raise FileNotFoundError("'{}' was not found or is a directory".format(path))
@@ -665,7 +688,7 @@ Generate a title following these rules:
                     button = Gtk.Button(
                         child=image_element,
                         css_classes=["flat", "chat_image_button"],
-                        name=os.path.join(self.data_dir, "chats", "{selected_chat}", id, image),
+                        name=os.path.join(self.data_dir, "chats", "{selected_chat}", message_id, image),
                         tooltip_text=_("Image")
                     )
                     button.connect("clicked", lambda button, file_path=path: self.preview_file(file_path, 'image', None))
@@ -728,19 +751,19 @@ Generate a title following these rules:
                     tooltip_text=name,
                     child=button_content
                 )
-                file_path = os.path.join(self.data_dir, "chats", "{selected_chat}", id, name)
+                file_path = os.path.join(self.data_dir, "chats", "{selected_chat}", message_id, name)
                 button.connect("clicked", lambda button, file_path=file_path, file_type=file_type: self.preview_file(file_path, file_type, None))
                 file_container.append(button)
             message_box.append(file_scroller)
 
         message_box.append(message_text)
-        overlay = Gtk.Overlay(css_classes=["message"], name=id)
+        overlay = Gtk.Overlay(css_classes=["message"], name=message_id)
         overlay.set_child(message_box)
 
         delete_button.connect("clicked", lambda button, element=overlay: self.delete_message(element))
         copy_button.connect("clicked", lambda button, element=overlay: self.copy_message(element))
         edit_button.connect("clicked", lambda button, element=overlay, textview=message_text, button_container=button_container: self.edit_message(element, textview, button_container))
-        regenerate_button.connect('clicked', lambda button, id=id, bot_message_box=message_box, bot_message_button_container=button_container : self.regenerate_message(id, bot_message_box, bot_message_button_container))
+        regenerate_button.connect('clicked', lambda button, message_id=message_id, bot_message_box=message_box, bot_message_button_container=button_container : self.regenerate_message(message_id, bot_message_box, bot_message_button_container))
         button_container.append(delete_button)
         button_container.append(copy_button)
         button_container.append(regenerate_button if bot else edit_button)
@@ -947,19 +970,22 @@ Generate a title following these rules:
     def generate_datetime_format(self, dt:datetime) -> str:
         date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
         current_date = GLib.DateTime.new_now_local()
-        if date.format("%Y/%m/%d") == current_date.format("%Y/%m/%d"): return date.format("%H:%M %p")
-        elif date.format("%Y") == current_date.format("%Y"): return date.format("%b %d, %H:%M %p")
-        else: return date.format("%b %d %Y, %H:%M %p")
+        if date.format("%Y/%m/%d") == current_date.format("%Y/%m/%d"):
+            return date.format("%H:%M %p")
+        elif date.format("%Y") == current_date.format("%Y"):
+            return date.format("%b %d, %H:%M %p")
+        else:
+            return date.format("%b %d %Y, %H:%M %p")
 
-    def update_bot_message(self, data, id):
+    def update_bot_message(self, data, message_id):
         if self.bot_message is None:
             self.save_history()
             sys.exit()
         vadjustment = self.chat_window.get_vadjustment()
-        if id not in self.chats["chats"][self.chats["selected_chat"]]["messages"] or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
+        if message_id not in self.chats["chats"][self.chats["selected_chat"]]["messages"] or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if 'done' in data and data['done']:
-            formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["date"], '%Y/%m/%d %H:%M:%S')))
+            formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]["date"], '%Y/%m/%d %H:%M:%S')))
             text = f"\n\n{self.convert_model_name(data['model'], 0)}\n<small>{formated_date}</small>"
             GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text.encode('utf-8')))
             self.save_history()
@@ -968,11 +994,11 @@ Generate a title following these rules:
             first_paragraph = self.bot_message.get_text(self.bot_message.get_start_iter(), self.bot_message.get_end_iter(), False).split("\n")[0]
             GLib.idle_add(self.show_notification, self.chats["selected_chat"], first_paragraph[:100] + (first_paragraph[100:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
         else:
-            if not self.chats["chats"][self.chats["selected_chat"]]["messages"][id]["content"] and self.loading_spinner:
+            if not self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]["content"] and self.loading_spinner:
                 GLib.idle_add(self.chat_container.remove, self.loading_spinner)
                 self.loading_spinner = None
             GLib.idle_add(self.bot_message.insert, self.bot_message.get_end_iter(), data['message']['content'])
-            self.chats["chats"][self.chats["selected_chat"]]["messages"][id]['content'] += data['message']['content']
+            self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]['content'] += data['message']['content']
 
     def toggle_ui_sensitive(self, status):
         for element in [self.chat_list_box, self.add_chat_button, self.secondary_menu_button]:
@@ -982,10 +1008,10 @@ Generate a title following these rules:
         self.stop_button.set_visible(self.send_button.get_visible())
         self.send_button.set_visible(not self.send_button.get_visible())
 
-    def run_message(self, messages, model, id):
+    def run_message(self, messages, model, message_id):
         logger.debug("Running message")
         self.bot_message_button_container.set_visible(False)
-        self.chats["chats"][self.chats["selected_chat"]]["messages"][id] = {
+        self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id] = {
             "role": "assistant",
             "model": model,
             "date": datetime.now().strftime("%Y/%m/%d %H:%M:%S"),
@@ -994,8 +1020,9 @@ Generate a title following these rules:
         if self.regenerate_button:
             GLib.idle_add(self.chat_container.remove, self.regenerate_button)
         try:
-            response = connection_handler.stream_post(f"{connection_handler.url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=lambda data, id=id: self.update_bot_message(data, id))
-            if response.status_code != 200: raise Exception('Network Error')
+            response = connection_handler.stream_post(f"{connection_handler.url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=lambda data, message_id=message_id: self.update_bot_message(data, message_id))
+            if response.status_code != 200:
+                raise Exception('Network Error')
             GLib.idle_add(self.add_code_blocks)
         except Exception as e:
             GLib.idle_add(self.connection_error)
@@ -1008,7 +1035,7 @@ Generate a title following these rules:
                 halign=3
             )
             GLib.idle_add(self.chat_container.append, self.regenerate_button)
-            self.regenerate_button.connect('clicked', lambda button, id=id, bot_message_box=self.bot_message_box, bot_message_button_container=self.bot_message_button_container : self.regenerate_message(id, bot_message_box, bot_message_button_container))
+            self.regenerate_button.connect('clicked', lambda button, message_id=message_id, bot_message_box=self.bot_message_box, bot_message_button_container=self.bot_message_button_container : self.regenerate_message(message_id, bot_message_box, bot_message_button_container))
         finally:
             GLib.idle_add(self.switch_send_stop_button)
             GLib.idle_add(self.toggle_ui_sensitive, True)
@@ -1016,7 +1043,7 @@ Generate a title following these rules:
                 GLib.idle_add(self.chat_container.remove, self.loading_spinner)
                 self.loading_spinner = None
 
-    def regenerate_message(self, id, bot_message_box, bot_message_button_container):
+    def regenerate_message(self, message_id, bot_message_box, bot_message_button_container):
         self.bot_message_button_container = bot_message_button_container
         self.bot_message_view = Gtk.TextView(
             editable=False,
@@ -1028,11 +1055,12 @@ Generate a title following these rules:
             css_classes=["flat"]
         )
         self.bot_message = self.bot_message_view.get_buffer()
-        for widget in list(bot_message_box): bot_message_box.remove(widget)
+        for widget in list(bot_message_box):
+            bot_message_box.remove(widget)
         bot_message_box.append(self.bot_message_view)
-        history = self.convert_history_to_ollama()[:list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()).index(id)]
-        if id in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
-            del self.chats["chats"][self.chats["selected_chat"]]["messages"][id]
+        history = self.convert_history_to_ollama()[:list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()).index(message_id)]
+        if message_id in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
+            del self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]
         data = {
             "model": self.convert_model_name(self.model_drop_down.get_selected_item().get_string(), 1),
             "messages": history,
@@ -1041,7 +1069,7 @@ Generate a title following these rules:
         }
         self.switch_send_stop_button()
         self.toggle_ui_sensitive(False)
-        thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], id))
+        thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], message_id))
         thread.start()
 
     def pull_model_update(self, data, model_name):
@@ -1086,7 +1114,8 @@ Generate a title following these rules:
             GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
     def pull_model(self, model):
-        if model in list(self.pulling_models.keys()) or model in self.local_models or ":" not in model: return
+        if model in list(self.pulling_models.keys()) or model in self.local_models or ":" not in model:
+            return
         logger.info("Pulling model")
         self.pulling_model_list_box.set_visible(True)
         #self.pulling_model_list_box.connect('row_selected', lambda list_box, row: dialogs.stop_pull_model(self, row.get_name()) if row else None) #It isn't working for some reason
@@ -1175,9 +1204,9 @@ Generate a title following these rules:
             if message:
                 formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(message['date'] + (":00" if message['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S')))
                 if message['role'] == 'user':
-                    self.show_message(message['content'], False, f"\n\n<small>{formated_date}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, id=key)
+                    self.show_message(message['content'], False, f"\n\n<small>{formated_date}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, message_id=key)
                 else:
-                    self.show_message(message['content'], True, f"\n\n{self.convert_model_name(message['model'], 0)}\n<small>{formated_date}</small>", id=key)
+                    self.show_message(message['content'], True, f"\n\n{self.convert_model_name(message['model'], 0)}\n<small>{formated_date}</small>", message_id=key)
                     self.add_code_blocks()
                     self.bot_message = None
 
@@ -1187,8 +1216,10 @@ Generate a title following these rules:
             try:
                 with open(os.path.join(self.data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
                     self.chats = json.load(f)
-                    if len(list(self.chats["chats"].keys())) == 0: self.chats["chats"][_("New Chat")] = {"messages": {}}
-                    if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]: self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
+                    if len(list(self.chats["chats"].keys())) == 0:
+                        self.chats["chats"][_("New Chat")] = {"messages": {}}
+                    if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]:
+                        self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
                     if "order" not in self.chats:
                         self.chats["order"] = []
                         for chat_name in self.chats["chats"].keys():
@@ -1218,7 +1249,7 @@ Generate a title following these rules:
                         chat_name = f"{'.'.join(chat_name.split('.')[:-1])} {i+1}.{chat_name.split('.')[-1]}"
                         break
                 else:
-                    if  f"{chat_name} {i+1}" not in compare_list:
+                    if f"{chat_name} {i+1}" not in compare_list:
                         chat_name = f"{chat_name} {i+1}"
                         break
         return chat_name
@@ -1248,7 +1279,8 @@ Generate a title following these rules:
     def rename_chat(self, old_chat_name, new_chat_name, label_element):
         logger.info(f"Renaming chat \"{old_chat_name}\" -> \"{new_chat_name}\"")
         new_chat_name = self.generate_numbered_name(new_chat_name, self.chats["chats"].keys())
-        if self.chats["selected_chat"] == old_chat_name: self.chats["selected_chat"] = new_chat_name
+        if self.chats["selected_chat"] == old_chat_name:
+            self.chats["selected_chat"] = new_chat_name
         self.chats["chats"][new_chat_name] = self.chats["chats"][old_chat_name]
         self.chats["order"][self.chats["order"].index(old_chat_name)] = new_chat_name
         del self.chats["chats"][old_chat_name]
@@ -1318,9 +1350,12 @@ Generate a title following these rules:
         gesture.connect("released", self.chat_click_handler)
         chat_row.add_controller(gesture)
 
-        if append: self.chat_list_box.append(chat_row)
-        else: self.chat_list_box.prepend(chat_row)
-        if select: self.chat_list_box.select_row(chat_row)
+        if append:
+            self.chat_list_box.append(chat_row)
+        else:
+            self.chat_list_box.prepend(chat_row)
+        if select:
+            self.chat_list_box.select_row(chat_row)
 
     def update_chat_list(self):
         self.chat_list_box.remove_all()
@@ -1346,8 +1381,10 @@ Generate a title following these rules:
         connection_handler.bearer_token = None
         connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
         local_instance.start()
-        if self.verify_connection() == False: self.connection_error()
-        else: self.remote_connection_switch.set_active(False)
+        if self.verify_connection() == False:
+            self.connection_error()
+        else:
+            self.remote_connection_switch.set_active(False)
 
     def connection_error(self):
         logger.error("Connection error")
@@ -1365,13 +1402,16 @@ Generate a title following these rules:
             if self.run_remote:
                 connection_handler.bearer_token = self.remote_bearer_token
                 connection_handler.url = self.remote_url
-                if self.verify_connection() == False: self.connection_error()
-                else: local_instance.stop()
+                if self.verify_connection() == False:
+                    self.connection_error()
+                else:
+                    local_instance.stop()
             else:
                 connection_handler.bearer_token = None
                 connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
                 local_instance.start()
-                if self.verify_connection() == False: self.connection_error()
+                if self.verify_connection() == False:
+                    self.connection_error()
 
     def on_replace_contents(self, file, result):
         file.replace_contents_finish(result)
@@ -1379,7 +1419,8 @@ Generate a title following these rules:
 
     def on_export_chat(self, file_dialog, result, chat_name):
         file = file_dialog.save_finish(result)
-        if not file: return
+        if not file:
+            return
         json_data = json.dumps({chat_name: self.chats["chats"][chat_name]}, indent=4).encode("UTF-8")
 
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -1413,7 +1454,8 @@ Generate a title following these rules:
 
     def on_chat_imported(self, file_dialog, result):
         file = file_dialog.open_finish(result)
-        if not file: return
+        if not file:
+            return
         stream = file.read(None)
         data_stream = Gio.DataInputStream.new(stream)
         tar_content = data_stream.read_bytes(1024 * 1024, None)
@@ -1483,7 +1525,8 @@ Generate a title following these rules:
                 return f.read()
         elif file_type == 'pdf':
             reader = PdfReader(file_path)
-            if len(reader.pages) == 0: return None
+            if len(reader.pages) == 0:
+                return None
             text = ""
             for i, page in enumerate(reader.pages):
                 text += f"\n- Page {i}\n{page.extract_text(extraction_mode='layout', layout_mode_space_vertically=False)}\n"
@@ -1494,7 +1537,8 @@ Generate a title following these rules:
         button = self.attachments[name]['button']
         button.get_parent().remove(button)
         del self.attachments[name]
-        if len(self.attachments) == 0: self.attachment_box.set_visible(False)
+        if len(self.attachments) == 0:
+            self.attachment_box.set_visible(False)
 
     def attach_file(self, file_path, file_type):
         logger.debug(f"Attaching file: {file_path}")
@@ -1652,7 +1696,8 @@ Generate a title following these rules:
                 self.seed_spin.set_value(self.model_tweaks['seed'])
                 self.keep_alive_spin.set_value(self.model_tweaks['keep_alive'])
                 #Overrides
-                if "ollama_overrides" in data: local_instance.overrides = data['ollama_overrides']
+                if "ollama_overrides" in data:
+                    local_instance.overrides = data['ollama_overrides']
                 for element in [
                         self.override_HSA_OVERRIDE_GFX_VERSION,
                         self.override_CUDA_VISIBLE_DEVICES,
@@ -1678,7 +1723,8 @@ Generate a title following these rules:
             local_instance.start()
             connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
             self.welcome_dialog.present(self)
-        if self.verify_connection() is False: self.connection_error()
+        if self.verify_connection() is False:
+            self.connection_error()
         self.update_list_available_models()
         self.load_history()
         self.update_chat_list()

@@ -20,6 +20,7 @@
 Main script run at launch, handles actions, about dialog and the app itself (not the window)
 """
 
+import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Gio, Adw, GLib
@@ -29,7 +30,6 @@ from .internal import cache_dir, data_dir
 
 import sys
 import logging
-import gi
 import os
 
 logger = logging.getLogger(__name__)
