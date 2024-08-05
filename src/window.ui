@@ -78,7 +78,7 @@
                           <object class="GtkDropDown" id="model_drop_down">
                             <signal name="notify" handler="verify_if_image_can_be_used"/>
                             <property name="width-request">260</property>
-                            <property name="enable-search">true</property>
+                            <property name="enable-search">false</property>
                             <property name="tooltip-text">Select Model</property>
                             <property name="model">
                               <object class="GtkStringList" id="model_string_list">
