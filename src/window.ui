@@ -739,8 +739,8 @@
 
     <object class="AdwDialog" id="file_preview_dialog">
       <property name="can-close">true</property>
-      <property name="width-request">450</property>
-      <property name="height-request">450</property>
+      <property name="width-request">400</property>
+      <property name="height-request">600</property>
       <child>
         <object class="AdwToolbarView">
           <child type="top">
@@ -805,8 +805,8 @@
 
     <object class="AdwDialog" id="welcome_dialog">
       <property name="can-close">false</property>
-      <property name="width-request">450</property>
-      <property name="height-request">450</property>
+      <property name="width-request">400</property>
+      <property name="height-request">600</property>
       <child>
         <object class="AdwToolbarView">
           <child type="bottom">
