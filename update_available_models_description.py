@@ -2,7 +2,6 @@
 Moves the descriptions of models to src/available_models_descriptions.py
 so they can be translated
 """
-
 import json
 
 if __name__ == "__main__":
@@ -13,5 +12,5 @@ if __name__ == "__main__":
         RESULTS += f"   '{key}': _(\"{value['description']}\"),\n"
     RESULTS += '}'
     with open('src/available_models_descriptions.py', 'w+', encoding="utf-8") as f:
-        f.write(results)
+        f.write(RESULTS)
 
