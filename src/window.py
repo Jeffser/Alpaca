@@ -19,8 +19,7 @@
 """
 Handles the main window
 """
-import json, requests, threading, os, re, base64, sys, gettext, locale, subprocess, uuid, shutil, tarfile, tempfile, logging, random
-from time import sleep
+import json, threading, os, re, base64, sys, gettext, uuid, shutil, tarfile, tempfile, logging
 from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
@@ -147,11 +146,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 if content['type'] == 'image':
                     content['button'].set_css_classes(["flat"])
             return True
-        else:
-            for name, content in self.attachments.items():
-                if content['type'] == 'image':
-                    content['button'].set_css_classes(["flat", "error"])
-            return False
+        for name, content in self.attachments.items():
+            if content['type'] == 'image':
+                content['button'].set_css_classes(["flat", "error"])
+        return False
 
     @Gtk.Template.Callback()
     def stop_message(self, button=None):
@@ -808,7 +806,6 @@ Generate a title following these rules:
                 self.model_string_list.append(model_name)
                 self.local_models.append(model["name"])
             #self.verify_if_image_can_be_used()
-            return
         else:
             self.connection_error()
 
@@ -974,8 +971,7 @@ Generate a title following these rules:
             return date.format("%H:%M %p")
         elif date.format("%Y") == current_date.format("%Y"):
             return date.format("%b %d, %H:%M %p")
-        else:
-            return date.format("%b %d %Y, %H:%M %p")
+        return date.format("%b %d %Y, %H:%M %p")
 
     def update_bot_message(self, data, message_id):
         if self.bot_message is None:
