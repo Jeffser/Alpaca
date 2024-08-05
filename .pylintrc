@@ -1,6 +1,8 @@
 [MASTER]
 
 [MESSAGES CONTROL]
-# Disable the undefined-variable warning
-disable=undefined-variable
-disable=C0301
+disable=undefined-variable, missing-function-docstring
+
+[FORMAT]
+max-line-length=120
+
