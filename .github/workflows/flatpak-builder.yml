@@ -1,7 +1,7 @@
 # .github/workflows/flatpak-build.yml
 on:
   workflow_dispatch:
-name: CI
+name: Flatpak Build
 jobs:
   flatpak:
     name: "Flatpak"
