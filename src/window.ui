@@ -12,13 +12,14 @@
     <property name="title">Alpaca</property>
     <child>
       <object class="AdwBreakpoint">
-        <condition>max-width: 800sp</condition>
+        <condition>max-width: 690sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
       </object>
     </child>
     <property name="content">
           <object class="AdwOverlaySplitView" id="split_view_overlay">
             <property name="show-sidebar" bind-source="show_sidebar_button" bind-property="active" bind-flags="sync-create"/>
+            <property name="sidebar-width-fraction">0.4</property>
             <property name="sidebar">
               <object class="AdwToolbarView">
                 <child type="top">
@@ -75,30 +76,64 @@
                         <property name="orientation">0</property>
                         <property name="spacing">12</property>
                         <child>
-                          <object class="GtkDropDown" id="model_drop_down">
-                            <signal name="notify" handler="verify_if_image_can_be_used"/>
-                            <property name="width-request">260</property>
-                            <property name="enable-search">true</property>
-                            <property name="tooltip-text">Select Model</property>
-                            <property name="model">
-                              <object class="GtkStringList" id="model_string_list">
-                                <items>
-                                </items>
+                          <object class="GtkMenuButton" id="model_selector_button">
+                            <property name="tooltip-text" translatable="yes">Select Model</property>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label">(None)</property>
+                                    <property name="ellipsize">2</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">down-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
+                            <property name="halign">1</property>
+                            <style>
+                              <class name="raised"/>
+                            </style>
+                            <property name="popover">
+                              <object class="GtkPopover" id="model_popover">
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="orientation">1</property>
+                                    <property name="spacing">10</property>
+                                    <child>
+                                      <object class="GtkButton">
+                                        <property name="hexpand">true</property>
+                                        <property name="label" translatable="yes">Manage Models</property>
+                                        <property name="tooltip-text" translatable="yes">Manage Models</property>
+                                        <property name="action-name">app.manage_models</property>
+                                        <signal name="clicked" handler="close_model_popup"/>
+                                        <style>
+                                          <class name="accent"/>
+                                        </style>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSeparator"/>
+                                    </child>
+                                    <child>
+                                      <object class="GtkListBox" id="model_list_box">
+                                        <property name="hexpand">true</property>
+                                        <style>
+                                          <class name="navigation-sidebar"/>
+                                          <class name="model_list_box"/>
+                                        </style>
+                                        <signal name="row-selected" handler="change_model"/>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
                               </object>
                             </property>
                           </object>
                         </child>
-                        <!--<child>
-                          <object class="GtkButton" id="manage_models_button">
-                            <signal name="clicked" handler="manage_models_button_activate"/>
-                            <property name="tooltip-text" translatable="yes">Manage Models</property>
-                            <child>
-                              <object class="AdwButtonContent">
-                                <property name="icon-name">brain-augemnted-symbolic</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>-->
                       </object>
                     </property>
                     <child type="end">
@@ -215,6 +250,10 @@
                                             <property name="top-margin">10</property>
                                             <property name="bottom-margin">10</property>
                                             <property name="hexpand">true</property>
+                                            <property name="input-hints">spellcheck</property>
+                                            <accessibility>
+                                              <property name="label" translatable="yes">Message text box</property>
+                                            </accessibility>
                                           </object>
                                         </child>
                                       </object>
@@ -442,6 +481,9 @@
     </object>
 
     <object class="AdwDialog" id="manage_models_dialog">
+      <accessibility>
+        <property name="label" translatable="yes">Manage models dialog</property>
+      </accessibility>
       <property name="can-close">true</property>
       <property name="width-request">400</property>
       <property name="height-request">600</property>
@@ -476,12 +518,18 @@
                       </child>
                       <child type="top">
                         <object class="GtkSearchBar" id="model_searchbar">
+                          <accessibility>
+                            <property name="label" translatable="yes">Model search bar</property>
+                          </accessibility>
                           <property name="key-capture-widget">AlpacaWindow</property>
                           <child>
                             <object class="GtkSearchEntry" id="searchentry">
                               <signal name="search-changed" handler="model_search_changed"/>
                               <property name="search-delay">100</property>
                               <property name="placeholder-text" translatable="yes">Search models</property>
+                              <accessibility>
+                                <property name="label" translatable="yes">Search models</property>
+                              </accessibility>
                             </object>
                           </child>
                         </object>
@@ -517,7 +565,7 @@
                               </child>
                               <child>
                                 <object class="GtkListBox" id="available_model_list_box">
-                                  <property name="selection-mode">single</property>
+                                  <property name="selection-mode">none</property>
                                   <style>
                                     <class name="boxed-list"/>
                                   </style>
@@ -580,7 +628,7 @@
                               <child>
                                 <object class="GtkListBox" id="model_tag_list_box">
                                   <property name="valign">1</property>
-                                  <property name="selection-mode">single</property>
+                                  <property name="selection-mode">none</property>
                                   <style>
                                     <class name="boxed-list"/>
                                   </style>
@@ -738,9 +786,12 @@
     </object>
 
     <object class="AdwDialog" id="file_preview_dialog">
+      <accessibility>
+        <property name="label" translatable="yes">File preview dialog</property>
+      </accessibility>
       <property name="can-close">true</property>
-      <property name="width-request">450</property>
-      <property name="height-request">450</property>
+      <property name="width-request">400</property>
+      <property name="height-request">600</property>
       <child>
         <object class="AdwToolbarView">
           <child type="top">
@@ -805,8 +856,8 @@
 
     <object class="AdwDialog" id="welcome_dialog">
       <property name="can-close">false</property>
-      <property name="width-request">450</property>
-      <property name="height-request">450</property>
+      <property name="width-request">400</property>
+      <property name="height-request">600</property>
       <child>
         <object class="AdwToolbarView">
           <child type="bottom">
@@ -1054,6 +1105,10 @@ By downloading any model you accept their license agreement available on the mod
     </section>
   </menu>
   <menu id="secondary_menu">
+    <item>
+      <attribute name="label" translatable="yes">Delete Chat</attribute>
+      <attribute name="action">app.delete_current_chat</attribute>
+    </item>
     <item>
       <attribute name="label" translatable="yes">Rename Chat</attribute>
       <attribute name="action">app.rename_current_chat</attribute>
