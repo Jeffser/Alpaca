@@ -287,7 +287,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.remote_url = entry.get_text()
         logger.debug(f"Changing remote url: {self.remote_url}")
         if self.run_remote:
-            connection_handler.url = self.remote_url
+            connection_handler.URL = self.remote_url
             if self.verify_connection() == False:
                 entry.set_css_classes(["error"])
                 self.show_toast(_("Failed to connect to server"), self.preferences_dialog)
@@ -298,7 +298,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.save_server_config()
         return
         if self.remote_url and self.run_remote:
-            connection_handler.url = self.remote_url
+            connection_handler.URL = self.remote_url
             if self.verify_connection() == False:
                 entry.set_css_classes(["error"])
                 self.show_toast(_("Failed to connect to server"), self.preferences_dialog)
@@ -491,7 +491,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         modelfile_buffer.delete(modelfile_buffer.get_start_iter(), modelfile_buffer.get_end_iter())
         self.create_model_system.set_text('')
         if not file:
-            response = connection_handler.simple_post(f"{connection_handler.url}/api/show", json.dumps({"name": self.convert_model_name(model, 1)}))
+            response = connection_handler.simple_post(f"{connection_handler.URL}/api/show", json.dumps({"name": self.convert_model_name(model, 1)}))
             if response.status_code == 200:
                 data = json.loads(response.text)
                 modelfile = []
@@ -645,7 +645,7 @@ Generate a title following these rules:
         data = {"model": current_model, "prompt": prompt, "stream": False}
         if 'images' in message:
             data["images"] = message['images']
-        response = connection_handler.simple_post(f"{connection_handler.url}/api/generate", data=json.dumps(data))
+        response = connection_handler.simple_post(f"{connection_handler.URL}/api/generate", data=json.dumps(data))
 
         new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
         new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
@@ -823,7 +823,7 @@ Generate a title following these rules:
     def update_list_local_models(self):
         logger.debug("Updating list of local models")
         self.local_models = []
-        response = connection_handler.simple_get(f"{connection_handler.url}/api/tags")
+        response = connection_handler.simple_get(f"{connection_handler.URL}/api/tags")
         self.model_list_box.remove_all()
         if response.status_code == 200:
             self.local_model_list_box.remove_all()
@@ -868,7 +868,7 @@ Generate a title following these rules:
 
     def verify_connection(self):
         try:
-            response = connection_handler.simple_get(f"{connection_handler.url}/api/tags")
+            response = connection_handler.simple_get(f"{connection_handler.URL}/api/tags")
             if response.status_code == 200:
                 self.save_server_config()
                 self.update_list_local_models()
@@ -1071,7 +1071,7 @@ Generate a title following these rules:
         if self.regenerate_button:
             GLib.idle_add(self.chat_container.remove, self.regenerate_button)
         try:
-            response = connection_handler.stream_post(f"{connection_handler.url}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=lambda data, message_id=message_id: self.update_bot_message(data, message_id))
+            response = connection_handler.stream_post(f"{connection_handler.URL}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=lambda data, message_id=message_id: self.update_bot_message(data, message_id))
             if response.status_code != 200:
                 raise Exception('Network Error')
             GLib.idle_add(self.add_code_blocks)
@@ -1141,10 +1141,10 @@ Generate a title following these rules:
     def pull_model_process(self, model, modelfile):
         if modelfile:
             data = {"name": model, "modelfile": modelfile}
-            response = connection_handler.stream_post(f"{connection_handler.url}/api/create", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
+            response = connection_handler.stream_post(f"{connection_handler.URL}/api/create", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
         else:
             data = {"name": model}
-            response = connection_handler.stream_post(f"{connection_handler.url}/api/pull", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
+            response = connection_handler.stream_post(f"{connection_handler.URL}/api/pull", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
         GLib.idle_add(self.update_list_local_models)
         GLib.idle_add(self.change_model)
 
@@ -1374,7 +1374,7 @@ Generate a title following these rules:
 
     def delete_model(self, model_name):
         logger.debug("Deleting model")
-        response = connection_handler.simple_delete(f"{connection_handler.url}/api/delete", data={"name": model_name})
+        response = connection_handler.simple_delete(f"{connection_handler.URL}/api/delete", data={"name": model_name})
         self.update_list_local_models()
         if response.status_code == 200:
             self.show_toast(_("Model deleted successfully"), self.manage_models_overlay)
@@ -1440,9 +1440,9 @@ Generate a title following these rules:
 
     def connect_remote(self, url, bearer_token):
         logger.debug(f"Connecting to remote: {url}")
-        connection_handler.url = url
+        connection_handler.URL = url
         connection_handler.BEARER_TOKEN = bearer_token
-        self.remote_url = connection_handler.url
+        self.remote_url = connection_handler.URL
         self.remote_connection_entry.set_text(self.remote_url)
         if self.verify_connection() == False: self.connection_error()
 
@@ -1450,7 +1450,7 @@ Generate a title following these rules:
         logger.debug("Connecting to Alpaca's Ollama instance")
         self.run_remote = False
         connection_handler.BEARER_TOKEN = None
-        connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
+        connection_handler.URL = f"http://127.0.0.1:{local_instance.port}"
         local_instance.start()
         if self.verify_connection() == False:
             self.connection_error()
@@ -1460,7 +1460,7 @@ Generate a title following these rules:
     def connection_error(self):
         logger.error("Connection error")
         if self.run_remote:
-            dialogs.reconnect_remote(self, connection_handler.url, connection_handler.BEARER_TOKEN)
+            dialogs.reconnect_remote(self, connection_handler.URL, connection_handler.BEARER_TOKEN)
         else:
             local_instance.reset()
             self.show_toast(_("There was an error with the local Ollama instance, so it has been reset"), self.main_overlay)
@@ -1472,14 +1472,14 @@ Generate a title following these rules:
             self.run_remote = new_value
             if self.run_remote:
                 connection_handler.BEARER_TOKEN = self.remote_bearer_token
-                connection_handler.url = self.remote_url
+                connection_handler.URL = self.remote_url
                 if self.verify_connection() == False:
                     self.connection_error()
                 else:
                     local_instance.stop()
             else:
                 connection_handler.BEARER_TOKEN = None
-                connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
+                connection_handler.URL = f"http://127.0.0.1:{local_instance.port}"
                 local_instance.start()
                 if self.verify_connection() == False:
                     self.connection_error()
@@ -1770,16 +1770,16 @@ Generate a title following these rules:
                 self.remote_bearer_token_entry.set_text(self.remote_bearer_token)
                 if self.run_remote:
                     connection_handler.BEARER_TOKEN = self.remote_bearer_token
-                    connection_handler.url = self.remote_url
+                    connection_handler.URL = self.remote_url
                     self.remote_connection_switch.set_active(True)
                 else:
                     connection_handler.BEARER_TOKEN = None
                     self.remote_connection_switch.set_active(False)
-                    connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
+                    connection_handler.URL = f"http://127.0.0.1:{local_instance.port}"
                     local_instance.start()
         else:
             local_instance.start()
-            connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
+            connection_handler.URL = f"http://127.0.0.1:{local_instance.port}"
             self.welcome_dialog.present(self)
         if self.verify_connection() is False:
             self.connection_error()
