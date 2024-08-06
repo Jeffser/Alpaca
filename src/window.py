@@ -418,26 +418,32 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def change_model(self, listbox=None, row=None):
         if not row:
-            current_model = self.convert_model_name(self.model_selector_button.get_child().get_label(), 1)
-            print("c ", current_model)
-            for i, m in enumerate(self.local_models):
-                if m == current_model:
-                    self.model_list_box.select_row(self.model_list_box.get_row_at_index(i))
-                    return
-            self.model_list_box.select_row(self.model_list_box.get_row_at_index(0))
-            return
+            current_model = self.model_selector_button.get_name()
+            if current_model != 'NO_MODEL':
+                for i, m in enumerate(self.local_models):
+                    if m == current_model:
+                        self.model_list_box.select_row(self.model_list_box.get_row_at_index(i))
+                        return
+            if len(self.local_models) > 0:
+                self.model_list_box.select_row(self.model_list_box.get_row_at_index(0))
+                return
+            else:
+                model_name = None
+        else:
+            model_name = row.get_child().get_label()
         button_content = Gtk.Box(
             spacing=10
         )
         button_content.append(
             Gtk.Label(
-                label=row.get_child().get_label(),
+                label=model_name if model_name else _("Select a Model"),
                 ellipsize=2
             )
         )
         button_content.append(
             Gtk.Image.new_from_icon_name("down-symbolic")
         )
+        self.model_selector_button.set_name(row.get_name() if row else 'NO_MODEL')
         self.model_selector_button.set_child(button_content)
         self.close_model_popup()
         self.verify_if_image_can_be_used()

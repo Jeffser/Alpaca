@@ -80,9 +80,10 @@
                             <property name="tooltip-text" translatable="yes">Select Model</property>
                             <property name="child">
                               <object class="GtkBox">
+                                <property name="spacing">10</property>
                                 <child>
                                   <object class="GtkLabel">
-                                    <property name="label">(None)</property>
+                                    <property name="label" translatable="yes">Select a Model</property>
                                     <property name="ellipsize">2</property>
                                   </object>
                                 </child>
