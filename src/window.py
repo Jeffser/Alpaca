@@ -1433,7 +1433,7 @@ Generate a title following these rules:
     def connect_remote(self, url, bearer_token):
         logger.debug(f"Connecting to remote: {url}")
         connection_handler.url = url
-        connection_handler.bearer_token = bearer_token
+        connection_handler.BEARER_TOKEN = bearer_token
         self.remote_url = connection_handler.url
         self.remote_connection_entry.set_text(self.remote_url)
         if self.verify_connection() == False: self.connection_error()
@@ -1441,7 +1441,7 @@ Generate a title following these rules:
     def connect_local(self):
         logger.debug("Connecting to Alpaca's Ollama instance")
         self.run_remote = False
-        connection_handler.bearer_token = None
+        connection_handler.BEARER_TOKEN = None
         connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
         local_instance.start()
         if self.verify_connection() == False:
@@ -1452,7 +1452,7 @@ Generate a title following these rules:
     def connection_error(self):
         logger.error("Connection error")
         if self.run_remote:
-            dialogs.reconnect_remote(self, connection_handler.url, connection_handler.bearer_token)
+            dialogs.reconnect_remote(self, connection_handler.url, connection_handler.BEARER_TOKEN)
         else:
             local_instance.reset()
             self.show_toast(_("There was an error with the local Ollama instance, so it has been reset"), self.main_overlay)
@@ -1463,14 +1463,14 @@ Generate a title following these rules:
         if new_value != self.run_remote:
             self.run_remote = new_value
             if self.run_remote:
-                connection_handler.bearer_token = self.remote_bearer_token
+                connection_handler.BEARER_TOKEN = self.remote_bearer_token
                 connection_handler.url = self.remote_url
                 if self.verify_connection() == False:
                     self.connection_error()
                 else:
                     local_instance.stop()
             else:
-                connection_handler.bearer_token = None
+                connection_handler.BEARER_TOKEN = None
                 connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
                 local_instance.start()
                 if self.verify_connection() == False:
@@ -1761,11 +1761,11 @@ Generate a title following these rules:
                 self.remote_connection_entry.set_text(self.remote_url)
                 self.remote_bearer_token_entry.set_text(self.remote_bearer_token)
                 if self.run_remote:
-                    connection_handler.bearer_token = self.remote_bearer_token
+                    connection_handler.BEARER_TOKEN = self.remote_bearer_token
                     connection_handler.url = self.remote_url
                     self.remote_connection_switch.set_active(True)
                 else:
-                    connection_handler.bearer_token = None
+                    connection_handler.BEARER_TOKEN = None
                     self.remote_connection_switch.set_active(False)
                     connection_handler.url = f"http://127.0.0.1:{local_instance.port}"
                     local_instance.start()
