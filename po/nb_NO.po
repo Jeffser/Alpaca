@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-04 22:57-0600\n"
+"POT-Creation-Date: 2024-08-06 13:39-0600\n"
 "PO-Revision-Date: 2024-07-02 18:24-0600\n"
 "Last-Translator: Niklas Opsahl Halvorsen\n"
 "Language-Team: Norwegian\n"
@@ -77,7 +77,7 @@ msgstr ""
 msgid "PDF recognition"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:884
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:952
 msgid "Disclaimer"
 msgstr "Obs!"
 
@@ -1058,152 +1058,176 @@ msgstr "0.1.1 Stabil utgivelse"
 msgid "This is the first public version of Alpaca"
 msgstr "Dette er den første offentlige versjonen av Alpaca"
 
-#: src/window.py:65 src/window.py:1223 src/window.py:1298 src/dialogs.py:90
-#: src/window.ui:28
+#: src/window.py:65 src/window.py:1289 src/window.py:1364 src/dialogs.py:90
+#: src/window.ui:29
 msgid "New Chat"
 msgstr "Ny samtale"
 
-#: src/window.py:180
+#: src/window.py:165
 msgid "Message edited successfully"
 msgstr "Melding suksessfullt redigert"
 
-#: src/window.py:196
+#: src/window.py:181
 msgid "Please select a model before chatting"
 msgstr "Velg en modell før samtalen"
 
-#: src/window.py:264 src/window.py:265
+#: src/window.py:249 src/window.py:250
 msgid "Close"
 msgstr "Lukk"
 
-#: src/window.py:267 src/window.py:268 src/window.ui:837
+#: src/window.py:252 src/window.py:253 src/window.ui:905
 msgid "Next"
 msgstr "Neste"
 
-#: src/window.py:309 src/window.py:320
+#: src/window.py:293 src/window.py:304
 msgid "Failed to connect to server"
 msgstr "Feilet tilkobling til server"
 
-#: src/window.py:327
+#: src/window.py:311
 msgid "Pulling in the background..."
 msgstr "Nedlaster i bakgrunnen..."
 
-#: src/window.py:380
+#: src/window.py:364
 msgid "Stop Creating '{}'"
 msgstr "Stopp skaping '{}'"
 
-#: src/window.py:420
+#: src/window.py:404
 msgid "image"
 msgstr "bilde"
 
-#: src/window.py:509
+#: src/window.py:439 src/window.ui:86
+msgid "Select a Model"
+msgstr ""
+
+#: src/window.py:545
 msgid "Message copied to the clipboard"
 msgstr "Melding kopiert til utklippstavle"
 
-#: src/window.py:639
+#: src/window.py:667
+msgid "User message"
+msgstr ""
+
+#: src/window.py:676
 msgid "Remove Message"
 msgstr "Fjern Melding"
 
-#: src/window.py:644 src/window.py:941
+#: src/window.py:681 src/window.py:989
 msgid "Copy Message"
 msgstr "Kopier Melding"
 
-#: src/window.py:649
+#: src/window.py:686
 msgid "Edit Message"
 msgstr "Rediger Melding"
 
-#: src/window.py:654
+#: src/window.py:691
 msgid "Regenerate Message"
 msgstr ""
 
-#: src/window.py:697
+#: src/window.py:734 src/window.py:736
 msgid "Image"
 msgstr ""
 
-#: src/window.py:707 src/window.py:723
+#: src/window.py:745 src/window.py:761
 msgid "Missing Image"
 msgstr ""
 
-#: src/window.py:725
+#: src/window.py:763 src/window.py:764
 msgid "Missing image"
 msgstr ""
 
-#: src/window.py:807
+#: src/window.py:845
 msgid "Remove '{}'"
 msgstr ""
 
-#: src/window.py:940
+#: src/window.py:964
+msgid "Response message"
+msgstr ""
+
+#: src/window.py:984
+msgid "{}Code Block"
+msgstr ""
+
+#: src/window.py:988
 msgid "Code Block"
 msgstr ""
 
-#: src/window.py:972
+#: src/window.py:1020
 msgid "Code copied to the clipboard"
 msgstr "Kode kopiert til utklippstavle"
 
-#: src/window.py:1035
+#: src/window.py:1083
 msgid "Regenerate Response"
 msgstr ""
 
-#: src/window.py:1103
+#: src/window.py:1152
 msgid "Task Complete"
 msgstr "Oppgave Ferdig"
 
-#: src/window.py:1103 src/window.py:1104
+#: src/window.py:1152 src/window.py:1153
 msgid "Model '{}' pulled successfully."
 msgstr "Modell '{}' suksessfullt nedlasted."
 
-#: src/window.py:1106 src/window.py:1109
+#: src/window.py:1155 src/window.py:1158
 msgid "Pull Model Error"
 msgstr "Problem med modell nedlasting"
 
-#: src/window.py:1106
+#: src/window.py:1155
 msgid "Failed to pull model '{}': {}"
 msgstr ""
 
-#: src/window.py:1107
+#: src/window.py:1156
 msgid "Error pulling '{}': {}"
 msgstr ""
 
-#: src/window.py:1109
+#: src/window.py:1158
 msgid "Failed to pull model '{}' due to network error."
 msgstr "Mislykkes nedlasting av modell '{}' grunnet av nettverks feil."
 
-#: src/window.py:1110
+#: src/window.py:1159
 msgid "Error pulling '{}'"
 msgstr ""
 
-#: src/window.py:1144
+#: src/window.py:1193
 msgid "Stop Pulling '{}'"
 msgstr ""
 
-#: src/window.py:1187
+#: src/window.py:1227
+msgid "Download {}:{}"
+msgstr ""
+
+#: src/window.py:1247
 msgid "Image Recognition"
 msgstr ""
 
-#: src/window.py:1314
+#: src/window.py:1252
+msgid "Enter download menu for {}"
+msgstr ""
+
+#: src/window.py:1380
 msgid "Model deleted successfully"
 msgstr "Modell suksessfullt slettet"
 
-#: src/window.py:1398
+#: src/window.py:1466
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr "Det var et problem med lokal Ollama instans, så den har fått omstart"
 
-#: src/window.py:1421
+#: src/window.py:1489
 msgid "Chat exported successfully"
 msgstr "Samtale suksessfullt eksportert"
 
-#: src/window.py:1492
+#: src/window.py:1560
 msgid "Chat imported successfully"
 msgstr "Samtale suksessfullt importert"
 
-#: src/window.py:1525
+#: src/window.py:1593
 msgid "Cannot open image"
 msgstr "Kan ikke åpne bilde"
 
-#: src/window.py:1609
+#: src/window.py:1677
 msgid "This video is not available"
 msgstr "Denne videoen er ikke tilgjengelig"
 
-#: src/window.py:1627 src/dialogs.py:306
+#: src/window.py:1695 src/dialogs.py:306
 msgid "Image recognition is only available on specific models"
 msgstr "Bildetolkning er bare tilgjengelig på enkelte modeller"
 
@@ -1964,7 +1988,7 @@ msgstr ""
 msgid "Enter name for new chat"
 msgstr ""
 
-#: src/dialogs.py:107 src/window.ui:719
+#: src/dialogs.py:107 src/window.ui:784
 msgid "Create"
 msgstr "Lag"
 
@@ -2016,7 +2040,7 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: src/dialogs.py:239
+#: src/dialogs.py:239 src/window.ui:80
 msgid "Select Model"
 msgstr ""
 
@@ -2071,55 +2095,63 @@ msgid ""
 "'{}'?"
 msgstr ""
 
-#: src/window.ui:39
+#: src/window.ui:40
 msgid "Menu"
 msgstr "Meny"
 
-#: src/window.ui:69
+#: src/window.ui:70
 msgid "Toggle Sidebar"
 msgstr "Skru av/på sidefelt"
 
-#: src/window.ui:108
+#: src/window.ui:112 src/window.ui:118 src/window.ui:513 src/window.ui:1105
+msgid "Manage Models"
+msgstr "Tilpass Modeller"
+
+#: src/window.ui:160
 msgid "Chat Menu"
 msgstr "Samtale Meny"
 
-#: src/window.ui:184
+#: src/window.ui:236
 msgid "Attach File"
 msgstr "Filvedlegg"
 
-#: src/window.ui:229 src/window.ui:1214
+#: src/window.ui:272
+msgid "Message text box"
+msgstr ""
+
+#: src/window.ui:285 src/window.ui:1292
 msgid "Send Message"
 msgstr "Send Melding"
 
-#: src/window.ui:278 src/window.ui:1043 src/window.ui:1161
+#: src/window.ui:334 src/window.ui:1111 src/window.ui:1239
 msgid "Preferences"
 msgstr "Innstillinger"
 
-#: src/window.ui:281 src/window.ui:1139
+#: src/window.ui:337 src/window.ui:1217
 msgid "General"
 msgstr "Generelt"
 
-#: src/window.ui:287
+#: src/window.ui:343
 msgid "Use Remote Connection to Ollama"
 msgstr "Bruk ekstern tilkobling til Ollama"
 
-#: src/window.ui:293
+#: src/window.ui:349
 msgid "URL of Remote Instance"
 msgstr "URL til Ekstern Instans"
 
-#: src/window.ui:300
+#: src/window.ui:356
 msgid "Bearer Token (Optional)"
 msgstr "Bearer Token (Frivillig)"
 
-#: src/window.ui:310
+#: src/window.ui:366
 msgid "Run Alpaca In Background"
 msgstr "Kjør Alpaca i Bakgrunn"
 
-#: src/window.ui:321
+#: src/window.ui:377
 msgid "Temperature"
 msgstr "Temperatur"
 
-#: src/window.ui:322
+#: src/window.ui:378
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
@@ -2127,11 +2159,11 @@ msgstr ""
 "Temperaturen til modellen. Øking av temperatur vil gjøre modellen mer "
 "kreativ (Standard: 0.8)"
 
-#: src/window.ui:337
+#: src/window.ui:393
 msgid "Seed"
 msgstr "Frø"
 
-#: src/window.ui:338
+#: src/window.ui:394
 msgid ""
 "Sets the random number seed to use for generation. Setting this to a "
 "specific number will make the model generate the same text for the same "
@@ -2140,11 +2172,11 @@ msgstr ""
 "Tilfeldig frø for bruk til generasjon. Velg et spesifikk nummer hvis du vil "
 "ha samme tekst fra samme inndata. (Standard: 0 (tilfeldig))"
 
-#: src/window.ui:352
+#: src/window.ui:408
 msgid "Keep Alive Time"
 msgstr "Hold Aktiv Tid"
 
-#: src/window.ui:353
+#: src/window.ui:409
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
@@ -2152,15 +2184,15 @@ msgstr ""
 "Kontrollerer hvor lenge modellen vil lagres i minne etter forespørselen i "
 "minutter (Standard: 5)"
 
-#: src/window.ui:369
+#: src/window.ui:425
 msgid "Ollama Instance"
 msgstr "Ollama Instanser"
 
-#: src/window.ui:373
+#: src/window.ui:429
 msgid "Ollama Overrides"
 msgstr "Ollama Overskrivelser"
 
-#: src/window.ui:374
+#: src/window.ui:430
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
@@ -2168,80 +2200,88 @@ msgstr ""
 "Tilpass argumentene brukt i Ollama, endringer i denne siden fullføres bare "
 "for den integrerte instansen, og den vil omstartes dersom du gjør endringer."
 
-#: src/window.ui:454 src/window.ui:1037
-msgid "Manage Models"
-msgstr "Tilpass Modeller"
+#: src/window.ui:502
+msgid "Manage models dialog"
+msgstr ""
 
-#: src/window.ui:464 src/window.ui:599
+#: src/window.ui:523 src/window.ui:664
 msgid "Create Model"
 msgstr "Lag Modell"
 
-#: src/window.ui:471
+#: src/window.ui:530
 msgid "Search Model"
 msgstr "Søk Modell"
 
-#: src/window.ui:484
+#: src/window.ui:539
+msgid "Model search bar"
+msgstr ""
+
+#: src/window.ui:546 src/window.ui:548
 msgid "Search models"
 msgstr "Søkemodeller"
 
-#: src/window.ui:531
+#: src/window.ui:596
 msgid "No Models Found"
 msgstr "Ingen Modeller Funnet"
 
-#: src/window.ui:532
+#: src/window.ui:597
 msgid "Try a different search"
 msgstr "Prøv andre søkeord"
 
-#: src/window.ui:577
+#: src/window.ui:642
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
 msgstr ""
 
-#: src/window.ui:634
+#: src/window.ui:699
 msgid "Base"
 msgstr "Standard"
 
-#: src/window.ui:653
+#: src/window.ui:718
 msgid "Name"
 msgstr "Navn"
 
-#: src/window.ui:659
+#: src/window.ui:724
 msgid "Context"
 msgstr "Kontekst"
 
-#: src/window.ui:703
+#: src/window.ui:768
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
 "documentation for more information if you're unsure."
 msgstr ""
 
-#: src/window.ui:751
+#: src/window.ui:807
+msgid "File preview dialog"
+msgstr ""
+
+#: src/window.ui:819
 msgid "Open With Default App"
 msgstr ""
 
-#: src/window.ui:759
+#: src/window.ui:827
 msgid "Remove Attachment"
 msgstr ""
 
-#: src/window.ui:821
+#: src/window.ui:889
 msgid "Previous"
 msgstr "Forrige"
 
-#: src/window.ui:864
+#: src/window.ui:932
 msgid "Welcome to Alpaca"
 msgstr "Velkommen til Alpaca"
 
-#: src/window.ui:865
+#: src/window.ui:933
 msgid "Powered by Ollama"
 msgstr "Drives av Ollama"
 
-#: src/window.ui:868
+#: src/window.ui:936
 msgid "Ollama Website"
 msgstr "Ollama Nettside"
 
-#: src/window.ui:885
+#: src/window.ui:953
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2251,11 +2291,11 @@ msgstr ""
 "programvare fra bruk av kode generert via KI modellene. Vær OBS og analyser "
 "kode før det brukes."
 
-#: src/window.ui:896
+#: src/window.ui:964
 msgid "Featured Models"
 msgstr "Fremhevede Modeller"
 
-#: src/window.ui:897
+#: src/window.ui:965
 msgid ""
 "Alpaca works locally on your device, to start chatting you'll need an AI "
 "model, you can either pull models from this list or the 'Manage Models' menu "
@@ -2266,103 +2306,103 @@ msgid ""
 "                  "
 msgstr ""
 
-#: src/window.ui:910
+#: src/window.ui:978
 msgid "Built by Meta"
 msgstr "Bygget av Meta"
 
-#: src/window.ui:938
+#: src/window.ui:1006
 msgid "Built by Google DeepMind"
 msgstr "Bygget av Google DeepMind"
 
-#: src/window.ui:966
+#: src/window.ui:1034
 msgid "Built by Microsoft"
 msgstr "Bygget av Microsoft"
 
-#: src/window.ui:994
+#: src/window.ui:1062
 msgid "Multimodal AI with image recognition"
 msgstr "Multimodal KI med bildetolkning"
 
-#: src/window.ui:1033
+#: src/window.ui:1101
 msgid "Import Chat"
 msgstr "Importer samtale"
 
-#: src/window.ui:1047
+#: src/window.ui:1115
 msgid "Keyboard Shortcuts"
 msgstr "Hurtigtaster"
 
-#: src/window.ui:1051
+#: src/window.ui:1119
 msgid "About Alpaca"
 msgstr "Om Alpaca"
 
-#: src/window.ui:1058 src/window.ui:1077
+#: src/window.ui:1127 src/window.ui:1149
 msgid "Rename Chat"
 msgstr "Navngi samtale"
 
-#: src/window.ui:1062 src/window.ui:1081
+#: src/window.ui:1131 src/window.ui:1153
 msgid "Export Chat"
 msgstr "Eksporter samtale"
 
-#: src/window.ui:1066
+#: src/window.ui:1135
 msgid "Clear Chat"
 msgstr "Rens samtale"
 
-#: src/window.ui:1073
+#: src/window.ui:1141 src/window.ui:1159
 msgid "Delete Chat"
 msgstr "Slett samtale"
 
-#: src/window.ui:1089
+#: src/window.ui:1167
 msgid "From Existing Model"
 msgstr "Fra Eksisterende Modell"
 
-#: src/window.ui:1093
+#: src/window.ui:1171
 msgid "From GGUF File"
 msgstr ""
 
-#: src/window.ui:1097
+#: src/window.ui:1175
 msgid "From Name"
 msgstr ""
 
-#: src/window.ui:1143
+#: src/window.ui:1221
 msgid "Close application"
 msgstr "Lukk applikasjon"
 
-#: src/window.ui:1149
+#: src/window.ui:1227
 msgid "Import chat"
 msgstr "Importer samtale"
 
-#: src/window.ui:1155
+#: src/window.ui:1233
 msgid "Clear chat"
 msgstr "Rens samtale"
 
-#: src/window.ui:1167
+#: src/window.ui:1245
 msgid "New chat"
 msgstr "Ny samtale"
 
-#: src/window.ui:1173
+#: src/window.ui:1251
 msgid "Show shortcuts window"
 msgstr "Vis hurtigtast vindu"
 
-#: src/window.ui:1179
+#: src/window.ui:1257
 msgid "Manage models"
 msgstr ""
 
-#: src/window.ui:1185
+#: src/window.ui:1263
 msgid "Toggle sidebar"
 msgstr ""
 
-#: src/window.ui:1192
+#: src/window.ui:1270
 msgid "Editor"
 msgstr "Redigerer"
 
-#: src/window.ui:1196
+#: src/window.ui:1274
 msgid "Copy"
 msgstr "Kopier"
 
-#: src/window.ui:1202
+#: src/window.ui:1280
 msgid "Paste"
 msgstr "Lim inn"
 
-#: src/window.ui:1208
+#: src/window.ui:1286
 msgid "Insert new line"
 msgstr "Sett inn ny linje"
 
