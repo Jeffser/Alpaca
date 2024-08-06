@@ -76,30 +76,64 @@
                         <property name="orientation">0</property>
                         <property name="spacing">12</property>
                         <child>
-                          <object class="GtkDropDown" id="model_drop_down">
-                            <signal name="notify" handler="verify_if_image_can_be_used"/>
-                            <property name="width-request">260</property>
-                            <property name="enable-search">false</property>
-                            <property name="tooltip-text">Select Model</property>
-                            <property name="model">
-                              <object class="GtkStringList" id="model_string_list">
-                                <items>
-                                </items>
+                          <object class="GtkMenuButton" id="model_selector_button">
+                            <property name="tooltip-text" translatable="yes">Select Model</property>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label">(None)</property>
+                                    <property name="ellipsize">2</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">down-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
+                            <property name="halign">1</property>
+                            <style>
+                              <class name="raised"/>
+                            </style>
+                            <property name="popover">
+                              <object class="GtkPopover" id="model_popover">
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="orientation">1</property>
+                                    <property name="spacing">10</property>
+                                    <child>
+                                      <object class="GtkButton">
+                                        <property name="hexpand">true</property>
+                                        <property name="label" translatable="yes">Manage Models</property>
+                                        <property name="tooltip-text" translatable="yes">Manage Models</property>
+                                        <property name="action-name">app.manage_models</property>
+                                        <signal name="clicked" handler="close_model_popup"/>
+                                        <style>
+                                          <class name="accent"/>
+                                        </style>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSeparator"/>
+                                    </child>
+                                    <child>
+                                      <object class="GtkListBox" id="model_list_box">
+                                        <property name="hexpand">true</property>
+                                        <style>
+                                          <class name="navigation-sidebar"/>
+                                          <class name="model_list_box"/>
+                                        </style>
+                                        <signal name="row-selected" handler="change_model"/>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
                               </object>
                             </property>
                           </object>
                         </child>
-                        <!--<child>
-                          <object class="GtkButton" id="manage_models_button">
-                            <signal name="clicked" handler="manage_models_button_activate"/>
-                            <property name="tooltip-text" translatable="yes">Manage Models</property>
-                            <child>
-                              <object class="AdwButtonContent">
-                                <property name="icon-name">brain-augemnted-symbolic</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>-->
                       </object>
                     </property>
                     <child type="end">
