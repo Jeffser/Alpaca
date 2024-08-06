@@ -1287,6 +1287,7 @@ Generate a title following these rules:
                         self.chats["order"] = []
                         for chat_name in self.chats["chats"].keys():
                             self.chats["order"].append(chat_name)
+                    self.model_list_box.select_row(self.model_list_box.get_row_at_index(0))
                     if len(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()) > 0:
                         last_model_used = self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]
                         for i, m in enumerate(self.local_models):
@@ -1382,6 +1383,7 @@ Generate a title following these rules:
             menu_model=self.chat_right_click_menu,
             has_arrow=False,
             halign=1,
+            height_request=125
         )
         self.selected_chat_row = chat_row
         position = Gdk.Rectangle()

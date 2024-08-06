@@ -99,19 +99,27 @@
                             </style>
                             <property name="popover">
                               <object class="GtkPopover" id="model_popover">
+                                <property name="has-arrow">false</property>
                                 <child>
                                   <object class="GtkBox">
                                     <property name="orientation">1</property>
-                                    <property name="spacing">10</property>
+                                    <property name="spacing">5</property>
                                     <child>
                                       <object class="GtkButton">
+                                        <property name="child">
+                                          <object class="GtkLabel">
+                                            <property name="label" translatable="yes">Manage Models</property>
+                                            <property name="justify">left</property>
+                                            <property name="halign">1</property>
+                                          </object>
+                                        </property>
                                         <property name="hexpand">true</property>
-                                        <property name="label" translatable="yes">Manage Models</property>
                                         <property name="tooltip-text" translatable="yes">Manage Models</property>
                                         <property name="action-name">app.manage_models</property>
                                         <signal name="clicked" handler="close_model_popup"/>
                                         <style>
-                                          <class name="accent"/>
+                                          <class name="flat"/>
+                                          <class name="manage_models_button"/>
                                         </style>
                                       </object>
                                     </child>
@@ -119,15 +127,23 @@
                                       <object class="GtkSeparator"/>
                                     </child>
                                     <child>
-                                      <object class="GtkListBox" id="model_list_box">
-                                        <property name="hexpand">true</property>
-                                        <style>
-                                          <class name="navigation-sidebar"/>
-                                          <class name="model_list_box"/>
-                                        </style>
-                                        <signal name="row-selected" handler="change_model"/>
+                                      <object class="GtkScrolledWindow">
+                                        <property name="max-content-height">300</property>
+                                        <property name="propagate-natural-width">true</property>
+                                        <property name="propagate-natural-height">true</property>
+                                        <child>
+                                          <object class="GtkListBox" id="model_list_box">
+                                            <property name="hexpand">true</property>
+                                            <style>
+                                              <class name="navigation-sidebar"/>
+                                              <class name="model_list_box"/>
+                                            </style>
+                                            <signal name="row-selected" handler="change_model"/>
+                                          </object>
+                                        </child>
                                       </object>
                                     </child>
+
                                   </object>
                                 </child>
                               </object>
@@ -1105,29 +1121,29 @@ By downloading any model you accept their license agreement available on the mod
     </section>
   </menu>
   <menu id="secondary_menu">
-    <item>
-      <attribute name="label" translatable="yes">Delete Chat</attribute>
-      <attribute name="action">app.delete_current_chat</attribute>
-    </item>
-    <item>
-      <attribute name="label" translatable="yes">Rename Chat</attribute>
-      <attribute name="action">app.rename_current_chat</attribute>
-    </item>
-    <item>
-      <attribute name="label" translatable="yes">Export Chat</attribute>
-      <attribute name="action">app.export_current_chat</attribute>
-    </item>
-    <item>
-      <attribute name="label" translatable="yes">Clear Chat</attribute>
-      <attribute name="action">app.clear</attribute>
-    </item>
-  </menu>
-  <menu id="chat_right_click_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Rename Chat</attribute>
+        <attribute name="action">app.rename_current_chat</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Export Chat</attribute>
+        <attribute name="action">app.export_current_chat</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Clear Chat</attribute>
+        <attribute name="action">app.clear</attribute>
+      </item>
+    </section>
     <section>
       <item>
         <attribute name="label" translatable="yes">Delete Chat</attribute>
-        <attribute name="action">app.delete_chat</attribute>
+        <attribute name="action">app.delete_current_chat</attribute>
       </item>
+    </section>
+  </menu>
+  <menu id="chat_right_click_menu">
+    <section>
       <item>
         <attribute name="label" translatable="yes">Rename Chat</attribute>
         <attribute name="action">app.rename_chat</attribute>
@@ -1135,6 +1151,12 @@ By downloading any model you accept their license agreement available on the mod
       <item>
         <attribute name="label" translatable="yes">Export Chat</attribute>
         <attribute name="action">app.export_chat</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Delete Chat</attribute>
+        <attribute name="action">app.delete_chat</attribute>
       </item>
     </section>
   </menu>
