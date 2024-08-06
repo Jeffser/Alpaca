@@ -661,7 +661,7 @@ Generate a title following these rules:
             margin_start=12,
             margin_end=12,
             hexpand=True,
-            css_classes=["flat"],
+            css_classes=["flat"] if bot else ["flat", "user_message"],
         )
         if not bot:
             message_text.update_property([4, 7, 1], [_("User message"), True, msg])
@@ -932,7 +932,7 @@ Generate a title following these rules:
                     margin_top=12,
                     margin_bottom=12,
                     hexpand=True,
-                    css_classes=["flat"]
+                    css_classes=["flat", "response_message"]
                 )
                 message_buffer = message_text.get_buffer()
 
@@ -979,11 +979,11 @@ Generate a title following these rules:
                 buffer.set_style_scheme(source_style)
                 source_view = GtkSource.View(
                     auto_indent=True, indent_width=4, buffer=buffer, show_line_numbers=True,
-                    top_margin=6, bottom_margin=6, left_margin=12, right_margin=12
+                    top_margin=6, bottom_margin=6, left_margin=12, right_margin=12, css_classes=["response_message"]
                 )
                 source_view.update_property([4], [_("{}Code Block").format('{} '.format(language.get_name()) if language else "")])
                 source_view.set_editable(False)
-                code_block_box = Gtk.Box(css_classes=["card"], orientation=1, overflow=1)
+                code_block_box = Gtk.Box(css_classes=["card", "response_message"], orientation=1, overflow=1)
                 title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=3)
                 title_box.append(Gtk.Label(label=language.get_name() if language else _("Code Block"), hexpand=True, xalign=0))
                 copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
