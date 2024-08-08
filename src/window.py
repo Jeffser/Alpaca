@@ -1300,8 +1300,12 @@ Generate a title following these rules:
                     "Can you summarize a long piece of text?"
                     "Can you write a poem?"
                     "Can you write a story?"
-                    "Can you describe a fictional world or society?"
+                    "Can you write a fictional world or society?"
                     "Code a snake game"
+                    "What is GNU-Linux?"
+                    "Which is the best linux distribution?"
+                    "Why is Pluto not a plant?"
+                    "Write a conversation between sun and Earth"
                 ]
                 for prompt in random.sample(possible_prompts, 3):
                     prompt_button = Gtk.Button(
