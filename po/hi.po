@@ -124,11 +124,11 @@ msgstr "नया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:86
 msgid "Changed shortcuts to standards"
-msgstr ""
+msgstr "शॉर्टकट्स को मानकों में बदला गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:87
 msgid "Moved 'Manage Models' button to primary menu"
-msgstr ""
+msgstr "'मॉडल्स प्रबंधित करें' बटन को प्राथमिक मेनू में स्थानांतरित किया गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
@@ -151,23 +151,31 @@ msgstr "सुधार"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Better handling of enter key (important for Japanese input)"
-msgstr ""
+msgstr "एंटर कुंजी का बेहतर प्रबंधन (जापानी इनपुट के लिए महत्वपूर्ण)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Removed sponsor dialog"
-msgstr ""
+msgstr "स्पॉन्सर डायलॉग हटा दिया गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Added sponsor link in about dialog"
-msgstr ""
+msgstr "अबाउट डायलॉग में स्पॉन्सर लिंक जोड़ा गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Changed window and elements dimensions"
-msgstr ""
+msgstr "विंडो और तत्वों के आयाम बदले गए"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Selected model changes when entering model manager"
-msgstr ""
+msgstr "मॉडल मैनेजर में प्रवेश करने पर चयनित मॉडल बदल जाता है"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:98
+msgid "Better image tooltips"
+msgstr "बेहतर इमेज टूलटिप्स"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:99
+msgid "GGUF Support"
+msgstr "जीजीयूएफ समर्थन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Better image tooltips"
@@ -1103,7 +1111,7 @@ msgstr "छवि"
 
 #: src/window.py:431 src/window.ui:86
 msgid "Select a Model"
-msgstr ""
+msgstr "एक मॉडल चुनें"
 
 #: src/window.py:539
 msgid "Message copied to the clipboard"
@@ -1111,7 +1119,7 @@ msgstr "संदेश क्लिपबोर्ड में कॉपी �
 
 #: src/window.py:661
 msgid "User message"
-msgstr ""
+msgstr "उपयोगकर्ता संदेश"
 
 #: src/window.py:670
 msgid "Remove Message"
@@ -1147,11 +1155,11 @@ msgstr "{} हटाएं"
 
 #: src/window.py:958
 msgid "Response message"
-msgstr ""
+msgstr "प्रतिक्रिया संदेश"
 
 #: src/window.py:978
 msgid "{}Code Block"
-msgstr ""
+msgstr "{}कोड ब्लॉक"
 
 #: src/window.py:982
 msgid "Code Block"
@@ -1211,25 +1219,26 @@ msgstr "छवि पहचान"
 
 #: src/window.py:1249
 msgid "Enter download menu for {}"
-msgstr ""
+msgstr "{} के लिए डाउनलोड मेनू में प्रवेश करें"
 
 #: src/window.py:1301
 msgid "Send prompt: '{}'"
-msgstr ""
+msgstr "प्रॉम्प्ट भेजें: '{}'"
 
 #: src/window.py:1307 src/window.py:1308
 msgid "Open Model Manager"
-msgstr ""
+msgstr "मॉडल मैनेजर खोलें"
 
 #: src/window.py:1316
 msgid "Try one of these prompts"
-msgstr ""
+msgstr "इनमें से एक प्रॉम्प्ट आजमाएं"
 
 #: src/window.py:1316
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
 msgstr ""
+"यह लगता है कि आपने अभी तक कोई मॉडल डाउनलोड नहीं किया है। शुरू करने के लिए मॉडल्स डाउनलोड करें!"
 
 #: src/window.py:1421
 msgid "Model deleted successfully"
@@ -2150,7 +2159,7 @@ msgstr "फ़ाइल संलग्न करें"
 
 #: src/window.ui:272
 msgid "Message text box"
-msgstr ""
+msgstr "संदेश पाठ बॉक्स"
 
 #: src/window.ui:285 src/window.ui:1157
 msgid "Send Message"
@@ -2236,7 +2245,7 @@ msgstr ""
 
 #: src/window.ui:502
 msgid "Manage models dialog"
-msgstr ""
+msgstr "मॉडल्स प्रबंधन संवाद"
 
 #: src/window.ui:523 src/window.ui:664
 msgid "Create Model"
@@ -2248,7 +2257,7 @@ msgstr "मॉडल खोजें"
 
 #: src/window.ui:539
 msgid "Model search bar"
-msgstr ""
+msgstr "मॉडल खोज बार"
 
 #: src/window.ui:546 src/window.ui:548
 msgid "Search models"
@@ -2294,7 +2303,7 @@ msgstr ""
 
 #: src/window.ui:807
 msgid "File preview dialog"
-msgstr ""
+msgstr "फ़ाइल पूर्वावलोकन संवाद"
 
 #: src/window.ui:819
 msgid "Open With Default App"
@@ -2392,11 +2401,11 @@ msgstr "शॉर्टकट्स विंडो दिखाएं"
 
 #: src/window.ui:1122
 msgid "Manage models"
-msgstr ""
+msgstr "मॉडल्स प्रबंधित करें"
 
 #: src/window.ui:1128
 msgid "Toggle sidebar"
-msgstr ""
+msgstr "साइडबार टॉगल करें"
 
 #: src/window.ui:1135
 msgid "Editor"
