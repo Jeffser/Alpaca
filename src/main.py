@@ -43,7 +43,8 @@ translators = [
     'CounterFlow64 (Norwegian) https://github.com/CounterFlow64',
     'Aritra Saha (Bengali) https://github.com/olumolu',
     'Yuehao Sui (Simplified Chinese) https://github.com/8ar10der',
-    'Aleksana (Simplified Chinese) https://github.com/Aleksanaa'
+    'Aleksana (Simplified Chinese) https://github.com/Aleksanaa',
+    'Aritra Saha (Hindi) https://github.com/olumolu'
 ]
 
 class AlpacaApplication(Adw.Application):
