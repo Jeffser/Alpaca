@@ -1301,7 +1301,7 @@ Generate a title following these rules:
                     "Can you write a story?",
                     "What is GNU-Linux?",
                     "Which is the best Linux distro?",
-                    "Why is Pluto not a planet?"
+                    "Why is Pluto not a planet?",
                     "What is a black-hole?",
                     "Tell me how to stay fit",
                     "Write a conversation between sun and Earth",
