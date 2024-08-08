@@ -1305,6 +1305,8 @@ Generate a title following these rules:
                     "What is GNU-Linux?"
                     "Which is the best linux distribution?"
                     "Why is Pluto not a plant?"
+                    "What is a black-hole?"
+                    "Tell me how to stay fit?"
                     "Write a conversation between sun and Earth"
                 ]
                 for prompt in random.sample(possible_prompts, 3):
