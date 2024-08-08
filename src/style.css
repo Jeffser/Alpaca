@@ -1,8 +1,4 @@
-.message_input_scroll_window > * {
-    box-shadow: none;
-    border-width: 0;
-}
-.message_text_view {
+.message_text_view, .modelfile_textview {
   background-color: rgba(0,0,0,0);
 }
 .chat_image_button {
@@ -11,4 +7,17 @@
 .editing_message_textview {
   border-radius: 5px;
   padding: 5px;
+}
+.model_list_box {
+	padding: 0;
+}
+.manage_models_button {
+  padding: 6px 8px 6px 8px;
+}
+.model_list_box > * {
+	margin: 0;
+}
+.user_message:focus, .response_message:focus, .editing_message_textview:focus {
+	box-shadow: 0 0 1px 2px mix(@accent_color, @window_bg_color, 0.5);
+	border-radius: 2px;
 }

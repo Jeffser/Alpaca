@@ -1,11 +1,15 @@
 # dialogs.py
-
-from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
+"""
+Handles UI dialogs
+"""
 import os
+import logging
 from pytube import YouTube
 from html2text import html2text
+from gi.repository import Adw, Gtk
 from . import connection_handler
 
+logger = logging.getLogger(__name__)
 # CLEAR CHAT | WORKS
 
 def clear_chat_response(self, dialog, task):
@@ -54,9 +58,11 @@ def delete_chat(self, chat_name):
 # RENAME CHAT | WORKS
 
 def rename_chat_response(self, dialog, task, old_chat_name, entry, label_element):
-    if not entry: return
+    if not entry:
+        return
     new_chat_name = entry.get_text()
-    if old_chat_name == new_chat_name: return
+    if old_chat_name == new_chat_name:
+        return
     if new_chat_name and (task is None or dialog.choose_finish(task) == "rename"):
         self.rename_chat(old_chat_name, new_chat_name, label_element)
 
@@ -82,7 +88,8 @@ def rename_chat(self, chat_name, label_element):
 
 def new_chat_response(self, dialog, task, entry):
     chat_name = _("New Chat")
-    if entry is not None and entry.get_text() != "": chat_name = entry.get_text()
+    if entry is not None and entry.get_text() != "":
+        chat_name = entry.get_text()
     if chat_name and (task is None or dialog.choose_finish(task) == "create"):
         self.new_chat(chat_name)
 
@@ -172,26 +179,38 @@ def remove_attached_file(self, name):
 
 # RECONNECT REMOTE | WORKS
 
-def reconnect_remote_response(self, dialog, task, entry):
+def reconnect_remote_response(self, dialog, task, url_entry, bearer_entry):
     response = dialog.choose_finish(task)
     if not task or response == "remote":
-        self.connect_remote(entry.get_text())
+        self.connect_remote(url_entry.get_text(), bearer_entry.get_text())
     elif response == "local":
         self.connect_local()
     elif response == "close":
         self.destroy()
 
-def reconnect_remote(self, current_url):
-    entry = Gtk.Entry(
+def reconnect_remote(self, current_url, current_bearer_token):
+    entry_url = Gtk.Entry(
         css_classes = ["error"],
-        text = current_url
+        text = current_url,
+        placeholder_text = "URL"
     )
+    entry_bearer_token = Gtk.Entry(
+        css_classes = ["error"] if current_bearer_token else None,
+        text = current_bearer_token,
+        placeholder_text = "Bearer Token (Optional)"
+    )
+    container = Gtk.Box(
+        orientation = 1,
+        spacing = 10
+    )
+    container.append(entry_url)
+    container.append(entry_bearer_token)
     dialog = Adw.AlertDialog(
         heading=_("Connection Error"),
         body=_("The remote instance has disconnected"),
-        extra_child=entry
+        extra_child=container
     )
-    entry.connect("activate", lambda entry, dialog: reconnect_remote_response(self, dialog, None, entry))
+    #entry.connect("activate", lambda entry, dialog: reconnect_remote_response(self, dialog, None, entry))
     dialog.add_response("close", _("Close Alpaca"))
     dialog.add_response("local", _("Use local instance"))
     dialog.add_response("remote", _("Connect"))
@@ -199,7 +218,7 @@ def reconnect_remote(self, current_url):
     dialog.choose(
         parent = self,
         cancellable = None,
-        callback = lambda dialog, task, entry=entry: reconnect_remote_response(self, dialog, task, entry)
+        callback = lambda dialog, task, url_entry=entry_url, bearer_entry=entry_bearer_token: reconnect_remote_response(self, dialog, task, url_entry, bearer_entry)
     )
 
 # CREATE MODEL | WORKS
@@ -212,7 +231,7 @@ def create_model_from_existing_response(self, dialog, task, dropdown):
 def create_model_from_existing(self):
     string_list = Gtk.StringList()
     for model in self.local_models:
-        string_list.append(model)
+        string_list.append(self.convert_model_name(model, 0))
 
     dropdown = Gtk.DropDown()
     dropdown.set_model(string_list)
@@ -231,20 +250,41 @@ def create_model_from_existing(self):
     )
 
 def create_model_from_file_response(self, file_dialog, result):
-    try: file = file_dialog.open_finish(result)
-    except:
-        self.logger.error(e)
-        return
     try:
-        self.create_model(file.get_path(), True)
+        file = file_dialog.open_finish(result)
+        try:
+            self.create_model(file.get_path(), True)
+        except Exception as e:
+            logger.error(e)
+            self.show_toast(_("An error occurred while creating the model"), self.main_overlay)
     except Exception as e:
-        self.logger.error(e)
-        self.show_toast(_("An error occurred while creating the model"), self.main_overlay)
+        logger.error(e)
 
 def create_model_from_file(self):
     file_dialog = Gtk.FileDialog(default_filter=self.file_filter_gguf)
     file_dialog.open(self, None, lambda file_dialog, result: create_model_from_file_response(self, file_dialog, result))
 
+def create_model_from_name_response(self, dialog, task, entry):
+    model = entry.get_text().lower().strip()
+    if dialog.choose_finish(task) == 'accept' and model:
+        self.pull_model(model)
+
+def create_model_from_name(self):
+    entry = Gtk.Entry()
+    entry.get_delegate().connect("insert-text", lambda *_ : self.check_alphanumeric(*_, ['-', '.', ':', '_', '/']))
+    dialog = Adw.AlertDialog(
+        heading=_("Pull Model"),
+        body=_("Input the name of the model in this format\nname:tag"),
+        extra_child=entry
+    )
+    dialog.add_response("cancel", _("Cancel"))
+    dialog.add_response("accept", _("Accept"))
+    dialog.set_response_appearance("accept", Adw.ResponseAppearance.SUGGESTED)
+    dialog.choose(
+        parent = self,
+        cancellable = None,
+        callback = lambda dialog, task, entry=entry: create_model_from_name_response(self, dialog, task, entry)
+    )
 # FILE CHOOSER | WORKS
 
 def attach_file_response(self, file_dialog, result):
@@ -253,23 +293,23 @@ def attach_file_response(self, file_dialog, result):
         "image": ["png", "jpeg", "jpg", "webp", "gif"],
         "pdf": ["pdf"]
     }
-    try: file = file_dialog.open_finish(result)
-    except:
-        self.logger.error(e)
+    try:
+        file = file_dialog.open_finish(result)
+    except Exception as e:
+        logger.error(e)
         return
     extension = file.get_path().split(".")[-1]
     file_type = next(key for key, value in file_types.items() if extension in value)
-    if not file_type: return
+    if not file_type:
+        return
     if file_type == 'image' and not self.verify_if_image_can_be_used():
         self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
         return
     self.attach_file(file.get_path(), file_type)
 
-
-def attach_file(self, filter):
-    file_dialog = Gtk.FileDialog(default_filter=filter)
+def attach_file(self, file_filter):
+    file_dialog = Gtk.FileDialog(default_filter=file_filter)
     file_dialog.open(self, None, lambda file_dialog, result: attach_file_response(self, file_dialog, result))
-
 
 # YouTube caption | WORKS
 
@@ -288,7 +328,7 @@ def youtube_caption_response(self, dialog, task, video_url, caption_drop_down):
         if not os.path.exists(os.path.join(self.cache_dir, 'tmp/youtube')):
             os.makedirs(os.path.join(self.cache_dir, 'tmp/youtube'))
         file_path = os.path.join(os.path.join(self.cache_dir, 'tmp/youtube'), f'{yt.title} ({selected_caption.split(" | ")[0]})')
-        with open(file_path, 'w+') as f:
+        with open(file_path, 'w+', encoding="utf-8") as f:
             f.write(text)
         self.attach_file(file_path, 'youtube')
 
@@ -300,7 +340,8 @@ def youtube_caption(self, video_url):
         self.show_toast(_("This video does not have any transcriptions"), self.main_overlay)
         return
     caption_list = Gtk.StringList()
-    for caption in captions: caption_list.append("{} | {}".format(caption.name, caption.code))
+    for caption in captions:
+        caption_list.append("{} | {}".format(caption.name, caption.code))
     caption_drop_down = Gtk.DropDown(
         enable_search=True,
         model=caption_list
@@ -336,7 +377,7 @@ def attach_website_response(self, dialog, task, url):
                 os.makedirs('/tmp/alpaca/websites/')
             md_name = self.generate_numbered_name('website.md', os.listdir('/tmp/alpaca/websites'))
             file_path = os.path.join('/tmp/alpaca/websites/', md_name)
-            with open(file_path, 'w+') as f:
+            with open(file_path, 'w+', encoding="utf-8") as f:
                 f.write('{}\n\n{}'.format(url, md))
             self.attach_file(file_path, 'website')
         else:

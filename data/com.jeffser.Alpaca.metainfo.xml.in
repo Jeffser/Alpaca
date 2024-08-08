@@ -78,6 +78,83 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="1.0.6" date="2024-08-04">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.6</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Changed shortcuts to standards</li>
+          <li>Moved 'Manage Models' button to primary menu</li>
+          <li>Stable support for GGUF model files</li>
+          <li>General optimizations</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Better handling of enter key (important for Japanese input)</li>
+          <li>Removed sponsor dialog</li>
+          <li>Added sponsor link in about dialog</li>
+          <li>Changed window and elements dimensions</li>
+          <li>Selected model changes when entering model manager</li>
+          <li>Better image tooltips</li>
+          <li>GGUF Support</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.5" date="2024-08-02">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.5</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Regenerate any response, even if they are incomplete</li>
+          <li>Support for pulling models by name:tag</li>
+          <li>Stable support for GGUF model files</li>
+          <li>Restored sidebar toggle button</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Reverted back to standard styles</li>
+          <li>Fixed generated titles having "'S" for some reason</li>
+          <li>Changed min width for model dropdown</li>
+          <li>Changed message entry shadow</li>
+          <li>The last model used is now restored when the user changes chat</li>
+          <li>Better check for message finishing</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.4" date="2024-08-01">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.4</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Added table rendering (Thanks Nokse)</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Made support dialog more common</li>
+          <li>Dialog title on tag chooser when downloading models didn't display properly</li>
+          <li>Prevent chat generation from generating a title with multiple lines</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.3" date="2024-08-01">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.3</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Bearer Token entry on connection error dialog</li>
+          <li>Small appearance changes</li>
+          <li>Compatibility with code blocks without explicit language</li>
+          <li>Rare, optional and dismissible support dialog</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Date format for Simplified Chinese translation</li>
+          <li>Bug with unsupported localizations</li>
+          <li>Min height being too large to be used on mobile</li>
+          <li>Remote connection checker bug</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.2" date="2024-07-29">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.2</url>
       <description>

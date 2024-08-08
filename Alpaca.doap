@@ -1,0 +1,34 @@
+<Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:gnome="http://api.gnome.org/doap-extensions#"
+         xmlns="http://usefulinc.com/ns/doap#">
+
+  <name xml:lang="en">Alpaca</name>
+  <shortdesc xml:lang="en">An Ollama client made with GTK4 and Adwaita</shortdesc>
+  <homepage rdf:resource="https://jeffser.com/alpaca" />
+  <bug-database rdf:resource="https://github.com/Jeffser/Alpaca/issues"/>
+  <programming-language>Python</programming-language>
+
+  <platform>GTK 4</platform>
+  <platform>Libadwaita</platform>
+
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>Jeffry Samuel</foaf:name>
+      <foaf:mbox rdf:resource="mailto:jeffrysamuer@gmail.com"/>
+      <foaf:account>
+        <foaf:OnlineAccount>
+          <foaf:accountServiceHomepage rdf:resource="https://github.com"/>
+          <foaf:accountName>jeffser</foaf:accountName>
+        </foaf:OnlineAccount>
+      </foaf:account>
+      <foaf:account>
+        <foaf:OnlineAccount>
+          <foaf:accountServiceHomepage rdf:resource="https://gitlab.gnome.org"/>
+          <foaf:accountName>jeffser</foaf:accountName>
+        </foaf:OnlineAccount>
+      </foaf:account>
+    </foaf:Person>
+  </maintainer>
+</Project>

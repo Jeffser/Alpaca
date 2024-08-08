@@ -1,0 +1,14 @@
+[MASTER]
+
+[MESSAGES CONTROL]
+disable=undefined-variable, line-too-long, missing-function-docstring, consider-using-f-string, import-error
+
+[FORMAT]
+max-line-length=200
+
+# Reasons for removing some checks:
+#	undefined-variable:		_() is used by the translator on build time but it is not defined on the scripts
+#	line-too-long:			I... I'm too lazy to make the lines shorter, maybe later
+#	missing-function-docstring	I'm not adding a docstring to all the functions, most are self explanatory
+#	consider-using-f-string		I can't use f-string because of the translator
+#	import-error			The linter doesn't have access to all the libraries that the project itself does

@@ -11,7 +11,11 @@ Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can man
 > [!WARNING]
 > This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any AI models.
 
+> [!IMPORTANT]
+> Please be aware that [GNOME Code of Conduct](https://conduct.gnome.org) applies to Alpaca before interacting with this repository.
+
 ## Features!
+
 - Talk to multiple models in the same conversation
 - Pull and delete models from the app
 - Image recognition
@@ -21,47 +25,38 @@ Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can man
 - Notifications
 - Import / Export chats
 - Delete / Edit messages
+- Regenerate messages
 - YouTube recognition (Ask questions about a YouTube video using the transcript)
-- Website recognition (Ask questions about a certain question by parsing the url)
+- Website recognition (Ask questions about a certain website by parsing the url)
 
 ## Screenies
-Chatting with a model | Image recognition |  Code highlighting
-:--------------------:|:-----------------:|:----------------------:
-![Screenshot from 2024-05-12 19-58-28](https://jeffser.com/images/alpaca/screenie1.png)  |  ![Screenshot from 2024-05-12 20-01-08](https://jeffser.com/images/alpaca/screenie2.png)  |  ![Screenshot from 2024-05-12 20-01-31](https://jeffser.com/images/alpaca/screenie3.png)
 
-## Preview
-1. Clone repo using Gnome Builder
-2. Press the `run` button
+Normal conversation | Image recognition | Code highlighting | YouTube transcription | Model management
+:------------------:|:-----------------:|:-----------------:|:---------------------:|:----------------:
+![screenie1](https://jeffser.com/images/alpaca/screenie1.png) | ![screenie2](https://jeffser.com/images/alpaca/screenie2.png) | ![screenie3](https://jeffser.com/images/alpaca/screenie3.png) | ![screenie4](https://jeffser.com/images/alpaca/screenie4.png) | ![screenie5](https://jeffser.com/images/alpaca/screenie5.png)
 
-## Instalation
-1. Go to the `releases` page
-2. Download the latest flatpak package
-3. Open it
+## Translators
 
-## Ollama session tips
-
-### Change the port of the integrated Ollama instance
-Go to `~/.var/app/com.jeffser.Alpaca/config/server.json` and change the `"local_port"` value, by default it is `11435`.
-
-### Backup all the chats
-The chat data is located in `~/.var/app/com.jeffser.Alpaca/data/chats` you can copy that directory wherever you want to.
-
-### Force showing the welcome dialog
-To do that you just need to delete the file `~/.var/app/com.jeffser.Alpaca/config/server.json`, this won't affect your saved chats or models.
-
-### Add/Change environment variables for Ollama
-You can change anything except `$HOME` and `$OLLAMA_HOST`, to do this go to `~/.var/app/com.jeffser.Alpaca/config/server.json` and change `ollama_overrides` accordingly, some overrides are available to change on the GUI.
+Language               | Contributors
+:----------------------|:-----------
+🇷🇺 Russian              | [Alex K](https://github.com/alexkdeveloper)
+🇪🇸 Spanish              | [Jeffry Samuel](https://github.com/jeffser)
+🇫🇷 French               | [Louis Chauvet-Villaret](https://github.com/loulou64490) , [Théo FORTIN](https://github.com/topiga)
+🇧🇷 Brazilian Portuguese | [Daimar Stein](https://github.com/not-a-dev-stein)
+🇳🇴 Norwegian            | [CounterFlow64](https://github.com/CounterFlow64)
+🇮🇳 Bengali              | [Aritra Saha](https://github.com/olumolu)
+🇨🇳 Simplified Chinese   | [Yuehao Sui](https://github.com/8ar10der) , [Aleksana](https://github.com/Aleksanaa)
+🇮🇳 Hindi                | [Aritra Saha](https://github.com/olumolu)
 
 ---
 
 ## Thanks
-- [not-a-dev-stein](https://github.com/not-a-dev-stein) for their help with requesting a new icon, bug reports and the translation to Brazilian Portuguese
-- [TylerLaBree](https://github.com/TylerLaBree) for their requests and ideas
-- [Alexkdeveloper](https://github.com/alexkdeveloper) for their help translating the app to Russian
-- [Imbev](https://github.com/imbev) for their reports and suggestions
-- [Nokse](https://github.com/Nokse22) for their contributions to the UI
-- [Louis Chauvet-Villaret](https://github.com/loulou64490) for their suggestions and help translating the app to French
-- [CounterFlow64](https://github.com/CounterFlow64) for their help translating the app to Norwegian
 
-## About forks
-If you want to fork this... I mean, I think it would be better if you start from scratch, my code isn't well documented at all, but if you really want to, please give me some credit, that's all I ask for... And maybe a donation (joke)
+- [not-a-dev-stein](https://github.com/not-a-dev-stein) for their help with requesting a new icon and bug reports
+- [TylerLaBree](https://github.com/TylerLaBree) for their requests and ideas
+- [Imbev](https://github.com/imbev) for their reports and suggestions
+- [Nokse](https://github.com/Nokse22) for their contributions to the UI and table rendering
+- [Louis Chauvet-Villaret](https://github.com/loulou64490) for their suggestions
+- [Aleksana](https://github.com/Aleksanaa) for her help with better handling of directories
+- Sponsors for giving me enough money to be able to take a ride to my campus every time I need to <3
+- Everyone that has shared kind words of encouragement!

@@ -1,0 +1,18 @@
+# .github/workflows/flatpak-build.yml
+on:
+  workflow_dispatch:
+name: Flatpak Build
+jobs:
+  flatpak:
+    name: "Flatpak"
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-46
+      options: --privileged
+    steps:
+    - uses: actions/checkout@v4
+    - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      with:
+        bundle: Alpaca.flatpak
+        manifest-path: com.jeffser.Alpaca.json
+        cache-key: flatpak-builder-${{ github.sha }}

@@ -5,35 +5,21 @@
   <template class="AlpacaWindow" parent="AdwApplicationWindow">
     <signal name="close-request" handler="closing_app"/>
     <property name="resizable">True</property>
-    <property name="width-request">360</property>
-    <property name="height-request">700</property>
+    <property name="width-request">400</property>
+    <property name="height-request">400</property>
     <property name="default-width">1300</property>
     <property name="default-height">800</property>
     <property name="title">Alpaca</property>
     <child>
       <object class="AdwBreakpoint">
-        <condition>max-width: 800sp</condition>
+        <condition>max-width: 690sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
-        <setter object="show_sidebar_button" property="visible">true</setter>
-      </object>
-    </child>
-    <child>
-    </child>
-    <child>
-      <object class="AdwBreakpoint">
-        <condition>max-width: 500sp</condition>
-        <setter object="split_view_overlay" property="collapsed">true</setter>
-        <setter object="show_sidebar_button" property="visible">true</setter>
-        <setter object="welcome_dialog" property="width-request">360</setter>
-        <setter object="manage_models_dialog" property="width-request">360</setter>
-        <setter object="create_model_dialog" property="width-request">360</setter>
-        <setter object="preferences_dialog" property="width-request">360</setter>
-        <setter object="file_preview_dialog" property="width-request">360</setter>
       </object>
     </child>
     <property name="content">
           <object class="AdwOverlaySplitView" id="split_view_overlay">
             <property name="show-sidebar" bind-source="show_sidebar_button" bind-property="active" bind-flags="sync-create"/>
+            <property name="sidebar-width-fraction">0.4</property>
             <property name="sidebar">
               <object class="AdwToolbarView">
                 <child type="top">
@@ -80,7 +66,6 @@
                   <object class="AdwHeaderBar" id="header_bar">
                     <child type="start">
                       <object class="GtkToggleButton" id="show_sidebar_button">
-                        <property name="visible">false</property>
                         <property name="icon-name">sidebar-show-symbolic</property>
                         <property name="tooltip-text" translatable="yes">Toggle Sidebar</property>
                         <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
@@ -91,28 +76,79 @@
                         <property name="orientation">0</property>
                         <property name="spacing">12</property>
                         <child>
-                          <object class="GtkDropDown" id="model_drop_down">
-                            <signal name="notify" handler="verify_if_image_can_be_used"/>
-                            <property name="width-request">150</property>
-                            <property name="enable-search">true</property>
-                            <property name="tooltip-text">Select Model</property>
-                            <property name="model">
-                              <object class="GtkStringList" id="model_string_list">
-                                <items>
-                                </items>
+                          <object class="GtkMenuButton" id="model_selector_button">
+                            <property name="tooltip-text" translatable="yes">Select Model</property>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="spacing">10</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">Select a Model</property>
+                                    <property name="ellipsize">2</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">down-symbolic</property>
+                                  </object>
+                                </child>
                               </object>
                             </property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="manage_models_button">
-                            <signal name="clicked" handler="manage_models_button_activate"/>
-                            <property name="tooltip-text" translatable="yes">Manage Models</property>
-                            <child>
-                              <object class="AdwButtonContent">
-                                <property name="icon-name">brain-augemnted-symbolic</property>
+                            <property name="halign">1</property>
+                            <style>
+                              <class name="raised"/>
+                            </style>
+                            <property name="popover">
+                              <object class="GtkPopover" id="model_popover">
+                                <property name="has-arrow">false</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="orientation">1</property>
+                                    <property name="spacing">5</property>
+                                    <child>
+                                      <object class="GtkButton">
+                                        <property name="child">
+                                          <object class="GtkLabel">
+                                            <property name="label" translatable="yes">Manage Models</property>
+                                            <property name="justify">left</property>
+                                            <property name="halign">1</property>
+                                          </object>
+                                        </property>
+                                        <property name="hexpand">true</property>
+                                        <property name="tooltip-text" translatable="yes">Manage Models</property>
+                                        <property name="action-name">app.manage_models</property>
+                                        <signal name="clicked" handler="close_model_popup"/>
+                                        <style>
+                                          <class name="flat"/>
+                                          <class name="manage_models_button"/>
+                                        </style>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSeparator"/>
+                                    </child>
+                                    <child>
+                                      <object class="GtkScrolledWindow">
+                                        <property name="max-content-height">300</property>
+                                        <property name="propagate-natural-width">true</property>
+                                        <property name="propagate-natural-height">true</property>
+                                        <child>
+                                          <object class="GtkListBox" id="model_list_box">
+                                            <property name="hexpand">true</property>
+                                            <style>
+                                              <class name="navigation-sidebar"/>
+                                              <class name="model_list_box"/>
+                                            </style>
+                                            <signal name="row-selected" handler="change_model"/>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+
+                                  </object>
+                                </child>
                               </object>
-                            </child>
+                            </property>
                           </object>
                         </child>
                       </object>
@@ -217,6 +253,8 @@
                                       <object class="GtkScrolledWindow">
                                         <property name="max-content-height">150</property>
                                         <property name="propagate-natural-height">true</property>
+                                        <property name="margin-start">10</property>
+                                        <property name="margin-end">10</property>
                                         <style>
                                           <class name="message_input_scroll_window"/>
                                         </style>
@@ -226,11 +264,13 @@
                                               <class name="message_text_view"/>
                                             </style>
                                             <property name="wrap-mode">word</property>
-                                            <property name="margin-start">10</property>
-                                            <property name="margin-end">10</property>
                                             <property name="top-margin">10</property>
                                             <property name="bottom-margin">10</property>
                                             <property name="hexpand">true</property>
+                                            <property name="input-hints">spellcheck</property>
+                                            <accessibility>
+                                              <property name="label" translatable="yes">Message text box</property>
+                                            </accessibility>
                                           </object>
                                         </child>
                                       </object>
@@ -244,8 +284,9 @@
                                       <property name="valign">3</property>
                                       <property name="tooltip-text" translatable="yes">Send Message</property>
                                       <style>
-                                        <class name="suggested-action"/>
+                                        <class name="accent"/>
                                         <class name="circular"/>
+                                        <class name="suggested-action"/>
                                       </style>
                                       <child>
                                         <object class="AdwButtonContent">
@@ -456,128 +497,10 @@
       </child>
     </object>
 
-    <object class="AdwDialog" id="create_model_dialog">
-      <property name="can-close">true</property>
-      <property name="width-request">400</property>
-      <property name="height-request">600</property>
-      <child>
-        <object class="AdwToastOverlay" id="create_model_overlay">
-          <child>
-            <object class="AdwToolbarView">
-              <child type="bottom">
-                <object class="GtkActionBar">
-                  <property name="revealed">true</property>
-                  <child type="end">
-                    <object class="GtkButton">
-                      <property name="label" translatable="yes">Create</property>
-                      <signal name="clicked" handler="create_model_start"/>
-                      <style>
-                        <class name="suggested-action"/>
-                      </style>
-                    </object>
-                  </child>
-                </object>
-              </child>
-              <child type="top">
-                <object class="AdwHeaderBar">
-                  <property name="title-widget">
-                    <object class="AdwWindowTitle">
-                      <property name="title" translatable="yes">Create Model</property>
-                    </object>
-                  </property>
-                </object>
-              </child>
-              <child>
-                <object class="GtkScrolledWindow">
-                  <property name="vexpand">true</property>
-                  <property name="hexpand">true</property>
-                  <child>
-                    <object class="GtkBox">
-                      <property name="margin-start">12</property>
-                      <property name="margin-end">12</property>
-                      <property name="margin-top">12</property>
-                      <property name="margin-bottom">12</property>
-                      <property name="orientation">1</property>
-                      <property name="spacing">12</property>
-                      <child>
-                        <object class="GtkListBox">
-                          <style>
-                            <class name="boxed-list"/>
-                            <class name="card"/>
-                          </style>
-                          <property name="selection-mode">none</property>
-                          <child>
-                            <object class="AdwActionRow" id="create_model_base">
-                              <property name="title" translatable="yes">Base</property>
-                              <property name="subtitle"/>
-                              <style>
-                                <class name="property"/>
-                              </style>
-                            </object>
-                          </child>
-                        </object>
-                      </child>
-                      <child>
-                        <object class="GtkListBox">
-                          <style>
-                            <class name="boxed-list"/>
-                            <class name="card"/>
-                          </style>
-                          <property name="selection-mode">none</property>
-                          <child>
-                            <object class="AdwEntryRow" id="create_model_name">
-                              <property name="title" translatable="yes">Name</property>
-                              <property name="input-purpose">alpha</property>
-                            </object>
-                          </child>
-                          <child>
-                            <object class="AdwEntryRow" id="create_model_system">
-                              <property name="title" translatable="yes">Context</property>
-                              <property name="input-purpose">alpha</property>
-                            </object>
-                          </child>
-                        </object>
-                      </child>
-                      <child>
-                        <object class="GtkListBox">
-                          <style>
-                            <class name="boxed-list"/>
-                            <class name="card"/>
-                          </style>
-                          <property name="selection-mode">none</property>
-                          <child>
-                            <object class="AdwEntryRow" id="create_model_template">
-                              <property name="title" translatable="yes">Template</property>
-                              <property name="input-purpose">alpha</property>
-                            </object>
-                          </child>
-                          <child>
-                            <object class="GtkLabel">
-                              <property name="label" translatable="yes">Some models require a specific template. Please visit the model's website for more information if you're unsure.</property>
-                              <property name="margin-start">12</property>
-                              <property name="margin-end">12</property>
-                              <property name="margin-top">12</property>
-                              <property name="margin-bottom">12</property>
-                              <property name="halign">1</property>
-                              <property name="wrap">true</property>
-                              <style>
-                                <class name="caption"/>
-                              </style>
-                            </object>
-                          </child>
-                        </object>
-                      </child>
-                    </object>
-                  </child>
-                </object>
-              </child>
-            </object>
-          </child>
-        </object>
-      </child>
-    </object>
-
     <object class="AdwDialog" id="manage_models_dialog">
+      <accessibility>
+        <property name="label" translatable="yes">Manage models dialog</property>
+      </accessibility>
       <property name="can-close">true</property>
       <property name="width-request">400</property>
       <property name="height-request">600</property>
@@ -612,12 +535,18 @@
                       </child>
                       <child type="top">
                         <object class="GtkSearchBar" id="model_searchbar">
+                          <accessibility>
+                            <property name="label" translatable="yes">Model search bar</property>
+                          </accessibility>
                           <property name="key-capture-widget">AlpacaWindow</property>
                           <child>
                             <object class="GtkSearchEntry" id="searchentry">
                               <signal name="search-changed" handler="model_search_changed"/>
                               <property name="search-delay">100</property>
                               <property name="placeholder-text" translatable="yes">Search models</property>
+                              <accessibility>
+                                <property name="label" translatable="yes">Search models</property>
+                              </accessibility>
                             </object>
                           </child>
                         </object>
@@ -653,7 +582,7 @@
                               </child>
                               <child>
                                 <object class="GtkListBox" id="available_model_list_box">
-                                  <property name="selection-mode">single</property>
+                                  <property name="selection-mode">none</property>
                                   <style>
                                     <class name="boxed-list"/>
                                   </style>
@@ -716,9 +645,146 @@
                               <child>
                                 <object class="GtkListBox" id="model_tag_list_box">
                                   <property name="valign">1</property>
-                                  <property name="selection-mode">single</property>
+                                  <property name="selection-mode">none</property>
                                   <style>
                                     <class name="boxed-list"/>
+                                  </style>
+                                </object>
+                              </child>
+                            </object>
+                          </child>
+                        </object>
+                      </property>
+                    </object>
+                  </property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwNavigationPage">
+                  <property name="title" translatable="yes">Create Model</property>
+                  <property name="tag">model_create_page</property>
+                  <property name="child">
+                    <object class="AdwToolbarView">
+                      <child type="top">
+                        <object class="AdwHeaderBar">
+                          <child type="start">
+                            <object class="GtkButton">
+                              <signal name="clicked" handler="link_button_handler"/>
+                              <property name="icon-name">globe-symbolic</property>
+                            </object>
+                          </child>
+                        </object>
+                      </child>
+                      <property name="content">
+                        <object class="GtkScrolledWindow">
+                          <property name="vexpand">true</property>
+                          <property name="hexpand">true</property>
+                          <child>
+                            <object class="GtkBox">
+                              <property name="margin-start">12</property>
+                              <property name="margin-end">12</property>
+                              <property name="margin-top">12</property>
+                              <property name="margin-bottom">12</property>
+                              <property name="orientation">1</property>
+                              <property name="spacing">12</property>
+                              <child>
+                                <object class="GtkListBox">
+                                  <style>
+                                    <class name="boxed-list"/>
+                                    <class name="card"/>
+                                  </style>
+                                  <property name="selection-mode">none</property>
+                                  <child>
+                                    <object class="AdwActionRow" id="create_model_base">
+                                      <property name="title" translatable="yes">Base</property>
+                                      <property name="sensitive">false</property>
+                                      <property name="subtitle"/>
+                                      <style>
+                                        <class name="property"/>
+                                      </style>
+                                    </object>
+                                  </child>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="GtkListBox">
+                                  <style>
+                                    <class name="boxed-list"/>
+                                    <class name="card"/>
+                                  </style>
+                                  <property name="selection-mode">none</property>
+                                  <child>
+                                    <object class="AdwEntryRow" id="create_model_name">
+                                      <property name="title" translatable="yes">Name</property>
+                                      <property name="input-purpose">alpha</property>
+                                    </object>
+                                  </child>
+                                  <child>
+                                    <object class="AdwEntryRow" id="create_model_system">
+                                      <property name="title" translatable="yes">Context</property>
+                                      <property name="input-purpose">alpha</property>
+                                    </object>
+                                  </child>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="GtkListBox">
+                                  <style>
+                                    <class name="boxed-list"/>
+                                    <class name="card"/>
+                                  </style>
+                                  <property name="selection-mode">none</property>
+                                  <child>
+                                    <object class="GtkBox">
+                                      <property name="height-request">140</property>
+                                      <property name="margin-top">10</property>
+                                      <property name="margin-bottom">10</property>
+                                      <property name="margin-start">10</property>
+                                      <property name="margin-end">10</property>
+                                      <style>
+                                        <class name="card"/>
+                                      </style>
+                                      <child>
+                                        <object class="GtkScrolledWindow">
+                                          <property name="margin-start">10</property>
+                                          <property name="margin-end">10</property>
+                                          <child>
+                                            <object class="GtkTextView" id="create_model_modelfile">
+                                              <style>
+                                                <class name="modelfile_textview"/>
+                                              </style>
+                                              <property name="wrap-mode">word</property>
+                                              <property name="top-margin">10</property>
+                                              <property name="bottom-margin">10</property>
+                                              <property name="hexpand">true</property>
+                                            </object>
+                                          </child>
+                                        </object>
+                                      </child>
+                                    </object>
+                                  </child>
+                                  <child>
+                                    <object class="GtkLabel">
+                                      <property name="label" translatable="yes">Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) instructions automatically. Please visit the model's website or Ollama documentation for more information if you're unsure.</property>
+                                      <property name="margin-top">10</property>
+                                      <property name="margin-bottom">10</property>
+                                      <property name="margin-start">10</property>
+                                      <property name="margin-end">10</property>
+                                      <property name="halign">1</property>
+                                      <property name="wrap">true</property>
+                                      <style>
+                                        <class name="caption"/>
+                                      </style>
+                                    </object>
+                                  </child>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="GtkButton">
+                                  <property name="label" translatable="yes">Create</property>
+                                  <signal name="clicked" handler="create_model_start"/>
+                                  <style>
+                                    <class name="suggested-action"/>
                                   </style>
                                 </object>
                               </child>
@@ -737,9 +803,12 @@
     </object>
 
     <object class="AdwDialog" id="file_preview_dialog">
+      <accessibility>
+        <property name="label" translatable="yes">File preview dialog</property>
+      </accessibility>
       <property name="can-close">true</property>
-      <property name="width-request">450</property>
-      <property name="height-request">450</property>
+      <property name="width-request">400</property>
+      <property name="height-request">600</property>
       <child>
         <object class="AdwToolbarView">
           <child type="top">
@@ -804,8 +873,8 @@
 
     <object class="AdwDialog" id="welcome_dialog">
       <property name="can-close">false</property>
-      <property name="width-request">450</property>
-      <property name="height-request">450</property>
+      <property name="width-request">400</property>
+      <property name="height-request">600</property>
       <child>
         <object class="AdwToolbarView">
           <child type="bottom">
@@ -884,141 +953,6 @@
                   <property name="description" translatable="yes">Alpaca and its developers are not liable for any damages to devices or software resulting from the execution of code generated by an AI model. Please exercise caution and review the code carefully before running it.</property>
                 </object>
               </child>
-              <child>
-                <object class="AdwStatusPage">
-                  <property name="hexpand">true</property>
-                  <property name="vexpand">true</property>
-                  <property name="margin-top">12</property>
-                  <property name="margin-bottom">12</property>
-                  <property name="margin-start">12</property>
-                  <property name="margin-end">12</property>
-                  <property name="title" translatable="yes">Featured Models</property>
-                  <property name="description" translatable="yes">Alpaca works locally on your device, to start chatting you'll need an AI model, you can either pull models from this list or the 'Manage Models' menu later.
-
-By downloading any model you accept their license agreement available on the model's website.
-                  </property>
-                  <child>
-                    <object class="GtkListBox">
-                      <property name="selection-mode">none</property>
-                      <style>
-                        <class name="boxed-list"/>
-                      </style>
-                      <child>
-                        <object class="AdwActionRow">
-                          <property name="title" translatable="no">Llama3</property>
-                          <property name="subtitle" translatable="yes">Built by Meta</property>
-                          <child type="suffix">
-                            <object class="GtkButton">
-                              <signal name="clicked" handler="link_button_handler"/>
-                              <property name="vexpand">false</property>
-                              <property name="icon-name">globe-symbolic</property>
-                              <property name="valign">3</property>
-                              <property name="name">https://ollama.com/library/llama3</property>
-                              <property name="tooltip-text">https://ollama.com/library/llama3</property>
-                            </object>
-                          </child>
-                          <child type="suffix">
-                            <object class="GtkButton">
-                              <signal name="clicked" handler="pull_featured_model"/>
-                              <property name="vexpand">false</property>
-                              <property name="icon-name">folder-download-symbolic</property>
-                              <property name="valign">3</property>
-                              <property name="tooltip-text">Pull 'Llama3 (latest)'</property>
-                              <style>
-                                <class name="accent"/>
-                              </style>
-                            </object>
-                          </child>
-                        </object>
-                      </child>
-                      <child>
-                        <object class="AdwActionRow">
-                          <property name="title" translatable="no">Gemma2</property>
-                          <property name="subtitle" translatable="yes">Built by Google DeepMind</property>
-                          <child type="suffix">
-                            <object class="GtkButton">
-                              <signal name="clicked" handler="link_button_handler"/>
-                              <property name="vexpand">false</property>
-                              <property name="icon-name">globe-symbolic</property>
-                              <property name="valign">3</property>
-                              <property name="name">https://ollama.com/library/gemma2</property>
-                              <property name="tooltip-text">https://ollama.com/library/gemma2</property>
-                            </object>
-                          </child>
-                          <child type="suffix">
-                            <object class="GtkButton">
-                              <signal name="clicked" handler="pull_featured_model"/>
-                              <property name="vexpand">false</property>
-                              <property name="icon-name">folder-download-symbolic</property>
-                              <property name="valign">3</property>
-                              <property name="tooltip-text">Pull 'Gemma2 (latest)'</property>
-                              <style>
-                                <class name="accent"/>
-                              </style>
-                            </object>
-                          </child>
-                        </object>
-                      </child>
-                      <child>
-                        <object class="AdwActionRow">
-                          <property name="title" translatable="no">Phi3</property>
-                          <property name="subtitle" translatable="yes">Built by Microsoft</property>
-                          <child type="suffix">
-                            <object class="GtkButton">
-                              <signal name="clicked" handler="link_button_handler"/>
-                              <property name="vexpand">false</property>
-                              <property name="icon-name">globe-symbolic</property>
-                              <property name="valign">3</property>
-                              <property name="name">https://ollama.com/library/phi3</property>
-                              <property name="tooltip-text">https://ollama.com/library/phi3</property>
-                            </object>
-                          </child>
-                          <child type="suffix">
-                            <object class="GtkButton">
-                              <signal name="clicked" handler="pull_featured_model"/>
-                              <property name="vexpand">false</property>
-                              <property name="icon-name">folder-download-symbolic</property>
-                              <property name="valign">3</property>
-                              <property name="tooltip-text">Pull 'Phi3 (latest)'</property>
-                              <style>
-                                <class name="accent"/>
-                              </style>
-                            </object>
-                          </child>
-                        </object>
-                      </child>
-                      <child>
-                        <object class="AdwActionRow">
-                          <property name="title" translatable="no">Llava</property>
-                          <property name="subtitle" translatable="yes">Multimodal AI with image recognition</property>
-                          <child type="suffix">
-                            <object class="GtkButton">
-                              <signal name="clicked" handler="link_button_handler"/>
-                              <property name="vexpand">false</property>
-                              <property name="icon-name">globe-symbolic</property>
-                              <property name="valign">3</property>
-                              <property name="name">https://ollama.com/library/llava</property>
-                              <property name="tooltip-text">https://ollama.com/library/llava</property>
-                            </object>
-                          </child>
-                          <child type="suffix">
-                            <object class="GtkButton">
-                              <signal name="clicked" handler="pull_featured_model"/>
-                              <property name="vexpand">false</property>
-                              <property name="icon-name">folder-download-symbolic</property>
-                              <property name="valign">3</property>
-                              <property name="tooltip-text">Pull 'Llava (latest)'</property>
-                              <style>
-                                <class name="accent"/>
-                              </style>
-                            </object>
-                          </child>
-                        </object>
-                      </child>
-                    </object>
-                  </child>
-                </object>
-              </child>
             </object>
           </child>
         </object>
@@ -1031,6 +965,10 @@ By downloading any model you accept their license agreement available on the mod
       <item>
         <attribute name="label" translatable="yes">Import Chat</attribute>
         <attribute name="action">app.import_chat</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Manage Models</attribute>
+        <attribute name="action">app.manage_models</attribute>
       </item>
     </section>
     <section>
@@ -1049,25 +987,29 @@ By downloading any model you accept their license agreement available on the mod
     </section>
   </menu>
   <menu id="secondary_menu">
-    <item>
-      <attribute name="label" translatable="yes">Rename Chat</attribute>
-      <attribute name="action">app.rename_current_chat</attribute>
-    </item>
-    <item>
-      <attribute name="label" translatable="yes">Export Chat</attribute>
-      <attribute name="action">app.export_current_chat</attribute>
-    </item>
-    <item>
-      <attribute name="label" translatable="yes">Clear Chat</attribute>
-      <attribute name="action">app.clear</attribute>
-    </item>
-  </menu>
-  <menu id="chat_right_click_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Rename Chat</attribute>
+        <attribute name="action">app.rename_current_chat</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Export Chat</attribute>
+        <attribute name="action">app.export_current_chat</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Clear Chat</attribute>
+        <attribute name="action">app.clear</attribute>
+      </item>
+    </section>
     <section>
       <item>
         <attribute name="label" translatable="yes">Delete Chat</attribute>
-        <attribute name="action">app.delete_chat</attribute>
+        <attribute name="action">app.delete_current_chat</attribute>
       </item>
+    </section>
+  </menu>
+  <menu id="chat_right_click_menu">
+    <section>
       <item>
         <attribute name="label" translatable="yes">Rename Chat</attribute>
         <attribute name="action">app.rename_chat</attribute>
@@ -1075,6 +1017,12 @@ By downloading any model you accept their license agreement available on the mod
       <item>
         <attribute name="label" translatable="yes">Export Chat</attribute>
         <attribute name="action">app.export_chat</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Delete Chat</attribute>
+        <attribute name="action">app.delete_chat</attribute>
       </item>
     </section>
   </menu>
@@ -1085,8 +1033,12 @@ By downloading any model you accept their license agreement available on the mod
         <attribute name="action">app.create_model_from_existing</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">From GGUF File (Experimental)</attribute>
+        <attribute name="label" translatable="yes">From GGUF File</attribute>
         <attribute name="action">app.create_model_from_file</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">From Name</attribute>
+        <attribute name="action">app.create_model_from_name</attribute>
       </item>
     </section>
   </menu>
@@ -1130,7 +1082,7 @@ By downloading any model you accept their license agreement available on the mod
             <property name="title" translatable="yes">General</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;Q</property>
+                <property name="accelerator">&lt;ctrl&gt;W</property>
                 <property name="title" translatable="yes">Close application</property>
               </object>
             </child>
@@ -1148,7 +1100,7 @@ By downloading any model you accept their license agreement available on the mod
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;P</property>
+                <property name="accelerator">&lt;ctrl&gt;comma</property>
                 <property name="title" translatable="yes">Preferences</property>
               </object>
             </child>
@@ -1162,6 +1114,18 @@ By downloading any model you accept their license agreement available on the mod
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;ctrl&gt;slash</property>
                 <property name="title" translatable="yes">Show shortcuts window</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;M</property>
+                <property name="title" translatable="yes">Manage models</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">F9</property>
+                <property name="title" translatable="yes">Toggle sidebar</property>
               </object>
             </child>
           </object>
