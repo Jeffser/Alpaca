@@ -1308,6 +1308,7 @@ Generate a title following these rules:
                     "What is a black-hole?"
                     "Tell me how to stay fit?"
                     "Write a conversation between sun and Earth"
+                    "Why is the grass green?"
                 ]
                 for prompt in random.sample(possible_prompts, 3):
                     prompt_button = Gtk.Button(
