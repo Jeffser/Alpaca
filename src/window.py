@@ -481,8 +481,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if mode == 1:
             return self.model_list_box.get_selected_row().get_name()
 
-    def check_alphanumeric(self, editable, text, length, position):
-        new_text = ''.join([char for char in text if char.isalnum() or char in ['-', '.', ':', '_']])
+    def check_alphanumeric(self, editable, text, length, position, allowed_chars):
+        new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
         if new_text != text:
             editable.stop_emission_by_name("insert-text")
 
@@ -1736,7 +1736,7 @@ Generate a title following these rules:
         self.file_preview_remove_button.connect('clicked', lambda button : dialogs.remove_attached_file(self, button.get_name()))
         self.add_chat_button.connect("clicked", lambda button : self.new_chat())
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
-        self.create_model_name.get_delegate().connect("insert-text", self.check_alphanumeric)
+        self.create_model_name.get_delegate().connect("insert-text", lambda *_ : self.check_alphanumeric(*_, ['-', '.', '_']))
         self.remote_connection_entry.connect("entry-activated", lambda entry : entry.set_css_classes([]))
         self.remote_connection_switch.connect("notify", lambda pspec, user_data : self.connection_switched())
         self.background_switch.connect("notify", lambda pspec, user_data : self.switch_run_on_background())

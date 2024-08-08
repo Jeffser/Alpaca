@@ -271,7 +271,7 @@ def create_model_from_name_response(self, dialog, task, entry):
 
 def create_model_from_name(self):
     entry = Gtk.Entry()
-    entry.get_delegate().connect("insert-text", self.check_alphanumeric)
+    entry.get_delegate().connect("insert-text", lambda *_ : self.check_alphanumeric(*_, ['-', '.', ':', '_', '/']))
     dialog = Adw.AlertDialog(
         heading=_("Pull Model"),
         body=_("Input the name of the model in this format\nname:tag"),
