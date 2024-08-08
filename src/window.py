@@ -164,7 +164,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.editing_message = None
             self.save_history()
             self.show_toast(_("Message edited successfully"), self.main_overlay)
-
+        if button and not button.get_visible():
+            return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False):
             return
         current_chat_row = self.chat_list_box.get_selected_row()
@@ -1768,7 +1769,7 @@ Generate a title following these rules:
         if not os.path.exists(os.path.join(self.data_dir, "chats")):
             os.makedirs(os.path.join(self.data_dir, "chats"))
         key_controller = Gtk.EventControllerKey.new()
-        key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: self.handle_enter_key() if keyval==Gdk.KEY_Return else None)
+        key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: self.handle_enter_key() if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
         self.message_text_view.add_controller(key_controller)
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
