@@ -19,7 +19,7 @@
 """
 Handles the main window
 """
-import json, threading, os, re, base64, sys, gettext, uuid, shutil, tarfile, tempfile, logging
+import json, threading, os, re, base64, sys, gettext, uuid, shutil, tarfile, tempfile, logging, random
 from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
@@ -119,6 +119,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_list_box = Gtk.Template.Child()
     model_popover = Gtk.Template.Child()
     model_selector_button = Gtk.Template.Child()
+    chat_welcome_screen : Adw.StatusPage = None
 
     manage_models_dialog = Gtk.Template.Child()
     pulling_model_list_box = Gtk.Template.Child()
@@ -142,7 +143,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.loading_spinner:
             self.chat_container.remove(self.loading_spinner)
         self.toggle_ui_sensitive(True)
-        self.switch_send_stop_button()
+        self.switch_send_stop_button(True)
         self.bot_message = None
         self.bot_message_box = None
         self.bot_message_view = None
@@ -164,8 +165,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.save_history()
             self.show_toast(_("Message edited successfully"), self.main_overlay)
 
-        if self.bot_message or self.get_focus() not in (self.message_text_view, self.send_button):
-            return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False):
             return
         current_chat_row = self.chat_list_box.get_selected_row()
@@ -217,7 +216,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
             "keep_alive": f"{self.model_tweaks['keep_alive']}m"
         }
-        self.switch_send_stop_button()
+        self.switch_send_stop_button(False)
         self.toggle_ui_sensitive(False)
 
         #self.attachments[name] = {"path": file_path, "type": file_type, "content": content}
@@ -229,6 +228,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.chat_container.append(self.loading_spinner)
         bot_id=self.generate_uuid()
         self.show_message("", True, message_id=bot_id)
+
+        if self.chat_welcome_screen:
+            self.chat_container.remove(self.chat_welcome_screen)
 
         thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], bot_id))
         thread.start()
@@ -271,12 +273,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if row and row.get_child().get_name() != self.chats["selected_chat"]:
             self.chats["selected_chat"] = row.get_child().get_name()
             self.load_history_into_chat()
-            if len(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()) > 0:
+            if len(self.chats["chats"][self.chats["selected_chat"]]["messages"]) > 0:
                 last_model_used = self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]
                 for i, m in enumerate(self.local_models):
                     if m == last_model_used:
                         self.model_list_box.select_row(self.model_list_box.get_row_at_index(i))
                         break
+            else:
+                self.load_history_into_chat()
             self.save_history()
 
     @Gtk.Template.Callback()
@@ -536,6 +540,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id)):
             shutil.rmtree(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id))
         self.save_history()
+        if len(self.chats["chats"][self.chats["selected_chat"]]["messages"]) == 0:
+            self.load_history_into_chat()
 
     def copy_message(self, message_element):
         logger.debug("Copying message")
@@ -594,7 +600,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.file_preview_text_view.set_visible(True)
                 buffer = self.file_preview_text_view.get_buffer()
                 buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-                buffer.insert(buffer.get_start_iter(), content, len(content))
+                buffer.insert(buffer.get_start_iter(), content, len(content.encode('utf-8')))
                 if file_type == 'youtube':
                     self.file_preview_dialog.set_title(content.split('\n')[0])
                     self.file_preview_open_button.set_name(content.split('\n')[2])
@@ -1055,9 +1061,9 @@ Generate a title following these rules:
         for element in [self.chat_list_box, self.add_chat_button, self.secondary_menu_button]:
             element.set_sensitive(status)
 
-    def switch_send_stop_button(self):
-        self.stop_button.set_visible(self.send_button.get_visible())
-        self.send_button.set_visible(not self.send_button.get_visible())
+    def switch_send_stop_button(self, send:bool):
+        self.stop_button.set_visible(not send)
+        self.send_button.set_visible(send)
 
     def run_message(self, messages, model, message_id):
         logger.debug("Running message")
@@ -1088,7 +1094,7 @@ Generate a title following these rules:
             GLib.idle_add(self.chat_container.append, self.regenerate_button)
             self.regenerate_button.connect('clicked', lambda button, message_id=message_id, bot_message_box=self.bot_message_box, bot_message_button_container=self.bot_message_button_container : self.regenerate_message(message_id, bot_message_box, bot_message_button_container))
         finally:
-            GLib.idle_add(self.switch_send_stop_button)
+            GLib.idle_add(self.switch_send_stop_button, True)
             GLib.idle_add(self.toggle_ui_sensitive, True)
             if self.loading_spinner:
                 GLib.idle_add(self.chat_container.remove, self.loading_spinner)
@@ -1118,7 +1124,7 @@ Generate a title following these rules:
             "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
             "keep_alive": f"{self.model_tweaks['keep_alive']}m"
         }
-        self.switch_send_stop_button()
+        self.switch_send_stop_button(False)
         self.toggle_ui_sensitive(False)
         thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], message_id))
         thread.start()
@@ -1267,17 +1273,51 @@ Generate a title following these rules:
         with open(os.path.join(self.data_dir, "chats", "chats.json"), "w+", encoding="utf-8") as f:
             json.dump(self.chats, f, indent=4)
 
+    def send_sample_prompt(self, prompt):
+        buffer = self.message_text_view.get_buffer()
+        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+        buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
+        self.send_message()
+
     def load_history_into_chat(self):
         for widget in list(self.chat_container): self.chat_container.remove(widget)
-        for key, message in self.chats['chats'][self.chats["selected_chat"]]['messages'].items():
-            if message:
-                formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(message['date'] + (":00" if message['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S')))
-                if message['role'] == 'user':
-                    self.show_message(message['content'], False, f"\n\n<small>{formated_date}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, message_id=key)
-                else:
-                    self.show_message(message['content'], True, f"\n\n{self.convert_model_name(message['model'], 0)}\n<small>{formated_date}</small>", message_id=key)
-                    self.add_code_blocks()
-                    self.bot_message = None
+        self.chat_welcome_screen = None
+        if len(self.chats['chats'][self.chats["selected_chat"]]['messages']) > 0:
+            for key, message in self.chats['chats'][self.chats["selected_chat"]]['messages'].items():
+                if message:
+                    formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(message['date'] + (":00" if message['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S')))
+                    if message['role'] == 'user':
+                        self.show_message(message['content'], False, f"\n\n<small>{formated_date}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, message_id=key)
+                    else:
+                        self.show_message(message['content'], True, f"\n\n{self.convert_model_name(message['model'], 0)}\n<small>{formated_date}</small>", message_id=key)
+                        self.add_code_blocks()
+                        self.bot_message = None
+        else:
+            possible_prompts = [
+                "What can you do?",
+                "Give me a pancake recipe",
+                "Why is the sky blue?"
+            ]
+            prompt_container = Gtk.Box(
+                orientation = 1,
+                spacing = 10,
+                halign = 3
+            )
+            for prompt in random.sample(possible_prompts, 3):
+                prompt_button = Gtk.Button(
+                    label=prompt
+                )
+                prompt_button.connect('clicked', lambda *_, prompt=prompt : self.send_sample_prompt(prompt))
+                prompt_container.append(prompt_button)
+            self.chat_welcome_screen = Adw.StatusPage(
+                icon_name="com.jeffser.Alpaca",
+                title="Alpaca",
+                description="Try one of these prompts",
+                child=prompt_container,
+                vexpand=True
+            )
+            self.chat_container.append(self.chat_welcome_screen)
+
 
     def load_history(self):
         logger.debug("Loading history")
