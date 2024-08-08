@@ -1130,7 +1130,7 @@ Generate a title following these rules:
             thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], message_id))
             thread.start()
         else:
-            self.show_toast(_("Message cannot be regenerated while receiving a response"), self.manage_models_overlay)
+            self.show_toast(_("Message cannot be regenerated while receiving a response"), self.main_overlay)
 
     def pull_model_update(self, data, model_name):
         if 'error' in data:
