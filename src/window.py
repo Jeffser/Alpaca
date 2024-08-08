@@ -1782,6 +1782,7 @@ Generate a title following these rules:
         self.remote_connection_entry.connect("entry-activated", lambda entry : entry.set_css_classes([]))
         self.remote_connection_switch.connect("notify", lambda pspec, user_data : self.connection_switched())
         self.background_switch.connect("notify", lambda pspec, user_data : self.switch_run_on_background())
+        self.set_focus(self.message_text_view)
         if os.path.exists(os.path.join(self.config_dir, "server.json")):
             with open(os.path.join(self.config_dir, "server.json"), "r", encoding="utf-8") as f:
                 data = json.load(f)
