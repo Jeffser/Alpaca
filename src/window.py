@@ -1101,33 +1101,36 @@ Generate a title following these rules:
                 self.loading_spinner = None
 
     def regenerate_message(self, message_id, bot_message_box, bot_message_button_container):
-        self.bot_message_button_container = bot_message_button_container
-        self.bot_message_view = Gtk.TextView(
-            editable=False,
-            focusable=True,
-            wrap_mode= Gtk.WrapMode.WORD,
-            margin_top=12,
-            margin_bottom=12,
-            hexpand=True,
-            css_classes=["flat"]
-        )
-        self.bot_message = self.bot_message_view.get_buffer()
-        for widget in list(bot_message_box):
-            bot_message_box.remove(widget)
-        bot_message_box.append(self.bot_message_view)
-        history = self.convert_history_to_ollama()[:list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()).index(message_id)]
-        if message_id in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
-            del self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]
-        data = {
-            "model": self.get_current_model(1),
-            "messages": history,
-            "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
-            "keep_alive": f"{self.model_tweaks['keep_alive']}m"
-        }
-        self.switch_send_stop_button(False)
-        self.toggle_ui_sensitive(False)
-        thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], message_id))
-        thread.start()
+        if not self.bot_message:
+            self.bot_message_button_container = bot_message_button_container
+            self.bot_message_view = Gtk.TextView(
+                editable=False,
+                focusable=True,
+                wrap_mode= Gtk.WrapMode.WORD,
+                margin_top=12,
+                margin_bottom=12,
+                hexpand=True,
+                css_classes=["flat"]
+            )
+            self.bot_message = self.bot_message_view.get_buffer()
+            for widget in list(bot_message_box):
+                bot_message_box.remove(widget)
+            bot_message_box.append(self.bot_message_view)
+            history = self.convert_history_to_ollama()[:list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()).index(message_id)]
+            if message_id in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
+                del self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]
+            data = {
+                "model": self.get_current_model(1),
+                "messages": history,
+                "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
+                "keep_alive": f"{self.model_tweaks['keep_alive']}m"
+            }
+            self.switch_send_stop_button(False)
+            self.toggle_ui_sensitive(False)
+            thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], message_id))
+            thread.start()
+        else:
+            self.show_toast(_("Message cannot be regenerated while receiving a response"), self.manage_models_overlay)
 
     def pull_model_update(self, data, model_name):
         if 'error' in data:
