@@ -1294,6 +1294,14 @@ Generate a title following these rules:
                     "What can you do?",
                     "Give me a pancake recipe",
                     "Why is the sky blue?"
+                    "Can you tell me a joke?"
+                    "Give me a healthy breakfast recipe"
+                    "How to make a pizza"
+                    "Can you summarize a long piece of text?"
+                    "Can you write a poem?"
+                    "Can you write a story?"
+                    "Can you describe a fictional world or society?"
+                    "Code a snake game"
                 ]
                 for prompt in random.sample(possible_prompts, 3):
                     prompt_button = Gtk.Button(
