@@ -1744,7 +1744,8 @@ Generate a title following these rules:
         clipboard.read_texture_async(None, self.cb_image_received)
 
     def handle_enter_key(self):
-        self.send_message()
+        if not self.bot_message:
+            self.send_message()
         return True
 
     def __init__(self, **kwargs):
