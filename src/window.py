@@ -308,18 +308,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.show_toast(_("Failed to connect to server"), self.preferences_dialog)
 
     @Gtk.Template.Callback()
-    def pull_featured_model(self, button):
-        action_row = button.get_parent().get_parent().get_parent()
-        button.get_parent().remove(button)
-        model = f"{action_row.get_title().lower()}:latest"
-        action_row.set_subtitle(_("Pulling in the background..."))
-        spinner = Gtk.Spinner()
-        spinner.set_spinning(True)
-        action_row.add_suffix(spinner)
-        action_row.set_sensitive(False)
-        self.pull_model(model)
-
-    @Gtk.Template.Callback()
     def closing_app(self, user_data):
         if self.get_hide_on_close():
             logger.info("Hiding app...")
@@ -1296,27 +1284,37 @@ Generate a title following these rules:
                         self.add_code_blocks()
                         self.bot_message = None
         else:
-            possible_prompts = [
-                "What can you do?",
-                "Give me a pancake recipe",
-                "Why is the sky blue?"
-            ]
-            prompt_container = Gtk.Box(
+            button_container = Gtk.Box(
                 orientation = 1,
                 spacing = 10,
                 halign = 3
             )
-            for prompt in random.sample(possible_prompts, 3):
-                prompt_button = Gtk.Button(
-                    label=prompt
+            if len(self.local_models) > 0:
+                possible_prompts = [
+                    "What can you do?",
+                    "Give me a pancake recipe",
+                    "Why is the sky blue?"
+                ]
+                for prompt in random.sample(possible_prompts, 3):
+                    prompt_button = Gtk.Button(
+                        label=prompt,
+                        tooltip_text=_("Send prompt: '{}'").format(prompt)
+                    )
+                    prompt_button.connect('clicked', lambda *_, prompt=prompt : self.send_sample_prompt(prompt))
+                    button_container.append(prompt_button)
+            else:
+                button = Gtk.Button(
+                    label=_("Open Model Manager"),
+                    tooltip_text=_("Open Model Manager"),
+                    css_classes=["accent"]
                 )
-                prompt_button.connect('clicked', lambda *_, prompt=prompt : self.send_sample_prompt(prompt))
-                prompt_container.append(prompt_button)
+                button.connect('clicked', lambda *_ : self.manage_models_dialog.present(self))
+                button_container.append(button)
             self.chat_welcome_screen = Adw.StatusPage(
                 icon_name="com.jeffser.Alpaca",
                 title="Alpaca",
-                description="Try one of these prompts",
-                child=prompt_container,
+                description=_("Try one of these prompts") if len(self.local_models) > 0 else _("It looks like you don't have any models downloaded yet. Download models to get started!"),
+                child=button_container,
                 vexpand=True
             )
             self.chat_container.append(self.chat_welcome_screen)
