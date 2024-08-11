@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0.6\n"
+"Project-Id-Version: 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-10 21:26-0600\n"
-"PO-Revision-Date: 2024-08-08 21:28+0200\n"
+"PO-Revision-Date: 2024-08-11 23:23+0200\n"
 "Last-Translator: Louis Chauvet-Villaret <louischauvet0@gmail.com>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -123,47 +123,47 @@ msgstr "Plusieurs modèles en téléchargement"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:173
 #: data/com.jeffser.Alpaca.metainfo.xml.in:198
 msgid "New"
-msgstr "Nouveau"
+msgstr "Nouveautés"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:86
 msgid "Model manager opens faster"
-msgstr ""
+msgstr "Changé : le gestionnaire de modèle s'ouvre plus rapidement"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:87
 msgid "Delete chat option in secondary menu"
-msgstr ""
+msgstr "Ajouté : option pour supprimer la discussion dans le menu secondaire"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "New model selector popup"
-msgstr ""
+msgstr "Ajouté : nouveau pop-up de sélection de modèle"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:89
 msgid "Standard shortcuts"
-msgstr ""
+msgstr "Ajouté : raccourcis claviers standards"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Model manager is navigable with keyboard"
-msgstr ""
+msgstr "Ajouté : le gestionnaire de modèle est navigable avec le clavier"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Changed sidebar collapsing behavior"
-msgstr ""
+msgstr "Changé : comportement de la barre latérale"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Focus indicators on messages"
-msgstr ""
+msgstr "Ajouté : indicateur de sélection sur les messages"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Welcome screen"
-msgstr ""
+msgstr "Ajouté : écran de bienvenue"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Give message entry focus at launch"
-msgstr ""
+msgstr "Ajouté : saisie sélectionnée au démarrage"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Generally better code"
-msgstr ""
+msgstr "Meilleur code en général"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
@@ -177,44 +177,47 @@ msgstr "Correctifs"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Better width for dialogs"
-msgstr ""
+msgstr "Changé : meilleur largeur des boites de dialogues"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Better compatibility with screen readers"
-msgstr ""
+msgstr "Ajouté : meilleur compatibilité pour les lecteurs d'écran"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Fixed message regenerator"
-msgstr ""
+msgstr "Résolu : générateur de message"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Removed 'Featured models' from welcome dialog"
 msgstr ""
+"Changé : modèles recommandés supprimés de la boite de dialogue de bienvenue"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Added default buttons to dialogs"
-msgstr ""
+msgstr "Ajouté : bouton par défaut sur les boites de dialogues"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Fixed import / export of chats"
-msgstr ""
+msgstr "Résolu : import/export des discussions"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Changed Python2 title to Python on code blocks"
-msgstr ""
+msgstr "Résolu : titre \"python2\" changé en \"python\" sur les blocs de code"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid ""
 "Prevent regeneration of title when the user changed it to a custom title"
 msgstr ""
+"Résolu : empêcher la génération d'un titre lorsque l'utilisateur en avait "
+"déjà choisi un"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
 msgid "Show date on stopped messages"
-msgstr ""
+msgstr "Résolu : afficher la date sur les messages stoppés"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Fix clear chat error"
-msgstr ""
+msgstr "Résolu : erreur d'effacement de discussion"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:117
 msgid "Changed shortcuts to standards"
@@ -1313,6 +1316,7 @@ msgstr "Regénérer la réponse"
 #: src/window.py:1149
 msgid "Message cannot be regenerated while receiving a response"
 msgstr ""
+"Le message ne peut pas être regénéré lors de la réception d'une réponse"
 
 #: src/window.py:1177
 msgid "Task Complete"
@@ -1360,21 +1364,23 @@ msgstr "Accédez au menu de téléchargement pour {}"
 
 #: src/window.py:1324
 msgid "Send prompt: '{}'"
-msgstr ""
+msgstr "Envoyer le prompt : '{}'"
 
 #: src/window.py:1330 src/window.py:1331
 msgid "Open Model Manager"
-msgstr ""
+msgstr "Ouvrir le gestionnaire de modèles"
 
 #: src/window.py:1339
 msgid "Try one of these prompts"
-msgstr ""
+msgstr "Essayez un des ces prompts"
 
 #: src/window.py:1339
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
 msgstr ""
+"On dirait que vous n'avez pas encore de modèles téléchargé. Télécharger un "
+"modèle pour commencer !"
 
 #: src/window.py:1444
 msgid "Model deleted successfully"
@@ -2199,7 +2205,7 @@ msgstr "Renommer la discussion ?"
 
 #: src/dialogs.py:75
 msgid "Renaming '{}'"
-msgstr "Renommer "
+msgstr "Renommer '{}'"
 
 #: src/dialogs.py:80
 msgid "Rename"
