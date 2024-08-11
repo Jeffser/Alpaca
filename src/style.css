@@ -17,7 +17,10 @@
 .model_list_box > * {
 	margin: 0;
 }
+.user_message, .response_message {
+  padding: 12px;
+  border-radius: 10px;
+}
 .user_message:focus, .response_message:focus, .editing_message_textview:focus {
 	box-shadow: 0 0 1px 2px mix(@accent_color, @window_bg_color, 0.5);
-	border-radius: 2px;
 }

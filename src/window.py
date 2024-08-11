@@ -64,6 +64,30 @@ class AlpacaWindow(Adw.ApplicationWindow):
     pulling_models = {}
     chats = {"chats": {_("New Chat"): {"messages": {}}}, "selected_chat": "New Chat", "order": []}
     attachments = {}
+    possible_prompts = [
+        "What can you do?",
+        "Give me a pancake recipe",
+        "Why is the sky blue?",
+        "Can you tell me a joke?",
+        "Give me a healthy breakfast recipe",
+        "How to make a pizza",
+        "Can you write a poem?",
+        "Can you write a story?",
+        "What is GNU-Linux?",
+        "Which is the best Linux distro?",
+        "Why is Pluto not a planet?",
+        "What is a black-hole?",
+        "Tell me how to stay fit",
+        "Write a conversation between sun and Earth",
+        "Why is the grass green?",
+        "Write an Haïku about AI",
+        "What is the meaning of life?",
+        "Explain quantum physics in simple terms",
+        "Explain the theory of relativity",
+        "Explain how photosynthesis works",
+        "Recommend a film about nature",
+        "What is nostalgia?"
+    ]
 
     #Override elements
     override_HSA_OVERRIDE_GFX_VERSION = Gtk.Template.Child()
@@ -659,12 +683,8 @@ Generate a title following these rules:
             editable=False,
             focusable=True,
             wrap_mode= Gtk.WrapMode.WORD,
-            margin_top=12,
-            margin_bottom=12,
-            margin_start=12,
-            margin_end=12,
             hexpand=True,
-            css_classes=["flat"] if bot else ["flat", "user_message"],
+            css_classes=["flat", "response_message"] if bot else ["flat", "user_message"],
         )
         if not bot:
             message_text.update_property([4, 7, 1], [_("User message"), True, msg])
@@ -932,8 +952,6 @@ Generate a title following these rules:
                     editable=False,
                     focusable=True,
                     wrap_mode= Gtk.WrapMode.WORD,
-                    margin_top=12,
-                    margin_bottom=12,
                     hexpand=True,
                     css_classes=["flat", "response_message"]
                 )
@@ -1299,24 +1317,7 @@ Generate a title following these rules:
                 halign = 3
             )
             if len(self.local_models) > 0:
-                possible_prompts = [
-                    "What can you do?",
-                    "Give me a pancake recipe",
-                    "Why is the sky blue?",
-                    "Can you tell me a joke?",
-                    "Give me a healthy breakfast recipe",
-                    "How to make a pizza",
-                    "Can you write a poem?",
-                    "Can you write a story?",
-                    "What is GNU-Linux?",
-                    "Which is the best Linux distro?",
-                    "Why is Pluto not a planet?",
-                    "What is a black-hole?",
-                    "Tell me how to stay fit",
-                    "Write a conversation between sun and Earth",
-                    "Why is the grass green?"
-                ]
-                for prompt in random.sample(possible_prompts, 3):
+                for prompt in random.sample(self.possible_prompts, 3):
                     prompt_button = Gtk.Button(
                         label=prompt,
                         tooltip_text=_("Send prompt: '{}'").format(prompt)
