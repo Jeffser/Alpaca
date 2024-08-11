@@ -1550,7 +1550,7 @@ Generate a title following these rules:
 
         with tempfile.TemporaryDirectory() as temp_dir:
             json_path = os.path.join(temp_dir, "data.json")
-            with open(json_path, "wb", encoding="utf-8") as json_file:
+            with open(json_path, "wb") as json_file:
                 json_file.write(json_data)
 
             tar_path = os.path.join(temp_dir, chat_name)
@@ -1560,7 +1560,7 @@ Generate a title following these rules:
                 if os.path.exists(directory) and os.path.isdir(directory):
                     tar.add(directory, arcname=os.path.basename(directory))
 
-            with open(tar_path, "rb", encoding="utf-8") as tar:
+            with open(tar_path, "rb") as tar:
                 tar_content = tar.read()
 
             file.replace_contents_async(
@@ -1588,7 +1588,7 @@ Generate a title following these rules:
         with tempfile.TemporaryDirectory() as temp_dir:
             tar_filename = os.path.join(temp_dir, "imported_chat.tar")
 
-            with open(tar_filename, "wb", encoding="utf-8") as tar_file:
+            with open(tar_filename, "wb") as tar_file:
                 tar_file.write(tar_content.get_data())
 
             with tarfile.open(tar_filename, "r") as tar:
