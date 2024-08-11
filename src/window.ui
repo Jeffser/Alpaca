@@ -100,6 +100,9 @@
                             </style>
                             <property name="popover">
                               <object class="GtkPopover" id="model_popover">
+                                <style>
+                                  <class name="model_popover"/>
+                                </style>
                                 <property name="has-arrow">false</property>
                                 <child>
                                   <object class="GtkBox">
