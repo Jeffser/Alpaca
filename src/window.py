@@ -1615,6 +1615,7 @@ Generate a title following these rules:
                         for chat_name, chat_content in data.items():
                             new_chat_name = self.generate_numbered_name(chat_name, list(self.chats['chats'].keys()))
                             self.chats['chats'][new_chat_name] = chat_content
+                            self.chats["order"].insert(0, new_chat_name)
                             src_path = os.path.join(temp_dir, chat_name)
                             if os.path.exists(src_path) and os.path.isdir(src_path):
                                 dest_path = os.path.join(self.data_dir, "chats", new_chat_name)
