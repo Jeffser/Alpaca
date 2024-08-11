@@ -1391,7 +1391,7 @@ Generate a title following these rules:
     def clear_chat(self):
         logger.info("Clearing chat")
         for widget in list(self.chat_container): self.chat_container.remove(widget)
-        self.chats["chats"][self.chats["selected_chat"]]["messages"] = []
+        self.chats["chats"][self.chats["selected_chat"]]["messages"] = {}
         self.save_history()
 
     def delete_chat(self, chat_name):
