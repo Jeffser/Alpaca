@@ -624,6 +624,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         return messages
 
     def generate_chat_title(self, message, label_element):
+        if not label_element.get_name().startswith(_("New Chat")):
+            return
         logger.debug("Generating chat title")
         prompt = f"""
 Generate a title following these rules:
