@@ -1102,6 +1102,7 @@ Generate a title following these rules:
                 css_classes=["flat"]
             )
             self.bot_message = self.bot_message_view.get_buffer()
+            self.bot_message_box = bot_message_box
             for widget in list(bot_message_box):
                 bot_message_box.remove(widget)
             bot_message_box.append(self.bot_message_view)
