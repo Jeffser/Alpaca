@@ -28,6 +28,7 @@ def clear_chat(self):
     dialog.add_response("cancel", _("Cancel"))
     dialog.add_response("clear", _("Clear"))
     dialog.set_response_appearance("clear", Adw.ResponseAppearance.DESTRUCTIVE)
+    dialog.set_default_response("clear")
     dialog.choose(
         parent = self,
         cancellable = None,
@@ -49,6 +50,7 @@ def delete_chat(self, chat_name):
     dialog.add_response("cancel", _("Cancel"))
     dialog.add_response("delete", _("Delete"))
     dialog.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
+    dialog.set_default_response("delete")
     dialog.choose(
         parent = self,
         cancellable = None,
@@ -74,10 +76,10 @@ def rename_chat(self, chat_name, label_element):
         extra_child=entry,
         close_response="cancel"
     )
-    entry.connect("activate", lambda dialog, old_chat_name=chat_name, entry=entry, label_element=label_element: rename_chat_response(self, dialog, None, old_chat_name, entry, label_element))
     dialog.add_response("cancel", _("Cancel"))
     dialog.add_response("rename", _("Rename"))
     dialog.set_response_appearance("rename", Adw.ResponseAppearance.SUGGESTED)
+    dialog.set_default_response("rename")
     dialog.choose(
         parent = self,
         cancellable = None,
@@ -102,10 +104,10 @@ def new_chat(self):
         extra_child=entry,
         close_response="cancel"
     )
-    entry.connect("activate", lambda dialog, entry: new_chat_response(self, dialog, None, entry))
     dialog.add_response("cancel", _("Cancel"))
     dialog.add_response("create", _("Create"))
     dialog.set_response_appearance("create", Adw.ResponseAppearance.SUGGESTED)
+    dialog.set_default_response("create")
     dialog.choose(
         parent = self,
         cancellable = None,
@@ -128,6 +130,7 @@ def stop_pull_model(self, model_name):
     dialog.add_response("cancel", _("Cancel"))
     dialog.add_response("stop", _("Stop"))
     dialog.set_response_appearance("stop", Adw.ResponseAppearance.DESTRUCTIVE)
+    dialog.set_default_response("stop")
     dialog.choose(
         parent = self.manage_models_dialog,
         cancellable = None,
@@ -149,6 +152,7 @@ def delete_model(self, model_name):
     dialog.add_response("cancel", _("Cancel"))
     dialog.add_response("delete", _("Delete"))
     dialog.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
+    dialog.set_default_response("delete")
     dialog.choose(
         parent = self.manage_models_dialog,
         cancellable = None,
@@ -171,6 +175,7 @@ def remove_attached_file(self, name):
     dialog.add_response("cancel", _("Cancel"))
     dialog.add_response("remove", _("Remove"))
     dialog.set_response_appearance("remove", Adw.ResponseAppearance.DESTRUCTIVE)
+    dialog.set_default_response("remove")
     dialog.choose(
         parent = self,
         cancellable = None,
@@ -210,11 +215,11 @@ def reconnect_remote(self, current_url, current_bearer_token):
         body=_("The remote instance has disconnected"),
         extra_child=container
     )
-    #entry.connect("activate", lambda entry, dialog: reconnect_remote_response(self, dialog, None, entry))
     dialog.add_response("close", _("Close Alpaca"))
     dialog.add_response("local", _("Use local instance"))
     dialog.add_response("remote", _("Connect"))
     dialog.set_response_appearance("remote", Adw.ResponseAppearance.SUGGESTED)
+    dialog.set_default_response("remote")
     dialog.choose(
         parent = self,
         cancellable = None,
@@ -243,6 +248,7 @@ def create_model_from_existing(self):
     dialog.add_response("cancel", _("Cancel"))
     dialog.add_response("accept", _("Accept"))
     dialog.set_response_appearance("accept", Adw.ResponseAppearance.SUGGESTED)
+    dialog.set_default_response("accept")
     dialog.choose(
         parent = self,
         cancellable = None,
@@ -280,6 +286,7 @@ def create_model_from_name(self):
     dialog.add_response("cancel", _("Cancel"))
     dialog.add_response("accept", _("Accept"))
     dialog.set_response_appearance("accept", Adw.ResponseAppearance.SUGGESTED)
+    dialog.set_default_response("accept")
     dialog.choose(
         parent = self,
         cancellable = None,
@@ -355,6 +362,7 @@ def youtube_caption(self, video_url):
     dialog.add_response("cancel", _("Cancel"))
     dialog.add_response("accept", _("Accept"))
     dialog.set_response_appearance("accept", Adw.ResponseAppearance.SUGGESTED)
+    dialog.set_default_response("accept")
     dialog.choose(
         parent = self,
         cancellable = None,
@@ -393,6 +401,7 @@ def attach_website(self, url):
     dialog.add_response("cancel", _("Cancel"))
     dialog.add_response("accept", _("Accept"))
     dialog.set_response_appearance("accept", Adw.ResponseAppearance.SUGGESTED)
+    dialog.set_default_response("accept")
     dialog.choose(
         parent = self,
         cancellable = None,
