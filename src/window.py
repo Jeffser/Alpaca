@@ -345,6 +345,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             logger.info("Closing app...")
             local_instance.stop()
+            self.get_application().quit()
 
     @Gtk.Template.Callback()
     def model_spin_changed(self, spin):
