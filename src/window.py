@@ -1330,7 +1330,7 @@ Generate a title following these rules:
                 button = Gtk.Button(
                     label=_("Open Model Manager"),
                     tooltip_text=_("Open Model Manager"),
-                    css_classes=["accent"]
+                    css_classes=["accent", "pill"]
                 )
                 button.connect('clicked', lambda *_ : self.manage_models_dialog.present(self))
                 button_container.append(button)
