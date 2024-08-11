@@ -886,7 +886,7 @@ Generate a title following these rules:
                 parts.append({"type": "normal", "text": normal_text.strip()})
             language = match.group(1)
             code_text = match.group(2)
-            parts.append({"type": "code", "text": code_text, "language": language})
+            parts.append({"type": "code", "text": code_text, "language": 'python3' if language == 'python' else language})
             pos = end
         # Match code blocks without language
         no_lang_code_block_pattern = re.compile(r'`\n(.*?)\n`', re.DOTALL)
