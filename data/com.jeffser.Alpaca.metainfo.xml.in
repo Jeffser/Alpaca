@@ -78,6 +78,37 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="1.1.0" date="2024-08-10">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.1.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Model manager opens faster</li>
+          <li>Delete chat option in secondary menu</li>
+          <li>New model selector popup</li>
+          <li>Standard shortcuts</li>
+          <li>Model manager is navigable with keyboard</li>
+          <li>Changed sidebar collapsing behavior</li>
+          <li>Focus indicators on messages</li>
+          <li>Welcome screen</li>
+          <li>Give message entry focus at launch</li>
+          <li>Generally better code</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Better width for dialogs</li>
+          <li>Better compatibility with screen readers</li>
+          <li>Fixed message regenerator</li>
+          <li>Removed 'Featured models' from welcome dialog</li>
+          <li>Added default buttons to dialogs</li>
+          <li>Fixed import / export of chats</li>
+          <li>Changed Python2 title to Python on code blocks</li>
+          <li>Prevent regeneration of title when the user changed it to a custom title</li>
+          <li>Show date on stopped messages</li>
+          <li>Fix clear chat error</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.6" date="2024-08-04">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.0.6</url>
       <description>
