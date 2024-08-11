@@ -171,6 +171,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         text = f"\n\n{self.convert_model_name(self.chats['chats'][self.chats['selected_chat']]['messages'][message_id]['model'], 0)}\n<small>{formated_date}</small>"
         self.bot_message.insert_markup(self.bot_message.get_end_iter(), text, len(text.encode('utf-8')))
         self.add_code_blocks()
+        self.bot_message_button_container.set_visible(True)
         self.toggle_ui_sensitive(True)
         self.switch_send_stop_button(True)
         self.bot_message = None
