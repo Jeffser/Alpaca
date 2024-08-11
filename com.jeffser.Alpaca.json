@@ -9,7 +9,8 @@
         "--share=ipc",
         "--socket=fallback-x11",
         "--device=dri",
-        "--socket=wayland"
+        "--socket=wayland",
+        "--env=LANGUAGE=fr_FR.UTF-8"
     ],
     "cleanup" : [
         "/include",

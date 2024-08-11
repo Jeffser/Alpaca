@@ -1433,6 +1433,7 @@ Generate a title following these rules:
         self.chats["order"].insert(0, chat_name)
         self.save_history()
         self.new_chat_element(chat_name, True, False)
+        self.set_focus(self.message_text_view)
 
     def stop_pull_model(self, model_name):
         logger.debug("Stopping model pull")
