@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-07 21:26-0600\n"
+"POT-Creation-Date: 2024-08-10 21:18-0600\n"
 "PO-Revision-Date: 2024-08-07 HO:MI+ZONE\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Hindi\n"
@@ -1068,195 +1068,196 @@ msgstr "0.1.1 स्थिर रिलीज़"
 msgid "This is the first public version of Alpaca"
 msgstr "यह अल्पाका का पहला सार्वजनिक संस्करण है"
 
-#: src/window.py:65 src/window.py:1330 src/window.py:1405 src/dialogs.py:90
-#: src/window.ui:29
+#: src/window.py:65 src/window.py:657 src/window.py:1353 src/window.py:1428
+#: src/dialogs.py:92 src/window.ui:29
 msgid "New Chat"
 msgstr "नई चैट शुरू करें"
 
-#: src/window.py:166
+#: src/window.py:196
 msgid "Message edited successfully"
 msgstr "संदेश सफलतापूर्वक संपादित किया गया है"
 
-#: src/window.py:180
+#: src/window.py:211
 msgid "Please select a model before chatting"
 msgstr "चैट करने से पहले एक मॉडल का चयन करें"
 
-#: src/window.py:251 src/window.py:252
+#: src/window.py:282 src/window.py:283
 msgid "Close"
 msgstr "बंद करें"
 
-#: src/window.py:254 src/window.py:255 src/window.ui:905
+#: src/window.py:285 src/window.py:286 src/window.ui:905
 msgid "Next"
 msgstr "अगला"
 
-#: src/window.py:297 src/window.py:308
+#: src/window.py:328 src/window.py:339
 msgid "Failed to connect to server"
 msgstr "सर्वर से कनेक्ट करने में असफल"
 
-#: src/window.py:356
+#: src/window.py:387
 msgid "Stop Creating '{}'"
 msgstr "{} बनाना बंद करें"
 
-#: src/window.py:396
+#: src/window.py:427
 msgid "image"
 msgstr "छवि"
 
-#: src/window.py:431 src/window.ui:86
+#: src/window.py:462 src/window.ui:86
 msgid "Select a Model"
 msgstr "एक मॉडल चुनें"
 
-#: src/window.py:539
+#: src/window.py:570
 msgid "Message copied to the clipboard"
 msgstr "संदेश क्लिपबोर्ड में कॉपी किया गया"
 
-#: src/window.py:661
+#: src/window.py:690
 msgid "User message"
 msgstr "उपयोगकर्ता संदेश"
 
-#: src/window.py:670
+#: src/window.py:699
 msgid "Remove Message"
 msgstr "संदेश हटाएं"
 
-#: src/window.py:675 src/window.py:983
+#: src/window.py:704 src/window.py:1011
 msgid "Copy Message"
 msgstr "संदेश कॉपी करें"
 
-#: src/window.py:680
+#: src/window.py:709
 msgid "Edit Message"
 msgstr "संदेश संपादित करें"
 
-#: src/window.py:685
+#: src/window.py:714
 msgid "Regenerate Message"
 msgstr "संदेश पुनः उत्पन्न करें"
 
-#: src/window.py:728 src/window.py:730
+#: src/window.py:758 src/window.py:760
 msgid "Image"
 msgstr ""
 
-#: src/window.py:739 src/window.py:755
+#: src/window.py:769 src/window.py:785
 msgid "Missing Image"
 msgstr "छवि नहीं मिली"
 
-#: src/window.py:757 src/window.py:758
+#: src/window.py:787 src/window.py:788
 msgid "Missing image"
 msgstr "छवि नहीं मिली"
 
-#: src/window.py:839
+#: src/window.py:869
 msgid "Remove '{}'"
 msgstr "{} हटाएं"
 
-#: src/window.py:958
+#: src/window.py:986
 msgid "Response message"
 msgstr "प्रतिक्रिया संदेश"
 
-#: src/window.py:978
+#: src/window.py:1006
 msgid "{}Code Block"
 msgstr "{}कोड ब्लॉक"
 
-#: src/window.py:982
+#: src/window.py:1010
 msgid "Code Block"
 msgstr "कोड ब्लॉक"
 
-#: src/window.py:1014
+#: src/window.py:1042
 msgid "Code copied to the clipboard"
 msgstr "कोड क्लिपबोर्ड में कॉपी किया गया"
 
-#: src/window.py:1077
+#: src/window.py:1104
 msgid "Regenerate Response"
 msgstr "उत्तर पुनः उत्पन्न करें"
 
-#: src/window.py:1121
+#: src/window.py:1149
 msgid "Message cannot be regenerated while receiving a response"
 msgstr ""
 
-#: src/window.py:1149
+#: src/window.py:1177
 msgid "Task Complete"
 msgstr "कार्य पूरा हुआ"
 
-#: src/window.py:1149 src/window.py:1150
+#: src/window.py:1177 src/window.py:1178
 msgid "Model '{}' pulled successfully."
 msgstr "मॉडल '{}' सफलतापूर्वक पुल किया गया है"
 
-#: src/window.py:1152 src/window.py:1155
+#: src/window.py:1180 src/window.py:1183
 msgid "Pull Model Error"
 msgstr "मॉडल पुल करने में त्रुटि"
 
-#: src/window.py:1152
+#: src/window.py:1180
 msgid "Failed to pull model '{}': {}"
 msgstr "मॉडल '{}' पुल करने में असफल: {}"
 
-#: src/window.py:1153
+#: src/window.py:1181
 msgid "Error pulling '{}': {}"
 msgstr "{} पुल करने में त्रुटि: {}"
 
-#: src/window.py:1155
+#: src/window.py:1183
 msgid "Failed to pull model '{}' due to network error."
 msgstr "नेटवर्क त्रुटि के कारण मॉडल '{}' पुल करने में असफल"
 
-#: src/window.py:1156
+#: src/window.py:1184
 msgid "Error pulling '{}'"
 msgstr "{} पुल करने में त्रुटि"
 
-#: src/window.py:1190
+#: src/window.py:1218
 msgid "Stop Pulling '{}'"
 msgstr "{} पुल करना बंद करें"
 
-#: src/window.py:1224
+#: src/window.py:1252
 msgid "Download {}:{}"
 msgstr ""
 
-#: src/window.py:1244
+#: src/window.py:1272
 msgid "Image Recognition"
 msgstr "छवि पहचान"
 
-#: src/window.py:1249
+#: src/window.py:1277
 msgid "Enter download menu for {}"
 msgstr "{} के लिए डाउनलोड मेनू में प्रवेश करें"
 
-#: src/window.py:1301
+#: src/window.py:1324
 msgid "Send prompt: '{}'"
 msgstr "प्रॉम्प्ट भेजें: '{}'"
 
-#: src/window.py:1307 src/window.py:1308
+#: src/window.py:1330 src/window.py:1331
 msgid "Open Model Manager"
 msgstr "मॉडल मैनेजर खोलें"
 
-#: src/window.py:1316
+#: src/window.py:1339
 msgid "Try one of these prompts"
 msgstr "इनमें से एक प्रॉम्प्ट आजमाएं"
 
-#: src/window.py:1316
+#: src/window.py:1339
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
 msgstr ""
-"यह लगता है कि आपने अभी तक कोई मॉडल डाउनलोड नहीं किया है। शुरू करने के लिए मॉडल्स डाउनलोड करें!"
+"यह लगता है कि आपने अभी तक कोई मॉडल डाउनलोड नहीं किया है। शुरू करने के लिए मॉडल्स "
+"डाउनलोड करें!"
 
-#: src/window.py:1421
+#: src/window.py:1444
 msgid "Model deleted successfully"
 msgstr "मॉडल सफलतापूर्वक हटा दिया गया है"
 
-#: src/window.py:1507
+#: src/window.py:1530
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr "स्थानीय ओलामा इंस्टेंस में एक त्रुटि थी, इसलिए इसे रीसेट कर दिया गया है"
 
-#: src/window.py:1530
+#: src/window.py:1553
 msgid "Chat exported successfully"
 msgstr "चैट सफलतापूर्वक निर्यात किया गया"
 
-#: src/window.py:1601
+#: src/window.py:1624
 msgid "Chat imported successfully"
 msgstr "चैट सफलतापूर्वक आयात किया गया"
 
-#: src/window.py:1634
+#: src/window.py:1657
 msgid "Cannot open image"
 msgstr "छवि खोलने में असमर्थ"
 
-#: src/window.py:1718
+#: src/window.py:1741
 msgid "This video is not available"
 msgstr "यह वीडियो उपलब्ध नहीं है"
 
-#: src/window.py:1736 src/dialogs.py:306
+#: src/window.py:1759 src/dialogs.py:313
 msgid "Image recognition is only available on specific models"
 msgstr "छवि पहचान केवल विशिष्ट मॉडल्स पर ही उपलब्ध है"
 
@@ -1975,9 +1976,9 @@ msgstr "चैट साफ करें?"
 msgid "Are you sure you want to clear the chat?"
 msgstr "क्या आप चैट को साफ करना चाहते हैं?"
 
-#: src/dialogs.py:28 src/dialogs.py:49 src/dialogs.py:78 src/dialogs.py:106
-#: src/dialogs.py:128 src/dialogs.py:149 src/dialogs.py:171 src/dialogs.py:243
-#: src/dialogs.py:280 src/dialogs.py:355 src/dialogs.py:393
+#: src/dialogs.py:28 src/dialogs.py:50 src/dialogs.py:79 src/dialogs.py:107
+#: src/dialogs.py:130 src/dialogs.py:152 src/dialogs.py:175 src/dialogs.py:248
+#: src/dialogs.py:286 src/dialogs.py:362 src/dialogs.py:401
 msgid "Cancel"
 msgstr "रद्द करें"
 
@@ -1985,111 +1986,111 @@ msgstr "रद्द करें"
 msgid "Clear"
 msgstr "साफ करें"
 
-#: src/dialogs.py:45
+#: src/dialogs.py:46
 msgid "Delete Chat?"
 msgstr "चैट हटाएं?"
 
-#: src/dialogs.py:46 src/dialogs.py:146
+#: src/dialogs.py:47 src/dialogs.py:149
 msgid "Are you sure you want to delete '{}'?"
 msgstr "क्या आप '{}' को हटाना चाहते हैं?"
 
-#: src/dialogs.py:50 src/dialogs.py:150
+#: src/dialogs.py:51 src/dialogs.py:153
 msgid "Delete"
 msgstr "हटाएं"
 
-#: src/dialogs.py:72
+#: src/dialogs.py:74
 msgid "Rename Chat?"
 msgstr "चैट का नाम बदलें?"
 
-#: src/dialogs.py:73
+#: src/dialogs.py:75
 msgid "Renaming '{}'"
 msgstr "'{}' का नाम बदल रहा है"
 
-#: src/dialogs.py:79
+#: src/dialogs.py:80
 msgid "Rename"
 msgstr "नाम बदलें"
 
-#: src/dialogs.py:100
+#: src/dialogs.py:102
 msgid "Create Chat?"
 msgstr "चैट बनाएं?"
 
-#: src/dialogs.py:101
+#: src/dialogs.py:103
 msgid "Enter name for new chat"
 msgstr "नए चैट के लिए नाम दर्ज करें"
 
-#: src/dialogs.py:107 src/window.ui:784
+#: src/dialogs.py:108 src/window.ui:784
 msgid "Create"
 msgstr "बनाएं"
 
-#: src/dialogs.py:124
+#: src/dialogs.py:126
 msgid "Stop Download?"
 msgstr "डाउनलोड रोकें?"
 
-#: src/dialogs.py:125
+#: src/dialogs.py:127
 msgid "Are you sure you want to stop pulling '{} ({})'?"
 msgstr "क्या आप '{}' ({}) को रोकना चाहते हैं?"
 
-#: src/dialogs.py:129
+#: src/dialogs.py:131
 msgid "Stop"
 msgstr "रोकें"
 
-#: src/dialogs.py:145
+#: src/dialogs.py:148
 msgid "Delete Model?"
 msgstr "मॉडल हटाएं?"
 
-#: src/dialogs.py:167
+#: src/dialogs.py:171
 msgid "Remove Attachment?"
 msgstr "संलग्नक हटाएं?"
 
-#: src/dialogs.py:168
+#: src/dialogs.py:172
 msgid "Are you sure you want to remove attachment?"
 msgstr "क्या आप संलग्नक हटाना चाहते हैं?"
 
-#: src/dialogs.py:172
+#: src/dialogs.py:176
 msgid "Remove"
 msgstr "हटाएं"
 
-#: src/dialogs.py:209
+#: src/dialogs.py:214
 msgid "Connection Error"
 msgstr "कनेक्शन त्रुटि"
 
-#: src/dialogs.py:210
+#: src/dialogs.py:215
 msgid "The remote instance has disconnected"
 msgstr "दूरस्थ उदाहरण से कनेक्शन टूट गया है"
 
-#: src/dialogs.py:214
+#: src/dialogs.py:218
 msgid "Close Alpaca"
 msgstr "अल्पाका बंद करें"
 
-#: src/dialogs.py:215
+#: src/dialogs.py:219
 msgid "Use local instance"
 msgstr "स्थानीय उदाहरण का उपयोग करें"
 
-#: src/dialogs.py:216
+#: src/dialogs.py:220
 msgid "Connect"
 msgstr "कनेक्ट करें"
 
-#: src/dialogs.py:239 src/window.ui:80
+#: src/dialogs.py:244 src/window.ui:80
 msgid "Select Model"
 msgstr "मॉडल चुनें"
 
-#: src/dialogs.py:240
+#: src/dialogs.py:245
 msgid "This model will be used as the base for the new model"
 msgstr "यह मॉडल नए मॉडल के लिए आधार के रूप में उपयोग किया जाएगा"
 
-#: src/dialogs.py:244 src/dialogs.py:281 src/dialogs.py:356 src/dialogs.py:394
+#: src/dialogs.py:249 src/dialogs.py:287 src/dialogs.py:363 src/dialogs.py:402
 msgid "Accept"
 msgstr "स्वीकार करें"
 
-#: src/dialogs.py:259
+#: src/dialogs.py:265
 msgid "An error occurred while creating the model"
 msgstr "मॉडल बनाते समय एक त्रुटि हुई"
 
-#: src/dialogs.py:276
+#: src/dialogs.py:282
 msgid "Pull Model"
 msgstr "मॉडल खींचें"
 
-#: src/dialogs.py:277
+#: src/dialogs.py:283
 msgid ""
 "Input the name of the model in this format\n"
 "name:tag"
@@ -2097,15 +2098,15 @@ msgstr ""
 "मॉडल का नाम इस प्रारूप में दर्ज करें\n"
 "नाम:टैग"
 
-#: src/dialogs.py:340
+#: src/dialogs.py:347
 msgid "This video does not have any transcriptions"
 msgstr "इस वीडियो में कोई भी लिप्यंतरण नहीं है"
 
-#: src/dialogs.py:350
+#: src/dialogs.py:357
 msgid "Attach YouTube Video?"
 msgstr "यूट्यूब वीडियो संलग्न करें?"
 
-#: src/dialogs.py:351
+#: src/dialogs.py:358
 msgid ""
 "{}\n"
 "\n"
@@ -2115,15 +2116,15 @@ msgstr ""
 "\n"
 "कृपया शामिल करने के लिए एक लिप्यंतरण चुनें"
 
-#: src/dialogs.py:384
+#: src/dialogs.py:392
 msgid "An error occurred while extracting text from the website"
 msgstr "वेबसाइट से पाठ निकालते समय एक त्रुटि हुई"
 
-#: src/dialogs.py:389
+#: src/dialogs.py:397
 msgid "Attach Website? (Experimental)"
 msgstr "वेबसाइट संलग्न करें? (प्रयोगात्मक)"
 
-#: src/dialogs.py:390
+#: src/dialogs.py:398
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"

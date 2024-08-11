@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-07 21:26-0600\n"
+"POT-Creation-Date: 2024-08-10 21:18-0600\n"
 "PO-Revision-Date: 2024-07-18 15:12-0600\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Bengali\n"
@@ -1065,195 +1065,194 @@ msgstr "0.1.1 স্থিতিশীল রিলিজ"
 msgid "This is the first public version of Alpaca"
 msgstr "এটি আলপাকার প্রথম পাবলিক সংস্করণ"
 
-#: src/window.py:65 src/window.py:1330 src/window.py:1405 src/dialogs.py:90
-#: src/window.ui:29
+#: src/window.py:65 src/window.py:657 src/window.py:1353 src/window.py:1428
+#: src/dialogs.py:92 src/window.ui:29
 msgid "New Chat"
 msgstr "নতুন চ্যাট"
 
-#: src/window.py:166
+#: src/window.py:196
 msgid "Message edited successfully"
 msgstr "বার্তা সফলভাবে সম্পাদিত হয়েছে"
 
-#: src/window.py:180
+#: src/window.py:211
 msgid "Please select a model before chatting"
 msgstr "চ্যাটিং আগে একটি মডেল নির্বাচন করুন"
 
-#: src/window.py:251 src/window.py:252
+#: src/window.py:282 src/window.py:283
 msgid "Close"
 msgstr "বন্ধ"
 
-#: src/window.py:254 src/window.py:255 src/window.ui:905
+#: src/window.py:285 src/window.py:286 src/window.ui:905
 msgid "Next"
 msgstr "পরবর্তী"
 
-#: src/window.py:297 src/window.py:308
+#: src/window.py:328 src/window.py:339
 msgid "Failed to connect to server"
 msgstr "সার্ভারে সংযোগ ব্যর্থ"
 
-#: src/window.py:356
+#: src/window.py:387
 msgid "Stop Creating '{}'"
 msgstr "'{}' তৈরি করা বন্ধ করুন"
 
-#: src/window.py:396
+#: src/window.py:427
 msgid "image"
 msgstr "ছবি"
 
-#: src/window.py:431 src/window.ui:86
+#: src/window.py:462 src/window.ui:86
 msgid "Select a Model"
 msgstr "একটি মডেল নির্বাচন করুন"
 
-#: src/window.py:539
+#: src/window.py:570
 msgid "Message copied to the clipboard"
 msgstr "ক্লিপবোর্ডে কপি করা হয়েছে"
 
-#: src/window.py:661
+#: src/window.py:690
 msgid "User message"
 msgstr "ব্যবহারকারীর বার্তা"
 
-#: src/window.py:670
+#: src/window.py:699
 msgid "Remove Message"
 msgstr "বার্তা অপসারণ"
 
-#: src/window.py:675 src/window.py:983
+#: src/window.py:704 src/window.py:1011
 msgid "Copy Message"
 msgstr "বার্তা কপি করুন"
 
-#: src/window.py:680
+#: src/window.py:709
 msgid "Edit Message"
 msgstr "বার্তা সম্পাদনা করুন"
 
-#: src/window.py:685
+#: src/window.py:714
 msgid "Regenerate Message"
 msgstr "বার্তা পুনরুত্পাদন করুন"
 
-#: src/window.py:728 src/window.py:730
+#: src/window.py:758 src/window.py:760
 msgid "Image"
 msgstr "চিত্র"
 
-#: src/window.py:739 src/window.py:755
+#: src/window.py:769 src/window.py:785
 msgid "Missing Image"
 msgstr "ছবি খুঁজে পাওয়া যায়নি"
 
-#: src/window.py:757 src/window.py:758
+#: src/window.py:787 src/window.py:788
 msgid "Missing image"
 msgstr "ছবি খুঁজে পাওয়া যায়নি"
 
-#: src/window.py:839
+#: src/window.py:869
 msgid "Remove '{}'"
 msgstr "'{}' অপসারণ করুন"
 
-#: src/window.py:958
+#: src/window.py:986
 msgid "Response message"
 msgstr "প্রতিক্রিয়া বার্তা"
 
-#: src/window.py:978
+#: src/window.py:1006
 msgid "{}Code Block"
 msgstr "{}কোড ব্লক"
 
-#: src/window.py:982
+#: src/window.py:1010
 msgid "Code Block"
 msgstr "কোড ব্লক"
 
-#: src/window.py:1014
+#: src/window.py:1042
 msgid "Code copied to the clipboard"
 msgstr "ক্লিপবোর্ডে কোড কপি করা হয়েছে"
 
-#: src/window.py:1077
+#: src/window.py:1104
 msgid "Regenerate Response"
 msgstr "উত্তর পুনরুত্পাদন করুন"
 
-#: src/window.py:1121
+#: src/window.py:1149
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "একটি প্রতিক্রিয়া পাওয়ার সময় বার্তা পুনরায় তৈরি করা যাবে না৷"
 
-#: src/window.py:1149
+#: src/window.py:1177
 msgid "Task Complete"
 msgstr "কাজ সম্পন্ন"
 
-#: src/window.py:1149 src/window.py:1150
+#: src/window.py:1177 src/window.py:1178
 msgid "Model '{}' pulled successfully."
 msgstr "মডেল '{}' সফলভাবে পুল করা হয়েছে"
 
-#: src/window.py:1152 src/window.py:1155
+#: src/window.py:1180 src/window.py:1183
 msgid "Pull Model Error"
 msgstr "মডেল পুল ত্রুটি"
 
-#: src/window.py:1152
+#: src/window.py:1180
 msgid "Failed to pull model '{}': {}"
 msgstr "মডেল '{}' পুল করা ব্যর্থ: {}"
 
-#: src/window.py:1153
+#: src/window.py:1181
 msgid "Error pulling '{}': {}"
 msgstr "'{}' পুল করার ত্রুটি: {}"
 
-#: src/window.py:1155
+#: src/window.py:1183
 msgid "Failed to pull model '{}' due to network error."
 msgstr "নেটওয়ার্ক ত্রুটির কারণে মডেল '{}' পুল করা সম্ভব হয়নি"
 
-#: src/window.py:1156
+#: src/window.py:1184
 msgid "Error pulling '{}'"
 msgstr "'{}' পুল করার ত্রুটি"
 
-#: src/window.py:1190
+#: src/window.py:1218
 msgid "Stop Pulling '{}'"
 msgstr "'{}' পুল করা বন্ধ করুন"
 
-#: src/window.py:1224
+#: src/window.py:1252
 msgid "Download {}:{}"
 msgstr "ডাউনলোড করুন {}:{}"
 
-#: src/window.py:1244
+#: src/window.py:1272
 msgid "Image Recognition"
 msgstr "ছবি সনাক্তকরণ"
 
-#: src/window.py:1249
+#: src/window.py:1277
 msgid "Enter download menu for {}"
 msgstr "{} এর ডাউনলোড মেনুতে প্রবেশ করুন"
 
-#: src/window.py:1301
+#: src/window.py:1324
 msgid "Send prompt: '{}'"
 msgstr "প্রম্পট পাঠান: '{}'"
 
-#: src/window.py:1307 src/window.py:1308
+#: src/window.py:1330 src/window.py:1331
 msgid "Open Model Manager"
 msgstr "মডেল ম্যানেজার খুলুন"
 
-#: src/window.py:1316
+#: src/window.py:1339
 msgid "Try one of these prompts"
 msgstr "এই প্রম্পটগুলির মধ্যে একটি চেষ্টা করুন"
 
-#: src/window.py:1316
+#: src/window.py:1339
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
-msgstr ""
-"মনে হচ্ছে আপনি এখনও কোনও মডেল ডাউনলোড করেননি। শুরু করতে মডেল ডাউনলোড করুন!"
+msgstr "মনে হচ্ছে আপনি এখনও কোনও মডেল ডাউনলোড করেননি। শুরু করতে মডেল ডাউনলোড করুন!"
 
-#: src/window.py:1421
+#: src/window.py:1444
 msgid "Model deleted successfully"
 msgstr "মডেল সফলভাবে মুছে ফেলা হয়েছে"
 
-#: src/window.py:1507
+#: src/window.py:1530
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr "স্থানীয় ওল্লামা ইনস্ট্যান্সে একটি ত্রুটি ছিল, তাই এটি রিসেট করা হয়েছে"
 
-#: src/window.py:1530
+#: src/window.py:1553
 msgid "Chat exported successfully"
 msgstr "চ্যাট সফলভাবে রপ্তানি করা হয়েছে"
 
-#: src/window.py:1601
+#: src/window.py:1624
 msgid "Chat imported successfully"
 msgstr "চ্যাট সফলভাবে আমদানি করা হয়েছে"
 
-#: src/window.py:1634
+#: src/window.py:1657
 msgid "Cannot open image"
 msgstr "ছবি খোলা যায়নি"
 
-#: src/window.py:1718
+#: src/window.py:1741
 msgid "This video is not available"
 msgstr "এই ভিডিওটি উপলব্ধ নয়"
 
-#: src/window.py:1736 src/dialogs.py:306
+#: src/window.py:1759 src/dialogs.py:313
 msgid "Image recognition is only available on specific models"
 msgstr "নির্দিষ্ট মডেলগুলিতে ছবি সনাক্তকরণ উপলব্ধ"
 
@@ -1981,9 +1980,9 @@ msgstr "চ্যাট পরিষ্কার করুন?"
 msgid "Are you sure you want to clear the chat?"
 msgstr "আপনি কি নিশ্চিত যে আপনি চ্যাটটি পরিষ্কার করতে চান?"
 
-#: src/dialogs.py:28 src/dialogs.py:49 src/dialogs.py:78 src/dialogs.py:106
-#: src/dialogs.py:128 src/dialogs.py:149 src/dialogs.py:171 src/dialogs.py:243
-#: src/dialogs.py:280 src/dialogs.py:355 src/dialogs.py:393
+#: src/dialogs.py:28 src/dialogs.py:50 src/dialogs.py:79 src/dialogs.py:107
+#: src/dialogs.py:130 src/dialogs.py:152 src/dialogs.py:175 src/dialogs.py:248
+#: src/dialogs.py:286 src/dialogs.py:362 src/dialogs.py:401
 msgid "Cancel"
 msgstr "বাতিল করুন"
 
@@ -1991,111 +1990,111 @@ msgstr "বাতিল করুন"
 msgid "Clear"
 msgstr "পরিষ্কার করুন"
 
-#: src/dialogs.py:45
+#: src/dialogs.py:46
 msgid "Delete Chat?"
 msgstr "চ্যাট মুছে ফেলুন?"
 
-#: src/dialogs.py:46 src/dialogs.py:146
+#: src/dialogs.py:47 src/dialogs.py:149
 msgid "Are you sure you want to delete '{}'?"
 msgstr "আপনি কি নিশ্চিত যে আপনি '{}' মুছে ফেলতে চান?"
 
-#: src/dialogs.py:50 src/dialogs.py:150
+#: src/dialogs.py:51 src/dialogs.py:153
 msgid "Delete"
 msgstr "মুছে ফেলুন"
 
-#: src/dialogs.py:72
+#: src/dialogs.py:74
 msgid "Rename Chat?"
 msgstr "চ্যাট পুনর্নামকরণ করুন?"
 
-#: src/dialogs.py:73
+#: src/dialogs.py:75
 msgid "Renaming '{}'"
 msgstr "'{}' পুনর্নামকরণ করা হচ্ছে"
 
-#: src/dialogs.py:79
+#: src/dialogs.py:80
 msgid "Rename"
 msgstr "পুনর্নামকরণ করুন"
 
-#: src/dialogs.py:100
+#: src/dialogs.py:102
 msgid "Create Chat?"
 msgstr "নতুন চ্যাট তৈরি করুন?"
 
-#: src/dialogs.py:101
+#: src/dialogs.py:103
 msgid "Enter name for new chat"
 msgstr "নতুন চ্যাটের জন্য নাম লিখুন"
 
-#: src/dialogs.py:107 src/window.ui:784
+#: src/dialogs.py:108 src/window.ui:784
 msgid "Create"
 msgstr "তৈরি করুন"
 
-#: src/dialogs.py:124
+#: src/dialogs.py:126
 msgid "Stop Download?"
 msgstr "ডাউনলোড বন্ধ করুন?"
 
-#: src/dialogs.py:125
+#: src/dialogs.py:127
 msgid "Are you sure you want to stop pulling '{} ({})'?"
 msgstr "আপনি কি নিশ্চিত যে আপনি '{}' ({}) টানা বন্ধ করতে চান?"
 
-#: src/dialogs.py:129
+#: src/dialogs.py:131
 msgid "Stop"
 msgstr "বন্ধ করুন"
 
-#: src/dialogs.py:145
+#: src/dialogs.py:148
 msgid "Delete Model?"
 msgstr "মডেল মুছে ফেলুন?"
 
-#: src/dialogs.py:167
+#: src/dialogs.py:171
 msgid "Remove Attachment?"
 msgstr "সংযুক্তি মুছে ফেলুন?"
 
-#: src/dialogs.py:168
+#: src/dialogs.py:172
 msgid "Are you sure you want to remove attachment?"
 msgstr "আপনি কি নিশ্চিত যে আপনি সংযুক্তি মুছে ফেলতে চান?"
 
-#: src/dialogs.py:172
+#: src/dialogs.py:176
 msgid "Remove"
 msgstr "মুছে ফেলুন"
 
-#: src/dialogs.py:209
+#: src/dialogs.py:214
 msgid "Connection Error"
 msgstr "সংযোগ ত্রুটি"
 
-#: src/dialogs.py:210
+#: src/dialogs.py:215
 msgid "The remote instance has disconnected"
 msgstr "দূরবর্তী ইনস্ট্যান্সটি সংযোগ বিচ্ছিন্ন হয়েছে"
 
-#: src/dialogs.py:214
+#: src/dialogs.py:218
 msgid "Close Alpaca"
 msgstr "আলপাকা বন্ধ করুন"
 
-#: src/dialogs.py:215
+#: src/dialogs.py:219
 msgid "Use local instance"
 msgstr "স্থানীয় ইনস্ট্যান্স ব্যবহার করুন"
 
-#: src/dialogs.py:216
+#: src/dialogs.py:220
 msgid "Connect"
 msgstr "সংযোগ করুন"
 
-#: src/dialogs.py:239 src/window.ui:80
+#: src/dialogs.py:244 src/window.ui:80
 msgid "Select Model"
 msgstr "মডেল নির্বাচন করুন"
 
-#: src/dialogs.py:240
+#: src/dialogs.py:245
 msgid "This model will be used as the base for the new model"
 msgstr "নতুন মডেলের জন্য এই মডেলটি ভিত্তি হিসাবে ব্যবহার করা হবে"
 
-#: src/dialogs.py:244 src/dialogs.py:281 src/dialogs.py:356 src/dialogs.py:394
+#: src/dialogs.py:249 src/dialogs.py:287 src/dialogs.py:363 src/dialogs.py:402
 msgid "Accept"
 msgstr "গ্রহণ করুন"
 
-#: src/dialogs.py:259
+#: src/dialogs.py:265
 msgid "An error occurred while creating the model"
 msgstr "মডেল তৈরি করার সময় একটি ত্রুটি ঘটেছে"
 
-#: src/dialogs.py:276
+#: src/dialogs.py:282
 msgid "Pull Model"
 msgstr "মডেল পুল করুন"
 
-#: src/dialogs.py:277
+#: src/dialogs.py:283
 msgid ""
 "Input the name of the model in this format\n"
 "name:tag"
@@ -2103,15 +2102,15 @@ msgstr ""
 "এই ফরম্যাটে মডেলের নাম ইনপুট করুন\n"
 "নাম:ট্যাগ"
 
-#: src/dialogs.py:340
+#: src/dialogs.py:347
 msgid "This video does not have any transcriptions"
 msgstr "এই ভিডিওতে কোন লিপ্যন্তর নেই"
 
-#: src/dialogs.py:350
+#: src/dialogs.py:357
 msgid "Attach YouTube Video?"
 msgstr "ইউটিউব ভিডিও সংযুক্ত করুন?"
 
-#: src/dialogs.py:351
+#: src/dialogs.py:358
 msgid ""
 "{}\n"
 "\n"
@@ -2121,15 +2120,15 @@ msgstr ""
 "\n"
 "অন্তর্ভুক্ত করার জন্য একটি লিপ্যন্তর নির্বাচন করুন"
 
-#: src/dialogs.py:384
+#: src/dialogs.py:392
 msgid "An error occurred while extracting text from the website"
 msgstr "ওয়েবসাইট থেকে টেক্সট নিষ্কাশনের সময় একটি ত্রুটি ঘটেছে"
 
-#: src/dialogs.py:389
+#: src/dialogs.py:397
 msgid "Attach Website? (Experimental)"
 msgstr "ওয়েবসাইট সংযুক্ত করুন? (পরীক্ষামূলক)"
 
-#: src/dialogs.py:390
+#: src/dialogs.py:398
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
