@@ -142,12 +142,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def stop_message(self, button=None):
         if self.loading_spinner:
             self.chat_container.remove(self.loading_spinner)
+        message_id = list(self.chats["chats"][self.chats["selected_chat"]]["messages"])[-1]
+        formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]["date"], '%Y/%m/%d %H:%M:%S')))
+        text = f"\n\n{self.convert_model_name(self.chats['chats'][self.chats['selected_chat']]['messages'][message_id]['model'], 0)}\n<small>{formated_date}</small>"
+        self.bot_message.insert_markup(self.bot_message.get_end_iter(), text, len(text.encode('utf-8')))
+        self.add_code_blocks()
         self.toggle_ui_sensitive(True)
         self.switch_send_stop_button(True)
         self.bot_message = None
         self.bot_message_box = None
         self.bot_message_view = None
         self.bot_message_button_container = None
+        self.save_history()
 
     @Gtk.Template.Callback()
     def send_message(self, button=None):
@@ -1027,7 +1033,6 @@ Generate a title following these rules:
 
     def update_bot_message(self, data, message_id):
         if self.bot_message is None:
-            self.save_history()
             sys.exit()
         vadjustment = self.chat_window.get_vadjustment()
         if message_id not in self.chats["chats"][self.chats["selected_chat"]]["messages"] or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
