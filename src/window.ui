@@ -996,6 +996,10 @@
         <attribute name="action">app.rename_current_chat</attribute>
       </item>
       <item>
+        <attribute name="label" translatable="yes">Duplicate Chat</attribute>
+        <attribute name="action">app.duplicate_current_chat</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">Export Chat</attribute>
         <attribute name="action">app.export_current_chat</attribute>
       </item>
@@ -1016,6 +1020,10 @@
       <item>
         <attribute name="label" translatable="yes">Rename Chat</attribute>
         <attribute name="action">app.rename_chat</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Duplicate Chat</attribute>
+        <attribute name="action">app.duplicate_chat</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">Export Chat</attribute>

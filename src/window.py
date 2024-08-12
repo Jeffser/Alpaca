@@ -1422,6 +1422,14 @@ Generate a title following these rules:
         if self.chats['selected_chat'] == chat_name:
             self.chat_list_box.select_row(self.chat_list_box.get_row_at_index(0))
 
+    def duplicate_chat(self, chat_name):
+        new_chat_name = self.generate_numbered_name(_("Copy of {}").format(chat_name), self.chats["chats"].keys())
+        self.chats["chats"][new_chat_name] = self.chats["chats"][chat_name]
+        self.chats["order"].insert(0, new_chat_name)
+        self.save_history()
+        self.new_chat_element(new_chat_name, True, False)
+        shutil.copytree(os.path.join(self.data_dir, "chats", chat_name), os.path.join(self.data_dir, "chats", new_chat_name))
+
     def rename_chat(self, old_chat_name, new_chat_name, label_element):
         logger.info(f"Renaming chat \"{old_chat_name}\" -> \"{new_chat_name}\"")
         new_chat_name = self.generate_numbered_name(new_chat_name, self.chats["chats"].keys())
@@ -1467,7 +1475,7 @@ Generate a title following these rules:
             menu_model=self.chat_right_click_menu,
             has_arrow=False,
             halign=1,
-            height_request=125
+            height_request=155
         )
         self.selected_chat_row = chat_row
         position = Gdk.Rectangle()
@@ -1725,6 +1733,8 @@ Generate a title following these rules:
         action_name = action.get_name()
         if action_name in ('delete_chat', 'delete_current_chat'):
             dialogs.delete_chat(self, chat_name)
+        elif action_name in ('duplicate_chat', 'duplicate_current_chat'):
+            self.duplicate_chat(chat_name)
         elif action_name in ('rename_chat', 'rename_current_chat'):
             dialogs.rename_chat(self, chat_name, chat_row.get_child())
         elif action_name in ('export_chat', 'export_current_chat'):
@@ -1804,6 +1814,8 @@ Generate a title following these rules:
         self.get_application().create_action('create_model_from_existing', lambda *_: dialogs.create_model_from_existing(self))
         self.get_application().create_action('create_model_from_file', lambda *_: dialogs.create_model_from_file(self))
         self.get_application().create_action('create_model_from_name', lambda *_: dialogs.create_model_from_name(self))
+        self.get_application().create_action('duplicate_chat', self.chat_actions)
+        self.get_application().create_action('duplicate_current_chat', self.current_chat_actions)
         self.get_application().create_action('delete_chat', self.chat_actions)
         self.get_application().create_action('delete_current_chat', self.current_chat_actions)
         self.get_application().create_action('rename_chat', self.chat_actions)
