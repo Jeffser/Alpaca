@@ -165,7 +165,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def stop_message(self, button=None):
         if self.loading_spinner:
-            self.chat_container.remove(self.loading_spinner)
+            self.loading_spinner.get_parent().remove(self.loading_spinner)
         message_id = list(self.chats["chats"][self.chats["selected_chat"]]["messages"])[-1]
         formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]["date"], '%Y/%m/%d %H:%M:%S')))
         text = f"\n\n{self.convert_model_name(self.chats['chats'][self.chats['selected_chat']]['messages'][message_id]['model'], 0)}\n<small>{formated_date}</small>"
@@ -1069,7 +1069,7 @@ Generate a title following these rules:
             GLib.idle_add(self.show_notification, self.chats["selected_chat"], first_paragraph[:100] + (first_paragraph[100:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
         else:
             if not self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]["content"] and self.loading_spinner:
-                GLib.idle_add(self.chat_container.remove, self.loading_spinner)
+                GLib.idle_add(self.loading_spinner.get_parent().remove, self.loading_spinner)
                 self.loading_spinner = None
             GLib.idle_add(self.bot_message.insert, self.bot_message.get_end_iter(), data['message']['content'])
             self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]['content'] += data['message']['content']
@@ -1114,7 +1114,7 @@ Generate a title following these rules:
             GLib.idle_add(self.switch_send_stop_button, True)
             GLib.idle_add(self.toggle_ui_sensitive, True)
             if self.loading_spinner:
-                GLib.idle_add(self.chat_container.remove, self.loading_spinner)
+                GLib.idle_add(self.loading_spinner.get_parent().remove, self.loading_spinner)
                 self.loading_spinner = None
 
     def regenerate_message(self, message_id, bot_message_box, bot_message_button_container):
@@ -1133,6 +1133,8 @@ Generate a title following these rules:
             self.bot_message_box = bot_message_box
             for widget in list(bot_message_box):
                 bot_message_box.remove(widget)
+            self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
+            bot_message_box.append(self.loading_spinner)
             bot_message_box.append(self.bot_message_view)
             history = self.convert_history_to_ollama()[:list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()).index(message_id)]
             if message_id in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
