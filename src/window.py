@@ -184,7 +184,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def send_message(self, button=None):
         if self.editing_message:
             self.editing_message["button_container"].set_visible(True)
-            self.editing_message["text_view"].set_css_classes(["flat"])
+            self.editing_message["text_view"].set_css_classes(["flat", "user_message"])
             self.editing_message["text_view"].set_cursor_visible(False)
             self.editing_message["text_view"].set_editable(False)
             buffer = self.editing_message["text_view"].get_buffer()
@@ -592,6 +592,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         text_view.set_cursor_visible(True)
 
         self.editing_message = {"text_view": text_view, "id": message_id, "button_container": button_container, "footer": footer}
+        if text_view.observe_controllers().get_n_items() == 8:
+            print(text_view.observe_controllers().get_n_items())
+            enter_key_controller = Gtk.EventControllerKey.new()
+            enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: self.handle_enter_key() if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
+            text_view.add_controller(enter_key_controller)
+            print(text_view.observe_controllers().get_n_items())
 
     def preview_file(self, file_path, file_type, presend_name):
         logger.debug(f"Previewing file: {file_path}")
@@ -1786,9 +1792,9 @@ Generate a title following these rules:
             self.available_models = json.load(f)
         if not os.path.exists(os.path.join(self.data_dir, "chats")):
             os.makedirs(os.path.join(self.data_dir, "chats"))
-        key_controller = Gtk.EventControllerKey.new()
-        key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: self.handle_enter_key() if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
-        self.message_text_view.add_controller(key_controller)
+        enter_key_controller = Gtk.EventControllerKey.new()
+        enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: self.handle_enter_key() if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
+        self.message_text_view.add_controller(enter_key_controller)
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.get_application().create_action('new_chat', lambda *_: self.new_chat(), ['<primary>n'])
