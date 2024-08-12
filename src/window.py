@@ -1056,7 +1056,7 @@ Generate a title following these rules:
         if self.bot_message is None:
             sys.exit()
         vadjustment = self.chat_window.get_vadjustment()
-        if message_id not in self.chats["chats"][self.chats["selected_chat"]]["messages"] or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
+        if not self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id] or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
             GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
         if 'done' in data and data['done']:
             formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]["date"], '%Y/%m/%d %H:%M:%S')))
@@ -1068,7 +1068,7 @@ Generate a title following these rules:
             first_paragraph = self.bot_message.get_text(self.bot_message.get_start_iter(), self.bot_message.get_end_iter(), False).split("\n")[0]
             GLib.idle_add(self.show_notification, self.chats["selected_chat"], first_paragraph[:100] + (first_paragraph[100:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
         else:
-            if not self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]["content"] and self.loading_spinner:
+            if self.loading_spinner:
                 GLib.idle_add(self.loading_spinner.get_parent().remove, self.loading_spinner)
                 self.loading_spinner = None
             GLib.idle_add(self.bot_message.insert, self.bot_message.get_end_iter(), data['message']['content'])
@@ -1085,12 +1085,13 @@ Generate a title following these rules:
     def run_message(self, messages, model, message_id):
         logger.debug("Running message")
         self.bot_message_button_container.set_visible(False)
-        self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id] = {
-            "role": "assistant",
-            "model": model,
-            "date": datetime.now().strftime("%Y/%m/%d %H:%M:%S"),
-            "content": ''
-        }
+        if message_id not in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
+            self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id] = {
+                "role": "assistant",
+                "model": model,
+                "date": datetime.now().strftime("%Y/%m/%d %H:%M:%S"),
+                "content": ''
+            }
         if self.regenerate_button:
             GLib.idle_add(self.chat_container.remove, self.regenerate_button)
         try:
@@ -1136,9 +1137,9 @@ Generate a title following these rules:
             self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
             bot_message_box.append(self.loading_spinner)
             bot_message_box.append(self.bot_message_view)
-            history = self.convert_history_to_ollama()[:list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()).index(message_id)]
             if message_id in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
-                del self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]
+                self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]['content'] = ''
+            history = self.convert_history_to_ollama()[:list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()).index(message_id)]
             data = {
                 "model": self.get_current_model(1),
                 "messages": history,
