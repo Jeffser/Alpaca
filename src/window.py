@@ -598,6 +598,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: self.handle_enter_key() if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
             text_view.add_controller(enter_key_controller)
             print(text_view.observe_controllers().get_n_items())
+        self.set_focus(text_view)
 
     def preview_file(self, file_path, file_type, presend_name):
         logger.debug(f"Previewing file: {file_path}")
