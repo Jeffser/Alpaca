@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.1.0\n"
+"Project-Id-Version: 1.1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-08-12 22:17-0600\n"
-"PO-Revision-Date: 2024-08-11 23:23+0200\n"
+"PO-Revision-Date: 2024-08-13 18:42+0200\n"
 "Last-Translator: Louis Chauvet-Villaret <louischauvet0@gmail.com>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -128,31 +128,33 @@ msgstr "Nouveautés"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:86
 msgid "New duplicate chat option"
-msgstr ""
+msgstr "Ajouté : option pour dupliquer la discussion"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:87
 msgid "Changed model selector appearance"
-msgstr ""
+msgstr "Changé : apparence du sélecteur de modèle"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "Message entry is focused on launch and chat change"
 msgstr ""
+"Changé : la saisie des messages est sélectionnée au démarrage et lors du "
+"changement de discussion"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:89
 msgid "Message is focused when it's being edited"
-msgstr ""
+msgstr "Changé : le message est sélectionné lorsqu'il est édité"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Added loading spinner when regenerating a message"
-msgstr ""
+msgstr "Ajouté : loader lorsque l'on regénère un message"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Added Ollama debugging to 'About Alpaca' dialog"
-msgstr ""
+msgstr "Ajouté : débogage Ollama à la boite de dialogue 'À propos d'Alpaca'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Changed YouTube transcription dialog appearance and behavior"
-msgstr ""
+msgstr "Changé : apparence de la boite de dialogue des transcriptions YouTube"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 #: data/com.jeffser.Alpaca.metainfo.xml.in:119
@@ -168,18 +170,22 @@ msgstr "Correctifs"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "CTRL+W and CTRL+Q stops local instance before closing the app"
 msgstr ""
+"Résolu : Ctrl + W et Ctrl + Q stoppent désormais l'instance local avant de "
+"fermer l'application"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Changed appearance of 'Open Model Manager' button on welcome screen"
 msgstr ""
+"Changé : apparence du bouton \"Ouvrir le Gestionnaire de modèle\" sur "
+"l'écran de bienvenue"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Fixed message generation not working consistently"
-msgstr ""
+msgstr "Résolu : la génération de messages fonctionnait mal"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Fixed message edition not working consistently"
-msgstr ""
+msgstr "Résolu : l'édition de message fonctionnait mal"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Model manager opens faster"
@@ -378,8 +384,8 @@ msgstr "Changé : empêche la génération d'un titre avec plusieurs lignes"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:197
 msgid "Bearer Token entry on connection error dialog"
 msgstr ""
-"Ajouté : boite de dialogue d'erreur pour saisir le jeton porteur (Bearer "
-"Token) lors de la connexion"
+"Ajouté : boite de dialogue d'erreur pour saisir le Bearer Token lors de la "
+"connexion"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:198
 msgid "Small appearance changes"
@@ -1430,7 +1436,7 @@ msgstr ""
 
 #: src/window.py:1430
 msgid "Copy of {}"
-msgstr ""
+msgstr "Copie de {}"
 
 #: src/window.py:1470
 msgid "Model deleted successfully"
@@ -2397,7 +2403,7 @@ msgstr "Gestion des modèles"
 
 #: src/window.ui:163
 msgid "Chat Menu"
-msgstr "Menu des discussions"
+msgstr "Menu de la discussion"
 
 #: src/window.ui:239
 msgid "Attach File"
@@ -2421,15 +2427,15 @@ msgstr "Général"
 
 #: src/window.ui:346
 msgid "Use Remote Connection to Ollama"
-msgstr "Utiliser une connexion distante d' Ollama"
+msgstr "Utiliser une instance externe d'Ollama"
 
 #: src/window.ui:352
 msgid "URL of Remote Instance"
-msgstr "URL de l'instance distante"
+msgstr "URL de l'instance externe"
 
 #: src/window.ui:359
 msgid "Bearer Token (Optional)"
-msgstr "Jeton porteur (Bearer Token) (optionnel)"
+msgstr "Bearer Token (optionnel)"
 
 #: src/window.ui:369
 msgid "Run Alpaca In Background"
@@ -2443,9 +2449,7 @@ msgstr "Température"
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
-msgstr ""
-"Température du modèle. Augmenter la température rendra le modèle plus "
-"créatif. (Défaut : 0.8)"
+msgstr "Augmenter la température rendra le modèle plus créatif. (Défaut : 0.8)"
 
 #: src/window.ui:396
 msgid "Seed"
@@ -2457,12 +2461,12 @@ msgid ""
 "specific number will make the model generate the same text for the same "
 "prompt. (Default: 0 (random))"
 msgstr ""
-"Définissez la graine aléatoire utilisé pour la génération de manière que le "
-"modèle génère le même texte pour le même prompt. (Défaut : 0 (aléatoire))"
+"Nombre aléatoire utilisé pour la génération. Définie sur une valeur, le "
+"modèle génèrera le même texte pour le même prompt. (Défaut : 0 (aléatoire))"
 
 #: src/window.ui:411
 msgid "Keep Alive Time"
-msgstr "Durée du modèle en mémoire"
+msgstr "Temps chargé en mémoire"
 
 #: src/window.ui:412
 msgid ""
@@ -2485,9 +2489,9 @@ msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
 msgstr ""
-"Gérer les arguments utilisés avec Ollama, tout les changements sur cette "
-"page ne s'appliquent seulement sur l'instance intégrée, l'instance va "
-"redémarrer si vous effectuez des changements."
+"Gérer les arguments utilisés par Ollama. Tout les changements sur cette page "
+"ne s'appliquent qu'à l'instance intégrée. L'instance va redémarrer si vous "
+"effectuez des changements."
 
 #: src/window.ui:505
 msgid "Manage models dialog"
@@ -2589,7 +2593,7 @@ msgstr ""
 
 #: src/window.ui:969
 msgid "Import Chat"
-msgstr "Importer la discussion"
+msgstr "Importer une discussion"
 
 #: src/window.ui:983
 msgid "Keyboard Shortcuts"
@@ -2605,7 +2609,7 @@ msgstr "Renommer la discussion"
 
 #: src/window.ui:999 src/window.ui:1025
 msgid "Duplicate Chat"
-msgstr ""
+msgstr "Dupliquer"
 
 #: src/window.ui:1003 src/window.ui:1029
 msgid "Export Chat"
