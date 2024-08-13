@@ -330,7 +330,7 @@ def youtube_caption_response(self, dialog, task, video_url, caption_drop_down):
         yt = YouTube(video_url)
         text = "{}\n{}\n{}\n\n".format(yt.title, yt.author, yt.watch_url)
         selected_caption = caption_drop_down.get_selected_item().get_string()
-        for event in yt.captions[selected_caption.split(' | ')[1]].json_captions['events']:
+        for event in yt.captions[selected_caption.split('(')[1][:-1]].json_captions['events']:
             text += "{}\n".format(event['segs'][0]['utf8'].replace('\n', '\\n'))
         if not os.path.exists(os.path.join(self.cache_dir, 'tmp/youtube')):
             os.makedirs(os.path.join(self.cache_dir, 'tmp/youtube'))
@@ -348,7 +348,7 @@ def youtube_caption(self, video_url):
         return
     caption_list = Gtk.StringList()
     for caption in captions:
-        caption_list.append("{} | {}".format(caption.name, caption.code))
+        caption_list.append("{} ({})".format(caption.name.title(), caption.code))
     caption_drop_down = Gtk.DropDown(
         enable_search=len(captions) > 10,
         model=caption_list
