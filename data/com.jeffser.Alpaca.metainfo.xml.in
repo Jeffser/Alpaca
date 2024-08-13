@@ -78,6 +78,28 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="1.1.1" date="2024-08-12">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.1.1</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>New duplicate chat option</li>
+          <li>Changed model selector appearance</li>
+          <li>Message entry is focused on launch and chat change</li>
+          <li>Message is focused when it's being edited</li>
+          <li>Added loading spinner when regenerating a message</li>
+          <li>Added Ollama debugging to 'About Alpaca' dialog</li>
+          <li>Changed YouTube transcription dialog appearance and behavior</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>CTRL+W and CTRL+Q stops local instance before closing the app</li>
+          <li>Changed appearance of 'Open Model Manager' button on welcome screen</li>
+          <li>Fixed message generation not working consistently</li>
+          <li>Fixed message edition not working consistently</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.0" date="2024-08-10">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.1.0</url>
       <description>
