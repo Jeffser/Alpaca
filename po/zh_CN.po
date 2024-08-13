@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-10 21:26-0600\n"
+"POT-Creation-Date: 2024-08-12 22:03-0600\n"
 "PO-Revision-Date: 2024-07-21 22:46+0200\n"
 "Last-Translator: Yuehao Sui <8ar10der@amao.run>\n"
 "Language-Team: Chinese (China)\n"
@@ -79,7 +79,7 @@ msgstr ""
 msgid "PDF recognition"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:952
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:955
 msgid "Disclaimer"
 msgstr "免责声明"
 
@@ -1123,194 +1123,198 @@ msgstr ""
 msgid "This is the first public version of Alpaca"
 msgstr ""
 
-#: src/window.py:65 src/window.py:657 src/window.py:1353 src/window.py:1428
+#: src/window.py:65 src/window.py:666 src/window.py:1365 src/window.py:1449
 #: src/dialogs.py:92 src/window.ui:29
 msgid "New Chat"
 msgstr "新对话"
 
-#: src/window.py:196
+#: src/window.py:197
 msgid "Message edited successfully"
 msgstr "更改消息成功"
 
-#: src/window.py:211
+#: src/window.py:212
 msgid "Please select a model before chatting"
 msgstr "请在对话前先选择一个模型"
 
-#: src/window.py:282 src/window.py:283
+#: src/window.py:283 src/window.py:284
 msgid "Close"
 msgstr "关闭"
 
-#: src/window.py:285 src/window.py:286 src/window.ui:905
+#: src/window.py:286 src/window.py:287 src/window.ui:908
 msgid "Next"
 msgstr "下一页"
 
-#: src/window.py:328 src/window.py:339
+#: src/window.py:329 src/window.py:340
 msgid "Failed to connect to server"
 msgstr "无法连接服务器"
 
-#: src/window.py:387
+#: src/window.py:389
 msgid "Stop Creating '{}'"
 msgstr "停止创建 '{}'"
 
-#: src/window.py:427
+#: src/window.py:429
 msgid "image"
 msgstr "图像"
 
-#: src/window.py:462 src/window.ui:86
+#: src/window.py:464 src/window.ui:86
 msgid "Select a Model"
 msgstr ""
 
-#: src/window.py:570
+#: src/window.py:572
 msgid "Message copied to the clipboard"
 msgstr "消息已复制到剪切板"
 
-#: src/window.py:690
+#: src/window.py:699
 msgid "User message"
 msgstr ""
 
-#: src/window.py:699
+#: src/window.py:708
 msgid "Remove Message"
 msgstr "移除消息"
 
-#: src/window.py:704 src/window.py:1011
+#: src/window.py:713 src/window.py:1020
 msgid "Copy Message"
 msgstr "复制消息"
 
-#: src/window.py:709
+#: src/window.py:718
 msgid "Edit Message"
 msgstr "编辑消息"
 
-#: src/window.py:714
+#: src/window.py:723
 msgid "Regenerate Message"
 msgstr "重新生成消息"
 
-#: src/window.py:758 src/window.py:760
+#: src/window.py:767 src/window.py:769
 msgid "Image"
 msgstr ""
 
-#: src/window.py:769 src/window.py:785
+#: src/window.py:778 src/window.py:794
 msgid "Missing Image"
 msgstr "无图像"
 
-#: src/window.py:787 src/window.py:788
+#: src/window.py:796 src/window.py:797
 msgid "Missing image"
 msgstr "无图像"
 
-#: src/window.py:869
+#: src/window.py:878
 msgid "Remove '{}'"
 msgstr "移除 '{}'"
 
-#: src/window.py:986
+#: src/window.py:995
 msgid "Response message"
 msgstr ""
 
-#: src/window.py:1006
+#: src/window.py:1015
 msgid "{}Code Block"
 msgstr ""
 
-#: src/window.py:1010
+#: src/window.py:1019
 msgid "Code Block"
 msgstr "代码块"
 
-#: src/window.py:1042
+#: src/window.py:1051
 msgid "Code copied to the clipboard"
 msgstr "代码已复制到剪切板"
 
-#: src/window.py:1104
+#: src/window.py:1114
 msgid "Regenerate Response"
 msgstr "重新生成回复"
 
-#: src/window.py:1149
+#: src/window.py:1161
 msgid "Message cannot be regenerated while receiving a response"
 msgstr ""
 
-#: src/window.py:1177
+#: src/window.py:1189
 msgid "Task Complete"
 msgstr "任务完成"
 
-#: src/window.py:1177 src/window.py:1178
+#: src/window.py:1189 src/window.py:1190
 msgid "Model '{}' pulled successfully."
 msgstr "成功拉取模型 '{}'"
 
-#: src/window.py:1180 src/window.py:1183
+#: src/window.py:1192 src/window.py:1195
 msgid "Pull Model Error"
 msgstr "拉取模型中遇到错误"
 
-#: src/window.py:1180
+#: src/window.py:1192
 msgid "Failed to pull model '{}': {}"
 msgstr "拉取 '{}': {} 模型失败"
 
-#: src/window.py:1181
+#: src/window.py:1193
 msgid "Error pulling '{}': {}"
 msgstr "拉取 '{}': {} 中发生错误"
 
-#: src/window.py:1183
+#: src/window.py:1195
 msgid "Failed to pull model '{}' due to network error."
 msgstr "由于网络错误，拉取模型 '{}' 失败"
 
-#: src/window.py:1184
+#: src/window.py:1196
 msgid "Error pulling '{}'"
 msgstr "拉取 '{}' 中遇到错误"
 
-#: src/window.py:1218
+#: src/window.py:1230
 msgid "Stop Pulling '{}'"
 msgstr "停止拉取 '{}'"
 
-#: src/window.py:1252
+#: src/window.py:1264
 msgid "Download {}:{}"
 msgstr ""
 
-#: src/window.py:1272
+#: src/window.py:1284
 msgid "Image Recognition"
 msgstr "图像识别"
 
-#: src/window.py:1277
+#: src/window.py:1289
 msgid "Enter download menu for {}"
 msgstr ""
 
-#: src/window.py:1324
+#: src/window.py:1336
 msgid "Send prompt: '{}'"
 msgstr ""
 
-#: src/window.py:1330 src/window.py:1331
+#: src/window.py:1342 src/window.py:1343
 msgid "Open Model Manager"
 msgstr ""
 
-#: src/window.py:1339
+#: src/window.py:1351
 msgid "Try one of these prompts"
 msgstr ""
 
-#: src/window.py:1339
+#: src/window.py:1351
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
 msgstr ""
 
-#: src/window.py:1444
+#: src/window.py:1426
+msgid "Copy of {}"
+msgstr ""
+
+#: src/window.py:1466
 msgid "Model deleted successfully"
 msgstr "模型删除成功"
 
-#: src/window.py:1530
+#: src/window.py:1552
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr "本地 Ollama 实例出错，已重置"
 
-#: src/window.py:1553
+#: src/window.py:1575
 msgid "Chat exported successfully"
 msgstr "聊天记录已成功导出"
 
-#: src/window.py:1624
+#: src/window.py:1647
 msgid "Chat imported successfully"
 msgstr "聊天记录已成功导入"
 
-#: src/window.py:1657
+#: src/window.py:1680
 msgid "Cannot open image"
 msgstr "无法打开图片"
 
-#: src/window.py:1741
+#: src/window.py:1766
 msgid "This video is not available"
 msgstr "视频不可用"
 
-#: src/window.py:1759 src/dialogs.py:313
+#: src/window.py:1784 src/dialogs.py:313
 msgid "Image recognition is only available on specific models"
 msgstr "图像识别功能仅适用于特定模型"
 
@@ -1987,7 +1991,7 @@ msgstr "创建聊天？"
 msgid "Enter name for new chat"
 msgstr "输入新聊天的名称"
 
-#: src/dialogs.py:108 src/window.ui:784
+#: src/dialogs.py:108 src/window.ui:787
 msgid "Create"
 msgstr "创建"
 
@@ -2107,65 +2111,65 @@ msgstr "目录"
 msgid "Toggle Sidebar"
 msgstr "切换侧边栏"
 
-#: src/window.ui:112 src/window.ui:118 src/window.ui:513 src/window.ui:970
+#: src/window.ui:115 src/window.ui:121 src/window.ui:516 src/window.ui:973
 msgid "Manage Models"
 msgstr "管理模型"
 
-#: src/window.ui:160
+#: src/window.ui:163
 msgid "Chat Menu"
 msgstr "聊天列表"
 
-#: src/window.ui:236
+#: src/window.ui:239
 msgid "Attach File"
 msgstr "附加文件"
 
-#: src/window.ui:272
+#: src/window.ui:275
 msgid "Message text box"
 msgstr ""
 
-#: src/window.ui:285 src/window.ui:1157
+#: src/window.ui:288 src/window.ui:1168
 msgid "Send Message"
 msgstr "发送消息"
 
-#: src/window.ui:334 src/window.ui:976 src/window.ui:1104
+#: src/window.ui:337 src/window.ui:979 src/window.ui:1115
 msgid "Preferences"
 msgstr "首选项"
 
-#: src/window.ui:337 src/window.ui:1082
+#: src/window.ui:340 src/window.ui:1093
 msgid "General"
 msgstr "通用"
 
-#: src/window.ui:343
+#: src/window.ui:346
 msgid "Use Remote Connection to Ollama"
 msgstr "远程连接到 Ollama"
 
-#: src/window.ui:349
+#: src/window.ui:352
 msgid "URL of Remote Instance"
 msgstr "远端实例的 URL"
 
-#: src/window.ui:356
+#: src/window.ui:359
 msgid "Bearer Token (Optional)"
 msgstr "令牌（可选）"
 
-#: src/window.ui:366
+#: src/window.ui:369
 msgid "Run Alpaca In Background"
 msgstr "在后台运行 Alpaca"
 
-#: src/window.ui:377
+#: src/window.ui:380
 msgid "Temperature"
 msgstr "温度参数（Temperature）"
 
-#: src/window.ui:378
+#: src/window.ui:381
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
 msgstr "模型的温度。温度越高，模型的回答就越有创意。(默认值：0.8）"
 
-#: src/window.ui:393
+#: src/window.ui:396
 msgid "Seed"
 msgstr "种子值"
 
-#: src/window.ui:394
+#: src/window.ui:397
 msgid ""
 "Sets the random number seed to use for generation. Setting this to a "
 "specific number will make the model generate the same text for the same "
@@ -2174,25 +2178,25 @@ msgstr ""
 "设置生成文本时使用的随机数种子。将其设置为特定的数字将使模型在同一提示下生成"
 "相同的文本（默认值：0（随机））。"
 
-#: src/window.ui:408
+#: src/window.ui:411
 msgid "Keep Alive Time"
 msgstr "保活时间"
 
-#: src/window.ui:409
+#: src/window.ui:412
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
 msgstr "控制模型在请求后加载到内存中的时间，以分钟为单位（默认：5）"
 
-#: src/window.ui:425
+#: src/window.ui:428
 msgid "Ollama Instance"
 msgstr "Ollama 实例"
 
-#: src/window.ui:429
+#: src/window.ui:432
 msgid "Ollama Overrides"
 msgstr "覆写 Ollama 参数"
 
-#: src/window.ui:430
+#: src/window.ui:433
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
@@ -2200,88 +2204,88 @@ msgstr ""
 "管理 Ollama 上使用的参数，此页面上的任何更改仅适用于集成实例，如果更改，实例"
 "将重新启动。"
 
-#: src/window.ui:502
+#: src/window.ui:505
 msgid "Manage models dialog"
 msgstr ""
 
-#: src/window.ui:523 src/window.ui:664
+#: src/window.ui:526 src/window.ui:667
 msgid "Create Model"
 msgstr "创建模型"
 
-#: src/window.ui:530
+#: src/window.ui:533
 msgid "Search Model"
 msgstr "搜索模型"
 
-#: src/window.ui:539
+#: src/window.ui:542
 msgid "Model search bar"
 msgstr ""
 
-#: src/window.ui:546 src/window.ui:548
+#: src/window.ui:549 src/window.ui:551
 msgid "Search models"
 msgstr "搜索模型"
 
-#: src/window.ui:596
+#: src/window.ui:599
 msgid "No Models Found"
 msgstr "未找到模型"
 
-#: src/window.ui:597
+#: src/window.ui:600
 msgid "Try a different search"
 msgstr "尝试不同的搜索"
 
-#: src/window.ui:642
+#: src/window.ui:645
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
 msgstr "下载此模型即表示您接受模型网站上的许可协议。"
 
-#: src/window.ui:699
+#: src/window.ui:702
 msgid "Base"
 msgstr "基础"
 
-#: src/window.ui:718
+#: src/window.ui:721
 msgid "Name"
 msgstr "名称"
 
-#: src/window.ui:724
+#: src/window.ui:727
 msgid "Context"
 msgstr "上下文"
 
-#: src/window.ui:768
+#: src/window.ui:771
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
 "documentation for more information if you're unsure."
 msgstr ""
 
-#: src/window.ui:807
+#: src/window.ui:810
 msgid "File preview dialog"
 msgstr ""
 
-#: src/window.ui:819
+#: src/window.ui:822
 msgid "Open With Default App"
 msgstr "用默认应用打开"
 
-#: src/window.ui:827
+#: src/window.ui:830
 msgid "Remove Attachment"
 msgstr "移除附件"
 
-#: src/window.ui:889
+#: src/window.ui:892
 msgid "Previous"
 msgstr "上一个"
 
-#: src/window.ui:932
+#: src/window.ui:935
 msgid "Welcome to Alpaca"
 msgstr "欢迎来到 Alpaca"
 
-#: src/window.ui:933
+#: src/window.ui:936
 msgid "Powered by Ollama"
 msgstr "基于 Ollama"
 
-#: src/window.ui:936
+#: src/window.ui:939
 msgid "Ollama Website"
 msgstr "Ollama 网站"
 
-#: src/window.ui:953
+#: src/window.ui:956
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2290,87 +2294,91 @@ msgstr ""
 "对于因执行人工智能模型生成的代码而对设备或软件造成的任何损害，Alpaca 及其开发"
 "人员概不负责。请谨慎行事，在运行代码前仔细检查。"
 
-#: src/window.ui:966
+#: src/window.ui:969
 msgid "Import Chat"
 msgstr "导入聊天"
 
-#: src/window.ui:980
+#: src/window.ui:983
 msgid "Keyboard Shortcuts"
 msgstr "快捷键"
 
-#: src/window.ui:984
+#: src/window.ui:987
 msgid "About Alpaca"
 msgstr "关于 Alpaca"
 
-#: src/window.ui:992 src/window.ui:1014
+#: src/window.ui:995 src/window.ui:1021
 msgid "Rename Chat"
 msgstr "重命名聊天"
 
-#: src/window.ui:996 src/window.ui:1018
+#: src/window.ui:999 src/window.ui:1025
+msgid "Duplicate Chat"
+msgstr ""
+
+#: src/window.ui:1003 src/window.ui:1029
 msgid "Export Chat"
 msgstr "导出聊天"
 
-#: src/window.ui:1000
+#: src/window.ui:1007
 msgid "Clear Chat"
 msgstr "清除聊天"
 
-#: src/window.ui:1006 src/window.ui:1024
+#: src/window.ui:1013 src/window.ui:1035
 msgid "Delete Chat"
 msgstr "删除聊天"
 
-#: src/window.ui:1032
+#: src/window.ui:1043
 msgid "From Existing Model"
 msgstr "从现有模型"
 
-#: src/window.ui:1036
+#: src/window.ui:1047
 msgid "From GGUF File"
 msgstr "从 GGUF 文件"
 
-#: src/window.ui:1040
+#: src/window.ui:1051
 msgid "From Name"
 msgstr "从名称"
 
-#: src/window.ui:1086
+#: src/window.ui:1097
 msgid "Close application"
 msgstr "关闭应用"
 
-#: src/window.ui:1092
+#: src/window.ui:1103
 msgid "Import chat"
 msgstr "导入聊天"
 
-#: src/window.ui:1098
+#: src/window.ui:1109
 msgid "Clear chat"
 msgstr "清除聊天"
 
-#: src/window.ui:1110
+#: src/window.ui:1121
 msgid "New chat"
 msgstr "新建聊天"
 
-#: src/window.ui:1116
+#: src/window.ui:1127
 msgid "Show shortcuts window"
 msgstr "显示快捷键窗口"
 
-#: src/window.ui:1122
+#: src/window.ui:1133
 msgid "Manage models"
 msgstr ""
 
-#: src/window.ui:1128
+#: src/window.ui:1139
 msgid "Toggle sidebar"
 msgstr ""
 
-#: src/window.ui:1135
+#: src/window.ui:1146
 msgid "Editor"
 msgstr "编辑器"
 
-#: src/window.ui:1139
+#: src/window.ui:1150
 msgid "Copy"
 msgstr "复制"
 
-#: src/window.ui:1145
+#: src/window.ui:1156
 msgid "Paste"
 msgstr "粘贴"
 
-#: src/window.ui:1151
+#: src/window.ui:1162
 msgid "Insert new line"
 msgstr "插入新行"
 
