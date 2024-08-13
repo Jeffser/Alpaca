@@ -1370,12 +1370,16 @@ Generate a title following these rules:
                         for chat_name in self.chats["chats"].keys():
                             self.chats["order"].append(chat_name)
                     self.model_list_box.select_row(self.model_list_box.get_row_at_index(0))
+                    self.chats["chats"] = {key: value for key, value in self.chats["chats"].items() if key in self.chats["order"]}
+                    if self.chats["selected_chat"] not in self.chats["order"]:
+                        self.chats["selected_chat"] = self.chats["order"][0]
                     if len(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()) > 0:
                         last_model_used = self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]
                         for i, m in enumerate(self.local_models):
                             if m == last_model_used:
                                 self.model_list_box.select_row(self.model_list_box.get_row_at_index(i))
                                 break
+
             except Exception as e:
                 logger.error(e)
                 self.chats = {"chats": {}, "selected_chat": None, "order": []}
