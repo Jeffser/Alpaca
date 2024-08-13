@@ -13,6 +13,6 @@ jobs:
     - uses: actions/checkout@v4
     - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
       with:
-        bundle: Alpaca.flatpak
+        bundle: com.jeffser.Alpaca.flatpak
         manifest-path: com.jeffser.Alpaca.json
         cache-key: flatpak-builder-${{ github.sha }}
