@@ -350,7 +350,7 @@ def youtube_caption(self, video_url):
     for caption in captions:
         caption_list.append("{} | {}".format(caption.name, caption.code))
     caption_drop_down = Gtk.DropDown(
-        enable_search=True,
+        enable_search=len(captions) > 10,
         model=caption_list
     )
     dialog = Adw.AlertDialog(
