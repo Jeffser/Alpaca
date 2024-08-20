@@ -682,10 +682,10 @@ Generate a title following these rules:
         if 'images' in message:
             data["images"] = message['images']
         response = connection_handler.simple_post(f"{connection_handler.URL}/api/generate", data=json.dumps(data))
-
-        new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
-        new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
-        self.rename_chat(label_element.get_name(), new_chat_name, label_element)
+        if response.status_code == 200:
+            new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
+            new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
+            self.rename_chat(label_element.get_name(), new_chat_name, label_element)
 
     def show_message(self, msg:str, bot:bool, footer:str=None, images:list=None, files:dict=None, message_id:str=None):
         message_text = Gtk.TextView(
