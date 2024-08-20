@@ -19,10 +19,13 @@ overrides = {}
 def log_output(pipe):
     with open(os.path.join(data_dir, 'tmp.log'), 'a') as f:
         with pipe:
-            for line in iter(pipe.readline, ''):
-                print(line, end='')
-                f.write(line)
-                f.flush()
+            try:
+                for line in iter(pipe.readline, ''):
+                    print(line, end='')
+                    f.write(line)
+                    f.flush()
+            except:
+                pass
 
 def start():
     if not os.path.isdir(os.path.join(cache_dir, 'tmp/ollama')):
