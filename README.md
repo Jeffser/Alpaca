@@ -47,6 +47,7 @@ Language               | Contributors
 🇮🇳 Bengali              | [Aritra Saha](https://github.com/olumolu)
 🇨🇳 Simplified Chinese   | [Yuehao Sui](https://github.com/8ar10der) , [Aleksana](https://github.com/Aleksanaa)
 🇮🇳 Hindi                | [Aritra Saha](https://github.com/olumolu)
+🇹🇷 Turkish              | [YusaBecerikli](https://github.com/YusaBecerikli)
 
 ---
 
