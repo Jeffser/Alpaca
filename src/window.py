@@ -32,7 +32,7 @@ gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
 
 from . import dialogs, local_instance, connection_handler, available_models_descriptions
-from .table_widget import TableWidget
+from .custom_widgets import table_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir
 
 logger = logging.getLogger(__name__)
@@ -1026,7 +1026,7 @@ Generate a title following these rules:
                 self.bot_message_box.append(code_block_box)
                 self.style_manager.connect("notify::dark", self.on_theme_changed, buffer)
             elif part['type'] == 'table':
-                table = TableWidget(part['text'])
+                table = table_widget.TableWidget(part['text'])
                 self.bot_message_box.append(table)
         vadjustment = self.chat_window.get_vadjustment()
         vadjustment.set_value(vadjustment.get_upper())
