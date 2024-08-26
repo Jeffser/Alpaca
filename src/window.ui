@@ -482,7 +482,20 @@
                                   <property name="vexpand">true</property>
                                   <property name="icon-name">edit-find-symbolic</property>
                                   <property name="title" translatable="yes">No Models Found</property>
-                                  <property name="description" translatable="yes">Try a different search</property>
+                                  <property name="description" translatable="yes">Try a different search or pull an unlisted model from it's name</property>
+                                  <property name="child">
+                                    <object class="GtkButton">
+                                      <property name="action-name">app.create_model_from_name</property>
+                                      <property name="child">
+                                        <object class="GtkLabel">
+                                          <property name="label">Pull model from name</property>
+                                        </object>
+                                      </property>
+                                      <style>
+                                        <class name="suggested-action"/>
+                                      </style>
+                                    </object>
+                                  </property>
                                 </object>
                               </child>
                             </object>

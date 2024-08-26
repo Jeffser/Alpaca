@@ -263,7 +263,7 @@ class footer(Gtk.Label):
             margin_start=5,
             focusable=True
         )
-        self.set_markup("{}<small>{}</small>".format((window.convert_model_name(model, 0) + "\n") if model else "", GLib.markup_escape_text(self.format_datetime(dt))))
+        self.set_markup("<small>{}{}</small>".format((window.convert_model_name(model, 0) + " • ") if model else "", GLib.markup_escape_text(self.format_datetime(dt))))
 
     def format_datetime(self, dt:datetime) -> str:
         date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
