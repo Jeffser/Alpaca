@@ -20,3 +20,5 @@ echo "Updating Hindi"
 msgmerge --no-fuzzy-matching -U po/hi.po po/alpaca.pot
 echo "Updating Turkish"
 msgmerge --no-fuzzy-matching -U po/tr.po po/alpaca.pot
+echo "Updating Ukrainian"
+msgmerge --no-fuzzy-matching -U po/uk.po po/alpaca.pot
