@@ -245,9 +245,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         data = {
             "model": current_model,
             "messages": self.convert_history_to_ollama(),
-            "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
-            "keep_alive": f"{self.model_tweaks['keep_alive']}m"
         }
+        model_tweaks = self.model_tweaks
+
         self.switch_send_stop_button(False)
         self.toggle_ui_sensitive(False)
 
@@ -264,12 +264,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.chat_welcome_screen:
             self.chat_container.remove(self.chat_welcome_screen)
 
-        thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], bot_id))
+        thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], bot_id, model_tweaks))
         thread.start()
         if len(data['messages']) == 1:
             message_data = data["messages"][0].copy()
             message_data['content'] = raw_message
-            generate_title_thread = threading.Thread(target=self.generate_chat_title, args=(message_data, self.chat_list_box.get_selected_row().get_child()))
+            generate_title_thread = threading.Thread(target=self.generate_chat_title, args=(message_data, self.chat_list_box.get_selected_row().get_child(), model_tweaks))
             generate_title_thread.start()
 
     @Gtk.Template.Callback()
@@ -662,7 +662,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             messages.append(new_message)
         return messages
 
-    def generate_chat_title(self, message, label_element):
+    def generate_chat_title(self, message, label_element, model_tweaks):
         if not label_element.get_name().startswith(_("New Chat")):
             return
         logger.debug("Generating chat title")
@@ -681,6 +681,12 @@ Generate a title following these rules:
         data = {"model": current_model, "prompt": prompt, "stream": False}
         if 'images' in message:
             data["images"] = message['images']
+        if model_tweaks is not None:
+            data["options"] = {
+                "temperature": model_tweaks["temperature"],
+                "seed": model_tweaks["seed"],
+            }
+            data["keep_alive"] = f"{model_tweaks['keep_alive']}m"
         response = connection_handler.simple_post(f"{connection_handler.URL}/api/generate", data=json.dumps(data))
         if response.status_code == 200:
             new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
@@ -1089,7 +1095,7 @@ Generate a title following these rules:
         self.stop_button.set_visible(not send)
         self.send_button.set_visible(send)
 
-    def run_message(self, messages, model, message_id):
+    def run_message(self, messages, model, message_id, model_tweaks):
         logger.debug("Running message")
         self.bot_message_button_container.set_visible(False)
         if message_id not in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
@@ -1102,7 +1108,17 @@ Generate a title following these rules:
         if self.regenerate_button:
             GLib.idle_add(self.chat_container.remove, self.regenerate_button)
         try:
-            response = connection_handler.stream_post(f"{connection_handler.URL}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=lambda data, message_id=message_id: self.update_bot_message(data, message_id))
+            request_data = {
+                "model": model,
+                "messages": messages,
+            }
+            if model_tweaks is not None:
+                request_data["options"] = {
+                    "temperature": model_tweaks["temperature"],
+                    "seed": model_tweaks["seed"],
+                }
+                request_data["keep_alive"] = f"{model_tweaks['keep_alive']}m"
+            response = connection_handler.stream_post(f"{connection_handler.URL}/api/chat", data=json.dumps(request_data), callback=lambda data, message_id=message_id: self.update_bot_message(data, message_id))
             if response.status_code != 200:
                 raise Exception('Network Error')
             GLib.idle_add(self.add_code_blocks)
@@ -1150,12 +1166,11 @@ Generate a title following these rules:
             data = {
                 "model": self.get_current_model(1),
                 "messages": history,
-                "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
-                "keep_alive": f"{self.model_tweaks['keep_alive']}m"
             }
+            model_tweaks = self.model_tweaks
             self.switch_send_stop_button(False)
             self.toggle_ui_sensitive(False)
-            thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], message_id))
+            thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], message_id, model_tweaks))
             thread.start()
         else:
             self.show_toast(_("Message cannot be regenerated while receiving a response"), self.main_overlay)
