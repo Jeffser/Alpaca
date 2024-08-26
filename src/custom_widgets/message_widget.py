@@ -342,12 +342,13 @@ class action_buttons(Gtk.Box):
         message_element = self.get_parent()
         if not chat.busy:
             message_element.set_text()
-            message_element.container.remove(message_element.footer)
+            if message_element.footer:
+                message_element.container.remove(message_element.footer)
             message_element.remove_overlay(self)
             message_element.action_buttons = None
             history = window.convert_history_to_ollama(chat)[:list(chat.messages).index(message_element.message_id)]
             data = {
-                "model": window.get_current_model(1),
+                "model": window.model_selector.get_model(),
                 "messages": history,
                 "options": {"temperature": window.model_tweaks["temperature"], "seed": window.model_tweaks["seed"]},
                 "keep_alive": f"{window.model_tweaks['keep_alive']}m"

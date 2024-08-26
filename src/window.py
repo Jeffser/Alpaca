@@ -591,34 +591,27 @@ Generate a title following these rules:
         self.stop_button.set_visible(not send)
         self.send_button.set_visible(send)
 
-    def run_message(self, data, message_element:message_widget.message):
+    def run_message(self, data:dict, message_element:message_widget.message):
         logger.debug("Running message")
         chat = message_element.get_parent().get_parent().get_parent().get_parent()
         chat.busy = True
         self.chat_list_box.set_sensitive(False)
         if chat.welcome_screen:
             chat.welcome_screen.set_visible(False)
+        if chat.regenerate_button:
+            chat.container.remove(chat.regenerate_button)
         self.switch_send_stop_button(False)
         if self.regenerate_button:
             GLib.idle_add(self.chat_list_box.get_current_chat().remove, self.regenerate_button)
         try:
-            print(data)
             response = connection_handler.stream_post(f"{connection_handler.URL}/api/chat", data=json.dumps(data), callback=lambda data, message_element=message_element: GLib.idle_add(message_element.update_message, data))
             if response.status_code != 200:
-                print(response)
                 raise Exception('Network Error')
         except Exception as e:
+            chat.busy = False
+            GLib.idle_add(message_element.add_action_buttons)
+            GLib.idle_add(chat.show_regenerate_button, message_element)
             GLib.idle_add(self.connection_error)
-            self.regenerate_button = Gtk.Button(
-                child=Adw.ButtonContent(
-                    icon_name='update-symbolic',
-                    label=_('Regenerate Response')
-                ),
-                css_classes=["suggested-action"],
-                halign=3
-            )
-            #GLib.idle_add(self.chat_list_box.get_current_chat().append, self.regenerate_button)
-            #self.regenerate_button.connect('clicked', lambda button, message_id=message_id, bot_message_box=self.bot_message_box, bot_message_button_container=self.bot_message_button_container : self.regenerate_message(message_id, bot_message_box, bot_message_button_container))
 
     def pull_model_update(self, data, model_name):
         if 'error' in data:

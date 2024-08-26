@@ -70,6 +70,7 @@ class chat(Gtk.ScrolledWindow):
         )
         self.messages = {}
         self.welcome_screen = None
+        self.regenerate_button = None
         self.busy = False
 
     def stop_message(self):
@@ -180,7 +181,19 @@ class chat(Gtk.ScrolledWindow):
                     messages_dict[message_id]['files'] = files
         return messages_dict
 
-
+    def show_regenerate_button(self, msg:message):
+        if self.regenerate_button:
+            self.remove(self.regenerate_button)
+        self.regenerate_button = Gtk.Button(
+            child=Adw.ButtonContent(
+                icon_name='update-symbolic',
+                label=_('Regenerate Response')
+            ),
+            css_classes=["suggested-action"],
+            halign=3
+        )
+        self.regenerate_button.connect('clicked', lambda *_: msg.action_buttons.regenerate_message())
+        self.container.append(self.regenerate_button)
 
 class chat_tab(Gtk.ListBoxRow):
     __gtype_name__ = 'AlpacaChatTab'
