@@ -48,7 +48,10 @@ alpaca_sources = [
 ]
 
 custom_widgets = [
-  'custom_widgets/table_widget.py'
+  'custom_widgets/table_widget.py',
+  'custom_widgets/message_widget.py',
+  'custom_widgets/chat_widget.py',
+  'custom_widgets/model_widget.py'
 ]
 
 install_data(alpaca_sources, install_dir: moduledir)

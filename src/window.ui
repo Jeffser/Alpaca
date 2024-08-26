@@ -26,6 +26,7 @@
                   <object class="AdwHeaderBar">
                     <child type="start">
                       <object class="GtkButton" id="add_chat_button">
+                        <property name="action-name">app.new_chat</property>
                         <property name="tooltip-text" translatable="yes">New Chat</property>
                         <property name="icon-name">chat-message-new-symbolic</property>
                         <style>
@@ -44,18 +45,9 @@
                   </object>
                 </child>
                 <property name="content">
-                  <object class="GtkScrolledWindow">
+                  <object class="GtkScrolledWindow" id="chat_list_container">
                     <property name="vexpand">true</property>
                     <property name="hexpand">true</property>
-                    <child>
-                      <object class="GtkListBox" id="chat_list_box">
-                        <signal name="row-selected" handler="chat_changed"/>
-                        <property name="selection-mode">single</property>
-                        <style>
-                          <class name="navigation-sidebar"/>
-                        </style>
-                      </object>
-                    </child>
                   </object>
                 </property>
               </object>
@@ -71,91 +63,6 @@
                         <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
                       </object>
                     </child>
-                    <property name="title-widget">
-                      <object class="GtkBox">
-                        <property name="orientation">0</property>
-                        <property name="spacing">12</property>
-                        <child>
-                          <object class="GtkMenuButton" id="model_selector_button">
-                            <property name="tooltip-text" translatable="yes">Select Model</property>
-                            <property name="child">
-                              <object class="GtkBox">
-                                <property name="spacing">10</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="label" translatable="yes">Select a Model</property>
-                                    <property name="ellipsize">2</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon-name">down-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                            </property>
-                            <property name="halign">1</property>
-                            <style>
-                              <class name="raised"/>
-                            </style>
-                            <property name="popover">
-                              <object class="GtkPopover" id="model_popover">
-                                <style>
-                                  <class name="model_popover"/>
-                                </style>
-                                <property name="has-arrow">false</property>
-                                <child>
-                                  <object class="GtkBox">
-                                    <property name="orientation">1</property>
-                                    <property name="spacing">5</property>
-                                    <child>
-                                      <object class="GtkButton">
-                                        <property name="child">
-                                          <object class="GtkLabel">
-                                            <property name="label" translatable="yes">Manage Models</property>
-                                            <property name="justify">left</property>
-                                            <property name="halign">1</property>
-                                          </object>
-                                        </property>
-                                        <property name="hexpand">true</property>
-                                        <property name="tooltip-text" translatable="yes">Manage Models</property>
-                                        <property name="action-name">app.manage_models</property>
-                                        <signal name="clicked" handler="close_model_popup"/>
-                                        <style>
-                                          <class name="flat"/>
-                                          <class name="manage_models_button"/>
-                                        </style>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkSeparator"/>
-                                    </child>
-                                    <child>
-                                      <object class="GtkScrolledWindow">
-                                        <property name="max-content-height">300</property>
-                                        <property name="propagate-natural-width">true</property>
-                                        <property name="propagate-natural-height">true</property>
-                                        <child>
-                                          <object class="GtkListBox" id="model_list_box">
-                                            <property name="hexpand">true</property>
-                                            <style>
-                                              <class name="navigation-sidebar"/>
-                                              <class name="model_list_box"/>
-                                            </style>
-                                            <signal name="row-selected" handler="change_model"/>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
-
-                                  </object>
-                                </child>
-                              </object>
-                            </property>
-                          </object>
-                        </child>
-                      </object>
-                    </property>
                     <child type="end">
                       <object class="GtkMenuButton" id="secondary_menu_button">
                         <property name="primary">False</property>
@@ -174,32 +81,10 @@
                     <child>
                     <object class="AdwToastOverlay" id="main_overlay">
                     <child>
-                      <object class="GtkScrolledWindow" id="chat_window">
-                        <property name="propagate-natural-height">true</property>
-                        <property name="kinetic-scrolling">true</property>
+                      <object class="GtkStack" id="chat_stack">
+                        <property name="hexpand">true</property>
                         <property name="vexpand">true</property>
-                        <style>
-                          <class name="undershoot-bottom"/>
-                        </style>
-                        <child>
-                          <object class="AdwClamp">
-                            <property name="maximum-size">1000</property>
-                            <property name="tightening-threshold">800</property>
-                            <child>
-                              <object class="GtkBox" id="chat_container">
-                                <property name="orientation">1</property>
-                                <property name="homogeneous">false</property>
-                                <property name="hexpand">true</property>
-                                <property name="vexpand">true</property>
-                                <property name="spacing">12</property>
-                                <property name="margin-top">12</property>
-                                <property name="margin-bottom">12</property>
-                                <property name="margin-start">12</property>
-                                <property name="margin-end">12</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
+                        <property name="hhomogeneous">true</property>
                       </object>
                     </child>
                     </object>
@@ -1139,6 +1024,12 @@
                 <property name="title" translatable="yes">Toggle sidebar</property>
               </object>
             </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">F2</property>
+                <property name="title" translatable="yes">Rename chat</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
@@ -1174,4 +1065,5 @@
     </child>
   </object>
 </interface>
+
 

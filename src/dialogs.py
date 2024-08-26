@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def clear_chat_response(self, dialog, task):
     if dialog.choose_finish(task) == "clear":
-        self.clear_chat()
+        self.chat_list_box.get_current_chat().clear_chat()
 
 def clear_chat(self):
     if self.bot_message is not None:
@@ -39,7 +39,7 @@ def clear_chat(self):
 
 def delete_chat_response(self, dialog, task, chat_name):
     if dialog.choose_finish(task) == "delete":
-        self.delete_chat(chat_name)
+        self.chat_list_box.delete_chat(chat_name)
 
 def delete_chat(self, chat_name):
     dialog = Adw.AlertDialog(
@@ -59,16 +59,16 @@ def delete_chat(self, chat_name):
 
 # RENAME CHAT | WORKS
 
-def rename_chat_response(self, dialog, task, old_chat_name, entry, label_element):
+def rename_chat_response(self, dialog, task, old_chat_name, entry):
     if not entry:
         return
     new_chat_name = entry.get_text()
     if old_chat_name == new_chat_name:
         return
     if new_chat_name and (task is None or dialog.choose_finish(task) == "rename"):
-        self.rename_chat(old_chat_name, new_chat_name, label_element)
+        self.chat_list_box.rename_chat(old_chat_name, new_chat_name)
 
-def rename_chat(self, chat_name, label_element):
+def rename_chat(self, chat_name):
     entry = Gtk.Entry()
     dialog = Adw.AlertDialog(
         heading=_("Rename Chat?"),
@@ -83,7 +83,7 @@ def rename_chat(self, chat_name, label_element):
     dialog.choose(
         parent = self,
         cancellable = None,
-        callback = lambda dialog, task, old_chat_name=chat_name, entry=entry, label_element=label_element: rename_chat_response(self, dialog, task, old_chat_name, entry, label_element)
+        callback = lambda dialog, task, old_chat_name=chat_name, entry=entry: rename_chat_response(self, dialog, task, old_chat_name, entry)
     )
 
 # NEW CHAT | WORKS | UNUSED REASON: The 'Add Chat' button now creates a chat without a name AKA "New Chat"

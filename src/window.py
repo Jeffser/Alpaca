@@ -32,7 +32,7 @@ gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
 
 from . import dialogs, local_instance, connection_handler, available_models_descriptions
-from .custom_widgets import table_widget
+from .custom_widgets import table_widget, message_widget, chat_widget, model_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir
 
 logger = logging.getLogger(__name__)
@@ -53,41 +53,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
     _ = gettext.gettext
 
     #Variables
-    editing_message = None
     available_models = None
     run_on_background = False
     remote_url = ""
     remote_bearer_token = ""
     run_remote = False
     model_tweaks = {"temperature": 0.7, "seed": 0, "keep_alive": 5}
-    local_models = []
     pulling_models = {}
-    chats = {"chats": {_("New Chat"): {"messages": {}}}, "selected_chat": "New Chat", "order": []}
     attachments = {}
-    possible_prompts = [
-        "What can you do?",
-        "Give me a pancake recipe",
-        "Why is the sky blue?",
-        "Can you tell me a joke?",
-        "Give me a healthy breakfast recipe",
-        "How to make a pizza",
-        "Can you write a poem?",
-        "Can you write a story?",
-        "What is GNU-Linux?",
-        "Which is the best Linux distro?",
-        "Why is Pluto not a planet?",
-        "What is a black-hole?",
-        "Tell me how to stay fit",
-        "Write a conversation between sun and Earth",
-        "Why is the grass green?",
-        "Write an Haïku about AI",
-        "What is the meaning of life?",
-        "Explain quantum physics in simple terms",
-        "Explain the theory of relativity",
-        "Explain how photosynthesis works",
-        "Recommend a film about nature",
-        "What is nostalgia?"
-    ]
+    header_bar = Gtk.Template.Child()
+    model_selector = None
 
     #Override elements
     override_HSA_OVERRIDE_GFX_VERSION = Gtk.Template.Child()
@@ -120,8 +95,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     welcome_next_button = Gtk.Template.Child()
     main_overlay = Gtk.Template.Child()
     manage_models_overlay = Gtk.Template.Child()
-    chat_container = Gtk.Template.Child()
-    chat_window = Gtk.Template.Child()
+    chat_stack = Gtk.Template.Child()
     message_text_view = Gtk.Template.Child()
     send_button = Gtk.Template.Child()
     stop_button = Gtk.Template.Child()
@@ -140,17 +114,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_searchbar = Gtk.Template.Child()
     no_results_page = Gtk.Template.Child()
     model_link_button = Gtk.Template.Child()
-    model_list_box = Gtk.Template.Child()
-    model_popover = Gtk.Template.Child()
-    model_selector_button = Gtk.Template.Child()
-    chat_welcome_screen : Adw.StatusPage = None
 
     manage_models_dialog = Gtk.Template.Child()
     pulling_model_list_box = Gtk.Template.Child()
     local_model_list_box = Gtk.Template.Child()
     available_model_list_box = Gtk.Template.Child()
 
-    chat_list_box = Gtk.Template.Child()
+    chat_list_container = Gtk.Template.Child()
+    chat_list_box = None
     add_chat_button = Gtk.Template.Child()
 
     loading_spinner = None
@@ -164,50 +135,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def stop_message(self, button=None):
-        if self.loading_spinner:
-            self.loading_spinner.get_parent().remove(self.loading_spinner)
-        message_id = list(self.chats["chats"][self.chats["selected_chat"]]["messages"])[-1]
-        formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]["date"], '%Y/%m/%d %H:%M:%S')))
-        text = f"\n\n{self.convert_model_name(self.chats['chats'][self.chats['selected_chat']]['messages'][message_id]['model'], 0)}\n<small>{formated_date}</small>"
-        self.bot_message.insert_markup(self.bot_message.get_end_iter(), text, len(text.encode('utf-8')))
-        self.add_code_blocks()
-        self.bot_message_button_container.set_visible(True)
-        self.toggle_ui_sensitive(True)
-        self.switch_send_stop_button(True)
-        self.bot_message = None
-        self.bot_message_box = None
-        self.bot_message_view = None
-        self.bot_message_button_container = None
-        self.save_history()
+        self.chat_list_box.get_current_chat().stop_message()
 
     @Gtk.Template.Callback()
     def send_message(self, button=None):
-        if self.editing_message:
-            self.editing_message["button_container"].set_visible(True)
-            self.editing_message["text_view"].set_css_classes(["flat", "user_message"])
-            self.editing_message["text_view"].set_cursor_visible(False)
-            self.editing_message["text_view"].set_editable(False)
-            buffer = self.editing_message["text_view"].get_buffer()
-            text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).rstrip('\n')
-            footer = "<small>" + self.editing_message["footer"] + "</small>"
-            buffer.insert_markup(buffer.get_end_iter(), footer, len(footer.encode('utf-8')))
-            self.chats["chats"][self.chats["selected_chat"]]["messages"][self.editing_message["id"]]["content"] = text
-            self.editing_message = None
-            self.save_history()
-            self.show_toast(_("Message edited successfully"), self.main_overlay)
         if button and not button.get_visible():
             return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False):
             return
-        current_chat_row = self.chat_list_box.get_selected_row()
-        self.chat_list_box.unselect_all()
-        self.chat_list_box.remove(current_chat_row)
-        self.chat_list_box.prepend(current_chat_row)
-        self.chat_list_box.select_row(self.chat_list_box.get_row_at_index(0))
-        self.chats['order'].remove(self.chats['selected_chat'])
-        self.chats['order'].insert(0, self.chats['selected_chat'])
-        self.save_history()
-        current_model = self.get_current_model(1)
+        current_chat = self.chat_list_box.get_current_chat()
+        if current_chat.busy == True:
+            return
+
+        self.chat_list_box.send_tab_to_top(self.chat_list_box.get_selected_row())
+
+        current_model = self.model_selector.get_model()
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
             return
@@ -215,61 +157,49 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         attached_images = []
         attached_files = {}
-        can_use_images = self.verify_if_image_can_be_used()
         for name, content in self.attachments.items():
-            if content["type"] == 'image' and can_use_images:
-                attached_images.append(name)
+            if content["type"] == 'image':
+                if self.verify_if_image_can_be_used():
+                    attached_images.append(name)
             else:
                 attached_files[name] = content['type']
-            if not os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id)):
-                os.makedirs(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id))
-            shutil.copy(content['path'], os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id, name))
+            if not os.path.exists(os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id)):
+                os.makedirs(os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id))
+            shutil.copy(content['path'], os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id, name))
             content["button"].get_parent().remove(content["button"])
         self.attachments = {}
         self.attachment_box.set_visible(False)
+        raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
+        current_chat.add_message(message_id, None)
+        m_element = current_chat.messages[message_id]
 
-            #{"path": file_path, "type": file_type, "content": content}
-
-        current_datetime = datetime.now()
-
-        self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id] = {
-            "role": "user",
-            "model": "User",
-            "date": current_datetime.strftime("%Y/%m/%d %H:%M:%S"),
-            "content": self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-        }
+        if len(attached_files) > 0:
+            m_element.add_attachments(attached_files)
         if len(attached_images) > 0:
-            self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]['images'] = attached_images
-        if len(attached_files.keys()) > 0:
-            self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]['files'] = attached_files
+            m_element.add_images(attached_images)
+        m_element.set_text(raw_message)
+        m_element.add_footer(datetime.now())
+        m_element.add_action_buttons()
+
         data = {
             "model": current_model,
-            "messages": self.convert_history_to_ollama(),
+            "messages": self.convert_history_to_ollama(current_chat),
             "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
             "keep_alive": f"{self.model_tweaks['keep_alive']}m"
         }
-        self.switch_send_stop_button(False)
-        self.toggle_ui_sensitive(False)
 
-        #self.attachments[name] = {"path": file_path, "type": file_type, "content": content}
-        raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-        formated_date = GLib.markup_escape_text(self.generate_datetime_format(current_datetime))
-        self.show_message(raw_message, False, f"\n\n<small>{formated_date}</small>", attached_images, attached_files, message_id=message_id)
         self.message_text_view.get_buffer().set_text("", 0)
-        self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
-        self.chat_container.append(self.loading_spinner)
+
         bot_id=self.generate_uuid()
-        self.show_message("", True, message_id=bot_id)
-
-        if self.chat_welcome_screen:
-            self.chat_container.remove(self.chat_welcome_screen)
-
-        thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], bot_id))
+        current_chat.add_message(bot_id, current_model)
+        m_element_bot = current_chat.messages[bot_id]
+        m_element_bot.set_text()
+        thread = threading.Thread(target=self.run_message, args=(data, m_element_bot))
         thread.start()
         if len(data['messages']) == 1:
             message_data = data["messages"][0].copy()
             message_data['content'] = raw_message
-            generate_title_thread = threading.Thread(target=self.generate_chat_title, args=(message_data, self.chat_list_box.get_selected_row().get_child()))
+            generate_title_thread = threading.Thread(target=self.generate_chat_title, args=(message_data, current_chat.get_name()))
             generate_title_thread.start()
 
     @Gtk.Template.Callback()
@@ -300,22 +230,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.connection_error()
 
     @Gtk.Template.Callback()
-    def chat_changed(self, listbox, row):
-        logger.debug("Changing selected chat")
-        if row and row.get_child().get_name() != self.chats["selected_chat"]:
-            self.chats["selected_chat"] = row.get_child().get_name()
-            self.load_history_into_chat()
-            if len(self.chats["chats"][self.chats["selected_chat"]]["messages"]) > 0:
-                last_model_used = self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]
-                for i, m in enumerate(self.local_models):
-                    if m == last_model_used:
-                        self.model_list_box.select_row(self.model_list_box.get_row_at_index(i))
-                        break
-            else:
-                self.load_history_into_chat()
-            self.save_history()
-
-    @Gtk.Template.Callback()
     def change_remote_url(self, entry):
         if not entry.get_text().startswith("http"):
             entry.set_text("http://{}".format(entry.get_text()))
@@ -341,6 +255,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
+        with open(os.path.join(data_dir, "chats", "selected_chat.txt"), 'w') as f:
+            f.write(self.chat_list_box.get_selected_row().chat_window.get_name())
         if self.get_hide_on_close():
             logger.info("Hiding app...")
         else:
@@ -413,7 +329,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def link_button_handler(self, button):
-        os.system(f'xdg-open "{button.get_name()}"'.replace("{selected_chat}", self.chats["selected_chat"]))
+        os.system(f'xdg-open "{button.get_name()}"'.replace("{selected_chat}", self.chat_list_box.get_current_chat().get_name()))
 
     @Gtk.Template.Callback()
     def model_search_toggle(self, button):
@@ -436,46 +352,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.available_model_list_box.set_visible(True)
             self.no_results_page.set_visible(False)
 
-    @Gtk.Template.Callback()
-    def close_model_popup(self, *_):
-        self.model_popover.hide()
-
-    @Gtk.Template.Callback()
-    def change_model(self, listbox=None, row=None):
-        if not row:
-            current_model = self.model_selector_button.get_name()
-            if current_model != 'NO_MODEL':
-                for i, m in enumerate(self.local_models):
-                    if m == current_model:
-                        self.model_list_box.select_row(self.model_list_box.get_row_at_index(i))
-                        return
-            if len(self.local_models) > 0:
-                self.model_list_box.select_row(self.model_list_box.get_row_at_index(0))
-                return
-            else:
-                model_name = None
-        else:
-            model_name = row.get_child().get_label()
-        button_content = Gtk.Box(
-            spacing=10
-        )
-        button_content.append(
-            Gtk.Label(
-                label=model_name if model_name else _("Select a Model"),
-                ellipsize=2
-            )
-        )
-        button_content.append(
-            Gtk.Image.new_from_icon_name("down-symbolic")
-        )
-        self.model_selector_button.set_name(row.get_name() if row else 'NO_MODEL')
-        self.model_selector_button.set_child(button_content)
-        self.close_model_popup()
-        self.verify_if_image_can_be_used()
-
     def verify_if_image_can_be_used(self):
         logger.debug("Verifying if image can be used")
-        selected = self.get_current_model(1)
+        selected = self.model_selector.get_model()
         if selected == None:
             return True
         selected = selected.split(":")[0]
@@ -497,14 +376,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 return "{}:{}".format(name.split(" (")[0].replace(" ", "-").lower(), name.split(" (")[1][:-1])
         except Exception as e:
             pass
-
-    def get_current_model(self, mode:int) -> str:
-        if not self.model_list_box.get_selected_row():
-            return None
-        if mode == 0:
-            return self.model_list_box.get_selected_row().get_child().get_label()
-        if mode == 1:
-            return self.model_list_box.get_selected_row().get_name()
 
     def check_alphanumeric(self, editable, text, length, position, allowed_chars):
         new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
@@ -553,56 +424,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 notification.set_icon(icon)
             self.get_application().send_notification(None, notification)
 
-    def delete_message(self, message_element):
-        logger.debug("Deleting message")
-        message_id = message_element.get_name()
-        del self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]
-        self.chat_container.remove(message_element)
-        if os.path.exists(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id)):
-            shutil.rmtree(os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id))
-        self.save_history()
-        if len(self.chats["chats"][self.chats["selected_chat"]]["messages"]) == 0:
-            self.load_history_into_chat()
-
-    def copy_message(self, message_element):
-        logger.debug("Copying message")
-        message_id = message_element.get_name()
-        clipboard = Gdk.Display().get_default().get_clipboard()
-        clipboard.set(self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]["content"])
-        self.show_toast(_("Message copied to the clipboard"), self.main_overlay)
-
-    def edit_message(self, message_element, text_view, button_container):
-        logger.debug("Editing message")
-        if self.editing_message:
-            self.send_message()
-
-        button_container.set_visible(False)
-        message_id = message_element.get_name()
-
-        text_buffer = text_view.get_buffer()
-        end_iter = text_buffer.get_end_iter()
-        start_iter = end_iter.copy()
-        start_iter.backward_line()
-        start_iter.backward_char()
-        footer = text_buffer.get_text(start_iter, end_iter, False)
-        text_buffer.delete(start_iter, end_iter)
-
-        text_view.set_editable(True)
-        text_view.set_css_classes(["view", "editing_message_textview"])
-        text_view.set_cursor_visible(True)
-
-        self.editing_message = {"text_view": text_view, "id": message_id, "button_container": button_container, "footer": footer}
-        if text_view.observe_controllers().get_n_items() == 8:
-            print(text_view.observe_controllers().get_n_items())
-            enter_key_controller = Gtk.EventControllerKey.new()
-            enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: self.handle_enter_key() if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
-            text_view.add_controller(enter_key_controller)
-            print(text_view.observe_controllers().get_n_items())
-        self.set_focus(text_view)
-
     def preview_file(self, file_path, file_type, presend_name):
         logger.debug(f"Previewing file: {file_path}")
-        file_path = file_path.replace("{selected_chat}", self.chats["selected_chat"])
+        file_path = file_path.replace("{selected_chat}", self.chat_list_box.get_current_chat().get_name())
+        if not os.path.isfile(file_path):
+            self.show_toast(_("Missing file"), self.main_overlay)
+            return
         content = self.get_content_of_file(file_path, file_type)
         if presend_name:
             self.file_preview_remove_button.set_visible(True)
@@ -639,15 +466,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     self.file_preview_open_button.set_name(file_path)
             self.file_preview_dialog.present(self)
 
-    def convert_history_to_ollama(self):
+    def convert_history_to_ollama(self, chat):
         messages = []
-        for message_id, message in self.chats["chats"][self.chats["selected_chat"]]["messages"].items():
+        for message_id, message in chat.messages_to_dict().items():
             new_message = message.copy()
             if 'files' in message and len(message['files']) > 0:
                 del new_message['files']
                 new_message['content'] = ''
                 for name, file_type in message['files'].items():
-                    file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id, name)
+                    file_path = os.path.join(self.data_dir, "chats", chat.get_name(), message_id, name)
                     file_data = self.get_content_of_file(file_path, file_type)
                     if file_data:
                         new_message['content'] += f"```[{name}]\n{file_data}\n```"
@@ -655,15 +482,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if 'images' in message and len(message['images']) > 0:
                 new_message['images'] = []
                 for name in message['images']:
-                    file_path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id, name)
+                    file_path = os.path.join(self.data_dir, "chats", chat.get_name(), message_id, name)
                     image_data = self.get_content_of_file(file_path, 'image')
                     if image_data:
                         new_message['images'].append(image_data)
             messages.append(new_message)
         return messages
 
-    def generate_chat_title(self, message, label_element):
-        if not label_element.get_name().startswith(_("New Chat")):
+    def generate_chat_title(self, message, old_chat_name):
+        if not old_chat_name.startswith(_("New Chat")):
             return
         logger.debug("Generating chat title")
         prompt = f"""
@@ -677,7 +504,7 @@ Generate a title following these rules:
 ```PROMPT
 {message['content']}
 ```"""
-        current_model = self.get_current_model(1)
+        current_model = self.model_selector.get_model()
         data = {"model": current_model, "prompt": prompt, "stream": False}
         if 'images' in message:
             data["images"] = message['images']
@@ -685,179 +512,13 @@ Generate a title following these rules:
         if response.status_code == 200:
             new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
             new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
-            self.rename_chat(label_element.get_name(), new_chat_name, label_element)
-
-    def show_message(self, msg:str, bot:bool, footer:str=None, images:list=None, files:dict=None, message_id:str=None):
-        message_text = Gtk.TextView(
-            editable=False,
-            focusable=True,
-            wrap_mode= Gtk.WrapMode.WORD,
-            hexpand=True,
-            css_classes=["flat", "response_message"] if bot else ["flat", "user_message"],
-        )
-        if not bot:
-            message_text.update_property([4, 7, 1], [_("User message"), True, msg])
-        message_buffer = message_text.get_buffer()
-        message_buffer.insert(message_buffer.get_end_iter(), msg)
-        if footer is not None:
-            message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer.encode('utf-8')))
-
-        delete_button = Gtk.Button(
-            icon_name = "user-trash-symbolic",
-            css_classes = ["flat", "circular"],
-            tooltip_text = _("Remove Message")
-        )
-        copy_button = Gtk.Button(
-            icon_name = "edit-copy-symbolic",
-            css_classes = ["flat", "circular"],
-            tooltip_text = _("Copy Message")
-        )
-        edit_button = Gtk.Button(
-            icon_name = "edit-symbolic",
-            css_classes = ["flat", "circular"],
-            tooltip_text = _("Edit Message")
-        )
-        regenerate_button = Gtk.Button(
-            icon_name = "update-symbolic",
-            css_classes = ["flat", "circular"],
-            tooltip_text = _("Regenerate Message")
-        )
-
-        button_container = Gtk.Box(
-            orientation=0,
-            spacing=6,
-            margin_end=6,
-            margin_bottom=6,
-            valign="end",
-            halign="end"
-        )
-
-        message_box = Gtk.Box(
-            orientation=1,
-            halign='fill',
-            css_classes=[None if bot else "card"],
-            spacing=5
-        )
-        message_text.set_valign(Gtk.Align.CENTER)
-
-        if images and len(images) > 0:
-            image_container = Gtk.Box(
-                orientation=0,
-                spacing=12
-            )
-            image_scroller = Gtk.ScrolledWindow(
-                margin_top=10,
-                margin_start=10,
-                margin_end=10,
-                hexpand=True,
-                height_request = 240,
-                child=image_container
-            )
-            for image in images:
-                path = os.path.join(self.data_dir, "chats", self.chats['selected_chat'], message_id, image)
-                try:
-                    if not os.path.isfile(path):
-                        raise FileNotFoundError("'{}' was not found or is a directory".format(path))
-                    image_element = Gtk.Image.new_from_file(path)
-                    image_element.set_size_request(240, 240)
-                    button = Gtk.Button(
-                        child=image_element,
-                        css_classes=["flat", "chat_image_button"],
-                        name=os.path.join(self.data_dir, "chats", "{selected_chat}", message_id, image),
-                        tooltip_text=_("Image")
-                    )
-                    image_element.update_property([4], [_("Image")])
-                    button.connect("clicked", lambda button, file_path=path: self.preview_file(file_path, 'image', None))
-                except Exception as e:
-                    logger.error(e)
-                    image_texture = Gtk.Image.new_from_icon_name("image-missing-symbolic")
-                    image_texture.set_icon_size(2)
-                    image_texture.set_vexpand(True)
-                    image_texture.set_pixel_size(120)
-                    image_label = Gtk.Label(
-                        label=_("Missing Image"),
-                    )
-                    image_box = Gtk.Box(
-                        spacing=10,
-                        orientation=1,
-                        margin_top=10,
-                        margin_bottom=10,
-                        margin_start=10,
-                        margin_end=10
-                    )
-                    image_box.append(image_texture)
-                    image_box.append(image_label)
-                    image_box.set_size_request(220, 220)
-                    button = Gtk.Button(
-                        child=image_box,
-                        css_classes=["flat", "chat_image_button"],
-                        tooltip_text=_("Missing Image")
-                    )
-                    image_texture.update_property([4], [_("Missing image")])
-                    button.connect("clicked", lambda button : self.show_toast(_("Missing image"), self.main_overlay))
-                image_container.append(button)
-            message_box.append(image_scroller)
-
-        if files and len(files) > 0:
-            file_container = Gtk.Box(
-                orientation=0,
-                spacing=12
-            )
-            file_scroller = Gtk.ScrolledWindow(
-                margin_top=10,
-                margin_start=10,
-                margin_end=10,
-                hexpand=True,
-                child=file_container
-            )
-            for name, file_type in files.items():
-                button_content = Adw.ButtonContent(
-                    label=name,
-                    icon_name={
-                        "plain_text": "document-text-symbolic",
-                        "pdf": "document-text-symbolic",
-                        "youtube": "play-symbolic",
-                        "website": "globe-symbolic"
-                    }[file_type]
-                )
-                button = Gtk.Button(
-                    vexpand=False,
-                    valign=3,
-                    name=name,
-                    css_classes=["flat"],
-                    tooltip_text=name,
-                    child=button_content
-                )
-                file_path = os.path.join(self.data_dir, "chats", "{selected_chat}", message_id, name)
-                button.connect("clicked", lambda button, file_path=file_path, file_type=file_type: self.preview_file(file_path, file_type, None))
-                file_container.append(button)
-            message_box.append(file_scroller)
-
-        message_box.append(message_text)
-        overlay = Gtk.Overlay(css_classes=["message"], name=message_id)
-        overlay.set_child(message_box)
-
-        delete_button.connect("clicked", lambda button, element=overlay: self.delete_message(element))
-        copy_button.connect("clicked", lambda button, element=overlay: self.copy_message(element))
-        edit_button.connect("clicked", lambda button, element=overlay, textview=message_text, button_container=button_container: self.edit_message(element, textview, button_container))
-        regenerate_button.connect('clicked', lambda button, message_id=message_id, bot_message_box=message_box, bot_message_button_container=button_container : self.regenerate_message(message_id, bot_message_box, bot_message_button_container))
-        button_container.append(delete_button)
-        button_container.append(copy_button)
-        button_container.append(regenerate_button if bot else edit_button)
-        overlay.add_overlay(button_container)
-        self.chat_container.append(overlay)
-
-        if bot:
-            self.bot_message = message_buffer
-            self.bot_message_view = message_text
-            self.bot_message_box = message_box
-            self.bot_message_button_container = button_container
+            self.chat_list_box.rename_chat(old_chat_name, new_chat_name)
 
     def update_list_local_models(self):
         logger.debug("Updating list of local models")
-        self.local_models = []
         response = connection_handler.simple_get(f"{connection_handler.URL}/api/tags")
-        self.model_list_box.remove_all()
+        self.model_selector.clear_list()
+
         if response.status_code == 200:
             self.local_model_list_box.remove_all()
             if len(json.loads(response.text)['models']) == 0:
@@ -881,17 +542,7 @@ Generate a title following these rules:
                 model_row.add_suffix(button)
                 self.local_model_list_box.append(model_row)
 
-                selector_row = Gtk.ListBoxRow(
-                    child = Gtk.Label(
-                        label=model_name, halign=1, hexpand=True
-                    ),
-                    halign=0,
-                    hexpand=True,
-                    name=model["name"],
-                    tooltip_text=model_name
-                )
-                self.model_list_box.append(selector_row)
-                self.local_models.append(model["name"])
+                self.model_selector.add_model(model["name"])
         else:
             self.connection_error()
 
@@ -909,129 +560,6 @@ Generate a title following these rules:
         except Exception as e:
             logger.error(e)
             return False
-
-    def add_code_blocks(self):
-        text = self.bot_message.get_text(self.bot_message.get_start_iter(), self.bot_message.get_end_iter(), True)
-        GLib.idle_add(self.bot_message_view.get_parent().remove, self.bot_message_view)
-        # Define a regular expression pattern to match code blocks
-        code_block_pattern = re.compile(r'```(\w+)\n(.*?)\n```', re.DOTALL)
-        parts = []
-        pos = 0
-        for match in code_block_pattern.finditer(text):
-            start, end = match.span()
-            if pos < start:
-                normal_text = text[pos:start]
-                parts.append({"type": "normal", "text": normal_text.strip()})
-            language = match.group(1)
-            code_text = match.group(2)
-            parts.append({"type": "code", "text": code_text, "language": 'python3' if language == 'python' else language})
-            pos = end
-        # Match code blocks without language
-        no_lang_code_block_pattern = re.compile(r'`\n(.*?)\n`', re.DOTALL)
-        for match in no_lang_code_block_pattern.finditer(text):
-            start, end = match.span()
-            if pos < start:
-                normal_text = text[pos:start]
-                parts.append({"type": "normal", "text": normal_text.strip()})
-            code_text = match.group(1)
-            parts.append({"type": "code", "text": code_text, "language": None})
-            pos = end
-        # Match tables
-        table_pattern = re.compile(r'((\r?\n){2}|^)([^\r\n]*\|[^\r\n]*(\r?\n)?)+(?=(\r?\n){2}|$)', re.MULTILINE)
-        for match in table_pattern.finditer(text):
-            start, end = match.span()
-            if pos < start:
-                normal_text = text[pos:start]
-                parts.append({"type": "normal", "text": normal_text.strip()})
-            table_text = match.group(0)
-            parts.append({"type": "table", "text": table_text})
-            pos = end
-        # Extract any remaining normal text after the last code block
-        if pos < len(text):
-            normal_text = text[pos:]
-            if normal_text.strip():
-                parts.append({"type": "normal", "text": normal_text.strip()})
-        bold_pattern = re.compile(r'\*\*(.*?)\*\*') #"**text**"
-        code_pattern = re.compile(r'`([^`\n]*?)`') #"`text`"
-        h1_pattern = re.compile(r'^#\s(.*)$') #"# text"
-        h2_pattern = re.compile(r'^##\s(.*)$') #"## text"
-        markup_pattern = re.compile(r'<(b|u|tt|span.*)>(.*?)<\/(b|u|tt|span)>') #heh butt span, I'm so funny
-        for part in parts:
-            if part['type'] == 'normal':
-                message_text = Gtk.TextView(
-                    editable=False,
-                    focusable=True,
-                    wrap_mode= Gtk.WrapMode.WORD,
-                    hexpand=True,
-                    css_classes=["flat", "response_message"]
-                )
-                message_buffer = message_text.get_buffer()
-
-                footer = None
-                if part['text'].split("\n")[-1] == parts[-1]['text'].split("\n")[-1]:
-                    footer = "\n<small>" + part['text'].split('\n')[-1] + "</small>"
-                    part['text'] = '\n'.join(part['text'].split("\n")[:-1])
-
-                part['text'] = part['text'].replace("\n* ", "\n• ")
-                #part['text'] = GLib.markup_escape_text(part['text'])
-                part['text'] = code_pattern.sub(r'<tt>\1</tt>', part['text'])
-                part['text'] = bold_pattern.sub(r'<b>\1</b>', part['text'])
-                part['text'] = h1_pattern.sub(r'<span size="x-large">\1</span>', part['text'])
-                part['text'] = h2_pattern.sub(r'<span size="large">\1</span>', part['text'])
-
-                position = 0
-                for match in markup_pattern.finditer(part['text']):
-                    start, end = match.span()
-                    if position < start:
-                        message_buffer.insert(message_buffer.get_end_iter(), part['text'][position:start])
-                    message_buffer.insert_markup(message_buffer.get_end_iter(), match.group(0), len(match.group(0).encode('utf-8')))
-                    position = end
-
-                if position < len(part['text']):
-                    message_buffer.insert(message_buffer.get_end_iter(), part['text'][position:])
-
-                if footer: message_buffer.insert_markup(message_buffer.get_end_iter(), footer, len(footer.encode('utf-8')))
-
-                message_text.update_property([4, 7, 1], [_("Response message"), False, message_buffer.get_text(message_buffer.get_start_iter(), message_buffer.get_end_iter(), False)])
-                self.bot_message_box.append(message_text)
-            elif part['type'] == 'code':
-                language = None
-                if part['language']:
-                    language = GtkSource.LanguageManager.get_default().get_language(part['language'])
-                if language:
-                    buffer = GtkSource.Buffer.new_with_language(language)
-                else:
-                    buffer = GtkSource.Buffer()
-                buffer.set_text(part['text'])
-                if self.style_manager.get_dark():
-                    source_style = GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark')
-                else:
-                    source_style = GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita')
-                buffer.set_style_scheme(source_style)
-                source_view = GtkSource.View(
-                    auto_indent=True, indent_width=4, buffer=buffer, show_line_numbers=True,
-                    top_margin=6, bottom_margin=6, left_margin=12, right_margin=12, css_classes=["code_block"]
-                )
-                source_view.update_property([4], [_("{}Code Block").format('{} '.format(language.get_name()) if language else "")])
-                source_view.set_editable(False)
-                code_block_box = Gtk.Box(css_classes=["card", "code_block"], orientation=1, overflow=1)
-                title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=3)
-                title_box.append(Gtk.Label(label=language.get_name() if language else _("Code Block"), hexpand=True, xalign=0))
-                copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
-                copy_button.connect("clicked", self.on_copy_code_clicked, buffer)
-                title_box.append(copy_button)
-                code_block_box.append(title_box)
-                code_block_box.append(Gtk.Separator())
-                code_block_box.append(source_view)
-                self.bot_message_box.append(code_block_box)
-                self.style_manager.connect("notify::dark", self.on_theme_changed, buffer)
-            elif part['type'] == 'table':
-                table = table_widget.TableWidget(part['text'])
-                self.bot_message_box.append(table)
-        vadjustment = self.chat_window.get_vadjustment()
-        vadjustment.set_value(vadjustment.get_upper())
-        self.bot_message = None
-        self.bot_message_box = None
 
     def on_theme_changed(self, manager, dark, buffer):
         logger.debug("Theme changed")
@@ -1059,53 +587,26 @@ Generate a title following these rules:
             return date.format("%b %d, %H:%M %p")
         return date.format("%b %d %Y, %H:%M %p")
 
-    def update_bot_message(self, data, message_id):
-        if self.bot_message is None:
-            sys.exit()
-        vadjustment = self.chat_window.get_vadjustment()
-        if not self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id] or vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
-            GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
-        if 'done' in data and data['done']:
-            formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]["date"], '%Y/%m/%d %H:%M:%S')))
-            text = f"\n\n{self.convert_model_name(data['model'], 0)}\n<small>{formated_date}</small>"
-            GLib.idle_add(self.bot_message.insert_markup, self.bot_message.get_end_iter(), text, len(text.encode('utf-8')))
-            self.save_history()
-            GLib.idle_add(self.bot_message_button_container.set_visible, True)
-            #Notification
-            first_paragraph = self.bot_message.get_text(self.bot_message.get_start_iter(), self.bot_message.get_end_iter(), False).split("\n")[0]
-            GLib.idle_add(self.show_notification, self.chats["selected_chat"], first_paragraph[:100] + (first_paragraph[100:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
-        else:
-            if self.loading_spinner:
-                GLib.idle_add(self.loading_spinner.get_parent().remove, self.loading_spinner)
-                self.loading_spinner = None
-            GLib.idle_add(self.bot_message.insert, self.bot_message.get_end_iter(), data['message']['content'])
-            self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]['content'] += data['message']['content']
-
-    def toggle_ui_sensitive(self, status):
-        for element in [self.chat_list_box, self.add_chat_button, self.secondary_menu_button]:
-            element.set_sensitive(status)
-
     def switch_send_stop_button(self, send:bool):
         self.stop_button.set_visible(not send)
         self.send_button.set_visible(send)
 
-    def run_message(self, messages, model, message_id):
+    def run_message(self, data, message_element:message_widget.message):
         logger.debug("Running message")
-        self.bot_message_button_container.set_visible(False)
-        if message_id not in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
-            self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id] = {
-                "role": "assistant",
-                "model": model,
-                "date": datetime.now().strftime("%Y/%m/%d %H:%M:%S"),
-                "content": ''
-            }
+        chat = message_element.get_parent().get_parent().get_parent().get_parent()
+        chat.busy = True
+        self.chat_list_box.set_sensitive(False)
+        if chat.welcome_screen:
+            chat.welcome_screen.set_visible(False)
+        self.switch_send_stop_button(False)
         if self.regenerate_button:
-            GLib.idle_add(self.chat_container.remove, self.regenerate_button)
+            GLib.idle_add(self.chat_list_box.get_current_chat().remove, self.regenerate_button)
         try:
-            response = connection_handler.stream_post(f"{connection_handler.URL}/api/chat", data=json.dumps({"model": model, "messages": messages}), callback=lambda data, message_id=message_id: self.update_bot_message(data, message_id))
+            print(data)
+            response = connection_handler.stream_post(f"{connection_handler.URL}/api/chat", data=json.dumps(data), callback=lambda data, message_element=message_element: GLib.idle_add(message_element.update_message, data))
             if response.status_code != 200:
+                print(response)
                 raise Exception('Network Error')
-            GLib.idle_add(self.add_code_blocks)
         except Exception as e:
             GLib.idle_add(self.connection_error)
             self.regenerate_button = Gtk.Button(
@@ -1116,49 +617,8 @@ Generate a title following these rules:
                 css_classes=["suggested-action"],
                 halign=3
             )
-            GLib.idle_add(self.chat_container.append, self.regenerate_button)
-            self.regenerate_button.connect('clicked', lambda button, message_id=message_id, bot_message_box=self.bot_message_box, bot_message_button_container=self.bot_message_button_container : self.regenerate_message(message_id, bot_message_box, bot_message_button_container))
-        finally:
-            GLib.idle_add(self.switch_send_stop_button, True)
-            GLib.idle_add(self.toggle_ui_sensitive, True)
-            if self.loading_spinner:
-                GLib.idle_add(self.loading_spinner.get_parent().remove, self.loading_spinner)
-                self.loading_spinner = None
-
-    def regenerate_message(self, message_id, bot_message_box, bot_message_button_container):
-        if not self.bot_message:
-            self.bot_message_button_container = bot_message_button_container
-            self.bot_message_view = Gtk.TextView(
-                editable=False,
-                focusable=True,
-                wrap_mode= Gtk.WrapMode.WORD,
-                margin_top=12,
-                margin_bottom=12,
-                hexpand=True,
-                css_classes=["flat"]
-            )
-            self.bot_message = self.bot_message_view.get_buffer()
-            self.bot_message_box = bot_message_box
-            for widget in list(bot_message_box):
-                bot_message_box.remove(widget)
-            self.loading_spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
-            bot_message_box.append(self.loading_spinner)
-            bot_message_box.append(self.bot_message_view)
-            if message_id in self.chats["chats"][self.chats["selected_chat"]]["messages"]:
-                self.chats["chats"][self.chats["selected_chat"]]["messages"][message_id]['content'] = ''
-            history = self.convert_history_to_ollama()[:list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()).index(message_id)]
-            data = {
-                "model": self.get_current_model(1),
-                "messages": history,
-                "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
-                "keep_alive": f"{self.model_tweaks['keep_alive']}m"
-            }
-            self.switch_send_stop_button(False)
-            self.toggle_ui_sensitive(False)
-            thread = threading.Thread(target=self.run_message, args=(data['messages'], data['model'], message_id))
-            thread.start()
-        else:
-            self.show_toast(_("Message cannot be regenerated while receiving a response"), self.main_overlay)
+            #GLib.idle_add(self.chat_list_box.get_current_chat().append, self.regenerate_button)
+            #self.regenerate_button.connect('clicked', lambda button, message_id=message_id, bot_message_box=self.bot_message_box, bot_message_button_container=self.bot_message_button_container : self.regenerate_message(message_id, bot_message_box, bot_message_button_container))
 
     def pull_model_update(self, data, model_name):
         if 'error' in data:
@@ -1183,7 +643,6 @@ Generate a title following these rules:
             data = {"name": model}
             response = connection_handler.stream_post(f"{connection_handler.URL}/api/pull", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
         GLib.idle_add(self.update_list_local_models)
-        GLib.idle_add(self.change_model)
 
         if response.status_code == 200 and 'error' not in self.pulling_models[model]:
             GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model), Gio.ThemedIcon.new("emblem-ok-symbolic"))
@@ -1203,7 +662,7 @@ Generate a title following these rules:
             GLib.idle_add(self.pulling_model_list_box.set_visible, False)
 
     def pull_model(self, model):
-        if model in self.pulling_models.keys() or model in self.local_models or ":" not in model:
+        if model in self.pulling_models.keys() or model in self.model_selector.get_model_list() or ":" not in model:
             return
         logger.info("Pulling model")
         self.pulling_model_list_box.set_visible(True)
@@ -1252,8 +711,9 @@ Generate a title following these rules:
         self.available_model_list_box.unselect_all()
         self.model_tag_list_box.remove_all()
         tags = self.available_models[model_name]['tags']
+
         for tag_data in tags:
-            if f"{model_name}:{tag_data[0]}" not in self.local_models:
+            if f"{model_name}:{tag_data[0]}" not in self.model_selector.get_model_list():
                 tag_row = Adw.ActionRow(
                     title = tag_data[0],
                     subtitle = tag_data[1],
@@ -1299,95 +759,61 @@ Generate a title following these rules:
             model.add_controller(event_controller_key)
             self.available_model_list_box.append(model)
 
-    def save_history(self):
+    def save_history(self, chat:chat_widget.chat=None):
         logger.debug("Saving history")
+        history = None
+        if chat and os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
+            history = {'chats': {chat.get_name(): {'messages': chat.messages_to_dict()}}}
+            try:
+                with open(os.path.join(self.data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    for chat_tab in self.chat_list_box.tab_list:
+                        if chat_tab.chat_window.get_name() != chat.get_name():
+                            history['chats'][chat_tab.chat_window.get_name()] = data['chats'][chat_tab.chat_window.get_name()]
+                history['chats'][chat.get_name()] = {'messages': chat.messages_to_dict()}
+            except Exception as e:
+                logger.error(e)
+                history = None
+        if not history:
+            history = {'chats': {}}
+            for chat_tab in self.chat_list_box.tab_list:
+                history['chats'][chat_tab.chat_window.get_name()] = {'messages': chat_tab.chat_window.messages_to_dict()}
+
         with open(os.path.join(self.data_dir, "chats", "chats.json"), "w+", encoding="utf-8") as f:
-            json.dump(self.chats, f, indent=4)
-
-    def send_sample_prompt(self, prompt):
-        buffer = self.message_text_view.get_buffer()
-        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-        buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
-        self.send_message()
-
-    def load_history_into_chat(self):
-        for widget in list(self.chat_container): self.chat_container.remove(widget)
-        self.chat_welcome_screen = None
-        if len(self.chats['chats'][self.chats["selected_chat"]]['messages']) > 0:
-            for key, message in self.chats['chats'][self.chats["selected_chat"]]['messages'].items():
-                if message:
-                    formated_date = GLib.markup_escape_text(self.generate_datetime_format(datetime.strptime(message['date'] + (":00" if message['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S')))
-                    if message['role'] == 'user':
-                        self.show_message(message['content'], False, f"\n\n<small>{formated_date}</small>", message['images'] if 'images' in message else None, message['files'] if 'files' in message else None, message_id=key)
-                    else:
-                        self.show_message(message['content'], True, f"\n\n{self.convert_model_name(message['model'], 0)}\n<small>{formated_date}</small>", message_id=key)
-                        self.add_code_blocks()
-                        self.bot_message = None
-        else:
-            button_container = Gtk.Box(
-                orientation = 1,
-                spacing = 10,
-                halign = 3
-            )
-            if len(self.local_models) > 0:
-                for prompt in random.sample(self.possible_prompts, 3):
-                    prompt_button = Gtk.Button(
-                        label=prompt,
-                        tooltip_text=_("Send prompt: '{}'").format(prompt)
-                    )
-                    prompt_button.connect('clicked', lambda *_, prompt=prompt : self.send_sample_prompt(prompt))
-                    button_container.append(prompt_button)
-            else:
-                button = Gtk.Button(
-                    label=_("Open Model Manager"),
-                    tooltip_text=_("Open Model Manager"),
-                    css_classes=["suggested-action", "pill"]
-                )
-                button.connect('clicked', lambda *_ : self.manage_models_dialog.present(self))
-                button_container.append(button)
-            self.chat_welcome_screen = Adw.StatusPage(
-                icon_name="com.jeffser.Alpaca",
-                title="Alpaca",
-                description=_("Try one of these prompts") if len(self.local_models) > 0 else _("It looks like you don't have any models downloaded yet. Download models to get started!"),
-                child=button_container,
-                vexpand=True
-            )
-            self.chat_container.append(self.chat_welcome_screen)
-
+            json.dump(history, f, indent=4)
 
     def load_history(self):
         logger.debug("Loading history")
         if os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
             try:
                 with open(os.path.join(self.data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
-                    self.chats = json.load(f)
-                    if len(list(self.chats["chats"].keys())) == 0:
-                        self.chats["chats"][_("New Chat")] = {"messages": {}}
-                    if "selected_chat" not in self.chats or self.chats["selected_chat"] not in self.chats["chats"]:
-                        self.chats["selected_chat"] = list(self.chats["chats"].keys())[0]
-                    if "order" not in self.chats:
-                        self.chats["order"] = []
-                        for chat_name in self.chats["chats"].keys():
-                            self.chats["order"].append(chat_name)
-                    self.model_list_box.select_row(self.model_list_box.get_row_at_index(0))
-                    self.chats["chats"] = {key: value for key, value in self.chats["chats"].items() if key in self.chats["order"]}
-                    if self.chats["selected_chat"] not in self.chats["order"]:
-                        self.chats["selected_chat"] = self.chats["order"][0]
-                    if len(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys()) > 0:
-                        last_model_used = self.chats["chats"][self.chats["selected_chat"]]["messages"][list(self.chats["chats"][self.chats["selected_chat"]]["messages"].keys())[-1]]["model"]
-                        for i, m in enumerate(self.local_models):
-                            if m == last_model_used:
-                                self.model_list_box.select_row(self.model_list_box.get_row_at_index(i))
-                                break
+                    data = json.load(f)
+                    selected_chat = None
+                    if len(list(data)) == 0:
+                        data['chats'][_("New Chat")] = {"messages": {}}
+                    if os.path.exists(os.path.join(self.data_dir, "chats", "selected_chat.txt")):
+                        with open(os.path.join(self.data_dir, "chats", "selected_chat.txt"), 'r') as scf:
+                            selected_chat = scf.read()
+                    elif 'selected_chat' in data and data['selected_chat'] in data['chats']:
+                        selected_chat = data['selected_chat']
+                    if not selected_chat or selected_chat not in data['chats']:
+                        selected_chat = list(data['chats'])[0]
+                    if len(data['chats'][selected_chat]['messages'].keys()) > 0:
+                        last_model_used = data['chats'][selected_chat]['messages'][list(data["chats"][selected_chat]["messages"])[-1]]["model"]
+                        self.model_selector.change_model(last_model_used)
+
+                    for chat_name in data['chats']:
+                        self.chat_list_box.append_chat(chat_name)
+                        chat_container = self.chat_list_box.get_chat_by_name(chat_name)
+                        if chat_name == selected_chat:
+                            self.chat_list_box.select_row(self.chat_list_box.tab_list[-1])
+                        chat_container.load_chat_messages(data['chats'][chat_name]['messages'])
 
             except Exception as e:
                 logger.error(e)
-                self.chats = {"chats": {}, "selected_chat": None, "order": []}
-                self.new_chat()
+                self.chat_list_box.prepend_chat(_("New Chat"))
         else:
-            self.chats = {"chats": {}, "selected_chat": None, "order": []}
-            self.new_chat()
-        self.load_history_into_chat()
+            self.chat_list_box.prepend_chat(_("New Chat"))
 
 
     def generate_numbered_name(self, chat_name:str, compare_list:list) -> str:
@@ -1406,57 +832,6 @@ Generate a title following these rules:
     def generate_uuid(self) -> str:
         return f"{datetime.today().strftime('%Y%m%d%H%M%S%f')}{uuid.uuid4().hex}"
 
-    def clear_chat(self):
-        logger.info("Clearing chat")
-        for widget in list(self.chat_container): self.chat_container.remove(widget)
-        self.chats["chats"][self.chats["selected_chat"]]["messages"] = {}
-        self.save_history()
-        self.load_history_into_chat()
-
-    def delete_chat(self, chat_name):
-        logger.info("Deleting chat")
-        del self.chats['chats'][chat_name]
-        self.chats['order'].remove(chat_name)
-        if os.path.exists(os.path.join(self.data_dir, "chats", chat_name)):
-            shutil.rmtree(os.path.join(self.data_dir, "chats", chat_name))
-        self.save_history()
-        self.update_chat_list()
-        if len(self.chats['chats'])==0:
-            self.new_chat()
-        if self.chats['selected_chat'] == chat_name:
-            self.chat_list_box.select_row(self.chat_list_box.get_row_at_index(0))
-
-    def duplicate_chat(self, chat_name):
-        new_chat_name = self.generate_numbered_name(_("Copy of {}").format(chat_name), self.chats["chats"].keys())
-        self.chats["chats"][new_chat_name] = self.chats["chats"][chat_name]
-        self.chats["order"].insert(0, new_chat_name)
-        self.save_history()
-        self.new_chat_element(new_chat_name, True, False)
-        shutil.copytree(os.path.join(self.data_dir, "chats", chat_name), os.path.join(self.data_dir, "chats", new_chat_name))
-
-    def rename_chat(self, old_chat_name, new_chat_name, label_element):
-        logger.info(f"Renaming chat \"{old_chat_name}\" -> \"{new_chat_name}\"")
-        new_chat_name = self.generate_numbered_name(new_chat_name, self.chats["chats"].keys())
-        if self.chats["selected_chat"] == old_chat_name:
-            self.chats["selected_chat"] = new_chat_name
-        self.chats["chats"][new_chat_name] = self.chats["chats"][old_chat_name]
-        self.chats["order"][self.chats["order"].index(old_chat_name)] = new_chat_name
-        del self.chats["chats"][old_chat_name]
-        if os.path.exists(os.path.join(self.data_dir, "chats", old_chat_name)):
-            shutil.move(os.path.join(self.data_dir, "chats", old_chat_name), os.path.join(self.data_dir, "chats", new_chat_name))
-        label_element.set_tooltip_text(new_chat_name)
-        label_element.set_label(new_chat_name)
-        label_element.set_name(new_chat_name)
-        self.save_history()
-
-    def new_chat(self):
-        chat_name = self.generate_numbered_name(_("New Chat"), self.chats["chats"].keys())
-        self.chats["chats"][chat_name] = {"messages": {}}
-        self.chats["order"].insert(0, chat_name)
-        self.save_history()
-        self.new_chat_element(chat_name, True, False)
-        self.set_focus(self.message_text_view)
-
     def stop_pull_model(self, model_name):
         logger.debug("Stopping model pull")
         self.pulling_models[model_name]['overlay'].get_parent().get_parent().remove(self.pulling_models[model_name]['overlay'].get_parent())
@@ -1468,7 +843,6 @@ Generate a title following these rules:
         self.update_list_local_models()
         if response.status_code == 200:
             self.show_toast(_("Model deleted successfully"), self.manage_models_overlay)
-            self.change_model()
         else:
             self.manage_models_dialog.close()
             self.connection_error()
@@ -1488,41 +862,6 @@ Generate a title following these rules:
         popover.set_parent(chat_row.get_child())
         popover.set_pointing_to(position)
         popover.popup()
-
-    def new_chat_element(self, chat_name:str, select:bool, append:bool):
-        chat_label = Gtk.Label(
-            label=chat_name,
-            tooltip_text=chat_name,
-            name=chat_name,
-            hexpand=True,
-            halign=0,
-            wrap=True,
-            ellipsize=3,
-            wrap_mode=2,
-            xalign=0
-        )
-        chat_row = Gtk.ListBoxRow(
-            css_classes = ["chat_row"],
-            height_request = 45,
-            child = chat_label
-        )
-
-        gesture = Gtk.GestureClick(button=3)
-        gesture.connect("released", self.chat_click_handler)
-        chat_row.add_controller(gesture)
-
-        if append:
-            self.chat_list_box.append(chat_row)
-        else:
-            self.chat_list_box.prepend(chat_row)
-        if select:
-            self.chat_list_box.select_row(chat_row)
-
-    def update_chat_list(self):
-        self.chat_list_box.remove_all()
-        for name in self.chats['order']:
-            if name in self.chats['chats'].keys():
-                self.new_chat_element(name, self.chats["selected_chat"] == name, True)
 
     def show_preferences_dialog(self):
         logger.debug("Showing preferences dialog")
@@ -1573,87 +912,6 @@ Generate a title following these rules:
                 local_instance.start()
                 if self.verify_connection() == False:
                     self.connection_error()
-
-    def on_replace_contents(self, file, result):
-        file.replace_contents_finish(result)
-        self.show_toast(_("Chat exported successfully"), self.main_overlay)
-
-    def on_export_chat(self, file_dialog, result, chat_name):
-        file = file_dialog.save_finish(result)
-        if not file:
-            return
-        json_data = json.dumps({chat_name: self.chats["chats"][chat_name]}, indent=4).encode("UTF-8")
-
-        with tempfile.TemporaryDirectory() as temp_dir:
-            json_path = os.path.join(temp_dir, "data.json")
-            with open(json_path, "wb") as json_file:
-                json_file.write(json_data)
-
-            tar_path = os.path.join(temp_dir, chat_name)
-            with tarfile.open(tar_path, "w") as tar:
-                tar.add(json_path, arcname="data.json")
-                directory = os.path.join(self.data_dir, "chats", chat_name)
-                if os.path.exists(directory) and os.path.isdir(directory):
-                    tar.add(directory, arcname=os.path.basename(directory))
-
-            with open(tar_path, "rb") as tar:
-                tar_content = tar.read()
-
-            file.replace_contents_async(
-                tar_content,
-                etag=None,
-                make_backup=False,
-                flags=Gio.FileCreateFlags.NONE,
-                cancellable=None,
-                callback=self.on_replace_contents
-            )
-
-    def export_chat(self, chat_name):
-        logger.info("Exporting chat")
-        file_dialog = Gtk.FileDialog(initial_name=f"{chat_name}.tar")
-        file_dialog.save(parent=self, cancellable=None, callback=lambda file_dialog, result, chat_name=chat_name: self.on_export_chat(file_dialog, result, chat_name))
-
-    def on_chat_imported(self, file_dialog, result):
-        file = file_dialog.open_finish(result)
-        if not file:
-            return
-        stream = file.read(None)
-        data_stream = Gio.DataInputStream.new(stream)
-        tar_content = data_stream.read_bytes(1024 * 1024, None)
-
-        with tempfile.TemporaryDirectory() as temp_dir:
-            tar_filename = os.path.join(temp_dir, "imported_chat.tar")
-
-            with open(tar_filename, "wb") as tar_file:
-                tar_file.write(tar_content.get_data())
-
-            with tarfile.open(tar_filename, "r") as tar:
-                tar.extractall(path=temp_dir)
-                chat_name = None
-                chat_content = None
-                for member in tar.getmembers():
-                    if member.name == "data.json":
-                        json_filepath = os.path.join(temp_dir, member.name)
-                        with open(json_filepath, "r", encoding="utf-8") as json_file:
-                            data = json.load(json_file)
-                        for chat_name, chat_content in data.items():
-                            new_chat_name = self.generate_numbered_name(chat_name, list(self.chats['chats'].keys()))
-                            self.chats['chats'][new_chat_name] = chat_content
-                            self.chats["order"].insert(0, new_chat_name)
-                            src_path = os.path.join(temp_dir, chat_name)
-                            if os.path.exists(src_path) and os.path.isdir(src_path):
-                                dest_path = os.path.join(self.data_dir, "chats", new_chat_name)
-                                shutil.copytree(src_path, dest_path)
-
-
-        self.update_chat_list()
-        self.save_history()
-        self.show_toast(_("Chat imported successfully"), self.main_overlay)
-
-    def import_chat(self):
-        logger.info("Importing chat")
-        file_dialog = Gtk.FileDialog(default_filter=self.file_filter_tar)
-        file_dialog.open(self, None, self.on_chat_imported)
 
     def switch_run_on_background(self):
         logger.debug("Switching run on background")
@@ -1733,16 +991,16 @@ Generate a title following these rules:
 
     def chat_actions(self, action, user_data):
         chat_row = self.selected_chat_row
-        chat_name = chat_row.get_child().get_name()
+        chat_name = chat_row.get_child().get_label()
         action_name = action.get_name()
         if action_name in ('delete_chat', 'delete_current_chat'):
             dialogs.delete_chat(self, chat_name)
         elif action_name in ('duplicate_chat', 'duplicate_current_chat'):
-            self.duplicate_chat(chat_name)
+            self.chat_list_box.duplicate_chat(chat_name)
         elif action_name in ('rename_chat', 'rename_current_chat'):
-            dialogs.rename_chat(self, chat_name, chat_row.get_child())
+            dialogs.rename_chat(self, chat_name)
         elif action_name in ('export_chat', 'export_current_chat'):
-            self.export_chat(chat_name)
+            self.chat_list_box.export_chat(chat_name)
 
     def current_chat_actions(self, action, user_data):
         self.selected_chat_row = self.chat_list_box.get_selected_row()
@@ -1802,6 +1060,14 @@ Generate a title following these rules:
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        message_widget.window = self
+        chat_widget.window = self
+        model_widget.window = self
+        self.model_selector = model_widget.model_selector_button()
+        self.header_bar.set_title_widget(self.model_selector)
+
+        self.chat_list_box = chat_widget.chat_list()
+        self.chat_list_container.set_child(self.chat_list_box)
         GtkSource.init()
         with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
             self.available_models = json.load(f)
@@ -1812,25 +1078,31 @@ Generate a title following these rules:
         self.message_text_view.add_controller(enter_key_controller)
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
-        self.get_application().create_action('new_chat', lambda *_: self.new_chat(), ['<primary>n'])
-        self.get_application().create_action('clear', lambda *_: dialogs.clear_chat(self), ['<primary>e'])
-        self.get_application().create_action('import_chat', lambda *_: self.import_chat(), ['<primary>i'])
-        self.get_application().create_action('create_model_from_existing', lambda *_: dialogs.create_model_from_existing(self))
-        self.get_application().create_action('create_model_from_file', lambda *_: dialogs.create_model_from_file(self))
-        self.get_application().create_action('create_model_from_name', lambda *_: dialogs.create_model_from_name(self))
-        self.get_application().create_action('duplicate_chat', self.chat_actions)
-        self.get_application().create_action('duplicate_current_chat', self.current_chat_actions)
-        self.get_application().create_action('delete_chat', self.chat_actions)
-        self.get_application().create_action('delete_current_chat', self.current_chat_actions)
-        self.get_application().create_action('rename_chat', self.chat_actions)
-        self.get_application().create_action('rename_current_chat', self.current_chat_actions)
-        self.get_application().create_action('export_chat', self.chat_actions)
-        self.get_application().create_action('export_current_chat', self.current_chat_actions)
-        self.get_application().create_action('toggle_sidebar', lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9'])
-        self.get_application().create_action('manage_models', lambda *_: self.manage_models_dialog.present(self), ['<primary>m'])
+
+        universal_actions = {
+            'new_chat': [lambda *_: self.chat_list_box.new_chat(), ['<primary>n']],
+            'clear': [lambda *_: dialogs.clear_chat(self), ['<primary>e']],
+            'import_chat': [lambda *_: self.chat_list_box.import_chat(), ['<primary>i']],
+            'create_model_from_existing': [lambda *_: dialogs.create_model_from_existing(self)],
+            'create_model_from_file': [lambda *_: dialogs.create_model_from_file(self)],
+            'create_model_from_name': [lambda *_: dialogs.create_model_from_name(self)],
+            'duplicate_chat': [self.chat_actions],
+            'duplicate_current_chat': [self.current_chat_actions],
+            'delete_chat': [self.chat_actions],
+            'delete_current_chat': [self.current_chat_actions],
+            'rename_chat': [self.chat_actions],
+            'rename_current_chat': [self.current_chat_actions, ['F2']],
+            'export_chat': [self.chat_actions],
+            'export_current_chat': [self.current_chat_actions],
+            'toggle_sidebar': [lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9']],
+            'manage_models': [lambda *_: self.manage_models_dialog.present(self), ['<primary>m']]
+        }
+
+        for action_name, data in universal_actions.items():
+            self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
+
         self.message_text_view.connect("paste-clipboard", self.on_clipboard_paste)
         self.file_preview_remove_button.connect('clicked', lambda button : dialogs.remove_attached_file(self, button.get_name()))
-        self.add_chat_button.connect("clicked", lambda button : self.new_chat())
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
         self.create_model_name.get_delegate().connect("insert-text", lambda *_ : self.check_alphanumeric(*_, ['-', '.', '_']))
         self.remote_connection_entry.connect("entry-activated", lambda entry : entry.set_css_classes([]))
@@ -1882,4 +1154,3 @@ Generate a title following these rules:
             self.connection_error()
         self.update_list_available_models()
         self.load_history()
-        self.update_chat_list()
