@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-12 22:17-0600\n"
+"POT-Creation-Date: 2024-08-26 15:07-0600\n"
 "PO-Revision-Date: 2024-07-18 15:12-0600\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Bengali\n"
@@ -77,7 +77,7 @@ msgstr "ওয়েবসাইট থেকে টেক্সট প্রো
 msgid "PDF recognition"
 msgstr "পিডিএফ স্বীকৃতি"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:955
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:854
 msgid "Disclaimer"
 msgstr "দাবিত্যাগ"
 
@@ -1196,198 +1196,108 @@ msgstr "0.1.1 স্থিতিশীল রিলিজ"
 msgid "This is the first public version of Alpaca"
 msgstr "এটি আলপাকার প্রথম পাবলিক সংস্করণ"
 
-#: src/window.py:65 src/window.py:666 src/window.py:1365 src/window.py:1453
-#: src/dialogs.py:92 src/window.ui:29
-msgid "New Chat"
-msgstr "নতুন চ্যাট"
-
-#: src/window.py:197
-msgid "Message edited successfully"
-msgstr "বার্তা সফলভাবে সম্পাদিত হয়েছে"
-
-#: src/window.py:212
+#: src/window.py:154
 msgid "Please select a model before chatting"
 msgstr "চ্যাটিং আগে একটি মডেল নির্বাচন করুন"
 
-#: src/window.py:283 src/window.py:284
+#: src/window.py:213 src/window.py:214
 msgid "Close"
 msgstr "বন্ধ"
 
-#: src/window.py:286 src/window.py:287 src/window.ui:908
+#: src/window.py:216 src/window.py:217 src/window.ui:807
 msgid "Next"
 msgstr "পরবর্তী"
 
-#: src/window.py:329 src/window.py:340
+#: src/window.py:243 src/window.py:254
 msgid "Failed to connect to server"
 msgstr "সার্ভারে সংযোগ ব্যর্থ"
 
-#: src/window.py:389
+#: src/window.py:305
 msgid "Stop Creating '{}'"
 msgstr "'{}' তৈরি করা বন্ধ করুন"
 
-#: src/window.py:429
+#: src/window.py:345
 msgid "image"
 msgstr "ছবি"
 
-#: src/window.py:464 src/window.ui:86
-msgid "Select a Model"
-msgstr "একটি মডেল নির্বাচন করুন"
+#: src/window.py:431
+msgid "Missing file"
+msgstr "অনুপস্থিত ফাইল"
 
-#: src/window.py:572
-msgid "Message copied to the clipboard"
-msgstr "ক্লিপবোর্ডে কপি করা হয়েছে"
+#: src/window.py:493 src/window.py:786 src/window.py:807 src/window.py:809
+#: src/dialogs.py:92 src/window.ui:30
+msgid "New Chat"
+msgstr "নতুন চ্যাট"
 
-#: src/window.py:699
-msgid "User message"
-msgstr "ব্যবহারকারীর বার্তা"
-
-#: src/window.py:708
-msgid "Remove Message"
-msgstr "বার্তা অপসারণ"
-
-#: src/window.py:713 src/window.py:1020
-msgid "Copy Message"
-msgstr "বার্তা কপি করুন"
-
-#: src/window.py:718
-msgid "Edit Message"
-msgstr "বার্তা সম্পাদনা করুন"
-
-#: src/window.py:723
-msgid "Regenerate Message"
-msgstr "বার্তা পুনরুত্পাদন করুন"
-
-#: src/window.py:767 src/window.py:769
-msgid "Image"
-msgstr "চিত্র"
-
-#: src/window.py:778 src/window.py:794
-msgid "Missing Image"
-msgstr "ছবি খুঁজে পাওয়া যায়নি"
-
-#: src/window.py:796 src/window.py:797
-msgid "Missing image"
-msgstr "ছবি খুঁজে পাওয়া যায়নি"
-
-#: src/window.py:878
+#: src/window.py:539
 msgid "Remove '{}'"
 msgstr "'{}' অপসারণ করুন"
 
-#: src/window.py:995
-msgid "Response message"
-msgstr "প্রতিক্রিয়া বার্তা"
-
-#: src/window.py:1015
-msgid "{}Code Block"
-msgstr "{}কোড ব্লক"
-
-#: src/window.py:1019
-msgid "Code Block"
-msgstr "কোড ব্লক"
-
-#: src/window.py:1051
+#: src/window.py:579
 msgid "Code copied to the clipboard"
 msgstr "ক্লিপবোর্ডে কোড কপি করা হয়েছে"
 
-#: src/window.py:1114
-msgid "Regenerate Response"
-msgstr "উত্তর পুনরুত্পাদন করুন"
-
-#: src/window.py:1161
-msgid "Message cannot be regenerated while receiving a response"
-msgstr "একটি প্রতিক্রিয়া পাওয়ার সময় বার্তা পুনরায় তৈরি করা যাবে না৷"
-
-#: src/window.py:1189
+#: src/window.py:641
 msgid "Task Complete"
 msgstr "কাজ সম্পন্ন"
 
-#: src/window.py:1189 src/window.py:1190
+#: src/window.py:641 src/window.py:642
 msgid "Model '{}' pulled successfully."
 msgstr "মডেল '{}' সফলভাবে পুল করা হয়েছে"
 
-#: src/window.py:1192 src/window.py:1195
+#: src/window.py:644 src/window.py:647
 msgid "Pull Model Error"
 msgstr "মডেল পুল ত্রুটি"
 
-#: src/window.py:1192
+#: src/window.py:644
 msgid "Failed to pull model '{}': {}"
 msgstr "মডেল '{}' পুল করা ব্যর্থ: {}"
 
-#: src/window.py:1193
+#: src/window.py:645
 msgid "Error pulling '{}': {}"
 msgstr "'{}' পুল করার ত্রুটি: {}"
 
-#: src/window.py:1195
+#: src/window.py:647
 msgid "Failed to pull model '{}' due to network error."
 msgstr "নেটওয়ার্ক ত্রুটির কারণে মডেল '{}' পুল করা সম্ভব হয়নি"
 
-#: src/window.py:1196
+#: src/window.py:648
 msgid "Error pulling '{}'"
 msgstr "'{}' পুল করার ত্রুটি"
 
-#: src/window.py:1230
+#: src/window.py:682
 msgid "Stop Pulling '{}'"
 msgstr "'{}' পুল করা বন্ধ করুন"
 
-#: src/window.py:1264
+#: src/window.py:717
 msgid "Download {}:{}"
 msgstr "ডাউনলোড করুন {}:{}"
 
-#: src/window.py:1284
+#: src/window.py:737
 msgid "Image Recognition"
 msgstr "ছবি সনাক্তকরণ"
 
-#: src/window.py:1289
+#: src/window.py:742
 msgid "Enter download menu for {}"
 msgstr "{} এর ডাউনলোড মেনুতে প্রবেশ করুন"
 
-#: src/window.py:1336
-msgid "Send prompt: '{}'"
-msgstr "প্রম্পট পাঠান: '{}'"
-
-#: src/window.py:1342 src/window.py:1343
-msgid "Open Model Manager"
-msgstr "মডেল ম্যানেজার খুলুন"
-
-#: src/window.py:1351
-msgid "Try one of these prompts"
-msgstr "এই প্রম্পটগুলির মধ্যে একটি চেষ্টা করুন"
-
-#: src/window.py:1351
-msgid ""
-"It looks like you don't have any models downloaded yet. Download models to "
-"get started!"
-msgstr "মনে হচ্ছে আপনি এখনও কোনও মডেল ডাউনলোড করেননি। শুরু করতে মডেল ডাউনলোড করুন!"
-
-#: src/window.py:1430
-msgid "Copy of {}"
-msgstr "{} এর অনুলিপি"
-
-#: src/window.py:1470
+#: src/window.py:838
 msgid "Model deleted successfully"
 msgstr "মডেল সফলভাবে মুছে ফেলা হয়েছে"
 
-#: src/window.py:1556
+#: src/window.py:888
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr "স্থানীয় ওল্লামা ইনস্ট্যান্সে একটি ত্রুটি ছিল, তাই এটি রিসেট করা হয়েছে"
 
-#: src/window.py:1579
-msgid "Chat exported successfully"
-msgstr "চ্যাট সফলভাবে রপ্তানি করা হয়েছে"
-
-#: src/window.py:1651
-msgid "Chat imported successfully"
-msgstr "চ্যাট সফলভাবে আমদানি করা হয়েছে"
-
-#: src/window.py:1684
+#: src/window.py:935
 msgid "Cannot open image"
 msgstr "ছবি খোলা যায়নি"
 
-#: src/window.py:1770
+#: src/window.py:1021
 msgid "This video is not available"
 msgstr "এই ভিডিওটি উপলব্ধ নয়"
 
-#: src/window.py:1788 src/dialogs.py:313
+#: src/window.py:1039 src/dialogs.py:313
 msgid "Image recognition is only available on specific models"
 msgstr "নির্দিষ্ট মডেলগুলিতে ছবি সনাক্তকরণ উপলব্ধ"
 
@@ -2157,7 +2067,7 @@ msgstr "নতুন চ্যাট তৈরি করুন?"
 msgid "Enter name for new chat"
 msgstr "নতুন চ্যাটের জন্য নাম লিখুন"
 
-#: src/dialogs.py:108 src/window.ui:787
+#: src/dialogs.py:108 src/window.ui:686
 msgid "Create"
 msgstr "তৈরি করুন"
 
@@ -2209,7 +2119,7 @@ msgstr "স্থানীয় ইনস্ট্যান্স ব্যব�
 msgid "Connect"
 msgstr "সংযোগ করুন"
 
-#: src/dialogs.py:244 src/window.ui:80
+#: src/dialogs.py:244
 msgid "Select Model"
 msgstr "মডেল নির্বাচন করুন"
 
@@ -2271,63 +2181,59 @@ msgstr ""
 "আপনি কি নিশ্চিত যে আপনি সংযুক্ত করতে চান\n"
 "'{}'?"
 
-#: src/window.ui:40
+#: src/window.ui:41
 msgid "Menu"
 msgstr "মেনু"
 
-#: src/window.ui:70
+#: src/window.ui:62
 msgid "Toggle Sidebar"
 msgstr "সাইডবার টগল করুন"
 
-#: src/window.ui:115 src/window.ui:121 src/window.ui:516 src/window.ui:973
-msgid "Manage Models"
-msgstr "মডেল পরিচালনা করুন"
-
-#: src/window.ui:163
+#: src/window.ui:70
 msgid "Chat Menu"
 msgstr "চ্যাট মেনু"
 
-#: src/window.ui:239
+#: src/window.ui:124
 msgid "Attach File"
 msgstr "ফাইল সংযুক্ত করুন"
 
-#: src/window.ui:275
+#: src/window.ui:160
 msgid "Message text box"
-msgstr ""
+msgstr "বার্তা টেক্সট বক্স"
 
-#: src/window.ui:288 src/window.ui:1168
+#: src/window.ui:173 src/window.ui:1073
 msgid "Send Message"
 msgstr "বার্তা পাঠান"
 
-#: src/window.ui:337 src/window.ui:979 src/window.ui:1115
+#: src/window.ui:222 src/window.ui:878 src/window.ui:1014
 msgid "Preferences"
 msgstr "পছন্দ"
 
-#: src/window.ui:340 src/window.ui:1093
+#: src/window.ui:225 src/window.ui:992
 msgid "General"
 msgstr "সাধারণ"
 
-#: src/window.ui:346
+#: src/window.ui:231
 msgid "Use Remote Connection to Ollama"
 msgstr "অল্লামায় দূরবর্তী সংযোগ ব্যবহার করুন"
 
-#: src/window.ui:352
+#: src/window.ui:237
 msgid "URL of Remote Instance"
 msgstr "দূরবর্তী ইনস্ট্যান্সের URL"
 
-#: src/window.ui:359
+#: src/window.ui:244
 msgid "Bearer Token (Optional)"
 msgstr "বিয়ারার টোকেন (ঐচ্ছিক)"
 
-#: src/window.ui:369
+#: src/window.ui:254
 msgid "Run Alpaca In Background"
 msgstr "আলপাকা পটভূমিতে চালান"
 
-#: src/window.ui:380
+#: src/window.ui:265
 msgid "Temperature"
 msgstr "তাপমাত্রা"
 
-#: src/window.ui:381
+#: src/window.ui:266
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
@@ -2335,11 +2241,11 @@ msgstr ""
 "মডেলের তাপমাত্রা। তাপমাত্রা বাড়ানো হলে মডেল আরও সৃজনশীলভাবে উত্তর দেবে। (ডিফল্ট: "
 "০.৮)"
 
-#: src/window.ui:396
+#: src/window.ui:281
 msgid "Seed"
 msgstr "বীজ"
 
-#: src/window.ui:397
+#: src/window.ui:282
 msgid ""
 "Sets the random number seed to use for generation. Setting this to a "
 "specific number will make the model generate the same text for the same "
@@ -2348,25 +2254,25 @@ msgstr ""
 "জন্মের জন্য ব্যবহার করার জন্য র্যান্ডম নম্বার সীড সেট করে। এই নির্দিষ্ট সংখ্যায় সেট "
 "করলে মডেল একই প্রম্পটের জন্য একই টেক্সট জন্ম দেবে। (ডিফল্ট: ০ (এলোমেলোভাবে))"
 
-#: src/window.ui:411
+#: src/window.ui:296
 msgid "Keep Alive Time"
 msgstr "জীবিত সময়"
 
-#: src/window.ui:412
+#: src/window.ui:297
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
 msgstr "অনুরোধের পরে মিনিটে মেমরিতে মডেল কতক্ষণ থাকবে তা নিয়ন্ত্রণ করে (ডিফল্ট: ৫)"
 
-#: src/window.ui:428
+#: src/window.ui:313
 msgid "Ollama Instance"
 msgstr "ওল্লামা ইনস্ট্যান্স"
 
-#: src/window.ui:432
+#: src/window.ui:317
 msgid "Ollama Overrides"
 msgstr "ওল্লামা ওভাররাইড"
 
-#: src/window.ui:433
+#: src/window.ui:318
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
@@ -2374,35 +2280,43 @@ msgstr ""
 "ওল্লামাতে ব্যবহৃত যুক্তিগুলি পরিচালনা করুন, এই পৃষ্ঠায় যেকোনো পরিবর্তন শুধুমাত্র প্রযোজ্য "
 "হবেসমন্বিত উদাহরণে, আপনি পরিবর্তন করলে উদাহরণটি পুনরায় চালু হবে।"
 
-#: src/window.ui:505
+#: src/window.ui:390
 msgid "Manage models dialog"
 msgstr "মডেল ব্যবস্থাপনা ডায়ালগ"
 
-#: src/window.ui:526 src/window.ui:667
+#: src/window.ui:401 src/window.ui:872
+msgid "Manage Models"
+msgstr "মডেল পরিচালনা করুন"
+
+#: src/window.ui:411 src/window.ui:566
 msgid "Create Model"
 msgstr "মডেল তৈরি করুন"
 
-#: src/window.ui:533
+#: src/window.ui:418
 msgid "Search Model"
 msgstr "মডেল খুঁজুন"
 
-#: src/window.ui:542
+#: src/window.ui:427
 msgid "Model search bar"
 msgstr "মডেল অনুসন্ধান বার"
 
-#: src/window.ui:549 src/window.ui:551
+#: src/window.ui:434 src/window.ui:436
 msgid "Search models"
 msgstr "মডেলগুলি খুঁজুন"
 
-#: src/window.ui:599
+#: src/window.ui:484
 msgid "No Models Found"
 msgstr "কোন মডেল পাওয়া যায়নি"
 
-#: src/window.ui:600
-msgid "Try a different search"
-msgstr "একটি ভিন্ন অনুসন্ধান চেষ্টা করুন"
+#: src/window.ui:485
+msgid "Try a different search or pull an unlisted model from it's name"
+msgstr "একটি ভিন্ন সার্চ চেষ্টা করুন বা এর নাম থেকে একটি তালিকাভুক্ত নয় এম টানুন"
 
-#: src/window.ui:645
+#: src/window.ui:492
+msgid "Pull Model From Name"
+msgstr "নাম থেকে মডেল টানুন"
+
+#: src/window.ui:544
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
@@ -2410,19 +2324,19 @@ msgstr ""
 "এই মডেলটি ডাউনলোড করার মাধ্যমে আপনি মডেলের ওয়েবসাইটে উপলব্ধ লাইসেন্স চুক্তি গ্রহণ "
 "করেন।"
 
-#: src/window.ui:702
+#: src/window.ui:601
 msgid "Base"
 msgstr "ভিত্তি"
 
-#: src/window.ui:721
+#: src/window.ui:620
 msgid "Name"
 msgstr "নাম"
 
-#: src/window.ui:727
+#: src/window.ui:626
 msgid "Context"
 msgstr "প্রসঙ্গ"
 
-#: src/window.ui:771
+#: src/window.ui:670
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -2432,35 +2346,35 @@ msgstr ""
 "স্বয়ংক্রিয়ভাবে পূরণ করে। আপনি অনিশ্চিত হলে মডেলের ওয়েবসাইট বা ওল্লামা ডকুমেন্টেশন "
 "ভিজিট করুন আরও তথ্যের জন্য।"
 
-#: src/window.ui:810
+#: src/window.ui:709
 msgid "File preview dialog"
 msgstr "ফাইল পূর্বরূপ ডায়ালগ"
 
-#: src/window.ui:822
+#: src/window.ui:721
 msgid "Open With Default App"
 msgstr "ডিফল্ট অ্যাপের সাথে খুলুন"
 
-#: src/window.ui:830
+#: src/window.ui:729
 msgid "Remove Attachment"
 msgstr "সংযুক্তি অপসারণ করুন"
 
-#: src/window.ui:892
+#: src/window.ui:791
 msgid "Previous"
 msgstr "পূর্ববর্তী"
 
-#: src/window.ui:935
+#: src/window.ui:834
 msgid "Welcome to Alpaca"
 msgstr "আলপাকায় স্বাগতম"
 
-#: src/window.ui:936
+#: src/window.ui:835
 msgid "Powered by Ollama"
 msgstr "ওল্লামা দ্বারা সক্ষম"
 
-#: src/window.ui:939
+#: src/window.ui:838
 msgid "Ollama Website"
 msgstr "ওল্লামা ওয়েবসাইট"
 
-#: src/window.ui:956
+#: src/window.ui:855
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2470,93 +2384,172 @@ msgstr ""
 "সফ্টওয়্যারের যেকোনো ক্ষতির জন্য দায়ী নয়।অনুগ্রহ করে সতর্কতা অবলম্বন করুন এবং কোডটি "
 "চালানোর আগে সাবধানে পর্যালোচনা করুন।"
 
-#: src/window.ui:969
+#: src/window.ui:868
 msgid "Import Chat"
 msgstr "চ্যাট আমদানি করুন"
 
-#: src/window.ui:983
+#: src/window.ui:882
 msgid "Keyboard Shortcuts"
 msgstr "কীবোর্ড শর্টকাট"
 
-#: src/window.ui:987
+#: src/window.ui:886
 msgid "About Alpaca"
 msgstr "আলপাকা সম্পর্কে"
 
-#: src/window.ui:995 src/window.ui:1021
+#: src/window.ui:894 src/window.ui:920
 msgid "Rename Chat"
 msgstr "চ্যাট নাম পরিবর্তন করুন"
 
-#: src/window.ui:999 src/window.ui:1025
+#: src/window.ui:898 src/window.ui:924
 msgid "Duplicate Chat"
 msgstr "চ্যাট অনুলিপি করুন"
 
-#: src/window.ui:1003 src/window.ui:1029
+#: src/window.ui:902 src/window.ui:928
 msgid "Export Chat"
 msgstr "চ্যাট রপ্তানি করুন"
 
-#: src/window.ui:1007
+#: src/window.ui:906
 msgid "Clear Chat"
 msgstr "চ্যাট পরিষ্কার করুন"
 
-#: src/window.ui:1013 src/window.ui:1035
+#: src/window.ui:912 src/window.ui:934
 msgid "Delete Chat"
 msgstr "চ্যাট ডিলিট করুন"
 
-#: src/window.ui:1043
+#: src/window.ui:942
 msgid "From Existing Model"
 msgstr "বিদ্যমান মডেল থেকে"
 
-#: src/window.ui:1047
+#: src/window.ui:946
 msgid "From GGUF File"
 msgstr "GGUF ফাইল থেকে"
 
-#: src/window.ui:1051
+#: src/window.ui:950
 msgid "From Name"
 msgstr "নাম থেকে"
 
-#: src/window.ui:1097
+#: src/window.ui:996
 msgid "Close application"
 msgstr "অ্যাপ্লিকেশন বন্ধ করুন"
 
-#: src/window.ui:1103
+#: src/window.ui:1002
 msgid "Import chat"
 msgstr "চ্যাট আমদানি করুন"
 
-#: src/window.ui:1109
+#: src/window.ui:1008
 msgid "Clear chat"
 msgstr "চ্যাট পরিষ্কার করুন"
 
-#: src/window.ui:1121
+#: src/window.ui:1020
 msgid "New chat"
 msgstr "নতুন চ্যাট"
 
-#: src/window.ui:1127
+#: src/window.ui:1026
 msgid "Show shortcuts window"
 msgstr "শর্টকাট উইন্ডো দেখান"
 
-#: src/window.ui:1133
+#: src/window.ui:1032
 msgid "Manage models"
 msgstr "মডেল ব্যবস্থাপনা"
 
-#: src/window.ui:1139
+#: src/window.ui:1038
 msgid "Toggle sidebar"
 msgstr "সাইডবার টগল"
 
-#: src/window.ui:1146
+#: src/window.ui:1044
+msgid "Rename chat"
+msgstr "চ্যাটের নাম পরিবর্তন করুন"
+
+#: src/window.ui:1051
 msgid "Editor"
 msgstr "সম্পাদক"
 
-#: src/window.ui:1150
+#: src/window.ui:1055
 msgid "Copy"
 msgstr "কপি"
 
-#: src/window.ui:1156
+#: src/window.ui:1061
 msgid "Paste"
 msgstr "পেস্ট"
 
-#: src/window.ui:1162
+#: src/window.ui:1067
 msgid "Insert new line"
 msgstr "নতুন লাইন সন্নিবেশ করুন"
+
+#~ msgid "Message edited successfully"
+#~ msgstr "বার্তা সফলভাবে সম্পাদিত হয়েছে"
+
+#~ msgid "Select a Model"
+#~ msgstr "একটি মডেল নির্বাচন করুন"
+
+#~ msgid "Message copied to the clipboard"
+#~ msgstr "ক্লিপবোর্ডে কপি করা হয়েছে"
+
+#~ msgid "User message"
+#~ msgstr "ব্যবহারকারীর বার্তা"
+
+#~ msgid "Remove Message"
+#~ msgstr "বার্তা অপসারণ"
+
+#~ msgid "Copy Message"
+#~ msgstr "বার্তা কপি করুন"
+
+#~ msgid "Edit Message"
+#~ msgstr "বার্তা সম্পাদনা করুন"
+
+#~ msgid "Regenerate Message"
+#~ msgstr "বার্তা পুনরুত্পাদন করুন"
+
+#~ msgid "Image"
+#~ msgstr "চিত্র"
+
+#~ msgid "Missing Image"
+#~ msgstr "ছবি খুঁজে পাওয়া যায়নি"
+
+#~ msgid "Missing image"
+#~ msgstr "ছবি খুঁজে পাওয়া যায়নি"
+
+#~ msgid "Response message"
+#~ msgstr "প্রতিক্রিয়া বার্তা"
+
+#~ msgid "{}Code Block"
+#~ msgstr "{}কোড ব্লক"
+
+#~ msgid "Code Block"
+#~ msgstr "কোড ব্লক"
+
+#~ msgid "Regenerate Response"
+#~ msgstr "উত্তর পুনরুত্পাদন করুন"
+
+#~ msgid "Message cannot be regenerated while receiving a response"
+#~ msgstr "একটি প্রতিক্রিয়া পাওয়ার সময় বার্তা পুনরায় তৈরি করা যাবে না৷"
+
+#~ msgid "Send prompt: '{}'"
+#~ msgstr "প্রম্পট পাঠান: '{}'"
+
+#~ msgid "Open Model Manager"
+#~ msgstr "মডেল ম্যানেজার খুলুন"
+
+#~ msgid "Try one of these prompts"
+#~ msgstr "এই প্রম্পটগুলির মধ্যে একটি চেষ্টা করুন"
+
+#~ msgid ""
+#~ "It looks like you don't have any models downloaded yet. Download models "
+#~ "to get started!"
+#~ msgstr ""
+#~ "মনে হচ্ছে আপনি এখনও কোনও মডেল ডাউনলোড করেননি। শুরু করতে মডেল ডাউনলোড করুন!"
+
+#~ msgid "Copy of {}"
+#~ msgstr "{} এর অনুলিপি"
+
+#~ msgid "Chat exported successfully"
+#~ msgstr "চ্যাট সফলভাবে রপ্তানি করা হয়েছে"
+
+#~ msgid "Chat imported successfully"
+#~ msgstr "চ্যাট সফলভাবে আমদানি করা হয়েছে"
+
+#~ msgid "Try a different search"
+#~ msgstr "একটি ভিন্ন অনুসন্ধান চেষ্টা করুন"
 
 #~ msgid "Pulling in the background..."
 #~ msgstr "পটভূমিতে ডাউনলোড হচ্ছে..."

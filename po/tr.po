@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-12 22:17-0600\n"
+"POT-Creation-Date: 2024-08-26 15:07-0600\n"
 "PO-Revision-Date: 2024-08-15 00:01-0600\n"
 "Last-Translator: YOUR NAME <YOUR EMAIL>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -36,8 +36,8 @@ msgid "Features"
 msgstr "Özellikler"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:13
-msgid "Built in Ollama kopyası"
-msgstr "Yerleşik Ollama örneği"
+msgid "Built in Ollama instance"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:14
 #: data/com.jeffser.Alpaca.metainfo.xml.in:647
@@ -77,7 +77,7 @@ msgstr "Web sitelerinden metinleri mesajlarınıza ekleyin"
 msgid "PDF recognition"
 msgstr "PDF tanıma"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:955
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:854
 msgid "Disclaimer"
 msgstr "Yasal uyarı"
 
@@ -935,7 +935,8 @@ msgstr "Diğer harika arkaplan şeyleri eklendi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:478
 msgid "Added Ollama as part of Alpaca, Ollama will run in a sandbox"
-msgstr "Alpaca'nın bir parçası olarak Ollama eklendi, Ollama bir sandbox'ta çalışacak"
+msgstr ""
+"Alpaca'nın bir parçası olarak Ollama eklendi, Ollama bir sandbox'ta çalışacak"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:479
 msgid "Added option to connect to remote instances (how it worked before)"
@@ -1214,200 +1215,108 @@ msgstr "0.1.1 Kararlı Sürüm"
 msgid "This is the first public version of Alpaca"
 msgstr "Bu, Alpaca'nın halka açık ilk sürümüdür"
 
-#: src/window.py:65 src/window.py:666 src/window.py:1365 src/window.py:1453
-#: src/dialogs.py:92 src/window.ui:29
-msgid "New Chat"
-msgstr "Yeni Sohbet"
-
-#: src/window.py:197
-msgid "Message edited successfully"
-msgstr "Mesaj başarıyla düzenlendi"
-
-#: src/window.py:212
+#: src/window.py:154
 msgid "Please select a model before chatting"
 msgstr "Lütfen sohbet etmeden önce bir model seçin"
 
-#: src/window.py:283 src/window.py:284
+#: src/window.py:213 src/window.py:214
 msgid "Close"
 msgstr "Kapat"
 
-#: src/window.py:286 src/window.py:287 src/window.ui:908
+#: src/window.py:216 src/window.py:217 src/window.ui:807
 msgid "Next"
 msgstr "Sonraki"
 
-#: src/window.py:329 src/window.py:340
+#: src/window.py:243 src/window.py:254
 msgid "Failed to connect to server"
 msgstr "Sunucuya bağlanılamadı"
 
-#: src/window.py:389
+#: src/window.py:305
 msgid "Stop Creating '{}'"
 msgstr "'{}' Oluşturmayı Durdur"
 
-#: src/window.py:429
+#: src/window.py:345
 msgid "image"
 msgstr "görsel"
 
-#: src/window.py:464 src/window.ui:86
-msgid "Select a Model"
-msgstr "Bir Model Seçin"
+#: src/window.py:431
+msgid "Missing file"
+msgstr ""
 
-#: src/window.py:572
-msgid "Message copied to the clipboard"
-msgstr "Mesaj panoya kopyalandı"
+#: src/window.py:493 src/window.py:786 src/window.py:807 src/window.py:809
+#: src/dialogs.py:92 src/window.ui:30
+msgid "New Chat"
+msgstr "Yeni Sohbet"
 
-#: src/window.py:699
-msgid "User message"
-msgstr "Kullanıcı mesajı"
-
-#: src/window.py:708
-msgid "Remove Message"
-msgstr "Mesajı Sil"
-
-#: src/window.py:713 src/window.py:1020
-msgid "Copy Message"
-msgstr "Mesajı Kopyala"
-
-#: src/window.py:718
-msgid "Edit Message"
-msgstr "Mesajı Düzenle"
-
-#: src/window.py:723
-msgid "Regenerate Message"
-msgstr "Mesajı Yeniden Oluştur"
-
-#: src/window.py:767 src/window.py:769
-msgid "Image"
-msgstr "Görsel"
-
-#: src/window.py:778 src/window.py:794
-msgid "Missing Image"
-msgstr "Kayıp Görüntü"
-
-#: src/window.py:796 src/window.py:797
-msgid "Missing image"
-msgstr "Kayıp görüntü"
-
-#: src/window.py:878
+#: src/window.py:539
 msgid "Remove '{}'"
 msgstr "'{}' ifadesini kaldır"
 
-#: src/window.py:995
-msgid "Response message"
-msgstr "Yanıt mesajı"
-
-#: src/window.py:1015
-msgid "{}Code Block"
-msgstr "{}Kod Bloğu"
-
-#: src/window.py:1019
-msgid "Code Block"
-msgstr "Kod Bloğu"
-
-#: src/window.py:1051
+#: src/window.py:579
 msgid "Code copied to the clipboard"
 msgstr "Kod panoya kopyalandı"
 
-#: src/window.py:1114
-msgid "Regenerate Response"
-msgstr "Yanıtı Yeniden Oluştur"
-
-#: src/window.py:1161
-msgid "Message cannot be regenerated while receiving a response"
-msgstr "Yanıt alınırken mesaj yeniden oluşturulamaz"
-
-#: src/window.py:1189
+#: src/window.py:641
 msgid "Task Complete"
 msgstr "Görev Tamamlandı"
 
-#: src/window.py:1189 src/window.py:1190
+#: src/window.py:641 src/window.py:642
 msgid "Model '{}' pulled successfully."
 msgstr "Model '{}' başarıyla indirildi."
 
-#: src/window.py:1192 src/window.py:1195
+#: src/window.py:644 src/window.py:647
 msgid "Pull Model Error"
 msgstr "Çekme İndirme Hatası"
 
-#: src/window.py:1192
+#: src/window.py:644
 msgid "Failed to pull model '{}': {}"
 msgstr "Model indirilemedi '{}': {}"
 
-#: src/window.py:1193
+#: src/window.py:645
 msgid "Error pulling '{}': {}"
 msgstr "İndirilirken Hata Oluştu '{}': {}"
 
-#: src/window.py:1195
+#: src/window.py:647
 msgid "Failed to pull model '{}' due to network error."
 msgstr "Ağ hatası nedeniyle '{}' modeli indirilemedi."
 
-#: src/window.py:1196
+#: src/window.py:648
 msgid "Error pulling '{}'"
 msgstr "İndirilirken hata oluştu '{}'"
 
-#: src/window.py:1230
+#: src/window.py:682
 msgid "Stop Pulling '{}'"
 msgstr "İndirmeyi Durdur '{}'"
 
-#: src/window.py:1264
+#: src/window.py:717
 msgid "Download {}:{}"
 msgstr "İndir {}:{}"
 
-#: src/window.py:1284
+#: src/window.py:737
 msgid "Image Recognition"
 msgstr "Görüntü Tanıma"
 
-#: src/window.py:1289
+#: src/window.py:742
 msgid "Enter download menu for {}"
 msgstr "{} için indirme menüsüne girin"
 
-#: src/window.py:1336
-msgid "Send prompt: '{}'"
-msgstr "Mesajı gönder: '{}"
-
-#: src/window.py:1342 src/window.py:1343
-msgid "Open Model Manager"
-msgstr "Model Yöneticisini Aç"
-
-#: src/window.py:1351
-msgid "Try one of these prompts"
-msgstr "Bu mesajlardan birini deneyin"
-
-#: src/window.py:1351
-msgid ""
-"It looks like you don't have any models downloaded yet. Download models to "
-"get started!"
-msgstr ""
-"Görünüşe göre henüz indirilmiş bir modeliniz yok. Başlamak için modelleri "
-"indirin!"
-
-#: src/window.py:1430
-msgid "Copy of {}"
-msgstr "Kopyası {}"
-
-#: src/window.py:1470
+#: src/window.py:838
 msgid "Model deleted successfully"
 msgstr "Model başarıyla silindi"
 
-#: src/window.py:1556
+#: src/window.py:888
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr "Yerel Ollama ile ilgili bir hata oluştu, bu nedenle sıfırlandı"
 
-#: src/window.py:1579
-msgid "Chat exported successfully"
-msgstr "Sohbet başarıyla dışa aktarıldı"
-
-#: src/window.py:1651
-msgid "Chat imported successfully"
-msgstr "Sohbet başarıyla içe aktarıldı"
-
-#: src/window.py:1684
+#: src/window.py:935
 msgid "Cannot open image"
 msgstr "Görüntü açılamadı"
 
-#: src/window.py:1770
+#: src/window.py:1021
 msgid "This video is not available"
 msgstr "Bu video mevcut değil"
 
-#: src/window.py:1788 src/dialogs.py:313
+#: src/window.py:1039 src/dialogs.py:313
 msgid "Image recognition is only available on specific models"
 msgstr "Görüntü tanıma özelliği yalnızca belirli modellerde mevcuttur"
 
@@ -2218,7 +2127,7 @@ msgstr "Sohbet oluştur?"
 msgid "Enter name for new chat"
 msgstr "Yeni sohbet için ad girin"
 
-#: src/dialogs.py:108 src/window.ui:787
+#: src/dialogs.py:108 src/window.ui:686
 msgid "Create"
 msgstr "Oluştur"
 
@@ -2270,7 +2179,7 @@ msgstr "Yerel örneği kullan"
 msgid "Connect"
 msgstr "Bağlan"
 
-#: src/dialogs.py:244 src/window.ui:80
+#: src/dialogs.py:244
 msgid "Select Model"
 msgstr "Model Seçin"
 
@@ -2332,63 +2241,59 @@ msgstr ""
 "Eklemek istediğinizden emin misiniz\n"
 "'{}' ?"
 
-#: src/window.ui:40
+#: src/window.ui:41
 msgid "Menu"
 msgstr "Menü"
 
-#: src/window.ui:70
+#: src/window.ui:62
 msgid "Toggle Sidebar"
 msgstr "Kenar Çubuğunu Aç / Kapat"
 
-#: src/window.ui:115 src/window.ui:121 src/window.ui:516 src/window.ui:973
-msgid "Manage Models"
-msgstr "Modelleri Yönet"
-
-#: src/window.ui:163
+#: src/window.ui:70
 msgid "Chat Menu"
 msgstr "Sohbet Menüsü"
 
-#: src/window.ui:239
+#: src/window.ui:124
 msgid "Attach File"
 msgstr "Dosya Ekle"
 
-#: src/window.ui:275
+#: src/window.ui:160
 msgid "Message text box"
 msgstr "Mesaj giriş kutusu"
 
-#: src/window.ui:288 src/window.ui:1168
+#: src/window.ui:173 src/window.ui:1073
 msgid "Send Message"
 msgstr "Mesaj Gönder"
 
-#: src/window.ui:337 src/window.ui:979 src/window.ui:1115
+#: src/window.ui:222 src/window.ui:878 src/window.ui:1014
 msgid "Preferences"
 msgstr "Tercihler"
 
-#: src/window.ui:340 src/window.ui:1093
+#: src/window.ui:225 src/window.ui:992
 msgid "General"
 msgstr "Genel"
 
-#: src/window.ui:346
+#: src/window.ui:231
 msgid "Use Remote Connection to Ollama"
 msgstr "Ollama'ya Uzaktan Bağlantı Kullanın"
 
-#: src/window.ui:352
+#: src/window.ui:237
 msgid "URL of Remote Instance"
 msgstr "Uzak Örnek URL'si"
 
-#: src/window.ui:359
+#: src/window.ui:244
 msgid "Bearer Token (Optional)"
 msgstr "Bearer Token (Opsiyonel)"
 
-#: src/window.ui:369
+#: src/window.ui:254
 msgid "Run Alpaca In Background"
 msgstr "Alpaka'yı Arka Planda Çalıştırın"
 
-#: src/window.ui:380
+#: src/window.ui:265
 msgid "Temperature"
 msgstr "Sıcaklık"
 
-#: src/window.ui:381
+#: src/window.ui:266
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
@@ -2396,11 +2301,11 @@ msgstr ""
 "Modelin sıcaklığı. Sıcaklığın artırılması modelin daha yaratıcı cevaplar "
 "vermesini sağlayacaktır. (Varsayılan: 0,8)"
 
-#: src/window.ui:396
+#: src/window.ui:281
 msgid "Seed"
 msgstr "Tohum"
 
-#: src/window.ui:397
+#: src/window.ui:282
 msgid ""
 "Sets the random number seed to use for generation. Setting this to a "
 "specific number will make the model generate the same text for the same "
@@ -2410,11 +2315,11 @@ msgstr ""
 "sayıya ayarlamak, modelin aynı komut için aynı metni oluşturmasını sağlar. "
 "(Varsayılan: 0 (rastgele))"
 
-#: src/window.ui:411
+#: src/window.ui:296
 msgid "Keep Alive Time"
 msgstr "Canlı Kalma Süresi"
 
-#: src/window.ui:412
+#: src/window.ui:297
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
@@ -2422,15 +2327,15 @@ msgstr ""
 "Modelin komuttan sonra bellekte ne kadar süreyle yüklü kalacağını dakika "
 "cinsinden kontrol eder (Varsayılan: 5)"
 
-#: src/window.ui:428
+#: src/window.ui:313
 msgid "Ollama Instance"
 msgstr "Ollama Örneği"
 
-#: src/window.ui:432
+#: src/window.ui:317
 msgid "Ollama Overrides"
 msgstr "Ollama Geçersiz Kılmaları"
 
-#: src/window.ui:433
+#: src/window.ui:318
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
@@ -2439,35 +2344,43 @@ msgstr ""
 "değişiklik yalnızca entegre örnek için geçerlidir, değişiklik yaparsanız "
 "örnek yeniden başlatılır."
 
-#: src/window.ui:505
+#: src/window.ui:390
 msgid "Manage models dialog"
 msgstr "Modelleri yönetme ekranı"
 
-#: src/window.ui:526 src/window.ui:667
+#: src/window.ui:401 src/window.ui:872
+msgid "Manage Models"
+msgstr "Modelleri Yönet"
+
+#: src/window.ui:411 src/window.ui:566
 msgid "Create Model"
 msgstr "Model Oluştur"
 
-#: src/window.ui:533
+#: src/window.ui:418
 msgid "Search Model"
 msgstr "Model Ara"
 
-#: src/window.ui:542
+#: src/window.ui:427
 msgid "Model search bar"
 msgstr "Model arama çubuğu"
 
-#: src/window.ui:549 src/window.ui:551
+#: src/window.ui:434 src/window.ui:436
 msgid "Search models"
 msgstr "Model arama"
 
-#: src/window.ui:599
+#: src/window.ui:484
 msgid "No Models Found"
 msgstr "Model Bulunamadı"
 
-#: src/window.ui:600
-msgid "Try a different search"
-msgstr "Farklı bir arama deneyin"
+#: src/window.ui:485
+msgid "Try a different search or pull an unlisted model from it's name"
+msgstr ""
 
-#: src/window.ui:645
+#: src/window.ui:492
+msgid "Pull Model From Name"
+msgstr ""
+
+#: src/window.ui:544
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
@@ -2475,19 +2388,19 @@ msgstr ""
 "Bu modeli indirerek, modelin web sitesinde bulunan lisans sözleşmesini kabul "
 "etmiş olursunuz."
 
-#: src/window.ui:702
+#: src/window.ui:601
 msgid "Base"
 msgstr "Temel"
 
-#: src/window.ui:721
+#: src/window.ui:620
 msgid "Name"
 msgstr "İsim"
 
-#: src/window.ui:727
+#: src/window.ui:626
 msgid "Context"
 msgstr "İçerik"
 
-#: src/window.ui:771
+#: src/window.ui:670
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -2497,35 +2410,35 @@ msgstr ""
 "talimatlarını otomatik olarak doldurur. Emin değilseniz, daha fazla bilgi "
 "için lütfen modelin web sitesini veya Ollama belgelerini ziyaret edin."
 
-#: src/window.ui:810
+#: src/window.ui:709
 msgid "File preview dialog"
 msgstr "Dosya önizleme ekranı"
 
-#: src/window.ui:822
+#: src/window.ui:721
 msgid "Open With Default App"
 msgstr "Varsayılan Uygulama ile Aç"
 
-#: src/window.ui:830
+#: src/window.ui:729
 msgid "Remove Attachment"
 msgstr "Eki Kaldır"
 
-#: src/window.ui:892
+#: src/window.ui:791
 msgid "Previous"
 msgstr "Önceki"
 
-#: src/window.ui:935
+#: src/window.ui:834
 msgid "Welcome to Alpaca"
 msgstr "Alpaka'ya Hoş Geldiniz"
 
-#: src/window.ui:936
+#: src/window.ui:835
 msgid "Powered by Ollama"
 msgstr "Ollama tarafından desteklenmektedir"
 
-#: src/window.ui:939
+#: src/window.ui:838
 msgid "Ollama Website"
 msgstr "Ollama Web Sitesi"
 
-#: src/window.ui:956
+#: src/window.ui:855
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2536,90 +2449,173 @@ msgstr ""
 "değildir. Lütfen dikkatli olun ve kodu çalıştırmadan önce dikkatlice "
 "inceleyin."
 
-#: src/window.ui:969
+#: src/window.ui:868
 msgid "Import Chat"
 msgstr "Sohbet İçe Aktar"
 
-#: src/window.ui:983
+#: src/window.ui:882
 msgid "Keyboard Shortcuts"
 msgstr "Klavye Kısayolları"
 
-#: src/window.ui:987
+#: src/window.ui:886
 msgid "About Alpaca"
 msgstr "Alpaka Hakkında"
 
-#: src/window.ui:995 src/window.ui:1021
+#: src/window.ui:894 src/window.ui:920
 msgid "Rename Chat"
 msgstr "Sohbeti Yeniden Adlandır"
 
-#: src/window.ui:999 src/window.ui:1025
+#: src/window.ui:898 src/window.ui:924
 msgid "Duplicate Chat"
 msgstr "Sohbeti Çoğalt"
 
-#: src/window.ui:1003 src/window.ui:1029
+#: src/window.ui:902 src/window.ui:928
 msgid "Export Chat"
 msgstr "Sohbet Dışa Aktar"
 
-#: src/window.ui:1007
+#: src/window.ui:906
 msgid "Clear Chat"
 msgstr "Sohbet Temizle"
 
-#: src/window.ui:1013 src/window.ui:1035
+#: src/window.ui:912 src/window.ui:934
 msgid "Delete Chat"
 msgstr "Sohbeti Sil"
 
-#: src/window.ui:1043
+#: src/window.ui:942
 msgid "From Existing Model"
 msgstr "Mevcut Modelden"
 
-#: src/window.ui:1047
+#: src/window.ui:946
 msgid "From GGUF File"
 msgstr "GGUF Dosyasından"
 
-#: src/window.ui:1051
+#: src/window.ui:950
 msgid "From Name"
 msgstr "İsimden"
 
-#: src/window.ui:1097
+#: src/window.ui:996
 msgid "Close application"
 msgstr "Uygulamayı kapat"
 
-#: src/window.ui:1103
+#: src/window.ui:1002
 msgid "Import chat"
 msgstr "Sohbet içe aktarma"
 
-#: src/window.ui:1109
+#: src/window.ui:1008
 msgid "Clear chat"
 msgstr "Sohbeti temizle"
 
-#: src/window.ui:1121
+#: src/window.ui:1020
 msgid "New chat"
 msgstr "Yeni sohbet"
 
-#: src/window.ui:1127
+#: src/window.ui:1026
 msgid "Show shortcuts window"
 msgstr "Kısayolları göster penceresi"
 
-#: src/window.ui:1133
+#: src/window.ui:1032
 msgid "Manage models"
 msgstr "Modelleri yönet"
 
-#: src/window.ui:1139
+#: src/window.ui:1038
 msgid "Toggle sidebar"
 msgstr "Kenar çubuğunu aç / kapat"
 
-#: src/window.ui:1146
+#: src/window.ui:1044
+msgid "Rename chat"
+msgstr ""
+
+#: src/window.ui:1051
 msgid "Editor"
 msgstr "Editör"
 
-#: src/window.ui:1150
+#: src/window.ui:1055
 msgid "Copy"
 msgstr "Kopyala"
 
-#: src/window.ui:1156
+#: src/window.ui:1061
 msgid "Paste"
 msgstr "Yapıştır"
 
-#: src/window.ui:1162
+#: src/window.ui:1067
 msgid "Insert new line"
 msgstr "Yeni satır ekle"
+
+#~ msgid "Built in Ollama kopyası"
+#~ msgstr "Yerleşik Ollama örneği"
+
+#~ msgid "Message edited successfully"
+#~ msgstr "Mesaj başarıyla düzenlendi"
+
+#~ msgid "Select a Model"
+#~ msgstr "Bir Model Seçin"
+
+#~ msgid "Message copied to the clipboard"
+#~ msgstr "Mesaj panoya kopyalandı"
+
+#~ msgid "User message"
+#~ msgstr "Kullanıcı mesajı"
+
+#~ msgid "Remove Message"
+#~ msgstr "Mesajı Sil"
+
+#~ msgid "Copy Message"
+#~ msgstr "Mesajı Kopyala"
+
+#~ msgid "Edit Message"
+#~ msgstr "Mesajı Düzenle"
+
+#~ msgid "Regenerate Message"
+#~ msgstr "Mesajı Yeniden Oluştur"
+
+#~ msgid "Image"
+#~ msgstr "Görsel"
+
+#~ msgid "Missing Image"
+#~ msgstr "Kayıp Görüntü"
+
+#~ msgid "Missing image"
+#~ msgstr "Kayıp görüntü"
+
+#~ msgid "Response message"
+#~ msgstr "Yanıt mesajı"
+
+#~ msgid "{}Code Block"
+#~ msgstr "{}Kod Bloğu"
+
+#~ msgid "Code Block"
+#~ msgstr "Kod Bloğu"
+
+#~ msgid "Regenerate Response"
+#~ msgstr "Yanıtı Yeniden Oluştur"
+
+#~ msgid "Message cannot be regenerated while receiving a response"
+#~ msgstr "Yanıt alınırken mesaj yeniden oluşturulamaz"
+
+#~ msgid "Send prompt: '{}'"
+#~ msgstr "Mesajı gönder: '{}"
+
+#~ msgid "Open Model Manager"
+#~ msgstr "Model Yöneticisini Aç"
+
+#~ msgid "Try one of these prompts"
+#~ msgstr "Bu mesajlardan birini deneyin"
+
+#~ msgid ""
+#~ "It looks like you don't have any models downloaded yet. Download models "
+#~ "to get started!"
+#~ msgstr ""
+#~ "Görünüşe göre henüz indirilmiş bir modeliniz yok. Başlamak için modelleri "
+#~ "indirin!"
+
+#~ msgid "Copy of {}"
+#~ msgstr "Kopyası {}"
+
+#~ msgid "Chat exported successfully"
+#~ msgstr "Sohbet başarıyla dışa aktarıldı"
+
+#~ msgid "Chat imported successfully"
+#~ msgstr "Sohbet başarıyla içe aktarıldı"
+
+#~ msgid "Try a different search"
+#~ msgstr "Farklı bir arama deneyin"
