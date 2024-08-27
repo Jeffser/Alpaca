@@ -49,6 +49,7 @@ Language               | Contributors
 🇮🇳 Hindi                | [Aritra Saha](https://github.com/olumolu)
 🇹🇷 Turkish              | [YusaBecerikli](https://github.com/YusaBecerikli)
 🇺🇦 Ukrainian            | [Simon](https://github.com/OriginalSimon)
+🇩🇪 German               | [Marcel Margenberg](https://github.com/MehrzweckMandala)
 
 ---
 
