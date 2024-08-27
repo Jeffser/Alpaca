@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk
-import logging, os, datetime, re, shutil, threading
+import logging, os, datetime, re, shutil, threading, sys
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .table_widget import TableWidget
 
@@ -440,6 +440,8 @@ class message(Gtk.Overlay):
                 self.dt = datetime.datetime.now()
                 self.add_footer(self.dt)
                 window.save_history(chat)
+        else:
+            sys.exit()
 
     def set_text(self, text:str=None):
         self.text = text
