@@ -116,15 +116,16 @@ def new_chat(self):
 
 # STOP PULL MODEL | WORKS
 
-def stop_pull_model_response(self, dialog, task, model_name):
+def stop_pull_model_response(self, dialog, task, pulling_model):
     if dialog.choose_finish(task) == "stop":
-        self.stop_pull_model(model_name)
+        if len(list(pulling_model.get_parent())) == 1:
+            pulling_model.get_parent().set_visible(False)
+        pulling_model.get_parent().remove(pulling_model)
 
-def stop_pull_model(self, model_name):
-    #self.pulling_model_list_box.unselect_all()
+def stop_pull_model(self, pulling_model):
     dialog = Adw.AlertDialog(
         heading=_("Stop Download?"),
-        body=_("Are you sure you want to stop pulling '{} ({})'?").format(model_name.split(":")[0].capitalize(), model_name.split(":")[1]),
+        body=_("Are you sure you want to stop pulling '{}'?").format(self.convert_model_name(pulling_model.get_name(), 0)),
         close_response="cancel"
     )
     dialog.add_response("cancel", _("Cancel"))
@@ -134,19 +135,19 @@ def stop_pull_model(self, model_name):
     dialog.choose(
         parent = self.manage_models_dialog,
         cancellable = None,
-        callback = lambda dialog, task, model_name = model_name: stop_pull_model_response(self, dialog, task, model_name)
+        callback = lambda dialog, task, model=pulling_model: stop_pull_model_response(self, dialog, task, model)
     )
 
 # DELETE MODEL | WORKS
 
 def delete_model_response(self, dialog, task, model_name):
     if dialog.choose_finish(task) == "delete":
-        self.delete_model(model_name)
+        self.model_manager.remove_local_model(model_name)
 
 def delete_model(self, model_name):
     dialog = Adw.AlertDialog(
         heading=_("Delete Model?"),
-        body=_("Are you sure you want to delete '{}'?").format(model_name),
+        body=_("Are you sure you want to delete '{}'?").format(self.convert_model_name(model_name, 0)),
         close_response="cancel"
     )
     dialog.add_response("cancel", _("Cancel"))

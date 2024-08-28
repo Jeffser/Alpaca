@@ -116,9 +116,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_link_button = Gtk.Template.Child()
 
     manage_models_dialog = Gtk.Template.Child()
-    pulling_model_list_box = Gtk.Template.Child()
-    local_model_list_box = Gtk.Template.Child()
-    available_model_list_box = Gtk.Template.Child()
+    model_scroller = Gtk.Template.Child()
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = None
@@ -284,7 +282,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for line in modelfile_raw.split('\n'):
             if not line.startswith('SYSTEM') and not line.startswith('FROM'):
                 modelfile.append(line)
-        self.pulling_model_list_box.set_visible(True)
+        #self.pulling_model_list_box.set_visible(True)
         model_row = Adw.ActionRow(
             title = name
         )
@@ -309,7 +307,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.pulling_models[name] = {"row": model_row, "progress_bar": progress_bar, "overlay": overlay}
         overlay.set_child(model_row)
         overlay.add_overlay(progress_bar)
-        self.pulling_model_list_box.append(overlay)
+        #self.pulling_model_list_box.append(overlay)
         self.navigation_view_manage_models.pop()
         thread.start()
 
@@ -334,22 +332,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def model_search_toggle(self, button):
         self.model_searchbar.set_search_mode(button.get_active())
-        self.pulling_model_list_box.set_visible(not button.get_active() and len(self.pulling_models) > 0)
-        self.local_model_list_box.set_visible(not button.get_active())
+        self.model_manager.pulling_list.set_visible(not button.get_active() and len(list(self.model_manager.pulling_list)) > 0)
+        self.model_manager.local_list.set_visible(not button.get_active() and len(list(self.model_manager.local_list)) > 0)
 
     @Gtk.Template.Callback()
     def model_search_changed(self, entry):
         results = 0
-        for i, key in enumerate(self.available_models.keys()):
-            row = self.available_model_list_box.get_row_at_index(i)
-            row.set_visible(re.search(entry.get_text(), '{} {} {}'.format(row.get_title(), (_("image") if self.available_models[key]['image'] else " "), row.get_subtitle()), re.IGNORECASE))
-            if row.get_visible():
+        for model in list(self.model_manager.available_list):
+            model.set_visible(re.search(entry.get_text(), '{} {} {} {} {}'.format(model.get_name(), model.model_title, model.model_author, model.model_description, (_('image') if model.image_recognition else '')), re.IGNORECASE))
+            if model.get_visible():
                 results += 1
         if entry.get_text() and results == 0:
-            self.available_model_list_box.set_visible(False)
             self.no_results_page.set_visible(True)
+            self.model_scroller.set_visible(False)
         else:
-            self.available_model_list_box.set_visible(True)
+            self.model_scroller.set_visible(True)
             self.no_results_page.set_visible(False)
 
     def verify_if_image_can_be_used(self):
@@ -514,38 +511,6 @@ Generate a title following these rules:
             new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
             self.chat_list_box.rename_chat(old_chat_name, new_chat_name)
 
-    def update_list_local_models(self):
-        logger.debug("Updating list of local models")
-        response = connection_handler.simple_get(f"{connection_handler.URL}/api/tags")
-        self.model_selector.clear_list()
-
-        if response.status_code == 200:
-            self.local_model_list_box.remove_all()
-            if len(json.loads(response.text)['models']) == 0:
-                self.local_model_list_box.set_visible(False)
-            else:
-                self.local_model_list_box.set_visible(True)
-            for model in json.loads(response.text)['models']:
-                model_name = self.convert_model_name(model["name"], 0)
-                model_row = Adw.ActionRow(
-                    title = "<b>{}</b>".format(model_name.split(" (")[0]),
-                    subtitle = model_name.split(" (")[1][:-1]
-                )
-                button = Gtk.Button(
-                    icon_name = "user-trash-symbolic",
-                    vexpand = False,
-                    valign = 3,
-                    css_classes = ["error", "circular"],
-                    tooltip_text = _("Remove '{}'").format(model_name)
-                )
-                button.connect("clicked", lambda button=button, model_name=model["name"]: dialogs.delete_model(self, model_name))
-                model_row.add_suffix(button)
-                self.local_model_list_box.append(model_row)
-
-                self.model_selector.add_model(model["name"])
-        else:
-            self.connection_error()
-
     def save_server_config(self):
         with open(os.path.join(self.config_dir, "server.json"), "w+", encoding="utf-8") as f:
             json.dump({'remote_url': self.remote_url, 'remote_bearer_token': self.remote_bearer_token, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background, 'model_tweaks': self.model_tweaks, 'ollama_overrides': local_instance.overrides}, f, indent=6)
@@ -555,7 +520,7 @@ Generate a title following these rules:
             response = connection_handler.simple_get(f"{connection_handler.URL}/api/tags")
             if response.status_code == 200:
                 self.save_server_config()
-                self.update_list_local_models()
+                #self.update_list_local_models()
             return response.status_code == 200
         except Exception as e:
             logger.error(e)
@@ -613,144 +578,6 @@ Generate a title following these rules:
             GLib.idle_add(chat.show_regenerate_button, message_element)
             GLib.idle_add(self.connection_error)
 
-    def pull_model_update(self, data, model_name):
-        if 'error' in data:
-            self.pulling_models[model_name]['error'] = data['error']
-            return
-        if model_name in self.pulling_models.keys():
-            if 'completed' in data and 'total' in data:
-                GLib.idle_add(self.pulling_models[model_name]['row'].set_subtitle, '<tt>{}%</tt>'.format(round(data['completed'] / data['total'] * 100, 2)))
-                GLib.idle_add(self.pulling_models[model_name]['progress_bar'].set_fraction, (data['completed'] / data['total']))
-            else:
-                GLib.idle_add(self.pulling_models[model_name]['row'].set_subtitle, '{}'.format(data['status'].capitalize()))
-                GLib.idle_add(self.pulling_models[model_name]['progress_bar'].pulse)
-        else:
-            if len(list(self.pulling_models.keys())) == 0:
-                GLib.idle_add(self.pulling_model_list_box.set_visible, False)
-
-    def pull_model_process(self, model, modelfile):
-        if modelfile:
-            data = {"name": model, "modelfile": modelfile}
-            response = connection_handler.stream_post(f"{connection_handler.URL}/api/create", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
-        else:
-            data = {"name": model}
-            response = connection_handler.stream_post(f"{connection_handler.URL}/api/pull", data=json.dumps(data), callback=lambda data, model_name=model: self.pull_model_update(data, model_name))
-        GLib.idle_add(self.update_list_local_models)
-
-        if response.status_code == 200 and 'error' not in self.pulling_models[model]:
-            GLib.idle_add(self.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model), Gio.ThemedIcon.new("emblem-ok-symbolic"))
-            GLib.idle_add(self.show_toast, _("Model '{}' pulled successfully.").format(model), self.manage_models_overlay)
-        elif response.status_code == 200 and self.pulling_models[model]['error']:
-            GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}': {}").format(model, self.pulling_models[model]['error']), Gio.ThemedIcon.new("dialog-error-symbolic"))
-            GLib.idle_add(self.show_toast, _("Error pulling '{}': {}").format(model, self.pulling_models[model]['error']), self.manage_models_overlay)
-        else:
-            GLib.idle_add(self.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(model), Gio.ThemedIcon.new("dialog-error-symbolic"))
-            GLib.idle_add(self.show_toast, _("Error pulling '{}'").format(model), self.manage_models_overlay)
-            GLib.idle_add(self.manage_models_dialog.close)
-            GLib.idle_add(self.connection_error)
-
-        GLib.idle_add(self.pulling_models[model]['overlay'].get_parent().get_parent().remove, self.pulling_models[model]['overlay'].get_parent())
-        del self.pulling_models[model]
-        if len(list(self.pulling_models.keys())) == 0:
-            GLib.idle_add(self.pulling_model_list_box.set_visible, False)
-
-    def pull_model(self, model):
-        if model in self.pulling_models.keys() or model in self.model_selector.get_model_list() or ":" not in model:
-            return
-        logger.info("Pulling model")
-        self.pulling_model_list_box.set_visible(True)
-        #self.pulling_model_list_box.connect('row_selected', lambda list_box, row: dialogs.stop_pull_model(self, row.get_name()) if row else None) #It isn't working for some reason
-        model_name = self.convert_model_name(model, 0)
-        model_row = Adw.ActionRow(
-            title = "<b>{}</b> <small>{}</small>".format(model_name.split(" (")[0], model_name.split(" (")[1][:-1]),
-            name = model
-        )
-        thread = threading.Thread(target=self.pull_model_process, kwargs={"model": model, "modelfile": None})
-        overlay = Gtk.Overlay()
-        progress_bar = Gtk.ProgressBar(
-            valign = 2,
-            show_text = False,
-            margin_start = 10,
-            margin_end = 10,
-            css_classes = ["osd", "horizontal", "bottom"]
-        )
-        button = Gtk.Button(
-            icon_name = "media-playback-stop-symbolic",
-            vexpand = False,
-            valign = 3,
-            css_classes = ["error", "circular"],
-            tooltip_text = _("Stop Pulling '{}'").format(model_name)
-        )
-        button.connect("clicked", lambda button, model_name=model : dialogs.stop_pull_model(self, model_name))
-        model_row.add_suffix(button)
-        self.pulling_models[model] = {"row": model_row, "progress_bar": progress_bar, "overlay": overlay}
-        overlay.set_child(model_row)
-        overlay.add_overlay(progress_bar)
-        self.pulling_model_list_box.append(overlay)
-        thread.start()
-
-    def confirm_pull_model(self, model_name):
-        logger.debug("Confirming pull model")
-        self.navigation_view_manage_models.pop()
-        self.model_tag_list_box.unselect_all()
-        self.pull_model(model_name)
-
-    def list_available_model_tags(self, model_name):
-        logger.debug("Listing available model tags")
-        self.navigation_view_manage_models.push_by_tag('model_tags_page')
-        self.navigation_view_manage_models.find_page('model_tags_page').set_title(model_name.replace("-", " ").title())
-        self.model_link_button.set_name(self.available_models[model_name]['url'])
-        self.model_link_button.set_tooltip_text(self.available_models[model_name]['url'])
-        self.available_model_list_box.unselect_all()
-        self.model_tag_list_box.remove_all()
-        tags = self.available_models[model_name]['tags']
-
-        for tag_data in tags:
-            if f"{model_name}:{tag_data[0]}" not in self.model_selector.get_model_list():
-                tag_row = Adw.ActionRow(
-                    title = tag_data[0],
-                    subtitle = tag_data[1],
-                    name = f"{model_name}:{tag_data[0]}"
-                )
-                download_icon = Gtk.Image.new_from_icon_name("folder-download-symbolic")
-                tag_row.add_suffix(download_icon)
-                download_icon.update_property([4], [_("Download {}:{}").format(model_name, tag_data[0])])
-
-                gesture_click = Gtk.GestureClick.new()
-                gesture_click.connect("pressed", lambda *_, name=f"{model_name}:{tag_data[0]}" : self.confirm_pull_model(name))
-
-                event_controller_key = Gtk.EventControllerKey.new()
-                event_controller_key.connect("key-pressed", lambda controller, key, *_, name=f"{model_name}:{tag_data[0]}" : self.confirm_pull_model(name) if key in (Gdk.KEY_space, Gdk.KEY_Return) else None)
-
-                tag_row.add_controller(gesture_click)
-                tag_row.add_controller(event_controller_key)
-
-                self.model_tag_list_box.append(tag_row)
-        return True
-
-    def update_list_available_models(self):
-        logger.debug("Updating list of available models")
-        self.available_model_list_box.remove_all()
-        for name, model_info in self.available_models.items():
-            model = Adw.ActionRow(
-                title = "<b>{}</b> <small>by {}</small>".format(name.replace("-", " ").title(), model_info['author']),
-                subtitle = available_models_descriptions.descriptions[name] + ("\n\n<b>{}</b>".format(_("Image Recognition")) if model_info['image'] else ""),
-                name = name
-            )
-            next_icon = Gtk.Image.new_from_icon_name("go-next")
-            next_icon.set_margin_start(5)
-            next_icon.update_property([4], [_("Enter download menu for {}").format(name.replace("-", ""))])
-            model.add_suffix(next_icon)
-
-            gesture_click = Gtk.GestureClick.new()
-            gesture_click.connect("pressed", lambda *_, name=name : self.list_available_model_tags(name))
-
-            event_controller_key = Gtk.EventControllerKey.new()
-            event_controller_key.connect("key-pressed", lambda controller, key, *_, name=name : self.list_available_model_tags(name) if key in (Gdk.KEY_space, Gdk.KEY_Return) else None)
-
-            model.add_controller(gesture_click)
-            model.add_controller(event_controller_key)
-            self.available_model_list_box.append(model)
 
     def save_history(self, chat:chat_widget.chat=None):
         logger.debug("Saving history")
@@ -793,8 +620,7 @@ Generate a title following these rules:
                         selected_chat = list(data['chats'])[0]
                     if len(data['chats'][selected_chat]['messages'].keys()) > 0:
                         last_model_used = data['chats'][selected_chat]['messages'][list(data["chats"][selected_chat]["messages"])[-1]]["model"]
-                        self.model_selector.change_model(last_model_used)
-
+                        self.model_manager.change_model(last_model_used)
                     for chat_name in data['chats']:
                         self.chat_list_box.append_chat(chat_name)
                         chat_container = self.chat_list_box.get_chat_by_name(chat_name)
@@ -829,16 +655,6 @@ Generate a title following these rules:
         logger.debug("Stopping model pull")
         self.pulling_models[model_name]['overlay'].get_parent().get_parent().remove(self.pulling_models[model_name]['overlay'].get_parent())
         del self.pulling_models[model_name]
-
-    def delete_model(self, model_name):
-        logger.debug("Deleting model")
-        response = connection_handler.simple_delete(f"{connection_handler.URL}/api/delete", data={"name": model_name})
-        self.update_list_local_models()
-        if response.status_code == 200:
-            self.show_toast(_("Model deleted successfully"), self.manage_models_overlay)
-        else:
-            self.manage_models_dialog.close()
-            self.connection_error()
 
     def chat_click_handler(self, gesture, n_press, x, y):
         chat_row = gesture.get_widget()
@@ -1056,8 +872,6 @@ Generate a title following these rules:
         message_widget.window = self
         chat_widget.window = self
         model_widget.window = self
-        self.model_selector = model_widget.model_selector_button()
-        self.header_bar.set_title_widget(self.model_selector)
 
         self.chat_list_box = chat_widget.chat_list()
         self.chat_list_container.set_child(self.chat_list_box)
@@ -1145,5 +959,16 @@ Generate a title following these rules:
             self.welcome_dialog.present(self)
         if self.verify_connection() is False:
             self.connection_error()
-        self.update_list_available_models()
+        self.model_manager = model_widget.model_manager_container()
+        self.model_scroller.set_child(self.model_manager)
+        self.model_manager.update_local_list()
+        self.model_manager.update_available_list()
+
+        """
+        response = connection_handler.simple_get(f"{connection_handler.URL}/api/tags")
+        self.model_selector.clear_list()
+
+        to update local models
+        """
+
         self.load_history()

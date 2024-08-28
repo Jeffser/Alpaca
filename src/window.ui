@@ -440,65 +440,38 @@
                         </object>
                       </child>
                       <property name="content">
-                        <object class="GtkScrolledWindow">
+                        <object class="GtkBox">
                           <property name="hexpand">true</property>
                           <property name="vexpand">true</property>
                           <child>
-                            <object class="GtkBox">
-                              <property name="margin-start">12</property>
-                              <property name="margin-end">12</property>
-                              <property name="margin-top">12</property>
-                              <property name="margin-bottom">12</property>
-                              <property name="orientation">1</property>
-                              <property name="spacing">12</property>
-                              <child>
-                                <object class="GtkListBox" id="pulling_model_list_box">
-                                  <property name="visible">false</property>
-                                  <property name="selection-mode">none</property>
-                                  <style>
-                                    <class name="boxed-list"/>
-                                  </style>
-                                </object>
-                              </child>
-                              <child>
-                                <object class="GtkListBox" id="local_model_list_box">
-                                  <property name="selection-mode">none</property>
-                                  <style>
-                                    <class name="boxed-list"/>
-                                  </style>
-                                </object>
-                              </child>
-                              <child>
-                                <object class="GtkListBox" id="available_model_list_box">
-                                  <property name="selection-mode">none</property>
-                                  <style>
-                                    <class name="boxed-list"/>
-                                  </style>
-                                </object>
-                              </child>
-                              <child>
-                                <object class="AdwStatusPage" id="no_results_page">
-                                  <property name="visible">false</property>
-                                  <property name="vexpand">true</property>
-                                  <property name="icon-name">edit-find-symbolic</property>
-                                  <property name="title" translatable="yes">No Models Found</property>
-                                  <property name="description" translatable="yes">Try a different search or pull an unlisted model from it's name</property>
+                            <object class="GtkScrolledWindow" id="model_scroller">
+                              <property name="hexpand">true</property>
+                              <property name="vexpand">true</property>
+                            </object>
+                          </child>
+                          <child>
+                            <object class="AdwStatusPage" id="no_results_page">
+                              <property name="visible">false</property>
+                              <property name="vexpand">true</property>
+                              <property name="hexpand">true</property>
+                              <property name="icon-name">edit-find-symbolic</property>
+                              <property name="title" translatable="yes">No Models Found</property>
+                              <property name="description" translatable="yes">Try a different search or pull an unlisted model from it's name</property>
+                              <property name="child">
+                                <object class="GtkButton">
+                                  <property name="tooltip-text">Pull Model From Name</property>
+                                  <property name="action-name">app.create_model_from_name</property>
+                                  <property name="halign">center</property>
                                   <property name="child">
-                                    <object class="GtkButton">
-                                      <property name="tooltip-text">Pull Model From Name</property>
-                                      <property name="action-name">app.create_model_from_name</property>
-                                      <property name="child">
-                                        <object class="GtkLabel">
-                                          <property name="label" translatable="yes">Pull Model From Name</property>
-                                        </object>
-                                      </property>
-                                      <style>
-                                        <class name="suggested-action"/>
-                                      </style>
+                                    <object class="GtkLabel">
+                                      <property name="label" translatable="yes">Pull Model From Name</property>
                                     </object>
                                   </property>
+                                  <style>
+                                    <class name="suggested-action"/>
+                                  </style>
                                 </object>
-                              </child>
+                              </property>
                             </object>
                           </child>
                         </object>
@@ -542,6 +515,9 @@
                                   <property name="margin-start">12</property>
                                   <property name="margin-end">12</property>
                                   <property name="label" translatable="yes">By downloading this model you accept the license agreement available on the model's website.</property>
+                                  <style>
+                                    <class name="dim-label"/>
+                                  </style>
                                 </object>
                               </child>
                               <child>

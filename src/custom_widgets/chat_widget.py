@@ -155,7 +155,7 @@ class chat(Gtk.ScrolledWindow):
                     message_element.set_text(message_data['content'])
                     message_element.add_footer(datetime.datetime.strptime(message_data['date'] + (":00" if message_data['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
         else:
-            self.show_welcome_screen(len(window.model_selector.get_model_list()) > 0)
+            self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
 
     def messages_to_dict(self) -> dict:
         messages_dict = {}
@@ -269,7 +269,7 @@ class chat_list(Gtk.ListBox):
         tab = chat_tab(chat_window)
         self.prepend(tab)
         self.tab_list.insert(0, tab)
-        chat_window.show_welcome_screen(len(window.model_selector.get_model_list()) > 0)
+        chat_window.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
         window.chat_stack.add_child(chat_window)
         window.chat_list_box.select_row(tab)
         return chat_window
@@ -399,5 +399,4 @@ class chat_list(Gtk.ListBox):
                 window.switch_send_stop_button(not row.chat_window.busy)
                 if len(row.chat_window.messages) > 0:
                     last_model_used = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
-                    window.model_selector.change_model(last_model_used)
-
+                    window.model_manager.change_model(last_model_used)
