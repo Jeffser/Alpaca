@@ -45,7 +45,9 @@ translators = [
     'Yuehao Sui (Simplified Chinese) https://github.com/8ar10der',
     'Aleksana (Simplified Chinese) https://github.com/Aleksanaa',
     'Aritra Saha (Hindi) https://github.com/olumolu',
-    'YusaBecerikli (Turkish) https://github.com/YusaBecerikli'
+    'YusaBecerikli (Turkish) https://github.com/YusaBecerikli',
+    'Simon (Ukrainian) https://github.com/OriginalSimon',
+    'Marcel Margenberg (German) https://github.com/MehrzweckMandala'
 ]
 
 class AlpacaApplication(Adw.Application):
