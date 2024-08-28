@@ -236,7 +236,7 @@ def create_model_from_existing_response(self, dialog, task, dropdown):
 
 def create_model_from_existing(self):
     string_list = Gtk.StringList()
-    for model in self.local_models:
+    for model in self.model_manager.get_model_list():
         string_list.append(self.convert_model_name(model, 0))
 
     dropdown = Gtk.DropDown()

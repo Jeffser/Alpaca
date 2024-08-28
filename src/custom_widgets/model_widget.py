@@ -472,10 +472,11 @@ class model_manager_container(Gtk.Box):
     def change_model(self, model_name:str):
         self.model_selector.change_model(model_name)
 
-    #threading.Thread(target=self.pulling_list.pull_model, args=(url, model_name, modelfile)).start()
     #Important: Call this using a thread, if not the app crashes
     def pull_model(self, url:str, model_name:str, modelfile:str=None): ##TODO, once you make an instance manager remove the url from this
-        if ':' in model_name and model_name not in [model.get_name() for model in list(self.pulling_list)]:
+        if ':' not in model_name:
+            model_name += ':latest'
+        if model_name not in [model.get_name() for model in list(self.pulling_list)] and model_name not in [model.get_name() for model in list(self.local_list)]:
             logger.info("Pulling model: {}".format(model_name))
             model = pulling_model(model_name)
             self.pulling_list.append(model)
@@ -489,14 +490,14 @@ class model_manager_container(Gtk.Box):
 
             if response.status_code == 200 and not model.error:
                 GLib.idle_add(window.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model_name), Gio.ThemedIcon.new("emblem-ok-symbolic"))
-                GLib.idle_add(window.show_toast, _("Model '{}' pulled successfully.").format(model), window.manage_models_overlay)
+                GLib.idle_add(window.show_toast, _("Model '{}' pulled successfully.").format(model_name), window.manage_models_overlay)
                 self.add_local_model(model_name)
             elif response.status_code == 200:
                 GLib.idle_add(window.show_notification, _("Pull Model Error"), _("Failed to pull model '{}': {}").format(model_name, model.error), Gio.ThemedIcon.new("dialog-error-symbolic"))
-                GLib.idle_add(window.show_toast, _("Error pulling '{}': {}").format(model, model.error), window.manage_models_overlay)
+                GLib.idle_add(window.show_toast, _("Error pulling '{}': {}").format(model_name, model.error), window.manage_models_overlay)
             else:
                 GLib.idle_add(window.show_notification, _("Pull Model Error"), _("Failed to pull model '{}' due to network error.").format(model_name), Gio.ThemedIcon.new("dialog-error-symbolic"))
-                GLib.idle_add(window.show_toast, _("Error pulling '{}'").format(model), window.manage_models_overlay)
+                GLib.idle_add(window.show_toast, _("Error pulling '{}'").format(model_name), window.manage_models_overlay)
                 GLib.idle_add(window.manage_models_dialog.close)
                 GLib.idle_add(window.connection_error)
 

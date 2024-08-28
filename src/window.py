@@ -62,7 +62,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     pulling_models = {}
     attachments = {}
     header_bar = Gtk.Template.Child()
-    model_selector = None
 
     #Override elements
     override_HSA_OVERRIDE_GFX_VERSION = Gtk.Template.Child()
@@ -147,7 +146,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         self.chat_list_box.send_tab_to_top(self.chat_list_box.get_selected_row())
 
-        current_model = self.model_selector.get_model()
+        current_model = self.model_manager.get_selected_model()
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
             return
@@ -282,34 +281,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for line in modelfile_raw.split('\n'):
             if not line.startswith('SYSTEM') and not line.startswith('FROM'):
                 modelfile.append(line)
-        #self.pulling_model_list_box.set_visible(True)
-        model_row = Adw.ActionRow(
-            title = name
-        )
-        thread = threading.Thread(target=self.pull_model_process, kwargs={"model": name, "modelfile": '\n'.join(modelfile)})
-        overlay = Gtk.Overlay()
-        progress_bar = Gtk.ProgressBar(
-            valign = 2,
-            show_text = False,
-            margin_start = 10,
-            margin_end = 10,
-            css_classes = ["osd", "horizontal", "bottom"]
-        )
-        button = Gtk.Button(
-            icon_name = "media-playback-stop-symbolic",
-            vexpand = False,
-            valign = 3,
-            css_classes = ["error"],
-            tooltip_text = _("Stop Creating '{}'").format(name)
-        )
-        button.connect("clicked", lambda button, model_name=name : dialogs.stop_pull_model(self, model_name))
-        model_row.add_suffix(button)
-        self.pulling_models[name] = {"row": model_row, "progress_bar": progress_bar, "overlay": overlay}
-        overlay.set_child(model_row)
-        overlay.add_overlay(progress_bar)
-        #self.pulling_model_list_box.append(overlay)
+        threading.Thread(target=self.model_manager.pull_model, kwargs={"url": connection_handler.URL, "model_name": name, "modelfile": '\n'.join(modelfile)}).start()
         self.navigation_view_manage_models.pop()
-        thread.start()
 
     @Gtk.Template.Callback()
     def override_changed(self, entry):
@@ -351,7 +324,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def verify_if_image_can_be_used(self):
         logger.debug("Verifying if image can be used")
-        selected = self.model_selector.get_model()
+        selected = self.model_manager.get_selected_model()
         if selected == None:
             return True
         selected = selected.split(":")[0]
@@ -501,7 +474,7 @@ Generate a title following these rules:
 ```PROMPT
 {message['content']}
 ```"""
-        current_model = self.model_selector.get_model()
+        current_model = self.model_manager.get_selected_model()
         data = {"model": current_model, "prompt": prompt, "stream": False}
         if 'images' in message:
             data["images"] = message['images']
