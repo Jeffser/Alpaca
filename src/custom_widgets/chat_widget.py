@@ -302,6 +302,8 @@ class chat_list(Gtk.ListBox):
             tab.get_child().set_label(new_chat_name)
             tab.get_child().set_tooltip_text(new_chat_name)
             tab.chat_window.set_name(new_chat_name)
+            if os.path.exists(os.path.join(data_dir, "chats", old_chat_name)):
+                shutil.move(os.path.join(data_dir, "chats", old_chat_name), os.path.join(data_dir, "chats", new_chat_name))
 
     def duplicate_chat(self, chat_name:str):
         new_chat_name = window.generate_numbered_name(_("Copy of {}").format(chat_name), [tab.chat_window.get_name() for tab in self.tab_list])

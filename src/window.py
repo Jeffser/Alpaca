@@ -159,7 +159,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 if self.model_manager.verify_if_image_can_be_used():
                     attached_images.append(os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id, name))
             else:
-                attached_files[name] = content['type']
+                attached_files[os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id, name)] = content['type']
             if not os.path.exists(os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id)):
                 os.makedirs(os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id))
             shutil.copy(content['path'], os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id, name))
