@@ -83,6 +83,7 @@ class model_selector_button(Gtk.MenuButton):
         elif len(list(listbox)) == 0:
             self.get_child().set_label(_("Select a Model"))
             self.set_tooltip_text(_("Select a Model"))
+        window.model_manager.verify_if_image_can_be_used()
 
     def add_model(self, model_name:str):
         model_row = Gtk.ListBoxRow(
@@ -471,6 +472,23 @@ class model_manager_container(Gtk.Box):
 
     def change_model(self, model_name:str):
         self.model_selector.change_model(model_name)
+
+    def verify_if_image_can_be_used(self):
+        logger.debug("Verifying if image can be used")
+        selected = self.get_selected_model()
+        if selected == None:
+            return False
+        selected = selected.split(":")[0]
+        with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
+            if selected in [key for key, value in json.load(f).items() if value["image"]]:
+                for name, content in window.attachments.items():
+                    if content['type'] == 'image':
+                        content['button'].set_css_classes(["flat"])
+                return True
+            for name, content in window.attachments.items():
+                if content['type'] == 'image':
+                    content['button'].set_css_classes(["flat", "error"])
+            return False
 
     #Important: Call this using a thread, if not the app crashes
     def pull_model(self, url:str, model_name:str, modelfile:str=None): ##TODO, once you make an instance manager remove the url from this

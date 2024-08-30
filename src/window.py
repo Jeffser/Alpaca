@@ -156,8 +156,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         attached_files = {}
         for name, content in self.attachments.items():
             if content["type"] == 'image':
-                if self.verify_if_image_can_be_used():
-                    attached_images.append(name)
+                if self.model_manager.verify_if_image_can_be_used():
+                    attached_images.append(os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id, name))
             else:
                 attached_files[name] = content['type']
             if not os.path.exists(os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id)):
@@ -321,22 +321,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             self.model_scroller.set_visible(True)
             self.no_results_page.set_visible(False)
-
-    def verify_if_image_can_be_used(self):
-        logger.debug("Verifying if image can be used")
-        selected = self.model_manager.get_selected_model()
-        if selected == None:
-            return True
-        selected = selected.split(":")[0]
-        if selected in [key for key, value in self.available_models.items() if value["image"]]:
-            for name, content in self.attachments.items():
-                if content['type'] == 'image':
-                    content['button'].set_css_classes(["flat"])
-            return True
-        for name, content in self.attachments.items():
-            if content['type'] == 'image':
-                content['button'].set_css_classes(["flat", "error"])
-        return False
 
     def convert_model_name(self, name:str, mode:int) -> str: # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag
         try:
@@ -817,7 +801,7 @@ Generate a title following these rules:
         try:
             texture = clipboard.read_texture_finish(result)
             if texture:
-                if self.verify_if_image_can_be_used():
+                if self.model_manager.verify_if_image_can_be_used():
                     pixbuf = Gdk.pixbuf_get_from_texture(texture)
                     if not os.path.exists(os.path.join(self.cache_dir, 'tmp/images/')):
                         os.makedirs(os.path.join(self.cache_dir, 'tmp/images/'))
@@ -936,12 +920,5 @@ Generate a title following these rules:
         self.model_scroller.set_child(self.model_manager)
         self.model_manager.update_local_list()
         self.model_manager.update_available_list()
-
-        """
-        response = connection_handler.simple_get(f"{connection_handler.URL}/api/tags")
-        self.model_selector.clear_list()
-
-        to update local models
-        """
 
         self.load_history()
