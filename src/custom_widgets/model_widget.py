@@ -20,8 +20,8 @@ class model_selector_popup(Gtk.Popover):
 
     def __init__(self):
         manage_models_button = Gtk.Button(
-            tooltip_text=_('Model Manager'),
-            child=Gtk.Label(label=_('Model Manager')),
+            tooltip_text=_('Manage Models'),
+            child=Gtk.Label(label=_('Manage Models'), halign=1),
             hexpand=True,
             css_classes=['manage_models_button', 'flat']
         )
@@ -59,12 +59,16 @@ class model_selector_button(Gtk.MenuButton):
         self.popover = model_selector_popup()
         self.popover.model_list_box.connect('selected-rows-changed', self.model_changed)
         self.popover.model_list_box.connect('row-activated', lambda *_: self.get_popover().hide())
+        container = Gtk.Box(
+            orientation=0,
+            spacing=5
+        )
+        self.label = Gtk.Label(label=_('Select a Model'))
+        container.append(self.label)
+        container.append(Gtk.Image.new_from_icon_name("down-symbolic"))
         super().__init__(
             tooltip_text=_('Select a Model'),
-            child=Adw.ButtonContent(
-                label=_('Select a model'),
-                icon_name='down-symbolic'
-            ),
+            child=container,
             popover=self.popover
         )
 
@@ -78,10 +82,10 @@ class model_selector_button(Gtk.MenuButton):
         row = listbox.get_selected_row()
         if row:
             model_name = row.get_name()
-            self.get_child().set_label(window.convert_model_name(model_name, 0))
+            self.label.set_label(window.convert_model_name(model_name, 0))
             self.set_tooltip_text(window.convert_model_name(model_name, 0))
         elif len(list(listbox)) == 0:
-            self.get_child().set_label(_("Select a Model"))
+            self.label.set_label(_("Select a Model"))
             self.set_tooltip_text(_("Select a Model"))
         window.model_manager.verify_if_image_can_be_used()
 
