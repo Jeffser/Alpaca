@@ -491,15 +491,6 @@ Generate a title following these rules:
             source_style = GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita')
         buffer.set_style_scheme(source_style)
 
-    def on_copy_code_clicked(self, btn, text_buffer):
-        logger.debug("Copying code")
-        clipboard = Gdk.Display().get_default().get_clipboard()
-        start = text_buffer.get_start_iter()
-        end = text_buffer.get_end_iter()
-        text = text_buffer.get_text(start, end, False)
-        clipboard.set(text)
-        self.show_toast(_("Code copied to the clipboard"), self.main_overlay)
-
     def generate_datetime_format(self, dt:datetime) -> str:
         date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
         current_date = GLib.DateTime.new_now_local()
