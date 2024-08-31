@@ -812,6 +812,17 @@ Generate a title following these rules:
         self.send_message()
         return True
 
+    def on_file_drop(self, drop_target, value, x, y):
+        files = value.get_files()
+        for file in files:
+            extension = os.path.splitext(file.get_path())[1][1:]
+            if extension in ('png', 'jpeg', 'jpg', 'webp', 'gif'):
+                self.attach_file(file.get_path(), 'image')
+            elif extension in ('txt', 'md', 'html', 'css', 'js', 'py', 'java', 'json', 'xml'):
+                self.attach_file(file.get_path(), 'plain_text')
+            elif extension == 'pdf':
+                self.attach_file(file.get_path(), 'pdf')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
@@ -821,6 +832,10 @@ Generate a title following these rules:
         message_widget.window = self
         chat_widget.window = self
         model_widget.window = self
+
+        drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
+        drop_target.connect('drop', self.on_file_drop)
+        self.message_text_view.add_controller(drop_target)
 
         self.chat_list_box = chat_widget.chat_list()
         self.chat_list_container.set_child(self.chat_list_box)
