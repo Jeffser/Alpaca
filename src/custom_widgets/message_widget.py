@@ -177,7 +177,6 @@ class image(Gtk.Button):
     __gtype_name__ = 'AlpacaImage'
 
     def __init__(self, image_path:str):
-        print('aaa   ', image_path)
         self.image_path = image_path
         self.image_name = os.path.basename(self.image_path)
 
@@ -425,12 +424,16 @@ class message(Gtk.Overlay):
     def update_message(self, data:dict):
         chat = self.get_parent().get_parent().get_parent().get_parent()
         if chat.busy:
+            vadjustment = chat.get_vadjustment()
             if self.spinner:
                 if not window.chat_list_box.get_sensitive():
                     window.chat_list_box.set_sensitive(True)
                 self.container.remove(self.spinner)
                 self.spinner = None
                 self.content_children[-1].set_visible(True)
+                GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
+            elif vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
+                GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
             self.content_children[-1].insert_at_end(data['message']['content'], False)
             if 'done' in data and data['done']:
                 if chat.welcome_screen:
