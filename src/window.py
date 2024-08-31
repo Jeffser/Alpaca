@@ -829,8 +829,6 @@ Generate a title following these rules:
         self.chat_list_box = chat_widget.chat_list()
         self.chat_list_container.set_child(self.chat_list_box)
         GtkSource.init()
-        with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
-            self.available_models = json.load(f)
         if not os.path.exists(os.path.join(self.data_dir, "chats")):
             os.makedirs(os.path.join(self.data_dir, "chats"))
         enter_key_controller = Gtk.EventControllerKey.new()
