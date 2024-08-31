@@ -214,6 +214,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def change_remote_connection(self, switcher, *_):
         logger.debug("Connection switched")
+        if self.remote_connection_switch.get_active() and not self.remote_connection_entry.get_text():
+            self.remote_connection_switch.set_active(False)
+            return
         self.ollama_instance.remote = self.remote_connection_switch.get_active()
         if self.ollama_instance.remote:
             self.ollama_instance.stop()
@@ -225,15 +228,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def change_remote_url(self, entry):
-        if not entry.get_text().startswith("http"):
+        if entry.get_text() and not entry.get_text().startswith("http"):
             entry.set_text("http://{}".format(entry.get_text()))
             return
-        if entry.get_text() != entry.get_text().rstrip('/'):
+        if entry.get_text() and entry.get_text() != entry.get_text().rstrip('/'):
             entry.set_text(entry.get_text().rstrip('/'))
             return
-        logger.debug(f"Changing remote url: {self.remote_url}")
+        self.remote_connection_switch.set_sensitive(entry.get_text())
+        logger.debug(f"Changing remote url: {self.ollama_instance.remote_url}")
         self.ollama_instance.remote_url = entry.get_text()
-        if self.ollama_instance.remote and self.model_manager:
+        if not entry.get_text():
+            self.remote_connection_switch.set_active(False)
+        if self.ollama_instance.remote and self.model_manager and entry.get_text():
             self.model_manager.update_local_list()
         self.save_server_config()
 
@@ -840,6 +846,7 @@ Generate a title following these rules:
                     self.background_switch.set_active(data['run_on_background'])
                     self.set_hide_on_close(self.background_switch.get_active())
                     self.remote_connection_entry.set_text(self.ollama_instance.remote_url)
+                    self.remote_connection_switch.set_sensitive(self.remote_connection_entry.get_text())
                     self.remote_bearer_token_entry.set_text(self.ollama_instance.bearer_token)
                     self.remote_connection_switch.set_active(self.ollama_instance.remote)
 
