@@ -128,6 +128,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     remote_connection_entry = Gtk.Template.Child()
     remote_bearer_token_entry = Gtk.Template.Child()
 
+    banner = Gtk.Template.Child()
+
     style_manager = Adw.StyleManager()
 
     @Gtk.Template.Callback()
@@ -817,6 +819,9 @@ Generate a title following these rules:
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.banner.set_revealed(monitor.get_power_saver_enabled()))
+        self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
+
         message_widget.window = self
         chat_widget.window = self
         model_widget.window = self
