@@ -9,7 +9,7 @@ gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk
 import logging, os, datetime, re, shutil, threading, json, sys
 from ..internal import config_dir, data_dir, cache_dir, source_dir
-from .. import connection_handler, available_models_descriptions, dialogs
+from .. import available_models_descriptions, dialogs
 
 logger = logging.getLogger(__name__)
 
@@ -352,8 +352,7 @@ class available_model(Gtk.ListBoxRow):
         self.add_controller(event_controller_key)
 
     def confirm_pull_model(self, model_name):
-        ##TODO I really need that instance manager
-        threading.Thread(target=window.model_manager.pull_model, args=('http://0.0.0.0:11435', model_name)).start()
+        threading.Thread(target=window.model_manager.pull_model, args=(model_name,)).start()
         window.navigation_view_manage_models.pop()
 
     def show_pull_menu(self):
@@ -433,7 +432,7 @@ class model_manager_container(Gtk.Box):
 
     def remove_local_model(self, model_name:str):
         logger.debug("Deleting model")
-        response = connection_handler.simple_delete(f"{connection_handler.URL}/api/delete", data={"name": model_name})
+        response = window.ollama_instance.request("DELETE", "api/delete", json.dumps({"name": model_name}))
 
         if response.status_code == 200:
             self.local_list.remove_model(model_name)
@@ -455,17 +454,21 @@ class model_manager_container(Gtk.Box):
 
     #Should only be called when the app starts
     def update_local_list(self):
-        response = connection_handler.simple_get(f"{connection_handler.URL}/api/tags")
-        if response.status_code == 200:
-            self.local_list.remove_all()
-            data = json.loads(response.text)
-            if len(data['models']) == 0:
-                self.local_list.set_visible(False)
+        try:
+            response = window.ollama_instance.request("GET", "api/tags")
+            if response.status_code == 200:
+                self.local_list.remove_all()
+                data = json.loads(response.text)
+                if len(data['models']) == 0:
+                    self.local_list.set_visible(False)
+                else:
+                    self.local_list.set_visible(True)
+                    for model in data['models']:
+                        self.add_local_model(model['name'])
             else:
-                self.local_list.set_visible(True)
-                for model in data['models']:
-                    self.add_local_model(model['name'])
-        else:
+                window.connection_error()
+        except Exception as e:
+            logger.error(e)
             window.connection_error()
 
     #Should only be called when the app starts
@@ -494,8 +497,7 @@ class model_manager_container(Gtk.Box):
                     content['button'].set_css_classes(["flat", "error"])
             return False
 
-    #Important: Call this using a thread, if not the app crashes
-    def pull_model(self, url:str, model_name:str, modelfile:str=None): ##TODO, once you make an instance manager remove the url from this
+    def pull_model(self, model_name:str, modelfile:str=None):
         if ':' not in model_name:
             model_name += ':latest'
         if model_name not in [model.get_name() for model in list(self.pulling_list)] and model_name not in [model.get_name() for model in list(self.local_list)]:
@@ -506,9 +508,9 @@ class model_manager_container(Gtk.Box):
                 GLib.idle_add(self.pulling_list.set_visible, True)
 
             if modelfile:
-                response = connection_handler.stream_post("{}/api/create".format(url), data=json.dumps({"name": model_name, "modelfile": modelfile}), callback=lambda data: model.update(data))
+                response = self.ollama_instance.request("POST", "api/create", json.dumps({"name": model_name, "modelfile": modelfile}), lambda data: model.update(data))
             else:
-                response = connection_handler.stream_post("{}/api/pull".format(url), data=json.dumps({"name": model_name}), callback=lambda data: model.update(data))
+                response = self.ollama_instance.request("POST", "api/pull", json.dumps({"name": model_name}), lambda data: model.update(data))
 
             if response.status_code == 200 and not model.error:
                 GLib.idle_add(window.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model_name), Gio.ThemedIcon.new("emblem-ok-symbolic"))

@@ -217,8 +217,24 @@ class chat_tab(Gtk.ListBoxRow):
         )
 
         self.gesture = Gtk.GestureClick(button=3)
-        self.gesture.connect("released", window.chat_click_handler)
+        self.gesture.connect("released", self.chat_click_handler)
         self.add_controller(self.gesture)
+
+    def chat_click_handler(self, gesture, n_press, x, y):
+        chat_row = gesture.get_widget()
+        popover = Gtk.PopoverMenu(
+            menu_model=window.chat_right_click_menu,
+            has_arrow=False,
+            halign=1,
+            height_request=155
+        )
+        window.selected_chat_row = chat_row
+        position = Gdk.Rectangle()
+        position.x = x
+        position.y = y
+        popover.set_parent(chat_row.get_child())
+        popover.set_pointing_to(position)
+        popover.popup()
 
 class chat_list(Gtk.ListBox):
     __gtype_name__ = 'AlpacaChatList'

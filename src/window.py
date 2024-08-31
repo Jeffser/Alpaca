@@ -31,7 +31,7 @@ gi.require_version('GdkPixbuf', '2.0')
 
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
 
-from . import dialogs, local_instance, connection_handler, available_models_descriptions
+from . import dialogs, connection_handler
 from .custom_widgets import table_widget, message_widget, chat_widget, model_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir
 
@@ -40,9 +40,6 @@ logger = logging.getLogger(__name__)
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
     app_dir = os.getenv("FLATPAK_DEST")
-    config_dir = config_dir
-    data_dir = data_dir
-    cache_dir = cache_dir
 
     __gtype_name__ = 'AlpacaWindow'
 
@@ -53,17 +50,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
     _ = gettext.gettext
 
     #Variables
-    available_models = None
-    run_on_background = False
-    remote_url = ""
-    remote_bearer_token = ""
-    run_remote = False
+
     model_tweaks = {"temperature": 0.7, "seed": 0, "keep_alive": 5}
     pulling_models = {}
     attachments = {}
     header_bar = Gtk.Template.Child()
 
     #Override elements
+    overrides_group = Gtk.Template.Child()
     override_HSA_OVERRIDE_GFX_VERSION = Gtk.Template.Child()
     override_CUDA_VISIBLE_DEVICES = Gtk.Template.Child()
     override_HIP_VISIBLE_DEVICES = Gtk.Template.Child()
@@ -76,9 +70,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     create_model_name = Gtk.Template.Child()
     create_model_system = Gtk.Template.Child()
     create_model_modelfile = Gtk.Template.Child()
-    temperature_spin = Gtk.Template.Child()
-    seed_spin = Gtk.Template.Child()
-    keep_alive_spin = Gtk.Template.Child()
+    tweaks_group = Gtk.Template.Child()
     preferences_dialog = Gtk.Template.Child()
     shortcut_window : Gtk.ShortcutsWindow  = Gtk.Template.Child()
     file_preview_dialog = Gtk.Template.Child()
@@ -115,9 +107,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = None
+    ollama_instance = None
+    model_manager = None
     add_chat_button = Gtk.Template.Child()
-
-    loading_spinner = None
 
     background_switch = Gtk.Template.Child()
     remote_connection_switch = Gtk.Template.Child()
@@ -155,12 +147,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for name, content in self.attachments.items():
             if content["type"] == 'image':
                 if self.model_manager.verify_if_image_can_be_used():
-                    attached_images.append(os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id, name))
+                    attached_images.append(os.path.join(data_dir, "chats", current_chat.get_name(), message_id, name))
             else:
-                attached_files[os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id, name)] = content['type']
-            if not os.path.exists(os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id)):
-                os.makedirs(os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id))
-            shutil.copy(content['path'], os.path.join(self.data_dir, "chats", current_chat.get_name(), message_id, name))
+                attached_files[os.path.join(data_dir, "chats", current_chat.get_name(), message_id, name)] = content['type']
+            if not os.path.exists(os.path.join(data_dir, "chats", current_chat.get_name(), message_id)):
+                os.makedirs(os.path.join(data_dir, "chats", current_chat.get_name(), message_id))
+            shutil.copy(content['path'], os.path.join(data_dir, "chats", current_chat.get_name(), message_id, name))
             content["button"].get_parent().remove(content["button"])
         self.attachments = {}
         self.attachment_box.set_visible(False)
@@ -179,8 +171,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         data = {
             "model": current_model,
             "messages": self.convert_history_to_ollama(current_chat),
-            "options": {"temperature": self.model_tweaks["temperature"], "seed": self.model_tweaks["seed"]},
-            "keep_alive": f"{self.model_tweaks['keep_alive']}m"
+            "options": {"temperature": self.ollama_instance.tweaks["temperature"], "seed": self.ollama_instance.tweaks["seed"]},
+            "keep_alive": f"{self.ollama_instance.tweaks['keep_alive']}m"
         }
 
         self.message_text_view.get_buffer().set_text("", 0)
@@ -221,32 +213,41 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
             self.welcome_dialog.force_close()
-            if not self.verify_connection():
-                self.connection_error()
+
+    @Gtk.Template.Callback()
+    def change_remote_connection(self, switcher, *_):
+        logger.debug("Connection switched")
+        self.ollama_instance.remote = self.remote_connection_switch.get_active()
+        if self.model_manager:
+            self.model_manager.update_local_list()
+        self.save_server_config()
 
     @Gtk.Template.Callback()
     def change_remote_url(self, entry):
         if not entry.get_text().startswith("http"):
             entry.set_text("http://{}".format(entry.get_text()))
             return
-        self.remote_url = entry.get_text()
+        if entry.get_text() != entry.get_text().rstrip('/'):
+            entry.set_text(entry.get_text().rstrip('/'))
+            return
         logger.debug(f"Changing remote url: {self.remote_url}")
-        if self.run_remote:
-            connection_handler.URL = self.remote_url
-            if self.verify_connection() == False:
-                entry.set_css_classes(["error"])
-                self.show_toast(_("Failed to connect to server"), self.preferences_dialog)
+        self.ollama_instance.remote_url = entry.get_text()
+        if self.ollama_instance.remote and self.model_manager:
+            self.model_manager.update_local_list()
+        self.save_server_config()
 
     @Gtk.Template.Callback()
     def change_remote_bearer_token(self, entry):
-        self.remote_bearer_token = entry.get_text()
+        self.ollama_instance.bearer_token = entry.get_text()
+        if self.ollama_instance.remote_url and self.ollama_instance.remote and self.model_manager:
+            self.model_manager.update_local_list()
         self.save_server_config()
-        return
-        if self.remote_url and self.run_remote:
-            connection_handler.URL = self.remote_url
-            if self.verify_connection() == False:
-                entry.set_css_classes(["error"])
-                self.show_toast(_("Failed to connect to server"), self.preferences_dialog)
+
+    @Gtk.Template.Callback()
+    def switch_run_on_background(self):
+        logger.debug("Switching run on background")
+        self.set_hide_on_close(self.background_switch.get_active())
+        self.save_server_config()
 
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
@@ -256,7 +257,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             logger.info("Hiding app...")
         else:
             logger.info("Closing app...")
-            local_instance.stop()
+            self.ollama_instance.stop()
             self.get_application().quit()
 
     @Gtk.Template.Callback()
@@ -266,8 +267,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             value = round(value)
         else:
             value = round(value, 1)
-        if self.model_tweaks[spin.get_name()] is not None and self.model_tweaks[spin.get_name()] != value:
-            self.model_tweaks[spin.get_name()] = value
+        if self.ollama_instance.tweaks[spin.get_name()] != value:
+            self.ollama_instance.tweaks[spin.get_name()] = value
             self.save_server_config()
 
     @Gtk.Template.Callback()
@@ -279,22 +280,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for line in modelfile_raw.split('\n'):
             if not line.startswith('SYSTEM') and not line.startswith('FROM'):
                 modelfile.append(line)
-        threading.Thread(target=self.model_manager.pull_model, kwargs={"url": connection_handler.URL, "model_name": name, "modelfile": '\n'.join(modelfile)}).start()
+        threading.Thread(target=self.model_manager.pull_model, kwargs={"model_name": name, "modelfile": '\n'.join(modelfile)}).start()
         self.navigation_view_manage_models.pop()
 
     @Gtk.Template.Callback()
     def override_changed(self, entry):
         name = entry.get_name()
         value = entry.get_text()
-        if (not value and name not in local_instance.overrides) or (value and value in local_instance.overrides and local_instance.overrides[name] == value):
-            return
-        if not value:
-            del local_instance.overrides[name]
-        else:
-            local_instance.overrides[name] = value
-        self.save_server_config()
-        if not self.run_remote:
-            local_instance.reset()
+        if self.ollama_instance:
+            if value:
+                self.ollama_instance.overrides[name] = value
+            elif name in self.ollama_instance.overrides:
+                del self.ollama_instance.overrides[name]
+            if not self.ollama_instance.remote:
+                self.ollama_instance.reset()
+            self.save_server_config()
 
     @Gtk.Template.Callback()
     def link_button_handler(self, button):
@@ -339,7 +339,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         modelfile_buffer.delete(modelfile_buffer.get_start_iter(), modelfile_buffer.get_end_iter())
         self.create_model_system.set_text('')
         if not file:
-            response = connection_handler.simple_post(f"{connection_handler.URL}/api/show", json.dumps({"name": self.convert_model_name(model, 1)}))
+            response = self.ollama_instance.request("POST", "api/show", json.dumps({"name": self.convert_model_name(model, 1)}))
             if response.status_code == 200:
                 data = json.loads(response.text)
                 modelfile = []
@@ -426,7 +426,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 del new_message['files']
                 new_message['content'] = ''
                 for name, file_type in message['files'].items():
-                    file_path = os.path.join(self.data_dir, "chats", chat.get_name(), message_id, name)
+                    file_path = os.path.join(data_dir, "chats", chat.get_name(), message_id, name)
                     file_data = self.get_content_of_file(file_path, file_type)
                     if file_data:
                         new_message['content'] += f"```[{name}]\n{file_data}\n```"
@@ -434,7 +434,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if 'images' in message and len(message['images']) > 0:
                 new_message['images'] = []
                 for name in message['images']:
-                    file_path = os.path.join(self.data_dir, "chats", chat.get_name(), message_id, name)
+                    file_path = os.path.join(data_dir, "chats", chat.get_name(), message_id, name)
                     image_data = self.get_content_of_file(file_path, 'image')
                     if image_data:
                         new_message['images'].append(image_data)
@@ -460,19 +460,29 @@ Generate a title following these rules:
         data = {"model": current_model, "prompt": prompt, "stream": False}
         if 'images' in message:
             data["images"] = message['images']
-        response = connection_handler.simple_post(f"{connection_handler.URL}/api/generate", data=json.dumps(data))
+        response = self.ollama_instance.request("POST", "api/generate", json.dumps(data))
         if response.status_code == 200:
             new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
             new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
             self.chat_list_box.rename_chat(old_chat_name, new_chat_name)
 
     def save_server_config(self):
-        with open(os.path.join(self.config_dir, "server.json"), "w+", encoding="utf-8") as f:
-            json.dump({'remote_url': self.remote_url, 'remote_bearer_token': self.remote_bearer_token, 'run_remote': self.run_remote, 'local_port': local_instance.port, 'run_on_background': self.run_on_background, 'model_tweaks': self.model_tweaks, 'ollama_overrides': local_instance.overrides}, f, indent=6)
+        with open(os.path.join(config_dir, "server.json"), "w+", encoding="utf-8") as f:
+            data = {
+                'remote_url': self.ollama_instance.remote_url,
+                'remote_bearer_token': self.ollama_instance.bearer_token,
+                'run_remote': self.ollama_instance.remote,
+                'local_port': self.ollama_instance.local_port,
+                'run_on_background': self.background_switch.get_active(),
+                'model_tweaks': self.ollama_instance.tweaks,
+                'ollama_overrides': self.ollama_instance.overrides
+            }
+
+            json.dump(data, f, indent=6)
 
     def verify_connection(self):
         try:
-            response = connection_handler.simple_get(f"{connection_handler.URL}/api/tags")
+            response = self.ollama_instance.request("GET", "api/tags")
             if response.status_code == 200:
                 self.save_server_config()
                 #self.update_list_local_models()
@@ -515,7 +525,7 @@ Generate a title following these rules:
         if self.regenerate_button:
             GLib.idle_add(self.chat_list_box.get_current_chat().remove, self.regenerate_button)
         try:
-            response = connection_handler.stream_post(f"{connection_handler.URL}/api/chat", data=json.dumps(data), callback=lambda data, message_element=message_element: GLib.idle_add(message_element.update_message, data))
+            response = self.ollama_instance.request("POST", "api/generate", json.dumps(data), lambda data, message_element=message_element: GLib.idle_add(message_element.update_message, data))
             if response.status_code != 200:
                 raise Exception('Network Error')
         except Exception as e:
@@ -528,10 +538,10 @@ Generate a title following these rules:
     def save_history(self, chat:chat_widget.chat=None):
         logger.debug("Saving history")
         history = None
-        if chat and os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
+        if chat and os.path.exists(os.path.join(data_dir, "chats", "chats.json")):
             history = {'chats': {chat.get_name(): {'messages': chat.messages_to_dict()}}}
             try:
-                with open(os.path.join(self.data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
+                with open(os.path.join(data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
                     data = json.load(f)
                     for chat_tab in self.chat_list_box.tab_list:
                         if chat_tab.chat_window.get_name() != chat.get_name():
@@ -545,20 +555,20 @@ Generate a title following these rules:
             for chat_tab in self.chat_list_box.tab_list:
                 history['chats'][chat_tab.chat_window.get_name()] = {'messages': chat_tab.chat_window.messages_to_dict()}
 
-        with open(os.path.join(self.data_dir, "chats", "chats.json"), "w+", encoding="utf-8") as f:
+        with open(os.path.join(data_dir, "chats", "chats.json"), "w+", encoding="utf-8") as f:
             json.dump(history, f, indent=4)
 
     def load_history(self):
         logger.debug("Loading history")
-        if os.path.exists(os.path.join(self.data_dir, "chats", "chats.json")):
+        if os.path.exists(os.path.join(data_dir, "chats", "chats.json")):
             try:
-                with open(os.path.join(self.data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
+                with open(os.path.join(data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
                     data = json.load(f)
                     selected_chat = None
                     if len(list(data)) == 0:
                         data['chats'][_("New Chat")] = {"messages": {}}
-                    if os.path.exists(os.path.join(self.data_dir, "chats", "selected_chat.txt")):
-                        with open(os.path.join(self.data_dir, "chats", "selected_chat.txt"), 'r') as scf:
+                    if os.path.exists(os.path.join(data_dir, "chats", "selected_chat.txt")):
+                        with open(os.path.join(data_dir, "chats", "selected_chat.txt"), 'r') as scf:
                             selected_chat = scf.read()
                     elif 'selected_chat' in data and data['selected_chat'] in data['chats']:
                         selected_chat = data['selected_chat']
@@ -602,77 +612,13 @@ Generate a title following these rules:
         self.pulling_models[model_name]['overlay'].get_parent().get_parent().remove(self.pulling_models[model_name]['overlay'].get_parent())
         del self.pulling_models[model_name]
 
-    def chat_click_handler(self, gesture, n_press, x, y):
-        chat_row = gesture.get_widget()
-        popover = Gtk.PopoverMenu(
-            menu_model=self.chat_right_click_menu,
-            has_arrow=False,
-            halign=1,
-            height_request=155
-        )
-        self.selected_chat_row = chat_row
-        position = Gdk.Rectangle()
-        position.x = x
-        position.y = y
-        popover.set_parent(chat_row.get_child())
-        popover.set_pointing_to(position)
-        popover.popup()
-
-    def show_preferences_dialog(self):
-        logger.debug("Showing preferences dialog")
-        self.preferences_dialog.present(self)
-
-    def connect_remote(self, url, bearer_token):
-        logger.debug(f"Connecting to remote: {url}")
-        connection_handler.URL = url
-        connection_handler.BEARER_TOKEN = bearer_token
-        self.remote_url = connection_handler.URL
-        self.remote_connection_entry.set_text(self.remote_url)
-        if self.verify_connection() == False: self.connection_error()
-
-    def connect_local(self):
-        logger.debug("Connecting to Alpaca's Ollama instance")
-        self.run_remote = False
-        connection_handler.BEARER_TOKEN = None
-        connection_handler.URL = f"http://127.0.0.1:{local_instance.port}"
-        local_instance.start()
-        if self.verify_connection() == False:
-            self.connection_error()
-        else:
-            self.remote_connection_switch.set_active(False)
-
     def connection_error(self):
         logger.error("Connection error")
-        if self.run_remote:
-            dialogs.reconnect_remote(self, connection_handler.URL, connection_handler.BEARER_TOKEN)
+        if self.ollama_instance.remote:
+            dialogs.reconnect_remote(self)
         else:
-            local_instance.reset()
+            self.ollama_instance.reset()
             self.show_toast(_("There was an error with the local Ollama instance, so it has been reset"), self.main_overlay)
-
-    def connection_switched(self):
-        logger.debug("Connection switched")
-        new_value = self.remote_connection_switch.get_active()
-        if new_value != self.run_remote:
-            self.run_remote = new_value
-            if self.run_remote:
-                connection_handler.BEARER_TOKEN = self.remote_bearer_token
-                connection_handler.URL = self.remote_url
-                if self.verify_connection() == False:
-                    self.connection_error()
-                else:
-                    local_instance.stop()
-            else:
-                connection_handler.BEARER_TOKEN = None
-                connection_handler.URL = f"http://127.0.0.1:{local_instance.port}"
-                local_instance.start()
-                if self.verify_connection() == False:
-                    self.connection_error()
-
-    def switch_run_on_background(self):
-        logger.debug("Switching run on background")
-        self.run_on_background = self.background_switch.get_active()
-        self.set_hide_on_close(self.run_on_background)
-        self.verify_connection()
 
     def get_content_of_file(self, file_path, file_type):
         if not os.path.exists(file_path): return None
@@ -792,11 +738,11 @@ Generate a title following these rules:
             if texture:
                 if self.model_manager.verify_if_image_can_be_used():
                     pixbuf = Gdk.pixbuf_get_from_texture(texture)
-                    if not os.path.exists(os.path.join(self.cache_dir, 'tmp/images/')):
-                        os.makedirs(os.path.join(self.cache_dir, 'tmp/images/'))
-                    image_name = self.generate_numbered_name('image.png', os.listdir(os.path.join(self.cache_dir, os.path.join(self.cache_dir, 'tmp/images'))))
-                    pixbuf.savev(os.path.join(self.cache_dir, 'tmp/images/{}'.format(image_name)), "png", [], [])
-                    self.attach_file(os.path.join(self.cache_dir, 'tmp/images/{}'.format(image_name)), 'image')
+                    if not os.path.exists(os.path.join(cache_dir, 'tmp/images/')):
+                        os.makedirs(os.path.join(cache_dir, 'tmp/images/'))
+                    image_name = self.generate_numbered_name('image.png', os.listdir(os.path.join(cache_dir, os.path.join(cache_dir, 'tmp/images'))))
+                    pixbuf.savev(os.path.join(cache_dir, 'tmp/images/{}'.format(image_name)), "png", [], [])
+                    self.attach_file(os.path.join(cache_dir, 'tmp/images/{}'.format(image_name)), 'image')
                 else:
                     self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
         except Exception as e:
@@ -840,8 +786,8 @@ Generate a title following these rules:
         self.chat_list_box = chat_widget.chat_list()
         self.chat_list_container.set_child(self.chat_list_box)
         GtkSource.init()
-        if not os.path.exists(os.path.join(self.data_dir, "chats")):
-            os.makedirs(os.path.join(self.data_dir, "chats"))
+        if not os.path.exists(os.path.join(data_dir, "chats")):
+            os.makedirs(os.path.join(data_dir, "chats"))
         enter_key_controller = Gtk.EventControllerKey.new()
         enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: self.handle_enter_key() if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
         self.message_text_view.add_controller(enter_key_controller)
@@ -873,54 +819,58 @@ Generate a title following these rules:
         self.message_text_view.connect("paste-clipboard", self.on_clipboard_paste)
         self.file_preview_remove_button.connect('clicked', lambda button : dialogs.remove_attached_file(self, button.get_name()))
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
-        self.create_model_name.get_delegate().connect("insert-text", lambda *_ : self.check_alphanumeric(*_, ['-', '.', '_']))
+        self.create_model_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_']))
         self.remote_connection_entry.connect("entry-activated", lambda entry : entry.set_css_classes([]))
-        self.remote_connection_switch.connect("notify", lambda pspec, user_data : self.connection_switched())
-        self.background_switch.connect("notify", lambda pspec, user_data : self.switch_run_on_background())
         self.set_focus(self.message_text_view)
-        if os.path.exists(os.path.join(self.config_dir, "server.json")):
-            with open(os.path.join(self.config_dir, "server.json"), "r", encoding="utf-8") as f:
-                data = json.load(f)
-                self.run_remote = data['run_remote']
-                local_instance.port = data['local_port']
-                self.remote_url = data['remote_url']
-                self.remote_bearer_token = data['remote_bearer_token'] if 'remote_bearer_token' in data else ''
-                self.run_on_background = data['run_on_background']
-                #Model Tweaks
-                if "model_tweaks" in data: self.model_tweaks = data['model_tweaks']
-                self.temperature_spin.set_value(self.model_tweaks['temperature'])
-                self.seed_spin.set_value(self.model_tweaks['seed'])
-                self.keep_alive_spin.set_value(self.model_tweaks['keep_alive'])
-                #Overrides
-                if "ollama_overrides" in data:
-                    local_instance.overrides = data['ollama_overrides']
-                for element in [
-                        self.override_HSA_OVERRIDE_GFX_VERSION,
-                        self.override_CUDA_VISIBLE_DEVICES,
-                        self.override_HIP_VISIBLE_DEVICES]:
-                    override = element.get_name()
-                    if override in local_instance.overrides:
-                        element.set_text(local_instance.overrides[override])
+        if os.path.exists(os.path.join(config_dir, "server.json")):
+            try:
+                with open(os.path.join(config_dir, "server.json"), "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    self.ollama_instance = connection_handler.instance(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'])
 
-                self.background_switch.set_active(self.run_on_background)
-                self.set_hide_on_close(self.run_on_background)
-                self.remote_connection_entry.set_text(self.remote_url)
-                self.remote_bearer_token_entry.set_text(self.remote_bearer_token)
-                if self.run_remote:
-                    connection_handler.BEARER_TOKEN = self.remote_bearer_token
-                    connection_handler.URL = self.remote_url
-                    self.remote_connection_switch.set_active(True)
-                else:
-                    connection_handler.BEARER_TOKEN = None
-                    self.remote_connection_switch.set_active(False)
-                    connection_handler.URL = f"http://127.0.0.1:{local_instance.port}"
-                    local_instance.start()
-        else:
-            local_instance.start()
-            connection_handler.URL = f"http://127.0.0.1:{local_instance.port}"
+                    #self.run_remote = data['run_remote']
+                    #local_instance.port = data['local_port']
+                    #self.remote_url = data['remote_url']
+                    #self.remote_bearer_token = data['remote_bearer_token'] if 'remote_bearer_token' in data else ''
+                    #self.run_on_background = data['run_on_background']
+                    ##Model Tweaks
+                    #if "model_tweaks" in data: self.model_tweaks = data['model_tweaks']
+                    #self.temperature_spin.set_value(self.model_tweaks['temperature'])
+                    #self.seed_spin.set_value(self.model_tweaks['seed'])
+                    #self.keep_alive_spin.set_value(self.model_tweaks['keep_alive'])
+                    #Overrides
+                    #if "ollama_overrides" in data:
+                        #local_instance.overrides = data['ollama_overrides']
+
+                    for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
+                        if element.get_name() in self.ollama_instance.tweaks:
+                            element.set_value(self.ollama_instance.tweaks[element.get_name()])
+
+                    for element in list(list(list(list(self.overrides_group)[0])[1])[0]):
+                        if element.get_name() in self.ollama_instance.overrides:
+                            element.set_text(self.ollama_instance.overrides[element.get_name()])
+
+                    self.background_switch.set_active(data['run_on_background'])
+                    self.set_hide_on_close(self.background_switch.get_active())
+                    self.remote_connection_entry.set_text(self.ollama_instance.remote_url)
+                    self.remote_bearer_token_entry.set_text(self.ollama_instance.bearer_token)
+                    self.remote_connection_switch.set_active(self.ollama_instance.remote)
+                    #if self.run_remote:
+                        #connection_handler.BEARER_TOKEN = self.remote_bearer_token
+                        #connection_handler.URL = self.remote_url
+                        #self.remote_connection_switch.set_active(True)
+                    #else:
+                        #connection_handler.BEARER_TOKEN = None
+                        #self.remote_connection_switch.set_active(False)
+                        #connection_handler.URL = f"http://127.0.0.1:{local_instance.port}"
+                        #local_instance.start()
+            except Exception as e:
+                logger.error(e)
+        if not self.ollama_instance:
+            self.ollama_instance = connection_handler.instance(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, None)
+            self.save_server_config()
             self.welcome_dialog.present(self)
-        if self.verify_connection() is False:
-            self.connection_error()
+
         self.model_manager = model_widget.model_manager_container()
         self.model_scroller.set_child(self.model_manager)
         self.model_manager.update_local_list()

@@ -3,11 +3,10 @@
 Handles UI dialogs
 """
 import os
-import logging
+import logging, requests
 from pytube import YouTube
 from html2text import html2text
 from gi.repository import Adw, Gtk
-from . import connection_handler
 
 logger = logging.getLogger(__name__)
 # CLEAR CHAT | WORKS
@@ -188,21 +187,25 @@ def remove_attached_file(self, name):
 def reconnect_remote_response(self, dialog, task, url_entry, bearer_entry):
     response = dialog.choose_finish(task)
     if not task or response == "remote":
-        self.connect_remote(url_entry.get_text(), bearer_entry.get_text())
+        self.ollama_instance.remote_url = url_entry.get_text()
+        self.ollama_instance.bearer_token = bearer_entry.get_text()
+        self.ollama_instance.remote = True
+        self.model_manager.update_local_list()
     elif response == "local":
-        self.connect_local()
+        self.ollama_instance.remote = False
+        self.model_manager.update_local_list()
     elif response == "close":
         self.destroy()
 
-def reconnect_remote(self, current_url, current_bearer_token):
+def reconnect_remote(self):
     entry_url = Gtk.Entry(
         css_classes = ["error"],
-        text = current_url,
+        text = self.ollama_instance.remote_url,
         placeholder_text = "URL"
     )
     entry_bearer_token = Gtk.Entry(
-        css_classes = ["error"] if current_bearer_token else None,
-        text = current_bearer_token,
+        css_classes = ["error"] if self.ollama_instance.bearer_token else None,
+        text = self.ollama_instance.bearer_token,
         placeholder_text = "Bearer Token (Optional)"
     )
     container = Gtk.Box(
@@ -374,7 +377,7 @@ def youtube_caption(self, video_url):
 
 def attach_website_response(self, dialog, task, url):
     if dialog.choose_finish(task) == "accept":
-        response = connection_handler.simple_get(url)
+        response = requests.get(url)
         if response.status_code == 200:
             html = response.text
             md = html2text(html)

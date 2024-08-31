@@ -234,6 +234,7 @@
             <object class="AdwPreferencesGroup">
               <child>
                 <object class="AdwSwitchRow" id="remote_connection_switch">
+                  <signal name="notify::active" handler="change_remote_connection"/>
                   <property name="title" translatable="yes">Use Remote Connection to Ollama</property>
                 </object>
               </child>
@@ -257,15 +258,16 @@
             <object class="AdwPreferencesGroup">
               <child>
                 <object class="AdwSwitchRow" id="background_switch">
+                  <signal name="notify::active" handler="switch_run_on_background"/>
                   <property name="title" translatable="yes">Run Alpaca In Background</property>
                 </object>
               </child>
             </object>
           </child>
           <child>
-            <object class="AdwPreferencesGroup">
+            <object class="AdwPreferencesGroup" id="tweaks_group">
               <child>
-                <object class="AdwSpinRow" id="temperature_spin">
+                <object class="AdwSpinRow">
                   <signal name="changed" handler="model_spin_changed"/>
                   <property name="name">temperature</property>
                   <property name="title" translatable="yes">Temperature</property>
@@ -281,7 +283,7 @@
                 </object>
               </child>
               <child>
-                <object class="AdwSpinRow" id="seed_spin">
+                <object class="AdwSpinRow">
                   <signal name="changed" handler="model_spin_changed"/>
                   <property name="name">seed</property>
                   <property name="title" translatable="yes">Seed</property>
@@ -296,7 +298,7 @@
                 </object>
               </child>
               <child>
-                <object class="AdwSpinRow" id="keep_alive_spin">
+                <object class="AdwSpinRow">
                   <signal name="changed" handler="model_spin_changed"/>
                   <property name="name">keep_alive</property>
                   <property name="title" translatable="yes">Keep Alive Time</property>
@@ -319,7 +321,7 @@
           <property name="title" translatable="yes">Ollama Instance</property>
           <property name="icon-name">brain-augemnted-symbolic</property>
           <child>
-            <object class="AdwPreferencesGroup">
+            <object class="AdwPreferencesGroup" id="overrides_group">
               <property name="title" translatable="yes">Ollama Overrides</property>
               <property name="description" translatable="yes">Manage the arguments used on Ollama, any changes on this page only applies to the integrated instance, the instance will restart if you make changes.</property>
               <child>
