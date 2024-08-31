@@ -81,10 +81,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     keep_alive_spin = Gtk.Template.Child()
     preferences_dialog = Gtk.Template.Child()
     shortcut_window : Gtk.ShortcutsWindow  = Gtk.Template.Child()
-    bot_message : Gtk.TextBuffer = None
-    bot_message_box : Gtk.Box = None
-    bot_message_view : Gtk.TextView = None
-    bot_message_button_container : Gtk.TextView = None
     file_preview_dialog = Gtk.Template.Child()
     file_preview_text_view = Gtk.Template.Child()
     file_preview_image = Gtk.Template.Child()
@@ -813,8 +809,7 @@ Generate a title following these rules:
         clipboard.read_texture_async(None, self.cb_image_received)
 
     def handle_enter_key(self):
-        if not self.bot_message:
-            self.send_message()
+        self.send_message()
         return True
 
     def __init__(self, **kwargs):
