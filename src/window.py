@@ -814,6 +814,7 @@ Generate a title following these rules:
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
         Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.banner.set_revealed(monitor.get_power_saver_enabled()))
         self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
 
