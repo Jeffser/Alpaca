@@ -17,209 +17,209 @@
       </object>
     </child>
     <property name="content">
-          <object class="AdwOverlaySplitView" id="split_view_overlay">
-            <property name="show-sidebar" bind-source="show_sidebar_button" bind-property="active" bind-flags="sync-create"/>
-            <property name="sidebar-width-fraction">0.4</property>
-            <property name="sidebar">
-              <object class="AdwToolbarView">
-                <child type="top">
-                  <object class="AdwHeaderBar">
-                    <child type="start">
-                      <object class="GtkButton" id="add_chat_button">
-                        <property name="action-name">app.new_chat</property>
-                        <property name="tooltip-text" translatable="yes">New Chat</property>
-                        <property name="icon-name">chat-message-new-symbolic</property>
-                        <style>
-                          <class name="flat"/>
-                        </style>
-                      </object>
-                    </child>
-                    <child type="end">
-                      <object class="GtkMenuButton">
-                        <property name="primary">True</property>
-                        <property name="icon-name">open-menu-symbolic</property>
-                        <property name="tooltip-text" translatable="yes">Menu</property>
-                        <property name="menu-model">primary_menu</property>
-                      </object>
-                    </child>
+      <object class="AdwOverlaySplitView" id="split_view_overlay">
+        <property name="show-sidebar" bind-source="show_sidebar_button" bind-property="active" bind-flags="sync-create"/>
+        <property name="sidebar-width-fraction">0.4</property>
+        <property name="sidebar">
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar">
+                <child type="start">
+                  <object class="GtkButton" id="add_chat_button">
+                    <property name="action-name">app.new_chat</property>
+                    <property name="tooltip-text" translatable="yes">New Chat</property>
+                    <property name="icon-name">chat-message-new-symbolic</property>
+                    <style>
+                      <class name="flat"/>
+                    </style>
                   </object>
                 </child>
-                <property name="content">
-                  <object class="GtkScrolledWindow" id="chat_list_container">
-                    <property name="vexpand">true</property>
-                    <property name="hexpand">true</property>
+                <child type="end">
+                  <object class="GtkMenuButton">
+                    <property name="primary">True</property>
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Menu</property>
+                    <property name="menu-model">primary_menu</property>
                   </object>
-                </property>
+                </child>
+              </object>
+            </child>
+            <property name="content">
+              <object class="GtkScrolledWindow" id="chat_list_container">
+                <property name="vexpand">true</property>
+                <property name="hexpand">true</property>
               </object>
             </property>
-            <child>
-              <object class="AdwToolbarView">
-                <child type="top">
-                  <object class="AdwHeaderBar" id="header_bar">
-                    <child type="start">
-                      <object class="GtkToggleButton" id="show_sidebar_button">
-                        <property name="icon-name">sidebar-show-symbolic</property>
-                        <property name="tooltip-text" translatable="yes">Toggle Sidebar</property>
-                        <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
-                      </object>
-                    </child>
-                    <child type="end">
-                      <object class="GtkMenuButton" id="secondary_menu_button">
-                        <property name="primary">False</property>
-                        <property name="icon-name">view-more-symbolic</property>
-                        <property name="tooltip-text" translatable="yes">Chat Menu</property>
-                        <property name="menu-model">secondary_menu</property>
-                      </object>
-                    </child>
+          </object>
+        </property>
+        <child>
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar" id="header_bar">
+                <child type="start">
+                  <object class="GtkToggleButton" id="show_sidebar_button">
+                    <property name="icon-name">sidebar-show-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Toggle Sidebar</property>
+                    <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
                   </object>
                 </child>
-                <property name="content">
-                  <object class="GtkBox"><!--ACTUAL CONTENT-->
-                    <property name="orientation">1</property>
-                    <property name="vexpand">true</property>
+                <child type="end">
+                  <object class="GtkMenuButton" id="secondary_menu_button">
+                    <property name="primary">False</property>
+                    <property name="icon-name">view-more-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Chat Menu</property>
+                    <property name="menu-model">secondary_menu</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <property name="content">
+              <object class="GtkBox"><!--ACTUAL CONTENT-->
+                <property name="orientation">1</property>
+                <property name="vexpand">true</property>
+                <property name="hexpand">true</property>
+                <child>
+                  <object class="AdwBanner" id="banner">
+                    <property name="button-label" translatable="true">Close</property>
+                    <property name="title" translatable="yes">Warning: Power saver mode is enabled, this will slow down message generation</property>
+                    <property name="revealed">true</property>
+                  </object>
+                </child>
+                <child>
+                <object class="AdwToastOverlay" id="main_overlay">
+                <child>
+                  <object class="GtkStack" id="chat_stack">
                     <property name="hexpand">true</property>
+                    <property name="vexpand">true</property>
+                    <property name="hhomogeneous">true</property>
+                  </object>
+                </child>
+                </object>
+                </child>
+                <child>
+                  <object class="AdwClamp">
+                    <property name="maximum-size">1000</property>
+                    <property name="tightening-threshold">800</property>
                     <child>
-                      <object class="AdwBanner" id="banner">
-                        <property name="button-label" translatable="true">Close</property>
-                        <property name="title" translatable="yes">Warning: Power saver mode is enabled, this will slow down message generation</property>
-                        <property name="revealed">true</property>
-                      </object>
-                    </child>
-                    <child>
-                    <object class="AdwToastOverlay" id="main_overlay">
-                    <child>
-                      <object class="GtkStack" id="chat_stack">
-                        <property name="hexpand">true</property>
-                        <property name="vexpand">true</property>
-                        <property name="hhomogeneous">true</property>
-                      </object>
-                    </child>
-                    </object>
-                    </child>
-                    <child>
-                      <object class="AdwClamp">
-                        <property name="maximum-size">1000</property>
-                        <property name="tightening-threshold">800</property>
+                      <object class="GtkBox">
+                        <property name="orientation">1</property>
+                        <property name="spacing">12</property>
+                        <property name="margin-top">12</property>
+                        <property name="margin-bottom">12</property>
+                        <property name="margin-start">12</property>
+                        <property name="margin-end">12</property>
+                        <child>
+                          <object class="GtkScrolledWindow" id="attachment_box">
+                            <property name="visible">false</property>
+                            <child>
+                              <object class="GtkBox" id="attachment_container">
+                                <property name="orientation">0</property>
+                                <property name="vexpand">false</property>
+                                <property name="spacing">12</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                         <child>
                           <object class="GtkBox">
-                            <property name="orientation">1</property>
+                            <property name="orientation">0</property>
                             <property name="spacing">12</property>
-                            <property name="margin-top">12</property>
-                            <property name="margin-bottom">12</property>
-                            <property name="margin-start">12</property>
-                            <property name="margin-end">12</property>
                             <child>
-                              <object class="GtkScrolledWindow" id="attachment_box">
-                                <property name="visible">false</property>
+                              <object class="GtkButton" id="attachment_button">
+                                <property name="vexpand">false</property>
+                                <property name="valign">3</property>
+                                <property name="tooltip-text" translatable="yes">Attach File</property>
+                                <style>
+                                  <class name="circular"/>
+                                </style>
                                 <child>
-                                  <object class="GtkBox" id="attachment_container">
-                                    <property name="orientation">0</property>
-                                    <property name="vexpand">false</property>
-                                    <property name="spacing">12</property>
+                                  <object class="AdwButtonContent">
+                                    <property name="icon-name">chain-link-loose-symbolic</property>
                                   </object>
                                 </child>
                               </object>
                             </child>
                             <child>
                               <object class="GtkBox">
-                                <property name="orientation">0</property>
-                                <property name="spacing">12</property>
+                                <style>
+                                  <class name="card"/>
+                                </style>
                                 <child>
-                                  <object class="GtkButton" id="attachment_button">
-                                    <property name="vexpand">false</property>
-                                    <property name="valign">3</property>
-                                    <property name="tooltip-text" translatable="yes">Attach File</property>
+                                  <object class="GtkScrolledWindow">
+                                    <property name="max-content-height">150</property>
+                                    <property name="propagate-natural-height">true</property>
+                                    <property name="margin-start">10</property>
+                                    <property name="margin-end">10</property>
                                     <style>
-                                      <class name="circular"/>
+                                      <class name="message_input_scroll_window"/>
                                     </style>
                                     <child>
-                                      <object class="AdwButtonContent">
-                                        <property name="icon-name">chain-link-loose-symbolic</property>
+                                      <object class="GtkTextView" id="message_text_view">
+                                        <style>
+                                          <class name="message_text_view"/>
+                                        </style>
+                                        <property name="wrap-mode">word</property>
+                                        <property name="top-margin">10</property>
+                                        <property name="bottom-margin">10</property>
+                                        <property name="hexpand">true</property>
+                                        <property name="input-hints">spellcheck</property>
+                                        <accessibility>
+                                          <property name="label" translatable="yes">Message text box</property>
+                                        </accessibility>
                                       </object>
                                     </child>
                                   </object>
                                 </child>
-                                <child>
-                                  <object class="GtkBox">
-                                    <style>
-                                      <class name="card"/>
-                                    </style>
-                                    <child>
-                                      <object class="GtkScrolledWindow">
-                                        <property name="max-content-height">150</property>
-                                        <property name="propagate-natural-height">true</property>
-                                        <property name="margin-start">10</property>
-                                        <property name="margin-end">10</property>
-                                        <style>
-                                          <class name="message_input_scroll_window"/>
-                                        </style>
-                                        <child>
-                                          <object class="GtkTextView" id="message_text_view">
-                                            <style>
-                                              <class name="message_text_view"/>
-                                            </style>
-                                            <property name="wrap-mode">word</property>
-                                            <property name="top-margin">10</property>
-                                            <property name="bottom-margin">10</property>
-                                            <property name="hexpand">true</property>
-                                            <property name="input-hints">spellcheck</property>
-                                            <accessibility>
-                                              <property name="label" translatable="yes">Message text box</property>
-                                            </accessibility>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
-                                  </object>
-                                  </child>
+                              </object>
+                              </child>
+                              <child>
+                                <object class="GtkButton" id="send_button">
+                                  <signal name="clicked" handler="send_message"/>
+                                  <property name="vexpand">false</property>
+                                  <property name="valign">3</property>
+                                  <property name="tooltip-text" translatable="yes">Send Message</property>
+                                  <style>
+                                    <class name="accent"/>
+                                    <class name="circular"/>
+                                    <class name="suggested-action"/>
+                                  </style>
                                   <child>
-                                    <object class="GtkButton" id="send_button">
-                                      <signal name="clicked" handler="send_message"/>
-                                      <property name="vexpand">false</property>
-                                      <property name="valign">3</property>
-                                      <property name="tooltip-text" translatable="yes">Send Message</property>
-                                      <style>
-                                        <class name="accent"/>
-                                        <class name="circular"/>
-                                        <class name="suggested-action"/>
-                                      </style>
-                                      <child>
-                                        <object class="AdwButtonContent">
-                                          <property name="icon-name">paper-plane-symbolic</property>
-                                        </object>
-                                      </child>
-                                    </object>
-                                  </child>
-                                  <child>
-                                    <object class="GtkButton" id="stop_button">
-                                      <signal name="clicked" handler="stop_message"/>
-                                      <property name="vexpand">false</property>
-                                      <property name="valign">3</property>
-                                      <property name="visible">false</property>
-                                      <style>
-                                        <class name="destructive-action"/>
-                                        <class name="circular"/>
-                                      </style>
-                                      <child>
-                                        <object class="AdwButtonContent">
-                                          <property name="icon-name">media-playback-stop-symbolic</property>
-                                        </object>
-                                      </child>
+                                    <object class="AdwButtonContent">
+                                      <property name="icon-name">paper-plane-symbolic</property>
                                     </object>
                                   </child>
                                 </object>
-                            </child>
-                          </object>
-
+                              </child>
+                              <child>
+                                <object class="GtkButton" id="stop_button">
+                                  <signal name="clicked" handler="stop_message"/>
+                                  <property name="vexpand">false</property>
+                                  <property name="valign">3</property>
+                                  <property name="visible">false</property>
+                                  <style>
+                                    <class name="destructive-action"/>
+                                    <class name="circular"/>
+                                  </style>
+                                  <child>
+                                    <object class="AdwButtonContent">
+                                      <property name="icon-name">media-playback-stop-symbolic</property>
+                                    </object>
+                                  </child>
+                                </object>
+                              </child>
+                            </object>
                         </child>
                       </object>
+
                     </child>
+                  </object>
+                </child>
 
 
-                  </object><!--END OF CONTENT-->
-                </property>
-              </object>
-            </child>
+              </object><!--END OF CONTENT-->
+            </property>
+          </object>
+        </child>
       </object>
     </property>
     <object class="AdwPreferencesDialog" id="preferences_dialog">
