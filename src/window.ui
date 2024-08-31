@@ -325,7 +325,7 @@
               <property name="title" translatable="yes">Ollama Overrides</property>
               <property name="description" translatable="yes">Manage the arguments used on Ollama, any changes on this page only applies to the integrated instance, the instance will restart if you make changes.</property>
               <child>
-                <object class="AdwEntryRow" id="override_HSA_OVERRIDE_GFX_VERSION">
+                <object class="AdwEntryRow">
                   <signal name="apply" handler="override_changed"/>
                   <property name="name">HSA_OVERRIDE_GFX_VERSION</property>
                   <property name="title" translatable="no">HSA_OVERRIDE_GFX_VERSION</property>
@@ -346,7 +346,7 @@
                 </object>
               </child>
               <child>
-                <object class="AdwEntryRow" id="override_CUDA_VISIBLE_DEVICES">
+                <object class="AdwEntryRow">
                   <signal name="apply" handler="override_changed"/>
                   <property name="name">CUDA_VISIBLE_DEVICES</property>
                   <property name="title" translatable="no">CUDA_VISIBLE_DEVICES</property>
@@ -367,7 +367,7 @@
                 </object>
               </child>
               <child>
-                <object class="AdwEntryRow" id="override_HIP_VISIBLE_DEVICES">
+                <object class="AdwEntryRow">
                   <signal name="apply" handler="override_changed"/>
                   <property name="name">HIP_VISIBLE_DEVICES</property>
                   <property name="title" translatable="no">HIP_VISIBLE_DEVICES</property>

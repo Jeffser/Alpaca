@@ -58,9 +58,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     #Override elements
     overrides_group = Gtk.Template.Child()
-    override_HSA_OVERRIDE_GFX_VERSION = Gtk.Template.Child()
-    override_CUDA_VISIBLE_DEVICES = Gtk.Template.Child()
-    override_HIP_VISIBLE_DEVICES = Gtk.Template.Child()
 
     #Elements
     split_view_overlay = Gtk.Template.Child()
@@ -218,6 +215,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def change_remote_connection(self, switcher, *_):
         logger.debug("Connection switched")
         self.ollama_instance.remote = self.remote_connection_switch.get_active()
+        if self.ollama_instance.remote:
+            self.ollama_instance.stop()
+        else:
+            self.ollama_instance.start()
         if self.model_manager:
             self.model_manager.update_local_list()
         self.save_server_config()
@@ -828,20 +829,6 @@ Generate a title following these rules:
                     data = json.load(f)
                     self.ollama_instance = connection_handler.instance(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'])
 
-                    #self.run_remote = data['run_remote']
-                    #local_instance.port = data['local_port']
-                    #self.remote_url = data['remote_url']
-                    #self.remote_bearer_token = data['remote_bearer_token'] if 'remote_bearer_token' in data else ''
-                    #self.run_on_background = data['run_on_background']
-                    ##Model Tweaks
-                    #if "model_tweaks" in data: self.model_tweaks = data['model_tweaks']
-                    #self.temperature_spin.set_value(self.model_tweaks['temperature'])
-                    #self.seed_spin.set_value(self.model_tweaks['seed'])
-                    #self.keep_alive_spin.set_value(self.model_tweaks['keep_alive'])
-                    #Overrides
-                    #if "ollama_overrides" in data:
-                        #local_instance.overrides = data['ollama_overrides']
-
                     for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
                         if element.get_name() in self.ollama_instance.tweaks:
                             element.set_value(self.ollama_instance.tweaks[element.get_name()])
@@ -855,15 +842,7 @@ Generate a title following these rules:
                     self.remote_connection_entry.set_text(self.ollama_instance.remote_url)
                     self.remote_bearer_token_entry.set_text(self.ollama_instance.bearer_token)
                     self.remote_connection_switch.set_active(self.ollama_instance.remote)
-                    #if self.run_remote:
-                        #connection_handler.BEARER_TOKEN = self.remote_bearer_token
-                        #connection_handler.URL = self.remote_url
-                        #self.remote_connection_switch.set_active(True)
-                    #else:
-                        #connection_handler.BEARER_TOKEN = None
-                        #self.remote_connection_switch.set_active(False)
-                        #connection_handler.URL = f"http://127.0.0.1:{local_instance.port}"
-                        #local_instance.start()
+
             except Exception as e:
                 logger.error(e)
         if not self.ollama_instance:
