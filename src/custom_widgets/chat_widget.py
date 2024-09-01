@@ -419,3 +419,5 @@ class chat_list(Gtk.ListBox):
                 if len(row.chat_window.messages) > 0:
                     last_model_used = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
                     window.model_manager.change_model(last_model_used)
+                with open(os.path.join(data_dir, "chats", "selected_chat.txt"), 'w') as f:
+                    f.write(row.chat_window.get_name())
