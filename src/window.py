@@ -778,7 +778,7 @@ Generate a title following these rules:
         #Instance
         self.launch_level_bar.set_value(0)
         self.launch_status.set_description(_('Loading instance'))
-        self.ollama_instance = connection_handler.ollamaInstance(local_port, remote_url, remote, tweaks, overrides, bearer_token)
+        self.ollama_instance = connection_handler.instance(local_port, remote_url, remote, tweaks, overrides, bearer_token)
 
         #Model Manager
         self.model_manager = model_widget.model_manager_container()
