@@ -201,6 +201,10 @@ class chat_tab(Gtk.ListBoxRow):
 
     def __init__(self, chat_window:chat):
         self.chat_window=chat_window
+        self.spinner = Gtk.Spinner(
+            spinning=True,
+            visible=False
+        )
         self.label = Gtk.Label(
             label=self.chat_window.get_name(),
             tooltip_text=self.chat_window.get_name(),
@@ -211,10 +215,16 @@ class chat_tab(Gtk.ListBoxRow):
             wrap_mode=2,
             xalign=0
         )
+        container = Gtk.Box(
+            orientation=0,
+            spacing=10
+        )
+        container.append(self.spinner)
+        container.append(self.label)
         super().__init__(
             css_classes = ["chat_row"],
             height_request = 45,
-            child = self.label
+            child = container
         )
 
         self.gesture = Gtk.GestureClick(button=3)
@@ -316,8 +326,8 @@ class chat_list(Gtk.ListBox):
         tab = self.get_tab_by_name(old_chat_name)
         if tab:
             new_chat_name = window.generate_numbered_name(new_chat_name, [tab.chat_window.get_name() for tab in self.tab_list])
-            tab.get_child().set_label(new_chat_name)
-            tab.get_child().set_tooltip_text(new_chat_name)
+            tab.label.set_label(new_chat_name)
+            tab.label.set_tooltip_text(new_chat_name)
             tab.chat_window.set_name(new_chat_name)
             if os.path.exists(os.path.join(data_dir, "chats", old_chat_name)):
                 shutil.move(os.path.join(data_dir, "chats", old_chat_name), os.path.join(data_dir, "chats", new_chat_name))

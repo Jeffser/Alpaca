@@ -171,7 +171,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             "model": current_model,
             "messages": self.convert_history_to_ollama(current_chat),
             "options": {"temperature": self.ollama_instance.tweaks["temperature"], "seed": self.ollama_instance.tweaks["seed"]},
-            "keep_alive": f"{self.ollama_instance.tweaks['keep_alive']}m"
+            "keep_alive": f"{self.ollama_instance.tweaks['keep_alive']}m",
+            "stream": True
         }
 
         self.message_text_view.get_buffer().set_text("", 0)
@@ -180,13 +181,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         current_chat.add_message(bot_id, current_model)
         m_element_bot = current_chat.messages[bot_id]
         m_element_bot.set_text()
-        thread = threading.Thread(target=self.run_message, args=(data, m_element_bot))
-        thread.start()
-        if len(data['messages']) == 1:
-            message_data = data["messages"][0].copy()
-            message_data['content'] = raw_message
-            generate_title_thread = threading.Thread(target=self.generate_chat_title, args=(message_data, current_chat.get_name()))
-            generate_title_thread.start()
+        threading.Thread(target=self.run_message, args=(data, m_element_bot, current_chat)).start()
 
     @Gtk.Template.Callback()
     def welcome_carousel_page_changed(self, carousel, index):
@@ -438,6 +433,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         messages = []
         for message_id, message in chat.messages_to_dict().items():
             new_message = message.copy()
+            if 'model' in new_message:
+                del new_message['model']
+            if 'date' in new_message:
+                del new_message['date']
             if 'files' in message and len(message['files']) > 0:
                 del new_message['files']
                 new_message['content'] = ''
@@ -458,8 +457,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         return messages
 
     def generate_chat_title(self, message, old_chat_name):
-        if not old_chat_name.startswith(_("New Chat")):
-            return
         logger.debug("Generating chat title")
         prompt = f"""
 Generate a title following these rules:
@@ -519,10 +516,13 @@ Generate a title following these rules:
         self.stop_button.set_visible(not send)
         self.send_button.set_visible(send)
 
-    def run_message(self, data:dict, message_element:message_widget.message):
+    def run_message(self, data:dict, message_element:message_widget.message, chat:chat_widget.chat):
         logger.debug("Running message")
-        chat = message_element.get_parent().get_parent().get_parent().get_parent()
         chat.busy = True
+        self.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(True)
+        if len(data['messages']) == 1 and chat.get_name().startswith(_("New Chat")):
+            threading.Thread(target=self.generate_chat_title, args=(data['messages'][0].copy(), chat.get_name())).start()
+
         self.chat_list_box.set_sensitive(False)
         if chat.welcome_screen:
             chat.welcome_screen.set_visible(False)
@@ -532,7 +532,7 @@ Generate a title following these rules:
         if self.regenerate_button:
             GLib.idle_add(self.chat_list_box.get_current_chat().remove, self.regenerate_button)
         try:
-            response = self.ollama_instance.request("POST", "api/generate", json.dumps(data), lambda data, message_element=message_element: GLib.idle_add(message_element.update_message, data))
+            response = self.ollama_instance.request("POST", "api/chat", json.dumps(data), lambda data, message_element=message_element: GLib.idle_add(message_element.update_message, data))
             if response.status_code != 200:
                 raise Exception('Network Error')
         except Exception as e:
@@ -699,7 +699,7 @@ Generate a title following these rules:
 
     def chat_actions(self, action, user_data):
         chat_row = self.selected_chat_row
-        chat_name = chat_row.get_child().get_label()
+        chat_name = chat_row.label.get_label()
         action_name = action.get_name()
         if action_name in ('delete_chat', 'delete_current_chat'):
             dialogs.delete_chat(self, chat_name)
