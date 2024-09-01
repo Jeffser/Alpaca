@@ -19,7 +19,7 @@
 """
 Handles the main window
 """
-import json, threading, os, re, base64, sys, gettext, uuid, shutil, tarfile, tempfile, logging, random
+import json, threading, os, re, base64, gettext, uuid, shutil, logging
 from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
@@ -32,7 +32,7 @@ gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
 
 from . import dialogs, connection_handler
-from .custom_widgets import table_widget, message_widget, chat_widget, model_widget
+from .custom_widgets import message_widget, chat_widget, model_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir
 
 logger = logging.getLogger(__name__)
@@ -515,15 +515,6 @@ Generate a title following these rules:
             source_style = GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita')
         buffer.set_style_scheme(source_style)
 
-    def generate_datetime_format(self, dt:datetime) -> str:
-        date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
-        current_date = GLib.DateTime.new_now_local()
-        if date.format("%Y/%m/%d") == current_date.format("%Y/%m/%d"):
-            return date.format("%H:%M %p")
-        if date.format("%Y") == current_date.format("%Y"):
-            return date.format("%b %d, %H:%M %p")
-        return date.format("%b %d %Y, %H:%M %p")
-
     def switch_send_stop_button(self, send:bool):
         self.stop_button.set_visible(not send)
         self.send_button.set_visible(send)
@@ -787,7 +778,7 @@ Generate a title following these rules:
         #Instance
         self.launch_level_bar.set_value(0)
         self.launch_status.set_description(_('Loading instance'))
-        self.ollama_instance = connection_handler.instance(local_port, remote_url, remote, tweaks, overrides, bearer_token)
+        self.ollama_instance = connection_handler.ollamaInstance(local_port, remote_url, remote, tweaks, overrides, bearer_token)
 
         #Model Manager
         self.model_manager = model_widget.model_manager_container()

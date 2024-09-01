@@ -8,9 +8,6 @@ from logging import getLogger
 from time import sleep
 
 logger = getLogger(__name__)
-#OK=200 response.status_code
-URL = None
-BEARER_TOKEN = None
 
 def log_output(pipe):
     with open(os.path.join(data_dir, 'tmp.log'), 'a') as f:

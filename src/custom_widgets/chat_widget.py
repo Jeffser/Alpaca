@@ -6,9 +6,9 @@ Handles the chat widget (testing)
 import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
-from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk
-import logging, os, datetime, re, shutil, random, tempfile, tarfile, json
-from ..internal import config_dir, data_dir, cache_dir, source_dir
+from gi.repository import Gtk, Gio, Adw, Gdk
+import logging, os, datetime, shutil, random, tempfile, tarfile, json
+from ..internal import data_dir
 from .message_widget import message
 
 logger = logging.getLogger(__name__)
