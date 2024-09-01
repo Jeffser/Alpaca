@@ -72,6 +72,7 @@ class chat(Gtk.ScrolledWindow):
         self.welcome_screen = None
         self.regenerate_button = None
         self.busy = False
+        self.get_vadjustment().connect('notify::page-size', lambda va, *_: va.set_value(va.get_upper() - va.get_page_size()) if va.get_value() == 0 else None)
 
     def stop_message(self):
         self.busy = False
