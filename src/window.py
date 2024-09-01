@@ -780,18 +780,8 @@ Generate a title following these rules:
         self.launch_status.set_description(_('Loading instance'))
         self.ollama_instance = connection_handler.instance(local_port, remote_url, remote, tweaks, overrides, bearer_token)
 
-        #Model Manager
-        self.model_manager = model_widget.model_manager_container()
-        self.model_scroller.set_child(self.model_manager)
-        self.launch_level_bar.set_value(1)
-        self.launch_status.set_description(_('Updating list of local models'))
-        self.model_manager.update_local_list()
-        self.launch_level_bar.set_value(2)
-        self.launch_status.set_description(_('Updating list of available models'))
-        self.model_manager.update_available_list()
-
         #User Preferences
-        self.launch_level_bar.set_value(3)
+        self.launch_level_bar.set_value(1)
         self.launch_status.set_description(_('Applying user preferences'))
         for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
             if element.get_name() in self.ollama_instance.tweaks:
@@ -806,6 +796,16 @@ Generate a title following these rules:
         self.remote_connection_switch.set_sensitive(self.remote_connection_entry.get_text())
         self.remote_bearer_token_entry.set_text(self.ollama_instance.bearer_token)
         self.remote_connection_switch.set_active(self.ollama_instance.remote)
+
+        #Model Manager
+        self.model_manager = model_widget.model_manager_container()
+        self.model_scroller.set_child(self.model_manager)
+        self.launch_level_bar.set_value(2)
+        self.launch_status.set_description(_('Updating list of local models'))
+        self.model_manager.update_local_list()
+        self.launch_level_bar.set_value(3)
+        self.launch_status.set_description(_('Updating list of available models'))
+        self.model_manager.update_available_list()
 
         #Chat History
         self.launch_level_bar.set_value(4)
@@ -878,7 +878,7 @@ Generate a title following these rules:
                 with open(os.path.join(config_dir, "server.json"), "r", encoding="utf-8") as f:
                     data = json.load(f)
                     self.background_switch.set_active(data['run_on_background'])
-                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], False, True)).start()
+                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], False, not data['run_remote'])).start()
             except Exception as e:
                 logger.error(e)
                 threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', True, True)).start()

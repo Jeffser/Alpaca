@@ -78,8 +78,8 @@ class instance():
         logger.info('Ollama version: {}'.format(v_str.split('client version is ')[1].strip()))
 
     def stop(self):
-        logger.info("Stopping Alpaca's Ollama instance")
         if self.instance:
+            logger.info("Stopping Alpaca's Ollama instance")
             self.instance.terminate()
             self.instance.wait()
             self.instance = None

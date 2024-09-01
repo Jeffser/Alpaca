@@ -193,6 +193,7 @@ def reconnect_remote_response(self, dialog, task, url_entry, bearer_entry):
         self.model_manager.update_local_list()
     elif response == "local":
         self.ollama_instance.remote = False
+        self.ollama_instance.start()
         self.model_manager.update_local_list()
     elif response == "close":
         self.destroy()
