@@ -59,6 +59,11 @@ class text_block(Gtk.Label):
             selectable=True
         )
         self.update_property([4, 7], [_("Response message") if bot else _("User message"), False])
+        self.connect('notify::has-focus', lambda *_: None if self.has_focus() else self.remove_selection() )
+
+    def remove_selection(self):
+        self.set_selectable(False)
+        self.set_selectable(True)
 
     def insert_at_end(self, text:str, markdown:bool):
         if markdown:
@@ -436,6 +441,7 @@ class message(Gtk.Overlay):
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
             self.content_children[-1].insert_at_end(data['message']['content'], False)
             if 'done' in data and data['done']:
+                window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
                 if chat.welcome_screen:
                     chat.container.remove(chat.welcome_screen)
                     chat.welcome_screen = None
