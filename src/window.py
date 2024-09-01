@@ -793,7 +793,7 @@ Generate a title following these rules:
         self.launch_status.set_description(_('Updating list of available models'))
         self.model_manager.update_available_list()
         self.launch_level_bar.set_value(3)
-        self.launch_status.set_description(_('Loading user settings'))
+        self.launch_status.set_description(_('Applying user preferences'))
         for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
             if element.get_name() in self.ollama_instance.tweaks:
                 element.set_value(self.ollama_instance.tweaks[element.get_name()])
