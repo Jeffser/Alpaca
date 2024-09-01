@@ -25,7 +25,7 @@ def log_output(pipe):
 
 class instance():
 
-    def __init__(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str=None):
+    def __init__(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str):
         self.local_port=local_port
         self.remote_url=remote_url
         self.remote=remote

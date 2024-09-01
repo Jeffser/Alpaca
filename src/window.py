@@ -98,7 +98,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_searchbar = Gtk.Template.Child()
     no_results_page = Gtk.Template.Child()
     model_link_button = Gtk.Template.Child()
-
+    launch_dialog = Gtk.Template.Child()
+    launch_status = Gtk.Template.Child()
+    launch_level_bar = Gtk.Template.Child()
     manage_models_dialog = Gtk.Template.Child()
     model_scroller = Gtk.Template.Child()
 
@@ -776,6 +778,43 @@ Generate a title following these rules:
             elif extension == 'pdf':
                 self.attach_file(file.get_path(), 'pdf')
 
+    def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, save:bool):
+        self.launch_dialog.present(self)
+        self.launch_level_bar.set_value(0)
+        self.launch_status.set_description(_('Loading instance'))
+        self.ollama_instance = connection_handler.instance(local_port, remote_url, remote, tweaks, overrides, bearer_token)
+
+        self.model_manager = model_widget.model_manager_container()
+        self.model_scroller.set_child(self.model_manager)
+        self.launch_level_bar.set_value(1)
+        self.launch_status.set_description(_('Updating list of local models'))
+        self.model_manager.update_local_list()
+        self.launch_level_bar.set_value(2)
+        self.launch_status.set_description(_('Updating list of available models'))
+        self.model_manager.update_available_list()
+        self.launch_level_bar.set_value(3)
+        self.launch_status.set_description(_('Loading user settings'))
+        for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
+            if element.get_name() in self.ollama_instance.tweaks:
+                element.set_value(self.ollama_instance.tweaks[element.get_name()])
+
+        for element in list(list(list(list(self.overrides_group)[0])[1])[0]):
+            if element.get_name() in self.ollama_instance.overrides:
+                element.set_text(self.ollama_instance.overrides[element.get_name()])
+
+        self.set_hide_on_close(self.background_switch.get_active())
+        self.remote_connection_entry.set_text(self.ollama_instance.remote_url)
+        self.remote_connection_switch.set_sensitive(self.remote_connection_entry.get_text())
+        self.remote_bearer_token_entry.set_text(self.ollama_instance.bearer_token)
+        self.remote_connection_switch.set_active(self.ollama_instance.remote)
+        self.launch_level_bar.set_value(4)
+        self.launch_status.set_description(_('Loading chats'))
+        self.load_history()
+        self.launch_level_bar.set_value(5)
+        self.launch_dialog.force_close()
+        if save:
+            self.save_server_config()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
@@ -833,33 +872,11 @@ Generate a title following these rules:
             try:
                 with open(os.path.join(config_dir, "server.json"), "r", encoding="utf-8") as f:
                     data = json.load(f)
-                    self.ollama_instance = connection_handler.instance(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'])
-
-                    for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
-                        if element.get_name() in self.ollama_instance.tweaks:
-                            element.set_value(self.ollama_instance.tweaks[element.get_name()])
-
-                    for element in list(list(list(list(self.overrides_group)[0])[1])[0]):
-                        if element.get_name() in self.ollama_instance.overrides:
-                            element.set_text(self.ollama_instance.overrides[element.get_name()])
-
                     self.background_switch.set_active(data['run_on_background'])
-                    self.set_hide_on_close(self.background_switch.get_active())
-                    self.remote_connection_entry.set_text(self.ollama_instance.remote_url)
-                    self.remote_connection_switch.set_sensitive(self.remote_connection_entry.get_text())
-                    self.remote_bearer_token_entry.set_text(self.ollama_instance.bearer_token)
-                    self.remote_connection_switch.set_active(self.ollama_instance.remote)
-
+                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], False)).start()
             except Exception as e:
                 logger.error(e)
-        if not self.ollama_instance:
-            self.ollama_instance = connection_handler.instance(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, None)
-            self.save_server_config()
+                threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', True)).start()
+        else:
+            threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', True)).start()
             self.welcome_dialog.present(self)
-
-        self.model_manager = model_widget.model_manager_container()
-        self.model_scroller.set_child(self.model_manager)
-        self.model_manager.update_local_list()
-        self.model_manager.update_available_list()
-
-        self.load_history()
