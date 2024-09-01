@@ -329,6 +329,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.model_scroller.set_visible(True)
             self.no_results_page.set_visible(False)
 
+    @Gtk.Template.Callback()
+    def on_clipboard_paste(self, textview):
+        logger.debug("Pasting from clipboard")
+        clipboard = Gdk.Display.get_default().get_clipboard()
+        clipboard.read_text_async(None, self.cb_text_received)
+        clipboard.read_texture_async(None, self.cb_image_received)
+
     def convert_model_name(self, name:str, mode:int) -> str: # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag
         try:
             if mode == 0:
@@ -757,12 +764,6 @@ Generate a title following these rules:
         except Exception as e:
             pass
 
-    def on_clipboard_paste(self, textview):
-        logger.debug("Pasting from clipboard")
-        clipboard = Gdk.Display.get_default().get_clipboard()
-        clipboard.read_text_async(None, self.cb_text_received)
-        clipboard.read_texture_async(None, self.cb_image_received)
-
     def handle_enter_key(self):
         self.send_message()
         return True
@@ -778,12 +779,17 @@ Generate a title following these rules:
             elif extension == 'pdf':
                 self.attach_file(file.get_path(), 'pdf')
 
-    def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, save:bool):
-        self.launch_dialog.present(self)
+    def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, save:bool, show_launch_dialog:bool):
+        #Show launch dialog
+        if show_launch_dialog:
+            self.launch_dialog.present(self)
+
+        #Instance
         self.launch_level_bar.set_value(0)
         self.launch_status.set_description(_('Loading instance'))
         self.ollama_instance = connection_handler.instance(local_port, remote_url, remote, tweaks, overrides, bearer_token)
 
+        #Model Manager
         self.model_manager = model_widget.model_manager_container()
         self.model_scroller.set_child(self.model_manager)
         self.launch_level_bar.set_value(1)
@@ -792,6 +798,8 @@ Generate a title following these rules:
         self.launch_level_bar.set_value(2)
         self.launch_status.set_description(_('Updating list of available models'))
         self.model_manager.update_available_list()
+
+        #User Preferences
         self.launch_level_bar.set_value(3)
         self.launch_status.set_description(_('Applying user preferences'))
         for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
@@ -807,11 +815,17 @@ Generate a title following these rules:
         self.remote_connection_switch.set_sensitive(self.remote_connection_entry.get_text())
         self.remote_bearer_token_entry.set_text(self.ollama_instance.bearer_token)
         self.remote_connection_switch.set_active(self.ollama_instance.remote)
+
+        #Chat History
         self.launch_level_bar.set_value(4)
         self.launch_status.set_description(_('Loading chats'))
         self.load_history()
         self.launch_level_bar.set_value(5)
-        self.launch_dialog.force_close()
+
+        #Close launch dialog
+        if show_launch_dialog:
+            self.launch_dialog.force_close()
+        #Save preferences
         if save:
             self.save_server_config()
 
@@ -873,10 +887,10 @@ Generate a title following these rules:
                 with open(os.path.join(config_dir, "server.json"), "r", encoding="utf-8") as f:
                     data = json.load(f)
                     self.background_switch.set_active(data['run_on_background'])
-                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], False)).start()
+                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], False, True)).start()
             except Exception as e:
                 logger.error(e)
-                threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', True)).start()
+                threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', True, True)).start()
         else:
-            threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', True)).start()
+            threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', True, False)).start()
             self.welcome_dialog.present(self)

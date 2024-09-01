@@ -154,6 +154,7 @@
                                     </style>
                                     <child>
                                       <object class="GtkTextView" id="message_text_view">
+                                        <signal name="paste-clipboard" handler="on_clipboard_paste"/>
                                         <style>
                                           <class name="message_text_view"/>
                                         </style>

@@ -59,6 +59,7 @@ class AlpacaApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.props.active_window.closing_app(None), ['<primary>w', '<primary>q'])
         self.create_action('preferences', lambda *_: self.props.active_window.preferences_dialog.present(self.props.active_window), ['<primary>comma'])
         self.create_action('about', self.on_about_action)
+        self.set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.version = version
 
     def do_activate(self):
