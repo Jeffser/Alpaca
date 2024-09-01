@@ -523,7 +523,6 @@ Generate a title following these rules:
         if len(data['messages']) == 1 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(data['messages'][0].copy(), chat.get_name())).start()
 
-        self.chat_list_box.set_sensitive(False)
         if chat.welcome_screen:
             chat.welcome_screen.set_visible(False)
         if chat.regenerate_button:

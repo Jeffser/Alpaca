@@ -215,12 +215,16 @@ class chat_tab(Gtk.ListBoxRow):
             wrap_mode=2,
             xalign=0
         )
+        self.indicator = Gtk.Image.new_from_icon_name("chat-bubble-text-symbolic")
+        self.indicator.set_visible(False)
+        self.indicator.set_css_classes(['accent'])
         container = Gtk.Box(
             orientation=0,
-            spacing=10
+            spacing=5
         )
-        container.append(self.spinner)
         container.append(self.label)
+        container.append(self.spinner)
+        container.append(self.indicator)
         super().__init__(
             css_classes = ["chat_row"],
             height_request = 45,
@@ -429,3 +433,5 @@ class chat_list(Gtk.ListBox):
                 if len(row.chat_window.messages) > 0:
                     last_model_used = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
                     window.model_manager.change_model(last_model_used)
+                if row.indicator.get_visible():
+                    row.indicator.set_visible(False)

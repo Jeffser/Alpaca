@@ -431,8 +431,6 @@ class message(Gtk.Overlay):
         if chat.busy:
             vadjustment = chat.get_vadjustment()
             if self.spinner:
-                if not window.chat_list_box.get_sensitive():
-                    window.chat_list_box.set_sensitive(True)
                 self.container.remove(self.spinner)
                 self.spinner = None
                 self.content_children[-1].set_visible(True)
@@ -442,6 +440,8 @@ class message(Gtk.Overlay):
             self.content_children[-1].insert_at_end(data['message']['content'], False)
             if 'done' in data and data['done']:
                 window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
+                if window.chat_list_box.get_current_chat().get_name() != chat.get_name():
+                    window.chat_list_box.get_tab_by_name(chat.get_name()).indicator.set_visible(True)
                 if chat.welcome_screen:
                     chat.container.remove(chat.welcome_screen)
                     chat.welcome_screen = None
