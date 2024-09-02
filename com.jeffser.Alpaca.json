@@ -119,21 +119,21 @@
             "name": "ollama",
             "buildsystem": "simple",
             "build-commands": [
-		"install -Dm0755 ollama* ${FLATPAK_DEST}/bin/ollama"
+            	"find . -maxdepth 1 -name '*64.tgz' -exec tar -xzf {} -C ${FLATPAK_DEST} \\;"
             ],
             "sources": [
             	{
             		"type": "file",
-            		"url": "https://github.com/ollama/ollama/releases/download/v0.3.3/ollama-linux-amd64",
-            		"sha256": "2b2a4ee4c86fa5b09503e95616bd1b3ee95238b1b3bf12488b9c27c66b84061a",
+            		"url": "https://github.com/ollama/ollama/releases/download/v0.3.9/ollama-linux-amd64.tgz",
+            		"sha256": "b0062fbccd46134818d9d59cfa3867ad6849163653cb1171bc852c5f379b0851",
 		    	"only-arches": [
 		    		"x86_64"
 		    	]
             	},
             	{
             		"type": "file",
-            		"url": "https://github.com/ollama/ollama/releases/download/v0.3.3/ollama-linux-arm64",
-            		"sha256": "28fddbea0c161bc539fd08a3dc78d51413cfe8da97386cb39420f4f30667e22c",
+            		"url": "https://github.com/ollama/ollama/releases/download/v0.3.9/ollama-linux-arm64.tgz",
+            		"sha256": "8979484bcb1448ab9b45107fbcb3b9f43c2af46f961487449b9ebf3518cd70eb",
 		    	"only-arches": [
 		    		"aarch64"
 		    	]
