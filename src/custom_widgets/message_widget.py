@@ -105,7 +105,7 @@ class code_block(Gtk.Box):
         title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=3)
         title_box.append(Gtk.Label(label=self.language.get_name() if self.language else _("Code Block"), hexpand=True, xalign=0))
         copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
-        copy_button.connect("clicked", lambda *_: self.on_copy)
+        copy_button.connect("clicked", lambda *_: self.on_copy())
         title_box.append(copy_button)
         self.append(title_box)
         self.append(Gtk.Separator())

@@ -525,6 +525,7 @@ Generate a title following these rules:
 
     def run_message(self, data:dict, message_element:message_widget.message, chat:chat_widget.chat):
         logger.debug("Running message")
+        self.save_history(chat)
         chat.busy = True
         self.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(True)
         if len(data['messages']) == 1 and chat.get_name().startswith(_("New Chat")):
