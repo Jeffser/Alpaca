@@ -24,7 +24,7 @@ msgstr "Alpaca"
 
 #: data/com.jeffser.Alpaca.desktop.in:9
 msgid "ai;ollama;llm"
-msgstr ""
+msgstr "ki;ollama;llm"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 msgid "Chat with local AI models"
@@ -132,67 +132,67 @@ msgstr "Neu"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:86
 msgid "Model, message and chat systems have been rewritten"
-msgstr ""
+msgstr "Modell-, Nachrichten und Chatsysteme wurden neugeschrieben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:87
 msgid "New models are available"
-msgstr ""
+msgstr "Neue Modelle verfügbar"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "Ollama updated to v0.3.9"
-msgstr ""
+msgstr "Ollama zu Version v0.3.9 aktualisiert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:89
 msgid "Added support for multiple chat generations simultaneously"
-msgstr ""
+msgstr "Support für simultane Multi-Chat-Generationen hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Added experimental AMD GPU support"
-msgstr ""
+msgstr "Experimenteller AMD GPU Support hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Added message loading spinner and new message indicator to chat tab"
-msgstr ""
+msgstr "Statusladebalken als Indikator für Nachrichten zum Chat-Tab hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added animations"
-msgstr ""
+msgstr "Animationen hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Changed model manager / model selector appearance"
-msgstr ""
+msgstr "Die Gestaltung des Modell Manager / Modellauswähler geändert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Changed message appearance"
-msgstr ""
+msgstr "Die Gestaltung der Nachrichten geändert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Added markdown and code blocks to user messages"
-msgstr ""
+msgstr "Markdown und Codeblöcke für Benutzernachrichten hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Added loading dialog at launch so the app opens faster"
-msgstr ""
+msgstr "Ladedialog beim Start hinzugefügt, damit sich die App schneller öffnet"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added warning when device is on 'battery saver' mode"
-msgstr ""
+msgstr "Warnung hinzugefügt, wenn sich das Gerät im 'Batteriesparmodus' befindet"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Added inactivity timer to integrated instance"
-msgstr ""
+msgstr "Inaktivitäts-Timer zur integrierten Instanz hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "The chat is now scrolled to the bottom when it's changed"
-msgstr ""
+msgstr "Der Chat wird jetzt nach unten gescrollt, wenn er geändert wird"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Better handling of focus on messages"
-msgstr ""
+msgstr "Bessere Handhabung von Nachrichten, die im Fokus stehen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Better general performance on the app"
-msgstr ""
+msgstr "Bessere Grundperformance der App"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "New duplicate chat option"
@@ -1353,23 +1353,23 @@ msgstr "Bilderkennung ist nur bei bestimmten Modellen verfügbar"
 
 #: src/window.py:786
 msgid "Loading instance"
-msgstr ""
+msgstr "Lade Instanz"
 
 #: src/window.py:791
 msgid "Applying user preferences"
-msgstr ""
+msgstr "User-Vorgaben anwenden"
 
 #: src/window.py:811
 msgid "Updating list of local models"
-msgstr ""
+msgstr "Liste der lokalen Modelle aktualisieren"
 
 #: src/window.py:814
 msgid "Updating list of available models"
-msgstr ""
+msgstr "Liste der verfügaren Modelle aktualisieren"
 
 #: src/window.py:819
 msgid "Loading chats"
-msgstr ""
+msgstr "Chats laden"
 
 #: src/available_models_descriptions.py:2
 msgid ""
@@ -1384,6 +1384,8 @@ msgid ""
 "Google Gemma 2 is a high-performing and efficient model by now available in "
 "three sizes: 2B, 9B, and 27B."
 msgstr ""
+"Google Gemma ist ein leistungsfähiges und effizientes Modell, dass ab sofort "
+"in drei Größen verfügbar ist: 2B, 9B und 27B."
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -1650,6 +1652,7 @@ msgid ""
 "Codestral is Mistral AI’s first-ever code model designed for code generation "
 "tasks."
 msgstr ""
+"Codestral ist Mistral AIs initiales Code-Modell welches auf Code-Generierungsaufgaben getrimmt ist"
 
 #: src/available_models_descriptions.py:39
 msgid ""
@@ -1889,7 +1892,8 @@ msgstr ""
 msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
-msgstr ""
+msgstr "🪐 Eine Familie von kleinen Modellen mit 135M, 360M und 1.7B Parametern, "
+"trainiert auf einem neuen hochwertigen Datensatz. "
 
 #: src/available_models_descriptions.py:73
 msgid ""
@@ -1897,6 +1901,9 @@ msgid ""
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
 "open-source models and even closed-source models (e.g., GPT4o)."
 msgstr ""
+"Qwen2 Math  ist eine Reihe von spezialisierten mathematischen Sprachmodellen, die auf den "
+" Qwen2 LLMs aufbaut, die die mathematischen Fähigkeiten von "
+" Open-Source-Modellen und sogar Closed-Source-Modellen (z. B. GPT4o) übertrifft."
 
 #: src/available_models_descriptions.py:74
 msgid ""
@@ -1941,8 +1948,10 @@ msgstr ""
 #: src/available_models_descriptions.py:80
 msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
-"overtaking similarly and larger sized models."
+"overtaking similarly and larger sized models. "
 msgstr ""
+"Ein leichtgewichtiges KI-Modell mit 3,8 Milliarden Parametern, dessen Leistung "
+", das ähnliche und größere Modelle übertrifft. "
 
 #: src/available_models_descriptions.py:81
 msgid ""
@@ -2002,6 +2011,8 @@ msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
 msgstr ""
+"Hermes 3 ist die neueste Version des Flaggschiffs der Hermes-Reihe von LLM von Nous Research "
+
 
 #: src/available_models_descriptions.py:90
 msgid ""
@@ -2130,6 +2141,8 @@ msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
 msgstr ""
+"BGE-M3 ist ein neues Modell von BAAI, das sich durch seine Vielseitigkeit in Multi-"
+"Funktionalität, Mehrsprachigkeit und Multigranularität."
 
 #: src/available_models_descriptions.py:107
 msgid ""
@@ -2158,17 +2171,18 @@ msgstr ""
 
 #: src/available_models_descriptions.py:110
 msgid "Embedding model from BAAI mapping texts to vectors."
-msgstr ""
+msgstr "Einbettungsmodell von BAAI, das Texte auf Vektoren abbildet."
 
 #: src/available_models_descriptions.py:111
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
 msgstr ""
+"Satztransformationsmodell, das für Aufgaben wie Clustering oder semantische Suche verwendet werden kann."
 
 #: src/connection_handler.py:81
 msgid "Ollama instance was shut down due to inactivity"
-msgstr ""
+msgstr "Ollama-Instanz wurde wegen Inaktivität abgeschaltet"
 
 #: src/dialogs.py:20
 msgid "Chat cannot be cleared while receiving a message"
@@ -2234,7 +2248,7 @@ msgstr "Download stoppen?"
 
 #: src/dialogs.py:127
 msgid "Are you sure you want to stop pulling '{}'?"
-msgstr ""
+msgstr "Bist du Dir sicher, das beziehen von '{}' abzubrechen?"
 
 #: src/dialogs.py:131
 msgid "Stop"
@@ -2353,7 +2367,7 @@ msgstr "Chat-Menü"
 #: src/window.ui:84
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
-msgstr ""
+msgstr "Warnung: Der Energiesparmodus ist aktiviert, dies verlangsamt die Nachrichtenerstellung"
 
 #: src/window.ui:130
 msgid "Attach File"
@@ -2447,7 +2461,7 @@ msgstr ""
 "Änderungen neu gestartet."
 
 #: src/window.ui:399
-msgid "Idle Timer"
+msgid "Leerlauf Timer"
 msgstr ""
 
 #: src/window.ui:400
@@ -2455,14 +2469,16 @@ msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
 msgstr ""
+"Anzahl der Minuten, die die Instanz im Leerlauf bleiben soll, bevor sie heruntergefahren wird (0 "
+"bedeutet, dass sie nicht abgeschaltet wird)"
 
 #: src/window.ui:419
 msgid "Loading Alpaca dialog"
-msgstr ""
+msgstr "Laden des Alpaca Dialogs"
 
 #: src/window.ui:426
 msgid "Loading Alpaca..."
-msgstr ""
+msgstr "Lade Alpaca..."
 
 #: src/window.ui:440
 msgid "Manage models dialog"
@@ -2667,62 +2683,64 @@ msgstr "Neue Zeile einfügen"
 
 #: src/custom_widgets/chat_widget.py:114
 msgid "Send prompt: '{}'"
-msgstr ""
+msgstr "Sende Prompt: '{}'"
 
 #: src/custom_widgets/chat_widget.py:120 src/custom_widgets/chat_widget.py:121
 msgid "Open Model Manager"
-msgstr ""
+msgstr "Öffne Modell-Manager"
 
 #: src/custom_widgets/chat_widget.py:130
 msgid "Try one of these prompts"
-msgstr ""
+msgstr "Teste einen dieser Prompts"
 
 #: src/custom_widgets/chat_widget.py:130
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
 msgstr ""
+"Es sieht so aus, als hätten Sie noch keine Modelle heruntergeladen. "
+"Laden Sie Modelle herunter, um loszulegen!"
 
 #: src/custom_widgets/chat_widget.py:191
 msgid "Regenerate Response"
-msgstr ""
+msgstr "Antwort regenerieren"
 
 #: src/custom_widgets/chat_widget.py:340
 msgid "Copy of {}"
-msgstr ""
+msgstr "Kopie von {}"
 
 #: src/custom_widgets/chat_widget.py:350
 msgid "Chat exported successfully"
-msgstr ""
+msgstr "Chatverlauf erfolgreich exportiert"
 
 #: src/custom_widgets/chat_widget.py:419
 msgid "Chat imported successfully"
-msgstr ""
+msgstr "Chatverlauf erfolgreich importiert"
 
 #: src/custom_widgets/message_widget.py:42
 msgid "Message edited successfully"
-msgstr ""
+msgstr "Nachricht erfolgreich editiert"
 
 #: src/custom_widgets/message_widget.py:61
 msgid "Response message"
-msgstr ""
+msgstr "Antwortnachricht"
 
 #: src/custom_widgets/message_widget.py:61
 msgid "User message"
-msgstr ""
+msgstr "Benutzernachricht"
 
 #: src/custom_widgets/message_widget.py:103
 msgid "{}Code Block"
-msgstr ""
+msgstr "{}Code-Block"
 
 #: src/custom_widgets/message_widget.py:106
 msgid "Code Block"
-msgstr ""
+msgstr "Code-Block"
 
 #: src/custom_widgets/message_widget.py:107
 #: src/custom_widgets/message_widget.py:306
 msgid "Copy Message"
-msgstr ""
+msgstr "Kopiere Nachricht"
 
 #: src/custom_widgets/message_widget.py:122
 msgid "Code copied to the clipboard"
@@ -2731,41 +2749,41 @@ msgstr "Code in die Zwischenablage kopiert"
 #: src/custom_widgets/message_widget.py:201
 #: src/custom_widgets/message_widget.py:203
 msgid "Image"
-msgstr ""
+msgstr "Bild"
 
 #: src/custom_widgets/message_widget.py:211
 #: src/custom_widgets/message_widget.py:227
 msgid "Missing Image"
-msgstr ""
+msgstr "Fehlendes Bild"
 
 #: src/custom_widgets/message_widget.py:229
 msgid "Missing image"
-msgstr ""
+msgstr "Fehlendes Bild"
 
 #: src/custom_widgets/message_widget.py:298
 msgid "Remove Message"
-msgstr ""
+msgstr "Nachricht entfernen"
 
 #: src/custom_widgets/message_widget.py:314
 msgid "Regenerate Message"
-msgstr ""
+msgstr "Nachricht regenerieren"
 
 #: src/custom_widgets/message_widget.py:321
 msgid "Edit Message"
-msgstr ""
+msgstr "Nachricht bearbeiten"
 
 #: src/custom_widgets/message_widget.py:343
 msgid "Message copied to the clipboard"
-msgstr ""
+msgstr "Nachricht in die Zwischenablage kopiert"
 
 #: src/custom_widgets/message_widget.py:364
 msgid "Message cannot be regenerated while receiving a response"
-msgstr ""
+msgstr "Nachricht kann nicht regeneriert werden, während eine Antwort gesendet wird"
 
 #: src/custom_widgets/model_widget.py:66 src/custom_widgets/model_widget.py:70
 #: src/custom_widgets/model_widget.py:88 src/custom_widgets/model_widget.py:89
 msgid "Select a Model"
-msgstr ""
+msgstr "Wähle ein Modell"
 
 #: src/custom_widgets/model_widget.py:163
 msgid "Stop Pulling '{}'"
