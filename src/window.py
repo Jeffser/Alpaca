@@ -718,6 +718,7 @@ Generate a title following these rules:
     def cb_text_received(self, clipboard, result):
         try:
             text = clipboard.read_text_finish(result)
+            print(text)
             #Check if text is a Youtube URL
             youtube_regex = re.compile(
                 r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/'
@@ -871,7 +872,7 @@ Generate a title following these rules:
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
-        self.message_text_view.connect("paste-clipboard", self.on_clipboard_paste)
+        #self.message_text_view.connect("paste-clipboard", self.on_clipboard_paste)
         self.file_preview_remove_button.connect('clicked', lambda button : dialogs.remove_attached_file(self, button.get_name()))
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
         self.create_model_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_']))
