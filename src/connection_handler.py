@@ -55,7 +55,7 @@ class instance():
         if not self.instance:
             self.start()
         connection_url = '{}/{}'.format(self.remote_url if self.remote else 'http://127.0.0.1:{}'.format(self.local_port), connection_url)
-        logger.info('Connection: {} : {}'.format(connection_type, connection_url))
+        logger.info('{} : {} : {}'.format(connection_type, connection_url, data))
         response = None
         match connection_type:
             case "GET":
@@ -70,7 +70,7 @@ class instance():
                 else:
                     response = requests.post(connection_url, headers=self.get_headers(True), data=data, stream=False)
             case "DELETE":
-                response = requests.delete(connection_url, headers=self.get_headers(False), json=data)
+                response = requests.delete(connection_url, headers=self.get_headers(False), data=data)
         self.busy -= 1
         if not self.idle_timer:
             self.start_timer()
