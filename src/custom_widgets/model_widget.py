@@ -155,14 +155,14 @@ class pulling_model(Gtk.ListBoxRow):
         description_box.append(subtitle_box)
         description_box.append(self.progress_bar)
 
-        delete_button = Gtk.Button(
+        stop_button = Gtk.Button(
             icon_name = "media-playback-stop-symbolic",
             vexpand = False,
             valign = 3,
             css_classes = ["destructive-action", "circular"],
             tooltip_text = _("Stop Pulling '{}'").format(window.convert_model_name(model_name, 0))
         )
-        delete_button.connect('clicked', lambda *_: dialogs.stop_pull_model(window, self))
+        stop_button.connect('clicked', lambda *_: dialogs.stop_pull_model(window, self))
 
         container_box = Gtk.Box(
             hexpand=True,
@@ -176,7 +176,7 @@ class pulling_model(Gtk.ListBoxRow):
         )
 
         container_box.append(description_box)
-        container_box.append(delete_button)
+        container_box.append(stop_button)
 
         super().__init__(
             child=container_box,

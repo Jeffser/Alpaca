@@ -51,8 +51,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     #Variables
 
-    model_tweaks = {"temperature": 0.7, "seed": 0, "keep_alive": 5}
-    pulling_models = {}
     attachments = {}
     header_bar = Gtk.Template.Child()
 
@@ -619,11 +617,6 @@ Generate a title following these rules:
 
     def generate_uuid(self) -> str:
         return f"{datetime.today().strftime('%Y%m%d%H%M%S%f')}{uuid.uuid4().hex}"
-
-    def stop_pull_model(self, model_name):
-        logger.debug("Stopping model pull")
-        self.pulling_models[model_name]['overlay'].get_parent().get_parent().remove(self.pulling_models[model_name]['overlay'].get_parent())
-        del self.pulling_models[model_name]
 
     def connection_error(self):
         logger.error("Connection error")
