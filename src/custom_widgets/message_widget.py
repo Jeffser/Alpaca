@@ -450,7 +450,6 @@ class message(Gtk.Overlay):
                 self.dt = datetime.datetime.now()
                 self.add_footer(self.dt)
                 window.show_notification(chat.get_name(), self.text[:200] + (self.text[200:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
-                window.ollama_instance.start_timer()
                 window.save_history(chat)
         else:
             sys.exit()

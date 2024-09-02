@@ -77,7 +77,7 @@ class instance():
         return response
 
     def run_timer(self):
-        if not self.idle_timer_stop_event.wait(self.idle_timer_delay*1):
+        if not self.idle_timer_stop_event.wait(self.idle_timer_delay*60):
             window.show_toast(_("Ollama instance was shut down due to inactivity"), window.main_overlay)
             self.stop()
 
