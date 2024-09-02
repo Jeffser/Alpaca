@@ -3,7 +3,7 @@
 Handles UI dialogs
 """
 import os
-import logging, requests
+import logging, requests, threading
 from pytube import YouTube
 from html2text import html2text
 from gi.repository import Adw, Gtk
@@ -278,7 +278,7 @@ def create_model_from_file(self):
 def create_model_from_name_response(self, dialog, task, entry):
     model = entry.get_text().lower().strip()
     if dialog.choose_finish(task) == 'accept' and model:
-        self.pull_model(model)
+        threading.Thread(target=self.model_manager.pull_model, kwargs={"model_name": model}).start()
 
 def create_model_from_name(self):
     entry = Gtk.Entry()
