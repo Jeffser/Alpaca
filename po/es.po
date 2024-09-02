@@ -24,7 +24,7 @@ msgstr "Alpaca"
 
 #: data/com.jeffser.Alpaca.desktop.in:9
 msgid "ai;ollama;llm"
-msgstr ""
+msgstr "ai;ollama;llm"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 msgid "Chat with local AI models"
@@ -132,67 +132,70 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:86
 msgid "Model, message and chat systems have been rewritten"
-msgstr ""
+msgstr "Se han reescrito los sistemas de modelos, mensajes y chat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:87
 msgid "New models are available"
-msgstr ""
+msgstr "Nuevos modelos disponibles"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "Ollama updated to v0.3.9"
-msgstr ""
+msgstr "Actualizado Ollama a v0.3.9"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:89
 msgid "Added support for multiple chat generations simultaneously"
-msgstr ""
+msgstr "Se agregó soporte para múltiples generaciones de chat simultáneamente"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Added experimental AMD GPU support"
-msgstr ""
+msgstr "Se agregó soporte experimental con GPU AMD"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Added message loading spinner and new message indicator to chat tab"
-msgstr ""
+msgstr "Se agregó un indicador de carga de mensajes y un indicador de mensajes "
+"nuevos a la pestaña de chat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added animations"
-msgstr ""
+msgstr "Se agregaron animaciones"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Changed model manager / model selector appearance"
-msgstr ""
+msgstr "Se modificó la apariencia del gestor de modelos / selector de modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Changed message appearance"
-msgstr ""
+msgstr "Se modificó la apariencia de mensajes"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Added markdown and code blocks to user messages"
-msgstr ""
+msgstr "Añadido markdown y bloques de código para mensajes de usuario"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Added loading dialog at launch so the app opens faster"
-msgstr ""
+msgstr "Se agregó un diálogo de carga al inicio para que la aplicación se "
+"abra más rápido"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added warning when device is on 'battery saver' mode"
-msgstr ""
+msgstr "Se agregó una advertencia cuando el dispositivo está en modo de "
+"'ahorro de batería'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Added inactivity timer to integrated instance"
-msgstr ""
+msgstr "Se agregó un temporizador de inactividad a la instancia integrada"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "The chat is now scrolled to the bottom when it's changed"
-msgstr ""
+msgstr "El chat ahora se desplaza hasta la parte inferior cuando se cambia"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Better handling of focus on messages"
-msgstr ""
+msgstr "Mejor manejo de focus en los mensajes"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Better general performance on the app"
-msgstr ""
+msgstr "Mejor rendimiento general en la aplicación"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "New duplicate chat option"
@@ -1314,7 +1317,7 @@ msgstr "Imagen"
 
 #: src/window.py:400
 msgid "Missing file"
-msgstr ""
+msgstr "Archivo faltante"
 
 #: src/window.py:530 src/window.py:582 src/window.py:602 src/window.py:604
 #: src/dialogs.py:91 src/window.ui:30 src/custom_widgets/chat_widget.py:309
@@ -1341,23 +1344,23 @@ msgstr ""
 
 #: src/window.py:786
 msgid "Loading instance"
-msgstr ""
+msgstr "Cargando instancia"
 
 #: src/window.py:791
 msgid "Applying user preferences"
-msgstr ""
+msgstr "Aplicando preferencias de usuario"
 
 #: src/window.py:811
 msgid "Updating list of local models"
-msgstr ""
+msgstr "Actualizando lista de modelos locales"
 
 #: src/window.py:814
 msgid "Updating list of available models"
-msgstr ""
+msgstr "Actualizando lista de modelos disponibles"
 
 #: src/window.py:819
 msgid "Loading chats"
-msgstr ""
+msgstr "Cargando chats"
 
 #: src/available_models_descriptions.py:2
 msgid ""
@@ -1372,6 +1375,8 @@ msgid ""
 "Google Gemma 2 is a high-performing and efficient model by now available in "
 "three sizes: 2B, 9B, and 27B."
 msgstr ""
+"Google Gemma 2 es un modelo de alto rendimiento y eficiente que ahora está "
+"disponible en tres tamaños: 2B, 9B y 27B."
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -1871,6 +1876,8 @@ msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
 msgstr ""
+"🪐 Una familia de modelos pequeños con 135M, 360M y 1.7B de parámetros, "
+"entrenados en un nuevo conjunto de datos de alta calidad."
 
 #: src/available_models_descriptions.py:73
 msgid ""
@@ -1878,6 +1885,10 @@ msgid ""
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
 "open-source models and even closed-source models (e.g., GPT4o)."
 msgstr ""
+"Qwen2 Math es una serie de modelos de lenguaje matemático especializados "
+"creados sobre la base de los LLM de Qwen2, que superan significativamente las "
+"capacidades matemáticas de los modelos de código abierto e incluso de los "
+"modelos de código cerrado (por ejemplo, GPT4o)."
 
 #: src/available_models_descriptions.py:74
 msgid ""
@@ -1922,6 +1933,8 @@ msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
 "overtaking similarly and larger sized models."
 msgstr ""
+"Un modelo de IA liviano con 3.8 mil millones de parámetros con un rendimiento "
+"que supera a modelos similares y de mayor tamaño."
 
 #: src/available_models_descriptions.py:81
 msgid ""
@@ -1979,6 +1992,8 @@ msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
 msgstr ""
+"Hermes 3 es la última versión de la serie insignia de LLM Hermes de Nous "
+"Research"
 
 #: src/available_models_descriptions.py:90
 msgid ""
@@ -2107,6 +2122,8 @@ msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
 msgstr ""
+"BGE-M3 es un nuevo modelo de BAAI que se distingue por su versatilidad en "
+"multifuncionalidad, multilingüismo y multigranularidad."
 
 #: src/available_models_descriptions.py:107
 msgid ""
@@ -2134,17 +2151,19 @@ msgstr ""
 
 #: src/available_models_descriptions.py:110
 msgid "Embedding model from BAAI mapping texts to vectors."
-msgstr ""
+msgstr "Modelo de incrustación de BAAI que mapea textos a vectores."
 
 #: src/available_models_descriptions.py:111
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
 msgstr ""
+"Modelo de transformadores de oraciones que puede utilizarse para tareas como "
+"agrupamiento o búsqueda semántica."
 
 #: src/connection_handler.py:81
 msgid "Ollama instance was shut down due to inactivity"
-msgstr ""
+msgstr "La instancia de Ollama se apagó debido a inactividad"
 
 #: src/dialogs.py:20
 msgid "Chat cannot be cleared while receiving a message"
@@ -2210,7 +2229,7 @@ msgstr "¿Parar Descarga?"
 
 #: src/dialogs.py:127
 msgid "Are you sure you want to stop pulling '{}'?"
-msgstr ""
+msgstr "¿Estás seguro de que quieres dejar de descargar '{}'?"
 
 #: src/dialogs.py:131
 msgid "Stop"
@@ -2330,6 +2349,8 @@ msgstr "Menu de Chat"
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr ""
+"Advertencia: el modo de ahorro de energía está habilitado, esto ralentizará "
+"la generación de mensajes."
 
 #: src/window.ui:130
 msgid "Attach File"
@@ -2424,21 +2445,23 @@ msgstr ""
 
 #: src/window.ui:399
 msgid "Idle Timer"
-msgstr ""
+msgstr "Temporizador de inactividad"
 
 #: src/window.ui:400
 msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
 msgstr ""
+"Número de minutos que la instancia debe permanecer inactiva antes de apagarse "
+"(0 significa que no se apagará)"
 
 #: src/window.ui:419
 msgid "Loading Alpaca dialog"
-msgstr ""
+msgstr "Dialogo de carga de Alpaca"
 
 #: src/window.ui:426
 msgid "Loading Alpaca..."
-msgstr ""
+msgstr "Cargando Alpaca..."
 
 #: src/window.ui:440
 msgid "Manage models dialog"
@@ -2471,11 +2494,12 @@ msgstr "Ningún modelo encontrado"
 
 #: src/window.ui:509
 msgid "Try a different search or pull an unlisted model from it's name"
-msgstr ""
+msgstr "Prueba una búsqueda diferente o descarga un modelo que no esté en "
+"el listado a partir de su nombre."
 
 #: src/window.ui:517
 msgid "Pull Model From Name"
-msgstr ""
+msgstr "Descargar Modelo a Partir del Nombre"
 
 #: src/window.ui:567
 msgid ""
@@ -2621,7 +2645,7 @@ msgstr "Alternar barra lateral"
 
 #: src/window.ui:1070
 msgid "Rename chat"
-msgstr ""
+msgstr "Renombrar chat"
 
 #: src/window.ui:1077
 msgid "Editor"
