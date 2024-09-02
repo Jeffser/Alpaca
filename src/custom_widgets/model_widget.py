@@ -508,9 +508,9 @@ class model_manager_container(Gtk.Box):
                 GLib.idle_add(self.pulling_list.set_visible, True)
 
             if modelfile:
-                response = self.ollama_instance.request("POST", "api/create", json.dumps({"name": model_name, "modelfile": modelfile}), lambda data: model.update(data))
+                response = window.ollama_instance.request("POST", "api/create", json.dumps({"name": model_name, "modelfile": modelfile}), lambda data: model.update(data))
             else:
-                response = self.ollama_instance.request("POST", "api/pull", json.dumps({"name": model_name}), lambda data: model.update(data))
+                response = window.ollama_instance.request("POST", "api/pull", json.dumps({"name": model_name}), lambda data: model.update(data))
 
             if response.status_code == 200 and not model.error:
                 GLib.idle_add(window.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model_name), Gio.ThemedIcon.new("emblem-ok-symbolic"))
