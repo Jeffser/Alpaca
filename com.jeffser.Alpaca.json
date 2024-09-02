@@ -119,11 +119,11 @@
             "name": "ollama",
             "buildsystem": "simple",
             "build-commands": [
-            	"find . -maxdepth 1 -name '*64.tgz' -exec tar -xzf {} -C ${FLATPAK_DEST} \\;"
+            	"cp -r --remove-destination * ${FLATPAK_DEST}/"
             ],
             "sources": [
             	{
-            		"type": "file",
+            		"type": "archive",
             		"url": "https://github.com/ollama/ollama/releases/download/v0.3.9/ollama-linux-amd64.tgz",
             		"sha256": "b0062fbccd46134818d9d59cfa3867ad6849163653cb1171bc852c5f379b0851",
 		    	"only-arches": [
@@ -131,7 +131,7 @@
 		    	]
             	},
             	{
-            		"type": "file",
+            		"type": "archive",
             		"url": "https://github.com/ollama/ollama/releases/download/v0.3.9/ollama-linux-arm64.tgz",
             		"sha256": "8979484bcb1448ab9b45107fbcb3b9f43c2af46f961487449b9ebf3518cd70eb",
 		    	"only-arches": [
