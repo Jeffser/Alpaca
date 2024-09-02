@@ -262,6 +262,12 @@ class chat_list(Gtk.ListBox):
         self.connect("row-selected", lambda listbox, row: self.chat_changed(row))
         self.tab_list = []
 
+    def update_welcome_screens(self, show_prompts:bool):
+        print('SHOW_PROMPTS: ', show_prompts)
+        for tab in self.tab_list:
+            if tab.chat_window.welcome_screen:
+                tab.chat_window.show_welcome_screen(show_prompts)
+
     def get_tab_by_name(self, chat_name:str) -> chat_tab:
         for tab in self.tab_list:
             if tab.chat_window.get_name() == chat_name:

@@ -436,9 +436,10 @@ class model_manager_container(Gtk.Box):
 
         if response.status_code == 200:
             self.local_list.remove_model(model_name)
-            if len(list(self.local_list)) == 0:
-                self.local_list.set_visible(False)
             self.model_selector.remove_model(model_name)
+            if len(self.get_model_list()) == 0:
+                self.local_list.set_visible(False)
+                window.chat_list_box.update_welcome_screens(False)
             window.show_toast(_("Model deleted successfully"), window.manage_models_overlay)
         else:
             window.manage_models_dialog.close()
@@ -526,7 +527,7 @@ class model_manager_container(Gtk.Box):
                 GLib.idle_add(window.connection_error)
 
             self.pulling_list.remove(model)
-
+            GLib.idle_add(window.chat_list_box.update_welcome_screens, len(self.get_model_list()) > 0)
             if len(list(self.pulling_list)) == 0:
                 GLib.idle_add(self.pulling_list.set_visible, False)
 
