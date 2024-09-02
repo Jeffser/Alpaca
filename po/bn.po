@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.1.1\n"
+"Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-02 03:00-0600\n"
-"PO-Revision-Date: 2024-07-18 15:12-0600\n"
+"PO-Revision-Date: 2024-09-02 15:12-0600\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Bengali\n"
 "Language: bn\n"
@@ -24,7 +24,7 @@ msgstr "আলপাকা"
 
 #: data/com.jeffser.Alpaca.desktop.in:9
 msgid "ai;ollama;llm"
-msgstr ""
+msgstr "কৃত্রিম বুদ্ধিমত্তা;অল্লামা;বৃহৎ ভাষা মডেল"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 msgid "Chat with local AI models"
@@ -131,67 +131,67 @@ msgstr "নতুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:86
 msgid "Model, message and chat systems have been rewritten"
-msgstr ""
+msgstr "মডেল, বার্তা এবং চ্যাট সিস্টেমগুলি পুনরায় লেখা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:87
 msgid "New models are available"
-msgstr ""
+msgstr "নতুন মডেলগুলি উপলব্ধ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "Ollama updated to v0.3.9"
-msgstr ""
+msgstr "অল্লামা v0.3.9 এ আপডেট করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:89
 msgid "Added support for multiple chat generations simultaneously"
-msgstr ""
+msgstr "একই সাথে একাধিক চ্যাট জেনারেশনের জন্য সমর্থন যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Added experimental AMD GPU support"
-msgstr ""
+msgstr "পরীক্ষামূলক AMD GPU সমর্থন যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Added message loading spinner and new message indicator to chat tab"
-msgstr ""
+msgstr "চ্যাট ট্যাবে বার্তা লোডিং স্পিনার এবং নতুন বার্তা ইন্ডিকেটর যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added animations"
-msgstr ""
+msgstr "অ্যানিমেশন যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Changed model manager / model selector appearance"
-msgstr ""
+msgstr "মডেল ম্যানেজার / মডেল সিলেক্টরের চেহারা পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Changed message appearance"
-msgstr ""
+msgstr "বার্তার চেহারা পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Added markdown and code blocks to user messages"
-msgstr ""
+msgstr "ব্যবহারকারীর বার্তায় মার্কডাউন এবং কোড ব্লক যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Added loading dialog at launch so the app opens faster"
-msgstr ""
+msgstr "অ্যাপটি দ্রুত খোলার জন্য লোডিং ডায়ালগ যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added warning when device is on 'battery saver' mode"
-msgstr ""
+msgstr "ডিভাইস 'ব্যাটারি সেভার' মোডে থাকলে সতর্কতা যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Added inactivity timer to integrated instance"
-msgstr ""
+msgstr "একত্রিত উদাহরণে নিষ্ক্রিয়তা টাইমার যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "The chat is now scrolled to the bottom when it's changed"
-msgstr ""
+msgstr "চ্যাটটি এখন নীচে স্ক্রোল করা হয় যখন এটি পরিবর্তিত হয়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Better handling of focus on messages"
-msgstr ""
+msgstr "বার্তাগুলিতে ফোকাসের আরও ভাল পরিচালনা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Better general performance on the app"
-msgstr ""
+msgstr "অ্যাপে আরও ভাল সাধারণ কর্মক্ষমতা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "New duplicate chat option"
@@ -805,8 +805,7 @@ msgstr "ঠিক করা হয়েছে পাঠান/স্টপ ব�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:389
 msgid "Fixed app not checking if remote connection works when starting"
-msgstr ""
-"ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
+msgstr "ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:396
 msgid "Daily Update"
@@ -814,8 +813,7 @@ msgstr "প্রতিদিনের আপডেট"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:398
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
-msgstr ""
-"চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
+msgstr "চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:399
 msgid "New shortcut for creating a chat (CTRL+N)"
@@ -1308,23 +1306,23 @@ msgstr "নির্দিষ্ট মডেলগুলিতে ছবি স
 
 #: src/window.py:786
 msgid "Loading instance"
-msgstr ""
+msgstr "উদাহরণ লোড করা হচ্ছে"
 
 #: src/window.py:791
 msgid "Applying user preferences"
-msgstr ""
+msgstr "ব্যবহারকারীর পছন্দ প্রয়োগ করা হচ্ছে"
 
 #: src/window.py:811
 msgid "Updating list of local models"
-msgstr ""
+msgstr "স্থানীয় মডেলের তালিকা আপডেট করা হচ্ছে"
 
 #: src/window.py:814
 msgid "Updating list of available models"
-msgstr ""
+msgstr "উপলব্ধ মডেলের তালিকা আপডেট করা হচ্ছে"
 
 #: src/window.py:819
 msgid "Loading chats"
-msgstr ""
+msgstr "চ্যাট লোড করা হচ্ছে"
 
 #: src/available_models_descriptions.py:2
 msgid ""
@@ -1339,6 +1337,7 @@ msgid ""
 "Google Gemma 2 is a high-performing and efficient model by now available in "
 "three sizes: 2B, 9B, and 27B."
 msgstr ""
+"গুগল জেমা 2 হল একটি উচ্চ-কর্মক্ষম এবং দক্ষ মডেল, যা এখন তিনটি আকারে উপলব্ধ: 2B, 9B, এবং 27B।"
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -1563,7 +1562,7 @@ msgstr ""
 #: src/available_models_descriptions.py:34
 msgid ""
 "StarCoder is a code generation model trained on 80+ programming languages."
-msgstr "স্টারকোডার হল ৮০+ প্রোগ্রামিং ভাষায় প্রশিক্ষিত একটি কোড জেনারেশন মডেল।"
+msgstr "স্টারকোডার হল 80+ প্রোগ্রামিং ভাষায় প্রশিক্ষিত একটি কোড জেনারেশন মডেল।"
 
 #: src/available_models_descriptions.py:35
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
@@ -1816,6 +1815,7 @@ msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
 msgstr ""
+"🪐 135M, 360M, এবং 1.7B প্যারামিটার সহ ছোট মডেলের একটি পরিবার, যা একটি নতুন উচ্চ-মানের ডেটাসেটে প্রশিক্ষিত।"
 
 #: src/available_models_descriptions.py:73
 msgid ""
@@ -1823,6 +1823,9 @@ msgid ""
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
 "open-source models and even closed-source models (e.g., GPT4o)."
 msgstr ""
+"Qwen2 Math হল Qwen2 LLMs এর উপর ভিত্তি করে তৈরি গাণিতিক ভাষা "
+"মডেলের একটি সিরিজ, যা উন্মুক্ত-উৎসের মডেল এবং এমনকি বন্ধ-উৎসের "
+"মডেলগুলির (যেমন, GPT4o) গাণিতিক ক্ষমতাকে উল্লেখযোগ্যভাবে ছাড়িয়ে যায়।"
 
 #: src/available_models_descriptions.py:74
 msgid ""
@@ -1917,6 +1920,7 @@ msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
 msgstr ""
+"হার্মিস ৩ হল নাউস রিসার্চের এলএলএমগুলির ফ্ল্যাগশিপ হার্মিস সিরিজের সর্বশেষ সংস্করণ"
 
 #: src/available_models_descriptions.py:90
 msgid ""
@@ -2039,6 +2043,8 @@ msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
 msgstr ""
+"BGE-M3 হল BAAI থেকে একটি নতুন মডেল, যা এর বহু-কার্যকারিতা, বহু-ভাষাবিদ্যা এবং "
+"বহু-গ্রানুলারিটির ক্ষেত্রে এর বহুমুখীতার জন্য স্বীকৃত।"
 
 #: src/available_models_descriptions.py:107
 msgid ""
@@ -2066,17 +2072,18 @@ msgstr ""
 
 #: src/available_models_descriptions.py:110
 msgid "Embedding model from BAAI mapping texts to vectors."
-msgstr ""
+msgstr "বিএএআই থেকে পাঠ্যগুলিকে ভেক্টরে ম্যাপ করার জন্য এম্বেডিং মডেল"
 
 #: src/available_models_descriptions.py:111
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
 msgstr ""
+"ক্লাস্টারিং বা সেম্যান্টিক সার্চের মতো কাজের জন্য ব্যবহার করা যেতে পারে এমন সেন্টেন্স-ট্রান্সফর্মার্স মডেল"
 
 #: src/connection_handler.py:81
 msgid "Ollama instance was shut down due to inactivity"
-msgstr ""
+msgstr "নিষ্ক্রিয়তার কারণে অল্লামা উদাহরণ বন্ধ করা হয়েছে"
 
 #: src/dialogs.py:20
 msgid "Chat cannot be cleared while receiving a message"
@@ -2142,7 +2149,7 @@ msgstr "ডাউনলোড বন্ধ করুন?"
 
 #: src/dialogs.py:127
 msgid "Are you sure you want to stop pulling '{}'?"
-msgstr ""
+msgstr "আপনি কি নিশ্চিত যে আপনি '{}' পুল করা বন্ধ করতে চান?"
 
 #: src/dialogs.py:131
 msgid "Stop"
@@ -2262,6 +2269,7 @@ msgstr "চ্যাট মেনু"
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr ""
+"সতর্কতা: পাওয়ার সেভার মোড সক্ষম করা হয়েছে, এটি বার্তা তৈরি করতে ধীর করে দেবে"
 
 #: src/window.ui:130
 msgid "Attach File"
@@ -2352,21 +2360,22 @@ msgstr ""
 
 #: src/window.ui:399
 msgid "Idle Timer"
-msgstr ""
+msgstr "নিষ্ক্রিয়তা টাইমার"
 
 #: src/window.ui:400
 msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
 msgstr ""
+"মিনিটের সংখ্যা যে উদাহরণটি নিষ্ক্রিয় থাকবে এবং এটি বন্ধ করা হবে (0 মানে এটি বন্ধ করা হবে না)"
 
 #: src/window.ui:419
 msgid "Loading Alpaca dialog"
-msgstr ""
+msgstr "অ্যালপাকা সংলাপ লোড করা হচ্ছে"
 
 #: src/window.ui:426
 msgid "Loading Alpaca..."
-msgstr ""
+msgstr "অ্যালপাকা লোড করা হচ্ছে..."
 
 #: src/window.ui:440
 msgid "Manage models dialog"
