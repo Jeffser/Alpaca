@@ -812,7 +812,7 @@ Generate a title following these rules:
         #Chat History
         self.launch_level_bar.set_value(4)
         self.launch_status.set_description(_('Loading chats'))
-        self.load_history()
+        GLib.idle_add(self.load_history)
         self.launch_level_bar.set_value(5)
 
         #Close launch dialog
@@ -821,7 +821,7 @@ Generate a title following these rules:
         #Save preferences
         if save:
             self.save_server_config()
-        self.welcome_next_button.set_sensitive(True)
+        GLib.idle_add(self.welcome_next_button.set_sensitive, True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
