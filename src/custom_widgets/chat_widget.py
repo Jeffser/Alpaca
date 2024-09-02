@@ -341,6 +341,7 @@ class chat_list(Gtk.ListBox):
             tab.chat_window.set_name(new_chat_name)
             if os.path.exists(os.path.join(data_dir, "chats", old_chat_name)):
                 shutil.move(os.path.join(data_dir, "chats", old_chat_name), os.path.join(data_dir, "chats", new_chat_name))
+            window.save_history(tab.chat_window)
 
     def duplicate_chat(self, chat_name:str):
         new_chat_name = window.generate_numbered_name(_("Copy of {}").format(chat_name), [tab.chat_window.get_name() for tab in self.tab_list])
@@ -349,7 +350,9 @@ class chat_list(Gtk.ListBox):
         except Exception as e:
             logger.error(e)
         self.prepend_chat(new_chat_name)
-        self.get_tab_by_name(new_chat_name).chat_window.load_chat_messages(self.get_tab_by_name(chat_name).chat_window.messages_to_dict())
+        created_chat = self.get_tab_by_name(new_chat_name).chat_window
+        created_chat.load_chat_messages(self.get_tab_by_name(chat_name).chat_window.messages_to_dict())
+        window.save_history(created_chat)
 
     def on_replace_contents(self, file, result):
         file.replace_contents_finish(result)
@@ -420,8 +423,9 @@ class chat_list(Gtk.ListBox):
                             if os.path.exists(src_path) and os.path.isdir(src_path) and not os.path.exists(dest_path):
                                 shutil.copytree(src_path, dest_path)
 
-                            self.prepend_chat(new_chat_name)
-                            self.get_chat_by_name(new_chat_name).load_chat_messages(chat_content['messages'])
+                            created_chat = self.prepend_chat(new_chat_name)
+                            created_chat.load_chat_messages(chat_content['messages'])
+                            window.save_history(created_chat)
         window.show_toast(_("Chat imported successfully"), window.main_overlay)
 
     def import_chat(self):
