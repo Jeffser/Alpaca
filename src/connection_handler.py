@@ -55,7 +55,7 @@ class instance():
         if not self.instance:
             self.start()
         connection_url = '{}/{}'.format(self.remote_url if self.remote else 'http://127.0.0.1:{}'.format(self.local_port), connection_url)
-        logger.info('{} : {} : {}'.format(connection_type, connection_url, data))
+        logger.info('{} : {}'.format(connection_type, connection_url))
         response = None
         match connection_type:
             case "GET":
