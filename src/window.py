@@ -836,6 +836,7 @@ Generate a title following these rules:
         message_widget.window = self
         chat_widget.window = self
         model_widget.window = self
+        connection_handler.window = self
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)

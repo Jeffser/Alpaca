@@ -9,6 +9,8 @@ from time import sleep
 
 logger = getLogger(__name__)
 
+window = None
+
 def log_output(pipe):
     with open(os.path.join(data_dir, 'tmp.log'), 'a') as f:
         with pipe:
@@ -33,6 +35,7 @@ class instance():
         self.idle_timer_stop_event=threading.Event()
         self.idle_timer=None
         self.instance=None
+        self.busy=0
         if not self.remote:
             self.start()
 
@@ -45,6 +48,7 @@ class instance():
         return headers if len(headers.keys()) > 0 else None
 
     def request(self, connection_type:str, connection_url:str, data:dict=None, callback:callable=None) -> requests.models.Response:
+        self.busy += 1
         if self.idle_timer:
             self.idle_timer_stop_event.set()
             self.idle_timer=None
@@ -63,27 +67,29 @@ class instance():
                         for line in response.iter_lines():
                             if line:
                                 callback(json.loads(line.decode("utf-8")))
-                    response = response
                 else:
                     response = requests.post(connection_url, headers=self.get_headers(True), data=data, stream=False)
             case "DELETE":
                 response = requests.delete(connection_url, headers=self.get_headers(False), json=data)
+        self.busy -= 1
         if not self.idle_timer:
             self.start_timer()
         return response
 
     def run_timer(self):
-        if not self.idle_timer_stop_event.wait(self.idle_timer_delay*60):
+        if not self.idle_timer_stop_event.wait(self.idle_timer_delay*1):
+            window.show_toast(_("Ollama instance was shut down due to inactivity"), window.main_overlay)
             self.stop()
 
     def start_timer(self):
-        if self.idle_timer:
-            self.idle_timer_stop_event.set()
-            self.idle_timer=None
-        if self.idle_timer_delay > 0:
-            self.idle_timer_stop_event.clear()
-            self.idle_timer = threading.Thread(target=self.run_timer)
-            self.idle_timer.start()
+        if self.busy == 0:
+            if self.idle_timer:
+                self.idle_timer_stop_event.set()
+                self.idle_timer=None
+            if self.idle_timer_delay > 0 and self.busy == 0:
+                self.idle_timer_stop_event.clear()
+                self.idle_timer = threading.Thread(target=self.run_timer)
+                self.idle_timer.start()
 
     def start(self):
         if not os.path.isdir(os.path.join(cache_dir, 'tmp/ollama')):
