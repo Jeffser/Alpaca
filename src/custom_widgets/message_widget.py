@@ -334,7 +334,7 @@ class action_buttons(Gtk.Box):
         del chat.messages[message_id]
         window.save_history(chat)
         if len(chat.messages) == 0:
-            chat.show_welcome_screen(len(window.model_selector.get_model_list()) > 0)
+            chat.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
 
     def copy_message(self):
         logger.debug("Copying message")
@@ -353,12 +353,12 @@ class action_buttons(Gtk.Box):
             message_element.action_buttons = None
             history = window.convert_history_to_ollama(chat)[:list(chat.messages).index(message_element.message_id)]
             data = {
-                "model": window.model_selector.get_model(),
+                "model": window.model_manager.get_selected_model(),
                 "messages": history,
-                "options": {"temperature": window.model_tweaks["temperature"], "seed": window.model_tweaks["seed"]},
-                "keep_alive": f"{window.model_tweaks['keep_alive']}m"
+                "options": {"temperature": window.ollama_instance.tweaks["temperature"], "seed": window.ollama_instance.tweaks["seed"]},
+                "keep_alive": f"{window.ollama_instance.tweaks['keep_alive']}m"
             }
-            thread = threading.Thread(target=window.run_message, args=(data, message_element))
+            thread = threading.Thread(target=window.run_message, args=(data, message_element, chat))
             thread.start()
         else:
             window.show_toast(_("Message cannot be regenerated while receiving a response"), window.main_overlay)
