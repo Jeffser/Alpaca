@@ -779,7 +779,7 @@ Generate a title following these rules:
     def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, save:bool, show_launch_dialog:bool):
         #Show launch dialog
         if show_launch_dialog:
-            self.launch_dialog.present(self)
+            GLib.idle_add(self.launch_dialog.present, self)
 
         #Instance
         self.launch_level_bar.set_value(0)
@@ -822,7 +822,7 @@ Generate a title following these rules:
 
         #Close launch dialog
         if show_launch_dialog:
-            self.launch_dialog.force_close()
+            GLib.idle_add(self.launch_dialog.force_close)
         #Save preferences
         if save:
             self.save_server_config()
