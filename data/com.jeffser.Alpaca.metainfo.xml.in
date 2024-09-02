@@ -78,6 +78,31 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="2.0.0" date="2024-09-01">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.0.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Model, message and chat systems have been rewritten</li>
+          <li>New models are available</li>
+          <li>Ollama updated to v0.3.9</li>
+          <li>Added support for multiple chat generations simultaneously</li>
+          <li>Added experimental AMD GPU support</li>
+          <li>Added message loading spinner and new message indicator to chat tab</li>
+          <li>Added animations</li>
+          <li>Changed model manager / model selector appearance</li>
+          <li>Changed message appearance</li>
+          <li>Added markdown and code blocks to user messages</li>
+          <li>Added loading dialog at launch so the app opens faster</li>
+          <li>Added warning when device is on 'battery saver' mode</li>
+        </ul>
+        <ul>
+          <li>The chat is now scrolled to the bottom when it's changed</li>
+          <li>Better handling of focus on messages</li>
+          <li>Better general performance on the app</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.1" date="2024-08-12">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/1.1.1</url>
       <description>
