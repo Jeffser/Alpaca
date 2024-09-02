@@ -13,6 +13,16 @@
         "--filesystem=/sys/module/amdgpu:ro",
         "--env=LD_LIBRARY_PATH=/app/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/sdk/llvm15/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/ollama"
     ],
+    "add-extensions": {
+    	"com.jeffser.Alpaca.plugin": {
+    		"version": "1.0",
+    		"add-ld-path": "/lib/ollama",
+    		"directory": "/lib/ollama",
+    		"no-autodownload": true,
+    		"autodelete": true,
+    		"subdirectories": true
+    	}
+    },
     "cleanup" : [
         "/include",
         "/lib/pkgconfig",
@@ -152,10 +162,5 @@
                 }
             ]
         }
-    ],
-    "add-extensions": {
-    	"com.jeffser.Alpaca.AMD": {
-    		"autodelete": true
-    	}
-    }
+    ]
 }
