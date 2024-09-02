@@ -109,6 +109,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     ollama_instance = None
     model_manager = None
     add_chat_button = Gtk.Template.Child()
+    instance_idle_timer = Gtk.Template.Child()
 
     background_switch = Gtk.Template.Child()
     remote_connection_switch = Gtk.Template.Child()
@@ -274,6 +275,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.ollama_instance.tweaks[spin.get_name()] != value:
             self.ollama_instance.tweaks[spin.get_name()] = value
             self.save_server_config()
+
+    @Gtk.Template.Callback()
+    def instance_idle_timer_changed(self, spin):
+        self.ollama_instance.idle_timer_delay = round(spin.get_value())
+        self.save_server_config()
 
     @Gtk.Template.Callback()
     def create_model_start(self, button):
@@ -488,7 +494,8 @@ Generate a title following these rules:
                 'local_port': self.ollama_instance.local_port,
                 'run_on_background': self.background_switch.get_active(),
                 'model_tweaks': self.ollama_instance.tweaks,
-                'ollama_overrides': self.ollama_instance.overrides
+                'ollama_overrides': self.ollama_instance.overrides,
+                'idle_timer': self.ollama_instance.idle_timer_delay
             }
 
             json.dump(data, f, indent=6)
@@ -769,7 +776,7 @@ Generate a title following these rules:
             elif extension == 'pdf':
                 self.attach_file(file.get_path(), 'pdf')
 
-    def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, save:bool, show_launch_dialog:bool):
+    def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, save:bool, show_launch_dialog:bool):
         #Show launch dialog
         if show_launch_dialog:
             self.launch_dialog.present(self)
@@ -777,7 +784,7 @@ Generate a title following these rules:
         #Instance
         self.launch_level_bar.set_value(0)
         self.launch_status.set_description(_('Loading instance'))
-        self.ollama_instance = connection_handler.instance(local_port, remote_url, remote, tweaks, overrides, bearer_token)
+        self.ollama_instance = connection_handler.instance(local_port, remote_url, remote, tweaks, overrides, bearer_token, idle_timer_delay)
 
         #User Preferences
         self.launch_level_bar.set_value(1)
@@ -795,6 +802,7 @@ Generate a title following these rules:
         self.remote_connection_switch.set_sensitive(self.remote_connection_entry.get_text())
         self.remote_bearer_token_entry.set_text(self.ollama_instance.bearer_token)
         self.remote_connection_switch.set_active(self.ollama_instance.remote)
+        self.instance_idle_timer.set_value(self.ollama_instance.idle_timer_delay)
 
         #Model Manager
         self.model_manager = model_widget.model_manager_container()
@@ -877,10 +885,12 @@ Generate a title following these rules:
                 with open(os.path.join(config_dir, "server.json"), "r", encoding="utf-8") as f:
                     data = json.load(f)
                     self.background_switch.set_active(data['run_on_background'])
-                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], False, not data['run_remote'])).start()
+                    if 'idle_timer' not in data:
+                        data['idle_timer'] = 0
+                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], round(data['idle_timer']), False, not data['run_remote'])).start()
             except Exception as e:
                 logger.error(e)
-                threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', True, True)).start()
+                threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, True)).start()
         else:
-            threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', True, False)).start()
+            threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, False)).start()
             self.welcome_dialog.present(self)

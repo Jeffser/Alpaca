@@ -22,14 +22,17 @@ def log_output(pipe):
 
 class instance():
 
-    def __init__(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str):
+    def __init__(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int):
         self.local_port=local_port
         self.remote_url=remote_url
         self.remote=remote
         self.tweaks=tweaks
         self.overrides=overrides
         self.bearer_token=bearer_token
-        self.instance = None
+        self.idle_timer_delay=idle_timer_delay
+        self.idle_timer_stop_event=threading.Event()
+        self.idle_timer=None
+        self.instance=None
         if not self.remote:
             self.start()
 
@@ -42,11 +45,17 @@ class instance():
         return headers if len(headers.keys()) > 0 else None
 
     def request(self, connection_type:str, connection_url:str, data:dict=None, callback:callable=None) -> requests.models.Response:
+        if self.idle_timer:
+            self.idle_timer_stop_event.set()
+            self.idle_timer=None
+        if not self.instance:
+            self.start()
         connection_url = '{}/{}'.format(self.remote_url if self.remote else 'http://127.0.0.1:{}'.format(self.local_port), connection_url)
         logger.info('Connection: {} : {}'.format(connection_type, connection_url))
+        response = None
         match connection_type:
             case "GET":
-                return requests.get(connection_url, headers=self.get_headers(False))
+                response = requests.get(connection_url, headers=self.get_headers(False))
             case "POST":
                 if callback:
                     response = requests.post(connection_url, headers=self.get_headers(True), data=data, stream=True)
@@ -54,29 +63,48 @@ class instance():
                         for line in response.iter_lines():
                             if line:
                                 callback(json.loads(line.decode("utf-8")))
-                    return response
+                    response = response
                 else:
-                    return requests.post(connection_url, headers=self.get_headers(True), data=data, stream=False)
+                    response = requests.post(connection_url, headers=self.get_headers(True), data=data, stream=False)
             case "DELETE":
-                return requests.delete(connection_url, headers=self.get_headers(False), json=data)
+                response = requests.delete(connection_url, headers=self.get_headers(False), json=data)
+        if not self.idle_timer:
+            self.start_timer()
+        return response
+
+    def run_timer(self):
+        if not self.idle_timer_stop_event.wait(self.idle_timer_delay*60):
+            self.stop()
+
+    def start_timer(self):
+        if self.idle_timer:
+            self.idle_timer_stop_event.set()
+            self.idle_timer=None
+        if self.idle_timer_delay > 0:
+            self.idle_timer_stop_event.clear()
+            self.idle_timer = threading.Thread(target=self.run_timer)
+            self.idle_timer.start()
 
     def start(self):
         if not os.path.isdir(os.path.join(cache_dir, 'tmp/ollama')):
             os.mkdir(os.path.join(cache_dir, 'tmp/ollama'))
-
+        self.instance = None
         params = self.overrides.copy()
         params["OLLAMA_DEBUG"] = "1"
         params["OLLAMA_HOST"] = f"127.0.0.1:{self.local_port}" # You can't change this directly sorry :3
         params["HOME"] = data_dir
         params["TMPDIR"] = os.path.join(cache_dir, 'tmp/ollama')
-        self.instance = subprocess.Popen(["ollama", "serve"], env={**os.environ, **params}, stderr=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
-        threading.Thread(target=log_output, args=(self.instance.stdout,)).start()
-        threading.Thread(target=log_output, args=(self.instance.stderr,)).start()
+        instance = subprocess.Popen(["ollama", "serve"], env={**os.environ, **params}, stderr=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+        threading.Thread(target=log_output, args=(instance.stdout,)).start()
+        threading.Thread(target=log_output, args=(instance.stderr,)).start()
         logger.info("Starting Alpaca's Ollama instance...")
         logger.debug(params)
         logger.info("Started Alpaca's Ollama instance")
         v_str = subprocess.check_output("ollama -v", shell=True).decode('utf-8')
         logger.info('Ollama version: {}'.format(v_str.split('client version is ')[1].strip()))
+        self.instance = instance
+        if not self.idle_timer:
+            self.start_timer()
 
     def stop(self):
         if self.instance:
