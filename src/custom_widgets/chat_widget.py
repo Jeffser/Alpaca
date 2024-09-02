@@ -362,7 +362,7 @@ class chat_list(Gtk.ListBox):
         file = file_dialog.save_finish(result)
         if not file:
             return
-        json_data = json.dumps({chat_name: self.get_chat_by_name(chat_name).messages_to_dict()}, indent=4).encode("UTF-8")
+        json_data = json.dumps({chat_name: {"messages": self.get_chat_by_name(chat_name).messages_to_dict()}}, indent=4).encode("UTF-8")
 
         with tempfile.TemporaryDirectory() as temp_dir:
             json_path = os.path.join(temp_dir, "data.json")
