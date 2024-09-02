@@ -449,6 +449,7 @@ class message(Gtk.Overlay):
                 self.set_text(self.content_children[-1].get_label())
                 self.dt = datetime.datetime.now()
                 self.add_footer(self.dt)
+                window.show_notification(chat.get_name(), self.text[:200] + (self.text[200:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
                 window.save_history(chat)
         else:
             sys.exit()
