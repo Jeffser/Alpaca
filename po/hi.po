@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.1.1\n"
+"Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-02 03:00-0600\n"
-"PO-Revision-Date: 2024-08-07 HO:MI+ZONE\n"
+"PO-Revision-Date: 2024-09-02 HO:MI+ZONE\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Hindi\n"
 "Language: hi\n"
@@ -23,7 +23,7 @@ msgstr "अलपाका"
 
 #: data/com.jeffser.Alpaca.desktop.in:9
 msgid "ai;ollama;llm"
-msgstr ""
+msgstr "कृत्रिम बुद्धिमत्ता;ओल्लामा;बड़ा भाषा मॉडल"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 msgid "Chat with local AI models"
@@ -131,67 +131,67 @@ msgstr "नया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:86
 msgid "Model, message and chat systems have been rewritten"
-msgstr ""
+msgstr "मॉडल, संदेश और चैट सिस्टम को पुनः लिखा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:87
 msgid "New models are available"
-msgstr ""
+msgstr "नए मॉडल उपलब्ध हैं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "Ollama updated to v0.3.9"
-msgstr ""
+msgstr "ओल्लामा v0.3.9 में अपडेट किया गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:89
 msgid "Added support for multiple chat generations simultaneously"
-msgstr ""
+msgstr "एक साथ कई चैट जनरेशन के लिए समर्थन जोड़ा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Added experimental AMD GPU support"
-msgstr ""
+msgstr "प्रयोगात्मक AMD GPU समर्थन जोड़ा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Added message loading spinner and new message indicator to chat tab"
-msgstr ""
+msgstr "चैट टैब में संदेश लोडिंग स्पिनर और नया संदेश संकेतक जोड़ा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added animations"
-msgstr ""
+msgstr "एनिमेशन जोड़ा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Changed model manager / model selector appearance"
-msgstr ""
+msgstr "मॉडल मैनेजर / मॉडल सेलेक्टर की उपस्थिति बदली गई है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Changed message appearance"
-msgstr ""
+msgstr "संदेश की उपस्थिति बदली गई है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Added markdown and code blocks to user messages"
-msgstr ""
+msgstr "ब्यबहारकर्ता संदेशों में मार्कडाउन और कोड ब्लॉक जोड़ा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Added loading dialog at launch so the app opens faster"
-msgstr ""
+msgstr "एप्लिकेशन तेजी से खुलता है, इसलिए लॉन्च पर लोडिंग डायलॉग जोड़ा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added warning when device is on 'battery saver' mode"
-msgstr ""
+msgstr "डिवाइस 'बैटरी सेवर' मोड पर होने पर चेतावनी जोड़ी गई है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Added inactivity timer to integrated instance"
-msgstr ""
+msgstr "एकीकृत उदाहरण में निष्क्रियता टाइमर जोड़ा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "The chat is now scrolled to the bottom when it's changed"
-msgstr ""
+msgstr "चैट अब नीचे स्क्रॉल किया जाता है जब यह बदला जाता है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Better handling of focus on messages"
-msgstr ""
+msgstr "संदेशों पर फोकस का बेहतर प्रबंधन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Better general performance on the app"
-msgstr ""
+msgstr "एप्लिकेशन पर बेहतर सामान्य प्रदर्शन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "New duplicate chat option"
@@ -1310,23 +1310,23 @@ msgstr "छवि पहचान केवल विशिष्ट मॉड�
 
 #: src/window.py:786
 msgid "Loading instance"
-msgstr ""
+msgstr "उदाहरण लोड हो रहा है"
 
 #: src/window.py:791
 msgid "Applying user preferences"
-msgstr ""
+msgstr "ब्यबहारकर्ता प्राथमिकताएँ लागू की जा रही हैं"
 
 #: src/window.py:811
 msgid "Updating list of local models"
-msgstr ""
+msgstr "स्थानीय मॉडलों की सूची अद्यतन की जा रही है"
 
 #: src/window.py:814
 msgid "Updating list of available models"
-msgstr ""
+msgstr "उपलब्ध मॉडलों की सूची अद्यतन की जा रही है"
 
 #: src/window.py:819
 msgid "Loading chats"
-msgstr ""
+msgstr "चैट लोड हो रहे हैं"
 
 #: src/available_models_descriptions.py:2
 msgid ""
@@ -1340,6 +1340,7 @@ msgid ""
 "Google Gemma 2 is a high-performing and efficient model by now available in "
 "three sizes: 2B, 9B, and 27B."
 msgstr ""
+"गूगल जेमा 2 एक उच्च प्रदर्शन और कुशल मॉडल है जो अब तीन आकारों में उपलब्ध है: 2B, 9B, और 27B"
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -1812,6 +1813,8 @@ msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
 msgstr ""
+"🪐 135M, 360M, और 1.7B पैरामीटर वाले छोटे मॉडलों का एक परिवार, जो एक नए उच्च-गुणवत्ता वाले "
+"डेटासेट पर प्रशिक्षित है।"
 
 #: src/available_models_descriptions.py:73
 msgid ""
@@ -1819,6 +1822,9 @@ msgid ""
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
 "open-source models and even closed-source models (e.g., GPT4o)."
 msgstr ""
+"Qwen2 Math Qwen2 LLMs पर आधारित विशेषज्ञता वाले गणित भाषा मॉडलों की एक "
+"श्रृंखला है, जो खुले स्रोत मॉडलों और यहां तक कि बंद स्रोत मॉडलों (जैसे, GPT4o) की "
+"गणितीय क्षमताओं को भी काफी हद तक पार करती है।"
 
 #: src/available_models_descriptions.py:74
 msgid ""
@@ -1911,6 +1917,7 @@ msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
 msgstr ""
+"हेर्मेस 3 नाउस रिसर्च द्वारा एलएलएम की फ्लैगशिप हेर्मेस श्रृंखला का नवीनतम संस्करण है"
 
 #: src/available_models_descriptions.py:90
 msgid ""
@@ -2059,17 +2066,18 @@ msgstr ""
 
 #: src/available_models_descriptions.py:110
 msgid "Embedding model from BAAI mapping texts to vectors."
-msgstr ""
+msgstr "बीएएआई से वेक्टर में पाठों को मैप करने के लिए एम्बेडिंग मॉडल"
 
 #: src/available_models_descriptions.py:111
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
 msgstr ""
+"क्लस्टरिंग या सेमेंटिक सर्च जैसे कार्यों के लिए उपयोग किया जा सकने वाला सेंटेंस-ट्रांसफॉर्मर मॉडल"
 
 #: src/connection_handler.py:81
 msgid "Ollama instance was shut down due to inactivity"
-msgstr ""
+msgstr "निष्क्रियता के कारण ओल्लामा उदाहरण बंद कर दिया गया"
 
 #: src/dialogs.py:20
 msgid "Chat cannot be cleared while receiving a message"
@@ -2135,7 +2143,7 @@ msgstr "डाउनलोड रोकें?"
 
 #: src/dialogs.py:127
 msgid "Are you sure you want to stop pulling '{}'?"
-msgstr ""
+msgstr "क्या आप निश्चित हैं कि आप '{}' को रोकना चाहते हैं?"
 
 #: src/dialogs.py:131
 msgid "Stop"
@@ -2253,6 +2261,7 @@ msgstr "चैट मेनू"
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr ""
+"चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
 
 #: src/window.ui:130
 msgid "Attach File"
@@ -2346,21 +2355,22 @@ msgstr ""
 
 #: src/window.ui:399
 msgid "Idle Timer"
-msgstr ""
+msgstr "निष्क्रिय टाइमर"
 
 #: src/window.ui:400
 msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
 msgstr ""
+"मिनटों की संख्या जिसके लिए उदाहरण को निष्क्रिय रहना चाहिए इससे पहले कि यह बंद हो जाए (0 का अर्थ है कि यह बंद नहीं होगा)"
 
 #: src/window.ui:419
 msgid "Loading Alpaca dialog"
-msgstr ""
+msgstr "अल्पाका संवाद लोड हो रहा है"
 
 #: src/window.ui:426
 msgid "Loading Alpaca..."
-msgstr ""
+msgstr "अल्पाका लोड हो रहा है..."
 
 #: src/window.ui:440
 msgid "Manage models dialog"
@@ -2627,7 +2637,7 @@ msgstr "कोड क्लिपबोर्ड में कॉपी कि�
 #: src/custom_widgets/message_widget.py:201
 #: src/custom_widgets/message_widget.py:203
 msgid "Image"
-msgstr ""
+msgstr "छवि"
 
 #: src/custom_widgets/message_widget.py:211
 #: src/custom_widgets/message_widget.py:227
@@ -2791,3 +2801,4 @@ msgstr "{} पुल करने में त्रुटि"
 
 #~ msgid "Multimodal AI with image recognition"
 #~ msgstr "इमेज रिकॉग्निशन के साथ मल्टीमॉडल एआई"
+
