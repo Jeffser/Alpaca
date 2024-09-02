@@ -50,7 +50,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     _ = gettext.gettext
 
     #Variables
-
+    ready = False #Used with welcome dialog
     attachments = {}
     header_bar = Gtk.Template.Child()
 
@@ -192,9 +192,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if index == carousel.get_n_pages()-1:
             self.welcome_next_button.set_label(_("Close"))
             self.welcome_next_button.set_tooltip_text(_("Close"))
+            self.welcome_next_button.set_sensitive(self.ready)
         else:
             self.welcome_next_button.set_label(_("Next"))
             self.welcome_next_button.set_tooltip_text(_("Next"))
+            self.welcome_next_button.set_sensitive(True)
 
     @Gtk.Template.Callback()
     def welcome_previous_button_activate(self, button):
@@ -819,6 +821,7 @@ Generate a title following these rules:
         #Save preferences
         if save:
             self.save_server_config()
+        self.welcome_next_button.set_sensitive(True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
