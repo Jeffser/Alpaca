@@ -113,6 +113,9 @@ class instance():
             self.start_timer()
 
     def stop(self):
+        if self.idle_timer:
+            self.idle_timer_stop_event.set()
+            self.idle_timer=None
         if self.instance:
             logger.info("Stopping Alpaca's Ollama instance")
             self.instance.terminate()
