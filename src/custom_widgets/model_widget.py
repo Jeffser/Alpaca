@@ -107,7 +107,6 @@ class model_selector_button(Gtk.MenuButton):
     def remove_model(self, model_name:str):
         self.get_popover().model_list_box.remove(next((model for model in list(self.get_popover().model_list_box) if model.get_name() == model_name), None))
         self.model_changed(self.get_popover().model_list_box)
-        print(self.get_popover().model_list_box.get_selected_row())
 
     def clear_list(self):
         self.get_popover().model_list_box.remove_all()

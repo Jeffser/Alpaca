@@ -263,7 +263,6 @@ class chat_list(Gtk.ListBox):
         self.tab_list = []
 
     def update_welcome_screens(self, show_prompts:bool):
-        print('SHOW_PROMPTS: ', show_prompts)
         for tab in self.tab_list:
             if tab.chat_window.welcome_screen:
                 tab.chat_window.show_welcome_screen(show_prompts)

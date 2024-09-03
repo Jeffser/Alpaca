@@ -719,7 +719,6 @@ Generate a title following these rules:
     def cb_text_received(self, clipboard, result):
         try:
             text = clipboard.read_text_finish(result)
-            print(text)
             #Check if text is a Youtube URL
             youtube_regex = re.compile(
                 r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/'
