@@ -249,9 +249,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.save_server_config()
 
     @Gtk.Template.Callback()
-    def switch_run_on_background(self):
+    def switch_run_on_background(self, switch, user_data):
         logger.debug("Switching run on background")
-        self.set_hide_on_close(self.background_switch.get_active())
+        self.set_hide_on_close(switch.get_active())
         self.save_server_config()
 
     @Gtk.Template.Callback()
