@@ -11,13 +11,13 @@
         "--device=dri",
         "--socket=wayland",
         "--filesystem=/sys/module/amdgpu:ro",
-        "--env=LD_LIBRARY_PATH=/app/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/sdk/llvm15/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/ollama"
+        "--env=LD_LIBRARY_PATH=/app/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/sdk/llvm15/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/ollama:/app/plugins/AMD/lib/ollama"
     ],
     "add-extensions": {
-    	"com.jeffser.Alpaca.plugin": {
+    	"com.jeffser.Alpaca.Plugins": {
     		"version": "1.0",
-    		"add-ld-path": "/lib/ollama",
-    		"directory": "/lib/ollama",
+    		"add-ld-path": "/app/plugins/AMD/lib/ollama",
+    		"directory": "plugins",
     		"no-autodownload": true,
     		"autodelete": true,
     		"subdirectories": true
@@ -129,7 +129,8 @@
             "name": "ollama",
             "buildsystem": "simple",
             "build-commands": [
-            	"cp -r --remove-destination * ${FLATPAK_DEST}/"
+            	"cp -r --remove-destination * ${FLATPAK_DEST}/",
+            	"mkdir ${FLATPAK_DEST}/plugins"
             ],
             "sources": [
             	{

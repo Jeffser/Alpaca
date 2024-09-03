@@ -50,9 +50,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     _ = gettext.gettext
 
     #Variables
-
-    model_tweaks = {"temperature": 0.7, "seed": 0, "keep_alive": 5}
-    pulling_models = {}
+    ready = False #Used with welcome dialog
     attachments = {}
     header_bar = Gtk.Template.Child()
 
@@ -194,9 +192,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if index == carousel.get_n_pages()-1:
             self.welcome_next_button.set_label(_("Close"))
             self.welcome_next_button.set_tooltip_text(_("Close"))
+            self.welcome_next_button.set_sensitive(self.ready)
         else:
             self.welcome_next_button.set_label(_("Next"))
             self.welcome_next_button.set_tooltip_text(_("Next"))
+            self.welcome_next_button.set_sensitive(True)
 
     @Gtk.Template.Callback()
     def welcome_previous_button_activate(self, button):
@@ -249,9 +249,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.save_server_config()
 
     @Gtk.Template.Callback()
-    def switch_run_on_background(self):
+    def switch_run_on_background(self, switch, user_data):
         logger.debug("Switching run on background")
-        self.set_hide_on_close(self.background_switch.get_active())
+        self.set_hide_on_close(switch.get_active())
         self.save_server_config()
 
     @Gtk.Template.Callback()
@@ -525,6 +525,7 @@ Generate a title following these rules:
 
     def run_message(self, data:dict, message_element:message_widget.message, chat:chat_widget.chat):
         logger.debug("Running message")
+        self.save_history(chat)
         chat.busy = True
         self.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(True)
         if len(data['messages']) == 1 and chat.get_name().startswith(_("New Chat")):
@@ -619,11 +620,6 @@ Generate a title following these rules:
 
     def generate_uuid(self) -> str:
         return f"{datetime.today().strftime('%Y%m%d%H%M%S%f')}{uuid.uuid4().hex}"
-
-    def stop_pull_model(self, model_name):
-        logger.debug("Stopping model pull")
-        self.pulling_models[model_name]['overlay'].get_parent().get_parent().remove(self.pulling_models[model_name]['overlay'].get_parent())
-        del self.pulling_models[model_name]
 
     def connection_error(self):
         logger.error("Connection error")
@@ -817,7 +813,7 @@ Generate a title following these rules:
         #Chat History
         self.launch_level_bar.set_value(4)
         self.launch_status.set_description(_('Loading chats'))
-        self.load_history()
+        GLib.idle_add(self.load_history)
         self.launch_level_bar.set_value(5)
 
         #Close launch dialog
@@ -826,6 +822,7 @@ Generate a title following these rules:
         #Save preferences
         if save:
             self.save_server_config()
+        GLib.idle_add(self.welcome_next_button.set_sensitive, True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -875,7 +872,6 @@ Generate a title following these rules:
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
-        self.message_text_view.connect("paste-clipboard", self.on_clipboard_paste)
         self.file_preview_remove_button.connect('clicked', lambda button : dialogs.remove_attached_file(self, button.get_name()))
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
         self.create_model_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_']))
