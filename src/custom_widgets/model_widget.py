@@ -107,7 +107,6 @@ class model_selector_button(Gtk.MenuButton):
     def remove_model(self, model_name:str):
         self.get_popover().model_list_box.remove(next((model for model in list(self.get_popover().model_list_box) if model.get_name() == model_name), None))
         self.model_changed(self.get_popover().model_list_box)
-        print(self.get_popover().model_list_box.get_selected_row())
 
     def clear_list(self):
         self.get_popover().model_list_box.remove_all()
@@ -155,14 +154,14 @@ class pulling_model(Gtk.ListBoxRow):
         description_box.append(subtitle_box)
         description_box.append(self.progress_bar)
 
-        delete_button = Gtk.Button(
+        stop_button = Gtk.Button(
             icon_name = "media-playback-stop-symbolic",
             vexpand = False,
             valign = 3,
             css_classes = ["destructive-action", "circular"],
             tooltip_text = _("Stop Pulling '{}'").format(window.convert_model_name(model_name, 0))
         )
-        delete_button.connect('clicked', lambda *_: dialogs.stop_pull_model(window, self))
+        stop_button.connect('clicked', lambda *_: dialogs.stop_pull_model(window, self))
 
         container_box = Gtk.Box(
             hexpand=True,
@@ -176,7 +175,7 @@ class pulling_model(Gtk.ListBoxRow):
         )
 
         container_box.append(description_box)
-        container_box.append(delete_button)
+        container_box.append(stop_button)
 
         super().__init__(
             child=container_box,
@@ -436,9 +435,10 @@ class model_manager_container(Gtk.Box):
 
         if response.status_code == 200:
             self.local_list.remove_model(model_name)
-            if len(list(self.local_list)) == 0:
-                self.local_list.set_visible(False)
             self.model_selector.remove_model(model_name)
+            if len(self.get_model_list()) == 0:
+                self.local_list.set_visible(False)
+                window.chat_list_box.update_welcome_screens(False)
             window.show_toast(_("Model deleted successfully"), window.manage_models_overlay)
         else:
             window.manage_models_dialog.close()
@@ -508,9 +508,9 @@ class model_manager_container(Gtk.Box):
                 GLib.idle_add(self.pulling_list.set_visible, True)
 
             if modelfile:
-                response = self.ollama_instance.request("POST", "api/create", json.dumps({"name": model_name, "modelfile": modelfile}), lambda data: model.update(data))
+                response = window.ollama_instance.request("POST", "api/create", json.dumps({"name": model_name, "modelfile": modelfile}), lambda data: model.update(data))
             else:
-                response = self.ollama_instance.request("POST", "api/pull", json.dumps({"name": model_name}), lambda data: model.update(data))
+                response = window.ollama_instance.request("POST", "api/pull", json.dumps({"name": model_name}), lambda data: model.update(data))
 
             if response.status_code == 200 and not model.error:
                 GLib.idle_add(window.show_notification, _("Task Complete"), _("Model '{}' pulled successfully.").format(model_name), Gio.ThemedIcon.new("emblem-ok-symbolic"))
@@ -526,7 +526,7 @@ class model_manager_container(Gtk.Box):
                 GLib.idle_add(window.connection_error)
 
             self.pulling_list.remove(model)
-
+            GLib.idle_add(window.chat_list_box.update_welcome_screens, len(self.get_model_list()) > 0)
             if len(list(self.pulling_list)) == 0:
                 GLib.idle_add(self.pulling_list.set_visible, False)
 

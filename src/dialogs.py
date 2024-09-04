@@ -3,10 +3,11 @@
 Handles UI dialogs
 """
 import os
-import logging, requests
+import logging, requests, threading, shutil
 from pytube import YouTube
 from html2text import html2text
 from gi.repository import Adw, Gtk
+from .internal import cache_dir
 
 logger = logging.getLogger(__name__)
 # CLEAR CHAT | WORKS
@@ -187,9 +188,10 @@ def remove_attached_file(self, name):
 def reconnect_remote_response(self, dialog, task, url_entry, bearer_entry):
     response = dialog.choose_finish(task)
     if not task or response == "remote":
-        self.ollama_instance.remote_url = url_entry.get_text()
-        self.ollama_instance.bearer_token = bearer_entry.get_text()
-        self.ollama_instance.remote = True
+        self.remote_connection_entry.set_text(url_entry.get_text())
+        self.remote_connection_switch.set_sensitive(url_entry.get_text())
+        self.remote_bearer_token_entry.set_text(bearer_entry.get_text())
+        self.remote_connection_switch.set_active(True)
         self.model_manager.update_local_list()
     elif response == "local":
         self.ollama_instance.remote = False
@@ -221,7 +223,8 @@ def reconnect_remote(self):
         extra_child=container
     )
     dialog.add_response("close", _("Close Alpaca"))
-    dialog.add_response("local", _("Use local instance"))
+    if shutil.which('ollama'):
+        dialog.add_response("local", _("Use local instance"))
     dialog.add_response("remote", _("Connect"))
     dialog.set_response_appearance("remote", Adw.ResponseAppearance.SUGGESTED)
     dialog.set_default_response("remote")
@@ -278,7 +281,7 @@ def create_model_from_file(self):
 def create_model_from_name_response(self, dialog, task, entry):
     model = entry.get_text().lower().strip()
     if dialog.choose_finish(task) == 'accept' and model:
-        self.pull_model(model)
+        threading.Thread(target=self.model_manager.pull_model, kwargs={"model_name": model}).start()
 
 def create_model_from_name(self):
     entry = Gtk.Entry()
@@ -337,9 +340,9 @@ def youtube_caption_response(self, dialog, task, video_url, caption_drop_down):
         selected_caption = caption_drop_down.get_selected_item().get_string()
         for event in yt.captions[selected_caption.split('(')[-1][:-1]].json_captions['events']:
             text += "{}\n".format(event['segs'][0]['utf8'].replace('\n', '\\n'))
-        if not os.path.exists(os.path.join(self.cache_dir, 'tmp/youtube')):
-            os.makedirs(os.path.join(self.cache_dir, 'tmp/youtube'))
-        file_path = os.path.join(os.path.join(self.cache_dir, 'tmp/youtube'), f'{yt.title} ({selected_caption.split(" (")[0]})')
+        if not os.path.exists(os.path.join(cache_dir, 'tmp/youtube')):
+            os.makedirs(os.path.join(cache_dir, 'tmp/youtube'))
+        file_path = os.path.join(os.path.join(cache_dir, 'tmp/youtube'), f'{yt.title} ({selected_caption.split(" (")[0]})')
         with open(file_path, 'w+', encoding="utf-8") as f:
             f.write(text)
         self.attach_file(file_path, 'youtube')
