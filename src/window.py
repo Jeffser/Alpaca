@@ -110,7 +110,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     instance_idle_timer = Gtk.Template.Child()
 
     background_switch = Gtk.Template.Child()
-    omit_powersave_warning_switch = Gtk.Template.Child()
+    powersaver_warning_switch = Gtk.Template.Child()
     remote_connection_switch = Gtk.Template.Child()
     remote_connection_entry = Gtk.Template.Child()
     remote_bearer_token_entry = Gtk.Template.Child()
@@ -256,9 +256,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.save_server_config()
     
     @Gtk.Template.Callback()
-    def switch_omit_powersave_warning(self, switch, user_data):
-        logger.debug("Switching omit powersave warning banner")
-        self.set_hide_on_close(switch.get_active())
+    def switch_powersaver_warning(self, switch, user_data):
+        logger.debug("Switching powersaver warning banner")
+        
         self.save_server_config()
 
     @Gtk.Template.Callback()
@@ -500,7 +500,7 @@ Generate a title following these rules:
                 'run_remote': self.ollama_instance.remote,
                 'local_port': self.ollama_instance.local_port,
                 'run_on_background': self.background_switch.get_active(),
-                'omit_powersave_warning': self.omit_powersave_warning_switch.get_active(),
+                'powersaver_warning': self.powersaver_warning_switch.get_active(),
                 'model_tweaks': self.ollama_instance.tweaks,
                 'ollama_overrides': self.ollama_instance.overrides,
                 'idle_timer': self.ollama_instance.idle_timer_delay
@@ -780,6 +780,9 @@ Generate a title following these rules:
             elif extension == 'pdf':
                 self.attach_file(file.get_path(), 'pdf')
 
+    def power_saver_toggled(self, monitor):
+        self.banner.set_revealed(monitor.get_power_saver_enabled() and self.powersaver_warning_switch.get_active())
+
     def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, save:bool, show_launch_dialog:bool):
         #Show launch dialog
         if show_launch_dialog:
@@ -888,16 +891,12 @@ Generate a title following these rules:
             try:
                 with open(os.path.join(config_dir, "server.json"), "r", encoding="utf-8") as f:
                     data = json.load(f)
-                    self.background_switch.set_active(data['run_on_background'])
-                    self.omit_powersave_warning_switch.set_active(data['omit_powersave_warning'])
+                    self.background_switch.set_active(data['run_on_background'])                    
                     if 'idle_timer' not in data:
                         data['idle_timer'] = 0
-                    
-                    if not data["omit_powersave_warning"]:
-                        self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
-                        Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.banner.set_revealed(monitor.get_power_saver_enabled()))
-                        self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
-
+                    if 'powersaver_warning' not in data:
+                        data['powersaver_warning'] = True
+                    self.powersaver_warning_switch.set_active(data['powersaver_warning'])
                     threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], round(data['idle_timer']), False, True)).start()
             except Exception as e:
                 logger.error(e)
@@ -905,3 +904,9 @@ Generate a title following these rules:
         else:
             threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, False)).start()
             self.welcome_dialog.present(self)
+
+    if self.powersaver_warning.get_active():
+        self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
+        
+    Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.power_saver_toggled(monitor))
+    self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
