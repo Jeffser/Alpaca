@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-02 03:00-0600\n"
-"PO-Revision-Date: 2024-08-13 18:42+0200\n"
+"PO-Revision-Date: 2024-09-04 12:35+0200\n"
 "Last-Translator: Louis Chauvet-Villaret <louischauvet0@gmail.com>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -25,7 +25,7 @@ msgstr "Alpaca"
 
 #: data/com.jeffser.Alpaca.desktop.in:9
 msgid "ai;ollama;llm"
-msgstr ""
+msgstr "ia;ollama;llm"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 msgid "Chat with local AI models"
@@ -134,66 +134,76 @@ msgstr "Nouveautés"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:86
 msgid "Model, message and chat systems have been rewritten"
 msgstr ""
+"Changé : réécriture du système de discussion, gestion des modèles et messages"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:87
 msgid "New models are available"
-msgstr ""
+msgstr "Ajouté : nouveau modèles"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "Ollama updated to v0.3.9"
-msgstr ""
+msgstr "Changé : Ollama mis à jour vers la version v0.3.9"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:89
 msgid "Added support for multiple chat generations simultaneously"
-msgstr ""
+msgstr "Ajouté : support de la génération de plusieurs discussions simultanées"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Added experimental AMD GPU support"
-msgstr ""
+msgstr "Ajouté : support expérimental des GPU AMD"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Added message loading spinner and new message indicator to chat tab"
 msgstr ""
+"Ajouté : icône de chargement des messages et un indicateur de message sur "
+"l'onglet discussion"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added animations"
-msgstr ""
+msgstr "Ajouté : animation"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Changed model manager / model selector appearance"
-msgstr ""
+msgstr "Changé : apparence du gestionnaire et sélecteur de modèles"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Changed message appearance"
-msgstr ""
+msgstr "Changé : apparence des messages"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Added markdown and code blocks to user messages"
 msgstr ""
+"Ajouté : support du markdown et des blocs de code pour les messages "
+"utilisateurs"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Added loading dialog at launch so the app opens faster"
 msgstr ""
+"Ajouté : boite de dialogue de chargement au démarrage pour que l'application "
+"s'ouvre plus rapidement"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added warning when device is on 'battery saver' mode"
 msgstr ""
+"Ajouté : avertissement lorsque l'appareil est en mode 'économisateur de "
+"batterie'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Added inactivity timer to integrated instance"
-msgstr ""
+msgstr "Ajouté : minuteur d'inactivité pour l'instance intégrée"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "The chat is now scrolled to the bottom when it's changed"
 msgstr ""
+"Résolu : la discussion est maintenant scrollé en bas lorsqu'elle est changée"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Better handling of focus on messages"
-msgstr ""
+msgstr "Ajouté : meilleur prise en charge de l'indicateur de sélection"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Better general performance on the app"
-msgstr ""
+msgstr "Résolu : meilleures performances générales dans l'application"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "New duplicate chat option"
@@ -429,7 +439,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:199
 msgid "Better check for message finishing"
-msgstr "Modification : meilleur vérification de la fin des messages"
+msgstr "Changé : meilleur vérification de la fin des messages"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:208
 msgid "Added table rendering (Thanks Nokse)"
@@ -1355,7 +1365,7 @@ msgstr "Image"
 
 #: src/window.py:400
 msgid "Missing file"
-msgstr ""
+msgstr "Fichier manquant"
 
 #: src/window.py:530 src/window.py:582 src/window.py:602 src/window.py:604
 #: src/dialogs.py:91 src/window.ui:30 src/custom_widgets/chat_widget.py:309
@@ -1383,23 +1393,23 @@ msgstr ""
 
 #: src/window.py:786
 msgid "Loading instance"
-msgstr ""
+msgstr "Chargement de l'instance"
 
 #: src/window.py:791
 msgid "Applying user preferences"
-msgstr ""
+msgstr "Application des préférences utilisateurs"
 
 #: src/window.py:811
 msgid "Updating list of local models"
-msgstr ""
+msgstr "Mise-à-jour de la liste des modèles locaux"
 
 #: src/window.py:814
 msgid "Updating list of available models"
-msgstr ""
+msgstr "Mise-à-jour de la liste des modèles disponibles"
 
 #: src/window.py:819
 msgid "Loading chats"
-msgstr ""
+msgstr "Chargement des discussions"
 
 #: src/available_models_descriptions.py:2
 msgid ""
@@ -1414,6 +1424,8 @@ msgid ""
 "Google Gemma 2 is a high-performing and efficient model by now available in "
 "three sizes: 2B, 9B, and 27B."
 msgstr ""
+"Google Gemma 2 est un modèle performant et efficace, désormais disponible en "
+"trois tailles : 2B, 9B et 27B."
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -1917,6 +1929,8 @@ msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
 msgstr ""
+"🪐 Une famille de petits modèles avec 135M, 360M et 1,7B paramètres, "
+"entraînés sur un nouveau dataset de haute qualité."
 
 #: src/available_models_descriptions.py:73
 msgid ""
@@ -1924,6 +1938,10 @@ msgid ""
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
 "open-source models and even closed-source models (e.g., GPT4o)."
 msgstr ""
+"Qwen2 Math est une série de modèles linguistiques spécialisés en "
+"mathématiques, construits à partir des LLMs Qwen2, surpassant de manière "
+"significative les capacités mathématiques des modèles open-source et même "
+"des modèles propriétaires (par exemple, GPT4o)."
 
 #: src/available_models_descriptions.py:74
 msgid ""
@@ -1968,6 +1986,8 @@ msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
 "overtaking similarly and larger sized models."
 msgstr ""
+"Un modèle d'IA léger avec 3,8 milliards de paramètres, surpassant en "
+"performance des modèles de taille similaire ou supérieure."
 
 #: src/available_models_descriptions.py:81
 msgid ""
@@ -2025,6 +2045,8 @@ msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
 msgstr ""
+"Hermes 3 est la dernière version de la série phare Hermes de LLMs par Nous "
+"Research."
 
 #: src/available_models_descriptions.py:90
 msgid ""
@@ -2153,6 +2175,8 @@ msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
 msgstr ""
+"BGE-M3 est un nouveau modèle de BAAI, distingué par sa polyvalence en termes "
+"de multi-fonctionnalité, multi-linguisme et multi-granularité."
 
 #: src/available_models_descriptions.py:107
 msgid ""
@@ -2180,17 +2204,19 @@ msgstr ""
 
 #: src/available_models_descriptions.py:110
 msgid "Embedding model from BAAI mapping texts to vectors."
-msgstr ""
+msgstr "Modèle d'embedding de BAAI, mappant les textes en vecteurs."
 
 #: src/available_models_descriptions.py:111
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
 msgstr ""
+"Modèle sentence-transformers pouvant être utilisé pour des tâches comme le "
+"clustering ou la recherche sémantique."
 
 #: src/connection_handler.py:81
 msgid "Ollama instance was shut down due to inactivity"
-msgstr ""
+msgstr "Ollama a été désactivée faute d'activitée"
 
 #: src/dialogs.py:20
 msgid "Chat cannot be cleared while receiving a message"
@@ -2257,7 +2283,7 @@ msgstr "Arrêter le téléchargement ?"
 
 #: src/dialogs.py:127
 msgid "Are you sure you want to stop pulling '{}'?"
-msgstr ""
+msgstr "Ếtes-vous sur de vouloir arrêter de télécharger '{}'?"
 
 #: src/dialogs.py:131
 msgid "Stop"
@@ -2377,6 +2403,8 @@ msgstr "Menu de la discussion"
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr ""
+"Attention : économiseur de batterie activé, la génération des messages sera "
+"ralentie"
 
 #: src/window.ui:130
 msgid "Attach File"
@@ -2468,21 +2496,23 @@ msgstr ""
 
 #: src/window.ui:399
 msgid "Idle Timer"
-msgstr ""
+msgstr "Minuteur d'inactivité"
 
 #: src/window.ui:400
 msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
 msgstr ""
+"Nombre de minutes durant laquelle l'instance reste inactive avant de "
+"s'éteindre (0 signifie qu'elle ne s'éteindra pas)"
 
 #: src/window.ui:419
 msgid "Loading Alpaca dialog"
-msgstr ""
+msgstr "Ajouté : boite de dialogue de lancement d'Alpaca"
 
 #: src/window.ui:426
 msgid "Loading Alpaca..."
-msgstr ""
+msgstr "Chargement d'Alpaca..."
 
 #: src/window.ui:440
 msgid "Manage models dialog"
@@ -2516,10 +2546,12 @@ msgstr "Aucun modèle trouvé"
 #: src/window.ui:509
 msgid "Try a different search or pull an unlisted model from it's name"
 msgstr ""
+"Essayez une recherche différente ou téléchargez un modèle non listé depuis "
+"son nom"
 
 #: src/window.ui:517
 msgid "Pull Model From Name"
-msgstr ""
+msgstr "Télécharger un modèle depuis son nom"
 
 #: src/window.ui:567
 msgid ""
@@ -2665,7 +2697,7 @@ msgstr "Basculer la barre latérale"
 
 #: src/window.ui:1070
 msgid "Rename chat"
-msgstr ""
+msgstr "Renommer la discussion"
 
 #: src/window.ui:1077
 msgid "Editor"
