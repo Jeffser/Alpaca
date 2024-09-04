@@ -1,13 +1,13 @@
 # Hindi translations for Alpaca package.
-# Copyright (C) 2024 Jeffser
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) 2024 Jeffry Samuel Eduarte Rojas
+# This file is distributed under the same license as the Alpaca package.
 # aritra saha <capsaicin@tuta.io>, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-02 03:00-0600\n"
+"POT-Creation-Date: 2024-09-04 15:32-0600\n"
 "PO-Revision-Date: 2024-09-02 HO:MI+ZONE\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Hindi\n"
@@ -80,7 +80,7 @@ msgstr "वेबसाइट से पाठ को प्रॉम्प्�
 msgid "PDF recognition"
 msgstr "पीडीएफ पहचान"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:880
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:886
 msgid "Disclaimer"
 msgstr "अस्वीकृति"
 
@@ -1267,64 +1267,64 @@ msgstr "0.1.1 स्थिर रिलीज़"
 msgid "This is the first public version of Alpaca"
 msgstr "यह अल्पाका का पहला सार्वजनिक संस्करण है"
 
-#: src/window.py:141
+#: src/window.py:140
 msgid "Please select a model before chatting"
 msgstr "चैट करने से पहले एक मॉडल का चयन करें"
 
-#: src/window.py:195 src/window.py:196
+#: src/window.py:194 src/window.py:195
 msgid "Close"
 msgstr "बंद करें"
 
-#: src/window.py:198 src/window.py:199 src/window.ui:833
+#: src/window.py:198 src/window.py:199 src/window.ui:839
 msgid "Next"
 msgstr "अगला"
 
-#: src/window.py:323
+#: src/window.py:333
 msgid "image"
 msgstr "छवि"
 
-#: src/window.py:400
+#: src/window.py:410
 msgid "Missing file"
 msgstr "फ़ाइल नहीं मिली"
 
-#: src/window.py:530 src/window.py:582 src/window.py:602 src/window.py:604
-#: src/dialogs.py:91 src/window.ui:30 src/custom_widgets/chat_widget.py:309
+#: src/window.py:543 src/window.py:595 src/window.py:615 src/window.py:617
+#: src/dialogs.py:92 src/window.ui:30 src/custom_widgets/chat_widget.py:314
 msgid "New Chat"
 msgstr "नई चैट शुरू करें"
 
-#: src/window.py:634
+#: src/window.py:642
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr "स्थानीय ओलामा इंस्टेंस में एक त्रुटि थी, इसलिए इसे रीसेट कर दिया गया है"
 
-#: src/window.py:656
+#: src/window.py:664
 msgid "Cannot open image"
 msgstr "छवि खोलने में असमर्थ"
 
-#: src/window.py:742
+#: src/window.py:750
 msgid "This video is not available"
 msgstr "यह वीडियो उपलब्ध नहीं है"
 
-#: src/window.py:760 src/dialogs.py:318
+#: src/window.py:768 src/dialogs.py:321
 msgid "Image recognition is only available on specific models"
 msgstr "छवि पहचान केवल विशिष्ट मॉडल्स पर ही उपलब्ध है"
 
-#: src/window.py:786
+#: src/window.py:797
 msgid "Loading instance"
 msgstr "उदाहरण लोड हो रहा है"
 
-#: src/window.py:791
+#: src/window.py:802
 msgid "Applying user preferences"
 msgstr "ब्यबहारकर्ता प्राथमिकताएँ लागू की जा रही हैं"
 
-#: src/window.py:811
+#: src/window.py:822
 msgid "Updating list of local models"
 msgstr "स्थानीय मॉडलों की सूची अद्यतन की जा रही है"
 
-#: src/window.py:814
+#: src/window.py:825
 msgid "Updating list of available models"
 msgstr "उपलब्ध मॉडलों की सूची अद्यतन की जा रही है"
 
-#: src/window.py:819
+#: src/window.py:830
 msgid "Loading chats"
 msgstr "चैट लोड हो रहे हैं"
 
@@ -1340,7 +1340,8 @@ msgid ""
 "Google Gemma 2 is a high-performing and efficient model by now available in "
 "three sizes: 2B, 9B, and 27B."
 msgstr ""
-"गूगल जेमा 2 एक उच्च प्रदर्शन और कुशल मॉडल है जो अब तीन आकारों में उपलब्ध है: 2B, 9B, और 27B"
+"गूगल जेमा 2 एक उच्च प्रदर्शन और कुशल मॉडल है जो अब तीन आकारों में उपलब्ध है: 2B, 9B, और "
+"27B"
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -1813,8 +1814,8 @@ msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
 msgstr ""
-"🪐 135M, 360M, और 1.7B पैरामीटर वाले छोटे मॉडलों का एक परिवार, जो एक नए उच्च-गुणवत्ता वाले "
-"डेटासेट पर प्रशिक्षित है।"
+"🪐 135M, 360M, और 1.7B पैरामीटर वाले छोटे मॉडलों का एक परिवार, जो एक नए उच्च-"
+"गुणवत्ता वाले डेटासेट पर प्रशिक्षित है।"
 
 #: src/available_models_descriptions.py:73
 msgid ""
@@ -1822,9 +1823,9 @@ msgid ""
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
 "open-source models and even closed-source models (e.g., GPT4o)."
 msgstr ""
-"Qwen2 Math Qwen2 LLMs पर आधारित विशेषज्ञता वाले गणित भाषा मॉडलों की एक "
-"श्रृंखला है, जो खुले स्रोत मॉडलों और यहां तक कि बंद स्रोत मॉडलों (जैसे, GPT4o) की "
-"गणितीय क्षमताओं को भी काफी हद तक पार करती है।"
+"Qwen2 Math Qwen2 LLMs पर आधारित विशेषज्ञता वाले गणित भाषा मॉडलों की एक श्रृंखला है, "
+"जो खुले स्रोत मॉडलों और यहां तक कि बंद स्रोत मॉडलों (जैसे, GPT4o) की गणितीय क्षमताओं को "
+"भी काफी हद तक पार करती है।"
 
 #: src/available_models_descriptions.py:74
 msgid ""
@@ -1916,8 +1917,7 @@ msgstr "16K कॉन्टेक्स्ट विंडो के साथ �
 msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
-msgstr ""
-"हेर्मेस 3 नाउस रिसर्च द्वारा एलएलएम की फ्लैगशिप हेर्मेस श्रृंखला का नवीनतम संस्करण है"
+msgstr "हेर्मेस 3 नाउस रिसर्च द्वारा एलएलएम की फ्लैगशिप हेर्मेस श्रृंखला का नवीनतम संस्करण है"
 
 #: src/available_models_descriptions.py:90
 msgid ""
@@ -2079,133 +2079,133 @@ msgstr ""
 msgid "Ollama instance was shut down due to inactivity"
 msgstr "निष्क्रियता के कारण ओल्लामा उदाहरण बंद कर दिया गया"
 
-#: src/dialogs.py:20
+#: src/dialogs.py:21
 msgid "Chat cannot be cleared while receiving a message"
 msgstr "संदेश प्राप्त करते समय चैट को साफ नहीं किया जा सकता है"
 
-#: src/dialogs.py:23
+#: src/dialogs.py:24
 msgid "Clear Chat?"
 msgstr "चैट साफ करें?"
 
-#: src/dialogs.py:24
+#: src/dialogs.py:25
 msgid "Are you sure you want to clear the chat?"
 msgstr "क्या आप चैट को साफ करना चाहते हैं?"
 
-#: src/dialogs.py:27 src/dialogs.py:49 src/dialogs.py:78 src/dialogs.py:106
-#: src/dialogs.py:130 src/dialogs.py:152 src/dialogs.py:175 src/dialogs.py:253
-#: src/dialogs.py:291 src/dialogs.py:367 src/dialogs.py:406
+#: src/dialogs.py:28 src/dialogs.py:50 src/dialogs.py:79 src/dialogs.py:107
+#: src/dialogs.py:131 src/dialogs.py:153 src/dialogs.py:176 src/dialogs.py:256
+#: src/dialogs.py:294 src/dialogs.py:370 src/dialogs.py:409
 msgid "Cancel"
 msgstr "रद्द करें"
 
-#: src/dialogs.py:28
+#: src/dialogs.py:29
 msgid "Clear"
 msgstr "साफ करें"
 
-#: src/dialogs.py:45
+#: src/dialogs.py:46
 msgid "Delete Chat?"
 msgstr "चैट हटाएं?"
 
-#: src/dialogs.py:46 src/dialogs.py:149
+#: src/dialogs.py:47 src/dialogs.py:150
 msgid "Are you sure you want to delete '{}'?"
 msgstr "क्या आप '{}' को हटाना चाहते हैं?"
 
-#: src/dialogs.py:50 src/dialogs.py:153
+#: src/dialogs.py:51 src/dialogs.py:154
 msgid "Delete"
 msgstr "हटाएं"
 
-#: src/dialogs.py:73
+#: src/dialogs.py:74
 msgid "Rename Chat?"
 msgstr "चैट का नाम बदलें?"
 
-#: src/dialogs.py:74
+#: src/dialogs.py:75
 msgid "Renaming '{}'"
 msgstr "'{}' का नाम बदल रहा है"
 
-#: src/dialogs.py:79
+#: src/dialogs.py:80
 msgid "Rename"
 msgstr "नाम बदलें"
 
-#: src/dialogs.py:101
+#: src/dialogs.py:102
 msgid "Create Chat?"
 msgstr "चैट बनाएं?"
 
-#: src/dialogs.py:102
+#: src/dialogs.py:103
 msgid "Enter name for new chat"
 msgstr "नए चैट के लिए नाम दर्ज करें"
 
-#: src/dialogs.py:107 src/window.ui:712
+#: src/dialogs.py:108 src/window.ui:718
 msgid "Create"
 msgstr "बनाएं"
 
-#: src/dialogs.py:126
+#: src/dialogs.py:127
 msgid "Stop Download?"
 msgstr "डाउनलोड रोकें?"
 
-#: src/dialogs.py:127
+#: src/dialogs.py:128
 msgid "Are you sure you want to stop pulling '{}'?"
 msgstr "क्या आप निश्चित हैं कि आप '{}' को रोकना चाहते हैं?"
 
-#: src/dialogs.py:131
+#: src/dialogs.py:132
 msgid "Stop"
 msgstr "रोकें"
 
-#: src/dialogs.py:148
+#: src/dialogs.py:149
 msgid "Delete Model?"
 msgstr "मॉडल हटाएं?"
 
-#: src/dialogs.py:171
+#: src/dialogs.py:172
 msgid "Remove Attachment?"
 msgstr "संलग्नक हटाएं?"
 
-#: src/dialogs.py:172
+#: src/dialogs.py:173
 msgid "Are you sure you want to remove attachment?"
 msgstr "क्या आप संलग्नक हटाना चाहते हैं?"
 
-#: src/dialogs.py:176
+#: src/dialogs.py:177
 msgid "Remove"
 msgstr "हटाएं"
 
-#: src/dialogs.py:219
+#: src/dialogs.py:221
 msgid "Connection Error"
 msgstr "कनेक्शन त्रुटि"
 
-#: src/dialogs.py:220
+#: src/dialogs.py:222
 msgid "The remote instance has disconnected"
 msgstr "दूरस्थ उदाहरण से कनेक्शन टूट गया है"
 
-#: src/dialogs.py:223
+#: src/dialogs.py:225
 msgid "Close Alpaca"
 msgstr "अल्पाका बंद करें"
 
-#: src/dialogs.py:224
+#: src/dialogs.py:227
 msgid "Use local instance"
 msgstr "स्थानीय उदाहरण का उपयोग करें"
 
-#: src/dialogs.py:225
+#: src/dialogs.py:228
 msgid "Connect"
 msgstr "कनेक्ट करें"
 
-#: src/dialogs.py:249
+#: src/dialogs.py:252
 msgid "Select Model"
 msgstr "मॉडल चुनें"
 
-#: src/dialogs.py:250
+#: src/dialogs.py:253
 msgid "This model will be used as the base for the new model"
 msgstr "यह मॉडल नए मॉडल के लिए आधार के रूप में उपयोग किया जाएगा"
 
-#: src/dialogs.py:254 src/dialogs.py:292 src/dialogs.py:368 src/dialogs.py:407
+#: src/dialogs.py:257 src/dialogs.py:295 src/dialogs.py:371 src/dialogs.py:410
 msgid "Accept"
 msgstr "स्वीकार करें"
 
-#: src/dialogs.py:270
+#: src/dialogs.py:273
 msgid "An error occurred while creating the model"
 msgstr "मॉडल बनाते समय एक त्रुटि हुई"
 
-#: src/dialogs.py:287
+#: src/dialogs.py:290
 msgid "Pull Model"
 msgstr "मॉडल खींचें"
 
-#: src/dialogs.py:288
+#: src/dialogs.py:291
 msgid ""
 "Input the name of the model in this format\n"
 "name:tag"
@@ -2213,15 +2213,15 @@ msgstr ""
 "मॉडल का नाम इस प्रारूप में दर्ज करें\n"
 "नाम:टैग"
 
-#: src/dialogs.py:352
+#: src/dialogs.py:355
 msgid "This video does not have any transcriptions"
 msgstr "इस वीडियो में कोई भी लिप्यंतरण नहीं है"
 
-#: src/dialogs.py:362
+#: src/dialogs.py:365
 msgid "Attach YouTube Video?"
 msgstr "यूट्यूब वीडियो संलग्न करें?"
 
-#: src/dialogs.py:363
+#: src/dialogs.py:366
 msgid ""
 "{}\n"
 "\n"
@@ -2231,15 +2231,15 @@ msgstr ""
 "\n"
 "कृपया शामिल करने के लिए एक लिप्यंतरण चुनें"
 
-#: src/dialogs.py:397
+#: src/dialogs.py:400
 msgid "An error occurred while extracting text from the website"
 msgstr "वेबसाइट से पाठ निकालते समय एक त्रुटि हुई"
 
-#: src/dialogs.py:402
+#: src/dialogs.py:405
 msgid "Attach Website? (Experimental)"
 msgstr "वेबसाइट संलग्न करें? (प्रयोगात्मक)"
 
-#: src/dialogs.py:403
+#: src/dialogs.py:406
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
@@ -2260,8 +2260,7 @@ msgstr "चैट मेनू"
 #: src/window.ui:84
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
-msgstr ""
-"चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
+msgstr "चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
 
 #: src/window.ui:130
 msgid "Attach File"
@@ -2271,15 +2270,15 @@ msgstr "फ़ाइल संलग्न करें"
 msgid "Message text box"
 msgstr "संदेश पाठ बॉक्स"
 
-#: src/window.ui:180 src/window.ui:1099
+#: src/window.ui:180 src/window.ui:1105
 msgid "Send Message"
 msgstr "संदेश भेजें"
 
-#: src/window.ui:229 src/window.ui:904 src/window.ui:1040
+#: src/window.ui:229 src/window.ui:910 src/window.ui:1046
 msgid "Preferences"
 msgstr "प्राथमिकताएं"
 
-#: src/window.ui:232 src/window.ui:1018
+#: src/window.ui:232 src/window.ui:1024
 msgid "General"
 msgstr "सामान्य"
 
@@ -2299,22 +2298,26 @@ msgstr "बियरर टोकन (वैकल्पिक)"
 msgid "Run Alpaca In Background"
 msgstr "एल्पाका को पृष्ठभूमि में चलाएं"
 
-#: src/window.ui:274
+#: src/window.ui:269
+msgid "Show Power Saver Warning"
+msgstr ""
+
+#: src/window.ui:280
 msgid "Temperature"
 msgstr "तापमान"
 
-#: src/window.ui:275
+#: src/window.ui:281
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
 msgstr ""
 "मॉडल का तापमान। तापमान बढ़ाने से मॉडल अधिक रचनात्मक रूप से उत्तर देगा। (डिफ़ॉल्ट: 0.8)"
 
-#: src/window.ui:290
+#: src/window.ui:296
 msgid "Seed"
 msgstr "बीज"
 
-#: src/window.ui:291
+#: src/window.ui:297
 msgid ""
 "Sets the random number seed to use for generation. Setting this to a "
 "specific number will make the model generate the same text for the same "
@@ -2324,11 +2327,11 @@ msgstr ""
 "संख्या में सेट करने से मॉडल एक ही प्रॉम्प्ट के लिए एक ही पाठ उत्पन्न करेगा। (डिफ़ॉल्ट: 0 "
 "(यादृच्छिक))"
 
-#: src/window.ui:305
+#: src/window.ui:311
 msgid "Keep Alive Time"
 msgstr "जीवित रखने का समय"
 
-#: src/window.ui:306
+#: src/window.ui:312
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
@@ -2336,15 +2339,15 @@ msgstr ""
 "नियंत्रित करता है कि मॉडल अनुरोध के बाद कितने समय तक मेमोरी में लोड रहेगा मिनटों में "
 "(डिफ़ॉल्ट: 5)"
 
-#: src/window.ui:322
+#: src/window.ui:328
 msgid "Ollama Instance"
 msgstr "ओलामा उदाहरण"
 
-#: src/window.ui:326
+#: src/window.ui:332
 msgid "Ollama Overrides"
 msgstr "ओलामा ओवरराइड्स"
 
-#: src/window.ui:327
+#: src/window.ui:333
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
@@ -2353,63 +2356,64 @@ msgstr ""
 "परिवर्तन केवल एकीकृत उदाहरण पर लागू होते हैं, यदि आप परिवर्तन करते हैं तो उदाहरण पुनः "
 "प्रारंभ होगा।"
 
-#: src/window.ui:399
+#: src/window.ui:405
 msgid "Idle Timer"
 msgstr "निष्क्रिय टाइमर"
 
-#: src/window.ui:400
+#: src/window.ui:406
 msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
 msgstr ""
-"मिनटों की संख्या जिसके लिए उदाहरण को निष्क्रिय रहना चाहिए इससे पहले कि यह बंद हो जाए (0 का अर्थ है कि यह बंद नहीं होगा)"
+"मिनटों की संख्या जिसके लिए उदाहरण को निष्क्रिय रहना चाहिए इससे पहले कि यह बंद हो जाए "
+"(0 का अर्थ है कि यह बंद नहीं होगा)"
 
-#: src/window.ui:419
+#: src/window.ui:425
 msgid "Loading Alpaca dialog"
 msgstr "अल्पाका संवाद लोड हो रहा है"
 
-#: src/window.ui:426
+#: src/window.ui:432
 msgid "Loading Alpaca..."
 msgstr "अल्पाका लोड हो रहा है..."
 
-#: src/window.ui:440
+#: src/window.ui:446
 msgid "Manage models dialog"
 msgstr "मॉडल्स प्रबंधन संवाद"
 
-#: src/window.ui:451 src/window.ui:898 src/custom_widgets/model_widget.py:23
+#: src/window.ui:457 src/window.ui:904 src/custom_widgets/model_widget.py:23
 #: src/custom_widgets/model_widget.py:24
 msgid "Manage Models"
 msgstr "मॉडल्स प्रबंधित करें"
 
-#: src/window.ui:461 src/window.ui:592
+#: src/window.ui:467 src/window.ui:598
 msgid "Create Model"
 msgstr "मॉडल बनाएं"
 
-#: src/window.ui:468
+#: src/window.ui:474
 msgid "Search Model"
 msgstr "मॉडल खोजें"
 
-#: src/window.ui:477
+#: src/window.ui:483
 msgid "Model search bar"
 msgstr "मॉडल खोज बार"
 
-#: src/window.ui:484 src/window.ui:486
+#: src/window.ui:490 src/window.ui:492
 msgid "Search models"
 msgstr "मॉडल्स खोजें"
 
-#: src/window.ui:508
+#: src/window.ui:514
 msgid "No Models Found"
 msgstr "कोई मॉडल नहीं मिला"
 
-#: src/window.ui:509
+#: src/window.ui:515
 msgid "Try a different search or pull an unlisted model from it's name"
 msgstr "एक अलग खोज आजमाएं या इसके नाम से एक अनसूचीबद्ध मॉडल खींचें"
 
-#: src/window.ui:517
+#: src/window.ui:523
 msgid "Pull Model From Name"
 msgstr "नाम से मॉडल खींचें"
 
-#: src/window.ui:567
+#: src/window.ui:573
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
@@ -2417,19 +2421,19 @@ msgstr ""
 "इस मॉडल को डाउनलोड करके आप मॉडल की वेबसाइट पर उपलब्ध लाइसेंस समझौते को स्वीकार करते "
 "हैं।"
 
-#: src/window.ui:627
+#: src/window.ui:633
 msgid "Base"
 msgstr "बेस"
 
-#: src/window.ui:646
+#: src/window.ui:652
 msgid "Name"
 msgstr "नाम"
 
-#: src/window.ui:652
+#: src/window.ui:658
 msgid "Context"
 msgstr "संदर्भ"
 
-#: src/window.ui:696
+#: src/window.ui:702
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -2439,35 +2443,35 @@ msgstr ""
 "(संदर्भ) निर्देशों को भर देता है। यदि आप अनिश्चित हैं तो अधिक जानकारी के लिए कृपया मॉडल "
 "की वेबसाइट या ओलामा दस्तावेज़ीकरण पर जाएं।"
 
-#: src/window.ui:735
+#: src/window.ui:741
 msgid "File preview dialog"
 msgstr "फ़ाइल पूर्वावलोकन संवाद"
 
-#: src/window.ui:747
+#: src/window.ui:753
 msgid "Open With Default App"
 msgstr "डिफ़ॉल्ट ऐप के साथ खोलें"
 
-#: src/window.ui:755
+#: src/window.ui:761
 msgid "Remove Attachment"
 msgstr "अटैचमेंट हटाएं"
 
-#: src/window.ui:817
+#: src/window.ui:823
 msgid "Previous"
 msgstr "पिछला"
 
-#: src/window.ui:860
+#: src/window.ui:866
 msgid "Welcome to Alpaca"
 msgstr "एल्पाका में आपका स्वागत है"
 
-#: src/window.ui:861
+#: src/window.ui:867
 msgid "Powered by Ollama"
 msgstr "ओलामा द्वारा संचालित"
 
-#: src/window.ui:864
+#: src/window.ui:870
 msgid "Ollama Website"
 msgstr "ओलामा वेबसाइट"
 
-#: src/window.ui:881
+#: src/window.ui:887
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2477,95 +2481,95 @@ msgstr ""
 "नहीं हैं जो एआई मॉडल द्वारा उत्पन्न कोड के निष्पादन से उत्पन्न होते हैं। कृपया सावधानी बरतें "
 "और कोड को चलाने से पहले इसे ध्यान से देखें।"
 
-#: src/window.ui:894
+#: src/window.ui:900
 msgid "Import Chat"
 msgstr "चैट आयात करें"
 
-#: src/window.ui:908
+#: src/window.ui:914
 msgid "Keyboard Shortcuts"
 msgstr "कीबोर्ड शॉर्टकट्स"
 
-#: src/window.ui:912
+#: src/window.ui:918
 msgid "About Alpaca"
 msgstr "एल्पाका के बारे में"
 
-#: src/window.ui:920 src/window.ui:946
+#: src/window.ui:926 src/window.ui:952
 msgid "Rename Chat"
 msgstr "चैट का नाम बदलें"
 
-#: src/window.ui:924 src/window.ui:950
+#: src/window.ui:930 src/window.ui:956
 msgid "Duplicate Chat"
 msgstr "चैट की प्रतिलिपि बनाएं"
 
-#: src/window.ui:928 src/window.ui:954
+#: src/window.ui:934 src/window.ui:960
 msgid "Export Chat"
 msgstr "चैट निर्यात करें"
 
-#: src/window.ui:932
+#: src/window.ui:938
 msgid "Clear Chat"
 msgstr "चैट साफ करें"
 
-#: src/window.ui:938 src/window.ui:960
+#: src/window.ui:944 src/window.ui:966
 msgid "Delete Chat"
 msgstr "चैट हटाएं"
 
-#: src/window.ui:968
+#: src/window.ui:974
 msgid "From Existing Model"
 msgstr "मौजूदा मॉडल से"
 
-#: src/window.ui:972
+#: src/window.ui:978
 msgid "From GGUF File"
 msgstr "जीजीयूएफ फाइल से"
 
-#: src/window.ui:976
+#: src/window.ui:982
 msgid "From Name"
 msgstr "नाम से"
 
-#: src/window.ui:1022
+#: src/window.ui:1028
 msgid "Close application"
 msgstr "एप्लिकेशन बंद करें"
 
-#: src/window.ui:1028
+#: src/window.ui:1034
 msgid "Import chat"
 msgstr "चैट आयात करें"
 
-#: src/window.ui:1034
+#: src/window.ui:1040
 msgid "Clear chat"
 msgstr "चैट साफ करें"
 
-#: src/window.ui:1046
+#: src/window.ui:1052
 msgid "New chat"
 msgstr "नई चैट"
 
-#: src/window.ui:1052
+#: src/window.ui:1058
 msgid "Show shortcuts window"
 msgstr "शॉर्टकट्स विंडो दिखाएं"
 
-#: src/window.ui:1058
+#: src/window.ui:1064
 msgid "Manage models"
 msgstr "मॉडल्स प्रबंधित करें"
 
-#: src/window.ui:1064
+#: src/window.ui:1070
 msgid "Toggle sidebar"
 msgstr "साइडबार टॉगल करें"
 
-#: src/window.ui:1070
+#: src/window.ui:1076
 msgid "Rename chat"
 msgstr "चैट का नाम बदलें"
 
-#: src/window.ui:1077
+#: src/window.ui:1083
 msgid "Editor"
 msgstr "संपादक"
 
-#: src/window.ui:1081
+#: src/window.ui:1087
 msgid "Copy"
 msgstr "कॉपी करें"
 
-#: src/window.ui:1087
+#: src/window.ui:1093
 msgid "Paste"
 msgstr "पेस्ट करें"
 
-#: src/window.ui:1093
+#: src/window.ui:1099
 msgid "Insert new line"
 msgstr "नई लाइन डालें"
 
@@ -2593,15 +2597,15 @@ msgstr ""
 msgid "Regenerate Response"
 msgstr "उत्तर पुनः उत्पन्न करें"
 
-#: src/custom_widgets/chat_widget.py:340
+#: src/custom_widgets/chat_widget.py:346
 msgid "Copy of {}"
 msgstr "{} की प्रति"
 
-#: src/custom_widgets/chat_widget.py:350
+#: src/custom_widgets/chat_widget.py:358
 msgid "Chat exported successfully"
 msgstr "चैट सफलतापूर्वक निर्यात किया गया"
 
-#: src/custom_widgets/chat_widget.py:419
+#: src/custom_widgets/chat_widget.py:428
 msgid "Chat imported successfully"
 msgstr "चैट सफलतापूर्वक आयात किया गया"
 
@@ -2673,23 +2677,23 @@ msgstr "उत्तर प्राप्त करते समय संद�
 msgid "Select a Model"
 msgstr "एक मॉडल चुनें"
 
-#: src/custom_widgets/model_widget.py:163
+#: src/custom_widgets/model_widget.py:162
 msgid "Stop Pulling '{}'"
 msgstr "{} पुल करना बंद करें"
 
-#: src/custom_widgets/model_widget.py:242
+#: src/custom_widgets/model_widget.py:241
 msgid "Remove '{}'"
 msgstr "{} हटाएं"
 
-#: src/custom_widgets/model_widget.py:309
+#: src/custom_widgets/model_widget.py:308
 msgid "Image Recognition"
 msgstr "छवि पहचान"
 
-#: src/custom_widgets/model_widget.py:335
+#: src/custom_widgets/model_widget.py:334
 msgid "Enter download menu for {}"
 msgstr "{} के लिए डाउनलोड मेनू में प्रवेश करें"
 
-#: src/custom_widgets/model_widget.py:377
+#: src/custom_widgets/model_widget.py:376
 msgid "Download {}:{}"
 msgstr "डाउनलोड {}:{}"
 
@@ -2801,4 +2805,3 @@ msgstr "{} पुल करने में त्रुटि"
 
 #~ msgid "Multimodal AI with image recognition"
 #~ msgstr "इमेज रिकॉग्निशन के साथ मल्टीमॉडल एआई"
-

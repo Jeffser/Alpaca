@@ -3,7 +3,7 @@
 Handles UI dialogs
 """
 import os
-import logging, requests, threading
+import logging, requests, threading, shutil
 from pytube import YouTube
 from html2text import html2text
 from gi.repository import Adw, Gtk
@@ -188,9 +188,10 @@ def remove_attached_file(self, name):
 def reconnect_remote_response(self, dialog, task, url_entry, bearer_entry):
     response = dialog.choose_finish(task)
     if not task or response == "remote":
-        self.ollama_instance.remote_url = url_entry.get_text()
-        self.ollama_instance.bearer_token = bearer_entry.get_text()
-        self.ollama_instance.remote = True
+        self.remote_connection_entry.set_text(url_entry.get_text())
+        self.remote_connection_switch.set_sensitive(url_entry.get_text())
+        self.remote_bearer_token_entry.set_text(bearer_entry.get_text())
+        self.remote_connection_switch.set_active(True)
         self.model_manager.update_local_list()
     elif response == "local":
         self.ollama_instance.remote = False
@@ -222,7 +223,8 @@ def reconnect_remote(self):
         extra_child=container
     )
     dialog.add_response("close", _("Close Alpaca"))
-    dialog.add_response("local", _("Use local instance"))
+    if shutil.which('ollama'):
+        dialog.add_response("local", _("Use local instance"))
     dialog.add_response("remote", _("Connect"))
     dialog.set_response_appearance("remote", Adw.ResponseAppearance.SUGGESTED)
     dialog.set_default_response("remote")
