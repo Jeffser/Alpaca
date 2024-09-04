@@ -258,7 +258,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def switch_powersaver_warning(self, switch, user_data):
         logger.debug("Switching powersaver warning banner")
-        
+        if switch.get_active():
+            self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
+        else:
+            self.banner.set_revealed(False)
         self.save_server_config()
 
     @Gtk.Template.Callback()
