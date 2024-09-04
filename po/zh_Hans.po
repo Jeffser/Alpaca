@@ -1,32 +1,33 @@
-# Simplified Chinese Tranlation for Alpaca
+# Simplified Chinese Translation for Alpaca
 # Copyright (C) 2024 Jeffser
 # This file is distributed under the same license as the Alpaca package.
 # Yuehao Sui <8ar10der@amao.run>, 2024.
+# Aleksana <me@aleksana.moe>, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-02 03:00-0600\n"
-"PO-Revision-Date: 2024-07-21 22:46+0200\n"
+"PO-Revision-Date: 2024-09-04 13:36+0200\n"
 "Last-Translator: Yuehao Sui <8ar10der@amao.run>\n"
-"Language-Team: Chinese (China)\n"
-"Language: zh_CN\n"
+"Language-Team: Simplified Chinese\n"
+"Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 46.1\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/com.jeffser.Alpaca.desktop.in:3
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
 msgid "Alpaca"
 msgstr "Alpaca"
 
+# 建议不翻译
 #: data/com.jeffser.Alpaca.desktop.in:9
 msgid "ai;ollama;llm"
-msgstr ""
+msgstr "ai;ollama;llm"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 msgid "Chat with local AI models"
@@ -1256,7 +1257,7 @@ msgstr "图像"
 
 #: src/window.py:400
 msgid "Missing file"
-msgstr ""
+msgstr "文件缺失"
 
 #: src/window.py:530 src/window.py:582 src/window.py:602 src/window.py:604
 #: src/dialogs.py:91 src/window.ui:30 src/custom_widgets/chat_widget.py:309
@@ -1281,23 +1282,23 @@ msgstr "图像识别功能仅适用于特定模型"
 
 #: src/window.py:786
 msgid "Loading instance"
-msgstr ""
+msgstr "正在加载实例"
 
 #: src/window.py:791
 msgid "Applying user preferences"
-msgstr ""
+msgstr "正在应用用户首选项"
 
 #: src/window.py:811
 msgid "Updating list of local models"
-msgstr ""
+msgstr "正在更新本地模型列表"
 
 #: src/window.py:814
 msgid "Updating list of available models"
-msgstr ""
+msgstr "正在更新可用模型列表"
 
 #: src/window.py:819
 msgid "Loading chats"
-msgstr ""
+msgstr "正在加载聊天"
 
 #: src/available_models_descriptions.py:2
 msgid ""
@@ -1310,6 +1311,7 @@ msgid ""
 "Google Gemma 2 is a high-performing and efficient model by now available in "
 "three sizes: 2B, 9B, and 27B."
 msgstr ""
+"Google Gemma 2 是一款高性能、高效率的模型，目前有 2B、9B 和 27B 三种规模。"
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -1403,7 +1405,7 @@ msgstr "Gemma 是由 Google DeepMind 构建的轻量级先进开放模型系列�
 msgid ""
 "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
 "0.5B to 110B parameters"
-msgstr "Qwen 1.5 是阿里云推出的一系列大型语言模型，参数从 0.5B 到 110B 不等。"
+msgstr "Qwen 1.5 是阿里云推出的一系列大型语言模型，参数从 0.5B 到 110B 不等"
 
 #: src/available_models_descriptions.py:18
 msgid ""
@@ -1438,7 +1440,7 @@ msgstr "Phi-2：微软研究院开发的 27 亿语言模型，具有出色的推
 
 #: src/available_models_descriptions.py:23
 msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
-msgstr "George Sung 和 Jarrad Hope 制作的无审查的 Llama 2 模型"
+msgstr "George Sung 和 Jarrad Hope 制作的无审查的 Llama 2 模型。"
 
 #: src/available_models_descriptions.py:24
 msgid ""
@@ -1730,6 +1732,8 @@ msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
 msgstr ""
+"🪐 在一个新的高质量数据集上训练的一系列小型模型，参数分别为 1.35 亿、3.6 亿"
+"和 17 亿。"
 
 #: src/available_models_descriptions.py:73
 msgid ""
@@ -1737,6 +1741,8 @@ msgid ""
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
 "open-source models and even closed-source models (e.g., GPT4o)."
 msgstr ""
+"Qwen2 Math 是建立在 Qwen2 LLMs 基础上的一系列专业数学语言模型，其数学能力大大"
+"超过开源模型甚至闭源模型（如 GPT4o）。"
 
 #: src/available_models_descriptions.py:74
 msgid ""
@@ -1773,7 +1779,7 @@ msgstr "Mistral 的扩展，支持 64K 或 128K 的上下文窗口。"
 msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
 "overtaking similarly and larger sized models."
-msgstr ""
+msgstr "拥有 38 亿个参数的轻量人工智能模型，性能超越同类和更大规模的模型。"
 
 #: src/available_models_descriptions.py:81
 msgid ""
@@ -1810,7 +1816,7 @@ msgstr "Nexus Raven 是针对函数调用任务的 13B 指令调整模型。"
 
 #: src/available_models_descriptions.py:87
 msgid "Great code generation model based on Llama2."
-msgstr "基于 Llama2 的优秀的代码生成模型"
+msgstr "基于 Llama2 的优秀的代码生成模型。"
 
 #: src/available_models_descriptions.py:88
 msgid "Uncensored Llama2 based model with support for a 16K context window."
@@ -1820,13 +1826,13 @@ msgstr "基于 Llama2 的无删减模型，支持 16K 上下文窗口。"
 msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
-msgstr ""
+msgstr "Hermes 3 是 Nous Research 旗舰产品 Hermes 系列 LLM 的最新版本"
 
 #: src/available_models_descriptions.py:90
 msgid ""
 "InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
 "outstanding reasoning capability."
-msgstr ""
+msgstr "InternLM2.5 是为实际场景量身定制的 7B 参数模型，具有出色的推理能力。"
 
 #: src/available_models_descriptions.py:91
 msgid ""
@@ -1860,6 +1866,8 @@ msgid ""
 "A series of models from Groq that represent a significant advancement in "
 "open-source AI capabilities for tool use/function calling."
 msgstr ""
+"来自 Groq 的一系列模型，代表了开源人工智能能力在工具使用/功能调用方面的重大进"
+"步。"
 
 #: src/available_models_descriptions.py:96
 msgid ""
@@ -1918,13 +1926,13 @@ msgstr "DBRX 是由 Databricks 创建的开放式通用 LLM。"
 msgid ""
 "MathΣtral: a 7B model designed for math reasoning and scientific discovery "
 "by Mistral AI."
-msgstr ""
+msgstr "MathΣtral：Mistral AI 为数学推理和科学发现设计的 7B 模型。"
 
 #: src/available_models_descriptions.py:106
 msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
-msgstr ""
+msgstr "BGE-M3 是 BAAI 推出的新型模型，具有多功能、多语言和多地域性的特点。"
 
 #: src/available_models_descriptions.py:107
 msgid ""
@@ -1936,27 +1944,28 @@ msgstr "一个强大的对话模型，设计用于聊天和指示用例。"
 msgid ""
 "An open weights function calling model based on Llama 3, competitive with "
 "GPT-4o function calling capabilities."
-msgstr ""
+msgstr "基于 Llama 3 的开放式权重函数调用模型，与 GPT-4o 函数调用能力相媲美。"
 
 #: src/available_models_descriptions.py:109
 msgid ""
 "A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
 "information extraction, based on Phi-3."
 msgstr ""
+"在用于信息提取的私人高质量合成数据集上微调的 3.8B 模型，以 Phi-3 为基础。"
 
 #: src/available_models_descriptions.py:110
 msgid "Embedding model from BAAI mapping texts to vectors."
-msgstr ""
+msgstr "来自 BAAI 的嵌入模型，将文本映射为矢量。"
 
 #: src/available_models_descriptions.py:111
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
-msgstr ""
+msgstr "可用于聚类或语义搜索等任务的句子转换器模型。"
 
 #: src/connection_handler.py:81
 msgid "Ollama instance was shut down due to inactivity"
-msgstr ""
+msgstr "Ollama 实例因闲置而关闭"
 
 #: src/dialogs.py:20
 msgid "Chat cannot be cleared while receiving a message"
@@ -2022,7 +2031,7 @@ msgstr "停止下载？"
 
 #: src/dialogs.py:127
 msgid "Are you sure you want to stop pulling '{}'?"
-msgstr ""
+msgstr "你确定要停止拉取 '{}' 吗？"
 
 #: src/dialogs.py:131
 msgid "Stop"
@@ -2089,6 +2098,8 @@ msgid ""
 "Input the name of the model in this format\n"
 "name:tag"
 msgstr ""
+"按照此格式输入模型名\n"
+"name:tag"
 
 #: src/dialogs.py:352
 msgid "This video does not have any transcriptions"
@@ -2139,7 +2150,7 @@ msgstr "聊天列表"
 #: src/window.ui:84
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
-msgstr ""
+msgstr "警告：省电模式已启用，消息生成速度将减慢"
 
 #: src/window.ui:130
 msgid "Attach File"
@@ -2147,7 +2158,7 @@ msgstr "附加文件"
 
 #: src/window.ui:167
 msgid "Message text box"
-msgstr ""
+msgstr "消息文本框"
 
 #: src/window.ui:180 src/window.ui:1099
 msgid "Send Message"
@@ -2228,25 +2239,25 @@ msgstr ""
 
 #: src/window.ui:399
 msgid "Idle Timer"
-msgstr ""
+msgstr "闲置倒计时"
 
 #: src/window.ui:400
 msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
-msgstr ""
+msgstr "实例在关闭前应保持闲置的分钟数（0 表示不关闭）"
 
 #: src/window.ui:419
 msgid "Loading Alpaca dialog"
-msgstr ""
+msgstr "正在加载 Alpaca 对话框"
 
 #: src/window.ui:426
 msgid "Loading Alpaca..."
-msgstr ""
+msgstr "正在加载 Alpaca ……"
 
 #: src/window.ui:440
 msgid "Manage models dialog"
-msgstr ""
+msgstr "管理模型对话框"
 
 #: src/window.ui:451 src/window.ui:898 src/custom_widgets/model_widget.py:23
 #: src/custom_widgets/model_widget.py:24
@@ -2263,7 +2274,7 @@ msgstr "搜索模型"
 
 #: src/window.ui:477
 msgid "Model search bar"
-msgstr ""
+msgstr "模型搜索框"
 
 #: src/window.ui:484 src/window.ui:486
 msgid "Search models"
@@ -2275,11 +2286,11 @@ msgstr "未找到模型"
 
 #: src/window.ui:509
 msgid "Try a different search or pull an unlisted model from it's name"
-msgstr ""
+msgstr "尝试不同的搜索，或根据名称拉取一个未列出的模型"
 
 #: src/window.ui:517
 msgid "Pull Model From Name"
-msgstr ""
+msgstr "根据名称拉取模型"
 
 #: src/window.ui:567
 msgid ""
@@ -2305,10 +2316,12 @@ msgid ""
 "instructions automatically. Please visit the model's website or Ollama "
 "documentation for more information if you're unsure."
 msgstr ""
+"有些模型需要一个模型文件，Alpaca 会自动填写 FROM 和 SYSTEM（上下文）说明。如"
+"果您不确定，请访问模型网站或 Ollama 文档以获取更多信息。"
 
 #: src/window.ui:735
 msgid "File preview dialog"
-msgstr ""
+msgstr "文件预览对话框"
 
 #: src/window.ui:747
 msgid "Open With Default App"
@@ -2361,7 +2374,7 @@ msgstr "重命名聊天"
 
 #: src/window.ui:924 src/window.ui:950
 msgid "Duplicate Chat"
-msgstr ""
+msgstr "复制聊天"
 
 #: src/window.ui:928 src/window.ui:954
 msgid "Export Chat"
@@ -2409,15 +2422,15 @@ msgstr "显示快捷键窗口"
 
 #: src/window.ui:1058
 msgid "Manage models"
-msgstr ""
+msgstr "管理模型"
 
 #: src/window.ui:1064
 msgid "Toggle sidebar"
-msgstr ""
+msgstr "切换侧边栏"
 
 #: src/window.ui:1070
 msgid "Rename chat"
-msgstr ""
+msgstr "重命名聊天"
 
 #: src/window.ui:1077
 msgid "Editor"
@@ -2437,21 +2450,21 @@ msgstr "插入新行"
 
 #: src/custom_widgets/chat_widget.py:114
 msgid "Send prompt: '{}'"
-msgstr ""
+msgstr "发送提示： '{}'"
 
 #: src/custom_widgets/chat_widget.py:120 src/custom_widgets/chat_widget.py:121
 msgid "Open Model Manager"
-msgstr ""
+msgstr "打开模型管理器"
 
 #: src/custom_widgets/chat_widget.py:130
 msgid "Try one of these prompts"
-msgstr ""
+msgstr "试试这些提示"
 
 #: src/custom_widgets/chat_widget.py:130
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
-msgstr ""
+msgstr "看起来您还没有下载任何模型。开始使用前下载模型！"
 
 #: src/custom_widgets/chat_widget.py:191
 msgid "Regenerate Response"
@@ -2459,7 +2472,7 @@ msgstr "重新生成回复"
 
 #: src/custom_widgets/chat_widget.py:340
 msgid "Copy of {}"
-msgstr ""
+msgstr "{}的副本"
 
 #: src/custom_widgets/chat_widget.py:350
 msgid "Chat exported successfully"
@@ -2475,15 +2488,15 @@ msgstr "更改消息成功"
 
 #: src/custom_widgets/message_widget.py:61
 msgid "Response message"
-msgstr ""
+msgstr "回复消息"
 
 #: src/custom_widgets/message_widget.py:61
 msgid "User message"
-msgstr ""
+msgstr "用户消息"
 
 #: src/custom_widgets/message_widget.py:103
 msgid "{}Code Block"
-msgstr ""
+msgstr "{}代码块"
 
 #: src/custom_widgets/message_widget.py:106
 msgid "Code Block"
@@ -2501,7 +2514,7 @@ msgstr "代码已复制到剪切板"
 #: src/custom_widgets/message_widget.py:201
 #: src/custom_widgets/message_widget.py:203
 msgid "Image"
-msgstr ""
+msgstr "图像"
 
 #: src/custom_widgets/message_widget.py:211
 #: src/custom_widgets/message_widget.py:227
@@ -2530,12 +2543,12 @@ msgstr "消息已复制到剪切板"
 
 #: src/custom_widgets/message_widget.py:364
 msgid "Message cannot be regenerated while receiving a response"
-msgstr ""
+msgstr "当收到回复时无法重新生成信息"
 
 #: src/custom_widgets/model_widget.py:66 src/custom_widgets/model_widget.py:70
 #: src/custom_widgets/model_widget.py:88 src/custom_widgets/model_widget.py:89
 msgid "Select a Model"
-msgstr ""
+msgstr "选择一个模型"
 
 #: src/custom_widgets/model_widget.py:163
 msgid "Stop Pulling '{}'"
@@ -2551,11 +2564,11 @@ msgstr "图像识别"
 
 #: src/custom_widgets/model_widget.py:335
 msgid "Enter download menu for {}"
-msgstr ""
+msgstr "输入 {} 的下载菜单"
 
 #: src/custom_widgets/model_widget.py:377
 msgid "Download {}:{}"
-msgstr ""
+msgstr "下载 {}:{}"
 
 #: src/custom_widgets/model_widget.py:442
 msgid "Model deleted successfully"
@@ -2568,7 +2581,7 @@ msgstr "任务完成"
 #: src/custom_widgets/model_widget.py:516
 #: src/custom_widgets/model_widget.py:517
 msgid "Model '{}' pulled successfully."
-msgstr "成功拉取模型 '{}'"
+msgstr "成功拉取模型 '{}' 。"
 
 #: src/custom_widgets/model_widget.py:520
 #: src/custom_widgets/model_widget.py:523
@@ -2585,7 +2598,7 @@ msgstr "拉取 '{}': {} 中发生错误"
 
 #: src/custom_widgets/model_widget.py:523
 msgid "Failed to pull model '{}' due to network error."
-msgstr "由于网络错误，拉取模型 '{}' 失败"
+msgstr "由于网络错误，拉取模型 '{}' 失败。"
 
 #: src/custom_widgets/model_widget.py:524
 msgid "Error pulling '{}'"
