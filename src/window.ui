@@ -264,9 +264,9 @@
                 </object>
               </child>
               <child>
-                <object class="AdwSwitchRow" id="omit_powersave_warning_switch">
-                  <signal name="notify::active" handler="switch_omit_powersave_warning"/>
-                  <property name="title" translatable="yes">Do not show powersave warning banner upon startup</property>
+                <object class="AdwSwitchRow" id="powersaver_warning_switch">
+                  <signal name="notify::active" handler="switch_powersaver_warning"/>
+                  <property name="title" translatable="yes">Show Power Saver Warning</property>
                 </object>
               </child>
             </object>
