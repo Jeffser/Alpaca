@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-02 03:00-0600\n"
+"POT-Creation-Date: 2024-09-04 15:32-0600\n"
 "PO-Revision-Date: 2024-07-30 12:46-0600\n"
 "Last-Translator: Marcel Margenberg <dev.margenberg@gmail.com>\n"
 "Language-Team: German\n"
@@ -81,7 +81,7 @@ msgstr "Text von einer Website zur Eingabeaufforderung hinzufügen"
 msgid "PDF recognition"
 msgstr "PDF-Erkennung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:880
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:886
 msgid "Disclaimer"
 msgstr "Haftungsausschluss"
 
@@ -152,7 +152,8 @@ msgstr "Experimenteller AMD GPU Support hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Added message loading spinner and new message indicator to chat tab"
-msgstr "Statusladebalken als Indikator für Nachrichten zum Chat-Tab hinzugefügt"
+msgstr ""
+"Statusladebalken als Indikator für Nachrichten zum Chat-Tab hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added animations"
@@ -176,7 +177,8 @@ msgstr "Ladedialog beim Start hinzugefügt, damit sich die App schneller öffnet
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added warning when device is on 'battery saver' mode"
-msgstr "Warnung hinzugefügt, wenn sich das Gerät im 'Batteriesparmodus' befindet"
+msgstr ""
+"Warnung hinzugefügt, wenn sich das Gerät im 'Batteriesparmodus' befindet"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Added inactivity timer to integrated instance"
@@ -1308,66 +1310,66 @@ msgstr "0.1.1 Stabiles Release"
 msgid "This is the first public version of Alpaca"
 msgstr "Dies ist die erste öffentliche Version von Alpaca"
 
-#: src/window.py:141
+#: src/window.py:140
 msgid "Please select a model before chatting"
 msgstr "Bitte wählen Sie ein Modell aus, bevor Sie chatten"
 
-#: src/window.py:195 src/window.py:196
+#: src/window.py:194 src/window.py:195
 msgid "Close"
 msgstr "Schließen"
 
-#: src/window.py:198 src/window.py:199 src/window.ui:833
+#: src/window.py:198 src/window.py:199 src/window.ui:839
 msgid "Next"
 msgstr "Weiter"
 
-#: src/window.py:323
+#: src/window.py:333
 msgid "image"
 msgstr "Bild"
 
-#: src/window.py:400
+#: src/window.py:410
 msgid "Missing file"
 msgstr "Fehlende Datei"
 
-#: src/window.py:530 src/window.py:582 src/window.py:602 src/window.py:604
-#: src/dialogs.py:91 src/window.ui:30 src/custom_widgets/chat_widget.py:309
+#: src/window.py:543 src/window.py:595 src/window.py:615 src/window.py:617
+#: src/dialogs.py:92 src/window.ui:30 src/custom_widgets/chat_widget.py:314
 msgid "New Chat"
 msgstr "Neuer Chat"
 
-#: src/window.py:634
+#: src/window.py:642
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr ""
 "Es gab einen Fehler mit der lokalen Ollama-Instanz, daher wurde sie "
 "zurückgesetzt"
 
-#: src/window.py:656
+#: src/window.py:664
 msgid "Cannot open image"
 msgstr "Bild kann nicht geöffnet werden"
 
-#: src/window.py:742
+#: src/window.py:750
 msgid "This video is not available"
 msgstr "Dieses Video ist nicht verfügbar"
 
-#: src/window.py:760 src/dialogs.py:318
+#: src/window.py:768 src/dialogs.py:321
 msgid "Image recognition is only available on specific models"
 msgstr "Bilderkennung ist nur bei bestimmten Modellen verfügbar"
 
-#: src/window.py:786
+#: src/window.py:797
 msgid "Loading instance"
 msgstr "Lade Instanz"
 
-#: src/window.py:791
+#: src/window.py:802
 msgid "Applying user preferences"
 msgstr "User-Vorgaben anwenden"
 
-#: src/window.py:811
+#: src/window.py:822
 msgid "Updating list of local models"
 msgstr "Liste der lokalen Modelle aktualisieren"
 
-#: src/window.py:814
+#: src/window.py:825
 msgid "Updating list of available models"
 msgstr "Liste der verfügaren Modelle aktualisieren"
 
-#: src/window.py:819
+#: src/window.py:830
 msgid "Loading chats"
 msgstr "Chats laden"
 
@@ -1652,7 +1654,8 @@ msgid ""
 "Codestral is Mistral AI’s first-ever code model designed for code generation "
 "tasks."
 msgstr ""
-"Codestral ist Mistral AIs initiales Code-Modell welches auf Code-Generierungsaufgaben getrimmt ist"
+"Codestral ist Mistral AIs initiales Code-Modell welches auf Code-"
+"Generierungsaufgaben getrimmt ist"
 
 #: src/available_models_descriptions.py:39
 msgid ""
@@ -1892,7 +1895,8 @@ msgstr ""
 msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
-msgstr "🪐 Eine Familie von kleinen Modellen mit 135M, 360M und 1.7B Parametern, "
+msgstr ""
+"🪐 Eine Familie von kleinen Modellen mit 135M, 360M und 1.7B Parametern, "
 "trainiert auf einem neuen hochwertigen Datensatz. "
 
 #: src/available_models_descriptions.py:73
@@ -1901,9 +1905,10 @@ msgid ""
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
 "open-source models and even closed-source models (e.g., GPT4o)."
 msgstr ""
-"Qwen2 Math  ist eine Reihe von spezialisierten mathematischen Sprachmodellen, die auf den "
-" Qwen2 LLMs aufbaut, die die mathematischen Fähigkeiten von "
-" Open-Source-Modellen und sogar Closed-Source-Modellen (z. B. GPT4o) übertrifft."
+"Qwen2 Math  ist eine Reihe von spezialisierten mathematischen "
+"Sprachmodellen, die auf den  Qwen2 LLMs aufbaut, die die mathematischen "
+"Fähigkeiten von  Open-Source-Modellen und sogar Closed-Source-Modellen (z. "
+"B. GPT4o) übertrifft."
 
 #: src/available_models_descriptions.py:74
 msgid ""
@@ -1948,10 +1953,8 @@ msgstr ""
 #: src/available_models_descriptions.py:80
 msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
-"overtaking similarly and larger sized models. "
+"overtaking similarly and larger sized models."
 msgstr ""
-"Ein leichtgewichtiges KI-Modell mit 3,8 Milliarden Parametern, dessen Leistung "
-", das ähnliche und größere Modelle übertrifft. "
 
 #: src/available_models_descriptions.py:81
 msgid ""
@@ -2011,8 +2014,8 @@ msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
 msgstr ""
-"Hermes 3 ist die neueste Version des Flaggschiffs der Hermes-Reihe von LLM von Nous Research "
-
+"Hermes 3 ist die neueste Version des Flaggschiffs der Hermes-Reihe von LLM "
+"von Nous Research "
 
 #: src/available_models_descriptions.py:90
 msgid ""
@@ -2141,8 +2144,8 @@ msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
 msgstr ""
-"BGE-M3 ist ein neues Modell von BAAI, das sich durch seine Vielseitigkeit in Multi-"
-"Funktionalität, Mehrsprachigkeit und Multigranularität."
+"BGE-M3 ist ein neues Modell von BAAI, das sich durch seine Vielseitigkeit in "
+"Multi-Funktionalität, Mehrsprachigkeit und Multigranularität."
 
 #: src/available_models_descriptions.py:107
 msgid ""
@@ -2178,139 +2181,140 @@ msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
 msgstr ""
-"Satztransformationsmodell, das für Aufgaben wie Clustering oder semantische Suche verwendet werden kann."
+"Satztransformationsmodell, das für Aufgaben wie Clustering oder semantische "
+"Suche verwendet werden kann."
 
 #: src/connection_handler.py:81
 msgid "Ollama instance was shut down due to inactivity"
 msgstr "Ollama-Instanz wurde wegen Inaktivität abgeschaltet"
 
-#: src/dialogs.py:20
+#: src/dialogs.py:21
 msgid "Chat cannot be cleared while receiving a message"
 msgstr "Chat kann während des Empfangs einer Nachricht nicht gelöscht werden"
 
-#: src/dialogs.py:23
+#: src/dialogs.py:24
 msgid "Clear Chat?"
 msgstr "Chat löschen?"
 
-#: src/dialogs.py:24
+#: src/dialogs.py:25
 msgid "Are you sure you want to clear the chat?"
 msgstr "Sind Sie sicher, dass Sie den Chat löschen möchten?"
 
-#: src/dialogs.py:27 src/dialogs.py:49 src/dialogs.py:78 src/dialogs.py:106
-#: src/dialogs.py:130 src/dialogs.py:152 src/dialogs.py:175 src/dialogs.py:253
-#: src/dialogs.py:291 src/dialogs.py:367 src/dialogs.py:406
+#: src/dialogs.py:28 src/dialogs.py:50 src/dialogs.py:79 src/dialogs.py:107
+#: src/dialogs.py:131 src/dialogs.py:153 src/dialogs.py:176 src/dialogs.py:256
+#: src/dialogs.py:294 src/dialogs.py:370 src/dialogs.py:409
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/dialogs.py:28
+#: src/dialogs.py:29
 msgid "Clear"
 msgstr "Löschen"
 
-#: src/dialogs.py:45
+#: src/dialogs.py:46
 msgid "Delete Chat?"
 msgstr "Chat löschen?"
 
-#: src/dialogs.py:46 src/dialogs.py:149
+#: src/dialogs.py:47 src/dialogs.py:150
 msgid "Are you sure you want to delete '{}'?"
 msgstr "Sind Sie sicher, dass Sie '{}' löschen möchten?"
 
-#: src/dialogs.py:50 src/dialogs.py:153
+#: src/dialogs.py:51 src/dialogs.py:154
 msgid "Delete"
 msgstr "Löschen"
 
-#: src/dialogs.py:73
+#: src/dialogs.py:74
 msgid "Rename Chat?"
 msgstr "Chat umbenennen?"
 
-#: src/dialogs.py:74
+#: src/dialogs.py:75
 msgid "Renaming '{}'"
 msgstr "'{}' umbenennen"
 
-#: src/dialogs.py:79
+#: src/dialogs.py:80
 msgid "Rename"
 msgstr "Umbenennen"
 
-#: src/dialogs.py:101
+#: src/dialogs.py:102
 msgid "Create Chat?"
 msgstr "Chat erstellen?"
 
-#: src/dialogs.py:102
+#: src/dialogs.py:103
 msgid "Enter name for new chat"
 msgstr "Namen für neuen Chat eingeben"
 
-#: src/dialogs.py:107 src/window.ui:712
+#: src/dialogs.py:108 src/window.ui:718
 msgid "Create"
 msgstr "Erstellen"
 
-#: src/dialogs.py:126
+#: src/dialogs.py:127
 msgid "Stop Download?"
 msgstr "Download stoppen?"
 
-#: src/dialogs.py:127
+#: src/dialogs.py:128
 msgid "Are you sure you want to stop pulling '{}'?"
 msgstr "Bist du Dir sicher, das beziehen von '{}' abzubrechen?"
 
-#: src/dialogs.py:131
+#: src/dialogs.py:132
 msgid "Stop"
 msgstr "Stoppen"
 
-#: src/dialogs.py:148
+#: src/dialogs.py:149
 msgid "Delete Model?"
 msgstr "Modell löschen?"
 
-#: src/dialogs.py:171
+#: src/dialogs.py:172
 msgid "Remove Attachment?"
 msgstr "Anhang entfernen?"
 
-#: src/dialogs.py:172
+#: src/dialogs.py:173
 msgid "Are you sure you want to remove attachment?"
 msgstr "Sind Sie sicher, dass Sie den Anhang entfernen möchten?"
 
-#: src/dialogs.py:176
+#: src/dialogs.py:177
 msgid "Remove"
 msgstr "Entfernen"
 
-#: src/dialogs.py:219
+#: src/dialogs.py:221
 msgid "Connection Error"
 msgstr "Verbindungsfehler"
 
-#: src/dialogs.py:220
+#: src/dialogs.py:222
 msgid "The remote instance has disconnected"
 msgstr "Die Remote-Instanz hat die Verbindung getrennt"
 
-#: src/dialogs.py:223
+#: src/dialogs.py:225
 msgid "Close Alpaca"
 msgstr "Alpaca schließen"
 
-#: src/dialogs.py:224
+#: src/dialogs.py:227
 msgid "Use local instance"
 msgstr "Lokale Instanz verwenden"
 
-#: src/dialogs.py:225
+#: src/dialogs.py:228
 msgid "Connect"
 msgstr "Verbinden"
 
-#: src/dialogs.py:249
+#: src/dialogs.py:252
 msgid "Select Model"
 msgstr "Modell auswählen"
 
-#: src/dialogs.py:250
+#: src/dialogs.py:253
 msgid "This model will be used as the base for the new model"
 msgstr "Dieses Modell wird als Basis für das neue Modell verwendet"
 
-#: src/dialogs.py:254 src/dialogs.py:292 src/dialogs.py:368 src/dialogs.py:407
+#: src/dialogs.py:257 src/dialogs.py:295 src/dialogs.py:371 src/dialogs.py:410
 msgid "Accept"
 msgstr "Akzeptieren"
 
-#: src/dialogs.py:270
+#: src/dialogs.py:273
 msgid "An error occurred while creating the model"
 msgstr "Beim Erstellen des Modells ist ein Fehler aufgetreten"
 
-#: src/dialogs.py:287
+#: src/dialogs.py:290
 msgid "Pull Model"
 msgstr "Modell abrufen"
 
-#: src/dialogs.py:288
+#: src/dialogs.py:291
 msgid ""
 "Input the name of the model in this format\n"
 "name:tag"
@@ -2318,15 +2322,15 @@ msgstr ""
 "Geben Sie den Namen des Modells in diesem Format ein\n"
 "Name:Tag"
 
-#: src/dialogs.py:352
+#: src/dialogs.py:355
 msgid "This video does not have any transcriptions"
 msgstr "Dieses Video hat keine Transkriptionen"
 
-#: src/dialogs.py:362
+#: src/dialogs.py:365
 msgid "Attach YouTube Video?"
 msgstr "YouTube-Video anhängen?"
 
-#: src/dialogs.py:363
+#: src/dialogs.py:366
 msgid ""
 "{}\n"
 "\n"
@@ -2336,15 +2340,15 @@ msgstr ""
 "\n"
 "Bitte wählen Sie ein Transkript zum Einbinden aus"
 
-#: src/dialogs.py:397
+#: src/dialogs.py:400
 msgid "An error occurred while extracting text from the website"
 msgstr "Beim Extrahieren von Text von der Website ist ein Fehler aufgetreten"
 
-#: src/dialogs.py:402
+#: src/dialogs.py:405
 msgid "Attach Website? (Experimental)"
 msgstr "Website anhängen? (Experimentell)"
 
-#: src/dialogs.py:403
+#: src/dialogs.py:406
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
@@ -2367,7 +2371,9 @@ msgstr "Chat-Menü"
 #: src/window.ui:84
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
-msgstr "Warnung: Der Energiesparmodus ist aktiviert, dies verlangsamt die Nachrichtenerstellung"
+msgstr ""
+"Warnung: Der Energiesparmodus ist aktiviert, dies verlangsamt die "
+"Nachrichtenerstellung"
 
 #: src/window.ui:130
 msgid "Attach File"
@@ -2377,15 +2383,15 @@ msgstr "Datei anhängen"
 msgid "Message text box"
 msgstr "Nachrichtentextfeld"
 
-#: src/window.ui:180 src/window.ui:1099
+#: src/window.ui:180 src/window.ui:1105
 msgid "Send Message"
 msgstr "Nachricht senden"
 
-#: src/window.ui:229 src/window.ui:904 src/window.ui:1040
+#: src/window.ui:229 src/window.ui:910 src/window.ui:1046
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: src/window.ui:232 src/window.ui:1018
+#: src/window.ui:232 src/window.ui:1024
 msgid "General"
 msgstr "Allgemein"
 
@@ -2405,11 +2411,15 @@ msgstr "Bearer-Token (Optional)"
 msgid "Run Alpaca In Background"
 msgstr "Alpaca im Hintergrund ausführen"
 
-#: src/window.ui:274
+#: src/window.ui:269
+msgid "Show Power Saver Warning"
+msgstr ""
+
+#: src/window.ui:280
 msgid "Temperature"
 msgstr "Temperatur"
 
-#: src/window.ui:275
+#: src/window.ui:281
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
@@ -2417,11 +2427,11 @@ msgstr ""
 "Die Temperatur des Modells. Eine Erhöhung der Temperatur lässt das Modell "
 "kreativer antworten. (Standard: 0,8)"
 
-#: src/window.ui:290
+#: src/window.ui:296
 msgid "Seed"
 msgstr "Seed"
 
-#: src/window.ui:291
+#: src/window.ui:297
 msgid ""
 "Sets the random number seed to use for generation. Setting this to a "
 "specific number will make the model generate the same text for the same "
@@ -2431,11 +2441,11 @@ msgstr ""
 "bestimmte Zahl gesetzt wird, generiert das Modell für den gleichen Prompt "
 "den gleichen Text. (Standard: 0 (zufällig))"
 
-#: src/window.ui:305
+#: src/window.ui:311
 msgid "Keep Alive Time"
 msgstr "Aktivhaltungszeit"
 
-#: src/window.ui:306
+#: src/window.ui:312
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
@@ -2443,15 +2453,15 @@ msgstr ""
 "Steuert, wie lange das Modell nach der Anfrage in Minuten im Speicher "
 "geladen bleibt (Standard: 5)"
 
-#: src/window.ui:322
+#: src/window.ui:328
 msgid "Ollama Instance"
 msgstr "Ollama-Instanz"
 
-#: src/window.ui:326
+#: src/window.ui:332
 msgid "Ollama Overrides"
 msgstr "Ollama-Überschreibungen"
 
-#: src/window.ui:327
+#: src/window.ui:333
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
@@ -2460,66 +2470,66 @@ msgstr ""
 "Seite gelten nur für die integrierte Instanz, die Instanz wird bei "
 "Änderungen neu gestartet."
 
-#: src/window.ui:399
-msgid "Leerlauf Timer"
+#: src/window.ui:405
+msgid "Idle Timer"
 msgstr ""
 
-#: src/window.ui:400
+#: src/window.ui:406
 msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
 msgstr ""
-"Anzahl der Minuten, die die Instanz im Leerlauf bleiben soll, bevor sie heruntergefahren wird (0 "
-"bedeutet, dass sie nicht abgeschaltet wird)"
+"Anzahl der Minuten, die die Instanz im Leerlauf bleiben soll, bevor sie "
+"heruntergefahren wird (0 bedeutet, dass sie nicht abgeschaltet wird)"
 
-#: src/window.ui:419
+#: src/window.ui:425
 msgid "Loading Alpaca dialog"
 msgstr "Laden des Alpaca Dialogs"
 
-#: src/window.ui:426
+#: src/window.ui:432
 msgid "Loading Alpaca..."
 msgstr "Lade Alpaca..."
 
-#: src/window.ui:440
+#: src/window.ui:446
 msgid "Manage models dialog"
 msgstr "Modelle verwalten-Dialog"
 
-#: src/window.ui:451 src/window.ui:898 src/custom_widgets/model_widget.py:23
+#: src/window.ui:457 src/window.ui:904 src/custom_widgets/model_widget.py:23
 #: src/custom_widgets/model_widget.py:24
 msgid "Manage Models"
 msgstr "Modelle verwalten"
 
-#: src/window.ui:461 src/window.ui:592
+#: src/window.ui:467 src/window.ui:598
 msgid "Create Model"
 msgstr "Modell erstellen"
 
-#: src/window.ui:468
+#: src/window.ui:474
 msgid "Search Model"
 msgstr "Modell suchen"
 
-#: src/window.ui:477
+#: src/window.ui:483
 msgid "Model search bar"
 msgstr "Modell-Suchleiste"
 
-#: src/window.ui:484 src/window.ui:486
+#: src/window.ui:490 src/window.ui:492
 msgid "Search models"
 msgstr "Modelle suchen"
 
-#: src/window.ui:508
+#: src/window.ui:514
 msgid "No Models Found"
 msgstr "Keine Modelle gefunden"
 
-#: src/window.ui:509
+#: src/window.ui:515
 msgid "Try a different search or pull an unlisted model from it's name"
 msgstr ""
 "Versuchen Sie eine andere Suche oder rufen Sie ein nicht gelistetes Modell "
 "über seinen Namen ab"
 
-#: src/window.ui:517
+#: src/window.ui:523
 msgid "Pull Model From Name"
 msgstr "Modell nach Namen abrufen"
 
-#: src/window.ui:567
+#: src/window.ui:573
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
@@ -2527,19 +2537,19 @@ msgstr ""
 "Durch das Herunterladen dieses Modells akzeptieren Sie die auf der Website "
 "des Modells verfügbare Lizenzvereinbarung."
 
-#: src/window.ui:627
+#: src/window.ui:633
 msgid "Base"
 msgstr "Basis"
 
-#: src/window.ui:646
+#: src/window.ui:652
 msgid "Name"
 msgstr "Name"
 
-#: src/window.ui:652
+#: src/window.ui:658
 msgid "Context"
 msgstr "Kontext"
 
-#: src/window.ui:696
+#: src/window.ui:702
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -2550,35 +2560,35 @@ msgstr ""
 "Modells oder die Ollama-Dokumentation für weitere Informationen, wenn Sie "
 "unsicher sind."
 
-#: src/window.ui:735
+#: src/window.ui:741
 msgid "File preview dialog"
 msgstr "Dateivorschau-Dialog"
 
-#: src/window.ui:747
+#: src/window.ui:753
 msgid "Open With Default App"
 msgstr "Mit Standard-App öffnen"
 
-#: src/window.ui:755
+#: src/window.ui:761
 msgid "Remove Attachment"
 msgstr "Anhang entfernen"
 
-#: src/window.ui:817
+#: src/window.ui:823
 msgid "Previous"
 msgstr "Zurück"
 
-#: src/window.ui:860
+#: src/window.ui:866
 msgid "Welcome to Alpaca"
 msgstr "Willkommen bei Alpaca"
 
-#: src/window.ui:861
+#: src/window.ui:867
 msgid "Powered by Ollama"
 msgstr "Betrieben von Ollama"
 
-#: src/window.ui:864
+#: src/window.ui:870
 msgid "Ollama Website"
 msgstr "Ollama-Website"
 
-#: src/window.ui:881
+#: src/window.ui:887
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2589,95 +2599,95 @@ msgstr ""
 "Modell generiert wurde. Bitte seien Sie vorsichtig und überprüfen Sie den "
 "Code sorgfältig, bevor Sie ihn ausführen."
 
-#: src/window.ui:894
+#: src/window.ui:900
 msgid "Import Chat"
 msgstr "Chat importieren"
 
-#: src/window.ui:908
+#: src/window.ui:914
 msgid "Keyboard Shortcuts"
 msgstr "Tastenkombinationen"
 
-#: src/window.ui:912
+#: src/window.ui:918
 msgid "About Alpaca"
 msgstr "Über Alpaca"
 
-#: src/window.ui:920 src/window.ui:946
+#: src/window.ui:926 src/window.ui:952
 msgid "Rename Chat"
 msgstr "Chat umbenennen"
 
-#: src/window.ui:924 src/window.ui:950
+#: src/window.ui:930 src/window.ui:956
 msgid "Duplicate Chat"
 msgstr "Chat duplizieren"
 
-#: src/window.ui:928 src/window.ui:954
+#: src/window.ui:934 src/window.ui:960
 msgid "Export Chat"
 msgstr "Chat exportieren"
 
-#: src/window.ui:932
+#: src/window.ui:938
 msgid "Clear Chat"
 msgstr "Chat löschen"
 
-#: src/window.ui:938 src/window.ui:960
+#: src/window.ui:944 src/window.ui:966
 msgid "Delete Chat"
 msgstr "Chat löschen"
 
-#: src/window.ui:968
+#: src/window.ui:974
 msgid "From Existing Model"
 msgstr "Aus bestehendem Modell"
 
-#: src/window.ui:972
+#: src/window.ui:978
 msgid "From GGUF File"
 msgstr "Aus GGUF-Datei"
 
-#: src/window.ui:976
+#: src/window.ui:982
 msgid "From Name"
 msgstr "Nach Namen"
 
-#: src/window.ui:1022
+#: src/window.ui:1028
 msgid "Close application"
 msgstr "Anwendung schließen"
 
-#: src/window.ui:1028
+#: src/window.ui:1034
 msgid "Import chat"
 msgstr "Chat importieren"
 
-#: src/window.ui:1034
+#: src/window.ui:1040
 msgid "Clear chat"
 msgstr "Chat löschen"
 
-#: src/window.ui:1046
+#: src/window.ui:1052
 msgid "New chat"
 msgstr "Neuer Chat"
 
-#: src/window.ui:1052
+#: src/window.ui:1058
 msgid "Show shortcuts window"
 msgstr "Tastenkombinationen-Fenster anzeigen"
 
-#: src/window.ui:1058
+#: src/window.ui:1064
 msgid "Manage models"
 msgstr "Modelle verwalten"
 
-#: src/window.ui:1064
+#: src/window.ui:1070
 msgid "Toggle sidebar"
 msgstr "Seitenleiste ein-/ausblenden"
 
-#: src/window.ui:1070
+#: src/window.ui:1076
 msgid "Rename chat"
 msgstr "Chat umbenennen"
 
-#: src/window.ui:1077
+#: src/window.ui:1083
 msgid "Editor"
 msgstr "Editor"
 
-#: src/window.ui:1081
+#: src/window.ui:1087
 msgid "Copy"
 msgstr "Kopieren"
 
-#: src/window.ui:1087
+#: src/window.ui:1093
 msgid "Paste"
 msgstr "Einfügen"
 
-#: src/window.ui:1093
+#: src/window.ui:1099
 msgid "Insert new line"
 msgstr "Neue Zeile einfügen"
 
@@ -2698,22 +2708,22 @@ msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
 msgstr ""
-"Es sieht so aus, als hätten Sie noch keine Modelle heruntergeladen. "
-"Laden Sie Modelle herunter, um loszulegen!"
+"Es sieht so aus, als hätten Sie noch keine Modelle heruntergeladen. Laden "
+"Sie Modelle herunter, um loszulegen!"
 
 #: src/custom_widgets/chat_widget.py:191
 msgid "Regenerate Response"
 msgstr "Antwort regenerieren"
 
-#: src/custom_widgets/chat_widget.py:340
+#: src/custom_widgets/chat_widget.py:346
 msgid "Copy of {}"
 msgstr "Kopie von {}"
 
-#: src/custom_widgets/chat_widget.py:350
+#: src/custom_widgets/chat_widget.py:358
 msgid "Chat exported successfully"
 msgstr "Chatverlauf erfolgreich exportiert"
 
-#: src/custom_widgets/chat_widget.py:419
+#: src/custom_widgets/chat_widget.py:428
 msgid "Chat imported successfully"
 msgstr "Chatverlauf erfolgreich importiert"
 
@@ -2778,30 +2788,31 @@ msgstr "Nachricht in die Zwischenablage kopiert"
 
 #: src/custom_widgets/message_widget.py:364
 msgid "Message cannot be regenerated while receiving a response"
-msgstr "Nachricht kann nicht regeneriert werden, während eine Antwort gesendet wird"
+msgstr ""
+"Nachricht kann nicht regeneriert werden, während eine Antwort gesendet wird"
 
 #: src/custom_widgets/model_widget.py:66 src/custom_widgets/model_widget.py:70
 #: src/custom_widgets/model_widget.py:88 src/custom_widgets/model_widget.py:89
 msgid "Select a Model"
 msgstr "Wähle ein Modell"
 
-#: src/custom_widgets/model_widget.py:163
+#: src/custom_widgets/model_widget.py:162
 msgid "Stop Pulling '{}'"
 msgstr "Abrufen von '{}' stoppen"
 
-#: src/custom_widgets/model_widget.py:242
+#: src/custom_widgets/model_widget.py:241
 msgid "Remove '{}'"
 msgstr "'{}' entfernen"
 
-#: src/custom_widgets/model_widget.py:309
+#: src/custom_widgets/model_widget.py:308
 msgid "Image Recognition"
 msgstr "Bilderkennung"
 
-#: src/custom_widgets/model_widget.py:335
+#: src/custom_widgets/model_widget.py:334
 msgid "Enter download menu for {}"
 msgstr "Download-Menü für {} aufrufen"
 
-#: src/custom_widgets/model_widget.py:377
+#: src/custom_widgets/model_widget.py:376
 msgid "Download {}:{}"
 msgstr "{}:{} herunterladen"
 
@@ -2839,6 +2850,13 @@ msgstr ""
 #: src/custom_widgets/model_widget.py:524
 msgid "Error pulling '{}'"
 msgstr "Fehler beim Abrufen von '{}'"
+
+#~ msgid ""
+#~ "A lightweight AI model with 3.8 billion parameters with performance "
+#~ "overtaking similarly and larger sized models. "
+#~ msgstr ""
+#~ "Ein leichtgewichtiges KI-Modell mit 3,8 Milliarden Parametern, dessen "
+#~ "Leistung , das ähnliche und größere Modelle übertrifft. "
 
 #~ msgid "Fixed generated titles having '\"S' for some reason"
 #~ msgstr "Generierte Titel haben aus irgendeinem Grund '\"S' - behoben"

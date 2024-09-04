@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-02 03:00-0600\n"
+"POT-Creation-Date: 2024-09-04 15:32-0600\n"
 "PO-Revision-Date: 2024-08-25 11:55-0600\n"
 "Last-Translator: Simon Bezruchenko <worcposj@gmail.com>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -82,7 +82,7 @@ msgstr "Додавайте текст із вебсайту до запиту"
 msgid "PDF recognition"
 msgstr "Розпізнавання PDF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:880
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:886
 msgid "Disclaimer"
 msgstr "Відмова від відповідальності"
 
@@ -153,7 +153,9 @@ msgstr "Додано експериментальну підтримку AMD GPU
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Added message loading spinner and new message indicator to chat tab"
-msgstr "Додано індикатор завантаження повідомлень та індикатор нових повідомлень на вкладку чату"
+msgstr ""
+"Додано індикатор завантаження повідомлень та індикатор нових повідомлень на "
+"вкладку чату"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added animations"
@@ -173,11 +175,14 @@ msgstr "Додано підтримку Markdown і блоків коду до �
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Added loading dialog at launch so the app opens faster"
-msgstr "Додано діалогове вікно завантаження при запуску для прискорення відкриття додатку"
+msgstr ""
+"Додано діалогове вікно завантаження при запуску для прискорення відкриття "
+"додатку"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added warning when device is on 'battery saver' mode"
-msgstr "Додано попередження при увімкненні режиму 'енергозбереження' на пристрої"
+msgstr ""
+"Додано попередження при увімкненні режиму 'енергозбереження' на пристрої"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Added inactivity timer to integrated instance"
@@ -221,7 +226,8 @@ msgstr "Додано налагодження Ollama в діалоговому �
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:118
 msgid "Changed YouTube transcription dialog appearance and behavior"
-msgstr "Змінено зовнішній вигляд та поведінку діалогового вікна транскрипції YouTube"
+msgstr ""
+"Змінено зовнішній вигляд та поведінку діалогового вікна транскрипції YouTube"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
 #: data/com.jeffser.Alpaca.metainfo.xml.in:145
@@ -240,7 +246,9 @@ msgstr "CTRL+W і CTRL+Q зупиняють локальний екземпля�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Changed appearance of 'Open Model Manager' button on welcome screen"
-msgstr "Змінено зовнішній вигляд кнопки 'Відкрити менеджер моделей' на вітальному екрані"
+msgstr ""
+"Змінено зовнішній вигляд кнопки 'Відкрити менеджер моделей' на вітальному "
+"екрані"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Fixed message generation not working consistently"
@@ -397,7 +405,9 @@ msgstr "Повернуто стандартні стилі"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:195
 msgid "Fixed generated titles having \"'S\" for some reason"
-msgstr "Виправлено помилку, коли згенеровані заголовки містили \"'S\" з невідомої причини"
+msgstr ""
+"Виправлено помилку, коли згенеровані заголовки містили \"'S\" з невідомої "
+"причини"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:196
 msgid "Changed min width for model dropdown"
@@ -409,7 +419,9 @@ msgstr "Змінено тінь введення повідомлення"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:198
 msgid "The last model used is now restored when the user changes chat"
-msgstr "Остання використана модель тепер відновлюється під час зміни чату користувачем"
+msgstr ""
+"Остання використана модель тепер відновлюється під час зміни чату "
+"користувачем"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:199
 msgid "Better check for message finishing"
@@ -432,7 +444,8 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:214
 msgid "Prevent chat generation from generating a title with multiple lines"
-msgstr "Запобігання створенню заголовка з декількох рядків під час генерації чату"
+msgstr ""
+"Запобігання створенню заголовка з декількох рядків під час генерації чату"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:223
 msgid "Bearer Token entry on connection error dialog"
@@ -448,7 +461,8 @@ msgstr "Сумісність із блоками коду без явної мо
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:226
 msgid "Rare, optional and dismissible support dialog"
-msgstr "Рідкісне, необов'язкове і таке, що можна закрити, діалогове вікно підтримки"
+msgstr ""
+"Рідкісне, необов'язкове і таке, що можна закрити, діалогове вікно підтримки"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:230
 msgid "Date format for Simplified Chinese translation"
@@ -460,7 +474,8 @@ msgstr "Помилка з непідтримуваними локалізаці�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:232
 msgid "Min height being too large to be used on mobile"
-msgstr "Мінімальна висота занадто велика для використання на мобільних пристроях"
+msgstr ""
+"Мінімальна висота занадто велика для використання на мобільних пристроях"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:233
 msgid "Remote connection checker bug"
@@ -480,7 +495,9 @@ msgstr "Транскрипції YouTube не зберігаються в пра
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:248
 msgid "Debug messages are now shown on the 'About Alpaca' dialog"
-msgstr "Відлагоджувальні повідомлення тепер відображаються в діалоговому вікні 'Про додаток Alpaca'"
+msgstr ""
+"Відлагоджувальні повідомлення тепер відображаються в діалоговому вікні 'Про "
+"додаток Alpaca'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:249
 msgid "Updated Ollama to v0.3.0 (new models)"
@@ -998,7 +1015,8 @@ msgstr "Додано Ollama як частину Alpaca, Ollama буде прац
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:505
 msgid "Added option to connect to remote instances (how it worked before)"
-msgstr "Додана опція підключення до віддалених екземплярів (як це працювало раніше)"
+msgstr ""
+"Додана опція підключення до віддалених екземплярів (як це працювало раніше)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:506
 msgid "Added option to import and export chats"
@@ -1036,7 +1054,8 @@ msgstr "Ще одне щоденне оновлення"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:521
 msgid "Added better UI for 'Manage Models' dialog"
-msgstr "Додано покращений інтерфейс для діалогового вікна 'Управління моделями'"
+msgstr ""
+"Додано покращений інтерфейс для діалогового вікна 'Управління моделями'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:522
 msgid "Added better UI for the chat sidebar"
@@ -1103,7 +1122,8 @@ msgstr "Краща масштабованість для різних розмі
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:557
 msgid "Fixed: Can't close app if first time setup fails"
-msgstr "Виправлено: Неможливо закрити додаток, якщо перше налаштування не вдалося"
+msgstr ""
+"Виправлено: Неможливо закрити додаток, якщо перше налаштування не вдалося"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:567
 msgid "Really Big Update"
@@ -1137,7 +1157,8 @@ msgstr "Додано індикатор завантаження при відп
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:575
 msgid "Added notifications if app is not active and a model pull finishes"
-msgstr "Додані сповіщення, якщо додаток не активний і завантаження моделі завершено"
+msgstr ""
+"Додані сповіщення, якщо додаток не активний і завантаження моделі завершено"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:576
 msgid "Added new symbolic icon"
@@ -1193,7 +1214,8 @@ msgstr "Виправлено: Опис додатка"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:610
 msgid "Fixed: Only show 'save changes dialog' when you actually change the url"
-msgstr "Виправлено: Показувати діалог 'зберегти зміни' лише коли URL дійсно змінено"
+msgstr ""
+"Виправлено: Показувати діалог 'зберегти зміни' лише коли URL дійсно змінено"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:620
 msgid "0.2.2 Bug fixes"
@@ -1270,64 +1292,64 @@ msgstr "0.1.1 Стабільний реліз"
 msgid "This is the first public version of Alpaca"
 msgstr "Це перша публічна версія Alpaca"
 
-#: src/window.py:141
+#: src/window.py:140
 msgid "Please select a model before chatting"
 msgstr "Будь ласка, виберіть модель перед початком чату"
 
-#: src/window.py:195 src/window.py:196
+#: src/window.py:194 src/window.py:195
 msgid "Close"
 msgstr "Закрити"
 
-#: src/window.py:198 src/window.py:199 src/window.ui:833
+#: src/window.py:198 src/window.py:199 src/window.ui:839
 msgid "Next"
 msgstr "Далі"
 
-#: src/window.py:323
+#: src/window.py:333
 msgid "image"
 msgstr "зображення"
 
-#: src/window.py:400
+#: src/window.py:410
 msgid "Missing file"
 msgstr "Відсутній файл"
 
-#: src/window.py:530 src/window.py:582 src/window.py:602 src/window.py:604
-#: src/dialogs.py:91 src/window.ui:30 src/custom_widgets/chat_widget.py:309
+#: src/window.py:543 src/window.py:595 src/window.py:615 src/window.py:617
+#: src/dialogs.py:92 src/window.ui:30 src/custom_widgets/chat_widget.py:314
 msgid "New Chat"
 msgstr "Новий чат"
 
-#: src/window.py:634
+#: src/window.py:642
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr "Виникла помилка з локальною інстанцією Ollama, тому вона була скинута"
 
-#: src/window.py:656
+#: src/window.py:664
 msgid "Cannot open image"
 msgstr "Не вдалося відкрити зображення"
 
-#: src/window.py:742
+#: src/window.py:750
 msgid "This video is not available"
 msgstr "Це відео недоступне"
 
-#: src/window.py:760 src/dialogs.py:318
+#: src/window.py:768 src/dialogs.py:321
 msgid "Image recognition is only available on specific models"
 msgstr "Розпізнавання зображень доступне лише для певних моделей"
 
-#: src/window.py:786
+#: src/window.py:797
 msgid "Loading instance"
 msgstr "Завантаження екземпляра"
 
-#: src/window.py:791
+#: src/window.py:802
 msgid "Applying user preferences"
 msgstr "Застосування налаштувань користувача"
 
-#: src/window.py:811
+#: src/window.py:822
 msgid "Updating list of local models"
 msgstr "Оновлення списку локальних моделей"
 
-#: src/window.py:814
+#: src/window.py:825
 msgid "Updating list of available models"
 msgstr "Оновлення списку доступних моделей"
 
-#: src/window.py:819
+#: src/window.py:830
 msgid "Loading chats"
 msgstr "Завантаження чатів"
 
@@ -1344,8 +1366,8 @@ msgid ""
 "Google Gemma 2 is a high-performing and efficient model by now available in "
 "three sizes: 2B, 9B, and 27B."
 msgstr ""
-"Google Gemma 2 — це високопродуктивна та ефективна модель, яка тепер доступна в "
-"трьох розмірах: 2B, 9B та 27B."
+"Google Gemma 2 — це високопродуктивна та ефективна модель, яка тепер "
+"доступна в трьох розмірах: 2B, 9B та 27B."
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -2102,140 +2124,140 @@ msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
 msgstr ""
-"Модель Sentence-transformers, яку можна використовувати для таких завдань, як кластеризація або "
-"семантичний пошук."
+"Модель Sentence-transformers, яку можна використовувати для таких завдань, "
+"як кластеризація або семантичний пошук."
 
 #: src/connection_handler.py:81
 msgid "Ollama instance was shut down due to inactivity"
 msgstr "Екземпляр Ollama був вимкнений через неактивність."
 
-#: src/dialogs.py:20
+#: src/dialogs.py:21
 msgid "Chat cannot be cleared while receiving a message"
 msgstr "Чат не може бути очищений під час отримання повідомлення"
 
-#: src/dialogs.py:23
+#: src/dialogs.py:24
 msgid "Clear Chat?"
 msgstr "Очистити чат?"
 
-#: src/dialogs.py:24
+#: src/dialogs.py:25
 msgid "Are you sure you want to clear the chat?"
 msgstr "Ви впевнені, що хочете очистити чат?"
 
-#: src/dialogs.py:27 src/dialogs.py:49 src/dialogs.py:78 src/dialogs.py:106
-#: src/dialogs.py:130 src/dialogs.py:152 src/dialogs.py:175 src/dialogs.py:253
-#: src/dialogs.py:291 src/dialogs.py:367 src/dialogs.py:406
+#: src/dialogs.py:28 src/dialogs.py:50 src/dialogs.py:79 src/dialogs.py:107
+#: src/dialogs.py:131 src/dialogs.py:153 src/dialogs.py:176 src/dialogs.py:256
+#: src/dialogs.py:294 src/dialogs.py:370 src/dialogs.py:409
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/dialogs.py:28
+#: src/dialogs.py:29
 msgid "Clear"
 msgstr "Очистити"
 
-#: src/dialogs.py:45
+#: src/dialogs.py:46
 msgid "Delete Chat?"
 msgstr "Видалити чат?"
 
-#: src/dialogs.py:46 src/dialogs.py:149
+#: src/dialogs.py:47 src/dialogs.py:150
 msgid "Are you sure you want to delete '{}'?"
 msgstr "Ви впевнені, що хочете видалити '{}'?"
 
-#: src/dialogs.py:50 src/dialogs.py:153
+#: src/dialogs.py:51 src/dialogs.py:154
 msgid "Delete"
 msgstr "Видалити"
 
-#: src/dialogs.py:73
+#: src/dialogs.py:74
 msgid "Rename Chat?"
 msgstr "Перейменувати чат?"
 
-#: src/dialogs.py:74
+#: src/dialogs.py:75
 msgid "Renaming '{}'"
 msgstr "Перейменування '{}'"
 
-#: src/dialogs.py:79
+#: src/dialogs.py:80
 msgid "Rename"
 msgstr "Перейменувати"
 
-#: src/dialogs.py:101
+#: src/dialogs.py:102
 msgid "Create Chat?"
 msgstr "Створити чат?"
 
-#: src/dialogs.py:102
+#: src/dialogs.py:103
 msgid "Enter name for new chat"
 msgstr "Введіть назву для нового чату"
 
-#: src/dialogs.py:107 src/window.ui:712
+#: src/dialogs.py:108 src/window.ui:718
 msgid "Create"
 msgstr "Створити"
 
-#: src/dialogs.py:126
+#: src/dialogs.py:127
 msgid "Stop Download?"
 msgstr "Зупинити завантаження?"
 
-#: src/dialogs.py:127
+#: src/dialogs.py:128
 msgid "Are you sure you want to stop pulling '{}'?"
 msgstr "Ви впевнені, що хочете припинити завантаження '{}'?"
 
-#: src/dialogs.py:131
+#: src/dialogs.py:132
 msgid "Stop"
 msgstr "Зупинити"
 
-#: src/dialogs.py:148
+#: src/dialogs.py:149
 msgid "Delete Model?"
 msgstr "Видалити модель?"
 
-#: src/dialogs.py:171
+#: src/dialogs.py:172
 msgid "Remove Attachment?"
 msgstr "Видалити вкладення?"
 
-#: src/dialogs.py:172
+#: src/dialogs.py:173
 msgid "Are you sure you want to remove attachment?"
 msgstr "Ви впевнені, що хочете видалити вкладення?"
 
-#: src/dialogs.py:176
+#: src/dialogs.py:177
 msgid "Remove"
 msgstr "Видалити"
 
-#: src/dialogs.py:219
+#: src/dialogs.py:221
 msgid "Connection Error"
 msgstr "Помилка з'єднання"
 
-#: src/dialogs.py:220
+#: src/dialogs.py:222
 msgid "The remote instance has disconnected"
 msgstr "Віддалений екземпляр відключився"
 
-#: src/dialogs.py:223
+#: src/dialogs.py:225
 msgid "Close Alpaca"
 msgstr "Закрити Alpaca"
 
-#: src/dialogs.py:224
+#: src/dialogs.py:227
 msgid "Use local instance"
 msgstr "Використовувати локальний екземпляр"
 
-#: src/dialogs.py:225
+#: src/dialogs.py:228
 msgid "Connect"
 msgstr "Підключитися"
 
-#: src/dialogs.py:249
+#: src/dialogs.py:252
 msgid "Select Model"
 msgstr "Вибрати модель"
 
-#: src/dialogs.py:250
+#: src/dialogs.py:253
 msgid "This model will be used as the base for the new model"
 msgstr "Цю модель буде використано як основу для нової моделі"
 
-#: src/dialogs.py:254 src/dialogs.py:292 src/dialogs.py:368 src/dialogs.py:407
+#: src/dialogs.py:257 src/dialogs.py:295 src/dialogs.py:371 src/dialogs.py:410
 msgid "Accept"
 msgstr "Прийняти"
 
-#: src/dialogs.py:270
+#: src/dialogs.py:273
 msgid "An error occurred while creating the model"
 msgstr "Сталася помилка під час створення моделі"
 
-#: src/dialogs.py:287
+#: src/dialogs.py:290
 msgid "Pull Model"
 msgstr "Завантажити модель"
 
-#: src/dialogs.py:288
+#: src/dialogs.py:291
 msgid ""
 "Input the name of the model in this format\n"
 "name:tag"
@@ -2243,15 +2265,15 @@ msgstr ""
 "Введіть назву моделі у такому форматі\n"
 "ім'я:тег"
 
-#: src/dialogs.py:352
+#: src/dialogs.py:355
 msgid "This video does not have any transcriptions"
 msgstr "У цього відео немає жодних транскрипцій"
 
-#: src/dialogs.py:362
+#: src/dialogs.py:365
 msgid "Attach YouTube Video?"
 msgstr "Прикріпити відео з YouTube?"
 
-#: src/dialogs.py:363
+#: src/dialogs.py:366
 msgid ""
 "{}\n"
 "\n"
@@ -2261,15 +2283,15 @@ msgstr ""
 "\n"
 "Будь ласка, виберіть транскрипцію для включення"
 
-#: src/dialogs.py:397
+#: src/dialogs.py:400
 msgid "An error occurred while extracting text from the website"
 msgstr "Сталася помилка під час вилучення тексту з вебсайту"
 
-#: src/dialogs.py:402
+#: src/dialogs.py:405
 msgid "Attach Website? (Experimental)"
 msgstr "Прикріпити вебсайт? (Експериментально)"
 
-#: src/dialogs.py:403
+#: src/dialogs.py:406
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
@@ -2302,15 +2324,15 @@ msgstr "Прикріпити файл"
 msgid "Message text box"
 msgstr "Текстове поле повідомлення"
 
-#: src/window.ui:180 src/window.ui:1099
+#: src/window.ui:180 src/window.ui:1105
 msgid "Send Message"
 msgstr "Надіслати повідомлення"
 
-#: src/window.ui:229 src/window.ui:904 src/window.ui:1040
+#: src/window.ui:229 src/window.ui:910 src/window.ui:1046
 msgid "Preferences"
 msgstr "Налаштування"
 
-#: src/window.ui:232 src/window.ui:1018
+#: src/window.ui:232 src/window.ui:1024
 msgid "General"
 msgstr "Загальні"
 
@@ -2330,11 +2352,15 @@ msgstr "Токен доступу (необов'язково)"
 msgid "Run Alpaca In Background"
 msgstr "Запускати Alpaca у фоновому режимі"
 
-#: src/window.ui:274
+#: src/window.ui:269
+msgid "Show Power Saver Warning"
+msgstr ""
+
+#: src/window.ui:280
 msgid "Temperature"
 msgstr "Температура"
 
-#: src/window.ui:275
+#: src/window.ui:281
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
@@ -2342,11 +2368,11 @@ msgstr ""
 "Температура моделі. Збільшення температури зробить відповіді моделі більш "
 "креативними. (За замовчуванням: 0.8)"
 
-#: src/window.ui:290
+#: src/window.ui:296
 msgid "Seed"
 msgstr "Насіння"
 
-#: src/window.ui:291
+#: src/window.ui:297
 msgid ""
 "Sets the random number seed to use for generation. Setting this to a "
 "specific number will make the model generate the same text for the same "
@@ -2356,11 +2382,11 @@ msgstr ""
 "цього значення на конкретне число змусить модель генерувати той самий текст "
 "для одного і того ж запиту. (За замовчуванням: 0 (випадковий))"
 
-#: src/window.ui:305
+#: src/window.ui:311
 msgid "Keep Alive Time"
 msgstr "Час збереження активності"
 
-#: src/window.ui:306
+#: src/window.ui:312
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
@@ -2368,15 +2394,15 @@ msgstr ""
 "Контролює, як довго модель залишатиметься завантаженою в пам'яті після "
 "запиту в хвилинах (За замовчуванням: 5)"
 
-#: src/window.ui:322
+#: src/window.ui:328
 msgid "Ollama Instance"
 msgstr "Екземпляр Ollama"
 
-#: src/window.ui:326
+#: src/window.ui:332
 msgid "Ollama Overrides"
 msgstr "Перезаписи Ollama"
 
-#: src/window.ui:327
+#: src/window.ui:333
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
@@ -2385,64 +2411,66 @@ msgstr ""
 "цьому сторінці застосовуються лише до інтегрованого екземпляра, екземпляр "
 "перезапуститься, якщо ви внесете зміни."
 
-#: src/window.ui:399
+#: src/window.ui:405
 msgid "Idle Timer"
 msgstr "Таймер простою"
 
-#: src/window.ui:400
+#: src/window.ui:406
 msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
 msgstr ""
-"Кількість хвилин, протягом яких екземпляр має залишатися в режимі простою, перш ніж він буде вимкнений (0 "
-"означає, що він не буде вимкнений)"
+"Кількість хвилин, протягом яких екземпляр має залишатися в режимі простою, "
+"перш ніж він буде вимкнений (0 означає, що він не буде вимкнений)"
 
-#: src/window.ui:419
+#: src/window.ui:425
 msgid "Loading Alpaca dialog"
 msgstr "Завантаження діалогового вікна Alpaca"
 
-#: src/window.ui:426
+#: src/window.ui:432
 msgid "Loading Alpaca..."
 msgstr "Завантаження Alpaca..."
 
-#: src/window.ui:440
+#: src/window.ui:446
 msgid "Manage models dialog"
 msgstr "Діалог управління моделями"
 
-#: src/window.ui:451 src/window.ui:898 src/custom_widgets/model_widget.py:23
+#: src/window.ui:457 src/window.ui:904 src/custom_widgets/model_widget.py:23
 #: src/custom_widgets/model_widget.py:24
 msgid "Manage Models"
 msgstr "Управління моделями"
 
-#: src/window.ui:461 src/window.ui:592
+#: src/window.ui:467 src/window.ui:598
 msgid "Create Model"
 msgstr "Створити модель"
 
-#: src/window.ui:468
+#: src/window.ui:474
 msgid "Search Model"
 msgstr "Шукати модель"
 
-#: src/window.ui:477
+#: src/window.ui:483
 msgid "Model search bar"
 msgstr "Панель пошуку моделей"
 
-#: src/window.ui:484 src/window.ui:486
+#: src/window.ui:490 src/window.ui:492
 msgid "Search models"
 msgstr "Шукати моделі"
 
-#: src/window.ui:508
+#: src/window.ui:514
 msgid "No Models Found"
 msgstr "Моделей не знайдено"
 
-#: src/window.ui:509
+#: src/window.ui:515
 msgid "Try a different search or pull an unlisted model from it's name"
-msgstr "Спробуйте інший пошук або завантажте не зазначену в списку модель за її назвою"
+msgstr ""
+"Спробуйте інший пошук або завантажте не зазначену в списку модель за її "
+"назвою"
 
-#: src/window.ui:517
+#: src/window.ui:523
 msgid "Pull Model From Name"
 msgstr "Завантажити модель за назвою"
 
-#: src/window.ui:567
+#: src/window.ui:573
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
@@ -2450,19 +2478,19 @@ msgstr ""
 "Завантажуючи цю модель, ви приймаєте ліцензійну угоду, що доступна на сайті "
 "моделі."
 
-#: src/window.ui:627
+#: src/window.ui:633
 msgid "Base"
 msgstr "База"
 
-#: src/window.ui:646
+#: src/window.ui:652
 msgid "Name"
 msgstr "Назва"
 
-#: src/window.ui:652
+#: src/window.ui:658
 msgid "Context"
 msgstr "Контекст"
 
-#: src/window.ui:696
+#: src/window.ui:702
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -2472,35 +2500,35 @@ msgstr ""
 "інструкції FROM та SYSTEM (контекст). Будь ласка, відвідайте сайт моделі або "
 "документацію Ollama для отримання додаткової інформації, якщо ви не впевнені."
 
-#: src/window.ui:735
+#: src/window.ui:741
 msgid "File preview dialog"
 msgstr "Діалог попереднього перегляду файлу"
 
-#: src/window.ui:747
+#: src/window.ui:753
 msgid "Open With Default App"
 msgstr "Відкрити за допомогою програми за замовчуванням"
 
-#: src/window.ui:755
+#: src/window.ui:761
 msgid "Remove Attachment"
 msgstr "Видалити вкладення"
 
-#: src/window.ui:817
+#: src/window.ui:823
 msgid "Previous"
 msgstr "Попередній"
 
-#: src/window.ui:860
+#: src/window.ui:866
 msgid "Welcome to Alpaca"
 msgstr "Ласкаво просимо до Alpaca"
 
-#: src/window.ui:861
+#: src/window.ui:867
 msgid "Powered by Ollama"
 msgstr "Працює на Ollama"
 
-#: src/window.ui:864
+#: src/window.ui:870
 msgid "Ollama Website"
 msgstr "Сайт Ollama"
 
-#: src/window.ui:881
+#: src/window.ui:887
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2511,95 +2539,95 @@ msgstr ""
 "згенерованого AI моделлю. Будь ласка, будьте обережні та уважно перевіряйте "
 "код перед його виконанням."
 
-#: src/window.ui:894
+#: src/window.ui:900
 msgid "Import Chat"
 msgstr "Імпорт чату"
 
-#: src/window.ui:908
+#: src/window.ui:914
 msgid "Keyboard Shortcuts"
 msgstr "Гарячі клавіші"
 
-#: src/window.ui:912
+#: src/window.ui:918
 msgid "About Alpaca"
 msgstr "Про Alpaca"
 
-#: src/window.ui:920 src/window.ui:946
+#: src/window.ui:926 src/window.ui:952
 msgid "Rename Chat"
 msgstr "Перейменувати чат"
 
-#: src/window.ui:924 src/window.ui:950
+#: src/window.ui:930 src/window.ui:956
 msgid "Duplicate Chat"
 msgstr "Дублювати чат"
 
-#: src/window.ui:928 src/window.ui:954
+#: src/window.ui:934 src/window.ui:960
 msgid "Export Chat"
 msgstr "Експортувати чат"
 
-#: src/window.ui:932
+#: src/window.ui:938
 msgid "Clear Chat"
 msgstr "Очистити чат"
 
-#: src/window.ui:938 src/window.ui:960
+#: src/window.ui:944 src/window.ui:966
 msgid "Delete Chat"
 msgstr "Видалити чат"
 
-#: src/window.ui:968
+#: src/window.ui:974
 msgid "From Existing Model"
 msgstr "З існуючої моделі"
 
-#: src/window.ui:972
+#: src/window.ui:978
 msgid "From GGUF File"
 msgstr "З файлу GGUF"
 
-#: src/window.ui:976
+#: src/window.ui:982
 msgid "From Name"
 msgstr "За назвою"
 
-#: src/window.ui:1022
+#: src/window.ui:1028
 msgid "Close application"
 msgstr "Закрити додаток"
 
-#: src/window.ui:1028
+#: src/window.ui:1034
 msgid "Import chat"
 msgstr "Імпорт чату"
 
-#: src/window.ui:1034
+#: src/window.ui:1040
 msgid "Clear chat"
 msgstr "Очистити чат"
 
-#: src/window.ui:1046
+#: src/window.ui:1052
 msgid "New chat"
 msgstr "Новий чат"
 
-#: src/window.ui:1052
+#: src/window.ui:1058
 msgid "Show shortcuts window"
 msgstr "Показати вікно гарячих клавіш"
 
-#: src/window.ui:1058
+#: src/window.ui:1064
 msgid "Manage models"
 msgstr "Управління моделями"
 
-#: src/window.ui:1064
+#: src/window.ui:1070
 msgid "Toggle sidebar"
 msgstr "Перемикання бокової панелі"
 
-#: src/window.ui:1070
+#: src/window.ui:1076
 msgid "Rename chat"
 msgstr "Перейменувати чат"
 
-#: src/window.ui:1077
+#: src/window.ui:1083
 msgid "Editor"
 msgstr "Редактор"
 
-#: src/window.ui:1081
+#: src/window.ui:1087
 msgid "Copy"
 msgstr "Копіювати"
 
-#: src/window.ui:1087
+#: src/window.ui:1093
 msgid "Paste"
 msgstr "Вставити"
 
-#: src/window.ui:1093
+#: src/window.ui:1099
 msgid "Insert new line"
 msgstr "Вставити новий рядок"
 
@@ -2626,15 +2654,15 @@ msgstr ""
 msgid "Regenerate Response"
 msgstr "Перегенерувати відповідь"
 
-#: src/custom_widgets/chat_widget.py:340
+#: src/custom_widgets/chat_widget.py:346
 msgid "Copy of {}"
 msgstr "Копія {}"
 
-#: src/custom_widgets/chat_widget.py:350
+#: src/custom_widgets/chat_widget.py:358
 msgid "Chat exported successfully"
 msgstr "Чат успішно експортовано"
 
-#: src/custom_widgets/chat_widget.py:419
+#: src/custom_widgets/chat_widget.py:428
 msgid "Chat imported successfully"
 msgstr "Чат успішно імпортовано"
 
@@ -2706,23 +2734,23 @@ msgstr "Повідомлення не може бути перегенерова
 msgid "Select a Model"
 msgstr "Виберіть модель"
 
-#: src/custom_widgets/model_widget.py:163
+#: src/custom_widgets/model_widget.py:162
 msgid "Stop Pulling '{}'"
 msgstr "Припинити завантаження '{}'"
 
-#: src/custom_widgets/model_widget.py:242
+#: src/custom_widgets/model_widget.py:241
 msgid "Remove '{}'"
 msgstr "Видалити '{}'"
 
-#: src/custom_widgets/model_widget.py:309
+#: src/custom_widgets/model_widget.py:308
 msgid "Image Recognition"
 msgstr "Розпізнавання зображень"
 
-#: src/custom_widgets/model_widget.py:335
+#: src/custom_widgets/model_widget.py:334
 msgid "Enter download menu for {}"
 msgstr "Перейти до меню завантаження для {}"
 
-#: src/custom_widgets/model_widget.py:377
+#: src/custom_widgets/model_widget.py:376
 msgid "Download {}:{}"
 msgstr "Завантажити {}:{}"
 
