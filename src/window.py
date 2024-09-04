@@ -496,20 +496,21 @@ Generate a title following these rules:
             self.chat_list_box.rename_chat(old_chat_name, new_chat_name)
 
     def save_server_config(self):
-        with open(os.path.join(config_dir, "server.json"), "w+", encoding="utf-8") as f:
-            data = {
-                'remote_url': self.ollama_instance.remote_url,
-                'remote_bearer_token': self.ollama_instance.bearer_token,
-                'run_remote': self.ollama_instance.remote,
-                'local_port': self.ollama_instance.local_port,
-                'run_on_background': self.background_switch.get_active(),
-                'powersaver_warning': self.powersaver_warning_switch.get_active(),
-                'model_tweaks': self.ollama_instance.tweaks,
-                'ollama_overrides': self.ollama_instance.overrides,
-                'idle_timer': self.ollama_instance.idle_timer_delay
-            }
+        if self.ollama_instance:
+            with open(os.path.join(config_dir, "server.json"), "w+", encoding="utf-8") as f:
+                data = {
+                    'remote_url': self.ollama_instance.remote_url,
+                    'remote_bearer_token': self.ollama_instance.bearer_token,
+                    'run_remote': self.ollama_instance.remote,
+                    'local_port': self.ollama_instance.local_port,
+                    'run_on_background': self.background_switch.get_active(),
+                    'powersaver_warning': self.powersaver_warning_switch.get_active(),
+                    'model_tweaks': self.ollama_instance.tweaks,
+                    'ollama_overrides': self.ollama_instance.overrides,
+                    'idle_timer': self.ollama_instance.idle_timer_delay
+                }
 
-            json.dump(data, f, indent=6)
+                json.dump(data, f, indent=6)
 
     def verify_connection(self):
         try:
