@@ -19,7 +19,7 @@
 """
 Handles the main window
 """
-import json, threading, os, re, base64, gettext, uuid, shutil, logging
+import json, threading, os, re, base64, gettext, uuid, shutil, logging, time
 from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
@@ -777,6 +777,12 @@ Generate a title following these rules:
         if show_launch_dialog:
             GLib.idle_add(self.launch_dialog.present, self)
 
+        #Check if Ollama instance doesn't exists
+        if not shutil.which('ollama'):
+            remote = True
+            if not remote_url:
+                remote_url = 'http://0.0.0.0:11434'
+
         #Instance
         self.launch_level_bar.set_value(0)
         self.launch_status.set_description(_('Loading instance'))
@@ -816,6 +822,8 @@ Generate a title following these rules:
         GLib.idle_add(self.load_history)
         self.launch_level_bar.set_value(5)
 
+        if self.ollama_instance.remote:
+            time.sleep(.5) #This is to prevent errors with gtk creating the launch dialog and closing it too quickly
         #Close launch dialog
         if show_launch_dialog:
             GLib.idle_add(self.launch_dialog.force_close)
@@ -884,7 +892,7 @@ Generate a title following these rules:
                     self.background_switch.set_active(data['run_on_background'])
                     if 'idle_timer' not in data:
                         data['idle_timer'] = 0
-                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], round(data['idle_timer']), False, not data['run_remote'])).start()
+                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], round(data['idle_timer']), False, True)).start()
             except Exception as e:
                 logger.error(e)
                 threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, True)).start()

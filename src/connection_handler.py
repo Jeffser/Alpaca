@@ -49,10 +49,10 @@ class instance():
 
     def request(self, connection_type:str, connection_url:str, data:dict=None, callback:callable=None) -> requests.models.Response:
         self.busy += 1
-        if self.idle_timer:
+        if self.idle_timer and not self.remote:
             self.idle_timer_stop_event.set()
             self.idle_timer=None
-        if not self.instance:
+        if not self.instance and not self.remote:
             self.start()
         connection_url = '{}/{}'.format(self.remote_url if self.remote else 'http://127.0.0.1:{}'.format(self.local_port), connection_url)
         logger.info('{} : {}'.format(connection_type, connection_url))
@@ -72,7 +72,7 @@ class instance():
             case "DELETE":
                 response = requests.delete(connection_url, headers=self.get_headers(False), data=data)
         self.busy -= 1
-        if not self.idle_timer:
+        if not self.idle_timer and not self.remote:
             self.start_timer()
         return response
 
