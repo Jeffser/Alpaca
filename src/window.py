@@ -840,6 +840,7 @@ Generate a title following these rules:
         if save:
             self.save_server_config()
         GLib.idle_add(self.welcome_next_button.set_sensitive, True)
+        self.ready = True
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
