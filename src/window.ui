@@ -263,6 +263,12 @@
                   <property name="title" translatable="yes">Run Alpaca In Background</property>
                 </object>
               </child>
+              <child>
+                <object class="AdwSwitchRow" id="powersaver_warning_switch">
+                  <signal name="notify::active" handler="switch_powersaver_warning"/>
+                  <property name="title" translatable="yes">Show Power Saver Warning</property>
+                </object>
+              </child>
             </object>
           </child>
           <child>
