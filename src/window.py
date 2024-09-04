@@ -904,8 +904,10 @@ Generate a title following these rules:
             except Exception as e:
                 logger.error(e)
                 threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, True)).start()
+                self.powersaver_warning_switch.set_active(True)
         else:
             threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, False)).start()
+            self.powersaver_warning_switch.set_active(True)
             self.welcome_dialog.present(self)
 
         if self.powersaver_warning_switch.get_active():
