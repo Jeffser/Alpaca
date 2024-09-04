@@ -905,8 +905,8 @@ Generate a title following these rules:
             threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, False)).start()
             self.welcome_dialog.present(self)
 
-    if self.powersaver_warning.get_active():
-        self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
-        
-    Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.power_saver_toggled(monitor))
-    self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
+        if self.powersaver_warning.get_active():
+            self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
+            
+        Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.power_saver_toggled(monitor))
+        self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
