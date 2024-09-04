@@ -2,7 +2,7 @@
 """
 Handles requests to remote and integrated instances of Ollama
 """
-import json, os, requests, subprocess, threading
+import json, os, requests, subprocess, threading, shutil
 from .internal import data_dir, cache_dir
 from logging import getLogger
 from time import sleep
@@ -92,25 +92,31 @@ class instance():
                 self.idle_timer.start()
 
     def start(self):
-        if not os.path.isdir(os.path.join(cache_dir, 'tmp/ollama')):
-            os.mkdir(os.path.join(cache_dir, 'tmp/ollama'))
-        self.instance = None
-        params = self.overrides.copy()
-        params["OLLAMA_DEBUG"] = "1"
-        params["OLLAMA_HOST"] = f"127.0.0.1:{self.local_port}" # You can't change this directly sorry :3
-        params["HOME"] = data_dir
-        params["TMPDIR"] = os.path.join(cache_dir, 'tmp/ollama')
-        instance = subprocess.Popen(["ollama", "serve"], env={**os.environ, **params}, stderr=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
-        threading.Thread(target=log_output, args=(instance.stdout,)).start()
-        threading.Thread(target=log_output, args=(instance.stderr,)).start()
-        logger.info("Starting Alpaca's Ollama instance...")
-        logger.debug(params)
-        logger.info("Started Alpaca's Ollama instance")
-        v_str = subprocess.check_output("ollama -v", shell=True).decode('utf-8')
-        logger.info('Ollama version: {}'.format(v_str.split('client version is ')[1].strip()))
-        self.instance = instance
-        if not self.idle_timer:
-            self.start_timer()
+        if shutil.which('ollama'):
+            if not os.path.isdir(os.path.join(cache_dir, 'tmp/ollama')):
+                os.mkdir(os.path.join(cache_dir, 'tmp/ollama'))
+            self.instance = None
+            params = self.overrides.copy()
+            params["OLLAMA_DEBUG"] = "1"
+            params["OLLAMA_HOST"] = f"127.0.0.1:{self.local_port}" # You can't change this directly sorry :3
+            params["HOME"] = data_dir
+            params["TMPDIR"] = os.path.join(cache_dir, 'tmp/ollama')
+            instance = subprocess.Popen(["ollama", "serve"], env={**os.environ, **params}, stderr=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+            threading.Thread(target=log_output, args=(instance.stdout,)).start()
+            threading.Thread(target=log_output, args=(instance.stderr,)).start()
+            logger.info("Starting Alpaca's Ollama instance...")
+            logger.debug(params)
+            logger.info("Started Alpaca's Ollama instance")
+            v_str = subprocess.check_output("ollama -v", shell=True).decode('utf-8')
+            logger.info('Ollama version: {}'.format(v_str.split('client version is ')[1].strip()))
+            self.instance = instance
+            if not self.idle_timer:
+                self.start_timer()
+        else:
+            self.remote = True
+            if not self.remote_url:
+                self.remote_url = 'http://0.0.0.0:11434'
+                window.connection_error()
 
     def stop(self):
         if self.idle_timer:

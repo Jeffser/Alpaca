@@ -777,12 +777,6 @@ Generate a title following these rules:
         if show_launch_dialog:
             GLib.idle_add(self.launch_dialog.present, self)
 
-        #Check if Ollama instance doesn't exists
-        if not shutil.which('ollama'):
-            remote = True
-            if not remote_url:
-                remote_url = 'http://0.0.0.0:11434'
-
         #Instance
         self.launch_level_bar.set_value(0)
         self.launch_status.set_description(_('Loading instance'))
