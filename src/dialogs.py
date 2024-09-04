@@ -3,7 +3,7 @@
 Handles UI dialogs
 """
 import os
-import logging, requests, threading
+import logging, requests, threading, shutil
 from pytube import YouTube
 from html2text import html2text
 from gi.repository import Adw, Gtk
@@ -223,7 +223,8 @@ def reconnect_remote(self):
         extra_child=container
     )
     dialog.add_response("close", _("Close Alpaca"))
-    dialog.add_response("local", _("Use local instance"))
+    if shutil.which('ollama'):
+        dialog.add_response("local", _("Use local instance"))
     dialog.add_response("remote", _("Connect"))
     dialog.set_response_appearance("remote", Adw.ResponseAppearance.SUGGESTED)
     dialog.set_default_response("remote")
