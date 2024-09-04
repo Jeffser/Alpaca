@@ -110,6 +110,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     instance_idle_timer = Gtk.Template.Child()
 
     background_switch = Gtk.Template.Child()
+    omit_powersave_warning_switch = Gtk.Template.Child()
     remote_connection_switch = Gtk.Template.Child()
     remote_connection_entry = Gtk.Template.Child()
     remote_bearer_token_entry = Gtk.Template.Child()
@@ -251,6 +252,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def switch_run_on_background(self, switch, user_data):
         logger.debug("Switching run on background")
+        self.set_hide_on_close(switch.get_active())
+        self.save_server_config()
+    
+    @Gtk.Template.Callback()
+    def switch_omit_powersave_warning(self, switch, user_data):
+        logger.debug("Switching omit powersave warning banner")
         self.set_hide_on_close(switch.get_active())
         self.save_server_config()
 
@@ -493,6 +500,7 @@ Generate a title following these rules:
                 'run_remote': self.ollama_instance.remote,
                 'local_port': self.ollama_instance.local_port,
                 'run_on_background': self.background_switch.get_active(),
+                'omit_powersave_warning': self.omit_powersave_warning_switch.get_active(),
                 'model_tweaks': self.ollama_instance.tweaks,
                 'ollama_overrides': self.ollama_instance.overrides,
                 'idle_timer': self.ollama_instance.idle_timer_delay
@@ -828,10 +836,7 @@ Generate a title following these rules:
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
-        Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.banner.set_revealed(monitor.get_power_saver_enabled()))
-        self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
-
+        
         message_widget.window = self
         chat_widget.window = self
         model_widget.window = self
@@ -884,8 +889,15 @@ Generate a title following these rules:
                 with open(os.path.join(config_dir, "server.json"), "r", encoding="utf-8") as f:
                     data = json.load(f)
                     self.background_switch.set_active(data['run_on_background'])
+                    self.omit_powersave_warning_switch.set_active(data['omit_powersave_warning'])
                     if 'idle_timer' not in data:
                         data['idle_timer'] = 0
+                    
+                    if not data["omit_powersave_warning"]:
+                        self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
+                        Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.banner.set_revealed(monitor.get_power_saver_enabled()))
+                        self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
+
                     threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], round(data['idle_timer']), False, True)).start()
             except Exception as e:
                 logger.error(e)
