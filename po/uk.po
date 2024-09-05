@@ -887,7 +887,7 @@ msgstr "Швидкі виправлення"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:431
 msgid "Fixed: Scroll when message is received"
-msgstr ""
+msgstr "Виправлено: Прокрутка при отриманні повідомлення"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:432
 msgid "Fixed: Content doesn't change when creating a new chat"
@@ -1055,7 +1055,8 @@ msgstr "Ще одне щоденне оновлення"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:521
 msgid "Added better UI for 'Manage Models' dialog"
 msgstr ""
-"Додано покращений інтерфейс для діалогового вікна 'Управління моделями'"
+"Додано покращений інтерфейс для діалогового вікна "
+"'Управління моделями'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:522
 msgid "Added better UI for the chat sidebar"
@@ -1123,7 +1124,8 @@ msgstr "Краща масштабованість для різних розмі
 #: data/com.jeffser.Alpaca.metainfo.xml.in:557
 msgid "Fixed: Can't close app if first time setup fails"
 msgstr ""
-"Виправлено: Неможливо закрити додаток, якщо перше налаштування не вдалося"
+"Виправлено: Неможливо закрити додаток, якщо перше "
+"налаштування не вдалося"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:567
 msgid "Really Big Update"
@@ -1157,8 +1159,7 @@ msgstr "Додано індикатор завантаження при відп
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:575
 msgid "Added notifications if app is not active and a model pull finishes"
-msgstr ""
-"Додані сповіщення, якщо додаток не активний і завантаження моделі завершено"
+msgstr "Додані сповіщення, якщо додаток не активний і завантаження моделі завершено"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:576
 msgid "Added new symbolic icon"
@@ -1214,8 +1215,7 @@ msgstr "Виправлено: Опис додатка"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:610
 msgid "Fixed: Only show 'save changes dialog' when you actually change the url"
-msgstr ""
-"Виправлено: Показувати діалог 'зберегти зміни' лише коли URL дійсно змінено"
+msgstr "Виправлено: Показувати діалог 'зберегти зміни' лише коли URL дійсно змінено"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:620
 msgid "0.2.2 Bug fixes"
@@ -1857,6 +1857,8 @@ msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
 msgstr ""
+"🪐 Родина невеликих моделей із 135M, 360M і 1.7B параметрів, навчених на "
+"новому високоякісному наборі даних."
 
 #: src/available_models_descriptions.py:73
 msgid ""
@@ -1864,6 +1866,9 @@ msgid ""
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
 "open-source models and even closed-source models (e.g., GPT4o)."
 msgstr ""
+"Qwen2 Math — серія спеціалізованих математичних мовних моделей, "
+"створених на основі Qwen2 LLMs, які значно перевершують математичні "
+"можливості моделей з відкритим кодом і навіть моделей із закритим кодом (наприклад, GPT4o)."
 
 #: src/available_models_descriptions.py:74
 msgid ""
@@ -1899,14 +1904,15 @@ msgstr "Неконтрольована версія моделі Wizard LM"
 
 #: src/available_models_descriptions.py:79
 msgid "An extension of Mistral to support context windows of 64K or 128K."
-msgstr ""
-"Розширення Mistral для підтримки контекстних вікон розміром 64K або 128K."
+msgstr "Розширення Mistral для підтримки контекстних вікон розміром 64K або 128K."
 
 #: src/available_models_descriptions.py:80
 msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
 "overtaking similarly and larger sized models."
 msgstr ""
+"Легка AI модель із 3.8 мільярдами параметрів, яка за продуктивністю "
+"перевершує аналогічні та більші моделі."
 
 #: src/available_models_descriptions.py:81
 msgid ""
@@ -1964,6 +1970,8 @@ msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
 msgstr ""
+"Hermes 3 — остання версія флагманської серії великих мовних моделей Hermes "
+"від Nous Research"
 
 #: src/available_models_descriptions.py:90
 msgid ""
@@ -2090,6 +2098,8 @@ msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
 msgstr ""
+"BGE-M3 — нова модель від BAAI, яка вирізняється своєю багатофункціональністю, "
+"багатомовністю та багатогранністю."
 
 #: src/available_models_descriptions.py:107
 msgid ""
@@ -2315,6 +2325,7 @@ msgstr "Меню чат"
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr ""
+"Увага: Увімкнено режим енергозбереження, це уповільнить генерацію повідомлень"
 
 #: src/window.ui:130
 msgid "Attach File"
@@ -2354,7 +2365,7 @@ msgstr "Запускати Alpaca у фоновому режимі"
 
 #: src/window.ui:269
 msgid "Show Power Saver Warning"
-msgstr ""
+msgstr "Показати попередження про режим енергозбереження"
 
 #: src/window.ui:280
 msgid "Temperature"
