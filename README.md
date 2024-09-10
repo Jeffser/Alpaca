@@ -35,6 +35,24 @@ Normal conversation | Image recognition | Code highlighting | YouTube transcript
 :------------------:|:-----------------:|:-----------------:|:---------------------:|:----------------:
 ![screenie1](https://jeffser.com/images/alpaca/screenie1.png) | ![screenie2](https://jeffser.com/images/alpaca/screenie2.png) | ![screenie3](https://jeffser.com/images/alpaca/screenie3.png) | ![screenie4](https://jeffser.com/images/alpaca/screenie4.png) | ![screenie5](https://jeffser.com/images/alpaca/screenie5.png)
 
+## Installation
+
+### Flathub
+
+You can find the latest stable version of the app on [Flathub](https://flathub.org/apps/com.jeffser.Alpaca)
+
+### Flatpak Package
+
+Everytime a new version is published they become available on the [releases page](https://github.com/Jeffser/Alpaca/releases) of the repository
+
+### Building Git Version
+
+Note: This is not recommended since the prerelease versions of the app often present errors and general instability.
+
+1. Clone the project
+2. Open with Gnome Builder
+3. Press the run button (or export if you want to build a Flatpak package)
+
 ## Translators
 
 Language               | Contributors
@@ -47,6 +65,9 @@ Language               | Contributors
 🇮🇳 Bengali              | [Aritra Saha](https://github.com/olumolu)
 🇨🇳 Simplified Chinese   | [Yuehao Sui](https://github.com/8ar10der) , [Aleksana](https://github.com/Aleksanaa)
 🇮🇳 Hindi                | [Aritra Saha](https://github.com/olumolu)
+🇹🇷 Turkish              | [YusaBecerikli](https://github.com/YusaBecerikli)
+🇺🇦 Ukrainian            | [Simon](https://github.com/OriginalSimon)
+🇩🇪 German               | [Marcel Margenberg](https://github.com/MehrzweckMandala)
 
 ---
 

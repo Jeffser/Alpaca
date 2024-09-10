@@ -15,8 +15,12 @@ msgmerge --no-fuzzy-matching -U po/nb_NO.po po/alpaca.pot
 echo "Updating Bengali"
 msgmerge --no-fuzzy-matching -U po/bn.po po/alpaca.pot
 echo "Updating Simplified Chinese"
-msgmerge --no-fuzzy-matching -U po/zh_CN.po po/alpaca.pot
+msgmerge --no-fuzzy-matching -U po/zh_Hans.po po/alpaca.pot
 echo "Updating Hindi"
 msgmerge --no-fuzzy-matching -U po/hi.po po/alpaca.pot
 echo "Updating Turkish"
 msgmerge --no-fuzzy-matching -U po/tr.po po/alpaca.pot
+echo "Updating Ukrainian"
+msgmerge --no-fuzzy-matching -U po/uk.po po/alpaca.pot
+echo "Updating German"
+msgmerge --no-fuzzy-matching -U po/de.po po/alpaca.pot

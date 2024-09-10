@@ -9,8 +9,20 @@
         "--share=ipc",
         "--socket=fallback-x11",
         "--device=dri",
-        "--socket=wayland"
+        "--socket=wayland",
+        "--filesystem=/sys/module/amdgpu:ro",
+        "--env=LD_LIBRARY_PATH=/app/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/sdk/llvm15/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/ollama:/app/plugins/AMD/lib/ollama"
     ],
+    "add-extensions": {
+    	"com.jeffser.Alpaca.Plugins": {
+    		"version": "1.0",
+    		"add-ld-path": "/app/plugins/AMD/lib/ollama",
+    		"directory": "plugins",
+    		"no-autodownload": true,
+    		"autodelete": true,
+    		"subdirectories": true
+    	}
+    },
     "cleanup" : [
         "/include",
         "/lib/pkgconfig",
@@ -117,21 +129,22 @@
             "name": "ollama",
             "buildsystem": "simple",
             "build-commands": [
-		"install -Dm0755 ollama* ${FLATPAK_DEST}/bin/ollama"
+            	"cp -r --remove-destination * ${FLATPAK_DEST}/",
+            	"mkdir ${FLATPAK_DEST}/plugins"
             ],
             "sources": [
             	{
-            		"type": "file",
-            		"url": "https://github.com/ollama/ollama/releases/download/v0.3.3/ollama-linux-amd64",
-            		"sha256": "2b2a4ee4c86fa5b09503e95616bd1b3ee95238b1b3bf12488b9c27c66b84061a",
+            		"type": "archive",
+            		"url": "https://github.com/ollama/ollama/releases/download/v0.3.9/ollama-linux-amd64.tgz",
+            		"sha256": "b0062fbccd46134818d9d59cfa3867ad6849163653cb1171bc852c5f379b0851",
 		    	"only-arches": [
 		    		"x86_64"
 		    	]
             	},
             	{
-            		"type": "file",
-            		"url": "https://github.com/ollama/ollama/releases/download/v0.3.3/ollama-linux-arm64",
-            		"sha256": "28fddbea0c161bc539fd08a3dc78d51413cfe8da97386cb39420f4f30667e22c",
+            		"type": "archive",
+            		"url": "https://github.com/ollama/ollama/releases/download/v0.3.9/ollama-linux-arm64.tgz",
+            		"sha256": "8979484bcb1448ab9b45107fbcb3b9f43c2af46f961487449b9ebf3518cd70eb",
 		    	"only-arches": [
 		    		"aarch64"
 		    	]

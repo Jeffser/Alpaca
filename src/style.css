@@ -18,13 +18,22 @@
 .model_list_box > * {
 	margin: 0;
 }
-.user_message, .response_message {
-  padding: 12px;
+.user_message > label, .response_message > label {
+  padding: 7px;
   border-radius: 10px;
 }
-.user_message:focus, .response_message:focus, .editing_message_textview:focus, .code_block:focus {
+.user_message label:focus, .response_message label:focus, .editing_message_textview:focus, .code_block:focus {
 	box-shadow: 0 0 1px 2px mix(@accent_color, @window_bg_color, 0.5);
 }
 .model_popover {
   margin-top: 6px;
+}
+stacksidebar {
+  border: none;
+}
+.image_recognition_indicator {
+  padding: 0px 10px;
+}
+.code_block {
+  font-family: monospace;
 }

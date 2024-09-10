@@ -44,7 +44,10 @@ translators = [
     'Aritra Saha (Bengali) https://github.com/olumolu',
     'Yuehao Sui (Simplified Chinese) https://github.com/8ar10der',
     'Aleksana (Simplified Chinese) https://github.com/Aleksanaa',
-    'Aritra Saha (Hindi) https://github.com/olumolu'
+    'Aritra Saha (Hindi) https://github.com/olumolu',
+    'YusaBecerikli (Turkish) https://github.com/YusaBecerikli',
+    'Simon (Ukrainian) https://github.com/OriginalSimon',
+    'Marcel Margenberg (German) https://github.com/MehrzweckMandala'
 ]
 
 class AlpacaApplication(Adw.Application):
@@ -54,8 +57,9 @@ class AlpacaApplication(Adw.Application):
         super().__init__(application_id='com.jeffser.Alpaca',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.props.active_window.closing_app(None), ['<primary>w', '<primary>q'])
-        self.create_action('preferences', lambda *_: AlpacaWindow.show_preferences_dialog(self.props.active_window), ['<primary>comma'])
+        self.create_action('preferences', lambda *_: self.props.active_window.preferences_dialog.present(self.props.active_window), ['<primary>comma'])
         self.create_action('about', self.on_about_action)
+        self.set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.version = version
 
     def do_activate(self):

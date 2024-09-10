@@ -3,18 +3,18 @@
 Handles UI dialogs
 """
 import os
-import logging
+import logging, requests, threading, shutil
 from pytube import YouTube
 from html2text import html2text
 from gi.repository import Adw, Gtk
-from . import connection_handler
+from .internal import cache_dir
 
 logger = logging.getLogger(__name__)
 # CLEAR CHAT | WORKS
 
 def clear_chat_response(self, dialog, task):
     if dialog.choose_finish(task) == "clear":
-        self.clear_chat()
+        self.chat_list_box.get_current_chat().clear_chat()
 
 def clear_chat(self):
     if self.bot_message is not None:
@@ -39,7 +39,7 @@ def clear_chat(self):
 
 def delete_chat_response(self, dialog, task, chat_name):
     if dialog.choose_finish(task) == "delete":
-        self.delete_chat(chat_name)
+        self.chat_list_box.delete_chat(chat_name)
 
 def delete_chat(self, chat_name):
     dialog = Adw.AlertDialog(
@@ -59,16 +59,16 @@ def delete_chat(self, chat_name):
 
 # RENAME CHAT | WORKS
 
-def rename_chat_response(self, dialog, task, old_chat_name, entry, label_element):
+def rename_chat_response(self, dialog, task, old_chat_name, entry):
     if not entry:
         return
     new_chat_name = entry.get_text()
     if old_chat_name == new_chat_name:
         return
     if new_chat_name and (task is None or dialog.choose_finish(task) == "rename"):
-        self.rename_chat(old_chat_name, new_chat_name, label_element)
+        self.chat_list_box.rename_chat(old_chat_name, new_chat_name)
 
-def rename_chat(self, chat_name, label_element):
+def rename_chat(self, chat_name):
     entry = Gtk.Entry()
     dialog = Adw.AlertDialog(
         heading=_("Rename Chat?"),
@@ -83,7 +83,7 @@ def rename_chat(self, chat_name, label_element):
     dialog.choose(
         parent = self,
         cancellable = None,
-        callback = lambda dialog, task, old_chat_name=chat_name, entry=entry, label_element=label_element: rename_chat_response(self, dialog, task, old_chat_name, entry, label_element)
+        callback = lambda dialog, task, old_chat_name=chat_name, entry=entry: rename_chat_response(self, dialog, task, old_chat_name, entry)
     )
 
 # NEW CHAT | WORKS | UNUSED REASON: The 'Add Chat' button now creates a chat without a name AKA "New Chat"
@@ -116,15 +116,16 @@ def new_chat(self):
 
 # STOP PULL MODEL | WORKS
 
-def stop_pull_model_response(self, dialog, task, model_name):
+def stop_pull_model_response(self, dialog, task, pulling_model):
     if dialog.choose_finish(task) == "stop":
-        self.stop_pull_model(model_name)
+        if len(list(pulling_model.get_parent())) == 1:
+            pulling_model.get_parent().set_visible(False)
+        pulling_model.get_parent().remove(pulling_model)
 
-def stop_pull_model(self, model_name):
-    #self.pulling_model_list_box.unselect_all()
+def stop_pull_model(self, pulling_model):
     dialog = Adw.AlertDialog(
         heading=_("Stop Download?"),
-        body=_("Are you sure you want to stop pulling '{} ({})'?").format(model_name.split(":")[0].capitalize(), model_name.split(":")[1]),
+        body=_("Are you sure you want to stop pulling '{}'?").format(self.convert_model_name(pulling_model.get_name(), 0)),
         close_response="cancel"
     )
     dialog.add_response("cancel", _("Cancel"))
@@ -134,19 +135,19 @@ def stop_pull_model(self, model_name):
     dialog.choose(
         parent = self.manage_models_dialog,
         cancellable = None,
-        callback = lambda dialog, task, model_name = model_name: stop_pull_model_response(self, dialog, task, model_name)
+        callback = lambda dialog, task, model=pulling_model: stop_pull_model_response(self, dialog, task, model)
     )
 
 # DELETE MODEL | WORKS
 
 def delete_model_response(self, dialog, task, model_name):
     if dialog.choose_finish(task) == "delete":
-        self.delete_model(model_name)
+        self.model_manager.remove_local_model(model_name)
 
 def delete_model(self, model_name):
     dialog = Adw.AlertDialog(
         heading=_("Delete Model?"),
-        body=_("Are you sure you want to delete '{}'?").format(model_name),
+        body=_("Are you sure you want to delete '{}'?").format(self.convert_model_name(model_name, 0)),
         close_response="cancel"
     )
     dialog.add_response("cancel", _("Cancel"))
@@ -187,21 +188,27 @@ def remove_attached_file(self, name):
 def reconnect_remote_response(self, dialog, task, url_entry, bearer_entry):
     response = dialog.choose_finish(task)
     if not task or response == "remote":
-        self.connect_remote(url_entry.get_text(), bearer_entry.get_text())
+        self.remote_connection_entry.set_text(url_entry.get_text())
+        self.remote_connection_switch.set_sensitive(url_entry.get_text())
+        self.remote_bearer_token_entry.set_text(bearer_entry.get_text())
+        self.remote_connection_switch.set_active(True)
+        self.model_manager.update_local_list()
     elif response == "local":
-        self.connect_local()
+        self.ollama_instance.remote = False
+        self.ollama_instance.start()
+        self.model_manager.update_local_list()
     elif response == "close":
         self.destroy()
 
-def reconnect_remote(self, current_url, current_bearer_token):
+def reconnect_remote(self):
     entry_url = Gtk.Entry(
         css_classes = ["error"],
-        text = current_url,
+        text = self.ollama_instance.remote_url,
         placeholder_text = "URL"
     )
     entry_bearer_token = Gtk.Entry(
-        css_classes = ["error"] if current_bearer_token else None,
-        text = current_bearer_token,
+        css_classes = ["error"] if self.ollama_instance.bearer_token else None,
+        text = self.ollama_instance.bearer_token,
         placeholder_text = "Bearer Token (Optional)"
     )
     container = Gtk.Box(
@@ -216,7 +223,8 @@ def reconnect_remote(self, current_url, current_bearer_token):
         extra_child=container
     )
     dialog.add_response("close", _("Close Alpaca"))
-    dialog.add_response("local", _("Use local instance"))
+    if shutil.which('ollama'):
+        dialog.add_response("local", _("Use local instance"))
     dialog.add_response("remote", _("Connect"))
     dialog.set_response_appearance("remote", Adw.ResponseAppearance.SUGGESTED)
     dialog.set_default_response("remote")
@@ -235,7 +243,7 @@ def create_model_from_existing_response(self, dialog, task, dropdown):
 
 def create_model_from_existing(self):
     string_list = Gtk.StringList()
-    for model in self.local_models:
+    for model in self.model_manager.get_model_list():
         string_list.append(self.convert_model_name(model, 0))
 
     dropdown = Gtk.DropDown()
@@ -273,7 +281,7 @@ def create_model_from_file(self):
 def create_model_from_name_response(self, dialog, task, entry):
     model = entry.get_text().lower().strip()
     if dialog.choose_finish(task) == 'accept' and model:
-        self.pull_model(model)
+        threading.Thread(target=self.model_manager.pull_model, kwargs={"model_name": model}).start()
 
 def create_model_from_name(self):
     entry = Gtk.Entry()
@@ -330,11 +338,11 @@ def youtube_caption_response(self, dialog, task, video_url, caption_drop_down):
         yt = YouTube(video_url)
         text = "{}\n{}\n{}\n\n".format(yt.title, yt.author, yt.watch_url)
         selected_caption = caption_drop_down.get_selected_item().get_string()
-        for event in yt.captions[selected_caption.split('(')[1][:-1]].json_captions['events']:
+        for event in yt.captions[selected_caption.split('(')[-1][:-1]].json_captions['events']:
             text += "{}\n".format(event['segs'][0]['utf8'].replace('\n', '\\n'))
-        if not os.path.exists(os.path.join(self.cache_dir, 'tmp/youtube')):
-            os.makedirs(os.path.join(self.cache_dir, 'tmp/youtube'))
-        file_path = os.path.join(os.path.join(self.cache_dir, 'tmp/youtube'), f'{yt.title} ({selected_caption.split(" | ")[0]})')
+        if not os.path.exists(os.path.join(cache_dir, 'tmp/youtube')):
+            os.makedirs(os.path.join(cache_dir, 'tmp/youtube'))
+        file_path = os.path.join(os.path.join(cache_dir, 'tmp/youtube'), f'{yt.title} ({selected_caption.split(" (")[0]})')
         with open(file_path, 'w+', encoding="utf-8") as f:
             f.write(text)
         self.attach_file(file_path, 'youtube')
@@ -373,7 +381,7 @@ def youtube_caption(self, video_url):
 
 def attach_website_response(self, dialog, task, url):
     if dialog.choose_finish(task) == "accept":
-        response = connection_handler.simple_get(url)
+        response = requests.get(url)
         if response.status_code == 200:
             html = response.text
             md = html2text(html)

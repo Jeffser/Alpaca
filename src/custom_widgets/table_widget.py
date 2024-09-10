@@ -37,7 +37,8 @@ class TableWidget(Gtk.Frame):
 
     def __init__(self, markdown):
         super().__init__()
-
+        self.set_margin_start(5)
+        self.set_margin_end(5)
         self.table = MarkdownTable()
 
         self.set_halign(Gtk.Align.START)
