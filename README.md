@@ -69,6 +69,8 @@ Language               | Contributors
 🇺🇦 Ukrainian            | [Simon](https://github.com/OriginalSimon)
 🇩🇪 German               | [Marcel Margenberg](https://github.com/MehrzweckMandala)
 
+Want to add a language? Visit [this discussion](https://github.com/Jeffser/Alpaca/discussions/153) to get started!
+
 ---
 
 ## Thanks
