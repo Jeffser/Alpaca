@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-04 15:32-0600\n"
-"PO-Revision-Date: 2024-08-15 00:01-0600\n"
-"Last-Translator: YOUR NAME <YOUR EMAIL>\n"
-"Language-Team: Turkish <gnome-turk@gnome.org>\n"
+"POT-Creation-Date: 2024-08-12 22:17-0600\n"
+"PO-Revision-Date: 2024-09-07 21:01+0300\n"
+"Last-Translator: Muhammed Yuşa Becerikli <myusabecerikli@gmail.com>\n"
+"Language-Team: Turkish\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: data/com.jeffser.Alpaca.desktop.in:3
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
@@ -24,7 +24,7 @@ msgstr "Alpaca"
 
 #: data/com.jeffser.Alpaca.desktop.in:9
 msgid "ai;ollama;llm"
-msgstr ""
+msgstr "ai;ollama;llm"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 msgid "Chat with local AI models"
@@ -41,7 +41,7 @@ msgstr "Özellikler"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:13
 msgid "Built in Ollama instance"
-msgstr ""
+msgstr "Ollama örneğinde üretilmiştir"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:14
 #: data/com.jeffser.Alpaca.metainfo.xml.in:673
@@ -132,67 +132,69 @@ msgstr "Yenilikler"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:86
 msgid "Model, message and chat systems have been rewritten"
-msgstr ""
+msgstr "Model, mesaj ve sohbet sistemleri yeniden yazıldı"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:87
 msgid "New models are available"
-msgstr ""
+msgstr "Yeni modeller eklendi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "Ollama updated to v0.3.9"
-msgstr ""
+msgstr "Ollama v0.3.9'a güncellendi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:89
 msgid "Added support for multiple chat generations simultaneously"
-msgstr ""
+msgstr "Aynı anda birden fazla sohbet nesli için destek eklendi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Added experimental AMD GPU support"
-msgstr ""
+msgstr "Deneysel AMD GPU desteği eklendi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Added message loading spinner and new message indicator to chat tab"
 msgstr ""
+"Sohbet sekmesine mesaj yükleme döndürücüsü ve yeni mesaj göstergesi eklendi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added animations"
-msgstr ""
+msgstr "Animasyonlar eklendi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Changed model manager / model selector appearance"
-msgstr ""
+msgstr "Model yöneticisi / model seçici görünümü değiştirildi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Changed message appearance"
-msgstr ""
+msgstr "Mesaj görünümü değiştirildi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Added markdown and code blocks to user messages"
-msgstr ""
+msgstr "Kullanıcı mesajlarına markdown ve kod blokları eklendi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Added loading dialog at launch so the app opens faster"
 msgstr ""
+"Uygulamanın daha hızlı açılması için açılışta yükleme iletişim kutusu eklendi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added warning when device is on 'battery saver' mode"
-msgstr ""
+msgstr "Cihaz 'pil tasarrufu' modundayken uyarı eklendi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Added inactivity timer to integrated instance"
-msgstr ""
+msgstr "Entegre örneğe hareketsizlik zamanlayıcısı eklendi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "The chat is now scrolled to the bottom when it's changed"
-msgstr ""
+msgstr "Sohbet artık değiştirildiğinde en alta kaydırılıyor"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Better handling of focus on messages"
-msgstr ""
+msgstr "Odaklanılan mesajların daha iyi işlenmesi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Better general performance on the app"
-msgstr ""
+msgstr "Uygulamada genel performans daha iyi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "New duplicate chat option"
@@ -1302,7 +1304,7 @@ msgstr "görsel"
 
 #: src/window.py:410
 msgid "Missing file"
-msgstr ""
+msgstr "Kayıp dosya"
 
 #: src/window.py:543 src/window.py:595 src/window.py:615 src/window.py:617
 #: src/dialogs.py:92 src/window.ui:30 src/custom_widgets/chat_widget.py:314
@@ -1327,23 +1329,23 @@ msgstr "Görüntü tanıma özelliği yalnızca belirli modellerde mevcuttur"
 
 #: src/window.py:797
 msgid "Loading instance"
-msgstr ""
+msgstr "Örnek yükleniyor"
 
 #: src/window.py:802
 msgid "Applying user preferences"
-msgstr ""
+msgstr "Kullanıcı tercihlerini uygulama"
 
 #: src/window.py:822
 msgid "Updating list of local models"
-msgstr ""
+msgstr "Yerel modeller listesi güncelleniyor"
 
 #: src/window.py:825
 msgid "Updating list of available models"
-msgstr ""
+msgstr "Mevcut modellerin listesi güncelleniyor"
 
 #: src/window.py:830
 msgid "Loading chats"
-msgstr ""
+msgstr "Sohbetler yükleniyor"
 
 #: src/available_models_descriptions.py:2
 msgid ""
@@ -1358,6 +1360,8 @@ msgid ""
 "Google Gemma 2 is a high-performing and efficient model by now available in "
 "three sizes: 2B, 9B, and 27B."
 msgstr ""
+"Google Gemma 2, yüksek performanslı ve verimli bir modeldir ve şu anda üç "
+"boyutta mevcuttur: 2B, 9B ve 27B."
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -1862,6 +1866,8 @@ msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
 msgstr ""
+"🪐 135M, 360M ve 1.7B parametreli küçük modeller ailesi, yeni bir yüksek "
+"kaliteli veri kümesi üzerinde eğitilmiştir."
 
 #: src/available_models_descriptions.py:73
 msgid ""
@@ -1869,6 +1875,10 @@ msgid ""
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
 "open-source models and even closed-source models (e.g., GPT4o)."
 msgstr ""
+"Qwen2 Math, Qwen2 LLM'ler üzerine inşa edilmiş, açık kaynaklı modellerin ve "
+"hatta kapalı kaynaklı modellerin (örneğin GPT4o) matematiksel "
+"yeteneklerinden önemli ölçüde daha iyi performans gösteren bir dizi özel "
+"matematik dili modelidir."
 
 #: src/available_models_descriptions.py:74
 msgid ""
@@ -1913,6 +1923,8 @@ msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
 "overtaking similarly and larger sized models."
 msgstr ""
+"Benzer ve daha büyük boyutlu modelleri geride bırakan performansa sahip 3,8 "
+"milyar parametreye sahip hafif bir yapay zeka modeli."
 
 #: src/available_models_descriptions.py:81
 msgid ""
@@ -1968,6 +1980,8 @@ msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
 msgstr ""
+"Hermes 3, Nous Research'ün amiral gemisi Hermes serisi LLM'lerin en son "
+"sürümüdür"
 
 #: src/available_models_descriptions.py:90
 msgid ""
@@ -2099,6 +2113,8 @@ msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
 msgstr ""
+"BGE-M3, BAAI'nin Çok İşlevlilik, Çok Dillilik ve Çok Grenlilik alanlarındaki "
+"çok yönlülüğü ile öne çıkan yeni bir modelidir."
 
 #: src/available_models_descriptions.py:107
 msgid ""
@@ -2126,17 +2142,19 @@ msgstr ""
 
 #: src/available_models_descriptions.py:110
 msgid "Embedding model from BAAI mapping texts to vectors."
-msgstr ""
+msgstr "BAAI'den metinleri vektörlere eşleyen gömme modeli."
 
 #: src/available_models_descriptions.py:111
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
 msgstr ""
+"Kümeleme veya anlamsal arama gibi görevler için kullanılabilen cümle "
+"dönüştürücüler modeli."
 
 #: src/connection_handler.py:81
 msgid "Ollama instance was shut down due to inactivity"
-msgstr ""
+msgstr "Ollama örneği hareketsizlik nedeniyle kapatıldı"
 
 #: src/dialogs.py:21
 msgid "Chat cannot be cleared while receiving a message"
@@ -2202,7 +2220,7 @@ msgstr "İndirmeyi durdur?"
 
 #: src/dialogs.py:128
 msgid "Are you sure you want to stop pulling '{}'?"
-msgstr ""
+msgstr "'{}' indirmeyi durdurmak istediğinizden emin misiniz?"
 
 #: src/dialogs.py:132
 msgid "Stop"
@@ -2321,7 +2339,7 @@ msgstr "Sohbet Menüsü"
 #: src/window.ui:84
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
-msgstr ""
+msgstr "Uyarı: Güç tasarrufu modu etkindir, bu mesaj üretimini yavaşlatacaktır"
 
 #: src/window.ui:130
 msgid "Attach File"
@@ -2361,7 +2379,7 @@ msgstr "Alpaka'yı Arka Planda Çalıştırın"
 
 #: src/window.ui:269
 msgid "Show Power Saver Warning"
-msgstr ""
+msgstr "Güç Tasarrufu Uyarısını Göster"
 
 #: src/window.ui:280
 msgid "Temperature"
@@ -2420,21 +2438,23 @@ msgstr ""
 
 #: src/window.ui:405
 msgid "Idle Timer"
-msgstr ""
+msgstr "Boşta Çalışma Zamanlayıcısı"
 
 #: src/window.ui:406
 msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
 msgstr ""
+"Örneğin kapatılmadan önce boşta kalması gereken dakika sayısı (0, "
+"kapatılmayacağı anlamına gelir)"
 
 #: src/window.ui:425
 msgid "Loading Alpaca dialog"
-msgstr ""
+msgstr "Alpaka iletişim kutusu yükleniyor"
 
 #: src/window.ui:432
 msgid "Loading Alpaca..."
-msgstr ""
+msgstr "Alpaka yükleniyor..."
 
 #: src/window.ui:446
 msgid "Manage models dialog"
@@ -2467,11 +2487,11 @@ msgstr "Model Bulunamadı"
 
 #: src/window.ui:515
 msgid "Try a different search or pull an unlisted model from it's name"
-msgstr ""
+msgstr "Farklı bir arama deneyin veya listelenmemiş bir modeli adından indirin"
 
 #: src/window.ui:523
 msgid "Pull Model From Name"
-msgstr ""
+msgstr "Modeli Adından İndir"
 
 #: src/window.ui:573
 msgid ""
@@ -2616,7 +2636,7 @@ msgstr "Kenar çubuğunu aç / kapat"
 
 #: src/window.ui:1076
 msgid "Rename chat"
-msgstr ""
+msgstr "Sohbeti yeniden adlandır"
 
 #: src/window.ui:1083
 msgid "Editor"
