@@ -193,11 +193,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if index == carousel.get_n_pages()-1:
             self.welcome_next_button.set_label(_("Close"))
             self.welcome_next_button.set_tooltip_text(_("Close"))
-            self.welcome_next_button.set_sensitive(self.ready)
         else:
             self.welcome_next_button.set_label(_("Next"))
             self.welcome_next_button.set_tooltip_text(_("Next"))
-            self.welcome_next_button.set_sensitive(True)
 
     @Gtk.Template.Callback()
     def welcome_previous_button_activate(self, button):
@@ -209,6 +207,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
             self.welcome_dialog.force_close()
+            if not self.ready:
+                self.launch_dialog.present(self)
 
     @Gtk.Template.Callback()
     def change_remote_connection(self, switcher, *_):
@@ -831,16 +831,14 @@ Generate a title following these rules:
         GLib.idle_add(self.load_history)
         self.launch_level_bar.set_value(5)
 
-        if self.ollama_instance.remote:
-            time.sleep(.5) #This is to prevent errors with gtk creating the launch dialog and closing it too quickly
-        #Close launch dialog
-        if show_launch_dialog:
-            GLib.idle_add(self.launch_dialog.force_close)
         #Save preferences
         if save:
             self.save_server_config()
-        GLib.idle_add(self.welcome_next_button.set_sensitive, True)
+
+        time.sleep(.5) #This is to prevent errors with gtk creating the launch dialog and closing it too quickly
         self.ready = True
+        #Close launch dialog
+        GLib.idle_add(self.launch_dialog.force_close)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
