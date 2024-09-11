@@ -152,6 +152,22 @@
             ]
         },
         {
+            "name": "libnuma",
+            "buildsystem": "autotools",
+            "build-commands": [
+            	"autoreconf -i",
+            	"make",
+            	"make install"
+            ],
+            "sources": [
+            	{
+        	    "type": "archive",
+        	    "url": "https://github.com/numactl/numactl/releases/download/v2.0.18/numactl-2.0.18.tar.gz",
+        	    "sha256": "b4fc0956317680579992d7815bc43d0538960dc73aa1dd8ca7e3806e30bc1274"
+            	}
+            ]
+        },
+        {
             "name" : "alpaca",
             "builddir" : true,
             "buildsystem" : "meson",
