@@ -86,3 +86,15 @@ Want to add a language? Visit [this discussion](https://github.com/Jeffser/Alpac
 - [Aleksana](https://github.com/Aleksanaa) for her help with better handling of directories
 - Sponsors for giving me enough money to be able to take a ride to my campus every time I need to <3
 - Everyone that has shared kind words of encouragement!
+
+---
+
+## Dependencies
+
+- [Requests](https://github.com/psf/requests)
+- [Pillow](https://github.com/python-pillow/Pillow)
+- [Pypdf](https://github.com/py-pdf/pypdf)
+- [Pytube](https://github.com/pytube/pytube)
+- [Html2Text](https://github.com/aaronsw/html2text)
+- [Ollama](https://github.com/ollama/ollama)
+- [Numactl](https://github.com/numactl/numactl)
