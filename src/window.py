@@ -562,7 +562,7 @@ Generate a title following these rules:
 
 
     def save_history(self, chat:chat_widget.chat=None):
-        logger.debug("Saving history")
+        logger.info("Saving history")
         history = None
         if chat and os.path.exists(os.path.join(data_dir, "chats", "chats.json")):
             history = {'chats': {chat.get_name(): {'messages': chat.messages_to_dict()}}}

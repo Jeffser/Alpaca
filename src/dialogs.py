@@ -14,10 +14,11 @@ logger = logging.getLogger(__name__)
 
 def clear_chat_response(self, dialog, task):
     if dialog.choose_finish(task) == "clear":
-        self.chat_list_box.get_current_chat().clear_chat()
+        self.chat_list_box.get_current_chat().show_welcome_screen(len(self.model_manager.get_model_list()) > 0)
+        self.save_history(self.chat_list_box.get_current_chat())
 
 def clear_chat(self):
-    if self.bot_message is not None:
+    if self.chat_list_box.get_current_chat().busy:
         self.show_toast(_("Chat cannot be cleared while receiving a message"), self.main_overlay)
         return
     dialog = Adw.AlertDialog(

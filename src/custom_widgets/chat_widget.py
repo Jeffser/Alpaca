@@ -81,7 +81,7 @@ class chat(Gtk.ScrolledWindow):
     def clear_chat(self):
         if self.busy:
             self.stop_message()
-        self.message = {}
+        self.messages = {}
         self.stop_message()
         for widget in list(self.container):
             self.container.remove(widget)
