@@ -8,6 +8,9 @@ Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can man
 
 ---
 
+> [!NOTE]
+> Please checkout [this discussion](https://github.com/Jeffser/Alpaca/discussions/292), I want to start developing a new app alongside Alpaca but I need some suggestions, thanks!
+
 > [!WARNING]
 > This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any AI models.
 
