@@ -107,8 +107,11 @@ class instance():
             logger.info("Starting Alpaca's Ollama instance...")
             logger.debug(params)
             logger.info("Started Alpaca's Ollama instance")
-            v_str = subprocess.check_output("ollama -v", shell=True).decode('utf-8')
-            logger.info('Ollama version: {}'.format(v_str.split('client version is ')[1].strip()))
+            try:
+                v_str = subprocess.check_output("ollama -v", shell=True).decode('utf-8')
+                logger.info(v_str.split('\n')[1].strip('Warning: ').strip())
+            except Exception as e:
+                logger.error(e)
             self.instance = instance
             if not self.idle_timer:
                 self.start_timer()
