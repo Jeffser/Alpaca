@@ -7,16 +7,20 @@ arch=('any')
 url="https://github.com/jeffser/Alpaca"
 license=('GPL-3.0')
 depends=('python-requests' 'python-pillow' 'python-pypdf' 'python-pytube' 'python-html2text')
-source=("git+https://github.com/jeffser/Alpaca.git")
+source=("https://github.com/Jeffser/Alpaca/archive/refs/tags/${pkgver}.tar.gz")
 md5sums=('SKIP')
 
+prepare() {
+  cd "$srcdir/Alpaca-${pkgver}"
+}
+
 build() {
-  cd "$srcdir/Alpaca"
+  cd "$srcdir/Alpaca-${pkgver}"
   meson setup _build
   meson compile -C _build
 }
 
 package() {
-  cd "$srcdir/Alpaca/_build"
+  cd "$srcdir/Alpaca-${pkgver}/_build"
   sudo meson install --destdir="$pkgdir"
 }
