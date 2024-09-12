@@ -56,6 +56,18 @@ Note: This is not recommended since the prerelease versions of the app often pre
 2. Open with Gnome Builder
 3. Press the run button (or export if you want to build a Flatpak package)
 
+### System Installation (Arch Linux)
+
+> [!NOTE]
+> This method doesn't include the Ollama instance
+
+```BASH
+mkdir Alpaca-build
+cd Alpaca-build
+curl -L -o PKGBUILD https://raw.githubusercontent.com/jeffser/Alpaca/main/PKGBUILD
+makepkg -si
+```
+
 ## Translators
 
 Language               | Contributors
