@@ -328,16 +328,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def model_search_changed(self, entry):
         results = 0
-        for model in list(self.model_manager.available_list):
-            model.set_visible(re.search(entry.get_text(), '{} {} {} {} {}'.format(model.get_name(), model.model_title, model.model_author, model.model_description, (_('image') if model.image_recognition else '')), re.IGNORECASE))
-            if model.get_visible():
-                results += 1
-        if entry.get_text() and results == 0:
-            self.no_results_page.set_visible(True)
-            self.model_scroller.set_visible(False)
-        else:
-            self.model_scroller.set_visible(True)
-            self.no_results_page.set_visible(False)
+        if self.model_manager:
+            for model in list(self.model_manager.available_list):
+                model.set_visible(re.search(entry.get_text(), '{} {} {} {} {}'.format(model.get_name(), model.model_title, model.model_author, model.model_description, (_('image') if model.image_recognition else '')), re.IGNORECASE))
+                if model.get_visible():
+                    results += 1
+            if entry.get_text() and results == 0:
+                self.no_results_page.set_visible(True)
+                self.model_scroller.set_visible(False)
+            else:
+                self.model_scroller.set_visible(True)
+                self.no_results_page.set_visible(False)
 
     @Gtk.Template.Callback()
     def on_clipboard_paste(self, textview):
