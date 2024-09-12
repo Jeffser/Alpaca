@@ -1,5 +1,5 @@
 # Maintainer: Jeffry Samuel Eduarte Rojas <jeffrysamuer@gmail.com>
-pkgname=Alpaca
+pkgname=com.jeffser.Alpaca
 pkgver=2.0.1
 pkgrel=1
 pkgdesc="An Ollama client made with GTK4 and Adwaita"
