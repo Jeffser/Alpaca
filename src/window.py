@@ -50,7 +50,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     _ = gettext.gettext
 
     #Variables
-    ready = False #Used with welcome dialog
     attachments = {}
     header_bar = Gtk.Template.Child()
 
@@ -207,8 +206,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
             self.welcome_dialog.force_close()
-            if not self.ready:
-                self.launch_dialog.present(self)
+            threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, True)).start()
+            self.powersaver_warning_switch.set_active(True)
 
     @Gtk.Template.Callback()
     def change_remote_connection(self, switcher, *_):
@@ -836,7 +835,6 @@ Generate a title following these rules:
             self.save_server_config()
 
         time.sleep(.5) #This is to prevent errors with gtk creating the launch dialog and closing it too quickly
-        self.ready = True
         #Close launch dialog
         GLib.idle_add(self.launch_dialog.force_close)
 
@@ -906,8 +904,6 @@ Generate a title following these rules:
                 threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, True)).start()
                 self.powersaver_warning_switch.set_active(True)
         else:
-            threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, False)).start()
-            self.powersaver_warning_switch.set_active(True)
             self.welcome_dialog.present(self)
 
         if self.powersaver_warning_switch.get_active():
