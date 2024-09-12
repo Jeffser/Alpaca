@@ -206,7 +206,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
             self.welcome_dialog.force_close()
-            threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, True)).start()
+            if shutil.which('ollama'):
+                threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, True)).start()
+            else:
+                threading.Thread(target=self.prepare_alpaca, args=(11435, 'http://0.0.0.0:11434', True, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, False)).start()
             self.powersaver_warning_switch.set_active(True)
 
     @Gtk.Template.Callback()
