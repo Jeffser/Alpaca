@@ -158,7 +158,7 @@ class pulling_model(Gtk.ListBoxRow):
             icon_name = "media-playback-stop-symbolic",
             vexpand = False,
             valign = 3,
-            css_classes = ["destructive-action", "circular"],
+            css_classes = ["error", "circular"],
             tooltip_text = _("Stop Pulling '{}'").format(window.convert_model_name(model_name, 0))
         )
         stop_button.connect('clicked', lambda *_: dialogs.stop_pull_model(window, self))
@@ -237,7 +237,7 @@ class local_model(Gtk.ListBoxRow):
             icon_name = "user-trash-symbolic",
             vexpand = False,
             valign = 3,
-            css_classes = ["destructive-action", "circular"],
+            css_classes = ["error", "circular"],
             tooltip_text = _("Remove '{}'").format(window.convert_model_name(model_name, 0))
         )
         delete_button.connect('clicked', lambda *_, model_name=model_name: dialogs.delete_model(window, model_name))
