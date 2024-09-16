@@ -1,28 +1,68 @@
 name: alpaca
 base: core24
-version: '1.0'
-summary: Alpaca Application
+adopt-info: alpaca
+summary: An Ollama client made with GTK4 and Adwaita
 description: |
-  Alpaca is an app by Jeffser with various features such as PDF processing, downloading with Pytube, and more.
+  Alpaca is an Ollama client where you can manage and chat with multiple models, 
+  Alpaca provides an easy and begginer friendly way of interacting with local AI, 
+  everything is open source and powered by Ollama.
+
+platforms:
+  amd64:
 
 confinement: strict
 grade: stable
+compression: lzo
+
+slots:
+  dbus-alpaca:
+    interface: dbus
+    bus: session
+    name: com.jeffser.Alpaca
 
 apps:
   alpaca:
-    command: usr/local/bin/alpaca
+    command: usr/bin/alpaca
+    desktop: meta/gui/alpaca.desktop
+    common-id: com.jeffser.Alpaca
+    extensions:
+      - gnome
     plugs:
       - network
       - network-bind
+      - desktop
+      - desktop-legacy
       - wayland
       - opengl
       - home
-      - raw-usb
-      - system-observe
+      - removable-media
+    slots:
+      - dbus-alpaca
+
+  ollama:
+    command: bin/ollama
+    plugs:
+      - home
+      - removable-media
+      - network
+      - network-bind
+      - opengl
+
+  ollama-daemon:
+    command: bin/ollama serve
+    daemon: simple
+    install-mode: enable
+    restart-condition: on-failure
+    plugs:
+      - home
+      - removable-media
+      - network
+      - network-bind
+      - opengl
 
 parts:
   # Python dependencies
-  python-packages:
+  python-deps:
     plugin: python
     source: .
     python-packages:
@@ -31,28 +71,21 @@ parts:
       - pypdf==4.2.0
       - pytube==15.0.0
       - html2text==2024.2.26
-    build-packages:
-      - python3-dev
-      - python3-pip
 
   # Ollama plugin
   ollama:
     plugin: dump
-    source: https://github.com/ollama/ollama/releases/download/v0.3.9/ollama-linux-amd64.tgz
-    stage: [bin, lib]
-
-  # libnuma build from source
-  libnuma:
-    plugin: autotools
-    source: https://github.com/numactl/numactl/releases/download/v2.0.18/numactl-2.0.18.tar.gz
-    build-packages:
-      - autoconf
-      - make
+    source: https://github.com/ollama/ollama/releases/download/v0.3.10/ollama-linux-amd64.tgz
 
   # Alpaca app
   alpaca:
     plugin: meson
-    source: https://github.com/Jeffser/Alpaca/archive/refs/tags/2.0.1.tar.gz
+    source-type: git
+    source: https://github.com/Jeffser/Alpaca.git
+    source-tag: '2.0.2'
+    source-depth: 1
+    meson-parameters:
+      - --prefix=/snap/alpaca/current/usr
     build-packages:
       - meson
       - ninja-build
@@ -63,11 +96,16 @@ parts:
       - gettext
       - desktop-file-utils
       - appstream
-    override-build: snapcraftctl build; chmod +x ${CRAFT_PART_INSTALL}/usr/local/bin/alpaca
-
-layout:
-  /usr/lib/x86_64-linux-gnu/GL/default/lib:
-    bind: $SNAP/usr/lib/x86_64-linux-gnu/GL/default/lib
-
-environment:
-  LD_LIBRARY_PATH: "$SNAP/usr/lib/x86_64-linux-gnu/GL/default/lib:$SNAP/usr/lib/x86_64-linux-gnu/openh264/extra:/app/plugins/AMD/lib/ollama:$LD_LIBRARY_PATH"
+    override-pull: |
+      craftctl default
+      craftctl set version=$(git describe --tags --abbrev=0)
+    override-build: |
+      craftctl default
+      sed -i '1c#!/usr/bin/env python3' $CRAFT_PART_INSTALL/snap/alpaca/current/usr/bin/alpaca
+    stage-packages:
+      - libnuma1
+    parse-info:
+      - usr/share/metainfo/com.jeffser.Alpaca.metainfo.xml
+    organize:
+      snap/alpaca/current/usr: usr
+    after: [python-deps]
