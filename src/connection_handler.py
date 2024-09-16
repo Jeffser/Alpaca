@@ -92,6 +92,7 @@ class instance():
                 self.idle_timer.start()
 
     def start(self):
+        self.stop()
         if shutil.which('ollama'):
             if not os.path.isdir(os.path.join(cache_dir, 'tmp/ollama')):
                 os.mkdir(os.path.join(cache_dir, 'tmp/ollama'))
