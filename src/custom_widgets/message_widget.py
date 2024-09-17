@@ -345,6 +345,9 @@ class action_buttons(Gtk.Box):
     def regenerate_message(self):
         chat = self.get_parent().get_parent().get_parent().get_parent().get_parent()
         message_element = self.get_parent()
+        if message_element.spinner:
+            message_element.container.remove(message_element.spinner)
+            message_element.spinner = None
         if not chat.busy:
             message_element.set_text()
             if message_element.footer:
@@ -425,6 +428,8 @@ class message(Gtk.Overlay):
         if not self.action_buttons:
             self.action_buttons = action_buttons(self.bot)
             self.add_overlay(self.action_buttons)
+            if not self.text:
+                self.action_buttons.set_visible(False)
 
     def update_message(self, data:dict):
         chat = self.get_parent().get_parent().get_parent().get_parent()
@@ -452,6 +457,9 @@ class message(Gtk.Overlay):
                 window.show_notification(chat.get_name(), self.text[:200] + (self.text[200:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
                 window.save_history(chat)
         else:
+            if self.spinner:
+                self.container.remove(self.spinner)
+                self.spinner = None
             sys.exit()
 
     def set_text(self, text:str=None):
@@ -538,6 +546,9 @@ class message(Gtk.Overlay):
             text_b = text_block(self.bot)
             text_b.set_visible(False)
             self.content_children.append(text_b)
+            if self.spinner:
+                self.container.remove(self.spinner)
+                self.spinner = None
             self.spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
             self.container.append(self.spinner)
             self.container.append(text_b)

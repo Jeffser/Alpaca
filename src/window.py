@@ -558,8 +558,12 @@ Generate a title following these rules:
             if response.status_code != 200:
                 raise Exception('Network Error')
         except Exception as e:
+            self.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
             chat.busy = False
             GLib.idle_add(message_element.add_action_buttons)
+            if message_element.spinner:
+                GLib.idle_add(message_element.container.remove, message_element.spinner)
+                message_element.spinner = None
             GLib.idle_add(chat.show_regenerate_button, message_element)
             GLib.idle_add(self.connection_error)
 
