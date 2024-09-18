@@ -458,8 +458,11 @@ class message(Gtk.Overlay):
                 window.save_history(chat)
         else:
             if self.spinner:
-                self.container.remove(self.spinner)
+                GLib.idle_add(self.container.remove, self.spinner)
                 self.spinner = None
+            chat_tab = window.chat_list_box.get_tab_by_name(chat.get_name())
+            if chat_tab.spinner:
+                GLib.idle_add(chat_tab.spinner.set_visible, False)
             sys.exit()
 
     def set_text(self, text:str=None):

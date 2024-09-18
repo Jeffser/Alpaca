@@ -554,7 +554,7 @@ Generate a title following these rules:
         if self.regenerate_button:
             GLib.idle_add(self.chat_list_box.get_current_chat().remove, self.regenerate_button)
         try:
-            response = self.ollama_instance.request("POST", "api/chat", json.dumps(data), lambda data, message_element=message_element: GLib.idle_add(message_element.update_message, data))
+            response = self.ollama_instance.request("POST", "api/chat", json.dumps(data), lambda data, message_element=message_element: message_element.update_message(data))
             if response.status_code != 200:
                 raise Exception('Network Error')
         except Exception as e:
