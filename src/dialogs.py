@@ -318,7 +318,7 @@ def attach_file_response(self, file_dialog, result):
     file_type = next(key for key, value in file_types.items() if extension in value)
     if not file_type:
         return
-    if file_type == 'image' and not self.verify_if_image_can_be_used():
+    if file_type == 'image' and not self.model_manager.verify_if_image_can_be_used():
         self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
         return
     self.attach_file(file.get_path(), file_type)
