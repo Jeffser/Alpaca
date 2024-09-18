@@ -59,7 +59,7 @@ class text_block(Gtk.Label):
             selectable=True
         )
         self.update_property([4, 7], [_("Response message") if bot else _("User message"), False])
-        self.connect('notify::has-focus', lambda *_: None if self.has_focus() else self.remove_selection() )
+        self.connect('notify::has-focus', lambda *_: GLib.idle_add(self.remove_selection) if self.has_focus() else None)
 
     def remove_selection(self):
         self.set_selectable(False)
@@ -556,4 +556,5 @@ class message(Gtk.Overlay):
             self.container.append(self.spinner)
             self.container.append(text_b)
         self.container.queue_draw()
+
 
