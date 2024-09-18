@@ -78,14 +78,20 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
-    <release version="2.0.3" date="2024-09-17">
-      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.0.2</url>
+    <release version="2.0.3" date="2024-09-18">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.0.3</url>
       <description>
         <p>Fixes</p>
         <ul>
           <li>Fixed spinner not hiding if the back end fails</li>
           <li>Fixed image recognition with local images</li>
           <li>Changed appearance of delete / stop model buttons</li>
+          <li>Fixed stop button crashing the app</li>
+        </ul>
+        <p>New</p>
+        <ul>
+          <li>Made sidebar resize a little when the window is smaller</li>
+          <li>Instant launch</li>
         </ul>
       </description>
     </release>
