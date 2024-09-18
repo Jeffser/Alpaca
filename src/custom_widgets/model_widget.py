@@ -69,7 +69,8 @@ class model_selector_button(Gtk.MenuButton):
         super().__init__(
             tooltip_text=_('Select a Model'),
             child=container,
-            popover=self.popover
+            popover=self.popover,
+            halign=3
         )
 
     def change_model(self, model_name:str):
@@ -471,6 +472,7 @@ class model_manager_container(Gtk.Box):
             logger.error(e)
             window.connection_error()
         window.title_stack.set_visible_child_name('model_selector')
+        window.chat_list_box.update_welcome_screens(len(self.get_model_list()) > 0)
 
     #Should only be called when the app starts
     def update_available_list(self):
