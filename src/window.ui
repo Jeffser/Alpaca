@@ -55,12 +55,39 @@
         <child>
           <object class="AdwToolbarView">
             <child type="top">
-              <object class="AdwHeaderBar" id="header_bar">
+              <object class="AdwHeaderBar">
                 <child type="start">
                   <object class="GtkToggleButton" id="show_sidebar_button">
                     <property name="icon-name">sidebar-show-symbolic</property>
                     <property name="tooltip-text" translatable="yes">Toggle Sidebar</property>
                     <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
+                  </object>
+                </child>
+                <child type="title">
+                  <object class="GtkStack" id="title_stack">
+                    <property name="transition_duration">100</property>
+                    <property name="transition_type">1</property>
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">loading</property>
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">0</property>
+                            <property name="spacing">10</property>
+                            <child>
+                              <object class="GtkSpinner">
+                                <property name="spinning">true</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label" translatable="yes">Loading Instance</property>
+                              </object>
+                            </child>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
                   </object>
                 </child>
                 <child type="end">
@@ -178,6 +205,7 @@
                                   <property name="vexpand">false</property>
                                   <property name="valign">3</property>
                                   <property name="tooltip-text" translatable="yes">Send Message</property>
+                                  <property name="sensitive">false</property>
                                   <style>
                                     <class name="accent"/>
                                     <class name="circular"/>
@@ -416,27 +444,6 @@
               </child>
             </object>
           </child>
-        </object>
-      </child>
-    </object>
-
-    <object class="AdwDialog" id="launch_dialog">
-      <accessibility>
-        <property name="label" translatable="yes">Loading Alpaca dialog</property>
-      </accessibility>
-      <property name="width-request">400</property>
-      <property name="can-close">false</property>
-      <child>
-        <object class="AdwStatusPage" id="launch_status">
-          <property name="icon_name">com.jeffser.Alpaca</property>
-          <property name="title" translatable="yes">Loading Alpaca...</property>
-          <property name="child">
-            <object class="GtkLevelBar" id="launch_level_bar">
-              <property name="mode">1</property>
-              <property name="min-value">0</property>
-              <property name="max-value">5</property>
-            </object>
-          </property>
         </object>
       </child>
     </object>

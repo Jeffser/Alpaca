@@ -51,7 +51,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     #Variables
     attachments = {}
-    header_bar = Gtk.Template.Child()
 
     #Override elements
     overrides_group = Gtk.Template.Child()
@@ -95,9 +94,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_searchbar = Gtk.Template.Child()
     no_results_page = Gtk.Template.Child()
     model_link_button = Gtk.Template.Child()
-    launch_dialog = Gtk.Template.Child()
-    launch_status = Gtk.Template.Child()
-    launch_level_bar = Gtk.Template.Child()
+    title_stack = Gtk.Template.Child()
     manage_models_dialog = Gtk.Template.Child()
     model_scroller = Gtk.Template.Child()
 
@@ -206,10 +203,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
             self.welcome_dialog.force_close()
-            if shutil.which('ollama'):
-                threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, True)).start()
-            else:
-                threading.Thread(target=self.prepare_alpaca, args=(11435, 'http://0.0.0.0:11434', True, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, False)).start()
             self.powersaver_warning_switch.set_active(True)
 
     @Gtk.Template.Callback()
@@ -794,19 +787,11 @@ Generate a title following these rules:
     def power_saver_toggled(self, monitor):
         self.banner.set_revealed(monitor.get_power_saver_enabled() and self.powersaver_warning_switch.get_active())
 
-    def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, save:bool, show_launch_dialog:bool):
-        #Show launch dialog
-        if show_launch_dialog:
-            GLib.idle_add(self.launch_dialog.present, self)
-
+    def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, save:bool):
         #Instance
-        self.launch_level_bar.set_value(0)
-        self.launch_status.set_description(_('Loading instance'))
         self.ollama_instance = connection_handler.instance(local_port, remote_url, remote, tweaks, overrides, bearer_token, idle_timer_delay)
 
         #User Preferences
-        self.launch_level_bar.set_value(1)
-        self.launch_status.set_description(_('Applying user preferences'))
         for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
             if element.get_name() in self.ollama_instance.tweaks:
                 element.set_value(self.ollama_instance.tweaks[element.get_name()])
@@ -825,26 +810,20 @@ Generate a title following these rules:
         #Model Manager
         self.model_manager = model_widget.model_manager_container()
         self.model_scroller.set_child(self.model_manager)
-        self.launch_level_bar.set_value(2)
-        self.launch_status.set_description(_('Updating list of local models'))
-        self.model_manager.update_local_list()
-        self.launch_level_bar.set_value(3)
-        self.launch_status.set_description(_('Updating list of available models'))
-        self.model_manager.update_available_list()
 
         #Chat History
-        self.launch_level_bar.set_value(4)
-        self.launch_status.set_description(_('Loading chats'))
-        GLib.idle_add(self.load_history)
-        self.launch_level_bar.set_value(5)
+        self.load_history()
+
+        #Model Manager P.2
+        self.model_manager.update_available_list()
+        self.model_manager.update_local_list()
+        self.get_application().lookup_action("manage_models").set_enabled(True)
 
         #Save preferences
         if save:
             self.save_server_config()
 
-        time.sleep(.5) #This is to prevent errors with gtk creating the launch dialog and closing it too quickly
-        #Close launch dialog
-        GLib.idle_add(self.launch_dialog.force_close)
+        self.send_button.set_sensitive(True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -890,6 +869,7 @@ Generate a title following these rules:
 
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
+        self.get_application().lookup_action("manage_models").set_enabled(False)
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialogs.remove_attached_file(self, button.get_name()))
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
@@ -906,12 +886,16 @@ Generate a title following these rules:
                     if 'powersaver_warning' not in data:
                         data['powersaver_warning'] = True
                     self.powersaver_warning_switch.set_active(data['powersaver_warning'])
-                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], round(data['idle_timer']), False, True)).start()
+                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], round(data['idle_timer']), False)).start()
             except Exception as e:
                 logger.error(e)
-                threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True, True)).start()
+                threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True)).start()
                 self.powersaver_warning_switch.set_active(True)
         else:
+            if shutil.which('ollama'):
+                threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True)).start()
+            else:
+                threading.Thread(target=self.prepare_alpaca, args=(11435, 'http://0.0.0.0:11434', True, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, True)).start()
             self.welcome_dialog.present(self)
 
         if self.powersaver_warning_switch.get_active():

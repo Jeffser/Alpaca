@@ -421,7 +421,7 @@ class model_manager_container(Gtk.Box):
         self.available_list = available_model_list()
         self.append(self.available_list)
         self.model_selector = model_selector_button()
-        window.header_bar.set_title_widget(self.model_selector)
+        window.title_stack.add_named(self.model_selector, 'model_selector')
 
     def add_local_model(self, model_name:str):
         self.local_list.add_model(model_name)
@@ -470,6 +470,7 @@ class model_manager_container(Gtk.Box):
         except Exception as e:
             logger.error(e)
             window.connection_error()
+        window.title_stack.set_visible_child_name('model_selector')
 
     #Should only be called when the app starts
     def update_available_list(self):
