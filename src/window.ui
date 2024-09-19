@@ -508,6 +508,7 @@
                           <property name="vexpand">true</property>
                           <child>
                             <object class="GtkScrolledWindow" id="model_scroller">
+                              <property name="hscrollbar-policy">2</property>
                               <property name="hexpand">true</property>
                               <property name="vexpand">true</property>
                             </object>
