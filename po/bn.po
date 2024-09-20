@@ -134,19 +134,19 @@ msgstr "সংশোধন করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:86
 msgid "Fixed spinner not hiding if the back end fails"
-msgstr ""
+msgstr "ব্যাক এন্ড ব্যর্থ হলে স্পিনার লুকানো ঠিক করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:87
 msgid "Fixed image recognition with local images"
-msgstr ""
+msgstr "স্থানীয় চিত্রের সাথে চিত্র সনাক্তকরণ ঠিক করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "Changed appearance of delete / stop model buttons"
-msgstr ""
+msgstr "মুছে ফেলা / মডেল বন্ধ করার বোতামের চেহারা পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:89
 msgid "Fixed stop button crashing the app"
-msgstr ""
+msgstr "স্টপ বোতাম অ্যাপটি ক্র্যাশ করা ঠিক করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
@@ -162,31 +162,31 @@ msgstr "নতুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Made sidebar resize a little when the window is smaller"
-msgstr ""
+msgstr "উইন্ডো ছোট হলে সাইডবারটি একটু আকার পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Instant launch"
-msgstr ""
+msgstr "তাত্ক্ষণিক চালু"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Fixed error on first run (welcome dialog)"
-msgstr ""
+msgstr "প্রথম চালানোর সময় ত্রুটি ঠিক করা হয়েছে (স্বাগত সংলাপ)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Fixed checker for Ollama instance (used on system packages)"
-msgstr ""
+msgstr "সিস্টেম প্যাকেজে ব্যবহৃত ওলামা ইনস্ট্যান্সের জন্য চেকার ঠিক করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:113
 msgid "Fixed 'clear chat' option"
-msgstr ""
+msgstr "চ্যাট পরিষ্কার করার বিকল্পটি ঠিক করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid "Fixed welcome dialog causing the local instance to not launch"
-msgstr ""
+msgstr "স্থানীয় ইনস্ট্যান্সটি চালু না করার কারণে স্বাগত সংলাপটি ঠিক করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Fixed support for AMD GPUs"
-msgstr ""
+msgstr "এএমডি জিপিইউ-এর জন্য সমর্থন ঠিক করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Model, message and chat systems have been rewritten"
@@ -533,8 +533,7 @@ msgstr "Ollama আপডেট করা হয়েছে v0.3.0 (নতুন
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:296
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
-msgstr ""
-"তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
+msgstr "তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:297
 msgid "Better connection check for Ollama"
@@ -715,7 +714,8 @@ msgstr "অনুবাদ"
 msgid ""
 "These are all the available translations on 1.0.0, thanks to all the "
 "contributors!"
-msgstr "এগুলি 1.0.0 এর উপলব্ধ সমস্ত অনুবাদ, সমস্ত অবদানকারীদের ধন্যবাদ!"
+msgstr ""
+"এগুলি 1.0.0 এর উপলব্ধ সমস্ত অনুবাদ, সমস্ত অবদানকারীদের ধন্যবাদ!"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:350
 msgid "Russian: Alex K"
@@ -853,8 +853,7 @@ msgstr "ঠিক করা হয়েছে পাঠান/স্টপ ব�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:427
 msgid "Fixed app not checking if remote connection works when starting"
-msgstr ""
-"ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
+msgstr "ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:434
 msgid "Daily Update"
@@ -862,8 +861,7 @@ msgstr "প্রতিদিনের আপডেট"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:436
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
-msgstr ""
-"চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
+msgstr "চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:437
 msgid "New shortcut for creating a chat (CTRL+N)"
@@ -1160,8 +1158,7 @@ msgstr "একাধিক চ্যাট সমর্থন যোগ কর�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:608
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
-msgstr ""
-"বোল্ড, তালিকা, শিরোনাম, উপশিরোনাম, মনোস্পেস সহ Pango Markup সমর্থন যোগ করা হয়েছে"
+msgstr "বোল্ড, তালিকা, শিরোনাম, উপশিরোনাম, মনোস্পেস সহ Pango Markup সমর্থন যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:609
 msgid "Added autoscroll if the user is at the bottom of the chat"
@@ -1593,7 +1590,8 @@ msgstr ""
 #: src/available_models_descriptions.py:34
 msgid ""
 "StarCoder is a code generation model trained on 80+ programming languages."
-msgstr "স্টারকোডার হল 80+ প্রোগ্রামিং ভাষায় প্রশিক্ষিত একটি কোড জেনারেশন মডেল।"
+msgstr ""
+"স্টারকোডার হল 80+ প্রোগ্রামিং ভাষায় প্রশিক্ষিত একটি কোড জেনারেশন মডেল।"
 
 #: src/available_models_descriptions.py:35
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
@@ -1798,7 +1796,8 @@ msgstr ""
 msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
-msgstr "এআই সফটওয়্যার উন্নয়ন দৃশ্যকল্পের জন্য বহুমুখী মডেল, কোড সম্পূর্ণতা সহ।"
+msgstr ""
+"এআই সফটওয়্যার উন্নয়ন দৃশ্যকল্পের জন্য বহুমুখী মডেল, কোড সম্পূর্ণতা সহ।"
 
 #: src/available_models_descriptions.py:66
 msgid ""
@@ -2626,7 +2625,8 @@ msgstr "এই প্রম্পটগুলির মধ্যে একটি
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
-msgstr "মনে হচ্ছে আপনি এখনও কোনও মডেল ডাউনলোড করেননি। শুরু করতে মডেল ডাউনলোড করুন!"
+msgstr ""
+"মনে হচ্ছে আপনি এখনও কোনও মডেল ডাউনলোড করেননি। শুরু করতে মডেল ডাউনলোড করুন!"
 
 #: src/custom_widgets/chat_widget.py:191
 msgid "Regenerate Response"
