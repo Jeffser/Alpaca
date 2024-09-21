@@ -69,7 +69,7 @@ Language               | Contributors
 🇺🇦 Ukrainian            | [Simon](https://github.com/OriginalSimon)
 🇩🇪 German               | [Marcel Margenberg](https://github.com/MehrzweckMandala)
 🇮🇱 Hebrew               | [Yosef Or Boczko](https://github.com/yoseforb)
-🇮🇳 Telugu               | [https://github.com/SpaciousCoder78]
+🇮🇳 Telugu               | [Aryan Karamtoth](https://github.com/SpaciousCoder78)
 
 Want to add a language? Visit [this discussion](https://github.com/Jeffser/Alpaca/discussions/153) to get started!
 
