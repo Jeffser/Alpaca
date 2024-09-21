@@ -415,6 +415,7 @@ class model_manager_container(Gtk.Box):
             spacing=12,
             orientation=1
         )
+        self.model_vision_cache = {}
         self.pulling_list = pulling_model_list()
         self.append(self.pulling_list)
         self.local_list = local_model_list()
@@ -483,17 +484,29 @@ class model_manager_container(Gtk.Box):
     def change_model(self, model_name:str):
         self.model_selector.change_model(model_name)
 
-    def has_vision(model_name) -> bool:
+    def has_vision(self, model_name) -> bool:
+        if model_name in self.model_vision_cache:
+            logger.debug(f"Vision for {model_name} (cached): {self.model_vision_cache[model_name]}")
+            return self.model_vision_cache[model_name]
+
         response = (
             window.ollama_instance.request(
-                "POST", "api/show", json.dumps({"model": model_name})
+                "POST", "api/show", json.dumps({"name": model_name})
             )
         )
 
         if response.status_code != 200:
+            logger.error(f"Status code was {response.status_code}")
             return False
 
-        return 'projector_info' in response
+        try:
+            model_info = json.loads(response.text)
+            self.model_vision_cache[model_name] = 'projector_info' in model_info
+            logger.debug(f"Vision for {model_name}: {self.model_vision_cache[model_name]}")
+            return self.model_vision_cache[model_name]
+        except Exception as e:
+            logger.error(f"Error fetching vision info: {str(e)}")
+            return False
 
     def verify_if_image_can_be_used(self):
         logger.debug("Verifying if image can be used")
@@ -502,10 +515,11 @@ class model_manager_container(Gtk.Box):
             return False
 
         # first try ollama show API.
-        if has_vision(selected):
+        if self.has_vision(selected):
             return True
 
-        # then fall back to the old method.
+        # then fall back to the old method.)
+
         selected = selected.split(":")[0]
         with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
             if selected in [key for key, value in json.load(f).items() if value["image"]]:
