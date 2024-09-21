@@ -415,7 +415,7 @@ class model_manager_container(Gtk.Box):
             spacing=12,
             orientation=1
         )
-        self.model_vision_cache = {}
+        
         self.pulling_list = pulling_model_list()
         self.append(self.pulling_list)
         self.local_list = local_model_list()
@@ -485,10 +485,6 @@ class model_manager_container(Gtk.Box):
         self.model_selector.change_model(model_name)
 
     def has_vision(self, model_name) -> bool:
-        if model_name in self.model_vision_cache:
-            logger.debug(f"Vision for {model_name} (cached): {self.model_vision_cache[model_name]}")
-            return self.model_vision_cache[model_name]
-
         response = (
             window.ollama_instance.request(
                 "POST", "api/show", json.dumps({"name": model_name})
@@ -501,9 +497,8 @@ class model_manager_container(Gtk.Box):
 
         try:
             model_info = json.loads(response.text)
-            self.model_vision_cache[model_name] = 'projector_info' in model_info
-            logger.debug(f"Vision for {model_name}: {self.model_vision_cache[model_name]}")
-            return self.model_vision_cache[model_name]
+            logger.debug(f"Vision for {model_name}: {'projector_info' in model_info}")
+            return 'projector_info' in model_info
         except Exception as e:
             logger.error(f"Error fetching vision info: {str(e)}")
             return False
