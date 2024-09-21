@@ -92,6 +92,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     file_preview_remove_button = Gtk.Template.Child()
     secondary_menu_button = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
+    message_searchbar = Gtk.Template.Child()
+    message_search_button = Gtk.Template.Child()
+    searchentry_messages = Gtk.Template.Child()
     no_results_page = Gtk.Template.Child()
     model_link_button = Gtk.Template.Child()
     title_stack = Gtk.Template.Child()
@@ -322,6 +325,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.model_manager.local_list.set_visible(not button.get_active() and len(list(self.model_manager.local_list)) > 0)
 
     @Gtk.Template.Callback()
+    def message_search_toggle(self, button):
+        self.message_searchbar.set_search_mode(button.get_active())
+
+    @Gtk.Template.Callback()
     def model_search_changed(self, entry):
         results = 0
         if self.model_manager:
@@ -335,6 +342,23 @@ class AlpacaWindow(Adw.ApplicationWindow):
             else:
                 self.model_scroller.set_visible(True)
                 self.no_results_page.set_visible(False)
+
+    @Gtk.Template.Callback()
+    def message_search_changed(self, entry, current_chat=None):
+        search_term=entry.get_text()
+        results = 0
+        if not current_chat:
+            current_chat = self.chat_list_box.get_current_chat()
+        if current_chat:
+            for key, message in current_chat.messages.items():
+                message.set_visible(re.search(search_term, message.text, re.IGNORECASE))
+                for block in message.content_children:
+                    if isinstance(block, message_widget.text_block):
+                        if search_term:
+                            highlighted_text = re.sub(f"({re.escape(search_term)})", r"<span background='yellow' bgalpha='30%'>\1</span>", block.get_text(),flags=re.IGNORECASE)
+                            block.set_markup(highlighted_text)
+                        else:
+                            block.set_markup(block.get_text())
 
     @Gtk.Template.Callback()
     def on_clipboard_paste(self, textview):
@@ -827,7 +851,7 @@ Generate a title following these rules:
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        
+        self.message_searchbar.connect('notify::search-mode-enabled', lambda *_: self.message_search_button.set_active(self.message_searchbar.get_search_mode()))
         message_widget.window = self
         chat_widget.window = self
         model_widget.window = self
@@ -864,7 +888,8 @@ Generate a title following these rules:
             'export_chat': [self.chat_actions],
             'export_current_chat': [self.current_chat_actions],
             'toggle_sidebar': [lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9']],
-            'manage_models': [lambda *_: self.manage_models_dialog.present(self), ['<primary>m']]
+            'manage_models': [lambda *_: self.manage_models_dialog.present(self), ['<primary>m']],
+            'search_messages': [lambda *_: self.message_searchbar.set_search_mode(not self.message_searchbar.get_search_mode()), ['<primary>f']]
         }
 
         for action_name, data in universal_actions.items():

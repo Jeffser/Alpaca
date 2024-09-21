@@ -54,6 +54,7 @@
         </property>
         <child>
           <object class="AdwToolbarView">
+            <property name="height-request">140</property>
             <child type="top">
               <object class="AdwHeaderBar">
                 <child type="start">
@@ -61,6 +62,13 @@
                     <property name="icon-name">sidebar-show-symbolic</property>
                     <property name="tooltip-text" translatable="yes">Toggle Sidebar</property>
                     <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
+                  </object>
+                </child>
+                <child type="start">
+                  <object class="GtkToggleButton" id="message_search_button">
+                    <property name="icon-name">edit-find-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Search Messages</property>
+                    <signal name="clicked" handler="message_search_toggle"/>
                   </object>
                 </child>
                 <child type="title">
@@ -96,6 +104,24 @@
                     <property name="icon-name">view-more-symbolic</property>
                     <property name="tooltip-text" translatable="yes">Chat Menu</property>
                     <property name="menu-model">secondary_menu</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child type="top">
+              <object class="GtkSearchBar" id="message_searchbar">
+                <accessibility>
+                  <property name="label" translatable="yes">Message search bar</property>
+                </accessibility>
+                <property name="key-capture-widget">AlpacaWindow</property>
+                <child>
+                  <object class="GtkSearchEntry" id="searchentry_messages">
+                    <signal name="search-changed" handler="message_search_changed"/>
+                    <property name="search-delay">200</property>
+                    <property name="placeholder-text" translatable="yes">Search messages</property>
+                    <accessibility>
+                      <property name="label" translatable="yes">Search messages</property>
+                    </accessibility>
                   </object>
                 </child>
               </object>
