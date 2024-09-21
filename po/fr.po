@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.0.0\n"
+"Project-Id-Version: 2.0.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-18 10:32-0600\n"
-"PO-Revision-Date: 2024-09-04 12:35+0200\n"
+"PO-Revision-Date: 2024-09-21 11:43+0200\n"
 "Last-Translator: Louis Chauvet-Villaret <louischauvet0@gmail.com>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -137,18 +137,20 @@ msgstr "Correctifs"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:86
 msgid "Fixed spinner not hiding if the back end fails"
 msgstr ""
+"Résolu : l'indicateur de chargement ne se masquait pas lorsque la tâche "
+"échouait"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:87
 msgid "Fixed image recognition with local images"
-msgstr ""
+msgstr "Résolu : reconnaissance d'image locales"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "Changed appearance of delete / stop model buttons"
-msgstr ""
+msgstr "Changé : apparence des boutons de suppression et arrêt de modèle"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:89
 msgid "Fixed stop button crashing the app"
-msgstr ""
+msgstr "Résolu : le bouton arrêter faisait planter l'application"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
@@ -165,30 +167,36 @@ msgstr "Nouveautés"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Made sidebar resize a little when the window is smaller"
 msgstr ""
+"Changé : la barre latérale est légèrement redimmensionnée lorsque la fenêtre "
+"est petite"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Instant launch"
-msgstr ""
+msgstr "Changé : lancement instantanée"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Fixed error on first run (welcome dialog)"
-msgstr ""
+msgstr "Résolu : erreur au lancement (boite de dialogue de bienvenue)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Fixed checker for Ollama instance (used on system packages)"
 msgstr ""
+"Résolu : vérification de l'instance Ollama (utilisé en tant que paquet "
+"système)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:113
 msgid "Fixed 'clear chat' option"
-msgstr ""
+msgstr "Résolu : option 'effacer la discussion'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid "Fixed welcome dialog causing the local instance to not launch"
 msgstr ""
+"Résolu : la boite de dialogue de bienvenue empêchait l'instance locale de "
+"démarrer"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Fixed support for AMD GPUs"
-msgstr ""
+msgstr "Résolu : support des GPU AMD"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Model, message and chat systems have been rewritten"
@@ -2425,7 +2433,7 @@ msgstr "Basculer la barre latérale"
 
 #: src/window.ui:84
 msgid "Loading Instance"
-msgstr ""
+msgstr "Chargement de l'instance"
 
 #: src/window.ui:97
 msgid "Chat Menu"
@@ -2435,8 +2443,8 @@ msgstr "Menu de la discussion"
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr ""
-"Attention : économiseur de batterie activé, la génération des messages sera "
-"ralentie"
+"Attention : mode Économie d'énergie activé, cela pourrait ralentir la "
+"génération des messages"
 
 #: src/window.ui:157
 msgid "Attach File"
@@ -2476,7 +2484,7 @@ msgstr "Exécuter Alpaca en arrière-plan"
 
 #: src/window.ui:297
 msgid "Show Power Saver Warning"
-msgstr ""
+msgstr "Voir l'avertissement lorsque le mode Économie d'énergie est activé"
 
 #: src/window.ui:308
 msgid "Temperature"
@@ -2669,7 +2677,7 @@ msgstr "Renommer la discussion"
 
 #: src/window.ui:937 src/window.ui:963
 msgid "Duplicate Chat"
-msgstr "Dupliquer"
+msgstr "Dupliquer la discussion"
 
 #: src/window.ui:941 src/window.ui:967
 msgid "Export Chat"
