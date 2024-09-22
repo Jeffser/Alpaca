@@ -72,7 +72,8 @@ class chat(Gtk.ScrolledWindow):
         self.welcome_screen = None
         self.regenerate_button = None
         self.busy = False
-        self.get_vadjustment().connect('notify::page-size', lambda va, *_: va.set_value(va.get_upper() - va.get_page_size()) if va.get_value() == 0 else None)
+        #self.get_vadjustment().connect('notify::page-size', lambda va, *_: va.set_value(va.get_upper() - va.get_page_size()) if va.get_value() == 0 else None)
+        ##TODO Figure out how to do this with the search thing
 
     def stop_message(self):
         self.busy = False
@@ -436,6 +437,10 @@ class chat_list(Gtk.ListBox):
         if row:
             current_tab_i = next((i for i, t in enumerate(self.tab_list) if t.chat_window == window.chat_stack.get_visible_child()), -1)
             if self.tab_list.index(row) != current_tab_i:
+                if window.searchentry_messages.get_text() != '':
+                    window.searchentry_messages.set_text('')
+                    window.message_search_changed(window.searchentry_messages, window.chat_stack.get_visible_child())
+                window.message_searchbar.set_search_mode(False)
                 window.chat_stack.set_transition_type(4 if self.tab_list.index(row) > current_tab_i else 5)
                 window.chat_stack.set_visible_child(row.chat_window)
                 window.switch_send_stop_button(not row.chat_window.busy)
