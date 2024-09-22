@@ -415,6 +415,7 @@ class model_manager_container(Gtk.Box):
             spacing=12,
             orientation=1
         )
+        
         self.pulling_list = pulling_model_list()
         self.append(self.pulling_list)
         self.local_list = local_model_list()
@@ -483,11 +484,37 @@ class model_manager_container(Gtk.Box):
     def change_model(self, model_name:str):
         self.model_selector.change_model(model_name)
 
+    def has_vision(self, model_name) -> bool:
+        response = (
+            window.ollama_instance.request(
+                "POST", "api/show", json.dumps({"name": model_name})
+            )
+        )
+
+        if response.status_code != 200:
+            logger.error(f"Status code was {response.status_code}")
+            return False
+
+        try:
+            model_info = json.loads(response.text)
+            logger.debug(f"Vision for {model_name}: {'projector_info' in model_info}")
+            return 'projector_info' in model_info
+        except Exception as e:
+            logger.error(f"Error fetching vision info: {str(e)}")
+            return False
+
     def verify_if_image_can_be_used(self):
         logger.debug("Verifying if image can be used")
         selected = self.get_selected_model()
         if selected == None:
             return False
+
+        # first try ollama show API.
+        if self.has_vision(selected):
+            return True
+
+        # then fall back to the old method.)
+
         selected = selected.split(":")[0]
         with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
             if selected in [key for key, value in json.load(f).items() if value["image"]]:
@@ -532,4 +559,3 @@ class model_manager_container(Gtk.Box):
             GLib.idle_add(window.chat_list_box.update_welcome_screens, len(self.get_model_list()) > 0)
             if len(list(self.pulling_list)) == 0:
                 GLib.idle_add(self.pulling_list.set_visible, False)
-
