@@ -442,7 +442,7 @@ class message(Gtk.Overlay):
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
             elif vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
-            self.content_children[-1].insert_at_end(data['message']['content'], False)
+            GLib.idle_add(self.content_children[-1].insert_at_end, data['message']['content'], False)
             if 'done' in data and data['done']:
                 window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
                 if window.chat_list_box.get_current_chat().get_name() != chat.get_name():
@@ -451,11 +451,11 @@ class message(Gtk.Overlay):
                     chat.container.remove(chat.welcome_screen)
                     chat.welcome_screen = None
                 chat.stop_message()
-                self.set_text(self.content_children[-1].get_label())
+                GLib.idle_add(self.set_text, self.content_children[-1].get_label())
                 self.dt = datetime.datetime.now()
-                self.add_footer(self.dt)
+                GLib.idle_add(self.add_footer, self.dt)
                 window.show_notification(chat.get_name(), self.text[:200] + (self.text[200:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
-                window.save_history(chat)
+                GLib.idle_add(window.save_history, chat)
         else:
             if self.spinner:
                 GLib.idle_add(self.container.remove, self.spinner)
