@@ -45,6 +45,14 @@ You can find the latest stable version of the app on [Flathub](https://flathub.o
 
 Everytime a new version is published they become available on the [releases page](https://github.com/Jeffser/Alpaca/releases) of the repository
 
+### Snap Package
+
+You can also find the Snap package on the [releases page](https://github.com/Jeffser/Alpaca/releases), to install it run this command:
+```BASH
+sudo snap install ./{package name} --dangerous
+```
+The `--dangerous` comes from the package being installed without any involvement of the SnapStore, I'm working on getting the app there, but for now you can test the app this way.
+
 ### Building Git Version
 
 Note: This is not recommended since the prerelease versions of the app often present errors and general instability.
