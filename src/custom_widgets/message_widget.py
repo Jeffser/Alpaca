@@ -451,6 +451,7 @@ class message(Gtk.Overlay):
                     chat.container.remove(chat.welcome_screen)
                     chat.welcome_screen = None
                 chat.stop_message()
+                self.text = self.content_children[-1].get_label()
                 GLib.idle_add(self.set_text, self.content_children[-1].get_label())
                 self.dt = datetime.datetime.now()
                 GLib.idle_add(self.add_footer, self.dt)

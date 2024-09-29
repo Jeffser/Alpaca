@@ -575,6 +575,7 @@ Generate a title following these rules:
             if response.status_code != 200:
                 raise Exception('Network Error')
         except Exception as e:
+            logger.error(e)
             self.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
             chat.busy = False
             GLib.idle_add(message_element.add_action_buttons)
