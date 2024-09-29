@@ -78,6 +78,15 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="2.0.6" date="2024-09-29">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.0.6</url>
+      <description>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed message notification sometimes crashing text rendering because of them running on different threads</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.0.5" date="2024-09-25">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.0.5</url>
       <description>
