@@ -14,6 +14,7 @@
       <object class="AdwBreakpoint">
         <condition>max-width: 690sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
+        <setter object="terminal_dialog" property="width-request">400</setter>
       </object>
     </child>
     <property name="content">
@@ -481,7 +482,7 @@
       </accessibility>
       <property name="title" translatable="yes">Terminal</property>
       <property name="can-close">true</property>
-      <property name="width-request">400</property>
+      <property name="width-request">600</property>
       <property name="height-request">600</property>
       <child>
         <object class="AdwToolbarView">
