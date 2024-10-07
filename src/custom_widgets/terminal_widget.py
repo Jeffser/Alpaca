@@ -18,10 +18,15 @@ class terminal(Vte.Terminal):
         pty = Vte.Pty.new_sync(Vte.PtyFlags.DEFAULT, None)
 
         self.set_pty(pty)
+
+        env = {
+            "TERM": "xterm-256color"
+        }
+
         pty.spawn_async(
             GLib.get_current_dir(),
             script,
-            [],
+            [f"{key}={value}" for key, value in env.items()],
             GLib.SpawnFlags.DEFAULT,
             None,
             None,

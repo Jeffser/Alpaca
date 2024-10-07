@@ -437,14 +437,25 @@ def run_script_response(self, dialog, task, script, language_name):
             else:
                 with open(os.path.join(data_dir, 'pyenv', 'requirements.txt'), 'w') as f:
                     f.write('')
-            print(script)
             script = ';\n'.join(script)
 
         script += '; echo "\n🦙 {}"'.format(_('Script exited'))
+        if language_name == 'bash':
+            script = script.replace('sudo ', 'pkexec ')
         if shutil.which('flatpak-spawn') and language_name == 'bash':
-            script = 'echo "🦙 {}\n";'.format(_('The script is contained inside Flatpak')) + script
-
-        self.run_terminal(['bash', '-c', script])
+            sandbox = True
+            try:
+                process = subprocess.run(['flatpak-spawn', '--host', 'bash', '-c', 'echo "test"'], check=True)
+                sandbox = False
+            except Exception as e:
+                pass
+            if sandbox:
+                script = 'echo "🦙 {}\n";'.format(_('The script is contained inside Flatpak')) + script
+                self.run_terminal(['bash', '-c', script])
+            else:
+                self.run_terminal(['flatpak-spawn', '--host', 'bash', '-c', script])
+        else:
+            self.run_terminal(['bash', '-c', script])
 
 def run_script(self, script:str, language_name:str):
     dialog = Adw.AlertDialog(
