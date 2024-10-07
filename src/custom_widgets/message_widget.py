@@ -484,7 +484,7 @@ class message(Gtk.Overlay):
         self.content_children = []
         if text:
             self.content_children = []
-            code_block_pattern = re.compile(r'```(\w+)\n(.*?)\n```', re.DOTALL)
+            code_block_pattern = re.compile(r'```(\w*)\n(.*?)\n\s*```', re.DOTALL)
             no_lang_code_block_pattern = re.compile(r'`\n(.*?)\n`', re.DOTALL)
             table_pattern = re.compile(r'((\r?\n){2}|^)([^\r\n]*\|[^\r\n]*(\r?\n)?)+(?=(\r?\n){2}|$)', re.MULTILINE)
             bold_pattern = re.compile(r'\*\*(.*?)\*\*') #"**text**"
