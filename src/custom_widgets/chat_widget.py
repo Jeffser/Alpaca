@@ -6,7 +6,7 @@ Handles the chat widget (testing)
 import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
-from gi.repository import Gtk, Gio, Adw, Gdk
+from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 import logging, os, datetime, shutil, random, tempfile, tarfile, json
 from ..internal import data_dir
 from .message_widget import message
@@ -154,8 +154,8 @@ class chat(Gtk.ScrolledWindow):
                         for file_name, file_type in message_data['files'].items():
                             files[os.path.join(data_dir, "chats", self.get_name(), message_id, file_name)] = file_type
                         message_element.add_attachments(files)
-                    message_element.set_text(message_data['content'])
-                    message_element.add_footer(datetime.datetime.strptime(message_data['date'] + (":00" if message_data['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
+                    GLib.idle_add(message_element.set_text, message_data['content'])
+                    GLib.idle_add(message_element.add_footer, datetime.datetime.strptime(message_data['date'] + (":00" if message_data['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
         else:
             self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
 
