@@ -168,6 +168,18 @@
             ]
         },
         {
+            "name": "vte",
+            "buildsystem": "meson",
+            "config-opts": ["-Dvapi=false"],
+            "sources": [
+            	{
+		   "type": "archive",
+		   "url": "https://gitlab.gnome.org/GNOME/vte/-/archive/0.78.0/vte-0.78.0.tar.gz",
+		   "sha256": "82e19d11780fed4b66400f000829ce5ca113efbbfb7975815f26ed93e4c05f2d"
+            	}
+            ]
+        },
+        {
             "name" : "alpaca",
             "builddir" : true,
             "buildsystem" : "meson",

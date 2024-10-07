@@ -32,7 +32,7 @@ gi.require_version('GdkPixbuf', '2.0')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
 
 from . import dialogs, connection_handler
-from .custom_widgets import message_widget, chat_widget, model_widget
+from .custom_widgets import message_widget, chat_widget, model_widget, terminal_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir
 
 logger = logging.getLogger(__name__)
@@ -117,6 +117,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     banner = Gtk.Template.Child()
 
     style_manager = Adw.StyleManager()
+
+    terminal_scroller = Gtk.Template.Child()
+    terminal_dialog = Gtk.Template.Child()
 
     @Gtk.Template.Callback()
     def stop_message(self, button=None):
@@ -367,6 +370,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         clipboard = Gdk.Display.get_default().get_clipboard()
         clipboard.read_text_async(None, self.cb_text_received)
         clipboard.read_texture_async(None, self.cb_image_received)
+
+    def run_terminal(self, script:list):
+        self.terminal_scroller.set_child(terminal_widget.terminal(script))
+        self.terminal_dialog.present(self)
 
     def convert_model_name(self, name:str, mode:int) -> str: # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag
         try:

@@ -475,6 +475,30 @@
       </child>
     </object>
 
+    <object class="AdwDialog" id="terminal_dialog">
+      <accessibility>
+        <property name="label" translatable="yes">Manage models dialog</property>
+      </accessibility>
+      <property name="title" translatable="yes">Terminal</property>
+      <property name="can-close">true</property>
+      <property name="width-request">400</property>
+      <property name="height-request">600</property>
+      <child>
+        <object class="AdwToolbarView">
+          <child type="top">
+            <object class="AdwHeaderBar">
+              <style>
+                <class name="osd"/>
+              </style>
+            </object>
+          </child>
+          <property name="content">
+            <object class="GtkScrolledWindow" id="terminal_scroller"></object>
+          </property>
+        </object>
+      </child>
+    </object>
+
     <object class="AdwDialog" id="manage_models_dialog">
       <accessibility>
         <property name="label" translatable="yes">Manage models dialog</property>

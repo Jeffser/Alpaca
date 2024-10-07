@@ -428,43 +428,11 @@ def run_script_response(self, dialog, task, script, language_name):
             with open(os.path.join(cache_dir, 'temp_python_script.py'), 'w') as f:
                 f.write(script)
             script = 'python3 {}'.format(os.path.join(cache_dir, 'temp_python_script.py'))
-        script += '; read -p "\n(Alpaca) {}"'.format(_('Press Enter to close...'))
-        using_flatpak = shutil.which('flatpak-spawn')
+        script += '; echo "\n(Alpaca) {}"'.format(_('Script exited'))
+        if shutil.which('flatpak-spawn'):
+            script = 'echo "{}\n";'.format(_('The script is contained inside Flatpak')) + script
 
-        try:
-            terminal_to_use = None
-            if os.path.isfile(os.path.join(config_dir, 'FORCE_TERMINAL')):
-                with open(os.path.join(config_dir, 'FORCE_TERMINAL'), 'r') as f:
-                    terminal_to_use = f.read().split('\n')[0].split(' ')
-            else:
-                terminals = [['kgx', '-e'], ['gnome-terminal', '--'], ['konsole', '-e'], ['xterm', '-e'], ['lxterminal', '-e'], ['kitty', '-e'], ['xfce4-terminal', '-x'], ['alacritty', '-e'], ['yakuake', '-e']]
-                for terminal in terminals:
-                    result = subprocess.run(
-                        ['flatpak-spawn', '--host', 'sh', '-c', f'command -v {terminal[0]}'] if using_flatpak else ['sh' '-c', f'command -v {terminal[0]}'],
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.PIPE
-                    )
-                    if result.returncode == 0:
-                        terminal_to_use = terminal
-                        break
-
-            if terminal_to_use:
-                if using_flatpak:
-                    run_command = ['flatpak-spawn', '--host']
-                    run_command[2:2] = terminal_to_use
-                else:
-                    run_command = terminal_to_use
-                if terminal_to_use[0] == 'flatpak':
-                    run_command.append(f'bash -c {script}')
-                else:
-                    run_command.append('bash')
-                    run_command.append('-c')
-                    run_command.append(script)
-                subprocess.Popen(run_command)
-            else:
-                self.show_toast(_('No compatible terminal was found in the system'), self.main_overlay)
-        except Exception as e:
-            logger.error(f'Error running script on {terminal_to_use}: {e}')
+        self.run_terminal(['bash', '-c', script])
 
 def run_script(self, script:str, language_name:str):
     dialog = Adw.AlertDialog(
