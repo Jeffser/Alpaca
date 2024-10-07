@@ -78,6 +78,23 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="2.5.0" date="2024-10-06">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.5.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Run bash and python scripts straight from chat</li>
+          <li>Updated Ollama to 0.3.12</li>
+          <li>New models!</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed and made faster the launch sequence</li>
+          <li>Better detection of code blocks in messages</li>
+          <li>Fixed app not loading in certain setups with Nvidia GPUs</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.0.6" date="2024-09-29">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.0.6</url>
       <description>
