@@ -135,15 +135,15 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:86
 msgid "Run bash and python scripts straight from chat"
-msgstr ""
+msgstr "Ejecutar scripts de Bash y Python directamente desde el chat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:87
 msgid "Updated Ollama to 0.3.12"
-msgstr ""
+msgstr "Ollama actualizado a 0.3.12"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:88
 msgid "New models!"
-msgstr ""
+msgstr "Nuevos modelos!"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
@@ -165,55 +165,59 @@ msgstr "Arreglos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Fixed and made faster the launch sequence"
-msgstr ""
+msgstr "Arreglado y optimizado el proceso de lanzamiento"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Better detection of code blocks in messages"
-msgstr ""
+msgstr "Mejor detección de bloques de código en mensajes"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Fixed app not loading in certain setups with Nvidia GPUs"
-msgstr ""
+msgstr "Arreglado: Aplicación no abre en ciertos equipos con GPUs Nvidia"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid ""
 "Fixed message notification sometimes crashing text rendering because of them "
 "running on different threads"
 msgstr ""
+"Arreglado: Notificaciones de mensajes a veces congelan la aplicación debido "
+"a que corrían en diferentes hilos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "Fixed message generation sometimes failing"
-msgstr ""
+msgstr "Arreglado: Generación de mensajes a veces fallaba"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:121
 msgid "Sidebar resizes with the window"
-msgstr ""
+msgstr "Barra lateral cambia su tamaño con respecto a la ventana"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
 msgid "New welcome dialog"
-msgstr ""
+msgstr "Nuevo dialogo de bienvenida"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Message search"
-msgstr ""
+msgstr "Busqueda de mensajes"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Updated Ollama to v0.3.11"
-msgstr ""
+msgstr "Actualizado Ollama a v0.3.11"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:125
 msgid "A lot of new models provided by Ollama repository"
-msgstr ""
+msgstr "Muchos modelos nuevos proveidos por el repositorio de Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:129
 msgid ""
 "Fixed text inside model manager when the accessibility option 'large text' "
 "is on"
 msgstr ""
+"Arreglado: Texto dentro del gestionador de modelos cuando la opción de "
+"accesibilidad 'texto grande' esta activa"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:130
 msgid "Fixed image recognition on unsupported models"
-msgstr ""
+msgstr "Arreglado reconocimiento de imagenes en modelos no soportados"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:139
 msgid "Fixed spinner not hiding if the back end fails"
@@ -1466,7 +1470,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:2
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
-msgstr ""
+msgstr "Llama 3.2 de Meta es pequeño con modelos 1B y 3B."
 
 #: src/available_models_descriptions.py:3
 msgid ""
@@ -1481,13 +1485,17 @@ msgid ""
 "Google Gemma 2 is a high-performing and efficient model available in three "
 "sizes: 2B, 9B, and 27B."
 msgstr ""
+"Google Gemma 2 es un modelo de alto rendimiento y eficiente disponible en "
+"tres tamaños: 2B, 9B y 27B."
 
 #: src/available_models_descriptions.py:5
 msgid ""
 "Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, "
 "encompassing up to 18 trillion tokens. The model supports up to 128K tokens "
 "and has multilingual support."
-msgstr ""
+msgstr "Los modelos Qwen2.5 están entrenados previamente con el último "
+"conjunto de datos a gran escala de Alibaba, que abarca hasta 18 billones de "
+"tokens. El modelo admite hasta 128 000 tokens y tiene soporte multilingüe."
 
 #: src/available_models_descriptions.py:6
 msgid ""
@@ -1502,12 +1510,15 @@ msgid ""
 "A commercial-friendly small language model by NVIDIA optimized for roleplay, "
 "RAG QA, and function calling."
 msgstr ""
+"Un modelo de lenguaje pequeño comercialmente amigable de NVIDIA optimizado "
+"para juegos de roles, control de calidad de RAG y llamada de funciones."
 
 #: src/available_models_descriptions.py:8
 msgid ""
 "Mistral Small is a lightweight model designed for cost-effective use in "
 "tasks like translation and summarization."
-msgstr ""
+msgstr "Mistral Small es un modelo liviano diseñado para un uso rentable en "
+"tareas como traducción y resumen."
 
 #: src/available_models_descriptions.py:9
 msgid ""
@@ -1720,6 +1731,9 @@ msgid ""
 "The latest series of Code-Specific Qwen models, with significant "
 "improvements in code generation, code reasoning, and code fixing."
 msgstr ""
+"La última serie de modelos Qwen específicos de código, con mejoras "
+"significativas en la generación de código, el razonamiento de código y "
+"la corrección de código."
 
 #: src/available_models_descriptions.py:38
 msgid ""
@@ -1938,6 +1952,9 @@ msgid ""
 "tuning that teaches a LLM to detect mistakes in its reasoning and correct "
 "course."
 msgstr ""
+"Un modelo de alto rendimiento entrenado con una nueva técnica llamada "
+"Reflection-tuning que enseña a un LLM a detectar errores en su razonamiento "
+"y corregir el rumbo."
 
 #: src/available_models_descriptions.py:67
 msgid ""
@@ -2087,6 +2104,9 @@ msgid ""
 "Yi-Coder is a series of open-source code language models that delivers state-"
 "of-the-art coding performance with fewer than 10 billion parameters."
 msgstr ""
+"Yi-Coder es una serie de modelos de lenguaje de código de código abierto "
+"que ofrece un rendimiento de codificación de última generación con menos de "
+"10 mil millones de parámetros."
 
 #: src/available_models_descriptions.py:88
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
@@ -2222,6 +2242,8 @@ msgid ""
 "A series of multimodal LLMs (MLLMs) designed for vision-language "
 "understanding."
 msgstr ""
+"Una serie de LLM multimodales (MLLM) diseñados para la comprensión "
+"entre visión y lenguaje."
 
 #: src/available_models_descriptions.py:107
 msgid ""
@@ -2285,6 +2307,8 @@ msgid ""
 "Solar Pro Preview: an advanced large language model (LLM) with 22 billion "
 "parameters designed to fit into a single GPU"
 msgstr ""
+"Vista previa de Solar Pro: un modelo de lenguaje grande (LLM) avanzado con "
+"22 mil millones de parámetros diseñado para caber en una sola GPU"
 
 #: src/available_models_descriptions.py:116
 msgid ""
@@ -2315,6 +2339,8 @@ msgid ""
 "A series of models that convert HTML content to Markdown content, which is "
 "useful for content conversion tasks."
 msgstr ""
+"Una serie de modelos que convierten contenido HTML en contenido Markdown, "
+"lo cual resulta útil para tareas de conversión de contenido."
 
 #: src/available_models_descriptions.py:120
 msgid "Embedding model from BAAI mapping texts to vectors."
@@ -2325,10 +2351,14 @@ msgid ""
 "An upgraded version of DeekSeek-V2 that integrates the general and coding "
 "abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
 msgstr ""
+"Una versión mejorada de DeepSeek-V2 que integra las capacidades generales "
+"y de codificación de DeepSeek-V2-Chat y DeepSeek-Coder-V2-Instruct."
 
 #: src/available_models_descriptions.py:122
 msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
 msgstr ""
+"Un modelo de verificación de datos de última generación desarrollado "
+"por Bespoke Labs."
 
 #: src/available_models_descriptions.py:123
 msgid ""
@@ -2513,21 +2543,23 @@ msgstr ""
 
 #: src/dialogs.py:431
 msgid "Press Enter to close..."
-msgstr ""
+msgstr "Presione Enter para cerrar..."
 
 #: src/dialogs.py:465
 msgid "No compatible terminal was found in the system"
-msgstr ""
+msgstr "No se encontró ningún terminal compatible en el sistema"
 
 #: src/dialogs.py:471 src/custom_widgets/message_widget.py:112
 msgid "Run Script"
-msgstr ""
+msgstr "Ejecutar Script"
 
 #: src/dialogs.py:472
 msgid ""
 "Make sure you understand what this script does before running it, Alpaca is "
 "not responsible for any damages to your device or data"
 msgstr ""
+"Asegúrese de comprender lo que hace este script antes de ejecutarlo. "
+"Alpaca no es responsable de ningún daño a su dispositivo o datos."
 
 #: src/window.ui:41
 msgid "Menu"
@@ -2539,7 +2571,7 @@ msgstr "Alternar Barra Lateral"
 
 #: src/window.ui:70
 msgid "Search Messages"
-msgstr ""
+msgstr "Buscar Mensajes"
 
 #: src/window.ui:92
 msgid "Loading Instance"
@@ -2551,11 +2583,11 @@ msgstr "Menu de Chat"
 
 #: src/window.ui:114
 msgid "Message search bar"
-msgstr ""
+msgstr "Barra de búsqueda de mensajes"
 
 #: src/window.ui:121 src/window.ui:123
 msgid "Search messages"
-msgstr ""
+msgstr "Buscar mensajes"
 
 #: src/window.ui:137
 msgid ""
