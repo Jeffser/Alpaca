@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alpaca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-06 23:26-0600\n"
+"POT-Creation-Date: 2024-10-07 10:38-0600\n"
 "PO-Revision-Date: 2024-09-16 14:07+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
@@ -85,7 +85,7 @@ msgstr "הוספת טקסט מאתר אינטרנט לפקודה"
 msgid "PDF recognition"
 msgstr "זיהוי PDF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:921
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:945
 msgid "Disclaimer"
 msgstr "כתב ויתור"
 
@@ -1369,44 +1369,44 @@ msgstr "0.1.1 גרסה יציבה"
 msgid "This is the first public version of Alpaca"
 msgstr "זוהי הגרסה הציבורית הראשונה של Alpaca"
 
-#: src/window.py:139
+#: src/window.py:142
 msgid "Please select a model before chatting"
 msgstr "יש לבחור מודל לפני תחילת השיחה"
 
-#: src/window.py:193 src/window.py:194
+#: src/window.py:196 src/window.py:197
 msgid "Close"
 msgstr "סגירה"
 
-#: src/window.py:196 src/window.py:197 src/window.ui:874
+#: src/window.py:199 src/window.py:200 src/window.ui:898
 msgid "Next"
 msgstr "הבא"
 
-#: src/window.py:336
+#: src/window.py:339
 msgid "image"
 msgstr "תמונה"
 
-#: src/window.py:431
+#: src/window.py:438
 msgid "Missing file"
 msgstr "קובץ חסר"
 
-#: src/window.py:564 src/window.py:621 src/window.py:641 src/window.py:643
-#: src/dialogs.py:93 src/window.ui:30 src/custom_widgets/chat_widget.py:315
+#: src/window.py:571 src/window.py:628 src/window.py:648 src/window.py:650
+#: src/dialogs.py:93 src/window.ui:31 src/custom_widgets/chat_widget.py:315
 msgid "New Chat"
 msgstr "שיחה חדשה"
 
-#: src/window.py:668
+#: src/window.py:675
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr "הייתה שגיאה עם מופע Ollama המקומי, לכן הוא אופס"
 
-#: src/window.py:690
+#: src/window.py:697
 msgid "Cannot open image"
 msgstr "לא ניתן לפתוח את התמונה"
 
-#: src/window.py:776
+#: src/window.py:783
 msgid "This video is not available"
 msgstr "סרטון זה אינו זמין"
 
-#: src/window.py:794 src/dialogs.py:322
+#: src/window.py:801 src/dialogs.py:322
 msgid "Image recognition is only available on specific models"
 msgstr "זיהוי תמונות זמין רק במודלים ספציפיים"
 
@@ -2225,7 +2225,7 @@ msgstr "האם אכן ברצונך לנקות את השיחה?"
 
 #: src/dialogs.py:29 src/dialogs.py:51 src/dialogs.py:80 src/dialogs.py:108
 #: src/dialogs.py:132 src/dialogs.py:154 src/dialogs.py:177 src/dialogs.py:257
-#: src/dialogs.py:295 src/dialogs.py:371 src/dialogs.py:410 src/dialogs.py:475
+#: src/dialogs.py:295 src/dialogs.py:371 src/dialogs.py:410 src/dialogs.py:455
 msgid "Cancel"
 msgstr "ביטול"
 
@@ -2265,7 +2265,7 @@ msgstr "ליצור שיחה?"
 msgid "Enter name for new chat"
 msgstr "יש להזין שם לשיחה חדשה"
 
-#: src/dialogs.py:109 src/window.ui:753
+#: src/dialogs.py:109 src/window.ui:777
 msgid "Create"
 msgstr "יצירה"
 
@@ -2326,7 +2326,7 @@ msgid "This model will be used as the base for the new model"
 msgstr "מודל זה ישמש כבסיס למודל החדש"
 
 #: src/dialogs.py:258 src/dialogs.py:296 src/dialogs.py:372 src/dialogs.py:411
-#: src/dialogs.py:476
+#: src/dialogs.py:456
 msgid "Accept"
 msgstr "אישור"
 
@@ -2381,101 +2381,105 @@ msgstr ""
 "‏'{}'?"
 
 #: src/dialogs.py:431
-msgid "Press Enter to close..."
+msgid "Setting up Python environment..."
 msgstr ""
 
-#: src/dialogs.py:465
-msgid "No compatible terminal was found in the system"
+#: src/dialogs.py:443
+msgid "Script exited"
 msgstr ""
 
-#: src/dialogs.py:471 src/custom_widgets/message_widget.py:112
+#: src/dialogs.py:445
+msgid "The script is contained inside Flatpak"
+msgstr ""
+
+#: src/dialogs.py:451 src/custom_widgets/message_widget.py:112
 msgid "Run Script"
 msgstr ""
 
-#: src/dialogs.py:472
+#: src/dialogs.py:452
 msgid ""
 "Make sure you understand what this script does before running it, Alpaca is "
 "not responsible for any damages to your device or data"
 msgstr ""
 
-#: src/window.ui:41
+#: src/window.ui:42
 msgid "Menu"
 msgstr "תפריט"
 
-#: src/window.ui:63
+#: src/window.ui:64
 msgid "Toggle Sidebar"
 msgstr "הצגת/הסתרת סרגל צד"
 
-#: src/window.ui:70
+#: src/window.ui:71
 msgid "Search Messages"
 msgstr ""
 
-#: src/window.ui:92
+#: src/window.ui:93
 msgid "Loading Instance"
 msgstr ""
 
-#: src/window.ui:105
+#: src/window.ui:106
 msgid "Chat Menu"
 msgstr "תפריט שיחה"
 
-#: src/window.ui:114
+#: src/window.ui:115
 msgid "Message search bar"
 msgstr ""
 
-#: src/window.ui:121 src/window.ui:123
+#: src/window.ui:122 src/window.ui:124
 msgid "Search messages"
 msgstr ""
 
-#: src/window.ui:137
+#: src/window.ui:138
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr "אזהרה: מצב חיסכון בחשמל מופעל, זה יאט את יצירת ההודעות"
 
-#: src/window.ui:184
+#: src/window.ui:185
 msgid "Attach File"
 msgstr "צירוף קובץ"
 
-#: src/window.ui:221
+#: src/window.ui:222
 msgid "Message text box"
 msgstr "תיבת טקסט להודעה"
 
-#: src/window.ui:234 src/window.ui:1140
+#: src/window.ui:235 src/window.ui:1164
 msgid "Send Message"
 msgstr "שליחת הודעה"
 
-#: src/window.ui:284 src/window.ui:945 src/window.ui:1081
+#: src/window.ui:285 src/window.ui:969 src/window.ui:1105
 msgid "Preferences"
 msgstr "העדפות"
 
-#: src/window.ui:287 src/window.ui:1059
+#: src/window.ui:288 src/window.ui:1083
 msgid "General"
 msgstr "כללי"
 
-#: src/window.ui:294
+#: src/window.ui:295
 msgid "Use Remote Connection to Ollama"
 msgstr "שימוש בחיבור מרוחק ל־Ollama"
 
-#: src/window.ui:300
+#: src/window.ui:301
 msgid "URL of Remote Instance"
 msgstr "כתובת URL של מופע מרוחק"
 
-#: src/window.ui:307
+#: src/window.ui:308
 msgid "Bearer Token (Optional)"
 msgstr "אסימון נושא (אפשרי)"
 
-#: src/window.ui:318
+#: src/window.ui:319
 msgid "Run Alpaca In Background"
 msgstr "הרצת Alpaca ברקע"
 
-#: src/window.ui:324
+#: src/window.ui:325
 msgid "Show Power Saver Warning"
 msgstr "הצגת אזהרת חיסכון בחשמל"
 
-#: src/window.ui:335
+#: src/window.ui:336
 msgid "Temperature"
 msgstr "טמפרטורה"
 
-#: src/window.ui:336
+#: src/window.ui:337
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
@@ -2483,11 +2487,11 @@ msgstr ""
 "הטמפרטורה של המודל. העלאת הטמפרטורה תגרום למודל לענות באופן יצירתי יותר. "
 "(ברירת מחדל: 0.8)"
 
-#: src/window.ui:351
+#: src/window.ui:352
 msgid "Seed"
 msgstr "ערך התחלתי"
 
-#: src/window.ui:352
+#: src/window.ui:353
 msgid ""
 "Sets the random number seed to use for generation. Setting this to a "
 "specific number will make the model generate the same text for the same "
@@ -2496,26 +2500,26 @@ msgstr ""
 "קובע את הערך ההתחלתי של המספר האקראי לשימוש ביצירה. הגדרת ערך מסוים תגרום "
 "למודל ליצור את אותו טקסט עבור אותה הנחיה (ברירת מחדל: 0 (אקראי))."
 
-#: src/window.ui:366
+#: src/window.ui:367
 msgid "Keep Alive Time"
 msgstr "זמן שמירה על חיים"
 
-#: src/window.ui:367
+#: src/window.ui:368
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
 msgstr ""
 "שולט על כמה זמן המודל יישאר טעון בזיכרון לאחר הבקשה בדקות (ברירת מחדל: 5)"
 
-#: src/window.ui:383
+#: src/window.ui:384
 msgid "Ollama Instance"
 msgstr "מופע Ollama"
 
-#: src/window.ui:387
+#: src/window.ui:388
 msgid "Ollama Overrides"
 msgstr "עקיפות Ollama"
 
-#: src/window.ui:388
+#: src/window.ui:389
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
@@ -2523,73 +2527,77 @@ msgstr ""
 "ניהול הארגומנטים המשמשים ב־Ollama, כל שינוי בעמוד זה חל רק על המופע המשולב, "
 "המופע יופעל מחדש אם תבצעו שינויים."
 
-#: src/window.ui:460
+#: src/window.ui:461
 msgid "Idle Timer"
 msgstr "קוצב זמן חוסר פעילות"
 
-#: src/window.ui:461
+#: src/window.ui:462
 msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
 msgstr ""
 "מספר הדקות שהמופע צריך להישאר לא פעיל לפני שהוא נכבה (0 פירושו שהוא לא ייכבה)"
 
-#: src/window.ui:480
+#: src/window.ui:481 src/window.ui:504
 msgid "Manage models dialog"
 msgstr "דו שיח ניהול מודלים"
 
-#: src/window.ui:491 src/window.ui:939 src/custom_widgets/model_widget.py:23
+#: src/window.ui:483
+msgid "Terminal"
+msgstr ""
+
+#: src/window.ui:515 src/window.ui:963 src/custom_widgets/model_widget.py:23
 #: src/custom_widgets/model_widget.py:24
 msgid "Manage Models"
 msgstr "ניהול מודלים"
 
-#: src/window.ui:501 src/window.ui:633
+#: src/window.ui:525 src/window.ui:657
 msgid "Create Model"
 msgstr "יצירת מודל"
 
-#: src/window.ui:508
+#: src/window.ui:532
 msgid "Search Model"
 msgstr "חיפוש מודל"
 
-#: src/window.ui:517
+#: src/window.ui:541
 msgid "Model search bar"
 msgstr "סרגל חיפוש מודל"
 
-#: src/window.ui:524 src/window.ui:526
+#: src/window.ui:548 src/window.ui:550
 msgid "Search models"
 msgstr "חיפוש מודלים"
 
-#: src/window.ui:549
+#: src/window.ui:573
 msgid "No Models Found"
 msgstr "לא נמצאו מודלים"
 
-#: src/window.ui:550
+#: src/window.ui:574
 msgid "Try a different search or pull an unlisted model from it's name"
 msgstr "יש לנסות חיפוש אחר או למשוך מודל שאינו ברשימה לפי שמו"
 
-#: src/window.ui:558
+#: src/window.ui:582
 msgid "Pull Model From Name"
 msgstr "משיכת מודל לפי שם"
 
-#: src/window.ui:608
+#: src/window.ui:632
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
 msgstr "הורדת מודל זה מהווה הסכמה לתנאי הרישיון הזמינים באתר המודל."
 
-#: src/window.ui:668
+#: src/window.ui:692
 msgid "Base"
 msgstr "בסיס"
 
-#: src/window.ui:687
+#: src/window.ui:711
 msgid "Name"
 msgstr "שם"
 
-#: src/window.ui:693
+#: src/window.ui:717
 msgid "Context"
 msgstr "הקשר"
 
-#: src/window.ui:737
+#: src/window.ui:761
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -2598,35 +2606,35 @@ msgstr ""
 "חלק מהמודלים דורשים קובץ מודל, Alpaca ממלא הוראות FROM ו־SYSTEM (הקשר) באופן "
 "אוטומטי. במקרה של ספק יש לבקר באתר המודל או בתיעוד של Ollama למידע נוסף."
 
-#: src/window.ui:776
+#: src/window.ui:800
 msgid "File preview dialog"
 msgstr "דו שיח תצוגה מקדימה של קובץ"
 
-#: src/window.ui:788
+#: src/window.ui:812
 msgid "Open With Default App"
 msgstr "פתיחה עם יישום ברירת המחדל"
 
-#: src/window.ui:796
+#: src/window.ui:820
 msgid "Remove Attachment"
 msgstr "הסרת קובץ מצורף"
 
-#: src/window.ui:858
+#: src/window.ui:882
 msgid "Previous"
 msgstr "הקודם"
 
-#: src/window.ui:901
+#: src/window.ui:925
 msgid "Welcome to Alpaca"
 msgstr "ברוך בואך ל־Alpaca"
 
-#: src/window.ui:902
+#: src/window.ui:926
 msgid "Powered by Ollama"
 msgstr "מופעל על ידי Ollama"
 
-#: src/window.ui:905
+#: src/window.ui:929
 msgid "Ollama Website"
 msgstr "אתר Ollama"
 
-#: src/window.ui:922
+#: src/window.ui:946
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2635,95 +2643,95 @@ msgstr ""
 "‏Alpaca ומפתחיה אינם אחראים לכל נזק למכשירים או לתוכנה הנובע מהרצת קוד שנוצר "
 "על ידי מודל AI. יש לנהוג בזהירות ולבדוק את הקוד בקפידה לפני הרצתו."
 
-#: src/window.ui:935
+#: src/window.ui:959
 msgid "Import Chat"
 msgstr "ייבוא שיחה"
 
-#: src/window.ui:949
+#: src/window.ui:973
 msgid "Keyboard Shortcuts"
 msgstr "צירופי מקשים"
 
-#: src/window.ui:953
+#: src/window.ui:977
 msgid "About Alpaca"
 msgstr "על Alpaca"
 
-#: src/window.ui:961 src/window.ui:987
+#: src/window.ui:985 src/window.ui:1011
 msgid "Rename Chat"
 msgstr "שינוי שם שיחה"
 
-#: src/window.ui:965 src/window.ui:991
+#: src/window.ui:989 src/window.ui:1015
 msgid "Duplicate Chat"
 msgstr "שכפול שיחה"
 
-#: src/window.ui:969 src/window.ui:995
+#: src/window.ui:993 src/window.ui:1019
 msgid "Export Chat"
 msgstr "ייצוא שיחה"
 
-#: src/window.ui:973
+#: src/window.ui:997
 msgid "Clear Chat"
 msgstr "ניקוי שיחה"
 
-#: src/window.ui:979 src/window.ui:1001
+#: src/window.ui:1003 src/window.ui:1025
 msgid "Delete Chat"
 msgstr "מחיקת שיחה"
 
-#: src/window.ui:1009
+#: src/window.ui:1033
 msgid "From Existing Model"
 msgstr "ממודל קיים"
 
-#: src/window.ui:1013
+#: src/window.ui:1037
 msgid "From GGUF File"
 msgstr "מקובץ GGUF"
 
-#: src/window.ui:1017
+#: src/window.ui:1041
 msgid "From Name"
 msgstr "משם"
 
-#: src/window.ui:1063
+#: src/window.ui:1087
 msgid "Close application"
 msgstr "סגירת יישום"
 
-#: src/window.ui:1069
+#: src/window.ui:1093
 msgid "Import chat"
 msgstr "ייבוא שיחה"
 
-#: src/window.ui:1075
+#: src/window.ui:1099
 msgid "Clear chat"
 msgstr "ניקוי שיחה"
 
-#: src/window.ui:1087
+#: src/window.ui:1111
 msgid "New chat"
 msgstr "שיחה חדשה"
 
-#: src/window.ui:1093
+#: src/window.ui:1117
 msgid "Show shortcuts window"
 msgstr "הצגת חלון קיצורים"
 
-#: src/window.ui:1099
+#: src/window.ui:1123
 msgid "Manage models"
 msgstr "ניהול מודלים"
 
-#: src/window.ui:1105
+#: src/window.ui:1129
 msgid "Toggle sidebar"
 msgstr "הצגת/הסתרת סרגל צד"
 
-#: src/window.ui:1111
+#: src/window.ui:1135
 msgid "Rename chat"
 msgstr "שינוי שם שיחה"
 
-#: src/window.ui:1118
+#: src/window.ui:1142
 msgid "Editor"
 msgstr "עורך"
 
-#: src/window.ui:1122
+#: src/window.ui:1146
 msgid "Copy"
 msgstr "העתקה"
 
-#: src/window.ui:1128
+#: src/window.ui:1152
 msgid "Paste"
 msgstr "הדבקה"
 
-#: src/window.ui:1134
+#: src/window.ui:1158
 msgid "Insert new line"
 msgstr "הוספת שורה חדשה"
 
