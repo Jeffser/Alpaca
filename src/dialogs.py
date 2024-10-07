@@ -422,7 +422,7 @@ def attach_website(self, url):
 def run_script_response(self, dialog, task, script):
     if dialog.choose_finish(task) == "accept":
         logger.info('Running: \n{}'.format(script))
-        script += '; read -p "{}"'.format(_('Press Enter to close...'))
+        script += '; read -p "\n(Alpaca) {}"'.format(_('Press Enter to close...'))
         using_flatpak = shutil.which('flatpak-spawn')
 
         try:
