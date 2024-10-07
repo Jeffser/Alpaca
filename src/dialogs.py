@@ -7,7 +7,7 @@ import logging, requests, threading, shutil, subprocess
 from pytube import YouTube
 from html2text import html2text
 from gi.repository import Adw, Gtk
-from .internal import cache_dir, config_dir
+from .internal import cache_dir, data_dir
 
 logger = logging.getLogger(__name__)
 # CLEAR CHAT | WORKS
@@ -423,11 +423,22 @@ def run_script_response(self, dialog, task, script, language_name):
     if dialog.choose_finish(task) == "accept":
         logger.info('Running: \n{}'.format(script))
         if language_name == 'python3':
-            if os.path.isfile(os.path.join(cache_dir, 'temp_python_script.py')):
-                os.remove(os.path.join(cache_dir, 'temp_python_script.py'))
-            with open(os.path.join(cache_dir, 'temp_python_script.py'), 'w') as f:
+            if not os.path.isdir(os.path.join(data_dir, 'pyenv')):
+                os.mkdir(os.path.join(data_dir, 'pyenv'))
+            with open(os.path.join(data_dir, 'pyenv', 'main.py'), 'w') as f:
                 f.write(script)
-            script = 'python3 {}'.format(os.path.join(cache_dir, 'temp_python_script.py'))
+            script = [
+                'python3 -m venv "{}"'.format(os.path.join(data_dir, 'pyenv')),
+                '{} {}'.format(os.path.join(data_dir, 'pyenv', 'bin', 'python3').replace(' ', '\\ '), os.path.join(data_dir, 'pyenv', 'main.py').replace(' ', '\\ '))
+            ]
+            if os.path.isfile(os.path.join(data_dir, 'pyenv', 'requirements.txt')):
+                script.insert(1, '{} install -r {}'.format(os.path.join(data_dir, 'pyenv', 'bin', 'pip3'), os.path.join(data_dir, 'pyenv', 'requirements.txt')))
+            else:
+                with open(os.path.join(data_dir, 'pyenv', 'requirements.txt'), 'w') as f:
+                    f.write('')
+            print(script)
+            script = ';\n'.join(script)
+
         script += '; echo "\n🦙 {}"'.format(_('Script exited'))
         if shutil.which('flatpak-spawn'):
             script = 'echo "🦙 {}\n";'.format(_('The script is contained inside Flatpak')) + script
