@@ -428,11 +428,12 @@ def run_script_response(self, dialog, task, script, language_name):
             with open(os.path.join(data_dir, 'pyenv', 'main.py'), 'w') as f:
                 f.write(script)
             script = [
+                'echo "🐍 {}\n"'.format(_('Setting up Python environment...')),
                 'python3 -m venv "{}"'.format(os.path.join(data_dir, 'pyenv')),
                 '{} {}'.format(os.path.join(data_dir, 'pyenv', 'bin', 'python3').replace(' ', '\\ '), os.path.join(data_dir, 'pyenv', 'main.py').replace(' ', '\\ '))
             ]
             if os.path.isfile(os.path.join(data_dir, 'pyenv', 'requirements.txt')):
-                script.insert(1, '{} install -r {}'.format(os.path.join(data_dir, 'pyenv', 'bin', 'pip3'), os.path.join(data_dir, 'pyenv', 'requirements.txt')))
+                script.insert(1, '{} install -r {} | grep -v "already satisfied"; clear'.format(os.path.join(data_dir, 'pyenv', 'bin', 'pip3'), os.path.join(data_dir, 'pyenv', 'requirements.txt')))
             else:
                 with open(os.path.join(data_dir, 'pyenv', 'requirements.txt'), 'w') as f:
                     f.write('')
