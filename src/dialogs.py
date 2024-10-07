@@ -3,7 +3,7 @@
 Handles UI dialogs
 """
 import os
-import logging, requests, threading, shutil, subprocess
+import logging, requests, threading, shutil, subprocess, re
 from pytube import YouTube
 from html2text import html2text
 from gi.repository import Adw, Gtk
@@ -441,7 +441,7 @@ def run_script_response(self, dialog, task, script, language_name):
 
         script += '; echo "\n🦙 {}"'.format(_('Script exited'))
         if language_name == 'bash':
-            script = script.replace('sudo ', 'pkexec ')
+            script = re.sub(r'(?m)^\s*sudo', 'pkexec', script)
         if shutil.which('flatpak-spawn') and language_name == 'bash':
             sandbox = True
             try:
