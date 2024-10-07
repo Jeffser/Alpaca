@@ -485,7 +485,6 @@ class message(Gtk.Overlay):
         if text:
             self.content_children = []
             code_block_pattern = re.compile(r'```(\w*)\n(.*?)\n\s*```', re.DOTALL)
-            no_lang_code_block_pattern = re.compile(r'`\n(.*?)\n`', re.DOTALL)
             table_pattern = re.compile(r'((\r?\n){2}|^)([^\r\n]*\|[^\r\n]*(\r?\n)?)+(?=(\r?\n){2}|$)', re.MULTILINE)
             bold_pattern = re.compile(r'\*\*(.*?)\*\*') #"**text**"
             code_pattern = re.compile(r'`([^`\n]*?)`') #"`text`"
@@ -503,15 +502,6 @@ class message(Gtk.Overlay):
                 language = match.group(1)
                 code_text = match.group(2)
                 parts.append({"type": "code", "text": code_text, "language": 'python3' if language == 'python' else language})
-                pos = end
-            # Code blocks (No language)
-            for match in no_lang_code_block_pattern.finditer(self.text):
-                start, end = match.span()
-                if pos < start:
-                    normal_text = self.text[pos:start]
-                    parts.append({"type": "normal", "text": normal_text.strip()})
-                code_text = match.group(1)
-                parts.append({"type": "code", "text": code_text, "language": None})
                 pos = end
             # Tables
             for match in table_pattern.finditer(self.text):
