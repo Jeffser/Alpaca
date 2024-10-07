@@ -6,7 +6,7 @@ Handles the terminal widget
 import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Vte', '3.91')
-from gi.repository import Gtk, Vte, GLib, Pango, GLib
+from gi.repository import Gtk, Vte, GLib, Pango, GLib, Gdk
 
 class terminal(Vte.Terminal):
     __gtype_name__ = 'AlpacaTerminal'
@@ -30,4 +30,14 @@ class terminal(Vte.Terminal):
             None
         )
 
-        self.connect('child-exited', lambda *_: print('exited'))
+        key_controller = Gtk.EventControllerKey()
+        key_controller.connect("key-pressed", self.on_key_press)
+        self.add_controller(key_controller)
+
+    def on_key_press(self, controller, keyval, keycode, state):
+        ctrl = state & Gdk.ModifierType.CONTROL_MASK
+        shift = state & Gdk.ModifierType.SHIFT_MASK
+        if ctrl and keyval == Gdk.KEY_c:
+            self.copy_clipboard()
+            return True
+        return False
