@@ -108,9 +108,9 @@ class code_block(Gtk.Box):
         copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
         copy_button.connect("clicked", lambda *_: self.on_copy())
         title_box.append(copy_button)
-        if language_name.lower() == 'bash':
+        if language_name and language_name.lower() in ['bash', 'python3']:
             run_button = Gtk.Button(icon_name="execute-from-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Run Script"))
-            run_button.connect("clicked", lambda *_: self.run_script())
+            run_button.connect("clicked", lambda *_: self.run_script(language_name))
             title_box.append(run_button)
         self.append(title_box)
         self.append(Gtk.Separator())
@@ -126,11 +126,11 @@ class code_block(Gtk.Box):
         clipboard.set(text)
         window.show_toast(_("Code copied to the clipboard"), window.main_overlay)
 
-    def run_script(self):
+    def run_script(self, language_name):
         logger.debug("Running script")
         start = self.buffer.get_start_iter()
         end = self.buffer.get_end_iter()
-        dialogs.run_script(window, self.buffer.get_text(start, end, False))
+        dialogs.run_script(window, self.buffer.get_text(start, end, False), language_name)
 
 class attachment(Gtk.Button):
     __gtype_name__ = 'AlpacaAttachment'

@@ -419,9 +419,11 @@ def attach_website(self, url):
 
 # Run Script
 
-def run_script_response(self, dialog, task, script):
+def run_script_response(self, dialog, task, script, language_name):
     if dialog.choose_finish(task) == "accept":
         logger.info('Running: \n{}'.format(script))
+        if language_name == 'python3':
+            script = 'echo "{}" | python3'.format(script.replace('"', '\\"'))
         script += '; read -p "\n(Alpaca) {}"'.format(_('Press Enter to close...'))
         using_flatpak = shutil.which('flatpak-spawn')
 
@@ -460,7 +462,7 @@ def run_script_response(self, dialog, task, script):
         except Exception as e:
             logger.error(f'Error running script on {terminal_to_use}: {e}')
 
-def run_script(self, script:str):
+def run_script(self, script:str, language_name:str):
     dialog = Adw.AlertDialog(
         heading=_("Run Script"),
         body=_("Make sure you understand what this script does before running it, Alpaca is not responsible for any damages to your device or data"),
@@ -473,5 +475,5 @@ def run_script(self, script:str):
     dialog.choose(
         parent = self,
         cancellable = None,
-        callback = lambda dialog, task, script=script: run_script_response(self, dialog, task, script)
+        callback = lambda dialog, task, script=script, language_name=language_name: run_script_response(self, dialog, task, script, language_name)
     )
