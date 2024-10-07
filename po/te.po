@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-18 10:32-0600\n"
+"POT-Creation-Date: 2024-10-06 23:26-0600\n"
 "PO-Revision-Date: 2024-09-21 19:39+0530\n"
 "Last-Translator: Aryan Karamtoth <aryankmmiv@outlook.com>\n"
 "Language-Team: Telugu l10n Translation Team <ubuntu-l10n-te@lists.launchpad."
@@ -36,7 +36,7 @@ msgid "An Ollama client"
 msgstr "ఒక ఒల్లమా క్లయింట్"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:11
-#: data/com.jeffser.Alpaca.metainfo.xml.in:709
+#: data/com.jeffser.Alpaca.metainfo.xml.in:762
 msgid "Features"
 msgstr "ఫీచర్లు"
 
@@ -45,12 +45,12 @@ msgid "Built in Ollama instance"
 msgstr "ఒల్లామా ఉదాహరణలో నిర్మించబడింది"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:14
-#: data/com.jeffser.Alpaca.metainfo.xml.in:711
+#: data/com.jeffser.Alpaca.metainfo.xml.in:764
 msgid "Talk to multiple models in the same conversation"
 msgstr "ఒకే సంభాషణలో బహుళ మోడల్‌లతో మాట్లాడండి"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:15
-#: data/com.jeffser.Alpaca.metainfo.xml.in:712
+#: data/com.jeffser.Alpaca.metainfo.xml.in:765
 msgid "Pull and delete models from the app"
 msgstr "యాప్ నుండి మోడల్‌లను లాగండి మరియు తొలగించండి"
 
@@ -82,7 +82,7 @@ msgstr "ప్రాంప్ట్‌కు వెబ్‌సైట్ ను�
 msgid "PDF recognition"
 msgstr "PDF గుర్తింపు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:893
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:921
 msgid "Disclaimer"
 msgstr "నిరాకరణ"
 
@@ -120,481 +120,551 @@ msgid "Multiple models being downloaded"
 msgstr "బహుళ మోడల్‌లు డౌన్‌లోడ్ చేయబడుతున్నాయి"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:84
-#: data/com.jeffser.Alpaca.metainfo.xml.in:101
-#: data/com.jeffser.Alpaca.metainfo.xml.in:111
-#: data/com.jeffser.Alpaca.metainfo.xml.in:158
-#: data/com.jeffser.Alpaca.metainfo.xml.in:183
-#: data/com.jeffser.Alpaca.metainfo.xml.in:208
-#: data/com.jeffser.Alpaca.metainfo.xml.in:230
-#: data/com.jeffser.Alpaca.metainfo.xml.in:248
-#: data/com.jeffser.Alpaca.metainfo.xml.in:266
-#: data/com.jeffser.Alpaca.metainfo.xml.in:278
-#: data/com.jeffser.Alpaca.metainfo.xml.in:294
-msgid "Fixes"
-msgstr "పరిష్కారాలు"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:86
-msgid "Fixed spinner not hiding if the back end fails"
-msgstr "బ్యాక్ ఎండ్ విఫలమైతే దాక్కోని స్థిర స్పిన్నర్"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:87
-msgid "Fixed image recognition with local images"
-msgstr "స్థానిక చిత్రాలతో స్థిర చిత్రం గుర్తింపు"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:88
-msgid "Changed appearance of delete / stop model buttons"
-msgstr "డిలీట్ / స్టాప్ మోడల్ బటన్‌ల రూపాన్ని మార్చారు"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:89
-msgid "Fixed stop button crashing the app"
-msgstr "అనువర్తనాన్ని క్రాష్ చేస్తున్న స్థిర స్టాప్ బటన్"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:91
-#: data/com.jeffser.Alpaca.metainfo.xml.in:122
-#: data/com.jeffser.Alpaca.metainfo.xml.in:148
-#: data/com.jeffser.Alpaca.metainfo.xml.in:170
+#: data/com.jeffser.Alpaca.metainfo.xml.in:119
+#: data/com.jeffser.Alpaca.metainfo.xml.in:144
+#: data/com.jeffser.Alpaca.metainfo.xml.in:175
 #: data/com.jeffser.Alpaca.metainfo.xml.in:201
 #: data/com.jeffser.Alpaca.metainfo.xml.in:223
-#: data/com.jeffser.Alpaca.metainfo.xml.in:244
-#: data/com.jeffser.Alpaca.metainfo.xml.in:259
-#: data/com.jeffser.Alpaca.metainfo.xml.in:284
+#: data/com.jeffser.Alpaca.metainfo.xml.in:254
+#: data/com.jeffser.Alpaca.metainfo.xml.in:276
+#: data/com.jeffser.Alpaca.metainfo.xml.in:297
+#: data/com.jeffser.Alpaca.metainfo.xml.in:312
+#: data/com.jeffser.Alpaca.metainfo.xml.in:337
 msgid "New"
 msgstr "కొత్తది"
 
+#: data/com.jeffser.Alpaca.metainfo.xml.in:86
+msgid "Run bash and python scripts straight from chat"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:87
+msgid "Updated Ollama to 0.3.12"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:88
+msgid "New models!"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:90
+#: data/com.jeffser.Alpaca.metainfo.xml.in:101
+#: data/com.jeffser.Alpaca.metainfo.xml.in:110
+#: data/com.jeffser.Alpaca.metainfo.xml.in:127
+#: data/com.jeffser.Alpaca.metainfo.xml.in:137
+#: data/com.jeffser.Alpaca.metainfo.xml.in:154
+#: data/com.jeffser.Alpaca.metainfo.xml.in:164
+#: data/com.jeffser.Alpaca.metainfo.xml.in:211
+#: data/com.jeffser.Alpaca.metainfo.xml.in:236
+#: data/com.jeffser.Alpaca.metainfo.xml.in:261
+#: data/com.jeffser.Alpaca.metainfo.xml.in:283
+#: data/com.jeffser.Alpaca.metainfo.xml.in:301
+#: data/com.jeffser.Alpaca.metainfo.xml.in:319
+#: data/com.jeffser.Alpaca.metainfo.xml.in:331
+#: data/com.jeffser.Alpaca.metainfo.xml.in:347
+msgid "Fixes"
+msgstr "పరిష్కారాలు"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:92
+msgid "Fixed and made faster the launch sequence"
+msgstr ""
+
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
+msgid "Better detection of code blocks in messages"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:94
+msgid "Fixed app not loading in certain setups with Nvidia GPUs"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:103
+msgid ""
+"Fixed message notification sometimes crashing text rendering because of them "
+"running on different threads"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:112
+msgid "Fixed message generation sometimes failing"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:121
+msgid "Sidebar resizes with the window"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:122
+msgid "New welcome dialog"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:123
+msgid "Message search"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:124
+msgid "Updated Ollama to v0.3.11"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:125
+msgid "A lot of new models provided by Ollama repository"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:129
+msgid ""
+"Fixed text inside model manager when the accessibility option 'large text' "
+"is on"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:130
+msgid "Fixed image recognition on unsupported models"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:139
+msgid "Fixed spinner not hiding if the back end fails"
+msgstr "బ్యాక్ ఎండ్ విఫలమైతే దాక్కోని స్థిర స్పిన్నర్"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:140
+msgid "Fixed image recognition with local images"
+msgstr "స్థానిక చిత్రాలతో స్థిర చిత్రం గుర్తింపు"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:141
+msgid "Changed appearance of delete / stop model buttons"
+msgstr "డిలీట్ / స్టాప్ మోడల్ బటన్‌ల రూపాన్ని మార్చారు"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:142
+msgid "Fixed stop button crashing the app"
+msgstr "అనువర్తనాన్ని క్రాష్ చేస్తున్న స్థిర స్టాప్ బటన్"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:146
 msgid "Made sidebar resize a little when the window is smaller"
 msgstr "విండో చిన్నగా ఉన్నప్పుడు సైడ్‌బార్ పరిమాణాన్ని కొద్దిగా మార్చండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:94
+#: data/com.jeffser.Alpaca.metainfo.xml.in:147
 msgid "Instant launch"
 msgstr "తక్షణ ప్రయోగం"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:103
+#: data/com.jeffser.Alpaca.metainfo.xml.in:156
 msgid "Fixed error on first run (welcome dialog)"
 msgstr "మొదటి రన్‌లో పరిష్కరించబడిన లోపం (స్వాగతం డైలాగ్)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:104
+#: data/com.jeffser.Alpaca.metainfo.xml.in:157
 msgid "Fixed checker for Ollama instance (used on system packages)"
 msgstr "ఒల్లామా ఉదాహరణ కోసం స్థిర చెకర్ (సిస్టమ్ ప్యాకేజీలలో ఉపయోగించబడుతుంది)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:113
+#: data/com.jeffser.Alpaca.metainfo.xml.in:166
 msgid "Fixed 'clear chat' option"
 msgstr "స్థిరమైన 'క్లియర్ చాట్' ఎంపిక"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:114
+#: data/com.jeffser.Alpaca.metainfo.xml.in:167
 msgid "Fixed welcome dialog causing the local instance to not launch"
 msgstr "స్థిర స్వాగత డైలాగ్ స్థానిక ఉదాహరణ ప్రారంభించబడదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:115
+#: data/com.jeffser.Alpaca.metainfo.xml.in:168
 msgid "Fixed support for AMD GPUs"
 msgstr "AMD GPUలకు స్థిర మద్దతు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:124
+#: data/com.jeffser.Alpaca.metainfo.xml.in:177
 msgid "Model, message and chat systems have been rewritten"
 msgstr "మోడల్, సందేశం మరియు చాట్ సిస్టమ్‌లు తిరిగి వ్రాయబడ్డాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:125
+#: data/com.jeffser.Alpaca.metainfo.xml.in:178
 msgid "New models are available"
 msgstr "కొత్త మోడల్స్ అందుబాటులో ఉన్నాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:126
+#: data/com.jeffser.Alpaca.metainfo.xml.in:179
 msgid "Ollama updated to v0.3.9"
 msgstr "ఒల్లామా v0.3.9కి నవీకరించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:127
+#: data/com.jeffser.Alpaca.metainfo.xml.in:180
 msgid "Added support for multiple chat generations simultaneously"
 msgstr "బహుళ చాట్ తరాల కోసం ఏకకాలంలో మద్దతు జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:128
+#: data/com.jeffser.Alpaca.metainfo.xml.in:181
 msgid "Added experimental AMD GPU support"
 msgstr "ప్రయోగాత్మక AMD GPU మద్దతు జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:129
+#: data/com.jeffser.Alpaca.metainfo.xml.in:182
 msgid "Added message loading spinner and new message indicator to chat tab"
 msgstr "చాట్ ట్యాబ్‌కు సందేశం లోడింగ్ స్పిన్నర్ మరియు కొత్త సందేశ సూచిక జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:130
+#: data/com.jeffser.Alpaca.metainfo.xml.in:183
 msgid "Added animations"
 msgstr "యానిమేషన్లు జోడించబడ్డాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:131
+#: data/com.jeffser.Alpaca.metainfo.xml.in:184
 msgid "Changed model manager / model selector appearance"
 msgstr "మోడల్ మేనేజర్ / మోడల్ సెలెక్టర్ రూపాన్ని మార్చారు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:132
+#: data/com.jeffser.Alpaca.metainfo.xml.in:185
 msgid "Changed message appearance"
 msgstr "సందేశ రూపాన్ని మార్చారు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:133
+#: data/com.jeffser.Alpaca.metainfo.xml.in:186
 msgid "Added markdown and code blocks to user messages"
 msgstr "వినియోగదారు సందేశాలకు మార్క్‌డౌన్ మరియు కోడ్ బ్లాక్‌లు జోడించబడ్డాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:134
+#: data/com.jeffser.Alpaca.metainfo.xml.in:187
 msgid "Added loading dialog at launch so the app opens faster"
 msgstr "లాంచ్‌లో లోడ్ డైలాగ్ జోడించబడింది కాబట్టి యాప్ వేగంగా తెరవబడుతుంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:135
+#: data/com.jeffser.Alpaca.metainfo.xml.in:188
 msgid "Added warning when device is on 'battery saver' mode"
 msgstr "పరికరం 'బ్యాటరీ సేవర్' మోడ్‌లో ఉన్నప్పుడు హెచ్చరిక జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:136
+#: data/com.jeffser.Alpaca.metainfo.xml.in:189
 msgid "Added inactivity timer to integrated instance"
 msgstr "ఇంటిగ్రేటెడ్ ఉదాహరణకి నిష్క్రియాత్మక టైమర్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:139
+#: data/com.jeffser.Alpaca.metainfo.xml.in:192
 msgid "The chat is now scrolled to the bottom when it's changed"
 msgstr "చాట్ మార్చబడినప్పుడు ఇప్పుడు దిగువకు స్క్రోల్ చేయబడుతుంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:140
+#: data/com.jeffser.Alpaca.metainfo.xml.in:193
 msgid "Better handling of focus on messages"
 msgstr "సందేశాలపై దృష్టిని మెరుగ్గా నిర్వహించడం"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:141
+#: data/com.jeffser.Alpaca.metainfo.xml.in:194
 msgid "Better general performance on the app"
 msgstr "యాప్‌లో మెరుగైన సాధారణ పనితీరు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:150
+#: data/com.jeffser.Alpaca.metainfo.xml.in:203
 msgid "New duplicate chat option"
 msgstr "కొత్త డూప్లికేట్ చాట్ ఆప్షన్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:151
+#: data/com.jeffser.Alpaca.metainfo.xml.in:204
 msgid "Changed model selector appearance"
 msgstr "మోడల్ సెలెక్టర్ రూపాన్ని మార్చారు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:152
+#: data/com.jeffser.Alpaca.metainfo.xml.in:205
 msgid "Message entry is focused on launch and chat change"
 msgstr "సందేశం నమోదు ప్రారంభించడం మరియు చాట్ మార్పుపై దృష్టి కేంద్రీకరించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:153
+#: data/com.jeffser.Alpaca.metainfo.xml.in:206
 msgid "Message is focused when it's being edited"
 msgstr "సందేశం ఎడిట్ అవుతున్నప్పుడు ఫోకస్ చేయబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:154
+#: data/com.jeffser.Alpaca.metainfo.xml.in:207
 msgid "Added loading spinner when regenerating a message"
 msgstr "సందేశాన్ని పునరుత్పత్తి చేస్తున్నప్పుడు లోడింగ్ స్పిన్నర్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:155
+#: data/com.jeffser.Alpaca.metainfo.xml.in:208
 msgid "Added Ollama debugging to 'About Alpaca' dialog"
 msgstr "'అబౌట్ అల్పాకా' డైలాగ్‌కు ఒల్లామా డీబగ్గింగ్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:156
+#: data/com.jeffser.Alpaca.metainfo.xml.in:209
 msgid "Changed YouTube transcription dialog appearance and behavior"
 msgstr "YouTube ట్రాన్స్క్రిప్షన్ డైలాగ్ రూపాన్ని మరియు ప్రవర్తన మార్చబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:160
+#: data/com.jeffser.Alpaca.metainfo.xml.in:213
 msgid "CTRL+W and CTRL+Q stops local instance before closing the app"
 msgstr "CTRL+W మరియు CTRL+Q అనువర్తనాన్ని మూసివేయడానికి ముందు స్థానిక ఉదాహరణను ఆపివేస్తుంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:161
+#: data/com.jeffser.Alpaca.metainfo.xml.in:214
 msgid "Changed appearance of 'Open Model Manager' button on welcome screen"
 msgstr "స్వాగత స్క్రీన్‌పై 'ఓపెన్ మోడల్ మేనేజర్' బటన్ రూపాన్ని మార్చారు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:162
+#: data/com.jeffser.Alpaca.metainfo.xml.in:215
 msgid "Fixed message generation not working consistently"
 msgstr "స్థిర సందేశ ఉత్పత్తి స్థిరంగా పని చేయడం లేదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:163
+#: data/com.jeffser.Alpaca.metainfo.xml.in:216
 msgid "Fixed message edition not working consistently"
 msgstr "స్థిర సందేశ ఎడిషన్ స్థిరంగా పని చేయడం లేదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:172
+#: data/com.jeffser.Alpaca.metainfo.xml.in:225
 msgid "Model manager opens faster"
 msgstr "మోడల్ మేనేజర్ వేగంగా తెరవబడుతుంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:173
+#: data/com.jeffser.Alpaca.metainfo.xml.in:226
 msgid "Delete chat option in secondary menu"
 msgstr "సెకండరీ మెనూలో చాట్ ఎంపికను తొలగించండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:174
+#: data/com.jeffser.Alpaca.metainfo.xml.in:227
 msgid "New model selector popup"
 msgstr "కొత్త మోడల్ సెలెక్టర్ పాప్అప్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:175
+#: data/com.jeffser.Alpaca.metainfo.xml.in:228
 msgid "Standard shortcuts"
 msgstr "ప్రామాణిక సత్వరమార్గాలు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:176
+#: data/com.jeffser.Alpaca.metainfo.xml.in:229
 msgid "Model manager is navigable with keyboard"
 msgstr "మోడల్ మేనేజర్ కీబోర్డ్‌తో నావిగేట్ చేయవచ్చు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:177
+#: data/com.jeffser.Alpaca.metainfo.xml.in:230
 msgid "Changed sidebar collapsing behavior"
 msgstr "సైడ్‌బార్ కూలిపోయే ప్రవర్తన మార్చబడిందిసైడ్‌బార్ కూలిపోయే ప్రవర్తన మార్చబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:178
+#: data/com.jeffser.Alpaca.metainfo.xml.in:231
 msgid "Focus indicators on messages"
 msgstr "సందేశాలపై సూచికలను ఫోకస్ చేయండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:179
+#: data/com.jeffser.Alpaca.metainfo.xml.in:232
 msgid "Welcome screen"
 msgstr "స్వాగతం స్క్రీన్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:180
+#: data/com.jeffser.Alpaca.metainfo.xml.in:233
 msgid "Give message entry focus at launch"
 msgstr "లాంచ్ సమయంలో మెసేజ్ ఎంట్రీ ఫోకస్ ఇవ్వండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:181
+#: data/com.jeffser.Alpaca.metainfo.xml.in:234
 msgid "Generally better code"
 msgstr "సాధారణంగా మెరుగైన కోడ్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:185
+#: data/com.jeffser.Alpaca.metainfo.xml.in:238
 msgid "Better width for dialogs"
 msgstr "డైలాగ్‌ల కోసం మెరుగైన వెడల్పు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:186
+#: data/com.jeffser.Alpaca.metainfo.xml.in:239
 msgid "Better compatibility with screen readers"
 msgstr "స్క్రీన్ రీడర్‌లతో మెరుగైన అనుకూలత"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:187
+#: data/com.jeffser.Alpaca.metainfo.xml.in:240
 msgid "Fixed message regenerator"
 msgstr "స్థిర సందేశ రీజెనరేటర్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:188
+#: data/com.jeffser.Alpaca.metainfo.xml.in:241
 msgid "Removed 'Featured models' from welcome dialog"
 msgstr "స్వాగత డైలాగ్ నుండి 'ఫీచర్డ్ మోడల్స్' తీసివేయబడ్డాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:189
+#: data/com.jeffser.Alpaca.metainfo.xml.in:242
 msgid "Added default buttons to dialogs"
 msgstr "డైలాగ్‌లకు డిఫాల్ట్ బటన్‌లు జోడించబడ్డాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:190
+#: data/com.jeffser.Alpaca.metainfo.xml.in:243
 msgid "Fixed import / export of chats"
 msgstr "చాట్‌ల స్థిర దిగుమతి / ఎగుమతి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:191
+#: data/com.jeffser.Alpaca.metainfo.xml.in:244
 msgid "Changed Python2 title to Python on code blocks"
 msgstr "కోడ్ బ్లాక్‌లలో పైథాన్2 టైటిల్ పైథాన్‌గా మార్చబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:192
+#: data/com.jeffser.Alpaca.metainfo.xml.in:245
 msgid ""
 "Prevent regeneration of title when the user changed it to a custom title"
 msgstr "వినియోగదారు దానిని అనుకూల శీర్షికకు మార్చినప్పుడు శీర్షిక పునరుత్పత్తిని నిరోధించండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:193
+#: data/com.jeffser.Alpaca.metainfo.xml.in:246
 msgid "Show date on stopped messages"
 msgstr "ఆగిపోయిన సందేశాలలో తేదీని చూపు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:194
+#: data/com.jeffser.Alpaca.metainfo.xml.in:247
 msgid "Fix clear chat error"
 msgstr "క్లియర్ చాట్ లోపాన్ని పరిష్కరించండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:203
+#: data/com.jeffser.Alpaca.metainfo.xml.in:256
 msgid "Changed shortcuts to standards"
 msgstr "సత్వరమార్గాలను ప్రమాణాలకు మార్చారు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:204
+#: data/com.jeffser.Alpaca.metainfo.xml.in:257
 msgid "Moved 'Manage Models' button to primary menu"
 msgstr "'మోడళ్లను నిర్వహించు' బటన్ ప్రాథమిక మెనుకి తరలించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:205
-#: data/com.jeffser.Alpaca.metainfo.xml.in:227
+#: data/com.jeffser.Alpaca.metainfo.xml.in:258
+#: data/com.jeffser.Alpaca.metainfo.xml.in:280
 msgid "Stable support for GGUF model files"
 msgstr "GGUF మోడల్ ఫైల్‌లకు స్థిరమైన మద్దతు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:206
-#: data/com.jeffser.Alpaca.metainfo.xml.in:481
+#: data/com.jeffser.Alpaca.metainfo.xml.in:259
+#: data/com.jeffser.Alpaca.metainfo.xml.in:534
 msgid "General optimizations"
 msgstr "సాధారణ ఆప్టిమైజేషన్లు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:210
+#: data/com.jeffser.Alpaca.metainfo.xml.in:263
 msgid "Better handling of enter key (important for Japanese input)"
 msgstr "ఎంటర్ కీ యొక్క మెరుగైన నిర్వహణ (జపనీస్ ఇన్‌పుట్ కోసం ముఖ్యమైనది)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:211
+#: data/com.jeffser.Alpaca.metainfo.xml.in:264
 msgid "Removed sponsor dialog"
 msgstr "స్పాన్సర్ డైలాగ్ తీసివేయబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:212
+#: data/com.jeffser.Alpaca.metainfo.xml.in:265
 msgid "Added sponsor link in about dialog"
 msgstr "గురించి డైలాగ్‌లో స్పాన్సర్ లింక్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:213
+#: data/com.jeffser.Alpaca.metainfo.xml.in:266
 msgid "Changed window and elements dimensions"
 msgstr "విండో మరియు మూలకాల కొలతలు మార్చబడ్డాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:214
+#: data/com.jeffser.Alpaca.metainfo.xml.in:267
 msgid "Selected model changes when entering model manager"
 msgstr "మోడల్ మేనేజర్‌లోకి ప్రవేశించినప్పుడు ఎంచుకున్న మోడల్ మార్పులు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:215
+#: data/com.jeffser.Alpaca.metainfo.xml.in:268
 msgid "Better image tooltips"
 msgstr "మెరుగైన చిత్ర టూల్‌టిప్‌లు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:216
+#: data/com.jeffser.Alpaca.metainfo.xml.in:269
 msgid "GGUF Support"
 msgstr "GGUF మద్దతు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:225
+#: data/com.jeffser.Alpaca.metainfo.xml.in:278
 msgid "Regenerate any response, even if they are incomplete"
 msgstr "అవి అసంపూర్ణంగా ఉన్నప్పటికీ, ఏదైనా ప్రతిస్పందనను పునరుద్ధరించండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:226
+#: data/com.jeffser.Alpaca.metainfo.xml.in:279
 msgid "Support for pulling models by name:tag"
 msgstr "పేరు:ట్యాగ్ ద్వారా మోడల్‌లను లాగడానికి మద్దతు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:228
+#: data/com.jeffser.Alpaca.metainfo.xml.in:281
 msgid "Restored sidebar toggle button"
 msgstr "సైడ్‌బార్ టోగుల్ బటన్ పునరుద్ధరించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:232
+#: data/com.jeffser.Alpaca.metainfo.xml.in:285
 msgid "Reverted back to standard styles"
 msgstr "ప్రామాణిక శైలులకు తిరిగి మార్చబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:233
+#: data/com.jeffser.Alpaca.metainfo.xml.in:286
 msgid "Fixed generated titles having \"'S\" for some reason"
 msgstr "కొన్ని కారణాల వల్ల \"'S\" ని కలిగి ఉన్న స్థిర జనరేట్ శీర్షికలు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:234
+#: data/com.jeffser.Alpaca.metainfo.xml.in:287
 msgid "Changed min width for model dropdown"
 msgstr "మోడల్ డ్రాప్‌డౌన్ కోసం నిమి వెడల్పు మార్చబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:235
+#: data/com.jeffser.Alpaca.metainfo.xml.in:288
 msgid "Changed message entry shadow"
 msgstr "సందేశం ఎంట్రీ షాడో మార్చబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:236
+#: data/com.jeffser.Alpaca.metainfo.xml.in:289
 msgid "The last model used is now restored when the user changes chat"
 msgstr "వినియోగదారు చాట్‌ను మార్చినప్పుడు ఉపయోగించిన చివరి మోడల్ ఇప్పుడు పునరుద్ధరించబడుతుంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:237
+#: data/com.jeffser.Alpaca.metainfo.xml.in:290
 msgid "Better check for message finishing"
 msgstr "మెసేజ్ ఫినిషింగ్ కోసం చెక్ చేయడం మంచిది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:246
+#: data/com.jeffser.Alpaca.metainfo.xml.in:299
 msgid "Added table rendering (Thanks Nokse)"
 msgstr "పట్టిక రెండరింగ్ జోడించబడింది (ధన్యవాదాలు నోక్స్)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:250
+#: data/com.jeffser.Alpaca.metainfo.xml.in:303
 msgid "Made support dialog more common"
 msgstr "మద్దతు డైలాగ్‌ను మరింత సాధారణం చేసింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:251
+#: data/com.jeffser.Alpaca.metainfo.xml.in:304
 msgid ""
 "Dialog title on tag chooser when downloading models didn't display properly"
 msgstr "మోడల్‌లను డౌన్‌లోడ్ చేస్తున్నప్పుడు ట్యాగ్ ఎంపికలో డైలాగ్ శీర్షిక సరిగ్గా ప్రదర్శించబడలేదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:252
+#: data/com.jeffser.Alpaca.metainfo.xml.in:305
 msgid "Prevent chat generation from generating a title with multiple lines"
 msgstr "బహుళ లైన్‌లతో టైటిల్‌ను రూపొందించకుండా చాట్ జనరేషన్‌ను నిరోధించండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:261
+#: data/com.jeffser.Alpaca.metainfo.xml.in:314
 msgid "Bearer Token entry on connection error dialog"
 msgstr "కనెక్షన్ ఎర్రర్ డైలాగ్‌లో బేరర్ టోకెన్ నమోదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:262
+#: data/com.jeffser.Alpaca.metainfo.xml.in:315
 msgid "Small appearance changes"
 msgstr "చిన్న ప్రదర్శన మారుతుంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:263
+#: data/com.jeffser.Alpaca.metainfo.xml.in:316
 msgid "Compatibility with code blocks without explicit language"
 msgstr "స్పష్టమైన భాష లేకుండా కోడ్ బ్లాక్‌లతో అనుకూలత"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:264
+#: data/com.jeffser.Alpaca.metainfo.xml.in:317
 msgid "Rare, optional and dismissible support dialog"
 msgstr "అరుదైన, ఐచ్ఛికం మరియు తిరస్కరించదగిన మద్దతు డైలాగ్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:268
+#: data/com.jeffser.Alpaca.metainfo.xml.in:321
 msgid "Date format for Simplified Chinese translation"
 msgstr "సరళీకృత చైనీస్ అనువాదం కోసం తేదీ ఆకృతి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:269
+#: data/com.jeffser.Alpaca.metainfo.xml.in:322
 msgid "Bug with unsupported localizations"
 msgstr "మద్దతు లేని స్థానికీకరణలతో బగ్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:270
+#: data/com.jeffser.Alpaca.metainfo.xml.in:323
 msgid "Min height being too large to be used on mobile"
 msgstr "కనిష్ట ఎత్తు మొబైల్‌లో ఉపయోగించడానికి చాలా పెద్దది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:271
+#: data/com.jeffser.Alpaca.metainfo.xml.in:324
 msgid "Remote connection checker bug"
 msgstr "రిమోట్ కనెక్షన్ చెకర్ బగ్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:280
+#: data/com.jeffser.Alpaca.metainfo.xml.in:333
 msgid "Models with capital letters on their tag don't work"
 msgstr "ట్యాగ్‌పై పెద్ద అక్షరాలతో మోడల్‌లు పని చేయవు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:281
+#: data/com.jeffser.Alpaca.metainfo.xml.in:334
 msgid "Ollama fails to launch on some systems"
 msgstr "ఒల్లమా కొన్ని సిస్టమ్‌లలో ప్రారంభించడంలో విఫలమైంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:282
+#: data/com.jeffser.Alpaca.metainfo.xml.in:335
 msgid "YouTube transcripts are not being saved in the right TMP directory"
 msgstr "YouTube లిప్యంతరీకరణలు సరైన TMP డైరెక్టరీలో సేవ్ చేయబడవు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:286
+#: data/com.jeffser.Alpaca.metainfo.xml.in:339
 msgid "Debug messages are now shown on the 'About Alpaca' dialog"
 msgstr "డీబగ్ సందేశాలు ఇప్పుడు 'అబౌట్ అల్పాకా' డైలాగ్‌లో చూపబడతాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:287
+#: data/com.jeffser.Alpaca.metainfo.xml.in:340
 msgid "Updated Ollama to v0.3.0 (new models)"
 msgstr "ఒల్లామా v0.3.0కి నవీకరించబడింది (కొత్త మోడల్‌లు)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:296
+#: data/com.jeffser.Alpaca.metainfo.xml.in:349
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
 msgstr "వారి పేర్లలో '-' ఉన్న మోడల్‌లు సరిగ్గా పని చేయలేదు, ఇది ఇప్పుడు పరిష్కరించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:297
+#: data/com.jeffser.Alpaca.metainfo.xml.in:350
 msgid "Better connection check for Ollama"
 msgstr "ఒల్లామా కోసం మెరుగైన కనెక్షన్ చెక్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:304
+#: data/com.jeffser.Alpaca.metainfo.xml.in:357
 msgid "Stable Release"
 msgstr "స్థిరమైన విడుదల"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:305
+#: data/com.jeffser.Alpaca.metainfo.xml.in:358
 msgid ""
 "The new icon was made by Tobias Bernard over the Gnome Gitlab, thanks for "
 "the great icon!"
 msgstr "కొత్త చిహ్నాన్ని గ్నోమ్ గిట్‌లాబ్‌పై టోబియాస్ బెర్నార్డ్ రూపొందించారు, గొప్ప చిహ్నానికి ధన్యవాదాలు!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:306
+#: data/com.jeffser.Alpaca.metainfo.xml.in:359
 msgid "Features and fixes"
 msgstr "ఫీచర్లు మరియు పరిష్కారాలు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:308
+#: data/com.jeffser.Alpaca.metainfo.xml.in:361
 msgid "Updated Ollama instance to 0.2.8"
 msgstr "ఒల్లామా ఉదాహరణ 0.2.8కి నవీకరించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:309
+#: data/com.jeffser.Alpaca.metainfo.xml.in:362
 msgid "Better model selector"
 msgstr "మెరుగైన మోడల్ సెలెక్టర్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:310
+#: data/com.jeffser.Alpaca.metainfo.xml.in:363
 msgid "Model manager redesign"
 msgstr "మోడల్ మేనేజర్ పునఃరూపకల్పన"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:311
+#: data/com.jeffser.Alpaca.metainfo.xml.in:364
 msgid "Better tag selector when pulling a model"
 msgstr "మోడల్‌ను లాగేటప్పుడు మంచి ట్యాగ్ సెలెక్టర్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:312
+#: data/com.jeffser.Alpaca.metainfo.xml.in:365
 msgid "Model search"
 msgstr "మోడల్ శోధన"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:313
+#: data/com.jeffser.Alpaca.metainfo.xml.in:366
 msgid "Added support for bearer tokens on remote instances"
 msgstr "రిమోట్ సందర్భాలలో బేరర్ టోకెన్‌లకు మద్దతు జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:314
+#: data/com.jeffser.Alpaca.metainfo.xml.in:367
 msgid "Preferences dialog redesign"
 msgstr "ప్రాధాన్యతల డైలాగ్ పునఃరూపకల్పన"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:315
+#: data/com.jeffser.Alpaca.metainfo.xml.in:368
 msgid "Added context menus to interact with a chat"
 msgstr "చాట్‌తో పరస్పర చర్య చేయడానికి సందర్భ మెనులు జోడించబడ్డాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:316
+#: data/com.jeffser.Alpaca.metainfo.xml.in:369
 msgid "Redesigned primary and secondary menus"
 msgstr "పునఃరూపకల్పన చేయబడిన ప్రాథమిక మరియు ద్వితీయ మెనూలు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:317
+#: data/com.jeffser.Alpaca.metainfo.xml.in:370
 msgid ""
 "YouTube integration: Paste the URL of a video with a transcript and it will "
 "be added to the prompt"
 msgstr ""
 "YouTube ఇంటిగ్రేషన్: వీడియో యొక్క URLని ట్రాన్స్క్రిప్ట్తో అతికించండి మరియు అది ప్రాంప్ట్కు జోడించబడుతుంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:318
+#: data/com.jeffser.Alpaca.metainfo.xml.in:371
 msgid ""
 "Website integration (Experimental): Extract the text from the body of a "
 "website by adding it's URL to the prompt"
@@ -602,181 +672,181 @@ msgstr ""
 "వెబ్‌సైట్ ఇంటిగ్రేషన్ (ప్రయోగాత్మకం): ప్రాంప్ట్‌కు దాని URLని జోడించడం ద్వారా వెబ్‌సైట్ బాడీ నుండి టెక్స్ట్‌ను "
 "సంగ్రహించండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:319
+#: data/com.jeffser.Alpaca.metainfo.xml.in:372
 msgid "Chat title generation"
 msgstr "చాట్ టైటిల్ జనరేషన్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:320
+#: data/com.jeffser.Alpaca.metainfo.xml.in:373
 msgid "Auto resizing of message entry"
 msgstr "సందేశం నమోదు యొక్క స్వీయ పునఃపరిమాణం"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:321
+#: data/com.jeffser.Alpaca.metainfo.xml.in:374
 msgid "Chat notifications"
 msgstr "చాట్ నోటిఫికేషన్‌లు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:322
+#: data/com.jeffser.Alpaca.metainfo.xml.in:375
 msgid "Added indicator when an image is missing"
 msgstr "చిత్రం లేనప్పుడు సూచిక జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:323
+#: data/com.jeffser.Alpaca.metainfo.xml.in:376
 msgid "Auto rearrange the order of chats when a message is received"
 msgstr "సందేశం వచ్చినప్పుడు చాట్‌ల క్రమాన్ని స్వయంచాలకంగా క్రమాన్ని మార్చండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:324
+#: data/com.jeffser.Alpaca.metainfo.xml.in:377
 msgid "Redesigned file preview dialog"
 msgstr "పునఃరూపకల్పన చేయబడిన ఫైల్ ప్రివ్యూ డైలాగ్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:325
+#: data/com.jeffser.Alpaca.metainfo.xml.in:378
 msgid "Credited new contributors"
 msgstr "కొత్త కంట్రిబ్యూటర్లకు ఘనత అందించారు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:326
+#: data/com.jeffser.Alpaca.metainfo.xml.in:379
 msgid "Better stability and optimization"
 msgstr "మెరుగైన స్థిరత్వం మరియు ఆప్టిమైజేషన్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:327
+#: data/com.jeffser.Alpaca.metainfo.xml.in:380
 msgid "Edit messages to change the context of a conversation"
 msgstr "సంభాషణ యొక్క సందర్భాన్ని మార్చడానికి సందేశాలను సవరించండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:328
+#: data/com.jeffser.Alpaca.metainfo.xml.in:381
 msgid "Added disclaimers when pulling models"
 msgstr "మోడల్‌లను లాగుతున్నప్పుడు నిరాకరణలు జోడించబడ్డాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:329
+#: data/com.jeffser.Alpaca.metainfo.xml.in:382
 msgid "Preview files before sending a message"
 msgstr "సందేశాన్ని పంపే ముందు ఫైల్‌లను ప్రివ్యూ చేయండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:330
+#: data/com.jeffser.Alpaca.metainfo.xml.in:383
 msgid "Better format for date and time on messages"
 msgstr "సందేశాలలో తేదీ మరియు సమయానికి మెరుగైన ఆకృతి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:331
+#: data/com.jeffser.Alpaca.metainfo.xml.in:384
 msgid "Error and debug logging on terminal"
 msgstr "టెర్మినల్‌లో లాగిన్ చేయడంలో లోపం మరియు డీబగ్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:332
+#: data/com.jeffser.Alpaca.metainfo.xml.in:385
 msgid "Auto-hiding sidebar button"
 msgstr "స్వయంచాలకంగా దాచే సైడ్‌బార్ బటన్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:333
+#: data/com.jeffser.Alpaca.metainfo.xml.in:386
 msgid "Various UI tweaks"
 msgstr "వివిధ UI ట్వీక్‌లు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:335
+#: data/com.jeffser.Alpaca.metainfo.xml.in:388
 msgid "New Models"
 msgstr "కొత్త మోడల్స్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:337
+#: data/com.jeffser.Alpaca.metainfo.xml.in:390
 msgid "Gemma2"
 msgstr "Gemma2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:338
+#: data/com.jeffser.Alpaca.metainfo.xml.in:391
 msgid "GLM4"
 msgstr "GLM4"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:339
+#: data/com.jeffser.Alpaca.metainfo.xml.in:392
 msgid "Codegeex4"
 msgstr "Codegeex4"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:340
+#: data/com.jeffser.Alpaca.metainfo.xml.in:393
 msgid "InternLM2"
 msgstr "InternLM2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:341
+#: data/com.jeffser.Alpaca.metainfo.xml.in:394
 msgid "Llama3-groq-tool-use"
 msgstr "Llama3-groq-tool-use"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:342
+#: data/com.jeffser.Alpaca.metainfo.xml.in:395
 msgid "Mathstral"
 msgstr "Mathstral"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:343
+#: data/com.jeffser.Alpaca.metainfo.xml.in:396
 msgid "Mistral-nemo"
 msgstr "Mistral-nemo"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:344
+#: data/com.jeffser.Alpaca.metainfo.xml.in:397
 msgid "Firefunction-v2"
 msgstr "Firefunction-v2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:345
+#: data/com.jeffser.Alpaca.metainfo.xml.in:398
 msgid "Nuextract"
 msgstr "Nuextract"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:347
+#: data/com.jeffser.Alpaca.metainfo.xml.in:400
 msgid "Translations"
 msgstr "అనువాదాలు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:348
+#: data/com.jeffser.Alpaca.metainfo.xml.in:401
 msgid ""
 "These are all the available translations on 1.0.0, thanks to all the "
 "contributors!"
 msgstr "ఇవన్నీ 1.0.0లో అందుబాటులో ఉన్న అనువాదాలు, సహకారులందరికీ ధన్యవాదాలు!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:350
+#: data/com.jeffser.Alpaca.metainfo.xml.in:403
 msgid "Russian: Alex K"
 msgstr "రష్యన్: Alex K"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:351
+#: data/com.jeffser.Alpaca.metainfo.xml.in:404
 msgid "Spanish: Jeffser"
 msgstr "స్పానిష్: Jeffser"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:352
+#: data/com.jeffser.Alpaca.metainfo.xml.in:405
 msgid "Brazilian Portuguese: Daimar Stein"
 msgstr "బ్రెజిలియన్ పోర్చుగీస్: Daimar Stein"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:353
+#: data/com.jeffser.Alpaca.metainfo.xml.in:406
 msgid "French: Louis Chauvet-Villaret"
 msgstr "ఫ్రెంచ్: Louis Chauvet-Villaret"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:354
+#: data/com.jeffser.Alpaca.metainfo.xml.in:407
 msgid "Norwegian: CounterFlow64"
 msgstr "నార్వేజియన్: CounterFlow64"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:355
+#: data/com.jeffser.Alpaca.metainfo.xml.in:408
 msgid "Bengali: Aritra Saha"
 msgstr "బెంగాలీ: Aritra Saha"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:356
+#: data/com.jeffser.Alpaca.metainfo.xml.in:409
 msgid "Simplified Chinese: Yuehao Sui"
 msgstr "సరళీకృత చైనీస్: Yuehao Sui"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:363
-#: data/com.jeffser.Alpaca.metainfo.xml.in:412
+#: data/com.jeffser.Alpaca.metainfo.xml.in:416
+#: data/com.jeffser.Alpaca.metainfo.xml.in:465
 msgid "Fix"
 msgstr "పరిష్కరించండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:364
+#: data/com.jeffser.Alpaca.metainfo.xml.in:417
 msgid ""
 "Removed DOCX compatibility temporally due to error with python-lxml "
 "dependency"
 msgstr "python-lxml డిపెండెన్సీతో లోపం కారణంగా తాత్కాలికంగా DOCX అనుకూలత తీసివేయబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:370
-#: data/com.jeffser.Alpaca.metainfo.xml.in:400
-#: data/com.jeffser.Alpaca.metainfo.xml.in:421
-#: data/com.jeffser.Alpaca.metainfo.xml.in:626
-#: data/com.jeffser.Alpaca.metainfo.xml.in:683
+#: data/com.jeffser.Alpaca.metainfo.xml.in:423
+#: data/com.jeffser.Alpaca.metainfo.xml.in:453
+#: data/com.jeffser.Alpaca.metainfo.xml.in:474
+#: data/com.jeffser.Alpaca.metainfo.xml.in:679
+#: data/com.jeffser.Alpaca.metainfo.xml.in:736
 msgid "Big Update"
 msgstr "పెద్ద నవీకరణ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:372
+#: data/com.jeffser.Alpaca.metainfo.xml.in:425
 msgid "Added compatibility for PDF"
 msgstr "PDF కోసం అనుకూలత జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:373
+#: data/com.jeffser.Alpaca.metainfo.xml.in:426
 msgid "Added compatibility for DOCX"
 msgstr "DOCX కోసం అనుకూలత జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:374
+#: data/com.jeffser.Alpaca.metainfo.xml.in:427
 msgid "Merged 'file attachment' menu into one button"
 msgstr "'ఫైల్ అటాచ్‌మెంట్' మెను ఒక బటన్‌లో విలీనం చేయబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:381
-#: data/com.jeffser.Alpaca.metainfo.xml.in:574
+#: data/com.jeffser.Alpaca.metainfo.xml.in:434
+#: data/com.jeffser.Alpaca.metainfo.xml.in:627
 msgid "Quick Fix"
 msgstr "త్వరిత పరిష్కారం"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:382
+#: data/com.jeffser.Alpaca.metainfo.xml.in:435
 msgid ""
 "There were some errors when transitioning from the old version of chats to "
 "the new version. I apologize if this caused any corruption in your chat "
@@ -785,340 +855,340 @@ msgstr ""
 "చాట్‌ల పాత వెర్షన్ నుండి కొత్త వెర్షన్‌కి మారుతున్నప్పుడు కొన్ని లోపాలు ఉన్నాయి. దీని వల్ల మీ చాట్ హిస్టరీలో ఏదైనా "
 "అవినీతి జరిగితే నేను క్షమాపణలు కోరుతున్నాను. అటువంటి పరివర్తన అవసరమయ్యే ఏకైక సమయం ఇది."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:388
-#: data/com.jeffser.Alpaca.metainfo.xml.in:540
+#: data/com.jeffser.Alpaca.metainfo.xml.in:441
+#: data/com.jeffser.Alpaca.metainfo.xml.in:593
 msgid "Huge Update"
 msgstr "భారీ నవీకరణ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:390
+#: data/com.jeffser.Alpaca.metainfo.xml.in:443
 msgid "Added: Support for plain text files"
 msgstr "జోడించబడింది: సాదా టెక్స్ట్ ఫైల్‌లకు మద్దతు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:391
+#: data/com.jeffser.Alpaca.metainfo.xml.in:444
 msgid "Added: New backend system for storing messages"
 msgstr "జోడించబడింది: సందేశాలను నిల్వ చేయడానికి కొత్త బ్యాకెండ్ సిస్టమ్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:392
+#: data/com.jeffser.Alpaca.metainfo.xml.in:445
 msgid "Added: Support for changing Ollama's overrides"
 msgstr "జోడించబడింది: ఒల్లామా యొక్క ఓవర్‌రైడ్‌లను మార్చడానికి మద్దతు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:393
+#: data/com.jeffser.Alpaca.metainfo.xml.in:446
 msgid "General Optimization"
 msgstr "సాధారణ ఆప్టిమైజేషన్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:402
+#: data/com.jeffser.Alpaca.metainfo.xml.in:455
 msgid "Added: Support for GGUF models (experimental)"
 msgstr "జోడించబడింది: GGUF మోడల్‌లకు మద్దతు (ప్రయోగాత్మకం)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:403
+#: data/com.jeffser.Alpaca.metainfo.xml.in:456
 msgid "Added: Support for customization and creation of models"
 msgstr "జోడించబడింది: అనుకూలీకరణ మరియు నమూనాల సృష్టికి మద్దతు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:404
+#: data/com.jeffser.Alpaca.metainfo.xml.in:457
 msgid "Fixed: Icons don't appear on non Gnome systems"
 msgstr "పరిష్కరించబడింది: గ్నోమ్ కాని సిస్టమ్‌లలో చిహ్నాలు కనిపించవు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:405
+#: data/com.jeffser.Alpaca.metainfo.xml.in:458
 msgid "Update Ollama to v0.1.39"
 msgstr "ఒల్లామాను v0.1.39కి నవీకరించండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:414
+#: data/com.jeffser.Alpaca.metainfo.xml.in:467
 msgid ""
 "Fixed: app didn't open if models tweaks wasn't present in the config files"
 msgstr "పరిష్కరించబడింది: కాన్ఫిగర్ ఫైల్‌లలో మోడల్స్ ట్వీక్‌లు లేకుంటే యాప్ తెరవబడదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:423
+#: data/com.jeffser.Alpaca.metainfo.xml.in:476
 msgid "Changed multiple icons (paper airplane for the send button)"
 msgstr "బహుళ చిహ్నాలు మార్చబడ్డాయి (పంపు బటన్ కోసం కాగితం విమానం)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:424
+#: data/com.jeffser.Alpaca.metainfo.xml.in:477
 msgid "Combined export / import chat buttons into a menu"
 msgstr "మెనులో కలిపి ఎగుమతి / దిగుమతి చాట్ బటన్లు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:425
+#: data/com.jeffser.Alpaca.metainfo.xml.in:478
 msgid "Added 'model tweaks' (temperature, seed, keep_alive)"
 msgstr "'మోడల్ ట్వీక్స్' జోడించబడింది (ఉష్ణోగ్రత, సీడ్, కీప్_లైవ్)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:426
+#: data/com.jeffser.Alpaca.metainfo.xml.in:479
 msgid "Fixed send / stop button"
 msgstr "సెండ్ / స్టాప్ బటన్ పరిష్కరించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:427
+#: data/com.jeffser.Alpaca.metainfo.xml.in:480
 msgid "Fixed app not checking if remote connection works when starting"
 msgstr "ప్రారంభించినప్పుడు రిమోట్ కనెక్షన్ పనిచేస్తుందో లేదో తనిఖీ చేయని స్థిరమైన యాప్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:434
+#: data/com.jeffser.Alpaca.metainfo.xml.in:487
 msgid "Daily Update"
 msgstr "రోజువారీ నవీకరణ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:436
+#: data/com.jeffser.Alpaca.metainfo.xml.in:489
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
 msgstr "చాట్ పేరుకు టెక్స్ట్ ఎలిప్సిస్ జోడించబడింది కాబట్టి ఇది బటన్ వెడల్పును మార్చదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:437
+#: data/com.jeffser.Alpaca.metainfo.xml.in:490
 msgid "New shortcut for creating a chat (CTRL+N)"
 msgstr "చాట్‌ని సృష్టించడానికి కొత్త సత్వరమార్గం (CTRL+N)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:438
+#: data/com.jeffser.Alpaca.metainfo.xml.in:491
 msgid "New message entry design"
 msgstr "కొత్త మెసేజ్ ఎంట్రీ డిజైన్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:439
+#: data/com.jeffser.Alpaca.metainfo.xml.in:492
 msgid "Fixed: Can't rename the same chat multiple times"
 msgstr "పరిష్కరించబడింది: ఒకే చాట్‌ని అనేకసార్లు పేరు మార్చడం సాధ్యం కాదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:446
+#: data/com.jeffser.Alpaca.metainfo.xml.in:499
 msgid "The fix"
 msgstr "దిద్దుబాటు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:448
+#: data/com.jeffser.Alpaca.metainfo.xml.in:501
 msgid ""
 "Fixed: Ollama instance keeps running on the background even when it is "
 "disabled"
 msgstr "పరిష్కరించబడింది: ఒల్లామా ఉదాహరణ నిలిపివేయబడినప్పుడు కూడా నేపథ్యంలో నడుస్తూనే ఉంటుంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:449
+#: data/com.jeffser.Alpaca.metainfo.xml.in:502
 msgid "Fixed: Can't pull models on the integrated instance"
 msgstr "పరిష్కరించబడింది: ఇంటిగ్రేటెడ్ ఇన్‌స్టాన్స్‌లో మోడల్‌లను లాగడం సాధ్యం కాదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:456
+#: data/com.jeffser.Alpaca.metainfo.xml.in:509
 msgid "Quick tweaks"
 msgstr "త్వరిత సర్దుబాటులు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:458
+#: data/com.jeffser.Alpaca.metainfo.xml.in:511
 msgid "Added progress bar to models that are being pulled"
 msgstr "లాగబడుతున్న మోడల్‌లకు ప్రోగ్రెస్ బార్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:459
+#: data/com.jeffser.Alpaca.metainfo.xml.in:512
 msgid "Added size to tags when pulling a model"
 msgstr "మోడల్‌ను లాగుతున్నప్పుడు ట్యాగ్‌లకు పరిమాణం జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:460
+#: data/com.jeffser.Alpaca.metainfo.xml.in:513
 msgid "General optimizations on the background"
 msgstr "నేపథ్యంలో సాధారణ ఆప్టిమైజేషన్లు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:467
+#: data/com.jeffser.Alpaca.metainfo.xml.in:520
 msgid "Quick fixes"
 msgstr "త్వరిత పరిష్కారాలు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:469
+#: data/com.jeffser.Alpaca.metainfo.xml.in:522
 msgid "Fixed: Scroll when message is received"
 msgstr "పరిష్కరించబడింది: సందేశం వచ్చినప్పుడు స్క్రోల్ చేయండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:470
+#: data/com.jeffser.Alpaca.metainfo.xml.in:523
 msgid "Fixed: Content doesn't change when creating a new chat"
 msgstr "పరిష్కరించబడింది: కొత్త చాట్‌ను సృష్టించేటప్పుడు కంటెంట్ మారదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:471
+#: data/com.jeffser.Alpaca.metainfo.xml.in:524
 msgid "Added 'Featured Models' page on welcome dialog"
 msgstr "స్వాగత డైలాగ్‌లో 'ఫీచర్డ్ మోడల్స్' పేజీ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:478
+#: data/com.jeffser.Alpaca.metainfo.xml.in:531
 msgid "Nice Update"
 msgstr "నైస్ అప్‌డేట్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:480
+#: data/com.jeffser.Alpaca.metainfo.xml.in:533
 msgid "UI tweaks (Thanks Nokse22)"
 msgstr "UI ట్వీక్స్ (ధన్యవాదాలు Nokse22)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:482
+#: data/com.jeffser.Alpaca.metainfo.xml.in:535
 msgid "Metadata fixes"
 msgstr "మెటాడేటా పరిష్కారాలు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:489
+#: data/com.jeffser.Alpaca.metainfo.xml.in:542
 msgid "Quick fix"
 msgstr "త్వరిత పరిష్కారం"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:491
+#: data/com.jeffser.Alpaca.metainfo.xml.in:544
 msgid "Updated Spanish translation"
 msgstr "అప్‌డేట్ చేసిన స్పానిష్ అనువాదం"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:492
+#: data/com.jeffser.Alpaca.metainfo.xml.in:545
 msgid "Added compatibility for PNG"
 msgstr "PNG కోసం అనుకూలత జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:499
+#: data/com.jeffser.Alpaca.metainfo.xml.in:552
 msgid "New Update"
 msgstr "కొత్త అప్‌డేట్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:501
+#: data/com.jeffser.Alpaca.metainfo.xml.in:554
 msgid "Updated model list"
 msgstr "మోడల్ జాబితా నవీకరించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:502
+#: data/com.jeffser.Alpaca.metainfo.xml.in:555
 msgid "Added image recognition to more models"
 msgstr "మరిన్ని మోడల్‌లకు ఇమేజ్ రికగ్నిషన్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:503
+#: data/com.jeffser.Alpaca.metainfo.xml.in:556
 msgid "Added Brazilian Portuguese translation (Thanks Daimaar Stein)"
 msgstr "బ్రెజిలియన్ పోర్చుగీస్ అనువాదం జోడించబడింది (ధన్యవాదాలు డైమార్ స్టెయిన్)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:504
+#: data/com.jeffser.Alpaca.metainfo.xml.in:557
 msgid "Refined the general UI (Thanks Nokse22)"
 msgstr "సాధారణ UIని మెరుగుపరిచారు (ధన్యవాదాలు Nokse22)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:505
+#: data/com.jeffser.Alpaca.metainfo.xml.in:558
 msgid "Added 'delete message' feature"
 msgstr "'డిలీట్ మెసేజ్' ఫీచర్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:506
+#: data/com.jeffser.Alpaca.metainfo.xml.in:559
 msgid ""
 "Added metadata so that software distributors know that the app is compatible "
 "with mobile"
 msgstr "మెటాడేటా జోడించబడింది, తద్వారా యాప్ మొబైల్‌కి అనుకూలంగా ఉందని సాఫ్ట్‌వేర్ పంపిణీదారులకు తెలుసు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:507
+#: data/com.jeffser.Alpaca.metainfo.xml.in:560
 msgid ""
 "Changed 'send' shortcut to just the return/enter key (to add a new line use "
 "shift+return)"
 msgstr ""
 "'పంపు' సత్వరమార్గాన్ని కేవలం రిటర్న్/ఎంటర్ కీకి మార్చారు (కొత్త లైన్‌ని జోడించడానికి షిఫ్ట్+రిటర్న్ ఉపయోగించండి)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:514
+#: data/com.jeffser.Alpaca.metainfo.xml.in:567
 msgid "Bug Fixes"
 msgstr "బగ్ పరిష్కారాలు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:516
+#: data/com.jeffser.Alpaca.metainfo.xml.in:569
 msgid "Fixed: Minor spelling mistake"
 msgstr "పరిష్కరించబడింది: చిన్న స్పెల్లింగ్ తప్పు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:517
+#: data/com.jeffser.Alpaca.metainfo.xml.in:570
 msgid "Added 'mobile' as a supported form factor"
 msgstr "మద్దతు ఉన్న ఫారమ్ ఫ్యాక్టర్‌గా 'మొబైల్' జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:518
+#: data/com.jeffser.Alpaca.metainfo.xml.in:571
 msgid "Fixed: 'Connection Error' dialog not working properly"
 msgstr "పరిష్కరించబడింది: 'కనెక్షన్ ఎర్రర్' డైలాగ్ సరిగ్గా పని చేయడం లేదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:519
+#: data/com.jeffser.Alpaca.metainfo.xml.in:572
 msgid "Fixed: App might freeze randomly on startup"
 msgstr "పరిష్కరించబడింది: యాప్ స్టార్టప్‌లో యాదృచ్ఛికంగా స్తంభింపజేయవచ్చు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:520
+#: data/com.jeffser.Alpaca.metainfo.xml.in:573
 msgid "Changed 'chats' label on sidebar for 'Alpaca'"
 msgstr "'అల్పాకా' కోసం సైడ్‌బార్‌లో 'చాట్స్' లేబుల్ మార్చబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:527
+#: data/com.jeffser.Alpaca.metainfo.xml.in:580
 msgid "Cool Update"
 msgstr "కూల్ అప్‌డేట్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:529
+#: data/com.jeffser.Alpaca.metainfo.xml.in:582
 msgid "Better design for chat window"
 msgstr "చాట్ విండో కోసం మెరుగైన డిజైన్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:530
+#: data/com.jeffser.Alpaca.metainfo.xml.in:583
 msgid "Better design for chat sidebar"
 msgstr "చాట్ సైడ్‌బార్ కోసం మెరుగైన డిజైన్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:531
+#: data/com.jeffser.Alpaca.metainfo.xml.in:584
 msgid "Fixed remote connections"
 msgstr "స్థిర రిమోట్ కనెక్షన్లు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:532
+#: data/com.jeffser.Alpaca.metainfo.xml.in:585
 msgid "Fixed Ollama restarting in loop"
 msgstr "స్థిర ఒల్లామా లూప్‌లో పునఃప్రారంభించబడుతోంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:533
+#: data/com.jeffser.Alpaca.metainfo.xml.in:586
 msgid "Other cool backend stuff"
 msgstr "ఇతర అద్భుతమైన బ్యాకెండ్ అంశాలు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:542
+#: data/com.jeffser.Alpaca.metainfo.xml.in:595
 msgid "Added Ollama as part of Alpaca, Ollama will run in a sandbox"
 msgstr "అల్పాకాలో భాగంగా ఒల్లామా జోడించబడింది, ఒల్లామా శాండ్‌బాక్స్‌లో నడుస్తుంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:543
+#: data/com.jeffser.Alpaca.metainfo.xml.in:596
 msgid "Added option to connect to remote instances (how it worked before)"
 msgstr "రిమోట్ ఉదంతాలకు కనెక్ట్ చేయడానికి ఎంపిక జోడించబడింది (ఇది ముందు ఎలా పనిచేసింది)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:544
+#: data/com.jeffser.Alpaca.metainfo.xml.in:597
 msgid "Added option to import and export chats"
 msgstr "చాట్‌లను దిగుమతి మరియు ఎగుమతి చేయడానికి ఎంపిక జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:545
+#: data/com.jeffser.Alpaca.metainfo.xml.in:598
 msgid "Added option to run Alpaca with Ollama in the background"
 msgstr "నేపథ్యంలో ఒల్లామాతో అల్పాకాను అమలు చేయడానికి ఎంపిక జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:546
+#: data/com.jeffser.Alpaca.metainfo.xml.in:599
 msgid "Added preferences dialog"
 msgstr "ప్రాధాన్యతల డైలాగ్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:547
+#: data/com.jeffser.Alpaca.metainfo.xml.in:600
 msgid "Changed the welcome dialog"
 msgstr "స్వాగత డైలాగ్ మార్చారు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:549
-#: data/com.jeffser.Alpaca.metainfo.xml.in:566
-#: data/com.jeffser.Alpaca.metainfo.xml.in:578
-#: data/com.jeffser.Alpaca.metainfo.xml.in:597
-#: data/com.jeffser.Alpaca.metainfo.xml.in:618
-#: data/com.jeffser.Alpaca.metainfo.xml.in:634
+#: data/com.jeffser.Alpaca.metainfo.xml.in:602
+#: data/com.jeffser.Alpaca.metainfo.xml.in:619
+#: data/com.jeffser.Alpaca.metainfo.xml.in:631
 #: data/com.jeffser.Alpaca.metainfo.xml.in:650
-#: data/com.jeffser.Alpaca.metainfo.xml.in:664
-#: data/com.jeffser.Alpaca.metainfo.xml.in:674
-#: data/com.jeffser.Alpaca.metainfo.xml.in:692
-#: data/com.jeffser.Alpaca.metainfo.xml.in:714
+#: data/com.jeffser.Alpaca.metainfo.xml.in:671
+#: data/com.jeffser.Alpaca.metainfo.xml.in:687
+#: data/com.jeffser.Alpaca.metainfo.xml.in:703
+#: data/com.jeffser.Alpaca.metainfo.xml.in:717
+#: data/com.jeffser.Alpaca.metainfo.xml.in:727
+#: data/com.jeffser.Alpaca.metainfo.xml.in:745
+#: data/com.jeffser.Alpaca.metainfo.xml.in:767
 msgid "Please report any errors to the issues page, thank you."
 msgstr "దయచేసి ఏవైనా లోపాలను సమస్యల పేజీకి నివేదించండి, ధన్యవాదాలు."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:557
+#: data/com.jeffser.Alpaca.metainfo.xml.in:610
 msgid "Yet Another Daily Update"
 msgstr "మరో డైలీ అప్‌డేట్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:559
+#: data/com.jeffser.Alpaca.metainfo.xml.in:612
 msgid "Added better UI for 'Manage Models' dialog"
 msgstr "'మోడళ్లను నిర్వహించండి' డైలాగ్ కోసం మెరుగైన UI జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:560
+#: data/com.jeffser.Alpaca.metainfo.xml.in:613
 msgid "Added better UI for the chat sidebar"
 msgstr "చాట్ సైడ్‌బార్ కోసం మెరుగైన UI జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:561
+#: data/com.jeffser.Alpaca.metainfo.xml.in:614
 msgid ""
 "Replaced model description with a button to open Ollama's website for the "
 "model"
 msgstr "మోడల్ కోసం ఒల్లామా వెబ్‌సైట్‌ను తెరవడానికి మోడల్ వివరణ బటన్‌తో భర్తీ చేయబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:562
+#: data/com.jeffser.Alpaca.metainfo.xml.in:615
 msgid "Added myself to the credits as the spanish translator"
 msgstr "స్పానిష్ అనువాదకుడిగా క్రెడిట్‌లకు నన్ను చేర్చుకున్నాను"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:563
+#: data/com.jeffser.Alpaca.metainfo.xml.in:616
 msgid "Using XDG properly to get config folder"
 msgstr "కాన్ఫిగరేషన్ ఫోల్డర్‌ని పొందడానికి XDGని సరిగ్గా ఉపయోగించడం"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:564
+#: data/com.jeffser.Alpaca.metainfo.xml.in:617
 msgid "Update for translations"
 msgstr "అనువాదాల కోసం నవీకరణ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:576
+#: data/com.jeffser.Alpaca.metainfo.xml.in:629
 msgid "The last update had some mistakes in the description of the update"
 msgstr "చివరి అప్‌డేట్‌లో అప్‌డేట్ వివరణలో కొన్ని తప్పులు ఉన్నాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:586
+#: data/com.jeffser.Alpaca.metainfo.xml.in:639
 msgid "Another Daily Update"
 msgstr "మరో డైలీ అప్‌డేట్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:588
+#: data/com.jeffser.Alpaca.metainfo.xml.in:641
 msgid "Added full Spanish translation"
 msgstr "పూర్తి స్పానిష్ అనువాదం జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:589
+#: data/com.jeffser.Alpaca.metainfo.xml.in:642
 msgid "Added support for background pulling of multiple models"
 msgstr "బహుళ మోడల్‌ల బ్యాక్‌గ్రౌండ్ పుల్లింగ్‌కు మద్దతు జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:590
+#: data/com.jeffser.Alpaca.metainfo.xml.in:643
 msgid "Added interrupt button"
 msgstr "అంతరాయ బటన్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:591
+#: data/com.jeffser.Alpaca.metainfo.xml.in:644
 msgid "Added basic shortcuts"
 msgstr "ప్రాథమిక సత్వరమార్గాలు జోడించబడ్డాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:592
+#: data/com.jeffser.Alpaca.metainfo.xml.in:645
 msgid "Better translation support"
 msgstr "మెరుగైన అనువాద మద్దతు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:593
+#: data/com.jeffser.Alpaca.metainfo.xml.in:646
 msgid ""
 "User can now leave chat name empty when creating a new one, it will add a "
 "placeholder name"
@@ -1126,216 +1196,220 @@ msgstr ""
 "కొత్త దాన్ని సృష్టించేటప్పుడు వినియోగదారు ఇప్పుడు చాట్ పేరును ఖాళీగా ఉంచవచ్చు, అది ప్లేస్‌హోల్డర్ పేరును "
 "జోడిస్తుంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:594
+#: data/com.jeffser.Alpaca.metainfo.xml.in:647
 msgid "Better scalling for different window sizes"
 msgstr "విభిన్న విండో పరిమాణాల కోసం మెరుగైన స్కేలింగ్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:595
+#: data/com.jeffser.Alpaca.metainfo.xml.in:648
 msgid "Fixed: Can't close app if first time setup fails"
 msgstr "పరిష్కరించబడింది: మొదటిసారి సెటప్ విఫలమైతే యాప్‌ను మూసివేయడం సాధ్యం కాదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:605
+#: data/com.jeffser.Alpaca.metainfo.xml.in:658
 msgid "Really Big Update"
 msgstr "నిజంగా పెద్ద నవీకరణ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:607
+#: data/com.jeffser.Alpaca.metainfo.xml.in:660
 msgid "Added multiple chats support!"
 msgstr "బహుళ చాట్‌ల మద్దతు జోడించబడింది!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:608
+#: data/com.jeffser.Alpaca.metainfo.xml.in:661
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
 msgstr "పాంగో మార్కప్ మద్దతు జోడించబడింది (బోల్డ్, జాబితా, శీర్షిక, ఉపశీర్షిక, మోనోస్పేస్)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:609
+#: data/com.jeffser.Alpaca.metainfo.xml.in:662
 msgid "Added autoscroll if the user is at the bottom of the chat"
 msgstr "వినియోగదారు చాట్ దిగువన ఉన్నట్లయితే ఆటోస్క్రోల్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:610
+#: data/com.jeffser.Alpaca.metainfo.xml.in:663
 msgid "Added support for multiple tags on a single model"
 msgstr "ఒకే మోడల్‌లో బహుళ ట్యాగ్‌లకు మద్దతు జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:611
+#: data/com.jeffser.Alpaca.metainfo.xml.in:664
 msgid "Added better model management dialog"
 msgstr "మెరుగైన మోడల్ మేనేజ్‌మెంట్ డైలాగ్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:612
+#: data/com.jeffser.Alpaca.metainfo.xml.in:665
 msgid "Added loading spinner when sending message"
 msgstr "సందేశాన్ని పంపేటప్పుడు లోడ్ స్పిన్నర్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:613
+#: data/com.jeffser.Alpaca.metainfo.xml.in:666
 msgid "Added notifications if app is not active and a model pull finishes"
 msgstr "యాప్ యాక్టివ్‌గా లేకుంటే మరియు మోడల్ పుల్ పూర్తి అయినట్లయితే నోటిఫికేషన్‌లు జోడించబడతాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:614
+#: data/com.jeffser.Alpaca.metainfo.xml.in:667
 msgid "Added new symbolic icon"
 msgstr "కొత్త సింబాలిక్ చిహ్నం జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:615
+#: data/com.jeffser.Alpaca.metainfo.xml.in:668
 msgid "Added frame to message textview widget"
 msgstr "మెసేజ్ టెక్స్ట్‌వ్యూ విడ్జెట్‌కి ఫ్రేమ్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:616
+#: data/com.jeffser.Alpaca.metainfo.xml.in:669
 msgid "Fixed \"code blocks shouldn't be editable\""
 msgstr "స్థిర \"కోడ్ బ్లాక్‌లు సవరించబడకూడదు\""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:628
+#: data/com.jeffser.Alpaca.metainfo.xml.in:681
 msgid "Added code highlighting"
 msgstr "కోడ్ హైలైటింగ్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:629
+#: data/com.jeffser.Alpaca.metainfo.xml.in:682
 msgid "Added image recognition (llava model)"
 msgstr "ఇమేజ్ రికగ్నిషన్ జోడించబడింది (ల్లావా మోడల్)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:630
+#: data/com.jeffser.Alpaca.metainfo.xml.in:683
 msgid "Added multiline prompt"
 msgstr "బహుళ లైన్ ప్రాంప్ట్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:631
+#: data/com.jeffser.Alpaca.metainfo.xml.in:684
 msgid "Fixed some small bugs"
 msgstr "కొన్ని చిన్న బగ్‌లు పరిష్కరించబడ్డాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:632
+#: data/com.jeffser.Alpaca.metainfo.xml.in:685
 msgid "General optimization"
 msgstr "సాధారణ ఆప్టిమైజేషన్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:642
+#: data/com.jeffser.Alpaca.metainfo.xml.in:695
 msgid "Fixes and features"
 msgstr "పరిష్కారాలు మరియు లక్షణాలు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:644
+#: data/com.jeffser.Alpaca.metainfo.xml.in:697
 msgid "Russian translation (thanks github/alexkdeveloper)"
 msgstr "రష్యన్ అనువాదం (ధన్యవాదాలు github/alexkdeveloper)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:645
+#: data/com.jeffser.Alpaca.metainfo.xml.in:698
 msgid "Fixed: Cannot close app on first setup"
 msgstr "పరిష్కరించబడింది: మొదటి సెటప్‌లో యాప్‌ను మూసివేయడం సాధ్యం కాదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:646
+#: data/com.jeffser.Alpaca.metainfo.xml.in:699
 msgid "Fixed: Brand colors for Flathub"
 msgstr "స్థిర: Flathub కోసం బ్రాండ్ రంగులు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:647
+#: data/com.jeffser.Alpaca.metainfo.xml.in:700
 msgid "Fixed: App description"
 msgstr "స్థిర: యాప్ వివరణ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:648
+#: data/com.jeffser.Alpaca.metainfo.xml.in:701
 msgid "Fixed: Only show 'save changes dialog' when you actually change the url"
 msgstr "పరిష్కరించబడింది: మీరు నిజంగా urlని మార్చినప్పుడు మాత్రమే 'మార్పులను సేవ్ చేయి డైలాగ్'ని చూపండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:658
+#: data/com.jeffser.Alpaca.metainfo.xml.in:711
 msgid "0.2.2 Bug fixes"
 msgstr "0.2.2 బగ్ పరిష్కారాలు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:660
+#: data/com.jeffser.Alpaca.metainfo.xml.in:713
 msgid "Toast messages appearing behind dialogs"
 msgstr "డైలాగ్‌ల వెనుక టోస్ట్ సందేశాలు కనిపిస్తాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:661
+#: data/com.jeffser.Alpaca.metainfo.xml.in:714
 msgid "Local model list not updating when changing servers"
 msgstr "సర్వర్‌లను మార్చేటప్పుడు స్థానిక మోడల్ జాబితా నవీకరించబడదు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:662
+#: data/com.jeffser.Alpaca.metainfo.xml.in:715
 msgid "Closing the setup dialog closes the whole app"
 msgstr "సెటప్ డైలాగ్‌ను మూసివేయడం వలన యాప్ మొత్తం మూసివేయబడుతుంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:672
+#: data/com.jeffser.Alpaca.metainfo.xml.in:725
 msgid "0.2.1 Data saving fix"
 msgstr "0.2.1 డేటా పొదుపు పరిష్కారం"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:673
+#: data/com.jeffser.Alpaca.metainfo.xml.in:726
 msgid ""
 "The app didn't save the config files and chat history to the right "
 "directory, this is now fixed"
 msgstr ""
 "యాప్ కాన్ఫిగర్ ఫైల్‌లను మరియు చాట్ హిస్టరీని సరైన డైరెక్టరీకి సేవ్ చేయలేదు, ఇది ఇప్పుడు పరిష్కరించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:682
+#: data/com.jeffser.Alpaca.metainfo.xml.in:735
 msgid "0.2.0"
 msgstr "0.2.0"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:684
+#: data/com.jeffser.Alpaca.metainfo.xml.in:737
 msgid "New Features"
 msgstr "కొత్త ఫీచర్లు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:686
+#: data/com.jeffser.Alpaca.metainfo.xml.in:739
 msgid "Restore chat after closing the app"
 msgstr "యాప్‌ను మూసివేసిన తర్వాత చాట్‌ని పునరుద్ధరించండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:687
+#: data/com.jeffser.Alpaca.metainfo.xml.in:740
 msgid "A button to clear the chat"
 msgstr "చాట్‌ను క్లియర్ చేయడానికి ఒక బటన్"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:688
+#: data/com.jeffser.Alpaca.metainfo.xml.in:741
 msgid "Fixed multiple bugs involving how messages are shown"
 msgstr "సందేశాలు ఎలా చూపబడతాయో కలిగి ఉన్న బహుళ బగ్‌లు పరిష్కరించబడ్డాయి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:689
+#: data/com.jeffser.Alpaca.metainfo.xml.in:742
 msgid "Added welcome dialog"
 msgstr "స్వాగత డైలాగ్ జోడించబడింది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:690
+#: data/com.jeffser.Alpaca.metainfo.xml.in:743
 msgid "More stability"
 msgstr "మరింత స్థిరత్వం"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:700
+#: data/com.jeffser.Alpaca.metainfo.xml.in:753
 msgid "0.1.2 Quick fixes"
 msgstr "0.1.2 త్వరిత పరిష్కారాలు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:701
+#: data/com.jeffser.Alpaca.metainfo.xml.in:754
 msgid ""
 "This release fixes some metadata needed to have a proper Flatpak application"
 msgstr "ఈ విడుదల సరైన ఫ్లాట్‌పాక్ అప్లికేషన్‌ను కలిగి ఉండటానికి అవసరమైన కొంత మెటాడేటాను పరిష్కరిస్తుంది"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:707
+#: data/com.jeffser.Alpaca.metainfo.xml.in:760
 msgid "0.1.1 Stable Release"
 msgstr "0.1.1 స్థిరమైన విడుదల"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:708
+#: data/com.jeffser.Alpaca.metainfo.xml.in:761
 msgid "This is the first public version of Alpaca"
 msgstr "ఇది అల్పాకా యొక్క మొదటి పబ్లిక్ వెర్షన్"
 
-#: src/window.py:136
+#: src/window.py:139
 msgid "Please select a model before chatting"
 msgstr "దయచేసి చాట్ చేసే ముందు మోడల్‌ని ఎంచుకోండి"
 
-#: src/window.py:190 src/window.py:191
+#: src/window.py:193 src/window.py:194
 msgid "Close"
 msgstr "మూసివేయి"
 
-#: src/window.py:193 src/window.py:194 src/window.ui:846
+#: src/window.py:196 src/window.py:197 src/window.ui:874
 msgid "Next"
 msgstr "తదుపరి"
 
-#: src/window.py:329
+#: src/window.py:336
 msgid "image"
 msgstr "చిత్రం"
 
-#: src/window.py:406
+#: src/window.py:431
 msgid "Missing file"
 msgstr "ఫైల్ లేదు"
 
-#: src/window.py:539 src/window.py:595 src/window.py:615 src/window.py:617
-#: src/dialogs.py:93 src/window.ui:30 src/custom_widgets/chat_widget.py:314
+#: src/window.py:564 src/window.py:621 src/window.py:641 src/window.py:643
+#: src/dialogs.py:93 src/window.ui:30 src/custom_widgets/chat_widget.py:315
 msgid "New Chat"
 msgstr "కొత్త చాట్"
 
-#: src/window.py:642
+#: src/window.py:668
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr "స్థానిక ఒల్లామా ఉదాహరణలో లోపం ఉంది, కనుక ఇది రీసెట్ చేయబడింది"
 
-#: src/window.py:664
+#: src/window.py:690
 msgid "Cannot open image"
 msgstr "చిత్రాన్ని తెరవడం సాధ్యపడదు"
 
-#: src/window.py:750
+#: src/window.py:776
 msgid "This video is not available"
 msgstr "ఈ వీడియో అందుబాటులో లేదు"
 
-#: src/window.py:768 src/dialogs.py:322
+#: src/window.py:794 src/dialogs.py:322
 msgid "Image recognition is only available on specific models"
 msgstr "నిర్దిష్ట మోడల్‌లలో మాత్రమే చిత్ర గుర్తింపు అందుబాటులో ఉంటుంది"
 
 #: src/available_models_descriptions.py:2
+msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
+msgstr ""
+
+#: src/available_models_descriptions.py:3
 msgid ""
 "Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and "
 "405B parameter sizes."
@@ -1343,34 +1417,46 @@ msgstr ""
 "లామా 3.1 అనేది మెటా నుండి 8B, 70B మరియు 405B పారామీటర్ పరిమాణాలలో అందుబాటులో ఉన్న కొత్త స్టేట్ ఆఫ్ ది "
 "ఆర్ట్ మోడల్."
 
-#: src/available_models_descriptions.py:3
-msgid ""
-"Google Gemma 2 is a high-performing and efficient model by now available in "
-"three sizes: 2B, 9B, and 27B."
-msgstr ""
-"Google Gemma 2 అనేది ఇప్పుడు మూడు పరిమాణాలలో అందుబాటులో ఉన్న అధిక-పనితీరు మరియు సమర్థవంతమైన "
-"మోడల్: 2B, 9B మరియు 27B."
-
 #: src/available_models_descriptions.py:4
+msgid ""
+"Google Gemma 2 is a high-performing and efficient model available in three "
+"sizes: 2B, 9B, and 27B."
+msgstr ""
+
+#: src/available_models_descriptions.py:5
+msgid ""
+"Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, "
+"encompassing up to 18 trillion tokens. The model supports up to 128K tokens "
+"and has multilingual support."
+msgstr ""
+
+#: src/available_models_descriptions.py:6
+msgid ""
+"A lightweight AI model with 3.8 billion parameters with performance "
+"overtaking similarly and larger sized models."
+msgstr ""
+"3.8 బిలియన్ పారామీటర్‌లతో కూడిన తేలికపాటి AI మోడల్ పనితీరు అదే విధంగా మరియు పెద్ద సైజు మోడల్‌లను "
+"అధిగమించింది."
+
+#: src/available_models_descriptions.py:7
+msgid ""
+"A commercial-friendly small language model by NVIDIA optimized for roleplay, "
+"RAG QA, and function calling."
+msgstr ""
+
+#: src/available_models_descriptions.py:8
+msgid ""
+"Mistral Small is a lightweight model designed for cost-effective use in "
+"tasks like translation and summarization."
+msgstr ""
+
+#: src/available_models_descriptions.py:9
 msgid ""
 "A state-of-the-art 12B model with 128k context length, built by Mistral AI "
 "in collaboration with NVIDIA."
 msgstr "NVIDIA సహకారంతో Mistral AI చే నిర్మించబడిన 128k సందర్భ నిడివితో అత్యాధునిక 12B మోడల్."
 
-#: src/available_models_descriptions.py:5
-msgid ""
-"Mistral Large 2 is Mistral's new flagship model that is significantly more "
-"capable in code generation, mathematics, and reasoning with 128k context "
-"window and support for dozens of languages."
-msgstr ""
-"Mistral Large 2 అనేది Mistral యొక్క కొత్త ఫ్లాగ్‌షిప్ మోడల్, ఇది 128k కాంటెక్స్ట్ విండో మరియు డజన్ల "
-"కొద్దీ భాషలకు మద్దతుతో కోడ్ ఉత్పత్తి, గణితం మరియు తార్కికంలో గణనీయమైన సామర్థ్యాన్ని కలిగి ఉంటుంది."
-
-#: src/available_models_descriptions.py:6
-msgid "Qwen2 is a new series of large language models from Alibaba group"
-msgstr "Qwen2 అనేది అలీబాబా గ్రూప్ నుండి పెద్ద భాషా నమూనాల కొత్త సిరీస్"
-
-#: src/available_models_descriptions.py:7
+#: src/available_models_descriptions.py:10
 msgid ""
 "An open-source Mixture-of-Experts code language model that achieves "
 "performance comparable to GPT4-Turbo in code-specific tasks."
@@ -1378,19 +1464,11 @@ msgstr ""
 "కోడ్-నిర్దిష్ట టాస్క్‌లలో GPT4-Turboతో పోల్చదగిన పనితీరును సాధించే ఓపెన్-సోర్స్ మిక్స్‌చర్-ఆఫ్-ఎక్స్‌పర్ట్స్ కోడ్ "
 "లాంగ్వేజ్ మోడల్."
 
-#: src/available_models_descriptions.py:8
-msgid ""
-"Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art "
-"open models by Microsoft."
-msgstr ""
-"Phi-3 అనేది మైక్రోసాఫ్ట్ ద్వారా తేలికైన 3B (మినీ) మరియు 14B (మీడియం) స్టేట్ ఆఫ్ ది ఆర్ట్ ఓపెన్ మోడల్‌ల "
-"కుటుంబం."
-
-#: src/available_models_descriptions.py:9
+#: src/available_models_descriptions.py:11
 msgid "The 7B model released by Mistral AI, updated to version 0.3."
 msgstr "Mistral AI విడుదల చేసిన 7B మోడల్, వెర్షన్ 0.3కి అప్‌డేట్ చేయబడింది."
 
-#: src/available_models_descriptions.py:10
+#: src/available_models_descriptions.py:12
 msgid ""
 "A set of Mixture of Experts (MoE) model with open weights by Mistral AI in "
 "8x7b and 8x22b parameter sizes."
@@ -1398,7 +1476,7 @@ msgstr ""
 "8x7b మరియు 8x22b పారామీటర్ సైజులలో మిస్ట్రల్ AI ద్వారా ఓపెన్ వెయిట్‌లతో కూడిన మిక్స్‌చర్ ఆఫ్ ఎక్స్‌పర్ట్స్ "
 "(MoE) మోడల్ సెట్."
 
-#: src/available_models_descriptions.py:11
+#: src/available_models_descriptions.py:13
 msgid ""
 "CodeGemma is a collection of powerful, lightweight models that can perform a "
 "variety of coding tasks like fill-in-the-middle code completion, code "
@@ -1408,7 +1486,7 @@ msgstr ""
 "CodeGemma అనేది శక్తివంతమైన, తేలికైన మోడల్‌ల సమాహారం, ఇది మిడిల్ కోడ్ పూర్తి చేయడం, కోడ్ ఉత్పత్తి చేయడం, "
 "సహజ భాషా అవగాహన, గణిత తార్కికం మరియు సూచనలను అనుసరించడం వంటి విభిన్న కోడింగ్ పనులను చేయగలదు."
 
-#: src/available_models_descriptions.py:12
+#: src/available_models_descriptions.py:14
 msgid ""
 "Command R is a Large Language Model optimized for conversational interaction "
 "and long context tasks."
@@ -1416,7 +1494,7 @@ msgstr ""
 "కమాండ్ R అనేది సంభాషణ పరస్పర చర్య మరియు సుదీర్ఘ సందర్భోచిత పనుల కోసం ఆప్టిమైజ్ చేయబడిన ఒక పెద్ద భాషా "
 "నమూనా."
 
-#: src/available_models_descriptions.py:13
+#: src/available_models_descriptions.py:15
 msgid ""
 "Command R+ is a powerful, scalable large language model purpose-built to "
 "excel at real-world enterprise use cases."
@@ -1424,20 +1502,18 @@ msgstr ""
 "కమాండ్ R+ అనేది ఒక శక్తివంతమైన, స్కేలబుల్ లార్జ్ లాంగ్వేజ్ మోడల్ ఉద్దేశ్యం-వాస్తవ-ప్రపంచ సంస్థ వినియోగ "
 "సందర్భాలలో రాణించడానికి రూపొందించబడింది."
 
-#: src/available_models_descriptions.py:14
+#: src/available_models_descriptions.py:16
 msgid ""
-"­čîő LLaVA is a novel end-to-end trained large multimodal model that combines "
+"🌋 LLaVA is a novel end-to-end trained large multimodal model that combines "
 "a vision encoder and Vicuna for general-purpose visual and language "
 "understanding. Updated to version 1.6."
 msgstr ""
-"čîő LLaVA అనేది ఒక నవల ఎండ్-టు-ఎండ్ శిక్షణ పొందిన పెద్ద మల్టీమోడల్ మోడల్, ఇది సాధారణ-ప్రయోజన దృశ్య "
-"మరియు భాషా అవగాహన కోసం విజన్ ఎన్‌కోడర్ మరియు వికునాను మిళితం చేస్తుంది. వెర్షన్ 1.6కి నవీకరించబడింది."
 
-#: src/available_models_descriptions.py:15
+#: src/available_models_descriptions.py:17
 msgid "Meta Llama 3: The most capable openly available LLM to date"
 msgstr "మెటా లామా 3: ఇప్పటి వరకు అత్యంత సామర్థ్యం గల బహిరంగంగా అందుబాటులో ఉన్న LLM"
 
-#: src/available_models_descriptions.py:16
+#: src/available_models_descriptions.py:18
 msgid ""
 "Gemma is a family of lightweight, state-of-the-art open models built by "
 "Google DeepMind. Updated to version 1.1"
@@ -1445,7 +1521,7 @@ msgstr ""
 "Gemma అనేది Google DeepMind ద్వారా రూపొందించబడిన తేలికపాటి, అత్యాధునిక ఓపెన్ మోడల్‌ల కుటుంబం. "
 "వెర్షన్ 1.1కి నవీకరించబడింది"
 
-#: src/available_models_descriptions.py:17
+#: src/available_models_descriptions.py:19
 msgid ""
 "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
 "0.5B to 110B parameters"
@@ -1453,49 +1529,34 @@ msgstr ""
 "వెన్ 1.5 అనేది అలీబాబా క్లౌడ్ ద్వారా 0.5B నుండి 110B పారామీటర్‌ల వరకు విస్తరించి ఉన్న పెద్ద భాషా నమూనాల "
 "శ్రేణి."
 
-#: src/available_models_descriptions.py:18
+#: src/available_models_descriptions.py:20
+msgid "Qwen2 is a new series of large language models from Alibaba group"
+msgstr "Qwen2 అనేది అలీబాబా గ్రూప్ నుండి పెద్ద భాషా నమూనాల కొత్త సిరీస్"
+
+#: src/available_models_descriptions.py:21
+msgid ""
+"Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art "
+"open models by Microsoft."
+msgstr ""
+"Phi-3 అనేది మైక్రోసాఫ్ట్ ద్వారా తేలికైన 3B (మినీ) మరియు 14B (మీడియం) స్టేట్ ఆఫ్ ది ఆర్ట్ ఓపెన్ మోడల్‌ల "
+"కుటుంబం."
+
+#: src/available_models_descriptions.py:22
 msgid ""
 "Llama 2 is a collection of foundation language models ranging from 7B to 70B "
 "parameters."
 msgstr "లామా 2 అనేది 7B నుండి 70B పారామీటర్‌ల వరకు ఉండే ఫౌండేషన్ లాంగ్వేజ్ మోడల్‌ల సమాహారం."
 
-#: src/available_models_descriptions.py:19
+#: src/available_models_descriptions.py:23
 msgid ""
 "A large language model that can use text prompts to generate and discuss "
 "code."
 msgstr "కోడ్‌ని రూపొందించడానికి మరియు చర్చించడానికి టెక్స్ట్ ప్రాంప్ట్‌లను ఉపయోగించగల పెద్ద భాషా నమూనా."
 
-#: src/available_models_descriptions.py:20
+#: src/available_models_descriptions.py:24
 msgid ""
 "A high-performing open embedding model with a large token context window."
 msgstr "పెద్ద టోకెన్ సందర్భ విండోతో అధిక-పనితీరు గల ఓపెన్ ఎంబెడ్డింగ్ మోడల్."
-
-#: src/available_models_descriptions.py:21
-msgid ""
-"Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
-"experts models that excels at coding tasks. Created by Eric Hartford."
-msgstr ""
-"సెన్సార్ చేయని, 8x7b మరియు 8x22b ఫైన్-ట్యూన్ చేయబడిన మోడల్‌లు మిక్స్‌ట్రాల్ మిక్స్‌డ్ ఆఫ్ ఎక్స్‌పర్ట్స్ మోడల్స్ "
-"ఆధారంగా కోడింగ్ టాస్క్‌లలో నిష్ణాతులు. ఎరిక్ హార్ట్‌ఫోర్డ్ రూపొందించారు."
-
-#: src/available_models_descriptions.py:22
-msgid ""
-"Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
-"outstanding reasoning and language understanding capabilities."
-msgstr ""
-"Phi-2: మైక్రోసాఫ్ట్ రీసెర్చ్ ద్వారా 2.7B భాషా నమూనా, ఇది అత్యుత్తమ తార్కికం మరియు భాషా అవగాహన సామర్థ్యాలను "
-"ప్రదర్శిస్తుంది."
-
-#: src/available_models_descriptions.py:23
-msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
-msgstr "జార్జ్ సంగ్ మరియు జర్రాడ్ హోప్ ద్వారా సెన్సార్ చేయని లామా 2 మోడల్."
-
-#: src/available_models_descriptions.py:24
-msgid ""
-"DeepSeek Coder is a capable coding model trained on two trillion code and "
-"natural language tokens."
-msgstr ""
-"డీప్‌సీక్ కోడర్ అనేది రెండు ట్రిలియన్ కోడ్ మరియు సహజ భాషా టోకెన్‌లపై శిక్షణ పొందిన సామర్థ్యం గల కోడింగ్ మోడల్."
 
 #: src/available_models_descriptions.py:25
 msgid "State-of-the-art large embedding model from mixedbread.ai"
@@ -1503,20 +1564,28 @@ msgstr "mixedbread.ai నుండి స్టేట్ ఆఫ్ ది ఆర
 
 #: src/available_models_descriptions.py:26
 msgid ""
-"Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
-"that are trained to act as helpful assistants."
+"Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
+"experts models that excels at coding tasks. Created by Eric Hartford."
 msgstr ""
-"Zephyr అనేది Mistral మరియు Mixtral మోడల్‌ల యొక్క ఫైన్-ట్యూన్డ్ వెర్షన్‌ల శ్రేణి, ఇవి సహాయక "
-"సహాయకులుగా పని చేయడానికి శిక్షణ పొందాయి."
+"సెన్సార్ చేయని, 8x7b మరియు 8x22b ఫైన్-ట్యూన్ చేయబడిన మోడల్‌లు మిక్స్‌ట్రాల్ మిక్స్‌డ్ ఆఫ్ ఎక్స్‌పర్ట్స్ మోడల్స్ "
+"ఆధారంగా కోడింగ్ టాస్క్‌లలో నిష్ణాతులు. ఎరిక్ హార్ట్‌ఫోర్డ్ రూపొందించారు."
 
 #: src/available_models_descriptions.py:27
 msgid ""
-"The uncensored Dolphin model based on Mistral that excels at coding tasks. "
-"Updated to version 2.8."
+"Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
+"outstanding reasoning and language understanding capabilities."
 msgstr ""
-"మిస్ట్రాల్ ఆధారంగా సెన్సార్ చేయని డాల్ఫిన్ మోడల్, ఇది కోడింగ్ టాస్క్‌లలో రాణిస్తుంది. వెర్షన్ 2.8కి నవీకరించబడింది."
+"Phi-2: మైక్రోసాఫ్ట్ రీసెర్చ్ ద్వారా 2.7B భాషా నమూనా, ఇది అత్యుత్తమ తార్కికం మరియు భాషా అవగాహన సామర్థ్యాలను "
+"ప్రదర్శిస్తుంది."
 
 #: src/available_models_descriptions.py:28
+msgid ""
+"DeepSeek Coder is a capable coding model trained on two trillion code and "
+"natural language tokens."
+msgstr ""
+"డీప్‌సీక్ కోడర్ అనేది రెండు ట్రిలియన్ కోడ్ మరియు సహజ భాషా టోకెన్‌లపై శిక్షణ పొందిన సామర్థ్యం గల కోడింగ్ మోడల్."
+
+#: src/available_models_descriptions.py:29
 msgid ""
 "StarCoder2 is the next generation of transparently trained open code LLMs "
 "that comes in three sizes: 3B, 7B and 15B parameters."
@@ -1524,15 +1593,30 @@ msgstr ""
 "StarCoder2 అనేది 3B, 7B మరియు 15B పారామీటర్‌లలో మూడు పరిమాణాలలో వచ్చే పారదర్శకంగా శిక్షణ పొందిన "
 "ఓపెన్ కోడ్ LLMల తదుపరి తరం."
 
-#: src/available_models_descriptions.py:29
-msgid ""
-"A general-purpose model ranging from 3 billion parameters to 70 billion, "
-"suitable for entry-level hardware."
-msgstr ""
-"3 బిలియన్ పారామీటర్‌ల నుండి 70 బిలియన్ల వరకు ఉండే సాధారణ-ప్రయోజన మోడల్, ప్రవేశ స్థాయి హార్డ్‌వేర్‌కు "
-"అనుకూలంగా ఉంటుంది."
-
 #: src/available_models_descriptions.py:30
+msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
+msgstr "జార్జ్ సంగ్ మరియు జర్రాడ్ హోప్ ద్వారా సెన్సార్ చేయని లామా 2 మోడల్."
+
+#: src/available_models_descriptions.py:31
+msgid ""
+"The uncensored Dolphin model based on Mistral that excels at coding tasks. "
+"Updated to version 2.8."
+msgstr ""
+"మిస్ట్రాల్ ఆధారంగా సెన్సార్ చేయని డాల్ఫిన్ మోడల్, ఇది కోడింగ్ టాస్క్‌లలో రాణిస్తుంది. వెర్షన్ 2.8కి నవీకరించబడింది."
+
+#: src/available_models_descriptions.py:32
+msgid ""
+"Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
+"that are trained to act as helpful assistants."
+msgstr ""
+"Zephyr అనేది Mistral మరియు Mixtral మోడల్‌ల యొక్క ఫైన్-ట్యూన్డ్ వెర్షన్‌ల శ్రేణి, ఇవి సహాయక "
+"సహాయకులుగా పని చేయడానికి శిక్షణ పొందాయి."
+
+#: src/available_models_descriptions.py:33
+msgid "Yi 1.5 is a high-performing, bilingual language model."
+msgstr "Yi 1.5 అధిక-పనితీరు, ద్విభాషా భాషా నమూనా."
+
+#: src/available_models_descriptions.py:34
 msgid ""
 "Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on "
 "Llama 3 that has a variety of instruction, conversational, and coding skills."
@@ -1540,11 +1624,27 @@ msgstr ""
 "డాల్ఫిన్ 2.9 అనేది లామా 3 ఆధారంగా ఎరిక్ హార్ట్‌ఫోర్డ్ రూపొందించిన 8B మరియు 70B పరిమాణాలతో కూడిన కొత్త మోడల్, "
 "ఇది వివిధ రకాల సూచన, సంభాషణ మరియు కోడింగ్ నైపుణ్యాలను కలిగి ఉంది."
 
-#: src/available_models_descriptions.py:31
-msgid "Yi 1.5 is a high-performing, bilingual language model."
-msgstr "Yi 1.5 అధిక-పనితీరు, ద్విభాషా భాషా నమూనా."
+#: src/available_models_descriptions.py:35
+msgid ""
+"A general-purpose model ranging from 3 billion parameters to 70 billion, "
+"suitable for entry-level hardware."
+msgstr ""
+"3 బిలియన్ పారామీటర్‌ల నుండి 70 బిలియన్ల వరకు ఉండే సాధారణ-ప్రయోజన మోడల్, ప్రవేశ స్థాయి హార్డ్‌వేర్‌కు "
+"అనుకూలంగా ఉంటుంది."
 
-#: src/available_models_descriptions.py:32
+#: src/available_models_descriptions.py:36
+msgid ""
+"A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
+"benchmarks."
+msgstr "అనేక బెంచ్‌మార్క్‌లలో మెరుగైన స్కోర్‌లతో లామా 3 ఇన్‌స్ట్రక్ట్ నుండి ఫైన్-ట్యూన్ చేయబడిన LLaVA మోడల్."
+
+#: src/available_models_descriptions.py:37
+msgid ""
+"The latest series of Code-Specific Qwen models, with significant "
+"improvements in code generation, code reasoning, and code fixing."
+msgstr ""
+
+#: src/available_models_descriptions.py:38
 msgid ""
 "Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
 "Mistral 7B model using the OpenOrca dataset."
@@ -1552,42 +1652,40 @@ msgstr ""
 "Mistral OpenOrca అనేది 7 బిలియన్ పారామీటర్ మోడల్, OpenOrca డేటాసెట్‌ని ఉపయోగించి Mistral 7B మోడల్ "
 "పైన ఫైన్-ట్యూన్ చేయబడింది."
 
-#: src/available_models_descriptions.py:33
-msgid ""
-"A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
-"benchmarks."
-msgstr "అనేక బెంచ్‌మార్క్‌లలో మెరుగైన స్కోర్‌లతో లామా 3 ఇన్‌స్ట్రక్ట్ నుండి ఫైన్-ట్యూన్ చేయబడిన LLaVA మోడల్."
-
-#: src/available_models_descriptions.py:34
+#: src/available_models_descriptions.py:39
 msgid ""
 "StarCoder is a code generation model trained on 80+ programming languages."
 msgstr "స్టార్‌కోడర్ అనేది 80+ ప్రోగ్రామింగ్ భాషలపై శిక్షణ పొందిన కోడ్ జనరేషన్ మోడల్."
 
-#: src/available_models_descriptions.py:35
-msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
-msgstr "చైనీస్ సంభాషణ సామర్థ్యాన్ని మెరుగుపరచడానికి లామా 2 ఆధారిత మోడల్ చక్కగా ట్యూన్ చేయబడింది."
-
-#: src/available_models_descriptions.py:36
-msgid ""
-"General use chat model based on Llama and Llama 2 with 2K to 16K context "
-"sizes."
-msgstr "2K నుండి 16K సందర్భ పరిమాణాలతో లామా మరియు లామా 2 ఆధారంగా సాధారణ ఉపయోగం చాట్ మోడల్."
-
-#: src/available_models_descriptions.py:37
+#: src/available_models_descriptions.py:40
 msgid ""
 "The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
 "model on 3 trillion tokens."
 msgstr ""
 "TinyLlama ప్రాజెక్ట్ అనేది 3 ట్రిలియన్ టోకెన్‌లలో కాంపాక్ట్ 1.1B లామా మోడల్‌కు శిక్షణనిచ్చే బహిరంగ ప్రయత్నం."
 
-#: src/available_models_descriptions.py:38
+#: src/available_models_descriptions.py:41
 msgid ""
-"Codestral is Mistral AIÔÇÖs first-ever code model designed for code "
-"generation tasks."
+"Codestral is Mistral AI’s first-ever code model designed for code generation "
+"tasks."
 msgstr ""
-"కోడ్‌స్ట్రాల్ అనేది మిస్ట్రాల్ AIÔÇÖ యొక్క మొట్టమొదటి కోడ్ మోడల్, ఇది కోడ్ ఉత్పత్తి పనుల కోసం రూపొందించబడింది."
 
-#: src/available_models_descriptions.py:39
+#: src/available_models_descriptions.py:42
+msgid ""
+"General use chat model based on Llama and Llama 2 with 2K to 16K context "
+"sizes."
+msgstr "2K నుండి 16K సందర్భ పరిమాణాలతో లామా మరియు లామా 2 ఆధారంగా సాధారణ ఉపయోగం చాట్ మోడల్."
+
+#: src/available_models_descriptions.py:43
+msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
+msgstr "చైనీస్ సంభాషణ సామర్థ్యాన్ని మెరుగుపరచడానికి లామా 2 ఆధారిత మోడల్ చక్కగా ట్యూన్ చేయబడింది."
+
+#: src/available_models_descriptions.py:44
+msgid ""
+"A suite of text embedding models by Snowflake, optimized for performance."
+msgstr "స్నోఫ్లేక్ ద్వారా టెక్స్ట్ ఎంబెడ్డింగ్ మోడల్‌ల సూట్, పనితీరు కోసం ఆప్టిమైజ్ చేయబడింది."
+
+#: src/available_models_descriptions.py:45
 msgid ""
 "Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
 "Llama 2 uncensored by Eric Hartford."
@@ -1595,67 +1693,22 @@ msgstr ""
 "విజార్డ్ వికునా అన్‌సెన్సార్డ్ అనేది ఎరిక్ హార్ట్‌ఫోర్డ్ చేత సెన్సార్ చేయని లామా 2 ఆధారంగా 7B, 13B మరియు 30B "
 "పారామీటర్ మోడల్."
 
-#: src/available_models_descriptions.py:40
+#: src/available_models_descriptions.py:46
+msgid "A family of open foundation models by IBM for Code Intelligence"
+msgstr "కోడ్ ఇంటెలిజెన్స్ కోసం IBM ద్వారా ఓపెన్ ఫౌండేషన్ నమూనాల కుటుంబం"
+
+#: src/available_models_descriptions.py:47
+msgid ""
+"A versatile model for AI software development scenarios, including code "
+"completion."
+msgstr "కోడ్ పూర్తి చేయడంతో సహా AI సాఫ్ట్‌వేర్ డెవలప్‌మెంట్ దృశ్యాల కోసం బహుముఖ నమూనా."
+
+#: src/available_models_descriptions.py:48
 msgid ""
 "The powerful family of models by Nous Research that excels at scientific "
 "discussion and coding tasks."
 msgstr ""
 "శాస్త్రీయ చర్చ మరియు కోడింగ్ టాస్క్‌లలో రాణిస్తున్న నౌస్ రీసెర్చ్ ద్వారా మోడల్స్ యొక్క శక్తివంతమైన కుటుంబం."
-
-#: src/available_models_descriptions.py:41
-msgid ""
-"A family of open-source models trained on a wide variety of data, surpassing "
-"ChatGPT on various benchmarks. Updated to version 3.5-0106."
-msgstr ""
-"అనేక రకాల డేటాపై శిక్షణ పొందిన ఓపెన్ సోర్స్ మోడల్‌ల కుటుంబం, వివిధ బెంచ్‌మార్క్‌లలో ChatGPTని అధిగమించింది. "
-"వెర్షన్ 3.5-0106కి నవీకరించబడింది."
-
-#: src/available_models_descriptions.py:42
-msgid ""
-"Aya 23, released by Cohere, is a new family of state-of-the-art, "
-"multilingual models that support 23 languages."
-msgstr ""
-"Aya 23, Cohere ద్వారా విడుదల చేయబడింది, ఇది 23 భాషలకు మద్దతు ఇచ్చే అత్యాధునిక, బహుభాషా నమూనాల "
-"కొత్త కుటుంబం."
-
-#: src/available_models_descriptions.py:43
-msgid ""
-"State of the art large language model from Microsoft AI with improved "
-"performance on complex chat, multilingual, reasoning and agent use cases."
-msgstr ""
-"కాంప్లెక్స్ చాట్, బహుభాషా, రీజనింగ్ మరియు ఏజెంట్ వినియోగ కేసులపై మెరుగైన పనితీరుతో Microsoft AI నుండి "
-"స్టేట్ ఆఫ్ ది ఆర్ట్ లార్జ్ లాంగ్వేజ్ మోడల్."
-
-#: src/available_models_descriptions.py:44
-msgid ""
-"An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
-"by Eric Hartford and based on TinyLlama."
-msgstr ""
-"ఎరిక్ హార్ట్‌ఫోర్డ్ ద్వారా కొత్త డాల్ఫిన్ 2.8 డేటాసెట్‌పై శిక్షణ పొందిన ప్రయోగాత్మక 1.1B పారామీటర్ మోడల్ మరియు "
-"TinyLlama ఆధారంగా."
-
-#: src/available_models_descriptions.py:45
-msgid "A family of open foundation models by IBM for Code Intelligence"
-msgstr "కోడ్ ఇంటెలిజెన్స్ కోసం IBM ద్వారా ఓపెన్ ఫౌండేషన్ నమూనాల కుటుంబం"
-
-#: src/available_models_descriptions.py:46
-msgid "State-of-the-art code generation model"
-msgstr "స్టేట్ ఆఫ్ ది ఆర్ట్ కోడ్ జనరేషన్ మోడల్"
-
-#: src/available_models_descriptions.py:47
-msgid ""
-"Stable Code 3B is a coding model with instruct and code completion variants "
-"on par with models such as Code Llama 7B that are 2.5x larger."
-msgstr ""
-"స్టేబుల్ కోడ్ 3B అనేది 2.5x పెద్ద కోడ్ లామా 7B వంటి మోడళ్లతో సమానంగా ఇన్‌స్ట్రస్ట్ మరియు కోడ్ కంప్లీషన్ "
-"వేరియంట్‌లతో కూడిన కోడింగ్ మోడల్."
-
-#: src/available_models_descriptions.py:48
-msgid ""
-"OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
-"open datasets."
-msgstr ""
-"OpenHermes 2.5 అనేది పూర్తిగా తెరిచిన డేటాసెట్‌లతో మిస్ట్రాల్‌లో టెక్నియం ద్వారా ఫైన్-ట్యూన్ చేయబడిన 7B మోడల్."
 
 #: src/available_models_descriptions.py:49
 msgid "Embedding models on very large sentence level datasets."
@@ -1663,141 +1716,62 @@ msgstr "చాలా పెద్ద వాక్య స్థాయి డే�
 
 #: src/available_models_descriptions.py:50
 msgid ""
+"A family of open-source models trained on a wide variety of data, surpassing "
+"ChatGPT on various benchmarks. Updated to version 3.5-0106."
+msgstr ""
+"అనేక రకాల డేటాపై శిక్షణ పొందిన ఓపెన్ సోర్స్ మోడల్‌ల కుటుంబం, వివిధ బెంచ్‌మార్క్‌లలో ChatGPTని అధిగమించింది. "
+"వెర్షన్ 3.5-0106కి నవీకరించబడింది."
+
+#: src/available_models_descriptions.py:51
+msgid ""
+"Aya 23, released by Cohere, is a new family of state-of-the-art, "
+"multilingual models that support 23 languages."
+msgstr ""
+"Aya 23, Cohere ద్వారా విడుదల చేయబడింది, ఇది 23 భాషలకు మద్దతు ఇచ్చే అత్యాధునిక, బహుభాషా నమూనాల "
+"కొత్త కుటుంబం."
+
+#: src/available_models_descriptions.py:52
+msgid ""
 "CodeQwen1.5 is a large language model pretrained on a large amount of code "
 "data."
 msgstr "CodeQwen1.5 అనేది పెద్ద మొత్తంలో కోడ్ డేటాపై ముందుగా శిక్షణ పొందిన పెద్ద భాషా నమూనా."
 
-#: src/available_models_descriptions.py:51
-msgid ""
-"Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model "
-"trained on multilingual data in English, Spanish, German, Italian, French, "
-"Portuguese, and Dutch."
-msgstr ""
-"స్థిరమైన LM 2 అనేది ఇంగ్లీష్, స్పానిష్, జర్మన్, ఇటాలియన్, ఫ్రెంచ్, పోర్చుగీస్ మరియు డచ్ భాషలలో బహుభాషా డేటాపై "
-"శిక్షణ పొందిన అత్యాధునిక 1.6B మరియు 12B పారామీటర్ లాంగ్వేజ్ మోడల్."
-
-#: src/available_models_descriptions.py:52
-msgid "Model focused on math and logic problems"
-msgstr "మోడల్ గణితం మరియు తర్కం సమస్యలపై దృష్టి పెట్టింది"
-
 #: src/available_models_descriptions.py:53
 msgid ""
-"A fine-tuned model based on Mistral with good coverage of domain and "
-"language."
-msgstr "డొమైన్ మరియు భాష యొక్క మంచి కవరేజీతో Mistral ఆధారంగా చక్కటి ట్యూన్ చేయబడిన మోడల్."
+"State of the art large language model from Microsoft AI with improved "
+"performance on complex chat, multilingual, reasoning and agent use cases."
+msgstr ""
+"కాంప్లెక్స్ చాట్, బహుభాషా, రీజనింగ్ మరియు ఏజెంట్ వినియోగ కేసులపై మెరుగైన పనితీరుతో Microsoft AI నుండి "
+"స్టేట్ ఆఫ్ ది ఆర్ట్ లార్జ్ లాంగ్వేజ్ మోడల్."
 
 #: src/available_models_descriptions.py:54
 msgid ""
-"This model extends LLama-3 8B's context length from 8k to over 1m tokens."
-msgstr "ఈ మోడల్ LLama-3 8B యొక్క సందర్భ నిడివిని 8k నుండి 1m కంటే ఎక్కువ టోకెన్‌లకు విస్తరించింది."
+"An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
+"by Eric Hartford and based on TinyLlama."
+msgstr ""
+"ఎరిక్ హార్ట్‌ఫోర్డ్ ద్వారా కొత్త డాల్ఫిన్ 2.8 డేటాసెట్‌పై శిక్షణ పొందిన ప్రయోగాత్మక 1.1B పారామీటర్ మోడల్ మరియు "
+"TinyLlama ఆధారంగా."
 
 #: src/available_models_descriptions.py:55
-msgid "Code generation model based on Code Llama."
-msgstr "కోడ్ లామా ఆధారంగా కోడ్ జనరేషన్ మోడల్."
+msgid "State-of-the-art code generation model"
+msgstr "స్టేట్ ఆఫ్ ది ఆర్ట్ కోడ్ జనరేషన్ మోడల్"
 
 #: src/available_models_descriptions.py:56
-msgid "General use models based on Llama and Llama 2 from Nous Research."
-msgstr "నౌస్ రీసెర్చ్ నుండి లామా మరియు లామా 2 ఆధారంగా సాధారణ వినియోగ నమూనాలు."
+msgid ""
+"Stable Code 3B is a coding model with instruct and code completion variants "
+"on par with models such as Code Llama 7B that are 2.5x larger."
+msgstr ""
+"స్టేబుల్ కోడ్ 3B అనేది 2.5x పెద్ద కోడ్ లామా 7B వంటి మోడళ్లతో సమానంగా ఇన్‌స్ట్రస్ట్ మరియు కోడ్ కంప్లీషన్ "
+"వేరియంట్‌లతో కూడిన కోడింగ్ మోడల్."
 
 #: src/available_models_descriptions.py:57
 msgid ""
-"A 7B and 15B uncensored variant of the Dolphin model family that excels at "
-"coding, based on StarCoder2."
+"OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
+"open datasets."
 msgstr ""
-"డాల్ఫిన్ మోడల్ ఫ్యామిలీకి చెందిన 7B మరియు 15B సెన్సార్ చేయని వేరియంట్, ఇది స్టార్‌కోడర్2 ఆధారంగా కోడింగ్‌లో "
-"రాణిస్తుంది."
+"OpenHermes 2.5 అనేది పూర్తిగా తెరిచిన డేటాసెట్‌లతో మిస్ట్రాల్‌లో టెక్నియం ద్వారా ఫైన్-ట్యూన్ చేయబడిన 7B మోడల్."
 
 #: src/available_models_descriptions.py:58
-msgid ""
-"SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
-"generation tasks"
-msgstr "SQLcoder అనేది SQL జనరేషన్ టాస్క్‌ల కోసం స్టార్‌కోడర్‌లో ఫైన్-ట్యూన్ చేయబడిన కోడ్ కంప్లీషన్ మోడల్."
-
-#: src/available_models_descriptions.py:59
-msgid ""
-"Conversational model based on Llama 2 that performs competitively on various "
-"benchmarks."
-msgstr "లామా 2 ఆధారంగా వివిధ బెంచ్‌మార్క్‌లపై పోటీతత్వం ప్రదర్శించే సంభాషణ మోడల్."
-
-#: src/available_models_descriptions.py:60
-msgid "An advanced language model crafted with 2 trillion bilingual tokens."
-msgstr "2 ట్రిలియన్ ద్విభాషా టోకెన్‌లతో రూపొందించబడిన అధునాతన భాషా నమూనా."
-
-#: src/available_models_descriptions.py:61
-msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
-msgstr "లామా 2 యొక్క పొడిగింపు 128k టోకెన్‌ల సందర్భానికి మద్దతు ఇస్తుంది."
-
-#: src/available_models_descriptions.py:62
-msgid ""
-"A model from NVIDIA based on Llama 3 that excels at conversational question "
-"answering (QA) and retrieval-augmented generation (RAG)."
-msgstr ""
-"Llama 3 ఆధారంగా NVIDIA నుండి ఒక మోడల్, ఇది సంభాషణ ప్రశ్న సమాధానాలు (QA) మరియు తిరిగి పొందడం-"
-"అగ్మెంటెడ్ జనరేషన్ (RAG)."
-
-#: src/available_models_descriptions.py:63
-msgid "General use model based on Llama 2."
-msgstr "లామా 2 ఆధారంగా సాధారణ వినియోగ నమూనా."
-
-#: src/available_models_descriptions.py:64
-msgid ""
-"Starling is a large language model trained by reinforcement learning from AI "
-"feedback focused on improving chatbot helpfulness."
-msgstr ""
-"స్టార్లింగ్ అనేది చాట్‌బాట్ సహాయాన్ని మెరుగుపరచడంపై దృష్టి సారించిన AI ఫీడ్‌బ్యాక్ నుండి రీన్‌ఫోర్స్‌మెంట్ లెర్నింగ్ "
-"ద్వారా శిక్షణ పొందిన పెద్ద భాషా నమూనా."
-
-#: src/available_models_descriptions.py:65
-msgid ""
-"A versatile model for AI software development scenarios, including code "
-"completion."
-msgstr "కోడ్ పూర్తి చేయడంతో సహా AI సాఫ్ట్‌వేర్ డెవలప్‌మెంట్ దృశ్యాల కోసం బహుముఖ నమూనా."
-
-#: src/available_models_descriptions.py:66
-msgid ""
-"A suite of text embedding models by Snowflake, optimized for performance."
-msgstr "స్నోఫ్లేక్ ద్వారా టెక్స్ట్ ఎంబెడ్డింగ్ మోడల్‌ల సూట్, పనితీరు కోసం ఆప్టిమైజ్ చేయబడింది."
-
-#: src/available_models_descriptions.py:67
-msgid ""
-"Orca 2 is built by Microsoft research, and are a fine-tuned version of "
-"Meta's Llama 2 models. The model is designed to excel particularly in "
-"reasoning."
-msgstr ""
-"ఓర్కా 2 మైక్రోసాఫ్ట్ పరిశోధన ద్వారా నిర్మించబడింది మరియు ఇది మెటా యొక్క లామా 2 మోడల్‌ల యొక్క ఫైన్-ట్యూన్డ్ వెర్షన్. "
-"మోడల్ ముఖ్యంగా రీజనింగ్‌లో రాణించేలా రూపొందించబడింది."
-
-#: src/available_models_descriptions.py:68
-msgid ""
-"A compact, yet powerful 10.7B large language model designed for single-turn "
-"conversation."
-msgstr "సింగిల్-టర్న్ సంభాషణ కోసం రూపొందించబడిన కాంపాక్ట్, ఇంకా శక్తివంతమైన 10.7B పెద్ద భాషా మోడల్."
-
-#: src/available_models_descriptions.py:69
-msgid ""
-"A companion assistant trained in philosophy, psychology, and personal "
-"relationships. Based on Mistral."
-msgstr ""
-"తత్వశాస్త్రం, మనస్తత్వశాస్త్రం మరియు వ్యక్తిగత సంబంధాలలో శిక్షణ పొందిన సహచర సహాయకుడు. మిస్ట్రాల్ "
-"ఆధారంగా."
-
-#: src/available_models_descriptions.py:70
-msgid ""
-"moondream2 is a small vision language model designed to run efficiently on "
-"edge devices."
-msgstr ""
-"moondream2 అనేది ఎడ్జ్ పరికరాలపై సమర్థవంతంగా అమలు చేయడానికి రూపొందించబడిన చిన్న విజన్ లాంగ్వేజ్ మోడల్."
-
-#: src/available_models_descriptions.py:71
-#: src/available_models_descriptions.py:72
-msgid ""
-"­č�É A family of small models with 135M, 360M, and 1.7B parameters, trained "
-"on a new high-quality dataset."
-msgstr ""
-"čÉ 135M, 360M మరియు 1.7B పారామీటర్‌లతో కూడిన చిన్న మోడల్‌ల కుటుంబం, కొత్త అధిక-నాణ్యత డేటాసెట్‌పై "
-"శిక్షణ పొందింది."
-
-#: src/available_models_descriptions.py:73
 msgid ""
 "Qwen2 Math is a series of specialized math language models built upon the "
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
@@ -1806,53 +1780,201 @@ msgstr ""
 "Qwen2 Math అనేది Qwen2 LLMలపై రూపొందించబడిన ప్రత్యేక గణిత భాషా నమూనాల శ్రేణి, ఇది ఓపెన్-సోర్స్ "
 "మోడల్స్ మరియు క్లోజ్డ్-సోర్స్ మోడల్‌ల (ఉదా., GPT4o) యొక్క గణిత సామర్థ్యాలను గణనీయంగా అధిగమిస్తుంది."
 
-#: src/available_models_descriptions.py:74
-msgid ""
-"2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
-"model by Microsoft Research."
-msgstr ""
-"మైక్రోసాఫ్ట్ రీసెర్చ్ ద్వారా ఫై లాంగ్వేజ్ మోడల్ ఆధారంగా ఎరిక్ హార్ట్‌ఫోర్డ్ ద్వారా 2.7B సెన్సార్ చేయని డాల్ఫిన్ మోడల్."
-
-#: src/available_models_descriptions.py:75
-msgid "A strong, economical, and efficient Mixture-of-Experts language model."
-msgstr "బలమైన, ఆర్థిక మరియు సమర్థవంతమైన మిక్స్చర్ ఆఫ్ ఎక్స్‌పర్ట్స్ లాంగ్వేజ్ మోడల్."
-
-#: src/available_models_descriptions.py:76
+#: src/available_models_descriptions.py:59
 msgid ""
 "BakLLaVA is a multimodal model consisting of the Mistral 7B base model "
 "augmented with the LLaVA architecture."
 msgstr ""
 "BakLLaVA అనేది LLaVA ఆర్కిటెక్చర్‌తో విస్తరించిన Mistral 7B బేస్ మోడల్‌తో కూడిన మల్టీమోడల్ మోడల్."
 
-#: src/available_models_descriptions.py:77
+#: src/available_models_descriptions.py:60
+msgid ""
+"Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model "
+"trained on multilingual data in English, Spanish, German, Italian, French, "
+"Portuguese, and Dutch."
+msgstr ""
+"స్థిరమైన LM 2 అనేది ఇంగ్లీష్, స్పానిష్, జర్మన్, ఇటాలియన్, ఫ్రెంచ్, పోర్చుగీస్ మరియు డచ్ భాషలలో బహుభాషా డేటాపై "
+"శిక్షణ పొందిన అత్యాధునిక 1.6B మరియు 12B పారామీటర్ లాంగ్వేజ్ మోడల్."
+
+#: src/available_models_descriptions.py:61
+msgid ""
+"This model extends LLama-3 8B's context length from 8k to over 1m tokens."
+msgstr "ఈ మోడల్ LLama-3 8B యొక్క సందర్భ నిడివిని 8k నుండి 1m కంటే ఎక్కువ టోకెన్‌లకు విస్తరించింది."
+
+#: src/available_models_descriptions.py:62
+msgid "An advanced language model crafted with 2 trillion bilingual tokens."
+msgstr "2 ట్రిలియన్ ద్విభాషా టోకెన్‌లతో రూపొందించబడిన అధునాతన భాషా నమూనా."
+
+#: src/available_models_descriptions.py:63
+msgid "Model focused on math and logic problems"
+msgstr "మోడల్ గణితం మరియు తర్కం సమస్యలపై దృష్టి పెట్టింది"
+
+#: src/available_models_descriptions.py:64
 msgid ""
 "A strong multi-lingual general language model with competitive performance "
 "to Llama 3."
 msgstr "లామా 3కి పోటీ పనితీరుతో బలమైన బహుళ-భాషా సాధారణ భాషా నమూనా."
 
+#: src/available_models_descriptions.py:65
+msgid ""
+"A fine-tuned model based on Mistral with good coverage of domain and "
+"language."
+msgstr "డొమైన్ మరియు భాష యొక్క మంచి కవరేజీతో Mistral ఆధారంగా చక్కటి ట్యూన్ చేయబడిన మోడల్."
+
+#: src/available_models_descriptions.py:66
+msgid ""
+"A high-performing model trained with a new technique called Reflection-"
+"tuning that teaches a LLM to detect mistakes in its reasoning and correct "
+"course."
+msgstr ""
+
+#: src/available_models_descriptions.py:67
+msgid ""
+"A model from NVIDIA based on Llama 3 that excels at conversational question "
+"answering (QA) and retrieval-augmented generation (RAG)."
+msgstr ""
+"Llama 3 ఆధారంగా NVIDIA నుండి ఒక మోడల్, ఇది సంభాషణ ప్రశ్న సమాధానాలు (QA) మరియు తిరిగి పొందడం-"
+"అగ్మెంటెడ్ జనరేషన్ (RAG)."
+
+#: src/available_models_descriptions.py:68
+msgid ""
+"Mistral Large 2 is Mistral's new flagship model that is significantly more "
+"capable in code generation, mathematics, and reasoning with 128k context "
+"window and support for dozens of languages."
+msgstr ""
+"Mistral Large 2 అనేది Mistral యొక్క కొత్త ఫ్లాగ్‌షిప్ మోడల్, ఇది 128k కాంటెక్స్ట్ విండో మరియు డజన్ల "
+"కొద్దీ భాషలకు మద్దతుతో కోడ్ ఉత్పత్తి, గణితం మరియు తార్కికంలో గణనీయమైన సామర్థ్యాన్ని కలిగి ఉంటుంది."
+
+#: src/available_models_descriptions.py:69
+msgid ""
+"moondream2 is a small vision language model designed to run efficiently on "
+"edge devices."
+msgstr ""
+"moondream2 అనేది ఎడ్జ్ పరికరాలపై సమర్థవంతంగా అమలు చేయడానికి రూపొందించబడిన చిన్న విజన్ లాంగ్వేజ్ మోడల్."
+
+#: src/available_models_descriptions.py:70
+msgid ""
+"Conversational model based on Llama 2 that performs competitively on various "
+"benchmarks."
+msgstr "లామా 2 ఆధారంగా వివిధ బెంచ్‌మార్క్‌లపై పోటీతత్వం ప్రదర్శించే సంభాషణ మోడల్."
+
+#: src/available_models_descriptions.py:71
+msgid "Code generation model based on Code Llama."
+msgstr "కోడ్ లామా ఆధారంగా కోడ్ జనరేషన్ మోడల్."
+
+#: src/available_models_descriptions.py:72
+msgid "General use models based on Llama and Llama 2 from Nous Research."
+msgstr "నౌస్ రీసెర్చ్ నుండి లామా మరియు లామా 2 ఆధారంగా సాధారణ వినియోగ నమూనాలు."
+
+#: src/available_models_descriptions.py:73
+msgid ""
+"SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
+"generation tasks"
+msgstr "SQLcoder అనేది SQL జనరేషన్ టాస్క్‌ల కోసం స్టార్‌కోడర్‌లో ఫైన్-ట్యూన్ చేయబడిన కోడ్ కంప్లీషన్ మోడల్."
+
+#: src/available_models_descriptions.py:74
+msgid ""
+"A 7B and 15B uncensored variant of the Dolphin model family that excels at "
+"coding, based on StarCoder2."
+msgstr ""
+"డాల్ఫిన్ మోడల్ ఫ్యామిలీకి చెందిన 7B మరియు 15B సెన్సార్ చేయని వేరియంట్, ఇది స్టార్‌కోడర్2 ఆధారంగా కోడింగ్‌లో "
+"రాణిస్తుంది."
+
+#: src/available_models_descriptions.py:75
+msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
+msgstr "లామా 2 యొక్క పొడిగింపు 128k టోకెన్‌ల సందర్భానికి మద్దతు ఇస్తుంది."
+
+#: src/available_models_descriptions.py:76
+msgid ""
+"🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
+"a new high-quality dataset."
+msgstr ""
+
+#: src/available_models_descriptions.py:77
+msgid "General use model based on Llama 2."
+msgstr "లామా 2 ఆధారంగా సాధారణ వినియోగ నమూనా."
+
 #: src/available_models_descriptions.py:78
-msgid "Uncensored version of Wizard LM model"
-msgstr "విజార్డ్ LM మోడల్ యొక్క సెన్సార్ చేయని వెర్షన్"
+msgid "A strong, economical, and efficient Mixture-of-Experts language model."
+msgstr "బలమైన, ఆర్థిక మరియు సమర్థవంతమైన మిక్స్చర్ ఆఫ్ ఎక్స్‌పర్ట్స్ లాంగ్వేజ్ మోడల్."
 
 #: src/available_models_descriptions.py:79
-msgid "An extension of Mistral to support context windows of 64K or 128K."
-msgstr "64K లేదా 128K యొక్క సందర్భ విండోలకు మద్దతు ఇవ్వడానికి Mistral యొక్క పొడిగింపు."
+msgid ""
+"Starling is a large language model trained by reinforcement learning from AI "
+"feedback focused on improving chatbot helpfulness."
+msgstr ""
+"స్టార్లింగ్ అనేది చాట్‌బాట్ సహాయాన్ని మెరుగుపరచడంపై దృష్టి సారించిన AI ఫీడ్‌బ్యాక్ నుండి రీన్‌ఫోర్స్‌మెంట్ లెర్నింగ్ "
+"ద్వారా శిక్షణ పొందిన పెద్ద భాషా నమూనా."
 
 #: src/available_models_descriptions.py:80
 msgid ""
-"A lightweight AI model with 3.8 billion parameters with performance "
-"overtaking similarly and larger sized models."
+"A companion assistant trained in philosophy, psychology, and personal "
+"relationships. Based on Mistral."
 msgstr ""
-"3.8 బిలియన్ పారామీటర్‌లతో కూడిన తేలికపాటి AI మోడల్ పనితీరు అదే విధంగా మరియు పెద్ద సైజు మోడల్‌లను "
-"అధిగమించింది."
+"తత్వశాస్త్రం, మనస్తత్వశాస్త్రం మరియు వ్యక్తిగత సంబంధాలలో శిక్షణ పొందిన సహచర సహాయకుడు. మిస్ట్రాల్ "
+"ఆధారంగా."
 
 #: src/available_models_descriptions.py:81
 msgid ""
-"Fine-tuned Llama 2 model to answer medical questions based on an open source "
-"medical dataset."
-msgstr "ఓపెన్ సోర్స్ మెడికల్ డేటాసెట్ ఆధారంగా వైద్య ప్రశ్నలకు సమాధానమివ్వడానికి ఫైన్-ట్యూన్ చేయబడిన లామా 2 మోడల్."
+"A compact, yet powerful 10.7B large language model designed for single-turn "
+"conversation."
+msgstr "సింగిల్-టర్న్ సంభాషణ కోసం రూపొందించబడిన కాంపాక్ట్, ఇంకా శక్తివంతమైన 10.7B పెద్ద భాషా మోడల్."
 
 #: src/available_models_descriptions.py:82
+msgid ""
+"Orca 2 is built by Microsoft research, and are a fine-tuned version of "
+"Meta's Llama 2 models. The model is designed to excel particularly in "
+"reasoning."
+msgstr ""
+"ఓర్కా 2 మైక్రోసాఫ్ట్ పరిశోధన ద్వారా నిర్మించబడింది మరియు ఇది మెటా యొక్క లామా 2 మోడల్‌ల యొక్క ఫైన్-ట్యూన్డ్ వెర్షన్. "
+"మోడల్ ముఖ్యంగా రీజనింగ్‌లో రాణించేలా రూపొందించబడింది."
+
+#: src/available_models_descriptions.py:83
+msgid ""
+"Llama 2 based model fine tuned on an Orca-style dataset. Originally called "
+"Free Willy."
+msgstr ""
+
+#: src/available_models_descriptions.py:84
+msgid ""
+"2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
+"model by Microsoft Research."
+msgstr ""
+"మైక్రోసాఫ్ట్ రీసెర్చ్ ద్వారా ఫై లాంగ్వేజ్ మోడల్ ఆధారంగా ఎరిక్ హార్ట్‌ఫోర్డ్ ద్వారా 2.7B సెన్సార్ చేయని డాల్ఫిన్ మోడల్."
+
+#: src/available_models_descriptions.py:85
+msgid "Uncensored version of Wizard LM model"
+msgstr "విజార్డ్ LM మోడల్ యొక్క సెన్సార్ చేయని వెర్షన్"
+
+#: src/available_models_descriptions.py:86
+msgid ""
+"Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
+"Research"
+msgstr "హీర్మేస్ 3 అనేది నౌస్ రీసెర్చ్ ద్వారా LLMల ఫ్లాగ్‌షిప్ హెర్మేస్ సిరీస్ యొక్క తాజా వెర్షన్"
+
+#: src/available_models_descriptions.py:87
+msgid ""
+"Yi-Coder is a series of open-source code language models that delivers state-"
+"of-the-art coding performance with fewer than 10 billion parameters."
+msgstr ""
+
+#: src/available_models_descriptions.py:88
+msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
+msgstr "కొత్త చిన్న LLaVA మోడల్ ఫై 3 మినీ నుండి చక్కగా ట్యూన్ చేయబడింది."
+
+#: src/available_models_descriptions.py:89
+msgid ""
+"InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
+"outstanding reasoning capability."
+msgstr ""
+"InternLM2.5 అనేది అత్యుత్తమ తార్కిక సామర్థ్యంతో ఆచరణాత్మక దృశ్యాల కోసం రూపొందించబడిన 7B పారామీటర్ "
+"మోడల్."
+
+#: src/available_models_descriptions.py:90
+msgid "An extension of Mistral to support context windows of 64K or 128K."
+msgstr "64K లేదా 128K యొక్క సందర్భ విండోలకు మద్దతు ఇవ్వడానికి Mistral యొక్క పొడిగింపు."
+
+#: src/available_models_descriptions.py:91
 msgid ""
 "An expansion of Llama 2 that specializes in integrating both general "
 "language understanding and domain-specific knowledge, particularly in "
@@ -1861,79 +1983,32 @@ msgstr ""
 "లామా 2 యొక్క విస్తరణ, ఇది సాధారణ భాషా అవగాహన మరియు డొమైన్-నిర్దిష్ట జ్ఞానం రెండింటినీ, ముఖ్యంగా ప్రోగ్రామింగ్ "
 "మరియు గణితంలో సమగ్రపరచడంలో ప్రత్యేకత కలిగి ఉంది."
 
-#: src/available_models_descriptions.py:83
-msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
-msgstr "కొత్త చిన్న LLaVA మోడల్ ఫై 3 మినీ నుండి చక్కగా ట్యూన్ చేయబడింది."
+#: src/available_models_descriptions.py:92
+msgid ""
+"Fine-tuned Llama 2 model to answer medical questions based on an open source "
+"medical dataset."
+msgstr "ఓపెన్ సోర్స్ మెడికల్ డేటాసెట్ ఆధారంగా వైద్య ప్రశ్నలకు సమాధానమివ్వడానికి ఫైన్-ట్యూన్ చేయబడిన లామా 2 మోడల్."
 
-#: src/available_models_descriptions.py:84
+#: src/available_models_descriptions.py:93
 msgid ""
 "Open-source medical large language model adapted from Llama 2 to the medical "
 "domain."
 msgstr "లామా 2 నుండి మెడికల్ డొమైన్‌కు స్వీకరించబడిన ఓపెన్ సోర్స్ మెడికల్ లార్జ్ లాంగ్వేజ్ మోడల్."
 
-#: src/available_models_descriptions.py:85
-msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
-msgstr "నౌస్ రీసెర్చ్ నుండి నౌస్ హెర్మేస్ 2 మోడల్, ఇప్పుడు మిక్స్‌ట్రాల్‌పై శిక్షణ పొందింది."
-
-#: src/available_models_descriptions.py:86
+#: src/available_models_descriptions.py:94
 msgid ""
 "Nexus Raven is a 13B instruction tuned model for function calling tasks."
 msgstr "Nexus Raven అనేది ఫంక్షన్ కాలింగ్ టాస్క్‌ల కోసం 13B సూచనల ట్యూన్డ్ మోడల్."
 
-#: src/available_models_descriptions.py:87
+#: src/available_models_descriptions.py:95
+msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
+msgstr "నౌస్ రీసెర్చ్ నుండి నౌస్ హెర్మేస్ 2 మోడల్, ఇప్పుడు మిక్స్‌ట్రాల్‌పై శిక్షణ పొందింది."
+
+#: src/available_models_descriptions.py:96
 msgid "Great code generation model based on Llama2."
 msgstr "లామా2 ఆధారంగా గొప్ప కోడ్ జనరేషన్ మోడల్."
 
-#: src/available_models_descriptions.py:88
-msgid "Uncensored Llama2 based model with support for a 16K context window."
-msgstr "16K కాంటెక్స్ట్ విండోకు మద్దతుతో సెన్సార్ చేయని లామా2 ఆధారిత మోడల్."
-
-#: src/available_models_descriptions.py:89
-msgid ""
-"Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
-"Research"
-msgstr "హీర్మేస్ 3 అనేది నౌస్ రీసెర్చ్ ద్వారా LLMల ఫ్లాగ్‌షిప్ హెర్మేస్ సిరీస్ యొక్క తాజా వెర్షన్"
-
-#: src/available_models_descriptions.py:90
-msgid ""
-"InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
-"outstanding reasoning capability."
-msgstr ""
-"InternLM2.5 అనేది అత్యుత్తమ తార్కిక సామర్థ్యంతో ఆచరణాత్మక దృశ్యాల కోసం రూపొందించబడిన 7B పారామీటర్ "
-"మోడల్."
-
-#: src/available_models_descriptions.py:91
-msgid ""
-"­čÄę Magicoder is a family of 7B parameter models trained on 75K synthetic "
-"instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
-"with open-source code snippets."
-msgstr ""
-"čÄę మ్యాజికోడర్ అనేది OSS-ఇన్‌స్ట్రక్ట్‌ని ఉపయోగించి 75K సింథటిక్ ఇన్‌స్ట్రక్షన్ డేటాపై శిక్షణ పొందిన 7B పారామీటర్ "
-"మోడల్‌ల కుటుంబం, ఇది ఓపెన్-సోర్స్ కోడ్ స్నిప్పెట్‌లతో LLMలను జ్ఞానోదయం చేసే కొత్త విధానం."
-
-#: src/available_models_descriptions.py:92
-msgid ""
-"A lightweight chat model allowing accurate, and responsive output without "
-"requiring high-end hardware."
-msgstr ""
-"హై-ఎండ్ హార్డ్‌వేర్ అవసరం లేకుండా ఖచ్చితమైన మరియు ప్రతిస్పందించే అవుట్‌పుట్‌ను అనుమతించే తేలికపాటి చాట్ మోడల్."
-
-#: src/available_models_descriptions.py:93
-msgid ""
-"A high-performing code instruct model created by merging two existing code "
-"models."
-msgstr ""
-"ఇప్పటికే ఉన్న రెండు కోడ్ మోడల్‌లను విలీనం చేయడం ద్వారా రూపొందించబడిన అధిక-పనితీరు గల కోడ్ సూచన మోడల్."
-
-#: src/available_models_descriptions.py:94
-msgid ""
-"MistralLite is a fine-tuned model based on Mistral with enhanced "
-"capabilities of processing long contexts."
-msgstr ""
-"MistralLite అనేది సుదీర్ఘ సందర్భాలను ప్రాసెస్ చేసే మెరుగైన సామర్థ్యాలతో Mistral ఆధారంగా చక్కగా ట్యూన్ "
-"చేయబడిన మోడల్."
-
-#: src/available_models_descriptions.py:95
+#: src/available_models_descriptions.py:97
 msgid ""
 "A series of models from Groq that represent a significant advancement in "
 "open-source AI capabilities for tool use/function calling."
@@ -1941,7 +2016,46 @@ msgstr ""
 "టూల్ యూజ్/ఫంక్షన్ కాలింగ్ కోసం ఓపెన్ సోర్స్ AI సామర్థ్యాలలో గణనీయమైన పురోగతిని సూచించే Groq నుండి మోడల్‌ల "
 "శ్రేణి."
 
-#: src/available_models_descriptions.py:96
+#: src/available_models_descriptions.py:98
+msgid "Uncensored Llama2 based model with support for a 16K context window."
+msgstr "16K కాంటెక్స్ట్ విండోకు మద్దతుతో సెన్సార్ చేయని లామా2 ఆధారిత మోడల్."
+
+#: src/available_models_descriptions.py:99
+msgid ""
+"🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic "
+"instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
+"with open-source code snippets."
+msgstr ""
+
+#: src/available_models_descriptions.py:100
+msgid ""
+"A lightweight chat model allowing accurate, and responsive output without "
+"requiring high-end hardware."
+msgstr ""
+"హై-ఎండ్ హార్డ్‌వేర్ అవసరం లేకుండా ఖచ్చితమైన మరియు ప్రతిస్పందించే అవుట్‌పుట్‌ను అనుమతించే తేలికపాటి చాట్ మోడల్."
+
+#: src/available_models_descriptions.py:101
+msgid ""
+"A high-performing code instruct model created by merging two existing code "
+"models."
+msgstr ""
+"ఇప్పటికే ఉన్న రెండు కోడ్ మోడల్‌లను విలీనం చేయడం ద్వారా రూపొందించబడిన అధిక-పనితీరు గల కోడ్ సూచన మోడల్."
+
+#: src/available_models_descriptions.py:102
+msgid ""
+"Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
+"MelodysDreamj."
+msgstr "విజార్డ్ వికునా అనేది MelodysDreamj ద్వారా శిక్షణ పొందిన లామా 2 ఆధారంగా 13B పారామీటర్ మోడల్."
+
+#: src/available_models_descriptions.py:103
+msgid ""
+"MistralLite is a fine-tuned model based on Mistral with enhanced "
+"capabilities of processing long contexts."
+msgstr ""
+"MistralLite అనేది సుదీర్ఘ సందర్భాలను ప్రాసెస్ చేసే మెరుగైన సామర్థ్యాలతో Mistral ఆధారంగా చక్కగా ట్యూన్ "
+"చేయబడిన మోడల్."
+
+#: src/available_models_descriptions.py:104
 msgid ""
 "Falcon2 is an 11B parameters causal decoder-only model built by TII and "
 "trained over 5T tokens."
@@ -1949,17 +2063,17 @@ msgstr ""
 "Falcon2 అనేది TII ద్వారా రూపొందించబడిన మరియు 5T టోకెన్‌లపై శిక్షణ పొందిన 11B పారామీటర్‌ల కారణ డీకోడర్-"
 "మాత్రమే మోడల్."
 
-#: src/available_models_descriptions.py:97
-msgid ""
-"Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
-"MelodysDreamj."
-msgstr "విజార్డ్ వికునా అనేది MelodysDreamj ద్వారా శిక్షణ పొందిన లామా 2 ఆధారంగా 13B పారామీటర్ మోడల్."
-
-#: src/available_models_descriptions.py:98
+#: src/available_models_descriptions.py:105
 msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
 msgstr "మదర్‌డక్ మరియు నంబర్స్ స్టేషన్ ద్వారా 7B పారామీటర్ టెక్స్ట్-టు-SQL మోడల్ తయారు చేయబడింది."
 
-#: src/available_models_descriptions.py:99
+#: src/available_models_descriptions.py:106
+msgid ""
+"A series of multimodal LLMs (MLLMs) designed for vision-language "
+"understanding."
+msgstr ""
+
+#: src/available_models_descriptions.py:107
 msgid ""
 "MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
 "interleaving the model with itself."
@@ -1967,18 +2081,18 @@ msgstr ""
 "MegaDolphin-2.2-120b అనేది డాల్ఫిన్-2.2-70b యొక్క రూపాంతరం, మోడల్‌ను దానితో కలుపుకోవడం ద్వారా "
 "సృష్టించబడింది."
 
-#: src/available_models_descriptions.py:100
+#: src/available_models_descriptions.py:108
 msgid ""
 "A top-performing mixture of experts model, fine-tuned with high-quality data."
 msgstr "అధిక-నాణ్యత డేటాతో చక్కగా ట్యూన్ చేయబడిన నిపుణుల మోడల్ యొక్క అత్యుత్తమ పనితీరు మిశ్రమం."
 
-#: src/available_models_descriptions.py:101
+#: src/available_models_descriptions.py:109
 msgid ""
 "A language model created by combining two fine-tuned Llama 2 70B models into "
 "one."
 msgstr "రెండు ఫైన్-ట్యూన్డ్ లామా 2 70B మోడల్‌లను ఒకటిగా కలపడం ద్వారా రూపొందించబడిన భాషా నమూనా."
 
-#: src/available_models_descriptions.py:102
+#: src/available_models_descriptions.py:110
 msgid ""
 "Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
 "Designed for chat and code generation."
@@ -1986,22 +2100,11 @@ msgstr ""
 "ఓపెన్ ఓర్కా ఓపెన్‌చాట్ మోడల్ మరియు గ్యారేజ్-బైండ్ ప్లాటిపస్ 2 మోడల్‌ను విలీనం చేయండి. చాట్ మరియు కోడ్ ఉత్పత్తి "
 "కోసం రూపొందించబడింది."
 
-#: src/available_models_descriptions.py:103
+#: src/available_models_descriptions.py:111
 msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
 msgstr "7B చాట్ మోడల్ అధిక-నాణ్యత డేటాతో మరియు Zephyr ఆధారంగా చక్కగా ట్యూన్ చేయబడింది."
 
-#: src/available_models_descriptions.py:104
-msgid "DBRX is an open, general-purpose LLM created by Databricks."
-msgstr "DBRX అనేది డేటాబ్రిక్స్ ద్వారా సృష్టించబడిన బహిరంగ, సాధారణ-ప్రయోజన LLM."
-
-#: src/available_models_descriptions.py:105
-msgid ""
-"Math╬útral: a 7B model designed for math reasoning and scientific discovery "
-"by Mistral AI."
-msgstr ""
-"Math╬útral: Mistral AI ద్వారా గణిత తార్కికం మరియు శాస్త్రీయ ఆవిష్కరణ కోసం రూపొందించబడిన 7B మోడల్."
-
-#: src/available_models_descriptions.py:106
+#: src/available_models_descriptions.py:112
 msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
@@ -2009,31 +2112,63 @@ msgstr ""
 "BGE-M3 అనేది BAAI నుండి వచ్చిన కొత్త మోడల్, ఇది బహుళ-ఫంక్షనాలిటీ, మల్టీ-లింగ్వాలిటీ మరియు మల్టీ-"
 "గ్రాన్యులారిటీలో దాని బహుముఖ ప్రజ్ఞకు ప్రత్యేకించబడింది."
 
-#: src/available_models_descriptions.py:107
+#: src/available_models_descriptions.py:113
 msgid ""
-"A robust conversational model designed to be used for both chat and instruct "
-"use cases."
+"MathΣtral: a 7B model designed for math reasoning and scientific discovery "
+"by Mistral AI."
 msgstr ""
-"చాట్ మరియు సూచన వినియోగ సందర్భాలు రెండింటికీ ఉపయోగించేందుకు రూపొందించబడిన బలమైన సంభాషణ నమూనా."
 
-#: src/available_models_descriptions.py:108
+#: src/available_models_descriptions.py:114
+msgid "DBRX is an open, general-purpose LLM created by Databricks."
+msgstr "DBRX అనేది డేటాబ్రిక్స్ ద్వారా సృష్టించబడిన బహిరంగ, సాధారణ-ప్రయోజన LLM."
+
+#: src/available_models_descriptions.py:115
 msgid ""
-"An open weights function calling model based on Llama 3, competitive with "
-"GPT-4o function calling capabilities."
-msgstr "లామా 3 ఆధారంగా ఓపెన్ వెయిట్స్ ఫంక్షన్ కాలింగ్ మోడల్, GPT-4o ఫంక్షన్ కాలింగ్ సామర్థ్యాలతో పోటీ."
+"Solar Pro Preview: an advanced large language model (LLM) with 22 billion "
+"parameters designed to fit into a single GPU"
+msgstr ""
 
-#: src/available_models_descriptions.py:109
+#: src/available_models_descriptions.py:116
 msgid ""
 "A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
 "information extraction, based on Phi-3."
 msgstr ""
 "Phi-3 ఆధారంగా సమాచార వెలికితీత కోసం ప్రైవేట్ అధిక-నాణ్యత సింథటిక్ డేటాసెట్‌లో 3.8B మోడల్ ఫైన్-ట్యూన్ చేయబడింది."
 
-#: src/available_models_descriptions.py:110
+#: src/available_models_descriptions.py:117
+msgid ""
+"A robust conversational model designed to be used for both chat and instruct "
+"use cases."
+msgstr ""
+"చాట్ మరియు సూచన వినియోగ సందర్భాలు రెండింటికీ ఉపయోగించేందుకు రూపొందించబడిన బలమైన సంభాషణ నమూనా."
+
+#: src/available_models_descriptions.py:118
+msgid ""
+"An open weights function calling model based on Llama 3, competitive with "
+"GPT-4o function calling capabilities."
+msgstr "లామా 3 ఆధారంగా ఓపెన్ వెయిట్స్ ఫంక్షన్ కాలింగ్ మోడల్, GPT-4o ఫంక్షన్ కాలింగ్ సామర్థ్యాలతో పోటీ."
+
+#: src/available_models_descriptions.py:119
+msgid ""
+"A series of models that convert HTML content to Markdown content, which is "
+"useful for content conversion tasks."
+msgstr ""
+
+#: src/available_models_descriptions.py:120
 msgid "Embedding model from BAAI mapping texts to vectors."
 msgstr "BAAI మ్యాపింగ్ టెక్స్ట్‌ల నుండి వెక్టర్‌లకు మోడల్‌ను పొందుపరచడం."
 
-#: src/available_models_descriptions.py:111
+#: src/available_models_descriptions.py:121
+msgid ""
+"An upgraded version of DeekSeek-V2 that integrates the general and coding "
+"abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
+msgstr ""
+
+#: src/available_models_descriptions.py:122
+msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
+msgstr ""
+
+#: src/available_models_descriptions.py:123
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
@@ -2057,7 +2192,7 @@ msgstr "మీరు ఖచ్చితంగా చాట్‌ని క్ల
 
 #: src/dialogs.py:29 src/dialogs.py:51 src/dialogs.py:80 src/dialogs.py:108
 #: src/dialogs.py:132 src/dialogs.py:154 src/dialogs.py:177 src/dialogs.py:257
-#: src/dialogs.py:295 src/dialogs.py:371 src/dialogs.py:410
+#: src/dialogs.py:295 src/dialogs.py:371 src/dialogs.py:410 src/dialogs.py:475
 msgid "Cancel"
 msgstr "రద్దు చేయి"
 
@@ -2097,7 +2232,7 @@ msgstr "చాట్‌ని సృష్టించాలా?"
 msgid "Enter name for new chat"
 msgstr "కొత్త చాట్ కోసం పేరును నమోదు చేయండి"
 
-#: src/dialogs.py:109 src/window.ui:725
+#: src/dialogs.py:109 src/window.ui:753
 msgid "Create"
 msgstr "సృష్టించు"
 
@@ -2158,6 +2293,7 @@ msgid "This model will be used as the base for the new model"
 msgstr "ఈ మోడల్ కొత్త మోడల్‌కు బేస్‌గా ఉపయోగించబడుతుంది"
 
 #: src/dialogs.py:258 src/dialogs.py:296 src/dialogs.py:372 src/dialogs.py:411
+#: src/dialogs.py:476
 msgid "Accept"
 msgstr "అంగీకరించు"
 
@@ -2211,72 +2347,102 @@ msgstr ""
 "మీరు ఖచ్చితంగా అటాచ్ చేయాలనుకుంటున్నారా\n"
 "'{}'?"
 
+#: src/dialogs.py:431
+msgid "Press Enter to close..."
+msgstr ""
+
+#: src/dialogs.py:465
+msgid "No compatible terminal was found in the system"
+msgstr ""
+
+#: src/dialogs.py:471 src/custom_widgets/message_widget.py:112
+msgid "Run Script"
+msgstr ""
+
+#: src/dialogs.py:472
+msgid ""
+"Make sure you understand what this script does before running it, Alpaca is "
+"not responsible for any damages to your device or data"
+msgstr ""
+
 #: src/window.ui:41
 msgid "Menu"
 msgstr "మెనూ"
 
-#: src/window.ui:62
+#: src/window.ui:63
 msgid "Toggle Sidebar"
 msgstr "సైడ్‌బార్‌ని టోగుల్ చేయండి"
 
-#: src/window.ui:84
+#: src/window.ui:70
+msgid "Search Messages"
+msgstr ""
+
+#: src/window.ui:92
 msgid "Loading Instance"
 msgstr "ఉదాహరణ లోడ్ అవుతోంది"
 
-#: src/window.ui:97
+#: src/window.ui:105
 msgid "Chat Menu"
 msgstr "చాట్ మెనూ"
 
-#: src/window.ui:111
+#: src/window.ui:114
+msgid "Message search bar"
+msgstr ""
+
+#: src/window.ui:121 src/window.ui:123
+msgid "Search messages"
+msgstr ""
+
+#: src/window.ui:137
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr "హెచ్చరిక: పవర్ సేవర్ మోడ్ ప్రారంభించబడింది, ఇది సందేశ ఉత్పత్తిని నెమ్మదిస్తుంది"
 
-#: src/window.ui:157
+#: src/window.ui:184
 msgid "Attach File"
 msgstr "ఫైల్‌ని అటాచ్ చేయండి"
 
-#: src/window.ui:194
+#: src/window.ui:221
 msgid "Message text box"
 msgstr "సందేశం టెక్స్ట్ బాక్స్"
 
-#: src/window.ui:207 src/window.ui:1112
+#: src/window.ui:234 src/window.ui:1140
 msgid "Send Message"
 msgstr "సందేశం పంపండి"
 
-#: src/window.ui:257 src/window.ui:917 src/window.ui:1053
+#: src/window.ui:284 src/window.ui:945 src/window.ui:1081
 msgid "Preferences"
 msgstr "ప్రాధాన్యతలు"
 
-#: src/window.ui:260 src/window.ui:1031
+#: src/window.ui:287 src/window.ui:1059
 msgid "General"
 msgstr "జనరల్"
 
-#: src/window.ui:267
+#: src/window.ui:294
 msgid "Use Remote Connection to Ollama"
 msgstr "ఒల్లమాకు రిమోట్ కనెక్షన్‌ని ఉపయోగించండి"
 
-#: src/window.ui:273
+#: src/window.ui:300
 msgid "URL of Remote Instance"
 msgstr "రిమోట్ ఉదాహరణ యొక్క URL"
 
-#: src/window.ui:280
+#: src/window.ui:307
 msgid "Bearer Token (Optional)"
 msgstr "బేరర్ టోకెన్ (ఐచ్ఛికం)"
 
-#: src/window.ui:291
+#: src/window.ui:318
 msgid "Run Alpaca In Background"
 msgstr "అల్పాకాను బ్యాక్‌గ్రౌండ్‌లో రన్ చేయండి"
 
-#: src/window.ui:297
+#: src/window.ui:324
 msgid "Show Power Saver Warning"
 msgstr "పవర్ సేవర్ హెచ్చరికను చూపు"
 
-#: src/window.ui:308
+#: src/window.ui:335
 msgid "Temperature"
 msgstr "ఉష్ణోగ్రత"
 
-#: src/window.ui:309
+#: src/window.ui:336
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
@@ -2284,11 +2450,11 @@ msgstr ""
 "మోడల్ యొక్క ఉష్ణోగ్రత. ఉష్ణోగ్రతను పెంచడం వలన మోడల్ మరింత సృజనాత్మకంగా సమాధానం ఇస్తుంది. (డిఫాల్ట్: "
 "0.8)"
 
-#: src/window.ui:324
+#: src/window.ui:351
 msgid "Seed"
 msgstr "విత్తనం"
 
-#: src/window.ui:325
+#: src/window.ui:352
 msgid ""
 "Sets the random number seed to use for generation. Setting this to a "
 "specific number will make the model generate the same text for the same "
@@ -2297,26 +2463,26 @@ msgstr ""
 "ఉత్పత్తి కోసం ఉపయోగించే యాదృచ్ఛిక సంఖ్య విత్తనాన్ని సెట్ చేస్తుంది. దీన్ని నిర్దిష్ట సంఖ్యకు సెట్ చేయడం వలన "
 "మోడల్ అదే ప్రాంప్ట్ కోసం అదే వచనాన్ని రూపొందించేలా చేస్తుంది. (డిఫాల్ట్: 0 (యాదృచ్ఛికం))"
 
-#: src/window.ui:339
+#: src/window.ui:366
 msgid "Keep Alive Time"
 msgstr "సజీవ సమయాన్ని ఉంచండి"
 
-#: src/window.ui:340
+#: src/window.ui:367
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
 msgstr ""
 "నిమిషాల్లో అభ్యర్థనను అనుసరించి మోడల్ ఎంతకాలం మెమరీలోకి లోడ్ చేయబడుతుందో నియంత్రిస్తుంది (డిఫాల్ట్: 5)"
 
-#: src/window.ui:356
+#: src/window.ui:383
 msgid "Ollama Instance"
 msgstr "ఒల్లమా ఉదాహరణ"
 
-#: src/window.ui:360
+#: src/window.ui:387
 msgid "Ollama Overrides"
 msgstr "ఒల్లమా ఓవర్‌రైడ్స్"
 
-#: src/window.ui:361
+#: src/window.ui:388
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
@@ -2324,74 +2490,74 @@ msgstr ""
 "ఒల్లామాలో ఉపయోగించిన ఆర్గ్యుమెంట్‌లను నిర్వహించండి, ఈ పేజీలో ఏవైనా మార్పులు ఇంటిగ్రేటెడ్ ఉదాహరణకి మాత్రమే "
 "వర్తిస్తాయి, మీరు మార్పులు చేస్తే ఉదాహరణ పునఃప్రారంభించబడుతుంది."
 
-#: src/window.ui:433
+#: src/window.ui:460
 msgid "Idle Timer"
 msgstr "నిష్క్రియ టైమర్"
 
-#: src/window.ui:434
+#: src/window.ui:461
 msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
 msgstr ""
 "షట్ డౌన్ చేయడానికి ముందు ఉదాహరణ నిష్క్రియంగా ఉండవలసిన నిమిషాల సంఖ్య (0 అంటే అది షట్ డౌన్ చేయబడదు)"
 
-#: src/window.ui:453
+#: src/window.ui:480
 msgid "Manage models dialog"
 msgstr "మోడల్స్ డైలాగ్‌ని నిర్వహించండి"
 
-#: src/window.ui:464 src/window.ui:911 src/custom_widgets/model_widget.py:23
+#: src/window.ui:491 src/window.ui:939 src/custom_widgets/model_widget.py:23
 #: src/custom_widgets/model_widget.py:24
 msgid "Manage Models"
 msgstr "మోడల్‌లను నిర్వహించండి"
 
-#: src/window.ui:474 src/window.ui:605
+#: src/window.ui:501 src/window.ui:633
 msgid "Create Model"
 msgstr "మోడల్‌ని సృష్టించండి"
 
-#: src/window.ui:481
+#: src/window.ui:508
 msgid "Search Model"
 msgstr "శోధన మోడల్"
 
-#: src/window.ui:490
+#: src/window.ui:517
 msgid "Model search bar"
 msgstr "మోడల్ శోధన పట్టీ"
 
-#: src/window.ui:497 src/window.ui:499
+#: src/window.ui:524 src/window.ui:526
 msgid "Search models"
 msgstr "నమూనాలను శోధించండి"
 
-#: src/window.ui:521
+#: src/window.ui:549
 msgid "No Models Found"
 msgstr "మోడల్‌లు ఏవీ కనుగొనబడలేదు"
 
-#: src/window.ui:522
+#: src/window.ui:550
 msgid "Try a different search or pull an unlisted model from it's name"
 msgstr "వేరే శోధనను ప్రయత్నించండి లేదా దాని పేరు నుండి జాబితా చేయని మోడల్‌ని లాగండి"
 
-#: src/window.ui:530
+#: src/window.ui:558
 msgid "Pull Model From Name"
 msgstr "పేరు నుండి మోడల్ లాగండి"
 
-#: src/window.ui:580
+#: src/window.ui:608
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
 msgstr ""
 "ఈ మోడల్‌ను డౌన్‌లోడ్ చేయడం ద్వారా మీరు మోడల్ వెబ్‌సైట్‌లో అందుబాటులో ఉన్న లైసెన్స్ ఒప్పందాన్ని అంగీకరిస్తారు."
 
-#: src/window.ui:640
+#: src/window.ui:668
 msgid "Base"
 msgstr "బేస్"
 
-#: src/window.ui:659
+#: src/window.ui:687
 msgid "Name"
 msgstr "పేరు"
 
-#: src/window.ui:665
+#: src/window.ui:693
 msgid "Context"
 msgstr "సందర్భం"
 
-#: src/window.ui:709
+#: src/window.ui:737
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -2400,35 +2566,35 @@ msgstr ""
 "కొన్ని మోడళ్లకు మోడల్ ఫైల్ అవసరం, అల్పాకా స్వయంచాలకంగా సిస్టమ్ (సందర్భం) సూచనల నుండి నింపుతుంది. "
 "దయచేసి మీకు ఖచ్చితంగా తెలియకుంటే మరింత సమాచారం కోసం మోడల్ వెబ్‌సైట్ లేదా ఒల్లామా డాక్యుమెంటేషన్‌ని సందర్శించండి."
 
-#: src/window.ui:748
+#: src/window.ui:776
 msgid "File preview dialog"
 msgstr "ఫైల్ ప్రివ్యూ డైలాగ్"
 
-#: src/window.ui:760
+#: src/window.ui:788
 msgid "Open With Default App"
 msgstr "డిఫాల్ట్ యాప్‌తో తెరవండి"
 
-#: src/window.ui:768
+#: src/window.ui:796
 msgid "Remove Attachment"
 msgstr "జోడింపుని తీసివేయండి"
 
-#: src/window.ui:830
+#: src/window.ui:858
 msgid "Previous"
 msgstr "మునుపటి"
 
-#: src/window.ui:873
+#: src/window.ui:901
 msgid "Welcome to Alpaca"
 msgstr "అల్పాకాకు స్వాగతం"
 
-#: src/window.ui:874
+#: src/window.ui:902
 msgid "Powered by Ollama"
 msgstr "ఒల్లమా ద్వారా ఆధారితం"
 
-#: src/window.ui:877
+#: src/window.ui:905
 msgid "Ollama Website"
 msgstr "ఒల్లమా వెబ్‌సైట్"
 
-#: src/window.ui:894
+#: src/window.ui:922
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2438,192 +2604,192 @@ msgstr ""
 "సాఫ్ట్‌వేర్‌లకు ఏవైనా నష్టాలకు బాధ్యత వహించరు. దయచేసి జాగ్రత్తగా ఉండండి మరియు కోడ్‌ని అమలు చేయడానికి ముందు "
 "జాగ్రత్తగా సమీక్షించండి."
 
-#: src/window.ui:907
+#: src/window.ui:935
 msgid "Import Chat"
 msgstr "చాట్‌ని దిగుమతి చేయండి"
 
-#: src/window.ui:921
+#: src/window.ui:949
 msgid "Keyboard Shortcuts"
 msgstr "కీబోర్డ్ సత్వరమార్గాలు"
 
-#: src/window.ui:925
+#: src/window.ui:953
 msgid "About Alpaca"
 msgstr "అల్పాకా గురించి"
 
-#: src/window.ui:933 src/window.ui:959
+#: src/window.ui:961 src/window.ui:987
 msgid "Rename Chat"
 msgstr "చాట్ పేరు మార్చండి"
 
-#: src/window.ui:937 src/window.ui:963
+#: src/window.ui:965 src/window.ui:991
 msgid "Duplicate Chat"
 msgstr "డూప్లికేట్ చాట్"
 
-#: src/window.ui:941 src/window.ui:967
+#: src/window.ui:969 src/window.ui:995
 msgid "Export Chat"
 msgstr "చాట్‌ని ఎగుమతి చేయండి"
 
-#: src/window.ui:945
+#: src/window.ui:973
 msgid "Clear Chat"
 msgstr "చాట్ క్లియర్ చేయండి"
 
-#: src/window.ui:951 src/window.ui:973
+#: src/window.ui:979 src/window.ui:1001
 msgid "Delete Chat"
 msgstr "చాట్‌ని తొలగించండి"
 
-#: src/window.ui:981
+#: src/window.ui:1009
 msgid "From Existing Model"
 msgstr "ఇప్పటికే ఉన్న మోడల్ నుండి"
 
-#: src/window.ui:985
+#: src/window.ui:1013
 msgid "From GGUF File"
 msgstr "GGUF ఫైల్ నుండి"
 
-#: src/window.ui:989
+#: src/window.ui:1017
 msgid "From Name"
 msgstr "పేరు నుండి"
 
-#: src/window.ui:1035
+#: src/window.ui:1063
 msgid "Close application"
 msgstr "అప్లికేషన్‌ను మూసివేయండి"
 
-#: src/window.ui:1041
+#: src/window.ui:1069
 msgid "Import chat"
 msgstr "చాట్‌ని దిగుమతి చేయండి"
 
-#: src/window.ui:1047
+#: src/window.ui:1075
 msgid "Clear chat"
 msgstr "చాట్‌ని క్లియర్ చేయండి"
 
-#: src/window.ui:1059
+#: src/window.ui:1087
 msgid "New chat"
 msgstr "కొత్త చాట్"
 
-#: src/window.ui:1065
+#: src/window.ui:1093
 msgid "Show shortcuts window"
 msgstr "సత్వరమార్గాల విండోను చూపు"
 
-#: src/window.ui:1071
+#: src/window.ui:1099
 msgid "Manage models"
 msgstr "నమూనాలను నిర్వహించండి"
 
-#: src/window.ui:1077
+#: src/window.ui:1105
 msgid "Toggle sidebar"
 msgstr "సైడ్‌బార్‌ని టోగుల్ చేయండి"
 
-#: src/window.ui:1083
+#: src/window.ui:1111
 msgid "Rename chat"
 msgstr "చాట్ పేరు మార్చండి"
 
-#: src/window.ui:1090
+#: src/window.ui:1118
 msgid "Editor"
 msgstr "ఎడిటర్"
 
-#: src/window.ui:1094
+#: src/window.ui:1122
 msgid "Copy"
 msgstr "కాపీ చేయండి"
 
-#: src/window.ui:1100
+#: src/window.ui:1128
 msgid "Paste"
 msgstr "అతికించండి"
 
-#: src/window.ui:1106
+#: src/window.ui:1134
 msgid "Insert new line"
 msgstr "కొత్త పంక్తిని చొప్పించండి"
 
-#: src/custom_widgets/chat_widget.py:114
+#: src/custom_widgets/chat_widget.py:115
 msgid "Send prompt: '{}'"
 msgstr "ప్రాంప్ట్ పంపండి: '{}'"
 
-#: src/custom_widgets/chat_widget.py:120 src/custom_widgets/chat_widget.py:121
+#: src/custom_widgets/chat_widget.py:121 src/custom_widgets/chat_widget.py:122
 msgid "Open Model Manager"
 msgstr "మోడల్ మేనేజర్‌ని తెరవండి"
 
-#: src/custom_widgets/chat_widget.py:130
+#: src/custom_widgets/chat_widget.py:131
 msgid "Try one of these prompts"
 msgstr "ఈ ప్రాంప్ట్‌లలో ఒకదాన్ని ప్రయత్నించండి"
 
-#: src/custom_widgets/chat_widget.py:130
+#: src/custom_widgets/chat_widget.py:131
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
 msgstr "మీరు ఇంకా డౌన్‌లోడ్ చేసిన మోడల్‌లు ఏవీ లేనట్లు కనిపిస్తోంది. ప్రారంభించడానికి మోడల్‌లను డౌన్‌లోడ్ చేయండి!"
 
-#: src/custom_widgets/chat_widget.py:191
+#: src/custom_widgets/chat_widget.py:192
 msgid "Regenerate Response"
 msgstr "ప్రతిస్పందనను పునరుద్ధరించండి"
 
-#: src/custom_widgets/chat_widget.py:346
+#: src/custom_widgets/chat_widget.py:347
 msgid "Copy of {}"
 msgstr "{} యొక్క కాపీ"
 
-#: src/custom_widgets/chat_widget.py:358
+#: src/custom_widgets/chat_widget.py:359
 msgid "Chat exported successfully"
 msgstr "చాట్ విజయవంతంగా ఎగుమతి చేయబడింది"
 
-#: src/custom_widgets/chat_widget.py:428
+#: src/custom_widgets/chat_widget.py:429
 msgid "Chat imported successfully"
 msgstr "చాట్ విజయవంతంగా దిగుమతి చేయబడింది"
 
-#: src/custom_widgets/message_widget.py:42
+#: src/custom_widgets/message_widget.py:43
 msgid "Message edited successfully"
 msgstr "సందేశం విజయవంతంగా సవరించబడింది"
 
-#: src/custom_widgets/message_widget.py:61
+#: src/custom_widgets/message_widget.py:62
 msgid "Response message"
 msgstr "ప్రతిస్పందన సందేశం"
 
-#: src/custom_widgets/message_widget.py:61
+#: src/custom_widgets/message_widget.py:62
 msgid "User message"
 msgstr "వినియోగదారు సందేశం"
 
-#: src/custom_widgets/message_widget.py:103
+#: src/custom_widgets/message_widget.py:104
 msgid "{}Code Block"
 msgstr "{}కోడ్ బ్లాక్"
 
-#: src/custom_widgets/message_widget.py:106
+#: src/custom_widgets/message_widget.py:107
 msgid "Code Block"
 msgstr "కోడ్ బ్లాక్"
 
-#: src/custom_widgets/message_widget.py:107
-#: src/custom_widgets/message_widget.py:306
+#: src/custom_widgets/message_widget.py:108
+#: src/custom_widgets/message_widget.py:317
 msgid "Copy Message"
 msgstr "సందేశాన్ని కాపీ చేయండి"
 
-#: src/custom_widgets/message_widget.py:122
+#: src/custom_widgets/message_widget.py:127
 msgid "Code copied to the clipboard"
 msgstr "కోడ్ క్లిప్‌బోర్డ్‌కి కాపీ చేయబడింది"
 
-#: src/custom_widgets/message_widget.py:201
-#: src/custom_widgets/message_widget.py:203
+#: src/custom_widgets/message_widget.py:212
+#: src/custom_widgets/message_widget.py:214
 msgid "Image"
 msgstr "చిత్రం"
 
-#: src/custom_widgets/message_widget.py:211
-#: src/custom_widgets/message_widget.py:227
+#: src/custom_widgets/message_widget.py:222
+#: src/custom_widgets/message_widget.py:238
 msgid "Missing Image"
 msgstr "చిత్రం లేదు"
 
-#: src/custom_widgets/message_widget.py:229
+#: src/custom_widgets/message_widget.py:240
 msgid "Missing image"
 msgstr "చిత్రం లేదు"
 
-#: src/custom_widgets/message_widget.py:298
+#: src/custom_widgets/message_widget.py:309
 msgid "Remove Message"
 msgstr "సందేశాన్ని తీసివేయండి"
 
-#: src/custom_widgets/message_widget.py:314
+#: src/custom_widgets/message_widget.py:325
 msgid "Regenerate Message"
 msgstr "సందేశాన్ని పునరుత్పత్తి చేయండి"
 
-#: src/custom_widgets/message_widget.py:321
+#: src/custom_widgets/message_widget.py:332
 msgid "Edit Message"
 msgstr "సందేశాన్ని సవరించండి"
 
-#: src/custom_widgets/message_widget.py:343
+#: src/custom_widgets/message_widget.py:354
 msgid "Message copied to the clipboard"
 msgstr "సందేశం క్లిప్‌బోర్డ్‌కి కాపీ చేయబడింది"
 
-#: src/custom_widgets/message_widget.py:367
+#: src/custom_widgets/message_widget.py:378
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "ప్రతిస్పందనను స్వీకరించేటప్పుడు సందేశాన్ని మళ్లీ రూపొందించడం సాధ్యం కాదు"
 
@@ -2652,36 +2818,81 @@ msgstr "{} కోసం డౌన్‌లోడ్ మెనుని నమో
 msgid "Download {}:{}"
 msgstr "డౌన్‌లోడ్ {}:{}"
 
-#: src/custom_widgets/model_widget.py:443
+#: src/custom_widgets/model_widget.py:444
 msgid "Model deleted successfully"
 msgstr "మోడల్ విజయవంతంగా తొలగించబడింది"
 
-#: src/custom_widgets/model_widget.py:519
+#: src/custom_widgets/model_widget.py:546
 msgid "Task Complete"
 msgstr "టాస్క్ కంప్లీట్"
 
-#: src/custom_widgets/model_widget.py:519
-#: src/custom_widgets/model_widget.py:520
+#: src/custom_widgets/model_widget.py:546
+#: src/custom_widgets/model_widget.py:547
 msgid "Model '{}' pulled successfully."
 msgstr "మోడల్ '{}' విజయవంతంగా లాగబడింది."
 
-#: src/custom_widgets/model_widget.py:523
-#: src/custom_widgets/model_widget.py:526
+#: src/custom_widgets/model_widget.py:550
+#: src/custom_widgets/model_widget.py:553
 msgid "Pull Model Error"
 msgstr "పుల్ మోడల్ లోపం"
 
-#: src/custom_widgets/model_widget.py:523
+#: src/custom_widgets/model_widget.py:550
 msgid "Failed to pull model '{}': {}"
 msgstr "మోడల్ '{}' లాగడం విఫలమైంది: {}"
 
-#: src/custom_widgets/model_widget.py:524
+#: src/custom_widgets/model_widget.py:551
 msgid "Error pulling '{}': {}"
 msgstr "'{}' లాగడంలో లోపం: {}"
 
-#: src/custom_widgets/model_widget.py:526
+#: src/custom_widgets/model_widget.py:553
 msgid "Failed to pull model '{}' due to network error."
 msgstr "నెట్‌వర్క్ లోపం కారణంగా మోడల్ '{}'ని లాగడం విఫలమైంది."
 
-#: src/custom_widgets/model_widget.py:527
+#: src/custom_widgets/model_widget.py:554
 msgid "Error pulling '{}'"
 msgstr "'{}' లాగడంలో లోపం"
+
+#~ msgid ""
+#~ "Google Gemma 2 is a high-performing and efficient model by now available "
+#~ "in three sizes: 2B, 9B, and 27B."
+#~ msgstr ""
+#~ "Google Gemma 2 అనేది ఇప్పుడు మూడు పరిమాణాలలో అందుబాటులో ఉన్న అధిక-పనితీరు మరియు "
+#~ "సమర్థవంతమైన మోడల్: 2B, 9B మరియు 27B."
+
+#~ msgid ""
+#~ "­čîő LLaVA is a novel end-to-end trained large multimodal model that "
+#~ "combines a vision encoder and Vicuna for general-purpose visual and "
+#~ "language understanding. Updated to version 1.6."
+#~ msgstr ""
+#~ "čîő LLaVA అనేది ఒక నవల ఎండ్-టు-ఎండ్ శిక్షణ పొందిన పెద్ద మల్టీమోడల్ మోడల్, ఇది సాధారణ-ప్రయోజన "
+#~ "దృశ్య మరియు భాషా అవగాహన కోసం విజన్ ఎన్‌కోడర్ మరియు వికునాను మిళితం చేస్తుంది. వెర్షన్ 1.6కి "
+#~ "నవీకరించబడింది."
+
+#~ msgid ""
+#~ "Codestral is Mistral AIÔÇÖs first-ever code model designed for code "
+#~ "generation tasks."
+#~ msgstr ""
+#~ "కోడ్‌స్ట్రాల్ అనేది మిస్ట్రాల్ AIÔÇÖ యొక్క మొట్టమొదటి కోడ్ మోడల్, ఇది కోడ్ ఉత్పత్తి పనుల కోసం "
+#~ "రూపొందించబడింది."
+
+#~ msgid ""
+#~ "­č�É A family of small models with 135M, 360M, and 1.7B parameters, "
+#~ "trained on a new high-quality dataset."
+#~ msgstr ""
+#~ "čÉ 135M, 360M మరియు 1.7B పారామీటర్‌లతో కూడిన చిన్న మోడల్‌ల కుటుంబం, కొత్త అధిక-నాణ్యత డేటాసెట్‌పై "
+#~ "శిక్షణ పొందింది."
+
+#~ msgid ""
+#~ "­čÄę Magicoder is a family of 7B parameter models trained on 75K synthetic "
+#~ "instruction data using OSS-Instruct, a novel approach to enlightening "
+#~ "LLMs with open-source code snippets."
+#~ msgstr ""
+#~ "čÄę మ్యాజికోడర్ అనేది OSS-ఇన్‌స్ట్రక్ట్‌ని ఉపయోగించి 75K సింథటిక్ ఇన్‌స్ట్రక్షన్ డేటాపై శిక్షణ పొందిన 7B "
+#~ "పారామీటర్ మోడల్‌ల కుటుంబం, ఇది ఓపెన్-సోర్స్ కోడ్ స్నిప్పెట్‌లతో LLMలను జ్ఞానోదయం చేసే కొత్త విధానం."
+
+#~ msgid ""
+#~ "Math╬útral: a 7B model designed for math reasoning and scientific "
+#~ "discovery by Mistral AI."
+#~ msgstr ""
+#~ "Math╬útral: Mistral AI ద్వారా గణిత తార్కికం మరియు శాస్త్రీయ ఆవిష్కరణ కోసం రూపొందించబడిన 7B "
+#~ "మోడల్."
