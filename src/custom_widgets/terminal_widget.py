@@ -6,7 +6,7 @@ Handles the terminal widget
 import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Vte', '3.91')
-from gi.repository import Gtk, Vte, GLib, Pango
+from gi.repository import Gtk, Vte, GLib, Pango, GLib
 
 class terminal(Vte.Terminal):
     __gtype_name__ = 'AlpacaTerminal'
@@ -14,7 +14,7 @@ class terminal(Vte.Terminal):
     def __init__(self, script:list):
         super().__init__(css_classes=["terminal"])
         self.set_font(Pango.FontDescription.from_string("Monospace 12"))
-
+        self.set_clear_background(False)
         pty = Vte.Pty.new_sync(Vte.PtyFlags.DEFAULT, None)
 
         self.set_pty(pty)

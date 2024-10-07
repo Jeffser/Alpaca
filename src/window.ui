@@ -486,15 +486,14 @@
       <property name="height-request">600</property>
       <child>
         <object class="AdwToolbarView">
+          <style>
+            <class name="osd"/>
+          </style>
           <child type="top">
-            <object class="AdwHeaderBar">
-              <style>
-                <class name="osd"/>
-              </style>
-            </object>
+            <object class="AdwHeaderBar"/>
           </child>
           <property name="content">
-            <object class="GtkScrolledWindow" id="terminal_scroller"></object>
+            <object class="GtkScrolledWindow" id="terminal_scroller"/>
           </property>
         </object>
       </child>

@@ -428,9 +428,9 @@ def run_script_response(self, dialog, task, script, language_name):
             with open(os.path.join(cache_dir, 'temp_python_script.py'), 'w') as f:
                 f.write(script)
             script = 'python3 {}'.format(os.path.join(cache_dir, 'temp_python_script.py'))
-        script += '; echo "\n(Alpaca) {}"'.format(_('Script exited'))
+        script += '; echo "\n🦙 {}"'.format(_('Script exited'))
         if shutil.which('flatpak-spawn'):
-            script = 'echo "{}\n";'.format(_('The script is contained inside Flatpak')) + script
+            script = 'echo "🦙 {}\n";'.format(_('The script is contained inside Flatpak')) + script
 
         self.run_terminal(['bash', '-c', script])
 
