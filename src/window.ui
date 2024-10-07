@@ -180,6 +180,7 @@
                               <object class="GtkButton" id="attachment_button">
                                 <property name="vexpand">false</property>
                                 <property name="valign">3</property>
+                                <property name="sensitive">false</property>
                                 <property name="tooltip-text" translatable="yes">Attach File</property>
                                 <style>
                                   <class name="circular"/>

@@ -351,14 +351,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
             current_chat = self.chat_list_box.get_current_chat()
         if current_chat:
             for key, message in current_chat.messages.items():
-                message.set_visible(re.search(search_term, message.text, re.IGNORECASE))
-                for block in message.content_children:
-                    if isinstance(block, message_widget.text_block):
-                        if search_term:
-                            highlighted_text = re.sub(f"({re.escape(search_term)})", r"<span background='yellow' bgalpha='30%'>\1</span>", block.get_text(),flags=re.IGNORECASE)
-                            block.set_markup(highlighted_text)
-                        else:
-                            block.set_markup(block.get_text())
+                if message and message.text:
+                    message.set_visible(re.search(search_term, message.text, re.IGNORECASE))
+                    for block in message.content_children:
+                        if isinstance(block, message_widget.text_block):
+                            if search_term:
+                                highlighted_text = re.sub(f"({re.escape(search_term)})", r"<span background='yellow' bgalpha='30%'>\1</span>", block.get_text(),flags=re.IGNORECASE)
+                                block.set_markup(highlighted_text)
+                            else:
+                                block.set_markup(block.get_text())
 
     @Gtk.Template.Callback()
     def on_clipboard_paste(self, textview):
@@ -813,8 +814,19 @@ Generate a title following these rules:
         self.banner.set_revealed(monitor.get_power_saver_enabled() and self.powersaver_warning_switch.get_active())
 
     def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, save:bool):
+        #Model Manager
+        self.model_manager = model_widget.model_manager_container()
+        self.model_scroller.set_child(self.model_manager)
+
+        #Chat History
+        self.load_history()
+
         #Instance
         self.ollama_instance = connection_handler.instance(local_port, remote_url, remote, tweaks, overrides, bearer_token, idle_timer_delay)
+
+        #Model Manager P.2
+        self.model_manager.update_available_list()
+        self.model_manager.update_local_list()
 
         #User Preferences
         for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
@@ -832,23 +844,13 @@ Generate a title following these rules:
         self.remote_connection_switch.set_active(self.ollama_instance.remote)
         self.instance_idle_timer.set_value(self.ollama_instance.idle_timer_delay)
 
-        #Model Manager
-        self.model_manager = model_widget.model_manager_container()
-        self.model_scroller.set_child(self.model_manager)
-
-        #Chat History
-        self.load_history()
-
-        #Model Manager P.2
-        self.model_manager.update_available_list()
-        self.model_manager.update_local_list()
-        self.get_application().lookup_action("manage_models").set_enabled(True)
-
         #Save preferences
         if save:
             self.save_server_config()
-
         self.send_button.set_sensitive(True)
+        self.attachment_button.set_sensitive(True)
+        self.get_application().lookup_action('manage_models').set_enabled(True)
+        self.get_application().lookup_action('preferences').set_enabled(True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -895,7 +897,9 @@ Generate a title following these rules:
 
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
-        self.get_application().lookup_action("manage_models").set_enabled(False)
+
+        self.get_application().lookup_action('manage_models').set_enabled(False)
+        self.get_application().lookup_action('preferences').set_enabled(False)
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialogs.remove_attached_file(self, button.get_name()))
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
