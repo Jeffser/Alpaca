@@ -3,11 +3,11 @@
 Handles UI dialogs
 """
 import os
-import logging, requests, threading, shutil
+import logging, requests, threading, shutil, subprocess
 from pytube import YouTube
 from html2text import html2text
 from gi.repository import Adw, Gtk
-from .internal import cache_dir
+from .internal import cache_dir, config_dir
 
 logger = logging.getLogger(__name__)
 # CLEAR CHAT | WORKS
@@ -415,4 +415,63 @@ def attach_website(self, url):
         parent = self,
         cancellable = None,
         callback = lambda dialog, task, url=url: attach_website_response(self, dialog, task, url)
+    )
+
+# Run Script
+
+def run_script_response(self, dialog, task, script):
+    if dialog.choose_finish(task) == "accept":
+        logger.info('Running: \n{}'.format(script))
+        script += '; read -p "{}"'.format(_('Press Enter to close...'))
+        using_flatpak = shutil.which('flatpak-spawn')
+
+        try:
+            terminal_to_use = None
+            if os.path.isfile(os.path.join(config_dir, 'FORCE_TERMINAL')):
+                with open(os.path.join(config_dir, 'FORCE_TERMINAL'), 'r') as f:
+                    terminal_to_use = f.read().split('\n')[0].split(' ')
+            else:
+                terminals = [['kgx', '-e'], ['gnome-terminal', '--'], ['konsole', '-e'], ['xterm', '-e'], ['lxterminal', '-e'], ['kitty', '-e'], ['xfce4-terminal', '-x'], ['alacritty', '-e'], ['yakuake', '-e']]
+                for terminal in terminals:
+                    result = subprocess.run(
+                        ['flatpak-spawn', '--host', 'sh', '-c', f'command -v {terminal[0]}'] if using_flatpak else ['sh' '-c', f'command -v {terminal[0]}'],
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.PIPE
+                    )
+                    if result.returncode == 0:
+                        terminal_to_use = terminal
+                        break
+
+            if terminal_to_use:
+                if using_flatpak:
+                    run_command = ['flatpak-spawn', '--host']
+                    run_command[2:2] = terminal_to_use
+                else:
+                    run_command = terminal_to_use
+                if terminal_to_use[0] == 'flatpak':
+                    run_command.append(f'bash -c {script}')
+                else:
+                    run_command.append('bash')
+                    run_command.append('-c')
+                    run_command.append(script)
+                subprocess.Popen(run_command)
+            else:
+                self.show_toast(_('No compatible terminal was found in the system'), self.main_overlay)
+        except Exception as e:
+            logger.error(f'Error running script on {terminal_to_use}: {e}')
+
+def run_script(self, script:str):
+    dialog = Adw.AlertDialog(
+        heading=_("Run Script"),
+        body=_("Make sure you understand what this script does before running it, Alpaca is not responsible for any damages to your device or data"),
+        close_response="cancel"
+    )
+    dialog.add_response("cancel", _("Cancel"))
+    dialog.add_response("accept", _("Accept"))
+    dialog.set_response_appearance("accept", Adw.ResponseAppearance.SUGGESTED)
+    dialog.set_default_response("accept")
+    dialog.choose(
+        parent = self,
+        cancellable = None,
+        callback = lambda dialog, task, script=script: run_script_response(self, dialog, task, script)
     )

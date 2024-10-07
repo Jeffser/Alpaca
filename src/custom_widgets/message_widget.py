@@ -10,6 +10,7 @@ from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk
 import logging, os, datetime, re, shutil, threading, sys
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .table_widget import TableWidget
+from .. import dialogs
 
 logger = logging.getLogger(__name__)
 
@@ -103,10 +104,14 @@ class code_block(Gtk.Box):
         self.source_view.update_property([4], [_("{}Code Block").format('{} '.format(self.language.get_name()) if self.language else "")])
 
         title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=3)
-        title_box.append(Gtk.Label(label=self.language.get_name() if self.language else _("Code Block"), hexpand=True, xalign=0))
+        title_box.append(Gtk.Label(label=self.language.get_name() if self.language else (language_name.title() if language_name else _("Code Block")), hexpand=True, xalign=0))
         copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
         copy_button.connect("clicked", lambda *_: self.on_copy())
         title_box.append(copy_button)
+        if language_name.lower() == 'bash':
+            run_button = Gtk.Button(icon_name="execute-from-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Run Script"))
+            run_button.connect("clicked", lambda *_: self.run_script())
+            title_box.append(run_button)
         self.append(title_box)
         self.append(Gtk.Separator())
         self.append(self.source_view)
@@ -120,6 +125,12 @@ class code_block(Gtk.Box):
         text = self.buffer.get_text(start, end, False)
         clipboard.set(text)
         window.show_toast(_("Code copied to the clipboard"), window.main_overlay)
+
+    def run_script(self):
+        logger.debug("Running script")
+        start = self.buffer.get_start_iter()
+        end = self.buffer.get_end_iter()
+        dialogs.run_script(window, self.buffer.get_text(start, end, False))
 
 class attachment(Gtk.Button):
     __gtype_name__ = 'AlpacaAttachment'
