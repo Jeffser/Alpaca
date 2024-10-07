@@ -423,7 +423,11 @@ def run_script_response(self, dialog, task, script, language_name):
     if dialog.choose_finish(task) == "accept":
         logger.info('Running: \n{}'.format(script))
         if language_name == 'python3':
-            script = 'echo "{}" | python3'.format(script.replace('"', '\\"'))
+            if os.path.isfile(os.path.join(cache_dir, 'temp_python_script.py')):
+                os.remove(os.path.join(cache_dir, 'temp_python_script.py'))
+            with open(os.path.join(cache_dir, 'temp_python_script.py'), 'w') as f:
+                f.write(script)
+            script = 'python3 {}'.format(os.path.join(cache_dir, 'temp_python_script.py'))
         script += '; read -p "\n(Alpaca) {}"'.format(_('Press Enter to close...'))
         using_flatpak = shutil.which('flatpak-spawn')
 
