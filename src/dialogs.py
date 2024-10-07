@@ -441,7 +441,7 @@ def run_script_response(self, dialog, task, script, language_name):
             script = ';\n'.join(script)
 
         script += '; echo "\n🦙 {}"'.format(_('Script exited'))
-        if shutil.which('flatpak-spawn'):
+        if shutil.which('flatpak-spawn') and language_name == 'bash':
             script = 'echo "🦙 {}\n";'.format(_('The script is contained inside Flatpak')) + script
 
         self.run_terminal(['bash', '-c', script])
