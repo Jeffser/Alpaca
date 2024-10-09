@@ -19,11 +19,6 @@ class terminal(Vte.Terminal):
 
         self.set_pty(pty)
 
-        env = {
-            'TERM': "xterm-256color",
-            'SUDO_ASKPASS': "sh -c 'pkexec echo'"
-        }
-
         pty.spawn_async(
             GLib.get_current_dir(),
             script,
