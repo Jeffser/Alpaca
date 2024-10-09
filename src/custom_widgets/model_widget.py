@@ -52,6 +52,23 @@ class model_selector_popup(Gtk.Popover):
             child=scroller
         )
 
+class model_selector_row(Gtk.ListBoxRow):
+    __gtype_name__ = 'AlpacaModelSelectorRow'
+
+    def __init__(self, model_name:str, image_recognition:bool):
+        super().__init__(
+            child = Gtk.Label(
+                label=window.convert_model_name(model_name, 0),
+                halign=1,
+                hexpand=True
+            ),
+            halign=0,
+            hexpand=True,
+            name=model_name,
+            tooltip_text=window.convert_model_name(model_name, 0)
+        )
+        self.image_recognition = image_recognition
+
 class model_selector_button(Gtk.MenuButton):
     __gtype_name__ = 'AlpacaModelSelectorButton'
 
@@ -91,19 +108,18 @@ class model_selector_button(Gtk.MenuButton):
         window.model_manager.verify_if_image_can_be_used()
 
     def add_model(self, model_name:str):
-        model_row = Gtk.ListBoxRow(
-            child = Gtk.Label(
-                label=window.convert_model_name(model_name, 0),
-                halign=1,
-                hexpand=True
-            ),
-            halign=0,
-            hexpand=True,
-            name=model_name,
-            tooltip_text=window.convert_model_name(model_name, 0)
-        )
-        self.get_popover().model_list_box.append(model_row)
-        self.change_model(model_name)
+        vision = False
+        response = window.ollama_instance.request("POST", "api/show", json.dumps({"name": model_name}))
+        if response.status_code != 200:
+            logger.error(f"Status code was {response.status_code}")
+            return
+        try:
+            vision = 'projector_info' in json.loads(response.text)
+        except Exception as e:
+            logger.error(f"Error fetching vision info: {str(e)}")
+        model_row = model_selector_row(model_name, vision)
+        GLib.idle_add(self.get_popover().model_list_box.append, model_row)
+        GLib.idle_add(self.change_model, model_name)
 
     def remove_model(self, model_name:str):
         self.get_popover().model_list_box.remove(next((model for model in list(self.get_popover().model_list_box) if model.get_name() == model_name), None))
@@ -273,7 +289,7 @@ class local_model_list(Gtk.ListBox):
 
     def add_model(self, model_name:str):
         model = local_model(model_name)
-        self.append(model)
+        GLib.idle_add(self.append, model)
         if not self.get_visible():
             self.set_visible(True)
 
@@ -466,7 +482,7 @@ class model_manager_container(Gtk.Box):
                 else:
                     self.local_list.set_visible(True)
                     for model in data['models']:
-                        self.add_local_model(model['name'])
+                        threading.Thread(target=self.add_local_model, args=(model['name'], )).start()
             else:
                 window.connection_error()
         except Exception as e:
@@ -484,48 +500,18 @@ class model_manager_container(Gtk.Box):
     def change_model(self, model_name:str):
         self.model_selector.change_model(model_name)
 
-    def has_vision(self, model_name) -> bool:
-        response = (
-            window.ollama_instance.request(
-                "POST", "api/show", json.dumps({"name": model_name})
-            )
-        )
-
-        if response.status_code != 200:
-            logger.error(f"Status code was {response.status_code}")
-            return False
-
-        try:
-            model_info = json.loads(response.text)
-            logger.debug(f"Vision for {model_name}: {'projector_info' in model_info}")
-            return 'projector_info' in model_info
-        except Exception as e:
-            logger.error(f"Error fetching vision info: {str(e)}")
-            return False
-
     def verify_if_image_can_be_used(self):
         logger.debug("Verifying if image can be used")
-        selected = self.get_selected_model()
-        if selected == None:
-            return False
-
-        # first try ollama show API.
-        if self.has_vision(selected):
+        selected = self.model_selector.get_popover().model_list_box.get_selected_row()
+        if selected and selected.image_recognition:
+            for name, content in window.attachments.items():
+                if content['type'] == 'image':
+                    content['button'].set_css_classes(["flat"])
             return True
-
-        # then fall back to the old method.)
-
-        selected = selected.split(":")[0]
-        with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
-            if selected in [key for key, value in json.load(f).items() if value["image"]]:
-                for name, content in window.attachments.items():
-                    if content['type'] == 'image':
-                        content['button'].set_css_classes(["flat"])
-                return True
+        elif selected:
             for name, content in window.attachments.items():
                 if content['type'] == 'image':
                     content['button'].set_css_classes(["flat", "error"])
-            return False
 
     def pull_model(self, model_name:str, modelfile:str=None):
         if ':' not in model_name:
