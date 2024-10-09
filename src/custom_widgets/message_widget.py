@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 window = None
 
-class edit_text_block(Gtk.TextView):
+class edit_text_block(Gtk.Box):
     __gtype_name__ = 'AlpacaEditTextBlock'
 
     def __init__(self, text:str):
@@ -27,21 +27,71 @@ class edit_text_block(Gtk.TextView):
             margin_bottom=5,
             margin_start=5,
             margin_end=5,
-            css_classes=["view", "editing_message_textview"]
-        )
-        self.get_buffer().insert(self.get_buffer().get_start_iter(), text, len(text.encode('utf-8')))
-        enter_key_controller = Gtk.EventControllerKey.new()
-        enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: self.edit_message() if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
-        self.add_controller(enter_key_controller)
 
-    def edit_message(self):
-        self.get_parent().get_parent().action_buttons.set_visible(True)
-        self.get_parent().get_parent().set_text(self.get_buffer().get_text(self.get_buffer().get_start_iter(), self.get_buffer().get_end_iter(), False))
-        self.get_parent().get_parent().add_footer(self.get_parent().get_parent().dt)
-        window.save_history(self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent())
+            spacing=5,
+            orientation=1
+        )
+        self.text_view = Gtk.TextView(
+            halign=0,
+            hexpand=True,
+            css_classes=["view", "editing_message_textview"],
+            wrap_mode=3
+        )
+        cancel_button = Gtk.Button(
+            vexpand=False,
+            valign=2,
+            halign=2,
+            tooltip_text=_("Cancel"),
+            css_classes=['flat', 'circular'],
+            icon_name='cross-large-symbolic'
+        )
+        cancel_button.connect('clicked', lambda *_: self.cancel_edit())
+        save_button = Gtk.Button(
+            vexpand=False,
+            valign=2,
+            halign=2,
+            tooltip_text=_("Save Message"),
+            css_classes=['flat', 'circular'],
+            icon_name='paper-plane-symbolic'
+        )
+        save_button.connect('clicked', lambda *_: self.edit_message())
+        self.append(self.text_view)
+
+        button_container = Gtk.Box(
+            halign=2,
+            spacing=5
+        )
+        button_container.append(cancel_button)
+        button_container.append(save_button)
+        self.append(button_container)
+        self.text_view.get_buffer().insert(self.text_view.get_buffer().get_start_iter(), text, len(text.encode('utf-8')))
+        key_controller = Gtk.EventControllerKey.new()
+        key_controller.connect("key-pressed", self.handle_key)
+        self.text_view.add_controller(key_controller)
+
+    def handle_key(self, controller, keyval, keycode, state):
+        if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK):
+            self.save_edit()
+            return True
+        elif keyval==Gdk.KEY_Escape:
+            self.cancel_edit()
+            return True
+
+    def save_edit(self):
+        message_element = self.get_parent().get_parent()
+        message_element.action_buttons.set_visible(True)
+        message_element.set_text(self.text_view.get_buffer().get_text(self.text_view.get_buffer().get_start_iter(), self.text_view.get_buffer().get_end_iter(), False))
+        message_element.add_footer(message_element.dt)
+        window.save_history(message_element.get_parent().get_parent().get_parent().get_parent())
         self.get_parent().remove(self)
         window.show_toast(_("Message edited successfully"), window.main_overlay)
-        return True
+
+    def cancel_edit(self):
+        message_element = self.get_parent().get_parent()
+        message_element.action_buttons.set_visible(True)
+        message_element.set_text(message_element.text)
+        message_element.add_footer(message_element.dt)
+        self.get_parent().remove(self)
 
 class text_block(Gtk.Label):
     __gtype_name__ = 'AlpacaTextBlock'
