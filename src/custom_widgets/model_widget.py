@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk
-import logging, os, datetime, re, shutil, threading, json, sys
+import logging, os, datetime, re, shutil, threading, json, sys, glob
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .. import available_models_descriptions, dialogs
 
@@ -199,9 +199,22 @@ class pulling_model(Gtk.ListBoxRow):
             name=model_name
         )
         self.error = None
+        self.digests = []
 
     def update(self, data):
+        if 'digest' in data and data['digest'] not in self.digests:
+            self.digests.append(data['digest'].replace(':', '-'))
         if not self.get_parent():
+            logger.info("Pulling of '{}' was canceled".format(self.get_name()))
+            directory = os.path.join(data_dir, '.ollama', 'models', 'blobs')
+            for digest in self.digests:
+                files_to_delete = glob.glob(os.path.join(directory, digest + '*'))
+                for file in files_to_delete:
+                    logger.info("Deleting '{}'".format(file))
+                    try:
+                        os.remove(file)
+                    except Exception as e:
+                        logger.error(f"Can't delete file {file}: {e}")
             sys.exit()
         if 'error' in data:
             self.error = data['error']
