@@ -440,6 +440,8 @@ def run_script_response(self, dialog, task, script, language_name):
             script = ';\n'.join(script)
 
         script += '; echo "\n🦙 {}"'.format(_('Script exited'))
+        if language_name == 'bash':
+            script = re.sub(r'(?m)^\s*sudo', 'pkexec', script)
         if shutil.which('flatpak-spawn') and language_name == 'bash':
             sandbox = True
             try:
