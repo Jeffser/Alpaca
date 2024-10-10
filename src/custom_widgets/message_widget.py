@@ -537,16 +537,11 @@ class message(Gtk.Overlay):
             code_block_pattern = re.compile(r'```(\w*)\n(.*?)\n\s*```', re.DOTALL)
             no_language_code_block_pattern = re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)
             table_pattern = re.compile(r'((\r?\n){2}|^)([^\r\n]*\|[^\r\n]*(\r?\n)?)+(?=(\r?\n){2}|$)', re.MULTILINE)
-            bold_pattern = re.compile(r'\*\*(.*?)\*\*') #"**text**"
-            code_pattern = re.compile(r'`([^`\n]*?)`') #"`text`"
-            h1_pattern = re.compile(r'^#\s(.*)$') #"# text"
-            h2_pattern = re.compile(r'^##\s(.*)$') #"## text"
             markup_pattern = re.compile(r'<(b|u|tt|span.*)>(.*?)<\/(b|u|tt|span)>') #heh butt span, I'm so funny
             parts = []
             pos = 0
             # Code blocks
             for match in code_block_pattern.finditer(self.text[pos:]):
-                print(match)
                 start, end = match.span()
                 if pos < start:
                     normal_text = self.text[pos:start]
@@ -583,10 +578,12 @@ class message(Gtk.Overlay):
                 if part['type'] == 'normal':
                     text_b = text_block(self.bot)
                     part['text'] = part['text'].replace("\n* ", "\n• ")
-                    part['text'] = code_pattern.sub(r'<tt>\1</tt>', part['text'])
-                    part['text'] = bold_pattern.sub(r'<b>\1</b>', part['text'])
-                    part['text'] = h1_pattern.sub(r'<span size="x-large">\1</span>', part['text'])
-                    part['text'] = h2_pattern.sub(r'<span size="large">\1</span>', part['text'])
+                    part['text'] = re.sub(r'`([^`\n]*?)`', r'<tt>\1</tt>', part['text'])
+                    part['text'] = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', part['text'], flags=re.MULTILINE)
+                    part['text'] = re.sub(r'^#\s+(.*)', r'<span size="x-large">\1</span>', part['text'], flags=re.MULTILINE)
+                    part['text'] = re.sub(r'^##\s+(.*)', r'<span size="large">\1</span>', part['text'], flags=re.MULTILINE)
+                    part['text'] = re.sub(r'_(\((.*?)\)|\d+)', r'<sub>\2\1</sub>', part['text'], flags=re.MULTILINE)
+                    part['text'] = re.sub(r'\^(\((.*?)\)|\d+)', r'<sup>\2\1</sup>', part['text'], flags=re.MULTILINE)
                     pos = 0
                     for match in markup_pattern.finditer(part['text']):
                         start, end = match.span()
