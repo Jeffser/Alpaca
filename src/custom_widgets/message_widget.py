@@ -534,7 +534,8 @@ class message(Gtk.Overlay):
         self.content_children = []
         if text:
             self.content_children = []
-            code_block_pattern = re.compile(r'[```|`](\w*)\n(.*?)\n\s*[```|`]', re.DOTALL)
+            code_block_pattern = re.compile(r'```(\w*)\n(.*?)\n\s*```', re.DOTALL)
+            no_language_code_block_pattern = re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)
             table_pattern = re.compile(r'((\r?\n){2}|^)([^\r\n]*\|[^\r\n]*(\r?\n)?)+(?=(\r?\n){2}|$)', re.MULTILINE)
             bold_pattern = re.compile(r'\*\*(.*?)\*\*') #"**text**"
             code_pattern = re.compile(r'`([^`\n]*?)`') #"`text`"
@@ -544,7 +545,8 @@ class message(Gtk.Overlay):
             parts = []
             pos = 0
             # Code blocks
-            for match in code_block_pattern.finditer(self.text):
+            for match in code_block_pattern.finditer(self.text[pos:]):
+                print(match)
                 start, end = match.span()
                 if pos < start:
                     normal_text = self.text[pos:start]
@@ -553,8 +555,17 @@ class message(Gtk.Overlay):
                 code_text = match.group(2)
                 parts.append({"type": "code", "text": code_text, "language": 'python3' if language == 'python' else language})
                 pos = end
+            for match in no_language_code_block_pattern.finditer(self.text[pos:]):
+                start, end = match.span()
+                if pos < start:
+                    normal_text = self.text[pos:start]
+                    parts.append({"type": "normal", "text": normal_text.strip()})
+                language = match.group(1)
+                code_text = match.group(2)
+                parts.append({"type": "code", "text": code_text, "language": None})
+                pos = end
             # Tables
-            for match in table_pattern.finditer(self.text):
+            for match in table_pattern.finditer(self.text[pos:]):
                 start, end = match.span()
                 if pos < start:
                     normal_text = self.text[pos:start]
@@ -563,8 +574,8 @@ class message(Gtk.Overlay):
                 parts.append({"type": "table", "text": table_text})
                 pos = end
             # Text blocks
-            if pos < len(text):
-                normal_text = text[pos:]
+            if pos < len(self.text[pos:]):
+                normal_text = self.text[pos:]
                 if normal_text.strip():
                     parts.append({"type": "normal", "text": normal_text.strip()})
 
