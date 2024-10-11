@@ -575,7 +575,7 @@ class message(Gtk.Overlay):
                 parts.append({"type": "table", "text": table_text})
                 pos = end
             # Text blocks
-            if pos < len(self.text[pos:]):
+            if pos < len(self.text):
                 normal_text = self.text[pos:]
                 if normal_text.strip():
                     parts.append({"type": "normal", "text": normal_text.strip()})
