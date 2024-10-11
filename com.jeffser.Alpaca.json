@@ -125,6 +125,55 @@
 		}
 	    ]
 	},
+	{
+	    "name": "python3-ollama",
+	    "buildsystem": "simple",
+	    "build-commands": [
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"ollama\" --no-build-isolation"
+	    ],
+	    "sources": [
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/9e/ef/7a4f225581a0d7886ea28359179cb861d7fbcdefad29663fc1167b86f69f/anyio-4.6.0-py3-none-any.whl",
+		    "sha256": "c7d2e9d63e31599eeb636c8c5c03a7e108d73b345f064f1c19fdc87b79036a9a"
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/12/90/3c9ff0512038035f59d279fddeb79f5f1eccd8859f06d6163c58798b9487/certifi-2024.8.30-py3-none-any.whl",
+		    "sha256": "922820b53db7a7257ffbda3f597266d435245903d80737e34f8a45ff3e3230d8"
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/95/04/ff642e65ad6b90db43e668d70ffb6736436c7ce41fcc549f4e9472234127/h11-0.14.0-py3-none-any.whl",
+		    "sha256": "e3fe4ac4b851c468cc8363d500db52c2ead036020723024a109d37346efaa761"
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/06/89/b161908e2f51be56568184aeb4a880fd287178d176fd1c860d2217f41106/httpcore-1.0.6-py3-none-any.whl",
+		    "sha256": "27b59625743b85577a8c0e10e55b50b5368a4f2cfe8cc7bcfa9cf00829c2682f"
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/56/95/9377bcb415797e44274b51d46e3249eba641711cf3348050f76ee7b15ffc/httpx-0.27.2-py3-none-any.whl",
+		    "sha256": "7bb2708e112d8fdd7829cd4243970f0c223274051cb35ee80c03301ee29a3df0"
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/76/c6/c88e154df9c4e1a2a66ccf0005a88dfb2650c1dffb6f5ce603dfbd452ce3/idna-3.10-py3-none-any.whl",
+		    "sha256": "946d195a0d259cbba61165e88e65941f16e9b36ea6ddb97f00452bae8b1287d3"
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/6a/ca/d22905ac3f768523f778189d38c9c6cd9edf4fa9dd09cb5a3fc57b184f90/ollama-0.3.3-py3-none-any.whl",
+		    "sha256": "ca6242ce78ab34758082b7392df3f9f6c2cb1d070a9dede1a4c545c929e16dba"
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/e9/44/75a9c9421471a6c4805dbf2356f7c181a29c1879239abab1ea2cc8f38b40/sniffio-1.3.1-py3-none-any.whl",
+		    "sha256": "2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2"
+		}
+	    ]
+	},
         {
             "name": "ollama",
             "buildsystem": "simple",
