@@ -816,10 +816,12 @@ Generate a title following these rules:
 
     def remote_switched(self, switch, state):
         def local_instance_process():
+            switch.set_sensitive(False)
             self.ollama_instance.remote = False
             self.ollama_instance.start()
             self.model_manager.update_local_list()
             self.save_server_config()
+            switch.set_sensitive(True)
 
         if state:
             options = {
@@ -830,8 +832,14 @@ Generate a title following these rules:
                 {"text": self.ollama_instance.remote_url, "placeholder": _('Server URL')},
                 {"text": self.ollama_instance.bearer_token, "placeholder": _('Bearer Token (Optional)')}
             ]
-            dialog_widget.Entry(_('Connect Remote Instance'), _('Enter instance information to continue'), list(options)[0], options, entries)
-        else:
+            dialog_widget.Entry(
+                _('Connect Remote Instance'),
+                _('Enter instance information to continue'),
+                list(options)[0],
+                options,
+                entries
+            )
+        elif self.ollama_instance.remote:
             threading.Thread(target=local_instance_process).start()
 
     def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, save:bool):
@@ -923,7 +931,7 @@ Generate a title following these rules:
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
         self.get_application().lookup_action('manage_models').set_enabled(False)
-        #self.get_application().lookup_action('preferences').set_enabled(False)
+        self.get_application().lookup_action('preferences').set_enabled(False)
         self.remote_connection_switch_handler = self.remote_connection_switch.get_activatable_widget().connect('state-set', self.remote_switched)
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))
