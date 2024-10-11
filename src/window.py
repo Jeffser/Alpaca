@@ -922,7 +922,7 @@ Generate a title following these rules:
             'new_chat': [lambda *_: self.chat_list_box.new_chat(), ['<primary>n']],
             'clear': [lambda *i: dialog_widget.simple(_('Clear Chat?'), _('Are you sure you want to clear the chat?'), self.chat_list_box.get_current_chat().clear_chat, _('Clear')), ['<primary>e']],
             'import_chat': [lambda *_: self.chat_list_box.import_chat(), ['<primary>i']],
-            'create_model_from_existing': [lambda *i: dialog_widget.simple_dropdown(_('Select Model'), _('This model will be used as the base for the new model'), lambda model: self.create_model(model, False), self.model_manager.get_model_list())],
+            'create_model_from_existing': [lambda *i: dialog_widget.simple_dropdown(_('Select Model'), _('This model will be used as the base for the new model'), lambda model: self.create_model(model, False), [self.convert_model_name(model, 0) for model in self.model_manager.get_model_list()])],
             'create_model_from_file': [lambda *i, file_filter=self.file_filter_gguf: dialog_widget.simple_file(file_filter, lambda file: self.create_model(file.get_path(), True))],
             'create_model_from_name': [lambda *i: dialog_widget.simple_entry(_('Pull Model'), _('Input the name of the model in this format\nname:tag'), lambda model: threading.Thread(target=self.model_manager.pull_model, kwargs={"model_name": model}).start(), {'placeholder': 'llama3.2:latest'})],
             'duplicate_chat': [self.chat_actions],
