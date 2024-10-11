@@ -9,7 +9,7 @@ gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk
 import logging, os, datetime, re, shutil, threading, json, sys, glob
 from ..internal import config_dir, data_dir, cache_dir, source_dir
-from .. import available_models_descriptions, dialogs
+from .. import available_models_descriptions
 from . import dialog_widget
 
 logger = logging.getLogger(__name__)
