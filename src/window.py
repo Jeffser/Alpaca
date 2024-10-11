@@ -32,7 +32,7 @@ gi.require_version('GdkPixbuf', '2.0')
 
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
 
-from . import connection_handler, generic_actions, instance_manager
+from . import connection_handler, generic_actions
 from .custom_widgets import message_widget, chat_widget, model_widget, terminal_widget, dialog_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir
 
