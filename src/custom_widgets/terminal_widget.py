@@ -7,6 +7,12 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Vte', '3.91')
 from gi.repository import Gtk, Vte, GLib, Pango, GLib, Gdk
+import logging, os, shutil, subprocess
+from ..internal import data_dir
+
+logger = logging.getLogger(__name__)
+
+window = None
 
 class terminal(Vte.Terminal):
     __gtype_name__ = 'AlpacaTerminal'
@@ -42,3 +48,44 @@ class terminal(Vte.Terminal):
             self.copy_clipboard()
             return True
         return False
+
+def show_terminal(script):
+    window.terminal_scroller.set_child(terminal(script))
+    window.terminal_dialog.present(window)
+
+def run_terminal(script:str, language_name:str):
+    logger.info('Running: \n{}'.format(language_name))
+    if language_name == 'python3':
+        if not os.path.isdir(os.path.join(data_dir, 'pyenv')):
+            os.mkdir(os.path.join(data_dir, 'pyenv'))
+        with open(os.path.join(data_dir, 'pyenv', 'main.py'), 'w') as f:
+            f.write(script)
+        script = [
+            'echo "🐍 {}\n"'.format(_('Setting up Python environment...')),
+            'python3 -m venv "{}"'.format(os.path.join(data_dir, 'pyenv')),
+            '{} {}'.format(os.path.join(data_dir, 'pyenv', 'bin', 'python3').replace(' ', '\\ '), os.path.join(data_dir, 'pyenv', 'main.py').replace(' ', '\\ '))
+        ]
+        if os.path.isfile(os.path.join(data_dir, 'pyenv', 'requirements.txt')):
+            script.insert(1, '{} install -r {} | grep -v "already satisfied"; clear'.format(os.path.join(data_dir, 'pyenv', 'bin', 'pip3'), os.path.join(data_dir, 'pyenv', 'requirements.txt')))
+        else:
+            with open(os.path.join(data_dir, 'pyenv', 'requirements.txt'), 'w') as f:
+                f.write('')
+        script = ';\n'.join(script)
+
+    script += '; echo "\n🦙 {}"'.format(_('Script exited'))
+    if language_name == 'bash':
+        script = re.sub(r'(?m)^\s*sudo', 'pkexec', script)
+    if shutil.which('flatpak-spawn') and language_name == 'bash':
+        sandbox = True
+        try:
+            process = subprocess.run(['flatpak-spawn', '--host', 'bash', '-c', 'echo "test"'], check=True)
+            sandbox = False
+        except Exception as e:
+            pass
+        if sandbox:
+            script = 'echo "🦙 {}\n";'.format(_('The script is contained inside Flatpak')) + script
+            show_terminal(['bash', '-c', script])
+        else:
+            show_terminal(['flatpak-spawn', '--host', 'bash', '-c', script])
+    else:
+        show_terminal(['bash', '-c', script])

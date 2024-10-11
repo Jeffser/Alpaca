@@ -10,6 +10,7 @@ from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk
 import logging, os, datetime, re, shutil, threading, json, sys, glob
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .. import available_models_descriptions, dialogs
+from . import dialog_widget
 
 logger = logging.getLogger(__name__)
 
@@ -178,7 +179,7 @@ class pulling_model(Gtk.ListBoxRow):
             css_classes = ["error", "circular"],
             tooltip_text = _("Stop Pulling '{}'").format(window.convert_model_name(model_name, 0))
         )
-        stop_button.connect('clicked', lambda *_: dialogs.stop_pull_model(window, self))
+        stop_button.connect('clicked', lambda *i: dialog_widget.simple(_('Stop Download?'), _("Are you sure you want to stop pulling '{}'?").format(window.convert_model_name(self.get_name(), 0)), self.stop, _('Stop'), 'destructive'))
 
         container_box = Gtk.Box(
             hexpand=True,
@@ -200,6 +201,11 @@ class pulling_model(Gtk.ListBoxRow):
         )
         self.error = None
         self.digests = []
+
+    def stop(self):
+        if len(list(self.get_parent())) == 1:
+            self.get_parent().set_visible(False)
+        self.get_parent().remove(self)
 
     def update(self, data):
         if 'digest' in data and data['digest'] not in self.digests:
@@ -270,7 +276,8 @@ class local_model(Gtk.ListBoxRow):
             css_classes = ["error", "circular"],
             tooltip_text = _("Remove '{}'").format(window.convert_model_name(model_name, 0))
         )
-        delete_button.connect('clicked', lambda *_, model_name=model_name: dialogs.delete_model(window, model_name))
+
+        delete_button.connect('clicked', lambda *i: dialog_widget.simple(_('Delete Model?'), _("Are you sure you want to delete '{}'?").format(model_title), lambda model_name=model_name: window.model_manager.remove_local_model(model_name), _('Delete'), 'destructive'))
 
         container_box = Gtk.Box(
             hexpand=True,

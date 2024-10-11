@@ -40,10 +40,10 @@ alpaca_sources = [
   'main.py',
   'window.py',
   'connection_handler.py',
-  'dialogs.py',
   'available_models.json',
   'available_models_descriptions.py',
-  'internal.py'
+  'internal.py',
+  'generic_actions.py'
 ]
 
 custom_widgets = [
@@ -51,7 +51,8 @@ custom_widgets = [
   'custom_widgets/message_widget.py',
   'custom_widgets/chat_widget.py',
   'custom_widgets/model_widget.py',
-  'custom_widgets/terminal_widget.py'
+  'custom_widgets/terminal_widget.py',
+  'custom_widgets/dialog_widget.py'
 ]
 
 install_data(alpaca_sources, install_dir: moduledir)

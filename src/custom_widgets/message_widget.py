@@ -10,7 +10,7 @@ from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk
 import logging, os, datetime, re, shutil, threading, sys
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .table_widget import TableWidget
-from .. import dialogs
+from . import dialog_widget, terminal_widget
 
 logger = logging.getLogger(__name__)
 
@@ -180,7 +180,13 @@ class code_block(Gtk.Box):
         logger.debug("Running script")
         start = self.buffer.get_start_iter()
         end = self.buffer.get_end_iter()
-        dialogs.run_script(window, self.buffer.get_text(start, end, False), language_name)
+        dialog_widget.simple(
+            _('Run Script'),
+            _('Make sure you understand what this script does before running it, Alpaca is not responsible for any damages to your device or data'),
+            lambda script=self.buffer.get_text(start, end, False), language_name=language_name: terminal_widget.run_terminal(script, language_name),
+            _('Execute'),
+            'destructive'
+        )
 
 class attachment(Gtk.Button):
     __gtype_name__ = 'AlpacaAttachment'

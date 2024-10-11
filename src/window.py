@@ -24,6 +24,7 @@ from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
 from datetime import datetime
+from pytube import YouTube
 
 import gi
 gi.require_version('GtkSource', '5')
@@ -31,8 +32,8 @@ gi.require_version('GdkPixbuf', '2.0')
 
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
 
-from . import dialogs, connection_handler
-from .custom_widgets import message_widget, chat_widget, model_widget, terminal_widget
+from . import dialogs, connection_handler, generic_actions
+from .custom_widgets import message_widget, chat_widget, model_widget, terminal_widget, dialog_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir
 
 logger = logging.getLogger(__name__)
@@ -371,10 +372,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         clipboard.read_text_async(None, self.cb_text_received)
         clipboard.read_texture_async(None, self.cb_image_received)
 
-    def run_terminal(self, script:list):
-        self.terminal_scroller.set_child(terminal_widget.terminal(script))
-        self.terminal_dialog.present(self)
-
     def convert_model_name(self, name:str, mode:int) -> str: # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag
         try:
             if mode == 0:
@@ -669,7 +666,34 @@ Generate a title following these rules:
     def connection_error(self):
         logger.error("Connection error")
         if self.ollama_instance.remote:
-            dialogs.reconnect_remote(self)
+            #dialogs.reconnect_remote(self)
+            options = {
+                _("Close Alpaca"): {
+                    "callback": lambda *_: self.get_application().quit(),
+                    "appearance": "destructive"
+                },
+                _("Use Local Instance"): {
+                    "callback": lambda *_: window.remote_connection_switch.set_active(False)
+                },
+                _("Connect"): {
+                    "callback": lambda url, bearer: generic_actions.connect_remote(url,bearer),
+                    "appearance": "suggested"
+                }
+            }
+            entries = [
+                {
+                    "text": self.ollama_instance.remote_url,
+                    "css": ['error'],
+                    "placeholder": _('Server URL')
+                },
+                {
+                    "text": self.ollama_instance.bearer_token,
+                    "css": ['error'] if self.ollama_instance.bearer_token else None,
+                    "placeholder": _('Bearer Token (Optional)')
+                }
+            ]
+
+
         else:
             self.ollama_instance.reset()
             self.show_toast(_("There was an error with the local Ollama instance, so it has been reset"), self.main_overlay)
@@ -714,6 +738,8 @@ Generate a title following these rules:
         del self.attachments[name]
         if len(self.attachments) == 0:
             self.attachment_box.set_visible(False)
+        if self.file_preview_dialog.get_visible():
+            self.file_preview_dialog.close()
 
     def attach_file(self, file_path, file_type):
         logger.debug(f"Attaching file: {file_path}")
@@ -739,7 +765,6 @@ Generate a title following these rules:
                 child=button_content
             )
             self.attachments[file_name] = {"path": file_path, "type": file_type, "content": content, "button": button}
-            #button.connect("clicked", lambda button: dialogs.remove_attached_file(self, button))
             button.connect("clicked", lambda button : self.preview_file(file_path, file_type, file_name))
             self.attachment_container.append(button)
             self.attachment_box.set_visible(True)
@@ -749,11 +774,11 @@ Generate a title following these rules:
         chat_name = chat_row.label.get_label()
         action_name = action.get_name()
         if action_name in ('delete_chat', 'delete_current_chat'):
-            dialogs.delete_chat(self, chat_name)
+            dialog_widget.simple(_('Delete Chat?'), _("Are you sure you want to delete '{}'?").format(chat_name), lambda chat_name=chat_name, *_: self.chat_list_box.delete_chat(chat_name), _('Delete'), 'destructive')
         elif action_name in ('duplicate_chat', 'duplicate_current_chat'):
             self.chat_list_box.duplicate_chat(chat_name)
         elif action_name in ('rename_chat', 'rename_current_chat'):
-            dialogs.rename_chat(self, chat_name)
+            dialog_widget.simple_entry(_('Rename Chat?'), _("Renaming '{}'").format(chat_name), lambda new_chat_name, old_chat_name=chat_name, *_: self.chat_list_box.rename_chat(old_chat_name, new_chat_name), {'placeholder': _('Chat name')}, _('Rename'))
         elif action_name in ('export_chat', 'export_current_chat'):
             self.chat_list_box.export_chat(chat_name)
 
@@ -777,12 +802,27 @@ Generate a title following these rules:
             )
             if youtube_regex.match(text):
                 try:
-                    dialogs.youtube_caption(self, text)
+                    yt = YouTube(text)
+                    captions = yt.captions
+                    if len(captions) == 0:
+                        self.show_toast(_("This video does not have any transcriptions"), self.main_overlay)
+                        return
+                    video_title = yt.title
+                    dialog_widget.simple_dropdown(
+                        _('Attach YouTube Video?'),
+                        _('{}\n\nPlease select a transcript to include').format(video_title),
+                        lambda caption_name, video_url=text: generic_actions.attach_youtube(video_url, caption_name),
+                        ["{} ({})".format(caption.name.title(), caption.code) for caption in captions]
+                    )
                 except Exception as e:
                     logger.error(e)
                     self.show_toast(_("This video is not available"), self.main_overlay)
             elif url_regex.match(text):
-                dialogs.attach_website(self, text)
+                dialog_widget.simple(
+                    _('Attach Website? (Experimental)'),
+                    _("Are you sure you want to attach\n'{}'?").format(text),
+                    lambda url=text: generic_actions.attach_website(url)
+                )
         except Exception as e:
             logger.error(e)
 
@@ -865,6 +905,9 @@ Generate a title following these rules:
         message_widget.window = self
         chat_widget.window = self
         model_widget.window = self
+        dialog_widget.window = self
+        terminal_widget.window = self
+        generic_actions.window = self
         connection_handler.window = self
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
@@ -884,11 +927,11 @@ Generate a title following these rules:
 
         universal_actions = {
             'new_chat': [lambda *_: self.chat_list_box.new_chat(), ['<primary>n']],
-            'clear': [lambda *_: dialogs.clear_chat(self), ['<primary>e']],
+            'clear': [lambda *i: dialog_widget.simple(_('Clear Chat?'), _('Are you sure you want to clear the chat?'), self.chat_list_box.get_current_chat().clear_chat, _('Clear')), ['<primary>e']],
             'import_chat': [lambda *_: self.chat_list_box.import_chat(), ['<primary>i']],
-            'create_model_from_existing': [lambda *_: dialogs.create_model_from_existing(self)],
-            'create_model_from_file': [lambda *_: dialogs.create_model_from_file(self)],
-            'create_model_from_name': [lambda *_: dialogs.create_model_from_name(self)],
+            'create_model_from_existing': [lambda *i: dialog_widget.simple_dropdown(_('Select Model'), _('This model will be used as the base for the new model'), lambda model: self.create_model(model, False), self.model_manager.get_model_list())],
+            'create_model_from_file': [lambda *i, file_filter=self.file_filter_gguf: dialog_widget.simple_file(file_filter, lambda file: self.create_model(file.get_path(), True))],
+            'create_model_from_name': [lambda *i: dialog_widget.simple_entry(_('Pull Model'), _('Input the name of the model in this format\nname:tag'), lambda model: threading.Thread(target=self.model_manager.pull_model, kwargs={"model_name": model}).start(), {'placeholder': 'llama3.2:latest'})],
             'duplicate_chat': [self.chat_actions],
             'duplicate_current_chat': [self.current_chat_actions],
             'delete_chat': [self.chat_actions],
@@ -908,8 +951,8 @@ Generate a title following these rules:
         self.get_application().lookup_action('manage_models').set_enabled(False)
         self.get_application().lookup_action('preferences').set_enabled(False)
 
-        self.file_preview_remove_button.connect('clicked', lambda button : dialogs.remove_attached_file(self, button.get_name()))
-        self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialogs.attach_file(self, file_filter))
+        self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))
+        self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialog_widget.simple_file(file_filter, generic_actions.attach_file))
         self.create_model_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_']))
         self.remote_connection_entry.connect("entry-activated", lambda entry : entry.set_css_classes([]))
         self.set_focus(self.message_text_view)

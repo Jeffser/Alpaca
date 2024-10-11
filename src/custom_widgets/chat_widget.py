@@ -86,6 +86,8 @@ class chat(Gtk.ScrolledWindow):
         self.stop_message()
         for widget in list(self.container):
             self.container.remove(widget)
+        self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
+        print('clear chat for some reason')
 
     def add_message(self, message_id:str, model:str=None):
         msg = message(message_id, model)
@@ -102,7 +104,9 @@ class chat(Gtk.ScrolledWindow):
         if self.welcome_screen:
             self.container.remove(self.welcome_screen)
             self.welcome_screen = None
-        self.clear_chat()
+        if len(list(self.container)) > 0:
+            self.clear_chat()
+            return
         button_container = Gtk.Box(
             orientation=1,
             spacing=10,
@@ -333,6 +337,8 @@ class chat_list(Gtk.ListBox):
         window.save_history()
 
     def rename_chat(self, old_chat_name:str, new_chat_name:str):
+        if new_chat_name == old_chat_name:
+            return
         tab = self.get_tab_by_name(old_chat_name)
         if tab:
             new_chat_name = window.generate_numbered_name(new_chat_name, [tab.chat_window.get_name() for tab in self.tab_list])
