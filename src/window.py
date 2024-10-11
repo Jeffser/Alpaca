@@ -667,29 +667,13 @@ Generate a title following these rules:
         logger.error("Connection error")
         if self.ollama_instance.remote:
             options = {
-                _("Close Alpaca"): {
-                    "callback": lambda *_: self.get_application().quit(),
-                    "appearance": "destructive"
-                },
-                _("Use Local Instance"): {
-                    "callback": lambda *_: window.remote_connection_switch.set_active(False)
-                },
-                _("Connect"): {
-                    "callback": lambda url, bearer: generic_actions.connect_remote(url,bearer),
-                    "appearance": "suggested"
-                }
+                _("Close Alpaca"): {"callback": lambda *_: self.get_application().quit(), "appearance": "destructive"},
+                _("Use Local Instance"): {"callback": lambda *_: window.remote_connection_switch.set_active(False)},
+                _("Connect"): {"callback": lambda url, bearer: generic_actions.connect_remote(url,bearer), "appearance": "suggested"}
             }
             entries = [
-                {
-                    "text": self.ollama_instance.remote_url,
-                    "css": ['error'],
-                    "placeholder": _('Server URL')
-                },
-                {
-                    "text": self.ollama_instance.bearer_token,
-                    "css": ['error'] if self.ollama_instance.bearer_token else None,
-                    "placeholder": _('Bearer Token (Optional)')
-                }
+                {"text": self.ollama_instance.remote_url, "css": ['error'], "placeholder": _('Server URL')},
+                {"text": self.ollama_instance.bearer_token, "css": ['error'] if self.ollama_instance.bearer_token else None, "placeholder": _('Bearer Token (Optional)')}
             ]
             dialog_widget.Entry(_('Connection Error'), _('The remote instance has disconnected'), list(options)[0], options, entries)
         else:
