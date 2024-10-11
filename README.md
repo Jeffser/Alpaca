@@ -91,6 +91,7 @@ Want to add a language? Visit [this discussion](https://github.com/Jeffser/Alpac
 - [Nokse](https://github.com/Nokse22) for their contributions to the UI and table rendering
 - [Louis Chauvet-Villaret](https://github.com/loulou64490) for their suggestions
 - [Aleksana](https://github.com/Aleksanaa) for her help with better handling of directories
+- [Gnome Builder Team](https://gitlab.gnome.org/GNOME/gnome-builder) for the awesome IDE I use to develop Alpaca
 - Sponsors for giving me enough money to be able to take a ride to my campus every time I need to <3
 - Everyone that has shared kind words of encouragement!
 
