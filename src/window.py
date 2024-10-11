@@ -853,7 +853,7 @@ Generate a title following these rules:
     def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, save:bool):
         #Model Manager
         self.model_manager = model_widget.model_manager_container()
-        GLib.idle_add(self.model_scroller.set_child, self.model_manager)
+        self.model_scroller.set_child(self.model_manager)
 
         #Chat History
         self.load_history()
@@ -868,26 +868,26 @@ Generate a title following these rules:
         #User Preferences
         for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
             if element.get_name() in self.ollama_instance.tweaks:
-                GLib.idle_add(element.set_value, self.ollama_instance.tweaks[element.get_name()])
+                element.set_value(self.ollama_instance.tweaks[element.get_name()])
 
         for element in list(list(list(list(self.overrides_group)[0])[1])[0]):
             if element.get_name() in self.ollama_instance.overrides:
-                GLib.idle_add(element.set_text, self.ollama_instance.overrides[element.get_name()])
+                element.set_text(self.ollama_instance.overrides[element.get_name()])
 
-        GLib.idle_add(self.set_hide_on_close, self.background_switch.get_active())
-        GLib.idle_add(self.instance_idle_timer.set_value, self.ollama_instance.idle_timer_delay)
+        self.set_hide_on_close(self.background_switch.get_active())
+        self.instance_idle_timer.set_value(self.ollama_instance.idle_timer_delay)
         self.remote_connection_switch.set_active(self.ollama_instance.remote)
         self.remote_connection_switch.get_activatable_widget().connect('state-set', self.remote_switched)
 
         #Save preferences
         if save:
-            GLib.idle_add(self.save_server_config)
-        GLib.idle_add(self.send_button.set_sensitive, True)
-        GLib.idle_add(self.attachment_button.set_sensitive, True)
-        GLib.idle_add(self.remote_connection_switch.set_sensitive, True)
-        GLib.idle_add(self.tweaks_group.set_sensitive, True)
-        GLib.idle_add(self.instance_page.set_sensitive, True)
-        GLib.idle_add(self.get_application().lookup_action('manage_models').set_enabled, True)
+            self.save_server_config()
+        self.send_button.set_sensitive(True)
+        self.attachment_button.set_sensitive(True)
+        self.remote_connection_switch.set_sensitive(True)
+        self.tweaks_group.set_sensitive(True)
+        self.instance_page.set_sensitive(True)
+        self.get_application().lookup_action('manage_models').set_enabled(True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
