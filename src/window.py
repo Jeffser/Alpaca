@@ -666,7 +666,6 @@ Generate a title following these rules:
     def connection_error(self):
         logger.error("Connection error")
         if self.ollama_instance.remote:
-            #dialogs.reconnect_remote(self)
             options = {
                 _("Close Alpaca"): {
                     "callback": lambda *_: self.get_application().quit(),
@@ -692,8 +691,7 @@ Generate a title following these rules:
                     "placeholder": _('Bearer Token (Optional)')
                 }
             ]
-
-
+            dialog_widget.Entry(_('Connection Error'), _('The remote instance has disconnected'), list(options)[0], options, entries)
         else:
             self.ollama_instance.reset()
             self.show_toast(_("There was an error with the local Ollama instance, so it has been reset"), self.main_overlay)
