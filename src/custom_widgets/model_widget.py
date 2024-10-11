@@ -179,7 +179,13 @@ class pulling_model(Gtk.ListBoxRow):
             css_classes = ["error", "circular"],
             tooltip_text = _("Stop Pulling '{}'").format(window.convert_model_name(model_name, 0))
         )
-        stop_button.connect('clicked', lambda *i: dialog_widget.simple(_('Stop Download?'), _("Are you sure you want to stop pulling '{}'?").format(window.convert_model_name(self.get_name(), 0)), self.stop, _('Stop'), 'destructive'))
+        stop_button.connect('clicked', lambda *i: dialog_widget.simple(
+            _('Stop Download?'),
+            _("Are you sure you want to stop pulling '{}'?").format(window.convert_model_name(self.get_name(), 0)),
+            self.stop,
+            _('Stop'),
+            'destructive'
+        ))
 
         container_box = Gtk.Box(
             hexpand=True,
@@ -277,7 +283,13 @@ class local_model(Gtk.ListBoxRow):
             tooltip_text = _("Remove '{}'").format(window.convert_model_name(model_name, 0))
         )
 
-        delete_button.connect('clicked', lambda *i: dialog_widget.simple(_('Delete Model?'), _("Are you sure you want to delete '{}'?").format(model_title), lambda model_name=model_name: window.model_manager.remove_local_model(model_name), _('Delete'), 'destructive'))
+        delete_button.connect('clicked', lambda *i: dialog_widget.simple(
+            _('Delete Model?'),
+            _("Are you sure you want to delete '{}'?").format(model_title),
+            lambda model_name=model_name: window.model_manager.remove_local_model(model_name),
+            _('Delete'),
+            'destructive'
+        ))
 
         container_box = Gtk.Box(
             hexpand=True,

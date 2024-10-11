@@ -774,11 +774,23 @@ Generate a title following these rules:
         chat_name = chat_row.label.get_label()
         action_name = action.get_name()
         if action_name in ('delete_chat', 'delete_current_chat'):
-            dialog_widget.simple(_('Delete Chat?'), _("Are you sure you want to delete '{}'?").format(chat_name), lambda chat_name=chat_name, *_: self.chat_list_box.delete_chat(chat_name), _('Delete'), 'destructive')
+            dialog_widget.simple(
+                _('Delete Chat?'),
+                _("Are you sure you want to delete '{}'?").format(chat_name),
+                lambda chat_name=chat_name, *_: self.chat_list_box.delete_chat(chat_name),
+                _('Delete'),
+                'destructive'
+            )
         elif action_name in ('duplicate_chat', 'duplicate_current_chat'):
             self.chat_list_box.duplicate_chat(chat_name)
         elif action_name in ('rename_chat', 'rename_current_chat'):
-            dialog_widget.simple_entry(_('Rename Chat?'), _("Renaming '{}'").format(chat_name), lambda new_chat_name, old_chat_name=chat_name, *_: self.chat_list_box.rename_chat(old_chat_name, new_chat_name), {'placeholder': _('Chat name')}, _('Rename'))
+            dialog_widget.simple_entry(
+                _('Rename Chat?'),
+                _("Renaming '{}'").format(chat_name),
+                lambda new_chat_name, old_chat_name=chat_name, *_: self.chat_list_box.rename_chat(old_chat_name, new_chat_name),
+                {'placeholder': _('Chat name')},
+                _('Rename')
+            )
         elif action_name in ('export_chat', 'export_current_chat'):
             self.chat_list_box.export_chat(chat_name)
 
