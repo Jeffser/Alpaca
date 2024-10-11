@@ -880,7 +880,7 @@ Generate a title following these rules:
 
         GLib.idle_add(self.set_hide_on_close, self.background_switch.get_active())
         GLib.idle_add(self.instance_idle_timer.set_value, self.ollama_instance.idle_timer_delay)
-        GLib.idle_add(self.remote_connection_switch.set_active, self.ollama_instance.remote)
+        self.remote_connection_switch.set_active(self.ollama_instance.remote)
         self.remote_connection_switch.get_activatable_widget().connect('state-set', self.remote_switched)
 
         #Save preferences
