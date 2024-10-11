@@ -507,6 +507,7 @@ class model_manager_container(Gtk.Box):
         try:
             response = window.ollama_instance.request("GET", "api/tags")
             if response.status_code == 200:
+                self.model_selector.popover.model_list_box.remove_all()
                 self.local_list.remove_all()
                 data = json.loads(response.text)
                 if len(data['models']) == 0:
