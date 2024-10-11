@@ -112,8 +112,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     background_switch = Gtk.Template.Child()
     powersaver_warning_switch = Gtk.Template.Child()
     remote_connection_switch = Gtk.Template.Child()
-    remote_connection_entry = Gtk.Template.Child()
-    remote_bearer_token_entry = Gtk.Template.Child()
+    remote_connection_switch_handler = None
 
     banner = Gtk.Template.Child()
 
@@ -211,45 +210,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             self.welcome_dialog.force_close()
             self.powersaver_warning_switch.set_active(True)
-
-    @Gtk.Template.Callback()
-    def change_remote_connection(self, switcher, *_):
-        logger.debug("Connection switched")
-        if self.remote_connection_switch.get_active() and not self.remote_connection_entry.get_text():
-            self.remote_connection_switch.set_active(False)
-            return
-        self.ollama_instance.remote = self.remote_connection_switch.get_active()
-        if self.ollama_instance.remote:
-            self.ollama_instance.stop()
-        else:
-            self.ollama_instance.start()
-        if self.model_manager:
-            self.model_manager.update_local_list()
-        self.save_server_config()
-
-    @Gtk.Template.Callback()
-    def change_remote_url(self, entry):
-        if entry.get_text() and not entry.get_text().startswith("http"):
-            entry.set_text("http://{}".format(entry.get_text()))
-            return
-        if entry.get_text() and entry.get_text() != entry.get_text().rstrip('/'):
-            entry.set_text(entry.get_text().rstrip('/'))
-            return
-        self.remote_connection_switch.set_sensitive(entry.get_text())
-        logger.debug(f"Changing remote url: {self.ollama_instance.remote_url}")
-        self.ollama_instance.remote_url = entry.get_text()
-        if not entry.get_text():
-            self.remote_connection_switch.set_active(False)
-        if self.ollama_instance.remote and self.model_manager and entry.get_text():
-            self.model_manager.update_local_list()
-        self.save_server_config()
-
-    @Gtk.Template.Callback()
-    def change_remote_bearer_token(self, entry):
-        self.ollama_instance.bearer_token = entry.get_text()
-        if self.ollama_instance.remote_url and self.ollama_instance.remote and self.model_manager:
-            self.model_manager.update_local_list()
-        self.save_server_config()
 
     @Gtk.Template.Callback()
     def switch_run_on_background(self, switch, user_data):
@@ -854,6 +814,26 @@ Generate a title following these rules:
     def power_saver_toggled(self, monitor):
         self.banner.set_revealed(monitor.get_power_saver_enabled() and self.powersaver_warning_switch.get_active())
 
+    def remote_switched(self, switch, state):
+        def local_instance_process():
+            self.ollama_instance.remote = False
+            self.ollama_instance.start()
+            self.model_manager.update_local_list()
+            self.save_server_config()
+
+        if state:
+            options = {
+                _("Cancel"): {"callback": lambda *_: self.remote_connection_switch.set_active(False)},
+                _("Connect"): {"callback": lambda url, bearer: generic_actions.connect_remote(url, bearer), "appearance": "suggested"}
+            }
+            entries = [
+                {"text": self.ollama_instance.remote_url, "placeholder": _('Server URL')},
+                {"text": self.ollama_instance.bearer_token, "placeholder": _('Bearer Token (Optional)')}
+            ]
+            dialog_widget.Entry(_('Connect Remote Instance'), _('Enter instance information to continue'), list(options)[0], options, entries)
+        else:
+            threading.Thread(target=local_instance_process).start()
+
     def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, save:bool):
         #Model Manager
         self.model_manager = model_widget.model_manager_container()
@@ -879,10 +859,10 @@ Generate a title following these rules:
                 element.set_text(self.ollama_instance.overrides[element.get_name()])
 
         self.set_hide_on_close(self.background_switch.get_active())
-        self.remote_connection_entry.set_text(self.ollama_instance.remote_url)
-        self.remote_connection_switch.set_sensitive(self.remote_connection_entry.get_text())
-        self.remote_bearer_token_entry.set_text(self.ollama_instance.bearer_token)
+
+        self.remote_connection_switch.get_activatable_widget().handler_block(self.remote_connection_switch_handler)
         self.remote_connection_switch.set_active(self.ollama_instance.remote)
+        self.remote_connection_switch.get_activatable_widget().handler_unblock(self.remote_connection_switch_handler)
         self.instance_idle_timer.set_value(self.ollama_instance.idle_timer_delay)
 
         #Save preferences
@@ -943,12 +923,12 @@ Generate a title following these rules:
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
         self.get_application().lookup_action('manage_models').set_enabled(False)
-        self.get_application().lookup_action('preferences').set_enabled(False)
+        #self.get_application().lookup_action('preferences').set_enabled(False)
+        self.remote_connection_switch_handler = self.remote_connection_switch.get_activatable_widget().connect('state-set', self.remote_switched)
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialog_widget.simple_file(file_filter, generic_actions.attach_file))
         self.create_model_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_']))
-        self.remote_connection_entry.connect("entry-activated", lambda entry : entry.set_css_classes([]))
         self.set_focus(self.message_text_view)
         if os.path.exists(os.path.join(config_dir, "server.json")):
             try:

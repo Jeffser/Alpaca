@@ -291,22 +291,7 @@
             <object class="AdwPreferencesGroup">
               <child>
                 <object class="AdwSwitchRow" id="remote_connection_switch">
-                  <signal name="notify::active" handler="change_remote_connection"/>
                   <property name="title" translatable="yes">Use Remote Connection to Ollama</property>
-                </object>
-              </child>
-              <child>
-                <object class="AdwEntryRow" id="remote_connection_entry">
-                  <signal name="apply" handler="change_remote_url"/>
-                  <property name="title" translatable="yes">URL of Remote Instance</property>
-                  <property name="show-apply-button">true</property>
-                </object>
-              </child>
-              <child>
-                <object class="AdwEntryRow" id="remote_bearer_token_entry">
-                  <signal name="apply" handler="change_remote_bearer_token"/>
-                  <property name="title" translatable="yes">Bearer Token (Optional)</property>
-                  <property name="show-apply-button">true</property>
                 </object>
               </child>
             </object>

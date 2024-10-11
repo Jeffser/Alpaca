@@ -10,13 +10,13 @@ from .internal import cache_dir
 
 window = None
 
-def connect_local():
-    window.remote_connection_switch.set_active(False)
-
-def connect_remote(url:str, bearer:str):
-    window.remote_connection_entry.set_text(url)
-    window.remote_bearer_token_entry.set_text(bearer)
-    window.remote_connection_switch.set_active(True)
+def connect_remote(remote_url:str, bearer_token:str):
+    window.ollama_instance.remote_url=remote_url
+    window.ollama_instance.bearer_token=bearer_token
+    window.ollama_instance.remote = True
+    window.ollama_instance.stop()
+    window.model_manager.update_local_list()
+    window.save_server_config()
 
 def attach_youtube(video_url:str, caption_name:str):
     buffer = window.message_text_view.get_buffer()

@@ -16,7 +16,7 @@ def log_output(pipe):
         with pipe:
             try:
                 for line in iter(pipe.readline, ''):
-                    print(line, end='')
+                    #print(line, end='')
                     f.write(line)
                     f.flush()
             except:
@@ -118,8 +118,6 @@ class instance():
                 self.start_timer()
         else:
             self.remote = True
-            if not self.remote_url:
-                window.remote_connection_entry.set_text('http://0.0.0.0:11434')
             window.remote_connection_switch.set_sensitive(True)
             window.remote_connection_switch.set_active(True)
 
