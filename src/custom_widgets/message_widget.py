@@ -294,6 +294,7 @@ class image(Gtk.Button):
                 tooltip_text=_("Missing Image")
             )
             image_texture.update_property([4], [_("Missing image")])
+        self.set_overflow(1)
         self.connect("clicked", lambda button, file_path=os.path.join(head, '{selected_chat}', last_dir, file_name): window.preview_file(file_path, 'image', None))
 
 class image_container(Gtk.ScrolledWindow):

@@ -4,6 +4,9 @@
 .chat_image_button {
   padding: 0;
 }
+.chat_image_button, .chat_image_button image {
+  border-radius: 10px;
+}
 .editing_message_textview {
   border-radius: 5px;
   padding: 5px;
