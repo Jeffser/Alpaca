@@ -819,8 +819,8 @@ Generate a title following these rules:
             sensitive_elements = [switch, self.tweaks_group, self.instance_page, self.send_button, self.attachment_button]
 
             [element.set_sensitive(False) for element in sensitive_elements]
-            self.get_application().lookup_action('manage_models').set_enabled, False)
-            self.title_stack.set_visible_child_name, 'loading')
+            self.get_application().lookup_action('manage_models').set_enabled(False)
+            self.title_stack.set_visible_child_name('loading')
 
             self.ollama_instance.remote = False
             self.ollama_instance.start()
@@ -828,8 +828,8 @@ Generate a title following these rules:
             self.save_server_config()
 
             [element.set_sensitive(True) for element in sensitive_elements]
-            self.get_application().lookup_action('manage_models').set_enabled, True)
-            self.title_stack.set_visible_child_name, 'model_selector')
+            self.get_application().lookup_action('manage_models').set_enabled(True)
+            self.title_stack.set_visible_child_name('model_selector')
 
         if state:
             options = {
