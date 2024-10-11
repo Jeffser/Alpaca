@@ -55,6 +55,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     #Override elements
     overrides_group = Gtk.Template.Child()
+    instance_page = Gtk.Template.Child()
 
     #Elements
     split_view_overlay = Gtk.Template.Child()
@@ -817,10 +818,18 @@ Generate a title following these rules:
     def remote_switched(self, switch, state):
         def local_instance_process():
             switch.set_sensitive(False)
+            self.tweaks_group.set_sensitive(False)
+            self.instance_page.set_sensitive(False)
+            self.get_application().lookup_action('manage_models').set_enabled(False)
+            self.title_stack.set_visible_child_name('loading')
             self.ollama_instance.remote = False
             self.ollama_instance.start()
             self.model_manager.update_local_list()
             self.save_server_config()
+            self.title_stack.set_visible_child_name('model_selector')
+            self.get_application().lookup_action('manage_models').set_enabled(True)
+            self.tweaks_group.set_sensitive(True)
+            self.instance_page.set_sensitive(True)
             switch.set_sensitive(True)
 
         if state:
@@ -878,8 +887,10 @@ Generate a title following these rules:
             self.save_server_config()
         self.send_button.set_sensitive(True)
         self.attachment_button.set_sensitive(True)
+        self.remote_connection_switch.set_sensitive(True)
+        self.tweaks_group.set_sensitive(True)
+        self.instance_page.set_sensitive(True)
         self.get_application().lookup_action('manage_models').set_enabled(True)
-        self.get_application().lookup_action('preferences').set_enabled(True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -931,7 +942,9 @@ Generate a title following these rules:
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
         self.get_application().lookup_action('manage_models').set_enabled(False)
-        self.get_application().lookup_action('preferences').set_enabled(False)
+        self.remote_connection_switch.set_sensitive(False)
+        self.tweaks_group.set_sensitive(False)
+        self.instance_page.set_sensitive(False)
         self.remote_connection_switch_handler = self.remote_connection_switch.get_activatable_widget().connect('state-set', self.remote_switched)
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))
