@@ -78,6 +78,22 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="2.6.0" date="2024-10-11">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.6.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Better system for handling dialogs</li>
+          <li>Better system for handling instance switching</li>
+          <li>Remote connection dialog</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed: Models get duplicated when switching remote and local instance</li>
+          <li>Better internal instance manager</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.5.1" date="2024-10-09">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.5.1</url>
       <description>
