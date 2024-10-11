@@ -816,24 +816,20 @@ Generate a title following these rules:
 
     def remote_switched(self, switch, state):
         def local_instance_process():
-            GLib.idle_add(switch.set_sensitive, False)
-            GLib.idle_add(self.tweaks_group.set_sensitive, False)
-            GLib.idle_add(self.instance_page.set_sensitive, False)
-            GLib.idle_add(self.send_button.set_sensitive, False)
-            GLib.idle_add(self.attachment_button.set_sensitive, False)
-            GLib.idle_add(self.get_application().lookup_action('manage_models').set_enabled, False)
-            GLib.idle_add(self.title_stack.set_visible_child_name, 'loading')
+            sensitive_elements = [switch, self.tweaks_group, self.instance_page, self.send_button, self.attachment_button]
+
+            [element.set_sensitive(False) for element in sensitive_elements]
+            self.get_application().lookup_action('manage_models').set_enabled, False)
+            self.title_stack.set_visible_child_name, 'loading')
+
             self.ollama_instance.remote = False
             self.ollama_instance.start()
             self.model_manager.update_local_list()
             self.save_server_config()
-            GLib.idle_add(switch.set_sensitive, True)
-            GLib.idle_add(self.tweaks_group.set_sensitive, True)
-            GLib.idle_add(self.instance_page.set_sensitive, True)
-            GLib.idle_add(self.send_button.set_sensitive, True)
-            GLib.idle_add(self.attachment_button.set_sensitive, True)
-            GLib.idle_add(self.get_application().lookup_action('manage_models').set_enabled, True)
-            GLib.idle_add(self.title_stack.set_visible_child_name, 'model_selector')
+
+            [element.set_sensitive(True) for element in sensitive_elements]
+            self.get_application().lookup_action('manage_models').set_enabled, True)
+            self.title_stack.set_visible_child_name, 'model_selector')
 
         if state:
             options = {
