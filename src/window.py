@@ -113,7 +113,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     background_switch = Gtk.Template.Child()
     powersaver_warning_switch = Gtk.Template.Child()
     remote_connection_switch = Gtk.Template.Child()
-    remote_connection_switch_handler = None
 
     banner = Gtk.Template.Child()
 
@@ -817,20 +816,24 @@ Generate a title following these rules:
 
     def remote_switched(self, switch, state):
         def local_instance_process():
-            switch.set_sensitive(False)
-            self.tweaks_group.set_sensitive(False)
-            self.instance_page.set_sensitive(False)
-            self.get_application().lookup_action('manage_models').set_enabled(False)
-            self.title_stack.set_visible_child_name('loading')
+            GLib.idle_add(switch.set_sensitive, False)
+            GLib.idle_add(self.tweaks_group.set_sensitive, False)
+            GLib.idle_add(self.instance_page.set_sensitive, False)
+            GLib.idle_add(self.send_button.set_sensitive, False)
+            GLib.idle_add(self.attachment_button.set_sensitive, False)
+            GLib.idle_add(self.get_application().lookup_action('manage_models').set_enabled, False)
+            GLib.idle_add(self.title_stack.set_visible_child_name, 'loading')
             self.ollama_instance.remote = False
             self.ollama_instance.start()
             self.model_manager.update_local_list()
             self.save_server_config()
-            self.title_stack.set_visible_child_name('model_selector')
-            self.get_application().lookup_action('manage_models').set_enabled(True)
-            self.tweaks_group.set_sensitive(True)
-            self.instance_page.set_sensitive(True)
-            switch.set_sensitive(True)
+            GLib.idle_add(switch.set_sensitive, True)
+            GLib.idle_add(self.tweaks_group.set_sensitive, True)
+            GLib.idle_add(self.instance_page.set_sensitive, True)
+            GLib.idle_add(self.send_button.set_sensitive, True)
+            GLib.idle_add(self.attachment_button.set_sensitive, True)
+            GLib.idle_add(self.get_application().lookup_action('manage_models').set_enabled, True)
+            GLib.idle_add(self.title_stack.set_visible_child_name, 'model_selector')
 
         if state:
             options = {
@@ -854,7 +857,7 @@ Generate a title following these rules:
     def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, save:bool):
         #Model Manager
         self.model_manager = model_widget.model_manager_container()
-        self.model_scroller.set_child(self.model_manager)
+        GLib.idle_add(self.model_scroller.set_child, self.model_manager)
 
         #Chat History
         self.load_history()
@@ -869,28 +872,26 @@ Generate a title following these rules:
         #User Preferences
         for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
             if element.get_name() in self.ollama_instance.tweaks:
-                element.set_value(self.ollama_instance.tweaks[element.get_name()])
+                GLib.idle_add(element.set_value, self.ollama_instance.tweaks[element.get_name()])
 
         for element in list(list(list(list(self.overrides_group)[0])[1])[0]):
             if element.get_name() in self.ollama_instance.overrides:
-                element.set_text(self.ollama_instance.overrides[element.get_name()])
+                GLib.idle_add(element.set_text, self.ollama_instance.overrides[element.get_name()])
 
-        self.set_hide_on_close(self.background_switch.get_active())
-
-        self.remote_connection_switch.get_activatable_widget().handler_block(self.remote_connection_switch_handler)
-        self.remote_connection_switch.set_active(self.ollama_instance.remote)
-        self.remote_connection_switch.get_activatable_widget().handler_unblock(self.remote_connection_switch_handler)
-        self.instance_idle_timer.set_value(self.ollama_instance.idle_timer_delay)
+        GLib.idle_add(self.set_hide_on_close, self.background_switch.get_active())
+        GLib.idle_add(self.instance_idle_timer.set_value, self.ollama_instance.idle_timer_delay)
+        GLib.idle_add(self.remote_connection_switch.set_active, self.ollama_instance.remote)
+        self.remote_connection_switch.get_activatable_widget().connect('state-set', self.remote_switched)
 
         #Save preferences
         if save:
-            self.save_server_config()
-        self.send_button.set_sensitive(True)
-        self.attachment_button.set_sensitive(True)
-        self.remote_connection_switch.set_sensitive(True)
-        self.tweaks_group.set_sensitive(True)
-        self.instance_page.set_sensitive(True)
-        self.get_application().lookup_action('manage_models').set_enabled(True)
+            GLib.idle_add(self.save_server_config)
+        GLib.idle_add(self.send_button.set_sensitive, True)
+        GLib.idle_add(self.attachment_button.set_sensitive, True)
+        GLib.idle_add(self.remote_connection_switch.set_sensitive, True)
+        GLib.idle_add(self.tweaks_group.set_sensitive, True)
+        GLib.idle_add(self.instance_page.set_sensitive, True)
+        GLib.idle_add(self.get_application().lookup_action('manage_models').set_enabled, True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -945,7 +946,6 @@ Generate a title following these rules:
         self.remote_connection_switch.set_sensitive(False)
         self.tweaks_group.set_sensitive(False)
         self.instance_page.set_sensitive(False)
-        self.remote_connection_switch_handler = self.remote_connection_switch.get_activatable_widget().connect('state-set', self.remote_switched)
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialog_widget.simple_file(file_filter, generic_actions.attach_file))
