@@ -257,7 +257,7 @@ class information_bow(Gtk.Box):
         self.subtitle = subtitle
         title_label = Gtk.Label(
             label=self.title,
-            css_classes=['subtitle', 'caption'],
+            css_classes=['subtitle', 'caption', 'dim-label'],
             hexpand=True,
             margin_top=10,
             margin_start=0,
