@@ -112,7 +112,7 @@ msgstr "কোড হাইলাইটিং দেখানো একটি �
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:66
 msgid "A Python script running inside integrated terminal"
-msgstr ""
+msgstr "একটি পাইথন স্ক্রিপ্ট যা ইন্টিগ্রেটেড টার্মিনালের মধ্যে চলছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:70
 msgid "A conversation involving a YouTube video transcript"
@@ -140,15 +140,15 @@ msgstr "নতুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Better system for handling dialogs"
-msgstr ""
+msgstr "ডায়ালগ পরিচালনার জন্য উন্নত সিস্টেম"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Better system for handling instance switching"
-msgstr ""
+msgstr "ইনস্ট্যান্স পরিবর্তনের জন্য উন্নত সিস্টেম"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Remote connection dialog"
-msgstr ""
+msgstr "রিমোট সংযোগ ডায়ালগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
@@ -172,27 +172,27 @@ msgstr "সংশোধন করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Fixed: Models get duplicated when switching remote and local instance"
-msgstr ""
+msgstr "সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Better internal instance manager"
-msgstr ""
+msgstr "উন্নত অভ্যন্তরীণ ইনস্ট্যান্স ম্যানেজার"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid "Added 'Cancel' and 'Save' buttons when editing a message"
-msgstr ""
+msgstr "একটি বার্তা সম্পাদনা করার সময় 'Cancel' এবং 'Save' বোতাম যুক্ত করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
 msgid "Better handling of image recognition"
-msgstr ""
+msgstr "ছবি সনাক্তকরণের জন্য উন্নত পরিচালনা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "Remove unused files when canceling a model download"
-msgstr ""
+msgstr "মডেল ডাউনলোড বাতিল করার সময় অপ্রয়োজনীয় ফাইলগুলি মুছে ফেলুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "Better message blocks rendering"
-msgstr ""
+msgstr "বার্তা ব্লক রেন্ডারিংয়ের জন্য উন্নত সমাধান"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:121
 msgid "Run bash and python scripts straight from chat"
@@ -486,8 +486,7 @@ msgstr "কোড ব্লকে পাইথন 2 শিরোনামকে 
 msgid ""
 "Prevent regeneration of title when the user changed it to a custom title"
 msgstr ""
-"ব্যবহারকারী এটিকে একটি কাস্টম শিরোনামে পরিবর্তন করলে শিরোনামের পুনর্জন্ম প্রতিরোধ "
-"করুন"
+"ব্যবহারকারী এটিকে একটি কাস্টম শিরোনামে পরিবর্তন করলে শিরোনামের পুনর্জন্ম প্রতিরোধ করুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:281
 msgid "Show date on stopped messages"
@@ -651,8 +650,7 @@ msgstr "Ollama আপডেট করা হয়েছে v0.3.0 (নতুন
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:384
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
-msgstr ""
-"তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
+msgstr "তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:385
 msgid "Better connection check for Ollama"
@@ -833,7 +831,8 @@ msgstr "অনুবাদ"
 msgid ""
 "These are all the available translations on 1.0.0, thanks to all the "
 "contributors!"
-msgstr "এগুলি 1.0.0 এর উপলব্ধ সমস্ত অনুবাদ, সমস্ত অবদানকারীদের ধন্যবাদ!"
+msgstr ""
+"এগুলি 1.0.0 এর উপলব্ধ সমস্ত অনুবাদ, সমস্ত অবদানকারীদের ধন্যবাদ!"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:438
 msgid "Russian: Alex K"
@@ -951,7 +950,8 @@ msgstr "ওল্লামাকে v0.1.39-এ আপডেট করুন"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:502
 msgid ""
 "Fixed: app didn't open if models tweaks wasn't present in the config files"
-msgstr "সংশোধন: কনফিগার ফাইলগুলিতে মডেলের টুইকগুলি উপস্থিত না থাকলে অ্যাপটি খুলবে না"
+msgstr ""
+"সংশোধন: কনফিগার ফাইলগুলিতে মডেলের টুইকগুলি উপস্থিত না থাকলে অ্যাপটি খুলবে না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:511
 msgid "Changed multiple icons (paper airplane for the send button)"
@@ -971,8 +971,7 @@ msgstr "ঠিক করা হয়েছে পাঠান/স্টপ ব�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:515
 msgid "Fixed app not checking if remote connection works when starting"
-msgstr ""
-"ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
+msgstr "ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:522
 msgid "Daily Update"
@@ -980,8 +979,7 @@ msgstr "প্রতিদিনের আপডেট"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:524
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
-msgstr ""
-"চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
+msgstr "চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:525
 msgid "New shortcut for creating a chat (CTRL+N)"
@@ -1278,8 +1276,7 @@ msgstr "একাধিক চ্যাট সমর্থন যোগ কর�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:696
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
-msgstr ""
-"বোল্ড, তালিকা, শিরোনাম, উপশিরোনাম, মনোস্পেস সহ Pango Markup সমর্থন যোগ করা হয়েছে"
+msgstr "বোল্ড, তালিকা, শিরোনাম, উপশিরোনাম, মনোস্পেস সহ Pango Markup সমর্থন যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:697
 msgid "Added autoscroll if the user is at the bottom of the chat"
@@ -1462,7 +1459,7 @@ msgstr "আলপাকা বন্ধ করুন"
 
 #: src/window.py:633
 msgid "Use Local Instance"
-msgstr ""
+msgstr "লোকাল ইনস্ট্যান্স ব্যবহার করুন"
 
 #: src/window.py:634 src/window.py:839
 msgid "Connect"
@@ -1470,7 +1467,7 @@ msgstr "সংযোগ করুন"
 
 #: src/window.py:637 src/window.py:842
 msgid "Server URL"
-msgstr ""
+msgstr "সার্ভার URL"
 
 #: src/window.py:638 src/window.py:843
 msgid "Bearer Token (Optional)"
@@ -1514,7 +1511,7 @@ msgstr "'{}' পুনর্নামকরণ করা হচ্ছে"
 
 #: src/window.py:735
 msgid "Chat name"
-msgstr ""
+msgstr "চ্যাটের নাম"
 
 #: src/window.py:736
 msgid "Rename"
@@ -1567,11 +1564,11 @@ msgstr "বাতিল করুন"
 
 #: src/window.py:846
 msgid "Connect Remote Instance"
-msgstr ""
+msgstr "রিমোট ইনস্ট্যান্সে সংযোগ করুন"
 
 #: src/window.py:847
 msgid "Enter instance information to continue"
-msgstr ""
+msgstr "অগ্রসর হতে ইনস্ট্যান্সের তথ্য প্রবেশ করুন"
 
 #: src/window.py:922
 msgid "Clear Chat?"
@@ -1919,8 +1916,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:43
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
-msgstr ""
-"ল্লামা 2 ভিত্তিক মডেল চীনা ডায়ালগ দক্ষতা উন্নত করার জন্য সূক্ষ্ম-টিউন করা হয়েছে"
+msgstr "ল্লামা 2 ভিত্তিক মডেল চীনা ডায়ালগ দক্ষতা উন্নত করার জন্য সূক্ষ্ম-টিউন করা হয়েছে"
 
 #: src/available_models_descriptions.py:44
 msgid ""
@@ -2227,6 +2223,8 @@ msgid ""
 "Yi-Coder is a series of open-source code language models that delivers state-"
 "of-the-art coding performance with fewer than 10 billion parameters."
 msgstr ""
+"Yi-Coder একটি খোলা উৎস কোড ভাষার মডেলের সিরিজ যা ১০ বিলিয়নের কম প্যারামিটার দিয়ে "
+"শ্রেষ্ঠ কোডিং কর্মক্ষমতা প্রদান করে।"
 
 #: src/available_models_descriptions.py:88
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
@@ -2308,7 +2306,8 @@ msgstr ""
 msgid ""
 "A lightweight chat model allowing accurate, and responsive output without "
 "requiring high-end hardware."
-msgstr "হালকা চ্যাট মডেল যা সঠিক এবং সাড়া প্রদান করে উচ্চ-মানের হার্ডওয়্যার ছাড়াই।"
+msgstr ""
+"হালকা চ্যাট মডেল যা সঠিক এবং সাড়া প্রদান করে উচ্চ-মানের হার্ডওয়্যার ছাড়াই।"
 
 #: src/available_models_descriptions.py:101
 msgid ""
@@ -2365,8 +2364,7 @@ msgstr ""
 msgid ""
 "A top-performing mixture of experts model, fine-tuned with high-quality data."
 msgstr ""
-"উচ্চ-পারফর্মিং বিশেষজ্ঞ মডেলের একটি মিশ্রণ, উচ্চ-মানের ডেটার সাথে ফাইন-টিউন করা "
-"হয়েছে।"
+"উচ্চ-পারফর্মিং বিশেষজ্ঞ মডেলের একটি মিশ্রণ, উচ্চ-মানের ডেটার সাথে ফাইন-টিউন করা হয়েছে।"
 
 #: src/available_models_descriptions.py:109
 msgid ""
@@ -2656,7 +2654,7 @@ msgstr ""
 
 #: src/window.ui:642
 msgid "Model Details"
-msgstr ""
+msgstr "মডেল বিস্তারিত"
 
 #: src/window.ui:707
 msgid "Base"
@@ -2834,7 +2832,8 @@ msgstr "এই প্রম্পটগুলির মধ্যে একটি
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
-msgstr "মনে হচ্ছে আপনি এখনও কোনও মডেল ডাউনলোড করেননি। শুরু করতে মডেল ডাউনলোড করুন!"
+msgstr ""
+"মনে হচ্ছে আপনি এখনও কোনও মডেল ডাউনলোড করেননি। শুরু করতে মডেল ডাউনলোড করুন!"
 
 #: src/custom_widgets/chat_widget.py:196
 msgid "Regenerate Response"
@@ -2854,7 +2853,7 @@ msgstr "চ্যাট সফলভাবে আমদানি করা হ�
 
 #: src/custom_widgets/message_widget.py:53
 msgid "Save Message"
-msgstr ""
+msgstr "বার্তা সংরক্ষণ করুন"
 
 #: src/custom_widgets/message_widget.py:87
 msgid "Message edited successfully"
@@ -2960,7 +2959,7 @@ msgstr "বন্ধ করুন"
 
 #: src/custom_widgets/model_widget.py:315
 msgid "Details"
-msgstr ""
+msgstr "বিস্তারিত"
 
 #: src/custom_widgets/model_widget.py:325
 msgid "Remove '{}'"
@@ -2972,27 +2971,27 @@ msgstr "মডেল মুছে ফেলুন?"
 
 #: src/custom_widgets/model_widget.py:376
 msgid "Modified At"
-msgstr ""
+msgstr "সংশোধিত সময়"
 
 #: src/custom_widgets/model_widget.py:377
 msgid "Parent Model"
-msgstr ""
+msgstr "মাতা মডেল"
 
 #: src/custom_widgets/model_widget.py:378
 msgid "Format"
-msgstr ""
+msgstr "ফরম্যাট"
 
 #: src/custom_widgets/model_widget.py:379
 msgid "Family"
-msgstr ""
+msgstr "পরিবার"
 
 #: src/custom_widgets/model_widget.py:380
 msgid "Parameter Size"
-msgstr ""
+msgstr "প্যারামিটার সাইজ"
 
 #: src/custom_widgets/model_widget.py:381
 msgid "Quantization Level"
-msgstr ""
+msgstr "কোয়ান্টাইজেশন স্তর"
 
 #: src/custom_widgets/model_widget.py:445
 msgid "Image Recognition"
