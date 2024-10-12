@@ -33,7 +33,7 @@ Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can man
 
 Normal conversation | Image recognition | Code highlighting | YouTube transcription | Model management
 :------------------:|:-----------------:|:-----------------:|:---------------------:|:----------------:
-![screenie1](https://jeffser.com/images/alpaca/screenie1.png) | ![screenie2](https://jeffser.com/images/alpaca/screenie2.png) | ![screenie3](https://jeffser.com/images/alpaca/screenie3.png) | ![screenie4](https://jeffser.com/images/alpaca/screenie4.png) | ![screenie5](https://jeffser.com/images/alpaca/screenie5.png)
+![screenie1](https://jeffser.com/images/alpaca/screenie1.png) | ![screenie2](https://jeffser.com/images/alpaca/screenie2.png) | ![screenie3](https://jeffser.com/images/alpaca/screenie3.png) | ![screenie4](https://jeffser.com/images/alpaca/screenie5.png) | ![screenie5](https://jeffser.com/images/alpaca/screenie6.png)
 
 ## Installation
 
