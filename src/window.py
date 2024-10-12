@@ -103,6 +103,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     manage_models_dialog = Gtk.Template.Child()
     model_scroller = Gtk.Template.Child()
     model_detail_page = Gtk.Template.Child()
+    model_detail_create_button = Gtk.Template.Child()
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = None
@@ -333,6 +334,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         clipboard.read_text_async(None, self.cb_text_received)
         clipboard.read_texture_async(None, self.cb_image_received)
 
+    @Gtk.Template.Callback()
+    def model_detail_create_button_clicked(self, button):
+        self.create_model(button.get_name(), False)
+
     def convert_model_name(self, name:str, mode:int) -> str: # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag
         try:
             if mode == 0:
@@ -352,20 +357,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
         modelfile_buffer.delete(modelfile_buffer.get_start_iter(), modelfile_buffer.get_end_iter())
         self.create_model_system.set_text('')
         if not file:
-            response = self.ollama_instance.request("POST", "api/show", json.dumps({"name": self.convert_model_name(model, 1)}))
-            if response.status_code == 200:
-                data = json.loads(response.text)
-                modelfile = []
-                for line in data['modelfile'].split('\n'):
-                    if line.startswith('SYSTEM'):
-                        self.create_model_system.set_text(line[len('SYSTEM'):].strip())
-                    if not line.startswith('SYSTEM') and not line.startswith('FROM') and not line.startswith('#'):
-                        modelfile.append(line)
-                self.create_model_name.set_text(self.convert_model_name(model, 1).split(':')[0] + "-custom")
-                modelfile_buffer.insert(modelfile_buffer.get_start_iter(), '\n'.join(modelfile), len('\n'.join(modelfile).encode('utf-8')))
-            else:
-                ##TODO ERROR MESSAGE
-                return
+            data = next((element for element in list(self.model_manager.model_selector.get_popover().model_list_box) if element.get_name() == self.convert_model_name(model, 1)), None).data
+            modelfile = []
+            for line in data['modelfile'].split('\n'):
+                if line.startswith('SYSTEM'):
+                    self.create_model_system.set_text(line[len('SYSTEM'):].strip())
+                if not line.startswith('SYSTEM') and not line.startswith('FROM') and not line.startswith('#'):
+                    modelfile.append(line)
+            self.create_model_name.set_text(self.convert_model_name(model, 1).split(':')[0] + "-custom")
+            modelfile_buffer.insert(modelfile_buffer.get_start_iter(), '\n'.join(modelfile), len('\n'.join(modelfile).encode('utf-8')))
             self.create_model_base.set_subtitle(self.convert_model_name(model, 1))
         else:
             self.create_model_name.set_text(os.path.splitext(os.path.basename(model))[0])

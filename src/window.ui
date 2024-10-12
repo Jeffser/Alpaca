@@ -212,6 +212,7 @@
                                         <signal name="paste-clipboard" handler="on_clipboard_paste"/>
                                         <style>
                                           <class name="message_text_view"/>
+                                          <class name="undershoot-bottom"/>
                                         </style>
                                         <property name="wrap-mode">word</property>
                                         <property name="top-margin">10</property>
@@ -645,7 +646,12 @@
                     <object class="AdwToolbarView">
                       <child type="top">
                         <object class="AdwHeaderBar">
-                          <child type="start"></child>
+                          <child type="start">
+                            <object class="GtkButton" id="model_detail_create_button">
+                              <signal name="clicked" handler="model_detail_create_button_clicked"/>
+                              <property name="icon-name">edit-copy-symbolic</property>
+                            </object>
+                          </child>
                         </object>
                       </child>
                       <property name="content">
@@ -756,6 +762,9 @@
                                         <object class="GtkScrolledWindow">
                                           <property name="margin-start">10</property>
                                           <property name="margin-end">10</property>
+                                          <style>
+                                            <class name="undershoot-bottom"/>
+                                          </style>
                                           <child>
                                             <object class="GtkTextView" id="create_model_modelfile">
                                               <style>

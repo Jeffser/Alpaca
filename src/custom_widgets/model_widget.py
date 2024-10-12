@@ -358,6 +358,8 @@ class local_model(Gtk.ListBoxRow):
 
         window.model_detail_page.set_title(' ('.join(model_name.split(' (')[:-1]))
         window.model_detail_page.set_description(' ('.join(model_name.split(' (')[-1:])[:-1])
+        window.model_detail_create_button.set_name(model_name)
+        window.model_detail_create_button.set_tooltip_text(_("Create Model Based on '{}'").format(model_name))
 
         details_flow_box = Gtk.FlowBox(
             valign=1,
