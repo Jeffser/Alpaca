@@ -384,7 +384,7 @@ class local_model(Gtk.ListBoxRow):
         if 'modified_at' in model.data and model.data['modified_at']:
             details_flow_box.append(information_bow(
                 title=translation_strings['modified_at'],
-                subtitle=datetime.datetime.strptime(':'.join(model.data['modified_at'].split(':')[:-1]), '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
+                subtitle=datetime.datetime.strptime(':'.join(model.data['modified_at'].split(':')[:2]), '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
             ))
 
         for name, value in model.data['details'].items():
