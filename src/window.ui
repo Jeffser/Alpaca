@@ -97,6 +97,18 @@
                         </property>
                       </object>
                     </child>
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">no_models</property>
+                        <property name="child">
+                          <object class="GtkButton">
+                            <property name="label" translatable="yes">Manage Models</property>
+                            <property name="tooltip-text" translatable="yes">Manage Models</property>
+                            <property name="action-name">app.manage_models</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
                   </object>
                 </child>
                 <child type="end">

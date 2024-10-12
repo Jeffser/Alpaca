@@ -831,7 +831,7 @@ Generate a title following these rules:
 
             [element.set_sensitive(True) for element in sensitive_elements]
             self.get_application().lookup_action('manage_models').set_enabled(True)
-            self.title_stack.set_visible_child_name('model_selector')
+            self.title_stack.set_visible_child_name('model_selector' if len(self.model_manager.get_model_list()) > 0 else 'no_models')
 
         if state:
             options = {

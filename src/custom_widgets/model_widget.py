@@ -82,11 +82,10 @@ class model_selector_button(Gtk.MenuButton):
             orientation=0,
             spacing=5
         )
-        self.label = Gtk.Label(label=_('Select a Model'))
+        self.label = Gtk.Label()
         container.append(self.label)
         container.append(Gtk.Image.new_from_icon_name("down-symbolic"))
         super().__init__(
-            tooltip_text=_('Select a Model'),
             child=container,
             popover=self.popover,
             halign=3
@@ -105,8 +104,7 @@ class model_selector_button(Gtk.MenuButton):
             self.label.set_label(window.convert_model_name(model_name, 0))
             self.set_tooltip_text(window.convert_model_name(model_name, 0))
         elif len(list(listbox)) == 0:
-            self.label.set_label(_("Select a Model"))
-            self.set_tooltip_text(_("Select a Model"))
+            window.title_stack.set_visible_child_name('no_models')
         window.model_manager.verify_if_image_can_be_used()
 
     def add_model(self, model_name:str):
@@ -122,10 +120,12 @@ class model_selector_button(Gtk.MenuButton):
         model_row = model_selector_row(model_name, data)
         GLib.idle_add(self.get_popover().model_list_box.append, model_row)
         GLib.idle_add(self.change_model, model_name)
+        GLib.idle_add(window.title_stack.set_visible_child_name, 'model_selector')
 
     def remove_model(self, model_name:str):
         self.get_popover().model_list_box.remove(next((model for model in list(self.get_popover().model_list_box) if model.get_name() == model_name), None))
         self.model_changed(self.get_popover().model_list_box)
+        window.title_stack.set_visible_child_name('model_selector' if len(window.model_manager.get_model_list()) > 0 else 'no_models')
 
     def clear_list(self):
         self.get_popover().model_list_box.remove_all()
@@ -611,7 +611,8 @@ class model_manager_container(Gtk.Box):
         except Exception as e:
             logger.error(e)
             window.connection_error()
-        window.title_stack.set_visible_child_name('model_selector')
+        window.title_stack.set_visible_child_name('model_selector' if len(window.model_manager.get_model_list()) > 0 else 'no_models')
+        #window.title_stack.set_visible_child_name('model_selector')
         window.chat_list_box.update_welcome_screens(len(self.get_model_list()) > 0)
 
     #Should only be called when the app starts
