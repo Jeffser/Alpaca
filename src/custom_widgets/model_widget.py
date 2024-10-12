@@ -56,7 +56,7 @@ class model_selector_popup(Gtk.Popover):
 class model_selector_row(Gtk.ListBoxRow):
     __gtype_name__ = 'AlpacaModelSelectorRow'
 
-    def __init__(self, model_name:str, image_recognition:bool):
+    def __init__(self, model_name:str, data:dict):
         super().__init__(
             child = Gtk.Label(
                 label=window.convert_model_name(model_name, 0),
@@ -68,7 +68,8 @@ class model_selector_row(Gtk.ListBoxRow):
             name=model_name,
             tooltip_text=window.convert_model_name(model_name, 0)
         )
-        self.image_recognition = image_recognition
+        self.data = data
+        self.image_recognition = 'projector_info' in self.data
 
 class model_selector_button(Gtk.MenuButton):
     __gtype_name__ = 'AlpacaModelSelectorButton'
@@ -109,16 +110,16 @@ class model_selector_button(Gtk.MenuButton):
         window.model_manager.verify_if_image_can_be_used()
 
     def add_model(self, model_name:str):
-        vision = False
+        data = None
         response = window.ollama_instance.request("POST", "api/show", json.dumps({"name": model_name}))
         if response.status_code != 200:
             logger.error(f"Status code was {response.status_code}")
             return
         try:
-            vision = 'projector_info' in json.loads(response.text)
+            data = json.loads(response.text)
         except Exception as e:
-            logger.error(f"Error fetching vision info: {str(e)}")
-        model_row = model_selector_row(model_name, vision)
+            logger.error(f"Error fetching 'api - show' info: {str(e)}")
+        model_row = model_selector_row(model_name, data)
         GLib.idle_add(self.get_popover().model_list_box.append, model_row)
         GLib.idle_add(self.change_model, model_name)
 
@@ -248,6 +249,37 @@ class pulling_model_list(Gtk.ListBox):
             visible=False
         )
 
+class information_bow(Gtk.Box):
+    __gtype_name__ = 'AlpacaModelInformationBow'
+
+    def __init__(self, title:str, subtitle:str):
+        self.title = title
+        self.subtitle = subtitle
+        title_label = Gtk.Label(
+            label=self.title,
+            css_classes=['subtitle', 'caption'],
+            hexpand=True,
+            margin_top=10,
+            margin_start=0,
+            margin_end=0
+        )
+        subtitle_label = Gtk.Label(
+            label=self.subtitle if self.subtitle else '(none)',
+            css_classes=['heading'],
+            hexpand=True,
+            margin_bottom=10,
+            margin_start=0,
+            margin_end=0
+        )
+        super().__init__(
+            spacing=5,
+            orientation=1,
+            css_classes=['card']
+        )
+        self.append(title_label)
+        self.append(subtitle_label)
+
+
 class local_model(Gtk.ListBoxRow):
     __gtype_name__ = 'AlpacaLocalModel'
 
@@ -274,6 +306,16 @@ class local_model(Gtk.ListBoxRow):
         )
         description_box.append(model_label)
         description_box.append(tag_label)
+
+        info_button = Gtk.Button(
+            icon_name = "info-outline-symbolic",
+            vexpand = False,
+            valign = 3,
+            css_classes = ["circular"],
+            tooltip_text = _("Details")
+        )
+
+        info_button.connect('clicked', self.show_information)
 
         delete_button = Gtk.Button(
             icon_name = "user-trash-symbolic",
@@ -302,12 +344,58 @@ class local_model(Gtk.ListBoxRow):
             margin_end=10
         )
         container_box.append(description_box)
+        container_box.append(info_button)
         container_box.append(delete_button)
 
         super().__init__(
             child=container_box,
             name=model_name
         )
+
+    def show_information(self, button):
+        model = next((element for element in list(window.model_manager.model_selector.get_popover().model_list_box) if element.get_name() == self.get_name()), None)
+        model_name = model.get_child().get_label()
+
+        window.model_detail_page.set_title(' ('.join(model_name.split(' (')[:-1]))
+        window.model_detail_page.set_description(' ('.join(model_name.split(' (')[-1:])[:-1])
+
+        details_flow_box = Gtk.FlowBox(
+            valign=1,
+            hexpand=True,
+            vexpand=False,
+            selection_mode=0,
+            max_children_per_line=2,
+            min_children_per_line=1,
+            margin_top=12,
+            margin_bottom=12,
+            margin_start=12,
+            margin_end=12
+        )
+
+        translation_strings={
+            'modified_at': _('Modified At'),
+            'parent_model': _('Parent Model'),
+            'format': _('Format'),
+            'family': _('Family'),
+            'parameter_size': _('Parameter Size'),
+            'quantization_level': _('Quantization Level')
+        }
+
+        if 'modified_at' in model.data and model.data['modified_at']:
+            details_flow_box.append(information_bow(
+                title=translation_strings['modified_at'],
+                subtitle=datetime.datetime.strptime(':'.join(model.data['modified_at'].split(':')[:-1]), '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
+            ))
+
+        for name, value in model.data['details'].items():
+            if isinstance(value, str):
+                details_flow_box.append(information_bow(
+                    title=translation_strings[name] if name in translation_strings else name.replace('_', ' ').title(),
+                    subtitle=value
+                ))
+
+        window.model_detail_page.set_child(details_flow_box)
+        window.navigation_view_manage_models.push_by_tag('model_information')
 
 class local_model_list(Gtk.ListBox):
     __gtype_name__ = 'AlpacaLocalModelList'

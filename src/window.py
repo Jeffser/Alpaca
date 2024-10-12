@@ -102,6 +102,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     title_stack = Gtk.Template.Child()
     manage_models_dialog = Gtk.Template.Child()
     model_scroller = Gtk.Template.Child()
+    model_detail_page = Gtk.Template.Child()
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = None
@@ -605,6 +606,7 @@ Generate a title following these rules:
                 self.chat_list_box.prepend_chat(_("New Chat"))
         else:
             self.chat_list_box.prepend_chat(_("New Chat"))
+
 
 
     def generate_numbered_name(self, chat_name:str, compare_list:list) -> str:

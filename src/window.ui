@@ -6,7 +6,7 @@
     <signal name="close-request" handler="closing_app"/>
     <property name="resizable">True</property>
     <property name="width-request">400</property>
-    <property name="height-request">400</property>
+    <property name="height-request">600</property>
     <property name="default-width">1300</property>
     <property name="default-height">800</property>
     <property name="title">Alpaca</property>
@@ -629,6 +629,36 @@
                                   </style>
                                 </object>
                               </child>
+                            </object>
+                          </child>
+                        </object>
+                      </property>
+                    </object>
+                  </property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwNavigationPage">
+                  <property name="title">Model Details</property>
+                  <property name="tag">model_information</property>
+                  <property name="child">
+                    <object class="AdwToolbarView">
+                      <child type="top">
+                        <object class="AdwHeaderBar">
+                          <child type="start"></child>
+                        </object>
+                      </child>
+                      <property name="content">
+                        <object class="GtkScrolledWindow">
+                          <property name="vexpand">true</property>
+                          <property name="hexpand">true</property>
+                          <child>
+                            <object class="AdwStatusPage" id="model_detail_page">
+                              <property name="icon-name">brain-augemnted-symbolic</property>
+                              <property name="description">text</property>
+                              <style>
+                                <class name="compact"/>
+                              </style>
                             </object>
                           </child>
                         </object>
