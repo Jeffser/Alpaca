@@ -16,7 +16,7 @@ def log_output(pipe):
         with pipe:
             try:
                 for line in iter(pipe.readline, ''):
-                    #print(line, end='')
+                    print(line, end='')
                     f.write(line)
                     f.flush()
             except:
