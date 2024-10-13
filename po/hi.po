@@ -141,21 +141,21 @@ msgstr "नया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Details page for models"
-msgstr ""
+msgstr "मॉडल्स के लिए विवरण पृष्ठ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid ""
 "Model selector gets replaced with 'manage models' button when there are no "
 "models downloaded"
-msgstr ""
+msgstr "जब कोई मॉडल डाउनलोड नहीं किया गया हो, तो मॉडल चयनकर्ता 'मॉडल प्रबंधित करें' बटन से बदल जाता है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added warning when model is too big for the device"
-msgstr ""
+msgstr "जब मॉडल डिवाइस के लिए बहुत बड़ा हो तो चेतावनी जोड़ी गई"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Added AMD GPU indicator in preferences"
-msgstr ""
+msgstr "प्राथमिकताओं में AMD GPU सूचक जोड़ा गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Better system for handling dialogs"
@@ -2485,15 +2485,15 @@ msgstr ""
 
 #: src/connection_handler.py:23
 msgid "Model request too large for system"
-msgstr ""
+msgstr "सिस्टम के लिए मॉडल अनुरोध बहुत बड़ा है"
 
 #: src/connection_handler.py:25
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU"
-msgstr ""
+msgstr "AMD GPU का पता चला है, लेकिन एक्सटेंशन गायब है, ओल्लामा CPU का उपयोग करेगा"
 
 #: src/connection_handler.py:28
 msgid "Using AMD GPU type '{}'"
-msgstr ""
+msgstr "AMD GPU प्रकार '{}' का उपयोग किया जा रहा है"
 
 #: src/connection_handler.py:89
 msgid "Ollama instance was shut down due to inactivity"
@@ -2501,11 +2501,11 @@ msgstr "निष्क्रियता के कारण ओल्लाम
 
 #: src/connection_handler.py:127
 msgid "Integrated Ollama instance is running"
-msgstr ""
+msgstr "समन्वित ओल्लामा उदाहरण चल रहा है"
 
 #: src/connection_handler.py:143 src/window.ui:478
 msgid "Integrated Ollama instance is not running"
-msgstr ""
+msgstr "समन्वित ओल्लामा उदाहरण चल नहीं रहा है"
 
 #: src/window.ui:42
 msgid "Menu"
@@ -2684,8 +2684,7 @@ msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
 msgstr ""
-"इस मॉडल को डाउनलोड करके आप मॉडल की वेबसाइट पर उपलब्ध लाइसेंस समझौते को स्वीकार करते "
-"हैं।"
+"इस मॉडल को डाउनलोड करके आप मॉडल की वेबसाइट पर उपलब्ध लाइसेंस समझौते को स्वीकार करते हैं।"
 
 #: src/window.ui:668
 msgid "Model Details"
@@ -3001,7 +3000,7 @@ msgstr "मॉडल हटाएं?"
 
 #: src/custom_widgets/model_widget.py:362
 msgid "Create Model Based on '{}'"
-msgstr ""
+msgstr "'{}' के आधार पर मॉडल बनाएं"
 
 #: src/custom_widgets/model_widget.py:378
 msgid "Modified At"
