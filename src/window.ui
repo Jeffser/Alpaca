@@ -692,14 +692,7 @@
                   <property name="child">
                     <object class="AdwToolbarView">
                       <child type="top">
-                        <object class="AdwHeaderBar">
-                          <child type="start">
-                            <object class="GtkButton">
-                              <signal name="clicked" handler="link_button_handler"/>
-                              <property name="icon-name">globe-symbolic</property>
-                            </object>
-                          </child>
-                        </object>
+                        <object class="AdwHeaderBar"/>
                       </child>
                       <property name="content">
                         <object class="GtkScrolledWindow">
