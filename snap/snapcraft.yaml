@@ -1,4 +1,4 @@
-name: alpaca
+name: jeffser-alpaca
 base: core24
 adopt-info: alpaca
 
@@ -63,14 +63,15 @@ parts:
   ollama:
     plugin: dump
     source: 
-      - on amd64: https://github.com/ollama/ollama/releases/download/v0.3.10/ollama-linux-amd64.tgz
-      - on arm64: https://github.com/ollama/ollama/releases/download/v0.3.10/ollama-linux-arm64.tgz
+      - on amd64: https://github.com/ollama/ollama/releases/download/v0.3.12/ollama-linux-amd64.tgz
+      - on arm64: https://github.com/ollama/ollama/releases/download/v0.3.12/ollama-linux-arm64.tgz
 
   # Alpaca app
   alpaca:
     plugin: meson
     source-type: git
     source: https://github.com/Jeffser/Alpaca.git
+    source-tag: 2.6.5
     source-depth: 1
     meson-parameters:
       - --prefix=/snap/alpaca/current/usr
