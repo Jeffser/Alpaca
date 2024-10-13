@@ -27,7 +27,7 @@ def log_output(pipe):
                     elif 'msg="amdgpu is supported"' in line:
                         window.ollama_information_label.set_label(_("Using AMD GPU type '{}'").format(line.split('=')[-1]))
                         window.ollama_information_label.set_css_classes(['dim-label', 'success'])
-            except:
+            except Exception as e:
                 pass
 
 class instance():
