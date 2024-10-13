@@ -142,21 +142,23 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Details page for models"
-msgstr ""
+msgstr "Pagina de detalles para modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid ""
 "Model selector gets replaced with 'manage models' button when there are no "
 "models downloaded"
 msgstr ""
+"El selector de modelos se remplaza con un boton para el gestor de modelos "
+"cuando no hay modelos descargados"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added warning when model is too big for the device"
-msgstr ""
+msgstr "Añadida advertencia cuando el modelo es muy grande para el dispositivo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Added AMD GPU indicator in preferences"
-msgstr ""
+msgstr "Añadido indicador para GPU de AMD en preferencias"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Better system for handling dialogs"
@@ -2582,15 +2584,16 @@ msgstr ""
 
 #: src/connection_handler.py:23
 msgid "Model request too large for system"
-msgstr ""
+msgstr "Solicitud de modelo muy grande para el sistema"
 
 #: src/connection_handler.py:25
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU"
-msgstr ""
+msgstr "GPU AMD detectada pero la extensión no está instalada, Ollama usará "
+"el CPU"
 
 #: src/connection_handler.py:28
 msgid "Using AMD GPU type '{}'"
-msgstr ""
+msgstr "Usando GPU AMD tipo '{}'"
 
 #: src/connection_handler.py:89
 msgid "Ollama instance was shut down due to inactivity"
@@ -2598,11 +2601,11 @@ msgstr "La instancia de Ollama se apagó debido a inactividad"
 
 #: src/connection_handler.py:127
 msgid "Integrated Ollama instance is running"
-msgstr ""
+msgstr "Instancia integrada de Ollama está corriendo"
 
 #: src/connection_handler.py:143 src/window.ui:478
 msgid "Integrated Ollama instance is not running"
-msgstr ""
+msgstr "Instancia integrada de Ollama no está corriendo"
 
 #: src/window.ui:42
 msgid "Menu"
@@ -3105,7 +3108,7 @@ msgstr "¿Eliminar Modelo?"
 
 #: src/custom_widgets/model_widget.py:362
 msgid "Create Model Based on '{}'"
-msgstr ""
+msgstr "Crear Modelo Basado en '{}'"
 
 #: src/custom_widgets/model_widget.py:378
 msgid "Modified At"
