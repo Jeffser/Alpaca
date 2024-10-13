@@ -104,6 +104,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_scroller = Gtk.Template.Child()
     model_detail_page = Gtk.Template.Child()
     model_detail_create_button = Gtk.Template.Child()
+    ollama_information_label = Gtk.Template.Child()
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = None

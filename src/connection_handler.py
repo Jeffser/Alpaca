@@ -21,6 +21,12 @@ def log_output(pipe):
                     f.flush()
                     if 'msg="model request too large for system"' in line:
                         window.show_toast(_("Model request too large for system"), window.main_overlay)
+                    elif 'msg="amdgpu detected, but no compatible rocm library found.' in line:
+                        window.ollama_information_label.set_label(_("AMD GPU detected but extension is missing, Ollama will use CPU"))
+                        window.ollama_information_label.set_css_classes(['dim-label', 'error'])
+                    elif 'msg="amdgpu is supported"' in line:
+                        window.ollama_information_label.set_label(_("Using AMD GPU type '{}'").format(line.split('=')[-1]))
+                        window.ollama_information_label.set_css_classes(['dim-label', 'success'])
             except:
                 pass
 
@@ -118,6 +124,8 @@ class instance():
             self.instance = instance
             if not self.idle_timer:
                 self.start_timer()
+            window.ollama_information_label.set_label(_("Integrated Ollama instance is running"))
+            window.ollama_information_label.set_css_classes(['dim-label', 'success'])
         else:
             self.remote = True
             window.remote_connection_switch.set_sensitive(True)
@@ -132,6 +140,8 @@ class instance():
             self.instance.terminate()
             self.instance.wait()
             self.instance = None
+            window.ollama_information_label.set_label(_("Integrated Ollama instance is not running"))
+            window.ollama_information_label.set_css_classes(['dim-label'])
             logger.info("Stopped Alpaca's Ollama instance")
 
     def reset(self):
