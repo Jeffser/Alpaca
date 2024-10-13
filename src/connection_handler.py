@@ -22,7 +22,7 @@ def log_output(pipe):
                     if 'msg="model request too large for system"' in line:
                         window.show_toast(_("Model request too large for system"), window.main_overlay)
                     elif 'msg="amdgpu detected, but no compatible rocm library found.' in line:
-                        window.ollama_information_label.set_label(_("AMD GPU detected but extension is missing, Ollama will use CPU"))
+                        window.ollama_information_label.set_label(_("AMD GPU detected but the extension is missing, Ollama will use CPU"))
                         window.ollama_information_label.set_css_classes(['dim-label', 'error'])
                     elif 'msg="amdgpu is supported"' in line:
                         window.ollama_information_label.set_label(_("Using AMD GPU type '{}'").format(line.split('=')[-1]))
