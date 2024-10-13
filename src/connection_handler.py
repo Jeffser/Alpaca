@@ -19,6 +19,8 @@ def log_output(pipe):
                     print(line, end='')
                     f.write(line)
                     f.flush()
+                    if 'msg="model request too large for system"' in line:
+                        window.show_toast(_("Model request too large for system"), window.main_overlay)
             except:
                 pass
 
