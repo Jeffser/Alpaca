@@ -23,7 +23,7 @@ def log_output(pipe):
                         window.show_toast(_("Model request too large for system"), window.main_overlay)
                     elif 'msg="amdgpu detected, but no compatible rocm library found.' in line:
                         if bool(os.getenv("FLATPAK_ID")):
-                            window.ollama_information_label.set_label(_("AMD GPU detected but <a href='appstream://com.jeffser.Alpaca.Plugins.AMD'>the extension</a> is missing, Ollama will use CPU"))
+                            window.ollama_information_label.set_label(_("AMD GPU detected but <a href='https://github.com/Jeffser/Alpaca/wiki/AMD-Support'>the extension</a> is missing, Ollama will use CPU"))
                         else:
                             window.ollama_information_label.set_label(_("AMD GPU detected but ROCm is missing, Ollama will use CPU"))
                         window.ollama_information_label.set_css_classes(['dim-label', 'error'])

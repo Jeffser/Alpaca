@@ -475,6 +475,7 @@
               <child>
                 <object class="GtkLabel" id="ollama_information_label">
                   <property name="wrap">true</property>
+                  <property name="use-markup">true</property>
                   <property name="label" translatable="yes">Integrated Ollama instance is not running</property>
                   <style>
                     <class name="dim-label"/>
