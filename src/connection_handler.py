@@ -11,6 +11,8 @@ logger = getLogger(__name__)
 
 window = None
 
+AMD_support_label = "\n<a href='https://github.com/Jeffser/Alpaca/wiki/AMD-Support'>{}</a>".format(_('Alpaca Support'))
+
 def log_output(pipe):
     with open(os.path.join(data_dir, 'tmp.log'), 'a') as f:
         with pipe:
@@ -23,9 +25,9 @@ def log_output(pipe):
                         window.show_toast(_("Model request too large for system"), window.main_overlay)
                     elif 'msg="amdgpu detected, but no compatible rocm library found.' in line:
                         if bool(os.getenv("FLATPAK_ID")):
-                            window.ollama_information_label.set_label(_("AMD GPU detected but the extension is missing, Ollama will use CPU.\n{}").format("<a href='https://github.com/Jeffser/Alpaca/wiki/AMD-Support'>{}</a>".format(_('Alpaca Support'))))
+                            window.ollama_information_label.set_label(_("AMD GPU detected but the extension is missing, Ollama will use CPU.") + AMD_support_label)
                         else:
-                            window.ollama_information_label.set_label(_("AMD GPU detected but ROCm is missing, Ollama will use CPU.\n{}").format("<a href='https://github.com/Jeffser/Alpaca/wiki/AMD-Support'>{}</a>".format(_('Alpaca Support'))))
+                            window.ollama_information_label.set_label(_("AMD GPU detected but ROCm is missing, Ollama will use CPU.") + AMD_support_label)
                         window.ollama_information_label.set_css_classes(['dim-label', 'error'])
                     elif 'msg="amdgpu is supported"' in line:
                         window.ollama_information_label.set_label(_("Using AMD GPU type '{}'").format(line.split('=')[-1]))
