@@ -631,7 +631,7 @@ Generate a title following these rules:
         if self.ollama_instance.remote:
             options = {
                 _("Close Alpaca"): {"callback": lambda *_: self.get_application().quit(), "appearance": "destructive"},
-                _("Use Local Instance"): {"callback": lambda *_: window.remote_connection_switch.set_active(False)},
+                _("Use Local Instance"): {"callback": lambda *_: self.remote_connection_switch.set_active(False)},
                 _("Connect"): {"callback": lambda url, bearer: generic_actions.connect_remote(url,bearer), "appearance": "suggested"}
             }
             entries = [
