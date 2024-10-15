@@ -469,10 +469,15 @@ class message(Gtk.Overlay):
             orientation=1,
             halign='fill',
             css_classes=["response_message"] if self.bot else ["card", "user_message"],
-            spacing=10
+            spacing=10,
+            width_request=-1 if self.bot else 375
         )
 
-        super().__init__(css_classes=["message"], name=message_id)
+        super().__init__(
+            css_classes=["message"],
+            name=message_id,
+            halign=0 if self.bot else 2
+        )
         self.set_child(self.container)
 
     def add_attachments(self, attachments:dict):

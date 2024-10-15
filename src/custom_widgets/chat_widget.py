@@ -66,7 +66,8 @@ class chat(Gtk.ScrolledWindow):
             vexpand=True,
             hexpand=True,
             css_classes=["undershoot-bottom"],
-            name=name
+            name=name,
+            hscrollbar_policy=2
         )
         self.messages = {}
         self.welcome_screen = None
