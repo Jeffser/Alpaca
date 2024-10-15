@@ -431,7 +431,9 @@ class available_model(Gtk.ListBoxRow):
             label="<b>{}</b> <small>by {}</small>".format(self.model_title, self.model_author),
             hexpand=True,
             halign=1,
-            use_markup=True
+            use_markup=True,
+            wrap=True,
+            wrap_mode=0
         )
         description_label = Gtk.Label(
             css_classes=["subtitle"],
