@@ -230,7 +230,8 @@ class attachment_container(Gtk.ScrolledWindow):
 
         self.container = Gtk.Box(
             orientation=0,
-            spacing=12
+            spacing=10,
+            valign=1
         )
 
         super().__init__(
@@ -238,7 +239,8 @@ class attachment_container(Gtk.ScrolledWindow):
             margin_start=10,
             margin_end=10,
             hexpand=True,
-            child=self.container
+            child=self.container,
+            vscrollbar_policy=2
         )
 
     def add_file(self, file:attachment):
@@ -467,7 +469,7 @@ class message(Gtk.Overlay):
             orientation=1,
             halign='fill',
             css_classes=["response_message"] if self.bot else ["card", "user_message"],
-            spacing=12
+            spacing=10
         )
 
         super().__init__(css_classes=["message"], name=message_id)
@@ -619,7 +621,7 @@ class message(Gtk.Overlay):
             if self.spinner:
                 self.container.remove(self.spinner)
                 self.spinner = None
-            self.spinner = Gtk.Spinner(spinning=True, margin_top=12, margin_bottom=12, hexpand=True)
+            self.spinner = Gtk.Spinner(spinning=True, margin_top=10, margin_bottom=10, hexpand=True)
             self.container.append(self.spinner)
             self.container.append(text_b)
         self.container.queue_draw()
