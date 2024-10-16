@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alpaca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 17:02-0600\n"
+"POT-Creation-Date: 2024-10-15 21:46-0600\n"
 "PO-Revision-Date: 2024-09-16 14:07+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
@@ -85,7 +85,7 @@ msgstr "הוספת טקסט מאתר אינטרנט לפקודה"
 msgid "PDF recognition"
 msgstr "זיהוי PDF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:987
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:989
 msgid "Disclaimer"
 msgstr "כתב ויתור"
 
@@ -1440,7 +1440,7 @@ msgstr "יש לבחור מודל לפני תחילת השיחה"
 msgid "Close"
 msgstr "סגירה"
 
-#: src/window.py:202 src/window.py:203 src/window.ui:940
+#: src/window.py:202 src/window.py:203 src/window.ui:942
 msgid "Next"
 msgstr "הבא"
 
@@ -1453,7 +1453,7 @@ msgid "Missing file"
 msgstr "קובץ חסר"
 
 #: src/window.py:530 src/window.py:587 src/window.py:607 src/window.py:609
-#: src/window.ui:31 src/custom_widgets/chat_widget.py:319
+#: src/window.ui:31 src/custom_widgets/chat_widget.py:320
 msgid "New Chat"
 msgstr "שיחה חדשה"
 
@@ -2415,27 +2415,35 @@ msgid ""
 msgstr ""
 "מודל sentence-transformers שניתן להשתמש בו למשימות כמו אשכול או חיפוש סמנטי."
 
-#: src/connection_handler.py:23
-msgid "Model request too large for system"
+#: src/connection_handler.py:14
+msgid "Alpaca Support"
 msgstr ""
 
 #: src/connection_handler.py:25
-msgid "AMD GPU detected but the extension is missing, Ollama will use CPU"
+msgid "Model request too large for system"
 msgstr ""
 
 #: src/connection_handler.py:28
+msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
+msgstr ""
+
+#: src/connection_handler.py:30
+msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
+msgstr ""
+
+#: src/connection_handler.py:33
 msgid "Using AMD GPU type '{}'"
 msgstr ""
 
-#: src/connection_handler.py:89
+#: src/connection_handler.py:94
 msgid "Ollama instance was shut down due to inactivity"
 msgstr "מופע Ollama נסגר עקב חוסר פעילות"
 
-#: src/connection_handler.py:127
+#: src/connection_handler.py:132
 msgid "Integrated Ollama instance is running"
 msgstr ""
 
-#: src/connection_handler.py:143 src/window.ui:478
+#: src/connection_handler.py:148 src/window.ui:479
 msgid "Integrated Ollama instance is not running"
 msgstr ""
 
@@ -2455,7 +2463,7 @@ msgstr ""
 msgid "Loading Instance"
 msgstr ""
 
-#: src/window.ui:105 src/window.ui:106 src/window.ui:526 src/window.ui:1005
+#: src/window.ui:105 src/window.ui:106 src/window.ui:528 src/window.ui:1007
 #: src/custom_widgets/model_widget.py:24 src/custom_widgets/model_widget.py:25
 msgid "Manage Models"
 msgstr "ניהול מודלים"
@@ -2485,15 +2493,15 @@ msgstr "צירוף קובץ"
 msgid "Message text box"
 msgstr "תיבת טקסט להודעה"
 
-#: src/window.ui:248 src/window.ui:1206
+#: src/window.ui:248 src/window.ui:1208
 msgid "Send Message"
 msgstr "שליחת הודעה"
 
-#: src/window.ui:298 src/window.ui:1011 src/window.ui:1147
+#: src/window.ui:298 src/window.ui:1013 src/window.ui:1149
 msgid "Preferences"
 msgstr "העדפות"
 
-#: src/window.ui:301 src/window.ui:1125
+#: src/window.ui:301 src/window.ui:1127
 msgid "General"
 msgstr "כללי"
 
@@ -2572,65 +2580,65 @@ msgid ""
 msgstr ""
 "מספר הדקות שהמופע צריך להישאר לא פעיל לפני שהוא נכבה (0 פירושו שהוא לא ייכבה)"
 
-#: src/window.ui:492 src/window.ui:515
+#: src/window.ui:494 src/window.ui:517
 msgid "Manage models dialog"
 msgstr "דו שיח ניהול מודלים"
 
-#: src/window.ui:494
+#: src/window.ui:496
 msgid "Terminal"
 msgstr ""
 
-#: src/window.ui:536 src/window.ui:703
+#: src/window.ui:538 src/window.ui:705
 msgid "Create Model"
 msgstr "יצירת מודל"
 
-#: src/window.ui:543
+#: src/window.ui:545
 msgid "Search Model"
 msgstr "חיפוש מודל"
 
-#: src/window.ui:552
+#: src/window.ui:554
 msgid "Model search bar"
 msgstr "סרגל חיפוש מודל"
 
-#: src/window.ui:559 src/window.ui:561
+#: src/window.ui:561 src/window.ui:563
 msgid "Search models"
 msgstr "חיפוש מודלים"
 
-#: src/window.ui:584
+#: src/window.ui:586
 msgid "No Models Found"
 msgstr "לא נמצאו מודלים"
 
-#: src/window.ui:585
+#: src/window.ui:587
 msgid "Try a different search or pull an unlisted model from it's name"
 msgstr "יש לנסות חיפוש אחר או למשוך מודל שאינו ברשימה לפי שמו"
 
-#: src/window.ui:593
+#: src/window.ui:595
 msgid "Pull Model From Name"
 msgstr "משיכת מודל לפי שם"
 
-#: src/window.ui:643
+#: src/window.ui:645
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
 msgstr "הורדת מודל זה מהווה הסכמה לתנאי הרישיון הזמינים באתר המודל."
 
-#: src/window.ui:668
+#: src/window.ui:670
 msgid "Model Details"
 msgstr ""
 
-#: src/window.ui:731
+#: src/window.ui:733
 msgid "Base"
 msgstr "בסיס"
 
-#: src/window.ui:750
+#: src/window.ui:752
 msgid "Name"
 msgstr "שם"
 
-#: src/window.ui:756
+#: src/window.ui:758
 msgid "Context"
 msgstr "הקשר"
 
-#: src/window.ui:803
+#: src/window.ui:805
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -2639,39 +2647,39 @@ msgstr ""
 "חלק מהמודלים דורשים קובץ מודל, Alpaca ממלא הוראות FROM ו־SYSTEM (הקשר) באופן "
 "אוטומטי. במקרה של ספק יש לבקר באתר המודל או בתיעוד של Ollama למידע נוסף."
 
-#: src/window.ui:819
+#: src/window.ui:821
 msgid "Create"
 msgstr "יצירה"
 
-#: src/window.ui:842
+#: src/window.ui:844
 msgid "File preview dialog"
 msgstr "דו שיח תצוגה מקדימה של קובץ"
 
-#: src/window.ui:854
+#: src/window.ui:856
 msgid "Open With Default App"
 msgstr "פתיחה עם יישום ברירת המחדל"
 
-#: src/window.ui:862
+#: src/window.ui:864
 msgid "Remove Attachment"
 msgstr "הסרת קובץ מצורף"
 
-#: src/window.ui:924
+#: src/window.ui:926
 msgid "Previous"
 msgstr "הקודם"
 
-#: src/window.ui:967
+#: src/window.ui:969
 msgid "Welcome to Alpaca"
 msgstr "ברוך בואך ל־Alpaca"
 
-#: src/window.ui:968
+#: src/window.ui:970
 msgid "Powered by Ollama"
 msgstr "מופעל על ידי Ollama"
 
-#: src/window.ui:971
+#: src/window.ui:973
 msgid "Ollama Website"
 msgstr "אתר Ollama"
 
-#: src/window.ui:988
+#: src/window.ui:990
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2680,95 +2688,95 @@ msgstr ""
 "‏Alpaca ומפתחיה אינם אחראים לכל נזק למכשירים או לתוכנה הנובע מהרצת קוד שנוצר "
 "על ידי מודל AI. יש לנהוג בזהירות ולבדוק את הקוד בקפידה לפני הרצתו."
 
-#: src/window.ui:1001
+#: src/window.ui:1003
 msgid "Import Chat"
 msgstr "ייבוא שיחה"
 
-#: src/window.ui:1015
+#: src/window.ui:1017
 msgid "Keyboard Shortcuts"
 msgstr "צירופי מקשים"
 
-#: src/window.ui:1019
+#: src/window.ui:1021
 msgid "About Alpaca"
 msgstr "על Alpaca"
 
-#: src/window.ui:1027 src/window.ui:1053
+#: src/window.ui:1029 src/window.ui:1055
 msgid "Rename Chat"
 msgstr "שינוי שם שיחה"
 
-#: src/window.ui:1031 src/window.ui:1057
+#: src/window.ui:1033 src/window.ui:1059
 msgid "Duplicate Chat"
 msgstr "שכפול שיחה"
 
-#: src/window.ui:1035 src/window.ui:1061
+#: src/window.ui:1037 src/window.ui:1063
 msgid "Export Chat"
 msgstr "ייצוא שיחה"
 
-#: src/window.ui:1039
+#: src/window.ui:1041
 msgid "Clear Chat"
 msgstr "ניקוי שיחה"
 
-#: src/window.ui:1045 src/window.ui:1067
+#: src/window.ui:1047 src/window.ui:1069
 msgid "Delete Chat"
 msgstr "מחיקת שיחה"
 
-#: src/window.ui:1075
+#: src/window.ui:1077
 msgid "From Existing Model"
 msgstr "ממודל קיים"
 
-#: src/window.ui:1079
+#: src/window.ui:1081
 msgid "From GGUF File"
 msgstr "מקובץ GGUF"
 
-#: src/window.ui:1083
+#: src/window.ui:1085
 msgid "From Name"
 msgstr "משם"
 
-#: src/window.ui:1129
+#: src/window.ui:1131
 msgid "Close application"
 msgstr "סגירת יישום"
 
-#: src/window.ui:1135
+#: src/window.ui:1137
 msgid "Import chat"
 msgstr "ייבוא שיחה"
 
-#: src/window.ui:1141
+#: src/window.ui:1143
 msgid "Clear chat"
 msgstr "ניקוי שיחה"
 
-#: src/window.ui:1153
+#: src/window.ui:1155
 msgid "New chat"
 msgstr "שיחה חדשה"
 
-#: src/window.ui:1159
+#: src/window.ui:1161
 msgid "Show shortcuts window"
 msgstr "הצגת חלון קיצורים"
 
-#: src/window.ui:1165
+#: src/window.ui:1167
 msgid "Manage models"
 msgstr "ניהול מודלים"
 
-#: src/window.ui:1171
+#: src/window.ui:1173
 msgid "Toggle sidebar"
 msgstr "הצגת/הסתרת סרגל צד"
 
-#: src/window.ui:1177
+#: src/window.ui:1179
 msgid "Rename chat"
 msgstr "שינוי שם שיחה"
 
-#: src/window.ui:1184
+#: src/window.ui:1186
 msgid "Editor"
 msgstr "עורך"
 
-#: src/window.ui:1188
+#: src/window.ui:1190
 msgid "Copy"
 msgstr "העתקה"
 
-#: src/window.ui:1194
+#: src/window.ui:1196
 msgid "Paste"
 msgstr "הדבקה"
 
-#: src/window.ui:1200
+#: src/window.ui:1202
 msgid "Insert new line"
 msgstr "הוספת שורה חדשה"
 
@@ -2776,37 +2784,37 @@ msgstr "הוספת שורה חדשה"
 msgid "An error occurred while extracting text from the website"
 msgstr "אירעה שגיאה בעת חילוץ טקסט מהאתר"
 
-#: src/custom_widgets/chat_widget.py:119
+#: src/custom_widgets/chat_widget.py:120
 msgid "Send prompt: '{}'"
 msgstr "שליחת הנחיה: '{}'"
 
-#: src/custom_widgets/chat_widget.py:125 src/custom_widgets/chat_widget.py:126
+#: src/custom_widgets/chat_widget.py:126 src/custom_widgets/chat_widget.py:127
 msgid "Open Model Manager"
 msgstr "פתיחת מנהל המודלים"
 
-#: src/custom_widgets/chat_widget.py:135
+#: src/custom_widgets/chat_widget.py:136
 msgid "Try one of these prompts"
 msgstr "נסו אחת מההנחיות האלה"
 
-#: src/custom_widgets/chat_widget.py:135
+#: src/custom_widgets/chat_widget.py:136
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
 msgstr "נראה שעדיין לא הורדת מודלים. יש להוריד מודלים כדי להתחיל!"
 
-#: src/custom_widgets/chat_widget.py:196
+#: src/custom_widgets/chat_widget.py:197
 msgid "Regenerate Response"
 msgstr "יצירה מחדש של תגובה"
 
-#: src/custom_widgets/chat_widget.py:353
+#: src/custom_widgets/chat_widget.py:354
 msgid "Copy of {}"
 msgstr "עותק של {}"
 
-#: src/custom_widgets/chat_widget.py:365
+#: src/custom_widgets/chat_widget.py:366
 msgid "Chat exported successfully"
 msgstr "השיחה יוצאה בהצלחה"
 
-#: src/custom_widgets/chat_widget.py:435
+#: src/custom_widgets/chat_widget.py:436
 msgid "Chat imported successfully"
 msgstr "השיחה יובאה בהצלחה"
 
@@ -2835,7 +2843,7 @@ msgid "Code Block"
 msgstr "בלוק קוד"
 
 #: src/custom_widgets/message_widget.py:158
-#: src/custom_widgets/message_widget.py:374
+#: src/custom_widgets/message_widget.py:376
 msgid "Copy Message"
 msgstr "העתקת הודעה"
 
@@ -2858,37 +2866,37 @@ msgstr ""
 msgid "Execute"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:268
 #: src/custom_widgets/message_widget.py:270
+#: src/custom_widgets/message_widget.py:272
 msgid "Image"
 msgstr "תמונה"
 
-#: src/custom_widgets/message_widget.py:278
-#: src/custom_widgets/message_widget.py:294
+#: src/custom_widgets/message_widget.py:280
+#: src/custom_widgets/message_widget.py:296
 msgid "Missing Image"
 msgstr "תמונה חסרה"
 
-#: src/custom_widgets/message_widget.py:296
+#: src/custom_widgets/message_widget.py:298
 msgid "Missing image"
 msgstr "תמונה חסרה"
 
-#: src/custom_widgets/message_widget.py:366
+#: src/custom_widgets/message_widget.py:368
 msgid "Remove Message"
 msgstr "הסרת הודעה"
 
-#: src/custom_widgets/message_widget.py:382
+#: src/custom_widgets/message_widget.py:384
 msgid "Regenerate Message"
 msgstr "יצירה מחדש של הודעה"
 
-#: src/custom_widgets/message_widget.py:389
+#: src/custom_widgets/message_widget.py:391
 msgid "Edit Message"
 msgstr "עריכת הודעה"
 
-#: src/custom_widgets/message_widget.py:411
+#: src/custom_widgets/message_widget.py:413
 msgid "Message copied to the clipboard"
 msgstr "ההודעה הועתקה ללוח הגזירים"
 
-#: src/custom_widgets/message_widget.py:435
+#: src/custom_widgets/message_widget.py:437
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "לא ניתן ליצור מחדש הודעה בזמן קבלת תגובה"
 
@@ -2948,49 +2956,49 @@ msgstr ""
 msgid "Quantization Level"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:447
+#: src/custom_widgets/model_widget.py:449
 msgid "Image Recognition"
 msgstr "זיהוי תמונות"
 
-#: src/custom_widgets/model_widget.py:473
+#: src/custom_widgets/model_widget.py:475
 msgid "Enter download menu for {}"
 msgstr "כניסה לתפריט הורדה עבור {}"
 
-#: src/custom_widgets/model_widget.py:515
+#: src/custom_widgets/model_widget.py:517
 msgid "Download {}:{}"
 msgstr "הורדת {}:{}"
 
-#: src/custom_widgets/model_widget.py:582
+#: src/custom_widgets/model_widget.py:584
 msgid "Model deleted successfully"
 msgstr "המודל נמחק בהצלחה"
 
-#: src/custom_widgets/model_widget.py:656
+#: src/custom_widgets/model_widget.py:658
 msgid "Task Complete"
 msgstr "המשימה הושלמה"
 
-#: src/custom_widgets/model_widget.py:656
-#: src/custom_widgets/model_widget.py:657
+#: src/custom_widgets/model_widget.py:658
+#: src/custom_widgets/model_widget.py:659
 msgid "Model '{}' pulled successfully."
 msgstr "המודל '{}' נמשך בהצלחה."
 
-#: src/custom_widgets/model_widget.py:660
-#: src/custom_widgets/model_widget.py:663
+#: src/custom_widgets/model_widget.py:662
+#: src/custom_widgets/model_widget.py:665
 msgid "Pull Model Error"
 msgstr "שגיאת משיכת מודל"
 
-#: src/custom_widgets/model_widget.py:660
+#: src/custom_widgets/model_widget.py:662
 msgid "Failed to pull model '{}': {}"
 msgstr "נכשלה משיכת המודל '{}': {}"
 
-#: src/custom_widgets/model_widget.py:661
+#: src/custom_widgets/model_widget.py:663
 msgid "Error pulling '{}': {}"
 msgstr "שגיאה במשיכת '{}': {}"
 
-#: src/custom_widgets/model_widget.py:663
+#: src/custom_widgets/model_widget.py:665
 msgid "Failed to pull model '{}' due to network error."
 msgstr "נכשלה משיכת המודל '{}' עקב שגיאת רשת."
 
-#: src/custom_widgets/model_widget.py:664
+#: src/custom_widgets/model_widget.py:666
 msgid "Error pulling '{}'"
 msgstr "שגיאה במשיכת '{}'"
 

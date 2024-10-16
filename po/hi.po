@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 17:02-0600\n"
+"POT-Creation-Date: 2024-10-15 21:46-0600\n"
 "PO-Revision-Date: 2024-09-02 HO:MI+ZONE\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Hindi\n"
@@ -80,7 +80,7 @@ msgstr "वेबसाइट से पाठ को प्रॉम्प्�
 msgid "PDF recognition"
 msgstr "पीडीएफ पहचान"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:987
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:989
 msgid "Disclaimer"
 msgstr "अस्वीकृति"
 
@@ -147,7 +147,9 @@ msgstr "मॉडल्स के लिए विवरण पृष्ठ"
 msgid ""
 "Model selector gets replaced with 'manage models' button when there are no "
 "models downloaded"
-msgstr "जब कोई मॉडल डाउनलोड नहीं किया गया हो, तो मॉडल चयनकर्ता 'मॉडल प्रबंधित करें' बटन से बदल जाता है"
+msgstr ""
+"जब कोई मॉडल डाउनलोड नहीं किया गया हो, तो मॉडल चयनकर्ता 'मॉडल प्रबंधित करें' बटन से "
+"बदल जाता है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added warning when model is too big for the device"
@@ -1459,7 +1461,7 @@ msgstr "चैट करने से पहले एक मॉडल का �
 msgid "Close"
 msgstr "बंद करें"
 
-#: src/window.py:202 src/window.py:203 src/window.ui:940
+#: src/window.py:202 src/window.py:203 src/window.ui:942
 msgid "Next"
 msgstr "अगला"
 
@@ -1472,7 +1474,7 @@ msgid "Missing file"
 msgstr "फ़ाइल नहीं मिली"
 
 #: src/window.py:530 src/window.py:587 src/window.py:607 src/window.py:609
-#: src/window.ui:31 src/custom_widgets/chat_widget.py:319
+#: src/window.ui:31 src/custom_widgets/chat_widget.py:320
 msgid "New Chat"
 msgstr "नई चैट शुरू करें"
 
@@ -2483,27 +2485,35 @@ msgid ""
 msgstr ""
 "क्लस्टरिंग या सेमेंटिक सर्च जैसे कार्यों के लिए उपयोग किया जा सकने वाला सेंटेंस-ट्रांसफॉर्मर मॉडल"
 
-#: src/connection_handler.py:23
+#: src/connection_handler.py:14
+msgid "Alpaca Support"
+msgstr ""
+
+#: src/connection_handler.py:25
 msgid "Model request too large for system"
 msgstr "सिस्टम के लिए मॉडल अनुरोध बहुत बड़ा है"
 
-#: src/connection_handler.py:25
-msgid "AMD GPU detected but the extension is missing, Ollama will use CPU"
-msgstr "AMD GPU का पता चला है, लेकिन एक्सटेंशन गायब है, ओल्लामा CPU का उपयोग करेगा"
-
 #: src/connection_handler.py:28
+msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
+msgstr ""
+
+#: src/connection_handler.py:30
+msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
+msgstr ""
+
+#: src/connection_handler.py:33
 msgid "Using AMD GPU type '{}'"
 msgstr "AMD GPU प्रकार '{}' का उपयोग किया जा रहा है"
 
-#: src/connection_handler.py:89
+#: src/connection_handler.py:94
 msgid "Ollama instance was shut down due to inactivity"
 msgstr "निष्क्रियता के कारण ओल्लामा उदाहरण बंद कर दिया गया"
 
-#: src/connection_handler.py:127
+#: src/connection_handler.py:132
 msgid "Integrated Ollama instance is running"
 msgstr "समन्वित ओल्लामा उदाहरण चल रहा है"
 
-#: src/connection_handler.py:143 src/window.ui:478
+#: src/connection_handler.py:148 src/window.ui:479
 msgid "Integrated Ollama instance is not running"
 msgstr "समन्वित ओल्लामा उदाहरण चल नहीं रहा है"
 
@@ -2523,7 +2533,7 @@ msgstr "संदेश खोजें"
 msgid "Loading Instance"
 msgstr "इंस्टेंस लोड हो रहा है"
 
-#: src/window.ui:105 src/window.ui:106 src/window.ui:526 src/window.ui:1005
+#: src/window.ui:105 src/window.ui:106 src/window.ui:528 src/window.ui:1007
 #: src/custom_widgets/model_widget.py:24 src/custom_widgets/model_widget.py:25
 msgid "Manage Models"
 msgstr "मॉडल्स प्रबंधित करें"
@@ -2553,15 +2563,15 @@ msgstr "फ़ाइल संलग्न करें"
 msgid "Message text box"
 msgstr "संदेश पाठ बॉक्स"
 
-#: src/window.ui:248 src/window.ui:1206
+#: src/window.ui:248 src/window.ui:1208
 msgid "Send Message"
 msgstr "संदेश भेजें"
 
-#: src/window.ui:298 src/window.ui:1011 src/window.ui:1147
+#: src/window.ui:298 src/window.ui:1013 src/window.ui:1149
 msgid "Preferences"
 msgstr "प्राथमिकताएं"
 
-#: src/window.ui:301 src/window.ui:1125
+#: src/window.ui:301 src/window.ui:1127
 msgid "General"
 msgstr "सामान्य"
 
@@ -2643,66 +2653,67 @@ msgstr ""
 "मिनटों की संख्या जिसके लिए उदाहरण को निष्क्रिय रहना चाहिए इससे पहले कि यह बंद हो जाए "
 "(0 का अर्थ है कि यह बंद नहीं होगा)"
 
-#: src/window.ui:492 src/window.ui:515
+#: src/window.ui:494 src/window.ui:517
 msgid "Manage models dialog"
 msgstr "मॉडल्स प्रबंधन संवाद"
 
-#: src/window.ui:494
+#: src/window.ui:496
 msgid "Terminal"
 msgstr "टर्मिनल"
 
-#: src/window.ui:536 src/window.ui:703
+#: src/window.ui:538 src/window.ui:705
 msgid "Create Model"
 msgstr "मॉडल बनाएं"
 
-#: src/window.ui:543
+#: src/window.ui:545
 msgid "Search Model"
 msgstr "मॉडल खोजें"
 
-#: src/window.ui:552
+#: src/window.ui:554
 msgid "Model search bar"
 msgstr "मॉडल खोज बार"
 
-#: src/window.ui:559 src/window.ui:561
+#: src/window.ui:561 src/window.ui:563
 msgid "Search models"
 msgstr "मॉडल्स खोजें"
 
-#: src/window.ui:584
+#: src/window.ui:586
 msgid "No Models Found"
 msgstr "कोई मॉडल नहीं मिला"
 
-#: src/window.ui:585
+#: src/window.ui:587
 msgid "Try a different search or pull an unlisted model from it's name"
 msgstr "एक अलग खोज आजमाएं या इसके नाम से एक अनसूचीबद्ध मॉडल खींचें"
 
-#: src/window.ui:593
+#: src/window.ui:595
 msgid "Pull Model From Name"
 msgstr "नाम से मॉडल खींचें"
 
-#: src/window.ui:643
+#: src/window.ui:645
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
 msgstr ""
-"इस मॉडल को डाउनलोड करके आप मॉडल की वेबसाइट पर उपलब्ध लाइसेंस समझौते को स्वीकार करते हैं।"
+"इस मॉडल को डाउनलोड करके आप मॉडल की वेबसाइट पर उपलब्ध लाइसेंस समझौते को स्वीकार करते "
+"हैं।"
 
-#: src/window.ui:668
+#: src/window.ui:670
 msgid "Model Details"
 msgstr "मॉडल विवरण"
 
-#: src/window.ui:731
+#: src/window.ui:733
 msgid "Base"
 msgstr "बेस"
 
-#: src/window.ui:750
+#: src/window.ui:752
 msgid "Name"
 msgstr "नाम"
 
-#: src/window.ui:756
+#: src/window.ui:758
 msgid "Context"
 msgstr "संदर्भ"
 
-#: src/window.ui:803
+#: src/window.ui:805
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -2712,39 +2723,39 @@ msgstr ""
 "(संदर्भ) निर्देशों को भर देता है। यदि आप अनिश्चित हैं तो अधिक जानकारी के लिए कृपया मॉडल "
 "की वेबसाइट या ओलामा दस्तावेज़ीकरण पर जाएं।"
 
-#: src/window.ui:819
+#: src/window.ui:821
 msgid "Create"
 msgstr "बनाएं"
 
-#: src/window.ui:842
+#: src/window.ui:844
 msgid "File preview dialog"
 msgstr "फ़ाइल पूर्वावलोकन संवाद"
 
-#: src/window.ui:854
+#: src/window.ui:856
 msgid "Open With Default App"
 msgstr "डिफ़ॉल्ट ऐप के साथ खोलें"
 
-#: src/window.ui:862
+#: src/window.ui:864
 msgid "Remove Attachment"
 msgstr "अटैचमेंट हटाएं"
 
-#: src/window.ui:924
+#: src/window.ui:926
 msgid "Previous"
 msgstr "पिछला"
 
-#: src/window.ui:967
+#: src/window.ui:969
 msgid "Welcome to Alpaca"
 msgstr "एल्पाका में आपका स्वागत है"
 
-#: src/window.ui:968
+#: src/window.ui:970
 msgid "Powered by Ollama"
 msgstr "ओलामा द्वारा संचालित"
 
-#: src/window.ui:971
+#: src/window.ui:973
 msgid "Ollama Website"
 msgstr "ओलामा वेबसाइट"
 
-#: src/window.ui:988
+#: src/window.ui:990
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2754,95 +2765,95 @@ msgstr ""
 "नहीं हैं जो एआई मॉडल द्वारा उत्पन्न कोड के निष्पादन से उत्पन्न होते हैं। कृपया सावधानी बरतें "
 "और कोड को चलाने से पहले इसे ध्यान से देखें।"
 
-#: src/window.ui:1001
+#: src/window.ui:1003
 msgid "Import Chat"
 msgstr "चैट आयात करें"
 
-#: src/window.ui:1015
+#: src/window.ui:1017
 msgid "Keyboard Shortcuts"
 msgstr "कीबोर्ड शॉर्टकट्स"
 
-#: src/window.ui:1019
+#: src/window.ui:1021
 msgid "About Alpaca"
 msgstr "एल्पाका के बारे में"
 
-#: src/window.ui:1027 src/window.ui:1053
+#: src/window.ui:1029 src/window.ui:1055
 msgid "Rename Chat"
 msgstr "चैट का नाम बदलें"
 
-#: src/window.ui:1031 src/window.ui:1057
+#: src/window.ui:1033 src/window.ui:1059
 msgid "Duplicate Chat"
 msgstr "चैट की प्रतिलिपि बनाएं"
 
-#: src/window.ui:1035 src/window.ui:1061
+#: src/window.ui:1037 src/window.ui:1063
 msgid "Export Chat"
 msgstr "चैट निर्यात करें"
 
-#: src/window.ui:1039
+#: src/window.ui:1041
 msgid "Clear Chat"
 msgstr "चैट साफ करें"
 
-#: src/window.ui:1045 src/window.ui:1067
+#: src/window.ui:1047 src/window.ui:1069
 msgid "Delete Chat"
 msgstr "चैट हटाएं"
 
-#: src/window.ui:1075
+#: src/window.ui:1077
 msgid "From Existing Model"
 msgstr "मौजूदा मॉडल से"
 
-#: src/window.ui:1079
+#: src/window.ui:1081
 msgid "From GGUF File"
 msgstr "जीजीयूएफ फाइल से"
 
-#: src/window.ui:1083
+#: src/window.ui:1085
 msgid "From Name"
 msgstr "नाम से"
 
-#: src/window.ui:1129
+#: src/window.ui:1131
 msgid "Close application"
 msgstr "एप्लिकेशन बंद करें"
 
-#: src/window.ui:1135
+#: src/window.ui:1137
 msgid "Import chat"
 msgstr "चैट आयात करें"
 
-#: src/window.ui:1141
+#: src/window.ui:1143
 msgid "Clear chat"
 msgstr "चैट साफ करें"
 
-#: src/window.ui:1153
+#: src/window.ui:1155
 msgid "New chat"
 msgstr "नई चैट"
 
-#: src/window.ui:1159
+#: src/window.ui:1161
 msgid "Show shortcuts window"
 msgstr "शॉर्टकट्स विंडो दिखाएं"
 
-#: src/window.ui:1165
+#: src/window.ui:1167
 msgid "Manage models"
 msgstr "मॉडल्स प्रबंधित करें"
 
-#: src/window.ui:1171
+#: src/window.ui:1173
 msgid "Toggle sidebar"
 msgstr "साइडबार टॉगल करें"
 
-#: src/window.ui:1177
+#: src/window.ui:1179
 msgid "Rename chat"
 msgstr "चैट का नाम बदलें"
 
-#: src/window.ui:1184
+#: src/window.ui:1186
 msgid "Editor"
 msgstr "संपादक"
 
-#: src/window.ui:1188
+#: src/window.ui:1190
 msgid "Copy"
 msgstr "कॉपी करें"
 
-#: src/window.ui:1194
+#: src/window.ui:1196
 msgid "Paste"
 msgstr "पेस्ट करें"
 
-#: src/window.ui:1200
+#: src/window.ui:1202
 msgid "Insert new line"
 msgstr "नई लाइन डालें"
 
@@ -2850,19 +2861,19 @@ msgstr "नई लाइन डालें"
 msgid "An error occurred while extracting text from the website"
 msgstr "वेबसाइट से पाठ निकालते समय एक त्रुटि हुई"
 
-#: src/custom_widgets/chat_widget.py:119
+#: src/custom_widgets/chat_widget.py:120
 msgid "Send prompt: '{}'"
 msgstr "प्रॉम्प्ट भेजें: '{}'"
 
-#: src/custom_widgets/chat_widget.py:125 src/custom_widgets/chat_widget.py:126
+#: src/custom_widgets/chat_widget.py:126 src/custom_widgets/chat_widget.py:127
 msgid "Open Model Manager"
 msgstr "मॉडल मैनेजर खोलें"
 
-#: src/custom_widgets/chat_widget.py:135
+#: src/custom_widgets/chat_widget.py:136
 msgid "Try one of these prompts"
 msgstr "इनमें से एक प्रॉम्प्ट आजमाएं"
 
-#: src/custom_widgets/chat_widget.py:135
+#: src/custom_widgets/chat_widget.py:136
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
@@ -2870,19 +2881,19 @@ msgstr ""
 "यह लगता है कि आपने अभी तक कोई मॉडल डाउनलोड नहीं किया है। शुरू करने के लिए मॉडल्स "
 "डाउनलोड करें!"
 
-#: src/custom_widgets/chat_widget.py:196
+#: src/custom_widgets/chat_widget.py:197
 msgid "Regenerate Response"
 msgstr "उत्तर पुनः उत्पन्न करें"
 
-#: src/custom_widgets/chat_widget.py:353
+#: src/custom_widgets/chat_widget.py:354
 msgid "Copy of {}"
 msgstr "{} की प्रति"
 
-#: src/custom_widgets/chat_widget.py:365
+#: src/custom_widgets/chat_widget.py:366
 msgid "Chat exported successfully"
 msgstr "चैट सफलतापूर्वक निर्यात किया गया"
 
-#: src/custom_widgets/chat_widget.py:435
+#: src/custom_widgets/chat_widget.py:436
 msgid "Chat imported successfully"
 msgstr "चैट सफलतापूर्वक आयात किया गया"
 
@@ -2911,7 +2922,7 @@ msgid "Code Block"
 msgstr "कोड ब्लॉक"
 
 #: src/custom_widgets/message_widget.py:158
-#: src/custom_widgets/message_widget.py:374
+#: src/custom_widgets/message_widget.py:376
 msgid "Copy Message"
 msgstr "संदेश कॉपी करें"
 
@@ -2936,37 +2947,37 @@ msgstr ""
 msgid "Execute"
 msgstr "क्रियान्वित करें"
 
-#: src/custom_widgets/message_widget.py:268
 #: src/custom_widgets/message_widget.py:270
+#: src/custom_widgets/message_widget.py:272
 msgid "Image"
 msgstr "छवि"
 
-#: src/custom_widgets/message_widget.py:278
-#: src/custom_widgets/message_widget.py:294
+#: src/custom_widgets/message_widget.py:280
+#: src/custom_widgets/message_widget.py:296
 msgid "Missing Image"
 msgstr "छवि नहीं मिली"
 
-#: src/custom_widgets/message_widget.py:296
+#: src/custom_widgets/message_widget.py:298
 msgid "Missing image"
 msgstr "छवि नहीं मिली"
 
-#: src/custom_widgets/message_widget.py:366
+#: src/custom_widgets/message_widget.py:368
 msgid "Remove Message"
 msgstr "संदेश हटाएं"
 
-#: src/custom_widgets/message_widget.py:382
+#: src/custom_widgets/message_widget.py:384
 msgid "Regenerate Message"
 msgstr "संदेश पुनः उत्पन्न करें"
 
-#: src/custom_widgets/message_widget.py:389
+#: src/custom_widgets/message_widget.py:391
 msgid "Edit Message"
 msgstr "संदेश संपादित करें"
 
-#: src/custom_widgets/message_widget.py:411
+#: src/custom_widgets/message_widget.py:413
 msgid "Message copied to the clipboard"
 msgstr "संदेश क्लिपबोर्ड में कॉपी किया गया"
 
-#: src/custom_widgets/message_widget.py:435
+#: src/custom_widgets/message_widget.py:437
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "उत्तर प्राप्त करते समय संदेश को पुनः उत्पन्न नहीं किया जा सकता"
 
@@ -3026,49 +3037,49 @@ msgstr "पैरामीटर आकार"
 msgid "Quantization Level"
 msgstr "क्वांटाइजेशन स्तर"
 
-#: src/custom_widgets/model_widget.py:447
+#: src/custom_widgets/model_widget.py:449
 msgid "Image Recognition"
 msgstr "छवि पहचान"
 
-#: src/custom_widgets/model_widget.py:473
+#: src/custom_widgets/model_widget.py:475
 msgid "Enter download menu for {}"
 msgstr "{} के लिए डाउनलोड मेनू में प्रवेश करें"
 
-#: src/custom_widgets/model_widget.py:515
+#: src/custom_widgets/model_widget.py:517
 msgid "Download {}:{}"
 msgstr "डाउनलोड {}:{}"
 
-#: src/custom_widgets/model_widget.py:582
+#: src/custom_widgets/model_widget.py:584
 msgid "Model deleted successfully"
 msgstr "मॉडल सफलतापूर्वक हटा दिया गया है"
 
-#: src/custom_widgets/model_widget.py:656
+#: src/custom_widgets/model_widget.py:658
 msgid "Task Complete"
 msgstr "कार्य पूरा हुआ"
 
-#: src/custom_widgets/model_widget.py:656
-#: src/custom_widgets/model_widget.py:657
+#: src/custom_widgets/model_widget.py:658
+#: src/custom_widgets/model_widget.py:659
 msgid "Model '{}' pulled successfully."
 msgstr "मॉडल '{}' सफलतापूर्वक पुल किया गया है"
 
-#: src/custom_widgets/model_widget.py:660
-#: src/custom_widgets/model_widget.py:663
+#: src/custom_widgets/model_widget.py:662
+#: src/custom_widgets/model_widget.py:665
 msgid "Pull Model Error"
 msgstr "मॉडल पुल करने में त्रुटि"
 
-#: src/custom_widgets/model_widget.py:660
+#: src/custom_widgets/model_widget.py:662
 msgid "Failed to pull model '{}': {}"
 msgstr "मॉडल '{}' पुल करने में असफल: {}"
 
-#: src/custom_widgets/model_widget.py:661
+#: src/custom_widgets/model_widget.py:663
 msgid "Error pulling '{}': {}"
 msgstr "{} पुल करने में त्रुटि: {}"
 
-#: src/custom_widgets/model_widget.py:663
+#: src/custom_widgets/model_widget.py:665
 msgid "Failed to pull model '{}' due to network error."
 msgstr "नेटवर्क त्रुटि के कारण मॉडल '{}' पुल करने में असफल"
 
-#: src/custom_widgets/model_widget.py:664
+#: src/custom_widgets/model_widget.py:666
 msgid "Error pulling '{}'"
 msgstr "{} पुल करने में त्रुटि"
 
@@ -3089,6 +3100,9 @@ msgstr "स्क्रिप्ट निकली"
 #: src/custom_widgets/terminal_widget.py:86
 msgid "The script is contained inside Flatpak"
 msgstr "स्क्रिप्ट Flatpak के अंदर है"
+
+#~ msgid "AMD GPU detected but the extension is missing, Ollama will use CPU"
+#~ msgstr "AMD GPU का पता चला है, लेकिन एक्सटेंशन गायब है, ओल्लामा CPU का उपयोग करेगा"
 
 #~ msgid "Select a Model"
 #~ msgstr "एक मॉडल चुनें"

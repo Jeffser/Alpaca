@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 17:02-0600\n"
+"POT-Creation-Date: 2024-10-15 21:46-0600\n"
 "PO-Revision-Date: 2024-09-21 11:43+0200\n"
 "Last-Translator: Louis Chauvet-Villaret <louischauvet0@gmail.com>\n"
 "Language-Team: French\n"
@@ -82,7 +82,7 @@ msgstr "Ajouter le texte d'un site web au prompt"
 msgid "PDF recognition"
 msgstr "Reconnaissance des PDF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:987
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:989
 msgid "Disclaimer"
 msgstr "Avertissement"
 
@@ -1544,7 +1544,7 @@ msgstr "Merci de sélectionner un modèle avant de discuter"
 msgid "Close"
 msgstr "Fermer"
 
-#: src/window.py:202 src/window.py:203 src/window.ui:940
+#: src/window.py:202 src/window.py:203 src/window.ui:942
 msgid "Next"
 msgstr "Suivant"
 
@@ -1557,7 +1557,7 @@ msgid "Missing file"
 msgstr "Fichier manquant"
 
 #: src/window.py:530 src/window.py:587 src/window.py:607 src/window.py:609
-#: src/window.ui:31 src/custom_widgets/chat_widget.py:319
+#: src/window.ui:31 src/custom_widgets/chat_widget.py:320
 msgid "New Chat"
 msgstr "Nouvelle discussion"
 
@@ -2603,27 +2603,35 @@ msgstr ""
 "Modèle sentence-transformers pouvant être utilisé pour des tâches comme le "
 "clustering ou la recherche sémantique."
 
-#: src/connection_handler.py:23
-msgid "Model request too large for system"
+#: src/connection_handler.py:14
+msgid "Alpaca Support"
 msgstr ""
 
 #: src/connection_handler.py:25
-msgid "AMD GPU detected but the extension is missing, Ollama will use CPU"
+msgid "Model request too large for system"
 msgstr ""
 
 #: src/connection_handler.py:28
+msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
+msgstr ""
+
+#: src/connection_handler.py:30
+msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
+msgstr ""
+
+#: src/connection_handler.py:33
 msgid "Using AMD GPU type '{}'"
 msgstr ""
 
-#: src/connection_handler.py:89
+#: src/connection_handler.py:94
 msgid "Ollama instance was shut down due to inactivity"
 msgstr "Ollama a été désactivée faute d'activitée"
 
-#: src/connection_handler.py:127
+#: src/connection_handler.py:132
 msgid "Integrated Ollama instance is running"
 msgstr ""
 
-#: src/connection_handler.py:143 src/window.ui:478
+#: src/connection_handler.py:148 src/window.ui:479
 msgid "Integrated Ollama instance is not running"
 msgstr ""
 
@@ -2643,7 +2651,7 @@ msgstr ""
 msgid "Loading Instance"
 msgstr "Chargement de l'instance"
 
-#: src/window.ui:105 src/window.ui:106 src/window.ui:526 src/window.ui:1005
+#: src/window.ui:105 src/window.ui:106 src/window.ui:528 src/window.ui:1007
 #: src/custom_widgets/model_widget.py:24 src/custom_widgets/model_widget.py:25
 msgid "Manage Models"
 msgstr "Gestion des modèles"
@@ -2675,15 +2683,15 @@ msgstr "Ajouter un fichier"
 msgid "Message text box"
 msgstr "Boite de saisie des messages"
 
-#: src/window.ui:248 src/window.ui:1206
+#: src/window.ui:248 src/window.ui:1208
 msgid "Send Message"
 msgstr "Envoyer le message"
 
-#: src/window.ui:298 src/window.ui:1011 src/window.ui:1147
+#: src/window.ui:298 src/window.ui:1013 src/window.ui:1149
 msgid "Preferences"
 msgstr "Préférences"
 
-#: src/window.ui:301 src/window.ui:1125
+#: src/window.ui:301 src/window.ui:1127
 msgid "General"
 msgstr "Général"
 
@@ -2763,45 +2771,45 @@ msgstr ""
 "Nombre de minutes durant laquelle l'instance reste inactive avant de "
 "s'éteindre (0 signifie qu'elle ne s'éteindra pas)"
 
-#: src/window.ui:492 src/window.ui:515
+#: src/window.ui:494 src/window.ui:517
 msgid "Manage models dialog"
 msgstr "Boite de dialogue "
 
-#: src/window.ui:494
+#: src/window.ui:496
 msgid "Terminal"
 msgstr ""
 
-#: src/window.ui:536 src/window.ui:703
+#: src/window.ui:538 src/window.ui:705
 msgid "Create Model"
 msgstr "Créer un modèle"
 
-#: src/window.ui:543
+#: src/window.ui:545
 msgid "Search Model"
 msgstr "Chercher un modèle"
 
-#: src/window.ui:552
+#: src/window.ui:554
 msgid "Model search bar"
 msgstr "Barre de recherche des modèles"
 
-#: src/window.ui:559 src/window.ui:561
+#: src/window.ui:561 src/window.ui:563
 msgid "Search models"
 msgstr "Chercher des modèles"
 
-#: src/window.ui:584
+#: src/window.ui:586
 msgid "No Models Found"
 msgstr "Aucun modèle trouvé"
 
-#: src/window.ui:585
+#: src/window.ui:587
 msgid "Try a different search or pull an unlisted model from it's name"
 msgstr ""
 "Essayez une recherche différente ou téléchargez un modèle non listé depuis "
 "son nom"
 
-#: src/window.ui:593
+#: src/window.ui:595
 msgid "Pull Model From Name"
 msgstr "Télécharger un modèle depuis son nom"
 
-#: src/window.ui:643
+#: src/window.ui:645
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
@@ -2809,23 +2817,23 @@ msgstr ""
 "En téléchargeant ce modèle, vous acceptez le contrat de licence disponible "
 "sur le site du modèle."
 
-#: src/window.ui:668
+#: src/window.ui:670
 msgid "Model Details"
 msgstr ""
 
-#: src/window.ui:731
+#: src/window.ui:733
 msgid "Base"
 msgstr "Base"
 
-#: src/window.ui:750
+#: src/window.ui:752
 msgid "Name"
 msgstr "Nom"
 
-#: src/window.ui:756
+#: src/window.ui:758
 msgid "Context"
 msgstr "Contexte"
 
-#: src/window.ui:803
+#: src/window.ui:805
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -2836,39 +2844,39 @@ msgstr ""
 "modèle ou la documentation d'Ollama pour plus d'information si vous n'êtes "
 "pas sûr."
 
-#: src/window.ui:819
+#: src/window.ui:821
 msgid "Create"
 msgstr "Créer"
 
-#: src/window.ui:842
+#: src/window.ui:844
 msgid "File preview dialog"
 msgstr "Boite de dialogue de la prévisualisation des fichiers"
 
-#: src/window.ui:854
+#: src/window.ui:856
 msgid "Open With Default App"
 msgstr "Ouvrir avec l'application par défaut"
 
-#: src/window.ui:862
+#: src/window.ui:864
 msgid "Remove Attachment"
 msgstr "Supprimer la pièce-jointe"
 
-#: src/window.ui:924
+#: src/window.ui:926
 msgid "Previous"
 msgstr "Précédent"
 
-#: src/window.ui:967
+#: src/window.ui:969
 msgid "Welcome to Alpaca"
 msgstr "Bienvenue sur Alpaca"
 
-#: src/window.ui:968
+#: src/window.ui:970
 msgid "Powered by Ollama"
 msgstr "Fonctionne grâce à Ollama"
 
-#: src/window.ui:971
+#: src/window.ui:973
 msgid "Ollama Website"
 msgstr "Site web d'Ollama"
 
-#: src/window.ui:988
+#: src/window.ui:990
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2879,95 +2887,95 @@ msgstr ""
 "modèle d'IA. Merci de faire attention et de vérifier prudemment le code "
 "avant de l'exécuter."
 
-#: src/window.ui:1001
+#: src/window.ui:1003
 msgid "Import Chat"
 msgstr "Importer une discussion"
 
-#: src/window.ui:1015
+#: src/window.ui:1017
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis claviers"
 
-#: src/window.ui:1019
+#: src/window.ui:1021
 msgid "About Alpaca"
 msgstr "À propos d'Alpaca"
 
-#: src/window.ui:1027 src/window.ui:1053
+#: src/window.ui:1029 src/window.ui:1055
 msgid "Rename Chat"
 msgstr "Renommer la discussion"
 
-#: src/window.ui:1031 src/window.ui:1057
+#: src/window.ui:1033 src/window.ui:1059
 msgid "Duplicate Chat"
 msgstr "Dupliquer la discussion"
 
-#: src/window.ui:1035 src/window.ui:1061
+#: src/window.ui:1037 src/window.ui:1063
 msgid "Export Chat"
 msgstr "Exporter la discussion"
 
-#: src/window.ui:1039
+#: src/window.ui:1041
 msgid "Clear Chat"
 msgstr "Effacer la discussion"
 
-#: src/window.ui:1045 src/window.ui:1067
+#: src/window.ui:1047 src/window.ui:1069
 msgid "Delete Chat"
 msgstr "Supprimer la discussion"
 
-#: src/window.ui:1075
+#: src/window.ui:1077
 msgid "From Existing Model"
 msgstr "Depuis un modèle existant"
 
-#: src/window.ui:1079
+#: src/window.ui:1081
 msgid "From GGUF File"
 msgstr "Depuis un fichier GGUF"
 
-#: src/window.ui:1083
+#: src/window.ui:1085
 msgid "From Name"
 msgstr "Depuis l'ID"
 
-#: src/window.ui:1129
+#: src/window.ui:1131
 msgid "Close application"
 msgstr "Fermer l'application"
 
-#: src/window.ui:1135
+#: src/window.ui:1137
 msgid "Import chat"
 msgstr "Importer la discussion"
 
-#: src/window.ui:1141
+#: src/window.ui:1143
 msgid "Clear chat"
 msgstr "Effacer la discussion"
 
-#: src/window.ui:1153
+#: src/window.ui:1155
 msgid "New chat"
 msgstr "Nouvelle discussion"
 
-#: src/window.ui:1159
+#: src/window.ui:1161
 msgid "Show shortcuts window"
 msgstr "Voir les raccourcis claviers"
 
-#: src/window.ui:1165
+#: src/window.ui:1167
 msgid "Manage models"
 msgstr "Gestion des modèles"
 
-#: src/window.ui:1171
+#: src/window.ui:1173
 msgid "Toggle sidebar"
 msgstr "Basculer la barre latérale"
 
-#: src/window.ui:1177
+#: src/window.ui:1179
 msgid "Rename chat"
 msgstr "Renommer la discussion"
 
-#: src/window.ui:1184
+#: src/window.ui:1186
 msgid "Editor"
 msgstr "Éditeur"
 
-#: src/window.ui:1188
+#: src/window.ui:1190
 msgid "Copy"
 msgstr "Copier"
 
-#: src/window.ui:1194
+#: src/window.ui:1196
 msgid "Paste"
 msgstr "Coller"
 
-#: src/window.ui:1200
+#: src/window.ui:1202
 msgid "Insert new line"
 msgstr "Insérer une ligne"
 
@@ -2975,19 +2983,19 @@ msgstr "Insérer une ligne"
 msgid "An error occurred while extracting text from the website"
 msgstr "Une erreur est survenue lors de l'extraction du texte du site web"
 
-#: src/custom_widgets/chat_widget.py:119
+#: src/custom_widgets/chat_widget.py:120
 msgid "Send prompt: '{}'"
 msgstr "Envoyer le prompt : '{}'"
 
-#: src/custom_widgets/chat_widget.py:125 src/custom_widgets/chat_widget.py:126
+#: src/custom_widgets/chat_widget.py:126 src/custom_widgets/chat_widget.py:127
 msgid "Open Model Manager"
 msgstr "Ouvrir le gestionnaire de modèles"
 
-#: src/custom_widgets/chat_widget.py:135
+#: src/custom_widgets/chat_widget.py:136
 msgid "Try one of these prompts"
 msgstr "Essayez un des ces prompts"
 
-#: src/custom_widgets/chat_widget.py:135
+#: src/custom_widgets/chat_widget.py:136
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
@@ -2995,19 +3003,19 @@ msgstr ""
 "On dirait que vous n'avez pas encore de modèles téléchargé. Télécharger un "
 "modèle pour commencer !"
 
-#: src/custom_widgets/chat_widget.py:196
+#: src/custom_widgets/chat_widget.py:197
 msgid "Regenerate Response"
 msgstr "Regénérer la réponse"
 
-#: src/custom_widgets/chat_widget.py:353
+#: src/custom_widgets/chat_widget.py:354
 msgid "Copy of {}"
 msgstr "Copie de {}"
 
-#: src/custom_widgets/chat_widget.py:365
+#: src/custom_widgets/chat_widget.py:366
 msgid "Chat exported successfully"
 msgstr "Discussion exportée avec succès"
 
-#: src/custom_widgets/chat_widget.py:435
+#: src/custom_widgets/chat_widget.py:436
 msgid "Chat imported successfully"
 msgstr "Discussion importée avec succès"
 
@@ -3036,7 +3044,7 @@ msgid "Code Block"
 msgstr "Bloc de code"
 
 #: src/custom_widgets/message_widget.py:158
-#: src/custom_widgets/message_widget.py:374
+#: src/custom_widgets/message_widget.py:376
 msgid "Copy Message"
 msgstr "Copier le message"
 
@@ -3059,37 +3067,37 @@ msgstr ""
 msgid "Execute"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:268
 #: src/custom_widgets/message_widget.py:270
+#: src/custom_widgets/message_widget.py:272
 msgid "Image"
 msgstr "Image"
 
-#: src/custom_widgets/message_widget.py:278
-#: src/custom_widgets/message_widget.py:294
+#: src/custom_widgets/message_widget.py:280
+#: src/custom_widgets/message_widget.py:296
 msgid "Missing Image"
 msgstr "Image manquante"
 
-#: src/custom_widgets/message_widget.py:296
+#: src/custom_widgets/message_widget.py:298
 msgid "Missing image"
 msgstr "Image manquante"
 
-#: src/custom_widgets/message_widget.py:366
+#: src/custom_widgets/message_widget.py:368
 msgid "Remove Message"
 msgstr "Supprimer le message"
 
-#: src/custom_widgets/message_widget.py:382
+#: src/custom_widgets/message_widget.py:384
 msgid "Regenerate Message"
 msgstr "Regénérer le message"
 
-#: src/custom_widgets/message_widget.py:389
+#: src/custom_widgets/message_widget.py:391
 msgid "Edit Message"
 msgstr "Éditer le message"
 
-#: src/custom_widgets/message_widget.py:411
+#: src/custom_widgets/message_widget.py:413
 msgid "Message copied to the clipboard"
 msgstr "Message copié dans le presse-papier"
 
-#: src/custom_widgets/message_widget.py:435
+#: src/custom_widgets/message_widget.py:437
 msgid "Message cannot be regenerated while receiving a response"
 msgstr ""
 "Le message ne peut pas être regénéré lors de la réception d'une réponse"
@@ -3150,49 +3158,49 @@ msgstr ""
 msgid "Quantization Level"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:447
+#: src/custom_widgets/model_widget.py:449
 msgid "Image Recognition"
 msgstr "Reconnaissance d'image"
 
-#: src/custom_widgets/model_widget.py:473
+#: src/custom_widgets/model_widget.py:475
 msgid "Enter download menu for {}"
 msgstr "Accédez au menu de téléchargement pour {}"
 
-#: src/custom_widgets/model_widget.py:515
+#: src/custom_widgets/model_widget.py:517
 msgid "Download {}:{}"
 msgstr "Télécharger {}:{}"
 
-#: src/custom_widgets/model_widget.py:582
+#: src/custom_widgets/model_widget.py:584
 msgid "Model deleted successfully"
 msgstr "Modèle supprimer avec succès"
 
-#: src/custom_widgets/model_widget.py:656
+#: src/custom_widgets/model_widget.py:658
 msgid "Task Complete"
 msgstr "Tâche complétée"
 
-#: src/custom_widgets/model_widget.py:656
-#: src/custom_widgets/model_widget.py:657
+#: src/custom_widgets/model_widget.py:658
+#: src/custom_widgets/model_widget.py:659
 msgid "Model '{}' pulled successfully."
 msgstr "Modèle '{}' téléchargé avec succès."
 
-#: src/custom_widgets/model_widget.py:660
-#: src/custom_widgets/model_widget.py:663
+#: src/custom_widgets/model_widget.py:662
+#: src/custom_widgets/model_widget.py:665
 msgid "Pull Model Error"
 msgstr "Erreur de téléchargement du modèle"
 
-#: src/custom_widgets/model_widget.py:660
+#: src/custom_widgets/model_widget.py:662
 msgid "Failed to pull model '{}': {}"
 msgstr "Échec de téléchargement du modèle '{}': {}"
 
-#: src/custom_widgets/model_widget.py:661
+#: src/custom_widgets/model_widget.py:663
 msgid "Error pulling '{}': {}"
 msgstr "Erreur lors du téléchargement de '{}': {}"
 
-#: src/custom_widgets/model_widget.py:663
+#: src/custom_widgets/model_widget.py:665
 msgid "Failed to pull model '{}' due to network error."
 msgstr "Échec du téléchargement du modèle '{}' du à une erreur de connexion."
 
-#: src/custom_widgets/model_widget.py:664
+#: src/custom_widgets/model_widget.py:666
 msgid "Error pulling '{}'"
 msgstr "Erreur lors du téléchargement de '{}'"
 

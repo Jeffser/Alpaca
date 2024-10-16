@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 17:02-0600\n"
+"POT-Creation-Date: 2024-10-15 21:46-0600\n"
 "PO-Revision-Date: 2024-07-02 18:24-0600\n"
 "Last-Translator: Niklas Opsahl Halvorsen\n"
 "Language-Team: Norwegian\n"
@@ -81,7 +81,7 @@ msgstr ""
 msgid "PDF recognition"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:987
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:989
 msgid "Disclaimer"
 msgstr "Obs!"
 
@@ -1445,7 +1445,7 @@ msgstr "Velg en modell før samtalen"
 msgid "Close"
 msgstr "Lukk"
 
-#: src/window.py:202 src/window.py:203 src/window.ui:940
+#: src/window.py:202 src/window.py:203 src/window.ui:942
 msgid "Next"
 msgstr "Neste"
 
@@ -1458,7 +1458,7 @@ msgid "Missing file"
 msgstr ""
 
 #: src/window.py:530 src/window.py:587 src/window.py:607 src/window.py:609
-#: src/window.ui:31 src/custom_widgets/chat_widget.py:319
+#: src/window.ui:31 src/custom_widgets/chat_widget.py:320
 msgid "New Chat"
 msgstr "Ny samtale"
 
@@ -2432,27 +2432,35 @@ msgid ""
 "semantic search."
 msgstr ""
 
-#: src/connection_handler.py:23
-msgid "Model request too large for system"
+#: src/connection_handler.py:14
+msgid "Alpaca Support"
 msgstr ""
 
 #: src/connection_handler.py:25
-msgid "AMD GPU detected but the extension is missing, Ollama will use CPU"
+msgid "Model request too large for system"
 msgstr ""
 
 #: src/connection_handler.py:28
+msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
+msgstr ""
+
+#: src/connection_handler.py:30
+msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
+msgstr ""
+
+#: src/connection_handler.py:33
 msgid "Using AMD GPU type '{}'"
 msgstr ""
 
-#: src/connection_handler.py:89
+#: src/connection_handler.py:94
 msgid "Ollama instance was shut down due to inactivity"
 msgstr ""
 
-#: src/connection_handler.py:127
+#: src/connection_handler.py:132
 msgid "Integrated Ollama instance is running"
 msgstr ""
 
-#: src/connection_handler.py:143 src/window.ui:478
+#: src/connection_handler.py:148 src/window.ui:479
 msgid "Integrated Ollama instance is not running"
 msgstr ""
 
@@ -2472,7 +2480,7 @@ msgstr ""
 msgid "Loading Instance"
 msgstr ""
 
-#: src/window.ui:105 src/window.ui:106 src/window.ui:526 src/window.ui:1005
+#: src/window.ui:105 src/window.ui:106 src/window.ui:528 src/window.ui:1007
 #: src/custom_widgets/model_widget.py:24 src/custom_widgets/model_widget.py:25
 msgid "Manage Models"
 msgstr "Tilpass Modeller"
@@ -2502,15 +2510,15 @@ msgstr "Filvedlegg"
 msgid "Message text box"
 msgstr ""
 
-#: src/window.ui:248 src/window.ui:1206
+#: src/window.ui:248 src/window.ui:1208
 msgid "Send Message"
 msgstr "Send Melding"
 
-#: src/window.ui:298 src/window.ui:1011 src/window.ui:1147
+#: src/window.ui:298 src/window.ui:1013 src/window.ui:1149
 msgid "Preferences"
 msgstr "Innstillinger"
 
-#: src/window.ui:301 src/window.ui:1125
+#: src/window.ui:301 src/window.ui:1127
 msgid "General"
 msgstr "Generelt"
 
@@ -2589,104 +2597,104 @@ msgid ""
 "means it won't be shut down)"
 msgstr ""
 
-#: src/window.ui:492 src/window.ui:515
+#: src/window.ui:494 src/window.ui:517
 msgid "Manage models dialog"
 msgstr ""
 
-#: src/window.ui:494
+#: src/window.ui:496
 msgid "Terminal"
 msgstr ""
 
-#: src/window.ui:536 src/window.ui:703
+#: src/window.ui:538 src/window.ui:705
 msgid "Create Model"
 msgstr "Lag Modell"
 
-#: src/window.ui:543
+#: src/window.ui:545
 msgid "Search Model"
 msgstr "Søk Modell"
 
-#: src/window.ui:552
+#: src/window.ui:554
 msgid "Model search bar"
 msgstr ""
 
-#: src/window.ui:559 src/window.ui:561
+#: src/window.ui:561 src/window.ui:563
 msgid "Search models"
 msgstr "Søkemodeller"
 
-#: src/window.ui:584
+#: src/window.ui:586
 msgid "No Models Found"
 msgstr "Ingen Modeller Funnet"
 
-#: src/window.ui:585
+#: src/window.ui:587
 msgid "Try a different search or pull an unlisted model from it's name"
 msgstr ""
 
-#: src/window.ui:593
+#: src/window.ui:595
 msgid "Pull Model From Name"
 msgstr ""
 
-#: src/window.ui:643
+#: src/window.ui:645
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
 msgstr ""
 
-#: src/window.ui:668
+#: src/window.ui:670
 msgid "Model Details"
 msgstr ""
 
-#: src/window.ui:731
+#: src/window.ui:733
 msgid "Base"
 msgstr "Standard"
 
-#: src/window.ui:750
+#: src/window.ui:752
 msgid "Name"
 msgstr "Navn"
 
-#: src/window.ui:756
+#: src/window.ui:758
 msgid "Context"
 msgstr "Kontekst"
 
-#: src/window.ui:803
+#: src/window.ui:805
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
 "documentation for more information if you're unsure."
 msgstr ""
 
-#: src/window.ui:819
+#: src/window.ui:821
 msgid "Create"
 msgstr "Lag"
 
-#: src/window.ui:842
+#: src/window.ui:844
 msgid "File preview dialog"
 msgstr ""
 
-#: src/window.ui:854
+#: src/window.ui:856
 msgid "Open With Default App"
 msgstr ""
 
-#: src/window.ui:862
+#: src/window.ui:864
 msgid "Remove Attachment"
 msgstr ""
 
-#: src/window.ui:924
+#: src/window.ui:926
 msgid "Previous"
 msgstr "Forrige"
 
-#: src/window.ui:967
+#: src/window.ui:969
 msgid "Welcome to Alpaca"
 msgstr "Velkommen til Alpaca"
 
-#: src/window.ui:968
+#: src/window.ui:970
 msgid "Powered by Ollama"
 msgstr "Drives av Ollama"
 
-#: src/window.ui:971
+#: src/window.ui:973
 msgid "Ollama Website"
 msgstr "Ollama Nettside"
 
-#: src/window.ui:988
+#: src/window.ui:990
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2696,95 +2704,95 @@ msgstr ""
 "programvare fra bruk av kode generert via KI modellene. Vær OBS og analyser "
 "kode før det brukes."
 
-#: src/window.ui:1001
+#: src/window.ui:1003
 msgid "Import Chat"
 msgstr "Importer samtale"
 
-#: src/window.ui:1015
+#: src/window.ui:1017
 msgid "Keyboard Shortcuts"
 msgstr "Hurtigtaster"
 
-#: src/window.ui:1019
+#: src/window.ui:1021
 msgid "About Alpaca"
 msgstr "Om Alpaca"
 
-#: src/window.ui:1027 src/window.ui:1053
+#: src/window.ui:1029 src/window.ui:1055
 msgid "Rename Chat"
 msgstr "Navngi samtale"
 
-#: src/window.ui:1031 src/window.ui:1057
+#: src/window.ui:1033 src/window.ui:1059
 msgid "Duplicate Chat"
 msgstr ""
 
-#: src/window.ui:1035 src/window.ui:1061
+#: src/window.ui:1037 src/window.ui:1063
 msgid "Export Chat"
 msgstr "Eksporter samtale"
 
-#: src/window.ui:1039
+#: src/window.ui:1041
 msgid "Clear Chat"
 msgstr "Rens samtale"
 
-#: src/window.ui:1045 src/window.ui:1067
+#: src/window.ui:1047 src/window.ui:1069
 msgid "Delete Chat"
 msgstr "Slett samtale"
 
-#: src/window.ui:1075
+#: src/window.ui:1077
 msgid "From Existing Model"
 msgstr "Fra Eksisterende Modell"
 
-#: src/window.ui:1079
+#: src/window.ui:1081
 msgid "From GGUF File"
 msgstr ""
 
-#: src/window.ui:1083
+#: src/window.ui:1085
 msgid "From Name"
 msgstr ""
 
-#: src/window.ui:1129
+#: src/window.ui:1131
 msgid "Close application"
 msgstr "Lukk applikasjon"
 
-#: src/window.ui:1135
+#: src/window.ui:1137
 msgid "Import chat"
 msgstr "Importer samtale"
 
-#: src/window.ui:1141
+#: src/window.ui:1143
 msgid "Clear chat"
 msgstr "Rens samtale"
 
-#: src/window.ui:1153
+#: src/window.ui:1155
 msgid "New chat"
 msgstr "Ny samtale"
 
-#: src/window.ui:1159
+#: src/window.ui:1161
 msgid "Show shortcuts window"
 msgstr "Vis hurtigtast vindu"
 
-#: src/window.ui:1165
+#: src/window.ui:1167
 msgid "Manage models"
 msgstr ""
 
-#: src/window.ui:1171
+#: src/window.ui:1173
 msgid "Toggle sidebar"
 msgstr ""
 
-#: src/window.ui:1177
+#: src/window.ui:1179
 msgid "Rename chat"
 msgstr ""
 
-#: src/window.ui:1184
+#: src/window.ui:1186
 msgid "Editor"
 msgstr "Redigerer"
 
-#: src/window.ui:1188
+#: src/window.ui:1190
 msgid "Copy"
 msgstr "Kopier"
 
-#: src/window.ui:1194
+#: src/window.ui:1196
 msgid "Paste"
 msgstr "Lim inn"
 
-#: src/window.ui:1200
+#: src/window.ui:1202
 msgid "Insert new line"
 msgstr "Sett inn ny linje"
 
@@ -2792,37 +2800,37 @@ msgstr "Sett inn ny linje"
 msgid "An error occurred while extracting text from the website"
 msgstr ""
 
-#: src/custom_widgets/chat_widget.py:119
+#: src/custom_widgets/chat_widget.py:120
 msgid "Send prompt: '{}'"
 msgstr ""
 
-#: src/custom_widgets/chat_widget.py:125 src/custom_widgets/chat_widget.py:126
+#: src/custom_widgets/chat_widget.py:126 src/custom_widgets/chat_widget.py:127
 msgid "Open Model Manager"
 msgstr ""
 
-#: src/custom_widgets/chat_widget.py:135
+#: src/custom_widgets/chat_widget.py:136
 msgid "Try one of these prompts"
 msgstr ""
 
-#: src/custom_widgets/chat_widget.py:135
+#: src/custom_widgets/chat_widget.py:136
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
 msgstr ""
 
-#: src/custom_widgets/chat_widget.py:196
+#: src/custom_widgets/chat_widget.py:197
 msgid "Regenerate Response"
 msgstr ""
 
-#: src/custom_widgets/chat_widget.py:353
+#: src/custom_widgets/chat_widget.py:354
 msgid "Copy of {}"
 msgstr ""
 
-#: src/custom_widgets/chat_widget.py:365
+#: src/custom_widgets/chat_widget.py:366
 msgid "Chat exported successfully"
 msgstr "Samtale suksessfullt eksportert"
 
-#: src/custom_widgets/chat_widget.py:435
+#: src/custom_widgets/chat_widget.py:436
 msgid "Chat imported successfully"
 msgstr "Samtale suksessfullt importert"
 
@@ -2851,7 +2859,7 @@ msgid "Code Block"
 msgstr ""
 
 #: src/custom_widgets/message_widget.py:158
-#: src/custom_widgets/message_widget.py:374
+#: src/custom_widgets/message_widget.py:376
 msgid "Copy Message"
 msgstr "Kopier Melding"
 
@@ -2874,37 +2882,37 @@ msgstr ""
 msgid "Execute"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:268
 #: src/custom_widgets/message_widget.py:270
+#: src/custom_widgets/message_widget.py:272
 msgid "Image"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:278
-#: src/custom_widgets/message_widget.py:294
+#: src/custom_widgets/message_widget.py:280
+#: src/custom_widgets/message_widget.py:296
 msgid "Missing Image"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:296
+#: src/custom_widgets/message_widget.py:298
 msgid "Missing image"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:366
+#: src/custom_widgets/message_widget.py:368
 msgid "Remove Message"
 msgstr "Fjern Melding"
 
-#: src/custom_widgets/message_widget.py:382
+#: src/custom_widgets/message_widget.py:384
 msgid "Regenerate Message"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:389
+#: src/custom_widgets/message_widget.py:391
 msgid "Edit Message"
 msgstr "Rediger Melding"
 
-#: src/custom_widgets/message_widget.py:411
+#: src/custom_widgets/message_widget.py:413
 msgid "Message copied to the clipboard"
 msgstr "Melding kopiert til utklippstavle"
 
-#: src/custom_widgets/message_widget.py:435
+#: src/custom_widgets/message_widget.py:437
 msgid "Message cannot be regenerated while receiving a response"
 msgstr ""
 
@@ -2964,49 +2972,49 @@ msgstr ""
 msgid "Quantization Level"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:447
+#: src/custom_widgets/model_widget.py:449
 msgid "Image Recognition"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:473
+#: src/custom_widgets/model_widget.py:475
 msgid "Enter download menu for {}"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:515
+#: src/custom_widgets/model_widget.py:517
 msgid "Download {}:{}"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:582
+#: src/custom_widgets/model_widget.py:584
 msgid "Model deleted successfully"
 msgstr "Modell suksessfullt slettet"
 
-#: src/custom_widgets/model_widget.py:656
+#: src/custom_widgets/model_widget.py:658
 msgid "Task Complete"
 msgstr "Oppgave Ferdig"
 
-#: src/custom_widgets/model_widget.py:656
-#: src/custom_widgets/model_widget.py:657
+#: src/custom_widgets/model_widget.py:658
+#: src/custom_widgets/model_widget.py:659
 msgid "Model '{}' pulled successfully."
 msgstr "Modell '{}' suksessfullt nedlasted."
 
-#: src/custom_widgets/model_widget.py:660
-#: src/custom_widgets/model_widget.py:663
+#: src/custom_widgets/model_widget.py:662
+#: src/custom_widgets/model_widget.py:665
 msgid "Pull Model Error"
 msgstr "Problem med modell nedlasting"
 
-#: src/custom_widgets/model_widget.py:660
+#: src/custom_widgets/model_widget.py:662
 msgid "Failed to pull model '{}': {}"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:661
+#: src/custom_widgets/model_widget.py:663
 msgid "Error pulling '{}': {}"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:663
+#: src/custom_widgets/model_widget.py:665
 msgid "Failed to pull model '{}' due to network error."
 msgstr "Mislykkes nedlasting av modell '{}' grunnet av nettverks feil."
 
-#: src/custom_widgets/model_widget.py:664
+#: src/custom_widgets/model_widget.py:666
 msgid "Error pulling '{}'"
 msgstr ""
 

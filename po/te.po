@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 17:02-0600\n"
+"POT-Creation-Date: 2024-10-15 21:46-0600\n"
 "PO-Revision-Date: 2024-09-21 19:39+0530\n"
 "Last-Translator: Aryan Karamtoth <aryankmmiv@outlook.com>\n"
 "Language-Team: Telugu l10n Translation Team <ubuntu-l10n-te@lists.launchpad."
@@ -82,7 +82,7 @@ msgstr "ప్రాంప్ట్‌కు వెబ్‌సైట్ ను�
 msgid "PDF recognition"
 msgstr "PDF గుర్తింపు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:987
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:989
 msgid "Disclaimer"
 msgstr "నిరాకరణ"
 
@@ -1435,7 +1435,7 @@ msgstr "దయచేసి చాట్ చేసే ముందు మోడ�
 msgid "Close"
 msgstr "మూసివేయి"
 
-#: src/window.py:202 src/window.py:203 src/window.ui:940
+#: src/window.py:202 src/window.py:203 src/window.ui:942
 msgid "Next"
 msgstr "తదుపరి"
 
@@ -1448,7 +1448,7 @@ msgid "Missing file"
 msgstr "ఫైల్ లేదు"
 
 #: src/window.py:530 src/window.py:587 src/window.py:607 src/window.py:609
-#: src/window.ui:31 src/custom_widgets/chat_widget.py:319
+#: src/window.ui:31 src/custom_widgets/chat_widget.py:320
 msgid "New Chat"
 msgstr "కొత్త చాట్"
 
@@ -2382,27 +2382,35 @@ msgid ""
 "semantic search."
 msgstr "క్లస్టరింగ్ లేదా సెమాంటిక్ సెర్చ్ వంటి పనుల కోసం ఉపయోగించగల వాక్య-ట్రాన్స్‌ఫార్మర్స్ మోడల్."
 
-#: src/connection_handler.py:23
-msgid "Model request too large for system"
+#: src/connection_handler.py:14
+msgid "Alpaca Support"
 msgstr ""
 
 #: src/connection_handler.py:25
-msgid "AMD GPU detected but the extension is missing, Ollama will use CPU"
+msgid "Model request too large for system"
 msgstr ""
 
 #: src/connection_handler.py:28
+msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
+msgstr ""
+
+#: src/connection_handler.py:30
+msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
+msgstr ""
+
+#: src/connection_handler.py:33
 msgid "Using AMD GPU type '{}'"
 msgstr ""
 
-#: src/connection_handler.py:89
+#: src/connection_handler.py:94
 msgid "Ollama instance was shut down due to inactivity"
 msgstr "నిష్క్రియాత్మకత కారణంగా ఒల్లామా ఉదాహరణ మూసివేయబడింది"
 
-#: src/connection_handler.py:127
+#: src/connection_handler.py:132
 msgid "Integrated Ollama instance is running"
 msgstr ""
 
-#: src/connection_handler.py:143 src/window.ui:478
+#: src/connection_handler.py:148 src/window.ui:479
 msgid "Integrated Ollama instance is not running"
 msgstr ""
 
@@ -2422,7 +2430,7 @@ msgstr ""
 msgid "Loading Instance"
 msgstr "ఉదాహరణ లోడ్ అవుతోంది"
 
-#: src/window.ui:105 src/window.ui:106 src/window.ui:526 src/window.ui:1005
+#: src/window.ui:105 src/window.ui:106 src/window.ui:528 src/window.ui:1007
 #: src/custom_widgets/model_widget.py:24 src/custom_widgets/model_widget.py:25
 msgid "Manage Models"
 msgstr "మోడల్‌లను నిర్వహించండి"
@@ -2452,15 +2460,15 @@ msgstr "ఫైల్‌ని అటాచ్ చేయండి"
 msgid "Message text box"
 msgstr "సందేశం టెక్స్ట్ బాక్స్"
 
-#: src/window.ui:248 src/window.ui:1206
+#: src/window.ui:248 src/window.ui:1208
 msgid "Send Message"
 msgstr "సందేశం పంపండి"
 
-#: src/window.ui:298 src/window.ui:1011 src/window.ui:1147
+#: src/window.ui:298 src/window.ui:1013 src/window.ui:1149
 msgid "Preferences"
 msgstr "ప్రాధాన్యతలు"
 
-#: src/window.ui:301 src/window.ui:1125
+#: src/window.ui:301 src/window.ui:1127
 msgid "General"
 msgstr "జనరల్"
 
@@ -2539,66 +2547,66 @@ msgid ""
 msgstr ""
 "షట్ డౌన్ చేయడానికి ముందు ఉదాహరణ నిష్క్రియంగా ఉండవలసిన నిమిషాల సంఖ్య (0 అంటే అది షట్ డౌన్ చేయబడదు)"
 
-#: src/window.ui:492 src/window.ui:515
+#: src/window.ui:494 src/window.ui:517
 msgid "Manage models dialog"
 msgstr "మోడల్స్ డైలాగ్‌ని నిర్వహించండి"
 
-#: src/window.ui:494
+#: src/window.ui:496
 msgid "Terminal"
 msgstr ""
 
-#: src/window.ui:536 src/window.ui:703
+#: src/window.ui:538 src/window.ui:705
 msgid "Create Model"
 msgstr "మోడల్‌ని సృష్టించండి"
 
-#: src/window.ui:543
+#: src/window.ui:545
 msgid "Search Model"
 msgstr "శోధన మోడల్"
 
-#: src/window.ui:552
+#: src/window.ui:554
 msgid "Model search bar"
 msgstr "మోడల్ శోధన పట్టీ"
 
-#: src/window.ui:559 src/window.ui:561
+#: src/window.ui:561 src/window.ui:563
 msgid "Search models"
 msgstr "నమూనాలను శోధించండి"
 
-#: src/window.ui:584
+#: src/window.ui:586
 msgid "No Models Found"
 msgstr "మోడల్‌లు ఏవీ కనుగొనబడలేదు"
 
-#: src/window.ui:585
+#: src/window.ui:587
 msgid "Try a different search or pull an unlisted model from it's name"
 msgstr "వేరే శోధనను ప్రయత్నించండి లేదా దాని పేరు నుండి జాబితా చేయని మోడల్‌ని లాగండి"
 
-#: src/window.ui:593
+#: src/window.ui:595
 msgid "Pull Model From Name"
 msgstr "పేరు నుండి మోడల్ లాగండి"
 
-#: src/window.ui:643
+#: src/window.ui:645
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
 msgstr ""
 "ఈ మోడల్‌ను డౌన్‌లోడ్ చేయడం ద్వారా మీరు మోడల్ వెబ్‌సైట్‌లో అందుబాటులో ఉన్న లైసెన్స్ ఒప్పందాన్ని అంగీకరిస్తారు."
 
-#: src/window.ui:668
+#: src/window.ui:670
 msgid "Model Details"
 msgstr ""
 
-#: src/window.ui:731
+#: src/window.ui:733
 msgid "Base"
 msgstr "బేస్"
 
-#: src/window.ui:750
+#: src/window.ui:752
 msgid "Name"
 msgstr "పేరు"
 
-#: src/window.ui:756
+#: src/window.ui:758
 msgid "Context"
 msgstr "సందర్భం"
 
-#: src/window.ui:803
+#: src/window.ui:805
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -2607,39 +2615,39 @@ msgstr ""
 "కొన్ని మోడళ్లకు మోడల్ ఫైల్ అవసరం, అల్పాకా స్వయంచాలకంగా సిస్టమ్ (సందర్భం) సూచనల నుండి నింపుతుంది. "
 "దయచేసి మీకు ఖచ్చితంగా తెలియకుంటే మరింత సమాచారం కోసం మోడల్ వెబ్‌సైట్ లేదా ఒల్లామా డాక్యుమెంటేషన్‌ని సందర్శించండి."
 
-#: src/window.ui:819
+#: src/window.ui:821
 msgid "Create"
 msgstr "సృష్టించు"
 
-#: src/window.ui:842
+#: src/window.ui:844
 msgid "File preview dialog"
 msgstr "ఫైల్ ప్రివ్యూ డైలాగ్"
 
-#: src/window.ui:854
+#: src/window.ui:856
 msgid "Open With Default App"
 msgstr "డిఫాల్ట్ యాప్‌తో తెరవండి"
 
-#: src/window.ui:862
+#: src/window.ui:864
 msgid "Remove Attachment"
 msgstr "జోడింపుని తీసివేయండి"
 
-#: src/window.ui:924
+#: src/window.ui:926
 msgid "Previous"
 msgstr "మునుపటి"
 
-#: src/window.ui:967
+#: src/window.ui:969
 msgid "Welcome to Alpaca"
 msgstr "అల్పాకాకు స్వాగతం"
 
-#: src/window.ui:968
+#: src/window.ui:970
 msgid "Powered by Ollama"
 msgstr "ఒల్లమా ద్వారా ఆధారితం"
 
-#: src/window.ui:971
+#: src/window.ui:973
 msgid "Ollama Website"
 msgstr "ఒల్లమా వెబ్‌సైట్"
 
-#: src/window.ui:988
+#: src/window.ui:990
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2649,95 +2657,95 @@ msgstr ""
 "సాఫ్ట్‌వేర్‌లకు ఏవైనా నష్టాలకు బాధ్యత వహించరు. దయచేసి జాగ్రత్తగా ఉండండి మరియు కోడ్‌ని అమలు చేయడానికి ముందు "
 "జాగ్రత్తగా సమీక్షించండి."
 
-#: src/window.ui:1001
+#: src/window.ui:1003
 msgid "Import Chat"
 msgstr "చాట్‌ని దిగుమతి చేయండి"
 
-#: src/window.ui:1015
+#: src/window.ui:1017
 msgid "Keyboard Shortcuts"
 msgstr "కీబోర్డ్ సత్వరమార్గాలు"
 
-#: src/window.ui:1019
+#: src/window.ui:1021
 msgid "About Alpaca"
 msgstr "అల్పాకా గురించి"
 
-#: src/window.ui:1027 src/window.ui:1053
+#: src/window.ui:1029 src/window.ui:1055
 msgid "Rename Chat"
 msgstr "చాట్ పేరు మార్చండి"
 
-#: src/window.ui:1031 src/window.ui:1057
+#: src/window.ui:1033 src/window.ui:1059
 msgid "Duplicate Chat"
 msgstr "డూప్లికేట్ చాట్"
 
-#: src/window.ui:1035 src/window.ui:1061
+#: src/window.ui:1037 src/window.ui:1063
 msgid "Export Chat"
 msgstr "చాట్‌ని ఎగుమతి చేయండి"
 
-#: src/window.ui:1039
+#: src/window.ui:1041
 msgid "Clear Chat"
 msgstr "చాట్ క్లియర్ చేయండి"
 
-#: src/window.ui:1045 src/window.ui:1067
+#: src/window.ui:1047 src/window.ui:1069
 msgid "Delete Chat"
 msgstr "చాట్‌ని తొలగించండి"
 
-#: src/window.ui:1075
+#: src/window.ui:1077
 msgid "From Existing Model"
 msgstr "ఇప్పటికే ఉన్న మోడల్ నుండి"
 
-#: src/window.ui:1079
+#: src/window.ui:1081
 msgid "From GGUF File"
 msgstr "GGUF ఫైల్ నుండి"
 
-#: src/window.ui:1083
+#: src/window.ui:1085
 msgid "From Name"
 msgstr "పేరు నుండి"
 
-#: src/window.ui:1129
+#: src/window.ui:1131
 msgid "Close application"
 msgstr "అప్లికేషన్‌ను మూసివేయండి"
 
-#: src/window.ui:1135
+#: src/window.ui:1137
 msgid "Import chat"
 msgstr "చాట్‌ని దిగుమతి చేయండి"
 
-#: src/window.ui:1141
+#: src/window.ui:1143
 msgid "Clear chat"
 msgstr "చాట్‌ని క్లియర్ చేయండి"
 
-#: src/window.ui:1153
+#: src/window.ui:1155
 msgid "New chat"
 msgstr "కొత్త చాట్"
 
-#: src/window.ui:1159
+#: src/window.ui:1161
 msgid "Show shortcuts window"
 msgstr "సత్వరమార్గాల విండోను చూపు"
 
-#: src/window.ui:1165
+#: src/window.ui:1167
 msgid "Manage models"
 msgstr "నమూనాలను నిర్వహించండి"
 
-#: src/window.ui:1171
+#: src/window.ui:1173
 msgid "Toggle sidebar"
 msgstr "సైడ్‌బార్‌ని టోగుల్ చేయండి"
 
-#: src/window.ui:1177
+#: src/window.ui:1179
 msgid "Rename chat"
 msgstr "చాట్ పేరు మార్చండి"
 
-#: src/window.ui:1184
+#: src/window.ui:1186
 msgid "Editor"
 msgstr "ఎడిటర్"
 
-#: src/window.ui:1188
+#: src/window.ui:1190
 msgid "Copy"
 msgstr "కాపీ చేయండి"
 
-#: src/window.ui:1194
+#: src/window.ui:1196
 msgid "Paste"
 msgstr "అతికించండి"
 
-#: src/window.ui:1200
+#: src/window.ui:1202
 msgid "Insert new line"
 msgstr "కొత్త పంక్తిని చొప్పించండి"
 
@@ -2745,37 +2753,37 @@ msgstr "కొత్త పంక్తిని చొప్పించండ�
 msgid "An error occurred while extracting text from the website"
 msgstr "వెబ్‌సైట్ నుండి వచనాన్ని సంగ్రహిస్తున్నప్పుడు లోపం సంభవించింది"
 
-#: src/custom_widgets/chat_widget.py:119
+#: src/custom_widgets/chat_widget.py:120
 msgid "Send prompt: '{}'"
 msgstr "ప్రాంప్ట్ పంపండి: '{}'"
 
-#: src/custom_widgets/chat_widget.py:125 src/custom_widgets/chat_widget.py:126
+#: src/custom_widgets/chat_widget.py:126 src/custom_widgets/chat_widget.py:127
 msgid "Open Model Manager"
 msgstr "మోడల్ మేనేజర్‌ని తెరవండి"
 
-#: src/custom_widgets/chat_widget.py:135
+#: src/custom_widgets/chat_widget.py:136
 msgid "Try one of these prompts"
 msgstr "ఈ ప్రాంప్ట్‌లలో ఒకదాన్ని ప్రయత్నించండి"
 
-#: src/custom_widgets/chat_widget.py:135
+#: src/custom_widgets/chat_widget.py:136
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
 msgstr "మీరు ఇంకా డౌన్‌లోడ్ చేసిన మోడల్‌లు ఏవీ లేనట్లు కనిపిస్తోంది. ప్రారంభించడానికి మోడల్‌లను డౌన్‌లోడ్ చేయండి!"
 
-#: src/custom_widgets/chat_widget.py:196
+#: src/custom_widgets/chat_widget.py:197
 msgid "Regenerate Response"
 msgstr "ప్రతిస్పందనను పునరుద్ధరించండి"
 
-#: src/custom_widgets/chat_widget.py:353
+#: src/custom_widgets/chat_widget.py:354
 msgid "Copy of {}"
 msgstr "{} యొక్క కాపీ"
 
-#: src/custom_widgets/chat_widget.py:365
+#: src/custom_widgets/chat_widget.py:366
 msgid "Chat exported successfully"
 msgstr "చాట్ విజయవంతంగా ఎగుమతి చేయబడింది"
 
-#: src/custom_widgets/chat_widget.py:435
+#: src/custom_widgets/chat_widget.py:436
 msgid "Chat imported successfully"
 msgstr "చాట్ విజయవంతంగా దిగుమతి చేయబడింది"
 
@@ -2804,7 +2812,7 @@ msgid "Code Block"
 msgstr "కోడ్ బ్లాక్"
 
 #: src/custom_widgets/message_widget.py:158
-#: src/custom_widgets/message_widget.py:374
+#: src/custom_widgets/message_widget.py:376
 msgid "Copy Message"
 msgstr "సందేశాన్ని కాపీ చేయండి"
 
@@ -2827,37 +2835,37 @@ msgstr ""
 msgid "Execute"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:268
 #: src/custom_widgets/message_widget.py:270
+#: src/custom_widgets/message_widget.py:272
 msgid "Image"
 msgstr "చిత్రం"
 
-#: src/custom_widgets/message_widget.py:278
-#: src/custom_widgets/message_widget.py:294
+#: src/custom_widgets/message_widget.py:280
+#: src/custom_widgets/message_widget.py:296
 msgid "Missing Image"
 msgstr "చిత్రం లేదు"
 
-#: src/custom_widgets/message_widget.py:296
+#: src/custom_widgets/message_widget.py:298
 msgid "Missing image"
 msgstr "చిత్రం లేదు"
 
-#: src/custom_widgets/message_widget.py:366
+#: src/custom_widgets/message_widget.py:368
 msgid "Remove Message"
 msgstr "సందేశాన్ని తీసివేయండి"
 
-#: src/custom_widgets/message_widget.py:382
+#: src/custom_widgets/message_widget.py:384
 msgid "Regenerate Message"
 msgstr "సందేశాన్ని పునరుత్పత్తి చేయండి"
 
-#: src/custom_widgets/message_widget.py:389
+#: src/custom_widgets/message_widget.py:391
 msgid "Edit Message"
 msgstr "సందేశాన్ని సవరించండి"
 
-#: src/custom_widgets/message_widget.py:411
+#: src/custom_widgets/message_widget.py:413
 msgid "Message copied to the clipboard"
 msgstr "సందేశం క్లిప్‌బోర్డ్‌కి కాపీ చేయబడింది"
 
-#: src/custom_widgets/message_widget.py:435
+#: src/custom_widgets/message_widget.py:437
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "ప్రతిస్పందనను స్వీకరించేటప్పుడు సందేశాన్ని మళ్లీ రూపొందించడం సాధ్యం కాదు"
 
@@ -2917,49 +2925,49 @@ msgstr ""
 msgid "Quantization Level"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:447
+#: src/custom_widgets/model_widget.py:449
 msgid "Image Recognition"
 msgstr "చిత్రం గుర్తింపు"
 
-#: src/custom_widgets/model_widget.py:473
+#: src/custom_widgets/model_widget.py:475
 msgid "Enter download menu for {}"
 msgstr "{} కోసం డౌన్‌లోడ్ మెనుని నమోదు చేయండి"
 
-#: src/custom_widgets/model_widget.py:515
+#: src/custom_widgets/model_widget.py:517
 msgid "Download {}:{}"
 msgstr "డౌన్‌లోడ్ {}:{}"
 
-#: src/custom_widgets/model_widget.py:582
+#: src/custom_widgets/model_widget.py:584
 msgid "Model deleted successfully"
 msgstr "మోడల్ విజయవంతంగా తొలగించబడింది"
 
-#: src/custom_widgets/model_widget.py:656
+#: src/custom_widgets/model_widget.py:658
 msgid "Task Complete"
 msgstr "టాస్క్ కంప్లీట్"
 
-#: src/custom_widgets/model_widget.py:656
-#: src/custom_widgets/model_widget.py:657
+#: src/custom_widgets/model_widget.py:658
+#: src/custom_widgets/model_widget.py:659
 msgid "Model '{}' pulled successfully."
 msgstr "మోడల్ '{}' విజయవంతంగా లాగబడింది."
 
-#: src/custom_widgets/model_widget.py:660
-#: src/custom_widgets/model_widget.py:663
+#: src/custom_widgets/model_widget.py:662
+#: src/custom_widgets/model_widget.py:665
 msgid "Pull Model Error"
 msgstr "పుల్ మోడల్ లోపం"
 
-#: src/custom_widgets/model_widget.py:660
+#: src/custom_widgets/model_widget.py:662
 msgid "Failed to pull model '{}': {}"
 msgstr "మోడల్ '{}' లాగడం విఫలమైంది: {}"
 
-#: src/custom_widgets/model_widget.py:661
+#: src/custom_widgets/model_widget.py:663
 msgid "Error pulling '{}': {}"
 msgstr "'{}' లాగడంలో లోపం: {}"
 
-#: src/custom_widgets/model_widget.py:663
+#: src/custom_widgets/model_widget.py:665
 msgid "Failed to pull model '{}' due to network error."
 msgstr "నెట్‌వర్క్ లోపం కారణంగా మోడల్ '{}'ని లాగడం విఫలమైంది."
 
-#: src/custom_widgets/model_widget.py:664
+#: src/custom_widgets/model_widget.py:666
 msgid "Error pulling '{}'"
 msgstr "'{}' లాగడంలో లోపం"
 

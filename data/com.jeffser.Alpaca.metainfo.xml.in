@@ -82,6 +82,20 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="2.7.0" date="2024-10-15">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.7.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>User messages are now compacted into bubbles</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed re connection dialog not working when 'use local instance' is selected</li>
+          <li>Fixed model manager not adapting to large system fonts</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.6.5" date="2024-10-13">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.6.5</url>
       <description>
