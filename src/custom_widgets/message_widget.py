@@ -469,7 +469,7 @@ class message(Gtk.Overlay):
             orientation=1,
             halign='fill',
             css_classes=["response_message"] if self.bot else ["card", "user_message"],
-            spacing=10,
+            spacing=5,
             width_request=-1 if self.bot else 375
         )
 
