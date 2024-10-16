@@ -4,7 +4,7 @@ Working on organizing the code
 """
 
 import os, requests
-from pytube import YouTube
+from youtube_transcript_api import YouTubeTranscriptApi
 from html2text import html2text
 from .internal import cache_dir
 
@@ -18,24 +18,34 @@ def connect_remote(remote_url:str, bearer_token:str):
     window.model_manager.update_local_list()
     window.save_server_config()
 
-def attach_youtube(video_url:str, caption_name:str):
+def attach_youtube(video_title:str, video_author:str, watch_url:str, video_url:str, video_id:str, caption_name:str):
     buffer = window.message_text_view.get_buffer()
     text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).replace(video_url, "")
     buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
     buffer.insert(buffer.get_start_iter(), text, len(text))
 
-    yt = YouTube(video_url)
-    text = "{}\n{}\n{}\n\n".format(yt.title, yt.author, yt.watch_url)
+    result_text = "{}\n{}\n{}\n\n".format(video_title, video_author, watch_url)
+    caption_name = caption_name.split(' (')[-1][:-1]
 
-    for event in yt.captions[caption_name.split('(')[-1][:-1]].json_captions['events']:
-        text += "{}\n".format(event['segs'][0]['utf8'].replace('\n', '\\n'))
+    if caption_name.startswith('Translate:'):
+        original_caption_name = get_youtube_transcripts(video_id)[0].split(' (')[-1][:-1]
+        transcript = YouTubeTranscriptApi.list_transcripts(video_id).find_transcript([original_caption_name]).translate(caption_name.split(':')[-1]).fetch()
+        result_text += '(Auto translated from Japanese)\n'
+    else:
+        transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=[caption_name])
+
+    result_text += '\n'.join([t['text'] for t in transcript])
+
     if not os.path.exists(os.path.join(cache_dir, 'tmp/youtube')):
         os.makedirs(os.path.join(cache_dir, 'tmp/youtube'))
-    file_path = os.path.join(os.path.join(cache_dir, 'tmp/youtube'), f'{yt.title} ({caption_name.split(" (")[0]})')
+    file_path = os.path.join(os.path.join(cache_dir, 'tmp/youtube'), '{} ({})'.format(video_title.replace('/', ' '), caption_name))
     with open(file_path, 'w+', encoding="utf-8") as f:
-        f.write(text)
+        f.write(result_text)
 
     window.attach_file(file_path, 'youtube')
+
+def get_youtube_transcripts(video_id:str):
+    return ['{} ({})'.format(t.language, t.language_code) for t in YouTubeTranscriptApi.list_transcripts(video_id)]
 
 def attach_website(url:str):
     response = requests.get(url)

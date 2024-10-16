@@ -69,7 +69,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     preferences_dialog = Gtk.Template.Child()
     shortcut_window : Gtk.ShortcutsWindow  = Gtk.Template.Child()
     file_preview_dialog = Gtk.Template.Child()
-    file_preview_text_view = Gtk.Template.Child()
+    file_preview_text_label = Gtk.Template.Child()
     file_preview_image = Gtk.Template.Child()
     welcome_dialog = Gtk.Template.Child()
     welcome_carousel = Gtk.Template.Child()
@@ -405,7 +405,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if content:
             if file_type == 'image':
                 self.file_preview_image.set_visible(True)
-                self.file_preview_text_view.set_visible(False)
+                self.file_preview_text_label.set_visible(False)
                 image_data = base64.b64decode(content)
                 loader = GdkPixbuf.PixbufLoader.new()
                 loader.write(image_data)
@@ -418,10 +418,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.file_preview_open_button.set_name(file_path)
             else:
                 self.file_preview_image.set_visible(False)
-                self.file_preview_text_view.set_visible(True)
-                buffer = self.file_preview_text_view.get_buffer()
-                buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-                buffer.insert(buffer.get_start_iter(), content, len(content.encode('utf-8')))
+                self.file_preview_text_label.set_visible(True)
+                buffer = self.file_preview_text_label.set_label(content)
                 if file_type == 'youtube':
                     self.file_preview_dialog.set_title(content.split('\n')[0])
                     self.file_preview_open_button.set_name(content.split('\n')[2])
@@ -760,20 +758,23 @@ Generate a title following these rules:
             if youtube_regex.match(text):
                 try:
                     yt = YouTube(text)
-                    captions = yt.captions
-                    if len(captions) == 0:
+                    transcriptions = generic_actions.get_youtube_transcripts(yt.video_id)
+                    if len(transcriptions) == 0:
                         self.show_toast(_("This video does not have any transcriptions"), self.main_overlay)
                         return
-                    video_title = yt.title
+
+                    if not any(filter(lambda x: '(en' in x, transcriptions)):
+                        transcriptions.insert(0, 'English (Translate:en)')
+
                     dialog_widget.simple_dropdown(
                         _('Attach YouTube Video?'),
-                        _('{}\n\nPlease select a transcript to include').format(video_title),
-                        lambda caption_name, video_url=text: generic_actions.attach_youtube(video_url, caption_name),
-                        ["{} ({})".format(caption.name.title(), caption.code) for caption in captions]
+                        _('{}\n\nPlease select a transcript to include').format(yt.streams[0].title),
+                        lambda caption_name, yt=yt, video_url=text: generic_actions.attach_youtube(yt.streams[0].title, yt.author, yt.watch_url, video_url, yt.video_id, caption_name),
+                        transcriptions
                     )
                 except Exception as e:
                     logger.error(e)
-                    self.show_toast(_("This video is not available"), self.main_overlay)
+                    self.show_toast(_("Error attaching video, please try again"), self.main_overlay)
             elif url_regex.match(text):
                 dialog_widget.simple(
                     _('Attach Website? (Experimental)'),
