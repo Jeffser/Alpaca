@@ -768,7 +768,7 @@ Generate a title following these rules:
 
                     dialog_widget.simple_dropdown(
                         _('Attach YouTube Video?'),
-                        _('{}\n\nPlease select a transcript to include').format(yt.streams[0].title),
+                        _('{}\n\nPlease select a transcript to include').format(yt.title),
                         lambda caption_name, yt=yt, video_url=text: generic_actions.attach_youtube(yt.title, yt.author, yt.watch_url, video_url, yt.video_id, caption_name),
                         transcriptions
                     )
