@@ -28,9 +28,10 @@ def attach_youtube(video_title:str, video_author:str, watch_url:str, video_url:s
     caption_name = caption_name.split(' (')[-1][:-1]
 
     if caption_name.startswith('Translate:'):
-        original_caption_name = get_youtube_transcripts(video_id)[0].split(' (')[-1][:-1]
+        available_captions = get_youtube_transcripts(video_id)
+        original_caption_name = available_captions[0].split(' (')[-1][:-1]
         transcript = YouTubeTranscriptApi.list_transcripts(video_id).find_transcript([original_caption_name]).translate(caption_name.split(':')[-1]).fetch()
-        result_text += '(Auto translated from Japanese)\n'
+        result_text += '(Auto translated from {})\n'.format(available_captions[0])
     else:
         transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=[caption_name])
 
