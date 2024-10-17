@@ -741,6 +741,36 @@ Generate a title following these rules:
         self.selected_chat_row = self.chat_list_box.get_selected_row()
         self.chat_actions(action, user_data)
 
+    def youtube_detected(self, video_url):
+        try:
+            tries=0
+            while True:
+                try:
+                    yt = YouTube(video_url)
+                    video_title = yt.title
+                    break
+                except Exception as e:
+                    tries+=1
+                    if tries == 4:
+                        raise Exception(e)
+            transcriptions = generic_actions.get_youtube_transcripts(yt.video_id)
+            if len(transcriptions) == 0:
+                self.show_toast(_("This video does not have any transcriptions"), self.main_overlay)
+                return
+
+            if not any(filter(lambda x: '(en' in x, transcriptions)):
+                transcriptions.insert(0, 'English (Translate:en)')
+
+            dialog_widget.simple_dropdown(
+                _('Attach YouTube Video?'),
+                _('{}\n\nPlease select a transcript to include').format(video_title),
+                lambda caption_name, yt=yt, video_url=video_url: generic_actions.attach_youtube(yt.title, yt.author, yt.watch_url, video_url, yt.video_id, caption_name),
+                transcriptions
+            )
+        except Exception as e:
+            logger.error(e)
+            self.show_toast(_("Error attaching video, please try again"), self.main_overlay)
+
     def cb_text_received(self, clipboard, result):
         try:
             text = clipboard.read_text_finish(result)
@@ -756,25 +786,7 @@ Generate a title following these rules:
                 r'(?:/[^\\s]*)?'
             )
             if youtube_regex.match(text):
-                try:
-                    yt = YouTube(text)
-                    transcriptions = generic_actions.get_youtube_transcripts(yt.video_id)
-                    if len(transcriptions) == 0:
-                        self.show_toast(_("This video does not have any transcriptions"), self.main_overlay)
-                        return
-
-                    if not any(filter(lambda x: '(en' in x, transcriptions)):
-                        transcriptions.insert(0, 'English (Translate:en)')
-
-                    dialog_widget.simple_dropdown(
-                        _('Attach YouTube Video?'),
-                        _('{}\n\nPlease select a transcript to include').format(yt.title),
-                        lambda caption_name, yt=yt, video_url=text: generic_actions.attach_youtube(yt.title, yt.author, yt.watch_url, video_url, yt.video_id, caption_name),
-                        transcriptions
-                    )
-                except Exception as e:
-                    logger.error(e)
-                    self.show_toast(_("Error attaching video, please try again"), self.main_overlay)
+                self.youtube_detected(text)
             elif url_regex.match(text):
                 dialog_widget.simple(
                     _('Attach Website? (Experimental)'),
