@@ -1,22 +1,22 @@
 # French translation for Alpaca package.
 # Copyright (C) 2024 Jeffry Samuel Eduarte Rojas
 # This file is distributed under the same license as the Alpaca package.
-# Louis Chauvet-Villaret <louischauvet0@gmail.com>, 2024.
+# Louis Chauvet-Villaret <louis@revuejazz.fr>, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-15 21:46-0600\n"
-"PO-Revision-Date: 2024-09-21 11:43+0200\n"
-"Last-Translator: Louis Chauvet-Villaret <louischauvet0@gmail.com>\n"
+"PO-Revision-Date: 2024-10-16 23:14+0200\n"
+"Last-Translator: Louis Chauvet-Villaret <louis@revuejazz.fr>\n"
 "Language-Team: French\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 46.1\n"
+"X-Generator: Gtranslator 47.0\n"
 
 #: data/com.jeffser.Alpaca.desktop.in:3
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
@@ -114,7 +114,7 @@ msgstr "Une discussion montrant de la coloration syntaxique de code"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:66
 msgid "A Python script running inside integrated terminal"
-msgstr ""
+msgstr "Un script Python lancé dans le terminal intégré"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:70
 msgid "A conversation involving a YouTube video transcript"
@@ -143,33 +143,36 @@ msgstr "Nouveautés"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Details page for models"
-msgstr ""
+msgstr "Ajouté : "
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid ""
 "Model selector gets replaced with 'manage models' button when there are no "
 "models downloaded"
 msgstr ""
+"Ajouté : sélecteur de modèle remplacé par le bouton 'gestionnaire de modèle' "
+"lorsqu'il y a aucun modèle de téléchargé"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added warning when model is too big for the device"
 msgstr ""
+"Ajouté : avertissement lorsque le modèle est trop lourd pour l'appareil"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Added AMD GPU indicator in preferences"
-msgstr ""
+msgstr "Ajouté : indicateur de GPU AMD dans les paramètres"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Better system for handling dialogs"
-msgstr ""
+msgstr "Changé : meilleur système de prise en charge des boites de dialogues"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Better system for handling instance switching"
-msgstr ""
+msgstr "Changé : meilleur système de prise en charge du changement d'instance"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Remote connection dialog"
-msgstr ""
+msgstr "Ajouté : boite de dialogue de connexion distante"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
@@ -194,90 +197,102 @@ msgstr "Correctifs"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Fixed: Models get duplicated when switching remote and local instance"
 msgstr ""
+"Résolu : les modèles se voyaient doublés lors du changement entre l'instance "
+"distante vers l'instance locale"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:109
 msgid "Better internal instance manager"
-msgstr ""
+msgstr "Changé : meilleur gestionnaire de l'instance interne"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:118
 msgid "Added 'Cancel' and 'Save' buttons when editing a message"
 msgstr ""
+"Ajouté : bouton 'Annuler' et 'Sauvegarder' lors de l'édition d'un message"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
 msgid "Better handling of image recognition"
-msgstr ""
+msgstr "Changé : meilleure prise en charge de la reconnaissance d'image"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Remove unused files when canceling a model download"
 msgstr ""
+"Résolu : suppression des fichiers inutilisés lors de l'arrêt du "
+"téléchargement d'un modèle"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Better message blocks rendering"
-msgstr ""
+msgstr "Changé : meilleur rendu de l'arrêt de génération de message"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:133
 msgid "Run bash and python scripts straight from chat"
 msgstr ""
+"Ajouté : exécutez des scripts Python et bash directement depuis la discussion"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:134
 msgid "Updated Ollama to 0.3.12"
-msgstr ""
+msgstr "Changé : Ollama mis-à-jour vers la version 0.3.12"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:135
 msgid "New models!"
-msgstr ""
+msgstr "Ajouté : nouveaux modèles"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:139
 msgid "Fixed and made faster the launch sequence"
-msgstr ""
+msgstr "Résolu : séquence de lancement plus rapide"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:140
 msgid "Better detection of code blocks in messages"
-msgstr ""
+msgstr "Résolu : meilleur détection des blocs de code dans les messages"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:141
 msgid "Fixed app not loading in certain setups with Nvidia GPUs"
 msgstr ""
+"Résolu : l'application ne se lançait pas dans certaines configuration avec "
+"des GPU Nvidia"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:150
 msgid ""
 "Fixed message notification sometimes crashing text rendering because of them "
 "running on different threads"
 msgstr ""
+"Résolu : la notification de message plantait sur le rendu du texte parce "
+"qu'elle fonctionnait sur un thread différent"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:159
 msgid "Fixed message generation sometimes failing"
-msgstr ""
+msgstr "Résolu : la génération de messages plantait parfois"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:168
 msgid "Sidebar resizes with the window"
-msgstr ""
+msgstr "Changé : la barre latérale se redimensionne avec la fenêtre"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:169
 msgid "New welcome dialog"
-msgstr ""
+msgstr "Ajouté : nouvelle boite de dialogue de bienvenue"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:170
 msgid "Message search"
-msgstr ""
+msgstr "Ajouté : recherche de message"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:171
 msgid "Updated Ollama to v0.3.11"
-msgstr ""
+msgstr "Changé : Ollama mis-à-jour vers la version 0.3.11"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:172
 msgid "A lot of new models provided by Ollama repository"
-msgstr ""
+msgstr "Ajouté : beaucoup de nouveau modèles du dépôt d'Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:176
 msgid ""
 "Fixed text inside model manager when the accessibility option 'large text' "
 "is on"
 msgstr ""
+"Résolu : texte à l'intérieur du gestionnaire de modèle quand l'option "
+"d’accessibilité 'grand texte' est activée"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:177
 msgid "Fixed image recognition on unsupported models"
-msgstr ""
+msgstr "Résolu : reconnaissance d'image sur certains modèles"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:186
 msgid "Fixed spinner not hiding if the back end fails"
@@ -1567,7 +1582,7 @@ msgstr "Fermer Alpaca"
 
 #: src/window.py:634
 msgid "Use Local Instance"
-msgstr ""
+msgstr "Utiliser l'instance locale"
 
 #: src/window.py:635 src/window.py:840
 msgid "Connect"
@@ -1575,7 +1590,7 @@ msgstr "Connecter"
 
 #: src/window.py:638 src/window.py:843
 msgid "Server URL"
-msgstr ""
+msgstr "URL du serveur"
 
 #: src/window.py:639 src/window.py:844
 msgid "Bearer Token (Optional)"
@@ -1621,7 +1636,7 @@ msgstr "Renommer '{}'"
 
 #: src/window.py:736
 msgid "Chat name"
-msgstr ""
+msgstr "Nom de la discussion"
 
 #: src/window.py:737
 msgid "Rename"
@@ -1675,11 +1690,11 @@ msgstr "Annuler"
 
 #: src/window.py:847
 msgid "Connect Remote Instance"
-msgstr ""
+msgstr "Connecter l'instance distante"
 
 #: src/window.py:848
 msgid "Enter instance information to continue"
-msgstr ""
+msgstr "Entrer les informations de l'instance distante pour continuer"
 
 #: src/window.py:923
 msgid "Clear Chat?"
@@ -1728,6 +1743,7 @@ msgstr "Suprimmer"
 #: src/available_models_descriptions.py:2
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
 msgstr ""
+"Meta's Llama 3.2 se décline en petits modèles avec 1B et 3B paramètres."
 
 #: src/available_models_descriptions.py:3
 msgid ""
@@ -1742,6 +1758,8 @@ msgid ""
 "Google Gemma 2 is a high-performing and efficient model available in three "
 "sizes: 2B, 9B, and 27B."
 msgstr ""
+"Google Gemma 2 est un modèle performant et efficace disponible en trois "
+"tailles : 2B, 9B et 27B."
 
 #: src/available_models_descriptions.py:5
 msgid ""
@@ -1749,6 +1767,9 @@ msgid ""
 "encompassing up to 18 trillion tokens. The model supports up to 128K tokens "
 "and has multilingual support."
 msgstr ""
+"Les modèles Qwen2.5 sont préentraînés sur le dernier jeu de données à grande "
+"échelle d'Alibaba, couvrant jusqu'à 18 000 milliards de tokens. Le modèle "
+"supporte jusqu'à 128K tokens et propose un support multilingue."
 
 #: src/available_models_descriptions.py:6
 msgid ""
@@ -1763,12 +1784,16 @@ msgid ""
 "A commercial-friendly small language model by NVIDIA optimized for roleplay, "
 "RAG QA, and function calling."
 msgstr ""
+"Un petit modèle de langage à usage commercial proposé par NVIDIA, optimisé "
+"pour les jeux de rôle, la RAG QA et les appels de fonctions."
 
 #: src/available_models_descriptions.py:8
 msgid ""
 "Mistral Small is a lightweight model designed for cost-effective use in "
 "tasks like translation and summarization."
 msgstr ""
+"Mistral Small est un modèle léger conçu pour un usage rentable dans des "
+"tâches comme la traduction et la synthèse."
 
 #: src/available_models_descriptions.py:9
 msgid ""
@@ -1985,6 +2010,9 @@ msgid ""
 "The latest series of Code-Specific Qwen models, with significant "
 "improvements in code generation, code reasoning, and code fixing."
 msgstr ""
+"La dernière série de modèles Qwen spécifiques au code, avec des "
+"améliorations significatives dans la génération, le raisonnement et la "
+"correction de code."
 
 #: src/available_models_descriptions.py:38
 msgid ""
@@ -2203,6 +2231,9 @@ msgid ""
 "tuning that teaches a LLM to detect mistakes in its reasoning and correct "
 "course."
 msgstr ""
+"Un modèle performant entraîné avec une nouvelle technique appelée "
+"\"Reflection-tuning\" qui apprend à un LLM à détecter les erreurs dans son "
+"raisonnement et à corriger son cours."
 
 #: src/available_models_descriptions.py:67
 msgid ""
@@ -2351,6 +2382,9 @@ msgid ""
 "Yi-Coder is a series of open-source code language models that delivers state-"
 "of-the-art coding performance with fewer than 10 billion parameters."
 msgstr ""
+"Yi-Coder est une série de modèles de langage de code open-source offrant des "
+"performances de codage à la pointe de la technologie avec moins de 10 "
+"milliards de paramètres."
 
 #: src/available_models_descriptions.py:88
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
@@ -2487,6 +2521,8 @@ msgid ""
 "A series of multimodal LLMs (MLLMs) designed for vision-language "
 "understanding."
 msgstr ""
+"Une série de modèles multimodaux (MLLMs) conçus pour la compréhension vision-"
+"langage."
 
 #: src/available_models_descriptions.py:107
 msgid ""
@@ -2550,6 +2586,8 @@ msgid ""
 "Solar Pro Preview: an advanced large language model (LLM) with 22 billion "
 "parameters designed to fit into a single GPU"
 msgstr ""
+"Solar Pro Preview : un modèle de langage de grande taille (LLM) avancé avec "
+"22 milliards de paramètres conçu pour tenir sur un seul GPU."
 
 #: src/available_models_descriptions.py:116
 msgid ""
@@ -2580,6 +2618,8 @@ msgid ""
 "A series of models that convert HTML content to Markdown content, which is "
 "useful for content conversion tasks."
 msgstr ""
+"Une série de modèles qui convertissent le contenu HTML en contenu Markdown, "
+"utile pour les tâches de conversion de contenu."
 
 #: src/available_models_descriptions.py:120
 msgid "Embedding model from BAAI mapping texts to vectors."
@@ -2590,10 +2630,13 @@ msgid ""
 "An upgraded version of DeekSeek-V2 that integrates the general and coding "
 "abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
 msgstr ""
+"Une version améliorée de DeepSeek-V2 qui intègre les capacités générales et "
+"de codage de DeepSeek-V2-Chat et DeepSeek-Coder-V2-Instruct."
 
 #: src/available_models_descriptions.py:122
 msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
 msgstr ""
+"Un modèle de vérification des faits de pointe développé par Bespoke Labs."
 
 #: src/available_models_descriptions.py:123
 msgid ""
@@ -2605,23 +2648,24 @@ msgstr ""
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
-msgstr ""
+msgstr "Support d'Alpaca"
 
 #: src/connection_handler.py:25
 msgid "Model request too large for system"
-msgstr ""
+msgstr "Modèle demandé trop lourd pour le système"
 
 #: src/connection_handler.py:28
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
 msgstr ""
+"GPU AMD détecté mais l'extension est manquante. Ollama utilisera  le CPU."
 
 #: src/connection_handler.py:30
 msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
-msgstr ""
+msgstr "GPU AMD détecté mais ROCm est manquant. Ollama utilisera le CPU."
 
 #: src/connection_handler.py:33
 msgid "Using AMD GPU type '{}'"
-msgstr ""
+msgstr "Utilisation de GPU AMD type '{}'"
 
 #: src/connection_handler.py:94
 msgid "Ollama instance was shut down due to inactivity"
@@ -2629,11 +2673,11 @@ msgstr "Ollama a été désactivée faute d'activitée"
 
 #: src/connection_handler.py:132
 msgid "Integrated Ollama instance is running"
-msgstr ""
+msgstr "L'instance intégrée d'Ollama est active"
 
 #: src/connection_handler.py:148 src/window.ui:479
 msgid "Integrated Ollama instance is not running"
-msgstr ""
+msgstr "L'instance intégrée d'Ollama est inactive"
 
 #: src/window.ui:42
 msgid "Menu"
@@ -2645,7 +2689,7 @@ msgstr "Basculer la barre latérale"
 
 #: src/window.ui:71
 msgid "Search Messages"
-msgstr ""
+msgstr "Chercher des messages"
 
 #: src/window.ui:93
 msgid "Loading Instance"
@@ -2662,11 +2706,11 @@ msgstr "Menu de la discussion"
 
 #: src/window.ui:127
 msgid "Message search bar"
-msgstr ""
+msgstr "Barre de recherche des messages"
 
 #: src/window.ui:134 src/window.ui:136
 msgid "Search messages"
-msgstr ""
+msgstr "Chercher un message"
 
 #: src/window.ui:150
 msgid ""
@@ -2777,7 +2821,7 @@ msgstr "Boite de dialogue "
 
 #: src/window.ui:496
 msgid "Terminal"
-msgstr ""
+msgstr "Terminal"
 
 #: src/window.ui:538 src/window.ui:705
 msgid "Create Model"
@@ -2819,7 +2863,7 @@ msgstr ""
 
 #: src/window.ui:670
 msgid "Model Details"
-msgstr ""
+msgstr "Détails du modèle"
 
 #: src/window.ui:733
 msgid "Base"
@@ -3021,7 +3065,7 @@ msgstr "Discussion importée avec succès"
 
 #: src/custom_widgets/message_widget.py:53
 msgid "Save Message"
-msgstr ""
+msgstr "Sauvegarder le message"
 
 #: src/custom_widgets/message_widget.py:87
 msgid "Message edited successfully"
@@ -3051,7 +3095,7 @@ msgstr "Copier le message"
 #: src/custom_widgets/message_widget.py:162
 #: src/custom_widgets/message_widget.py:184
 msgid "Run Script"
-msgstr ""
+msgstr "Lancer le script"
 
 #: src/custom_widgets/message_widget.py:177
 msgid "Code copied to the clipboard"
@@ -3062,10 +3106,12 @@ msgid ""
 "Make sure you understand what this script does before running it, Alpaca is "
 "not responsible for any damages to your device or data"
 msgstr ""
+"Assurez-vous de ce que le script effectue avant de le lancer. Alpaca n'est "
+"pas responsable des dommages causés à votre appareil ou à vos données.\t"
 
 #: src/custom_widgets/message_widget.py:187
 msgid "Execute"
-msgstr ""
+msgstr "Exécuter"
 
 #: src/custom_widgets/message_widget.py:270
 #: src/custom_widgets/message_widget.py:272
@@ -3120,7 +3166,7 @@ msgstr "Arrêter"
 
 #: src/custom_widgets/model_widget.py:315
 msgid "Details"
-msgstr ""
+msgstr "Détails"
 
 #: src/custom_widgets/model_widget.py:325
 msgid "Remove '{}'"
@@ -3132,31 +3178,31 @@ msgstr "Supprimer le modèle ?"
 
 #: src/custom_widgets/model_widget.py:362
 msgid "Create Model Based on '{}'"
-msgstr ""
+msgstr "Créer un modèle basé sur '{}'"
 
 #: src/custom_widgets/model_widget.py:378
 msgid "Modified At"
-msgstr ""
+msgstr "Modifié à"
 
 #: src/custom_widgets/model_widget.py:379
 msgid "Parent Model"
-msgstr ""
+msgstr "Modèle parent"
 
 #: src/custom_widgets/model_widget.py:380
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 #: src/custom_widgets/model_widget.py:381
 msgid "Family"
-msgstr ""
+msgstr "Famille"
 
 #: src/custom_widgets/model_widget.py:382
 msgid "Parameter Size"
-msgstr ""
+msgstr "Taille de paramètre"
 
 #: src/custom_widgets/model_widget.py:383
 msgid "Quantization Level"
-msgstr ""
+msgstr "Niveau de quantification"
 
 #: src/custom_widgets/model_widget.py:449
 msgid "Image Recognition"
@@ -3212,15 +3258,15 @@ msgstr "Accepter"
 
 #: src/custom_widgets/terminal_widget.py:64
 msgid "Setting up Python environment..."
-msgstr ""
+msgstr "Paramétrage de l'environnement Python..."
 
 #: src/custom_widgets/terminal_widget.py:75
 msgid "Script exited"
-msgstr ""
+msgstr "Script terminé"
 
 #: src/custom_widgets/terminal_widget.py:86
 msgid "The script is contained inside Flatpak"
-msgstr ""
+msgstr "Le script est conteneurisé dans Flatpak"
 
 #~ msgid "Select a Model"
 #~ msgstr "Sélectionnez un modèle"
