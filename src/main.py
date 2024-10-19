@@ -40,6 +40,7 @@ translators = [
     'Louis Chauvet-Villaret (French) https://github.com/loulou64490',
     'Théo FORTIN (French) https://github.com/topiga',
     'Daimar Stein (Brazilian Portuguese) https://github.com/not-a-dev-stein',
+    'Bruno Antunes (Brazilian Portuguese) https://github.com/antun3s',
     'CounterFlow64 (Norwegian) https://github.com/CounterFlow64',
     'Aritra Saha (Bengali) https://github.com/olumolu',
     'Yuehao Sui (Simplified Chinese) https://github.com/8ar10der',
