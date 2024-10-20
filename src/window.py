@@ -758,8 +758,8 @@ Generate a title following these rules:
                 self.show_toast(_("This video does not have any transcriptions"), self.main_overlay)
                 return
 
-            if not any(filter(lambda x: '(en' in x and 'auto-generated' not in x, transcriptions)):
-                transcriptions.insert(0, 'English (translate:en)')
+            if not any(filter(lambda x: '(en' in x and 'auto-generated' not in x and len(transcriptions) > 1, transcriptions)):
+                transcriptions.insert(1, 'English (translate:en)')
 
             dialog_widget.simple_dropdown(
                 _('Attach YouTube Video?'),
