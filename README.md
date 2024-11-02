@@ -73,21 +73,21 @@ Note: This is not recommended since the prerelease versions of the app often pre
 
 ## Translators
 
-Language               | Contributors
-:----------------------|:-----------
-🇷🇺 Russian              | [Alex K](https://github.com/alexkdeveloper)
-🇪🇸 Spanish              | [Jeffry Samuel](https://github.com/jeffser)
-🇫🇷 French               | [Louis Chauvet-Villaret](https://github.com/loulou64490) , [Théo FORTIN](https://github.com/topiga)
-🇧🇷 Brazilian Portuguese | [Daimar Stein](https://github.com/not-a-dev-stein) , [Bruno Antunes](https://github.com/antun3s)
-🇳🇴 Norwegian            | [CounterFlow64](https://github.com/CounterFlow64)
-🇮🇳 Bengali              | [Aritra Saha](https://github.com/olumolu)
-🇨🇳 Simplified Chinese   | [Yuehao Sui](https://github.com/8ar10der) , [Aleksana](https://github.com/Aleksanaa)
-🇮🇳 Hindi                | [Aritra Saha](https://github.com/olumolu)
-🇹🇷 Turkish              | [YusaBecerikli](https://github.com/YusaBecerikli)
-🇺🇦 Ukrainian            | [Simon](https://github.com/OriginalSimon)
-🇩🇪 German               | [Marcel Margenberg](https://github.com/MehrzweckMandala)
-🇮🇱 Hebrew               | [Yosef Or Boczko](https://github.com/yoseforb)
-🇮🇳 Telugu               | [Aryan Karamtoth](https://github.com/SpaciousCoder78)
+Language                               | Contributors
+:--------------------------------------|:-----------
+🇮🇳 bn-IN বাংলা (ভারত)           | [Aritra Saha](https://github.com/olumolu)
+🇩🇪 de-DE Deutsch (Deutschland)         | [Marcel Margenberg](https://github.com/MehrzweckMandala)
+🇪🇸 es-ES Español (españa)              | [Jeffry Samuel](https://github.com/jeffser)
+🇫🇷 fr-FR Français (France)             | [Louis Chauvet-Villaret](https://github.com/loulou64490) , [Théo FORTIN](https://github.com/topiga)
+🇮🇱 he-IL עברית (ישראל)                 | [Yosef Or Boczko](https://github.com/yoseforb)
+🇮🇳 hi-IN हिन्दी (भारत)         | [Aritra Saha](https://github.com/olumolu)
+🇳🇴 no-NO Norsk (Norge)                 | [CounterFlow64](https://github.com/CounterFlow64)
+🇧🇷 pt-BR Português (Brasil)            | [Daimar Stein](https://github.com/not-a-dev-stein) , [Bruno Antunes](https://github.com/antun3s)
+🇷🇺 ru-RU Русский (Россия)              | [Alex K](https://github.com/alexkdeveloper)
+🇮🇳 te-IN తెలుగు (భారతదేశం)  | [Aryan Karamtoth](https://github.com/SpaciousCoder78)
+🇹🇷 tr-TR Türkçe (Türkiye)              | [YusaBecerikli](https://github.com/YusaBecerikli)
+🇺🇦 uk-UA Українська (Україна)          | [Simon](https://github.com/OriginalSimon)
+🇨🇳 zh-CN 中文（简体，中国）               | [Yuehao Sui](https://github.com/8ar10der) , [Aleksana](https://github.com/Aleksanaa)
 
 Want to add a language? Visit [this discussion](https://github.com/Jeffser/Alpaca/discussions/153) to get started!
 
