@@ -143,7 +143,7 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "User messages are now compacted into bubbles"
-msgstr ""
+msgstr "Mensajes de usuario ahora son compactados en burbujas"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
@@ -170,10 +170,12 @@ msgstr "Arreglos"
 msgid ""
 "Fixed re connection dialog not working when 'use local instance' is selected"
 msgstr ""
+"Dialogo de reconnexión arreglado: no funciona cuando 'usar instancia local' "
+"es seleccionado"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Fixed model manager not adapting to large system fonts"
-msgstr ""
+msgstr "Arreglado gestor de modelos no adaptandose a fuentes de sistema grandes"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Details page for models"
@@ -1617,7 +1619,7 @@ msgstr ""
 
 #: src/window.py:772
 msgid "Error attaching video, please try again"
-msgstr ""
+msgstr "Error adjuntando video, por favor intenta denuevo"
 
 #: src/window.py:792
 msgid "Attach Website? (Experimental)"
@@ -1709,6 +1711,8 @@ msgid ""
 "Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
 "generative models in 11B and 90B sizes."
 msgstr ""
+"Llama 3.2 Vision es una colección de modelos generativos de razonamiento de "
+"imágenes ajustados por instrucciones en tamaños 11B y 90B."
 
 #: src/available_models_descriptions.py:4
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
@@ -2285,6 +2289,8 @@ msgid ""
 "A large language model built by the Technology Innovation Institute (TII) "
 "for use in summarization, text generation, and chat bots."
 msgstr ""
+"Un modelo de lenguaje grande creado por el Instituto de Innovación "
+"Tecnológica (TII) para su uso en resúmenes, generación de texto y chat bots."
 
 #: src/available_models_descriptions.py:82
 msgid ""
@@ -2437,6 +2443,9 @@ msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
 msgstr ""
+"Llama-3.1-Nemotron-70B-Instruct es un modelo de lenguaje grande "
+"personalizado por NVIDIA para mejorar la utilidad de las respuestas "
+"generadas por LLM a las consultas de los usuarios."
 
 #: src/available_models_descriptions.py:103
 msgid "Uncensored Llama2 based model with support for a 16K context window."
@@ -2521,6 +2530,10 @@ msgid ""
 "cases and support for retrieval augmented generation (RAG), streamlining "
 "code generation, translation and bug fixing."
 msgstr ""
+"Los modelos IBM Granite 2B y 8B están diseñados para soportar casos de uso "
+"basados ​​en herramientas y soporte para generación aumentada de recuperación "
+"(RAG), agilizando la generación de código, la traducción y la corrección de "
+"errores."
 
 #: src/available_models_descriptions.py:114
 msgid ""
@@ -2585,6 +2598,8 @@ msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
+"Los modelos IBM Granite 1B y 3B son la primera mezcla de modelos Granite de "
+"expertos (MoE) de IBM diseñados para un uso de baja latencia."
 
 #: src/available_models_descriptions.py:123
 msgid ""
@@ -2599,6 +2614,8 @@ msgid ""
 "SmolLM2 is a family of compact language models available in three size: "
 "135M, 360M, and 1.7B parameters."
 msgstr ""
+"SmolLM2 es una familia de modelos de lenguaje compactos disponibles en "
+"tres tamaños: 135M, 360M y 1.7B de parámetros."
 
 #: src/available_models_descriptions.py:125
 msgid ""
@@ -2613,6 +2630,8 @@ msgid ""
 "Cohere For AI's language models trained to perform well across 23 different "
 "languages."
 msgstr ""
+"Cohere Para modelos de lenguaje de IA entrenados para funcionar bien en "
+"23 idiomas diferentes."
 
 #: src/available_models_descriptions.py:127
 msgid "Embedding model from BAAI mapping texts to vectors."
@@ -2630,6 +2649,9 @@ msgid ""
 "text prompt input and text output responses against a set of defined safety "
 "policies."
 msgstr ""
+"ShieldGemma es un conjunto de modelos de instrucciones optimizados para "
+"evaluar la seguridad de las respuestas de entrada y salida de texto frente "
+"a un conjunto de políticas de seguridad definidas."
 
 #: src/available_models_descriptions.py:130
 msgid ""
@@ -2644,6 +2666,8 @@ msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
 msgstr ""
+"Llama Guard 3 es una serie de modelos optimizados para la clasificación de "
+"seguridad de contenido de entradas y respuestas LLM."
 
 #: src/available_models_descriptions.py:132
 msgid ""
@@ -2658,18 +2682,24 @@ msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
 msgstr ""
+"OpenCoder es una familia LLM de código abierto y reproducible que incluye "
+"modelos 1.5B y 8B y admite chat en los idiomas inglés y chino."
 
 #: src/available_models_descriptions.py:134
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
 msgstr ""
+"Los modelos IBM Granite Guardian 3.0 2B y 8B están diseñados para detectar "
+"riesgos en indicaciones y/o respuestas."
 
 #: src/available_models_descriptions.py:135
 msgid ""
 "Athene-V2 is a 72B parameter model which excels at code completion, "
 "mathematics, and log extraction tasks."
 msgstr ""
+"Athene-V2 es un modelo de parámetros 72B que se destaca en tareas de "
+"finalización de código, matemáticas y extracción de registros."
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
