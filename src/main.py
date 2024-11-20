@@ -115,9 +115,9 @@ def main(version):
     )
 
     parser.add_argument('--version', action='store_true', help='Display the application version and exit.')
-    parser.add_argument('--new-chat', type=str, help="Start a new chat with the specified title.")
+    parser.add_argument('--new-chat', type=str, metavar='"CHAT"', help="Start a new chat with the specified title.")
     parser.add_argument('--list-chats', action='store_true', help='Display all the current chats')
-    parser.add_argument('--select-chat', type=str, help="Select a chat on launch")
+    parser.add_argument('--select-chat', type=str, metavar='"CHAT"', help="Select a chat on launch")
     args = parser.parse_args()
 
     if args.version:
