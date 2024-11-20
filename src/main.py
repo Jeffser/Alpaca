@@ -121,7 +121,7 @@ def main(version):
     args = parser.parse_args()
 
     if args.version:
-        print(f"Alpaca version {version}")  # Replace with dynamic version if needed
+        print(f"Alpaca version {version}")
         sys.exit(0)
 
     if args.list_chats:
