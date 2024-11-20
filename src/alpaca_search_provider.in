@@ -1,0 +1,80 @@
+#!/usr/bin/python3
+
+import sys
+import subprocess
+from pydbus import SessionBus
+from gi.repository import GLib
+
+class AlpacaSearchProvider:
+    """
+    <node>
+        <interface name='org.gnome.Shell.SearchProvider2'>
+            <method name='GetInitialResultSet'>
+                <arg type='as' name='terms' direction='in'/>
+                <arg type='as' name='results' direction='out'/>
+            </method>
+            <method name='GetSubsearchResultSet'>
+                <arg type='as' name='previousResults' direction='in'/>
+                <arg type='as' name='terms' direction='in'/>
+                <arg type='as' name='results' direction='out'/>
+            </method>
+            <method name='ActivateResult'>
+                <arg type='s' name='identifier' direction='in'/>
+                <arg type='as' name='terms' direction='in'/>
+                <arg type='u' name='uid' direction='in'/>
+            </method>
+            <method name='GetResultMetas'>
+                <arg type='as' name='identifiers' direction='in'/>
+                <arg type='aa{sv}' name='metas' direction='out'/>
+            </method>
+        </interface>
+    </node>
+    """
+
+    descriptions = {
+        "open": _('Open chat'),
+        "create": _('Create chat'),
+        "ask": _('Create chat and send message')
+    }
+
+    def GetInitialResultSet(self, terms):
+        results = self.search_chats(terms)
+        return results
+
+    def GetSubsearchResultSet(self, previousResults, terms):
+        results = self.search_chats(terms)
+        return results
+
+    def ActivateResult(self, identifier, terms, uid=None):
+        if identifier.split(':')[0] == 'open':
+            subprocess.Popen(['alpaca', '--select-chat', ':'.join(identifier.split(':')[1:])])
+        elif identifier.split(':')[0] == 'create':
+            subprocess.Popen(['alpaca', '--new-chat', ':'.join(identifier.split(':')[1:])])
+        elif identifier.split(':')[0] == 'ask':
+            subprocess.Popen(['alpaca', '--ask', ':'.join(identifier.split(':')[1:])])
+
+    def search_chats(self, terms):
+        query = ' '.join(terms)
+        output = subprocess.check_output(['alpaca', '--list-chats'])
+        chats = output.decode().splitlines()
+        results = [f'open:{chat}' for chat in chats if query.lower() in chat.lower()]
+        results.append(f'create:{query}')
+        results.append(f'ask:{query}')
+        return results
+
+    def GetResultMetas(self, identifiers):
+        results = []
+        for identifier in identifiers:
+            metas = {
+                "id": GLib.Variant("s", identifier),
+                "name": GLib.Variant("s", ':'.join(identifier.split(':')[1:])),
+                "description": GLib.Variant("s", self.descriptions[identifier.split(':')[0]]),
+                "gicon": GLib.Variant("s", "com.jeffser.Alpaca")
+            }
+            results.append(metas)
+        return results
+
+bus = SessionBus()
+bus.publish("com.jeffser.Alpaca.SearchProvider", AlpacaSearchProvider())
+loop = GLib.MainLoop()
+loop.run()

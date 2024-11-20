@@ -164,6 +164,20 @@
 		}
 	    ]
 	},
+	{
+	    "name": "python3-pydbus",
+	    "buildsystem": "simple",
+	    "build-commands": [
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"pydbus\" --no-build-isolation"
+	    ],
+	    "sources": [
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/92/56/27148014c2f85ce70332f18612f921f682395c7d4e91ec103783be4fce00/pydbus-0.6.0-py2.py3-none-any.whl",
+		    "sha256": "66b80106352a718d80d6c681dc2a82588048e30b75aab933e4020eb0660bf85e"
+		}
+	    ]
+	},
         {
             "name": "ollama",
             "buildsystem": "simple",
