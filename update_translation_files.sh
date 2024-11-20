@@ -28,3 +28,5 @@ echo "Updating Hebrew"
 msgmerge --no-fuzzy-matching -U po/he.po po/alpaca.pot
 echo "Updating Telugu"
 msgmerge --no-fuzzy-matching -U po/te.po po/alpaca.pot
+echo "Updating Italian"
+msgmerge --no-fuzzy-matching -U po/it.po po/alpaca.pot
