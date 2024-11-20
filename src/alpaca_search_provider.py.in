@@ -3,10 +3,23 @@
 import sys
 import subprocess
 import gettext
+import os
+import json
 from pydbus import SessionBus
-from gi.repository import GLib
+from gi.repository import GLib, Gio
 
 _ = gettext.gettext
+
+def get_data_dir() -> str:
+    env = 'XDG_DATA_HOME'
+    default = '~/.local/share'
+    if bool(os.getenv("FLATPAK_ID")):
+        return os.getenv(env)
+    base = os.getenv(env) or os.path.expanduser(default)
+    path = os.path.join(base, APP_ID)
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path
 
 class AlpacaSearchProvider:
     """
@@ -34,10 +47,10 @@ class AlpacaSearchProvider:
     </node>
     """
 
-    descriptions = {
-        "open": _('Open chat'),
-        "create": _('Create chat'),
-        "ask": _('Create chat and send message')
+    opts = {
+        "open": {'description': _('Open chat'), 'option': '--select-chat'},
+        "create": {'description': _('Create chat'), 'option': '--new-chat'},
+        "ask": {'description': _('Create chat and send message'), 'option': '--ask'}
     }
 
     def GetInitialResultSet(self, terms):
@@ -49,18 +62,22 @@ class AlpacaSearchProvider:
         return results
 
     def ActivateResult(self, identifier, terms, uid=None):
-        if identifier.split(':')[0] == 'open':
-            subprocess.Popen(['alpaca', '--select-chat', ':'.join(identifier.split(':')[1:])])
-        elif identifier.split(':')[0] == 'create':
-            subprocess.Popen(['alpaca', '--new-chat', ':'.join(identifier.split(':')[1:])])
-        elif identifier.split(':')[0] == 'ask':
-            subprocess.Popen(['alpaca', '--ask', ':'.join(identifier.split(':')[1:])])
+        argv = ['alpaca', self.opts[identifier.split(':')[0]]['option'], ':'.join(identifier.split(':')[1:])]
+        (pid, _stdin, _stdout, _stderr) = GLib.spawn_async(
+            argv,
+            flags=GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+            standard_input=False,
+            standard_output=False,
+            standard_error=False
+        )
+        GLib.spawn_close_pid(pid)
 
     def search_chats(self, terms):
-        if 'alpaca' not in subprocess.run(['ps', 'aux'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True).stdout.lower():
+        if os.path.exists(os.path.join(get_data_dir(), "chats", "chats.json")):
+            with open(os.path.join(get_data_dir(), "chats", "chats.json"), "r", encoding="utf-8") as f:
+                data = json.load(f)
+                chats = list(data['chats'].keys())
             query = ' '.join(terms)
-            output = subprocess.check_output(['alpaca', '--list-chats'])
-            chats = output.decode().splitlines()
             results = [f'open:{chat}' for chat in chats if query.lower() in chat.lower()]
             results.append(f'create:{query}')
             results.append(f'ask:{query}')
@@ -73,7 +90,7 @@ class AlpacaSearchProvider:
             metas = {
                 "id": GLib.Variant("s", identifier),
                 "name": GLib.Variant("s", ':'.join(identifier.split(':')[1:])),
-                "description": GLib.Variant("s", self.descriptions[identifier.split(':')[0]]),
+                "description": GLib.Variant("s", self.opts[identifier.split(':')[0]]['description']),
                 "gicon": GLib.Variant("s", "com.jeffser.Alpaca")
             }
             results.append(metas)
