@@ -27,7 +27,7 @@ configure_file(
 )
 
 configure_file(
-  input: 'alpaca_search_provider.in',
+  input: 'alpaca_search_provider.py.in',
   output: 'alpaca_search_provider',
   configuration: conf,
   install: true,
