@@ -65,6 +65,7 @@ class AlpacaSearchProvider:
             results.append(f'create:{query}')
             results.append(f'ask:{query}')
             return results
+        return []
 
     def GetResultMetas(self, identifiers):
         results = []
