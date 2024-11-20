@@ -908,6 +908,12 @@ Generate a title following these rules:
         self.instance_page.set_sensitive(True)
         self.get_application().lookup_action('manage_models').set_enabled(True)
 
+        if self.get_application().args.ask:
+            self.chat_list_box.new_chat()
+            GLib.idle_add(self.message_text_view.get_buffer().insert_at_cursor, self.get_application().args.ask, len(self.get_application().args.ask.encode('utf-8')))
+            time.sleep(1)
+            self.send_message()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.message_searchbar.connect('notify::search-mode-enabled', lambda *_: self.message_search_button.set_active(self.message_searchbar.get_search_mode()))

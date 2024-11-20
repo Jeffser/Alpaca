@@ -117,7 +117,8 @@ def main(version):
     parser.add_argument('--version', action='store_true', help='Display the application version and exit.')
     parser.add_argument('--new-chat', type=str, metavar='"CHAT"', help="Start a new chat with the specified title.")
     parser.add_argument('--list-chats', action='store_true', help='Display all the current chats')
-    parser.add_argument('--select-chat', type=str, metavar='"CHAT"', help="Select a chat on launch")
+    parser.add_argument('--select-chat', type=str, metavar='"CHAT"', help="Select a chat on launch"),
+    parser.add_argument('--ask', type=str, metavar='"MESSAGE"', help="Create chat and send message")
     args = parser.parse_args()
 
     if args.version:
@@ -137,9 +138,6 @@ def main(version):
         if os.path.exists(os.path.join(data_dir, "chats")):
             with open(os.path.join(data_dir, "chats", "selected_chat.txt"), "w+", encoding="utf-8") as f:
                 f.write(args.select_chat)
-
-    if args.new_chat:
-        print(f"Starting a new chat with title: {args.new_chat}")
 
     app = AlpacaApplication(version)
     logger.info(f"Alpaca version: {app.version}")
