@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alpaca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-20 12:11-0600\n"
+"POT-Creation-Date: 2024-11-20 12:31-0600\n"
 "PO-Revision-Date: 2024-09-16 14:07+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
@@ -2868,6 +2868,18 @@ msgstr "הדבקה"
 #: src/window.ui:1200
 msgid "Insert new line"
 msgstr "הוספת שורה חדשה"
+
+#: src/alpaca_search_provider.py.in:38
+msgid "Open chat"
+msgstr ""
+
+#: src/alpaca_search_provider.py.in:39
+msgid "Create chat"
+msgstr ""
+
+#: src/alpaca_search_provider.py.in:40
+msgid "Create chat and send message"
+msgstr ""
 
 #: src/generic_actions.py:68
 msgid "An error occurred while extracting text from the website"

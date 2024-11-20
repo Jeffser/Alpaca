@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-20 12:11-0600\n"
+"POT-Creation-Date: 2024-11-20 12:31-0600\n"
 "PO-Revision-Date: 2024-05-19 19:44-0600\n"
 "Last-Translator: Jeffry Samuel Eduarte Rojas <jeffrysamuer@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -175,7 +175,8 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Fixed model manager not adapting to large system fonts"
-msgstr "Arreglado gestor de modelos no adaptandose a fuentes de sistema grandes"
+msgstr ""
+"Arreglado gestor de modelos no adaptandose a fuentes de sistema grandes"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Details page for models"
@@ -2614,8 +2615,8 @@ msgid ""
 "SmolLM2 is a family of compact language models available in three size: "
 "135M, 360M, and 1.7B parameters."
 msgstr ""
-"SmolLM2 es una familia de modelos de lenguaje compactos disponibles en "
-"tres tamaños: 135M, 360M y 1.7B de parámetros."
+"SmolLM2 es una familia de modelos de lenguaje compactos disponibles en tres "
+"tamaños: 135M, 360M y 1.7B de parámetros."
 
 #: src/available_models_descriptions.py:125
 msgid ""
@@ -2630,8 +2631,8 @@ msgid ""
 "Cohere For AI's language models trained to perform well across 23 different "
 "languages."
 msgstr ""
-"Cohere Para modelos de lenguaje de IA entrenados para funcionar bien en "
-"23 idiomas diferentes."
+"Cohere Para modelos de lenguaje de IA entrenados para funcionar bien en 23 "
+"idiomas diferentes."
 
 #: src/available_models_descriptions.py:127
 msgid "Embedding model from BAAI mapping texts to vectors."
@@ -2650,8 +2651,8 @@ msgid ""
 "policies."
 msgstr ""
 "ShieldGemma es un conjunto de modelos de instrucciones optimizados para "
-"evaluar la seguridad de las respuestas de entrada y salida de texto frente "
-"a un conjunto de políticas de seguridad definidas."
+"evaluar la seguridad de las respuestas de entrada y salida de texto frente a "
+"un conjunto de políticas de seguridad definidas."
 
 #: src/available_models_descriptions.py:130
 msgid ""
@@ -3080,6 +3081,18 @@ msgstr "Pegar"
 #: src/window.ui:1200
 msgid "Insert new line"
 msgstr "Saltar línea"
+
+#: src/alpaca_search_provider.py.in:38
+msgid "Open chat"
+msgstr ""
+
+#: src/alpaca_search_provider.py.in:39
+msgid "Create chat"
+msgstr ""
+
+#: src/alpaca_search_provider.py.in:40
+msgid "Create chat and send message"
+msgstr ""
 
 #: src/generic_actions.py:68
 msgid "An error occurred while extracting text from the website"
