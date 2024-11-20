@@ -57,13 +57,14 @@ class AlpacaSearchProvider:
             subprocess.Popen(['alpaca', '--ask', ':'.join(identifier.split(':')[1:])])
 
     def search_chats(self, terms):
-        query = ' '.join(terms)
-        output = subprocess.check_output(['alpaca', '--list-chats'])
-        chats = output.decode().splitlines()
-        results = [f'open:{chat}' for chat in chats if query.lower() in chat.lower()]
-        results.append(f'create:{query}')
-        results.append(f'ask:{query}')
-        return results
+        if 'alpaca' not in subprocess.run(['ps', 'aux'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True).stdout.lower():
+            query = ' '.join(terms)
+            output = subprocess.check_output(['alpaca', '--list-chats'])
+            chats = output.decode().splitlines()
+            results = [f'open:{chat}' for chat in chats if query.lower() in chat.lower()]
+            results.append(f'create:{query}')
+            results.append(f'ask:{query}')
+            return results
 
     def GetResultMetas(self, identifiers):
         results = []
