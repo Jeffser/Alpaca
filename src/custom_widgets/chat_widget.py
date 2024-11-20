@@ -316,8 +316,8 @@ class chat_list(Gtk.ListBox):
         window.chat_list_box.select_row(tab)
         return chat_window
 
-    def new_chat(self):
-        window.save_history(self.prepend_chat(_("New Chat")))
+    def new_chat(self, chat_title:str=_("New Chat")):
+        window.save_history(self.prepend_chat(chat_title))
 
     def delete_chat(self, chat_name:str):
         chat_tab = None

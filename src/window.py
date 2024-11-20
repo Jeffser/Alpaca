@@ -874,6 +874,9 @@ Generate a title following these rules:
         #Chat History
         self.load_history()
 
+        if self.get_application().args.new_chat:
+            self.chat_list_box.new_chat(self.get_application().args.new_chat)
+
         #Instance
         self.ollama_instance = connection_handler.instance(local_port, remote_url, remote, tweaks, overrides, bearer_token, idle_timer_delay)
 

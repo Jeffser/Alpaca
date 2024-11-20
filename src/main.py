@@ -31,6 +31,7 @@ from .internal import cache_dir, data_dir
 import sys
 import logging
 import os
+import argparse
 
 logger = logging.getLogger(__name__)
 
@@ -52,6 +53,8 @@ translators = [
     'Edoardo Brogiolo (Italian) https://github.com/edo0'
 ]
 
+parser = argparse.ArgumentParser(description="Alpaca")
+
 class AlpacaApplication(Adw.Application):
     """The main application singleton class."""
 
@@ -63,6 +66,7 @@ class AlpacaApplication(Adw.Application):
         self.create_action('about', self.on_about_action)
         self.set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.version = version
+        self.args = parser.parse_args()
 
     def do_activate(self):
         win = self.props.active_window
@@ -108,6 +112,18 @@ def main(version):
         level=logging.INFO,
         handlers=[logging.FileHandler(filename=os.path.join(data_dir, 'tmp.log')), logging.StreamHandler(stream=sys.stdout)]
     )
+
+    parser.add_argument('--version', action='store_true', help='Display the application version and exit.')
+    parser.add_argument('--new-chat', type=str, help="Start a new chat with the specified title.")
+    args = parser.parse_args()
+
+    if args.version:
+        print(f"Alpaca version {version}")  # Replace with dynamic version if needed
+        sys.exit(0)
+
+    if args.new_chat:
+        print(f"Starting a new chat with title: {args.new_chat}")
+
     app = AlpacaApplication(version)
     logger.info(f"Alpaca version: {app.version}")
-    return app.run(sys.argv)
+    return app.run([])
