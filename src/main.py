@@ -96,7 +96,7 @@ class AlpacaService:
 
     def Ask(self, message:str):
         time.sleep(1)
-        self.app.props.active_window.quick_chat(message, self.app.props.active_window)
+        self.app.props.active_window.quick_chat(message)
 
 class AlpacaApplication(Adw.Application):
     """The main application singleton class."""

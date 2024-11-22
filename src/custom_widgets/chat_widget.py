@@ -166,8 +166,6 @@ class chat(Gtk.ScrolledWindow):
             self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
 
     def messages_to_dict(self) -> dict:
-        print(self.get_name())
-        print(self.messages)
         messages_dict = {}
         for message_id, message_element in self.messages.items():
             if message_element.text and message_element.dt:
