@@ -455,5 +455,7 @@ class chat_list(Gtk.ListBox):
                 if len(row.chat_window.messages) > 0:
                     last_model_used = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
                     window.model_manager.change_model(last_model_used)
+                else:
+                    window.model_manager.change_model(window.convert_model_name(window.default_model_list.get_string(window.default_model_combo.get_selected()), 1))
                 if row.indicator.get_visible():
                     row.indicator.set_visible(False)

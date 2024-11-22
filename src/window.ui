@@ -323,6 +323,21 @@
                   <property name="title" translatable="yes">Show Power Saver Warning</property>
                 </object>
               </child>
+              <child>
+                <object class="AdwComboRow" id="default_model_combo">
+                  <signal name="notify::selected" handler="changed_default_model"/>
+                  <property name="name">default_model</property>
+                  <property name="title" translatable="yes">Default Model</property>
+                  <property name="subtitle" translatable="yes">The default model to use on new chats and when Alpaca is launched with the option --ask "message"</property>
+                  <property name="model">
+                    <object class="GtkStringList" id="default_model_list">
+                      <items>
+
+                      </items>
+                    </object>
+                  </property>
+                </object>
+              </child>
             </object>
           </child>
           <child>

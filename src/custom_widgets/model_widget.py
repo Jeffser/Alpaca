@@ -570,6 +570,7 @@ class model_manager_container(Gtk.Box):
         if not self.local_list.get_visible():
             self.local_list.set_visible(True)
         self.model_selector.add_model(model_name)
+        window.default_model_list.append(window.convert_model_name(model_name, 0))
 
     def remove_local_model(self, model_name:str):
         logger.debug("Deleting model")
@@ -578,6 +579,10 @@ class model_manager_container(Gtk.Box):
         if response.status_code == 200:
             self.local_list.remove_model(model_name)
             self.model_selector.remove_model(model_name)
+            try:
+                window.default_model_list.remove(window.default_model_list.find(model_name))
+            except:
+                pass
             if len(self.get_model_list()) == 0:
                 self.local_list.set_visible(False)
                 window.chat_list_box.update_welcome_screens(False)
@@ -599,15 +604,21 @@ class model_manager_container(Gtk.Box):
         try:
             response = window.ollama_instance.request("GET", "api/tags")
             if response.status_code == 200:
+                threads = []
                 self.model_selector.popover.model_list_box.remove_all()
                 self.local_list.remove_all()
+                window.default_model_list.splice(0, len(list(window.default_model_list)), None)
                 data = json.loads(response.text)
                 if len(data['models']) == 0:
                     self.local_list.set_visible(False)
                 else:
                     self.local_list.set_visible(True)
                     for model in data['models']:
-                        threading.Thread(target=self.add_local_model, args=(model['name'], )).start()
+                        thread = threading.Thread(target=self.add_local_model, args=(model['name'], ))
+                        thread.start()
+                        threads.append(thread)
+                for thread in threads:
+                    thread.join()
             else:
                 window.connection_error()
         except Exception as e:
