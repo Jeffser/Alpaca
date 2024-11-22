@@ -43,7 +43,7 @@ possible_prompts = [
 class chat(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaChat'
 
-    def __init__(self, name:str):
+    def __init__(self, name:str, quick_chat:bool=False):
         self.container = Gtk.Box(
             orientation=1,
             hexpand=True,
@@ -73,6 +73,7 @@ class chat(Gtk.ScrolledWindow):
         self.welcome_screen = None
         self.regenerate_button = None
         self.busy = False
+        self.quick_chat = quick_chat
         #self.get_vadjustment().connect('notify::page-size', lambda va, *_: va.set_value(va.get_upper() - va.get_page_size()) if va.get_value() == 0 else None)
         ##TODO Figure out how to do this with the search thing
 
@@ -159,12 +160,14 @@ class chat(Gtk.ScrolledWindow):
                         for file_name, file_type in message_data['files'].items():
                             files[os.path.join(data_dir, "chats", self.get_name(), message_id, file_name)] = file_type
                         message_element.add_attachments(files)
-                    GLib.idle_add(message_element.set_text, message_data['content'])
-                    GLib.idle_add(message_element.add_footer, datetime.datetime.strptime(message_data['date'] + (":00" if message_data['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
+                    message_element.set_text(message_data['content'])
+                    message_element.add_footer(datetime.datetime.strptime(message_data['date'] + (":00" if message_data['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
         else:
             self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
 
     def messages_to_dict(self) -> dict:
+        print(self.get_name())
+        print(self.messages)
         messages_dict = {}
         for message_id, message_element in self.messages.items():
             if message_element.text and message_element.dt:

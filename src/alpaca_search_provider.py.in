@@ -49,8 +49,7 @@ class AlpacaSearchProvider:
 
     opts = {
         "open": {'description': _('Open chat'), 'option': '--select-chat'},
-        "create": {'description': _('Create chat'), 'option': '--new-chat'},
-        "ask": {'description': _('Create chat and send message'), 'option': '--ask'}
+        "ask": {'description': _('Quick chat'), 'option': '--ask'}
     }
 
     def GetInitialResultSet(self, terms):
@@ -69,8 +68,6 @@ class AlpacaSearchProvider:
                 raise Exception('Alpaca not running')
             if identifier.split(':')[0] == 'open':
                 app_service.Open(':'.join(identifier.split(':')[1:]))
-            elif identifier.split(':')[0] == 'create':
-                app_service.Create(':'.join(identifier.split(':')[1:]))
             elif identifier.split(':')[0] == 'ask':
                 app_service.Ask(':'.join(identifier.split(':')[1:]))
         except:
@@ -95,7 +92,6 @@ class AlpacaSearchProvider:
                 results = [f'open:{chat}' for chat in chats if query.lower() in chat.lower()]
             except:
                 pass
-        results.append(f'create:{query}')
         results.append(f'ask:{query}')
         return results
 

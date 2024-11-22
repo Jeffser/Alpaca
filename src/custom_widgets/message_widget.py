@@ -352,7 +352,7 @@ class footer(Gtk.Label):
 class action_buttons(Gtk.Box):
     __gtype_name__ = 'AlpacaActionButtonContainer'
 
-    def __init__(self, bot:bool):
+    def __init__(self, bot:bool, include_delete:bool):
         super().__init__(
             orientation=0,
             spacing=6,
@@ -362,13 +362,14 @@ class action_buttons(Gtk.Box):
             halign="end"
         )
 
-        self.delete_button = Gtk.Button(
-            icon_name = "user-trash-symbolic",
-            css_classes = ["flat", "circular"],
-            tooltip_text = _("Remove Message")
-        )
-        self.delete_button.connect('clicked', lambda *_: self.delete_message())
-        self.append(self.delete_button)
+        if include_delete:
+            self.delete_button = Gtk.Button(
+                icon_name = "user-trash-symbolic",
+                css_classes = ["flat", "circular"],
+                tooltip_text = _("Remove Message")
+            )
+            self.delete_button.connect('clicked', lambda *_: self.delete_message())
+            self.append(self.delete_button)
 
         self.copy_button = Gtk.Button(
             icon_name = "edit-copy-symbolic",
@@ -501,7 +502,7 @@ class message(Gtk.Overlay):
 
     def add_action_buttons(self):
         if not self.action_buttons:
-            self.action_buttons = action_buttons(self.bot)
+            self.action_buttons = action_buttons(self.bot, not self.get_parent().get_parent().get_parent().get_parent().quick_chat)
             self.add_overlay(self.action_buttons)
             if not self.text:
                 self.action_buttons.set_visible(False)
@@ -519,26 +520,31 @@ class message(Gtk.Overlay):
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
             GLib.idle_add(self.content_children[-1].insert_at_end, data['message']['content'], False)
             if 'done' in data and data['done']:
-                window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
-                if window.chat_list_box.get_current_chat().get_name() != chat.get_name():
-                    window.chat_list_box.get_tab_by_name(chat.get_name()).indicator.set_visible(True)
-                if chat.welcome_screen:
-                    chat.container.remove(chat.welcome_screen)
-                    chat.welcome_screen = None
+                if not chat.quick_chat:
+                    window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
+                    if window.chat_list_box.get_current_chat().get_name() != chat.get_name():
+                        window.chat_list_box.get_tab_by_name(chat.get_name()).indicator.set_visible(True)
+                    if chat.welcome_screen:
+                        chat.container.remove(chat.welcome_screen)
+                        chat.welcome_screen = None
                 chat.stop_message()
                 self.text = self.content_children[-1].get_label()
                 GLib.idle_add(self.set_text, self.content_children[-1].get_label())
                 self.dt = datetime.datetime.now()
                 GLib.idle_add(self.add_footer, self.dt)
                 window.show_notification(chat.get_name(), self.text[:200] + (self.text[200:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
-                GLib.idle_add(window.save_history, chat)
+                if chat.quick_chat:
+                    GLib.idle_add(window.quick_ask_save_button.set_sensitive, True)
+                else:
+                    GLib.idle_add(window.save_history, chat)
         else:
             if self.spinner:
                 GLib.idle_add(self.container.remove, self.spinner)
                 self.spinner = None
-            chat_tab = window.chat_list_box.get_tab_by_name(chat.get_name())
-            if chat_tab.spinner:
-                GLib.idle_add(chat_tab.spinner.set_visible, False)
+            if not chat.quick_chat:
+                chat_tab = window.chat_list_box.get_tab_by_name(chat.get_name())
+                if chat_tab.spinner:
+                    GLib.idle_add(chat_tab.spinner.set_visible, False)
             sys.exit()
 
     def set_text(self, text:str=None):

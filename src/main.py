@@ -95,11 +95,8 @@ class AlpacaService:
         self.app.props.active_window.chat_list_box.new_chat(chat_name)
 
     def Ask(self, message:str):
-        self.app.props.active_window.chat_list_box.new_chat()
-        self.app.props.active_window.chat_list_box.select_row(self.app.props.active_window.chat_list_box.tab_list[0])
-        self.app.props.active_window.message_text_view.get_buffer().insert_at_cursor(message, len(message.encode('utf-8')))
         time.sleep(1)
-        self.app.props.active_window.send_message()
+        self.app.props.active_window.quick_chat(message, self.app.props.active_window)
 
 class AlpacaApplication(Adw.Application):
     """The main application singleton class."""
@@ -119,7 +116,8 @@ class AlpacaApplication(Adw.Application):
         win = self.props.active_window
         if not win:
             win = AlpacaWindow(application=self)
-        win.present()
+        if not self.args.ask:
+            win.present()
 
     def on_about_action(self, widget, _):
         about = Adw.AboutDialog(#transient_for=self.props.active_window,

@@ -489,6 +489,34 @@
       </child>
     </object>
 
+    <object class="AdwWindow" id="quick_ask">
+      <signal name="close-request" handler="closing_quick_ask"/>
+      <accessibility>
+        <property name="label" translatable="yes">Quick chat dialog</property>
+      </accessibility>
+      <property name="title" translatable="yes">Quick Chat</property>
+      <property name="width-request">400</property>
+      <property name="height-request">400</property>
+      <child>
+        <object class="AdwToolbarView">
+          <child type="top">
+            <object class="AdwHeaderBar">
+              <child type="start">
+                <object class="GtkButton" id="quick_ask_save_button">
+                  <property name="icon-name">document-save-symbolic</property>
+                  <property name="tooltip-text" translatable="yes">Save Conversation to Alpaca</property>
+                  <signal name="clicked" handler="quick_ask_save"/>
+                </object>
+              </child>
+            </object>
+          </child>
+          <property name="content">
+            <object class="AdwToastOverlay" id="quick_ask_overlay"/>
+          </property>
+        </object>
+      </child>
+    </object>
+
     <object class="AdwDialog" id="terminal_dialog">
       <accessibility>
         <property name="label" translatable="yes">Manage models dialog</property>

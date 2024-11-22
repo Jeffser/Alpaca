@@ -124,6 +124,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     terminal_scroller = Gtk.Template.Child()
     terminal_dialog = Gtk.Template.Child()
 
+    quick_ask = Gtk.Template.Child()
+    quick_ask_overlay = Gtk.Template.Child()
+    quick_ask_save_button = Gtk.Template.Child()
+
     @Gtk.Template.Callback()
     def stop_message(self, button=None):
         self.chat_list_box.get_current_chat().stop_message()
@@ -348,6 +352,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
         except Exception as e:
             pass
 
+    @Gtk.Template.Callback()
+    def quick_ask_save(self, button):
+        self.quick_ask.close()
+        chat = self.quick_ask_overlay.get_child()
+        chat_name = self.generate_numbered_name(chat.get_name(), [tab.chat_window.get_name() for tab in self.chat_list_box.tab_list])
+        new_chat = self.chat_list_box.prepend_chat(chat_name)
+        new_chat.load_chat_messages(chat.messages_to_dict())
+        self.save_history(new_chat)
+        self.present()
+
+    @Gtk.Template.Callback()
+    def closing_quick_ask(self, user_data):
+        if not self.get_visible():
+            self.close()
+
     def check_alphanumeric(self, editable, text, length, position, allowed_chars):
         new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
         if new_text != text:
@@ -382,7 +401,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         overlay.add_toast(toast)
 
     def show_notification(self, title:str, body:str, icon:Gio.ThemedIcon=None):
-        if not self.is_active():
+        if not self.is_active() and not self.quick_ask.is_active():
             logger.info(f"{title}, {body}")
             notification = Gio.Notification.new(title)
             notification.set_body(body)
@@ -866,6 +885,47 @@ Generate a title following these rules:
         elif self.ollama_instance.remote:
             threading.Thread(target=local_instance_process).start()
 
+    def run_quick_chat(self, data:dict, message_element:message_widget.message):
+        try:
+            response = self.ollama_instance.request("POST", "api/chat", json.dumps(data), lambda data, message_element=message_element: message_element.update_message(data))
+            if response.status_code != 200:
+                raise Exception('Network Error')
+        except Exception as e:
+            logger.error(e)
+            self.show_toast(_("An error occurred: {}").format(e), self.quick_ask_overlay)
+
+    def quick_chat(self, message:str):
+        self.quick_ask_save_button.set_sensitive(False)
+        self.quick_ask.present()
+        current_model = self.model_manager.get_selected_model()
+        if current_model is None:
+            self.show_toast(_("Please select a model before chatting"), self.quick_ask_overlay)
+            return
+        chat = chat_widget.chat(_('Quick Chat'), True)
+        self.quick_ask_overlay.set_child(chat)
+
+        message_id = self.generate_uuid()
+        chat.add_message(message_id, None)
+        m_element = chat.messages[message_id]
+        m_element.set_text(message)
+        m_element.add_footer(datetime.now())
+        m_element.add_action_buttons()
+
+        data = {
+            "model": current_model,
+            "messages": self.convert_history_to_ollama(chat),
+            "options": {"temperature": self.ollama_instance.tweaks["temperature"], "seed": self.ollama_instance.tweaks["seed"]},
+            "keep_alive": f"{self.ollama_instance.tweaks['keep_alive']}m",
+            "stream": True
+        }
+
+        bot_id=self.generate_uuid()
+        chat.add_message(bot_id, current_model)
+        m_element_bot = chat.messages[bot_id]
+        m_element_bot.set_text()
+        chat.busy = True
+        threading.Thread(target=self.run_quick_chat, args=(data, m_element_bot)).start()
+
     def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, save:bool):
         #Model Manager
         self.model_manager = model_widget.model_manager_container()
@@ -909,10 +969,8 @@ Generate a title following these rules:
         self.get_application().lookup_action('manage_models').set_enabled(True)
 
         if self.get_application().args.ask:
-            self.chat_list_box.new_chat()
-            GLib.idle_add(self.message_text_view.get_buffer().insert_at_cursor, self.get_application().args.ask, len(self.get_application().args.ask.encode('utf-8')))
             time.sleep(1)
-            self.send_message()
+            GLib.idle_add(self.quick_chat, self.get_application().args.ask)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
