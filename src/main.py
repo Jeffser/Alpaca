@@ -33,6 +33,9 @@ import logging
 import os
 import argparse
 import json
+import time
+
+from pydbus import SessionBus
 
 logger = logging.getLogger(__name__)
 
@@ -56,6 +59,48 @@ translators = [
 
 parser = argparse.ArgumentParser(description="Alpaca")
 
+class AlpacaService:
+    """
+    <node>
+        <interface name='com.jeffser.Alpaca'>
+            <method name='IsRunning'>
+                <arg type='s' name='result' direction='out'/>
+            </method>
+            <method name='Open'>
+                <arg type='s' name='chat' direction='in'/>
+            </method>
+            <method name='Create'>
+                <arg type='s' name='chat' direction='in'/>
+            </method>
+            <method name='Ask'>
+                <arg type='s' name='message' direction='in'/>
+            </method>
+        </interface>
+    </node>
+    """
+
+    def __init__(self, app):
+        self.app = app
+
+    def IsRunning(self):
+        return 'yeah'
+
+    def Open(self, chat_name:str):
+        print('open')
+        for chat_row in self.app.props.active_window.chat_list_box.tab_list:
+            if chat_row.chat_window.get_name() == chat_name:
+                self.app.props.active_window.chat_list_box.select_row(chat_row)
+
+    def Create(self, chat_name:str):
+        self.app.props.active_window.chat_list_box.new_chat(chat_name)
+
+    def Ask(self, message:str):
+        self.app.props.active_window.chat_list_box.new_chat()
+        self.app.props.active_window.chat_list_box.select_row(self.app.props.active_window.chat_list_box.tab_list[0])
+        self.app.props.active_window.message_text_view.get_buffer().insert_at_cursor(message, len(message.encode('utf-8')))
+        time.sleep(1)
+        self.app.props.active_window.send_message()
+
 class AlpacaApplication(Adw.Application):
     """The main application singleton class."""
 
@@ -68,6 +113,7 @@ class AlpacaApplication(Adw.Application):
         self.set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.version = version
         self.args = parser.parse_args()
+        SessionBus().publish('com.jeffser.Alpaca', AlpacaService(self))
 
     def do_activate(self):
         win = self.props.active_window
