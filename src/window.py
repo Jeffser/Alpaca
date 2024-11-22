@@ -901,7 +901,7 @@ Generate a title following these rules:
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.quick_ask_overlay)
             return
-        chat = chat_widget.chat(_('Quick Chat'), True)
+        chat = chat_widget.chat(_('Quick Ask'), True)
         self.quick_ask_overlay.set_child(chat)
 
         message_id = self.generate_uuid()

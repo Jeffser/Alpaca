@@ -492,9 +492,9 @@
     <object class="AdwWindow" id="quick_ask">
       <signal name="close-request" handler="closing_quick_ask"/>
       <accessibility>
-        <property name="label" translatable="yes">Quick chat dialog</property>
+        <property name="label" translatable="yes">Quick ask dialog</property>
       </accessibility>
-      <property name="title" translatable="yes">Quick Chat</property>
+      <property name="title" translatable="yes">Quick Ask</property>
       <property name="width-request">400</property>
       <property name="height-request">400</property>
       <child>
