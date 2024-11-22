@@ -73,16 +73,19 @@ class AlpacaSearchProvider:
         GLib.spawn_close_pid(pid)
 
     def search_chats(self, terms):
+        results = []
         if os.path.exists(os.path.join(get_data_dir(), "chats", "chats.json")):
-            with open(os.path.join(get_data_dir(), "chats", "chats.json"), "r", encoding="utf-8") as f:
-                data = json.load(f)
-                chats = list(data['chats'].keys())
-            query = ' '.join(terms)
-            results = [f'open:{chat}' for chat in chats if query.lower() in chat.lower()]
-            results.append(f'create:{query}')
-            results.append(f'ask:{query}')
-            return results
-        return []
+            try:
+                with open(os.path.join(get_data_dir(), "chats", "chats.json"), "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    chats = list(data['chats'].keys())
+                query = ' '.join(terms)
+                results = [f'open:{chat}' for chat in chats if query.lower() in chat.lower()]
+            except:
+                pass
+        results.append(f'create:{query}')
+        results.append(f'ask:{query}')
+        return results
 
     def GetResultMetas(self, identifiers):
         results = []
