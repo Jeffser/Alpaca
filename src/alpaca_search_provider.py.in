@@ -63,17 +63,17 @@ class AlpacaSearchProvider:
 
     def ActivateResult(self, identifier, terms, uid=None):
         bus = SessionBus()
-        # Get the DBus object
-        app_service = bus.get("com.jeffser.Alpaca")
-        # Call the method
-        if app_service.IsRunning() == 'yeah':
+        try:
+            app_service = bus.get("com.jeffser.Alpaca")
+            if app_service.IsRunning() != 'yeah':
+                raise Exception('Alpaca not running')
             if identifier.split(':')[0] == 'open':
                 app_service.Open(':'.join(identifier.split(':')[1:]))
             elif identifier.split(':')[0] == 'create':
                 app_service.Create(':'.join(identifier.split(':')[1:]))
             elif identifier.split(':')[0] == 'ask':
                 app_service.Ask(':'.join(identifier.split(':')[1:]))
-        else:
+        except:
             argv = ['alpaca', self.opts[identifier.split(':')[0]]['option'], ':'.join(identifier.split(':')[1:])]
             (pid, _stdin, _stdout, _stderr) = GLib.spawn_async(
                 argv,
