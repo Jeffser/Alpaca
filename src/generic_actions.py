@@ -69,7 +69,10 @@ def attach_website(url:str):
 
 def attach_file(file):
     file_types = {
-        "plain_text": ["txt", "md", "html", "css", "js", "py", "java", "json", "xml"],
+        "plain_text": ["txt", "md"],
+        "code": ["c", "h", "css", "html", "js", "ts", "py", "java", "json", "xml", "asm", "nasm",
+                "cs", "csx", "cpp", "cxx", "cp", "hxx", "inc", "csv", "lsp", "lisp", "el", "emacs",
+                "l", "cu", "dockerfile", "glsl", "g", "lua", "php", "rb", "ru", "rs", "sql", "sh"],
         "image": ["png", "jpeg", "jpg", "webp", "gif"],
         "pdf": ["pdf"]
     }
