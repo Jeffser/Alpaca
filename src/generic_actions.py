@@ -72,7 +72,7 @@ def attach_file(file):
         "plain_text": ["txt", "md"],
         "code": ["c", "h", "css", "html", "js", "ts", "py", "java", "json", "xml", "asm", "nasm",
                 "cs", "csx", "cpp", "cxx", "cp", "hxx", "inc", "csv", "lsp", "lisp", "el", "emacs",
-                "l", "cu", "dockerfile", "glsl", "g", "lua", "php", "rb", "ru", "rs", "sql", "sh"],
+                "l", "cu", "dockerfile", "glsl", "g", "lua", "php", "rb", "ru", "rs", "sql", "sh", "p8"],
         "image": ["png", "jpeg", "jpg", "webp", "gif"],
         "pdf": ["pdf"]
     }

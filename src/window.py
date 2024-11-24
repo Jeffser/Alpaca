@@ -855,7 +855,7 @@ Generate a title following these rules:
             elif extension in ("c", "h", "css", "html", "js", "ts", "py", "java", "json", "xml",
                                 "asm", "nasm", "cs", "csx", "cpp", "cxx", "cp", "hxx", "inc", "csv",
                                 "lsp", "lisp", "el", "emacs", "l", "cu", "dockerfile", "glsl", "g",
-                                "lua", "php", "rb", "ru", "rs", "sql", "sh"):
+                                "lua", "php", "rb", "ru", "rs", "sql", "sh", "p8"):
                 self.attach_file(file.get_path(), 'code')
             elif extension == 'pdf':
                 self.attach_file(file.get_path(), 'pdf')
