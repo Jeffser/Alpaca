@@ -148,18 +148,20 @@ msgid ""
 "Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
 "--list-chats, --version"
 msgstr ""
+"Додано параметри запуску: --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
+"--list-chats, --version"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Added integration as Gnome Search Provider"
-msgstr ""
+msgstr "Додано інтеграцію як постачальник пошуку Gnome"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Updated Ollama to v0.4.2 with new models"
-msgstr ""
+msgstr "Оновлено Ollama до версії 0.4.2 з новими моделями"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "User messages are now compacted into bubbles"
-msgstr ""
+msgstr "Повідомлення користувачів тепер скомпоновані у бульбашки"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 #: data/com.jeffser.Alpaca.metainfo.xml.in:131
@@ -186,10 +188,12 @@ msgstr "Виправлення"
 msgid ""
 "Fixed re connection dialog not working when 'use local instance' is selected"
 msgstr ""
+"Виправлено діалог повторного підключення, який не працював при виборі "
+"опції 'використовувати локальний екземпляр'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid "Fixed model manager not adapting to large system fonts"
-msgstr ""
+msgstr "Виправлено менеджер моделей, який не адаптувався до великих системних шрифтів"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Details page for models"
@@ -1710,12 +1714,16 @@ msgid ""
 "The latest series of Code-Specific Qwen models, with significant "
 "improvements in code generation, code reasoning, and code fixing."
 msgstr ""
+"Остання серія моделей Qwen, спеціалізованих для коду, з суттєвими "
+"покращеннями у генеруванні коду, розумінні коду та виправленні коду."
 
 #: src/available_models_descriptions.py:3
 msgid ""
 "Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
 "generative models in 11B and 90B sizes."
 msgstr ""
+"Llama 3.2 Vision — це колекція генеративних моделей, налаштованих для "
+"логічного аналізу зображень, у розмірах 11B і 90B."
 
 #: src/available_models_descriptions.py:4
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
@@ -2278,6 +2286,8 @@ msgid ""
 "A large language model built by the Technology Innovation Institute (TII) "
 "for use in summarization, text generation, and chat bots."
 msgstr ""
+"Велика мовна модель, створена Інститутом інноваційних технологій (TII) для "
+"використання в підсумовуванні, генеруванні тексту та чат-ботах."
 
 #: src/available_models_descriptions.py:82
 msgid ""
@@ -2292,6 +2302,8 @@ msgid ""
 "Yi-Coder is a series of open-source code language models that delivers state-"
 "of-the-art coding performance with fewer than 10 billion parameters."
 msgstr ""
+"Yi-Coder — це серія відкритих мовних моделей для коду, що забезпечують "
+"передову продуктивність програмування з менш ніж 10 мільярдами параметрів."
 
 #: src/available_models_descriptions.py:84
 msgid ""
@@ -2371,6 +2383,8 @@ msgid ""
 "A series of multimodal LLMs (MLLMs) designed for vision-language "
 "understanding."
 msgstr ""
+"Серія мультимодальних мовних моделей (MLLM), розроблених для розуміння "
+"взаємодії зору та мови."
 
 #: src/available_models_descriptions.py:95
 msgid ""
@@ -2424,6 +2438,8 @@ msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
 msgstr ""
+"Llama-3.1-Nemotron-70B-Instruct — це велика мовна модель, налаштована NVIDIA "
+"для покращення корисності відповідей, згенерованих LLM, на запити користувачів."
 
 #: src/available_models_descriptions.py:103
 msgid "Uncensored Llama2 based model with support for a 16K context window."
@@ -2507,6 +2523,9 @@ msgid ""
 "cases and support for retrieval augmented generation (RAG), streamlining "
 "code generation, translation and bug fixing."
 msgstr ""
+"Моделі IBM Granite 2B і 8B розроблені для підтримки сценаріїв використання, "
+"заснованих на інструментах, а також для підтримки генерації з доповненням "
+"отриманих даних (RAG), спрощуючи створення коду, переклад і виправлення помилок."
 
 #: src/available_models_descriptions.py:114
 msgid ""
@@ -2543,12 +2562,16 @@ msgid ""
 "Solar Pro Preview: an advanced large language model (LLM) with 22 billion "
 "parameters designed to fit into a single GPU"
 msgstr ""
+"Solar Pro Preview: передова велика мовна модель (LLM) з 22 мільярдами "
+"параметрів, розроблена для роботи на одному GPU."
 
 #: src/available_models_descriptions.py:119
 msgid ""
 "A series of models that convert HTML content to Markdown content, which is "
 "useful for content conversion tasks."
 msgstr ""
+"Серія моделей, які перетворюють HTML-контент у Markdown-контент, що є "
+"корисним для завдань конвертації контенту."
 
 #: src/available_models_descriptions.py:120
 msgid ""
@@ -2567,6 +2590,8 @@ msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
+"Моделі IBM Granite 1B і 3B — це перші моделі Granite від IBM на основі "
+"мішаних експертів (MoE), розроблені для використання з низькою затримкою."
 
 #: src/available_models_descriptions.py:123
 msgid ""
@@ -2602,7 +2627,7 @@ msgstr "Модель вбудовування від BAAI, що відображ
 
 #: src/available_models_descriptions.py:128
 msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
-msgstr ""
+msgstr "Модель для перевірки фактів передового рівня, розроблена Bespoke Labs."
 
 #: src/available_models_descriptions.py:129
 msgid ""
@@ -2610,18 +2635,24 @@ msgid ""
 "text prompt input and text output responses against a set of defined safety "
 "policies."
 msgstr ""
+"ShieldGemma — набір моделей, налаштованих для оцінки безпеки введених текстових "
+"запитів та текстових відповідей згідно з визначеними політиками безпеки."
 
 #: src/available_models_descriptions.py:130
 msgid ""
 "An upgraded version of DeekSeek-V2 that integrates the general and coding "
 "abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
 msgstr ""
+"Оновлена версія DeekSeek-V2, що інтегрує загальні та програмні можливості моделей "
+"DeepSeek-V2-Chat і DeepSeek-Coder-V2-Instruct."
 
 #: src/available_models_descriptions.py:131
 msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
 msgstr ""
+"Llama Guard 3 — серія моделей, тонко налаштованих для класифікації безпеки "
+"вхідних даних та відповідей LLM."
 
 #: src/available_models_descriptions.py:132
 msgid ""
@@ -2636,38 +2667,44 @@ msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
 msgstr ""
+"OpenCoder — це відкрита та відтворювана сім'я мовних моделей для коду, що включає "
+"моделі 1.5B і 8B, підтримуючи чат англійською та китайською мовами."
 
 #: src/available_models_descriptions.py:134
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
 msgstr ""
+"Моделі IBM Granite Guardian 3.0 2B та 8B розроблені для виявлення ризиків у запитах "
+"та/або відповідях."
 
 #: src/available_models_descriptions.py:135
 msgid ""
 "Athene-V2 is a 72B parameter model which excels at code completion, "
 "mathematics, and log extraction tasks."
 msgstr ""
+"Athene-V2 — це модель з 72 мільярдами параметрів, яка відзначається виконанням "
+"завдань з доповнення коду, математики та вилучення логів."
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
-msgstr ""
+msgstr "Підтримка Alpaca"
 
 #: src/connection_handler.py:25
 msgid "Model request too large for system"
-msgstr ""
+msgstr "Запит моделі занадто великий для системи"
 
 #: src/connection_handler.py:28
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
-msgstr ""
+msgstr "Виявлено AMD GPU, але розширення відсутнє, Ollama використовуватиме CPU."
 
 #: src/connection_handler.py:30
 msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
-msgstr ""
+msgstr "Виявлено AMD GPU, але відсутній ROCm, Ollama використовуватиме CPU."
 
 #: src/connection_handler.py:33
 msgid "Using AMD GPU type '{}'"
-msgstr ""
+msgstr "Використовуємо тип AMD GPU '{}'"
 
 #: src/connection_handler.py:94
 msgid "Ollama instance was shut down due to inactivity"
@@ -2675,11 +2712,11 @@ msgstr "Екземпляр Ollama був вимкнений через неак�
 
 #: src/connection_handler.py:132
 msgid "Integrated Ollama instance is running"
-msgstr ""
+msgstr "Інтегрований екземпляр Ollama працює"
 
 #: src/connection_handler.py:148 src/window.ui:479
 msgid "Integrated Ollama instance is not running"
-msgstr ""
+msgstr "Інтегрований екземпляр Ollama не працює"
 
 #: src/window.ui:42
 msgid "Menu"
@@ -2691,11 +2728,11 @@ msgstr "Перемкнути бічну панель"
 
 #: src/window.ui:71
 msgid "Search Messages"
-msgstr ""
+msgstr "Пошук повідомлень"
 
 #: src/window.ui:93
 msgid "Loading Instance"
-msgstr ""
+msgstr "Завантаження екземпляра"
 
 #: src/window.ui:105 src/window.ui:106 src/window.ui:528 src/window.ui:1005
 #: src/custom_widgets/model_widget.py:24 src/custom_widgets/model_widget.py:25
@@ -2708,11 +2745,11 @@ msgstr "Меню чат"
 
 #: src/window.ui:127
 msgid "Message search bar"
-msgstr ""
+msgstr "Панель пошуку повідомлень"
 
 #: src/window.ui:134 src/window.ui:136
 msgid "Search messages"
-msgstr ""
+msgstr "Шукати повідомлення"
 
 #: src/window.ui:150
 msgid ""
@@ -2825,7 +2862,7 @@ msgstr "Діалог управління моделями"
 
 #: src/window.ui:496
 msgid "Terminal"
-msgstr ""
+msgstr "Термінал"
 
 #: src/window.ui:538 src/window.ui:705
 msgid "Create Model"
@@ -2867,7 +2904,7 @@ msgstr ""
 
 #: src/window.ui:670
 msgid "Model Details"
-msgstr ""
+msgstr "Деталі моделі"
 
 #: src/window.ui:733
 msgid "Base"
@@ -3028,15 +3065,15 @@ msgstr "Вставити новий рядок"
 
 #: src/alpaca_search_provider.py.in:38
 msgid "Open chat"
-msgstr ""
+msgstr "Відкрити чат"
 
 #: src/alpaca_search_provider.py.in:39
 msgid "Create chat"
-msgstr ""
+msgstr "Створити чат"
 
 #: src/alpaca_search_provider.py.in:40
 msgid "Create chat and send message"
-msgstr ""
+msgstr "Створити чат і надіслати повідомлення"
 
 #: src/generic_actions.py:68
 msgid "An error occurred while extracting text from the website"
@@ -3079,7 +3116,7 @@ msgstr "Чат успішно імпортовано"
 
 #: src/custom_widgets/message_widget.py:53
 msgid "Save Message"
-msgstr ""
+msgstr "Зберегти повідомлення"
 
 #: src/custom_widgets/message_widget.py:87
 msgid "Message edited successfully"
@@ -3109,7 +3146,7 @@ msgstr "Копіювати повідомлення"
 #: src/custom_widgets/message_widget.py:162
 #: src/custom_widgets/message_widget.py:184
 msgid "Run Script"
-msgstr ""
+msgstr "Запустити скрипт"
 
 #: src/custom_widgets/message_widget.py:177
 msgid "Code copied to the clipboard"
@@ -3120,10 +3157,12 @@ msgid ""
 "Make sure you understand what this script does before running it, Alpaca is "
 "not responsible for any damages to your device or data"
 msgstr ""
+"Переконайтеся, що ви розумієте, що робить цей скрипт перед його запуском. Alpaca "
+"не несе відповідальності за будь-які пошкодження вашого пристрою чи даних."
 
 #: src/custom_widgets/message_widget.py:187
 msgid "Execute"
-msgstr ""
+msgstr "Виконати"
 
 #: src/custom_widgets/message_widget.py:270
 #: src/custom_widgets/message_widget.py:272
