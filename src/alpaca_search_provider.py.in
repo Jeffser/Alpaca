@@ -48,8 +48,8 @@ class AlpacaSearchProvider:
     """
 
     opts = {
-        "open": {'description': _('Open chat'), 'option': '--select-chat'},
-        "ask": {'description': _('Quick chat'), 'option': '--ask'}
+        "open": {'name': _('Open chat'), 'option': '--select-chat'},
+        "ask": {'name': _('Quick ask'), 'option': '--ask'}
     }
 
     def GetInitialResultSet(self, terms):
@@ -100,8 +100,8 @@ class AlpacaSearchProvider:
         for identifier in identifiers:
             metas = {
                 "id": GLib.Variant("s", identifier),
-                "name": GLib.Variant("s", ':'.join(identifier.split(':')[1:])),
-                "description": GLib.Variant("s", self.opts[identifier.split(':')[0]]['description']),
+                "name": GLib.Variant("s", self.opts[identifier.split(':')[0]]['name']),
+                "description": GLib.Variant("s", ':'.join(identifier.split(':')[1:])),
                 "gicon": GLib.Variant("s", "com.jeffser.Alpaca")
             }
             results.append(metas)
