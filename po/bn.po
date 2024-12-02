@@ -144,29 +144,31 @@ msgstr "নতুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
-msgstr ""
+msgstr "নতুন বিকল্প --ask MESSAGE, একটি নতুন 'দ্রুত জিজ্ঞাসা' উইন্���ো খোলার জন্য"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Gnome Search integration now works whilst the app is opened"
-msgstr ""
+msgstr "গনোম সার্চ একীকরণ এখন অ্যাপটি খোলা থাকাকালীন কাজ করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid ""
 "Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
 "--list-chats, --version"
 msgstr ""
+"যোগ করা হয়েছে লঞ্চ প্যারামিটার --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
+"--list-chats, --version"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Added integration as Gnome Search Provider"
-msgstr ""
+msgstr "গনোম সার্চ প্রদানকারী হিসাবে একীকরণ যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Updated Ollama to v0.4.2 with new models"
-msgstr ""
+msgstr "নতুন মডেলগুলির সাথে Ollama v0.4.2 এ আপডেট করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "User messages are now compacted into bubbles"
-msgstr ""
+msgstr "ব্যবহারকারীর বার্তাগুলি এখন বাবলে সংকুচিত করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:113
 #: data/com.jeffser.Alpaca.metainfo.xml.in:141
@@ -193,10 +195,11 @@ msgstr "সংশোধন করে"
 msgid ""
 "Fixed re connection dialog not working when 'use local instance' is selected"
 msgstr ""
+"সংযোগ পুনরায় সংযোগ সংলাপটি কাজ না করার সমস্যা সংশোধন করা হয়েছে যখন 'স্থানীয় উদাহরণ ব্যবহার করুন' নির্বাচন করা হয়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
 msgid "Fixed model manager not adapting to large system fonts"
-msgstr ""
+msgstr "বড় সিস্টেম ফন্টের সাথে খাপ খাইয়ে নিতে মডেল ম্যানেজারের সমস্যা সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:125
 msgid "Details page for models"
@@ -231,8 +234,7 @@ msgstr "রিমোট সংযোগ ডায়ালগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:143
 msgid "Fixed: Models get duplicated when switching remote and local instance"
-msgstr ""
-"সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
+msgstr "সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:144
 msgid "Better internal instance manager"
@@ -711,8 +713,7 @@ msgstr "Ollama আপডেট করা হয়েছে v0.3.0 (নতুন
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:431
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
-msgstr ""
-"তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
+msgstr "তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:432
 msgid "Better connection check for Ollama"
@@ -1635,11 +1636,11 @@ msgstr "অগ্রসর হতে ইনস্ট্যান্সের ত
 
 #: src/window.py:903
 msgid "An error occurred: {}"
-msgstr ""
+msgstr "একটি ত্রুটি ঘটেছে: {}"
 
 #: src/window.py:912 src/window.ui:512
 msgid "Quick Ask"
-msgstr ""
+msgstr "দ্রুত জিজ্ঞাসা"
 
 #: src/window.py:1019
 msgid "Clear Chat?"
@@ -1698,6 +1699,7 @@ msgid ""
 "Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
 "generative models in 11B and 90B sizes."
 msgstr ""
+"Llama 3.2 ভিশন হল 11B এবং 90B আকারের নির্দেশনা-টিউনড চিত্র যুক্তি জেনারেটিভ মডেলের একটি সংগ্রহ।"
 
 #: src/available_models_descriptions.py:4
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
@@ -2391,6 +2393,7 @@ msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
 msgstr ""
+"Llama-3.1-Nemotron-70B-Instruct হল NVIDIA দ্বারা ব্যবহারকারীর প্রশ্নের উত্তরে LLM ��ত্পাদিত উত্তরের সাহায্যকারিতা উন্নত করার জন্য পরিবর্তিত একটি বড় ভাষা মডেল।"
 
 #: src/available_models_descriptions.py:103
 msgid "Uncensored Llama2 based model with support for a 16K context window."
@@ -2532,6 +2535,7 @@ msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
+"আইবিএম গ্রানাইট 1B এবং 3B মডেলগুলি হল আইবিএম থেকে কম বিলম্বনা ব্যবহারের জন্য ডিজাইন করা প্রথম বিশেষজ্ঞদের মিশ্রণ (MoE) গ্রানাইট মডেল।"
 
 #: src/available_models_descriptions.py:123
 msgid ""
@@ -2546,6 +2550,7 @@ msgid ""
 "SmolLM2 is a family of compact language models available in three size: "
 "135M, 360M, and 1.7B parameters."
 msgstr ""
+"SmolLM2 হল একটি কমপ্যাক্ট ভাষা মডেলের পরিবার যা তিনটি আকারে উপলব্ধ: 135M, 360M, এবং 1.7B প্যারামিটার।"
 
 #: src/available_models_descriptions.py:125
 msgid ""
@@ -2560,6 +2565,7 @@ msgid ""
 "Cohere For AI's language models trained to perform well across 23 different "
 "languages."
 msgstr ""
+"Cohere For AI-এর ভাষা মডেলগুলি 23টি ভিন্ন ভাষায় ভাল কাজ করার জন্য প্রশিক্ষিত।"
 
 #: src/available_models_descriptions.py:127
 msgid "Embedding model from BAAI mapping texts to vectors."
@@ -2575,6 +2581,7 @@ msgid ""
 "text prompt input and text output responses against a set of defined safety "
 "policies."
 msgstr ""
+"ShieldGemma হল নির্দেশনা-টিউনড মডেলের একটি সেট যা পাঠ্য প্রম্পট ইনপুট এবং পাঠ্য আউটপুট উত্তরগুলির নিরাপত্তা মূল্যায়ন করার জন্য একটি নির্দিষ্ট নিরাপত্তা নীতির বিরুদ্ধে।"
 
 #: src/available_models_descriptions.py:130
 msgid ""
@@ -2589,6 +2596,7 @@ msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
 msgstr ""
+"Llama Guard 3 হল এলএলএম ইনপুট এবং উত্তরগুলির বিষয়বস্তু নিরাপত্তা শ্রেণীবিভাগের জন্য সূক্ষ্ম-টিউনড মডেলের একটি সিরিজ।"
 
 #: src/available_models_descriptions.py:132
 msgid ""
@@ -2603,18 +2611,21 @@ msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
 msgstr ""
+"OpenCoder হল একটি উন্মুক্ত এবং পুনরুত্পাদনযোগ্য কোড এলএলএম পরিবার যা 1.5B এবং 8B মডেলগুলিকে অন্তর্ভুক্ত করে, ইংরেজি এবং চীনা ভাষায় চ্যাট সমর্থন করে।"
 
 #: src/available_models_descriptions.py:134
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
 msgstr ""
+"আইবিএম গ্রানাইট গার্ডিয়ান 3.0 2B এবং 8B মডেলগুলি প্রম্পট এবং/অথবা উত্তরগুলিতে ঝুঁকি শনাক্ত করার জন্য ডিজাইন করা হয়েছে।"
 
 #: src/available_models_descriptions.py:135
 msgid ""
 "Athene-V2 is a 72B parameter model which excels at code completion, "
 "mathematics, and log extraction tasks."
 msgstr ""
+"Athene-V2 হল একটি 72B প্যারামিটার মডেল যা কোড সম্পূর্ণতা, গণিত এবং লগ নির্গমন কাজে উত্তম।"
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -2721,13 +2732,14 @@ msgstr "পাওয়ার সেভার সতর্কতা দেখা
 
 #: src/window.ui:330
 msgid "Default Model"
-msgstr ""
+msgstr "ডিফল্ট মডেল"
 
 #: src/window.ui:331
 msgid ""
 "The default model to use on new chats and when Alpaca is launched with the "
 "option --ask \"message\""
 msgstr ""
+"নতুন চ্যাট এবং যখন Alpaca --ask \"message\" বিকল্প দিয়ে চালু করা হয় তখন ব্যবহার করার জন্য ডিফল্ট মডেল"
 
 #: src/window.ui:349
 msgid "Temperature"
@@ -2794,11 +2806,11 @@ msgstr ""
 
 #: src/window.ui:510
 msgid "Quick ask dialog"
-msgstr ""
+msgstr "দ্রুত জিজ্ঞাসা সংলাপ"
 
 #: src/window.ui:522
 msgid "Save Conversation to Alpaca"
-msgstr ""
+msgstr "কথোপকথন আলপাকাতে সংরক্ষণ করুন"
 
 #: src/window.ui:537 src/window.ui:560
 msgid "Manage models dialog"
@@ -3006,11 +3018,11 @@ msgstr "নতুন লাইন সন্নিবেশ করুন"
 
 #: src/alpaca_search_provider.py.in:51
 msgid "Open chat"
-msgstr ""
+msgstr "চ্যাট খুলুন"
 
 #: src/alpaca_search_provider.py.in:52
 msgid "Quick ask"
-msgstr ""
+msgstr "দ্রুত জিজ্ঞাসা"
 
 #: src/generic_actions.py:68
 msgid "An error occurred while extracting text from the website"
