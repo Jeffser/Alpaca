@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.0.4\n"
+"Project-Id-Version: 2.9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-26 22:46-0600\n"
 "PO-Revision-Date: 2024-09-02 HO:MI+ZONE\n"
@@ -1637,11 +1637,11 @@ msgstr "जारी रखने के लिए इंस्टेंस क�
 
 #: src/window.py:903
 msgid "An error occurred: {}"
-msgstr ""
+msgstr "एक त्रुटि हुई: {}"
 
 #: src/window.py:912 src/window.ui:512
 msgid "Quick Ask"
-msgstr ""
+msgstr "त्वरित पूछें"
 
 #: src/window.py:1019
 msgid "Clear Chat?"
@@ -1700,6 +1700,7 @@ msgid ""
 "Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
 "generative models in 11B and 90B sizes."
 msgstr ""
+"लामा 3.2 विजन एक संग्रह है जिसमें 11बी और 90बी आकार में निर्देश-ट्यून किए गए छवि तर्क उत्पादक मॉडल हैं।"
 
 #: src/available_models_descriptions.py:4
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
@@ -2246,6 +2247,7 @@ msgid ""
 "A large language model built by the Technology Innovation Institute (TII) "
 "for use in summarization, text generation, and chat bots."
 msgstr ""
+"एक बड़ा भाषा मॉडल जिसे प्रौद्योगिकी नवाचार संस्थान (टीआईआई) द्वारा सारांश, पाठ उत्पादन और चैटबॉट में उपयोग के लिए बनाया गया है।"
 
 #: src/available_models_descriptions.py:82
 msgid ""
@@ -2386,6 +2388,7 @@ msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
 msgstr ""
+"लामा-3.1-नेमोट्रॉन-70बी-इन्स्ट्रक्ट एक बड़ा भाषा मॉडल है जिसे एनवीडिया द्वारा उपयोगकर्ता प्रश्नों के लिए एलएलएम द्वारा उत्पन्न प्रतिक्रियाओं की उपयोगिता में सुधार करने के लिए अनुकूलित किया गया है।"
 
 #: src/available_models_descriptions.py:103
 msgid "Uncensored Llama2 based model with support for a 16K context window."
@@ -2464,6 +2467,7 @@ msgid ""
 "cases and support for retrieval augmented generation (RAG), streamlining "
 "code generation, translation and bug fixing."
 msgstr ""
+"आईबीएम ग्रैनाइट 2बी और 8बी मॉडल टूल-आधारित उपयोग के मामलों का समर्थन करने और पुनर्प्राप्ति संवर्धित पीढ़ी (आरएजी) के समर्थन के लिए डिज़ाइन किए गए हैं, जो कोड उत्पादन, अनुवाद और बग फिक्सिंग को सुव्यवस्थित करते हैं।"
 
 #: src/available_models_descriptions.py:114
 msgid ""
@@ -2526,6 +2530,7 @@ msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
+"आईबीएम ग्रैनाइट 1बी और 3बी मॉडल आईबीएम द्वारा कम विलंबता उपयोग के लिए डिज़ाइन किए गए पहले विशेषज्ञों के मिश्रण (एमओई) ग्रैनाइट मॉडल हैं।"
 
 #: src/available_models_descriptions.py:123
 msgid ""
@@ -2540,6 +2545,7 @@ msgid ""
 "SmolLM2 is a family of compact language models available in three size: "
 "135M, 360M, and 1.7B parameters."
 msgstr ""
+"स्मोलएलएम2 एक परिवार है जिसमें तीन आकार में उपलब्ध कॉम्पैक्ट भाषा मॉडल हैं: 135एम, 360एम, और 1.7बी पैरामीटर।"
 
 #: src/available_models_descriptions.py:125
 msgid ""
@@ -2554,6 +2560,7 @@ msgid ""
 "Cohere For AI's language models trained to perform well across 23 different "
 "languages."
 msgstr ""
+"कोहियर फॉर एआई के भाषा मॉडल जो 23 विभिन्न भाषाओं में अच्छा प्रदर्शन करने के लिए प्रशिक्षित किए गए हैं।"
 
 #: src/available_models_descriptions.py:127
 msgid "Embedding model from BAAI mapping texts to vectors."
@@ -2569,6 +2576,7 @@ msgid ""
 "text prompt input and text output responses against a set of defined safety "
 "policies."
 msgstr ""
+"शील्डगेम्मा निर्देश-ट्यून किए गए मॉडलों का एक सेट है जो परिभाषित सुरक्षा नीतियों के खिलाफ पाठ प्रॉम्प्ट इनपुट और पाठ आउटपुट प्रतिक्रियाओं की सुरक्षा का मूल्यांकन करने के लिए है।"
 
 #: src/available_models_descriptions.py:130
 msgid ""
@@ -2583,6 +2591,7 @@ msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
 msgstr ""
+"लामा गार्ड 3 एलएलएम इनपुट और प्रतिक्रियाओं के लिए सामग्री सुरक्षा वर्गीकरण के लिए फाइन-ट्यून किए गए मॉडलों की एक श्रृंखला है।"
 
 #: src/available_models_descriptions.py:132
 msgid ""
@@ -2596,18 +2605,21 @@ msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
 msgstr ""
+"ओपनकोडर एक खुला और पुनरुत्पादक कोड एलएलएम परिवार है जिसमें 1.5बी और 8बी मॉडल शामिल हैं, जो अंग्रेजी और चीनी भाषाओं में चैट का समर्थन करता है।"
 
 #: src/available_models_descriptions.py:134
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
 msgstr ""
+"आईबीएम ग्रैनाइट गार्डियन 3.0 2बी और 8बी मॉडल प्रॉम्प्ट और/या प्रतिक्रियाओं में जोखिमों का पता लगाने के लिए डिज़ाइन किए गए हैं।"
 
 #: src/available_models_descriptions.py:135
 msgid ""
 "Athene-V2 is a 72B parameter model which excels at code completion, "
 "mathematics, and log extraction tasks."
 msgstr ""
+"एथेन-वी2 एक 72बी पैरामीटर मॉडल है जो कोड पूर्णता, गणित और लॉग निष्कर्षण कार्यों में उत्कृष्ट है।"
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -2675,8 +2687,7 @@ msgid "Search messages"
 msgstr "संदेश खोजें"
 
 #: src/window.ui:150
-msgid ""
-"Warning: Power saver mode is enabled, this will slow down message generation"
+msgid "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr "चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
 
 #: src/window.ui:197
@@ -2713,13 +2724,14 @@ msgstr "पॉवर सेवर वार्निंग दिखाएं"
 
 #: src/window.ui:330
 msgid "Default Model"
-msgstr ""
+msgstr "डिफ़ॉल्ट मॉडल"
 
 #: src/window.ui:331
 msgid ""
 "The default model to use on new chats and when Alpaca is launched with the "
 "option --ask \"message\""
 msgstr ""
+"नए चैट और अल्पाका को विकल्प --ask \"message\" के साथ लॉन्च करने पर उपयोग करने के लिए डिफ़ॉल्ट मॉडल"
 
 #: src/window.ui:349
 msgid "Temperature"
@@ -2789,11 +2801,11 @@ msgstr ""
 
 #: src/window.ui:510
 msgid "Quick ask dialog"
-msgstr ""
+msgstr "त्वरित पूछें संवाद"
 
 #: src/window.ui:522
 msgid "Save Conversation to Alpaca"
-msgstr ""
+msgstr "बातचीत को अल्पाका में सेव करें"
 
 #: src/window.ui:537 src/window.ui:560
 msgid "Manage models dialog"
@@ -3001,11 +3013,11 @@ msgstr "नई लाइन डालें"
 
 #: src/alpaca_search_provider.py.in:51
 msgid "Open chat"
-msgstr ""
+msgstr "चैट खोलें"
 
 #: src/alpaca_search_provider.py.in:52
 msgid "Quick ask"
-msgstr ""
+msgstr "त्वरित पूछें"
 
 #: src/generic_actions.py:68
 msgid "An error occurred while extracting text from the website"
