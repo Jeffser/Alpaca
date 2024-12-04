@@ -205,6 +205,7 @@ class attachment(Gtk.Button):
             label=self.file_name,
             icon_name={
                 "plain_text": "document-text-symbolic",
+                "code": "code-symbolic",
                 "pdf": "document-text-symbolic",
                 "youtube": "play-symbolic",
                 "website": "globe-symbolic"

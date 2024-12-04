@@ -689,7 +689,7 @@ Generate a title following these rules:
             except Exception as e:
                 logger.error(e)
                 self.show_toast(_("Cannot open image"), self.main_overlay)
-        elif file_type == 'plain_text' or file_type == 'youtube' or file_type == 'website':
+        elif file_type == 'plain_text' or file_type == 'code' or file_type == 'youtube' or file_type == 'website':
             with open(file_path, 'r', encoding="utf-8") as f:
                 return f.read()
         elif file_type == 'pdf':
@@ -721,6 +721,7 @@ Generate a title following these rules:
                 icon_name={
                     "image": "image-x-generic-symbolic",
                     "plain_text": "document-text-symbolic",
+                    "code": "code-symbolic",
                     "pdf": "document-text-symbolic",
                     "youtube": "play-symbolic",
                     "website": "globe-symbolic"
@@ -849,8 +850,13 @@ Generate a title following these rules:
             extension = os.path.splitext(file.get_path())[1][1:]
             if extension in ('png', 'jpeg', 'jpg', 'webp', 'gif'):
                 self.attach_file(file.get_path(), 'image')
-            elif extension in ('txt', 'md', 'html', 'css', 'js', 'py', 'java', 'json', 'xml'):
+            elif extension in ('txt', 'md'):
                 self.attach_file(file.get_path(), 'plain_text')
+            elif extension in ("c", "h", "css", "html", "js", "ts", "py", "java", "json", "xml",
+                                "asm", "nasm", "cs", "csx", "cpp", "cxx", "cp", "hxx", "inc", "csv",
+                                "lsp", "lisp", "el", "emacs", "l", "cu", "dockerfile", "glsl", "g",
+                                "lua", "php", "rb", "ru", "rs", "sql", "sh", "p8"):
+                self.attach_file(file.get_path(), 'code')
             elif extension == 'pdf':
                 self.attach_file(file.get_path(), 'pdf')
 
