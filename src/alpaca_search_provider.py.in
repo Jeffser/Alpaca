@@ -83,12 +83,12 @@ class AlpacaSearchProvider:
 
     def search_chats(self, terms):
         results = []
+        query = ' '.join(terms)
         if os.path.exists(os.path.join(get_data_dir(), "chats", "chats.json")):
             try:
                 with open(os.path.join(get_data_dir(), "chats", "chats.json"), "r", encoding="utf-8") as f:
                     data = json.load(f)
                     chats = list(data['chats'].keys())
-                query = ' '.join(terms)
                 results = [f'open:{chat}' for chat in chats if query.lower() in chat.lower()]
             except:
                 pass
