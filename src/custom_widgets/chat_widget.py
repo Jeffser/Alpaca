@@ -298,27 +298,33 @@ class chat_list(Gtk.ListBox):
         self.select_row(tab)
 
     def append_chat(self, chat_name:str) -> chat:
-        chat_name = window.generate_numbered_name(chat_name, [tab.chat_window.get_name() for tab in self.tab_list])
-        chat_window = chat(chat_name)
-        tab = chat_tab(chat_window)
-        self.append(tab)
-        self.tab_list.append(tab)
-        window.chat_stack.add_child(chat_window)
-        return chat_window
+        chat_name = chat_name.strip()
+        if chat_name:
+            chat_name = window.generate_numbered_name(chat_name, [tab.chat_window.get_name() for tab in self.tab_list])
+            chat_window = chat(chat_name)
+            tab = chat_tab(chat_window)
+            self.append(tab)
+            self.tab_list.append(tab)
+            window.chat_stack.add_child(chat_window)
+            return chat_window
 
     def prepend_chat(self, chat_name:str) -> chat:
-        chat_name = window.generate_numbered_name(chat_name, [tab.chat_window.get_name() for tab in self.tab_list])
-        chat_window = chat(chat_name)
-        tab = chat_tab(chat_window)
-        self.prepend(tab)
-        self.tab_list.insert(0, tab)
-        chat_window.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
-        window.chat_stack.add_child(chat_window)
-        window.chat_list_box.select_row(tab)
-        return chat_window
+        chat_name = chat_name.strip()
+        if chat_name:
+            chat_name = window.generate_numbered_name(chat_name, [tab.chat_window.get_name() for tab in self.tab_list])
+            chat_window = chat(chat_name)
+            tab = chat_tab(chat_window)
+            self.prepend(tab)
+            self.tab_list.insert(0, tab)
+            chat_window.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
+            window.chat_stack.add_child(chat_window)
+            window.chat_list_box.select_row(tab)
+            return chat_window
 
     def new_chat(self, chat_title:str=_("New Chat")):
-        window.save_history(self.prepend_chat(chat_title))
+        chat_title = chat_title.strip()
+        if chat_title:
+            window.save_history(self.prepend_chat(chat_title))
 
     def delete_chat(self, chat_name:str):
         chat_tab = None
@@ -339,7 +345,8 @@ class chat_list(Gtk.ListBox):
         window.save_history()
 
     def rename_chat(self, old_chat_name:str, new_chat_name:str):
-        if new_chat_name == old_chat_name:
+        new_chat_name = new_chat_name.strip()
+        if not new_chat_name or new_chat_name == old_chat_name:
             return
         tab = self.get_tab_by_name(old_chat_name)
         if tab:
