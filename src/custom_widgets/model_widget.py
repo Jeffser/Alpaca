@@ -495,6 +495,29 @@ class available_model(Gtk.ListBoxRow):
         threading.Thread(target=window.model_manager.pull_model, args=(model_name,)).start()
         window.navigation_view_manage_models.pop()
 
+    def pull_model(self, model_name):
+        rematch = re.search(r':(\d*\.?\d*)([bBmM])', model_name)
+        parameter_size = 0
+        if rematch:
+            number = float(rematch.group(1))
+            suffix = rematch.group(2).lower()
+            parameter_size = number * 1e9 if suffix == 'b' else number * 1e6
+
+        ram = float(os.popen("free -b | awk '/^Mem:/ {print $7}'").read().strip())
+
+        if parameter_size * 2 <= ram: # multiplied by bytes_per_param (2)
+            # Probably Ok
+            self.confirm_pull_model(model_name)
+        else:
+            # Might don't work
+            dialog_widget.simple(
+                _('Large Model'),
+                _("Your system's available RAM suggests that this model might be too large to run optimally. Are you sure you want to download it anyway?"),
+                lambda name=model_name: self.confirm_pull_model(name),
+                'Download',
+                'destructive'
+            )
+
     def show_pull_menu(self):
         with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
             data = json.load(f)
@@ -517,7 +540,7 @@ class available_model(Gtk.ListBoxRow):
                     download_icon.update_property([4], [_("Download {}:{}").format(self.get_name(), tag_data[0])])
 
                     gesture_click = Gtk.GestureClick.new()
-                    gesture_click.connect("pressed", lambda *_, name=f"{self.get_name()}:{tag_data[0]}" : self.confirm_pull_model(name))
+                    gesture_click.connect("pressed", lambda *_, name=f"{self.get_name()}:{tag_data[0]}" : self.pull_model(name))
 
                     event_controller_key = Gtk.EventControllerKey.new()
                     event_controller_key.connect("key-pressed", lambda controller, key, *_, name=f"{self.get_name()}:{tag_data[0]}" : self.confirm_pull_model(name) if key in (Gdk.KEY_space, Gdk.KEY_Return) else None)
