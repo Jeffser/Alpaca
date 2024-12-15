@@ -146,12 +146,6 @@ class AlpacaApplication(Adw.Application):
 
 
 def main(version):
-    if os.path.isfile(os.path.join(data_dir, 'tmp.log')):
-        os.remove(os.path.join(data_dir, 'tmp.log'))
-    if os.path.isdir(os.path.join(cache_dir, 'tmp')):
-        os.system('rm -rf ' + os.path.join(cache_dir, "tmp/*"))
-    else:
-        os.mkdir(os.path.join(cache_dir, 'tmp'))
     logging.basicConfig(
         format="%(levelname)s\t[%(filename)s | %(funcName)s] %(message)s",
         level=logging.INFO,
@@ -182,6 +176,13 @@ def main(version):
         if os.path.exists(os.path.join(data_dir, "chats")):
             with open(os.path.join(data_dir, "chats", "selected_chat.txt"), "w+", encoding="utf-8") as f:
                 f.write(args.select_chat)
+
+    if os.path.isfile(os.path.join(data_dir, 'tmp.log')):
+        os.remove(os.path.join(data_dir, 'tmp.log'))
+    if os.path.isdir(os.path.join(cache_dir, 'tmp')):
+        os.system('rm -rf ' + os.path.join(cache_dir, "tmp/*"))
+    else:
+        os.mkdir(os.path.join(cache_dir, 'tmp'))
 
     app = AlpacaApplication(version)
     logger.info(f"Alpaca version: {app.version}")

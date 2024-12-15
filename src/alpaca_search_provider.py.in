@@ -10,17 +10,6 @@ from gi.repository import GLib, Gio
 
 _ = gettext.gettext
 
-def get_data_dir() -> str:
-    env = 'XDG_DATA_HOME'
-    default = '~/.local/share'
-    if bool(os.getenv("FLATPAK_ID")):
-        return os.getenv(env)
-    base = os.getenv(env) or os.path.expanduser(default)
-    path = os.path.join(base, APP_ID)
-    if not os.path.exists(path):
-        os.makedirs(path)
-    return path
-
 class AlpacaSearchProvider:
     """
     <node>
@@ -82,17 +71,14 @@ class AlpacaSearchProvider:
             GLib.spawn_close_pid(pid)
 
     def search_chats(self, terms):
-        results = []
         query = ' '.join(terms)
-        if os.path.exists(os.path.join(get_data_dir(), "chats", "chats.json")):
-            try:
-                with open(os.path.join(get_data_dir(), "chats", "chats.json"), "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                    chats = list(data['chats'].keys())
-                results = [f'open:{chat}' for chat in chats if query.lower() in chat.lower()]
-            except:
-                pass
-        results.append(f'ask:{query}')
+        results = [f'ask:{query}']
+        try:
+            result = subprocess.run(['alpaca', '--list-chats'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
+            chats = result.stdout.strip().split('\n')
+            results = [f'open:{chat}' for chat in chats if query.lower() in chat.lower()]
+        except:
+            pass
         return results
 
     def GetResultMetas(self, identifiers):
