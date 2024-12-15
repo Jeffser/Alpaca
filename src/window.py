@@ -181,10 +181,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         data = {
             "model": current_model,
             "messages": self.convert_history_to_ollama(current_chat),
-            "options": {"temperature": self.ollama_instance.tweaks["temperature"], "seed": self.ollama_instance.tweaks["seed"]},
+            "options": {"temperature": self.ollama_instance.tweaks["temperature"]},
             "keep_alive": f"{self.ollama_instance.tweaks['keep_alive']}m",
             "stream": True
         }
+        if self.ollama_instance.tweaks["seed"] != 0:
+            data['options']['seed'] = self.ollama_instance.tweaks["seed"]
 
         self.message_text_view.get_buffer().set_text("", 0)
 
@@ -928,10 +930,12 @@ Generate a title following these rules:
         data = {
             "model": current_model,
             "messages": self.convert_history_to_ollama(chat),
-            "options": {"temperature": self.ollama_instance.tweaks["temperature"], "seed": self.ollama_instance.tweaks["seed"]},
+            "options": {"temperature": self.ollama_instance.tweaks["temperature"]},
             "keep_alive": f"{self.ollama_instance.tweaks['keep_alive']}m",
             "stream": True
         }
+        if self.ollama_instance.tweaks["seed"] != 0:
+            data['options']['seed'] = self.ollama_instance.tweaks["seed"]
 
         bot_id=self.generate_uuid()
         chat.add_message(bot_id, current_model)

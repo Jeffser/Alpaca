@@ -431,9 +431,11 @@ class action_buttons(Gtk.Box):
             data = {
                 "model": message_element.model,
                 "messages": history,
-                "options": {"temperature": window.ollama_instance.tweaks["temperature"], "seed": window.ollama_instance.tweaks["seed"]},
+                "options": {"temperature": window.ollama_instance.tweaks["temperature"]},
                 "keep_alive": f"{window.ollama_instance.tweaks['keep_alive']}m"
             }
+            if window.ollama_instance.tweaks["seed"] != 0:
+                data['options']['seed'] = window.ollama_instance.tweaks["seed"]
             thread = threading.Thread(target=window.run_message, args=(data, message_element, chat))
             thread.start()
         else:
