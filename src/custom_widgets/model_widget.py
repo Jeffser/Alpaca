@@ -514,7 +514,7 @@ class available_model(Gtk.ListBoxRow):
                 _('Large Model'),
                 _("Your system's available RAM suggests that this model might be too large to run optimally. Are you sure you want to download it anyway?"),
                 lambda name=model_name: self.confirm_pull_model(name),
-                'Download',
+                _('Download'),
                 'destructive'
             )
 
