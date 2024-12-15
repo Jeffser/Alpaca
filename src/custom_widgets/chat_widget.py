@@ -165,6 +165,29 @@ class chat(Gtk.ScrolledWindow):
         else:
             self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
 
+    def messages_to_md(self) -> str:
+        markdown = []
+        for message_id, message_element in self.messages.items():
+            if message_element.text and message_element.dt:
+                markdown.append('**{}** | {}'.format(window.convert_model_name(message_element.model, 0) if message_element.bot else _('User'), message_element.dt.strftime("%Y/%m/%d %H:%M:%S")))
+                markdown.append(message_element.text)
+                if message_element.image_c:
+                    for file in message_element.image_c.files:
+                        markdown.append('![{}](./{}/{}/{})'.format(file.image_name, self.get_name(), message_id, file.image_name))
+                if message_element.attachment_c:
+                    emojis = {
+                        'plain_text': '📃',
+                        'code': '💻',
+                        'pdf': '📕',
+                        'youtube': '📹',
+                        'website': '🌐'
+                    }
+                    for file in message_element.attachment_c.files:
+                        markdown.append('[{} {}](./{}/{}/{}) '.format(emojis[file.file_type], file.file_name, self.get_name(), message_id, file.file_name))
+                markdown.append('----')
+        markdown.append('Generated from [Alpaca](https://github.com/Jeffser/Alpaca)')
+        return '\n\n'.join(markdown)
+
     def messages_to_dict(self) -> dict:
         messages_dict = {}
         for message_id, message_element in self.messages.items():
@@ -378,15 +401,21 @@ class chat_list(Gtk.ListBox):
         if not file:
             return
         json_data = json.dumps({chat_name: {"messages": self.get_chat_by_name(chat_name).messages_to_dict()}}, indent=4).encode("UTF-8")
+        markdown_text = self.get_chat_by_name(chat_name).messages_to_md()
 
         with tempfile.TemporaryDirectory() as temp_dir:
             json_path = os.path.join(temp_dir, "data.json")
             with open(json_path, "wb") as json_file:
                 json_file.write(json_data)
 
+            markdown_path = os.path.join(temp_dir, '{}.md'.format(chat_name))
+            with open(markdown_path, "w") as md_file:
+                md_file.write(markdown_text)
+
             tar_path = os.path.join(temp_dir, chat_name)
             with tarfile.open(tar_path, "w") as tar:
                 tar.add(json_path, arcname="data.json")
+                tar.add(markdown_path, arcname="{}.md".format(chat_name))
                 directory = os.path.join(data_dir, "chats", chat_name)
                 if os.path.exists(directory) and os.path.isdir(directory):
                     tar.add(directory, arcname=os.path.basename(directory))
