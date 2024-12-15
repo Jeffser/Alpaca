@@ -337,7 +337,8 @@ class footer(Gtk.Label):
             xalign=0,
             margin_bottom=5,
             margin_start=5,
-            focusable=True
+            focusable=True,
+            css_classes=['dim-label']
         )
         self.set_markup("<small>{}{}</small>".format((window.convert_model_name(model, 0) + " • ") if model else "", GLib.markup_escape_text(self.format_datetime(dt))))
 
