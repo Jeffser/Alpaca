@@ -86,7 +86,6 @@ class AlpacaService:
         return 'yeah'
 
     def Open(self, chat_name:str):
-        print('open')
         for chat_row in self.app.props.active_window.chat_list_box.tab_list:
             if chat_row.chat_window.get_name() == chat_name:
                 self.app.props.active_window.chat_list_box.select_row(chat_row)
@@ -110,7 +109,20 @@ class AlpacaApplication(Adw.Application):
         self.set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.version = version
         self.args = parser.parse_args()
-        SessionBus().publish('com.jeffser.Alpaca', AlpacaService(self))
+        try:
+            SessionBus().publish('com.jeffser.Alpaca', AlpacaService(self))
+        except:
+            # The app is probably already running so let's use dbus to interact if needed
+            app_service = SessionBus().get("com.jeffser.Alpaca")
+            if app_service.IsRunning() != 'yeah':
+                raise Exception('Alpaca not running')
+            if self.args.new_chat:
+                app_service.Create(self.args.new_chat)
+            elif self.args.select_chat:
+                app_service.Open(self.args.select_chat)
+            elif self.args.ask:
+                app_service.Ask(self.args.ask)
+            sys.exit(0)
 
     def do_activate(self):
         win = self.props.active_window
