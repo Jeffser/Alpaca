@@ -146,11 +146,11 @@ msgstr "Нове"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
-msgstr ""
+msgstr "Нова опція --ask MESSAGE для відкриття нового вікна 'Quick Ask'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Gnome Search integration now works whilst the app is opened"
-msgstr ""
+msgstr "Інтеграція з Gnome Search тепер працює, коли додаток відкрито"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid ""
@@ -1676,11 +1676,11 @@ msgstr "Введіть інформацію про інстанцію, щоб п
 
 #: src/window.py:903
 msgid "An error occurred: {}"
-msgstr ""
+msgstr "Сталася помилка: {}"
 
 #: src/window.py:912 src/window.ui:512
 msgid "Quick Ask"
-msgstr ""
+msgstr "Швидке запитання"
 
 #: src/window.py:1019
 msgid "Clear Chat?"
@@ -2808,13 +2808,15 @@ msgstr "Показати попередження про режим енерго
 
 #: src/window.ui:330
 msgid "Default Model"
-msgstr ""
+msgstr "Модель за замовчуванням"
 
 #: src/window.ui:331
 msgid ""
 "The default model to use on new chats and when Alpaca is launched with the "
 "option --ask \"message\""
 msgstr ""
+"Модель за замовчуванням для використання в нових чатах та при запуску Alpaca з "
+"опцією --ask \"message\""
 
 #: src/window.ui:349
 msgid "Temperature"
@@ -2885,11 +2887,11 @@ msgstr ""
 
 #: src/window.ui:510
 msgid "Quick ask dialog"
-msgstr ""
+msgstr "Діалог швидкого запиту"
 
 #: src/window.ui:522
 msgid "Save Conversation to Alpaca"
-msgstr ""
+msgstr "Зберегти розмову в Alpaca"
 
 #: src/window.ui:537 src/window.ui:560
 msgid "Manage models dialog"
@@ -3101,7 +3103,6 @@ msgstr "Вставити новий рядок"
 #: src/alpaca_search_provider.py.in:51
 msgid "Open chat"
 msgstr "Відкрити чат"
-
 
 #: src/alpaca_search_provider.py.in:39
 msgid "Create chat"
