@@ -426,9 +426,10 @@ class action_buttons(Gtk.Box):
                 message_element.container.remove(message_element.footer)
             message_element.remove_overlay(self)
             message_element.action_buttons = None
+            message_element.model = window.model_manager.get_selected_model()
             history = window.convert_history_to_ollama(chat)[:list(chat.messages).index(message_element.message_id)]
             data = {
-                "model": window.model_manager.get_selected_model(),
+                "model": message_element.model,
                 "messages": history,
                 "options": {"temperature": window.ollama_instance.tweaks["temperature"], "seed": window.ollama_instance.tweaks["seed"]},
                 "keep_alive": f"{window.ollama_instance.tweaks['keep_alive']}m"
