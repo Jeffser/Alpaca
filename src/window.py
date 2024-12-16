@@ -992,7 +992,7 @@ Generate a title following these rules:
             self.save_server_config()
         self.send_button.set_sensitive(True)
         self.attachment_button.set_sensitive(True)
-        self.remote_connection_switch.set_sensitive(True)
+        self.remote_connection_switch.set_sensitive(shutil.which('ollama'))
         self.tweaks_group.set_sensitive(True)
         self.instance_page.set_sensitive(True)
         self.get_application().lookup_action('manage_models').set_enabled(True)
