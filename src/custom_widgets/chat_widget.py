@@ -272,11 +272,14 @@ class chat_tab(Gtk.ListBoxRow):
             child = container
         )
 
-        self.gesture = Gtk.GestureClick(button=3)
-        self.gesture.connect("released", self.chat_click_handler)
-        self.add_controller(self.gesture)
+        self.gesture_click = Gtk.GestureClick(button=3)
+        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.open_menu(gesture, x, y))
+        self.add_controller(self.gesture_click)
+        self.gesture_long_press = Gtk.GestureLongPress()
+        self.gesture_long_press.connect("pressed", self.open_menu)
+        self.add_controller(self.gesture_long_press)
 
-    def chat_click_handler(self, gesture, n_press, x, y):
+    def open_menu(self, gesture, x, y):
         chat_row = gesture.get_widget()
         popover = Gtk.PopoverMenu(
             menu_model=window.chat_right_click_menu,
