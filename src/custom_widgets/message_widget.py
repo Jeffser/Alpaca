@@ -54,7 +54,7 @@ class edit_text_block(Gtk.Box):
             css_classes=['flat', 'circular'],
             icon_name='paper-plane-symbolic'
         )
-        save_button.connect('clicked', lambda *_: self.edit_message())
+        save_button.connect('clicked', lambda *_: self.save_edit())
         self.append(self.text_view)
 
         button_container = Gtk.Box(
