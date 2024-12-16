@@ -96,7 +96,7 @@ class edit_text_block(Gtk.Box):
 class text_block(Gtk.Label):
     __gtype_name__ = 'AlpacaTextBlock'
 
-    def __init__(self, bot:bool):
+    def __init__(self, bot:bool, system:bool):
         super().__init__(
             hexpand=True,
             halign=0,
@@ -107,9 +107,15 @@ class text_block(Gtk.Label):
             margin_start=5,
             margin_end=5,
             focusable=True,
-            selectable=True
+            selectable=True,
+            css_classes=['dim-label'] if system else []
         )
-        self.update_property([4, 7], [_("Response message") if bot else _("User message"), False])
+        if bot:
+            self.update_property([4, 7], [_("Response message"), False])
+        elif system:
+            self.update_property([4, 7], [_("System message"), False])
+        else:
+            self.update_property([4, 7], [_("User message"), False])
         self.connect('notify::has-focus', lambda *_: GLib.idle_add(self.remove_selection) if self.has_focus() else None)
 
     def remove_selection(self):
@@ -327,7 +333,7 @@ class image_container(Gtk.ScrolledWindow):
 class footer(Gtk.Label):
     __gtype_name__ = 'AlpacaMessageFooter'
 
-    def __init__(self, dt:datetime.datetime, model:str=None):
+    def __init__(self, dt:datetime.datetime, model:str=None, system:bool=False):
         super().__init__(
             hexpand=False,
             halign=0,
@@ -340,7 +346,13 @@ class footer(Gtk.Label):
             focusable=True,
             css_classes=['dim-label']
         )
-        self.set_markup("<small>{}{}</small>".format((window.convert_model_name(model, 0) + " • ") if model else "", GLib.markup_escape_text(self.format_datetime(dt))))
+        message_author = ""
+        if model:
+            message_author = window.convert_model_name(model, 0) + " • "
+        if system:
+            message_author = "{} • ".format(_("System"))
+
+        self.set_markup("<small>{}{}</small>".format(message_author, GLib.markup_escape_text(self.format_datetime(dt))))
 
     def format_datetime(self, dt:datetime) -> str:
         date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
@@ -458,9 +470,11 @@ class action_buttons(Gtk.Box):
 class message(Gtk.Overlay):
     __gtype_name__ = 'AlpacaMessage'
 
-    def __init__(self, message_id:str, model:str=None):
+    def __init__(self, message_id:str, model:str=None, system:bool=False):
+        if system: print('system')
         self.message_id = message_id
         self.bot = model != None
+        self.system = system
         self.dt = None
         self.model = model
         self.action_buttons = None
@@ -474,15 +488,15 @@ class message(Gtk.Overlay):
         self.container = Gtk.Box(
             orientation=1,
             halign='fill',
-            css_classes=["response_message"] if self.bot else ["card", "user_message"],
+            css_classes=["response_message"] if self.bot or self.system else ["card", "user_message"],
             spacing=5,
-            width_request=-1 if self.bot else 375
+            width_request=-1 if self.bot or self.system else 375
         )
 
         super().__init__(
             css_classes=["message"],
             name=message_id,
-            halign=0 if self.bot else 2
+            halign=0 if self.bot or self.system else 2
         )
         self.set_child(self.container)
 
@@ -502,7 +516,7 @@ class message(Gtk.Overlay):
 
     def add_footer(self, dt:datetime.datetime):
         self.dt = dt
-        self.footer = footer(self.dt, self.model)
+        self.footer = footer(self.dt, self.model, self.system)
         self.container.append(self.footer)
 
     def add_action_buttons(self):
@@ -601,7 +615,7 @@ class message(Gtk.Overlay):
 
             for part in parts:
                 if part['type'] == 'normal':
-                    text_b = text_block(self.bot)
+                    text_b = text_block(self.bot, self.system)
                     part['text'] = part['text'].replace("\n* ", "\n• ")
                     part['text'] = re.sub(r'`([^`\n]*?)`', r'<tt>\1</tt>', part['text'])
                     part['text'] = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', part['text'], flags=re.MULTILINE)
@@ -631,7 +645,7 @@ class message(Gtk.Overlay):
                     self.container.append(table_w)
             self.add_action_buttons()
         else:
-            text_b = text_block(self.bot)
+            text_b = text_block(self.bot, self.system)
             text_b.set_visible(False)
             self.content_children.append(text_b)
             if self.spinner:

@@ -172,7 +172,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.attachments = {}
         self.attachment_box.set_visible(False)
         raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-        current_chat.add_message(message_id, None)
+        current_chat.add_message(message_id, None, False)
         m_element = current_chat.messages[message_id]
 
         if len(attached_files) > 0:
@@ -196,7 +196,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.message_text_view.get_buffer().set_text("", 0)
 
         bot_id=self.generate_uuid()
-        current_chat.add_message(bot_id, current_model)
+        current_chat.add_message(bot_id, current_model, False)
         m_element_bot = current_chat.messages[bot_id]
         m_element_bot.set_text()
         threading.Thread(target=self.run_message, args=(data, m_element_bot, current_chat)).start()
@@ -926,7 +926,7 @@ Generate a title following these rules:
         self.quick_ask_overlay.set_child(chat)
 
         message_id = self.generate_uuid()
-        chat.add_message(message_id, None)
+        chat.add_message(message_id, None, False)
         m_element = chat.messages[message_id]
         m_element.set_text(message)
         m_element.add_footer(datetime.now())
@@ -943,7 +943,7 @@ Generate a title following these rules:
             data['options']['seed'] = self.ollama_instance.tweaks["seed"]
 
         bot_id=self.generate_uuid()
-        chat.add_message(bot_id, current_model)
+        chat.add_message(bot_id, current_model, False)
         m_element_bot = chat.messages[bot_id]
         m_element_bot.set_text()
         chat.busy = True

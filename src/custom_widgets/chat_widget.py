@@ -91,8 +91,8 @@ class chat(Gtk.ScrolledWindow):
         self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
         print('clear chat for some reason')
 
-    def add_message(self, message_id:str, model:str=None):
-        msg = message(message_id, model)
+    def add_message(self, message_id:str, model:str=None, system:bool=None):
+        msg = message(message_id, model, system)
         self.messages[message_id] = msg
         self.container.append(msg)
 
@@ -148,7 +148,7 @@ class chat(Gtk.ScrolledWindow):
                 self.welcome_screen = None
             for message_id, message_data in messages.items():
                 if message_data['content']:
-                    self.add_message(message_id, message_data['model'] if message_data['role'] == 'assistant' else None)
+                    self.add_message(message_id, message_data['model'] if message_data['role'] == 'assistant' else None, message_data['role'] == 'system')
                     message_element = self.messages[message_id]
                     if 'images' in message_data:
                         images=[]
@@ -169,7 +169,13 @@ class chat(Gtk.ScrolledWindow):
         markdown = []
         for message_id, message_element in self.messages.items():
             if message_element.text and message_element.dt:
-                markdown.append('**{}** | {}'.format(window.convert_model_name(message_element.model, 0) if message_element.bot else _('User'), message_element.dt.strftime("%Y/%m/%d %H:%M:%S")))
+                message_author = _('User')
+                if message_element.bot:
+                    message_author = window.convert_model_name(message_element.model, 0)
+                if message_element.system:
+                    message_author = _('System')
+
+                markdown.append('**{}** | {}'.format(message_author, message_element.dt.strftime("%Y/%m/%d %H:%M:%S")))
                 markdown.append(message_element.text)
                 if message_element.image_c:
                     for file in message_element.image_c.files:
@@ -192,8 +198,13 @@ class chat(Gtk.ScrolledWindow):
         messages_dict = {}
         for message_id, message_element in self.messages.items():
             if message_element.text and message_element.dt:
+                message_author = 'user'
+                if message_element.bot:
+                    message_author = 'assistant'
+                if message_element.system:
+                    message_author = 'system'
                 messages_dict[message_id] = {
-                    'role': 'assistant' if message_element.bot else 'user',
+                    'role': message_author,
                     'model': message_element.model,
                     'date': message_element.dt.strftime("%Y/%m/%d %H:%M:%S"),
                     'content': message_element.text
