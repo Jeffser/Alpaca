@@ -108,7 +108,8 @@ class text_block(Gtk.Label):
             margin_end=5,
             focusable=True,
             selectable=True,
-            css_classes=['dim-label'] if system else []
+            css_classes=['dim-label'] if system else [],
+            justify=2 if system else 0
         )
         if bot:
             self.update_property([4, 7], [_("Response message"), False])
