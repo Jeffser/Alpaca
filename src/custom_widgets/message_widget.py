@@ -381,7 +381,8 @@ class option_popup(Gtk.Popover):
         )
         self.edit_button.connect('clicked', lambda *_: self.edit_message())
 
-        container.append(self.regenerate_button if self.message_element.bot else self.edit_button)
+        container.append(self.regenerate_button)
+        container.append(self.edit_button)
 
     def delete_message(self):
         logger.debug("Deleting message")
