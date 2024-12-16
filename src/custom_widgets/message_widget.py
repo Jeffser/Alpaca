@@ -363,15 +363,6 @@ class option_popup(Gtk.Popover):
         self.copy_button.connect('clicked', lambda *_: self.copy_message())
         container.append(self.copy_button)
 
-        self.regenerate_button = Gtk.Button(
-            halign=1,
-            hexpand=True,
-            icon_name="update-symbolic",
-            css_classes=["flat"],
-            tooltip_text=_("Regenerate Message")
-        )
-        self.regenerate_button.connect('clicked', lambda *_: self.regenerate_message())
-
         self.edit_button = Gtk.Button(
             halign=1,
             hexpand=True,
@@ -381,8 +372,17 @@ class option_popup(Gtk.Popover):
         )
         self.edit_button.connect('clicked', lambda *_: self.edit_message())
 
-        container.append(self.regenerate_button)
         container.append(self.edit_button)
+        if self.message_element.bot:
+            self.regenerate_button = Gtk.Button(
+                halign=1,
+                hexpand=True,
+                icon_name="update-symbolic",
+                css_classes=["flat"],
+                tooltip_text=_("Regenerate Message")
+            )
+            self.regenerate_button.connect('clicked', lambda *_: self.regenerate_message())
+            container.append(self.regenerate_button)
 
     def delete_message(self):
         logger.debug("Deleting message")
