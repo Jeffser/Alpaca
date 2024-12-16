@@ -30,6 +30,7 @@
 }
 .model_popover {
   margin-top: 6px;
+  margin-bottom: 6px;
 }
 stacksidebar {
   border: none;
@@ -42,4 +43,7 @@ stacksidebar {
 }
 .terminal {
   padding: 10px;
+}
+.message_options_button > button {
+  min-height: 20px;
 }

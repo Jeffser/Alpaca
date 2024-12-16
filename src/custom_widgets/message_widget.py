@@ -79,7 +79,6 @@ class edit_text_block(Gtk.Box):
 
     def save_edit(self):
         message_element = self.get_parent().get_parent()
-        message_element.action_buttons.set_visible(True)
         message_element.set_text(self.text_view.get_buffer().get_text(self.text_view.get_buffer().get_start_iter(), self.text_view.get_buffer().get_end_iter(), False))
         message_element.add_footer(message_element.dt)
         window.save_history(message_element.get_parent().get_parent().get_parent().get_parent())
@@ -88,7 +87,6 @@ class edit_text_block(Gtk.Box):
 
     def cancel_edit(self):
         message_element = self.get_parent().get_parent()
-        message_element.action_buttons.set_visible(True)
         message_element.set_text(message_element.text)
         message_element.add_footer(message_element.dt)
         self.get_parent().remove(self)
@@ -331,19 +329,132 @@ class image_container(Gtk.ScrolledWindow):
         self.container.append(img)
         self.files.append(img)
 
-class footer(Gtk.Label):
+class option_popup(Gtk.Popover):
+    __gtype_name__ = 'AlpacaMessagePopup'
+
+    def __init__(self, message_element):
+        self.message_element = message_element
+        container = Gtk.Box(
+            spacing=5
+        )
+        super().__init__(
+            has_arrow=True,
+            child=container
+        )
+
+        if not self.message_element.get_parent().get_parent().get_parent().get_parent().quick_chat:
+            self.delete_button = Gtk.Button(
+                halign=1,
+                hexpand=True,
+                icon_name="user-trash-symbolic",
+                css_classes = ["flat"],
+                tooltip_text = _("Remove Message")
+            )
+            self.delete_button.connect('clicked', lambda *_: self.delete_message())
+            container.append(self.delete_button)
+
+        self.copy_button = Gtk.Button(
+            halign=1,
+            hexpand=True,
+            icon_name="edit-copy-symbolic",
+            css_classes=["flat"],
+            tooltip_text=_("Copy Message")
+        )
+        self.copy_button.connect('clicked', lambda *_: self.copy_message())
+        container.append(self.copy_button)
+
+        self.regenerate_button = Gtk.Button(
+            halign=1,
+            hexpand=True,
+            icon_name="update-symbolic",
+            css_classes=["flat"],
+            tooltip_text=_("Regenerate Message")
+        )
+        self.regenerate_button.connect('clicked', lambda *_: self.regenerate_message())
+
+        self.edit_button = Gtk.Button(
+            halign=1,
+            hexpand=True,
+            icon_name="edit-symbolic",
+            css_classes=["flat"],
+            tooltip_text=_("Edit Message")
+        )
+        self.edit_button.connect('clicked', lambda *_: self.edit_message())
+
+        container.append(self.regenerate_button if self.message_element.bot else self.edit_button)
+
+    def delete_message(self):
+        logger.debug("Deleting message")
+        chat = self.message_element.get_parent().get_parent().get_parent().get_parent()
+        message_id = self.message_element.message_id
+        self.message_element.get_parent().remove(self.message_element)
+        if os.path.exists(os.path.join(data_dir, "chats", window.chat_list_box.get_current_chat().get_name(), message_id)):
+            shutil.rmtree(os.path.join(data_dir, "chats", window.chat_list_box.get_current_chat().get_name(), message_id))
+        del chat.messages[message_id]
+        window.save_history(chat)
+        if len(chat.messages) == 0:
+            chat.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
+
+    def copy_message(self):
+        logger.debug("Copying message")
+        clipboard = Gdk.Display().get_default().get_clipboard()
+        clipboard.set(self.message_element.text)
+        window.show_toast(_("Message copied to the clipboard"), window.main_overlay)
+
+    def edit_message(self):
+        logger.debug("Editing message")
+        for child in self.message_element.content_children:
+            self.message_element.container.remove(child)
+        self.message_element.content_children = []
+        self.message_element.container.remove(self.message_element.footer)
+        self.message_element.footer = None
+        edit_text_b = edit_text_block(self.message_element.text)
+        self.message_element.container.append(edit_text_b)
+        window.set_focus(edit_text_b)
+
+    def regenerate_message(self):
+        chat = self.message_element.get_parent().get_parent().get_parent().get_parent()
+        if self.message_element.spinner:
+            self.message_element.container.remove(self.message_element.spinner)
+            self.message_element.spinner = None
+        if not chat.busy:
+            self.message_element.set_text()
+            if self.message_element.footer:
+                self.message_element.container.remove(self.message_element.footer)
+            self.message_element.model = window.model_manager.get_selected_model()
+            history = window.convert_history_to_ollama(chat)[:list(chat.messages).index(self.message_element.message_id)]
+            data = {
+                "model": self.message_element.model,
+                "messages": history,
+                "options": {"temperature": window.ollama_instance.tweaks["temperature"]},
+                "keep_alive": f"{window.ollama_instance.tweaks['keep_alive']}m"
+            }
+            if window.ollama_instance.tweaks["seed"] != 0:
+                data['options']['seed'] = window.ollama_instance.tweaks["seed"]
+            thread = threading.Thread(target=window.run_message, args=(data, self.message_element, chat))
+            thread.start()
+        else:
+            window.show_toast(_("Message cannot be regenerated while receiving a response"), window.main_overlay)
+
+class footer(Gtk.Box):
     __gtype_name__ = 'AlpacaMessageFooter'
 
     def __init__(self, dt:datetime.datetime, model:str=None, system:bool=False):
         super().__init__(
-            hexpand=False,
-            halign=0,
+            orientation=0,
+            hexpand=True,
+            margin_start=10,
+            margin_bottom=10,
+            spacing=5,
+            halign=0
+        )
+        self.options_button=None
+        label = Gtk.Label(
+            hexpand=True,
             wrap=True,
             ellipsize=3,
             wrap_mode=2,
             xalign=0,
-            margin_bottom=5,
-            margin_start=5,
             focusable=True,
             css_classes=['dim-label']
         )
@@ -352,8 +463,8 @@ class footer(Gtk.Label):
             message_author = window.convert_model_name(model, 0) + " • "
         if system:
             message_author = "{} • ".format(_("System"))
-
-        self.set_markup("<small>{}{}</small>".format(message_author, GLib.markup_escape_text(self.format_datetime(dt))))
+        label.set_markup("<small>{}{}</small>".format(message_author, GLib.markup_escape_text(self.format_datetime(dt))))
+        self.append(label)
 
     def format_datetime(self, dt:datetime) -> str:
         date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
@@ -364,111 +475,16 @@ class footer(Gtk.Label):
             return date.format("%b %d, %H:%M %p")
         return date.format("%b %d %Y, %H:%M %p")
 
-class action_buttons(Gtk.Box):
-    __gtype_name__ = 'AlpacaActionButtonContainer'
-
-    def __init__(self, bot:bool, include_delete:bool):
-        super().__init__(
-            orientation=0,
-            spacing=6,
-            margin_end=6,
-            margin_bottom=6,
-            valign="end",
-            halign="end"
+    def add_options_button(self):
+        self.popup = option_popup(self.get_parent().get_parent())
+        self.options_button = Gtk.MenuButton(
+            icon_name='view-more-horizontal-symbolic',
+            css_classes=['message_options_button', 'flat', 'circular', 'dim-label'],
+            popover=self.popup
         )
+        self.prepend(self.options_button)
 
-        if include_delete:
-            self.delete_button = Gtk.Button(
-                icon_name = "user-trash-symbolic",
-                css_classes = ["flat", "circular"],
-                tooltip_text = _("Remove Message")
-            )
-            self.delete_button.connect('clicked', lambda *_: self.delete_message())
-            self.append(self.delete_button)
-
-        self.copy_button = Gtk.Button(
-            icon_name = "edit-copy-symbolic",
-            css_classes = ["flat", "circular"],
-            tooltip_text = _("Copy Message")
-        )
-        self.copy_button.connect('clicked', lambda *_: self.copy_message())
-        self.append(self.copy_button)
-
-        self.regenerate_button = Gtk.Button(
-            icon_name = "update-symbolic",
-            css_classes = ["flat", "circular"],
-            tooltip_text = _("Regenerate Message")
-        )
-        self.regenerate_button.connect('clicked', lambda *_: self.regenerate_message())
-
-        self.edit_button = Gtk.Button(
-            icon_name = "edit-symbolic",
-            css_classes = ["flat", "circular"],
-            tooltip_text = _("Edit Message")
-        )
-        self.edit_button.connect('clicked', lambda *_: self.edit_message())
-
-        self.append(self.regenerate_button if bot else self.edit_button)
-
-    def delete_message(self):
-        logger.debug("Deleting message")
-        chat = self.get_parent().get_parent().get_parent().get_parent().get_parent()
-        message_id = self.get_parent().message_id
-        self.get_parent().get_parent().remove(self.get_parent())
-        if os.path.exists(os.path.join(data_dir, "chats", window.chat_list_box.get_current_chat().get_name(), self.get_parent().message_id)):
-            shutil.rmtree(os.path.join(data_dir, "chats", window.chat_list_box.get_current_chat().get_name(), self.get_parent().message_id))
-        del chat.messages[message_id]
-        window.save_history(chat)
-        if len(chat.messages) == 0:
-            chat.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
-
-    def copy_message(self):
-        logger.debug("Copying message")
-        clipboard = Gdk.Display().get_default().get_clipboard()
-        clipboard.set(self.get_parent().text)
-        window.show_toast(_("Message copied to the clipboard"), window.main_overlay)
-
-    def regenerate_message(self):
-        chat = self.get_parent().get_parent().get_parent().get_parent().get_parent()
-        message_element = self.get_parent()
-        if message_element.spinner:
-            message_element.container.remove(message_element.spinner)
-            message_element.spinner = None
-        if not chat.busy:
-            message_element.set_text()
-            if message_element.footer:
-                message_element.container.remove(message_element.footer)
-            message_element.remove_overlay(self)
-            message_element.action_buttons = None
-            message_element.model = window.model_manager.get_selected_model()
-            history = window.convert_history_to_ollama(chat)[:list(chat.messages).index(message_element.message_id)]
-            data = {
-                "model": message_element.model,
-                "messages": history,
-                "options": {"temperature": window.ollama_instance.tweaks["temperature"]},
-                "keep_alive": f"{window.ollama_instance.tweaks['keep_alive']}m"
-            }
-            if window.ollama_instance.tweaks["seed"] != 0:
-                data['options']['seed'] = window.ollama_instance.tweaks["seed"]
-            thread = threading.Thread(target=window.run_message, args=(data, message_element, chat))
-            thread.start()
-        else:
-            window.show_toast(_("Message cannot be regenerated while receiving a response"), window.main_overlay)
-
-    def edit_message(self):
-        logger.debug("Editing message")
-        self.get_parent().action_buttons.set_visible(False)
-        for child in self.get_parent().content_children:
-            self.get_parent().container.remove(child)
-        self.get_parent().content_children = []
-        self.get_parent().container.remove(self.get_parent().footer)
-        self.get_parent().footer = None
-        edit_text_b = edit_text_block(self.get_parent().text)
-        self.get_parent().container.append(edit_text_b)
-        window.set_focus(edit_text_b)
-
-
-class message(Gtk.Overlay):
+class message(Adw.Bin):
     __gtype_name__ = 'AlpacaMessage'
 
     def __init__(self, message_id:str, model:str=None, system:bool=False):
@@ -478,7 +494,6 @@ class message(Gtk.Overlay):
         self.system = system
         self.dt = None
         self.model = model
-        self.action_buttons = None
         self.content_children = [] #These are the code blocks, text blocks and tables
         self.footer = None
         self.image_c = None
@@ -519,13 +534,7 @@ class message(Gtk.Overlay):
         self.dt = dt
         self.footer = footer(self.dt, self.model, self.system)
         self.container.append(self.footer)
-
-    def add_action_buttons(self):
-        if not self.action_buttons:
-            self.action_buttons = action_buttons(self.bot, not self.get_parent().get_parent().get_parent().get_parent().quick_chat)
-            self.add_overlay(self.action_buttons)
-            if not self.text:
-                self.action_buttons.set_visible(False)
+        self.footer.add_options_button()
 
     def update_message(self, data:dict):
         chat = self.get_parent().get_parent().get_parent().get_parent()
@@ -644,7 +653,6 @@ class message(Gtk.Overlay):
                     table_w = TableWidget(part['text'])
                     self.content_children.append(table_w)
                     self.container.append(table_w)
-            self.add_action_buttons()
         else:
             text_b = text_block(self.bot, self.system)
             text_b.set_visible(False)

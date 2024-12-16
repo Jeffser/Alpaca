@@ -181,7 +181,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             m_element.add_images(attached_images)
         m_element.set_text(raw_message)
         m_element.add_footer(datetime.now())
-        m_element.add_action_buttons()
 
         data = {
             "model": current_model,
@@ -577,7 +576,7 @@ Generate a title following these rules:
             logger.error(e)
             self.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
             chat.busy = False
-            GLib.idle_add(message_element.add_action_buttons)
+            GLib.idle_add(message_element.footer.add_options_button)
             if message_element.spinner:
                 GLib.idle_add(message_element.container.remove, message_element.spinner)
                 message_element.spinner = None
@@ -930,7 +929,6 @@ Generate a title following these rules:
         m_element = chat.messages[message_id]
         m_element.set_text(message)
         m_element.add_footer(datetime.now())
-        m_element.add_action_buttons()
 
         data = {
             "model": current_model,
