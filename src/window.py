@@ -131,6 +131,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     quick_ask_save_button = Gtk.Template.Child()
 
     @Gtk.Template.Callback()
+    def refresh_local_models(self, button=None):
+        logger.info("Refreshing local model list")
+        self.model_manager.update_local_list()
+
+    @Gtk.Template.Callback()
     def stop_message(self, button=None):
         self.chat_list_box.get_current_chat().stop_message()
 

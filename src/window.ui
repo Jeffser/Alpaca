@@ -589,6 +589,14 @@
                               <signal name="clicked" handler="model_search_toggle"/>
                             </object>
                           </child>
+                          <child type="end">
+                            <object class="GtkButton" id="model_refresh_button">
+                              <property name="icon-name">view-refresh-symbolic</property>
+                              <property name="tooltip-text" translatable="yes">Refresh Local Models</property>
+                              <property name="visible" bind-source="remote_connection_switch" bind-property="active" bind-flags="sync-create"/>
+                              <signal name="clicked" handler="refresh_local_models"/>
+                            </object>
+                          </child>
                         </object>
                       </child>
                       <child type="top">
@@ -995,7 +1003,7 @@
               <signal name="page-changed" handler="welcome_carousel_page_changed"/>
               <property name="hexpand">true</property>
               <property name="vexpand">true</property>
-              <property name="allow-long-swipes">true</property>
+              <property name="allow-long-swipes">true</property>remote_connection_switch
               <property name="allow-scroll-wheel">true</property>
               <property name="spacing">12</property>
               <child>
