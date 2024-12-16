@@ -1120,6 +1120,18 @@
       </item>
     </section>
   </menu>
+  <menu id="send_message_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Send as User</attribute>
+        <attribute name="action">app.send_message</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Send as System</attribute>
+        <attribute name="action">app.send_system_message</attribute>
+      </item>
+    </section>
+  </menu>
   <menu id="create_model_menu">
     <section>
       <item>

@@ -184,7 +184,7 @@
             "name": "ollama",
             "buildsystem": "simple",
             "build-commands": [
-            	"cp -r --remove-destination * ${FLATPAK_DEST}/",
+            	"#cp -r --remove-destination * ${FLATPAK_DEST}/",
             	"mkdir ${FLATPAK_DEST}/plugins"
             ],
             "sources": [
@@ -193,7 +193,7 @@
             		"url": "https://github.com/ollama/ollama/releases/download/v0.4.2/ollama-linux-amd64.tgz",
             		"sha256": "485b1b223571828a46532d55c118ea0c686af6acfb83876a9579ec1790d5cb33",
 		    	"only-arches": [
-		    		"x86_64"
+		    		"aarch64"
 		    	]
             	},
             	{

@@ -88,6 +88,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     file_filter_attachments = Gtk.Template.Child()
     attachment_button = Gtk.Template.Child()
     chat_right_click_menu = Gtk.Template.Child()
+    send_message_menu = Gtk.Template.Child()
     model_tag_list_box = Gtk.Template.Child()
     navigation_view_manage_models = Gtk.Template.Child()
     file_preview_open_button = Gtk.Template.Child()
@@ -140,7 +141,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.chat_list_box.get_current_chat().stop_message()
 
     @Gtk.Template.Callback()
-    def send_message(self, button=None):
+    def send_message(self, button=None, system:bool=False):
         if button and not button.get_visible():
             return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False):
@@ -172,7 +173,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.attachments = {}
         self.attachment_box.set_visible(False)
         raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-        current_chat.add_message(message_id, None, False)
+        current_chat.add_message(message_id, None, system)
         m_element = current_chat.messages[message_id]
 
         if len(attached_files) > 0:
@@ -181,24 +182,27 @@ class AlpacaWindow(Adw.ApplicationWindow):
             m_element.add_images(attached_images)
         m_element.set_text(raw_message)
         m_element.add_footer(datetime.now())
-
-        data = {
-            "model": current_model,
-            "messages": self.convert_history_to_ollama(current_chat),
-            "options": {"temperature": self.ollama_instance.tweaks["temperature"]},
-            "keep_alive": f"{self.ollama_instance.tweaks['keep_alive']}m",
-            "stream": True
-        }
-        if self.ollama_instance.tweaks["seed"] != 0:
-            data['options']['seed'] = self.ollama_instance.tweaks["seed"]
-
         self.message_text_view.get_buffer().set_text("", 0)
 
-        bot_id=self.generate_uuid()
-        current_chat.add_message(bot_id, current_model, False)
-        m_element_bot = current_chat.messages[bot_id]
-        m_element_bot.set_text()
-        threading.Thread(target=self.run_message, args=(data, m_element_bot, current_chat)).start()
+        if system:
+            if current_chat.welcome_screen:
+                current_chat.welcome_screen.set_visible(False)
+        else:
+            data = {
+                "model": current_model,
+                "messages": self.convert_history_to_ollama(current_chat),
+                "options": {"temperature": self.ollama_instance.tweaks["temperature"]},
+                "keep_alive": f"{self.ollama_instance.tweaks['keep_alive']}m",
+                "stream": True
+            }
+            if self.ollama_instance.tweaks["seed"] != 0:
+                data['options']['seed'] = self.ollama_instance.tweaks["seed"]
+
+            bot_id=self.generate_uuid()
+            current_chat.add_message(bot_id, current_model, False)
+            m_element_bot = current_chat.messages[bot_id]
+            m_element_bot.set_text()
+            threading.Thread(target=self.run_message, args=(data, m_element_bot, current_chat)).start()
 
     @Gtk.Template.Callback()
     def welcome_carousel_page_changed(self, carousel, index):
@@ -846,10 +850,6 @@ Generate a title following these rules:
         except Exception as e:
             pass
 
-    def handle_enter_key(self):
-        self.send_message()
-        return True
-
     def on_file_drop(self, drop_target, value, x, y):
         files = value.get_files()
         for file in files:
@@ -1001,6 +1001,20 @@ Generate a title following these rules:
             time.sleep(1)
             GLib.idle_add(self.quick_chat, self.get_application().args.ask)
 
+    def open_send_menu(self, gesture, x, y):
+        button = gesture.get_widget()
+        popover = Gtk.PopoverMenu(
+            menu_model=self.send_message_menu,
+            has_arrow=False,
+            halign=1
+        )
+        position = Gdk.Rectangle()
+        position.x = x
+        position.y = y
+        popover.set_parent(button.get_child())
+        popover.set_pointing_to(position)
+        popover.popup()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.message_searchbar.connect('notify::search-mode-enabled', lambda *_: self.message_search_button.set_active(self.message_searchbar.get_search_mode()))
@@ -1022,7 +1036,15 @@ Generate a title following these rules:
         if not os.path.exists(os.path.join(data_dir, "chats")):
             os.makedirs(os.path.join(data_dir, "chats"))
         enter_key_controller = Gtk.EventControllerKey.new()
-        enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: self.handle_enter_key() if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
+        enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: (self.send_message() or True) if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
+
+        gesture_click = Gtk.GestureClick(button=3)
+        gesture_click.connect("released", lambda gesture, n_press, x, y: self.open_send_menu(gesture, x, y))
+        self.send_button.add_controller(gesture_click)
+        gesture_long_press = Gtk.GestureLongPress()
+        gesture_long_press.connect("pressed", self.open_send_menu)
+        self.send_button.add_controller(gesture_long_press)
+
         self.message_text_view.add_controller(enter_key_controller)
         self.set_help_overlay(self.shortcut_window)
         self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
@@ -1044,7 +1066,9 @@ Generate a title following these rules:
             'export_current_chat': [self.current_chat_actions],
             'toggle_sidebar': [lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9']],
             'manage_models': [lambda *_: self.manage_models_dialog.present(self), ['<primary>m']],
-            'search_messages': [lambda *_: self.message_searchbar.set_search_mode(not self.message_searchbar.get_search_mode()), ['<primary>f']]
+            'search_messages': [lambda *_: self.message_searchbar.set_search_mode(not self.message_searchbar.get_search_mode()), ['<primary>f']],
+            'send_message': [lambda *_: self.send_message()],
+            'send_system_message': [lambda *_: self.send_message(None, True)]
         }
 
         for action_name, data in universal_actions.items():
