@@ -11,6 +11,10 @@ from .internal import cache_dir
 window = None
 
 def connect_remote(remote_url:str, bearer_token:str):
+    if remote_url.endswith('/'):
+        remote_url = remote_url.rstrip('/')
+    if not (remote_url.startswith('http://') or remote_url.startswith('https://')):
+        remote_url = f'http://{remote_url}'
     window.ollama_instance.remote_url=remote_url
     window.ollama_instance.bearer_token=bearer_token
     window.ollama_instance.remote = True
