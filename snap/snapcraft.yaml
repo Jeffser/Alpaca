@@ -57,7 +57,9 @@ parts:
       - pillow==10.3.0
       - pypdf==4.2.0
       - pytube==15.0.0
+      - youtube-transcript-api==0.6.2
       - html2text==2024.2.26
+      - pydbus==0.6.0
 
   # Ollama plugin
   ollama:
@@ -65,23 +67,33 @@ parts:
     source: 
       - on amd64: https://github.com/ollama/ollama/releases/download/v0.3.12/ollama-linux-amd64.tgz
       - on arm64: https://github.com/ollama/ollama/releases/download/v0.3.12/ollama-linux-arm64.tgz
-
+  
+  # VTE
+  vte:
+    plugin: nil
+    stage-packages:
+      - libvte-2.91-0
+      - gir1.2-vte-2.91
+    build-packages:
+      - pkg-config
+      - gcc
+      
   # Alpaca app
   alpaca:
     plugin: meson
     source-type: git
     source: https://github.com/Jeffser/Alpaca.git
-    source-tag: 2.6.5
+    source-commit: 67a3c78ef68bb8b43a5f3e80f573707a64541f89
     source-depth: 1
     meson-parameters:
-      - --prefix=/snap/alpaca/current/usr
+      - --prefix=/snap/jeffser-alpaca/current/usr
     override-build: |
       craftctl default
-      sed -i '1c#!/usr/bin/env python3' $CRAFT_PART_INSTALL/snap/alpaca/current/usr/bin/alpaca
+      sed -i '1c#!/usr/bin/env python3' $CRAFT_PART_INSTALL/snap/jeffser-alpaca/current/usr/bin/alpaca
     parse-info:
       - usr/share/metainfo/com.jeffser.Alpaca.metainfo.xml
     organize:
-      snap/alpaca/current: .
+      snap/jeffser-alpaca/current: .
     after: [python-deps]
 
   deps:
