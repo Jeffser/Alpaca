@@ -142,61 +142,65 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "System messages can now be sent directly from Alpaca"
-msgstr ""
+msgstr "Mensajes de sistema ahora pueden ser enviados directamente desde Alpaca"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "New redesign for messages and smaller minimum size"
-msgstr ""
+msgstr "Nuevo rediseño para mensajes y menor tamaño minimo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "New models included in 'available models list'"
-msgstr ""
+msgstr "Nuevos modelos incluidos en la 'lista de modelos disponibles'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Added symbolic icon when attaching code files"
-msgstr ""
+msgstr "Añadido icono simbolico cuando se adjuntan archivos de codigos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "When exporting a chat it now includes a markdown file"
-msgstr ""
+msgstr "Cuando se exporta un chat ahora se incluye un archivo Markdown"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Refresh button in model manager when using a remote instance"
-msgstr ""
+msgstr "Botón de recarga en el gestor de modelos cuando se usa instancia remota"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Assistant messages are now editable"
-msgstr ""
+msgstr "Mensajes de asistente ahora son editables"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Updated Ollama to v0.5.2"
-msgstr ""
+msgstr "Ollama actualizado a v0.5.2"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Restored ROCm compatibility"
-msgstr ""
+msgstr "Capabilidad ROCm restaurada"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid ""
 "Added long press gesture to chat rows so actions can be done in touchscreens"
 msgstr ""
+"Se agregó un gesto de pulsación prolongada a las filas de chat para que se "
+"puedan realizar acciones en pantallas táctiles"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Fixed edit button not saving changes"
-msgstr ""
+msgstr "Arreglado boton de editado no guardando cambios"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Changed max temperature value to 2"
-msgstr ""
+msgstr "Cambiado el valor temperatura maxima a 2"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Made seed 0 actually random"
-msgstr ""
+msgstr "Semilla 0 ahora es aleatoria"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid ""
 "Fixed Gnome search provider not working outside of Flatpak installations"
 msgstr ""
+"El proveedor de búsqueda de Gnome corregido no funcionaba fuera de las "
+"instalaciones de Flatpak"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
@@ -1793,12 +1797,16 @@ msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to Llama 3.1 405B model."
 msgstr ""
+"Nuevo modelo 70B de última generación. Llama 3.3 70B ofrece un rendimiento "
+"similar al modelo Llama 3.1 405B."
 
 #: src/available_models_descriptions.py:3
 msgid ""
 "QwQ is an experimental research model focused on advancing AI reasoning "
 "capabilities."
 msgstr ""
+"QwQ es un modelo de investigación experimental centrado en mejorar las "
+"capacidades de razonamiento de la IA."
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -2733,6 +2741,8 @@ msgid ""
 "An open large reasoning model for real-world solutions by the Alibaba "
 "International Digital Commerce Group (AIDC-AI)."
 msgstr ""
+"Un modelo de razonamiento abierto a gran escala para soluciones del mundo "
+"real del Alibaba International Digital Commerce Group (AIDC-AI)."
 
 #: src/available_models_descriptions.py:129
 msgid "Embedding model from BAAI mapping texts to vectors."
@@ -2807,12 +2817,18 @@ msgid ""
 "Tülu 3 is a leading instruction following model family, offering fully open-"
 "source data, code, and recipes by the The Allen Institute for AI."
 msgstr ""
+"Tülu 3 es una familia de modelos de seguimiento de instrucciones líder que "
+"ofrece datos, códigos y recetas de código totalmente abierto del Instituto "
+"Allen para IA."
 
 #: src/available_models_descriptions.py:139
 msgid ""
 "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
 "support without sacrificing English performance or scalability."
 msgstr ""
+"Modelo de integración de vanguardia de Snowflake. Arctic Embed 2.0 agrega "
+"compatibilidad multilingüe sin sacrificar el rendimiento ni la escalabilidad "
+"en inglés."
 
 #: src/available_models_descriptions.py:140
 msgid ""
@@ -2828,12 +2844,17 @@ msgid ""
 "Korean) generative models ranging from 2.4B to 32B parameters, developed and "
 "released by LG AI Research."
 msgstr ""
+"EXAONE 3.5 es una colección de modelos generativos bilingües (inglés y "
+"coreano) optimizados para instrucciones que van desde 2.4B a 32B parámetros, "
+"desarrollados y lanzados por LG AI Research."
 
 #: src/available_models_descriptions.py:142
 msgid ""
 "Sailor2 are multilingual language models made for South-East Asia. Available "
 "in 1B, 8B, and 20B parameter sizes."
 msgstr ""
+"Sailor2 son modelos de lenguaje multilingües diseñados para el sudeste "
+"asiático. Disponibles en tamaños de parámetros 1B, 8B y 20B."
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -3045,7 +3066,7 @@ msgstr "Buscar Modelo"
 
 #: src/window.ui:595
 msgid "Refresh Local Models"
-msgstr ""
+msgstr "Recargar Modelos Locales"
 
 #: src/window.ui:605
 msgid "Model search bar"
@@ -3181,11 +3202,11 @@ msgstr "Eliminar Chat"
 
 #: src/window.ui:1126
 msgid "Send as User"
-msgstr ""
+msgstr "Enviar Como Usuario"
 
 #: src/window.ui:1130
 msgid "Send as System"
-msgstr ""
+msgstr "Enviar Como Sistema"
 
 #: src/window.ui:1138
 msgid "From Existing Model"
@@ -3281,12 +3302,12 @@ msgstr ""
 
 #: src/custom_widgets/chat_widget.py:172
 msgid "User"
-msgstr ""
+msgstr "Usuario"
 
 #: src/custom_widgets/chat_widget.py:176
 #: src/custom_widgets/message_widget.py:467
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #: src/custom_widgets/chat_widget.py:232
 msgid "Regenerate Response"
@@ -3318,7 +3339,7 @@ msgstr "Mensaje de respuesta"
 
 #: src/custom_widgets/message_widget.py:115
 msgid "System message"
-msgstr ""
+msgstr "Mensaje de sistema"
 
 #: src/custom_widgets/message_widget.py:117
 msgid "User message"
@@ -3458,17 +3479,20 @@ msgstr "Entrar menu de descarga para {}"
 
 #: src/custom_widgets/model_widget.py:514
 msgid "Large Model"
-msgstr ""
+msgstr "Modelo Largo"
 
 #: src/custom_widgets/model_widget.py:515
 msgid ""
 "Your system's available RAM suggests that this model might be too large to "
 "run optimally. Are you sure you want to download it anyway?"
 msgstr ""
+"La memoria RAM disponible en tu sistema sugiere que este modelo podría "
+"ser demasiado grande para funcionar de manera óptima. ¿Estás seguro de "
+"que deseas descargarlo de todos modos?"
 
 #: src/custom_widgets/model_widget.py:517
 msgid "Download"
-msgstr ""
+msgstr "Descargar"
 
 #: src/custom_widgets/model_widget.py:540
 msgid "Download {}:{}"
