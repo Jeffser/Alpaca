@@ -580,13 +580,13 @@ Generate a title following these rules:
             logger.error(e)
             self.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
             chat.busy = False
-            GLib.idle_add(message_element.footer.add_options_button)
+            GLib.idle_add(message_element.add_footer, datetime.now())
             if message_element.spinner:
                 GLib.idle_add(message_element.container.remove, message_element.spinner)
                 message_element.spinner = None
             GLib.idle_add(chat.show_regenerate_button, message_element)
             GLib.idle_add(self.connection_error)
-
+            GLib.idle_add(self.save_history, chat)
 
     def save_history(self, chat:chat_widget.chat=None):
         logger.info("Saving history")

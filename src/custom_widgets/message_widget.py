@@ -491,7 +491,6 @@ class message(Adw.Bin):
     __gtype_name__ = 'AlpacaMessage'
 
     def __init__(self, message_id:str, model:str=None, system:bool=False):
-        if system: print('system')
         self.message_id = message_id
         self.bot = model != None
         self.system = system

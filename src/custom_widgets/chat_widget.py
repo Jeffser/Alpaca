@@ -89,7 +89,6 @@ class chat(Gtk.ScrolledWindow):
         for widget in list(self.container):
             self.container.remove(widget)
         self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
-        print('clear chat for some reason')
 
     def add_message(self, message_id:str, model:str=None, system:bool=None):
         msg = message(message_id, model, system)
