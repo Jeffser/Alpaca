@@ -446,6 +446,7 @@ class footer(Gtk.Box):
             hexpand=True,
             margin_start=10,
             margin_bottom=10,
+            margin_end=10,
             spacing=5,
             halign=0
         )
@@ -507,7 +508,7 @@ class message(Adw.Bin):
             halign='fill',
             css_classes=["response_message"] if self.bot or self.system else ["card", "user_message"],
             spacing=5,
-            width_request=-1 if self.bot or self.system else 375
+            width_request=-1 if self.bot or self.system else 100
         )
 
         super().__init__(
