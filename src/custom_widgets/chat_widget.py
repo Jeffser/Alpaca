@@ -233,7 +233,7 @@ class chat(Gtk.ScrolledWindow):
             css_classes=["suggested-action"],
             halign=3
         )
-        self.regenerate_button.connect('clicked', lambda *_: msg.action_buttons.regenerate_message())
+        self.regenerate_button.connect('clicked', lambda *_: msg.footer.popup.regenerate_message())
         self.container.append(self.regenerate_button)
 
 class chat_tab(Gtk.ListBoxRow):

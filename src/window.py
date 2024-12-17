@@ -510,11 +510,14 @@ Generate a title following these rules:
         data = {"model": current_model, "prompt": prompt, "stream": False}
         if 'images' in message:
             data["images"] = message['images']
-        response = self.ollama_instance.request("POST", "api/generate", json.dumps(data))
-        if response.status_code == 200:
-            new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
-            new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
-            self.chat_list_box.rename_chat(old_chat_name, new_chat_name)
+        try:
+            response = self.ollama_instance.request("POST", "api/generate", json.dumps(data))
+            if response.status_code == 200:
+                new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
+                new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
+                self.chat_list_box.rename_chat(old_chat_name, new_chat_name)
+        except Exception as e:
+            logger.error(e)
 
     def save_server_config(self):
         if self.ollama_instance:
@@ -567,6 +570,7 @@ Generate a title following these rules:
 
         if chat.welcome_screen:
             chat.welcome_screen.set_visible(False)
+            chat.welcome_screen = None
         if chat.regenerate_button:
             chat.container.remove(chat.regenerate_button)
         self.switch_send_stop_button(False)
@@ -580,13 +584,14 @@ Generate a title following these rules:
             logger.error(e)
             self.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
             chat.busy = False
-            GLib.idle_add(message_element.add_footer, datetime.now())
             if message_element.spinner:
                 GLib.idle_add(message_element.container.remove, message_element.spinner)
                 message_element.spinner = None
+            GLib.idle_add(message_element.set_text, message_element.content_children[-1].get_label())
+            GLib.idle_add(message_element.add_footer, datetime.now())
             GLib.idle_add(chat.show_regenerate_button, message_element)
-            GLib.idle_add(self.connection_error)
             GLib.idle_add(self.save_history, chat)
+            GLib.idle_add(self.connection_error)
 
     def save_history(self, chat:chat_widget.chat=None):
         logger.info("Saving history")
