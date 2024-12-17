@@ -328,6 +328,7 @@ class image_container(Gtk.ScrolledWindow):
     def add_image(self, img:image):
         self.container.append(img)
         self.files.append(img)
+        self.set_size_request(240 * len(self.files), 240)
 
 class option_popup(Gtk.Popover):
     __gtype_name__ = 'AlpacaMessagePopup'
