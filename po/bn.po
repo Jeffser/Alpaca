@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.0.0\n"
+"Project-Id-Version: 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-17 01:19-0600\n"
-"PO-Revision-Date: 2024-09-02 15:12-0600\n"
+"PO-Revision-Date: 2024-12-17 15:12-0600\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Bengali\n"
 "Language: bn\n"
@@ -141,65 +141,63 @@ msgstr "নতুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "System messages can now be sent directly from Alpaca"
-msgstr ""
+msgstr "এখন সিস্টেমের বার্তাগুলি সরাসরি আলপাকা থেকে পাঠানো যাবে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "New redesign for messages and smaller minimum size"
-msgstr ""
+msgstr "বার্তা এবং ছোট ন্যূনতম আকারের জন্য নতুন পুনঃনকশা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "New models included in 'available models list'"
-msgstr ""
+msgstr "'উপলব্ধ মডেলের তালিকা' তে নতুন মডেল অন্তর্ভুক্ত"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Added symbolic icon when attaching code files"
-msgstr ""
+msgstr "কোড ফাইল সংযুক্ত করার সময় প্রতীকী আইকন যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "When exporting a chat it now includes a markdown file"
-msgstr ""
+msgstr "যখন একটি চ্যাট রফতানি করা হয় তখন এটি একটি মার্কডাউন ফাইল অন্তর্ভুক্ত করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Refresh button in model manager when using a remote instance"
-msgstr ""
+msgstr "একটি দূরবর্তী উদাহরণ ব্যবহার করার সময় মডেল ম্যানেজারে রিফ্রেশ বাটন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Assistant messages are now editable"
-msgstr ""
+msgstr "সহায়ক বার্তাগুলি এখন সম্পাদনা করা যাবে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Updated Ollama to v0.5.2"
-msgstr ""
+msgstr "ওলামাকে v0.5.2 এ আপডেট করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Restored ROCm compatibility"
-msgstr ""
+msgstr "ROCm সামঞ্জস্যতা পুনরুদ্ধার করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
-msgid ""
-"Added long press gesture to chat rows so actions can be done in touchscreens"
-msgstr ""
+msgid "Added long press gesture to chat rows so actions can be done in touchscreens"
+msgstr "স্পর্শ পর্দায় ক্রিয়াকলাপ করা যায় এমনভাবে চ্যাট সারিতে দীর্ঘ চাপ অভিব্যক্তি যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:102
-msgid "Fixed edit button not saving changes"
-msgstr ""
+#: data/com.jeffser.Alpaca.metainfo.xml.in:102 
+msgid "Fixed edit button not saving changes" 
+msgstr "সম্পাদনা বাটন পরিবর্তন সংরক্ষণ না করার সমস্যা সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Changed max temperature value to 2"
-msgstr ""
+msgstr "সর্বোচ্চ তাপমাত্রার মান 2 এ পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Made seed 0 actually random"
-msgstr ""
+msgstr "বীজ 0 কে আসলেই একটি অবাধ সংখ্যা করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
-msgid ""
-"Fixed Gnome search provider not working outside of Flatpak installations"
-msgstr ""
+msgid "Fixed Gnome search provider not working outside of Flatpak installations"
+msgstr "ফ্ল্যাটপ্যাক ইনস্টলেশনের বাইরে গনোম সার্চ প্রদানকারী কাজ না করার সমস্যা সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
-msgstr "নতুন বিকল্প --ask MESSAGE, একটি নতুন 'দ্রুত জিজ্ঞাসা' উইন্���ো খোলার জন্য"
+msgstr "নতুন বিকল্প --ask MESSAGE, একটি নতুন 'দ্রুত জিজ্ঞাসা' উইন্ডো খোলার জন্য"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Gnome Search integration now works whilst the app is opened"
@@ -291,8 +289,7 @@ msgstr "রিমোট সংযোগ ডায়ালগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:167
 msgid "Fixed: Models get duplicated when switching remote and local instance"
-msgstr ""
-"সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
+msgstr "সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:168
 msgid "Better internal instance manager"
@@ -1071,7 +1068,8 @@ msgstr "ওল্লামাকে v0.1.39-এ আপডেট করুন"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:573
 msgid ""
 "Fixed: app didn't open if models tweaks wasn't present in the config files"
-msgstr "সংশোধন: কনফিগার ফাইলগুলিতে মডেলের টুইকগুলি উপস্থিত না থাকলে অ্যাপটি খুলবে না"
+msgstr ""
+"সংশোধন: কনফিগার ফাইলগুলিতে মডেলের টুইকগুলি উপস্থিত না থাকলে অ্যাপটি খুলবে না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:582
 msgid "Changed multiple icons (paper airplane for the send button)"
@@ -1091,8 +1089,7 @@ msgstr "ঠিক করা হয়েছে পাঠান/স্টপ ব�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:586
 msgid "Fixed app not checking if remote connection works when starting"
-msgstr ""
-"ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
+msgstr "ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:593
 msgid "Daily Update"
@@ -1100,8 +1097,7 @@ msgstr "প্রতিদিনের আপডেট"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:595
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
-msgstr ""
-"চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
+msgstr "চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:596
 msgid "New shortcut for creating a chat (CTRL+N)"
@@ -1750,12 +1746,14 @@ msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to Llama 3.1 405B model."
 msgstr ""
+"নতুন সেরা ৭০বি মডেল। ল্লামা ৩.৩ ৭০বি ল্লামা ৩.১ ৪০৫বি মডেলের তুলনায় একই রকম কর্মক্ষমতা প্রদান করে।"
 
 #: src/available_models_descriptions.py:3
 msgid ""
 "QwQ is an experimental research model focused on advancing AI reasoning "
 "capabilities."
 msgstr ""
+"কিউডব্লিউকিউ হল একটি পরীক্ষামূলক গবেষণা মডেল যা এআই যুক্তি ক্ষমতা এগিয়ে নিতে দৃষ্টি নিবদ্ধ করে।"
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -2338,6 +2336,7 @@ msgid ""
 "A large language model built by the Technology Innovation Institute (TII) "
 "for use in summarization, text generation, and chat bots."
 msgstr ""
+"টেকনোলজি ইনোভেশন ইনস্টিটিউট (টিআইআই) দ্বারা নির্মিত একটি বড় ভাষা মডেল যা সংক্ষিপ্তকরণ, পাঠ্য উৎপাদন এবং চ্যাট বটগুলিতে ব্যবহারের জন্য।"
 
 #: src/available_models_descriptions.py:86
 msgid ""
@@ -2468,8 +2467,7 @@ msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
 msgstr ""
-"Llama-3.1-Nemotron-70B-Instruct হল NVIDIA দ্বারা ব্যবহারকারীর প্রশ্নের উত্তরে LLM "
-"��ত্পাদিত উত্তরের সাহায্যকারিতা উন্নত করার জন্য পরিবর্তিত একটি বড় ভাষা মডেল।"
+"Llama-3.1-Nemotron-70B-Instruct হল NVIDIA দ্বারা ব্যবহারকারীর প্রশ্নের উত্তরে LLM উৎপাদিত উত্তরের সাহায্যকারিতা উন্নত করার জন্য পরিবর্তিত একটি বড় ভাষা মডেল।"
 
 #: src/available_models_descriptions.py:104
 msgid ""
@@ -2494,6 +2492,7 @@ msgid ""
 "cases and support for retrieval augmented generation (RAG), streamlining "
 "code generation, translation and bug fixing."
 msgstr ""
+"আইবিএম গ্রানাইট ২বি এবং ৮বি মডেলগুলি টুল-ভিত্তিক ব্যবহারের ক্ষেত্রে এবং রিট্রিভাল অগমেন্টেড জেনারেশন (RAG) এর জন্য সমর্থন প্রদানের জন্য ডিজাইন করা হয়েছে, কোড উৎপাদন, অনুবাদ এবং বাগ সংশোধনকে সহজ করে।"
 
 #: src/available_models_descriptions.py:109
 msgid ""
@@ -2710,20 +2709,14 @@ msgid ""
 "Tülu 3 is a leading instruction following model family, offering fully open-"
 "source data, code, and recipes by the The Allen Institute for AI."
 msgstr ""
+"টুলু ৩ একটি নেতৃস্থানীয় নির্দেশ অনুসরণকারী মডেল পরিবার, যা সম্পূর্ণরূপে উন্মুক্ত উত্সের ডেটা, কোড এবং রেসিপিগুলি অ্যালেন ইনস্টিটিউট ফর এআই দ্বারা প্রদান করে।"
 
 #: src/available_models_descriptions.py:139
 msgid ""
 "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
 "support without sacrificing English performance or scalability."
 msgstr ""
-
-#: src/available_models_descriptions.py:140
-msgid ""
-"The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
-"in prompts and/or responses."
-msgstr ""
-"আইবিএম গ্রানাইট গার্ডিয়ান 3.0 2B এবং 8B মডেলগুলি প্রম্পট এবং/অথবা উত্তরগুলিতে ঝুঁকি "
-"শনাক্ত করার জন্য ডিজাইন করা হয়েছে।"
+"স্নোফ্লেকের ফ্রন্টিয়ার এম্বেডিং মডেল। আর্কটিক এম্বেড ২.০ ইংরেজি কর্মক্ষমতা বা স্কেলেবিলিটি বলি দিয়ে বহুভাষিক সমর্থন যোগ করে।"
 
 #: src/available_models_descriptions.py:141
 msgid ""
@@ -2731,12 +2724,14 @@ msgid ""
 "Korean) generative models ranging from 2.4B to 32B parameters, developed and "
 "released by LG AI Research."
 msgstr ""
+"এক্সওয়ান ৩.৫ হল একটি সংগ্রহ ইন্সট্রাকশন-টিউনড দ্বিভাষিক (ইংরেজি এবং কোরিয়ান) জেনারেটিভ মডেল, ২.৪ বিলিয়ন থেকে ৩২ বিলিয়ন প্যারামিটার পর্যন্ত, এলজি এআই রিসার্চ দ্বারা বিকাশ এবং প্রকাশিত।"
 
 #: src/available_models_descriptions.py:142
 msgid ""
 "Sailor2 are multilingual language models made for South-East Asia. Available "
 "in 1B, 8B, and 20B parameter sizes."
 msgstr ""
+"সেইলর ২ হল দক্ষিণ-পূর্ব এশিয়ার জন্য তৈরি বহুভাষিক ভাষা মডেল। ১ বিলিয়ন, ৮ বিলিয়ন এবং ২০ বিলিয়ন প্যারামিটার আকারে উপলব্ধ।"
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -2942,7 +2937,7 @@ msgstr "মডেল খুঁজুন"
 
 #: src/window.ui:595
 msgid "Refresh Local Models"
-msgstr ""
+msgstr "স্থানীয় মডেলগুলি পুনরায় লোড করুন"
 
 #: src/window.ui:605
 msgid "Model search bar"
@@ -3074,11 +3069,11 @@ msgstr "চ্যাট ডিলিট করুন"
 
 #: src/window.ui:1126
 msgid "Send as User"
-msgstr ""
+msgstr "ব্যবহারকারী হিসাবে পাঠান"
 
 #: src/window.ui:1130
 msgid "Send as System"
-msgstr ""
+msgstr "সিস্টেম হিসাবে পাঠান"
 
 #: src/window.ui:1138
 msgid "From Existing Model"
@@ -3172,12 +3167,12 @@ msgstr "মনে হচ্ছে আপনি এখনও কোনও মড�
 
 #: src/custom_widgets/chat_widget.py:172
 msgid "User"
-msgstr ""
+msgstr "ব্যবহারকারী"
 
 #: src/custom_widgets/chat_widget.py:176
 #: src/custom_widgets/message_widget.py:467
 msgid "System"
-msgstr ""
+msgstr "সিস্টেম"
 
 #: src/custom_widgets/chat_widget.py:232
 msgid "Regenerate Response"
@@ -3209,7 +3204,7 @@ msgstr "প্রতিক্রিয়া বার্তা"
 
 #: src/custom_widgets/message_widget.py:115
 msgid "System message"
-msgstr ""
+msgstr "সিস্টেম বার্তা"
 
 #: src/custom_widgets/message_widget.py:117
 msgid "User message"
@@ -3349,17 +3344,18 @@ msgstr "{} এর ডাউনলোড মেনুতে প্রবেশ �
 
 #: src/custom_widgets/model_widget.py:514
 msgid "Large Model"
-msgstr ""
+msgstr "বড় মডেল"
 
 #: src/custom_widgets/model_widget.py:515
 msgid ""
 "Your system's available RAM suggests that this model might be too large to "
 "run optimally. Are you sure you want to download it anyway?"
 msgstr ""
+"আপনার সিস্টেমের উপলব্ধ র‍্যাম নির্দেশ করে যে এই মডেলটি সম্ভবত আদর্শভাবে চালানোর জন্য খুব বড়। আপনি কি নিশ্চিত যে আপনি এটি ডাউনলোড করতে চান?"
 
 #: src/custom_widgets/model_widget.py:517
 msgid "Download"
-msgstr ""
+msgstr "ডাউনলোড করুন"
 
 #: src/custom_widgets/model_widget.py:540
 msgid "Download {}:{}"
