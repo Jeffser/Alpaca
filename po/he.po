@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alpaca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 22:46-0600\n"
+"POT-Creation-Date: 2024-12-17 01:04-0600\n"
 "PO-Revision-Date: 2024-09-16 14:07+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
@@ -85,7 +85,7 @@ msgstr "הוספת טקסט מאתר אינטרנט לפקודה"
 msgid "PDF recognition"
 msgstr "זיהוי PDF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:1030
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:1038
 msgid "Disclaimer"
 msgstr "כתב ויתור"
 
@@ -97,10 +97,6 @@ msgid ""
 msgstr ""
 "מיזם זה אינו קשור כלל ל-Ollama, ואין אחריות לכל נזק למכשיר או לתוכנה שנגרם "
 "מהרצת קוד שניתן על ידי מודלים כלשהם."
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:28
-msgid "Jeffry Samuel Eduarte Rojas"
-msgstr "ג'פרי סמואל אדוארטה רוחאס"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:54
 msgid "A normal conversation with an AI Model"
@@ -1471,104 +1467,104 @@ msgstr "0.1.1 גרסה יציבה"
 msgid "This is the first public version of Alpaca"
 msgstr "זוהי הגרסה הציבורית הראשונה של Alpaca"
 
-#: src/window.py:151 src/window.py:910
+#: src/window.py:157 src/window.py:922
 msgid "Please select a model before chatting"
 msgstr "יש לבחור מודל לפני תחילת השיחה"
 
-#: src/window.py:205 src/window.py:206
+#: src/window.py:215 src/window.py:216
 msgid "Close"
 msgstr "סגירה"
 
-#: src/window.py:208 src/window.py:209 src/window.ui:983
+#: src/window.py:218 src/window.py:219 src/window.ui:991
 msgid "Next"
 msgstr "הבא"
 
-#: src/window.py:314
+#: src/window.py:324
 msgid "image"
 msgstr "תמונה"
 
-#: src/window.py:423
+#: src/window.py:433
 msgid "Missing file"
 msgstr "קובץ חסר"
 
-#: src/window.py:555 src/window.py:612 src/window.py:632 src/window.py:634
-#: src/window.ui:31 src/custom_widgets/chat_widget.py:320
+#: src/window.py:565 src/window.py:622 src/window.py:642 src/window.py:644
+#: src/window.ui:31 src/custom_widgets/chat_widget.py:361
 msgid "New Chat"
 msgstr "שיחה חדשה"
 
-#: src/window.py:658
+#: src/window.py:668
 msgid "Close Alpaca"
 msgstr "סגירת Alpaca"
 
-#: src/window.py:659
+#: src/window.py:669
 msgid "Use Local Instance"
 msgstr ""
 
-#: src/window.py:660 src/window.py:880
+#: src/window.py:670 src/window.py:892
 msgid "Connect"
 msgstr "התחברות"
 
-#: src/window.py:663 src/window.py:883
+#: src/window.py:673 src/window.py:895
 msgid "Server URL"
 msgstr ""
 
-#: src/window.py:664 src/window.py:884
+#: src/window.py:674 src/window.py:896
 msgid "Bearer Token (Optional)"
 msgstr "אסימון נושא (אפשרי)"
 
-#: src/window.py:666
+#: src/window.py:676
 msgid "Connection Error"
 msgstr "שגיאת חיבור"
 
-#: src/window.py:666
+#: src/window.py:676
 msgid "The remote instance has disconnected"
 msgstr "המופע המרוחק התנתק"
 
-#: src/window.py:669
+#: src/window.py:679
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr "הייתה שגיאה עם מופע Ollama המקומי, לכן הוא אופס"
 
-#: src/window.py:691
+#: src/window.py:701
 msgid "Cannot open image"
 msgstr "לא ניתן לפתוח את התמונה"
 
-#: src/window.py:748
+#: src/window.py:759
 msgid "Delete Chat?"
 msgstr "למחוק את השיחה?"
 
-#: src/window.py:749 src/custom_widgets/model_widget.py:330
+#: src/window.py:760 src/custom_widgets/model_widget.py:330
 msgid "Are you sure you want to delete '{}'?"
 msgstr "האם אכן ברצונך למחוק את '{}'?"
 
-#: src/window.py:751 src/custom_widgets/model_widget.py:332
+#: src/window.py:762 src/custom_widgets/model_widget.py:332
 msgid "Delete"
 msgstr "מחיקה"
 
-#: src/window.py:758
+#: src/window.py:769
 msgid "Rename Chat?"
 msgstr "לשנות את שם השיחה?"
 
-#: src/window.py:759
+#: src/window.py:770
 msgid "Renaming '{}'"
 msgstr "משנה שם ל־'{}'"
 
-#: src/window.py:761
+#: src/window.py:772
 msgid "Chat name"
 msgstr ""
 
-#: src/window.py:762
+#: src/window.py:773
 msgid "Rename"
 msgstr "שינוי שם"
 
-#: src/window.py:785
+#: src/window.py:796
 msgid "This video does not have any transcriptions"
 msgstr "לסרטון זה אין תמלולים"
 
-#: src/window.py:792
+#: src/window.py:803
 msgid "Attach YouTube Video?"
 msgstr "לצרף סרטון YouTube?"
 
-#: src/window.py:793
+#: src/window.py:804
 msgid ""
 "{}\n"
 "\n"
@@ -1578,15 +1574,15 @@ msgstr ""
 "\n"
 "אנא בחרו תמליל לכלול"
 
-#: src/window.py:799
+#: src/window.py:810
 msgid "Error attaching video, please try again"
 msgstr ""
 
-#: src/window.py:819
+#: src/window.py:830
 msgid "Attach Website? (Experimental)"
 msgstr "לצרף אתר אינטרנט? (ניסיוני)"
 
-#: src/window.py:820
+#: src/window.py:831
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
@@ -1594,58 +1590,58 @@ msgstr ""
 "האם אכן ברצונך לצרף את\n"
 "‏'{}'?"
 
-#: src/window.py:838 src/generic_actions.py:81
+#: src/window.py:849 src/generic_actions.py:84
 msgid "Image recognition is only available on specific models"
 msgstr "זיהוי תמונות זמין רק במודלים ספציפיים"
 
-#: src/window.py:879 src/custom_widgets/message_widget.py:44
+#: src/window.py:891 src/custom_widgets/message_widget.py:44
 #: src/custom_widgets/dialog_widget.py:136
 #: src/custom_widgets/dialog_widget.py:148
 #: src/custom_widgets/dialog_widget.py:160
 msgid "Cancel"
 msgstr "ביטול"
 
-#: src/window.py:887
+#: src/window.py:899
 msgid "Connect Remote Instance"
 msgstr ""
 
-#: src/window.py:888
+#: src/window.py:900
 msgid "Enter instance information to continue"
 msgstr ""
 
-#: src/window.py:903
+#: src/window.py:915
 msgid "An error occurred: {}"
 msgstr ""
 
-#: src/window.py:912 src/window.ui:512
+#: src/window.py:924 src/window.ui:512
 msgid "Quick Ask"
 msgstr ""
 
-#: src/window.py:1019
+#: src/window.py:1054
 msgid "Clear Chat?"
 msgstr "לנקות את השיחה?"
 
-#: src/window.py:1019
+#: src/window.py:1054
 msgid "Are you sure you want to clear the chat?"
 msgstr "האם אכן ברצונך לנקות את השיחה?"
 
-#: src/window.py:1019
+#: src/window.py:1054
 msgid "Clear"
 msgstr "ניקוי"
 
-#: src/window.py:1021
+#: src/window.py:1056
 msgid "Select Model"
 msgstr "בחירת מודל"
 
-#: src/window.py:1021
+#: src/window.py:1056
 msgid "This model will be used as the base for the new model"
 msgstr "מודל זה ישמש כבסיס למודל החדש"
 
-#: src/window.py:1023
+#: src/window.py:1058
 msgid "Pull Model"
 msgstr "משיכת מודל"
 
-#: src/window.py:1023
+#: src/window.py:1058
 msgid ""
 "Input the name of the model in this format\n"
 "name:tag"
@@ -1653,50 +1649,61 @@ msgstr ""
 "יש להזין את שם המודל בתבנית זה\n"
 "name:tag"
 
-#: src/window.py:1045
+#: src/window.py:1082
 msgid "Remove Attachment?"
 msgstr "להסיר קובץ מצורף?"
 
-#: src/window.py:1045
+#: src/window.py:1082
 msgid "Are you sure you want to remove attachment?"
 msgstr "האם אכן ברצונך להסיר את הקובץ המצורף?"
 
-#: src/window.py:1045
+#: src/window.py:1082
 msgid "Remove"
 msgstr "הסרה"
 
 #: src/available_models_descriptions.py:2
 msgid ""
-"The latest series of Code-Specific Qwen models, with significant "
-"improvements in code generation, code reasoning, and code fixing."
+"New state of the art 70B model. Llama 3.3 70B offers similar performance "
+"compared to Llama 3.1 405B model."
 msgstr ""
 
 #: src/available_models_descriptions.py:3
+msgid ""
+"QwQ is an experimental research model focused on advancing AI reasoning "
+"capabilities."
+msgstr ""
+
+#: src/available_models_descriptions.py:4
 msgid ""
 "Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
 "generative models in 11B and 90B sizes."
 msgstr ""
 
-#: src/available_models_descriptions.py:4
+#: src/available_models_descriptions.py:5
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
 msgstr ""
 
-#: src/available_models_descriptions.py:5
+#: src/available_models_descriptions.py:6
 msgid ""
 "Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and "
 "405B parameter sizes."
 msgstr ""
 "‏Llama 3.1 הוא מודל חדשני מ־Meta הזמין בגדלים של 8B, 70B ו־405B פרמטרים."
 
-#: src/available_models_descriptions.py:6
+#: src/available_models_descriptions.py:7
 msgid "Meta Llama 3: The most capable openly available LLM to date"
 msgstr "‏Meta Llama 3: מודל השפה הגדול הזמין בצורה פתוחה המסוגל ביותר עד כה"
 
-#: src/available_models_descriptions.py:7
+#: src/available_models_descriptions.py:8
 msgid "The 7B model released by Mistral AI, updated to version 0.3."
 msgstr "מודל ה־7B שפורסם על ידי Mistral AI, עודכן לגרסה 0.3."
 
-#: src/available_models_descriptions.py:8
+#: src/available_models_descriptions.py:9
+msgid ""
+"A high-performing open embedding model with a large token context window."
+msgstr "מודל הטמעה פתוח בעל ביצועים גבוהים עם חלון הקשר טוקן גדול."
+
+#: src/available_models_descriptions.py:10
 msgid ""
 "Gemma is a family of lightweight, state-of-the-art open models built by "
 "Google DeepMind. Updated to version 1.1"
@@ -1704,7 +1711,7 @@ msgstr ""
 "‏Gemma היא משפחה של מודלים פתוחים, קלי משקל וחדשניים שנבנו על ידי Google "
 "DeepMind. עודכן לגרסה 1.1"
 
-#: src/available_models_descriptions.py:9
+#: src/available_models_descriptions.py:11
 msgid ""
 "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
 "0.5B to 110B parameters"
@@ -1712,16 +1719,11 @@ msgstr ""
 "‏Qwen 1.5 היא סדרה של מודלי שפה גדולים מבית Alibaba Cloud הנעים בין 0.5B "
 "ל־110B פרמטרים"
 
-#: src/available_models_descriptions.py:10
+#: src/available_models_descriptions.py:12
 msgid "Qwen2 is a new series of large language models from Alibaba group"
 msgstr "‏Qwen2 היא סדרה חדשה של מודלי שפה גדולים מקבוצת Alibaba"
 
-#: src/available_models_descriptions.py:11
-msgid ""
-"A high-performing open embedding model with a large token context window."
-msgstr "מודל הטמעה פתוח בעל ביצועים גבוהים עם חלון הקשר טוקן גדול."
-
-#: src/available_models_descriptions.py:12
+#: src/available_models_descriptions.py:13
 msgid ""
 "Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art "
 "open models by Microsoft."
@@ -1729,26 +1731,26 @@ msgstr ""
 "‏Phi-3 היא משפחה של מודלים פתוחים חדשניים וקלי משקל של 3B (Mini) ו־14B "
 "(Medium) מבית Microsoft."
 
-#: src/available_models_descriptions.py:13
+#: src/available_models_descriptions.py:14
 msgid ""
 "Llama 2 is a collection of foundation language models ranging from 7B to 70B "
 "parameters."
 msgstr "‏Llama 2 הוא אוסף של מודלי שפה בסיסיים הנעים בין 7B ל־70B פרמטרים."
 
-#: src/available_models_descriptions.py:14
+#: src/available_models_descriptions.py:15
 msgid ""
 "Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, "
 "encompassing up to 18 trillion tokens. The model supports up to 128K tokens "
 "and has multilingual support."
 msgstr ""
 
-#: src/available_models_descriptions.py:15
+#: src/available_models_descriptions.py:16
 msgid ""
 "Google Gemma 2 is a high-performing and efficient model available in three "
 "sizes: 2B, 9B, and 27B."
 msgstr ""
 
-#: src/available_models_descriptions.py:16
+#: src/available_models_descriptions.py:17
 msgid ""
 "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines "
 "a vision encoder and Vicuna for general-purpose visual and language "
@@ -1757,17 +1759,19 @@ msgstr ""
 "‏🌋 LLaVA הוא מודל מולטימודלי גדול חדשני שאומן מקצה לקצה המשלב מקודד ראייה "
 "ו־Vicuna להבנה ויזואלית ולשונית לשימוש כללי. עודכן לגרסה 1.6."
 
-#: src/available_models_descriptions.py:17
+#: src/available_models_descriptions.py:18
 msgid ""
 "A large language model that can use text prompts to generate and discuss "
 "code."
 msgstr "מודל שפה גדול היכול להשתמש בהנחיות טקסט כדי ליצור ולדון בקוד."
 
-#: src/available_models_descriptions.py:18
-msgid "State-of-the-art large embedding model from mixedbread.ai"
-msgstr "מודל הטמעה גדול חדשני מ־mixedbread.ai"
-
 #: src/available_models_descriptions.py:19
+msgid ""
+"The latest series of Code-Specific Qwen models, with significant "
+"improvements in code generation, code reasoning, and code fixing."
+msgstr ""
+
+#: src/available_models_descriptions.py:20
 msgid ""
 "A state-of-the-art 12B model with 128k context length, built by Mistral AI "
 "in collaboration with NVIDIA."
@@ -1775,23 +1779,19 @@ msgstr ""
 "מודל 12B חדשני עם אורך הקשר של 128k, שנבנה על ידי Mistral AI בשיתוף פעולה עם "
 "NVIDIA."
 
-#: src/available_models_descriptions.py:20
-msgid ""
-"A set of Mixture of Experts (MoE) model with open weights by Mistral AI in "
-"8x7b and 8x22b parameter sizes."
-msgstr ""
-"סט של מודל Mixture of Experts (MoE) עם משקלות פתוחים מבית Mistral AI בגדלי "
-"פרמטרים של 8x7b ו־8x22b."
-
 #: src/available_models_descriptions.py:21
 msgid ""
-"Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
-"experts models that excels at coding tasks. Created by Eric Hartford."
+"The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
+"model on 3 trillion tokens."
 msgstr ""
-"מודלים לא מצונזרים, 8x7b ו־8x22b מכווננים עדין המבוססים על מודלי Mixtral "
-"mixture of experts המצטיינים במשימות קידוד. נוצר על ידי אריק הרטפורד."
+"פרויקט TinyLlama הוא מאמץ פתוח לאמן מודל Llama קומפקטי של 1.1B על 3 טריליון "
+"טוקנים."
 
 #: src/available_models_descriptions.py:22
+msgid "State-of-the-art large embedding model from mixedbread.ai"
+msgstr "מודל הטמעה גדול חדשני מ־mixedbread.ai"
+
+#: src/available_models_descriptions.py:23
 msgid ""
 "StarCoder2 is the next generation of transparently trained open code LLMs "
 "that comes in three sizes: 3B, 7B and 15B parameters."
@@ -1799,29 +1799,21 @@ msgstr ""
 "‏StarCoder2 הוא הדור הבא של מודלי LLM לקוד פתוח שאומנו בשקיפות, המגיע בשלושה "
 "גדלים: 3B, 7B ו־15B פרמטרים."
 
-#: src/available_models_descriptions.py:23
-msgid ""
-"An open-source Mixture-of-Experts code language model that achieves "
-"performance comparable to GPT4-Turbo in code-specific tasks."
-msgstr ""
-"מודל שפת קוד בגישת Mixture-of-Experts בקוד פתוח המשיג ביצועים הדומים ל־GPT4-"
-"Turbo במשימות ספציפיות לקוד."
-
 #: src/available_models_descriptions.py:24
 msgid ""
-"Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
-"outstanding reasoning and language understanding capabilities."
+"A set of Mixture of Experts (MoE) model with open weights by Mistral AI in "
+"8x7b and 8x22b parameter sizes."
 msgstr ""
-"‏Phi-2: מודל שפה של 2.7B מבית Microsoft Research המציג יכולות מרשימות של "
-"חשיבה והבנת שפה."
+"סט של מודל Mixture of Experts (MoE) עם משקלות פתוחים מבית Mistral AI בגדלי "
+"פרמטרים של 8x7b ו־8x22b."
 
 #: src/available_models_descriptions.py:25
 msgid ""
-"DeepSeek Coder is a capable coding model trained on two trillion code and "
-"natural language tokens."
+"Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
+"experts models that excels at coding tasks. Created by Eric Hartford."
 msgstr ""
-"‏DeepSeek Coder הוא מודל קידוד מסוגל שאומן על שני טריליון טוקנים של קוד ושפה "
-"טבעית."
+"מודלים לא מצונזרים, 8x7b ו־8x22b מכווננים עדין המבוססים על מודלי Mixtral "
+"mixture of experts המצטיינים במשימות קידוד. נוצר על ידי אריק הרטפורד."
 
 #: src/available_models_descriptions.py:26
 msgid ""
@@ -1836,68 +1828,38 @@ msgstr ""
 
 #: src/available_models_descriptions.py:27
 msgid ""
-"The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
-"model on 3 trillion tokens."
+"An open-source Mixture-of-Experts code language model that achieves "
+"performance comparable to GPT4-Turbo in code-specific tasks."
 msgstr ""
-"פרויקט TinyLlama הוא מאמץ פתוח לאמן מודל Llama קומפקטי של 1.1B על 3 טריליון "
-"טוקנים."
+"מודל שפת קוד בגישת Mixture-of-Experts בקוד פתוח המשיג ביצועים הדומים ל־GPT4-"
+"Turbo במשימות ספציפיות לקוד."
 
 #: src/available_models_descriptions.py:28
+msgid ""
+"Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
+"outstanding reasoning and language understanding capabilities."
+msgstr ""
+"‏Phi-2: מודל שפה של 2.7B מבית Microsoft Research המציג יכולות מרשימות של "
+"חשיבה והבנת שפה."
+
+#: src/available_models_descriptions.py:29
 msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
 msgstr "מודל Llama 2 לא מצונזר מאת ג'ורג' סונג וג'ראד הופ."
 
-#: src/available_models_descriptions.py:29
-msgid ""
-"The uncensored Dolphin model based on Mistral that excels at coding tasks. "
-"Updated to version 2.8."
-msgstr ""
-"מודל Dolphin הלא מצונזר המבוסס על Mistral המצטיין במשימות קידוד. עודכן לגרסה "
-"2.8."
-
 #: src/available_models_descriptions.py:30
-msgid "Yi 1.5 is a high-performing, bilingual language model."
-msgstr "‏Yi 1.5 הוא מודל שפה דו־לשוני בעל ביצועים גבוהים."
+msgid ""
+"DeepSeek Coder is a capable coding model trained on two trillion code and "
+"natural language tokens."
+msgstr ""
+"‏DeepSeek Coder הוא מודל קידוד מסוגל שאומן על שני טריליון טוקנים של קוד ושפה "
+"טבעית."
 
 #: src/available_models_descriptions.py:31
 msgid ""
-"Command R is a Large Language Model optimized for conversational interaction "
-"and long context tasks."
-msgstr ""
-"‏Command R הוא מודל שפה גדול שמותאם לאינטראקציה שיחתית ומשימות הקשר ארוכות."
+"A suite of text embedding models by Snowflake, optimized for performance."
+msgstr "סדרה של מודלי הטמעת טקסט מבית Snowflake, מותאמים לביצועים מיטביים."
 
 #: src/available_models_descriptions.py:32
-msgid ""
-"Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on "
-"Llama 3 that has a variety of instruction, conversational, and coding skills."
-msgstr ""
-"‏Dolphin 2.9 הוא מודל חדש בגדלים של 8B ו־70B מאת אריק הרטפורד המבוסס על Llama "
-"3 ובעל מגוון מיומנויות הוראה, שיחה וקידוד."
-
-#: src/available_models_descriptions.py:33
-msgid ""
-"A general-purpose model ranging from 3 billion parameters to 70 billion, "
-"suitable for entry-level hardware."
-msgstr ""
-"מודל לשימוש כללי הנע בין 3 מיליארד פרמטרים ל־70 מיליארד, מתאים לחומרה ברמת "
-"כניסה."
-
-#: src/available_models_descriptions.py:34
-msgid ""
-"Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
-"that are trained to act as helpful assistants."
-msgstr ""
-"‏Zephyr היא סדרה של גרסאות מכווננות עדין של מודלי Mistral ו־Mixtral שאומנו "
-"לפעול כעוזרים מועילים."
-
-#: src/available_models_descriptions.py:35
-msgid ""
-"A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
-"benchmarks."
-msgstr ""
-"מודל LLaVA מכוונן עדין מ־Llama 3 Instruct עם ציונים טובים יותר במספר מדדי "
-"השוואה."
-
-#: src/available_models_descriptions.py:36
 msgid ""
 "State of the art large language model from Microsoft AI with improved "
 "performance on complex chat, multilingual, reasoning and agent use cases."
@@ -1905,12 +1867,58 @@ msgstr ""
 "מודל שפה גדול חדשני מבית Microsoft AI עם ביצועים משופרים בצ'אט מורכב, "
 "רב־לשוני, חשיבה ומקרי שימוש של סוכנים."
 
+#: src/available_models_descriptions.py:33
+msgid ""
+"The uncensored Dolphin model based on Mistral that excels at coding tasks. "
+"Updated to version 2.8."
+msgstr ""
+"מודל Dolphin הלא מצונזר המבוסס על Mistral המצטיין במשימות קידוד. עודכן לגרסה "
+"2.8."
+
+#: src/available_models_descriptions.py:34
+msgid ""
+"Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on "
+"Llama 3 that has a variety of instruction, conversational, and coding skills."
+msgstr ""
+"‏Dolphin 2.9 הוא מודל חדש בגדלים של 8B ו־70B מאת אריק הרטפורד המבוסס על Llama "
+"3 ובעל מגוון מיומנויות הוראה, שיחה וקידוד."
+
+#: src/available_models_descriptions.py:35
+msgid "Yi 1.5 is a high-performing, bilingual language model."
+msgstr "‏Yi 1.5 הוא מודל שפה דו־לשוני בעל ביצועים גבוהים."
+
+#: src/available_models_descriptions.py:36
+msgid ""
+"Command R is a Large Language Model optimized for conversational interaction "
+"and long context tasks."
+msgstr ""
+"‏Command R הוא מודל שפה גדול שמותאם לאינטראקציה שיחתית ומשימות הקשר ארוכות."
+
 #: src/available_models_descriptions.py:37
 msgid ""
-"A suite of text embedding models by Snowflake, optimized for performance."
-msgstr "סדרה של מודלי הטמעת טקסט מבית Snowflake, מותאמים לביצועים מיטביים."
+"A general-purpose model ranging from 3 billion parameters to 70 billion, "
+"suitable for entry-level hardware."
+msgstr ""
+"מודל לשימוש כללי הנע בין 3 מיליארד פרמטרים ל־70 מיליארד, מתאים לחומרה ברמת "
+"כניסה."
 
 #: src/available_models_descriptions.py:38
+msgid ""
+"A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
+"benchmarks."
+msgstr ""
+"מודל LLaVA מכוונן עדין מ־Llama 3 Instruct עם ציונים טובים יותר במספר מדדי "
+"השוואה."
+
+#: src/available_models_descriptions.py:39
+msgid ""
+"Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
+"that are trained to act as helpful assistants."
+msgstr ""
+"‏Zephyr היא סדרה של גרסאות מכווננות עדין של מודלי Mistral ו־Mixtral שאומנו "
+"לפעול כעוזרים מועילים."
+
+#: src/available_models_descriptions.py:40
 msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
 "overtaking similarly and larger sized models."
@@ -1918,30 +1926,34 @@ msgstr ""
 "מודל AI קל משקל עם 3.8 מיליארד פרמטרים עם ביצועים העולים על מודלים בגודל "
 "דומה וגדול יותר."
 
-#: src/available_models_descriptions.py:39
-msgid ""
-"StarCoder is a code generation model trained on 80+ programming languages."
-msgstr "‏StarCoder הוא מודל ליצירת קוד שאומן על יותר מ־80 שפות תכנות."
-
-#: src/available_models_descriptions.py:40
+#: src/available_models_descriptions.py:41
 msgid "Embedding models on very large sentence level datasets."
 msgstr "מודלי הטמעה על מערכי נתונים גדולים מאוד ברמת המשפט."
 
-#: src/available_models_descriptions.py:41
+#: src/available_models_descriptions.py:42
 msgid ""
 "Codestral is Mistral AI’s first-ever code model designed for code generation "
 "tasks."
 msgstr ""
 "‏‏Codestral הוא מודל הקוד הראשון אי פעם של Mistral AI שתוכנן למשימות יצירת קוד."
 
-#: src/available_models_descriptions.py:42
+#: src/available_models_descriptions.py:43
+msgid ""
+"StarCoder is a code generation model trained on 80+ programming languages."
+msgstr "‏StarCoder הוא מודל ליצירת קוד שאומן על יותר מ־80 שפות תכנות."
+
+#: src/available_models_descriptions.py:44
 msgid ""
 "General use chat model based on Llama and Llama 2 with 2K to 16K context "
 "sizes."
 msgstr ""
 "מודל צ'אט לשימוש כללי המבוסס על Llama ו־Llama 2 עם גדלי הקשר של 2K עד 16K."
 
-#: src/available_models_descriptions.py:43
+#: src/available_models_descriptions.py:45
+msgid "A family of open foundation models by IBM for Code Intelligence"
+msgstr "משפחה של מודלי בסיס פתוחים מבית IBM לבינה מלאכותית בקוד"
+
+#: src/available_models_descriptions.py:46
 msgid ""
 "Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
 "Mistral 7B model using the OpenOrca dataset."
@@ -1949,11 +1961,15 @@ msgstr ""
 "‏Mistral OpenOrca הוא מודל של 7 מיליארד פרמטרים, מכוונן עדין על בסיס מודל "
 "Mistral 7B באמצעות מערך הנתונים OpenOrca."
 
-#: src/available_models_descriptions.py:44
-msgid "A family of open foundation models by IBM for Code Intelligence"
-msgstr "משפחה של מודלי בסיס פתוחים מבית IBM לבינה מלאכותית בקוד"
+#: src/available_models_descriptions.py:47
+msgid ""
+"🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
+"a new high-quality dataset."
+msgstr ""
+"🪐 משפחה של מודלים קטנים עם 135M, 360M, ו־1.7B פרמטרים, שאומנו על מערך "
+"נתונים חדש באיכות גבוהה."
 
-#: src/available_models_descriptions.py:45
+#: src/available_models_descriptions.py:48
 msgid ""
 "Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
 "Llama 2 uncensored by Eric Hartford."
@@ -1961,17 +1977,25 @@ msgstr ""
 "‏Wizard Vicuna Uncensored הוא מודל של 7B, 13B, ו־30B פרמטרים המבוסס על Llama "
 "2 לא מצונזר מאת אריק הרטפורד."
 
-#: src/available_models_descriptions.py:46
+#: src/available_models_descriptions.py:49
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
 msgstr "מודל מבוסס Llama 2 שכוונן עדין לשיפור יכולת הדיאלוג בסינית."
 
-#: src/available_models_descriptions.py:47
+#: src/available_models_descriptions.py:50
+msgid ""
+"BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
+"Functionality, Multi-Linguality, and Multi-Granularity."
+msgstr ""
+"‏BGE-M3 הוא מודל חדש מ־BAAI המצטיין בגמישותו ברב־פונקציונליות, רב־לשוניות, "
+"ורב־הבחנתי."
+
+#: src/available_models_descriptions.py:51
 msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
 msgstr "מודל רב־תכליתי לתרחישי פיתוח תוכנה של AI, כולל השלמת קוד."
 
-#: src/available_models_descriptions.py:48
+#: src/available_models_descriptions.py:52
 msgid ""
 "A family of open-source models trained on a wide variety of data, surpassing "
 "ChatGPT on various benchmarks. Updated to version 3.5-0106."
@@ -1979,7 +2003,7 @@ msgstr ""
 "משפחה של מודלים בקוד פתוח שאומנו על מגוון רחב של נתונים, עולים על ChatGPT "
 "במדדי השוואה שונים. עודכן לגרסה 3.5-0106."
 
-#: src/available_models_descriptions.py:49
+#: src/available_models_descriptions.py:53
 msgid ""
 "Aya 23, released by Cohere, is a new family of state-of-the-art, "
 "multilingual models that support 23 languages."
@@ -1987,40 +2011,20 @@ msgstr ""
 "‏Aya 23, שפורסם על ידי Cohere, היא משפחה חדשה של מודלים רב־לשוניים חדשניים "
 "התומכים ב־23 שפות."
 
-#: src/available_models_descriptions.py:50
+#: src/available_models_descriptions.py:54
+msgid ""
+"CodeQwen1.5 is a large language model pretrained on a large amount of code "
+"data."
+msgstr "‏CodeQwen1.5 הוא מודל שפה גדול שאומן מראש על כמות גדולה של נתוני קוד."
+
+#: src/available_models_descriptions.py:55
 msgid ""
 "The powerful family of models by Nous Research that excels at scientific "
 "discussion and coding tasks."
 msgstr ""
 "משפחת המודלים העוצמתית מבית Nous Research המצטיינת בדיון מדעי ומשימות קידוד."
 
-#: src/available_models_descriptions.py:51
-msgid ""
-"CodeQwen1.5 is a large language model pretrained on a large amount of code "
-"data."
-msgstr "‏CodeQwen1.5 הוא מודל שפה גדול שאומן מראש על כמות גדולה של נתוני קוד."
-
-#: src/available_models_descriptions.py:52
-msgid "State-of-the-art code generation model"
-msgstr "מודל חדשני ליצירת קוד"
-
-#: src/available_models_descriptions.py:53
-msgid ""
-"An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
-"by Eric Hartford and based on TinyLlama."
-msgstr ""
-"מודל ניסיוני של 1.1B פרמטרים שאומן על מערך הנתונים החדש Dolphin 2.8 מאת אריק "
-"הרטפורד ומבוסס על TinyLlama."
-
-#: src/available_models_descriptions.py:54
-msgid ""
-"Stable Code 3B is a coding model with instruct and code completion variants "
-"on par with models such as Code Llama 7B that are 2.5x larger."
-msgstr ""
-"‏Stable Code 3B הוא מודל קידוד עם גרסאות הוראות והשלמת קוד ברמה של מודלים כמו "
-"Code Llama 7B שהם גדולים פי 2.5."
-
-#: src/available_models_descriptions.py:55
+#: src/available_models_descriptions.py:56
 msgid ""
 "Command R+ is a powerful, scalable large language model purpose-built to "
 "excel at real-world enterprise use cases."
@@ -2028,7 +2032,27 @@ msgstr ""
 "‏Command R+ הוא מודל שפה גדול, עוצמתי וניתן להרחבה שנבנה במיוחד להצטיין במקרי "
 "שימוש ארגוניים מהעולם האמיתי."
 
-#: src/available_models_descriptions.py:56
+#: src/available_models_descriptions.py:57
+msgid "State-of-the-art code generation model"
+msgstr "מודל חדשני ליצירת קוד"
+
+#: src/available_models_descriptions.py:58
+msgid ""
+"Stable Code 3B is a coding model with instruct and code completion variants "
+"on par with models such as Code Llama 7B that are 2.5x larger."
+msgstr ""
+"‏Stable Code 3B הוא מודל קידוד עם גרסאות הוראות והשלמת קוד ברמה של מודלים כמו "
+"Code Llama 7B שהם גדולים פי 2.5."
+
+#: src/available_models_descriptions.py:59
+msgid ""
+"An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
+"by Eric Hartford and based on TinyLlama."
+msgstr ""
+"מודל ניסיוני של 1.1B פרמטרים שאומן על מערך הנתונים החדש Dolphin 2.8 מאת אריק "
+"הרטפורד ומבוסס על TinyLlama."
+
+#: src/available_models_descriptions.py:60
 msgid ""
 "OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
 "open datasets."
@@ -2036,7 +2060,16 @@ msgstr ""
 "‏OpenHermes 2.5 הוא מודל 7B שכוונן עדין על ידי Teknium על Mistral עם מערכי "
 "נתונים פתוחים לחלוטין."
 
-#: src/available_models_descriptions.py:57
+#: src/available_models_descriptions.py:61
+msgid ""
+"Mistral Large 2 is Mistral's new flagship model that is significantly more "
+"capable in code generation, mathematics, and reasoning with 128k context "
+"window and support for dozens of languages."
+msgstr ""
+"‏Mistral Large 2 הוא המודל הדגל החדש של Mistral שמסוגל באופן משמעותי יותר "
+"ביצירת קוד, מתמטיקה, וחשיבה עם חלון הקשר של 128k ותמיכה בעשרות שפות."
+
+#: src/available_models_descriptions.py:62
 msgid ""
 "Qwen2 Math is a series of specialized math language models built upon the "
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
@@ -2046,16 +2079,13 @@ msgstr ""
 "LLMs, אשר עולים משמעותית על היכולות המתמטיות של מודלים בקוד פתוח ואפילו "
 "מודלים בקוד סגור (למשל, GPT4o)."
 
-#: src/available_models_descriptions.py:58
+#: src/available_models_descriptions.py:63
 msgid ""
-"Mistral Large 2 is Mistral's new flagship model that is significantly more "
-"capable in code generation, mathematics, and reasoning with 128k context "
-"window and support for dozens of languages."
-msgstr ""
-"‏Mistral Large 2 הוא המודל הדגל החדש של Mistral שמסוגל באופן משמעותי יותר "
-"ביצירת קוד, מתמטיקה, וחשיבה עם חלון הקשר של 128k ותמיכה בעשרות שפות."
+"A strong multi-lingual general language model with competitive performance "
+"to Llama 3."
+msgstr "מודל שפה כללי רב־לשוני חזק עם ביצועים תחרותיים ל־Llama 3."
 
-#: src/available_models_descriptions.py:59
+#: src/available_models_descriptions.py:64
 msgid ""
 "Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model "
 "trained on multilingual data in English, Spanish, German, Italian, French, "
@@ -2064,7 +2094,7 @@ msgstr ""
 "‏Stable LM 2 הוא מודל שפה חדשני של 1.6B ו־12B פרמטרים שאומן על נתונים "
 "רב־לשוניים באנגלית, ספרדית, גרמנית, איטלקית, צרפתית, פורטוגזית והולנדית."
 
-#: src/available_models_descriptions.py:60
+#: src/available_models_descriptions.py:65
 msgid ""
 "BakLLaVA is a multimodal model consisting of the Mistral 7B base model "
 "augmented with the LLaVA architecture."
@@ -2072,59 +2102,39 @@ msgstr ""
 "‏BakLLaVA הוא מודל מולטימודלי המורכב ממודל הבסיס Mistral 7B המועשר "
 "בארכיטקטורת LLaVA."
 
-#: src/available_models_descriptions.py:61
+#: src/available_models_descriptions.py:66
 msgid ""
 "A high-performing model trained with a new technique called Reflection-"
 "tuning that teaches a LLM to detect mistakes in its reasoning and correct "
 "course."
 msgstr ""
 
-#: src/available_models_descriptions.py:62
-msgid ""
-"A strong multi-lingual general language model with competitive performance "
-"to Llama 3."
-msgstr "מודל שפה כללי רב־לשוני חזק עם ביצועים תחרותיים ל־Llama 3."
-
-#: src/available_models_descriptions.py:63
+#: src/available_models_descriptions.py:67
 msgid "An advanced language model crafted with 2 trillion bilingual tokens."
 msgstr "מודל שפה מתקדם שנוצר עם 2 טריליון טוקנים דו־לשוניים."
 
-#: src/available_models_descriptions.py:64
+#: src/available_models_descriptions.py:68
 msgid ""
 "This model extends LLama-3 8B's context length from 8k to over 1m tokens."
 msgstr "מודל זה מרחיב את אורך ההקשר של LLama-3 8B מ־8k ליותר ממיליון טוקנים."
 
-#: src/available_models_descriptions.py:65
+#: src/available_models_descriptions.py:69
 msgid "Model focused on math and logic problems"
 msgstr "מודל המתמקד בבעיות מתמטיקה ולוגיקה"
 
-#: src/available_models_descriptions.py:66
-msgid ""
-"🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
-"a new high-quality dataset."
-msgstr ""
-"🪐 משפחה של מודלים קטנים עם 135M, 360M, ו־1.7B פרמטרים, שאומנו על מערך "
-"נתונים חדש באיכות גבוהה."
-
-#: src/available_models_descriptions.py:67
-msgid ""
-"A fine-tuned model based on Mistral with good coverage of domain and "
-"language."
-msgstr "מודל מכוונן עדין המבוסס על Mistral עם כיסוי טוב של תחום ושפה."
-
-#: src/available_models_descriptions.py:68
+#: src/available_models_descriptions.py:70
 msgid ""
 "moondream2 is a small vision language model designed to run efficiently on "
 "edge devices."
 msgstr "‏moondream2 הוא מודל שפה חזותי קטן המתוכנן לרוץ ביעילות על מכשירי קצה."
 
-#: src/available_models_descriptions.py:69
+#: src/available_models_descriptions.py:71
 msgid ""
-"Conversational model based on Llama 2 that performs competitively on various "
-"benchmarks."
-msgstr "מודל שיחתי המבוסס על Llama 2 המבצע באופן תחרותי במדדי השוואה שונים."
+"A fine-tuned model based on Mistral with good coverage of domain and "
+"language."
+msgstr "מודל מכוונן עדין המבוסס על Mistral עם כיסוי טוב של תחום ושפה."
 
-#: src/available_models_descriptions.py:70
+#: src/available_models_descriptions.py:72
 msgid ""
 "A model from NVIDIA based on Llama 3 that excels at conversational question "
 "answering (QA) and retrieval-augmented generation (RAG)."
@@ -2132,25 +2142,31 @@ msgstr ""
 "מודל מ־NVIDIA המבוסס על Llama 3 המצטיין בשאלות ותשובות שיחתיות (QA) ויצירה "
 "מוגברת־אחזור (RAG)."
 
-#: src/available_models_descriptions.py:71
+#: src/available_models_descriptions.py:73
+msgid ""
+"Conversational model based on Llama 2 that performs competitively on various "
+"benchmarks."
+msgstr "מודל שיחתי המבוסס על Llama 2 המבצע באופן תחרותי במדדי השוואה שונים."
+
+#: src/available_models_descriptions.py:74
 msgid ""
 "SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
 "generation tasks"
 msgstr "‏SQLCoder הוא מודל השלמת קוד שכוונן עדין על StarCoder למשימות יצירת SQL"
 
-#: src/available_models_descriptions.py:72
+#: src/available_models_descriptions.py:75
 msgid "General use models based on Llama and Llama 2 from Nous Research."
 msgstr "מודלים לשימוש כללי המבוססים על Llama ו־Llama 2 מ־Nous Research."
 
-#: src/available_models_descriptions.py:73
+#: src/available_models_descriptions.py:76
 msgid "Code generation model based on Code Llama."
 msgstr "מודל ליצירת קוד המבוסס על Code Llama."
 
-#: src/available_models_descriptions.py:74
+#: src/available_models_descriptions.py:77
 msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
 msgstr "הרחבה של Llama 2 התומכת בהקשר של עד 128k טוקנים."
 
-#: src/available_models_descriptions.py:75
+#: src/available_models_descriptions.py:78
 msgid ""
 "A 7B and 15B uncensored variant of the Dolphin model family that excels at "
 "coding, based on StarCoder2."
@@ -2158,15 +2174,15 @@ msgstr ""
 "גרסה לא מצונזרת של 7B ו־15B ממשפחת מודל Dolphin המצטיינת בקידוד, מבוססת על "
 "StarCoder2."
 
-#: src/available_models_descriptions.py:76
+#: src/available_models_descriptions.py:79
 msgid "General use model based on Llama 2."
 msgstr "מודל לשימוש כללי המבוסס על Llama 2."
 
-#: src/available_models_descriptions.py:77
+#: src/available_models_descriptions.py:80
 msgid "A strong, economical, and efficient Mixture-of-Experts language model."
 msgstr "מודל שפה חזק, חסכוני ויעיל מסוג Mixture-of-Experts."
 
-#: src/available_models_descriptions.py:78
+#: src/available_models_descriptions.py:81
 msgid ""
 "Starling is a large language model trained by reinforcement learning from AI "
 "feedback focused on improving chatbot helpfulness."
@@ -2174,40 +2190,14 @@ msgstr ""
 "‏Starling הוא מודל שפה גדול שאומן באמצעות למידה מחיזוקים ממשוב AI המתמקד "
 "בשיפור השימושיות של צ'אטבוטים."
 
-#: src/available_models_descriptions.py:79
+#: src/available_models_descriptions.py:82
 msgid ""
 "A companion assistant trained in philosophy, psychology, and personal "
 "relationships. Based on Mistral."
 msgstr ""
 "עוזר אישי שאומן בפילוסופיה, פסיכולוגיה ויחסים אישיים. מבוסס על Mistral."
 
-#: src/available_models_descriptions.py:80
-msgid ""
-"A compact, yet powerful 10.7B large language model designed for single-turn "
-"conversation."
-msgstr "מודל שפה גדול של 10.7B קומפקטי אך עוצמתי המתוכנן לשיחות סיבוב בודד."
-
-#: src/available_models_descriptions.py:81
-msgid ""
-"A large language model built by the Technology Innovation Institute (TII) "
-"for use in summarization, text generation, and chat bots."
-msgstr ""
-
-#: src/available_models_descriptions.py:82
-msgid ""
-"InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
-"outstanding reasoning capability."
-msgstr ""
-"‏InternLM2.5 הוא מודל של 7B פרמטרים המותאם לתרחישים מעשיים עם יכולת חשיבה "
-"יוצאת דופן."
-
 #: src/available_models_descriptions.py:83
-msgid ""
-"Yi-Coder is a series of open-source code language models that delivers state-"
-"of-the-art coding performance with fewer than 10 billion parameters."
-msgstr ""
-
-#: src/available_models_descriptions.py:84
 msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
@@ -2215,7 +2205,43 @@ msgstr ""
 "‏Hermes 3 הוא הגרסה האחרונה של סדרת הדגל Hermes של מודלי LLM מבית Nous "
 "Research"
 
+#: src/available_models_descriptions.py:84
+msgid ""
+"Yi-Coder is a series of open-source code language models that delivers state-"
+"of-the-art coding performance with fewer than 10 billion parameters."
+msgstr ""
+
 #: src/available_models_descriptions.py:85
+msgid ""
+"A large language model built by the Technology Innovation Institute (TII) "
+"for use in summarization, text generation, and chat bots."
+msgstr ""
+
+#: src/available_models_descriptions.py:86
+msgid ""
+"InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
+"outstanding reasoning capability."
+msgstr ""
+"‏InternLM2.5 הוא מודל של 7B פרמטרים המותאם לתרחישים מעשיים עם יכולת חשיבה "
+"יוצאת דופן."
+
+#: src/available_models_descriptions.py:87
+msgid ""
+"A compact, yet powerful 10.7B large language model designed for single-turn "
+"conversation."
+msgstr "מודל שפה גדול של 10.7B קומפקטי אך עוצמתי המתוכנן לשיחות סיבוב בודד."
+
+#: src/available_models_descriptions.py:88
+msgid ""
+"Athene-V2 is a 72B parameter model which excels at code completion, "
+"mathematics, and log extraction tasks."
+msgstr ""
+
+#: src/available_models_descriptions.py:89
+msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
+msgstr "מודל LLaVA קטן חדש שכוונן עדין מ־Phi 3 Mini."
+
+#: src/available_models_descriptions.py:90
 msgid ""
 "Orca 2 is built by Microsoft research, and are a fine-tuned version of "
 "Meta's Llama 2 models. The model is designed to excel particularly in "
@@ -2224,17 +2250,25 @@ msgstr ""
 "‏Orca 2 נבנה על ידי מחקר Microsoft, והוא גרסה מכווננת עדין של מודלי Llama 2 "
 "של Meta. המודל מתוכנן להצטיין במיוחד בחשיבה."
 
-#: src/available_models_descriptions.py:86
+#: src/available_models_descriptions.py:91
+msgid ""
+"A series of multimodal LLMs (MLLMs) designed for vision-language "
+"understanding."
+msgstr ""
+
+#: src/available_models_descriptions.py:92
 msgid ""
 "Llama 2 based model fine tuned on an Orca-style dataset. Originally called "
 "Free Willy."
 msgstr ""
 
-#: src/available_models_descriptions.py:87
-msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
-msgstr "מודל LLaVA קטן חדש שכוונן עדין מ־Phi 3 Mini."
+#: src/available_models_descriptions.py:93
+msgid ""
+"Mistral Small is a lightweight model designed for cost-effective use in "
+"tasks like translation and summarization."
+msgstr ""
 
-#: src/available_models_descriptions.py:88
+#: src/available_models_descriptions.py:94
 msgid ""
 "2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
 "model by Microsoft Research."
@@ -2242,56 +2276,15 @@ msgstr ""
 "מודל Dolphin לא מצונזר של 2.7B מאת אריק הרטפורד, המבוסס על מודל השפה Phi של "
 "Microsoft Research."
 
-#: src/available_models_descriptions.py:89
-msgid "Uncensored version of Wizard LM model"
-msgstr "גרסה לא מצונזרת של מודל Wizard LM"
-
-#: src/available_models_descriptions.py:90
-msgid ""
-"Mistral Small is a lightweight model designed for cost-effective use in "
-"tasks like translation and summarization."
-msgstr ""
-
-#: src/available_models_descriptions.py:91
-msgid "An extension of Mistral to support context windows of 64K or 128K."
-msgstr "הרחבה של Mistral לתמיכה בחלונות הקשר של 64K או 128K."
-
-#: src/available_models_descriptions.py:92
-msgid ""
-"An expansion of Llama 2 that specializes in integrating both general "
-"language understanding and domain-specific knowledge, particularly in "
-"programming and mathematics."
-msgstr ""
-"הרחבה של Llama 2 המתמחה בשילוב הן של הבנת שפה כללית והן של ידע ספציפי לתחום, "
-"במיוחד בתכנות ומתמטיקה."
-
-#: src/available_models_descriptions.py:93
-msgid ""
-"BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
-"Functionality, Multi-Linguality, and Multi-Granularity."
-msgstr ""
-"‏BGE-M3 הוא מודל חדש מ־BAAI המצטיין בגמישותו ברב־פונקציונליות, רב־לשוניות, "
-"ורב־הבחנתי."
-
-#: src/available_models_descriptions.py:94
-msgid ""
-"A series of multimodal LLMs (MLLMs) designed for vision-language "
-"understanding."
-msgstr ""
-
 #: src/available_models_descriptions.py:95
 msgid ""
-"Fine-tuned Llama 2 model to answer medical questions based on an open source "
-"medical dataset."
+"SmolLM2 is a family of compact language models available in three size: "
+"135M, 360M, and 1.7B parameters."
 msgstr ""
-"מודל Llama 2 מכוונן עדין לענות על שאלות רפואיות על בסיס מערך נתונים רפואי "
-"בקוד פתוח."
 
 #: src/available_models_descriptions.py:96
-msgid ""
-"Open-source medical large language model adapted from Llama 2 to the medical "
-"domain."
-msgstr "מודל שפה גדול רפואי בקוד פתוח שהותאם מ־Llama 2 לתחום הרפואי."
+msgid "Uncensored version of Wizard LM model"
+msgstr "גרסה לא מצונזרת של מודל Wizard LM"
 
 #: src/available_models_descriptions.py:97
 msgid ""
@@ -2300,11 +2293,33 @@ msgid ""
 msgstr ""
 
 #: src/available_models_descriptions.py:98
-msgid ""
-"Nexus Raven is a 13B instruction tuned model for function calling tasks."
-msgstr "‏Nexus Raven הוא מודל 13B מכוונן הוראות למשימות קריאת פונקציות."
+msgid "An extension of Mistral to support context windows of 64K or 128K."
+msgstr "הרחבה של Mistral לתמיכה בחלונות הקשר של 64K או 128K."
 
 #: src/available_models_descriptions.py:99
+msgid ""
+"An expansion of Llama 2 that specializes in integrating both general "
+"language understanding and domain-specific knowledge, particularly in "
+"programming and mathematics."
+msgstr ""
+"הרחבה של Llama 2 המתמחה בשילוב הן של הבנת שפה כללית והן של ידע ספציפי לתחום, "
+"במיוחד בתכנות ומתמטיקה."
+
+#: src/available_models_descriptions.py:100
+msgid ""
+"Fine-tuned Llama 2 model to answer medical questions based on an open source "
+"medical dataset."
+msgstr ""
+"מודל Llama 2 מכוונן עדין לענות על שאלות רפואיות על בסיס מערך נתונים רפואי "
+"בקוד פתוח."
+
+#: src/available_models_descriptions.py:101
+msgid ""
+"Open-source medical large language model adapted from Llama 2 to the medical "
+"domain."
+msgstr "מודל שפה גדול רפואי בקוד פתוח שהותאם מ־Llama 2 לתחום הרפואי."
+
+#: src/available_models_descriptions.py:102
 msgid ""
 "A series of models from Groq that represent a significant advancement in "
 "open-source AI capabilities for tool use/function calling."
@@ -2312,25 +2327,37 @@ msgstr ""
 "סדרה של מודלים מ־Groq המייצגים התקדמות משמעותית ביכולות AI בקוד פתוח לשימוש "
 "בכלים/קריאת פונקציות."
 
-#: src/available_models_descriptions.py:100
-msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
-msgstr "מודל Nous Hermes 2 מ־Nous Research, כעת מאומן על Mixtral."
-
-#: src/available_models_descriptions.py:101
-msgid "Great code generation model based on Llama2."
-msgstr "מודל מצוין ליצירת קוד המבוסס על Llama2."
-
-#: src/available_models_descriptions.py:102
+#: src/available_models_descriptions.py:103
 msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
 msgstr ""
 
-#: src/available_models_descriptions.py:103
+#: src/available_models_descriptions.py:104
+msgid ""
+"Nexus Raven is a 13B instruction tuned model for function calling tasks."
+msgstr "‏Nexus Raven הוא מודל 13B מכוונן הוראות למשימות קריאת פונקציות."
+
+#: src/available_models_descriptions.py:105
+msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
+msgstr "מודל Nous Hermes 2 מ־Nous Research, כעת מאומן על Mixtral."
+
+#: src/available_models_descriptions.py:106
+msgid "Great code generation model based on Llama2."
+msgstr "מודל מצוין ליצירת קוד המבוסס על Llama2."
+
+#: src/available_models_descriptions.py:107
 msgid "Uncensored Llama2 based model with support for a 16K context window."
 msgstr "מודל מבוסס Llama2 לא מצונזר עם תמיכה בחלון הקשר של 16K."
 
-#: src/available_models_descriptions.py:104
+#: src/available_models_descriptions.py:108
+msgid ""
+"The IBM Granite 2B and 8B models are designed to support tool-based use "
+"cases and support for retrieval augmented generation (RAG), streamlining "
+"code generation, translation and bug fixing."
+msgstr ""
+
+#: src/available_models_descriptions.py:109
 msgid ""
 "🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic "
 "instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
@@ -2340,20 +2367,20 @@ msgstr ""
 "סינתטיים באמצעות OSS-Instruct, גישה חדשנית להארת מודלי LLM עם קטעי קוד בקוד "
 "פתוח."
 
-#: src/available_models_descriptions.py:105
+#: src/available_models_descriptions.py:110
 msgid ""
 "A lightweight chat model allowing accurate, and responsive output without "
 "requiring high-end hardware."
 msgstr "מודל צ'אט קל משקל המאפשר פלט מדויק ומגיב ללא צורך בחומרה מתקדמת."
 
-#: src/available_models_descriptions.py:106
+#: src/available_models_descriptions.py:111
 msgid ""
 "A high-performing code instruct model created by merging two existing code "
 "models."
 msgstr ""
 "מודל הוראות קוד בעל ביצועים גבוהים שנוצר על ידי מיזוג שני מודלי קוד קיימים."
 
-#: src/available_models_descriptions.py:107
+#: src/available_models_descriptions.py:112
 msgid ""
 "Falcon2 is an 11B parameters causal decoder-only model built by TII and "
 "trained over 5T tokens."
@@ -2361,7 +2388,7 @@ msgstr ""
 "‏Falcon2 הוא מודל מפענח סיבתי בלבד של 11B פרמטרים שנבנה על ידי TII ואומן על "
 "פני 5T טוקנים."
 
-#: src/available_models_descriptions.py:108
+#: src/available_models_descriptions.py:113
 msgid ""
 "Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
 "MelodysDreamj."
@@ -2369,7 +2396,7 @@ msgstr ""
 "‏Wizard Vicuna הוא מודל של 13B פרמטרים המבוסס על Llama 2 שאומן על ידי "
 "MelodysDreamj."
 
-#: src/available_models_descriptions.py:109
+#: src/available_models_descriptions.py:114
 msgid ""
 "MistralLite is a fine-tuned model based on Mistral with enhanced "
 "capabilities of processing long contexts."
@@ -2377,56 +2404,25 @@ msgstr ""
 "‏MistralLite הוא מודל מכוונן עדין המבוסס על Mistral עם יכולות משופרות של "
 "עיבוד הקשרים ארוכים."
 
-#: src/available_models_descriptions.py:110
-msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
-msgstr ""
-"מודל טקסט־ל־SQL של 7B פרמטרים שנוצר על ידי MotherDuck ו־Numbers Station."
-
-#: src/available_models_descriptions.py:111
-msgid ""
-"MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
-"interleaving the model with itself."
-msgstr ""
-"‏MegaDolphin-2.2-120b הוא שינוי של Dolphin-2.2-70b שנוצר על ידי שילוב המודל "
-"עם עצמו."
-
-#: src/available_models_descriptions.py:112
-msgid ""
-"A top-performing mixture of experts model, fine-tuned with high-quality data."
-msgstr ""
-"מודל mixture of experts מוביל בביצועים, מכוונן עדין עם נתונים באיכות גבוהה."
-
-#: src/available_models_descriptions.py:113
-msgid ""
-"The IBM Granite 2B and 8B models are designed to support tool-based use "
-"cases and support for retrieval augmented generation (RAG), streamlining "
-"code generation, translation and bug fixing."
-msgstr ""
-
-#: src/available_models_descriptions.py:114
+#: src/available_models_descriptions.py:115
 msgid ""
 "MathΣtral: a 7B model designed for math reasoning and scientific discovery "
 "by Mistral AI."
 msgstr ""
 "‏MathΣtral: מודל 7B המתוכנן לחשיבה מתמטית וגילוי מדעי על ידי Mistral AI."
 
-#: src/available_models_descriptions.py:115
-msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
-msgstr "מודל צ'אט 7B מכוונן עדין עם נתונים באיכות גבוהה ומבוסס על Zephyr."
-
 #: src/available_models_descriptions.py:116
-msgid ""
-"Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
-"Designed for chat and code generation."
+msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
 msgstr ""
-"מיזוג של מודל Open Orca OpenChat ומודל Garage-bAInd Platypus 2. מתוכנן לצ'אט "
-"ויצירת קוד."
+"מודל טקסט־ל־SQL של 7B פרמטרים שנוצר על ידי MotherDuck ו־Numbers Station."
 
 #: src/available_models_descriptions.py:117
 msgid ""
-"A language model created by combining two fine-tuned Llama 2 70B models into "
-"one."
-msgstr "מודל שפה שנוצר על ידי שילוב שני מודלי Llama 2 70B מכווננים עדין לאחד."
+"MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
+"interleaving the model with itself."
+msgstr ""
+"‏MegaDolphin-2.2-120b הוא שינוי של Dolphin-2.2-70b שנוצר על ידי שילוב המודל "
+"עם עצמו."
 
 #: src/available_models_descriptions.py:118
 msgid ""
@@ -2442,41 +2438,41 @@ msgstr ""
 
 #: src/available_models_descriptions.py:120
 msgid ""
-"A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
-"information extraction, based on Phi-3."
+"A top-performing mixture of experts model, fine-tuned with high-quality data."
 msgstr ""
-"מודל 3.8B מכוונן עדין על מערך נתונים סינתטי פרטי באיכות גבוהה לחילוץ מידע, "
-"מבוסס על Phi-3."
+"מודל mixture of experts מוביל בביצועים, מכוונן עדין עם נתונים באיכות גבוהה."
 
 #: src/available_models_descriptions.py:121
-msgid "DBRX is an open, general-purpose LLM created by Databricks."
-msgstr "‏DBRX הוא מודל LLM פתוח לשימוש כללי שנוצר על ידי Databricks."
+msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
+msgstr "מודל צ'אט 7B מכוונן עדין עם נתונים באיכות גבוהה ומבוסס על Zephyr."
 
 #: src/available_models_descriptions.py:122
+msgid ""
+"Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
+"Designed for chat and code generation."
+msgstr ""
+"מיזוג של מודל Open Orca OpenChat ומודל Garage-bAInd Platypus 2. מתוכנן לצ'אט "
+"ויצירת קוד."
+
+#: src/available_models_descriptions.py:123
+msgid ""
+"A language model created by combining two fine-tuned Llama 2 70B models into "
+"one."
+msgstr "מודל שפה שנוצר על ידי שילוב שני מודלי Llama 2 70B מכווננים עדין לאחד."
+
+#: src/available_models_descriptions.py:124
 msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
 
-#: src/available_models_descriptions.py:123
-msgid ""
-"An open weights function calling model based on Llama 3, competitive with "
-"GPT-4o function calling capabilities."
-msgstr ""
-"מודל קריאת פונקציות עם משקלות פתוחים המבוסס על Llama 3, תחרותי ליכולות קריאת "
-"הפונקציות של GPT-4o."
-
-#: src/available_models_descriptions.py:124
-msgid ""
-"SmolLM2 is a family of compact language models available in three size: "
-"135M, 360M, and 1.7B parameters."
-msgstr ""
-
 #: src/available_models_descriptions.py:125
 msgid ""
-"A robust conversational model designed to be used for both chat and instruct "
-"use cases."
-msgstr "מודל שיחה חזק המתוכנן לשימוש הן במקרי שימוש של צ'אט והן של הוראות."
+"A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
+"information extraction, based on Phi-3."
+msgstr ""
+"מודל 3.8B מכוונן עדין על מערך נתונים סינתטי פרטי באיכות גבוהה לחילוץ מידע, "
+"מבוסס על Phi-3."
 
 #: src/available_models_descriptions.py:126
 msgid ""
@@ -2485,55 +2481,98 @@ msgid ""
 msgstr ""
 
 #: src/available_models_descriptions.py:127
-msgid "Embedding model from BAAI mapping texts to vectors."
-msgstr "מודל הטמעה מ־BAAI הממפה טקסטים לווקטורים."
+msgid "DBRX is an open, general-purpose LLM created by Databricks."
+msgstr "‏DBRX הוא מודל LLM פתוח לשימוש כללי שנוצר על ידי Databricks."
 
 #: src/available_models_descriptions.py:128
-msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
+msgid ""
+"An open large reasoning model for real-world solutions by the Alibaba "
+"International Digital Commerce Group (AIDC-AI)."
 msgstr ""
 
 #: src/available_models_descriptions.py:129
+msgid "Embedding model from BAAI mapping texts to vectors."
+msgstr "מודל הטמעה מ־BAAI הממפה טקסטים לווקטורים."
+
+#: src/available_models_descriptions.py:130
+msgid ""
+"An open weights function calling model based on Llama 3, competitive with "
+"GPT-4o function calling capabilities."
+msgstr ""
+"מודל קריאת פונקציות עם משקלות פתוחים המבוסס על Llama 3, תחרותי ליכולות קריאת "
+"הפונקציות של GPT-4o."
+
+#: src/available_models_descriptions.py:131
+msgid ""
+"A robust conversational model designed to be used for both chat and instruct "
+"use cases."
+msgstr "מודל שיחה חזק המתוכנן לשימוש הן במקרי שימוש של צ'אט והן של הוראות."
+
+#: src/available_models_descriptions.py:132
+msgid ""
+"An upgraded version of DeekSeek-V2 that integrates the general and coding "
+"abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
+msgstr ""
+
+#: src/available_models_descriptions.py:133
 msgid ""
 "ShieldGemma is set of instruction tuned models for evaluating the safety of "
 "text prompt input and text output responses against a set of defined safety "
 "policies."
 msgstr ""
 
-#: src/available_models_descriptions.py:130
-msgid ""
-"An upgraded version of DeekSeek-V2 that integrates the general and coding "
-"abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
+#: src/available_models_descriptions.py:134
+msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
 msgstr ""
 
-#: src/available_models_descriptions.py:131
+#: src/available_models_descriptions.py:135
 msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
 msgstr ""
 
-#: src/available_models_descriptions.py:132
+#: src/available_models_descriptions.py:136
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
 msgstr ""
 "מודל sentence-transformers שניתן להשתמש בו למשימות כמו אשכול או חיפוש סמנטי."
 
-#: src/available_models_descriptions.py:133
+#: src/available_models_descriptions.py:137
 msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
 msgstr ""
 
-#: src/available_models_descriptions.py:134
+#: src/available_models_descriptions.py:138
+msgid ""
+"Tülu 3 is a leading instruction following model family, offering fully open-"
+"source data, code, and recipes by the The Allen Institute for AI."
+msgstr ""
+
+#: src/available_models_descriptions.py:139
+msgid ""
+"Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
+"support without sacrificing English performance or scalability."
+msgstr ""
+
+#: src/available_models_descriptions.py:140
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
 msgstr ""
 
-#: src/available_models_descriptions.py:135
+#: src/available_models_descriptions.py:141
 msgid ""
-"Athene-V2 is a 72B parameter model which excels at code completion, "
-"mathematics, and log extraction tasks."
+"EXAONE 3.5 is a collection of instruction-tuned bilingual (English and "
+"Korean) generative models ranging from 2.4B to 32B parameters, developed and "
+"released by LG AI Research."
+msgstr ""
+
+#: src/available_models_descriptions.py:142
+msgid ""
+"Sailor2 are multilingual language models made for South-East Asia. Available "
+"in 1B, 8B, and 20B parameter sizes."
 msgstr ""
 
 #: src/connection_handler.py:14
@@ -2584,7 +2623,7 @@ msgstr ""
 msgid "Loading Instance"
 msgstr ""
 
-#: src/window.ui:105 src/window.ui:106 src/window.ui:571 src/window.ui:1048
+#: src/window.ui:105 src/window.ui:106 src/window.ui:571 src/window.ui:1056
 #: src/custom_widgets/model_widget.py:24 src/custom_widgets/model_widget.py:25
 msgid "Manage Models"
 msgstr "ניהול מודלים"
@@ -2614,15 +2653,15 @@ msgstr "צירוף קובץ"
 msgid "Message text box"
 msgstr "תיבת טקסט להודעה"
 
-#: src/window.ui:248 src/window.ui:1249
+#: src/window.ui:248 src/window.ui:1299
 msgid "Send Message"
 msgstr "שליחת הודעה"
 
-#: src/window.ui:298 src/window.ui:1054 src/window.ui:1190
+#: src/window.ui:298 src/window.ui:1062 src/window.ui:1240
 msgid "Preferences"
 msgstr "העדפות"
 
-#: src/window.ui:301 src/window.ui:1168
+#: src/window.ui:301 src/window.ui:1218
 msgid "General"
 msgstr "כללי"
 
@@ -2727,7 +2766,7 @@ msgstr "דו שיח ניהול מודלים"
 msgid "Terminal"
 msgstr ""
 
-#: src/window.ui:581 src/window.ui:748
+#: src/window.ui:581 src/window.ui:756
 msgid "Create Model"
 msgstr "יצירת מודל"
 
@@ -2735,49 +2774,53 @@ msgstr "יצירת מודל"
 msgid "Search Model"
 msgstr "חיפוש מודל"
 
-#: src/window.ui:597
+#: src/window.ui:595
+msgid "Refresh Local Models"
+msgstr ""
+
+#: src/window.ui:605
 msgid "Model search bar"
 msgstr "סרגל חיפוש מודל"
 
-#: src/window.ui:604 src/window.ui:606
+#: src/window.ui:612 src/window.ui:614
 msgid "Search models"
 msgstr "חיפוש מודלים"
 
-#: src/window.ui:629
+#: src/window.ui:637
 msgid "No Models Found"
 msgstr "לא נמצאו מודלים"
 
-#: src/window.ui:630
+#: src/window.ui:638
 msgid "Try a different search or pull an unlisted model from it's name"
 msgstr "יש לנסות חיפוש אחר או למשוך מודל שאינו ברשימה לפי שמו"
 
-#: src/window.ui:638
+#: src/window.ui:646
 msgid "Pull Model From Name"
 msgstr "משיכת מודל לפי שם"
 
-#: src/window.ui:688
+#: src/window.ui:696
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
 msgstr "הורדת מודל זה מהווה הסכמה לתנאי הרישיון הזמינים באתר המודל."
 
-#: src/window.ui:713
+#: src/window.ui:721
 msgid "Model Details"
 msgstr ""
 
-#: src/window.ui:776
+#: src/window.ui:784
 msgid "Base"
 msgstr "בסיס"
 
-#: src/window.ui:795
+#: src/window.ui:803
 msgid "Name"
 msgstr "שם"
 
-#: src/window.ui:801
+#: src/window.ui:809
 msgid "Context"
 msgstr "הקשר"
 
-#: src/window.ui:848
+#: src/window.ui:856
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -2786,39 +2829,39 @@ msgstr ""
 "חלק מהמודלים דורשים קובץ מודל, Alpaca ממלא הוראות FROM ו־SYSTEM (הקשר) באופן "
 "אוטומטי. במקרה של ספק יש לבקר באתר המודל או בתיעוד של Ollama למידע נוסף."
 
-#: src/window.ui:864
+#: src/window.ui:872
 msgid "Create"
 msgstr "יצירה"
 
-#: src/window.ui:887
+#: src/window.ui:895
 msgid "File preview dialog"
 msgstr "דו שיח תצוגה מקדימה של קובץ"
 
-#: src/window.ui:899
+#: src/window.ui:907
 msgid "Open With Default App"
 msgstr "פתיחה עם יישום ברירת המחדל"
 
-#: src/window.ui:907
+#: src/window.ui:915
 msgid "Remove Attachment"
 msgstr "הסרת קובץ מצורף"
 
-#: src/window.ui:967
+#: src/window.ui:975
 msgid "Previous"
 msgstr "הקודם"
 
-#: src/window.ui:1010
+#: src/window.ui:1018
 msgid "Welcome to Alpaca"
 msgstr "ברוך בואך ל־Alpaca"
 
-#: src/window.ui:1011
+#: src/window.ui:1019
 msgid "Powered by Ollama"
 msgstr "מופעל על ידי Ollama"
 
-#: src/window.ui:1014
+#: src/window.ui:1022
 msgid "Ollama Website"
 msgstr "אתר Ollama"
 
-#: src/window.ui:1031
+#: src/window.ui:1039
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2827,103 +2870,111 @@ msgstr ""
 "‏Alpaca ומפתחיה אינם אחראים לכל נזק למכשירים או לתוכנה הנובע מהרצת קוד שנוצר "
 "על ידי מודל AI. יש לנהוג בזהירות ולבדוק את הקוד בקפידה לפני הרצתו."
 
-#: src/window.ui:1044
+#: src/window.ui:1052
 msgid "Import Chat"
 msgstr "ייבוא שיחה"
 
-#: src/window.ui:1058
+#: src/window.ui:1066
 msgid "Keyboard Shortcuts"
 msgstr "צירופי מקשים"
 
-#: src/window.ui:1062
+#: src/window.ui:1070
 msgid "About Alpaca"
 msgstr "על Alpaca"
 
-#: src/window.ui:1070 src/window.ui:1096
+#: src/window.ui:1078 src/window.ui:1104
 msgid "Rename Chat"
 msgstr "שינוי שם שיחה"
 
-#: src/window.ui:1074 src/window.ui:1100
+#: src/window.ui:1082 src/window.ui:1108
 msgid "Duplicate Chat"
 msgstr "שכפול שיחה"
 
-#: src/window.ui:1078 src/window.ui:1104
+#: src/window.ui:1086 src/window.ui:1112
 msgid "Export Chat"
 msgstr "ייצוא שיחה"
 
-#: src/window.ui:1082
+#: src/window.ui:1090
 msgid "Clear Chat"
 msgstr "ניקוי שיחה"
 
-#: src/window.ui:1088 src/window.ui:1110
+#: src/window.ui:1096 src/window.ui:1118
 msgid "Delete Chat"
 msgstr "מחיקת שיחה"
 
-#: src/window.ui:1118
+#: src/window.ui:1126
+msgid "Send as User"
+msgstr ""
+
+#: src/window.ui:1130
+msgid "Send as System"
+msgstr ""
+
+#: src/window.ui:1138
 msgid "From Existing Model"
 msgstr "ממודל קיים"
 
-#: src/window.ui:1122
+#: src/window.ui:1142
 msgid "From GGUF File"
 msgstr "מקובץ GGUF"
 
-#: src/window.ui:1126
+#: src/window.ui:1146
 msgid "From Name"
 msgstr "משם"
 
-#: src/window.ui:1172
+#: src/window.ui:1222
 msgid "Close application"
 msgstr "סגירת יישום"
 
-#: src/window.ui:1178
+#: src/window.ui:1228
 msgid "Import chat"
 msgstr "ייבוא שיחה"
 
-#: src/window.ui:1184
+#: src/window.ui:1234
 msgid "Clear chat"
 msgstr "ניקוי שיחה"
 
-#: src/window.ui:1196
+#: src/window.ui:1246
 msgid "New chat"
 msgstr "שיחה חדשה"
 
-#: src/window.ui:1202
+#: src/window.ui:1252
 msgid "Show shortcuts window"
 msgstr "הצגת חלון קיצורים"
 
-#: src/window.ui:1208
+#: src/window.ui:1258
 msgid "Manage models"
 msgstr "ניהול מודלים"
 
-#: src/window.ui:1214
+#: src/window.ui:1264
 msgid "Toggle sidebar"
 msgstr "הצגת/הסתרת סרגל צד"
 
-#: src/window.ui:1220
+#: src/window.ui:1270
 msgid "Rename chat"
 msgstr "שינוי שם שיחה"
 
-#: src/window.ui:1227
+#: src/window.ui:1277
 msgid "Editor"
 msgstr "עורך"
 
-#: src/window.ui:1231
+#: src/window.ui:1281
 msgid "Copy"
 msgstr "העתקה"
 
-#: src/window.ui:1237
+#: src/window.ui:1287
 msgid "Paste"
 msgstr "הדבקה"
 
-#: src/window.ui:1243
+#: src/window.ui:1293
 msgid "Insert new line"
 msgstr "הוספת שורה חדשה"
 
-#: src/alpaca_search_provider.py.in:51
+#: src/alpaca_search_provider.py.in:40
 msgid "Open chat"
 msgstr ""
 
-#: src/alpaca_search_provider.py.in:52
+#: src/alpaca_search_provider.py.in:41
 msgid "Quick ask"
 msgstr ""
 
@@ -2949,19 +3000,28 @@ msgid ""
 "get started!"
 msgstr "נראה שעדיין לא הורדת מודלים. יש להוריד מודלים כדי להתחיל!"
 
-#: src/custom_widgets/chat_widget.py:198
+#: src/custom_widgets/chat_widget.py:172
+msgid "User"
+msgstr ""
+
+#: src/custom_widgets/chat_widget.py:176
+#: src/custom_widgets/message_widget.py:467
+msgid "System"
+msgstr ""
+
+#: src/custom_widgets/chat_widget.py:232
 msgid "Regenerate Response"
 msgstr "יצירה מחדש של תגובה"
 
-#: src/custom_widgets/chat_widget.py:355
+#: src/custom_widgets/chat_widget.py:399
 msgid "Copy of {}"
 msgstr "עותק של {}"
 
-#: src/custom_widgets/chat_widget.py:367
+#: src/custom_widgets/chat_widget.py:411
 msgid "Chat exported successfully"
 msgstr "השיחה יוצאה בהצלחה"
 
-#: src/custom_widgets/chat_widget.py:437
+#: src/custom_widgets/chat_widget.py:487
 msgid "Chat imported successfully"
 msgstr "השיחה יובאה בהצלחה"
 
@@ -2969,77 +3029,81 @@ msgstr "השיחה יובאה בהצלחה"
 msgid "Save Message"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:87
+#: src/custom_widgets/message_widget.py:86
 msgid "Message edited successfully"
 msgstr "ההודעה נערכה בהצלחה"
 
-#: src/custom_widgets/message_widget.py:112
+#: src/custom_widgets/message_widget.py:113
 msgid "Response message"
 msgstr "הודעת תגובה"
 
-#: src/custom_widgets/message_widget.py:112
+#: src/custom_widgets/message_widget.py:115
+msgid "System message"
+msgstr ""
+
+#: src/custom_widgets/message_widget.py:117
 msgid "User message"
 msgstr "הודעת משתמש"
 
-#: src/custom_widgets/message_widget.py:154
+#: src/custom_widgets/message_widget.py:159
 msgid "{}Code Block"
 msgstr "בלוק קוד {}"
 
-#: src/custom_widgets/message_widget.py:157
+#: src/custom_widgets/message_widget.py:162
 msgid "Code Block"
 msgstr "בלוק קוד"
 
-#: src/custom_widgets/message_widget.py:158
-#: src/custom_widgets/message_widget.py:377
+#: src/custom_widgets/message_widget.py:163
+#: src/custom_widgets/message_widget.py:361
 msgid "Copy Message"
 msgstr "העתקת הודעה"
 
-#: src/custom_widgets/message_widget.py:162
-#: src/custom_widgets/message_widget.py:184
+#: src/custom_widgets/message_widget.py:167
+#: src/custom_widgets/message_widget.py:189
 msgid "Run Script"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:177
+#: src/custom_widgets/message_widget.py:182
 msgid "Code copied to the clipboard"
 msgstr "הקוד הועתק ללוח הגזירים"
 
-#: src/custom_widgets/message_widget.py:185
+#: src/custom_widgets/message_widget.py:190
 msgid ""
 "Make sure you understand what this script does before running it, Alpaca is "
 "not responsible for any damages to your device or data"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:187
+#: src/custom_widgets/message_widget.py:192
 msgid "Execute"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:270
-#: src/custom_widgets/message_widget.py:272
+#: src/custom_widgets/message_widget.py:276
+#: src/custom_widgets/message_widget.py:278
 msgid "Image"
 msgstr "תמונה"
 
-#: src/custom_widgets/message_widget.py:280
-#: src/custom_widgets/message_widget.py:296
+#: src/custom_widgets/message_widget.py:286
+#: src/custom_widgets/message_widget.py:302
 msgid "Missing Image"
 msgstr "תמונה חסרה"
 
-#: src/custom_widgets/message_widget.py:298
+#: src/custom_widgets/message_widget.py:304
 msgid "Missing image"
 msgstr "תמונה חסרה"
 
-#: src/custom_widgets/message_widget.py:369
+#: src/custom_widgets/message_widget.py:351
 msgid "Remove Message"
 msgstr "הסרת הודעה"
 
-#: src/custom_widgets/message_widget.py:385
-msgid "Regenerate Message"
-msgstr "יצירה מחדש של הודעה"
-
-#: src/custom_widgets/message_widget.py:392
+#: src/custom_widgets/message_widget.py:371
 msgid "Edit Message"
 msgstr "עריכת הודעה"
 
-#: src/custom_widgets/message_widget.py:414
+#: src/custom_widgets/message_widget.py:382
+msgid "Regenerate Message"
+msgstr "יצירה מחדש של הודעה"
+
+#: src/custom_widgets/message_widget.py:403
 msgid "Message copied to the clipboard"
 msgstr "ההודעה הועתקה ללוח הגזירים"
 
@@ -3111,41 +3175,55 @@ msgstr "זיהוי תמונות"
 msgid "Enter download menu for {}"
 msgstr "כניסה לתפריט הורדה עבור {}"
 
+#: src/custom_widgets/model_widget.py:514
+msgid "Large Model"
+msgstr ""
+
+#: src/custom_widgets/model_widget.py:515
+msgid ""
+"Your system's available RAM suggests that this model might be too large to "
+"run optimally. Are you sure you want to download it anyway?"
+msgstr ""
+
 #: src/custom_widgets/model_widget.py:517
+msgid "Download"
+msgstr ""
+
+#: src/custom_widgets/model_widget.py:540
 msgid "Download {}:{}"
 msgstr "הורדת {}:{}"
 
-#: src/custom_widgets/model_widget.py:589
+#: src/custom_widgets/model_widget.py:612
 msgid "Model deleted successfully"
 msgstr "המודל נמחק בהצלחה"
 
-#: src/custom_widgets/model_widget.py:669
+#: src/custom_widgets/model_widget.py:692
 msgid "Task Complete"
 msgstr "המשימה הושלמה"
 
-#: src/custom_widgets/model_widget.py:669
-#: src/custom_widgets/model_widget.py:670
+#: src/custom_widgets/model_widget.py:692
+#: src/custom_widgets/model_widget.py:693
 msgid "Model '{}' pulled successfully."
 msgstr "המודל '{}' נמשך בהצלחה."
 
-#: src/custom_widgets/model_widget.py:673
-#: src/custom_widgets/model_widget.py:676
+#: src/custom_widgets/model_widget.py:696
+#: src/custom_widgets/model_widget.py:699
 msgid "Pull Model Error"
 msgstr "שגיאת משיכת מודל"
 
-#: src/custom_widgets/model_widget.py:673
+#: src/custom_widgets/model_widget.py:696
 msgid "Failed to pull model '{}': {}"
 msgstr "נכשלה משיכת המודל '{}': {}"
 
-#: src/custom_widgets/model_widget.py:674
+#: src/custom_widgets/model_widget.py:697
 msgid "Error pulling '{}': {}"
 msgstr "שגיאה במשיכת '{}': {}"
 
-#: src/custom_widgets/model_widget.py:676
+#: src/custom_widgets/model_widget.py:699
 msgid "Failed to pull model '{}' due to network error."
 msgstr "נכשלה משיכת המודל '{}' עקב שגיאת רשת."
 
-#: src/custom_widgets/model_widget.py:677
+#: src/custom_widgets/model_widget.py:700
 msgid "Error pulling '{}'"
 msgstr "שגיאה במשיכת '{}'"
 
@@ -3166,6 +3244,9 @@ msgstr ""
 #: src/custom_widgets/terminal_widget.py:86
 msgid "The script is contained inside Flatpak"
 msgstr ""
+
+#~ msgid "Jeffry Samuel Eduarte Rojas"
+#~ msgstr "ג'פרי סמואל אדוארטה רוחאס"
 
 #~ msgid "This video is not available"
 #~ msgstr "סרטון זה אינו זמין"
