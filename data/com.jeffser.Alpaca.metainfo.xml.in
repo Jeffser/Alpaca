@@ -82,6 +82,30 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="3.0.0" date="2024-12-20">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.0.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>System messages can now be sent directly from Alpaca</li>
+          <li>New redesign for messages and smaller minimum size</li>
+          <li>New models included in 'available models list'</li>
+          <li>Added symbolic icon when attaching code files</li>
+          <li>When exporting a chat it now includes a markdown file</li>
+          <li>Refresh button in model manager when using a remote instance</li>
+          <li>Assistant messages are now editable</li>
+          <li>Updated Ollama to v0.5.2</li>
+        </ul>
+        <ul>
+          <li>Restored ROCm compatibility</li>
+          <li>Added long press gesture to chat rows so actions can be done in touchscreens</li>
+          <li>Fixed edit button not saving changes</li>
+          <li>Changed max temperature value to 2</li>
+          <li>Made seed 0 actually random</li>
+          <li>Fixed Gnome search provider not working outside of Flatpak installations</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.9.0" date="2024-11-26">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.9.0</url>
       <description>
