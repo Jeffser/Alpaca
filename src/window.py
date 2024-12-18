@@ -19,9 +19,7 @@
 """
 Handles the main window
 """
-import json, threading, os, re, base64, gettext, uuid, shutil, logging, time
-import odf.opendocument as odfopen
-import odf.table as odftable
+import json, threading, os, re, base64, gettext, uuid, shutil, logging, time, odfdo
 from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
@@ -719,25 +717,30 @@ Generate a title following these rules:
                 text += f"\n- Page {i}\n{page.extract_text(extraction_mode='layout', layout_mode_space_vertically=False)}\n"
             return text
         elif file_type == 'odt':
-            doc = odfopen.load(file_path)
+            document = odfdo.Document(file_path)
             markdown_elements = []
 
-            for child in doc.text.childNodes:
-                if child.qname[1] == 'p' or child.qname[1] == 'span':
-                    markdown_elements.append(str(child))
-                elif child.qname[1] == 'h':
-                    markdown_elements.append('# {}'.format(str(child)))
-                elif child.qname[1] == 'table':
+            for element in document.body.children:
+                if element.tag in ('text:p', 'text:span'):
+                    markdown_elements.append(element.text)
+                elif element.tag == 'text:h':
+                    markdown_elements.append('{} {}'.format('#', element.text))
+                elif element.tag == 'table:table':
                     generated_table = []
                     column_sizes = []
-                    for row in child.getElementsByType(odftable.TableRow):
-                        generated_table.append([])
-                        for column_n, cell in enumerate(row.getElementsByType(odftable.TableCell)):
-                            if column_n + 1 > len(column_sizes):
-                                column_sizes.append(0)
-                            if len(str(cell)) > column_sizes[column_n]:
-                                column_sizes[column_n] = len(str(cell))
-                            generated_table[-1].append(str(cell))
+                    for row in element.children:
+                        if row.tag == 'table:table-row':
+                            generated_table.append([])
+                            for column_n, cell in enumerate(row.children):
+                                if cell.tag == 'table:table-cell':
+                                    if column_n + 1 > len(column_sizes):
+                                        column_sizes.append(0)
+                                    cell_text = " ".join(
+                                        el.text for el in cell.children
+                                    )
+                                    if len(str(cell)) > column_sizes[column_n]:
+                                        column_sizes[column_n] = len(cell_text)
+                                    generated_table[-1].append(cell_text)
                     generated_table.insert(1, [])
                     for column_n in range(len(generated_table[0])):
                         generated_table[1].append('-' * column_sizes[column_n])
