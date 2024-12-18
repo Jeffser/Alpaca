@@ -19,7 +19,7 @@ window = None
 class edit_text_block(Gtk.Box):
     __gtype_name__ = 'AlpacaEditTextBlock'
 
-    def __init__(self, text:str):
+    def __init__(self, text:str, width:int, height:int):
         super().__init__(
             hexpand=True,
             halign=0,
@@ -35,7 +35,9 @@ class edit_text_block(Gtk.Box):
             halign=0,
             hexpand=True,
             css_classes=["view", "editing_message_textview"],
-            wrap_mode=3
+            wrap_mode=3,
+            width_request=width,
+            height_request=height
         )
         cancel_button = Gtk.Button(
             vexpand=False,
@@ -405,12 +407,12 @@ class option_popup(Gtk.Popover):
 
     def edit_message(self):
         logger.debug("Editing message")
+        edit_text_b = edit_text_block(self.message_element.text, self.message_element.get_size(0) - 10, self.message_element.get_size(1) - self.message_element.footer.get_size(1) * 2)
         for child in self.message_element.content_children:
             self.message_element.container.remove(child)
         self.message_element.content_children = []
         self.message_element.container.remove(self.message_element.footer)
         self.message_element.footer = None
-        edit_text_b = edit_text_block(self.message_element.text)
         self.message_element.container.append(edit_text_b)
         window.set_focus(edit_text_b)
 
