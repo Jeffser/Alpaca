@@ -449,7 +449,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 pixbuf = loader.get_pixbuf()
                 texture = Gdk.Texture.new_for_pixbuf(pixbuf)
                 self.file_preview_image.set_from_paintable(texture)
-                self.file_preview_image.set_size_request(240, 240)
+                self.file_preview_image.set_size_request(360, 360)
+                self.file_preview_image.set_overflow(1)
                 self.file_preview_dialog.set_title(os.path.basename(file_path))
                 self.file_preview_open_button.set_name(file_path)
             else:

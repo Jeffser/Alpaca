@@ -895,8 +895,6 @@
         <property name="label" translatable="yes">File preview dialog</property>
       </accessibility>
       <property name="can-close">true</property>
-      <property name="width-request">400</property>
-      <property name="height-request">600</property>
       <child>
         <object class="AdwToolbarView">
           <child type="top">
@@ -928,6 +926,8 @@
               <property name="margin-bottom">12</property>
               <property name="margin-start">12</property>
               <property name="margin-end">12</property>
+              <property name="propagate-natural-width">true</property>
+              <property name="propagate-natural-height">true</property>
               <style>
                 <class name="card"/>
                 <class name="view"/>
@@ -947,6 +947,9 @@
                     <object class="GtkImage" id="file_preview_image">
                       <property name="hexpand">true</property>
                       <property name="vexpand">true</property>
+                      <style>
+                        <class name="rounded_image"/>
+                      </style>
                     </object>
                   </child>
                 </object>
