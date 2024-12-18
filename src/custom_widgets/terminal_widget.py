@@ -5,6 +5,7 @@ Handles the terminal widget
 
 import gi
 gi.require_version('Gtk', '4.0')
+gi.require_version('Vte', '3.91')
 from gi.repository import Gtk, Vte, GLib, Pango, GLib, Gdk
 import logging, os, shutil, subprocess, re
 from ..internal import data_dir

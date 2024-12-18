@@ -70,20 +70,15 @@ parts:
   
   # VTE
   vte:
-    plugin: nil
-    stage-packages:
-      - libvte-2.91-0
-      - gir1.2-vte-2.91
-    build-packages:
-      - pkg-config
-      - gcc
-      
+    plugin: meson
+    source-type: tar
+    source: https://gitlab.gnome.org/GNOME/vte/-/archive/0.78.0/vte-0.78.0.tar.gz
+
   # Alpaca app
   alpaca:
     plugin: meson
     source-type: git
     source: https://github.com/Jeffser/Alpaca.git
-    source-commit: 67a3c78ef68bb8b43a5f3e80f573707a64541f89
     source-depth: 1
     meson-parameters:
       - --prefix=/snap/jeffser-alpaca/current/usr
