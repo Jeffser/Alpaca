@@ -102,6 +102,7 @@ class text_block(Gtk.Label):
             css_classes=['dim-label'] if system else [],
             justify=2 if system else 0
         )
+        self.raw_text = ''
         if bot:
             self.update_property([4, 7], [_("Response message"), False])
         elif system:
@@ -114,11 +115,9 @@ class text_block(Gtk.Label):
         self.set_selectable(False)
         self.set_selectable(True)
 
-    def insert_at_end(self, text:str, markdown:bool):
-        if markdown:
-            self.set_markup(self.get_text() + text)
-        else:
-            self.set_text(self.get_text() + text)
+    def insert_at_end(self, text:str):
+        self.raw_text += text
+        self.set_markup(self.raw_text)
         self.update_property([1], [self.get_text()])
 
     def clear_text(self):
@@ -530,7 +529,7 @@ class message(Adw.Bin):
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
             elif vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
-            GLib.idle_add(self.content_children[-1].insert_at_end, data['message']['content'], False)
+            GLib.idle_add(self.content_children[-1].insert_at_end, '<span>{}</span>'.format(GLib.markup_escape_text(data['message']['content'])))
             if 'done' in data and data['done']:
                 if not chat.quick_chat:
                     window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
@@ -612,22 +611,24 @@ class message(Adw.Bin):
                     part['text'] = part['text'].replace("\n* ", "\n• ")
                     part['text'] = re.sub(r'`([^`\n]*?)`', r'<tt>\1</tt>', part['text'])
                     part['text'] = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', part['text'], flags=re.MULTILINE)
-                    part['text'] = re.sub(r'^#\s+(.*)', r'<span size="x-large">\1</span>', part['text'], flags=re.MULTILINE)
-                    part['text'] = re.sub(r'^##\s+(.*)', r'<span size="large">\1</span>', part['text'], flags=re.MULTILINE)
+                    part['text'] = re.sub(r'^#\s+(.*)', r'<span size="xx-large">\1</span>', part['text'], flags=re.MULTILINE)
+                    part['text'] = re.sub(r'^##\s+(.*)', r'<span size="x-large">\1</span>', part['text'], flags=re.MULTILINE)
+                    part['text'] = re.sub(r'^###\s+(.*)', r'<span size="large">\1</span>', part['text'], flags=re.MULTILINE)
                     part['text'] = re.sub(r'_(\((.*?)\)|\d+)', r'<sub>\2\1</sub>', part['text'], flags=re.MULTILINE)
                     part['text'] = re.sub(r'\^(\((.*?)\)|\d+)', r'<sup>\2\1</sup>', part['text'], flags=re.MULTILINE)
                     pos = 0
                     for match in markup_pattern.finditer(part['text']):
                         start, end = match.span()
                         if pos < start:
-                            text_b.insert_at_end(part['text'][pos:start], False)
-                        text_b.insert_at_end(match.group(0), True)
+                            text_b.raw_text += '<span>{}</span>'.format(GLib.markup_escape_text(part['text'][pos:start]))
+                        text_b.raw_text += match.group(0)
                         pos = end
 
                     if pos < len(part['text']):
-                        text_b.insert_at_end(part['text'][pos:], False)
+                        text_b.raw_text += '<span>{}</span>'.format(GLib.markup_escape_text(part['text'][pos:]))
                     self.content_children.append(text_b)
                     self.container.append(text_b)
+                    GLib.idle_add(text_b.set_markup,text_b.raw_text)
                 elif part['type'] == 'code':
                     code_b = code_block(part['text'], part['language'])
                     self.content_children.append(code_b)
