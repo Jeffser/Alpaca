@@ -181,21 +181,21 @@
 	    ]
 	},
 	{
-	    "name": "python3-odfpy",
+	    "name": "python3-odfdo",
 	    "buildsystem": "simple",
 	    "build-commands": [
-		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"odfpy\" --no-build-isolation"
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"odfdo\" --no-build-isolation"
 	    ],
 	    "sources": [
 		{
 		    "type": "file",
-		    "url": "https://files.pythonhosted.org/packages/07/6c/aa3f2f849e01cb6a001cd8554a88d4c77c5c1a31c95bdf1cf9301e6d9ef4/defusedxml-0.7.1-py2.py3-none-any.whl",
-		    "sha256": "a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61"
+		    "url": "https://files.pythonhosted.org/packages/82/41/f256b26c0090abe13d3051144148b749f0636e0d9903994ac766218bcc2f/odfdo-3.13.2-py3-none-any.whl",
+		    "sha256": "4e81dfc974a23b9eca9c742fcdb95d80d7927571944b241b371e4a7143116ddb"
 		},
 		{
 		    "type": "file",
-		    "url": "https://files.pythonhosted.org/packages/97/73/8ade73f6749177003f7ce3304f524774adda96e6aaab30ea79fd8fda7934/odfpy-1.4.1.tar.gz",
-		    "sha256": "db766a6e59c5103212f3cc92ec8dd50a0f3a02790233ed0b52148b70d3c438ec"
+		    "url": "https://files.pythonhosted.org/packages/89/49/ae6f38fd331e8a5d5059c14e702a0a6e8435f1d2be645e9cb26f865b409e/odfdo-3.13.2.tar.gz",
+		    "sha256": "4b5aa9ddf76c18edeb883d6f79524f4a6939bfd609c8194e231015f6e8779cf5"
 		}
 	    ]
 	},
