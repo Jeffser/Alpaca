@@ -70,9 +70,9 @@ parts:
   
   # VTE
   vte:
-    plugin: meson
-    source-type: tar
-    source: https://gitlab.gnome.org/GNOME/vte/-/archive/0.78.0/vte-0.78.0.tar.gz
+    plugin: nil
+    stage-packages:
+      - gir1.2-vte-3.91
 
   # Alpaca app
   alpaca:
