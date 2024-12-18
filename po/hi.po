@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.9.0\n"
+"Project-Id-Version: 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-17 01:19-0600\n"
 "PO-Revision-Date: 2024-09-02 HO:MI+ZONE\n"
@@ -141,61 +141,63 @@ msgstr "नया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "System messages can now be sent directly from Alpaca"
-msgstr ""
+msgstr "अब अल्पाका से सीधे सिस्टम संदेश भेजे जा सकते हैं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "New redesign for messages and smaller minimum size"
-msgstr ""
+msgstr "संदेशों के लिए नया डिज़ाइन और छोटा न्यूनतम आकार"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "New models included in 'available models list'"
-msgstr ""
+msgstr "उपलब्ध मॉडल सूची में नए मॉडल जोड़े गए हैं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Added symbolic icon when attaching code files"
-msgstr ""
+msgstr "कोड फ़ाइलें संलग्न करते समय प्रतीकात्मक आइकन जोड़ा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "When exporting a chat it now includes a markdown file"
-msgstr ""
+msgstr "अब चैट को निर्यात करते समय इसमें एक मार्कडाउन फ़ाइल शामिल होती है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Refresh button in model manager when using a remote instance"
-msgstr ""
+msgstr "दूरस्थ उदाहरण का उपयोग करते समय मॉडल प्रबंधक में रिफ्रेश बटन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Assistant messages are now editable"
-msgstr ""
+msgstr "अब सहायक संदेश संपादन योग्य हैं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Updated Ollama to v0.5.2"
-msgstr ""
+msgstr "ओलामा को v0.5.2 में अपडेट किया गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Restored ROCm compatibility"
-msgstr ""
+msgstr "आरओसीएम संगतता बहाल की गई है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid ""
 "Added long press gesture to chat rows so actions can be done in touchscreens"
 msgstr ""
+"चैट पंक्तियों में लंबे समय तक दबाने की गति जोड़ी गई है ताकि टचस्क्रीन पर क्रियाएं की जा सकें"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Fixed edit button not saving changes"
-msgstr ""
+msgstr "संपादन बटन द्वारा परिवर्तनों को सहेजने में समस्या को ठीक किया गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Changed max temperature value to 2"
-msgstr ""
+msgstr "अधिकतम तापमान मान को 2 में बदल दिया गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Made seed 0 actually random"
-msgstr ""
+msgstr "बीज 0 को वास्तव में यादृच्छिक बनाया गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid ""
 "Fixed Gnome search provider not working outside of Flatpak installations"
 msgstr ""
+"फ्लैटपैक स्थापनाओं के बाहर ज्ञोम खोज प्रदाता काम नहीं करने की समस्या को ठीक किया गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
@@ -690,8 +692,7 @@ msgstr "संदेश प्रविष्टि का छाया बद�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:395
 msgid "The last model used is now restored when the user changes chat"
-msgstr ""
-"जब उपयोगकर्ता चैट बदलता है तो अंतिम उपयोग किए गए मॉडल को पुनः प्राप्त किया जाता है"
+msgstr "जब उपयोगकर्ता चैट बदलता है तो अंतिम उपयोग किए गए मॉडल को पुनः प्राप्त किया जाता है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:396
 msgid "Better check for message finishing"
@@ -708,7 +709,8 @@ msgstr "समर्थन संवाद को अधिक सामान�
 #: data/com.jeffser.Alpaca.metainfo.xml.in:410
 msgid ""
 "Dialog title on tag chooser when downloading models didn't display properly"
-msgstr "मॉडल डाउनलोड करते समय टैग चूज़र पर संवाद शीर्षक सही ढंग से नहीं दिखाई दिया"
+msgstr ""
+"मॉडल डाउनलोड करते समय टैग चूज़र पर संवाद शीर्षक सही ढंग से नहीं दिखाई दिया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:411
 msgid "Prevent chat generation from generating a title with multiple lines"
@@ -768,8 +770,7 @@ msgstr "ओलामा को v0.3.0 (नए मॉडल्स) में अ�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:455
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
-msgstr ""
-"जिन मॉडल्स के नाम में '-' होता था, वे ठीक से काम नहीं करते थे, अब यह समस्या ठीक हो गई है"
+msgstr "जिन मॉडल्स के नाम में '-' होता था, वे ठीक से काम नहीं करते थे, अब यह समस्या ठीक हो गई है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:456
 msgid "Better connection check for Ollama"
@@ -950,7 +951,8 @@ msgstr "अनुवाद"
 msgid ""
 "These are all the available translations on 1.0.0, thanks to all the "
 "contributors!"
-msgstr "यह 1.0.0 पर उपलब्ध सभी अनुवाद हैं, सभी योगदानकर्ताओं को धन्यवाद!"
+msgstr ""
+"यह 1.0.0 पर उपलब्ध सभी अनुवाद हैं, सभी योगदानकर्ताओं को धन्यवाद!"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:509
 msgid "Russian: Alex K"
@@ -1059,8 +1061,7 @@ msgstr "मॉडल्स के अनुकूलन और निर्म�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:563
 msgid "Fixed: Icons don't appear on non Gnome systems"
-msgstr ""
-"ग्नोम सिस्टम के अलावा अन्य सिस्टम पर आइकॉन नहीं दिखाई देते थे, यह समस्या अब ठीक हो गई है"
+msgstr "ग्नोम सिस्टम के अलावा अन्य सिस्टम पर आइकॉन नहीं दिखाई देते थे, यह समस्या अब ठीक हो गई है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:564
 msgid "Update Ollama to v0.1.39"
@@ -1385,8 +1386,7 @@ msgstr "विभिन्न विंडो आकारों के लि�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:754
 msgid "Fixed: Can't close app if first time setup fails"
-msgstr ""
-"सुधार: पहली बार सेटअप विफल होने पर ऐप को बंद नहीं किया जा सकता था, यह समस्या अब "
+msgstr "सुधार: पहली बार सेटअप विफल होने पर ऐप को बंद नहीं किया जा सकता था, यह समस्या अब "
 "ठीक हो गई है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:764
@@ -1660,7 +1660,7 @@ msgstr ""
 
 #: src/window.py:810
 msgid "Error attaching video, please try again"
-msgstr ""
+msgstr "वीडियो संलग्न करने में त्रुटि, कृपया पुनः प्रयास करें"
 
 #: src/window.py:830
 msgid "Attach Website? (Experimental)"
@@ -1748,12 +1748,14 @@ msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to Llama 3.1 405B model."
 msgstr ""
+"नया राज्य कला 70बी मॉडल। लामा 3.3 70बी लामा 3.1 405बी मॉडल की तुलना में समान प्रदर्शन प्रदान करता है।"
 
 #: src/available_models_descriptions.py:3
 msgid ""
 "QwQ is an experimental research model focused on advancing AI reasoning "
 "capabilities."
 msgstr ""
+"क्यूवीक्यू एक प्रयोगात्मक अनुसंधान मॉडल है जो एआई तर्क क्षमताओं को आगे बढ़ाने पर केंद्रित है।"
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -1785,7 +1787,8 @@ msgstr "मिस्ट्रल एआई द्वारा जारी 7B �
 #: src/available_models_descriptions.py:9
 msgid ""
 "A high-performing open embedding model with a large token context window."
-msgstr "एक उच्च प्रदर्शन वाला ओपन एम्बेडिंग मॉडल जिसमें एक बड़ा टोकन कंटेक्स्ट विंडो है"
+msgstr ""
+"एक उच्च प्रदर्शन वाला ओपन एम्बेडिंग मॉडल जिसमें एक बड़ा टोकन कंटेक्स्ट विंडो है"
 
 #: src/available_models_descriptions.py:10
 msgid ""
@@ -2446,7 +2449,8 @@ msgstr ""
 msgid ""
 "Open-source medical large language model adapted from Llama 2 to the medical "
 "domain."
-msgstr "ओपन-सोर्स मेडिकल लार्ज लैंग्वेज मॉडल जो एलएलएएमए 2 से मेडिकल डोमेन में अनुकूलित है।"
+msgstr ""
+"ओपन-सोर्स मेडिकल लार्ज लैंग्वेज मॉडल जो एलएलएएमए 2 से मेडिकल डोमेन में अनुकूलित है।"
 
 #: src/available_models_descriptions.py:102
 msgid ""
@@ -2706,20 +2710,14 @@ msgid ""
 "Tülu 3 is a leading instruction following model family, offering fully open-"
 "source data, code, and recipes by the The Allen Institute for AI."
 msgstr ""
+"टुलू 3 एक अग्रणी निर्देश अनुसरण मॉडल परिवार है, जो पूरी तरह से खुला स्रोत डेटा, कोड और रेसिपी प्रदान करता है एलेन इंस्टीट्यूट फॉर एआई द्वारा।"
 
 #: src/available_models_descriptions.py:139
 msgid ""
 "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
 "support without sacrificing English performance or scalability."
 msgstr ""
-
-#: src/available_models_descriptions.py:140
-msgid ""
-"The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
-"in prompts and/or responses."
-msgstr ""
-"आईबीएम ग्रैनाइट गार्डियन 3.0 2बी और 8बी मॉडल प्रॉम्प्ट और/या प्रतिक्रियाओं में जोखिमों "
-"का पता लगाने के लिए डिज़ाइन किए गए हैं।"
+"स्नोफ्लेक का फ्रंटियर एम्बेडिंग मॉडल। आर्कटिक एम्बेड 2.0 में बहुभाषी समर्थन जोड़ता है बिना अंग्रेजी प्रदर्शन या स्केलेबिलिटी को प्रभावित किए।"
 
 #: src/available_models_descriptions.py:141
 msgid ""
@@ -2727,12 +2725,14 @@ msgid ""
 "Korean) generative models ranging from 2.4B to 32B parameters, developed and "
 "released by LG AI Research."
 msgstr ""
+"एक्सएओएन 3.5 अंग्रेजी और कोरियाई भाषाओं के लिए निर्देश-ट्यून किए गए द्विभाषी उत्पन्न मॉडलों का संग्रह है, जो 2.4 बी से 32 बी पैरामीटर तक है, जिसे एलजी एआई रिसर्च द्वारा विकसित और जारी किया गया है।"
 
 #: src/available_models_descriptions.py:142
 msgid ""
 "Sailor2 are multilingual language models made for South-East Asia. Available "
 "in 1B, 8B, and 20B parameter sizes."
 msgstr ""
+"सेलर2 दक्षिण-पूर्व एशिया के लिए बनाए गए बहुभाषी भाषा मॉडल हैं। 1 बी, 8 बी और 20 बी पैरामीटर आकार में उपलब्ध हैं।"
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -2802,7 +2802,8 @@ msgstr "संदेश खोजें"
 #: src/window.ui:150
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
-msgstr "चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
+msgstr ""
+"चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
 
 #: src/window.ui:197
 msgid "Attach File"
@@ -2940,7 +2941,7 @@ msgstr "मॉडल खोजें"
 
 #: src/window.ui:595
 msgid "Refresh Local Models"
-msgstr ""
+msgstr "स्थानीय मॉडल्स को रिफ्रेश करें"
 
 #: src/window.ui:605
 msgid "Model search bar"
@@ -2967,8 +2968,7 @@ msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
 msgstr ""
-"इस मॉडल को डाउनलोड करके आप मॉडल की वेबसाइट पर उपलब्ध लाइसेंस समझौते को स्वीकार करते "
-"हैं।"
+"इस मॉडल को डाउनलोड करके आप मॉडल की वेबसाइट पर उपलब्ध लाइसेंस समझौते को स्वीकार करते हैं।"
 
 #: src/window.ui:721
 msgid "Model Details"
@@ -3072,11 +3072,11 @@ msgstr "चैट हटाएं"
 
 #: src/window.ui:1126
 msgid "Send as User"
-msgstr ""
+msgstr "यूजर के रूप में भेजें"
 
 #: src/window.ui:1130
 msgid "Send as System"
-msgstr ""
+msgstr "सिस्टम के रूप में भेजें"
 
 #: src/window.ui:1138
 msgid "From Existing Model"
@@ -3172,12 +3172,12 @@ msgstr ""
 
 #: src/custom_widgets/chat_widget.py:172
 msgid "User"
-msgstr ""
+msgstr "उपयोगकर्ता"
 
 #: src/custom_widgets/chat_widget.py:176
 #: src/custom_widgets/message_widget.py:467
 msgid "System"
-msgstr ""
+msgstr "सिस्टम"
 
 #: src/custom_widgets/chat_widget.py:232
 msgid "Regenerate Response"
@@ -3209,7 +3209,7 @@ msgstr "प्रतिक्रिया संदेश"
 
 #: src/custom_widgets/message_widget.py:115
 msgid "System message"
-msgstr ""
+msgstr "सिस्टम संदेश"
 
 #: src/custom_widgets/message_widget.py:117
 msgid "User message"
@@ -3349,17 +3349,18 @@ msgstr "{} के लिए डाउनलोड मेनू में प्�
 
 #: src/custom_widgets/model_widget.py:514
 msgid "Large Model"
-msgstr ""
+msgstr "बड़ा मॉडल"
 
 #: src/custom_widgets/model_widget.py:515
 msgid ""
 "Your system's available RAM suggests that this model might be too large to "
 "run optimally. Are you sure you want to download it anyway?"
 msgstr ""
+"आपके सिस्टम की उपलब्ध रैम से पता चलता है कि यह मॉडल इष्टतम रूप से चलाने के लिए बहुत बड़ा हो सकता है। क्या आप वैसे भी इसे डाउनलोड करना चाहते हैं?"
 
 #: src/custom_widgets/model_widget.py:517
 msgid "Download"
-msgstr ""
+msgstr "डाउनलोड करें"
 
 #: src/custom_widgets/model_widget.py:540
 msgid "Download {}:{}"
