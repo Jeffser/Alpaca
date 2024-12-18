@@ -437,7 +437,7 @@ class footer(Gtk.Box):
             wrap=True,
             ellipsize=3,
             wrap_mode=2,
-            margin_end=5,
+            margin_end=10,
             xalign=0,
             focusable=True,
             css_classes=['dim-label']
