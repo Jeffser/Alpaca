@@ -8,8 +8,8 @@
   border-radius: 10px;
 }
 .editing_message_textview {
-  border-radius: 5px;
-  padding: 5px;
+  padding: 7px;
+  border-radius: 10px;
 }
 .model_list_box {
 	padding: 0;
@@ -21,7 +21,7 @@
 .model_list_box > * {
 	margin: 0;
 }
-.user_message > label, .response_message > label, .user_message > box > textview, .response_message > box > textview {
+.user_message > label, .response_message > label {
   padding: 7px;
   border-radius: 10px;
 }
