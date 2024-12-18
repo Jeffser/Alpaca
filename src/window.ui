@@ -941,6 +941,9 @@
                       <property name="margin-start">12</property>
                       <property name="margin-end">12</property>
                       <property name="selectable">true</property>
+                      <style>
+                        <class name="monospace"/>
+                      </style>
                     </object>
                   </child>
                   <child>
@@ -1193,6 +1196,7 @@
       <suffix>sh</suffix>
       <suffix>p8</suffix>
       <suffix>pdf</suffix>
+      <suffix>odt</suffix>
       <suffix>png</suffix>
       <suffix>jpeg</suffix>
       <suffix>jpg</suffix>

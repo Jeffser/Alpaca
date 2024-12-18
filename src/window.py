@@ -20,6 +20,8 @@
 Handles the main window
 """
 import json, threading, os, re, base64, gettext, uuid, shutil, logging, time
+import odf.opendocument as odfopen
+import odf.table as odftable
 from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
@@ -716,6 +718,37 @@ Generate a title following these rules:
             for i, page in enumerate(reader.pages):
                 text += f"\n- Page {i}\n{page.extract_text(extraction_mode='layout', layout_mode_space_vertically=False)}\n"
             return text
+        elif file_type == 'odt':
+            doc = odfopen.load(file_path)
+            markdown_elements = []
+
+            for child in doc.text.childNodes:
+                if child.qname[1] == 'p' or child.qname[1] == 'span':
+                    markdown_elements.append(str(child))
+                elif child.qname[1] == 'h':
+                    markdown_elements.append('# {}'.format(str(child)))
+                elif child.qname[1] == 'table':
+                    generated_table = []
+                    column_sizes = []
+                    for row in child.getElementsByType(odftable.TableRow):
+                        generated_table.append([])
+                        for column_n, cell in enumerate(row.getElementsByType(odftable.TableCell)):
+                            if column_n + 1 > len(column_sizes):
+                                column_sizes.append(0)
+                            if len(str(cell)) > column_sizes[column_n]:
+                                column_sizes[column_n] = len(str(cell))
+                            generated_table[-1].append(str(cell))
+                    generated_table.insert(1, [])
+                    for column_n in range(len(generated_table[0])):
+                        generated_table[1].append('-' * column_sizes[column_n])
+                    table_str = ''
+                    for row in generated_table:
+                        for column_n, cell in enumerate(row):
+                            table_str += '| {} '.format(cell.ljust(column_sizes[column_n], ' '))
+                        table_str += '|\n'
+                    markdown_elements.append(table_str)
+
+            return '\n\n'.join(markdown_elements)
 
     def remove_attached_file(self, name):
         logger.debug("Removing attached file")
@@ -739,6 +772,7 @@ Generate a title following these rules:
                     "plain_text": "document-text-symbolic",
                     "code": "code-symbolic",
                     "pdf": "document-text-symbolic",
+                    "odt": "document-text-symbolic",
                     "youtube": "play-symbolic",
                     "website": "globe-symbolic"
                 }[file_type]

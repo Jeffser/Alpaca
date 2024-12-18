@@ -78,7 +78,8 @@ def attach_file(file):
                 "cs", "csx", "cpp", "cxx", "cp", "hxx", "inc", "csv", "lsp", "lisp", "el", "emacs",
                 "l", "cu", "dockerfile", "glsl", "g", "lua", "php", "rb", "ru", "rs", "sql", "sh", "p8"],
         "image": ["png", "jpeg", "jpg", "webp", "gif"],
-        "pdf": ["pdf"]
+        "pdf": ["pdf"],
+        "odt": ["odt"]
     }
     extension = file.get_path().split(".")[-1]
     file_type = next(key for key, value in file_types.items() if extension in value)
