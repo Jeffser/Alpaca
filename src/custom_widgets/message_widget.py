@@ -19,15 +19,10 @@ window = None
 class edit_text_block(Gtk.Box):
     __gtype_name__ = 'AlpacaEditTextBlock'
 
-    def __init__(self, text:str, width:int, height:int):
+    def __init__(self, text:str, width:int):
         super().__init__(
             hexpand=True,
             halign=0,
-            margin_top=5,
-            margin_bottom=5,
-            margin_start=5,
-            margin_end=5,
-
             spacing=5,
             orientation=1
         )
@@ -37,36 +32,35 @@ class edit_text_block(Gtk.Box):
             css_classes=["view", "editing_message_textview"],
             wrap_mode=3,
             width_request=width,
-            height_request=height
         )
         cancel_button = Gtk.Button(
             vexpand=False,
             valign=2,
-            halign=2,
+            halign=1,
             tooltip_text=_("Cancel"),
-            css_classes=['flat', 'circular'],
+            css_classes=['flat', 'circular', 'dim-label'],
             icon_name='cross-large-symbolic'
         )
         cancel_button.connect('clicked', lambda *_: self.cancel_edit())
         save_button = Gtk.Button(
             vexpand=False,
             valign=2,
-            halign=2,
+            halign=1,
             tooltip_text=_("Save Message"),
-            css_classes=['flat', 'circular'],
+            css_classes=['flat', 'circular', 'dim-label'],
             icon_name='paper-plane-symbolic'
         )
         save_button.connect('clicked', lambda *_: self.save_edit())
         self.append(self.text_view)
 
         button_container = Gtk.Box(
-            halign=2,
+            halign=1,
             spacing=5
         )
         button_container.append(cancel_button)
         button_container.append(save_button)
         self.append(button_container)
-        self.text_view.get_buffer().insert(self.text_view.get_buffer().get_start_iter(), text, len(text.encode('utf-8')))
+        #self.text_view.get_buffer().insert(self.text_view.get_buffer().get_start_iter(), text, len(text.encode('utf-8')))
         key_controller = Gtk.EventControllerKey.new()
         key_controller.connect("key-pressed", self.handle_key)
         self.text_view.add_controller(key_controller)
@@ -103,9 +97,6 @@ class text_block(Gtk.Label):
             wrap=True,
             wrap_mode=0,
             xalign=0,
-            margin_top=5,
-            margin_start=5,
-            margin_end=5,
             focusable=True,
             selectable=True,
             css_classes=['dim-label'] if system else [],
@@ -243,9 +234,6 @@ class attachment_container(Gtk.ScrolledWindow):
         )
 
         super().__init__(
-            margin_top=10,
-            margin_start=10,
-            margin_end=10,
             hexpand=True,
             child=self.container,
             vscrollbar_policy=2
@@ -290,10 +278,6 @@ class image(Gtk.Button):
             image_box = Gtk.Box(
                 spacing=10,
                 orientation=1,
-                margin_top=10,
-                margin_bottom=10,
-                margin_start=10,
-                margin_end=10
             )
             image_box.append(image_texture)
             image_box.append(image_label)
@@ -319,9 +303,6 @@ class image_container(Gtk.ScrolledWindow):
         )
 
         super().__init__(
-            margin_top=10,
-            margin_start=10,
-            margin_end=10,
             hexpand=True,
             height_request = 240,
             child=self.container
@@ -407,13 +388,14 @@ class option_popup(Gtk.Popover):
 
     def edit_message(self):
         logger.debug("Editing message")
-        edit_text_b = edit_text_block(self.message_element.text, self.message_element.get_size(0) - 10, self.message_element.get_size(1) - self.message_element.footer.get_size(1) * 2)
+        edit_text_b = edit_text_block(self.message_element.text, self.message_element.get_size(0) - 10)
         for child in self.message_element.content_children:
             self.message_element.container.remove(child)
         self.message_element.content_children = []
         self.message_element.container.remove(self.message_element.footer)
         self.message_element.footer = None
         self.message_element.container.append(edit_text_b)
+        GLib.idle_add(edit_text_b.text_view.get_buffer().insert, edit_text_b.text_view.get_buffer().get_start_iter(), self.message_element.text, len(self.message_element.text.encode('utf-8')))
         window.set_focus(edit_text_b)
 
     def regenerate_message(self):
@@ -447,9 +429,6 @@ class footer(Gtk.Box):
         super().__init__(
             orientation=0,
             hexpand=True,
-            margin_start=10,
-            margin_bottom=10,
-            margin_end=10,
             spacing=5,
             halign=0
         )
@@ -509,7 +488,7 @@ class message(Adw.Bin):
             orientation=1,
             halign='fill',
             css_classes=["response_message"] if self.bot or self.system else ["card", "user_message"],
-            spacing=5,
+            spacing=10,
             width_request=-1 if self.bot or self.system else 100
         )
 
