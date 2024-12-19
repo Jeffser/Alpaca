@@ -143,61 +143,62 @@ msgstr "Нове"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "System messages can now be sent directly from Alpaca"
-msgstr ""
+msgstr "Системні повідомлення тепер можна надсилати безпосередньо з Alpaca"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "New redesign for messages and smaller minimum size"
-msgstr ""
+msgstr "Новий дизайн для повідомлень та менший мінімальний розмір"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "New models included in 'available models list'"
-msgstr ""
+msgstr "Нові моделі додані до списку 'доступних моделей'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Added symbolic icon when attaching code files"
-msgstr ""
+msgstr "Додано символічну іконку при додаванні файлів з кодом"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "When exporting a chat it now includes a markdown file"
-msgstr ""
+msgstr "Під час експорту чату тепер додається файл у форматі Markdown"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Refresh button in model manager when using a remote instance"
-msgstr ""
+msgstr "Кнопка оновлення в менеджері моделей при використанні віддаленого примірника"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Assistant messages are now editable"
-msgstr ""
+msgstr "Повідомлення асистента тепер можна редагувати"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Updated Ollama to v0.5.2"
-msgstr ""
+msgstr "Оновлено Ollama до версії 0.5.2"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Restored ROCm compatibility"
-msgstr ""
+msgstr "Відновлено сумісність з ROCm"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid ""
 "Added long press gesture to chat rows so actions can be done in touchscreens"
 msgstr ""
+"Додано жест тривалого натискання на рядки чату для виконання дій на сенсорних екранах"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Fixed edit button not saving changes"
-msgstr ""
+msgstr "Виправлено проблему, коли кнопка редагування не зберігала зміни"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Changed max temperature value to 2"
-msgstr ""
+msgstr "Максимальне значення температури змінено на 2"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Made seed 0 actually random"
-msgstr ""
+msgstr "Насіння 0 тепер дійсно випадкове"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid ""
 "Fixed Gnome search provider not working outside of Flatpak installations"
-msgstr ""
+msgstr "Виправлено проблему, коли пошуковий провайдер Gnome не працював за межами установок Flatpak"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
@@ -1695,9 +1696,9 @@ msgstr ""
 "\n"
 "Будь ласка, виберіть транскрипцію для включення"
 
-#: src/window.py:810
-msgid "Error attaching video, please try again"
-msgstr ""
+#: src/window.py:810  
+msgid "Error attaching video, please try again"  
+msgstr "Помилка при додаванні відео, будь ласка, спробуйте ще раз"
 
 #: src/window.py:830
 msgid "Attach Website? (Experimental)"
@@ -1782,17 +1783,17 @@ msgstr "Ви впевнені, що хочете видалити вкладен
 msgid "Remove"
 msgstr "Видалити"
 
-#: src/available_models_descriptions.py:2
-msgid ""
-"New state of the art 70B model. Llama 3.3 70B offers similar performance "
-"compared to Llama 3.1 405B model."
-msgstr ""
+#: src/available_models_descriptions.py:2  
+msgid ""  
+"New state of the art 70B model. Llama 3.3 70B offers similar performance "  
+"compared to Llama 3.1 405B model."  
+msgstr "Нова передова модель з 70 мільярдами параметрів. Llama 3.3 70B пропонує подібну продуктивність у порівнянні з моделлю Llama 3.1 405B."  
 
-#: src/available_models_descriptions.py:3
-msgid ""
-"QwQ is an experimental research model focused on advancing AI reasoning "
-"capabilities."
-msgstr ""
+#: src/available_models_descriptions.py:3  
+msgid ""  
+"QwQ is an experimental research model focused on advancing AI reasoning "  
+"capabilities."  
+msgstr "QwQ — це експериментальна дослідницька модель, спрямована на вдосконалення здатності ШІ до логічного мислення."  
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -2261,12 +2262,15 @@ msgstr ""
 "BakLLaVA — це мультимодальна модель, що складається з базової моделі Mistral "
 "7B, доповненої архітектурою LLaVA."
 
-#: src/available_models_descriptions.py:66
-msgid ""
-"A high-performing model trained with a new technique called Reflection-"
-"tuning that teaches a LLM to detect mistakes in its reasoning and correct "
-"course."
+#: src/available_models_descriptions.py:66  
+msgid ""  
+"A high-performing model trained with a new technique called Reflection-"  
+"tuning that teaches a LLM to detect mistakes in its reasoning and correct "  
+"course."  
 msgstr ""
+"Високопродуктивна модель, навчена за допомогою нової техніки, яка називається "
+"«Reflection-tuning», що дозволяє великій мовній моделі виявляти помилки у своєму мисленні " 
+"та коригувати їх."  
 
 #: src/available_models_descriptions.py:67
 msgid "An advanced language model crafted with 2 trillion bilingual tokens."
@@ -2460,11 +2464,13 @@ msgstr ""
 "Неконтрольована модель Dolphin з 2.7B параметрів від Ерика Хартфорда, на "
 "основі мовної моделі Phi від Microsoft Research."
 
-#: src/available_models_descriptions.py:95
-msgid ""
-"SmolLM2 is a family of compact language models available in three size: "
-"135M, 360M, and 1.7B parameters."
+#: src/available_models_descriptions.py:95  
+msgid ""  
+"SmolLM2 is a family of compact language models available in three size: "  
+"135M, 360M, and 1.7B parameters."  
 msgstr ""
+"SmolLM2 — це сімейство компактних мовних моделей, доступних у трьох розмірах: "
+"135М, 360М і 1.7B параметрів."  
 
 #: src/available_models_descriptions.py:96
 msgid "Uncensored version of Wizard LM model"
@@ -2700,11 +2706,13 @@ msgstr ""
 msgid "DBRX is an open, general-purpose LLM created by Databricks."
 msgstr "DBRX — це відкрита універсальна мовна модель, створена Databricks."
 
-#: src/available_models_descriptions.py:128
-msgid ""
-"An open large reasoning model for real-world solutions by the Alibaba "
-"International Digital Commerce Group (AIDC-AI)."
+#: src/available_models_descriptions.py:128  
+msgid ""  
+"An open large reasoning model for real-world solutions by the Alibaba "  
+"International Digital Commerce Group (AIDC-AI)."  
 msgstr ""
+"Відкрита велика модель логічного мислення для реальних рішень від "
+"Міжнародної цифрової комерційної групи Alibaba (AIDC-AI)."
 
 #: src/available_models_descriptions.py:129
 msgid "Embedding model from BAAI mapping texts to vectors."
@@ -2772,38 +2780,39 @@ msgstr ""
 "OpenCoder — це відкрита та відтворювана сім'я мовних моделей для коду, що "
 "включає моделі 1.5B і 8B, підтримуючи чат англійською та китайською мовами."
 
-#: src/available_models_descriptions.py:138
-msgid ""
-"Tülu 3 is a leading instruction following model family, offering fully open-"
-"source data, code, and recipes by the The Allen Institute for AI."
+#: src/available_models_descriptions.py:138  
+msgid ""  
+"Tülu 3 is a leading instruction following model family, offering fully open-"  
+"source data, code, and recipes by the The Allen Institute for AI."  
 msgstr ""
+"Tülu 3 — провідна модель сімейства інструктивного навчання, яка пропонує "
+"повністю відкриті дані, код і рецепти від Інституту Аллена для штучного інтелекту."  
 
-#: src/available_models_descriptions.py:139
-msgid ""
-"Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
-"support without sacrificing English performance or scalability."
+#: src/available_models_descriptions.py:139  
+msgid ""  
+"Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "  
+"support without sacrificing English performance or scalability."  
 msgstr ""
+"Модель вбудовування нового покоління від Snowflake. Arctic Embed 2.0 додає "
+"багатомовну підтримку без втрати продуктивності англійської мови чи масштабованості."  
 
-#: src/available_models_descriptions.py:140
-msgid ""
-"The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
-"in prompts and/or responses."
+#: src/available_models_descriptions.py:141  
+msgid ""  
+"EXAONE 3.5 is a collection of instruction-tuned bilingual (English and "  
+"Korean) generative models ranging from 2.4B to 32B parameters, developed and "  
+"released by LG AI Research."  
 msgstr ""
-"Моделі IBM Granite Guardian 3.0 2B та 8B розроблені для виявлення ризиків у "
-"запитах та/або відповідях."
+"EXAONE 3.5 — це колекція двомовних (англійською та корейською) "
+"генеративних моделей з налаштуванням інструкцій, параметри яких варіюються " 
+"від 2.4 до 32 мільярдів, розроблена та випущена LG AI Research."  
 
-#: src/available_models_descriptions.py:141
-msgid ""
-"EXAONE 3.5 is a collection of instruction-tuned bilingual (English and "
-"Korean) generative models ranging from 2.4B to 32B parameters, developed and "
-"released by LG AI Research."
+#: src/available_models_descriptions.py:142  
+msgid ""  
+"Sailor2 are multilingual language models made for South-East Asia. Available "  
+"in 1B, 8B, and 20B parameter sizes."  
 msgstr ""
-
-#: src/available_models_descriptions.py:142
-msgid ""
-"Sailor2 are multilingual language models made for South-East Asia. Available "
-"in 1B, 8B, and 20B parameter sizes."
-msgstr ""
+"Sailor2 — багатомовні мовні моделі, створені для Південно-Східної Азії. "
+"Доступні у розмірах 1 мільярд, 8 мільярдів і 20 мільярдів параметрів."  
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -3012,9 +3021,9 @@ msgstr "Створити модель"
 msgid "Search Model"
 msgstr "Шукати модель"
 
-#: src/window.ui:595
-msgid "Refresh Local Models"
-msgstr ""
+#: src/window.ui:595  
+msgid "Refresh Local Models"  
+msgstr "Оновити локальні моделі"
 
 #: src/window.ui:605
 msgid "Model search bar"
@@ -3147,13 +3156,13 @@ msgstr "Очистити чат"
 msgid "Delete Chat"
 msgstr "Видалити чат"
 
-#: src/window.ui:1126
-msgid "Send as User"
-msgstr ""
+#: src/window.ui:1126  
+msgid "Send as User"  
+msgstr "Надіслати як користувач"  
 
-#: src/window.ui:1130
-msgid "Send as System"
-msgstr ""
+#: src/window.ui:1130  
+msgid "Send as System"  
+msgstr "Надіслати як система"
 
 #: src/window.ui:1138
 msgid "From Existing Model"
@@ -3246,14 +3255,14 @@ msgid ""
 msgstr ""
 "Схоже, у вас ще не завантажено жодної моделі. Завантажте моделі, щоб почати!"
 
-#: src/custom_widgets/chat_widget.py:172
-msgid "User"
-msgstr ""
+#: src/custom_widgets/chat_widget.py:172  
+msgid "User"  
+msgstr "Користувач"  
 
-#: src/custom_widgets/chat_widget.py:176
-#: src/custom_widgets/message_widget.py:467
-msgid "System"
-msgstr ""
+#: src/custom_widgets/chat_widget.py:176  
+#: src/custom_widgets/message_widget.py:467  
+msgid "System"  
+msgstr "Система"
 
 #: src/custom_widgets/chat_widget.py:232
 msgid "Regenerate Response"
@@ -3283,9 +3292,9 @@ msgstr "Повідомлення успішно відредаговано"
 msgid "Response message"
 msgstr "Повідомлення відповіді"
 
-#: src/custom_widgets/message_widget.py:115
-msgid "System message"
-msgstr ""
+#: src/custom_widgets/message_widget.py:115  
+msgid "System message"  
+msgstr "Системне повідомлення"
 
 #: src/custom_widgets/message_widget.py:117
 msgid "User message"
@@ -3424,19 +3433,22 @@ msgstr "Розпізнавання зображень"
 msgid "Enter download menu for {}"
 msgstr "Перейти до меню завантаження для {}"
 
-#: src/custom_widgets/model_widget.py:514
-msgid "Large Model"
-msgstr ""
+#: src/custom_widgets/model_widget.py:514  
+msgid "Large Model"  
+msgstr "Велика модель"  
 
-#: src/custom_widgets/model_widget.py:515
-msgid ""
-"Your system's available RAM suggests that this model might be too large to "
-"run optimally. Are you sure you want to download it anyway?"
+#: src/custom_widgets/model_widget.py:515  
+msgid ""  
+"Your system's available RAM suggests that this model might be too large to "  
+"run optimally. Are you sure you want to download it anyway?"  
 msgstr ""
+"Доступна оперативна пам'ять вашої системи вказує на "
+"те, що ця модель може бути занадто великою для оптимальної роботи. "
+"Ви впевнені, що хочете завантажити її все одно?"
 
-#: src/custom_widgets/model_widget.py:517
-msgid "Download"
-msgstr ""
+#: src/custom_widgets/model_widget.py:517  
+msgid "Download"  
+msgstr "Завантажити"  
 
 #: src/custom_widgets/model_widget.py:540
 msgid "Download {}:{}"
