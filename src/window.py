@@ -1006,7 +1006,7 @@ Generate a title following these rules:
         chat.busy = True
         threading.Thread(target=self.run_quick_chat, args=(data, m_element_bot)).start()
 
-    def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, default_model:str, model_directory:str, save:bool):
+    def prepare_alpaca(self, configuration:dict, save:bool):
         #Model Manager
         self.model_manager = model_widget.model_manager_container()
         self.model_scroller.set_child(self.model_manager)
@@ -1018,7 +1018,7 @@ Generate a title following these rules:
             self.chat_list_box.new_chat(self.get_application().args.new_chat)
 
         #Instance
-        self.ollama_instance = connection_handler.instance(local_port, remote_url, remote, tweaks, overrides, bearer_token, idle_timer_delay, model_directory)
+        self.ollama_instance = connection_handler.instance(configuration['local_port'], configuration['remote_url'], configuration['run_remote'], configuration['model_tweaks'], configuration['ollama_overrides'], configuration['remote_bearer_token'], configuration['idle_timer'], configuration['model_directory'])
 
         #Model Manager P.2
         self.model_manager.update_available_list()
@@ -1029,10 +1029,10 @@ Generate a title following these rules:
             if element.get_name() in self.ollama_instance.tweaks:
                 element.set_value(self.ollama_instance.tweaks[element.get_name()])
 
-        if default_model:
+        if configuration['default_model']:
             try:
                 for i, model in enumerate(list(self.default_model_list)):
-                    if self.convert_model_name(model.get_string(), 1) == default_model:
+                    if self.convert_model_name(model.get_string(), 1) == configuration['default_model']:
                         self.default_model_combo.set_selected(i)
             except:
                 pass
@@ -1041,8 +1041,7 @@ Generate a title following these rules:
             if element.get_name() in self.ollama_instance.overrides:
                 element.set_text(self.ollama_instance.overrides[element.get_name()])
 
-        self.model_directory_selector.set_subtitle(model_directory)
-
+        self.model_directory_selector.set_subtitle(self.ollama_instance.model_directory)
         self.set_hide_on_close(self.background_switch.get_active())
         self.instance_idle_timer.set_value(self.ollama_instance.idle_timer_delay)
         self.remote_connection_switch.set_active(self.ollama_instance.remote)
@@ -1055,7 +1054,10 @@ Generate a title following these rules:
         self.attachment_button.set_sensitive(True)
         self.remote_connection_switch.set_sensitive(shutil.which('ollama'))
         self.tweaks_group.set_sensitive(True)
-        self.instance_page.set_sensitive(True)
+        self.instance_page.set_sensitive(shutil.which('ollama'))
+        if not shutil.which('ollama'):
+            print('huh')
+            self.preferences_dialog.remove(self.instance_page)
         self.get_application().lookup_action('manage_models').set_enabled(True)
 
         if self.get_application().args.ask:
@@ -1144,30 +1146,46 @@ Generate a title following these rules:
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialog_widget.simple_file(file_filter, generic_actions.attach_file))
         self.create_model_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_']))
         self.set_focus(self.message_text_view)
+
+        configuration = { # Defaults
+            "remote_url": "http://0.0.0.0:11434",
+            "remote_bearer_token": "",
+            "run_remote": False,
+            "local_port": 11435,
+            "run_on_background": False,
+            "powersaver_warning": True,
+            "default_model": None,
+            "model_tweaks": {
+                "temperature": 0.7,
+                "seed": 0,
+                "keep_alive": 5
+            },
+            "ollama_overrides": {},
+            "idle_timer": 0,
+            "model_directory": os.path.join(data_dir, '.ollama', 'models')
+        }
+
         if os.path.exists(os.path.join(config_dir, "server.json")):
             try:
                 with open(os.path.join(config_dir, "server.json"), "r", encoding="utf-8") as f:
                     data = json.load(f)
-                    self.background_switch.set_active(data['run_on_background'])                    
-                    if 'idle_timer' not in data:
-                        data['idle_timer'] = 0
-                    if 'powersaver_warning' not in data:
-                        data['powersaver_warning'] = True
-                    if 'default_model' not in data:
-                        data['default_model'] = None
-                    if 'model_directory' not in data:
-                        data['model_directory'] = os.path.join(data_dir, '.ollama', 'models')
-                    self.powersaver_warning_switch.set_active(data['powersaver_warning'])
-                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], round(data['idle_timer']), data['default_model'], data['model_directory'], False)).start()
+                    for option, value in configuration.items():
+                        if option in data and data[option] != value and type(data[option]) == type(value):
+                            configuration[option] = data[option]
+
+                    self.background_switch.set_active(configuration['run_on_background'])
+                    self.powersaver_warning_switch.set_active(configuration['powersaver_warning'])
+
+                    threading.Thread(target=self.prepare_alpaca, args=(configuration, False)).start()
             except Exception as e:
                 logger.error(e)
-                threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, None, True)).start()
+                threading.Thread(target=self.prepare_alpaca, args=(configuration, True)).start()
                 self.powersaver_warning_switch.set_active(True)
         else:
             if shutil.which('ollama'):
-                threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, None, True)).start()
+                threading.Thread(target=self.prepare_alpaca, args=(configuration, True)).start()
             else:
-                threading.Thread(target=self.prepare_alpaca, args=(11435, 'http://0.0.0.0:11434', True, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, None, True)).start()
+                threading.Thread(target=self.prepare_alpaca, args=(configuration, True)).start()
             self.welcome_dialog.present(self)
 
         if self.powersaver_warning_switch.get_active():
