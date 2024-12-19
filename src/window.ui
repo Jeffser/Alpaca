@@ -317,6 +317,7 @@
                       <signal name="clicked" handler="remote_connection_selector_clicked"/>
                       <property name="icon-name">chain-link-loose-symbolic</property>
                       <property name="valign">3</property>
+                      <property name="tooltip-text" translatable="yes">Change Ollama Instance</property>
                       <style>
                         <class name="circular"/>
                       </style>
@@ -512,6 +513,7 @@
                       <signal name="clicked" handler="model_directory_selector_clicked"/>
                       <property name="icon-name">inode-directory-symbolic</property>
                       <property name="valign">3</property>
+                      <property name="tooltip-text" translatable="yes">Change Model Directory</property>
                       <style>
                         <class name="circular"/>
                       </style>
