@@ -1183,9 +1183,8 @@ Generate a title following these rules:
                 self.powersaver_warning_switch.set_active(True)
         else:
             if shutil.which('ollama'):
-                threading.Thread(target=self.prepare_alpaca, args=(configuration, True)).start()
-            else:
-                threading.Thread(target=self.prepare_alpaca, args=(configuration, True)).start()
+                configuration['run_remote'] = True
+            threading.Thread(target=self.prepare_alpaca, args=(configuration, True)).start()
             self.welcome_dialog.present(self)
 
         if self.powersaver_warning_switch.get_active():
