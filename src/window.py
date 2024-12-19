@@ -109,6 +109,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     default_model_combo = Gtk.Template.Child()
     default_model_list = Gtk.Template.Child()
     model_directory_selector = Gtk.Template.Child()
+    remote_connection_selector = Gtk.Template.Child()
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = None
@@ -131,6 +132,24 @@ class AlpacaWindow(Adw.ApplicationWindow):
     quick_ask = Gtk.Template.Child()
     quick_ask_overlay = Gtk.Template.Child()
     quick_ask_save_button = Gtk.Template.Child()
+
+    @Gtk.Template.Callback()
+    def remote_connection_selector_clicked(self, button):
+        options = {
+            _("Cancel"): {"callback": lambda *_: None},
+            _("Connect"): {"callback": lambda url, bearer: generic_actions.connect_remote(url, bearer), "appearance": "suggested"}
+        }
+        entries = [
+            {"text": self.ollama_instance.remote_url, "placeholder": _('Server URL')},
+            {"text": self.ollama_instance.bearer_token, "placeholder": _('Bearer Token (Optional)')}
+        ]
+        dialog_widget.Entry(
+            _('Connect Remote Instance'),
+            _('Enter instance information to continue'),
+            list(options)[0],
+            options,
+            entries
+        )
 
     @Gtk.Template.Callback()
     def model_directory_selector_clicked(self, button):
@@ -1052,12 +1071,13 @@ Generate a title following these rules:
             self.save_server_config()
         self.send_button.set_sensitive(True)
         self.attachment_button.set_sensitive(True)
-        self.remote_connection_switch.set_sensitive(shutil.which('ollama'))
+        self.remote_connection_switch.set_visible(shutil.which('ollama'))
+        self.remote_connection_selector.set_visible(not shutil.which('ollama'))
         self.tweaks_group.set_sensitive(True)
         self.instance_page.set_sensitive(shutil.which('ollama'))
         if not shutil.which('ollama'):
-            print('huh')
             self.preferences_dialog.remove(self.instance_page)
+            self.remote_connection_selector.set_subtitle(configuration['remote_url'])
         self.get_application().lookup_action('manage_models').set_enabled(True)
 
         if self.get_application().args.ask:

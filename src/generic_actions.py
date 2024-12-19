@@ -21,6 +21,7 @@ def connect_remote(remote_url:str, bearer_token:str):
     window.ollama_instance.stop()
     window.model_manager.update_local_list()
     window.save_server_config()
+    window.remote_connection_selector.set_subtitle(remote_url)
 
 def attach_youtube(video_title:str, video_author:str, watch_url:str, video_url:str, video_id:str, caption_name:str):
     buffer = window.message_text_view.get_buffer()

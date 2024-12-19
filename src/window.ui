@@ -304,7 +304,24 @@
             <object class="AdwPreferencesGroup">
               <child>
                 <object class="AdwSwitchRow" id="remote_connection_switch">
+                  <property name="visible">false</property>
                   <property name="title" translatable="yes">Use Remote Connection to Ollama</property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwActionRow" id="remote_connection_selector">
+                  <property name="visible">false</property>
+                  <property name="title" translatable="yes">Change Ollama Instance</property>
+                  <child type="suffix">
+                    <object class="GtkButton">
+                      <signal name="clicked" handler="remote_connection_selector_clicked"/>
+                      <property name="icon-name">chain-link-loose-symbolic</property>
+                      <property name="valign">3</property>
+                      <style>
+                        <class name="circular"/>
+                      </style>
+                    </object>
+                  </child>
                 </object>
               </child>
             </object>
@@ -490,7 +507,6 @@
               <child>
                 <object class="AdwActionRow" id="model_directory_selector">
                   <property name="title" translatable="yes">Model Directory</property>
-                  <property name="subtitle"></property>
                   <child type="suffix">
                     <object class="GtkButton">
                       <signal name="clicked" handler="model_directory_selector_clicked"/>
