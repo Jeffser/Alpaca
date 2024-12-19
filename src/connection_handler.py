@@ -37,13 +37,14 @@ def log_output(pipe):
 
 class instance():
 
-    def __init__(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int):
+    def __init__(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, model_directory:str):
         self.local_port=local_port
         self.remote_url=remote_url
         self.remote=remote
         self.tweaks=tweaks
         self.overrides=overrides
         self.bearer_token=bearer_token
+        self.model_directory = model_directory
         self.idle_timer_delay=idle_timer_delay
         self.idle_timer_stop_event=threading.Event()
         self.idle_timer=None
@@ -113,7 +114,7 @@ class instance():
             params = self.overrides.copy()
             params["OLLAMA_DEBUG"] = "1"
             params["OLLAMA_HOST"] = f"127.0.0.1:{self.local_port}" # You can't change this directly sorry :3
-            params["HOME"] = data_dir
+            params["OLLAMA_MODELS"] = self.model_directory
             params["TMPDIR"] = os.path.join(cache_dir, 'tmp/ollama')
             instance = subprocess.Popen(["ollama", "serve"], env={**os.environ, **params}, stderr=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
             threading.Thread(target=log_output, args=(instance.stdout,)).start()

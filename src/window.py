@@ -108,6 +108,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     ollama_information_label = Gtk.Template.Child()
     default_model_combo = Gtk.Template.Child()
     default_model_list = Gtk.Template.Child()
+    model_directory_selector = Gtk.Template.Child()
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = None
@@ -130,6 +131,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
     quick_ask = Gtk.Template.Child()
     quick_ask_overlay = Gtk.Template.Child()
     quick_ask_save_button = Gtk.Template.Child()
+
+    @Gtk.Template.Callback()
+    def model_directory_selector_clicked(self, button):
+        def directory_selected(result):
+            button.set_sensitive(False)
+            selected_directory = result.get_path()
+            self.ollama_instance.model_directory = selected_directory
+            self.model_directory_selector.set_subtitle(selected_directory)
+            if not self.ollama_instance.remote:
+                self.ollama_instance.reset()
+            self.save_server_config()
+            self.refresh_local_models()
+            button.set_sensitive(True)
+        dialog_widget.simple_directory(directory_selected)
 
     @Gtk.Template.Callback()
     def refresh_local_models(self, button=None):
@@ -533,7 +548,8 @@ Generate a title following these rules:
                     'default_model': self.convert_model_name(self.default_model_list.get_string(self.default_model_combo.get_selected()), 1),
                     'model_tweaks': self.ollama_instance.tweaks,
                     'ollama_overrides': self.ollama_instance.overrides,
-                    'idle_timer': self.ollama_instance.idle_timer_delay
+                    'idle_timer': self.ollama_instance.idle_timer_delay,
+                    'model_directory': self.ollama_instance.model_directory
                 }
 
                 json.dump(data, f, indent=6)
@@ -990,7 +1006,7 @@ Generate a title following these rules:
         chat.busy = True
         threading.Thread(target=self.run_quick_chat, args=(data, m_element_bot)).start()
 
-    def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, default_model:str, save:bool):
+    def prepare_alpaca(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, default_model:str, model_directory:str, save:bool):
         #Model Manager
         self.model_manager = model_widget.model_manager_container()
         self.model_scroller.set_child(self.model_manager)
@@ -1002,7 +1018,7 @@ Generate a title following these rules:
             self.chat_list_box.new_chat(self.get_application().args.new_chat)
 
         #Instance
-        self.ollama_instance = connection_handler.instance(local_port, remote_url, remote, tweaks, overrides, bearer_token, idle_timer_delay)
+        self.ollama_instance = connection_handler.instance(local_port, remote_url, remote, tweaks, overrides, bearer_token, idle_timer_delay, model_directory)
 
         #Model Manager P.2
         self.model_manager.update_available_list()
@@ -1024,6 +1040,8 @@ Generate a title following these rules:
         for element in list(list(list(list(self.overrides_group)[0])[1])[0]):
             if element.get_name() in self.ollama_instance.overrides:
                 element.set_text(self.ollama_instance.overrides[element.get_name()])
+
+        self.model_directory_selector.set_subtitle(model_directory)
 
         self.set_hide_on_close(self.background_switch.get_active())
         self.instance_idle_timer.set_value(self.ollama_instance.idle_timer_delay)
@@ -1137,8 +1155,10 @@ Generate a title following these rules:
                         data['powersaver_warning'] = True
                     if 'default_model' not in data:
                         data['default_model'] = None
+                    if 'model_directory' not in data:
+                        data['model_directory'] = os.path.join(data_dir, '.ollama', 'models')
                     self.powersaver_warning_switch.set_active(data['powersaver_warning'])
-                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], round(data['idle_timer']), data['default_model'], False)).start()
+                    threading.Thread(target=self.prepare_alpaca, args=(data['local_port'], data['remote_url'], data['run_remote'], data['model_tweaks'], data['ollama_overrides'], data['remote_bearer_token'], round(data['idle_timer']), data['default_model'], data['model_directory'], False)).start()
             except Exception as e:
                 logger.error(e)
                 threading.Thread(target=self.prepare_alpaca, args=(11435, '', False, {'temperature': 0.7, 'seed': 0, 'keep_alive': 5}, {}, '', 0, None, True)).start()

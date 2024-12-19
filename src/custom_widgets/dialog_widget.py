@@ -171,3 +171,6 @@ def simple_file(file_filter:Gtk.FileFilter, callback:callable):
     file_dialog = Gtk.FileDialog(default_filter=file_filter)
     file_dialog.open(window, None, lambda file_dialog, result: callback(file_dialog.open_finish(result)) if result else None)
 
+def simple_directory(callback:callable):
+    directory_dialog = Gtk.FileDialog()
+    directory_dialog.select_folder(window, None, lambda directory_dialog, result: callback(directory_dialog.select_folder_finish(result)))
