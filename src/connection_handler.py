@@ -30,7 +30,7 @@ def log_output(pipe):
                             window.ollama_information_label.set_label(_("AMD GPU detected but ROCm is missing, Ollama will use CPU.") + AMD_support_label)
                         window.ollama_information_label.set_css_classes(['dim-label', 'error'])
                     elif 'msg="amdgpu is supported"' in line:
-                        window.ollama_information_label.set_label(_("Using AMD GPU type '{}'").format(line.split('=')[-1]))
+                        window.ollama_information_label.set_label(_("Using AMD GPU type '{}'").format(line.split('=')[-1].replace('\n', '')))
                         window.ollama_information_label.set_css_classes(['dim-label', 'success'])
             except Exception as e:
                 pass
