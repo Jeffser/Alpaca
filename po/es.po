@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-17 01:19-0600\n"
+"POT-Creation-Date: 2024-12-18 22:11-0600\n"
 "PO-Revision-Date: 2024-05-19 19:44-0600\n"
 "Last-Translator: Jeffry Samuel Eduarte Rojas <jeffrysamuer@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -81,7 +81,7 @@ msgstr "Agrega texto de un sitio web a los mensajes"
 msgid "PDF recognition"
 msgstr "Reconocimiento de PDF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:1038
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:1082
 msgid "Disclaimer"
 msgstr "Aviso Legal"
 
@@ -142,7 +142,8 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "System messages can now be sent directly from Alpaca"
-msgstr "Mensajes de sistema ahora pueden ser enviados directamente desde Alpaca"
+msgstr ""
+"Mensajes de sistema ahora pueden ser enviados directamente desde Alpaca"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "New redesign for messages and smaller minimum size"
@@ -162,7 +163,8 @@ msgstr "Cuando se exporta un chat ahora se incluye un archivo Markdown"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Refresh button in model manager when using a remote instance"
-msgstr "Botón de recarga en el gestor de modelos cuando se usa instancia remota"
+msgstr ""
+"Botón de recarga en el gestor de modelos cuando se usa instancia remota"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Assistant messages are now editable"
@@ -1596,105 +1598,120 @@ msgstr "0.1.1"
 msgid "This is the first public version of Alpaca"
 msgstr "Esta es la primera versión publica de Alpaca"
 
-#: src/window.py:157 src/window.py:922
-msgid "Please select a model before chatting"
-msgstr "Por favor selecciona un modelo antes de enviar un mensaje"
+#: src/window.py:139 src/window.py:970 src/custom_widgets/message_widget.py:40
+#: src/custom_widgets/dialog_widget.py:136
+#: src/custom_widgets/dialog_widget.py:148
+#: src/custom_widgets/dialog_widget.py:160
+msgid "Cancel"
+msgstr "Cancelar"
 
-#: src/window.py:215 src/window.py:216
-msgid "Close"
-msgstr "Cerrar"
-
-#: src/window.py:218 src/window.py:219 src/window.ui:991
-msgid "Next"
-msgstr "Siguiente"
-
-#: src/window.py:324
-msgid "image"
-msgstr "Imagen"
-
-#: src/window.py:433
-msgid "Missing file"
-msgstr "Archivo faltante"
-
-#: src/window.py:565 src/window.py:622 src/window.py:642 src/window.py:644
-#: src/window.ui:31 src/custom_widgets/chat_widget.py:361
-msgid "New Chat"
-msgstr "Nuevo Chat"
-
-#: src/window.py:668
-msgid "Close Alpaca"
-msgstr "Cerrar Alpaca"
-
-#: src/window.py:669
-msgid "Use Local Instance"
-msgstr "Usar Instancia Local"
-
-#: src/window.py:670 src/window.py:892
+#: src/window.py:140 src/window.py:713 src/window.py:971
 msgid "Connect"
 msgstr "Conectar"
 
-#: src/window.py:673 src/window.py:895
+#: src/window.py:143 src/window.py:715 src/window.py:974
 msgid "Server URL"
 msgstr "URL del Server"
 
-#: src/window.py:674 src/window.py:896
+#: src/window.py:144 src/window.py:716 src/window.py:975
 msgid "Bearer Token (Optional)"
 msgstr "Bearer Token (Opcional)"
 
-#: src/window.py:676
+#: src/window.py:147 src/window.py:978
+msgid "Connect Remote Instance"
+msgstr "Conectar Instancia Remota"
+
+#: src/window.py:148 src/window.py:979
+msgid "Enter instance information to continue"
+msgstr "Ingresa información de la instancia para continuar"
+
+#: src/window.py:191 src/window.py:1001
+msgid "Please select a model before chatting"
+msgstr "Por favor selecciona un modelo antes de enviar un mensaje"
+
+#: src/window.py:249 src/window.py:250
+msgid "Close"
+msgstr "Cerrar"
+
+#: src/window.py:252 src/window.py:253 src/window.ui:1035
+msgid "Next"
+msgstr "Siguiente"
+
+#: src/window.py:358
+msgid "image"
+msgstr "Imagen"
+
+#: src/window.py:467
+msgid "Missing file"
+msgstr "Archivo faltante"
+
+#: src/window.py:604 src/window.py:663 src/window.py:683 src/window.py:685
+#: src/window.ui:31 src/custom_widgets/chat_widget.py:360
+msgid "New Chat"
+msgstr "Nuevo Chat"
+
+#: src/window.py:709
+msgid "Close Alpaca"
+msgstr "Cerrar Alpaca"
+
+#: src/window.py:712
+msgid "Use Local Instance"
+msgstr "Usar Instancia Local"
+
+#: src/window.py:718
 msgid "Connection Error"
 msgstr "Error de conexión"
 
-#: src/window.py:676
+#: src/window.py:718
 msgid "The remote instance has disconnected"
 msgstr "La instancia remota se ha desconectado"
 
-#: src/window.py:679
+#: src/window.py:721
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr ""
 "Ha ocurrido un error con la instancia local de Ollama, ha sido reinicida"
 
-#: src/window.py:701
+#: src/window.py:743
 msgid "Cannot open image"
 msgstr "No se pudo abrir la imagen"
 
-#: src/window.py:759
+#: src/window.py:838
 msgid "Delete Chat?"
 msgstr "¿Eliminar Chat?"
 
-#: src/window.py:760 src/custom_widgets/model_widget.py:330
+#: src/window.py:839 src/custom_widgets/model_widget.py:330
 msgid "Are you sure you want to delete '{}'?"
 msgstr "¿Estás seguro de que quieres eliminar '{}'?"
 
-#: src/window.py:762 src/custom_widgets/model_widget.py:332
+#: src/window.py:841 src/custom_widgets/model_widget.py:332
 msgid "Delete"
 msgstr "Eliminar"
 
-#: src/window.py:769
+#: src/window.py:848
 msgid "Rename Chat?"
 msgstr "¿Renombrar Chat?"
 
-#: src/window.py:770
+#: src/window.py:849
 msgid "Renaming '{}'"
 msgstr "Renombrando '{}'"
 
-#: src/window.py:772
+#: src/window.py:851
 msgid "Chat name"
 msgstr "Nombre de Chat"
 
-#: src/window.py:773
+#: src/window.py:852
 msgid "Rename"
 msgstr "Renombrar"
 
-#: src/window.py:796
+#: src/window.py:875
 msgid "This video does not have any transcriptions"
 msgstr "Este video no tiene transcripciones"
 
-#: src/window.py:803
+#: src/window.py:882
 msgid "Attach YouTube Video?"
 msgstr "¿Adjuntar Video de YouTube?"
 
-#: src/window.py:804
+#: src/window.py:883
 msgid ""
 "{}\n"
 "\n"
@@ -1704,15 +1721,15 @@ msgstr ""
 "\n"
 "Por favor selecciona la transcripción ha incluir"
 
-#: src/window.py:810
+#: src/window.py:889
 msgid "Error attaching video, please try again"
 msgstr "Error adjuntando video, por favor intenta denuevo"
 
-#: src/window.py:830
+#: src/window.py:909
 msgid "Attach Website? (Experimental)"
 msgstr "¿Adjuntar Sitio Web? (Experimental)"
 
-#: src/window.py:831
+#: src/window.py:910
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
@@ -1720,59 +1737,44 @@ msgstr ""
 "¿Estás seguro de que quieres adjuntar\n"
 "'{}'?"
 
-#: src/window.py:849 src/generic_actions.py:84
+#: src/window.py:928 src/generic_actions.py:90
 msgid "Image recognition is only available on specific models"
 msgstr ""
 "Reconocimiento de imagenes esta disponible solamente en modelos compatibles"
 
-#: src/window.py:891 src/custom_widgets/message_widget.py:44
-#: src/custom_widgets/dialog_widget.py:136
-#: src/custom_widgets/dialog_widget.py:148
-#: src/custom_widgets/dialog_widget.py:160
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: src/window.py:899
-msgid "Connect Remote Instance"
-msgstr "Conectar Instancia Remota"
-
-#: src/window.py:900
-msgid "Enter instance information to continue"
-msgstr "Ingresa información de la instancia para continuar"
-
-#: src/window.py:915
+#: src/window.py:994
 msgid "An error occurred: {}"
 msgstr "Un error ocurrió: {}"
 
-#: src/window.py:924 src/window.ui:512
+#: src/window.py:1003 src/window.ui:550
 msgid "Quick Ask"
 msgstr "Pregunta Rápida"
 
-#: src/window.py:1054
+#: src/window.py:1139
 msgid "Clear Chat?"
 msgstr "¿Limpiar Chat?"
 
-#: src/window.py:1054
+#: src/window.py:1139
 msgid "Are you sure you want to clear the chat?"
 msgstr "¿Estás seguro de que quieres limpiar el chat?"
 
-#: src/window.py:1054
+#: src/window.py:1139
 msgid "Clear"
 msgstr "Limpiar"
 
-#: src/window.py:1056
+#: src/window.py:1141
 msgid "Select Model"
 msgstr "Selecciona el Modelo"
 
-#: src/window.py:1056
+#: src/window.py:1141
 msgid "This model will be used as the base for the new model"
 msgstr "Este modelo será usado como base para el nuevo modelo"
 
-#: src/window.py:1058
+#: src/window.py:1143
 msgid "Pull Model"
 msgstr "Descargar Modelo"
 
-#: src/window.py:1058
+#: src/window.py:1143
 msgid ""
 "Input the name of the model in this format\n"
 "name:tag"
@@ -1780,15 +1782,15 @@ msgstr ""
 "Ingresa el nombre del modelo en este formato\n"
 "nombre:etiqueta"
 
-#: src/window.py:1082
+#: src/window.py:1167
 msgid "Remove Attachment?"
 msgstr "¿Remover Adjunto?"
 
-#: src/window.py:1082
+#: src/window.py:1167
 msgid "Are you sure you want to remove attachment?"
 msgstr "¿Estás seguro de que quieres remover el adjunto?"
 
-#: src/window.py:1082
+#: src/window.py:1167
 msgid "Remove"
 msgstr "Remover"
 
@@ -2877,15 +2879,15 @@ msgstr "GPU AMD detectada pero ROCm no está instalado, Ollama usará CPU."
 msgid "Using AMD GPU type '{}'"
 msgstr "Usando GPU AMD tipo '{}'"
 
-#: src/connection_handler.py:94
+#: src/connection_handler.py:95
 msgid "Ollama instance was shut down due to inactivity"
 msgstr "La instancia de Ollama se apagó debido a inactividad"
 
-#: src/connection_handler.py:132
+#: src/connection_handler.py:133
 msgid "Integrated Ollama instance is running"
 msgstr "Instancia integrada de Ollama está corriendo"
 
-#: src/connection_handler.py:148 src/window.ui:494
+#: src/connection_handler.py:149 src/window.ui:532
 msgid "Integrated Ollama instance is not running"
 msgstr "Instancia integrada de Ollama no está corriendo"
 
@@ -2905,7 +2907,7 @@ msgstr "Buscar Mensajes"
 msgid "Loading Instance"
 msgstr "Cargando Instancia"
 
-#: src/window.ui:105 src/window.ui:106 src/window.ui:571 src/window.ui:1056
+#: src/window.ui:105 src/window.ui:106 src/window.ui:609 src/window.ui:1100
 #: src/custom_widgets/model_widget.py:24 src/custom_widgets/model_widget.py:25
 msgid "Manage Models"
 msgstr "Gestionar Modelos"
@@ -2937,35 +2939,39 @@ msgstr "Adjuntar Archivo"
 msgid "Message text box"
 msgstr "Caja de texto para mensaje"
 
-#: src/window.ui:248 src/window.ui:1299
+#: src/window.ui:248 src/window.ui:1344
 msgid "Send Message"
 msgstr "Enviar Mensaje"
 
-#: src/window.ui:298 src/window.ui:1062 src/window.ui:1240
+#: src/window.ui:298 src/window.ui:1106 src/window.ui:1285
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: src/window.ui:301 src/window.ui:1218
+#: src/window.ui:301 src/window.ui:1263
 msgid "General"
 msgstr "General"
 
-#: src/window.ui:307
+#: src/window.ui:308
 msgid "Use Remote Connection to Ollama"
 msgstr "Usa una conección remota a Ollama"
 
-#: src/window.ui:317
+#: src/window.ui:314 src/window.ui:320
+msgid "Change Ollama Instance"
+msgstr ""
+
+#: src/window.ui:335
 msgid "Run Alpaca In Background"
 msgstr "Ejecutar Alpaca en el fondo"
 
-#: src/window.ui:323
+#: src/window.ui:341
 msgid "Show Power Saver Warning"
 msgstr "Mostrar Advertencia de Ahorro de Energía"
 
-#: src/window.ui:330
+#: src/window.ui:348
 msgid "Default Model"
 msgstr "Modelo por Defecto"
 
-#: src/window.ui:331
+#: src/window.ui:349
 msgid ""
 "The default model to use on new chats and when Alpaca is launched with the "
 "option --ask \"message\""
@@ -2973,11 +2979,11 @@ msgstr ""
 "El modelo por defecto a usar en chats nuevos y cuando Alpaca es lanzado con "
 "la opción --ask \"mensaje\""
 
-#: src/window.ui:349
+#: src/window.ui:367
 msgid "Temperature"
 msgstr "Temperatura"
 
-#: src/window.ui:350
+#: src/window.ui:368
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
@@ -2985,11 +2991,11 @@ msgstr ""
 "La temperatura del modelo. Incrementando la temparatura hará que el modelo "
 "responda más creativamente (Por defecto: 0.8)"
 
-#: src/window.ui:365
+#: src/window.ui:383
 msgid "Seed"
 msgstr "Semilla"
 
-#: src/window.ui:366
+#: src/window.ui:384
 msgid ""
 "Sets the random number seed to use for generation. Setting this to a "
 "specific number will make the model generate the same text for the same "
@@ -2999,11 +3005,11 @@ msgstr ""
 "numero especifico hará que el modelo genere el mismo texto a la misma "
 "pregunta del usuario (Por defecto: 0 (Al azar))"
 
-#: src/window.ui:380
+#: src/window.ui:398
 msgid "Keep Alive Time"
 msgstr "Tiempo Para Mantener Vivo"
 
-#: src/window.ui:381
+#: src/window.ui:399
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
@@ -3011,15 +3017,15 @@ msgstr ""
 "Controla por cuanto tiempo el modelo permanecera cargado en la memoria "
 "despues de la ultima petición en minutos (Por defecto: 5)"
 
-#: src/window.ui:397
+#: src/window.ui:415
 msgid "Ollama Instance"
 msgstr "Instancia de Ollama"
 
-#: src/window.ui:401
+#: src/window.ui:419
 msgid "Ollama Overrides"
 msgstr "Overrides de Ollama"
 
-#: src/window.ui:402
+#: src/window.ui:420
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
@@ -3028,11 +3034,11 @@ msgstr ""
 "solo aplica a la instancia integrada, la instancia se reiniciará si haces "
 "algún cambio"
 
-#: src/window.ui:474
+#: src/window.ui:492
 msgid "Idle Timer"
 msgstr "Temporizador de inactividad"
 
-#: src/window.ui:475
+#: src/window.ui:493
 msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
@@ -3041,56 +3047,64 @@ msgstr ""
 "apagarse (0 significa que no se apagará)"
 
 #: src/window.ui:510
+msgid "Model Directory"
+msgstr ""
+
+#: src/window.ui:516
+msgid "Change Model Directory"
+msgstr ""
+
+#: src/window.ui:548
 msgid "Quick ask dialog"
 msgstr "Dialogo de pregunta rápida"
 
-#: src/window.ui:522
+#: src/window.ui:560
 msgid "Save Conversation to Alpaca"
 msgstr "Guardar Conversación a Alpaca"
 
-#: src/window.ui:537 src/window.ui:560
+#: src/window.ui:575 src/window.ui:598
 msgid "Manage models dialog"
 msgstr "Dialogo de gestión de modelos"
 
-#: src/window.ui:539
+#: src/window.ui:577
 msgid "Terminal"
 msgstr "Terminal"
 
-#: src/window.ui:581 src/window.ui:756
+#: src/window.ui:619 src/window.ui:794
 msgid "Create Model"
 msgstr "Crear Modelo"
 
-#: src/window.ui:588
+#: src/window.ui:626
 msgid "Search Model"
 msgstr "Buscar Modelo"
 
-#: src/window.ui:595
+#: src/window.ui:633
 msgid "Refresh Local Models"
 msgstr "Recargar Modelos Locales"
 
-#: src/window.ui:605
+#: src/window.ui:643
 msgid "Model search bar"
 msgstr "Barra de busqueda de modelos"
 
-#: src/window.ui:612 src/window.ui:614
+#: src/window.ui:650 src/window.ui:652
 msgid "Search models"
 msgstr "Buscar Modelos"
 
-#: src/window.ui:637
+#: src/window.ui:675
 msgid "No Models Found"
 msgstr "Ningún modelo encontrado"
 
-#: src/window.ui:638
+#: src/window.ui:676
 msgid "Try a different search or pull an unlisted model from it's name"
 msgstr ""
 "Prueba una búsqueda diferente o descarga un modelo que no esté en el listado "
 "a partir de su nombre."
 
-#: src/window.ui:646
+#: src/window.ui:684
 msgid "Pull Model From Name"
 msgstr "Descargar Modelo a Partir del Nombre"
 
-#: src/window.ui:696
+#: src/window.ui:734
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website."
@@ -3098,23 +3112,23 @@ msgstr ""
 "Al descargar este modelo aceptas la licencia disponible en el sitio web del "
 "modelo"
 
-#: src/window.ui:721
+#: src/window.ui:759
 msgid "Model Details"
 msgstr "Detalles de Modelo"
 
-#: src/window.ui:784
+#: src/window.ui:822
 msgid "Base"
 msgstr "Base"
 
-#: src/window.ui:803
+#: src/window.ui:841
 msgid "Name"
 msgstr "Nombre"
 
-#: src/window.ui:809
+#: src/window.ui:847
 msgid "Context"
 msgstr "Contexto"
 
-#: src/window.ui:856
+#: src/window.ui:894
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -3125,39 +3139,39 @@ msgstr ""
 "visita el sitio web del modelo o la documentación de Ollama para más "
 "información si tienes dudas."
 
-#: src/window.ui:872
+#: src/window.ui:910
 msgid "Create"
 msgstr "Crear"
 
-#: src/window.ui:895
+#: src/window.ui:933
 msgid "File preview dialog"
 msgstr "Dialogo de vista previa de archivos"
 
-#: src/window.ui:907
+#: src/window.ui:943
 msgid "Open With Default App"
 msgstr "Abrir con aplicación predeterminada"
 
-#: src/window.ui:915
+#: src/window.ui:951
 msgid "Remove Attachment"
 msgstr "Remover Adjunto"
 
-#: src/window.ui:975
+#: src/window.ui:1019
 msgid "Previous"
 msgstr "Anterior"
 
-#: src/window.ui:1018
+#: src/window.ui:1062
 msgid "Welcome to Alpaca"
 msgstr "Bienvenido a Alpaca"
 
-#: src/window.ui:1019
+#: src/window.ui:1063
 msgid "Powered by Ollama"
 msgstr "Impulsado por Ollama"
 
-#: src/window.ui:1022
+#: src/window.ui:1066
 msgid "Ollama Website"
 msgstr "Sitio Web de Ollama"
 
-#: src/window.ui:1039
+#: src/window.ui:1083
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -3168,103 +3182,103 @@ msgstr ""
 "un modelo de IA. Por favor sea precavido y revise el codigo cuidadosamente "
 "antes de correrlo"
 
-#: src/window.ui:1052
+#: src/window.ui:1096
 msgid "Import Chat"
 msgstr "Importar chat"
 
-#: src/window.ui:1066
+#: src/window.ui:1110
 msgid "Keyboard Shortcuts"
 msgstr "Atajos de Teclado"
 
-#: src/window.ui:1070
+#: src/window.ui:1114
 msgid "About Alpaca"
 msgstr "Sobre Alpaca"
 
-#: src/window.ui:1078 src/window.ui:1104
+#: src/window.ui:1122 src/window.ui:1148
 msgid "Rename Chat"
 msgstr "Renombrar Chat"
 
-#: src/window.ui:1082 src/window.ui:1108
+#: src/window.ui:1126 src/window.ui:1152
 msgid "Duplicate Chat"
 msgstr "Duplicar Chat"
 
-#: src/window.ui:1086 src/window.ui:1112
+#: src/window.ui:1130 src/window.ui:1156
 msgid "Export Chat"
 msgstr "Exportar chat"
 
-#: src/window.ui:1090
+#: src/window.ui:1134
 msgid "Clear Chat"
 msgstr "Limpiar Chat"
 
-#: src/window.ui:1096 src/window.ui:1118
+#: src/window.ui:1140 src/window.ui:1162
 msgid "Delete Chat"
 msgstr "Eliminar Chat"
 
-#: src/window.ui:1126
+#: src/window.ui:1170
 msgid "Send as User"
 msgstr "Enviar Como Usuario"
 
-#: src/window.ui:1130
+#: src/window.ui:1174
 msgid "Send as System"
 msgstr "Enviar Como Sistema"
 
-#: src/window.ui:1138
+#: src/window.ui:1182
 msgid "From Existing Model"
 msgstr "Desde Modelo Existente"
 
-#: src/window.ui:1142
+#: src/window.ui:1186
 msgid "From GGUF File"
 msgstr "Desde Archivo GGUF"
 
-#: src/window.ui:1146
+#: src/window.ui:1190
 msgid "From Name"
 msgstr "Desde Nombre"
 
-#: src/window.ui:1222
+#: src/window.ui:1267
 msgid "Close application"
 msgstr "Cerrar aplicación"
 
-#: src/window.ui:1228
+#: src/window.ui:1273
 msgid "Import chat"
 msgstr "Importar chat"
 
-#: src/window.ui:1234
+#: src/window.ui:1279
 msgid "Clear chat"
 msgstr "Limpiar chat"
 
-#: src/window.ui:1246
+#: src/window.ui:1291
 msgid "New chat"
 msgstr "Nuevo chat"
 
-#: src/window.ui:1252
+#: src/window.ui:1297
 msgid "Show shortcuts window"
 msgstr "Mostrar ventana de atajos"
 
-#: src/window.ui:1258
+#: src/window.ui:1303
 msgid "Manage models"
 msgstr "Gestionar modelos"
 
-#: src/window.ui:1264
+#: src/window.ui:1309
 msgid "Toggle sidebar"
 msgstr "Alternar barra lateral"
 
-#: src/window.ui:1270
+#: src/window.ui:1315
 msgid "Rename chat"
 msgstr "Renombrar chat"
 
-#: src/window.ui:1277
+#: src/window.ui:1322
 msgid "Editor"
 msgstr "Editor"
 
-#: src/window.ui:1281
+#: src/window.ui:1326
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/window.ui:1287
+#: src/window.ui:1332
 msgid "Paste"
 msgstr "Pegar"
 
-#: src/window.ui:1293
+#: src/window.ui:1338
 msgid "Insert new line"
 msgstr "Saltar línea"
 
@@ -3276,23 +3290,23 @@ msgstr "Abrir chat"
 msgid "Quick ask"
 msgstr "Pregunta rápida"
 
-#: src/generic_actions.py:68
+#: src/generic_actions.py:73
 msgid "An error occurred while extracting text from the website"
 msgstr "Ha ocurrido un error mientras se extraía texto del sitio web"
 
-#: src/custom_widgets/chat_widget.py:121
+#: src/custom_widgets/chat_widget.py:120
 msgid "Send prompt: '{}'"
 msgstr "Enviar mensaje: '{}'"
 
-#: src/custom_widgets/chat_widget.py:127 src/custom_widgets/chat_widget.py:128
+#: src/custom_widgets/chat_widget.py:126 src/custom_widgets/chat_widget.py:127
 msgid "Open Model Manager"
 msgstr "Abrir Gestor de Modelos"
 
-#: src/custom_widgets/chat_widget.py:137
+#: src/custom_widgets/chat_widget.py:136
 msgid "Try one of these prompts"
 msgstr "Prueba uno de estos mensajes"
 
-#: src/custom_widgets/chat_widget.py:137
+#: src/custom_widgets/chat_widget.py:136
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
@@ -3300,74 +3314,74 @@ msgstr ""
 "Parece que aún no has descargado ningún modelo. ¡Descarga modelos para "
 "empezar!"
 
-#: src/custom_widgets/chat_widget.py:172
+#: src/custom_widgets/chat_widget.py:171
 msgid "User"
 msgstr "Usuario"
 
-#: src/custom_widgets/chat_widget.py:176
-#: src/custom_widgets/message_widget.py:467
+#: src/custom_widgets/chat_widget.py:175
+#: src/custom_widgets/message_widget.py:449
 msgid "System"
 msgstr "Sistema"
 
-#: src/custom_widgets/chat_widget.py:232
+#: src/custom_widgets/chat_widget.py:231
 msgid "Regenerate Response"
 msgstr "Regenerar Respuesta"
 
-#: src/custom_widgets/chat_widget.py:399
+#: src/custom_widgets/chat_widget.py:398
 msgid "Copy of {}"
 msgstr "Copia de {}"
 
-#: src/custom_widgets/chat_widget.py:411
+#: src/custom_widgets/chat_widget.py:410
 msgid "Chat exported successfully"
 msgstr "Chat exportado exitosamente"
 
-#: src/custom_widgets/chat_widget.py:487
+#: src/custom_widgets/chat_widget.py:486
 msgid "Chat imported successfully"
 msgstr "Chat importado exitosamente"
 
-#: src/custom_widgets/message_widget.py:53
+#: src/custom_widgets/message_widget.py:49
 msgid "Save Message"
 msgstr "Guardar Mensaje"
 
-#: src/custom_widgets/message_widget.py:86
+#: src/custom_widgets/message_widget.py:82
 msgid "Message edited successfully"
 msgstr "Mensaje eliminado exitosamente"
 
-#: src/custom_widgets/message_widget.py:113
+#: src/custom_widgets/message_widget.py:107
 msgid "Response message"
 msgstr "Mensaje de respuesta"
 
-#: src/custom_widgets/message_widget.py:115
+#: src/custom_widgets/message_widget.py:109
 msgid "System message"
 msgstr "Mensaje de sistema"
 
-#: src/custom_widgets/message_widget.py:117
+#: src/custom_widgets/message_widget.py:111
 msgid "User message"
 msgstr "Mensaje de usuario"
 
-#: src/custom_widgets/message_widget.py:159
+#: src/custom_widgets/message_widget.py:151
 msgid "{}Code Block"
 msgstr "{}Bloque de Código"
 
-#: src/custom_widgets/message_widget.py:162
+#: src/custom_widgets/message_widget.py:154
 msgid "Code Block"
 msgstr "Bloque de Código"
 
-#: src/custom_widgets/message_widget.py:163
-#: src/custom_widgets/message_widget.py:361
+#: src/custom_widgets/message_widget.py:155
+#: src/custom_widgets/message_widget.py:344
 msgid "Copy Message"
 msgstr "Copiar Mensaje"
 
-#: src/custom_widgets/message_widget.py:167
-#: src/custom_widgets/message_widget.py:189
+#: src/custom_widgets/message_widget.py:159
+#: src/custom_widgets/message_widget.py:181
 msgid "Run Script"
 msgstr "Ejecutar Script"
 
-#: src/custom_widgets/message_widget.py:182
+#: src/custom_widgets/message_widget.py:174
 msgid "Code copied to the clipboard"
 msgstr "Codigo copiado"
 
-#: src/custom_widgets/message_widget.py:190
+#: src/custom_widgets/message_widget.py:182
 msgid ""
 "Make sure you understand what this script does before running it, Alpaca is "
 "not responsible for any damages to your device or data"
@@ -3375,41 +3389,41 @@ msgstr ""
 "Asegúrese de comprender lo que hace este script antes de ejecutarlo. Alpaca "
 "no es responsable de ningún daño a su dispositivo o datos."
 
-#: src/custom_widgets/message_widget.py:192
+#: src/custom_widgets/message_widget.py:184
 msgid "Execute"
 msgstr "Ejecutar"
 
-#: src/custom_widgets/message_widget.py:276
-#: src/custom_widgets/message_widget.py:278
+#: src/custom_widgets/message_widget.py:265
+#: src/custom_widgets/message_widget.py:267
 msgid "Image"
 msgstr "Imagen"
 
-#: src/custom_widgets/message_widget.py:286
-#: src/custom_widgets/message_widget.py:302
+#: src/custom_widgets/message_widget.py:275
+#: src/custom_widgets/message_widget.py:287
 msgid "Missing Image"
 msgstr "Imagen no Encontrada"
 
-#: src/custom_widgets/message_widget.py:304
+#: src/custom_widgets/message_widget.py:289
 msgid "Missing image"
 msgstr "Imagen no Encontrada"
 
-#: src/custom_widgets/message_widget.py:351
+#: src/custom_widgets/message_widget.py:334
 msgid "Remove Message"
 msgstr "Remover Mensaje"
 
-#: src/custom_widgets/message_widget.py:371
+#: src/custom_widgets/message_widget.py:354
 msgid "Edit Message"
 msgstr "Editar Mensaje"
 
-#: src/custom_widgets/message_widget.py:382
+#: src/custom_widgets/message_widget.py:365
 msgid "Regenerate Message"
 msgstr "Regenerar Mensaje"
 
-#: src/custom_widgets/message_widget.py:403
+#: src/custom_widgets/message_widget.py:386
 msgid "Message copied to the clipboard"
 msgstr "Mensaje copiado"
 
-#: src/custom_widgets/message_widget.py:438
+#: src/custom_widgets/message_widget.py:422
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "Mensaje no puede ser regenerado mientras se recibe una respuesta"
 
@@ -3486,9 +3500,9 @@ msgid ""
 "Your system's available RAM suggests that this model might be too large to "
 "run optimally. Are you sure you want to download it anyway?"
 msgstr ""
-"La memoria RAM disponible en tu sistema sugiere que este modelo podría "
-"ser demasiado grande para funcionar de manera óptima. ¿Estás seguro de "
-"que deseas descargarlo de todos modos?"
+"La memoria RAM disponible en tu sistema sugiere que este modelo podría ser "
+"demasiado grande para funcionar de manera óptima. ¿Estás seguro de que "
+"deseas descargarlo de todos modos?"
 
 #: src/custom_widgets/model_widget.py:517
 msgid "Download"
@@ -3542,11 +3556,11 @@ msgstr "Aceptar"
 msgid "Setting up Python environment..."
 msgstr "Iniciando ambiente de Python"
 
-#: src/custom_widgets/terminal_widget.py:75
+#: src/custom_widgets/terminal_widget.py:74
 msgid "Script exited"
 msgstr "El script salió"
 
-#: src/custom_widgets/terminal_widget.py:86
+#: src/custom_widgets/terminal_widget.py:85
 msgid "The script is contained inside Flatpak"
 msgstr "El script está contenido dentro de Flatpak"
 
