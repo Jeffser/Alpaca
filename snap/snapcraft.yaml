@@ -66,8 +66,8 @@ parts:
   ollama:
     plugin: dump
     source: 
-      - on amd64: https://github.com/ollama/ollama/releases/download/v0.5.2/ollama-linux-amd64.tgz
-      - on arm64: https://github.com/ollama/ollama/releases/download/v0.5.2/ollama-linux-arm64.tgz
+      - on amd64: https://github.com/ollama/ollama/releases/download/v0.5.4/ollama-linux-amd64.tgz
+      - on arm64: https://github.com/ollama/ollama/releases/download/v0.5.4/ollama-linux-arm64.tgz
   
   # VTE
   vte:
