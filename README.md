@@ -117,3 +117,4 @@ Want to add a language? Visit [this discussion](https://github.com/Jeffser/Alpac
 - [Html2Text](https://github.com/aaronsw/html2text)
 - [Ollama](https://github.com/ollama/ollama)
 - [Numactl](https://github.com/numactl/numactl)
+- [odfpy](https://github.com/eea/odfpy)
