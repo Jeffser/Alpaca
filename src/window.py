@@ -265,6 +265,24 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             self.welcome_dialog.force_close()
             self.powersaver_warning_switch.set_active(True)
+            configuration = { # Defaults
+                "remote_url": "http://0.0.0.0:11434",
+                "remote_bearer_token": "",
+                "run_remote": shutil.which('ollama'),
+                "local_port": 11435,
+                "run_on_background": False,
+                "powersaver_warning": True,
+                "default_model": None,
+                "model_tweaks": {
+                    "temperature": 0.7,
+                    "seed": 0,
+                    "keep_alive": 5
+                },
+                "ollama_overrides": {},
+                "idle_timer": 0,
+                "model_directory": os.path.join(data_dir, '.ollama', 'models')
+            }
+            threading.Thread(target=self.prepare_alpaca, args=(configuration, True)).start()
 
     @Gtk.Template.Callback()
     def switch_run_on_background(self, switch, user_data):
@@ -1199,9 +1217,6 @@ Generate a title following these rules:
                 threading.Thread(target=self.prepare_alpaca, args=(configuration, True)).start()
                 self.powersaver_warning_switch.set_active(True)
         else:
-            if shutil.which('ollama'):
-                configuration['run_remote'] = True
-            threading.Thread(target=self.prepare_alpaca, args=(configuration, True)).start()
             self.welcome_dialog.present(self)
 
         if self.powersaver_warning_switch.get_active():
