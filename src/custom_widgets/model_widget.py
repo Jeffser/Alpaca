@@ -496,27 +496,30 @@ class available_model(Gtk.ListBoxRow):
         window.navigation_view_manage_models.pop()
 
     def pull_model(self, model_name):
-        rematch = re.search(r':(\d*\.?\d*)([bBmM])', model_name)
-        parameter_size = 0
-        if rematch:
-            number = float(rematch.group(1))
-            suffix = rematch.group(2).lower()
-            parameter_size = number * 1e9 if suffix == 'b' else number * 1e6
+        if sys.platform in ('linux', 'linux2'):
+            rematch = re.search(r':(\d*\.?\d*)([bBmM])', model_name)
+            parameter_size = 0
+            if rematch:
+                number = float(rematch.group(1))
+                suffix = rematch.group(2).lower()
+                parameter_size = number * 1e9 if suffix == 'b' else number * 1e6
 
-        ram = float(os.popen("free -b | awk '/^Mem:/ {print $7}'").read().strip())
+            ram = float(os.popen("free -b | awk '/^Mem:/ {print $7}'").read().strip())
 
-        if parameter_size * 2 <= ram: # multiplied by bytes_per_param (2)
-            # Probably Ok
-            self.confirm_pull_model(model_name)
+            if parameter_size * 2 <= ram: # multiplied by bytes_per_param (2)
+                # Probably Ok
+                self.confirm_pull_model(model_name)
+            else:
+                # Might don't work
+                dialog_widget.simple(
+                    _('Large Model'),
+                    _("Your system's available RAM suggests that this model might be too large to run optimally. Are you sure you want to download it anyway?"),
+                    lambda name=model_name: self.confirm_pull_model(name),
+                    _('Download'),
+                    'destructive'
+                )
         else:
-            # Might don't work
-            dialog_widget.simple(
-                _('Large Model'),
-                _("Your system's available RAM suggests that this model might be too large to run optimally. Are you sure you want to download it anyway?"),
-                lambda name=model_name: self.confirm_pull_model(name),
-                _('Download'),
-                'destructive'
-            )
+            self.confirm_pull_model(model_name)
 
     def show_pull_menu(self):
         with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:

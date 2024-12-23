@@ -71,20 +71,19 @@ class instance():
         connection_url = '{}/{}'.format(self.remote_url if self.remote else 'http://127.0.0.1:{}'.format(self.local_port), connection_url)
         logger.info('{} : {}'.format(connection_type, connection_url))
         response = None
-        match connection_type:
-            case "GET":
-                response = requests.get(connection_url, headers=self.get_headers(False))
-            case "POST":
-                if callback:
-                    response = requests.post(connection_url, headers=self.get_headers(True), data=data, stream=True)
-                    if response.status_code == 200:
-                        for line in response.iter_lines():
-                            if line:
-                                callback(json.loads(line.decode("utf-8")))
-                else:
-                    response = requests.post(connection_url, headers=self.get_headers(True), data=data, stream=False)
-            case "DELETE":
-                response = requests.delete(connection_url, headers=self.get_headers(False), data=data)
+        if connection_type == "GET":
+            response = requests.get(connection_url, headers=self.get_headers(False))
+        elif connection_type == "POST":
+            if callback:
+                response = requests.post(connection_url, headers=self.get_headers(True), data=data, stream=True)
+                if response.status_code == 200:
+                    for line in response.iter_lines():
+                        if line:
+                            callback(json.loads(line.decode("utf-8")))
+            else:
+                response = requests.post(connection_url, headers=self.get_headers(True), data=data, stream=False)
+        elif connection_type == "DELETE":
+            response = requests.delete(connection_url, headers=self.get_headers(False), data=data)
         self.busy -= 1
         if not self.idle_timer and not self.remote:
             self.start_timer()
