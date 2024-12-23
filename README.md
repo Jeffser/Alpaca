@@ -108,12 +108,6 @@ Want to add a language? Visit [this discussion](https://github.com/Jeffser/Alpac
 
 ---
 
-## Dependencies
+## Packaging Alpaca
 
-- [Requests](https://github.com/psf/requests)
-- [Pillow](https://github.com/python-pillow/Pillow)
-- [Pypdf](https://github.com/py-pdf/pypdf)
-- [Pytube](https://github.com/pytube/pytube)
-- [Html2Text](https://github.com/aaronsw/html2text)
-- [Ollama](https://github.com/ollama/ollama)
-- [Numactl](https://github.com/numactl/numactl)
+If you want to package Alpaca in a different packaging method please read [this wiki page](https://github.com/Jeffser/Alpaca/wiki/Packaging-Alpaca).
