@@ -1,16 +1,4 @@
 {
-    "llama3.3": {
-        "url": "https://ollama.com/library/llama3.3",
-        "description": "New state of the art 70B model. Llama 3.3 70B offers similar performance compared to Llama 3.1 405B model.",
-        "tags": [
-            [
-                "70b",
-                "43\u202fGB"
-            ]
-        ],
-        "image": false,
-        "author": "Meta"
-    },
     "qwq": {
         "url": "https://ollama.com/library/qwq",
         "description": "QwQ is an experimental research model focused on advancing AI reasoning capabilities.",
@@ -434,6 +422,18 @@
         ],
         "image": false,
         "author": "Mistral AI"
+    },
+    "llama3.3": {
+        "url": "https://ollama.com/library/llama3.3",
+        "description": "New state of the art 70B model. Llama 3.3 70B offers similar performance compared to Llama 3.1 405B model.",
+        "tags": [
+            [
+                "70b",
+                "43\u202fGB"
+            ]
+        ],
+        "image": false,
+        "author": "Meta"
     },
     "dolphin-mixtral": {
         "url": "https://ollama.com/library/dolphin-mixtral",
