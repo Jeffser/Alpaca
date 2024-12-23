@@ -99,9 +99,9 @@ window.macos windowcontrols > button.minimize:active > image {
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#caa124" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14" style="fill-rule:evenodd"/><rect width="8" height="2" x="3.998" y="6.992" opacity=".5" ry="1" style="stroke-width:3.7795"/></svg>') no-repeat center;
 }
 
-window.macos window.maximized windowcontrols > button.maximize:hover > image {
+window.macos.maximized windowcontrols > button.maximize:hover > image {
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><g fill-rule="evenodd"><path fill="#20a932" d="M8 14.999a7 7 0 1 0 0-14 7 7 0 0 0 0 14"/><path fill="#28d33f" d="M8 14.507a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13"/></g><path d="M8.025 3.414V7c0 .416.585 1 1 1h3.586zM3.39 8l4.586 4.586V9c0-.416-.585-1-1-1z" opacity=".5"/></svg>') no-repeat center;
 }
-window.macos window.maximized windowcontrols > button.maximize:active > image {
+window.macos.maximized windowcontrols > button.maximize:active > image {
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#20a932" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14" style="fill-rule:evenodd"/><path d="M8.025 3.414V7c0 .416.585 1 1 1h3.586zM3.39 8l4.586 4.586V9c0-.416-.585-1-1-1z" opacity=".5"/></svg>') no-repeat center;
 }
