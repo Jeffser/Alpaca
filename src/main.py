@@ -131,6 +131,12 @@ class AlpacaApplication(Adw.Application):
             win = AlpacaWindow(application=self)
         if not self.args.ask:
             win.present()
+        if sys.platform == 'darwin': # MacOS
+            settings = Gtk.Settings.get_default()
+            if settings:
+                settings.set_property('gtk-xft-antialias', 1)
+                settings.set_property('gtk-decoration-layout', 'close,minimize,maximize:menu')
+            win.add_css_class('macos')
 
     def on_about_action(self, widget, _):
         about = Adw.AboutDialog(#transient_for=self.props.active_window,
