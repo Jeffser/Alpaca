@@ -117,7 +117,7 @@ class text_block(Gtk.Label):
 
     def insert_at_end(self, text:str):
         self.raw_text += text
-        self.set_markup(self.raw_text)
+        self.set_text(self.raw_text)
         self.update_property([1], [self.get_text()])
 
     def clear_text(self):
@@ -530,7 +530,7 @@ class message(Adw.Bin):
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
             elif vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
-            GLib.idle_add(self.content_children[-1].insert_at_end, '<span>{}</span>'.format(GLib.markup_escape_text(data['message']['content'])))
+            GLib.idle_add(self.content_children[-1].insert_at_end, data['message']['content'])
             if 'done' in data and data['done']:
                 if not chat.quick_chat:
                     window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)

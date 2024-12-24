@@ -154,7 +154,7 @@ class AlpacaApplication(Adw.Application):
             issue_url='https://github.com/Jeffser/Alpaca/issues',
             license_type=3,
             website="https://jeffser.com/alpaca",
-            debug_info=open(os.path.join(data_dir, 'tmp.log'), 'r').read()) if os.path.exists(os.path.join(data_dir, 'tmp.log')) else ''
+            debug_info=open(os.path.join(data_dir, 'tmp.log'), 'r').read() if os.path.exists(os.path.join(data_dir, 'tmp.log')) else '')
         about.add_link("Become a Sponsor", "https://github.com/sponsors/Jeffser")
         about.present(parent=self.props.active_window)
 
