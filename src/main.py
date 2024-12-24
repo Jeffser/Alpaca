@@ -137,6 +137,8 @@ class AlpacaApplication(Adw.Application):
                 settings.set_property('gtk-xft-antialias', 1)
                 settings.set_property('gtk-decoration-layout', 'close,minimize,maximize:menu')
             win.add_css_class('macos')
+            win.powersaver_warning_switch.set_visible(False)
+            win.background_switch.set_visible(False)
 
     def on_about_action(self, widget, _):
         about = Adw.AboutDialog(#transient_for=self.props.active_window,
