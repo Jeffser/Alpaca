@@ -473,6 +473,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def show_notification(self, title:str, body:str, icon:Gio.ThemedIcon=None):
         if not self.is_active() and not self.quick_ask.is_active():
+            body = body.replace('<span>', '').replace('</span>', '')
             logger.info(f"{title}, {body}")
             notification = Gio.Notification.new(title)
             notification.set_body(body)
