@@ -82,7 +82,17 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
-    <release version="3.0.0" date="2024-12-20">
+    <release version="3.0.1" date="2024-12-24">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.0.1</url>
+      <description>
+        <p>Fixes</p>
+        <ul>
+          <li>Correctly escape markup before rendering message</li>
+          <li>Fixed about dialog not working if log file was missing</li>
+        </ul>
+      </description>
+    </release>
+    <release version="3.0.0" date="2024-12-23">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.0.0</url>
       <description>
         <p>New</p>
