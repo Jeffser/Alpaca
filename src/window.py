@@ -268,7 +268,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             configuration = { # Defaults
                 "remote_url": "http://0.0.0.0:11434",
                 "remote_bearer_token": "",
-                "run_remote": shutil.which('ollama'),
+                "run_remote": not shutil.which('ollama'),
                 "local_port": 11435,
                 "run_on_background": False,
                 "powersaver_warning": True,
