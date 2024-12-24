@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-18 22:49-0600\n"
 "PO-Revision-Date: 2024-05-23 23:29-0600\n"
-"Last-Translator: Daimar Stein <daimarstein@pm.me>\n"
+"Last-Translator: Bruno Antunes <antunes.dll@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -147,103 +147,107 @@ msgstr "Novo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "System messages can now be sent directly from Alpaca"
-msgstr ""
+msgstr "As mensagens do sistema agora podem ser enviadas diretamente do Alpaca"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "New redesign for messages and smaller minimum size"
-msgstr ""
+msgstr "Novo design para mensagens e tamanho mínimo menor"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "New models included in 'available models list'"
-msgstr ""
+msgstr "Novos modelos incluídos na ‘lista de modelos disponíveis’"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:93
 msgid "Added symbolic icon when attaching code files"
-msgstr ""
+msgstr "Adicionado ícone simbólico ao anexar arquivos de código"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "When exporting a chat it now includes a markdown file"
-msgstr ""
+msgstr "Ao exportar uma conversa, ele agora inclui um arquivo markdown"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Refresh button in model manager when using a remote instance"
-msgstr ""
+msgstr "Botão Atualizar no gerenciador de modelos ao usar uma instância remota"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Assistant messages are now editable"
-msgstr ""
+msgstr "As mensagens do assistente agora são editáveis"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Updated Ollama to v0.5.2"
-msgstr ""
+msgstr "Ollama atualizado para v0.5.2"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "New option to change model directory"
-msgstr ""
+msgstr "Nova opção para alterar o diretório do modelo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "File previewer now resizes dynamically to content"
-msgstr ""
+msgstr "O visualizador de arquivos agora é redimensionado dinamicamente para o conteúdo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Adapted Alpaca to work without integrated Ollama instance"
-msgstr ""
+msgstr "Alpaca adaptado para funcionar sem instância integrada do Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Compatibility added with ODT files"
-msgstr ""
+msgstr "Compatibilidade adicionada com arquivos ODT"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Restored ROCm compatibility"
-msgstr ""
+msgstr "Compatibilidade ROCm restaurada"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid ""
 "Added long press gesture to chat rows so actions can be done in touchscreens"
 msgstr ""
+"Adicionado gesto de toque longo nas linhas da conversa para que as ações possam ser feitas em telas sensíveis ao toque"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid "Fixed edit button not saving changes"
-msgstr ""
+msgstr "Corrigido o botão de edição que não salvava as alterações"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
 msgid "Changed max temperature value to 2"
-msgstr ""
+msgstr "Valor de temperatura máxima alterado para 2"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Made seed 0 actually random"
-msgstr ""
+msgstr "Tornou a semente 0 realmente aleatória"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:109
 msgid ""
 "Fixed Gnome search provider not working outside of Flatpak installations"
 msgstr ""
+"Corrigido o provedor de pesquisa do Gnome que não funcionava fora das instalações do Flatpak"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:118
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
-msgstr ""
+msgstr "Nova opção --ask MESSAGE, para abrir uma nova janela de 'Pergunta Rápida'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:119
 msgid "Gnome Search integration now works whilst the app is opened"
-msgstr ""
+msgstr "A integração do Gnome Search agora funciona enquanto o aplicativo está aberto"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:128
 msgid ""
 "Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
 "--list-chats, --version"
 msgstr ""
+"Adicionados parâmetros de inicialização --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
+"--list-chart, --version"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:129
 msgid "Added integration as Gnome Search Provider"
-msgstr ""
+msgstr "Adicionada integração como Gnome Search Provider"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:130
 msgid "Updated Ollama to v0.4.2 with new models"
-msgstr ""
+msgstr "Ollama atualizado para v0.4.2 com novos modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:139
 msgid "User messages are now compacted into bubbles"
-msgstr ""
+msgstr "As mensagens do usuário agora estão compactadas em bolhas"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:141
 #: data/com.jeffser.Alpaca.metainfo.xml.in:169
@@ -270,10 +274,11 @@ msgstr "Correções"
 msgid ""
 "Fixed re connection dialog not working when 'use local instance' is selected"
 msgstr ""
+"Corrigida a caixa de diálogo de reconexão que não funcionava quando 'usar instância local' era selecionado"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:144
 msgid "Fixed model manager not adapting to large system fonts"
-msgstr ""
+msgstr "Corrigido o gerenciador de modelos que não se adaptava a fontes grandes do sistema"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:153
 msgid "Details page for models"
@@ -1776,7 +1781,7 @@ msgstr ""
 
 #: src/window.py:889
 msgid "Error attaching video, please try again"
-msgstr ""
+msgstr "Erro ao anexar vídeo, tente novamente"
 
 #: src/window.py:909
 msgid "Attach Website? (Experimental)"
@@ -1797,11 +1802,11 @@ msgstr "Reconhecimento de imagem (Disponível apenas com o modelo LLaVA)"
 
 #: src/window.py:994
 msgid "An error occurred: {}"
-msgstr ""
+msgstr "Ocorreu um erro: {}"
 
 #: src/window.py:1003 src/window.ui:550
 msgid "Quick Ask"
-msgstr ""
+msgstr "Pergunta rápida"
 
 #: src/window.py:1139
 msgid "Clear Chat?"
@@ -1850,18 +1855,23 @@ msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to Llama 3.1 405B model."
 msgstr ""
+"Novo modelo 70B de última geração. O Llama 3.3 70B oferece desempenho similar "
+"em comparação ao modelo Llama 3.1 405B."
 
 #: src/available_models_descriptions.py:3
 msgid ""
 "QwQ is an experimental research model focused on advancing AI reasoning "
 "capabilities."
 msgstr ""
+"QwQ é um modelo de pesquisa experimental focado no avanço das capacidades de raciocínio da IA."
 
 #: src/available_models_descriptions.py:4
 msgid ""
 "Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
 "generative models in 11B and 90B sizes."
 msgstr ""
+"Llama 3.2 Vision é uma coleção de modelos generativos de raciocínio de imagem "
+"ajustados por instruções em tamanhos 11B e 90B."
 
 #: src/available_models_descriptions.py:5
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
@@ -2465,6 +2475,8 @@ msgid ""
 "A large language model built by the Technology Innovation Institute (TII) "
 "for use in summarization, text generation, and chat bots."
 msgstr ""
+"Um grande modelo de linguagem criado pelo Technology Innovation Institute (TII) "
+"para uso em resumos, geração de texto e bots de bate-papo."
 
 #: src/available_models_descriptions.py:86
 msgid ""
@@ -2487,6 +2499,8 @@ msgid ""
 "Athene-V2 is a 72B parameter model which excels at code completion, "
 "mathematics, and log extraction tasks."
 msgstr ""
+"Athene-V2 é um modelo de parâmetro 72B que se destaca em tarefas de conclusão de código, "
+"matemática e extração de log."
 
 #: src/available_models_descriptions.py:89
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
@@ -2539,6 +2553,8 @@ msgid ""
 "SmolLM2 is a family of compact language models available in three size: "
 "135M, 360M, and 1.7B parameters."
 msgstr ""
+"SmolLM2 é uma família de modelos de linguagem compactos disponíveis em três tamanhos: "
+"Parâmetros 135M, 360M e 1,7B."
 
 #: src/available_models_descriptions.py:96
 msgid "Uncensored version of Wizard LM model"
@@ -2596,6 +2612,8 @@ msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
 msgstr ""
+"Llama-3.1-Nemotron-70B-Instruct é um grande modelo de linguagem personalizado pela "
+"NVIDIA para melhorar a utilidade das respostas geradas por LLM para consultas de usuários."
 
 #: src/available_models_descriptions.py:104
 msgid ""
@@ -2624,6 +2642,9 @@ msgid ""
 "cases and support for retrieval augmented generation (RAG), streamlining "
 "code generation, translation and bug fixing."
 msgstr ""
+"Os modelos IBM Granite 2B e 8B foram projetados para oferecer suporte a casos de uso "
+"baseados em ferramentas e suporte para geração aumentada de recuperação (RAG), "
+"simplificando a geração de código, tradução e correção de bugs."
 
 #: src/available_models_descriptions.py:109
 msgid ""
@@ -2747,6 +2768,8 @@ msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
+"Os modelos IBM Granite 1B e 3B são a primeira mistura de especialistas (MoE)"
+"Modelos Granite da IBM projetados para uso de baixa latência."
 
 #: src/available_models_descriptions.py:125
 msgid ""
@@ -2761,6 +2784,8 @@ msgid ""
 "Cohere For AI's language models trained to perform well across 23 different "
 "languages."
 msgstr ""
+"Os modelos de linguagem da Cohere For AI foram treinados para ter um bom desempenho "
+"em 23 idiomas diferentes."
 
 #: src/available_models_descriptions.py:127
 msgid "DBRX is an open, general-purpose LLM created by Databricks."
@@ -2771,6 +2796,8 @@ msgid ""
 "An open large reasoning model for real-world solutions by the Alibaba "
 "International Digital Commerce Group (AIDC-AI)."
 msgstr ""
+"Um modelo de raciocínio aberto e amplo para soluções do mundo real pelo Alibaba"
+"International Digital Commerce Group (AIDC-AI)."
 
 #: src/available_models_descriptions.py:129
 msgid "Embedding model from BAAI mapping texts to vectors."
@@ -2806,6 +2833,9 @@ msgid ""
 "text prompt input and text output responses against a set of defined safety "
 "policies."
 msgstr ""
+"ShieldGemma é um conjunto de modelos de instruções ajustadas para avaliar a segurança de "
+"respostas de entrada e saída de texto de prompt de texto em relação a um conjunto de "
+"políticas de segurança definidas."
 
 #: src/available_models_descriptions.py:134
 msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
@@ -2818,6 +2848,8 @@ msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
 msgstr ""
+"Llama Guard 3 é uma série de modelos ajustados para classificação de segurança de "
+"conteúdo de entradas e respostas LLM."
 
 #: src/available_models_descriptions.py:136
 msgid ""
@@ -2832,24 +2864,32 @@ msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
 msgstr ""
+"OpenCoder é uma família LLM de código aberto e reproduzível que inclui modelos 1.5B "
+"e 8B, com suporte para chat em inglês e chinês."
 
 #: src/available_models_descriptions.py:138
 msgid ""
 "Tülu 3 is a leading instruction following model family, offering fully open-"
 "source data, code, and recipes by the The Allen Institute for AI."
 msgstr ""
+"Tülu 3 é uma família líder de modelos de instruções, oferecendo dados, códigos e receitas totalmente"
+"de código aberto pelo The Allen Institute for AI."
 
 #: src/available_models_descriptions.py:139
 msgid ""
 "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
 "support without sacrificing English performance or scalability."
 msgstr ""
+"Modelo de incorporação de fronteira do Snowflake. O Arctic Embed 2.0 adiciona suporte multilíngue "
+"sem sacrificar o desempenho ou a escalabilidade do inglês."
 
 #: src/available_models_descriptions.py:140
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
 msgstr ""
+"Os modelos IBM Granite Guardian 3.0 2B e 8B são projetados para detectar riscos "
+"em prompts e/ou respostas."
 
 #: src/available_models_descriptions.py:141
 msgid ""
@@ -2857,12 +2897,17 @@ msgid ""
 "Korean) generative models ranging from 2.4B to 32B parameters, developed and "
 "released by LG AI Research."
 msgstr ""
+"EXAONE 3.5 é uma coleção de modelos generativos bilíngues (inglês e "
+"coreano) ajustados por instruções, variando de 2,4B a 32B parâmetros, desenvolvidos e "
+"lançados pela LG AI Research."
 
 #: src/available_models_descriptions.py:142
 msgid ""
 "Sailor2 are multilingual language models made for South-East Asia. Available "
 "in 1B, 8B, and 20B parameter sizes."
 msgstr ""
+"Sailor2 são modelos de linguagem multilíngues feitos para o Sudeste Asiático. Disponíveis "
+"em tamanhos de parâmetros 1B, 8B e 20B."
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -2965,7 +3010,7 @@ msgstr "Gerencia uma conexão remota com Ollama"
 
 #: src/window.ui:314 src/window.ui:320
 msgid "Change Ollama Instance"
-msgstr ""
+msgstr "Alterar instância do Ollama"
 
 #: src/window.ui:335
 #, fuzzy
@@ -2978,13 +3023,15 @@ msgstr "Mostrar aviso de economia de energia"
 
 #: src/window.ui:348
 msgid "Default Model"
-msgstr ""
+msgstr "Modelo Padrão"
 
 #: src/window.ui:349
 msgid ""
 "The default model to use on new chats and when Alpaca is launched with the "
 "option --ask \"message\""
 msgstr ""
+"O modelo padrão a ser usado em novos chats e quando o Alpaca é iniciado com a "
+"opção --ask \"message\""
 
 #: src/window.ui:367
 #, fuzzy
@@ -3058,19 +3105,19 @@ msgstr ""
 
 #: src/window.ui:510
 msgid "Model Directory"
-msgstr ""
+msgstr "Diretório de modelos"
 
 #: src/window.ui:516
 msgid "Change Model Directory"
-msgstr ""
+msgstr "Alterar diretório de modelo"
 
 #: src/window.ui:548
 msgid "Quick ask dialog"
-msgstr ""
+msgstr "Caixa de diálogo de pergunta rápida"
 
 #: src/window.ui:560
 msgid "Save Conversation to Alpaca"
-msgstr ""
+msgstr "Salvar conversa no Alpaca"
 
 #: src/window.ui:575 src/window.ui:598
 msgid "Manage models dialog"
@@ -3092,7 +3139,7 @@ msgstr "Funcionalidades"
 
 #: src/window.ui:633
 msgid "Refresh Local Models"
-msgstr ""
+msgstr "Atualizar modelos locais"
 
 #: src/window.ui:643
 msgid "Model search bar"
@@ -3228,11 +3275,11 @@ msgstr "Excluir Conversa"
 
 #: src/window.ui:1170
 msgid "Send as User"
-msgstr ""
+msgstr "Enviar como usuário"
 
 #: src/window.ui:1174
 msgid "Send as System"
-msgstr ""
+msgstr "Enviar como sistema"
 
 #: src/window.ui:1182
 msgid "From Existing Model"
@@ -3276,7 +3323,7 @@ msgstr "Alternar barra lateral"
 
 #: src/window.ui:1315
 msgid "Rename chat"
-msgstr "Renomear batepapo"
+msgstr "Renomear conversa"
 
 #: src/window.ui:1322
 msgid "Editor"
@@ -3296,11 +3343,11 @@ msgstr "Inserir nova linha"
 
 #: src/alpaca_search_provider.py.in:40
 msgid "Open chat"
-msgstr ""
+msgstr "Abrir conversa"
 
 #: src/alpaca_search_provider.py.in:41
 msgid "Quick ask"
-msgstr ""
+msgstr "Pergunta rápida"
 
 #: src/generic_actions.py:73
 msgid "An error occurred while extracting text from the website"
@@ -3328,12 +3375,12 @@ msgstr ""
 
 #: src/custom_widgets/chat_widget.py:171
 msgid "User"
-msgstr ""
+msgstr "Usuário"
 
 #: src/custom_widgets/chat_widget.py:175
 #: src/custom_widgets/message_widget.py:449
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #: src/custom_widgets/chat_widget.py:231
 msgid "Regenerate Response"
@@ -3368,7 +3415,7 @@ msgstr "Mensagem de resposta"
 
 #: src/custom_widgets/message_widget.py:109
 msgid "System message"
-msgstr ""
+msgstr "Mensagem do sistema"
 
 #: src/custom_widgets/message_widget.py:111
 msgid "User message"
@@ -3511,17 +3558,19 @@ msgstr "Entre no menu de download de {}"
 
 #: src/custom_widgets/model_widget.py:514
 msgid "Large Model"
-msgstr ""
+msgstr "Modelo Grande"
 
 #: src/custom_widgets/model_widget.py:515
 msgid ""
 "Your system's available RAM suggests that this model might be too large to "
 "run optimally. Are you sure you want to download it anyway?"
 msgstr ""
+"A RAM disponível no seu sistema sugere que este modelo pode ser muito grande para "
+"rodar de forma otimizada. Tem certeza de que deseja baixá-lo mesmo assim?"
 
 #: src/custom_widgets/model_widget.py:517
 msgid "Download"
-msgstr ""
+msgstr "Baixar"
 
 #: src/custom_widgets/model_widget.py:540
 msgid "Download {}:{}"
