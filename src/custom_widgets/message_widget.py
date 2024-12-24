@@ -569,7 +569,7 @@ class message(Adw.Bin):
             code_block_pattern = re.compile(r'```(\w*)\n(.*?)\n\s*```', re.DOTALL)
             no_language_code_block_pattern = re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)
             table_pattern = re.compile(r'((\r?\n){2}|^)([^\r\n]*\|[^\r\n]*(\r?\n)?)+(?=(\r?\n){2}|$)', re.MULTILINE)
-            markup_pattern = re.compile(r'<(b|u|tt|span.*)>(.*?)<\/(b|u|tt|span)>') #heh butt span, I'm so funny
+            markup_pattern = re.compile(r'<(b|u|tt|a.*|span.*)>(.*?)<\/(b|u|tt|a|span)>')
             parts = []
             pos = 0
             # Code blocks
@@ -617,6 +617,8 @@ class message(Adw.Bin):
                     part['text'] = re.sub(r'^###\s+(.*)', r'<span size="large">\1</span>', part['text'], flags=re.MULTILINE)
                     part['text'] = re.sub(r'_(\((.*?)\)|\d+)', r'<sub>\2\1</sub>', part['text'], flags=re.MULTILINE)
                     part['text'] = re.sub(r'\^(\((.*?)\)|\d+)', r'<sup>\2\1</sup>', part['text'], flags=re.MULTILINE)
+                    part['text'] = re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\1">\2</a>', part['text'], flags=re.MULTILINE)
+                    part['text'] = re.sub(r'\s\[(.*?)\]\s', r' <a href="\1">\1</a> ', part['text'], flags=re.MULTILINE)
                     pos = 0
                     for match in markup_pattern.finditer(part['text']):
                         start, end = match.span()
