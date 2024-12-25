@@ -553,6 +553,7 @@ class available_model(Gtk.ListBoxRow):
         window.navigation_view_manage_models.pop()
 
     def pull_model(self, model_name):
+        global available_models
         rematch = re.search(r':(\d*\.?\d*)([bBmM])', model_name)
         parameter_size = 0
         if rematch:
@@ -560,8 +561,15 @@ class available_model(Gtk.ListBoxRow):
             suffix = rematch.group(2).lower()
             parameter_size = number * 1e9 if suffix == 'b' else number * 1e6
         parameter_size *= 2
-        print(parameter_size)
-        if parameter_size > 50000000000:
+        if model_name.split(':')[0] in available_models and 'embedding' in available_models[model_name.split(':')[0]]['categories']:
+            dialog_widget.simple(
+                _('Embedding Model'),
+                _("This model is meant to be used in the training of other models and won't work directly with Alpaca. Are you sure you want to download it anyway?"),
+                lambda name=model_name: self.confirm_pull_model(name),
+                _('Download'),
+                'destructive'
+            )
+        elif parameter_size > 50000000000:
             dialog_widget.simple(
                 _('Large Model'),
                 _("This model might be too large to run optimally. Are you sure you want to download it anyway?"),
