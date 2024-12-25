@@ -112,6 +112,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     default_model_list = Gtk.Template.Child()
     model_directory_selector = Gtk.Template.Child()
     remote_connection_selector = Gtk.Template.Child()
+    model_tag_flow_box = Gtk.Template.Child()
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = None

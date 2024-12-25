@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk
-import logging, os, datetime, re, shutil, threading, json, sys, glob
+import logging, os, datetime, re, shutil, threading, json, sys, glob, icu
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .. import available_models_descriptions
 from . import dialog_widget
@@ -284,10 +284,14 @@ class category_pill(Gtk.Button):
         'small': {'name': _('Small'), 'css': ['success'], 'icon': 'leaf-symbolic'},
         'medium': {'name': _('Medium'), 'css': ['success'], 'icon': 'sprout-symbolic'},
         'big': {'name': _('Big'), 'css': ['warning'], 'icon': 'tree-circle-symbolic'},
-        'huge': {'name': _('Huge'), 'css': ['error'], 'icon': 'weight-symbolic'}
+        'huge': {'name': _('Huge'), 'css': ['error'], 'icon': 'weight-symbolic'},
+        'language': {'css': [], 'icon': 'language-symbolic'}
     }
 
     def __init__(self, name_id:str, show_label:bool):
+        if 'language:' in name_id:
+            self.metadata['language']['name'] = name_id.split(':')[1]
+            name_id = 'language'
         button_content = Adw.ButtonContent(
             icon_name=self.metadata[name_id]['icon']
         )
@@ -419,10 +423,17 @@ class local_model(Gtk.ListBoxRow):
             orientation=0,
             selection_mode=0,
             valign=1,
-            halign=3
+            halign=0
         )
-        for category in self.categories:
+        languages = ['en']
+        if self.get_name() in available_models:
+            languages = available_models[self.get_name()]['languages']
+
+        for category in self.categories + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]:
             categories_box.append(category_pill(category, True))
+
+        if 'multilingual' in self.categories and len(languages) == 1:
+            window.model_tag_flow_box.append(category_pill('language:Others...', True))
 
         container_box = Gtk.Box(
             orientation=1,
@@ -562,12 +573,23 @@ class available_model(Gtk.ListBoxRow):
             self.confirm_pull_model(model_name)
 
     def show_pull_menu(self):
+        global available_models
         window.navigation_view_manage_models.push_by_tag('model_tags_page')
         window.navigation_view_manage_models.find_page('model_tags_page').set_title(self.get_name().replace("-", " ").title())
         window.model_link_button.set_name(available_models[self.get_name()]['url'])
         window.model_link_button.set_tooltip_text(available_models[self.get_name()]['url'])
         window.model_tag_list_box.remove_all()
         tags = available_models[self.get_name()]['tags']
+        window.model_tag_flow_box.remove_all()
+        languages = ['en']
+        if self.get_name() in available_models:
+            languages = available_models[self.get_name()]['languages']
+
+        for category in [cat for cat in self.categories if cat not in ['small', 'medium', 'big', 'huge']] + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]:
+            window.model_tag_flow_box.append(category_pill(category, True))
+
+        if 'multilingual' in self.categories and len(languages) == 1:
+            window.model_tag_flow_box.append(category_pill('language:' + _('Others...'), True))
 
         for tag_data in tags:
             if f"{self.get_name()}:{tag_data[0]}" not in window.model_manager.get_model_list():

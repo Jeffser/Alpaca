@@ -199,6 +199,20 @@
 		}
 	    ]
 	},
+	{
+	    "name": "python3-pyicu",
+	    "buildsystem": "simple",
+	    "build-commands": [
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"pyicu\" --no-build-isolation"
+	    ],
+	    "sources": [
+	    	{
+	    		"type": "file",
+	    		"url": "https://files.pythonhosted.org/packages/52/21/4e9b0a3ace3027fc63107fa2b5d6e66e321e104da071d787856962fbad52/PyICU-2.14.tar.gz",
+	    		"sha256": "acc7eb92bd5c554ed577249c6978450a4feda0aa6f01470152b3a7b382a02132"
+	    	}
+	    ]
+	},
         {
             "name": "ollama",
             "buildsystem": "simple",

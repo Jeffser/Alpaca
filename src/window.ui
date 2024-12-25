@@ -738,6 +738,14 @@
                                 </object>
                               </child>
                               <child>
+                                <object class="GtkFlowBox" id="model_tag_flow_box">
+                                  <property name="hexpand">true</property>
+                                  <property name="vexpand">false</property>
+                                  <property name="orientation">0</property>
+                                  <property name="selection-mode">0</property>
+                                </object>
+                              </child>
+                              <child>
                                 <object class="GtkListBox" id="model_tag_list_box">
                                   <property name="valign">1</property>
                                   <property name="selection-mode">none</property>
