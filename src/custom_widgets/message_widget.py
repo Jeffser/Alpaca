@@ -609,6 +609,7 @@ class message(Adw.Bin):
             for part in parts:
                 if part['type'] == 'normal':
                     text_b = text_block(self.bot, self.system)
+                    part['text'] = GLib.markup_escape_text(part['text'])
                     part['text'] = part['text'].replace("\n* ", "\n• ")
                     part['text'] = re.sub(r'`([^`\n]*?)`', r'<tt>\1</tt>', part['text'])
                     part['text'] = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', part['text'], flags=re.MULTILINE)
@@ -620,15 +621,16 @@ class message(Adw.Bin):
                     part['text'] = re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\1">\2</a>', part['text'], flags=re.MULTILINE)
                     part['text'] = re.sub(r'\s\[(.*?)\]\s', r' <a href="\1">\1</a> ', part['text'], flags=re.MULTILINE)
                     pos = 0
+
                     for match in markup_pattern.finditer(part['text']):
                         start, end = match.span()
                         if pos < start:
-                            text_b.raw_text += '<span>{}</span>'.format(GLib.markup_escape_text(part['text'][pos:start]))
+                            text_b.raw_text += part['text'][pos:start]
                         text_b.raw_text += match.group(0)
                         pos = end
 
                     if pos < len(part['text']):
-                        text_b.raw_text += '<span>{}</span>'.format(GLib.markup_escape_text(part['text'][pos:]))
+                        text_b.raw_text += part['text'][pos:]
                     self.content_children.append(text_b)
                     self.container.append(text_b)
                     GLib.idle_add(text_b.set_markup,text_b.raw_text)
