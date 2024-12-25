@@ -140,4 +140,8 @@ descriptions = {
    'granite3-guardian': _("The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks in prompts and/or responses."),
    'exaone3.5': _("EXAONE 3.5 is a collection of instruction-tuned bilingual (English and Korean) generative models ranging from 2.4B to 32B parameters, developed and released by LG AI Research."),
    'sailor2': _("Sailor2 are multilingual language models made for South-East Asia. Available in 1B, 8B, and 20B parameter sizes."),
+   'falcon3': _("A family of efficient AI models under 10B parameters performant in science, math, and coding through innovative training techniques."),
+   'granite3.1-dense': _("The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 trillion tokens of data, demonstrated significant improvements over their predecessors in performance and speed in IBM’s initial testing."),
+   'granite3.1-moe': _("The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) Granite models from IBM designed for low latency usage."),
+   'granite-embedding': _("The IBM Granite Embedding 30M and 278M models models are text-only dense biencoder embedding models, with 30M available in English only and 278M serving multilingual use cases."),
 }

@@ -16,6 +16,8 @@ logger = logging.getLogger(__name__)
 
 window = None
 
+available_models = None
+
 class model_selector_popup(Gtk.Popover):
     __gtype_name__ = 'AlpacaModelSelectorPopup'
 
@@ -107,16 +109,7 @@ class model_selector_button(Gtk.MenuButton):
             window.title_stack.set_visible_child_name('no_models')
         window.model_manager.verify_if_image_can_be_used()
 
-    def add_model(self, model_name:str):
-        data = None
-        response = window.ollama_instance.request("POST", "api/show", json.dumps({"name": model_name}))
-        if response.status_code != 200:
-            logger.error(f"Status code was {response.status_code}")
-            return
-        try:
-            data = json.loads(response.text)
-        except Exception as e:
-            logger.error(f"Error fetching 'api - show' info: {str(e)}")
+    def add_model(self, model_name:str, data:dict):
         model_row = model_selector_row(model_name, data)
         GLib.idle_add(self.get_popover().model_list_box.append, model_row)
         GLib.idle_add(self.change_model, model_name)
@@ -279,13 +272,41 @@ class information_bow(Gtk.Box):
         self.append(title_label)
         self.append(subtitle_label)
 
+class category_pill(Gtk.Button):
+    __gtype_name__ = 'AlpacaCategoryPill'
+
+    metadata = {
+        'multilingual': {'name': _('Multilingual'), 'css': ['accent'], 'icon': 'language-symbolic'},
+        'code': {'name': _('Code'), 'css': ['accent'], 'icon': 'code-symbolic'},
+        'math': {'name': _('Math'), 'css': ['accent'], 'icon': 'accessories-calculator-symbolic'},
+        'vision': {'name': _('Vision'), 'css': ['accent'], 'icon': 'eye-open-negative-filled-symbolic'},
+        'embedding': {'name': _('Embedding'), 'css': ['error'], 'icon': 'brain-augemnted-symbolic'},
+        'small': {'name': _('Small'), 'css': ['success'], 'icon': 'leaf-symbolic'},
+        'medium': {'name': _('Medium'), 'css': ['success'], 'icon': 'sprout-symbolic'},
+        'big': {'name': _('Big'), 'css': ['warning'], 'icon': 'tree-circle-symbolic'},
+        'huge': {'name': _('Huge'), 'css': ['error'], 'icon': 'weight-symbolic'}
+    }
+
+    def __init__(self, name_id:str, show_label:bool):
+        button_content = Adw.ButtonContent(
+            icon_name=self.metadata[name_id]['icon']
+        )
+        if show_label:
+            button_content.set_label(self.metadata[name_id]['name'])
+        super().__init__(
+            css_classes=['subtitle', 'category_pill'] + self.metadata[name_id]['css'] + (['pill'] if show_label else ['circular']),
+            tooltip_text=self.metadata[name_id]['name'],
+            child=button_content,
+            halign=1
+        )
+
 
 class local_model(Gtk.ListBoxRow):
     __gtype_name__ = 'AlpacaLocalModel'
 
-    def __init__(self, model_name:str):
+    def __init__(self, model_name:str, categories:list):
         model_title = window.convert_model_name(model_name, 0)
-
+        self.categories = categories
         model_label = Gtk.Label(
             css_classes=["heading"],
             label=model_title.split(" (")[0],
@@ -368,10 +389,6 @@ class local_model(Gtk.ListBoxRow):
             selection_mode=0,
             max_children_per_line=2,
             min_children_per_line=1,
-            margin_top=12,
-            margin_bottom=12,
-            margin_start=12,
-            margin_end=12
         )
 
         translation_strings={
@@ -396,7 +413,32 @@ class local_model(Gtk.ListBoxRow):
                     subtitle=value
                 ))
 
-        window.model_detail_page.set_child(details_flow_box)
+        categories_box = Gtk.FlowBox(
+            hexpand=True,
+            vexpand=False,
+            orientation=0,
+            selection_mode=0,
+            valign=1,
+            halign=3
+        )
+        for category in self.categories:
+            categories_box.append(category_pill(category, True))
+
+        container_box = Gtk.Box(
+            orientation=1,
+            spacing=10,
+            hexpand=True,
+            vexpand=True,
+            margin_top=12,
+            margin_bottom=12,
+            margin_start=12,
+            margin_end=12
+        )
+
+        container_box.append(details_flow_box)
+        container_box.append(categories_box)
+
+        window.model_detail_page.set_child(container_box)
         window.navigation_view_manage_models.push_by_tag('model_information')
 
 class local_model_list(Gtk.ListBox):
@@ -409,8 +451,8 @@ class local_model_list(Gtk.ListBox):
             visible=False
         )
 
-    def add_model(self, model_name:str):
-        model = local_model(model_name)
+    def add_model(self, model_name:str, categories:list):
+        model = local_model(model_name, categories)
         GLib.idle_add(self.append, model)
         if not self.get_visible():
             self.set_visible(True)
@@ -421,11 +463,12 @@ class local_model_list(Gtk.ListBox):
 class available_model(Gtk.ListBoxRow):
     __gtype_name__ = 'AlpacaAvailableModel'
 
-    def __init__(self, model_name:str, model_author:str, model_description:str, image_recognition:bool):
+    def __init__(self, model_name:str, model_author:str, model_description:str, categories:list):
         self.model_description = model_description
         self.model_title = model_name.replace("-", " ").title()
         self.model_author = model_author
-        self.image_recognition = image_recognition
+        self.categories = categories
+        self.image_recognition = 'vision' in categories
         model_label = Gtk.Label(
             css_classes=["heading"],
             label="<b>{}</b> <small>by {}</small>".format(self.model_title, self.model_author),
@@ -443,13 +486,11 @@ class available_model(Gtk.ListBoxRow):
             wrap=True,
             wrap_mode=0,
         )
-        image_recognition_indicator = Gtk.Button(
-            css_classes=["success", "pill", "image_recognition_indicator"],
-            child=Gtk.Label(
-                label=_("Image Recognition"),
-                css_classes=["subtitle"]
-            ),
-            halign=1
+        categories_box = Gtk.FlowBox(
+            hexpand=True,
+            vexpand=True,
+            orientation=0,
+            selection_mode=0
         )
         description_box = Gtk.Box(
             hexpand=True,
@@ -459,7 +500,12 @@ class available_model(Gtk.ListBoxRow):
         )
         description_box.append(model_label)
         description_box.append(description_label)
-        if self.image_recognition: description_box.append(image_recognition_indicator)
+        description_box.append(categories_box)
+
+        for category in self.categories:
+            categories_box.append(category_pill(category, False))
+
+        #if self.image_recognition: description_box.append(image_recognition_indicator)
 
         container_box = Gtk.Box(
             hexpand=True,
@@ -522,36 +568,34 @@ class available_model(Gtk.ListBoxRow):
             self.confirm_pull_model(model_name)
 
     def show_pull_menu(self):
-        with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
-            data = json.load(f)
-            window.navigation_view_manage_models.push_by_tag('model_tags_page')
-            window.navigation_view_manage_models.find_page('model_tags_page').set_title(self.get_name().replace("-", " ").title())
-            window.model_link_button.set_name(data[self.get_name()]['url'])
-            window.model_link_button.set_tooltip_text(data[self.get_name()]['url'])
-            window.model_tag_list_box.remove_all()
-            tags = data[self.get_name()]['tags']
+        window.navigation_view_manage_models.push_by_tag('model_tags_page')
+        window.navigation_view_manage_models.find_page('model_tags_page').set_title(self.get_name().replace("-", " ").title())
+        window.model_link_button.set_name(available_models[self.get_name()]['url'])
+        window.model_link_button.set_tooltip_text(available_models[self.get_name()]['url'])
+        window.model_tag_list_box.remove_all()
+        tags = available_models[self.get_name()]['tags']
 
-            for tag_data in tags:
-                if f"{self.get_name()}:{tag_data[0]}" not in window.model_manager.get_model_list():
-                    tag_row = Adw.ActionRow(
-                        title = tag_data[0],
-                        subtitle = tag_data[1],
-                        name = f"{self.get_name()}:{tag_data[0]}"
-                    )
-                    download_icon = Gtk.Image.new_from_icon_name("folder-download-symbolic")
-                    tag_row.add_suffix(download_icon)
-                    download_icon.update_property([4], [_("Download {}:{}").format(self.get_name(), tag_data[0])])
+        for tag_data in tags:
+            if f"{self.get_name()}:{tag_data[0]}" not in window.model_manager.get_model_list():
+                tag_row = Adw.ActionRow(
+                    title = tag_data[0],
+                    subtitle = tag_data[1],
+                    name = f"{self.get_name()}:{tag_data[0]}"
+                )
+                download_icon = Gtk.Image.new_from_icon_name("folder-download-symbolic")
+                tag_row.add_suffix(download_icon)
+                download_icon.update_property([4], [_("Download {}:{}").format(self.get_name(), tag_data[0])])
 
-                    gesture_click = Gtk.GestureClick.new()
-                    gesture_click.connect("pressed", lambda *_, name=f"{self.get_name()}:{tag_data[0]}" : self.pull_model(name))
+                gesture_click = Gtk.GestureClick.new()
+                gesture_click.connect("pressed", lambda *_, name=f"{self.get_name()}:{tag_data[0]}" : self.pull_model(name))
 
-                    event_controller_key = Gtk.EventControllerKey.new()
-                    event_controller_key.connect("key-pressed", lambda controller, key, *_, name=f"{self.get_name()}:{tag_data[0]}" : self.confirm_pull_model(name) if key in (Gdk.KEY_space, Gdk.KEY_Return) else None)
+                event_controller_key = Gtk.EventControllerKey.new()
+                event_controller_key.connect("key-pressed", lambda controller, key, *_, name=f"{self.get_name()}:{tag_data[0]}" : self.confirm_pull_model(name) if key in (Gdk.KEY_space, Gdk.KEY_Return) else None)
 
-                    tag_row.add_controller(gesture_click)
-                    tag_row.add_controller(event_controller_key)
+                tag_row.add_controller(gesture_click)
+                tag_row.add_controller(event_controller_key)
 
-                    window.model_tag_list_box.append(tag_row)
+                window.model_tag_list_box.append(tag_row)
 
 class available_model_list(Gtk.ListBox):
     __gtype_name__ = 'AlpacaAvailableModelList'
@@ -563,8 +607,8 @@ class available_model_list(Gtk.ListBox):
             visible=False
         )
 
-    def add_model(self, model_name:str, model_author:str, model_description:str, image_recognition:bool):
-        model = available_model(model_name, model_author, model_description, image_recognition)
+    def add_model(self, model_name:str, model_author:str, model_description:str, categories:list):
+        model = available_model(model_name, model_author, model_description, categories)
         self.append(model)
         if not self.get_visible():
             self.set_visible(True)
@@ -590,12 +634,31 @@ class model_manager_container(Gtk.Box):
         self.append(self.available_list)
         self.model_selector = model_selector_button()
         window.title_stack.add_named(self.model_selector, 'model_selector')
+        global available_models
+        try:
+            with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
+                available_models = json.load(f)
+        except Exception as e:
+            available_models = {}
 
     def add_local_model(self, model_name:str):
-        self.local_list.add_model(model_name)
+        data = None
+        categories = []
+        try:
+            response = window.ollama_instance.request("POST", "api/show", json.dumps({"name": model_name}))
+            data = json.loads(response.text)
+        except Exception as e:
+            data = None
+
+        if model_name.split(':')[0] in available_models: # Same name in available models, extract categories
+            categories = available_models[model_name.split(':')[0]]['categories']
+        elif data and data['details']['parent_model'].split(':')[0] in available_models:
+            categories = available_models[data['details']['parent_model'].split(':')[0]]['categories']
+
+        self.local_list.add_model(model_name, [cat for cat in categories if cat not in ['small', 'medium', 'big', 'huge']])
         if not self.local_list.get_visible():
             self.local_list.set_visible(True)
-        self.model_selector.add_model(model_name)
+        self.model_selector.add_model(model_name, data)
         window.default_model_list.append(window.convert_model_name(model_name, 0))
 
     def remove_local_model(self, model_name:str):
@@ -656,9 +719,9 @@ class model_manager_container(Gtk.Box):
 
     #Should only be called when the app starts
     def update_available_list(self):
-        with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
-            for name, model_info in json.load(f).items():
-                self.available_list.add_model(name, model_info['author'], available_models_descriptions.descriptions[name], model_info['image'])
+        global available_models
+        for name, model_info in available_models.items():
+            self.available_list.add_model(name, model_info['author'], available_models_descriptions.descriptions[name], model_info['categories'])
 
     def change_model(self, model_name:str):
         self.model_selector.change_model(model_name)
