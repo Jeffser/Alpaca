@@ -82,6 +82,21 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="3.1.0" date="2024-12-25">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.1.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Added categories to models</li>
+          <li>Specified model's languages</li>
+          <li>Added warning when downloading embedding models</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Replaced low ram warning with big model warning</li>
+        </ul>
+      </description>
+    </release>
     <release version="3.0.1" date="2024-12-24">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.0.1</url>
       <description>
