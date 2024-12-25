@@ -212,7 +212,7 @@ class pulling_model(Gtk.ListBoxRow):
             self.digests.append(data['digest'].replace(':', '-'))
         if not self.get_parent():
             logger.info("Pulling of '{}' was canceled".format(self.get_name()))
-            directory = os.path.join(data_dir, '.ollama', 'models', 'blobs')
+            directory = os.path.join(window.ollama_instance.model_directory, 'blobs')
             for digest in self.digests:
                 files_to_delete = glob.glob(os.path.join(directory, digest + '*'))
                 for file in files_to_delete:
