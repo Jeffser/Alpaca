@@ -53,6 +53,10 @@ sudo snap install ./{package name} --dangerous
 ```
 The `--dangerous` comes from the package being installed without any involvement of the SnapStore, I'm working on getting the app there, but for now you can test the app this way.
 
+### MacOS
+
+Please read the [wiki page](https://github.com/Jeffser/Alpaca/wiki/MacOS) for MacOS.
+
 ### Nix
 
 Alpaca is also available in Nixpkgs. See [package info](https://search.nixos.org/packages?channel=unstable&show=alpaca&from=0&size=50&sort=relevance&type=packages&query=alpaca) for installation instructions.
