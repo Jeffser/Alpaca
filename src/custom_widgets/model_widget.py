@@ -593,7 +593,7 @@ class available_model(Gtk.ListBoxRow):
         if self.get_name() in available_models:
             languages = available_models[self.get_name()]['languages']
 
-        for category in [cat for cat in self.categories if cat not in ['small', 'medium', 'big', 'huge']] + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]:
+        for category in self.categories + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]:
             window.model_tag_flow_box.append(category_pill(category, True))
 
         if 'multilingual' in self.categories and len(languages) == 1:
