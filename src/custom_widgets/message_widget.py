@@ -30,7 +30,7 @@ class edit_text_block(Gtk.Box):
             halign=0,
             hexpand=True,
             css_classes=["view", "editing_message_textview"],
-            wrap_mode=3,
+            wrap_mode=2,
             width_request=width,
         )
         cancel_button = Gtk.Button(
@@ -95,7 +95,7 @@ class text_block(Gtk.Label):
             hexpand=True,
             halign=0,
             wrap=True,
-            wrap_mode=0,
+            wrap_mode=2,
             xalign=0,
             focusable=True,
             selectable=True,
