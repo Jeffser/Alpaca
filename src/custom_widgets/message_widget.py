@@ -371,10 +371,12 @@ class option_popup(Gtk.Popover):
         chat = self.message_element.get_parent().get_parent().get_parent().get_parent()
         message_id = self.message_element.message_id
         self.message_element.get_parent().remove(self.message_element)
-        if os.path.exists(os.path.join(data_dir, "chats", window.chat_list_box.get_current_chat().get_name(), message_id)):
-            shutil.rmtree(os.path.join(data_dir, "chats", window.chat_list_box.get_current_chat().get_name(), message_id))
         del chat.messages[message_id]
-        window.save_history(chat)
+        sqlite_con = sqlite3.connect(window.sqlite_path)
+        cursor = sqlite_con.cursor()
+        cursor.execute("DELETE FROM message WHERE id=?;", (message_id,))
+        sqlite_con.commit()
+        sqlite_con.close()
         if len(chat.messages) == 0:
             chat.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
 
