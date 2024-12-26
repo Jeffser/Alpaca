@@ -545,32 +545,28 @@ class message(Adw.Bin):
             elif vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
             GLib.idle_add(self.content_children[-1].insert_at_end, data['message']['content'])
-            if 'done' in data and data['done']:
-                if not chat.quick_chat:
-                    window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
-                    if window.chat_list_box.get_current_chat().get_name() != chat.get_name():
-                        window.chat_list_box.get_tab_by_name(chat.get_name()).indicator.set_visible(True)
-                    if chat.welcome_screen:
-                        chat.container.remove(chat.welcome_screen)
-                        chat.welcome_screen = None
-                chat.stop_message()
-                self.text = self.content_children[-1].get_label()
-                GLib.idle_add(self.set_text, self.content_children[-1].get_label())
-                self.dt = datetime.datetime.now()
-                GLib.idle_add(self.add_footer, self.dt)
-                window.show_notification(chat.get_name(), self.text[:200] + (self.text[200:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
-                if chat.quick_chat:
-                    GLib.idle_add(window.quick_ask_save_button.set_sensitive, True)
-                else:
-                    GLib.idle_add(window.save_history, chat)
-        else:
-            if self.spinner:
-                GLib.idle_add(self.container.remove, self.spinner)
-                self.spinner = None
+        if not chat.busy or ('done' in data and data['done']):
             if not chat.quick_chat:
-                chat_tab = window.chat_list_box.get_tab_by_name(chat.get_name())
-                if chat_tab.spinner:
-                    GLib.idle_add(chat_tab.spinner.set_visible, False)
+                window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
+                if window.chat_list_box.get_current_chat().get_name() != chat.get_name():
+                    window.chat_list_box.get_tab_by_name(chat.get_name()).indicator.set_visible(True)
+                if chat.welcome_screen:
+                    chat.container.remove(chat.welcome_screen)
+                    chat.welcome_screen = None
+            chat.stop_message()
+            self.text = self.content_children[-1].get_label()
+            GLib.idle_add(self.set_text, self.content_children[-1].get_label())
+            self.dt = datetime.datetime.now()
+            GLib.idle_add(self.add_footer, self.dt)
+            window.show_notification(chat.get_name(), self.text[:200] + (self.text[200:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
+            if chat.quick_chat:
+                GLib.idle_add(window.quick_ask_save_button.set_sensitive, True)
+            else:
+                sqlite_con = sqlite3.connect(window.sqlite_path)
+                cursor = sqlite_con.cursor()
+                cursor.execute("UPDATE message SET date_time = ?, content = ? WHERE id = ?", (self.dt.strftime("%Y/%m/%d %H:%M:%S"), self.text, self.message_id))
+                sqlite_con.commit()
+                sqlite_con.close()
             sys.exit()
 
     def set_text(self, text:str=None):

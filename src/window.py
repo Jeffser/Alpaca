@@ -194,6 +194,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
             return
+
+        sqlite_con = sqlite3.connect(self.sqlite_path)
+        cursor = sqlite_con.cursor()
+
         message_id = self.generate_uuid()
 
         attached_images = []
@@ -220,6 +224,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             m_element.add_images(attached_images)
         m_element.set_text(raw_message)
         m_element.add_footer(datetime.now())
+
+        cursor.execute("INSERT INTO message (id, chat_id, role, model, date_time, content) VALUES (?, ?, ?, ?, ?, ?)",
+                (m_element.message_id, current_chat.chat_id, 'system' if system else 'user', None, m_element.dt.strftime("%Y/%m/%d %H:%M:%S"), m_element.text))
+
         self.message_text_view.get_buffer().set_text("", 0)
 
         if system:
@@ -240,7 +248,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             current_chat.add_message(bot_id, current_model, False)
             m_element_bot = current_chat.messages[bot_id]
             m_element_bot.set_text()
+            cursor.execute("INSERT INTO message (id, chat_id, role, model, date_time, content) VALUES (?, ?, ?, ?, ?, ?)",
+                (m_element_bot.message_id, current_chat.chat_id, 'assistant', current_model, m_element.dt.strftime("%Y/%m/%d %H:%M:%S"), '(No Text)'))
             threading.Thread(target=self.run_message, args=(data, m_element_bot, current_chat)).start()
+
+        sqlite_con.commit()
+        sqlite_con.close()
 
     @Gtk.Template.Callback()
     def welcome_carousel_page_changed(self, carousel, index):
@@ -616,7 +629,6 @@ Generate a title following these rules:
 
     def run_message(self, data:dict, message_element:message_widget.message, chat:chat_widget.chat):
         logger.debug("Running message")
-        self.save_history(chat)
         chat.busy = True
         self.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(True)
         if len(data['messages']) == 1 and chat.get_name().startswith(_("New Chat")):
@@ -644,12 +656,19 @@ Generate a title following these rules:
             GLib.idle_add(message_element.set_text, message_element.content_children[-1].get_label())
             GLib.idle_add(message_element.add_footer, datetime.now())
             GLib.idle_add(chat.show_regenerate_button, message_element)
-            GLib.idle_add(self.save_history, chat)
+            sqlite_con = sqlite3.connect(window.sqlite_path)
+            cursor = sqlite_con.cursor()
+            cursor.execute("UPDATE message SET date_time = ?, content = ? WHERE id = ?",
+                (message_element.dt.strftime("%Y/%m/%d %H:%M:%S"), message_element.content_children[-1].get_label(), message_element.message_id)
+            )
+            sqlite_con.commit()
+            sqlite_con.close()
             GLib.idle_add(self.connection_error)
 
     def save_history(self, chat:chat_widget.chat=None):
         logger.info("Saving history")
         history = None
+        return
         if chat and os.path.exists(os.path.join(data_dir, "chats", "chats.json")):
             history = {'chats': {chat.get_name(): {'messages': chat.messages_to_dict()}}}
             try:
