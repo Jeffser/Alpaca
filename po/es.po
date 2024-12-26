@@ -143,15 +143,15 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Added categories to models"
-msgstr ""
+msgstr "Añadidas categorias a modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Specified model's languages"
-msgstr ""
+msgstr "Especificar lenguajes de modelo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added warning when downloading embedding models"
-msgstr ""
+msgstr "Añadida advertencia cuando se descargan modelos de incrustación"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
@@ -178,7 +178,8 @@ msgstr "Arreglos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Replaced low ram warning with big model warning"
-msgstr ""
+msgstr "Se reemplazó la advertencia de RAM baja con una advertencia "
+"de modelo grande"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Correctly escape markup before rendering message"
@@ -2907,6 +2908,10 @@ msgid ""
 "A family of efficient AI models under 10B parameters performant in science, "
 "math, and coding through innovative training techniques."
 msgstr ""
+"Una familia de modelos de IA eficientes con un rendimiento de 10B de "
+"parámetros en ciencias, matemáticas y codificación a través de técnicas de "
+"entrenamiento innovadoras.
+"
 
 #: src/available_models_descriptions.py:144
 msgid ""
@@ -2914,12 +2919,17 @@ msgid ""
 "trillion tokens of data, demonstrated significant improvements over their "
 "predecessors in performance and speed in IBM’s initial testing."
 msgstr ""
+"The IBM Granite 2B and 8B models are text-only dense LLMs trained on over "
+"12 trillion tokens of data, demonstrated significant improvements over their "
+"predecessors in performance and speed in IBM’s initial testing."
 
 #: src/available_models_descriptions.py:145
 msgid ""
 "The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
+"Los modelos IBM Granite 1B y 3B son modelos Granite de mezcla de contexto "
+"largo de expertos (MoE) de IBM diseñados para un uso de baja latencia."
 
 #: src/available_models_descriptions.py:146
 msgid ""
@@ -2927,6 +2937,9 @@ msgid ""
 "biencoder embedding models, with 30M available in English only and 278M "
 "serving multilingual use cases."
 msgstr ""
+"Los modelos IBM Granite Embedding 30M y 278M son modelos de incrustación de "
+"biencoder densos de solo texto, con 30M disponible solo en inglés y 278M "
+"para casos de uso multilingües."
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -3515,39 +3528,39 @@ msgstr "Parar"
 
 #: src/custom_widgets/model_widget.py:279
 msgid "Multilingual"
-msgstr ""
+msgstr "Plurilingüe"
 
 #: src/custom_widgets/model_widget.py:280
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #: src/custom_widgets/model_widget.py:281
 msgid "Math"
-msgstr ""
+msgstr "Matemáticas"
 
 #: src/custom_widgets/model_widget.py:282
 msgid "Vision"
-msgstr ""
+msgstr "Visión"
 
 #: src/custom_widgets/model_widget.py:283
 msgid "Embedding"
-msgstr ""
+msgstr "Incrustación"
 
 #: src/custom_widgets/model_widget.py:284
 msgid "Small"
-msgstr ""
+msgstr "Pequeño"
 
 #: src/custom_widgets/model_widget.py:285
 msgid "Medium"
-msgstr ""
+msgstr "Mediano"
 
 #: src/custom_widgets/model_widget.py:286
 msgid "Big"
-msgstr ""
+msgstr "Grande"
 
 #: src/custom_widgets/model_widget.py:287
 msgid "Huge"
-msgstr ""
+msgstr "Enorme"
 
 #: src/custom_widgets/model_widget.py:340
 msgid "Details"
@@ -3595,13 +3608,16 @@ msgstr "Entrar menu de descarga para {}"
 
 #: src/custom_widgets/model_widget.py:566
 msgid "Embedding Model"
-msgstr ""
+msgstr "Modelo de incrustación"
 
 #: src/custom_widgets/model_widget.py:567
 msgid ""
 "This model is meant to be used in the training of other models and won't "
 "work directly with Alpaca. Are you sure you want to download it anyway?"
 msgstr ""
+"Este modelo está pensado para usarse en el entrenamiento de otros modelos y "
+"no funcionará directamente con Alpaca. ¿Estás seguro de que quieres "
+"descargarlo de todas formas?"
 
 #: src/custom_widgets/model_widget.py:569
 #: src/custom_widgets/model_widget.py:577
@@ -3617,10 +3633,12 @@ msgid ""
 "This model might be too large to run optimally. Are you sure you want to "
 "download it anyway?"
 msgstr ""
+"Es posible que este modelo sea demasiado grande para funcionar de forma "
+"óptima. ¿Estás seguro de que deseas descargarlo de todas formas?"
 
 #: src/custom_widgets/model_widget.py:600
 msgid "Others..."
-msgstr ""
+msgstr "Otros..."
 
 #: src/custom_widgets/model_widget.py:611
 msgid "Download {}:{}"
