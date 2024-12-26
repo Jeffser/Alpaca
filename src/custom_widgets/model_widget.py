@@ -600,16 +600,17 @@ class available_model(Gtk.ListBoxRow):
             window.model_tag_flow_box.append(category_pill('language:' + _('Others...'), True))
 
         for tag_data in tags:
-            if f"{self.get_name()}:{tag_data[0]}" not in window.model_manager.get_model_list():
-                tag_row = Adw.ActionRow(
-                    title = tag_data[0],
-                    subtitle = tag_data[1],
-                    name = f"{self.get_name()}:{tag_data[0]}"
-                )
-                download_icon = Gtk.Image.new_from_icon_name("folder-download-symbolic")
-                tag_row.add_suffix(download_icon)
-                download_icon.update_property([4], [_("Download {}:{}").format(self.get_name(), tag_data[0])])
+            tag_row = Adw.ActionRow(
+                title = tag_data[0],
+                subtitle = tag_data[1],
+                name = f"{self.get_name()}:{tag_data[0]}",
+                sensitive = f"{self.get_name()}:{tag_data[0]}" not in window.model_manager.get_model_list()
+            )
+            download_icon = Gtk.Image.new_from_icon_name("folder-download-symbolic" if f"{self.get_name()}:{tag_data[0]}" not in window.model_manager.get_model_list() else "check-plain-symbolic")
+            tag_row.add_suffix(download_icon)
+            download_icon.update_property([4], [_("Download {}:{}").format(self.get_name(), tag_data[0])])
 
+            if f"{self.get_name()}:{tag_data[0]}" not in window.model_manager.get_model_list():
                 gesture_click = Gtk.GestureClick.new()
                 gesture_click.connect("pressed", lambda *_, name=f"{self.get_name()}:{tag_data[0]}" : self.pull_model(name))
 
@@ -619,7 +620,7 @@ class available_model(Gtk.ListBoxRow):
                 tag_row.add_controller(gesture_click)
                 tag_row.add_controller(event_controller_key)
 
-                window.model_tag_list_box.append(tag_row)
+            window.model_tag_list_box.append(tag_row)
 
 class available_model_list(Gtk.ListBox):
     __gtype_name__ = 'AlpacaAvailableModelList'
