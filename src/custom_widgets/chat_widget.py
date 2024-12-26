@@ -404,6 +404,10 @@ class chat_list(Gtk.ListBox):
             sqlite_con = sqlite3.connect(window.sqlite_path)
             cursor = sqlite_con.cursor()
             cursor.execute("DELETE FROM chat WHERE id=?;", (chat_id,))
+            messages = cursor.execute("SELECT id FROM message WHERE chat_id=?", (self.chat_id,)).fetchall()
+            for message in messages:
+                cursor.execute("DELETE FROM attachment WHERE message_id=?", (message[0],))
+            cursor.execute("DELETE FROM message WHERE chat_id=?", (chat_id,))
             sqlite_con.commit()
             sqlite_con.close()
 

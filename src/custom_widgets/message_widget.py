@@ -375,6 +375,7 @@ class option_popup(Gtk.Popover):
         sqlite_con = sqlite3.connect(window.sqlite_path)
         cursor = sqlite_con.cursor()
         cursor.execute("DELETE FROM message WHERE id=?;", (message_id,))
+        cursor.execute("DELETE FROM attachment WHERE message_id=?;", (message_id,))
         sqlite_con.commit()
         sqlite_con.close()
         if len(chat.messages) == 0:
