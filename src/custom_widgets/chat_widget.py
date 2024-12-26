@@ -414,9 +414,11 @@ class chat_list(Gtk.ListBox):
             tab.label.set_label(new_chat_name)
             tab.label.set_tooltip_text(new_chat_name)
             tab.chat_window.set_name(new_chat_name)
-            if os.path.exists(os.path.join(data_dir, "chats", old_chat_name)):
-                shutil.move(os.path.join(data_dir, "chats", old_chat_name), os.path.join(data_dir, "chats", new_chat_name))
-            window.save_history(tab.chat_window)
+            sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
+            cursor = sqlite_con.cursor()
+            cursor.execute("UPDATE Chat SET name=? WHERE id=?", (new_chat_name, tab.chat_window.chat_id))
+            sqlite_con.commit()
+            sqlite_con.close()
 
     def duplicate_chat(self, chat_name:str):
         new_chat_name = window.generate_numbered_name(_("Copy of {}").format(chat_name), [tab.chat_window.get_name() for tab in self.tab_list])
