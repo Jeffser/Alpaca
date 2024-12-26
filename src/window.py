@@ -135,9 +135,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     quick_ask_overlay = Gtk.Template.Child()
     quick_ask_save_button = Gtk.Template.Child()
 
-    #SQLITE
-    sqlite_con = None
-
     @Gtk.Template.Callback()
     def remote_connection_selector_clicked(self, button):
         options = {
@@ -484,23 +481,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 notification.set_icon(icon)
             self.get_application().send_notification(None, notification)
 
-    def preview_file(self, file_path, file_type, presend_name):
-        logger.debug(f"Previewing file: {file_path}")
-        file_path = file_path.replace("{selected_chat}", self.chat_list_box.get_current_chat().get_name())
-        if not os.path.isfile(file_path):
-            self.show_toast(_("Missing file"), self.main_overlay)
-            return
-        content = self.get_content_of_file(file_path, file_type)
-        if presend_name:
+    def preview_file(self, file_name:str, file_content:str, file_type:str, show_remove:bool):
+        logger.info(f"Previewing file: {file_name}")
+        if show_remove:
             self.file_preview_remove_button.set_visible(True)
-            self.file_preview_remove_button.set_name(presend_name)
+            self.file_preview_remove_button.set_name(file_name)
         else:
             self.file_preview_remove_button.set_visible(False)
-        if content:
+        if file_content:
             if file_type == 'image':
                 self.file_preview_image.set_visible(True)
                 self.file_preview_text_label.set_visible(False)
-                image_data = base64.b64decode(content)
+                image_data = base64.b64decode(file_content)
                 loader = GdkPixbuf.PixbufLoader.new()
                 loader.write(image_data)
                 loader.close()
@@ -509,20 +501,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.file_preview_image.set_from_paintable(texture)
                 self.file_preview_image.set_size_request(360, 360)
                 self.file_preview_image.set_overflow(1)
-                self.file_preview_dialog.set_title(os.path.basename(file_path))
-                self.file_preview_open_button.set_name(file_path)
+                self.file_preview_dialog.set_title(file_name)
+                self.file_preview_open_button.set_visible(False)
             else:
                 self.file_preview_image.set_visible(False)
                 self.file_preview_text_label.set_visible(True)
-                buffer = self.file_preview_text_label.set_label(content)
+                buffer = self.file_preview_text_label.set_label(file_content)
                 if file_type == 'youtube':
-                    self.file_preview_dialog.set_title(content.split('\n')[0])
-                    self.file_preview_open_button.set_name(content.split('\n')[2])
+                    self.file_preview_dialog.set_title(file_content.split('\n')[0])
+                    self.file_preview_open_button.set_name(file_content.split('\n')[2])
                 elif file_type == 'website':
-                    self.file_preview_open_button.set_name(content.split('\n')[0])
+                    self.file_preview_open_button.set_name(file_content.split('\n')[0])
                 else:
-                    self.file_preview_dialog.set_title(os.path.basename(file_path))
-                    self.file_preview_open_button.set_name(file_path)
+                    self.file_preview_dialog.set_title(file_name)
+                    self.file_preview_open_button.set_visible(False)
             self.file_preview_dialog.present(self)
 
     def convert_history_to_ollama(self, chat):
@@ -678,6 +670,27 @@ Generate a title following these rules:
 
     def load_history(self):
         logger.debug("Loading history")
+        selected_chat = None
+        if os.path.exists(os.path.join(data_dir, "chats", "selected_chat.txt")):
+            with open(os.path.join(data_dir, "chats", "selected_chat.txt"), 'r') as f:
+                selected_chat = f.read()
+        sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
+        cursor = sqlite_con.cursor()
+        cursor.execute("SELECT id, name FROM chat")
+        chats = cursor.fetchall()
+        if len(chats) > 0:
+            for row in chats:
+                self.chat_list_box.append_chat(row[1], row[0])
+                chat_container = self.chat_list_box.get_chat_by_name(row[1])
+                if not selected_chat:
+                    selected_chat = row[1]
+                if row[1] == selected_chat:
+                    self.chat_list_box.select_row(self.chat_list_box.tab_list[-1])
+                chat_container.load_chat_messages()
+        else:
+            self.chat_list_box.new_chat()
+
+        return
         if os.path.exists(os.path.join(data_dir, "chats", "chats.json")):
             try:
                 with open(os.path.join(data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
@@ -705,8 +718,7 @@ Generate a title following these rules:
             except Exception as e:
                 logger.error(e)
                 self.chat_list_box.prepend_chat(_("New Chat"))
-        else:
-            self.chat_list_box.prepend_chat(_("New Chat"))
+
 
 
 
@@ -842,7 +854,7 @@ Generate a title following these rules:
                 child=button_content
             )
             self.attachments[file_name] = {"path": file_path, "type": file_type, "content": content, "button": button}
-            button.connect("clicked", lambda button : self.preview_file(file_path, file_type, file_name))
+            button.connect("clicked", lambda button : self.preview_file(file_name, content, file_type, True))
             self.attachment_container.append(button)
             self.attachment_box.set_visible(True)
 
@@ -1111,8 +1123,8 @@ Generate a title following these rules:
         popover.popup()
 
     def setup_sqlite(self):
-        self.sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
-        cursor = self.sqlite_con.cursor()
+        sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
+        cursor = sqlite_con.cursor()
 
         tables = {
             "chat": """
@@ -1143,18 +1155,20 @@ Generate a title following these rules:
         }
 
         for name, script in tables.items():
-            if not cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='{}'".format(name)).fetchone():
+            if not cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=?", (name,)).fetchone():
                 cursor.execute(script)
 
-        self.sqlite_con.commit()
-
+        sqlite_con.commit()
+        sqlite_con.close()
 
     def initial_convert_to_sql(self):
+        return
         if os.path.exists(os.path.join(data_dir, "chats", "chats.json")):
             try:
                 with open(os.path.join(data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
                     data = json.load(f)
-                    cursor = self.sqlite_con.cursor()
+                    sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
+                    cursor = sqlite_con.cursor()
                     for chat_name in data['chats'].keys():
                         chat_id = self.generate_uuid()
                         cursor.execute("INSERT INTO chat (id, name) VALUES (?, ?);", (chat_id, chat_name))
@@ -1176,7 +1190,8 @@ Generate a title following these rules:
                                     cursor.execute("INSERT INTO attachment (id, message_id, type, name, content) VALUES (?, ?, ?, ?, ?)",
                                     (attachment_id, message_id, 'image', image, content))
 
-                    self.sqlite_con.commit()
+                    sqlite_con.commit()
+                    sqlite_con.close()
             except Exception as e:
                 logger.error(e)
                 pass

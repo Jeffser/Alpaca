@@ -6,8 +6,8 @@ Handles the message widget (testing)
 import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
-from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk
-import logging, os, datetime, re, shutil, threading, sys
+from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk, GdkPixbuf
+import logging, os, datetime, re, shutil, threading, sys, base64
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .table_widget import TableWidget
 from . import dialog_widget, terminal_widget
@@ -188,15 +188,10 @@ class code_block(Gtk.Box):
 class attachment(Gtk.Button):
     __gtype_name__ = 'AlpacaAttachment'
 
-    def __init__(self, file_name:str, file_path:str, file_type:str):
+    def __init__(self, file_name:str, file_type:str, file_content:str):
         self.file_name = file_name
-        self.file_path = file_path
         self.file_type = file_type
-
-        directory, file_name = os.path.split(self.file_path)
-        head, last_dir = os.path.split(directory)
-        head, second_last_dir = os.path.split(head)
-        self.file_path = os.path.join(head, '{selected_chat}', last_dir, file_name)
+        self.file_content = file_content
 
         button_content = Adw.ButtonContent(
             label=self.file_name,
@@ -208,7 +203,6 @@ class attachment(Gtk.Button):
                 "website": "globe-symbolic"
             }[self.file_type]
         )
-
         super().__init__(
             vexpand=False,
             valign=3,
@@ -218,7 +212,7 @@ class attachment(Gtk.Button):
             child=button_content
         )
 
-        self.connect("clicked", lambda button, file_path=self.file_path, file_type=self.file_type: window.preview_file(file_path, file_type, None))
+        self.connect("clicked", lambda button, file_content=self.file_content, file_type=self.file_type: window.preview_file(self.get_name(), file_content, file_type, False))
 
 class attachment_container(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentContainer'
@@ -246,26 +240,25 @@ class attachment_container(Gtk.ScrolledWindow):
 class image(Gtk.Button):
     __gtype_name__ = 'AlpacaImage'
 
-    def __init__(self, image_path:str):
-        self.image_path = image_path
-        self.image_name = os.path.basename(self.image_path)
-
-        directory, file_name = os.path.split(self.image_path)
-        head, last_dir = os.path.split(directory)
-        head, second_last_dir = os.path.split(head)
-
+    def __init__(self, image_name:str, content:str):
+        self.content = content
         try:
-            if not os.path.isfile(self.image_path):
-                raise FileNotFoundError("'{}' was not found or is a directory".format(self.image_path))
-            image = Gtk.Image.new_from_file(self.image_path)
+            image_data = base64.b64decode(self.content)
+            loader = GdkPixbuf.PixbufLoader.new()
+            loader.write(image_data)
+            loader.close()
+            pixbuf = loader.get_pixbuf()
+            texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+            image = Gtk.Image.new_from_paintable(texture)
             image.set_size_request(240, 240)
             super().__init__(
                 child=image,
                 css_classes=["flat", "chat_image_button"],
-                name=self.image_name,
+                name=image_name,
                 tooltip_text=_("Image")
             )
             image.update_property([4], [_("Image")])
+            self.connect("clicked", lambda button, content=self.content: window.preview_file(self.get_name(), content, 'image', False))
         except Exception as e:
             logger.error(e)
             image_texture = Gtk.Image.new_from_icon_name("image-missing-symbolic")
@@ -281,7 +274,7 @@ class image(Gtk.Button):
             )
             image_box.append(image_texture)
             image_box.append(image_label)
-            image_box.set_size_request(220, 220)
+            image_box.set_size_request(240, 240)
             super().__init__(
                 child=image_box,
                 css_classes=["flat", "chat_image_button"],
@@ -289,7 +282,6 @@ class image(Gtk.Button):
             )
             image_texture.update_property([4], [_("Missing image")])
         self.set_overflow(1)
-        self.connect("clicked", lambda button, file_path=os.path.join(head, '{selected_chat}', last_dir, file_name): window.preview_file(file_path, 'image', None))
 
 class image_container(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaImageContainer'
@@ -499,6 +491,19 @@ class message(Adw.Bin):
             halign=0 if self.bot or self.system else 2
         )
         self.set_child(self.container)
+
+    def add_attachment(self, name:str, attachment_type:str, content:str):
+        if attachment_type == 'image':
+            if not self.image_c:
+                self.image_c = image_container()
+                self.container.append(self.image_c)
+                self.image_c.add_image(image(name, content))
+        else:
+            if not self.attachment_c:
+                self.attachment_c = attachment_container()
+                self.container.append(self.attachment_c)
+                self.attachment_c.add_file(attachment(name, attachment_type, content))
+
 
     def add_attachments(self, attachments:dict):
         self.attachment_c = attachment_container()

@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
-import logging, os, datetime, shutil, random, tempfile, tarfile, json
+import logging, os, datetime, shutil, random, tempfile, tarfile, json, sqlite3
 from ..internal import data_dir
 from .message_widget import message
 
@@ -43,7 +43,7 @@ possible_prompts = [
 class chat(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaChat'
 
-    def __init__(self, name:str, quick_chat:bool=False):
+    def __init__(self, name:str, chat_id=str, quick_chat:bool=False):
         self.container = Gtk.Box(
             orientation=1,
             hexpand=True,
@@ -73,6 +73,7 @@ class chat(Gtk.ScrolledWindow):
         self.welcome_screen = None
         self.regenerate_button = None
         self.busy = False
+        self.chat_id = chat_id
         self.quick_chat = quick_chat
         #self.get_vadjustment().connect('notify::page-size', lambda va, *_: va.set_value(va.get_upper() - va.get_page_size()) if va.get_value() == 0 else None)
         ##TODO Figure out how to do this with the search thing
@@ -140,7 +141,25 @@ class chat(Gtk.ScrolledWindow):
 
         self.container.append(self.welcome_screen)
 
-    def load_chat_messages(self, messages:dict):
+    def load_chat_messages(self):
+        sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
+        cursor = sqlite_con.cursor()
+        cursor.execute("SELECT id, role, model, date_time, content FROM message WHERE chat_id=?", (self.chat_id,))
+        messages = cursor.fetchall()
+        if len(messages) > 0:
+            if self.welcome_screen:
+                self.container.remove(self.welcome_screen)
+                self.welcome_screen = None
+            for message in messages:
+                self.add_message(message[0], message[2] if message[1] == 'assistant' else None, message[1] == 'system')
+                message_element = self.messages[message[0]]
+                for attachment in cursor.execute("SELECT id, type, name, content FROM attachment WHERE message_id=?", (message[0],)):
+                    message_element.add_attachment(attachment[2], attachment[1], attachment[3])
+                message_element.set_text(message[4])
+                message_element.add_footer(datetime.datetime.strptime(message[3] + (":00" if message[3].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
+        else:
+            self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
+        return
         if len(messages.keys()) > 0:
             if self.welcome_screen:
                 self.container.remove(self.welcome_screen)
@@ -333,22 +352,22 @@ class chat_list(Gtk.ListBox):
         self.prepend(tab)
         self.select_row(tab)
 
-    def append_chat(self, chat_name:str) -> chat:
+    def append_chat(self, chat_name:str, chat_id:str) -> chat:
         chat_name = chat_name.strip()
         if chat_name:
             chat_name = window.generate_numbered_name(chat_name, [tab.chat_window.get_name() for tab in self.tab_list])
-            chat_window = chat(chat_name)
+            chat_window = chat(chat_name, chat_id)
             tab = chat_tab(chat_window)
             self.append(tab)
             self.tab_list.append(tab)
             window.chat_stack.add_child(chat_window)
             return chat_window
 
-    def prepend_chat(self, chat_name:str) -> chat:
+    def prepend_chat(self, chat_name:str, chat_id:str) -> chat:
         chat_name = chat_name.strip()
         if chat_name:
             chat_name = window.generate_numbered_name(chat_name, [tab.chat_window.get_name() for tab in self.tab_list])
-            chat_window = chat(chat_name)
+            chat_window = chat(chat_name, chat_id)
             tab = chat_tab(chat_window)
             self.prepend(tab)
             self.tab_list.insert(0, tab)
@@ -360,7 +379,7 @@ class chat_list(Gtk.ListBox):
     def new_chat(self, chat_title:str=_("New Chat")):
         chat_title = chat_title.strip()
         if chat_title:
-            window.save_history(self.prepend_chat(chat_title))
+            window.save_history(self.prepend_chat(chat_title, window.generate_uuid()))
 
     def delete_chat(self, chat_name:str):
         chat_tab = None
