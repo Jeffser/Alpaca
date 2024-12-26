@@ -135,6 +135,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     quick_ask_overlay = Gtk.Template.Child()
     quick_ask_save_button = Gtk.Template.Child()
 
+    sqlite_path = os.path.join(data_dir, "chats_test.db")
+
     @Gtk.Template.Callback()
     def remote_connection_selector_clicked(self, button):
         options = {
@@ -674,7 +676,7 @@ Generate a title following these rules:
         if os.path.exists(os.path.join(data_dir, "chats", "selected_chat.txt")):
             with open(os.path.join(data_dir, "chats", "selected_chat.txt"), 'r') as f:
                 selected_chat = f.read()
-        sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
+        sqlite_con = sqlite3.connect(self.sqlite_path)
         cursor = sqlite_con.cursor()
         cursor.execute("SELECT id, name FROM chat")
         chats = cursor.fetchall()
@@ -1123,7 +1125,7 @@ Generate a title following these rules:
         popover.popup()
 
     def setup_sqlite(self):
-        sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
+        sqlite_con = sqlite3.connect(self.sqlite_path)
         cursor = sqlite_con.cursor()
 
         tables = {
@@ -1167,7 +1169,7 @@ Generate a title following these rules:
             try:
                 with open(os.path.join(data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
                     data = json.load(f)
-                    sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
+                    sqlite_con = sqlite3.connect(self.sqlite_path)
                     cursor = sqlite_con.cursor()
                     for chat_name in data['chats'].keys():
                         chat_id = self.generate_uuid()

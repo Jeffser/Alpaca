@@ -142,7 +142,7 @@ class chat(Gtk.ScrolledWindow):
         self.container.append(self.welcome_screen)
 
     def load_chat_messages(self):
-        sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
+        sqlite_con = sqlite3.connect(window.sqlite_path)
         cursor = sqlite_con.cursor()
         cursor.execute("SELECT id, role, model, date_time, content FROM message WHERE chat_id=?", (self.chat_id,))
         messages = cursor.fetchall()
@@ -380,7 +380,7 @@ class chat_list(Gtk.ListBox):
         chat_title = chat_title.strip()
         if chat_title:
             chat_window = self.prepend_chat(chat_title, window.generate_uuid())
-            sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
+            sqlite_con = sqlite3.connect(window.sqlite_path)
             cursor = sqlite_con.cursor()
             cursor.execute("INSERT INTO chat (id, name) VALUES (?, ?);", (chat_window.chat_id, chat_window.get_name()))
             sqlite_con.commit()
@@ -393,16 +393,19 @@ class chat_list(Gtk.ListBox):
                 chat_tab = c
         if chat_tab:
             chat_tab.chat_window.stop_message()
+            chat_id = chat_tab.chat_window.chat_id
             window.chat_stack.remove(chat_tab.chat_window)
             self.tab_list.remove(chat_tab)
             self.remove(chat_tab)
-            if os.path.exists(os.path.join(data_dir, "chats", chat_name)):
-                shutil.rmtree(os.path.join(data_dir, "chats", chat_name))
             if len(self.tab_list) == 0:
                 self.new_chat()
             if not self.get_current_chat() or self.get_current_chat() == chat_tab.chat_window:
                 self.select_row(self.get_row_at_index(0))
-        window.save_history()
+            sqlite_con = sqlite3.connect(window.sqlite_path)
+            cursor = sqlite_con.cursor()
+            cursor.execute("DELETE FROM chat WHERE id=?;", (chat_id,))
+            sqlite_con.commit()
+            sqlite_con.close()
 
     def rename_chat(self, old_chat_name:str, new_chat_name:str):
         new_chat_name = new_chat_name.strip()
@@ -414,7 +417,7 @@ class chat_list(Gtk.ListBox):
             tab.label.set_label(new_chat_name)
             tab.label.set_tooltip_text(new_chat_name)
             tab.chat_window.set_name(new_chat_name)
-            sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
+            sqlite_con = sqlite3.connect(window.sqlite_path)
             cursor = sqlite_con.cursor()
             cursor.execute("UPDATE Chat SET name=? WHERE id=?", (new_chat_name, tab.chat_window.chat_id))
             sqlite_con.commit()
