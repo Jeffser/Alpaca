@@ -425,14 +425,24 @@ class chat_list(Gtk.ListBox):
 
     def duplicate_chat(self, chat_name:str):
         new_chat_name = window.generate_numbered_name(_("Copy of {}").format(chat_name), [tab.chat_window.get_name() for tab in self.tab_list])
-        try:
-            shutil.copytree(os.path.join(data_dir, "chats", chat_name), os.path.join(data_dir, "chats", new_chat_name))
-        except Exception as e:
-            logger.error(e)
-        self.prepend_chat(new_chat_name)
-        created_chat = self.get_tab_by_name(new_chat_name).chat_window
-        created_chat.load_chat_messages(self.get_tab_by_name(chat_name).chat_window.messages_to_dict())
-        window.save_history(created_chat)
+        new_chat_id = window.generate_uuid()
+
+        sqlite_con = sqlite3.connect(window.sqlite_path)
+        cursor = sqlite_con.cursor()
+        cursor.execute("INSERT INTO chat (id, name) VALUES (?, ?);", (new_chat_id, new_chat_name))
+
+        messages = cursor.execute("SELECT id, role, model, date_time, content FROM message WHERE chat_id=?", (self.get_chat_by_name(chat_name).chat_id,)).fetchall()
+        for message in messages:
+            new_message_id = window.generate_uuid()
+            cursor.execute("INSERT INTO message (id, chat_id, role, model, date_time, content) VALUES (?, ?, ?, ?, ?, ?)",
+                (new_message_id, new_chat_id, message[1], message[2], message[3], message[4]))
+            attachments = cursor.execute("SELECT type, name, content FROM attachment WHERE message_id=?", (message[0],)).fetchall()
+            for attachment in attachments:
+                cursor.execute("INSERT INTO attachment (id, message_id, type, name, content) VALUES (?, ?, ?, ?, ?)",
+                    (window.generate_uuid(), new_message_id, attachment[0], attachment[1], attachment[2]))
+        sqlite_con.commit()
+        sqlite_con.close()
+        self.prepend_chat(new_chat_name, new_chat_id).load_chat_messages()
 
     def on_replace_contents(self, file, result):
         file.replace_contents_finish(result)
