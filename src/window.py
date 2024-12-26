@@ -19,7 +19,7 @@
 """
 Handles the main window
 """
-import json, threading, os, re, base64, gettext, uuid, shutil, logging, time, requests
+import json, threading, os, re, base64, gettext, uuid, shutil, logging, time, requests, sqlite3
 import odf.opendocument as odfopen
 import odf.table as odftable
 from io import BytesIO
@@ -134,6 +134,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     quick_ask = Gtk.Template.Child()
     quick_ask_overlay = Gtk.Template.Child()
     quick_ask_save_button = Gtk.Template.Child()
+
+    #SQLITE
+    sqlite_con = None
 
     @Gtk.Template.Callback()
     def remote_connection_selector_clicked(self, button):
@@ -1107,8 +1110,81 @@ Generate a title following these rules:
         popover.set_pointing_to(position)
         popover.popup()
 
+    def setup_sqlite(self):
+        self.sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
+        cursor = self.sqlite_con.cursor()
+
+        tables = {
+            "chat": """
+                CREATE TABLE chat (
+                    id TEXT NOT NULL PRIMARY KEY,
+                    name TEXT NOT NULL
+                );
+            """,
+            "message": """
+                CREATE TABLE message (
+                    id TEXT NOT NULL PRIMARY KEY,
+                    chat_id TEXT NOT NULL,
+                    role TEXT NOT NULL,
+                    model TEXT,
+                    date_time DATETIME NOT NULL,
+                    content TEXT NOT NULL
+                )
+            """,
+            "attachment": """
+                CREATE TABLE attachment (
+                    id TEXT NOT NULL PRIMARY KEY,
+                    message_id TEXT NOT NULL,
+                    type TEXT NOT NULL,
+                    name TEXT NOT NULL,
+                    content TEXT NOT NULL
+                )
+            """
+        }
+
+        for name, script in tables.items():
+            if not cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='{}'".format(name)).fetchone():
+                cursor.execute(script)
+
+        self.sqlite_con.commit()
+
+
+    def initial_convert_to_sql(self):
+        if os.path.exists(os.path.join(data_dir, "chats", "chats.json")):
+            try:
+                with open(os.path.join(data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    cursor = self.sqlite_con.cursor()
+                    for chat_name in data['chats'].keys():
+                        chat_id = self.generate_uuid()
+                        cursor.execute("INSERT INTO chat (id, name) VALUES (?, ?);", (chat_id, chat_name))
+
+                        for message_id, message in data['chats'][chat_name]['messages'].items():
+                            cursor.execute("INSERT INTO message (id, chat_id, role, model, date_time, content) VALUES (?, ?, ?, ?, ?, ?)",
+                            (message_id, chat_id, message['role'], message['model'], message['date'], message['content']))
+
+                            if 'files' in message:
+                                for file_name, file_type in message['files'].items():
+                                    attachment_id = self.generate_uuid()
+                                    content = self.get_content_of_file(os.path.join(data_dir, "chats", chat_name, message_id, file_name), file_type)
+                                    cursor.execute("INSERT INTO attachment (id, message_id, type, name, content) VALUES (?, ?, ?, ?, ?)",
+                                    (attachment_id, message_id, file_type, file_name, content))
+                            if 'images' in message:
+                                for image in message['images']:
+                                    attachment_id = self.generate_uuid()
+                                    content = self.get_content_of_file(os.path.join(data_dir, "chats", chat_name, message_id, image), 'image')
+                                    cursor.execute("INSERT INTO attachment (id, message_id, type, name, content) VALUES (?, ?, ?, ?, ?)",
+                                    (attachment_id, message_id, 'image', image, content))
+
+                    self.sqlite_con.commit()
+            except Exception as e:
+                logger.error(e)
+                pass
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.setup_sqlite()
+        self.initial_convert_to_sql()
         self.message_searchbar.connect('notify::search-mode-enabled', lambda *_: self.message_search_button.set_active(self.message_searchbar.get_search_mode()))
         message_widget.window = self
         chat_widget.window = self
