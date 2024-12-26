@@ -19,14 +19,13 @@
 """
 Handles the main window
 """
-import json, threading, os, re, base64, gettext, uuid, shutil, logging, time
+import json, threading, os, re, base64, gettext, uuid, shutil, logging, time, requests
 import odf.opendocument as odfopen
 import odf.table as odftable
 from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
 from datetime import datetime
-from pytube import YouTube
 
 import gi
 gi.require_version('GtkSource', '5')
@@ -875,17 +874,10 @@ Generate a title following these rules:
 
     def youtube_detected(self, video_url):
         try:
-            tries=0
-            while True:
-                try:
-                    yt = YouTube(video_url)
-                    video_title = yt.title
-                    break
-                except Exception as e:
-                    tries+=1
-                    if tries == 4:
-                        raise Exception(e)
-            transcriptions = generic_actions.get_youtube_transcripts(yt.video_id)
+            response = requests.get('https://noembed.com/embed?url={}'.format(video_url))
+            data = json.loads(response.text)
+
+            transcriptions = generic_actions.get_youtube_transcripts(data['url'].split('=')[1])
             if len(transcriptions) == 0:
                 self.show_toast(_("This video does not have any transcriptions"), self.main_overlay)
                 return
@@ -895,8 +887,8 @@ Generate a title following these rules:
 
             dialog_widget.simple_dropdown(
                 _('Attach YouTube Video?'),
-                _('{}\n\nPlease select a transcript to include').format(video_title),
-                lambda caption_name, yt=yt, video_url=video_url: generic_actions.attach_youtube(yt.title, yt.author, yt.watch_url, video_url, yt.video_id, caption_name),
+                _('{}\n\nPlease select a transcript to include').format(data['title']),
+                lambda caption_name, data=data, video_url=video_url: generic_actions.attach_youtube(data['title'], data['author_name'], data['url'], video_url, data['url'].split('=')[1], caption_name),
                 transcriptions
             )
         except Exception as e:

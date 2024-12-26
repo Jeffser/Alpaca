@@ -5,6 +5,7 @@ Working on organizing the code
 
 import os, requests
 from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api.formatters import TextFormatter
 from html2text import html2text
 from .internal import cache_dir
 
@@ -40,7 +41,8 @@ def attach_youtube(video_title:str, video_author:str, watch_url:str, video_url:s
     else:
         transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=[caption_name])
 
-    result_text += '\n'.join([t['text'] for t in transcript])
+    result_text += TextFormatter().format_transcript(transcript)
+    #result_text += '\n'.join([t['text'] for t in transcript])
 
     if not os.path.exists(os.path.join(cache_dir, 'tmp/youtube')):
         os.makedirs(os.path.join(cache_dir, 'tmp/youtube'))
