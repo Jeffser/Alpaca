@@ -443,9 +443,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.quick_ask.close()
         chat = self.quick_ask_overlay.get_child()
         chat_name = self.generate_numbered_name(chat.get_name(), [tab.chat_window.get_name() for tab in self.chat_list_box.tab_list])
-        new_chat = self.chat_list_box.prepend_chat(chat_name)
-        new_chat.load_chat_messages(chat.messages_to_dict())
-        self.save_history(new_chat)
+        new_chat = self.chat_list_box.new_chat(chat_name)
+        sqlite_con = sqlite3.connect(self.sqlite_path)
+        cursor = sqlite_con.cursor()
+        for message in chat.messages.values():
+            message_author = 'user'
+            if message.bot:
+                message_author = 'assistant'
+            if message.system:
+                message_author = 'system'
+            cursor.execute("INSERT INTO message (id, chat_id, role, model, date_time, content) VALUES (?, ?, ?, ?, ?, ?)",
+                (message.message_id, new_chat.chat_id, message_author, message.model, message.dt.strftime("%Y/%m/%d %H:%M:%S"), message.text))
+        sqlite_con.commit()
+        sqlite_con.close()
+        new_chat.load_chat_messages()
         self.present()
 
     @Gtk.Template.Callback()
@@ -1043,7 +1054,7 @@ Generate a title following these rules:
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.quick_ask_overlay)
             return
-        chat = chat_widget.chat(_('Quick Ask'), True)
+        chat = chat_widget.chat(_('Quick Ask'), 'QA', True)
         self.quick_ask_overlay.set_child(chat)
 
         message_id = self.generate_uuid()
@@ -1075,7 +1086,7 @@ Generate a title following these rules:
         self.model_scroller.set_child(self.model_manager)
 
         #Chat History
-        self.load_history()
+        GLib.idle_add(self.load_history)
 
         if self.get_application().args.new_chat:
             self.chat_list_box.new_chat(self.get_application().args.new_chat)

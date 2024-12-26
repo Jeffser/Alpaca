@@ -385,6 +385,7 @@ class chat_list(Gtk.ListBox):
             cursor.execute("INSERT INTO chat (id, name) VALUES (?, ?);", (chat_window.chat_id, chat_window.get_name()))
             sqlite_con.commit()
             sqlite_con.close()
+            return chat_window
 
     def delete_chat(self, chat_name:str):
         chat_tab = None
@@ -404,7 +405,7 @@ class chat_list(Gtk.ListBox):
             sqlite_con = sqlite3.connect(window.sqlite_path)
             cursor = sqlite_con.cursor()
             cursor.execute("DELETE FROM chat WHERE id=?;", (chat_id,))
-            messages = cursor.execute("SELECT id FROM message WHERE chat_id=?", (self.chat_id,)).fetchall()
+            messages = cursor.execute("SELECT id FROM message WHERE chat_id=?", (chat_id,)).fetchall()
             for message in messages:
                 cursor.execute("DELETE FROM attachment WHERE message_id=?", (message[0],))
             cursor.execute("DELETE FROM message WHERE chat_id=?", (chat_id,))
