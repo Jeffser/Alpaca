@@ -235,7 +235,8 @@ class attachment_container(Gtk.ScrolledWindow):
         super().__init__(
             hexpand=True,
             child=self.container,
-            vscrollbar_policy=2
+            vscrollbar_policy=2,
+            propagate_natural_width=True
         )
 
     def add_file(self, file:attachment):

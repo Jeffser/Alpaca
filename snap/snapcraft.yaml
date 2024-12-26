@@ -56,11 +56,11 @@ parts:
       - requests==2.31.0
       - pillow==10.3.0
       - pypdf==4.2.0
-      - pytube==15.0.0
       - youtube-transcript-api==0.6.2
       - html2text==2024.2.26
       - pydbus==0.6.0
       - odfpy==1.4.1
+      - pyicu==2.14
 
   # Ollama plugin
   ollama:
