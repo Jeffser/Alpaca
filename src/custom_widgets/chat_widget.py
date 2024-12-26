@@ -379,7 +379,12 @@ class chat_list(Gtk.ListBox):
     def new_chat(self, chat_title:str=_("New Chat")):
         chat_title = chat_title.strip()
         if chat_title:
-            window.save_history(self.prepend_chat(chat_title, window.generate_uuid()))
+            chat_window = self.prepend_chat(chat_title, window.generate_uuid())
+            sqlite_con = sqlite3.connect(os.path.join(os.path.join(data_dir, "chats_test.db")))
+            cursor = sqlite_con.cursor()
+            cursor.execute("INSERT INTO chat (id, name) VALUES (?, ?);", (chat_window.chat_id, chat_window.get_name()))
+            sqlite_con.commit()
+            sqlite_con.close()
 
     def delete_chat(self, chat_name:str):
         chat_tab = None
