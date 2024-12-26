@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk, GdkPixbuf
-import logging, os, datetime, re, shutil, threading, sys, base64
+import logging, os, datetime, re, shutil, threading, sys, base64, sqlite3
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .table_widget import TableWidget
 from . import dialog_widget, terminal_widget
@@ -77,7 +77,13 @@ class edit_text_block(Gtk.Box):
         message_element = self.get_parent().get_parent()
         message_element.set_text(self.text_view.get_buffer().get_text(self.text_view.get_buffer().get_start_iter(), self.text_view.get_buffer().get_end_iter(), False))
         message_element.add_footer(message_element.dt)
-        window.save_history(message_element.get_parent().get_parent().get_parent().get_parent())
+
+        sqlite_con = sqlite3.connect(window.sqlite_path)
+        cursor = sqlite_con.cursor()
+        cursor.execute("UPDATE message SET content=? WHERE id=?", (message_element.text, message_element.message_id))
+        sqlite_con.commit()
+        sqlite_con.close()
+
         self.get_parent().remove(self)
         window.show_toast(_("Message edited successfully"), window.main_overlay)
 
