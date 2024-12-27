@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.0.0\n"
+"Project-Id-Version: 3.1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-27 15:11-0600\n"
 "PO-Revision-Date: 2024-12-17 15:12-0600\n"
@@ -142,15 +142,15 @@ msgstr "নতুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Added categories to models"
-msgstr ""
+msgstr "মডেলগুলিতে বিভাগ যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Specified model's languages"
-msgstr ""
+msgstr "নির্দিষ্ট মডেলের ভাষাসমূহ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added warning when downloading embedding models"
-msgstr ""
+msgstr "এম্বেডিং মডেল ডাউনলোড করার সময় সতর্কতা যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
@@ -177,7 +177,7 @@ msgstr "সংশোধন করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Replaced low ram warning with big model warning"
-msgstr ""
+msgstr "কম র‍্যাম সতর্কতা প্রতিস্থাপন করা হয়েছে বড় মডেল সতর্কতার সাথে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Correctly escape markup before rendering message"
@@ -818,8 +818,7 @@ msgstr "Ollama আপডেট করা হয়েছে v0.3.0 (নতুন
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:484
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
-msgstr ""
-"তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
+msgstr "তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:485
 msgid "Better connection check for Ollama"
@@ -1138,8 +1137,7 @@ msgstr "ঠিক করা হয়েছে পাঠান/স্টপ ব�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:615
 msgid "Fixed app not checking if remote connection works when starting"
-msgstr ""
-"ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
+msgstr "ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:622
 msgid "Daily Update"
@@ -2164,7 +2162,8 @@ msgstr ""
 msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
-msgstr "এআই সফটওয়্যার উন্নয়ন দৃশ্যকল্পের জন্য বহুমুখী মডেল, কোড সম্পূর্ণতা সহ।"
+msgstr ""
+"এআই সফটওয়্যার উন্নয়ন দৃশ্যকল্পের জন্য বহুমুখী মডেল, কোড সম্পূর্ণতা সহ।"
 
 #: src/available_models_descriptions.py:52
 msgid ""
@@ -2543,7 +2542,8 @@ msgstr ""
 #: src/available_models_descriptions.py:104
 msgid ""
 "Nexus Raven is a 13B instruction tuned model for function calling tasks."
-msgstr "নেক্সাস রেভেন হল ১৩বি ইন্সট্রাকশন টিউনড মডেল ফাংশন কলিং টাস্কের জন্য।"
+msgstr ""
+"নেক্সাস রেভেন হল ১৩বি ইন্সট্রাকশন টিউনড মডেল ফাংশন কলিং টাস্কের জন্য।"
 
 #: src/available_models_descriptions.py:105
 msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
@@ -2797,7 +2797,7 @@ msgstr ""
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
-msgstr ""
+msgstr "আইবিএম গ্রানাইট গার্ডিয়ান ৩.০ ২বি এবং ৮বি মডেলগুলি প্রম্পট এবং/অথবা প্রতিক্রিয়ায় ঝুঁকি সনাক্ত করার জন্য ডিজাইন করা হয়েছে।"
 
 #: src/available_models_descriptions.py:141
 msgid ""
@@ -2821,27 +2821,27 @@ msgstr ""
 msgid ""
 "A family of efficient AI models under 10B parameters performant in science, "
 "math, and coding through innovative training techniques."
-msgstr ""
+msgstr "১০ বিলিয়নের নিচে প্যারামিটার সহ কার্যকরী AI মডেলের একটি পরিবার, যা বিজ্ঞান, গণিত এবং কোডিংয়ে উদ্ভাবনী প্রশিক্ষণ কৌশলের মাধ্যমে কার্যকর।"
 
 #: src/available_models_descriptions.py:144
 msgid ""
 "The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 "
 "trillion tokens of data, demonstrated significant improvements over their "
 "predecessors in performance and speed in IBM’s initial testing."
-msgstr ""
+msgstr "আইবিএম গ্রানাইট ২বি এবং ৮বি মডেলগুলি শুধুমাত্র টেক্সটের ঘন LLM, যা ১২ ট্রিলিয়নেরও বেশি টোকেনের ডেটার উপর প্রশিক্ষিত, তাদের পূর্বসূরীদের তুলনায় পারফরম্যান্স এবং গতিতে উল্লেখযোগ্য উন্নতি প্রদর্শন করেছে আইবিএমের প্রাথমিক পরীক্ষায়।"
 
 #: src/available_models_descriptions.py:145
 msgid ""
 "The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
-msgstr ""
+msgstr "আইবিএম গ্রানাইট ১বি এবং ৩বি মডেলগুলি দীর্ঘ-প্রসঙ্গ বিশেষজ্ঞদের মিশ্রণ (MoE) গ্রানাইট মডেল, যা কম লেটেন্সি ব্যবহারের জন্য ডিজাইন করা হয়েছে।"
 
 #: src/available_models_descriptions.py:146
 msgid ""
 "The IBM Granite Embedding 30M and 278M models models are text-only dense "
 "biencoder embedding models, with 30M available in English only and 278M "
 "serving multilingual use cases."
-msgstr ""
+msgstr "আইবিএম গ্রানাইট এমবেডিং ৩০এম এবং ২৭৮এম মডেলগুলি শুধুমাত্র টেক্সটের ঘন বাইএনকোডার এমবেডিং মডেল, যার মধ্যে ৩০এম শুধুমাত্র ইংরেজিতে এবং ২৭৮এম বহুভাষিক ব্যবহারের জন্য উপলব্ধ।"
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -2940,7 +2940,7 @@ msgstr "অল্লামায় দূরবর্তী সংযোগ ব
 
 #: src/window.ui:314 src/window.ui:320
 msgid "Change Ollama Instance"
-msgstr ""
+msgstr "ওল্লামা ইনস্ট্যান্স পরিবর্তন করুন"
 
 #: src/window.ui:335
 msgid "Run Alpaca In Background"
@@ -2995,7 +2995,8 @@ msgstr "জীবিত সময়"
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
-msgstr "অনুরোধের পরে মিনিটে মেমরিতে মডেল কতক্ষণ থাকবে তা নিয়ন্ত্রণ করে (ডিফল্ট: ৫)"
+msgstr ""
+"অনুরোধের পরে মিনিটে মেমরিতে মডেল কতক্ষণ থাকবে তা নিয়ন্ত্রণ করে (ডিফল্ট: ৫)"
 
 #: src/window.ui:415
 msgid "Ollama Instance"
@@ -3027,11 +3028,11 @@ msgstr ""
 
 #: src/window.ui:510
 msgid "Model Directory"
-msgstr ""
+msgstr "মডেল ডিরেক্টরি"
 
 #: src/window.ui:516
 msgid "Change Model Directory"
-msgstr ""
+msgstr "মডেল ডিরেক্টরি পরিবর্তন করুন"
 
 #: src/window.ui:548
 msgid "Quick ask dialog"
@@ -3414,39 +3415,39 @@ msgstr "বন্ধ করুন"
 
 #: src/custom_widgets/model_widget.py:295
 msgid "Multilingual"
-msgstr ""
+msgstr "বহুভাষিক"
 
 #: src/custom_widgets/model_widget.py:296
 msgid "Code"
-msgstr ""
+msgstr "কোড"
 
 #: src/custom_widgets/model_widget.py:297
 msgid "Math"
-msgstr ""
+msgstr "গণিত"
 
 #: src/custom_widgets/model_widget.py:298
 msgid "Vision"
-msgstr ""
+msgstr "দৃষ্টি"
 
 #: src/custom_widgets/model_widget.py:299
 msgid "Embedding"
-msgstr ""
+msgstr "এমবেডিং"
 
 #: src/custom_widgets/model_widget.py:300
 msgid "Small"
-msgstr ""
+msgstr "ছোট"
 
 #: src/custom_widgets/model_widget.py:301
 msgid "Medium"
-msgstr ""
+msgstr "মাঝারি"
 
 #: src/custom_widgets/model_widget.py:302
 msgid "Big"
-msgstr ""
+msgstr "বড়"
 
 #: src/custom_widgets/model_widget.py:303
 msgid "Huge"
-msgstr ""
+msgstr "বিশাল"
 
 #: src/custom_widgets/model_widget.py:356
 msgid "Details"
@@ -3510,13 +3511,13 @@ msgstr "{} এর ডাউনলোড মেনুতে প্রবেশ �
 
 #: src/custom_widgets/model_widget.py:631
 msgid "Embedding Model"
-msgstr ""
+msgstr "এমবেডিং মডেল"
 
 #: src/custom_widgets/model_widget.py:632
 msgid ""
 "This model is meant to be used in the training of other models and won't "
 "work directly with Alpaca. Are you sure you want to download it anyway?"
-msgstr ""
+msgstr "এই মডেলটি অন্যান্য মডেলের প্রশিক্ষণে ব্যবহারের জন্য ডিজাইন করা হয়েছে এবং এটি সরাসরি আলপাকার সাথে কাজ করবে না। আপনি কি নিশ্চিত যে আপনি এটি ডাউনলোড করতে চান?"
 
 #: src/custom_widgets/model_widget.py:634
 #: src/custom_widgets/model_widget.py:642
@@ -3531,11 +3532,11 @@ msgstr "বড় মডেল"
 msgid ""
 "This model might be too large to run optimally. Are you sure you want to "
 "download it anyway?"
-msgstr ""
+msgstr "এই মডেলটি কার্যকরভাবে চালানোর জন্য খুব বড় হতে পারে। আপনি কি নিশ্চিত যে আপনি এটি ডাউনলোড করতে চান?"
 
 #: src/custom_widgets/model_widget.py:665
 msgid "Others..."
-msgstr ""
+msgstr "অন্যান্য..."
 
 #: src/custom_widgets/model_widget.py:676
 msgid "Download {}:{}"
