@@ -857,7 +857,18 @@ Generate a title following these rules:
                 _('Rename')
             )
         elif action_name in ('export_chat', 'export_current_chat'):
-            self.chat_list_box.export_chat(chat_name)
+            chat = self.chat_list_box.get_chat_by_name(chat_name)
+            options = {
+                _("Importable (.db)"): chat.export_db,
+                _("Markdown"): lambda chat=chat: chat.export_md(False),
+                _("Markdown (Obsidian Style)"): lambda chat=chat: chat.export_md(True)
+            }
+            dialog_widget.simple_dropdown(
+                _("Export Chat"),
+                _("Select a method to export the chat"),
+                lambda option, options=options: options[option](),
+                options.keys()
+            )
 
     def current_chat_actions(self, action, user_data):
         self.selected_chat_row = self.chat_list_box.get_selected_row()

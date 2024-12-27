@@ -160,7 +160,27 @@ class chat(Gtk.ScrolledWindow):
         else:
             self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
 
-    def messages_to_md(self) -> str:
+    def on_export_successful(self, file, result):
+        file.replace_contents_finish(result)
+        window.show_toast(_("Chat exported successfully"), window.main_overlay)
+
+    def on_export_chat(self, file_dialog, result, temp_path):
+        file = file_dialog.save_finish(result)
+        if file:
+            with open(temp_path, "rb") as db:
+                file.replace_contents_async(
+                    db.read(),
+                    etag=None,
+                    make_backup=False,
+                    flags=Gio.FileCreateFlags.NONE,
+                    cancellable=None,
+                    callback=self.on_export_successful
+                )
+
+    def export_md(self, obsidian:bool):
+        logger.info("Exporting chat (MD)")
+        if os.path.isfile(os.path.join(cache_dir, 'export.md')):
+            os.remove(os.path.join(cache_dir, 'export.md'))
         markdown = []
         for message_id, message_element in self.messages.items():
             if message_element.text and message_element.dt:
@@ -170,11 +190,11 @@ class chat(Gtk.ScrolledWindow):
                 if message_element.system:
                     message_author = _('System')
 
-                markdown.append('**{}** | {}'.format(message_author, message_element.dt.strftime("%Y/%m/%d %H:%M:%S")))
+                markdown.append('### **{}** | {}'.format(message_author, message_element.dt.strftime("%Y/%m/%d %H:%M:%S")))
                 markdown.append(message_element.text)
                 if message_element.image_c:
                     for file in message_element.image_c.files:
-                        markdown.append('![{}](./{}/{}/{})'.format(file.image_name, self.get_name(), message_id, file.image_name))
+                        markdown.append('![🖼️ {}](data:image/{};base64,{})'.format(file.get_name(), file.get_name().split('.')[1], file.content))
                 if message_element.attachment_c:
                     emojis = {
                         'plain_text': '📃',
@@ -184,10 +204,34 @@ class chat(Gtk.ScrolledWindow):
                         'website': '🌐'
                     }
                     for file in message_element.attachment_c.files:
-                        markdown.append('[{} {}](./{}/{}/{}) '.format(emojis[file.file_type], file.file_name, self.get_name(), message_id, file.file_name))
+                        if obsidian:
+                            file_block = "> [!quote]- {}\n".format(file.get_name())
+                            for line in file.file_content.split("\n"):
+                                file_block += "> {}\n".format(line)
+                            markdown.append(file_block)
+                        else:
+                            markdown.append('<details>\n\n<summary>{} {}</summary>\n\n```TXT\n{}\n```\n\n</details>'.format(emojis[file.file_type], file.get_name(), file.file_content))
                 markdown.append('----')
         markdown.append('Generated from [Alpaca](https://github.com/Jeffser/Alpaca)')
-        return '\n\n'.join(markdown)
+        with open(os.path.join(cache_dir, 'export.md'), 'w+') as f:
+            f.write('\n\n'.join(markdown))
+        file_dialog = Gtk.FileDialog(initial_name=f"{self.get_name()}.md")
+        file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.md'): self.on_export_chat(file_dialog, result, temp_path))
+
+    def export_db(self):
+        logger.info("Exporting chat (DB)")
+        if os.path.isfile(os.path.join(cache_dir, 'export.db')):
+            os.remove(os.path.join(cache_dir, 'export.db'))
+        sqlite_con = sqlite3.connect(window.sqlite_path)
+        cursor = sqlite_con.cursor()
+        cursor.execute("ATTACH DATABASE ? AS export", (os.path.join(cache_dir, 'export.db'),))
+        cursor.execute("CREATE TABLE export.chat AS SELECT * FROM chat WHERE id=?", (self.chat_id,))
+        cursor.execute("CREATE TABLE export.message AS SELECT * FROM message WHERE chat_id=?", (self.chat_id,))
+        cursor.execute("CREATE TABLE export.attachment AS SELECT a.* FROM attachment as a JOIN message m ON a.message_id = m.id WHERE m.chat_id=?", (self.chat_id,))
+        sqlite_con.commit()
+        sqlite_con.close()
+        file_dialog = Gtk.FileDialog(initial_name=f"{self.get_name()}.db")
+        file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.db'): self.on_export_chat(file_dialog, result, temp_path))
 
     def messages_to_dict(self) -> dict:
         messages_dict = {}
@@ -425,40 +469,6 @@ class chat_list(Gtk.ListBox):
         sqlite_con.commit()
         sqlite_con.close()
         self.prepend_chat(new_chat_name, new_chat_id).load_chat_messages()
-
-    def on_replace_contents(self, file, result):
-        file.replace_contents_finish(result)
-        window.show_toast(_("Chat exported successfully"), window.main_overlay)
-
-    def on_export_chat(self, file_dialog, result, db_path):
-        file = file_dialog.save_finish(result)
-        if file:
-            with open(db_path, "rb") as db:
-                file.replace_contents_async(
-                    db.read(),
-                    etag=None,
-                    make_backup=False,
-                    flags=Gio.FileCreateFlags.NONE,
-                    cancellable=None,
-                    callback=self.on_replace_contents
-                )
-
-    def export_chat(self, chat_name:str):
-        logger.info("Exporting chat")
-        chat = self.get_chat_by_name(chat_name)
-        if chat:
-            if os.path.isfile(os.path.join(cache_dir, 'export.db')):
-                os.remove(os.path.join(cache_dir, 'export.db'))
-            sqlite_con = sqlite3.connect(window.sqlite_path)
-            cursor = sqlite_con.cursor()
-            cursor.execute("ATTACH DATABASE ? AS export", (os.path.join(cache_dir, 'export.db'),))
-            cursor.execute("CREATE TABLE export.chat AS SELECT * FROM chat WHERE id=?", (chat.chat_id,))
-            cursor.execute("CREATE TABLE export.message AS SELECT * FROM message WHERE chat_id=?", (chat.chat_id,))
-            cursor.execute("CREATE TABLE export.attachment AS SELECT a.* FROM attachment as a JOIN message m ON a.message_id = m.id WHERE m.chat_id=?", (chat.chat_id,))
-            sqlite_con.commit()
-            sqlite_con.close()
-        file_dialog = Gtk.FileDialog(initial_name=f"{chat_name}.db")
-        file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, db_path=os.path.join(cache_dir, 'export.db'): self.on_export_chat(file_dialog, result, db_path))
 
     def on_chat_imported(self, file_dialog, result):
         file = file_dialog.open_finish(result)
