@@ -783,12 +783,43 @@
                           <property name="vexpand">true</property>
                           <property name="hexpand">true</property>
                           <child>
-                            <object class="AdwStatusPage" id="model_detail_page">
-                              <property name="icon-name">brain-augemnted-symbolic</property>
-                              <property name="description">text</property>
-                              <style>
-                                <class name="compact"/>
-                              </style>
+                            <object class="GtkBox">
+                              <property name="spacing">10</property>
+                              <property name="margin-top">12</property>
+                              <property name="margin-bottom">12</property>
+                              <property name="margin-start">12</property>
+                              <property name="margin-end">12</property>
+                              <property name="orientation">1</property>
+                              <child>
+                                <object class="AdwBin" id="model_detail_header"></object>
+                              </child>
+                              <child>
+                                <object class="GtkLabel" id="model_detail_system">
+                                  <property name="wrap-mode">2</property>
+                                  <property name="hexpand">true</property>
+                                  <property name="wrap">true</property>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="GtkFlowBox" id="model_detail_information">
+                                  <property name="valign">1</property>
+                                  <property name="hexpand">true</property>
+                                  <property name="vexpand">true</property>
+                                  <property name="selection-mode">0</property>
+                                  <property name="max-children-per-line">2</property>
+                                  <property name="min-children-per-line">1</property>
+                                </object>
+                              </child>
+                              <child>
+                                <object class="GtkFlowBox" id="model_detail_categories">
+                                  <property name="hexpand">true</property>
+                                  <property name="vexpand">False</property>
+                                  <property name="orientation">0</property>
+                                  <property name="selection-mode">0</property>
+                                  <property name="valign">1</property>
+                                  <property name="halign">0</property>
+                                </object>
+                              </child>
                             </object>
                           </child>
                         </object>
@@ -859,7 +890,7 @@
                                 </object>
                               </child>
                               <child>
-                                <object class="GtkListBox">
+                                <object class="GtkListBox" id="create_model_modelfile_section">
                                   <style>
                                     <class name="boxed-list"/>
                                     <class name="card"/>

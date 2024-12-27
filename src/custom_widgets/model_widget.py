@@ -6,8 +6,8 @@ Handles the model widget (testing)
 import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
-from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk
-import logging, os, datetime, re, shutil, threading, json, sys, glob, icu
+from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk, GdkPixbuf
+import logging, os, datetime, re, shutil, threading, json, sys, glob, icu, base64, sqlite3
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .. import available_models_descriptions
 from . import dialog_widget
@@ -72,6 +72,13 @@ class model_selector_row(Gtk.ListBoxRow):
         )
         self.data = data
         self.image_recognition = 'projector_info' in self.data
+        self.profile_picture_data = None
+        sqlite_con = sqlite3.connect(window.sqlite_path)
+        cursor = sqlite_con.cursor()
+        picture = cursor.execute("SELECT picture FROM model WHERE id=?", (self.get_name(),)).fetchone()
+        if picture:
+            self.profile_picture_data = picture[0]
+        sqlite_con.close()
 
 class model_selector_button(Gtk.MenuButton):
     __gtype_name__ = 'AlpacaModelSelectorButton'
@@ -119,9 +126,18 @@ class model_selector_button(Gtk.MenuButton):
         self.get_popover().model_list_box.remove(next((model for model in list(self.get_popover().model_list_box) if model.get_name() == model_name), None))
         self.model_changed(self.get_popover().model_list_box)
         window.title_stack.set_visible_child_name('model_selector' if len(window.model_manager.get_model_list()) > 0 else 'no_models')
+        sqlite_con = sqlite3.connect(window.sqlite_path)
+        cursor = sqlite_con.cursor()
+        cursor.execute("DELETE FROM model WHERE id=?", (self.get_name(),))
+        sqlite_con.commit()
+        sqlite_con.close()
+        window.chat_list_box.update_profile_pictures()
 
     def clear_list(self):
         self.get_popover().model_list_box.remove_all()
+
+    def get_model_by_name(self, model_name:str) -> object:
+        return next((model for model in list(self.get_popover().model_list_box) if model.get_name() == model_name), None)
 
 class pulling_model(Gtk.ListBoxRow):
     __gtype_name__ = 'AlpacaPullingModel'
@@ -377,23 +393,73 @@ class local_model(Gtk.ListBoxRow):
             name=model_name
         )
 
+    def change_pfp(self, file_dialog, result, button, model):
+        file = file_dialog.open_finish(result)
+        if file:
+            model.profile_picture_data = window.get_content_of_file(file.get_path(), 'image')
+            image_data = base64.b64decode(model.profile_picture_data)
+            loader = GdkPixbuf.PixbufLoader.new()
+            loader.write(image_data)
+            loader.close()
+            pixbuf = loader.get_pixbuf()
+            texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+            image = Gtk.Image.new_from_paintable(texture)
+            image.set_size_request(64, 64)
+            button.set_overflow(1)
+            button.set_child(image)
+            sqlite_con = sqlite3.connect(window.sqlite_path)
+            cursor = sqlite_con.cursor()
+            if cursor.execute("SELECT picture FROM model WHERE id=?", (self.get_name(),)).fetchone():
+                cursor.execute("UPDATE model SET picture=? WHERE id=?", (model.profile_picture_data, self.get_name()))
+            else:
+                cursor.execute("INSERT INTO model (id, picture) VALUES (?, ?)", (self.get_name(), model.profile_picture_data))
+            sqlite_con.commit()
+            sqlite_con.close()
+            window.chat_list_box.update_profile_pictures()
+
     def show_information(self, button):
         model = next((element for element in list(window.model_manager.model_selector.get_popover().model_list_box) if element.get_name() == self.get_name()), None)
         model_name = model.get_child().get_label()
-
-        window.model_detail_page.set_title(' ('.join(model_name.split(' (')[:-1]))
-        window.model_detail_page.set_description(' ('.join(model_name.split(' (')[-1:])[:-1])
         window.model_detail_create_button.set_name(model_name)
         window.model_detail_create_button.set_tooltip_text(_("Create Model Based on '{}'").format(model_name))
 
-        details_flow_box = Gtk.FlowBox(
-            valign=1,
-            hexpand=True,
-            vexpand=False,
-            selection_mode=0,
-            max_children_per_line=2,
-            min_children_per_line=1,
+        actionrow = Adw.ActionRow(
+            title="<big>{}</big>".format(' ('.join(model_name.split(' (')[:-1])),
+            subtitle=' ('.join(model_name.split(' (')[-1:])[:-1],
+            css_classes=["card"]
         )
+        pfp_button = Gtk.Button(
+            css_classes=['circular'],
+            valign=3,
+            icon_name='brain-augemnted-symbolic',
+            width_request=64,
+            height_request=64,
+            margin_top=10,
+            margin_bottom=10,
+            tooltip_text=_("Change Model Picture")
+        )
+        if model.profile_picture_data:
+            image_data = base64.b64decode(model.profile_picture_data)
+            loader = GdkPixbuf.PixbufLoader.new()
+            loader.write(image_data)
+            loader.close()
+            pixbuf = loader.get_pixbuf()
+            texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+            image = Gtk.Image.new_from_paintable(texture)
+            image.set_size_request(64, 64)
+            pfp_button.set_overflow(1)
+            pfp_button.set_child(image)
+
+        file_filter = Gtk.FileFilter()
+        file_filter.add_suffix('png')
+        file_filter.add_suffix('jpg')
+        file_filter.add_suffix('jpeg')
+        file_filter.add_suffix('webp')
+
+        pfp_button.connect('clicked', lambda button: Gtk.FileDialog(default_filter=file_filter).open(window, None, lambda file_dialog, result, button=button, model=model: self.change_pfp(file_dialog, result, button, model)))
+
+        actionrow.add_prefix(pfp_button)
+        window.model_detail_header.set_child(actionrow)
 
         translation_strings={
             'modified_at': _('Modified At'),
@@ -403,53 +469,31 @@ class local_model(Gtk.ListBoxRow):
             'parameter_size': _('Parameter Size'),
             'quantization_level': _('Quantization Level')
         }
-
+        window.model_detail_system.set_label(model.data['system'] if 'system' in model.data else '')
+        window.model_detail_information.remove_all()
         if 'modified_at' in model.data and model.data['modified_at']:
-            details_flow_box.append(information_bow(
+            window.model_detail_information.append(information_bow(
                 title=translation_strings['modified_at'],
                 subtitle=datetime.datetime.strptime(':'.join(model.data['modified_at'].split(':')[:2]), '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
             ))
 
         for name, value in model.data['details'].items():
             if isinstance(value, str):
-                details_flow_box.append(information_bow(
+                window.model_detail_information.append(information_bow(
                     title=translation_strings[name] if name in translation_strings else name.replace('_', ' ').title(),
                     subtitle=value
                 ))
-
-        categories_box = Gtk.FlowBox(
-            hexpand=True,
-            vexpand=False,
-            orientation=0,
-            selection_mode=0,
-            valign=1,
-            halign=0
-        )
+        window.model_detail_categories.remove_all()
         languages = ['en']
         if self.get_name() in available_models:
             languages = available_models[self.get_name()]['languages']
 
         for category in self.categories + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]:
-            categories_box.append(category_pill(category, True))
+            window.model_detail_categories.append(category_pill(category, True))
 
         if 'multilingual' in self.categories and len(languages) == 1:
             window.model_tag_flow_box.append(category_pill('language:Others...', True))
 
-        container_box = Gtk.Box(
-            orientation=1,
-            spacing=10,
-            hexpand=True,
-            vexpand=True,
-            margin_top=12,
-            margin_bottom=12,
-            margin_start=12,
-            margin_end=12
-        )
-
-        container_box.append(details_flow_box)
-        container_box.append(categories_box)
-
-        window.model_detail_page.set_child(container_box)
         window.navigation_view_manage_models.push_by_tag('model_information')
 
 class local_model_list(Gtk.ListBox):
@@ -739,8 +783,8 @@ class model_manager_container(Gtk.Box):
             logger.error(e)
             window.connection_error()
         window.title_stack.set_visible_child_name('model_selector' if len(window.model_manager.get_model_list()) > 0 else 'no_models')
-        #window.title_stack.set_visible_child_name('model_selector')
-        window.chat_list_box.update_welcome_screens(len(self.get_model_list()) > 0)
+        GLib.idle_add(window.chat_list_box.update_profile_pictures)
+        #GLib.idle_add(self.chat_list_box.update_welcome_screens, len(self.model_manager.get_model_list()) > 0)
 
     #Should only be called when the app starts
     def update_available_list(self):

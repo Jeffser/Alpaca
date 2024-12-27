@@ -340,6 +340,11 @@ class chat_list(Gtk.ListBox):
         self.connect("row-selected", lambda listbox, row: self.chat_changed(row))
         self.tab_list = []
 
+    def update_profile_pictures(self):
+        for tab in self.tab_list:
+            for message in tab.chat_window.messages.values():
+                message.update_profile_picture()
+
     def update_welcome_screens(self, show_prompts:bool):
         for tab in self.tab_list:
             if tab.chat_window.welcome_screen:

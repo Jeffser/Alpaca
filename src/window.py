@@ -66,6 +66,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     create_model_name = Gtk.Template.Child()
     create_model_system = Gtk.Template.Child()
     create_model_modelfile = Gtk.Template.Child()
+    create_model_modelfile_section = Gtk.Template.Child()
     tweaks_group = Gtk.Template.Child()
     preferences_dialog = Gtk.Template.Child()
     shortcut_window : Gtk.ShortcutsWindow  = Gtk.Template.Child()
@@ -104,7 +105,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     title_stack = Gtk.Template.Child()
     manage_models_dialog = Gtk.Template.Child()
     model_scroller = Gtk.Template.Child()
-    model_detail_page = Gtk.Template.Child()
+    model_detail_header = Gtk.Template.Child()
+    model_detail_information = Gtk.Template.Child()
+    model_detail_categories = Gtk.Template.Child()
+    model_detail_system = Gtk.Template.Child()
     model_detail_create_button = Gtk.Template.Child()
     ollama_information_label = Gtk.Template.Child()
     default_model_combo = Gtk.Template.Child()
@@ -338,7 +342,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def create_model_start(self, button):
-        name = self.create_model_name.get_text().lower().replace(":", "")
+        name = self.create_model_name.get_text().lower().replace(":", "").replace(" ", "-")
         modelfile_buffer = self.create_model_modelfile.get_buffer()
         modelfile_raw = modelfile_buffer.get_text(modelfile_buffer.get_start_iter(), modelfile_buffer.get_end_iter(), False)
         modelfile = ["FROM {}".format(self.create_model_base.get_subtitle()), "SYSTEM {}".format(self.create_model_system.get_text())]
@@ -464,19 +468,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
         modelfile_buffer.delete(modelfile_buffer.get_start_iter(), modelfile_buffer.get_end_iter())
         self.create_model_system.set_text('')
         if not file:
-            data = next((element for element in list(self.model_manager.model_selector.get_popover().model_list_box) if element.get_name() == self.convert_model_name(model, 1)), None).data
+            data = self.model_manager.model_selector.get_model_by_name(self.convert_model_name(model, 1)).data
             modelfile = []
+            if 'system' in data and data['system']:
+                self.create_model_system.set_text(data['system'])
             for line in data['modelfile'].split('\n'):
-                if line.startswith('SYSTEM'):
-                    self.create_model_system.set_text(line[len('SYSTEM'):].strip())
                 if not line.startswith('SYSTEM') and not line.startswith('FROM') and not line.startswith('#'):
                     modelfile.append(line)
             self.create_model_name.set_text(self.convert_model_name(model, 1).split(':')[0] + "-custom")
             modelfile_buffer.insert(modelfile_buffer.get_start_iter(), '\n'.join(modelfile), len('\n'.join(modelfile).encode('utf-8')))
             self.create_model_base.set_subtitle(self.convert_model_name(model, 1))
+            self.create_model_modelfile_section.set_visible(False)
         else:
             self.create_model_name.set_text(os.path.splitext(os.path.basename(model))[0])
             self.create_model_base.set_subtitle(model)
+            self.create_model_modelfile_section.set_visible(True)
         self.navigation_view_manage_models.push_by_tag('model_create_page')
 
     def show_toast(self, message:str, overlay):
@@ -1004,7 +1010,7 @@ Generate a title following these rules:
         self.model_scroller.set_child(self.model_manager)
 
         #Chat History
-        GLib.idle_add(self.load_history)
+        self.load_history()
 
         if self.get_application().args.new_chat:
             self.chat_list_box.new_chat(self.get_application().args.new_chat)
@@ -1100,6 +1106,12 @@ Generate a title following these rules:
                     type TEXT NOT NULL,
                     name TEXT NOT NULL,
                     content TEXT NOT NULL
+                )
+            """,
+            "model": """
+                CREATE TABLE model (
+                    id TEXT NOT NULL PRIMARY KEY,
+                    picture TEXT NOT NULL
                 )
             """
         }
@@ -1214,7 +1226,7 @@ Generate a title following these rules:
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))
         self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialog_widget.simple_file(file_filter, generic_actions.attach_file))
-        self.create_model_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_']))
+        self.create_model_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
         self.set_focus(self.message_text_view)
 
         configuration = { # Defaults
