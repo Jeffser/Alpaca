@@ -1122,7 +1122,6 @@ Generate a title following these rules:
         sqlite_con.close()
 
     def initial_convert_to_sql(self):
-        return
         if os.path.exists(os.path.join(data_dir, "chats", "chats.json")):
             try:
                 with open(os.path.join(data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
@@ -1152,6 +1151,7 @@ Generate a title following these rules:
 
                     sqlite_con.commit()
                     sqlite_con.close()
+                shutil.move(os.path.join(data_dir, "chats"), os.path.join(data_dir, "chats_OLD"))
             except Exception as e:
                 logger.error(e)
                 pass

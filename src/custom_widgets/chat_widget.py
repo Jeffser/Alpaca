@@ -257,35 +257,6 @@ class chat(Gtk.ScrolledWindow):
                 messages.append(message_data)
         return messages
 
-    def messages_to_dict(self) -> dict:
-        messages_dict = {}
-        for message_id, message_element in self.messages.items():
-            if message_element.text and message_element.dt:
-                message_author = 'user'
-                if message_element.bot:
-                    message_author = 'assistant'
-                if message_element.system:
-                    message_author = 'system'
-                messages_dict[message_id] = {
-                    'role': message_author,
-                    'model': message_element.model,
-                    'date': message_element.dt.strftime("%Y/%m/%d %H:%M:%S"),
-                    'content': message_element.text
-                }
-
-                if message_element.image_c:
-                    images = []
-                    for file in message_element.image_c.files:
-                        images.append(file.get_name())
-                    messages_dict[message_id]['images'] = images
-
-                if message_element.attachment_c:
-                    files = {}
-                    for file in message_element.attachment_c.files:
-                        files[file.file_name] = file.file_type
-                    messages_dict[message_id]['files'] = files
-        return messages_dict
-
     def show_regenerate_button(self, msg:message):
         if self.regenerate_button:
             self.remove(self.regenerate_button)
