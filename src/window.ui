@@ -1250,9 +1250,9 @@
       <suffix>gif</suffix>
     </suffixes>
   </object>
-  <object class="GtkFileFilter" id="file_filter_tar">
+  <object class="GtkFileFilter" id="file_filter_db">
     <mime-types>
-      <mime-type>application/x-tar</mime-type>
+      <mime-type>application/vnd.sqlite3</mime-type>
     </mime-types>
   </object>
   <object class="GtkFileFilter" id="file_filter_gguf">

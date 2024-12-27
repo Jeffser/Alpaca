@@ -84,7 +84,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     stop_button = Gtk.Template.Child()
     attachment_container = Gtk.Template.Child()
     attachment_box = Gtk.Template.Child()
-    file_filter_tar = Gtk.Template.Child()
+    file_filter_db = Gtk.Template.Child()
     file_filter_gguf = Gtk.Template.Child()
     file_filter_attachments = Gtk.Template.Child()
     attachment_button = Gtk.Template.Child()

@@ -522,7 +522,7 @@ class chat_list(Gtk.ListBox):
 
     def import_chat(self):
         logger.info("Importing chat")
-        file_dialog = Gtk.FileDialog()
+        file_dialog = Gtk.FileDialog(default_filter=window.file_filter_db)
         file_dialog.open(window, None, self.on_chat_imported)
 
     def chat_changed(self, row):
