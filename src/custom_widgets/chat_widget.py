@@ -8,7 +8,7 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 import logging, os, datetime, shutil, random, tempfile, tarfile, json, sqlite3
-from ..internal import data_dir
+from ..internal import data_dir, cache_dir
 from .message_widget import message
 
 logger = logging.getLogger(__name__)
@@ -453,51 +453,72 @@ class chat_list(Gtk.ListBox):
         file.replace_contents_finish(result)
         window.show_toast(_("Chat exported successfully"), window.main_overlay)
 
-    def on_export_chat(self, file_dialog, result, chat_name):
+    def on_export_chat(self, file_dialog, result, db_path):
         file = file_dialog.save_finish(result)
-        if not file:
-            return
-        json_data = json.dumps({chat_name: {"messages": self.get_chat_by_name(chat_name).messages_to_dict()}}, indent=4).encode("UTF-8")
-        markdown_text = self.get_chat_by_name(chat_name).messages_to_md()
-
-        with tempfile.TemporaryDirectory() as temp_dir:
-            json_path = os.path.join(temp_dir, "data.json")
-            with open(json_path, "wb") as json_file:
-                json_file.write(json_data)
-
-            markdown_path = os.path.join(temp_dir, '{}.md'.format(chat_name))
-            with open(markdown_path, "w") as md_file:
-                md_file.write(markdown_text)
-
-            tar_path = os.path.join(temp_dir, chat_name)
-            with tarfile.open(tar_path, "w") as tar:
-                tar.add(json_path, arcname="data.json")
-                tar.add(markdown_path, arcname="{}.md".format(chat_name))
-                directory = os.path.join(data_dir, "chats", chat_name)
-                if os.path.exists(directory) and os.path.isdir(directory):
-                    tar.add(directory, arcname=os.path.basename(directory))
-
-            with open(tar_path, "rb") as tar:
-                tar_content = tar.read()
-
-            file.replace_contents_async(
-                tar_content,
-                etag=None,
-                make_backup=False,
-                flags=Gio.FileCreateFlags.NONE,
-                cancellable=None,
-                callback=self.on_replace_contents
-            )
+        if file:
+            with open(db_path, "rb") as db:
+                file.replace_contents_async(
+                    db.read(),
+                    etag=None,
+                    make_backup=False,
+                    flags=Gio.FileCreateFlags.NONE,
+                    cancellable=None,
+                    callback=self.on_replace_contents
+                )
 
     def export_chat(self, chat_name:str):
         logger.info("Exporting chat")
-        file_dialog = Gtk.FileDialog(initial_name=f"{chat_name}.tar")
-        file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, chat_name=chat_name: self.on_export_chat(file_dialog, result, chat_name))
+        chat = self.get_chat_by_name(chat_name)
+        if chat:
+            if os.path.isfile(os.path.join(cache_dir, 'export.db')):
+                os.remove(os.path.join(cache_dir, 'export.db'))
+            sqlite_con = sqlite3.connect(window.sqlite_path)
+            cursor = sqlite_con.cursor()
+            cursor.execute("ATTACH DATABASE ? AS export", (os.path.join(cache_dir, 'export.db'),))
+            cursor.execute("CREATE TABLE export.chat AS SELECT * FROM chat WHERE id=?", (chat.chat_id,))
+            cursor.execute("CREATE TABLE export.message AS SELECT * FROM message WHERE chat_id=?", (chat.chat_id,))
+            cursor.execute("CREATE TABLE export.attachment AS SELECT a.* FROM attachment as a JOIN message m ON a.message_id = m.id WHERE m.chat_id=?", (chat.chat_id,))
+            sqlite_con.commit()
+            sqlite_con.close()
+        file_dialog = Gtk.FileDialog(initial_name=f"{chat_name}.db")
+        file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, db_path=os.path.join(cache_dir, 'export.db'): self.on_export_chat(file_dialog, result, db_path))
 
     def on_chat_imported(self, file_dialog, result):
         file = file_dialog.open_finish(result)
-        if not file:
-            return
+        if file:
+            if os.path.isfile(os.path.join(cache_dir, 'import.db')):
+                os.remove(os.path.join(cache_dir, 'import.db'))
+            file.copy(Gio.File.new_for_path(os.path.join(cache_dir, 'import.db')), Gio.FileCopyFlags.OVERWRITE, None, None, None, None)
+            sqlite_con = sqlite3.connect(window.sqlite_path)
+            cursor = sqlite_con.cursor()
+            cursor.execute("ATTACH DATABASE ? AS import", (os.path.join(cache_dir, 'import.db'),))
+            # Check repeated chat.name
+            for repeated_chat in cursor.execute("SELECT import.chat.id, import.chat.name FROM import.chat JOIN chat dbchat ON import.chat.name = dbchat.name").fetchall():
+                new_name = window.generate_numbered_name(repeated_chat[1], [tab.chat_window.get_name() for tab in self.tab_list])
+                cursor.execute("UPDATE import.chat SET name=? WHERE id=?", (repeated_chat[1], repeated_chat[0]))
+            # Check repeated chat.id
+            for repeated_chat in cursor.execute("SELECT import.chat.id FROM import.chat JOIN chat dbchat ON import.chat.id = dbchat.id").fetchall():
+                new_id = window.generate_uuid()
+                cursor.execute("UPDATE import.chat SET id=? WHERE id=?", (new_id, repeated_chat[0]))
+                cursor.execute("UPDATE import.message SET chat_id=? WHERE chat_id=?", (new_id, repeated_chat[0]))
+            # Check repeated message.id
+            for repeated_message in cursor.execute("SELECT import.message.id FROM import.message JOIN message dbmessage ON import.message.id = dbmessage.id").fetchall():
+                new_id = window.generate_uuid()
+                cursor.execute("UPDATE import.attachment SET message_id=? WHERE message_id=?", (new_id, repeated_message[0]))
+                cursor.execute("UPDATE import.message SET id=? WHERE id=?", (new_id, repeated_message[0]))
+            # Check repeated attachment.id
+            for repeated_attachment in cursor.execute("SELECT import.attachment.id FROM import.attachment JOIN attachment dbattachment ON import.attachment.id = dbattachment.id").fetchall():
+                new_id = window.generate_uuid()
+                cursor.execute("UPDATE import.attachment SET id=? WHERE id=?", (new_id, repeated_attachment[0]))
+            # Import
+            cursor.execute("INSERT INTO chat SELECT * FROM import.chat")
+            cursor.execute("INSERT INTO message SELECT * FROM import.message")
+            cursor.execute("INSERT INTO attachment SELECT * FROM import.attachment")
+            sqlite_con.commit()
+            for chat in cursor.execute("SELECT * FROM import.chat"):
+                self.prepend_chat(chat[1], chat[0]).load_chat_messages()
+            sqlite_con.close()
+        return
         stream = file.read(None)
         data_stream = Gio.DataInputStream.new(stream)
         tar_content = data_stream.read_bytes(1024 * 1024, None)
@@ -531,7 +552,7 @@ class chat_list(Gtk.ListBox):
 
     def import_chat(self):
         logger.info("Importing chat")
-        file_dialog = Gtk.FileDialog(default_filter=window.file_filter_tar)
+        file_dialog = Gtk.FileDialog()
         file_dialog.open(window, None, self.on_chat_imported)
 
     def chat_changed(self, row):
