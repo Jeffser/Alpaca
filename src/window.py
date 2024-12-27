@@ -200,28 +200,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         message_id = self.generate_uuid()
 
-        attached_images = []
-        attached_files = {}
-        for name, content in self.attachments.items():
-            if content["type"] == 'image':
-                if self.model_manager.verify_if_image_can_be_used():
-                    attached_images.append(os.path.join(data_dir, "chats", current_chat.get_name(), message_id, name))
-            else:
-                attached_files[os.path.join(data_dir, "chats", current_chat.get_name(), message_id, name)] = content['type']
-            if not os.path.exists(os.path.join(data_dir, "chats", current_chat.get_name(), message_id)):
-                os.makedirs(os.path.join(data_dir, "chats", current_chat.get_name(), message_id))
-            shutil.copy(content['path'], os.path.join(data_dir, "chats", current_chat.get_name(), message_id, name))
-            content["button"].get_parent().remove(content["button"])
-        self.attachments = {}
-        self.attachment_box.set_visible(False)
         raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
         current_chat.add_message(message_id, None, system)
         m_element = current_chat.messages[message_id]
 
-        if len(attached_files) > 0:
-            m_element.add_attachments(attached_files)
-        if len(attached_images) > 0:
-            m_element.add_images(attached_images)
+        for name, content in self.attachments.items():
+            cursor.execute("INSERT INTO attachment (id, message_id, type, name, content) VALUES (?, ?, ?, ?, ?)",(
+                self.generate_uuid(), message_id, content['type'], name, content['content']))
+            m_element.add_attachment(name, content['type'], content['content'])
+            content["button"].get_parent().remove(content["button"])
+        self.attachments = {}
+        self.attachment_box.set_visible(False)
+
         m_element.set_text(raw_message)
         m_element.add_footer(datetime.now())
 

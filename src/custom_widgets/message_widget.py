@@ -512,21 +512,6 @@ class message(Adw.Bin):
                 self.container.append(self.attachment_c)
                 self.attachment_c.add_file(attachment(name, attachment_type, content))
 
-
-    def add_attachments(self, attachments:dict):
-        self.attachment_c = attachment_container()
-        self.container.append(self.attachment_c)
-        for file_path, file_type in attachments.items():
-            file = attachment(os.path.basename(file_path), file_path, file_type)
-            self.attachment_c.add_file(file)
-
-    def add_images(self, images:list):
-        self.image_c = image_container()
-        self.container.append(self.image_c)
-        for image_path in images:
-            image_element = image(image_path)
-            self.image_c.add_image(image_element)
-
     def add_footer(self, dt:datetime.datetime):
         self.dt = dt
         self.footer = footer(self.dt, self.model, self.system)
