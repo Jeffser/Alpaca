@@ -506,8 +506,8 @@ class local_model(Gtk.ListBoxRow):
                 ))
         window.model_detail_categories.remove_all()
         languages = ['en']
-        if self.get_name() in available_models:
-            languages = available_models[self.get_name()]['languages']
+        if model.get_name().split(':')[0] in available_models:
+            languages = available_models[model.get_name().split(':')[0]]['languages']
 
         for category in self.categories + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]:
             window.model_detail_categories.append(category_pill(category, True))
