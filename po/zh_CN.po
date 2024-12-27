@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.6.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-25 17:56-0600\n"
+"POT-Creation-Date: 2024-12-27 15:11-0600\n"
 "PO-Revision-Date: 2024-10-27 19:10+0100\n"
 "Last-Translator: Yuehao Sui <8ar10der@amao.run>\n"
 "Language-Team: Simplified Chinese\n"
@@ -84,7 +84,7 @@ msgstr "将来自网站的文本添加到提示中"
 msgid "PDF recognition"
 msgstr "PDF 识别"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:1090
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:1121
 msgid "Disclaimer"
 msgstr "免责声明"
 
@@ -1557,119 +1557,135 @@ msgstr ""
 msgid "This is the first public version of Alpaca"
 msgstr ""
 
-#: src/window.py:142 src/window.py:985 src/custom_widgets/message_widget.py:40
+#: src/window.py:147 src/window.py:947 src/custom_widgets/message_widget.py:40
+#: src/custom_widgets/model_widget.py:439
 #: src/custom_widgets/dialog_widget.py:136
 #: src/custom_widgets/dialog_widget.py:148
 #: src/custom_widgets/dialog_widget.py:160
 msgid "Cancel"
 msgstr "取消"
 
-#: src/window.py:143 src/window.py:735 src/window.py:986
+#: src/window.py:148 src/window.py:693 src/window.py:948
 msgid "Connect"
 msgstr "连接"
 
-#: src/window.py:146 src/window.py:737 src/window.py:989
+#: src/window.py:151 src/window.py:695 src/window.py:951
 msgid "Server URL"
 msgstr ""
 
-#: src/window.py:147 src/window.py:738 src/window.py:990
+#: src/window.py:152 src/window.py:696 src/window.py:952
 msgid "Bearer Token (Optional)"
 msgstr "令牌（可选）"
 
-#: src/window.py:150 src/window.py:993
+#: src/window.py:155 src/window.py:955
 msgid "Connect Remote Instance"
 msgstr ""
 
-#: src/window.py:151 src/window.py:994
+#: src/window.py:156 src/window.py:956
 msgid "Enter instance information to continue"
 msgstr ""
 
-#: src/window.py:194 src/window.py:1016
+#: src/window.py:199 src/window.py:978
 msgid "Please select a model before chatting"
 msgstr "请在对话前先选择一个模型"
 
-#: src/window.py:252 src/window.py:253
+#: src/window.py:260 src/window.py:261
 msgid "Close"
 msgstr "关闭"
 
-#: src/window.py:255 src/window.py:256 src/window.ui:1043
+#: src/window.py:263 src/window.py:264 src/window.ui:1074
 msgid "Next"
 msgstr "下一页"
 
-#: src/window.py:379
+#: src/window.py:387
 msgid "image"
 msgstr "图像"
 
-#: src/window.py:489
-msgid "Missing file"
-msgstr "文件缺失"
-
-#: src/window.py:626 src/window.py:685 src/window.py:705 src/window.py:707
-#: src/window.ui:31 src/custom_widgets/chat_widget.py:360
+#: src/window.py:614 src/window.ui:31 src/custom_widgets/chat_widget.py:400
 msgid "New Chat"
 msgstr "新对话"
 
-#: src/window.py:731
+#: src/window.py:689
 msgid "Close Alpaca"
 msgstr "关闭 Alpaca"
 
-#: src/window.py:734
+#: src/window.py:692
 msgid "Use Local Instance"
 msgstr ""
 
-#: src/window.py:740
+#: src/window.py:698
 msgid "Connection Error"
 msgstr "连接错误"
 
-#: src/window.py:740
+#: src/window.py:698
 msgid "The remote instance has disconnected"
 msgstr "无法连接远端实例"
 
-#: src/window.py:743
+#: src/window.py:701
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr "本地 Ollama 实例出错，已重置"
 
-#: src/window.py:765
+#: src/window.py:723
 msgid "Cannot open image"
 msgstr "无法打开图片"
 
-#: src/window.py:853
+#: src/window.py:811
 msgid "Delete Chat?"
 msgstr "删除聊天？"
 
-#: src/window.py:854 src/custom_widgets/model_widget.py:355
+#: src/window.py:812 src/custom_widgets/model_widget.py:371
 msgid "Are you sure you want to delete '{}'?"
 msgstr "你确定你想要删除 '{}' 吗？"
 
-#: src/window.py:856 src/custom_widgets/model_widget.py:357
+#: src/window.py:814 src/custom_widgets/model_widget.py:373
 msgid "Delete"
 msgstr "删除"
 
-#: src/window.py:863
+#: src/window.py:821
 msgid "Rename Chat?"
 msgstr "重命名聊天？"
 
-#: src/window.py:864
+#: src/window.py:822
 msgid "Renaming '{}'"
 msgstr "重命名 '{}'"
 
-#: src/window.py:866
+#: src/window.py:824
 msgid "Chat name"
 msgstr ""
 
-#: src/window.py:867
+#: src/window.py:825
 msgid "Rename"
 msgstr "重命名"
 
-#: src/window.py:890
+#: src/window.py:830
+msgid "Importable (.db)"
+msgstr ""
+
+#: src/window.py:831
+msgid "Markdown"
+msgstr ""
+
+#: src/window.py:832
+msgid "Markdown (Obsidian Style)"
+msgstr ""
+
+#: src/window.py:835 src/window.ui:1169 src/window.ui:1195
+msgid "Export Chat"
+msgstr "导出聊天"
+
+#: src/window.py:836
+msgid "Select a method to export the chat"
+msgstr ""
+
+#: src/window.py:852
 msgid "This video does not have any transcriptions"
 msgstr "本视频没有任何转录内容"
 
-#: src/window.py:897
+#: src/window.py:859
 msgid "Attach YouTube Video?"
 msgstr "附加 YouTube 视频？"
 
-#: src/window.py:898
+#: src/window.py:860
 msgid ""
 "{}\n"
 "\n"
@@ -1679,15 +1695,15 @@ msgstr ""
 "\n"
 "请选择要附加的转录"
 
-#: src/window.py:904
+#: src/window.py:866
 msgid "Error attaching video, please try again"
 msgstr ""
 
-#: src/window.py:924
+#: src/window.py:886
 msgid "Attach Website? (Experimental)"
 msgstr "附加网站？（试验性）"
 
-#: src/window.py:925
+#: src/window.py:887
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
@@ -1695,43 +1711,43 @@ msgstr ""
 "您确定要附加\n"
 "'{}'?"
 
-#: src/window.py:943 src/generic_actions.py:90
+#: src/window.py:905 src/generic_actions.py:92
 msgid "Image recognition is only available on specific models"
 msgstr "图像识别功能仅适用于特定模型"
 
-#: src/window.py:1009
+#: src/window.py:971
 msgid "An error occurred: {}"
 msgstr ""
 
-#: src/window.py:1018 src/window.ui:550
+#: src/window.py:980 src/window.ui:550
 msgid "Quick Ask"
 msgstr ""
 
-#: src/window.py:1154
+#: src/window.py:1198
 msgid "Clear Chat?"
 msgstr "清除聊天记录？"
 
-#: src/window.py:1154
+#: src/window.py:1198
 msgid "Are you sure you want to clear the chat?"
 msgstr "你确定你想要清除聊天记录吗？"
 
-#: src/window.py:1154
+#: src/window.py:1198
 msgid "Clear"
 msgstr "清除"
 
-#: src/window.py:1156
+#: src/window.py:1200
 msgid "Select Model"
 msgstr "选择模型"
 
-#: src/window.py:1156
+#: src/window.py:1200
 msgid "This model will be used as the base for the new model"
 msgstr "该模型将作为新模型的基础"
 
-#: src/window.py:1158
+#: src/window.py:1202
 msgid "Pull Model"
 msgstr "拉取模型"
 
-#: src/window.py:1158
+#: src/window.py:1202
 msgid ""
 "Input the name of the model in this format\n"
 "name:tag"
@@ -1739,15 +1755,15 @@ msgstr ""
 "按照此格式输入模型名\n"
 "name:tag"
 
-#: src/window.py:1182
+#: src/window.py:1226
 msgid "Remove Attachment?"
 msgstr "移除附件？"
 
-#: src/window.py:1182
+#: src/window.py:1226
 msgid "Are you sure you want to remove attachment?"
 msgstr "你确定你想要移除附件？"
 
-#: src/window.py:1182
+#: src/window.py:1226 src/custom_widgets/model_widget.py:440
 msgid "Remove"
 msgstr "移除"
 
@@ -2681,7 +2697,7 @@ msgstr ""
 msgid "Loading Instance"
 msgstr ""
 
-#: src/window.ui:105 src/window.ui:106 src/window.ui:609 src/window.ui:1108
+#: src/window.ui:105 src/window.ui:106 src/window.ui:609 src/window.ui:1139
 #: src/custom_widgets/model_widget.py:26 src/custom_widgets/model_widget.py:27
 msgid "Manage Models"
 msgstr "管理模型"
@@ -2711,15 +2727,15 @@ msgstr "附加文件"
 msgid "Message text box"
 msgstr "消息文本框"
 
-#: src/window.ui:248 src/window.ui:1352
+#: src/window.ui:248 src/window.ui:1383
 msgid "Send Message"
 msgstr "发送消息"
 
-#: src/window.ui:298 src/window.ui:1114 src/window.ui:1293
+#: src/window.ui:298 src/window.ui:1145 src/window.ui:1324
 msgid "Preferences"
 msgstr "首选项"
 
-#: src/window.ui:301 src/window.ui:1271
+#: src/window.ui:301 src/window.ui:1302
 msgid "General"
 msgstr "通用"
 
@@ -2832,7 +2848,7 @@ msgstr "管理模型对话框"
 msgid "Terminal"
 msgstr ""
 
-#: src/window.ui:619 src/window.ui:802
+#: src/window.ui:619 src/window.ui:833
 msgid "Create Model"
 msgstr "创建模型"
 
@@ -2874,19 +2890,19 @@ msgstr "下载此模型即表示您接受模型网站上的许可协议。"
 msgid "Model Details"
 msgstr ""
 
-#: src/window.ui:830
+#: src/window.ui:861
 msgid "Base"
 msgstr "基础"
 
-#: src/window.ui:849
+#: src/window.ui:880
 msgid "Name"
 msgstr "名称"
 
-#: src/window.ui:855
+#: src/window.ui:886
 msgid "Context"
 msgstr "上下文"
 
-#: src/window.ui:902
+#: src/window.ui:933
 msgid ""
 "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
 "instructions automatically. Please visit the model's website or Ollama "
@@ -2895,39 +2911,39 @@ msgstr ""
 "有些模型需要一个模型文件，Alpaca 会自动填写 FROM 和 SYSTEM（上下文）说明。如"
 "果您不确定，请访问模型网站或 Ollama 文档以获取更多信息。"
 
-#: src/window.ui:918
+#: src/window.ui:949
 msgid "Create"
 msgstr "创建"
 
-#: src/window.ui:941
+#: src/window.ui:972
 msgid "File preview dialog"
 msgstr "文件预览对话框"
 
-#: src/window.ui:951
+#: src/window.ui:982
 msgid "Open With Default App"
 msgstr "用默认应用打开"
 
-#: src/window.ui:959
+#: src/window.ui:990
 msgid "Remove Attachment"
 msgstr "移除附件"
 
-#: src/window.ui:1027
+#: src/window.ui:1058
 msgid "Previous"
 msgstr "上一个"
 
-#: src/window.ui:1070
+#: src/window.ui:1101
 msgid "Welcome to Alpaca"
 msgstr "欢迎来到 Alpaca"
 
-#: src/window.ui:1071
+#: src/window.ui:1102
 msgid "Powered by Ollama"
 msgstr "基于 Ollama"
 
-#: src/window.ui:1074
+#: src/window.ui:1105
 msgid "Ollama Website"
 msgstr "Ollama 网站"
 
-#: src/window.ui:1091
+#: src/window.ui:1122
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -2936,103 +2952,99 @@ msgstr ""
 "对于因执行人工智能模型生成的代码而对设备或软件造成的任何损害，Alpaca 及其开发"
 "人员概不负责。请谨慎行事，在运行代码前仔细检查。"
 
-#: src/window.ui:1104
+#: src/window.ui:1135
 msgid "Import Chat"
 msgstr "导入聊天"
 
-#: src/window.ui:1118
+#: src/window.ui:1149
 msgid "Keyboard Shortcuts"
 msgstr "快捷键"
 
-#: src/window.ui:1122
+#: src/window.ui:1153
 msgid "About Alpaca"
 msgstr "关于 Alpaca"
 
-#: src/window.ui:1130 src/window.ui:1156
+#: src/window.ui:1161 src/window.ui:1187
 msgid "Rename Chat"
 msgstr "重命名聊天"
 
-#: src/window.ui:1134 src/window.ui:1160
+#: src/window.ui:1165 src/window.ui:1191
 msgid "Duplicate Chat"
 msgstr "复制聊天"
 
-#: src/window.ui:1138 src/window.ui:1164
-msgid "Export Chat"
-msgstr "导出聊天"
-
-#: src/window.ui:1142
+#: src/window.ui:1173
 msgid "Clear Chat"
 msgstr "清除聊天"
 
-#: src/window.ui:1148 src/window.ui:1170
+#: src/window.ui:1179 src/window.ui:1201
 msgid "Delete Chat"
 msgstr "删除聊天"
 
-#: src/window.ui:1178
+#: src/window.ui:1209
 msgid "Send as User"
 msgstr ""
 
-#: src/window.ui:1182
+#: src/window.ui:1213
 msgid "Send as System"
 msgstr ""
 
-#: src/window.ui:1190
+#: src/window.ui:1221
 msgid "From Existing Model"
 msgstr "从现有模型"
 
-#: src/window.ui:1194
+#: src/window.ui:1225
 msgid "From GGUF File"
 msgstr "从 GGUF 文件"
 
-#: src/window.ui:1198
+#: src/window.ui:1229
 msgid "From Name"
 msgstr "从名称"
 
-#: src/window.ui:1275
+#: src/window.ui:1306
 msgid "Close application"
 msgstr "关闭应用"
 
-#: src/window.ui:1281
+#: src/window.ui:1312
 msgid "Import chat"
 msgstr "导入聊天"
 
-#: src/window.ui:1287
+#: src/window.ui:1318
 msgid "Clear chat"
 msgstr "清除聊天"
 
-#: src/window.ui:1299
+#: src/window.ui:1330
 msgid "New chat"
 msgstr "新建聊天"
 
-#: src/window.ui:1305
+#: src/window.ui:1336
 msgid "Show shortcuts window"
 msgstr "显示快捷键窗口"
 
-#: src/window.ui:1311
+#: src/window.ui:1342
 msgid "Manage models"
 msgstr "管理模型"
 
-#: src/window.ui:1317
+#: src/window.ui:1348
 msgid "Toggle sidebar"
 msgstr "切换侧边栏"
 
-#: src/window.ui:1323
+#: src/window.ui:1354
 msgid "Rename chat"
 msgstr "重命名聊天"
 
-#: src/window.ui:1330
+#: src/window.ui:1361
 msgid "Editor"
 msgstr "编辑器"
 
-#: src/window.ui:1334
+#: src/window.ui:1365
 msgid "Copy"
 msgstr "复制"
 
-#: src/window.ui:1340
+#: src/window.ui:1371
 msgid "Paste"
 msgstr "粘贴"
 
-#: src/window.ui:1346
+#: src/window.ui:1377
 msgid "Insert new line"
 msgstr "插入新行"
 
@@ -3044,50 +3056,50 @@ msgstr ""
 msgid "Quick ask"
 msgstr ""
 
-#: src/generic_actions.py:73
+#: src/generic_actions.py:75
 msgid "An error occurred while extracting text from the website"
 msgstr "从网站提取文本时发生错误"
 
-#: src/custom_widgets/chat_widget.py:120
+#: src/custom_widgets/chat_widget.py:121
 msgid "Send prompt: '{}'"
 msgstr "发送提示： '{}'"
 
-#: src/custom_widgets/chat_widget.py:126 src/custom_widgets/chat_widget.py:127
+#: src/custom_widgets/chat_widget.py:127 src/custom_widgets/chat_widget.py:128
 msgid "Open Model Manager"
 msgstr "打开模型管理器"
 
-#: src/custom_widgets/chat_widget.py:136
+#: src/custom_widgets/chat_widget.py:137
 msgid "Try one of these prompts"
 msgstr "试试这些提示"
 
-#: src/custom_widgets/chat_widget.py:136
+#: src/custom_widgets/chat_widget.py:137
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
 msgstr "看起来您还没有下载任何模型。开始使用前下载模型！"
 
-#: src/custom_widgets/chat_widget.py:171
-msgid "User"
-msgstr ""
-
-#: src/custom_widgets/chat_widget.py:175
-#: src/custom_widgets/message_widget.py:449
-msgid "System"
-msgstr ""
-
-#: src/custom_widgets/chat_widget.py:231
-msgid "Regenerate Response"
-msgstr "重新生成回复"
-
-#: src/custom_widgets/chat_widget.py:398
-msgid "Copy of {}"
-msgstr "{}的副本"
-
-#: src/custom_widgets/chat_widget.py:410
+#: src/custom_widgets/chat_widget.py:165
 msgid "Chat exported successfully"
 msgstr "聊天记录已成功导出"
 
-#: src/custom_widgets/chat_widget.py:486
+#: src/custom_widgets/chat_widget.py:187
+msgid "User"
+msgstr ""
+
+#: src/custom_widgets/chat_widget.py:191
+#: src/custom_widgets/message_widget.py:455
+msgid "System"
+msgstr ""
+
+#: src/custom_widgets/chat_widget.py:266
+msgid "Regenerate Response"
+msgstr "重新生成回复"
+
+#: src/custom_widgets/chat_widget.py:453
+msgid "Copy of {}"
+msgstr "{}的副本"
+
+#: src/custom_widgets/chat_widget.py:508
 msgid "Chat imported successfully"
 msgstr "聊天记录已成功导入"
 
@@ -3095,56 +3107,56 @@ msgstr "聊天记录已成功导入"
 msgid "Save Message"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:82
+#: src/custom_widgets/message_widget.py:88
 msgid "Message edited successfully"
 msgstr "更改消息成功"
 
-#: src/custom_widgets/message_widget.py:107
+#: src/custom_widgets/message_widget.py:113
 msgid "Response message"
 msgstr "回复消息"
 
-#: src/custom_widgets/message_widget.py:109
+#: src/custom_widgets/message_widget.py:115
 msgid "System message"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:111
+#: src/custom_widgets/message_widget.py:117
 msgid "User message"
 msgstr "用户消息"
 
-#: src/custom_widgets/message_widget.py:151
+#: src/custom_widgets/message_widget.py:157
 msgid "{}Code Block"
 msgstr "{}代码块"
 
-#: src/custom_widgets/message_widget.py:154
+#: src/custom_widgets/message_widget.py:160
 msgid "Code Block"
 msgstr "代码块"
 
-#: src/custom_widgets/message_widget.py:155
-#: src/custom_widgets/message_widget.py:344
+#: src/custom_widgets/message_widget.py:161
+#: src/custom_widgets/message_widget.py:343
 msgid "Copy Message"
 msgstr "复制消息"
 
-#: src/custom_widgets/message_widget.py:159
-#: src/custom_widgets/message_widget.py:181
+#: src/custom_widgets/message_widget.py:165
+#: src/custom_widgets/message_widget.py:187
 msgid "Run Script"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:174
+#: src/custom_widgets/message_widget.py:180
 msgid "Code copied to the clipboard"
 msgstr "代码已复制到剪切板"
 
-#: src/custom_widgets/message_widget.py:182
+#: src/custom_widgets/message_widget.py:188
 msgid ""
 "Make sure you understand what this script does before running it, Alpaca is "
 "not responsible for any damages to your device or data"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:184
+#: src/custom_widgets/message_widget.py:190
 msgid "Execute"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:265
-#: src/custom_widgets/message_widget.py:267
+#: src/custom_widgets/message_widget.py:264
+#: src/custom_widgets/message_widget.py:266
 msgid "Image"
 msgstr "图像"
 
@@ -3157,186 +3169,202 @@ msgstr "无图像"
 msgid "Missing image"
 msgstr "无图像"
 
-#: src/custom_widgets/message_widget.py:334
+#: src/custom_widgets/message_widget.py:333
 msgid "Remove Message"
 msgstr "移除消息"
 
-#: src/custom_widgets/message_widget.py:354
+#: src/custom_widgets/message_widget.py:353
 msgid "Edit Message"
 msgstr "编辑消息"
 
-#: src/custom_widgets/message_widget.py:365
+#: src/custom_widgets/message_widget.py:364
 msgid "Regenerate Message"
 msgstr "重新生成消息"
 
-#: src/custom_widgets/message_widget.py:386
+#: src/custom_widgets/message_widget.py:388
 msgid "Message copied to the clipboard"
 msgstr "消息已复制到剪切板"
 
-#: src/custom_widgets/message_widget.py:422
+#: src/custom_widgets/message_widget.py:423
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "当收到回复时无法重新生成信息"
 
-#: src/custom_widgets/model_widget.py:174
+#: src/custom_widgets/model_widget.py:190
 msgid "Stop Pulling '{}'"
 msgstr "停止拉取 '{}'"
 
-#: src/custom_widgets/model_widget.py:177
+#: src/custom_widgets/model_widget.py:193
 msgid "Stop Download?"
 msgstr "停止下载？"
 
-#: src/custom_widgets/model_widget.py:178
+#: src/custom_widgets/model_widget.py:194
 msgid "Are you sure you want to stop pulling '{}'?"
 msgstr "你确定要停止拉取 '{}' 吗？"
 
-#: src/custom_widgets/model_widget.py:180
+#: src/custom_widgets/model_widget.py:196
 msgid "Stop"
 msgstr "停止"
 
-#: src/custom_widgets/model_widget.py:279
+#: src/custom_widgets/model_widget.py:295
 msgid "Multilingual"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:280
+#: src/custom_widgets/model_widget.py:296
 msgid "Code"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:281
+#: src/custom_widgets/model_widget.py:297
 msgid "Math"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:282
+#: src/custom_widgets/model_widget.py:298
 msgid "Vision"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:283
+#: src/custom_widgets/model_widget.py:299
 msgid "Embedding"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:284
+#: src/custom_widgets/model_widget.py:300
 msgid "Small"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:285
+#: src/custom_widgets/model_widget.py:301
 msgid "Medium"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:286
+#: src/custom_widgets/model_widget.py:302
 msgid "Big"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:287
+#: src/custom_widgets/model_widget.py:303
 msgid "Huge"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:340
+#: src/custom_widgets/model_widget.py:356
 msgid "Details"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:350
+#: src/custom_widgets/model_widget.py:366
 msgid "Remove '{}'"
 msgstr "移除 '{}'"
 
-#: src/custom_widgets/model_widget.py:354
+#: src/custom_widgets/model_widget.py:370
 msgid "Delete Model?"
 msgstr "删除模型？"
 
-#: src/custom_widgets/model_widget.py:387
+#: src/custom_widgets/model_widget.py:441
+msgid "Change"
+msgstr ""
+
+#: src/custom_widgets/model_widget.py:443
+msgid "Model Profile Picture"
+msgstr ""
+
+#: src/custom_widgets/model_widget.py:443
+msgid "What do you want to do with the model's profile picture?"
+msgstr ""
+
+#: src/custom_widgets/model_widget.py:451
 msgid "Create Model Based on '{}'"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:399
+#: src/custom_widgets/model_widget.py:466
+msgid "Change Model Picture"
+msgstr ""
+
+#: src/custom_widgets/model_widget.py:486
 msgid "Modified At"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:400
+#: src/custom_widgets/model_widget.py:487
 msgid "Parent Model"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:401
+#: src/custom_widgets/model_widget.py:488
 msgid "Format"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:402
+#: src/custom_widgets/model_widget.py:489
 msgid "Family"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:403
+#: src/custom_widgets/model_widget.py:490
 msgid "Parameter Size"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:404
+#: src/custom_widgets/model_widget.py:491
 msgid "Quantization Level"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:532
+#: src/custom_widgets/model_widget.py:597
 msgid "Enter download menu for {}"
 msgstr "输入 {} 的下载菜单"
 
-#: src/custom_widgets/model_widget.py:566
+#: src/custom_widgets/model_widget.py:631
 msgid "Embedding Model"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:567
+#: src/custom_widgets/model_widget.py:632
 msgid ""
 "This model is meant to be used in the training of other models and won't "
 "work directly with Alpaca. Are you sure you want to download it anyway?"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:569
-#: src/custom_widgets/model_widget.py:577
+#: src/custom_widgets/model_widget.py:634
+#: src/custom_widgets/model_widget.py:642
 msgid "Download"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:574
+#: src/custom_widgets/model_widget.py:639
 msgid "Large Model"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:575
+#: src/custom_widgets/model_widget.py:640
 msgid ""
 "This model might be too large to run optimally. Are you sure you want to "
 "download it anyway?"
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:600
+#: src/custom_widgets/model_widget.py:665
 msgid "Others..."
 msgstr ""
 
-#: src/custom_widgets/model_widget.py:611
+#: src/custom_widgets/model_widget.py:676
 msgid "Download {}:{}"
 msgstr "下载 {}:{}"
 
-#: src/custom_widgets/model_widget.py:702
+#: src/custom_widgets/model_widget.py:768
 msgid "Model deleted successfully"
 msgstr "模型删除成功"
 
-#: src/custom_widgets/model_widget.py:782
+#: src/custom_widgets/model_widget.py:848
 msgid "Task Complete"
 msgstr "任务完成"
 
-#: src/custom_widgets/model_widget.py:782
-#: src/custom_widgets/model_widget.py:783
+#: src/custom_widgets/model_widget.py:848
+#: src/custom_widgets/model_widget.py:849
 msgid "Model '{}' pulled successfully."
 msgstr "成功拉取模型 '{}' 。"
 
-#: src/custom_widgets/model_widget.py:786
-#: src/custom_widgets/model_widget.py:789
+#: src/custom_widgets/model_widget.py:852
+#: src/custom_widgets/model_widget.py:855
 msgid "Pull Model Error"
 msgstr "拉取模型中遇到错误"
 
-#: src/custom_widgets/model_widget.py:786
+#: src/custom_widgets/model_widget.py:852
 msgid "Failed to pull model '{}': {}"
 msgstr "拉取 '{}': {} 模型失败"
 
-#: src/custom_widgets/model_widget.py:787
+#: src/custom_widgets/model_widget.py:853
 msgid "Error pulling '{}': {}"
 msgstr "拉取 '{}': {} 中发生错误"
 
-#: src/custom_widgets/model_widget.py:789
+#: src/custom_widgets/model_widget.py:855
 msgid "Failed to pull model '{}' due to network error."
 msgstr "由于网络错误，拉取模型 '{}' 失败。"
 
-#: src/custom_widgets/model_widget.py:790
+#: src/custom_widgets/model_widget.py:856
 msgid "Error pulling '{}'"
 msgstr "拉取 '{}' 中遇到错误"
 
@@ -3357,6 +3385,9 @@ msgstr ""
 #: src/custom_widgets/terminal_widget.py:85
 msgid "The script is contained inside Flatpak"
 msgstr ""
+
+#~ msgid "Missing file"
+#~ msgstr "文件缺失"
 
 #~ msgid "Image Recognition"
 #~ msgstr "图像识别"

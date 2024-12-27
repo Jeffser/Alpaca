@@ -654,7 +654,6 @@ Generate a title following these rules:
         sqlite_con = sqlite3.connect(self.sqlite_path)
         cursor = sqlite_con.cursor()
         chats = cursor.execute('SELECT chat.id, chat.name, MAX(message.date_time) AS latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id GROUP BY chat.id ORDER BY latest_message_time DESC').fetchall()
-        #chats = cursor.execute('SELECT chat.id, chat.name FROM chat JOIN message ON chat.id = message.chat_id GROUP BY chat.id ORDER BY MAX(message.date_time) DESC').fetchall()
         if len(chats) > 0:
             for row in chats:
                 self.chat_list_box.append_chat(row[1], row[0])
