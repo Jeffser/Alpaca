@@ -417,6 +417,33 @@ class local_model(Gtk.ListBoxRow):
             sqlite_con.close()
             window.chat_list_box.update_profile_pictures()
 
+    def remove_pfp(self, button, model):
+        sqlite_con = sqlite3.connect(window.sqlite_path)
+        cursor = sqlite_con.cursor()
+        cursor.execute("DELETE FROM model WHERE id=?", (self.get_name(),))
+        sqlite_con.commit()
+        sqlite_con.close()
+        #button.remove(button.get_child())
+        button.set_icon_name('brain-augemnted-symbolic')
+        model.profile_picture_data = None
+        window.chat_list_box.update_profile_pictures()
+
+    def pfp_button_pressed(self, button, model):
+        file_filter = Gtk.FileFilter()
+        file_filter.add_suffix('png')
+        file_filter.add_suffix('jpg')
+        file_filter.add_suffix('jpeg')
+        file_filter.add_suffix('webp')
+        if model.profile_picture_data:
+            options = {
+                _('Cancel'): {'callback': None},
+                _('Remove'): {'callback': lambda button=button, model=model: self.remove_pfp(button, model), 'appearance': 'destructive'},
+                _('Change'): {'callback': lambda button=button, model=model: Gtk.FileDialog(default_filter=file_filter).open(window, None, lambda file_dialog, result, button=button, model=model: self.change_pfp(file_dialog, result, button, model)), 'appearance': 'suggested'},
+            }
+            dialog_widget.Options(_("Model Profile Picture"), _("What do you want to do with the model's profile picture?"), list(options.keys())[0], options)
+        else:
+            Gtk.FileDialog(default_filter=file_filter).open(window, None, lambda file_dialog, result, button=button, model=model: self.change_pfp(file_dialog, result, button, model))
+
     def show_information(self, button):
         model = next((element for element in list(window.model_manager.model_selector.get_popover().model_list_box) if element.get_name() == self.get_name()), None)
         model_name = model.get_child().get_label()
@@ -450,13 +477,7 @@ class local_model(Gtk.ListBoxRow):
             pfp_button.set_overflow(1)
             pfp_button.set_child(image)
 
-        file_filter = Gtk.FileFilter()
-        file_filter.add_suffix('png')
-        file_filter.add_suffix('jpg')
-        file_filter.add_suffix('jpeg')
-        file_filter.add_suffix('webp')
-
-        pfp_button.connect('clicked', lambda button: Gtk.FileDialog(default_filter=file_filter).open(window, None, lambda file_dialog, result, button=button, model=model: self.change_pfp(file_dialog, result, button, model)))
+        pfp_button.connect('clicked', lambda button, model=model: self.pfp_button_pressed(button, model))
 
         actionrow.add_prefix(pfp_button)
         window.model_detail_header.set_child(actionrow)

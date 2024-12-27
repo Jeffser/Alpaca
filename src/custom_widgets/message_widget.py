@@ -471,9 +471,7 @@ class footer(Gtk.Box):
     def add_options_button(self):
         self.popup = option_popup(self.get_parent().get_parent())
         message_element = self.get_parent().get_parent()
-
-        if self.options_button:
-            self.options_button.get_parent().remove(self.options_button)
+        message_element.profile_picture = None
 
         if message_element.profile_picture_data:
             image_data = base64.b64decode(message_element.profile_picture_data)
@@ -569,6 +567,8 @@ class message(Gtk.Box):
     def add_footer(self, dt:datetime.datetime):
         self.dt = dt
         if self.footer:
+            if self.profile_picture:
+                self.footer.options_button.get_parent().remove(self.footer.options_button)
             self.container.remove(self.footer)
         self.footer = footer(self.dt, self, self.model, self.system)
         self.container.prepend(self.footer)
