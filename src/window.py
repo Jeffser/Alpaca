@@ -236,7 +236,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             data = {
                 "model": current_model,
-                "messages": self.convert_history_to_ollama(current_chat),
+                "messages": current_chat.convert_to_ollama(),
                 "options": {"temperature": self.ollama_instance.tweaks["temperature"]},
                 "keep_alive": f"{self.ollama_instance.tweaks['keep_alive']}m",
                 "stream": True
@@ -542,33 +542,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     self.file_preview_dialog.set_title(file_name)
                     self.file_preview_open_button.set_visible(False)
             self.file_preview_dialog.present(self)
-
-    def convert_history_to_ollama(self, chat):
-        messages = []
-        for message_id, message in chat.messages_to_dict().items():
-            new_message = message.copy()
-            if 'model' in new_message:
-                del new_message['model']
-            if 'date' in new_message:
-                del new_message['date']
-            if 'files' in message and len(message['files']) > 0:
-                del new_message['files']
-                new_message['content'] = ''
-                for name, file_type in message['files'].items():
-                    file_path = os.path.join(data_dir, "chats", chat.get_name(), message_id, name)
-                    file_data = self.get_content_of_file(file_path, file_type)
-                    if file_data:
-                        new_message['content'] += f"```[{name}]\n{file_data}\n```"
-                new_message['content'] += message['content']
-            if 'images' in message and len(message['images']) > 0:
-                new_message['images'] = []
-                for name in message['images']:
-                    file_path = os.path.join(data_dir, "chats", chat.get_name(), message_id, name)
-                    image_data = self.get_content_of_file(file_path, 'image')
-                    if image_data:
-                        new_message['images'].append(image_data)
-            messages.append(new_message)
-        return messages
 
     def generate_chat_title(self, message, old_chat_name):
         logger.debug("Generating chat title")
@@ -1020,7 +993,7 @@ Generate a title following these rules:
 
         data = {
             "model": current_model,
-            "messages": self.convert_history_to_ollama(chat),
+            "messages": chat.convert_to_ollama(),
             "options": {"temperature": self.ollama_instance.tweaks["temperature"]},
             "keep_alive": f"{self.ollama_instance.tweaks['keep_alive']}m",
             "stream": True

@@ -409,10 +409,9 @@ class option_popup(Gtk.Popover):
             if self.message_element.footer:
                 self.message_element.container.remove(self.message_element.footer)
             self.message_element.model = window.model_manager.get_selected_model()
-            history = window.convert_history_to_ollama(chat)[:list(chat.messages).index(self.message_element.message_id)]
             data = {
                 "model": self.message_element.model,
-                "messages": history,
+                "messages": chat.convert_to_ollama(),
                 "options": {"temperature": window.ollama_instance.tweaks["temperature"]},
                 "keep_alive": f"{window.ollama_instance.tweaks['keep_alive']}m"
             }
@@ -547,7 +546,6 @@ class message(Adw.Bin):
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
             GLib.idle_add(self.content_children[-1].insert_at_end, data['message']['content'])
         if not chat.busy or ('done' in data and data['done']):
-            print(1)
             if not chat.quick_chat:
                 window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
                 if window.chat_list_box.get_current_chat().get_name() != chat.get_name():
@@ -555,7 +553,6 @@ class message(Adw.Bin):
                 if chat.welcome_screen:
                     chat.container.remove(chat.welcome_screen)
                     chat.welcome_screen = None
-            print(2)
             chat.stop_message()
             self.text = self.content_children[-1].get_label()
             GLib.idle_add(self.set_text, self.content_children[-1].get_label())
@@ -563,7 +560,6 @@ class message(Adw.Bin):
             GLib.idle_add(self.add_footer, self.dt)
             window.show_notification(chat.get_name(), self.text[:200] + (self.text[200:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
             if chat.quick_chat:
-                print(3)
                 GLib.idle_add(window.quick_ask_save_button.set_sensitive, True)
             else:
                 sqlite_con = sqlite3.connect(window.sqlite_path)

@@ -233,6 +233,30 @@ class chat(Gtk.ScrolledWindow):
         file_dialog = Gtk.FileDialog(initial_name=f"{self.get_name()}.db")
         file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.db'): self.on_export_chat(file_dialog, result, temp_path))
 
+    def convert_to_ollama(self) -> dict:
+        messages = []
+        for message in self.messages.values():
+            if message.text and message.dt:
+                message_role = 'user'
+                if message.bot:
+                    message_role = 'assistant'
+                if message.system:
+                    message_role = 'system'
+                message_data = {
+                    'role': message_role,
+                    'content': ''
+                }
+                if message.image_c and len(message.image_c.files) > 0:
+                    message_data['images'] = []
+                    for image in message.image_c.files:
+                        message_data['images'].append(image.content)
+                if message.attachment_c and len(message.attachment_c.files) > 0:
+                    for attachment in message.attachment_c.files:
+                        message_data['content'] += '```{} ({})\n{}\n```\n\n'.format(attachment.file_name, attachment.file_type, attachment.file_content)
+                message_data['content'] += message.text
+                messages.append(message_data)
+        return messages
+
     def messages_to_dict(self) -> dict:
         messages_dict = {}
         for message_id, message_element in self.messages.items():
@@ -252,7 +276,7 @@ class chat(Gtk.ScrolledWindow):
                 if message_element.image_c:
                     images = []
                     for file in message_element.image_c.files:
-                        images.append(file.image_name)
+                        images.append(file.get_name())
                     messages_dict[message_id]['images'] = images
 
                 if message_element.attachment_c:
