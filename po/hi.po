@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.0.2\n"
+"Project-Id-Version: 3.1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-25 17:56-0600\n"
 "PO-Revision-Date: 2024-09-02 HO:MI+ZONE\n"
@@ -142,15 +142,15 @@ msgstr "नया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:90
 msgid "Added categories to models"
-msgstr ""
+msgstr "मॉडल्स में श्रेणियाँ जोड़ी गईं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:91
 msgid "Specified model's languages"
-msgstr ""
+msgstr "मॉडल की भाषाएँ निर्दिष्ट की गईं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:92
 msgid "Added warning when downloading embedding models"
-msgstr ""
+msgstr "एम्बेडिंग मॉडल डाउनलोड करते समय चेतावनी जोड़ी गई"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
@@ -177,7 +177,7 @@ msgstr "सुधार"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Replaced low ram warning with big model warning"
-msgstr ""
+msgstr "कम रैम चेतावनी को बड़े मॉडल चेतावनी से बदल दिया गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Correctly escape markup before rendering message"
@@ -1999,7 +1999,8 @@ msgstr ""
 #: src/available_models_descriptions.py:31
 msgid ""
 "A suite of text embedding models by Snowflake, optimized for performance."
-msgstr "स्नोफ्लेक द्वारा प्रदर्शन के लिए अनुकूलित टेक्स्ट एम्बेडिंग मॉडल्स का एक सूट।"
+msgstr ""
+"स्नोफ्लेक द्वारा प्रदर्शन के लिए अनुकूलित टेक्स्ट एम्बेडिंग मॉडल्स का एक सूट।"
 
 #: src/available_models_descriptions.py:32
 msgid ""
@@ -2683,7 +2684,7 @@ msgstr "डीबीआरएक्स डेटाब्रिक्स द्�
 msgid ""
 "An open large reasoning model for real-world solutions by the Alibaba "
 "International Digital Commerce Group (AIDC-AI)."
-msgstr ""
+msgstr "अलीबाबा इंटरनेशनल डिजिटल कॉमर्स ग्रुप (AIDC-AI) द्वारा वास्तविक दुनिया के समाधानों के लिए एक ओपन बड़े तर्क मॉडल।"
 
 #: src/available_models_descriptions.py:129
 msgid "Embedding model from BAAI mapping texts to vectors."
@@ -2769,7 +2770,7 @@ msgstr ""
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
-msgstr ""
+msgstr "आईबीएम ग्रेनाइट गार्जियन ३.० २बी और ८बी मॉडल प्रॉम्प्ट और/या प्रतिक्रियाओं में जोखिमों का पता लगाने के लिए डिज़ाइन किए गए हैं।"
 
 #: src/available_models_descriptions.py:141
 msgid ""
@@ -2793,20 +2794,20 @@ msgstr ""
 msgid ""
 "A family of efficient AI models under 10B parameters performant in science, "
 "math, and coding through innovative training techniques."
-msgstr ""
+msgstr "१० बिलियन से कम पैरामीटर वाले कुशल AI मॉडलों का एक परिवार, जो विज्ञान, गणित और कोडिंग में नवोन्मेषी प्रशिक्षण तकनीकों के माध्यम से प्रदर्शन करते हैं।"
 
 #: src/available_models_descriptions.py:144
 msgid ""
 "The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 "
 "trillion tokens of data, demonstrated significant improvements over their "
 "predecessors in performance and speed in IBM’s initial testing."
-msgstr ""
+msgstr "आईबीएम ग्रेनाइट २बी और ८बी मॉडल केवल टेक्स्ट के घने LLM हैं, जो १२ ट्रिलियन से अधिक टोकन के डेटा पर प्रशिक्षित हैं, जिन्होंने आईबीएम की प्रारंभिक परीक्षण में प्रदर्शन और गति में अपने पूर्ववर्तियों की तुलना में महत्वपूर्ण सुधार प्रदर्शित किया।"
 
 #: src/available_models_descriptions.py:145
 msgid ""
 "The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
-msgstr ""
+msgstr "आईबीएम ग्रेनाइट १बी और ३बी मॉडल लंबे संदर्भ के विशेषज्ञों के मिश्रण (MoE) ग्रेनाइट मॉडल हैं, जो कम विलंबता उपयोग के लिए डिज़ाइन किए गए हैं।"
 
 #: src/available_models_descriptions.py:146
 msgid ""
@@ -2814,6 +2815,7 @@ msgid ""
 "biencoder embedding models, with 30M available in English only and 278M "
 "serving multilingual use cases."
 msgstr ""
+"आईबीएम ग्रेनाइट एम्बेडिंग ३०एम और २७८एम मॉडल केवल टेक्स्ट के घने बायएनकोडर एम्बेडिंग मॉडल हैं, जिनमें ३०एम केवल अंग्रेजी में उपलब्ध है और २७८एम बहुभाषी उपयोग के मामलों के लिए सेवा प्रदान करता है।"
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -2883,7 +2885,8 @@ msgstr "संदेश खोजें"
 #: src/window.ui:150
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
-msgstr "चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
+msgstr ""
+"चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
 
 #: src/window.ui:197
 msgid "Attach File"
@@ -3001,11 +3004,11 @@ msgstr ""
 
 #: src/window.ui:510
 msgid "Model Directory"
-msgstr ""
+msgstr "मॉडल निर्देशिका"
 
 #: src/window.ui:516
 msgid "Change Model Directory"
-msgstr ""
+msgstr "मॉडल निर्देशिका बदलें"
 
 #: src/window.ui:548
 msgid "Quick ask dialog"
@@ -3394,39 +3397,39 @@ msgstr "रोकें"
 
 #: src/custom_widgets/model_widget.py:279
 msgid "Multilingual"
-msgstr ""
+msgstr "बहुभाषी"
 
 #: src/custom_widgets/model_widget.py:280
 msgid "Code"
-msgstr ""
+msgstr "कोड"
 
 #: src/custom_widgets/model_widget.py:281
 msgid "Math"
-msgstr ""
+msgstr "गणित"
 
 #: src/custom_widgets/model_widget.py:282
 msgid "Vision"
-msgstr ""
+msgstr "दृष्टि"
 
 #: src/custom_widgets/model_widget.py:283
 msgid "Embedding"
-msgstr ""
+msgstr "एम्बेडिंग"
 
 #: src/custom_widgets/model_widget.py:284
 msgid "Small"
-msgstr ""
+msgstr "छोटा"
 
 #: src/custom_widgets/model_widget.py:285
 msgid "Medium"
-msgstr ""
+msgstr "मध्यम"
 
 #: src/custom_widgets/model_widget.py:286
 msgid "Big"
-msgstr ""
+msgstr "बड़ा"
 
 #: src/custom_widgets/model_widget.py:287
 msgid "Huge"
-msgstr ""
+msgstr "विशाल"
 
 #: src/custom_widgets/model_widget.py:340
 msgid "Details"
@@ -3474,13 +3477,13 @@ msgstr "{} के लिए डाउनलोड मेनू में प्�
 
 #: src/custom_widgets/model_widget.py:566
 msgid "Embedding Model"
-msgstr ""
+msgstr "एम्बेडिंग मॉडल"
 
 #: src/custom_widgets/model_widget.py:567
 msgid ""
 "This model is meant to be used in the training of other models and won't "
 "work directly with Alpaca. Are you sure you want to download it anyway?"
-msgstr ""
+msgstr "यह मॉडल अन्य मॉडलों के प्रशिक्षण में उपयोग के लिए डिज़ाइन किया गया है और यह सीधे अलपाका के साथ काम नहीं करेगा। क्या आप सुनिश्चित हैं कि आप इसे डाउनलोड करना चाहते हैं?"
 
 #: src/custom_widgets/model_widget.py:569
 #: src/custom_widgets/model_widget.py:577
@@ -3495,11 +3498,11 @@ msgstr "बड़ा मॉडल"
 msgid ""
 "This model might be too large to run optimally. Are you sure you want to "
 "download it anyway?"
-msgstr ""
+msgstr "यह मॉडल प्रभावी ढंग से चलाने के लिए बहुत बड़ा हो सकता है। क्या आप सुनिश्चित हैं कि आप इसे डाउनलोड करना चाहते हैं?"
 
 #: src/custom_widgets/model_widget.py:600
 msgid "Others..."
-msgstr ""
+msgstr "अन्य..."
 
 #: src/custom_widgets/model_widget.py:611
 msgid "Download {}:{}"
