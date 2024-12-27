@@ -159,29 +159,6 @@ class chat(Gtk.ScrolledWindow):
                 message_element.add_footer(datetime.datetime.strptime(message[3] + (":00" if message[3].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
         else:
             self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
-        return
-        if len(messages.keys()) > 0:
-            if self.welcome_screen:
-                self.container.remove(self.welcome_screen)
-                self.welcome_screen = None
-            for message_id, message_data in messages.items():
-                if message_data['content']:
-                    self.add_message(message_id, message_data['model'] if message_data['role'] == 'assistant' else None, message_data['role'] == 'system')
-                    message_element = self.messages[message_id]
-                    if 'images' in message_data:
-                        images=[]
-                        for image in message_data['images']:
-                            images.append(os.path.join(data_dir, "chats", self.get_name(), message_id, image))
-                        message_element.add_images(images)
-                    if 'files' in message_data:
-                        files={}
-                        for file_name, file_type in message_data['files'].items():
-                            files[os.path.join(data_dir, "chats", self.get_name(), message_id, file_name)] = file_type
-                        message_element.add_attachments(files)
-                    message_element.set_text(message_data['content'])
-                    message_element.add_footer(datetime.datetime.strptime(message_data['date'] + (":00" if message_data['date'].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
-        else:
-            self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
 
     def messages_to_md(self) -> str:
         markdown = []
@@ -495,7 +472,7 @@ class chat_list(Gtk.ListBox):
             # Check repeated chat.name
             for repeated_chat in cursor.execute("SELECT import.chat.id, import.chat.name FROM import.chat JOIN chat dbchat ON import.chat.name = dbchat.name").fetchall():
                 new_name = window.generate_numbered_name(repeated_chat[1], [tab.chat_window.get_name() for tab in self.tab_list])
-                cursor.execute("UPDATE import.chat SET name=? WHERE id=?", (repeated_chat[1], repeated_chat[0]))
+                cursor.execute("UPDATE import.chat SET name=? WHERE id=?", (new_name, repeated_chat[0]))
             # Check repeated chat.id
             for repeated_chat in cursor.execute("SELECT import.chat.id FROM import.chat JOIN chat dbchat ON import.chat.id = dbchat.id").fetchall():
                 new_id = window.generate_uuid()
