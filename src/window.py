@@ -676,30 +676,6 @@ Generate a title following these rules:
             sqlite_con.close()
             GLib.idle_add(self.connection_error)
 
-    def save_history(self, chat:chat_widget.chat=None):
-        logger.info("Saving history")
-        history = None
-        return
-        if chat and os.path.exists(os.path.join(data_dir, "chats", "chats.json")):
-            history = {'chats': {chat.get_name(): {'messages': chat.messages_to_dict()}}}
-            try:
-                with open(os.path.join(data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                    for chat_tab in self.chat_list_box.tab_list:
-                        if chat_tab.chat_window.get_name() != chat.get_name():
-                            history['chats'][chat_tab.chat_window.get_name()] = data['chats'][chat_tab.chat_window.get_name()]
-                history['chats'][chat.get_name()] = {'messages': chat.messages_to_dict()}
-            except Exception as e:
-                logger.error(e)
-                history = None
-        if not history:
-            history = {'chats': {}}
-            for chat_tab in self.chat_list_box.tab_list:
-                history['chats'][chat_tab.chat_window.get_name()] = {'messages': chat_tab.chat_window.messages_to_dict()}
-
-        with open(os.path.join(data_dir, "chats", "chats.json"), "w+", encoding="utf-8") as f:
-            json.dump(history, f, indent=4)
-
     def load_history(self):
         logger.debug("Loading history")
         selected_chat = None
@@ -721,38 +697,6 @@ Generate a title following these rules:
                 chat_container.load_chat_messages()
         else:
             self.chat_list_box.new_chat()
-
-        return
-        if os.path.exists(os.path.join(data_dir, "chats", "chats.json")):
-            try:
-                with open(os.path.join(data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                    selected_chat = None
-                    if len(list(data)) == 0:
-                        data['chats'][_("New Chat")] = {"messages": {}}
-                    if os.path.exists(os.path.join(data_dir, "chats", "selected_chat.txt")):
-                        with open(os.path.join(data_dir, "chats", "selected_chat.txt"), 'r') as scf:
-                            selected_chat = scf.read()
-                    elif 'selected_chat' in data and data['selected_chat'] in data['chats']:
-                        selected_chat = data['selected_chat']
-                    if not selected_chat or selected_chat not in data['chats']:
-                        selected_chat = list(data['chats'])[0]
-                    if len(data['chats'][selected_chat]['messages'].keys()) > 0:
-                        last_model_used = data['chats'][selected_chat]['messages'][list(data["chats"][selected_chat]["messages"])[-1]]["model"]
-                        self.model_manager.change_model(last_model_used)
-                    for chat_name in data['chats']:
-                        self.chat_list_box.append_chat(chat_name)
-                        chat_container = self.chat_list_box.get_chat_by_name(chat_name)
-                        if chat_name == selected_chat:
-                            self.chat_list_box.select_row(self.chat_list_box.tab_list[-1])
-                        chat_container.load_chat_messages(data['chats'][chat_name]['messages'])
-
-            except Exception as e:
-                logger.error(e)
-                self.chat_list_box.prepend_chat(_("New Chat"))
-
-
-
 
     def generate_numbered_name(self, chat_name:str, compare_list:list) -> str:
         if chat_name in compare_list:

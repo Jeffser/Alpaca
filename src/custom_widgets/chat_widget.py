@@ -518,36 +518,6 @@ class chat_list(Gtk.ListBox):
             for chat in cursor.execute("SELECT * FROM import.chat"):
                 self.prepend_chat(chat[1], chat[0]).load_chat_messages()
             sqlite_con.close()
-        return
-        stream = file.read(None)
-        data_stream = Gio.DataInputStream.new(stream)
-        tar_content = data_stream.read_bytes(1024 * 1024, None)
-
-        with tempfile.TemporaryDirectory() as temp_dir:
-            tar_filename = os.path.join(temp_dir, "imported_chat.tar")
-
-            with open(tar_filename, "wb") as tar_file:
-                tar_file.write(tar_content.get_data())
-
-            with tarfile.open(tar_filename, "r") as tar:
-                tar.extractall(path=temp_dir)
-                chat_name = None
-                chat_content = None
-                for member in tar.getmembers():
-                    if member.name == "data.json":
-                        json_filepath = os.path.join(temp_dir, member.name)
-                        with open(json_filepath, "r", encoding="utf-8") as json_file:
-                            data = json.load(json_file)
-                        for chat_name, chat_content in data.items():
-                            new_chat_name = window.generate_numbered_name(chat_name, [tab.chat_window.get_name() for tab in self.tab_list])
-                            src_path = os.path.join(temp_dir, chat_name)
-                            dest_path = os.path.join(data_dir, "chats", new_chat_name)
-                            if os.path.exists(src_path) and os.path.isdir(src_path) and not os.path.exists(dest_path):
-                                shutil.copytree(src_path, dest_path)
-
-                            created_chat = self.prepend_chat(new_chat_name)
-                            created_chat.load_chat_messages(chat_content['messages'])
-                            window.save_history(created_chat)
         window.show_toast(_("Chat imported successfully"), window.main_overlay)
 
     def import_chat(self):
