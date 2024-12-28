@@ -611,7 +611,7 @@ Generate a title following these rules:
         logger.debug("Running message")
         chat.busy = True
         self.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(True)
-        if len(data['messages']) == 1 and chat.get_name().startswith(_("New Chat")):
+        if [m['role'] for m in data['messages']].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(data['messages'][0].copy(), chat.get_name())).start()
 
         if chat.welcome_screen:
