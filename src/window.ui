@@ -463,8 +463,8 @@
               <child>
                 <object class="AdwEntryRow">
                   <signal name="apply" handler="override_changed"/>
-                  <property name="name">HIP_VISIBLE_DEVICES</property>
-                  <property name="title" translatable="no">HIP_VISIBLE_DEVICES</property>
+                  <property name="name">ROCR_VISIBLE_DEVICES</property>
+                  <property name="title" translatable="no">ROCR_VISIBLE_DEVICES</property>
                   <property name="show-apply-button">true</property>
                   <child type="prefix">
                     <object class="GtkButton">
