@@ -367,7 +367,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def link_button_handler(self, button):
-        os.system(f'xdg-open "{button.get_name()}"'.replace("{selected_chat}", self.chat_list_box.get_current_chat().get_name()))
+        try:
+            Gio.AppInfo.launch_default_for_uri(button.get_name())
+        except Exception as e:
+            logger.error(e)
 
     @Gtk.Template.Callback()
     def model_search_toggle(self, button):

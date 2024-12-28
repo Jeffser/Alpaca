@@ -46,10 +46,33 @@
               </object>
             </child>
             <property name="content">
-              <object class="GtkScrolledWindow" id="chat_list_container">
-                <property name="vexpand">true</property>
-                <property name="hexpand">true</property>
+              <object class="GtkBox">
+                <property name="orientation">1</property>
+                <property name="spacing">5</property>
+                <child>
+                  <object class="GtkScrolledWindow" id="chat_list_container">
+                    <property name="vexpand">true</property>
+                    <property name="hexpand">true</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <signal name="clicked" handler="link_button_handler"/>
+                    <property name="name">https://github.com/sponsors/Jeffser</property>
+                    <property name="icon-name">heart-filled-symbolic</property>
+                    <property name="halign">1</property>
+                    <property name="margin-start">5</property>
+                    <property name="margin-bottom">5</property>
+                    <property name="tooltip-text" translatable="yes">Sponsor Alpaca</property>
+                    <style>
+                      <class name="flat"/>
+                      <class name="circular"/>
+                      <class name="accent"/>
+                    </style>
+                  </object>
+                </child>
               </object>
+
             </property>
           </object>
         </property>
