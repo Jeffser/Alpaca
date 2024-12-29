@@ -424,7 +424,7 @@ class local_model(Gtk.ListBoxRow):
         sqlite_con.commit()
         sqlite_con.close()
         #button.remove(button.get_child())
-        button.set_icon_name('brain-augemnted-symbolic')
+        button.set_icon_name('image-x-generic-symbolic')
         model.profile_picture_data = None
         window.chat_list_box.update_profile_pictures()
 
@@ -458,7 +458,7 @@ class local_model(Gtk.ListBoxRow):
         pfp_button = Gtk.Button(
             css_classes=['circular'],
             valign=3,
-            icon_name='brain-augemnted-symbolic',
+            icon_name='image-x-generic-symbolic',
             width_request=64,
             height_request=64,
             margin_top=10,
