@@ -19,7 +19,7 @@ window = None
 class edit_text_block(Gtk.Box):
     __gtype_name__ = 'AlpacaEditTextBlock'
 
-    def __init__(self, text:str, width:int):
+    def __init__(self, text:str):
         super().__init__(
             hexpand=True,
             halign=0,
@@ -31,7 +31,6 @@ class edit_text_block(Gtk.Box):
             hexpand=True,
             css_classes=["view", "editing_message_textview"],
             wrap_mode=2,
-            width_request=width,
         )
         cancel_button = Gtk.Button(
             vexpand=False,
@@ -76,7 +75,6 @@ class edit_text_block(Gtk.Box):
     def save_edit(self):
         message_element = self.get_parent().get_parent()
         message_element.set_text(self.text_view.get_buffer().get_text(self.text_view.get_buffer().get_start_iter(), self.text_view.get_buffer().get_end_iter(), False))
-        message_element.add_footer(message_element.dt)
 
         sqlite_con = sqlite3.connect(window.sqlite_path)
         cursor = sqlite_con.cursor()
@@ -90,7 +88,6 @@ class edit_text_block(Gtk.Box):
     def cancel_edit(self):
         message_element = self.get_parent().get_parent()
         message_element.set_text(message_element.text)
-        message_element.add_footer(message_element.dt)
         self.get_parent().remove(self)
 
 class text_block(Gtk.Label):
@@ -389,12 +386,11 @@ class option_popup(Gtk.Popover):
 
     def edit_message(self):
         logger.debug("Editing message")
-        edit_text_b = edit_text_block(self.message_element.text, self.message_element.get_size(0) - 10)
+        self.popdown()
+        edit_text_b = edit_text_block(self.message_element.text)
         for child in self.message_element.content_children:
             self.message_element.container.remove(child)
         self.message_element.content_children = []
-        self.message_element.container.remove(self.message_element.footer)
-        self.message_element.footer = None
         self.message_element.container.append(edit_text_b)
         GLib.idle_add(edit_text_b.text_view.get_buffer().insert, edit_text_b.text_view.get_buffer().get_start_iter(), self.message_element.text, len(self.message_element.text.encode('utf-8')))
         window.set_focus(edit_text_b)
