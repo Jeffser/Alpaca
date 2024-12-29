@@ -86,6 +86,21 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="3.2.0" date="2024-12-29">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.2.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Transitioned chat backend from JSON to SQLite3</li>
+          <li>Changed appearance of messages</li>
+          <li>Added the option to add profile pictures to models</li>
+        </ul>
+        <p>Fix</p>
+        <ul>
+          <li>Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES</li>
+        </ul>
+      </description>
+    </release>
     <release version="3.1.0" date="2024-12-25">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.1.0</url>
       <description>
