@@ -18,7 +18,7 @@ def log_output(pipe):
         with pipe:
             try:
                 for line in iter(pipe.readline, ''):
-                    #print(line, end='')
+                    print(line, end='')
                     f.write(line)
                     f.flush()
                     if 'msg="model request too large for system"' in line:
@@ -69,7 +69,8 @@ class instance():
         if not self.instance and not self.remote:
             self.start()
         connection_url = '{}/{}'.format(self.remote_url if self.remote else 'http://127.0.0.1:{}'.format(self.local_port), connection_url)
-        logger.info('{} : {}'.format(connection_type, connection_url))
+        if self.remote:
+            logger.info('{} : {}'.format(connection_type, connection_url))
         response = None
         if connection_type == "GET":
             response = requests.get(connection_url, headers=self.get_headers(False))
@@ -111,7 +112,6 @@ class instance():
                 os.mkdir(os.path.join(cache_dir, 'tmp/ollama'))
             self.instance = None
             params = self.overrides.copy()
-            params["OLLAMA_DEBUG"] = "1"
             params["OLLAMA_HOST"] = f"127.0.0.1:{self.local_port}" # You can't change this directly sorry :3
             params["OLLAMA_MODELS"] = self.model_directory
             params["TMPDIR"] = os.path.join(cache_dir, 'tmp/ollama')
