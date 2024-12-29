@@ -159,6 +159,7 @@ class chat(Gtk.ScrolledWindow):
                 message_element.add_footer(datetime.datetime.strptime(message[3] + (":00" if message[3].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
         else:
             self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
+        sqlite_con.close()
 
     def on_export_successful(self, file, result):
         file.replace_contents_finish(result)

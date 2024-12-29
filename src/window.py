@@ -665,7 +665,7 @@ Generate a title following these rules:
                     selected_chat = row[1]
                 if row[1] == selected_chat:
                     self.chat_list_box.select_row(self.chat_list_box.tab_list[-1])
-                chat_container.load_chat_messages()
+                threading.Thread(target=chat_container.load_chat_messages).start()
         else:
             self.chat_list_box.new_chat()
 
