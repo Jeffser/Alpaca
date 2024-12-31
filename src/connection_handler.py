@@ -112,6 +112,7 @@ class instance():
                 os.mkdir(os.path.join(cache_dir, 'tmp/ollama'))
             self.instance = None
             params = self.overrides.copy()
+            params["OLLAMA_DEBUG"] = "1"
             params["OLLAMA_HOST"] = f"127.0.0.1:{self.local_port}" # You can't change this directly sorry :3
             params["OLLAMA_MODELS"] = self.model_directory
             params["TMPDIR"] = os.path.join(cache_dir, 'tmp/ollama')
