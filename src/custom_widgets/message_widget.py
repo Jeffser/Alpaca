@@ -442,7 +442,7 @@ class footer(Gtk.Box):
         )
         message_author = ""
         if model:
-            model_name = window.convert_model_name(model, 0).rstrip(" (latest)")
+            model_name = window.convert_model_name(model, 0).replace(" (latest)", '')
             if message_element.profile_picture_data:
                 message_author = model_name
             else:
