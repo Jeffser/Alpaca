@@ -1082,7 +1082,7 @@ Generate a title following these rules:
         self.remote_connection_selector.set_visible(not shutil.which('ollama'))
         self.tweaks_group.set_sensitive(True)
         self.remote_connection_switch.set_sensitive(True)
-        self.instance_page.set_sensitive(shutil.which('ollama'))
+        self.instance_page.set_sensitive(shutil.which('ollama') and not self.remote_connection_switch.get_active())
         if not shutil.which('ollama'):
             self.preferences_dialog.remove(self.instance_page)
             self.remote_connection_selector.set_subtitle(configuration['remote_url'])

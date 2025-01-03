@@ -435,6 +435,7 @@
       </child>
       <child>
         <object class="AdwPreferencesPage" id="instance_page">
+          <property name="sensitive" bind-source="remote_connection_switch" bind-property="active" bind-flags="invert-boolean"/>
           <property name="title" translatable="yes">Ollama Instance</property>
           <property name="icon-name">brain-augemnted-symbolic</property>
           <child>
