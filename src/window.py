@@ -659,6 +659,7 @@ Generate a title following these rules:
                 threading.Thread(target=chat_container.load_chat_messages).start()
         else:
             self.chat_list_box.new_chat()
+        sqlite_con.close()
 
     def generate_numbered_name(self, chat_name:str, compare_list:list) -> str:
         if chat_name in compare_list:
@@ -971,21 +972,25 @@ Generate a title following these rules:
             self.show_toast(_("An error occurred: {}").format(e), self.quick_ask_overlay)
 
     def quick_chat(self, message:str):
+        print(1)
         self.quick_ask_save_button.set_sensitive(False)
         self.quick_ask.present()
+        print(2)
         current_model = self.convert_model_name(self.default_model_list.get_string(self.default_model_combo.get_selected()), 1)
+        print(3)
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.quick_ask_overlay)
             return
+        print(4)
         chat = chat_widget.chat(_('Quick Ask'), 'QA', True)
         self.quick_ask_overlay.set_child(chat)
-
+        print(5)
         message_id = self.generate_uuid()
         chat.add_message(message_id, None, False)
         m_element = chat.messages[message_id]
         m_element.set_text(message)
         m_element.add_footer(datetime.now())
-
+        print(6)
         data = {
             "model": current_model,
             "messages": chat.convert_to_ollama(),
@@ -995,13 +1000,14 @@ Generate a title following these rules:
         }
         if self.ollama_instance.tweaks["seed"] != 0:
             data['options']['seed'] = self.ollama_instance.tweaks["seed"]
-
+        print(7)
         bot_id=self.generate_uuid()
         chat.add_message(bot_id, current_model, False)
         m_element_bot = chat.messages[bot_id]
         m_element_bot.set_text()
         chat.busy = True
         threading.Thread(target=self.run_quick_chat, args=(data, m_element_bot)).start()
+        print(8)
 
     def prepare_alpaca(self):
         sqlite_con = sqlite3.connect(self.sqlite_path)
@@ -1083,8 +1089,8 @@ Generate a title following these rules:
         self.get_application().lookup_action('manage_models').set_enabled(True)
 
         if self.get_application().args.ask:
-            time.sleep(1)
             GLib.idle_add(self.quick_chat, self.get_application().args.ask)
+
         sqlite_con.close()
 
     def open_send_menu(self, gesture, x, y):

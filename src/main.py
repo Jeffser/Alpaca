@@ -34,6 +34,7 @@ import os
 import argparse
 import json
 import time
+import sqlite3
 
 from pydbus import SessionBus
 
@@ -129,8 +130,7 @@ class AlpacaApplication(Adw.Application):
         win = self.props.active_window
         if not win:
             win = AlpacaWindow(application=self)
-        if not self.args.ask:
-            win.present()
+        win.present()
         if sys.platform == 'darwin': # MacOS
             settings = Gtk.Settings.get_default()
             if settings:
@@ -185,18 +185,23 @@ def main(version):
         sys.exit(0)
 
     if args.list_chats:
-        if os.path.exists(os.path.join(data_dir, "chats", "chats.json")):
-            with open(os.path.join(data_dir, "chats", "chats.json"), "r", encoding="utf-8") as f:
-                data = json.load(f)
-                print('\n'.join(list(data['chats'].keys())))
+        sqlite_con = sqlite3.connect(os.path.join(data_dir, "alpaca.db"))
+        cursor = sqlite_con.cursor()
+        chats = cursor.execute('SELECT chat.name, MAX(message.date_time) AS latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id GROUP BY chat.id ORDER BY latest_message_time DESC').fetchall()
+        if chats:
+            for chat in chats:
+                print(chat[0])
         else:
             print()
+        sqlite_con.close()
         sys.exit(0)
 
     if args.select_chat:
-        if os.path.exists(os.path.join(data_dir, "chats")):
-            with open(os.path.join(data_dir, "chats", "selected_chat.txt"), "w+", encoding="utf-8") as f:
-                f.write(args.select_chat)
+        sqlite_con = sqlite3.connect(os.path.join(data_dir, "alpaca.db"))
+        cursor = sqlite_con.cursor()
+        cursor.execute("UPDATE preferences SET value=? WHERE id=?", (args.select_chat, 'selected_chat'))
+        sqlite_con.commit()
+        sqlite_con.close()
 
     if os.path.isfile(os.path.join(data_dir, 'tmp.log')):
         os.remove(os.path.join(data_dir, 'tmp.log'))
