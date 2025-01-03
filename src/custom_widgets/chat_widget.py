@@ -180,8 +180,6 @@ class chat(Gtk.ScrolledWindow):
 
     def export_md(self, obsidian:bool):
         logger.info("Exporting chat (MD)")
-        if os.path.isfile(os.path.join(cache_dir, 'export.md')):
-            os.remove(os.path.join(cache_dir, 'export.md'))
         markdown = []
         for message_id, message_element in self.messages.items():
             if message_element.text and message_element.dt:
@@ -214,7 +212,7 @@ class chat(Gtk.ScrolledWindow):
                             markdown.append('<details>\n\n<summary>{} {}</summary>\n\n```TXT\n{}\n```\n\n</details>'.format(emojis[file.file_type], file.get_name(), file.file_content))
                 markdown.append('----')
         markdown.append('Generated from [Alpaca](https://github.com/Jeffser/Alpaca)')
-        with open(os.path.join(cache_dir, 'export.md'), 'w+') as f:
+        with open(os.path.join(cache_dir, 'export.md'), 'w') as f:
             f.write('\n\n'.join(markdown))
         file_dialog = Gtk.FileDialog(initial_name=f"{self.get_name()}.md")
         file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.md'): self.on_export_chat(file_dialog, result, temp_path))
@@ -234,7 +232,14 @@ class chat(Gtk.ScrolledWindow):
         file_dialog = Gtk.FileDialog(initial_name=f"{self.get_name()}.db")
         file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.db'): self.on_export_chat(file_dialog, result, temp_path))
 
-    def convert_to_ollama(self) -> dict:
+    def export_json(self, include_metadata:bool):
+        logger.info("Exporting chat (JSON)")
+        with open(os.path.join(cache_dir, 'export.json'), 'w') as f:
+            f.write(json.dumps({self.get_name() if include_metadata else 'messages': self.convert_to_ollama(include_metadata)}, indent=4))
+        file_dialog = Gtk.FileDialog(initial_name=f"{self.get_name()}.json")
+        file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.json'): self.on_export_chat(file_dialog, result, temp_path))
+
+    def convert_to_ollama(self, include_metadata:bool=False) -> dict:
         messages = []
         for message in self.messages.values():
             if message.text and message.dt:
@@ -255,6 +260,9 @@ class chat(Gtk.ScrolledWindow):
                     for attachment in message.attachment_c.files:
                         message_data['content'] += '```{} ({})\n{}\n```\n\n'.format(attachment.file_name, attachment.file_type, attachment.file_content)
                 message_data['content'] += message.text
+                if include_metadata:
+                    message_data['date'] = message.dt.strftime("%Y/%m/%d %H:%M:%S")
+                    message_data['model'] = message.model
                 messages.append(message_data)
         return messages
 

@@ -832,7 +832,9 @@ Generate a title following these rules:
             options = {
                 _("Importable (.db)"): chat.export_db,
                 _("Markdown"): lambda chat=chat: chat.export_md(False),
-                _("Markdown (Obsidian Style)"): lambda chat=chat: chat.export_md(True)
+                _("Markdown (Obsidian Style)"): lambda chat=chat: chat.export_md(True),
+                _("JSON"): lambda chat=chat: chat.export_json(False),
+                _("JSON (Include Metadata)"): lambda chat=chat: chat.export_json(True)
             }
             dialog_widget.simple_dropdown(
                 _("Export Chat"),
