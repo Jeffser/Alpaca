@@ -139,7 +139,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     quick_ask_overlay = Gtk.Template.Child()
     quick_ask_save_button = Gtk.Template.Child()
 
-    sqlite_path = os.path.join(data_dir, "chats_test.db")
+    sqlite_path = os.path.join(data_dir, "alpaca.db")
 
     @Gtk.Template.Callback()
     def remote_connection_selector_clicked(self, button):
@@ -168,7 +168,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.model_directory_selector.set_subtitle(selected_directory)
             if not self.ollama_instance.remote:
                 self.ollama_instance.reset()
-            self.save_server_config()
+            sqlite_con = sqlite3.connect(self.sqlite_path)
+            cursor = sqlite_con.cursor()
+            cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (self.ollama_instance.model_directory, str(type(self.ollama_instance.model_directory)), "model_directory"))
+            sqlite_con.commit()
+            sqlite_con.close()
             self.refresh_local_models()
             button.set_sensitive(True)
         dialog_widget.simple_directory(directory_selected)
@@ -274,30 +278,23 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             self.welcome_dialog.force_close()
             self.powersaver_warning_switch.set_active(True)
-            configuration = { # Defaults
-                "remote_url": "http://0.0.0.0:11434",
-                "remote_bearer_token": "",
-                "run_remote": not shutil.which('ollama'),
-                "local_port": 11435,
-                "run_on_background": False,
-                "powersaver_warning": True,
-                "default_model": None,
-                "model_tweaks": {
-                    "temperature": 0.7,
-                    "seed": 0,
-                    "keep_alive": 5
-                },
-                "ollama_overrides": {},
-                "idle_timer": 0,
-                "model_directory": os.path.join(data_dir, '.ollama', 'models')
-            }
-            threading.Thread(target=self.prepare_alpaca, args=(configuration, True)).start()
+            sqlite_con = sqlite3.connect(self.sqlite_path)
+            cursor = sqlite_con.cursor()
+            cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (not shutil.which('ollama'), str(type(not shutil.which('ollama'))), "run_remote"))
+            cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (False, str(type(False)), "show_welcome_dialog"))
+            sqlite_con.commit()
+            sqlite_con.close()
+            threading.Thread(target=self.prepare_alpaca).start()
 
     @Gtk.Template.Callback()
     def switch_run_on_background(self, switch, user_data):
         logger.debug("Switching run on background")
         self.set_hide_on_close(switch.get_active())
-        self.save_server_config()
+        sqlite_con = sqlite3.connect(self.sqlite_path)
+        cursor = sqlite_con.cursor()
+        cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (switch.get_active(), str(type(switch.get_active())), "run_on_background"))
+        sqlite_con.commit()
+        sqlite_con.close()
     
     @Gtk.Template.Callback()
     def switch_powersaver_warning(self, switch, user_data):
@@ -306,17 +303,30 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
         else:
             self.banner.set_revealed(False)
-        self.save_server_config()
+        sqlite_con = sqlite3.connect(self.sqlite_path)
+        cursor = sqlite_con.cursor()
+        cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (switch.get_active(), str(type(switch.get_active())), "powersaver_warning"))
+        sqlite_con.commit()
+        sqlite_con.close()
 
     @Gtk.Template.Callback()
     def changed_default_model(self, comborow, user_data):
         logger.debug("Changed default model")
-        self.save_server_config()
+        default_model = self.convert_model_name(self.default_model_list.get_string(self.default_model_combo.get_selected()), 1)
+        sqlite_con = sqlite3.connect(self.sqlite_path)
+        cursor = sqlite_con.cursor()
+        cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (default_model, str(type(default_model)), "default_model"))
+        sqlite_con.commit()
+        sqlite_con.close()
 
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
-        with open(os.path.join(data_dir, "chats", "selected_chat.txt"), 'w') as f:
-            f.write(self.chat_list_box.get_selected_row().chat_window.get_name())
+        selected_chat = self.chat_list_box.get_selected_row().chat_window.get_name()
+        sqlite_con = sqlite3.connect(self.sqlite_path)
+        cursor = sqlite_con.cursor()
+        cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (selected_chat, str(type(selected_chat)), 'selected_chat'))
+        sqlite_con.commit()
+        sqlite_con.close()
         if self.get_hide_on_close():
             logger.info("Hiding app...")
         else:
@@ -333,12 +343,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
             value = round(value, 1)
         if self.ollama_instance.tweaks[spin.get_name()] != value:
             self.ollama_instance.tweaks[spin.get_name()] = value
-            self.save_server_config()
+            sqlite_con = sqlite3.connect(self.sqlite_path)
+            cursor = sqlite_con.cursor()
+            cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (value, str(type(value)), spin.get_name()))
+            sqlite_con.commit()
+            sqlite_con.close()
 
     @Gtk.Template.Callback()
     def instance_idle_timer_changed(self, spin):
         self.ollama_instance.idle_timer_delay = round(spin.get_value())
-        self.save_server_config()
+        sqlite_con = sqlite3.connect(self.sqlite_path)
+        cursor = sqlite_con.cursor()
+        cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (self.ollama_instance.idle_timer_delay, str(type(self.ollama_instance.idle_timer_delay)), "idle_timer"))
+        sqlite_con.commit()
+        sqlite_con.close()
 
     @Gtk.Template.Callback()
     def create_model_start(self, button):
@@ -363,7 +381,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 del self.ollama_instance.overrides[name]
             if not self.ollama_instance.remote:
                 self.ollama_instance.reset()
-            self.save_server_config()
+            sqlite_con = sqlite3.connect(self.sqlite_path)
+            cursor = sqlite_con.cursor()
+            cursor.execute("UPDATE overrides SET value=? WHERE id=?", (value, name))
+            sqlite_con.commit()
+            sqlite_con.close()
 
     @Gtk.Template.Callback()
     def link_button_handler(self, button):
@@ -568,36 +590,6 @@ Generate a title following these rules:
         except Exception as e:
             logger.error(e)
 
-    def save_server_config(self):
-        if self.ollama_instance:
-            with open(os.path.join(config_dir, "server.json"), "w+", encoding="utf-8") as f:
-                data = {
-                    'remote_url': self.ollama_instance.remote_url,
-                    'remote_bearer_token': self.ollama_instance.bearer_token,
-                    'run_remote': self.ollama_instance.remote,
-                    'local_port': self.ollama_instance.local_port,
-                    'run_on_background': self.background_switch.get_active(),
-                    'powersaver_warning': self.powersaver_warning_switch.get_active(),
-                    'default_model': self.convert_model_name(self.default_model_list.get_string(self.default_model_combo.get_selected()), 1),
-                    'model_tweaks': self.ollama_instance.tweaks,
-                    'ollama_overrides': self.ollama_instance.overrides,
-                    'idle_timer': self.ollama_instance.idle_timer_delay,
-                    'model_directory': self.ollama_instance.model_directory
-                }
-
-                json.dump(data, f, indent=6)
-
-    def verify_connection(self):
-        try:
-            response = self.ollama_instance.request("GET", "api/tags")
-            if response.status_code == 200:
-                self.save_server_config()
-                #self.update_list_local_models()
-            return response.status_code == 200
-        except Exception as e:
-            logger.error(e)
-            return False
-
     def on_theme_changed(self, manager, dark, buffer):
         logger.debug("Theme changed")
         if manager.get_dark():
@@ -650,12 +642,11 @@ Generate a title following these rules:
 
     def load_history(self):
         logger.debug("Loading history")
-        selected_chat = None
-        if os.path.exists(os.path.join(data_dir, "chats", "selected_chat.txt")):
-            with open(os.path.join(data_dir, "chats", "selected_chat.txt"), 'r') as f:
-                selected_chat = f.read()
         sqlite_con = sqlite3.connect(self.sqlite_path)
         cursor = sqlite_con.cursor()
+        selected_chat = cursor.execute("SELECT value FROM preferences WHERE id='selected_chat'").fetchone()
+        if selected_chat:
+            selected_chat = selected_chat[0]
         chats = cursor.execute('SELECT chat.id, chat.name, MAX(message.date_time) AS latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id GROUP BY chat.id ORDER BY latest_message_time DESC').fetchall()
         if len(chats) > 0:
             for row in chats:
@@ -941,7 +932,11 @@ Generate a title following these rules:
             self.ollama_instance.remote = False
             self.ollama_instance.start()
             self.model_manager.update_local_list()
-            self.save_server_config()
+            sqlite_con = sqlite3.connect(self.sqlite_path)
+            cursor = sqlite_con.cursor()
+            cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (False, str(type(False)), "run_remote"))
+            sqlite_con.commit()
+            sqlite_con.close()
 
             [element.set_sensitive(True) for element in sensitive_elements]
             self.get_application().lookup_action('manage_models').set_enabled(True)
@@ -1008,7 +1003,34 @@ Generate a title following these rules:
         chat.busy = True
         threading.Thread(target=self.run_quick_chat, args=(data, m_element_bot)).start()
 
-    def prepare_alpaca(self, configuration:dict, save:bool):
+    def prepare_alpaca(self):
+        sqlite_con = sqlite3.connect(self.sqlite_path)
+        cursor = sqlite_con.cursor()
+
+        configuration = {}
+        for row in cursor.execute("SELECT id, value, type FROM preferences").fetchall():
+            value = row[1]
+            if row[2] == "<class 'int'>":
+                value = int(value)
+            elif row[2] == "<class 'float'>":
+                value = float(value)
+            elif row[2] == "<class 'bool'>":
+                value = value == "1"
+            configuration[row[0]] = value
+        if 'show_welcome_dialog' in configuration and configuration['show_welcome_dialog']:
+            GLib.idle_add(self.welcome_dialog.present, self)
+            sqlite_con.close()
+            return
+
+        configuration['model_tweaks'] = {
+            "temperature": configuration['temperature'],
+            "seed": configuration['seed'],
+            "keep_alive": configuration['keep_alive']
+        }
+        configuration['ollama_overrides'] = {}
+        for row in cursor.execute("SELECT id, value FROM overrides"):
+            configuration['ollama_overrides'][row[0]] = row[1]
+
         #Model Manager
         self.model_manager = model_widget.model_manager_container()
         self.model_scroller.set_child(self.model_manager)
@@ -1048,10 +1070,6 @@ Generate a title following these rules:
         self.instance_idle_timer.set_value(self.ollama_instance.idle_timer_delay)
         self.remote_connection_switch.set_active(self.ollama_instance.remote)
         self.remote_connection_switch.get_activatable_widget().connect('state-set', self.remote_switched)
-
-        #Save preferences
-        if save:
-            self.save_server_config()
         self.send_button.set_sensitive(True)
         self.attachment_button.set_sensitive(True)
         self.remote_connection_switch.set_visible(shutil.which('ollama'))
@@ -1067,6 +1085,7 @@ Generate a title following these rules:
         if self.get_application().args.ask:
             time.sleep(1)
             GLib.idle_add(self.quick_chat, self.get_application().args.ask)
+        sqlite_con.close()
 
     def open_send_menu(self, gesture, x, y):
         button = gesture.get_widget()
@@ -1083,6 +1102,8 @@ Generate a title following these rules:
         popover.popup()
 
     def setup_sqlite(self):
+        if os.path.exists(os.path.join(data_dir, "chats_test.db")) and not os.path.exists(os.path.join(data_dir, "alpaca.db")):
+            shutil.move(os.path.join(data_dir, "chats_test.db"), os.path.join(data_dir, "alpaca.db"))
         sqlite_con = sqlite3.connect(self.sqlite_path)
         cursor = sqlite_con.cursor()
 
@@ -1117,12 +1138,43 @@ Generate a title following these rules:
                     id TEXT NOT NULL PRIMARY KEY,
                     picture TEXT NOT NULL
                 )
+            """,
+            "preferences": """
+                CREATE TABLE preferences (
+                    id TEXT NOT NULL PRIMARY KEY,
+                    value TEXT,
+                    type TEXT
+                )
+            """,
+            "overrides": """
+                CREATE TABLE overrides (
+                    id TEXT NOT NULL PRIMARY KEY,
+                    value TEXT
+                )
             """
         }
 
         for name, script in tables.items():
             if not cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=?", (name,)).fetchone():
                 cursor.execute(script)
+
+        preferences = {
+            "remote_url": "http://0.0.0.0:11434",
+            "remote_bearer_token": "",
+            "run_remote": False,
+            "local_port": 11435,
+            "run_on_background": False,
+            "powersaver_warning": True,
+            "default_model": "",
+            "idle_timer": 0,
+            "model_directory": os.path.join(data_dir, '.ollama', 'models'),
+            "selected_chat": None,
+            "show_welcome_dialog": True
+        }
+
+        for name, value in preferences.items():
+            if not cursor.execute("SELECT * FROM preferences WHERE id=?", (name,)).fetchone():
+                cursor.execute("INSERT INTO preferences (id, value, type) VALUES (?, ?, ?)", (name, value, str(type(value))))
 
         sqlite_con.commit()
         sqlite_con.close()
@@ -1162,6 +1214,38 @@ Generate a title following these rules:
                 logger.error(e)
                 pass
 
+        if os.path.exists(os.path.join(data_dir, "chats")):
+            shutil.rmtree(os.path.join(data_dir, "chats"))
+
+        if os.path.exists(os.path.join(config_dir, "server.json")):
+            try:
+                with open(os.path.join(config_dir, "server.json"), "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    sqlite_con = sqlite3.connect(self.sqlite_path)
+                    cursor = sqlite_con.cursor()
+                    if 'model_tweaks' in data:
+                        for name, value in data['model_tweaks'].items():
+                            data[name] = value
+                        del data['model_tweaks']
+                    for name, value in data.items():
+                        if isinstance(value, dict) and name == 'ollama_overrides':
+                            for name2, value2 in value.items():
+                                if cursor.execute("SELECT * FROM overrides WHERE id=?", (name2,)).fetchone():
+                                    cursor.execute("UPDATE overrides SET value=? WHERE id=?", (value2, name2))
+                                else:
+                                    cursor.execute("INSERT INTO overrides (id, value) VALUES (?, ?)", (name2, value2))
+                        else:
+                            if cursor.execute("SELECT * FROM preferences WHERE id=?", (name,)).fetchone():
+                                cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (value, str(type(value)), name))
+                            else:
+                                cursor.execute("INSERT INTO preferences (id, value, type) VALUES (?, ?, ?)", (name, value, str(type(value))))
+                    sqlite_con.commit()
+                    sqlite_con.close()
+                os.remove(os.path.join(config_dir, "server.json"))
+            except Exception as e:
+                logger.error(e)
+                pass
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.setup_sqlite()
@@ -1182,8 +1266,6 @@ Generate a title following these rules:
         self.chat_list_box = chat_widget.chat_list()
         self.chat_list_container.set_child(self.chat_list_box)
         GtkSource.init()
-        if not os.path.exists(os.path.join(data_dir, "chats")):
-            os.makedirs(os.path.join(data_dir, "chats"))
         enter_key_controller = Gtk.EventControllerKey.new()
         enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: (self.send_message() or True) if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
 
@@ -1233,42 +1315,7 @@ Generate a title following these rules:
         self.create_model_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
         self.set_focus(self.message_text_view)
 
-        configuration = { # Defaults
-            "remote_url": "http://0.0.0.0:11434",
-            "remote_bearer_token": "",
-            "run_remote": False,
-            "local_port": 11435,
-            "run_on_background": False,
-            "powersaver_warning": True,
-            "default_model": None,
-            "model_tweaks": {
-                "temperature": 0.7,
-                "seed": 0,
-                "keep_alive": 5
-            },
-            "ollama_overrides": {},
-            "idle_timer": 0,
-            "model_directory": os.path.join(data_dir, '.ollama', 'models')
-        }
-
-        if os.path.exists(os.path.join(config_dir, "server.json")):
-            try:
-                with open(os.path.join(config_dir, "server.json"), "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                    for option, value in configuration.items():
-                        if option in data and data[option] != value and type(data[option]) == type(value):
-                            configuration[option] = data[option]
-
-                    self.background_switch.set_active(configuration['run_on_background'])
-                    self.powersaver_warning_switch.set_active(configuration['powersaver_warning'])
-
-                    threading.Thread(target=self.prepare_alpaca, args=(configuration, False)).start()
-            except Exception as e:
-                logger.error(e)
-                threading.Thread(target=self.prepare_alpaca, args=(configuration, True)).start()
-                self.powersaver_warning_switch.set_active(True)
-        else:
-            self.welcome_dialog.present(self)
+        threading.Thread(target=self.prepare_alpaca).start()
 
         if self.powersaver_warning_switch.get_active():
             self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
