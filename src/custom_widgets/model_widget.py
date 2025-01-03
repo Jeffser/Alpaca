@@ -240,13 +240,14 @@ class pulling_model(Gtk.ListBoxRow):
             sys.exit()
         if 'error' in data:
             self.error = data['error']
-        if 'total' in data and 'completed' in data:
-            fraction = round(data['completed'] / data['total'], 4)
-            GLib.idle_add(self.prc_label.set_label, f"{fraction:05.2%}")
-            GLib.idle_add(self.progress_bar.set_fraction, fraction)
         else:
-            GLib.idle_add(self.prc_label.set_label, data['status'])
-            GLib.idle_add(self.progress_bar.pulse)
+            if 'total' in data and 'completed' in data:
+                fraction = round(data['completed'] / data['total'], 4)
+                GLib.idle_add(self.prc_label.set_label, f"{fraction:05.2%}")
+                GLib.idle_add(self.progress_bar.set_fraction, fraction)
+            else:
+                GLib.idle_add(self.prc_label.set_label, data['status'])
+                GLib.idle_add(self.progress_bar.pulse)
 
 class pulling_model_list(Gtk.ListBox):
     __gtype_name__ = 'AlpacaPullingModelList'
