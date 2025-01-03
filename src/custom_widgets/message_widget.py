@@ -83,11 +83,15 @@ class edit_text_block(Gtk.Box):
         sqlite_con.close()
 
         self.get_parent().remove(self)
+        message_element.set_hexpand(False)
+        message_element.set_halign(0 if message_element.bot else 2)
         window.show_toast(_("Message edited successfully"), window.main_overlay)
 
     def cancel_edit(self):
         message_element = self.get_parent().get_parent()
         message_element.set_text(message_element.text)
+        message_element.set_hexpand(False)
+        message_element.set_halign(0 if message_element.bot else 2)
         self.get_parent().remove(self)
 
 class text_block(Gtk.Label):
@@ -387,6 +391,8 @@ class option_popup(Gtk.Popover):
     def edit_message(self):
         logger.debug("Editing message")
         self.popdown()
+        self.message_element.set_hexpand(True)
+        self.message_element.set_halign(0)
         edit_text_b = edit_text_block(self.message_element.text)
         for child in self.message_element.content_children:
             self.message_element.container.remove(child)
