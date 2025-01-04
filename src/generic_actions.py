@@ -101,7 +101,10 @@ def attach_file(file):
         "pdf": ["pdf"],
         "odt": ["odt"]
     }
-    extension = file.get_path().split(".")[-1]
+    if file.query_info("standard::content-type", 0, None).get_content_type() == 'text/plain':
+        extension = 'txt'
+    else:
+        extension = file.get_path().split(".")[-1]
     file_type = next(key for key, value in file_types.items() if extension in value)
     if not file_type:
         return
