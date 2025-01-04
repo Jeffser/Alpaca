@@ -26,7 +26,7 @@
             <child type="top">
               <object class="AdwHeaderBar">
                 <child type="start">
-                  <object class="GtkButton" id="add_chat_button">
+                  <object class="GtkButton">
                     <property name="action-name">app.new_chat</property>
                     <property name="tooltip-text" translatable="yes">New Chat</property>
                     <property name="icon-name">chat-message-new-symbolic</property>
@@ -135,7 +135,7 @@
                   </object>
                 </child>
                 <child type="end">
-                  <object class="GtkMenuButton" id="secondary_menu_button">
+                  <object class="GtkMenuButton">
                     <property name="primary">False</property>
                     <property name="icon-name">view-more-symbolic</property>
                     <property name="tooltip-text" translatable="yes">Chat Menu</property>

@@ -42,7 +42,6 @@ logger = logging.getLogger(__name__)
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
-    app_dir = os.getenv("FLATPAK_DEST")
 
     __gtype_name__ = 'AlpacaWindow'
 
@@ -98,7 +97,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     navigation_view_manage_models = Gtk.Template.Child()
     file_preview_open_button = Gtk.Template.Child()
     file_preview_remove_button = Gtk.Template.Child()
-    secondary_menu_button = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
     message_searchbar = Gtk.Template.Child()
     message_search_button = Gtk.Template.Child()
@@ -124,7 +122,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     chat_list_box = None
     ollama_instance = None
     model_manager = None
-    add_chat_button = Gtk.Template.Child()
     instance_idle_timer = Gtk.Template.Child()
 
     background_switch = Gtk.Template.Child()
@@ -132,8 +129,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     remote_connection_switch = Gtk.Template.Child()
 
     banner = Gtk.Template.Child()
-
-    style_manager = Adw.StyleManager()
 
     terminal_scroller = Gtk.Template.Child()
     terminal_dialog = Gtk.Template.Child()

@@ -127,10 +127,6 @@ class text_block(Gtk.Label):
         self.set_text(self.raw_text)
         self.update_property([1], [self.get_text()])
 
-    def clear_text(self):
-        self.buffer.delete(self.textbuffer.get_start_iter(), self.textbuffer.get_end_iter())
-        self.update_property([1], [""])
-
 class code_block(Gtk.Box):
     __gtype_name__ = 'AlpacaCodeBlock'
 

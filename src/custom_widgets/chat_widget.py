@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
-import logging, os, datetime, shutil, random, tempfile, tarfile, json, sqlite3
+import logging, os, datetime, shutil, random, json, sqlite3
 from ..internal import data_dir, cache_dir
 from .message_widget import message
 
@@ -316,7 +316,7 @@ class chat_tab(Gtk.ListBoxRow):
         )
 
         self.gesture_click = Gtk.GestureClick(button=3)
-        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.open_menu(gesture, x, y))
+        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.open_menu(gesture, x, y) if n_press == 1 else None)
         self.add_controller(self.gesture_click)
         self.gesture_long_press = Gtk.GestureLongPress()
         self.gesture_long_press.connect("pressed", self.open_menu)

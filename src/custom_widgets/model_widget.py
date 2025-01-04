@@ -133,9 +133,6 @@ class model_selector_button(Gtk.MenuButton):
         sqlite_con.close()
         window.chat_list_box.update_profile_pictures()
 
-    def clear_list(self):
-        self.get_popover().model_list_box.remove_all()
-
     def get_model_by_name(self, model_name:str) -> object:
         return next((model for model in list(self.get_popover().model_list_box) if model.get_name() == model_name), None)
 
