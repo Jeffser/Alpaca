@@ -1250,13 +1250,14 @@ Generate a title following these rules:
         portal = bus.get("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop")
         subscription = None
 
-        def on_response(sender, obj, iface, signal, *_):
-            response = _[0]
+        def on_response(sender, obj, iface, signal, *params):
+            response = params[0]
             if response[0] == 0:
                 uri = response[1].get("uri")
                 generic_actions.attach_file(Gio.File.new_for_uri(uri))
             else:
                 logger.error(f"Screenshot request failed with response: {response}\n{sender}\n{obj}\n{iface}\n{signal}")
+                self.show_toast(_("Attachment failed, screenshot might be too big"), self.main_overlay)
             if subscription:
                 subscription.disconnect()
 
