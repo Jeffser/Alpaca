@@ -568,25 +568,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def generate_chat_title(self, message, old_chat_name):
         logger.debug("Generating chat title")
-        prompt = f"""
+        system_prompt = f"""
 Generate a title following these rules:
     - The title should be based on the prompt at the end
     - Keep it in the same language as the prompt
     - The title needs to be less than 30 characters
     - Use only alphanumeric characters and spaces
     - Just write the title, NOTHING ELSE
-
-```PROMPT
-{message['content']}
-```"""
+"""
         current_model = self.model_manager.get_selected_model()
-        data = {"model": current_model, "prompt": prompt, "stream": False}
-        if 'images' in message:
-            data["images"] = message['images']
+        data = {"model": current_model, "messages": [{"role": "system", "content": system_prompt}] + [message], "stream": False}
         try:
-            response = self.ollama_instance.request("POST", "api/generate", json.dumps(data))
+            response = self.ollama_instance.request("POST", "api/chat", json.dumps(data))
             if response.status_code == 200:
-                new_chat_name = json.loads(response.text)["response"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
+                new_chat_name = json.loads(response.text)["message"]["content"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
                 new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
                 self.chat_list_box.rename_chat(old_chat_name, new_chat_name)
         except Exception as e:
