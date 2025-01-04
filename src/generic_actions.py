@@ -3,7 +3,7 @@
 Working on organizing the code
 """
 
-import os, requests, sqlite3
+import os, requests, sqlite3, re
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api.formatters import TextFormatter
 from html2text import html2text
@@ -70,10 +70,21 @@ def attach_website(url:str):
         textview_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).replace(url, "")
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
         buffer.insert(buffer.get_start_iter(), textview_text, len(textview_text))
+
         if not os.path.exists('/tmp/alpaca/websites/'):
             os.makedirs('/tmp/alpaca/websites/')
-        md_name = window.generate_numbered_name('website.md', os.listdir('/tmp/alpaca/websites'))
-        file_path = os.path.join('/tmp/alpaca/websites/', md_name)
+
+        website_title = 'website'
+        match = re.search(r'^# (.+)', md, re.MULTILINE)
+        if match:
+            website_title = match.group(1)
+        else:
+            match = re.search(r'https?://(?:www\.)?([^/]+)', url)
+            if match:
+                website_title = match.group(1)
+        website_title = window.generate_numbered_name(website_title, os.listdir('/tmp/alpaca/websites'))
+
+        file_path = os.path.join('/tmp/alpaca/websites/', website_title)
         with open(file_path, 'w+', encoding="utf-8") as f:
             f.write('{}\n\n{}'.format(url, md))
         window.attach_file(file_path, 'website')
