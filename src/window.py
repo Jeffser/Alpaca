@@ -703,7 +703,7 @@ Generate a title following these rules:
             try:
                 with Image.open(file_path) as img:
                     width, height = img.size
-                    max_size = 720
+                    max_size = 640
                     if width > height:
                         new_width = max_size
                         new_height = int((max_size / width) * height)
