@@ -1,5 +1,8 @@
-.message_text_view, .modelfile_textview {
+.modelfile_textview {
   background-color: rgba(0,0,0,0);
+}
+.message_text_view {
+  padding: 0 5px 0 5px;
 }
 .chat_image_button {
   padding: 0;

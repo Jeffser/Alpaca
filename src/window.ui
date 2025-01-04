@@ -230,77 +230,58 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkBox">
-                                <style>
-                                  <class name="card"/>
-                                </style>
+                              <object class="AdwBin">
                                 <child>
-                                  <object class="GtkScrolledWindow">
+                                  <object class="GtkScrolledWindow" id="message_text_view_scrolled_window">
                                     <property name="max-content-height">150</property>
                                     <property name="propagate-natural-height">true</property>
-                                    <property name="margin-start">10</property>
-                                    <property name="margin-end">10</property>
+                                    <property name="overflow">1</property>
                                     <style>
                                       <class name="message_input_scroll_window"/>
+                                      <class name="undershoot-bottom"/>
+                                      <class name="card"/>
                                     </style>
-                                    <child>
-                                      <object class="GtkTextView" id="message_text_view">
-                                        <signal name="paste-clipboard" handler="on_clipboard_paste"/>
-                                        <style>
-                                          <class name="message_text_view"/>
-                                          <class name="undershoot-bottom"/>
-                                        </style>
-                                        <property name="wrap-mode">word</property>
-                                        <property name="top-margin">10</property>
-                                        <property name="bottom-margin">10</property>
-                                        <property name="hexpand">true</property>
-                                        <property name="input-hints">spellcheck</property>
-                                        <accessibility>
-                                          <property name="label" translatable="yes">Message text box</property>
-                                        </accessibility>
-                                      </object>
-                                    </child>
                                   </object>
                                 </child>
                               </object>
-                              </child>
-                              <child>
-                                <object class="GtkButton" id="send_button">
-                                  <signal name="clicked" handler="send_message"/>
-                                  <property name="vexpand">false</property>
-                                  <property name="valign">3</property>
-                                  <property name="tooltip-text" translatable="yes">Send Message</property>
-                                  <property name="sensitive">false</property>
-                                  <style>
-                                    <class name="accent"/>
-                                    <class name="circular"/>
-                                    <class name="suggested-action"/>
-                                  </style>
-                                  <child>
-                                    <object class="AdwButtonContent">
-                                      <property name="icon-name">paper-plane-symbolic</property>
-                                    </object>
-                                  </child>
-                                </object>
-                              </child>
-                              <child>
-                                <object class="GtkButton" id="stop_button">
-                                  <signal name="clicked" handler="stop_message"/>
-                                  <property name="vexpand">false</property>
-                                  <property name="valign">3</property>
-                                  <property name="visible">false</property>
-                                  <style>
-                                    <class name="destructive-action"/>
-                                    <class name="circular"/>
-                                  </style>
-                                  <child>
-                                    <object class="AdwButtonContent">
-                                      <property name="icon-name">media-playback-stop-symbolic</property>
-                                    </object>
-                                  </child>
-                                </object>
-                              </child>
-                            </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="send_button">
+                                <signal name="clicked" handler="send_message"/>
+                                <property name="vexpand">false</property>
+                                <property name="valign">3</property>
+                                <property name="tooltip-text" translatable="yes">Send Message</property>
+                                <property name="sensitive">false</property>
+                                <style>
+                                  <class name="accent"/>
+                                  <class name="circular"/>
+                                  <class name="suggested-action"/>
+                                </style>
+                                <child>
+                                  <object class="AdwButtonContent">
+                                    <property name="icon-name">paper-plane-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="stop_button">
+                                <signal name="clicked" handler="stop_message"/>
+                                <property name="vexpand">false</property>
+                                <property name="valign">3</property>
+                                <property name="visible">false</property>
+                                <style>
+                                  <class name="destructive-action"/>
+                                  <class name="circular"/>
+                                </style>
+                                <child>
+                                  <object class="AdwButtonContent">
+                                    <property name="icon-name">media-playback-stop-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
                         </child>
                       </object>
 

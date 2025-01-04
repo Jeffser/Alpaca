@@ -31,8 +31,8 @@ from pydbus import SessionBus, Variant
 import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
-
-from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf
+gi.require_version('Spelling', '1')
+from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelling
 
 from . import connection_handler, generic_actions
 from .custom_widgets import message_widget, chat_widget, model_widget, terminal_widget, dialog_widget
@@ -81,7 +81,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     main_overlay = Gtk.Template.Child()
     manage_models_overlay = Gtk.Template.Child()
     chat_stack = Gtk.Template.Child()
-    message_text_view = Gtk.Template.Child()
+    message_text_view = None
+    message_text_view_scrolled_window = Gtk.Template.Child()
     send_button = Gtk.Template.Child()
     stop_button = Gtk.Template.Child()
     attachment_container = Gtk.Template.Child()
@@ -1271,6 +1272,7 @@ Generate a title following these rules:
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        GtkSource.init()
         self.setup_sqlite()
         self.initial_convert_to_sql()
         self.message_searchbar.connect('notify::search-mode-enabled', lambda *_: self.message_search_button.set_active(self.message_searchbar.get_search_mode()))
@@ -1284,11 +1286,16 @@ Generate a title following these rules:
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
+        self.message_text_view = GtkSource.View(
+            css_classes=['message_text_view'], top_margin=10, bottom_margin=10, hexpand=True
+        )
+
+        self.message_text_view_scrolled_window.set_child(self.message_text_view)
         self.message_text_view.add_controller(drop_target)
+        self.message_text_view.get_buffer().set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('adwaita'))
 
         self.chat_list_box = chat_widget.chat_list()
         self.chat_list_container.set_child(self.chat_list_box)
-        GtkSource.init()
         enter_key_controller = Gtk.EventControllerKey.new()
         enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: (self.send_message() or True) if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
 
@@ -1340,6 +1347,12 @@ Generate a title following these rules:
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))
         self.create_model_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
+
+        checker = Spelling.Checker.get_default()
+        adapter = Spelling.TextBufferAdapter.new(self.message_text_view.get_buffer(), checker)
+        self.message_text_view.set_extra_menu(adapter.get_menu_model())
+        self.message_text_view.insert_action_group('spelling', adapter)
+        adapter.set_enabled(True)
         self.set_focus(self.message_text_view)
 
         threading.Thread(target=self.prepare_alpaca).start()

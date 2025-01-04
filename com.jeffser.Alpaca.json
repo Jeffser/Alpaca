@@ -199,6 +199,19 @@
 	    	}
 	    ]
 	},
+	{
+            "name" : "libspelling",
+            "builddir" : true,
+            "buildsystem" : "meson",
+            "config-opts" : [ "-Ddocs=false", "-Dvapi=false" ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/GNOME/libspelling.git",
+                    "branch" : "main"
+                }
+            ]
+        },
         {
             "name": "ollama",
             "buildsystem": "simple",
