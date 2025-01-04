@@ -703,7 +703,7 @@ Generate a title following these rules:
             try:
                 with Image.open(file_path) as img:
                     width, height = img.size
-                    max_size = 240
+                    max_size = 720
                     if width > height:
                         new_width = max_size
                         new_height = int((max_size / width) * height)
@@ -1245,20 +1245,20 @@ Generate a title following these rules:
                 logger.error(e)
                 pass
 
-    def screenie(self):
+    def request_screenshot(self):
         bus = SessionBus()
         portal = bus.get("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop")
         subscription = None
 
         def on_response(sender, obj, iface, signal, *_):
-            if subscription:
-                subscription.disconnect()
             response = _[0]
             if response[0] == 0:
                 uri = response[1].get("uri")
                 generic_actions.attach_file(Gio.File.new_for_uri(uri))
             else:
-                print(f"Screenshot request failed with response: {response}")
+                logger.error(f"Screenshot request failed with response: {response}\n{sender}\n{obj}\n{iface}\n{signal}")
+            if subscription:
+                subscription.disconnect()
 
         subscription = bus.subscribe(
             iface="org.freedesktop.portal.Request",
@@ -1324,7 +1324,7 @@ Generate a title following these rules:
             'send_message': [lambda *_: self.send_message()],
             'send_system_message': [lambda *_: self.send_message(None, True)],
             'attach_file': [lambda *_, file_filter=self.file_filter_attachments: dialog_widget.simple_file(file_filter, generic_actions.attach_file)],
-            'attach_screenshot': [lambda *_: self.screenie()],
+            'attach_screenshot': [lambda *i: self.request_screenshot() if self.model_manager.verify_if_image_can_be_used() else self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)],
             'attach_url': [lambda *i: dialog_widget.simple_entry(_('Attach Website? (Experimental)'), _('Please enter a website URL'), self.cb_text_received, {'placeholder': 'https://jeffser.com/alpaca/'})],
             'attach_youtube': [lambda *i: dialog_widget.simple_entry(_('Attach YouTube Captions?'), _('Please enter a YouTube video URL'), self.cb_text_received, {'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})]
         }
