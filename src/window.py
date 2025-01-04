@@ -26,6 +26,7 @@ from io import BytesIO
 from PIL import Image
 from pypdf import PdfReader
 from datetime import datetime
+from pydbus import SessionBus, Variant
 
 import gi
 gi.require_version('GtkSource', '5')
@@ -91,6 +92,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     attachment_button = Gtk.Template.Child()
     chat_right_click_menu = Gtk.Template.Child()
     send_message_menu = Gtk.Template.Child()
+    attachment_menu = Gtk.Template.Child()
     model_tag_list_box = Gtk.Template.Child()
     navigation_view_manage_models = Gtk.Template.Child()
     file_preview_open_button = Gtk.Template.Child()
@@ -441,7 +443,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def on_clipboard_paste(self, textview):
         logger.debug("Pasting from clipboard")
         clipboard = Gdk.Display.get_default().get_clipboard()
-        clipboard.read_text_async(None, self.cb_text_received)
+        clipboard.read_text_async(None, lambda clipboard, result: self.cb_text_received(clipboard.read_text_finish(result)))
         clipboard.read_texture_async(None, self.cb_image_received)
 
     @Gtk.Template.Callback()
@@ -862,9 +864,8 @@ Generate a title following these rules:
             logger.error(e)
             self.show_toast(_("Error attaching video, please try again"), self.main_overlay)
 
-    def cb_text_received(self, clipboard, result):
+    def cb_text_received(self, text):
         try:
-            text = clipboard.read_text_finish(result)
             #Check if text is a Youtube URL
             youtube_regex = re.compile(
                 r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/'
@@ -1085,10 +1086,10 @@ Generate a title following these rules:
 
         sqlite_con.close()
 
-    def open_send_menu(self, gesture, x, y):
+    def open_button_menu(self, gesture, x, y, menu):
         button = gesture.get_widget()
         popover = Gtk.PopoverMenu(
-            menu_model=self.send_message_menu,
+            menu_model=menu,
             has_arrow=False,
             halign=1
         )
@@ -1244,6 +1245,29 @@ Generate a title following these rules:
                 logger.error(e)
                 pass
 
+    def screenie(self):
+        bus = SessionBus()
+        portal = bus.get("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop")
+        subscription = None
+
+        def on_response(sender, obj, iface, signal, *_):
+            if subscription:
+                subscription.disconnect()
+            response = _[0]
+            if response[0] == 0:
+                uri = response[1].get("uri")
+                generic_actions.attach_file(Gio.File.new_for_uri(uri))
+            else:
+                print(f"Screenshot request failed with response: {response}")
+
+        subscription = bus.subscribe(
+            iface="org.freedesktop.portal.Request",
+            signal="Response",
+            signal_fired=on_response
+        )
+
+        portal.Screenshot("", {"interactive": Variant('b', True)})
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.setup_sqlite()
@@ -1267,12 +1291,13 @@ Generate a title following these rules:
         enter_key_controller = Gtk.EventControllerKey.new()
         enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: (self.send_message() or True) if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
 
-        gesture_click = Gtk.GestureClick(button=3)
-        gesture_click.connect("released", lambda gesture, n_press, x, y: self.open_send_menu(gesture, x, y))
-        self.send_button.add_controller(gesture_click)
-        gesture_long_press = Gtk.GestureLongPress()
-        gesture_long_press.connect("pressed", self.open_send_menu)
-        self.send_button.add_controller(gesture_long_press)
+        for button, menu in {self.send_button: self.send_message_menu, self.attachment_button: self.attachment_menu}.items():
+            gesture_click = Gtk.GestureClick(button=3)
+            gesture_click.connect("released", lambda gesture, n_press, x, y, menu=menu: self.open_button_menu(gesture, x, y, menu))
+            button.add_controller(gesture_click)
+            gesture_long_press = Gtk.GestureLongPress()
+            gesture_long_press.connect("pressed", lambda gesture, x, y, menu=menu: self.open_button_menu(gesture, x, y, menu))
+            button.add_controller(gesture_long_press)
 
         self.message_text_view.add_controller(enter_key_controller)
         self.set_help_overlay(self.shortcut_window)
@@ -1297,7 +1322,11 @@ Generate a title following these rules:
             'manage_models': [lambda *_: self.manage_models_dialog.present(self), ['<primary>m']],
             'search_messages': [lambda *_: self.message_searchbar.set_search_mode(not self.message_searchbar.get_search_mode()), ['<primary>f']],
             'send_message': [lambda *_: self.send_message()],
-            'send_system_message': [lambda *_: self.send_message(None, True)]
+            'send_system_message': [lambda *_: self.send_message(None, True)],
+            'attach_file': [lambda *_, file_filter=self.file_filter_attachments: dialog_widget.simple_file(file_filter, generic_actions.attach_file)],
+            'attach_screenshot': [lambda *_: self.screenie()],
+            'attach_url': [lambda *i: dialog_widget.simple_entry(_('Attach Website? (Experimental)'), _('Please enter a website URL'), self.cb_text_received, {'placeholder': 'https://jeffser.com/alpaca/'})],
+            'attach_youtube': [lambda *i: dialog_widget.simple_entry(_('Attach YouTube Captions?'), _('Please enter a YouTube video URL'), self.cb_text_received, {'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})]
         }
 
         for action_name, data in universal_actions.items():
@@ -1309,7 +1338,6 @@ Generate a title following these rules:
         self.instance_page.set_sensitive(False)
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))
-        self.attachment_button.connect("clicked", lambda button, file_filter=self.file_filter_attachments: dialog_widget.simple_file(file_filter, generic_actions.attach_file))
         self.create_model_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
         self.set_focus(self.message_text_view)
 

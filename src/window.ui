@@ -218,6 +218,7 @@
                                 <property name="valign">3</property>
                                 <property name="sensitive">false</property>
                                 <property name="tooltip-text" translatable="yes">Attach File</property>
+                                <property name="action-name">app.attach_file</property>
                                 <style>
                                   <class name="circular"/>
                                 </style>
@@ -1236,6 +1237,26 @@
       <item>
         <attribute name="label" translatable="yes">Send as System</attribute>
         <attribute name="action">app.send_system_message</attribute>
+      </item>
+    </section>
+  </menu>
+  <menu id="attachment_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Attach File</attribute>
+        <attribute name="action">app.attach_file</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Attach Screenshot</attribute>
+        <attribute name="action">app.attach_screenshot</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Attach Website</attribute>
+        <attribute name="action">app.attach_url</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Attach YouTube Captions</attribute>
+        <attribute name="action">app.attach_youtube</attribute>
       </item>
     </section>
   </menu>
