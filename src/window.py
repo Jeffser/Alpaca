@@ -570,10 +570,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         logger.debug("Generating chat title")
         system_prompt = f"""
 Generate a title following these rules:
-    - The title should be based on the prompt at the end
+    - The title should be based on the user's prompt
     - Keep it in the same language as the prompt
     - The title needs to be less than 30 characters
-    - Use only alphanumeric characters and spaces
+    - Use only alphanumeric characters, spaces and optionally emojis
     - Just write the title, NOTHING ELSE
 """
         current_model = self.model_manager.get_selected_model()
