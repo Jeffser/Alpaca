@@ -230,19 +230,14 @@
                               </object>
                             </child>
                             <child>
-                              <object class="AdwBin">
-                                <child>
-                                  <object class="GtkScrolledWindow" id="message_text_view_scrolled_window">
-                                    <property name="max-content-height">150</property>
-                                    <property name="propagate-natural-height">true</property>
-                                    <property name="overflow">1</property>
-                                    <style>
-                                      <class name="message_input_scroll_window"/>
-                                      <class name="undershoot-bottom"/>
-                                      <class name="card"/>
-                                    </style>
-                                  </object>
-                                </child>
+                              <object class="GtkScrolledWindow" id="message_text_view_scrolled_window">
+                                <property name="max-content-height">150</property>
+                                <property name="propagate-natural-height">true</property>
+                                <property name="overflow">1</property>
+                                <style>
+                                  <class name="undershoot-bottom"/>
+                                  <class name="card"/>
+                                </style>
                               </object>
                             </child>
                             <child>

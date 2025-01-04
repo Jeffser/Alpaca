@@ -592,14 +592,6 @@ Generate a title following these rules:
         except Exception as e:
             logger.error(e)
 
-    def on_theme_changed(self, manager, dark, buffer):
-        logger.debug("Theme changed")
-        if manager.get_dark():
-            source_style = GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark')
-        else:
-            source_style = GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita')
-        buffer.set_style_scheme(source_style)
-
     def switch_send_stop_button(self, send:bool):
         self.stop_button.set_visible(not send)
         self.send_button.set_visible(send)
