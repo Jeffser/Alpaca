@@ -441,13 +441,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                                 block.set_markup(block.get_text())
 
     @Gtk.Template.Callback()
-    def on_clipboard_paste(self, textview):
-        logger.debug("Pasting from clipboard")
-        clipboard = Gdk.Display.get_default().get_clipboard()
-        clipboard.read_text_async(None, lambda clipboard, result: self.cb_text_received(clipboard.read_text_finish(result)))
-        clipboard.read_texture_async(None, self.cb_image_received)
-
-    @Gtk.Template.Callback()
     def model_detail_create_button_clicked(self, button):
         self.create_model(button.get_name(), False)
 
@@ -485,6 +478,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def closing_quick_ask(self, user_data):
         if not self.get_visible():
             self.close()
+
+    def on_clipboard_paste(self, textview):
+        logger.debug("Pasting from clipboard")
+        clipboard = Gdk.Display.get_default().get_clipboard()
+        clipboard.read_text_async(None, lambda clipboard, result: self.cb_text_received(clipboard.read_text_finish(result)))
+        clipboard.read_texture_async(None, self.cb_image_received)
 
     def check_alphanumeric(self, editable, text, length, position, allowed_chars):
         new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
@@ -1293,6 +1292,7 @@ Generate a title following these rules:
         self.message_text_view_scrolled_window.set_child(self.message_text_view)
         self.message_text_view.add_controller(drop_target)
         self.message_text_view.get_buffer().set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('adwaita'))
+        self.message_text_view.connect('paste-clipboard', self.on_clipboard_paste)
 
         self.chat_list_box = chat_widget.chat_list()
         self.chat_list_container.set_child(self.chat_list_box)
