@@ -9,6 +9,7 @@ gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk, GdkPixbuf
 import logging, os, datetime, re, shutil, threading, sys, base64, sqlite3, tempfile
 import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.mathtext as mathtext
 from PIL import Image
