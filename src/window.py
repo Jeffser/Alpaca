@@ -770,7 +770,7 @@ Generate a title following these rules:
             )
             button = Gtk.Button(
                 vexpand=True,
-                valign=3,
+                valign=0,
                 name=file_name,
                 css_classes=["flat"],
                 tooltip_text=file_name,
