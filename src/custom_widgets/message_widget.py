@@ -361,8 +361,8 @@ class latex_image(Gtk.MenuButton):
                 content_fit=1,
                 vexpand=True
             )
-            with tempfile.TemporaryFile() as png_path:
-                png_path = '{}.png'.format(png_path)
+            with tempfile.TemporaryDirectory() as temp_path:
+                png_path = os.path.join(temp_path, 'equation.png')
                 fig, ax = plt.subplots()
                 ax.text(0.5, 0.5, eq, fontsize=24, ha='center', va='center', usetex=use_TeX)
                 ax.axis('off')
