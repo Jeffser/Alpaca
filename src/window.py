@@ -1337,9 +1337,7 @@ Generate a title following these rules:
         adapter.set_enabled(True)
         self.set_focus(self.message_text_view)
 
-        st = time.time()
         self.prepare_alpaca()
-        print('{}s'.format(time.time() - st))
 
         if self.powersaver_warning_switch.get_active():
             self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
