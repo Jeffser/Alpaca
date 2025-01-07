@@ -999,7 +999,7 @@ Generate a title following these rules:
                 value = value == "1"
             configuration[row[0]] = value
         if 'show_welcome_dialog' in configuration and configuration['show_welcome_dialog']:
-            GLib.idle_add(self.welcome_dialog.present, self)
+            self.welcome_dialog.present(self)
             sqlite_con.close()
             return
 
@@ -1014,13 +1014,13 @@ Generate a title following these rules:
 
         #Model Manager
         self.model_manager = model_widget.model_manager_container()
-        GLib.idle_add(self.model_scroller.set_child, self.model_manager)
+        self.model_scroller.set_child(self.model_manager)
 
         #Chat History
         threading.Thread(target=self.load_history).start()
 
         if self.get_application().args.new_chat:
-            GLib.idle_add(self.chat_list_box.new_chat, self.get_application().args.new_chat)
+            self.chat_list_box.new_chat(self.get_application().args.new_chat)
 
         #Instance
         self.ollama_instance = connection_handler.instance(configuration['local_port'], configuration['remote_url'], configuration['run_remote'], configuration['model_tweaks'], configuration['ollama_overrides'], configuration['remote_bearer_token'], configuration['idle_timer'], configuration['model_directory'])
@@ -1032,39 +1032,39 @@ Generate a title following these rules:
         #User Preferences
         for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
             if element.get_name() in self.ollama_instance.tweaks:
-                GLib.idle_add(element.set_value, self.ollama_instance.tweaks[element.get_name()])
+                element.set_value(self.ollama_instance.tweaks[element.get_name()])
 
         if configuration['default_model']:
             try:
                 for i, model in enumerate(list(self.default_model_list)):
                     if self.convert_model_name(model.get_string(), 1) == configuration['default_model']:
-                        GLib.idle_add(self.default_model_combo.set_selected, i)
+                        self.default_model_combo.set_selected(i)
             except:
                 pass
 
         for element in list(list(list(list(self.overrides_group)[0])[1])[0]):
             if element.get_name() in self.ollama_instance.overrides:
-                GLib.idle_add(element.set_text, self.ollama_instance.overrides[element.get_name()])
+                element.set_text(self.ollama_instance.overrides[element.get_name()])
 
-        GLib.idle_add(self.model_directory_selector.set_subtitle, self.ollama_instance.model_directory)
-        GLib.idle_add(self.set_hide_on_close, self.background_switch.get_active())
-        GLib.idle_add(self.instance_idle_timer.set_value, self.ollama_instance.idle_timer_delay)
-        GLib.idle_add(self.remote_connection_switch.set_active, self.ollama_instance.remote)
+        self.model_directory_selector.set_subtitle(self.ollama_instance.model_directory)
+        self.set_hide_on_close(self.background_switch.get_active())
+        self.instance_idle_timer.set_value(self.ollama_instance.idle_timer_delay)
+        self.remote_connection_switch.set_active(self.ollama_instance.remote)
         self.remote_connection_switch.get_activatable_widget().connect('state-set', self.remote_switched)
-        GLib.idle_add(self.send_button.set_sensitive, True)
-        GLib.idle_add(self.attachment_button.set_sensitive, True)
-        GLib.idle_add(self.remote_connection_switch.set_visible, shutil.which('ollama'))
-        GLib.idle_add(self.remote_connection_selector.set_visible, not shutil.which('ollama'))
-        GLib.idle_add(self.tweaks_group.set_sensitive, True)
-        GLib.idle_add(self.remote_connection_switch.set_sensitive, True)
-        GLib.idle_add(self.instance_page.set_sensitive, shutil.which('ollama') and not self.remote_connection_switch.get_active())
+        self.send_button.set_sensitive(True)
+        self.attachment_button.set_sensitive(True)
+        self.remote_connection_switch.set_visible(shutil.which('ollama'))
+        self.remote_connection_selector.set_visible(not shutil.which('ollama'))
+        self.tweaks_group.set_sensitive(True)
+        self.remote_connection_switch.set_sensitive(True)
+        self.instance_page.set_sensitive(shutil.which('ollama') and not self.remote_connection_switch.get_active())
         if not shutil.which('ollama'):
-            GLib.idle_add(self.preferences_dialog.remove, self.instance_page)
-            GLib.idle_add(self.remote_connection_selector.set_subtitle, configuration['remote_url'])
+            self.preferences_dialog.remove, self.instance_page)
+            self.remote_connection_selector.set_subtitle, configuration['remote_url'])
         self.get_application().lookup_action('manage_models').set_enabled(True)
 
         if self.get_application().args.ask:
-            GLib.idle_add(self.quick_chat, self.get_application().args.ask)
+            self.quick_chat, self.get_application().args.ask)
 
         sqlite_con.close()
 
@@ -1337,7 +1337,7 @@ Generate a title following these rules:
         adapter.set_enabled(True)
         self.set_focus(self.message_text_view)
 
-        threading.Thread(target=self.prepare_alpaca).start()
+        self.prepare_alpaca()
 
         if self.powersaver_warning_switch.get_active():
             self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
