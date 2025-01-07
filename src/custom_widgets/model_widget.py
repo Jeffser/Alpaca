@@ -743,10 +743,10 @@ class model_manager_container(Gtk.Box):
         elif data and data['details']['parent_model'].split(':')[0] in available_models:
             categories = available_models[data['details']['parent_model'].split(':')[0]]['categories']
 
-        GLib.idle_add(self.local_list.add_model, model_name, [cat for cat in categories if cat not in ['small', 'medium', 'big', 'huge']])
+        self.local_list.add_model(model_name, [cat for cat in categories if cat not in ['small', 'medium', 'big', 'huge']])
         if not self.local_list.get_visible():
             self.local_list.set_visible(True)
-        GLib.idle_add(self.model_selector.add_model, model_name, data)
+        self.model_selector.add_model(model_name, data)
         GLib.idle_add(window.default_model_list.append, window.convert_model_name(model_name, 0))
 
     def remove_local_model(self, model_name:str):

@@ -635,6 +635,7 @@ Generate a title following these rules:
         if selected_chat:
             selected_chat = selected_chat[0]
         chats = cursor.execute('SELECT chat.id, chat.name, MAX(message.date_time) AS latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id GROUP BY chat.id ORDER BY latest_message_time DESC').fetchall()
+        threads = []
         if len(chats) > 0:
             for row in chats:
                 self.chat_list_box.append_chat(row[1], row[0])
@@ -643,9 +644,13 @@ Generate a title following these rules:
                     selected_chat = row[1]
                 if row[1] == selected_chat:
                     self.chat_list_box.select_row(self.chat_list_box.tab_list[-1])
-                threading.Thread(target=chat_container.load_chat_messages).start()
+                thread = threading.Thread(target=chat_container.load_chat_messages)
+                thread.start()
+                threads.append(thread)
         else:
             self.chat_list_box.new_chat()
+        #for thread in threads:
+            #thread.join()
         sqlite_con.close()
 
     def generate_numbered_name(self, chat_name:str, compare_list:list) -> str:
@@ -1020,7 +1025,7 @@ Generate a title following these rules:
         self.model_scroller.set_child(self.model_manager)
 
         #Chat History
-        threading.Thread(target=self.load_history).start()
+        self.load_history()
 
         if self.get_application().args.new_chat:
             self.chat_list_box.new_chat(self.get_application().args.new_chat)
