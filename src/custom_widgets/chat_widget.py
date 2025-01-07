@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
-import logging, os, datetime, shutil, random, json, sqlite3
+import logging, os, datetime, shutil, random, json, sqlite3, threading
 from ..internal import data_dir, cache_dir
 from .message_widget import message
 
@@ -477,7 +477,8 @@ class chat_list(Gtk.ListBox):
                     (window.generate_uuid(), new_message_id, attachment[0], attachment[1], attachment[2]))
         sqlite_con.commit()
         sqlite_con.close()
-        self.prepend_chat(new_chat_name, new_chat_id).load_chat_messages()
+        new_chat = self.prepend_chat(new_chat_name, new_chat_id)
+        threading.Thread(target=new_chat.load_chat_messages).start()
 
     def on_chat_imported(self, file_dialog, result):
         file = file_dialog.open_finish(result)
@@ -512,7 +513,8 @@ class chat_list(Gtk.ListBox):
             cursor.execute("INSERT INTO attachment SELECT * FROM import.attachment")
             sqlite_con.commit()
             for chat in cursor.execute("SELECT * FROM import.chat"):
-                self.prepend_chat(chat[1], chat[0]).load_chat_messages()
+                new_chat = self.prepend_chat(chat[1], chat[0])
+                threading.Thread(target=new_chat.load_chat_messages).start()
             sqlite_con.close()
         window.show_toast(_("Chat imported successfully"), window.main_overlay)
 

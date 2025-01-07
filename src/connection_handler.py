@@ -50,8 +50,6 @@ class instance():
         self.idle_timer=None
         self.instance=None
         self.busy=0
-        if not self.remote:
-            self.start()
 
     def get_headers(self, include_json:bool) -> dict:
         headers = {}

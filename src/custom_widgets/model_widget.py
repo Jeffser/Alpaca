@@ -743,11 +743,11 @@ class model_manager_container(Gtk.Box):
         elif data and data['details']['parent_model'].split(':')[0] in available_models:
             categories = available_models[data['details']['parent_model'].split(':')[0]]['categories']
 
-        self.local_list.add_model(model_name, [cat for cat in categories if cat not in ['small', 'medium', 'big', 'huge']])
+        GLib.idle_add(self.local_list.add_model, model_name, [cat for cat in categories if cat not in ['small', 'medium', 'big', 'huge']])
         if not self.local_list.get_visible():
             self.local_list.set_visible(True)
-        self.model_selector.add_model(model_name, data)
-        window.default_model_list.append(window.convert_model_name(model_name, 0))
+        GLib.idle_add(self.model_selector.add_model, model_name, data)
+        GLib.idle_add(window.default_model_list.append, window.convert_model_name(model_name, 0))
 
     def remove_local_model(self, model_name:str):
         logger.debug("Deleting model")
@@ -782,14 +782,15 @@ class model_manager_container(Gtk.Box):
             response = window.ollama_instance.request("GET", "api/tags")
             if response.status_code == 200:
                 threads = []
-                self.model_selector.popover.model_list_box.remove_all()
-                self.local_list.remove_all()
+                GLib.idle_add(self.model_selector.popover.model_list_box.remove_all)
+                GLib.idle_add(self.local_list.remove_all)
                 window.default_model_list.splice(0, len(list(window.default_model_list)), None)
                 data = json.loads(response.text)
+                GLib.idle_add(window.chat_list_box.update_welcome_screens, len(data['models']) > 0)
                 if len(data['models']) == 0:
-                    self.local_list.set_visible(False)
+                    GLib.idle_add(self.local_list.set_visible, False)
                 else:
-                    self.local_list.set_visible(True)
+                    GLib.idle_add(self.local_list.set_visible, True)
                     for model in data['models']:
                         thread = threading.Thread(target=self.add_local_model, args=(model['name'], ))
                         thread.start()
@@ -803,7 +804,6 @@ class model_manager_container(Gtk.Box):
             window.connection_error()
         window.title_stack.set_visible_child_name('model_selector' if len(window.model_manager.get_model_list()) > 0 else 'no_models')
         GLib.idle_add(window.chat_list_box.update_profile_pictures)
-        #GLib.idle_add(self.chat_list_box.update_welcome_screens, len(self.model_manager.get_model_list()) > 0)
 
     #Should only be called when the app starts
     def update_available_list(self):
