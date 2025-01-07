@@ -914,7 +914,7 @@ Generate a title following these rules:
             self.title_stack.set_visible_child_name('loading')
 
             self.ollama_instance.remote = False
-            self.ollama_instance.start()
+            threading.Thread(target=self.ollama_instance.start).start()
             self.model_manager.update_local_list()
             sqlite_con = sqlite3.connect(self.sqlite_path)
             cursor = sqlite_con.cursor()
@@ -1026,8 +1026,8 @@ Generate a title following these rules:
         self.ollama_instance = connection_handler.instance(configuration['local_port'], configuration['remote_url'], configuration['run_remote'], configuration['model_tweaks'], configuration['ollama_overrides'], configuration['remote_bearer_token'], configuration['idle_timer'], configuration['model_directory'])
 
         #Model Manager P.2
-        self.model_manager.update_available_list()
-        self.model_manager.update_local_list()
+        threading.Thread(target=self.model_manager.update_available_list).start()
+        threading.Thread(target=self.model_manager.update_local_list).start()
 
         #User Preferences
         for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
@@ -1337,7 +1337,9 @@ Generate a title following these rules:
         adapter.set_enabled(True)
         self.set_focus(self.message_text_view)
 
+        st = time.time()
         self.prepare_alpaca()
+        print('{}s'.format(time.time() - st))
 
         if self.powersaver_warning_switch.get_active():
             self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
