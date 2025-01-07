@@ -1017,7 +1017,6 @@ Generate a title following these rules:
         GLib.idle_add(self.model_scroller.set_child, self.model_manager)
 
         #Chat History
-        #self.load_history()
         threading.Thread(target=self.load_history).start()
 
         if self.get_application().args.new_chat:
