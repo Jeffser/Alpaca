@@ -424,16 +424,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if not current_chat:
             current_chat = self.chat_list_box.get_current_chat()
         if current_chat:
-            for key, message in current_chat.messages.items():
-                if message and message.text:
-                    message.set_visible(re.search(search_term, message.text, re.IGNORECASE))
-                    for block in message.content_children:
-                        if isinstance(block, message_widget.text_block):
-                            if search_term:
-                                highlighted_text = re.sub(f"({re.escape(search_term)})", r"<span background='yellow' bgalpha='30%'>\1</span>", block.get_text(),flags=re.IGNORECASE)
-                                block.set_markup(highlighted_text)
-                            else:
-                                block.set_markup(block.get_text())
+            try:
+                for key, message in current_chat.messages.items():
+                    if message and message.text:
+                        message.set_visible(re.search(search_term, message.text, re.IGNORECASE))
+                        for block in message.content_children:
+                            if isinstance(block, message_widget.text_block):
+                                if search_term:
+                                    highlighted_text = re.sub(f"({re.escape(search_term)})", r"<span background='yellow' bgalpha='30%'>\1</span>", block.get_text(),flags=re.IGNORECASE)
+                                    block.set_markup(highlighted_text)
+                                else:
+                                    block.set_markup(block.get_text())
+            except Exception as e:
+                pass
 
     @Gtk.Template.Callback()
     def model_detail_create_button_clicked(self, button):
