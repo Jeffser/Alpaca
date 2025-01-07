@@ -1059,12 +1059,12 @@ Generate a title following these rules:
         self.remote_connection_switch.set_sensitive(True)
         self.instance_page.set_sensitive(shutil.which('ollama') and not self.remote_connection_switch.get_active())
         if not shutil.which('ollama'):
-            self.preferences_dialog.remove, self.instance_page)
-            self.remote_connection_selector.set_subtitle, configuration['remote_url'])
+            self.preferences_dialog.remove(self.instance_page)
+            self.remote_connection_selector.set_subtitle(configuration['remote_url'])
         self.get_application().lookup_action('manage_models').set_enabled(True)
 
         if self.get_application().args.ask:
-            self.quick_chat, self.get_application().args.ask)
+            self.quick_chat(self.get_application().args.ask)
 
         sqlite_con.close()
 
