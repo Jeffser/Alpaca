@@ -56,7 +56,6 @@ translators = [
     'Simon (Ukrainian) https://github.com/OriginalSimon',
     'Marcel Margenberg (German) https://github.com/MehrzweckMandala',
     'Edoardo Brogiolo (Italian) https://github.com/edo0',
-    'Kreyren (Czech) https://github.com/Kreyren'
     'Shidore (Japanese) https://github.com/sh1d0re'
 ]
 

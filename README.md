@@ -93,7 +93,6 @@ Language               | Contributors
 🇮🇱 Hebrew               | [Yosef Or Boczko](https://github.com/yoseforb)
 🇮🇳 Telugu               | [Aryan Karamtoth](https://github.com/SpaciousCoder78)
 🇮🇹 Italian              | [Edoardo Brogiolo](https://github.com/edo0)
-🇨🇿 Czech                | [Kreyren](https://github.com/Kreyren)
 🇯🇵 Japanese             | [Shidore](https://github.com/sh1d0re)
 
 Want to add a language? Visit [this discussion](https://github.com/Jeffser/Alpaca/discussions/153) to get started!
