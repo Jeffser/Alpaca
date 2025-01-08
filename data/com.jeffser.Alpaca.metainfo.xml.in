@@ -86,6 +86,27 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="3.5.0" date="2025-01-07">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.5.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Added option for attaching screenshots</li>
+          <li>Basic LaTeX math equations are now rendered in messages</li>
+          <li>Images are now attached in 640p resolution</li>
+          <li>Website attachments now use extracted titles</li>
+          <li>Better chat title generation</li>
+          <li>Added option to attach any plain text files</li>
+          <li>Added spellchecker to message entry</li>
+          <li>Alpaca's parameters are now stored using SQLite3</li>
+          <li>Small appearance changes in text entries</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Alpaca's launch process is more reliable</li>
+        </ul>
+      </description>
+    </release>
     <release version="3.2.0" date="2024-12-29">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.2.0</url>
       <description>
