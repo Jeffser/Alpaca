@@ -82,8 +82,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     chat_stack = Gtk.Template.Child()
     message_text_view = None
     message_text_view_scrolled_window = Gtk.Template.Child()
-    send_button = Gtk.Template.Child()
-    stop_button = Gtk.Template.Child()
+    action_button_stack = Gtk.Template.Child()
     attachment_container = Gtk.Template.Child()
     attachment_box = Gtk.Template.Child()
     file_filter_db = Gtk.Template.Child()
@@ -586,8 +585,7 @@ Generate a title following these rules:
             logger.error(e)
 
     def switch_send_stop_button(self, send:bool):
-        self.stop_button.set_visible(not send)
-        self.send_button.set_visible(send)
+        self.action_button_stack.set_visible_child_name('send' if send else 'stop')
 
     def run_message(self, data:dict, message_element:message_widget.message, chat:chat_widget.chat):
         logger.debug("Running message")
@@ -915,7 +913,7 @@ Generate a title following these rules:
 
     def remote_switched(self, switch, state):
         def local_instance_process():
-            sensitive_elements = [switch, self.tweaks_group, self.instance_page, self.send_button, self.attachment_button]
+            sensitive_elements = [switch, self.tweaks_group, self.instance_page, self.action_button_stack, self.attachment_button]
 
             [element.set_sensitive(False) for element in sensitive_elements]
             self.get_application().lookup_action('manage_models').set_enabled(False)
@@ -1059,7 +1057,7 @@ Generate a title following these rules:
         self.instance_idle_timer.set_value(self.ollama_instance.idle_timer_delay)
         self.remote_connection_switch.set_active(self.ollama_instance.remote)
         self.remote_connection_switch.get_activatable_widget().connect('state-set', self.remote_switched)
-        self.send_button.set_sensitive(True)
+        self.action_button_stack.set_sensitive(True)
         self.attachment_button.set_sensitive(True)
         self.remote_connection_switch.set_visible(shutil.which('ollama'))
         self.remote_connection_selector.set_visible(not shutil.which('ollama'))
@@ -1292,7 +1290,7 @@ Generate a title following these rules:
         enter_key_controller = Gtk.EventControllerKey.new()
         enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: (self.send_message() or True) if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
 
-        for button, menu in {self.send_button: self.send_message_menu, self.attachment_button: self.attachment_menu}.items():
+        for button, menu in {self.action_button_stack.get_child_by_name('send'): self.send_message_menu, self.attachment_button: self.attachment_menu}.items():
             gesture_click = Gtk.GestureClick(button=3)
             gesture_click.connect("released", lambda gesture, n_press, x, y, menu=menu: self.open_button_menu(gesture, x, y, menu))
             button.add_controller(gesture_click)
