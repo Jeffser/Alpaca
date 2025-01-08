@@ -1012,9 +1012,9 @@ Generate a title following these rules:
             return
 
         configuration['model_tweaks'] = {
-            "temperature": configuration['temperature'],
-            "seed": configuration['seed'],
-            "keep_alive": configuration['keep_alive']
+            "temperature": configuration['temperature'] if 'temperature' in configuration else 0.7,
+            "seed": configuration['seed'] if 'seed' in configuration else 0,
+            "keep_alive": configuration['keep_alive'] if 'keep_alive' in configuration else 5
         }
         configuration['ollama_overrides'] = {}
         for row in cursor.execute("SELECT id, value FROM overrides"):
@@ -1158,7 +1158,10 @@ Generate a title following these rules:
             "idle_timer": 0,
             "model_directory": os.path.join(data_dir, '.ollama', 'models'),
             "selected_chat": None,
-            "show_welcome_dialog": True
+            "show_welcome_dialog": True,
+            "temperature": 0.7,
+            "seed": 0,
+            "keep_alive": 5
         }
 
         for name, value in preferences.items():
