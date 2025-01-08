@@ -30,3 +30,7 @@ echo "Updating Telugu"
 msgmerge --no-fuzzy-matching -U po/te.po po/alpaca.pot
 echo "Updating Italian"
 msgmerge --no-fuzzy-matching -U po/it.po po/alpaca.pot
+echo "Updating Czech"
+msgmerge --no-fuzzy-matching -U po/cs.po po/alpaca.pot
+echo "Updating Japanese"
+msgmerge --no-fuzzy-matching -U po/ja.po po/alpaca.pot
