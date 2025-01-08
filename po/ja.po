@@ -149,39 +149,39 @@ msgstr "新機能"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Added option for attaching screenshots"
-msgstr ""
+msgstr "スクリーンショット付属オプションの追加"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Basic LaTeX math equations are now rendered in messages"
-msgstr ""
+msgstr "基本的なLaTeX数式はメッセージ内でレンダーリングが可能になりました"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Images are now attached in 640p resolution"
-msgstr ""
+msgstr "画像は640pで付属されます"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Website attachments now use extracted titles"
-msgstr ""
+msgstr "Webサイト付属は拡張タイトルを使用します"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Better chat title generation"
-msgstr ""
+msgstr "チャットタイトル名の改善"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Added option to attach any plain text files"
-msgstr ""
+msgstr "無内容なテキストファイルの付属オプションの追加"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Added spellchecker to message entry"
-msgstr ""
+msgstr "メッセージエントリーにスペルチェック機能を追加"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Alpaca's parameters are now stored using SQLite3"
-msgstr ""
+msgstr "AlpacaパラメータはSQLite3で保存されます"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Small appearance changes in text entries"
-msgstr ""
+msgstr "小規模なテキストエントリーの外見変更"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 #: data/com.jeffser.Alpaca.metainfo.xml.in:134
@@ -209,15 +209,15 @@ msgstr "修正事項"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid "Alpaca's launch process is more reliable"
-msgstr ""
+msgstr "Alpaca起動プロセスの安定化"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Transitioned chat backend from JSON to SQLite3"
-msgstr ""
+msgstr "チャットのバックエンドをJSONからSQLite3に移行。"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
 msgid "Changed appearance of messages"
-msgstr ""
+msgstr "メッセージの体裁を変更"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:117
 msgid "Added the option to add profile pictures to models"
@@ -231,105 +231,103 @@ msgstr "修正"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:121
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
-msgstr ""
+msgstr "HIP_VISIBLE_DEVICESのオーバーライドをROCR_VISIBLE_DEVICESに変更"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:130
 msgid "Added categories to models"
-msgstr ""
+msgstr "モデルにカテゴリーの追加"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:131
 msgid "Specified model's languages"
-msgstr ""
+msgstr "モデルの言語を指定"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:132
 msgid "Added warning when downloading embedding models"
-msgstr ""
+msgstr "埋め込みモデルのダウンロード時に警告の追加"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:136
 msgid "Replaced low ram warning with big model warning"
-msgstr ""
+msgstr "低RAM警告を大きなモデル警告に置き換え"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:145
 msgid "Correctly escape markup before rendering message"
-msgstr ""
+msgstr "メッセージのレンダリング前にマークアップを正しくエスケープ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:146
 msgid "Fixed about dialog not working if log file was missing"
-msgstr ""
+msgstr "ログファイルが欠如しているときのダイアログが動作しない問題を修正"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:155
 msgid "System messages can now be sent directly from Alpaca"
-msgstr ""
+msgstr "システムメッセージがAlpacaから直接送信可能に"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:156
 msgid "New redesign for messages and smaller minimum size"
-msgstr ""
+msgstr "メッセージの新しいデザインと最小サイズの縮小"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:157
 msgid "New models included in 'available models list'"
-msgstr ""
+msgstr "'利用可能なモデルリスト'に新しいモデルを追加"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:158
 msgid "Added symbolic icon when attaching code files"
-msgstr ""
+msgstr "コードファイル添付時にシンボリックアイコンの追加"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:159
 msgid "When exporting a chat it now includes a markdown file"
-msgstr ""
+msgstr "チャットをエクスポートする際にマークダウンファイルを含めるように"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:160
 msgid "Refresh button in model manager when using a remote instance"
-msgstr ""
+msgstr "リモートインスタンス使用時にモデルマネージャーにリフレッシュボタン追加"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:161
 msgid "Assistant messages are now editable"
-msgstr ""
+msgstr "アシスタントメッセージが編集可能に"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:162
 msgid "Updated Ollama to v0.5.2"
-msgstr ""
+msgstr "Ollamaをv0.5.2に更新"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:163
 msgid "New option to change model directory"
-msgstr ""
+msgstr "モデルディレクトリを変更する新オプション"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:164
 msgid "File previewer now resizes dynamically to content"
-msgstr ""
+msgstr "ファイルプレビューワーがコンテンツに合わせて動的にリサイズ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:165
 msgid "Adapted Alpaca to work without integrated Ollama instance"
-msgstr ""
+msgstr "統合されたOllamaインスタンスなしで動作するようにAlpacaを適応"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:166
 msgid "Compatibility added with ODT files"
-msgstr ""
+msgstr "ODTファイルとの互換性追加"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:169
 msgid "Restored ROCm compatibility"
-msgstr ""
+msgstr "ROCm互換性を復元"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:170
-msgid ""
-"Added long press gesture to chat rows so actions can be done in touchscreens"
-msgstr ""
+msgid "Added long press gesture to chat rows so actions can be done in touchscreens"
+msgstr "タッチスクリーンで操作可能なようにチャット行にロングプレスジェスチャーを追加"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:171
 msgid "Fixed edit button not saving changes"
-msgstr ""
+msgstr "編集ボタンが変更を保存しない問題を修正"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:172
 msgid "Changed max temperature value to 2"
-msgstr ""
+msgstr "最大温度値を2に変更"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:173
 msgid "Made seed 0 actually random"
-msgstr ""
+msgstr "シード0を実際にランダムに変更"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:174
-msgid ""
-"Fixed Gnome search provider not working outside of Flatpak installations"
-msgstr ""
+msgid "Fixed Gnome search provider not working outside of Flatpak installations"
+msgstr "Flatpakインストール外で動作しないGnome検索プロバイダーの修正"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:183
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
@@ -3493,39 +3491,39 @@ msgstr "停止"
 
 #: src/custom_widgets/model_widget.py:293
 msgid "Multilingual"
-msgstr ""
+msgstr "マルチリンガル"
 
 #: src/custom_widgets/model_widget.py:294
 msgid "Code"
-msgstr ""
+msgstr "コード"
 
 #: src/custom_widgets/model_widget.py:295
 msgid "Math"
-msgstr ""
+msgstr "数学"
 
 #: src/custom_widgets/model_widget.py:296
 msgid "Vision"
-msgstr ""
+msgstr "視覚"
 
 #: src/custom_widgets/model_widget.py:297
 msgid "Embedding"
-msgstr ""
+msgstr "エンベッド"
 
 #: src/custom_widgets/model_widget.py:298
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 #: src/custom_widgets/model_widget.py:299
 msgid "Medium"
-msgstr ""
+msgstr "中"
 
 #: src/custom_widgets/model_widget.py:300
 msgid "Big"
-msgstr ""
+msgstr "大"
 
 #: src/custom_widgets/model_widget.py:301
 msgid "Huge"
-msgstr ""
+msgstr "極大"
 
 #: src/custom_widgets/model_widget.py:354
 msgid "Details"
@@ -3541,15 +3539,15 @@ msgstr "モデルを削除しますか？"
 
 #: src/custom_widgets/model_widget.py:439
 msgid "Change"
-msgstr ""
+msgstr "変更"
 
 #: src/custom_widgets/model_widget.py:441
 msgid "Model Profile Picture"
-msgstr ""
+msgstr "モデルプロファイルピクチャー"
 
 #: src/custom_widgets/model_widget.py:441
 msgid "What do you want to do with the model's profile picture?"
-msgstr ""
+msgstr "モデルのプロファイルピクチャーをどうしますか？"
 
 #: src/custom_widgets/model_widget.py:449
 msgid "Create Model Based on '{}'"
@@ -3557,7 +3555,7 @@ msgstr "'{}'に基づいてモデルを作成"
 
 #: src/custom_widgets/model_widget.py:464
 msgid "Change Model Picture"
-msgstr ""
+msgstr "モデル写真の変更"
 
 #: src/custom_widgets/model_widget.py:484
 msgid "Modified At"
