@@ -61,19 +61,14 @@ parts:
       - pydbus==0.6.0
       - odfpy==1.4.1
       - pyicu==2.14
+      - matplotlib==3.10.0
 
   # Ollama plugin
   ollama:
     plugin: dump
     source: 
       - on amd64: https://github.com/ollama/ollama/releases/download/v0.5.4/ollama-linux-amd64.tgz
-      - on arm64: https://github.com/ollama/ollama/releases/download/v0.5.4/ollama-linux-arm64.tgz
-  
-  # VTE
-  vte:
-    plugin: nil
-    stage-packages:
-      - gir1.2-vte-3.91
+      - on arm64: https://github.com/ollama/ollama/releases/download/v0.5.4/ollama-linux-arm64.tgz     
 
   # Alpaca app
   alpaca:
@@ -97,5 +92,7 @@ parts:
     after: [alpaca]
     stage-packages:
       - libnuma1
+      - gir1.2-vte-3.91
+      - gir1.2-spelling-1
     prime:
       - usr/lib/*/libnuma.so.1*
