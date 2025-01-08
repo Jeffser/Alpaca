@@ -57,6 +57,7 @@ translators = [
     'Marcel Margenberg (German) https://github.com/MehrzweckMandala',
     'Edoardo Brogiolo (Italian) https://github.com/edo0',
     'Kreyren (Czech) https://github.com/Kreyren'
+    'Shidore (Japanese) https://github.com/sh1d0re'
 ]
 
 parser = argparse.ArgumentParser(description="Alpaca")
