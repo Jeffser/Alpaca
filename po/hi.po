@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.2.0\n"
+"Project-Id-Version: 3.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-07 19:02-0600\n"
-"PO-Revision-Date: 2024-09-02 HO:MI+ZONE\n"
+"PO-Revision-Date: 2025-01-08 HO:MI+ZONE\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Hindi\n"
 "Language: hi\n"
@@ -148,39 +148,39 @@ msgstr "नया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Added option for attaching screenshots"
-msgstr ""
+msgstr "स्क्रीनशॉट संलग्न करने के लिए विकल्प जोड़ा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Basic LaTeX math equations are now rendered in messages"
-msgstr ""
+msgstr "बुनियादी LaTeX गणित समीकरण अब संदेशों में प्रदर्शित किए जाते हैं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Images are now attached in 640p resolution"
-msgstr ""
+msgstr "छवियाँ अब 640p रिज़ॉल्यूशन में संलग्न की जाती हैं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Website attachments now use extracted titles"
-msgstr ""
+msgstr "वेबसाइट संलग्नक अब निकाले गए शीर्षकों का उपयोग करते हैं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Better chat title generation"
-msgstr ""
+msgstr "बेहतर चैट शीर्षक उत्पादन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Added option to attach any plain text files"
-msgstr ""
+msgstr "किसी भी सादे पाठ फ़ाइल को संलग्न करने के लिए विकल्प जोड़ा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Added spellchecker to message entry"
-msgstr ""
+msgstr "संदेश प्रविष्टि में वर्तनी जाँचक जोड़ा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Alpaca's parameters are now stored using SQLite3"
-msgstr ""
+msgstr "आल्पाका के पैरामीटर अब SQLite3 का उपयोग करके संग्रहीत किए जाते हैं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Small appearance changes in text entries"
-msgstr ""
+msgstr "पाठ प्रविष्टियों में छोटे दिखने वाले परिवर्तन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 #: data/com.jeffser.Alpaca.metainfo.xml.in:134
@@ -208,7 +208,7 @@ msgstr "सुधार"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid "Alpaca's launch process is more reliable"
-msgstr ""
+msgstr "आल्पाका की लॉन्च प्रक्रिया अधिक विश्वसनीय है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Transitioned chat backend from JSON to SQLite3"
@@ -1064,7 +1064,8 @@ msgstr "अनुवाद"
 msgid ""
 "These are all the available translations on 1.0.0, thanks to all the "
 "contributors!"
-msgstr "यह 1.0.0 पर उपलब्ध सभी अनुवाद हैं, सभी योगदानकर्ताओं को धन्यवाद!"
+msgstr ""
+"यह 1.0.0 पर उपलब्ध सभी अनुवाद हैं, सभी योगदानकर्ताओं को धन्यवाद!"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:578
 msgid "Russian: Alex K"
@@ -1168,8 +1169,7 @@ msgstr "मॉडल्स के अनुकूलन और निर्म�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:632
 msgid "Fixed: Icons don't appear on non Gnome systems"
-msgstr ""
-"ग्नोम सिस्टम के अलावा अन्य सिस्टम पर आइकॉन नहीं दिखाई देते थे, यह समस्या अब ठीक हो गई है"
+msgstr "ग्नोम सिस्टम के अलावा अन्य सिस्टम पर आइकॉन नहीं दिखाई देते थे, यह समस्या अब ठीक हो गई है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:633
 msgid "Update Ollama to v0.1.39"
@@ -1199,9 +1199,7 @@ msgstr "सेंड / स्टॉप बटन ठीक हो गया ह�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:655
 msgid "Fixed app not checking if remote connection works when starting"
-msgstr ""
-"ऐप शुरू होने पर रिमोट कनेक्शन काम कर रहा है या नहीं, इसकी जाँच नहीं करता था, यह समस्या "
-"अब ठीक हो गई है"
+msgstr "ऐप शुरू होने पर रिमोट कनेक्शन काम कर रहा है या नहीं, इसकी जाँच नहीं करता था, यह समस्या अब ठीक हो गई है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:662
 msgid "Daily Update"
@@ -1774,11 +1772,11 @@ msgstr "मार्कडाउन (ओब्सीडियन शैली)"
 
 #: src/window.py:820
 msgid "JSON"
-msgstr ""
+msgstr "JSON"
 
 #: src/window.py:821
 msgid "JSON (Include Metadata)"
-msgstr ""
+msgstr "JSON (मेटाडेटा शामिल करें)"
 
 #: src/window.py:824 src/window.ui:1149 src/window.ui:1175
 msgid "Export Chat"
@@ -1834,7 +1832,7 @@ msgstr "त्वरित पूछें"
 
 #: src/window.py:1250
 msgid "Attachment failed, screenshot might be too big"
-msgstr ""
+msgstr "संलग्नक विफल हो गया, स्क्रीनशॉट बहुत बड़ा हो सकता है"
 
 #: src/window.py:1306
 msgid "Clear Chat?"
@@ -1870,15 +1868,15 @@ msgstr ""
 
 #: src/window.py:1326
 msgid "Please enter a website URL"
-msgstr ""
+msgstr "कृपया एक वेबसाइट URL दर्ज करें"
 
 #: src/window.py:1327
 msgid "Attach YouTube Captions?"
-msgstr ""
+msgstr "यूट्यूब कैप्शन संलग्न करें?"
 
 #: src/window.py:1327
 msgid "Please enter a YouTube video URL"
-msgstr ""
+msgstr "कृपया एक यूट्यूब वीडियो URL दर्ज करें"
 
 #: src/window.py:1338
 msgid "Remove Attachment?"
@@ -2467,7 +2465,8 @@ msgstr ""
 msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
-msgstr "हेर्मेस 3 नाउस रिसर्च द्वारा एलएलएम की फ्लैगशिप हेर्मेस श्रृंखला का नवीनतम संस्करण है"
+msgstr ""
+"हेर्मेस 3 नाउस रिसर्च द्वारा एलएलएम की फ्लैगशिप हेर्मेस श्रृंखला का नवीनतम संस्करण है"
 
 #: src/available_models_descriptions.py:84
 msgid ""
@@ -2527,7 +2526,8 @@ msgstr ""
 msgid ""
 "A series of multimodal LLMs (MLLMs) designed for vision-language "
 "understanding."
-msgstr "दृष्टि-भाषा समझ के लिए डिज़ाइन किए गए बहु-मोडल LLMs (MLLMs) की एक श्रृंखला।"
+msgstr ""
+"दृष्टि-भाषा समझ के लिए डिज़ाइन किए गए बहु-मोडल LLMs (MLLMs) की एक श्रृंखला।"
 
 #: src/available_models_descriptions.py:92
 msgid ""
@@ -2598,7 +2598,8 @@ msgstr ""
 msgid ""
 "Open-source medical large language model adapted from Llama 2 to the medical "
 "domain."
-msgstr "ओपन-सोर्स मेडिकल लार्ज लैंग्वेज मॉडल जो एलएलएएमए 2 से मेडिकल डोमेन में अनुकूलित है।"
+msgstr ""
+"ओपन-सोर्स मेडिकल लार्ज लैंग्वेज मॉडल जो एलएलएएमए 2 से मेडिकल डोमेन में अनुकूलित है।"
 
 #: src/available_models_descriptions.py:102
 msgid ""
@@ -2620,7 +2621,8 @@ msgstr ""
 #: src/available_models_descriptions.py:104
 msgid ""
 "Nexus Raven is a 13B instruction tuned model for function calling tasks."
-msgstr "नेक्सस रेवेन एक 13बी इंस्ट्रक्शन ट्यून्ड मॉडल है जो फंक्शन कॉलिंग टास्क्स के लिए है।"
+msgstr ""
+"नेक्सस रेवेन एक 13बी इंस्ट्रक्शन ट्यून्ड मॉडल है जो फंक्शन कॉलिंग टास्क्स के लिए है।"
 
 #: src/available_models_descriptions.py:105
 msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
@@ -2666,7 +2668,8 @@ msgstr ""
 msgid ""
 "A high-performing code instruct model created by merging two existing code "
 "models."
-msgstr "दो मौजूदा कोड मॉडल्स को मिलाकर बनाया गया एक उच्च-प्रदर्शन कोड निर्देश मॉडल।"
+msgstr ""
+"दो मौजूदा कोड मॉडल्स को मिलाकर बनाया गया एक उच्च-प्रदर्शन कोड निर्देश मॉडल।"
 
 #: src/available_models_descriptions.py:112
 msgid ""
@@ -2971,7 +2974,7 @@ msgstr "मेनू"
 
 #: src/window.ui:62
 msgid "Sponsor Alpaca"
-msgstr ""
+msgstr "आल्पाका को स्पॉन्सर करें"
 
 #: src/window.ui:82
 msgid "Toggle Sidebar"
@@ -3017,7 +3020,7 @@ msgstr "संदेश भेजें"
 
 #: src/window.ui:256
 msgid "Stop Message"
-msgstr ""
+msgstr "संदेश रोकें"
 
 #: src/window.ui:281 src/window.ui:1125 src/window.ui:1327
 msgid "Preferences"
@@ -3033,7 +3036,7 @@ msgstr "ओलामा के लिए दूरस्थ कनेक्श�
 
 #: src/window.ui:297 src/window.ui:303
 msgid "Change Ollama Instance"
-msgstr ""
+msgstr "ओलामा इंस्टेंस बदलें"
 
 #: src/window.ui:318
 msgid "Run Alpaca In Background"
@@ -3291,15 +3294,15 @@ msgstr "सिस्टम के रूप में भेजें"
 
 #: src/window.ui:1205
 msgid "Attach Screenshot"
-msgstr ""
+msgstr "स्क्रीनशॉट संलग्न करें"
 
 #: src/window.ui:1209
 msgid "Attach Website"
-msgstr ""
+msgstr "वेबसाइट संलग्न करें"
 
 #: src/window.ui:1213
 msgid "Attach YouTube Captions"
-msgstr ""
+msgstr "यूट्यूब कैप्शन संलग्न करें"
 
 #: src/window.ui:1221
 msgid "From Existing Model"
@@ -3488,19 +3491,19 @@ msgstr "छवि नहीं मिली"
 
 #: src/custom_widgets/message_widget.py:323
 msgid "Copy Equation"
-msgstr ""
+msgstr "समीकरण कॉपी करें"
 
 #: src/custom_widgets/message_widget.py:329
 msgid "Regenerate Equation"
-msgstr ""
+msgstr "समीकरण पुनः उत्पन्न करें"
 
 #: src/custom_widgets/message_widget.py:349
 msgid "Equation copied to the clipboard"
-msgstr ""
+msgstr "समीकरण क्लिपबोर्ड में कॉपी किया गया है"
 
 #: src/custom_widgets/message_widget.py:353
 msgid "LaTeX Equation"
-msgstr ""
+msgstr "लेटेक्स समीकरण"
 
 #: src/custom_widgets/message_widget.py:420
 msgid "Remove Message"
