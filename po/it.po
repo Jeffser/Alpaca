@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 01\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-07 19:02-0600\n"
-"PO-Revision-Date: 2025-01-02 22:32+0000\n"
+"PO-Revision-Date: 2025-01-09 09:32+0000\n"
 "Last-Translator: Edoardo Brogiolo <edoardo@brogiolo.eu>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -151,39 +151,40 @@ msgstr "Novità"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:94
 msgid "Added option for attaching screenshots"
-msgstr ""
+msgstr "Aggiunta un'opzione per allegare gli screenshot"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 msgid "Basic LaTeX math equations are now rendered in messages"
 msgstr ""
+"Equazioni matematiche semplici in LaTeX ora vengono visualizzate nei messaggi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "Images are now attached in 640p resolution"
-msgstr ""
+msgstr "Le immagini vengono ora allegate con una risoluzione di 640p"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Website attachments now use extracted titles"
-msgstr ""
+msgstr "Gli allegati dei siti web ora utilizzano i titoli estratti"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Better chat title generation"
-msgstr ""
+msgstr "Migliore generazione dei titoli delle chat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Added option to attach any plain text files"
-msgstr ""
+msgstr "Aggiunta l'opzione di allegare qualsiasi file di testo semplice"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Added spellchecker to message entry"
-msgstr ""
+msgstr "Aggiunto un correttore ortografico all'inserimento dei messaggi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Alpaca's parameters are now stored using SQLite3"
-msgstr ""
+msgstr "I parametri di Alpaca vengono ora salvati in un database SQLite3."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Small appearance changes in text entries"
-msgstr ""
+msgstr "Piccole modifiche all'aspetto delle voci di testo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 #: data/com.jeffser.Alpaca.metainfo.xml.in:134
@@ -211,7 +212,7 @@ msgstr "Correzioni"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid "Alpaca's launch process is more reliable"
-msgstr ""
+msgstr "Il processo di avvio di Alpaca è più stabile"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Transitioned chat backend from JSON to SQLite3"
@@ -1867,11 +1868,11 @@ msgstr "Markdown (stile Obsidian)"
 
 #: src/window.py:820
 msgid "JSON"
-msgstr ""
+msgstr "JSON"
 
 #: src/window.py:821
 msgid "JSON (Include Metadata)"
-msgstr ""
+msgstr "JSON (inclusi i metadati)"
 
 #: src/window.py:824 src/window.ui:1149 src/window.ui:1175
 msgid "Export Chat"
@@ -1930,7 +1931,7 @@ msgstr "Domanda rapida"
 
 #: src/window.py:1250
 msgid "Attachment failed, screenshot might be too big"
-msgstr ""
+msgstr "Errore dell'allegato, lo screenshot potrebbe essere troppo grande"
 
 #: src/window.py:1306
 msgid "Clear Chat?"
@@ -1966,15 +1967,15 @@ msgstr ""
 
 #: src/window.py:1326
 msgid "Please enter a website URL"
-msgstr ""
+msgstr "Inserisci l'URL di un sito web"
 
 #: src/window.py:1327
 msgid "Attach YouTube Captions?"
-msgstr ""
+msgstr "Allegare i sottotitoli di YouTube?"
 
 #: src/window.py:1327
 msgid "Please enter a YouTube video URL"
-msgstr ""
+msgstr "Inserisci l'URL di un video di YouTube"
 
 #: src/window.py:1338
 msgid "Remove Attachment?"
@@ -3185,7 +3186,7 @@ msgstr "Invia il messaggio"
 
 #: src/window.ui:256
 msgid "Stop Message"
-msgstr ""
+msgstr "Interrompi il messaggio"
 
 #: src/window.ui:281 src/window.ui:1125 src/window.ui:1327
 msgid "Preferences"
@@ -3463,15 +3464,15 @@ msgstr "Manda come sistema"
 
 #: src/window.ui:1205
 msgid "Attach Screenshot"
-msgstr ""
+msgstr "Allega uno screenshot"
 
 #: src/window.ui:1209
 msgid "Attach Website"
-msgstr ""
+msgstr "Allega un sito web"
 
 #: src/window.ui:1213
 msgid "Attach YouTube Captions"
-msgstr ""
+msgstr "Allega i sottotitoli di YouTube"
 
 #: src/window.ui:1221
 msgid "From Existing Model"
@@ -3661,19 +3662,19 @@ msgstr "Immagine mancante"
 
 #: src/custom_widgets/message_widget.py:323
 msgid "Copy Equation"
-msgstr ""
+msgstr "Copia l'equazione"
 
 #: src/custom_widgets/message_widget.py:329
 msgid "Regenerate Equation"
-msgstr ""
+msgstr "Rigenera l'equazione"
 
 #: src/custom_widgets/message_widget.py:349
 msgid "Equation copied to the clipboard"
-msgstr ""
+msgstr "Equazione copiata negli appunti"
 
 #: src/custom_widgets/message_widget.py:353
 msgid "LaTeX Equation"
-msgstr ""
+msgstr "Equazione in LaTeX"
 
 #: src/custom_widgets/message_widget.py:420
 msgid "Remove Message"
