@@ -14,7 +14,6 @@
       <object class="AdwBreakpoint">
         <condition>max-width: 690sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
-        <setter object="terminal_dialog" property="width-request">400</setter>
       </object>
     </child>
     <property name="content">
@@ -290,8 +289,6 @@
     </property>
     <object class="AdwPreferencesDialog" id="preferences_dialog">
       <property name="can-close">true</property>
-      <property name="width-request">400</property>
-      <property name="height-request">600</property>
       <property name="title" translatable="yes">Preferences</property>
       <child>
         <object class="AdwPreferencesPage" id="general_page">
@@ -574,8 +571,6 @@
       </accessibility>
       <property name="title" translatable="yes">Terminal</property>
       <property name="can-close">true</property>
-      <property name="width-request">600</property>
-      <property name="height-request">600</property>
       <child>
         <object class="AdwToolbarView">
           <style>
@@ -585,7 +580,10 @@
             <object class="AdwHeaderBar"/>
           </child>
           <property name="content">
-            <object class="GtkScrolledWindow" id="terminal_scroller"/>
+            <object class="GtkScrolledWindow" id="terminal_scroller">
+              <property name="propagate-natural-height">true</property>
+              <property name="propagate-natural-width">true</property>
+            </object>
           </property>
         </object>
       </child>
@@ -597,7 +595,6 @@
       </accessibility>
       <property name="can-close">true</property>
       <property name="width-request">400</property>
-      <property name="height-request">600</property>
       <child>
         <object class="AdwToastOverlay" id="manage_models_overlay">
           <child>
@@ -662,6 +659,7 @@
                               <property name="hscrollbar-policy">2</property>
                               <property name="hexpand">true</property>
                               <property name="vexpand">true</property>
+                              <property name="propagate-natural-height">true</property>
                             </object>
                           </child>
                           <child>
@@ -1037,7 +1035,6 @@
     <object class="AdwDialog" id="welcome_dialog">
       <property name="can-close">false</property>
       <property name="width-request">400</property>
-      <property name="height-request">600</property>
       <child>
         <object class="AdwToolbarView">
           <child type="bottom">
