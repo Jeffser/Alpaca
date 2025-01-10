@@ -69,7 +69,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     create_model_modelfile_section = Gtk.Template.Child()
     tweaks_group = Gtk.Template.Child()
     preferences_dialog = Gtk.Template.Child()
-    shortcut_window : Gtk.ShortcutsWindow  = Gtk.Template.Child()
     file_preview_dialog = Gtk.Template.Child()
     file_preview_text_label = Gtk.Template.Child()
     file_preview_image = Gtk.Template.Child()
@@ -1113,8 +1112,6 @@ Generate a title following these rules:
             button.add_controller(gesture_long_press)
 
         self.message_text_view.add_controller(enter_key_controller)
-        self.set_help_overlay(self.shortcut_window)
-        self.get_application().set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
 
         universal_actions = {
             'new_chat': [lambda *_: self.chat_list_box.new_chat(), ['<primary>n']],
@@ -1126,7 +1123,7 @@ Generate a title following these rules:
             'duplicate_chat': [self.chat_actions],
             'duplicate_current_chat': [self.current_chat_actions],
             'delete_chat': [self.chat_actions],
-            'delete_current_chat': [self.current_chat_actions],
+            'delete_current_chat': [self.current_chat_actions, ['<primary>w']],
             'rename_chat': [self.chat_actions],
             'rename_current_chat': [self.current_chat_actions, ['F2']],
             'export_chat': [self.chat_actions],
