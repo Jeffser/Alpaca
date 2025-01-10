@@ -95,7 +95,7 @@ def run_terminal(script:str, language_name:str):
         ])
         Gio.AppInfo.launch_default_for_uri('http://0.0.0.0:8080')
 
-    script += '; echo "\n🦙 {}"'.format(_('Script exited'))
+    script += ';\necho "\n🦙 {}"'.format(_('Script exited'))
     if language_name == 'bash':
         script = re.sub(r'(?m)^\s*sudo', 'pkexec', script)
     if shutil.which('flatpak-spawn') and language_name == 'bash':
