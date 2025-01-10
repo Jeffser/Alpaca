@@ -78,7 +78,7 @@ def run_terminal(script:str, language_name:str):
         with open(os.path.join(data_dir, 'cppenv', 'script.cpp'), 'w') as f:
             f.write(script)
         script = ';\n'.join([
-            'echo -e "🦙 {}\n"'.format(_('Building C++ script')),
+            'echo -e "🦙 {}\n"'.format(_('Compiling C++ script')),
             'g++ "{}" -o "{}"'.format(os.path.join(data_dir, 'cppenv', 'script.cpp'), os.path.join(data_dir, 'cppenv', 'script')),
             'chmod u+x "{}"'.format(os.path.join(data_dir, 'cppenv', 'script')),
             'clear',
@@ -95,7 +95,7 @@ def run_terminal(script:str, language_name:str):
         ])
         Gio.AppInfo.launch_default_for_uri('http://0.0.0.0:8080')
 
-    script += ';\necho "\n🦙 {}"'.format(_('Script exited'))
+    script += '; echo "\n🦙 {}"'.format(_('Script exited'))
     if language_name == 'bash':
         script = re.sub(r'(?m)^\s*sudo', 'pkexec', script)
     if shutil.which('flatpak-spawn') and language_name == 'bash':
