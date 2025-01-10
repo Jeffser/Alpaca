@@ -218,7 +218,7 @@ class instance:
             if cursor.execute("SELECT id FROM preferences WHERE id=?", (preference_id,)).fetchone():
                 cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (preference_value, str(type(preference_value)), preference_id))
             else:
-                cursor.execute("INSERT INTO preferences (id, value, type) VALUES (?, ?)", (preference_id, preference_value, str(type(preference_value))))
+                cursor.execute("INSERT INTO preferences (id, value, type) VALUES (?, ?, ?)", (preference_id, preference_value, str(type(preference_value))))
         sqlite_con.commit()
         sqlite_con.close()
 
