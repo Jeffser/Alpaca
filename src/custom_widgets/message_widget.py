@@ -151,7 +151,7 @@ class code_block(Gtk.Box):
             top_margin=6, bottom_margin=6, left_margin=12, right_margin=12, css_classes=["code_block"]
         )
         self.source_view.update_property([4], [_("{}Code Block").format('{} '.format(self.language.get_name()) if self.language else "")])
-        title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=3, spacing=5)
+        title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=12, spacing=5)
         title_box.append(Gtk.Label(label=self.language.get_name() if self.language else (language_name.title() if language_name else _("Code Block")), hexpand=True, xalign=0))
         copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
         copy_button.connect("clicked", lambda *_: self.on_copy())
@@ -190,7 +190,6 @@ class code_block(Gtk.Box):
         self.change_buttons_state(True)
         self.text_preedit = self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
         window.set_focus(self.source_view)
-        print(self.get_parent().get_parent())
 
     def cancel_edit(self, button):
         self.change_buttons_state(False)
