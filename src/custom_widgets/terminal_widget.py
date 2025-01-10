@@ -61,7 +61,9 @@ def run_terminal(files:dict):
         os.mkdir(os.path.join(data_dir, 'code runner'))
 
     for file_name, file_metadata in files.items():
+        window.terminal_dir_button.set_name('file://{}'.format(os.path.join(data_dir, 'code runner')))
         if file_metadata['language'].lower() in ('python3', 'py', 'py3', 'python'):
+            window.terminal_dir_button.set_name('file://{}'.format(os.path.join(data_dir, 'code runner', 'python')))
             if not os.path.isdir(os.path.join(data_dir, 'code runner', 'python')):
                 os.mkdir(os.path.join(data_dir, 'code runner', 'python'))
             with open(os.path.join(data_dir, 'code runner', 'python', file_name), 'w') as f:
@@ -79,6 +81,7 @@ def run_terminal(files:dict):
                 'python3 "{}"'.format(os.path.join(data_dir, 'code runner', 'python', file_name))
             ]
         elif file_metadata['language'].lower() in ('cpp', 'c', 'c++'):
+            window.terminal_dir_button.set_name('file://{}'.format(os.path.join(data_dir, 'code runner', 'cpp')))
             if not os.path.isdir(os.path.join(data_dir, 'code runner', 'cpp')):
                 os.mkdir(os.path.join(data_dir, 'code runner', 'cpp'))
             with open(os.path.join(data_dir, 'code runner', 'cpp', file_name), 'w') as f:
@@ -97,9 +100,8 @@ def run_terminal(files:dict):
             with open(os.path.join(data_dir, 'code runner', 'html', file_name), 'w') as f:
                 f.write(file_metadata['content'])
         elif file_metadata['language'].lower() in ('html'):
-            script += [
-                'echo -e "🦙 {}"'.format(_('Running local web server')),
-            ]
+            window.terminal_dir_button.set_name('file://{}'.format(os.path.join(data_dir, 'code runner', 'html')))
+            script.append('echo -e "🦙 {}"'.format(_('Running local web server')))
             if not os.path.isdir(os.path.join(data_dir, 'code runner', 'html')):
                 os.mkdir(os.path.join(data_dir, 'code runner', 'html'))
             with open(os.path.join(data_dir, 'code runner', 'html', file_name), 'w') as f:
@@ -115,70 +117,7 @@ def run_terminal(files:dict):
                 f.write(content)
             script.append('python -m http.server 8080 --directory "{}"'.format(os.path.join(data_dir, 'code runner', 'html')))
             Gio.AppInfo.launch_default_for_uri('http://0.0.0.0:8080')
+        else:
+            script.append(file_metadata['content'])
     show_terminal(['bash', '-c', ';\n'.join(script)])
 
-def run_terminal_old(script:str, language_name:str):
-    logger.info('Running: {}'.format(language_name))
-    if language_name.lower() == 'python3':
-        if not os.path.isdir(os.path.join(data_dir, 'pyenv')):
-            os.mkdir(os.path.join(data_dir, 'pyenv'))
-        with open(os.path.join(data_dir, 'pyenv', 'main.py'), 'w') as f:
-            f.write(script)
-        if not os.path.isfile(os.path.join(data_dir, 'pyenv', 'requirements.txt')):
-            with open(os.path.join(data_dir, 'pyenv', 'requirements.txt'), 'w') as f:
-                f.write('')
-        script = ';\n'.join([
-            'echo -e "🐍 {}\n"'.format(_('Setting up Python environment...')),
-            'python3 -m venv "{}"'.format(os.path.join(data_dir, 'pyenv')),
-            'source "{}"'.format(os.path.join(data_dir, 'pyenv', 'bin', 'activate')),
-            'pip install -r "{}" | grep -v "already satisfied"'.format(os.path.join(data_dir, 'pyenv', 'requirements.txt')),
-            'clear',
-            'python3 "{}"'.format(os.path.join(data_dir, 'pyenv', 'main.py'))
-        ])
-        window.terminal_dir_button.set_name('file://{}'.format(os.path.join(data_dir, 'pyenv')))
-        window.terminal_dir_button.set_visible(True)
-    elif language_name.lower() in ('cpp', 'c++', 'c'):
-        if not os.path.isdir(os.path.join(data_dir, 'cppenv')):
-            os.mkdir(os.path.join(data_dir, 'cppenv'))
-        with open(os.path.join(data_dir, 'cppenv', 'script.cpp'), 'w') as f:
-            f.write(script)
-        script = ';\n'.join([
-            'echo -e "🦙 {}\n"'.format(_('Compiling C++ script...')),
-            'g++ "{}" -o "{}"'.format(os.path.join(data_dir, 'cppenv', 'script.cpp'), os.path.join(data_dir, 'cppenv', 'script')),
-            'chmod u+x "{}"'.format(os.path.join(data_dir, 'cppenv', 'script')),
-            'clear',
-            os.path.join(data_dir, 'cppenv', 'script')
-        ])
-        window.terminal_dir_button.set_name('file://{}'.format(os.path.join(data_dir, 'cppenv')))
-        window.terminal_dir_button.set_visible(True)
-    elif language_name.lower() == 'html':
-        if not os.path.isdir(os.path.join(data_dir, 'htmlenv')):
-            os.mkdir(os.path.join(data_dir, 'htmlenv'))
-        with open(os.path.join(data_dir, 'htmlenv', 'index.html'), 'w') as f:
-            f.write(script)
-        script = ';\n'.join([
-            'echo -e "🦙 {}\n"'.format(_('Running local web server')),
-            'python -m http.server 8080 --directory {}'.format(os.path.join(data_dir, 'htmlenv'))
-        ])
-        Gio.AppInfo.launch_default_for_uri('http://0.0.0.0:8080')
-        window.terminal_dir_button.set_name('file://{}'.format(os.path.join(data_dir, 'htmlenv')))
-        window.terminal_dir_button.set_visible(True)
-    else:
-        window.terminal_dir_button.set_visible(False)
-    script += '; echo "\n🦙 {}"'.format(_('Script exited'))
-    if language_name == 'bash':
-        script = re.sub(r'(?m)^\s*sudo', 'pkexec', script)
-    if shutil.which('flatpak-spawn') and language_name == 'bash':
-        sandbox = True
-        try:
-            process = subprocess.run(['flatpak-spawn', '--host', 'bash', '-c', 'echo "test"'], check=True)
-            sandbox = False
-        except Exception as e:
-            pass
-        if sandbox:
-            script = 'echo "🦙 {}\n";'.format(_('The script is contained inside Flatpak')) + script
-            show_terminal(['bash', '-c', script])
-        else:
-            show_terminal(['flatpak-spawn', '--host', 'bash', '-c', script])
-    else:
-        show_terminal(['bash', '-c', script])
