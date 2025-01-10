@@ -54,14 +54,14 @@ def show_terminal(script):
     window.terminal_dialog.present(window)
 
 def run_terminal(script:str, language_name:str):
-    logger.info('Running: \n{}'.format(language_name))
+    logger.info('Running: {}'.format(language_name))
     if language_name == 'python3':
         if not os.path.isdir(os.path.join(data_dir, 'pyenv')):
             os.mkdir(os.path.join(data_dir, 'pyenv'))
         with open(os.path.join(data_dir, 'pyenv', 'main.py'), 'w') as f:
             f.write(script)
         script = [
-            'echo "🐍 {}\n"'.format(_('Setting up Python environment...')),
+            'echo -e "🐍 {}\n"'.format(_('Setting up Python environment...')),
             'python3 -m venv "{}"'.format(os.path.join(data_dir, 'pyenv')),
             '{} {}'.format(os.path.join(data_dir, 'pyenv', 'bin', 'python3').replace(' ', '\\ '), os.path.join(data_dir, 'pyenv', 'main.py').replace(' ', '\\ '))
         ]
@@ -69,6 +69,17 @@ def run_terminal(script:str, language_name:str):
             with open(os.path.join(data_dir, 'pyenv', 'requirements.txt'), 'w') as f:
                 f.write('')
         script.insert(1, '{} install -r {} | grep -v "already satisfied"; clear'.format(os.path.join(data_dir, 'pyenv', 'bin', 'pip3'), os.path.join(data_dir, 'pyenv', 'requirements.txt')))
+        script = ';\n'.join(script)
+    elif language_name in ('cpp', 'c++', 'c'):
+        if not os.path.isdir(os.path.join(data_dir, 'cppenv')):
+            os.mkdir(os.path.join(data_dir, 'cppenv'))
+        with open(os.path.join(data_dir, 'cppenv', 'script.cpp'), 'w') as f:
+            f.write(script)
+        script = [
+            'g++ "{}" -o "{}"'.format(os.path.join(data_dir, 'cppenv', 'script.cpp'), os.path.join(data_dir, 'cppenv', 'script')),
+            'chmod u+x "{}"'.format(os.path.join(data_dir, 'cppenv', 'script')),
+            os.path.join(data_dir, 'cppenv', 'script')
+        ]
         script = ';\n'.join(script)
 
     script += '; echo "\n🦙 {}"'.format(_('Script exited'))

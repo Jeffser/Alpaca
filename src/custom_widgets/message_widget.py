@@ -157,7 +157,7 @@ class code_block(Gtk.Box):
         copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
         copy_button.connect("clicked", lambda *_: self.on_copy())
         title_box.append(copy_button)
-        if language_name and language_name.lower() in ['bash', 'python3']:
+        if language_name and language_name.lower() in ('bash', 'python3', 'c++', 'cpp', 'c'):
             run_button = Gtk.Button(icon_name="execute-from-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Run Script"))
             run_button.connect("clicked", lambda *_: self.run_script(language_name))
             title_box.append(run_button)
@@ -695,7 +695,7 @@ class message(Gtk.Box):
         self.content_children = []
         if text:
             self.content_children = []
-            code_block_pattern = re.compile(r'```(\w*)\n(.*?)\n\s*```', re.DOTALL)
+            code_block_pattern = re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)
             no_language_code_block_pattern = re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)
             table_pattern = re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)
             latex_pattern = re.compile(r'\\\[\n(.*?)\n\\\]|\$(.*?)\$', re.MULTILINE)
