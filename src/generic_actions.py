@@ -90,7 +90,8 @@ def attach_file(file):
         "plain_text": ["txt", "md"],
         "code": ["c", "h", "css", "html", "js", "ts", "py", "java", "json", "xml", "asm", "nasm",
                 "cs", "csx", "cpp", "cxx", "cp", "hxx", "inc", "csv", "lsp", "lisp", "el", "emacs",
-                "l", "cu", "dockerfile", "glsl", "g", "lua", "php", "rb", "ru", "rs", "sql", "sh", "p8"],
+                "l", "cu", "dockerfile", "glsl", "g", "lua", "php", "rb", "ru", "rs", "sql", "sh", "p8",
+                "yaml"],
         "image": ["png", "jpeg", "jpg", "webp", "gif"],
         "pdf": ["pdf"],
         "odt": ["odt"]
@@ -99,9 +100,11 @@ def attach_file(file):
         extension = 'txt'
     else:
         extension = file.get_path().split(".")[-1]
-    file_type = next(key for key, value in file_types.items() if extension in value)
-    if not file_type:
-        return
+    found_types = [key for key, value in file_types.items() if extension in value]
+    if len(found_types) == 0:
+        file_type = 'plain_text'
+    else:
+        file_type = found_types[0]
     if file_type == 'image' and not window.model_manager.verify_if_image_can_be_used():
         window.show_toast(_("Image recognition is only available on specific models"), window.main_overlay)
         return
