@@ -398,7 +398,8 @@ class latex_image(Gtk.MenuButton):
             halign=3,
             popover=self.popover,
             height_request=75,
-            css_classes=['flat']
+            css_classes=['flat'],
+            child=Gtk.Spinner(spinning=True)
         )
         threading.Thread(target=self.generate_image, args=(True,)).start()
 
