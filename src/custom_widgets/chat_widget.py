@@ -190,7 +190,7 @@ class chat(Gtk.ScrolledWindow):
                 markdown.append(message_element.text)
                 if message_element.image_c:
                     for file in message_element.image_c.files:
-                        markdown.append('![🖼️ {}](data:image/{};base64,{})'.format(file.get_name(), file.get_name().split('.')[1], file.content))
+                        markdown.append('![🖼️ {}](data:image/{};base64,{})'.format(file.get_name(), file.get_name().split('.')[1], file.file_content))
                 if message_element.attachment_c:
                     emojis = {
                         'plain_text': '📃',
@@ -245,7 +245,7 @@ class chat(Gtk.ScrolledWindow):
                 if message.image_c and len(message.image_c.files) > 0:
                     message_data['images'] = []
                     for image in message.image_c.files:
-                        message_data['images'].append(image.content)
+                        message_data['images'].append(image.file_content)
                 if message.attachment_c and len(message.attachment_c.files) > 0:
                     for attachment in message.attachment_c.files:
                         message_data['content'] += '```{} ({})\n{}\n```\n\n'.format(attachment.file_name, attachment.file_type, attachment.file_content)
