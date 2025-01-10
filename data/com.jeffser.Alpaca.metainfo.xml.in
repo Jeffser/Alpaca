@@ -93,6 +93,10 @@
         <ul>
           <li>Added option for attaching screenshots</li>
           <li>Basic LaTeX math equations are now rendered in messages</li>
+          <li>HTML and C++ scripts can now be run inside Alpaca</li>
+          <li>Added option to open the environment directory from the terminal</li>
+          <li>Added option to edit code blocks directly</li>
+          <li>Complete keyboard shortcut list</li>
           <li>Images are now attached in 640p resolution</li>
           <li>Website attachments now use extracted titles</li>
           <li>Better chat title generation</li>
@@ -104,6 +108,7 @@
         <p>Fixes</p>
         <ul>
           <li>Alpaca's launch process is more reliable</li>
+          <li>Closing the terminal now kills the script subprocess</li>
         </ul>
       </description>
     </release>
