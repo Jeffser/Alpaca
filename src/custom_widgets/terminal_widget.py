@@ -78,7 +78,7 @@ def run_terminal(script:str, language_name:str):
         with open(os.path.join(data_dir, 'cppenv', 'script.cpp'), 'w') as f:
             f.write(script)
         script = ';\n'.join([
-            'echo -e "🦙 {}\n"'.format(_('Compiling C++ script')),
+            'echo -e "🦙 {}\n"'.format(_('Compiling C++ script...')),
             'g++ "{}" -o "{}"'.format(os.path.join(data_dir, 'cppenv', 'script.cpp'), os.path.join(data_dir, 'cppenv', 'script')),
             'chmod u+x "{}"'.format(os.path.join(data_dir, 'cppenv', 'script')),
             'clear',
