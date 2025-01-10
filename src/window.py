@@ -571,11 +571,11 @@ Generate a title following these rules:
         selected_chat = self.sql_instance.get_preference('selected_chat')
         chats = self.sql_instance.get_chats()
         if len(chats) > 0:
+            if selected_chat not in [row[1] for row in chats]:
+                selected_chat = chats[0][1]
             for row in chats:
                 self.chat_list_box.append_chat(row[1], row[0])
                 chat_container = self.chat_list_box.get_chat_by_name(row[1])
-                if not selected_chat:
-                    selected_chat = row[1]
                 if row[1] == selected_chat:
                     self.chat_list_box.select_row(self.chat_list_box.tab_list[-1])
                 threading.Thread(target=chat_container.load_chat_messages).start()
