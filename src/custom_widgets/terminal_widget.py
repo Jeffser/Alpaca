@@ -72,6 +72,8 @@ def run_terminal(script:str, language_name:str):
             'clear',
             'python3 "{}"'.format(os.path.join(data_dir, 'pyenv', 'main.py'))
         ])
+        window.terminal_dir_button.set_name('file://{}'.format(os.path.join(data_dir, 'pyenv')))
+        window.terminal_dir_button.set_visible(True)
     elif language_name.lower() in ('cpp', 'c++', 'c'):
         if not os.path.isdir(os.path.join(data_dir, 'cppenv')):
             os.mkdir(os.path.join(data_dir, 'cppenv'))
@@ -84,6 +86,8 @@ def run_terminal(script:str, language_name:str):
             'clear',
             os.path.join(data_dir, 'cppenv', 'script')
         ])
+        window.terminal_dir_button.set_name('file://{}'.format(os.path.join(data_dir, 'cppenv')))
+        window.terminal_dir_button.set_visible(True)
     elif language_name.lower() == 'html':
         if not os.path.isdir(os.path.join(data_dir, 'htmlenv')):
             os.mkdir(os.path.join(data_dir, 'htmlenv'))
@@ -94,7 +98,10 @@ def run_terminal(script:str, language_name:str):
             'python -m http.server 8080 --directory {}'.format(os.path.join(data_dir, 'htmlenv'))
         ])
         Gio.AppInfo.launch_default_for_uri('http://0.0.0.0:8080')
-
+        window.terminal_dir_button.set_name('file://{}'.format(os.path.join(data_dir, 'htmlenv')))
+        window.terminal_dir_button.set_visible(True)
+    else:
+        window.terminal_dir_button.set_visible(False)
     script += '; echo "\n🦙 {}"'.format(_('Script exited'))
     if language_name == 'bash':
         script = re.sub(r'(?m)^\s*sudo', 'pkexec', script)

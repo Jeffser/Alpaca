@@ -130,6 +130,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     terminal_scroller = Gtk.Template.Child()
     terminal_dialog = Gtk.Template.Child()
+    terminal_dir_button = Gtk.Template.Child()
 
     quick_ask = Gtk.Template.Child()
     quick_ask_overlay = Gtk.Template.Child()

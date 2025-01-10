@@ -578,7 +578,18 @@
             <class name="osd"/>
           </style>
           <child type="top">
-            <object class="AdwHeaderBar"/>
+            <object class="AdwHeaderBar">
+              <child type="start">
+                <object class="GtkButton" id="terminal_dir_button">
+                  <signal name="clicked" handler="link_button_handler"/>
+                  <property name="tooltip-text" translatable="yes">Open Environment Directory</property>
+                  <property name="icon-name">document-open-symbolic</property>
+                  <style>
+                    <class name="flat"/>
+                  </style>
+                </object>
+              </child>
+            </object>
           </child>
           <property name="content">
             <object class="GtkScrolledWindow" id="terminal_scroller">
