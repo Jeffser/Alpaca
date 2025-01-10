@@ -213,7 +213,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.sql_instance.insert_or_update_message(m_element)
 
         self.message_text_view.get_buffer().set_text("", 0)
-        return
+
         if system:
             if current_chat.welcome_screen:
                 current_chat.welcome_screen.set_visible(False)
