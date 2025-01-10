@@ -151,20 +151,57 @@ class code_block(Gtk.Box):
             top_margin=6, bottom_margin=6, left_margin=12, right_margin=12, css_classes=["code_block"]
         )
         self.source_view.update_property([4], [_("{}Code Block").format('{} '.format(self.language.get_name()) if self.language else "")])
-
-        title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=3)
+        title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=3, spacing=5)
         title_box.append(Gtk.Label(label=self.language.get_name() if self.language else (language_name.title() if language_name else _("Code Block")), hexpand=True, xalign=0))
         copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
         copy_button.connect("clicked", lambda *_: self.on_copy())
         title_box.append(copy_button)
+        self.run_button = None
         if language_name and language_name.lower() in ('bash', 'python3', 'c++', 'cpp', 'c', 'html'):
-            run_button = Gtk.Button(icon_name="execute-from-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Run Script"))
-            run_button.connect("clicked", lambda *_: self.run_script(language_name))
-            title_box.append(run_button)
+            self.edit_button = Gtk.Button(icon_name="edit-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Edit Code Block"))
+            self.edit_button.connect('clicked', self.start_edit)
+            title_box.append(self.edit_button)
+
+            self.cancel_edit_button = Gtk.Button(icon_name="cross-large-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Cancel"), visible=False)
+            self.cancel_edit_button.connect('clicked', self.cancel_edit)
+            title_box.append(self.cancel_edit_button)
+
+            self.save_edit_button = Gtk.Button(icon_name="paper-plane-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Save"), visible=False)
+            self.save_edit_button.connect('clicked', self.save_edit)
+            title_box.append(self.save_edit_button)
+
+            self.run_button = Gtk.Button(icon_name="execute-from-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Run Script"))
+            self.run_button.connect("clicked", lambda *_: self.run_script(language_name))
+            title_box.append(self.run_button)
         self.append(title_box)
         self.append(Gtk.Separator())
         self.append(self.source_view)
         self.buffer.set_text(text)
+        self.text_preedit = text
+
+    def change_buttons_state(self, editing):
+        self.edit_button.set_visible(not editing)
+        self.run_button.set_visible(not editing)
+        self.cancel_edit_button.set_visible(editing)
+        self.save_edit_button.set_visible(editing)
+        self.source_view.set_editable(editing)
+
+    def start_edit(self, button):
+        self.change_buttons_state(True)
+        self.text_preedit = self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
+        window.set_focus(self.source_view)
+        print(self.get_parent().get_parent())
+
+    def cancel_edit(self, button):
+        self.change_buttons_state(False)
+        self.buffer.set_text(self.text_preedit)
+
+    def save_edit(self, button):
+        self.change_buttons_state(False)
+        message_element = self.get_parent().get_parent()
+        message_element.text = message_element.text.replace(self.text_preedit, self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False))
+        window.sql_instance.insert_or_update_message(message_element)
+        window.show_toast(_("Message edited successfully"), window.main_overlay)
 
     def on_copy(self):
         logger.debug("Copying code")
