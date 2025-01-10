@@ -138,6 +138,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     sql_instance = sql_manager.instance(os.path.join(data_dir, "alpaca.db"))
 
     @Gtk.Template.Callback()
+    def closing_terminal(self, dialog):
+        dialog.get_child().get_content().get_child().feed_child(b"\x03")
+        dialog.force_close()
+
+    @Gtk.Template.Callback()
     def remote_connection_selector_clicked(self, button):
         options = {
             _("Cancel"): {"callback": lambda *_: None},

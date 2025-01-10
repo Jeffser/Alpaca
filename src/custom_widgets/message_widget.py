@@ -157,7 +157,7 @@ class code_block(Gtk.Box):
         copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
         copy_button.connect("clicked", lambda *_: self.on_copy())
         title_box.append(copy_button)
-        if language_name and language_name.lower() in ('bash', 'python3', 'c++', 'cpp', 'c'):
+        if language_name and language_name.lower() in ('bash', 'python3', 'c++', 'cpp', 'c', 'html'):
             run_button = Gtk.Button(icon_name="execute-from-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Run Script"))
             run_button.connect("clicked", lambda *_: self.run_script(language_name))
             title_box.append(run_button)

@@ -6,8 +6,8 @@ Handles the terminal widget
 import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Vte', '3.91')
-from gi.repository import Gtk, Vte, GLib, Pango, GLib, Gdk
-import logging, os, shutil, subprocess, re
+from gi.repository import Gtk, Vte, GLib, Pango, GLib, Gdk, Gio
+import logging, os, shutil, subprocess, re, signal
 from ..internal import data_dir
 
 logger = logging.getLogger(__name__)
@@ -22,9 +22,7 @@ class terminal(Vte.Terminal):
         self.set_font(Pango.FontDescription.from_string("Monospace 12"))
         self.set_clear_background(False)
         pty = Vte.Pty.new_sync(Vte.PtyFlags.DEFAULT, None)
-
         self.set_pty(pty)
-
         pty.spawn_async(
             GLib.get_current_dir(),
             script,
@@ -34,9 +32,9 @@ class terminal(Vte.Terminal):
             None,
             -1,
             None,
+            None,
             None
         )
-
         key_controller = Gtk.EventControllerKey()
         key_controller.connect("key-pressed", self.on_key_press)
         self.add_controller(key_controller)
@@ -55,7 +53,7 @@ def show_terminal(script):
 
 def run_terminal(script:str, language_name:str):
     logger.info('Running: {}'.format(language_name))
-    if language_name == 'python3':
+    if language_name.lower() == 'python3':
         if not os.path.isdir(os.path.join(data_dir, 'pyenv')):
             os.mkdir(os.path.join(data_dir, 'pyenv'))
         with open(os.path.join(data_dir, 'pyenv', 'main.py'), 'w') as f:
@@ -70,7 +68,7 @@ def run_terminal(script:str, language_name:str):
                 f.write('')
         script.insert(1, '{} install -r {} | grep -v "already satisfied"; clear'.format(os.path.join(data_dir, 'pyenv', 'bin', 'pip3'), os.path.join(data_dir, 'pyenv', 'requirements.txt')))
         script = ';\n'.join(script)
-    elif language_name in ('cpp', 'c++', 'c'):
+    elif language_name.lower() in ('cpp', 'c++', 'c'):
         if not os.path.isdir(os.path.join(data_dir, 'cppenv')):
             os.mkdir(os.path.join(data_dir, 'cppenv'))
         with open(os.path.join(data_dir, 'cppenv', 'script.cpp'), 'w') as f:
@@ -81,6 +79,13 @@ def run_terminal(script:str, language_name:str):
             os.path.join(data_dir, 'cppenv', 'script')
         ]
         script = ';\n'.join(script)
+    elif language_name.lower() == 'html':
+        if not os.path.isdir(os.path.join(data_dir, 'htmlenv')):
+            os.mkdir(os.path.join(data_dir, 'htmlenv'))
+        with open(os.path.join(data_dir, 'htmlenv', 'index.html'), 'w') as f:
+            f.write(script)
+        script = 'python -m http.server 8080 --directory {}'.format(os.path.join(data_dir, 'htmlenv'))
+        Gio.AppInfo.launch_default_for_uri('http://0.0.0.0:8080')
 
     script += '; echo "\n🦙 {}"'.format(_('Script exited'))
     if language_name == 'bash':

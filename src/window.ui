@@ -567,10 +567,11 @@
 
     <object class="AdwDialog" id="terminal_dialog">
       <accessibility>
-        <property name="label" translatable="yes">Manage models dialog</property>
+        <property name="label" translatable="yes">Terminal dialog</property>
       </accessibility>
+      <signal name="close-attempt" handler="closing_terminal"/>
       <property name="title" translatable="yes">Terminal</property>
-      <property name="can-close">true</property>
+      <property name="can-close">false</property>
       <child>
         <object class="AdwToolbarView">
           <style>
