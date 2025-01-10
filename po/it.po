@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 01\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-09 19:13-0600\n"
-"PO-Revision-Date: 2025-01-09 09:32+0000\n"
+"PO-Revision-Date: 2025-01-10 09:41+0000\n"
 "Last-Translator: Edoardo Brogiolo <edoardo@brogiolo.eu>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -532,7 +532,8 @@ msgstr "Corretto il riconoscimento di immagini da file locali"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:316
 msgid "Changed appearance of delete / stop model buttons"
-msgstr "Cambiato il design dei tasti di cancellazione / stop dei modelli"
+msgstr ""
+"Cambiato il design dei tasti di eliminazione / interruzione dei modelli"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:317
 msgid "Fixed stop button crashing the app"
@@ -560,7 +561,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:341
 msgid "Fixed 'clear chat' option"
-msgstr "Corretta l'opzione 'cancella chat'"
+msgstr "Corretta l'opzione 'cancella la chat'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:342
 msgid "Fixed welcome dialog causing the local instance to not launch"
@@ -837,7 +838,7 @@ msgstr "Supporto per lo scaricamento di modelli in base a name:tag"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:456
 msgid "Restored sidebar toggle button"
-msgstr "Reintrodotto il toggle per la barra laterale"
+msgstr "Reintrodotta la possibilità di mostrare o nascondere la barra laterale"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:460
 msgid "Reverted back to standard styles"
@@ -1719,7 +1720,7 @@ msgstr "Ripristina le chat dopo la chiusura dell'app"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:915
 msgid "A button to clear the chat"
-msgstr "Un pulsante per cancellare la chat"
+msgstr "Un pulsante per svuotare le chat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:916
 msgid "Fixed multiple bugs involving how messages are shown"
@@ -3142,11 +3143,11 @@ msgstr "Dona ad Alpaca"
 
 #: src/window.ui:81
 msgid "Toggle Sidebar"
-msgstr "Aziona la barra laterale"
+msgstr "Mostra o nascondi la barra laterale"
 
 #: src/window.ui:88
 msgid "Search Messages"
-msgstr "Cerca nei messaggi"
+msgstr "Cerca fra i messaggi"
 
 #: src/window.ui:110
 msgid "Loading Instance"
@@ -3167,7 +3168,7 @@ msgstr "Barra di ricerca dei messaggi"
 
 #: src/window.ui:151 src/window.ui:153
 msgid "Search messages"
-msgstr "Cerca nei messaggi"
+msgstr "Cerca fra i messaggi"
 
 #: src/window.ui:167
 msgid ""
@@ -3501,72 +3502,72 @@ msgstr "Si è verificato un errore durante l'estrazione del testo dal sito web"
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 #: src/gtk/help-overlay.ui:14
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Mostra le scorciatoie"
 
 #: src/gtk/help-overlay.ui:20
 msgctxt "shortcut window"
 msgid "Preferences"
-msgstr ""
+msgstr "Preferenze"
 
 #: src/gtk/help-overlay.ui:26
 msgctxt "shortcut window"
 msgid "Model Manager"
-msgstr ""
+msgstr "Gestore dei modelli"
 
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "Mostra o nascondi la barra laterale"
 
 #: src/gtk/help-overlay.ui:38
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Esci"
 
 #: src/gtk/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Chat Management"
-msgstr ""
+msgstr "Gestione delle chat"
 
 #: src/gtk/help-overlay.ui:49
 msgctxt "shortcut window"
 msgid "Create Chat"
-msgstr ""
+msgstr "Crea una nuova chat"
 
 #: src/gtk/help-overlay.ui:55
 msgctxt "shortcut window"
 msgid "Delete Chat"
-msgstr ""
+msgstr "Elimina la chat"
 
 #: src/gtk/help-overlay.ui:61
 msgctxt "shortcut window"
 msgid "Import Chat"
-msgstr ""
+msgstr "Importa delle chat"
 
 #: src/gtk/help-overlay.ui:67
 msgctxt "shortcut window"
 msgid "Clear Chat"
-msgstr ""
+msgstr "Cancella la chat"
 
 #: src/gtk/help-overlay.ui:73
 msgctxt "shortcut window"
 msgid "Rename Chat"
-msgstr ""
+msgstr "Rinomina la chat"
 
 #: src/gtk/help-overlay.ui:79
 msgctxt "shortcut window"
 msgid "Search Messages"
-msgstr ""
+msgstr "Cerca fra i messaggi"
 
 #: src/gtk/help-overlay.ui:87
 msgctxt "shortcut window"
 msgid "Message Entry"
-msgstr ""
+msgstr "Campo di inserimento del messaggio"
 
 #: src/gtk/help-overlay.ui:90
 msgid "Copy"
@@ -3578,7 +3579,7 @@ msgstr "Incolla"
 
 #: src/gtk/help-overlay.ui:102
 msgid "Open Emoji Menu"
-msgstr ""
+msgstr "Apri il menù degli emoji"
 
 #: src/gtk/help-overlay.ui:108
 msgid "Insert new line"
@@ -3586,15 +3587,17 @@ msgstr "Inserisci una nuova riga"
 
 #: src/gtk/help-overlay.ui:114
 msgid "Send Message as System"
-msgstr ""
+msgstr "Manda un messaggio come Sistema"
 
 #: src/gtk/help-overlay.ui:115
 msgid "System messages are taken as literal instructions by models"
 msgstr ""
+"Messaggi inviati come Sistema vengono interpretati come instruzioni "
+"letterali dai modelli"
 
 #: src/gtk/help-overlay.ui:121
 msgid "Send Message as User"
-msgstr ""
+msgstr "Manda un messaggio come Utente"
 
 #: src/custom_widgets/chat_widget.py:122
 msgid "Send prompt: '{}'"
@@ -3756,7 +3759,7 @@ msgstr "Interrompere il download?"
 
 #: src/custom_widgets/model_widget.py:184
 msgid "Are you sure you want to stop pulling '{}'?"
-msgstr "Sei sicuro di voler smettere di estrarre '{}'?"
+msgstr "Sei sicuro di voler interrompere lo scaricamento di '{}'?"
 
 #: src/custom_widgets/model_widget.py:186
 msgid "Stop"
@@ -3808,7 +3811,7 @@ msgstr "Rimuovi '{}'"
 
 #: src/custom_widgets/model_widget.py:361
 msgid "Delete Model?"
-msgstr "Cancellare il modello?"
+msgstr "Eliminare il modello?"
 
 #: src/custom_widgets/model_widget.py:421
 msgid "Change"
