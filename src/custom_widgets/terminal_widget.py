@@ -45,6 +45,9 @@ class terminal(Vte.Terminal):
         if ctrl and keyval == Gdk.KEY_c:
             self.copy_clipboard()
             return True
+        elif ctrl and keyval == Gdk.KEY_v:
+            self.paste_clipboard()
+            return True
         return False
 
 def show_terminal(script):
@@ -58,33 +61,38 @@ def run_terminal(script:str, language_name:str):
             os.mkdir(os.path.join(data_dir, 'pyenv'))
         with open(os.path.join(data_dir, 'pyenv', 'main.py'), 'w') as f:
             f.write(script)
-        script = [
-            'echo -e "🐍 {}\n"'.format(_('Setting up Python environment...')),
-            'python3 -m venv "{}"'.format(os.path.join(data_dir, 'pyenv')),
-            '{} {}'.format(os.path.join(data_dir, 'pyenv', 'bin', 'python3').replace(' ', '\\ '), os.path.join(data_dir, 'pyenv', 'main.py').replace(' ', '\\ '))
-        ]
         if not os.path.isfile(os.path.join(data_dir, 'pyenv', 'requirements.txt')):
             with open(os.path.join(data_dir, 'pyenv', 'requirements.txt'), 'w') as f:
                 f.write('')
-        script.insert(1, '{} install -r {} | grep -v "already satisfied"; clear'.format(os.path.join(data_dir, 'pyenv', 'bin', 'pip3'), os.path.join(data_dir, 'pyenv', 'requirements.txt')))
-        script = ';\n'.join(script)
+        script = ';\n'.join([
+            'echo -e "🐍 {}\n"'.format(_('Setting up Python environment...')),
+            'python3 -m venv "{}"'.format(os.path.join(data_dir, 'pyenv')),
+            'source "{}"'.format(os.path.join(data_dir, 'pyenv', 'bin', 'activate')),
+            'pip install -r "{}" | grep -v "already satisfied"'.format(os.path.join(data_dir, 'pyenv', 'requirements.txt')),
+            'clear',
+            'python3 "{}"'.format(os.path.join(data_dir, 'pyenv', 'main.py'))
+        ])
     elif language_name.lower() in ('cpp', 'c++', 'c'):
         if not os.path.isdir(os.path.join(data_dir, 'cppenv')):
             os.mkdir(os.path.join(data_dir, 'cppenv'))
         with open(os.path.join(data_dir, 'cppenv', 'script.cpp'), 'w') as f:
             f.write(script)
-        script = [
+        script = ';\n'.join([
+            'echo -e "🦙 {}\n"'.format(_('Building C++ script')),
             'g++ "{}" -o "{}"'.format(os.path.join(data_dir, 'cppenv', 'script.cpp'), os.path.join(data_dir, 'cppenv', 'script')),
             'chmod u+x "{}"'.format(os.path.join(data_dir, 'cppenv', 'script')),
+            'clear',
             os.path.join(data_dir, 'cppenv', 'script')
-        ]
-        script = ';\n'.join(script)
+        ])
     elif language_name.lower() == 'html':
         if not os.path.isdir(os.path.join(data_dir, 'htmlenv')):
             os.mkdir(os.path.join(data_dir, 'htmlenv'))
         with open(os.path.join(data_dir, 'htmlenv', 'index.html'), 'w') as f:
             f.write(script)
-        script = 'python -m http.server 8080 --directory {}'.format(os.path.join(data_dir, 'htmlenv'))
+        script = ';\n'.join([
+            'echo -e "🦙 {}\n"'.format(_('Running local web server')),
+            'python -m http.server 8080 --directory {}'.format(os.path.join(data_dir, 'htmlenv'))
+        ])
         Gio.AppInfo.launch_default_for_uri('http://0.0.0.0:8080')
 
     script += '; echo "\n🦙 {}"'.format(_('Script exited'))
