@@ -85,11 +85,11 @@ def run_terminal(files:dict):
                 f.write(file_metadata['content'])
             script += [
                 'echo -e "🦙 {}\n"'.format(_('Compiling C++ script...')),
-                'g++ "{}" -o "{}"'.format(os.path.join(data_dir, 'code runner', 'cpp', file_name), os.path.join(data_dir, 'code runner', 'cpp', file_name.split('.')[:-1] + '.bin')),
-                'chmod u+x "{}"'.format(os.path.join(data_dir, 'code runner', 'cpp', file_name.split('.')[:-1] + '.bin')),
+                'g++ "{}" -o "{}"'.format(os.path.join(data_dir, 'code runner', 'cpp', file_name), os.path.join(data_dir, 'code runner', 'cpp', '.'.join(file_name.split('.')[:-1]) + '.bin')),
+                'chmod u+x "{}"'.format(os.path.join(data_dir, 'code runner', 'cpp', '.'.join(file_name.split('.')[:-1]) + '.bin')),
                 'clear',
-                'echo -e "🦙 {}\n"'.format(file_name.split('.')[:-1]+'.bin'),
-                os.path.join(data_dir, 'code runner', 'cpp', file_name.split('.')[:-1] + '.bin')
+                'echo -e "🦙 {}\n"'.format('.'.join(file_name.split('.')[:-1])+'.bin'),
+                '"{}"'.format(os.path.join(data_dir, 'code runner', 'cpp', '.'.join(file_name.split('.')[:-1]) + '.bin'))
             ]
         elif file_metadata['language'].lower() in ('css', 'js', 'javascript'):
             if not os.path.isdir(os.path.join(data_dir, 'code runner', 'html')):
