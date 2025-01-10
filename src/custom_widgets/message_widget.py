@@ -168,7 +168,7 @@ class code_block(Gtk.Box):
         self.save_edit_button = Gtk.Button(icon_name="paper-plane-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Save"), visible=False)
         self.save_edit_button.connect('clicked', self.save_edit)
         title_box.append(self.save_edit_button)
-        if language_name and language_name.lower() in ('bash', 'python3', 'c++', 'cpp', 'c', 'html'):
+        if language_name and language_name.lower() in ('bash', 'python3', 'py', 'py3', 'c++', 'cpp', 'c', 'html'):
             self.run_button = Gtk.Button(icon_name="execute-from-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Run Script"))
             self.run_button.connect("clicked", lambda *_: self.run_script(language_name))
             title_box.append(self.run_button)
@@ -211,6 +211,38 @@ class code_block(Gtk.Box):
         clipboard.set(text)
         window.show_toast(_("Code copied to the clipboard"), window.main_overlay)
 
+    def extract_code(self, code_block_element):
+        language_element = code_block_element.buffer.get_language()
+        file_name = 'script'
+        language = 'bash'
+        if language_element:
+            language = language_element.get_name()
+        file_names = {
+            'script.cpp': ['cpp', 'c', 'c++'],
+            'main.py': ['python3', 'py', 'py3', 'python'],
+            'index.html': ['html'],
+            'style.css': ['css'],
+            'script.js': ['js', 'javascript'],
+            'script.sh': ['bash', 'sh']
+        }
+        found_types = [key for key, value in file_names.items() if language.lower() in value]
+        if len(found_types) > 0:
+            file_name = found_types[0]
+        return file_name, {'language': language, 'content': code_block_element.buffer.get_text(code_block_element.buffer.get_start_iter(), code_block_element.buffer.get_end_iter(), False)}
+
+    def confirm_run_script(self):
+        message_element = self.get_parent().get_parent()
+        files = {}
+        file_name, file_data = self.extract_code(self)
+        files[file_name] = file_data
+        if file_data['language'].lower() == 'html':
+            for block in message_element.content_children:
+                if isinstance(block, code_block) and block != self:
+                    file_name2, file_data2 = self.extract_code(block)
+                    if file_data2['language'].lower() in ('css', 'js', 'javascript'):
+                        files[file_name2] = file_data2
+        terminal_widget.run_terminal(files)
+
     def run_script(self, language_name):
         logger.debug("Running script")
         start = self.buffer.get_start_iter()
@@ -218,7 +250,7 @@ class code_block(Gtk.Box):
         dialog_widget.simple(
             _('Run Script'),
             _('Make sure you understand what this script does before running it, Alpaca is not responsible for any damages to your device or data'),
-            lambda script=self.buffer.get_text(start, end, False), language_name=language_name: terminal_widget.run_terminal(script, language_name),
+            lambda *_: self.confirm_run_script(),
             _('Execute'),
             'destructive'
         )
