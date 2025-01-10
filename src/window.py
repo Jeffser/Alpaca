@@ -526,7 +526,6 @@ Generate a title following these rules:
             response = self.ollama_instance.request("POST", "api/chat", json.dumps(data))
             if response.status_code == 200:
                 new_chat_name = json.loads(response.text)["message"]["content"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
-                new_chat_name = new_chat_name[:50] + (new_chat_name[50:] and '...')
                 self.chat_list_box.rename_chat(old_chat_name, new_chat_name)
         except Exception as e:
             logger.error(e)
