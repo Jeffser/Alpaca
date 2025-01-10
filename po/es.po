@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 19:12-0600\n"
+"POT-Creation-Date: 2025-01-09 19:13-0600\n"
 "PO-Revision-Date: 2024-05-19 19:44-0600\n"
 "Last-Translator: Jeffry Samuel Eduarte Rojas <jeffrysamuer@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -3444,6 +3444,104 @@ msgstr "Pregunta rápida"
 msgid "An error occurred while extracting text from the website"
 msgstr "Ha ocurrido un error mientras se extraía texto del sitio web"
 
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Model Manager"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Toggle Sidebar"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:38
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Chat Management"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:49
+msgctxt "shortcut window"
+msgid "Create Chat"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:55
+msgctxt "shortcut window"
+msgid "Delete Chat"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:61
+msgctxt "shortcut window"
+msgid "Import Chat"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:67
+msgctxt "shortcut window"
+msgid "Clear Chat"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Rename Chat"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:79
+msgctxt "shortcut window"
+msgid "Search Messages"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Message Entry"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:90
+msgid "Copy"
+msgstr "Copiar"
+
+#: src/gtk/help-overlay.ui:96
+msgid "Paste"
+msgstr "Pegar"
+
+#: src/gtk/help-overlay.ui:102
+msgid "Open Emoji Menu"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:108
+msgid "Insert new line"
+msgstr "Saltar línea"
+
+#: src/gtk/help-overlay.ui:114
+msgid "Send Message as System"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:115
+msgid "System messages are taken as literal instructions by models"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:121
+msgid "Send Message as User"
+msgstr ""
+
 #: src/custom_widgets/chat_widget.py:122
 msgid "Send prompt: '{}'"
 msgstr "Enviar mensaje: '{}'"
@@ -3821,15 +3919,6 @@ msgstr "El script está contenido dentro de Flatpak"
 
 #~ msgid "Editor"
 #~ msgstr "Editor"
-
-#~ msgid "Copy"
-#~ msgstr "Copiar"
-
-#~ msgid "Paste"
-#~ msgstr "Pegar"
-
-#~ msgid "Insert new line"
-#~ msgstr "Saltar línea"
 
 #~ msgid "Message text box"
 #~ msgstr "Caja de texto para mensaje"

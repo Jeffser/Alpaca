@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 19:12-0600\n"
+"POT-Creation-Date: 2025-01-09 19:13-0600\n"
 "PO-Revision-Date: 2024-07-08 17:18+0800\n"
 "Last-Translator: (YOUR NAME) <(EMAIL OPTIONAL)>\n"
 "Language-Team: Russian\n"
@@ -3220,6 +3220,104 @@ msgstr ""
 msgid "An error occurred while extracting text from the website"
 msgstr "При извлечении текста с веб-сайта произошла ошибка"
 
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Общие"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Показывать комбинации клавиш"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Model Manager"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Toggle Sidebar"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:38
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Выйти"
+
+#: src/gtk/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Chat Management"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:49
+msgctxt "shortcut window"
+msgid "Create Chat"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:55
+msgctxt "shortcut window"
+msgid "Delete Chat"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:61
+msgctxt "shortcut window"
+msgid "Import Chat"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:67
+msgctxt "shortcut window"
+msgid "Clear Chat"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Rename Chat"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:79
+msgctxt "shortcut window"
+msgid "Search Messages"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Message Entry"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:90
+msgid "Copy"
+msgstr "Копировать"
+
+#: src/gtk/help-overlay.ui:96
+msgid "Paste"
+msgstr "Вставить"
+
+#: src/gtk/help-overlay.ui:102
+msgid "Open Emoji Menu"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:108
+msgid "Insert new line"
+msgstr "Вставить новую строку"
+
+#: src/gtk/help-overlay.ui:114
+msgid "Send Message as System"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:115
+msgid "System messages are taken as literal instructions by models"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:121
+msgid "Send Message as User"
+msgstr ""
+
 #: src/custom_widgets/chat_widget.py:122
 msgid "Send prompt: '{}'"
 msgstr ""
@@ -3580,15 +3678,6 @@ msgstr ""
 #~ msgid "Editor"
 #~ msgstr "Редактор"
 
-#~ msgid "Copy"
-#~ msgstr "Копировать"
-
-#~ msgid "Paste"
-#~ msgstr "Вставить"
-
-#~ msgid "Insert new line"
-#~ msgstr "Вставить новую строку"
-
 #~ msgid "Image Recognition"
 #~ msgstr "Распознавание изображений"
 
@@ -3666,18 +3755,6 @@ msgstr ""
 
 #~ msgid "From GGUF File (Experimental)"
 #~ msgstr "Из файла GGUF (экспериментальный)"
-
-#~ msgctxt "shortcut window"
-#~ msgid "General"
-#~ msgstr "Общие"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Show Shortcuts"
-#~ msgstr "Показывать комбинации клавиш"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Quit"
-#~ msgstr "Выйти"
 
 #~ msgid "Open with Default App"
 #~ msgstr "Открыть с помощью приложения по умолчанию"
