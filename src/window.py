@@ -1101,7 +1101,7 @@ Generate a title following these rules:
         self.chat_list_box = chat_widget.chat_list()
         self.chat_list_container.set_child(self.chat_list_box)
         enter_key_controller = Gtk.EventControllerKey.new()
-        enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: (self.send_message() or True) if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
+        enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: (self.send_message(None, bool(state & Gdk.ModifierType.CONTROL_MASK)) or True) if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
 
         for button, menu in {self.action_button_stack.get_child_by_name('send'): self.send_message_menu, self.attachment_button: self.attachment_menu}.items():
             gesture_click = Gtk.GestureClick(button=3)
