@@ -260,7 +260,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
             self.welcome_dialog.force_close()
-            self.powersaver_warning_switch.set_active(True)
             self.sql_instance.insert_or_update_preferences({'run_remote': not shutil.which('ollama'), 'show_welcome_dialog': False})
             threading.Thread(target=self.prepare_alpaca).start()
 
@@ -937,6 +936,7 @@ Generate a title following these rules:
             if element.get_name() in self.ollama_instance.tweaks:
                 element.set_value(self.ollama_instance.tweaks[element.get_name()])
 
+        self.powersaver_warning_switch.set_active(self.sql_instance.get_preference('powersaver_warning'))
         default_model = self.sql_instance.get_preference('default_model')
         if default_model:
             try:
