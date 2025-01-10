@@ -1096,7 +1096,7 @@ Generate a title following these rules:
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
         self.message_text_view = GtkSource.View(
-            css_classes=['message_text_view'], top_margin=10, bottom_margin=10, hexpand=True
+            css_classes=['message_text_view'], top_margin=10, bottom_margin=10, hexpand=True, wrap_mode=3
         )
 
         self.message_text_view_scrolled_window.set_child(self.message_text_view)
