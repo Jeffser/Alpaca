@@ -3,7 +3,7 @@
 Working on organizing the code
 """
 
-import os, requests, sqlite3, re
+import os, requests, re
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api.formatters import TextFormatter
 from html2text import html2text
@@ -21,13 +21,7 @@ def connect_remote(remote_url:str, bearer_token:str):
     window.ollama_instance.remote = True
     window.ollama_instance.stop()
     window.model_manager.update_local_list()
-    sqlite_con = sqlite3.connect(window.sqlite_path)
-    cursor = sqlite_con.cursor()
-    cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (True, str(type(True)), "run_remote"))
-    cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (remote_url, str(type(remote_url)), "remote_url"))
-    cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (bearer_token, str(type(bearer_token)), "remote_bearer_token"))
-    sqlite_con.commit()
-    sqlite_con.close()
+    window.sql_instance.insert_or_update_preferences({'run_remote': True, 'remote_url': remote_url, 'remote_bearer_token': bearer_token})
     window.remote_connection_selector.set_subtitle(remote_url)
 
 def attach_youtube(video_title:str, video_author:str, watch_url:str, video_url:str, video_id:str, caption_name:str):

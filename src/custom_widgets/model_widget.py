@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk, GdkPixbuf
-import logging, os, datetime, re, shutil, threading, json, sys, glob, icu, base64, sqlite3
+import logging, os, datetime, re, shutil, threading, json, sys, glob, icu, base64
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .. import available_models_descriptions
 from . import dialog_widget
@@ -73,12 +73,9 @@ class model_selector_row(Gtk.ListBoxRow):
         self.data = data
         self.image_recognition = 'projector_info' in self.data
         self.profile_picture_data = None
-        sqlite_con = sqlite3.connect(window.sqlite_path)
-        cursor = sqlite_con.cursor()
-        picture = cursor.execute("SELECT picture FROM model WHERE id=?", (self.get_name(),)).fetchone()
+        picture = window.sql_instance.get_model_picture(self.get_name())
         if picture:
-            self.profile_picture_data = picture[0]
-        sqlite_con.close()
+            self.profile_picture_data = picture
 
 class model_selector_button(Gtk.MenuButton):
     __gtype_name__ = 'AlpacaModelSelectorButton'
@@ -126,11 +123,7 @@ class model_selector_button(Gtk.MenuButton):
         self.get_popover().model_list_box.remove(next((model for model in list(self.get_popover().model_list_box) if model.get_name() == model_name), None))
         self.model_changed(self.get_popover().model_list_box)
         window.title_stack.set_visible_child_name('model_selector' if len(window.model_manager.get_model_list()) > 0 else 'no_models')
-        sqlite_con = sqlite3.connect(window.sqlite_path)
-        cursor = sqlite_con.cursor()
-        cursor.execute("DELETE FROM model WHERE id=?", (self.get_name(),))
-        sqlite_con.commit()
-        sqlite_con.close()
+        window.sql_instance.delete_model_picture(self.get_name())
         window.chat_list_box.update_profile_pictures()
 
     def get_model_by_name(self, model_name:str) -> object:
@@ -405,22 +398,11 @@ class local_model(Gtk.ListBoxRow):
             image.set_size_request(64, 64)
             button.set_overflow(1)
             button.set_child(image)
-            sqlite_con = sqlite3.connect(window.sqlite_path)
-            cursor = sqlite_con.cursor()
-            if cursor.execute("SELECT picture FROM model WHERE id=?", (self.get_name(),)).fetchone():
-                cursor.execute("UPDATE model SET picture=? WHERE id=?", (model.profile_picture_data, self.get_name()))
-            else:
-                cursor.execute("INSERT INTO model (id, picture) VALUES (?, ?)", (self.get_name(), model.profile_picture_data))
-            sqlite_con.commit()
-            sqlite_con.close()
+            window.sql_instance.insert_or_update_model_picture(self.get_name(), model.profile_picture_data)
             window.chat_list_box.update_profile_pictures()
 
     def remove_pfp(self, button, model):
-        sqlite_con = sqlite3.connect(window.sqlite_path)
-        cursor = sqlite_con.cursor()
-        cursor.execute("DELETE FROM model WHERE id=?", (self.get_name(),))
-        sqlite_con.commit()
-        sqlite_con.close()
+        window.sql_instance.delete_model_picture(self.get_name())
         #button.remove(button.get_child())
         button.set_icon_name('image-x-generic-symbolic')
         model.profile_picture_data = None

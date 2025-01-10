@@ -37,19 +37,24 @@ def log_output(pipe):
 
 class instance():
 
-    def __init__(self, local_port:int, remote_url:str, remote:bool, tweaks:dict, overrides:dict, bearer_token:str, idle_timer_delay:int, model_directory:str):
-        self.local_port=local_port
-        self.remote_url=remote_url
-        self.remote=remote
-        self.tweaks=tweaks
-        self.overrides=overrides
-        self.bearer_token=bearer_token
-        self.model_directory = model_directory
-        self.idle_timer_delay=idle_timer_delay
-        self.idle_timer_stop_event=threading.Event()
-        self.idle_timer=None
-        self.instance=None
-        self.busy=0
+    def __init__(self):
+        preferences = window.sql_instance.get_preferences()
+        self.local_port = preferences.get('local_port', 11435)
+        self.remote_url = preferences.get('remote_url', 'http://0.0.0.0:11434')
+        self.remote = preferences.get('run_remote', False)
+        self.tweaks = {
+            'temperature': preferences.get('temperature', 0.7),
+            'seed': preferences.get('seed', 0),
+            'keep_alive': preferences.get('keep_alive', 5)
+        }
+        self.overrides = window.sql_instance.get_overrides()
+        self.bearer_token = preferences.get('remote_bearer_token', "")
+        self.model_directory = preferences.get('model_directory', os.path.join(data_dir, '.ollama', 'models'))
+        self.idle_timer_delay = preferences.get('idle_timer', 0)
+        self.idle_timer_stop_event = threading.Event()
+        self.idle_timer = None
+        self.instance = None
+        self.busy = 0
 
     def get_headers(self, include_json:bool) -> dict:
         headers = {}

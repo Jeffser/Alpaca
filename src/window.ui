@@ -483,7 +483,7 @@
               <child>
                 <object class="AdwSpinRow" id="instance_idle_timer">
                   <signal name="changed" handler="instance_idle_timer_changed"/>
-                  <property name="name">timer</property>
+                  <property name="name">idle_timer</property>
                   <property name="title" translatable="yes">Idle Timer</property>
                   <property name="subtitle" translatable="yes">Number of minutes the instance should remain idle before it is shut down (0 means it won't be shut down)</property>
                   <property name="digits">0</property>

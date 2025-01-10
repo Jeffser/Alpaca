@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
-import logging, os, datetime, shutil, random, json, sqlite3, threading
+import logging, os, datetime, shutil, random, json, threading
 from ..internal import data_dir, cache_dir
 from .message_widget import message
 
@@ -95,6 +95,7 @@ class chat(Gtk.ScrolledWindow):
         msg = message(message_id, model, system)
         self.messages[message_id] = msg
         self.container.append(msg)
+        return msg
 
     def send_sample_prompt(self, prompt):
         buffer = window.message_text_view.get_buffer()
@@ -142,24 +143,20 @@ class chat(Gtk.ScrolledWindow):
         self.container.append(self.welcome_screen)
 
     def load_chat_messages(self):
-        sqlite_con = sqlite3.connect(window.sqlite_path)
-        cursor = sqlite_con.cursor()
-        cursor.execute("SELECT id, role, model, date_time, content FROM message WHERE chat_id=?", (self.chat_id,))
-        messages = cursor.fetchall()
+        messages = window.sql_instance.get_messages(self)
         if len(messages) > 0:
             if self.welcome_screen:
                 self.container.remove(self.welcome_screen)
                 self.welcome_screen = None
             for message in messages:
-                self.add_message(message[0], message[2] if message[1] == 'assistant' else None, message[1] == 'system')
-                message_element = self.messages[message[0]]
-                for attachment in cursor.execute("SELECT id, type, name, content FROM attachment WHERE message_id=?", (message[0],)):
+                message_element = self.add_message(message[0], message[2] if message[1] == 'assistant' else None, message[1] == 'system')
+                attachments = window.sql_instance.get_attachments(message_element)
+                for attachment in attachments:
                     message_element.add_attachment(attachment[2], attachment[1], attachment[3])
                 message_element.set_text(message[4])
                 message_element.add_footer(datetime.datetime.strptime(message[3] + (":00" if message[3].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
         else:
             self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
-        sqlite_con.close()
 
     def on_export_successful(self, file, result):
         file.replace_contents_finish(result)
@@ -221,14 +218,7 @@ class chat(Gtk.ScrolledWindow):
         logger.info("Exporting chat (DB)")
         if os.path.isfile(os.path.join(cache_dir, 'export.db')):
             os.remove(os.path.join(cache_dir, 'export.db'))
-        sqlite_con = sqlite3.connect(window.sqlite_path)
-        cursor = sqlite_con.cursor()
-        cursor.execute("ATTACH DATABASE ? AS export", (os.path.join(cache_dir, 'export.db'),))
-        cursor.execute("CREATE TABLE export.chat AS SELECT * FROM chat WHERE id=?", (self.chat_id,))
-        cursor.execute("CREATE TABLE export.message AS SELECT * FROM message WHERE chat_id=?", (self.chat_id,))
-        cursor.execute("CREATE TABLE export.attachment AS SELECT a.* FROM attachment as a JOIN message m ON a.message_id = m.id WHERE m.chat_id=?", (self.chat_id,))
-        sqlite_con.commit()
-        sqlite_con.close()
+        window.sql_instance.export_db(self, os.path.join(cache_dir, 'export.db'))
         file_dialog = Gtk.FileDialog(initial_name=f"{self.get_name()}.db")
         file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.db'): self.on_export_chat(file_dialog, result, temp_path))
 
@@ -410,11 +400,7 @@ class chat_list(Gtk.ListBox):
         chat_title = chat_title.strip()
         if chat_title:
             chat_window = self.prepend_chat(chat_title, window.generate_uuid())
-            sqlite_con = sqlite3.connect(window.sqlite_path)
-            cursor = sqlite_con.cursor()
-            cursor.execute("INSERT INTO chat (id, name) VALUES (?, ?);", (chat_window.chat_id, chat_window.get_name()))
-            sqlite_con.commit()
-            sqlite_con.close()
+            window.sql_instance.insert_or_update_chat(chat_window)
             return chat_window
 
     def delete_chat(self, chat_name:str):
@@ -425,6 +411,7 @@ class chat_list(Gtk.ListBox):
         if chat_tab:
             chat_tab.chat_window.stop_message()
             chat_id = chat_tab.chat_window.chat_id
+            window.sql_instance.delete_chat(chat_tab.chat_window)
             window.chat_stack.remove(chat_tab.chat_window)
             self.tab_list.remove(chat_tab)
             self.remove(chat_tab)
@@ -432,15 +419,6 @@ class chat_list(Gtk.ListBox):
                 self.new_chat()
             if not self.get_current_chat() or self.get_current_chat() == chat_tab.chat_window:
                 self.select_row(self.get_row_at_index(0))
-            sqlite_con = sqlite3.connect(window.sqlite_path)
-            cursor = sqlite_con.cursor()
-            cursor.execute("DELETE FROM chat WHERE id=?;", (chat_id,))
-            messages = cursor.execute("SELECT id FROM message WHERE chat_id=?", (chat_id,)).fetchall()
-            for message in messages:
-                cursor.execute("DELETE FROM attachment WHERE message_id=?", (message[0],))
-            cursor.execute("DELETE FROM message WHERE chat_id=?", (chat_id,))
-            sqlite_con.commit()
-            sqlite_con.close()
 
     def rename_chat(self, old_chat_name:str, new_chat_name:str):
         new_chat_name = new_chat_name.strip()
@@ -452,32 +430,14 @@ class chat_list(Gtk.ListBox):
             tab.label.set_label(new_chat_name)
             tab.label.set_tooltip_text(new_chat_name)
             tab.chat_window.set_name(new_chat_name)
-            sqlite_con = sqlite3.connect(window.sqlite_path)
-            cursor = sqlite_con.cursor()
-            cursor.execute("UPDATE Chat SET name=? WHERE id=?", (new_chat_name, tab.chat_window.chat_id))
-            sqlite_con.commit()
-            sqlite_con.close()
+            window.sql_instance.insert_or_update_chat(tab.chat_window)
 
     def duplicate_chat(self, chat_name:str):
+        old_chat_window = self.get_chat_by_name(chat_name)
         new_chat_name = window.generate_numbered_name(_("Copy of {}").format(chat_name), [tab.chat_window.get_name() for tab in self.tab_list])
         new_chat_id = window.generate_uuid()
-
-        sqlite_con = sqlite3.connect(window.sqlite_path)
-        cursor = sqlite_con.cursor()
-        cursor.execute("INSERT INTO chat (id, name) VALUES (?, ?);", (new_chat_id, new_chat_name))
-
-        messages = cursor.execute("SELECT id, role, model, date_time, content FROM message WHERE chat_id=?", (self.get_chat_by_name(chat_name).chat_id,)).fetchall()
-        for message in messages:
-            new_message_id = window.generate_uuid()
-            cursor.execute("INSERT INTO message (id, chat_id, role, model, date_time, content) VALUES (?, ?, ?, ?, ?, ?)",
-                (new_message_id, new_chat_id, message[1], message[2], message[3], message[4]))
-            attachments = cursor.execute("SELECT type, name, content FROM attachment WHERE message_id=?", (message[0],)).fetchall()
-            for attachment in attachments:
-                cursor.execute("INSERT INTO attachment (id, message_id, type, name, content) VALUES (?, ?, ?, ?, ?)",
-                    (window.generate_uuid(), new_message_id, attachment[0], attachment[1], attachment[2]))
-        sqlite_con.commit()
-        sqlite_con.close()
         new_chat = self.prepend_chat(new_chat_name, new_chat_id)
+        window.sql_instance.duplicate_chat(old_chat_window, new_chat)
         threading.Thread(target=new_chat.load_chat_messages).start()
 
     def on_chat_imported(self, file_dialog, result):
@@ -486,36 +446,9 @@ class chat_list(Gtk.ListBox):
             if os.path.isfile(os.path.join(cache_dir, 'import.db')):
                 os.remove(os.path.join(cache_dir, 'import.db'))
             file.copy(Gio.File.new_for_path(os.path.join(cache_dir, 'import.db')), Gio.FileCopyFlags.OVERWRITE, None, None, None, None)
-            sqlite_con = sqlite3.connect(window.sqlite_path)
-            cursor = sqlite_con.cursor()
-            cursor.execute("ATTACH DATABASE ? AS import", (os.path.join(cache_dir, 'import.db'),))
-            # Check repeated chat.name
-            for repeated_chat in cursor.execute("SELECT import.chat.id, import.chat.name FROM import.chat JOIN chat dbchat ON import.chat.name = dbchat.name").fetchall():
-                new_name = window.generate_numbered_name(repeated_chat[1], [tab.chat_window.get_name() for tab in self.tab_list])
-                cursor.execute("UPDATE import.chat SET name=? WHERE id=?", (new_name, repeated_chat[0]))
-            # Check repeated chat.id
-            for repeated_chat in cursor.execute("SELECT import.chat.id FROM import.chat JOIN chat dbchat ON import.chat.id = dbchat.id").fetchall():
-                new_id = window.generate_uuid()
-                cursor.execute("UPDATE import.chat SET id=? WHERE id=?", (new_id, repeated_chat[0]))
-                cursor.execute("UPDATE import.message SET chat_id=? WHERE chat_id=?", (new_id, repeated_chat[0]))
-            # Check repeated message.id
-            for repeated_message in cursor.execute("SELECT import.message.id FROM import.message JOIN message dbmessage ON import.message.id = dbmessage.id").fetchall():
-                new_id = window.generate_uuid()
-                cursor.execute("UPDATE import.attachment SET message_id=? WHERE message_id=?", (new_id, repeated_message[0]))
-                cursor.execute("UPDATE import.message SET id=? WHERE id=?", (new_id, repeated_message[0]))
-            # Check repeated attachment.id
-            for repeated_attachment in cursor.execute("SELECT import.attachment.id FROM import.attachment JOIN attachment dbattachment ON import.attachment.id = dbattachment.id").fetchall():
-                new_id = window.generate_uuid()
-                cursor.execute("UPDATE import.attachment SET id=? WHERE id=?", (new_id, repeated_attachment[0]))
-            # Import
-            cursor.execute("INSERT INTO chat SELECT * FROM import.chat")
-            cursor.execute("INSERT INTO message SELECT * FROM import.message")
-            cursor.execute("INSERT INTO attachment SELECT * FROM import.attachment")
-            sqlite_con.commit()
-            for chat in cursor.execute("SELECT * FROM import.chat"):
+            for chat in window.sql_instance.import_chat(os.path.join(cache_dir, 'import.db'), [tab.chat_window.get_name() for tab in self.tab_list]):
                 new_chat = self.prepend_chat(chat[1], chat[0])
                 threading.Thread(target=new_chat.load_chat_messages).start()
-            sqlite_con.close()
         window.show_toast(_("Chat imported successfully"), window.main_overlay)
 
     def import_chat(self):

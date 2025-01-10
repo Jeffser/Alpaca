@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk, GdkPixbuf
-import logging, os, datetime, re, shutil, threading, sys, base64, sqlite3, tempfile
+import logging, os, datetime, re, shutil, threading, sys, base64, tempfile
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -80,13 +80,7 @@ class edit_text_block(Gtk.Box):
     def save_edit(self):
         message_element = self.get_parent().get_parent()
         message_element.set_text(self.text_view.get_buffer().get_text(self.text_view.get_buffer().get_start_iter(), self.text_view.get_buffer().get_end_iter(), False))
-
-        sqlite_con = sqlite3.connect(window.sqlite_path)
-        cursor = sqlite_con.cursor()
-        cursor.execute("UPDATE message SET content=? WHERE id=?", (message_element.text, message_element.message_id))
-        sqlite_con.commit()
-        sqlite_con.close()
-
+        window.sql_instance.insert_or_update_message(message_element)
         self.get_parent().remove(self)
         message_element.set_hexpand(message_element.bot)
         message_element.set_halign(0 if message_element.bot else 2)
@@ -197,12 +191,10 @@ class attachment(Gtk.Button):
     __gtype_name__ = 'AlpacaAttachment'
 
     def __init__(self, file_name:str, file_type:str, file_content:str):
-        self.file_name = file_name
         self.file_type = file_type
         self.file_content = file_content
-
         button_content = Adw.ButtonContent(
-            label=self.file_name,
+            label=file_name,
             icon_name={
                 "plain_text": "document-text-symbolic",
                 "code": "code-symbolic",
@@ -214,12 +206,11 @@ class attachment(Gtk.Button):
         super().__init__(
             vexpand=False,
             valign=3,
-            name=self.file_name,
+            name=file_name,
             css_classes=["flat"],
-            tooltip_text=self.file_name,
+            tooltip_text=file_name,
             child=button_content
         )
-
         self.connect("clicked", lambda button, file_content=self.file_content, file_type=self.file_type: window.preview_file(self.get_name(), file_content, file_type, False))
 
 class attachment_container(Gtk.ScrolledWindow):
@@ -248,10 +239,11 @@ class attachment_container(Gtk.ScrolledWindow):
 class image(Gtk.Button):
     __gtype_name__ = 'AlpacaImage'
 
-    def __init__(self, image_name:str, content:str):
-        self.content = content
+    def __init__(self, file_name:str, file_content:str):
+        self.file_type = 'image'
+        self.file_content = file_content
         try:
-            image_data = base64.b64decode(self.content)
+            image_data = base64.b64decode(self.file_content)
             loader = GdkPixbuf.PixbufLoader.new()
             loader.write(image_data)
             loader.close()
@@ -262,11 +254,11 @@ class image(Gtk.Button):
             super().__init__(
                 child=image,
                 css_classes=["flat", "chat_image_button"],
-                name=image_name,
+                name=file_name,
                 tooltip_text=_("Image")
             )
             image.update_property([4], [_("Image")])
-            self.connect("clicked", lambda button, content=self.content: window.preview_file(self.get_name(), content, 'image', False))
+            self.connect("clicked", lambda button, content=self.file_content: window.preview_file(self.get_name(), content, 'image', False))
         except Exception as e:
             logger.error(e)
             image_texture = Gtk.Image.new_from_icon_name("image-missing-symbolic")
@@ -411,7 +403,7 @@ class option_popup(Gtk.Popover):
             child=container
         )
 
-        if not self.message_element.get_parent().get_parent().get_parent().get_parent().quick_chat:
+        if not self.message_element.get_chat().quick_chat:
             self.delete_button = Gtk.Button(
                 halign=1,
                 hexpand=True,
@@ -455,16 +447,11 @@ class option_popup(Gtk.Popover):
 
     def delete_message(self):
         logger.debug("Deleting message")
-        chat = self.message_element.get_parent().get_parent().get_parent().get_parent()
+        chat = self.message_element.get_chat()
         message_id = self.message_element.message_id
+        window.sql_instance.delete_message(self.message_element)
         self.message_element.get_parent().remove(self.message_element)
         del chat.messages[message_id]
-        sqlite_con = sqlite3.connect(window.sqlite_path)
-        cursor = sqlite_con.cursor()
-        cursor.execute("DELETE FROM message WHERE id=?;", (message_id,))
-        cursor.execute("DELETE FROM attachment WHERE message_id=?;", (message_id,))
-        sqlite_con.commit()
-        sqlite_con.close()
         if len(chat.messages) == 0:
             chat.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
 
@@ -488,7 +475,7 @@ class option_popup(Gtk.Popover):
         window.set_focus(edit_text_b)
 
     def regenerate_message(self):
-        chat = self.message_element.get_parent().get_parent().get_parent().get_parent()
+        chat = self.message_element.get_chat()
         if self.message_element.spinner:
             self.message_element.container.remove(self.message_element.spinner)
             self.message_element.spinner = None
@@ -640,17 +627,24 @@ class message(Gtk.Box):
                     self.profile_picture_data = new_profile_picture_data
                     self.add_footer(self.dt)
 
+    def get_chat(self):
+        return self.get_parent().get_parent().get_parent().get_parent()
+
     def add_attachment(self, name:str, attachment_type:str, content:str):
         if attachment_type == 'image':
             if not self.image_c:
                 self.image_c = image_container()
                 self.container.append(self.image_c)
-                self.image_c.add_image(image(name, content))
+            new_image = image(name, content)
+            self.image_c.add_image(new_image)
+            return new_image
         else:
             if not self.attachment_c:
                 self.attachment_c = attachment_container()
                 self.container.append(self.attachment_c)
-                self.attachment_c.add_file(attachment(name, attachment_type, content))
+            new_attachment = attachment(name, attachment_type, content)
+            self.attachment_c.add_file(new_attachment)
+            return new_attachment
 
     def add_footer(self, dt:datetime.datetime):
         self.dt = dt
@@ -663,7 +657,7 @@ class message(Gtk.Box):
         self.footer.add_options_button()
 
     def update_message(self, data:dict):
-        chat = self.get_parent().get_parent().get_parent().get_parent()
+        chat = self.get_chat()
         if chat.busy:
             vadjustment = chat.get_vadjustment()
             if self.spinner:
@@ -691,11 +685,7 @@ class message(Gtk.Box):
             if chat.quick_chat:
                 GLib.idle_add(window.quick_ask_save_button.set_sensitive, True)
             else:
-                sqlite_con = sqlite3.connect(window.sqlite_path)
-                cursor = sqlite_con.cursor()
-                cursor.execute("UPDATE message SET date_time = ?, content = ? WHERE id = ?", (self.dt.strftime("%Y/%m/%d %H:%M:%S"), self.text, self.message_id))
-                sqlite_con.commit()
-                sqlite_con.close()
+                window.sql_instance.insert_or_update_message(self)
             sys.exit()
 
     def set_text(self, text:str=None):
