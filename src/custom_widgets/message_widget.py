@@ -157,19 +157,18 @@ class code_block(Gtk.Box):
         copy_button.connect("clicked", lambda *_: self.on_copy())
         title_box.append(copy_button)
         self.run_button = None
+        self.edit_button = Gtk.Button(icon_name="edit-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Edit Code Block"))
+        self.edit_button.connect('clicked', self.start_edit)
+        title_box.append(self.edit_button)
+
+        self.cancel_edit_button = Gtk.Button(icon_name="cross-large-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Cancel"), visible=False)
+        self.cancel_edit_button.connect('clicked', self.cancel_edit)
+        title_box.append(self.cancel_edit_button)
+
+        self.save_edit_button = Gtk.Button(icon_name="paper-plane-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Save"), visible=False)
+        self.save_edit_button.connect('clicked', self.save_edit)
+        title_box.append(self.save_edit_button)
         if language_name and language_name.lower() in ('bash', 'python3', 'c++', 'cpp', 'c', 'html'):
-            self.edit_button = Gtk.Button(icon_name="edit-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Edit Code Block"))
-            self.edit_button.connect('clicked', self.start_edit)
-            title_box.append(self.edit_button)
-
-            self.cancel_edit_button = Gtk.Button(icon_name="cross-large-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Cancel"), visible=False)
-            self.cancel_edit_button.connect('clicked', self.cancel_edit)
-            title_box.append(self.cancel_edit_button)
-
-            self.save_edit_button = Gtk.Button(icon_name="paper-plane-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Save"), visible=False)
-            self.save_edit_button.connect('clicked', self.save_edit)
-            title_box.append(self.save_edit_button)
-
             self.run_button = Gtk.Button(icon_name="execute-from-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Run Script"))
             self.run_button.connect("clicked", lambda *_: self.run_script(language_name))
             title_box.append(self.run_button)
@@ -180,8 +179,9 @@ class code_block(Gtk.Box):
         self.text_preedit = text
 
     def change_buttons_state(self, editing):
+        if self.run_button:
+            self.run_button.set_visible(not editing)
         self.edit_button.set_visible(not editing)
-        self.run_button.set_visible(not editing)
         self.cancel_edit_button.set_visible(editing)
         self.save_edit_button.set_visible(editing)
         self.source_view.set_editable(editing)
