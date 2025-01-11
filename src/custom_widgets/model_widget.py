@@ -791,7 +791,9 @@ class model_manager_container(Gtk.Box):
     def update_available_list(self):
         global available_models
         for name, model_info in available_models.items():
-            self.available_list.add_model(name, model_info['author'], available_models_descriptions.descriptions[name], model_info['categories'])
+            if 'small' in model_info['categories'] or 'medium' in model_info['categories'] or 'big' in model_info['categories'] or os.getenv('ALPACA_SHOW_HUGE_MODELS', '0') == '1':
+                if 'embedding' not in model_info['categories'] or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1':
+                    self.available_list.add_model(name, model_info['author'], available_models_descriptions.descriptions[name], model_info['categories'])
 
     def change_model(self, model_name:str):
         self.model_selector.change_model(model_name)
