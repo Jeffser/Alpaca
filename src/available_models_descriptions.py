@@ -1,5 +1,5 @@
 descriptions = {
-   'llama3.3': _("New state of the art 70B model. Llama 3.3 70B offers similar performance compared to Llama 3.1 405B model."),
+   'llama3.3': _("New state of the art 70B model. Llama 3.3 70B offers similar performance compared to the Llama 3.1 405B model."),
    'qwq': _("QwQ is an experimental research model focused on advancing AI reasoning capabilities."),
    'llama3.2-vision': _("Llama 3.2 Vision is a collection of instruction-tuned image reasoning generative models in 11B and 90B sizes."),
    'llama3.2': _("Meta's Llama 3.2 goes small with 1B and 3B models."),
@@ -144,4 +144,7 @@ descriptions = {
    'granite3.1-dense': _("The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 trillion tokens of data, demonstrated significant improvements over their predecessors in performance and speed in IBM’s initial testing."),
    'granite3.1-moe': _("The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) Granite models from IBM designed for low latency usage."),
    'granite-embedding': _("The IBM Granite Embedding 30M and 278M models models are text-only dense biencoder embedding models, with 30M available in English only and 278M serving multilingual use cases."),
+   'phi4': _("Phi 4 is a 14B parameter, state-of-the-art open model from Microsoft."),
+   'smallthinker': _("A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."),
+   'dolphin3': _("Dolphin 3.0 Llama 3.1 8B 🐬 is the next generation of the Dolphin series of instruct-tuned models designed to be the ultimate general purpose local model, enabling coding, math, agentic, function calling, and general use cases."),
 }
