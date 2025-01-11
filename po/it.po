@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 01\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-10 18:11-0600\n"
-"PO-Revision-Date: 2025-01-10 09:41+0000\n"
+"PO-Revision-Date: 2025-01-11 18:15+0000\n"
 "Last-Translator: Edoardo Brogiolo <edoardo@brogiolo.eu>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -161,18 +161,21 @@ msgstr ""
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "HTML and C++ scripts can now be run inside Alpaca"
 msgstr ""
+"Script in HTML e C++ possono ora essere eseguiti all'interno di Alpaca."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added option to open the environment directory from the terminal"
 msgstr ""
+"Aggiunta l'opzione per aprire il percorso della cartella dell'ambiente dal "
+"terminale"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Added option to edit code blocks directly"
-msgstr ""
+msgstr "Aggiunta la possibilità di modificare direttamente i blocchi di codice"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Complete keyboard shortcut list"
-msgstr ""
+msgstr "Elenco completo delle scorciatoie da tastiera"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Images are now attached in 640p resolution"
@@ -232,7 +235,7 @@ msgstr "Il processo di avvio di Alpaca è più stabile"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "Closing the terminal now kills the script subprocess"
-msgstr ""
+msgstr "La chiusura del terminale ora termina il sottoprocesso dello script"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
 msgid "Transitioned chat backend from JSON to SQLite3"
@@ -804,7 +807,9 @@ msgstr "Corretto un errore nella pulizia delle chat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:436
 msgid "Changed shortcuts to standards"
-msgstr "Reimpostate scorciatoie predefinite"
+msgstr ""
+"Reimpo\n"
+" scorciatoie predefinite"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:437
 msgid "Moved 'Manage Models' button to primary menu"
@@ -2016,6 +2021,8 @@ msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to the Llama 3.1 405B model."
 msgstr ""
+"Nuovo modello 70B all'avanguardia. Llama 3.3 70B offre prestazioni simili al "
+"modello Llama 3.1 405B."
 
 #: src/available_models_descriptions.py:3
 msgid ""
@@ -3120,11 +3127,14 @@ msgstr ""
 #: src/available_models_descriptions.py:147
 msgid "Phi 4 is a 14B parameter, state-of-the-art open model from Microsoft."
 msgstr ""
+"Phi 4 è un modello aperto all'avanguardia di Microsoft da 14B di parametri."
 
 #: src/available_models_descriptions.py:148
 msgid ""
 "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
 msgstr ""
+"Un nuovo modello di ragionamento di piccole dimensioni ottimizzato a partire "
+"dal modello Qwen 2.5 3B Instruct."
 
 #: src/available_models_descriptions.py:149
 msgid ""
@@ -3133,6 +3143,11 @@ msgid ""
 "model, enabling coding, math, agentic, function calling, and general use "
 "cases."
 msgstr ""
+"Dolphin 3.0 Llama 3.1 8B 🐬 è la nuova generazione di modelli della serie "
+"Dolphin ottimizzati per le istruzioni, progettati per essere il modello "
+"locale di uso generale per eccellenza, che consenta di eseguire operazioni "
+"di scrittura del codice, matematica, gestione, chiamata di funzioni e casi "
+"d'uso generali."
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -3346,7 +3361,7 @@ msgstr "Salva la conversazione in Alpaca"
 
 #: src/window.ui:570
 msgid "Terminal dialog"
-msgstr ""
+msgstr "Finestra di dialogo del terminale"
 
 #: src/window.ui:573
 msgid "Terminal"
@@ -3354,7 +3369,7 @@ msgstr "Terminale"
 
 #: src/window.ui:585
 msgid "Open Environment Directory"
-msgstr ""
+msgstr "Apri la cartella dell'ambiente"
 
 #: src/window.ui:606
 msgid "Manage models dialog"
@@ -3724,11 +3739,11 @@ msgstr "Copia il messaggio"
 
 #: src/custom_widgets/message_widget.py:160
 msgid "Edit Code Block"
-msgstr ""
+msgstr "Modifica il blocco di codice"
 
 #: src/custom_widgets/message_widget.py:168
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
 #: src/custom_widgets/message_widget.py:172
 #: src/custom_widgets/message_widget.py:251
@@ -3997,11 +4012,11 @@ msgstr "Configurazione dell'ambiente Python..."
 
 #: src/custom_widgets/terminal_widget.py:90
 msgid "Compiling C++ script..."
-msgstr ""
+msgstr "Compilazione dello script in C++..."
 
 #: src/custom_widgets/terminal_widget.py:104
 msgid "Running local web server"
-msgstr ""
+msgstr "Esecuzione del web server locale"
 
 #~ msgid ""
 #~ "New state of the art 70B model. Llama 3.3 70B offers similar performance "
