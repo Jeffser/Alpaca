@@ -156,19 +156,19 @@ msgstr "মৌলিক LaTeX গাণিতিক সমীকরণগুল�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "HTML and C++ scripts can now be run inside Alpaca"
-msgstr ""
+msgstr "HTML এবং C++ স্ক্রিপ্ট এখন আলপাকা-তে চালানো যাবে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added option to open the environment directory from the terminal"
-msgstr ""
+msgstr "টার্মিনাল থেকে পরিবেশ ডিরেক্টরি খোলার বিকল্প যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Added option to edit code blocks directly"
-msgstr ""
+msgstr "কোড ব্লক সরাসরি সম্পাদনা করার বিকল্প যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Complete keyboard shortcut list"
-msgstr ""
+msgstr "সম্পূর্ণ কীবোর্ড শর্টকাট তালিকা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Images are now attached in 640p resolution"
@@ -228,7 +228,7 @@ msgstr "আলপাকার চালু প্রক্রিয়া এখ
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "Closing the terminal now kills the script subprocess"
-msgstr ""
+msgstr "টার্মিনাল বন্ধ করলে এখন স্ক্রিপ্ট সাবপ্রসেস বন্ধ হয়ে যাবে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
 msgid "Transitioned chat backend from JSON to SQLite3"
@@ -250,8 +250,7 @@ msgstr "সংশোধন করুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:126
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
-msgstr ""
-"ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
+msgstr "ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:135
 msgid "Added categories to models"
@@ -392,8 +391,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:214
 msgid "Fixed model manager not adapting to large system fonts"
-msgstr ""
-"বড় সিস্টেম ফন্টের সাথে খাপ খাইয়ে নিতে মডেল ম্যানেজারের সমস্যা সংশোধন করা হয়েছে"
+msgstr "বড় সিস্টেম ফন্টের সাথে খাপ খাইয়ে নিতে মডেল ম্যানেজারের সমস্যা সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:223
 msgid "Details page for models"
@@ -428,8 +426,7 @@ msgstr "রিমোট সংযোগ ডায়ালগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:241
 msgid "Fixed: Models get duplicated when switching remote and local instance"
-msgstr ""
-"সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
+msgstr "সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:242
 msgid "Better internal instance manager"
@@ -2217,7 +2214,8 @@ msgstr ""
 #: src/available_models_descriptions.py:43
 msgid ""
 "StarCoder is a code generation model trained on 80+ programming languages."
-msgstr "স্টারকোডার হল 80+ প্রোগ্রামিং ভাষায় প্রশিক্ষিত একটি কোড জেনারেশন মডেল।"
+msgstr ""
+"স্টারকোডার হল 80+ প্রোগ্রামিং ভাষায় প্রশিক্ষিত একটি কোড জেনারেশন মডেল।"
 
 #: src/available_models_descriptions.py:44
 msgid ""
@@ -2294,7 +2292,8 @@ msgstr ""
 msgid ""
 "CodeQwen1.5 is a large language model pretrained on a large amount of code "
 "data."
-msgstr "কোডকুইন ১.৫ হল একটি বড় ভাষা মডেল যা বড় পরিমাণের কোড ডেটার উপর প্রিট্রেনড।"
+msgstr ""
+"কোডকুইন ১.৫ হল একটি বড় ভাষা মডেল যা বড় পরিমাণের কোড ডেটার উপর প্রিট্রেনড।"
 
 #: src/available_models_descriptions.py:55
 msgid ""
@@ -2732,8 +2731,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:116
 msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
-msgstr ""
-"মাদারডাক এবং নাম্বারস স্টেশন দ্বারা তৈরি করা ৭বি প্যারামিটার টেক্সট-টু-এসকিউএল "
+msgstr "মাদারডাক এবং নাম্বারস স্টেশন দ্বারা তৈরি করা ৭বি প্যারামিটার টেক্সট-টু-এসকিউএল "
 "মডেল।"
 
 #: src/available_models_descriptions.py:117
@@ -2967,12 +2965,12 @@ msgstr ""
 
 #: src/available_models_descriptions.py:147
 msgid "Phi 4 is a 14B parameter, state-of-the-art open model from Microsoft."
-msgstr ""
+msgstr "Phi 4 হল ১৪ বিলিয়ন প্যারামিটার বিশিষ্ট, মাইক্রোসফটের একটি সর্বাধুনিক ওপেন মডেল।"
 
 #: src/available_models_descriptions.py:148
 msgid ""
 "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
-msgstr ""
+msgstr "Qwen 2.5 3B ইনস্ট্রাক্ট মডেল থেকে সূক্ষ্মভাবে টিউন করা একটি নতুন ছোট রিজনিং মডেল।"
 
 #: src/available_models_descriptions.py:149
 msgid ""
@@ -2980,7 +2978,7 @@ msgid ""
 "instruct-tuned models designed to be the ultimate general purpose local "
 "model, enabling coding, math, agentic, function calling, and general use "
 "cases."
-msgstr ""
+msgstr "Dolphin 3.0 Llama 3.1 8B 🐬 হল Dolphin সিরিজের পরবর্তী প্রজন্মের ইনস্ট্রাক্ট-টিউনড মডেল, যা সর্বাধিক সাধারণ উদ্দেশ্যে স্থানীয় মডেল হিসেবে ডিজাইন করা হয়েছে, যা কোডিং, গাণিতিক হিসাব, এজেন্টিক, ফাংশন কলিং এবং সাধারণ ব্যবহার ক্ষেত্র সমর্থন করে।"
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -3186,7 +3184,7 @@ msgstr "কথোপকথন আলপাকাতে সংরক্ষণ ক
 
 #: src/window.ui:570
 msgid "Terminal dialog"
-msgstr ""
+msgstr "টার্মিনাল ডায়ালগ"
 
 #: src/window.ui:573
 msgid "Terminal"
@@ -3194,7 +3192,7 @@ msgstr "টার্মিনাল"
 
 #: src/window.ui:585
 msgid "Open Environment Directory"
-msgstr ""
+msgstr "পরিবেশ ডিরেক্টরি খুলুন"
 
 #: src/window.ui:606
 msgid "Manage models dialog"
