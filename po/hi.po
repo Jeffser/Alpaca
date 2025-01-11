@@ -156,19 +156,19 @@ msgstr "बुनियादी LaTeX गणित समीकरण अब �
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "HTML and C++ scripts can now be run inside Alpaca"
-msgstr ""
+msgstr "अब HTML और C++ स्क्रिप्ट्स को Alpaca के अंदर चलाया जा सकता है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added option to open the environment directory from the terminal"
-msgstr ""
+msgstr "टर्मिनल से पर्यावरण निर्देशिका खोलने का विकल्प जोड़ा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Added option to edit code blocks directly"
-msgstr ""
+msgstr "कोड ब्लॉक्स को सीधे संपादित करने का विकल्प जोड़ा गया है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Complete keyboard shortcut list"
-msgstr ""
+msgstr "पूर्ण कीबोर्ड शॉर्टकट सूची"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Images are now attached in 640p resolution"
@@ -228,7 +228,7 @@ msgstr "आल्पाका की लॉन्च प्रक्रिया
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "Closing the terminal now kills the script subprocess"
-msgstr ""
+msgstr "अब टर्मिनल बंद करने से स्क्रिप्ट सबप्रोसेस समाप्त हो जाएगा"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
 msgid "Transitioned chat backend from JSON to SQLite3"
@@ -1918,6 +1918,7 @@ msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to the Llama 3.1 405B model."
 msgstr ""
+"नया अत्याधुनिक 70B मॉडल। Llama 3.3 70B, Llama 3.1 405B मॉडल की तुलना में समान प्रदर्शन प्रदान करता है।"
 
 #: src/available_models_descriptions.py:3
 msgid ""
@@ -1956,7 +1957,8 @@ msgstr "मिस्ट्रल एआई द्वारा जारी 7B �
 #: src/available_models_descriptions.py:9
 msgid ""
 "A high-performing open embedding model with a large token context window."
-msgstr "एक उच्च प्रदर्शन वाला ओपन एम्बेडिंग मॉडल जिसमें एक बड़ा टोकन कंटेक्स्ट विंडो है"
+msgstr ""
+"एक उच्च प्रदर्शन वाला ओपन एम्बेडिंग मॉडल जिसमें एक बड़ा टोकन कंटेक्स्ट विंडो है"
 
 #: src/available_models_descriptions.py:10
 msgid ""
@@ -2546,7 +2548,8 @@ msgstr ""
 msgid ""
 "A series of multimodal LLMs (MLLMs) designed for vision-language "
 "understanding."
-msgstr "दृष्टि-भाषा समझ के लिए डिज़ाइन किए गए बहु-मोडल LLMs (MLLMs) की एक श्रृंखला।"
+msgstr ""
+"दृष्टि-भाषा समझ के लिए डिज़ाइन किए गए बहु-मोडल LLMs (MLLMs) की एक श्रृंखला।"
 
 #: src/available_models_descriptions.py:92
 msgid ""
@@ -2756,9 +2759,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:121
 msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
-msgstr ""
-"एक 7बी चैट मॉडल जो उच्च-गुणवत्ता वाले डेटा के साथ फाइन-ट्यून किया गया है और ज़ेफर पर "
-"आधारित है।"
+msgstr "एक 7बी चैट मॉडल जो उच्च-गुणवत्ता वाले डेटा के साथ फाइन-ट्यून किया गया है और ज़ेफर पर आधारित है।"
 
 #: src/available_models_descriptions.py:122
 msgid ""
@@ -2954,12 +2955,12 @@ msgstr ""
 
 #: src/available_models_descriptions.py:147
 msgid "Phi 4 is a 14B parameter, state-of-the-art open model from Microsoft."
-msgstr ""
+msgstr "Phi 4 एक 14B पैरामीटर वाला, माइक्रोसॉफ्ट का अत्याधुनिक ओपन मॉडल है।"
 
 #: src/available_models_descriptions.py:148
 msgid ""
 "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
-msgstr ""
+msgstr "Qwen 2.5 3B Instruct मॉडल से सूक्ष्म रूप से ट्यून किया गया एक नया छोटा रीज़निंग मॉडल।"
 
 #: src/available_models_descriptions.py:149
 msgid ""
@@ -2968,6 +2969,7 @@ msgid ""
 "model, enabling coding, math, agentic, function calling, and general use "
 "cases."
 msgstr ""
+"Dolphin 3.0 Llama 3.1 8B 🐬 Dolphin श्रृंखला के अगले पीढ़ी के instruct-tuned मॉडल है, जिसे एक सर्वश्रेष्ठ सामान्य उद्देश्य स्थानीय मॉडल के रूप में डिज़ाइन किया गया है, जो कोडिंग, गणित, एजेंटिक, फ़ंक्शन कॉलिंग और सामान्य उपयोग मामलों को सक्षम करता है।"
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -3041,7 +3043,8 @@ msgstr "संदेश खोजें"
 #: src/window.ui:167
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
-msgstr "चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
+msgstr ""
+"चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
 
 #: src/window.ui:215 src/window.ui:1224
 msgid "Attach File"
@@ -3175,7 +3178,7 @@ msgstr "बातचीत को अल्पाका में सेव क�
 
 #: src/window.ui:570
 msgid "Terminal dialog"
-msgstr ""
+msgstr "टर्मिनल संवाद"
 
 #: src/window.ui:573
 msgid "Terminal"
@@ -3183,7 +3186,7 @@ msgstr "टर्मिनल"
 
 #: src/window.ui:585
 msgid "Open Environment Directory"
-msgstr ""
+msgstr "पर्यावरण निर्देशिका खोलें"
 
 #: src/window.ui:606
 msgid "Manage models dialog"
