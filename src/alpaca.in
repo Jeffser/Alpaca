@@ -23,6 +23,7 @@ import os
 import sys
 import signal
 import gettext
+import locale
 
 VERSION = '@VERSION@'
 pkgdatadir = '@pkgdatadir@'
@@ -30,8 +31,8 @@ localedir = '@localedir@'
 
 sys.path.insert(1, pkgdatadir)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
-gettext.bindtextdomain('alpaca', localedir)
-gettext.textdomain('alpaca')
+locale.bindtextdomain('alpaca', localedir)
+locale.textdomain('alpaca')
 gettext.install('alpaca', localedir)
 
 if __name__ == '__main__':
