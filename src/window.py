@@ -933,8 +933,6 @@ Generate a title following these rules:
         #Model Manager P.2
         self.model_manager.update_available_list()
         self.model_manager.update_local_list()
-        #threading.Thread(target=self.model_manager.update_available_list).start()
-        #threading.Thread(target=self.model_manager.update_local_list).start()
 
         #User Preferences
         for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
