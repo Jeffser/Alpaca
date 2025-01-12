@@ -157,19 +157,19 @@ msgstr "Ecuaciones básicas de LaTeX ahora son renderizadas en mensajes"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 msgid "HTML and C++ scripts can now be run inside Alpaca"
-msgstr ""
+msgstr "Scripts de C++ y HTML ahora pueden ser ejecutados dentro de Alpaca"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added option to open the environment directory from the terminal"
-msgstr ""
+msgstr "Añadida opción para abrir el directorio del ambiente en la terminal"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Added option to edit code blocks directly"
-msgstr ""
+msgstr "Añadida opción para editar bloques de código directamente"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Complete keyboard shortcut list"
-msgstr ""
+msgstr "Lista de atajos de teclado completa"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Images are now attached in 640p resolution"
@@ -229,7 +229,7 @@ msgstr "El proceso de lanzamiento de Alpaca ahora es más confiable"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "Closing the terminal now kills the script subprocess"
-msgstr ""
+msgstr "Cerrar la terminal ahora detiene el suproceso del script"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
 msgid "Transitioned chat backend from JSON to SQLite3"
@@ -1969,6 +1969,8 @@ msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to the Llama 3.1 405B model."
 msgstr ""
+"Nuevo modelo 70B de última generación. Llama 3.3 70B ofrece un rendimiento "
+"similar al modelo Llama 3.1 405B."
 
 #: src/available_models_descriptions.py:3
 msgid ""
@@ -3065,12 +3067,15 @@ msgstr ""
 
 #: src/available_models_descriptions.py:147
 msgid "Phi 4 is a 14B parameter, state-of-the-art open model from Microsoft."
-msgstr ""
+msgstr "Phi 4 es un modelo abierto de última generación con 14B parámetros "
+"de Microsoft."
 
 #: src/available_models_descriptions.py:148
 msgid ""
 "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
 msgstr ""
+"Un nuevo modelo de razonamiento pequeño perfeccionado a partir del modelo "
+"Instruct 3B de Qwen 2.5."
 
 #: src/available_models_descriptions.py:149
 msgid ""
@@ -3079,6 +3084,10 @@ msgid ""
 "model, enabling coding, math, agentic, function calling, and general use "
 "cases."
 msgstr ""
+"Dolphin 3.0 Llama 3.1 8B 🐬 es la próxima generación de la serie Dolphin "
+"de modelos optimizados por instrucciones, diseñados para ser el mejor modelo "
+"local de propósito general, que permite codificación, matemáticas, agentes, "
+"llamadas de funciones y casos de uso general."
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -3290,7 +3299,7 @@ msgstr "Guardar Conversación a Alpaca"
 
 #: src/window.ui:570
 msgid "Terminal dialog"
-msgstr ""
+msgstr "Diálogo de terminal"
 
 #: src/window.ui:573
 msgid "Terminal"
@@ -3298,7 +3307,7 @@ msgstr "Terminal"
 
 #: src/window.ui:585
 msgid "Open Environment Directory"
-msgstr ""
+msgstr "Abrir Directorio del Ambiente"
 
 #: src/window.ui:606
 msgid "Manage models dialog"
@@ -3669,11 +3678,11 @@ msgstr "Copiar Mensaje"
 
 #: src/custom_widgets/message_widget.py:160
 msgid "Edit Code Block"
-msgstr ""
+msgstr "Editar Bloque de Código"
 
 #: src/custom_widgets/message_widget.py:168
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 #: src/custom_widgets/message_widget.py:172
 #: src/custom_widgets/message_widget.py:251
@@ -3942,11 +3951,11 @@ msgstr "Iniciando ambiente de Python"
 
 #: src/custom_widgets/terminal_widget.py:90
 msgid "Compiling C++ script..."
-msgstr ""
+msgstr "Compilando script C++..."
 
 #: src/custom_widgets/terminal_widget.py:104
 msgid "Running local web server"
-msgstr ""
+msgstr "Ejecutar servidor web local"
 
 #~ msgid ""
 #~ "New state of the art 70B model. Llama 3.3 70B offers similar performance "
