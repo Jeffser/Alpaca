@@ -139,8 +139,9 @@ class code_block(Gtk.Box):
         )
 
         self.language = None
-        if language_name:
-            self.language = GtkSource.LanguageManager.get_default().get_language(language_name)
+        self.language_name = language_name
+        if self.language_name:
+            self.language = GtkSource.LanguageManager.get_default().get_language(self.language_name)
         if self.language:
             self.buffer = GtkSource.Buffer.new_with_language(self.language)
         else:
@@ -152,7 +153,7 @@ class code_block(Gtk.Box):
         )
         self.source_view.update_property([4], [_("{}Code Block").format('{} '.format(self.language.get_name()) if self.language else "")])
         title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=12, spacing=5)
-        title_box.append(Gtk.Label(label=self.language.get_name() if self.language else (language_name.title() if language_name else _("Code Block")), hexpand=True, xalign=0))
+        title_box.append(Gtk.Label(label=self.language.get_name() if self.language else (self.language_name.title() if self.language_name else _("Code Block")), hexpand=True, xalign=0))
         copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
         copy_button.connect("clicked", lambda *_: self.on_copy())
         title_box.append(copy_button)
@@ -168,9 +169,9 @@ class code_block(Gtk.Box):
         self.save_edit_button = Gtk.Button(icon_name="paper-plane-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Save"), visible=False)
         self.save_edit_button.connect('clicked', self.save_edit)
         title_box.append(self.save_edit_button)
-        if language_name and language_name.lower() in ('bash', 'python3', 'py', 'py3', 'c++', 'cpp', 'c', 'html'):
+        if self.language_name and self.language_name.lower() in ('bash', 'sh', 'python', 'python3', 'py', 'py3', 'c++', 'cpp', 'c', 'html'):
             self.run_button = Gtk.Button(icon_name="execute-from-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Run Script"))
-            self.run_button.connect("clicked", lambda *_: self.run_script(language_name))
+            self.run_button.connect("clicked", lambda *_: self.run_script(self.language_name))
             title_box.append(self.run_button)
         self.append(title_box)
         self.append(Gtk.Separator())
@@ -212,11 +213,8 @@ class code_block(Gtk.Box):
         window.show_toast(_("Code copied to the clipboard"), window.main_overlay)
 
     def extract_code(self, code_block_element):
-        language_element = code_block_element.buffer.get_language()
         file_name = 'script'
-        language = 'bash'
-        if language_element:
-            language = language_element.get_name()
+        language = code_block_element.language_name
         file_names = {
             'script.cpp': ['cpp', 'c', 'c++'],
             'main.py': ['python3', 'py', 'py3', 'python'],
