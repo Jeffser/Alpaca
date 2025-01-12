@@ -573,11 +573,10 @@ Generate a title following these rules:
             if selected_chat not in [row[1] for row in chats]:
                 selected_chat = chats[0][1]
             for row in chats:
-                self.chat_list_box.append_chat(row[1], row[0])
-                chat_container = self.chat_list_box.get_chat_by_name(row[1])
+                chat_container =self.chat_list_box.append_chat(row[1], row[0])
                 if row[1] == selected_chat:
                     self.chat_list_box.select_row(self.chat_list_box.tab_list[-1])
-                threading.Thread(target=chat_container.load_chat_messages).start()
+                chat_container.load_chat_messages()
         else:
             self.chat_list_box.new_chat()
 
@@ -932,8 +931,10 @@ Generate a title following these rules:
         self.ollama_instance = connection_handler.instance()
 
         #Model Manager P.2
-        threading.Thread(target=self.model_manager.update_available_list).start()
-        threading.Thread(target=self.model_manager.update_local_list).start()
+        self.model_manager.update_available_list()
+        self.model_manager.update_local_list()
+        #threading.Thread(target=self.model_manager.update_available_list).start()
+        #threading.Thread(target=self.model_manager.update_local_list).start()
 
         #User Preferences
         for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
