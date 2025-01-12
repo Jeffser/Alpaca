@@ -87,6 +87,17 @@ parts:
       snap/jeffser-alpaca/current: .
     after: [python-deps]
 
+  vte:
+    plugin: nil
+    stage-packages:
+      - gir1.2-vte-3.91
+
+  spelling:
+    plugin: nil
+    stage-packages:
+      - gir1.2-spelling-1
+      - libspelling-1-1
+
   deps:
     plugin: nil
     after: [alpaca]
