@@ -1,6 +1,6 @@
 # sql_manager.py
 
-import sqlite3, uuid, datetime, os
+import sqlite3, uuid, datetime, os, shutil
 from .internal import data_dir
 
 def generate_uuid() -> str:
