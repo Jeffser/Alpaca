@@ -5,10 +5,9 @@ Handles models
 
 import gi
 gi.require_version('Gtk', '4.0')
-gi.require_version('GtkSource', '5')
-from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk, GdkPixbuf
-import logging, os, datetime, re, shutil, threading, json, sys, glob, icu, base64, hashlib
-from ..internal import config_dir, data_dir, cache_dir, source_dir
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
+import logging, os, datetime, re, threading, json, sys, glob, icu, base64, hashlib
+from ..internal import source_dir
 from .. import available_models_descriptions
 from . import dialog_widget
 
