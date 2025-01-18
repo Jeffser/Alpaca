@@ -69,11 +69,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     split_view_overlay = Gtk.Template.Child()
     regenerate_button : Gtk.Button = None
     selected_chat_row : Gtk.ListBoxRow = None
-    create_model_base = Gtk.Template.Child()
-    create_model_name = Gtk.Template.Child()
-    create_model_system = Gtk.Template.Child()
-    create_model_modelfile = Gtk.Template.Child()
-    create_model_modelfile_section = Gtk.Template.Child()
     tweaks_group = Gtk.Template.Child()
     preferences_dialog = Gtk.Template.Child()
     file_preview_dialog = Gtk.Template.Child()
@@ -84,7 +79,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     welcome_previous_button = Gtk.Template.Child()
     welcome_next_button = Gtk.Template.Child()
     main_overlay = Gtk.Template.Child()
-    manage_models_overlay = Gtk.Template.Child()
     chat_stack = Gtk.Template.Child()
     message_text_view = None
     message_text_view_scrolled_window = Gtk.Template.Child()
@@ -98,30 +92,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
     chat_right_click_menu = Gtk.Template.Child()
     send_message_menu = Gtk.Template.Child()
     attachment_menu = Gtk.Template.Child()
-    model_tag_list_box = Gtk.Template.Child()
-    navigation_view_manage_models = Gtk.Template.Child()
     file_preview_open_button = Gtk.Template.Child()
     file_preview_remove_button = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
     message_searchbar = Gtk.Template.Child()
     message_search_button = Gtk.Template.Child()
     searchentry_messages = Gtk.Template.Child()
-    no_results_page = Gtk.Template.Child()
-    model_link_button = Gtk.Template.Child()
     title_stack = Gtk.Template.Child()
-    manage_models_dialog = Gtk.Template.Child()
-    model_scroller = Gtk.Template.Child()
-    model_detail_header = Gtk.Template.Child()
-    model_detail_information = Gtk.Template.Child()
-    model_detail_categories = Gtk.Template.Child()
-    model_detail_system = Gtk.Template.Child()
-    model_detail_create_button = Gtk.Template.Child()
     ollama_information_label = Gtk.Template.Child()
     default_model_combo = Gtk.Template.Child()
     default_model_list = Gtk.Template.Child()
     model_directory_selector = Gtk.Template.Child()
     remote_connection_selector = Gtk.Template.Child()
-    model_tag_flow_box = Gtk.Template.Child()
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = None
@@ -306,7 +288,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def remote_connection_selector_clicked(self, button):
         options = {
             _("Cancel"): {"callback": lambda *_: None},
-            _("Connect"): {"callback": lambda url, bearer: generic_actions.connect_remote(url, bearer), "appearance": "suggested"}
+            _("Connect"): {"callback": lambda url, bearer: self.connect_remote(url, bearer), "appearance": "suggested"}
         }
         entries = [
             {"text": self.ollama_instance.remote_url, "placeholder": _('Server URL')},
@@ -333,11 +315,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.refresh_local_models()
             button.set_sensitive(True)
         dialog_widget.simple_directory(directory_selected)
-
-    @Gtk.Template.Callback()
-    def refresh_local_models(self, button=None):
-        logger.info("Refreshing local model list")
-        model_manager_widget.update_local_model_list()
 
     @Gtk.Template.Callback()
     def stop_message(self, button=None):
@@ -476,18 +453,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.sql_instance.insert_or_update_preferences({'idle_timer': self.ollama_instance.idle_timer_delay})
 
     @Gtk.Template.Callback()
-    def create_model_start(self, button):
-        name = self.create_model_name.get_text().lower().replace(":", "").replace(" ", "-")
-        modelfile_buffer = self.create_model_modelfile.get_buffer()
-        modelfile_raw = modelfile_buffer.get_text(modelfile_buffer.get_start_iter(), modelfile_buffer.get_end_iter(), False)
-        modelfile = ["FROM {}".format(self.create_model_base.get_subtitle()), "SYSTEM {}".format(self.create_model_system.get_text())]
-        for line in modelfile_raw.split('\n'):
-            if not line.startswith('SYSTEM') and not line.startswith('FROM'):
-                modelfile.append(line)
-        threading.Thread(target=self.model_manager.pull_model, kwargs={"model_name": name, "modelfile": '\n'.join(modelfile)}).start()
-        self.navigation_view_manage_models.pop()
-
-    @Gtk.Template.Callback()
     def override_changed(self, entry):
         name = entry.get_name()
         value = entry.get_text()
@@ -510,12 +475,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def model_search_changed(self, entry):
         results_local = False
-        for model in list(self.local_model_flowbox):
-            model.set_visible(re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE))
-            results_local = results_local or model.get_visible()
-            if not model.get_visible() and model in self.local_model_flowbox.get_selected_children():
-                self.local_model_flowbox.unselect_all()
-        self.local_model_stack.set_visible_child_name('content' if results_local else 'no-results')
+        if len(model_manager_widget.get_local_models()) > 0:
+            for model in list(self.local_model_flowbox):
+                model.set_visible(re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE))
+                results_local = results_local or model.get_visible()
+                if not model.get_visible() and model in self.local_model_flowbox.get_selected_children():
+                    self.local_model_flowbox.unselect_all()
+            self.local_model_stack.set_visible_child_name('content' if results_local else 'no-results')
+        else:
+            self.local_model_stack.set_visible_child_name('no-models')
 
         results_available = False
         for model in list(self.available_model_flowbox):
@@ -545,10 +513,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                                     block.set_markup(block.get_text())
             except Exception as e:
                 pass
-
-    @Gtk.Template.Callback()
-    def model_detail_create_button_clicked(self, button):
-        self.create_model(button.get_name(), False)
 
     def convert_model_name(self, name:str, mode:int) -> str: # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag
         try:
@@ -585,28 +549,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
         if new_text != text:
             editable.stop_emission_by_name("insert-text")
-
-    def create_model(self, model:str, file:bool):
-        modelfile_buffer = self.create_model_modelfile.get_buffer()
-        modelfile_buffer.delete(modelfile_buffer.get_start_iter(), modelfile_buffer.get_end_iter())
-        self.create_model_system.set_text('')
-        if not file:
-            data = self.model_manager.model_selector.get_model_by_name(self.convert_model_name(model, 1)).data
-            modelfile = []
-            if 'system' in data and data['system']:
-                self.create_model_system.set_text(data['system'])
-            for line in data['modelfile'].split('\n'):
-                if not line.startswith('SYSTEM') and not line.startswith('FROM') and not line.startswith('#'):
-                    modelfile.append(line)
-            self.create_model_name.set_text(self.convert_model_name(model, 1).split(':')[0] + "-custom")
-            modelfile_buffer.insert(modelfile_buffer.get_start_iter(), '\n'.join(modelfile), len('\n'.join(modelfile).encode('utf-8')))
-            self.create_model_base.set_subtitle(self.convert_model_name(model, 1))
-            self.create_model_modelfile_section.set_visible(False)
-        else:
-            self.create_model_name.set_text(os.path.splitext(os.path.basename(model))[0])
-            self.create_model_base.set_subtitle(model)
-            self.create_model_modelfile_section.set_visible(True)
-        self.navigation_view_manage_models.push_by_tag('model_create_page')
 
     def show_toast(self, message:str, overlay):
         logger.info(message)
@@ -672,7 +614,7 @@ Generate a title following these rules:
     - Use only alphanumeric characters, spaces and optionally emojis
     - Just write the title, NOTHING ELSE
 """
-        current_model = self.model_manager.get_selected_model()
+        current_model = self.model_selector.get_selected_model().get_name()
         data = {"model": current_model, "messages": [{"role": "system", "content": system_prompt}] + [message], "stream": False}
         try:
             response = self.ollama_instance.request("POST", "api/chat", json.dumps(data))
@@ -756,7 +698,7 @@ Generate a title following these rules:
             }
             if shutil.which('ollama'):
                 options[_("Use Local Instance")] = {"callback": lambda *_: self.remote_connection_switch.set_active(False)}
-            options[_("Connect")] = {"callback": lambda url, bearer: generic_actions.connect_remote(url,bearer), "appearance": "suggested"}
+            options[_("Connect")] = {"callback": lambda url, bearer: self.connect_remote(url,bearer), "appearance": "suggested"}
             entries = [
                 {"text": self.ollama_instance.remote_url, "css": ['error'], "placeholder": _('Server URL')},
                 {"text": self.ollama_instance.bearer_token, "css": ['error'] if self.ollama_instance.bearer_token else None, "placeholder": _('Bearer Token (Optional)')}
@@ -979,7 +921,7 @@ Generate a title following these rules:
         try:
             texture = clipboard.read_texture_finish(result)
             if texture:
-                if self.model_manager.verify_if_image_can_be_used():
+                if self.model_selector.get_selected_model().get_vision():
                     pixbuf = Gdk.pixbuf_get_from_texture(texture)
                     if not os.path.exists(os.path.join(cache_dir, 'tmp/images/')):
                         os.makedirs(os.path.join(cache_dir, 'tmp/images/'))
@@ -1007,6 +949,19 @@ Generate a title following these rules:
             elif extension == 'pdf':
                 self.attach_file(file.get_path(), 'pdf')
 
+    def connect_remote(self, remote_url:str, bearer_token:str):
+        if remote_url.endswith('/'):
+            remote_url = remote_url.rstrip('/')
+        if not (remote_url.startswith('http://') or remote_url.startswith('https://')):
+            remote_url = f'http://{remote_url}'
+        self.ollama_instance.remote_url=remote_url
+        self.ollama_instance.bearer_token=bearer_token
+        self.ollama_instance.remote = True
+        self.ollama_instance.stop()
+        model_manager_widget.update_local_model_list()
+        self.sql_instance.insert_or_update_preferences({'run_remote': True, 'remote_url': remote_url, 'remote_bearer_token': bearer_token})
+        self.remote_connection_selector.set_subtitle(remote_url)
+
     def remote_switched(self, switch, state):
         def local_instance_process():
             sensitive_elements = [switch, self.tweaks_group, self.instance_page, self.action_button_stack, self.attachment_button]
@@ -1017,17 +972,16 @@ Generate a title following these rules:
 
             self.ollama_instance.remote = False
             threading.Thread(target=self.ollama_instance.start).start()
-            self.model_manager.update_local_list()
+            model_manager_widget.update_local_model_list()
             self.sql_instance.insert_or_update_preferences({'run_remote': False})
 
             [element.set_sensitive(True) for element in sensitive_elements]
             self.get_application().lookup_action('manage_models').set_enabled(True)
-            self.title_stack.set_visible_child_name('model_selector' if len(self.model_manager.get_model_list()) > 0 else 'no_models')
 
         if state:
             options = {
                 _("Cancel"): {"callback": lambda *_: self.remote_connection_switch.set_active(False)},
-                _("Connect"): {"callback": lambda url, bearer: generic_actions.connect_remote(url, bearer), "appearance": "suggested"}
+                _("Connect"): {"callback": lambda url, bearer: self.connect_remote(url, bearer), "appearance": "suggested"}
             }
             entries = [
                 {"text": self.ollama_instance.remote_url, "placeholder": _('Server URL')},
@@ -1091,11 +1045,8 @@ Generate a title following these rules:
         self.ollama_instance = connection_handler.instance()
 
         #Model Manager
-        self.model_manager = model_widget.model_manager_container()
-        self.model_scroller.set_child(self.model_manager)
-
         self.model_selector = model_manager_widget.local_model_selector()
-        self.title_stack.add_named(self.model_selector, 'new-model-selector')
+        self.title_stack.add_named(self.model_selector, 'model-selector')
         model_manager_widget.update_local_model_list()
         model_manager_widget.update_available_model_list()
 
@@ -1104,14 +1055,6 @@ Generate a title following these rules:
 
         if self.get_application().args.new_chat:
             self.chat_list_box.new_chat(self.get_application().args.new_chat)
-
-
-
-
-
-        #Model Manager P.2
-        self.model_manager.update_available_list()
-        self.model_manager.update_local_list()
 
         #User Preferences
         for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
@@ -1147,11 +1090,10 @@ Generate a title following these rules:
         if not shutil.which('ollama'):
             self.preferences_dialog.remove(self.instance_page)
             self.remote_connection_selector.set_subtitle(configuration['remote_url'])
-        self.get_application().lookup_action('manage_models').set_enabled(True)
+        self.get_application().lookup_action('model_manager').set_enabled(True)
 
         if self.get_application().args.ask:
             self.quick_chat(self.get_application().args.ask)
-        self.title_stack.set_visible_child_name('new-model-selector')
 
     def open_button_menu(self, gesture, x, y, menu):
         button = gesture.get_widget()
@@ -1302,9 +1244,6 @@ Generate a title following these rules:
             'new_chat': [lambda *_: self.chat_list_box.new_chat(), ['<primary>n']],
             'clear': [lambda *i: dialog_widget.simple(_('Clear Chat?'), _('Are you sure you want to clear the chat?'), self.chat_list_box.get_current_chat().clear_chat, _('Clear')), ['<primary>e']],
             'import_chat': [lambda *_: self.chat_list_box.import_chat(), ['<primary>i']],
-            'create_model_from_existing': [lambda *i: dialog_widget.simple_dropdown(_('Select Model'), _('This model will be used as the base for the new model'), lambda model: self.create_model(model, False), [self.convert_model_name(model, 0) for model in self.model_manager.get_model_list()])],
-            'create_model_from_file': [lambda *i, file_filter=self.file_filter_gguf: dialog_widget.simple_file(file_filter, lambda file: self.create_model(file.get_path(), True))],
-            'create_model_from_name': [lambda *i: dialog_widget.simple_entry(_('Pull Model'), _('Input the name of the model in this format\nname:tag'), lambda model: threading.Thread(target=self.model_manager.pull_model, kwargs={"model_name": model}).start(), {'placeholder': 'llama3.2:latest'})],
             'duplicate_chat': [self.chat_actions],
             'duplicate_current_chat': [self.current_chat_actions],
             'delete_chat': [self.chat_actions],
@@ -1314,27 +1253,25 @@ Generate a title following these rules:
             'export_chat': [self.chat_actions],
             'export_current_chat': [self.current_chat_actions],
             'toggle_sidebar': [lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9']],
-            'manage_models': [lambda *_: self.manage_models_dialog.present(self), ['<primary>m']],
             'search_messages': [lambda *_: self.message_searchbar.set_search_mode(not self.message_searchbar.get_search_mode()), ['<primary>f']],
             'send_message': [lambda *_: self.send_message()],
             'send_system_message': [lambda *_: self.send_message(None, True)],
             'attach_file': [lambda *_, file_filter=self.file_filter_attachments: dialog_widget.simple_file(file_filter, generic_actions.attach_file)],
-            'attach_screenshot': [lambda *i: self.request_screenshot() if self.model_manager.verify_if_image_can_be_used() else self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)],
+            'attach_screenshot': [lambda *i: self.request_screenshot() if self.model_selector.get_selected_model().get_vision() else self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)],
             'attach_url': [lambda *i: dialog_widget.simple_entry(_('Attach Website? (Experimental)'), _('Please enter a website URL'), self.cb_text_received, {'placeholder': 'https://jeffser.com/alpaca/'})],
             'attach_youtube': [lambda *i: dialog_widget.simple_entry(_('Attach YouTube Captions?'), _('Please enter a YouTube video URL'), self.cb_text_received, {'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})],
-            'new_model_manager' : [lambda *i: self.main_navigation_view.push_by_tag('model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else self.main_navigation_view.pop_to_tag('chat'), ['<primary>x']]
+            'model_manager' : [lambda *i: self.main_navigation_view.push_by_tag('model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else self.main_navigation_view.pop_to_tag('chat'), ['<primary>m']]
         }
 
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
-        self.get_application().lookup_action('manage_models').set_enabled(False)
+        self.get_application().lookup_action('model_manager').set_enabled(False)
         self.remote_connection_switch.set_sensitive(False)
         self.tweaks_group.set_sensitive(False)
         self.instance_page.set_sensitive(False)
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))
-        self.create_model_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
         self.model_creator_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
         self.model_creator_tag.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
 

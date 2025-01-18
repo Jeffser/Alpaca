@@ -65,7 +65,7 @@ class local_model_selector(Gtk.Box):
             icon_name='brain-augemnted-symbolic',
             css_classes=['flat']
         )
-        manage_models_button.set_action_name("app.new_model_manager")
+        manage_models_button.set_action_name("app.model_manager")
 
         button_container = Gtk.Box(spacing=5)
         self.button_label = Gtk.Label(use_markup=True, ellipsize=3)
@@ -194,6 +194,7 @@ class pulling_model(Gtk.Box):
                 new_model = add_local_model(self.get_name())
                 GLib.idle_add(window.local_model_flowbox.remove, self.get_parent())
                 GLib.idle_add(window.local_model_flowbox.select_child, new_model.get_parent())
+                GLib.idle_add(window.title_stack.set_visible_child_name, 'model-selector')
 
     def get_page(self):
         def stop_download():
@@ -430,6 +431,7 @@ class local_model(Gtk.Box):
             window.local_model_flowbox.remove(self)
             if len(list(window.local_model_flowbox)) == 0:
                 window.local_model_stack.set_visible_child_name('no-models')
+                window.title_stack.set_visible_child_name('no-models')
             window.sql_instance.delete_model_picture(self.get_name())
 
     def get_page(self):
@@ -624,7 +626,8 @@ def update_local_model_list():
     except Exception as e:
         logger.error(e)
         window.connection_error()
-    window.title_stack.set_visible_child_name('model_selector' if len(get_local_models()) > 0 else 'no_models')
+    window.title_stack.set_visible_child_name('model-selector' if len(get_local_models()) > 0 else 'no-models')
+    window.local_model_stack.set_visible_child_name('content' if len(get_local_models()) > 0 else 'no-models')
 
 
 def update_available_model_list():

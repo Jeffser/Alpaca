@@ -11,19 +11,6 @@ from .internal import cache_dir
 
 window = None
 
-def connect_remote(remote_url:str, bearer_token:str):
-    if remote_url.endswith('/'):
-        remote_url = remote_url.rstrip('/')
-    if not (remote_url.startswith('http://') or remote_url.startswith('https://')):
-        remote_url = f'http://{remote_url}'
-    window.ollama_instance.remote_url=remote_url
-    window.ollama_instance.bearer_token=bearer_token
-    window.ollama_instance.remote = True
-    window.ollama_instance.stop()
-    window.model_manager.update_local_list()
-    window.sql_instance.insert_or_update_preferences({'run_remote': True, 'remote_url': remote_url, 'remote_bearer_token': bearer_token})
-    window.remote_connection_selector.set_subtitle(remote_url)
-
 def attach_youtube(video_title:str, video_author:str, watch_url:str, video_url:str, video_id:str, caption_name:str):
     buffer = window.message_text_view.get_buffer()
     text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).replace(video_url, "")
