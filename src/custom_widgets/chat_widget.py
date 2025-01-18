@@ -89,7 +89,7 @@ class chat(Gtk.ScrolledWindow):
         self.stop_message()
         for widget in list(self.container):
             self.container.remove(widget)
-        self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
+        self.show_welcome_screen()
 
     def add_message(self, message_id:str, model:str=None, system:bool=None):
         msg = message(message_id, model, system)
@@ -103,7 +103,7 @@ class chat(Gtk.ScrolledWindow):
         buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
         window.send_message()
 
-    def show_welcome_screen(self, show_prompts:bool):
+    def show_welcome_screen(self):
         if self.welcome_screen:
             self.container.remove(self.welcome_screen)
             self.welcome_screen = None
@@ -115,7 +115,7 @@ class chat(Gtk.ScrolledWindow):
             spacing=10,
             halign=3
         )
-        if show_prompts:
+        if len(list(window.local_model_flowbox)) > 0:
             for prompt in random.sample(possible_prompts, 3):
                 prompt_button = Gtk.Button(
                     label=prompt,
@@ -135,7 +135,7 @@ class chat(Gtk.ScrolledWindow):
         self.welcome_screen = Adw.StatusPage(
             icon_name="com.jeffser.Alpaca",
             title="Alpaca",
-            description=_("Try one of these prompts") if show_prompts else _("It looks like you don't have any models downloaded yet. Download models to get started!"),
+            description=_("Try one of these prompts") if len(list(window.local_model_flowbox)) > 0 else _("It looks like you don't have any models downloaded yet. Download models to get started!"),
             child=button_container,
             vexpand=True
         )
@@ -156,7 +156,7 @@ class chat(Gtk.ScrolledWindow):
                 message_element.set_text(message[4])
                 message_element.add_footer(datetime.datetime.strptime(message[3] + (":00" if message[3].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
         else:
-            self.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
+            self.show_welcome_screen()
 
     def on_export_successful(self, file, result):
         file.replace_contents_finish(result)
@@ -344,10 +344,10 @@ class chat_list(Gtk.ListBox):
             for message in tab.chat_window.messages.values():
                 message.update_profile_picture()
 
-    def update_welcome_screens(self, show_prompts:bool):
+    def update_welcome_screens(self):
         for tab in self.tab_list:
             if tab.chat_window.welcome_screen:
-                tab.chat_window.show_welcome_screen(show_prompts)
+                tab.chat_window.show_welcome_screen()
 
     def get_tab_by_name(self, chat_name:str) -> chat_tab:
         for tab in self.tab_list:
@@ -391,7 +391,7 @@ class chat_list(Gtk.ListBox):
             tab = chat_tab(chat_window)
             self.prepend(tab)
             self.tab_list.insert(0, tab)
-            chat_window.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
+            chat_window.show_welcome_screen()
             window.chat_stack.add_child(chat_window)
             window.chat_list_box.select_row(tab)
             return chat_window
@@ -467,10 +467,13 @@ class chat_list(Gtk.ListBox):
                 window.chat_stack.set_transition_type(4 if self.tab_list.index(row) > current_tab_i else 5)
                 window.chat_stack.set_visible_child(row.chat_window)
                 window.switch_send_stop_button(not row.chat_window.busy)
-                if len(row.chat_window.messages) > 0:
-                    last_model_used = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
-                    window.model_manager.change_model(last_model_used)
-                else:
-                    window.model_manager.change_model(window.convert_model_name(window.default_model_list.get_string(window.default_model_combo.get_selected()), 1))
+                if window.model_selector:
+                    if len(row.chat_window.messages) > 0:
+                        model_to_use = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
+                    else:
+                        model_to_use = window.convert_model_name(window.default_model_list.get_string(window.default_model_combo.get_selected()), 1)
+                    detected_models = [row for row in window.model_selector.local_model_list if row.get_name() == model_to_use]
+                    if len(detected_models) > 0:
+                        window.model_selector.local_model_list.select_row(detected_models[0])
                 if row.indicator.get_visible():
                     row.indicator.set_visible(False)

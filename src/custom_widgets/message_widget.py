@@ -520,7 +520,7 @@ class option_popup(Gtk.Popover):
         self.message_element.get_parent().remove(self.message_element)
         del chat.messages[message_id]
         if len(chat.messages) == 0:
-            chat.show_welcome_screen(len(window.model_manager.get_model_list()) > 0)
+            chat.show_welcome_screen()
 
     def copy_message(self):
         logger.debug("Copying message")
@@ -550,7 +550,7 @@ class option_popup(Gtk.Popover):
             self.message_element.set_text()
             if self.message_element.footer:
                 self.message_element.container.remove(self.message_element.footer)
-            self.message_element.model = window.model_manager.get_selected_model()
+            self.message_element.model = window.model_selector.get_selected_model().get_name()
             data = {
                 "model": self.message_element.model,
                 "messages": chat.convert_to_ollama(),
@@ -588,7 +588,7 @@ class footer(Gtk.Box):
         )
         message_author = ""
         if model:
-            model_name = window.convert_model_name(model, 0).replace(" (latest)", '')
+            model_name = window.convert_model_name(model, 0).replace(" (latest)", '').replace(' (custom)', '')
             if message_element.profile_picture_data:
                 message_author = model_name
             else:
@@ -665,9 +665,9 @@ class message(Gtk.Box):
         self.profile_picture_data = None
         self.profile_picture = None
         if self.bot and self.model:
-            model_row = window.model_manager.model_selector.get_model_by_name(self.model)
-            if model_row:
-                self.profile_picture_data = model_row.profile_picture_data
+            model = window.model_selector.get_model_by_name(self.model)
+            if model:
+                self.profile_picture_data = model.data.get('profile_picture')
 
         self.container = Gtk.Box(
             orientation=1,
@@ -687,9 +687,9 @@ class message(Gtk.Box):
 
     def update_profile_picture(self):
         if self.bot and self.model:
-            model_row = window.model_manager.model_selector.get_model_by_name(self.model)
-            if model_row:
-                new_profile_picture_data = model_row.profile_picture_data
+            model = window.model_selector.get_model_by_name(self.model)
+            if model:
+                new_profile_picture_data = model.data.get('profile_picture')
                 if new_profile_picture_data != self.profile_picture_data:
                     self.profile_picture_data = new_profile_picture_data
                     self.add_footer(self.dt)

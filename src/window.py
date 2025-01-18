@@ -19,7 +19,7 @@
 """
 Handles the main window
 """
-import json, threading, os, re, base64, gettext, uuid, shutil, logging, time, requests, sqlite3
+import json, threading, os, re, base64, gettext, uuid, shutil, logging, time, requests, sqlite3, hashlib
 import odf.opendocument as odfopen
 import odf.table as odftable
 from io import BytesIO
@@ -32,10 +32,10 @@ import gi
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 gi.require_version('Spelling', '1')
-from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelling
+from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelling, GObject
 
 from . import connection_handler, generic_actions, sql_manager
-from .custom_widgets import message_widget, chat_widget, model_widget, terminal_widget, dialog_widget
+from .custom_widgets import message_widget, chat_widget, model_widget, terminal_widget, dialog_widget, model_manager_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir
 
 logger = logging.getLogger(__name__)
@@ -59,6 +59,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
     instance_page = Gtk.Template.Child()
 
     #Elements
+    local_model_stack = Gtk.Template.Child()
+    available_model_stack = Gtk.Template.Child()
+    model_manager_stack = Gtk.Template.Child()
+    main_navigation_view = Gtk.Template.Child()
+    local_model_flowbox = Gtk.Template.Child()
+    available_model_flowbox = Gtk.Template.Child()
+    split_view_overlay_model_manager = Gtk.Template.Child()
     split_view_overlay = Gtk.Template.Child()
     regenerate_button : Gtk.Button = None
     selected_chat_row : Gtk.ListBoxRow = None
@@ -120,6 +127,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     chat_list_box = None
     ollama_instance = None
     model_manager = None
+    model_selector = None
     instance_idle_timer = Gtk.Template.Child()
 
     background_switch = Gtk.Template.Child()
@@ -136,7 +144,167 @@ class AlpacaWindow(Adw.ApplicationWindow):
     quick_ask_overlay = Gtk.Template.Child()
     quick_ask_save_button = Gtk.Template.Child()
 
+    model_creator_stack = Gtk.Template.Child()
+    model_creator_base = Gtk.Template.Child()
+    model_creator_profile_picture = Gtk.Template.Child()
+    model_creator_name = Gtk.Template.Child()
+    model_creator_tag = Gtk.Template.Child()
+    model_creator_context = Gtk.Template.Child()
+    model_creator_imagination = Gtk.Template.Child()
+    model_creator_focus = Gtk.Template.Child()
+
     sql_instance = sql_manager.instance(os.path.join(data_dir, "alpaca.db"))
+
+    @Gtk.Template.Callback()
+    def model_creator_accept(self, button):
+        profile_picture = self.model_creator_profile_picture.get_subtitle()
+        model_name = '{}:{}'.format(self.model_creator_name.get_text(), self.model_creator_tag.get_text()).replace(' ', '-')
+        context_buffer = self.model_creator_context.get_buffer()
+        system_message = context_buffer.get_text(context_buffer.get_start_iter(), context_buffer.get_end_iter(), False)
+        top_k = self.model_creator_imagination.get_value()
+        top_p = self.model_creator_focus.get_value() / 100
+
+        def gguf_processing(file_path:str):
+            try:
+
+                dialog = Adw.Dialog()
+
+                with open(file_path, 'rb', buffering=0) as f:
+                    sha256 = hashlib.file_digest(f, 'sha256').hexdigest()
+                    print(sha256)
+            except Exception as e:
+                logger.error(e)
+
+        if not self.model_selector.get_model_by_name(model_name):
+            if profile_picture:
+                self.sql_instance.insert_or_update_model_picture(model_name, self.get_content_of_file(profile_picture, 'profile_picture'))
+            if self.model_creator_base.get_subtitle():
+                threading.Thread(target=gguf_processing, args=(self.model_creator_base.get_subtitle(),)).start()
+            else:
+                base_model_name = self.convert_model_name(self.model_creator_base.get_selected_item().get_string(), 1)
+                data_json = {
+                    'from': base_model_name,
+                    'model': model_name,
+                    'system': system_message,
+                    'parameters': {
+                        'top_k': top_k,
+                        'top_p': top_p
+                    },
+                    'stream': True
+                }
+                model_manager_widget.create_model(data_json)
+
+    @Gtk.Template.Callback()
+    def model_creator_cancel(self, button):
+        self.model_creator_stack.set_visible_child_name('introduction')
+
+    @Gtk.Template.Callback()
+    def model_creator_load_profile_picture(self, button):
+        file_filter = Gtk.FileFilter()
+        file_filter.add_suffix('png')
+        file_filter.add_suffix('jpg')
+        file_filter.add_suffix('jpeg')
+        file_filter.add_suffix('webp')
+        dialog_widget.simple_file(file_filter, lambda file: self.model_creator_profile_picture.set_subtitle(file.get_path()))
+
+    @Gtk.Template.Callback()
+    def model_creator_base_changed(self, comborow, params):
+        model_name = comborow.get_selected_item().get_string()
+        if model_name != 'GGUF' and comborow.get_subtitle():
+            model_name = self.convert_model_name(model_name, 1)
+
+            self.model_creator_name.set_text(model_name.split(':')[0])
+            self.model_creator_tag.set_text('custom')
+
+            system = self.model_selector.get_model_by_name(model_name).data.get('system')
+            if system:
+                context_buffer = self.model_creator_context.get_buffer()
+                context_buffer.delete(context_buffer.get_start_iter(), context_buffer.get_end_iter())
+                context_buffer.insert_at_cursor(system, len(system))
+
+            modelfile = self.model_selector.get_model_by_name(model_name).data.get('modelfile')
+            if modelfile:
+                for line in modelfile.splitlines():
+                    if line.startswith('PARAMETER top_k'):
+                        top_k = int(line.split(' ')[2])
+                        print(top_k)
+                        self.model_creator_imagination.set_value(top_p)
+                    elif line.startswith('PARAMETER top_p'):
+                        top_p = int(float(line.split(' ')[2]) * 100)
+                        self.model_creator_focus.set_value(top_p)
+
+    @Gtk.Template.Callback()
+    def model_creator_gguf(self, button):
+        def result(file):
+            try:
+                file_path = file.get_path()
+            except Exception as e:
+                return
+            context_buffer = self.model_creator_context.get_buffer()
+            context_buffer.delete(context_buffer.get_start_iter(), context_buffer.get_end_iter())
+            self.model_creator_profile_picture.set_subtitle('')
+            string_list = Gtk.StringList()
+            string_list.append('GGUF')
+            self.model_creator_base.set_model(string_list)
+            self.model_creator_base.set_subtitle(file_path)
+            self.model_creator_stack.set_visible_child_name('content')
+
+        file_filter = Gtk.FileFilter()
+        file_filter.add_suffix('gguf')
+        dialog_widget.simple_file(file_filter, result)
+
+    @Gtk.Template.Callback()
+    def model_creator_existing(self, button):
+        context_buffer = self.model_creator_context.get_buffer()
+        context_buffer.delete(context_buffer.get_start_iter(), context_buffer.get_end_iter())
+        self.model_creator_profile_picture.set_subtitle('')
+        self.model_creator_base.set_subtitle('')
+        string_list = Gtk.StringList()
+        [string_list.append(value.model_title) for value in model_manager_widget.get_local_models().values()]
+        self.model_creator_base.set_model(string_list)
+        self.model_creator_stack.set_visible_child_name('content')
+
+    @Gtk.Template.Callback()
+    def model_manager_stack_changed(self, viewstack, params):
+        self.local_model_flowbox.unselect_all()
+        self.available_model_flowbox.unselect_all()
+        self.model_creator_stack.set_visible_child_name('introduction')
+
+    @Gtk.Template.Callback()
+    def model_manager_child_activated(self, flowbox, selected_child):
+        self.split_view_overlay_model_manager.set_show_sidebar(selected_child)
+        self.set_focus(selected_child.get_child().get_default_widget())
+
+    @Gtk.Template.Callback()
+    def model_manager_child_selected(self, flowbox):
+        def set_default_sidebar():
+            time.sleep(1)
+            if not self.split_view_overlay_model_manager.get_show_sidebar():
+                sidebar = Adw.ToolbarView()
+                sidebar.add_top_bar(Adw.HeaderBar(show_back_button=False))
+                sidebar.set_content(Adw.StatusPage(icon_name='brain-augemnted-symbolic'))
+                GLib.idle_add(self.split_view_overlay_model_manager.set_sidebar, sidebar)
+
+        selected_children = flowbox.get_selected_children()
+        if len(selected_children) > 0:
+            if not self.split_view_overlay_model_manager.get_show_sidebar():
+                self.split_view_overlay_model_manager.set_show_sidebar(True)
+            model = selected_children[0].get_child()
+
+            sidebar = Adw.ToolbarView()
+            sidebar.add_top_bar(Adw.HeaderBar(show_back_button=False))
+
+            actionbar, content = model.get_page()
+
+            sidebar.set_content(content)
+            if actionbar:
+                sidebar.add_bottom_bar(actionbar)
+
+            self.split_view_overlay_model_manager.set_sidebar(sidebar)
+        else:
+            self.split_view_overlay_model_manager.set_show_sidebar(False)
+            threading.Thread(target=set_default_sidebar).start()
+
 
     @Gtk.Template.Callback()
     def closing_terminal(self, dialog):
@@ -178,7 +346,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def refresh_local_models(self, button=None):
         logger.info("Refreshing local model list")
-        self.model_manager.update_local_list()
+        model_manager_widget.update_local_model_list()
 
     @Gtk.Template.Callback()
     def stop_message(self, button=None):
@@ -196,7 +364,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         self.chat_list_box.send_tab_to_top(self.chat_list_box.get_selected_row())
 
-        current_model = self.model_manager.get_selected_model()
+        current_model = self.model_selector.get_selected_model().get_name()
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
             return
@@ -349,29 +517,22 @@ class AlpacaWindow(Adw.ApplicationWindow):
             logger.error(e)
 
     @Gtk.Template.Callback()
-    def model_search_toggle(self, button):
-        self.model_searchbar.set_search_mode(button.get_active())
-        self.model_manager.pulling_list.set_visible(not button.get_active() and len(list(self.model_manager.pulling_list)) > 0)
-        self.model_manager.local_list.set_visible(not button.get_active() and len(list(self.model_manager.local_list)) > 0)
-
-    @Gtk.Template.Callback()
-    def message_search_toggle(self, button):
-        self.message_searchbar.set_search_mode(button.get_active())
-
-    @Gtk.Template.Callback()
     def model_search_changed(self, entry):
-        results = 0
-        if self.model_manager:
-            for model in list(self.model_manager.available_list):
-                model.set_visible(re.search(entry.get_text(), '{} {} {} {} {}'.format(model.get_name(), model.model_title, model.model_author, model.model_description, (_('image') if model.image_recognition else '')), re.IGNORECASE))
-                if model.get_visible():
-                    results += 1
-            if entry.get_text() and results == 0:
-                self.no_results_page.set_visible(True)
-                self.model_scroller.set_visible(False)
-            else:
-                self.model_scroller.set_visible(True)
-                self.no_results_page.set_visible(False)
+        results_local = False
+        for model in list(self.local_model_flowbox):
+            model.set_visible(re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE))
+            results_local = results_local or model.get_visible()
+            if not model.get_visible() and model in self.local_model_flowbox.get_selected_children():
+                self.local_model_flowbox.unselect_all()
+        self.local_model_stack.set_visible_child_name('content' if results_local else 'no-results')
+
+        results_available = False
+        for model in list(self.available_model_flowbox):
+            model.set_visible(re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE))
+            results_available = results_available or model.get_visible()
+            if not model.get_visible() and model in self.available_model_flowbox.get_selected_children():
+                self.available_model_flowbox.unselect_all()
+        self.available_model_stack.set_visible_child_name('content' if results_available else 'no-results')
 
     @Gtk.Template.Callback()
     def message_search_changed(self, entry, current_chat=None):
@@ -635,7 +796,25 @@ Generate a title following these rules:
             except Exception as e:
                 logger.error(e)
                 self.show_toast(_("Cannot open image"), self.main_overlay)
-        elif file_type == 'plain_text' or file_type == 'code' or file_type == 'youtube' or file_type == 'website':
+        elif file_type == 'profile_picture':
+            try:
+                with Image.open(file_path) as img:
+                    width, height = img.size
+                    max_size = 128
+                    if width > height:
+                        new_width = max_size
+                        new_height = int((max_size / width) * height)
+                    else:
+                        new_height = max_size
+                        new_width = int((max_size / height) * width)
+                    resized_img = img.resize((new_width, new_height), Image.LANCZOS)
+                    with BytesIO() as output:
+                        resized_img.save(output, format="PNG")
+                        image_data = output.getvalue()
+                    return base64.b64encode(image_data).decode("utf-8")
+            except Exception as e:
+                logger.error(e)
+        elif file_type in ('plain_text', 'code', 'youtube', 'website'):
             with open(file_path, 'r', encoding="utf-8") as f:
                 return f.read()
         elif file_type == 'pdf':
@@ -917,9 +1096,17 @@ Generate a title following these rules:
             self.welcome_dialog.present(self)
             return
 
+        #Instance
+        self.ollama_instance = connection_handler.instance()
+
         #Model Manager
         self.model_manager = model_widget.model_manager_container()
         self.model_scroller.set_child(self.model_manager)
+
+        self.model_selector = model_manager_widget.local_model_selector()
+        self.title_stack.add_named(self.model_selector, 'new-model-selector')
+        model_manager_widget.update_local_model_list()
+        model_manager_widget.update_available_model_list()
 
         #Chat History
         self.load_history()
@@ -927,8 +1114,9 @@ Generate a title following these rules:
         if self.get_application().args.new_chat:
             self.chat_list_box.new_chat(self.get_application().args.new_chat)
 
-        #Instance
-        self.ollama_instance = connection_handler.instance()
+
+
+
 
         #Model Manager P.2
         self.model_manager.update_available_list()
@@ -972,6 +1160,7 @@ Generate a title following these rules:
 
         if self.get_application().args.ask:
             self.quick_chat(self.get_application().args.ask)
+        self.title_stack.set_visible_child_name('new-model-selector')
 
     def open_button_menu(self, gesture, x, y, menu):
         button = gesture.get_widget()
@@ -1090,6 +1279,7 @@ Generate a title following these rules:
         terminal_widget.window = self
         generic_actions.window = self
         connection_handler.window = self
+        model_manager_widget.window = self
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
@@ -1140,7 +1330,8 @@ Generate a title following these rules:
             'attach_file': [lambda *_, file_filter=self.file_filter_attachments: dialog_widget.simple_file(file_filter, generic_actions.attach_file)],
             'attach_screenshot': [lambda *i: self.request_screenshot() if self.model_manager.verify_if_image_can_be_used() else self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)],
             'attach_url': [lambda *i: dialog_widget.simple_entry(_('Attach Website? (Experimental)'), _('Please enter a website URL'), self.cb_text_received, {'placeholder': 'https://jeffser.com/alpaca/'})],
-            'attach_youtube': [lambda *i: dialog_widget.simple_entry(_('Attach YouTube Captions?'), _('Please enter a YouTube video URL'), self.cb_text_received, {'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})]
+            'attach_youtube': [lambda *i: dialog_widget.simple_entry(_('Attach YouTube Captions?'), _('Please enter a YouTube video URL'), self.cb_text_received, {'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})],
+            'new_model_manager' : [lambda *i: self.main_navigation_view.push_by_tag('model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else self.main_navigation_view.pop_to_tag('chat'), ['<primary>x']]
         }
 
         for action_name, data in universal_actions.items():
@@ -1153,6 +1344,8 @@ Generate a title following these rules:
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))
         self.create_model_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
+        self.model_creator_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
+        self.model_creator_tag.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
 
         checker = Spelling.Checker.get_default()
         adapter = Spelling.TextBufferAdapter.new(self.message_text_view.get_buffer(), checker)

@@ -105,7 +105,7 @@ def attach_file(file):
         file_type = 'plain_text'
     else:
         file_type = found_types[0]
-    if file_type == 'image' and not window.model_manager.verify_if_image_can_be_used():
+    if file_type == 'image' and not window.model_selector.get_selected_model().get_vision():
         window.show_toast(_("Image recognition is only available on specific models"), window.main_overlay)
         return
     window.attach_file(file.get_path(), file_type)

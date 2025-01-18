@@ -32,7 +32,8 @@ class model_selector_popup(Gtk.Popover):
         manage_models_button.connect("clicked", lambda *_: self.hide())
         self.model_list_box = Gtk.ListBox(
             css_classes=['navigation-sidebar', 'model_list_box'],
-            height_request=0
+            height_request=0,
+            selection_mode=1
         )
         container = Gtk.Box(
             orientation=1,
@@ -109,20 +110,20 @@ class model_selector_button(Gtk.MenuButton):
             model_name = row.get_name()
             self.label.set_label(window.convert_model_name(model_name, 0))
             self.set_tooltip_text(window.convert_model_name(model_name, 0))
-        elif len(list(listbox)) == 0:
-            window.title_stack.set_visible_child_name('no_models')
+        #elif len(list(listbox)) == 0:
+            #window.title_stack.set_visible_child_name('no_models')
         window.model_manager.verify_if_image_can_be_used()
 
     def add_model(self, model_name:str, data:dict):
         model_row = model_selector_row(model_name, data)
         GLib.idle_add(self.get_popover().model_list_box.append, model_row)
         GLib.idle_add(self.change_model, model_name)
-        GLib.idle_add(window.title_stack.set_visible_child_name, 'model_selector')
+        #GLib.idle_add(window.title_stack.set_visible_child_name, 'model_selector')
 
     def remove_model(self, model_name:str):
         self.get_popover().model_list_box.remove(next((model for model in list(self.get_popover().model_list_box) if model.get_name() == model_name), None))
         self.model_changed(self.get_popover().model_list_box)
-        window.title_stack.set_visible_child_name('model_selector' if len(window.model_manager.get_model_list()) > 0 else 'no_models')
+        #window.title_stack.set_visible_child_name('model_selector' if len(window.model_manager.get_model_list()) > 0 else 'no_models')
         window.sql_instance.delete_model_picture(self.get_name())
         window.chat_list_box.update_profile_pictures()
 
@@ -703,7 +704,7 @@ class model_manager_container(Gtk.Box):
         self.available_list = available_model_list()
         self.append(self.available_list)
         self.model_selector = model_selector_button()
-        window.title_stack.add_named(self.model_selector, 'model_selector')
+        #window.title_stack.add_named(self.model_selector, 'model_selector')
         global available_models
         try:
             with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
@@ -744,7 +745,7 @@ class model_manager_container(Gtk.Box):
                 pass
             if len(self.get_model_list()) == 0:
                 self.local_list.set_visible(False)
-                window.chat_list_box.update_welcome_screens(False)
+                window.chat_list_box.update_welcome_screens()
             window.show_toast(_("Model deleted successfully"), window.manage_models_overlay)
         else:
             window.manage_models_dialog.close()
@@ -768,7 +769,7 @@ class model_manager_container(Gtk.Box):
                 GLib.idle_add(self.local_list.remove_all)
                 window.default_model_list.splice(0, len(list(window.default_model_list)), None)
                 data = json.loads(response.text)
-                GLib.idle_add(window.chat_list_box.update_welcome_screens, len(data['models']) > 0)
+                GLib.idle_add(window.chat_list_box.update_welcome_screens)
                 if len(data['models']) == 0:
                     GLib.idle_add(self.local_list.set_visible, False)
                 else:
@@ -784,7 +785,7 @@ class model_manager_container(Gtk.Box):
         except Exception as e:
             logger.error(e)
             window.connection_error()
-        window.title_stack.set_visible_child_name('model_selector' if len(window.model_manager.get_model_list()) > 0 else 'no_models')
+        #window.title_stack.set_visible_child_name('model_selector' if len(window.model_manager.get_model_list()) > 0 else 'no_models')
         GLib.idle_add(window.chat_list_box.update_profile_pictures)
 
     #Should only be called when the app starts
@@ -840,6 +841,6 @@ class model_manager_container(Gtk.Box):
                 GLib.idle_add(window.connection_error)
 
             self.pulling_list.remove(model)
-            GLib.idle_add(window.chat_list_box.update_welcome_screens, len(self.get_model_list()) > 0)
+            GLib.idle_add(window.chat_list_box.update_welcome_screens)
             if len(list(self.pulling_list)) == 0:
                 GLib.idle_add(self.pulling_list.set_visible, False)

@@ -60,6 +60,27 @@ stacksidebar {
 	padding: 12px;
 }
 
+.model_flowbox, .model_flowbox .model_box, .p10 {
+  padding: 10px;
+}
+
+.model_flowbox flowboxchild {
+	border-radius: 12px;
+	padding: 0;
+}
+
+.model_pfp {
+  border-radius: 100%;
+}
+
+.local_model_selector {
+  border-radius: 6px;
+}
+
+.model_flowbox flowboxchild:selected > * {
+	background-color: unset;
+}
+
 /*-----------MACOS STUFF-----------*/
 
 window.macos windowcontrols > button > image {
