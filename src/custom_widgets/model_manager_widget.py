@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk, GdkPixbuf
-import logging, os, datetime, re, shutil, threading, json, sys, glob, icu, base64
+import logging, os, datetime, re, shutil, threading, json, sys, glob, icu, base64, hashlib
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .. import available_models_descriptions
 from . import dialog_widget
@@ -262,9 +262,10 @@ class local_model_page(Gtk.Box):
             selection_mode=0
         )
         self.append(information_container)
+        parent_model = self.model.data.get('details', {}).get('parent_model')
         metadata={
             _('Tag'): model_title.split(' (')[-1][:-1],
-            _('Parent Model'): self.model.data.get('details', {}).get('parent_model'),
+            _('Parent Model'): parent_model if '/' not in parent_model else 'GGUF',
             _('Family'): self.model.data.get('details', {}).get('family'),
             _('Parameter Size'): self.model.data.get('details', {}).get('parameter_size'),
             _('Quantization Level'): self.model.data.get('details', {}).get('quantization_level')
@@ -288,7 +289,9 @@ class local_model_page(Gtk.Box):
                 hexpand=True,
                 margin_top=10,
                 margin_start=0,
-                margin_end=0
+                margin_end=0,
+                ellipsize=3,
+                tooltip_text=name
             )
             info_box.append(title_label)
             subtitle_label = Gtk.Label(
@@ -297,7 +300,9 @@ class local_model_page(Gtk.Box):
                 hexpand=True,
                 margin_bottom=10,
                 margin_start=0,
-                margin_end=0
+                margin_end=0,
+                ellipsize=3,
+                tooltip_text=value if value else _('Not Available')
             )
             info_box.append(subtitle_label)
             information_container.append(info_box)
@@ -642,23 +647,48 @@ def get_local_models() -> dict:
         results[model.get_name()] = model
     return results
 
-def pull_model_confirm(model_name:str, data:dict, action:str):
+def pull_model_confirm(model_name:str):
     if model_name not in list(get_local_models().keys()):
         model = pulling_model(model_name)
         window.local_model_flowbox.prepend(model)
         GLib.idle_add(window.model_manager_stack.set_visible_child_name, 'local_models')
         GLib.idle_add(window.local_model_flowbox.select_child, model.get_parent())
         GLib.idle_add(window.local_model_stack.set_visible_child_name, 'content')
-        response = window.ollama_instance.request("POST", "api/{}".format(action), json.dumps(data), lambda result_data: model.update_progressbar(result_data))
-        print(response)
+        response = window.ollama_instance.request("POST", "api/pull", json.dumps({'name': model_name, 'stream': True}), lambda result_data: model.update_progressbar(result_data))
 
 def pull_model(row, icon):
     model_name = row.get_name()
     row.remove(icon)
     row.add_suffix(Gtk.Image.new_from_icon_name('check-plain-symbolic'))
     row.set_sensitive(False)
-    threading.Thread(target=pull_model_confirm, args=(model_name, {'name': model_name, 'stream': True}, 'pull')).start()
+    threading.Thread(target=pull_model_confirm, args=(model_name,)).start()
 
-def create_model(data:dict):
-    threading.Thread(target=pull_model_confirm, args=(data.get('model'), data, 'create')).start()
+def create_model_confirm(data:dict, gguf_path:str):
+    if data.get('model') and data.get('model') not in list(get_local_models().keys()):
+        model = pulling_model(data.get('model'))
+        window.local_model_flowbox.prepend(model)
+        GLib.idle_add(window.model_manager_stack.set_visible_child_name, 'local_models')
+        GLib.idle_add(window.local_model_flowbox.select_child, model.get_parent())
+        GLib.idle_add(window.local_model_stack.set_visible_child_name, 'content')
+        if gguf_path:
+            try:
+                with open(gguf_path, 'rb', buffering=0) as f:
+                    model.update_progressbar({'status': 'Generating sha256'})
+                    sha256 = hashlib.file_digest(f, 'sha256').hexdigest()
+
+                with open(gguf_path, 'rb') as f:
+                    response = window.ollama_instance.request('GET', 'api/blobs/sha256:{}'.format(sha256))
+                    if response.status_code == 404:
+                        print('a')
+                        model.update_progressbar({'status': 'Uploading GGUF to Ollama instance'})
+                        response = window.ollama_instance.request('POST', 'api/blobs/sha256:{}'.format(sha256), f)
+                    data['files'] = {os.path.split(gguf_path)[1]: 'sha256:{}'.format(sha256)}
+            except Exception as e:
+                logger.error(e)
+                GLib.idle_add(window.local_model_flowbox.remove, model.get_parent())
+                return
+        response = window.ollama_instance.request("POST", "api/create", json.dumps(data), lambda result_data: model.update_progressbar(result_data))
+
+def create_model(data:dict, gguf_path:str=None):
+    threading.Thread(target=create_model_confirm, args=(data, gguf_path)).start()
 

@@ -19,7 +19,7 @@
 """
 Handles the main window
 """
-import json, threading, os, re, base64, gettext, uuid, shutil, logging, time, requests, sqlite3, hashlib
+import json, threading, os, re, base64, gettext, uuid, shutil, logging, time, requests, sqlite3
 import odf.opendocument as odfopen
 import odf.table as odftable
 from io import BytesIO
@@ -164,31 +164,25 @@ class AlpacaWindow(Adw.ApplicationWindow):
         top_k = self.model_creator_imagination.get_value()
         top_p = self.model_creator_focus.get_value() / 100
 
-        def gguf_processing(file_path:str):
-            try:
-                with open(file_path, 'rb', buffering=0) as f:
-                    sha256 = hashlib.file_digest(f, 'sha256').hexdigest()
-                    print(sha256)
-            except Exception as e:
-                logger.error(e)
-
         if not self.model_selector.get_model_by_name(model_name):
             if profile_picture:
                 self.sql_instance.insert_or_update_model_picture(model_name, self.get_content_of_file(profile_picture, 'profile_picture'))
+
+            data_json = {
+                'model': model_name,
+                'system': system_message,
+                'parameters': {
+                    'top_k': top_k,
+                    'top_p': top_p
+                },
+                'stream': True
+            }
+
             if self.model_creator_base.get_subtitle():
-                threading.Thread(target=gguf_processing, args=(self.model_creator_base.get_subtitle(),)).start()
+                gguf_path = self.model_creator_base.get_subtitle()
+                model_manager_widget.create_model(data_json, gguf_path)
             else:
-                base_model_name = self.convert_model_name(self.model_creator_base.get_selected_item().get_string(), 1)
-                data_json = {
-                    'from': base_model_name,
-                    'model': model_name,
-                    'system': system_message,
-                    'parameters': {
-                        'top_k': top_k,
-                        'top_p': top_p
-                    },
-                    'stream': True
-                }
+                data_json['from'] = self.convert_model_name(self.model_creator_base.get_selected_item().get_string(), 1)
                 model_manager_widget.create_model(data_json)
 
     @Gtk.Template.Callback()
