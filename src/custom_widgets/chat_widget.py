@@ -456,21 +456,22 @@ class chat_list(Gtk.ListBox):
     def chat_changed(self, row):
         if row:
             current_tab_i = next((i for i, t in enumerate(self.tab_list) if t.chat_window == window.chat_stack.get_visible_child()), -1)
-            if self.tab_list.index(row) != current_tab_i:
-                if window.searchentry_messages.get_text() != '':
-                    window.searchentry_messages.set_text('')
-                    window.message_search_changed(window.searchentry_messages, window.chat_stack.get_visible_child())
-                window.message_searchbar.set_search_mode(False)
-                window.chat_stack.set_transition_type(4 if self.tab_list.index(row) > current_tab_i else 5)
-                window.chat_stack.set_visible_child(row.chat_window)
-                window.switch_send_stop_button(not row.chat_window.busy)
-                if window.model_selector:
-                    if len(row.chat_window.messages) > 0:
-                        model_to_use = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
-                    else:
-                        model_to_use = window.convert_model_name(window.default_model_list.get_string(window.default_model_combo.get_selected()), 1)
-                    detected_models = [row for row in window.model_selector.local_model_list if row.get_name() == model_to_use]
-                    if len(detected_models) > 0:
-                        window.model_selector.local_model_list.select_row(detected_models[0])
-                if row.indicator.get_visible():
-                    row.indicator.set_visible(False)
+            if window.searchentry_messages.get_text() != '':
+                window.searchentry_messages.set_text('')
+                window.message_search_changed(window.searchentry_messages, window.chat_stack.get_visible_child())
+            window.message_searchbar.set_search_mode(False)
+            window.chat_stack.set_transition_type(4 if self.tab_list.index(row) > current_tab_i else 5)
+            window.chat_stack.set_visible_child(row.chat_window)
+            window.switch_send_stop_button(not row.chat_window.busy)
+            if window.model_selector:
+                if len(row.chat_window.messages) > 0:
+                    model_to_use = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
+                else:
+                    model_to_use = window.convert_model_name(window.default_model_list.get_string(window.default_model_combo.get_selected()), 1)
+                detected_models = [row for row in list(window.model_selector.local_model_list) if row.get_name() == model_to_use]
+                if len(detected_models) > 0:
+                    window.model_selector.local_model_list.select_row(detected_models[0])
+                else:
+                    window.model_selector.local_model_list.select_row(list(window.model_selector.local_model_list)[0])
+            if row.indicator.get_visible():
+                row.indicator.set_visible(False)

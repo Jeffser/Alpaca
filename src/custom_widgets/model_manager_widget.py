@@ -37,7 +37,7 @@ class local_model_row(Gtk.ListBoxRow):
             tooltip_text=model_title
         )
 
-class local_model_selector(Gtk.Box):
+class local_model_selector(Adw.Bin):
     __gtype_name__ = 'AlpacaLocalModelSelector'
 
     def __init__(self):
@@ -76,10 +76,10 @@ class local_model_selector(Gtk.Box):
             popover=popover,
             css_classes=['flat']
         )
-
-        super().__init__(css_classes=['card', 'local_model_selector'])
-        self.append(manage_models_button)
-        self.append(selector_button)
+        container = Gtk.Box(css_classes=['card', 'local_model_selector'], halign=3)
+        container.append(manage_models_button)
+        container.append(selector_button)
+        super().__init__(child=container)
 
     def get_selected_model(self):
         return self.local_model_list.get_selected_row().model
@@ -609,13 +609,16 @@ def add_local_model(model_name:str):
     return model_element
 
 def update_local_model_list():
+    string_list = Gtk.StringList()
     window.local_model_flowbox.remove_all()
+    window.model_selector.local_model_list.remove_all()
     try:
         response = window.ollama_instance.request("GET", "api/tags")
         if response.status_code == 200:
             threads = []
             data = json.loads(response.text)
-            for model in data['models']:
+            for model in data.get('models'):
+                string_list.append(model.get('name'))
                 thread = threading.Thread(target=add_local_model, args=(model['name'], ))
                 thread.start()
                 threads.append(thread)
@@ -628,7 +631,7 @@ def update_local_model_list():
         window.connection_error()
     window.title_stack.set_visible_child_name('model-selector' if len(get_local_models()) > 0 else 'no-models')
     window.local_model_stack.set_visible_child_name('content' if len(get_local_models()) > 0 else 'no-models')
-
+    window.default_model_combo.set_model(string_list)
 
 def update_available_model_list():
     global available_models

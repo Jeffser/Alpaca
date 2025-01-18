@@ -967,7 +967,7 @@ Generate a title following these rules:
             sensitive_elements = [switch, self.tweaks_group, self.instance_page, self.action_button_stack, self.attachment_button]
 
             [element.set_sensitive(False) for element in sensitive_elements]
-            self.get_application().lookup_action('manage_models').set_enabled(False)
+            self.get_application().lookup_action('model_manager').set_enabled(False)
             self.title_stack.set_visible_child_name('loading')
 
             self.ollama_instance.remote = False
@@ -976,7 +976,7 @@ Generate a title following these rules:
             self.sql_instance.insert_or_update_preferences({'run_remote': False})
 
             [element.set_sensitive(True) for element in sensitive_elements]
-            self.get_application().lookup_action('manage_models').set_enabled(True)
+            self.get_application().lookup_action('model_manager').set_enabled(True)
 
         if state:
             options = {
@@ -1052,6 +1052,7 @@ Generate a title following these rules:
 
         #Chat History
         self.load_history()
+        self.chat_list_box.chat_changed(self.chat_list_box.get_selected_row())
 
         if self.get_application().args.new_chat:
             self.chat_list_box.new_chat(self.get_application().args.new_chat)
