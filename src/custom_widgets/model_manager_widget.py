@@ -58,7 +58,7 @@ class local_model_selector(Adw.Bin):
             child=scroller
         )
 
-        self.local_model_list.connect('row-selected', lambda listbox, row: self.button_label.set_label(row.get_child().get_label()))
+        self.local_model_list.connect('row-selected', lambda listbox, row: self.on_row_selected(row))
         self.local_model_list.connect('row-activated', lambda *_: popover.hide())
         manage_models_button = Gtk.Button(
             tooltip_text=_('Manage Models'),
@@ -80,6 +80,12 @@ class local_model_selector(Adw.Bin):
         container.append(manage_models_button)
         container.append(selector_button)
         super().__init__(child=container)
+
+    def on_row_selected(self, row):
+        if row:
+            self.button_label.set_label(row.get_child().get_label())
+        elif len(list(self.local_model_list)) > 0:
+            self.local_model_list.select_row(list(self.local_model_list)[0])
 
     def get_selected_model(self):
         return self.local_model_list.get_selected_row().model
@@ -428,6 +434,7 @@ class local_model(Gtk.Box):
     def remove_model(self):
         response = window.ollama_instance.request("DELETE", "api/delete", json.dumps({"name": self.get_name()}))
         if response.status_code == 200:
+            window.model_selector.local_model_list.remove(self.row)
             window.local_model_flowbox.remove(self)
             if len(list(window.local_model_flowbox)) == 0:
                 window.local_model_stack.set_visible_child_name('no-models')
