@@ -145,21 +145,27 @@
                       </object>
                     </child>
                     <child type="top">
-                      <object class="GtkSearchBar" id="message_searchbar">
-                        <accessibility>
-                          <property name="label" translatable="yes">Message search bar</property>
-                        </accessibility>
-                        <property name="search-mode-enabled" bind-source="message_search_button" bind-property="active" bind-flags="sync-create"/>
-                        <property name="key-capture-widget">AlpacaWindow</property>
+                      <object class="AdwClamp">
+                        <property name="maximum-size">1000</property>
+                        <property name="tightening-threshold">800</property>
                         <child>
-                          <object class="GtkSearchEntry" id="searchentry_messages">
-                            <signal name="search-changed" handler="message_search_changed"/>
-                            <property name="hexpand">true</property>
-                            <property name="search-delay">200</property>
-                            <property name="placeholder-text" translatable="yes">Search messages</property>
+                          <object class="GtkSearchBar" id="message_searchbar">
                             <accessibility>
-                              <property name="label" translatable="yes">Search messages</property>
+                              <property name="label" translatable="yes">Message search bar</property>
                             </accessibility>
+                            <property name="search-mode-enabled" bind-source="message_search_button" bind-property="active" bind-flags="sync-create"/>
+                            <property name="key-capture-widget">AlpacaWindow</property>
+                            <child>
+                              <object class="GtkSearchEntry" id="searchentry_messages">
+                                <signal name="search-changed" handler="message_search_changed"/>
+                                <property name="hexpand">true</property>
+                                <property name="search-delay">200</property>
+                                <property name="placeholder-text" translatable="yes">Search messages</property>
+                                <accessibility>
+                                  <property name="label" translatable="yes">Search messages</property>
+                                </accessibility>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -341,21 +347,27 @@
                       </object>
                     </child>
                     <child type="top">
-                      <object class="GtkSearchBar" id="model_searchbar">
-                        <accessibility>
-                          <property name="label" translatable="yes">Model search bar</property>
-                        </accessibility>
-                        <property name="search-mode-enabled" bind-source="model_search_button" bind-property="active" bind-flags="sync-create"/>
-                        <property name="key-capture-widget">AlpacaWindow</property>
+                      <object class="AdwClamp">
+                        <property name="maximum-size">1000</property>
+                        <property name="tightening-threshold">800</property>
                         <child>
-                          <object class="GtkSearchEntry" id="searchentry">
-                            <property name="hexpand">true</property>
-                            <signal name="search-changed" handler="model_search_changed"/>
-                            <property name="search-delay">100</property>
-                            <property name="placeholder-text" translatable="yes">Search models</property>
+                          <object class="GtkSearchBar" id="model_searchbar">
                             <accessibility>
-                              <property name="label" translatable="yes">Search models</property>
+                              <property name="label" translatable="yes">Model search bar</property>
                             </accessibility>
+                            <property name="search-mode-enabled" bind-source="model_search_button" bind-property="active" bind-flags="sync-create"/>
+                            <property name="key-capture-widget">AlpacaWindow</property>
+                            <child>
+                              <object class="GtkSearchEntry" id="searchentry">
+                                <property name="hexpand">true</property>
+                                <signal name="search-changed" handler="model_search_changed"/>
+                                <property name="search-delay">100</property>
+                                <property name="placeholder-text" translatable="yes">Search models</property>
+                                <accessibility>
+                                  <property name="label" translatable="yes">Search models</property>
+                                </accessibility>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
