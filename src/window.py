@@ -1051,7 +1051,6 @@ Generate a title following these rules:
 
         #Chat History
         self.load_history()
-        self.chat_list_box.chat_changed(self.chat_list_box.get_selected_row())
 
         if self.get_application().args.new_chat:
             self.chat_list_box.new_chat(self.get_application().args.new_chat)
