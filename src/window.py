@@ -96,7 +96,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     file_preview_remove_button = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
     message_searchbar = Gtk.Template.Child()
-    message_search_button = Gtk.Template.Child()
     searchentry_messages = Gtk.Template.Child()
     title_stack = Gtk.Template.Child()
     ollama_information_label = Gtk.Template.Child()
@@ -1202,7 +1201,6 @@ Generate a title following these rules:
         super().__init__(**kwargs)
         GtkSource.init()
         self.initial_convert_to_sql()
-        self.message_searchbar.connect('notify::search-mode-enabled', lambda *_: self.message_search_button.set_active(self.message_searchbar.get_search_mode()))
         message_widget.window = self
         chat_widget.window = self
         dialog_widget.window = self

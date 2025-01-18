@@ -104,6 +104,7 @@
                           <object class="GtkToggleButton" id="message_search_button">
                             <property name="icon-name">edit-find-symbolic</property>
                             <property name="tooltip-text" translatable="yes">Search Messages</property>
+                            <property name="active" bind-source="message_searchbar" bind-property="search-mode-enabled" bind-flags="sync-create"/>
                           </object>
                         </child>
                         <child type="title">
@@ -171,6 +172,7 @@
                         <child>
                           <object class="GtkSearchEntry" id="searchentry_messages">
                             <signal name="search-changed" handler="message_search_changed"/>
+                            <property name="hexpand">true</property>
                             <property name="search-delay">200</property>
                             <property name="placeholder-text" translatable="yes">Search messages</property>
                             <accessibility>

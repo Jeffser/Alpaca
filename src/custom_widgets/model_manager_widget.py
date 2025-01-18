@@ -593,7 +593,7 @@ class available_model(Gtk.Box):
         self.page.set_vexpand(True)
 
         disclaimer = Gtk.Label(
-            label='{}\n\n<a href="{}">{}</a>'.format(_("By downloading this model you accept it's license agreement."), self.data['url'], _("Model's Website")),
+            label=_("By downloading this model you accept the license agreement available on the model's website"),
             wrap=True,
             wrap_mode=2,
             css_classes=['dim-label', 'p10'],
@@ -605,7 +605,19 @@ class available_model(Gtk.Box):
         container.append(Gtk.ScrolledWindow(child=self.page, css_classes=['undershoot-bottom']))
         container.append(disclaimer)
 
-        return None, container
+        actionbar = Gtk.ActionBar()
+        web_button = Gtk.Button(
+            child=Adw.ButtonContent(
+                icon_name='globe-symbolic',
+                label=_('Visit Website')
+            ),
+            tooltip_text=self.data.get('url'),
+            css_classes=['raised']
+        )
+        web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri(self.data.get('url')))
+        actionbar.set_center_widget(web_button)
+
+        return actionbar, container
 
     def get_search_string(self) -> str:
         return '{} {} {} {}'.format(self.get_name(), self.get_name().replace('-', ' ').title(), available_models_descriptions.descriptions[self.get_name()], ' '.join(self.data.get('categories')))
