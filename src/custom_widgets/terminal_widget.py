@@ -117,7 +117,21 @@ def run_terminal(files:dict):
                 f.write(content)
             script.append('python -m http.server 8080 --directory "{}"'.format(os.path.join(data_dir, 'code runner', 'html')))
             Gio.AppInfo.launch_default_for_uri('http://0.0.0.0:8080')
-        else:
-            script.append(file_metadata['content'])
+        elif file_metadata['language'].lower() in ('bash', 'sh'):
+            if shutil.which('flatpak-spawn'):
+                sandbox = True
+                try:
+                    process = subprocess.run(['flatpak-spawn', '--host', 'bash', '-c', 'echo "test"'], check=True)
+                    sandbox = False
+                except Exception as e:
+                    pass
+                if sandbox:
+                    script.append('echo "🦙 {}\n"'.format(_('Using Flatpak contained shell')))
+                    script.append(file_metadata['content'])
+                else:
+                    script.append(file_metadata['content'])
+                    show_terminal(['flatpak-spawn', '--host', 'bash', '-c', ';\n'.join(script)])
+                    return
+    print(script)
     show_terminal(['bash', '-c', ';\n'.join(script)])
 
