@@ -275,10 +275,7 @@ class chat_tab(Gtk.ListBoxRow):
 
     def __init__(self, chat_window:chat):
         self.chat_window=chat_window
-        self.spinner = Gtk.Spinner(
-            spinning=True,
-            visible=False
-        )
+        self.spinner = Adw.Spinner(visible=False)
         self.label = Gtk.Label(
             label=self.chat_window.get_name(),
             tooltip_text=self.chat_window.get_name(),

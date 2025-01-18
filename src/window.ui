@@ -118,9 +118,7 @@
                                     <property name="orientation">0</property>
                                     <property name="spacing">10</property>
                                     <child>
-                                      <object class="GtkSpinner">
-                                        <property name="spinning">true</property>
-                                      </object>
+                                      <object class="AdwSpinner"/>
                                     </child>
                                     <child>
                                       <object class="GtkLabel">

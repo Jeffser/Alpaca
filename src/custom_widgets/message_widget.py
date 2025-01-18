@@ -397,7 +397,7 @@ class latex_image(Gtk.MenuButton):
             popover=self.popover,
             height_request=75,
             css_classes=['flat'],
-            child=Gtk.Spinner(spinning=True)
+            child=Adw.Spinner()
         )
         threading.Thread(target=self.generate_image, args=(True,)).start()
 
@@ -860,7 +860,7 @@ class message(Gtk.Box):
             if self.spinner:
                 self.container.remove(self.spinner)
                 self.spinner = None
-            self.spinner = Gtk.Spinner(spinning=True, margin_top=10, margin_bottom=10, hexpand=True)
+            self.spinner = Adw.Spinner(margin_top=10, margin_bottom=10, halign=3, hexpand=True)
             self.container.append(self.spinner)
             self.container.append(text_b)
         self.container.queue_draw()

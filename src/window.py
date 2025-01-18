@@ -166,9 +166,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         def gguf_processing(file_path:str):
             try:
-
-                dialog = Adw.Dialog()
-
                 with open(file_path, 'rb', buffering=0) as f:
                     sha256 = hashlib.file_digest(f, 'sha256').hexdigest()
                     print(sha256)
@@ -210,7 +207,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def model_creator_base_changed(self, comborow, params):
         model_name = comborow.get_selected_item().get_string()
-        if model_name != 'GGUF' and comborow.get_subtitle():
+        if model_name != 'GGUF' and not comborow.get_subtitle():
             model_name = self.convert_model_name(model_name, 1)
 
             self.model_creator_name.set_text(model_name.split(':')[0])
