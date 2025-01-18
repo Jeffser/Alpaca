@@ -457,7 +457,6 @@ class chat_list(Gtk.ListBox):
                     model_to_use = window.convert_model_name(window.default_model_list.get_string(window.default_model_combo.get_selected()), 1)
                     if len(row.chat_window.messages) > 0:
                         model_to_use = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
-                    print(model_to_use)
                     detected_models = [row for row in list(window.model_selector.local_model_list) if row.get_name() == model_to_use]
                     if len(detected_models) > 0:
                         window.model_selector.local_model_list.select_row(detected_models[0])
