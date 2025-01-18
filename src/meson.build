@@ -51,7 +51,6 @@ custom_widgets = [
   'custom_widgets/table_widget.py',
   'custom_widgets/message_widget.py',
   'custom_widgets/chat_widget.py',
-  'custom_widgets/model_widget.py',
   'custom_widgets/terminal_widget.py',
   'custom_widgets/dialog_widget.py',
   'custom_widgets/model_manager_widget.py'
