@@ -40,76 +40,36 @@ possible_prompts = [
     "What is nostalgia?"
 ]
 
-class chat(Gtk.ScrolledWindow):
+class chat(Gtk.Stack):
     __gtype_name__ = 'AlpacaChat'
 
     def __init__(self, name:str, chat_id=str, quick_chat:bool=False):
+        super().__init__(
+            name=name,
+            transition_type=1
+        )
         self.container = Gtk.Box(
             orientation=1,
             hexpand=True,
             vexpand=True,
             spacing=12,
-            margin_top=12,
-            margin_bottom=12,
-            margin_start=12,
-            margin_end=12
+            css_classes=['p10']
         )
         self.clamp = Adw.Clamp(
             maximum_size=1000,
             tightening_threshold=800,
             child=self.container
         )
-        super().__init__(
+        self.scrolledwindow = Gtk.ScrolledWindow(
             child=self.clamp,
             propagate_natural_height=True,
             kinetic_scrolling=True,
             vexpand=True,
             hexpand=True,
             css_classes=["undershoot-bottom"],
-            name=name,
             hscrollbar_policy=2
         )
-        self.messages = {}
-        self.welcome_screen = None
-        self.regenerate_button = None
-        self.busy = False
-        self.chat_id = chat_id
-        self.quick_chat = quick_chat
-        #self.get_vadjustment().connect('notify::page-size', lambda va, *_: va.set_value(va.get_upper() - va.get_page_size()) if va.get_value() == 0 else None)
-        ##TODO Figure out how to do this with the search thing
-
-    def stop_message(self):
-        self.busy = False
-        window.switch_send_stop_button(True)
-
-    def clear_chat(self):
-        if self.busy:
-            self.stop_message()
-        self.messages = {}
-        self.stop_message()
-        for widget in list(self.container):
-            self.container.remove(widget)
-        self.show_welcome_screen()
-
-    def add_message(self, message_id:str, model:str=None, system:bool=None):
-        msg = message(message_id, model, system)
-        self.messages[message_id] = msg
-        self.container.append(msg)
-        return msg
-
-    def send_sample_prompt(self, prompt):
-        buffer = window.message_text_view.get_buffer()
-        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-        buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
-        window.send_message()
-
-    def show_welcome_screen(self):
-        if self.welcome_screen:
-            self.container.remove(self.welcome_screen)
-            self.welcome_screen = None
-        if len(list(self.container)) > 0:
-            self.clear_chat()
-            return
+        self.add_named(self.scrolledwindow, 'content')
         button_container = Gtk.Box(
             orientation=1,
             spacing=10,
@@ -139,24 +99,53 @@ class chat(Gtk.ScrolledWindow):
             child=button_container,
             vexpand=True
         )
+        list(self.welcome_screen)[0].add_css_class('undershoot-bottom')
+        self.add_named(self.welcome_screen, 'welcome-screen')
 
-        self.container.append(self.welcome_screen)
+        self.messages = {}
+        self.welcome_screen = None
+        self.regenerate_button = None
+        self.busy = False
+        self.chat_id = chat_id
+        self.quick_chat = quick_chat
+        #self.get_vadjustment().connect('notify::page-size', lambda va, *_: va.set_value(va.get_upper() - va.get_page_size()) if va.get_value() == 0 else None)
+        ##TODO Figure out how to do this with the search thing
+
+    def stop_message(self):
+        self.busy = False
+        window.switch_send_stop_button(True)
+
+    def clear_chat(self):
+        if self.busy:
+            self.stop_message()
+        self.messages = {}
+        self.stop_message()
+        for widget in list(self.container):
+            self.container.remove(widget)
+        self.set_visible_child_name('welcome-screen')
+
+    def add_message(self, message_id:str, model:str=None, system:bool=None):
+        msg = message(message_id, model, system)
+        self.messages[message_id] = msg
+        self.container.append(msg)
+        return msg
+
+    def send_sample_prompt(self, prompt):
+        buffer = window.message_text_view.get_buffer()
+        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+        buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
+        window.send_message()
 
     def load_chat_messages(self):
         messages = window.sql_instance.get_messages(self)
-        if len(messages) > 0:
-            if self.welcome_screen:
-                self.container.remove(self.welcome_screen)
-                self.welcome_screen = None
-            for message in messages:
-                message_element = self.add_message(message[0], message[2] if message[1] == 'assistant' else None, message[1] == 'system')
-                attachments = window.sql_instance.get_attachments(message_element)
-                for attachment in attachments:
-                    message_element.add_attachment(attachment[2], attachment[1], attachment[3])
-                message_element.set_text(message[4])
-                message_element.add_footer(datetime.datetime.strptime(message[3] + (":00" if message[3].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
-        else:
-            self.show_welcome_screen()
+        for message in messages:
+            message_element = self.add_message(message[0], message[2] if message[1] == 'assistant' else None, message[1] == 'system')
+            attachments = window.sql_instance.get_attachments(message_element)
+            for attachment in attachments:
+                message_element.add_attachment(attachment[2], attachment[1], attachment[3])
+            message_element.set_text(message[4])
+            message_element.add_footer(datetime.datetime.strptime(message[3] + (":00" if message[3].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
+        self.set_visible_child_name('content' if len(messages) > 0 else 'welcome-screen')
 
     def on_export_successful(self, file, result):
         file.replace_contents_finish(result)
@@ -344,7 +333,7 @@ class chat_list(Gtk.ListBox):
     def update_welcome_screens(self):
         for tab in self.tab_list:
             if tab.chat_window.welcome_screen:
-                tab.chat_window.show_welcome_screen()
+                tab.chat_window.set_visible_child_name('content' if len(tab.chat_window.messages) > 0 else 'welcome-screen')
 
     def get_tab_by_name(self, chat_name:str) -> chat_tab:
         for tab in self.tab_list:
@@ -388,7 +377,7 @@ class chat_list(Gtk.ListBox):
             tab = chat_tab(chat_window)
             self.prepend(tab)
             self.tab_list.insert(0, tab)
-            chat_window.show_welcome_screen()
+            self.set_visible_child_name('welcome-screen')
             window.chat_stack.add_child(chat_window)
             window.chat_list_box.select_row(tab)
             return chat_window

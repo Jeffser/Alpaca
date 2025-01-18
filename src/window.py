@@ -357,8 +357,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.message_text_view.get_buffer().set_text("", 0)
 
         if system:
-            if current_chat.welcome_screen:
-                current_chat.welcome_screen.set_visible(False)
+            current_chat.set_visible_child_name('content')
         else:
             data = {
                 "model": current_model,
@@ -634,9 +633,7 @@ Generate a title following these rules:
         if [m['role'] for m in data['messages']].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(data['messages'][0].copy(), chat.get_name())).start()
 
-        if chat.welcome_screen:
-            chat.welcome_screen.set_visible(False)
-            chat.welcome_screen = None
+        chat.set_visible_child_name('content')
         if chat.regenerate_button:
             chat.container.remove(chat.regenerate_button)
         self.switch_send_stop_button(False)

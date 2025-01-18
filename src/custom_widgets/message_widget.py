@@ -520,7 +520,7 @@ class option_popup(Gtk.Popover):
         self.message_element.get_parent().remove(self.message_element)
         del chat.messages[message_id]
         if len(chat.messages) == 0:
-            chat.show_welcome_screen()
+            chat.set_visible_child_name('welcome-screen')
 
     def copy_message(self):
         logger.debug("Copying message")
@@ -695,7 +695,7 @@ class message(Gtk.Box):
                     self.add_footer(self.dt)
 
     def get_chat(self):
-        return self.get_parent().get_parent().get_parent().get_parent()
+        return self.get_parent().get_parent().get_parent().get_parent().get_parent()
 
     def add_attachment(self, name:str, attachment_type:str, content:str):
         if attachment_type == 'image':
@@ -726,7 +726,7 @@ class message(Gtk.Box):
     def update_message(self, data:dict):
         chat = self.get_chat()
         if chat.busy:
-            vadjustment = chat.get_vadjustment()
+            vadjustment = chat.scrolledwindow.get_vadjustment()
             if self.spinner:
                 self.container.remove(self.spinner)
                 self.spinner = None
