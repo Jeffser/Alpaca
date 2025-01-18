@@ -377,7 +377,7 @@ class chat_list(Gtk.ListBox):
             tab = chat_tab(chat_window)
             self.prepend(tab)
             self.tab_list.insert(0, tab)
-            self.set_visible_child_name('welcome-screen')
+            chat_window.set_visible_child_name('welcome-screen')
             window.chat_stack.add_child(chat_window)
             window.chat_list_box.select_row(tab)
             return chat_window
