@@ -134,7 +134,15 @@
                                 <property name="name">no-models</property>
                                 <property name="child">
                                   <object class="GtkButton">
-                                    <property name="label" translatable="yes">Manage Models</property>
+                                    <property name="child">
+                                      <object class="AdwButtonContent">
+                                        <property name="icon-name">brain-augemnted-symbolic</property>
+                                        <property name="label" translatable="yes">Manage Models</property>
+                                      </object>
+                                    </property>
+                                    <style>
+                                      <class name="raised"/>
+                                    </style>
                                     <property name="tooltip-text" translatable="yes">Manage Models</property>
                                     <property name="action-name">app.model_manager</property>
                                   </object>
