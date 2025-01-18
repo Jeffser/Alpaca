@@ -129,7 +129,7 @@ class chat(Gtk.ScrolledWindow):
                 tooltip_text=_("Open Model Manager"),
                 css_classes=["suggested-action", "pill"]
             )
-            button.set_action_name('app.manage_models')
+            button.set_action_name('app.model_manager')
             button_container.append(button)
 
         self.welcome_screen = Adw.StatusPage(
