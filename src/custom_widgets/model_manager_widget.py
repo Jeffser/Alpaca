@@ -126,7 +126,7 @@ class pulling_model_page(Gtk.Box):
         self.append(self.progressbar)
 
 class pulling_model(Gtk.Box):
-    __gtype_name__ = 'NewAlpacaPullingModel'
+    __gtype_name__ = 'AlpacaPullingModel'
 
     def __init__(self, name:str):
         self.model_title = window.convert_model_name(name, 0)
@@ -354,7 +354,7 @@ class local_model_page(Gtk.Box):
             dialog_widget.simple_file(file_filter, set_profile_picture)
 
 class local_model(Gtk.Box):
-    __gtype_name__ = 'NewAlpacaLocalModel'
+    __gtype_name__ = 'AlpacaLocalModel'
 
     def __init__(self, name:str):
         self.model_title = window.convert_model_name(name, 0)
@@ -469,8 +469,8 @@ class local_model(Gtk.Box):
             self.page.get_parent().remove(self.page)
         return actionbar, Gtk.ScrolledWindow(child=self.page, css_classes=['undershoot-bottom'])
 
-class category_pill(Gtk.Button):
-    __gtype_name__ = 'NewAlpacaCategoryPill'
+class category_pill(Adw.Bin):
+    __gtype_name__ = 'AlpacaCategoryPill'
 
     metadata = {
         'multilingual': {'name': _('Multilingual'), 'css': ['accent'], 'icon': 'language-symbolic'},
@@ -479,7 +479,7 @@ class category_pill(Gtk.Button):
         'vision': {'name': _('Vision'), 'css': ['accent'], 'icon': 'eye-open-negative-filled-symbolic'},
         'embedding': {'name': _('Embedding'), 'css': ['error'], 'icon': 'brain-augemnted-symbolic'},
         'small': {'name': _('Small'), 'css': ['success'], 'icon': 'leaf-symbolic'},
-        'medium': {'name': _('Medium'), 'css': ['success'], 'icon': 'sprout-symbolic'},
+        'medium': {'name': _('Medium'), 'css': ['brown'], 'icon': 'sprout-symbolic'},
         'big': {'name': _('Big'), 'css': ['warning'], 'icon': 'tree-circle-symbolic'},
         'huge': {'name': _('Huge'), 'css': ['error'], 'icon': 'weight-symbolic'},
         'language': {'css': [], 'icon': 'language-symbolic'}
@@ -498,8 +498,9 @@ class category_pill(Gtk.Button):
             css_classes=['subtitle', 'category_pill'] + self.metadata[name_id]['css'] + (['pill'] if show_label else ['circular']),
             tooltip_text=self.metadata[name_id]['name'],
             child=button_content,
-            halign=1,
-            focusable=False
+            halign=0,
+            focusable=False,
+            hexpand=True
         )
 
 class available_model_page(Gtk.Box):
@@ -525,7 +526,8 @@ class available_model_page(Gtk.Box):
         self.append(title_label)
         categories_box = Gtk.FlowBox(
             hexpand=True,
-            selection_mode=0
+            selection_mode=0,
+            max_children_per_line=2
         )
         for category in self.model.data.get('categories', []) + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in self.model.data.get('languages', [])]:
             categories_box.append(category_pill(category, True))
@@ -555,7 +557,7 @@ class available_model_page(Gtk.Box):
         self.append(self.tag_list)
 
 class available_model(Gtk.Box):
-    __gtype_name__ = 'NewAlpacaAvailableModel'
+    __gtype_name__ = 'AlpacaAvailableModel'
 
     def __init__(self, name:str, data:dict):
         self.data = data
