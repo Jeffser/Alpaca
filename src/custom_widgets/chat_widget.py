@@ -322,7 +322,7 @@ class chat_list(Gtk.ListBox):
             selection_mode=1,
             css_classes=["navigation-sidebar"]
         )
-        self.connect("row-selected", lambda listbox, row: self.chat_changed(row))
+        self.connect("row-selected", lambda listbox, row: self.chat_changed(row, False))
         self.tab_list = []
 
     def update_profile_pictures(self):
@@ -442,10 +442,10 @@ class chat_list(Gtk.ListBox):
         file_dialog = Gtk.FileDialog(default_filter=window.file_filter_db)
         file_dialog.open(window, None, self.on_chat_imported)
 
-    def chat_changed(self, row):
+    def chat_changed(self, row, force:bool):
         if row:
             current_tab_i = next((i for i, t in enumerate(self.tab_list) if t.chat_window == window.chat_stack.get_visible_child()), -1)
-            if self.tab_list.index(row) != current_tab_i:
+            if self.tab_list.index(row) != current_tab_i or force:
                 if window.searchentry_messages.get_text() != '':
                     window.searchentry_messages.set_text('')
                     window.message_search_changed(window.searchentry_messages, window.chat_stack.get_visible_child())
@@ -454,10 +454,10 @@ class chat_list(Gtk.ListBox):
                 window.chat_stack.set_visible_child(row.chat_window)
                 window.switch_send_stop_button(not row.chat_window.busy)
                 if window.model_selector:
+                    model_to_use = window.convert_model_name(window.default_model_list.get_string(window.default_model_combo.get_selected()), 1)
                     if len(row.chat_window.messages) > 0:
                         model_to_use = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
-                    else:
-                        model_to_use = window.convert_model_name(window.default_model_list.get_string(window.default_model_combo.get_selected()), 1)
+                    print(model_to_use)
                     detected_models = [row for row in list(window.model_selector.local_model_list) if row.get_name() == model_to_use]
                     if len(detected_models) > 0:
                         window.model_selector.local_model_list.select_row(detected_models[0])
