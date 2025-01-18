@@ -765,7 +765,7 @@ class message(Gtk.Box):
             code_block_pattern = re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)
             no_language_code_block_pattern = re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)
             table_pattern = re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)
-            latex_pattern = re.compile(r'\\\[\n(.*?)\n\\\]|\$(.*?)\$', re.MULTILINE)
+            latex_pattern = re.compile(r'^\\\[\n(.*?)\n\\\]|^\$(.*?)\$', re.MULTILINE)
             markup_pattern = re.compile(r'<(b|u|tt|a.*|span.*)>(.*?)<\/(b|u|tt|a|span)>')
             parts = []
             pos = 0
