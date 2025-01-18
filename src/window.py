@@ -95,6 +95,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     file_preview_open_button = Gtk.Template.Child()
     file_preview_remove_button = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
+    model_search_button = Gtk.Template.Child()
     message_searchbar = Gtk.Template.Child()
     searchentry_messages = Gtk.Template.Child()
     title_stack = Gtk.Template.Child()
@@ -241,6 +242,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.local_model_flowbox.unselect_all()
         self.available_model_flowbox.unselect_all()
         self.model_creator_stack.set_visible_child_name('introduction')
+        self.model_search_button.set_sensitive(viewstack.get_visible_child_name() != 'model_creator')
+        self.model_search_button.set_active(self.model_search_button.get_active() and viewstack.get_visible_child_name() != 'model_creator')
 
     @Gtk.Template.Callback()
     def model_manager_child_activated(self, flowbox, selected_child):

@@ -367,6 +367,7 @@
                         <property name="key-capture-widget">AlpacaWindow</property>
                         <child>
                           <object class="GtkSearchEntry" id="searchentry">
+                            <property name="hexpand">true</property>
                             <signal name="search-changed" handler="model_search_changed"/>
                             <property name="search-delay">100</property>
                             <property name="placeholder-text" translatable="yes">Search models</property>
