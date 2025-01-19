@@ -9,11 +9,20 @@ gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 
 window=None
+showing_dialog=False
 
 button_appearance={
     'suggested': Adw.ResponseAppearance.SUGGESTED,
     'destructive': Adw.ResponseAppearance.DESTRUCTIVE
 }
+
+def get_dialog_showing() -> bool:
+    global showing_dialog
+    return showing_dialog
+
+def set_dialog_showing(state:bool):
+    global showing_dialog
+    showing_dialog = state
 
 # Don't call this directly outside this script
 class baseDialog(Adw.AlertDialog):
@@ -26,6 +35,8 @@ class baseDialog(Adw.AlertDialog):
             body=body,
             close_response=close_response
         )
+        self.connect('realize', lambda *_: set_dialog_showing(True))
+        self.connect('unrealize', lambda *_: set_dialog_showing(False))
         for option, data in self.options.items():
             self.add_response(option, option)
             if 'appearance' in data:
@@ -44,11 +55,12 @@ class Options(baseDialog):
             close_response,
             options
         )
-        self.choose(
-            parent = window,
-            cancellable = None,
-            callback = self.response
-        )
+        if not get_dialog_showing():
+            self.choose(
+                parent = window,
+                cancellable = None,
+                callback = self.response
+            )
 
     def response(self, dialog, task):
         result = dialog.choose_finish(task)
@@ -87,11 +99,12 @@ class Entry(baseDialog):
         self.set_extra_child(self.container)
 
         self.connect('realize', lambda *_: list(self.container)[0].grab_focus())
-        self.choose(
-            parent = window,
-            cancellable = None,
-            callback = self.response
-        )
+        if not get_dialog_showing():
+            self.choose(
+                parent = window,
+                cancellable = None,
+                callback = self.response
+            )
 
     def response(self, dialog, task):
         result = dialog.choose_finish(task)
@@ -120,11 +133,13 @@ class DropDown(baseDialog):
         ))
 
         self.connect('realize', lambda *_: self.get_extra_child().grab_focus())
-        self.choose(
-            parent = window,
-            cancellable = None,
-            callback = lambda dialog, task, dropdown=self.get_extra_child(): self.response(dialog, task, dropdown.get_selected_item().get_string())
-        )
+        if not get_dialog_showing():
+            showing_dialog = True
+            self.choose(
+                parent = window,
+                cancellable = None,
+                callback = lambda dialog, task, dropdown=self.get_extra_child(): self.response(dialog, task, dropdown.get_selected_item().get_string())
+            )
 
     def response(self, dialog, task, item:str):
         result = dialog.choose_finish(task)
