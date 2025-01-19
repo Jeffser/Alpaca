@@ -121,7 +121,7 @@ class pulling_model_page(Gtk.Box):
             justify=2
         )
         self.append(Adw.Bin(css_classes=['card', 'p10'], child=self.status_label))
-        self.progressbar = Gtk.ProgressBar()
+        self.progressbar = Gtk.ProgressBar(show_text=True)
         self.append(self.progressbar)
 
 class pulling_model(Gtk.Box):
