@@ -488,11 +488,16 @@ class category_pill(Adw.Bin):
         if 'language:' in name_id:
             self.metadata['language']['name'] = name_id.split(':')[1]
             name_id = 'language'
-        button_content = Adw.ButtonContent(
-            icon_name=self.metadata[name_id]['icon']
+        button_content = Gtk.Box(
+            spacing=5,
+            halign=3
         )
+        button_content.append(Gtk.Image.new_from_icon_name(self.metadata[name_id]['icon']))
         if show_label:
-            button_content.set_label(self.metadata[name_id]['name'])
+            button_content.append(Gtk.Label(
+                label='<span weight="bold">{}</span>'.format(self.metadata[name_id]['name']),
+                use_markup=True
+            ))
         super().__init__(
             css_classes=['subtitle', 'category_pill'] + self.metadata[name_id]['css'] + (['pill'] if show_label else ['circular']),
             tooltip_text=self.metadata[name_id]['name'],
@@ -511,7 +516,8 @@ class available_model_page(Gtk.Box):
             orientation=1,
             spacing=10,
             valign=3,
-            css_classes=['p10']
+            css_classes=['p10'],
+            vexpand=True
         )
         title_label = Gtk.Label(
             label=self.model.get_name().replace('-', ' ').title(),
@@ -528,9 +534,9 @@ class available_model_page(Gtk.Box):
             selection_mode=0,
             max_children_per_line=2
         )
+        self.append(categories_box)
         for category in self.model.data.get('categories', []) + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in self.model.data.get('languages', [])]:
             categories_box.append(category_pill(category, True))
-        self.append(categories_box)
 
         self.tag_list = Gtk.ListBox(
             css_classes=["boxed-list"],
@@ -591,7 +597,6 @@ class available_model(Gtk.Box):
 
     def get_page(self):
         self.page = available_model_page(self)
-        self.page.set_vexpand(True)
 
         disclaimer = Gtk.Label(
             label=_("By downloading this model you accept the license agreement available on the model's website"),
