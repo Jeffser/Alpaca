@@ -200,6 +200,7 @@ class pulling_model(Gtk.Box):
                 GLib.idle_add(window.local_model_flowbox.remove, self.get_parent())
                 GLib.idle_add(window.local_model_flowbox.select_child, new_model.get_parent())
                 GLib.idle_add(window.title_stack.set_visible_child_name, 'model-selector')
+                window.show_notification(_('Download Completed'), _("Model '{}' downloaded successfully.").format(self.model_title), Gio.ThemedIcon.new('document-save-symbolic'))
 
     def get_page(self):
         def stop_download():
