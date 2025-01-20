@@ -21,6 +21,14 @@ logger = logging.getLogger(__name__)
 
 window = None
 
+language_fallback = {
+    #'bash': 'sh',
+    'cmd': 'powershell',
+    'batch': 'powershell',
+    'c#': 'csharp',
+    'vb.net': 'vbnet'
+}
+
 class edit_text_block(Gtk.Box):
     __gtype_name__ = 'AlpacaEditTextBlock'
 
@@ -141,7 +149,7 @@ class code_block(Gtk.Box):
         self.language = None
         self.language_name = language_name
         if self.language_name:
-            self.language = GtkSource.LanguageManager.get_default().get_language(self.language_name)
+            self.language = GtkSource.LanguageManager.get_default().get_language(language_fallback.get(self.language_name.lower(), self.language_name))
         if self.language:
             self.buffer = GtkSource.Buffer.new_with_language(self.language)
         else:
@@ -151,9 +159,9 @@ class code_block(Gtk.Box):
             auto_indent=True, indent_width=4, buffer=self.buffer, show_line_numbers=True, editable=None,
             top_margin=6, bottom_margin=6, left_margin=12, right_margin=12, css_classes=["code_block"]
         )
-        self.source_view.update_property([4], [_("{}Code Block").format('{} '.format(self.language.get_name()) if self.language else "")])
+        self.source_view.update_property([4], [_("{}Code Block").format('{} '.format(self.language_name.title()) if self.language else "")])
         title_box = Gtk.Box(margin_start=12, margin_top=3, margin_bottom=3, margin_end=12, spacing=5)
-        title_box.append(Gtk.Label(label=self.language.get_name() if self.language else (self.language_name.title() if self.language_name else _("Code Block")), hexpand=True, xalign=0))
+        title_box.append(Gtk.Label(label=self.language_name.title() if self.language_name else _("Code Block"), hexpand=True, xalign=0))
         copy_button = Gtk.Button(icon_name="edit-copy-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Copy Message"))
         copy_button.connect("clicked", lambda *_: self.on_copy())
         title_box.append(copy_button)
