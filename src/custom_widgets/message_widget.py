@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 window = None
 
 language_fallback = {
-    #'bash': 'sh',
+    'bash': 'sh',
     'cmd': 'powershell',
     'batch': 'powershell',
     'c#': 'csharp',
