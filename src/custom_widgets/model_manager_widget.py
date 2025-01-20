@@ -344,7 +344,7 @@ class local_model_page(Gtk.Box):
             file_filter.add_suffix(suffix)
         if self.model.data['profile_picture']:
             options = {
-                _('Cancel'): {'callback': lambda: None},
+                _('Cancel'): {},
                 _('Remove'): {'callback': remove_profile_picture, 'appearance': 'destructive'},
                 _('Change'): {'callback': lambda: dialog_widget.simple_file(file_filter, set_profile_picture), 'appearance': 'suggested'},
             }

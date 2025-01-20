@@ -428,14 +428,35 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
+        def close():
+            self.ollama_instance.stop()
+            self.get_application().quit()
+
+        def switch_to_hide():
+            self.set_hide_on_close(True)
+            self.close() #Recalls this function
+
         selected_chat = self.chat_list_box.get_selected_row().chat_window.get_name()
         self.sql_instance.insert_or_update_preferences({'selected_chat': selected_chat})
         if self.get_hide_on_close():
             logger.info("Hiding app...")
         else:
             logger.info("Closing app...")
-            self.ollama_instance.stop()
-            self.get_application().quit()
+            if True or any([el for el in list(self.local_model_flowbox) if isinstance(el.get_child(), model_manager_widget.pulling_model)]):
+                options = {
+                    _('Cancel'): {},
+                    _('Hide'): {'callback': switch_to_hide},
+                    _('Close'): {'callback': close, 'appearance': 'destructive'},
+                }
+                dialog_widget.Options(
+                    _('Close Alpaca?'),
+                    _('A task is currently in progress. Are you sure you want to close Alpaca?'),
+                    list(options.keys())[0],
+                    options,
+                )
+                return True
+            else:
+                close()
 
     @Gtk.Template.Callback()
     def model_spin_changed(self, spin):
