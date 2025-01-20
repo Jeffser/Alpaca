@@ -182,8 +182,17 @@ def simple_dropdown(heading:str, body:str, callback:callable, items:list, button
 
     return DropDown(heading, body, 'cancel', options, items)
 
-def simple_file(file_filter:Gtk.FileFilter, callback:callable):
-    file_dialog = Gtk.FileDialog(default_filter=file_filter)
+def get_image_filter() -> Gtk.FileFilter:
+    ff = Gtk.FileFilter()
+    ff.set_name(_('Image'))
+    ff.add_pixbuf_formats()
+    return ff
+
+def simple_file(file_filters:list, callback:callable):
+    filter_list = Gio.ListStore.new(Gtk.FileFilter)
+    for item in file_filters:
+        filter_list.append(item)
+    file_dialog = Gtk.FileDialog(default_filter=file_filters[0], filters=filter_list)
     file_dialog.open(window, None, lambda file_dialog, result: callback(file_dialog.open_finish(result)) if result else None)
 
 def simple_directory(callback:callable):

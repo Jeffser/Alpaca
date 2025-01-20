@@ -339,19 +339,16 @@ class local_model_page(Gtk.Box):
             window.sql_instance.delete_model_picture(self.model.get_name())
             self.model.update_profile_picture()
 
-        file_filter = Gtk.FileFilter()
-        for suffix in ('png', 'jpg', 'jpeg', 'webp'):
-            file_filter.add_suffix(suffix)
         if self.model.data['profile_picture']:
             options = {
                 _('Cancel'): {},
                 _('Remove'): {'callback': remove_profile_picture, 'appearance': 'destructive'},
-                _('Change'): {'callback': lambda: dialog_widget.simple_file(file_filter, set_profile_picture), 'appearance': 'suggested'},
+                _('Change'): {'callback': lambda: dialog_widget.simple_file([dialog_widget.get_image_filter()], set_profile_picture), 'appearance': 'suggested'},
             }
 
             dialog_widget.Options(_("Model Profile Picture"), _("What do you want to do with the model's profile picture?"), list(options.keys())[0], options)
         else:
-            dialog_widget.simple_file(file_filter, set_profile_picture)
+            dialog_widget.simple_file([dialog_widget.get_image_filter()], set_profile_picture)
 
 class local_model(Gtk.Box):
     __gtype_name__ = 'AlpacaLocalModel'
@@ -465,8 +462,6 @@ class local_model(Gtk.Box):
         actionbar.pack_end(remove_button)
         if not self.page:
             self.page = local_model_page(self)
-        elif self.page.get_parent():
-            self.page.get_parent().remove(self.page)
         return actionbar, Gtk.ScrolledWindow(child=self.page, css_classes=['undershoot-bottom'])
 
 class category_pill(Adw.Bin):

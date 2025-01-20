@@ -85,9 +85,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     action_button_stack = Gtk.Template.Child()
     attachment_container = Gtk.Template.Child()
     attachment_box = Gtk.Template.Child()
+    file_filter_plain = Gtk.Template.Child()
+    file_filter_pdf = Gtk.Template.Child()
+    file_filter_odt = Gtk.Template.Child()
     file_filter_db = Gtk.Template.Child()
     file_filter_gguf = Gtk.Template.Child()
-    file_filter_attachments = Gtk.Template.Child()
     attachment_button = Gtk.Template.Child()
     chat_right_click_menu = Gtk.Template.Child()
     send_message_menu = Gtk.Template.Child()
@@ -173,12 +175,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def model_creator_load_profile_picture(self, button):
-        file_filter = Gtk.FileFilter()
-        file_filter.add_suffix('png')
-        file_filter.add_suffix('jpg')
-        file_filter.add_suffix('jpeg')
-        file_filter.add_suffix('webp')
-        dialog_widget.simple_file(file_filter, lambda file: self.model_creator_profile_picture.set_subtitle(file.get_path()))
+        dialog_widget.simple_file([dialog_widget.get_image_filter()], lambda file: self.model_creator_profile_picture.set_subtitle(file.get_path()))
 
     @Gtk.Template.Callback()
     def model_creator_base_changed(self, comborow, params):
@@ -222,9 +219,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.model_creator_base.set_subtitle(file_path)
             self.model_creator_stack.set_visible_child_name('content')
 
-        file_filter = Gtk.FileFilter()
-        file_filter.add_suffix('gguf')
-        dialog_widget.simple_file(file_filter, result)
+        dialog_widget.simple_file([self.file_filter_gguf], result)
 
     @Gtk.Template.Callback()
     def model_creator_existing(self, button):
@@ -429,6 +424,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
         def close():
+            selected_chat = self.chat_list_box.get_selected_row().chat_window.get_name()
+            self.sql_instance.insert_or_update_preferences({'selected_chat': selected_chat})
             self.ollama_instance.stop()
             self.get_application().quit()
 
@@ -436,8 +433,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.set_hide_on_close(True)
             self.close() #Recalls this function
 
-        selected_chat = self.chat_list_box.get_selected_row().chat_window.get_name()
-        self.sql_instance.insert_or_update_preferences({'selected_chat': selected_chat})
         if self.get_hide_on_close():
             logger.info("Hiding app...")
         else:
@@ -1221,6 +1216,12 @@ Generate a title following these rules:
 
         portal.Screenshot("", {"interactive": Variant('b', True)})
 
+    def attachment_request(self):
+        file_filters = [self.file_filter_plain, self.file_filter_pdf, self.file_filter_odt]
+        if self.model_selector.get_selected_model().get_vision():
+            file_filters.append(dialog_widget.get_image_filter())
+        dialog_widget.simple_file(file_filters, generic_actions.attach_file)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
@@ -1274,7 +1275,7 @@ Generate a title following these rules:
             'search_messages': [lambda *_: self.message_searchbar.set_search_mode(not self.message_searchbar.get_search_mode()), ['<primary>f']],
             'send_message': [lambda *_: self.send_message()],
             'send_system_message': [lambda *_: self.send_message(None, True)],
-            'attach_file': [lambda *_, file_filter=self.file_filter_attachments: dialog_widget.simple_file(file_filter, generic_actions.attach_file)],
+            'attach_file': [lambda *_: self.attachment_request()],
             'attach_screenshot': [lambda *i: self.request_screenshot() if self.model_selector.get_selected_model().get_vision() else self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)],
             'attach_url': [lambda *i: dialog_widget.simple_entry(_('Attach Website? (Experimental)'), _('Please enter a website URL'), self.cb_text_received, {'placeholder': 'https://jeffser.com/alpaca/'})],
             'attach_youtube': [lambda *i: dialog_widget.simple_entry(_('Attach YouTube Captions?'), _('Please enter a YouTube video URL'), self.cb_text_received, {'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})],
