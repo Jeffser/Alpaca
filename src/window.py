@@ -442,7 +442,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             logger.info("Hiding app...")
         else:
             logger.info("Closing app...")
-            if True or any([el for el in list(self.local_model_flowbox) if isinstance(el.get_child(), model_manager_widget.pulling_model)]):
+            if any([el for el in list(self.local_model_flowbox) if isinstance(el.get_child(), model_manager_widget.pulling_model)]):
                 options = {
                     _('Cancel'): {},
                     _('Hide'): {'callback': switch_to_hide},
