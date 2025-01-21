@@ -639,7 +639,7 @@ def update_local_model_list():
             threads = []
             data = json.loads(response.text)
             for model in data.get('models'):
-                string_list.append(model.get('name'))
+                string_list.append(window.convert_model_name(model.get('name'), 0))
                 thread = threading.Thread(target=add_local_model, args=(model['name'], ))
                 thread.start()
                 threads.append(thread)

@@ -454,7 +454,7 @@ class chat_list(Gtk.ListBox):
                 window.chat_stack.set_visible_child(row.chat_window)
                 window.switch_send_stop_button(not row.chat_window.busy)
                 if window.model_selector:
-                    model_to_use = window.convert_model_name(window.default_model_list.get_string(window.default_model_combo.get_selected()), 1)
+                    model_to_use = window.convert_model_name(window.default_model_combo.get_selected_item().get_string(), 1)
                     if len(row.chat_window.messages) > 0:
                         model_to_use = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
                     detected_models = [row for row in list(window.model_selector.local_model_list) if row.get_name() == model_to_use]
