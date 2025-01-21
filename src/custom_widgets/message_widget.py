@@ -464,6 +464,25 @@ class latex_image(Gtk.MenuButton):
                     self.set_tooltip_text(error.split('ParseSyntaxException: ')[-1])
                 self.set_child(label)
 
+class think_block(Gtk.ListBox):
+    __gtype_name__ = 'AlpacaThinkBlock'
+
+    def __init__(self, content:str):
+        self.content = content
+        super().__init__(
+            css_classes=['boxed-list'],
+            selection_mode=0
+        )
+        expander_row = Adw.ExpanderRow(
+            title=_("Thought")
+        )
+        label = text_block(False, False)
+        label.set_text(self.content)
+        label.add_css_class('p10')
+        expander_row.add_row(label)
+        self.append(expander_row)
+        label.get_parent().set_focusable(False)
+        label.get_parent().set_overflow(1)
 
 class option_popup(Gtk.Popover):
     __gtype_name__ = 'AlpacaMessagePopup'
@@ -775,6 +794,7 @@ class message(Gtk.Box):
             table_pattern = re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)
             latex_pattern = re.compile(r'^\s+\\\[\n(.*?)\n\s+\\\]|^\s+\$(.*?)\$', re.MULTILINE)
             markup_pattern = re.compile(r'<(b|u|tt|a.*|span.*)>(.*?)<\/(b|u|tt|a|span)>')
+            think_pattern = re.compile(r'<think>\n(.*?)\n<\/think>\n')
             parts = []
             pos = 0
             # Code blocks
@@ -813,6 +833,15 @@ class message(Gtk.Box):
                     parts.append({"type": "normal", "text": normal_text.strip()})
                 latex_text = match.group(0)
                 parts.append({"type": "latex", "text": latex_text})
+                pos = end
+            # Think
+            for match in think_pattern.finditer(self.text[pos:]):
+                start, end = match.span()
+                if pos < start:
+                    normal_text = self.text[pos:start]
+                    parts.append({"type": "normal", "text": normal_text.strip()})
+                think_text = match.group(1)
+                parts.append({"type": "think", "text": think_text})
                 pos = end
             # Text blocks
             if pos < len(self.text):
@@ -861,6 +890,10 @@ class message(Gtk.Box):
                     latex_w = latex_image(part['text'])
                     self.content_children.append(latex_w)
                     self.container.append(latex_w)
+                elif part['type'] == 'think':
+                    think_w = think_block(part['text'])
+                    self.content_children.append(think_w)
+                    self.container.append(think_w)
         else:
             text_b = text_block(self.bot, self.system)
             text_b.set_visible(False)
