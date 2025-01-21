@@ -343,12 +343,12 @@ class local_model_page(Gtk.Box):
             options = {
                 _('Cancel'): {},
                 _('Remove'): {'callback': remove_profile_picture, 'appearance': 'destructive'},
-                _('Change'): {'callback': lambda: dialog_widget.simple_file([dialog_widget.get_image_filter()], set_profile_picture), 'appearance': 'suggested', 'default': True},
+                _('Change'): {'callback': lambda: dialog_widget.simple_file([window.file_filter_image], set_profile_picture), 'appearance': 'suggested', 'default': True},
             }
 
             dialog_widget.Options(_("Model Profile Picture"), _("What do you want to do with the model's profile picture?"), list(options.keys())[0], options)
         else:
-            dialog_widget.simple_file([dialog_widget.get_image_filter()], set_profile_picture)
+            dialog_widget.simple_file([window.file_filter_image], set_profile_picture)
 
 class local_model(Gtk.Box):
     __gtype_name__ = 'AlpacaLocalModel'

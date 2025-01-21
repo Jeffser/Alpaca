@@ -180,12 +180,6 @@ def simple_dropdown(heading:str, body:str, callback:callable, items:list, button
 
     return DropDown(heading, body, 'cancel', options, items)
 
-def get_image_filter() -> Gtk.FileFilter:
-    ff = Gtk.FileFilter()
-    ff.set_name(_('Image'))
-    ff.add_pixbuf_formats()
-    return ff
-
 def simple_file(file_filters:list, callback:callable):
     filter_list = Gio.ListStore.new(Gtk.FileFilter)
     for item in file_filters:

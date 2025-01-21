@@ -85,11 +85,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     action_button_stack = Gtk.Template.Child()
     attachment_container = Gtk.Template.Child()
     attachment_box = Gtk.Template.Child()
-    file_filter_plain = Gtk.Template.Child()
-    file_filter_pdf = Gtk.Template.Child()
-    file_filter_odt = Gtk.Template.Child()
-    file_filter_db = Gtk.Template.Child()
-    file_filter_gguf = Gtk.Template.Child()
     attachment_button = Gtk.Template.Child()
     chat_right_click_menu = Gtk.Template.Child()
     send_message_menu = Gtk.Template.Child()
@@ -106,6 +101,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     default_model_list = Gtk.Template.Child()
     model_directory_selector = Gtk.Template.Child()
     remote_connection_selector = Gtk.Template.Child()
+
+    file_filter_db = Gtk.Template.Child()
+    file_filter_gguf = Gtk.Template.Child()
+    file_filter_image = Gtk.FileFilter()
+    file_filter_image.add_pixbuf_formats()
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = None
@@ -175,7 +175,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def model_creator_load_profile_picture(self, button):
-        dialog_widget.simple_file([dialog_widget.get_image_filter()], lambda file: self.model_creator_profile_picture.set_subtitle(file.get_path()))
+        dialog_widget.simple_file([self.file_filter_image], lambda file: self.model_creator_profile_picture.set_subtitle(file.get_path()))
 
     @Gtk.Template.Callback()
     def model_creator_base_changed(self, comborow, params):
@@ -1218,9 +1218,16 @@ Generate a title following these rules:
         portal.Screenshot("", {"interactive": Variant('b', True)})
 
     def attachment_request(self):
-        file_filters = [self.file_filter_plain, self.file_filter_pdf, self.file_filter_odt]
+        ff = Gtk.FileFilter()
+        ff.set_name(_('Any compatible Alpaca attachment'))
+        file_filters = [ff]
+        for mime in ['text/plain', 'application/pdf', 'application/vnd.oasis.opendocument.text']:
+            ff = Gtk.FileFilter()
+            ff.add_mime_type(mime)
+            file_filters.append(ff)
         if self.model_selector.get_selected_model().get_vision():
-            file_filters.append(dialog_widget.get_image_filter())
+            file_filters[0].add_pixbuf_formats()
+            file_filters.append(self.file_filter_image)
         dialog_widget.simple_file(file_filters, generic_actions.attach_file)
 
     def __init__(self, **kwargs):
