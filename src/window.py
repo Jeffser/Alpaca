@@ -285,7 +285,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def remote_connection_selector_clicked(self, button):
         options = {
             _("Cancel"): {"callback": lambda *_: None},
-            _("Connect"): {"callback": lambda url, bearer: self.connect_remote(url, bearer), "appearance": "suggested"}
+            _("Connect"): {"callback": lambda url, bearer: self.connect_remote(url, bearer), "appearance": "suggested", "default": True}
         }
         entries = [
             {"text": self.ollama_instance.remote_url, "placeholder": _('Server URL')},
@@ -439,7 +439,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             logger.info("Closing app...")
             if any([chat.chat_window.busy for chat in self.chat_list_box.tab_list]) or any([el for el in list(self.local_model_flowbox) if isinstance(el.get_child(), model_manager_widget.pulling_model)]):
                 options = {
-                    _('Cancel'): {},
+                    _('Cancel'): {'default': True},
                     _('Hide'): {'callback': switch_to_hide},
                     _('Close'): {'callback': close, 'appearance': 'destructive'},
                 }
@@ -713,7 +713,7 @@ Generate a title following these rules:
             }
             if shutil.which('ollama'):
                 options[_("Use Local Instance")] = {"callback": lambda *_: self.remote_connection_switch.set_active(False)}
-            options[_("Connect")] = {"callback": lambda url, bearer: self.connect_remote(url,bearer), "appearance": "suggested"}
+            options[_("Connect")] = {"callback": lambda url, bearer: self.connect_remote(url,bearer), "appearance": "suggested", "default": True}
             entries = [
                 {"text": self.ollama_instance.remote_url, "css": ['error'], "placeholder": _('Server URL')},
                 {"text": self.ollama_instance.bearer_token, "css": ['error'] if self.ollama_instance.bearer_token else None, "placeholder": _('Bearer Token (Optional)')}
@@ -862,7 +862,7 @@ Generate a title following these rules:
                 _('Rename Chat?'),
                 _("Renaming '{}'").format(chat_name),
                 lambda new_chat_name, old_chat_name=chat_name, *_: self.chat_list_box.rename_chat(old_chat_name, new_chat_name),
-                {'placeholder': _('Chat name')},
+                {'placeholder': _('Chat name'), 'default': True},
                 _('Rename')
             )
         elif action_name in ('export_chat', 'export_current_chat'):
@@ -996,7 +996,7 @@ Generate a title following these rules:
         if state:
             options = {
                 _("Cancel"): {"callback": lambda *_: self.remote_connection_switch.set_active(False)},
-                _("Connect"): {"callback": lambda url, bearer: self.connect_remote(url, bearer), "appearance": "suggested"}
+                _("Connect"): {"callback": lambda url, bearer: self.connect_remote(url, bearer), "appearance": "suggested", "default": True}
             }
             entries = [
                 {"text": self.ollama_instance.remote_url, "placeholder": _('Server URL')},

@@ -51,12 +51,12 @@ class Options(baseDialog):
             self.choose(
                 parent = window,
                 cancellable = None,
-                callback = self.response
+                callback = lambda dialog, task: self.response(dialog.choose_finish(task))
             )
 
-    def response(self, dialog, task):
-        result = dialog.choose_finish(task)
-        if result in self.options and 'callback' in self.options[result]:
+    def response(self, result:str):
+        self.close()
+        if 'callback' in self.options.get(result, {}):
             self.options[result]['callback']()
 
 class Entry(baseDialog):
@@ -88,6 +88,13 @@ class Entry(baseDialog):
                 entry.set_text(data['text'])
             self.container.append(entry)
 
+        default_action = [name for name, value in options.items() if value.get('default', False)]
+        for i, entry in enumerate(list(self.container)):
+            if i < len(list(self.container)) - 1:
+                entry.connect('activate', lambda *_, index=i: list(self.container)[index+1].grab_focus())
+            elif default_action:
+                entry.connect('activate', lambda *_, action=default_action[0]: self.response(action))
+
         self.set_extra_child(self.container)
 
         self.connect('realize', lambda *_: list(self.container)[0].grab_focus())
@@ -95,12 +102,12 @@ class Entry(baseDialog):
             self.choose(
                 parent = window,
                 cancellable = None,
-                callback = self.response
+                callback = lambda dialog, task: self.response(dialog.choose_finish(task))
             )
 
-    def response(self, dialog, task):
-        result = dialog.choose_finish(task)
-        if result in self.options and 'callback' in self.options[result]:
+    def response(self, result:str):
+        self.close()
+        if 'callback' in self.options.get(result, {}):
             entry_results = []
             for entry in list(self.container):
                 entry_results.append(entry.get_text())
@@ -129,12 +136,12 @@ class DropDown(baseDialog):
             self.choose(
                 parent = window,
                 cancellable = None,
-                callback = lambda dialog, task, dropdown=self.get_extra_child(): self.response(dialog, task, dropdown.get_selected_item().get_string())
+                callback = lambda dialog, task, dropdown=self.get_extra_child(): self.response(dialog.choose_finish(task), dropdown.get_selected_item().get_string())
             )
 
-    def response(self, dialog, task, item:str):
-        result = dialog.choose_finish(task)
-        if result in self.options and 'callback' in self.options[result]:
+    def response(self, result:str, item:str):
+        self.close()
+        if 'callback' in self.options.get(result, {}):
             self.options[result]['callback'](item)
 
 def simple(heading:str, body:str, callback:callable, button_name:str=_('Accept'), button_appearance:str='suggested'):

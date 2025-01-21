@@ -343,7 +343,7 @@ class local_model_page(Gtk.Box):
             options = {
                 _('Cancel'): {},
                 _('Remove'): {'callback': remove_profile_picture, 'appearance': 'destructive'},
-                _('Change'): {'callback': lambda: dialog_widget.simple_file([dialog_widget.get_image_filter()], set_profile_picture), 'appearance': 'suggested'},
+                _('Change'): {'callback': lambda: dialog_widget.simple_file([dialog_widget.get_image_filter()], set_profile_picture), 'appearance': 'suggested', 'default': True},
             }
 
             dialog_widget.Options(_("Model Profile Picture"), _("What do you want to do with the model's profile picture?"), list(options.keys())[0], options)
