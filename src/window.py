@@ -991,6 +991,7 @@ Generate a title following these rules:
             self.sql_instance.insert_or_update_preferences({'run_remote': False})
 
             [element.set_sensitive(True) for element in sensitive_elements]
+            self.chat_list_box.chat_changed(self.chat_list_box.get_selected_row(), True)
             self.get_application().lookup_action('model_manager').set_enabled(True)
 
         if state:
