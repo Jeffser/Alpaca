@@ -9,7 +9,6 @@ gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 
 window=None
-showing_dialog=False
 
 button_appearance={
     'suggested': Adw.ResponseAppearance.SUGGESTED,
@@ -17,12 +16,7 @@ button_appearance={
 }
 
 def get_dialog_showing() -> bool:
-    global showing_dialog
-    return showing_dialog
-
-def set_dialog_showing(state:bool):
-    global showing_dialog
-    showing_dialog = state
+    return any([True for dt in (Options, Entry, DropDown) if isinstance(window.get_visible_dialog(), dt)])
 
 # Don't call this directly outside this script
 class baseDialog(Adw.AlertDialog):
@@ -35,8 +29,6 @@ class baseDialog(Adw.AlertDialog):
             body=body,
             close_response=close_response
         )
-        self.connect('realize', lambda *_: set_dialog_showing(True))
-        self.connect('unrealize', lambda *_: set_dialog_showing(False))
         for option, data in self.options.items():
             self.add_response(option, option)
             if 'appearance' in data:
@@ -134,7 +126,6 @@ class DropDown(baseDialog):
 
         self.connect('realize', lambda *_: self.get_extra_child().grab_focus())
         if not get_dialog_showing():
-            showing_dialog = True
             self.choose(
                 parent = window,
                 cancellable = None,
