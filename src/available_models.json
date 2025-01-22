@@ -3116,11 +3116,11 @@
         "tags": [
             [
                 "2b",
-                "1.5\u202fGB"
+                "1.6\u202fGB"
             ],
             [
                 "8b",
-                "4.9\u202fGB"
+                "5.0\u202fGB"
             ]
         ],
         "url": "https://ollama.com/library/granite3.1-dense",
@@ -3263,6 +3263,129 @@
         "author": "Cognitive Computations",
         "languages": [
             "en"
+        ]
+    },
+    "deepseek-r1": {
+        "tags": [
+            [
+                "1.5b",
+                "1.1\u202fGB"
+            ],
+            [
+                "7b",
+                "4.7\u202fGB"
+            ],
+            [
+                "8b",
+                "4.9\u202fGB"
+            ],
+            [
+                "14b",
+                "9.0\u202fGB"
+            ],
+            [
+                "32b",
+                "20\u202fGB"
+            ],
+            [
+                "70b",
+                "43\u202fGB"
+            ],
+            [
+                "671b",
+                "404\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/deepseek-r1",
+        "categories": [
+            "small",
+            "medium",
+            "big",
+            "huge",
+            "code",
+            "math"
+        ],
+        "author": "DeepSeek Team",
+        "languages": [
+            "en"
+        ]
+    },
+    "deepseek-v3": {
+        "tags": [
+            [
+                "671b",
+                "404\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/deepseek-v3",
+        "categories": [
+            "huge"
+        ],
+        "author": "DeepSeek Team",
+        "languages": [
+            "en"
+        ]
+    },
+    "olmo2": {
+        "tags": [
+            [
+                "7b",
+                "4.5\u202fGB"
+            ],
+            [
+                "13b",
+                "8.4\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/olmo2",
+        "categories": [
+            "small",
+            "medium"
+        ],
+        "author": "Ai2",
+        "languages": [
+            "en"
+        ]
+    },
+    "command-r7b": {
+        "tags": [
+            [
+                "7b",
+                "5.1\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/command-r7b",
+        "categories": [
+            "medium",
+            "code",
+            "multilingual",
+            "embedding"
+        ],
+        "author": "Cohere",
+        "languages": [
+            "en",
+            "fr",
+            "es",
+            "it",
+            "de",
+            "pt",
+            "ja",
+            "ko",
+            "ar",
+            "zh",
+            "ru",
+            "pl",
+            "tr",
+            "vi",
+            "nl",
+            "cs",
+            "id",
+            "uk",
+            "ro",
+            "el",
+            "hi",
+            "he",
+            "fa"
         ]
     }
 }

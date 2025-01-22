@@ -129,10 +129,21 @@ class text_block(Gtk.Label):
         self.set_selectable(False)
         self.set_selectable(True)
 
-    def insert_at_end(self, text:str):
-        self.raw_text += text
-        self.set_text(self.raw_text)
-        self.update_property([1], [self.get_text()])
+class generating_text_block(Gtk.TextView):
+    __gtype_name__ = 'AlpacaGeneratingTextBlock'
+
+    def __init__(self):
+        super().__init__(
+            hexpand=True,
+            halign=0,
+            editable=False,
+            wrap_mode=3,
+            css_classes=['flat']
+        )
+        self.buffer = self.get_buffer()
+
+    def get_text(self) -> str:
+        return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
 
 class code_block(Gtk.Box):
     __gtype_name__ = 'AlpacaCodeBlock'
@@ -761,7 +772,8 @@ class message(Gtk.Box):
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
             elif vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
-            GLib.idle_add(self.content_children[-1].insert_at_end, data['message']['content'])
+            GLib.idle_add(self.content_children[-1].buffer.insert, self.content_children[-1].buffer.get_end_iter(), data['message']['content'], len(data['message']['content'].encode('utf-8')))
+
         if not chat.busy or ('done' in data and data['done']):
             if not chat.quick_chat:
                 window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
@@ -771,8 +783,8 @@ class message(Gtk.Box):
                     chat.container.remove(chat.welcome_screen)
                     chat.welcome_screen = None
             chat.stop_message()
-            self.text = self.content_children[-1].get_label()
-            GLib.idle_add(self.set_text, self.content_children[-1].get_label())
+            self.text = self.content_children[-1].get_text()
+            GLib.idle_add(self.set_text, self.content_children[-1].get_text())
             self.dt = datetime.datetime.now()
             GLib.idle_add(self.add_footer, self.dt)
             window.show_notification(chat.get_name(), self.text[:200] + (self.text[200:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
@@ -789,14 +801,23 @@ class message(Gtk.Box):
         self.content_children = []
         if text:
             self.content_children = []
+            think_pattern = re.compile(r'^<think>\n+([^+]*)\n+<\/think>\n', re.DOTALL)
             code_block_pattern = re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)
             no_language_code_block_pattern = re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)
             table_pattern = re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)
             latex_pattern = re.compile(r'^\s+\\\[\n(.*?)\n\s+\\\]|^\s+\$(.*?)\$', re.MULTILINE)
             markup_pattern = re.compile(r'<(b|u|tt|a.*|span.*)>(.*?)<\/(b|u|tt|a|span)>')
-            think_pattern = re.compile(r'<think>\n(.*?)\n<\/think>\n')
             parts = []
             pos = 0
+            # Think
+            for match in think_pattern.finditer(self.text[pos:]):
+                start, end = match.span()
+                if pos < start:
+                    normal_text = self.text[pos:start]
+                    parts.append({"type": "normal", "text": normal_text.strip()})
+                think_text = match.group(1)
+                parts.append({"type": "think", "text": think_text})
+                pos = end
             # Code blocks
             for match in code_block_pattern.finditer(self.text[pos:]):
                 start, end = match.span()
@@ -833,15 +854,6 @@ class message(Gtk.Box):
                     parts.append({"type": "normal", "text": normal_text.strip()})
                 latex_text = match.group(0)
                 parts.append({"type": "latex", "text": latex_text})
-                pos = end
-            # Think
-            for match in think_pattern.finditer(self.text[pos:]):
-                start, end = match.span()
-                if pos < start:
-                    normal_text = self.text[pos:start]
-                    parts.append({"type": "normal", "text": normal_text.strip()})
-                think_text = match.group(1)
-                parts.append({"type": "think", "text": think_text})
                 pos = end
             # Text blocks
             if pos < len(self.text):
@@ -891,11 +903,12 @@ class message(Gtk.Box):
                     self.content_children.append(latex_w)
                     self.container.append(latex_w)
                 elif part['type'] == 'think':
+                    print('think')
                     think_w = think_block(part['text'])
                     self.content_children.append(think_w)
                     self.container.append(think_w)
         else:
-            text_b = text_block(self.bot, self.system)
+            text_b = generating_text_block()
             text_b.set_visible(False)
             self.content_children.append(text_b)
             if self.spinner:
@@ -905,5 +918,6 @@ class message(Gtk.Box):
             self.container.append(self.spinner)
             self.container.append(text_b)
         self.container.queue_draw()
+
 
 

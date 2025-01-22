@@ -663,12 +663,13 @@ Generate a title following these rules:
                 raise Exception('Network Error')
         except Exception as e:
             logger.error(e)
+            raise Exception(e)
             self.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
             chat.busy = False
             if message_element.spinner:
                 GLib.idle_add(message_element.container.remove, message_element.spinner)
                 message_element.spinner = None
-            GLib.idle_add(message_element.set_text, message_element.content_children[-1].get_label())
+            GLib.idle_add(message_element.set_text, message_element.content_children[-1].get_text())
             GLib.idle_add(message_element.add_footer, datetime.now())
             GLib.idle_add(chat.show_regenerate_button, message_element)
             self.sql_instance.insert_or_update_message(message_element)

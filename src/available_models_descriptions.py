@@ -144,7 +144,11 @@ descriptions = {
    'granite3.1-dense': _("The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 trillion tokens of data, demonstrated significant improvements over their predecessors in performance and speed in IBM’s initial testing."),
    'granite3.1-moe': _("The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) Granite models from IBM designed for low latency usage."),
    'granite-embedding': _("The IBM Granite Embedding 30M and 278M models models are text-only dense biencoder embedding models, with 30M available in English only and 278M serving multilingual use cases."),
-   'phi4': _("Phi 4 is a 14B parameter, state-of-the-art open model from Microsoft."),
+   'phi4': _("Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."),
    'smallthinker': _("A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."),
    'dolphin3': _("Dolphin 3.0 Llama 3.1 8B 🐬 is the next generation of the Dolphin series of instruct-tuned models designed to be the ultimate general purpose local model, enabling coding, math, agentic, function calling, and general use cases."),
+   'deepseek-r1': _("DeepSeek's first generation reasoning models with comparable performance to OpenAI-o1."),
+   'deepseek-v3': _("A strong Mixture-of-Experts (MoE) language model with 671B total parameters with 37B activated for each token."),
+   'olmo2': _("OLMo 2 is a new family of 7B and 13B models trained on up to 5T tokens. These models are on par with or better than equivalently sized fully open models, and competitive with open-weight models such as Llama 3.1 on English academic benchmarks."),
+   'command-r7b': _("The smallest model in Cohere's R series delivers top-tier speed, efficiency, and quality to build powerful AI applications on commodity GPUs and edge devices."),
 }
