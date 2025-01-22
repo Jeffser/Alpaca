@@ -72,7 +72,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     tweaks_group = Gtk.Template.Child()
     preferences_dialog = Gtk.Template.Child()
     file_preview_dialog = Gtk.Template.Child()
-    file_preview_text_label = Gtk.Template.Child()
+    file_preview_text = Gtk.Template.Child()
     file_preview_image = Gtk.Template.Child()
     welcome_dialog = Gtk.Template.Child()
     welcome_carousel = Gtk.Template.Child()
@@ -595,7 +595,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if file_content:
             if file_type == 'image':
                 self.file_preview_image.set_visible(True)
-                self.file_preview_text_label.set_visible(False)
+                self.file_preview_text.set_visible(False)
                 image_data = base64.b64decode(file_content)
                 loader = GdkPixbuf.PixbufLoader.new()
                 loader.write(image_data)
@@ -609,8 +609,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.file_preview_open_button.set_visible(False)
             else:
                 self.file_preview_image.set_visible(False)
-                self.file_preview_text_label.set_label(file_content)
-                self.file_preview_text_label.set_visible(True)
+                buffer = self.file_preview_text.get_buffer()
+                buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+                buffer.insert(buffer.get_end_iter(), file_content, len(file_content.encode('utf-8')))
+                self.file_preview_text.set_visible(True)
                 if file_type == 'youtube':
                     self.file_preview_dialog.set_title(file_content.split('\n')[0])
                     self.file_preview_open_button.set_name(file_content.split('\n')[2])
