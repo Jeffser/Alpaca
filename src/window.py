@@ -418,8 +418,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def changed_default_model(self, comborow, user_data):
         logger.debug("Changed default model")
-        default_model = self.convert_model_name(self.default_model_combo.get_selected_item().get_string(), 1)
-        self.sql_instance.insert_or_update_preferences({'default_model': default_model})
+        default_model = self.default_model_combo.get_selected_item()
+        if default_model:
+            self.sql_instance.insert_or_update_preferences({'default_model': self.convert_model_name(default_model.get_string(), 1)})
 
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
@@ -633,8 +634,12 @@ Generate a title following these rules:
     - Use only alphanumeric characters, spaces and optionally emojis
     - Just write the title, NOTHING ELSE
 """
-        current_model = self.convert_model_name(self.default_model_combo.get_selected_item().get_string(), 1)
-        data = {"model": current_model, "messages": [{"role": "system", "content": system_prompt}] + [message], "stream": False}
+        default_model = self.default_model_combo.get_selected_item()
+        if default_model:
+            model_to_use = self.convert_model_name(default_model.get_string(), 1)
+        else:
+            return
+        data = {"model": model_to_use, "messages": [{"role": "system", "content": system_prompt}] + [message], "stream": False}
         try:
             response = self.ollama_instance.request("POST", "api/chat", json.dumps(data))
             if response.status_code == 200:
@@ -1028,7 +1033,9 @@ Generate a title following these rules:
     def quick_chat(self, message:str):
         self.quick_ask_save_button.set_sensitive(False)
         self.quick_ask.present()
-        current_model = self.convert_model_name(self.default_model_combo.get_selected_item().get_string(), 1)
+        default_model = self.default_model_combo.get_selected_item()
+        if default_model:
+            current_model = self.convert_model_name(default_model.get_string(), 1)
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.quick_ask_overlay)
             return
