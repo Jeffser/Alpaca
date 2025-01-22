@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk, GdkPixbuf
-import logging, os, datetime, re, shutil, threading, sys, base64, tempfile
+import logging, os, datetime, re, shutil, threading, sys, base64, tempfile, time
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -28,6 +28,16 @@ language_fallback = {
     'c#': 'csharp',
     'vb.net': 'vbnet'
 }
+
+markup_pattern = re.compile(r'<(b|u|tt|a.*|span.*)>(.*?)<\/(b|u|tt|a|span)>')
+
+patterns = [
+    ('think', re.compile(r'<think>\n+(.*?)\n+<\/think>\n', re.DOTALL)),
+    ('code', re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
+    ('code', re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)),
+    ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
+    ('latex', re.compile(r'^\s+\\\[\n(.*?)\n\s+\\\]|^\s+\$(.*?)\$', re.MULTILINE))
+]
 
 class edit_text_block(Gtk.Box):
     __gtype_name__ = 'AlpacaEditTextBlock'
@@ -782,60 +792,19 @@ class message(Gtk.Box):
         self.content_children = []
         if text:
             self.content_children = []
-            think_pattern = re.compile(r'^<think>\n+([^+]*)\n+<\/think>\n', re.DOTALL)
-            code_block_pattern = re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)
-            no_language_code_block_pattern = re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)
-            table_pattern = re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)
-            latex_pattern = re.compile(r'^\s+\\\[\n(.*?)\n\s+\\\]|^\s+\$(.*?)\$', re.MULTILINE)
-            markup_pattern = re.compile(r'<(b|u|tt|a.*|span.*)>(.*?)<\/(b|u|tt|a|span)>')
             parts = []
             pos = 0
-            # Think
-            for match in think_pattern.finditer(self.text[pos:]):
-                start, end = match.span()
-                if pos < start:
-                    normal_text = self.text[pos:start]
-                    parts.append({"type": "normal", "text": normal_text.strip()})
-                think_text = match.group(1)
-                parts.append({"type": "think", "text": think_text})
-                pos = end
-            # Code blocks
-            for match in code_block_pattern.finditer(self.text[pos:]):
-                start, end = match.span()
-                if pos < start:
-                    normal_text = self.text[pos:start]
-                    parts.append({"type": "normal", "text": normal_text.strip()})
-                language = match.group(1)
-                code_text = match.group(2)
-                parts.append({"type": "code", "text": code_text, "language": 'python3' if language == 'python' else language})
-                pos = end
-            for match in no_language_code_block_pattern.finditer(self.text[pos:]):
-                start, end = match.span()
-                if pos < start:
-                    normal_text = self.text[pos:start]
-                    parts.append({"type": "normal", "text": normal_text.strip()})
-                language = match.group(1)
-                code_text = match.group(2)
-                parts.append({"type": "code", "text": code_text, "language": None})
-                pos = end
-            # Tables
-            for match in table_pattern.finditer(self.text[pos:]):
-                start, end = match.span()
-                if pos < start:
-                    normal_text = self.text[pos:start]
-                    parts.append({"type": "normal", "text": normal_text.strip()})
-                table_text = match.group(0)
-                parts.append({"type": "table", "text": table_text})
-                pos = end
-            # Latex
-            for match in latex_pattern.finditer(self.text[pos:]):
-                start, end = match.span()
-                if pos < start:
-                    normal_text = self.text[pos:start]
-                    parts.append({"type": "normal", "text": normal_text.strip()})
-                latex_text = match.group(0)
-                parts.append({"type": "latex", "text": latex_text})
-                pos = end
+            for pattern_name, pattern in patterns:
+                for match in pattern.finditer(self.text[pos:]):
+                    start, end = match.span()
+                    if pos < start:
+                        normal_text = self.text[pos:start]
+                        parts.append({"type": "normal", "text": normal_text.strip()})
+                    if pattern_name == 'code':
+                        parts.append({"type": pattern_name, "text": match.group(2), "language": match.group(1)})
+                    else:
+                        parts.append({"type": pattern_name, "text": match.group(1)})
+                    pos += end
             # Text blocks
             if pos < len(self.text):
                 normal_text = self.text[pos:]
