@@ -285,7 +285,8 @@ class attachment(Gtk.Button):
                 "code": "code-symbolic",
                 "pdf": "document-text-symbolic",
                 "youtube": "play-symbolic",
-                "website": "globe-symbolic"
+                "website": "globe-symbolic",
+                "thought": "brain-augemnted-symbolic"
             }[self.file_type]
         )
         super().__init__(
@@ -474,26 +475,6 @@ class latex_image(Gtk.MenuButton):
                 if 'ParseSyntaxException' in error:
                     self.set_tooltip_text(error.split('ParseSyntaxException: ')[-1])
                 self.set_child(label)
-
-class think_block(Gtk.ListBox):
-    __gtype_name__ = 'AlpacaThinkBlock'
-
-    def __init__(self, content:str):
-        self.content = content
-        super().__init__(
-            css_classes=['boxed-list'],
-            selection_mode=0
-        )
-        expander_row = Adw.ExpanderRow(
-            title=_("Thought")
-        )
-        label = text_block(False, False)
-        label.set_text(self.content)
-        label.add_css_class('p10')
-        expander_row.add_row(label)
-        self.append(expander_row)
-        label.get_parent().set_focusable(False)
-        label.get_parent().set_overflow(1)
 
 class option_popup(Gtk.Popover):
     __gtype_name__ = 'AlpacaMessagePopup'
@@ -903,8 +884,7 @@ class message(Gtk.Box):
                     self.content_children.append(latex_w)
                     self.container.append(latex_w)
                 elif part['type'] == 'think':
-                    print('think')
-                    think_w = think_block(part['text'])
+                    think_w = attachment(_('Thought'), 'thought', part['text'])
                     self.content_children.append(think_w)
                     self.container.append(think_w)
         else:

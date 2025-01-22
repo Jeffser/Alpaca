@@ -609,8 +609,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.file_preview_open_button.set_visible(False)
             else:
                 self.file_preview_image.set_visible(False)
+                self.file_preview_text_label.set_label(file_content)
                 self.file_preview_text_label.set_visible(True)
-                buffer = self.file_preview_text_label.set_label(file_content)
                 if file_type == 'youtube':
                     self.file_preview_dialog.set_title(file_content.split('\n')[0])
                     self.file_preview_open_button.set_name(file_content.split('\n')[2])
