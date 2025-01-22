@@ -32,7 +32,7 @@ language_fallback = {
 markup_pattern = re.compile(r'<(b|u|tt|a.*|span.*)>(.*?)<\/(b|u|tt|a|span)>')
 
 patterns = [
-    ('think', re.compile(r'<think>\n+(.*?)\n+<\/think>\n', re.DOTALL)),
+    ('think', re.compile(r'<think>\n+(.*?)\n+<\/think>', re.DOTALL)),
     ('code', re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
     ('code', re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)),
     ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
@@ -791,20 +791,20 @@ class message(Gtk.Box):
             self.container.remove(child)
         self.content_children = []
         if text:
-            self.content_children = []
             parts = []
             pos = 0
             for pattern_name, pattern in patterns:
                 for match in pattern.finditer(self.text[pos:]):
                     start, end = match.span()
-                    if pos < start:
-                        normal_text = self.text[pos:start]
+                    if pos < start + pos:
+                        normal_text = self.text[pos:start+pos]
                         parts.append({"type": "normal", "text": normal_text.strip()})
                     if pattern_name == 'code':
                         parts.append({"type": pattern_name, "text": match.group(2), "language": match.group(1)})
                     else:
                         parts.append({"type": pattern_name, "text": match.group(1)})
                     pos += end
+                    print(start, pos, len(self.text))
             # Text blocks
             if pos < len(self.text):
                 normal_text = self.text[pos:]
@@ -853,9 +853,7 @@ class message(Gtk.Box):
                     self.content_children.append(latex_w)
                     self.container.append(latex_w)
                 elif part['type'] == 'think':
-                    think_w = attachment(_('Thought'), 'thought', part['text'])
-                    self.content_children.append(think_w)
-                    self.container.append(think_w)
+                    self.add_attachment(_('Thought'), 'thought', part['text'])
         else:
             text_b = generating_text_block()
             text_b.set_visible(False)
