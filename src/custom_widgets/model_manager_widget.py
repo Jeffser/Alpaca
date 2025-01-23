@@ -227,6 +227,8 @@ class pulling_model(Gtk.Box):
         actionbar.set_center_widget(stop_button)
         if not self.page:
             self.page = pulling_model_page(self)
+        elif self.page.get_parent():
+            self.page.get_parent().set_child(None)
         return actionbar, Gtk.ScrolledWindow(child=self.page, css_classes=['undershoot-bottom'])
 
 class local_model_page(Gtk.Box):
