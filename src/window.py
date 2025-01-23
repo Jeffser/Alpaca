@@ -337,7 +337,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         message_id = self.generate_uuid()
 
         raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-        m_element = current_chat.add_message(message_id, None, system)
+        m_element = current_chat.add_message(message_id, datetime.now(), None, system)
 
         for name, content in self.attachments.items():
             attachment = m_element.add_attachment(name, content['type'], content['content'])
@@ -347,7 +347,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.attachment_box.set_visible(False)
 
         m_element.set_text(raw_message)
-        m_element.add_footer(datetime.now())
 
         self.sql_instance.insert_or_update_message(m_element)
 
@@ -367,9 +366,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 data['options']['seed'] = self.ollama_instance.tweaks["seed"]
 
             bot_id=self.generate_uuid()
-            m_element_bot = current_chat.add_message(bot_id, current_model, False)
+            m_element_bot = current_chat.add_message(bot_id, datetime.now(), current_model, False)
             m_element_bot.set_text()
-            m_element_bot.dt = datetime.now()
             self.sql_instance.insert_or_update_message(m_element_bot)
             threading.Thread(target=self.run_message, args=(data, m_element_bot, current_chat)).start()
 
@@ -677,7 +675,8 @@ Generate a title following these rules:
                 GLib.idle_add(message_element.container.remove, message_element.spinner)
                 message_element.spinner = None
             GLib.idle_add(message_element.set_text, message_element.content_children[-1].get_text())
-            GLib.idle_add(message_element.add_footer, datetime.now())
+            message_element.dt = datetime.now()
+            GLib.idle_add(message_element.add_footer)
             GLib.idle_add(chat.show_regenerate_button, message_element)
             self.sql_instance.insert_or_update_message(message_element)
             GLib.idle_add(self.connection_error)
@@ -1042,10 +1041,8 @@ Generate a title following these rules:
         chat = chat_widget.chat(_('Quick Ask'), 'QA', True)
         self.quick_ask_overlay.set_child(chat)
         message_id = self.generate_uuid()
-        chat.add_message(message_id, None, False)
-        m_element = chat.messages[message_id]
+        m_element = chat.add_message(message_id, datetime.now(), None, False)
         m_element.set_text(message)
-        m_element.add_footer(datetime.now())
         data = {
             "model": current_model,
             "messages": chat.convert_to_ollama(),
@@ -1056,8 +1053,7 @@ Generate a title following these rules:
         if self.ollama_instance.tweaks["seed"] != 0:
             data['options']['seed'] = self.ollama_instance.tweaks["seed"]
         bot_id=self.generate_uuid()
-        chat.add_message(bot_id, current_model, False)
-        m_element_bot = chat.messages[bot_id]
+        m_element_bot = chat.add_message(bot_id, datetime.now(), current_model, False)
         m_element_bot.set_text()
         chat.busy = True
         threading.Thread(target=self.run_quick_chat, args=(data, m_element_bot)).start()

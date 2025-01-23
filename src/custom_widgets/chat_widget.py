@@ -124,8 +124,9 @@ class chat(Gtk.Stack):
             self.container.remove(widget)
         self.set_visible_child_name('welcome-screen')
 
-    def add_message(self, message_id:str, model:str=None, system:bool=None):
-        msg = message(message_id, model, system)
+    def add_message(self, message_id:str, dt:datetime.datetime, model:str=None, system:bool=None):
+        print(dt)
+        msg = message(message_id, dt, model, system)
         self.messages[message_id] = msg
         self.container.append(msg)
         return msg
@@ -139,12 +140,11 @@ class chat(Gtk.Stack):
     def load_chat_messages(self):
         messages = window.sql_instance.get_messages(self)
         for message in messages:
-            message_element = self.add_message(message[0], message[2] if message[1] == 'assistant' else None, message[1] == 'system')
+            message_element = self.add_message(message[0], datetime.datetime.strptime(message[3] + (":00" if message[3].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'), message[2] if message[1] == 'assistant' else None, message[1] == 'system')
             attachments = window.sql_instance.get_attachments(message_element)
             for attachment in attachments:
                 message_element.add_attachment(attachment[2], attachment[1], attachment[3])
             message_element.set_text(message[4])
-            message_element.add_footer(datetime.datetime.strptime(message[3] + (":00" if message[3].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'))
         self.set_visible_child_name('content' if len(messages) > 0 else 'welcome-screen')
 
     def on_export_successful(self, file, result):

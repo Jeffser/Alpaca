@@ -499,16 +499,15 @@ class option_popup(Gtk.Popover):
             child=container
         )
 
-        if not self.message_element.get_chat().quick_chat:
-            self.delete_button = Gtk.Button(
-                halign=1,
-                hexpand=True,
-                icon_name="user-trash-symbolic",
-                css_classes = ["flat"],
-                tooltip_text = _("Remove Message")
-            )
-            self.delete_button.connect('clicked', lambda *_: self.delete_message())
-            container.append(self.delete_button)
+        self.delete_button = Gtk.Button(
+            halign=1,
+            hexpand=True,
+            icon_name="user-trash-symbolic",
+            css_classes = ["flat"],
+            tooltip_text = _("Remove Message")
+        )
+        self.delete_button.connect('clicked', lambda *_: self.delete_message())
+        container.append(self.delete_button)
 
         self.copy_button = Gtk.Button(
             halign=1,
@@ -596,7 +595,8 @@ class option_popup(Gtk.Popover):
 class footer(Gtk.Box):
     __gtype_name__ = 'AlpacaMessageFooter'
 
-    def __init__(self, dt:datetime.datetime, message_element, model:str=None, system:bool=False):
+    def __init__(self, message_element):
+        self.message_element = message_element
         super().__init__(
             orientation=0,
             hexpand=True,
@@ -616,21 +616,22 @@ class footer(Gtk.Box):
             css_classes=[] if message_element.profile_picture_data else ['dim-label']
         )
         message_author = ""
-        if model:
-            model_name = window.convert_model_name(model, 0).replace(" (latest)", '').replace(' (custom)', '')
+        if self.message_element.model:
+            model_name = window.convert_model_name(self.message_element.model, 0).replace(" (latest)", '').replace(' (custom)', '')
             if message_element.profile_picture_data:
                 message_author = model_name
             else:
                 message_author = "{} • ".format(model_name)
-        if system:
+        if self.message_element.system:
             message_author = "{} • ".format(_("System"))
         if message_element.profile_picture_data:
-            label.set_markup("<span weight='bold'>{}</span>\n<small>{}</small>".format(message_author, GLib.markup_escape_text(self.format_datetime(dt))))
+            label.set_markup("<span weight='bold'>{}</span>\n<small>{}</small>".format(message_author, GLib.markup_escape_text(self.format_datetime())))
         else:
-            label.set_markup("<small>{}{}</small>".format(message_author, GLib.markup_escape_text(self.format_datetime(dt))))
+            label.set_markup("<small>{}{}</small>".format(message_author, GLib.markup_escape_text(self.format_datetime())))
         self.append(label)
 
-    def format_datetime(self, dt:datetime) -> str:
+    def format_datetime(self) -> str:
+        dt = self.message_element.dt
         date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
         current_date = GLib.DateTime.new_now_local()
         if date.format("%Y/%m/%d") == current_date.format("%Y/%m/%d"):
@@ -640,19 +641,18 @@ class footer(Gtk.Box):
         return date.format("%b %d %Y, %H:%M %p")
 
     def add_options_button(self):
-        self.popup = option_popup(self.get_parent().get_parent())
-        message_element = self.get_parent().get_parent()
-        message_element.profile_picture = None
+        self.popup = option_popup(self.message_element)
+        self.message_element.profile_picture = None
 
-        if message_element.profile_picture_data:
-            image_data = base64.b64decode(message_element.profile_picture_data)
+        if self.message_element.profile_picture_data:
+            image_data = base64.b64decode(self.message_element.profile_picture_data)
             loader = GdkPixbuf.PixbufLoader.new()
             loader.write(image_data)
             loader.close()
             pixbuf = loader.get_pixbuf()
             texture = Gdk.Texture.new_for_pixbuf(pixbuf)
-            message_element.profile_picture = Gtk.Image.new_from_paintable(texture)
-            message_element.profile_picture.set_size_request(40, 40)
+            self.message_element.profile_picture = Gtk.Image.new_from_paintable(texture)
+            self.message_element.profile_picture.set_size_request(40, 40)
             self.options_button = Gtk.MenuButton(
                 width_request=40,
                 height_request=40,
@@ -662,10 +662,10 @@ class footer(Gtk.Box):
                 margin_top=5
             )
             self.options_button.set_overflow(1)
-            self.options_button.set_child(message_element.profile_picture)
+            self.options_button.set_child(self.message_element.profile_picture)
             list(self.options_button)[0].add_css_class('circular')
             list(self.options_button)[0].set_overflow(1)
-            message_element.prepend(self.options_button)
+            self.message_element.prepend(self.options_button)
 
         if not self.options_button:
             self.options_button = Gtk.MenuButton(
@@ -679,11 +679,11 @@ class footer(Gtk.Box):
 class message(Gtk.Box):
     __gtype_name__ = 'AlpacaMessage'
 
-    def __init__(self, message_id:str, model:str=None, system:bool=False):
+    def __init__(self, message_id:str, dt:datetime.datetime, model:str=None, system:bool=False):
         self.message_id = message_id
         self.bot = model != None
         self.system = system
-        self.dt = None
+        self.dt = dt
         self.model = model
         self.content_children = [] #These are the code blocks, text blocks and tables
         self.footer = None
@@ -714,6 +714,7 @@ class message(Gtk.Box):
         )
 
         self.append(self.container)
+        self.add_footer()
 
     def update_profile_picture(self):
         if self.bot and self.model:
@@ -722,10 +723,13 @@ class message(Gtk.Box):
                 new_profile_picture_data = model.data.get('profile_picture')
                 if new_profile_picture_data != self.profile_picture_data:
                     self.profile_picture_data = new_profile_picture_data
-                    self.add_footer(self.dt)
+                    self.add_footer()
 
     def get_chat(self):
-        return self.get_parent().get_parent().get_parent().get_parent().get_parent()
+        try:
+            return self.get_parent().get_parent().get_parent().get_parent().get_parent()
+        except Exception as e:
+            pass
 
     def add_attachment(self, name:str, attachment_type:str, content:str):
         if attachment_type == 'image':
@@ -743,13 +747,12 @@ class message(Gtk.Box):
             self.attachment_c.add_file(new_attachment)
             return new_attachment
 
-    def add_footer(self, dt:datetime.datetime):
-        self.dt = dt
+    def add_footer(self):
         if self.footer:
             if self.profile_picture:
                 self.footer.options_button.get_parent().remove(self.footer.options_button)
             self.container.remove(self.footer)
-        self.footer = footer(self.dt, self, self.model, self.system)
+        self.footer = footer(self)
         self.container.prepend(self.footer)
         self.footer.add_options_button()
 
@@ -778,7 +781,7 @@ class message(Gtk.Box):
             self.text = self.content_children[-1].get_text()
             GLib.idle_add(self.set_text, self.content_children[-1].get_text())
             self.dt = datetime.datetime.now()
-            GLib.idle_add(self.add_footer, self.dt)
+            GLib.idle_add(self.add_footer)
             window.show_notification(chat.get_name(), self.text[:200] + (self.text[200:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
             if chat.quick_chat:
                 GLib.idle_add(window.quick_ask_save_button.set_sensitive, True)
