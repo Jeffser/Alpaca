@@ -175,7 +175,9 @@ class pulling_model(Gtk.Box):
             sys.exit()
         if 'error' in data:
             self.error = data['error']
+            self.get_parent().get_parent().remove(self.get_parent())
             logger.error(self.error)
+            dialog_widget.simple_error(_('Model Manager Error'), _("An error occurred whilst pulling '{}'").format(self.get_name()), self.error)
         else:
 
             if 'total' in data and 'completed' in data:
@@ -680,6 +682,8 @@ def get_local_models() -> dict:
 def pull_model_confirm(model_name:str):
     if model_name:
         model_name = model_name.strip().replace('\n', '')
+        if ':' not in model_name:
+            model_name += ':latest'
         if model_name not in list(get_local_models().keys()):
             model = pulling_model(model_name)
             window.local_model_flowbox.prepend(model)

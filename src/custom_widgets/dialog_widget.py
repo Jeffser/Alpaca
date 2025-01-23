@@ -154,7 +154,7 @@ def simple(heading:str, body:str, callback:callable, button_name:str=_('Accept')
         }
     }
 
-    return Options(heading, body, 'cancel', options)
+    return Options(heading, body, list(options.keys())[0], options)
 
 def simple_entry(heading:str, body:str, callback:callable, entries:list or dict, button_name:str=_('Accept'), button_appearance:str='suggested'):
     options = {
@@ -166,7 +166,7 @@ def simple_entry(heading:str, body:str, callback:callable, entries:list or dict,
         }
     }
 
-    return Entry(heading, body, 'cancel', options, entries)
+    return Entry(heading, body, list(options.keys())[0], options, entries)
 
 def simple_dropdown(heading:str, body:str, callback:callable, items:list, button_name:str=_('Accept'), button_appearance:str='suggested'):
     options = {
@@ -178,7 +178,50 @@ def simple_dropdown(heading:str, body:str, callback:callable, items:list, button
         }
     }
 
-    return DropDown(heading, body, 'cancel', options, items)
+    return DropDown(heading, body, list(options.keys())[0], options, items)
+
+def simple_error(title:str, body:str, error_log:str, callback:callable=None):
+    container = Gtk.Box(
+        hexpand=True,
+        vexpand=True,
+        orientation=1,
+        spacing=10,
+        css_classes=['p10']
+    )
+    container.append(Gtk.Label(
+        label=body,
+        wrap=True,
+        wrap_mode=2
+    ))
+    container.append(Gtk.ScrolledWindow(
+        min_content_width=300,
+        hscrollbar_policy=2,
+        propagate_natural_height=True,
+        propagate_natural_width=True,
+        css_classes=['card'],
+        child=Gtk.Label(
+            css_classes=['p10', 'monospace', 'error'],
+            label=error_log,
+            wrap=True,
+            wrap_mode=2,
+            selectable=True
+        )
+    ))
+
+    tbv = Adw.ToolbarView()
+    tbv.add_top_bar(Adw.HeaderBar())
+    tbv.set_content(container)
+
+    dialog = Adw.Dialog(
+        title=title,
+        follows_content_size=True,
+        child=tbv
+    )
+
+    if callback:
+        dialog.connect('closed', lambda *_: callback())
+
+    GLib.idle_add(dialog.present, window)
 
 def simple_file(file_filters:list, callback:callable):
     filter_list = Gio.ListStore.new(Gtk.FileFilter)
