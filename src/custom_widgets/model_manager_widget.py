@@ -629,12 +629,16 @@ def update_local_model_list():
     string_list = Gtk.StringList()
     window.local_model_flowbox.remove_all()
     window.model_selector.local_model_list.remove_all()
+    default_model = window.sql_instance.get_preference('default_model')
+    selected_default_model_index = 0
     try:
         response = window.ollama_instance.request("GET", "api/tags")
         if response.status_code == 200:
             threads = []
             data = json.loads(response.text)
-            for model in data.get('models'):
+            for i, model in enumerate(data.get('models')):
+                if model.get('name') == default_model:
+                    selected_default_model_index = i
                 string_list.append(window.convert_model_name(model.get('name'), 0))
                 thread = threading.Thread(target=add_local_model, args=(model['name'], ))
                 thread.start()
@@ -649,6 +653,7 @@ def update_local_model_list():
     window.title_stack.set_visible_child_name('model-selector' if len(get_local_models()) > 0 else 'no-models')
     window.local_model_stack.set_visible_child_name('content' if len(get_local_models()) > 0 else 'no-models')
     window.default_model_combo.set_model(string_list)
+    window.default_model_combo.set_selected(selected_default_model_index)
 
 def update_available_model_list():
     global available_models

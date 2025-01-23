@@ -416,7 +416,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def changed_default_model(self, comborow, user_data):
         logger.debug("Changed default model")
         default_model = self.default_model_combo.get_selected_item()
-        if default_model:
+        if default_model and self.default_model_combo.get_sensitive():
+            print(default_model.get_string())
             self.sql_instance.insert_or_update_preferences({'default_model': self.convert_model_name(default_model.get_string(), 1)})
 
     @Gtk.Template.Callback()
@@ -1108,6 +1109,7 @@ Generate a title following these rules:
         self.remote_connection_selector.set_visible(not shutil.which('ollama'))
         self.tweaks_group.set_sensitive(True)
         self.remote_connection_switch.set_sensitive(True)
+        self.default_model_combo.set_sensitive(True)
         self.instance_page.set_sensitive(shutil.which('ollama') and not self.remote_connection_switch.get_active())
         if not shutil.which('ollama'):
             self.preferences_dialog.remove(self.instance_page)
