@@ -609,8 +609,8 @@ class footer(Gtk.Box):
             wrap=True,
             ellipsize=3,
             wrap_mode=2,
-            margin_end=10,
-            margin_start=10 if message_element.profile_picture_data else 0,
+            margin_end=7,
+            margin_start=7 if message_element.profile_picture_data else 0,
             xalign=0,
             focusable=True,
             css_classes=[] if message_element.profile_picture_data else ['dim-label']
@@ -709,7 +709,8 @@ class message(Gtk.Box):
         super().__init__(
             css_classes=["message"],
             name=message_id,
-            halign=0 if self.bot or self.system else 2
+            halign=0 if self.bot or self.system else 2,
+            spacing=2
         )
 
         self.append(self.container)
