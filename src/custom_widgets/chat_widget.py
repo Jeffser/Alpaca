@@ -125,7 +125,6 @@ class chat(Gtk.Stack):
         self.set_visible_child_name('welcome-screen')
 
     def add_message(self, message_id:str, dt:datetime.datetime, model:str=None, system:bool=None):
-        print(dt)
         msg = message(message_id, dt, model, system)
         self.messages[message_id] = msg
         self.container.append(msg)

@@ -197,7 +197,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 for line in modelfile.splitlines():
                     if line.startswith('PARAMETER top_k'):
                         top_k = int(line.split(' ')[2])
-                        print(top_k)
                         self.model_creator_imagination.set_value(top_p)
                     elif line.startswith('PARAMETER top_p'):
                         top_p = int(float(line.split(' ')[2]) * 100)

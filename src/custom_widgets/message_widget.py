@@ -808,7 +808,6 @@ class message(Gtk.Box):
                     else:
                         parts.append({"type": pattern_name, "text": match.group(1)})
                     pos += end
-                    print(start, pos, len(self.text))
             # Text blocks
             if pos < len(self.text):
                 normal_text = self.text[pos:]

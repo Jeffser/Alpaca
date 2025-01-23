@@ -706,7 +706,6 @@ def create_model_confirm(data:dict, gguf_path:str):
                 with open(gguf_path, 'rb') as f:
                     response = window.ollama_instance.request('GET', 'api/blobs/sha256:{}'.format(sha256))
                     if response.status_code == 404:
-                        print('a')
                         model.update_progressbar({'status': 'Uploading GGUF to Ollama instance'})
                         response = window.ollama_instance.request('POST', 'api/blobs/sha256:{}'.format(sha256), f)
                     data['files'] = {os.path.split(gguf_path)[1]: 'sha256:{}'.format(sha256)}
