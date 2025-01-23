@@ -344,6 +344,13 @@
                             <property name="policy">wide</property>
                           </object>
                         </property>
+                        <child type="end">
+                          <object class="GtkButton">
+                            <property name="tooltip-text" translatable="yes">Download Model From Name</property>
+                            <property name="action-name">app.download_model_from_name</property>
+                            <property name="icon-name">list-add-symbolic</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child type="top">
