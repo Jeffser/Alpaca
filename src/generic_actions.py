@@ -3,6 +3,8 @@
 Working on organizing the code
 """
 
+import gi
+from gi.repository import GLib
 import os, requests, re
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api.formatters import TextFormatter
@@ -14,8 +16,8 @@ window = None
 def attach_youtube(video_title:str, video_author:str, watch_url:str, video_url:str, video_id:str, caption_name:str):
     buffer = window.message_text_view.get_buffer()
     text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).replace(video_url, "")
-    buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-    buffer.insert(buffer.get_start_iter(), text, len(text))
+    GLib.idle_add(buffer.delete, buffer.get_start_iter(), buffer.get_end_iter())
+    GLib.idle_add(buffer.insert, buffer.get_start_iter(), text, len(text))
 
     result_text = "{}\n{}\n{}\n\n".format(video_title, video_author, watch_url)
     caption_name = caption_name.split(' (')[-1][:-1]
@@ -49,8 +51,8 @@ def attach_website(url:str):
         md = html2text(html)
         buffer = window.message_text_view.get_buffer()
         textview_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).replace(url, "")
-        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-        buffer.insert(buffer.get_start_iter(), textview_text, len(textview_text))
+        GLib.idle_add(buffer.delete, buffer.get_start_iter(), buffer.get_end_iter())
+        GLib.idle_add(buffer.insert, buffer.get_start_iter(), textview_text, len(textview_text))
 
         if not os.path.exists('/tmp/alpaca/websites/'):
             os.makedirs('/tmp/alpaca/websites/')

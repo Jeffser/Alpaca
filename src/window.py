@@ -912,7 +912,7 @@ Generate a title following these rules:
             dialog_widget.simple_dropdown(
                 _('Attach YouTube Video?'),
                 _('{}\n\nPlease select a transcript to include').format(data['title']),
-                lambda caption_name, data=data, video_url=video_url: generic_actions.attach_youtube(data['title'], data['author_name'], data['url'], video_url, data['url'].split('=')[1], caption_name),
+                lambda caption_name, data=data, video_url=video_url: threading.Thread(target=generic_actions.attach_youtube, args=(data['title'], data['author_name'], data['url'], video_url, data['url'].split('=')[1], caption_name)).start(),
                 transcriptions
             )
         except Exception as e:
@@ -938,7 +938,7 @@ Generate a title following these rules:
                 dialog_widget.simple(
                     _('Attach Website? (Experimental)'),
                     _("Are you sure you want to attach\n'{}'?").format(text),
-                    lambda url=text: generic_actions.attach_website(url)
+                    lambda url=text: threading.Thread(target=generic_actions.attach_website, args=(url,)).start()
                 )
         except Exception as e:
             logger.error(e)
