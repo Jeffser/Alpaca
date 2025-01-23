@@ -580,8 +580,9 @@ class option_popup(Gtk.Popover):
             self.message_element.spinner = None
         if not chat.busy:
             self.message_element.set_text()
-            self.message_element.footer.options_button.set_sensitive(False)
             self.message_element.model = window.model_selector.get_selected_model().get_name()
+            self.message_element.add_footer()
+            self.message_element.footer.options_button.set_sensitive(False)
             data = {
                 "model": self.message_element.model,
                 "messages": chat.convert_to_ollama(),
@@ -788,7 +789,6 @@ class message(Gtk.Box):
             self.text = self.content_children[-1].get_text()
             GLib.idle_add(self.set_text, self.content_children[-1].get_text())
             self.dt = datetime.datetime.now()
-            GLib.idle_add(self.add_footer)
             window.show_notification(chat.get_name(), self.text[:200] + (self.text[200:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
             if chat.quick_chat:
                 GLib.idle_add(window.quick_ask_save_button.set_sensitive, True)
