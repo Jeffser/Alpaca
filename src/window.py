@@ -686,13 +686,18 @@ Generate a title following these rules:
         selected_chat = self.sql_instance.get_preference('selected_chat')
         chats = self.sql_instance.get_chats()
         if len(chats) > 0:
+            threads = []
             if selected_chat not in [row[1] for row in chats]:
                 selected_chat = chats[0][1]
             for row in chats:
                 chat_container =self.chat_list_box.append_chat(row[1], row[0])
                 if row[1] == selected_chat:
                     self.chat_list_box.select_row(self.chat_list_box.tab_list[-1])
-                chat_container.load_chat_messages()
+                threads.append(threading.Thread(target=chat_container.load_chat_messages))
+                threads[-1].start()
+            for thread in threads:
+                thread.join()
+            GLib.idle_add(self.main_navigation_view.replace_with_tags, ['chat'])
         else:
             self.chat_list_box.new_chat()
 

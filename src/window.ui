@@ -30,6 +30,28 @@
       <object class="AdwNavigationView" id="main_navigation_view">
         <child>
           <object class="AdwNavigationPage">
+            <property name="title" translatable="yes">Loading</property>
+            <property name="tag">loading</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar"/>
+                </child>
+                <property name="content">
+                  <object class="AdwStatusPage">
+                    <property name="title">Alpaca</property>
+                    <property name="icon-name">com.jeffser.Alpaca</property>
+                    <property name="child">
+                      <object class="AdwSpinner"/>
+                    </property>
+                  </object>
+                </property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwNavigationPage">
             <property name="title">Alpaca</property>
             <property name="tag">chat</property>
             <property name="child">
