@@ -315,13 +315,20 @@
                 <property name="enable-hide-gesture">true</property>
                 <property name="enable-show-gesture">true</property>
                 <property name="sidebar">
-                  <object class="AdwToolbarView">
+                  <object class="AdwToolbarView" id="model_manager_sidebar">
                     <child type="top">
-                      <object class="AdwHeaderBar"/>
+                      <object class="AdwHeaderBar">
+                        <property name="show-back-button">false</property>
+                      </object>
                     </child>
                     <property name="content">
-                      <object class="AdwStatusPage">
-                        <property name="icon-name">brain-augemnted-symbolic</property>
+                      <object class="GtkScrolledWindow">
+                        <property name="vexpand">true</property>
+                        <child>
+                          <object class="AdwStatusPage">
+                            <property name="icon-name">brain-augemnted-symbolic</property>
+                          </object>
+                        </child>
                       </object>
                     </property>
                   </object>

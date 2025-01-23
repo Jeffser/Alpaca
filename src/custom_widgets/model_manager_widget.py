@@ -227,9 +227,7 @@ class pulling_model(Gtk.Box):
         actionbar.set_center_widget(stop_button)
         if not self.page:
             self.page = pulling_model_page(self)
-        elif self.page.get_parent():
-            self.page.get_parent().set_child(None)
-        return actionbar, Gtk.ScrolledWindow(child=self.page, css_classes=['undershoot-bottom'])
+        return actionbar, self.page
 
 class local_model_page(Gtk.Box):
     __gtype_name__ = 'AlpacaLocalModelPage'
@@ -462,7 +460,7 @@ class local_model(Gtk.Box):
         actionbar.pack_end(remove_button)
         if not self.page:
             self.page = local_model_page(self)
-        return actionbar, Gtk.ScrolledWindow(child=self.page, css_classes=['undershoot-bottom'])
+        return actionbar, self.page
 
 class category_pill(Adw.Bin):
     __gtype_name__ = 'AlpacaCategoryPill'
@@ -556,6 +554,14 @@ class available_model_page(Gtk.Box):
                 row.add_controller(gesture_click)
             self.tag_list.append(row)
         self.append(self.tag_list)
+        self.append(Gtk.Label(
+            label=_("By downloading this model you accept the license agreement available on the model's website"),
+            wrap=True,
+            wrap_mode=2,
+            css_classes=['dim-label', 'p10'],
+            justify=2,
+            use_markup=True
+        ))
 
 class available_model(Gtk.Box):
     __gtype_name__ = 'AlpacaAvailableModel'
@@ -592,21 +598,6 @@ class available_model(Gtk.Box):
         return self.page.tag_list
 
     def get_page(self):
-        self.page = available_model_page(self)
-
-        disclaimer = Gtk.Label(
-            label=_("By downloading this model you accept the license agreement available on the model's website"),
-            wrap=True,
-            wrap_mode=2,
-            css_classes=['dim-label', 'p10'],
-            justify=2,
-            use_markup=True
-        )
-
-        container = Gtk.Box(orientation=1, spacing=5)
-        container.append(Gtk.ScrolledWindow(child=self.page, css_classes=['undershoot-bottom']))
-        container.append(disclaimer)
-
         actionbar = Gtk.ActionBar()
         web_button = Gtk.Button(
             child=Adw.ButtonContent(
@@ -619,7 +610,9 @@ class available_model(Gtk.Box):
         web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri(self.data.get('url')))
         actionbar.set_center_widget(web_button)
 
-        return actionbar, container
+        if not self.page:
+            self.page = available_model_page(self)
+        return actionbar, self.page
 
     def get_search_string(self) -> str:
         return '{} {} {} {}'.format(self.get_name(), self.get_name().replace('-', ' ').title(), available_models_descriptions.descriptions[self.get_name()], ' '.join(self.data.get('categories')))
