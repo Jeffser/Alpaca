@@ -576,8 +576,7 @@ class option_popup(Gtk.Popover):
             self.message_element.spinner = None
         if not chat.busy:
             self.message_element.set_text()
-            if self.message_element.footer:
-                self.message_element.container.remove(self.message_element.footer)
+            self.message_element.footer.options_button.set_sensitive(False)
             self.message_element.model = window.model_selector.get_selected_model().get_name()
             data = {
                 "model": self.message_element.model,
@@ -770,6 +769,7 @@ class message(Gtk.Box):
             GLib.idle_add(self.content_children[-1].buffer.insert, self.content_children[-1].buffer.get_end_iter(), data['message']['content'], len(data['message']['content'].encode('utf-8')))
 
         if not chat.busy or ('done' in data and data['done']):
+            self.footer.options_button.set_sensitive(True)
             if not chat.quick_chat:
                 window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
                 if window.chat_list_box.get_current_chat().get_name() != chat.get_name():
