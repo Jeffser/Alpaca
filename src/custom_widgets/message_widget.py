@@ -608,8 +608,8 @@ class footer(Gtk.Box):
             wrap=True,
             ellipsize=3,
             wrap_mode=2,
-            margin_end=7,
-            margin_start=7 if message_element.profile_picture_data else 0,
+            margin_end=5,
+            margin_start=5 if message_element.profile_picture_data else 0,
             xalign=0,
             focusable=True,
             css_classes=[] if message_element.profile_picture_data else ['dim-label']
