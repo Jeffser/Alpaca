@@ -44,16 +44,14 @@ class edit_text_block(Gtk.Box):
 
     def __init__(self, text:str):
         super().__init__(
-            hexpand=True,
             halign=0,
             spacing=5,
             orientation=1
         )
         self.text_view = Gtk.TextView(
             halign=0,
-            hexpand=True,
             css_classes=["view", "editing_message_textview"],
-            wrap_mode=2,
+            wrap_mode=2
         )
         cancel_button = Gtk.Button(
             vexpand=False,
@@ -82,10 +80,17 @@ class edit_text_block(Gtk.Box):
         button_container.append(cancel_button)
         button_container.append(save_button)
         self.append(button_container)
-        #self.text_view.get_buffer().insert(self.text_view.get_buffer().get_start_iter(), text, len(text.encode('utf-8')))
         key_controller = Gtk.EventControllerKey.new()
         key_controller.connect("key-pressed", self.handle_key)
         self.text_view.add_controller(key_controller)
+        self.text_view.connect('realize', lambda *_: self.set_text(text))
+
+    def set_text(self, text:str):
+        buffer = self.text_view.get_buffer()
+        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+        buffer.insert(buffer.get_start_iter(), text, len(text.encode('utf8')))
+        GLib.idle_add(self.text_view.set_vexpand, True)
+        GLib.idle_add(self.text_view.set_vexpand, False)
 
     def handle_key(self, controller, keyval, keycode, state):
         if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK):
@@ -566,7 +571,6 @@ class option_popup(Gtk.Popover):
             self.message_element.container.remove(child)
         self.message_element.content_children = []
         self.message_element.container.append(edit_text_b)
-        GLib.idle_add(edit_text_b.text_view.get_buffer().insert, edit_text_b.text_view.get_buffer().get_start_iter(), self.message_element.text, len(self.message_element.text.encode('utf-8')))
         window.set_focus(edit_text_b)
 
     def regenerate_message(self):
