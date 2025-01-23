@@ -697,7 +697,6 @@ Generate a title following these rules:
                 threads[-1].start()
             for thread in threads:
                 thread.join()
-            GLib.idle_add(self.main_navigation_view.replace_with_tags, ['chat'])
         else:
             self.chat_list_box.new_chat()
 
@@ -1115,6 +1114,7 @@ Generate a title following these rules:
 
         if self.get_application().args.ask:
             self.quick_chat(self.get_application().args.ask)
+        GLib.idle_add(self.main_navigation_view.replace_with_tags, ['chat'])
 
     def open_button_menu(self, gesture, x, y, menu):
         button = gesture.get_widget()
