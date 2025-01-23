@@ -253,7 +253,7 @@ class local_model_page(Gtk.Box):
             tooltip_text=_('Change Profile Picture')
         )
         self.append(self.image_container)
-        self.image_container.connect('clicked', lambda *_: self.change_profile_picture())
+        self.image_container.connect('clicked', lambda *_: self.model.change_profile_picture())
         title_label = Gtk.Label(
             label=model_title.split(' (')[0],
             tooltip_text=model_title.split(' (')[0],
@@ -325,30 +325,14 @@ class local_model_page(Gtk.Box):
             focusable=True
         )
         self.append(system_label)
+        self.model.image_container.connect('notify::child', lambda *_: self.update_profile_picture())
 
-    def change_profile_picture(self):
-        def set_profile_picture(file):
-            if file:
-                picture_b64 = window.get_content_of_file(file.get_path(), 'profile_picture')
-                window.sql_instance.insert_or_update_model_picture(self.model.get_name(), picture_b64)
-                self.model.update_profile_picture()
-                window.chat_list_box.update_profile_pictures()
-
-        def remove_profile_picture():
-            window.sql_instance.delete_model_picture(self.model.get_name())
-            self.model.update_profile_picture()
-            window.chat_list_box.update_profile_pictures()
-
-        if self.model.data['profile_picture']:
-            options = {
-                _('Cancel'): {},
-                _('Remove'): {'callback': remove_profile_picture, 'appearance': 'destructive'},
-                _('Change'): {'callback': lambda: dialog_widget.simple_file([window.file_filter_image], set_profile_picture), 'appearance': 'suggested', 'default': True},
-            }
-
-            dialog_widget.Options(_("Model Profile Picture"), _("What do you want to do with the model's profile picture?"), list(options.keys())[0], options)
-        else:
-            dialog_widget.simple_file([window.file_filter_image], set_profile_picture)
+    def update_profile_picture(self):
+        image = self.model.create_profile_picture(128)
+        if not image:
+            image = Gtk.Image.new_from_icon_name('image-missing-symbolic')
+            image.set_size_request(128, 128)
+        self.image_container.set_child(image)
 
 class local_model(Gtk.Box):
     __gtype_name__ = 'AlpacaLocalModel'
@@ -421,12 +405,30 @@ class local_model(Gtk.Box):
     def update_profile_picture(self):
         self.data['profile_picture'] = window.sql_instance.get_model_picture(self.get_name())
         self.image_container.set_child(self.create_profile_picture(64))
-        if self.page:
-            image = self.create_profile_picture(128)
-            if not image:
-                image = Gtk.Image.new_from_icon_name('image-missing-symbolic')
-                image.set_size_request(128, 128)
-            self.page.image_container.set_child(image)
+
+    def change_profile_picture(self):
+        def set_profile_picture(file):
+            if file:
+                picture_b64 = window.get_content_of_file(file.get_path(), 'profile_picture')
+                window.sql_instance.insert_or_update_model_picture(self.get_name(), picture_b64)
+                self.update_profile_picture()
+                window.chat_list_box.update_profile_pictures()
+
+        def remove_profile_picture():
+            window.sql_instance.delete_model_picture(self.get_name())
+            self.update_profile_picture()
+            window.chat_list_box.update_profile_pictures()
+
+        if self.data['profile_picture']:
+            options = {
+                _('Cancel'): {},
+                _('Remove'): {'callback': remove_profile_picture, 'appearance': 'destructive'},
+                _('Change'): {'callback': lambda: dialog_widget.simple_file([window.file_filter_image], set_profile_picture), 'appearance': 'suggested', 'default': True},
+            }
+
+            dialog_widget.Options(_("Model Profile Picture"), _("What do you want to do with the model's profile picture?"), list(options.keys())[0], options)
+        else:
+            dialog_widget.simple_file([window.file_filter_image], set_profile_picture)
 
     def remove_model(self):
         response = window.ollama_instance.request("DELETE", "api/delete", json.dumps({"name": self.get_name()}))
