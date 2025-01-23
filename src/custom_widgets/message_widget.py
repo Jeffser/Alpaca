@@ -723,6 +723,9 @@ class message(Gtk.Box):
                 if new_profile_picture_data != self.profile_picture_data:
                     self.profile_picture_data = new_profile_picture_data
                     self.add_footer()
+            elif self.profile_picture_data:
+                self.profile_picture_data = None
+                self.add_footer()
 
     def get_chat(self):
         try:

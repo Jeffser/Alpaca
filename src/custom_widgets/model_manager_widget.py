@@ -332,10 +332,12 @@ class local_model_page(Gtk.Box):
                 picture_b64 = window.get_content_of_file(file.get_path(), 'profile_picture')
                 window.sql_instance.insert_or_update_model_picture(self.model.get_name(), picture_b64)
                 self.model.update_profile_picture()
+                window.chat_list_box.update_profile_pictures()
 
         def remove_profile_picture():
             window.sql_instance.delete_model_picture(self.model.get_name())
             self.model.update_profile_picture()
+            window.chat_list_box.update_profile_pictures()
 
         if self.model.data['profile_picture']:
             options = {
@@ -435,6 +437,7 @@ class local_model(Gtk.Box):
                 window.local_model_stack.set_visible_child_name('no-models')
                 window.title_stack.set_visible_child_name('no-models')
             window.sql_instance.delete_model_picture(self.get_name())
+            window.chat_list_box.update_profile_pictures()
 
     def get_page(self):
         actionbar = Gtk.ActionBar()
