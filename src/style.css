@@ -25,8 +25,8 @@
 	margin: 0;
 }
 .user_message > label, .response_message > label, .response_message textview {
-  border-radius: 7px;
-  padding: 7px;
+  border-radius: 5px;
+  padding: 5px;
 }
 .user_message label:focus, .response_message label:focus, .editing_message_textview:focus, .code_block:focus {
 	box-shadow: 0 0 1px 2px mix(@accent_color, @window_bg_color, 0.5);
