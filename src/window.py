@@ -1085,14 +1085,6 @@ Generate a title following these rules:
                 element.set_value(self.ollama_instance.tweaks[element.get_name()])
 
         self.powersaver_warning_switch.set_active(self.sql_instance.get_preference('powersaver_warning'))
-        default_model = self.sql_instance.get_preference('default_model')
-        if default_model:
-            try:
-                for i, model in enumerate(list(self.default_model_list)):
-                    if self.convert_model_name(model.get_string(), 1) == default_model:
-                        self.default_model_combo.set_selected(i)
-            except:
-                pass
 
         for element in list(list(list(list(self.overrides_group)[0])[1])[0]):
             if element.get_name() in self.ollama_instance.overrides:
