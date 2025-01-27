@@ -1328,22 +1328,6 @@
       </item>
     </section>
   </menu>
-  <menu id="create_model_menu">
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">From Existing Model</attribute>
-        <attribute name="action">app.create_model_from_existing</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">From GGUF File</attribute>
-        <attribute name="action">app.create_model_from_file</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">From Name</attribute>
-        <attribute name="action">app.create_model_from_name</attribute>
-      </item>
-    </section>
-  </menu>
   <object class="GtkFileFilter" id="file_filter_db">
     <mime-types>
       <mime-type>application/vnd.sqlite3</mime-type>
