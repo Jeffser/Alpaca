@@ -144,7 +144,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def model_creator_accept(self, button):
         profile_picture = self.model_creator_profile_picture.get_subtitle()
-        model_name = '{}:{}'.format(self.model_creator_name.get_text(), self.model_creator_tag.get_text()).replace(' ', '-')
+        model_name = '{}:{}'.format(self.model_creator_name.get_text(), self.model_creator_tag.get_text()).replace(' ', '-').lower()
         context_buffer = self.model_creator_context.get_buffer()
         system_message = context_buffer.get_text(context_buffer.get_start_iter(), context_buffer.get_end_iter(), False)
         top_k = self.model_creator_imagination.get_value()
@@ -185,24 +185,24 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if model_name != 'GGUF' and not comborow.get_subtitle():
             model_name = self.convert_model_name(model_name, 1)
 
-            self.model_creator_name.set_text(model_name.split(':')[0])
-            self.model_creator_tag.set_text('custom')
+            GLib.idle_add(self.model_creator_name.set_text, model_name.split(':')[0])
+            GLib.idle_add(self.model_creator_tag.set_text, 'custom')
 
             system = self.model_selector.get_model_by_name(model_name).data.get('system')
             if system:
                 context_buffer = self.model_creator_context.get_buffer()
-                context_buffer.delete(context_buffer.get_start_iter(), context_buffer.get_end_iter())
-                context_buffer.insert_at_cursor(system, len(system))
+                GLib.idle_add(context_buffer.delete, context_buffer.get_start_iter(), context_buffer.get_end_iter())
+                GLib.idle_add(context_buffer.insert_at_cursor, system, len(system))
 
             modelfile = self.model_selector.get_model_by_name(model_name).data.get('modelfile')
             if modelfile:
                 for line in modelfile.splitlines():
                     if line.startswith('PARAMETER top_k'):
                         top_k = int(line.split(' ')[2])
-                        self.model_creator_imagination.set_value(top_p)
+                        GLib.idle_add(self.model_creator_imagination.set_value, top_k)
                     elif line.startswith('PARAMETER top_p'):
                         top_p = int(float(line.split(' ')[2]) * 100)
-                        self.model_creator_focus.set_value(top_p)
+                        GLib.idle_add(self.model_creator_focus.set_value, top_p)
 
     @Gtk.Template.Callback()
     def model_creator_gguf(self, button):
@@ -223,15 +223,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
         dialog_widget.simple_file([self.file_filter_gguf], result)
 
     @Gtk.Template.Callback()
-    def model_creator_existing(self, button):
+    def model_creator_existing(self, button, selected_model:str=None):
+        GLib.idle_add(self.model_manager_stack.set_visible_child_name, 'model_creator')
         context_buffer = self.model_creator_context.get_buffer()
         context_buffer.delete(context_buffer.get_start_iter(), context_buffer.get_end_iter())
-        self.model_creator_profile_picture.set_subtitle('')
-        self.model_creator_base.set_subtitle('')
+        GLib.idle_add(self.model_creator_profile_picture.set_subtitle, '')
+        GLib.idle_add(self.model_creator_base.set_subtitle, '')
         string_list = Gtk.StringList()
-        [string_list.append(value.model_title) for value in model_manager_widget.get_local_models().values()]
-        self.model_creator_base.set_model(string_list)
-        self.model_creator_stack.set_visible_child_name('content')
+        if selected_model:
+            GLib.idle_add(string_list.append, self.convert_model_name(selected_model, 0))
+        else:
+            [GLib.idle_add(string_list.append, value.model_title) for value in model_manager_widget.get_local_models().values()]
+        GLib.idle_add(self.model_creator_base.set_model, string_list)
+        GLib.idle_add(self.model_creator_stack.set_visible_child_name, 'content')
 
     @Gtk.Template.Callback()
     def model_manager_stack_changed(self, viewstack, params):
@@ -562,9 +566,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         clipboard.read_texture_async(None, self.cb_image_received)
 
     def check_alphanumeric(self, editable, text, length, position, allowed_chars):
-        new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
-        if new_text != text:
-            editable.stop_emission_by_name("insert-text")
+        if length == 1:
+            new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
+            if new_text != text:
+                editable.stop_emission_by_name("insert-text")
 
     def show_toast(self, message:str, overlay):
         logger.info(message)
@@ -1291,7 +1296,7 @@ Generate a title following these rules:
             'attach_screenshot': [lambda *i: self.request_screenshot() if self.model_selector.get_selected_model().get_vision() else self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)],
             'attach_url': [lambda *i: dialog_widget.simple_entry(_('Attach Website? (Experimental)'), _('Please enter a website URL'), self.cb_text_received, {'placeholder': 'https://jeffser.com/alpaca/'})],
             'attach_youtube': [lambda *i: dialog_widget.simple_entry(_('Attach YouTube Captions?'), _('Please enter a YouTube video URL'), self.cb_text_received, {'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})],
-            'model_manager' : [lambda *i: self.main_navigation_view.push_by_tag('model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else self.main_navigation_view.pop_to_tag('chat'), ['<primary>m']],
+            'model_manager' : [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>m']],
             'download_model_from_name' : [lambda *i: dialog_widget.simple_entry(_('Download Model?'), _('Please enter the model name following this template: name:tag'), lambda name: threading.Thread(target=model_manager_widget.pull_model_confirm, args=(name,)).start(), {'placeholder': 'deepseek-r1:7b'})]
         }
 

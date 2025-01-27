@@ -450,6 +450,7 @@ class local_model(Gtk.Box):
             tooltip_text=_('Create Child'),
             css_classes=['accent']
         )
+        create_child_button.connect('clicked', lambda button: window.model_creator_existing(button, self.get_name()))
         actionbar.pack_start(create_child_button)
 
         remove_button = Gtk.Button(
