@@ -3329,15 +3329,15 @@ msgstr "Seleccione un método para importar un modelo para continuar"
 
 #: src/window.ui:560
 msgid "GGUF File"
-msgstr ""
+msgstr "Archivo GGUF"
 
 #: src/window.ui:571
 msgid "Existing Model"
-msgstr ""
+msgstr "Modelo Existente"
 
 #: src/window.ui:589
 msgid "Identity"
-msgstr ""
+msgstr "Identidad"
 
 #: src/window.ui:592
 msgid "Base"
@@ -3345,11 +3345,11 @@ msgstr "Base"
 
 #: src/window.ui:599
 msgid "Profile Picture"
-msgstr ""
+msgstr "Foto de Perfil"
 
 #: src/window.ui:604
 msgid "Open File"
-msgstr ""
+msgstr "Abrir Archivo"
 
 #: src/window.ui:615
 msgid "Name"
@@ -3357,7 +3357,7 @@ msgstr "Nombre"
 
 #: src/window.ui:620 src/custom_widgets/model_manager_widget.py:274
 msgid "Tag"
-msgstr ""
+msgstr "Etiqueta"
 
 #: src/window.ui:627
 msgid "Context"
@@ -3368,30 +3368,33 @@ msgid ""
 "Describe the desired behavior of the model in its primary language "
 "(typically English)."
 msgstr ""
+"Describe el comportamiento deseado del modelo en su idioma principal "
+"(normalmente inglés)."
 
 #: src/window.ui:655
 msgid "Behavior"
-msgstr ""
+msgstr "Comportamiento"
 
 #: src/window.ui:658
 msgid "Imagination"
-msgstr ""
+msgstr "Imaginación"
 
 #: src/window.ui:659
 msgid "A higher number results in more diverse answers from the model. (top_k)"
-msgstr ""
+msgstr "Un número mayor da como resultado respuestas más diversas del modelo. "
+"(top_k)"
 
 #: src/window.ui:673
 msgid "Focus"
-msgstr ""
+msgstr "Concentración"
 
 #: src/window.ui:674
 msgid "A higher number widens the amount of possible answers. (top_p)"
-msgstr ""
+msgstr "Un número mayor amplía la cantidad de respuestas posibles. (top_p)"
 
 #: src/window.ui:707 src/window.ui:715
 msgid "Add Model"
-msgstr ""
+msgstr "Agregar modelo"
 
 #: src/window.ui:749 src/window.ui:1238
 msgid "Preferences"
@@ -3423,7 +3426,8 @@ msgstr "Modelo por Defecto"
 
 #: src/window.ui:800
 msgid "The default model to use on new chats and when generating chat titles"
-msgstr ""
+msgstr "El modelo predeterminado que se utilizará en los chats nuevos y al "
+"generar títulos de chat"
 
 #: src/window.ui:819
 msgid "Temperature"
@@ -3891,32 +3895,32 @@ msgstr "Mensaje no puede ser regenerado mientras se recibe una respuesta"
 
 #: src/custom_widgets/message_widget.py:866
 msgid "Thought"
-msgstr ""
+msgstr "Pensamiento"
 
 #: src/custom_widgets/model_manager_widget.py:180
 msgid "Model Manager Error"
-msgstr ""
+msgstr "Error del Gestor de Modelos"
 
 #: src/custom_widgets/model_manager_widget.py:180
 msgid "An error occurred whilst pulling '{}'"
-msgstr ""
+msgstr "Se produjo un error al descargar '{}'"
 
 #: src/custom_widgets/model_manager_widget.py:205
 msgid "Download Completed"
-msgstr ""
+msgstr "Descarga Completada"
 
 #: src/custom_widgets/model_manager_widget.py:205
 msgid "Model '{}' downloaded successfully."
-msgstr ""
+msgstr "El modelo '{}' se descargó correctamente."
 
 #: src/custom_widgets/model_manager_widget.py:217
 #: src/custom_widgets/model_manager_widget.py:219
 msgid "Stop Download"
-msgstr ""
+msgstr "Detener la descarga"
 
 #: src/custom_widgets/model_manager_widget.py:223
 msgid "Stop Download?"
-msgstr "¿Parar Descarga?"
+msgstr "¿Detener Descarga?"
 
 #: src/custom_widgets/model_manager_widget.py:224
 msgid "Are you sure you want to stop pulling '{}'?"
@@ -3928,7 +3932,7 @@ msgstr "Parar"
 
 #: src/custom_widgets/model_manager_widget.py:255
 msgid "Change Profile Picture"
-msgstr ""
+msgstr "Cambiar Foto de Perfil"
 
 #: src/custom_widgets/model_manager_widget.py:275
 msgid "Parent Model"
@@ -3954,11 +3958,11 @@ msgstr "Modificado en"
 #: src/custom_widgets/model_manager_widget.py:305
 #: src/custom_widgets/model_manager_widget.py:312
 msgid "Not Available"
-msgstr ""
+msgstr "No Disponible"
 
 #: src/custom_widgets/model_manager_widget.py:320
 msgid "(No system message available)"
-msgstr ""
+msgstr "(No hay ningún mensaje del sistema disponible)"
 
 #: src/custom_widgets/model_manager_widget.py:428
 msgid "Change"
@@ -3974,19 +3978,19 @@ msgstr "¿Qué quieres hacer con la foto de perfil del modelo?"
 
 #: src/custom_widgets/model_manager_widget.py:450
 msgid "Create Child"
-msgstr ""
+msgstr "Crear Descendiente"
 
 #: src/custom_widgets/model_manager_widget.py:457
 msgid "Remove Model"
-msgstr ""
+msgstr "Remover Modelo"
 
 #: src/custom_widgets/model_manager_widget.py:461
 msgid "Remove Model?"
-msgstr ""
+msgstr "¿Remover Modelo?"
 
 #: src/custom_widgets/model_manager_widget.py:462
 msgid "Are you sure you want to remove '{}'?"
-msgstr ""
+msgstr "¿Estás seguro de que quieres eliminar '{}'?"
 
 #: src/custom_widgets/model_manager_widget.py:476
 msgid "Multilingual"
