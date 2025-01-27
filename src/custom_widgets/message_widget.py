@@ -863,7 +863,8 @@ class message(Gtk.Box):
                     self.content_children.append(latex_w)
                     self.container.append(latex_w)
                 elif part['type'] == 'think':
-                    self.add_attachment(_('Thought'), 'thought', part['text'])
+                    attachment = self.add_attachment(_('Thought'), 'thought', part['text'])
+                    attachment.remove_css_class('flat')
         else:
             text_b = generating_text_block()
             text_b.set_visible(False)
