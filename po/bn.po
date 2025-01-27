@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-10 18:11-0600\n"
+"POT-Creation-Date: 2025-01-27 17:06-0600\n"
 "PO-Revision-Date: 2025-01-07 15:12-0600\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Bengali\n"
@@ -35,7 +35,7 @@ msgid "An Ollama client"
 msgstr "এক ওল্লামা ক্লায়েন্ট"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:11
-#: data/com.jeffser.Alpaca.metainfo.xml.in:942
+#: data/com.jeffser.Alpaca.metainfo.xml.in:966
 msgid "Features"
 msgstr "বৈশিষ্ট্য"
 
@@ -44,12 +44,12 @@ msgid "Built in Ollama instance"
 msgstr "ওল্লামা দৃষ্টান্তে নির্মিত"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:14
-#: data/com.jeffser.Alpaca.metainfo.xml.in:944
+#: data/com.jeffser.Alpaca.metainfo.xml.in:968
 msgid "Talk to multiple models in the same conversation"
 msgstr "একই কথোপকথনে একাধিক মডেলের সাথে কথা বলুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:15
-#: data/com.jeffser.Alpaca.metainfo.xml.in:945
+#: data/com.jeffser.Alpaca.metainfo.xml.in:969
 msgid "Pull and delete models from the app"
 msgstr "অ্যাপ থেকে মডেলগুলি টানুন এবং মুছুন"
 
@@ -81,7 +81,7 @@ msgstr "ওয়েবসাইট থেকে টেক্সট প্রো
 msgid "PDF recognition"
 msgstr "পিডিএফ স্বীকৃতি"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:1124
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:1214
 msgid "Disclaimer"
 msgstr "দাবিত্যাগ"
 
@@ -122,247 +122,301 @@ msgstr "ইউটিউব ভিডিও ট্রান্সক্রিপ�
 msgid "Multiple models being downloaded"
 msgstr "একাধিক মডেল ডাউনলোড হচ্ছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:92
-#: data/com.jeffser.Alpaca.metainfo.xml.in:118
-#: data/com.jeffser.Alpaca.metainfo.xml.in:133
-#: data/com.jeffser.Alpaca.metainfo.xml.in:158
-#: data/com.jeffser.Alpaca.metainfo.xml.in:186
-#: data/com.jeffser.Alpaca.metainfo.xml.in:196
-#: data/com.jeffser.Alpaca.metainfo.xml.in:207
-#: data/com.jeffser.Alpaca.metainfo.xml.in:221
-#: data/com.jeffser.Alpaca.metainfo.xml.in:233
-#: data/com.jeffser.Alpaca.metainfo.xml.in:249
-#: data/com.jeffser.Alpaca.metainfo.xml.in:264
-#: data/com.jeffser.Alpaca.metainfo.xml.in:299
-#: data/com.jeffser.Alpaca.metainfo.xml.in:324
-#: data/com.jeffser.Alpaca.metainfo.xml.in:355
-#: data/com.jeffser.Alpaca.metainfo.xml.in:381
-#: data/com.jeffser.Alpaca.metainfo.xml.in:403
-#: data/com.jeffser.Alpaca.metainfo.xml.in:434
-#: data/com.jeffser.Alpaca.metainfo.xml.in:456
-#: data/com.jeffser.Alpaca.metainfo.xml.in:477
-#: data/com.jeffser.Alpaca.metainfo.xml.in:492
-#: data/com.jeffser.Alpaca.metainfo.xml.in:517
+#: data/com.jeffser.Alpaca.metainfo.xml.in:82
+msgid "Model creator screen"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:96
+#: data/com.jeffser.Alpaca.metainfo.xml.in:116
+#: data/com.jeffser.Alpaca.metainfo.xml.in:142
+#: data/com.jeffser.Alpaca.metainfo.xml.in:157
+#: data/com.jeffser.Alpaca.metainfo.xml.in:182
+#: data/com.jeffser.Alpaca.metainfo.xml.in:210
+#: data/com.jeffser.Alpaca.metainfo.xml.in:220
+#: data/com.jeffser.Alpaca.metainfo.xml.in:231
+#: data/com.jeffser.Alpaca.metainfo.xml.in:245
+#: data/com.jeffser.Alpaca.metainfo.xml.in:257
+#: data/com.jeffser.Alpaca.metainfo.xml.in:273
+#: data/com.jeffser.Alpaca.metainfo.xml.in:288
+#: data/com.jeffser.Alpaca.metainfo.xml.in:323
+#: data/com.jeffser.Alpaca.metainfo.xml.in:348
+#: data/com.jeffser.Alpaca.metainfo.xml.in:379
+#: data/com.jeffser.Alpaca.metainfo.xml.in:405
+#: data/com.jeffser.Alpaca.metainfo.xml.in:427
+#: data/com.jeffser.Alpaca.metainfo.xml.in:458
+#: data/com.jeffser.Alpaca.metainfo.xml.in:480
+#: data/com.jeffser.Alpaca.metainfo.xml.in:501
+#: data/com.jeffser.Alpaca.metainfo.xml.in:516
+#: data/com.jeffser.Alpaca.metainfo.xml.in:541
 msgid "New"
 msgstr "নতুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:94
+#: data/com.jeffser.Alpaca.metainfo.xml.in:98
+msgid "New model manager"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:99
+msgid "Changed GtkSpinner to AdwSpinner"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:100
+msgid "Better handling of launch process"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:101
+msgid "New loading screen at launch"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:102
+msgid "Better handling of file types"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:103
+msgid "Better regex expression for LaTeX equations"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:104
+msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:105
+msgid "Better handling of think tags in messages"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:106
+msgid "Default model is now in charge of generating titles"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:107
+msgid "Message header is now shown whilst the message is being generated"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:108
+msgid "Better handling of model profile pictures"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:109
+msgid "New models in 'available models' list"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:118
 msgid "Added option for attaching screenshots"
 msgstr "স্ক্রীনশট সংযুক্ত করার বিকল্প যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:95
+#: data/com.jeffser.Alpaca.metainfo.xml.in:119
 msgid "Basic LaTeX math equations are now rendered in messages"
 msgstr "মৌলিক LaTeX গাণিতিক সমীকরণগুলি এখন বার্তাগুলিতে প্রদর্শিত হয়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:96
+#: data/com.jeffser.Alpaca.metainfo.xml.in:120
 msgid "HTML and C++ scripts can now be run inside Alpaca"
 msgstr "HTML এবং C++ স্ক্রিপ্ট এখন আলপাকা-তে চালানো যাবে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:97
+#: data/com.jeffser.Alpaca.metainfo.xml.in:121
 msgid "Added option to open the environment directory from the terminal"
 msgstr "টার্মিনাল থেকে পরিবেশ ডিরেক্টরি খোলার বিকল্প যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:98
+#: data/com.jeffser.Alpaca.metainfo.xml.in:122
 msgid "Added option to edit code blocks directly"
 msgstr "কোড ব্লক সরাসরি সম্পাদনা করার বিকল্প যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:99
+#: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Complete keyboard shortcut list"
 msgstr "সম্পূর্ণ কীবোর্ড শর্টকাট তালিকা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:100
+#: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Images are now attached in 640p resolution"
 msgstr "চিত্রগুলি এখন 640p রেজোলিউশনে সংযুক্ত করা হয়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:101
+#: data/com.jeffser.Alpaca.metainfo.xml.in:125
 msgid "Website attachments now use extracted titles"
 msgstr "ওয়েবসাইট সংযুক্তিগুলি এখন নির্গত শিরোনামগুলি ব্যবহার করে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:102
+#: data/com.jeffser.Alpaca.metainfo.xml.in:126
 msgid "Better chat title generation"
 msgstr "আলোচনা শিরোনাম তৈরির উন্নতি"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:103
+#: data/com.jeffser.Alpaca.metainfo.xml.in:127
 msgid "Added option to attach any plain text files"
 msgstr "যেকোনো সাধারণ পাঠ্য ফাইল সংযুক্ত করার বিকল্প যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:104
+#: data/com.jeffser.Alpaca.metainfo.xml.in:128
 msgid "Added spellchecker to message entry"
 msgstr "বার্তা প্রবেশের জন্য বানান পরীক্ষক যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:105
+#: data/com.jeffser.Alpaca.metainfo.xml.in:129
 msgid "Alpaca's parameters are now stored using SQLite3"
 msgstr "আলপাকার প্যারামিটারগুলি এখন SQLite3 ব্যবহার করে সংরক্ষণ করা হয়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:106
+#: data/com.jeffser.Alpaca.metainfo.xml.in:130
 msgid "Small appearance changes in text entries"
 msgstr "পাঠ্য এন্ট্রিগুলিতে ছোট চেহারার পরিবর্তন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:108
-#: data/com.jeffser.Alpaca.metainfo.xml.in:139
-#: data/com.jeffser.Alpaca.metainfo.xml.in:148
-#: data/com.jeffser.Alpaca.metainfo.xml.in:211
-#: data/com.jeffser.Alpaca.metainfo.xml.in:239
-#: data/com.jeffser.Alpaca.metainfo.xml.in:253
-#: data/com.jeffser.Alpaca.metainfo.xml.in:270
-#: data/com.jeffser.Alpaca.metainfo.xml.in:281
-#: data/com.jeffser.Alpaca.metainfo.xml.in:290
-#: data/com.jeffser.Alpaca.metainfo.xml.in:307
-#: data/com.jeffser.Alpaca.metainfo.xml.in:317
-#: data/com.jeffser.Alpaca.metainfo.xml.in:334
-#: data/com.jeffser.Alpaca.metainfo.xml.in:344
-#: data/com.jeffser.Alpaca.metainfo.xml.in:391
-#: data/com.jeffser.Alpaca.metainfo.xml.in:416
-#: data/com.jeffser.Alpaca.metainfo.xml.in:441
-#: data/com.jeffser.Alpaca.metainfo.xml.in:463
-#: data/com.jeffser.Alpaca.metainfo.xml.in:481
-#: data/com.jeffser.Alpaca.metainfo.xml.in:499
-#: data/com.jeffser.Alpaca.metainfo.xml.in:511
-#: data/com.jeffser.Alpaca.metainfo.xml.in:527
+#: data/com.jeffser.Alpaca.metainfo.xml.in:132
+#: data/com.jeffser.Alpaca.metainfo.xml.in:163
+#: data/com.jeffser.Alpaca.metainfo.xml.in:172
+#: data/com.jeffser.Alpaca.metainfo.xml.in:235
+#: data/com.jeffser.Alpaca.metainfo.xml.in:263
+#: data/com.jeffser.Alpaca.metainfo.xml.in:277
+#: data/com.jeffser.Alpaca.metainfo.xml.in:294
+#: data/com.jeffser.Alpaca.metainfo.xml.in:305
+#: data/com.jeffser.Alpaca.metainfo.xml.in:314
+#: data/com.jeffser.Alpaca.metainfo.xml.in:331
+#: data/com.jeffser.Alpaca.metainfo.xml.in:341
+#: data/com.jeffser.Alpaca.metainfo.xml.in:358
+#: data/com.jeffser.Alpaca.metainfo.xml.in:368
+#: data/com.jeffser.Alpaca.metainfo.xml.in:415
+#: data/com.jeffser.Alpaca.metainfo.xml.in:440
+#: data/com.jeffser.Alpaca.metainfo.xml.in:465
+#: data/com.jeffser.Alpaca.metainfo.xml.in:487
+#: data/com.jeffser.Alpaca.metainfo.xml.in:505
+#: data/com.jeffser.Alpaca.metainfo.xml.in:523
+#: data/com.jeffser.Alpaca.metainfo.xml.in:535
+#: data/com.jeffser.Alpaca.metainfo.xml.in:551
 msgid "Fixes"
 msgstr "সংশোধন করে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:110
+#: data/com.jeffser.Alpaca.metainfo.xml.in:134
 msgid "Alpaca's launch process is more reliable"
 msgstr "আলপাকার চালু প্রক্রিয়া এখন আরও নির্ভরযোগ্য"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:111
+#: data/com.jeffser.Alpaca.metainfo.xml.in:135
 msgid "Closing the terminal now kills the script subprocess"
 msgstr "টার্মিনাল বন্ধ করলে এখন স্ক্রিপ্ট সাবপ্রসেস বন্ধ হয়ে যাবে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:120
+#: data/com.jeffser.Alpaca.metainfo.xml.in:144
 msgid "Transitioned chat backend from JSON to SQLite3"
 msgstr "চ্যাট ব্যাকএন্ডকে জেসন থেকে এসকিউলাইট ৩ এ রূপান্তরিত করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:121
+#: data/com.jeffser.Alpaca.metainfo.xml.in:145
 msgid "Changed appearance of messages"
 msgstr "বার্তার চেহারা পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:122
+#: data/com.jeffser.Alpaca.metainfo.xml.in:146
 msgid "Added the option to add profile pictures to models"
 msgstr "মডেলে প্রোফাইল ছবি যোগ করার বিকল্প যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:124
-#: data/com.jeffser.Alpaca.metainfo.xml.in:596
-#: data/com.jeffser.Alpaca.metainfo.xml.in:645
+#: data/com.jeffser.Alpaca.metainfo.xml.in:148
+#: data/com.jeffser.Alpaca.metainfo.xml.in:620
+#: data/com.jeffser.Alpaca.metainfo.xml.in:669
 msgid "Fix"
 msgstr "সংশোধন করুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:126
+#: data/com.jeffser.Alpaca.metainfo.xml.in:150
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
-msgstr "ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
+msgstr ""
+"ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:135
+#: data/com.jeffser.Alpaca.metainfo.xml.in:159
 msgid "Added categories to models"
 msgstr "মডেলগুলিতে বিভাগ যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:136
+#: data/com.jeffser.Alpaca.metainfo.xml.in:160
 msgid "Specified model's languages"
 msgstr "নির্দিষ্ট মডেলের ভাষাসমূহ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:137
+#: data/com.jeffser.Alpaca.metainfo.xml.in:161
 msgid "Added warning when downloading embedding models"
 msgstr "এম্বেডিং মডেল ডাউনলোড করার সময় সতর্কতা যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:141
+#: data/com.jeffser.Alpaca.metainfo.xml.in:165
 msgid "Replaced low ram warning with big model warning"
 msgstr "কম র‍্যাম সতর্কতা প্রতিস্থাপন করা হয়েছে বড় মডেল সতর্কতার সাথে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:150
+#: data/com.jeffser.Alpaca.metainfo.xml.in:174
 msgid "Correctly escape markup before rendering message"
 msgstr "বার্তা প্রদর্শনের আগে মার্কআপকে সঠিকভাবে এস্কেপ করুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:151
+#: data/com.jeffser.Alpaca.metainfo.xml.in:175
 msgid "Fixed about dialog not working if log file was missing"
 msgstr "লগ ফাইল না থাকলে সম্পর্কে সংলাপ কাজ না করার সমস্যা সংশোধন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:160
+#: data/com.jeffser.Alpaca.metainfo.xml.in:184
 msgid "System messages can now be sent directly from Alpaca"
 msgstr "এখন সিস্টেমের বার্তাগুলি সরাসরি আলপাকা থেকে পাঠানো যাবে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:161
+#: data/com.jeffser.Alpaca.metainfo.xml.in:185
 msgid "New redesign for messages and smaller minimum size"
 msgstr "বার্তা এবং ছোট ন্যূনতম আকারের জন্য নতুন পুনঃনকশা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:162
+#: data/com.jeffser.Alpaca.metainfo.xml.in:186
 msgid "New models included in 'available models list'"
 msgstr "'উপলব্ধ মডেলের তালিকা' তে নতুন মডেল অন্তর্ভুক্ত"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:163
+#: data/com.jeffser.Alpaca.metainfo.xml.in:187
 msgid "Added symbolic icon when attaching code files"
 msgstr "কোড ফাইল সংযুক্ত করার সময় প্রতীকী আইকন যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:164
+#: data/com.jeffser.Alpaca.metainfo.xml.in:188
 msgid "When exporting a chat it now includes a markdown file"
 msgstr "যখন একটি চ্যাট রফতানি করা হয় তখন এটি একটি মার্কডাউন ফাইল অন্তর্ভুক্ত করে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:165
+#: data/com.jeffser.Alpaca.metainfo.xml.in:189
 msgid "Refresh button in model manager when using a remote instance"
 msgstr "একটি দূরবর্তী উদাহরণ ব্যবহার করার সময় মডেল ম্যানেজারে রিফ্রেশ বাটন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:166
+#: data/com.jeffser.Alpaca.metainfo.xml.in:190
 msgid "Assistant messages are now editable"
 msgstr "সহায়ক বার্তাগুলি এখন সম্পাদনা করা যাবে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:167
+#: data/com.jeffser.Alpaca.metainfo.xml.in:191
 msgid "Updated Ollama to v0.5.2"
 msgstr "ওলামাকে v0.5.2 এ আপডেট করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:168
+#: data/com.jeffser.Alpaca.metainfo.xml.in:192
 msgid "New option to change model directory"
 msgstr "মডেল ডিরেক্টরি পরিবর্তন করার নতুন বিকল্প"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:169
+#: data/com.jeffser.Alpaca.metainfo.xml.in:193
 msgid "File previewer now resizes dynamically to content"
 msgstr "ফাইল প্রিভিউয়ার এখন সামগ্রীর সাথে গতিশীলভাবে আকার পরিবর্তন করে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:170
+#: data/com.jeffser.Alpaca.metainfo.xml.in:194
 msgid "Adapted Alpaca to work without integrated Ollama instance"
 msgstr "একীভূত ওলামা ইনস্ট্যান্স ছাড়াই কাজ করার জন্য আলপাকাকে অভিযোজিত করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:171
+#: data/com.jeffser.Alpaca.metainfo.xml.in:195
 msgid "Compatibility added with ODT files"
 msgstr "ODT ফাইলগুলির সাথে সামঞ্জস্যতা যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:174
+#: data/com.jeffser.Alpaca.metainfo.xml.in:198
 msgid "Restored ROCm compatibility"
 msgstr "ROCm সামঞ্জস্যতা পুনরুদ্ধার করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:175
+#: data/com.jeffser.Alpaca.metainfo.xml.in:199
 msgid ""
 "Added long press gesture to chat rows so actions can be done in touchscreens"
 msgstr ""
 "স্পর্শ পর্দায় ক্রিয়াকলাপ করা যায় এমনভাবে চ্যাট সারিতে দীর্ঘ চাপ অভিব্যক্তি যোগ করা "
 "হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:176
+#: data/com.jeffser.Alpaca.metainfo.xml.in:200
 msgid "Fixed edit button not saving changes"
 msgstr "সম্পাদনা বাটন পরিবর্তন সংরক্ষণ না করার সমস্যা সংশোধন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:177
+#: data/com.jeffser.Alpaca.metainfo.xml.in:201
 msgid "Changed max temperature value to 2"
 msgstr "সর্বোচ্চ তাপমাত্রার মান 2 এ পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:178
+#: data/com.jeffser.Alpaca.metainfo.xml.in:202
 msgid "Made seed 0 actually random"
 msgstr "বীজ 0 কে আসলেই একটি অবাধ সংখ্যা করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:179
+#: data/com.jeffser.Alpaca.metainfo.xml.in:203
 msgid ""
 "Fixed Gnome search provider not working outside of Flatpak installations"
 msgstr ""
 "ফ্ল্যাটপ্যাক ইনস্টলেশনের বাইরে গনোম সার্চ প্রদানকারী কাজ না করার সমস্যা সংশোধন করা "
 "হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:188
+#: data/com.jeffser.Alpaca.metainfo.xml.in:212
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
 msgstr "নতুন বিকল্প --ask MESSAGE, একটি নতুন 'দ্রুত জিজ্ঞাসা' উইন্ডো খোলার জন্য"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:189
+#: data/com.jeffser.Alpaca.metainfo.xml.in:213
 msgid "Gnome Search integration now works whilst the app is opened"
 msgstr "গনোম সার্চ একীকরণ এখন অ্যাপটি খোলা থাকাকালীন কাজ করে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:198
+#: data/com.jeffser.Alpaca.metainfo.xml.in:222
 msgid ""
 "Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
 "--list-chats, --version"
@@ -370,109 +424,111 @@ msgstr ""
 "যোগ করা হয়েছে লঞ্চ প্যারামিটার --ask MESSAGE, --new-chat CHAT, --select-chat "
 "CHAT, --list-chats, --version"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:199
+#: data/com.jeffser.Alpaca.metainfo.xml.in:223
 msgid "Added integration as Gnome Search Provider"
 msgstr "গনোম সার্চ প্রদানকারী হিসাবে একীকরণ যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:200
+#: data/com.jeffser.Alpaca.metainfo.xml.in:224
 msgid "Updated Ollama to v0.4.2 with new models"
 msgstr "নতুন মডেলগুলির সাথে Ollama v0.4.2 এ আপডেট করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:209
+#: data/com.jeffser.Alpaca.metainfo.xml.in:233
 msgid "User messages are now compacted into bubbles"
 msgstr "ব্যবহারকারীর বার্তাগুলি এখন বাবলে সংকুচিত করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:213
+#: data/com.jeffser.Alpaca.metainfo.xml.in:237
 msgid ""
 "Fixed re connection dialog not working when 'use local instance' is selected"
 msgstr ""
 "সংযোগ পুনরায় সংযোগ সংলাপটি কাজ না করার সমস্যা সংশোধন করা হয়েছে যখন 'স্থানীয় "
 "উদাহরণ ব্যবহার করুন' নির্বাচন করা হয়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:214
+#: data/com.jeffser.Alpaca.metainfo.xml.in:238
 msgid "Fixed model manager not adapting to large system fonts"
-msgstr "বড় সিস্টেম ফন্টের সাথে খাপ খাইয়ে নিতে মডেল ম্যানেজারের সমস্যা সংশোধন করা হয়েছে"
+msgstr ""
+"বড় সিস্টেম ফন্টের সাথে খাপ খাইয়ে নিতে মডেল ম্যানেজারের সমস্যা সংশোধন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:223
+#: data/com.jeffser.Alpaca.metainfo.xml.in:247
 msgid "Details page for models"
 msgstr "মডেলের জন্য বিস্তারিত পৃষ্ঠা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:224
+#: data/com.jeffser.Alpaca.metainfo.xml.in:248
 msgid ""
 "Model selector gets replaced with 'manage models' button when there are no "
 "models downloaded"
 msgstr ""
 "কোনো মডেল ডাউনলোড না হলে মডেল নির্বাচকের জায়গায় 'মডেল ম্যানেজ করুন' বোতামটি আসে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:225
+#: data/com.jeffser.Alpaca.metainfo.xml.in:249
 msgid "Added warning when model is too big for the device"
 msgstr "মডেল ডিভাইসের জন্য অনেক বড় হলে সতর্কবার্তা যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:226
+#: data/com.jeffser.Alpaca.metainfo.xml.in:250
 msgid "Added AMD GPU indicator in preferences"
 msgstr "পছন্দসমূহে AMD GPU নির্দেশক যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:235
+#: data/com.jeffser.Alpaca.metainfo.xml.in:259
 msgid "Better system for handling dialogs"
 msgstr "ডায়ালগ পরিচালনার জন্য উন্নত সিস্টেম"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:236
+#: data/com.jeffser.Alpaca.metainfo.xml.in:260
 msgid "Better system for handling instance switching"
 msgstr "ইনস্ট্যান্স পরিবর্তনের জন্য উন্নত সিস্টেম"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:237
+#: data/com.jeffser.Alpaca.metainfo.xml.in:261
 msgid "Remote connection dialog"
 msgstr "রিমোট সংযোগ ডায়ালগ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:241
+#: data/com.jeffser.Alpaca.metainfo.xml.in:265
 msgid "Fixed: Models get duplicated when switching remote and local instance"
-msgstr "সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
+msgstr ""
+"সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:242
+#: data/com.jeffser.Alpaca.metainfo.xml.in:266
 msgid "Better internal instance manager"
 msgstr "উন্নত অভ্যন্তরীণ ইনস্ট্যান্স ম্যানেজার"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:251
+#: data/com.jeffser.Alpaca.metainfo.xml.in:275
 msgid "Added 'Cancel' and 'Save' buttons when editing a message"
 msgstr "একটি বার্তা সম্পাদনা করার সময় 'Cancel' এবং 'Save' বোতাম যুক্ত করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:255
+#: data/com.jeffser.Alpaca.metainfo.xml.in:279
 msgid "Better handling of image recognition"
 msgstr "ছবি সনাক্তকরণের জন্য উন্নত পরিচালনা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:256
+#: data/com.jeffser.Alpaca.metainfo.xml.in:280
 msgid "Remove unused files when canceling a model download"
 msgstr "মডেল ডাউনলোড বাতিল করার সময় অপ্রয়োজনীয় ফাইলগুলি মুছে ফেলুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:257
+#: data/com.jeffser.Alpaca.metainfo.xml.in:281
 msgid "Better message blocks rendering"
 msgstr "বার্তা ব্লক রেন্ডারিংয়ের জন্য উন্নত সমাধান"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:266
+#: data/com.jeffser.Alpaca.metainfo.xml.in:290
 msgid "Run bash and python scripts straight from chat"
 msgstr "চ্যাট থেকে সরাসরি ব্যাশ এবং পাইথন স্ক্রিপ্ট চালান"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:267
+#: data/com.jeffser.Alpaca.metainfo.xml.in:291
 msgid "Updated Ollama to 0.3.12"
 msgstr "ওলামাকে ০.৩.১২ এ আপডেট করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:268
+#: data/com.jeffser.Alpaca.metainfo.xml.in:292
 msgid "New models!"
 msgstr "নতুন মডেল!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:272
+#: data/com.jeffser.Alpaca.metainfo.xml.in:296
 msgid "Fixed and made faster the launch sequence"
 msgstr "লঞ্চ ক্রম ঠিক করা হয়েছে এবং আরও দ্রুত করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:273
+#: data/com.jeffser.Alpaca.metainfo.xml.in:297
 msgid "Better detection of code blocks in messages"
 msgstr "মেসেজে কোড ব্লকের আরও ভাল সনাক্তকরণ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:274
+#: data/com.jeffser.Alpaca.metainfo.xml.in:298
 msgid "Fixed app not loading in certain setups with Nvidia GPUs"
 msgstr "নির্দিষ্ট Nvidia GPU সেটআপে অ্যাপ লোড না হওয়ার সমস্যা ঠিক করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:283
+#: data/com.jeffser.Alpaca.metainfo.xml.in:307
 msgid ""
 "Fixed message notification sometimes crashing text rendering because of them "
 "running on different threads"
@@ -480,31 +536,31 @@ msgstr ""
 "বিভিন্ন থ্রেডে চলার কারণে মেসেজ নোটিফিকেশনের টেক্সট রেন্ডারিং ক্র্যাশ হওয়ার সমস্যা "
 "ঠিক করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:292
+#: data/com.jeffser.Alpaca.metainfo.xml.in:316
 msgid "Fixed message generation sometimes failing"
 msgstr "মেসেজ জেনারেশন কখনও কখনও ব্যর্থ হওয়ার সমস্যা ঠিক করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:301
+#: data/com.jeffser.Alpaca.metainfo.xml.in:325
 msgid "Sidebar resizes with the window"
 msgstr "উইন্ডোর সাথে সাইডবারের আকার পরিবর্তন হয়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:302
+#: data/com.jeffser.Alpaca.metainfo.xml.in:326
 msgid "New welcome dialog"
 msgstr "নতুন ওয়েলকাম ডায়ালগ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:303
+#: data/com.jeffser.Alpaca.metainfo.xml.in:327
 msgid "Message search"
 msgstr "মেসেজ অনুসন্ধান"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:304
+#: data/com.jeffser.Alpaca.metainfo.xml.in:328
 msgid "Updated Ollama to v0.3.11"
 msgstr "Ollama v0.3.11 এ আপডেট করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:305
+#: data/com.jeffser.Alpaca.metainfo.xml.in:329
 msgid "A lot of new models provided by Ollama repository"
 msgstr "Ollama রিপোজিটরি থেকে অনেক নতুন মডেল সরবরাহ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:309
+#: data/com.jeffser.Alpaca.metainfo.xml.in:333
 msgid ""
 "Fixed text inside model manager when the accessibility option 'large text' "
 "is on"
@@ -512,411 +568,411 @@ msgstr ""
 "অ্যাক্সেসিবিলিটি অপশন 'লার্জ টেক্সট' চালু থাকলে মডেল ম্যানেজারের ভিতরের টেক্সট ঠিক "
 "করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:310
+#: data/com.jeffser.Alpaca.metainfo.xml.in:334
 msgid "Fixed image recognition on unsupported models"
 msgstr "অসমর্থিত মডেলে ইমেজ সনাক্তকরণ ঠিক করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:319
+#: data/com.jeffser.Alpaca.metainfo.xml.in:343
 msgid "Fixed spinner not hiding if the back end fails"
 msgstr "ব্যাক এন্ড ব্যর্থ হলে স্পিনার লুকানো ঠিক করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:320
+#: data/com.jeffser.Alpaca.metainfo.xml.in:344
 msgid "Fixed image recognition with local images"
 msgstr "স্থানীয় চিত্রের সাথে চিত্র সনাক্তকরণ ঠিক করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:321
+#: data/com.jeffser.Alpaca.metainfo.xml.in:345
 msgid "Changed appearance of delete / stop model buttons"
 msgstr "মুছে ফেলা / মডেল বন্ধ করার বোতামের চেহারা পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:322
+#: data/com.jeffser.Alpaca.metainfo.xml.in:346
 msgid "Fixed stop button crashing the app"
 msgstr "স্টপ বোতাম অ্যাপটি ক্র্যাশ করা ঠিক করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:326
+#: data/com.jeffser.Alpaca.metainfo.xml.in:350
 msgid "Made sidebar resize a little when the window is smaller"
 msgstr "উইন্ডো ছোট হলে সাইডবারটি একটু আকার পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:327
+#: data/com.jeffser.Alpaca.metainfo.xml.in:351
 msgid "Instant launch"
 msgstr "তাত্ক্ষণিক চালু"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:336
+#: data/com.jeffser.Alpaca.metainfo.xml.in:360
 msgid "Fixed error on first run (welcome dialog)"
 msgstr "প্রথম চালানোর সময় ত্রুটি ঠিক করা হয়েছে (স্বাগত সংলাপ)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:337
+#: data/com.jeffser.Alpaca.metainfo.xml.in:361
 msgid "Fixed checker for Ollama instance (used on system packages)"
 msgstr "সিস্টেম প্যাকেজে ব্যবহৃত ওলামা ইনস্ট্যান্সের জন্য চেকার ঠিক করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:346
+#: data/com.jeffser.Alpaca.metainfo.xml.in:370
 msgid "Fixed 'clear chat' option"
 msgstr "চ্যাট পরিষ্কার করার বিকল্পটি ঠিক করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:347
+#: data/com.jeffser.Alpaca.metainfo.xml.in:371
 msgid "Fixed welcome dialog causing the local instance to not launch"
 msgstr "স্থানীয় ইনস্ট্যান্সটি চালু না করার কারণে স্বাগত সংলাপটি ঠিক করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:348
+#: data/com.jeffser.Alpaca.metainfo.xml.in:372
 msgid "Fixed support for AMD GPUs"
 msgstr "এএমডি জিপিইউ-এর জন্য সমর্থন ঠিক করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:357
+#: data/com.jeffser.Alpaca.metainfo.xml.in:381
 msgid "Model, message and chat systems have been rewritten"
 msgstr "মডেল, বার্তা এবং চ্যাট সিস্টেমগুলি পুনরায় লেখা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:358
+#: data/com.jeffser.Alpaca.metainfo.xml.in:382
 msgid "New models are available"
 msgstr "নতুন মডেলগুলি উপলব্ধ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:359
+#: data/com.jeffser.Alpaca.metainfo.xml.in:383
 msgid "Ollama updated to v0.3.9"
 msgstr "অল্লামা v0.3.9 এ আপডেট করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:360
+#: data/com.jeffser.Alpaca.metainfo.xml.in:384
 msgid "Added support for multiple chat generations simultaneously"
 msgstr "একই সাথে একাধিক চ্যাট জেনারেশনের জন্য সমর্থন যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:361
+#: data/com.jeffser.Alpaca.metainfo.xml.in:385
 msgid "Added experimental AMD GPU support"
 msgstr "পরীক্ষামূলক AMD GPU সমর্থন যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:362
+#: data/com.jeffser.Alpaca.metainfo.xml.in:386
 msgid "Added message loading spinner and new message indicator to chat tab"
 msgstr "চ্যাট ট্যাবে বার্তা লোডিং স্পিনার এবং নতুন বার্তা ইন্ডিকেটর যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:363
+#: data/com.jeffser.Alpaca.metainfo.xml.in:387
 msgid "Added animations"
 msgstr "অ্যানিমেশন যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:364
+#: data/com.jeffser.Alpaca.metainfo.xml.in:388
 msgid "Changed model manager / model selector appearance"
 msgstr "মডেল ম্যানেজার / মডেল সিলেক্টরের চেহারা পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:365
+#: data/com.jeffser.Alpaca.metainfo.xml.in:389
 msgid "Changed message appearance"
 msgstr "বার্তার চেহারা পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:366
+#: data/com.jeffser.Alpaca.metainfo.xml.in:390
 msgid "Added markdown and code blocks to user messages"
 msgstr "ব্যবহারকারীর বার্তায় মার্কডাউন এবং কোড ব্লক যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:367
+#: data/com.jeffser.Alpaca.metainfo.xml.in:391
 msgid "Added loading dialog at launch so the app opens faster"
 msgstr "অ্যাপটি দ্রুত খোলার জন্য লোডিং ডায়ালগ যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:368
+#: data/com.jeffser.Alpaca.metainfo.xml.in:392
 msgid "Added warning when device is on 'battery saver' mode"
 msgstr "ডিভাইস 'ব্যাটারি সেভার' মোডে থাকলে সতর্কতা যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:369
+#: data/com.jeffser.Alpaca.metainfo.xml.in:393
 msgid "Added inactivity timer to integrated instance"
 msgstr "একত্রিত উদাহরণে নিষ্ক্রিয়তা টাইমার যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:372
+#: data/com.jeffser.Alpaca.metainfo.xml.in:396
 msgid "The chat is now scrolled to the bottom when it's changed"
 msgstr "চ্যাটটি এখন নীচে স্ক্রোল করা হয় যখন এটি পরিবর্তিত হয়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:373
+#: data/com.jeffser.Alpaca.metainfo.xml.in:397
 msgid "Better handling of focus on messages"
 msgstr "বার্তাগুলিতে ফোকাসের আরও ভাল পরিচালনা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:374
+#: data/com.jeffser.Alpaca.metainfo.xml.in:398
 msgid "Better general performance on the app"
 msgstr "অ্যাপে আরও ভাল সাধারণ কর্মক্ষমতা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:383
+#: data/com.jeffser.Alpaca.metainfo.xml.in:407
 msgid "New duplicate chat option"
 msgstr "নতুন ডুপ্লিকেট চ্যাট বিকল্প"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:384
+#: data/com.jeffser.Alpaca.metainfo.xml.in:408
 msgid "Changed model selector appearance"
 msgstr "মডেল সিলেক্টরের চেহারা পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:385
+#: data/com.jeffser.Alpaca.metainfo.xml.in:409
 msgid "Message entry is focused on launch and chat change"
 msgstr "লঞ্চ এবং চ্যাট পরিবর্তনের সময় মেসেজ এন্ট্রি ফোকাস করা হয়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:386
+#: data/com.jeffser.Alpaca.metainfo.xml.in:410
 msgid "Message is focused when it's being edited"
 msgstr "মেসেজ সম্পাদনা করার সময় ফোকাস করা হয়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:387
+#: data/com.jeffser.Alpaca.metainfo.xml.in:411
 msgid "Added loading spinner when regenerating a message"
 msgstr "মেসেজ পুনরায় তৈরি করার সময় লোডিং স্পিনার যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:388
+#: data/com.jeffser.Alpaca.metainfo.xml.in:412
 msgid "Added Ollama debugging to 'About Alpaca' dialog"
 msgstr "সম্পর্কে আলপাকা সংলাপে Ollama ডিবাগিং যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:389
+#: data/com.jeffser.Alpaca.metainfo.xml.in:413
 msgid "Changed YouTube transcription dialog appearance and behavior"
 msgstr "ইউটিউব ট্রান্সক্রিপশন সংলাপের চেহারা এবং আচরণ পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:393
+#: data/com.jeffser.Alpaca.metainfo.xml.in:417
 msgid "CTRL+W and CTRL+Q stops local instance before closing the app"
 msgstr "CTRL+W এবং CTRL+Q অ্যাপটি বন্ধ করার আগে স্থানীয় ইনস্ট্যান্স বন্ধ করে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:394
+#: data/com.jeffser.Alpaca.metainfo.xml.in:418
 msgid "Changed appearance of 'Open Model Manager' button on welcome screen"
 msgstr "ওপেন মডেল ম্যানেজার বাটনের চেহারা পরিবর্তন করা হয়েছে ওয়েলকাম স্ক্রীনে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:395
+#: data/com.jeffser.Alpaca.metainfo.xml.in:419
 msgid "Fixed message generation not working consistently"
 msgstr "মেসেজ তৈরি করা সমস্যা সমাধান করা হয়েছে যা নির্ভরযোগ্যভাবে কাজ করছিল না"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:396
+#: data/com.jeffser.Alpaca.metainfo.xml.in:420
 msgid "Fixed message edition not working consistently"
 msgstr "মেসেজ সম্পাদনা করা সমস্যা সমাধান করা হয়েছে যা নির্ভরযোগ্যভাবে কাজ করছিল না"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:405
+#: data/com.jeffser.Alpaca.metainfo.xml.in:429
 msgid "Model manager opens faster"
 msgstr "মডেল ম্যানেজার দ্রুত খোলে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:406
+#: data/com.jeffser.Alpaca.metainfo.xml.in:430
 msgid "Delete chat option in secondary menu"
 msgstr "গৌণ মেনুতে চ্যাট মুছে ফেলার বিকল্প"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:407
+#: data/com.jeffser.Alpaca.metainfo.xml.in:431
 msgid "New model selector popup"
 msgstr "নতুন মডেল সিলেক্টর পপআপ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:408
+#: data/com.jeffser.Alpaca.metainfo.xml.in:432
 msgid "Standard shortcuts"
 msgstr "স্ট্যান্ডার্ড শর্টকাট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:409
+#: data/com.jeffser.Alpaca.metainfo.xml.in:433
 msgid "Model manager is navigable with keyboard"
 msgstr "মডেল ম্যানেজার কীবোর্ড দিয়ে নেভিগেট করা যায়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:410
+#: data/com.jeffser.Alpaca.metainfo.xml.in:434
 msgid "Changed sidebar collapsing behavior"
 msgstr "সাইডবার পতনের আচরণ পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:411
+#: data/com.jeffser.Alpaca.metainfo.xml.in:435
 msgid "Focus indicators on messages"
 msgstr "বার্তাগুলিতে ফোকাস ইন্ডিকেটর"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:412
+#: data/com.jeffser.Alpaca.metainfo.xml.in:436
 msgid "Welcome screen"
 msgstr "স্বাগত স্ক্রীন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:413
+#: data/com.jeffser.Alpaca.metainfo.xml.in:437
 msgid "Give message entry focus at launch"
 msgstr "লঞ্চে বার্তা এন্ট্রি ফোকাস দিন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:414
+#: data/com.jeffser.Alpaca.metainfo.xml.in:438
 msgid "Generally better code"
 msgstr "সাধারণত ভাল কোড"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:418
+#: data/com.jeffser.Alpaca.metainfo.xml.in:442
 msgid "Better width for dialogs"
 msgstr "ডায়ালগের জন্য আরও ভাল প্রস্থ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:419
+#: data/com.jeffser.Alpaca.metainfo.xml.in:443
 msgid "Better compatibility with screen readers"
 msgstr "স্ক্রীন রিডারের সাথে আরও ভাল সামঞ্জস্য"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:420
+#: data/com.jeffser.Alpaca.metainfo.xml.in:444
 msgid "Fixed message regenerator"
 msgstr "বার্তা পুনর্জন্মের সমস্যা সংশোধন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:421
+#: data/com.jeffser.Alpaca.metainfo.xml.in:445
 msgid "Removed 'Featured models' from welcome dialog"
 msgstr "স্বাগত ডায়ালগ থেকে 'ফিচার্ড মডেল' অপসারণ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:422
+#: data/com.jeffser.Alpaca.metainfo.xml.in:446
 msgid "Added default buttons to dialogs"
 msgstr "ডায়ালগে ডিফল্ট বাটন যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:423
+#: data/com.jeffser.Alpaca.metainfo.xml.in:447
 msgid "Fixed import / export of chats"
 msgstr "চ্যাটের আমদানি / রপ্তানি সমস্যা সংশোধন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:424
+#: data/com.jeffser.Alpaca.metainfo.xml.in:448
 msgid "Changed Python2 title to Python on code blocks"
 msgstr "কোড ব্লকে পাইথন 2 শিরোনামকে পাইথনে পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:425
+#: data/com.jeffser.Alpaca.metainfo.xml.in:449
 msgid ""
 "Prevent regeneration of title when the user changed it to a custom title"
 msgstr ""
 "ব্যবহারকারী এটিকে একটি কাস্টম শিরোনামে পরিবর্তন করলে শিরোনামের পুনর্জন্ম প্রতিরোধ "
 "করুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:426
+#: data/com.jeffser.Alpaca.metainfo.xml.in:450
 msgid "Show date on stopped messages"
 msgstr "থামানো বার্তাগুলিতে তারিখ দেখান"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:427
+#: data/com.jeffser.Alpaca.metainfo.xml.in:451
 msgid "Fix clear chat error"
 msgstr "ক্লিয়ার চ্যাট ত্রুটি সংশোধন করুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:436
+#: data/com.jeffser.Alpaca.metainfo.xml.in:460
 msgid "Changed shortcuts to standards"
 msgstr "স্ট্যান্ডার্ডের সাথে শর্টকাট পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:437
+#: data/com.jeffser.Alpaca.metainfo.xml.in:461
 msgid "Moved 'Manage Models' button to primary menu"
 msgstr "প্রাথমিক মেনুতে 'মডেল ব্যবস্থাপনা' বাটন স্থানান্তর করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:438
-#: data/com.jeffser.Alpaca.metainfo.xml.in:460
+#: data/com.jeffser.Alpaca.metainfo.xml.in:462
+#: data/com.jeffser.Alpaca.metainfo.xml.in:484
 msgid "Stable support for GGUF model files"
 msgstr "GGUF মডেল ফাইলের জন্য স্থিতিশীল সহায়তা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:439
-#: data/com.jeffser.Alpaca.metainfo.xml.in:714
+#: data/com.jeffser.Alpaca.metainfo.xml.in:463
+#: data/com.jeffser.Alpaca.metainfo.xml.in:738
 msgid "General optimizations"
 msgstr "সাধারণ অপ্টিমাইজেশন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:443
+#: data/com.jeffser.Alpaca.metainfo.xml.in:467
 msgid "Better handling of enter key (important for Japanese input)"
 msgstr "জাপানি ইনপুটের জন্য এন্টার কীর উন্নত হ্যান্ডলিং"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:444
+#: data/com.jeffser.Alpaca.metainfo.xml.in:468
 msgid "Removed sponsor dialog"
 msgstr "স্পনসর ডায়ালগ সরানো হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:445
+#: data/com.jeffser.Alpaca.metainfo.xml.in:469
 msgid "Added sponsor link in about dialog"
 msgstr "সম্পর্কে ডায়ালগে স্পনসর লিংক যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:446
+#: data/com.jeffser.Alpaca.metainfo.xml.in:470
 msgid "Changed window and elements dimensions"
 msgstr "উইন্ডো এবং উপাদানগুলির মাত্রা পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:447
+#: data/com.jeffser.Alpaca.metainfo.xml.in:471
 msgid "Selected model changes when entering model manager"
 msgstr "মডেল ম্যানেজারে প্রবেশ করার সময় নির্বাচিত মডেল পরিবর্তন করা হয়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:448
+#: data/com.jeffser.Alpaca.metainfo.xml.in:472
 msgid "Better image tooltips"
 msgstr "চিত্র টুলটিপস উন্নত করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:449
+#: data/com.jeffser.Alpaca.metainfo.xml.in:473
 msgid "GGUF Support"
 msgstr "GGUF সমর্থন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:458
+#: data/com.jeffser.Alpaca.metainfo.xml.in:482
 msgid "Regenerate any response, even if they are incomplete"
 msgstr "সম্পূর্ণ না হলেও যে কোনও উত্তর পুনরুত্পাদন করুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:459
+#: data/com.jeffser.Alpaca.metainfo.xml.in:483
 msgid "Support for pulling models by name:tag"
 msgstr "নাম:ট্যাগ দ্বারা মডেল টানার জন্য সহায়তা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:461
+#: data/com.jeffser.Alpaca.metainfo.xml.in:485
 msgid "Restored sidebar toggle button"
 msgstr "সাইডবার টগল বোতাম পুনরুদ্ধার করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:465
+#: data/com.jeffser.Alpaca.metainfo.xml.in:489
 msgid "Reverted back to standard styles"
 msgstr "মানক শৈলীতে ফিরে আসা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:466
+#: data/com.jeffser.Alpaca.metainfo.xml.in:490
 msgid "Fixed generated titles having \"'S\" for some reason"
 msgstr "কোনও কারণে \"'S\" থাকা উত্পাদিত শিরোনামগুলি সংশোধন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:467
+#: data/com.jeffser.Alpaca.metainfo.xml.in:491
 msgid "Changed min width for model dropdown"
 msgstr "মডেল ড্রপডাউনের জন্য সর্বনিম্ন প্রস্থ পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:468
+#: data/com.jeffser.Alpaca.metainfo.xml.in:492
 msgid "Changed message entry shadow"
 msgstr "বার্তা প্রবেশ ছায়া পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:469
+#: data/com.jeffser.Alpaca.metainfo.xml.in:493
 msgid "The last model used is now restored when the user changes chat"
 msgstr "ব্যবহারকারী চ্যাট পরিবর্তন করলে সর্বশেষ ব্যবহৃত মডেলটি এখন পুনরুদ্ধার করা হয়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:470
+#: data/com.jeffser.Alpaca.metainfo.xml.in:494
 msgid "Better check for message finishing"
 msgstr "বার্তা সমাপ্তির জন্য উন্নত পরীক্ষা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:479
+#: data/com.jeffser.Alpaca.metainfo.xml.in:503
 msgid "Added table rendering (Thanks Nokse)"
 msgstr "নকসের ধন্যবাদ, টেবিল রেন্ডারিং যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:483
+#: data/com.jeffser.Alpaca.metainfo.xml.in:507
 msgid "Made support dialog more common"
 msgstr "সাপোর্ট ডায়ালগকে আরও সাধারণ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:484
+#: data/com.jeffser.Alpaca.metainfo.xml.in:508
 msgid ""
 "Dialog title on tag chooser when downloading models didn't display properly"
 msgstr ""
 "মডেল ডাউনলোড করার সময় ট্যাগ চয়সারের ডায়ালগ শিরোনাম সঠিকভাবে প্রদর্শিত হয়নি"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:485
+#: data/com.jeffser.Alpaca.metainfo.xml.in:509
 msgid "Prevent chat generation from generating a title with multiple lines"
 msgstr "একাধিক লাইন সহ শিরোনাম তৈরি করা থেকে চ্যাট জেনারেশন বন্ধ করুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:494
+#: data/com.jeffser.Alpaca.metainfo.xml.in:518
 msgid "Bearer Token entry on connection error dialog"
 msgstr "কনেকশন এরর ডায়ালগে বিয়ারার টোকেন এন্ট্রি"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:495
+#: data/com.jeffser.Alpaca.metainfo.xml.in:519
 msgid "Small appearance changes"
 msgstr "ছোট আকারের পরিবর্তন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:496
+#: data/com.jeffser.Alpaca.metainfo.xml.in:520
 msgid "Compatibility with code blocks without explicit language"
 msgstr "স্পষ্ট ভাষা ছাড়া কোড ব্লকগুলির সাথে সামঞ্জস্য"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:497
+#: data/com.jeffser.Alpaca.metainfo.xml.in:521
 msgid "Rare, optional and dismissible support dialog"
 msgstr "বিরল, ঐচ্ছিক এবং বাতিলযোগ্য সাপোর্ট ডায়ালগ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:501
+#: data/com.jeffser.Alpaca.metainfo.xml.in:525
 msgid "Date format for Simplified Chinese translation"
 msgstr "সরলীকৃত চাইনিজ অনুবাদের জন্য তারিখ ফরম্যাট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:502
+#: data/com.jeffser.Alpaca.metainfo.xml.in:526
 msgid "Bug with unsupported localizations"
 msgstr "অসমর্থিত স্থানীয়করণের সাথে বাগ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:503
+#: data/com.jeffser.Alpaca.metainfo.xml.in:527
 msgid "Min height being too large to be used on mobile"
 msgstr "মোবাইলে ব্যবহারের জন্য ন্যূনতম উচ্চতা খুব বড়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:504
+#: data/com.jeffser.Alpaca.metainfo.xml.in:528
 msgid "Remote connection checker bug"
 msgstr "রিমোট কনেকশন চেকার বাগ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:513
+#: data/com.jeffser.Alpaca.metainfo.xml.in:537
 msgid "Models with capital letters on their tag don't work"
 msgstr "তাদের ট্যাগে বড় হাতের অক্ষর থাকা মডেলগুলি কাজ করে না"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:514
+#: data/com.jeffser.Alpaca.metainfo.xml.in:538
 msgid "Ollama fails to launch on some systems"
 msgstr "কিছু সিস্টেমে Ollama চালু করতে ব্যর্থ হয়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:515
+#: data/com.jeffser.Alpaca.metainfo.xml.in:539
 msgid "YouTube transcripts are not being saved in the right TMP directory"
 msgstr "ইউটিউব ট্রান্সক্রিপ্টগুলি সঠিক TMP ডিরেক্টরিতে সংরক্ষিত হচ্ছে না"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:519
+#: data/com.jeffser.Alpaca.metainfo.xml.in:543
 msgid "Debug messages are now shown on the 'About Alpaca' dialog"
 msgstr "ডিবাগ বার্তাগুলি এখন 'About Alpaca' ডায়ালগে দেখানো হচ্ছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:520
+#: data/com.jeffser.Alpaca.metainfo.xml.in:544
 msgid "Updated Ollama to v0.3.0 (new models)"
 msgstr "Ollama আপডেট করা হয়েছে v0.3.0 (নতুন মডেল)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:529
+#: data/com.jeffser.Alpaca.metainfo.xml.in:553
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
 msgstr ""
 "তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:530
+#: data/com.jeffser.Alpaca.metainfo.xml.in:554
 msgid "Better connection check for Ollama"
 msgstr "ওল্লামা এর জন্য ভাল কনেকশন চেক"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:537
+#: data/com.jeffser.Alpaca.metainfo.xml.in:561
 msgid "Stable Release"
 msgstr "স্থিতিশীল রিলিজ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:538
+#: data/com.jeffser.Alpaca.metainfo.xml.in:562
 msgid ""
 "The new icon was made by Tobias Bernard over the Gnome Gitlab, thanks for "
 "the great icon!"
@@ -924,54 +980,54 @@ msgstr ""
 "টোবিয়াস বার্নার্ড দ্বারা নতুন আইকনটি জিনোম গিটল্যাব এর উপরে তৈরি করা হয়েছে, "
 "দুর্দান্ত আইকনের জন্য ধন্যবাদ!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:539
+#: data/com.jeffser.Alpaca.metainfo.xml.in:563
 msgid "Features and fixes"
 msgstr "বৈশিষ্ট্য এবং সংশোধন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:541
+#: data/com.jeffser.Alpaca.metainfo.xml.in:565
 msgid "Updated Ollama instance to 0.2.8"
 msgstr "অল্লামা ইনস্ট্যান্স ০.২.৮ এ আপডেট করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:542
+#: data/com.jeffser.Alpaca.metainfo.xml.in:566
 msgid "Better model selector"
 msgstr "আরও ভালো মডেল নির্বাচক"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:543
+#: data/com.jeffser.Alpaca.metainfo.xml.in:567
 msgid "Model manager redesign"
 msgstr "মডেল ম্যানেজার পুনঃনকশা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:544
+#: data/com.jeffser.Alpaca.metainfo.xml.in:568
 msgid "Better tag selector when pulling a model"
 msgstr "মডেল টানার সময় আরও ভালো ট্যাগ নির্বাচক"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:545
+#: data/com.jeffser.Alpaca.metainfo.xml.in:569
 msgid "Model search"
 msgstr "মডেল অনুসন্ধান"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:546
+#: data/com.jeffser.Alpaca.metainfo.xml.in:570
 msgid "Added support for bearer tokens on remote instances"
 msgstr "দূরবর্তী ইনস্ট্যান্সে বেয়ারার টোকেনের জন্য সমর্থন যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:547
+#: data/com.jeffser.Alpaca.metainfo.xml.in:571
 msgid "Preferences dialog redesign"
 msgstr "পছন্দ ডায়ালগ পুনঃনকশা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:548
+#: data/com.jeffser.Alpaca.metainfo.xml.in:572
 msgid "Added context menus to interact with a chat"
 msgstr "চ্যাটের সাথে ইন্টারঅ্যাক্ট করার জন্য সংক্ষিপ্ত মেনু যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:549
+#: data/com.jeffser.Alpaca.metainfo.xml.in:573
 msgid "Redesigned primary and secondary menus"
 msgstr "প্রাথমিক এবং গৌণ মেনু পুনঃনকশা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:550
+#: data/com.jeffser.Alpaca.metainfo.xml.in:574
 msgid ""
 "YouTube integration: Paste the URL of a video with a transcript and it will "
 "be added to the prompt"
 msgstr ""
 "ইউটিউব একীকরণ: একটি লিপি সহ ভিডিওর ইউআরএল পেস্ট করুন এবং এটি প্রম্পটে যোগ করা হবে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:551
+#: data/com.jeffser.Alpaca.metainfo.xml.in:575
 msgid ""
 "Website integration (Experimental): Extract the text from the body of a "
 "website by adding it's URL to the prompt"
@@ -979,145 +1035,145 @@ msgstr ""
 "ওয়েবসাইট একীকরণ (পরীক্ষামূলক): প্রম্পটে ইউআরএল যোগ করে ওয়েবসাইটের শরীর থেকে পাঠ্য "
 "নির্যাস করুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:552
+#: data/com.jeffser.Alpaca.metainfo.xml.in:576
 msgid "Chat title generation"
 msgstr "চ্যাট শিরোনাম উৎপাদন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:553
+#: data/com.jeffser.Alpaca.metainfo.xml.in:577
 msgid "Auto resizing of message entry"
 msgstr "বার্তা প্রবেশের স্বয়ংক্রিয় আকার পরিবর্তন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:554
+#: data/com.jeffser.Alpaca.metainfo.xml.in:578
 msgid "Chat notifications"
 msgstr "চ্যাট বিজ্ঞপ্তি"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:555
+#: data/com.jeffser.Alpaca.metainfo.xml.in:579
 msgid "Added indicator when an image is missing"
 msgstr "একটি ছবি অনুপস্থিত থাকলে সূচক যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:556
+#: data/com.jeffser.Alpaca.metainfo.xml.in:580
 msgid "Auto rearrange the order of chats when a message is received"
 msgstr "একটি বার্তা প্রাপ্ত হলে চ্যাটের ক্রম স্বয়ংক্রিয় পুনর্বিন্যাস"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:557
+#: data/com.jeffser.Alpaca.metainfo.xml.in:581
 msgid "Redesigned file preview dialog"
 msgstr "ফাইল পূর্বরূপ ডায়ালগ পুনঃনকশা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:558
+#: data/com.jeffser.Alpaca.metainfo.xml.in:582
 msgid "Credited new contributors"
 msgstr "নতুন অবদানকারীদের কৃতিত্ব দেওয়া হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:559
+#: data/com.jeffser.Alpaca.metainfo.xml.in:583
 msgid "Better stability and optimization"
 msgstr "আরও ভালো স্থিতিশীলতা এবং অপ্টিমাইজেশন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:560
+#: data/com.jeffser.Alpaca.metainfo.xml.in:584
 msgid "Edit messages to change the context of a conversation"
 msgstr "কনভার্সেশনের প্রসঙ্গ পরিবর্তন করার জন্য বার্তা সম্পাদনা করুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:561
+#: data/com.jeffser.Alpaca.metainfo.xml.in:585
 msgid "Added disclaimers when pulling models"
 msgstr "মডেল টানার সময় দাবি যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:562
+#: data/com.jeffser.Alpaca.metainfo.xml.in:586
 msgid "Preview files before sending a message"
 msgstr "বার্তা পাঠানোর আগে ফাইল পূর্বরূপ দেখুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:563
+#: data/com.jeffser.Alpaca.metainfo.xml.in:587
 msgid "Better format for date and time on messages"
 msgstr "বার্তায় তারিখ এবং সময়ের জন্য আরও ভালো ফরম্যাট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:564
+#: data/com.jeffser.Alpaca.metainfo.xml.in:588
 msgid "Error and debug logging on terminal"
 msgstr "টার্মিনালে ত্রুটি এবং ডিবাগ লগিং"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:565
+#: data/com.jeffser.Alpaca.metainfo.xml.in:589
 msgid "Auto-hiding sidebar button"
 msgstr "সাইডবার বাটন স্বয়ংক্রিয় লুকানো"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:566
+#: data/com.jeffser.Alpaca.metainfo.xml.in:590
 msgid "Various UI tweaks"
 msgstr "বিভিন্ন ইউআই টুইকস"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:568
+#: data/com.jeffser.Alpaca.metainfo.xml.in:592
 msgid "New Models"
 msgstr "নতুন মডেল"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:570
+#: data/com.jeffser.Alpaca.metainfo.xml.in:594
 msgid "Gemma2"
 msgstr "জেমা 2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:571
+#: data/com.jeffser.Alpaca.metainfo.xml.in:595
 msgid "GLM4"
 msgstr "জিএলএম 4"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:572
+#: data/com.jeffser.Alpaca.metainfo.xml.in:596
 msgid "Codegeex4"
 msgstr "কোডজিক্স 4"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:573
+#: data/com.jeffser.Alpaca.metainfo.xml.in:597
 msgid "InternLM2"
 msgstr "ইন্টার্নএলএম 2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:574
+#: data/com.jeffser.Alpaca.metainfo.xml.in:598
 msgid "Llama3-groq-tool-use"
 msgstr "ল্লামা 3-গ্রোক-টুল-ব্যবহার"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:575
+#: data/com.jeffser.Alpaca.metainfo.xml.in:599
 msgid "Mathstral"
 msgstr "ম্যাথস্ট্রাল"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:576
+#: data/com.jeffser.Alpaca.metainfo.xml.in:600
 msgid "Mistral-nemo"
 msgstr "মিস্ট্রাল-নেমো"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:577
+#: data/com.jeffser.Alpaca.metainfo.xml.in:601
 msgid "Firefunction-v2"
 msgstr "ফায়ারফাংশন-ভি 2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:578
+#: data/com.jeffser.Alpaca.metainfo.xml.in:602
 msgid "Nuextract"
 msgstr "নুএক্সট্র্যাক্ট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:580
+#: data/com.jeffser.Alpaca.metainfo.xml.in:604
 msgid "Translations"
 msgstr "অনুবাদ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:581
+#: data/com.jeffser.Alpaca.metainfo.xml.in:605
 msgid ""
 "These are all the available translations on 1.0.0, thanks to all the "
 "contributors!"
 msgstr "এগুলি 1.0.0 এর উপলব্ধ সমস্ত অনুবাদ, সমস্ত অবদানকারীদের ধন্যবাদ!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:583
+#: data/com.jeffser.Alpaca.metainfo.xml.in:607
 msgid "Russian: Alex K"
 msgstr "রাশিয়ান: আলেক্স কে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:584
+#: data/com.jeffser.Alpaca.metainfo.xml.in:608
 msgid "Spanish: Jeffser"
 msgstr "স্প্যানিশ: জেফসার"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:585
+#: data/com.jeffser.Alpaca.metainfo.xml.in:609
 msgid "Brazilian Portuguese: Daimar Stein"
 msgstr "ব্রাজিলিয়ান পর্তুগিজ: ডাইমার স্টাইন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:586
+#: data/com.jeffser.Alpaca.metainfo.xml.in:610
 msgid "French: Louis Chauvet-Villaret"
 msgstr "ফ্রেন্চ: লুই শাভে-ভিলারেট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:587
+#: data/com.jeffser.Alpaca.metainfo.xml.in:611
 msgid "Norwegian: CounterFlow64"
 msgstr "নরওয়েজিয়ান: কাউন্টারফ্লো 64"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:588
+#: data/com.jeffser.Alpaca.metainfo.xml.in:612
 msgid "Bengali: Aritra Saha"
 msgstr "বাংলা: অরিত্র সাহা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:589
+#: data/com.jeffser.Alpaca.metainfo.xml.in:613
 msgid "Simplified Chinese: Yuehao Sui"
 msgstr "সরলীকৃত চাইনিজ: ইউহাও সুই"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:597
+#: data/com.jeffser.Alpaca.metainfo.xml.in:621
 msgid ""
 "Removed DOCX compatibility temporally due to error with python-lxml "
 "dependency"
@@ -1125,32 +1181,32 @@ msgstr ""
 "সাময়িকভাবে python-lxml নির্ভরশীলতার সাথে ত্রুটির কারণে DOCX সামঞ্জস্যতা সরিয়ে "
 "দেওয়া হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:603
-#: data/com.jeffser.Alpaca.metainfo.xml.in:633
-#: data/com.jeffser.Alpaca.metainfo.xml.in:654
-#: data/com.jeffser.Alpaca.metainfo.xml.in:859
-#: data/com.jeffser.Alpaca.metainfo.xml.in:916
+#: data/com.jeffser.Alpaca.metainfo.xml.in:627
+#: data/com.jeffser.Alpaca.metainfo.xml.in:657
+#: data/com.jeffser.Alpaca.metainfo.xml.in:678
+#: data/com.jeffser.Alpaca.metainfo.xml.in:883
+#: data/com.jeffser.Alpaca.metainfo.xml.in:940
 msgid "Big Update"
 msgstr "বড় আপডেট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:605
+#: data/com.jeffser.Alpaca.metainfo.xml.in:629
 msgid "Added compatibility for PDF"
 msgstr "PDF এর জন্য সামঞ্জস্যতা যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:606
+#: data/com.jeffser.Alpaca.metainfo.xml.in:630
 msgid "Added compatibility for DOCX"
 msgstr "DOCX এর জন্য সামঞ্জস্যতা যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:607
+#: data/com.jeffser.Alpaca.metainfo.xml.in:631
 msgid "Merged 'file attachment' menu into one button"
 msgstr "একটি বাটনে 'ফাইল সংযুক্তি' মেনু একীভূত করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:614
-#: data/com.jeffser.Alpaca.metainfo.xml.in:807
+#: data/com.jeffser.Alpaca.metainfo.xml.in:638
+#: data/com.jeffser.Alpaca.metainfo.xml.in:831
 msgid "Quick Fix"
 msgstr "দ্রুত সংশোধন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:615
+#: data/com.jeffser.Alpaca.metainfo.xml.in:639
 msgid ""
 "There were some errors when transitioning from the old version of chats to "
 "the new version. I apologize if this caused any corruption in your chat "
@@ -1160,186 +1216,186 @@ msgstr ""
 "আপনার চ্যাটে ইতিহাস কোনো ত্রুটি হলে আমি ক্ষমাপ্রার্থী। এটিই একমাত্র সময় হওয়া উচিত "
 "যে এই ধরনের পরিবর্তনের প্রয়োজন।"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:621
-#: data/com.jeffser.Alpaca.metainfo.xml.in:773
+#: data/com.jeffser.Alpaca.metainfo.xml.in:645
+#: data/com.jeffser.Alpaca.metainfo.xml.in:797
 msgid "Huge Update"
 msgstr "বিশাল আপডেট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:623
+#: data/com.jeffser.Alpaca.metainfo.xml.in:647
 msgid "Added: Support for plain text files"
 msgstr "সংযুক্ত করা হয়েছে: প্লেইন টেক্সট ফাইলের জন্য সমর্থন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:624
+#: data/com.jeffser.Alpaca.metainfo.xml.in:648
 msgid "Added: New backend system for storing messages"
 msgstr "সংযুক্ত করা হয়েছে: বার্তা সংরক্ষণের জন্য নতুন ব্যাকএন্ড সিস্টেম"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:625
+#: data/com.jeffser.Alpaca.metainfo.xml.in:649
 msgid "Added: Support for changing Ollama's overrides"
 msgstr "সংযুক্ত করা হয়েছে: ওল্লামার ওভাররাইড পরিবর্তন করার জন্য সমর্থন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:626
+#: data/com.jeffser.Alpaca.metainfo.xml.in:650
 msgid "General Optimization"
 msgstr "সাধারণ অপ্টিমাইজেশান"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:635
+#: data/com.jeffser.Alpaca.metainfo.xml.in:659
 msgid "Added: Support for GGUF models (experimental)"
 msgstr "সংযুক্ত করা হয়েছে: GGUF মডেলের জন্য সমর্থন (পরীক্ষামূলক)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:636
+#: data/com.jeffser.Alpaca.metainfo.xml.in:660
 msgid "Added: Support for customization and creation of models"
 msgstr "সংযুক্ত করা হয়েছে: কাস্টমাইজেশন এবং মডেল তৈরির জন্য সমর্থন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:637
+#: data/com.jeffser.Alpaca.metainfo.xml.in:661
 msgid "Fixed: Icons don't appear on non Gnome systems"
 msgstr "সংশোধন: নন জিনোম সিস্টেমে আইকন প্রদর্শিত হয় না"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:638
+#: data/com.jeffser.Alpaca.metainfo.xml.in:662
 msgid "Update Ollama to v0.1.39"
 msgstr "ওল্লামাকে v0.1.39-এ আপডেট করুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:647
+#: data/com.jeffser.Alpaca.metainfo.xml.in:671
 msgid ""
 "Fixed: app didn't open if models tweaks wasn't present in the config files"
 msgstr "সংশোধন: কনফিগার ফাইলগুলিতে মডেলের টুইকগুলি উপস্থিত না থাকলে অ্যাপটি খুলবে না"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:656
+#: data/com.jeffser.Alpaca.metainfo.xml.in:680
 msgid "Changed multiple icons (paper airplane for the send button)"
 msgstr "একাধিক আইকন পরিবর্তন করা হয়েছে (পাঠানো বোতামের জন্য কাগজের বিমান)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:657
+#: data/com.jeffser.Alpaca.metainfo.xml.in:681
 msgid "Combined export / import chat buttons into a menu"
 msgstr "একটি মেনুতে রপ্তানি/আমদানি চ্যাট বোতামগুলিকে সংযুক্ত করুন৷"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:658
+#: data/com.jeffser.Alpaca.metainfo.xml.in:682
 msgid "Added 'model tweaks' (temperature, seed, keep_alive)"
 msgstr "'মডেল টুইক' যোগ করা হয়েছে (তাপমাত্রা, বীজ, জীবিত_রাখা)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:659
+#: data/com.jeffser.Alpaca.metainfo.xml.in:683
 msgid "Fixed send / stop button"
 msgstr "ঠিক করা হয়েছে পাঠান/স্টপ বোতাম"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:660
+#: data/com.jeffser.Alpaca.metainfo.xml.in:684
 msgid "Fixed app not checking if remote connection works when starting"
 msgstr ""
 "ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:667
+#: data/com.jeffser.Alpaca.metainfo.xml.in:691
 msgid "Daily Update"
 msgstr "প্রতিদিনের আপডেট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:669
+#: data/com.jeffser.Alpaca.metainfo.xml.in:693
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
 msgstr ""
 "চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:670
+#: data/com.jeffser.Alpaca.metainfo.xml.in:694
 msgid "New shortcut for creating a chat (CTRL+N)"
 msgstr "একটি চ্যাট তৈরির জন্য নতুন শর্টকাট (CTRL+N)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:671
+#: data/com.jeffser.Alpaca.metainfo.xml.in:695
 msgid "New message entry design"
 msgstr "নতুন বার্তা লেখা নকশা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:672
+#: data/com.jeffser.Alpaca.metainfo.xml.in:696
 msgid "Fixed: Can't rename the same chat multiple times"
 msgstr "ঠিক করা হয়েছে: একই চ্যাটের একাধিকবার নাম পরিবর্তন করা যাবে না"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:679
+#: data/com.jeffser.Alpaca.metainfo.xml.in:703
 msgid "The fix"
 msgstr "ঠিক করা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:681
+#: data/com.jeffser.Alpaca.metainfo.xml.in:705
 msgid ""
 "Fixed: Ollama instance keeps running on the background even when it is "
 "disabled"
 msgstr ""
 "ঠিক করা হয়েছে: ওল্লামা ইনস্ট্যান্স ব্যাকগ্রাউন্ডে চলতে থাকে এমনকি যখন এটি অকেজো"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:682
+#: data/com.jeffser.Alpaca.metainfo.xml.in:706
 msgid "Fixed: Can't pull models on the integrated instance"
 msgstr "সংশোধন: ইন্টিগ্রেটেড ইনস্ট্যান্সে মডেল টানতে পারে না"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:689
+#: data/com.jeffser.Alpaca.metainfo.xml.in:713
 msgid "Quick tweaks"
 msgstr "দ্রুত টুইকস"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:691
+#: data/com.jeffser.Alpaca.metainfo.xml.in:715
 msgid "Added progress bar to models that are being pulled"
 msgstr "টানা হচ্ছে এমন মডেলগুলিতে অগ্রগতি বার যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:692
+#: data/com.jeffser.Alpaca.metainfo.xml.in:716
 msgid "Added size to tags when pulling a model"
 msgstr "একটি মডেল টানা হলে ট্যাগগুলিতে আকার যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:693
+#: data/com.jeffser.Alpaca.metainfo.xml.in:717
 msgid "General optimizations on the background"
 msgstr "পটভূমিতে সাধারণ অপ্টিমাইজেশন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:700
+#: data/com.jeffser.Alpaca.metainfo.xml.in:724
 msgid "Quick fixes"
 msgstr "দ্রুত সংশোধন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:702
+#: data/com.jeffser.Alpaca.metainfo.xml.in:726
 msgid "Fixed: Scroll when message is received"
 msgstr "সংশোধন: Scroll when message is received"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:703
+#: data/com.jeffser.Alpaca.metainfo.xml.in:727
 msgid "Fixed: Content doesn't change when creating a new chat"
 msgstr "সংশোধন: Content doesn't change when creating a new chat"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:704
+#: data/com.jeffser.Alpaca.metainfo.xml.in:728
 msgid "Added 'Featured Models' page on welcome dialog"
 msgstr "স্বাগত ডায়ালগে 'বৈশিষ্ট্যযুক্ত মডেল' পৃষ্ঠা যুক্ত করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:711
+#: data/com.jeffser.Alpaca.metainfo.xml.in:735
 msgid "Nice Update"
 msgstr "সুন্দর আপডেট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:713
+#: data/com.jeffser.Alpaca.metainfo.xml.in:737
 msgid "UI tweaks (Thanks Nokse22)"
 msgstr "ইউআই টুইকস (নোকসে২২ কে ধন্যবাদ)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:715
+#: data/com.jeffser.Alpaca.metainfo.xml.in:739
 msgid "Metadata fixes"
 msgstr "মেটাডেটা সংশোধন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:722
+#: data/com.jeffser.Alpaca.metainfo.xml.in:746
 msgid "Quick fix"
 msgstr "দ্রুত সংশোধন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:724
+#: data/com.jeffser.Alpaca.metainfo.xml.in:748
 msgid "Updated Spanish translation"
 msgstr "স্প্যানিশ অনুবাদ হালনাগাদ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:725
+#: data/com.jeffser.Alpaca.metainfo.xml.in:749
 msgid "Added compatibility for PNG"
 msgstr "পিএনজির জন্য সামঞ্জস্য যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:732
+#: data/com.jeffser.Alpaca.metainfo.xml.in:756
 msgid "New Update"
 msgstr "নতুন আপডেট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:734
+#: data/com.jeffser.Alpaca.metainfo.xml.in:758
 msgid "Updated model list"
 msgstr "আপডেট মডেল তালিকা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:735
+#: data/com.jeffser.Alpaca.metainfo.xml.in:759
 msgid "Added image recognition to more models"
 msgstr "আরও মডেলে চিত্র স্বীকৃতি যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:736
+#: data/com.jeffser.Alpaca.metainfo.xml.in:760
 msgid "Added Brazilian Portuguese translation (Thanks Daimaar Stein)"
 msgstr "ব্রাজিলীয় পর্তুগিজ অনুবাদ যোগ করা হয়েছে (ধন্যবাদ ডাইমার স্টাইন)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:737
+#: data/com.jeffser.Alpaca.metainfo.xml.in:761
 msgid "Refined the general UI (Thanks Nokse22)"
 msgstr "সাধারণ ইউআই পরিশীলিত করা হয়েছে (নোকসে২২ কে ধন্যবাদ)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:738
+#: data/com.jeffser.Alpaca.metainfo.xml.in:762
 msgid "Added 'delete message' feature"
 msgstr "বার্তা মুছে ফেলার বৈশিষ্ট্য যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:739
+#: data/com.jeffser.Alpaca.metainfo.xml.in:763
 msgid ""
 "Added metadata so that software distributors know that the app is compatible "
 "with mobile"
@@ -1347,7 +1403,7 @@ msgstr ""
 "সফটওয়্যার ডিস্ট্রিবিউটররা জানতে পারে যে অ্যাপটি মোবাইলের সাথে সামঞ্জস্যপূর্ণ, এজন্য "
 "মেটাডেটা যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:740
+#: data/com.jeffser.Alpaca.metainfo.xml.in:764
 msgid ""
 "Changed 'send' shortcut to just the return/enter key (to add a new line use "
 "shift+return)"
@@ -1355,105 +1411,105 @@ msgstr ""
 "শুধু রিটার্ন/এন্টার কীতে 'পাঠান' শর্টকাট পরিবর্তন করা হয়েছে (নতুন লাইন যোগ করতে "
 "শিফট+রিটার্ন ব্যবহার করুন)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:747
+#: data/com.jeffser.Alpaca.metainfo.xml.in:771
 msgid "Bug Fixes"
 msgstr "বাগ সংশোধন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:749
+#: data/com.jeffser.Alpaca.metainfo.xml.in:773
 msgid "Fixed: Minor spelling mistake"
 msgstr "সংশোধন: সামান্য বানান ভুল"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:750
+#: data/com.jeffser.Alpaca.metainfo.xml.in:774
 msgid "Added 'mobile' as a supported form factor"
 msgstr "সমর্থিত আকার ফ্যাক্টর হিসাবে 'মোবাইল' যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:751
+#: data/com.jeffser.Alpaca.metainfo.xml.in:775
 msgid "Fixed: 'Connection Error' dialog not working properly"
 msgstr "সংশোধন: 'কনেকশন এরর' ডায়ালগ সঠিকভাবে কাজ করছে না"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:752
+#: data/com.jeffser.Alpaca.metainfo.xml.in:776
 msgid "Fixed: App might freeze randomly on startup"
 msgstr "সংশোধন: অ্যাপ স্টার্টআপে অবান্তর জমে যেতে পারে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:753
+#: data/com.jeffser.Alpaca.metainfo.xml.in:777
 msgid "Changed 'chats' label on sidebar for 'Alpaca'"
 msgstr "সাইডবারে 'আলপাকা'র জন্য 'চ্যাটস' লেবেল পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:760
+#: data/com.jeffser.Alpaca.metainfo.xml.in:784
 msgid "Cool Update"
 msgstr "কুল আপডেট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:762
+#: data/com.jeffser.Alpaca.metainfo.xml.in:786
 msgid "Better design for chat window"
 msgstr "চ্যাট উইন্ডোর জন্য ভালো ডিজাইন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:763
+#: data/com.jeffser.Alpaca.metainfo.xml.in:787
 msgid "Better design for chat sidebar"
 msgstr "চ্যাট সাইডবারের জন্য ভালো ডিজাইন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:764
+#: data/com.jeffser.Alpaca.metainfo.xml.in:788
 msgid "Fixed remote connections"
 msgstr "দূরবর্তী সংযোগ সংশোধন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:765
+#: data/com.jeffser.Alpaca.metainfo.xml.in:789
 msgid "Fixed Ollama restarting in loop"
 msgstr "ওল্লামা লুপে পুনরায় চালু হচ্ছে সংশোধন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:766
+#: data/com.jeffser.Alpaca.metainfo.xml.in:790
 msgid "Other cool backend stuff"
 msgstr "অন্যান্য কুল ব্যাকএন্ড স্টাফ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:775
+#: data/com.jeffser.Alpaca.metainfo.xml.in:799
 msgid "Added Ollama as part of Alpaca, Ollama will run in a sandbox"
 msgstr "Alpacaর অংশ হিসাবে Ollama যোগ করা হয়েছে, Ollama একটি স্যান্ডবক্সে চালু হবে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:776
+#: data/com.jeffser.Alpaca.metainfo.xml.in:800
 msgid "Added option to connect to remote instances (how it worked before)"
 msgstr "আগের মতো দূরবর্তী উদাহরণে সংযোগ করার বিকল্প যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:777
+#: data/com.jeffser.Alpaca.metainfo.xml.in:801
 msgid "Added option to import and export chats"
 msgstr "চ্যাট আমদানি ও রপ্তানি করার বিকল্প যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:778
+#: data/com.jeffser.Alpaca.metainfo.xml.in:802
 msgid "Added option to run Alpaca with Ollama in the background"
 msgstr "পটভূমিতে ওল্লামা সহ আলপাকা চালু করার বিকল্প যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:779
+#: data/com.jeffser.Alpaca.metainfo.xml.in:803
 msgid "Added preferences dialog"
 msgstr "পছন্দ ডায়ালগ যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:780
+#: data/com.jeffser.Alpaca.metainfo.xml.in:804
 msgid "Changed the welcome dialog"
 msgstr "স্বাগত ডায়ালগ পরিবর্তন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:782
-#: data/com.jeffser.Alpaca.metainfo.xml.in:799
-#: data/com.jeffser.Alpaca.metainfo.xml.in:811
-#: data/com.jeffser.Alpaca.metainfo.xml.in:830
-#: data/com.jeffser.Alpaca.metainfo.xml.in:851
-#: data/com.jeffser.Alpaca.metainfo.xml.in:867
-#: data/com.jeffser.Alpaca.metainfo.xml.in:883
-#: data/com.jeffser.Alpaca.metainfo.xml.in:897
+#: data/com.jeffser.Alpaca.metainfo.xml.in:806
+#: data/com.jeffser.Alpaca.metainfo.xml.in:823
+#: data/com.jeffser.Alpaca.metainfo.xml.in:835
+#: data/com.jeffser.Alpaca.metainfo.xml.in:854
+#: data/com.jeffser.Alpaca.metainfo.xml.in:875
+#: data/com.jeffser.Alpaca.metainfo.xml.in:891
 #: data/com.jeffser.Alpaca.metainfo.xml.in:907
-#: data/com.jeffser.Alpaca.metainfo.xml.in:925
-#: data/com.jeffser.Alpaca.metainfo.xml.in:947
+#: data/com.jeffser.Alpaca.metainfo.xml.in:921
+#: data/com.jeffser.Alpaca.metainfo.xml.in:931
+#: data/com.jeffser.Alpaca.metainfo.xml.in:949
+#: data/com.jeffser.Alpaca.metainfo.xml.in:971
 msgid "Please report any errors to the issues page, thank you."
 msgstr "কোনো ত্রুটি পাওয়া গেলে ইস্যু পেজে রিপোর্ট করুন, ধন্যবাদ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:790
+#: data/com.jeffser.Alpaca.metainfo.xml.in:814
 msgid "Yet Another Daily Update"
 msgstr "আরেকটি দৈনিক আপডেট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:792
+#: data/com.jeffser.Alpaca.metainfo.xml.in:816
 msgid "Added better UI for 'Manage Models' dialog"
 msgstr "'মডেল পরিচালনা' ডায়ালগের জন্য ভালো UI যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:793
+#: data/com.jeffser.Alpaca.metainfo.xml.in:817
 msgid "Added better UI for the chat sidebar"
 msgstr "চ্যাট সাইডবারের জন্য ভালো UI যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:794
+#: data/com.jeffser.Alpaca.metainfo.xml.in:818
 msgid ""
 "Replaced model description with a button to open Ollama's website for the "
 "model"
@@ -1461,47 +1517,47 @@ msgstr ""
 "মডেলের জন্য ওল্লামার ওয়েবসাইট খুলতে একটি বোতাম দিয়ে মডেলের বিবরণ প্রতিস্থাপিত "
 "হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:795
+#: data/com.jeffser.Alpaca.metainfo.xml.in:819
 msgid "Added myself to the credits as the spanish translator"
 msgstr "স্প্যানিশ অনুবাদক হিসাবে আমি ক্রেডিটে নিজেকে যোগ করেছি"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:796
+#: data/com.jeffser.Alpaca.metainfo.xml.in:820
 msgid "Using XDG properly to get config folder"
 msgstr "কনফিগ ফোল্ডার পাওয়ার জন্য XDG সঠিকভাবে ব্যবহার করছি"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:797
+#: data/com.jeffser.Alpaca.metainfo.xml.in:821
 msgid "Update for translations"
 msgstr "অনুবাদের জন্য আপডেট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:809
+#: data/com.jeffser.Alpaca.metainfo.xml.in:833
 msgid "The last update had some mistakes in the description of the update"
 msgstr "আপডেটের বর্ণনায় সর্বশেষ আপডেটে কিছু ভুল ছিল"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:819
+#: data/com.jeffser.Alpaca.metainfo.xml.in:843
 msgid "Another Daily Update"
 msgstr "আরেকটি দৈনিক আপডেট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:821
+#: data/com.jeffser.Alpaca.metainfo.xml.in:845
 msgid "Added full Spanish translation"
 msgstr "সম্পূর্ণ স্প্যানিশ অনুবাদ যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:822
+#: data/com.jeffser.Alpaca.metainfo.xml.in:846
 msgid "Added support for background pulling of multiple models"
 msgstr "একাধিক মডেলের পিছনে টানার জন্য সমর্থন যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:823
+#: data/com.jeffser.Alpaca.metainfo.xml.in:847
 msgid "Added interrupt button"
 msgstr "বাধা দেওয়ার বোতাম যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:824
+#: data/com.jeffser.Alpaca.metainfo.xml.in:848
 msgid "Added basic shortcuts"
 msgstr "মৌলিক শর্টকাট যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:825
+#: data/com.jeffser.Alpaca.metainfo.xml.in:849
 msgid "Better translation support"
 msgstr "ভালো অনুবাদ সমর্থন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:826
+#: data/com.jeffser.Alpaca.metainfo.xml.in:850
 msgid ""
 "User can now leave chat name empty when creating a new one, it will add a "
 "placeholder name"
@@ -1509,124 +1565,124 @@ msgstr ""
 "নতুন একটি তৈরি করার সময় ব্যবহারকারী এখন চ্যাট নাম খালি রাখতে পারে, এটি একটি "
 "স্থানধারক নাম যোগ করবে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:827
+#: data/com.jeffser.Alpaca.metainfo.xml.in:851
 msgid "Better scalling for different window sizes"
 msgstr "বিভিন্ন উইন্ডো আকারের জন্য ভালো স্কেলিং"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:828
+#: data/com.jeffser.Alpaca.metainfo.xml.in:852
 msgid "Fixed: Can't close app if first time setup fails"
 msgstr "সংশোধন: প্রথম সেটআপ ব্যর্থ হলে অ্যাপ বন্ধ করতে পারবেন না"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:838
+#: data/com.jeffser.Alpaca.metainfo.xml.in:862
 msgid "Really Big Update"
 msgstr "খুব বড় আপডেট"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:840
+#: data/com.jeffser.Alpaca.metainfo.xml.in:864
 msgid "Added multiple chats support!"
 msgstr "একাধিক চ্যাট সমর্থন যোগ করা হয়েছে!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:841
+#: data/com.jeffser.Alpaca.metainfo.xml.in:865
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
 msgstr ""
 "বোল্ড, তালিকা, শিরোনাম, উপশিরোনাম, মনোস্পেস সহ Pango Markup সমর্থন যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:842
+#: data/com.jeffser.Alpaca.metainfo.xml.in:866
 msgid "Added autoscroll if the user is at the bottom of the chat"
 msgstr "চ্যাটের নিচে ব্যবহারকারী থাকলে স্বয়ংক্রিয় স্ক্রোল যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:843
+#: data/com.jeffser.Alpaca.metainfo.xml.in:867
 msgid "Added support for multiple tags on a single model"
 msgstr "একক মডেলে একাধিক ট্যাগের জন্য সমর্থন যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:844
+#: data/com.jeffser.Alpaca.metainfo.xml.in:868
 msgid "Added better model management dialog"
 msgstr "ভালো মডেল ব্যবস্থাপনা ডায়ালগ যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:845
+#: data/com.jeffser.Alpaca.metainfo.xml.in:869
 msgid "Added loading spinner when sending message"
 msgstr "বার্তা পাঠানোর সময় লোডিং স্পিনার যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:846
+#: data/com.jeffser.Alpaca.metainfo.xml.in:870
 msgid "Added notifications if app is not active and a model pull finishes"
 msgstr "অ্যাপ সক্রিয় না থাকলে এবং মডেল পুল সমাপ্ত হলে নোটিফিকেশন যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:847
+#: data/com.jeffser.Alpaca.metainfo.xml.in:871
 msgid "Added new symbolic icon"
 msgstr "নতুন প্রতীকী আইকন যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:848
+#: data/com.jeffser.Alpaca.metainfo.xml.in:872
 msgid "Added frame to message textview widget"
 msgstr "বার্তা টেক্সটভিউ উইজেটে ফ্রেম যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:849
+#: data/com.jeffser.Alpaca.metainfo.xml.in:873
 msgid "Fixed \"code blocks shouldn't be editable\""
 msgstr "\"কোড ব্লকগুলি সম্পাদনা করা উচিত নয়\" সংশোধন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:861
+#: data/com.jeffser.Alpaca.metainfo.xml.in:885
 msgid "Added code highlighting"
 msgstr "কোড হাইলাইটিং যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:862
+#: data/com.jeffser.Alpaca.metainfo.xml.in:886
 msgid "Added image recognition (llava model)"
 msgstr "চিত্র স্বীকৃতি (ল্লাভা মডেল) যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:863
+#: data/com.jeffser.Alpaca.metainfo.xml.in:887
 msgid "Added multiline prompt"
 msgstr "বহুলাইন প্রম্পট যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:864
+#: data/com.jeffser.Alpaca.metainfo.xml.in:888
 msgid "Fixed some small bugs"
 msgstr "কিছু ছোট বাগ সংশোধন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:865
+#: data/com.jeffser.Alpaca.metainfo.xml.in:889
 msgid "General optimization"
 msgstr "সাধারণ অপ্টিমাইজেশন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:875
+#: data/com.jeffser.Alpaca.metainfo.xml.in:899
 msgid "Fixes and features"
 msgstr "সংশোধন এবং বৈশিষ্ট্য"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:877
+#: data/com.jeffser.Alpaca.metainfo.xml.in:901
 msgid "Russian translation (thanks github/alexkdeveloper)"
 msgstr "রাশিয়ান অনুবাদ (ধন্যবাদ github/alexkdeveloper)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:878
+#: data/com.jeffser.Alpaca.metainfo.xml.in:902
 msgid "Fixed: Cannot close app on first setup"
 msgstr "সংশোধন: প্রথম সেটআপে অ্যাপ বন্ধ করতে পারবেন না"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:879
+#: data/com.jeffser.Alpaca.metainfo.xml.in:903
 msgid "Fixed: Brand colors for Flathub"
 msgstr "ফ্ল্যাথাবের জন্য ব্র্যান্ড রঙ সংশোধন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:880
+#: data/com.jeffser.Alpaca.metainfo.xml.in:904
 msgid "Fixed: App description"
 msgstr "অ্যাপ বর্ণনা সংশোধন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:881
+#: data/com.jeffser.Alpaca.metainfo.xml.in:905
 msgid "Fixed: Only show 'save changes dialog' when you actually change the url"
 msgstr "শুধুমাত্র আপনি আসলে ইউআরএল পরিবর্তন করলে 'পরিবর্তন সংরক্ষণ ডায়ালগ' দেখান"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:891
+#: data/com.jeffser.Alpaca.metainfo.xml.in:915
 msgid "0.2.2 Bug fixes"
 msgstr "0.2.2 বাগ সংশোধন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:893
+#: data/com.jeffser.Alpaca.metainfo.xml.in:917
 msgid "Toast messages appearing behind dialogs"
 msgstr "ডায়ালগসের পিছনে টোস্ট বার্তা আসছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:894
+#: data/com.jeffser.Alpaca.metainfo.xml.in:918
 msgid "Local model list not updating when changing servers"
 msgstr "সার্ভার পরিবর্তন করার সময় স্থানীয় মডেল তালিকা আপডেট হচ্ছে না"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:895
+#: data/com.jeffser.Alpaca.metainfo.xml.in:919
 msgid "Closing the setup dialog closes the whole app"
 msgstr "সেটআপ ডায়ালগ বন্ধ করলে সমগ্র অ্যাপ বন্ধ হয়ে যায়"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:905
+#: data/com.jeffser.Alpaca.metainfo.xml.in:929
 msgid "0.2.1 Data saving fix"
 msgstr "0.2.1 ডেটা সংরক্ষণ সংশোধন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:906
+#: data/com.jeffser.Alpaca.metainfo.xml.in:930
 msgid ""
 "The app didn't save the config files and chat history to the right "
 "directory, this is now fixed"
@@ -1634,190 +1690,199 @@ msgstr ""
 "অ্যাপটি কনফিগার ফাইল এবং চ্যাট ইতিহাস ডানদিকে সংরক্ষণ করেনিডিরেক্টরি, এটা এখন "
 "ঠিক করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:915
+#: data/com.jeffser.Alpaca.metainfo.xml.in:939
 msgid "0.2.0"
 msgstr "0.2.0"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:917
+#: data/com.jeffser.Alpaca.metainfo.xml.in:941
 msgid "New Features"
 msgstr "নতুন বৈশিষ্ট্য"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:919
+#: data/com.jeffser.Alpaca.metainfo.xml.in:943
 msgid "Restore chat after closing the app"
 msgstr "অ্যাপ বন্ধ করার পর চ্যাট পুনরুদ্ধার"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:920
+#: data/com.jeffser.Alpaca.metainfo.xml.in:944
 msgid "A button to clear the chat"
 msgstr "চ্যাট পরিষ্কার করার জন্য একটি বোতাম"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:921
+#: data/com.jeffser.Alpaca.metainfo.xml.in:945
 msgid "Fixed multiple bugs involving how messages are shown"
 msgstr "বার্তা দেখানোর সময় বহু বাগ সংশোধন করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:922
+#: data/com.jeffser.Alpaca.metainfo.xml.in:946
 msgid "Added welcome dialog"
 msgstr "স্বাগত ডায়ালগ যোগ করা হয়েছে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:923
+#: data/com.jeffser.Alpaca.metainfo.xml.in:947
 msgid "More stability"
 msgstr "আরও স্থিতিশীলতা"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:933
+#: data/com.jeffser.Alpaca.metainfo.xml.in:957
 msgid "0.1.2 Quick fixes"
 msgstr "0.1.2 দ্রুত সংশোধন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:934
+#: data/com.jeffser.Alpaca.metainfo.xml.in:958
 msgid ""
 "This release fixes some metadata needed to have a proper Flatpak application"
 msgstr ""
 "এই রিলিজ একটি সঠিক ফ্ল্যাটপ্যাক অ্যাপ্লিকেশন থাকার জন্য কিছু মেটাডেটা সংশোধন করে"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:940
+#: data/com.jeffser.Alpaca.metainfo.xml.in:964
 msgid "0.1.1 Stable Release"
 msgstr "0.1.1 স্থিতিশীল রিলিজ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:941
+#: data/com.jeffser.Alpaca.metainfo.xml.in:965
 msgid "This is the first public version of Alpaca"
 msgstr "এটি আলপাকার প্রথম পাবলিক সংস্করণ"
 
-#: src/window.py:149 src/window.py:860 src/custom_widgets/message_widget.py:44
-#: src/custom_widgets/message_widget.py:164
-#: src/custom_widgets/model_widget.py:419
-#: src/custom_widgets/dialog_widget.py:136
-#: src/custom_widgets/dialog_widget.py:148
-#: src/custom_widgets/dialog_widget.py:160
+#: src/window.py:285 src/window.py:441 src/window.py:1010 src/window.ui:697
+#: src/window.ui:701 src/custom_widgets/message_widget.py:60
+#: src/custom_widgets/message_widget.py:199
+#: src/custom_widgets/model_manager_widget.py:426
+#: src/custom_widgets/dialog_widget.py:149
+#: src/custom_widgets/dialog_widget.py:161
+#: src/custom_widgets/dialog_widget.py:173
 msgid "Cancel"
 msgstr "বাতিল করুন"
 
-#: src/window.py:150 src/window.py:608 src/window.py:861
+#: src/window.py:286 src/window.py:727 src/window.py:1011
 msgid "Connect"
 msgstr "সংযোগ করুন"
 
-#: src/window.py:153 src/window.py:610 src/window.py:864
+#: src/window.py:289 src/window.py:729 src/window.py:1014
 msgid "Server URL"
 msgstr "সার্ভার URL"
 
-#: src/window.py:154 src/window.py:611 src/window.py:865
+#: src/window.py:290 src/window.py:730 src/window.py:1015
 msgid "Bearer Token (Optional)"
 msgstr "বিয়ারার টোকেন (ঐচ্ছিক)"
 
-#: src/window.py:157 src/window.py:868
+#: src/window.py:293 src/window.py:1018
 msgid "Connect Remote Instance"
 msgstr "রিমোট ইনস্ট্যান্সে সংযোগ করুন"
 
-#: src/window.py:158 src/window.py:869
+#: src/window.py:294 src/window.py:1019
 msgid "Enter instance information to continue"
 msgstr "অগ্রসর হতে ইনস্ট্যান্সের তথ্য প্রবেশ করুন"
 
-#: src/window.py:201 src/window.py:891
+#: src/window.py:332 src/window.py:1043
 msgid "Please select a model before chatting"
 msgstr "চ্যাটিং আগে একটি মডেল নির্বাচন করুন"
 
-#: src/window.py:252 src/window.py:253
+#: src/window.py:381 src/window.py:382 src/window.py:443
 msgid "Close"
 msgstr "বন্ধ"
 
-#: src/window.py:255 src/window.py:256 src/window.ui:1077
+#: src/window.py:384 src/window.py:385 src/window.ui:1167
 msgid "Next"
 msgstr "পরবর্তী"
 
-#: src/window.py:366
-msgid "image"
-msgstr "ছবি"
+#: src/window.py:442
+msgid "Hide"
+msgstr ""
 
-#: src/window.py:540 src/window.ui:30 src/custom_widgets/chat_widget.py:399
+#: src/window.py:446
+msgid "Close Alpaca?"
+msgstr ""
+
+#: src/window.py:447
+msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
+msgstr ""
+
+#: src/window.py:656 src/window.ui:69 src/custom_widgets/chat_widget.py:384
 msgid "New Chat"
 msgstr "নতুন চ্যাট"
 
-#: src/window.py:604
+#: src/window.py:723
 msgid "Close Alpaca"
 msgstr "আলপাকা বন্ধ করুন"
 
-#: src/window.py:607
+#: src/window.py:726
 msgid "Use Local Instance"
 msgstr "লোকাল ইনস্ট্যান্স ব্যবহার করুন"
 
-#: src/window.py:613
+#: src/window.py:732
 msgid "Connection Error"
 msgstr "সংযোগ ত্রুটি"
 
-#: src/window.py:613
+#: src/window.py:732
 msgid "The remote instance has disconnected"
 msgstr "দূরবর্তী ইনস্ট্যান্সটি সংযোগ বিচ্ছিন্ন হয়েছে"
 
-#: src/window.py:616
+#: src/window.py:735
 msgid "There was an error with the local Ollama instance, so it has been reset"
 msgstr "স্থানীয় ওল্লামা ইনস্ট্যান্সে একটি ত্রুটি ছিল, তাই এটি রিসেট করা হয়েছে"
 
-#: src/window.py:638
+#: src/window.py:757
 msgid "Cannot open image"
 msgstr "ছবি খোলা যায়নি"
 
-#: src/window.py:726
+#: src/window.py:863
 msgid "Delete Chat?"
 msgstr "চ্যাট মুছে ফেলুন?"
 
-#: src/window.py:727 src/custom_widgets/model_widget.py:362
+#: src/window.py:864
 msgid "Are you sure you want to delete '{}'?"
 msgstr "আপনি কি নিশ্চিত যে আপনি '{}' মুছে ফেলতে চান?"
 
-#: src/window.py:729 src/custom_widgets/model_widget.py:364
+#: src/window.py:866
 msgid "Delete"
 msgstr "মুছে ফেলুন"
 
-#: src/window.py:736
+#: src/window.py:873
 msgid "Rename Chat?"
 msgstr "চ্যাট পুনর্নামকরণ করুন?"
 
-#: src/window.py:737
+#: src/window.py:874
 msgid "Renaming '{}'"
 msgstr "'{}' পুনর্নামকরণ করা হচ্ছে"
 
-#: src/window.py:739
+#: src/window.py:876
 msgid "Chat name"
 msgstr "চ্যাটের নাম"
 
-#: src/window.py:740
+#: src/window.py:877
 msgid "Rename"
 msgstr "পুনর্নামকরণ করুন"
 
-#: src/window.py:745
+#: src/window.py:882
 msgid "Importable (.db)"
 msgstr "আমদানি করা যায় (.db)"
 
-#: src/window.py:746
+#: src/window.py:883
 msgid "Markdown"
 msgstr "মার্কডাউন"
 
-#: src/window.py:747
+#: src/window.py:884
 msgid "Markdown (Obsidian Style)"
 msgstr "মার্কডাউন (অবসিডিয়ান স্টাইল)"
 
-#: src/window.py:748
+#: src/window.py:885
 msgid "JSON"
 msgstr "JSON"
 
-#: src/window.py:749
+#: src/window.py:886
 msgid "JSON (Include Metadata)"
 msgstr "JSON (মেটাডেটা অন্তর্ভুক্ত)"
 
-#: src/window.py:752 src/window.ui:1172 src/window.ui:1198
+#: src/window.py:889 src/window.ui:1262 src/window.ui:1288
 msgid "Export Chat"
 msgstr "চ্যাট রপ্তানি করুন"
 
-#: src/window.py:753
+#: src/window.py:890
 msgid "Select a method to export the chat"
 msgstr "চ্যাট রপ্তানি করার জন্য একটি পদ্ধতি নির্বাচন করুন"
 
-#: src/window.py:769
+#: src/window.py:906
 msgid "This video does not have any transcriptions"
 msgstr "এই ভিডিওতে কোন লিপ্যন্তর নেই"
 
-#: src/window.py:776
+#: src/window.py:913
 msgid "Attach YouTube Video?"
 msgstr "ইউটিউব ভিডিও সংযুক্ত করুন?"
 
-#: src/window.py:777
+#: src/window.py:914
 msgid ""
 "{}\n"
 "\n"
@@ -1827,15 +1892,15 @@ msgstr ""
 "\n"
 "অন্তর্ভুক্ত করার জন্য একটি লিপ্যন্তর নির্বাচন করুন"
 
-#: src/window.py:783
+#: src/window.py:920
 msgid "Error attaching video, please try again"
 msgstr "ভিডিও সংযুক্ত করতে ত্রুটি, দয়া করে আবার চেষ্টা করুন"
 
-#: src/window.py:802 src/window.py:1143
+#: src/window.py:939 src/window.py:1292
 msgid "Attach Website? (Experimental)"
 msgstr "ওয়েবসাইট সংযুক্ত করুন? (পরীক্ষামূলক)"
 
-#: src/window.py:803
+#: src/window.py:940
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
@@ -1843,75 +1908,68 @@ msgstr ""
 "আপনি কি নিশ্চিত যে আপনি সংযুক্ত করতে চান\n"
 "'{}'?"
 
-#: src/window.py:821 src/window.py:1142 src/generic_actions.py:109
+#: src/window.py:958 src/window.py:1291 src/generic_actions.py:98
 msgid "Image recognition is only available on specific models"
 msgstr "নির্দিষ্ট মডেলগুলিতে ছবি সনাক্তকরণ উপলব্ধ"
 
-#: src/window.py:884
+#: src/window.py:1034
 msgid "An error occurred: {}"
 msgstr "একটি ত্রুটি ঘটেছে: {}"
 
-#: src/window.py:893 src/window.ui:545
+#: src/window.py:1045 src/window.ui:1003
 msgid "Quick Ask"
 msgstr "দ্রুত জিজ্ঞাসা"
 
-#: src/window.py:1070
+#: src/window.py:1212
 msgid "Attachment failed, screenshot might be too big"
 msgstr "সংযুক্তি ব্যর্থ, স্ক্রীনশটটি খুব বড় হতে পারে"
 
-#: src/window.py:1123
+#: src/window.py:1226
+msgid "Any compatible Alpaca attachment"
+msgstr ""
+
+#: src/window.py:1276
 msgid "Clear Chat?"
 msgstr "চ্যাট পরিষ্কার করুন?"
 
-#: src/window.py:1123
+#: src/window.py:1276
 msgid "Are you sure you want to clear the chat?"
 msgstr "আপনি কি নিশ্চিত যে আপনি চ্যাটটি পরিষ্কার করতে চান?"
 
-#: src/window.py:1123
+#: src/window.py:1276
 msgid "Clear"
 msgstr "পরিষ্কার করুন"
 
-#: src/window.py:1125
-msgid "Select Model"
-msgstr "মডেল নির্বাচন করুন"
-
-#: src/window.py:1125
-msgid "This model will be used as the base for the new model"
-msgstr "নতুন মডেলের জন্য এই মডেলটি ভিত্তি হিসাবে ব্যবহার করা হবে"
-
-#: src/window.py:1127
-msgid "Pull Model"
-msgstr "মডেল পুল করুন"
-
-#: src/window.py:1127
-msgid ""
-"Input the name of the model in this format\n"
-"name:tag"
-msgstr ""
-"এই ফরম্যাটে মডেলের নাম ইনপুট করুন\n"
-"নাম:ট্যাগ"
-
-#: src/window.py:1143
+#: src/window.py:1292
 msgid "Please enter a website URL"
 msgstr "দয়া করে একটি ওয়েবসাইট URL লিখুন"
 
-#: src/window.py:1144
+#: src/window.py:1293
 msgid "Attach YouTube Captions?"
 msgstr "ইউটিউব ক্যাপশন সংযুক্ত করবেন?"
 
-#: src/window.py:1144
+#: src/window.py:1293
 msgid "Please enter a YouTube video URL"
 msgstr "দয়া করে একটি ইউটিউব ভিডিও URL লিখুন"
 
-#: src/window.py:1155
+#: src/window.py:1295
+msgid "Download Model?"
+msgstr ""
+
+#: src/window.py:1295
+msgid "Please enter the model name following this template: name:tag"
+msgstr ""
+
+#: src/window.py:1306
 msgid "Remove Attachment?"
 msgstr "সংযুক্তি মুছে ফেলুন?"
 
-#: src/window.py:1155
+#: src/window.py:1306
 msgid "Are you sure you want to remove attachment?"
 msgstr "আপনি কি নিশ্চিত যে আপনি সংযুক্তি মুছে ফেলতে চান?"
 
-#: src/window.py:1155 src/custom_widgets/model_widget.py:420
+#: src/window.py:1306 src/custom_widgets/model_manager_widget.py:427
+#: src/custom_widgets/model_manager_widget.py:464
 msgid "Remove"
 msgstr "মুছে ফেলুন"
 
@@ -2214,8 +2272,7 @@ msgstr ""
 #: src/available_models_descriptions.py:43
 msgid ""
 "StarCoder is a code generation model trained on 80+ programming languages."
-msgstr ""
-"স্টারকোডার হল 80+ প্রোগ্রামিং ভাষায় প্রশিক্ষিত একটি কোড জেনারেশন মডেল।"
+msgstr "স্টারকোডার হল 80+ প্রোগ্রামিং ভাষায় প্রশিক্ষিত একটি কোড জেনারেশন মডেল।"
 
 #: src/available_models_descriptions.py:44
 msgid ""
@@ -2292,8 +2349,7 @@ msgstr ""
 msgid ""
 "CodeQwen1.5 is a large language model pretrained on a large amount of code "
 "data."
-msgstr ""
-"কোডকুইন ১.৫ হল একটি বড় ভাষা মডেল যা বড় পরিমাণের কোড ডেটার উপর প্রিট্রেনড।"
+msgstr "কোডকুইন ১.৫ হল একটি বড় ভাষা মডেল যা বড় পরিমাণের কোড ডেটার উপর প্রিট্রেনড।"
 
 #: src/available_models_descriptions.py:55
 msgid ""
@@ -2731,7 +2787,8 @@ msgstr ""
 
 #: src/available_models_descriptions.py:116
 msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
-msgstr "মাদারডাক এবং নাম্বারস স্টেশন দ্বারা তৈরি করা ৭বি প্যারামিটার টেক্সট-টু-এসকিউএল "
+msgstr ""
+"মাদারডাক এবং নাম্বারস স্টেশন দ্বারা তৈরি করা ৭বি প্যারামিটার টেক্সট-টু-এসকিউএল "
 "মডেল।"
 
 #: src/available_models_descriptions.py:117
@@ -2964,13 +3021,14 @@ msgstr ""
 "উপলব্ধ।"
 
 #: src/available_models_descriptions.py:147
-msgid "Phi 4 is a 14B parameter, state-of-the-art open model from Microsoft."
-msgstr "Phi 4 হল ১৪ বিলিয়ন প্যারামিটার বিশিষ্ট, মাইক্রোসফটের একটি সর্বাধুনিক ওপেন মডেল।"
+msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
+msgstr ""
 
 #: src/available_models_descriptions.py:148
 msgid ""
 "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
-msgstr "Qwen 2.5 3B ইনস্ট্রাক্ট মডেল থেকে সূক্ষ্মভাবে টিউন করা একটি নতুন ছোট রিজনিং মডেল।"
+msgstr ""
+"Qwen 2.5 3B ইনস্ট্রাক্ট মডেল থেকে সূক্ষ্মভাবে টিউন করা একটি নতুন ছোট রিজনিং মডেল।"
 
 #: src/available_models_descriptions.py:149
 msgid ""
@@ -2978,7 +3036,37 @@ msgid ""
 "instruct-tuned models designed to be the ultimate general purpose local "
 "model, enabling coding, math, agentic, function calling, and general use "
 "cases."
-msgstr "Dolphin 3.0 Llama 3.1 8B 🐬 হল Dolphin সিরিজের পরবর্তী প্রজন্মের ইনস্ট্রাক্ট-টিউনড মডেল, যা সর্বাধিক সাধারণ উদ্দেশ্যে স্থানীয় মডেল হিসেবে ডিজাইন করা হয়েছে, যা কোডিং, গাণিতিক হিসাব, এজেন্টিক, ফাংশন কলিং এবং সাধারণ ব্যবহার ক্ষেত্র সমর্থন করে।"
+msgstr ""
+"Dolphin 3.0 Llama 3.1 8B 🐬 হল Dolphin সিরিজের পরবর্তী প্রজন্মের ইনস্ট্রাক্ট-টিউনড "
+"মডেল, যা সর্বাধিক সাধারণ উদ্দেশ্যে স্থানীয় মডেল হিসেবে ডিজাইন করা হয়েছে, যা "
+"কোডিং, গাণিতিক হিসাব, এজেন্টিক, ফাংশন কলিং এবং সাধারণ ব্যবহার ক্ষেত্র সমর্থন করে।"
+
+#: src/available_models_descriptions.py:150
+msgid ""
+"DeepSeek's first generation reasoning models with comparable performance to "
+"OpenAI-o1."
+msgstr ""
+
+#: src/available_models_descriptions.py:151
+msgid ""
+"A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
+"with 37B activated for each token."
+msgstr ""
+
+#: src/available_models_descriptions.py:152
+msgid ""
+"OLMo 2 is a new family of 7B and 13B models trained on up to 5T tokens. "
+"These models are on par with or better than equivalently sized fully open "
+"models, and competitive with open-weight models such as Llama 3.1 on English "
+"academic benchmarks."
+msgstr ""
+
+#: src/available_models_descriptions.py:153
+msgid ""
+"The smallest model in Cohere's R series delivers top-tier speed, efficiency, "
+"and quality to build powerful AI applications on commodity GPUs and edge "
+"devices."
+msgstr ""
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -3008,106 +3096,215 @@ msgstr "নিষ্ক্রিয়তার কারণে অল্লা�
 msgid "Integrated Ollama instance is running"
 msgstr "সমন্বিত অল্লামা উদাহরণ চলছে"
 
-#: src/connection_handler.py:151 src/window.ui:527
+#: src/connection_handler.py:151 src/window.ui:985
 msgid "Integrated Ollama instance is not running"
 msgstr "সমন্বিত অল্লামা উদাহরণ চলছে না"
 
-#: src/window.ui:41
+#: src/window.ui:80
 msgid "Menu"
 msgstr "মেনু"
 
-#: src/window.ui:61
-msgid "Sponsor Alpaca"
-msgstr "অলপাকা স্পনসর করুন"
-
-#: src/window.ui:81
+#: src/window.ui:102
 msgid "Toggle Sidebar"
 msgstr "সাইডবার টগল করুন"
 
-#: src/window.ui:88
+#: src/window.ui:109
 msgid "Search Messages"
 msgstr "মেসেজ অনুসন্ধান করুন"
 
-#: src/window.ui:110
+#: src/window.ui:129
 msgid "Loading Instance"
 msgstr "ইনস্ট্যান্স লোড করা হচ্ছে"
 
-#: src/window.ui:122 src/window.ui:123 src/window.ui:616 src/window.ui:1142
-#: src/custom_widgets/model_widget.py:26 src/custom_widgets/model_widget.py:27
+#: src/window.ui:144 src/window.ui:150 src/window.ui:1232
+#: src/custom_widgets/model_manager_widget.py:63
 msgid "Manage Models"
 msgstr "মডেল পরিচালনা করুন"
 
-#: src/window.ui:135
+#: src/window.ui:162
 msgid "Chat Menu"
 msgstr "চ্যাট মেনু"
 
-#: src/window.ui:144
+#: src/window.ui:175
 msgid "Message search bar"
 msgstr "মেসেজ সার্চ বার"
 
-#: src/window.ui:151 src/window.ui:153
+#: src/window.ui:184 src/window.ui:186
 msgid "Search messages"
 msgstr "মেসেজ অনুসন্ধান করুন"
 
-#: src/window.ui:167
+#: src/window.ui:202
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr ""
 "সতর্কতা: পাওয়ার সেভার মোড সক্ষম করা হয়েছে, এটি বার্তা তৈরি করতে ধীর করে দেবে"
 
-#: src/window.ui:215 src/window.ui:1224
+#: src/window.ui:250 src/window.ui:1314
 msgid "Attach File"
 msgstr "ফাইল সংযুক্ত করুন"
 
-#: src/window.ui:245
+#: src/window.ui:280
 msgid "Send Message"
 msgstr "বার্তা পাঠান"
 
-#: src/window.ui:264
+#: src/window.ui:299
 msgid "Stop Message"
 msgstr "বার্তা থামান"
 
-#: src/window.ui:292 src/window.ui:1148
+#: src/window.ui:329
+msgid "Model Manager"
+msgstr ""
+
+#: src/window.ui:365
+msgid "Search Model"
+msgstr "মডেল খুঁজুন"
+
+#: src/window.ui:377
+msgid "Download Model From Name"
+msgstr ""
+
+#: src/window.ui:391
+msgid "Model search bar"
+msgstr "মডেল অনুসন্ধান বার"
+
+#: src/window.ui:400 src/window.ui:402
+msgid "Search models"
+msgstr "মডেলগুলি খুঁজুন"
+
+#: src/window.ui:416
+msgid "Local Models"
+msgstr ""
+
+#: src/window.ui:426 src/window.ui:469 src/window.ui:523
+msgid "No Models Found"
+msgstr "কোন মডেল পাওয়া যায়নি"
+
+#: src/window.ui:427
+msgid ""
+"It looks a bit empty in here. Try downloading some models to get started!"
+msgstr ""
+
+#: src/window.ui:470 src/window.ui:524
+msgid ""
+"Looks like we’re fresh out of models for that search. Try tweaking your "
+"keywords, or maybe explore something new!"
+msgstr ""
+
+#: src/window.ui:482
+msgid "Available Models"
+msgstr ""
+
+#: src/window.ui:536 src/window.ui:547
+msgid "Model Creator"
+msgstr ""
+
+#: src/window.ui:548
+msgid "Select a method of importing a chat to continue"
+msgstr ""
+
+#: src/window.ui:560
+msgid "GUUF File"
+msgstr ""
+
+#: src/window.ui:571
+msgid "Existing Model"
+msgstr ""
+
+#: src/window.ui:589
+msgid "Identity"
+msgstr ""
+
+#: src/window.ui:592
+msgid "Base"
+msgstr "ভিত্তি"
+
+#: src/window.ui:599
+msgid "Profile Picture"
+msgstr ""
+
+#: src/window.ui:604
+msgid "Open File"
+msgstr ""
+
+#: src/window.ui:615
+msgid "Name"
+msgstr "নাম"
+
+#: src/window.ui:620 src/custom_widgets/model_manager_widget.py:274
+msgid "Tag"
+msgstr ""
+
+#: src/window.ui:627
+msgid "Context"
+msgstr "প্রসঙ্গ"
+
+#: src/window.ui:628
+msgid ""
+"Describe the desired behavior of the model in its primary language "
+"(typically English)."
+msgstr ""
+
+#: src/window.ui:655
+msgid "Behavior"
+msgstr ""
+
+#: src/window.ui:658
+msgid "Imagination"
+msgstr ""
+
+#: src/window.ui:659
+msgid "A higher number results in more diverse answers from the model. (top_k)"
+msgstr ""
+
+#: src/window.ui:673
+msgid "Focus"
+msgstr ""
+
+#: src/window.ui:674
+msgid "A higher number widens the amount of possible answers. (top_p)"
+msgstr ""
+
+#: src/window.ui:707 src/window.ui:715
+msgid "Add Model"
+msgstr ""
+
+#: src/window.ui:749 src/window.ui:1238
 msgid "Preferences"
 msgstr "পছন্দ"
 
-#: src/window.ui:295
+#: src/window.ui:752
 msgid "General"
 msgstr "সাধারণ"
 
-#: src/window.ui:302
+#: src/window.ui:759
 msgid "Use Remote Connection to Ollama"
 msgstr "অল্লামায় দূরবর্তী সংযোগ ব্যবহার করুন"
 
-#: src/window.ui:308 src/window.ui:314
+#: src/window.ui:765 src/window.ui:771
 msgid "Change Ollama Instance"
 msgstr "ওল্লামা ইনস্ট্যান্স পরিবর্তন করুন"
 
-#: src/window.ui:329
+#: src/window.ui:786
 msgid "Run Alpaca In Background"
 msgstr "আলপাকা পটভূমিতে চালান"
 
-#: src/window.ui:335
+#: src/window.ui:792
 msgid "Show Power Saver Warning"
 msgstr "পাওয়ার সেভার সতর্কতা দেখান"
 
-#: src/window.ui:342
+#: src/window.ui:799
 msgid "Default Model"
 msgstr "ডিফল্ট মডেল"
 
-#: src/window.ui:343
-msgid ""
-"The default model to use on new chats and when Alpaca is launched with the "
-"option --ask \"message\""
+#: src/window.ui:800
+msgid "The default model to use on new chats and when generating chat titles"
 msgstr ""
-"নতুন চ্যাট এবং যখন Alpaca --ask \"message\" বিকল্প দিয়ে চালু করা হয় তখন ব্যবহার "
-"করার জন্য ডিফল্ট মডেল"
 
-#: src/window.ui:361
+#: src/window.ui:819
 msgid "Temperature"
 msgstr "তাপমাত্রা"
 
-#: src/window.ui:362
+#: src/window.ui:820
 msgid ""
 "The temperature of the model. Increasing the temperature will make the model "
 "answer more creatively. (Default: 0.8)"
@@ -3115,11 +3312,11 @@ msgstr ""
 "মডেলের তাপমাত্রা। তাপমাত্রা বাড়ানো হলে মডেল আরও সৃজনশীলভাবে উত্তর দেবে। (ডিফল্ট: "
 "০.৮)"
 
-#: src/window.ui:377
+#: src/window.ui:835
 msgid "Seed"
 msgstr "বীজ"
 
-#: src/window.ui:378
+#: src/window.ui:836
 msgid ""
 "Sets the random number seed to use for generation. Setting this to a "
 "specific number will make the model generate the same text for the same "
@@ -3128,25 +3325,25 @@ msgstr ""
 "জন্মের জন্য ব্যবহার করার জন্য র্যান্ডম নম্বার সীড সেট করে। এই নির্দিষ্ট সংখ্যায় সেট "
 "করলে মডেল একই প্রম্পটের জন্য একই টেক্সট জন্ম দেবে। (ডিফল্ট: ০ (এলোমেলোভাবে))"
 
-#: src/window.ui:392
+#: src/window.ui:850
 msgid "Keep Alive Time"
 msgstr "জীবিত সময়"
 
-#: src/window.ui:393
+#: src/window.ui:851
 msgid ""
 "Controls how long the model will stay loaded into memory following the "
 "request in minutes (Default: 5)"
 msgstr "অনুরোধের পরে মিনিটে মেমরিতে মডেল কতক্ষণ থাকবে তা নিয়ন্ত্রণ করে (ডিফল্ট: ৫)"
 
-#: src/window.ui:410
+#: src/window.ui:868
 msgid "Ollama Instance"
 msgstr "ওল্লামা ইনস্ট্যান্স"
 
-#: src/window.ui:414
+#: src/window.ui:872
 msgid "Ollama Overrides"
 msgstr "ওল্লামা ওভাররাইড"
 
-#: src/window.ui:415
+#: src/window.ui:873
 msgid ""
 "Manage the arguments used on Ollama, any changes on this page only applies "
 "to the integrated instance, the instance will restart if you make changes."
@@ -3154,11 +3351,11 @@ msgstr ""
 "ওল্লামাতে ব্যবহৃত যুক্তিগুলি পরিচালনা করুন, এই পৃষ্ঠায় যেকোনো পরিবর্তন শুধুমাত্র প্রযোজ্য "
 "হবেসমন্বিত উদাহরণে, আপনি পরিবর্তন করলে উদাহরণটি পুনরায় চালু হবে।"
 
-#: src/window.ui:487
+#: src/window.ui:945
 msgid "Idle Timer"
 msgstr "নিষ্ক্রিয়তা টাইমার"
 
-#: src/window.ui:488
+#: src/window.ui:946
 msgid ""
 "Number of minutes the instance should remain idle before it is shut down (0 "
 "means it won't be shut down)"
@@ -3166,137 +3363,63 @@ msgstr ""
 "মিনিটের সংখ্যা যে উদাহরণটি নিষ্ক্রিয় থাকবে এবং এটি বন্ধ করা হবে (0 মানে এটি বন্ধ "
 "করা হবে না)"
 
-#: src/window.ui:505
+#: src/window.ui:963
 msgid "Model Directory"
 msgstr "মডেল ডিরেক্টরি"
 
-#: src/window.ui:511
+#: src/window.ui:969
 msgid "Change Model Directory"
 msgstr "মডেল ডিরেক্টরি পরিবর্তন করুন"
 
-#: src/window.ui:543
+#: src/window.ui:1001
 msgid "Quick ask dialog"
 msgstr "দ্রুত জিজ্ঞাসা সংলাপ"
 
-#: src/window.ui:555
+#: src/window.ui:1013
 msgid "Save Conversation to Alpaca"
 msgstr "কথোপকথন আলপাকাতে সংরক্ষণ করুন"
 
-#: src/window.ui:570
+#: src/window.ui:1028
 msgid "Terminal dialog"
 msgstr "টার্মিনাল ডায়ালগ"
 
-#: src/window.ui:573
+#: src/window.ui:1031
 msgid "Terminal"
 msgstr "টার্মিনাল"
 
-#: src/window.ui:585
+#: src/window.ui:1043
 msgid "Open Environment Directory"
 msgstr "পরিবেশ ডিরেক্টরি খুলুন"
 
-#: src/window.ui:606
-msgid "Manage models dialog"
-msgstr "মডেল ব্যবস্থাপনা ডায়ালগ"
-
-#: src/window.ui:626 src/window.ui:841
-msgid "Create Model"
-msgstr "মডেল তৈরি করুন"
-
-#: src/window.ui:633
-msgid "Search Model"
-msgstr "মডেল খুঁজুন"
-
-#: src/window.ui:640
-msgid "Refresh Local Models"
-msgstr "স্থানীয় মডেলগুলি পুনরায় লোড করুন"
-
-#: src/window.ui:650
-msgid "Model search bar"
-msgstr "মডেল অনুসন্ধান বার"
-
-#: src/window.ui:657 src/window.ui:659
-msgid "Search models"
-msgstr "মডেলগুলি খুঁজুন"
-
-#: src/window.ui:683
-msgid "No Models Found"
-msgstr "কোন মডেল পাওয়া যায়নি"
-
-#: src/window.ui:684
-msgid "Try a different search or pull an unlisted model from it's name"
-msgstr "একটি ভিন্ন সার্চ চেষ্টা করুন বা এর নাম থেকে একটি তালিকাভুক্ত নয় এম টানুন"
-
-#: src/window.ui:692
-msgid "Pull Model From Name"
-msgstr "নাম থেকে মডেল টানুন"
-
-#: src/window.ui:742
-msgid ""
-"By downloading this model you accept the license agreement available on the "
-"model's website."
-msgstr ""
-"এই মডেলটি ডাউনলোড করার মাধ্যমে আপনি মডেলের ওয়েবসাইটে উপলব্ধ লাইসেন্স চুক্তি গ্রহণ "
-"করেন।"
-
-#: src/window.ui:775
-msgid "Model Details"
-msgstr "মডেল বিস্তারিত"
-
-#: src/window.ui:869
-msgid "Base"
-msgstr "ভিত্তি"
-
-#: src/window.ui:888
-msgid "Name"
-msgstr "নাম"
-
-#: src/window.ui:894
-msgid "Context"
-msgstr "প্রসঙ্গ"
-
-#: src/window.ui:936
-msgid ""
-"Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
-"instructions automatically. Please visit the model's website or Ollama "
-"documentation for more information if you're unsure."
-msgstr ""
-"কিছু মডেল মডেলফাইল প্রয়োজন, আলপাকা FROM এবং SYSTEM (কন্টেক্সট) নির্দেশাবলী "
-"স্বয়ংক্রিয়ভাবে পূরণ করে। আপনি অনিশ্চিত হলে মডেলের ওয়েবসাইট বা ওল্লামা ডকুমেন্টেশন "
-"ভিজিট করুন আরও তথ্যের জন্য।"
-
-#: src/window.ui:952
-msgid "Create"
-msgstr "তৈরি করুন"
-
-#: src/window.ui:975
+#: src/window.ui:1064
 msgid "File preview dialog"
 msgstr "ফাইল পূর্বরূপ ডায়ালগ"
 
-#: src/window.ui:985
+#: src/window.ui:1075
 msgid "Open With Default App"
 msgstr "ডিফল্ট অ্যাপের সাথে খুলুন"
 
-#: src/window.ui:993
+#: src/window.ui:1083
 msgid "Remove Attachment"
 msgstr "সংযুক্তি অপসারণ করুন"
 
-#: src/window.ui:1061
+#: src/window.ui:1151
 msgid "Previous"
 msgstr "পূর্ববর্তী"
 
-#: src/window.ui:1104
+#: src/window.ui:1194
 msgid "Welcome to Alpaca"
 msgstr "আলপাকায় স্বাগতম"
 
-#: src/window.ui:1105
+#: src/window.ui:1195
 msgid "Powered by Ollama"
 msgstr "ওল্লামা দ্বারা সক্ষম"
 
-#: src/window.ui:1108
+#: src/window.ui:1198
 msgid "Ollama Website"
 msgstr "ওল্লামা ওয়েবসাইট"
 
-#: src/window.ui:1125
+#: src/window.ui:1215
 msgid ""
 "Alpaca and its developers are not liable for any damages to devices or "
 "software resulting from the execution of code generated by an AI model. "
@@ -3306,63 +3429,63 @@ msgstr ""
 "সফ্টওয়্যারের যেকোনো ক্ষতির জন্য দায়ী নয়।অনুগ্রহ করে সতর্কতা অবলম্বন করুন এবং কোডটি "
 "চালানোর আগে সাবধানে পর্যালোচনা করুন।"
 
-#: src/window.ui:1138
+#: src/window.ui:1228
 msgid "Import Chat"
 msgstr "চ্যাট আমদানি করুন"
 
-#: src/window.ui:1152
+#: src/window.ui:1242
 msgid "Keyboard Shortcuts"
 msgstr "কীবোর্ড শর্টকাট"
 
-#: src/window.ui:1156
+#: src/window.ui:1246
 msgid "About Alpaca"
 msgstr "আলপাকা সম্পর্কে"
 
-#: src/window.ui:1164 src/window.ui:1190
+#: src/window.ui:1254 src/window.ui:1280
 msgid "Rename Chat"
 msgstr "চ্যাট নাম পরিবর্তন করুন"
 
-#: src/window.ui:1168 src/window.ui:1194
+#: src/window.ui:1258 src/window.ui:1284
 msgid "Duplicate Chat"
 msgstr "চ্যাট অনুলিপি করুন"
 
-#: src/window.ui:1176
+#: src/window.ui:1266
 msgid "Clear Chat"
 msgstr "চ্যাট পরিষ্কার করুন"
 
-#: src/window.ui:1182 src/window.ui:1204
+#: src/window.ui:1272 src/window.ui:1294
 msgid "Delete Chat"
 msgstr "চ্যাট ডিলিট করুন"
 
-#: src/window.ui:1212
+#: src/window.ui:1302
 msgid "Send as User"
 msgstr "ব্যবহারকারী হিসাবে পাঠান"
 
-#: src/window.ui:1216
+#: src/window.ui:1306
 msgid "Send as System"
 msgstr "সিস্টেম হিসাবে পাঠান"
 
-#: src/window.ui:1228
+#: src/window.ui:1318
 msgid "Attach Screenshot"
 msgstr "স্ক্রীনশট সংযুক্ত করুন"
 
-#: src/window.ui:1232
+#: src/window.ui:1322
 msgid "Attach Website"
 msgstr "ওয়েবসাইট সংযুক্ত করুন"
 
-#: src/window.ui:1236
+#: src/window.ui:1326
 msgid "Attach YouTube Captions"
 msgstr "ইউটিউব ক্যাপশন সংযুক্ত করুন"
 
-#: src/window.ui:1244
+#: src/window.ui:1334
 msgid "From Existing Model"
 msgstr "বিদ্যমান মডেল থেকে"
 
-#: src/window.ui:1248
+#: src/window.ui:1338
 msgid "From GGUF File"
 msgstr "GGUF ফাইল থেকে"
 
-#: src/window.ui:1252
+#: src/window.ui:1342
 msgid "From Name"
 msgstr "নাম থেকে"
 
@@ -3374,7 +3497,7 @@ msgstr "চ্যাট খুলুন"
 msgid "Quick ask"
 msgstr "দ্রুত জিজ্ঞাসা"
 
-#: src/generic_actions.py:86
+#: src/generic_actions.py:75
 msgid "An error occurred while extracting text from the website"
 msgstr "ওয়েবসাইট থেকে টেক্সট নিষ্কাশনের সময় একটি ত্রুটি ঘটেছে"
 
@@ -3476,102 +3599,101 @@ msgstr "সিস্টেমের বার্তাগুলি মডেল 
 msgid "Send Message as User"
 msgstr "ব্যবহারকারী হিসাবে বার্তা পাঠান"
 
-#: src/custom_widgets/chat_widget.py:122
+#: src/custom_widgets/chat_widget.py:82
 msgid "Send prompt: '{}'"
 msgstr "প্রম্পট পাঠান: '{}'"
 
-#: src/custom_widgets/chat_widget.py:128 src/custom_widgets/chat_widget.py:129
+#: src/custom_widgets/chat_widget.py:88 src/custom_widgets/chat_widget.py:89
 msgid "Open Model Manager"
 msgstr "মডেল ম্যানেজার খুলুন"
 
-#: src/custom_widgets/chat_widget.py:138
+#: src/custom_widgets/chat_widget.py:98
 msgid "Try one of these prompts"
 msgstr "এই প্রম্পটগুলির মধ্যে একটি চেষ্টা করুন"
 
-#: src/custom_widgets/chat_widget.py:138
+#: src/custom_widgets/chat_widget.py:98
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
-msgstr ""
-"মনে হচ্ছে আপনি এখনও কোনও মডেল ডাউনলোড করেননি। শুরু করতে মডেল ডাউনলোড করুন!"
+msgstr "মনে হচ্ছে আপনি এখনও কোনও মডেল ডাউনলোড করেননি। শুরু করতে মডেল ডাউনলোড করুন!"
 
-#: src/custom_widgets/chat_widget.py:163
+#: src/custom_widgets/chat_widget.py:151
 msgid "Chat exported successfully"
 msgstr "চ্যাট সফলভাবে রপ্তানি করা হয়েছে"
 
-#: src/custom_widgets/chat_widget.py:183
+#: src/custom_widgets/chat_widget.py:171
 msgid "User"
 msgstr "ব্যবহারকারী"
 
-#: src/custom_widgets/chat_widget.py:187
-#: src/custom_widgets/message_widget.py:599
+#: src/custom_widgets/chat_widget.py:175
+#: src/custom_widgets/message_widget.py:630
 msgid "System"
 msgstr "সিস্টেম"
 
-#: src/custom_widgets/chat_widget.py:265
+#: src/custom_widgets/chat_widget.py:253
 msgid "Regenerate Response"
 msgstr "উত্তর পুনরুত্পাদন করুন"
 
-#: src/custom_widgets/chat_widget.py:437
+#: src/custom_widgets/chat_widget.py:422
 msgid "Copy of {}"
 msgstr "{} এর অনুলিপি"
 
-#: src/custom_widgets/chat_widget.py:452
+#: src/custom_widgets/chat_widget.py:437
 msgid "Chat imported successfully"
 msgstr "চ্যাট সফলভাবে আমদানি করা হয়েছে"
 
-#: src/custom_widgets/message_widget.py:53
+#: src/custom_widgets/message_widget.py:69
 msgid "Save Message"
 msgstr "বার্তা সংরক্ষণ করুন"
 
-#: src/custom_widgets/message_widget.py:87
-#: src/custom_widgets/message_widget.py:203
+#: src/custom_widgets/message_widget.py:110
+#: src/custom_widgets/message_widget.py:238
 msgid "Message edited successfully"
 msgstr "বার্তা সফলভাবে সম্পাদিত হয়েছে"
 
-#: src/custom_widgets/message_widget.py:113
+#: src/custom_widgets/message_widget.py:136
 msgid "Response message"
 msgstr "প্রতিক্রিয়া বার্তা"
 
-#: src/custom_widgets/message_widget.py:115
+#: src/custom_widgets/message_widget.py:138
 msgid "System message"
 msgstr "সিস্টেম বার্তা"
 
-#: src/custom_widgets/message_widget.py:117
+#: src/custom_widgets/message_widget.py:140
 msgid "User message"
 msgstr "ব্যবহারকারীর বার্তা"
 
-#: src/custom_widgets/message_widget.py:153
+#: src/custom_widgets/message_widget.py:188
 msgid "{}Code Block"
 msgstr "{}কোড ব্লক"
 
-#: src/custom_widgets/message_widget.py:155
+#: src/custom_widgets/message_widget.py:190
 msgid "Code Block"
 msgstr "কোড ব্লক"
 
-#: src/custom_widgets/message_widget.py:156
-#: src/custom_widgets/message_widget.py:491
+#: src/custom_widgets/message_widget.py:191
+#: src/custom_widgets/message_widget.py:522
 msgid "Copy Message"
 msgstr "বার্তা কপি করুন"
 
-#: src/custom_widgets/message_widget.py:160
+#: src/custom_widgets/message_widget.py:195
 msgid "Edit Code Block"
 msgstr "কোড ব্লক সম্পাদনা করুন"
 
-#: src/custom_widgets/message_widget.py:168
+#: src/custom_widgets/message_widget.py:203
 msgid "Save"
 msgstr "সংরক্ষণ করুন"
 
-#: src/custom_widgets/message_widget.py:172
-#: src/custom_widgets/message_widget.py:251
+#: src/custom_widgets/message_widget.py:207
+#: src/custom_widgets/message_widget.py:283
 msgid "Run Script"
 msgstr "স্ক্রিপ্ট চালান"
 
-#: src/custom_widgets/message_widget.py:212
+#: src/custom_widgets/message_widget.py:247
 msgid "Code copied to the clipboard"
 msgstr "ক্লিপবোর্ডে কোড কপি করা হয়েছে"
 
-#: src/custom_widgets/message_widget.py:252
+#: src/custom_widgets/message_widget.py:284
 msgid ""
 "Make sure you understand what this script does before running it, Alpaca is "
 "not responsible for any damages to your device or data"
@@ -3579,246 +3701,208 @@ msgstr ""
 "স্ক্রিপ্টটি চালানোর আগে আপনি এটি কী করে তা নিশ্চিত করুন, আপনার ডিভাইস বা ডেটার "
 "কোনো ক্ষতির জন্য Alpaca দায়ী নয়।"
 
-#: src/custom_widgets/message_widget.py:254
+#: src/custom_widgets/message_widget.py:286
 msgid "Execute"
 msgstr "কার্যকর করুন"
 
-#: src/custom_widgets/message_widget.py:326
-#: src/custom_widgets/message_widget.py:328
+#: src/custom_widgets/message_widget.py:359
+#: src/custom_widgets/message_widget.py:361
 msgid "Image"
 msgstr "চিত্র"
 
-#: src/custom_widgets/message_widget.py:337
-#: src/custom_widgets/message_widget.py:349
+#: src/custom_widgets/message_widget.py:370
+#: src/custom_widgets/message_widget.py:382
 msgid "Missing Image"
 msgstr "ছবি খুঁজে পাওয়া যায়নি"
 
-#: src/custom_widgets/message_widget.py:351
+#: src/custom_widgets/message_widget.py:384
 msgid "Missing image"
 msgstr "ছবি খুঁজে পাওয়া যায়নি"
 
-#: src/custom_widgets/message_widget.py:383
+#: src/custom_widgets/message_widget.py:416
 msgid "Copy Equation"
 msgstr "সমীকরণ কপি করুন"
 
-#: src/custom_widgets/message_widget.py:389
+#: src/custom_widgets/message_widget.py:422
 msgid "Regenerate Equation"
 msgstr "সমীকরণ পুনর্নির্মাণ করুন"
 
-#: src/custom_widgets/message_widget.py:410
+#: src/custom_widgets/message_widget.py:443
 msgid "Equation copied to the clipboard"
 msgstr "সমীকরণ ক্লিপবোর্ডে কপি করা হয়েছে"
 
-#: src/custom_widgets/message_widget.py:414
+#: src/custom_widgets/message_widget.py:447
 msgid "LaTeX Equation"
 msgstr "LaTeX সমীকরণ"
 
-#: src/custom_widgets/message_widget.py:481
+#: src/custom_widgets/message_widget.py:512
 msgid "Remove Message"
 msgstr "বার্তা অপসারণ"
 
-#: src/custom_widgets/message_widget.py:501
+#: src/custom_widgets/message_widget.py:532
 msgid "Edit Message"
 msgstr "বার্তা সম্পাদনা করুন"
 
-#: src/custom_widgets/message_widget.py:512
+#: src/custom_widgets/message_widget.py:543
 msgid "Regenerate Message"
 msgstr "বার্তা পুনরুত্পাদন করুন"
 
-#: src/custom_widgets/message_widget.py:531
+#: src/custom_widgets/message_widget.py:562
 msgid "Message copied to the clipboard"
 msgstr "ক্লিপবোর্ডে কপি করা হয়েছে"
 
-#: src/custom_widgets/message_widget.py:567
+#: src/custom_widgets/message_widget.py:597
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "একটি প্রতিক্রিয়া পাওয়ার সময় বার্তা পুনরায় তৈরি করা যাবে না৷"
 
-#: src/custom_widgets/model_widget.py:180
-msgid "Stop Pulling '{}'"
-msgstr "'{}' পুল করা বন্ধ করুন"
+#: src/custom_widgets/message_widget.py:866
+msgid "Thought"
+msgstr ""
 
-#: src/custom_widgets/model_widget.py:183
+#: src/custom_widgets/model_manager_widget.py:180
+msgid "Model Manager Error"
+msgstr ""
+
+#: src/custom_widgets/model_manager_widget.py:180
+msgid "An error occurred whilst pulling '{}'"
+msgstr ""
+
+#: src/custom_widgets/model_manager_widget.py:205
+msgid "Download Completed"
+msgstr ""
+
+#: src/custom_widgets/model_manager_widget.py:205
+msgid "Model '{}' downloaded successfully."
+msgstr ""
+
+#: src/custom_widgets/model_manager_widget.py:217
+#: src/custom_widgets/model_manager_widget.py:219
+msgid "Stop Download"
+msgstr ""
+
+#: src/custom_widgets/model_manager_widget.py:223
 msgid "Stop Download?"
 msgstr "ডাউনলোড বন্ধ করুন?"
 
-#: src/custom_widgets/model_widget.py:184
+#: src/custom_widgets/model_manager_widget.py:224
 msgid "Are you sure you want to stop pulling '{}'?"
 msgstr "আপনি কি নিশ্চিত যে আপনি '{}' পুল করা বন্ধ করতে চান?"
 
-#: src/custom_widgets/model_widget.py:186
+#: src/custom_widgets/model_manager_widget.py:226
 msgid "Stop"
 msgstr "বন্ধ করুন"
 
-#: src/custom_widgets/model_widget.py:286
-msgid "Multilingual"
-msgstr "বহুভাষিক"
+#: src/custom_widgets/model_manager_widget.py:255
+msgid "Change Profile Picture"
+msgstr ""
 
-#: src/custom_widgets/model_widget.py:287
-msgid "Code"
-msgstr "কোড"
-
-#: src/custom_widgets/model_widget.py:288
-msgid "Math"
-msgstr "গণিত"
-
-#: src/custom_widgets/model_widget.py:289
-msgid "Vision"
-msgstr "দৃষ্টি"
-
-#: src/custom_widgets/model_widget.py:290
-msgid "Embedding"
-msgstr "এমবেডিং"
-
-#: src/custom_widgets/model_widget.py:291
-msgid "Small"
-msgstr "ছোট"
-
-#: src/custom_widgets/model_widget.py:292
-msgid "Medium"
-msgstr "মাঝারি"
-
-#: src/custom_widgets/model_widget.py:293
-msgid "Big"
-msgstr "বড়"
-
-#: src/custom_widgets/model_widget.py:294
-msgid "Huge"
-msgstr "বিশাল"
-
-#: src/custom_widgets/model_widget.py:347
-msgid "Details"
-msgstr "বিস্তারিত"
-
-#: src/custom_widgets/model_widget.py:357
-msgid "Remove '{}'"
-msgstr "'{}' অপসারণ করুন"
-
-#: src/custom_widgets/model_widget.py:361
-msgid "Delete Model?"
-msgstr "মডেল মুছে ফেলুন?"
-
-#: src/custom_widgets/model_widget.py:421
-msgid "Change"
-msgstr "পরিবর্তন"
-
-#: src/custom_widgets/model_widget.py:423
-msgid "Model Profile Picture"
-msgstr "মডেল প্রোফাইল ছবি"
-
-#: src/custom_widgets/model_widget.py:423
-msgid "What do you want to do with the model's profile picture?"
-msgstr "আপনি মডেলের প্রোফাইল ছবির সাথে কী করতে চান?"
-
-#: src/custom_widgets/model_widget.py:431
-msgid "Create Model Based on '{}'"
-msgstr "'{}'-এর উপর ভিত্তি করে মডেল তৈরি করুন"
-
-#: src/custom_widgets/model_widget.py:446
-msgid "Change Model Picture"
-msgstr "মডেল ছবিটি পরিবর্তন করুন"
-
-#: src/custom_widgets/model_widget.py:466
-msgid "Modified At"
-msgstr "সংশোধিত সময়"
-
-#: src/custom_widgets/model_widget.py:467
+#: src/custom_widgets/model_manager_widget.py:275
 msgid "Parent Model"
 msgstr "অভিভাবক মডেল"
 
-#: src/custom_widgets/model_widget.py:468
-msgid "Format"
-msgstr "ফরম্যাট"
-
-#: src/custom_widgets/model_widget.py:469
+#: src/custom_widgets/model_manager_widget.py:276
 msgid "Family"
 msgstr "পরিবার"
 
-#: src/custom_widgets/model_widget.py:470
+#: src/custom_widgets/model_manager_widget.py:277
 msgid "Parameter Size"
 msgstr "প্যারামিটার সাইজ"
 
-#: src/custom_widgets/model_widget.py:471
+#: src/custom_widgets/model_manager_widget.py:278
 msgid "Quantization Level"
 msgstr "কোয়ান্টাইজেশন স্তর"
 
-#: src/custom_widgets/model_widget.py:577
-msgid "Enter download menu for {}"
-msgstr "{} এর ডাউনলোড মেনুতে প্রবেশ করুন"
+#: src/custom_widgets/model_manager_widget.py:282
+#: src/custom_widgets/model_manager_widget.py:284
+msgid "Modified At"
+msgstr "সংশোধিত সময়"
 
-#: src/custom_widgets/model_widget.py:611
-msgid "Embedding Model"
-msgstr "এমবেডিং মডেল"
-
-#: src/custom_widgets/model_widget.py:612
-msgid ""
-"This model is meant to be used in the training of other models and won't "
-"work directly with Alpaca. Are you sure you want to download it anyway?"
+#: src/custom_widgets/model_manager_widget.py:305
+#: src/custom_widgets/model_manager_widget.py:312
+msgid "Not Available"
 msgstr ""
-"এই মডেলটি অন্যান্য মডেলের প্রশিক্ষণে ব্যবহারের জন্য ডিজাইন করা হয়েছে এবং এটি "
-"সরাসরি আলপাকার সাথে কাজ করবে না। আপনি কি নিশ্চিত যে আপনি এটি ডাউনলোড করতে চান?"
 
-#: src/custom_widgets/model_widget.py:614
-#: src/custom_widgets/model_widget.py:622
-msgid "Download"
-msgstr "ডাউনলোড করুন"
-
-#: src/custom_widgets/model_widget.py:619
-msgid "Large Model"
-msgstr "বড় মডেল"
-
-#: src/custom_widgets/model_widget.py:620
-msgid ""
-"This model might be too large to run optimally. Are you sure you want to "
-"download it anyway?"
+#: src/custom_widgets/model_manager_widget.py:320
+msgid "(No system message available)"
 msgstr ""
-"এই মডেলটি কার্যকরভাবে চালানোর জন্য খুব বড় হতে পারে। আপনি কি নিশ্চিত যে আপনি এটি "
-"ডাউনলোড করতে চান?"
 
-#: src/custom_widgets/model_widget.py:645
-msgid "Others..."
-msgstr "অন্যান্য..."
+#: src/custom_widgets/model_manager_widget.py:428
+msgid "Change"
+msgstr "পরিবর্তন"
 
-#: src/custom_widgets/model_widget.py:656
-msgid "Download {}:{}"
-msgstr "ডাউনলোড করুন {}:{}"
+#: src/custom_widgets/model_manager_widget.py:431
+msgid "Model Profile Picture"
+msgstr "মডেল প্রোফাইল ছবি"
 
-#: src/custom_widgets/model_widget.py:748
-msgid "Model deleted successfully"
-msgstr "মডেল সফলভাবে মুছে ফেলা হয়েছে"
+#: src/custom_widgets/model_manager_widget.py:431
+msgid "What do you want to do with the model's profile picture?"
+msgstr "আপনি মডেলের প্রোফাইল ছবির সাথে কী করতে চান?"
 
-#: src/custom_widgets/model_widget.py:828
-msgid "Task Complete"
-msgstr "কাজ সম্পন্ন"
+#: src/custom_widgets/model_manager_widget.py:450
+msgid "Create Child"
+msgstr ""
 
-#: src/custom_widgets/model_widget.py:828
-#: src/custom_widgets/model_widget.py:829
-msgid "Model '{}' pulled successfully."
-msgstr "মডেল '{}' সফলভাবে পুল করা হয়েছে"
+#: src/custom_widgets/model_manager_widget.py:457
+msgid "Remove Model"
+msgstr ""
 
-#: src/custom_widgets/model_widget.py:832
-#: src/custom_widgets/model_widget.py:835
-msgid "Pull Model Error"
-msgstr "মডেল পুল ত্রুটি"
+#: src/custom_widgets/model_manager_widget.py:461
+msgid "Remove Model?"
+msgstr ""
 
-#: src/custom_widgets/model_widget.py:832
-msgid "Failed to pull model '{}': {}"
-msgstr "মডেল '{}' পুল করা ব্যর্থ: {}"
+#: src/custom_widgets/model_manager_widget.py:462
+msgid "Are you sure you want to remove '{}'?"
+msgstr ""
 
-#: src/custom_widgets/model_widget.py:833
-msgid "Error pulling '{}': {}"
-msgstr "'{}' পুল করার ত্রুটি: {}"
+#: src/custom_widgets/model_manager_widget.py:476
+msgid "Multilingual"
+msgstr "বহুভাষিক"
 
-#: src/custom_widgets/model_widget.py:835
-msgid "Failed to pull model '{}' due to network error."
-msgstr "নেটওয়ার্ক ত্রুটির কারণে মডেল '{}' পুল করা সম্ভব হয়নি"
+#: src/custom_widgets/model_manager_widget.py:477
+msgid "Code"
+msgstr "কোড"
 
-#: src/custom_widgets/model_widget.py:836
-msgid "Error pulling '{}'"
-msgstr "'{}' পুল করার ত্রুটি"
+#: src/custom_widgets/model_manager_widget.py:478
+msgid "Math"
+msgstr "গণিত"
 
-#: src/custom_widgets/dialog_widget.py:134
-#: src/custom_widgets/dialog_widget.py:146
-#: src/custom_widgets/dialog_widget.py:158
+#: src/custom_widgets/model_manager_widget.py:479
+msgid "Vision"
+msgstr "দৃষ্টি"
+
+#: src/custom_widgets/model_manager_widget.py:480
+msgid "Embedding"
+msgstr "এমবেডিং"
+
+#: src/custom_widgets/model_manager_widget.py:481
+msgid "Small"
+msgstr "ছোট"
+
+#: src/custom_widgets/model_manager_widget.py:482
+msgid "Medium"
+msgstr "মাঝারি"
+
+#: src/custom_widgets/model_manager_widget.py:483
+msgid "Big"
+msgstr "বড়"
+
+#: src/custom_widgets/model_manager_widget.py:484
+msgid "Huge"
+msgstr "বিশাল"
+
+#: src/custom_widgets/model_manager_widget.py:565
+msgid ""
+"By downloading this model you accept the license agreement available on the "
+"model's website"
+msgstr ""
+
+#: src/custom_widgets/model_manager_widget.py:612
+msgid "Visit Website"
+msgstr ""
+
+#: src/custom_widgets/dialog_widget.py:147
+#: src/custom_widgets/dialog_widget.py:159
+#: src/custom_widgets/dialog_widget.py:171
 msgid "Accept"
 msgstr "গ্রহণ করুন"
 
@@ -3833,6 +3917,159 @@ msgstr "C++ স্ক্রিপ্ট কম্পাইল হচ্ছে...
 #: src/custom_widgets/terminal_widget.py:104
 msgid "Running local web server"
 msgstr "লোকাল ওয়েব সার্ভার চালু হচ্ছে"
+
+#: src/custom_widgets/terminal_widget.py:129
+msgid "Using Flatpak contained shell"
+msgstr ""
+
+#~ msgid "image"
+#~ msgstr "ছবি"
+
+#~ msgid "Select Model"
+#~ msgstr "মডেল নির্বাচন করুন"
+
+#~ msgid "This model will be used as the base for the new model"
+#~ msgstr "নতুন মডেলের জন্য এই মডেলটি ভিত্তি হিসাবে ব্যবহার করা হবে"
+
+#~ msgid "Pull Model"
+#~ msgstr "মডেল পুল করুন"
+
+#~ msgid ""
+#~ "Input the name of the model in this format\n"
+#~ "name:tag"
+#~ msgstr ""
+#~ "এই ফরম্যাটে মডেলের নাম ইনপুট করুন\n"
+#~ "নাম:ট্যাগ"
+
+#~ msgid ""
+#~ "Phi 4 is a 14B parameter, state-of-the-art open model from Microsoft."
+#~ msgstr ""
+#~ "Phi 4 হল ১৪ বিলিয়ন প্যারামিটার বিশিষ্ট, মাইক্রোসফটের একটি সর্বাধুনিক ওপেন মডেল।"
+
+#~ msgid "Sponsor Alpaca"
+#~ msgstr "অলপাকা স্পনসর করুন"
+
+#~ msgid ""
+#~ "The default model to use on new chats and when Alpaca is launched with "
+#~ "the option --ask \"message\""
+#~ msgstr ""
+#~ "নতুন চ্যাট এবং যখন Alpaca --ask \"message\" বিকল্প দিয়ে চালু করা হয় তখন "
+#~ "ব্যবহার করার জন্য ডিফল্ট মডেল"
+
+#~ msgid "Manage models dialog"
+#~ msgstr "মডেল ব্যবস্থাপনা ডায়ালগ"
+
+#~ msgid "Create Model"
+#~ msgstr "মডেল তৈরি করুন"
+
+#~ msgid "Refresh Local Models"
+#~ msgstr "স্থানীয় মডেলগুলি পুনরায় লোড করুন"
+
+#~ msgid "Try a different search or pull an unlisted model from it's name"
+#~ msgstr "একটি ভিন্ন সার্চ চেষ্টা করুন বা এর নাম থেকে একটি তালিকাভুক্ত নয় এম টানুন"
+
+#~ msgid "Pull Model From Name"
+#~ msgstr "নাম থেকে মডেল টানুন"
+
+#~ msgid ""
+#~ "By downloading this model you accept the license agreement available on "
+#~ "the model's website."
+#~ msgstr ""
+#~ "এই মডেলটি ডাউনলোড করার মাধ্যমে আপনি মডেলের ওয়েবসাইটে উপলব্ধ লাইসেন্স চুক্তি "
+#~ "গ্রহণ করেন।"
+
+#~ msgid "Model Details"
+#~ msgstr "মডেল বিস্তারিত"
+
+#~ msgid ""
+#~ "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
+#~ "instructions automatically. Please visit the model's website or Ollama "
+#~ "documentation for more information if you're unsure."
+#~ msgstr ""
+#~ "কিছু মডেল মডেলফাইল প্রয়োজন, আলপাকা FROM এবং SYSTEM (কন্টেক্সট) নির্দেশাবলী "
+#~ "স্বয়ংক্রিয়ভাবে পূরণ করে। আপনি অনিশ্চিত হলে মডেলের ওয়েবসাইট বা ওল্লামা "
+#~ "ডকুমেন্টেশন ভিজিট করুন আরও তথ্যের জন্য।"
+
+#~ msgid "Create"
+#~ msgstr "তৈরি করুন"
+
+#~ msgid "Stop Pulling '{}'"
+#~ msgstr "'{}' পুল করা বন্ধ করুন"
+
+#~ msgid "Details"
+#~ msgstr "বিস্তারিত"
+
+#~ msgid "Remove '{}'"
+#~ msgstr "'{}' অপসারণ করুন"
+
+#~ msgid "Delete Model?"
+#~ msgstr "মডেল মুছে ফেলুন?"
+
+#~ msgid "Create Model Based on '{}'"
+#~ msgstr "'{}'-এর উপর ভিত্তি করে মডেল তৈরি করুন"
+
+#~ msgid "Change Model Picture"
+#~ msgstr "মডেল ছবিটি পরিবর্তন করুন"
+
+#~ msgid "Format"
+#~ msgstr "ফরম্যাট"
+
+#~ msgid "Enter download menu for {}"
+#~ msgstr "{} এর ডাউনলোড মেনুতে প্রবেশ করুন"
+
+#~ msgid "Embedding Model"
+#~ msgstr "এমবেডিং মডেল"
+
+#~ msgid ""
+#~ "This model is meant to be used in the training of other models and won't "
+#~ "work directly with Alpaca. Are you sure you want to download it anyway?"
+#~ msgstr ""
+#~ "এই মডেলটি অন্যান্য মডেলের প্রশিক্ষণে ব্যবহারের জন্য ডিজাইন করা হয়েছে এবং এটি "
+#~ "সরাসরি আলপাকার সাথে কাজ করবে না। আপনি কি নিশ্চিত যে আপনি এটি ডাউনলোড করতে "
+#~ "চান?"
+
+#~ msgid "Download"
+#~ msgstr "ডাউনলোড করুন"
+
+#~ msgid "Large Model"
+#~ msgstr "বড় মডেল"
+
+#~ msgid ""
+#~ "This model might be too large to run optimally. Are you sure you want to "
+#~ "download it anyway?"
+#~ msgstr ""
+#~ "এই মডেলটি কার্যকরভাবে চালানোর জন্য খুব বড় হতে পারে। আপনি কি নিশ্চিত যে আপনি "
+#~ "এটি ডাউনলোড করতে চান?"
+
+#~ msgid "Others..."
+#~ msgstr "অন্যান্য..."
+
+#~ msgid "Download {}:{}"
+#~ msgstr "ডাউনলোড করুন {}:{}"
+
+#~ msgid "Model deleted successfully"
+#~ msgstr "মডেল সফলভাবে মুছে ফেলা হয়েছে"
+
+#~ msgid "Task Complete"
+#~ msgstr "কাজ সম্পন্ন"
+
+#~ msgid "Model '{}' pulled successfully."
+#~ msgstr "মডেল '{}' সফলভাবে পুল করা হয়েছে"
+
+#~ msgid "Pull Model Error"
+#~ msgstr "মডেল পুল ত্রুটি"
+
+#~ msgid "Failed to pull model '{}': {}"
+#~ msgstr "মডেল '{}' পুল করা ব্যর্থ: {}"
+
+#~ msgid "Error pulling '{}': {}"
+#~ msgstr "'{}' পুল করার ত্রুটি: {}"
+
+#~ msgid "Failed to pull model '{}' due to network error."
+#~ msgstr "নেটওয়ার্ক ত্রুটির কারণে মডেল '{}' পুল করা সম্ভব হয়নি"
+
+#~ msgid "Error pulling '{}'"
+#~ msgstr "'{}' পুল করার ত্রুটি"
 
 #~ msgid ""
 #~ "New state of the art 70B model. Llama 3.3 70B offers similar performance "
