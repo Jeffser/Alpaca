@@ -90,6 +90,26 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="4.0.0" date="2025-01-27">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/4.0.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>New model manager</li>
+          <li>Changed GtkSpinner to AdwSpinner</li>
+          <li>Better handling of launch process</li>
+          <li>New loading screen at launch</li>
+          <li>Better handling of file types</li>
+          <li>Better regex expression for LaTeX equations</li>
+          <li>Confirmation dialog if user closes Alpaca whilst a model is downloading</li>
+          <li>Better handling of think tags in messages</li>
+          <li>Default model is now in charge of generating titles</li>
+          <li>Message header is now shown whilst the message is being generated</li>
+          <li>Better handling of model profile pictures</li>
+          <li>New models in 'available models' list</li>
+        </ul>
+      </description>
+    </release>
     <release version="3.5.0" date="2025-01-07">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.5.0</url>
       <description>
