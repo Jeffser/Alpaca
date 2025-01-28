@@ -255,9 +255,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         def set_default_sidebar():
             time.sleep(1)
             if not self.split_view_overlay_model_manager.get_show_sidebar():
-                if self.model_manager_sidebar_bottom_bar:
-                    self.model_manager_sidebar.remove(self.model_manager_sidebar_bottom_bar)
-                self.model_manager_sidebar.get_content().set_child(Adw.StatusPage(icon_name='brain-augemnted-symbolic'))
+                if self.model_manager_sidebar_bottom_bar and self.model_manager_sidebar_bottom_bar.get_parent():
+                    GLib.idle_add(self.model_manager_sidebar.remove, self.model_manager_sidebar_bottom_bar)
+                GLib.idle_add(self.model_manager_sidebar.get_content().set_child, Adw.StatusPage(icon_name='brain-augemnted-symbolic'))
 
         selected_children = flowbox.get_selected_children()
         if len(selected_children) > 0:
@@ -267,7 +267,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             actionbar, content = model.get_page()
 
-            if self.model_manager_sidebar_bottom_bar:
+            if self.model_manager_sidebar_bottom_bar and self.model_manager_sidebar_bottom_bar.get_parent():
                 self.model_manager_sidebar.remove(self.model_manager_sidebar_bottom_bar)
             self.model_manager_sidebar_bottom_bar = actionbar
             self.model_manager_sidebar.add_bottom_bar(self.model_manager_sidebar_bottom_bar)
