@@ -640,6 +640,7 @@
                                                   <object class="GtkTextView" id="model_creator_context">
                                                     <property name="wrap-mode">3</property>
                                                     <property name="overflow">1</property>
+                                                    <property name="accepts-tab">false</property>
                                                     <style>
                                                       <class name="p10"/>
                                                       <class name="modelfile_textview"/>

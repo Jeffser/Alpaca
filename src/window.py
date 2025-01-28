@@ -146,7 +146,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         profile_picture = self.model_creator_profile_picture.get_subtitle()
         model_name = '{}:{}'.format(self.model_creator_name.get_text(), self.model_creator_tag.get_text()).replace(' ', '-').lower()
         context_buffer = self.model_creator_context.get_buffer()
-        system_message = context_buffer.get_text(context_buffer.get_start_iter(), context_buffer.get_end_iter(), False)
+        system_message = context_buffer.get_text(context_buffer.get_start_iter(), context_buffer.get_end_iter(), False).replace('"', '\\"')
         top_k = self.model_creator_imagination.get_value()
         top_p = self.model_creator_focus.get_value() / 100
 
