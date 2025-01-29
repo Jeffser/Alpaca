@@ -878,7 +878,7 @@ Generate a title following these rules:
                 _('Rename Chat?'),
                 _("Renaming '{}'").format(chat_name),
                 lambda new_chat_name, old_chat_name=chat_name, *_: self.chat_list_box.rename_chat(old_chat_name, new_chat_name),
-                {'placeholder': _('Chat name'), 'default': True},
+                {'placeholder': _('Chat name'), 'default': True, 'text': chat_name},
                 _('Rename')
             )
         elif action_name in ('export_chat', 'export_current_chat'):
