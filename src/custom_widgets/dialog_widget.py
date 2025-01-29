@@ -154,7 +154,7 @@ def simple(heading:str, body:str, callback:callable, button_name:str=_('Accept')
         }
     }
 
-    return Options(heading, body, list(options.keys())[0], options)
+    Options(heading, body, list(options.keys())[0], options)
 
 def simple_entry(heading:str, body:str, callback:callable, entries:list or dict, button_name:str=_('Accept'), button_appearance:str='suggested'):
     options = {
@@ -166,7 +166,7 @@ def simple_entry(heading:str, body:str, callback:callable, entries:list or dict,
         }
     }
 
-    return Entry(heading, body, list(options.keys())[0], options, entries)
+    Entry(heading, body, list(options.keys())[0], options, entries)
 
 def simple_dropdown(heading:str, body:str, callback:callable, items:list, button_name:str=_('Accept'), button_appearance:str='suggested'):
     options = {
@@ -178,7 +178,7 @@ def simple_dropdown(heading:str, body:str, callback:callable, items:list, button
         }
     }
 
-    return DropDown(heading, body, list(options.keys())[0], options, items)
+    DropDown(heading, body, list(options.keys())[0], options, items)
 
 def simple_error(title:str, body:str, error_log:str, callback:callable=None):
     container = Gtk.Box(
