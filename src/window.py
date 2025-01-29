@@ -908,13 +908,13 @@ Generate a title following these rules:
 
             transcriptions = generic_actions.get_youtube_transcripts(data['url'].split('=')[1])
             if len(transcriptions) == 0:
-                self.show_toast(_("This video does not have any transcriptions"), self.main_overlay)
+                GLib.idle_add(self.show_toast, _("This video does not have any transcriptions"), self.main_overlay)
                 return
 
             if not any(filter(lambda x: '(en' in x and 'auto-generated' not in x and len(transcriptions) > 1, transcriptions)):
                 transcriptions.insert(1, 'English (translate:en)')
 
-            dialog_widget.simple_dropdown(
+            GLib.idle_add(dialog_widget.simple_dropdown,
                 _('Attach YouTube Video?'),
                 _('{}\n\nPlease select a transcript to include').format(data['title']),
                 lambda caption_name, data=data, video_url=video_url: threading.Thread(target=generic_actions.attach_youtube, args=(data['title'], data['author_name'], data['url'], video_url, data['url'].split('=')[1], caption_name)).start(),
@@ -922,7 +922,8 @@ Generate a title following these rules:
             )
         except Exception as e:
             logger.error(e)
-            self.show_toast(_("Error attaching video, please try again"), self.main_overlay)
+            GLib.idle_add(self.show_toast, _("Error attaching video, please try again"), self.main_overlay)
+        GLib.idle_add(self.message_text_view_scrolled_window.set_sensitive, True)
 
     def cb_text_received(self, text):
         try:
@@ -938,7 +939,8 @@ Generate a title following these rules:
                 r'(?:/[^\\s]*)?'
             )
             if youtube_regex.match(text):
-                self.youtube_detected(text)
+                self.message_text_view_scrolled_window.set_sensitive(False)
+                threading.Thread(target=self.youtube_detected, args=(text,)).start()
             elif url_regex.match(text):
                 dialog_widget.simple(
                     _('Attach Website? (Experimental)'),
