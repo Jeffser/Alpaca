@@ -124,7 +124,7 @@ msgstr "कई मॉडल डाउनलोड किए जारहे ह�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:82
 msgid "Model creator screen"
-msgstr ""
+msgstr "मॉडल निर्माता स्क्रीन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
@@ -153,51 +153,51 @@ msgstr "नया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "New model manager"
-msgstr ""
+msgstr "नया मॉडल प्रबंधक"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Changed GtkSpinner to AdwSpinner"
-msgstr ""
+msgstr "GtkSpinner को AdwSpinner में बदला"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Better handling of launch process"
-msgstr ""
+msgstr "लॉन्च प्रक्रिया का बेहतर प्रबंधन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "New loading screen at launch"
-msgstr ""
+msgstr "लॉन्च पर नया लोडिंग स्क्रीन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Better handling of file types"
-msgstr ""
+msgstr "फाइल प्रकारों का बेहतर प्रबंधन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Better regex expression for LaTeX equations"
-msgstr ""
+msgstr "LaTeX समीकरणों के लिए बेहतर regex अभिव्यक्ति"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
-msgstr ""
+msgstr "यदि उपयोगकर्ता मॉडल डाउनलोड करते समय Alpaca बंद करता है तो पुष्टि संवाद"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Better handling of think tags in messages"
-msgstr ""
+msgstr "संदेशों में सोच टैग का बेहतर प्रबंधन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid "Default model is now in charge of generating titles"
-msgstr ""
+msgstr "डिफ़ॉल्ट मॉडल अब शीर्षक उत्पन्न करने का कार्यभार संभालता है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
 msgid "Message header is now shown whilst the message is being generated"
-msgstr ""
+msgstr "संदेश उत्पन्न होते समय अब संदेश शीर्षक दिखाया जाता है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Better handling of model profile pictures"
-msgstr ""
+msgstr "मॉडल प्रोफ़ाइल चित्रों का बेहतर प्रबंधन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:109
 msgid "New models in 'available models' list"
-msgstr ""
+msgstr "'उपलब्ध मॉडल' सूची में नए मॉडल"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:118
 msgid "Added option for attaching screenshots"
@@ -1137,7 +1137,8 @@ msgstr "अनुवाद"
 msgid ""
 "These are all the available translations on 1.0.0, thanks to all the "
 "contributors!"
-msgstr "यह 1.0.0 पर उपलब्ध सभी अनुवाद हैं, सभी योगदानकर्ताओं को धन्यवाद!"
+msgstr ""
+"यह 1.0.0 पर उपलब्ध सभी अनुवाद हैं, सभी योगदानकर्ताओं को धन्यवाद!"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:607
 msgid "Russian: Alex K"
@@ -1272,8 +1273,7 @@ msgstr "सेंड / स्टॉप बटन ठीक हो गया ह�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:684
 msgid "Fixed app not checking if remote connection works when starting"
-msgstr ""
-"ऐप शुरू होने पर रिमोट कनेक्शन काम कर रहा है या नहीं, इसकी जाँच नहीं करता था, यह समस्या "
+msgstr "ऐप शुरू होने पर रिमोट कनेक्शन काम कर रहा है या नहीं, इसकी जाँच नहीं करता था, यह समस्या "
 "अब ठीक हो गई है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:691
@@ -1777,15 +1777,15 @@ msgstr "अगला"
 
 #: src/window.py:445
 msgid "Hide"
-msgstr ""
+msgstr "छिपाएँ"
 
 #: src/window.py:449
 msgid "Close Alpaca?"
-msgstr ""
+msgstr "Alpaca बंद करें?"
 
 #: src/window.py:450
 msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
-msgstr ""
+msgstr "एक कार्य वर्तमान में प्रगति पर है। क्या आप सुनिश्चित हैं कि आप Alpaca बंद करना चाहते हैं?"
 
 #: src/window.py:660 src/window.ui:69 src/custom_widgets/chat_widget.py:384
 msgid "New Chat"
@@ -1922,7 +1922,7 @@ msgstr "संलग्नक विफल हो गया, स्क्री�
 
 #: src/window.py:1235
 msgid "Any compatible Alpaca attachment"
-msgstr ""
+msgstr "कोई भी संगत Alpaca अटैचमेंट"
 
 #: src/window.py:1285
 msgid "Clear Chat?"
@@ -1950,11 +1950,11 @@ msgstr "कृपया एक यूट्यूब वीडियो URL द�
 
 #: src/window.py:1304
 msgid "Download Model?"
-msgstr ""
+msgstr "मॉडल डाउनलोड करें?"
 
 #: src/window.py:1304
 msgid "Please enter the model name following this template: name:tag"
-msgstr ""
+msgstr "कृपया इस टेम्पलेट का पालन करते हुए मॉडल का नाम दर्ज करें: नाम:टैग"
 
 #: src/window.py:1318
 msgid "Remove Attachment?"
@@ -2305,8 +2305,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:49
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
-msgstr ""
-"ल्लामा 2 आधारित मॉडल जो चीनी संवाद क्षमता में सुधार करने के लिए फाइन-ट्यून किया गया है"
+msgstr "ल्लामा 2 आधारित मॉडल जो चीनी संवाद क्षमता में सुधार करने के लिए फाइन-ट्यून किया गया है"
 
 #: src/available_models_descriptions.py:50
 msgid ""
@@ -2321,8 +2320,7 @@ msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
 msgstr ""
-"एक बहुमुखी मॉडल जो एआई सॉफ्टवेयर डेवलपमेंट सीनेरियो के लिए है, जिसमें कोड पूर्णता भी शामिल "
-"है।"
+"एक बहुमुखी मॉडल जो एआई सॉफ्टवेयर डेवलपमेंट सीनेरियो के लिए है, जिसमें कोड पूर्णता भी शामिल है।"
 
 #: src/available_models_descriptions.py:52
 msgid ""
@@ -3012,7 +3010,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:147
 msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
-msgstr ""
+msgstr "Phi-4 एक 14B पैरामीटर वाला, अत्याधुनिक ओपन मॉडल है जो Microsoft से है।"
 
 #: src/available_models_descriptions.py:148
 msgid ""
@@ -3035,13 +3033,13 @@ msgstr ""
 msgid ""
 "DeepSeek's first generation reasoning models with comparable performance to "
 "OpenAI-o1."
-msgstr ""
+msgstr "DeepSeek की पहली पीढ़ी के तर्क मॉडल OpenAI-o1 के समान प्रदर्शन के साथ।"
 
 #: src/available_models_descriptions.py:151
 msgid ""
 "A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
 "with 37B activated for each token."
-msgstr ""
+msgstr "671B कुल पैरामीटर वाला एक मजबूत मिश्रण-विशेषज्ञ (MoE) भाषा मॉडल है, जिसमें प्रत्येक टोकन के लिए 37B सक्रिय हैं।"
 
 #: src/available_models_descriptions.py:152
 msgid ""
@@ -3049,14 +3047,14 @@ msgid ""
 "These models are on par with or better than equivalently sized fully open "
 "models, and competitive with open-weight models such as Llama 3.1 on English "
 "academic benchmarks."
-msgstr ""
+msgstr "OLMo 2 7B और 13B मॉडलों का एक नया परिवार है जिसे 5T टोकन तक प्रशिक्षित किया गया है। ये मॉडल समान आकार के पूरी तरह से ओपन मॉडलों के बराबर या बेहतर हैं, और अंग्रेजी शैक्षणिक मानकों पर Llama 3.1 जैसे ओपन-वेट मॉडलों के साथ प्रतिस्पर्धी हैं।"
 
 #: src/available_models_descriptions.py:153
 msgid ""
 "The smallest model in Cohere's R series delivers top-tier speed, efficiency, "
 "and quality to build powerful AI applications on commodity GPUs and edge "
 "devices."
-msgstr ""
+msgstr "Cohere की R श्रृंखला में सबसे छोटा मॉडल उच्चतम गति, दक्षता और गुणवत्ता प्रदान करता है ताकि सामान्य GPU और एज डिवाइस पर शक्तिशाली AI अनुप्रयोग बनाए जा सकें।"
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -3142,7 +3140,7 @@ msgstr "संदेश रोकें"
 
 #: src/window.ui:329
 msgid "Model Manager"
-msgstr ""
+msgstr "मॉडल प्रबंधक"
 
 #: src/window.ui:365
 msgid "Search Model"
@@ -3150,7 +3148,7 @@ msgstr "मॉडल खोजें"
 
 #: src/window.ui:379
 msgid "Model Manager Menu"
-msgstr ""
+msgstr "मॉडल प्रबंधक मेनू"
 
 #: src/window.ui:392
 msgid "Model search bar"
@@ -3162,7 +3160,7 @@ msgstr "मॉडल्स खोजें"
 
 #: src/window.ui:417
 msgid "Local Models"
-msgstr ""
+msgstr "स्थानीय मॉडल"
 
 #: src/window.ui:427 src/window.ui:470 src/window.ui:524
 msgid "No Models Found"
@@ -3171,37 +3169,37 @@ msgstr "कोई मॉडल नहीं मिला"
 #: src/window.ui:428
 msgid ""
 "It looks a bit empty in here. Try downloading some models to get started!"
-msgstr ""
+msgstr "यहाँ थोड़ा खाली लग रहा है। शुरू करने के लिए कुछ मॉडल डाउनलोड करने का प्रयास करें!"
 
 #: src/window.ui:471 src/window.ui:525
 msgid ""
 "Looks like we’re fresh out of models for that search. Try tweaking your "
 "keywords, or maybe explore something new!"
-msgstr ""
+msgstr "लगता है कि उस खोज के लिए हमारे पास मॉडल खत्म हो गए हैं। अपने कीवर्ड को संशोधित करने का प्रयास करें, या शायद कुछ नया खोजें!"
 
 #: src/window.ui:483
 msgid "Available Models"
-msgstr ""
+msgstr "उपलब्ध मॉडल"
 
 #: src/window.ui:537 src/window.ui:548
 msgid "Model Creator"
-msgstr ""
+msgstr "मॉडल निर्माता"
 
 #: src/window.ui:549
 msgid "Select a method of importing a model to continue"
-msgstr ""
+msgstr "जारी रखने के लिए एक मॉडल आयात करने की विधि चुनें"
 
 #: src/window.ui:561
 msgid "GGUF File"
-msgstr ""
+msgstr "GGUF फ़ाइल"
 
 #: src/window.ui:572
 msgid "Existing Model"
-msgstr ""
+msgstr "मौजूदा मॉडल"
 
 #: src/window.ui:590
 msgid "Identity"
-msgstr ""
+msgstr "पहचान"
 
 #: src/window.ui:593
 msgid "Base"
@@ -3209,11 +3207,11 @@ msgstr "बेस"
 
 #: src/window.ui:600
 msgid "Profile Picture"
-msgstr ""
+msgstr "प्रोफ़ाइल चित्र"
 
 #: src/window.ui:605
 msgid "Open File"
-msgstr ""
+msgstr "फ़ाइल खोलें"
 
 #: src/window.ui:616
 msgid "Name"
@@ -3221,7 +3219,7 @@ msgstr "नाम"
 
 #: src/window.ui:621 src/custom_widgets/model_manager_widget.py:274
 msgid "Tag"
-msgstr ""
+msgstr "टैग"
 
 #: src/window.ui:628
 msgid "Context"
@@ -3231,31 +3229,31 @@ msgstr "संदर्भ"
 msgid ""
 "Describe the desired behavior of the model in its primary language "
 "(typically English)."
-msgstr ""
+msgstr "मॉडल के इच्छित व्यवहार का वर्णन करें उसकी प्राथमिक भाषा में (आमतौर पर अंग्रेजी)।"
 
 #: src/window.ui:657
 msgid "Behavior"
-msgstr ""
+msgstr "व्यवहार"
 
 #: src/window.ui:660
 msgid "Imagination"
-msgstr ""
+msgstr "कल्पना"
 
 #: src/window.ui:661
 msgid "A higher number results in more diverse answers from the model. (top_k)"
-msgstr ""
+msgstr "उच्च संख्या मॉडल से अधिक विविध उत्तरों का परिणाम देती है। (top_k)"
 
 #: src/window.ui:675
 msgid "Focus"
-msgstr ""
+msgstr "फोकस"
 
 #: src/window.ui:676
 msgid "A higher number widens the amount of possible answers. (top_p)"
-msgstr ""
+msgstr "उच्च संख्या संभावित उत्तरों की मात्रा को बढ़ाती है। (top_p)"
 
 #: src/window.ui:709 src/window.ui:717
 msgid "Add Model"
-msgstr ""
+msgstr "मॉडल जोड़ें"
 
 #: src/window.ui:751 src/window.ui:1240
 msgid "Preferences"
@@ -3451,11 +3449,11 @@ msgstr "चैट हटाएं"
 
 #: src/window.ui:1282
 msgid "Reload Local Models"
-msgstr ""
+msgstr "स्थानीय मॉडल पुनः लोड करें"
 
 #: src/window.ui:1286
 msgid "Download Model From Name"
-msgstr ""
+msgstr "नाम से मॉडल डाउनलोड करें"
 
 #: src/window.ui:1316
 msgid "Send as User"
@@ -3747,28 +3745,28 @@ msgstr "उत्तर प्राप्त करते समय संद�
 
 #: src/custom_widgets/message_widget.py:866
 msgid "Thought"
-msgstr ""
+msgstr "विचार"
 
 #: src/custom_widgets/model_manager_widget.py:180
 msgid "Model Manager Error"
-msgstr ""
+msgstr "मॉडल प्रबंधक त्रुटि"
 
 #: src/custom_widgets/model_manager_widget.py:180
 msgid "An error occurred whilst pulling '{}'"
-msgstr ""
+msgstr "'{}' खींचते समय एक त्रुटि हुई"
 
 #: src/custom_widgets/model_manager_widget.py:205
 msgid "Download Completed"
-msgstr ""
+msgstr "डाउनलोड पूरा हुआ"
 
 #: src/custom_widgets/model_manager_widget.py:205
 msgid "Model '{}' downloaded successfully."
-msgstr ""
+msgstr "मॉडल '{}' सफलतापूर्वक डाउनलोड किया गया।"
 
 #: src/custom_widgets/model_manager_widget.py:217
 #: src/custom_widgets/model_manager_widget.py:219
 msgid "Stop Download"
-msgstr ""
+msgstr "डाउनलोड रोकें"
 
 #: src/custom_widgets/model_manager_widget.py:223
 msgid "Stop Download?"
@@ -3784,7 +3782,7 @@ msgstr "रोकें"
 
 #: src/custom_widgets/model_manager_widget.py:255
 msgid "Change Profile Picture"
-msgstr ""
+msgstr "प्रोफ़ाइल चित्र बदलें"
 
 #: src/custom_widgets/model_manager_widget.py:275
 msgid "Parent Model"
@@ -3810,11 +3808,11 @@ msgstr "संशोधित समय"
 #: src/custom_widgets/model_manager_widget.py:305
 #: src/custom_widgets/model_manager_widget.py:312
 msgid "Not Available"
-msgstr ""
+msgstr "उपलब्ध नहीं"
 
 #: src/custom_widgets/model_manager_widget.py:320
 msgid "(No system message available)"
-msgstr ""
+msgstr "(कोई सिस्टम संदेश उपलब्ध नहीं)"
 
 #: src/custom_widgets/model_manager_widget.py:428
 msgid "Change"
@@ -3830,19 +3828,19 @@ msgstr "आप मॉडल की प्रोफ़ाइल चित्र �
 
 #: src/custom_widgets/model_manager_widget.py:450
 msgid "Create Child"
-msgstr ""
+msgstr "बच्चा बनाएं"
 
 #: src/custom_widgets/model_manager_widget.py:458
 msgid "Remove Model"
-msgstr ""
+msgstr "मॉडल हटाएं"
 
 #: src/custom_widgets/model_manager_widget.py:462
 msgid "Remove Model?"
-msgstr ""
+msgstr "मॉडल हटाएं?"
 
 #: src/custom_widgets/model_manager_widget.py:463
 msgid "Are you sure you want to remove '{}'?"
-msgstr ""
+msgstr "क्या आप सुनिश्चित हैं कि आप '{}' हटाना चाहते हैं?"
 
 #: src/custom_widgets/model_manager_widget.py:477
 msgid "Multilingual"
@@ -3884,11 +3882,11 @@ msgstr "विशाल"
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website"
-msgstr ""
+msgstr "इस मॉडल को डाउनलोड करके आप मॉडल की वेबसाइट पर उपलब्ध लाइसेंस समझौते को स्वीकार करते हैं।"
 
 #: src/custom_widgets/model_manager_widget.py:613
 msgid "Visit Website"
-msgstr ""
+msgstr "वेबसाइट पर जाएं"
 
 #: src/custom_widgets/dialog_widget.py:147
 #: src/custom_widgets/dialog_widget.py:159
@@ -3910,7 +3908,7 @@ msgstr "स्थानीय वेब सर्वर चल रहा है"
 
 #: src/custom_widgets/terminal_widget.py:129
 msgid "Using Flatpak contained shell"
-msgstr ""
+msgstr "फ्लैटपैक में शामिल शेल का उपयोग कर रहे हैं"
 
 #~ msgid "From Existing Model"
 #~ msgstr "मौजूदा मॉडल से"
@@ -4249,3 +4247,4 @@ msgstr ""
 
 #~ msgid "Multimodal AI with image recognition"
 #~ msgstr "इमेज रिकॉग्निशन के साथ मल्टीमॉडल एआई"
+
