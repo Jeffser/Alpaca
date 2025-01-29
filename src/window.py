@@ -969,7 +969,10 @@ Generate a title following these rules:
         for file in files:
             extension = os.path.splitext(file.get_path())[1][1:]
             if extension in ('png', 'jpeg', 'jpg', 'webp', 'gif'):
-                self.attach_file(file.get_path(), 'image')
+                if self.model_selector.get_selected_model().get_vision():
+                    self.attach_file(file.get_path(), 'image')
+                else:
+                    self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
             elif extension in ('txt', 'md'):
                 self.attach_file(file.get_path(), 'plain_text')
             elif extension in ("c", "h", "css", "html", "js", "ts", "py", "java", "json", "xml",
