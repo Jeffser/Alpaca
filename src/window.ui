@@ -373,10 +373,11 @@
                           </object>
                         </property>
                         <child type="end">
-                          <object class="GtkButton">
-                            <property name="tooltip-text" translatable="yes">Download Model From Name</property>
-                            <property name="action-name">app.download_model_from_name</property>
-                            <property name="icon-name">list-add-symbolic</property>
+                          <object class="GtkMenuButton">
+                            <property name="primary">False</property>
+                            <property name="icon-name">view-more-symbolic</property>
+                            <property name="tooltip-text" translatable="yes">Model Manager Menu</property>
+                            <property name="menu-model">model_manager_menu</property>
                           </object>
                         </child>
                       </object>
@@ -1272,6 +1273,18 @@
       <item>
         <attribute name="label" translatable="yes">Delete Chat</attribute>
         <attribute name="action">app.delete_current_chat</attribute>
+      </item>
+    </section>
+  </menu>
+  <menu id="model_manager_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Reload Local Models</attribute>
+        <attribute name="action">app.reload_local_models</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Download Model From Name</attribute>
+        <attribute name="action">app.download_model_from_name</attribute>
       </item>
     </section>
   </menu>
