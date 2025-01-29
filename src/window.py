@@ -19,7 +19,7 @@
 """
 Handles the main window
 """
-import json, threading, os, re, base64, gettext, uuid, shutil, logging, time, requests, sqlite3
+import json, threading, os, re, base64, gettext, uuid, shutil, logging, time, requests, sqlite3, sys
 import odf.opendocument as odfopen
 import odf.table as odftable
 from io import BytesIO
@@ -1304,6 +1304,8 @@ Generate a title following these rules:
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
         self.get_application().lookup_action('model_manager').set_enabled(False)
+        if sys.platform == 'darwin':
+            self.get_application().lookup_action('attach_screenshot').set_enabled(False)
         self.remote_connection_switch.set_sensitive(False)
         self.tweaks_group.set_sensitive(False)
         self.instance_page.set_sensitive(False)
