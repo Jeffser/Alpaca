@@ -1,6 +1,6 @@
 # main.py
 #
-# Copyright 2024 Jeffser
+# Copyright 2025 Jeffser
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -152,7 +152,7 @@ class AlpacaApplication(Adw.Application):
             developers=['Jeffser https://jeffser.com'],
             designers=['Jeffser https://jeffser.com', 'Tobias Bernard (App Icon) https://tobiasbernard.com/'],
             translator_credits='\n'.join(translators),
-            copyright='© 2024 Jeffser\n© 2024 Ollama',
+            copyright='© 2025 Jeffser\n© 2025 Ollama',
             issue_url='https://github.com/Jeffser/Alpaca/issues',
             license_type=3,
             website="https://jeffser.com/alpaca",
