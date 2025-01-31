@@ -138,6 +138,8 @@ class AlpacaApplication(Adw.Application):
             if settings:
                 settings.set_property('gtk-xft-antialias', 1)
                 settings.set_property('gtk-decoration-layout', 'close,minimize,maximize:menu')
+                settings.set_property('gtk-font-name', 'Apple SD Gothic Neo')
+                settings.set_property('gtk-xft-dpi', 110592)
             win.add_css_class('macos')
             win.powersaver_warning_switch.set_visible(False)
             win.background_switch.set_visible(False)
