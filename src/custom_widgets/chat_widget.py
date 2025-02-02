@@ -185,7 +185,8 @@ class chat(Gtk.Stack):
                         'code': '💻',
                         'pdf': '📕',
                         'youtube': '📹',
-                        'website': '🌐'
+                        'website': '🌐',
+                        'thought': '🧠'
                     }
                     for file in message_element.attachment_c.files:
                         if obsidian:
@@ -194,7 +195,7 @@ class chat(Gtk.Stack):
                                 file_block += "> {}\n".format(line)
                             markdown.append(file_block)
                         else:
-                            markdown.append('<details>\n\n<summary>{} {}</summary>\n\n```TXT\n{}\n```\n\n</details>'.format(emojis[file.file_type], file.get_name(), file.file_content))
+                            markdown.append('<details>\n\n<summary>{} {}</summary>\n\n```TXT\n{}\n```\n\n</details>'.format(emojis.get(file.file_type, ''), file.get_name(), file.file_content))
                 markdown.append('----')
         markdown.append('Generated from [Alpaca](https://github.com/Jeffser/Alpaca)')
         with open(os.path.join(cache_dir, 'export.md'), 'w') as f:
