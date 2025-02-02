@@ -2,14 +2,15 @@
 # Copyright (C) 2024 Jeffry Samuel Eduarte Rojas
 # This file is distributed under the same license as the Alpaca package.
 # Marcel Margenberg <dev.margenberg@gmail.com>, 2024.
+# Magnus Schlinsog <magnusschlinsog@gmail.com>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-28 20:47-0600\n"
-"PO-Revision-Date:  2024-10-27 03:33+0000Last-Translator: Marcel Margenberg "
-"<dev.margenberg@gmail.com>\n"
+"PO-Revision-Date:  2025-02-02 12:20+0001"
+"Last-Translator: Magnus Schlinsog <magnusschlinsog@gmail.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -105,7 +106,7 @@ msgstr "Eine Konversation mit Bilderkennung"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:62
 msgid "A conversation involving a custom model"
-msgstr ""
+msgstr "Eine Unterhaltung mit einem benutzerdefinierten Modell"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:66
 msgid "A conversation showing code highlighting"
@@ -125,7 +126,7 @@ msgstr "Mehrere Modelle werden heruntergeladen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:82
 msgid "Model creator screen"
-msgstr ""
+msgstr "Modellerstellungsoberfläche"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
@@ -154,103 +155,107 @@ msgstr "Neu"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "New model manager"
-msgstr ""
+msgstr "Neuer KI-Modell-Manager"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Changed GtkSpinner to AdwSpinner"
-msgstr ""
+msgstr "Von GtkSpinner auf AdwSpinner gewechselt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Better handling of launch process"
-msgstr ""
+msgstr "Besserer Ablauf des Startprozesses"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "New loading screen at launch"
-msgstr ""
+msgstr "Neuer Ladebildschirm beim Start"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Better handling of file types"
-msgstr ""
+msgstr "Bessere Handhabung von Dateitypen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Better regex expression for LaTeX equations"
-msgstr ""
+msgstr "Bessere RegEx-Ausdrücke für LaTeX-Gleichungen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
 msgstr ""
+"Bestätigungsdialog, sollte Alpaca während des Downloads eines Modells "
+"geschlossen werden"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Better handling of think tags in messages"
-msgstr ""
+msgstr "Bessere Handhabung von Reasoning-Tags in Nachrichten"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid "Default model is now in charge of generating titles"
-msgstr ""
+msgstr "Das Standard-Modell generiert nun Titel"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
 msgid "Message header is now shown whilst the message is being generated"
-msgstr ""
+msgstr "Die Nachrichtenkopfzeile wird nun während der Generierung angezeigt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Better handling of model profile pictures"
-msgstr ""
+msgstr "Bessere Handhabung von Profilbildern der Modelle"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:109
 msgid "New models in 'available models' list"
-msgstr ""
+msgstr "Neue Modelle in der 'Verfügbare Modelle'-Liste"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:118
 msgid "Added option for attaching screenshots"
-msgstr ""
+msgstr "Option zum Anfügen von Screenshots hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:119
 msgid "Basic LaTeX math equations are now rendered in messages"
 msgstr ""
+"Grundlegende LaTeX-Mathematikgleichungen werden nun in Nachrichten "
+"gerendert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
 msgid "HTML and C++ scripts can now be run inside Alpaca"
-msgstr ""
+msgstr "HTML sowie C++-Skripte können nun innerhalb von Alpaca ausgeführt werden"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:121
 msgid "Added option to open the environment directory from the terminal"
-msgstr ""
+msgstr "Option hinzugefügt, den Umgebungsordner vom Terminal aus zu öffnen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
 msgid "Added option to edit code blocks directly"
-msgstr ""
+msgstr "Option hinzugefügt, um Codeblöcke direkt bearbeiten zu können"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Complete keyboard shortcut list"
-msgstr ""
+msgstr "Tastenkürzelliste vervollständigt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Images are now attached in 640p resolution"
-msgstr ""
+msgstr "Bilder werden nun in 640p-Auflösung angehangen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:125
 msgid "Website attachments now use extracted titles"
-msgstr ""
+msgstr "Website-Anhänge nutzen nun auch extrahierte Titel"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:126
 msgid "Better chat title generation"
-msgstr ""
+msgstr "Bessere Generierung der Chat-Titel"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:127
 msgid "Added option to attach any plain text files"
-msgstr ""
+msgstr "Option hinzugefügt, um Klartextdateien anzuhängen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:128
 msgid "Added spellchecker to message entry"
-msgstr ""
+msgstr "Rechtschreiberkennung zum Nachrichtenfeld hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:129
 msgid "Alpaca's parameters are now stored using SQLite3"
-msgstr ""
+msgstr "Alpaca's Einstellungen werden nun mittels SQLite3 gespeichert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:130
 msgid "Small appearance changes in text entries"
-msgstr ""
+msgstr "Geringfügige Aussehensanpassungen in Textfeldern"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:132
 #: data/com.jeffser.Alpaca.metainfo.xml.in:163
@@ -278,23 +283,24 @@ msgstr "Fehlerbehebungen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:134
 msgid "Alpaca's launch process is more reliable"
-msgstr ""
+msgstr "Alpaca's Startprozess ist zuverlässiger"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:135
 msgid "Closing the terminal now kills the script subprocess"
 msgstr ""
+"Das Terminal zu schließen führt nun zum Beenden des Skript-Subprozesses"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:144
 msgid "Transitioned chat backend from JSON to SQLite3"
-msgstr ""
+msgstr "Chat-Backend von JSON zu SQLite migriert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:145
 msgid "Changed appearance of messages"
-msgstr ""
+msgstr "Erscheinungsbild der Nachrichten geändert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:146
 msgid "Added the option to add profile pictures to models"
-msgstr ""
+msgstr "Option hinzugefügt, um Profilbilder zu Modellen hinzuzufügen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:148
 #: data/com.jeffser.Alpaca.metainfo.xml.in:620
@@ -304,140 +310,155 @@ msgstr "Fehlerbehebung"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:150
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
-msgstr ""
+msgstr "Override HIP_VISIBLE_DEVICES zu ROCR_VISIBLE_DEVICES gewechselt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:159
 msgid "Added categories to models"
-msgstr ""
+msgstr "Kategorien zu Modellen hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:160
 msgid "Specified model's languages"
-msgstr ""
+msgstr "Sprachen der Modelle spezifiziert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:161
 msgid "Added warning when downloading embedding models"
-msgstr ""
+msgstr "Warnung beim Download von Embedding-Modellen hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:165
 msgid "Replaced low ram warning with big model warning"
 msgstr ""
+"Warnung über geringen Arbeitsspeicher mit Warnung zu großem Modell ersetzt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:174
 msgid "Correctly escape markup before rendering message"
-msgstr ""
+msgstr "Markup richtig escapen, bevor es in der Nachricht gerendert wird"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:175
 msgid "Fixed about dialog not working if log file was missing"
 msgstr ""
+"Nicht funktionierenden 'Über Alpaca'-Dialog behoben, sollte die Log-Datei "
+"fehlen."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:184
 msgid "System messages can now be sent directly from Alpaca"
-msgstr ""
+msgstr "Systemnachrichten können nun direkt mit Alpaca gesendet werden"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:185
 msgid "New redesign for messages and smaller minimum size"
-msgstr ""
+msgstr "Neues Design für Nachrichten und kleinere Minimalgröße"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:186
 msgid "New models included in 'available models list'"
-msgstr ""
+msgstr "Neue Modelle in 'Verfügbare Modelle'-Liste aufgenommen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:187
 msgid "Added symbolic icon when attaching code files"
-msgstr ""
+msgstr "Symbolische Icons beim Anhang von Codedateien hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:188
 msgid "When exporting a chat it now includes a markdown file"
-msgstr ""
+msgstr "Der Export eines Chats beinhaltet nun eine Markdown-Datei"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:189
 msgid "Refresh button in model manager when using a remote instance"
-msgstr ""
+msgstr "'Neu laden'-Knopf im Modellmanager bei Nutzung einer Remoteinstanz"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:190
 msgid "Assistant messages are now editable"
-msgstr ""
+msgstr "Assistentnachrichten können nun bearbeitet werden"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:191
 msgid "Updated Ollama to v0.5.2"
-msgstr ""
+msgstr "Ollama auf v0.5.2 aktualisiert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:192
 msgid "New option to change model directory"
-msgstr ""
+msgstr "Neue Option zum Wechseln des Modellordners"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:193
 msgid "File previewer now resizes dynamically to content"
-msgstr ""
+msgstr "Größe der Dateivorschau wird nun dynamisch zum Inhalt angepasst"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:194
 msgid "Adapted Alpaca to work without integrated Ollama instance"
-msgstr ""
+msgstr "Alpaca angepasst, sodass es ohne integrierte Instanz arbeiten kann"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:195
 msgid "Compatibility added with ODT files"
-msgstr ""
+msgstr "Kompatibilität mit ODT-Dateien hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:198
 msgid "Restored ROCm compatibility"
-msgstr ""
+msgstr "ROCm-Kompatibilität wiederhergestellt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:199
 msgid ""
 "Added long press gesture to chat rows so actions can be done in touchscreens"
 msgstr ""
+"Langes Drücken-Geste zu Chatzeilen hinzugefügt, sodass Aktionen auch auf "
+"Touchscreens durchgeführt werden können."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:200
 msgid "Fixed edit button not saving changes"
 msgstr ""
+"Fehler des Bearbeiten-Knopfes behoben, der die Änderungen nicht speicherte"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:201
 msgid "Changed max temperature value to 2"
-msgstr ""
+msgstr "Maximal-Modelltemperaturwert auf 2 geändert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:202
 msgid "Made seed 0 actually random"
-msgstr ""
+msgstr "Seed '0' tatsächlich zufällig gemacht"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:203
 msgid ""
 "Fixed Gnome search provider not working outside of Flatpak installations"
 msgstr ""
+"Nicht funktionierenden GNOME-Search-Provider außerhalb von "
+"Flatpak-Installationen behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:212
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
 msgstr ""
+"Neue Option '--ask MESSAGE', um ein neues 'Quick Ask'-Fenster zu öffnen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:213
 msgid "Gnome Search integration now works whilst the app is opened"
-msgstr ""
+msgstr "GNOME-Suche-Integration funktioniert nun, wenn die App geöffnet ist"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:222
 msgid ""
 "Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
 "--list-chats, --version"
 msgstr ""
+"Startparameter '--ask MESSAGE', '--new-chat CHAT', '--select-chat CHAT', "
+"'--list-chats', '--version' hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:223
 msgid "Added integration as Gnome Search Provider"
-msgstr ""
+msgstr "Integration als GNOME-Suche-Provider hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:224
 msgid "Updated Ollama to v0.4.2 with new models"
-msgstr ""
+msgstr "Ollama auf Version v0.4.2 mit neuen Modellen aktualisiert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:233
 msgid "User messages are now compacted into bubbles"
-msgstr ""
+msgstr "Nutzernachrichten sind nun kleiner in Sprechblasen komprimiert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:237
 msgid ""
 "Fixed re connection dialog not working when 'use local instance' is selected"
 msgstr ""
+"Bei Auswahl von 'Nutzung lokaler Instanz' nicht funktionierenden "
+"re-Verbindungsdialog behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:238
 msgid "Fixed model manager not adapting to large system fonts"
 msgstr ""
+"Nicht mit zu großen Systemschriftgrößen funktionierenden Modellmanager "
+"behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:247
 msgid "Details page for models"
@@ -1824,15 +1845,15 @@ msgstr "Weiter"
 
 #: src/window.py:445
 msgid "Hide"
-msgstr ""
+msgstr "Verbergen"
 
 #: src/window.py:449
 msgid "Close Alpaca?"
-msgstr ""
+msgstr "Alpaca schließen?"
 
 #: src/window.py:450
 msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
-msgstr ""
+msgstr "Eine Aufgabe wird derzeit bearbeitet. Sind Sie sicher, dass Sie Alpaca schließen möchten?"
 
 #: src/window.py:660 src/window.ui:69 src/custom_widgets/chat_widget.py:384
 msgid "New Chat"
@@ -1894,23 +1915,23 @@ msgstr "Umbenennen"
 
 #: src/window.py:886
 msgid "Importable (.db)"
-msgstr ""
+msgstr "Importierbare Datei (.db)"
 
 #: src/window.py:887
 msgid "Markdown"
-msgstr ""
+msgstr "Markdown"
 
 #: src/window.py:888
 msgid "Markdown (Obsidian Style)"
-msgstr ""
+msgstr "Markdown (Obsidian-Style)"
 
 #: src/window.py:889
 msgid "JSON"
-msgstr ""
+msgstr "JSON"
 
 #: src/window.py:890
 msgid "JSON (Include Metadata)"
-msgstr ""
+msgstr "JSON (Metadaten einbezogen)"
 
 #: src/window.py:893 src/window.ui:1264 src/window.ui:1302
 msgid "Export Chat"
@@ -1918,7 +1939,7 @@ msgstr "Chat exportieren"
 
 #: src/window.py:894
 msgid "Select a method to export the chat"
-msgstr ""
+msgstr "Wählen Sie eine Methode, um den Chat zu exportieren"
 
 #: src/window.py:910
 msgid "This video does not have any transcriptions"
@@ -1940,7 +1961,7 @@ msgstr ""
 
 #: src/window.py:924
 msgid "Error attaching video, please try again"
-msgstr ""
+msgstr "Es gab einen Fehler beim Anfügen des Videos. Versuchen Sie es bitte erneut."
 
 #: src/window.py:945 src/window.py:1301
 msgid "Attach Website? (Experimental)"
@@ -1961,19 +1982,19 @@ msgstr "Bilderkennung ist nur bei bestimmten Modellen verfügbar"
 
 #: src/window.py:1043
 msgid "An error occurred: {}"
-msgstr ""
+msgstr "Ein Fehler trat auf: {}"
 
 #: src/window.py:1054 src/window.ui:1005
 msgid "Quick Ask"
-msgstr ""
+msgstr "Flinke Frage"
 
 #: src/window.py:1221
 msgid "Attachment failed, screenshot might be too big"
-msgstr ""
+msgstr "Anhängen schlug fehl; das Bildschirmfoto ist womöglich zu groß."
 
 #: src/window.py:1235
 msgid "Any compatible Alpaca attachment"
-msgstr ""
+msgstr "Jeglicher Alpaca-kompatibler Anhang"
 
 #: src/window.py:1285
 msgid "Clear Chat?"
@@ -1989,23 +2010,23 @@ msgstr "Löschen"
 
 #: src/window.py:1301
 msgid "Please enter a website URL"
-msgstr ""
+msgstr "Bitte geben Sie eine Website-URL an"
 
 #: src/window.py:1302
 msgid "Attach YouTube Captions?"
-msgstr ""
+msgstr "YouTube-Untertitel anhängen?"
 
 #: src/window.py:1302
 msgid "Please enter a YouTube video URL"
-msgstr ""
+msgstr "Bitte geben Sie eine YouTube-Video-URL ein"
 
 #: src/window.py:1304
 msgid "Download Model?"
-msgstr ""
+msgstr "Modell herunterladen?"
 
 #: src/window.py:1304
 msgid "Please enter the model name following this template: name:tag"
-msgstr ""
+msgstr "Bitte geben Sie den Modellnamen nach folgendem Schema an: name:tag"
 
 #: src/window.py:1318
 msgid "Remove Attachment?"
@@ -2025,18 +2046,25 @@ msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to the Llama 3.1 405B model."
 msgstr ""
+"70B-Modell auf dem neuesten Stand der Technik. Llama 3.3 70B liefert eine"
+"mit Llama 3.1 405B vergleichbare Leistung."
 
 #: src/available_models_descriptions.py:3
 msgid ""
 "QwQ is an experimental research model focused on advancing AI reasoning "
 "capabilities."
 msgstr ""
+"QwQ ist ein experimentelles Forschungsmodell mit einem Fokus auf erweiterte"
+"Fähigkeiten des logischen Denkens einer KI."
 
 #: src/available_models_descriptions.py:4
 msgid ""
 "Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
 "generative models in 11B and 90B sizes."
 msgstr ""
+"Llama 3.2 Vision ist eine Sammlung von besonders auf Anweisungen "
+"abgestimmten, logisch denkenden generativen Modellen in Größen von"
+"11B und 90B Parametern."
 
 #: src/available_models_descriptions.py:5
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
@@ -2649,6 +2677,8 @@ msgid ""
 "A large language model built by the Technology Innovation Institute (TII) "
 "for use in summarization, text generation, and chat bots."
 msgstr ""
+"Ein vom Technology Innovation Institute (TII) entwickeltes LLM zur Nutzung "
+"in Zusammenfassung, Textgenerierung und als Chatbot."
 
 #: src/available_models_descriptions.py:86
 msgid ""
@@ -2670,7 +2700,8 @@ msgstr ""
 msgid ""
 "Athene-V2 is a 72B parameter model which excels at code completion, "
 "mathematics, and log extraction tasks."
-msgstr ""
+msgstr "Athene-V2 ist ein 72B-Parameter-Modell welches besonders gut in "
+"Codevervollständigung, Mathematik und Log-Extrahierungsaufgaben abschneidet."
 
 #: src/available_models_descriptions.py:89
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
@@ -2724,6 +2755,8 @@ msgid ""
 "SmolLM2 is a family of compact language models available in three size: "
 "135M, 360M, and 1.7B parameters."
 msgstr ""
+"SmolLM2 ist eine Familie von kompakten Sprachmodellen - verfügbar in drei "
+"Größen: 135M, 360M und 1.7B Parameter."
 
 #: src/available_models_descriptions.py:96
 msgid "Uncensored version of Wizard LM model"
@@ -2783,6 +2816,8 @@ msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
 msgstr ""
+"Llama-3.1-Nemotron-70B-Instruct ist ein LLM, welches von NVIDIA verfeinert "
+"wurde, um dessen Antworten auf Nutzeranfragen hilfreicher zu machen."
 
 #: src/available_models_descriptions.py:104
 msgid ""
@@ -2811,7 +2846,10 @@ msgid ""
 "The IBM Granite 2B and 8B models are designed to support tool-based use "
 "cases and support for retrieval augmented generation (RAG), streamlining "
 "code generation, translation and bug fixing."
-msgstr ""
+msgstr "Die IBM Granite 2B- und 8B-Modelle sind dazu entwickelt, "
+"toolbasierte Anwendungsfälle und Unterstützung für abrufaugmentierte "
+"Generierung (RAG), vereinfachte Codegenerierung, Übersetzung und das "
+"Beheben von Bugs zu unterstützen."
 
 #: src/available_models_descriptions.py:109
 msgid ""
@@ -2935,6 +2973,8 @@ msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
+"Die IBM Granite 1B- und 3B-Modelle sind die ersten Mixture of Experts "
+"(MoE)-Granite-Modelle von IBM, entwickelt für Nutzung mit geringer Latenz."
 
 #: src/available_models_descriptions.py:125
 msgid ""
@@ -2950,6 +2990,7 @@ msgid ""
 "Cohere For AI's language models trained to perform well across 23 different "
 "languages."
 msgstr ""
+"Cohere For AI's LLMs, trainiert darauf, gut in 23 Sprachen abzuschneiden."
 
 #: src/available_models_descriptions.py:127
 msgid "DBRX is an open, general-purpose LLM created by Databricks."
@@ -2961,6 +3002,8 @@ msgid ""
 "An open large reasoning model for real-world solutions by the Alibaba "
 "International Digital Commerce Group (AIDC-AI)."
 msgstr ""
+"Ein offenes, großes Reasoning-Modell für Lösungen in der echten Welt von "
+"der Alibaba International Digital Commerce Group (AIDC-AI)."
 
 #: src/available_models_descriptions.py:129
 msgid "Embedding model from BAAI mapping texts to vectors."
@@ -2986,7 +3029,9 @@ msgstr ""
 msgid ""
 "An upgraded version of DeekSeek-V2 that integrates the general and coding "
 "abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
-msgstr ""
+msgstr "Eine verbesserte Version von DeepSeek-V2, welche die generischen "
+"sowie Coding-Fähigkeiten von sowohl DeepSeek-V2-Chat als auch "
+"DeepSeek-Coder-V2-Instruct vereint."
 
 #: src/available_models_descriptions.py:133
 msgid ""
@@ -2994,6 +3039,9 @@ msgid ""
 "text prompt input and text output responses against a set of defined safety "
 "policies."
 msgstr ""
+"ShieldGemma ist eine Sammlung von Anweisungs-getuneten Modellen zur "
+"Auswertung von der Sicherheit der Prompteingaben sowie -ausgaben aufgrund "
+"einer Sammlung an definierten Sicherheitsregeln."
 
 #: src/available_models_descriptions.py:134
 msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
@@ -3004,6 +3052,8 @@ msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
 msgstr ""
+"Llama Guard 3 ist eine Serie an Modellen, die auf Inhaltsicherheits-"
+"Klassifizierung von LLM-Eingaben und -Ausgaben feinabgestimmt wurden."
 
 #: src/available_models_descriptions.py:136
 msgid ""
@@ -3018,24 +3068,34 @@ msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
 msgstr ""
+"OpenCoder ist eine offene, reproduzierbare LLM-Familie, welche 1.5B und "
+"8B-Modelle beinhaltet und Konversationen in Englisch und Chinesisch "
+"unterstützt."
 
 #: src/available_models_descriptions.py:138
 msgid ""
 "Tülu 3 is a leading instruction following model family, offering fully open-"
 "source data, code, and recipes by the The Allen Institute for AI."
 msgstr ""
+"Tülu 3 ist eine Familie an führenden, Anweisungen folgenden Modellen mit "
+"quelloffenen Daten, Code und Reproduktionsanweisungen vom The Allen "
+"Institute for AI."
 
 #: src/available_models_descriptions.py:139
 msgid ""
 "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
 "support without sacrificing English performance or scalability."
 msgstr ""
+"Snowflake's erstklassiges Einbettungsmodell. Arctic Embed 2.0 fügt "
+"multilinguale Unterstützung hinzu, ohne die Leistung oder Skalierbarkeit in "
+"Englisch zu beeinflussen."
 
 #: src/available_models_descriptions.py:140
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
-msgstr ""
+msgstr "Die IBM Granite Guardian 3.0 2B- und 8B-Modelle wurden entwickelt, um "
+"Risiken in Ein- und Ausgaben zu erkennen."
 
 #: src/available_models_descriptions.py:141
 msgid ""
@@ -3043,18 +3103,26 @@ msgid ""
 "Korean) generative models ranging from 2.4B to 32B parameters, developed and "
 "released by LG AI Research."
 msgstr ""
+"EXAONE 3.5 ist ein Sammlung an Anweisungs-feinabgestimmten, bilingualen "
+"(Englisch und Koreanisch), generativen Modellen zwischen 2.4B und 32B "
+"Parametern, entwickelt und veröffentlicht von LG AI Research."
 
 #: src/available_models_descriptions.py:142
 msgid ""
 "Sailor2 are multilingual language models made for South-East Asia. Available "
 "in 1B, 8B, and 20B parameter sizes."
 msgstr ""
+"Sailor2 sind multilinguale Sprachmodelle für Südostasien. Verfügbar in 1B-, "
+"8B- und 20B-Parametergrößen."
 
 #: src/available_models_descriptions.py:143
 msgid ""
 "A family of efficient AI models under 10B parameters performant in science, "
 "math, and coding through innovative training techniques."
 msgstr ""
+"Eine Familie an effizienten KI-Modellen unter 10B Parametern, die "
+"leistungsfähig in Wissenschaft, Mathematik und Programmierung durch "
+"innovative Trainingstechniken sind."
 
 #: src/available_models_descriptions.py:144
 msgid ""
@@ -3062,12 +3130,18 @@ msgid ""
 "trillion tokens of data, demonstrated significant improvements over their "
 "predecessors in performance and speed in IBM’s initial testing."
 msgstr ""
+"Die IBM Granite 2B- und 8B-Modelle sind ausschließlich textbasierte, dichte "
+"LLMs, welche auf über 12 Billionen Tokens an Daten trainiert wurden und "
+"umfangreiche Fortschritte gegenüber deren Vorgängern in Gebieten wie "
+"Geschwindigkeit in IBM's initialien Tests zeigen."
 
 #: src/available_models_descriptions.py:145
 msgid ""
 "The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
+"Die IBM Granite 1B- und 3B-Modelle sind Mixture of Experts (MoE)-Modelle "
+"für langen Kontext von IBM für die Nutzung mit geriner Latenz."
 
 #: src/available_models_descriptions.py:146
 msgid ""
@@ -3075,15 +3149,21 @@ msgid ""
 "biencoder embedding models, with 30M available in English only and 278M "
 "serving multilingual use cases."
 msgstr ""
+"Die IBM Granite Embedding 30M- und 278M-Modelle sind ausschließlich "
+"textbasierte, dichte biencoder-embedding-Modelle mit 30M auf Englisch"
+"dedizierte und 278M auf multilinguale Zwecke dedizierte Parameter."
 
 #: src/available_models_descriptions.py:147
 msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
 msgstr ""
+"Phi-4 ist ein 14B-Parameter, modernes und offenes Modell von Microsoft."
 
 #: src/available_models_descriptions.py:148
 msgid ""
 "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
 msgstr ""
+"Ein neues, kleines Reasoning-Modell, feinabgestimmt von dem Qwen 2.5 "
+"3B-Instruct-Modell"
 
 #: src/available_models_descriptions.py:149
 msgid ""
@@ -3092,18 +3172,26 @@ msgid ""
 "model, enabling coding, math, agentic, function calling, and general use "
 "cases."
 msgstr ""
+"Dolphin 3.0 Llama 3.1 8B 🐬 ist die nächste Generation der Dolphin-Serie von"
+"Anweisungs-feinabgestimmten Modellen, die darauf ausgelegt sind, die "
+"ultimativen, allgemeinen, lokalen Modelle für Coding, Mathematik, "
+"Funktionsaufrufe und generelle Nutznug zu sein."
 
 #: src/available_models_descriptions.py:150
 msgid ""
 "DeepSeek's first generation reasoning models with comparable performance to "
 "OpenAI-o1."
 msgstr ""
+"DeepSeek's erste Generation an Reasoning-Modellen mit vergleichbarer "
+"Performance zu OpenAI's o1."
 
 #: src/available_models_descriptions.py:151
 msgid ""
 "A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
 "with 37B activated for each token."
 msgstr ""
+"Ein starkes Mixture of Experts (MoE)-Sprachmodell mit 671B Parametern "
+"insgesamt und 37B Parametern, die für jeden Token aktiviert werden."
 
 #: src/available_models_descriptions.py:152
 msgid ""
@@ -3112,6 +3200,11 @@ msgid ""
 "models, and competitive with open-weight models such as Llama 3.1 on English "
 "academic benchmarks."
 msgstr ""
+"OLMo 2 ist eine neue Familie von 7B- und 13B-Modellen, trainiert auf bis zu "
+"5 Billionen Token. Diese Modelle haben eine ähnliche oder sogar bessere "
+"Leistung als ähnliche, vollständig offene Modelle und sind mit anderen "
+"open-weight-Modellen wie Llama 3.1 in englischen, akademischen Benchmarks "
+"kompetetiv."
 
 #: src/available_models_descriptions.py:153
 msgid ""
@@ -3119,6 +3212,9 @@ msgid ""
 "and quality to build powerful AI applications on commodity GPUs and edge "
 "devices."
 msgstr ""
+"Das kleinste Modell in Cohere's R-Serie liefert höchste Geschwindigkeit, "
+"Effizienz und Qualität, um starke KI-Anwendungen auf handelsüblichen GPUs "
+"und Edge-Geräten auszuführen."
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -3203,11 +3299,11 @@ msgstr "Nachricht senden"
 
 #: src/window.ui:299
 msgid "Stop Message"
-msgstr ""
+msgstr "Nachricht anhalten"
 
 #: src/window.ui:329
 msgid "Model Manager"
-msgstr ""
+msgstr "Modellmanager"
 
 #: src/window.ui:365
 msgid "Search Model"
@@ -3215,7 +3311,7 @@ msgstr "Modell suchen"
 
 #: src/window.ui:379
 msgid "Model Manager Menu"
-msgstr ""
+msgstr "Modellmanager-Menü"
 
 #: src/window.ui:392
 msgid "Model search bar"
@@ -3227,7 +3323,7 @@ msgstr "Modelle suchen"
 
 #: src/window.ui:417
 msgid "Local Models"
-msgstr ""
+msgstr "Lokale Modelle"
 
 #: src/window.ui:427 src/window.ui:470 src/window.ui:524
 msgid "No Models Found"
@@ -3237,36 +3333,40 @@ msgstr "Keine Modelle gefunden"
 msgid ""
 "It looks a bit empty in here. Try downloading some models to get started!"
 msgstr ""
+"Hier sieht es ein wenig leer aus! Probieren Sie, ein paar Modelle "
+"herunterzuladen, um loszulegen!"
 
 #: src/window.ui:471 src/window.ui:525
 msgid ""
 "Looks like we’re fresh out of models for that search. Try tweaking your "
 "keywords, or maybe explore something new!"
 msgstr ""
+"Es scheint, als gäbe es für's Erste keine Modelle für diese Anfrage. "
+"Probieren Sie, die Suche etwas abzuändern oder entdecken Sie etwas Neues!"
 
 #: src/window.ui:483
 msgid "Available Models"
-msgstr ""
+msgstr "Verfügbare Modelle"
 
 #: src/window.ui:537 src/window.ui:548
 msgid "Model Creator"
-msgstr ""
+msgstr "Modell-Ersteller"
 
 #: src/window.ui:549
 msgid "Select a method of importing a model to continue"
-msgstr ""
+msgstr "Wählen Sie eine Methode, ein Modell zu importieren, um fortzufahren."
 
 #: src/window.ui:561
 msgid "GGUF File"
-msgstr ""
+msgstr "GGUF-Datei"
 
 #: src/window.ui:572
 msgid "Existing Model"
-msgstr ""
+msgstr "Existierendes Modell"
 
 #: src/window.ui:590
 msgid "Identity"
-msgstr ""
+msgstr "Identität"
 
 #: src/window.ui:593
 msgid "Base"
@@ -3274,11 +3374,11 @@ msgstr "Basis"
 
 #: src/window.ui:600
 msgid "Profile Picture"
-msgstr ""
+msgstr "Profilbild"
 
 #: src/window.ui:605
 msgid "Open File"
-msgstr ""
+msgstr "Datei öffnen"
 
 #: src/window.ui:616
 msgid "Name"
@@ -3286,7 +3386,7 @@ msgstr "Name"
 
 #: src/window.ui:621 src/custom_widgets/model_manager_widget.py:274
 msgid "Tag"
-msgstr ""
+msgstr "Tag"
 
 #: src/window.ui:628
 msgid "Context"
@@ -3297,30 +3397,32 @@ msgid ""
 "Describe the desired behavior of the model in its primary language "
 "(typically English)."
 msgstr ""
+"Beschreiben Sie das gewollte Verhalten des Modells in seiner Hauptsprache "
+"(meist ist dies Englisch)."
 
 #: src/window.ui:657
 msgid "Behavior"
-msgstr ""
+msgstr "Verhalten"
 
 #: src/window.ui:660
 msgid "Imagination"
-msgstr ""
+msgstr "Vorstellungskraft"
 
 #: src/window.ui:661
 msgid "A higher number results in more diverse answers from the model. (top_k)"
-msgstr ""
+msgstr "Ein höherer Wert ergibt diversere Antworten vom Modell. (top_k)"
 
 #: src/window.ui:675
 msgid "Focus"
-msgstr ""
+msgstr "Fokus"
 
 #: src/window.ui:676
 msgid "A higher number widens the amount of possible answers. (top_p)"
-msgstr ""
+msgstr "Ein höherer Wert erweitert die Menge an möglichen Antworten. (top_p)"
 
 #: src/window.ui:709 src/window.ui:717
 msgid "Add Model"
-msgstr ""
+msgstr "Modell hinzufügen"
 
 #: src/window.ui:751 src/window.ui:1240
 msgid "Preferences"
@@ -3336,7 +3438,7 @@ msgstr "Remote-Verbindung zu Ollama verwenden"
 
 #: src/window.ui:767 src/window.ui:773
 msgid "Change Ollama Instance"
-msgstr ""
+msgstr "Ollama-Instanz ändern"
 
 #: src/window.ui:788
 msgid "Run Alpaca In Background"
@@ -3348,11 +3450,13 @@ msgstr "Zeige Energiesparmodus-Warnung"
 
 #: src/window.ui:801
 msgid "Default Model"
-msgstr ""
+msgstr "Standard-Modell"
 
 #: src/window.ui:802
 msgid "The default model to use on new chats and when generating chat titles"
 msgstr ""
+"Das Standardmodell wird in neuen Chats und zur Generierung der Chat-Titel "
+"genutzt."
 
 #: src/window.ui:821
 msgid "Temperature"
@@ -3423,23 +3527,23 @@ msgstr ""
 
 #: src/window.ui:965
 msgid "Model Directory"
-msgstr ""
+msgstr "Modellordner"
 
 #: src/window.ui:971
 msgid "Change Model Directory"
-msgstr ""
+msgstr "Modellordner ändern"
 
 #: src/window.ui:1003
 msgid "Quick ask dialog"
-msgstr ""
+msgstr "Flinke Frage-Dialog"
 
 #: src/window.ui:1015
 msgid "Save Conversation to Alpaca"
-msgstr ""
+msgstr "Konversation in Alpaca speichern"
 
 #: src/window.ui:1030
 msgid "Terminal dialog"
-msgstr ""
+msgstr "Terminal-Dialog"
 
 #: src/window.ui:1033
 msgid "Terminal"
@@ -3447,7 +3551,7 @@ msgstr "Terminal"
 
 #: src/window.ui:1045
 msgid "Open Environment Directory"
-msgstr ""
+msgstr "Umgebungsordner öffnen"
 
 #: src/window.ui:1066
 msgid "File preview dialog"
@@ -3518,39 +3622,39 @@ msgstr "Chat löschen"
 
 #: src/window.ui:1282
 msgid "Reload Local Models"
-msgstr ""
+msgstr "Lokale Modelle neu laden"
 
 #: src/window.ui:1286
 msgid "Download Model From Name"
-msgstr ""
+msgstr "Modell anhand eines Namens herunterladen"
 
 #: src/window.ui:1316
 msgid "Send as User"
-msgstr ""
+msgstr "Als Nutzer senden"
 
 #: src/window.ui:1320
 msgid "Send as System"
-msgstr ""
+msgstr "Als System senden"
 
 #: src/window.ui:1332
 msgid "Attach Screenshot"
-msgstr ""
+msgstr "Bildschirmfoto anhängen"
 
 #: src/window.ui:1336
 msgid "Attach Website"
-msgstr ""
+msgstr "Website anhängen"
 
 #: src/window.ui:1340
 msgid "Attach YouTube Captions"
-msgstr ""
+msgstr "YouTube-Videountertitel anhängen"
 
 #: src/alpaca_search_provider.py.in:40
 msgid "Open chat"
-msgstr ""
+msgstr "Chat öffnen"
 
 #: src/alpaca_search_provider.py.in:41
 msgid "Quick ask"
-msgstr ""
+msgstr "Flinke Frage"
 
 #: src/generic_actions.py:75
 msgid "An error occurred while extracting text from the website"
@@ -3559,72 +3663,72 @@ msgstr "Beim Extrahieren von Text von der Website ist ein Fehler aufgetreten"
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 #: src/gtk/help-overlay.ui:14
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Tastenkürzel anzeigen"
 
 #: src/gtk/help-overlay.ui:20
 msgctxt "shortcut window"
 msgid "Preferences"
-msgstr ""
+msgstr "Einstellungen"
 
 #: src/gtk/help-overlay.ui:26
 msgctxt "shortcut window"
 msgid "Model Manager"
-msgstr ""
+msgstr "Modellmanager"
 
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "Seitenleiste auf-/zuklappen"
 
 #: src/gtk/help-overlay.ui:38
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Beenden"
 
 #: src/gtk/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Chat Management"
-msgstr ""
+msgstr "Chatverwaltung"
 
 #: src/gtk/help-overlay.ui:49
 msgctxt "shortcut window"
 msgid "Create Chat"
-msgstr ""
+msgstr "Chat erstellen"
 
 #: src/gtk/help-overlay.ui:55
 msgctxt "shortcut window"
 msgid "Delete Chat"
-msgstr ""
+msgstr "Chat löschen"
 
 #: src/gtk/help-overlay.ui:61
 msgctxt "shortcut window"
 msgid "Import Chat"
-msgstr ""
+msgstr "Chat importieren"
 
 #: src/gtk/help-overlay.ui:67
 msgctxt "shortcut window"
 msgid "Clear Chat"
-msgstr ""
+msgstr "Chat leeren"
 
 #: src/gtk/help-overlay.ui:73
 msgctxt "shortcut window"
 msgid "Rename Chat"
-msgstr ""
+msgstr "Chat umbenennen"
 
 #: src/gtk/help-overlay.ui:79
 msgctxt "shortcut window"
 msgid "Search Messages"
-msgstr ""
+msgstr "Nachrichten durchsuchen"
 
 #: src/gtk/help-overlay.ui:87
 msgctxt "shortcut window"
 msgid "Message Entry"
-msgstr ""
+msgstr "Nachricht-Eingabe"
 
 #: src/gtk/help-overlay.ui:90
 msgid "Copy"
@@ -3636,7 +3740,7 @@ msgstr "Einfügen"
 
 #: src/gtk/help-overlay.ui:102
 msgid "Open Emoji Menu"
-msgstr ""
+msgstr "Emoji-Menü öffnen"
 
 #: src/gtk/help-overlay.ui:108
 msgid "Insert new line"
@@ -3644,15 +3748,17 @@ msgstr "Neue Zeile einfügen"
 
 #: src/gtk/help-overlay.ui:114
 msgid "Send Message as System"
-msgstr ""
+msgstr "Nachricht als System senden"
 
 #: src/gtk/help-overlay.ui:115
 msgid "System messages are taken as literal instructions by models"
 msgstr ""
+"Systemnachrichten werden als tatsächliche Anweisung vom Modell "
+"interpretiert."
 
 #: src/gtk/help-overlay.ui:121
 msgid "Send Message as User"
-msgstr ""
+msgstr "Nachricht als Nutzer senden"
 
 #: src/custom_widgets/chat_widget.py:82
 msgid "Send prompt: '{}'"
@@ -3680,12 +3786,12 @@ msgstr "Chatverlauf erfolgreich exportiert"
 
 #: src/custom_widgets/chat_widget.py:171
 msgid "User"
-msgstr ""
+msgstr "Nutzer"
 
 #: src/custom_widgets/chat_widget.py:175
 #: src/custom_widgets/message_widget.py:630
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: src/custom_widgets/chat_widget.py:253
 msgid "Regenerate Response"
@@ -3714,7 +3820,7 @@ msgstr "Antwortnachricht"
 
 #: src/custom_widgets/message_widget.py:138
 msgid "System message"
-msgstr ""
+msgstr "Systemnachricht"
 
 #: src/custom_widgets/message_widget.py:140
 msgid "User message"
@@ -3735,11 +3841,11 @@ msgstr "Kopiere Nachricht"
 
 #: src/custom_widgets/message_widget.py:195
 msgid "Edit Code Block"
-msgstr ""
+msgstr "Codeblock bearbeiten"
 
 #: src/custom_widgets/message_widget.py:203
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: src/custom_widgets/message_widget.py:207
 #: src/custom_widgets/message_widget.py:283
@@ -3779,19 +3885,19 @@ msgstr "Fehlendes Bild"
 
 #: src/custom_widgets/message_widget.py:416
 msgid "Copy Equation"
-msgstr ""
+msgstr "Gleichung speichern"
 
 #: src/custom_widgets/message_widget.py:422
 msgid "Regenerate Equation"
-msgstr ""
+msgstr "Gleichung neu generieren"
 
 #: src/custom_widgets/message_widget.py:443
 msgid "Equation copied to the clipboard"
-msgstr ""
+msgstr "Gleichung in Zwischenablage kopiert"
 
 #: src/custom_widgets/message_widget.py:447
 msgid "LaTeX Equation"
-msgstr ""
+msgstr "LaTeX-Gleichung"
 
 #: src/custom_widgets/message_widget.py:512
 msgid "Remove Message"
@@ -3816,28 +3922,28 @@ msgstr ""
 
 #: src/custom_widgets/message_widget.py:866
 msgid "Thought"
-msgstr ""
+msgstr "Gedanke"
 
 #: src/custom_widgets/model_manager_widget.py:180
 msgid "Model Manager Error"
-msgstr ""
+msgstr "Modellmanager-Fehler"
 
 #: src/custom_widgets/model_manager_widget.py:180
 msgid "An error occurred whilst pulling '{}'"
-msgstr ""
+msgstr "Ein Fehler trat beim Download von '{}' auf"
 
 #: src/custom_widgets/model_manager_widget.py:205
 msgid "Download Completed"
-msgstr ""
+msgstr "Download abgeschlossen"
 
 #: src/custom_widgets/model_manager_widget.py:205
 msgid "Model '{}' downloaded successfully."
-msgstr ""
+msgstr "Modell '{}' erfolgreich heruntergeladen."
 
 #: src/custom_widgets/model_manager_widget.py:217
 #: src/custom_widgets/model_manager_widget.py:219
 msgid "Stop Download"
-msgstr ""
+msgstr "Download anhalten"
 
 #: src/custom_widgets/model_manager_widget.py:223
 msgid "Stop Download?"
@@ -3853,7 +3959,7 @@ msgstr "Stoppen"
 
 #: src/custom_widgets/model_manager_widget.py:255
 msgid "Change Profile Picture"
-msgstr ""
+msgstr "Profilbilder ändern"
 
 #: src/custom_widgets/model_manager_widget.py:275
 msgid "Parent Model"
@@ -3879,85 +3985,86 @@ msgstr "Geändert am"
 #: src/custom_widgets/model_manager_widget.py:305
 #: src/custom_widgets/model_manager_widget.py:312
 msgid "Not Available"
-msgstr ""
+msgstr "Nicht verfügbar"
 
 #: src/custom_widgets/model_manager_widget.py:320
 msgid "(No system message available)"
-msgstr ""
+msgstr "(Keine Systemnachricht verfügbar)"
 
 #: src/custom_widgets/model_manager_widget.py:428
 msgid "Change"
-msgstr ""
+msgstr "Ändern"
 
 #: src/custom_widgets/model_manager_widget.py:431
 msgid "Model Profile Picture"
-msgstr ""
+msgstr "Modell-Profilbild"
 
 #: src/custom_widgets/model_manager_widget.py:431
 msgid "What do you want to do with the model's profile picture?"
-msgstr ""
+msgstr "Was möchten Sie mit dem Profilbild des Modells tun?"
 
 #: src/custom_widgets/model_manager_widget.py:450
 msgid "Create Child"
-msgstr ""
+msgstr "Abstammendes Modell aus diesem erstellen"
 
 #: src/custom_widgets/model_manager_widget.py:458
 msgid "Remove Model"
-msgstr ""
+msgstr "Modell entfernen"
 
 #: src/custom_widgets/model_manager_widget.py:462
 msgid "Remove Model?"
-msgstr ""
+msgstr "Modell wirklich entfernen?"
 
 #: src/custom_widgets/model_manager_widget.py:463
 msgid "Are you sure you want to remove '{}'?"
-msgstr ""
+msgstr "Sind Sie sich sicher, dass Sie '{}' entfernen möchten?"
 
 #: src/custom_widgets/model_manager_widget.py:477
 msgid "Multilingual"
-msgstr ""
+msgstr "Multilingual"
 
 #: src/custom_widgets/model_manager_widget.py:478
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 #: src/custom_widgets/model_manager_widget.py:479
 msgid "Math"
-msgstr ""
+msgstr "Mathematik"
 
 #: src/custom_widgets/model_manager_widget.py:480
 msgid "Vision"
-msgstr ""
+msgstr "Sehen"
 
 #: src/custom_widgets/model_manager_widget.py:481
 msgid "Embedding"
-msgstr ""
+msgstr "Eingebettet"
 
 #: src/custom_widgets/model_manager_widget.py:482
 msgid "Small"
-msgstr ""
+msgstr "Klein"
 
 #: src/custom_widgets/model_manager_widget.py:483
 msgid "Medium"
-msgstr ""
+msgstr "Mittel"
 
 #: src/custom_widgets/model_manager_widget.py:484
 msgid "Big"
-msgstr ""
+msgstr "Groß"
 
 #: src/custom_widgets/model_manager_widget.py:485
 msgid "Huge"
-msgstr ""
+msgstr "Riesig"
 
 #: src/custom_widgets/model_manager_widget.py:566
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website"
-msgstr ""
+msgstr "Durch das Herunterladen dieses Modells akzeptieren Sie die "
+"Lizenzbestimmungen auf der Website des Modells."
 
 #: src/custom_widgets/model_manager_widget.py:613
 msgid "Visit Website"
-msgstr ""
+msgstr "Website besuchen"
 
 #: src/custom_widgets/dialog_widget.py:147
 #: src/custom_widgets/dialog_widget.py:159
@@ -3971,15 +4078,15 @@ msgstr "Python-Umgebung wird eingerichtet..."
 
 #: src/custom_widgets/terminal_widget.py:90
 msgid "Compiling C++ script..."
-msgstr ""
+msgstr "C++-Skript wird kompiliert..."
 
 #: src/custom_widgets/terminal_widget.py:104
 msgid "Running local web server"
-msgstr ""
+msgstr "Führt lokalen Webserver aus"
 
 #: src/custom_widgets/terminal_widget.py:129
 msgid "Using Flatpak contained shell"
-msgstr ""
+msgstr "Nutzt Flatpak-beinhaltete Shell"
 
 #~ msgid "From Existing Model"
 #~ msgstr "Aus bestehendem Modell"
