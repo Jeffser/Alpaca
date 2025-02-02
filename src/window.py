@@ -1237,6 +1237,7 @@ Generate a title following these rules:
         for mime in ['text/plain', 'application/pdf', 'application/vnd.oasis.opendocument.text']:
             ff = Gtk.FileFilter()
             ff.add_mime_type(mime)
+            file_filters[0].add_mime_type(mime)
             file_filters.append(ff)
         if self.model_selector.get_selected_model().get_vision():
             file_filters[0].add_pixbuf_formats()
