@@ -820,6 +820,8 @@ class message(Gtk.Box):
                                 "language": match.group(1),
                             }
                         )
+                    elif pattern_name == "table":
+                        parts.append({"type": pattern_name, "text": text[match_start:match_end]})
                     else:
                         parts.append({"type": pattern_name, "text": match.group(1)})
 
