@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 01\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-28 20:47-0600\n"
-"PO-Revision-Date: 2025-01-11 18:15+0000\n"
+"PO-Revision-Date: 2025-02-04 23:35+0000\n"
 "Last-Translator: Edoardo Brogiolo <edoardo@brogiolo.eu>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -127,7 +127,7 @@ msgstr "Più modelli sono in fase di scaricamento"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:82
 msgid "Model creator screen"
-msgstr ""
+msgstr "Schermata del creatore di modelli"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
@@ -156,51 +156,55 @@ msgstr "Novità"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "New model manager"
-msgstr ""
+msgstr "Nuovo gestore di modelli"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Changed GtkSpinner to AdwSpinner"
-msgstr ""
+msgstr "Sostituito GtkSpinner con AdwSpinner"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Better handling of launch process"
-msgstr ""
+msgstr "Migliore gestione del processo di avvio"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "New loading screen at launch"
-msgstr ""
+msgstr "Nuova schermata di caricamento all'avvio"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Better handling of file types"
-msgstr ""
+msgstr "Migliore gestione dei tipi di file"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Better regex expression for LaTeX equations"
-msgstr ""
+msgstr "Migliore espressione regex per le equazioni in LaTeX"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
 msgstr ""
+"Finestra di conferma se l'utente chiude Alpaca mentre un modello è in fase "
+"di scaricamento"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Better handling of think tags in messages"
-msgstr ""
+msgstr "Migliore gestione dei tag di ragionamento nei messaggi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid "Default model is now in charge of generating titles"
-msgstr ""
+msgstr "Il modello predefinito è ora incaricato di generare i titoli"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
 msgid "Message header is now shown whilst the message is being generated"
 msgstr ""
+"Il titolo della chat del messaggio viene ora visualizzata durante la "
+"generazione del messaggio."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Better handling of model profile pictures"
-msgstr ""
+msgstr "Migliore gestione delle immagini di profilo dei modelli"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:109
 msgid "New models in 'available models' list"
-msgstr ""
+msgstr "Nuovi modelli nell'elenco dei 'modelli disponibili'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:118
 msgid "Added option for attaching screenshots"
@@ -1875,15 +1879,15 @@ msgstr "Avanti"
 
 #: src/window.py:445
 msgid "Hide"
-msgstr ""
+msgstr "Nascondi"
 
 #: src/window.py:449
 msgid "Close Alpaca?"
-msgstr ""
+msgstr "Chiudere Alpaca?"
 
 #: src/window.py:450
 msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
-msgstr ""
+msgstr "Un processo è ancora in corso. Sei sicuro di voler chiudere Alpaca?"
 
 #: src/window.py:660 src/window.ui:69 src/custom_widgets/chat_widget.py:384
 msgid "New Chat"
@@ -2025,7 +2029,7 @@ msgstr "Errore dell'allegato, lo screenshot potrebbe essere troppo grande"
 
 #: src/window.py:1235
 msgid "Any compatible Alpaca attachment"
-msgstr ""
+msgstr "Qualsiasi allegato compatibile con Alpaca"
 
 #: src/window.py:1285
 msgid "Clear Chat?"
@@ -2053,11 +2057,11 @@ msgstr "Inserisci l'URL di un video di YouTube"
 
 #: src/window.py:1304
 msgid "Download Model?"
-msgstr ""
+msgstr "Scaricare il modello?"
 
 #: src/window.py:1304
 msgid "Please enter the model name following this template: name:tag"
-msgstr ""
+msgstr "Inserisci il nome del modello seguendo in questo formato: name:tag"
 
 #: src/window.py:1318
 msgid "Remove Attachment?"
@@ -2546,7 +2550,7 @@ msgid ""
 "A strong multi-lingual general language model with competitive performance "
 "to Llama 3."
 msgstr ""
-"Un solido modello linguistico generale multilingue con prestazioni "
+"Un potente modello linguistico generale multilingue con prestazioni "
 "comparabili a Llama 3."
 
 #: src/available_models_descriptions.py:64
@@ -3183,6 +3187,7 @@ msgstr ""
 #: src/available_models_descriptions.py:147
 msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
 msgstr ""
+"Phi-4 è un modello open-source all'avanguardia da 14B parametri di Microsoft."
 
 #: src/available_models_descriptions.py:148
 msgid ""
@@ -3209,12 +3214,16 @@ msgid ""
 "DeepSeek's first generation reasoning models with comparable performance to "
 "OpenAI-o1."
 msgstr ""
+"Modelli di ragionamento di prima generazione di DeepSeek con prestazioni "
+"paragonabili a quelle di OpenAI-o1."
 
 #: src/available_models_descriptions.py:151
 msgid ""
 "A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
 "with 37B activated for each token."
 msgstr ""
+"Un modello Mixture-of-Experts (MoE) potente, con 671B parametri totali e 37B "
+"attivati per ogni token."
 
 #: src/available_models_descriptions.py:152
 msgid ""
@@ -3223,6 +3232,10 @@ msgid ""
 "models, and competitive with open-weight models such as Llama 3.1 on English "
 "academic benchmarks."
 msgstr ""
+"OLMo 2 è una nuova famiglia di modelli 7B e 13B addestrati su token fino a "
+"5T. Questi modelli sono alla pari o migliori di modelli completamente aperti "
+"di dimensioni equivalenti, e sono comparabili a modelli con pesi aperti come "
+"Llama 3.1 su benchmark accademici inglesi."
 
 #: src/available_models_descriptions.py:153
 msgid ""
@@ -3230,6 +3243,9 @@ msgid ""
 "and quality to build powerful AI applications on commodity GPUs and edge "
 "devices."
 msgstr ""
+"Il modello più piccolo della serie R di Cohere offre velocità, efficienza e "
+"qualità di altissimo livello per realizzare potenti applicazioni AI su GPU "
+"domestiche e dispositivi con risorse limitate."
 
 #: src/connection_handler.py:14
 msgid "Alpaca Support"
@@ -3320,7 +3336,7 @@ msgstr "Interrompi il messaggio"
 
 #: src/window.ui:329
 msgid "Model Manager"
-msgstr ""
+msgstr "Gestore dei modelli"
 
 #: src/window.ui:365
 msgid "Search Model"
@@ -3328,7 +3344,7 @@ msgstr "Cerca un modello"
 
 #: src/window.ui:379
 msgid "Model Manager Menu"
-msgstr ""
+msgstr "Menù del gestore dei modelli"
 
 #: src/window.ui:392
 msgid "Model search bar"
@@ -3340,7 +3356,7 @@ msgstr "Cerca i modelli"
 
 #: src/window.ui:417
 msgid "Local Models"
-msgstr ""
+msgstr "Modelli locali"
 
 #: src/window.ui:427 src/window.ui:470 src/window.ui:524
 msgid "No Models Found"
@@ -3350,36 +3366,39 @@ msgstr "Nessun modello trovato"
 msgid ""
 "It looks a bit empty in here. Try downloading some models to get started!"
 msgstr ""
+"È un po' vuoto qui dentro. Prova a scaricare dei modelli per cominciare!"
 
 #: src/window.ui:471 src/window.ui:525
 msgid ""
 "Looks like we’re fresh out of models for that search. Try tweaking your "
 "keywords, or maybe explore something new!"
 msgstr ""
+"Sembra che non abbiamo trovato modelli per questa ricerca. Prova a "
+"modificare le parole chiave, o ad esplorare per trovare qualcosa di nuovo!"
 
 #: src/window.ui:483
 msgid "Available Models"
-msgstr ""
+msgstr "Modelli disponibili"
 
 #: src/window.ui:537 src/window.ui:548
 msgid "Model Creator"
-msgstr ""
+msgstr "Creatore di modelli"
 
 #: src/window.ui:549
 msgid "Select a method of importing a model to continue"
-msgstr ""
+msgstr "Seleziona un metodo di importazione dei modelli per proseguire"
 
 #: src/window.ui:561
 msgid "GGUF File"
-msgstr ""
+msgstr "File GGUF"
 
 #: src/window.ui:572
 msgid "Existing Model"
-msgstr ""
+msgstr "Modello preesistente"
 
 #: src/window.ui:590
 msgid "Identity"
-msgstr ""
+msgstr "Identità"
 
 #: src/window.ui:593
 msgid "Base"
@@ -3387,11 +3406,11 @@ msgstr "Base"
 
 #: src/window.ui:600
 msgid "Profile Picture"
-msgstr ""
+msgstr "Immagine del profilo"
 
 #: src/window.ui:605
 msgid "Open File"
-msgstr ""
+msgstr "Apri un file"
 
 #: src/window.ui:616
 msgid "Name"
@@ -3399,7 +3418,7 @@ msgstr "Nome"
 
 #: src/window.ui:621 src/custom_widgets/model_manager_widget.py:274
 msgid "Tag"
-msgstr ""
+msgstr "Tag"
 
 #: src/window.ui:628
 msgid "Context"
@@ -3410,30 +3429,34 @@ msgid ""
 "Describe the desired behavior of the model in its primary language "
 "(typically English)."
 msgstr ""
+"Descrivi il comportamento desiderato del modello nella sua lingua principale "
+"(tipicamente l'inglese)."
 
 #: src/window.ui:657
 msgid "Behavior"
-msgstr ""
+msgstr "Comportamento"
 
 #: src/window.ui:660
 msgid "Imagination"
-msgstr ""
+msgstr "Immaginazione"
 
 #: src/window.ui:661
 msgid "A higher number results in more diverse answers from the model. (top_k)"
 msgstr ""
+"Un numero più alto comporta risposte più diversificate da parte del modello. "
+"(top_k)"
 
 #: src/window.ui:675
 msgid "Focus"
-msgstr ""
+msgstr "Focus"
 
 #: src/window.ui:676
 msgid "A higher number widens the amount of possible answers. (top_p)"
-msgstr ""
+msgstr "Un numero più alto amplia il numero di risposte possibili. (top_p)"
 
 #: src/window.ui:709 src/window.ui:717
 msgid "Add Model"
-msgstr ""
+msgstr "Aggiungi un modello"
 
 #: src/window.ui:751 src/window.ui:1240
 msgid "Preferences"
@@ -3466,6 +3489,8 @@ msgstr "Modello predefinito"
 #: src/window.ui:802
 msgid "The default model to use on new chats and when generating chat titles"
 msgstr ""
+"Il modello predefinito da utilizzare per le nuove chat e per la generazione "
+"dei titoli delle chat."
 
 #: src/window.ui:821
 msgid "Temperature"
@@ -3631,11 +3656,11 @@ msgstr "Elimina la chat"
 
 #: src/window.ui:1282
 msgid "Reload Local Models"
-msgstr ""
+msgstr "Carica nuovamente i modelli locali"
 
 #: src/window.ui:1286
 msgid "Download Model From Name"
-msgstr ""
+msgstr "Scarica il modello per nome"
 
 #: src/window.ui:1316
 msgid "Send as User"
@@ -3930,28 +3955,28 @@ msgstr "Il messaggio non può essere rigenerato mentre si riceve una risposta"
 
 #: src/custom_widgets/message_widget.py:866
 msgid "Thought"
-msgstr ""
+msgstr "Ragionamento"
 
 #: src/custom_widgets/model_manager_widget.py:180
 msgid "Model Manager Error"
-msgstr ""
+msgstr "Errore del gestore dei modelli"
 
 #: src/custom_widgets/model_manager_widget.py:180
 msgid "An error occurred whilst pulling '{}'"
-msgstr ""
+msgstr "Si è verificato un errore durante lo scaricamento di '{}'"
 
 #: src/custom_widgets/model_manager_widget.py:205
 msgid "Download Completed"
-msgstr ""
+msgstr "Scaricamento completato"
 
 #: src/custom_widgets/model_manager_widget.py:205
 msgid "Model '{}' downloaded successfully."
-msgstr ""
+msgstr "Modello '{}' scaricato con successo."
 
 #: src/custom_widgets/model_manager_widget.py:217
 #: src/custom_widgets/model_manager_widget.py:219
 msgid "Stop Download"
-msgstr ""
+msgstr "Interrompi lo scaricamento"
 
 #: src/custom_widgets/model_manager_widget.py:223
 msgid "Stop Download?"
@@ -3967,7 +3992,7 @@ msgstr "Stop"
 
 #: src/custom_widgets/model_manager_widget.py:255
 msgid "Change Profile Picture"
-msgstr ""
+msgstr "Cambia la foto del profilo"
 
 #: src/custom_widgets/model_manager_widget.py:275
 msgid "Parent Model"
@@ -3993,11 +4018,11 @@ msgstr "Modificato a"
 #: src/custom_widgets/model_manager_widget.py:305
 #: src/custom_widgets/model_manager_widget.py:312
 msgid "Not Available"
-msgstr ""
+msgstr "Non disponibile"
 
 #: src/custom_widgets/model_manager_widget.py:320
 msgid "(No system message available)"
-msgstr ""
+msgstr "(Nessun messaggio di sistema disponibile)"
 
 #: src/custom_widgets/model_manager_widget.py:428
 msgid "Change"
@@ -4013,19 +4038,19 @@ msgstr "Cosa vuoi fare con l'immagine del profilo del modello?"
 
 #: src/custom_widgets/model_manager_widget.py:450
 msgid "Create Child"
-msgstr ""
+msgstr "Crea un duplicato"
 
 #: src/custom_widgets/model_manager_widget.py:458
 msgid "Remove Model"
-msgstr ""
+msgstr "Rimuovi il modello"
 
 #: src/custom_widgets/model_manager_widget.py:462
 msgid "Remove Model?"
-msgstr ""
+msgstr "Rimuovere il modello?"
 
 #: src/custom_widgets/model_manager_widget.py:463
 msgid "Are you sure you want to remove '{}'?"
-msgstr ""
+msgstr "Sei sicuro di voler rimuovere '{}'?"
 
 #: src/custom_widgets/model_manager_widget.py:477
 msgid "Multilingual"
@@ -4068,10 +4093,12 @@ msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website"
 msgstr ""
+"Scaricando questo modello si accetta la licenza disponibile sul sito web del "
+"modello."
 
 #: src/custom_widgets/model_manager_widget.py:613
 msgid "Visit Website"
-msgstr ""
+msgstr "Visita il sito web"
 
 #: src/custom_widgets/dialog_widget.py:147
 #: src/custom_widgets/dialog_widget.py:159
@@ -4093,7 +4120,7 @@ msgstr "Esecuzione del web server locale"
 
 #: src/custom_widgets/terminal_widget.py:129
 msgid "Using Flatpak contained shell"
-msgstr ""
+msgstr "Si sta utilizzando la shell containerizzata in Flatpak"
 
 #~ msgid "From Existing Model"
 #~ msgstr "Da un modello esistente"
