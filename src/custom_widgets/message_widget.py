@@ -806,15 +806,25 @@ class message(Gtk.Box):
             pos = 0
             for pattern_name, pattern in patterns:
                 for match in pattern.finditer(self.text[pos:]):
-                    start, end = match.span()
-                    if pos < start + pos:
-                        normal_text = self.text[pos:start+pos]
+                    match_start, match_end = match.span()
+
+                    if pos < (match_start):
+                        normal_text = self.text[pos:(match_start)]
                         parts.append({"type": "normal", "text": normal_text.strip()})
-                    if pattern_name == 'code':
-                        parts.append({"type": pattern_name, "text": match.group(2), "language": match.group(1)})
+
+                    if pattern_name == "code":
+                        parts.append(
+                            {
+                                "type": pattern_name,
+                                "text": match.group(2),
+                                "language": match.group(1),
+                            }
+                        )
                     else:
                         parts.append({"type": pattern_name, "text": match.group(1)})
-                    pos += end
+
+                    pos = match_end
+
             # Text blocks
             if pos < len(self.text):
                 normal_text = self.text[pos:]
