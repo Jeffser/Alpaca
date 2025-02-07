@@ -55,10 +55,10 @@ translators = [
     'YusaBecerikli (Turkish) https://github.com/YusaBecerikli',
     'Simon (Ukrainian) https://github.com/OriginalSimon',
     'Marcel Margenberg (German) https://github.com/MehrzweckMandala',
-    'Mags0ft (German) https://github.com/mags0ft'
+    'Magnus Schlinsog (German) https://github.com/mags0ft',
     'Edoardo Brogiolo (Italian) https://github.com/edo0',
     'Shidore (Japanese) https://github.com/sh1d0re',
-    'Henk Leerssen (Dutch) https://github.com/Henkster72'
+    'Henk Leerssen (Dutch) https://github.com/Henkster72',
 ]
 
 parser = argparse.ArgumentParser(description="Alpaca")
