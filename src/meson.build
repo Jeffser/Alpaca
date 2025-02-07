@@ -44,7 +44,8 @@ alpaca_sources = [
   'available_models_descriptions.py',
   'internal.py',
   'generic_actions.py',
-  'sql_manager.py'
+  'sql_manager.py',
+  'instance_manager.py'
 ]
 
 custom_widgets = [

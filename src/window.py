@@ -34,7 +34,7 @@ gi.require_version('GdkPixbuf', '2.0')
 gi.require_version('Spelling', '1')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelling, GObject
 
-from . import connection_handler, generic_actions, sql_manager
+from . import connection_handler, generic_actions, sql_manager, instance_manager
 from .custom_widgets import message_widget, chat_widget, terminal_widget, dialog_widget, model_manager_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir
 
