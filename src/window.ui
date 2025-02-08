@@ -414,7 +414,7 @@
                         <child>
                           <object class="AdwViewStackPage">
                             <property name="name">local_models</property>
-                            <property name="title" translatable="yes">Local Models</property>
+                            <property name="title" translatable="yes">Local</property>
                             <property name="icon-name">folder-download-symbolic</property>
                             <property name="child">
                               <object class="GtkStack" id="local_model_stack">
@@ -480,7 +480,7 @@
                         <child>
                           <object class="AdwViewStackPage">
                             <property name="name">available_models</property>
-                            <property name="title" translatable="yes">Available Models</property>
+                            <property name="title" translatable="yes">Available</property>
                             <property name="icon-name">globe-symbolic</property>
                             <property name="child">
                               <object class="GtkStack" id="available_model_stack">
@@ -534,7 +534,7 @@
                         <child>
                           <object class="AdwViewStackPage">
                             <property name="name">model_creator</property>
-                            <property name="title" translatable="yes">Model Creator</property>
+                            <property name="title" translatable="yes">Creator</property>
                             <property name="icon-name">brain-augemnted-symbolic</property>
                             <property name="child">
                               <object class="GtkStack" id="model_creator_stack">
