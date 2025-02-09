@@ -18,6 +18,8 @@ window = None
 possible_prompts = [
     "What can you do?",
     "Give me a pancake recipe",
+    "how many R in strawberry?",
+    "17.11 or 17.9 which number is larger?",
     "Why is the sky blue?",
     "Can you tell me a joke?",
     "Give me a healthy breakfast recipe",
