@@ -17,6 +17,10 @@ window = None
 
 possible_prompts = [
     "What can you do?",
+    "how many R in strawberry?",
+    "17.11 or 17.9 which number is larger?",
+    "Find the value of Y, if X− 2Y + 2Z = 16, X − Y + Z = 9 and 2X − 3Y − Z = 9",
+    "U is the father of N. N is the sister of T. T is the wife of I. I is son of L. How is U related to L?",
     "Give me a pancake recipe",
     "Why is the sky blue?",
     "Can you tell me a joke?",
