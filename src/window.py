@@ -482,7 +482,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 del self.ollama_instance.overrides[name]
             if not self.ollama_instance.remote:
                 self.ollama_instance.reset()
-            self.sql_instance.insert_or_update_preferences({name: value})
+            self.sql_instance.insert_or_update_override(name, value)
 
     @Gtk.Template.Callback()
     def link_button_handler(self, button):
