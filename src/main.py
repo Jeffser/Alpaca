@@ -184,6 +184,8 @@ def main(version):
     parser.add_argument('--select-chat', type=str, metavar='"CHAT"', help="Select a chat on launch")
     parser.add_argument('--ask', type=str, metavar='"MESSAGE"', help="Open quick ask with message")
     parser.add_argument('--change-port', type=int, metavar='"PORT"', help="Change the integrated instance port")
+    parser.add_argument('--api-type', type=str, metavar='"API_TYPE"', help="Specify the API type (ollama, openai, gemini, anthropic")
+    parser.add_argument('--api-key', type=str, metavar='"API_KEY"', help="Specify the API key for the chosen API type")
     args = parser.parse_args()
 
     if args.version:
@@ -213,6 +215,14 @@ def main(version):
         sqlite_con = sqlite3.connect(os.path.join(data_dir, "alpaca.db"))
         cursor = sqlite_con.cursor()
         cursor.execute("UPDATE preferences SET value=? WHERE id=?", (args.change_port, 'local_port'))
+        sqlite_con.commit()
+        sqlite_con.close()
+
+    if args.api_type and args.api_key:
+        sqlite_con = sqlite3.connect(os.path.join(data_dir, "alpaca.db"))
+        cursor = sqlite_con.cursor()
+        cursor.execute("UPDATE preferences SET value=? WHERE id=?", (args.api_type, 'api_type'))
+        cursor.execute("UPDATE preferences SET value=? WHERE id=?", (args.api_key, 'api_key'))
         sqlite_con.commit()
         sqlite_con.close()
 

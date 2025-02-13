@@ -834,7 +834,7 @@ Generate a title following these rules:
     def attach_file(self, file_path, file_type):
         logger.debug(f"Attaching file: {file_path}")
         file_name = self.generate_numbered_name(os.path.basename(file_path), self.attachments.keys())
-        content = self.get_content_of_file(file_path, file_type)
+        content = self.get_content_of_file(file_path)
         if content:
             button_content = Adw.ButtonContent(
                 label=file_name,
