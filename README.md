@@ -1,10 +1,9 @@
-<p align="center"><img src="https://jeffser.com/images/alpaca/logo.svg"></p>
-
-# Alpaca
-
-<a href='https://flathub.org/apps/com.jeffser.Alpaca'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
+<p align="center"><img src="https://jeffser.com/images/alpaca/logo.svg">
+<h1 align="center">Alpaca</h1>
 
 Alpaca is an [Ollama](https://github.com/ollama/ollama) client where you can manage and chat with multiple models, Alpaca provides an easy and beginner friendly way of interacting with local AI, everything is open source and powered by Ollama.
+
+<p align="center"><a href='https://flathub.org/apps/com.jeffser.Alpaca'><img width='190' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a></p>
 
 ---
 
