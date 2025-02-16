@@ -135,6 +135,33 @@
                             </child>
                             <child>
                               <object class="GtkStackPage">
+                                <property name="name">model-selector</property>
+                                <property name="child">
+                                  <object class="GtkBox">
+                                    <style>
+                                      <class name="card"/>
+                                      <class name="local_model_selector"/>
+                                    </style>
+                                    <property name="halign">3</property>
+                                    <child>
+                                      <object class="GtkButton">
+                                        <property name="icon-name">brain-augemnted-symbolic</property>
+                                        <property name="tooltip-text" translatable="yes">Manage Models</property>
+                                        <property name="action-name">app.model_manager</property>
+                                        <style>
+                                          <class name="flat"/>
+                                        </style>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkDropDown" id="model_dropdown"/>
+                                    </child>
+                                  </object>
+                                </property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkStackPage">
                                 <property name="name">no-models</property>
                                 <property name="child">
                                   <object class="GtkButton">

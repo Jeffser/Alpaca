@@ -102,7 +102,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     chat_list_container = Gtk.Template.Child()
     chat_list_box = None
     model_manager = None
-    model_selector = None
 
     background_switch = Gtk.Template.Child()
     powersaver_warning_switch = Gtk.Template.Child()
@@ -125,6 +124,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_creator_context = Gtk.Template.Child()
     model_creator_imagination = Gtk.Template.Child()
     model_creator_focus = Gtk.Template.Child()
+    model_dropdown = Gtk.Template.Child()
 
     instance_preferences_page = Gtk.Template.Child()
     instance_listbox = Gtk.Template.Child()
@@ -177,7 +177,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         top_k = self.model_creator_imagination.get_value()
         top_p = self.model_creator_focus.get_value() / 100
 
-        if not self.model_selector.get_model_by_name(model_name):
+        found_models = [row.model for row in list(window.model_dropdown.get_model()) if row.model.get_name() == model_name]
+        if not found_models:
             if profile_picture:
                 self.sql_instance.insert_or_update_model_picture(model_name, self.get_content_of_file(profile_picture, 'profile_picture'))
 
@@ -215,13 +216,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(self.model_creator_name.set_text, model_name.split(':')[0])
             GLib.idle_add(self.model_creator_tag.set_text, 'custom')
 
-            system = self.model_selector.get_model_by_name(model_name).data.get('system')
+            system = None
+            modelfile = None
+
+            found_models = [row.model for row in list(window.model_dropdown.get_model()) if row.model.get_name() == model_name]
+            if found_models:
+                system = found_models[0].data.get('system')
+                modelfile = found_models[0].data.get('modelfile')
+
             if system:
                 context_buffer = self.model_creator_context.get_buffer()
                 GLib.idle_add(context_buffer.delete, context_buffer.get_start_iter(), context_buffer.get_end_iter())
                 GLib.idle_add(context_buffer.insert_at_cursor, system, len(system))
 
-            modelfile = self.model_selector.get_model_by_name(model_name).data.get('modelfile')
             if modelfile:
                 for line in modelfile.splitlines():
                     if line.startswith('PARAMETER top_k'):
@@ -326,7 +333,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         self.chat_list_box.send_tab_to_top(self.chat_list_box.get_selected_row())
 
-        current_model = self.model_selector.get_selected_model().get_name()
+        current_model = self.model_dropdown.get_selected_item().model.get_name()
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
             return
@@ -384,7 +391,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             self.welcome_dialog.force_close()
             self.sql_instance.insert_or_update_preferences({'show_welcome_dialog': False})
-            self.prepare_alpaca()
 
     @Gtk.Template.Callback()
     def switch_run_on_background(self, switch, user_data):
@@ -882,7 +888,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         try:
             texture = clipboard.read_texture_finish(result)
             if texture:
-                if self.model_selector.get_selected_model().get_vision():
+                if self.model_dropdown.get_selected_item().model.get_vision():
                     pixbuf = Gdk.pixbuf_get_from_texture(texture)
                     if not os.path.exists(os.path.join(cache_dir, 'tmp/images/')):
                         os.makedirs(os.path.join(cache_dir, 'tmp/images/'))
@@ -899,7 +905,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for file in files:
             extension = os.path.splitext(file.get_path())[1][1:]
             if extension in ('png', 'jpeg', 'jpg', 'webp', 'gif'):
-                if self.model_selector.get_selected_model().get_vision():
+                if self.model_dropdown.get_selected_item().model.get_vision():
                     self.attach_file(file.get_path(), 'image')
                 else:
                     self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
@@ -938,10 +944,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             return instance_manager.empty()
 
     def prepare_alpaca(self):
-        #Model Manager
-        self.model_selector = model_manager_widget.local_model_selector()
-        self.title_stack.add_named(self.model_selector, 'model-selector')
-
         instance_manager.update_instance_list()
 
         #Chat History
@@ -1069,7 +1071,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             ff.add_mime_type(mime)
             file_filters[0].add_mime_type(mime)
             file_filters.append(ff)
-        if self.model_selector.get_selected_model().get_vision():
+        if self.model_dropdown.get_selected_item().model.get_vision():
             file_filters[0].add_pixbuf_formats()
             file_filters.append(self.file_filter_image)
         dialog_widget.simple_file(file_filters, generic_actions.attach_file)
@@ -1089,6 +1091,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
         generic_actions.window = self
         model_manager_widget.window = self
         instance_manager.window = self
+
+        # Prepare model selector
+        list(self.model_dropdown)[0].add_css_class('flat')
+        self.model_dropdown.set_model(Gio.ListStore.new(model_manager_widget.local_model_row))
+        self.model_dropdown.set_expression(Gtk.PropertyExpression.new(model_manager_widget.local_model_row, None, "name"))
+        #print(self.model_dropdown.get_selected_item().model.get_name())
+
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
@@ -1132,7 +1141,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'send_message': [lambda *_: self.send_message()],
             'send_system_message': [lambda *_: self.send_message(None, True)],
             'attach_file': [lambda *_: self.attachment_request()],
-            'attach_screenshot': [lambda *i: self.request_screenshot() if self.model_selector.get_selected_model().get_vision() else self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)],
+            'attach_screenshot': [lambda *i: self.request_screenshot() if self.model_dropdown.get_selected_item().model.get_vision() else self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)],
             'attach_url': [lambda *i: dialog_widget.simple_entry(_('Attach Website? (Experimental)'), _('Please enter a website URL'), self.cb_text_received, {'placeholder': 'https://jeffser.com/alpaca/'})],
             'attach_youtube': [lambda *i: dialog_widget.simple_entry(_('Attach YouTube Captions?'), _('Please enter a YouTube video URL'), self.cb_text_received, {'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})],
             'model_manager' : [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>m']],
@@ -1159,10 +1168,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         adapter.set_enabled(True)
         self.set_focus(self.message_text_view)
 
-        if self.sql_instance.get_preference('show_welcome_dialog'):
-            self.welcome_dialog.present(self)
-        else:
-            self.prepare_alpaca()
+        self.prepare_alpaca()
 
         if self.powersaver_warning_switch.get_active():
             self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())

@@ -583,10 +583,10 @@ class option_popup(Gtk.Popover):
             self.message_element.spinner = None
         if not chat.busy:
             self.message_element.set_text()
-            self.message_element.model = window.model_selector.get_selected_model().get_name()
+            self.message_element.model = window.model_dropdown.get_selected_item().model.get_name()
             self.message_element.add_footer()
             self.message_element.footer.options_button.set_sensitive(False)
-            threading.Thread(target=window.get_current_instance().generate_message, args=(self.message_element, window.model_selector.get_selected_model().get_name())).start()
+            threading.Thread(target=window.get_current_instance().generate_message, args=(self.message_element, window.model_dropdown.get_selected_item().model.get_name())).start()
         else:
             window.show_toast(_("Message cannot be regenerated while receiving a response"), window.main_overlay)
 
@@ -692,9 +692,9 @@ class message(Gtk.Box):
         self.profile_picture_data = None
         self.profile_picture = None
         if self.bot and self.model:
-            model = window.model_selector.get_model_by_name(self.model)
-            if model:
-                self.profile_picture_data = model.data.get('profile_picture')
+            found_models = [row.model for row in list(window.model_dropdown.get_model()) if row.model.get_name() == self.model]
+            if found_models:
+                self.profile_picture_data = found_models[0].data.get('profile_picture')
 
         self.container = Gtk.Box(
             orientation=1,
@@ -716,9 +716,9 @@ class message(Gtk.Box):
 
     def update_profile_picture(self):
         if self.bot and self.model:
-            model = window.model_selector.get_model_by_name(self.model)
-            if model:
-                new_profile_picture_data = model.data.get('profile_picture')
+            found_models = [row.model for row in list(window.model_dropdown.get_model()) if row.model.get_name() == self.model]
+            if found_models:
+                new_profile_picture_data = found_models[0].data.get('profile_picture')
                 if new_profile_picture_data != self.profile_picture_data:
                     self.profile_picture_data = new_profile_picture_data
                     self.add_footer()

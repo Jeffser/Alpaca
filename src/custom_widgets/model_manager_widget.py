@@ -5,7 +5,7 @@ Handles models
 
 import gi
 gi.require_version('Gtk', '4.0')
-from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject
 import logging, os, datetime, re, threading, json, sys, glob, icu, base64, hashlib
 from ..internal import source_dir
 from .. import available_models_descriptions
@@ -17,82 +17,18 @@ window = None
 
 available_models = None
 
-class local_model_row(Gtk.ListBoxRow):
+class local_model_row(GObject.Object):
     __gtype_name__ = 'AlpacaLocalModelRow'
 
+    name = GObject.Property(type=str)
+
     def __init__(self, model):
+        super().__init__()
         self.model = model
-        model_title = window.convert_model_name(self.model.get_name(), 0)
-        super().__init__(
-            child=Gtk.Label(
-                label=model_title,
-                use_markup=True,
-                halign=1,
-                hexpand=True
-            ),
-            halign=0,
-            hexpand=True,
-            name=self.model.get_name(),
-            tooltip_text=model_title
-        )
+        self.name = model.model_title
 
-class local_model_selector(Adw.Bin):
-    __gtype_name__ = 'AlpacaLocalModelSelector'
-
-    def __init__(self):
-        self.local_model_list = Gtk.ListBox(
-            css_classes=['navigation-sidebar', 'model_list_box'],
-            height_request=0,
-            selection_mode=1
-        )
-        scroller = Gtk.ScrolledWindow(
-            max_content_height=300,
-            propagate_natural_width=True,
-            propagate_natural_height=True,
-            child=self.local_model_list
-        )
-        popover = Gtk.Popover(
-            css_classes=['model_popover'],
-            has_arrow=False,
-            child=scroller
-        )
-
-        self.local_model_list.connect('row-selected', lambda listbox, row: self.on_row_selected(row))
-        self.local_model_list.connect('row-activated', lambda *_: popover.hide())
-        manage_models_button = Gtk.Button(
-            tooltip_text=_('Manage Models'),
-            icon_name='brain-augemnted-symbolic',
-            css_classes=['flat']
-        )
-        manage_models_button.set_action_name("app.model_manager")
-
-        button_container = Gtk.Box(spacing=5)
-        self.button_label = Gtk.Label(use_markup=True, ellipsize=3)
-        button_container.append(self.button_label)
-        button_container.append(Gtk.Image.new_from_icon_name("down-symbolic"))
-        selector_button = Gtk.MenuButton(
-            child=button_container,
-            popover=popover,
-            css_classes=['flat']
-        )
-        container = Gtk.Box(css_classes=['card', 'local_model_selector'], halign=3)
-        container.append(manage_models_button)
-        container.append(selector_button)
-        super().__init__(child=container)
-
-    def on_row_selected(self, row):
-        if row:
-            self.button_label.set_label(row.get_child().get_label())
-        elif len(list(self.local_model_list)) > 0:
-            self.local_model_list.select_row(list(self.local_model_list)[0])
-
-    def get_selected_model(self):
-        return self.local_model_list.get_selected_row().model
-
-    def get_model_by_name(self, name:str):
-        results = [value for key, value in get_local_models().items() if key == name]
-        if len(results) > 0:
-            return results[0]
+    def __str__(self):
+        return self.model.model_title
 
 class pulling_model_page(Gtk.Box):
     __gtype_name__ = 'AlpacaPullingModelPage'
@@ -389,7 +325,7 @@ class local_model(Gtk.Box):
             self.append(subtitle_label)
         self.page = None
         self.row = local_model_row(self)
-        window.model_selector.local_model_list.prepend(self.row)
+        GLib.idle_add(window.model_dropdown.get_model().append, self.row)
         self.data = {}
         self.update_data()
 
@@ -452,7 +388,10 @@ class local_model(Gtk.Box):
 
     def remove_model(self):
         if window.get_current_instance().delete_model(self.get_name()):
-            window.model_selector.local_model_list.remove(self.row)
+            found_models = [i for i, row in enumerate(list(window.model_dropdown.get_model())) if row.model.get_name() == self.get_name()]
+            if found_models:
+                window.model_dropdown.get_model().remove(found_models[0])
+
             window.local_model_flowbox.remove(self)
             if len(list(window.local_model_flowbox)) == 0:
                 window.local_model_stack.set_visible_child_name('no-models')
@@ -651,7 +590,7 @@ def add_local_model(model_name:str):
 
 def update_local_model_list():
     window.local_model_flowbox.remove_all()
-    window.model_selector.local_model_list.remove_all()
+    window.model_dropdown.get_model().remove_all()
     default_model = window.sql_instance.get_preference('default_model')
     threads=[]
     for model in window.get_current_instance().get_local_models():

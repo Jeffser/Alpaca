@@ -10,6 +10,7 @@ from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 import logging, os, datetime, shutil, random, json, threading
 from ..internal import data_dir, cache_dir
 from .message_widget import message
+from . import model_manager_widget
 
 logger = logging.getLogger(__name__)
 
@@ -464,14 +465,13 @@ class chat_list(Gtk.ListBox):
                 window.chat_stack.set_transition_type(4 if self.tab_list.index(row) > current_tab_i else 5)
                 window.chat_stack.set_visible_child(row.chat_window)
                 window.switch_send_stop_button(not row.chat_window.busy)
-                if window.model_selector:
-                    model_to_use = window.get_current_instance().get_default_model()
-                    if len(row.chat_window.messages) > 0:
-                        model_to_use = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
-                    detected_models = [row for row in list(window.model_selector.local_model_list) if row.get_name() == model_to_use]
-                    if len(detected_models) > 0:
-                        window.model_selector.local_model_list.select_row(detected_models[0])
-                    elif len(list(window.model_selector.local_model_list)) > 0:
-                        window.model_selector.local_model_list.select_row(list(window.model_selector.local_model_list)[0])
+
+                model_to_use = window.get_current_instance().get_default_model()
+                if len(row.chat_window.messages) > 0:
+                    model_to_use = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
+                detected_models = [i for i, row in enumerate(list(window.model_dropdown.get_model())) if row.model.get_name() == model_to_use]
+                if len(detected_models) > 0:
+                    window.model_dropdown.set_selected(detected_models[0])
+
                 if row.indicator.get_visible():
                     row.indicator.set_visible(False)
