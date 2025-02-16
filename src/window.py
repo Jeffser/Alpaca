@@ -34,7 +34,7 @@ gi.require_version('GdkPixbuf', '2.0')
 gi.require_version('Spelling', '1')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelling, GObject
 
-from . import connection_handler, generic_actions, sql_manager, instance_manager
+from . import generic_actions, sql_manager, instance_manager
 from .custom_widgets import message_widget, chat_widget, terminal_widget, dialog_widget, model_manager_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir
 
@@ -1087,7 +1087,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         dialog_widget.window = self
         terminal_widget.window = self
         generic_actions.window = self
-        connection_handler.window = self
         model_manager_widget.window = self
         instance_manager.window = self
 
