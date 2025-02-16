@@ -774,8 +774,9 @@ class message(Gtk.Box):
 
         if not chat.busy or data.get('done', False):
             self.footer.options_button.set_sensitive(True)
-            if not chat.quick_chat:
-                window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
+            tab = window.chat_list_box.get_tab_by_name(chat.get_name())
+            if not chat.quick_chat and tab:
+                tab.spinner.set_visible(False)
                 if window.chat_list_box.get_current_chat().get_name() != chat.get_name():
                     window.chat_list_box.get_tab_by_name(chat.get_name()).indicator.set_visible(True)
                 if chat.welcome_screen:
