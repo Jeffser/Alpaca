@@ -68,6 +68,8 @@ class instance:
                 "temperature": "REAL NOT NULL",
                 "seed": "INTEGER NOT NULL",
                 "overrides": "TEXT NOT NULL",
+                "default_model": "TEXT NOT NULL",
+                "title_model": "TEXT NOT NULL",
                 "model_directory": "TEXT"
             }
         }
