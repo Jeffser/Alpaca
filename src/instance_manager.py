@@ -474,6 +474,27 @@ class ollama(base_ollama):
         seed_el = Adw.SpinRow(title=_('Seed'), subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'), name='seed', digits=0, numeric=True, snap_to_ticks=True, adjustment=Gtk.Adjustment(value=self.seed, lower=0, upper=99999999, step_increment=1))
         pg.add(seed_el)
 
+        if self.instance_id:
+            pg = Adw.PreferencesGroup()
+            pp.add(pg)
+            default_model_el = Adw.ComboRow(title=_('Default Model'), subtitle=_('Model to select when starting a new chat.'))
+            default_model_index = 0
+            title_model_el = Adw.ComboRow(title=_('Title Model'), subtitle=_('Model to use when generating a chat title.'))
+            title_model_index = 0
+            string_list = Gtk.StringList()
+            for i, model in enumerate(self.get_local_models()):
+                string_list.append(window.convert_model_name(model.get('name'), 0))
+                if model.get('name') == self.default_model:
+                    default_model_index = i
+                if model.get('name') == self.title_model:
+                    title_model_index = i
+            default_model_el.set_model(string_list)
+            default_model_el.set_selected(default_model_index)
+            title_model_el.set_model(string_list)
+            title_model_el.set_selected(title_model_index)
+            pg.add(default_model_el)
+            pg.add(title_model_el)
+
         pg = Adw.PreferencesGroup()
         pp.add(pg)
         button_container = Gtk.Box(spacing=10, halign=3)
@@ -491,7 +512,10 @@ class ollama(base_ollama):
         )
 
         def save():
-            if not self.instance_id:
+            if self.instance_id:
+                self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
+                self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
+            else:
                 self.instance_id = window.generate_uuid()
             if name_el.get_text():
                 self.name = name_el.get_text()
@@ -583,9 +607,30 @@ class openai_base(base_instance):
         temperature_el = Adw.SpinRow(title=_('Temperature'), subtitle=_('Increasing the temperature will make the models answer more creatively.'), name='temperature', digits=2, numeric=True, snap_to_ticks=True, adjustment=Gtk.Adjustment(value=self.temperature, lower=0.01, upper=2, step_increment=0.01))
         pg.add(temperature_el)
 
-        if self.instance_type != 'gemini':
+        if self.instance_type not in ('gemini', 'venice'):
             seed_el = Adw.SpinRow(title=_('Seed'), subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'), name='seed', digits=0, numeric=True, snap_to_ticks=True, adjustment=Gtk.Adjustment(value=self.seed, lower=0, upper=99999999, step_increment=1))
             pg.add(seed_el)
+
+        if self.instance_id:
+            pg = Adw.PreferencesGroup()
+            pp.add(pg)
+            default_model_el = Adw.ComboRow(title=_('Default Model'), subtitle=_('Model to select when starting a new chat.'))
+            default_model_index = 0
+            title_model_el = Adw.ComboRow(title=_('Title Model'), subtitle=_('Model to use when generating a chat title.'))
+            title_model_index = 0
+            string_list = Gtk.StringList()
+            for i, model in enumerate(self.get_local_models()):
+                string_list.append(window.convert_model_name(model.get('name'), 0))
+                if model.get('name') == self.default_model:
+                    default_model_index = i
+                if model.get('name') == self.title_model:
+                    title_model_index = i
+            default_model_el.set_model(string_list)
+            default_model_el.set_selected(default_model_index)
+            title_model_el.set_model(string_list)
+            title_model_el.set_selected(title_model_index)
+            pg.add(default_model_el)
+            pg.add(title_model_el)
 
         pg = Adw.PreferencesGroup()
         pp.add(pg)
@@ -604,7 +649,10 @@ class openai_base(base_instance):
         )
 
         def save():
-            if not self.instance_id:
+            if self.instance_id:
+                self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
+                self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
+            else:
                 self.instance_id = window.generate_uuid()
             if name_el.get_text():
                 self.name = name_el.get_text()
