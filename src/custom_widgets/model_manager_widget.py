@@ -107,8 +107,8 @@ class pulling_model_page(Gtk.Box):
             css_classes=['p10']
         )
         title_label = Gtk.Label(
-            label=model_title.split(' (')[0],
-            tooltip_text=model_title.split(' (')[0],
+            label=window.convert_model_name(self.model.get_name(), 2)[0],
+            tooltip_text=window.convert_model_name(self.model.get_name(), 2)[0],
             css_classes=['title-1'],
             wrap=True,
             wrap_mode=2,
@@ -136,14 +136,14 @@ class pulling_model(Gtk.Box):
             name=name
         )
         title_label = Gtk.Label(
-            label=self.model_title.split(' (')[0],
+            label=window.convert_model_name(name, 2)[0],
             css_classes=['title-3'],
             vexpand=True,
             ellipsize=3
         )
         self.append(title_label)
         subtitle_label = Gtk.Label(
-            label=self.model_title.split(' (')[1][:-1],
+            label=window.convert_model_name(name, 2)[1],
             css_classes=['dim-label'],
             vexpand=True,
             ellipsize=3
@@ -163,15 +163,16 @@ class pulling_model(Gtk.Box):
     def update_progressbar(self, data:dict):
         if not self.get_parent():
             logger.info("Pulling of '{}' was canceled".format(self.get_name()))
-            directory = os.path.join(window.ollama_instance.model_directory, 'blobs')
-            for digest in self.digests:
-                files_to_delete = glob.glob(os.path.join(directory, digest + '*'))
-                for file in files_to_delete:
-                    logger.info("Deleting '{}'".format(file))
-                    try:
-                        os.remove(file)
-                    except Exception as e:
-                        logger.error(f"Can't delete file {file}: {e}")
+            if window.get_current_instance().model_directory:
+                directory = os.path.join(window.get_current_instance().model_directory, 'blobs')
+                for digest in self.digests:
+                    files_to_delete = glob.glob(os.path.join(directory, digest + '*'))
+                    for file in files_to_delete:
+                        logger.info("Deleting '{}'".format(file))
+                        try:
+                            os.remove(file)
+                        except Exception as e:
+                            logger.error(f"Can't delete file {file}: {e}")
             sys.exit()
         if 'error' in data:
             self.error = data['error']
@@ -257,8 +258,8 @@ class local_model_page(Gtk.Box):
         self.append(self.image_container)
         self.image_container.connect('clicked', lambda *_: self.model.change_profile_picture())
         title_label = Gtk.Label(
-            label=model_title.split(' (')[0],
-            tooltip_text=model_title.split(' (')[0],
+            label=window.convert_model_name(self.model.get_name(), 2)[0],
+            tooltip_text=window.convert_model_name(self.model.get_name(), 2)[0],
             css_classes=['title-1'],
             wrap=True,
             wrap_mode=2,
@@ -271,12 +272,13 @@ class local_model_page(Gtk.Box):
         self.append(information_container)
         parent_model = self.model.data.get('details', {}).get('parent_model')
         metadata={
-            _('Tag'): model_title.split(' (')[-1][:-1],
-            _('Parent Model'): parent_model if '/' not in parent_model else 'GGUF',
+            _('Tag'): window.convert_model_name(self.model.get_name(), 2)[1],
             _('Family'): self.model.data.get('details', {}).get('family'),
             _('Parameter Size'): self.model.data.get('details', {}).get('parameter_size'),
             _('Quantization Level'): self.model.data.get('details', {}).get('quantization_level')
         }
+        if parent_model:
+            metadata[_('Parent Model')] = parent_model if '/' not in parent_model else 'GGUF'
 
         if 'modified_at' in self.model.data:
             metadata[_('Modified At')] = datetime.datetime.strptime(':'.join(self.model.data['modified_at'].split(':')[:2]), '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
@@ -284,49 +286,65 @@ class local_model_page(Gtk.Box):
             metadata[_('Modified At')] = None
 
         for name, value in metadata.items():
-            info_box = Gtk.Box(
-                orientation=1,
-                spacing=5,
-                css_classes=['card'],
-                name=name
+            if value:
+                info_box = Gtk.Box(
+                    orientation=1,
+                    spacing=5,
+                    css_classes=['card'],
+                    name=name
+                )
+                title_label = Gtk.Label(
+                    label=name,
+                    css_classes=['subtitle', 'caption', 'dim-label'],
+                    hexpand=True,
+                    margin_top=10,
+                    margin_start=0,
+                    margin_end=0,
+                    ellipsize=3,
+                    tooltip_text=name
+                )
+                info_box.append(title_label)
+                subtitle_label = Gtk.Label(
+                    label=value if value else _('Not Available'),
+                    css_classes=['heading'],
+                    hexpand=True,
+                    margin_bottom=10,
+                    margin_start=0,
+                    margin_end=0,
+                    ellipsize=3,
+                    tooltip_text=value if value else _('Not Available')
+                )
+                info_box.append(subtitle_label)
+                information_container.append(info_box)
+        if self.model.data.get('system'):
+            system_label = Adw.Bin(
+                css_classes=['card', 'p10'],
+                child = Gtk.Label(
+                    label=self.model.data.get('system'),
+                    hexpand=True,
+                    halign=0,
+                    wrap=True,
+                    wrap_mode=2,
+                    justify=2,
+                ),
+                focusable=True
             )
-            title_label = Gtk.Label(
-                label=name,
-                css_classes=['subtitle', 'caption', 'dim-label'],
-                hexpand=True,
-                margin_top=10,
-                margin_start=0,
-                margin_end=0,
-                ellipsize=3,
-                tooltip_text=name
+            self.append(system_label)
+        if self.model.data.get('description'):
+            description_label = Adw.Bin(
+                css_classes=['card', 'p10'],
+                child = Gtk.Label(
+                    label=self.model.data.get('description'),
+                    hexpand=True,
+                    halign=0,
+                    wrap=True,
+                    wrap_mode=2,
+                    justify=2,
+                ),
+                focusable=True
             )
-            info_box.append(title_label)
-            subtitle_label = Gtk.Label(
-                label=value if value else _('Not Available'),
-                css_classes=['heading'],
-                hexpand=True,
-                margin_bottom=10,
-                margin_start=0,
-                margin_end=0,
-                ellipsize=3,
-                tooltip_text=value if value else _('Not Available')
-            )
-            info_box.append(subtitle_label)
-            information_container.append(info_box)
+            self.append(description_label)
 
-        system_label = Adw.Bin(
-            css_classes=['card', 'p10'],
-            child = Gtk.Label(
-                label=self.model.data['system'] if 'system' in self.model.data and self.model.data['system'] else _('(No system message available)'),
-                hexpand=True,
-                halign=0,
-                wrap=True,
-                wrap_mode=2,
-                justify=2,
-            ),
-            focusable=True
-        )
-        self.append(system_label)
         self.model.image_container.connect('notify::child', lambda *_: self.update_profile_picture())
 
     def update_profile_picture(self):
@@ -355,19 +373,20 @@ class local_model(Gtk.Box):
         )
         self.append(self.image_container)
         title_label = Gtk.Label(
-            label=self.model_title.split(' (')[0],
+            label=window.convert_model_name(name, 2)[0],
             css_classes=['title-3'],
             vexpand=True,
             ellipsize=3
         )
         self.append(title_label)
-        subtitle_label = Gtk.Label(
-            label=self.model_title.split(' (')[1][:-1],
-            css_classes=['dim-label'],
-            vexpand=True,
-            ellipsize=3
-        )
-        self.append(subtitle_label)
+        if window.convert_model_name(name, 2)[1]:
+            subtitle_label = Gtk.Label(
+                label=window.convert_model_name(name, 2)[1],
+                css_classes=['dim-label'],
+                vexpand=True,
+                ellipsize=3
+            )
+            self.append(subtitle_label)
         self.page = None
         self.row = local_model_row(self)
         window.model_selector.local_model_list.prepend(self.row)
@@ -382,8 +401,7 @@ class local_model(Gtk.Box):
 
     def update_data(self):
         try:
-            response = window.ollama_instance.request("POST", "api/show", json.dumps({"name": self.get_name()}))
-            self.data = json.loads(response.text)
+            self.data = window.get_current_instance().get_model_info(self.get_name())
         except Exception as e:
             self.data = {'details': {}}
         self.update_profile_picture()
@@ -433,8 +451,7 @@ class local_model(Gtk.Box):
             dialog_widget.simple_file([window.file_filter_image], set_profile_picture)
 
     def remove_model(self):
-        response = window.ollama_instance.request("DELETE", "api/delete", json.dumps({"name": self.get_name()}))
-        if response.status_code == 200:
+        if window.get_current_instance().delete_model(self.get_name()):
             window.model_selector.local_model_list.remove(self.row)
             window.local_model_flowbox.remove(self)
             if len(list(window.local_model_flowbox)) == 0:
@@ -445,27 +462,29 @@ class local_model(Gtk.Box):
 
     def get_page(self):
         actionbar = Gtk.ActionBar()
-        create_child_button = Gtk.Button(
-            icon_name='list-add-symbolic',
-            tooltip_text=_('Create Child'),
-            css_classes=['accent']
-        )
-        create_child_button.connect('clicked', lambda button: window.model_creator_existing(button, self.get_name()))
-        actionbar.pack_start(create_child_button)
+        if window.model_creator_stack_page.get_visible():
+            create_child_button = Gtk.Button(
+                icon_name='list-add-symbolic',
+                tooltip_text=_('Create Child'),
+                css_classes=['accent']
+            )
+            create_child_button.connect('clicked', lambda button: window.model_creator_existing(button, self.get_name()))
+            actionbar.pack_start(create_child_button)
 
-        remove_button = Gtk.Button(
-            icon_name='user-trash-symbolic',
-            tooltip_text=_('Remove Model'),
-            css_classes=['destructive-action']
-        )
-        remove_button.connect('clicked', lambda button: dialog_widget.simple(
-            _('Remove Model?'),
-            _("Are you sure you want to remove '{}'?").format(window.convert_model_name(self.get_name(), 0)),
-            self.remove_model,
-            _('Remove'),
-            'destructive'
-        ))
-        actionbar.pack_end(remove_button)
+        if window.available_models_stack_page.get_visible():
+            remove_button = Gtk.Button(
+                icon_name='user-trash-symbolic',
+                tooltip_text=_('Remove Model'),
+                css_classes=['destructive-action']
+            )
+            remove_button.connect('clicked', lambda button: dialog_widget.simple(
+                _('Remove Model?'),
+                _("Are you sure you want to remove '{}'?").format(window.convert_model_name(self.get_name(), 0)),
+                self.remove_model,
+                _('Remove'),
+                'destructive'
+            ))
+            actionbar.pack_end(remove_button)
         if not self.page:
             self.page = local_model_page(self)
         return actionbar, self.page
@@ -631,48 +650,29 @@ def add_local_model(model_name:str):
     return model_element
 
 def update_local_model_list():
-    string_list = Gtk.StringList()
     window.local_model_flowbox.remove_all()
     window.model_selector.local_model_list.remove_all()
     default_model = window.sql_instance.get_preference('default_model')
-    selected_default_model_index = 0
-    try:
-        response = window.ollama_instance.request("GET", "api/tags")
-        if response.status_code == 200:
-            threads = []
-            data = json.loads(response.text)
-            for i, model in enumerate(data.get('models')):
-                if model.get('name') == default_model:
-                    selected_default_model_index = i
-                string_list.append(window.convert_model_name(model.get('name'), 0))
-                thread = threading.Thread(target=add_local_model, args=(model['name'], ))
-                thread.start()
-                threads.append(thread)
-            for thread in threads:
-                thread.join()
-        else:
-            window.connection_error()
-    except Exception as e:
-        logger.error(e)
-        window.connection_error()
+    threads=[]
+    for model in window.get_current_instance().get_local_models():
+        thread = threading.Thread(target=add_local_model, args=(model['name'], ))
+        thread.start()
+        threads.append(thread)
+    for thread in threads:
+        thread.join()
     window.title_stack.set_visible_child_name('model-selector' if len(get_local_models()) > 0 else 'no-models')
     window.local_model_stack.set_visible_child_name('content' if len(get_local_models()) > 0 else 'no-models')
-    window.default_model_combo.set_model(string_list)
-    window.default_model_combo.set_selected(selected_default_model_index)
 
 def update_available_model_list():
     global available_models
-    try:
-        with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
-            available_models = json.load(f)
-    except Exception as e:
-        available_models = {}
+    available_models = window.get_current_instance().get_available_models()
     window.available_model_flowbox.remove_all()
     for name, model_info in available_models.items():
         if 'small' in model_info['categories'] or 'medium' in model_info['categories'] or 'big' in model_info['categories'] or os.getenv('ALPACA_SHOW_HUGE_MODELS', '0') == '1':
             if 'embedding' not in model_info['categories'] or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1':
                 model_element = available_model(name, model_info)
                 window.available_model_flowbox.append(model_element)
+    window.get_application().lookup_action('download_model_from_name').set_enabled(len(available_models) > 0)
 
 def get_local_models() -> dict:
     results = {}
@@ -691,7 +691,7 @@ def pull_model_confirm(model_name:str):
             GLib.idle_add(window.model_manager_stack.set_visible_child_name, 'local_models')
             GLib.idle_add(window.local_model_flowbox.select_child, model.get_parent())
             GLib.idle_add(window.local_model_stack.set_visible_child_name, 'content')
-            response = window.ollama_instance.request("POST", "api/pull", json.dumps({'name': model_name, 'stream': True}), lambda result_data: model.update_progressbar(result_data))
+            window.get_current_instance().pull_model(model_name, model.update_progressbar)
 
 def pull_model(row, icon):
     model_name = row.get_name()
@@ -704,7 +704,7 @@ def create_model_confirm(data:dict, gguf_path:str):
     if data.get('model') and data.get('model') not in list(get_local_models().keys()):
         model = pulling_model(data.get('model'))
         window.local_model_flowbox.prepend(model)
-        GLib.idle_add(window.model_manager_stack.set_visible_child_name, 'local_models')
+        GLib.idle_add(window.model_manager_stack.set_visible_child_name, 'added_models')
         GLib.idle_add(window.local_model_flowbox.select_child, model.get_parent())
         GLib.idle_add(window.local_model_stack.set_visible_child_name, 'content')
         if gguf_path:
@@ -713,17 +713,15 @@ def create_model_confirm(data:dict, gguf_path:str):
                     model.update_progressbar({'status': 'Generating sha256'})
                     sha256 = hashlib.file_digest(f, 'sha256').hexdigest()
 
-                with open(gguf_path, 'rb') as f:
-                    response = window.ollama_instance.request('GET', 'api/blobs/sha256:{}'.format(sha256))
-                    if response.status_code == 404:
-                        model.update_progressbar({'status': 'Uploading GGUF to Ollama instance'})
-                        response = window.ollama_instance.request('POST', 'api/blobs/sha256:{}'.format(sha256), f)
+                if not window.get_current_instance().gguf_exists(sha256):
+                    model.update_progressbar({'status': 'Uploading GGUF to Ollama instance'})
+                    window.get_current_instance().upload_gguf(gguf_path, sha256)
                     data['files'] = {os.path.split(gguf_path)[1]: 'sha256:{}'.format(sha256)}
             except Exception as e:
                 logger.error(e)
                 GLib.idle_add(window.local_model_flowbox.remove, model.get_parent())
                 return
-        response = window.ollama_instance.request("POST", "api/create", json.dumps(data), lambda result_data: model.update_progressbar(result_data))
+        window.get_current_instance().create_model(data, model.update_progressbar)
 
 def create_model(data:dict, gguf_path:str=None):
     threading.Thread(target=create_model_confirm, args=(data, gguf_path)).start()

@@ -1,6 +1,6 @@
 # sql_manager.py
 
-import sqlite3, uuid, datetime, os, shutil
+import sqlite3, uuid, datetime, os, shutil, json
 from .internal import data_dir
 
 def generate_uuid() -> str:
@@ -57,9 +57,18 @@ class instance:
                 "value": "TEXT",
                 "type": "TEXT"
             },
-            "overrides": {
+            "instances": {
                 "id": "TEXT NOT NULL PRIMARY KEY",
-                "value": "TEXT"
+                "name": "TEXT NOT NULL",
+                "type": "TEXT NOT NULL",
+                "url": "TEXT",
+                "max_tokens": "INTEGER NOT NULL",
+                "api": "TEXT",
+                "bearer": "TEXT",
+                "temperature": "REAL NOT NULL",
+                "seed": "INTEGER NOT NULL",
+                "overrides": "TEXT NOT NULL",
+                "model_directory": "TEXT"
             }
         }
 
@@ -68,6 +77,8 @@ class instance:
             cursor.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_def})")
         sqlite_con.commit()
         sqlite_con.close()
+
+        ##TODO remember to drop overrides (table) and delete all the unused preferences
 
     ###########
     ## CHATS ##
@@ -308,3 +319,68 @@ class instance:
         for row in result:
             overrides[row[0]] = row[1]
         return overrides
+
+    ###############
+    ## Instances ##
+    ###############
+
+    def get_instances(self) -> list:
+        columns = ['id', 'name', 'type', 'url', 'max_tokens', 'api', 'bearer', 'temperature', 'seed', 'overrides', 'model_directory', 'default_model', 'title_model', 'pinned']
+        sqlite_con = sqlite3.connect(self.sql_path)
+        cursor = sqlite_con.cursor()
+        result = cursor.execute("SELECT {} FROM instances".format(', '.join(columns))).fetchall()
+        sqlite_con.close()
+        instances = []
+        for row in result:
+            instances.append({})
+            for i, column in enumerate(columns):
+                value = row[i]
+                if column == 'overrides':
+                    try:
+                        value = json.loads(value)
+                    except Exception as e:
+                        value = {}
+                elif column == 'pinned':
+                    value = value == 1
+                instances[-1][column] = value
+        return instances
+
+    def insert_or_update_instance(self, ins):
+        data = {
+            'id': ins.instance_id,
+            'name': ins.name,
+            'type': ins.instance_type,
+            'url': ins.instance_url,
+            'max_tokens': ins.max_tokens,
+            'api': ins.api_key,
+            'bearer': ins.bearer,
+            'temperature': ins.temperature,
+            'seed': ins.seed,
+            'overrides': json.dumps(ins.overrides),
+            'model_directory': ins.model_directory,
+            'default_model': ins.default_model,
+            'title_model': ins.title_model,
+            'pinned': ins.pinned
+        }
+
+        sqlite_con = sqlite3.connect(self.sql_path)
+        cursor = sqlite_con.cursor()
+        if cursor.execute("SELECT id FROM instances WHERE id=?", (data.get('id'),)).fetchone():
+            instance_id = data.pop('id', None)
+            set_clause = ', '.join(f"{key} = ?" for key in data.keys())
+            values = list(data.values()) + [instance_id]
+            cursor.execute(f"UPDATE instances SET {set_clause} WHERE id=?", values)
+        else:
+            columns = ', '.join(data.keys())
+            placeholders = ', '.join('?' for _ in data)
+            values = tuple(data.values())
+            cursor.execute(f'INSERT INTO instances ({columns}) VALUES ({placeholders})', values)
+        sqlite_con.commit()
+        sqlite_con.close()
+
+    def delete_instance(self, instance_id:str):
+        sqlite_con = sqlite3.connect(self.sql_path)
+        cursor = sqlite_con.cursor()
+        cursor.execute("DELETE FROM instances WHERE id=?", (instance_id,))
+        sqlite_con.commit()
+        sqlite_con.close()

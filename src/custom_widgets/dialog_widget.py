@@ -180,6 +180,49 @@ def simple_dropdown(heading:str, body:str, callback:callable, items:list, button
 
     DropDown(heading, body, list(options.keys())[0], options, items)
 
+def simple_log(title:str, summary_text:str, summary_classes:list, log_text:str):
+    container = Gtk.Box(
+        hexpand=True,
+        vexpand=True,
+        orientation=1,
+        spacing=10,
+        css_classes=['p10']
+    )
+    container.append(Gtk.Label(
+        label=summary_text,
+        wrap=True,
+        wrap_mode=2,
+        css_classes=summary_classes,
+        use_markup=True,
+        justify=2
+    ))
+    container.append(Gtk.ScrolledWindow(
+        min_content_width=300,
+        hscrollbar_policy=2,
+        propagate_natural_height=True,
+        propagate_natural_width=True,
+        css_classes=['card'],
+        child=Gtk.Label(
+            css_classes=['p10', 'monospace'],
+            label=log_text,
+            wrap=True,
+            wrap_mode=2,
+            selectable=True
+        )
+    ))
+
+    tbv = Adw.ToolbarView()
+    tbv.add_top_bar(Adw.HeaderBar())
+    tbv.set_content(container)
+
+    dialog = Adw.Dialog(
+        title=title,
+        follows_content_size=True,
+        child=tbv
+    )
+
+    GLib.idle_add(dialog.present, window)
+
 def simple_error(title:str, body:str, error_log:str, callback:callable=None):
     container = Gtk.Box(
         hexpand=True,

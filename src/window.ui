@@ -326,6 +326,49 @@
         </child>
         <child>
           <object class="AdwNavigationPage">
+            <property name="title" translatable="yes">Instance Manager</property>
+            <property name="tag">instance_manager</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar"/>
+                </child>
+                <property name="content">
+                  <object class="AdwPreferencesPage" id="instance_preferences_page">
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="yes">Added Instances</property>
+                        <property name="description" translatable="yes">Manage your AI instances, chats and messages are shared between instances when generating responses.</property>
+                        <property name="header-suffix">
+                          <object class="GtkButton">
+                            <property name="icon-name">list-add-symbolic</property>
+                            <property name="valign">3</property>
+                            <property name="tooltip-text">Add Instance</property>
+                            <signal name="clicked" handler="add_instance"/>
+                            <style>
+                              <class name="flat"/>
+                            </style>
+                          </object>
+                        </property>
+                        <child>
+                          <object class="GtkListBox" id="instance_listbox">
+                            <property name="selection-mode">single</property>
+                            <signal name="row-selected" handler="instance_changed"/>
+                            <style>
+                              <class name="boxed-list"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwNavigationPage">
             <property name="title" translatable="yes">Model Manager</property>
             <property name="tag">model_manager</property>
             <property name="child">
@@ -413,8 +456,8 @@
                         <signal name="notify::visible-child" handler="model_manager_stack_changed"/>
                         <child>
                           <object class="AdwViewStackPage">
-                            <property name="name">local_models</property>
-                            <property name="title" translatable="yes">Local</property>
+                            <property name="name">added_models</property>
+                            <property name="title" translatable="yes">Added</property>
                             <property name="icon-name">folder-download-symbolic</property>
                             <property name="child">
                               <object class="GtkStack" id="local_model_stack">
@@ -478,7 +521,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="AdwViewStackPage">
+                          <object class="AdwViewStackPage" id="available_models_stack_page">
                             <property name="name">available_models</property>
                             <property name="title" translatable="yes">Available</property>
                             <property name="icon-name">globe-symbolic</property>
@@ -532,7 +575,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="AdwViewStackPage">
+                          <object class="AdwViewStackPage"  id="model_creator_stack_page">
                             <property name="name">model_creator</property>
                             <property name="title" translatable="yes">Creator</property>
                             <property name="icon-name">brain-augemnted-symbolic</property>
@@ -709,7 +752,7 @@
                                                     <property name="tooltip-text" translatable="yes">Add Model</property>
                                                     <style>
                                                       <class name="pill"/>
-                                                      <class name="accent"/>
+                                                      <class name="suggested-action"/>
                                                     </style>
                                                     <property name="child">
                                                       <object class="AdwButtonContent">
@@ -756,33 +799,6 @@
           <child>
             <object class="AdwPreferencesGroup">
               <child>
-                <object class="AdwSwitchRow" id="remote_connection_switch">
-                  <property name="visible">false</property>
-                  <property name="title" translatable="yes">Use Remote Connection to Ollama</property>
-                </object>
-              </child>
-              <child>
-                <object class="AdwActionRow" id="remote_connection_selector">
-                  <property name="visible">false</property>
-                  <property name="title" translatable="yes">Change Ollama Instance</property>
-                  <child type="suffix">
-                    <object class="GtkButton">
-                      <signal name="clicked" handler="remote_connection_selector_clicked"/>
-                      <property name="icon-name">chain-link-loose-symbolic</property>
-                      <property name="valign">3</property>
-                      <property name="tooltip-text" translatable="yes">Change Ollama Instance</property>
-                      <style>
-                        <class name="circular"/>
-                      </style>
-                    </object>
-                  </child>
-                </object>
-              </child>
-            </object>
-          </child>
-          <child>
-            <object class="AdwPreferencesGroup">
-              <child>
                 <object class="AdwSwitchRow" id="background_switch">
                   <signal name="notify::active" handler="switch_run_on_background"/>
                   <property name="title" translatable="yes">Run Alpaca In Background</property>
@@ -792,203 +808,6 @@
                 <object class="AdwSwitchRow" id="powersaver_warning_switch">
                   <signal name="notify::active" handler="switch_powersaver_warning"/>
                   <property name="title" translatable="yes">Show Power Saver Warning</property>
-                </object>
-              </child>
-              <child>
-                <object class="AdwComboRow" id="default_model_combo">
-                  <signal name="notify::selected" handler="changed_default_model"/>
-                  <property name="name">default_model</property>
-                  <property name="title" translatable="yes">Default Model</property>
-                  <property name="subtitle" translatable="yes">The default model to use on new chats and when generating chat titles</property>
-                  <property name="sensitive">false</property>
-                  <property name="model">
-                    <object class="GtkStringList" id="default_model_list">
-                      <items>
-
-                      </items>
-                    </object>
-                  </property>
-                </object>
-              </child>
-            </object>
-          </child>
-          <child>
-            <object class="AdwPreferencesGroup" id="tweaks_group">
-              <child>
-                <object class="AdwSpinRow">
-                  <signal name="changed" handler="model_spin_changed"/>
-                  <property name="name">temperature</property>
-                  <property name="title" translatable="yes">Temperature</property>
-                  <property name="subtitle" translatable="yes">The temperature of the model. Increasing the temperature will make the model answer more creatively. (Default: 0.8)</property>
-                  <property name="digits">1</property>
-                  <property name="adjustment">
-                    <object class="GtkAdjustment">
-                      <property name="lower">0</property>
-                      <property name="upper">2</property>
-                      <property name="step-increment">0.1</property>
-                    </object>
-                  </property>
-                </object>
-              </child>
-              <child>
-                <object class="AdwSpinRow">
-                  <signal name="changed" handler="model_spin_changed"/>
-                  <property name="name">seed</property>
-                  <property name="title" translatable="yes">Seed</property>
-                  <property name="subtitle" translatable="yes">Sets the random number seed to use for generation. Setting this to a specific number will make the model generate the same text for the same prompt. (Default: 0 (random))</property>
-                  <property name="adjustment">
-                    <object class="GtkAdjustment">
-                      <property name="lower">0</property>
-                      <property name="upper">999999</property>
-                      <property name="step-increment">1</property>
-                    </object>
-                  </property>
-                </object>
-              </child>
-              <child>
-                <object class="AdwSpinRow">
-                  <signal name="changed" handler="model_spin_changed"/>
-                  <property name="name">keep_alive</property>
-                  <property name="title" translatable="yes">Keep Alive Time</property>
-                  <property name="subtitle" translatable="yes">Controls how long the model will stay loaded into memory following the request in minutes (Default: 5)</property>
-                  <property name="adjustment">
-                    <object class="GtkAdjustment">
-                      <property name="lower">-1</property>
-                      <property name="upper">999999</property>
-                      <property name="step-increment">1</property>
-                    </object>
-                  </property>
-                </object>
-              </child>
-            </object>
-          </child>
-        </object>
-      </child>
-      <child>
-        <object class="AdwPreferencesPage" id="instance_page">
-          <property name="sensitive" bind-source="remote_connection_switch" bind-property="active" bind-flags="invert-boolean"/>
-          <property name="title" translatable="yes">Ollama Instance</property>
-          <property name="icon-name">brain-augemnted-symbolic</property>
-          <child>
-            <object class="AdwPreferencesGroup" id="overrides_group">
-              <property name="title" translatable="yes">Ollama Overrides</property>
-              <property name="description" translatable="yes">Manage the arguments used on Ollama, any changes on this page only applies to the integrated instance, the instance will restart if you make changes.</property>
-              <child>
-                <object class="AdwEntryRow">
-                  <signal name="apply" handler="override_changed"/>
-                  <property name="name">HSA_OVERRIDE_GFX_VERSION</property>
-                  <property name="title" translatable="no">HSA_OVERRIDE_GFX_VERSION</property>
-                  <property name="show-apply-button">true</property>
-                  <child type="prefix">
-                    <object class="GtkButton">
-                      <signal name="clicked" handler="link_button_handler"/>
-                      <property name="name">https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides</property>
-                      <property name="tooltip-text">https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides</property>
-                      <property name="vexpand">false</property>
-                      <property name="valign">3</property>
-                      <property name="icon-name">globe-symbolic</property>
-                      <style>
-                        <class name="success"/>
-                      </style>
-                    </object>
-                  </child>
-                </object>
-              </child>
-              <child>
-                <object class="AdwEntryRow">
-                  <signal name="apply" handler="override_changed"/>
-                  <property name="name">CUDA_VISIBLE_DEVICES</property>
-                  <property name="title" translatable="no">CUDA_VISIBLE_DEVICES</property>
-                  <property name="show-apply-button">true</property>
-                  <child type="prefix">
-                    <object class="GtkButton">
-                      <signal name="clicked" handler="link_button_handler"/>
-                      <property name="name">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection</property>
-                      <property name="tooltip-text">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection</property>
-                      <property name="vexpand">false</property>
-                      <property name="valign">3</property>
-                      <property name="icon-name">globe-symbolic</property>
-                      <style>
-                        <class name="success"/>
-                      </style>
-                    </object>
-                  </child>
-                </object>
-              </child>
-              <child>
-                <object class="AdwEntryRow">
-                  <signal name="apply" handler="override_changed"/>
-                  <property name="name">ROCR_VISIBLE_DEVICES</property>
-                  <property name="title" translatable="no">ROCR_VISIBLE_DEVICES</property>
-                  <property name="show-apply-button">true</property>
-                  <child type="prefix">
-                    <object class="GtkButton">
-                      <signal name="clicked" handler="link_button_handler"/>
-                      <property name="name">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection-1</property>
-                      <property name="tooltip-text">https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection-1</property>
-                      <property name="vexpand">false</property>
-                      <property name="valign">3</property>
-                      <property name="icon-name">globe-symbolic</property>
-                      <style>
-                        <class name="success"/>
-                      </style>
-                    </object>
-                  </child>
-                </object>
-              </child>
-            </object>
-          </child>
-          <child>
-            <object class="AdwPreferencesGroup">
-              <child>
-                <object class="AdwSpinRow" id="instance_idle_timer">
-                  <signal name="changed" handler="instance_idle_timer_changed"/>
-                  <property name="name">idle_timer</property>
-                  <property name="title" translatable="yes">Idle Timer</property>
-                  <property name="subtitle" translatable="yes">Number of minutes the instance should remain idle before it is shut down (0 means it won't be shut down)</property>
-                  <property name="digits">0</property>
-                  <property name="adjustment">
-                    <object class="GtkAdjustment">
-                      <property name="lower">0</property>
-                      <property name="upper">60</property>
-                      <property name="step-increment">5</property>
-                    </object>
-                  </property>
-                </object>
-              </child>
-            </object>
-          </child>
-          <child>
-            <object class="AdwPreferencesGroup">
-              <child>
-                <object class="AdwActionRow" id="model_directory_selector">
-                  <property name="title" translatable="yes">Model Directory</property>
-                  <child type="suffix">
-                    <object class="GtkButton">
-                      <signal name="clicked" handler="model_directory_selector_clicked"/>
-                      <property name="icon-name">inode-directory-symbolic</property>
-                      <property name="valign">3</property>
-                      <property name="tooltip-text" translatable="yes">Change Model Directory</property>
-                      <style>
-                        <class name="circular"/>
-                      </style>
-                    </object>
-                  </child>
-                </object>
-              </child>
-            </object>
-          </child>
-          <child>
-            <object class="AdwPreferencesGroup">
-              <child>
-                <object class="GtkLabel" id="ollama_information_label">
-                  <property name="wrap">true</property>
-                  <property name="use-markup">true</property>
-                  <property name="label" translatable="yes">Integrated Ollama instance is not running</property>
-                  <property name="justify">2</property>
-                  <style>
-                    <class name="dim-label"/>
-                  </style>
                 </object>
               </child>
             </object>
@@ -1231,6 +1050,10 @@
         <attribute name="action">app.import_chat</attribute>
       </item>
       <item>
+        <attribute name="label" translatable="yes">Manage Instances</attribute>
+        <attribute name="action">app.instance_manager</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">Manage Models</attribute>
         <attribute name="action">app.model_manager</attribute>
       </item>
@@ -1279,8 +1102,8 @@
   <menu id="model_manager_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Reload Local Models</attribute>
-        <attribute name="action">app.reload_local_models</attribute>
+        <attribute name="label" translatable="yes">Reload Added Models</attribute>
+        <attribute name="action">app.reload_added_models</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">Download Model From Name</attribute>

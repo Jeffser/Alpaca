@@ -29,6 +29,12 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Instance Manager</property>
+                <property name="action-name">app.instance_manager</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes" context="shortcut window">Toggle Sidebar</property>
                 <property name="action-name">app.toggle_sidebar</property>
               </object>
@@ -54,12 +60,6 @@
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes" context="shortcut window">Delete Chat</property>
                 <property name="action-name">app.delete_current_chat</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkShortcutsShortcut">
-                <property name="title" translatable="yes" context="shortcut window">Import Chat</property>
-                <property name="action-name">app.import_chat</property>
               </object>
             </child>
             <child>

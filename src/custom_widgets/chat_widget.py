@@ -229,16 +229,27 @@ class chat(Gtk.Stack):
                     message_role = 'system'
                 message_data = {
                     'role': message_role,
-                    'content': ''
+                    'content': []
                 }
+                raw_text = ''
                 if message.image_c and len(message.image_c.files) > 0:
-                    message_data['images'] = []
                     for image in message.image_c.files:
-                        message_data['images'].append(image.file_content)
+                        message_data['content'].append({
+                            'type': 'image_url',
+                            'image_url': {
+                                'url': f'data:image/jpeg;base64,{image.file_content}'
+                            }
+                        })
                 if message.attachment_c and len(message.attachment_c.files) > 0:
                     for attachment in message.attachment_c.files:
-                        message_data['content'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get_name(), attachment.file_type, attachment.file_content)
-                message_data['content'] += message.text
+                        message_data['content'].append({
+                            'type': 'text',
+                            'text': '```{} ({})\n{}\n```\n\n'.format(attachment.get_name(), attachment.file_type, attachment.file_content)
+                        })
+                message_data['content'].append({
+                    'type': 'text',
+                    'text': message.text
+                })
                 if include_metadata:
                     message_data['date'] = message.dt.strftime("%Y/%m/%d %H:%M:%S")
                     message_data['model'] = message.model
@@ -454,11 +465,7 @@ class chat_list(Gtk.ListBox):
                 window.chat_stack.set_visible_child(row.chat_window)
                 window.switch_send_stop_button(not row.chat_window.busy)
                 if window.model_selector:
-                    default_model = window.default_model_combo.get_selected_item()
-                    if default_model:
-                        model_to_use = window.convert_model_name(default_model.get_string(), 1)
-                    else:
-                        model_to_use = None
+                    model_to_use = window.get_current_instance().get_default_model()
                     if len(row.chat_window.messages) > 0:
                         model_to_use = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
                     detected_models = [row for row in list(window.model_selector.local_model_list) if row.get_name() == model_to_use]

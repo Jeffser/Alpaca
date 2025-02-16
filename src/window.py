@@ -54,10 +54,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     #Variables
     attachments = {}
 
-    #Override elements
-    overrides_group = Gtk.Template.Child()
-    instance_page = Gtk.Template.Child()
-
     #Elements
     local_model_stack = Gtk.Template.Child()
     available_model_stack = Gtk.Template.Child()
@@ -71,7 +67,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     split_view_overlay = Gtk.Template.Child()
     regenerate_button : Gtk.Button = None
     selected_chat_row : Gtk.ListBoxRow = None
-    tweaks_group = Gtk.Template.Child()
     preferences_dialog = Gtk.Template.Child()
     file_preview_dialog = Gtk.Template.Child()
     file_preview_text = Gtk.Template.Child()
@@ -98,11 +93,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     message_searchbar = Gtk.Template.Child()
     searchentry_messages = Gtk.Template.Child()
     title_stack = Gtk.Template.Child()
-    ollama_information_label = Gtk.Template.Child()
-    default_model_combo = Gtk.Template.Child()
-    default_model_list = Gtk.Template.Child()
-    model_directory_selector = Gtk.Template.Child()
-    remote_connection_selector = Gtk.Template.Child()
 
     file_filter_db = Gtk.Template.Child()
     file_filter_gguf = Gtk.Template.Child()
@@ -111,14 +101,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = None
-    ollama_instance = None
     model_manager = None
     model_selector = None
-    instance_idle_timer = Gtk.Template.Child()
 
     background_switch = Gtk.Template.Child()
     powersaver_warning_switch = Gtk.Template.Child()
-    remote_connection_switch = Gtk.Template.Child()
 
     banner = Gtk.Template.Child()
 
@@ -139,12 +126,52 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_creator_imagination = Gtk.Template.Child()
     model_creator_focus = Gtk.Template.Child()
 
+    instance_preferences_page = Gtk.Template.Child()
+    instance_listbox = Gtk.Template.Child()
+    available_models_stack_page = Gtk.Template.Child()
+    model_creator_stack_page = Gtk.Template.Child()
+    last_selected_instance_row = None
+
     sql_instance = sql_manager.instance(os.path.join(data_dir, "alpaca.db"))
+
+    @Gtk.Template.Callback()
+    def add_instance(self, button):
+        def selected(ins:str):
+            tbv=Adw.ToolbarView()
+            tbv.add_top_bar(Adw.HeaderBar())
+            tbv.set_content(ins.get_preferences_page(ins))
+            self.main_navigation_view.push(Adw.NavigationPage(title=_('Add Instance'), tag='instance', child=tbv))
+
+        options = {}
+        for ins_type in instance_manager.ready_instances:
+            options[ins_type.instance_type_display] = ins_type
+
+        dialog_widget.simple_dropdown(
+            _("Add Instance"),
+            _("Select a type of instance to add"),
+            lambda option, options=options: selected(options[option]),
+            options.keys()
+        )
+
+    @Gtk.Template.Callback()
+    def instance_changed(self, listbox, row):
+        def change_instance():
+            if self.last_selected_instance_row:
+                self.last_selected_instance_row.instance.stop()
+            self.last_selected_instance_row = row
+
+            self.available_models_stack_page.set_visible(len(model_manager_widget.available_models) > 0)
+            self.model_creator_stack_page.set_visible(len(model_manager_widget.available_models) > 0)
+            self.sql_instance.insert_or_update_preferences({'selected_instance': row.instance.instance_id})
+        if listbox.get_sensitive() and row:
+            model_manager_widget.update_local_model_list()
+            model_manager_widget.update_available_model_list()
+            threading.Thread(target=change_instance).start()
 
     @Gtk.Template.Callback()
     def model_creator_accept(self, button):
         profile_picture = self.model_creator_profile_picture.get_subtitle()
-        model_name = '{}:{}'.format(self.model_creator_name.get_text(), self.model_creator_tag.get_text()).replace(' ', '-').lower()
+        model_name = '{}:{}'.format(self.model_creator_name.get_text(), self.model_creator_tag.get_text() if self.model_creator_tag.get_text() else 'latest').replace(' ', '-').lower()
         context_buffer = self.model_creator_context.get_buffer()
         system_message = context_buffer.get_text(context_buffer.get_start_iter(), context_buffer.get_end_iter(), False).replace('"', '\\"')
         top_k = self.model_creator_imagination.get_value()
@@ -242,8 +269,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.local_model_flowbox.unselect_all()
         self.available_model_flowbox.unselect_all()
         self.model_creator_stack.set_visible_child_name('introduction')
-        self.model_search_button.set_sensitive(viewstack.get_visible_child_name() != 'model_creator')
-        self.model_search_button.set_active(self.model_search_button.get_active() and viewstack.get_visible_child_name() != 'model_creator')
+        self.model_search_button.set_sensitive(viewstack.get_visible_child_name() not in ('model_creator', 'instances'))
+        self.model_search_button.set_active(self.model_search_button.get_active() and viewstack.get_visible_child_name() not in ('model_creator', 'instances'))
 
     @Gtk.Template.Callback()
     def model_manager_child_activated(self, flowbox, selected_child):
@@ -282,38 +309,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def closing_terminal(self, dialog):
         dialog.get_child().get_content().get_child().feed_child(b"\x03")
         dialog.force_close()
-
-    @Gtk.Template.Callback()
-    def remote_connection_selector_clicked(self, button):
-        options = {
-            _("Cancel"): {"callback": lambda *_: None},
-            _("Connect"): {"callback": lambda url, bearer: self.connect_remote(url, bearer), "appearance": "suggested", "default": True}
-        }
-        entries = [
-            {"text": self.ollama_instance.remote_url, "placeholder": _('Server URL')},
-            {"text": self.ollama_instance.bearer_token, "placeholder": _('Bearer Token (Optional)')}
-        ]
-        dialog_widget.Entry(
-            _('Connect Remote Instance'),
-            _('Enter instance information to continue'),
-            list(options)[0],
-            options,
-            entries
-        )
-
-    @Gtk.Template.Callback()
-    def model_directory_selector_clicked(self, button):
-        def directory_selected(result):
-            button.set_sensitive(False)
-            selected_directory = result.get_path()
-            self.ollama_instance.model_directory = selected_directory
-            self.model_directory_selector.set_subtitle(selected_directory)
-            if not self.ollama_instance.remote:
-                self.ollama_instance.reset()
-            self.sql_instance.insert_or_update_preferences({'model_directory': self.ollama_instance.model_directory})
-            self.refresh_local_models()
-            button.set_sensitive(True)
-        dialog_widget.simple_directory(directory_selected)
 
     @Gtk.Template.Callback()
     def stop_message(self, button=None):
@@ -357,22 +352,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if system:
             current_chat.set_visible_child_name('content')
         else:
-            data = {
-                "model": current_model,
-                "messages": current_chat.convert_to_ollama(),
-                "options": {"temperature": self.ollama_instance.tweaks["temperature"]},
-                "keep_alive": f"{self.ollama_instance.tweaks['keep_alive']}m",
-                "stream": True
-            }
-            if self.ollama_instance.tweaks["seed"] != 0:
-                data['options']['seed'] = self.ollama_instance.tweaks["seed"]
-
             bot_id=self.generate_uuid()
             m_element_bot = current_chat.add_message(bot_id, datetime.now(), current_model, False)
             m_element_bot.set_text()
             m_element_bot.footer.options_button.set_sensitive(False)
             self.sql_instance.insert_or_update_message(m_element_bot)
-            threading.Thread(target=self.run_message, args=(data, m_element_bot, current_chat)).start()
+            threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
 
     @Gtk.Template.Callback()
     def welcome_carousel_page_changed(self, carousel, index):
@@ -398,8 +383,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
             self.welcome_dialog.force_close()
-            self.sql_instance.insert_or_update_preferences({'run_remote': not shutil.which('ollama'), 'show_welcome_dialog': False})
-            threading.Thread(target=self.prepare_alpaca).start()
+            self.sql_instance.insert_or_update_preferences({'show_welcome_dialog': False})
+            self.prepare_alpaca()
 
     @Gtk.Template.Callback()
     def switch_run_on_background(self, switch, user_data):
@@ -417,18 +402,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.sql_instance.insert_or_update_preferences({'powersaver_warning': switch.get_active()})
 
     @Gtk.Template.Callback()
-    def changed_default_model(self, comborow, user_data):
-        logger.debug("Changed default model")
-        default_model = self.default_model_combo.get_selected_item()
-        if default_model and self.default_model_combo.get_sensitive():
-            self.sql_instance.insert_or_update_preferences({'default_model': self.convert_model_name(default_model.get_string(), 1)})
-
-    @Gtk.Template.Callback()
     def closing_app(self, user_data):
         def close():
             selected_chat = self.chat_list_box.get_selected_row().chat_window.get_name()
             self.sql_instance.insert_or_update_preferences({'selected_chat': selected_chat})
-            self.ollama_instance.stop()
+            self.get_current_instance().stop()
             self.get_application().quit()
 
         def switch_to_hide():
@@ -456,35 +434,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 close()
 
     @Gtk.Template.Callback()
-    def model_spin_changed(self, spin):
-        value = spin.get_value()
-        if spin.get_name() != "temperature":
-            value = round(value)
-        else:
-            value = round(value, 1)
-        if self.ollama_instance.tweaks[spin.get_name()] != value:
-            self.ollama_instance.tweaks[spin.get_name()] = value
-            self.sql_instance.insert_or_update_preferences({spin.get_name(): value})
-
-    @Gtk.Template.Callback()
-    def instance_idle_timer_changed(self, spin):
-        self.ollama_instance.idle_timer_delay = round(spin.get_value())
-        self.sql_instance.insert_or_update_preferences({'idle_timer': self.ollama_instance.idle_timer_delay})
-
-    @Gtk.Template.Callback()
-    def override_changed(self, entry):
-        name = entry.get_name()
-        value = entry.get_text()
-        if self.ollama_instance:
-            if value:
-                self.ollama_instance.overrides[name] = value
-            elif name in self.ollama_instance.overrides:
-                del self.ollama_instance.overrides[name]
-            if not self.ollama_instance.remote:
-                self.ollama_instance.reset()
-            self.sql_instance.insert_or_update_preferences({name: value})
-
-    @Gtk.Template.Callback()
     def link_button_handler(self, button):
         try:
             Gio.AppInfo.launch_default_for_uri(button.get_name())
@@ -505,12 +454,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.local_model_stack.set_visible_child_name('no-models')
 
         results_available = False
-        for model in list(self.available_model_flowbox):
-            model.set_visible(re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE))
-            results_available = results_available or model.get_visible()
-            if not model.get_visible() and model in self.available_model_flowbox.get_selected_children():
-                self.available_model_flowbox.unselect_all()
-        self.available_model_stack.set_visible_child_name('content' if results_available else 'no-results')
+        if len(model_manager_widget.available_models) > 0:
+            self.available_models_stack_page.set_visible(True)
+            self.model_creator_stack_page.set_visible(True)
+            for model in list(self.available_model_flowbox):
+                model.set_visible(re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE))
+                results_available = results_available or model.get_visible()
+                if not model.get_visible() and model in self.available_model_flowbox.get_selected_children():
+                    self.available_model_flowbox.unselect_all()
+            self.available_model_stack.set_visible_child_name('content' if results_available else 'no-results')
+        else:
+            self.available_models_stack_page.set_visible(False)
+            self.model_creator_stack_page.set_visible(False)
 
     @Gtk.Template.Callback()
     def message_search_changed(self, entry, current_chat=None):
@@ -533,12 +488,28 @@ class AlpacaWindow(Adw.ApplicationWindow):
             except Exception as e:
                 pass
 
-    def convert_model_name(self, name:str, mode:int) -> str: # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag
+    def convert_model_name(self, name:str, mode:int): # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag   |   mode=2 name:tag -> name, tag
         try:
             if mode == 0:
-                return "{} ({})".format(name.split(":")[0].replace("-", " ").title(), name.split(":")[1])
-            if mode == 1:
-                return "{}:{}".format(name.split(" (")[0].replace(" ", "-").lower(), name.split(" (")[1][:-1])
+                if ':' in name:
+                    name = name.split(':')
+                    return '{} ({})'.format(name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title())
+                else:
+                    return name.replace('-', ' ').title()
+            elif mode == 1:
+                if ' (' in name:
+                    name = name.split(' (')
+                    return '{}:{}'.format(name[0].replace(' ', '-').lower(), name[1][:-1].replace(' ', '-').lower())
+                else:
+                    return name.replace(' ', '-').lower()
+            elif mode == 2:
+                if ':' in name:
+                    name = name.split(':')
+                    return name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title()
+                else:
+                    return name.replace('-', ' ').title(), None
+
+
         except Exception as e:
             pass
 
@@ -626,33 +597,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     self.file_preview_open_button.set_visible(False)
             self.file_preview_dialog.present(self)
 
-    def generate_chat_title(self, message, old_chat_name):
-        logger.debug("Generating chat title")
-        system_prompt = f"""
-Generate a title following these rules:
-    - The title should be based on the user's prompt
-    - Keep it in the same language as the prompt
-    - The title needs to be less than 30 characters
-    - Use only alphanumeric characters, spaces and optionally emojis
-    - Just write the title, NOTHING ELSE
-"""
-        default_model = self.default_model_combo.get_selected_item()
-        if default_model:
-            model_to_use = self.convert_model_name(default_model.get_string(), 1)
-        else:
-            return
-        data = {"model": model_to_use, "messages": [{"role": "system", "content": system_prompt}] + [message], "stream": False}
-        try:
-            response = self.ollama_instance.request("POST", "api/chat", json.dumps(data))
-            if response.status_code == 200:
-                new_chat_name = json.loads(response.text)["message"]["content"].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
-                # Think is sometimes capitalised, sometimes not, so normalise the case.
-                if "</think>" in new_chat_name.lower():
-                    new_chat_name = new_chat_name[new_chat_name.lower().find("</think>") + len("</think>"):].strip().removeprefix("Title: ").removeprefix("title: ").strip('\'"').replace('\n', ' ').title().replace('\'S', '\'s')
-                self.chat_list_box.rename_chat(old_chat_name, new_chat_name)
-        except Exception as e:
-            logger.error(e)
-
     def switch_send_stop_button(self, send:bool):
         self.action_button_stack.set_visible_child_name('send' if send else 'stop')
 
@@ -670,9 +614,10 @@ Generate a title following these rules:
         if self.regenerate_button:
             GLib.idle_add(self.chat_list_box.get_current_chat().remove, self.regenerate_button)
         try:
-            response = self.ollama_instance.request("POST", "api/chat", json.dumps(data), lambda data, message_element=message_element: message_element.update_message(data))
-            if response.status_code != 200:
-                raise Exception('Network Error')
+            ''
+            #response = self.ollama_ainstance.request("POST", "api/chat", json.dumps(data), lambda data, message_element=message_element: message_element.update_message(data))
+            #if response.status_code != 200:
+                #raise Exception('Network Error')
         except Exception as e:
             logger.error(e)
             raise Exception(e)
@@ -686,7 +631,6 @@ Generate a title following these rules:
             GLib.idle_add(message_element.add_footer)
             GLib.idle_add(chat.show_regenerate_button, message_element)
             self.sql_instance.insert_or_update_message(message_element)
-            GLib.idle_add(self.connection_error)
 
     def load_history(self):
         logger.debug("Loading history")
@@ -722,24 +666,6 @@ Generate a title following these rules:
 
     def generate_uuid(self) -> str:
         return f"{datetime.today().strftime('%Y%m%d%H%M%S%f')}{uuid.uuid4().hex}"
-
-    def connection_error(self):
-        logger.error("Connection error")
-        if self.ollama_instance.remote:
-            options = {
-                _("Close Alpaca"): {"callback": lambda *_: self.get_application().quit(), "appearance": "destructive"},
-            }
-            if shutil.which('ollama'):
-                options[_("Use Local Instance")] = {"callback": lambda *_: self.remote_connection_switch.set_active(False)}
-            options[_("Connect")] = {"callback": lambda url, bearer: self.connect_remote(url,bearer), "appearance": "suggested", "default": True}
-            entries = [
-                {"text": self.ollama_instance.remote_url, "css": ['error'], "placeholder": _('Server URL')},
-                {"text": self.ollama_instance.bearer_token, "css": ['error'] if self.ollama_instance.bearer_token else None, "placeholder": _('Bearer Token (Optional)')}
-            ]
-            dialog_widget.Entry(_('Connection Error'), _('The remote instance has disconnected'), list(options)[0], options, entries)
-        else:
-            self.ollama_instance.reset()
-            self.show_toast(_("There was an error with the local Ollama instance, so it has been reset"), self.main_overlay)
 
     def get_content_of_file(self, file_path, file_type):
         if not os.path.exists(file_path): return None
@@ -987,68 +913,10 @@ Generate a title following these rules:
             elif extension == 'pdf':
                 self.attach_file(file.get_path(), 'pdf')
 
-    def connect_remote(self, remote_url:str, bearer_token:str):
-        if remote_url.endswith('/'):
-            remote_url = remote_url.rstrip('/')
-        if not (remote_url.startswith('http://') or remote_url.startswith('https://')):
-            remote_url = f'http://{remote_url}'
-        self.ollama_instance.remote_url=remote_url
-        self.ollama_instance.bearer_token=bearer_token
-        self.ollama_instance.remote = True
-        self.ollama_instance.stop()
-        model_manager_widget.update_local_model_list()
-        self.sql_instance.insert_or_update_preferences({'run_remote': True, 'remote_url': remote_url, 'remote_bearer_token': bearer_token})
-        self.remote_connection_selector.set_subtitle(remote_url)
-
-    def remote_switched(self, switch, state):
-        def local_instance_process():
-            sensitive_elements = [switch, self.tweaks_group, self.instance_page, self.action_button_stack, self.attachment_button]
-
-            [element.set_sensitive(False) for element in sensitive_elements]
-            self.get_application().lookup_action('model_manager').set_enabled(False)
-            self.title_stack.set_visible_child_name('loading')
-
-            self.ollama_instance.remote = False
-            threading.Thread(target=self.ollama_instance.start).start()
-            model_manager_widget.update_local_model_list()
-            self.sql_instance.insert_or_update_preferences({'run_remote': False})
-
-            [element.set_sensitive(True) for element in sensitive_elements]
-            self.chat_list_box.chat_changed(self.chat_list_box.get_selected_row(), True)
-            self.get_application().lookup_action('model_manager').set_enabled(True)
-
-        if state:
-            options = {
-                _("Cancel"): {"callback": lambda *_: self.remote_connection_switch.set_active(False)},
-                _("Connect"): {"callback": lambda url, bearer: self.connect_remote(url, bearer), "appearance": "suggested", "default": True}
-            }
-            entries = [
-                {"text": self.ollama_instance.remote_url, "placeholder": _('Server URL')},
-                {"text": self.ollama_instance.bearer_token, "placeholder": _('Bearer Token (Optional)')}
-            ]
-            dialog_widget.Entry(
-                _('Connect Remote Instance'),
-                _('Enter instance information to continue'),
-                list(options)[0],
-                options,
-                entries
-            )
-        elif self.ollama_instance.remote:
-            threading.Thread(target=local_instance_process).start()
-
-    def run_quick_chat(self, data:dict, message_element:message_widget.message):
-        try:
-            response = self.ollama_instance.request("POST", "api/chat", json.dumps(data), lambda data, message_element=message_element: message_element.update_message(data))
-            if response.status_code != 200:
-                raise Exception('Network Error')
-        except Exception as e:
-            logger.error(e)
-            self.show_toast(_("An error occurred: {}").format(e), self.quick_ask_overlay)
-
     def quick_chat(self, message:str):
         self.quick_ask_save_button.set_sensitive(False)
         self.quick_ask.present()
-        default_model = self.default_model_combo.get_selected_item()
+        default_model = self.get_current_instance().get_default_model()
         if default_model:
             current_model = self.convert_model_name(default_model.get_string(), 1)
         if current_model is None:
@@ -1056,37 +924,25 @@ Generate a title following these rules:
             return
         chat = chat_widget.chat(_('Quick Ask'), 'QA', True)
         self.quick_ask_overlay.set_child(chat)
-        message_id = self.generate_uuid()
-        m_element = chat.add_message(message_id, datetime.now(), None, False)
+        m_element = chat.add_message(self.generate_uuid(), datetime.now(), None, False)
         m_element.set_text(message)
-        data = {
-            "model": current_model,
-            "messages": chat.convert_to_ollama(),
-            "options": {"temperature": self.ollama_instance.tweaks["temperature"]},
-            "keep_alive": f"{self.ollama_instance.tweaks['keep_alive']}m",
-            "stream": True
-        }
-        if self.ollama_instance.tweaks["seed"] != 0:
-            data['options']['seed'] = self.ollama_instance.tweaks["seed"]
-        bot_id=self.generate_uuid()
-        m_element_bot = chat.add_message(bot_id, datetime.now(), current_model, False)
+        m_element_bot = chat.add_message(self.generate_uuid(), datetime.now(), current_model, False)
         m_element_bot.set_text()
         chat.busy = True
-        threading.Thread(target=self.run_quick_chat, args=(data, m_element_bot)).start()
+        threading.Thread(target=self.get_current_instance().generate_message(m_element_bot, current_model), args=(data, m_element_bot)).start()
+
+    def get_current_instance(self):
+        if self.instance_listbox.get_selected_row():
+            return self.instance_listbox.get_selected_row().instance
+        else:
+            return instance_manager.empty()
 
     def prepare_alpaca(self):
-        if self.sql_instance.get_preference('show_welcome_dialog'):
-            self.welcome_dialog.present(self)
-            return
-
-        #Instance
-        self.ollama_instance = connection_handler.instance()
-
         #Model Manager
         self.model_selector = model_manager_widget.local_model_selector()
         self.title_stack.add_named(self.model_selector, 'model-selector')
-        model_manager_widget.update_local_model_list()
-        model_manager_widget.update_available_model_list()
+
+        instance_manager.update_instance_list()
 
         #Chat History
         self.load_history()
@@ -1095,33 +951,11 @@ Generate a title following these rules:
         if self.get_application().args.new_chat:
             self.chat_list_box.new_chat(self.get_application().args.new_chat)
 
-        #User Preferences
-        for element in list(list(list(list(self.tweaks_group)[0])[1])[0]):
-            if element.get_name() in self.ollama_instance.tweaks:
-                element.set_value(self.ollama_instance.tweaks[element.get_name()])
-
         self.powersaver_warning_switch.set_active(self.sql_instance.get_preference('powersaver_warning'))
 
-        for element in list(list(list(list(self.overrides_group)[0])[1])[0]):
-            if element.get_name() in self.ollama_instance.overrides:
-                element.set_text(self.ollama_instance.overrides[element.get_name()])
-
-        self.model_directory_selector.set_subtitle(self.ollama_instance.model_directory)
         self.set_hide_on_close(self.background_switch.get_active())
-        self.instance_idle_timer.set_value(self.ollama_instance.idle_timer_delay)
-        self.remote_connection_switch.set_active(self.ollama_instance.remote)
-        self.remote_connection_switch.get_activatable_widget().connect('state-set', self.remote_switched)
         self.action_button_stack.set_sensitive(True)
         self.attachment_button.set_sensitive(True)
-        self.remote_connection_switch.set_visible(shutil.which('ollama'))
-        self.remote_connection_selector.set_visible(not shutil.which('ollama'))
-        self.tweaks_group.set_sensitive(True)
-        self.remote_connection_switch.set_sensitive(True)
-        self.default_model_combo.set_sensitive(True)
-        self.instance_page.set_sensitive(shutil.which('ollama') and not self.remote_connection_switch.get_active())
-        if not shutil.which('ollama'):
-            self.preferences_dialog.remove(self.instance_page)
-            self.remote_connection_selector.set_subtitle(self.sql_instance.get_preference('remote_url'))
         self.get_application().lookup_action('model_manager').set_enabled(True)
 
         if self.get_application().args.ask:
@@ -1191,17 +1025,10 @@ Generate a title following these rules:
                             data[name] = value
                         del data['model_tweaks']
                     for name, value in data.items():
-                        if isinstance(value, dict) and name == 'ollama_overrides':
-                            for name2, value2 in value.items():
-                                if cursor.execute("SELECT * FROM overrides WHERE id=?", (name2,)).fetchone():
-                                    cursor.execute("UPDATE overrides SET value=? WHERE id=?", (value2, name2))
-                                else:
-                                    cursor.execute("INSERT INTO overrides (id, value) VALUES (?, ?)", (name2, value2))
+                        if cursor.execute("SELECT * FROM preferences WHERE id=?", (name,)).fetchone():
+                            cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (value, str(type(value)), name))
                         else:
-                            if cursor.execute("SELECT * FROM preferences WHERE id=?", (name,)).fetchone():
-                                cursor.execute("UPDATE preferences SET value=?, type=? WHERE id=?", (value, str(type(value)), name))
-                            else:
-                                cursor.execute("INSERT INTO preferences (id, value, type) VALUES (?, ?, ?)", (name, value, str(type(value))))
+                            cursor.execute("INSERT INTO preferences (id, value, type) VALUES (?, ?, ?)", (name, value, str(type(value))))
                     sqlite_con.commit()
                     sqlite_con.close()
                 os.remove(os.path.join(config_dir, "server.json"))
@@ -1247,6 +1074,10 @@ Generate a title following these rules:
             file_filters.append(self.file_filter_image)
         dialog_widget.simple_file(file_filters, generic_actions.attach_file)
 
+    def show_instance_manager(self):
+        self.instance_preferences_page.set_sensitive(not any([tab.chat_window.busy for tab in self.chat_list_box.tab_list]))
+        GLib.idle_add(self.main_navigation_view.push_by_tag, 'instance_manager')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
@@ -1258,6 +1089,7 @@ Generate a title following these rules:
         generic_actions.window = self
         connection_handler.window = self
         model_manager_widget.window = self
+        instance_manager.window = self
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
@@ -1287,7 +1119,7 @@ Generate a title following these rules:
         universal_actions = {
             'new_chat': [lambda *_: self.chat_list_box.new_chat(), ['<primary>n']],
             'clear': [lambda *i: dialog_widget.simple(_('Clear Chat?'), _('Are you sure you want to clear the chat?'), self.chat_list_box.get_current_chat().clear_chat, _('Clear')), ['<primary>e']],
-            'import_chat': [lambda *_: self.chat_list_box.import_chat(), ['<primary>i']],
+            'import_chat': [lambda *_: self.chat_list_box.import_chat()],
             'duplicate_chat': [self.chat_actions],
             'duplicate_current_chat': [self.current_chat_actions],
             'delete_chat': [self.chat_actions],
@@ -1305,8 +1137,9 @@ Generate a title following these rules:
             'attach_url': [lambda *i: dialog_widget.simple_entry(_('Attach Website? (Experimental)'), _('Please enter a website URL'), self.cb_text_received, {'placeholder': 'https://jeffser.com/alpaca/'})],
             'attach_youtube': [lambda *i: dialog_widget.simple_entry(_('Attach YouTube Captions?'), _('Please enter a YouTube video URL'), self.cb_text_received, {'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})],
             'model_manager' : [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>m']],
+            'instance_manager' : [lambda *i: self.show_instance_manager() if self.main_navigation_view.get_visible_page().get_tag() != 'instance_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>i']],
             'download_model_from_name' : [lambda *i: dialog_widget.simple_entry(_('Download Model?'), _('Please enter the model name following this template: name:tag'), lambda name: threading.Thread(target=model_manager_widget.pull_model_confirm, args=(name,)).start(), {'placeholder': 'deepseek-r1:7b'})],
-            'reload_local_models': [lambda *_: model_manager_widget.update_local_model_list()]
+            'reload_added_models': [lambda *_: model_manager_widget.update_local_model_list()]
         }
 
         for action_name, data in universal_actions.items():
@@ -1315,9 +1148,6 @@ Generate a title following these rules:
         self.get_application().lookup_action('model_manager').set_enabled(False)
         if sys.platform == 'darwin':
             self.get_application().lookup_action('attach_screenshot').set_enabled(False)
-        self.remote_connection_switch.set_sensitive(False)
-        self.tweaks_group.set_sensitive(False)
-        self.instance_page.set_sensitive(False)
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))
         self.model_creator_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
@@ -1330,7 +1160,10 @@ Generate a title following these rules:
         adapter.set_enabled(True)
         self.set_focus(self.message_text_view)
 
-        self.prepare_alpaca()
+        if self.sql_instance.get_preference('show_welcome_dialog'):
+            self.welcome_dialog.present(self)
+        else:
+            self.prepare_alpaca()
 
         if self.powersaver_warning_switch.get_active():
             self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
