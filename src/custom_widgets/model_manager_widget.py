@@ -593,7 +593,8 @@ def update_local_model_list():
     window.model_dropdown.get_model().remove_all()
     default_model = window.sql_instance.get_preference('default_model')
     threads=[]
-    for model in window.get_current_instance().get_local_models():
+    local_models = window.get_current_instance().get_local_models()
+    for model in local_models:
         thread = threading.Thread(target=add_local_model, args=(model['name'], ))
         thread.start()
         threads.append(thread)
@@ -601,6 +602,7 @@ def update_local_model_list():
         thread.join()
     window.title_stack.set_visible_child_name('model-selector' if len(get_local_models()) > 0 else 'no-models')
     window.local_model_stack.set_visible_child_name('content' if len(get_local_models()) > 0 else 'no-models')
+    window.model_dropdown.set_enable_search(len(local_models) > 10)
 
 def update_available_model_list():
     global available_models
