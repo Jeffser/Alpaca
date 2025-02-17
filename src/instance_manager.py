@@ -146,7 +146,7 @@ class empty:
         return ''
 
 class base_ollama(base_instance):
-    api_key = ''
+    api_key = 'ollama'
     process = None
 
     def stop(self):
