@@ -137,8 +137,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def zoom_changed(self, spinner):
-        self.sql_instance.insert_or_update_preferences({'zoom': int(spinner.get_value())})
-        self.update_zoom()
+        threading.Thread(target=self.sql_instance.insert_or_update_preferences, args=({'zoom': int(spinner.get_value())},)).start()
+        settings = Gtk.Settings.get_default()
+        if sys.platform != 'darwin':
+            settings.reset_property('gtk-xft-dpi')
+        settings.set_property('gtk-xft-dpi',  settings.get_property('gtk-xft-dpi') + (int(spinner.get_value()) - 100) * 400)
 
     @Gtk.Template.Callback()
     def add_instance(self, button):
@@ -1055,25 +1058,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.instance_preferences_page.set_sensitive(not any([tab.chat_window.busy for tab in self.chat_list_box.tab_list]))
         GLib.idle_add(self.main_navigation_view.push_by_tag, 'instance_manager')
 
-    def update_zoom(self):
-        current_zoom = self.sql_instance.get_preference('zoom')
-        if not current_zoom or current_zoom < 0:
-            current_zoom = 0
-            self.sql_instance.insert_or_update_preferences({'zoom': current_zoom})
-        elif current_zoom > 200:
-            current_zoom = 200
-            self.sql_instance.insert_or_update_preferences({'zoom': current_zoom})
+    def toggle_searchbar(self):
+        # TODO Gnome 48: Replace with get_visible_page_tag()
+        current_tag = self.main_navigation_view.get_visible_page().get_tag()
 
-        settings = Gtk.Settings.get_default()
-        settings.reset_property('gtk-xft-dpi')
-        if sys.platform == 'darwin':
-            current_dpi = 110592
-        else:
-            current_dpi = settings.get_property('gtk-xft-dpi')
-        settings.set_property('gtk-xft-dpi',  current_dpi + (current_zoom - 100) * 400)
+        searchbars = {
+            'chat': self.message_searchbar,
+            'model_manager': self.model_searchbar
+        }
 
-        if current_zoom != self.zoom_spin.get_value():
-            self.zoom_spin.set_value(current_zoom)
+        if searchbars.get(current_tag):
+            searchbars.get(current_tag).set_search_mode(not searchbars.get(current_tag).get_search_mode())
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -1092,7 +1087,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.model_dropdown.set_model(Gio.ListStore.new(model_manager_widget.local_model_row))
         self.model_dropdown.set_expression(Gtk.PropertyExpression.new(model_manager_widget.local_model_row, None, "name"))
 
-        self.update_zoom()
+        self.zoom_spin.set_value(self.sql_instance.get_preference('zoom'))
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
@@ -1132,7 +1127,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'export_chat': [self.chat_actions],
             'export_current_chat': [self.current_chat_actions],
             'toggle_sidebar': [lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9']],
-            'search_messages': [lambda *_: self.message_searchbar.set_search_mode(not self.message_searchbar.get_search_mode()), ['<primary>f']],
+            'toggle_search': [lambda *_: self.toggle_searchbar(), ['<primary>f']],
             'send_message': [lambda *_: self.send_message()],
             'send_system_message': [lambda *_: self.send_message(None, True)],
             'attach_file': [lambda *_: self.attachment_request()],
