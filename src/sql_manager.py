@@ -79,8 +79,6 @@ class instance:
             columns_def = ", ".join([f"{col_name} {col_def}" for col_name, col_def in columns.items()])
             cursor.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_def})")
 
-        ##TODO remember to drop overrides (table) and delete all the unused preferences
-
         # Ollama is available but there are no instances added
         if len(self.get_instances()) == 0 and shutil.which('ollama'):
             overrides = {
