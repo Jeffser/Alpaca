@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 window = None
 
-available_models = None
+available_models = {}
 
 class local_model_row(GObject.Object):
     __gtype_name__ = 'AlpacaLocalModelRow'

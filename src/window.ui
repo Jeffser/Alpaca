@@ -361,31 +361,69 @@
                   <object class="AdwHeaderBar"/>
                 </child>
                 <property name="content">
-                  <object class="AdwPreferencesPage" id="instance_preferences_page">
+                  <object class="GtkStack" id="instance_manager_stack">
                     <child>
-                      <object class="AdwPreferencesGroup">
-                        <property name="title" translatable="yes">Added Instances</property>
-                        <property name="description" translatable="yes">Manage your AI instances, chats and messages are shared between instances when generating responses.</property>
-                        <property name="header-suffix">
-                          <object class="GtkButton">
-                            <property name="icon-name">list-add-symbolic</property>
-                            <property name="valign">3</property>
-                            <property name="tooltip-text">Add Instance</property>
-                            <signal name="clicked" handler="add_instance"/>
-                            <style>
-                              <class name="flat"/>
-                            </style>
+                      <object class="GtkStackPage">
+                        <property name="name">no-instances</property>
+                        <property name="child">
+                          <object class="AdwStatusPage">
+                            <property name="icon-name">sad-computer-symbolic</property>
+                            <property name="title" translatable="yes">No Instances Found</property>
+                            <property name="description" translatable="yes">It looks a bit empty in here. Try adding an instance get started!</property>
+                            <property name="child">
+                              <object class="GtkButton">
+                                <property name="tooltip-text" translatable="yes">Add Instance</property>
+                                <signal name="clicked" handler="add_instance"/>
+                                <property name="halign">3</property>
+                                <style>
+                                  <class name="pill"/>
+                                  <class name="suggested-action"/>
+                                </style>
+                                <property name="child">
+                                  <object class="AdwButtonContent">
+                                    <property name="icon-name">list-add-symbolic</property>
+                                    <property name="label" translatable="yes">Add Instance</property>
+                                  </object>
+                                </property>
+                              </object>
+                            </property>
                           </object>
                         </property>
-                        <child>
-                          <object class="GtkListBox" id="instance_listbox">
-                            <property name="selection-mode">single</property>
-                            <signal name="row-selected" handler="instance_changed"/>
-                            <style>
-                              <class name="boxed-list"/>
-                            </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">content</property>
+                        <property name="child">
+                          <object class="AdwPreferencesPage" id="instance_preferences_page">
+                            <child>
+                              <object class="AdwPreferencesGroup">
+                                <property name="title" translatable="yes">Added Instances</property>
+                                <property name="description" translatable="yes">Manage your AI instances, chats and messages are shared between instances when generating responses.</property>
+                                <property name="header-suffix">
+                                  <object class="GtkButton">
+                                    <property name="icon-name">list-add-symbolic</property>
+                                    <property name="valign">3</property>
+                                    <property name="tooltip-text" translatable="yes">Add Instance</property>
+                                    <signal name="clicked" handler="add_instance"/>
+                                    <style>
+                                      <class name="flat"/>
+                                    </style>
+                                  </object>
+                                </property>
+                                <child>
+                                  <object class="GtkListBox" id="instance_listbox">
+                                    <property name="selection-mode">single</property>
+                                    <signal name="row-selected" handler="instance_changed"/>
+                                    <style>
+                                      <class name="boxed-list"/>
+                                    </style>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
                           </object>
-                        </child>
+                        </property>
                       </object>
                     </child>
                   </object>

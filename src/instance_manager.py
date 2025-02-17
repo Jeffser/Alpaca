@@ -115,9 +115,10 @@ class base_instance:
 
 # Fallback for when there are no instances
 class empty:
-    name = _('Empty')
+    instance_id = None
+    name = 'Fallback Instance'
     instance_type = 'empty'
-    instance_type_display = _('Empty')
+    instance_type_display = 'Empty'
     pinned = True
 
     def __init__(self):
@@ -134,6 +135,9 @@ class empty:
 
     def get_model_info(self, model_name:str) -> dict:
         return {}
+
+    def get_default_model(self) -> str:
+        return ''
 
 class base_ollama(base_instance):
     api_key = 'ollama'
@@ -778,6 +782,8 @@ def update_instance_list():
         venice.instance_type: venice
     }
     if len(instances) > 0:
+        window.instance_manager_stack.set_visible_child_name('content')
+        window.instance_listbox.set_sensitive(True)
         for i, ins in enumerate(instances):
             row = None
             if ins.get('type') == 'ollama:managed' and shutil.which('ollama'):
@@ -789,9 +795,11 @@ def update_instance_list():
             if row:
                 window.instance_listbox.append(row)
                 if selected_instance == row.instance.instance_id:
-                    window.instance_listbox.set_sensitive(True)
                     window.instance_listbox.select_row(row)
+        if not window.instance_listbox.get_selected_row():
+            window.instance_listbox.select_row(window.instance_listbox.get_row_at_index(0))
     else:
+        window.instance_manager_stack.set_visible_child_name('no-instances')
         row = instance_row(empty())
         window.instance_listbox.append(row)
         window.instance_listbox.set_sensitive(True)

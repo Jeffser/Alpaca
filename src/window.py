@@ -58,6 +58,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     local_model_stack = Gtk.Template.Child()
     available_model_stack = Gtk.Template.Child()
     model_manager_stack = Gtk.Template.Child()
+    instance_manager_stack = Gtk.Template.Child()
     model_manager_sidebar = Gtk.Template.Child()
     model_manager_sidebar_bottom_bar : Gtk.ActionBar = None
     main_navigation_view = Gtk.Template.Child()
