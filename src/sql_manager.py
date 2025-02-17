@@ -2,6 +2,7 @@
 
 import sqlite3, uuid, datetime, os, shutil, json
 from .internal import data_dir
+from . import instance_manager
 
 def generate_uuid() -> str:
     return f"{datetime.datetime.today().strftime('%Y%m%d%H%M%S%f')}{uuid.uuid4().hex}"
@@ -77,10 +78,30 @@ class instance:
         for table_name, columns in tables.items():
             columns_def = ", ".join([f"{col_name} {col_def}" for col_name, col_def in columns.items()])
             cursor.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_def})")
-        sqlite_con.commit()
-        sqlite_con.close()
 
         ##TODO remember to drop overrides (table) and delete all the unused preferences
+
+        # Ollama is available but there are no instances added
+        if len(self.get_instances()) == 0 and shutil.which('ollama'):
+            overrides = {
+                'HSA_OVERRIDE_GFX_VERSION': '',
+                'CUDA_VISIBLE_DEVICES': '',
+                'ROCR_VISIBLE_DEVICES': ''
+            }
+            self.insert_or_update_instance(instance_manager.ollama_managed(generate_uuid(), 'Alpaca', 'http://0.0.0.0:11434', 0.7, 0, overrides, os.path.join(data_dir, '.ollama', 'models'), None, None, True))
+
+        if self.get_preference('run_remote'):
+            instance_id = generate_uuid()
+            self.insert_or_update_instance(instance_manager.ollama(instance_id, _('Legacy Remote Instance'), self.get_preference('remote_url'), self.get_preference('remote_bearer_token'), 0.7, 0, None, None, False))
+
+        # Remove stuff from previous versions (cleaning)
+        try:
+            cursor.execute("DELETE FROM preferences WHERE id IN ('default_model', 'local_port', 'remote_url', 'remote_bearer_token', 'run_remote', 'idle_timer', 'model_directory', 'temperature', 'seed', 'keep_alive')")
+            cursor.execute("DROP TABLE overrides")
+        except Exception as e:
+            pass
+        sqlite_con.commit()
+        sqlite_con.close()
 
     ###########
     ## CHATS ##
