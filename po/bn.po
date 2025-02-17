@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-16 23:52-0600\n"
+"POT-Creation-Date: 2025-02-17 14:06-0600\n"
 "PO-Revision-Date: 2025-01-07 15:12-0600\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Bengali\n"
@@ -1798,8 +1798,8 @@ msgid "Next"
 msgstr "পরবর্তী"
 
 #: src/window.py:429 src/instance_manager.py:405 src/instance_manager.py:406
-#: src/instance_manager.py:512 src/instance_manager.py:513
-#: src/instance_manager.py:649 src/instance_manager.py:650 src/window.ui:916
+#: src/instance_manager.py:514 src/instance_manager.py:515
+#: src/instance_manager.py:656 src/instance_manager.py:657 src/window.ui:916
 #: src/window.ui:920 src/custom_widgets/message_widget.py:60
 #: src/custom_widgets/message_widget.py:199
 #: src/custom_widgets/model_manager_widget.py:380
@@ -1972,7 +1972,7 @@ msgstr "সংযুক্তি মুছে ফেলুন?"
 msgid "Are you sure you want to remove attachment?"
 msgstr "আপনি কি নিশ্চিত যে আপনি সংযুক্তি মুছে ফেলতে চান?"
 
-#: src/window.py:1127 src/instance_manager.py:758
+#: src/window.py:1127 src/instance_manager.py:773
 #: src/custom_widgets/model_manager_widget.py:381
 #: src/custom_widgets/model_manager_widget.py:423
 msgid "Remove"
@@ -3088,24 +3088,24 @@ msgstr ""
 msgid "Instance"
 msgstr ""
 
-#: src/instance_manager.py:58 src/window.ui:161
+#: src/instance_manager.py:57 src/window.ui:161
 #: src/custom_widgets/chat_widget.py:397
 msgid "New Chat"
 msgstr "নতুন চ্যাট"
 
-#: src/instance_manager.py:80 src/instance_manager.py:166
+#: src/instance_manager.py:79 src/instance_manager.py:166
 #: src/instance_manager.py:176 src/instance_manager.py:319
-#: src/instance_manager.py:574 src/instance_manager.py:705
-#: src/instance_manager.py:733
+#: src/instance_manager.py:578 src/instance_manager.py:716
+#: src/instance_manager.py:744
 msgid "Instance Error"
 msgstr ""
 
-#: src/instance_manager.py:80
+#: src/instance_manager.py:79
 msgid "Message generation failed"
 msgstr ""
 
-#: src/instance_manager.py:166 src/instance_manager.py:574
-#: src/instance_manager.py:705 src/instance_manager.py:733
+#: src/instance_manager.py:166 src/instance_manager.py:578
+#: src/instance_manager.py:716 src/instance_manager.py:744
 msgid "Could not retrieve added models"
 msgstr ""
 
@@ -3157,8 +3157,8 @@ msgstr ""
 msgid "Ollama Log"
 msgstr ""
 
-#: src/instance_manager.py:335 src/instance_manager.py:469
-#: src/instance_manager.py:589 src/window.ui:833
+#: src/instance_manager.py:335 src/instance_manager.py:471
+#: src/instance_manager.py:593 src/window.ui:833
 msgid "Name"
 msgstr "নাম"
 
@@ -3170,23 +3170,23 @@ msgstr ""
 msgid "Which network port will Ollama use"
 msgstr ""
 
-#: src/instance_manager.py:346 src/instance_manager.py:481
-#: src/instance_manager.py:617
+#: src/instance_manager.py:346 src/instance_manager.py:483
+#: src/instance_manager.py:624
 msgid "Temperature"
 msgstr "তাপমাত্রা"
 
-#: src/instance_manager.py:346 src/instance_manager.py:481
-#: src/instance_manager.py:617
+#: src/instance_manager.py:346 src/instance_manager.py:483
+#: src/instance_manager.py:624
 msgid "Increasing the temperature will make the models answer more creatively."
 msgstr ""
 
-#: src/instance_manager.py:349 src/instance_manager.py:484
-#: src/instance_manager.py:621
+#: src/instance_manager.py:349 src/instance_manager.py:486
+#: src/instance_manager.py:628
 msgid "Seed"
 msgstr "বীজ"
 
-#: src/instance_manager.py:349 src/instance_manager.py:484
-#: src/instance_manager.py:621
+#: src/instance_manager.py:349 src/instance_manager.py:486
+#: src/instance_manager.py:628
 msgid ""
 "Setting this to a specific number other than 0 will make the model generate "
 "the same text for the same prompt."
@@ -3200,23 +3200,23 @@ msgstr "মডেল ডিরেক্টরি"
 msgid "Select Directory"
 msgstr ""
 
-#: src/instance_manager.py:367 src/instance_manager.py:490
-#: src/instance_manager.py:627
+#: src/instance_manager.py:367 src/instance_manager.py:492
+#: src/instance_manager.py:634
 msgid "Default Model"
 msgstr "ডিফল্ট মডেল"
 
-#: src/instance_manager.py:367 src/instance_manager.py:490
-#: src/instance_manager.py:627
+#: src/instance_manager.py:367 src/instance_manager.py:492
+#: src/instance_manager.py:634
 msgid "Model to select when starting a new chat."
 msgstr ""
 
-#: src/instance_manager.py:369 src/instance_manager.py:492
-#: src/instance_manager.py:629
+#: src/instance_manager.py:369 src/instance_manager.py:494
+#: src/instance_manager.py:636
 msgid "Title Model"
 msgstr ""
 
-#: src/instance_manager.py:369 src/instance_manager.py:492
-#: src/instance_manager.py:629
+#: src/instance_manager.py:369 src/instance_manager.py:494
+#: src/instance_manager.py:636
 msgid "Model to use when generating a chat title."
 msgstr ""
 
@@ -3231,52 +3231,56 @@ msgid ""
 msgstr ""
 
 #: src/instance_manager.py:412 src/instance_manager.py:413
-#: src/instance_manager.py:519 src/instance_manager.py:520
-#: src/instance_manager.py:656 src/instance_manager.py:657
+#: src/instance_manager.py:521 src/instance_manager.py:522
+#: src/instance_manager.py:663 src/instance_manager.py:664
 #: src/custom_widgets/message_widget.py:203
 msgid "Save"
 msgstr "সংরক্ষণ করুন"
 
-#: src/instance_manager.py:466
+#: src/instance_manager.py:468
 msgid "Local or remote AI instance not managed by Alpaca"
 msgstr ""
 
-#: src/instance_manager.py:472
+#: src/instance_manager.py:474 src/instance_manager.py:596
 msgid "Instance URL"
 msgstr ""
 
-#: src/instance_manager.py:475
-msgid "Bearer Token (Optional)"
-msgstr "বিয়ারার টোকেন (ঐচ্ছিক)"
+#: src/instance_manager.py:477
+msgid "API Key (Optional)"
+msgstr ""
 
-#: src/instance_manager.py:591 src/instance_manager.py:593
+#: src/instance_manager.py:598 src/instance_manager.py:600
 msgid "API Key (Unchanged)"
 msgstr ""
 
-#: src/instance_manager.py:591 src/instance_manager.py:593
+#: src/instance_manager.py:598 src/instance_manager.py:600
 msgid "API Key"
 msgstr ""
 
-#: src/instance_manager.py:599
+#: src/instance_manager.py:606
 msgid "Max Tokens"
 msgstr ""
 
-#: src/instance_manager.py:600
+#: src/instance_manager.py:607
 msgid ""
 "Defines the maximum number of tokens (words + spaces) the AI can generate in "
 "a response. More tokens allow longer replies but may take more time and cost "
 "more."
 msgstr ""
 
-#: src/instance_manager.py:758
-msgid "Remove Instance?"
-msgstr ""
-
-#: src/instance_manager.py:758
-msgid "Are you sure you want to remove this instance?"
+#: src/instance_manager.py:755
+msgid "OpenAI Compatible Instance"
 msgstr ""
 
 #: src/instance_manager.py:773
+msgid "Remove Instance?"
+msgstr ""
+
+#: src/instance_manager.py:773
+msgid "Are you sure you want to remove this instance?"
+msgstr ""
+
+#: src/instance_manager.py:788
 msgid "Edit Instance"
 msgstr ""
 
@@ -4066,6 +4070,9 @@ msgstr "লোকাল ওয়েব সার্ভার চালু হ�
 #: src/custom_widgets/terminal_widget.py:129
 msgid "Using Flatpak contained shell"
 msgstr "ফ্ল্যাটপ্যাক অন্তর্ভুক্ত শেল ব্যবহার করা হচ্ছে"
+
+#~ msgid "Bearer Token (Optional)"
+#~ msgstr "বিয়ারার টোকেন (ঐচ্ছিক)"
 
 #~ msgid "Chat with local AI models"
 #~ msgstr "স্থানীয় এআই মডেলদের সাথে চ্যাট করুন"

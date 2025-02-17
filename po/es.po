@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-16 23:52-0600\n"
+"POT-Creation-Date: 2025-02-17 14:06-0600\n"
 "PO-Revision-Date: 2024-05-19 19:44-0600\n"
 "Last-Translator: Jeffry Samuel Eduarte Rojas <jeffrysamuer@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -208,8 +208,9 @@ msgstr "Arreglos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Exporting chats with 'thoughts' attachment is fixed"
-msgstr "Se solucionó el problema de exportación de chats con el archivo "
-"adjunto 'pensamientos'"
+msgstr ""
+"Se solucionó el problema de exportación de chats con el archivo adjunto "
+"'pensamientos'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
 msgid "Fixed attachment filters"
@@ -1843,8 +1844,8 @@ msgid "Next"
 msgstr "Siguiente"
 
 #: src/window.py:429 src/instance_manager.py:405 src/instance_manager.py:406
-#: src/instance_manager.py:512 src/instance_manager.py:513
-#: src/instance_manager.py:649 src/instance_manager.py:650 src/window.ui:916
+#: src/instance_manager.py:514 src/instance_manager.py:515
+#: src/instance_manager.py:656 src/instance_manager.py:657 src/window.ui:916
 #: src/window.ui:920 src/custom_widgets/message_widget.py:60
 #: src/custom_widgets/message_widget.py:199
 #: src/custom_widgets/model_manager_widget.py:380
@@ -2020,7 +2021,7 @@ msgstr "¿Remover Adjunto?"
 msgid "Are you sure you want to remove attachment?"
 msgstr "¿Estás seguro de que quieres remover el adjunto?"
 
-#: src/window.py:1127 src/instance_manager.py:758
+#: src/window.py:1127 src/instance_manager.py:773
 #: src/custom_widgets/model_manager_widget.py:381
 #: src/custom_widgets/model_manager_widget.py:423
 msgid "Remove"
@@ -3195,24 +3196,24 @@ msgstr ""
 msgid "Instance"
 msgstr "Instancia"
 
-#: src/instance_manager.py:58 src/window.ui:161
+#: src/instance_manager.py:57 src/window.ui:161
 #: src/custom_widgets/chat_widget.py:397
 msgid "New Chat"
 msgstr "Nuevo Chat"
 
-#: src/instance_manager.py:80 src/instance_manager.py:166
+#: src/instance_manager.py:79 src/instance_manager.py:166
 #: src/instance_manager.py:176 src/instance_manager.py:319
-#: src/instance_manager.py:574 src/instance_manager.py:705
-#: src/instance_manager.py:733
+#: src/instance_manager.py:578 src/instance_manager.py:716
+#: src/instance_manager.py:744
 msgid "Instance Error"
 msgstr "Error de Instancia"
 
-#: src/instance_manager.py:80
+#: src/instance_manager.py:79
 msgid "Message generation failed"
 msgstr "Error en la generación del mensaje"
 
-#: src/instance_manager.py:166 src/instance_manager.py:574
-#: src/instance_manager.py:705 src/instance_manager.py:733
+#: src/instance_manager.py:166 src/instance_manager.py:578
+#: src/instance_manager.py:716 src/instance_manager.py:744
 msgid "Could not retrieve added models"
 msgstr "No se pudieron recuperar los modelos agregados"
 
@@ -3265,8 +3266,8 @@ msgstr "Instancia de IA local administrada directamente por Alpaca"
 msgid "Ollama Log"
 msgstr "Registro de Ollama"
 
-#: src/instance_manager.py:335 src/instance_manager.py:469
-#: src/instance_manager.py:589 src/window.ui:833
+#: src/instance_manager.py:335 src/instance_manager.py:471
+#: src/instance_manager.py:593 src/window.ui:833
 msgid "Name"
 msgstr "Nombre"
 
@@ -3278,24 +3279,24 @@ msgstr "Puerto"
 msgid "Which network port will Ollama use"
 msgstr "El puerto de red que Ollama utilizará"
 
-#: src/instance_manager.py:346 src/instance_manager.py:481
-#: src/instance_manager.py:617
+#: src/instance_manager.py:346 src/instance_manager.py:483
+#: src/instance_manager.py:624
 msgid "Temperature"
 msgstr "Temperatura"
 
-#: src/instance_manager.py:346 src/instance_manager.py:481
-#: src/instance_manager.py:617
+#: src/instance_manager.py:346 src/instance_manager.py:483
+#: src/instance_manager.py:624
 msgid "Increasing the temperature will make the models answer more creatively."
-msgstr "Aumentar la temperatura hará que los modelos respondan de forma más "
-"creativa."
+msgstr ""
+"Aumentar la temperatura hará que los modelos respondan de forma más creativa."
 
-#: src/instance_manager.py:349 src/instance_manager.py:484
-#: src/instance_manager.py:621
+#: src/instance_manager.py:349 src/instance_manager.py:486
+#: src/instance_manager.py:628
 msgid "Seed"
 msgstr "Semilla"
 
-#: src/instance_manager.py:349 src/instance_manager.py:484
-#: src/instance_manager.py:621
+#: src/instance_manager.py:349 src/instance_manager.py:486
+#: src/instance_manager.py:628
 msgid ""
 "Setting this to a specific number other than 0 will make the model generate "
 "the same text for the same prompt."
@@ -3311,23 +3312,23 @@ msgstr "Directorio de Modelos"
 msgid "Select Directory"
 msgstr "Seleccionar Directorio"
 
-#: src/instance_manager.py:367 src/instance_manager.py:490
-#: src/instance_manager.py:627
+#: src/instance_manager.py:367 src/instance_manager.py:492
+#: src/instance_manager.py:634
 msgid "Default Model"
 msgstr "Modelo por Defecto"
 
-#: src/instance_manager.py:367 src/instance_manager.py:490
-#: src/instance_manager.py:627
+#: src/instance_manager.py:367 src/instance_manager.py:492
+#: src/instance_manager.py:634
 msgid "Model to select when starting a new chat."
 msgstr "Modelo a seleccionar al iniciar un nuevo chat."
 
-#: src/instance_manager.py:369 src/instance_manager.py:492
-#: src/instance_manager.py:629
+#: src/instance_manager.py:369 src/instance_manager.py:494
+#: src/instance_manager.py:636
 msgid "Title Model"
 msgstr "Modelo de Título"
 
-#: src/instance_manager.py:369 src/instance_manager.py:492
-#: src/instance_manager.py:629
+#: src/instance_manager.py:369 src/instance_manager.py:494
+#: src/instance_manager.py:636
 msgid "Model to use when generating a chat title."
 msgstr "Modelo a utilizar al generar un título de chat."
 
@@ -3344,37 +3345,37 @@ msgstr ""
 "relacionados con la GPU con Ollama."
 
 #: src/instance_manager.py:412 src/instance_manager.py:413
-#: src/instance_manager.py:519 src/instance_manager.py:520
-#: src/instance_manager.py:656 src/instance_manager.py:657
+#: src/instance_manager.py:521 src/instance_manager.py:522
+#: src/instance_manager.py:663 src/instance_manager.py:664
 #: src/custom_widgets/message_widget.py:203
 msgid "Save"
 msgstr "Guardar"
 
-#: src/instance_manager.py:466
+#: src/instance_manager.py:468
 msgid "Local or remote AI instance not managed by Alpaca"
 msgstr "Instancia de IA local o remota no administrada por Alpaca"
 
-#: src/instance_manager.py:472
+#: src/instance_manager.py:474 src/instance_manager.py:596
 msgid "Instance URL"
 msgstr "URL de instancia"
 
-#: src/instance_manager.py:475
-msgid "Bearer Token (Optional)"
-msgstr "Bearer Token (Opcional)"
+#: src/instance_manager.py:477
+msgid "API Key (Optional)"
+msgstr "Clave API (Opcional)"
 
-#: src/instance_manager.py:591 src/instance_manager.py:593
+#: src/instance_manager.py:598 src/instance_manager.py:600
 msgid "API Key (Unchanged)"
 msgstr "Clave API (Sin Cambios)"
 
-#: src/instance_manager.py:591 src/instance_manager.py:593
+#: src/instance_manager.py:598 src/instance_manager.py:600
 msgid "API Key"
 msgstr "Clave API"
 
-#: src/instance_manager.py:599
+#: src/instance_manager.py:606
 msgid "Max Tokens"
 msgstr "Tokens Maximos"
 
-#: src/instance_manager.py:600
+#: src/instance_manager.py:607
 msgid ""
 "Defines the maximum number of tokens (words + spaces) the AI can generate in "
 "a response. More tokens allow longer replies but may take more time and cost "
@@ -3384,15 +3385,19 @@ msgstr ""
 "generar en una respuesta. Más tokens permiten respuestas más largas, pero "
 "pueden llevar más tiempo y costar más."
 
-#: src/instance_manager.py:758
+#: src/instance_manager.py:755
+msgid "OpenAI Compatible Instance"
+msgstr "Instancia Compatible con OpenAI"
+
+#: src/instance_manager.py:773
 msgid "Remove Instance?"
 msgstr "¿Eliminar instancia?"
 
-#: src/instance_manager.py:758
+#: src/instance_manager.py:773
 msgid "Are you sure you want to remove this instance?"
 msgstr "¿Estás seguro de que quieres eliminar esta instancia?"
 
-#: src/instance_manager.py:773
+#: src/instance_manager.py:788
 msgid "Edit Instance"
 msgstr "Editar Instancia"
 
@@ -3426,8 +3431,8 @@ msgid ""
 msgstr ""
 "Alpaca y sus desarrolladores no son responsables de ningún daño a los "
 "dispositivos o al software que resulte de la ejecución del código generado "
-"por un modelo de IA. Tenga cuidado y revise el código con atención antes "
-"de ejecutarlo.\n"
+"por un modelo de IA. Tenga cuidado y revise el código con atención antes de "
+"ejecutarlo.\n"
 "\n"
 "Alpaca se distribuye bajo la licencia GPL v3.0, este software no tiene "
 "garantía."
@@ -3578,8 +3583,8 @@ msgid ""
 "It looks a bit empty in here. Try downloading some models or change your AI "
 "instance to get started!"
 msgstr ""
-"Parece un poco vacío aquí. ¡Prueba a descargar algunos modelos o cambia "
-"tu instancia de IA para comenzar!"
+"Parece un poco vacío aquí. ¡Prueba a descargar algunos modelos o cambia tu "
+"instancia de IA para comenzar!"
 
 #: src/window.ui:631 src/window.ui:641 src/window.ui:1139
 msgid "Manage Instances"
@@ -4208,6 +4213,9 @@ msgstr "Ejecutar servidor web local"
 #: src/custom_widgets/terminal_widget.py:129
 msgid "Using Flatpak contained shell"
 msgstr "Usando el shell contenido de Flatpak"
+
+#~ msgid "Bearer Token (Optional)"
+#~ msgstr "Bearer Token (Opcional)"
 
 #~ msgid "Chat with local AI models"
 #~ msgstr "Chatea con modelos de IA"
