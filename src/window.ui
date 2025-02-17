@@ -984,6 +984,19 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                   <property name="title" translatable="yes">Show Power Saver Warning</property>
                 </object>
               </child>
+              <child>
+                <object class="AdwSpinRow" id="zoom_spin">
+                  <signal name="output" handler="zoom_changed"/>
+                  <property name="title" translatable="yes">Zoom</property>
+                  <property name="adjustment">
+                    <object class="GtkAdjustment">
+                      <property name="lower">100</property>
+                      <property name="upper">200</property>
+                      <property name="step-increment">10</property>
+                    </object>
+                  </property>
+                </object>
+              </child>
             </object>
           </child>
         </object>

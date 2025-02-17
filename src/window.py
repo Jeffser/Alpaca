@@ -55,6 +55,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     attachments = {}
 
     #Elements
+    zoom_spin = Gtk.Template.Child()
     local_model_stack = Gtk.Template.Child()
     available_model_stack = Gtk.Template.Child()
     model_manager_stack = Gtk.Template.Child()
@@ -133,6 +134,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     last_selected_instance_row = None
 
     sql_instance = sql_manager.instance(os.path.join(data_dir, "alpaca.db"))
+
+    @Gtk.Template.Callback()
+    def zoom_changed(self, spinner):
+        self.sql_instance.insert_or_update_preferences({'zoom': int(spinner.get_value())})
+        self.update_zoom()
 
     @Gtk.Template.Callback()
     def add_instance(self, button):
@@ -1049,6 +1055,26 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.instance_preferences_page.set_sensitive(not any([tab.chat_window.busy for tab in self.chat_list_box.tab_list]))
         GLib.idle_add(self.main_navigation_view.push_by_tag, 'instance_manager')
 
+    def update_zoom(self):
+        current_zoom = self.sql_instance.get_preference('zoom')
+        if not current_zoom or current_zoom < 0:
+            current_zoom = 0
+            self.sql_instance.insert_or_update_preferences({'zoom': current_zoom})
+        elif current_zoom > 200:
+            current_zoom = 200
+            self.sql_instance.insert_or_update_preferences({'zoom': current_zoom})
+
+        settings = Gtk.Settings.get_default()
+        settings.reset_property('gtk-xft-dpi')
+        if sys.platform == 'darwin':
+            current_dpi = 110592
+        else:
+            current_dpi = settings.get_property('gtk-xft-dpi')
+        settings.set_property('gtk-xft-dpi',  current_dpi + (current_zoom - 100) * 400)
+
+        if current_zoom != self.zoom_spin.get_value():
+            self.zoom_spin.set_value(current_zoom)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
@@ -1065,6 +1091,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         list(self.model_dropdown)[0].add_css_class('flat')
         self.model_dropdown.set_model(Gio.ListStore.new(model_manager_widget.local_model_row))
         self.model_dropdown.set_expression(Gtk.PropertyExpression.new(model_manager_widget.local_model_row, None, "name"))
+
+        self.update_zoom()
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
