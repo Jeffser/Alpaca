@@ -389,7 +389,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if button.get_label() == "Next":
             self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
-            self.sql_instance.insert_or_update_preferences({'show_welcome_dialog': False})
+            self.sql_instance.insert_or_update_preferences({'skip_welcome_page': True})
             self.main_navigation_view.replace_with_tags(['loading'])
             self.prepare_alpaca()
 
@@ -1137,10 +1137,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         adapter.set_enabled(True)
         self.set_focus(self.message_text_view)
 
-        if self.sql_instance.get_preference('show_welcome_dialog'):
-            self.main_navigation_view.replace_with_tags(['welcome'])
-        else:
+        if self.sql_instance.get_preference('skip_welcome_page'):
             self.prepare_alpaca()
+        else:
+            self.main_navigation_view.replace_with_tags(['welcome'])
 
         if self.powersaver_warning_switch.get_active():
             self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())

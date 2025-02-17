@@ -625,7 +625,24 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                       <object class="AdwStatusPage">
                                         <property name="icon-name">sad-computer-symbolic</property>
                                         <property name="title" translatable="yes">No Models Found</property>
-                                        <property name="description" translatable="yes">It looks a bit empty in here. Try downloading some models to get started!</property>
+                                        <property name="description" translatable="yes">It looks a bit empty in here. Try downloading some models or change your AI instance to get started!</property>
+                                        <property name="child">
+                                          <object class="GtkButton">
+                                            <property name="tooltip-text" translatable="yes">Manage Instances</property>
+                                            <property name="action-name">app.instance_manager</property>
+                                            <property name="halign">3</property>
+                                            <style>
+                                              <class name="pill"/>
+                                              <class name="suggested-action"/>
+                                            </style>
+                                            <property name="child">
+                                              <object class="AdwButtonContent">
+                                                <property name="icon-name">processor-symbolic</property>
+                                                <property name="label" translatable="yes">Manage Instances</property>
+                                              </object>
+                                            </property>
+                                          </object>
+                                        </property>
                                       </object>
                                     </property>
                                   </object>

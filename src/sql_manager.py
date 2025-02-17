@@ -88,14 +88,14 @@ class instance:
                 'CUDA_VISIBLE_DEVICES': '',
                 'ROCR_VISIBLE_DEVICES': ''
             }
-            self.insert_or_update_instance(instance_manager.ollama_managed(generate_uuid(), 'Alpaca', 'http://0.0.0.0:11434', 0.7, 0, overrides, os.path.join(data_dir, '.ollama', 'models'), None, None, True))
+            self.insert_or_update_instance(instance_manager.ollama_managed(generate_uuid(), 'Alpaca', 'http://0.0.0.0:11435', 0.7, 0, overrides, os.path.join(data_dir, '.ollama', 'models'), None, None, True))
 
         if self.get_preference('run_remote'):
             self.insert_or_update_instance(instance_manager.ollama(generate_uuid(), _('Legacy Remote Instance'), self.get_preference('remote_url'), self.get_preference('remote_bearer_token'), 0.7, 0, None, None, False))
 
         # Remove stuff from previous versions (cleaning)
         try:
-            cursor.execute("DELETE FROM preferences WHERE id IN ('default_model', 'local_port', 'remote_url', 'remote_bearer_token', 'run_remote', 'idle_timer', 'model_directory', 'temperature', 'seed', 'keep_alive')")
+            cursor.execute("DELETE FROM preferences WHERE id IN ('default_model', 'local_port', 'remote_url', 'remote_bearer_token', 'run_remote', 'idle_timer', 'model_directory', 'temperature', 'seed', 'keep_alive', 'show_welcome_dialog')")
             cursor.execute("DROP TABLE overrides")
         except Exception as e:
             pass
