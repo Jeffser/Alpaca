@@ -549,7 +549,7 @@ class ollama(base_ollama):
         pg.add(button_container)
         return pp
 
-class openai_base(base_instance):
+class base_openai(base_instance):
     max_tokens = 256
     api_key = ''
 
@@ -592,6 +592,9 @@ class openai_base(base_instance):
 
         name_el = Adw.EntryRow(title=_('Name'), name='name', text=self.name)
         pg.add(name_el)
+        if self.instance_type == 'openai:generic':
+            url_el = Adw.EntryRow(title=_('Instance URL'), name='url', text=self.instance_url)
+            pg.add(url_el)
         api_el = Adw.EntryRow(title=_('API Key (Unchanged)') if self.api_key else _('API Key'), name='api')
         if self.api_key:
             api_el.connect('changed', lambda el: api_el.set_title(_('API Key') if api_el.get_text() else _('API Key (Unchanged)')))
@@ -670,6 +673,8 @@ class openai_base(base_instance):
                     self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
             else:
                 self.instance_id = window.generate_uuid()
+            if self.instance_type == 'openai:generic':
+                self.instace_url = url_el.get_text()
             if name_el.get_text():
                 self.name = name_el.get_text()
             if api_el.get_text():
@@ -688,12 +693,12 @@ class openai_base(base_instance):
         pg.add(button_container)
         return pp
 
-class chatgpt(openai_base):
+class chatgpt(base_openai):
     instance_type = 'chatgpt'
     instance_type_display = 'OpenAI ChatGPT'
     instance_url = 'https://api.openai.com/v1/'
 
-class gemini(openai_base):
+class gemini(base_openai):
     instance_type = 'gemini'
     instance_type_display = 'Google Gemini'
     instance_url = 'https://generativelanguage.googleapis.com/v1beta/openai/'
@@ -722,7 +727,7 @@ class gemini(openai_base):
             logger.error(e)
         return {}
 
-class together(openai_base):
+class together(base_openai):
     instance_type = 'together'
     instance_type_display = 'Together AI'
     instance_url = 'https://api.together.xyz/v1/'
@@ -740,10 +745,14 @@ class together(openai_base):
             logger.error(e)
             window.instance_listbox.unselect_all()
 
-class venice(openai_base):
+class venice(base_openai):
     instance_type = 'venice'
     instance_type_display = 'Venice'
     instance_url = 'https://api.venice.ai/api/v1/'
+
+class generic_openai(base_openai):
+    instance_type = 'openai:generic'
+    instance_type_display = _('OpenAI Compatible Instance')
 
 class instance_row(Adw.ActionRow):
     __gtype_name__ = 'AlpacaInstanceRow'
@@ -791,7 +800,8 @@ def update_instance_list():
         chatgpt.instance_type: chatgpt,
         gemini.instance_type: gemini,
         together.instance_type: together,
-        venice.instance_type: venice
+        venice.instance_type: venice,
+        generic_openai.instance_type: generic_openai
     }
     if len(instances) > 0:
         window.instance_manager_stack.set_visible_child_name('content')
@@ -817,7 +827,7 @@ def update_instance_list():
         window.instance_listbox.set_sensitive(True)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama, chatgpt, gemini, together, venice]
+ready_instances = [ollama, chatgpt, gemini, together, venice, generic_openai]
 
 if shutil.which('ollama'):
     ready_instances.insert(0, ollama_managed)
