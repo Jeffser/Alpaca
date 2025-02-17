@@ -34,3 +34,5 @@ echo "Updating Czech"
 msgmerge --no-fuzzy-matching -U po/cs.po po/alpaca.pot
 echo "Updating Japanese"
 msgmerge --no-fuzzy-matching -U po/ja.po po/alpaca.pot
+echo "Updating Indonesian"
+msgmerge --no-fuzzy-matching -U po/id.po po/alpaca.pot
