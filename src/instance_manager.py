@@ -578,6 +578,7 @@ class base_openai(base_instance):
             dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve added models'), str(e))
             logger.error(e)
             window.instance_listbox.unselect_all()
+            return []
 
     def get_available_models(self) -> dict:
         return {}
@@ -592,7 +593,7 @@ class base_openai(base_instance):
 
         name_el = Adw.EntryRow(title=_('Name'), name='name', text=self.name)
         pg.add(name_el)
-        if self.instance_type == 'openai:generic':
+        if self.instance_type in ('openai:generic',):
             url_el = Adw.EntryRow(title=_('Instance URL'), name='url', text=self.instance_url)
             pg.add(url_el)
         api_el = Adw.EntryRow(title=_('API Key (Unchanged)') if self.api_key else _('API Key'), name='api')
@@ -673,8 +674,10 @@ class base_openai(base_instance):
                     self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
             else:
                 self.instance_id = window.generate_uuid()
-            if self.instance_type == 'openai:generic':
-                self.instace_url = url_el.get_text()
+            if self.instance_type in ('openai:generic', 'llamacpp'):
+                self.instance_url = url_el.get_text().rstrip('/')
+                if not re.match(r'^(http|https)://', self.instance_url):
+                    self.instance_url = 'http://{}'.format(self.instance_url)
             if name_el.get_text():
                 self.name = name_el.get_text()
             if api_el.get_text():
@@ -754,6 +757,10 @@ class generic_openai(base_openai):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
 
+    def __init__(self, instance_id:str, name:str, instance_url:str, max_tokens:int, api_key:str, temperature:float, seed:int, default_model:str, title_model:str, pinned:bool):
+        self.instance_url = instance_url
+        super().__init__(instance_id, name, max_tokens, api_key, temperature, seed, default_model, title_model, pinned)
+
 class instance_row(Adw.ActionRow):
     __gtype_name__ = 'AlpacaInstanceRow'
 
@@ -801,7 +808,6 @@ def update_instance_list():
         gemini.instance_type: gemini,
         together.instance_type: together,
         venice.instance_type: venice,
-        generic_openai.instance_type: generic_openai
     }
     if len(instances) > 0:
         window.instance_manager_stack.set_visible_child_name('content')
@@ -812,6 +818,8 @@ def update_instance_list():
                 row = instance_row(ollama_managed(ins.get('id'), ins.get('name'), ins.get('url'), ins.get('temperature'), ins.get('seed'), ins.get('overrides'), ins.get('model_directory'), ins.get('default_model'), ins.get('title_model'), ins.get('pinned')))
             elif ins.get('type') == 'ollama':
                 row = instance_row(ollama(ins.get('id'), ins.get('name'), ins.get('url'), ins.get('api'), ins.get('temperature'), ins.get('seed'), ins.get('default_model'), ins.get('title_model'), ins.get('pinned')))
+            elif ins.get('type') == 'openai:generic':
+                row = instance_row(generic_openai(ins.get('id'), ins.get('name'), ins.get('url'), ins.get('max_tokens'), ins.get('api'), ins.get('temperature'), ins.get('seed'), ins.get('default_model'), ins.get('title_model'), ins.get('pinned')))
             elif openai_compatible_instances.get(ins.get('type')):
                 row = instance_row(openai_compatible_instances.get(ins.get('type'))(ins.get('id'), ins.get('name'), ins.get('max_tokens'), ins.get('api'), ins.get('temperature'), ins.get('seed'), ins.get('default_model'), ins.get('title_model'), ins.get('pinned')))
             if row:
