@@ -178,7 +178,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         top_k = self.model_creator_imagination.get_value()
         top_p = self.model_creator_focus.get_value() / 100
 
-        found_models = [row.model for row in list(window.model_dropdown.get_model()) if row.model.get_name() == model_name]
+        found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.model.get_name() == model_name]
         if not found_models:
             if profile_picture:
                 self.sql_instance.insert_or_update_model_picture(model_name, self.get_content_of_file(profile_picture, 'profile_picture'))
@@ -220,7 +220,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             system = None
             modelfile = None
 
-            found_models = [row.model for row in list(window.model_dropdown.get_model()) if row.model.get_name() == model_name]
+            found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.model.get_name() == model_name]
             if found_models:
                 system = found_models[0].data.get('system')
                 modelfile = found_models[0].data.get('modelfile')
