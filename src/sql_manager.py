@@ -91,8 +91,7 @@ class instance:
             self.insert_or_update_instance(instance_manager.ollama_managed(generate_uuid(), 'Alpaca', 'http://0.0.0.0:11434', 0.7, 0, overrides, os.path.join(data_dir, '.ollama', 'models'), None, None, True))
 
         if self.get_preference('run_remote'):
-            instance_id = generate_uuid()
-            self.insert_or_update_instance(instance_manager.ollama(instance_id, _('Legacy Remote Instance'), self.get_preference('remote_url'), self.get_preference('remote_bearer_token'), 0.7, 0, None, None, False))
+            self.insert_or_update_instance(instance_manager.ollama(generate_uuid(), _('Legacy Remote Instance'), self.get_preference('remote_url'), self.get_preference('remote_bearer_token'), 0.7, 0, None, None, False))
 
         # Remove stuff from previous versions (cleaning)
         try:

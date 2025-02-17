@@ -50,6 +50,11 @@ class base_instance:
             chat.container.remove(chat.regenerate_button)
 
         messages = chat.convert_to_ollama()[:list(chat.messages.values()).index(bot_message)]
+        if self.instance_type in ('gemini', 'venice'):
+            for m in messages:
+                if m.get('role') == 'system':
+                    m['role'] = 'user'
+
         if not chat.quick_chat and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
 
@@ -57,6 +62,7 @@ class base_instance:
             "model": model,
             "messages": messages,
             "temperature": self.temperature,
+            "max_tokens": self.max_tokens,
             "stream": True
         }
 
@@ -67,7 +73,7 @@ class base_instance:
             response = self.client.chat.completions.create(**params)
 
             for chunk in response:
-                if chunk.choices[0].delta.content:
+                if chunk.choices and chunk.choices[0].delta.content:
                     bot_message.update_message({"content": chunk.choices[0].delta.content})
             bot_message.update_message({"done": True})
         except Exception as e:
@@ -81,7 +87,7 @@ class base_instance:
             emoji:str = ""
 
         messages = [
-            {"role": "system", "content": "You are an assistant that generates short chat titles based on the first message from a user. If you want to add an emoji, use the emoji character directly (e.g., 😀) instead of its description (e.g., ':happy_face:')."},
+            {"role": "system" if self.instance_type not in ('gemini', 'venice') else "user", "content": "You are an assistant that generates short chat titles based on the first message from a user. If you want to add an emoji, use the emoji character directly (e.g., 😀) instead of its description (e.g., ':happy_face:')."},
             {"role": "user", "content": "Generate a title for this prompt:\n{}".format(prompt)}
         ]
 
@@ -92,7 +98,8 @@ class base_instance:
                 temperature=0.2,
                 model=model,
                 messages=messages,
-                response_format=chat_title
+                response_format=chat_title,
+                max_tokens=100
             )
             response = completion.choices[0].message
             if response.parsed:
@@ -100,9 +107,8 @@ class base_instance:
                 window.chat_list_box.rename_chat(chat.get_name(), '{} {}'.format(response.parsed.emoji, response.parsed.title).strip())
         except Exception as e:
             try:
-                response = self.client.chat.completions.create(model=model, messages=messages, temperature=0.3)
-                title = response.choices[0].delta.content.title()
-                window.chat_list_box.rename_chat(chat.get_name(), title)
+                response = self.client.chat.completions.create(model=model, messages=messages, temperature=0.2, max_tokens=100)
+                window.chat_list_box.rename_chat(chat.get_name(), str(response.choices[0].message.content))
             except Exception as e:
                 logger.error(e)
 
