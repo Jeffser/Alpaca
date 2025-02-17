@@ -65,7 +65,6 @@ class instance:
                 "url": "TEXT",
                 "max_tokens": "INTEGER NOT NULL",
                 "api": "TEXT",
-                "bearer": "TEXT",
                 "temperature": "REAL NOT NULL",
                 "seed": "INTEGER NOT NULL",
                 "overrides": "TEXT NOT NULL",
@@ -347,7 +346,7 @@ class instance:
     ###############
 
     def get_instances(self) -> list:
-        columns = ['id', 'name', 'type', 'url', 'max_tokens', 'api', 'bearer', 'temperature', 'seed', 'overrides', 'model_directory', 'default_model', 'title_model', 'pinned']
+        columns = ['id', 'name', 'type', 'url', 'max_tokens', 'api', 'temperature', 'seed', 'overrides', 'model_directory', 'default_model', 'title_model', 'pinned']
         sqlite_con = sqlite3.connect(self.sql_path)
         cursor = sqlite_con.cursor()
         result = cursor.execute("SELECT {} FROM instances".format(', '.join(columns))).fetchall()
@@ -375,7 +374,6 @@ class instance:
             'url': ins.instance_url,
             'max_tokens': ins.max_tokens,
             'api': ins.api_key,
-            'bearer': ins.bearer,
             'temperature': ins.temperature,
             'seed': ins.seed,
             'overrides': json.dumps(ins.overrides),

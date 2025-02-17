@@ -29,7 +29,6 @@ class base_instance:
     instance_url = None
     max_tokens = 4096
     api_key = None
-    bearer = None
     temperature = 0.7
     seed = 0
     overrides = {}
@@ -69,9 +68,6 @@ class base_instance:
         if self.seed != 0 and self.instance_type not in ('gemini', 'venice'):
             params["seed"] = self.seed
 
-        if self.bearer:
-            params['Authorization'] = 'Bearer {}'.format(self.bearer)
-
         try:
             response = self.client.chat.completions.create(**params)
 
@@ -102,8 +98,6 @@ class base_instance:
             "messages": messages,
             "max_tokens": 100
         }
-        if self.bearer:
-            params['Authorization'] = 'Bearer {}'.format(self.bearer)
 
         try:
             completion = self.client.beta.chat.completions.parse(**params, response_format=chat_title)
@@ -152,7 +146,7 @@ class empty:
         return ''
 
 class base_ollama(base_instance):
-    api_key = 'ollama'
+    api_key = ''
     process = None
 
     def stop(self):
@@ -165,7 +159,7 @@ class base_ollama(base_instance):
         if not self.process:
             self.start()
         try:
-            response = requests.get('{}/api/tags'.format(self.instance_url), headers={'Authorization': 'Bearer {}'.format(self.bearer)})
+            response = requests.get('{}/api/tags'.format(self.instance_url), headers={'Authorization': 'Bearer {}'.format(self.api_key)})
             if response.status_code == 200:
                 return json.loads(response.text).get('models')
         except Exception as e:
@@ -188,7 +182,7 @@ class base_ollama(base_instance):
         if not self.process:
             self.start()
         try:
-            response = requests.post('{}/api/show'.format(self.instance_url), headers={'Content-Type': 'application/json', 'Authorization': 'Bearer {}'.format(self.bearer)}, data=json.dumps({"name": model_name}), stream=False)
+            response = requests.post('{}/api/show'.format(self.instance_url), headers={'Content-Type': 'application/json', 'Authorization': 'Bearer {}'.format(self.api_key)}, data=json.dumps({"name": model_name}), stream=False)
             if response.status_code == 200:
                 return json.loads(response.text)
         except Exception as e:
@@ -199,7 +193,7 @@ class base_ollama(base_instance):
         if not self.process:
             self.start()
         try:
-            response = requests.post('{}/api/pull'.format(self.instance_url), headers={'Content-Type': 'application/json', 'Authorization': 'Bearer {}'.format(self.bearer)}, data=json.dumps({'name': model_name, 'stream': True}), stream=True)
+            response = requests.post('{}/api/pull'.format(self.instance_url), headers={'Content-Type': 'application/json', 'Authorization': 'Bearer {}'.format(self.api_key)}, data=json.dumps({'name': model_name, 'stream': True}), stream=True)
             if response.status_code == 200:
                 for line in response.iter_lines():
                     if line:
@@ -212,7 +206,7 @@ class base_ollama(base_instance):
         if not self.process:
             self.start()
         try:
-            return requests.get('{}/api/blobs/sha256:{}'.format(self.instance_url, sha256), headers={'Authorization': 'Bearer {}'.format(self.bearer)}).status_code != 404
+            return requests.get('{}/api/blobs/sha256:{}'.format(self.instance_url, sha256), headers={'Authorization': 'Bearer {}'.format(self.api_key)}).status_code != 404
         except Exception as e:
             return False
 
@@ -220,13 +214,13 @@ class base_ollama(base_instance):
         if not self.process:
             self.start()
         with open(gguf_path, 'rb') as f:
-            requests.post('{}/api/blobs/sha256:{}'.format(self.instance_url, sha256), data=f, headers={'Authorization': 'Bearer {}'.format(self.bearer)})
+            requests.post('{}/api/blobs/sha256:{}'.format(self.instance_url, sha256), data=f, headers={'Authorization': 'Bearer {}'.format(self.api_key)})
 
     def create_model(self, data:dict, callback:callable):
         if not self.process:
             self.start()
         try:
-            response = requests.post('{}/api/create'.format(self.instance_url), headers={'Content-Type': 'application/json', 'Authorization': 'Bearer {}'.format(self.bearer)}, data=json.dumps(data), stream=True)
+            response = requests.post('{}/api/create'.format(self.instance_url), headers={'Content-Type': 'application/json', 'Authorization': 'Bearer {}'.format(self.api_key)}, data=json.dumps(data), stream=True)
             if response.status_code == 200:
                 for line in response.iter_lines():
                     if line:
@@ -239,7 +233,7 @@ class base_ollama(base_instance):
         if not self.process:
             self.start()
         try:
-            response = requests.delete('{}/api/delete'.format(self.instance_url), headers={'Content-Type': 'application/json', 'Authorization': 'Bearer {}'.format(self.bearer)}, data=json.dumps({"name": model_name}))
+            response = requests.delete('{}/api/delete'.format(self.instance_url), headers={'Content-Type': 'application/json', 'Authorization': 'Bearer {}'.format(self.api_key)}, data=json.dumps({"name": model_name}))
             return response.status_code == 200
         except Exception as e:
             return False
@@ -454,11 +448,11 @@ class ollama(base_ollama):
     instance_type_display = 'Ollama'
     instance_url = 'http://0.0.0.0:11434'
 
-    def __init__(self, instance_id:str, name:str, instance_url:str, bearer:str, temperature:float, seed:int, default_model:str, title_model:str, pinned:bool):
+    def __init__(self, instance_id:str, name:str, instance_url:str, api_key:str, temperature:float, seed:int, default_model:str, title_model:str, pinned:bool):
         self.instance_id = instance_id
         self.name = name
         self.instance_url = instance_url
-        self.bearer = bearer
+        self.api_key = api_key
         self.temperature = temperature
         self.seed = seed
         self.default_model = default_model
@@ -480,8 +474,8 @@ class ollama(base_ollama):
         url_el = Adw.EntryRow(title=_('Instance URL'), name='url', text=self.instance_url)
         pg.add(url_el)
 
-        bearer_el = Adw.EntryRow(title=_('Bearer Token (Optional)'), name='bearer', text=self.bearer)
-        pg.add(bearer_el)
+        api_el = Adw.EntryRow(title=_('Bearer Token (Optional)'), name='api', text=self.api_key)
+        pg.add(api_el)
 
         pg = Adw.PreferencesGroup()
         pp.add(pg)
@@ -542,7 +536,7 @@ class ollama(base_ollama):
             self.instance_url = url_el.get_text().rstrip('/')
             if not re.match(r'^(http|https)://', self.instance_url):
                 self.instance_url = 'http://{}'.format(self.instance_url)
-            self.bearer = bearer_el.get_text()
+            self.api_key = api_el.get_text()
             self.temperature = temperature_el.get_value()
             self.seed = int(seed_el.get_value())
 
@@ -807,7 +801,7 @@ def update_instance_list():
             if ins.get('type') == 'ollama:managed' and shutil.which('ollama'):
                 row = instance_row(ollama_managed(ins.get('id'), ins.get('name'), ins.get('url'), ins.get('temperature'), ins.get('seed'), ins.get('overrides'), ins.get('model_directory'), ins.get('default_model'), ins.get('title_model'), ins.get('pinned')))
             elif ins.get('type') == 'ollama':
-                row = instance_row(ollama(ins.get('id'), ins.get('name'), ins.get('url'), ins.get('bearer'), ins.get('temperature'), ins.get('seed'), ins.get('default_model'), ins.get('title_model'), ins.get('pinned')))
+                row = instance_row(ollama(ins.get('id'), ins.get('name'), ins.get('url'), ins.get('api'), ins.get('temperature'), ins.get('seed'), ins.get('default_model'), ins.get('title_model'), ins.get('pinned')))
             elif openai_compatible_instances.get(ins.get('type')):
                 row = instance_row(openai_compatible_instances.get(ins.get('type'))(ins.get('id'), ins.get('name'), ins.get('max_tokens'), ins.get('api'), ins.get('temperature'), ins.get('seed'), ins.get('default_model'), ins.get('title_model'), ins.get('pinned')))
             if row:
