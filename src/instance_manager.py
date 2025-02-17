@@ -431,8 +431,10 @@ class ollama_managed(base_ollama):
             for name, element in override_elements.items():
                 self.overrides[name] = element.get_text()
             if self.instance_id:
-                self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
-                self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
+                if default_model_el.get_selected_item():
+                    self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
+                if title_model_el.get_selected_item():
+                    self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
                 self.start()
             else:
                 self.instance_id = window.generate_uuid()
@@ -529,8 +531,10 @@ class ollama(base_ollama):
 
         def save():
             if self.instance_id:
-                self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
-                self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
+                if default_model_el.get_selected_item():
+                    self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
+                if title_model_el.get_selected_item():
+                    self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
             else:
                 self.instance_id = window.generate_uuid()
             if name_el.get_text():
@@ -666,8 +670,10 @@ class openai_base(base_instance):
 
         def save():
             if self.instance_id:
-                self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
-                self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
+                if default_model_el.get_selected_item():
+                    self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
+                if title_model_el.get_selected_item():
+                    self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
             else:
                 self.instance_id = window.generate_uuid()
             if name_el.get_text():
