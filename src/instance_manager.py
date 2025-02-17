@@ -69,6 +69,9 @@ class base_instance:
         if self.seed != 0 and self.instance_type not in ('gemini', 'venice'):
             params["seed"] = self.seed
 
+        if self.bearer:
+            params['Authorization'] = 'Bearer {}'.format(self.bearer)
+
         try:
             response = self.client.chat.completions.create(**params)
 
@@ -93,21 +96,24 @@ class base_instance:
 
         model = self.title_model if self.title_model else self.get_default_model()
 
+        params = {
+            "temperature": 0.2,
+            "model": model,
+            "messages": messages,
+            "max_tokens": 100
+        }
+        if self.bearer:
+            params['Authorization'] = 'Bearer {}'.format(self.bearer)
+
         try:
-            completion = self.client.beta.chat.completions.parse(
-                temperature=0.2,
-                model=model,
-                messages=messages,
-                response_format=chat_title,
-                max_tokens=100
-            )
+            completion = self.client.beta.chat.completions.parse(**params, response_format=chat_title)
             response = completion.choices[0].message
             if response.parsed:
                 emoji = response.parsed.emoji if len(response.parsed.emoji) == 1 else '💬'
                 window.chat_list_box.rename_chat(chat.get_name(), '{} {}'.format(response.parsed.emoji, response.parsed.title).strip())
         except Exception as e:
             try:
-                response = self.client.chat.completions.create(model=model, messages=messages, temperature=0.2, max_tokens=100)
+                response = self.client.chat.completions.create(**params)
                 window.chat_list_box.rename_chat(chat.get_name(), str(response.choices[0].message.content))
             except Exception as e:
                 logger.error(e)
@@ -159,7 +165,7 @@ class base_ollama(base_instance):
         if not self.process:
             self.start()
         try:
-            response = requests.get('{}/api/tags'.format(self.instance_url))
+            response = requests.get('{}/api/tags'.format(self.instance_url), headers={'Authorization': 'Bearer {}'.format(self.bearer)})
             if response.status_code == 200:
                 return json.loads(response.text).get('models')
         except Exception as e:
@@ -182,7 +188,7 @@ class base_ollama(base_instance):
         if not self.process:
             self.start()
         try:
-            response = requests.post('{}/api/show'.format(self.instance_url), headers={'Content-Type': 'application/json'}, data=json.dumps({"name": model_name}), stream=False)
+            response = requests.post('{}/api/show'.format(self.instance_url), headers={'Content-Type': 'application/json', 'Authorization': 'Bearer {}'.format(self.bearer)}, data=json.dumps({"name": model_name}), stream=False)
             if response.status_code == 200:
                 return json.loads(response.text)
         except Exception as e:
@@ -193,7 +199,7 @@ class base_ollama(base_instance):
         if not self.process:
             self.start()
         try:
-            response = requests.post('{}/api/pull'.format(self.instance_url), headers={'Content-Type': 'application/json'}, data=json.dumps({'name': model_name, 'stream': True}), stream=True)
+            response = requests.post('{}/api/pull'.format(self.instance_url), headers={'Content-Type': 'application/json', 'Authorization': 'Bearer {}'.format(self.bearer)}, data=json.dumps({'name': model_name, 'stream': True}), stream=True)
             if response.status_code == 200:
                 for line in response.iter_lines():
                     if line:
@@ -206,7 +212,7 @@ class base_ollama(base_instance):
         if not self.process:
             self.start()
         try:
-            return requests.get('{}/api/blobs/sha256:{}'.format(self.instance_url, sha256)).status_code != 404
+            return requests.get('{}/api/blobs/sha256:{}'.format(self.instance_url, sha256), headers={'Authorization': 'Bearer {}'.format(self.bearer)}).status_code != 404
         except Exception as e:
             return False
 
@@ -214,13 +220,13 @@ class base_ollama(base_instance):
         if not self.process:
             self.start()
         with open(gguf_path, 'rb') as f:
-            requests.post('{}/api/blobs/sha256:{}'.format(self.instance_url, sha256), data=f)
+            requests.post('{}/api/blobs/sha256:{}'.format(self.instance_url, sha256), data=f, headers={'Authorization': 'Bearer {}'.format(self.bearer)})
 
     def create_model(self, data:dict, callback:callable):
         if not self.process:
             self.start()
         try:
-            response = requests.post('{}/api/create'.format(self.instance_url), headers={'Content-Type': 'application/json'}, data=json.dumps(data), stream=True)
+            response = requests.post('{}/api/create'.format(self.instance_url), headers={'Content-Type': 'application/json', 'Authorization': 'Bearer {}'.format(self.bearer)}, data=json.dumps(data), stream=True)
             if response.status_code == 200:
                 for line in response.iter_lines():
                     if line:
@@ -233,7 +239,7 @@ class base_ollama(base_instance):
         if not self.process:
             self.start()
         try:
-            response = requests.delete('{}/api/delete'.format(self.instance_url), headers={'Content-Type': 'application/json'}, data=json.dumps({"name": model_name}))
+            response = requests.delete('{}/api/delete'.format(self.instance_url), headers={'Content-Type': 'application/json', 'Authorization': 'Bearer {}'.format(self.bearer)}, data=json.dumps({"name": model_name}))
             return response.status_code == 200
         except Exception as e:
             return False
