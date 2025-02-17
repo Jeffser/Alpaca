@@ -94,6 +94,7 @@ Language               | Contributors
 🇮🇹 Italian              | [Edoardo Brogiolo](https://github.com/edo0)
 🇯🇵 Japanese             | [Shidore](https://github.com/sh1d0re)
 🇳🇱 Dutch                | [Henk Leerssen](https://github.com/Henkster72)
+🇮🇩 Indonesian           | [Nofal Briansah](https://github.com/nofalbriansah)
 
 Want to add a language? Visit [this discussion](https://github.com/Jeffser/Alpaca/discussions/153) to get started!
 
