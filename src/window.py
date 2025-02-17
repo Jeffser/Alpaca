@@ -932,11 +932,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.chat_list_box.new_chat(self.get_application().args.new_chat)
 
         self.powersaver_warning_switch.set_active(self.sql_instance.get_preference('powersaver_warning'))
-
-        self.set_hide_on_close(self.background_switch.get_active())
-        self.action_button_stack.set_sensitive(True)
-        self.attachment_button.set_sensitive(True)
-        self.get_application().lookup_action('model_manager').set_enabled(True)
+        self.background_switch.set_active(self.sql_instance.get_preference('run_on_background'))
+        self.zoom_spin.set_value(self.sql_instance.get_preference('zoom'))
 
         if self.get_application().args.ask:
             self.quick_chat(self.get_application().args.ask)
@@ -1087,8 +1084,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.model_dropdown.set_model(Gio.ListStore.new(model_manager_widget.local_model_row))
         self.model_dropdown.set_expression(Gtk.PropertyExpression.new(model_manager_widget.local_model_row, None, "name"))
 
-        self.zoom_spin.set_value(self.sql_instance.get_preference('zoom'))
-
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
         self.message_text_view = GtkSource.View(
@@ -1143,7 +1138,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
-        self.get_application().lookup_action('model_manager').set_enabled(False)
         if sys.platform == 'darwin':
             self.get_application().lookup_action('attach_screenshot').set_enabled(False)
 
@@ -1162,9 +1156,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.prepare_alpaca()
         else:
             self.main_navigation_view.replace_with_tags(['welcome'])
-
-        if self.powersaver_warning_switch.get_active():
-            self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
             
         Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.banner.set_revealed(monitor.get_power_saver_enabled() and self.powersaver_warning_switch.get_active()))
         self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
