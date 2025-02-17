@@ -1003,6 +1003,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
     </object>
 
     <object class="AdwWindow" id="quick_ask">
+      <property name="name">AlpacaQuickAsk</property>
       <signal name="close-request" handler="closing_quick_ask"/>
       <accessibility>
         <property name="label" translatable="yes">Quick ask dialog</property>
