@@ -15,7 +15,7 @@ import matplotlib.mathtext as mathtext
 from PIL import Image
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .table_widget import TableWidget
-from . import dialog_widget, terminal_widget
+from . import dialog_widget, terminal_widget, model_manager_widget
 
 logger = logging.getLogger(__name__)
 
