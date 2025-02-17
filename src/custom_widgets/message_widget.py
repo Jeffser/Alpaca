@@ -581,12 +581,13 @@ class option_popup(Gtk.Popover):
         if self.message_element.spinner:
             self.message_element.container.remove(self.message_element.spinner)
             self.message_element.spinner = None
-        if not chat.busy:
+        model = model_manager_widget.get_selected_model().get_name()
+        if not chat.busy and model:
             self.message_element.set_text()
-            self.message_element.model = window.model_dropdown.get_selected_item().model.get_name()
+            self.message_element.model = model
             self.message_element.add_footer()
             self.message_element.footer.options_button.set_sensitive(False)
-            threading.Thread(target=window.get_current_instance().generate_message, args=(self.message_element, window.model_dropdown.get_selected_item().model.get_name())).start()
+            threading.Thread(target=window.get_current_instance().generate_message, args=(self.message_element, model)).start()
         else:
             window.show_toast(_("Message cannot be regenerated while receiving a response"), window.main_overlay)
 

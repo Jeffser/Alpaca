@@ -10,6 +10,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api.formatters import TextFormatter
 from html2text import html2text
 from .internal import cache_dir
+from .custom_widgets import model_manager_widget
 
 window = None
 
@@ -94,7 +95,7 @@ def attach_file(file):
         file_type = 'plain_text'
     else:
         file_type = found_types[0]
-    if file_type == 'image' and not window.model_dropdown.get_selected_item().model.get_vision():
+    if file_type == 'image' and not model_manager_widget.get_selected_model().get_vision():
         window.show_toast(_("Image recognition is only available on specific models"), window.main_overlay)
         return
     window.attach_file(file.get_path(), file_type)

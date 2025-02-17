@@ -333,7 +333,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         self.chat_list_box.send_tab_to_top(self.chat_list_box.get_selected_row())
 
-        current_model = self.model_dropdown.get_selected_item().model.get_name()
+        current_model = model_manager_widget.get_selected_model().get_name()
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
             return
@@ -857,7 +857,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         try:
             texture = clipboard.read_texture_finish(result)
             if texture:
-                if self.model_dropdown.get_selected_item().model.get_vision():
+                if model_manager_widget.get_selected_model().get_vision():
                     pixbuf = Gdk.pixbuf_get_from_texture(texture)
                     if not os.path.exists(os.path.join(cache_dir, 'tmp/images/')):
                         os.makedirs(os.path.join(cache_dir, 'tmp/images/'))
@@ -874,7 +874,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for file in files:
             extension = os.path.splitext(file.get_path())[1][1:]
             if extension in ('png', 'jpeg', 'jpg', 'webp', 'gif'):
-                if self.model_dropdown.get_selected_item().model.get_vision():
+                if model_manager_widget.get_selected_model().get_vision():
                     self.attach_file(file.get_path(), 'image')
                 else:
                     self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
@@ -1040,7 +1040,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             ff.add_mime_type(mime)
             file_filters[0].add_mime_type(mime)
             file_filters.append(ff)
-        if self.model_dropdown.get_selected_item().model.get_vision():
+        if model_manager_widget.get_selected_model().get_vision():
             file_filters[0].add_pixbuf_formats()
             file_filters.append(self.file_filter_image)
         dialog_widget.simple_file(file_filters, generic_actions.attach_file)
@@ -1065,8 +1065,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         list(self.model_dropdown)[0].add_css_class('flat')
         self.model_dropdown.set_model(Gio.ListStore.new(model_manager_widget.local_model_row))
         self.model_dropdown.set_expression(Gtk.PropertyExpression.new(model_manager_widget.local_model_row, None, "name"))
-        #print(self.model_dropdown.get_selected_item().model.get_name())
-
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
@@ -1110,7 +1108,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'send_message': [lambda *_: self.send_message()],
             'send_system_message': [lambda *_: self.send_message(None, True)],
             'attach_file': [lambda *_: self.attachment_request()],
-            'attach_screenshot': [lambda *i: self.request_screenshot() if self.model_dropdown.get_selected_item().model.get_vision() else self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)],
+            'attach_screenshot': [lambda *i: self.request_screenshot() if model_manager_widget.get_selected_model().get_vision() else self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)],
             'attach_url': [lambda *i: dialog_widget.simple_entry(_('Attach Website? (Experimental)'), _('Please enter a website URL'), self.cb_text_received, {'placeholder': 'https://jeffser.com/alpaca/'})],
             'attach_youtube': [lambda *i: dialog_widget.simple_entry(_('Attach YouTube Captions?'), _('Please enter a YouTube video URL'), self.cb_text_received, {'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})],
             'model_manager' : [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>m']],
