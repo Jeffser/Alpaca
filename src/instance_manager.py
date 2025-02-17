@@ -670,7 +670,7 @@ class openai_base(base_instance):
                 self.api_key = api_el.get_text()
             self.max_tokens = int(max_tokens_el.get_value())
             self.temperature = temperature_el.get_value()
-            if self.instance_type != 'gemini':
+            if self.instance_type not in ('gemini', 'venice'):
                 self.seed = int(seed_el.get_value())
 
             window.sql_instance.insert_or_update_instance(self)
