@@ -156,7 +156,7 @@ class AlpacaApplication(Adw.Application):
             developers=['Jeffser https://jeffser.com'],
             designers=['Jeffser https://jeffser.com', 'Tobias Bernard (App Icon) https://tobiasbernard.com/'],
             translator_credits='\n'.join(translators),
-            copyright='© 2025 Jeffser\n© 2025 Ollama',
+            copyright='© 2025 Jeffser\n© 2025 Ollama Meta Platforms, Inc.\n© 2025 ChatGPT OpenAI, Inc.\n© 2025 Gemini Google Alphabet, Inc.\n© 2025 Together.ai\n© 2025 Venice AI',
             issue_url='https://github.com/Jeffser/Alpaca/issues',
             license_type=3,
             website="https://jeffser.com/alpaca",
