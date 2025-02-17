@@ -103,6 +103,7 @@ class AlpacaService:
         self.app.props.active_window.quick_chat(message)
 
 class AlpacaApplication(Adw.Application):
+    __gtype_name__ = 'AlpacaApplication'
     """The main application singleton class."""
 
     def __init__(self, version):
