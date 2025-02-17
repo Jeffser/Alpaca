@@ -629,7 +629,7 @@ def pull_model_confirm(model_name:str):
         if model_name not in list(get_local_models().keys()):
             model = pulling_model(model_name)
             window.local_model_flowbox.prepend(model)
-            GLib.idle_add(window.model_manager_stack.set_visible_child_name, 'local_models')
+            GLib.idle_add(window.model_manager_stack.set_visible_child_name, 'added_models')
             GLib.idle_add(window.local_model_flowbox.select_child, model.get_parent())
             GLib.idle_add(window.local_model_stack.set_visible_child_name, 'content')
             window.get_current_instance().pull_model(model_name, model.update_progressbar)
