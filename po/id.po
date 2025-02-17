@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-28 20:47-0600\n"
+"POT-Creation-Date: 2025-02-16 23:52-0600\n"
 "PO-Revision-Date: 2025-02-05 18:21-0600\n"
 "Last-Translator: Nofal Briansah <nofalbriansah@gmail.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
@@ -26,15 +26,15 @@ msgid "ai;ollama;llm"
 msgstr "ai;ollama;llm"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
-msgid "Chat with local AI models"
-msgstr "Mengobrol dengan model AI lokal"
+msgid "Chat with local and online AI models"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:10
-msgid "An Ollama client"
-msgstr "Klien Ollama"
+msgid "A private AI client"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:11
-#: data/com.jeffser.Alpaca.metainfo.xml.in:966
+#: data/com.jeffser.Alpaca.metainfo.xml.in:993
 msgid "Features"
 msgstr "Fitur"
 
@@ -43,12 +43,12 @@ msgid "Built in Ollama instance"
 msgstr "Instansi Ollama bawaan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:14
-#: data/com.jeffser.Alpaca.metainfo.xml.in:968
+#: data/com.jeffser.Alpaca.metainfo.xml.in:995
 msgid "Talk to multiple models in the same conversation"
 msgstr "Berbicara dengan beberapa model dalam satu percakapan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:15
-#: data/com.jeffser.Alpaca.metainfo.xml.in:969
+#: data/com.jeffser.Alpaca.metainfo.xml.in:996
 msgid "Pull and delete models from the app"
 msgstr "Mengunduh dan menghapus model dari aplikasi"
 
@@ -80,7 +80,7 @@ msgstr "Tambahkan teks dari situs web ke perintah"
 msgid "PDF recognition"
 msgstr "Pengenalan PDF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:1216
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24 src/window.ui:110
 msgid "Disclaimer"
 msgstr "Penafian"
 
@@ -90,13 +90,17 @@ msgid ""
 "any damages to your device or software caused by running code given by any "
 "models."
 msgstr ""
-"Proyek ini tidak berafiliasi dengan Ollama. Saya tidak bertanggung jawab atas "
-"kerusakan pada perangkat atau perangkat lunak Anda akibat menjalankan kode "
-"yang diberikan oleh model apa pun."
+"Proyek ini tidak berafiliasi dengan Ollama. Saya tidak bertanggung jawab "
+"atas kerusakan pada perangkat atau perangkat lunak Anda akibat menjalankan "
+"kode yang diberikan oleh model apa pun."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:54
 msgid "A normal conversation with an AI Model"
 msgstr "Percakapan normal dengan model AI"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:58
+msgid "A conversation involving image recognition"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:62
 msgid "A conversation involving a custom model"
@@ -123,876 +127,953 @@ msgid "Model creator screen"
 msgstr "Layar pembuat model"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
-#: data/com.jeffser.Alpaca.metainfo.xml.in:116
-#: data/com.jeffser.Alpaca.metainfo.xml.in:142
-#: data/com.jeffser.Alpaca.metainfo.xml.in:157
-#: data/com.jeffser.Alpaca.metainfo.xml.in:182
-#: data/com.jeffser.Alpaca.metainfo.xml.in:210
-#: data/com.jeffser.Alpaca.metainfo.xml.in:220
-#: data/com.jeffser.Alpaca.metainfo.xml.in:231
-#: data/com.jeffser.Alpaca.metainfo.xml.in:245
-#: data/com.jeffser.Alpaca.metainfo.xml.in:257
-#: data/com.jeffser.Alpaca.metainfo.xml.in:273
-#: data/com.jeffser.Alpaca.metainfo.xml.in:288
-#: data/com.jeffser.Alpaca.metainfo.xml.in:323
-#: data/com.jeffser.Alpaca.metainfo.xml.in:348
-#: data/com.jeffser.Alpaca.metainfo.xml.in:379
-#: data/com.jeffser.Alpaca.metainfo.xml.in:405
-#: data/com.jeffser.Alpaca.metainfo.xml.in:427
-#: data/com.jeffser.Alpaca.metainfo.xml.in:458
-#: data/com.jeffser.Alpaca.metainfo.xml.in:480
-#: data/com.jeffser.Alpaca.metainfo.xml.in:501
-#: data/com.jeffser.Alpaca.metainfo.xml.in:516
-#: data/com.jeffser.Alpaca.metainfo.xml.in:541
+#: data/com.jeffser.Alpaca.metainfo.xml.in:123
+#: data/com.jeffser.Alpaca.metainfo.xml.in:143
+#: data/com.jeffser.Alpaca.metainfo.xml.in:169
+#: data/com.jeffser.Alpaca.metainfo.xml.in:184
+#: data/com.jeffser.Alpaca.metainfo.xml.in:209
+#: data/com.jeffser.Alpaca.metainfo.xml.in:237
+#: data/com.jeffser.Alpaca.metainfo.xml.in:247
+#: data/com.jeffser.Alpaca.metainfo.xml.in:258
+#: data/com.jeffser.Alpaca.metainfo.xml.in:272
+#: data/com.jeffser.Alpaca.metainfo.xml.in:284
+#: data/com.jeffser.Alpaca.metainfo.xml.in:300
+#: data/com.jeffser.Alpaca.metainfo.xml.in:315
+#: data/com.jeffser.Alpaca.metainfo.xml.in:350
+#: data/com.jeffser.Alpaca.metainfo.xml.in:375
+#: data/com.jeffser.Alpaca.metainfo.xml.in:406
+#: data/com.jeffser.Alpaca.metainfo.xml.in:432
+#: data/com.jeffser.Alpaca.metainfo.xml.in:454
+#: data/com.jeffser.Alpaca.metainfo.xml.in:485
+#: data/com.jeffser.Alpaca.metainfo.xml.in:507
+#: data/com.jeffser.Alpaca.metainfo.xml.in:528
+#: data/com.jeffser.Alpaca.metainfo.xml.in:543
+#: data/com.jeffser.Alpaca.metainfo.xml.in:568
 msgid "New"
 msgstr "Baru"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
-msgid "New model manager"
-msgstr "Manajer model baru"
+msgid "New instance manager"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
-msgid "Changed GtkSpinner to AdwSpinner"
-msgstr "Mengubah GtkSpinner menjadi AdwSpinner"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:100
-msgid "Better handling of launch process"
-msgstr "Penanganan proses peluncuran yang lebih baik"
+msgid "New welcome screen"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
-msgid "New loading screen at launch"
-msgstr "Layar pemuatan baru saat peluncuran"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:102
-msgid "Better handling of file types"
-msgstr "Penanganan jenis file yang lebih baik"
+msgid "New Instances"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
-msgid "Better regex expression for LaTeX equations"
-msgstr "Ekspresi regex yang lebih baik untuk persamaan LaTeX"
+msgid "OpenAI ChatGPT"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
-msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
-msgstr "Dialog konfirmasi jika pengguna menutup Alpaca saat model sedang diunduh"
+msgid "Google Gemini"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
-msgid "Better handling of think tags in messages"
-msgstr "Penanganan tag 'think' dalam pesan yang lebih baik"
+msgid "Together AI"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
-msgid "Default model is now in charge of generating titles"
-msgstr "Model default sekarang bertanggung jawab untuk menghasilkan judul"
+msgid "Venice"
+msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:107
-msgid "Message header is now shown whilst the message is being generated"
-msgstr "Header pesan sekarang ditampilkan saat pesan sedang dibuat"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:108
-msgid "Better handling of model profile pictures"
-msgstr "Penanganan gambar profil model yang lebih baik"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:109
-msgid "New models in 'available models' list"
-msgstr "Model baru dalam daftar 'model yang tersedia'"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:118
-msgid "Added option for attaching screenshots"
-msgstr "Menambahkan opsi untuk melampirkan tangkapan layar"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:119
-msgid "Basic LaTeX math equations are now rendered in messages"
-msgstr "Persamaan matematika LaTeX dasar sekarang dirender dalam pesan"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:120
-msgid "HTML and C++ scripts can now be run inside Alpaca"
-msgstr "Skrip HTML dan C++ sekarang dapat dijalankan di dalam Alpaca"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:121
-msgid "Added option to open the environment directory from the terminal"
-msgstr "Menambahkan opsi untuk membuka direktori lingkungan dari terminal"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:122
-msgid "Added option to edit code blocks directly"
-msgstr "Menambahkan opsi untuk mengedit blok kode secara langsung"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:123
-msgid "Complete keyboard shortcut list"
-msgstr "Daftar pintasan keyboard lengkap"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:124
-msgid "Images are now attached in 640p resolution"
-msgstr "Gambar sekarang dilampirkan dalam resolusi 640p"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:125
-msgid "Website attachments now use extracted titles"
-msgstr "Lampiran situs web sekarang menggunakan judul yang diekstrak"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:126
-msgid "Better chat title generation"
-msgstr "Pembuatan judul percakapan yang lebih baik"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:127
-msgid "Added option to attach any plain text files"
-msgstr "Menambahkan opsi untuk melampirkan file teks biasa"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:128
-msgid "Added spellchecker to message entry"
-msgstr "Menambahkan pemeriksa ejaan pada kolom pesan"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:129
-msgid "Alpaca's parameters are now stored using SQLite3"
-msgstr "Parameter Alpaca sekarang disimpan menggunakan SQLite3"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:130
-msgid "Small appearance changes in text entries"
-msgstr "Perubahan kecil pada tampilan entri teks"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:132
-#: data/com.jeffser.Alpaca.metainfo.xml.in:163
-#: data/com.jeffser.Alpaca.metainfo.xml.in:172
-#: data/com.jeffser.Alpaca.metainfo.xml.in:235
-#: data/com.jeffser.Alpaca.metainfo.xml.in:263
-#: data/com.jeffser.Alpaca.metainfo.xml.in:277
-#: data/com.jeffser.Alpaca.metainfo.xml.in:294
-#: data/com.jeffser.Alpaca.metainfo.xml.in:305
-#: data/com.jeffser.Alpaca.metainfo.xml.in:314
-#: data/com.jeffser.Alpaca.metainfo.xml.in:331
+#: data/com.jeffser.Alpaca.metainfo.xml.in:113
+#: data/com.jeffser.Alpaca.metainfo.xml.in:159
+#: data/com.jeffser.Alpaca.metainfo.xml.in:190
+#: data/com.jeffser.Alpaca.metainfo.xml.in:199
+#: data/com.jeffser.Alpaca.metainfo.xml.in:262
+#: data/com.jeffser.Alpaca.metainfo.xml.in:290
+#: data/com.jeffser.Alpaca.metainfo.xml.in:304
+#: data/com.jeffser.Alpaca.metainfo.xml.in:321
+#: data/com.jeffser.Alpaca.metainfo.xml.in:332
 #: data/com.jeffser.Alpaca.metainfo.xml.in:341
 #: data/com.jeffser.Alpaca.metainfo.xml.in:358
 #: data/com.jeffser.Alpaca.metainfo.xml.in:368
-#: data/com.jeffser.Alpaca.metainfo.xml.in:415
-#: data/com.jeffser.Alpaca.metainfo.xml.in:440
-#: data/com.jeffser.Alpaca.metainfo.xml.in:465
-#: data/com.jeffser.Alpaca.metainfo.xml.in:487
-#: data/com.jeffser.Alpaca.metainfo.xml.in:505
-#: data/com.jeffser.Alpaca.metainfo.xml.in:523
-#: data/com.jeffser.Alpaca.metainfo.xml.in:535
-#: data/com.jeffser.Alpaca.metainfo.xml.in:551
+#: data/com.jeffser.Alpaca.metainfo.xml.in:385
+#: data/com.jeffser.Alpaca.metainfo.xml.in:395
+#: data/com.jeffser.Alpaca.metainfo.xml.in:442
+#: data/com.jeffser.Alpaca.metainfo.xml.in:467
+#: data/com.jeffser.Alpaca.metainfo.xml.in:492
+#: data/com.jeffser.Alpaca.metainfo.xml.in:514
+#: data/com.jeffser.Alpaca.metainfo.xml.in:532
+#: data/com.jeffser.Alpaca.metainfo.xml.in:550
+#: data/com.jeffser.Alpaca.metainfo.xml.in:562
+#: data/com.jeffser.Alpaca.metainfo.xml.in:578
 msgid "Fixes"
 msgstr "Perbaikan"
 
+#: data/com.jeffser.Alpaca.metainfo.xml.in:115
+msgid "Exporting chats with 'thoughts' attachment is fixed"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:116
+msgid "Fixed attachment filters"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:125
+msgid "New model manager"
+msgstr "Manajer model baru"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:126
+msgid "Changed GtkSpinner to AdwSpinner"
+msgstr "Mengubah GtkSpinner menjadi AdwSpinner"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:127
+msgid "Better handling of launch process"
+msgstr "Penanganan proses peluncuran yang lebih baik"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:128
+msgid "New loading screen at launch"
+msgstr "Layar pemuatan baru saat peluncuran"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:129
+msgid "Better handling of file types"
+msgstr "Penanganan jenis file yang lebih baik"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:130
+msgid "Better regex expression for LaTeX equations"
+msgstr "Ekspresi regex yang lebih baik untuk persamaan LaTeX"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:131
+msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
+msgstr ""
+"Dialog konfirmasi jika pengguna menutup Alpaca saat model sedang diunduh"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:132
+msgid "Better handling of think tags in messages"
+msgstr "Penanganan tag 'think' dalam pesan yang lebih baik"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:133
+msgid "Default model is now in charge of generating titles"
+msgstr "Model default sekarang bertanggung jawab untuk menghasilkan judul"
+
 #: data/com.jeffser.Alpaca.metainfo.xml.in:134
+msgid "Message header is now shown whilst the message is being generated"
+msgstr "Header pesan sekarang ditampilkan saat pesan sedang dibuat"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:135
+msgid "Better handling of model profile pictures"
+msgstr "Penanganan gambar profil model yang lebih baik"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:136
+msgid "New models in 'available models' list"
+msgstr "Model baru dalam daftar 'model yang tersedia'"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:145
+msgid "Added option for attaching screenshots"
+msgstr "Menambahkan opsi untuk melampirkan tangkapan layar"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:146
+msgid "Basic LaTeX math equations are now rendered in messages"
+msgstr "Persamaan matematika LaTeX dasar sekarang dirender dalam pesan"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:147
+msgid "HTML and C++ scripts can now be run inside Alpaca"
+msgstr "Skrip HTML dan C++ sekarang dapat dijalankan di dalam Alpaca"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:148
+msgid "Added option to open the environment directory from the terminal"
+msgstr "Menambahkan opsi untuk membuka direktori lingkungan dari terminal"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:149
+msgid "Added option to edit code blocks directly"
+msgstr "Menambahkan opsi untuk mengedit blok kode secara langsung"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:150
+msgid "Complete keyboard shortcut list"
+msgstr "Daftar pintasan keyboard lengkap"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:151
+msgid "Images are now attached in 640p resolution"
+msgstr "Gambar sekarang dilampirkan dalam resolusi 640p"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:152
+msgid "Website attachments now use extracted titles"
+msgstr "Lampiran situs web sekarang menggunakan judul yang diekstrak"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:153
+msgid "Better chat title generation"
+msgstr "Pembuatan judul percakapan yang lebih baik"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:154
+msgid "Added option to attach any plain text files"
+msgstr "Menambahkan opsi untuk melampirkan file teks biasa"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:155
+msgid "Added spellchecker to message entry"
+msgstr "Menambahkan pemeriksa ejaan pada kolom pesan"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:156
+msgid "Alpaca's parameters are now stored using SQLite3"
+msgstr "Parameter Alpaca sekarang disimpan menggunakan SQLite3"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:157
+msgid "Small appearance changes in text entries"
+msgstr "Perubahan kecil pada tampilan entri teks"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:161
 msgid "Alpaca's launch process is more reliable"
 msgstr "Proses peluncuran Alpaca lebih andal"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:135
+#: data/com.jeffser.Alpaca.metainfo.xml.in:162
 msgid "Closing the terminal now kills the script subprocess"
 msgstr "Menutup terminal sekarang akan menghentikan subproses skrip"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:144
+#: data/com.jeffser.Alpaca.metainfo.xml.in:171
 msgid "Transitioned chat backend from JSON to SQLite3"
 msgstr "Backend percakapan beralih dari JSON ke SQLite3"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:145
+#: data/com.jeffser.Alpaca.metainfo.xml.in:172
 msgid "Changed appearance of messages"
 msgstr "Mengubah tampilan pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:146
+#: data/com.jeffser.Alpaca.metainfo.xml.in:173
 msgid "Added the option to add profile pictures to models"
 msgstr "Menambahkan opsi untuk menambahkan gambar profil ke model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:148
-#: data/com.jeffser.Alpaca.metainfo.xml.in:620
-#: data/com.jeffser.Alpaca.metainfo.xml.in:669
+#: data/com.jeffser.Alpaca.metainfo.xml.in:175
+#: data/com.jeffser.Alpaca.metainfo.xml.in:647
+#: data/com.jeffser.Alpaca.metainfo.xml.in:696
 msgid "Fix"
 msgstr "Perbaikan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:150
+#: data/com.jeffser.Alpaca.metainfo.xml.in:177
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
 msgstr "Mengubah override HIP_VISIBLE_DEVICES menjadi ROCR_VISIBLE_DEVICES"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:159
+#: data/com.jeffser.Alpaca.metainfo.xml.in:186
 msgid "Added categories to models"
 msgstr "Menambahkan kategori ke model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:160
+#: data/com.jeffser.Alpaca.metainfo.xml.in:187
 msgid "Specified model's languages"
 msgstr "Menentukan bahasa model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:161
+#: data/com.jeffser.Alpaca.metainfo.xml.in:188
 msgid "Added warning when downloading embedding models"
 msgstr "Menambahkan peringatan saat mengunduh model embedding"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:165
+#: data/com.jeffser.Alpaca.metainfo.xml.in:192
 msgid "Replaced low ram warning with big model warning"
 msgstr "Mengganti peringatan RAM rendah dengan peringatan model besar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:174
+#: data/com.jeffser.Alpaca.metainfo.xml.in:201
 msgid "Correctly escape markup before rendering message"
 msgstr "Melakukan escape markup dengan benar sebelum merender pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:175
+#: data/com.jeffser.Alpaca.metainfo.xml.in:202
 msgid "Fixed about dialog not working if log file was missing"
 msgstr "Memperbaiki dialog 'Tentang' yang tidak berfungsi jika file log hilang"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:184
+#: data/com.jeffser.Alpaca.metainfo.xml.in:211
 msgid "System messages can now be sent directly from Alpaca"
 msgstr "Pesan sistem sekarang dapat dikirim langsung dari Alpaca"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:185
+#: data/com.jeffser.Alpaca.metainfo.xml.in:212
 msgid "New redesign for messages and smaller minimum size"
 msgstr "Desain ulang pesan baru dan ukuran minimum yang lebih kecil"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:186
+#: data/com.jeffser.Alpaca.metainfo.xml.in:213
 msgid "New models included in 'available models list'"
 msgstr "Model baru ditambahkan ke dalam daftar 'model yang tersedia'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:187
+#: data/com.jeffser.Alpaca.metainfo.xml.in:214
 msgid "Added symbolic icon when attaching code files"
 msgstr "Menambahkan ikon simbolis saat melampirkan file kode"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:188
+#: data/com.jeffser.Alpaca.metainfo.xml.in:215
 msgid "When exporting a chat it now includes a markdown file"
 msgstr "Saat mengekspor percakapan, sekarang disertakan file markdown"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:189
+#: data/com.jeffser.Alpaca.metainfo.xml.in:216
 msgid "Refresh button in model manager when using a remote instance"
-msgstr "Tombol segarkan di pengelola model saat menggunakan instance jarak jauh"
+msgstr ""
+"Tombol segarkan di pengelola model saat menggunakan instance jarak jauh"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:190
+#: data/com.jeffser.Alpaca.metainfo.xml.in:217
 msgid "Assistant messages are now editable"
 msgstr "Pesan asisten sekarang dapat diedit"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:191
+#: data/com.jeffser.Alpaca.metainfo.xml.in:218
 msgid "Updated Ollama to v0.5.2"
 msgstr "Memperbarui Ollama ke versi 0.5.2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:192
+#: data/com.jeffser.Alpaca.metainfo.xml.in:219
 msgid "New option to change model directory"
 msgstr "Opsi baru untuk mengubah direktori model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:193
+#: data/com.jeffser.Alpaca.metainfo.xml.in:220
 msgid "File previewer now resizes dynamically to content"
-msgstr "Pratinjau file sekarang menyesuaikan ukuran secara dinamis dengan konten"
+msgstr ""
+"Pratinjau file sekarang menyesuaikan ukuran secara dinamis dengan konten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:194
+#: data/com.jeffser.Alpaca.metainfo.xml.in:221
 msgid "Adapted Alpaca to work without integrated Ollama instance"
-msgstr "Menyesuaikan Alpaca agar dapat berfungsi tanpa instance Ollama terintegrasi"
+msgstr ""
+"Menyesuaikan Alpaca agar dapat berfungsi tanpa instance Ollama terintegrasi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:195
+#: data/com.jeffser.Alpaca.metainfo.xml.in:222
 msgid "Compatibility added with ODT files"
 msgstr "Menambahkan kompatibilitas dengan file ODT"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:198
+#: data/com.jeffser.Alpaca.metainfo.xml.in:225
 msgid "Restored ROCm compatibility"
 msgstr "Mengembalikan kompatibilitas ROCm"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:199
-msgid "Added long press gesture to chat rows so actions can be done in touchscreens"
-msgstr "Menambahkan gerakan tekan lama pada baris percakapan agar tindakan dapat dilakukan di layar sentuh"
+#: data/com.jeffser.Alpaca.metainfo.xml.in:226
+msgid ""
+"Added long press gesture to chat rows so actions can be done in touchscreens"
+msgstr ""
+"Menambahkan gerakan tekan lama pada baris percakapan agar tindakan dapat "
+"dilakukan di layar sentuh"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:200
+#: data/com.jeffser.Alpaca.metainfo.xml.in:227
 msgid "Fixed edit button not saving changes"
 msgstr "Memperbaiki tombol edit yang tidak menyimpan perubahan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:201
+#: data/com.jeffser.Alpaca.metainfo.xml.in:228
 msgid "Changed max temperature value to 2"
 msgstr "Mengubah nilai suhu maksimum menjadi 2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:202
+#: data/com.jeffser.Alpaca.metainfo.xml.in:229
 msgid "Made seed 0 actually random"
 msgstr "Membuat seed 0 benar-benar acak"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:203
-msgid "Fixed Gnome search provider not working outside of Flatpak installations"
-msgstr "Memperbaiki penyedia pencarian Gnome yang tidak berfungsi di luar instalasi Flatpak"
+#: data/com.jeffser.Alpaca.metainfo.xml.in:230
+msgid ""
+"Fixed Gnome search provider not working outside of Flatpak installations"
+msgstr ""
+"Memperbaiki penyedia pencarian Gnome yang tidak berfungsi di luar instalasi "
+"Flatpak"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:212
+#: data/com.jeffser.Alpaca.metainfo.xml.in:239
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
 msgstr "Opsi baru --ask MESSAGE, untuk membuka jendela 'Tanya Cepat' baru"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:213
+#: data/com.jeffser.Alpaca.metainfo.xml.in:240
 msgid "Gnome Search integration now works whilst the app is opened"
 msgstr "Integrasi Pencarian Gnome sekarang berfungsi saat aplikasi dibuka"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:222
+#: data/com.jeffser.Alpaca.metainfo.xml.in:249
 msgid ""
-"Added launch parameters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
+"Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
 "--list-chats, --version"
-msgstr "Menambahkan parameter peluncuran --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, --list-chats, --version"
+msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:223
+#: data/com.jeffser.Alpaca.metainfo.xml.in:250
 msgid "Added integration as Gnome Search Provider"
 msgstr "Menambahkan integrasi sebagai Penyedia Pencarian Gnome"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:224
+#: data/com.jeffser.Alpaca.metainfo.xml.in:251
 msgid "Updated Ollama to v0.4.2 with new models"
 msgstr "Memperbarui Ollama ke versi 0.4.2 dengan model baru"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:233
+#: data/com.jeffser.Alpaca.metainfo.xml.in:260
 msgid "User messages are now compacted into bubbles"
 msgstr "Pesan pengguna sekarang dikompresi dalam bentuk gelembung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:237
+#: data/com.jeffser.Alpaca.metainfo.xml.in:264
 msgid ""
 "Fixed re connection dialog not working when 'use local instance' is selected"
-msgstr "Memperbaiki dialog penyambungan ulang yang tidak berfungsi saat 'gunakan instance lokal' dipilih"
+msgstr ""
+"Memperbaiki dialog penyambungan ulang yang tidak berfungsi saat 'gunakan "
+"instance lokal' dipilih"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:238
+#: data/com.jeffser.Alpaca.metainfo.xml.in:265
 msgid "Fixed model manager not adapting to large system fonts"
-msgstr "Memperbaiki pengelola model yang tidak menyesuaikan dengan font sistem yang besar"
+msgstr ""
+"Memperbaiki pengelola model yang tidak menyesuaikan dengan font sistem yang "
+"besar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:247
+#: data/com.jeffser.Alpaca.metainfo.xml.in:274
 msgid "Details page for models"
 msgstr "Halaman detail untuk model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:248
+#: data/com.jeffser.Alpaca.metainfo.xml.in:275
 msgid ""
 "Model selector gets replaced with 'manage models' button when there are no "
 "models downloaded"
-msgstr "Pemilih model akan digantikan dengan tombol 'kelola model' saat tidak ada model yang diunduh"
+msgstr ""
+"Pemilih model akan digantikan dengan tombol 'kelola model' saat tidak ada "
+"model yang diunduh"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:249
+#: data/com.jeffser.Alpaca.metainfo.xml.in:276
 msgid "Added warning when model is too big for the device"
 msgstr "Menambahkan peringatan saat model terlalu besar untuk perangkat"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:250
+#: data/com.jeffser.Alpaca.metainfo.xml.in:277
 msgid "Added AMD GPU indicator in preferences"
 msgstr "Menambahkan indikator GPU AMD di pengaturan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:259
+#: data/com.jeffser.Alpaca.metainfo.xml.in:286
 msgid "Better system for handling dialogs"
 msgstr "Sistem yang lebih baik untuk menangani dialog"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:260
+#: data/com.jeffser.Alpaca.metainfo.xml.in:287
 msgid "Better system for handling instance switching"
 msgstr "Sistem yang lebih baik untuk menangani pergantian instance"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:261
+#: data/com.jeffser.Alpaca.metainfo.xml.in:288
 msgid "Remote connection dialog"
 msgstr "Dialog koneksi jarak jauh"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:265
+#: data/com.jeffser.Alpaca.metainfo.xml.in:292
 msgid "Fixed: Models get duplicated when switching remote and local instance"
-msgstr "Memperbaiki: Model menjadi duplikat saat beralih antara instance jarak jauh dan lokal"
+msgstr ""
+"Memperbaiki: Model menjadi duplikat saat beralih antara instance jarak jauh "
+"dan lokal"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:266
+#: data/com.jeffser.Alpaca.metainfo.xml.in:293
 msgid "Better internal instance manager"
 msgstr "Pengelola instance internal yang lebih baik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:275
+#: data/com.jeffser.Alpaca.metainfo.xml.in:302
 msgid "Added 'Cancel' and 'Save' buttons when editing a message"
 msgstr "Menambahkan tombol 'Batal' dan 'Simpan' saat mengedit pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:279
+#: data/com.jeffser.Alpaca.metainfo.xml.in:306
 msgid "Better handling of image recognition"
 msgstr "Penanganan pengenalan gambar yang lebih baik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:280
+#: data/com.jeffser.Alpaca.metainfo.xml.in:307
 msgid "Remove unused files when canceling a model download"
 msgstr "Menghapus file yang tidak terpakai saat membatalkan unduhan model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:281
+#: data/com.jeffser.Alpaca.metainfo.xml.in:308
 msgid "Better message blocks rendering"
 msgstr "Perenderan blok pesan yang lebih baik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:290
+#: data/com.jeffser.Alpaca.metainfo.xml.in:317
 msgid "Run bash and python scripts straight from chat"
 msgstr "Menjalankan skrip bash dan python langsung dari percakapan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:291
+#: data/com.jeffser.Alpaca.metainfo.xml.in:318
 msgid "Updated Ollama to 0.3.12"
 msgstr "Memperbarui Ollama ke versi 0.3.12"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:292
+#: data/com.jeffser.Alpaca.metainfo.xml.in:319
 msgid "New models!"
 msgstr "Model baru!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:296
+#: data/com.jeffser.Alpaca.metainfo.xml.in:323
 msgid "Fixed and made faster the launch sequence"
 msgstr "Memperbaiki dan mempercepat urutan peluncuran"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:297
+#: data/com.jeffser.Alpaca.metainfo.xml.in:324
 msgid "Better detection of code blocks in messages"
 msgstr "Pendeteksian blok kode dalam pesan yang lebih baik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:298
+#: data/com.jeffser.Alpaca.metainfo.xml.in:325
 msgid "Fixed app not loading in certain setups with Nvidia GPUs"
-msgstr "Memperbaiki aplikasi yang tidak bisa dimuat pada beberapa konfigurasi dengan GPU Nvidia"
+msgstr ""
+"Memperbaiki aplikasi yang tidak bisa dimuat pada beberapa konfigurasi dengan "
+"GPU Nvidia"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:307
+#: data/com.jeffser.Alpaca.metainfo.xml.in:334
 msgid ""
 "Fixed message notification sometimes crashing text rendering because of them "
 "running on different threads"
-msgstr "Memperbaiki notifikasi pesan yang terkadang menyebabkan render teks macet karena berjalan di thread yang berbeda"
+msgstr ""
+"Memperbaiki notifikasi pesan yang terkadang menyebabkan render teks macet "
+"karena berjalan di thread yang berbeda"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:316
+#: data/com.jeffser.Alpaca.metainfo.xml.in:343
 msgid "Fixed message generation sometimes failing"
 msgstr "Memperbaiki kegagalan dalam menghasilkan pesan secara acak"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:325
+#: data/com.jeffser.Alpaca.metainfo.xml.in:352
 msgid "Sidebar resizes with the window"
 msgstr "Sidebar menyesuaikan ukuran dengan jendela"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:326
+#: data/com.jeffser.Alpaca.metainfo.xml.in:353
 msgid "New welcome dialog"
 msgstr "Dialog sambutan baru"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:327
+#: data/com.jeffser.Alpaca.metainfo.xml.in:354
 msgid "Message search"
 msgstr "Pencarian pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:328
+#: data/com.jeffser.Alpaca.metainfo.xml.in:355
 msgid "Updated Ollama to v0.3.11"
 msgstr "Memperbarui Ollama ke versi 0.3.11"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:329
+#: data/com.jeffser.Alpaca.metainfo.xml.in:356
 msgid "A lot of new models provided by Ollama repository"
 msgstr "Banyak model baru yang disediakan oleh repositori Ollama"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:333
+#: data/com.jeffser.Alpaca.metainfo.xml.in:360
 msgid ""
 "Fixed text inside model manager when the accessibility option 'large text' "
 "is on"
-msgstr "Memperbaiki teks di dalam pengelola model saat opsi aksesibilitas 'teks besar' diaktifkan"
+msgstr ""
+"Memperbaiki teks di dalam pengelola model saat opsi aksesibilitas 'teks "
+"besar' diaktifkan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:334
+#: data/com.jeffser.Alpaca.metainfo.xml.in:361
 msgid "Fixed image recognition on unsupported models"
 msgstr "Memperbaiki pengenalan gambar pada model yang tidak didukung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:343
+#: data/com.jeffser.Alpaca.metainfo.xml.in:370
 msgid "Fixed spinner not hiding if the back end fails"
 msgstr "Memperbaiki spinner yang tidak menghilang jika backend gagal"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:344
+#: data/com.jeffser.Alpaca.metainfo.xml.in:371
 msgid "Fixed image recognition with local images"
 msgstr "Memperbaiki pengenalan gambar dengan gambar lokal"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:345
+#: data/com.jeffser.Alpaca.metainfo.xml.in:372
 msgid "Changed appearance of delete / stop model buttons"
 msgstr "Mengubah tampilan tombol hapus / hentikan model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:346
+#: data/com.jeffser.Alpaca.metainfo.xml.in:373
 msgid "Fixed stop button crashing the app"
 msgstr "Memperbaiki tombol berhenti yang menyebabkan aplikasi macet"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:350
+#: data/com.jeffser.Alpaca.metainfo.xml.in:377
 msgid "Made sidebar resize a little when the window is smaller"
 msgstr "Membuat sidebar menyesuaikan sedikit saat jendela lebih kecil"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:351
+#: data/com.jeffser.Alpaca.metainfo.xml.in:378
 msgid "Instant launch"
 msgstr "Peluncuran instan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:360
+#: data/com.jeffser.Alpaca.metainfo.xml.in:387
 msgid "Fixed error on first run (welcome dialog)"
 msgstr "Memperbaiki kesalahan saat pertama kali dijalankan (dialog sambutan)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:361
+#: data/com.jeffser.Alpaca.metainfo.xml.in:388
 msgid "Fixed checker for Ollama instance (used on system packages)"
 msgstr "Memperbaiki pemeriksa instance Ollama (digunakan pada paket sistem)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:370
+#: data/com.jeffser.Alpaca.metainfo.xml.in:397
 msgid "Fixed 'clear chat' option"
 msgstr "Memperbaiki opsi 'hapus obrolan'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:371
+#: data/com.jeffser.Alpaca.metainfo.xml.in:398
 msgid "Fixed welcome dialog causing the local instance to not launch"
-msgstr "Memperbaiki dialog sambutan yang menyebabkan instance lokal tidak dapat diluncurkan"
+msgstr ""
+"Memperbaiki dialog sambutan yang menyebabkan instance lokal tidak dapat "
+"diluncurkan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:372
+#: data/com.jeffser.Alpaca.metainfo.xml.in:399
 msgid "Fixed support for AMD GPUs"
 msgstr "Memperbaiki dukungan untuk GPU AMD"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:381
+#: data/com.jeffser.Alpaca.metainfo.xml.in:408
 msgid "Model, message and chat systems have been rewritten"
 msgstr "Sistem model, pesan, dan obrolan telah ditulis ulang"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:382
+#: data/com.jeffser.Alpaca.metainfo.xml.in:409
 msgid "New models are available"
 msgstr "Model baru tersedia"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:383
+#: data/com.jeffser.Alpaca.metainfo.xml.in:410
 msgid "Ollama updated to v0.3.9"
 msgstr "Ollama diperbarui ke versi 0.3.9"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:384
+#: data/com.jeffser.Alpaca.metainfo.xml.in:411
 msgid "Added support for multiple chat generations simultaneously"
-msgstr "Menambahkan dukungan untuk menghasilkan beberapa obrolan secara bersamaan"
+msgstr ""
+"Menambahkan dukungan untuk menghasilkan beberapa obrolan secara bersamaan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:385
+#: data/com.jeffser.Alpaca.metainfo.xml.in:412
 msgid "Added experimental AMD GPU support"
 msgstr "Menambahkan dukungan eksperimental untuk GPU AMD"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:386
+#: data/com.jeffser.Alpaca.metainfo.xml.in:413
 msgid "Added message loading spinner and new message indicator to chat tab"
-msgstr "Menambahkan pemintal pemuatan pesan dan indikator pesan baru ke tab obrolan"
+msgstr ""
+"Menambahkan pemintal pemuatan pesan dan indikator pesan baru ke tab obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:387
+#: data/com.jeffser.Alpaca.metainfo.xml.in:414
 msgid "Added animations"
 msgstr "Menambahkan animasi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:388
+#: data/com.jeffser.Alpaca.metainfo.xml.in:415
 msgid "Changed model manager / model selector appearance"
 msgstr "Mengubah tampilan pengelola model / pemilih model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:389
+#: data/com.jeffser.Alpaca.metainfo.xml.in:416
 msgid "Changed message appearance"
 msgstr "Mengubah tampilan pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:390
+#: data/com.jeffser.Alpaca.metainfo.xml.in:417
 msgid "Added markdown and code blocks to user messages"
 msgstr "Menambahkan markdown dan blok kode ke pesan pengguna"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:391
+#: data/com.jeffser.Alpaca.metainfo.xml.in:418
 msgid "Added loading dialog at launch so the app opens faster"
-msgstr "Menambahkan dialog pemuatan saat peluncuran agar aplikasi terbuka lebih cepat"
+msgstr ""
+"Menambahkan dialog pemuatan saat peluncuran agar aplikasi terbuka lebih cepat"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:392
+#: data/com.jeffser.Alpaca.metainfo.xml.in:419
 msgid "Added warning when device is on 'battery saver' mode"
 msgstr "Menambahkan peringatan saat perangkat dalam mode 'penghemat baterai'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:393
+#: data/com.jeffser.Alpaca.metainfo.xml.in:420
 msgid "Added inactivity timer to integrated instance"
 msgstr "Menambahkan pengatur waktu ketidakaktifan ke instance terintegrasi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:396
+#: data/com.jeffser.Alpaca.metainfo.xml.in:423
 msgid "The chat is now scrolled to the bottom when it's changed"
 msgstr "Obrolan sekarang menggulir ke bawah saat diubah"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:397
+#: data/com.jeffser.Alpaca.metainfo.xml.in:424
 msgid "Better handling of focus on messages"
 msgstr "Penanganan fokus pada pesan yang lebih baik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:398
+#: data/com.jeffser.Alpaca.metainfo.xml.in:425
 msgid "Better general performance on the app"
 msgstr "Kinerja umum aplikasi yang lebih baik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:407
+#: data/com.jeffser.Alpaca.metainfo.xml.in:434
 msgid "New duplicate chat option"
 msgstr "Opsi duplikasi obrolan baru"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:408
+#: data/com.jeffser.Alpaca.metainfo.xml.in:435
 msgid "Changed model selector appearance"
 msgstr "Mengubah tampilan pemilih model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:409
+#: data/com.jeffser.Alpaca.metainfo.xml.in:436
 msgid "Message entry is focused on launch and chat change"
 msgstr "Kolom entri pesan difokuskan saat peluncuran dan perubahan obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:410
+#: data/com.jeffser.Alpaca.metainfo.xml.in:437
 msgid "Message is focused when it's being edited"
 msgstr "Pesan difokuskan saat sedang diedit"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:411
+#: data/com.jeffser.Alpaca.metainfo.xml.in:438
 msgid "Added loading spinner when regenerating a message"
 msgstr "Menambahkan pemintal pemuatan saat meregenerasi pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:412
+#: data/com.jeffser.Alpaca.metainfo.xml.in:439
 msgid "Added Ollama debugging to 'About Alpaca' dialog"
 msgstr "Menambahkan fitur debug Ollama ke dialog 'Tentang Alpaca'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:413
+#: data/com.jeffser.Alpaca.metainfo.xml.in:440
 msgid "Changed YouTube transcription dialog appearance and behavior"
 msgstr "Mengubah tampilan dan perilaku dialog transkripsi YouTube"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:417
+#: data/com.jeffser.Alpaca.metainfo.xml.in:444
 msgid "CTRL+W and CTRL+Q stops local instance before closing the app"
 msgstr "CTRL+W dan CTRL+Q menghentikan instance lokal sebelum menutup aplikasi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:418
+#: data/com.jeffser.Alpaca.metainfo.xml.in:445
 msgid "Changed appearance of 'Open Model Manager' button on welcome screen"
 msgstr "Mengubah tampilan tombol 'Buka Pengelola Model' di layar sambutan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:419
+#: data/com.jeffser.Alpaca.metainfo.xml.in:446
 msgid "Fixed message generation not working consistently"
 msgstr "Memperbaiki pembuatan pesan yang tidak bekerja secara konsisten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:420
+#: data/com.jeffser.Alpaca.metainfo.xml.in:447
 msgid "Fixed message edition not working consistently"
 msgstr "Memperbaiki penyuntingan pesan yang tidak bekerja secara konsisten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:429
+#: data/com.jeffser.Alpaca.metainfo.xml.in:456
 msgid "Model manager opens faster"
 msgstr "Pengelola model terbuka lebih cepat"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:430
+#: data/com.jeffser.Alpaca.metainfo.xml.in:457
 msgid "Delete chat option in secondary menu"
 msgstr "Opsi hapus obrolan di menu sekunder"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:431
+#: data/com.jeffser.Alpaca.metainfo.xml.in:458
 msgid "New model selector popup"
 msgstr "Popup pemilih model baru"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:432
+#: data/com.jeffser.Alpaca.metainfo.xml.in:459
 msgid "Standard shortcuts"
 msgstr "Pintasan standar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:433
+#: data/com.jeffser.Alpaca.metainfo.xml.in:460
 msgid "Model manager is navigable with keyboard"
 msgstr "Pengelola model dapat dinavigasi dengan keyboard"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:434
+#: data/com.jeffser.Alpaca.metainfo.xml.in:461
 msgid "Changed sidebar collapsing behavior"
 msgstr "Mengubah perilaku penyusutan sidebar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:435
+#: data/com.jeffser.Alpaca.metainfo.xml.in:462
 msgid "Focus indicators on messages"
 msgstr "Indikator fokus pada pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:436
+#: data/com.jeffser.Alpaca.metainfo.xml.in:463
 msgid "Welcome screen"
 msgstr "Layar sambutan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:437
+#: data/com.jeffser.Alpaca.metainfo.xml.in:464
 msgid "Give message entry focus at launch"
 msgstr "Memberikan fokus pada kolom entri pesan saat peluncuran"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:438
+#: data/com.jeffser.Alpaca.metainfo.xml.in:465
 msgid "Generally better code"
 msgstr "Kode yang lebih baik secara umum"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:442
+#: data/com.jeffser.Alpaca.metainfo.xml.in:469
 msgid "Better width for dialogs"
 msgstr "Lebar dialog yang lebih baik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:443
+#: data/com.jeffser.Alpaca.metainfo.xml.in:470
 msgid "Better compatibility with screen readers"
 msgstr "Kompatibilitas yang lebih baik dengan pembaca layar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:444
+#: data/com.jeffser.Alpaca.metainfo.xml.in:471
 msgid "Fixed message regenerator"
 msgstr "Memperbaiki regenerasi pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:445
+#: data/com.jeffser.Alpaca.metainfo.xml.in:472
 msgid "Removed 'Featured models' from welcome dialog"
 msgstr "Menghapus 'Model unggulan' dari dialog sambutan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:446
+#: data/com.jeffser.Alpaca.metainfo.xml.in:473
 msgid "Added default buttons to dialogs"
 msgstr "Menambahkan tombol default ke dialog"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:447
+#: data/com.jeffser.Alpaca.metainfo.xml.in:474
 msgid "Fixed import / export of chats"
 msgstr "Memperbaiki impor / ekspor obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:448
+#: data/com.jeffser.Alpaca.metainfo.xml.in:475
 msgid "Changed Python2 title to Python on code blocks"
 msgstr "Mengubah judul Python2 menjadi Python pada blok kode"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:449
-msgid "Prevent regeneration of title when the user changed it to a custom title"
+#: data/com.jeffser.Alpaca.metainfo.xml.in:476
+msgid ""
+"Prevent regeneration of title when the user changed it to a custom title"
 msgstr "Mencegah regenerasi judul saat pengguna mengubahnya ke judul kustom"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:450
+#: data/com.jeffser.Alpaca.metainfo.xml.in:477
 msgid "Show date on stopped messages"
 msgstr "Menampilkan tanggal pada pesan yang dihentikan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:451
+#: data/com.jeffser.Alpaca.metainfo.xml.in:478
 msgid "Fix clear chat error"
 msgstr "Memperbaiki kesalahan saat menghapus obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:460
+#: data/com.jeffser.Alpaca.metainfo.xml.in:487
 msgid "Changed shortcuts to standards"
 msgstr "Mengubah pintasan ke standar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:461
+#: data/com.jeffser.Alpaca.metainfo.xml.in:488
 msgid "Moved 'Manage Models' button to primary menu"
 msgstr "Memindahkan tombol 'Kelola Model' ke menu utama"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:462
-#: data/com.jeffser.Alpaca.metainfo.xml.in:484
+#: data/com.jeffser.Alpaca.metainfo.xml.in:489
+#: data/com.jeffser.Alpaca.metainfo.xml.in:511
 msgid "Stable support for GGUF model files"
 msgstr "Dukungan stabil untuk file model GGUF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:463
-#: data/com.jeffser.Alpaca.metainfo.xml.in:738
+#: data/com.jeffser.Alpaca.metainfo.xml.in:490
+#: data/com.jeffser.Alpaca.metainfo.xml.in:765
 msgid "General optimizations"
 msgstr "Optimasi umum"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:467
+#: data/com.jeffser.Alpaca.metainfo.xml.in:494
 msgid "Better handling of enter key (important for Japanese input)"
-msgstr "Penanganan tombol enter yang lebih baik (penting untuk input bahasa Jepang)"
+msgstr ""
+"Penanganan tombol enter yang lebih baik (penting untuk input bahasa Jepang)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:468
+#: data/com.jeffser.Alpaca.metainfo.xml.in:495
 msgid "Removed sponsor dialog"
 msgstr "Menghapus dialog sponsor"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:469
+#: data/com.jeffser.Alpaca.metainfo.xml.in:496
 msgid "Added sponsor link in about dialog"
 msgstr "Menambahkan tautan sponsor di dialog tentang"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:470
+#: data/com.jeffser.Alpaca.metainfo.xml.in:497
 msgid "Changed window and elements dimensions"
 msgstr "Mengubah dimensi jendela dan elemen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:471
+#: data/com.jeffser.Alpaca.metainfo.xml.in:498
 msgid "Selected model changes when entering model manager"
 msgstr "Model yang dipilih berubah saat memasuki pengelola model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:472
+#: data/com.jeffser.Alpaca.metainfo.xml.in:499
 msgid "Better image tooltips"
 msgstr "Tooltip gambar yang lebih baik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:473
+#: data/com.jeffser.Alpaca.metainfo.xml.in:500
 msgid "GGUF Support"
 msgstr "Dukungan GGUF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:482
+#: data/com.jeffser.Alpaca.metainfo.xml.in:509
 msgid "Regenerate any response, even if they are incomplete"
 msgstr "Regenerasi respon apa pun, meskipun tidak lengkap"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:483
+#: data/com.jeffser.Alpaca.metainfo.xml.in:510
 msgid "Support for pulling models by name:tag"
 msgstr "Dukungan untuk menarik model berdasarkan nama:tag"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:485
+#: data/com.jeffser.Alpaca.metainfo.xml.in:512
 msgid "Restored sidebar toggle button"
 msgstr "Mengembalikan tombol toggle sidebar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:489
+#: data/com.jeffser.Alpaca.metainfo.xml.in:516
 msgid "Reverted back to standard styles"
 msgstr "Kembali ke gaya standar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:490
+#: data/com.jeffser.Alpaca.metainfo.xml.in:517
 msgid "Fixed generated titles having \"'S\" for some reason"
-msgstr "Memperbaiki judul yang dihasilkan memiliki \"'S\" karena alasan tertentu"
+msgstr ""
+"Memperbaiki judul yang dihasilkan memiliki \"'S\" karena alasan tertentu"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:491
+#: data/com.jeffser.Alpaca.metainfo.xml.in:518
 msgid "Changed min width for model dropdown"
 msgstr "Mengubah lebar minimum untuk dropdown model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:492
+#: data/com.jeffser.Alpaca.metainfo.xml.in:519
 msgid "Changed message entry shadow"
 msgstr "Mengubah bayangan entri pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:493
+#: data/com.jeffser.Alpaca.metainfo.xml.in:520
 msgid "The last model used is now restored when the user changes chat"
-msgstr "Model terakhir yang digunakan sekarang dipulihkan ketika pengguna mengubah obrolan"
+msgstr ""
+"Model terakhir yang digunakan sekarang dipulihkan ketika pengguna mengubah "
+"obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:494
+#: data/com.jeffser.Alpaca.metainfo.xml.in:521
 msgid "Better check for message finishing"
 msgstr "Pemeriksaan yang lebih baik untuk menyelesaikan pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:503
+#: data/com.jeffser.Alpaca.metainfo.xml.in:530
 msgid "Added table rendering (Thanks Nokse)"
 msgstr "Menambahkan render tabel (Terima kasih Nokse)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:507
+#: data/com.jeffser.Alpaca.metainfo.xml.in:534
 msgid "Made support dialog more common"
 msgstr "Membuat dialog dukungan lebih umum"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:508
-msgid "Dialog title on tag chooser when downloading models didn't display properly"
-msgstr "Judul dialog pada pemilih tag saat mengunduh model tidak ditampilkan dengan benar"
+#: data/com.jeffser.Alpaca.metainfo.xml.in:535
+msgid ""
+"Dialog title on tag chooser when downloading models didn't display properly"
+msgstr ""
+"Judul dialog pada pemilih tag saat mengunduh model tidak ditampilkan dengan "
+"benar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:509
+#: data/com.jeffser.Alpaca.metainfo.xml.in:536
 msgid "Prevent chat generation from generating a title with multiple lines"
 msgstr "Mencegah generasi obrolan menghasilkan judul dengan beberapa baris"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:518
+#: data/com.jeffser.Alpaca.metainfo.xml.in:545
 msgid "Bearer Token entry on connection error dialog"
 msgstr "Entri Token Pembawa pada dialog kesalahan koneksi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:519
+#: data/com.jeffser.Alpaca.metainfo.xml.in:546
 msgid "Small appearance changes"
 msgstr "Perubahan tampilan kecil"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:520
+#: data/com.jeffser.Alpaca.metainfo.xml.in:547
 msgid "Compatibility with code blocks without explicit language"
 msgstr "Kompatibilitas dengan blok kode tanpa bahasa eksplisit"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:521
+#: data/com.jeffser.Alpaca.metainfo.xml.in:548
 msgid "Rare, optional and dismissible support dialog"
 msgstr "Dialog dukungan yang jarang, opsional, dan dapat diabaikan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:525
+#: data/com.jeffser.Alpaca.metainfo.xml.in:552
 msgid "Date format for Simplified Chinese translation"
 msgstr "Format tanggal untuk terjemahan Bahasa Mandarin Sederhana"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:526
+#: data/com.jeffser.Alpaca.metainfo.xml.in:553
 msgid "Bug with unsupported localizations"
 msgstr "Bug dengan lokalasi yang tidak didukung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:527
+#: data/com.jeffser.Alpaca.metainfo.xml.in:554
 msgid "Min height being too large to be used on mobile"
 msgstr "Tinggi minimum terlalu besar untuk digunakan di perangkat mobile"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:528
+#: data/com.jeffser.Alpaca.metainfo.xml.in:555
 msgid "Remote connection checker bug"
 msgstr "Bug pemeriksa koneksi jarak jauh"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:537
+#: data/com.jeffser.Alpaca.metainfo.xml.in:564
 msgid "Models with capital letters on their tag don't work"
 msgstr "Model dengan huruf kapital pada tag mereka tidak berfungsi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:538
+#: data/com.jeffser.Alpaca.metainfo.xml.in:565
 msgid "Ollama fails to launch on some systems"
 msgstr "Ollama gagal diluncurkan di beberapa sistem"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:539
+#: data/com.jeffser.Alpaca.metainfo.xml.in:566
 msgid "YouTube transcripts are not being saved in the right TMP directory"
 msgstr "Transkrip YouTube tidak disimpan di direktori TMP yang tepat"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:543
+#: data/com.jeffser.Alpaca.metainfo.xml.in:570
 msgid "Debug messages are now shown on the 'About Alpaca' dialog"
 msgstr "Pesan debug sekarang ditampilkan di dialog 'Tentang Alpaca'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:544
+#: data/com.jeffser.Alpaca.metainfo.xml.in:571
 msgid "Updated Ollama to v0.3.0 (new models)"
 msgstr "Memperbarui Ollama ke v0.3.0 (model baru)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:553
+#: data/com.jeffser.Alpaca.metainfo.xml.in:580
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
-msgstr "Model dengan '-' dalam nama mereka tidak berfungsi dengan benar, ini sekarang telah diperbaiki"
+msgstr ""
+"Model dengan '-' dalam nama mereka tidak berfungsi dengan benar, ini "
+"sekarang telah diperbaiki"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:554
+#: data/com.jeffser.Alpaca.metainfo.xml.in:581
 msgid "Better connection check for Ollama"
 msgstr "Pemeriksaan koneksi yang lebih baik untuk Ollama"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:561
+#: data/com.jeffser.Alpaca.metainfo.xml.in:588
 msgid "Stable Release"
 msgstr "Rilis Stabil"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:562
+#: data/com.jeffser.Alpaca.metainfo.xml.in:589
 msgid ""
 "The new icon was made by Tobias Bernard over the Gnome Gitlab, thanks for "
 "the great icon!"
 msgstr ""
-"Ikon baru dibuat oleh Tobias Bernard di Gnome Gitlab, terima kasih atas "
-"ikon yang luar biasa!"
+"Ikon baru dibuat oleh Tobias Bernard di Gnome Gitlab, terima kasih atas ikon "
+"yang luar biasa!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:563
+#: data/com.jeffser.Alpaca.metainfo.xml.in:590
 msgid "Features and fixes"
 msgstr "Fitur dan perbaikan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:565
+#: data/com.jeffser.Alpaca.metainfo.xml.in:592
 msgid "Updated Ollama instance to 0.2.8"
 msgstr "Memperbarui instansi Ollama ke 0.2.8"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:566
+#: data/com.jeffser.Alpaca.metainfo.xml.in:593
 msgid "Better model selector"
 msgstr "Pemilih model yang lebih baik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:567
+#: data/com.jeffser.Alpaca.metainfo.xml.in:594
 msgid "Model manager redesign"
 msgstr "Desain ulang pengelola model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:568
+#: data/com.jeffser.Alpaca.metainfo.xml.in:595
 msgid "Better tag selector when pulling a model"
 msgstr "Pemilih tag yang lebih baik saat menarik model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:569
+#: data/com.jeffser.Alpaca.metainfo.xml.in:596
 msgid "Model search"
 msgstr "Pencarian model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:570
+#: data/com.jeffser.Alpaca.metainfo.xml.in:597
 msgid "Added support for bearer tokens on remote instances"
 msgstr "Menambahkan dukungan untuk token pembawa pada instansi jarak jauh"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:571
+#: data/com.jeffser.Alpaca.metainfo.xml.in:598
 msgid "Preferences dialog redesign"
 msgstr "Desain ulang dialog preferensi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:572
+#: data/com.jeffser.Alpaca.metainfo.xml.in:599
 msgid "Added context menus to interact with a chat"
 msgstr "Menambahkan menu konteks untuk berinteraksi dengan obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:573
+#: data/com.jeffser.Alpaca.metainfo.xml.in:600
 msgid "Redesigned primary and secondary menus"
 msgstr "Desain ulang menu utama dan sekunder"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:574
+#: data/com.jeffser.Alpaca.metainfo.xml.in:601
 msgid ""
 "YouTube integration: Paste the URL of a video with a transcript and it will "
 "be added to the prompt"
@@ -1000,852 +1081,846 @@ msgstr ""
 "Integrasi YouTube: Tempelkan URL video dengan transkrip dan itu akan "
 "ditambahkan ke prompt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:575
+#: data/com.jeffser.Alpaca.metainfo.xml.in:602
 msgid ""
 "Website integration (Experimental): Extract the text from the body of a "
 "website by adding it's URL to the prompt"
 msgstr ""
-"Integrasi situs web (Eksperimental): Ekstrak teks dari badan situs web dengan menambahkan URL-nya ke dalam prompt"
+"Integrasi situs web (Eksperimental): Ekstrak teks dari badan situs web "
+"dengan menambahkan URL-nya ke dalam prompt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:576
+#: data/com.jeffser.Alpaca.metainfo.xml.in:603
 msgid "Chat title generation"
 msgstr "Pembuatan judul obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:577
+#: data/com.jeffser.Alpaca.metainfo.xml.in:604
 msgid "Auto resizing of message entry"
 msgstr "Penyusuaian ukuran entri pesan secara otomatis"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:578
+#: data/com.jeffser.Alpaca.metainfo.xml.in:605
 msgid "Chat notifications"
 msgstr "Pemberitahuan obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:579
+#: data/com.jeffser.Alpaca.metainfo.xml.in:606
 msgid "Added indicator when an image is missing"
 msgstr "Menambahkan indikator saat gambar hilang"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:580
+#: data/com.jeffser.Alpaca.metainfo.xml.in:607
 msgid "Auto rearrange the order of chats when a message is received"
 msgstr "Menyusun ulang urutan obrolan secara otomatis saat pesan diterima"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:581
+#: data/com.jeffser.Alpaca.metainfo.xml.in:608
 msgid "Redesigned file preview dialog"
 msgstr "Desain ulang dialog pratinjau file"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:582
+#: data/com.jeffser.Alpaca.metainfo.xml.in:609
 msgid "Credited new contributors"
 msgstr "Memberikan kredit kepada kontributor baru"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:583
+#: data/com.jeffser.Alpaca.metainfo.xml.in:610
 msgid "Better stability and optimization"
 msgstr "Stabilitas dan optimisasi yang lebih baik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:584
+#: data/com.jeffser.Alpaca.metainfo.xml.in:611
 msgid "Edit messages to change the context of a conversation"
 msgstr "Edit pesan untuk mengubah konteks obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:585
+#: data/com.jeffser.Alpaca.metainfo.xml.in:612
 msgid "Added disclaimers when pulling models"
 msgstr "Menambahkan penafian saat menarik model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:586
+#: data/com.jeffser.Alpaca.metainfo.xml.in:613
 msgid "Preview files before sending a message"
 msgstr "Pratinjau file sebelum mengirim pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:587
+#: data/com.jeffser.Alpaca.metainfo.xml.in:614
 msgid "Better format for date and time on messages"
 msgstr "Format yang lebih baik untuk tanggal dan waktu pada pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:588
+#: data/com.jeffser.Alpaca.metainfo.xml.in:615
 msgid "Error and debug logging on terminal"
 msgstr "Pencatatan error dan debug di terminal"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:589
+#: data/com.jeffser.Alpaca.metainfo.xml.in:616
 msgid "Auto-hiding sidebar button"
 msgstr "Tombol sidebar yang disembunyikan secara otomatis"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:590
+#: data/com.jeffser.Alpaca.metainfo.xml.in:617
 msgid "Various UI tweaks"
 msgstr "Berbagai penyesuaian UI"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:592
+#: data/com.jeffser.Alpaca.metainfo.xml.in:619
 msgid "New Models"
 msgstr "Model Baru"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:594
+#: data/com.jeffser.Alpaca.metainfo.xml.in:621
 msgid "Gemma2"
 msgstr "Gemma2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:595
+#: data/com.jeffser.Alpaca.metainfo.xml.in:622
 msgid "GLM4"
 msgstr "GLM4"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:596
+#: data/com.jeffser.Alpaca.metainfo.xml.in:623
 msgid "Codegeex4"
 msgstr "Codegeex4"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:597
+#: data/com.jeffser.Alpaca.metainfo.xml.in:624
 msgid "InternLM2"
 msgstr "InternLM2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:598
+#: data/com.jeffser.Alpaca.metainfo.xml.in:625
 msgid "Llama3-groq-tool-use"
 msgstr "Llama3-groq-tool-use"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:599
+#: data/com.jeffser.Alpaca.metainfo.xml.in:626
 msgid "Mathstral"
 msgstr "Mathstral"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:600
+#: data/com.jeffser.Alpaca.metainfo.xml.in:627
 msgid "Mistral-nemo"
 msgstr "Mistral-nemo"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:601
+#: data/com.jeffser.Alpaca.metainfo.xml.in:628
 msgid "Firefunction-v2"
 msgstr "Firefunction-v2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:602
+#: data/com.jeffser.Alpaca.metainfo.xml.in:629
 msgid "Nuextract"
 msgstr "Nuextract"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:604
+#: data/com.jeffser.Alpaca.metainfo.xml.in:631
 msgid "Translations"
 msgstr "Terjemahan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:605
+#: data/com.jeffser.Alpaca.metainfo.xml.in:632
 msgid ""
 "These are all the available translations on 1.0.0, thanks to all the "
 "contributors!"
 msgstr ""
-"Ini adalah semua terjemahan yang tersedia pada versi 1.0.0, terima kasih kepada semua kontributor!"
+"Ini adalah semua terjemahan yang tersedia pada versi 1.0.0, terima kasih "
+"kepada semua kontributor!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:607
+#: data/com.jeffser.Alpaca.metainfo.xml.in:634
 msgid "Russian: Alex K"
 msgstr "Rusia: Alex K"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:608
+#: data/com.jeffser.Alpaca.metainfo.xml.in:635
 msgid "Spanish: Jeffser"
 msgstr "Spanyol: Jeffser"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:609
+#: data/com.jeffser.Alpaca.metainfo.xml.in:636
 msgid "Brazilian Portuguese: Daimar Stein"
 msgstr "Portugis Brasil: Daimar Stein"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:610
+#: data/com.jeffser.Alpaca.metainfo.xml.in:637
 msgid "French: Louis Chauvet-Villaret"
 msgstr "Prancis: Louis Chauvet-Villaret"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:611
+#: data/com.jeffser.Alpaca.metainfo.xml.in:638
 msgid "Norwegian: CounterFlow64"
 msgstr "Norwegia: CounterFlow64"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:612
+#: data/com.jeffser.Alpaca.metainfo.xml.in:639
 msgid "Bengali: Aritra Saha"
 msgstr "Bengali: Aritra Saha"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:613
+#: data/com.jeffser.Alpaca.metainfo.xml.in:640
 msgid "Simplified Chinese: Yuehao Sui"
 msgstr "Mandarin Sederhana: Yuehao Sui"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:621
+#: data/com.jeffser.Alpaca.metainfo.xml.in:648
 msgid ""
-"Removed DOCX compatibility temporarily due to error with python-lxml "
+"Removed DOCX compatibility temporally due to error with python-lxml "
 "dependency"
 msgstr ""
-"Kompatibilitas DOCX dihapus sementara karena kesalahan pada ketergantungan python-lxml"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:627
-#: data/com.jeffser.Alpaca.metainfo.xml.in:657
-#: data/com.jeffser.Alpaca.metainfo.xml.in:678
-#: data/com.jeffser.Alpaca.metainfo.xml.in:883
-#: data/com.jeffser.Alpaca.metainfo.xml.in:940
+#: data/com.jeffser.Alpaca.metainfo.xml.in:654
+#: data/com.jeffser.Alpaca.metainfo.xml.in:684
+#: data/com.jeffser.Alpaca.metainfo.xml.in:705
+#: data/com.jeffser.Alpaca.metainfo.xml.in:910
+#: data/com.jeffser.Alpaca.metainfo.xml.in:967
 msgid "Big Update"
 msgstr "Pembaruan Besar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:629
+#: data/com.jeffser.Alpaca.metainfo.xml.in:656
 msgid "Added compatibility for PDF"
 msgstr "Menambahkan kompatibilitas untuk PDF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:630
+#: data/com.jeffser.Alpaca.metainfo.xml.in:657
 msgid "Added compatibility for DOCX"
 msgstr "Menambahkan kompatibilitas untuk DOCX"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:631
+#: data/com.jeffser.Alpaca.metainfo.xml.in:658
 msgid "Merged 'file attachment' menu into one button"
 msgstr "Menggabungkan menu 'lampiran file' menjadi satu tombol"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:638
-#: data/com.jeffser.Alpaca.metainfo.xml.in:831
+#: data/com.jeffser.Alpaca.metainfo.xml.in:665
+#: data/com.jeffser.Alpaca.metainfo.xml.in:858
 msgid "Quick Fix"
 msgstr "Perbaikan Cepat"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:639
+#: data/com.jeffser.Alpaca.metainfo.xml.in:666
 msgid ""
 "There were some errors when transitioning from the old version of chats to "
 "the new version. I apologize if this caused any corruption in your chat "
 "history. This should be the only time such a transition is needed."
 msgstr ""
-"Ada beberapa kesalahan saat beralih dari versi lama obrolan ke versi baru. Saya mohon maaf jika ini menyebabkan kerusakan pada riwayat obrolan Anda. Ini seharusnya menjadi satu-satunya kali transisi seperti ini diperlukan."
+"Ada beberapa kesalahan saat beralih dari versi lama obrolan ke versi baru. "
+"Saya mohon maaf jika ini menyebabkan kerusakan pada riwayat obrolan Anda. "
+"Ini seharusnya menjadi satu-satunya kali transisi seperti ini diperlukan."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:645
-#: data/com.jeffser.Alpaca.metainfo.xml.in:797
+#: data/com.jeffser.Alpaca.metainfo.xml.in:672
+#: data/com.jeffser.Alpaca.metainfo.xml.in:824
 msgid "Huge Update"
 msgstr "Pembaruan Besar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:647
+#: data/com.jeffser.Alpaca.metainfo.xml.in:674
 msgid "Added: Support for plain text files"
 msgstr "Ditambahkan: Dukungan untuk file teks biasa"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:648
+#: data/com.jeffser.Alpaca.metainfo.xml.in:675
 msgid "Added: New backend system for storing messages"
 msgstr "Ditambahkan: Sistem backend baru untuk menyimpan pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:649
+#: data/com.jeffser.Alpaca.metainfo.xml.in:676
 msgid "Added: Support for changing Ollama's overrides"
 msgstr "Ditambahkan: Dukungan untuk mengubah override Ollama"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:650
+#: data/com.jeffser.Alpaca.metainfo.xml.in:677
 msgid "General Optimization"
 msgstr "Optimisasi Umum"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:659
+#: data/com.jeffser.Alpaca.metainfo.xml.in:686
 msgid "Added: Support for GGUF models (experimental)"
 msgstr "Ditambahkan: Dukungan untuk model GGUF (eksperimental)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:660
+#: data/com.jeffser.Alpaca.metainfo.xml.in:687
 msgid "Added: Support for customization and creation of models"
 msgstr "Ditambahkan: Dukungan untuk kustomisasi dan pembuatan model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:661
+#: data/com.jeffser.Alpaca.metainfo.xml.in:688
 msgid "Fixed: Icons don't appear on non Gnome systems"
 msgstr "Diperbaiki: Ikon tidak muncul pada sistem non-Gnome"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:662
+#: data/com.jeffser.Alpaca.metainfo.xml.in:689
 msgid "Update Ollama to v0.1.39"
 msgstr "Perbarui Ollama ke v0.1.39"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:671
+#: data/com.jeffser.Alpaca.metainfo.xml.in:698
 msgid ""
 "Fixed: app didn't open if models tweaks wasn't present in the config files"
 msgstr ""
-"Diperbaiki: aplikasi tidak terbuka jika perubahan model tidak ada dalam file konfigurasi"
+"Diperbaiki: aplikasi tidak terbuka jika perubahan model tidak ada dalam file "
+"konfigurasi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:680
+#: data/com.jeffser.Alpaca.metainfo.xml.in:707
 msgid "Changed multiple icons (paper airplane for the send button)"
 msgstr "Mengubah beberapa ikon (pesawat kertas untuk tombol kirim)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:681
+#: data/com.jeffser.Alpaca.metainfo.xml.in:708
 msgid "Combined export / import chat buttons into a menu"
 msgstr "Menggabungkan tombol ekspor / impor obrolan ke dalam menu"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:682
+#: data/com.jeffser.Alpaca.metainfo.xml.in:709
 msgid "Added 'model tweaks' (temperature, seed, keep_alive)"
 msgstr "Ditambahkan 'penyesuaian model' (suhu, benih, keep_alive)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:683
+#: data/com.jeffser.Alpaca.metainfo.xml.in:710
 msgid "Fixed send / stop button"
 msgstr "Diperbaiki tombol kirim / berhenti"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:684
+#: data/com.jeffser.Alpaca.metainfo.xml.in:711
 msgid "Fixed app not checking if remote connection works when starting"
-msgstr "Diperbaiki aplikasi tidak memeriksa apakah koneksi jarak jauh berfungsi saat memulai"
+msgstr ""
+"Diperbaiki aplikasi tidak memeriksa apakah koneksi jarak jauh berfungsi saat "
+"memulai"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:691
+#: data/com.jeffser.Alpaca.metainfo.xml.in:718
 msgid "Daily Update"
 msgstr "Pembaruan Harian"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:693
+#: data/com.jeffser.Alpaca.metainfo.xml.in:720
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
-msgstr "Ditambahkan elipsis teks pada nama obrolan agar tidak mengubah lebar tombol"
+msgstr ""
+"Ditambahkan elipsis teks pada nama obrolan agar tidak mengubah lebar tombol"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:694
+#: data/com.jeffser.Alpaca.metainfo.xml.in:721
 msgid "New shortcut for creating a chat (CTRL+N)"
 msgstr "Pintasan baru untuk membuat obrolan (CTRL+N)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:695
+#: data/com.jeffser.Alpaca.metainfo.xml.in:722
 msgid "New message entry design"
 msgstr "Desain entri pesan baru"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:696
+#: data/com.jeffser.Alpaca.metainfo.xml.in:723
 msgid "Fixed: Can't rename the same chat multiple times"
 msgstr "Diperbaiki: Tidak bisa mengganti nama obrolan yang sama beberapa kali"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:703
+#: data/com.jeffser.Alpaca.metainfo.xml.in:730
 msgid "The fix"
 msgstr "Perbaikannya"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:705
+#: data/com.jeffser.Alpaca.metainfo.xml.in:732
 msgid ""
 "Fixed: Ollama instance keeps running on the background even when it is "
 "disabled"
 msgstr ""
-"Diperbaiki: Instansi Ollama terus berjalan di latar belakang meskipun dinonaktifkan"
+"Diperbaiki: Instansi Ollama terus berjalan di latar belakang meskipun "
+"dinonaktifkan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:706
+#: data/com.jeffser.Alpaca.metainfo.xml.in:733
 msgid "Fixed: Can't pull models on the integrated instance"
 msgstr "Diperbaiki: Tidak bisa menarik model pada instansi terintegrasi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:713
+#: data/com.jeffser.Alpaca.metainfo.xml.in:740
 msgid "Quick tweaks"
 msgstr "Penyesuaian Cepat"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:715
+#: data/com.jeffser.Alpaca.metainfo.xml.in:742
 msgid "Added progress bar to models that are being pulled"
 msgstr "Ditambahkan bilah progres untuk model yang sedang ditarik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:716
+#: data/com.jeffser.Alpaca.metainfo.xml.in:743
 msgid "Added size to tags when pulling a model"
 msgstr "Ditambahkan ukuran pada tag saat menarik model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:717
+#: data/com.jeffser.Alpaca.metainfo.xml.in:744
 msgid "General optimizations on the background"
 msgstr "Optimisasi umum di latar belakang"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:724
+#: data/com.jeffser.Alpaca.metainfo.xml.in:751
 msgid "Quick fixes"
 msgstr "Perbaikan Cepat"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:726
+#: data/com.jeffser.Alpaca.metainfo.xml.in:753
 msgid "Fixed: Scroll when message is received"
 msgstr "Diperbaiki: Gulir saat pesan diterima"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:727
+#: data/com.jeffser.Alpaca.metainfo.xml.in:754
 msgid "Fixed: Content doesn't change when creating a new chat"
 msgstr "Diperbaiki: Konten tidak berubah saat membuat obrolan baru"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:728
+#: data/com.jeffser.Alpaca.metainfo.xml.in:755
 msgid "Added 'Featured Models' page on welcome dialog"
 msgstr "Ditambahkan halaman 'Model Unggulan' pada dialog sambutan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:735
+#: data/com.jeffser.Alpaca.metainfo.xml.in:762
 msgid "Nice Update"
 msgstr "Pembaruan Menarik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:737
+#: data/com.jeffser.Alpaca.metainfo.xml.in:764
 msgid "UI tweaks (Thanks Nokse22)"
 msgstr "Penyesuaian UI (Terima kasih Nokse22)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:739
+#: data/com.jeffser.Alpaca.metainfo.xml.in:766
 msgid "Metadata fixes"
 msgstr "Perbaikan metadata"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:746
+#: data/com.jeffser.Alpaca.metainfo.xml.in:773
 msgid "Quick fix"
 msgstr "Perbaikan Cepat"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:748
+#: data/com.jeffser.Alpaca.metainfo.xml.in:775
 msgid "Updated Spanish translation"
 msgstr "Pembaruan terjemahan Spanyol"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:749
+#: data/com.jeffser.Alpaca.metainfo.xml.in:776
 msgid "Added compatibility for PNG"
 msgstr "Ditambahkan kompatibilitas untuk PNG"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:756
+#: data/com.jeffser.Alpaca.metainfo.xml.in:783
 msgid "New Update"
 msgstr "Pembaruan Baru"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:758
+#: data/com.jeffser.Alpaca.metainfo.xml.in:785
 msgid "Updated model list"
 msgstr "Daftar model diperbarui"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:759
+#: data/com.jeffser.Alpaca.metainfo.xml.in:786
 msgid "Added image recognition to more models"
 msgstr "Ditambahkan pengenalan gambar ke lebih banyak model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:760
+#: data/com.jeffser.Alpaca.metainfo.xml.in:787
 msgid "Added Brazilian Portuguese translation (Thanks Daimaar Stein)"
 msgstr "Ditambahkan terjemahan Portugis Brasil (Terima kasih Daimaar Stein)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:761
+#: data/com.jeffser.Alpaca.metainfo.xml.in:788
 msgid "Refined the general UI (Thanks Nokse22)"
 msgstr "Menyempurnakan UI secara umum (Terima kasih Nokse22)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:762
+#: data/com.jeffser.Alpaca.metainfo.xml.in:789
 msgid "Added 'delete message' feature"
 msgstr "Ditambahkan fitur 'hapus pesan'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:763
+#: data/com.jeffser.Alpaca.metainfo.xml.in:790
 msgid ""
 "Added metadata so that software distributors know that the app is compatible "
 "with mobile"
 msgstr ""
-"Ditambahkan metadata agar distributor perangkat lunak tahu bahwa aplikasi ini kompatibel dengan perangkat mobile"
+"Ditambahkan metadata agar distributor perangkat lunak tahu bahwa aplikasi "
+"ini kompatibel dengan perangkat mobile"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:764
+#: data/com.jeffser.Alpaca.metainfo.xml.in:791
 msgid ""
 "Changed 'send' shortcut to just the return/enter key (to add a new line use "
 "shift+return)"
 msgstr ""
-"Diubah pintasan 'kirim' hanya menjadi tombol return/enter (untuk menambahkan baris baru gunakan shift+return)"
+"Diubah pintasan 'kirim' hanya menjadi tombol return/enter (untuk menambahkan "
+"baris baru gunakan shift+return)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:771
+#: data/com.jeffser.Alpaca.metainfo.xml.in:798
 msgid "Bug Fixes"
 msgstr "Perbaikan Bug"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:773
+#: data/com.jeffser.Alpaca.metainfo.xml.in:800
 msgid "Fixed: Minor spelling mistake"
 msgstr "Diperbaiki: Kesalahan pengejaan minor"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:774
+#: data/com.jeffser.Alpaca.metainfo.xml.in:801
 msgid "Added 'mobile' as a supported form factor"
 msgstr "Ditambahkan 'mobile' sebagai faktor bentuk yang didukung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:775
+#: data/com.jeffser.Alpaca.metainfo.xml.in:802
 msgid "Fixed: 'Connection Error' dialog not working properly"
 msgstr "Diperbaiki: Dialog 'Error Koneksi' tidak berfungsi dengan benar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:776
+#: data/com.jeffser.Alpaca.metainfo.xml.in:803
 msgid "Fixed: App might freeze randomly on startup"
 msgstr "Diperbaiki: Aplikasi mungkin membeku secara acak saat startup"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:777
+#: data/com.jeffser.Alpaca.metainfo.xml.in:804
 msgid "Changed 'chats' label on sidebar for 'Alpaca'"
 msgstr "Diubah label 'obrolan' di sidebar menjadi 'Alpaca'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:784
+#: data/com.jeffser.Alpaca.metainfo.xml.in:811
 msgid "Cool Update"
 msgstr "Pembaruan Keren"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:786
+#: data/com.jeffser.Alpaca.metainfo.xml.in:813
 msgid "Better design for chat window"
 msgstr "Desain yang lebih baik untuk jendela obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:787
+#: data/com.jeffser.Alpaca.metainfo.xml.in:814
 msgid "Better design for chat sidebar"
 msgstr "Desain yang lebih baik untuk sidebar obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:788
+#: data/com.jeffser.Alpaca.metainfo.xml.in:815
 msgid "Fixed remote connections"
 msgstr "Diperbaiki koneksi jarak jauh"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:789
+#: data/com.jeffser.Alpaca.metainfo.xml.in:816
 msgid "Fixed Ollama restarting in loop"
 msgstr "Diperbaiki Ollama yang memulai ulang dalam loop"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:790
+#: data/com.jeffser.Alpaca.metainfo.xml.in:817
 msgid "Other cool backend stuff"
 msgstr "Hal keren lainnya di backend"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:799
+#: data/com.jeffser.Alpaca.metainfo.xml.in:826
 msgid "Added Ollama as part of Alpaca, Ollama will run in a sandbox"
-msgstr "Ditambahkan Ollama sebagai bagian dari Alpaca, Ollama akan berjalan di sandbox"
+msgstr ""
+"Ditambahkan Ollama sebagai bagian dari Alpaca, Ollama akan berjalan di "
+"sandbox"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:800
+#: data/com.jeffser.Alpaca.metainfo.xml.in:827
 msgid "Added option to connect to remote instances (how it worked before)"
-msgstr "Ditambahkan opsi untuk terhubung ke instance jarak jauh (seperti sebelumnya)"
+msgstr ""
+"Ditambahkan opsi untuk terhubung ke instance jarak jauh (seperti sebelumnya)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:801
+#: data/com.jeffser.Alpaca.metainfo.xml.in:828
 msgid "Added option to import and export chats"
 msgstr "Ditambahkan opsi untuk mengimpor dan mengekspor obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:802
+#: data/com.jeffser.Alpaca.metainfo.xml.in:829
 msgid "Added option to run Alpaca with Ollama in the background"
-msgstr "Ditambahkan opsi untuk menjalankan Alpaca dengan Ollama di latar belakang"
+msgstr ""
+"Ditambahkan opsi untuk menjalankan Alpaca dengan Ollama di latar belakang"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:803
+#: data/com.jeffser.Alpaca.metainfo.xml.in:830
 msgid "Added preferences dialog"
 msgstr "Ditambahkan dialog preferensi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:804
+#: data/com.jeffser.Alpaca.metainfo.xml.in:831
 msgid "Changed the welcome dialog"
 msgstr "Diubah dialog sambutan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:806
-#: data/com.jeffser.Alpaca.metainfo.xml.in:823
-#: data/com.jeffser.Alpaca.metainfo.xml.in:835
-#: data/com.jeffser.Alpaca.metainfo.xml.in:854
-#: data/com.jeffser.Alpaca.metainfo.xml.in:875
-#: data/com.jeffser.Alpaca.metainfo.xml.in:891
-#: data/com.jeffser.Alpaca.metainfo.xml.in:907
-#: data/com.jeffser.Alpaca.metainfo.xml.in:921
-#: data/com.jeffser.Alpaca.metainfo.xml.in:931
-#: data/com.jeffser.Alpaca.metainfo.xml.in:949
-#: data/com.jeffser.Alpaca.metainfo.xml.in:971
+#: data/com.jeffser.Alpaca.metainfo.xml.in:833
+#: data/com.jeffser.Alpaca.metainfo.xml.in:850
+#: data/com.jeffser.Alpaca.metainfo.xml.in:862
+#: data/com.jeffser.Alpaca.metainfo.xml.in:881
+#: data/com.jeffser.Alpaca.metainfo.xml.in:902
+#: data/com.jeffser.Alpaca.metainfo.xml.in:918
+#: data/com.jeffser.Alpaca.metainfo.xml.in:934
+#: data/com.jeffser.Alpaca.metainfo.xml.in:948
+#: data/com.jeffser.Alpaca.metainfo.xml.in:958
+#: data/com.jeffser.Alpaca.metainfo.xml.in:976
+#: data/com.jeffser.Alpaca.metainfo.xml.in:998
 msgid "Please report any errors to the issues page, thank you."
 msgstr "Silakan laporkan kesalahan apapun ke halaman masalah, terima kasih."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:814
+#: data/com.jeffser.Alpaca.metainfo.xml.in:841
 msgid "Yet Another Daily Update"
 msgstr "Pembaruan Harian Lainnya"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:816
+#: data/com.jeffser.Alpaca.metainfo.xml.in:843
 msgid "Added better UI for 'Manage Models' dialog"
 msgstr "Ditambahkan UI yang lebih baik untuk dialog 'Kelola Model'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:817
+#: data/com.jeffser.Alpaca.metainfo.xml.in:844
 msgid "Added better UI for the chat sidebar"
 msgstr "Ditambahkan UI yang lebih baik untuk sidebar obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:818
+#: data/com.jeffser.Alpaca.metainfo.xml.in:845
 msgid ""
 "Replaced model description with a button to open Ollama's website for the "
 "model"
 msgstr ""
-"Diganti deskripsi model dengan tombol untuk membuka situs web Ollama untuk model tersebut"
+"Diganti deskripsi model dengan tombol untuk membuka situs web Ollama untuk "
+"model tersebut"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:819
+#: data/com.jeffser.Alpaca.metainfo.xml.in:846
 msgid "Added myself to the credits as the spanish translator"
 msgstr "Menambahkan diri saya ke kredit sebagai penerjemah bahasa Spanyol"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:820
+#: data/com.jeffser.Alpaca.metainfo.xml.in:847
 msgid "Using XDG properly to get config folder"
 msgstr "Menggunakan XDG dengan benar untuk mendapatkan folder konfigurasi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:821
+#: data/com.jeffser.Alpaca.metainfo.xml.in:848
 msgid "Update for translations"
 msgstr "Pembaruan untuk terjemahan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:833
+#: data/com.jeffser.Alpaca.metainfo.xml.in:860
 msgid "The last update had some mistakes in the description of the update"
-msgstr "Pembaruan terakhir memiliki beberapa kesalahan dalam deskripsi pembaruan"
+msgstr ""
+"Pembaruan terakhir memiliki beberapa kesalahan dalam deskripsi pembaruan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:843
+#: data/com.jeffser.Alpaca.metainfo.xml.in:870
 msgid "Another Daily Update"
 msgstr "Pembaruan Harian Lainnya"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:845
+#: data/com.jeffser.Alpaca.metainfo.xml.in:872
 msgid "Added full Spanish translation"
 msgstr "Ditambahkan terjemahan lengkap bahasa Spanyol"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:846
+#: data/com.jeffser.Alpaca.metainfo.xml.in:873
 msgid "Added support for background pulling of multiple models"
-msgstr "Ditambahkan dukungan untuk pengambilan latar belakang dari beberapa model"
+msgstr ""
+"Ditambahkan dukungan untuk pengambilan latar belakang dari beberapa model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:847
+#: data/com.jeffser.Alpaca.metainfo.xml.in:874
 msgid "Added interrupt button"
 msgstr "Ditambahkan tombol interupsi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:848
+#: data/com.jeffser.Alpaca.metainfo.xml.in:875
 msgid "Added basic shortcuts"
 msgstr "Ditambahkan pintasan dasar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:849
+#: data/com.jeffser.Alpaca.metainfo.xml.in:876
 msgid "Better translation support"
 msgstr "Dukungan terjemahan yang lebih baik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:850
+#: data/com.jeffser.Alpaca.metainfo.xml.in:877
 msgid ""
 "User can now leave chat name empty when creating a new one, it will add a "
 "placeholder name"
 msgstr ""
-"Pengguna sekarang dapat membiarkan nama obrolan kosong saat membuat yang baru, akan ditambahkan nama pengganti"
+"Pengguna sekarang dapat membiarkan nama obrolan kosong saat membuat yang "
+"baru, akan ditambahkan nama pengganti"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:851
-msgid "Better scaling for different window sizes"
-msgstr "Skalabilitas yang lebih baik untuk ukuran jendela yang berbeda"
+#: data/com.jeffser.Alpaca.metainfo.xml.in:878
+msgid "Better scalling for different window sizes"
+msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:852
+#: data/com.jeffser.Alpaca.metainfo.xml.in:879
 msgid "Fixed: Can't close app if first time setup fails"
 msgstr "Diperbaiki: Tidak dapat menutup aplikasi jika pengaturan pertama gagal"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:862
+#: data/com.jeffser.Alpaca.metainfo.xml.in:889
 msgid "Really Big Update"
 msgstr "Pembaruan Besar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:864
+#: data/com.jeffser.Alpaca.metainfo.xml.in:891
 msgid "Added multiple chats support!"
 msgstr "Ditambahkan dukungan untuk beberapa obrolan!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:865
+#: data/com.jeffser.Alpaca.metainfo.xml.in:892
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
-msgstr "Ditambahkan dukungan Pango Markup (tebal, daftar, judul, subjudul, monospace)"
+msgstr ""
+"Ditambahkan dukungan Pango Markup (tebal, daftar, judul, subjudul, monospace)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:866
+#: data/com.jeffser.Alpaca.metainfo.xml.in:893
 msgid "Added autoscroll if the user is at the bottom of the chat"
 msgstr "Ditambahkan autoscroll jika pengguna berada di bagian bawah obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:867
+#: data/com.jeffser.Alpaca.metainfo.xml.in:894
 msgid "Added support for multiple tags on a single model"
 msgstr "Ditambahkan dukungan untuk beberapa tag pada satu model"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:868
+#: data/com.jeffser.Alpaca.metainfo.xml.in:895
 msgid "Added better model management dialog"
 msgstr "Ditambahkan dialog manajemen model yang lebih baik"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:869
+#: data/com.jeffser.Alpaca.metainfo.xml.in:896
 msgid "Added loading spinner when sending message"
 msgstr "Ditambahkan spinner pemuatan saat mengirim pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:870
+#: data/com.jeffser.Alpaca.metainfo.xml.in:897
 msgid "Added notifications if app is not active and a model pull finishes"
-msgstr "Ditambahkan notifikasi jika aplikasi tidak aktif dan pengambilan model selesai"
+msgstr ""
+"Ditambahkan notifikasi jika aplikasi tidak aktif dan pengambilan model "
+"selesai"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:871
+#: data/com.jeffser.Alpaca.metainfo.xml.in:898
 msgid "Added new symbolic icon"
 msgstr "Ditambahkan ikon simbolik baru"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:872
+#: data/com.jeffser.Alpaca.metainfo.xml.in:899
 msgid "Added frame to message textview widget"
 msgstr "Ditambahkan bingkai ke widget tampilan teks pesan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:873
+#: data/com.jeffser.Alpaca.metainfo.xml.in:900
 msgid "Fixed \"code blocks shouldn't be editable\""
 msgstr "Diperbaiki \"blok kode seharusnya tidak dapat diedit\""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:885
+#: data/com.jeffser.Alpaca.metainfo.xml.in:912
 msgid "Added code highlighting"
 msgstr "Ditambahkan penyorotan kode"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:886
+#: data/com.jeffser.Alpaca.metainfo.xml.in:913
 msgid "Added image recognition (llava model)"
 msgstr "Ditambahkan pengenalan gambar (model llava)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:887
+#: data/com.jeffser.Alpaca.metainfo.xml.in:914
 msgid "Added multiline prompt"
 msgstr "Ditambahkan prompt multiline"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:888
+#: data/com.jeffser.Alpaca.metainfo.xml.in:915
 msgid "Fixed some small bugs"
 msgstr "Diperbaiki beberapa bug kecil"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:889
+#: data/com.jeffser.Alpaca.metainfo.xml.in:916
 msgid "General optimization"
 msgstr "Optimisasi umum"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:899
+#: data/com.jeffser.Alpaca.metainfo.xml.in:926
 msgid "Fixes and features"
 msgstr "Perbaikan dan fitur"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:901
+#: data/com.jeffser.Alpaca.metainfo.xml.in:928
 msgid "Russian translation (thanks github/alexkdeveloper)"
 msgstr "Terjemahan Rusia (terima kasih github/alexkdeveloper)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:902
+#: data/com.jeffser.Alpaca.metainfo.xml.in:929
 msgid "Fixed: Cannot close app on first setup"
 msgstr "Diperbaiki: Tidak dapat menutup aplikasi pada pengaturan pertama"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:903
+#: data/com.jeffser.Alpaca.metainfo.xml.in:930
 msgid "Fixed: Brand colors for Flathub"
 msgstr "Diperbaiki: Warna merek untuk Flathub"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:904
+#: data/com.jeffser.Alpaca.metainfo.xml.in:931
 msgid "Fixed: App description"
 msgstr "Diperbaiki: Deskripsi aplikasi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:905
+#: data/com.jeffser.Alpaca.metainfo.xml.in:932
 msgid "Fixed: Only show 'save changes dialog' when you actually change the url"
-msgstr "Diperbaiki: Hanya tampilkan dialog 'simpan perubahan' saat Anda benar-benar mengubah url"
+msgstr ""
+"Diperbaiki: Hanya tampilkan dialog 'simpan perubahan' saat Anda benar-benar "
+"mengubah url"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:915
+#: data/com.jeffser.Alpaca.metainfo.xml.in:942
 msgid "0.2.2 Bug fixes"
 msgstr "0.2.2 Perbaikan bug"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:917
+#: data/com.jeffser.Alpaca.metainfo.xml.in:944
 msgid "Toast messages appearing behind dialogs"
 msgstr "Pesan toast muncul di belakang dialog"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:918
+#: data/com.jeffser.Alpaca.metainfo.xml.in:945
 msgid "Local model list not updating when changing servers"
 msgstr "Daftar model lokal tidak terbarui saat mengganti server"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:919
+#: data/com.jeffser.Alpaca.metainfo.xml.in:946
 msgid "Closing the setup dialog closes the whole app"
 msgstr "Menutup dialog pengaturan menutup seluruh aplikasi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:929
+#: data/com.jeffser.Alpaca.metainfo.xml.in:956
 msgid "0.2.1 Data saving fix"
 msgstr "0.2.1 Perbaikan penyimpanan data"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:930
+#: data/com.jeffser.Alpaca.metainfo.xml.in:957
 msgid ""
 "The app didn't save the config files and chat history to the right "
 "directory, this is now fixed"
 msgstr ""
-"Aplikasi tidak menyimpan file konfigurasi dan riwayat obrolan ke direktori yang benar, ini sekarang diperbaiki"
+"Aplikasi tidak menyimpan file konfigurasi dan riwayat obrolan ke direktori "
+"yang benar, ini sekarang diperbaiki"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:939
+#: data/com.jeffser.Alpaca.metainfo.xml.in:966
 msgid "0.2.0"
 msgstr "0.2.0"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:941
+#: data/com.jeffser.Alpaca.metainfo.xml.in:968
 msgid "New Features"
 msgstr "Fitur Baru"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:943
+#: data/com.jeffser.Alpaca.metainfo.xml.in:970
 msgid "Restore chat after closing the app"
 msgstr "Pulihkan obrolan setelah menutup aplikasi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:944
+#: data/com.jeffser.Alpaca.metainfo.xml.in:971
 msgid "A button to clear the chat"
 msgstr "Tombol untuk membersihkan obrolan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:945
+#: data/com.jeffser.Alpaca.metainfo.xml.in:972
 msgid "Fixed multiple bugs involving how messages are shown"
 msgstr "Diperbaiki beberapa bug yang melibatkan cara pesan ditampilkan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:946
+#: data/com.jeffser.Alpaca.metainfo.xml.in:973
 msgid "Added welcome dialog"
 msgstr "Ditambahkan dialog sambutan"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:947
+#: data/com.jeffser.Alpaca.metainfo.xml.in:974
 msgid "More stability"
 msgstr "Lebih stabil"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:957
+#: data/com.jeffser.Alpaca.metainfo.xml.in:984
 msgid "0.1.2 Quick fixes"
 msgstr "0.1.2 Perbaikan cepat"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:958
+#: data/com.jeffser.Alpaca.metainfo.xml.in:985
 msgid ""
 "This release fixes some metadata needed to have a proper Flatpak application"
 msgstr ""
-"Rilis ini memperbaiki beberapa metadata yang diperlukan untuk memiliki aplikasi Flatpak yang tepat"
+"Rilis ini memperbaiki beberapa metadata yang diperlukan untuk memiliki "
+"aplikasi Flatpak yang tepat"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:964
+#: data/com.jeffser.Alpaca.metainfo.xml.in:991
 msgid "0.1.1 Stable Release"
 msgstr "0.1.1 Rilis Stabil"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:965
+#: data/com.jeffser.Alpaca.metainfo.xml.in:992
 msgid "This is the first public version of Alpaca"
 msgstr "Ini adalah versi publik pertama dari Alpaca"
 
-#: src/window.py:289 src/window.py:444 src/window.py:1019 src/window.ui:699
-#: src/window.ui:703 src/custom_widgets/message_widget.py:60
+#: src/window.py:143 src/window.py:150 src/window.ui:467 src/window.ui:477
+#: src/window.ui:499
+msgid "Add Instance"
+msgstr ""
+
+#: src/window.py:151
+msgid "Select a type of instance to add"
+msgstr ""
+
+#: src/window.py:338 src/window.py:898
+msgid "Please select a model before chatting"
+msgstr "Harap pilih model sebelum memulai obrolan"
+
+#: src/window.py:377 src/window.py:378 src/window.py:431 src/window.ui:320
+msgid "Close"
+msgstr "Tutup"
+
+#: src/window.py:380 src/window.py:381 src/window.ui:82 src/window.ui:83
+msgid "Next"
+msgstr "Berikutnya"
+
+#: src/window.py:429 src/instance_manager.py:405 src/instance_manager.py:406
+#: src/instance_manager.py:512 src/instance_manager.py:513
+#: src/instance_manager.py:649 src/instance_manager.py:650 src/window.ui:916
+#: src/window.ui:920 src/custom_widgets/message_widget.py:60
 #: src/custom_widgets/message_widget.py:199
-#: src/custom_widgets/model_manager_widget.py:426
+#: src/custom_widgets/model_manager_widget.py:380
 #: src/custom_widgets/dialog_widget.py:149
 #: src/custom_widgets/dialog_widget.py:161
 #: src/custom_widgets/dialog_widget.py:173
 msgid "Cancel"
 msgstr "Batal"
 
-#: src/window.py:290 src/window.py:731 src/window.py:1020
-msgid "Connect"
-msgstr "Hubungkan"
-
-#: src/window.py:293 src/window.py:733 src/window.py:1023
-msgid "Server URL"
-msgstr "URL Server"
-
-#: src/window.py:294 src/window.py:734 src/window.py:1024
-msgid "Bearer Token (Optional)"
-msgstr "Token Bearer (Opsional)"
-
-#: src/window.py:297 src/window.py:1027
-msgid "Connect Remote Instance"
-msgstr "Hubungkan Instansi Jarak Jauh"
-
-#: src/window.py:298 src/window.py:1028
-msgid "Enter instance information to continue"
-msgstr "Masukkan informasi instansi untuk melanjutkan"
-
-#: src/window.py:336 src/window.py:1052
-msgid "Please select a model before chatting"
-msgstr "Harap pilih model sebelum memulai obrolan"
-
-#: src/window.py:385 src/window.py:386 src/window.py:446
-msgid "Close"
-msgstr "Tutup"
-
-#: src/window.py:388 src/window.py:389 src/window.ui:1169
-msgid "Next"
-msgstr "Berikutnya"
-
-#: src/window.py:445
+#: src/window.py:430
 msgid "Hide"
 msgstr "Sembunyikan"
 
-#: src/window.py:449
+#: src/window.py:434
 msgid "Close Alpaca?"
 msgstr "Tutup Alpaca?"
 
-#: src/window.py:450
+#: src/window.py:435
 msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
-msgstr "Saat ini ada tugas yang sedang berlangsung. Apakah Anda yakin ingin menutup Alpaca?"
+msgstr ""
+"Saat ini ada tugas yang sedang berlangsung. Apakah Anda yakin ingin menutup "
+"Alpaca?"
 
-#: src/window.py:660 src/window.ui:69 src/custom_widgets/chat_widget.py:384
-msgid "New Chat"
-msgstr "Obrolan Baru"
-
-#: src/window.py:727
-msgid "Close Alpaca"
-msgstr "Tutup Alpaca"
-
-#: src/window.py:730
-msgid "Use Local Instance"
-msgstr "Gunakan Instansi Lokal"
-
-#: src/window.py:736
-msgid "Connection Error"
-msgstr "Kesalahan Koneksi"
-
-#: src/window.py:736
-msgid "The remote instance has disconnected"
-msgstr "Instansi jarak jauh telah terputus"
-
-#: src/window.py:739
-msgid "There was an error with the local Ollama instance, so it has been reset"
-msgstr "Terjadi kesalahan dengan instansi Ollama lokal, sehingga telah direset"
-
-#: src/window.py:761
+#: src/window.py:665
 msgid "Cannot open image"
 msgstr "Tidak dapat membuka gambar"
 
-#: src/window.py:867
+#: src/window.py:771
 msgid "Delete Chat?"
 msgstr "Hapus Obrolan?"
 
-#: src/window.py:868
+#: src/window.py:772
 msgid "Are you sure you want to delete '{}'?"
 msgstr "Apakah Anda yakin ingin menghapus '{}'?"
 
-#: src/window.py:870
+#: src/window.py:774
 msgid "Delete"
 msgstr "Hapus"
 
-#: src/window.py:877
+#: src/window.py:781
 msgid "Rename Chat?"
 msgstr "Ganti Nama Obrolan?"
 
-#: src/window.py:878
+#: src/window.py:782
 msgid "Renaming '{}'"
 msgstr "Mengganti nama '{}'"
 
-#: src/window.py:880
+#: src/window.py:784
 msgid "Chat name"
 msgstr "Nama Obrolan"
 
-#: src/window.py:881
+#: src/window.py:785
 msgid "Rename"
 msgstr "Ganti Nama"
 
-#: src/window.py:886
+#: src/window.py:790
 msgid "Importable (.db)"
 msgstr "Dapat Diimpor (.db)"
 
-#: src/window.py:887
+#: src/window.py:791
 msgid "Markdown"
 msgstr "Markdown"
 
-#: src/window.py:888
+#: src/window.py:792
 msgid "Markdown (Obsidian Style)"
 msgstr "Markdown (Gaya Obsidian)"
 
-#: src/window.py:889
+#: src/window.py:793
 msgid "JSON"
 msgstr "JSON"
 
-#: src/window.py:890
+#: src/window.py:794
 msgid "JSON (Include Metadata)"
 msgstr "JSON (Sertakan Metadata)"
 
-#: src/window.py:893 src/window.ui:1264 src/window.ui:1302
+#: src/window.py:797 src/window.ui:1173 src/window.ui:1211
 msgid "Export Chat"
 msgstr "Ekspor Obrolan"
 
-#: src/window.py:894
+#: src/window.py:798
 msgid "Select a method to export the chat"
 msgstr "Pilih metode untuk mengekspor obrolan"
 
-#: src/window.py:910
+#: src/window.py:814
 msgid "This video does not have any transcriptions"
 msgstr "Video ini tidak memiliki transkripsi"
 
-#: src/window.py:917
+#: src/window.py:821
 msgid "Attach YouTube Video?"
 msgstr "Lampirkan Video YouTube?"
 
-#: src/window.py:918
+#: src/window.py:822
 msgid ""
 "{}\n"
 "\n"
@@ -1855,15 +1930,15 @@ msgstr ""
 "\n"
 "Harap pilih transkrip untuk disertakan"
 
-#: src/window.py:924
+#: src/window.py:828
 msgid "Error attaching video, please try again"
 msgstr "Kesalahan saat melampirkan video, silakan coba lagi"
 
-#: src/window.py:945 src/window.py:1301
+#: src/window.py:849 src/window.py:1112
 msgid "Attach Website? (Experimental)"
 msgstr "Lampirkan Situs Web? (Eksperimental)"
 
-#: src/window.py:946
+#: src/window.py:850
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
@@ -1871,69 +1946,66 @@ msgstr ""
 "Apakah Anda yakin ingin melampirkan\n"
 "'{}'?"
 
-#: src/window.py:964 src/window.py:976 src/window.py:1300
-#: src/generic_actions.py:98
+#: src/window.py:868 src/window.py:880 src/window.py:1111
+#: src/generic_actions.py:99
 msgid "Image recognition is only available on specific models"
 msgstr "Pengenalan gambar hanya tersedia pada model tertentu"
 
-#: src/window.py:1043
-msgid "An error occurred: {}"
-msgstr "Terjadi kesalahan: {}"
-
-#: src/window.py:1054 src/window.ui:1005
+#: src/window.py:900 src/window.ui:998
 msgid "Quick Ask"
 msgstr "Tanya Cepat"
 
-#: src/window.py:1221
+#: src/window.py:1022
 msgid "Attachment failed, screenshot might be too big"
 msgstr "Lampiran gagal, tangkapan layar mungkin terlalu besar"
 
-#: src/window.py:1235
+#: src/window.py:1036
 msgid "Any compatible Alpaca attachment"
 msgstr "Lampiran Alpaca yang kompatibel"
 
-#: src/window.py:1285
+#: src/window.py:1096
 msgid "Clear Chat?"
 msgstr "Bersihkan Obrolan?"
 
-#: src/window.py:1285
+#: src/window.py:1096
 msgid "Are you sure you want to clear the chat?"
 msgstr "Apakah Anda yakin ingin membersihkan obrolan?"
 
-#: src/window.py:1285
+#: src/window.py:1096
 msgid "Clear"
 msgstr "Bersihkan"
 
-#: src/window.py:1301
+#: src/window.py:1112
 msgid "Please enter a website URL"
 msgstr "Harap masukkan URL situs web"
 
-#: src/window.py:1302
+#: src/window.py:1113
 msgid "Attach YouTube Captions?"
 msgstr "Lampirkan Keterangan YouTube?"
 
-#: src/window.py:1302
+#: src/window.py:1113
 msgid "Please enter a YouTube video URL"
 msgstr "Harap masukkan URL video YouTube"
 
-#: src/window.py:1304
+#: src/window.py:1116
 msgid "Download Model?"
 msgstr "Unduh Model?"
 
-#: src/window.py:1304
+#: src/window.py:1116
 msgid "Please enter the model name following this template: name:tag"
 msgstr "Harap masukkan nama model mengikuti template ini: nama:tag"
 
-#: src/window.py:1318
+#: src/window.py:1127
 msgid "Remove Attachment?"
 msgstr "Hapus Lampiran?"
 
-#: src/window.py:1318
+#: src/window.py:1127
 msgid "Are you sure you want to remove attachment?"
 msgstr "Apakah Anda yakin ingin menghapus lampiran?"
 
-#: src/window.py:1318 src/custom_widgets/model_manager_widget.py:427
-#: src/custom_widgets/model_manager_widget.py:465
+#: src/window.py:1127 src/instance_manager.py:758
+#: src/custom_widgets/model_manager_widget.py:381
+#: src/custom_widgets/model_manager_widget.py:423
 msgid "Remove"
 msgstr "Hapus"
 
@@ -1942,8 +2014,8 @@ msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to the Llama 3.1 405B model."
 msgstr ""
-"Model baru 70B terkini. Llama 3.3 70B menawarkan kinerja serupa "
-"dibandingkan dengan model Llama 3.1 405B."
+"Model baru 70B terkini. Llama 3.3 70B menawarkan kinerja serupa dibandingkan "
+"dengan model Llama 3.1 405B."
 
 #: src/available_models_descriptions.py:3
 msgid ""
@@ -1975,7 +2047,8 @@ msgstr ""
 
 #: src/available_models_descriptions.py:7
 msgid "Meta Llama 3: The most capable openly available LLM to date"
-msgstr "Meta Llama 3: LLM yang paling mampu dan terbuka yang tersedia hingga saat ini"
+msgstr ""
+"Meta Llama 3: LLM yang paling mampu dan terbuka yang tersedia hingga saat ini"
 
 #: src/available_models_descriptions.py:8
 msgid "The 7B model released by Mistral AI, updated to version 0.3."
@@ -1985,7 +2058,8 @@ msgstr "Model 7B yang dirilis oleh Mistral AI, diperbarui ke versi 0.3."
 msgid ""
 "A high-performing open embedding model with a large token context window."
 msgstr ""
-"Model embedding terbuka dengan kinerja tinggi dan jendela konteks token yang besar."
+"Model embedding terbuka dengan kinerja tinggi dan jendela konteks token yang "
+"besar."
 
 #: src/available_models_descriptions.py:10
 msgid ""
@@ -2000,8 +2074,8 @@ msgid ""
 "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
 "0.5B to 110B parameters"
 msgstr ""
-"Qwen 1.5 adalah serangkaian model bahasa besar dari Alibaba Cloud yang mencakup "
-"parameter mulai dari 0.5B hingga 110B."
+"Qwen 1.5 adalah serangkaian model bahasa besar dari Alibaba Cloud yang "
+"mencakup parameter mulai dari 0.5B hingga 110B."
 
 #: src/available_models_descriptions.py:12
 msgid "Qwen2 is a new series of large language models from Alibaba group"
@@ -2020,7 +2094,8 @@ msgid ""
 "Llama 2 is a collection of foundation language models ranging from 7B to 70B "
 "parameters."
 msgstr ""
-"Llama 2 adalah kumpulan model bahasa dasar yang mencakup parameter dari 7B hingga 70B."
+"Llama 2 adalah kumpulan model bahasa dasar yang mencakup parameter dari 7B "
+"hingga 70B."
 
 #: src/available_models_descriptions.py:15
 msgid ""
@@ -2037,8 +2112,8 @@ msgid ""
 "Google Gemma 2 is a high-performing and efficient model available in three "
 "sizes: 2B, 9B, and 27B."
 msgstr ""
-"Google Gemma 2 adalah model dengan kinerja tinggi dan efisien yang tersedia dalam tiga "
-"ukuran: 2B, 9B, dan 27B."
+"Google Gemma 2 adalah model dengan kinerja tinggi dan efisien yang tersedia "
+"dalam tiga ukuran: 2B, 9B, dan 27B."
 
 #: src/available_models_descriptions.py:17
 msgid ""
@@ -2046,24 +2121,25 @@ msgid ""
 "a vision encoder and Vicuna for general-purpose visual and language "
 "understanding. Updated to version 1.6."
 msgstr ""
-"🌋 LLaVA adalah model multimodal besar yang dilatih end-to-end yang menggabungkan "
-"pengkode visi dan Vicuna untuk pemahaman visual dan bahasa umum. Diperbarui ke versi 1.6."
+"🌋 LLaVA adalah model multimodal besar yang dilatih end-to-end yang "
+"menggabungkan pengkode visi dan Vicuna untuk pemahaman visual dan bahasa "
+"umum. Diperbarui ke versi 1.6."
 
 #: src/available_models_descriptions.py:18
 msgid ""
 "A large language model that can use text prompts to generate and discuss "
 "code."
 msgstr ""
-"Model bahasa besar yang dapat menggunakan prompt teks untuk menghasilkan dan membahas "
-"kode."
+"Model bahasa besar yang dapat menggunakan prompt teks untuk menghasilkan dan "
+"membahas kode."
 
 #: src/available_models_descriptions.py:19
 msgid ""
 "The latest series of Code-Specific Qwen models, with significant "
 "improvements in code generation, code reasoning, and code fixing."
 msgstr ""
-"Serangkaian model Qwen terbaru yang spesifik untuk kode, dengan peningkatan signifikan "
-"pada pembuatan kode, penalaran kode, dan perbaikan kode."
+"Serangkaian model Qwen terbaru yang spesifik untuk kode, dengan peningkatan "
+"signifikan pada pembuatan kode, penalaran kode, dan perbaikan kode."
 
 #: src/available_models_descriptions.py:20
 msgid ""
@@ -2078,8 +2154,8 @@ msgid ""
 "The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
 "model on 3 trillion tokens."
 msgstr ""
-"Proyek TinyLlama adalah upaya terbuka untuk melatih model Llama 1.1B yang kompak "
-"pada 3 triliun token."
+"Proyek TinyLlama adalah upaya terbuka untuk melatih model Llama 1.1B yang "
+"kompak pada 3 triliun token."
 
 #: src/available_models_descriptions.py:22
 msgid "State-of-the-art large embedding model from mixedbread.ai"
@@ -2090,24 +2166,25 @@ msgid ""
 "StarCoder2 is the next generation of transparently trained open code LLMs "
 "that comes in three sizes: 3B, 7B and 15B parameters."
 msgstr ""
-"StarCoder2 adalah generasi berikutnya dari LLM kode terbuka yang dilatih secara transparan "
-"yang hadir dalam tiga ukuran: 3B, 7B, dan 15B parameter."
+"StarCoder2 adalah generasi berikutnya dari LLM kode terbuka yang dilatih "
+"secara transparan yang hadir dalam tiga ukuran: 3B, 7B, dan 15B parameter."
 
 #: src/available_models_descriptions.py:24
 msgid ""
 "A set of Mixture of Experts (MoE) model with open weights by Mistral AI in "
 "8x7b and 8x22b parameter sizes."
 msgstr ""
-"Serangkaian model Mixture of Experts (MoE) dengan bobot terbuka oleh Mistral AI dalam "
-"ukuran parameter 8x7b dan 8x22b."
+"Serangkaian model Mixture of Experts (MoE) dengan bobot terbuka oleh Mistral "
+"AI dalam ukuran parameter 8x7b dan 8x22b."
 
 #: src/available_models_descriptions.py:25
 msgid ""
 "Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
 "experts models that excels at coding tasks. Created by Eric Hartford."
 msgstr ""
-"Model 8x7b dan 8x22b yang disesuaikan tanpa sensor, berdasarkan model Mixtral mixture of "
-"experts yang unggul dalam tugas pemrograman. Dibuat oleh Eric Hartford."
+"Model 8x7b dan 8x22b yang disesuaikan tanpa sensor, berdasarkan model "
+"Mixtral mixture of experts yang unggul dalam tugas pemrograman. Dibuat oleh "
+"Eric Hartford."
 
 #: src/available_models_descriptions.py:26
 msgid ""
@@ -2116,25 +2193,25 @@ msgid ""
 "generation, natural language understanding, mathematical reasoning, and "
 "instruction following."
 msgstr ""
-"CodeGemma adalah kumpulan model kuat dan ringan yang dapat melakukan berbagai "
-"tugas pemrograman seperti penyelesaian kode di tengah, pembuatan kode, "
-"pemahaman bahasa alami, penalaran matematis, dan mengikuti instruksi."
+"CodeGemma adalah kumpulan model kuat dan ringan yang dapat melakukan "
+"berbagai tugas pemrograman seperti penyelesaian kode di tengah, pembuatan "
+"kode, pemahaman bahasa alami, penalaran matematis, dan mengikuti instruksi."
 
 #: src/available_models_descriptions.py:27
 msgid ""
 "An open-source Mixture-of-Experts code language model that achieves "
 "performance comparable to GPT4-Turbo in code-specific tasks."
 msgstr ""
-"Model bahasa kode Mixture-of-Experts sumber terbuka yang mencapai "
-"kinerja sebanding dengan GPT4-Turbo dalam tugas khusus kode."
+"Model bahasa kode Mixture-of-Experts sumber terbuka yang mencapai kinerja "
+"sebanding dengan GPT4-Turbo dalam tugas khusus kode."
 
 #: src/available_models_descriptions.py:28
 msgid ""
 "Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
 "outstanding reasoning and language understanding capabilities."
 msgstr ""
-"Phi-2: model bahasa 2.7B oleh Microsoft Research yang menunjukkan "
-"kemampuan penalaran dan pemahaman bahasa yang luar biasa."
+"Phi-2: model bahasa 2.7B oleh Microsoft Research yang menunjukkan kemampuan "
+"penalaran dan pemahaman bahasa yang luar biasa."
 
 #: src/available_models_descriptions.py:29
 msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
@@ -2145,8 +2222,8 @@ msgid ""
 "DeepSeek Coder is a capable coding model trained on two trillion code and "
 "natural language tokens."
 msgstr ""
-"DeepSeek Coder adalah model pemrograman yang mampu, dilatih pada dua triliun kode dan "
-"token bahasa alami."
+"DeepSeek Coder adalah model pemrograman yang mampu, dilatih pada dua triliun "
+"kode dan token bahasa alami."
 
 #: src/available_models_descriptions.py:31
 msgid ""
@@ -2159,23 +2236,25 @@ msgid ""
 "State of the art large language model from Microsoft AI with improved "
 "performance on complex chat, multilingual, reasoning and agent use cases."
 msgstr ""
-"Model bahasa besar terkini dari Microsoft AI dengan peningkatan "
-"kinerja pada obrolan kompleks, multilingual, penalaran, dan kasus penggunaan agen."
+"Model bahasa besar terkini dari Microsoft AI dengan peningkatan kinerja pada "
+"obrolan kompleks, multilingual, penalaran, dan kasus penggunaan agen."
 
 #: src/available_models_descriptions.py:33
 msgid ""
 "The uncensored Dolphin model based on Mistral that excels at coding tasks. "
 "Updated to version 2.8."
 msgstr ""
-"Model Dolphin tanpa sensor berdasarkan Mistral yang unggul dalam tugas pemrograman."
+"Model Dolphin tanpa sensor berdasarkan Mistral yang unggul dalam tugas "
+"pemrograman."
 
 #: src/available_models_descriptions.py:34
 msgid ""
 "Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on "
 "Llama 3 that has a variety of instruction, conversational, and coding skills."
 msgstr ""
-"Dolphin 2.9 adalah model baru dengan ukuran 8B dan 70B oleh Eric Hartford yang "
-"berdasarkan Llama 3, memiliki berbagai keterampilan instruksi, percakapan, dan pemrograman."
+"Dolphin 2.9 adalah model baru dengan ukuran 8B dan 70B oleh Eric Hartford "
+"yang berdasarkan Llama 3, memiliki berbagai keterampilan instruksi, "
+"percakapan, dan pemrograman."
 
 #: src/available_models_descriptions.py:35
 msgid "Yi 1.5 is a high-performing, bilingual language model."
@@ -2186,40 +2265,40 @@ msgid ""
 "Command R is a Large Language Model optimized for conversational interaction "
 "and long context tasks."
 msgstr ""
-"Command R adalah Model Bahasa Besar yang dioptimalkan untuk interaksi percakapan "
-"dan tugas dengan konteks panjang."
+"Command R adalah Model Bahasa Besar yang dioptimalkan untuk interaksi "
+"percakapan dan tugas dengan konteks panjang."
 
 #: src/available_models_descriptions.py:37
 msgid ""
 "A general-purpose model ranging from 3 billion parameters to 70 billion, "
 "suitable for entry-level hardware."
 msgstr ""
-"Model serbaguna dengan parameter mulai dari 3 miliar hingga 70 miliar, "
-"cocok untuk perangkat keras tingkat pemula."
+"Model serbaguna dengan parameter mulai dari 3 miliar hingga 70 miliar, cocok "
+"untuk perangkat keras tingkat pemula."
 
 #: src/available_models_descriptions.py:38
 msgid ""
 "A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
 "benchmarks."
 msgstr ""
-"Model LLaVA yang disesuaikan dari Llama 3 Instruct dengan skor lebih baik pada beberapa "
-"tolok ukur."
+"Model LLaVA yang disesuaikan dari Llama 3 Instruct dengan skor lebih baik "
+"pada beberapa tolok ukur."
 
 #: src/available_models_descriptions.py:39
 msgid ""
 "Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
 "that are trained to act as helpful assistants."
 msgstr ""
-"Zephyr adalah serangkaian versi yang disesuaikan dari model Mistral dan Mixtral "
-"yang dilatih untuk bertindak sebagai asisten yang membantu."
+"Zephyr adalah serangkaian versi yang disesuaikan dari model Mistral dan "
+"Mixtral yang dilatih untuk bertindak sebagai asisten yang membantu."
 
 #: src/available_models_descriptions.py:40
 msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
 "overtaking similarly and larger sized models."
 msgstr ""
-"Model AI ringan dengan 3,8 miliar parameter yang kinerjanya "
-"mengungguli model serupa dan yang lebih besar."
+"Model AI ringan dengan 3,8 miliar parameter yang kinerjanya mengungguli "
+"model serupa dan yang lebih besar."
 
 #: src/available_models_descriptions.py:41
 msgid "Embedding models on very large sentence level datasets."
@@ -2230,20 +2309,23 @@ msgid ""
 "Codestral is Mistral AI’s first-ever code model designed for code generation "
 "tasks."
 msgstr ""
-"Codestral adalah model kode pertama dari Mistral AI yang dirancang untuk tugas pembuatan kode."
+"Codestral adalah model kode pertama dari Mistral AI yang dirancang untuk "
+"tugas pembuatan kode."
 
 #: src/available_models_descriptions.py:43
 msgid ""
 "StarCoder is a code generation model trained on 80+ programming languages."
 msgstr ""
-"StarCoder adalah model pembuatan kode yang dilatih pada lebih dari 80 bahasa pemrograman."
+"StarCoder adalah model pembuatan kode yang dilatih pada lebih dari 80 bahasa "
+"pemrograman."
 
 #: src/available_models_descriptions.py:44
 msgid ""
 "General use chat model based on Llama and Llama 2 with 2K to 16K context "
 "sizes."
 msgstr ""
-"Model chat serbaguna berdasarkan Llama dan Llama 2 dengan ukuran konteks 2K hingga 16K."
+"Model chat serbaguna berdasarkan Llama dan Llama 2 dengan ukuran konteks 2K "
+"hingga 16K."
 
 #: src/available_models_descriptions.py:45
 msgid "A family of open foundation models by IBM for Code Intelligence"
@@ -2254,8 +2336,8 @@ msgid ""
 "Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
 "Mistral 7B model using the OpenOrca dataset."
 msgstr ""
-"Mistral OpenOrca adalah model dengan 7 miliar parameter, disesuaikan dari model "
-"Mistral 7B menggunakan dataset OpenOrca."
+"Mistral OpenOrca adalah model dengan 7 miliar parameter, disesuaikan dari "
+"model Mistral 7B menggunakan dataset OpenOrca."
 
 #: src/available_models_descriptions.py:47
 msgid ""
@@ -2270,27 +2352,30 @@ msgid ""
 "Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
 "Llama 2 uncensored by Eric Hartford."
 msgstr ""
-"Wizard Vicuna Uncensored adalah model dengan 7B, 13B, dan 30B parameter berdasarkan "
-"Llama 2 tanpa sensor oleh Eric Hartford."
+"Wizard Vicuna Uncensored adalah model dengan 7B, 13B, dan 30B parameter "
+"berdasarkan Llama 2 tanpa sensor oleh Eric Hartford."
 
 #: src/available_models_descriptions.py:49
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
-msgstr "Model berbasis Llama 2 yang disesuaikan untuk meningkatkan kemampuan dialog bahasa Mandarin."
+msgstr ""
+"Model berbasis Llama 2 yang disesuaikan untuk meningkatkan kemampuan dialog "
+"bahasa Mandarin."
 
 #: src/available_models_descriptions.py:50
 msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
 msgstr ""
-"BGE-M3 adalah model baru dari BAAI yang terkenal karena fleksibilitasnya dalam Multi-"
-"Fungsi, Multi-Bahasa, dan Multi-Granularitas."
+"BGE-M3 adalah model baru dari BAAI yang terkenal karena fleksibilitasnya "
+"dalam Multi-Fungsi, Multi-Bahasa, dan Multi-Granularitas."
 
 #: src/available_models_descriptions.py:51
 msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
 msgstr ""
-"Model serbaguna untuk skenario pengembangan perangkat lunak AI, termasuk penyelesaian kode."
+"Model serbaguna untuk skenario pengembangan perangkat lunak AI, termasuk "
+"penyelesaian kode."
 
 #: src/available_models_descriptions.py:52
 msgid ""
@@ -2313,23 +2398,25 @@ msgid ""
 "CodeQwen1.5 is a large language model pretrained on a large amount of code "
 "data."
 msgstr ""
-"CodeQwen1.5 adalah model bahasa besar yang dilatih sebelumnya pada sejumlah besar data kode."
+"CodeQwen1.5 adalah model bahasa besar yang dilatih sebelumnya pada sejumlah "
+"besar data kode."
 
 #: src/available_models_descriptions.py:55
 msgid ""
 "The powerful family of models by Nous Research that excels at scientific "
 "discussion and coding tasks."
 msgstr ""
-"Keluarga model kuat oleh Nous Research yang unggul dalam diskusi ilmiah "
-"dan tugas pemrograman."
+"Keluarga model kuat oleh Nous Research yang unggul dalam diskusi ilmiah dan "
+"tugas pemrograman."
 
 #: src/available_models_descriptions.py:56
 msgid ""
 "Command R+ is a powerful, scalable large language model purpose-built to "
 "excel at real-world enterprise use cases."
 msgstr ""
-"Command R+ adalah model bahasa besar yang kuat dan dapat diskalakan yang dirancang untuk "
-"berkinerja tinggi dalam kasus penggunaan dunia nyata di perusahaan."
+"Command R+ adalah model bahasa besar yang kuat dan dapat diskalakan yang "
+"dirancang untuk berkinerja tinggi dalam kasus penggunaan dunia nyata di "
+"perusahaan."
 
 #: src/available_models_descriptions.py:57
 msgid "State-of-the-art code generation model"
@@ -2340,24 +2427,25 @@ msgid ""
 "Stable Code 3B is a coding model with instruct and code completion variants "
 "on par with models such as Code Llama 7B that are 2.5x larger."
 msgstr ""
-"Stable Code 3B adalah model pemrograman dengan varian instruksi dan penyelesaian kode "
-"yang setara dengan model seperti Code Llama 7B yang ukurannya 2,5x lebih besar."
+"Stable Code 3B adalah model pemrograman dengan varian instruksi dan "
+"penyelesaian kode yang setara dengan model seperti Code Llama 7B yang "
+"ukurannya 2,5x lebih besar."
 
 #: src/available_models_descriptions.py:59
 msgid ""
 "An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
 "by Eric Hartford and based on TinyLlama."
 msgstr ""
-"Model eksperimen dengan 1,1B parameter yang dilatih pada dataset Dolphin 2.8 baru "
-"oleh Eric Hartford dan berdasarkan TinyLlama."
+"Model eksperimen dengan 1,1B parameter yang dilatih pada dataset Dolphin 2.8 "
+"baru oleh Eric Hartford dan berdasarkan TinyLlama."
 
 #: src/available_models_descriptions.py:60
 msgid ""
 "OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
 "open datasets."
 msgstr ""
-"OpenHermes 2.5 adalah model 7B yang disesuaikan oleh Teknium pada Mistral dengan "
-"dataset terbuka sepenuhnya."
+"OpenHermes 2.5 adalah model 7B yang disesuaikan oleh Teknium pada Mistral "
+"dengan dataset terbuka sepenuhnya."
 
 #: src/available_models_descriptions.py:61
 msgid ""
@@ -2366,8 +2454,8 @@ msgid ""
 "window and support for dozens of languages."
 msgstr ""
 "Mistral Large 2 adalah model unggulan baru dari Mistral yang jauh lebih "
-"mampu dalam pembuatan kode, matematika, dan penalaran dengan jendela konteks 128k "
-"dan dukungan untuk puluhan bahasa."
+"mampu dalam pembuatan kode, matematika, dan penalaran dengan jendela konteks "
+"128k dan dukungan untuk puluhan bahasa."
 
 #: src/available_models_descriptions.py:62
 msgid ""
@@ -2375,17 +2463,17 @@ msgid ""
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
 "open-source models and even closed-source models (e.g., GPT4o)."
 msgstr ""
-"Qwen2 Math adalah serangkaian model bahasa matematika yang dibangun berdasarkan "
-"Qwen2 LLM, yang secara signifikan melampaui kemampuan matematika model sumber terbuka "
-"dan bahkan model sumber tertutup (misalnya, GPT4o)."
+"Qwen2 Math adalah serangkaian model bahasa matematika yang dibangun "
+"berdasarkan Qwen2 LLM, yang secara signifikan melampaui kemampuan matematika "
+"model sumber terbuka dan bahkan model sumber tertutup (misalnya, GPT4o)."
 
 #: src/available_models_descriptions.py:63
 msgid ""
 "A strong multi-lingual general language model with competitive performance "
 "to Llama 3."
 msgstr ""
-"Model bahasa umum multibahasa yang kuat dengan kinerja kompetitif "
-"terhadap Llama 3."
+"Model bahasa umum multibahasa yang kuat dengan kinerja kompetitif terhadap "
+"Llama 3."
 
 #: src/available_models_descriptions.py:64
 msgid ""
@@ -2393,9 +2481,9 @@ msgid ""
 "trained on multilingual data in English, Spanish, German, Italian, French, "
 "Portuguese, and Dutch."
 msgstr ""
-"Stable LM 2 adalah model bahasa terkini dengan 1.6B dan 12B parameter "
-"yang dilatih pada data multibahasa dalam bahasa Inggris, Spanyol, Jerman, Italia, Prancis, "
-"Portugis, dan Belanda."
+"Stable LM 2 adalah model bahasa terkini dengan 1.6B dan 12B parameter yang "
+"dilatih pada data multibahasa dalam bahasa Inggris, Spanyol, Jerman, Italia, "
+"Prancis, Portugis, dan Belanda."
 
 #: src/available_models_descriptions.py:65
 msgid ""
@@ -2411,9 +2499,9 @@ msgid ""
 "tuning that teaches a LLM to detect mistakes in its reasoning and correct "
 "course."
 msgstr ""
-"Model dengan kinerja tinggi yang dilatih dengan teknik baru yang disebut Reflection-"
-"tuning yang mengajarkan LLM untuk mendeteksi kesalahan dalam penalarannya dan memperbaiki "
-"arahnya."
+"Model dengan kinerja tinggi yang dilatih dengan teknik baru yang disebut "
+"Reflection-tuning yang mengajarkan LLM untuk mendeteksi kesalahan dalam "
+"penalarannya dan memperbaiki arahnya."
 
 #: src/available_models_descriptions.py:67
 msgid "An advanced language model crafted with 2 trillion bilingual tokens."
@@ -2423,7 +2511,8 @@ msgstr "Model bahasa canggih yang dibuat dengan 2 triliun token bilingual."
 msgid ""
 "This model extends LLama-3 8B's context length from 8k to over 1m tokens."
 msgstr ""
-"Model ini memperpanjang panjang konteks LLama-3 8B dari 8k hingga lebih dari 1 juta token."
+"Model ini memperpanjang panjang konteks LLama-3 8B dari 8k hingga lebih dari "
+"1 juta token."
 
 #: src/available_models_descriptions.py:69
 msgid "Model focused on math and logic problems"
@@ -2434,35 +2523,40 @@ msgid ""
 "moondream2 is a small vision language model designed to run efficiently on "
 "edge devices."
 msgstr ""
-"moondream2 adalah model bahasa visi kecil yang dirancang untuk berjalan dengan efisien di perangkat edge."
+"moondream2 adalah model bahasa visi kecil yang dirancang untuk berjalan "
+"dengan efisien di perangkat edge."
 
 #: src/available_models_descriptions.py:71
 msgid ""
 "A fine-tuned model based on Mistral with good coverage of domain and "
 "language."
 msgstr ""
-"Model yang telah disesuaikan berdasarkan Mistral dengan cakupan yang baik pada domain dan bahasa."
+"Model yang telah disesuaikan berdasarkan Mistral dengan cakupan yang baik "
+"pada domain dan bahasa."
 
 #: src/available_models_descriptions.py:72
 msgid ""
 "A model from NVIDIA based on Llama 3 that excels at conversational question "
 "answering (QA) and retrieval-augmented generation (RAG)."
 msgstr ""
-"Model dari NVIDIA berbasis Llama 3 yang unggul dalam menjawab pertanyaan percakapan (QA) dan generasi berbantuan pencarian (RAG)."
+"Model dari NVIDIA berbasis Llama 3 yang unggul dalam menjawab pertanyaan "
+"percakapan (QA) dan generasi berbantuan pencarian (RAG)."
 
 #: src/available_models_descriptions.py:73
 msgid ""
 "Conversational model based on Llama 2 that performs competitively on various "
 "benchmarks."
 msgstr ""
-"Model percakapan berbasis Llama 2 yang berkinerja baik dalam berbagai benchmark."
+"Model percakapan berbasis Llama 2 yang berkinerja baik dalam berbagai "
+"benchmark."
 
 #: src/available_models_descriptions.py:74
 msgid ""
 "SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
 "generation tasks"
 msgstr ""
-"SQLCoder adalah model penyelesaian kode yang telah disesuaikan dengan StarCoder untuk tugas pembuatan SQL."
+"SQLCoder adalah model penyelesaian kode yang telah disesuaikan dengan "
+"StarCoder untuk tugas pembuatan SQL."
 
 #: src/available_models_descriptions.py:75
 msgid "General use models based on Llama and Llama 2 from Nous Research."
@@ -2481,7 +2575,8 @@ msgid ""
 "A 7B and 15B uncensored variant of the Dolphin model family that excels at "
 "coding, based on StarCoder2."
 msgstr ""
-"Varian 7B dan 15B dari keluarga model Dolphin yang tidak disensor dan unggul dalam pengkodean, berbasis StarCoder2."
+"Varian 7B dan 15B dari keluarga model Dolphin yang tidak disensor dan unggul "
+"dalam pengkodean, berbasis StarCoder2."
 
 #: src/available_models_descriptions.py:79
 msgid "General use model based on Llama 2."
@@ -2496,56 +2591,64 @@ msgid ""
 "Starling is a large language model trained by reinforcement learning from AI "
 "feedback focused on improving chatbot helpfulness."
 msgstr ""
-"Starling adalah model bahasa besar yang dilatih dengan pembelajaran penguatan dari umpan balik AI yang fokus pada peningkatan kegunaan chatbot."
+"Starling adalah model bahasa besar yang dilatih dengan pembelajaran "
+"penguatan dari umpan balik AI yang fokus pada peningkatan kegunaan chatbot."
 
 #: src/available_models_descriptions.py:82
 msgid ""
 "A companion assistant trained in philosophy, psychology, and personal "
 "relationships. Based on Mistral."
 msgstr ""
-"Asisten pendamping yang dilatih dalam filsafat, psikologi, dan hubungan pribadi. Berdasarkan Mistral."
+"Asisten pendamping yang dilatih dalam filsafat, psikologi, dan hubungan "
+"pribadi. Berdasarkan Mistral."
 
 #: src/available_models_descriptions.py:83
 msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
 msgstr ""
-"Hermes 3 adalah versi terbaru dari seri utama Hermes dari LLM oleh Nous Research."
+"Hermes 3 adalah versi terbaru dari seri utama Hermes dari LLM oleh Nous "
+"Research."
 
 #: src/available_models_descriptions.py:84
 msgid ""
 "Yi-Coder is a series of open-source code language models that delivers state-"
 "of-the-art coding performance with fewer than 10 billion parameters."
 msgstr ""
-"Yi-Coder adalah serangkaian model bahasa kode sumber terbuka yang memberikan kinerja pengkodean terkini dengan kurang dari 10 miliar parameter."
+"Yi-Coder adalah serangkaian model bahasa kode sumber terbuka yang memberikan "
+"kinerja pengkodean terkini dengan kurang dari 10 miliar parameter."
 
 #: src/available_models_descriptions.py:85
 msgid ""
 "A large language model built by the Technology Innovation Institute (TII) "
 "for use in summarization, text generation, and chat bots."
 msgstr ""
-"Model bahasa besar yang dibangun oleh Technology Innovation Institute (TII) untuk digunakan dalam ringkasan, pembuatan teks, dan chatbot."
+"Model bahasa besar yang dibangun oleh Technology Innovation Institute (TII) "
+"untuk digunakan dalam ringkasan, pembuatan teks, dan chatbot."
 
 #: src/available_models_descriptions.py:86
 msgid ""
 "InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
 "outstanding reasoning capability."
 msgstr ""
-"InternLM2.5 adalah model dengan 7B parameter yang disesuaikan untuk skenario praktis dengan kemampuan penalaran yang luar biasa."
+"InternLM2.5 adalah model dengan 7B parameter yang disesuaikan untuk skenario "
+"praktis dengan kemampuan penalaran yang luar biasa."
 
 #: src/available_models_descriptions.py:87
 msgid ""
 "A compact, yet powerful 10.7B large language model designed for single-turn "
 "conversation."
 msgstr ""
-"Model bahasa besar 10.7B yang kompak namun kuat, dirancang untuk percakapan satu kali."
+"Model bahasa besar 10.7B yang kompak namun kuat, dirancang untuk percakapan "
+"satu kali."
 
 #: src/available_models_descriptions.py:88
 msgid ""
 "Athene-V2 is a 72B parameter model which excels at code completion, "
 "mathematics, and log extraction tasks."
 msgstr ""
-"Athene-V2 adalah model dengan 72B parameter yang unggul dalam penyelesaian kode, matematika, dan ekstraksi log."
+"Athene-V2 adalah model dengan 72B parameter yang unggul dalam penyelesaian "
+"kode, matematika, dan ekstraksi log."
 
 #: src/available_models_descriptions.py:89
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
@@ -2557,42 +2660,49 @@ msgid ""
 "Meta's Llama 2 models. The model is designed to excel particularly in "
 "reasoning."
 msgstr ""
-"Orca 2 dibangun oleh penelitian Microsoft, dan merupakan versi yang disesuaikan dari model Llama 2 milik Meta. Model ini dirancang untuk unggul terutama dalam penalaran."
+"Orca 2 dibangun oleh penelitian Microsoft, dan merupakan versi yang "
+"disesuaikan dari model Llama 2 milik Meta. Model ini dirancang untuk unggul "
+"terutama dalam penalaran."
 
 #: src/available_models_descriptions.py:91
 msgid ""
 "A series of multimodal LLMs (MLLMs) designed for vision-language "
 "understanding."
 msgstr ""
-"Serangkaian LLM multimodal (MLLM) yang dirancang untuk pemahaman bahasa-vision."
+"Serangkaian LLM multimodal (MLLM) yang dirancang untuk pemahaman bahasa-"
+"vision."
 
 #: src/available_models_descriptions.py:92
 msgid ""
 "Llama 2 based model fine tuned on an Orca-style dataset. Originally called "
 "Free Willy."
 msgstr ""
-"Model berbasis Llama 2 yang disesuaikan dengan dataset gaya Orca. Awalnya disebut Free Willy."
+"Model berbasis Llama 2 yang disesuaikan dengan dataset gaya Orca. Awalnya "
+"disebut Free Willy."
 
 #: src/available_models_descriptions.py:93
 msgid ""
 "Mistral Small is a lightweight model designed for cost-effective use in "
 "tasks like translation and summarization."
 msgstr ""
-"Mistral Small adalah model ringan yang dirancang untuk penggunaan hemat biaya dalam tugas-tugas seperti penerjemahan dan ringkasan."
+"Mistral Small adalah model ringan yang dirancang untuk penggunaan hemat "
+"biaya dalam tugas-tugas seperti penerjemahan dan ringkasan."
 
 #: src/available_models_descriptions.py:94
 msgid ""
 "2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
 "model by Microsoft Research."
 msgstr ""
-"Model Dolphin 2.7B tanpa sensor oleh Eric Hartford, berbasis model bahasa Phi oleh Microsoft Research."
+"Model Dolphin 2.7B tanpa sensor oleh Eric Hartford, berbasis model bahasa "
+"Phi oleh Microsoft Research."
 
 #: src/available_models_descriptions.py:95
 msgid ""
 "SmolLM2 is a family of compact language models available in three size: "
 "135M, 360M, and 1.7B parameters."
 msgstr ""
-"SmolLM2 adalah keluarga model bahasa kompak yang tersedia dalam tiga ukuran: 135M, 360M, dan 1.7B parameter."
+"SmolLM2 adalah keluarga model bahasa kompak yang tersedia dalam tiga ukuran: "
+"135M, 360M, dan 1.7B parameter."
 
 #: src/available_models_descriptions.py:96
 msgid "Uncensored version of Wizard LM model"
@@ -2603,7 +2713,8 @@ msgid ""
 "A commercial-friendly small language model by NVIDIA optimized for roleplay, "
 "RAG QA, and function calling."
 msgstr ""
-"Model bahasa kecil yang ramah komersial dari NVIDIA yang dioptimalkan untuk peran bermain, RAG QA, dan pemanggilan fungsi."
+"Model bahasa kecil yang ramah komersial dari NVIDIA yang dioptimalkan untuk "
+"peran bermain, RAG QA, dan pemanggilan fungsi."
 
 #: src/available_models_descriptions.py:98
 msgid "An extension of Mistral to support context windows of 64K or 128K."
@@ -2615,45 +2726,54 @@ msgid ""
 "language understanding and domain-specific knowledge, particularly in "
 "programming and mathematics."
 msgstr ""
-"Ekspansi dari Llama 2 yang mengkhususkan diri dalam mengintegrasikan pemahaman bahasa umum dan pengetahuan spesifik domain, terutama dalam pemrograman dan matematika."
+"Ekspansi dari Llama 2 yang mengkhususkan diri dalam mengintegrasikan "
+"pemahaman bahasa umum dan pengetahuan spesifik domain, terutama dalam "
+"pemrograman dan matematika."
 
 #: src/available_models_descriptions.py:100
 msgid ""
 "Fine-tuned Llama 2 model to answer medical questions based on an open source "
 "medical dataset."
 msgstr ""
-"Model Llama 2 yang disesuaikan untuk menjawab pertanyaan medis berdasarkan dataset medis sumber terbuka."
+"Model Llama 2 yang disesuaikan untuk menjawab pertanyaan medis berdasarkan "
+"dataset medis sumber terbuka."
 
 #: src/available_models_descriptions.py:101
 msgid ""
 "Open-source medical large language model adapted from Llama 2 to the medical "
 "domain."
 msgstr ""
-"Model bahasa besar medis sumber terbuka yang disesuaikan dari Llama 2 ke domain medis."
+"Model bahasa besar medis sumber terbuka yang disesuaikan dari Llama 2 ke "
+"domain medis."
 
 #: src/available_models_descriptions.py:102
 msgid ""
 "A series of models from Groq that represent a significant advancement in "
 "open-source AI capabilities for tool use/function calling."
 msgstr ""
-"Serangkaian model dari Groq yang mewakili kemajuan signifikan dalam kemampuan AI sumber terbuka untuk penggunaan alat/pemanggilan fungsi."
+"Serangkaian model dari Groq yang mewakili kemajuan signifikan dalam "
+"kemampuan AI sumber terbuka untuk penggunaan alat/pemanggilan fungsi."
 
 #: src/available_models_descriptions.py:103
 msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
 msgstr ""
-"Llama-3.1-Nemotron-70B-Instruct adalah model bahasa besar yang disesuaikan oleh NVIDIA untuk meningkatkan kegunaan respons yang dihasilkan oleh LLM terhadap kueri pengguna."
+"Llama-3.1-Nemotron-70B-Instruct adalah model bahasa besar yang disesuaikan "
+"oleh NVIDIA untuk meningkatkan kegunaan respons yang dihasilkan oleh LLM "
+"terhadap kueri pengguna."
 
 #: src/available_models_descriptions.py:104
 msgid ""
 "Nexus Raven is a 13B instruction tuned model for function calling tasks."
 msgstr ""
-"Nexus Raven adalah model 13B yang disesuaikan dengan instruksi untuk tugas pemanggilan fungsi."
+"Nexus Raven adalah model 13B yang disesuaikan dengan instruksi untuk tugas "
+"pemanggilan fungsi."
 
 #: src/available_models_descriptions.py:105
 msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
-msgstr "Model Nous Hermes 2 dari Nous Research, sekarang dilatih di atas Mixtral."
+msgstr ""
+"Model Nous Hermes 2 dari Nous Research, sekarang dilatih di atas Mixtral."
 
 #: src/available_models_descriptions.py:106
 msgid "Great code generation model based on Llama2."
@@ -2661,7 +2781,8 @@ msgstr "Model pembuatan kode hebat berbasis Llama2."
 
 #: src/available_models_descriptions.py:107
 msgid "Uncensored Llama2 based model with support for a 16K context window."
-msgstr "Model berbasis Llama2 tanpa sensor dengan dukungan untuk jendela konteks 16K."
+msgstr ""
+"Model berbasis Llama2 tanpa sensor dengan dukungan untuk jendela konteks 16K."
 
 #: src/available_models_descriptions.py:108
 msgid ""
@@ -2669,8 +2790,9 @@ msgid ""
 "cases and support for retrieval augmented generation (RAG), streamlining "
 "code generation, translation and bug fixing."
 msgstr ""
-"Model IBM Granite 2B dan 8B dirancang untuk mendukung penggunaan berbasis alat dan dukungan untuk generasi berbantuan pencarian (RAG), "
-"mempermudah pembuatan kode, penerjemahan, dan perbaikan bug."
+"Model IBM Granite 2B dan 8B dirancang untuk mendukung penggunaan berbasis "
+"alat dan dukungan untuk generasi berbantuan pencarian (RAG), mempermudah "
+"pembuatan kode, penerjemahan, dan perbaikan bug."
 
 #: src/available_models_descriptions.py:109
 msgid ""
@@ -2678,120 +2800,140 @@ msgid ""
 "instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
 "with open-source code snippets."
 msgstr ""
-"🎩 Magicoder adalah keluarga model dengan 7B parameter yang dilatih menggunakan 75K data instruksi sintetis menggunakan OSS-Instruct, "
-"pendekatan baru untuk mencerahkan LLM dengan cuplikan kode sumber terbuka."
+"🎩 Magicoder adalah keluarga model dengan 7B parameter yang dilatih "
+"menggunakan 75K data instruksi sintetis menggunakan OSS-Instruct, pendekatan "
+"baru untuk mencerahkan LLM dengan cuplikan kode sumber terbuka."
 
 #: src/available_models_descriptions.py:110
 msgid ""
 "A lightweight chat model allowing accurate, and responsive output without "
 "requiring high-end hardware."
 msgstr ""
-"Model obrolan ringan yang memungkinkan keluaran yang akurat dan responsif tanpa memerlukan perangkat keras kelas atas."
+"Model obrolan ringan yang memungkinkan keluaran yang akurat dan responsif "
+"tanpa memerlukan perangkat keras kelas atas."
 
 #: src/available_models_descriptions.py:111
 msgid ""
 "A high-performing code instruct model created by merging two existing code "
 "models."
 msgstr ""
-"Model instruksi kode berkinerja tinggi yang dibuat dengan menggabungkan dua model kode yang ada."
+"Model instruksi kode berkinerja tinggi yang dibuat dengan menggabungkan dua "
+"model kode yang ada."
 
 #: src/available_models_descriptions.py:112
 msgid ""
 "Falcon2 is an 11B parameters causal decoder-only model built by TII and "
 "trained over 5T tokens."
 msgstr ""
-"Falcon2 adalah model dekoder kausal 11B parameter yang dibangun oleh TII dan dilatih di atas 5T token."
+"Falcon2 adalah model dekoder kausal 11B parameter yang dibangun oleh TII dan "
+"dilatih di atas 5T token."
 
 #: src/available_models_descriptions.py:113
 msgid ""
 "Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
 "MelodysDreamj."
 msgstr ""
-"Wizard Vicuna adalah model 13B parameter berbasis Llama 2 yang dilatih oleh MelodysDreamj."
+"Wizard Vicuna adalah model 13B parameter berbasis Llama 2 yang dilatih oleh "
+"MelodysDreamj."
 
 #: src/available_models_descriptions.py:114
 msgid ""
 "MistralLite is a fine-tuned model based on Mistral with enhanced "
 "capabilities of processing long contexts."
 msgstr ""
-"MistralLite adalah model yang disesuaikan berbasis Mistral dengan kemampuan ditingkatkan untuk memproses konteks panjang."
+"MistralLite adalah model yang disesuaikan berbasis Mistral dengan kemampuan "
+"ditingkatkan untuk memproses konteks panjang."
 
 #: src/available_models_descriptions.py:115
 msgid ""
 "MathΣtral: a 7B model designed for math reasoning and scientific discovery "
 "by Mistral AI."
 msgstr ""
-"MathΣtral: model 7B yang dirancang untuk penalaran matematika dan penemuan ilmiah oleh Mistral AI."
+"MathΣtral: model 7B yang dirancang untuk penalaran matematika dan penemuan "
+"ilmiah oleh Mistral AI."
 
 #: src/available_models_descriptions.py:116
 msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
-msgstr "Model text-to-SQL dengan 7B parameter yang dibuat oleh MotherDuck dan Numbers Station."
+msgstr ""
+"Model text-to-SQL dengan 7B parameter yang dibuat oleh MotherDuck dan "
+"Numbers Station."
 
 #: src/available_models_descriptions.py:117
 msgid ""
 "MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
 "interleaving the model with itself."
 msgstr ""
-"MegaDolphin-2.2-120b adalah transformasi dari Dolphin-2.2-70b yang dibuat dengan menyelingi model dengan dirinya sendiri."
+"MegaDolphin-2.2-120b adalah transformasi dari Dolphin-2.2-70b yang dibuat "
+"dengan menyelingi model dengan dirinya sendiri."
 
 #: src/available_models_descriptions.py:118
 msgid ""
 "Solar Pro Preview: an advanced large language model (LLM) with 22 billion "
 "parameters designed to fit into a single GPU"
 msgstr ""
-"Solar Pro Preview: model bahasa besar (LLM) canggih dengan 22 miliar parameter yang dirancang untuk muat dalam satu GPU."
+"Solar Pro Preview: model bahasa besar (LLM) canggih dengan 22 miliar "
+"parameter yang dirancang untuk muat dalam satu GPU."
 
 #: src/available_models_descriptions.py:119
 msgid ""
 "A series of models that convert HTML content to Markdown content, which is "
 "useful for content conversion tasks."
 msgstr ""
-"Serangkaian model yang mengonversi konten HTML menjadi konten Markdown, yang berguna untuk tugas konversi konten."
+"Serangkaian model yang mengonversi konten HTML menjadi konten Markdown, yang "
+"berguna untuk tugas konversi konten."
 
 #: src/available_models_descriptions.py:120
 msgid ""
 "A top-performing mixture of experts model, fine-tuned with high-quality data."
 msgstr ""
-"Model campuran ahli berkinerja tinggi, disesuaikan dengan data berkualitas tinggi."
+"Model campuran ahli berkinerja tinggi, disesuaikan dengan data berkualitas "
+"tinggi."
 
 #: src/available_models_descriptions.py:121
 msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
-msgstr "Model obrolan 7B yang disesuaikan dengan data berkualitas tinggi dan berbasis Zephyr."
+msgstr ""
+"Model obrolan 7B yang disesuaikan dengan data berkualitas tinggi dan "
+"berbasis Zephyr."
 
 #: src/available_models_descriptions.py:122
 msgid ""
 "Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
 "Designed for chat and code generation."
 msgstr ""
-"Penggabungan model Open Orca OpenChat dan model Garage-bAInd Platypus 2. Dirancang untuk obrolan dan pembuatan kode."
+"Penggabungan model Open Orca OpenChat dan model Garage-bAInd Platypus 2. "
+"Dirancang untuk obrolan dan pembuatan kode."
 
 #: src/available_models_descriptions.py:123
 msgid ""
 "A language model created by combining two fine-tuned Llama 2 70B models into "
 "one."
 msgstr ""
-"Model bahasa yang dibuat dengan menggabungkan dua model Llama 2 70B yang disesuaikan menjadi satu."
+"Model bahasa yang dibuat dengan menggabungkan dua model Llama 2 70B yang "
+"disesuaikan menjadi satu."
 
 #: src/available_models_descriptions.py:124
 msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
-"Model IBM Granite 1B dan 3B adalah model campuran ahli (MoE) pertama dari IBM yang dirancang untuk penggunaan latensi rendah."
+"Model IBM Granite 1B dan 3B adalah model campuran ahli (MoE) pertama dari "
+"IBM yang dirancang untuk penggunaan latensi rendah."
 
 #: src/available_models_descriptions.py:125
 msgid ""
 "A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
 "information extraction, based on Phi-3."
 msgstr ""
-"Model 3.8B yang disesuaikan dengan dataset sintetis berkualitas tinggi pribadi untuk ekstraksi informasi, berbasis Phi-3."
+"Model 3.8B yang disesuaikan dengan dataset sintetis berkualitas tinggi "
+"pribadi untuk ekstraksi informasi, berbasis Phi-3."
 
 #: src/available_models_descriptions.py:126
 msgid ""
 "Cohere For AI's language models trained to perform well across 23 different "
 "languages."
 msgstr ""
-"Model bahasa Cohere For AI yang dilatih untuk berkinerja baik di 23 bahasa berbeda."
+"Model bahasa Cohere For AI yang dilatih untuk berkinerja baik di 23 bahasa "
+"berbeda."
 
 #: src/available_models_descriptions.py:127
 msgid "DBRX is an open, general-purpose LLM created by Databricks."
@@ -2802,7 +2944,8 @@ msgid ""
 "An open large reasoning model for real-world solutions by the Alibaba "
 "International Digital Commerce Group (AIDC-AI)."
 msgstr ""
-"Model penalaran besar terbuka untuk solusi dunia nyata oleh Alibaba International Digital Commerce Group (AIDC-AI)."
+"Model penalaran besar terbuka untuk solusi dunia nyata oleh Alibaba "
+"International Digital Commerce Group (AIDC-AI)."
 
 #: src/available_models_descriptions.py:129
 msgid "Embedding model from BAAI mapping texts to vectors."
@@ -2813,21 +2956,24 @@ msgid ""
 "An open weights function calling model based on Llama 3, competitive with "
 "GPT-4o function calling capabilities."
 msgstr ""
-"Model pemanggilan fungsi dengan bobot terbuka berbasis Llama 3, bersaing dengan kemampuan pemanggilan fungsi GPT-4o."
+"Model pemanggilan fungsi dengan bobot terbuka berbasis Llama 3, bersaing "
+"dengan kemampuan pemanggilan fungsi GPT-4o."
 
 #: src/available_models_descriptions.py:131
 msgid ""
 "A robust conversational model designed to be used for both chat and instruct "
 "use cases."
 msgstr ""
-"Model percakapan yang kuat yang dirancang untuk digunakan dalam kasus obrolan dan instruksi."
+"Model percakapan yang kuat yang dirancang untuk digunakan dalam kasus "
+"obrolan dan instruksi."
 
 #: src/available_models_descriptions.py:132
 msgid ""
 "An upgraded version of DeekSeek-V2 that integrates the general and coding "
 "abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
 msgstr ""
-"Versi yang ditingkatkan dari DeekSeek-V2 yang mengintegrasikan kemampuan umum dan pengkodean dari DeepSeek-V2-Chat dan DeepSeek-Coder-V2-Instruct."
+"Versi yang ditingkatkan dari DeekSeek-V2 yang mengintegrasikan kemampuan "
+"umum dan pengkodean dari DeepSeek-V2-Chat dan DeepSeek-Coder-V2-Instruct."
 
 #: src/available_models_descriptions.py:133
 msgid ""
@@ -2835,7 +2981,9 @@ msgid ""
 "text prompt input and text output responses against a set of defined safety "
 "policies."
 msgstr ""
-"ShieldGemma adalah serangkaian model yang disesuaikan untuk mengevaluasi keamanan masukan prompt teks dan respons keluaran teks terhadap seperangkat kebijakan keamanan yang telah ditentukan."
+"ShieldGemma adalah serangkaian model yang disesuaikan untuk mengevaluasi "
+"keamanan masukan prompt teks dan respons keluaran teks terhadap seperangkat "
+"kebijakan keamanan yang telah ditentukan."
 
 #: src/available_models_descriptions.py:134
 msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
@@ -2846,42 +2994,49 @@ msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
 msgstr ""
-"Llama Guard 3 adalah serangkaian model yang disesuaikan untuk klasifikasi keamanan konten masukan dan respons LLM."
+"Llama Guard 3 adalah serangkaian model yang disesuaikan untuk klasifikasi "
+"keamanan konten masukan dan respons LLM."
 
 #: src/available_models_descriptions.py:136
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
 msgstr ""
-"Model sentence-transformers yang dapat digunakan untuk tugas-tugas seperti pengelompokan atau pencarian semantik."
+"Model sentence-transformers yang dapat digunakan untuk tugas-tugas seperti "
+"pengelompokan atau pencarian semantik."
 
 #: src/available_models_descriptions.py:137
 msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
 msgstr ""
-"OpenCoder adalah keluarga LLM kode sumber terbuka dan dapat direproduksi yang mencakup model 1.5B dan 8B, mendukung obrolan dalam bahasa Inggris dan Cina."
+"OpenCoder adalah keluarga LLM kode sumber terbuka dan dapat direproduksi "
+"yang mencakup model 1.5B dan 8B, mendukung obrolan dalam bahasa Inggris dan "
+"Cina."
 
 #: src/available_models_descriptions.py:138
 msgid ""
 "Tülu 3 is a leading instruction following model family, offering fully open-"
 "source data, code, and recipes by the The Allen Institute for AI."
 msgstr ""
-"Tülu 3 adalah keluarga model pengikut instruksi terkemuka, menawarkan data, kode, dan resep sumber terbuka sepenuhnya oleh The Allen Institute for AI."
+"Tülu 3 adalah keluarga model pengikut instruksi terkemuka, menawarkan data, "
+"kode, dan resep sumber terbuka sepenuhnya oleh The Allen Institute for AI."
 
 #: src/available_models_descriptions.py:139
 msgid ""
 "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
 "support without sacrificing English performance or scalability."
 msgstr ""
-"Model embedding perbatasan Snowflake. Arctic Embed 2.0 menambahkan dukungan multibahasa tanpa mengorbankan kinerja atau skalabilitas bahasa Inggris."
+"Model embedding perbatasan Snowflake. Arctic Embed 2.0 menambahkan dukungan "
+"multibahasa tanpa mengorbankan kinerja atau skalabilitas bahasa Inggris."
 
 #: src/available_models_descriptions.py:140
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
 msgstr ""
-"Model IBM Granite Guardian 3.0 2B dan 8B dirancang untuk mendeteksi risiko dalam prompt dan/atau respons."
+"Model IBM Granite Guardian 3.0 2B dan 8B dirancang untuk mendeteksi risiko "
+"dalam prompt dan/atau respons."
 
 #: src/available_models_descriptions.py:141
 msgid ""
@@ -2889,21 +3044,26 @@ msgid ""
 "Korean) generative models ranging from 2.4B to 32B parameters, developed and "
 "released by LG AI Research."
 msgstr ""
-"EXAONE 3.5 adalah kumpulan model generatif bilingual (Inggris dan Korea) yang telah disesuaikan dengan instruksi, dengan parameter berkisar dari 2.4B hingga 32B, dikembangkan dan dirilis oleh LG AI Research."
+"EXAONE 3.5 adalah kumpulan model generatif bilingual (Inggris dan Korea) "
+"yang telah disesuaikan dengan instruksi, dengan parameter berkisar dari 2.4B "
+"hingga 32B, dikembangkan dan dirilis oleh LG AI Research."
 
 #: src/available_models_descriptions.py:142
 msgid ""
 "Sailor2 are multilingual language models made for South-East Asia. Available "
 "in 1B, 8B, and 20B parameter sizes."
 msgstr ""
-"Sailor2 adalah model bahasa multibahasa yang dibuat untuk Asia Tenggara. Tersedia dalam ukuran parameter 1B, 8B, dan 20B."
+"Sailor2 adalah model bahasa multibahasa yang dibuat untuk Asia Tenggara. "
+"Tersedia dalam ukuran parameter 1B, 8B, dan 20B."
 
 #: src/available_models_descriptions.py:143
 msgid ""
 "A family of efficient AI models under 10B parameters performant in science, "
 "math, and coding through innovative training techniques."
 msgstr ""
-"Sebagian keluarga model AI efisien dengan parameter di bawah 10B yang tampil baik dalam ilmu pengetahuan, matematika, dan pemrograman melalui teknik pelatihan inovatif."
+"Sebagian keluarga model AI efisien dengan parameter di bawah 10B yang tampil "
+"baik dalam ilmu pengetahuan, matematika, dan pemrograman melalui teknik "
+"pelatihan inovatif."
 
 #: src/available_models_descriptions.py:144
 msgid ""
@@ -2911,14 +3071,18 @@ msgid ""
 "trillion tokens of data, demonstrated significant improvements over their "
 "predecessors in performance and speed in IBM’s initial testing."
 msgstr ""
-"Model IBM Granite 2B dan 8B adalah LLM padat berbasis teks yang dilatih dengan lebih dari 12 triliun token data, menunjukkan peningkatan signifikan dalam kinerja dan kecepatan dibandingkan pendahulunya dalam uji coba awal IBM."
+"Model IBM Granite 2B dan 8B adalah LLM padat berbasis teks yang dilatih "
+"dengan lebih dari 12 triliun token data, menunjukkan peningkatan signifikan "
+"dalam kinerja dan kecepatan dibandingkan pendahulunya dalam uji coba awal "
+"IBM."
 
 #: src/available_models_descriptions.py:145
 msgid ""
 "The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
-"Model IBM Granite 1B dan 3B adalah model campuran ahli (MoE) konteks panjang dari IBM yang dirancang untuk penggunaan dengan latensi rendah."
+"Model IBM Granite 1B dan 3B adalah model campuran ahli (MoE) konteks panjang "
+"dari IBM yang dirancang untuk penggunaan dengan latensi rendah."
 
 #: src/available_models_descriptions.py:146
 msgid ""
@@ -2926,11 +3090,14 @@ msgid ""
 "biencoder embedding models, with 30M available in English only and 278M "
 "serving multilingual use cases."
 msgstr ""
-"Model IBM Granite Embedding 30M dan 278M adalah model penyematkan biencoder berbasis teks, dengan 30M hanya tersedia dalam bahasa Inggris dan 278M untuk kasus penggunaan multibahasa."
+"Model IBM Granite Embedding 30M dan 278M adalah model penyematkan biencoder "
+"berbasis teks, dengan 30M hanya tersedia dalam bahasa Inggris dan 278M untuk "
+"kasus penggunaan multibahasa."
 
 #: src/available_models_descriptions.py:147
 msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
-msgstr "Phi-4 adalah model terbuka canggih dari Microsoft dengan parameter 14B."
+msgstr ""
+"Phi-4 adalah model terbuka canggih dari Microsoft dengan parameter 14B."
 
 #: src/available_models_descriptions.py:148
 msgid ""
@@ -2945,21 +3112,26 @@ msgid ""
 "model, enabling coding, math, agentic, function calling, and general use "
 "cases."
 msgstr ""
-"Dolphin 3.0 Llama 3.1 8B 🐬 adalah generasi berikutnya dari seri Dolphin model yang disesuaikan dengan instruksi yang dirancang untuk menjadi model lokal serbaguna terbaik, memungkinkan pemrograman, matematika, agen, pemanggilan fungsi, dan kasus penggunaan umum."
+"Dolphin 3.0 Llama 3.1 8B 🐬 adalah generasi berikutnya dari seri Dolphin "
+"model yang disesuaikan dengan instruksi yang dirancang untuk menjadi model "
+"lokal serbaguna terbaik, memungkinkan pemrograman, matematika, agen, "
+"pemanggilan fungsi, dan kasus penggunaan umum."
 
 #: src/available_models_descriptions.py:150
 msgid ""
 "DeepSeek's first generation reasoning models with comparable performance to "
 "OpenAI-o1."
 msgstr ""
-"Model penalaran generasi pertama DeepSeek dengan kinerja yang setara dengan OpenAI-o1."
+"Model penalaran generasi pertama DeepSeek dengan kinerja yang setara dengan "
+"OpenAI-o1."
 
 #: src/available_models_descriptions.py:151
 msgid ""
 "A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
 "with 37B activated for each token."
 msgstr ""
-"Model bahasa Mixture-of-Experts (MoE) yang kuat dengan total 671B parameter dengan 37B diaktifkan untuk setiap token."
+"Model bahasa Mixture-of-Experts (MoE) yang kuat dengan total 671B parameter "
+"dengan 37B diaktifkan untuk setiap token."
 
 #: src/available_models_descriptions.py:152
 msgid ""
@@ -2968,7 +3140,10 @@ msgid ""
 "models, and competitive with open-weight models such as Llama 3.1 on English "
 "academic benchmarks."
 msgstr ""
-"OLMo 2 adalah keluarga baru dari model 7B dan 13B yang dilatih dengan hingga 5T token. Model-model ini setara atau lebih baik daripada model terbuka sepenuhnya dengan ukuran serupa, dan kompetitif dengan model dengan bobot terbuka seperti Llama 3.1 pada tolok ukur akademik bahasa Inggris."
+"OLMo 2 adalah keluarga baru dari model 7B dan 13B yang dilatih dengan hingga "
+"5T token. Model-model ini setara atau lebih baik daripada model terbuka "
+"sepenuhnya dengan ukuran serupa, dan kompetitif dengan model dengan bobot "
+"terbuka seperti Llama 3.1 pada tolok ukur akademik bahasa Inggris."
 
 #: src/available_models_descriptions.py:153
 msgid ""
@@ -2976,181 +3151,435 @@ msgid ""
 "and quality to build powerful AI applications on commodity GPUs and edge "
 "devices."
 msgstr ""
-"Model terkecil dalam seri R dari Cohere memberikan kecepatan, efisiensi, dan kualitas terbaik untuk membangun aplikasi AI yang kuat di GPU komoditas dan perangkat edge."
+"Model terkecil dalam seri R dari Cohere memberikan kecepatan, efisiensi, dan "
+"kualitas terbaik untuk membangun aplikasi AI yang kuat di GPU komoditas dan "
+"perangkat edge."
 
-#: src/connection_handler.py:14
+#: src/instance_manager.py:28
+msgid "Instance"
+msgstr ""
+
+#: src/instance_manager.py:58 src/window.ui:161
+#: src/custom_widgets/chat_widget.py:397
+msgid "New Chat"
+msgstr "Obrolan Baru"
+
+#: src/instance_manager.py:80 src/instance_manager.py:166
+#: src/instance_manager.py:176 src/instance_manager.py:319
+#: src/instance_manager.py:574 src/instance_manager.py:705
+#: src/instance_manager.py:733
+msgid "Instance Error"
+msgstr ""
+
+#: src/instance_manager.py:80
+msgid "Message generation failed"
+msgstr ""
+
+#: src/instance_manager.py:166 src/instance_manager.py:574
+#: src/instance_manager.py:705 src/instance_manager.py:733
+msgid "Could not retrieve added models"
+msgstr ""
+
+#: src/instance_manager.py:176
+msgid "Could not retrieve available models"
+msgstr ""
+
+#: src/instance_manager.py:244
+msgid "Ollama (Managed)"
+msgstr ""
+
+#: src/instance_manager.py:273
 msgid "Alpaca Support"
 msgstr "Dukungan Alpaca"
 
-#: src/connection_handler.py:25
+#: src/instance_manager.py:280
 msgid "Model request too large for system"
 msgstr "Permintaan model terlalu besar untuk sistem"
 
-#: src/connection_handler.py:28
+#: src/instance_manager.py:283
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
-msgstr "GPU AMD terdeteksi tetapi ekstensi tidak ada, Ollama akan menggunakan CPU."
+msgstr ""
+"GPU AMD terdeteksi tetapi ekstensi tidak ada, Ollama akan menggunakan CPU."
 
-#: src/connection_handler.py:30
+#: src/instance_manager.py:285
 msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
 msgstr "GPU AMD terdeteksi tetapi ROCm tidak ada, Ollama akan menggunakan CPU."
 
-#: src/connection_handler.py:33
+#: src/instance_manager.py:287
 msgid "Using AMD GPU type '{}'"
 msgstr "Menggunakan jenis GPU AMD '{}'"
 
-#: src/connection_handler.py:98
-msgid "Ollama instance was shut down due to inactivity"
-msgstr "Instans Ollama dimatikan karena tidak aktif"
-
-#: src/connection_handler.py:135
-msgid "Integrated Ollama instance is running"
-msgstr "Instans Ollama terintegrasi sedang berjalan"
-
-#: src/connection_handler.py:151 src/window.ui:987
+#: src/instance_manager.py:297
 msgid "Integrated Ollama instance is not running"
 msgstr "Instans Ollama terintegrasi tidak sedang berjalan"
 
-#: src/window.ui:80
+#: src/instance_manager.py:319
+msgid "Managed Ollama instance failed to start"
+msgstr ""
+
+#: src/instance_manager.py:322
+msgid "Integrated Ollama instance is running"
+msgstr "Instans Ollama terintegrasi sedang berjalan"
+
+#: src/instance_manager.py:326
+msgid "Local AI instance managed directly by Alpaca"
+msgstr ""
+
+#: src/instance_manager.py:329 src/instance_manager.py:330
+msgid "Ollama Log"
+msgstr ""
+
+#: src/instance_manager.py:335 src/instance_manager.py:469
+#: src/instance_manager.py:589 src/window.ui:833
+msgid "Name"
+msgstr "Nama"
+
+#: src/instance_manager.py:341
+msgid "Port"
+msgstr ""
+
+#: src/instance_manager.py:341
+msgid "Which network port will Ollama use"
+msgstr ""
+
+#: src/instance_manager.py:346 src/instance_manager.py:481
+#: src/instance_manager.py:617
+msgid "Temperature"
+msgstr "Temperatur"
+
+#: src/instance_manager.py:346 src/instance_manager.py:481
+#: src/instance_manager.py:617
+msgid "Increasing the temperature will make the models answer more creatively."
+msgstr ""
+
+#: src/instance_manager.py:349 src/instance_manager.py:484
+#: src/instance_manager.py:621
+msgid "Seed"
+msgstr "Benih"
+
+#: src/instance_manager.py:349 src/instance_manager.py:484
+#: src/instance_manager.py:621
+msgid ""
+"Setting this to a specific number other than 0 will make the model generate "
+"the same text for the same prompt."
+msgstr ""
+
+#: src/instance_manager.py:354
+msgid "Model Directory"
+msgstr "Direktori Model"
+
+#: src/instance_manager.py:356
+msgid "Select Directory"
+msgstr ""
+
+#: src/instance_manager.py:367 src/instance_manager.py:490
+#: src/instance_manager.py:627
+msgid "Default Model"
+msgstr "Model Default"
+
+#: src/instance_manager.py:367 src/instance_manager.py:490
+#: src/instance_manager.py:627
+msgid "Model to select when starting a new chat."
+msgstr ""
+
+#: src/instance_manager.py:369 src/instance_manager.py:492
+#: src/instance_manager.py:629
+msgid "Title Model"
+msgstr ""
+
+#: src/instance_manager.py:369 src/instance_manager.py:492
+#: src/instance_manager.py:629
+msgid "Model to use when generating a chat title."
+msgstr ""
+
+#: src/instance_manager.py:385
+msgid "Overrides"
+msgstr ""
+
+#: src/instance_manager.py:385
+msgid ""
+"These entries are optional, they are used to troubleshoot GPU related "
+"problems with Ollama."
+msgstr ""
+
+#: src/instance_manager.py:412 src/instance_manager.py:413
+#: src/instance_manager.py:519 src/instance_manager.py:520
+#: src/instance_manager.py:656 src/instance_manager.py:657
+#: src/custom_widgets/message_widget.py:203
+msgid "Save"
+msgstr "Simpan"
+
+#: src/instance_manager.py:466
+msgid "Local or remote AI instance not managed by Alpaca"
+msgstr ""
+
+#: src/instance_manager.py:472
+msgid "Instance URL"
+msgstr ""
+
+#: src/instance_manager.py:475
+msgid "Bearer Token (Optional)"
+msgstr "Token Bearer (Opsional)"
+
+#: src/instance_manager.py:591 src/instance_manager.py:593
+msgid "API Key (Unchanged)"
+msgstr ""
+
+#: src/instance_manager.py:591 src/instance_manager.py:593
+msgid "API Key"
+msgstr ""
+
+#: src/instance_manager.py:599
+msgid "Max Tokens"
+msgstr ""
+
+#: src/instance_manager.py:600
+msgid ""
+"Defines the maximum number of tokens (words + spaces) the AI can generate in "
+"a response. More tokens allow longer replies but may take more time and cost "
+"more."
+msgstr ""
+
+#: src/instance_manager.py:758
+msgid "Remove Instance?"
+msgstr ""
+
+#: src/instance_manager.py:758
+msgid "Are you sure you want to remove this instance?"
+msgstr ""
+
+#: src/instance_manager.py:773
+msgid "Edit Instance"
+msgstr ""
+
+#: src/window.ui:33
+msgid "Loading"
+msgstr ""
+
+#: src/window.ui:54
+msgid "Welcome"
+msgstr ""
+
+#: src/window.ui:66 src/window.ui:67
+msgid "Previous"
+msgstr "Sebelumnya"
+
+#: src/window.ui:102
+msgid "Welcome to Alpaca"
+msgstr "Selamat datang di Alpaca"
+
+#: src/window.ui:103
+msgid "Powering your potential"
+msgstr ""
+
+#: src/window.ui:111
+msgid ""
+"Alpaca and its developers are not liable for any damages to devices or "
+"software resulting from the execution of code generated by an AI model. "
+"Please exercise caution and review the code carefully before running it.\n"
+"\n"
+"Alpaca is distributed under GPL v3.0, this software comes with no warranty."
+msgstr ""
+
+#: src/window.ui:120
+msgid "Effortless Code Execution"
+msgstr ""
+
+#: src/window.ui:121
+msgid ""
+"Alpaca can run Python, C++, and even HTML (with a live server) right from "
+"your conversations. Give it a try!"
+msgstr ""
+
+#: src/window.ui:127
+msgid "Your AI, Your Choice"
+msgstr ""
+
+#: src/window.ui:128
+msgid ""
+"Alpaca includes Ollama by default, giving you instant access to AI. "
+"Customize your experience further by connecting to Google Gemini, OpenAI "
+"ChatGPT, Together.AI, and more."
+msgstr ""
+
+#: src/window.ui:134
+msgid "Private by Design"
+msgstr ""
+
+#: src/window.ui:135
+msgid ""
+"With Alpaca, your conversations are saved locally on your device, so you can "
+"be confident that your data is always secure and private."
+msgstr ""
+
+#: src/window.ui:172
 msgid "Menu"
 msgstr "Menu"
 
-#: src/window.ui:102
+#: src/window.ui:194
 msgid "Toggle Sidebar"
 msgstr "Toggel Sidebar"
 
-#: src/window.ui:109
+#: src/window.ui:201
 msgid "Search Messages"
 msgstr "Cari Pesan"
 
-#: src/window.ui:129
+#: src/window.ui:221
 msgid "Loading Instance"
 msgstr "Memuat Instans"
 
-#: src/window.ui:144 src/window.ui:150 src/window.ui:1234
-#: src/custom_widgets/model_manager_widget.py:63
+#: src/window.ui:241 src/window.ui:263 src/window.ui:269 src/window.ui:1143
 msgid "Manage Models"
 msgstr "Kelola Model"
 
-#: src/window.ui:162
+#: src/window.ui:281
 msgid "Chat Menu"
 msgstr "Menu Chat"
 
-#: src/window.ui:175
+#: src/window.ui:294
 msgid "Message search bar"
 msgstr "Bilah pencarian pesan"
 
-#: src/window.ui:184 src/window.ui:186
+#: src/window.ui:303 src/window.ui:305
 msgid "Search messages"
 msgstr "Cari pesan"
 
-#: src/window.ui:202
+#: src/window.ui:321
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr ""
-"Peringatan: Mode penghemat daya diaktifkan, ini akan memperlambat pembuatan pesan"
+"Peringatan: Mode penghemat daya diaktifkan, ini akan memperlambat pembuatan "
+"pesan"
 
-#: src/window.ui:250 src/window.ui:1328
+#: src/window.ui:369 src/window.ui:1237
 msgid "Attach File"
 msgstr "Lampirkan File"
 
-#: src/window.ui:280
+#: src/window.ui:399
 msgid "Send Message"
 msgstr "Kirim Pesan"
 
-#: src/window.ui:299
+#: src/window.ui:418
 msgid "Stop Message"
 msgstr "Hentikan Pesan"
 
-#: src/window.ui:329
+#: src/window.ui:448
+msgid "Instance Manager"
+msgstr ""
+
+#: src/window.ui:463
+msgid "No Instances Found"
+msgstr ""
+
+#: src/window.ui:464
+msgid "It looks a bit empty in here. Try adding an instance get started!"
+msgstr ""
+
+#: src/window.ui:493
+msgid "Added Instances"
+msgstr ""
+
+#: src/window.ui:494
+msgid ""
+"Manage your AI instances, chats and messages are shared between instances "
+"when generating responses."
+msgstr ""
+
+#: src/window.ui:529
 msgid "Model Manager"
 msgstr "Pengelola Model"
 
-#: src/window.ui:365
+#: src/window.ui:565
 msgid "Search Model"
 msgstr "Cari Model"
 
-#: src/window.ui:379
+#: src/window.ui:579
 msgid "Model Manager Menu"
 msgstr "Menu Pengelola Model"
 
-#: src/window.ui:392
+#: src/window.ui:592
 msgid "Model search bar"
 msgstr "Bilah pencarian model"
 
-#: src/window.ui:401 src/window.ui:403
+#: src/window.ui:601 src/window.ui:603
 msgid "Search models"
 msgstr "Cari model"
 
-#: src/window.ui:417
-msgid "Local Models"
-msgstr "Model Lokal"
+#: src/window.ui:617
+msgid "Added"
+msgstr ""
 
-#: src/window.ui:427 src/window.ui:470 src/window.ui:524
+#: src/window.ui:627 src/window.ui:687 src/window.ui:741
 msgid "No Models Found"
 msgstr "Tidak Ada Model Ditemukan"
 
-#: src/window.ui:428
+#: src/window.ui:628
 msgid ""
-"It looks a bit empty in here. Try downloading some models to get started!"
+"It looks a bit empty in here. Try downloading some models or change your AI "
+"instance to get started!"
 msgstr ""
-"Sepertinya agak kosong di sini. Cobalah mengunduh beberapa model untuk memulai!"
 
-#: src/window.ui:471 src/window.ui:525
+#: src/window.ui:631 src/window.ui:641 src/window.ui:1139
+msgid "Manage Instances"
+msgstr ""
+
+#: src/window.ui:688 src/window.ui:742
 msgid ""
 "Looks like we’re fresh out of models for that search. Try tweaking your "
 "keywords, or maybe explore something new!"
 msgstr ""
-"Sepertinya kami kehabisan model untuk pencarian itu. Cobalah sesuaikan kata kunci Anda, atau mungkin jelajahi sesuatu yang baru!"
+"Sepertinya kami kehabisan model untuk pencarian itu. Cobalah sesuaikan kata "
+"kunci Anda, atau mungkin jelajahi sesuatu yang baru!"
 
-#: src/window.ui:483
-msgid "Available Models"
-msgstr "Model yang Tersedia"
+#: src/window.ui:700
+msgid "Available"
+msgstr ""
 
-#: src/window.ui:537 src/window.ui:548
+#: src/window.ui:754
+msgid "Creator"
+msgstr ""
+
+#: src/window.ui:765
 msgid "Model Creator"
 msgstr "Pembuat Model"
 
-#: src/window.ui:549
+#: src/window.ui:766
 msgid "Select a method of importing a model to continue"
 msgstr "Pilih metode untuk mengimpor model untuk melanjutkan"
 
-#: src/window.ui:561
+#: src/window.ui:778
 msgid "GGUF File"
 msgstr "File GGUF"
 
-#: src/window.ui:572
+#: src/window.ui:789
 msgid "Existing Model"
 msgstr "Model yang Ada"
 
-#: src/window.ui:590
+#: src/window.ui:807
 msgid "Identity"
 msgstr "Identitas"
 
-#: src/window.ui:593
+#: src/window.ui:810
 msgid "Base"
 msgstr "Dasar"
 
-#: src/window.ui:600
+#: src/window.ui:817
 msgid "Profile Picture"
 msgstr "Gambar Profil"
 
-#: src/window.ui:605
+#: src/window.ui:822
 msgid "Open File"
 msgstr "Buka File"
 
-#: src/window.ui:616
-msgid "Name"
-msgstr "Nama"
-
-#: src/window.ui:621 src/custom_widgets/model_manager_widget.py:274
+#: src/window.ui:838 src/custom_widgets/model_manager_widget.py:211
 msgid "Tag"
 msgstr "Tag"
 
-#: src/window.ui:628
+#: src/window.ui:845
 msgid "Context"
 msgstr "Konteks"
 
-#: src/window.ui:629
+#: src/window.ui:846
 msgid ""
 "Describe the desired behavior of the model in its primary language "
 "(typically English)."
@@ -3158,241 +3587,134 @@ msgstr ""
 "Deskripsikan perilaku yang diinginkan dari model dalam bahasa utamanya "
 "(biasanya bahasa Inggris)."
 
-#: src/window.ui:657
+#: src/window.ui:874
 msgid "Behavior"
 msgstr "Perilaku"
 
-#: src/window.ui:660
+#: src/window.ui:877
 msgid "Imagination"
 msgstr "Imaginasi"
 
-#: src/window.ui:661
+#: src/window.ui:878
 msgid "A higher number results in more diverse answers from the model. (top_k)"
-msgstr "Angka yang lebih tinggi menghasilkan jawaban yang lebih beragam dari model. (top_k)"
+msgstr ""
+"Angka yang lebih tinggi menghasilkan jawaban yang lebih beragam dari model. "
+"(top_k)"
 
-#: src/window.ui:675
+#: src/window.ui:892
 msgid "Focus"
 msgstr "Fokus"
 
-#: src/window.ui:676
+#: src/window.ui:893
 msgid "A higher number widens the amount of possible answers. (top_p)"
-msgstr "Angka yang lebih tinggi memperluas jumlah jawaban yang mungkin. (top_p)"
+msgstr ""
+"Angka yang lebih tinggi memperluas jumlah jawaban yang mungkin. (top_p)"
 
-#: src/window.ui:709 src/window.ui:717
+#: src/window.ui:926 src/window.ui:934
 msgid "Add Model"
 msgstr "Tambah Model"
 
-#: src/window.ui:751 src/window.ui:1240
+#: src/window.ui:968 src/window.ui:1149
 msgid "Preferences"
 msgstr "Preferensi"
 
-#: src/window.ui:754
+#: src/window.ui:971
 msgid "General"
 msgstr "Umum"
 
-#: src/window.ui:761
-msgid "Use Remote Connection to Ollama"
-msgstr "Gunakan Koneksi Jarak Jauh ke Ollama"
-
-#: src/window.ui:767 src/window.ui:773
-msgid "Change Ollama Instance"
-msgstr "Ganti Instans Ollama"
-
-#: src/window.ui:788
+#: src/window.ui:978
 msgid "Run Alpaca In Background"
 msgstr "Jalankan Alpaca di Latar Belakang"
 
-#: src/window.ui:794
+#: src/window.ui:984
 msgid "Show Power Saver Warning"
 msgstr "Tampilkan Peringatan Penghemat Daya"
 
-#: src/window.ui:801
-msgid "Default Model"
-msgstr "Model Default"
-
-#: src/window.ui:802
-msgid "The default model to use on new chats and when generating chat titles"
-msgstr "Model default yang digunakan pada obrolan baru dan saat menghasilkan judul obrolan"
-
-#: src/window.ui:821
-msgid "Temperature"
-msgstr "Temperatur"
-
-#: src/window.ui:822
-msgid ""
-"The temperature of the model. Increasing the temperature will make the model "
-"answer more creatively. (Default: 0.8)"
-msgstr ""
-"Temperatur model. Meningkatkan temperatur akan membuat model memberikan jawaban yang lebih kreatif. (Default: 0.8)"
-
-#: src/window.ui:837
-msgid "Seed"
-msgstr "Benih"
-
-#: src/window.ui:838
-msgid ""
-"Sets the random number seed to use for generation. Setting this to a "
-"specific number will make the model generate the same text for the same "
-"prompt. (Default: 0 (random))"
-msgstr ""
-"Menetapkan benih angka acak untuk digunakan dalam pembuatan. Menetapkannya ke angka tertentu akan membuat model menghasilkan teks yang sama untuk permintaan yang sama. (Default: 0 (acak))"
-
-#: src/window.ui:852
-msgid "Keep Alive Time"
-msgstr "Waktu Tetap Aktif"
-
-#: src/window.ui:853
-msgid ""
-"Controls how long the model will stay loaded into memory following the "
-"request in minutes (Default: 5)"
-msgstr ""
-"Mengontrol berapa lama model akan tetap dimuat dalam memori setelah permintaan dalam menit (Default: 5)"
-
-#: src/window.ui:870
-msgid "Ollama Instance"
-msgstr "Instans Ollama"
-
-#: src/window.ui:874
-msgid "Ollama Overrides"
-msgstr "Penggantian Ollama"
-
-#: src/window.ui:875
-msgid ""
-"Manage the arguments used on Ollama, any changes on this page only applies "
-"to the integrated instance, the instance will restart if you make changes."
-msgstr ""
-"Kelola argumen yang digunakan di Ollama, perubahan apa pun di halaman ini hanya berlaku untuk instans terintegrasi, instans akan dimulai ulang jika Anda membuat perubahan."
-
-#: src/window.ui:947
-msgid "Idle Timer"
-msgstr "Penghitung Waktu Diam"
-
-#: src/window.ui:948
-msgid ""
-"Number of minutes the instance should remain idle before it is shut down (0 "
-"means it won't be shut down)"
-msgstr ""
-"Jumlah menit instans harus tetap diam sebelum dimatikan (0 berarti tidak akan dimatikan)"
-
-#: src/window.ui:965
-msgid "Model Directory"
-msgstr "Direktori Model"
-
-#: src/window.ui:971
-msgid "Change Model Directory"
-msgstr "Ganti Direktori Model"
-
-#: src/window.ui:1003
+#: src/window.ui:996
 msgid "Quick ask dialog"
 msgstr "Dialog Tanya Cepat"
 
-#: src/window.ui:1015
+#: src/window.ui:1008
 msgid "Save Conversation to Alpaca"
 msgstr "Simpan Percakapan ke Alpaca"
 
-#: src/window.ui:1030
+#: src/window.ui:1023
 msgid "Terminal dialog"
 msgstr "Dialog Terminal"
 
-#: src/window.ui:1033
+#: src/window.ui:1026
 msgid "Terminal"
 msgstr "Terminal"
 
-#: src/window.ui:1045
+#: src/window.ui:1038
 msgid "Open Environment Directory"
 msgstr "Buka Direktori Lingkungan"
 
-#: src/window.ui:1066
+#: src/window.ui:1059
 msgid "File preview dialog"
 msgstr "Dialog Pratinjau File"
 
-#: src/window.ui:1077
+#: src/window.ui:1070
 msgid "Open With Default App"
 msgstr "Buka Dengan Aplikasi Default"
 
-#: src/window.ui:1085
+#: src/window.ui:1078
 msgid "Remove Attachment"
 msgstr "Hapus Lampiran"
 
-#: src/window.ui:1153
-msgid "Previous"
-msgstr "Sebelumnya"
-
-#: src/window.ui:1196
-msgid "Welcome to Alpaca"
-msgstr "Selamat datang di Alpaca"
-
-#: src/window.ui:1197
-msgid "Powered by Ollama"
-msgstr "Didukung oleh Ollama"
-
-#: src/window.ui:1200
-msgid "Ollama Website"
-msgstr "Situs Web Ollama"
-
-#: src/window.ui:1217
-msgid ""
-"Alpaca and its developers are not liable for any damages to devices or "
-"software resulting from the execution of code generated by an AI model. "
-"Please exercise caution and review the code carefully before running it."
-msgstr ""
-"Alpaca dan pengembangnya tidak bertanggung jawab atas kerusakan perangkat atau "
-"perangkat lunak yang diakibatkan oleh eksekusi kode yang dihasilkan oleh model AI. "
-"Harap berhati-hati dan tinjau kode dengan seksama sebelum menjalankannya."
-
-#: src/window.ui:1230
+#: src/window.ui:1135
 msgid "Import Chat"
 msgstr "Impor Obrolan"
 
-#: src/window.ui:1244
+#: src/window.ui:1153
 msgid "Keyboard Shortcuts"
 msgstr "Pintasan Keyboard"
 
-#: src/window.ui:1248
+#: src/window.ui:1157
 msgid "About Alpaca"
 msgstr "Tentang Alpaca"
 
-#: src/window.ui:1256 src/window.ui:1294
+#: src/window.ui:1165 src/window.ui:1203
 msgid "Rename Chat"
 msgstr "Ganti Nama Obrolan"
 
-#: src/window.ui:1260 src/window.ui:1298
+#: src/window.ui:1169 src/window.ui:1207
 msgid "Duplicate Chat"
 msgstr "Duplikat Obrolan"
 
-#: src/window.ui:1268
+#: src/window.ui:1177
 msgid "Clear Chat"
 msgstr "Bersihkan Obrolan"
 
-#: src/window.ui:1274 src/window.ui:1308
+#: src/window.ui:1183 src/window.ui:1217
 msgid "Delete Chat"
 msgstr "Hapus Obrolan"
 
-#: src/window.ui:1282
-msgid "Reload Local Models"
-msgstr "Muat Ulang Model Lokal"
+#: src/window.ui:1191
+msgid "Reload Added Models"
+msgstr ""
 
-#: src/window.ui:1286
+#: src/window.ui:1195
 msgid "Download Model From Name"
 msgstr "Unduh Model Berdasarkan Nama"
 
-#: src/window.ui:1316
+#: src/window.ui:1225
 msgid "Send as User"
 msgstr "Kirim sebagai Pengguna"
 
-#: src/window.ui:1320
+#: src/window.ui:1229
 msgid "Send as System"
 msgstr "Kirim sebagai Sistem"
 
-#: src/window.ui:1332
+#: src/window.ui:1241
 msgid "Attach Screenshot"
 msgstr "Lampirkan Screenshot"
 
-#: src/window.ui:1336
+#: src/window.ui:1245
 msgid "Attach Website"
 msgstr "Lampirkan Situs Web"
 
-#: src/window.ui:1340
+#: src/window.ui:1249
 msgid "Attach YouTube Captions"
 msgstr "Lampirkan Teks YouTube"
 
@@ -3404,7 +3726,7 @@ msgstr "Buka obrolan"
 msgid "Quick ask"
 msgstr "Tanya cepat"
 
-#: src/generic_actions.py:75
+#: src/generic_actions.py:76
 msgid "An error occurred while extracting text from the website"
 msgstr "Terjadi kesalahan saat mengekstrak teks dari situs web"
 
@@ -3430,33 +3752,33 @@ msgstr "Manajer Model"
 
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
+msgid "Instance Manager"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:38
+msgctxt "shortcut window"
 msgid "Toggle Sidebar"
 msgstr "Alihkan Sisi Bilah"
 
-#: src/gtk/help-overlay.ui:38
+#: src/gtk/help-overlay.ui:44
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Keluar"
 
-#: src/gtk/help-overlay.ui:46
+#: src/gtk/help-overlay.ui:52
 msgctxt "shortcut window"
 msgid "Chat Management"
 msgstr "Manajemen Obrolan"
 
-#: src/gtk/help-overlay.ui:49
+#: src/gtk/help-overlay.ui:55
 msgctxt "shortcut window"
 msgid "Create Chat"
 msgstr "Buat Obrolan"
 
-#: src/gtk/help-overlay.ui:55
+#: src/gtk/help-overlay.ui:61
 msgctxt "shortcut window"
 msgid "Delete Chat"
 msgstr "Hapus Obrolan"
-
-#: src/gtk/help-overlay.ui:61
-msgctxt "shortcut window"
-msgid "Import Chat"
-msgstr "Impor Obrolan"
 
 #: src/gtk/help-overlay.ui:67
 msgctxt "shortcut window"
@@ -3506,47 +3828,47 @@ msgstr "Pesan sistem dianggap sebagai instruksi literal oleh model"
 msgid "Send Message as User"
 msgstr "Kirim Pesan sebagai Pengguna"
 
-#: src/custom_widgets/chat_widget.py:82
+#: src/custom_widgets/chat_widget.py:83
 msgid "Send prompt: '{}'"
 msgstr "Kirim prompt: '{}'"
 
-#: src/custom_widgets/chat_widget.py:88 src/custom_widgets/chat_widget.py:89
+#: src/custom_widgets/chat_widget.py:89 src/custom_widgets/chat_widget.py:90
 msgid "Open Model Manager"
 msgstr "Buka Manajer Model"
 
-#: src/custom_widgets/chat_widget.py:98
+#: src/custom_widgets/chat_widget.py:99
 msgid "Try one of these prompts"
 msgstr "Coba salah satu prompt ini"
 
-#: src/custom_widgets/chat_widget.py:98
+#: src/custom_widgets/chat_widget.py:99
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
 msgstr ""
 "Sepertinya Anda belum mengunduh model apa pun. Unduh model untuk memulai!"
 
-#: src/custom_widgets/chat_widget.py:151
+#: src/custom_widgets/chat_widget.py:152
 msgid "Chat exported successfully"
 msgstr "Obrolan berhasil diekspor"
 
-#: src/custom_widgets/chat_widget.py:171
+#: src/custom_widgets/chat_widget.py:172
 msgid "User"
 msgstr "Pengguna"
 
-#: src/custom_widgets/chat_widget.py:175
-#: src/custom_widgets/message_widget.py:630
+#: src/custom_widgets/chat_widget.py:176
+#: src/custom_widgets/message_widget.py:625
 msgid "System"
 msgstr "Sistem"
 
-#: src/custom_widgets/chat_widget.py:253
+#: src/custom_widgets/chat_widget.py:266
 msgid "Regenerate Response"
 msgstr "Regenerasi Respons"
 
-#: src/custom_widgets/chat_widget.py:422
+#: src/custom_widgets/chat_widget.py:435
 msgid "Copy of {}"
 msgstr "Salinan dari {}"
 
-#: src/custom_widgets/chat_widget.py:437
+#: src/custom_widgets/chat_widget.py:450
 msgid "Chat imported successfully"
 msgstr "Obrolan berhasil diimpor"
 
@@ -3580,17 +3902,13 @@ msgid "Code Block"
 msgstr "Blok Kode"
 
 #: src/custom_widgets/message_widget.py:191
-#: src/custom_widgets/message_widget.py:522
+#: src/custom_widgets/message_widget.py:525
 msgid "Copy Message"
 msgstr "Salin Pesan"
 
 #: src/custom_widgets/message_widget.py:195
 msgid "Edit Code Block"
 msgstr "Edit Blok Kode"
-
-#: src/custom_widgets/message_widget.py:203
-msgid "Save"
-msgstr "Simpan"
 
 #: src/custom_widgets/message_widget.py:207
 #: src/custom_widgets/message_widget.py:283
@@ -3606,206 +3924,203 @@ msgid ""
 "Make sure you understand what this script does before running it, Alpaca is "
 "not responsible for any damages to your device or data"
 msgstr ""
-"Pastikan Anda memahami apa yang dilakukan skrip ini sebelum menjalankannya, Alpaca "
-"tidak bertanggung jawab atas kerusakan perangkat atau data Anda"
+"Pastikan Anda memahami apa yang dilakukan skrip ini sebelum menjalankannya, "
+"Alpaca tidak bertanggung jawab atas kerusakan perangkat atau data Anda"
 
 #: src/custom_widgets/message_widget.py:286
 msgid "Execute"
 msgstr "Eksekusi"
 
-#: src/custom_widgets/message_widget.py:359
 #: src/custom_widgets/message_widget.py:361
+#: src/custom_widgets/message_widget.py:363
 msgid "Image"
 msgstr "Gambar"
 
-#: src/custom_widgets/message_widget.py:370
-#: src/custom_widgets/message_widget.py:382
+#: src/custom_widgets/message_widget.py:372
+#: src/custom_widgets/message_widget.py:384
 msgid "Missing Image"
 msgstr "Gambar Hilang"
 
-#: src/custom_widgets/message_widget.py:384
+#: src/custom_widgets/message_widget.py:386
 msgid "Missing image"
 msgstr "Gambar hilang"
 
-#: src/custom_widgets/message_widget.py:416
+#: src/custom_widgets/message_widget.py:419
 msgid "Copy Equation"
 msgstr "Salin Persamaan"
 
-#: src/custom_widgets/message_widget.py:422
+#: src/custom_widgets/message_widget.py:425
 msgid "Regenerate Equation"
 msgstr "Regenerasi Persamaan"
 
-#: src/custom_widgets/message_widget.py:443
+#: src/custom_widgets/message_widget.py:446
 msgid "Equation copied to the clipboard"
 msgstr "Persamaan disalin ke papan klip"
 
-#: src/custom_widgets/message_widget.py:447
+#: src/custom_widgets/message_widget.py:450
 msgid "LaTeX Equation"
 msgstr "Persamaan LaTeX"
 
-#: src/custom_widgets/message_widget.py:512
+#: src/custom_widgets/message_widget.py:515
 msgid "Remove Message"
 msgstr "Hapus Pesan"
 
-#: src/custom_widgets/message_widget.py:532
+#: src/custom_widgets/message_widget.py:535
 msgid "Edit Message"
 msgstr "Edit Pesan"
 
-#: src/custom_widgets/message_widget.py:543
+#: src/custom_widgets/message_widget.py:546
 msgid "Regenerate Message"
 msgstr "Regenerasi Pesan"
 
-#: src/custom_widgets/message_widget.py:562
+#: src/custom_widgets/message_widget.py:565
 msgid "Message copied to the clipboard"
 msgstr "Pesan disalin ke papan klip"
 
-#: src/custom_widgets/message_widget.py:597
+#: src/custom_widgets/message_widget.py:592
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "Pesan tidak dapat diregenerasi saat menerima respons"
 
-#: src/custom_widgets/message_widget.py:866
+#: src/custom_widgets/message_widget.py:878
 msgid "Thought"
 msgstr "Pikiran"
 
-#: src/custom_widgets/model_manager_widget.py:180
+#: src/custom_widgets/model_manager_widget.py:117
 msgid "Model Manager Error"
 msgstr "Kesalahan Manajer Model"
 
-#: src/custom_widgets/model_manager_widget.py:180
+#: src/custom_widgets/model_manager_widget.py:117
 msgid "An error occurred whilst pulling '{}'"
 msgstr "Terjadi kesalahan saat menarik '{}'"
 
-#: src/custom_widgets/model_manager_widget.py:205
+#: src/custom_widgets/model_manager_widget.py:142
 msgid "Download Completed"
 msgstr "Unduhan Selesai"
 
-#: src/custom_widgets/model_manager_widget.py:205
+#: src/custom_widgets/model_manager_widget.py:142
 msgid "Model '{}' downloaded successfully."
 msgstr "Model '{}' berhasil diunduh."
 
-#: src/custom_widgets/model_manager_widget.py:217
-#: src/custom_widgets/model_manager_widget.py:219
+#: src/custom_widgets/model_manager_widget.py:154
+#: src/custom_widgets/model_manager_widget.py:156
 msgid "Stop Download"
 msgstr "Hentikan Unduhan"
 
-#: src/custom_widgets/model_manager_widget.py:223
+#: src/custom_widgets/model_manager_widget.py:160
 msgid "Stop Download?"
 msgstr "Hentikan Unduhan?"
 
-#: src/custom_widgets/model_manager_widget.py:224
+#: src/custom_widgets/model_manager_widget.py:161
 msgid "Are you sure you want to stop pulling '{}'?"
 msgstr "Apakah Anda yakin ingin menghentikan penarikan '{}'?"
 
-#: src/custom_widgets/model_manager_widget.py:226
+#: src/custom_widgets/model_manager_widget.py:163
 msgid "Stop"
 msgstr "Hentikan"
 
-#: src/custom_widgets/model_manager_widget.py:255
+#: src/custom_widgets/model_manager_widget.py:192
 msgid "Change Profile Picture"
 msgstr "Ganti Foto Profil"
 
-#: src/custom_widgets/model_manager_widget.py:275
-msgid "Parent Model"
-msgstr "Model Induk"
-
-#: src/custom_widgets/model_manager_widget.py:276
+#: src/custom_widgets/model_manager_widget.py:212
 msgid "Family"
 msgstr "Keluarga"
 
-#: src/custom_widgets/model_manager_widget.py:277
+#: src/custom_widgets/model_manager_widget.py:213
 msgid "Parameter Size"
 msgstr "Ukuran Parameter"
 
-#: src/custom_widgets/model_manager_widget.py:278
+#: src/custom_widgets/model_manager_widget.py:214
 msgid "Quantization Level"
 msgstr "Tingkat Kuantisasi"
 
-#: src/custom_widgets/model_manager_widget.py:282
-#: src/custom_widgets/model_manager_widget.py:284
+#: src/custom_widgets/model_manager_widget.py:217
+msgid "Parent Model"
+msgstr "Model Induk"
+
+#: src/custom_widgets/model_manager_widget.py:220
+#: src/custom_widgets/model_manager_widget.py:222
 msgid "Modified At"
 msgstr "Dimodifikasi Pada"
 
-#: src/custom_widgets/model_manager_widget.py:305
-#: src/custom_widgets/model_manager_widget.py:312
+#: src/custom_widgets/model_manager_widget.py:244
+#: src/custom_widgets/model_manager_widget.py:251
 msgid "Not Available"
 msgstr "Tidak Tersedia"
 
-#: src/custom_widgets/model_manager_widget.py:320
-msgid "(No system message available)"
-msgstr "(Pesan sistem tidak tersedia)"
-
-#: src/custom_widgets/model_manager_widget.py:428
+#: src/custom_widgets/model_manager_widget.py:382
 msgid "Change"
 msgstr "Ubah"
 
-#: src/custom_widgets/model_manager_widget.py:431
+#: src/custom_widgets/model_manager_widget.py:385
 msgid "Model Profile Picture"
 msgstr "Gambar Profil Model"
 
-#: src/custom_widgets/model_manager_widget.py:431
+#: src/custom_widgets/model_manager_widget.py:385
 msgid "What do you want to do with the model's profile picture?"
 msgstr "Apa yang ingin Anda lakukan dengan gambar profil model?"
 
-#: src/custom_widgets/model_manager_widget.py:450
+#: src/custom_widgets/model_manager_widget.py:407
 msgid "Create Child"
 msgstr "Buat Anak"
 
-#: src/custom_widgets/model_manager_widget.py:458
+#: src/custom_widgets/model_manager_widget.py:416
 msgid "Remove Model"
 msgstr "Hapus Model"
 
-#: src/custom_widgets/model_manager_widget.py:462
+#: src/custom_widgets/model_manager_widget.py:420
 msgid "Remove Model?"
 msgstr "Hapus Model?"
 
-#: src/custom_widgets/model_manager_widget.py:463
+#: src/custom_widgets/model_manager_widget.py:421
 msgid "Are you sure you want to remove '{}'?"
 msgstr "Apakah Anda yakin ingin menghapus '{}'?"
 
-#: src/custom_widgets/model_manager_widget.py:477
+#: src/custom_widgets/model_manager_widget.py:435
 msgid "Multilingual"
 msgstr "Multibahasa"
 
-#: src/custom_widgets/model_manager_widget.py:478
+#: src/custom_widgets/model_manager_widget.py:436
 msgid "Code"
 msgstr "Kode"
 
-#: src/custom_widgets/model_manager_widget.py:479
+#: src/custom_widgets/model_manager_widget.py:437
 msgid "Math"
 msgstr "Matematika"
 
-#: src/custom_widgets/model_manager_widget.py:480
+#: src/custom_widgets/model_manager_widget.py:438
 msgid "Vision"
 msgstr "Penglihatan"
 
-#: src/custom_widgets/model_manager_widget.py:481
+#: src/custom_widgets/model_manager_widget.py:439
 msgid "Embedding"
 msgstr "Penyematan"
 
-#: src/custom_widgets/model_manager_widget.py:482
+#: src/custom_widgets/model_manager_widget.py:440
 msgid "Small"
 msgstr "Kecil"
 
-#: src/custom_widgets/model_manager_widget.py:483
+#: src/custom_widgets/model_manager_widget.py:441
 msgid "Medium"
 msgstr "Sedang"
 
-#: src/custom_widgets/model_manager_widget.py:484
+#: src/custom_widgets/model_manager_widget.py:442
 msgid "Big"
 msgstr "Besar"
 
-#: src/custom_widgets/model_manager_widget.py:485
+#: src/custom_widgets/model_manager_widget.py:443
 msgid "Huge"
 msgstr "Raksasa"
 
-#: src/custom_widgets/model_manager_widget.py:566
+#: src/custom_widgets/model_manager_widget.py:524
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website"
 msgstr ""
-"Dengan mengunduh model ini, Anda menerima perjanjian lisensi yang tersedia di situs web model"
+"Dengan mengunduh model ini, Anda menerima perjanjian lisensi yang tersedia "
+"di situs web model"
 
-#: src/custom_widgets/model_manager_widget.py:613
+#: src/custom_widgets/model_manager_widget.py:571
 msgid "Visit Website"
 msgstr "Kunjungi Situs Web"
 
@@ -3830,3 +4145,165 @@ msgstr "Menjalankan server web lokal"
 #: src/custom_widgets/terminal_widget.py:129
 msgid "Using Flatpak contained shell"
 msgstr "Menggunakan shell yang terkandung dalam Flatpak"
+
+#~ msgid "Chat with local AI models"
+#~ msgstr "Mengobrol dengan model AI lokal"
+
+#~ msgid "An Ollama client"
+#~ msgstr "Klien Ollama"
+
+#~ msgid ""
+#~ "Added launch parameters --ask MESSAGE, --new-chat CHAT, --select-chat "
+#~ "CHAT, --list-chats, --version"
+#~ msgstr ""
+#~ "Menambahkan parameter peluncuran --ask MESSAGE, --new-chat CHAT, --select-"
+#~ "chat CHAT, --list-chats, --version"
+
+#~ msgid ""
+#~ "Removed DOCX compatibility temporarily due to error with python-lxml "
+#~ "dependency"
+#~ msgstr ""
+#~ "Kompatibilitas DOCX dihapus sementara karena kesalahan pada "
+#~ "ketergantungan python-lxml"
+
+#~ msgid "Better scaling for different window sizes"
+#~ msgstr "Skalabilitas yang lebih baik untuk ukuran jendela yang berbeda"
+
+#~ msgid "Connect"
+#~ msgstr "Hubungkan"
+
+#~ msgid "Server URL"
+#~ msgstr "URL Server"
+
+#~ msgid "Connect Remote Instance"
+#~ msgstr "Hubungkan Instansi Jarak Jauh"
+
+#~ msgid "Enter instance information to continue"
+#~ msgstr "Masukkan informasi instansi untuk melanjutkan"
+
+#~ msgid "Close Alpaca"
+#~ msgstr "Tutup Alpaca"
+
+#~ msgid "Use Local Instance"
+#~ msgstr "Gunakan Instansi Lokal"
+
+#~ msgid "Connection Error"
+#~ msgstr "Kesalahan Koneksi"
+
+#~ msgid "The remote instance has disconnected"
+#~ msgstr "Instansi jarak jauh telah terputus"
+
+#~ msgid ""
+#~ "There was an error with the local Ollama instance, so it has been reset"
+#~ msgstr ""
+#~ "Terjadi kesalahan dengan instansi Ollama lokal, sehingga telah direset"
+
+#~ msgid "An error occurred: {}"
+#~ msgstr "Terjadi kesalahan: {}"
+
+#~ msgid "Ollama instance was shut down due to inactivity"
+#~ msgstr "Instans Ollama dimatikan karena tidak aktif"
+
+#~ msgid "Local Models"
+#~ msgstr "Model Lokal"
+
+#~ msgid ""
+#~ "It looks a bit empty in here. Try downloading some models to get started!"
+#~ msgstr ""
+#~ "Sepertinya agak kosong di sini. Cobalah mengunduh beberapa model untuk "
+#~ "memulai!"
+
+#~ msgid "Available Models"
+#~ msgstr "Model yang Tersedia"
+
+#~ msgid "Use Remote Connection to Ollama"
+#~ msgstr "Gunakan Koneksi Jarak Jauh ke Ollama"
+
+#~ msgid "Change Ollama Instance"
+#~ msgstr "Ganti Instans Ollama"
+
+#~ msgid ""
+#~ "The default model to use on new chats and when generating chat titles"
+#~ msgstr ""
+#~ "Model default yang digunakan pada obrolan baru dan saat menghasilkan "
+#~ "judul obrolan"
+
+#~ msgid ""
+#~ "The temperature of the model. Increasing the temperature will make the "
+#~ "model answer more creatively. (Default: 0.8)"
+#~ msgstr ""
+#~ "Temperatur model. Meningkatkan temperatur akan membuat model memberikan "
+#~ "jawaban yang lebih kreatif. (Default: 0.8)"
+
+#~ msgid ""
+#~ "Sets the random number seed to use for generation. Setting this to a "
+#~ "specific number will make the model generate the same text for the same "
+#~ "prompt. (Default: 0 (random))"
+#~ msgstr ""
+#~ "Menetapkan benih angka acak untuk digunakan dalam pembuatan. "
+#~ "Menetapkannya ke angka tertentu akan membuat model menghasilkan teks yang "
+#~ "sama untuk permintaan yang sama. (Default: 0 (acak))"
+
+#~ msgid "Keep Alive Time"
+#~ msgstr "Waktu Tetap Aktif"
+
+#~ msgid ""
+#~ "Controls how long the model will stay loaded into memory following the "
+#~ "request in minutes (Default: 5)"
+#~ msgstr ""
+#~ "Mengontrol berapa lama model akan tetap dimuat dalam memori setelah "
+#~ "permintaan dalam menit (Default: 5)"
+
+#~ msgid "Ollama Instance"
+#~ msgstr "Instans Ollama"
+
+#~ msgid "Ollama Overrides"
+#~ msgstr "Penggantian Ollama"
+
+#~ msgid ""
+#~ "Manage the arguments used on Ollama, any changes on this page only "
+#~ "applies to the integrated instance, the instance will restart if you make "
+#~ "changes."
+#~ msgstr ""
+#~ "Kelola argumen yang digunakan di Ollama, perubahan apa pun di halaman ini "
+#~ "hanya berlaku untuk instans terintegrasi, instans akan dimulai ulang jika "
+#~ "Anda membuat perubahan."
+
+#~ msgid "Idle Timer"
+#~ msgstr "Penghitung Waktu Diam"
+
+#~ msgid ""
+#~ "Number of minutes the instance should remain idle before it is shut down "
+#~ "(0 means it won't be shut down)"
+#~ msgstr ""
+#~ "Jumlah menit instans harus tetap diam sebelum dimatikan (0 berarti tidak "
+#~ "akan dimatikan)"
+
+#~ msgid "Change Model Directory"
+#~ msgstr "Ganti Direktori Model"
+
+#~ msgid "Powered by Ollama"
+#~ msgstr "Didukung oleh Ollama"
+
+#~ msgid "Ollama Website"
+#~ msgstr "Situs Web Ollama"
+
+#~ msgid ""
+#~ "Alpaca and its developers are not liable for any damages to devices or "
+#~ "software resulting from the execution of code generated by an AI model. "
+#~ "Please exercise caution and review the code carefully before running it."
+#~ msgstr ""
+#~ "Alpaca dan pengembangnya tidak bertanggung jawab atas kerusakan perangkat "
+#~ "atau perangkat lunak yang diakibatkan oleh eksekusi kode yang dihasilkan "
+#~ "oleh model AI. Harap berhati-hati dan tinjau kode dengan seksama sebelum "
+#~ "menjalankannya."
+
+#~ msgid "Reload Local Models"
+#~ msgstr "Muat Ulang Model Lokal"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Import Chat"
+#~ msgstr "Impor Obrolan"
+
+#~ msgid "(No system message available)"
+#~ msgstr "(Pesan sistem tidak tersedia)"
