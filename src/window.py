@@ -607,38 +607,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def switch_send_stop_button(self, send:bool):
         self.action_button_stack.set_visible_child_name('send' if send else 'stop')
 
-    def run_message(self, data:dict, message_element:message_widget.message, chat:chat_widget.chat):
-        logger.debug("Running message")
-        chat.busy = True
-        self.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(True)
-        if [m['role'] for m in data['messages']].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
-            threading.Thread(target=self.generate_chat_title, args=(data['messages'][0].copy(), chat.get_name())).start()
-
-        chat.set_visible_child_name('content')
-        if chat.regenerate_button:
-            chat.container.remove(chat.regenerate_button)
-        self.switch_send_stop_button(False)
-        if self.regenerate_button:
-            GLib.idle_add(self.chat_list_box.get_current_chat().remove, self.regenerate_button)
-        try:
-            ''
-            #response = self.ollama_ainstance.request("POST", "api/chat", json.dumps(data), lambda data, message_element=message_element: message_element.update_message(data))
-            #if response.status_code != 200:
-                #raise Exception('Network Error')
-        except Exception as e:
-            logger.error(e)
-            raise Exception(e)
-            self.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(False)
-            chat.busy = False
-            if message_element.spinner:
-                GLib.idle_add(message_element.container.remove, message_element.spinner)
-                message_element.spinner = None
-            GLib.idle_add(message_element.set_text, message_element.content_children[-1].get_text())
-            message_element.dt = datetime.now()
-            GLib.idle_add(message_element.add_footer)
-            GLib.idle_add(chat.show_regenerate_button, message_element)
-            self.sql_instance.insert_or_update_message(message_element)
-
     def load_history(self):
         logger.debug("Loading history")
         selected_chat = self.sql_instance.get_preference('selected_chat')
