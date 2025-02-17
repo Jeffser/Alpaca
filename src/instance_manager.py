@@ -104,7 +104,7 @@ class base_instance:
             response = completion.choices[0].message
             if response.parsed:
                 emoji = response.parsed.emoji if len(response.parsed.emoji) == 1 else '💬'
-                window.chat_list_box.rename_chat(chat.get_name(), '{} {}'.format(response.parsed.emoji, response.parsed.title).strip())
+                window.chat_list_box.rename_chat(chat.get_name(), '{} {}'.format(emoji, response.parsed.title).strip())
         except Exception as e:
             try:
                 response = self.client.chat.completions.create(**params)
