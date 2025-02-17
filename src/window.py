@@ -72,7 +72,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     file_preview_dialog = Gtk.Template.Child()
     file_preview_text = Gtk.Template.Child()
     file_preview_image = Gtk.Template.Child()
-    welcome_dialog = Gtk.Template.Child()
     welcome_carousel = Gtk.Template.Child()
     welcome_previous_button = Gtk.Template.Child()
     welcome_next_button = Gtk.Template.Child()
@@ -390,8 +389,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if button.get_label() == "Next":
             self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
-            self.welcome_dialog.force_close()
             self.sql_instance.insert_or_update_preferences({'show_welcome_dialog': False})
+            self.main_navigation_view.replace_with_tags(['loading'])
+            self.prepare_alpaca()
 
     @Gtk.Template.Callback()
     def switch_run_on_background(self, switch, user_data):
@@ -1137,7 +1137,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         adapter.set_enabled(True)
         self.set_focus(self.message_text_view)
 
-        self.prepare_alpaca()
+        if self.sql_instance.get_preference('show_welcome_dialog'):
+            self.main_navigation_view.replace_with_tags(['welcome'])
+        else:
+            self.prepare_alpaca()
 
         if self.powersaver_warning_switch.get_active():
             self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
