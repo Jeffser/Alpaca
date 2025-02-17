@@ -474,7 +474,7 @@ class ollama(base_ollama):
         url_el = Adw.EntryRow(title=_('Instance URL'), name='url', text=self.instance_url)
         pg.add(url_el)
 
-        api_el = Adw.EntryRow(title=_('Bearer Token (Optional)'), name='api', text=self.api_key)
+        api_el = Adw.EntryRow(title=_('API Key (Optional)'), name='api', text=self.api_key)
         pg.add(api_el)
 
         pg = Adw.PreferencesGroup()
