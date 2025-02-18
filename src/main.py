@@ -94,9 +94,11 @@ class AlpacaService:
         for chat_row in self.app.props.active_window.chat_list_box.tab_list:
             if chat_row.chat_window.get_name() == chat_name:
                 self.app.props.active_window.chat_list_box.select_row(chat_row)
+                self.app.props.active_window.present()
 
     def Create(self, chat_name:str):
         self.app.props.active_window.chat_list_box.new_chat(chat_name)
+        self.app.props.active_window.present()
 
     def Ask(self, message:str):
         time.sleep(1)
