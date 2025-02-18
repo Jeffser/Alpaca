@@ -136,12 +136,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
     sql_instance = sql_manager.instance(os.path.join(data_dir, "alpaca.db"))
 
     @Gtk.Template.Callback()
-    def zoom_changed(self, spinner):
-        threading.Thread(target=self.sql_instance.insert_or_update_preferences, args=({'zoom': int(spinner.get_value())},)).start()
-        settings = Gtk.Settings.get_default()
-        if sys.platform != 'darwin':
+    def zoom_changed(self, spinner, force:bool=False):
+        if force or self.sql_instance.get_preference('zoom') != int(spinner.get_value()):
+            threading.Thread(target=self.sql_instance.insert_or_update_preferences, args=({'zoom': int(spinner.get_value())},)).start()
+            settings = Gtk.Settings.get_default()
             settings.reset_property('gtk-xft-dpi')
-        settings.set_property('gtk-xft-dpi',  settings.get_property('gtk-xft-dpi') + (int(spinner.get_value()) - 100) * 400)
+            settings.set_property('gtk-xft-dpi',  settings.get_property('gtk-xft-dpi') + (int(spinner.get_value()) - 100) * 400)
 
     @Gtk.Template.Callback()
     def add_instance(self, button):
@@ -934,6 +934,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.powersaver_warning_switch.set_active(self.sql_instance.get_preference('powersaver_warning'))
         self.background_switch.set_active(self.sql_instance.get_preference('run_on_background'))
         self.zoom_spin.set_value(self.sql_instance.get_preference('zoom'))
+        self.zoom_changed(self.zoom_spin, True)
 
         if self.get_application().args.ask:
             self.quick_chat(self.get_application().args.ask)
