@@ -80,6 +80,8 @@ class AlpacaService:
             <method name='Ask'>
                 <arg type='s' name='message' direction='in'/>
             </method>
+            <method name='Present'>
+            </method>
         </interface>
     </node>
     """
@@ -90,15 +92,18 @@ class AlpacaService:
     def IsRunning(self):
         return 'yeah'
 
+    def Present(self):
+        self.app.props.active_window.present()
+
     def Open(self, chat_name:str):
         for chat_row in self.app.props.active_window.chat_list_box.tab_list:
             if chat_row.chat_window.get_name() == chat_name:
                 self.app.props.active_window.chat_list_box.select_row(chat_row)
-                self.app.props.active_window.present()
+                self.Present()
 
     def Create(self, chat_name:str):
         self.app.props.active_window.chat_list_box.new_chat(chat_name)
-        self.app.props.active_window.present()
+        self.Present()
 
     def Ask(self, message:str):
         time.sleep(1)
@@ -123,7 +128,9 @@ class AlpacaApplication(Adw.Application):
             except:
                 # The app is probably already running so let's use dbus to interact if needed
                 app_service = SessionBus().get("com.jeffser.Alpaca")
-                if app_service.IsRunning() != 'yeah':
+                if app_service.IsRunning() == 'yeah':
+                    app_service.Present()
+                else:
                     raise Exception('Alpaca not running')
                 if self.args.new_chat:
                     app_service.Create(self.args.new_chat)
