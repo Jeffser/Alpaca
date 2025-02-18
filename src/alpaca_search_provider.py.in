@@ -5,6 +5,7 @@ import subprocess
 import gettext
 import os
 import json
+import time
 from pydbus import SessionBus
 from gi.repository import GLib, Gio
 
@@ -36,14 +37,15 @@ class AlpacaSearchProvider:
     </node>
     """
 
+    _cache = {'chats': None, 'timestamp': 0}
+
     opts = {
         "open": {'name': _('Open chat'), 'option': '--select-chat'},
         "ask": {'name': _('Quick ask'), 'option': '--ask'}
     }
 
     def GetInitialResultSet(self, terms):
-        results = self.search_chats(terms)
-        return results
+        return []
 
     def GetSubsearchResultSet(self, previousResults, terms):
         results = self.search_chats(terms)
@@ -72,13 +74,16 @@ class AlpacaSearchProvider:
 
     def search_chats(self, terms):
         query = ' '.join(terms)
-        results = [f'ask:{query}']
+        results = []
         try:
-            result = subprocess.run(['alpaca', '--list-chats'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
-            chats = result.stdout.strip().split('\n')
-            results = [f'open:{chat}' for chat in chats if query.lower() in chat.lower()]
-        except:
-            pass
+            if time.time() - self._cache.get('timestamp') > 30:
+                result = subprocess.run(['alpaca', '--list-chats'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
+                self._cache['chats'] = result.stdout.strip().split('\n')
+                self._cache['timestamp'] = time.time()
+            results = [f'open:{chat}' for chat in self._cache.get('chats', []) if query.lower() in chat.lower()]
+        except Exception as e:
+            print(e)
+        results.append(f'ask:{query}')
         return results
 
     def GetResultMetas(self, identifiers):
