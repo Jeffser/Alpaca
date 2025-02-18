@@ -902,7 +902,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.quick_ask.present()
         default_model = self.get_current_instance().get_default_model()
         if default_model:
-            current_model = self.convert_model_name(default_model.get_string(), 1)
+            current_model = self.convert_model_name(default_model, 1)
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.quick_ask_overlay)
             return

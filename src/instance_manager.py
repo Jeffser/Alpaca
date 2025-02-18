@@ -40,7 +40,8 @@ class base_instance:
     def generate_message(self, bot_message, model:str):
         chat = bot_message.get_chat()
         chat.busy = True
-        window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(True)
+        if not chat.quick_chat:
+            window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(True)
         chat.set_visible_child_name('content')
         window.switch_send_stop_button(False)
         if window.regenerate_button:
