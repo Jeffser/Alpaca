@@ -913,7 +913,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         m_element_bot = chat.add_message(self.generate_uuid(), datetime.now(), current_model, False)
         m_element_bot.set_text()
         chat.busy = True
-        threading.Thread(target=self.get_current_instance().generate_message(m_element_bot, current_model), args=(data, m_element_bot)).start()
+        threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
 
     def get_current_instance(self):
         if self.instance_listbox.get_selected_row():
@@ -936,9 +936,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.zoom_spin.set_value(self.sql_instance.get_preference('zoom'))
         self.zoom_changed(self.zoom_spin, True)
 
+        GLib.idle_add(self.main_navigation_view.replace_with_tags, ['chat'])
         if self.get_application().args.ask:
             self.quick_chat(self.get_application().args.ask)
-        GLib.idle_add(self.main_navigation_view.replace_with_tags, ['chat'])
 
     def open_button_menu(self, gesture, x, y, menu):
         button = gesture.get_widget()

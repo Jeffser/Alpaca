@@ -215,10 +215,10 @@ class instance:
         cursor = sqlite_con.cursor()
         if cursor.execute("SELECT id FROM message WHERE id=?", (message.message_id,)).fetchone():
             cursor.execute("UPDATE message SET chat_id=?, role=?, model=?, date_time=?, content=? WHERE id=?",
-            (message.get_chat().chat_id, message_author, message.model, message.dt.strftime("%Y/%m/%d %H:%M:%S"), message.text if message.text else '', message.message_id))
+            (force_chat_id if force_chat_id else message.get_chat().chat_id, message_author, message.model, message.dt.strftime("%Y/%m/%d %H:%M:%S"), message.text if message.text else '', message.message_id))
         else:
             cursor.execute("INSERT INTO message (id, chat_id, role, model, date_time, content) VALUES (?, ?, ?, ?, ?, ?)",
-            (message.message_id, message.get_chat().chat_id, message_author, message.model, message.dt.strftime("%Y/%m/%d %H:%M:%S"), message.text if message.text else ''))
+            (message.message_id, force_chat_id if force_chat_id else message.get_chat().chat_id, message_author, message.model, message.dt.strftime("%Y/%m/%d %H:%M:%S"), message.text if message.text else ''))
         sqlite_con.commit()
         sqlite_con.close()
 
