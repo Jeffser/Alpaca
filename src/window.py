@@ -1083,6 +1083,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         list(self.model_dropdown)[0].add_css_class('flat')
         self.model_dropdown.set_model(Gio.ListStore.new(model_manager_widget.local_model_row))
         self.model_dropdown.set_expression(Gtk.PropertyExpression.new(model_manager_widget.local_model_row, None, "name"))
+        factory = Gtk.SignalListItemFactory()
+        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=2, xalign=0)))
+        factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
+        self.model_dropdown.set_factory(factory)
+        list(list(self.model_dropdown)[1].get_child())[1].set_propagate_natural_width(True)
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
