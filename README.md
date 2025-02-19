@@ -3,6 +3,8 @@
 
 <p align="center">Alpaca is an <a href="https://github.com/ollama/ollama">Ollama</a> client where you can manage and chat with multiple models, Alpaca provides an easy and beginner friendly way of interacting with local AI, everything is open source and powered by Ollama.</p>
 
+<p align="center">You can also use third party AI providers such as Gemini, ChatGPT and more!</p>
+
 <p align="center"><a href='https://flathub.org/apps/com.jeffser.Alpaca'><img width='190' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a></p>
 
 ---
