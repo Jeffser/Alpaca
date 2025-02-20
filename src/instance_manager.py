@@ -476,6 +476,14 @@ class ollama(base_ollama):
         pg.add(url_el)
 
         api_el = Adw.EntryRow(title=_('API Key (Optional)'), name='api', text=self.api_key)
+        link_button = Gtk.Button(
+            name='https://github.com/Jeffser/Alpaca/wiki/Instances#bearer-token-compatibility',
+            tooltip_text='https://github.com/Jeffser/Alpaca/wiki/Instances#bearer-token-compatibility',
+            icon_name='globe-symbolic',
+            valign=3
+        )
+        link_button.connect('clicked', window.link_button_handler)
+        api_el.add_suffix(link_button)
         pg.add(api_el)
 
         pg = Adw.PreferencesGroup()
