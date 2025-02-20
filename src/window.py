@@ -137,7 +137,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def zoom_changed(self, spinner, force:bool=False):
-        if force or self.sql_instance.get_preference('zoom') != int(spinner.get_value()):
+        if force or self.sql_instance.get_preference('zoom', 100) != int(spinner.get_value()):
             threading.Thread(target=self.sql_instance.insert_or_update_preferences, args=({'zoom': int(spinner.get_value())},)).start()
             settings = Gtk.Settings.get_default()
             settings.reset_property('gtk-xft-dpi')
@@ -931,9 +931,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.get_application().args.new_chat:
             self.chat_list_box.new_chat(self.get_application().args.new_chat)
 
-        self.powersaver_warning_switch.set_active(self.sql_instance.get_preference('powersaver_warning'))
-        self.background_switch.set_active(self.sql_instance.get_preference('run_on_background'))
-        self.zoom_spin.set_value(self.sql_instance.get_preference('zoom'))
+        self.powersaver_warning_switch.set_active(self.sql_instance.get_preference('powersaver_warning', True))
+        self.background_switch.set_active(self.sql_instance.get_preference('run_on_background', False))
+        self.zoom_spin.set_value(self.sql_instance.get_preference('zoom', 100))
         self.zoom_changed(self.zoom_spin, True)
 
         GLib.idle_add(self.main_navigation_view.replace_with_tags, ['chat'])
@@ -1158,7 +1158,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         adapter.set_enabled(True)
         self.set_focus(self.message_text_view)
 
-        if self.sql_instance.get_preference('skip_welcome_page'):
+        if self.sql_instance.get_preference('skip_welcome_page', False):
             self.prepare_alpaca()
         else:
             self.main_navigation_view.replace_with_tags(['welcome'])

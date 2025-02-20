@@ -253,7 +253,7 @@ class instance:
         sqlite_con.commit()
         sqlite_con.close()
 
-    def get_preference(self, preference_name:str) -> object:
+    def get_preference(self, preference_name:str, default=None) -> object:
         sqlite_con = sqlite3.connect(self.sql_path)
         cursor = sqlite_con.cursor()
         result = cursor.execute("SELECT value, type FROM preferences WHERE id=?", (preference_name,)).fetchone()
@@ -268,6 +268,8 @@ class instance:
                 return type_map[result[1]](result[0])
             else:
                 return result[0]
+        else:
+            return default
 
     def get_preferences(self) -> dict:
         sqlite_con = sqlite3.connect(self.sql_path)
