@@ -400,7 +400,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             self.sql_instance.insert_or_update_preferences({'skip_welcome_page': True})
             self.main_navigation_view.replace_with_tags(['loading'])
-            self.prepare_alpaca()
+            threading.Thread(target=self.prepare_alpaca).start()
 
     @Gtk.Template.Callback()
     def switch_run_on_background(self, switch, user_data):
@@ -1159,7 +1159,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.set_focus(self.message_text_view)
 
         if self.sql_instance.get_preference('skip_welcome_page', False):
-            self.prepare_alpaca()
+            threading.Thread(target=self.prepare_alpaca).start()
         else:
             self.main_navigation_view.replace_with_tags(['welcome'])
             

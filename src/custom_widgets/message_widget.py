@@ -586,6 +586,7 @@ class option_popup(Gtk.Popover):
             self.message_element.set_text()
             self.message_element.model = model
             self.message_element.add_footer()
+            self.message_element.update_profile_picture()
             self.message_element.footer.options_button.set_sensitive(False)
             threading.Thread(target=window.get_current_instance().generate_message, args=(self.message_element, model)).start()
         else:
