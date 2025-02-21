@@ -59,7 +59,8 @@ translators = [
     'Edoardo Brogiolo (Italian) https://github.com/edo0',
     'Shidore (Japanese) https://github.com/sh1d0re',
     'Henk Leerssen (Dutch) https://github.com/Henkster72',
-    'Nofal Briansah (Indonesian) https://github.com/nofalbriansah'
+    'Nofal Briansah (Indonesian) https://github.com/nofalbriansah',
+    'Harimanish (Tamil) https://github.com/harimanish'
 ]
 
 parser = argparse.ArgumentParser(description="Alpaca")
