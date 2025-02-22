@@ -172,6 +172,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.available_models_stack_page.set_visible(len(model_manager_widget.available_models) > 0)
             self.model_creator_stack_page.set_visible(len(model_manager_widget.available_models) > 0)
             self.sql_instance.insert_or_update_preferences({'selected_instance': row.instance.instance_id})
+            self.chat_list_box.update_profile_pictures()
         if listbox.get_sensitive() and row:
             model_manager_widget.update_local_model_list()
             model_manager_widget.update_available_model_list()
@@ -400,7 +401,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             self.sql_instance.insert_or_update_preferences({'skip_welcome_page': True})
             self.main_navigation_view.replace_with_tags(['loading'])
-            threading.Thread(target=self.prepare_alpaca).start()
+            self.prepare_alpaca()
 
     @Gtk.Template.Callback()
     def switch_run_on_background(self, switch, user_data):
@@ -416,6 +417,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             self.banner.set_revealed(False)
         self.sql_instance.insert_or_update_preferences({'powersaver_warning': switch.get_active()})
+
+    @Gtk.Template.Callback()
+    def opening_app(self, user_data):
+        if self.sql_instance.get_preference('skip_welcome_page', False):
+            self.prepare_alpaca()
+        else:
+            self.main_navigation_view.replace_with_tags(['welcome'])
 
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
@@ -922,8 +930,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             return instance_manager.empty()
 
     def prepare_alpaca(self):
-        instance_manager.update_instance_list()
-
         #Chat History
         self.load_history()
         self.chat_list_box.chat_changed(self.chat_list_box.get_selected_row(), True)
@@ -935,7 +941,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.background_switch.set_active(self.sql_instance.get_preference('run_on_background', False))
         self.zoom_spin.set_value(self.sql_instance.get_preference('zoom', 100))
         self.zoom_changed(self.zoom_spin, True)
-
+        instance_manager.update_instance_list()
         GLib.idle_add(self.main_navigation_view.replace_with_tags, ['chat'])
         if self.get_application().args.ask:
             self.quick_chat(self.get_application().args.ask)
@@ -1157,11 +1163,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.message_text_view.insert_action_group('spelling', adapter)
         adapter.set_enabled(True)
         self.set_focus(self.message_text_view)
-
-        if self.sql_instance.get_preference('skip_welcome_page', False):
-            threading.Thread(target=self.prepare_alpaca).start()
-        else:
-            self.main_navigation_view.replace_with_tags(['welcome'])
             
         Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.banner.set_revealed(monitor.get_power_saver_enabled() and self.powersaver_warning_switch.get_active()))
         self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))

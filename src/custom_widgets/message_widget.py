@@ -718,7 +718,7 @@ class message(Gtk.Box):
 
     def update_profile_picture(self):
         if self.bot and self.model:
-            found_models = [row.model for row in list(window.model_dropdown.get_model()) if row.model.get_name() == self.model]
+            found_models = [model for model in list(model_manager_widget.get_local_models().values()) if model.get_name() == self.model]
             if found_models:
                 new_profile_picture_data = found_models[0].data.get('profile_picture')
                 if new_profile_picture_data != self.profile_picture_data:
