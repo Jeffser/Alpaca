@@ -28,7 +28,7 @@ msgstr "ai;ollama;llm"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 msgid "Chat with AI models"
-msgstr ""
+msgstr "Chatea con modelos de IA"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:10
 msgid "A private AI client"
@@ -156,15 +156,15 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Tweaked appearance of models in model manager"
-msgstr ""
+msgstr "Se modificó la apariencia de los modelos en el gestor de modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Updated Ollama instance to 0.5.11"
-msgstr ""
+msgstr "Se actualizó la instancia de Ollama a la versión 0.5.11"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Added new models"
-msgstr ""
+msgstr "Se agregaron nuevos modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:109
 msgid "New instance manager"
@@ -2727,6 +2727,8 @@ msgid ""
 "Mistral Small 3 sets a new benchmark in the “small” Large Language Models "
 "category below 70B."
 msgstr ""
+"Mistral Small 3 establece un nuevo punto de referencia en la categoría de "
+"modelos de lenguaje grandes “pequeños” por debajo de 70B."
 
 #: src/available_models_descriptions.py:94
 msgid ""
@@ -3170,6 +3172,9 @@ msgid ""
 "to OpenAI-o1, including six dense models distilled from DeepSeek-R1 based on "
 "Llama and Qwen."
 msgstr ""
+"Primera generación de modelos de razonamiento de DeepSeek con un rendimiento "
+"comparable a OpenAI-o1, incluidos seis modelos densos extraídos de "
+"DeepSeek-R1 basados ​​en Llama y Qwen."
 
 #: src/available_models_descriptions.py:151
 msgid ""
@@ -3207,6 +3212,9 @@ msgid ""
 "A fully open-source family of reasoning models built using a dataset derived "
 "by distilling DeepSeek-R1."
 msgstr ""
+"Una familia de modelos de razonamiento de código completamente abierto "
+"creada utilizando un conjunto de datos derivado de la destilación de "
+"DeepSeek-R1."
 
 #: src/available_models_descriptions.py:155
 msgid ""
@@ -3214,12 +3222,17 @@ msgid ""
 "performance of OpenAI’s o1-preview with just 1.5B parameters on popular math "
 "evaluations."
 msgstr ""
+"Una versión optimizada de Deepseek-R1-Distilled-Qwen-1.5B que supera el "
+"rendimiento de o1-preview de OpenAI con solo 1.500 millones de parámetros "
+"en evaluaciones matemáticas populares."
 
 #: src/available_models_descriptions.py:156
 msgid ""
 "A version of the DeepSeek-R1 model that has been post trained to provide "
 "unbiased, accurate, and factual information by Perplexity."
 msgstr ""
+"Una versión del modelo DeepSeek-R1 que ha sido entrenado posteriormente para "
+"proporcionar información imparcial, precisa y objetiva de Perplexity."
 
 #: src/instance_manager.py:28
 msgid "Instance"
@@ -3718,7 +3731,7 @@ msgstr "Mostrar Advertencia de Ahorro de Energía"
 
 #: src/window.ui:966
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 #: src/window.ui:986
 msgid "Quick ask dialog"
@@ -3883,7 +3896,7 @@ msgstr "Renombrar Chat"
 #: src/gtk/help-overlay.ui:79
 msgctxt "shortcut window"
 msgid "Toggle Searchbars"
-msgstr ""
+msgstr "Alternar las Barras de Búsqueda"
 
 #: src/gtk/help-overlay.ui:87
 msgctxt "shortcut window"
