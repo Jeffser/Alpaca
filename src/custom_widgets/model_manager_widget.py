@@ -373,7 +373,10 @@ class local_model(Gtk.Box):
 
     def update_profile_picture(self):
         self.data['profile_picture'] = window.sql_instance.get_model_picture(self.get_name())
-        self.image_container.set_child(self.create_profile_picture(64))
+        picture = self.create_profile_picture(64)
+        if not picture:
+            self.image_container.set_visible(False)
+        self.image_container.set_child(picture)
 
     def change_profile_picture(self):
         def set_profile_picture(file):
