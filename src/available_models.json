@@ -2102,12 +2102,18 @@
             [
                 "22b",
                 "13\u202fGB"
+            ],
+            [
+                "24b",
+                "14\u202fGB"
             ]
         ],
         "author": "Mistral AI",
         "categories": [
             "big",
-            "code"
+            "huge",
+            "code",
+            "math"
         ],
         "languages": [
             "en"
@@ -2912,6 +2918,7 @@
         "author": "Paraphrase Team",
         "categories": [
             "small",
+            "multilingual",
             "embedding"
         ],
         "languages": [
@@ -3195,8 +3202,8 @@
         "categories": [
             "small",
             "medium",
-            "code",
             "embedding",
+            "code",
             "multilingual"
         ],
         "author": "IBM Research",
@@ -3386,6 +3393,68 @@
             "hi",
             "he",
             "fa"
+        ]
+    },
+    "openthinker": {
+        "tags": [
+            [
+                "7b",
+                "4.7\u202fGB"
+            ],
+            [
+                "32b",
+                "20\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/openthinker",
+        "categories": [
+            "small",
+            "huge"
+        ],
+        "author": "Open Thoughts Team",
+        "languages": [
+            "en"
+        ]
+    },
+    "deepscaler": {
+        "tags": [
+            [
+                "1.5b",
+                "3.6\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/deepscaler",
+        "categories": [
+            "small",
+            "math"
+        ],
+        "author": "Agentica Project",
+        "languages": [
+            "en"
+        ]
+    },
+    "r1-1776": {
+        "tags": [
+            [
+                "70b",
+                "43\u202fGB"
+            ],
+            [
+                "671b",
+                "404\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/r1-1776",
+        "categories": [
+            "huge",
+            "multilingual",
+            "math"
+        ],
+        "author": "Perplexity AI",
+        "languages": [
+            "en",
+            "zh",
+            "ja"
         ]
     }
 }
