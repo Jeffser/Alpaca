@@ -75,6 +75,8 @@ class base_instance:
             for chunk in response:
                 if chunk.choices and chunk.choices[0].delta.content:
                     bot_message.update_message({"content": chunk.choices[0].delta.content})
+                if not chat.busy:
+                    break
             bot_message.update_message({"done": True})
         except Exception as e:
             dialog_widget.simple_error(_('Instance Error'), _('Message generation failed'), e)

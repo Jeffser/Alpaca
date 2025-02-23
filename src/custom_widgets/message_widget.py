@@ -774,7 +774,7 @@ class message(Gtk.Box):
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
             GLib.idle_add(write, data.get('content', ''))
 
-        if not chat.busy or data.get('done', False):
+        if data.get('done', False):
             self.footer.options_button.set_sensitive(True)
             tab = window.chat_list_box.get_tab_by_name(chat.get_name())
             if not chat.quick_chat and tab:
