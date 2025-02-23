@@ -1,14 +1,10 @@
-name: alpaca
+name: jeffser-alpaca
 base: core24
 adopt-info: alpaca
-summary: An Ollama client made with GTK4 and Adwaita
-description: |
-  Alpaca is an Ollama client where you can manage and chat with multiple models, 
-  Alpaca provides an easy and begginer friendly way of interacting with local AI, 
-  everything is open source and powered by Ollama.
 
 platforms:
   amd64:
+  arm64:
 
 confinement: strict
 grade: stable
@@ -23,21 +19,14 @@ slots:
 apps:
   alpaca:
     command: usr/bin/alpaca
-    desktop: meta/gui/alpaca.desktop
     common-id: com.jeffser.Alpaca
     extensions:
       - gnome
     plugs:
       - network
       - network-bind
-      - desktop
-      - desktop-legacy
-      - wayland
-      - opengl
       - home
       - removable-media
-    slots:
-      - dbus-alpaca
 
   ollama:
     command: bin/ollama
@@ -46,7 +35,6 @@ apps:
       - removable-media
       - network
       - network-bind
-      - opengl
 
   ollama-daemon:
     command: bin/ollama serve
@@ -58,7 +46,6 @@ apps:
       - removable-media
       - network
       - network-bind
-      - opengl
 
 parts:
   # Python dependencies
@@ -69,43 +56,55 @@ parts:
       - requests==2.31.0
       - pillow==10.3.0
       - pypdf==4.2.0
-      - pytube==15.0.0
+      - youtube-transcript-api==0.6.2
       - html2text==2024.2.26
+      - pydbus==0.6.0
+      - odfpy==1.4.1
+      - pyicu==2.14
+      - matplotlib==3.10.0
+      - openai==1.61.1
 
   # Ollama plugin
   ollama:
     plugin: dump
-    source: https://github.com/ollama/ollama/releases/download/v0.3.10/ollama-linux-amd64.tgz
+    source: 
+      - on amd64: https://github.com/ollama/ollama/releases/download/v0.5.4/ollama-linux-amd64.tgz
+      - on arm64: https://github.com/ollama/ollama/releases/download/v0.5.4/ollama-linux-arm64.tgz     
 
   # Alpaca app
   alpaca:
     plugin: meson
     source-type: git
     source: https://github.com/Jeffser/Alpaca.git
-    source-tag: '2.0.2'
     source-depth: 1
     meson-parameters:
-      - --prefix=/snap/alpaca/current/usr
-    build-packages:
-      - meson
-      - ninja-build
-      - pkg-config
-      - libcairo2-dev
-      - libgtk-3-dev
-      - libglib2.0-dev
-      - gettext
-      - desktop-file-utils
-      - appstream
-    override-pull: |
-      craftctl default
-      craftctl set version=$(git describe --tags --abbrev=0)
+      - --prefix=/snap/jeffser-alpaca/current/usr
     override-build: |
       craftctl default
-      sed -i '1c#!/usr/bin/env python3' $CRAFT_PART_INSTALL/snap/alpaca/current/usr/bin/alpaca
-    stage-packages:
-      - libnuma1
+      sed -i '1c#!/usr/bin/env python3' $CRAFT_PART_INSTALL/snap/jeffser-alpaca/current/usr/bin/alpaca
     parse-info:
       - usr/share/metainfo/com.jeffser.Alpaca.metainfo.xml
     organize:
-      snap/alpaca/current/usr: usr
+      snap/jeffser-alpaca/current: .
     after: [python-deps]
+
+  vte:
+    plugin: nil
+    stage-packages:
+      - gir1.2-vte-3.91
+
+  spelling:
+    plugin: nil
+    stage-packages:
+      - gir1.2-spelling-1
+      - libspelling-1-1
+
+  deps:
+    plugin: nil
+    after: [alpaca]
+    stage-packages:
+      - libnuma1
+      - gir1.2-vte-3.91
+      - gir1.2-spelling-1
+    prime:
+      - usr/lib/*/libnuma.so.1*

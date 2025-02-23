@@ -26,31 +26,34 @@ configure_file(
   install_mode: 'r-xr-xr-x'
 )
 
-#configure_file(
-  #input: 'alpaca_search_provider.in',
-  #output: 'alpaca_search_provider',
-  #configuration: conf,
-  #install: true,
-  #install_dir: get_option('bindir'),
-  #install_mode: 'r-xr-xr-x'
-#)
+configure_file(
+  input: 'alpaca_search_provider.py.in',
+  output: 'alpaca_search_provider',
+  configuration: conf,
+  install: true,
+  install_dir: get_option('bindir'),
+  install_mode: 'r-xr-xr-x'
+)
 
 alpaca_sources = [
   '__init__.py',
   'main.py',
   'window.py',
-  'connection_handler.py',
-  'dialogs.py',
   'available_models.json',
   'available_models_descriptions.py',
-  'internal.py'
+  'internal.py',
+  'generic_actions.py',
+  'sql_manager.py',
+  'instance_manager.py'
 ]
 
 custom_widgets = [
   'custom_widgets/table_widget.py',
   'custom_widgets/message_widget.py',
   'custom_widgets/chat_widget.py',
-  'custom_widgets/model_widget.py'
+  'custom_widgets/terminal_widget.py',
+  'custom_widgets/dialog_widget.py',
+  'custom_widgets/model_manager_widget.py'
 ]
 
 install_data(alpaca_sources, install_dir: moduledir)

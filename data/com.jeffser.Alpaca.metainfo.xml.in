@@ -5,9 +5,9 @@
 	<project_license>GPL-3.0-or-later</project_license>
   <launchable type="desktop-id">com.jeffser.Alpaca.desktop</launchable>
   <name>Alpaca</name>
-  <summary>Chat with local AI models</summary>
+  <summary>Chat with AI models</summary>
 	<description>
-    <p>An Ollama client</p>
+    <p>A private AI client</p>
     <p>Features</p>
 	  <ul>
 	    <li>Built in Ollama instance</li>
@@ -59,15 +59,27 @@
     </screenshot>
     <screenshot>
       <image>https://jeffser.com/images/alpaca/screenie3.png</image>
-      <caption>A conversation showing code highlighting</caption>
+      <caption>A conversation involving a custom model</caption>
     </screenshot>
     <screenshot>
       <image>https://jeffser.com/images/alpaca/screenie4.png</image>
-      <caption>A conversation involving a YouTube video transcript</caption>
+      <caption>A conversation showing code highlighting</caption>
     </screenshot>
     <screenshot>
       <image>https://jeffser.com/images/alpaca/screenie5.png</image>
+      <caption>A Python script running inside integrated terminal</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://jeffser.com/images/alpaca/screenie6.png</image>
+      <caption>A conversation involving a YouTube video transcript</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://jeffser.com/images/alpaca/screenie7.png</image>
       <caption>Multiple models being downloaded</caption>
+    </screenshot>
+     <screenshot>
+      <image>https://jeffser.com/images/alpaca/screenie8.png</image>
+      <caption>Model creator screen</caption>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1" />
@@ -75,9 +87,292 @@
   <url type="homepage">https://jeffser.com/alpaca/</url>
   <url type="donation">https://github.com/sponsors/Jeffser</url>
   <url type="translate">https://github.com/Jeffser/Alpaca/discussions/153</url>
-  <url type="contribute">https://github.com/Jeffser/Alpaca/discussions/154</url>
+  <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="5.0.1" date="2025-02-22">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/5.0.1</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Tweaked appearance of models in model manager</li>
+          <li>Updated Ollama instance to 0.5.11</li>
+          <li>Added new models</li>
+        </ul>
+      </description>
+    </release>
+    <release version="5.0.0" date="2025-02-17">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/5.0.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>New instance manager</li>
+          <li>New welcome screen</li>
+        </ul>
+        <p>New Instances</p>
+        <ul>
+          <li>OpenAI ChatGPT</li>
+          <li>Google Gemini</li>
+          <li>Together AI</li>
+          <li>Venice</li>
+        </ul>
+      </description>
+    </release>
+    <release version="4.0.1" date="2025-02-03">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/4.0.1</url>
+      <description>
+        <p>Fixes</p>
+        <ul>
+          <li>Exporting chats with 'thoughts' attachment is fixed</li>
+          <li>Fixed attachment filters</li>
+        </ul>
+      </description>
+    </release>
+    <release version="4.0.0" date="2025-01-27">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/4.0.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>New model manager</li>
+          <li>Changed GtkSpinner to AdwSpinner</li>
+          <li>Better handling of launch process</li>
+          <li>New loading screen at launch</li>
+          <li>Better handling of file types</li>
+          <li>Better regex expression for LaTeX equations</li>
+          <li>Confirmation dialog if user closes Alpaca whilst a model is downloading</li>
+          <li>Better handling of think tags in messages</li>
+          <li>Default model is now in charge of generating titles</li>
+          <li>Message header is now shown whilst the message is being generated</li>
+          <li>Better handling of model profile pictures</li>
+          <li>New models in 'available models' list</li>
+        </ul>
+      </description>
+    </release>
+    <release version="3.5.0" date="2025-01-07">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.5.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Added option for attaching screenshots</li>
+          <li>Basic LaTeX math equations are now rendered in messages</li>
+          <li>HTML and C++ scripts can now be run inside Alpaca</li>
+          <li>Added option to open the environment directory from the terminal</li>
+          <li>Added option to edit code blocks directly</li>
+          <li>Complete keyboard shortcut list</li>
+          <li>Images are now attached in 640p resolution</li>
+          <li>Website attachments now use extracted titles</li>
+          <li>Better chat title generation</li>
+          <li>Added option to attach any plain text files</li>
+          <li>Added spellchecker to message entry</li>
+          <li>Alpaca's parameters are now stored using SQLite3</li>
+          <li>Small appearance changes in text entries</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Alpaca's launch process is more reliable</li>
+          <li>Closing the terminal now kills the script subprocess</li>
+        </ul>
+      </description>
+    </release>
+    <release version="3.2.0" date="2024-12-29">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.2.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Transitioned chat backend from JSON to SQLite3</li>
+          <li>Changed appearance of messages</li>
+          <li>Added the option to add profile pictures to models</li>
+        </ul>
+        <p>Fix</p>
+        <ul>
+          <li>Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES</li>
+        </ul>
+      </description>
+    </release>
+    <release version="3.1.0" date="2024-12-25">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.1.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Added categories to models</li>
+          <li>Specified model's languages</li>
+          <li>Added warning when downloading embedding models</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Replaced low ram warning with big model warning</li>
+        </ul>
+      </description>
+    </release>
+    <release version="3.0.1" date="2024-12-24">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.0.1</url>
+      <description>
+        <p>Fixes</p>
+        <ul>
+          <li>Correctly escape markup before rendering message</li>
+          <li>Fixed about dialog not working if log file was missing</li>
+        </ul>
+      </description>
+    </release>
+    <release version="3.0.0" date="2024-12-23">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/3.0.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>System messages can now be sent directly from Alpaca</li>
+          <li>New redesign for messages and smaller minimum size</li>
+          <li>New models included in 'available models list'</li>
+          <li>Added symbolic icon when attaching code files</li>
+          <li>When exporting a chat it now includes a markdown file</li>
+          <li>Refresh button in model manager when using a remote instance</li>
+          <li>Assistant messages are now editable</li>
+          <li>Updated Ollama to v0.5.2</li>
+          <li>New option to change model directory</li>
+          <li>File previewer now resizes dynamically to content</li>
+          <li>Adapted Alpaca to work without integrated Ollama instance</li>
+          <li>Compatibility added with ODT files</li>
+        </ul>
+        <ul>
+          <li>Restored ROCm compatibility</li>
+          <li>Added long press gesture to chat rows so actions can be done in touchscreens</li>
+          <li>Fixed edit button not saving changes</li>
+          <li>Changed max temperature value to 2</li>
+          <li>Made seed 0 actually random</li>
+          <li>Fixed Gnome search provider not working outside of Flatpak installations</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.9.0" date="2024-11-26">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.9.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>New option --ask MESSAGE, to open a new 'Quick Ask' window</li>
+          <li>Gnome Search integration now works whilst the app is opened</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.8.0" date="2024-11-20">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.8.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, --list-chats, --version</li>
+          <li>Added integration as Gnome Search Provider</li>
+          <li>Updated Ollama to v0.4.2 with new models</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.7.0" date="2024-11-03">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.7.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>User messages are now compacted into bubbles</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed re connection dialog not working when 'use local instance' is selected</li>
+          <li>Fixed model manager not adapting to large system fonts</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.6.5" date="2024-10-13">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.6.5</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Details page for models</li>
+          <li>Model selector gets replaced with 'manage models' button when there are no models downloaded</li>
+          <li>Added warning when model is too big for the device</li>
+          <li>Added AMD GPU indicator in preferences</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.6.0" date="2024-10-11">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.6.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Better system for handling dialogs</li>
+          <li>Better system for handling instance switching</li>
+          <li>Remote connection dialog</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed: Models get duplicated when switching remote and local instance</li>
+          <li>Better internal instance manager</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.5.1" date="2024-10-09">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.5.1</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Added 'Cancel' and 'Save' buttons when editing a message</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Better handling of image recognition</li>
+          <li>Remove unused files when canceling a model download</li>
+          <li>Better message blocks rendering</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.5.0" date="2024-10-06">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.5.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Run bash and python scripts straight from chat</li>
+          <li>Updated Ollama to 0.3.12</li>
+          <li>New models!</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed and made faster the launch sequence</li>
+          <li>Better detection of code blocks in messages</li>
+          <li>Fixed app not loading in certain setups with Nvidia GPUs</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.0.6" date="2024-09-29">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.0.6</url>
+      <description>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed message notification sometimes crashing text rendering because of them running on different threads</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.0.5" date="2024-09-25">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.0.5</url>
+      <description>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed message generation sometimes failing</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.0.4" date="2024-09-22">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.0.4</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Sidebar resizes with the window</li>
+          <li>New welcome dialog</li>
+          <li>Message search</li>
+          <li>Updated Ollama to v0.3.11</li>
+          <li>A lot of new models provided by Ollama repository</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed text inside model manager when the accessibility option 'large text' is on</li>
+          <li>Fixed image recognition on unsupported models</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.0.3" date="2024-09-18">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/2.0.3</url>
       <description>

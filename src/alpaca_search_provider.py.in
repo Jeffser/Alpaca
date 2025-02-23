@@ -1,0 +1,104 @@
+#!/usr/bin/python3
+
+import sys
+import subprocess
+import gettext
+import os
+import json
+import time
+from pydbus import SessionBus
+from gi.repository import GLib, Gio
+
+_ = gettext.gettext
+
+class AlpacaSearchProvider:
+    """
+    <node>
+        <interface name='org.gnome.Shell.SearchProvider2'>
+            <method name='GetInitialResultSet'>
+                <arg type='as' name='terms' direction='in'/>
+                <arg type='as' name='results' direction='out'/>
+            </method>
+            <method name='GetSubsearchResultSet'>
+                <arg type='as' name='previousResults' direction='in'/>
+                <arg type='as' name='terms' direction='in'/>
+                <arg type='as' name='results' direction='out'/>
+            </method>
+            <method name='ActivateResult'>
+                <arg type='s' name='identifier' direction='in'/>
+                <arg type='as' name='terms' direction='in'/>
+                <arg type='u' name='uid' direction='in'/>
+            </method>
+            <method name='GetResultMetas'>
+                <arg type='as' name='identifiers' direction='in'/>
+                <arg type='aa{sv}' name='metas' direction='out'/>
+            </method>
+        </interface>
+    </node>
+    """
+
+    _cache = {'chats': None, 'timestamp': 0}
+
+    opts = {
+        "open": {'name': _('Open chat'), 'option': '--select-chat'},
+        "ask": {'name': _('Quick ask'), 'option': '--ask'}
+    }
+
+    def GetInitialResultSet(self, terms):
+        return []
+
+    def GetSubsearchResultSet(self, previousResults, terms):
+        results = self.search_chats(terms)
+        return results
+
+    def ActivateResult(self, identifier, terms, uid=None):
+        bus = SessionBus()
+        try:
+            app_service = bus.get("com.jeffser.Alpaca")
+            if app_service.IsRunning() != 'yeah':
+                raise Exception('Alpaca not running')
+            if identifier.split(':')[0] == 'open':
+                app_service.Open(':'.join(identifier.split(':')[1:]))
+            elif identifier.split(':')[0] == 'ask':
+                app_service.Ask(':'.join(identifier.split(':')[1:]))
+        except:
+            argv = ['alpaca', self.opts[identifier.split(':')[0]]['option'], ':'.join(identifier.split(':')[1:])]
+            (pid, _stdin, _stdout, _stderr) = GLib.spawn_async(
+                argv,
+                flags=GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+                standard_input=False,
+                standard_output=False,
+                standard_error=False
+            )
+            GLib.spawn_close_pid(pid)
+
+    def search_chats(self, terms):
+        query = ' '.join(terms)
+        results = []
+        try:
+            if time.time() - self._cache.get('timestamp') > 30:
+                result = subprocess.run(['alpaca', '--list-chats'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
+                self._cache['chats'] = result.stdout.strip().split('\n')
+                self._cache['timestamp'] = time.time()
+            results = [f'open:{chat}' for chat in self._cache.get('chats', []) if query.lower() in chat.lower()]
+        except Exception as e:
+            print(e)
+        results.append(f'ask:{query}')
+        return results
+
+    def GetResultMetas(self, identifiers):
+        results = []
+        for identifier in identifiers:
+            metas = {
+                "id": GLib.Variant("s", identifier),
+                "name": GLib.Variant("s", self.opts[identifier.split(':')[0]]['name']),
+                "description": GLib.Variant("s", ':'.join(identifier.split(':')[1:])),
+                "gicon": GLib.Variant("s", "com.jeffser.Alpaca")
+            }
+            results.append(metas)
+        return results
+
+bus = SessionBus()
+bus.publish("com.jeffser.Alpaca.SearchProvider", AlpacaSearchProvider())
+loop = GLib.MainLoop()
+loop.run()

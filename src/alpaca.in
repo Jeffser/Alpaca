@@ -2,7 +2,7 @@
 
 # alpaca.in
 #
-# Copyright 2024 Unknown
+# Copyright 2025 Jeffser
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@
 import os
 import sys
 import signal
-import locale
 import gettext
+import locale
 
 VERSION = '@VERSION@'
 pkgdatadir = '@pkgdatadir@'

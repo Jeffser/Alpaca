@@ -4,10 +4,14 @@ data/com.jeffser.Alpaca.gschema.xml
 src/main.py
 src/window.py
 src/available_models_descriptions.py
-src/connection_handler.py
-src/dialogs.py
+src/instance_manager.py
 src/window.ui
+src/alpaca_search_provider.py.in
+src/generic_actions.py
+src/gtk/help-overlay.ui
 src/custom_widgets/chat_widget.py
 src/custom_widgets/message_widget.py
-src/custom_widgets/model_widget.py
+src/custom_widgets/model_manager_widget.py
 src/custom_widgets/table_widget.py
+src/custom_widgets/dialog_widget.py
+src/custom_widgets/terminal_widget.py
