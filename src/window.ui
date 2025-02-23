@@ -212,10 +212,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                 <property name="name">model-selector</property>
                                 <property name="child">
                                   <object class="GtkBox">
-                                    <style>
-                                      <class name="card"/>
-                                      <class name="local_model_selector"/>
-                                    </style>
                                     <property name="halign">3</property>
                                     <child>
                                       <object class="GtkButton">
