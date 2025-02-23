@@ -18,5 +18,11 @@ If applicable, add screenshots to help explain your problem.
 
 **Debugging information**
 ```
-Please paste here the debugging information available at 'About Alpaca' > 'Troubleshooting' > 'Debugging Information'
+Please include the output of Alpaca, for this you'll need to run Alpaca from the terminal, then try to reproduce the error you want to report.
+
+(Flatpak)
+flatpak run com.jeffser.Alpaca
+
+(Snap)
+jeffser-alpaca
 ```
