@@ -69,20 +69,23 @@ class pulling_model(Gtk.Box):
             orientation=1,
             spacing=5,
             css_classes=['card', 'model_box'],
-            name=name
+            name=name,
+            valign=3
         )
         title_label = Gtk.Label(
             label=window.convert_model_name(name, 2)[0],
             css_classes=['title-3'],
-            vexpand=True,
-            ellipsize=3
+            ellipsize=3,
+            hexpand=True,
+            halign=1
         )
         self.append(title_label)
         subtitle_label = Gtk.Label(
             label=window.convert_model_name(name, 2)[1],
             css_classes=['dim-label'],
-            vexpand=True,
-            ellipsize=3
+            ellipsize=3,
+            hexpand=True,
+            halign=1
         )
         self.append(subtitle_label)
         self.progressbar = Gtk.ProgressBar()
@@ -204,7 +207,8 @@ class local_model_page(Gtk.Box):
         )
         self.append(title_label)
         information_container = Gtk.FlowBox(
-            selection_mode=0
+            selection_mode=0,
+            homogeneous=True
         )
         self.append(information_container)
         parent_model = self.model.data.get('details', {}).get('parent_model')
@@ -214,8 +218,8 @@ class local_model_page(Gtk.Box):
             _('Parameter Size'): self.model.data.get('details', {}).get('parameter_size'),
             _('Quantization Level'): self.model.data.get('details', {}).get('quantization_level')
         }
-        if parent_model:
-            metadata[_('Parent Model')] = parent_model if '/' not in parent_model else 'GGUF'
+        if parent_model and '/' not in parent_model:
+            metadata[_('Parent Model')] = window.convert_model_name(parent_model, 0)
 
         if 'modified_at' in self.model.data:
             metadata[_('Modified At')] = datetime.datetime.strptime(':'.join(self.model.data['modified_at'].split(':')[:2]), '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
@@ -227,7 +231,6 @@ class local_model_page(Gtk.Box):
                 info_box = Gtk.Box(
                     orientation=1,
                     spacing=5,
-                    css_classes=['card', 'p5'],
                     name=name
                 )
                 title_label = Gtk.Label(
@@ -238,18 +241,20 @@ class local_model_page(Gtk.Box):
                     margin_start=0,
                     margin_end=0,
                     ellipsize=3,
-                    tooltip_text=name
+                    tooltip_text=name,
+                    halign=1
                 )
                 info_box.append(title_label)
                 subtitle_label = Gtk.Label(
-                    label=value if value else _('Not Available'),
+                    label=value,
                     css_classes=['heading'],
                     hexpand=True,
                     margin_bottom=10,
                     margin_start=0,
                     margin_end=0,
                     ellipsize=3,
-                    tooltip_text=value if value else _('Not Available')
+                    tooltip_text=value,
+                    halign=1
                 )
                 info_box.append(subtitle_label)
                 information_container.append(info_box)
@@ -297,8 +302,7 @@ class local_model(Gtk.Box):
     def __init__(self, name:str):
         self.model_title = window.convert_model_name(name, 0)
         super().__init__(
-            orientation=1,
-            spacing=5,
+            spacing=10,
             css_classes=['card', 'model_box'],
             name=name
         )
@@ -309,21 +313,29 @@ class local_model(Gtk.Box):
             overflow=1,
         )
         self.append(self.image_container)
+        text_container = Gtk.Box(
+            orientation=1,
+            spacing=5,
+            valign=3
+        )
+        self.append(text_container)
         title_label = Gtk.Label(
             label=window.convert_model_name(name, 2)[0],
             css_classes=['title-3'],
-            vexpand=True,
-            ellipsize=3
+            ellipsize=3,
+            hexpand=True,
+            halign=1
         )
-        self.append(title_label)
+        text_container.append(title_label)
         if window.convert_model_name(name, 2)[1]:
             subtitle_label = Gtk.Label(
                 label=window.convert_model_name(name, 2)[1],
                 css_classes=['dim-label'],
-                vexpand=True,
-                ellipsize=3
+                ellipsize=3,
+                hexpand=True,
+                halign=1
             )
-            self.append(subtitle_label)
+            text_container.append(subtitle_label)
         self.page = None
         self.row = local_model_row(self)
         GLib.idle_add(window.model_dropdown.get_model().append, self.row)
