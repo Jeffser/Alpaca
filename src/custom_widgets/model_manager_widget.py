@@ -183,6 +183,7 @@ class local_model_page(Gtk.Box):
         image = self.model.create_profile_picture(128)
         if not image:
             image = Gtk.Image.new_from_icon_name('image-missing-symbolic')
+            image.set_icon_size(2)
             image.set_size_request(128, 128)
         self.image_container = Gtk.Button(
             css_classes=['circular'],
@@ -226,7 +227,7 @@ class local_model_page(Gtk.Box):
                 info_box = Gtk.Box(
                     orientation=1,
                     spacing=5,
-                    css_classes=['card'],
+                    css_classes=['card', 'p5'],
                     name=name
                 )
                 title_label = Gtk.Label(
@@ -558,6 +559,17 @@ class available_model(Gtk.Box):
             halign=1
         )
         self.append(description_label)
+        if os.getenv('ALPACA_SHOW_TAGS_ON_LIST', '0') == '1':
+            categories_box = Gtk.FlowBox(
+                hexpand=True,
+                selection_mode=0,
+                vexpand=True,
+                row_spacing=5,
+                column_spacing=5
+            )
+            self.append(categories_box)
+            for category in self.data.get('categories', []):
+                categories_box.append(category_pill(category, True))
         self.page = None
 
     def get_default_widget(self):
