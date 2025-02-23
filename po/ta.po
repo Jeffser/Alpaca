@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-23 10:04-0600\n"
+"POT-Creation-Date: 2025-02-23 10:21-0600\n"
 "PO-Revision-Date: 2025-02-05 18:26-0600\n"
 "Last-Translator: Harimanish Kathiravan harimanishhmp@gmail.com\n"
 "Language-Team: Tamil <tamil@systemreboot.net>\n"
@@ -1821,9 +1821,9 @@ msgstr "மூடு"
 msgid "Next"
 msgstr "அடுத்து"
 
-#: src/window.py:446 src/instance_manager.py:406 src/instance_manager.py:407
-#: src/instance_manager.py:523 src/instance_manager.py:524
-#: src/instance_manager.py:666 src/instance_manager.py:667 src/window.ui:894
+#: src/window.py:446 src/instance_manager.py:407 src/instance_manager.py:408
+#: src/instance_manager.py:524 src/instance_manager.py:525
+#: src/instance_manager.py:667 src/instance_manager.py:668 src/window.ui:894
 #: src/window.ui:898 src/custom_widgets/message_widget.py:60
 #: src/custom_widgets/message_widget.py:199
 #: src/custom_widgets/model_manager_widget.py:393
@@ -1996,7 +1996,7 @@ msgstr "இணைப்பை அகற்றவா?"
 msgid "Are you sure you want to remove attachment?"
 msgstr "நீங்கள் இணைப்பை அகற்ற விரும்புகிறீர்களா?"
 
-#: src/window.py:1156 src/instance_manager.py:789
+#: src/window.py:1156 src/instance_manager.py:790
 #: src/custom_widgets/model_manager_widget.py:394
 #: src/custom_widgets/model_manager_widget.py:436
 msgid "Remove"
@@ -3168,194 +3168,194 @@ msgstr ""
 msgid "New Chat"
 msgstr "புதிய அரட்டை"
 
-#: src/instance_manager.py:80 src/instance_manager.py:167
-#: src/instance_manager.py:177 src/instance_manager.py:320
-#: src/instance_manager.py:587 src/instance_manager.py:728
-#: src/instance_manager.py:756
+#: src/instance_manager.py:81 src/instance_manager.py:168
+#: src/instance_manager.py:178 src/instance_manager.py:321
+#: src/instance_manager.py:588 src/instance_manager.py:729
+#: src/instance_manager.py:757
 msgid "Instance Error"
 msgstr ""
 
-#: src/instance_manager.py:80
+#: src/instance_manager.py:81
 msgid "Message generation failed"
 msgstr ""
 
-#: src/instance_manager.py:167 src/instance_manager.py:587
-#: src/instance_manager.py:728 src/instance_manager.py:756
+#: src/instance_manager.py:168 src/instance_manager.py:588
+#: src/instance_manager.py:729 src/instance_manager.py:757
 msgid "Could not retrieve added models"
 msgstr ""
 
-#: src/instance_manager.py:177
+#: src/instance_manager.py:178
 msgid "Could not retrieve available models"
 msgstr ""
 
-#: src/instance_manager.py:245
+#: src/instance_manager.py:246
 msgid "Ollama (Managed)"
 msgstr ""
 
-#: src/instance_manager.py:274
+#: src/instance_manager.py:275
 msgid "Alpaca Support"
 msgstr "அல்பாகா ஆதரவு"
 
-#: src/instance_manager.py:281
+#: src/instance_manager.py:282
 msgid "Model request too large for system"
 msgstr "மாடல் கோரிக்கை கணினிக்கு மிகவும் பெரியது"
 
-#: src/instance_manager.py:284
+#: src/instance_manager.py:285
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
 msgstr "AMD GPU கண்டறியப்பட்டது ஆனால் நீட்டிப்பு இல்லை, ஓல்லமா CPU ஐப் பயன்படுத்தும்."
 
-#: src/instance_manager.py:286
+#: src/instance_manager.py:287
 msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
 msgstr "AMD GPU கண்டறியப்பட்டது ஆனால் ROCm இல்லை, ஓல்லமா CPU ஐப் பயன்படுத்தும்."
 
-#: src/instance_manager.py:288
+#: src/instance_manager.py:289
 msgid "Using AMD GPU type '{}'"
 msgstr "AMD GPU வகையைப் பயன்படுத்துகிறது '{}'"
 
-#: src/instance_manager.py:298
+#: src/instance_manager.py:299
 msgid "Integrated Ollama instance is not running"
 msgstr "ஒருங்கிணைந்த ஓல்லமா நிகழ்வு இயங்கவில்லை"
 
-#: src/instance_manager.py:320
+#: src/instance_manager.py:321
 msgid "Managed Ollama instance failed to start"
 msgstr ""
 
-#: src/instance_manager.py:323
+#: src/instance_manager.py:324
 msgid "Integrated Ollama instance is running"
 msgstr "ஒருங்கிணைந்த ஓல்லமா நிகழ்வு இயங்குகிறது"
 
-#: src/instance_manager.py:327
+#: src/instance_manager.py:328
 msgid "Local AI instance managed directly by Alpaca"
 msgstr ""
 
-#: src/instance_manager.py:330 src/instance_manager.py:331
+#: src/instance_manager.py:331 src/instance_manager.py:332
 msgid "Ollama Log"
 msgstr ""
 
-#: src/instance_manager.py:336 src/instance_manager.py:472
-#: src/instance_manager.py:603 src/window.ui:811
+#: src/instance_manager.py:337 src/instance_manager.py:473
+#: src/instance_manager.py:604 src/window.ui:811
 msgid "Name"
 msgstr "பெயர்"
 
-#: src/instance_manager.py:342
+#: src/instance_manager.py:343
 msgid "Port"
 msgstr ""
 
-#: src/instance_manager.py:342
+#: src/instance_manager.py:343
 msgid "Which network port will Ollama use"
 msgstr ""
 
-#: src/instance_manager.py:347 src/instance_manager.py:492
-#: src/instance_manager.py:634
+#: src/instance_manager.py:348 src/instance_manager.py:493
+#: src/instance_manager.py:635
 msgid "Temperature"
 msgstr "வெப்பநிலை"
 
-#: src/instance_manager.py:347 src/instance_manager.py:492
-#: src/instance_manager.py:634
+#: src/instance_manager.py:348 src/instance_manager.py:493
+#: src/instance_manager.py:635
 msgid "Increasing the temperature will make the models answer more creatively."
 msgstr ""
 
-#: src/instance_manager.py:350 src/instance_manager.py:495
-#: src/instance_manager.py:638
+#: src/instance_manager.py:351 src/instance_manager.py:496
+#: src/instance_manager.py:639
 msgid "Seed"
 msgstr "விதை"
 
-#: src/instance_manager.py:350 src/instance_manager.py:495
-#: src/instance_manager.py:638
+#: src/instance_manager.py:351 src/instance_manager.py:496
+#: src/instance_manager.py:639
 msgid ""
 "Setting this to a specific number other than 0 will make the model generate "
 "the same text for the same prompt."
 msgstr ""
 
-#: src/instance_manager.py:355
+#: src/instance_manager.py:356
 msgid "Model Directory"
 msgstr "மாடல் கோப்பகம்"
 
-#: src/instance_manager.py:357
+#: src/instance_manager.py:358
 msgid "Select Directory"
 msgstr ""
 
-#: src/instance_manager.py:368 src/instance_manager.py:501
-#: src/instance_manager.py:644
+#: src/instance_manager.py:369 src/instance_manager.py:502
+#: src/instance_manager.py:645
 msgid "Default Model"
 msgstr "இயல்புநிலை மாதிரி"
 
-#: src/instance_manager.py:368 src/instance_manager.py:501
-#: src/instance_manager.py:644
+#: src/instance_manager.py:369 src/instance_manager.py:502
+#: src/instance_manager.py:645
 msgid "Model to select when starting a new chat."
 msgstr ""
 
-#: src/instance_manager.py:370 src/instance_manager.py:503
-#: src/instance_manager.py:646
+#: src/instance_manager.py:371 src/instance_manager.py:504
+#: src/instance_manager.py:647
 msgid "Title Model"
 msgstr ""
 
-#: src/instance_manager.py:370 src/instance_manager.py:503
-#: src/instance_manager.py:646
+#: src/instance_manager.py:371 src/instance_manager.py:504
+#: src/instance_manager.py:647
 msgid "Model to use when generating a chat title."
 msgstr ""
 
-#: src/instance_manager.py:386
+#: src/instance_manager.py:387
 msgid "Overrides"
 msgstr ""
 
-#: src/instance_manager.py:386
+#: src/instance_manager.py:387
 msgid ""
 "These entries are optional, they are used to troubleshoot GPU related "
 "problems with Ollama."
 msgstr ""
 
-#: src/instance_manager.py:413 src/instance_manager.py:414
-#: src/instance_manager.py:530 src/instance_manager.py:531
-#: src/instance_manager.py:673 src/instance_manager.py:674
+#: src/instance_manager.py:414 src/instance_manager.py:415
+#: src/instance_manager.py:531 src/instance_manager.py:532
+#: src/instance_manager.py:674 src/instance_manager.py:675
 #: src/custom_widgets/message_widget.py:203
 msgid "Save"
 msgstr "சேமி"
 
-#: src/instance_manager.py:469
+#: src/instance_manager.py:470
 msgid "Local or remote AI instance not managed by Alpaca"
 msgstr ""
 
-#: src/instance_manager.py:475 src/instance_manager.py:606
+#: src/instance_manager.py:476 src/instance_manager.py:607
 msgid "Instance URL"
 msgstr ""
 
-#: src/instance_manager.py:478
+#: src/instance_manager.py:479
 msgid "API Key (Optional)"
 msgstr ""
 
-#: src/instance_manager.py:608 src/instance_manager.py:610
+#: src/instance_manager.py:609 src/instance_manager.py:611
 msgid "API Key (Unchanged)"
 msgstr ""
 
-#: src/instance_manager.py:608 src/instance_manager.py:610
+#: src/instance_manager.py:609 src/instance_manager.py:611
 msgid "API Key"
 msgstr ""
 
-#: src/instance_manager.py:616
+#: src/instance_manager.py:617
 msgid "Max Tokens"
 msgstr ""
 
-#: src/instance_manager.py:617
+#: src/instance_manager.py:618
 msgid ""
 "Defines the maximum number of tokens (words + spaces) the AI can generate in "
 "a response. More tokens allow longer replies but may take more time and cost "
 "more."
 msgstr ""
 
-#: src/instance_manager.py:767
+#: src/instance_manager.py:768
 msgid "OpenAI Compatible Instance"
 msgstr ""
 
-#: src/instance_manager.py:789
+#: src/instance_manager.py:790
 msgid "Remove Instance?"
 msgstr ""
 
-#: src/instance_manager.py:789
+#: src/instance_manager.py:790
 msgid "Are you sure you want to remove this instance?"
 msgstr ""
 
-#: src/instance_manager.py:804
+#: src/instance_manager.py:805
 msgid "Edit Instance"
 msgstr ""
 

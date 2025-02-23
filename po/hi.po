@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-23 10:04-0600\n"
+"POT-Creation-Date: 2025-02-23 10:21-0600\n"
 "PO-Revision-Date: 2025-01-08 HO:MI+ZONE\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Hindi\n"
@@ -1805,9 +1805,9 @@ msgstr "बंद करें"
 msgid "Next"
 msgstr "अगला"
 
-#: src/window.py:446 src/instance_manager.py:406 src/instance_manager.py:407
-#: src/instance_manager.py:523 src/instance_manager.py:524
-#: src/instance_manager.py:666 src/instance_manager.py:667 src/window.ui:894
+#: src/window.py:446 src/instance_manager.py:407 src/instance_manager.py:408
+#: src/instance_manager.py:524 src/instance_manager.py:525
+#: src/instance_manager.py:667 src/instance_manager.py:668 src/window.ui:894
 #: src/window.ui:898 src/custom_widgets/message_widget.py:60
 #: src/custom_widgets/message_widget.py:199
 #: src/custom_widgets/model_manager_widget.py:393
@@ -1979,7 +1979,7 @@ msgstr "संलग्नक हटाएं?"
 msgid "Are you sure you want to remove attachment?"
 msgstr "क्या आप संलग्नक हटाना चाहते हैं?"
 
-#: src/window.py:1156 src/instance_manager.py:789
+#: src/window.py:1156 src/instance_manager.py:790
 #: src/custom_widgets/model_manager_widget.py:394
 #: src/custom_widgets/model_manager_widget.py:436
 msgid "Remove"
@@ -3108,100 +3108,100 @@ msgstr "इंस्टेंस"
 msgid "New Chat"
 msgstr "नई चैट शुरू करें"
 
-#: src/instance_manager.py:80 src/instance_manager.py:167
-#: src/instance_manager.py:177 src/instance_manager.py:320
-#: src/instance_manager.py:587 src/instance_manager.py:728
-#: src/instance_manager.py:756
+#: src/instance_manager.py:81 src/instance_manager.py:168
+#: src/instance_manager.py:178 src/instance_manager.py:321
+#: src/instance_manager.py:588 src/instance_manager.py:729
+#: src/instance_manager.py:757
 msgid "Instance Error"
 msgstr "इंस्टेंस त्रुटि"
 
-#: src/instance_manager.py:80
+#: src/instance_manager.py:81
 msgid "Message generation failed"
 msgstr "संदेश निर्माण विफल रहा"
 
-#: src/instance_manager.py:167 src/instance_manager.py:587
-#: src/instance_manager.py:728 src/instance_manager.py:756
+#: src/instance_manager.py:168 src/instance_manager.py:588
+#: src/instance_manager.py:729 src/instance_manager.py:757
 msgid "Could not retrieve added models"
 msgstr "जोड़े गए मॉडल प्राप्त नहीं किए जा सके"
 
-#: src/instance_manager.py:177
+#: src/instance_manager.py:178
 msgid "Could not retrieve available models"
 msgstr "उपलब्ध मॉडल प्राप्त नहीं किए जा सके"
 
-#: src/instance_manager.py:245
+#: src/instance_manager.py:246
 msgid "Ollama (Managed)"
 msgstr "ओल्लामा (प्रबंधित)"
 
-#: src/instance_manager.py:274
+#: src/instance_manager.py:275
 msgid "Alpaca Support"
 msgstr "अल्पाका समर्थन"
 
-#: src/instance_manager.py:281
+#: src/instance_manager.py:282
 msgid "Model request too large for system"
 msgstr "सिस्टम के लिए मॉडल अनुरोध बहुत बड़ा है"
 
-#: src/instance_manager.py:284
+#: src/instance_manager.py:285
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
 msgstr "AMD GPU का पता चला है, लेकिन एक्सटेंशन गायब है, Ollama CPU का उपयोग करेगा।"
 
-#: src/instance_manager.py:286
+#: src/instance_manager.py:287
 msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
 msgstr "AMD GPU का पता चला है, लेकिन ROCm गायब है, Ollama CPU का उपयोग करेगा।"
 
-#: src/instance_manager.py:288
+#: src/instance_manager.py:289
 msgid "Using AMD GPU type '{}'"
 msgstr "AMD GPU प्रकार '{}' का उपयोग किया जा रहा है"
 
-#: src/instance_manager.py:298
+#: src/instance_manager.py:299
 msgid "Integrated Ollama instance is not running"
 msgstr "समन्वित ओल्लामा उदाहरण चल नहीं रहा है"
 
-#: src/instance_manager.py:320
+#: src/instance_manager.py:321
 msgid "Managed Ollama instance failed to start"
 msgstr "प्रबंधित ओल्लामा इंस्टेंस शुरू करने में विफल रहा"
 
-#: src/instance_manager.py:323
+#: src/instance_manager.py:324
 msgid "Integrated Ollama instance is running"
 msgstr "समन्वित ओल्लामा उदाहरण चल रहा है"
 
-#: src/instance_manager.py:327
+#: src/instance_manager.py:328
 msgid "Local AI instance managed directly by Alpaca"
 msgstr "स्थानीय एआई इंस्टेंस जिसे सीधे अल्पाका द्वारा प्रबंधित किया जाता है"
 
-#: src/instance_manager.py:330 src/instance_manager.py:331
+#: src/instance_manager.py:331 src/instance_manager.py:332
 msgid "Ollama Log"
 msgstr "ओल्लामा लॉग"
 
-#: src/instance_manager.py:336 src/instance_manager.py:472
-#: src/instance_manager.py:603 src/window.ui:811
+#: src/instance_manager.py:337 src/instance_manager.py:473
+#: src/instance_manager.py:604 src/window.ui:811
 msgid "Name"
 msgstr "नाम"
 
-#: src/instance_manager.py:342
+#: src/instance_manager.py:343
 msgid "Port"
 msgstr "पोर्ट"
 
-#: src/instance_manager.py:342
+#: src/instance_manager.py:343
 msgid "Which network port will Ollama use"
 msgstr "ओल्लामा किस नेटवर्क पोर्ट का उपयोग करेगा"
 
-#: src/instance_manager.py:347 src/instance_manager.py:492
-#: src/instance_manager.py:634
+#: src/instance_manager.py:348 src/instance_manager.py:493
+#: src/instance_manager.py:635
 msgid "Temperature"
 msgstr "तापमान"
 
-#: src/instance_manager.py:347 src/instance_manager.py:492
-#: src/instance_manager.py:634
+#: src/instance_manager.py:348 src/instance_manager.py:493
+#: src/instance_manager.py:635
 msgid "Increasing the temperature will make the models answer more creatively."
 msgstr "तापमान बढ़ाने से मॉडल अधिक रचनात्मक रूप से उत्तर देंगे।"
 
-#: src/instance_manager.py:350 src/instance_manager.py:495
-#: src/instance_manager.py:638
+#: src/instance_manager.py:351 src/instance_manager.py:496
+#: src/instance_manager.py:639
 msgid "Seed"
 msgstr "बीज"
 
-#: src/instance_manager.py:350 src/instance_manager.py:495
-#: src/instance_manager.py:638
+#: src/instance_manager.py:351 src/instance_manager.py:496
+#: src/instance_manager.py:639
 msgid ""
 "Setting this to a specific number other than 0 will make the model generate "
 "the same text for the same prompt."
@@ -3209,39 +3209,39 @@ msgstr ""
 "इसे 0 के अलावा किसी विशेष संख्या पर सेट करने से मॉडल समान प्रोत्साहन के लिए एक ही पाठ "
 "उत्पन्न करेगा।"
 
-#: src/instance_manager.py:355
+#: src/instance_manager.py:356
 msgid "Model Directory"
 msgstr "मॉडल निर्देशिका"
 
-#: src/instance_manager.py:357
+#: src/instance_manager.py:358
 msgid "Select Directory"
 msgstr "निर्देशिका चुनें"
 
-#: src/instance_manager.py:368 src/instance_manager.py:501
-#: src/instance_manager.py:644
+#: src/instance_manager.py:369 src/instance_manager.py:502
+#: src/instance_manager.py:645
 msgid "Default Model"
 msgstr "डिफ़ॉल्ट मॉडल"
 
-#: src/instance_manager.py:368 src/instance_manager.py:501
-#: src/instance_manager.py:644
+#: src/instance_manager.py:369 src/instance_manager.py:502
+#: src/instance_manager.py:645
 msgid "Model to select when starting a new chat."
 msgstr "नया चैट प्रारंभ करते समय चयन के लिए मॉडल।"
 
-#: src/instance_manager.py:370 src/instance_manager.py:503
-#: src/instance_manager.py:646
+#: src/instance_manager.py:371 src/instance_manager.py:504
+#: src/instance_manager.py:647
 msgid "Title Model"
 msgstr "शीर्षक मॉडल"
 
-#: src/instance_manager.py:370 src/instance_manager.py:503
-#: src/instance_manager.py:646
+#: src/instance_manager.py:371 src/instance_manager.py:504
+#: src/instance_manager.py:647
 msgid "Model to use when generating a chat title."
 msgstr "चैट शीर्षक उत्पन्न करते समय उपयोग करने के लिए मॉडल।"
 
-#: src/instance_manager.py:386
+#: src/instance_manager.py:387
 msgid "Overrides"
 msgstr "ओवरराइड्स"
 
-#: src/instance_manager.py:386
+#: src/instance_manager.py:387
 msgid ""
 "These entries are optional, they are used to troubleshoot GPU related "
 "problems with Ollama."
@@ -3249,38 +3249,38 @@ msgstr ""
 "ये प्रविष्टियाँ वैकल्पिक हैं, इन्हें ओल्लामा से संबंधित GPU समस्याओं का निवारण करने के लिए "
 "उपयोग किया जाता है।"
 
-#: src/instance_manager.py:413 src/instance_manager.py:414
-#: src/instance_manager.py:530 src/instance_manager.py:531
-#: src/instance_manager.py:673 src/instance_manager.py:674
+#: src/instance_manager.py:414 src/instance_manager.py:415
+#: src/instance_manager.py:531 src/instance_manager.py:532
+#: src/instance_manager.py:674 src/instance_manager.py:675
 #: src/custom_widgets/message_widget.py:203
 msgid "Save"
 msgstr "सहेजें"
 
-#: src/instance_manager.py:469
+#: src/instance_manager.py:470
 msgid "Local or remote AI instance not managed by Alpaca"
 msgstr "स्थानीय या दूरस्थ एआई इंस्टेंस जो अल्पाका द्वारा प्रबंधित नहीं है"
 
-#: src/instance_manager.py:475 src/instance_manager.py:606
+#: src/instance_manager.py:476 src/instance_manager.py:607
 msgid "Instance URL"
 msgstr "इंस्टेंस URL"
 
-#: src/instance_manager.py:478
+#: src/instance_manager.py:479
 msgid "API Key (Optional)"
 msgstr "एपीआई कुंजी (वैकल्पिक)"
 
-#: src/instance_manager.py:608 src/instance_manager.py:610
+#: src/instance_manager.py:609 src/instance_manager.py:611
 msgid "API Key (Unchanged)"
 msgstr "एपीआई कुंजी (बदली नहीं)"
 
-#: src/instance_manager.py:608 src/instance_manager.py:610
+#: src/instance_manager.py:609 src/instance_manager.py:611
 msgid "API Key"
 msgstr "एपीआई कुंजी"
 
-#: src/instance_manager.py:616
+#: src/instance_manager.py:617
 msgid "Max Tokens"
 msgstr "अधिकतम टोकन"
 
-#: src/instance_manager.py:617
+#: src/instance_manager.py:618
 msgid ""
 "Defines the maximum number of tokens (words + spaces) the AI can generate in "
 "a response. More tokens allow longer replies but may take more time and cost "
@@ -3290,19 +3290,19 @@ msgstr ""
 "उत्पन्न कर सकता है। अधिक टोकन से लंबी प्रतिक्रियाएँ मिल सकती हैं, लेकिन इससे अधिक समय लग "
 "सकता है और खर्च भी बढ़ सकता है।"
 
-#: src/instance_manager.py:767
+#: src/instance_manager.py:768
 msgid "OpenAI Compatible Instance"
 msgstr "ओपनएआई संगत इंस्टेंस"
 
-#: src/instance_manager.py:789
+#: src/instance_manager.py:790
 msgid "Remove Instance?"
 msgstr "इंस्टेंस हटाएं?"
 
-#: src/instance_manager.py:789
+#: src/instance_manager.py:790
 msgid "Are you sure you want to remove this instance?"
 msgstr "क्या आप वाकई इस इंस्टेंस को हटाना चाहते हैं?"
 
-#: src/instance_manager.py:804
+#: src/instance_manager.py:805
 msgid "Edit Instance"
 msgstr "इंस्टेंस संपादित करें"
 
