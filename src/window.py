@@ -1,6 +1,6 @@
 # window.py
 #
-# Copyright 2024 Jeffser
+# Copyright 2024-2025 Jeffser
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,25 +16,43 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
+
 """
 Handles the main window
 """
-import json, threading, os, re, base64, gettext, uuid, shutil, logging, time, requests, sqlite3, sys
-import odf.opendocument as odfopen
-import odf.table as odftable
+
+import json
+import threading
+import os
+import re
+import base64
+import gettext
+import uuid
+import shutil
+import logging
+import time
+import requests
+import sqlite3
+import sys
+
+from datetime import datetime
 from io import BytesIO
 from PIL import Image
-from pypdf import PdfReader
-from datetime import datetime
-from pydbus import SessionBus, Variant
 
 import gi
+import odf.opendocument as odfopen
+import odf.table as odftable
+from pypdf import PdfReader
+from pydbus import SessionBus, Variant
+
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
 gi.require_version('Spelling', '1')
+
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelling, GObject
 
 from . import generic_actions, sql_manager, instance_manager
+from .constants import AlpacaFolders, Platforms
 from .custom_widgets import message_widget, chat_widget, terminal_widget, dialog_widget, model_manager_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir
 
@@ -871,11 +889,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if texture:
                 if model_manager_widget.get_selected_model().get_vision():
                     pixbuf = Gdk.pixbuf_get_from_texture(texture)
-                    if not os.path.exists(os.path.join(cache_dir, 'tmp/images/')):
-                        os.makedirs(os.path.join(cache_dir, 'tmp/images/'))
-                    image_name = self.generate_numbered_name('image.png', os.listdir(os.path.join(cache_dir, os.path.join(cache_dir, 'tmp/images'))))
-                    pixbuf.savev(os.path.join(cache_dir, 'tmp/images/{}'.format(image_name)), "png", [], [])
-                    self.attach_file(os.path.join(cache_dir, 'tmp/images/{}'.format(image_name)), 'image')
+                    if not os.path.exists(os.path.join(cache_dir, AlpacaFolders.images_temp_ext)):
+                        os.makedirs(os.path.join(cache_dir, AlpacaFolders.images_temp_ext))
+                    image_name = self.generate_numbered_name('image.png', os.listdir(os.path.join(cache_dir, os.path.join(cache_dir, AlpacaFolders.images_temp_ext))))
+                    pixbuf.savev(os.path.join(cache_dir, '{}/{}'.format(AlpacaFolders.images_temp_ext, image_name)), "png", [], [])
+                    self.attach_file(os.path.join(cache_dir, '{}/{}'.format(AlpacaFolders.images_temp_ext, image_name)), 'image')
                 else:
                     self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
         except Exception as e:
@@ -1120,10 +1138,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 'menu': self.attachment_menu
             }
         }.items():
-            if name == 'attachment' and sys.platform not in ('darwin', 'win32'):
+            if name == 'attachment' and sys.platform not in Platforms.ported:
                 data['menu'].append(_('Attach Screenshot'), 'app.attach_screenshot')
             gesture_click = Gtk.GestureClick(button=3)
-            gesture_click.connect("released", lambda gesture, n_press, x, y, menu=data.get('menu'): self.open_button_menu(gesture, x, y, menu))
+            gesture_click.connect("released", lambda gesture, _n_press, x, y, menu=data.get('menu'): self.open_button_menu(gesture, x, y, menu))
             data.get('button').add_controller(gesture_click)
             gesture_long_press = Gtk.GestureLongPress()
             gesture_long_press.connect("pressed", lambda gesture, x, y, menu=data.get('menu'): self.open_button_menu(gesture, x, y, menu))
@@ -1158,7 +1176,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
-        if sys.platform in ('darwin', 'win32'):
+        if sys.platform in Platforms.ported:
             self.get_application().lookup_action('attach_screenshot').set_enabled(False)
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))

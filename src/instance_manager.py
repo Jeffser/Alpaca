@@ -8,6 +8,8 @@ from gi.repository import Adw, Gtk, GLib
 
 import openai, requests, json, logging, os, shutil, subprocess, threading, re
 from pydantic import BaseModel
+
+from .constants import AlpacaFolders
 from .internal import source_dir, data_dir, cache_dir
 from .custom_widgets import dialog_widget
 from . import available_models_descriptions
@@ -303,11 +305,11 @@ class ollama_managed(base_ollama):
     def start(self):
         self.stop()
         if shutil.which('ollama'):
-            if not os.path.isdir(os.path.join(cache_dir, 'tmp/ollama')):
-                os.mkdir(os.path.join(cache_dir, 'tmp/ollama'))
+            if not os.path.isdir(os.path.join(cache_dir, AlpacaFolders.ollama_temp_ext)):
+                os.mkdir(os.path.join(cache_dir, AlpacaFolders.ollama_temp_ext))
             params = self.overrides.copy()
             params["OLLAMA_HOST"] = self.instance_url
-            params["TMPDIR"] = os.path.join(cache_dir, 'tmp/ollama')
+            params["TMPDIR"] = os.path.join(cache_dir, AlpacaFolders.ollama_temp_ext)
             params["OLLAMA_MODELS"] = self.model_directory
             self.process = subprocess.Popen(["ollama", "serve"], env={**os.environ, **params}, stderr=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
             threading.Thread(target=self.log_output, args=(self.process.stdout,)).start()

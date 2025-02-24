@@ -39,6 +39,7 @@ alpaca_sources = [
   '__init__.py',
   'main.py',
   'window.py',
+  'constants.py',
   'available_models.json',
   'available_models_descriptions.py',
   'internal.py',
