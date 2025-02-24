@@ -158,7 +158,7 @@ class AlpacaApplication(Adw.Application):
             settings = Gtk.Settings.get_default()
             if settings:
                 settings.set_property('gtk-font-name', 'Segoe UI')
-        if sys.platform in ('darwin', 'win32') # MacOS and Windows
+        if sys.platform in ('darwin', 'win32'): # MacOS and Windows
             win.powersaver_warning_switch.set_visible(False)
             win.background_switch.set_visible(False)
 
