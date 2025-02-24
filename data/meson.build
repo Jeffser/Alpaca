@@ -16,7 +16,7 @@ searchprovider_desktop_file = i18n.merge_file(
   install_dir: get_option('datadir') / 'applications'
 )
 
-desktop_utils = find_program('desktop-file-validate', required: true)
+desktop_utils = find_program('desktop-file-validate', required: false)
 if desktop_utils.found()
   test('Validate desktop file', desktop_utils, args: [desktop_file])
   test('Validate search provider desktop file', desktop_utils, args: [searchprovider_desktop_file])
@@ -30,9 +30,11 @@ appstream_file = i18n.merge_file(
   install_dir: get_option('datadir') / 'metainfo'
 )
 
-appstreamcli = find_program('appstreamcli', required: true, disabler: true)
-test('Validate appstream file', appstreamcli,
+appstreamcli = find_program('appstreamcli', required: true, disabler: false)
+if appstreamcli.found()
+  test('Validate appstream file', appstreamcli,
      args: ['validate', '--no-net', '--explain', appstream_file])
+endif
 
 install_data('com.jeffser.Alpaca.gschema.xml',
   install_dir: get_option('datadir') / 'glib-2.0' / 'schemas'
