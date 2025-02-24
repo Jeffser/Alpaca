@@ -137,5 +137,6 @@ def run_terminal(files:dict):
                     script.append(file_metadata['content'])
                     show_terminal(['flatpak-spawn', '--host', 'bash', '-c', ';\n'.join(script)])
                     return
+    script.append('echo -e "\n🦙 {}"'.format(_('Script Exited') ))
     show_terminal(['bash', '-c', ';\n'.join(script)])
 
