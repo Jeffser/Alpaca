@@ -145,7 +145,7 @@ class chat(Gtk.Stack):
             attachments = window.sql_instance.get_attachments(message_element)
             for attachment in attachments:
                 message_element.add_attachment(attachment[2], attachment[1], attachment[3])
-            message_element.set_text(message[4])
+            GLib.idle_add(message_element.set_text, message[4])
         self.set_visible_child_name('content' if len(messages) > 0 else 'welcome-screen')
 
     def on_export_successful(self, file, result):
