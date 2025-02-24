@@ -400,7 +400,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
             self.sql_instance.insert_or_update_preferences({'skip_welcome_page': True})
-            self.main_navigation_view.replace_with_tags(['loading'])
             self.prepare_alpaca()
 
     @Gtk.Template.Callback()
@@ -636,10 +635,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 chat_container =self.chat_list_box.append_chat(row[1], row[0])
                 if row[1] == selected_chat:
                     self.chat_list_box.select_row(self.chat_list_box.tab_list[-1])
-                #threads.append(threading.Thread(target=chat_container.load_chat_messages))
-                #threads[-1].start()
-            #for thread in threads:
-                #thread.join()
         else:
             self.chat_list_box.new_chat()
 
@@ -930,6 +925,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             return instance_manager.empty()
 
     def prepare_alpaca(self):
+        self.main_navigation_view.replace_with_tags(['chat'])
+
         #Chat History
         self.load_history()
         self.chat_list_box.chat_changed(self.chat_list_box.get_selected_row(), True)
@@ -942,7 +939,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.zoom_spin.set_value(self.sql_instance.get_preference('zoom', 100))
         self.zoom_changed(self.zoom_spin, True)
         instance_manager.update_instance_list()
-        GLib.idle_add(self.main_navigation_view.replace_with_tags, ['chat'])
+
         if self.get_application().args.ask:
             self.quick_chat(self.get_application().args.ask)
 
