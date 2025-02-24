@@ -154,6 +154,10 @@ class AlpacaApplication(Adw.Application):
                 settings.set_property('gtk-font-name', 'Apple SD Gothic Neo')
                 settings.set_property('gtk-xft-dpi', 110592)
             win.add_css_class('macos')
+        elif sys.platform == 'win32':
+            settings = Gtk.Settings.get_default()
+            if settings:
+                settings.set_property('gtk-font-name', 'Segoe UI')
         if sys.platform in ('darwin', 'win32') # MacOS and Windows
             win.powersaver_warning_switch.set_visible(False)
             win.background_switch.set_visible(False)
