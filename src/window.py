@@ -636,10 +636,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 chat_container =self.chat_list_box.append_chat(row[1], row[0])
                 if row[1] == selected_chat:
                     self.chat_list_box.select_row(self.chat_list_box.tab_list[-1])
-                threads.append(threading.Thread(target=chat_container.load_chat_messages))
-                threads[-1].start()
-            for thread in threads:
-                thread.join()
+                #threads.append(threading.Thread(target=chat_container.load_chat_messages))
+                #threads[-1].start()
+            #for thread in threads:
+                #thread.join()
         else:
             self.chat_list_box.new_chat()
 

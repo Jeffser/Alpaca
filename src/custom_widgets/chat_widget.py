@@ -70,6 +70,7 @@ class chat(Gtk.Stack):
             css_classes=["undershoot-bottom"],
             hscrollbar_policy=2
         )
+        self.add_named(Adw.Spinner(), 'loading')
         self.add_named(self.scrolledwindow, 'content')
         button_container = Gtk.Box(
             orientation=1,
@@ -461,6 +462,8 @@ class chat_list(Gtk.ListBox):
                 if window.searchentry_messages.get_text() != '':
                     window.searchentry_messages.set_text('')
                     window.message_search_changed(window.searchentry_messages, window.chat_stack.get_visible_child())
+                if row.chat_window.get_visible_child_name() == 'loading' and len(row.chat_window.messages) == 0:
+                    threading.Thread(target=row.chat_window.load_chat_messages).start()
                 window.message_searchbar.set_search_mode(False)
                 window.chat_stack.set_transition_type(4 if self.tab_list.index(row) > current_tab_i else 5)
                 window.chat_stack.set_visible_child(row.chat_window)
