@@ -1,6 +1,6 @@
 # sql_manager.py
 
-import sqlite3, uuid, datetime, os, shutil, json
+import sqlite3, uuid, datetime, os, shutil, json, sys
 from .internal import data_dir
 from . import instance_manager
 
@@ -86,7 +86,7 @@ class instance:
                 'CUDA_VISIBLE_DEVICES': '',
                 'ROCR_VISIBLE_DEVICES': ''
             }
-            self.insert_or_update_instance(instance_manager.ollama_managed(generate_uuid(), 'Alpaca', 'http://0.0.0.0:11435', 0.7, 0, overrides, os.path.join(data_dir, '.ollama', 'models'), None, None, True))
+            self.insert_or_update_instance(instance_manager.ollama_managed(generate_uuid(), 'Alpaca', 'http://{}:11435'.format('127.0.0.1' if sys.platform == 'win32' else '0.0.0.0'), 0.7, 0, overrides, os.path.join(data_dir, '.ollama', 'models'), None, None, True))
 
         if self.get_preference('run_remote'):
             self.insert_or_update_instance(instance_manager.ollama(generate_uuid(), _('Legacy Remote Instance'), self.get_preference('remote_url'), self.get_preference('remote_bearer_token'), 0.7, 0, None, None, False))
