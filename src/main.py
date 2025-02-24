@@ -25,6 +25,7 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Gio, Adw, GLib
 
+from .constants import TRANSLATORS, Platforms
 from .window import AlpacaWindow
 from .internal import cache_dir, data_dir
 
@@ -39,30 +40,6 @@ import sqlite3
 from pydbus import SessionBus
 
 logger = logging.getLogger(__name__)
-
-translators = [
-    'Alex K (Russian) https://github.com/alexkdeveloper',
-    'Jeffry Samuel (Spanish) https://github.com/jeffser',
-    'Louis Chauvet-Villaret (French) https://github.com/loulou64490',
-    'Théo FORTIN (French) https://github.com/topiga',
-    'Daimar Stein (Brazilian Portuguese) https://github.com/not-a-dev-stein',
-    'Bruno Antunes (Brazilian Portuguese) https://github.com/antun3s',
-    'CounterFlow64 (Norwegian) https://github.com/CounterFlow64',
-    'Aritra Saha (Bengali) https://github.com/olumolu',
-    'Yuehao Sui (Simplified Chinese) https://github.com/8ar10der',
-    'Aleksana (Simplified Chinese) https://github.com/Aleksanaa',
-    'Aritra Saha (Hindi) https://github.com/olumolu',
-    'YusaBecerikli (Turkish) https://github.com/YusaBecerikli',
-    'Simon (Ukrainian) https://github.com/OriginalSimon',
-    'Marcel Margenberg (German) https://github.com/MehrzweckMandala',
-    'Magnus Schlinsog (German) https://github.com/mags0ft',
-    'Edoardo Brogiolo (Italian) https://github.com/edo0',
-    'Shidore (Japanese) https://github.com/sh1d0re',
-    'Henk Leerssen (Dutch) https://github.com/Henkster72',
-    'Nofal Briansah (Indonesian) https://github.com/nofalbriansah',
-    'Harimanish (Tamil) https://github.com/harimanish',
-    'Ekaterine Papava (Georgian) https://github.com/EkaterinePapava'
-]
 
 parser = argparse.ArgumentParser(description="Alpaca")
 
@@ -147,7 +124,7 @@ class AlpacaApplication(Adw.Application):
         if not win:
             win = AlpacaWindow(application=self)
         win.present()
-        if sys.platform == 'darwin': # MacOS
+        if sys.platform == Platforms.mac_os: # MacOS
             settings = Gtk.Settings.get_default()
             if settings:
                 settings.set_property('gtk-xft-antialias', 1)
@@ -155,11 +132,11 @@ class AlpacaApplication(Adw.Application):
                 settings.set_property('gtk-font-name', 'Apple SD Gothic Neo')
                 settings.set_property('gtk-xft-dpi', 110592)
             win.add_css_class('macos')
-        elif sys.platform == 'win32': # Windows
+        elif sys.platform == Platforms.windows: # Windows
             settings = Gtk.Settings.get_default()
             if settings:
                 settings.set_property('gtk-font-name', 'Segoe UI')
-        if sys.platform in ('darwin', 'win32'): # MacOS and Windows
+        if sys.platform in Platforms.ported: # MacOS and Windows
             win.powersaver_warning_switch.set_visible(False)
             win.background_switch.set_visible(False)
 
@@ -172,7 +149,7 @@ class AlpacaApplication(Adw.Application):
             support_url="https://github.com/Jeffser/Alpaca/discussions/155",
             developers=['Jeffser https://jeffser.com'],
             designers=['Jeffser https://jeffser.com', 'Tobias Bernard (App Icon) https://tobiasbernard.com/'],
-            translator_credits='\n'.join(translators),
+            translator_credits='\n'.join(TRANSLATORS),
             copyright='© 2025 Alpaca Jeffry Samuel Eduarte Rojas\n© 2025 Ollama Meta Platforms, Inc.\n© 2025 ChatGPT OpenAI, Inc.\n© 2025 Gemini Google Alphabet, Inc.\n© 2025 Together.ai\n© 2025 Venice AI',
             issue_url='https://github.com/Jeffser/Alpaca/issues',
             license_type=3,
@@ -225,10 +202,13 @@ def main(version):
         sqlite_con.commit()
         sqlite_con.close()
 
-    if os.path.isdir(os.path.join(cache_dir, 'tmp')):
+    cache_dir_path: str = os.path.join(cache_dir, 'tmp')
+    if os.path.isdir(cache_dir_path):
+        # TODO: Change this, this is error-prone.
+        # And very dangerous, if bwrap doesn't do a good job.
         os.system('rm -rf ' + os.path.join(cache_dir, "tmp/*"))
     else:
-        os.mkdir(os.path.join(cache_dir, 'tmp'))
+        os.mkdir(cache_dir_path)
 
     app = AlpacaApplication(version)
     logger.info(f"Alpaca version: {app.version}")

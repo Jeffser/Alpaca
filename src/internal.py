@@ -2,10 +2,13 @@
 """
 Handles paths, they can be different if the app is running as a Flatpak
 """
+
 import os
 
-APP_ID = "com.jeffser.Alpaca"
+from .constants import APP_ID
 
+
+# The identifier when inside the Flatpak runtime
 IN_FLATPAK = bool(os.getenv("FLATPAK_ID"))
 
 def get_xdg_home(env, default):

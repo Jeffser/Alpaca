@@ -6,11 +6,14 @@ Working on organizing the code
 import gi
 from gi.repository import GLib
 import os, requests, re
+
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api.formatters import TextFormatter
 from html2text import html2text
-from .internal import cache_dir
+
+from .constants import AlpacaFolders
 from .custom_widgets import model_manager_widget
+from .internal import cache_dir
 
 window = None
 
@@ -34,9 +37,9 @@ def attach_youtube(video_title:str, video_author:str, watch_url:str, video_url:s
     result_text += TextFormatter().format_transcript(transcript)
     #result_text += '\n'.join([t['text'] for t in transcript])
 
-    if not os.path.exists(os.path.join(cache_dir, 'tmp/youtube')):
-        os.makedirs(os.path.join(cache_dir, 'tmp/youtube'))
-    file_path = os.path.join(os.path.join(cache_dir, 'tmp/youtube'), '{} ({})'.format(video_title.replace('/', ' '), caption_name))
+    if not os.path.exists(os.path.join(cache_dir, AlpacaFolders.youtube_temp_ext)):
+        os.makedirs(os.path.join(cache_dir, AlpacaFolders.youtube_temp_ext))
+    file_path = os.path.join(os.path.join(cache_dir, AlpacaFolders.youtube_temp_ext), '{} ({})'.format(video_title.replace('/', ' '), caption_name))
     with open(file_path, 'w+', encoding="utf-8") as f:
         f.write(result_text)
 
@@ -55,8 +58,8 @@ def attach_website(url:str):
         GLib.idle_add(buffer.delete, buffer.get_start_iter(), buffer.get_end_iter())
         GLib.idle_add(buffer.insert, buffer.get_start_iter(), textview_text, len(textview_text))
 
-        if not os.path.exists('/tmp/alpaca/websites/'):
-            os.makedirs('/tmp/alpaca/websites/')
+        if not os.path.exists(f'{AlpacaFolders.website_temp}/'):
+            os.makedirs(f'{AlpacaFolders.website_temp}/')
 
         website_title = 'website'
         match = re.search(r'^# (.+)', md, re.MULTILINE)
@@ -66,9 +69,9 @@ def attach_website(url:str):
             match = re.search(r'https?://(?:www\.)?([^/]+)', url)
             if match:
                 website_title = match.group(1)
-        website_title = window.generate_numbered_name(website_title, os.listdir('/tmp/alpaca/websites'))
+        website_title = window.generate_numbered_name(website_title, os.listdir(f'{AlpacaFolders.website_temp}'))
 
-        file_path = os.path.join('/tmp/alpaca/websites/', website_title)
+        file_path = os.path.join(f'{AlpacaFolders.website_temp}/', website_title)
         with open(file_path, 'w+', encoding="utf-8") as f:
             f.write('{}\n\n{}'.format(url, md))
         window.attach_file(file_path, 'website')
