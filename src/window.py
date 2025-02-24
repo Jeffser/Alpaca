@@ -1110,13 +1110,24 @@ class AlpacaWindow(Adw.ApplicationWindow):
         enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: (self.send_message(None, bool(state & Gdk.ModifierType.CONTROL_MASK)) or True) if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
         self.message_text_view.add_controller(enter_key_controller)
 
-        for button, menu in {self.action_button_stack.get_child_by_name('send'): self.send_message_menu, self.attachment_button: self.attachment_menu}.items():
+        for name, data in {
+            'send': {
+                'button': self.action_button_stack.get_child_by_name('send'),
+                'menu': self.send_message_menu
+            },
+            'attachment': {
+                'button': self.attachment_button,
+                'menu': self.attachment_menu
+            }
+        }.items():
+            if name == 'attachment' and sys.platform not in ('darwin', 'win32'):
+                data['menu'].append(_('Attach Screenshot'), 'app.attach_screenshot')
             gesture_click = Gtk.GestureClick(button=3)
-            gesture_click.connect("released", lambda gesture, n_press, x, y, menu=menu: self.open_button_menu(gesture, x, y, menu))
-            button.add_controller(gesture_click)
+            gesture_click.connect("released", lambda gesture, n_press, x, y, menu=data.get('menu'): self.open_button_menu(gesture, x, y, menu))
+            data.get('button').add_controller(gesture_click)
             gesture_long_press = Gtk.GestureLongPress()
-            gesture_long_press.connect("pressed", lambda gesture, x, y, menu=menu: self.open_button_menu(gesture, x, y, menu))
-            button.add_controller(gesture_long_press)
+            gesture_long_press.connect("pressed", lambda gesture, x, y, menu=data.get('menu'): self.open_button_menu(gesture, x, y, menu))
+            data.get('button').add_controller(gesture_long_press)
 
         universal_actions = {
             'new_chat': [lambda *_: self.chat_list_box.new_chat(), ['<primary>n']],
@@ -1147,7 +1158,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
-        if sys.platform == 'darwin':
+        if sys.platform in ('darwin', 'win32'):
             self.get_application().lookup_action('attach_screenshot').set_enabled(False)
 
         self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))

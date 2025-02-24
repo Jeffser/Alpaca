@@ -170,8 +170,7 @@ class AlpacaApplication(Adw.Application):
             copyright='© 2025 Alpaca Jeffry Samuel Eduarte Rojas\n© 2025 Ollama Meta Platforms, Inc.\n© 2025 ChatGPT OpenAI, Inc.\n© 2025 Gemini Google Alphabet, Inc.\n© 2025 Together.ai\n© 2025 Venice AI',
             issue_url='https://github.com/Jeffser/Alpaca/issues',
             license_type=3,
-            website="https://jeffser.com/alpaca",
-            debug_info=open(os.path.join(data_dir, 'tmp.log'), 'r').read() if os.path.exists(os.path.join(data_dir, 'tmp.log')) else '')
+            website="https://jeffser.com/alpaca")
         about.add_link("Become a Sponsor", "https://github.com/sponsors/Jeffser")
         about.present(parent=self.props.active_window)
 
@@ -187,7 +186,7 @@ def main(version):
     logging.basicConfig(
         format="%(levelname)s\t[%(filename)s | %(funcName)s] %(message)s",
         level=logging.INFO,
-        handlers=[logging.FileHandler(filename=os.path.join(data_dir, 'tmp.log')), logging.StreamHandler(stream=sys.stdout)]
+        handlers=[logging.StreamHandler(stream=sys.stdout)]
     )
 
     parser.add_argument('--version', action='store_true', help='Display the application version and exit.')
@@ -220,8 +219,6 @@ def main(version):
         sqlite_con.commit()
         sqlite_con.close()
 
-    if os.path.isfile(os.path.join(data_dir, 'tmp.log')):
-        os.remove(os.path.join(data_dir, 'tmp.log'))
     if os.path.isdir(os.path.join(cache_dir, 'tmp')):
         os.system('rm -rf ' + os.path.join(cache_dir, "tmp/*"))
     else:

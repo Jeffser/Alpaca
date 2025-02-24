@@ -203,7 +203,7 @@ class code_block(Gtk.Box):
         self.save_edit_button = Gtk.Button(icon_name="paper-plane-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Save"), visible=False)
         self.save_edit_button.connect('clicked', self.save_edit)
         title_box.append(self.save_edit_button)
-        if self.language_name and self.language_name.lower() in ('bash', 'sh', 'python', 'python3', 'py', 'py3', 'c++', 'cpp', 'c', 'html'):
+        if self.language_name and self.language_name.lower() in ('bash', 'sh', 'python', 'python3', 'py', 'py3', 'c++', 'cpp', 'c', 'html') and sys.platform != 'win32':
             self.run_button = Gtk.Button(icon_name="execute-from-symbolic", css_classes=["flat", "circular"], tooltip_text=_("Run Script"))
             self.run_button.connect("clicked", lambda *_: self.run_script(self.language_name))
             title_box.append(self.run_button)
