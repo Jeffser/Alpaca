@@ -319,7 +319,7 @@ class instance:
         sqlite_con.close()
 
     ##############
-    ## OVERRIDE ##
+    ## OVERRIDE ## DEPRECATED
     ##############
 
     def insert_or_update_override(self, override_id:str, override_value:str):
