@@ -550,6 +550,8 @@ class ollama(base_ollama):
             if not re.match(r'^(http|https)://', self.instance_url):
                 self.instance_url = 'http://{}'.format(self.instance_url)
             self.api_key = api_el.get_text()
+            if not self.api_key:
+                self.api_key = 'ollama'
             self.temperature = temperature_el.get_value()
             self.seed = int(seed_el.get_value())
 
