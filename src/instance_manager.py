@@ -270,8 +270,8 @@ class ollama_managed(base_ollama):
         self.log_raw = ''
         self.log_summary = ('', ['dim-label'])
         self.client = openai.OpenAI(
-            base_url='{}/v1/'.format(self.instance_url),
-            api_key=self.api_key
+            base_url='{}/v1/'.format(self.instance_url).replace('\n', ''),
+            api_key=self.api_key if self.api_key else 'NO_KEY'
         )
 
     def log_output(self, pipe):
@@ -421,14 +421,14 @@ class ollama_managed(base_ollama):
 
         def save():
             if name_el.get_text():
-                self.name = name_el.get_text()
+                self.name = name_el.get_text().replace('\n', '')
             self.instance_url = 'http://0.0.0.0:{}'.format(int(port_el.get_value()))
             self.temperature = temperature_el.get_value()
             self.seed = int(seed_el.get_value())
             self.model_directory = directory_el.get_subtitle()
             self.overrides = {}
             for name, element in override_elements.items():
-                self.overrides[name] = element.get_text()
+                self.overrides[name] = element.get_text().replace('\n', '')
             if self.instance_id:
                 if default_model_el.get_selected_item():
                     self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
@@ -464,8 +464,8 @@ class ollama(base_ollama):
         self.title_model = title_model
         self.pinned = pinned
         self.client = openai.OpenAI(
-            base_url='{}/v1/'.format(self.instance_url),
-            api_key=self.api_key
+            base_url='{}/v1/'.format(self.instance_url).replace('\n', ''),
+            api_key=self.api_key if self.api_key else 'NO_KEY'
         )
 
     def get_preferences_page(self) -> Adw.PreferencesPage:
@@ -545,10 +545,10 @@ class ollama(base_ollama):
             else:
                 self.instance_id = window.generate_uuid()
             if name_el.get_text():
-                self.name = name_el.get_text()
-            self.instance_url = url_el.get_text().rstrip('/')
+                self.name = name_el.get_text().replace('\n', '')
+            self.instance_url = url_el.get_text().rstrip('/').replace('\n', '')
             if not re.match(r'^(http|https)://', self.instance_url):
-                self.instance_url = 'http://{}'.format(self.instance_url)
+                self.instance_url = 'http://{}'.format(self.instance_url).replace('\n', '')
             self.api_key = api_el.get_text()
             if not self.api_key:
                 self.api_key = 'ollama'
@@ -579,8 +579,8 @@ class base_openai(base_instance):
         self.title_model = title_model
         self.pinned = pinned
         self.client = openai.OpenAI(
-            base_url=self.instance_url,
-            api_key=self.api_key
+            base_url=self.instance_url.replace('\n', ''),
+            api_key=self.api_key if self.api_key else 'NO_KEY'
         )
 
     def stop(self):
@@ -690,13 +690,13 @@ class base_openai(base_instance):
             else:
                 self.instance_id = window.generate_uuid()
             if self.instance_type in ('openai:generic', 'llamacpp'):
-                self.instance_url = url_el.get_text().rstrip('/')
+                self.instance_url = url_el.get_text().rstrip('/').replace('\n', '')
                 if not re.match(r'^(http|https)://', self.instance_url):
-                    self.instance_url = 'http://{}'.format(self.instance_url)
+                    self.instance_url = 'http://{}'.format(self.instance_url).replace('\n', '')
             if name_el.get_text():
-                self.name = name_el.get_text()
+                self.name = name_el.get_text().replace('\n', '')
             if api_el.get_text():
-                self.api_key = api_el.get_text()
+                self.api_key = api_el.get_text().replace('\n', '')
             self.max_tokens = int(max_tokens_el.get_value())
             self.temperature = temperature_el.get_value()
             if self.instance_type not in ('gemini', 'venice'):
