@@ -95,7 +95,6 @@ def run_terminal(files:dict):
                 'echo -e "🦙 {}\n"'.format(_('Compiling C++ script...')),
                 'g++ "{}" -o "{}"'.format(os.path.join(data_dir, 'code runner', 'cpp', file_name), os.path.join(data_dir, 'code runner', 'cpp', '.'.join(file_name.split('.')[:-1]) + '.bin')),
                 'chmod u+x "{}"'.format(os.path.join(data_dir, 'code runner', 'cpp', '.'.join(file_name.split('.')[:-1]) + '.bin')),
-                'clear',
                 'echo -e "🦙 {}\n"'.format('.'.join(file_name.split('.')[:-1])+'.bin'),
                 '"{}"'.format(os.path.join(data_dir, 'code runner', 'cpp', '.'.join(file_name.split('.')[:-1]) + '.bin'))
             ]
