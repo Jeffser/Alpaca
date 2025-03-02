@@ -90,6 +90,18 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="5.0.6" date="2025-03-02">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/5.0.6</url>
+      <description>
+        <p>Fixes</p>
+        <ul>
+          <li>Don't clear the building output of C++ scripts</li>
+          <li>Better handling of attachments</li>
+          <li>Handle remote Ollama instance's API Key better</li>
+          <li>Remove '\n' characters in instance edit page</li>
+        </ul>
+      </description>
+    </release>
     <release version="5.0.5" date="2025-02-25">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/5.0.5</url>
       <description>
