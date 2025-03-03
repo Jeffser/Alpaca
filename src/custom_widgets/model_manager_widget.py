@@ -453,7 +453,7 @@ class category_pill(Adw.Bin):
         'vision': {'name': _('Vision'), 'css': ['accent'], 'icon': 'eye-open-negative-filled-symbolic'},
         'embedding': {'name': _('Embedding'), 'css': ['error'], 'icon': 'brain-augemnted-symbolic'},
         'small': {'name': _('Small'), 'css': ['success'], 'icon': 'leaf-symbolic'},
-        'medium': {'name': _('Medium'), 'css': ['brown'], 'icon': 'sprout-symbolic'},
+        'medium': {'name': _('Medium'), 'css': ['success'], 'icon': 'sprout-symbolic'},
         'big': {'name': _('Big'), 'css': ['warning'], 'icon': 'tree-circle-symbolic'},
         'huge': {'name': _('Huge'), 'css': ['error'], 'icon': 'weight-symbolic'},
         'language': {'css': [], 'icon': 'language-symbolic'}

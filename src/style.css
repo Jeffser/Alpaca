@@ -1,5 +1,5 @@
 .modelfile_textview {
-  background-color: rgba(0,0,0,0);
+  background: transparent;
 }
 .message_text_view {
   padding: 0 5px 0 5px;
@@ -79,10 +79,6 @@ stacksidebar {
 
 .model_flowbox flowboxchild:selected > * {
 	background-color: unset;
-}
-
-.brown {
-  color: @brown_1;
 }
 
 /*-----------MACOS STUFF-----------*/
