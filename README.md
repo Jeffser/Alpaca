@@ -56,7 +56,9 @@ The `--dangerous` comes from the package being installed without any involvement
 
 ### MacOS
 
-Please read the [wiki page](https://github.com/Jeffser/Alpaca/wiki/MacOS) for MacOS.
+1. Download the MacOS DMG from the [releases page](https://github.com/Jeffser/Alpaca/releases) under `assets`.
+2. Mount the DMG file by opening it.
+3. Drag the `Alpaca.app` file to your apps folder.
 
 ### Nix
 
