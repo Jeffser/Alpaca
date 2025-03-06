@@ -54,7 +54,7 @@ from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelli
 from . import generic_actions, sql_manager, instance_manager
 from .constants import AlpacaFolders, Platforms
 from .custom_widgets import message_widget, chat_widget, terminal_widget, dialog_widget, model_manager_widget
-from .internal import config_dir, data_dir, cache_dir, source_dir
+from .internal import config_dir, data_dir, cache_dir, source_dir, IN_FLATPAK
 
 logger = logging.getLogger(__name__)
 
@@ -144,6 +144,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_creator_imagination = Gtk.Template.Child()
     model_creator_focus = Gtk.Template.Child()
     model_dropdown = Gtk.Template.Child()
+    notice_dialog = Gtk.Template.Child()
 
     instance_preferences_page = Gtk.Template.Child()
     instance_listbox = Gtk.Template.Child()
@@ -152,6 +153,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     last_selected_instance_row = None
 
     sql_instance = sql_manager.instance(os.path.join(data_dir, "alpaca.db"))
+
+    @Gtk.Template.Callback()
+    def closing_notice(self, dialog):
+        self.sql_instance.insert_or_update_preferences({"last_notice_seen": dialog.get_name()})
 
     @Gtk.Template.Callback()
     def zoom_changed(self, spinner, force:bool=False):
@@ -1192,3 +1197,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             
         Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.banner.set_revealed(monitor.get_power_saver_enabled() and self.powersaver_warning_switch.get_active()))
         self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
+
+        # Notice
+        if not self.sql_instance.get_preference('last_notice_seen') == 'Ollama_Removal' and IN_FLATPAK:
+            self.notice_dialog.present(self)

@@ -11,13 +11,13 @@
         "--device=all",
         "--socket=wayland",
         "--filesystem=/sys/module/amdgpu:ro",
-        "--env=LD_LIBRARY_PATH=/app/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/sdk/llvm15/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/ollama:/app/plugins/AMD/lib/ollama",
         "--talk-name=com.jeffser.Alpaca",
         "--own-name=com.jeffser.Alpaca"
     ],
     "add-extensions": {
     	"com.jeffser.Alpaca.Plugins": {
-    		"add-ld-path": "/app/plugins/AMD/lib/ollama",
+    		"add-ld-path": "/app/plugins/AMD/lib/ollama:/app/plugins/Ollama/lib/ollama",
+    		"add-bin-path": "/app/plugins/AMD/bin:/app/plugins/Ollama/bin",
     		"directory": "plugins",
     		"no-autodownload": true,
     		"autodelete": true,
@@ -455,8 +455,7 @@
             "name": "ollama",
             "buildsystem": "simple",
             "build-commands": [
-            	"tar -xvf ollama.tgz -C ${FLATPAK_DEST}",
-            	"mkdir ${FLATPAK_DEST}/plugins"
+            	"tar -xvf ollama.tgz -C ${FLATPAK_DEST}"
             ],
             "sources": [
             	{
@@ -511,6 +510,9 @@
             "name": "alpaca",
             "builddir": true,
             "buildsystem": "meson",
+            "post-install": [
+                "mkdir ${FLATPAK_DEST}/plugins"
+            ],
             "sources": [
                 {
                     "type": "git",

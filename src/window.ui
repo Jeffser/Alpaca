@@ -6,7 +6,7 @@
     <signal name="close-request" handler="closing_app"/>
     <signal name="show" handler="opening_app"/>
     <property name="resizable">True</property>
-    <property name="width-request">360</property>
+    <property name="width-request">400</property>
     <property name="height-request">240</property>
     <property name="default-width">1300</property>
     <property name="default-height">800</property>
@@ -954,6 +954,40 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
               </child>
             </object>
           </child>
+        </object>
+      </child>
+    </object>
+
+    <object class="AdwDialog" id="notice_dialog">
+      <property name="name">Ollama_Removal</property>
+      <property name="title" translatable="yes">Notice</property>
+      <property name="width-request">400</property>
+      <signal name="closed" handler="closing_notice"/>
+      <child>
+        <object class="AdwToolbarView">
+          <child type="top">
+            <object class="AdwHeaderBar"/>
+          </child>
+          <property name="content">
+            <object class="AdwStatusPage">
+              <property name="icon-name">com.jeffser.Alpaca</property>
+              <property name="title" translatable="yes">Removal of Ollama</property>
+              <property name="description" translatable="yes">Hey there! With Alpaca 5.1.0, we're making some changes. To keep using Ollama directly within Alpaca, you'll just need to install our new Ollama extension. Don't worry, your models remain untouched!</property>
+              <child>
+                <object class="GtkButton">
+                  <signal name="clicked" handler="link_button_handler"/>
+                  <property name="name">appstream://com.jeffser.Alpaca</property>
+                  <property name="label" translatable="yes">Install Ollama</property>
+                  <property name="tooltip-text" translatable="yes">Install Ollama</property>
+                  <property name="halign">3</property>
+                  <style>
+                    <class name="suggested-action"/>
+                    <class name="pill"/>
+                  </style>
+                </object>
+              </child>
+            </object>
+          </property>
         </object>
       </child>
     </object>
