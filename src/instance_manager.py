@@ -843,7 +843,7 @@ def update_instance_list():
                     window.instance_listbox.select_row(row)
         if not window.instance_listbox.get_selected_row():
             window.instance_listbox.select_row(window.instance_listbox.get_row_at_index(0))
-    else:
+    if len(list(window.instance_listbox)) == 0:
         window.instance_manager_stack.set_visible_child_name('no-instances')
         row = instance_row(empty())
         window.instance_listbox.append(row)
