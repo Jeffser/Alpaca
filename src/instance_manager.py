@@ -275,7 +275,7 @@ class ollama_managed(base_ollama):
         )
 
     def log_output(self, pipe):
-        AMD_support_label = "\n<a href='https://github.com/Jeffser/Alpaca/wiki/Ollama-in-Flatpak'>{}</a>".format(_('Alpaca Support'))
+        AMD_support_label = "\n<a href='https://github.com/Jeffser/Alpaca/wiki/AMD-Support'>{}</a>".format(_('Alpaca Support'))
         with pipe:
             try:
                 for line in iter(pipe.readline, ''):
