@@ -511,7 +511,7 @@
             "builddir": true,
             "buildsystem": "meson",
             "post-install": [
-                "mkdir ${FLATPAK_DEST}/plugins"
+                "mkdir -p ${FLATPAK_DEST}/plugins"
             ],
             "sources": [
                 {
