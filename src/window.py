@@ -1199,5 +1199,5 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
 
         # Notice
-        if not self.sql_instance.get_preference('last_notice_seen') == 'Ollama_Removal' and IN_FLATPAK:
+        if not self.sql_instance.get_preference('last_notice_seen') == self.notice_dialog.get_name() and IN_FLATPAK:
             self.notice_dialog.present(self)
