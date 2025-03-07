@@ -150,6 +150,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     instance_listbox = Gtk.Template.Child()
     available_models_stack_page = Gtk.Template.Child()
     model_creator_stack_page = Gtk.Template.Child()
+    install_ollama_button = Gtk.Template.Child()
     last_selected_instance_row = None
 
     sql_instance = sql_manager.instance(os.path.join(data_dir, "alpaca.db"))
@@ -443,6 +444,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def opening_app(self, user_data):
         if self.sql_instance.get_preference('skip_welcome_page', False):
+            # Notice
+            if not self.sql_instance.get_preference('last_notice_seen') == self.notice_dialog.get_name() and IN_FLATPAK and not shutil.which('ollama'):
+                self.notice_dialog.present(self)
             self.prepare_alpaca()
         else:
             self.main_navigation_view.replace_with_tags(['welcome'])
@@ -1198,6 +1202,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.banner.set_revealed(monitor.get_power_saver_enabled() and self.powersaver_warning_switch.get_active()))
         self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
 
-        # Notice
-        if not self.sql_instance.get_preference('last_notice_seen') == self.notice_dialog.get_name() and IN_FLATPAK and not shutil.which('ollama'):
-            self.notice_dialog.present(self)
+        if shutil.which('ollama'):
+            text = _('Already Installed!')
+            self.install_ollama_button.set_label(text)
+            self.install_ollama_button.set_tooltip_text(text)
+            self.install_ollama_button.set_sensitive(False)

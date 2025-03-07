@@ -103,16 +103,29 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                     </child>
                     <child>
                       <object class="AdwStatusPage">
-                        <property name="icon-name">processor-symbolic</property>
-                        <property name="title" translatable="yes">Your AI, Your Choice</property>
-                        <property name="description" translatable="yes">Alpaca includes Ollama by default, giving you instant access to AI. Customize your experience further by connecting to Google Gemini, OpenAI ChatGPT, Together.AI, and more.</property>
+                        <property name="icon-name">padlock2-symbolic</property>
+                        <property name="title" translatable="yes">Private by Design</property>
+                        <property name="description" translatable="yes">With Alpaca, your conversations are saved locally on your device, so you can be confident that your data is always secure and private.</property>
                       </object>
                     </child>
                     <child>
                       <object class="AdwStatusPage">
-                        <property name="icon-name">padlock2-symbolic</property>
-                        <property name="title" translatable="yes">Private by Design</property>
-                        <property name="description" translatable="yes">With Alpaca, your conversations are saved locally on your device, so you can be confident that your data is always secure and private.</property>
+                        <property name="icon-name">processor-symbolic</property>
+                        <property name="title" translatable="yes">Local AI</property>
+                        <property name="description" translatable="yes">Alpaca works with AI providers such as Gemini and ChatGPT.  To run AI models locally on your machine, you'll need to install Ollama within Alpaca. We've made it super easy to do, so you can get started quickly!</property>
+                        <property name="child">
+                          <object class="GtkButton" id="install_ollama_button">
+                            <signal name="clicked" handler="link_button_handler"/>
+                            <property name="name">https://github.com/Jeffser/Alpaca/wiki/Installing-Ollama</property>
+                            <property name="label" translatable="yes">Install Ollama</property>
+                            <property name="tooltip-text" translatable="yes">Install Ollama</property>
+                            <property name="halign">3</property>
+                            <style>
+                              <class name="suggested-action"/>
+                              <class name="pill"/>
+                            </style>
+                          </object>
+                        </property>
                       </object>
                     </child>
                   </object>
