@@ -12,7 +12,9 @@
         "--socket=wayland",
         "--filesystem=/sys/module/amdgpu:ro",
         "--talk-name=com.jeffser.Alpaca",
-        "--own-name=com.jeffser.Alpaca"
+        "--own-name=com.jeffser.Alpaca",
+        "--env=LD_LIBRARY_PATH=/app/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/sdk/llvm15/lib:/usr/lib/ollama:/app/plugins/AMD/lib/ollama:/app/plugins/AMD/lib/ollama/rocm:/app/plugins/AMD/lib/ollama/rocm/rocblas/library/",
+        "--env=PATH=/app/bin:/app/plugins/Ollama/bin:/usr/bin"
     ],
     "add-extensions": {
     	"com.jeffser.Alpaca.Plugins": {
@@ -449,22 +451,6 @@
                     "url": "https://gitlab.gnome.org/GNOME/libspelling.git",
                     "tag": "0.4.5"
                 }
-            ]
-        },
-        {
-            "name": "libnuma",
-            "buildsystem": "autotools",
-            "build-commands": [
-            	"autoreconf -i",
-            	"make",
-            	"make install"
-            ],
-            "sources": [
-            	{
-        	    "type": "archive",
-        	    "url": "https://github.com/numactl/numactl/releases/download/v2.0.18/numactl-2.0.18.tar.gz",
-        	    "sha256": "b4fc0956317680579992d7815bc43d0538960dc73aa1dd8ca7e3806e30bc1274"
-            	}
             ]
         },
         {
