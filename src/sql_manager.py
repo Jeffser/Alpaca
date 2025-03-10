@@ -6,7 +6,14 @@ for storing chats, instances, preferences and more.
 # sql_manager.py
 
 from typing import Union
-import sqlite3, uuid, datetime, os, shutil, json, sys
+import sqlite3
+import uuid
+import datetime
+import os
+import shutil
+import json
+import sys
+
 from .internal import data_dir
 from . import instance_manager
 
@@ -83,6 +90,11 @@ class SQLiteConnection:
 
 
 class Instance:
+    """
+    An instance class for the SQLite database used by Alpaca - it can be used
+    to interface with the database in a modular and extensible way.
+    """
+
     def __init__(self, sql_path: str):
         self.sql_path = sql_path
 
@@ -202,7 +214,7 @@ class Instance:
     'show_welcome_dialog')"
                 )
                 c.cursor.execute("DROP TABLE overrides")
-            except Exception as e:
+            except Exception:
                 pass
 
     ###########
@@ -527,10 +539,10 @@ VALUES (?, ?, ?, ?, ?)",
             }
             if result[1] in type_map:
                 return type_map[result[1]](result[0])
-            else:
-                return result[0]
-        else:
-            return default
+
+            return result[0]
+
+        return default
 
     def get_preferences(self) -> dict:
         with SQLiteConnection(self.sql_path) as c:
@@ -583,8 +595,7 @@ VALUES (?, ?, ?, ?, ?)",
                 "SELECT picture FROM model WHERE id=?", (model_id,)
             ).fetchone()
 
-        if res:
-            return res[0]
+        return res[0] if res else None
 
     def delete_model_picture(self, model_id: str):
         with SQLiteConnection(self.sql_path) as c:
@@ -659,7 +670,7 @@ VALUES (?, ?, ?, ?, ?)",
                 if column == "overrides":
                     try:
                         value = json.loads(value)
-                    except Exception as e:
+                    except Exception:
                         value = {}
                 elif column == "pinned":
                     value = value == 1
@@ -690,7 +701,7 @@ VALUES (?, ?, ?, ?, ?)",
                 "SELECT id FROM instances WHERE id=?", (data.get("id"),)
             ).fetchone():
                 instance_id = data.pop("id", None)
-                set_clause = ", ".join(f"{key} = ?" for key in data.keys())
+                set_clause = ", ".join(f"{key} = ?" for key in data)
                 values = list(data.values()) + [instance_id]
 
                 c.cursor.execute(
