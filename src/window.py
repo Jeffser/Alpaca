@@ -153,7 +153,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     install_ollama_button = Gtk.Template.Child()
     last_selected_instance_row = None
 
-    sql_instance = sql_manager.instance(os.path.join(data_dir, "alpaca.db"))
+    sql_instance = sql_manager.Instance(os.path.join(data_dir, "alpaca.db"))
 
     @Gtk.Template.Callback()
     def closing_notice(self, dialog):
