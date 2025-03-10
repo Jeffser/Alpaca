@@ -85,7 +85,9 @@ class SQLiteConnection:
         connection.
         """
 
-        self.sqlite_con.commit()
+        if self.sqlite_con.in_transaction:
+            self.sqlite_con.commit()
+
         self.sqlite_con.close()
 
 
