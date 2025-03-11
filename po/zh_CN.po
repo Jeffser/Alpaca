@@ -1,23 +1,23 @@
 # Simplified Chinese Translation for Alpaca
 # Copyright (C) 2024 Jeffser
 # This file is distributed under the same license as the Alpaca package.
-# Yuehao Sui <8ar10der@amao.run>, 2024.
 # Aleksana <me@aleksana.moe>, 2024.
+# Yuehao Sui <8ar10der@amao.run>, 2024-2025.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.6.5\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 5.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Jeffser/Alpaca/issues\n"
 "POT-Creation-Date: 2025-03-06 18:23-0600\n"
-"PO-Revision-Date: 2024-12-28 23:36+0100\n"
+"PO-Revision-Date: 2025-03-11 16:57+0100\n"
 "Last-Translator: Yuehao Sui <8ar10der@amao.run>\n"
-"Language-Team: Simplified Chinese\n"
-"Language: zh\n"
+"Language-Team: Chinese (China)\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Gtranslator 47.1\n"
 
 #: data/com.jeffser.Alpaca.desktop.in:2
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
@@ -31,20 +31,20 @@ msgstr "ai;ollama;llm"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 msgid "Chat with AI models"
-msgstr ""
+msgstr "与AI模型聊天"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:10
 msgid "A private AI client"
-msgstr ""
+msgstr "私人AI客户端"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:11
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1026
 msgid "Features"
-msgstr "特性"
+msgstr "功能特点"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:13
 msgid "Built in Ollama instance"
-msgstr "在 Ollama 实例中构建"
+msgstr "内置 Ollama 实例"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:14
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1028
@@ -111,7 +111,7 @@ msgstr "一段带有图像识别的对话"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:62
 msgid "A conversation involving a custom model"
-msgstr ""
+msgstr "一段涉及自定义模型的对话"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:66
 msgid "A conversation showing code highlighting"
@@ -119,7 +119,7 @@ msgstr "一段展示代码高亮的对话"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:70
 msgid "A Python script running inside integrated terminal"
-msgstr "在内置终端中运行的 Python 脚本"
+msgstr "一段在内置终端中运行的 Python 脚本"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:74
 msgid "A conversation involving a YouTube video transcript"
@@ -131,7 +131,7 @@ msgstr "已下载的多个模型"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:82
 msgid "Model creator screen"
-msgstr ""
+msgstr "模型创建者界面"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
 #: data/com.jeffser.Alpaca.metainfo.xml.in:146
@@ -1810,15 +1810,15 @@ msgstr "取消"
 
 #: src/window.py:469
 msgid "Hide"
-msgstr ""
+msgstr "隐藏"
 
 #: src/window.py:473
 msgid "Close Alpaca?"
-msgstr ""
+msgstr "关闭 Alpaca？"
 
 #: src/window.py:474
 msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
-msgstr ""
+msgstr "当前有一个任务正在进行中。你确定要关闭 Alpaca 吗？"
 
 #: src/window.py:700
 msgid "Cannot open image"
@@ -1866,11 +1866,11 @@ msgstr "Markdown格式 （Obsidian 风格）"
 
 #: src/window.py:828
 msgid "JSON"
-msgstr ""
+msgstr "JSON"
 
 #: src/window.py:829
 msgid "JSON (Include Metadata)"
-msgstr ""
+msgstr "JSON（包含元数据）"
 
 #: src/window.py:832 src/window.ui:1176 src/window.ui:1214
 msgid "Export Chat"
@@ -1925,15 +1925,15 @@ msgstr "快速提问"
 
 #: src/window.py:1055
 msgid "Attachment failed, screenshot might be too big"
-msgstr ""
+msgstr "添加附件失败，截图可能太大了。"
 
 #: src/window.py:1069
 msgid "Any compatible Alpaca attachment"
-msgstr ""
+msgstr "任何与 Alpaca 兼容的附件"
 
 #: src/window.py:1147
 msgid "Attach Screenshot"
-msgstr ""
+msgstr "附加屏幕截图"
 
 #: src/window.py:1157
 msgid "Clear Chat?"
@@ -1949,23 +1949,23 @@ msgstr "清除"
 
 #: src/window.py:1173
 msgid "Please enter a website URL"
-msgstr ""
+msgstr "请输入一个网站地址"
 
 #: src/window.py:1174
 msgid "Attach YouTube Captions?"
-msgstr ""
+msgstr "附加上 YouTube 字幕？"
 
 #: src/window.py:1174
 msgid "Please enter a YouTube video URL"
-msgstr ""
+msgstr "请输入一个YouTube视频地址"
 
 #: src/window.py:1177
 msgid "Download Model?"
-msgstr ""
+msgstr "下载模型？"
 
 #: src/window.py:1177
 msgid "Please enter the model name following this template: name:tag"
-msgstr ""
+msgstr "请按照以下模板输入模型名称：name:tag"
 
 #: src/window.py:1187
 msgid "Remove Attachment?"
@@ -1986,6 +1986,8 @@ msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to the Llama 3.1 405B model."
 msgstr ""
+"最新一代的70B参数模型。Llama 3.3 70B 与 Llama 3.1 405B 模型相比提供了相似的性"
+"能。"
 
 #: src/available_models_descriptions.py:3
 msgid ""
@@ -2555,7 +2557,7 @@ msgstr ""
 msgid ""
 "Mistral Small 3 sets a new benchmark in the “small” Large Language Models "
 "category below 70B."
-msgstr ""
+msgstr "Mistral Small 3 在低于70B参数的“小型”大语言模型类别中设立了新的基准。"
 
 #: src/available_models_descriptions.py:94
 msgid ""
@@ -2910,12 +2912,12 @@ msgstr ""
 
 #: src/available_models_descriptions.py:147
 msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
-msgstr ""
+msgstr "Phi-4 是微软发布的14B参数的最新开源模型。"
 
 #: src/available_models_descriptions.py:148
 msgid ""
 "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
-msgstr ""
+msgstr "一个新的小型推理模型，基于Qwen 2.5 3B指令模型微调而来。"
 
 #: src/available_models_descriptions.py:149
 msgid ""
@@ -2924,6 +2926,8 @@ msgid ""
 "model, enabling coding, math, agentic, function calling, and general use "
 "cases."
 msgstr ""
+"Dolphin 3.0 Llama 3.1 8B 🐬 是 Dolphin 系列指令微调模型的下一代，旨在成为终极"
+"通用本地模型，能够支持编程、数学、代理行为、函数调用以及一般用途场景。"
 
 #: src/available_models_descriptions.py:150
 msgid ""
@@ -2931,12 +2935,16 @@ msgid ""
 "to OpenAI-o1, including six dense models distilled from DeepSeek-R1 based on "
 "Llama and Qwen."
 msgstr ""
+"DeepSeek 的第一代推理模型，性能与 OpenAI-o1 相当，包括六个从基于 Llama 和 "
+"Qwen 的 DeepSeek-R1 提炼而来的大纲模型。"
 
 #: src/available_models_descriptions.py:151
 msgid ""
 "A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
 "with 37B activated for each token."
 msgstr ""
+"一个强大的Mixture-of-Experts（MoE）语言模型，总参数量为671B，每个词令牌激活"
+"37B参数。"
 
 #: src/available_models_descriptions.py:152
 msgid ""
@@ -2945,6 +2953,9 @@ msgid ""
 "models, and competitive with open-weight models such as Llama 3.1 on English "
 "academic benchmarks."
 msgstr ""
+"OLMo 2 是一个新的家族，包括7B和13B参数的模型，训练数据量高达5万亿个词令牌。这"
+"些模型与同等规模的完全开源模型相当或更优，并且在英语学术基准测试中与像 Llama "
+"3.1 这样的开放权重模型竞争激烈。"
 
 #: src/available_models_descriptions.py:153
 msgid ""
@@ -2952,12 +2963,15 @@ msgid ""
 "and quality to build powerful AI applications on commodity GPUs and edge "
 "devices."
 msgstr ""
+"Cohere R 系列中的最小模型提供了顶级的速度、效率和质量，使得在普通GPU和边缘设"
+"备上构建强大的AI应用变得可能。"
 
 #: src/available_models_descriptions.py:154
 msgid ""
 "A fully open-source family of reasoning models built using a dataset derived "
 "by distilling DeepSeek-R1."
 msgstr ""
+"一个完全开源的推理模型家族，使用了从 DeepSeek-R1 提炼出的数据集构建而成。"
 
 #: src/available_models_descriptions.py:155
 msgid ""
@@ -2965,16 +2979,20 @@ msgid ""
 "performance of OpenAI’s o1-preview with just 1.5B parameters on popular math "
 "evaluations."
 msgstr ""
+"基于 DeepSeek-R1 提炼的 Qwen-1.5B 微调版本，在流行的数学评估中性能超越了 "
+"OpenAI 的 o1-preview，仅使用1.5亿个参数。"
 
 #: src/available_models_descriptions.py:156
 msgid ""
 "A version of the DeepSeek-R1 model that has been post trained to provide "
 "unbiased, accurate, and factual information by Perplexity."
 msgstr ""
+"经过 Perplexity 后微调的 DeepSeek-R1 模型版本，能够提供\"无偏见、准确且事实"
+"\"的信息。"
 
 #: src/instance_manager.py:30
 msgid "Instance"
-msgstr ""
+msgstr "实例"
 
 #: src/instance_manager.py:60 src/window.ui:141
 #: src/custom_widgets/chat_widget.py:396
@@ -2986,24 +3004,24 @@ msgstr "新对话"
 #: src/instance_manager.py:593 src/instance_manager.py:734
 #: src/instance_manager.py:762
 msgid "Instance Error"
-msgstr ""
+msgstr "实例错误"
 
 #: src/instance_manager.py:84
 msgid "Message generation failed"
-msgstr ""
+msgstr "消息生成失败"
 
 #: src/instance_manager.py:171 src/instance_manager.py:593
 #: src/instance_manager.py:734 src/instance_manager.py:762
 msgid "Could not retrieve added models"
-msgstr ""
+msgstr "无法检索到已添加的模型"
 
 #: src/instance_manager.py:181
 msgid "Could not retrieve available models"
-msgstr ""
+msgstr "无法检索到可用的模型"
 
 #: src/instance_manager.py:249
 msgid "Ollama (Managed)"
-msgstr ""
+msgstr "Ollama（托管版）"
 
 #: src/instance_manager.py:278
 msgid "Alpaca Support"
@@ -3011,7 +3029,7 @@ msgstr "Alpaca 支持文档"
 
 #: src/instance_manager.py:285
 msgid "Model request too large for system"
-msgstr "系统无法满足过大的模型要求"
+msgstr "模型需求太大，超出系统处理能力"
 
 #: src/instance_manager.py:288
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
@@ -3031,7 +3049,7 @@ msgstr "集成的 Ollama 实例未运行"
 
 #: src/instance_manager.py:324
 msgid "Managed Ollama instance failed to start"
-msgstr ""
+msgstr "托管的 Ollama 实例启动失败"
 
 #: src/instance_manager.py:327
 msgid "Integrated Ollama instance is running"
@@ -3039,11 +3057,11 @@ msgstr "集成的 Ollama 实例正在运行"
 
 #: src/instance_manager.py:331
 msgid "Local AI instance managed directly by Alpaca"
-msgstr ""
+msgstr "本地AI实例由 Alpaca 直接管理"
 
 #: src/instance_manager.py:334 src/instance_manager.py:335
 msgid "Ollama Log"
-msgstr ""
+msgstr "Ollama 日志"
 
 #: src/instance_manager.py:340 src/instance_manager.py:476
 #: src/instance_manager.py:609 src/window.ui:790
@@ -3052,21 +3070,21 @@ msgstr "名称"
 
 #: src/instance_manager.py:346
 msgid "Port"
-msgstr ""
+msgstr "端口"
 
 #: src/instance_manager.py:346
 msgid "Which network port will Ollama use"
-msgstr ""
+msgstr "Ollama 将使用哪个网络端口？"
 
 #: src/instance_manager.py:351 src/instance_manager.py:496
 #: src/instance_manager.py:640
 msgid "Temperature"
-msgstr "温度参数（Temperature）"
+msgstr "温度（随机性控制参数）"
 
 #: src/instance_manager.py:351 src/instance_manager.py:496
 #: src/instance_manager.py:640
 msgid "Increasing the temperature will make the models answer more creatively."
-msgstr ""
+msgstr "提高温度会使模型的回答更具创造性。"
 
 #: src/instance_manager.py:354 src/instance_manager.py:499
 #: src/instance_manager.py:644
@@ -3078,7 +3096,7 @@ msgstr "种子值"
 msgid ""
 "Setting this to a specific number other than 0 will make the model generate "
 "the same text for the same prompt."
-msgstr ""
+msgstr "将其设置为除0以外的具体数字可以确保在相同提示下模型生成相同的文本。"
 
 #: src/instance_manager.py:359
 msgid "Model Directory"
@@ -3086,7 +3104,7 @@ msgstr "模型目录"
 
 #: src/instance_manager.py:361
 msgid "Select Directory"
-msgstr ""
+msgstr "选择目录"
 
 #: src/instance_manager.py:372 src/instance_manager.py:505
 #: src/instance_manager.py:650
@@ -3096,58 +3114,58 @@ msgstr "默认模型"
 #: src/instance_manager.py:372 src/instance_manager.py:505
 #: src/instance_manager.py:650
 msgid "Model to select when starting a new chat."
-msgstr ""
+msgstr "启动新聊天时选择的模型。"
 
 #: src/instance_manager.py:374 src/instance_manager.py:507
 #: src/instance_manager.py:652
 msgid "Title Model"
-msgstr ""
+msgstr "标题模型"
 
 #: src/instance_manager.py:374 src/instance_manager.py:507
 #: src/instance_manager.py:652
 msgid "Model to use when generating a chat title."
-msgstr ""
+msgstr "生成聊天标题时使用的模型。"
 
 #: src/instance_manager.py:390
 msgid "Overrides"
-msgstr ""
+msgstr "覆盖设置"
 
 #: src/instance_manager.py:390
 msgid ""
 "These entries are optional, they are used to troubleshoot GPU related "
 "problems with Ollama."
-msgstr ""
+msgstr "这些条目是可选的，它们用于排查与 Ollama 相关的 GPU 问题。"
 
 #: src/instance_manager.py:417 src/instance_manager.py:418
 #: src/instance_manager.py:534 src/instance_manager.py:535
 #: src/instance_manager.py:679 src/instance_manager.py:680
 #: src/custom_widgets/message_widget.py:203
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #: src/instance_manager.py:473
 msgid "Local or remote AI instance not managed by Alpaca"
-msgstr ""
+msgstr "本地或远程AI实例不由Alpaca管理"
 
 #: src/instance_manager.py:479 src/instance_manager.py:612
 msgid "Instance URL"
-msgstr ""
+msgstr "实例 URL"
 
 #: src/instance_manager.py:482
 msgid "API Key (Optional)"
-msgstr ""
+msgstr "API密钥（可选）"
 
 #: src/instance_manager.py:614 src/instance_manager.py:616
 msgid "API Key (Unchanged)"
-msgstr ""
+msgstr "API密钥（未更改）"
 
 #: src/instance_manager.py:614 src/instance_manager.py:616
 msgid "API Key"
-msgstr ""
+msgstr "API密钥"
 
 #: src/instance_manager.py:622
 msgid "Max Tokens"
-msgstr ""
+msgstr "最大tokens数"
 
 #: src/instance_manager.py:623
 msgid ""
@@ -3155,26 +3173,28 @@ msgid ""
 "a response. More tokens allow longer replies but may take more time and cost "
 "more."
 msgstr ""
+"定义了 AI 在响应中可以生成的最大 token 数（单词+空格）。更多的 token 允许更长"
+"的回复，但可能需要更多的时间并产生更高的成本。"
 
 #: src/instance_manager.py:773
 msgid "OpenAI Compatible Instance"
-msgstr ""
+msgstr "兼容 OpenAI 的实例"
 
 #: src/instance_manager.py:795
 msgid "Remove Instance?"
-msgstr ""
+msgstr "移除实例？"
 
 #: src/instance_manager.py:795
 msgid "Are you sure you want to remove this instance?"
-msgstr ""
+msgstr "您确定要移除这个实例吗？"
 
 #: src/instance_manager.py:810
 msgid "Edit Instance"
-msgstr ""
+msgstr "编辑实例"
 
 #: src/window.ui:34
 msgid "Welcome"
-msgstr ""
+msgstr "欢迎！"
 
 #: src/window.ui:46 src/window.ui:47
 msgid "Previous"
@@ -3186,7 +3206,7 @@ msgstr "欢迎来到 Alpaca"
 
 #: src/window.ui:83
 msgid "Powering your potential"
-msgstr ""
+msgstr "助力您的潜力"
 
 #: src/window.ui:91
 msgid ""
@@ -3196,20 +3216,26 @@ msgid ""
 "\n"
 "Alpaca is distributed under GPL v3.0, this software comes with no warranty."
 msgstr ""
+"使用AI模型生成的代码执行导致的任何设备或软件损坏，Alpaca及其开发人员不承担任"
+"何责任。请在运行代码前谨慎检查并仔细审核。\n"
+"\n"
+"Alpaca 按照 GPLv3.0 协议分发，本软件不提供任何形式的保障。"
 
 #: src/window.ui:100
 msgid "Effortless Code Execution"
-msgstr ""
+msgstr "代码轻松执行"
 
 #: src/window.ui:101
 msgid ""
 "Alpaca can run Python, C++, and even HTML (with a live server) right from "
 "your conversations. Give it a try!"
 msgstr ""
+"Alpaca 可以直接从您的对话中运行Python、C++，甚至HTML（需要一个live服务器）。"
+"试试看！"
 
 #: src/window.ui:107
 msgid "Your AI, Your Choice"
-msgstr ""
+msgstr "你的 AI 你做主！"
 
 #: src/window.ui:108
 msgid ""
@@ -3217,16 +3243,20 @@ msgid ""
 "Customize your experience further by connecting to Google Gemini, OpenAI "
 "ChatGPT, Together.AI, and more."
 msgstr ""
+"Alpaca 默认包含 Ollama，为您提供即时访问AI的功能。您可以进一步自定义体验，连"
+"接到 Google Gemini、OpenAI ChatGPT、Together.AI 等更多服务。"
 
 #: src/window.ui:114
 msgid "Private by Design"
-msgstr ""
+msgstr "私密性设计"
 
 #: src/window.ui:115
 msgid ""
 "With Alpaca, your conversations are saved locally on your device, so you can "
 "be confident that your data is always secure and private."
 msgstr ""
+"使用 Alpaca，您的对话将保存在您设备的本地，因此您可以确保您的数据始终安全且私"
+"密。"
 
 #: src/window.ui:152
 msgid "Menu"
@@ -3246,7 +3276,7 @@ msgstr "管理模型"
 
 #: src/window.ui:237
 msgid "Chat Menu"
-msgstr "聊天列表"
+msgstr "对话列表"
 
 #: src/window.ui:250
 msgid "Message search bar"
@@ -3271,33 +3301,33 @@ msgstr "发送消息"
 
 #: src/window.ui:373
 msgid "Stop Message"
-msgstr ""
+msgstr "停止消息"
 
 #: src/window.ui:403
 msgid "Instance Manager"
-msgstr ""
+msgstr "实例管理器"
 
 #: src/window.ui:418
 msgid "No Instances Found"
-msgstr ""
+msgstr "未找到任何实例"
 
 #: src/window.ui:419
 msgid "It looks a bit empty in here. Try adding an instance get started!"
-msgstr ""
+msgstr "这里看起来有点空荡。试试添加一个实例开始使用吧！"
 
 #: src/window.ui:448
 msgid "Added Instances"
-msgstr ""
+msgstr "已添加的实例"
 
 #: src/window.ui:449
 msgid ""
 "Manage your AI instances, chats and messages are shared between instances "
 "when generating responses."
-msgstr ""
+msgstr "管理您的 AI 实例，在生成响应时，对话和交流会在不同实例之间共享。"
 
 #: src/window.ui:484
 msgid "Model Manager"
-msgstr ""
+msgstr "模型管理器"
 
 #: src/window.ui:522
 msgid "Search Model"
@@ -3305,7 +3335,7 @@ msgstr "搜索模型"
 
 #: src/window.ui:536
 msgid "Model Manager Menu"
-msgstr ""
+msgstr "模型管理菜单"
 
 #: src/window.ui:549
 msgid "Model search bar"
@@ -3317,7 +3347,7 @@ msgstr "搜索模型"
 
 #: src/window.ui:574
 msgid "Added"
-msgstr ""
+msgstr "已添加"
 
 #: src/window.ui:584 src/window.ui:644 src/window.ui:698
 msgid "No Models Found"
@@ -3327,61 +3357,62 @@ msgstr "未找到模型"
 msgid ""
 "It looks a bit empty in here. Try downloading some models or change your AI "
 "instance to get started!"
-msgstr ""
+msgstr "这里看起来有点空荡。试试下载一些模型或更改您的 AI 实例开始使用吧！"
 
 #: src/window.ui:588 src/window.ui:598 src/window.ui:1142
 msgid "Manage Instances"
-msgstr ""
+msgstr "管理实例"
 
 #: src/window.ui:645 src/window.ui:699
 msgid ""
 "Looks like we’re fresh out of models for that search. Try tweaking your "
 "keywords, or maybe explore something new!"
 msgstr ""
+"看来没有找到符合条件的模型。您可以尝试调整关键词，或者探索一些新的内容！"
 
 #: src/window.ui:657
 msgid "Available"
-msgstr ""
+msgstr "可获取"
 
 #: src/window.ui:711
 msgid "Creator"
-msgstr ""
+msgstr "创建者"
 
 #: src/window.ui:722
 msgid "Model Creator"
-msgstr ""
+msgstr "模型创建者"
 
 #: src/window.ui:723
 msgid "Select a method of importing a model to continue"
-msgstr ""
+msgstr "请选择一种导入模型的方法继续："
 
 #: src/window.ui:735
 msgid "GGUF File"
-msgstr ""
+msgstr "GGUF 文件"
 
 #: src/window.ui:746
 msgid "Existing Model"
-msgstr ""
+msgstr "已存在的模型"
 
 #: src/window.ui:764
 msgid "Identity"
-msgstr ""
+msgstr "识别信息"
 
 #: src/window.ui:767
 msgid "Base"
-msgstr "基础"
+msgstr "基础模型"
 
 #: src/window.ui:774
 msgid "Profile Picture"
-msgstr ""
+msgstr "简介图片"
 
 #: src/window.ui:779
 msgid "Open File"
-msgstr ""
+msgstr "打开文件"
 
 #: src/window.ui:795 src/custom_widgets/model_manager_widget.py:216
 msgid "Tag"
-msgstr ""
+msgstr "标签"
 
 #: src/window.ui:802
 msgid "Context"
@@ -3391,31 +3422,31 @@ msgstr "上下文"
 msgid ""
 "Describe the desired behavior of the model in its primary language "
 "(typically English)."
-msgstr ""
+msgstr "用模型的主要语言（通常是英语）描述您希望的模型的行为。"
 
 #: src/window.ui:831
 msgid "Behavior"
-msgstr ""
+msgstr "行为"
 
 #: src/window.ui:834
 msgid "Imagination"
-msgstr ""
+msgstr "想象力"
 
 #: src/window.ui:835
 msgid "A higher number results in more diverse answers from the model. (top_k)"
-msgstr ""
+msgstr "较高的数字会导致模型生成更多样化的回答。（top_k）"
 
 #: src/window.ui:849
 msgid "Focus"
-msgstr ""
+msgstr "专注力"
 
 #: src/window.ui:850
 msgid "A higher number widens the amount of possible answers. (top_p)"
-msgstr ""
+msgstr "较高的数字会增加可能的答案范围。（top_p）"
 
 #: src/window.ui:883 src/window.ui:891
 msgid "Add Model"
-msgstr ""
+msgstr "添加模型"
 
 #: src/window.ui:925 src/window.ui:1152
 msgid "Preferences"
@@ -3431,15 +3462,15 @@ msgstr "显示省电警告"
 
 #: src/window.ui:945
 msgid "Zoom"
-msgstr ""
+msgstr "缩放"
 
 #: src/window.ui:963
 msgid "Notice"
-msgstr ""
+msgstr "注意"
 
 #: src/window.ui:974
 msgid "Removal of Ollama"
-msgstr ""
+msgstr "移除 Ollama"
 
 #: src/window.ui:975
 msgid ""
@@ -3447,10 +3478,12 @@ msgid ""
 "Ollama directly within Alpaca, you'll just need to install our new Ollama "
 "extension. Don't worry, your models remain untouched!"
 msgstr ""
+"你好！在 Alpaca 5.1.0 中，我们进行了一些更改。要继续直接在Alpaca中使用 "
+"Ollama，您只需安装我们的新 Ollama 扩展即可。别担心，您的模型不会受到影响！"
 
 #: src/window.ui:980 src/window.ui:981
 msgid "Install Ollama"
-msgstr ""
+msgstr "安装 Ollama"
 
 #: src/window.ui:999
 msgid "Quick ask dialog"
@@ -3462,7 +3495,7 @@ msgstr "保存对话至 Alpace"
 
 #: src/window.ui:1026
 msgid "Terminal dialog"
-msgstr ""
+msgstr "终端对话框"
 
 #: src/window.ui:1029
 msgid "Terminal"
@@ -3470,7 +3503,7 @@ msgstr "终端"
 
 #: src/window.ui:1041
 msgid "Open Environment Directory"
-msgstr ""
+msgstr "打开环境目录"
 
 #: src/window.ui:1062
 msgid "File preview dialog"
@@ -3486,7 +3519,7 @@ msgstr "移除附件"
 
 #: src/window.ui:1138
 msgid "Import Chat"
-msgstr "导入聊天"
+msgstr "导入对话"
 
 #: src/window.ui:1156
 msgid "Keyboard Shortcuts"
@@ -3498,27 +3531,27 @@ msgstr "关于 Alpaca"
 
 #: src/window.ui:1168 src/window.ui:1206
 msgid "Rename Chat"
-msgstr "重命名聊天"
+msgstr "重命名对话"
 
 #: src/window.ui:1172 src/window.ui:1210
 msgid "Duplicate Chat"
-msgstr "复制聊天"
+msgstr "复制对话"
 
 #: src/window.ui:1180
 msgid "Clear Chat"
-msgstr "清除聊天"
+msgstr "清除对话"
 
 #: src/window.ui:1186 src/window.ui:1220
 msgid "Delete Chat"
-msgstr "删除聊天"
+msgstr "删除对话"
 
 #: src/window.ui:1194
 msgid "Reload Added Models"
-msgstr ""
+msgstr "重载已添加的模型"
 
 #: src/window.ui:1198
 msgid "Download Model From Name"
-msgstr ""
+msgstr "根据名称下载模型"
 
 #: src/window.ui:1228
 msgid "Send as User"
@@ -3530,15 +3563,15 @@ msgstr "以系统身份发送"
 
 #: src/window.ui:1244
 msgid "Attach Website"
-msgstr ""
+msgstr "附加网站"
 
 #: src/window.ui:1248
 msgid "Attach YouTube Captions"
-msgstr ""
+msgstr "附加 YouTube 字幕"
 
 #: src/alpaca_search_provider.py.in:43
 msgid "Open chat"
-msgstr "打开聊天"
+msgstr "打开对话"
 
 #: src/alpaca_search_provider.py.in:44
 msgid "Quick ask"
@@ -3551,72 +3584,72 @@ msgstr "从网站提取文本时发生错误"
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "通用"
 
 #: src/gtk/help-overlay.ui:14
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "显示快捷方式"
 
 #: src/gtk/help-overlay.ui:20
 msgctxt "shortcut window"
 msgid "Preferences"
-msgstr ""
+msgstr "首选项"
 
 #: src/gtk/help-overlay.ui:26
 msgctxt "shortcut window"
 msgid "Model Manager"
-msgstr ""
+msgstr "模型管理器"
 
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
 msgid "Instance Manager"
-msgstr ""
+msgstr "实例管理器"
 
 #: src/gtk/help-overlay.ui:38
 msgctxt "shortcut window"
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "切换侧边栏"
 
 #: src/gtk/help-overlay.ui:44
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "退出"
 
 #: src/gtk/help-overlay.ui:52
 msgctxt "shortcut window"
 msgid "Chat Management"
-msgstr ""
+msgstr "对话管理"
 
 #: src/gtk/help-overlay.ui:55
 msgctxt "shortcut window"
 msgid "Create Chat"
-msgstr ""
+msgstr "创建对话"
 
 #: src/gtk/help-overlay.ui:61
 msgctxt "shortcut window"
 msgid "Delete Chat"
-msgstr ""
+msgstr "删除对话"
 
 #: src/gtk/help-overlay.ui:67
 msgctxt "shortcut window"
 msgid "Clear Chat"
-msgstr ""
+msgstr "清除对话"
 
 #: src/gtk/help-overlay.ui:73
 msgctxt "shortcut window"
 msgid "Rename Chat"
-msgstr ""
+msgstr "重命名对话"
 
 #: src/gtk/help-overlay.ui:79
 msgctxt "shortcut window"
 msgid "Toggle Searchbars"
-msgstr ""
+msgstr "切换搜索栏"
 
 #: src/gtk/help-overlay.ui:87
 msgctxt "shortcut window"
 msgid "Message Entry"
-msgstr ""
+msgstr "消息输入框"
 
 #: src/gtk/help-overlay.ui:90
 msgid "Copy"
@@ -3628,7 +3661,7 @@ msgstr "粘贴"
 
 #: src/gtk/help-overlay.ui:102
 msgid "Open Emoji Menu"
-msgstr ""
+msgstr "打开 Emoji 目录"
 
 #: src/gtk/help-overlay.ui:108
 msgid "Insert new line"
@@ -3636,15 +3669,15 @@ msgstr "插入新行"
 
 #: src/gtk/help-overlay.ui:114
 msgid "Send Message as System"
-msgstr ""
+msgstr "以系统身份发送消息"
 
 #: src/gtk/help-overlay.ui:115
 msgid "System messages are taken as literal instructions by models"
-msgstr ""
+msgstr "系统消息会被模型视为严格的指令"
 
 #: src/gtk/help-overlay.ui:121
 msgid "Send Message as User"
-msgstr ""
+msgstr "以用户身份发送消息"
 
 #: src/custom_widgets/chat_widget.py:84
 msgid "Send prompt: '{}'"
@@ -3662,7 +3695,7 @@ msgstr "试试这些提示"
 msgid ""
 "It looks like you don't have any models downloaded yet. Download models to "
 "get started!"
-msgstr "看起来您还没有下载任何模型。开始使用前下载模型！"
+msgstr "看起来你还没有下载任何模型。快去下载一些模型开始吧！"
 
 #: src/custom_widgets/chat_widget.py:153
 msgid "Chat exported successfully"
@@ -3683,7 +3716,7 @@ msgstr "重新生成回复"
 
 #: src/custom_widgets/chat_widget.py:434
 msgid "Copy of {}"
-msgstr "{}的副本"
+msgstr "{} 的副本"
 
 #: src/custom_widgets/chat_widget.py:449
 msgid "Chat imported successfully"
@@ -3712,7 +3745,7 @@ msgstr "用户消息"
 
 #: src/custom_widgets/message_widget.py:188
 msgid "{}Code Block"
-msgstr "{}代码块"
+msgstr "{} 代码块"
 
 #: src/custom_widgets/message_widget.py:190
 msgid "Code Block"
@@ -3725,7 +3758,7 @@ msgstr "复制消息"
 
 #: src/custom_widgets/message_widget.py:195
 msgid "Edit Code Block"
-msgstr ""
+msgstr "编辑代码块"
 
 #: src/custom_widgets/message_widget.py:207
 #: src/custom_widgets/message_widget.py:283
@@ -3763,19 +3796,19 @@ msgstr "无图像"
 
 #: src/custom_widgets/message_widget.py:419
 msgid "Copy Equation"
-msgstr ""
+msgstr "复制公式"
 
 #: src/custom_widgets/message_widget.py:425
 msgid "Regenerate Equation"
-msgstr ""
+msgstr "重新生成公式"
 
 #: src/custom_widgets/message_widget.py:446
 msgid "Equation copied to the clipboard"
-msgstr ""
+msgstr "公式已复制到剪贴板。"
 
 #: src/custom_widgets/message_widget.py:450
 msgid "LaTeX Equation"
-msgstr ""
+msgstr "Latex 公式"
 
 #: src/custom_widgets/message_widget.py:515
 msgid "Remove Message"
@@ -3799,28 +3832,28 @@ msgstr "当收到回复时无法重新生成信息"
 
 #: src/custom_widgets/message_widget.py:879
 msgid "Thought"
-msgstr ""
+msgstr "思考\t"
 
 #: src/custom_widgets/model_manager_widget.py:120
 msgid "Model Manager Error"
-msgstr ""
+msgstr "模型管理错误"
 
 #: src/custom_widgets/model_manager_widget.py:120
 msgid "An error occurred whilst pulling '{}'"
-msgstr ""
+msgstr "从远程获取 '{}' 时发生错误。"
 
 #: src/custom_widgets/model_manager_widget.py:145
 msgid "Download Completed"
-msgstr ""
+msgstr "下载完成"
 
 #: src/custom_widgets/model_manager_widget.py:145
 msgid "Model '{}' downloaded successfully."
-msgstr ""
+msgstr "模型 '{}' 下载成功。"
 
 #: src/custom_widgets/model_manager_widget.py:157
 #: src/custom_widgets/model_manager_widget.py:159
 msgid "Stop Download"
-msgstr ""
+msgstr "停止下在"
 
 #: src/custom_widgets/model_manager_widget.py:163
 msgid "Stop Download?"
@@ -3836,7 +3869,7 @@ msgstr "停止"
 
 #: src/custom_widgets/model_manager_widget.py:196
 msgid "Change Profile Picture"
-msgstr ""
+msgstr "更改简介图片"
 
 #: src/custom_widgets/model_manager_widget.py:217
 msgid "Family"
@@ -3873,19 +3906,19 @@ msgstr "您想如何处理模型的简介照片？"
 
 #: src/custom_widgets/model_manager_widget.py:422
 msgid "Create Child"
-msgstr ""
+msgstr "创建子模型"
 
 #: src/custom_widgets/model_manager_widget.py:431
 msgid "Remove Model"
-msgstr ""
+msgstr "移除模型"
 
 #: src/custom_widgets/model_manager_widget.py:435
 msgid "Remove Model?"
-msgstr ""
+msgstr "要移除该模型吗？"
 
 #: src/custom_widgets/model_manager_widget.py:436
 msgid "Are you sure you want to remove '{}'?"
-msgstr ""
+msgstr "您确定要移除 '{}' 吗？"
 
 #: src/custom_widgets/model_manager_widget.py:450
 msgid "Multilingual"
@@ -3921,17 +3954,17 @@ msgstr "大型"
 
 #: src/custom_widgets/model_manager_widget.py:458
 msgid "Huge"
-msgstr "巨大型"
+msgstr "巨型"
 
 #: src/custom_widgets/model_manager_widget.py:539
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website"
-msgstr ""
+msgstr "通过下载此模型，您将接受在该模型网站上提供的许可协议。"
 
 #: src/custom_widgets/model_manager_widget.py:597
 msgid "Visit Website"
-msgstr ""
+msgstr "访问网站"
 
 #: src/custom_widgets/dialog_widget.py:147
 #: src/custom_widgets/dialog_widget.py:159
@@ -3945,467 +3978,16 @@ msgstr "设置 Python 环境……"
 
 #: src/custom_widgets/terminal_widget.py:95
 msgid "Compiling C++ script..."
-msgstr ""
+msgstr "正在编译C++脚本..."
 
 #: src/custom_widgets/terminal_widget.py:108
 msgid "Running local web server"
-msgstr ""
+msgstr "运行本地网页服务器"
 
 #: src/custom_widgets/terminal_widget.py:133
 msgid "Using Flatpak contained shell"
-msgstr ""
+msgstr "使用 Flatpak 内置的 shell 环境"
 
 #: src/custom_widgets/terminal_widget.py:139
 msgid "Script Exited"
-msgstr ""
-
-#~ msgid ""
-#~ "Mistral Small is a lightweight model designed for cost-effective use in "
-#~ "tasks like translation and summarization."
-#~ msgstr ""
-#~ "Mistral Small 是一个轻量级模型，设计用于翻译和摘要等任务，具有成本效益。"
-
-#~ msgid "Loading Instance"
-#~ msgstr "载入实例"
-
-#~ msgid "General"
-#~ msgstr "通用"
-
-#~ msgid "Bearer Token (Optional)"
-#~ msgstr "令牌（可选）"
-
-#~ msgid "Chat with local AI models"
-#~ msgstr "与本地 AI 模型对话"
-
-#~ msgid "An Ollama client"
-#~ msgstr "一个 Ollama 的客户端"
-
-#~ msgid "Connect"
-#~ msgstr "连接"
-
-#~ msgid "Server URL"
-#~ msgstr "服务器 URL"
-
-#~ msgid "Connect Remote Instance"
-#~ msgstr "连接远程实例"
-
-#~ msgid "Enter instance information to continue"
-#~ msgstr "输入实例信息以继续"
-
-#~ msgid "Close Alpaca"
-#~ msgstr "关闭 Alpaca"
-
-#~ msgid "Use Local Instance"
-#~ msgstr "使用本地实例"
-
-#~ msgid "Connection Error"
-#~ msgstr "连接错误"
-
-#~ msgid "The remote instance has disconnected"
-#~ msgstr "无法连接远端实例"
-
-#~ msgid ""
-#~ "There was an error with the local Ollama instance, so it has been reset"
-#~ msgstr "本地 Ollama 实例出错，已重置"
-
-#~ msgid "An error occurred: {}"
-#~ msgstr "发生错误： {}"
-
-#~ msgid "Ollama instance was shut down due to inactivity"
-#~ msgstr "Ollama 实例因闲置而关闭"
-
-#~ msgid "Use Remote Connection to Ollama"
-#~ msgstr "远程连接到 Ollama"
-
-#~ msgid "Change Ollama Instance"
-#~ msgstr "更改 Ollama 实例"
-
-#~ msgid ""
-#~ "The temperature of the model. Increasing the temperature will make the "
-#~ "model answer more creatively. (Default: 0.8)"
-#~ msgstr "模型的“温度”。“温度”越高，模型的回答就越有创意。(默认值：0.8）"
-
-#~ msgid ""
-#~ "Sets the random number seed to use for generation. Setting this to a "
-#~ "specific number will make the model generate the same text for the same "
-#~ "prompt. (Default: 0 (random))"
-#~ msgstr ""
-#~ "设置生成文本时使用的随机数种子。将其设置为特定的数字将使模型在同一提示下生"
-#~ "成相同的文本（默认值：0（随机））。"
-
-#~ msgid "Keep Alive Time"
-#~ msgstr "保活时间"
-
-#~ msgid ""
-#~ "Controls how long the model will stay loaded into memory following the "
-#~ "request in minutes (Default: 5)"
-#~ msgstr "控制模型在请求后加载到内存中的时间，以分钟为单位（默认：5）"
-
-#~ msgid "Ollama Instance"
-#~ msgstr "Ollama 实例"
-
-#~ msgid "Ollama Overrides"
-#~ msgstr "覆写 Ollama 参数"
-
-#~ msgid ""
-#~ "Manage the arguments used on Ollama, any changes on this page only "
-#~ "applies to the integrated instance, the instance will restart if you make "
-#~ "changes."
-#~ msgstr ""
-#~ "管理 Ollama 上使用的参数，此页面上的任何更改仅适用于集成实例，如果更改，实"
-#~ "例将重新启动。"
-
-#~ msgid "Idle Timer"
-#~ msgstr "闲置倒计时"
-
-#~ msgid ""
-#~ "Number of minutes the instance should remain idle before it is shut down "
-#~ "(0 means it won't be shut down)"
-#~ msgstr "实例在关闭前应保持闲置的分钟数（0 表示不关闭）"
-
-#~ msgid "Change Model Directory"
-#~ msgstr "更改模型目录"
-
-#~ msgid "Powered by Ollama"
-#~ msgstr "基于 Ollama"
-
-#~ msgid "Ollama Website"
-#~ msgstr "Ollama 网站"
-
-#~ msgid ""
-#~ "Alpaca and its developers are not liable for any damages to devices or "
-#~ "software resulting from the execution of code generated by an AI model. "
-#~ "Please exercise caution and review the code carefully before running it."
-#~ msgstr ""
-#~ "对于因执行人工智能模型生成的代码而对设备或软件造成的任何损害，Alpaca 及其"
-#~ "开发人员概不负责。请谨慎行事，在运行代码前仔细检查。"
-
-#~ msgid "From Existing Model"
-#~ msgstr "从现有模型"
-
-#~ msgid "From GGUF File"
-#~ msgstr "从 GGUF 文件"
-
-#~ msgid "From Name"
-#~ msgstr "从名称"
-
-#~ msgid "image"
-#~ msgstr "图像"
-
-#~ msgid "Select Model"
-#~ msgstr "选择模型"
-
-#~ msgid "This model will be used as the base for the new model"
-#~ msgstr "该模型将作为新模型的基础"
-
-#~ msgid "Pull Model"
-#~ msgstr "拉取模型"
-
-#~ msgid ""
-#~ "Input the name of the model in this format\n"
-#~ "name:tag"
-#~ msgstr ""
-#~ "按照此格式输入模型名\n"
-#~ "name:tag"
-
-#~ msgid ""
-#~ "The default model to use on new chats and when Alpaca is launched with "
-#~ "the option --ask \"message\""
-#~ msgstr ""
-#~ "当 Alpace 启动时带有选项 “--ask \"message\"”时，新建对话时使用的默认模型"
-
-#~ msgid "Manage models dialog"
-#~ msgstr "管理模型对话框"
-
-#~ msgid "Create Model"
-#~ msgstr "创建模型"
-
-#~ msgid "Refresh Local Models"
-#~ msgstr "刷新本地模型"
-
-#~ msgid "Try a different search or pull an unlisted model from it's name"
-#~ msgstr "尝试不同的搜索，或根据名称拉取一个未列出的模型"
-
-#~ msgid "Pull Model From Name"
-#~ msgstr "根据名称拉取模型"
-
-#~ msgid ""
-#~ "By downloading this model you accept the license agreement available on "
-#~ "the model's website."
-#~ msgstr "下载此模型即表示您接受模型网站上的许可协议。"
-
-#~ msgid "Model Details"
-#~ msgstr "模型详情"
-
-#~ msgid ""
-#~ "Some models require a modelfile, Alpaca fills FROM and SYSTEM (context) "
-#~ "instructions automatically. Please visit the model's website or Ollama "
-#~ "documentation for more information if you're unsure."
-#~ msgstr ""
-#~ "有些模型需要一个模型文件，Alpaca 会自动填写 FROM 和 SYSTEM（上下文）说明。"
-#~ "如果您不确定，请访问模型网站或 Ollama 文档以获取更多信息。"
-
-#~ msgid "Create"
-#~ msgstr "创建"
-
-#~ msgid "Stop Pulling '{}'"
-#~ msgstr "停止拉取 '{}'"
-
-#~ msgid "Details"
-#~ msgstr "详细信息"
-
-#~ msgid "Remove '{}'"
-#~ msgstr "移除 '{}'"
-
-#~ msgid "Delete Model?"
-#~ msgstr "删除模型？"
-
-#~ msgid "Create Model Based on '{}'"
-#~ msgstr "基于 '{}' 创建模型"
-
-#~ msgid "Change Model Picture"
-#~ msgstr "更改模型照片"
-
-#~ msgid "Format"
-#~ msgstr "格式"
-
-#~ msgid "Enter download menu for {}"
-#~ msgstr "输入 {} 的下载菜单"
-
-#~ msgid "Embedding Model"
-#~ msgstr "嵌入模型"
-
-#~ msgid ""
-#~ "This model is meant to be used in the training of other models and won't "
-#~ "work directly with Alpaca. Are you sure you want to download it anyway?"
-#~ msgstr ""
-#~ "该模型用于训练其他模型，不能直接与 Alpaca 一起使用。您确定要下载它吗？"
-
-#~ msgid "Download"
-#~ msgstr "下载"
-
-#~ msgid "Large Model"
-#~ msgstr "大型模型"
-
-#~ msgid ""
-#~ "This model might be too large to run optimally. Are you sure you want to "
-#~ "download it anyway?"
-#~ msgstr "该模型可能太大，无法以最佳方式运行。您确定要下载吗？"
-
-#~ msgid "Others..."
-#~ msgstr "其他……"
-
-#~ msgid "Download {}:{}"
-#~ msgstr "下载 {}:{}"
-
-#~ msgid "Model deleted successfully"
-#~ msgstr "模型删除成功"
-
-#~ msgid "Task Complete"
-#~ msgstr "任务完成"
-
-#~ msgid "Model '{}' pulled successfully."
-#~ msgstr "成功拉取模型 '{}' 。"
-
-#~ msgid "Pull Model Error"
-#~ msgstr "拉取模型中遇到错误"
-
-#~ msgid "Failed to pull model '{}': {}"
-#~ msgstr "拉取 '{}': {} 模型失败"
-
-#~ msgid "Error pulling '{}': {}"
-#~ msgstr "拉取 '{}': {} 中发生错误"
-
-#~ msgid "Failed to pull model '{}' due to network error."
-#~ msgstr "由于网络错误，拉取模型 '{}' 失败。"
-
-#~ msgid "Error pulling '{}'"
-#~ msgstr "拉取 '{}' 中遇到错误"
-
-#~ msgid ""
-#~ "New state of the art 70B model. Llama 3.3 70B offers similar performance "
-#~ "compared to Llama 3.1 405B model."
-#~ msgstr ""
-#~ "最先进的新型 70B 型号。与 Llama 3.1 405B 型号相比，Llama 3.3 70B 型号具有"
-#~ "相似的性能。"
-
-#~ msgid "Script exited"
-#~ msgstr "脚本已退出"
-
-#~ msgid "The script is contained inside Flatpak"
-#~ msgstr "该脚本包含在 Flatpak 中"
-
-#~ msgid "Close application"
-#~ msgstr "关闭应用"
-
-#~ msgid "Import chat"
-#~ msgstr "导入聊天"
-
-#~ msgid "Clear chat"
-#~ msgstr "清除聊天"
-
-#~ msgid "New chat"
-#~ msgstr "新建聊天"
-
-#~ msgid "Show shortcuts window"
-#~ msgstr "显示快捷键窗口"
-
-#~ msgid "Manage models"
-#~ msgstr "管理模型"
-
-#~ msgid "Toggle sidebar"
-#~ msgstr "切换侧边栏"
-
-#~ msgid "Rename chat"
-#~ msgstr "重命名聊天"
-
-#~ msgid "Editor"
-#~ msgstr "编辑器"
-
-#~ msgid "Message text box"
-#~ msgstr "消息文本框"
-
-#~ msgid "Missing file"
-#~ msgstr "文件缺失"
-
-#~ msgid "Image Recognition"
-#~ msgstr "图像识别"
-
-#~ msgid "This video is not available"
-#~ msgstr "视频不可用"
-
-#~ msgid "Loading instance"
-#~ msgstr "正在加载实例"
-
-#~ msgid "Applying user preferences"
-#~ msgstr "正在应用用户首选项"
-
-#~ msgid "Updating list of local models"
-#~ msgstr "正在更新本地模型列表"
-
-#~ msgid "Updating list of available models"
-#~ msgstr "正在更新可用模型列表"
-
-#~ msgid "Loading chats"
-#~ msgstr "正在加载聊天"
-
-#~ msgid ""
-#~ "Google Gemma 2 is a high-performing and efficient model by now available "
-#~ "in three sizes: 2B, 9B, and 27B."
-#~ msgstr ""
-#~ "Google Gemma 2 是一款高性能、高效率的模型，目前有 2B、9B 和 27B 三种规模。"
-
-#~ msgid "Chat cannot be cleared while receiving a message"
-#~ msgstr "接收信息时无法清除聊天记录"
-
-#~ msgid "Create Chat?"
-#~ msgstr "创建聊天？"
-
-#~ msgid "Enter name for new chat"
-#~ msgstr "输入新聊天的名称"
-
-#~ msgid "Use local instance"
-#~ msgstr "使用本地实例"
-
-#~ msgid "An error occurred while creating the model"
-#~ msgstr "创建模型时发生错误"
-
-#~ msgid "URL of Remote Instance"
-#~ msgstr "远端实例的 URL"
-
-#~ msgid "Loading Alpaca dialog"
-#~ msgstr "正在加载 Alpaca 对话框"
-
-#~ msgid "Loading Alpaca..."
-#~ msgstr "正在加载 Alpaca ……"
-
-#~ msgid "Select a Model"
-#~ msgstr "选择一个模型"
-
-#~ msgid "Failed to connect to server"
-#~ msgstr "无法连接服务器"
-
-#~ msgid "Stop Creating '{}'"
-#~ msgstr "停止创建 '{}'"
-
-#~ msgid "Google Gemma 2 is now available in 2 sizes, 9B and 27B."
-#~ msgstr "Google Gemma 2 现在有两种大小：9B 和 27B。"
-
-#~ msgid "Are you sure you want to stop pulling '{} ({})'?"
-#~ msgstr "你确定你想要停止拉取 '{} ({})'？"
-
-#~ msgid "Try a different search"
-#~ msgstr "尝试不同的搜索"
-
-#~ msgid "Pulling in the background..."
-#~ msgstr "正在后台拉取中……"
-
-#~ msgid "Featured Models"
-#~ msgstr "特色模型"
-
-#~ msgid "Built by Meta"
-#~ msgstr "由 Meta 构建"
-
-#~ msgid "Built by Google DeepMind"
-#~ msgstr "由谷歌 DeepMind 构建"
-
-#~ msgid "Built by Microsoft"
-#~ msgstr "由微软构建"
-
-#~ msgid "Multimodal AI with image recognition"
-#~ msgstr "具有图像识别功能的多模态人工智能"
-
-#~ msgid "Thank you!"
-#~ msgstr "谢谢！"
-
-#~ msgid "Visit Alpaca's website if you change your mind!"
-#~ msgstr "如果你改变注意了，请访问 Alpaca 的主页！"
-
-#~ msgid "Support"
-#~ msgstr "支持"
-
-#~ msgid "Are you enjoying Alpaca? Consider sponsoring the project!"
-#~ msgstr "你喜欢 Alpaca 吗？考虑赞助这个项目！"
-
-#~ msgid "Don't show again"
-#~ msgstr "不再显示"
-
-#~ msgid "Later"
-#~ msgstr "稍后"
-
-#~ msgid "Remove '{} ({})'"
-#~ msgstr "移除 '{} ({})'"
-
-#~ msgid "Stop Pulling '{} ({})'"
-#~ msgstr "停止拉取模型 '{} ({})'"
-
-#~ msgid "Template"
-#~ msgstr "模板"
-
-#~ msgid ""
-#~ "Some models require a specific template. Please visit the model's website "
-#~ "for more information if you're unsure."
-#~ msgstr "某些模型需要特定的模板。如果您不确定，请访问模型网站了解更多信息。"
-
-#~ msgid "From GGUF File (Experimental)"
-#~ msgstr "基于 GGUF 文件（实验性）"
-
-#~ msgid "A conversation showing code highlight"
-#~ msgstr "显示代码高亮的对话"
-
-#~ msgid "A conversation involving multiple models"
-#~ msgstr "包含多种模型的对话"
-
-#~ msgid "Managing models"
-#~ msgstr "管理模型"
-
-#~ msgid "Open with Default App"
-#~ msgstr "使用默认应用打开"
-
-#~ msgid ""
-#~ "Alpaca works locally on your device, to start chatting you'll need an AI "
-#~ "model, you can either pull models from this list or the 'Manage Models' "
-#~ "menu later."
-#~ msgstr ""
-#~ "Alpaca 可在您的设备上本地运行，要开始聊天，您需要一个人工智能模型，您可以"
-#~ "从该列表或稍后的“管理模型”菜单中拉取模型。"
+msgstr "脚本已退出"
