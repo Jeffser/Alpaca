@@ -13,12 +13,12 @@
         "--filesystem=/sys/module/amdgpu:ro",
         "--talk-name=com.jeffser.Alpaca",
         "--own-name=com.jeffser.Alpaca",
-        "--env=LD_LIBRARY_PATH=/app/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/sdk/llvm15/lib:/usr/lib/ollama:/app/plugins/AMD/lib/ollama:/app/plugins/AMD/lib/ollama/rocm:/app/plugins/AMD/lib/ollama/rocm/rocblas/library/",
-        "--env=PATH=/app/bin:/app/plugins/Ollama/bin:/usr/bin"
+        "--env=LD_LIBRARY_PATH=/app/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/sdk/llvm15/lib:/app/plugins/lib",
+        "--env=PATH=/app/bin:/usr/bin:/app/plugins/bin"
     ],
     "add-extensions": {
     	"com.jeffser.Alpaca.Plugins": {
-    		"add-ld-path": "/app/plugins/AMD/lib/ollama:/app/plugins/Ollama/lib/ollama",
+    		"merge-dirs": "lib;bin",
     		"directory": "plugins",
     		"no-autodownload": true,
     		"autodelete": true,
