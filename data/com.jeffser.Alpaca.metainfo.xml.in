@@ -90,6 +90,23 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="5.2.0" date="2025-03-12">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/5.2.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Option to delete all chats</li>
+          <li>Button to refresh sample prompts</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed saving Ollama (Managed) instance might crash it</li>
+          <li>Fixed stop button</li>
+          <li>Fixed model search not working if there are only pulling models</li>
+          <li>Fixed sample prompts sometimes not appearing</li>
+        </ul>
+      </description>
+    </release>
     <release version="5.1.0" date="2025-03-06">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/5.1.0</url>
       <description>

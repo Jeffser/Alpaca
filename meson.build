@@ -1,5 +1,5 @@
 project('Alpaca', 'c',
-          version: '5.1.0',
+          version: '5.2.0',
     meson_version: '>= 0.62.0',
   default_options: [ 'warning_level=2', 'werror=false', ],
 )
