@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-06 18:23-0600\n"
+"POT-Creation-Date: 2025-03-12 00:23-0600\n"
 "PO-Revision-Date: 2025-02-05 18:26-0600\n"
 "Last-Translator: Harimanish Kathiravan harimanishhmp@gmail.com\n"
 "Language-Team: Tamil <tamil@systemreboot.net>\n"
@@ -1830,20 +1830,20 @@ msgstr "0.1.1 நிலையான வெளியீடு"
 msgid "This is the first public version of Alpaca"
 msgstr "இது அல்பாகாவின் முதல் பொது பதிப்பாகும்"
 
-#: src/window.py:175 src/window.py:182 src/window.ui:422 src/window.ui:432
-#: src/window.ui:454
+#: src/window.py:176 src/window.py:183 src/window.ui:435 src/window.ui:445
+#: src/window.ui:467
 msgid "Add Instance"
 msgstr ""
 
-#: src/window.py:183
+#: src/window.py:184
 msgid "Select a type of instance to add"
 msgstr ""
 
-#: src/window.py:371 src/window.py:933
+#: src/window.py:371 src/window.py:936
 msgid "Please select a model before chatting"
 msgstr "அரட்டையடிப்பதற்கு முன் தயவுசெய்து ஒரு மாதிரியைத் தேர்ந்தெடுக்கவும்"
 
-#: src/window.py:410 src/window.py:411 src/window.py:470 src/window.ui:276
+#: src/window.py:410 src/window.py:411 src/window.py:473
 msgid "Close"
 msgstr "மூடு"
 
@@ -1851,10 +1851,10 @@ msgstr "மூடு"
 msgid "Next"
 msgstr "அடுத்து"
 
-#: src/window.py:468 src/instance_manager.py:410 src/instance_manager.py:411
+#: src/window.py:471 src/instance_manager.py:410 src/instance_manager.py:411
 #: src/instance_manager.py:527 src/instance_manager.py:528
-#: src/instance_manager.py:672 src/instance_manager.py:673 src/window.ui:873
-#: src/window.ui:877 src/custom_widgets/message_widget.py:60
+#: src/instance_manager.py:672 src/instance_manager.py:673 src/window.ui:886
+#: src/window.ui:890 src/custom_widgets/message_widget.py:60
 #: src/custom_widgets/message_widget.py:199
 #: src/custom_widgets/model_manager_widget.py:395
 #: src/custom_widgets/dialog_widget.py:149
@@ -1863,87 +1863,87 @@ msgstr "அடுத்து"
 msgid "Cancel"
 msgstr "ரத்துசெய்"
 
-#: src/window.py:469
+#: src/window.py:472
 msgid "Hide"
 msgstr "மறை"
 
-#: src/window.py:473
+#: src/window.py:476
 msgid "Close Alpaca?"
 msgstr "அல்பாகாவை மூடவா?"
 
-#: src/window.py:474
+#: src/window.py:477
 msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
 msgstr "ஒரு பணி தற்போது நடந்து கொண்டிருக்கிறது. அல்பாகாவை மூட விரும்புகிறீர்களா?"
 
-#: src/window.py:700
+#: src/window.py:703
 msgid "Cannot open image"
 msgstr "படத்தை திறக்க முடியாது"
 
-#: src/window.py:806
+#: src/window.py:809
 msgid "Delete Chat?"
 msgstr "அரட்டையை நீக்கவா?"
 
-#: src/window.py:807
+#: src/window.py:810
 msgid "Are you sure you want to delete '{}'?"
 msgstr "நீங்கள் '{}' ஐ நீக்க விரும்புகிறீர்களா?"
 
-#: src/window.py:809
+#: src/window.py:812 src/window.py:1182
 msgid "Delete"
 msgstr "நீக்கு"
 
-#: src/window.py:816
+#: src/window.py:819
 msgid "Rename Chat?"
 msgstr "அரட்டையை மறுபெயரிடவா?"
 
-#: src/window.py:817
+#: src/window.py:820
 msgid "Renaming '{}'"
 msgstr "'{}' க்கு மறுபெயரிடுதல்"
 
-#: src/window.py:819
+#: src/window.py:822
 msgid "Chat name"
 msgstr "அரட்டை பெயர்"
 
-#: src/window.py:820
+#: src/window.py:823
 msgid "Rename"
 msgstr "மறுபெயரிடு"
 
-#: src/window.py:825
+#: src/window.py:828
 msgid "Importable (.db)"
 msgstr "இறக்குமதி செய்யக்கூடிய (.db)"
 
-#: src/window.py:826
+#: src/window.py:829
 msgid "Markdown"
 msgstr "மார்க்டவுன்"
 
-#: src/window.py:827
+#: src/window.py:830
 msgid "Markdown (Obsidian Style)"
 msgstr "மார்க்டவுன் (அப்சிடியன் பாணி)"
 
-#: src/window.py:828
+#: src/window.py:831
 msgid "JSON"
 msgstr "JSON"
 
-#: src/window.py:829
+#: src/window.py:832
 msgid "JSON (Include Metadata)"
 msgstr "JSON (மெட்டாடேட்டாவை உள்ளடக்கு)"
 
-#: src/window.py:832 src/window.ui:1176 src/window.ui:1214
+#: src/window.py:835 src/window.ui:1198 src/window.ui:1236
 msgid "Export Chat"
 msgstr "அரட்டையை ஏற்றுமதி செய்"
 
-#: src/window.py:833
+#: src/window.py:836
 msgid "Select a method to export the chat"
 msgstr "அரட்டையை ஏற்றுமதி செய்ய ஒரு முறையைத் தேர்ந்தெடுக்கவும்"
 
-#: src/window.py:849
+#: src/window.py:852
 msgid "This video does not have any transcriptions"
 msgstr "இந்த வீடியோவில் எந்த டிரான்ஸ்கிரிப்ஷனும் இல்லை"
 
-#: src/window.py:856
+#: src/window.py:859
 msgid "Attach YouTube Video?"
 msgstr "யூடியூப் வீடியோவை இணைக்கவா?"
 
-#: src/window.py:857
+#: src/window.py:860
 msgid ""
 "{}\n"
 "\n"
@@ -1953,15 +1953,15 @@ msgstr ""
 "\n"
 "தயவுசெய்து சேர்க்க ஒரு டிரான்ஸ்கிரிப்டைத் தேர்ந்தெடுக்கவும்"
 
-#: src/window.py:863
+#: src/window.py:866
 msgid "Error attaching video, please try again"
 msgstr "வீடியோவை இணைப்பதில் பிழை ஏற்பட்டது, மீண்டும் முயற்சிக்கவும்"
 
-#: src/window.py:884 src/window.py:1173
+#: src/window.py:887 src/window.py:1176
 msgid "Attach Website? (Experimental)"
 msgstr "வலைத்தளத்தை இணைக்கவா? (சோதனை)"
 
-#: src/window.py:885
+#: src/window.py:888
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
@@ -1969,72 +1969,84 @@ msgstr ""
 "நீங்கள் இணைக்க விரும்புகிறீர்களா?\n"
 " '{}'?"
 
-#: src/window.py:903 src/window.py:915 src/window.py:1172
+#: src/window.py:906 src/window.py:918 src/window.py:1175
 #: src/generic_actions.py:102
 msgid "Image recognition is only available on specific models"
 msgstr "பட அங்கீகாரம் குறிப்பிட்ட மாதிரிகளில் மட்டுமே கிடைக்கும்"
 
-#: src/window.py:935 src/window.ui:1001
+#: src/window.py:938 src/window.ui:1023
 msgid "Quick Ask"
 msgstr "விரைவு கேள்வி"
 
-#: src/window.py:1055
+#: src/window.py:1058
 msgid "Attachment failed, screenshot might be too big"
 msgstr "இணைப்பு தோல்வியுற்றது, திரைப்பிடிப்பு மிகவும் பெரியதாக இருக்கலாம்"
 
-#: src/window.py:1069
+#: src/window.py:1072
 msgid "Any compatible Alpaca attachment"
 msgstr "எந்தவொரு இணக்கமான அல்பாகா இணைப்பும்"
 
-#: src/window.py:1147
+#: src/window.py:1150
 msgid "Attach Screenshot"
 msgstr "திரைக்காட்சியை இணை"
 
-#: src/window.py:1157
+#: src/window.py:1160
 msgid "Clear Chat?"
 msgstr "அரட்டையை அழிக்கவா?"
 
-#: src/window.py:1157
+#: src/window.py:1160
 msgid "Are you sure you want to clear the chat?"
 msgstr "நீங்கள் அரட்டையை அழிக்க விரும்புகிறீர்களா?"
 
-#: src/window.py:1157
+#: src/window.py:1160
 msgid "Clear"
 msgstr "அழி"
 
-#: src/window.py:1173
+#: src/window.py:1176
 msgid "Please enter a website URL"
 msgstr "தயவுசெய்து ஒரு வலைத்தள URL ஐ உள்ளிடவும்"
 
-#: src/window.py:1174
+#: src/window.py:1177
 msgid "Attach YouTube Captions?"
 msgstr "யூடியூப் தலைப்புகளை இணைக்கவா?"
 
-#: src/window.py:1174
+#: src/window.py:1177
 msgid "Please enter a YouTube video URL"
 msgstr "தயவுசெய்து ஒரு யூடியூப் வீடியோ URL ஐ உள்ளிடவும்"
 
-#: src/window.py:1177
+#: src/window.py:1180
 msgid "Download Model?"
 msgstr "மாதிரியைப் பதிவிறக்கவா?"
 
-#: src/window.py:1177
+#: src/window.py:1180
 msgid "Please enter the model name following this template: name:tag"
 msgstr "தயவுசெய்து மாதிரி பெயரை இந்தப் படிவத்தைப் பின்பற்றி உள்ளிடவும்: பெயர்: குறிச்சொல்"
 
-#: src/window.py:1187
+#: src/window.py:1182
+msgid "Delete All Chats?"
+msgstr ""
+
+#: src/window.py:1182
+msgid "Are you sure you want to delete all chats?"
+msgstr ""
+
+#: src/window.py:1191
 msgid "Remove Attachment?"
 msgstr "இணைப்பை அகற்றவா?"
 
-#: src/window.py:1187
+#: src/window.py:1191
 msgid "Are you sure you want to remove attachment?"
 msgstr "நீங்கள் இணைப்பை அகற்ற விரும்புகிறீர்களா?"
 
-#: src/window.py:1187 src/instance_manager.py:795
+#: src/window.py:1191 src/instance_manager.py:795
 #: src/custom_widgets/model_manager_widget.py:396
 #: src/custom_widgets/model_manager_widget.py:438
 msgid "Remove"
 msgstr "அகற்று"
+
+#: src/window.py:1206
+msgid "Already Installed!"
+msgstr ""
 
 #: src/available_models_descriptions.py:2
 msgid ""
@@ -3197,8 +3209,8 @@ msgstr ""
 msgid "Instance"
 msgstr ""
 
-#: src/instance_manager.py:60 src/window.ui:141
-#: src/custom_widgets/chat_widget.py:396
+#: src/instance_manager.py:60 src/window.ui:154
+#: src/custom_widgets/chat_widget.py:392
 msgid "New Chat"
 msgstr "புதிய அரட்டை"
 
@@ -3267,7 +3279,7 @@ msgid "Ollama Log"
 msgstr ""
 
 #: src/instance_manager.py:340 src/instance_manager.py:476
-#: src/instance_manager.py:609 src/window.ui:790
+#: src/instance_manager.py:609 src/window.ui:803
 msgid "Name"
 msgstr "பெயர்"
 
@@ -3429,132 +3441,136 @@ msgid ""
 msgstr ""
 
 #: src/window.ui:107
-msgid "Your AI, Your Choice"
-msgstr ""
-
-#: src/window.ui:108
-msgid ""
-"Alpaca includes Ollama by default, giving you instant access to AI. "
-"Customize your experience further by connecting to Google Gemini, OpenAI "
-"ChatGPT, Together.AI, and more."
-msgstr ""
-
-#: src/window.ui:114
 msgid "Private by Design"
 msgstr ""
 
-#: src/window.ui:115
+#: src/window.ui:108
 msgid ""
 "With Alpaca, your conversations are saved locally on your device, so you can "
 "be confident that your data is always secure and private."
 msgstr ""
 
-#: src/window.ui:152
+#: src/window.ui:114
+msgid "Local AI"
+msgstr ""
+
+#: src/window.ui:115
+msgid ""
+"Alpaca works with AI providers such as Gemini and ChatGPT.  To run AI models "
+"locally on your machine, you'll need to install Ollama within Alpaca. We've "
+"made it super easy to do, so you can get started quickly!"
+msgstr ""
+
+#: src/window.ui:120 src/window.ui:121 src/window.ui:1002 src/window.ui:1003
+msgid "Install Ollama"
+msgstr ""
+
+#: src/window.ui:165
 msgid "Menu"
 msgstr "பட்டி"
 
-#: src/window.ui:174
+#: src/window.ui:187
 msgid "Toggle Sidebar"
 msgstr "பக்கவாட்டுப் பட்டியை மாற்றவும்"
 
-#: src/window.ui:181
+#: src/window.ui:194
 msgid "Search Messages"
 msgstr "செய்திகளைத் தேடு"
 
-#: src/window.ui:198 src/window.ui:225 src/window.ui:1146
+#: src/window.ui:211 src/window.ui:238 src/window.ui:1168
 msgid "Manage Models"
 msgstr "மாடல்களை நிர்வகி"
 
-#: src/window.ui:237
+#: src/window.ui:250
 msgid "Chat Menu"
 msgstr "அரட்டை பட்டி"
 
-#: src/window.ui:250
+#: src/window.ui:263
 msgid "Message search bar"
 msgstr "செய்தி தேடல் பட்டி"
 
-#: src/window.ui:259 src/window.ui:261
+#: src/window.ui:272 src/window.ui:274
 msgid "Search messages"
 msgstr "செய்திகளைத் தேடு"
 
-#: src/window.ui:277
+#: src/window.ui:290
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr "எச்சரிக்கை: பவர் சேவர் முறை இயக்கப்பட்டது, இது செய்தி உருவாக்கத்தை மெதுவாக்கும்"
 
-#: src/window.ui:324 src/window.ui:1240
+#: src/window.ui:337 src/window.ui:1262
 msgid "Attach File"
 msgstr "கோப்பை இணைக்கவும்"
 
-#: src/window.ui:354
+#: src/window.ui:367
 msgid "Send Message"
 msgstr "செய்தி அனுப்பு"
 
-#: src/window.ui:373
+#: src/window.ui:386
 msgid "Stop Message"
 msgstr "செய்தியை நிறுத்து"
 
-#: src/window.ui:403
+#: src/window.ui:416
 msgid "Instance Manager"
 msgstr ""
 
-#: src/window.ui:418
+#: src/window.ui:431
 msgid "No Instances Found"
 msgstr ""
 
-#: src/window.ui:419
+#: src/window.ui:432
 msgid "It looks a bit empty in here. Try adding an instance get started!"
 msgstr ""
 
-#: src/window.ui:448
+#: src/window.ui:461
 msgid "Added Instances"
 msgstr ""
 
-#: src/window.ui:449
+#: src/window.ui:462
 msgid ""
 "Manage your AI instances, chats and messages are shared between instances "
 "when generating responses."
 msgstr ""
 
-#: src/window.ui:484
+#: src/window.ui:497
 msgid "Model Manager"
 msgstr "மாடல் மேலாளர்"
 
-#: src/window.ui:522
+#: src/window.ui:535
 msgid "Search Model"
 msgstr "மாடலைத் தேடு"
 
-#: src/window.ui:536
+#: src/window.ui:549
 msgid "Model Manager Menu"
 msgstr "மாடல் மேலாளர் பட்டி"
 
-#: src/window.ui:549
+#: src/window.ui:562
 msgid "Model search bar"
 msgstr "மாடல் தேடல் பட்டி"
 
-#: src/window.ui:558 src/window.ui:560
+#: src/window.ui:571 src/window.ui:573
 msgid "Search models"
 msgstr "மாடல்களைத் தேடு"
 
-#: src/window.ui:574
+#: src/window.ui:587
 msgid "Added"
 msgstr ""
 
-#: src/window.ui:584 src/window.ui:644 src/window.ui:698
+#: src/window.ui:597 src/window.ui:657 src/window.ui:711
 msgid "No Models Found"
 msgstr "மாதிரிகள் எதுவும் காணப்படவில்லை"
 
-#: src/window.ui:585
+#: src/window.ui:598
 msgid ""
 "It looks a bit empty in here. Try downloading some models or change your AI "
 "instance to get started!"
 msgstr ""
 
-#: src/window.ui:588 src/window.ui:598 src/window.ui:1142
+#: src/window.ui:601 src/window.ui:611 src/window.ui:1164
 msgid "Manage Instances"
 msgstr ""
 
-#: src/window.ui:645 src/window.ui:699
+#: src/window.ui:658 src/window.ui:712
 msgid ""
 "Looks like we’re fresh out of models for that search. Try tweaking your "
 "keywords, or maybe explore something new!"
@@ -3562,202 +3578,202 @@ msgstr ""
 "அந்தத் தேடலுக்கு எங்களிடம் மாதிரிகள் எதுவும் இல்லை. உங்கள் முக்கிய வார்த்தைகளை மாற்றியமைக்க "
 "முயற்சிக்கவும் அல்லது புதிய ஒன்றை ஆராயவும்!"
 
-#: src/window.ui:657
+#: src/window.ui:670
 msgid "Available"
 msgstr ""
 
-#: src/window.ui:711
+#: src/window.ui:724
 msgid "Creator"
 msgstr ""
 
-#: src/window.ui:722
+#: src/window.ui:735
 msgid "Model Creator"
 msgstr "மாடல் உருவாக்கியாளர்"
 
-#: src/window.ui:723
+#: src/window.ui:736
 msgid "Select a method of importing a model to continue"
 msgstr "தொடர ஒரு மாதிரியை இறக்குமதி செய்யும் முறையைத் தேர்ந்தெடுக்கவும்"
 
-#: src/window.ui:735
+#: src/window.ui:748
 msgid "GGUF File"
 msgstr "GGUF கோப்பு"
 
-#: src/window.ui:746
+#: src/window.ui:759
 msgid "Existing Model"
 msgstr "ஏற்கனவே உள்ள மாதிரி"
 
-#: src/window.ui:764
+#: src/window.ui:777
 msgid "Identity"
 msgstr "அடையாளம்"
 
-#: src/window.ui:767
+#: src/window.ui:780
 msgid "Base"
 msgstr "அடிப்படை"
 
-#: src/window.ui:774
+#: src/window.ui:787
 msgid "Profile Picture"
 msgstr "சுயவிவரப் படம்"
 
-#: src/window.ui:779
+#: src/window.ui:792
 msgid "Open File"
 msgstr "கோப்பைத் திற"
 
-#: src/window.ui:795 src/custom_widgets/model_manager_widget.py:216
+#: src/window.ui:808 src/custom_widgets/model_manager_widget.py:216
 msgid "Tag"
 msgstr "குறிச்சொல்"
 
-#: src/window.ui:802
+#: src/window.ui:815
 msgid "Context"
 msgstr "சூழல்"
 
-#: src/window.ui:803
+#: src/window.ui:816
 msgid ""
 "Describe the desired behavior of the model in its primary language "
 "(typically English)."
 msgstr ""
 "மாதிரியின் விரும்பிய நடத்தையை அதன் முதன்மை மொழியில் விவரிக்கவும் (பொதுவாக ஆங்கிலம்)."
 
-#: src/window.ui:831
+#: src/window.ui:844
 msgid "Behavior"
 msgstr "நடத்தை"
 
-#: src/window.ui:834
+#: src/window.ui:847
 msgid "Imagination"
 msgstr "கற்பனை"
 
-#: src/window.ui:835
+#: src/window.ui:848
 msgid "A higher number results in more diverse answers from the model. (top_k)"
 msgstr ""
 "ஒரு பெரிய எண் மாதிரியிலிருந்து மிகவும் மாறுபட்ட பதில்களைக் கொடுக்கிறது. (top_k)"
 
-#: src/window.ui:849
+#: src/window.ui:862
 msgid "Focus"
 msgstr "கவனம்"
 
-#: src/window.ui:850
+#: src/window.ui:863
 msgid "A higher number widens the amount of possible answers. (top_p)"
 msgstr "ஒரு பெரிய எண் சாத்தியமான பதில்களின் அளவை விரிவுபடுத்துகிறது. (top_p)"
 
-#: src/window.ui:883 src/window.ui:891
+#: src/window.ui:896 src/window.ui:904
 msgid "Add Model"
 msgstr "மாதிரியைச் சேர்"
 
-#: src/window.ui:925 src/window.ui:1152
+#: src/window.ui:938 src/window.ui:1174
 msgid "Preferences"
 msgstr "விருப்பத்தேர்வுகள்"
 
-#: src/window.ui:933
+#: src/window.ui:946
 msgid "Run Alpaca In Background"
 msgstr "அல்பாகாவை பின்னணியில் இயக்கு"
 
-#: src/window.ui:939
+#: src/window.ui:952
 msgid "Show Power Saver Warning"
 msgstr "பவர் சேவர் எச்சரிக்கையை காட்டு"
 
-#: src/window.ui:945
+#: src/window.ui:958
 msgid "Zoom"
 msgstr ""
 
-#: src/window.ui:963
+#: src/window.ui:973
+msgid "Delete All Chats"
+msgstr ""
+
+#: src/window.ui:985
 msgid "Notice"
 msgstr ""
 
-#: src/window.ui:974
+#: src/window.ui:996
 msgid "Removal of Ollama"
 msgstr ""
 
-#: src/window.ui:975
+#: src/window.ui:997
 msgid ""
 "Hey there! With Alpaca 5.1.0, we're making some changes. To keep using "
 "Ollama directly within Alpaca, you'll just need to install our new Ollama "
 "extension. Don't worry, your models remain untouched!"
 msgstr ""
 
-#: src/window.ui:980 src/window.ui:981
-msgid "Install Ollama"
-msgstr ""
-
-#: src/window.ui:999
+#: src/window.ui:1021
 msgid "Quick ask dialog"
 msgstr "விரைவு கேள்வி உரையாடல்"
 
-#: src/window.ui:1011
+#: src/window.ui:1033
 msgid "Save Conversation to Alpaca"
 msgstr "உரையாடலை அல்பாகாவில் சேமி"
 
-#: src/window.ui:1026
+#: src/window.ui:1048
 msgid "Terminal dialog"
 msgstr "டெர்மினல் உரையாடல்"
 
-#: src/window.ui:1029
+#: src/window.ui:1051
 msgid "Terminal"
 msgstr "டெர்மினல்"
 
-#: src/window.ui:1041
+#: src/window.ui:1063
 msgid "Open Environment Directory"
 msgstr "சூழல் கோப்பகத்தைத் திற"
 
-#: src/window.ui:1062
+#: src/window.ui:1084
 msgid "File preview dialog"
 msgstr "கோப்பு முன்னோட்ட உரையாடல்"
 
-#: src/window.ui:1073
+#: src/window.ui:1095
 msgid "Open With Default App"
 msgstr "இயல்புநிலை பயன்பாட்டுடன் திற"
 
-#: src/window.ui:1081
+#: src/window.ui:1103
 msgid "Remove Attachment"
 msgstr "இணைப்பை அகற்று"
 
-#: src/window.ui:1138
+#: src/window.ui:1160
 msgid "Import Chat"
 msgstr "அரட்டையை இறக்குமதி செய்"
 
-#: src/window.ui:1156
+#: src/window.ui:1178
 msgid "Keyboard Shortcuts"
 msgstr "விசைப்பலகை குறுக்குவழிகள்"
 
-#: src/window.ui:1160
+#: src/window.ui:1182
 msgid "About Alpaca"
 msgstr "அல்பாகாவைப் பற்றி"
 
-#: src/window.ui:1168 src/window.ui:1206
+#: src/window.ui:1190 src/window.ui:1228
 msgid "Rename Chat"
 msgstr "அரட்டையை மறுபெயரிடு"
 
-#: src/window.ui:1172 src/window.ui:1210
+#: src/window.ui:1194 src/window.ui:1232
 msgid "Duplicate Chat"
 msgstr "அரட்டையை நகலெடு"
 
-#: src/window.ui:1180
+#: src/window.ui:1202
 msgid "Clear Chat"
 msgstr "அரட்டையை அழி"
 
-#: src/window.ui:1186 src/window.ui:1220
+#: src/window.ui:1208 src/window.ui:1242
 msgid "Delete Chat"
 msgstr "அரட்டையை நீக்கு"
 
-#: src/window.ui:1194
+#: src/window.ui:1216
 msgid "Reload Added Models"
 msgstr ""
 
-#: src/window.ui:1198
+#: src/window.ui:1220
 msgid "Download Model From Name"
 msgstr "பெயரிலிருந்து மாதிரியைப் பதிவிறக்கு"
 
-#: src/window.ui:1228
+#: src/window.ui:1250
 msgid "Send as User"
 msgstr "பயனராக அனுப்பு"
 
-#: src/window.ui:1232
+#: src/window.ui:1254
 msgid "Send as System"
 msgstr "கணினியாக அனுப்பு"
 
-#: src/window.ui:1244
+#: src/window.ui:1266
 msgid "Attach Website"
 msgstr "வலைத்தளத்தை இணை"
 
-#: src/window.ui:1248
+#: src/window.ui:1270
 msgid "Attach YouTube Captions"
 msgstr "யூடியூப் தலைப்புகளை இணை"
 
@@ -3871,48 +3887,36 @@ msgstr "கணினி செய்திகள் மாதிரிகளா�
 msgid "Send Message as User"
 msgstr "பயனராக செய்தியை அனுப்பு"
 
-#: src/custom_widgets/chat_widget.py:84
+#: src/custom_widgets/chat_widget.py:83
 msgid "Send prompt: '{}'"
 msgstr "ப்ராம்ப்ட்டை அனுப்பு: '{}'"
 
-#: src/custom_widgets/chat_widget.py:90 src/custom_widgets/chat_widget.py:91
-msgid "Open Model Manager"
-msgstr "மாடல் மேலாளரைத் திற"
-
-#: src/custom_widgets/chat_widget.py:100
+#: src/custom_widgets/chat_widget.py:91
 msgid "Try one of these prompts"
 msgstr "இந்த ப்ராம்ப்ட்டுகளில் ஒன்றை முயற்சிக்கவும்"
 
-#: src/custom_widgets/chat_widget.py:100
-msgid ""
-"It looks like you don't have any models downloaded yet. Download models to "
-"get started!"
-msgstr ""
-"உங்களிடம் இன்னும் எந்த மாடல்களும் பதிவிறக்கம் செய்யப்படவில்லை போல் தெரிகிறது. தொடங்க "
-"மாதிரிகளைப் பதிவிறக்கவும்!"
-
-#: src/custom_widgets/chat_widget.py:153
+#: src/custom_widgets/chat_widget.py:149
 msgid "Chat exported successfully"
 msgstr "அரட்டை வெற்றிகரமாக ஏற்றுமதி செய்யப்பட்டது"
 
-#: src/custom_widgets/chat_widget.py:173
+#: src/custom_widgets/chat_widget.py:169
 msgid "User"
 msgstr "பயனர்"
 
-#: src/custom_widgets/chat_widget.py:177
+#: src/custom_widgets/chat_widget.py:173
 #: src/custom_widgets/message_widget.py:626
 msgid "System"
 msgstr "கணினி"
 
-#: src/custom_widgets/chat_widget.py:265
+#: src/custom_widgets/chat_widget.py:261
 msgid "Regenerate Response"
 msgstr "பதிலை மீண்டும் உருவாக்கு"
 
-#: src/custom_widgets/chat_widget.py:434
+#: src/custom_widgets/chat_widget.py:430
 msgid "Copy of {}"
 msgstr "{} இன் நகல்"
 
-#: src/custom_widgets/chat_widget.py:449
+#: src/custom_widgets/chat_widget.py:445
 msgid "Chat imported successfully"
 msgstr "அரட்டை வெற்றிகரமாக இறக்குமதி செய்யப்பட்டது"
 
@@ -4025,7 +4029,7 @@ msgstr "செய்தி கிளிப்போர்டுக்கு ந�
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "பதிலைப் பெறும்போது செய்தியை மீண்டும் உருவாக்க முடியாது"
 
-#: src/custom_widgets/message_widget.py:879
+#: src/custom_widgets/message_widget.py:878
 msgid "Thought"
 msgstr "எண்ணம்"
 
@@ -4188,6 +4192,16 @@ msgstr "பிளாட்பாக் உள்ளடக்க ஷெல்ல�
 #: src/custom_widgets/terminal_widget.py:139
 msgid "Script Exited"
 msgstr ""
+
+#~ msgid "Open Model Manager"
+#~ msgstr "மாடல் மேலாளரைத் திற"
+
+#~ msgid ""
+#~ "It looks like you don't have any models downloaded yet. Download models "
+#~ "to get started!"
+#~ msgstr ""
+#~ "உங்களிடம் இன்னும் எந்த மாடல்களும் பதிவிறக்கம் செய்யப்படவில்லை போல் தெரிகிறது. தொடங்க "
+#~ "மாதிரிகளைப் பதிவிறக்கவும்!"
 
 #~ msgid "Chat with local AI models"
 #~ msgstr "உள்ளூர் AI மாதிரிகளுடன் அரட்டையடிக்கவும்"

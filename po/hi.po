@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-06 18:23-0600\n"
+"POT-Creation-Date: 2025-03-12 00:23-0600\n"
 "PO-Revision-Date: 2025-01-08 HO:MI+ZONE\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Hindi\n"
@@ -1814,20 +1814,20 @@ msgstr "0.1.1 स्थिर रिलीज़"
 msgid "This is the first public version of Alpaca"
 msgstr "यह अल्पाका का पहला सार्वजनिक संस्करण है"
 
-#: src/window.py:175 src/window.py:182 src/window.ui:422 src/window.ui:432
-#: src/window.ui:454
+#: src/window.py:176 src/window.py:183 src/window.ui:435 src/window.ui:445
+#: src/window.ui:467
 msgid "Add Instance"
 msgstr "इंस्टेंस जोड़ें"
 
-#: src/window.py:183
+#: src/window.py:184
 msgid "Select a type of instance to add"
 msgstr "जोड़ने के लिए एक इंस्टेंस का प्रकार चुनें"
 
-#: src/window.py:371 src/window.py:933
+#: src/window.py:371 src/window.py:936
 msgid "Please select a model before chatting"
 msgstr "चैट करने से पहले एक मॉडल का चयन करें"
 
-#: src/window.py:410 src/window.py:411 src/window.py:470 src/window.ui:276
+#: src/window.py:410 src/window.py:411 src/window.py:473
 msgid "Close"
 msgstr "बंद करें"
 
@@ -1835,10 +1835,10 @@ msgstr "बंद करें"
 msgid "Next"
 msgstr "अगला"
 
-#: src/window.py:468 src/instance_manager.py:410 src/instance_manager.py:411
+#: src/window.py:471 src/instance_manager.py:410 src/instance_manager.py:411
 #: src/instance_manager.py:527 src/instance_manager.py:528
-#: src/instance_manager.py:672 src/instance_manager.py:673 src/window.ui:873
-#: src/window.ui:877 src/custom_widgets/message_widget.py:60
+#: src/instance_manager.py:672 src/instance_manager.py:673 src/window.ui:886
+#: src/window.ui:890 src/custom_widgets/message_widget.py:60
 #: src/custom_widgets/message_widget.py:199
 #: src/custom_widgets/model_manager_widget.py:395
 #: src/custom_widgets/dialog_widget.py:149
@@ -1847,88 +1847,88 @@ msgstr "अगला"
 msgid "Cancel"
 msgstr "रद्द करें"
 
-#: src/window.py:469
+#: src/window.py:472
 msgid "Hide"
 msgstr "छिपाएँ"
 
-#: src/window.py:473
+#: src/window.py:476
 msgid "Close Alpaca?"
 msgstr "Alpaca बंद करें?"
 
-#: src/window.py:474
+#: src/window.py:477
 msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
 msgstr ""
 "एक कार्य वर्तमान में प्रगति पर है। क्या आप सुनिश्चित हैं कि आप Alpaca बंद करना चाहते हैं?"
 
-#: src/window.py:700
+#: src/window.py:703
 msgid "Cannot open image"
 msgstr "छवि खोलने में असमर्थ"
 
-#: src/window.py:806
+#: src/window.py:809
 msgid "Delete Chat?"
 msgstr "चैट हटाएं?"
 
-#: src/window.py:807
+#: src/window.py:810
 msgid "Are you sure you want to delete '{}'?"
 msgstr "क्या आप '{}' को हटाना चाहते हैं?"
 
-#: src/window.py:809
+#: src/window.py:812 src/window.py:1182
 msgid "Delete"
 msgstr "हटाएं"
 
-#: src/window.py:816
+#: src/window.py:819
 msgid "Rename Chat?"
 msgstr "चैट का नाम बदलें?"
 
-#: src/window.py:817
+#: src/window.py:820
 msgid "Renaming '{}'"
 msgstr "'{}' का नाम बदल रहा है"
 
-#: src/window.py:819
+#: src/window.py:822
 msgid "Chat name"
 msgstr "चैट का नाम"
 
-#: src/window.py:820
+#: src/window.py:823
 msgid "Rename"
 msgstr "नाम बदलें"
 
-#: src/window.py:825
+#: src/window.py:828
 msgid "Importable (.db)"
 msgstr "आयात करने योग्य (.db)"
 
-#: src/window.py:826
+#: src/window.py:829
 msgid "Markdown"
 msgstr "मार्कडाउन"
 
-#: src/window.py:827
+#: src/window.py:830
 msgid "Markdown (Obsidian Style)"
 msgstr "मार्कडाउन (ओब्सीडियन शैली)"
 
-#: src/window.py:828
+#: src/window.py:831
 msgid "JSON"
 msgstr "JSON"
 
-#: src/window.py:829
+#: src/window.py:832
 msgid "JSON (Include Metadata)"
 msgstr "JSON (मेटाडेटा शामिल करें)"
 
-#: src/window.py:832 src/window.ui:1176 src/window.ui:1214
+#: src/window.py:835 src/window.ui:1198 src/window.ui:1236
 msgid "Export Chat"
 msgstr "चैट निर्यात करें"
 
-#: src/window.py:833
+#: src/window.py:836
 msgid "Select a method to export the chat"
 msgstr "चैट निर्यात करने के लिए एक विधि चुनें"
 
-#: src/window.py:849
+#: src/window.py:852
 msgid "This video does not have any transcriptions"
 msgstr "इस वीडियो में कोई भी लिप्यंतरण नहीं है"
 
-#: src/window.py:856
+#: src/window.py:859
 msgid "Attach YouTube Video?"
 msgstr "यूट्यूब वीडियो संलग्न करें?"
 
-#: src/window.py:857
+#: src/window.py:860
 msgid ""
 "{}\n"
 "\n"
@@ -1938,86 +1938,98 @@ msgstr ""
 "\n"
 "कृपया शामिल करने के लिए एक लिप्यंतरण चुनें"
 
-#: src/window.py:863
+#: src/window.py:866
 msgid "Error attaching video, please try again"
 msgstr "वीडियो संलग्न करने में त्रुटि, कृपया पुनः प्रयास करें"
 
-#: src/window.py:884 src/window.py:1173
+#: src/window.py:887 src/window.py:1176
 msgid "Attach Website? (Experimental)"
 msgstr "वेबसाइट संलग्न करें? (प्रयोगात्मक)"
 
-#: src/window.py:885
+#: src/window.py:888
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
 msgstr "क्या आप '{}' को संलग्न करना चाहते हैं?"
 
-#: src/window.py:903 src/window.py:915 src/window.py:1172
+#: src/window.py:906 src/window.py:918 src/window.py:1175
 #: src/generic_actions.py:102
 msgid "Image recognition is only available on specific models"
 msgstr "छवि पहचान केवल विशिष्ट मॉडल्स पर ही उपलब्ध है"
 
-#: src/window.py:935 src/window.ui:1001
+#: src/window.py:938 src/window.ui:1023
 msgid "Quick Ask"
 msgstr "त्वरित पूछें"
 
-#: src/window.py:1055
+#: src/window.py:1058
 msgid "Attachment failed, screenshot might be too big"
 msgstr "संलग्नक विफल हो गया, स्क्रीनशॉट बहुत बड़ा हो सकता है"
 
-#: src/window.py:1069
+#: src/window.py:1072
 msgid "Any compatible Alpaca attachment"
 msgstr "कोई भी संगत Alpaca अटैचमेंट"
 
-#: src/window.py:1147
+#: src/window.py:1150
 msgid "Attach Screenshot"
 msgstr "स्क्रीनशॉट संलग्न करें"
 
-#: src/window.py:1157
+#: src/window.py:1160
 msgid "Clear Chat?"
 msgstr "चैट साफ करें?"
 
-#: src/window.py:1157
+#: src/window.py:1160
 msgid "Are you sure you want to clear the chat?"
 msgstr "क्या आप चैट को साफ करना चाहते हैं?"
 
-#: src/window.py:1157
+#: src/window.py:1160
 msgid "Clear"
 msgstr "साफ करें"
 
-#: src/window.py:1173
+#: src/window.py:1176
 msgid "Please enter a website URL"
 msgstr "कृपया एक वेबसाइट URL दर्ज करें"
 
-#: src/window.py:1174
+#: src/window.py:1177
 msgid "Attach YouTube Captions?"
 msgstr "यूट्यूब कैप्शन संलग्न करें?"
 
-#: src/window.py:1174
+#: src/window.py:1177
 msgid "Please enter a YouTube video URL"
 msgstr "कृपया एक यूट्यूब वीडियो URL दर्ज करें"
 
-#: src/window.py:1177
+#: src/window.py:1180
 msgid "Download Model?"
 msgstr "मॉडल डाउनलोड करें?"
 
-#: src/window.py:1177
+#: src/window.py:1180
 msgid "Please enter the model name following this template: name:tag"
 msgstr "कृपया इस टेम्पलेट का पालन करते हुए मॉडल का नाम दर्ज करें: नाम:टैग"
 
-#: src/window.py:1187
+#: src/window.py:1182
+msgid "Delete All Chats?"
+msgstr ""
+
+#: src/window.py:1182
+msgid "Are you sure you want to delete all chats?"
+msgstr ""
+
+#: src/window.py:1191
 msgid "Remove Attachment?"
 msgstr "संलग्नक हटाएं?"
 
-#: src/window.py:1187
+#: src/window.py:1191
 msgid "Are you sure you want to remove attachment?"
 msgstr "क्या आप संलग्नक हटाना चाहते हैं?"
 
-#: src/window.py:1187 src/instance_manager.py:795
+#: src/window.py:1191 src/instance_manager.py:795
 #: src/custom_widgets/model_manager_widget.py:396
 #: src/custom_widgets/model_manager_widget.py:438
 msgid "Remove"
 msgstr "हटाएं"
+
+#: src/window.py:1206
+msgid "Already Installed!"
+msgstr ""
 
 #: src/available_models_descriptions.py:2
 msgid ""
@@ -3147,8 +3159,8 @@ msgstr ""
 msgid "Instance"
 msgstr "इंस्टेंस"
 
-#: src/instance_manager.py:60 src/window.ui:141
-#: src/custom_widgets/chat_widget.py:396
+#: src/instance_manager.py:60 src/window.ui:154
+#: src/custom_widgets/chat_widget.py:392
 msgid "New Chat"
 msgstr "नई चैट शुरू करें"
 
@@ -3217,7 +3229,7 @@ msgid "Ollama Log"
 msgstr "ओल्लामा लॉग"
 
 #: src/instance_manager.py:340 src/instance_manager.py:476
-#: src/instance_manager.py:609 src/window.ui:790
+#: src/instance_manager.py:609 src/window.ui:803
 msgid "Name"
 msgstr "नाम"
 
@@ -3394,24 +3406,10 @@ msgstr ""
 "भी चला सकता है। इसे आज़माएं!"
 
 #: src/window.ui:107
-msgid "Your AI, Your Choice"
-msgstr "आपका एआई, आपकी पसंद"
-
-#: src/window.ui:108
-msgid ""
-"Alpaca includes Ollama by default, giving you instant access to AI. "
-"Customize your experience further by connecting to Google Gemini, OpenAI "
-"ChatGPT, Together.AI, and more."
-msgstr ""
-"एल्पाका डिफ़ॉल्ट रूप से ओल्लामा को शामिल करता है, जिससे आपको एआई तक त्वरित पहुंच मिलती "
-"है। Google Gemini, OpenAI ChatGPT, Together.AI, और अन्य से कनेक्ट करके अपने अनुभव को "
-"और अनुकूलित करें।"
-
-#: src/window.ui:114
 msgid "Private by Design"
 msgstr "विन्यास के अनुसार निजी"
 
-#: src/window.ui:115
+#: src/window.ui:108
 msgid ""
 "With Alpaca, your conversations are saved locally on your device, so you can "
 "be confident that your data is always secure and private."
@@ -3419,68 +3417,83 @@ msgstr ""
 "एल्पाका के साथ, आपकी बातचीत आपके डिवाइस पर स्थानीय रूप से सहेजी जाती है, जिससे आप "
 "सुनिश्चित हो सकते हैं कि आपका डेटा हमेशा सुरक्षित और निजी रहता है।"
 
-#: src/window.ui:152
+#: src/window.ui:114
+msgid "Local AI"
+msgstr ""
+
+#: src/window.ui:115
+msgid ""
+"Alpaca works with AI providers such as Gemini and ChatGPT.  To run AI models "
+"locally on your machine, you'll need to install Ollama within Alpaca. We've "
+"made it super easy to do, so you can get started quickly!"
+msgstr ""
+
+#: src/window.ui:120 src/window.ui:121 src/window.ui:1002 src/window.ui:1003
+msgid "Install Ollama"
+msgstr ""
+
+#: src/window.ui:165
 msgid "Menu"
 msgstr "मेनू"
 
-#: src/window.ui:174
+#: src/window.ui:187
 msgid "Toggle Sidebar"
 msgstr "साइडबार टॉगल करें"
 
-#: src/window.ui:181
+#: src/window.ui:194
 msgid "Search Messages"
 msgstr "संदेश खोजें"
 
-#: src/window.ui:198 src/window.ui:225 src/window.ui:1146
+#: src/window.ui:211 src/window.ui:238 src/window.ui:1168
 msgid "Manage Models"
 msgstr "मॉडल्स प्रबंधित करें"
 
-#: src/window.ui:237
+#: src/window.ui:250
 msgid "Chat Menu"
 msgstr "चैट मेनू"
 
-#: src/window.ui:250
+#: src/window.ui:263
 msgid "Message search bar"
 msgstr "संदेश खोज बार"
 
-#: src/window.ui:259 src/window.ui:261
+#: src/window.ui:272 src/window.ui:274
 msgid "Search messages"
 msgstr "संदेश खोजें"
 
-#: src/window.ui:277
+#: src/window.ui:290
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr "चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
 
-#: src/window.ui:324 src/window.ui:1240
+#: src/window.ui:337 src/window.ui:1262
 msgid "Attach File"
 msgstr "फ़ाइल संलग्न करें"
 
-#: src/window.ui:354
+#: src/window.ui:367
 msgid "Send Message"
 msgstr "संदेश भेजें"
 
-#: src/window.ui:373
+#: src/window.ui:386
 msgid "Stop Message"
 msgstr "संदेश रोकें"
 
-#: src/window.ui:403
+#: src/window.ui:416
 msgid "Instance Manager"
 msgstr "इंस्टेंस प्रबंधक"
 
-#: src/window.ui:418
+#: src/window.ui:431
 msgid "No Instances Found"
 msgstr "कोई इंस्टेंस नहीं मिला"
 
-#: src/window.ui:419
+#: src/window.ui:432
 msgid "It looks a bit empty in here. Try adding an instance get started!"
 msgstr "यहाँ कुछ खाली लग रहा है। शुरू करने के लिए एक इंस्टेंस जोड़ें!"
 
-#: src/window.ui:448
+#: src/window.ui:461
 msgid "Added Instances"
 msgstr "जोड़े गए इंस्टेंस"
 
-#: src/window.ui:449
+#: src/window.ui:462
 msgid ""
 "Manage your AI instances, chats and messages are shared between instances "
 "when generating responses."
@@ -3488,46 +3501,46 @@ msgstr ""
 "अपने एआई इंस्टेंस का प्रबंधन करें, चैट्स और संदेश प्रतिक्रियाएँ उत्पन्न करते समय इंस्टेंसों के बीच "
 "साझा होते हैं।"
 
-#: src/window.ui:484
+#: src/window.ui:497
 msgid "Model Manager"
 msgstr "मॉडल प्रबंधक"
 
-#: src/window.ui:522
+#: src/window.ui:535
 msgid "Search Model"
 msgstr "मॉडल खोजें"
 
-#: src/window.ui:536
+#: src/window.ui:549
 msgid "Model Manager Menu"
 msgstr "मॉडल प्रबंधक मेनू"
 
-#: src/window.ui:549
+#: src/window.ui:562
 msgid "Model search bar"
 msgstr "मॉडल खोज बार"
 
-#: src/window.ui:558 src/window.ui:560
+#: src/window.ui:571 src/window.ui:573
 msgid "Search models"
 msgstr "मॉडल्स खोजें"
 
-#: src/window.ui:574
+#: src/window.ui:587
 msgid "Added"
 msgstr "जोड़ गया"
 
-#: src/window.ui:584 src/window.ui:644 src/window.ui:698
+#: src/window.ui:597 src/window.ui:657 src/window.ui:711
 msgid "No Models Found"
 msgstr "कोई मॉडल नहीं मिला"
 
-#: src/window.ui:585
+#: src/window.ui:598
 msgid ""
 "It looks a bit empty in here. Try downloading some models or change your AI "
 "instance to get started!"
 msgstr ""
 "यहाँ कुछ खाली लग रहा है। शुरू करने के लिए कुछ मॉडल डाउनलोड करें या अपना एआई इंस्टेंस बदलें!"
 
-#: src/window.ui:588 src/window.ui:598 src/window.ui:1142
+#: src/window.ui:601 src/window.ui:611 src/window.ui:1164
 msgid "Manage Instances"
 msgstr "इंस्टेंस प्रबंधित करें"
 
-#: src/window.ui:645 src/window.ui:699
+#: src/window.ui:658 src/window.ui:712
 msgid ""
 "Looks like we’re fresh out of models for that search. Try tweaking your "
 "keywords, or maybe explore something new!"
@@ -3535,200 +3548,200 @@ msgstr ""
 "लगता है कि उस खोज के लिए हमारे पास नए मॉडल उपलब्ध नहीं हैं। अपने कीवर्ड्स को बदलने का "
 "प्रयास करें, या कुछ नया खोजें!"
 
-#: src/window.ui:657
+#: src/window.ui:670
 msgid "Available"
 msgstr "उपलब्ध"
 
-#: src/window.ui:711
+#: src/window.ui:724
 msgid "Creator"
 msgstr "रचनाकार"
 
-#: src/window.ui:722
+#: src/window.ui:735
 msgid "Model Creator"
 msgstr "मॉडल निर्माता"
 
-#: src/window.ui:723
+#: src/window.ui:736
 msgid "Select a method of importing a model to continue"
 msgstr "जारी रखने के लिए एक मॉडल आयात करने की विधि चुनें"
 
-#: src/window.ui:735
+#: src/window.ui:748
 msgid "GGUF File"
 msgstr "GGUF फ़ाइल"
 
-#: src/window.ui:746
+#: src/window.ui:759
 msgid "Existing Model"
 msgstr "मौजूदा मॉडल"
 
-#: src/window.ui:764
+#: src/window.ui:777
 msgid "Identity"
 msgstr "पहचान"
 
-#: src/window.ui:767
+#: src/window.ui:780
 msgid "Base"
 msgstr "बेस"
 
-#: src/window.ui:774
+#: src/window.ui:787
 msgid "Profile Picture"
 msgstr "प्रोफ़ाइल चित्र"
 
-#: src/window.ui:779
+#: src/window.ui:792
 msgid "Open File"
 msgstr "फ़ाइल खोलें"
 
-#: src/window.ui:795 src/custom_widgets/model_manager_widget.py:216
+#: src/window.ui:808 src/custom_widgets/model_manager_widget.py:216
 msgid "Tag"
 msgstr "टैग"
 
-#: src/window.ui:802
+#: src/window.ui:815
 msgid "Context"
 msgstr "संदर्भ"
 
-#: src/window.ui:803
+#: src/window.ui:816
 msgid ""
 "Describe the desired behavior of the model in its primary language "
 "(typically English)."
 msgstr "मॉडल के इच्छित व्यवहार का वर्णन करें उसकी प्राथमिक भाषा में (आमतौर पर अंग्रेजी)।"
 
-#: src/window.ui:831
+#: src/window.ui:844
 msgid "Behavior"
 msgstr "व्यवहार"
 
-#: src/window.ui:834
+#: src/window.ui:847
 msgid "Imagination"
 msgstr "कल्पना"
 
-#: src/window.ui:835
+#: src/window.ui:848
 msgid "A higher number results in more diverse answers from the model. (top_k)"
 msgstr "उच्च संख्या मॉडल से अधिक विविध उत्तरों का परिणाम देती है। (top_k)"
 
-#: src/window.ui:849
+#: src/window.ui:862
 msgid "Focus"
 msgstr "फोकस"
 
-#: src/window.ui:850
+#: src/window.ui:863
 msgid "A higher number widens the amount of possible answers. (top_p)"
 msgstr "उच्च संख्या संभावित उत्तरों की मात्रा को बढ़ाती है। (top_p)"
 
-#: src/window.ui:883 src/window.ui:891
+#: src/window.ui:896 src/window.ui:904
 msgid "Add Model"
 msgstr "मॉडल जोड़ें"
 
-#: src/window.ui:925 src/window.ui:1152
+#: src/window.ui:938 src/window.ui:1174
 msgid "Preferences"
 msgstr "प्राथमिकताएं"
 
-#: src/window.ui:933
+#: src/window.ui:946
 msgid "Run Alpaca In Background"
 msgstr "एल्पाका को पृष्ठभूमि में चलाएं"
 
-#: src/window.ui:939
+#: src/window.ui:952
 msgid "Show Power Saver Warning"
 msgstr "पॉवर सेवर वार्निंग दिखाएं"
 
-#: src/window.ui:945
+#: src/window.ui:958
 msgid "Zoom"
 msgstr "ज़ूम"
 
-#: src/window.ui:963
+#: src/window.ui:973
+msgid "Delete All Chats"
+msgstr ""
+
+#: src/window.ui:985
 msgid "Notice"
 msgstr ""
 
-#: src/window.ui:974
+#: src/window.ui:996
 msgid "Removal of Ollama"
 msgstr ""
 
-#: src/window.ui:975
+#: src/window.ui:997
 msgid ""
 "Hey there! With Alpaca 5.1.0, we're making some changes. To keep using "
 "Ollama directly within Alpaca, you'll just need to install our new Ollama "
 "extension. Don't worry, your models remain untouched!"
 msgstr ""
 
-#: src/window.ui:980 src/window.ui:981
-msgid "Install Ollama"
-msgstr ""
-
-#: src/window.ui:999
+#: src/window.ui:1021
 msgid "Quick ask dialog"
 msgstr "त्वरित पूछें संवाद"
 
-#: src/window.ui:1011
+#: src/window.ui:1033
 msgid "Save Conversation to Alpaca"
 msgstr "बातचीत को अल्पाका में सेव करें"
 
-#: src/window.ui:1026
+#: src/window.ui:1048
 msgid "Terminal dialog"
 msgstr "टर्मिनल संवाद"
 
-#: src/window.ui:1029
+#: src/window.ui:1051
 msgid "Terminal"
 msgstr "टर्मिनल"
 
-#: src/window.ui:1041
+#: src/window.ui:1063
 msgid "Open Environment Directory"
 msgstr "पर्यावरण निर्देशिका खोलें"
 
-#: src/window.ui:1062
+#: src/window.ui:1084
 msgid "File preview dialog"
 msgstr "फ़ाइल पूर्वावलोकन संवाद"
 
-#: src/window.ui:1073
+#: src/window.ui:1095
 msgid "Open With Default App"
 msgstr "डिफ़ॉल्ट ऐप के साथ खोलें"
 
-#: src/window.ui:1081
+#: src/window.ui:1103
 msgid "Remove Attachment"
 msgstr "अटैचमेंट हटाएं"
 
-#: src/window.ui:1138
+#: src/window.ui:1160
 msgid "Import Chat"
 msgstr "चैट आयात करें"
 
-#: src/window.ui:1156
+#: src/window.ui:1178
 msgid "Keyboard Shortcuts"
 msgstr "कीबोर्ड शॉर्टकट्स"
 
-#: src/window.ui:1160
+#: src/window.ui:1182
 msgid "About Alpaca"
 msgstr "एल्पाका के बारे में"
 
-#: src/window.ui:1168 src/window.ui:1206
+#: src/window.ui:1190 src/window.ui:1228
 msgid "Rename Chat"
 msgstr "चैट का नाम बदलें"
 
-#: src/window.ui:1172 src/window.ui:1210
+#: src/window.ui:1194 src/window.ui:1232
 msgid "Duplicate Chat"
 msgstr "चैट की प्रतिलिपि बनाएं"
 
-#: src/window.ui:1180
+#: src/window.ui:1202
 msgid "Clear Chat"
 msgstr "चैट साफ करें"
 
-#: src/window.ui:1186 src/window.ui:1220
+#: src/window.ui:1208 src/window.ui:1242
 msgid "Delete Chat"
 msgstr "चैट हटाएं"
 
-#: src/window.ui:1194
+#: src/window.ui:1216
 msgid "Reload Added Models"
 msgstr "जोड़ गए मॉडलों को पुनः लोड करें"
 
-#: src/window.ui:1198
+#: src/window.ui:1220
 msgid "Download Model From Name"
 msgstr "नाम से मॉडल डाउनलोड करें"
 
-#: src/window.ui:1228
+#: src/window.ui:1250
 msgid "Send as User"
 msgstr "यूजर के रूप में भेजें"
 
-#: src/window.ui:1232
+#: src/window.ui:1254
 msgid "Send as System"
 msgstr "सिस्टम के रूप में भेजें"
 
-#: src/window.ui:1244
+#: src/window.ui:1266
 msgid "Attach Website"
 msgstr "वेबसाइट संलग्न करें"
 
-#: src/window.ui:1248
+#: src/window.ui:1270
 msgid "Attach YouTube Captions"
 msgstr "यूट्यूब कैप्शन संलग्न करें"
 
@@ -3842,48 +3855,36 @@ msgstr "सिस्टम संदेशों को मॉडल द्व�
 msgid "Send Message as User"
 msgstr "उपयोगकर्ता के रूप में संदेश भेजें"
 
-#: src/custom_widgets/chat_widget.py:84
+#: src/custom_widgets/chat_widget.py:83
 msgid "Send prompt: '{}'"
 msgstr "प्रॉम्प्ट भेजें: '{}'"
 
-#: src/custom_widgets/chat_widget.py:90 src/custom_widgets/chat_widget.py:91
-msgid "Open Model Manager"
-msgstr "मॉडल मैनेजर खोलें"
-
-#: src/custom_widgets/chat_widget.py:100
+#: src/custom_widgets/chat_widget.py:91
 msgid "Try one of these prompts"
 msgstr "इनमें से एक प्रॉम्प्ट आजमाएं"
 
-#: src/custom_widgets/chat_widget.py:100
-msgid ""
-"It looks like you don't have any models downloaded yet. Download models to "
-"get started!"
-msgstr ""
-"यह लगता है कि आपने अभी तक कोई मॉडल डाउनलोड नहीं किया है। शुरू करने के लिए मॉडल्स "
-"डाउनलोड करें!"
-
-#: src/custom_widgets/chat_widget.py:153
+#: src/custom_widgets/chat_widget.py:149
 msgid "Chat exported successfully"
 msgstr "चैट सफलतापूर्वक निर्यात किया गया"
 
-#: src/custom_widgets/chat_widget.py:173
+#: src/custom_widgets/chat_widget.py:169
 msgid "User"
 msgstr "उपयोगकर्ता"
 
-#: src/custom_widgets/chat_widget.py:177
+#: src/custom_widgets/chat_widget.py:173
 #: src/custom_widgets/message_widget.py:626
 msgid "System"
 msgstr "सिस्टम"
 
-#: src/custom_widgets/chat_widget.py:265
+#: src/custom_widgets/chat_widget.py:261
 msgid "Regenerate Response"
 msgstr "उत्तर पुनः उत्पन्न करें"
 
-#: src/custom_widgets/chat_widget.py:434
+#: src/custom_widgets/chat_widget.py:430
 msgid "Copy of {}"
 msgstr "{} की प्रति"
 
-#: src/custom_widgets/chat_widget.py:449
+#: src/custom_widgets/chat_widget.py:445
 msgid "Chat imported successfully"
 msgstr "चैट सफलतापूर्वक आयात किया गया"
 
@@ -3996,7 +3997,7 @@ msgstr "संदेश क्लिपबोर्ड में कॉपी �
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "उत्तर प्राप्त करते समय संदेश को पुनः उत्पन्न नहीं किया जा सकता"
 
-#: src/custom_widgets/message_widget.py:879
+#: src/custom_widgets/message_widget.py:878
 msgid "Thought"
 msgstr "विचार"
 
@@ -4159,6 +4160,28 @@ msgstr "फ्लैटपैक में शामिल शेल का उ�
 #: src/custom_widgets/terminal_widget.py:139
 msgid "Script Exited"
 msgstr ""
+
+#~ msgid "Your AI, Your Choice"
+#~ msgstr "आपका एआई, आपकी पसंद"
+
+#~ msgid ""
+#~ "Alpaca includes Ollama by default, giving you instant access to AI. "
+#~ "Customize your experience further by connecting to Google Gemini, OpenAI "
+#~ "ChatGPT, Together.AI, and more."
+#~ msgstr ""
+#~ "एल्पाका डिफ़ॉल्ट रूप से ओल्लामा को शामिल करता है, जिससे आपको एआई तक त्वरित पहुंच "
+#~ "मिलती है। Google Gemini, OpenAI ChatGPT, Together.AI, और अन्य से कनेक्ट करके "
+#~ "अपने अनुभव को और अनुकूलित करें।"
+
+#~ msgid "Open Model Manager"
+#~ msgstr "मॉडल मैनेजर खोलें"
+
+#~ msgid ""
+#~ "It looks like you don't have any models downloaded yet. Download models "
+#~ "to get started!"
+#~ msgstr ""
+#~ "यह लगता है कि आपने अभी तक कोई मॉडल डाउनलोड नहीं किया है। शुरू करने के लिए मॉडल्स "
+#~ "डाउनलोड करें!"
 
 #~ msgid "Loading"
 #~ msgstr "लोड हो रहा है"
