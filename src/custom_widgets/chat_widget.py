@@ -459,7 +459,7 @@ class chat_list(Gtk.ListBox):
                 window.message_searchbar.set_search_mode(False)
 
                 # Load future_row if not loaded already
-                if future_row.chat_window.get_visible_child_name() == 'loading' and len(future_row.chat_window.messages) == 0:
+                if len(future_row.chat_window.messages) == 0:
                     threading.Thread(target=future_row.chat_window.load_chat_messages).start()
 
                 # Unload current_row
