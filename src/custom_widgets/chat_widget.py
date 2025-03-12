@@ -108,8 +108,6 @@ class chat(Gtk.Stack):
         window.switch_send_stop_button(True)
 
     def clear_chat(self):
-        if self.busy:
-            self.stop_message()
         self.messages = {}
         self.stop_message()
         for widget in list(self.container):
@@ -142,6 +140,12 @@ class chat(Gtk.Stack):
                 message_element.add_attachment(attachment[2], attachment[1], attachment[3])
             GLib.idle_add(message_element.set_text, message[4])
         self.set_visible_child_name('content' if len(messages) > 0 else 'welcome-screen')
+
+    def unload_chat_messages(self):
+        self.messages = {}
+        for widget in list(self.container):
+            self.container.remove(widget)
+        self.set_visible_child_name('loading')
 
     def on_export_successful(self, file, result):
         file.replace_contents_finish(result)
@@ -443,26 +447,40 @@ class chat_list(Gtk.ListBox):
         file_dialog = Gtk.FileDialog(default_filter=window.file_filter_db)
         file_dialog.open(window, None, self.on_chat_imported)
 
-    def chat_changed(self, row, force:bool):
-        if row:
-            current_tab_i = next((i for i, t in enumerate(self.tab_list) if t.chat_window == window.chat_stack.get_visible_child()), -1)
-            if self.tab_list.index(row) != current_tab_i or force:
+    def chat_changed(self, future_row, force:bool):
+        if future_row:
+            current_row = next((t for t in self.tab_list if t.chat_window == window.chat_stack.get_visible_child()), future_row)
+            if self.tab_list.index(future_row) != self.tab_list.index(current_row) or force:
+
+                # Empty Search
                 if window.searchentry_messages.get_text() != '':
                     window.searchentry_messages.set_text('')
                     window.message_search_changed(window.searchentry_messages, window.chat_stack.get_visible_child())
-                if row.chat_window.get_visible_child_name() == 'loading' and len(row.chat_window.messages) == 0:
-                    threading.Thread(target=row.chat_window.load_chat_messages).start()
                 window.message_searchbar.set_search_mode(False)
-                window.chat_stack.set_transition_type(4 if self.tab_list.index(row) > current_tab_i else 5)
-                window.chat_stack.set_visible_child(row.chat_window)
-                window.switch_send_stop_button(not row.chat_window.busy)
 
+                # Load future_row if not loaded already
+                if future_row.chat_window.get_visible_child_name() == 'loading' and len(future_row.chat_window.messages) == 0:
+                    threading.Thread(target=future_row.chat_window.load_chat_messages).start()
+
+                # Unload current_row
+                if not current_row.chat_window.busy and current_row.chat_window.get_visible_child_name() == 'content' and len(current_row.chat_window.messages) > 0:
+                    threading.Thread(target=current_row.chat_window.unload_chat_messages).start()
+
+                # Select transition type and change chat
+                window.chat_stack.set_transition_type(4 if self.tab_list.index(future_row) > self.tab_list.index(current_row) else 5)
+                window.chat_stack.set_visible_child(future_row.chat_window)
+
+                # Sync stop/send button to chat's state
+                window.switch_send_stop_button(not future_row.chat_window.busy)
+
+                # Select the correct model for the chat
                 model_to_use = window.get_current_instance().get_default_model()
-                if len(row.chat_window.messages) > 0:
-                    model_to_use = row.chat_window.messages[list(row.chat_window.messages)[-1]].model
-                detected_models = [i for i, row in enumerate(list(window.model_dropdown.get_model())) if row.model.get_name() == model_to_use]
+                if len(future_row.chat_window.messages) > 0:
+                    model_to_use = future_row.chat_window.messages[list(future_row.chat_window.messages)[-1]].model
+                detected_models = [i for i, future_row in enumerate(list(window.model_dropdown.get_model())) if future_row.model.get_name() == model_to_use]
                 if len(detected_models) > 0:
                     window.model_dropdown.set_selected(detected_models[0])
 
-                if row.indicator.get_visible():
-                    row.indicator.set_visible(False)
+                # If it has the "new message" indicator, hide it
+                if future_row.indicator.get_visible():
+                    future_row.indicator.set_visible(False)
