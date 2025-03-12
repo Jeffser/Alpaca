@@ -6,7 +6,7 @@ Manages AI instances (only Ollama for now)
 import gi
 from gi.repository import Adw, Gtk, GLib
 
-import openai, requests, json, logging, os, shutil, subprocess, threading, re
+import openai, requests, json, logging, os, shutil, subprocess, threading, re, time
 from pydantic import BaseModel
 
 from .constants import AlpacaFolders
@@ -434,7 +434,7 @@ class ollama_managed(base_ollama):
                     self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
                 if title_model_el.get_selected_item():
                     self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
-                self.start()
+                #self.start()
             else:
                 self.instance_id = window.generate_uuid()
 

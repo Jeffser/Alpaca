@@ -192,14 +192,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if self.last_selected_instance_row:
                 self.last_selected_instance_row.instance.stop()
             self.last_selected_instance_row = row
-
+            model_manager_widget.update_local_model_list()
+            model_manager_widget.update_available_model_list()
             self.available_models_stack_page.set_visible(len(model_manager_widget.available_models) > 0)
             self.model_creator_stack_page.set_visible(len(model_manager_widget.available_models) > 0)
             self.sql_instance.insert_or_update_preferences({'selected_instance': row.instance.instance_id})
             self.chat_list_box.update_profile_pictures()
         if listbox.get_sensitive() and row:
-            model_manager_widget.update_local_model_list()
-            model_manager_widget.update_available_model_list()
             threading.Thread(target=change_instance).start()
 
     @Gtk.Template.Callback()
