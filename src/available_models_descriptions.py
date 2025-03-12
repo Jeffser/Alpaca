@@ -1,6 +1,6 @@
 descriptions = {
    'llama3.3': _("New state of the art 70B model. Llama 3.3 70B offers similar performance compared to the Llama 3.1 405B model."),
-   'qwq': _("QwQ is an experimental research model focused on advancing AI reasoning capabilities."),
+   'qwq': _("QwQ is the reasoning model of the Qwen series."),
    'llama3.2-vision': _("Llama 3.2 Vision is a collection of instruction-tuned image reasoning generative models in 11B and 90B sizes."),
    'llama3.2': _("Meta's Llama 3.2 goes small with 1B and 3B models."),
    'llama3.1': _("Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and 405B parameter sizes."),
@@ -154,4 +154,9 @@ descriptions = {
    'openthinker': _("A fully open-source family of reasoning models built using a dataset derived by distilling DeepSeek-R1."),
    'deepscaler': _("A fine-tuned version of Deepseek-R1-Distilled-Qwen-1.5B that surpasses the performance of OpenAI’s o1-preview with just 1.5B parameters on popular math evaluations."),
    'r1-1776': _("A version of the DeepSeek-R1 model that has been post trained to provide unbiased, accurate, and factual information by Perplexity."),
+   'gemma3': _("The current strongest model that fits on a single GPU."),
+   'phi4-mini': _("Phi-4-mini brings significant enhancements in multilingual support, reasoning, and mathematics, and now, the long-awaited function calling feature is finally supported."),
+   'granite3.2-vision': _("A compact and efficient vision-language model, specifically designed for visual document understanding, enabling automated content extraction from tables, charts, infographics, plots, diagrams, and more."),
+   'granite3.2': _("Granite-3.2 is a family of long-context AI models from IBM Granite fine-tuned for thinking capabilities."),
+   'command-r7b-arabic': _("A new state-of-the-art version of the lightweight Command R7B model that excels in advanced Arabic language capabilities for enterprises in the Middle East and Northern Africa."),
 }

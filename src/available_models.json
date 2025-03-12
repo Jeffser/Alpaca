@@ -33,9 +33,7 @@
         ],
         "author": "Qwen Team",
         "categories": [
-            "huge",
-            "code",
-            "math"
+            "huge"
         ],
         "languages": [
             "en"
@@ -2918,7 +2916,6 @@
         "author": "Paraphrase Team",
         "categories": [
             "small",
-            "multilingual",
             "embedding"
         ],
         "languages": [
@@ -3202,8 +3199,8 @@
         "categories": [
             "small",
             "medium",
-            "embedding",
             "code",
+            "embedding",
             "multilingual"
         ],
         "author": "IBM Research",
@@ -3455,6 +3452,145 @@
             "en",
             "zh",
             "ja"
+        ]
+    },
+    "gemma3": {
+        "tags": [
+            [
+                "1b",
+                "815\u202fMB"
+            ],
+            [
+                "4b",
+                "3.3\u202fGB"
+            ],
+            [
+                "12b",
+                "8.1\u202fGB"
+            ],
+            [
+                "27b",
+                "17\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/gemma3",
+        "categories": [
+            "small",
+            "medium",
+            "big",
+            "huge"
+        ],
+        "author": "Google DeepMind",
+        "languages": [
+            "en"
+        ]
+    },
+    "phi4-mini": {
+        "tags": [
+            [
+                "3.8b",
+                "2.5\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/phi4-mini",
+        "categories": [
+            "small",
+            "math",
+            "multilingual"
+        ],
+        "author": "Microsoft",
+        "languages": [
+            "en",
+            "ar",
+            "zh",
+            "cs",
+            "da",
+            "nl",
+            "fi",
+            "fr",
+            "de",
+            "he",
+            "hu",
+            "it",
+            "ja",
+            "ko",
+            "no",
+            "pl",
+            "pt",
+            "ru",
+            "es",
+            "sv",
+            "th",
+            "tr",
+            "uk"
+        ]
+    },
+    "granite3.2-vision": {
+        "tags": [
+            [
+                "2b",
+                "2.4\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/granite3.2-vision",
+        "categories": [
+            "small",
+            "vision"
+        ],
+        "author": "IBM for Code Intelligence",
+        "languages": [
+            "en"
+        ]
+    },
+    "granite3.2": {
+        "tags": [
+            [
+                "2b",
+                "1.5\u202fGB"
+            ],
+            [
+                "8b",
+                "4.9\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/granite3.2",
+        "categories": [
+            "small",
+            "medium",
+            "multilingual"
+        ],
+        "author": "IBM for Code Intelligence",
+        "languages": [
+            "en",
+            "de",
+            "es",
+            "fr",
+            "ja",
+            "pt",
+            "ar",
+            "cs",
+            "it",
+            "ko",
+            "nl",
+            "zh"
+        ]
+    },
+    "command-r7b-arabic": {
+        "tags": [
+            [
+                "7b",
+                "5.1\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/command-r7b-arabic",
+        "categories": [
+            "medium",
+            "multilingual"
+        ],
+        "author": "Cohere",
+        "languages": [
+            "en",
+            "ar"
         ]
     }
 }
