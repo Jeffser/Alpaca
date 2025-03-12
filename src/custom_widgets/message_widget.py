@@ -763,17 +763,6 @@ class message(Gtk.Box):
         def write(content:str):
             self.content_children[-1].buffer.insert(self.content_children[-1].buffer.get_end_iter(), content, len(content.encode('utf-8')))
         chat = self.get_chat()
-        if chat.busy:
-            vadjustment = chat.scrolledwindow.get_vadjustment()
-            if self.spinner:
-                self.container.remove(self.spinner)
-                self.spinner = None
-                self.content_children[-1].set_visible(True)
-                GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
-            elif vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
-                GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
-            GLib.idle_add(write, data.get('content', ''))
-
         if data.get('done', False):
             self.footer.options_button.set_sensitive(True)
             tab = window.chat_list_box.get_tab_by_name(chat.get_name())
@@ -794,6 +783,16 @@ class message(Gtk.Box):
             else:
                 window.sql_instance.insert_or_update_message(self)
             sys.exit()
+        else:
+            vadjustment = chat.scrolledwindow.get_vadjustment()
+            if self.spinner:
+                self.container.remove(self.spinner)
+                self.spinner = None
+                self.content_children[-1].set_visible(True)
+                GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
+            elif vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
+                GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
+            GLib.idle_add(write, data.get('content', ''))
 
     def set_text(self, text:str=None):
         self.text = text
