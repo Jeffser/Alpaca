@@ -492,7 +492,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def model_search_changed(self, entry):
         results_local = False
-        if len(model_manager_widget.get_local_models()) > 0:
+        if len(list(self.local_model_flowbox)) > 0:
             for model in list(self.local_model_flowbox):
                 model.set_visible(re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE))
                 results_local = results_local or model.get_visible()
