@@ -72,6 +72,26 @@ class chat(Gtk.Stack):
         )
         self.add_named(Adw.Spinner(), 'loading')
         self.add_named(self.scrolledwindow, 'content')
+
+        self.welcome_screen = Adw.StatusPage(
+            icon_name="com.jeffser.Alpaca",
+            title="Alpaca",
+            description=_("Try one of these prompts"),
+            vexpand=True
+        )
+        list(self.welcome_screen)[0].add_css_class('undershoot-bottom')
+        self.add_named(self.welcome_screen, 'welcome-screen')
+        self.refresh_welcome_screen_prompts()
+
+        self.messages = {}
+        self.regenerate_button = None
+        self.busy = False
+        self.chat_id = chat_id
+        self.quick_chat = quick_chat
+        #self.get_vadjustment().connect('notify::page-size', lambda va, *_: va.set_value(va.get_upper() - va.get_page_size()) if va.get_value() == 0 else None)
+        ##TODO Figure out how to do this with the search thing
+
+    def refresh_welcome_screen_prompts(self):
         button_container = Gtk.Box(
             orientation=1,
             spacing=10,
@@ -84,24 +104,16 @@ class chat(Gtk.Stack):
             )
             prompt_button.connect('clicked', lambda *_, prompt=prompt : self.send_sample_prompt(prompt))
             button_container.append(prompt_button)
-
-        welcome_screen = Adw.StatusPage(
-            icon_name="com.jeffser.Alpaca",
-            title="Alpaca",
-            description=_("Try one of these prompts"),
-            child=button_container,
-            vexpand=True
+        refresh_button = Gtk.Button(
+            icon_name='view-refresh-symbolic',
+            tooltip_text=_("Refresh Prompts"),
+            halign=3,
+            css_classes=["circular", "accent"]
         )
-        list(welcome_screen)[0].add_css_class('undershoot-bottom')
-        self.add_named(welcome_screen, 'welcome-screen')
+        refresh_button.connect('clicked', lambda *_: self.refresh_welcome_screen_prompts())
+        button_container.append(refresh_button)
+        self.welcome_screen.set_child(button_container)
 
-        self.messages = {}
-        self.regenerate_button = None
-        self.busy = False
-        self.chat_id = chat_id
-        self.quick_chat = quick_chat
-        #self.get_vadjustment().connect('notify::page-size', lambda va, *_: va.set_value(va.get_upper() - va.get_page_size()) if va.get_value() == 0 else None)
-        ##TODO Figure out how to do this with the search thing
 
     def stop_message(self):
         self.busy = False
@@ -450,8 +462,7 @@ class chat_list(Gtk.ListBox):
     def chat_changed(self, future_row):
         if future_row:
             current_row = next((t for t in self.tab_list if t.chat_window == window.chat_stack.get_visible_child()), future_row)
-            if self.tab_list.index(future_row) != self.tab_list.index(current_row):
-
+            if self.tab_list.index(future_row) != self.tab_list.index(current_row) or future_row.chat_window.get_visible_child_name() == 'loading':
                 # Empty Search
                 if window.searchentry_messages.get_text() != '':
                     window.searchentry_messages.set_text('')
