@@ -85,18 +85,17 @@ class chat(Gtk.Stack):
             prompt_button.connect('clicked', lambda *_, prompt=prompt : self.send_sample_prompt(prompt))
             button_container.append(prompt_button)
 
-        self.welcome_screen = Adw.StatusPage(
+        welcome_screen = Adw.StatusPage(
             icon_name="com.jeffser.Alpaca",
             title="Alpaca",
             description=_("Try one of these prompts"),
             child=button_container,
             vexpand=True
         )
-        list(self.welcome_screen)[0].add_css_class('undershoot-bottom')
-        self.add_named(self.welcome_screen, 'welcome-screen')
+        list(welcome_screen)[0].add_css_class('undershoot-bottom')
+        self.add_named(welcome_screen, 'welcome-screen')
 
         self.messages = {}
-        self.welcome_screen = None
         self.regenerate_button = None
         self.busy = False
         self.chat_id = chat_id
@@ -336,11 +335,6 @@ class chat_list(Gtk.ListBox):
         for tab in self.tab_list:
             for message in tab.chat_window.messages.values():
                 message.update_profile_picture()
-
-    def update_welcome_screens(self):
-        for tab in self.tab_list:
-            if tab.chat_window.welcome_screen:
-                tab.chat_window.set_visible_child_name('content' if len(tab.chat_window.messages) > 0 else 'welcome-screen')
 
     def get_tab_by_name(self, chat_name:str) -> chat_tab:
         for tab in self.tab_list:

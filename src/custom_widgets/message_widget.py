@@ -770,9 +770,7 @@ class message(Gtk.Box):
                 tab.spinner.set_visible(False)
                 if window.chat_list_box.get_current_chat().get_name() != chat.get_name():
                     window.chat_list_box.get_tab_by_name(chat.get_name()).indicator.set_visible(True)
-                if chat.welcome_screen:
-                    chat.container.remove(chat.welcome_screen)
-                    chat.welcome_screen = None
+                chat.set_visible_child_name('content')
             chat.stop_message()
             self.text = self.content_children[-1].get_text()
             GLib.idle_add(self.set_text, self.content_children[-1].get_text())
