@@ -450,7 +450,7 @@ class chat_list(Gtk.ListBox):
     def chat_changed(self, future_row):
         if future_row:
             current_row = next((t for t in self.tab_list if t.chat_window == window.chat_stack.get_visible_child()), future_row)
-            if self.tab_list.index(future_row) != self.tab_list.index(current_row) or force:
+            if self.tab_list.index(future_row) != self.tab_list.index(current_row):
 
                 # Empty Search
                 if window.searchentry_messages.get_text() != '':
