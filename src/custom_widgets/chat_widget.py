@@ -77,27 +77,18 @@ class chat(Gtk.Stack):
             spacing=10,
             halign=3
         )
-        if len(list(window.local_model_flowbox)) > 0:
-            for prompt in random.sample(possible_prompts, 3):
-                prompt_button = Gtk.Button(
-                    label=prompt,
-                    tooltip_text=_("Send prompt: '{}'").format(prompt)
-                )
-                prompt_button.connect('clicked', lambda *_, prompt=prompt : self.send_sample_prompt(prompt))
-                button_container.append(prompt_button)
-        else:
-            button = Gtk.Button(
-                label=_("Open Model Manager"),
-                tooltip_text=_("Open Model Manager"),
-                css_classes=["suggested-action", "pill"]
+        for prompt in random.sample(possible_prompts, 3):
+            prompt_button = Gtk.Button(
+                label=prompt,
+                tooltip_text=_("Send prompt: '{}'").format(prompt)
             )
-            button.set_action_name('app.model_manager')
-            button_container.append(button)
+            prompt_button.connect('clicked', lambda *_, prompt=prompt : self.send_sample_prompt(prompt))
+            button_container.append(prompt_button)
 
         self.welcome_screen = Adw.StatusPage(
             icon_name="com.jeffser.Alpaca",
             title="Alpaca",
-            description=_("Try one of these prompts") if len(list(window.local_model_flowbox)) > 0 else _("It looks like you don't have any models downloaded yet. Download models to get started!"),
+            description=_("Try one of these prompts"),
             child=button_container,
             vexpand=True
         )
@@ -133,10 +124,15 @@ class chat(Gtk.Stack):
         return msg
 
     def send_sample_prompt(self, prompt):
-        buffer = window.message_text_view.get_buffer()
-        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-        buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
-        window.send_message()
+        if len(list(window.local_model_flowbox)) > 0:
+            buffer = window.message_text_view.get_buffer()
+            buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+            buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
+            window.send_message()
+        elif window.get_current_instance().instance_type == 'empty':
+            window.get_application().lookup_action('instance_manager').activate()
+        else:
+            window.get_application().lookup_action('model_manager').activate()
 
     def load_chat_messages(self):
         messages = window.sql_instance.get_messages(self)
