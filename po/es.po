@@ -162,15 +162,15 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Option to delete all chats"
-msgstr ""
+msgstr "Opción para eliminar todos los chats"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Button to refresh sample prompts"
-msgstr ""
+msgstr "Botón para actualizar los mensajes de muestra"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "New models"
-msgstr ""
+msgstr "Nuevos modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
@@ -201,19 +201,19 @@ msgstr "Arreglos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Fixed saving Ollama (Managed) instance might crash it"
-msgstr ""
+msgstr "Se solucionó el problema de guardar una instancia de Ollama (administrada) que podría bloquearla."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Fixed stop button"
-msgstr ""
+msgstr "Se arregló el botón de parada"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid "Fixed model search not working if there are only pulling models"
-msgstr ""
+msgstr "La búsqueda de modelo no funciona si solo hay modelos descargandose"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
 msgid "Fixed sample prompts sometimes not appearing"
-msgstr ""
+msgstr "Se corrigieron los mensajes de muestra que a veces no aparecían."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
 msgid "Don't clear the building output of C++ scripts"
@@ -2126,7 +2126,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:3
 msgid "QwQ is the reasoning model of the Qwen series."
-msgstr ""
+msgstr "QwQ es el modelo de razonamiento de la serie Qwen."
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -3308,7 +3308,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:157
 msgid "The current strongest model that fits on a single GPU."
-msgstr ""
+msgstr "El modelo más potente actual que se adapta a una sola GPU."
 
 #: src/available_models_descriptions.py:158
 msgid ""
@@ -3316,6 +3316,9 @@ msgid ""
 "reasoning, and mathematics, and now, the long-awaited function calling "
 "feature is finally supported."
 msgstr ""
+"Phi-4-mini aporta mejoras significativas en soporte multilingüe, "
+"razonamiento y matemáticas, y ahora, la tan esperada función de llamada de "
+"funciones finalmente es compatible."
 
 #: src/available_models_descriptions.py:159
 msgid ""
@@ -3323,12 +3326,18 @@ msgid ""
 "visual document understanding, enabling automated content extraction from "
 "tables, charts, infographics, plots, diagrams, and more."
 msgstr ""
+"Un modelo de lenguaje de visión compacto y eficiente, diseñado "
+"específicamente para la comprensión visual de documentos, que permite la "
+"extracción automatizada de contenido de tablas, gráficos, infografías, "
+"gráficos, diagramas y más."
 
 #: src/available_models_descriptions.py:160
 msgid ""
 "Granite-3.2 is a family of long-context AI models from IBM Granite fine-"
 "tuned for thinking capabilities."
 msgstr ""
+"Granite-3.2 es una familia de modelos de IA de contexto largo de IBM Granite "
+"optimizados para capacidades de pensamiento."
 
 #: src/available_models_descriptions.py:161
 msgid ""
@@ -3336,6 +3345,9 @@ msgid ""
 "excels in advanced Arabic language capabilities for enterprises in the "
 "Middle East and Northern Africa."
 msgstr ""
+"Una nueva versión de última generación del modelo liviano Command R7B que se "
+"destaca por sus capacidades avanzadas en idioma árabe para empresas en Medio "
+"Oriente y el norte de África."
 
 #: src/instance_manager.py:30
 msgid "Instance"
@@ -4064,7 +4076,7 @@ msgstr "Enviar mensaje: '{}'"
 
 #: src/custom_widgets/chat_widget.py:109
 msgid "Refresh Prompts"
-msgstr ""
+msgstr "Refrescar Mensajes de Prueba"
 
 #: src/custom_widgets/chat_widget.py:164
 msgid "Chat exported successfully"
