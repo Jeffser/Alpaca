@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.0.0\n"
+"Project-Id-Version: 5.3.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-12 00:23-0600\n"
 "PO-Revision-Date: 2025-01-07 15:12-0600\n"
@@ -158,19 +158,19 @@ msgstr "সংশোধন করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Don't clear the building output of C++ scripts"
-msgstr ""
+msgstr "C++ স্ক্রিপ্টের বিল্ডিং আউটপুট পরিষ্কার করবেন না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Better handling of attachments"
-msgstr ""
+msgstr "সংযুক্তির আরও ভাল পরিচালনা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Handle remote Ollama instance's API Key better"
-msgstr ""
+msgstr "দূরবর্তী ওল্লামা ইনস্ট্যান্সের API কী আরও ভালভাবে পরিচালনা কর"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
-msgid "Remove '\\n' characters in instance edit page"
-msgstr ""
+msgid "Remove '\n' characters in instance edit page"
+msgstr "ইনস্ট্যান্স এডিট পেজে '\n' অক্ষরগুলি সরান"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 #: data/com.jeffser.Alpaca.metainfo.xml.in:118
@@ -202,11 +202,11 @@ msgstr "নতুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
 msgid "Dynamic chat loading"
-msgstr ""
+msgstr "ডাইনামিক চ্যাট লোডিং"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "Updated Ollama instance"
-msgstr ""
+msgstr "আপডেট করা ওল্লামা ইনস্ট্যান্স"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
 msgid "Tweaked appearance of models in model manager"
@@ -282,8 +282,7 @@ msgstr "LaTeX সমীকরণের জন্য আরও ভাল রে�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:164
 msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
-msgstr ""
-"যখন একটি মডেল ডাউনলোড হচ্ছে, তখন ব্যবহারকারী আলপাকা বন্ধ করলে নিশ্চিতকরণ ডায়ালগ"
+msgstr "যখন একটি মডেল ডাউনলোড হচ্ছে, তখন ব্যবহারকারী আলপাকা বন্ধ করলে নিশ্চিতকরণ ডায়ালগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:165
 msgid "Better handling of think tags in messages"
@@ -385,8 +384,7 @@ msgstr "সংশোধন করুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:210
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
-msgstr ""
-"ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
+msgstr "ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:219
 msgid "Added categories to models"
@@ -527,8 +525,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:298
 msgid "Fixed model manager not adapting to large system fonts"
-msgstr ""
-"বড় সিস্টেম ফন্টের সাথে খাপ খাইয়ে নিতে মডেল ম্যানেজারের সমস্যা সংশোধন করা হয়েছে"
+msgstr "বড় সিস্টেম ফন্টের সাথে খাপ খাইয়ে নিতে মডেল ম্যানেজারের সমস্যা সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:307
 msgid "Details page for models"
@@ -563,8 +560,7 @@ msgstr "রিমোট সংযোগ ডায়ালগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:325
 msgid "Fixed: Models get duplicated when switching remote and local instance"
-msgstr ""
-"সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
+msgstr "সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:326
 msgid "Better internal instance manager"
@@ -2012,11 +2008,11 @@ msgstr "দয়া করে এই টেমপ্লেট অনুসর�
 
 #: src/window.py:1182
 msgid "Delete All Chats?"
-msgstr ""
+msgstr "সমস্ত চ্যাট মুছে ফেলুন?"
 
 #: src/window.py:1182
 msgid "Are you sure you want to delete all chats?"
-msgstr ""
+msgstr "আপনি কি নিশ্চিত যে আপনি সমস্ত চ্যাট মুছে ফেলতে চান?"
 
 #: src/window.py:1191
 msgid "Remove Attachment?"
@@ -2034,7 +2030,7 @@ msgstr "মুছে ফেলুন"
 
 #: src/window.py:1206
 msgid "Already Installed!"
-msgstr ""
+msgstr "ইতিমধ্যেই ইনস্টল করা হয়েছে!"
 
 #: src/available_models_descriptions.py:2
 msgid ""
@@ -2692,6 +2688,7 @@ msgid ""
 "Mistral Small 3 sets a new benchmark in the “small” Large Language Models "
 "category below 70B."
 msgstr ""
+"মিস্ট্রাল স্মল ৩ ৭০বির নিচে 'ছোট' বিভাগে বড় ভাষা মডেলগুলির মধ্যে একটি নতুন মানদণ্ড স্থাপন করেছে।"
 
 #: src/available_models_descriptions.py:94
 msgid ""
@@ -2769,7 +2766,8 @@ msgstr ""
 #: src/available_models_descriptions.py:104
 msgid ""
 "Nexus Raven is a 13B instruction tuned model for function calling tasks."
-msgstr "নেক্সাস রেভেন হল ১৩বি ইন্সট্রাকশন টিউনড মডেল ফাংশন কলিং টাস্কের জন্য।"
+msgstr ""
+"নেক্সাস রেভেন হল ১৩বি ইন্সট্রাকশন টিউনড মডেল ফাংশন কলিং টাস্কের জন্য।"
 
 #: src/available_models_descriptions.py:105
 msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
@@ -2850,9 +2848,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:116
 msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
-msgstr ""
-"মাদারডাক এবং নাম্বারস স্টেশন দ্বারা তৈরি করা ৭বি প্যারামিটার টেক্সট-টু-এসকিউএল "
-"মডেল।"
+msgstr "মাদারডাক এবং নাম্বারস স্টেশন দ্বারা তৈরি করা ৭বি প্যারামিটার টেক্সট-টু-এসকিউএল মডেল।"
 
 #: src/available_models_descriptions.py:117
 msgid ""
@@ -3429,7 +3425,7 @@ msgstr ""
 
 #: src/window.ui:114
 msgid "Local AI"
-msgstr ""
+msgstr "স্থানীয় এআই"
 
 #: src/window.ui:115
 msgid ""
@@ -3437,10 +3433,13 @@ msgid ""
 "locally on your machine, you'll need to install Ollama within Alpaca. We've "
 "made it super easy to do, so you can get started quickly!"
 msgstr ""
+"আলপাকা জেমিনি এবং চ্যাটজিপিটির মতো এআই প্রদানকারীদের সাথে কাজ করে। আপনার মেশিনে স্থানীয়ভাবে "
+"এআই মডেল চালানোর জন্য, আপনাকে আলপাকার মধ্যে ওল্লামা ইনস্টল করতে হবে। আমরা এটি খুব সহজ করেছি, "
+"তাই আপনি দ্রুত শুরু করতে পারেন!"
 
 #: src/window.ui:120 src/window.ui:121 src/window.ui:1002 src/window.ui:1003
 msgid "Install Ollama"
-msgstr ""
+msgstr "ওল্লামা ইনস্টল করুন"
 
 #: src/window.ui:165
 msgid "Menu"
@@ -3656,15 +3655,15 @@ msgstr "জুম"
 
 #: src/window.ui:973
 msgid "Delete All Chats"
-msgstr ""
+msgstr "সমস্ত চ্যাট মুছে ফেলুন"
 
 #: src/window.ui:985
 msgid "Notice"
-msgstr ""
+msgstr "নোটিশ"
 
 #: src/window.ui:996
 msgid "Removal of Ollama"
-msgstr ""
+msgstr "ওল্লামা অপসারণ"
 
 #: src/window.ui:997
 msgid ""
@@ -3672,6 +3671,9 @@ msgid ""
 "Ollama directly within Alpaca, you'll just need to install our new Ollama "
 "extension. Don't worry, your models remain untouched!"
 msgstr ""
+"হ্যালো! আলপাকা ৫.১.০ এর সাথে, আমরা কিছু পরিবর্তন করছি। আলপাকার মধ্যে সরাসরি ওল্লামা ব্যবহার করা "
+"চালিয়ে যেতে, আপনাকে শুধুমাত্র আমাদের নতুন ওল্লামা এক্সটেনশন ইনস্টল করতে হবে। চিন্তা করবেন না, আপনার "
+"মডেলগুলি অপরিবর্তিত থাকবে!"
 
 #: src/window.ui:1021
 msgid "Quick ask dialog"
