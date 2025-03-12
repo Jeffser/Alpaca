@@ -158,19 +158,19 @@ msgstr "सुधार"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Don't clear the building output of C++ scripts"
-msgstr ""
+msgstr "C++ स्क्रिप्ट्स के निर्माण आउटपुट को साफ न करें"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Better handling of attachments"
-msgstr ""
+msgstr "संलग्नकों को बेहतर ढंग से संभालना"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Handle remote Ollama instance's API Key better"
-msgstr ""
+msgstr "दूरस्थ ओलामा इंस्टेंस की एपीआई कुंजी को बेहतर ढंग से संभालना"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Remove '\\n' characters in instance edit page"
-msgstr ""
+msgstr "इंस्टेंस संपादित पृष्ठ में '\\n' वर्णों को हटाएं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 #: data/com.jeffser.Alpaca.metainfo.xml.in:118
@@ -202,11 +202,11 @@ msgstr "नया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
 msgid "Dynamic chat loading"
-msgstr ""
+msgstr "डायनामिक चैट लोडिंग"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "Updated Ollama instance"
-msgstr ""
+msgstr "अद्यतन ओलामा इंस्टेंस"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
 msgid "Tweaked appearance of models in model manager"
@@ -2007,11 +2007,11 @@ msgstr "कृपया इस टेम्पलेट का पालन क�
 
 #: src/window.py:1182
 msgid "Delete All Chats?"
-msgstr ""
+msgstr "क्या आप सभी चैट्स को हटाना चाहते हैं?"
 
 #: src/window.py:1182
 msgid "Are you sure you want to delete all chats?"
-msgstr ""
+msgstr "क्या आप वाकई सभी चैट्स को हटाना चाहते हैं?"
 
 #: src/window.py:1191
 msgid "Remove Attachment?"
@@ -2029,7 +2029,7 @@ msgstr "हटाएं"
 
 #: src/window.py:1206
 msgid "Already Installed!"
-msgstr ""
+msgstr "पहले से ही स्थापित किया गया है!"
 
 #: src/available_models_descriptions.py:2
 msgid ""
@@ -2666,7 +2666,8 @@ msgstr ""
 msgid ""
 "A series of multimodal LLMs (MLLMs) designed for vision-language "
 "understanding."
-msgstr "दृष्टि-भाषा समझ के लिए डिज़ाइन किए गए बहु-मोडल LLMs (MLLMs) की एक श्रृंखला।"
+msgstr ""
+"दृष्टि-भाषा समझ के लिए डिज़ाइन किए गए बहु-मोडल LLMs (MLLMs) की एक श्रृंखला।"
 
 #: src/available_models_descriptions.py:92
 msgid ""
@@ -3419,7 +3420,7 @@ msgstr ""
 
 #: src/window.ui:114
 msgid "Local AI"
-msgstr ""
+msgstr "स्थानीय एआई"
 
 #: src/window.ui:115
 msgid ""
@@ -3427,10 +3428,13 @@ msgid ""
 "locally on your machine, you'll need to install Ollama within Alpaca. We've "
 "made it super easy to do, so you can get started quickly!"
 msgstr ""
+"अल्पाका जेमिनी और चैटजीपीटी जैसे एआई प्रदाताओं के साथ काम करता है। अपने मशीन पर स्थानीय रूप से एआई मॉडल "
+"चलाने के लिए, आपको अल्पाका के भीतर ओलामा स्थापित करने की आवश्यकता होगी। हमने इसे करना बहुत आसान बना दिया है, "
+"ताकि आप जल्दी से शुरू कर सकें!"
 
 #: src/window.ui:120 src/window.ui:121 src/window.ui:1002 src/window.ui:1003
 msgid "Install Ollama"
-msgstr ""
+msgstr "ओलामा स्थापित करें"
 
 #: src/window.ui:165
 msgid "Menu"
@@ -3463,7 +3467,8 @@ msgstr "संदेश खोजें"
 #: src/window.ui:290
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
-msgstr "चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
+msgstr ""
+"चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
 
 #: src/window.ui:337 src/window.ui:1262
 msgid "Attach File"
@@ -3644,15 +3649,15 @@ msgstr "ज़ूम"
 
 #: src/window.ui:973
 msgid "Delete All Chats"
-msgstr ""
+msgstr "सभी चैट्स हटाएं"
 
 #: src/window.ui:985
 msgid "Notice"
-msgstr ""
+msgstr "नोटिस"
 
 #: src/window.ui:996
 msgid "Removal of Ollama"
-msgstr ""
+msgstr "ओलामा को हटाना"
 
 #: src/window.ui:997
 msgid ""
@@ -3660,6 +3665,8 @@ msgid ""
 "Ollama directly within Alpaca, you'll just need to install our new Ollama "
 "extension. Don't worry, your models remain untouched!"
 msgstr ""
+"नमस्ते! अल्पाका 5.1.0 के साथ, हम कुछ बदलाव कर रहे हैं। अल्पाका के भीतर सीधे ओलामा का उपयोग करने के लिए, "
+"आपको बस हमारा नया ओलामा एक्सटेंशन स्थापित करने की आवश्यकता होगी। चिंता न करें, आपके मॉडल अभी भी अछूते हैं!"
 
 #: src/window.ui:1021
 msgid "Quick ask dialog"
@@ -4159,7 +4166,7 @@ msgstr "फ्लैटपैक में शामिल शेल का उ�
 
 #: src/custom_widgets/terminal_widget.py:139
 msgid "Script Exited"
-msgstr ""
+msgstr "स्क्रिप्ट समाप्त हुई"
 
 #~ msgid "Your AI, Your Choice"
 #~ msgstr "आपका एआई, आपकी पसंद"
