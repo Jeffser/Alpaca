@@ -332,7 +332,7 @@ class chat_list(Gtk.ListBox):
             selection_mode=1,
             css_classes=["navigation-sidebar"]
         )
-        self.connect("row-selected", lambda listbox, row: self.chat_changed(row, False))
+        self.connect("row-selected", lambda listbox, row: self.chat_changed(row))
         self.tab_list = []
 
     def update_profile_pictures(self):
@@ -447,7 +447,7 @@ class chat_list(Gtk.ListBox):
         file_dialog = Gtk.FileDialog(default_filter=window.file_filter_db)
         file_dialog.open(window, None, self.on_chat_imported)
 
-    def chat_changed(self, future_row, force:bool):
+    def chat_changed(self, future_row):
         if future_row:
             current_row = next((t for t in self.tab_list if t.chat_window == window.chat_stack.get_visible_child()), future_row)
             if self.tab_list.index(future_row) != self.tab_list.index(current_row) or force:
