@@ -475,6 +475,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                   <object class="GtkListBox" id="instance_listbox">
                                     <property name="selection-mode">single</property>
                                     <signal name="row-selected" handler="instance_changed"/>
+                                    <signal name="unselect-all" handler="instance_changed"/>
                                     <style>
                                       <class name="boxed-list"/>
                                     </style>

@@ -196,10 +196,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             model_manager_widget.update_available_model_list()
             self.available_models_stack_page.set_visible(len(model_manager_widget.available_models) > 0)
             self.model_creator_stack_page.set_visible(len(model_manager_widget.available_models) > 0)
-            self.sql_instance.insert_or_update_preferences({'selected_instance': row.instance.instance_id})
+            if row:
+                self.sql_instance.insert_or_update_preferences({'selected_instance': row.instance.instance_id})
             self.chat_list_box.update_profile_pictures()
-        if listbox.get_sensitive() and row:
+        if listbox.get_sensitive():
             threading.Thread(target=change_instance).start()
+
 
     @Gtk.Template.Callback()
     def model_creator_accept(self, button):
