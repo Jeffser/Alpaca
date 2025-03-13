@@ -364,12 +364,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if current_chat.busy == True:
             return
 
-        self.chat_list_box.send_tab_to_top(self.chat_list_box.get_selected_row())
+        if self.get_current_instance().instance_type == 'empty':
+            self.get_application().lookup_action('instance_manager').activate()
+            return
 
         current_model = model_manager_widget.get_selected_model().get_name()
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
             return
+
+        self.chat_list_box.send_tab_to_top(self.chat_list_box.get_selected_row())
 
         message_id = self.generate_uuid()
 
