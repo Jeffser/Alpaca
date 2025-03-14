@@ -12,7 +12,7 @@ from pydantic import BaseModel
 from .constants import AlpacaFolders
 from .internal import source_dir, data_dir, cache_dir
 from .custom_widgets import dialog_widget
-from . import available_models_descriptions
+from . import available_models_descriptions, generation_actions
 
 logger = logging.getLogger(__name__)
 
@@ -39,15 +39,13 @@ class base_instance:
     title_model = None
     pinned = False
 
-    def generate_message(self, bot_message, model:str):
+    def prepare_chat(self, bot_message):
         chat = bot_message.get_chat()
         chat.busy = True
         if not chat.quick_chat:
             window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(True)
         chat.set_visible_child_name('content')
         window.switch_send_stop_button(False)
-        if window.regenerate_button:
-            GLib.idle_add(window.chat_list_box.get_current_chat().remove, window.regenerate_button)
         if chat.regenerate_button:
             chat.container.remove(chat.regenerate_button)
 
@@ -56,6 +54,10 @@ class base_instance:
             for m in messages:
                 if m.get('role') == 'system':
                     m['role'] = 'user'
+        return chat, messages
+
+    def generate_message(self, bot_message, model:str):
+        chat, messages = self.prepare_chat(bot_message)
 
         if not chat.quick_chat and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
@@ -73,17 +75,21 @@ class base_instance:
 
         try:
             response = self.client.chat.completions.create(**params)
-
             for chunk in response:
-                if chunk.choices and chunk.choices[0].delta.content:
-                    bot_message.update_message({"content": chunk.choices[0].delta.content})
+                if chunk.choices and chunk.choices[0].delta:
+                    delta = chunk.choices[0].delta
+                    if delta.content:
+                        bot_message.update_message({"content": delta.content})
                 if not chat.busy:
                     break
-            bot_message.update_message({"done": True})
         except Exception as e:
             dialog_widget.simple_error(_('Instance Error'), _('Message generation failed'), e)
             logger.error(e)
             window.instance_listbox.unselect_all()
+        bot_message.update_message({"done": True})
+
+    def use_actions(self, bot_message, model:str):
+        chat, messages = self.prepare_chat(bot_message)
 
     def generate_chat_title(self, chat, prompt:str):
         class chat_title(BaseModel): #Pydantic
@@ -726,7 +732,7 @@ class gemini(base_openai):
             response = requests.get('https://generativelanguage.googleapis.com/v1beta/models?key={}'.format(self.api_key))
             models = []
             for model in response.json().get('models', []):
-                if "generateContent" in model.get("supportedGenerationMethods", []) and 'discontinued' not in model.get('description'):
+                if "generateContent" in model.get("supportedGenerationMethods", []) and 'discontinued' not in model.get('description', []):
                     model['name'] = model.get('name').removeprefix('models/')
                     models.append(model)
             return models
@@ -734,6 +740,7 @@ class gemini(base_openai):
             dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve added models'), str(e))
             logger.error(e)
             window.instance_listbox.unselect_all()
+        return []
 
     def get_model_info(self, model_name:str) -> dict:
         try:
@@ -854,3 +861,4 @@ ready_instances = [ollama, chatgpt, gemini, together, venice, generic_openai]
 
 if shutil.which('ollama'):
     ready_instances.insert(0, ollama_managed)
+

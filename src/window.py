@@ -85,7 +85,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     available_model_flowbox = Gtk.Template.Child()
     split_view_overlay_model_manager = Gtk.Template.Child()
     split_view_overlay = Gtk.Template.Child()
-    regenerate_button : Gtk.Button = None
     selected_chat_row : Gtk.ListBoxRow = None
     preferences_dialog = Gtk.Template.Child()
     file_preview_dialog = Gtk.Template.Child()
