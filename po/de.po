@@ -6,11 +6,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.0.0\n"
+"Project-Id-Version: 5.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-12 15:00-0600\n"
-"PO-Revision-Date:  2025-02-02 12:20+0001Last-Translator: Magnus Schlinsog "
-"<magnusschlinsog@gmail.com>\n"
+"PO-Revision-Date:  2025-03-14 09:08+0001\n"
+"Last-Translator: Magnus Schlinsog <magnusschlinsog@gmail.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -163,15 +163,15 @@ msgstr "Neu"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Option to delete all chats"
-msgstr ""
+msgstr "Option, alle Chats zu löschen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Button to refresh sample prompts"
-msgstr ""
+msgstr "Knopf, um Beispielprompts neu zu laden"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "New models"
-msgstr ""
+msgstr "Neue Modelle"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
@@ -202,43 +202,45 @@ msgstr "Fehlerbehebungen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Fixed saving Ollama (Managed) instance might crash it"
-msgstr ""
+msgstr "Behoben, dass integrierte Ollama-Instanz beim Speichern absürzt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Fixed stop button"
-msgstr ""
+msgstr "Stopp-Knopf behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid "Fixed model search not working if there are only pulling models"
 msgstr ""
+"Nicht funktionierenden Modellsuche behoben, wenn es nur zu ladende Modelle "
+"gibt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
 msgid "Fixed sample prompts sometimes not appearing"
-msgstr ""
+msgstr "Nicht erscheinende Beispielprompts behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
 msgid "Don't clear the building output of C++ scripts"
-msgstr ""
+msgstr "Build-Ausgabe von C++-Skripten wird nicht mehr geleert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:117
 msgid "Better handling of attachments"
-msgstr ""
+msgstr "Bessere Handhabung von Anhängen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:118
 msgid "Handle remote Ollama instance's API Key better"
-msgstr ""
+msgstr "Bessere Handhabung des API-Schlüssels einer Ollama-Remoteinstanz"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:119
 msgid "Remove '\\n' characters in instance edit page"
-msgstr ""
+msgstr "Entferne '\\n'-Buchstaben in Instanzbearbeitungsseite"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:128
 msgid "Dynamic chat loading"
-msgstr ""
+msgstr "Dynamisches Laden von Chats"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:129
 msgid "Updated Ollama instance"
-msgstr ""
+msgstr "Ollama-Instanz aktualisiert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:138
 msgid "Tweaked appearance of models in model manager"
@@ -736,7 +738,7 @@ msgstr "Prüfer für Ollama-Instanz (verwendet in Systempaketen) behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:448
 msgid "Fixed 'clear chat' option"
-msgstr "'Chat löschen'-Option behoben"
+msgstr "'Chat leeren'-Option behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:449
 msgid "Fixed welcome dialog causing the local instance to not launch"
@@ -940,7 +942,7 @@ msgstr "Datum bei gestoppten Nachrichten anzeigen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:529
 msgid "Fix clear chat error"
-msgstr "Fehler beim Löschen des Chats behoben"
+msgstr "Fehler beim Leeren des Chats behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:538
 msgid "Changed shortcuts to standards"
@@ -1879,7 +1881,7 @@ msgstr "Chat nach dem Schließen der App wiederherstellen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1022
 msgid "A button to clear the chat"
-msgstr "Eine Schaltfläche zum Löschen des Chats"
+msgstr "Eine Schaltfläche zum Leeren des Chats"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1023
 msgid "Fixed multiple bugs involving how messages are shown"
@@ -2077,15 +2079,15 @@ msgstr "Bildschirmfoto anhängen"
 
 #: src/window.py:1159
 msgid "Clear Chat?"
-msgstr "Chat löschen?"
+msgstr "Chat leeren?"
 
 #: src/window.py:1159
 msgid "Are you sure you want to clear the chat?"
-msgstr "Sind Sie sicher, dass Sie den Chat löschen möchten?"
+msgstr "Sind Sie sicher, dass Sie den Chat leeren möchten?"
 
 #: src/window.py:1159
 msgid "Clear"
-msgstr "Löschen"
+msgstr "Leeren"
 
 #: src/window.py:1175
 msgid "Please enter a website URL"
@@ -2109,11 +2111,11 @@ msgstr "Bitte geben Sie den Modellnamen nach folgendem Schema an: name:tag"
 
 #: src/window.py:1181
 msgid "Delete All Chats?"
-msgstr ""
+msgstr "Alle Chats löschen?"
 
 #: src/window.py:1181
 msgid "Are you sure you want to delete all chats?"
-msgstr ""
+msgstr "Sind Sie sich sicher, dass Sie alle Chats löschen möchten?"
 
 #: src/window.py:1190
 msgid "Remove Attachment?"
@@ -2131,7 +2133,7 @@ msgstr "Entfernen"
 
 #: src/window.py:1205
 msgid "Already Installed!"
-msgstr ""
+msgstr "Bereits installiert!"
 
 #: src/available_models_descriptions.py:2
 msgid ""
@@ -2143,7 +2145,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:3
 msgid "QwQ is the reasoning model of the Qwen series."
-msgstr ""
+msgstr "QwQ ist das Reasoning-Modell aus der Qwen-Serie."
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -3338,7 +3340,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:157
 msgid "The current strongest model that fits on a single GPU."
-msgstr ""
+msgstr "Das derzeit stärkste Modell, dass auf eine einzige GPU passt."
 
 #: src/available_models_descriptions.py:158
 msgid ""
@@ -3346,6 +3348,9 @@ msgid ""
 "reasoning, and mathematics, and now, the long-awaited function calling "
 "feature is finally supported."
 msgstr ""
+"Phi-4-mini bringt ausschlaggebende Verbesserungen in den multilingualen, "
+"Reasoning- und mathematischen Fähigkeiten und unterstützt nun die "
+"langerwarteten Funktionsaufruf-Fähigkeiten."
 
 #: src/available_models_descriptions.py:159
 msgid ""
@@ -3353,12 +3358,17 @@ msgid ""
 "visual document understanding, enabling automated content extraction from "
 "tables, charts, infographics, plots, diagrams, and more."
 msgstr ""
+"Ein kompaktes und effizienties Vision-Sprachmodell, das besonders für das "
+"visuelle Verstehen von Dokumenten, automatischer Extraktion von Inhalten "
+"aus Tabellen, Diagrammen, Infografiken und mehr trainiert wurde."
 
 #: src/available_models_descriptions.py:160
 msgid ""
 "Granite-3.2 is a family of long-context AI models from IBM Granite fine-"
 "tuned for thinking capabilities."
 msgstr ""
+"Granite-3.2 ist eine Familie von KI-Modellen mit langem Kontextfenster von "
+"IBM, das für das Denken feinabgestimmt wurde."
 
 #: src/available_models_descriptions.py:161
 msgid ""
@@ -3366,6 +3376,9 @@ msgid ""
 "excels in advanced Arabic language capabilities for enterprises in the "
 "Middle East and Northern Africa."
 msgstr ""
+"Eine hochmoderne Version des leichtgewichtigen Command R7B-Modells, das mit "
+"seiner erweiterten arabischen Sprachfähigkeit für Unternehmen im mittleren "
+"Osten und Nordafrika beeindruckt."
 
 #: src/instance_manager.py:30
 msgid "Instance"
@@ -3634,7 +3647,7 @@ msgstr ""
 
 #: src/window.ui:114
 msgid "Local AI"
-msgstr ""
+msgstr "Lokale KI"
 
 #: src/window.ui:115
 msgid ""
@@ -3642,10 +3655,14 @@ msgid ""
 "locally on your machine, you'll need to install Ollama within Alpaca. We've "
 "made it super easy to do, so you can get started quickly!"
 msgstr ""
+"Alpaca arbeitet mit KI-Anbietern wie Gemini oder ChatGPT. Um KI-Modelle "
+"lokal auf Ihrem Gerät ausführen zu können, müssen Sie Ollama innerhalb von "
+"Alpaca installieren. Das haben wir sehr einfach gemacht, sodass Sie ganz "
+"schnell loslegen können!"
 
 #: src/window.ui:120 src/window.ui:121 src/window.ui:1006 src/window.ui:1007
 msgid "Install Ollama"
-msgstr ""
+msgstr "Ollama installieren"
 
 #: src/window.ui:165
 msgid "Menu"
@@ -3866,15 +3883,15 @@ msgstr "Vergrößerung"
 
 #: src/window.ui:977
 msgid "Delete All Chats"
-msgstr ""
+msgstr "Alle Chats löschen"
 
 #: src/window.ui:989
 msgid "Notice"
-msgstr ""
+msgstr "Information"
 
 #: src/window.ui:1000
 msgid "Removal of Ollama"
-msgstr ""
+msgstr "Entfernung von Ollama"
 
 #: src/window.ui:1001
 msgid ""
@@ -3882,6 +3899,10 @@ msgid ""
 "Ollama directly within Alpaca, you'll just need to install our new Ollama "
 "extension. Don't worry, your models remain untouched!"
 msgstr ""
+"Hi! Mit Alpaca 5.1.0 haben wir ein paar Änderungen gemacht. Um ab nun "
+"Ollama weiterhin direkt in Alpaca nutzen zu können, brauchst du nur kurz "
+"unsere neue Ollama-Erweiterung zu installieren. Aber keine Sorge, deine "
+"heruntergeladenen Modelle bleiben unberührt."
 
 #: src/window.ui:1025
 msgid "Quick ask dialog"
@@ -3937,7 +3958,7 @@ msgstr "Chat duplizieren"
 
 #: src/window.ui:1206
 msgid "Clear Chat"
-msgstr "Chat löschen"
+msgstr "Chat leeren"
 
 #: src/window.ui:1212 src/window.ui:1246
 msgid "Delete Chat"
@@ -4088,7 +4109,7 @@ msgstr "Sende Prompt: '{}'"
 
 #: src/custom_widgets/chat_widget.py:109
 msgid "Refresh Prompts"
-msgstr ""
+msgstr "Beispielprompts neu laden"
 
 #: src/custom_widgets/chat_widget.py:164
 msgid "Chat exported successfully"
@@ -4388,7 +4409,7 @@ msgstr "Nutzt Flatpak-beinhaltete Shell"
 
 #: src/custom_widgets/terminal_widget.py:139
 msgid "Script Exited"
-msgstr ""
+msgstr "Skript beendet"
 
 #~ msgid ""
 #~ "QwQ is an experimental research model focused on advancing AI reasoning "
@@ -4726,7 +4747,7 @@ msgstr ""
 #~ msgstr "Chat importieren"
 
 #~ msgid "Clear chat"
-#~ msgstr "Chat löschen"
+#~ msgstr "Chat leeren"
 
 #~ msgid "New chat"
 #~ msgstr "Neuer Chat"
