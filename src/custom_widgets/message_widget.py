@@ -32,7 +32,7 @@ language_fallback = {
 markup_pattern = re.compile(r'<(b|u|tt|a.*|span.*)>(.*?)<\/(b|u|tt|a|span)>')
 
 patterns = [
-    ('think', re.compile(r'(?:<think>|<\|begin_of_thought\|>)\n+(.*?)\n+(?:<\/think>|<\|end_of_thought\|>)', re.DOTALL)),
+    ('think', re.compile(r'(?:<think>|<\|begin_of_thought\|>)\n+(.*?)\n+(?:<\/think>|<\|end_of_thought\|>)', re.DOTALL | re.IGNORECASE)),
     ('code', re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
     ('code', re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)),
     ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
@@ -47,7 +47,7 @@ def remove_trailing_solution_markers(text: str):
     """
     Removes any trailing markers that reasoning models may leave in their final
     solutions. OpenThinker, for example, uses tags such as
-    <|begin_of_solution|> and <|end_of_solution|> that can be removed.
+    `<|begin_of_solution|>` and `<|end_of_solution|>` that can be removed.
 
     See https://github.com/Jeffser/Alpaca/issues/604.
     """
@@ -55,9 +55,14 @@ def remove_trailing_solution_markers(text: str):
     text = text.strip()
 
     for enclosing_tags in SOLUTION_ENCLOSING_TAGS:
-        if text.endswith(enclosing_tags[1]):
+        if text.casefold().endswith(enclosing_tags[1].casefold()):
             text = text[:-len(enclosing_tags[1])].strip()
-            text = text.replace(enclosing_tags[0], "", 1)
+            text = re.sub(
+                re.escape(enclosing_tags[0]),
+                "",
+                text,
+                flags=re.IGNORECASE
+            )
 
             break
 
