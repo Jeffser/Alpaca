@@ -1,133 +1,83 @@
-# generation_tools.py
+# generation_actions.py
 
-import logging, json
+import logging, json, os
 logger = logging.getLogger(__name__)
 
 import datetime, time, random, threading
 
-action_list = [{
-    "metadata": {
-        "name": "Get Datetime",
-        "description": "Gets the current date and time in the specified strftime format",
-        "author": "Jeffser"
-    },
-    "parameters": [
-        {
-            "name": "format",
-            "type": "string",
-            "description": "The strftime format to use when retrieving the current date and time",
-            "required": True,
-            "show": True
-        }
-    ]
-    "variables": [
-        {
-            "name": "Current Time",
-            "default": "",
-            "show": True
-        },
-        {
-            "name": "Message",
-            "default": "",
-            "show": False
-        }
-    ],
-    "functions": [
-        {
-            "name": "Get Current Time",
-            "parameters": [
-                {
-                    "name": "format",
-                    "method": "parameter",
-                    "value": "format"
-                }
-            ],
-            "return": "Current Time"
-        },
-        {
-            "name": "Concatenate Text",
-            "parameters": [
-                {
-                    "name": "texts",
-                    "method": "list",
-                    "value": [
-                        {
-                            "method": "constant",
-                            "value": "The time is "
-                        },
-                        {
-                            "method": "variable",
-                            "value": "Current Time"
-                        }
-                    ]
-                }
-            ],
-            "return": "Message"
-        },
-        {
-            "name": "Show Message",
-            "parameters": [
-                {
-                    "name": "animate",
-                    "method": "constant",
-                    "value": True
-                },
-                {
-                    "name": "text",
-                    "method": "variable",
-                    "value": "Message"
-                }
-            ]
-        }
-    ]
-}]
+window = None
+
+class test_message: # To test append_message
+    def update_message(data:dict):
+        print(data.get('content'), end='')
 
 class get_current_time:
     """
-    Gets the current time in the specified format
     Parameters:
         - format
           - type: str
           - default: %I:%M:%S %p
     Returns current time in format (str)
     """
+    name="Get Current Time"
+    description="Gets the current time in the specified format"
 
-
-    def run(self, **args):
+    def run(**args):
         time_format = args.get('format', '%I:%M:%S %p')
         return datetime.datetime.now().strftime(time_format)
 
 class concatenate_text:
     """
-    Concatenates one or more strings
     Parameters:
         - texts
             - type: list
     Returns concatenated text (str)
     """
+    name="Concatenate Text"
+    description="Concatenates one or more strings"
 
-    def run(self, **args):
-        text ''.join([str(t) for t in args.get('texts', [])])
+    def run(**args):
+        texts = args.get('texts', [])
+        text = ''.join([str(t) for t in texts])
         return text
 
-class action:
+class append_message:
+    """
+    Parameters:
+        - text
+            - type: str
+        - animate (Add small delay to every word, simulating text generation)
+            - type: bool
+            - default: True
+        - message (Auto added when deployed)
+            - type: dynamic
+    """
+    name="Show Message"
+    description="Appends text to bot message using Alpaca's message update system"
+
+    def run(**args) -> None:
+        animate = args.get('animate', True)
+        text = args.get('text', None)
+        message = args.get('message', None)
+        if text and message:
+            for word in args.get('text').split(' '):
+                message.update_message({"content": '{} '.format(word)})
+                if animate:
+                    time.sleep(round(random.uniform(0.01, 1.00), 3))
+
+available_calls=[get_current_time, concatenate_text, append_message]
+
+class Action:
     messages = []
     runtime_env = {}
     functions = []
 
-    def __init__(self, messages:list, action_name:str, parameters:dict):
-        found_actions = [a for a in action_list if a.get('metadata', {}).get('name') == action_name]
-        if len(found_actions) == 0:
-            return {'error': _('Action not found)}
-        self.action = found_actions[0]
+    def __init__(self, messages:list, action:dict, parameters:dict):
+        self.action = action
         self.messages = messages
         self.runtime_env['variables'] = {v.get('name'): v.get('default') for v in action.get('variables')}
         self.runtime_env['parameters'] = parameters
-        calls = {
-            "Get Current Time": get_current_time,
-            "Concatenate Text": concatenate_text,
-            "Show Message": self.show_message
-        }
+        calls = {c.name: c for c in available_calls}
         for f in self.action.get('functions'):
             f['call'] = calls.get(f.get('name'), lambda: None)
             self.functions.append(f)
@@ -150,25 +100,61 @@ class action:
             params = {}
             for p in f.get('parameters', []):
                 params[p.get('name')] = self.get_value(p.get('method'), p.get('value'))
-            response = f.get('call').run(**params)
+            response = f.get('call').run(**params, message=self.messages[-1])
             if f.get('return'):
                 self.runtime_env.get('variables')[f.get('return')] = response
-        return "# {}\n{}\n{}"
 
-    def show_message(self, **args) -> None:
-        """
-        Outputs text to the message element
-        Parameters:
-            - text
-                - type: str
-            - animate (Add small delay to every word, simulating text generation)
-                - type: bool
-                - default: True
-        """
-        animate = args.get('animate', True)
-        if args.get("text"):
-            for word in args.get('text').split(' '):
-                #self.messages[-1].update_message({"content": '{} '.format(word)})
-                if animate:
-                    time.sleep(round(random.uniform(0.01, 1.00), 3))
+class Manager:
+    loaded_actions = {}
+
+    def __init__(self, integrated_actions_path:str):
+        with open(integrated_actions_path, 'r', encoding='utf-8') as f:
+            for action_id, action in json.load(f).items():
+                function_name = action.get('metadata').get('name').replace(' ', '_').lower()
+                self.loaded_actions[function_name] = {
+                    'tool': self.get_tool(action, function_name),
+                    'action': action,
+                    'enabled': True,
+                    'id': action_id
+                }
+
+    def run(self, function_name:str, params:dict):
+        action = self.loaded_actions.get(function_name, {}).get('action')
+        if action:
+            action_runner = Action([test_message], action, params)
+            action_runner.run()
+
+    def get_available_tools(self) -> list:
+        tools = []
+        for name, action in loaded_actions.items():
+            if action.get('enabled'):
+                tools.append(action.get('tool'))
+        return tools
+
+    def get_tool(self, action:dict, name:str) -> dict: # Converts action to tool for AIs to understand
+        description = action.get('metadata', {}).get('description')
+        if name and description:
+            parameters = {}
+            required_parameters = []
+            for p in action.get('parameters'):
+                if p.get('name') and p.get('type') and p.get('description'):
+                    parameters[p.get('name')] = {}
+                    parameters.get(p.get('name'))['type'] = p.get('type')
+                    parameters.get(p.get('name'))['description'] = p.get('description')
+                    if p.get('required', False):
+                        required_parameters.append(p.get('name'))
+            return {
+                "type": "function",
+                "function": {
+                    "name": name,
+                    "description": description,
+                    "parameters": {
+                        "type": "object",
+                        "properties": parameters,
+                        "required": required_parameters,
+                        "additionalProperties": False
+                    },
+                    "strict": True
+                }
+            }
 

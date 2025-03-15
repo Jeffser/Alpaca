@@ -12,7 +12,7 @@ from pydantic import BaseModel
 from .constants import AlpacaFolders
 from .internal import source_dir, data_dir, cache_dir
 from .custom_widgets import dialog_widget
-from . import available_models_descriptions, generation_actions
+from . import available_models_descriptions
 
 logger = logging.getLogger(__name__)
 

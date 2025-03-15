@@ -51,7 +51,7 @@ gi.require_version('Spelling', '1')
 
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelling, GObject
 
-from . import generic_actions, sql_manager, instance_manager
+from . import generic_actions, sql_manager, instance_manager, generation_actions
 from .constants import AlpacaFolders, Platforms
 from .custom_widgets import message_widget, chat_widget, terminal_widget, dialog_widget, model_manager_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir, IN_FLATPAK
@@ -153,6 +153,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     last_selected_instance_row = None
 
     sql_instance = sql_manager.Instance(os.path.join(data_dir, "alpaca.db"))
+    action_manager = generation_actions.Manager(os.path.join(source_dir, 'integrated_actions.json'))
 
     @Gtk.Template.Callback()
     def closing_notice(self, dialog):
@@ -1112,6 +1113,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         generic_actions.window = self
         model_manager_widget.window = self
         instance_manager.window = self
+        generation_actions.window = self
 
         # Prepare model selector
         list(self.model_dropdown)[0].add_css_class('flat')
