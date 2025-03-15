@@ -32,12 +32,36 @@ language_fallback = {
 markup_pattern = re.compile(r'<(b|u|tt|a.*|span.*)>(.*?)<\/(b|u|tt|a|span)>')
 
 patterns = [
-    ('think', re.compile(r'<think>\n+(.*?)\n+<\/think>', re.DOTALL)),
+    ('think', re.compile(r'(?:<think>|<\|begin_of_thought\|>)\n+(.*?)\n+(?:<\/think>|<\|end_of_thought\|>)', re.DOTALL)),
     ('code', re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
     ('code', re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)),
     ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
     ('latex', re.compile(r'^\s+\\\[\n(.*?)\n\s+\\\]|^\s+\$(.*?)\$', re.MULTILINE))
 ]
+
+SOLUTION_ENCLOSING_TAGS = [
+    ("<|begin_of_solution|>", "<|end_of_solution|>"), # for OpenThinker
+]
+
+def remove_trailing_solution_markers(text: str):
+    """
+    Removes any trailing markers that reasoning models may leave in their final
+    solutions. OpenThinker, for example, uses tags such as
+    <|begin_of_solution|> and <|end_of_solution|> that can be removed.
+
+    See https://github.com/Jeffser/Alpaca/issues/604.
+    """
+
+    text = text.strip()
+
+    for enclosing_tags in SOLUTION_ENCLOSING_TAGS:
+        if text.endswith(enclosing_tags[1]):
+            text = text[:-len(enclosing_tags[1])].strip()
+            text = text.replace(enclosing_tags[0], "", 1)
+
+            break
+
+    return text
 
 class edit_text_block(Gtk.Box):
     __gtype_name__ = 'AlpacaEditTextBlock'
@@ -793,10 +817,13 @@ class message(Gtk.Box):
             GLib.idle_add(write, data.get('content', ''))
 
     def set_text(self, text:str=None):
+        text = remove_trailing_solution_markers(text)
         self.text = text
+
         for child in self.content_children:
             self.container.remove(child)
         self.content_children = []
+        
         if text:
             parts = []
             pos = 0
@@ -886,6 +913,3 @@ class message(Gtk.Box):
             self.container.append(self.spinner)
             self.container.append(text_b)
         self.container.queue_draw()
-
-
-
