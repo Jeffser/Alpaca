@@ -69,14 +69,13 @@ class base_instance:
         tools = generation_actions.get_enabled_tools()
         tools_used = []
 
-        generation_actions.log_to_message("Selecting action to use...", bot_message, True)
-
         try:
             completion = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
                 tools=tools
             )
+            generation_actions.log_to_message("Selecting action to use...", bot_message, True)
             for call in completion.choices[0].message.tool_calls:
                 generation_actions.log_to_message("Using `{}`".format(call.function.name), bot_message, True)
                 response = generation_actions.run_tool(call.function.name, json.loads(call.function.arguments), messages, bot_message)
@@ -91,6 +90,7 @@ class base_instance:
                     "response": str(response)
                 })
         except Exception as e:
+            window.show_toast(_("'{}' does not support actions.").format(window.convert_model_name(model, 0)), window.main_overlay)
             logger.error(e)
 
         generation_actions.log_to_message("Generating message...", bot_message, True)
