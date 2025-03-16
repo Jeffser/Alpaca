@@ -145,6 +145,11 @@ class Instance:
                     "model_directory": "TEXT",
                     "pinned": "INTEGER NOT NULL",
                 },
+                "actions_parameters": {
+                    "name": "TEXT NOT NULL PRIMARY KEY",
+                    "variables": "TEXT NOT NULL",
+                    "activated": "INTEGER NOT NULL"
+                }
             }
 
             for table_name, columns in tables.items():
@@ -656,3 +661,23 @@ class Instance:
             c.cursor.execute(
                 "DELETE FROM instances WHERE id=?", (instance_id,)
             )
+
+    #############
+    ## Actions ##
+    #############
+
+    def get_actions_parameters(self):
+        with SQLiteConnection(self.sql_path) as c:
+            result = c.cursor.execute(
+                "SELECT name, variables, activated FROM actions_parameters"
+            ).fetchall()
+
+        actions = {}
+
+        for row in result:
+            actions[row[0]] = {
+                'variables': json.loads(row[1]),
+                'activated': row[2] != 0
+            }
+
+        return actions

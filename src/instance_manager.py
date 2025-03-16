@@ -12,7 +12,7 @@ from pydantic import BaseModel
 from .constants import AlpacaFolders
 from .internal import source_dir, data_dir, cache_dir
 from .custom_widgets import dialog_widget
-from . import available_models_descriptions
+from . import available_models_descriptions, generation_actions
 
 logger = logging.getLogger(__name__)
 
@@ -50,10 +50,6 @@ class base_instance:
             chat.container.remove(chat.regenerate_button)
 
         messages = chat.convert_to_ollama()[:list(chat.messages.values()).index(bot_message)]
-        if self.instance_type in ('gemini', 'venice'):
-            for m in messages:
-                if m.get('role') == 'system':
-                    m['role'] = 'user'
         return chat, messages
 
     def generate_message(self, bot_message, model:str):
@@ -62,18 +58,67 @@ class base_instance:
         if not chat.quick_chat and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
 
+        self.generate_response(self, bot_message, chat, messages, model, None)
+
+    def use_actions(self, bot_message, model:str):
+        chat, messages = self.prepare_chat(bot_message)
+
+        if not chat.quick_chat and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
+            threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
+
+        tools = generation_actions.get_enabled_tools()
+        tools_used = []
+
+        generation_actions.log_to_message("Selecting action to use...", bot_message, True)
+
+        try:
+            completion = self.client.chat.completions.create(
+                model=model,
+                messages=messages,
+                tools=tools
+            )
+            for call in completion.choices[0].message.tool_calls:
+                generation_actions.log_to_message("Using `{}`".format(call.function.name), bot_message, True)
+                response = generation_actions.run_tool(call.function.name, json.loads(call.function.arguments), messages, bot_message)
+                messages.append({
+                    "role": "tool",
+                    "tool_call_id": call.id,
+                    "content": str(response)
+                })
+                tools_used.append({
+                    "name": call.function.name,
+                    "arguments": json.loads(call.function.arguments),
+                    "response": str(response)
+                })
+        except Exception as e:
+            logger.error(e)
+
+        generation_actions.log_to_message("Generating message...", bot_message, True)
+        self.generate_response(bot_message, chat, messages, model, tools if len(tools_used) > 0 else None)
+
+    def generate_response(self, bot_message, chat, messages:list, model:str, tools:list):
+        if self.instance_type in ('gemini', 'venice'):
+            for i in range(len(messages)):
+                if messages[i].get('role') == 'system':
+                    messages[i]['role'] = 'user'
+
         params = {
             "model": model,
             "messages": messages,
             "temperature": self.temperature,
             "max_tokens": self.max_tokens,
-            "stream": True
+            "stream": True,
+            "tool_choice": "none"
         }
 
         if self.seed != 0 and self.instance_type not in ('gemini', 'venice'):
             params["seed"] = self.seed
 
+        if tools:
+            params["tools"] = tools
+
         try:
+            bot_message.update_message({"clear": True})
             response = self.client.chat.completions.create(**params)
             for chunk in response:
                 if chunk.choices and chunk.choices[0].delta:
@@ -87,9 +132,6 @@ class base_instance:
             logger.error(e)
             window.instance_listbox.unselect_all()
         bot_message.update_message({"done": True})
-
-    def use_actions(self, bot_message, model:str):
-        chat, messages = self.prepare_chat(bot_message)
 
     def generate_chat_title(self, chat, prompt:str):
         class chat_title(BaseModel): #Pydantic

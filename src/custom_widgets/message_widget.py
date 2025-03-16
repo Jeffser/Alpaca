@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk, GdkPixbuf
-import logging, os, datetime, re, shutil, threading, sys, base64, tempfile, time
+import logging, os, datetime, re, shutil, threading, sys, base64, tempfile, time, random
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -762,6 +762,9 @@ class message(Gtk.Box):
     def update_message(self, data:dict):
         def write(content:str):
             self.content_children[-1].buffer.insert(self.content_children[-1].buffer.get_end_iter(), content, len(content.encode('utf-8')))
+        def clear():
+            bf=self.content_children[-1].buffer
+            bf.delete(bf.get_start_iter(), bf.get_end_iter())
         chat = self.get_chat()
         if data.get('done', False):
             self.footer.options_button.set_sensitive(True)
@@ -781,7 +784,7 @@ class message(Gtk.Box):
             else:
                 window.sql_instance.insert_or_update_message(self)
             sys.exit()
-        else:
+        elif data.get('content', False):
             vadjustment = chat.scrolledwindow.get_vadjustment()
             if self.spinner:
                 self.container.remove(self.spinner)
@@ -791,6 +794,8 @@ class message(Gtk.Box):
             elif vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
             GLib.idle_add(write, data.get('content', ''))
+        elif data.get('clear', False):
+            GLib.idle_add(clear)
 
     def set_text(self, text:str=None):
         self.text = text
