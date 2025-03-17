@@ -24,7 +24,7 @@ class action(Adw.ActionRow):
 
     variables = {}
 
-    def __init__(self, variables:dict, enabled:bool=True):
+    def __init__(self, variables:dict, enabled:bool):
         for name, data in self.variables.items():
             self.variables[name]['value'] = variables.get(name, data.get('value'))
 
@@ -313,7 +313,7 @@ available_actions = [get_current_datetime, get_recipes_by_category, get_recipe_b
 def update_available_tools():
     actions_parameters = window.sql_instance.get_actions_parameters()
     for ac in available_actions:
-        action_element = ac(actions_parameters.get(ac.name, {}).get('variables', {}))
+        action_element = ac(actions_parameters.get(ac.name, {}).get('variables', {}), actions_parameters.get(ac.name, {}).get('activated', False))
         window.action_listbox.prepend(action_element)
 
 def get_enabled_tools() -> list:
