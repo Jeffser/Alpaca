@@ -666,7 +666,7 @@ class Instance:
     ## Actions ##
     #############
 
-    def get_actions_parameters(self):
+    def get_actions_parameters(self) -> dict:
         with SQLiteConnection(self.sql_path) as c:
             result = c.cursor.execute(
                 "SELECT name, variables, activated FROM actions_parameters"
@@ -681,3 +681,18 @@ class Instance:
             }
 
         return actions
+
+    def insert_or_update_actions_parameters(self, action_name:str, variables:dict, activated:bool):
+        with SQLiteConnection(self.sql_path) as c:
+            if c.cursor.execute(
+                "SELECT * FROM actions_parameters WHERE name=?", (action_name,)
+            ).fetchone():
+                c.cursor.execute(
+                    "UPDATE actions_parameters SET variables=?, activated=? WHERE name=?",
+                    (json.dumps(variables), 1 if activated else 0, action_name)
+                )
+            else:
+                c.cursor.execute(
+                    "INSERT INTO actions_parameters (name, variables, activated) VALUES (?, ?, ?)",
+                    (action_name, json.dumps(variables), 1 if activated else 0)
+                )

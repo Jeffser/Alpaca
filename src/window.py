@@ -151,6 +151,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_creator_stack_page = Gtk.Template.Child()
     install_ollama_button = Gtk.Template.Child()
     action_listbox = Gtk.Template.Child()
+    action_page_bin = Gtk.Template.Child()
     last_selected_instance_row = None
 
     sql_instance = sql_manager.Instance(os.path.join(data_dir, "alpaca.db"))

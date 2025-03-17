@@ -507,7 +507,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                     <child>
                       <object class="AdwPreferencesGroup">
                         <property name="title" translatable="yes">Available Actions</property>
-                        <property name="description" translatable="yes">Functions that AI models might use when sending a message by selecting "Use Actions" in the send button context menu</property>
+                        <property name="description" translatable="yes">Functions that AI models might use when sending a message by selecting "Use Actions" in the send button context menu.</property>
                         <child>
                           <object class="GtkListBox" id="action_listbox">
                             <property name="selection-mode">0</property>
@@ -519,6 +519,22 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                       </object>
                     </child>
                   </object>
+                </property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwNavigationPage">
+            <property name="title" translatable="yes">Action</property>
+            <property name="tag">action</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar"/>
+                </child>
+                <property name="content">
+                  <object class="AdwBin" id="action_page_bin"/>
                 </property>
               </object>
             </property>
