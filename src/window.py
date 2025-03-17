@@ -51,7 +51,7 @@ gi.require_version('Spelling', '1')
 
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelling, GObject
 
-from . import generic_actions, sql_manager, instance_manager, generation_actions
+from . import generic_actions, sql_manager, instance_manager, action_manager
 from .constants import AlpacaFolders, Platforms
 from .custom_widgets import message_widget, chat_widget, terminal_widget, dialog_widget, model_manager_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir, IN_FLATPAK
@@ -456,6 +456,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def opening_app(self, user_data):
+        threading.Thread(target=action_manager.update_available_tools).start()
         if self.sql_instance.get_preference('skip_welcome_page', False):
             # Notice
             if not self.sql_instance.get_preference('last_notice_seen') == self.notice_dialog.get_name() and IN_FLATPAK and not shutil.which('ollama'):
@@ -1121,9 +1122,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         generic_actions.window = self
         model_manager_widget.window = self
         instance_manager.window = self
-        generation_actions.window = self
-
-        generation_actions.update_available_tools()
+        action_manager.window = self
 
         # Prepare model selector
         list(self.model_dropdown)[0].add_css_class('flat')
