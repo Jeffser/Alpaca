@@ -66,7 +66,7 @@ class base_instance:
         if not chat.quick_chat and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
 
-        tools = generation_actions.get_enabled_tools()
+        tools = action_manager.get_enabled_tools()
         tools_used = []
 
         try:
@@ -75,10 +75,10 @@ class base_instance:
                 messages=messages,
                 tools=tools
             )
-            generation_actions.log_to_message("Selecting action to use...", bot_message, True)
+            action_manager.log_to_message("Selecting action to use...", bot_message, True)
             for call in completion.choices[0].message.tool_calls:
-                generation_actions.log_to_message("Using `{}`".format(call.function.name), bot_message, True)
-                response = generation_actions.run_tool(call.function.name, json.loads(call.function.arguments), messages, bot_message)
+                action_manager.log_to_message("Using `{}`".format(call.function.name), bot_message, True)
+                response = action_manager.run_tool(call.function.name, json.loads(call.function.arguments), messages, bot_message)
                 messages.append({
                     "role": "tool",
                     "tool_call_id": call.id,
@@ -93,7 +93,7 @@ class base_instance:
             window.show_toast(_("'{}' does not support actions.").format(window.convert_model_name(model, 0)), window.main_overlay)
             logger.error(e)
 
-        generation_actions.log_to_message("Generating message...", bot_message, True)
+        action_manager.log_to_message("Generating message...", bot_message, True)
         self.generate_response(bot_message, chat, messages, model, tools if len(tools_used) > 0 else None)
 
     def generate_response(self, bot_message, chat, messages:list, model:str, tools:list):
