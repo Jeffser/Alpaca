@@ -1,6 +1,6 @@
 # generation_actions.py
 
-import logging, json, os
+import logging, json, os, tempfile, shutil
 logger = logging.getLogger(__name__)
 
 import datetime, time, random, threading, requests
@@ -195,10 +195,58 @@ class get_current_datetime(action):
         current_datetime = datetime.datetime.now().strftime(format_to_get)
         return current_datetime
 
+class get_recipe_by_name(action):
+    tool = {
+        "name": "get_recipe_by_name",
+        "description": "Gets the recipe of a meal in JSON format by its name",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "meal": {
+                    "type": "string",
+                    "description": "The name of a meal"
+                }
+            },
+            "required": [
+                "meal"
+            ]
+        },
+        "strict": True
+    }
+    name = _("Get Recipe by Name")
+    description = _("Gets a recipe by the meal's name")
+    variables = {}
+
+    def run(self, arguments, messages, bot_message) -> str:
+        meal = arguments.get('meal', '').replace('_', ' ').title()
+        if meal:
+            response = requests.get('https://www.themealdb.com/api/json/v1/1/search.php?s={}'.format(meal))
+            if response.status_code == 200:
+                meals = response.json().get('meals', [])
+                if len(meals) > 0:
+                    meal = meals[0]
+                    image_response = requests.get(meal.get('strMealThumb'), stream=True)
+                    if image_response.status_code == 200:
+                        with tempfile.NamedTemporaryFile(delete=True, suffix='.jpg') as tmp_file:
+                            image_response.raw.decode_content = True
+                            shutil.copyfileobj(image_response.raw, tmp_file)
+                            raw_b64 = window.get_content_of_file(tmp_file.name, 'image')
+                            attachment = bot_message.add_attachment(meal.get('strMeal', 'Meal'), 'image', raw_b64)
+                            window.sql_instance.add_attachment(bot_message, attachment)
+                    if meal.get("strYoutube"):
+                        attachment = bot_message.add_attachment(_("YouTube Video"), "link", meal.get("strYoutube"))
+                        window.sql_instance.add_attachment(bot_message, attachment)
+                    if meal.get("strSource"):
+                        attachment = bot_message.add_attachment(_("Source"), "link", meal.get("strSource"))
+                        window.sql_instance.add_attachment(bot_message, attachment)
+                    return json.dumps(meal, indent=2)
+                else:
+                    return "{'error': '404: Not Found'}"
+
 class get_recipes_by_category(action):
     tool = {
         "name": "get_recipes_by_category",
-        "description": "Gets a list of food recipes IDs filtered by category in JSON format",
+        "description": "Gets a list of food recipes names and IDs filtered by category in JSON format",
         "parameters": {
             "type": "object",
             "properties": {
@@ -208,11 +256,18 @@ class get_recipes_by_category(action):
                     "enum": [
                         "Random", "Beef", "Chicken", "Dessert", "Lamb", "Miscellaneous", "Pasta", "Pork", "Seafood", "Side", "Starter", "Vegan", "Vegetarian", "Breakfast", "Goat"
                     ]
+                },
+                "mode": {
+                    "type": "string",
+                    "description": "Whether to get a single meal with it's recipe or a list of recipe names",
+                    "enum": [
+                        "single recipe", "list of meals"
+                    ]
                 }
             },
             "required": [
-                "category"
-            ],
+                "category", "mode"
+            ]
         },
         "strict": True
     }
@@ -226,10 +281,34 @@ class get_recipes_by_category(action):
             category = random.choice(self.tool.get('parameters', {}).get('properties', {}).get('category', {}).get('enum', [])[1:])
         response = requests.get('https://www.themealdb.com/api/json/v1/1/filter.php?c={}'.format(category))
         if response.status_code == 200:
-            data = response.json()
+            data = []
+            for meal in response.json().get("meals", []):
+                data.append({
+                    "name": meal.get("strMeal"),
+                    "id": meal.get("idMeal")
+                })
+
+            if arguments.get("mode", "list of meals") == "single recipe":
+                response2 = requests.get('www.themealdb.com/api/json/v1/1/lookup.php?i={}'.format(random.choice(data).get('id')))
+                if response2.json().get("meals", [False])[0]:
+                    data = response2.json().get("meals")[0]
+                    image_response = requests.get(data.get('strMealThumb'), stream=True)
+                    if image_response.status_code == 200:
+                        with tempfile.NamedTemporaryFile(delete=True, suffix='.jpg') as tmp_file:
+                            image_response.raw.decode_content = True
+                            shutil.copyfileobj(image_response.raw, tmp_file)
+                            raw_b64 = window.get_content_of_file(tmp_file.name, 'image')
+                            attachment = bot_message.add_attachment(data.get('strMeal', 'Meal'), 'image', raw_b64)
+                            window.sql_instance.add_attachment(bot_message, attachment)
+                    if meal.get("strYoutube"):
+                        attachment = bot_message.add_attachment(_("YouTube Video"), "link", meal.get("strYoutube"))
+                        window.sql_instance.add_attachment(bot_message, attachment)
+                    if meal.get("strSource"):
+                        attachment = bot_message.add_attachment(_("Source"), "link", meal.get("strSource"))
+                        window.sql_instance.add_attachment(bot_message, attachment)
             return json.dumps(data, indent=2)
 
-available_actions = [get_current_datetime, get_recipes_by_category]
+available_actions = [get_current_datetime, get_recipes_by_category, get_recipe_by_name]
 
 def update_available_tools():
     actions_parameters = window.sql_instance.get_actions_parameters()

@@ -321,18 +321,23 @@ class attachment(Gtk.Button):
                 "pdf": "document-text-symbolic",
                 "youtube": "play-symbolic",
                 "website": "globe-symbolic",
-                "thought": "brain-augemnted-symbolic"
-            }[self.file_type]
+                "thought": "brain-augemnted-symbolic",
+                "action": "processor-symbolic",
+                "link": "globe-symbolic"
+            }.get(self.file_type, "document-text-symbolic")
         )
         super().__init__(
             vexpand=False,
             valign=3,
-            name=file_name,
+            name=self.file_content if self.file_type == "link" else file_name,
             css_classes=["flat"],
-            tooltip_text=file_name,
+            tooltip_text=self.file_content if self.file_type == "link" else file_name,
             child=button_content
         )
-        self.connect("clicked", lambda button, file_content=self.file_content, file_type=self.file_type: window.preview_file(self.get_name(), file_content, file_type, False))
+        if self.file_type == "link":
+            self.connect("clicked", window.link_button_handler)
+        else:
+            self.connect("clicked", lambda button, file_content=self.file_content, file_type=self.file_type: window.preview_file(self.get_name(), file_content, file_type, False))
 
 class attachment_container(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentContainer'
@@ -409,7 +414,7 @@ class image(Gtk.Button):
 class image_container(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaImageContainer'
 
-    def __init__(self):
+    def __init__(self, bot):
         self.files = []
 
         self.container = Gtk.Box(
@@ -420,7 +425,7 @@ class image_container(Gtk.ScrolledWindow):
         super().__init__(
             height_request = 240,
             child=self.container,
-            halign=2,
+            halign=1 if bot else 2,
             propagate_natural_width=True
         )
 
@@ -757,15 +762,15 @@ class message(Gtk.Box):
     def add_attachment(self, name:str, attachment_type:str, content:str):
         if attachment_type == 'image':
             if not self.image_c:
-                self.image_c = image_container()
-                self.container.append(self.image_c)
+                self.image_c = image_container(self.bot)
+                self.container.insert_child_after(self.image_c, self.footer)
             new_image = image(name, content)
             self.image_c.add_image(new_image)
             return new_image
         else:
             if not self.attachment_c:
                 self.attachment_c = attachment_container()
-                self.container.append(self.attachment_c)
+                self.container.insert_child_after(self.attachment_c, self.footer)
             new_attachment = attachment(name, attachment_type, content)
             self.attachment_c.add_file(new_attachment)
             return new_attachment
@@ -807,7 +812,7 @@ class message(Gtk.Box):
         elif data.get('content', False):
             vadjustment = chat.scrolledwindow.get_vadjustment()
             if self.spinner:
-                self.container.remove(self.spinner)
+                GLib.idle_add(self.container.remove, self.spinner)
                 self.spinner = None
                 self.content_children[-1].set_visible(True)
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
