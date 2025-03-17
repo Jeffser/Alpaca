@@ -9,17 +9,6 @@ from gi.repository import Adw, Gtk
 
 window = None
 
-"""
-VARIABLE EXAMPLE
-variables = {
-    NAME: {
-        "value": VALUE,
-        "type": TYPE (str, bool, int, float)
-    }
-}
-"""
-
-
 class action(Adw.ActionRow):
 
     variables = {}
