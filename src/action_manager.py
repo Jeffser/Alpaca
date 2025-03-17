@@ -3,7 +3,7 @@
 import logging, json, os
 logger = logging.getLogger(__name__)
 
-import datetime, time, random, threading
+import datetime, time, random, threading, requests
 
 from gi.repository import Adw, Gtk
 
@@ -84,18 +84,19 @@ class action(Adw.ActionRow):
             )
         )
         action_page.add(ai_description)
-        arguments = Adw.PreferencesGroup(
-            title=_("Arguments"),
-            description=_("Variables that are filled by the AI.")
-        )
-        for name, data in self.tool.get('parameters', {}).get('properties', {}).items():
-            arguments.add(
-                Adw.ActionRow(
-                    title=name.replace('_', ' ').title(),
-                    subtitle=data.get('description')
-                )
+        if len(list(self.tool.get('parameters'))) > 0:
+            arguments = Adw.PreferencesGroup(
+                title=_("Arguments"),
+                description=_("Variables that are filled by the AI.")
             )
-        action_page.add(arguments)
+            for name, data in self.tool.get('parameters', {}).get('properties', {}).items():
+                arguments.add(
+                    Adw.ActionRow(
+                        title=name.replace('_', ' ').title(),
+                        subtitle=data.get('description')
+                    )
+                )
+            action_page.add(arguments)
 
         if len(list(self.variables)) > 0:
             variables = Adw.PreferencesGroup(
@@ -182,7 +183,7 @@ class get_current_datetime(action):
     description = _("Gets the current date and/or time.")
     variables = {}
 
-    def run(self, arguments, messages, bot_message) -> dict:
+    def run(self, arguments, messages, bot_message) -> str:
         formats = {
             "date": "%A, %B %d %Y",
             "time": "%H:%M %p",
@@ -194,7 +195,41 @@ class get_current_datetime(action):
         current_datetime = datetime.datetime.now().strftime(format_to_get)
         return current_datetime
 
-available_actions = [get_current_datetime]
+class get_recipes_by_category(action):
+    tool = {
+        "name": "get_recipes_by_category",
+        "description": "Gets a list of food recipes IDs filtered by category in JSON format",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string",
+                    "description": "The category of food to filter recipes by",
+                    "enum": [
+                        "Random", "Beef", "Chicken", "Dessert", "Lamb", "Miscellaneous", "Pasta", "Pork", "Seafood", "Side", "Starter", "Vegan", "Vegetarian", "Breakfast", "Goat"
+                    ]
+                }
+            },
+            "required": [
+                "category"
+            ],
+        },
+        "strict": True
+    }
+    name = _("Get Recipes by Category")
+    description = _("Gets a list of food recipes by a specified category")
+    variables = {}
+
+    def run(self, arguments, messages, bot_message) -> str:
+        category = arguments.get('category', 'Random')
+        if category == 'Random':
+            category = random.choice(self.tool.get('parameters', {}).get('properties', {}).get('category', {}).get('enum', [])[1:])
+        response = requests.get('https://www.themealdb.com/api/json/v1/1/filter.php?c={}'.format(category))
+        if response.status_code == 200:
+            data = response.json()
+            return json.dumps(data, indent=2)
+
+available_actions = [get_current_datetime, get_recipes_by_category]
 
 def update_available_tools():
     actions_parameters = window.sql_instance.get_actions_parameters()
@@ -209,10 +244,14 @@ def get_enabled_tools() -> list:
             tools.append(ac.get_tool())
     return tools
 
-def run_tool(action_name:str, arguments:dict, messages:list, bot_message):
+def get_action(action_name:str):
     actions = [a for a in list(window.action_listbox) if a.tool.get('name') == action_name]
     if actions:
-        action = actions[0]
+        return actions[0]
+
+def run_tool(action_name:str, arguments:dict, messages:list, bot_message):
+    action = get_action(action_name)
+    if action:
         response = action.run(arguments, messages, bot_message)
         return response
 
