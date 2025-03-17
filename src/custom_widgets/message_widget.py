@@ -44,16 +44,9 @@ SOLUTION_ENCLOSING_TAGS = [
 ]
 
 def remove_trailing_solution_markers(text: str):
-    """
-    Removes any trailing markers that reasoning models may leave in their final
-    solutions. OpenThinker, for example, uses tags such as
-    `<|begin_of_solution|>` and `<|end_of_solution|>` that can be removed.
-
-    See https://github.com/Jeffser/Alpaca/issues/604.
-    """
-
+    if not text:
+        return
     text = text.strip()
-
     for enclosing_tags in SOLUTION_ENCLOSING_TAGS:
         if text.casefold().endswith(enclosing_tags[1].casefold()):
             text = text[:-len(enclosing_tags[1])].strip()
@@ -63,9 +56,7 @@ def remove_trailing_solution_markers(text: str):
                 text,
                 flags=re.IGNORECASE
             )
-
             break
-
     return text
 
 class edit_text_block(Gtk.Box):
