@@ -796,6 +796,10 @@ class message(Gtk.Box):
             GLib.idle_add(write, data.get('content', ''))
         elif data.get('clear', False):
             GLib.idle_add(clear)
+        elif data.get('add_css', False):
+            GLib.idle_add(self.content_children[-1].add_css_class, data.get('add_css'))
+        elif data.get('remove_css', False):
+            GLib.idle_add(self.content_children[-1].remove_css_class, data.get('remove_css'))
 
     def set_text(self, text:str=None):
         self.text = text
