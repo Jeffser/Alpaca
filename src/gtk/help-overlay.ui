@@ -35,6 +35,12 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Action Manager</property>
+                <property name="action-name">app.action_manager</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes" context="shortcut window">Toggle Sidebar</property>
                 <property name="action-name">app.toggle_sidebar</property>
               </object>

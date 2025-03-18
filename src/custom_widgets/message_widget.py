@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk, GdkPixbuf
-import logging, os, datetime, re, shutil, threading, sys, base64, tempfile, time
+import logging, os, datetime, re, shutil, threading, sys, base64, tempfile, time, random
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -44,16 +44,9 @@ SOLUTION_ENCLOSING_TAGS = [
 ]
 
 def remove_trailing_solution_markers(text: str):
-    """
-    Removes any trailing markers that reasoning models may leave in their final
-    solutions. OpenThinker, for example, uses tags such as
-    `<|begin_of_solution|>` and `<|end_of_solution|>` that can be removed.
-
-    See https://github.com/Jeffser/Alpaca/issues/604.
-    """
-
+    if not text:
+        return
     text = text.strip()
-
     for enclosing_tags in SOLUTION_ENCLOSING_TAGS:
         if text.casefold().endswith(enclosing_tags[1].casefold()):
             text = text[:-len(enclosing_tags[1])].strip()
@@ -63,9 +56,7 @@ def remove_trailing_solution_markers(text: str):
                 text,
                 flags=re.IGNORECASE
             )
-
             break
-
     return text
 
 class edit_text_block(Gtk.Box):
@@ -330,18 +321,23 @@ class attachment(Gtk.Button):
                 "pdf": "document-text-symbolic",
                 "youtube": "play-symbolic",
                 "website": "globe-symbolic",
-                "thought": "brain-augemnted-symbolic"
-            }[self.file_type]
+                "thought": "brain-augemnted-symbolic",
+                "action": "processor-symbolic",
+                "link": "globe-symbolic"
+            }.get(self.file_type, "document-text-symbolic")
         )
         super().__init__(
             vexpand=False,
             valign=3,
-            name=file_name,
+            name=self.file_content if self.file_type == "link" else file_name,
             css_classes=["flat"],
-            tooltip_text=file_name,
+            tooltip_text=self.file_content if self.file_type == "link" else file_name,
             child=button_content
         )
-        self.connect("clicked", lambda button, file_content=self.file_content, file_type=self.file_type: window.preview_file(self.get_name(), file_content, file_type, False))
+        if self.file_type == "link":
+            self.connect("clicked", window.link_button_handler)
+        else:
+            self.connect("clicked", lambda button, file_content=self.file_content, file_type=self.file_type: window.preview_file(self.get_name(), file_content, file_type, False))
 
 class attachment_container(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentContainer'
@@ -418,7 +414,7 @@ class image(Gtk.Button):
 class image_container(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaImageContainer'
 
-    def __init__(self):
+    def __init__(self, bot):
         self.files = []
 
         self.container = Gtk.Box(
@@ -429,7 +425,7 @@ class image_container(Gtk.ScrolledWindow):
         super().__init__(
             height_request = 240,
             child=self.container,
-            halign=2,
+            halign=1 if bot else 2,
             propagate_natural_width=True
         )
 
@@ -766,15 +762,15 @@ class message(Gtk.Box):
     def add_attachment(self, name:str, attachment_type:str, content:str):
         if attachment_type == 'image':
             if not self.image_c:
-                self.image_c = image_container()
-                self.container.append(self.image_c)
+                self.image_c = image_container(self.bot)
+                self.container.insert_child_after(self.image_c, self.footer)
             new_image = image(name, content)
             self.image_c.add_image(new_image)
             return new_image
         else:
             if not self.attachment_c:
                 self.attachment_c = attachment_container()
-                self.container.append(self.attachment_c)
+                self.container.insert_child_after(self.attachment_c, self.footer)
             new_attachment = attachment(name, attachment_type, content)
             self.attachment_c.add_file(new_attachment)
             return new_attachment
@@ -791,6 +787,9 @@ class message(Gtk.Box):
     def update_message(self, data:dict):
         def write(content:str):
             self.content_children[-1].buffer.insert(self.content_children[-1].buffer.get_end_iter(), content, len(content.encode('utf-8')))
+        def clear():
+            bf=self.content_children[-1].buffer
+            bf.delete(bf.get_start_iter(), bf.get_end_iter())
         chat = self.get_chat()
         if data.get('done', False):
             self.footer.options_button.set_sensitive(True)
@@ -810,16 +809,22 @@ class message(Gtk.Box):
             else:
                 window.sql_instance.insert_or_update_message(self)
             sys.exit()
-        else:
+        elif data.get('content', False):
             vadjustment = chat.scrolledwindow.get_vadjustment()
             if self.spinner:
-                self.container.remove(self.spinner)
+                GLib.idle_add(self.container.remove, self.spinner)
                 self.spinner = None
                 self.content_children[-1].set_visible(True)
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
             elif vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
             GLib.idle_add(write, data.get('content', ''))
+        elif data.get('clear', False):
+            GLib.idle_add(clear)
+        elif data.get('add_css', False):
+            GLib.idle_add(self.content_children[-1].add_css_class, data.get('add_css'))
+        elif data.get('remove_css', False):
+            GLib.idle_add(self.content_children[-1].remove_css_class, data.get('remove_css'))
 
     def set_text(self, text:str=None):
         text = remove_trailing_solution_markers(text)

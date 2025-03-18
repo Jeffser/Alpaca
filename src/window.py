@@ -51,7 +51,7 @@ gi.require_version('Spelling', '1')
 
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelling, GObject
 
-from . import generic_actions, sql_manager, instance_manager
+from . import generic_actions, sql_manager, instance_manager, action_manager
 from .constants import AlpacaFolders, Platforms
 from .custom_widgets import message_widget, chat_widget, terminal_widget, dialog_widget, model_manager_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir, IN_FLATPAK
@@ -85,7 +85,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     available_model_flowbox = Gtk.Template.Child()
     split_view_overlay_model_manager = Gtk.Template.Child()
     split_view_overlay = Gtk.Template.Child()
-    regenerate_button : Gtk.Button = None
     selected_chat_row : Gtk.ListBoxRow = None
     preferences_dialog = Gtk.Template.Child()
     file_preview_dialog = Gtk.Template.Child()
@@ -151,6 +150,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     available_models_stack_page = Gtk.Template.Child()
     model_creator_stack_page = Gtk.Template.Child()
     install_ollama_button = Gtk.Template.Child()
+    action_listbox = Gtk.Template.Child()
+    action_page_bin = Gtk.Template.Child()
     last_selected_instance_row = None
 
     sql_instance = sql_manager.Instance(os.path.join(data_dir, "alpaca.db"))
@@ -357,7 +358,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.chat_list_box.get_current_chat().stop_message()
 
     @Gtk.Template.Callback()
-    def send_message(self, button=None, system:bool=False):
+    def send_message(self, button=None, mode:int=0): #mode 0=user 1=system 2=tool
         if button and not button.get_visible():
             return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False):
@@ -380,7 +381,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         message_id = self.generate_uuid()
 
         raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-        m_element = current_chat.add_message(message_id, datetime.now(), None, system)
+        m_element = current_chat.add_message(message_id, datetime.now(), None, mode==1)
 
         for name, content in self.attachments.items():
             attachment = m_element.add_attachment(name, content['type'], content['content'])
@@ -395,15 +396,22 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         self.message_text_view.get_buffer().set_text("", 0)
 
-        if system:
-            current_chat.set_visible_child_name('content')
-        else:
+        if mode==0:
             bot_id=self.generate_uuid()
             m_element_bot = current_chat.add_message(bot_id, datetime.now(), current_model, False)
             m_element_bot.set_text()
             m_element_bot.footer.options_button.set_sensitive(False)
             self.sql_instance.insert_or_update_message(m_element_bot)
             threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
+        elif mode==1:
+            current_chat.set_visible_child_name('content')
+        elif mode==2:
+            bot_id=self.generate_uuid()
+            m_element_bot = current_chat.add_message(bot_id, datetime.now(), current_model, False)
+            m_element_bot.set_text()
+            m_element_bot.footer.options_button.set_sensitive(False)
+            #self.sql_instance.insert_or_update_message(m_element_bot)
+            threading.Thread(target=self.get_current_instance().use_actions, args=(m_element_bot, current_model)).start()
 
     @Gtk.Template.Callback()
     def welcome_carousel_page_changed(self, carousel, index):
@@ -448,6 +456,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def opening_app(self, user_data):
+        threading.Thread(target=action_manager.update_available_tools).start()
         if self.sql_instance.get_preference('skip_welcome_page', False):
             # Notice
             if not self.sql_instance.get_preference('last_notice_seen') == self.notice_dialog.get_name() and IN_FLATPAK and not shutil.which('ollama'):
@@ -1113,6 +1122,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         generic_actions.window = self
         model_manager_widget.window = self
         instance_manager.window = self
+        action_manager.window = self
 
         # Prepare model selector
         list(self.model_dropdown)[0].add_css_class('flat')
@@ -1174,14 +1184,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'export_current_chat': [self.current_chat_actions],
             'toggle_sidebar': [lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9']],
             'toggle_search': [lambda *_: self.toggle_searchbar(), ['<primary>f']],
-            'send_message': [lambda *_: self.send_message()],
-            'send_system_message': [lambda *_: self.send_message(None, True)],
+            'send_message': [lambda *_: self.send_message(None, 0)],
+            'send_system_message': [lambda *_: self.send_message(None, 1)],
+            'use_actions': [lambda *_: self.send_message(None, 2)],
             'attach_file': [lambda *_: self.attachment_request()],
             'attach_screenshot': [lambda *i: self.request_screenshot() if model_manager_widget.get_selected_model().get_vision() else self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)],
             'attach_url': [lambda *i: dialog_widget.simple_entry(_('Attach Website? (Experimental)'), _('Please enter a website URL'), self.cb_text_received, {'placeholder': 'https://jeffser.com/alpaca/'})],
             'attach_youtube': [lambda *i: dialog_widget.simple_entry(_('Attach YouTube Captions?'), _('Please enter a YouTube video URL'), self.cb_text_received, {'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})],
             'model_manager' : [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>m']],
             'instance_manager' : [lambda *i: self.show_instance_manager() if self.main_navigation_view.get_visible_page().get_tag() != 'instance_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>i']],
+            'action_manager': [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'action_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'action_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']],
             'download_model_from_name' : [lambda *i: dialog_widget.simple_entry(_('Download Model?'), _('Please enter the model name following this template: name:tag'), lambda name: threading.Thread(target=model_manager_widget.pull_model_confirm, args=(name,)).start(), {'placeholder': 'deepseek-r1:7b'})],
             'reload_added_models': [lambda *_: model_manager_widget.update_local_model_list()],
             'delete_all_chats': [lambda *i: dialog_widget.simple(_('Delete All Chats?'), _('Are you sure you want to delete all chats?'), lambda: [GLib.idle_add(self.chat_list_box.delete_chat, c.chat_window.get_name()) for c in self.chat_list_box.tab_list], _('Delete'), 'destructive')]

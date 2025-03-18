@@ -12,7 +12,7 @@ from pydantic import BaseModel
 from .constants import AlpacaFolders
 from .internal import source_dir, data_dir, cache_dir
 from .custom_widgets import dialog_widget
-from . import available_models_descriptions
+from . import available_models_descriptions, action_manager
 
 logger = logging.getLogger(__name__)
 
@@ -39,51 +39,117 @@ class base_instance:
     title_model = None
     pinned = False
 
-    def generate_message(self, bot_message, model:str):
+    def prepare_chat(self, bot_message):
         chat = bot_message.get_chat()
         chat.busy = True
         if not chat.quick_chat:
             window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(True)
         chat.set_visible_child_name('content')
         window.switch_send_stop_button(False)
-        if window.regenerate_button:
-            GLib.idle_add(window.chat_list_box.get_current_chat().remove, window.regenerate_button)
         if chat.regenerate_button:
             chat.container.remove(chat.regenerate_button)
 
         messages = chat.convert_to_ollama()[:list(chat.messages.values()).index(bot_message)]
-        if self.instance_type in ('gemini', 'venice'):
-            for m in messages:
-                if m.get('role') == 'system':
-                    m['role'] = 'user'
+        return chat, messages
+
+    def generate_message(self, bot_message, model:str):
+        chat, messages = self.prepare_chat(bot_message)
 
         if not chat.quick_chat and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
+
+        self.generate_response(self, bot_message, chat, messages, model, None)
+
+    def use_actions(self, bot_message, model:str):
+        chat, messages = self.prepare_chat(bot_message)
+        bot_message.update_message({'add_css': 'dim-label'})
+
+        if not chat.quick_chat and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
+            threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
+
+        tools = action_manager.get_enabled_tools()
+        tools_used = []
+
+        try:
+            completion = self.client.chat.completions.create(
+                model=model,
+                messages=messages,
+                tools=tools
+            )
+            action_manager.log_to_message("Selecting action to use...", bot_message, True)
+            for call in completion.choices[0].message.tool_calls:
+                action_manager.log_to_message("Using `{}`".format(call.function.name), bot_message, True)
+                response = action_manager.run_tool(call.function.name, json.loads(call.function.arguments), messages, bot_message)
+                arguments = json.loads(call.function.arguments)
+                messages.append({
+                    "role": "tool",
+                    "tool_call_id": call.id,
+                    "content": str(response)
+                })
+                tools_used.append({
+                    "name": call.function.name,
+                    "arguments": arguments,
+                    "response": str(response)
+                })
+                action = action_manager.get_action(call.function.name)
+                if action:
+                    attachment = bot_message.add_attachment(
+                        action.name,
+                        'action',
+                        '# {}\n\n## Arguments:\n{}\n\n## Result:\n\n```\n{}\n```'.format(
+                            call.function.name,
+                            '\n'.join(['- {}: {}'.format(k,v) for k, v in arguments.items()]),
+                            str(response)
+                        )
+                    )
+                    window.sql_instance.add_attachment(bot_message, attachment)
+        except Exception as e:
+            window.show_toast(_("'{}' does not support actions.").format(window.convert_model_name(model, 0)), window.main_overlay)
+            logger.error(e)
+
+        action_manager.log_to_message("Generating message...", bot_message, True)
+        bot_message.update_message({'remove_css': 'dim-label'})
+        if not bot_message.spinner:
+            bot_message.spinner = Adw.Spinner()
+            bot_message.container.append(bot_message.spinner)
+        self.generate_response(bot_message, chat, messages, model, tools if len(tools_used) > 0 else None)
+
+    def generate_response(self, bot_message, chat, messages:list, model:str, tools:list):
+        if self.instance_type in ('gemini', 'venice'):
+            for i in range(len(messages)):
+                if messages[i].get('role') == 'system':
+                    messages[i]['role'] = 'user'
 
         params = {
             "model": model,
             "messages": messages,
             "temperature": self.temperature,
             "max_tokens": self.max_tokens,
-            "stream": True
+            "stream": True,
+            "tool_choice": "none"
         }
 
         if self.seed != 0 and self.instance_type not in ('gemini', 'venice'):
             params["seed"] = self.seed
 
-        try:
-            response = self.client.chat.completions.create(**params)
+        if tools:
+            params["tools"] = tools
 
+        try:
+            bot_message.update_message({"clear": True})
+            response = self.client.chat.completions.create(**params)
             for chunk in response:
-                if chunk.choices and chunk.choices[0].delta.content:
-                    bot_message.update_message({"content": chunk.choices[0].delta.content})
+                if chunk.choices and chunk.choices[0].delta:
+                    delta = chunk.choices[0].delta
+                    if delta.content:
+                        bot_message.update_message({"content": delta.content})
                 if not chat.busy:
                     break
-            bot_message.update_message({"done": True})
         except Exception as e:
             dialog_widget.simple_error(_('Instance Error'), _('Message generation failed'), e)
             logger.error(e)
             window.instance_listbox.unselect_all()
+        bot_message.update_message({"done": True})
 
     def generate_chat_title(self, chat, prompt:str):
         class chat_title(BaseModel): #Pydantic
@@ -728,7 +794,7 @@ class gemini(base_openai):
             response = requests.get('https://generativelanguage.googleapis.com/v1beta/models?key={}'.format(self.api_key))
             models = []
             for model in response.json().get('models', []):
-                if "generateContent" in model.get("supportedGenerationMethods", []) and 'discontinued' not in model.get('description'):
+                if "generateContent" in model.get("supportedGenerationMethods", []) and 'discontinued' not in model.get('description', []):
                     model['name'] = model.get('name').removeprefix('models/')
                     models.append(model)
             return models
@@ -736,6 +802,7 @@ class gemini(base_openai):
             dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve added models'), str(e))
             logger.error(e)
             window.instance_listbox.unselect_all()
+        return []
 
     def get_model_info(self, model_name:str) -> dict:
         try:
@@ -856,3 +923,4 @@ ready_instances = [ollama, chatgpt, gemini, together, venice, generic_openai]
 
 if shutil.which('ollama'):
     ready_instances.insert(0, ollama_managed)
+

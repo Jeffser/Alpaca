@@ -495,6 +495,53 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
         </child>
         <child>
           <object class="AdwNavigationPage">
+            <property name="title" translatable="yes">Action Manager</property>
+            <property name="tag">action_manager</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar"/>
+                </child>
+                <property name="content">
+                  <object class="AdwPreferencesPage">
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="yes">Available Actions</property>
+                        <property name="description" translatable="yes">Functions that AI models might use when sending a message by selecting "Use Actions" in the send button context menu.</property>
+                        <child>
+                          <object class="GtkListBox" id="action_listbox">
+                            <property name="selection-mode">0</property>
+                            <style>
+                              <class name="boxed-list"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwNavigationPage">
+            <property name="title" translatable="yes">Action</property>
+            <property name="tag">action</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar"/>
+                </child>
+                <property name="content">
+                  <object class="AdwBin" id="action_page_bin"/>
+                </property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwNavigationPage">
             <property name="title" translatable="yes">Model Manager</property>
             <property name="tag">model_manager</property>
             <property name="child">
@@ -1173,6 +1220,10 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
         <attribute name="label" translatable="yes">Manage Models</attribute>
         <attribute name="action">app.model_manager</attribute>
       </item>
+      <item>
+        <attribute name="label" translatable="yes">Manage Actions</attribute>
+        <attribute name="action">app.action_manager</attribute>
+      </item>
     </section>
     <section>
       <item>
@@ -1258,6 +1309,10 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
       <item>
         <attribute name="label" translatable="yes">Send as System</attribute>
         <attribute name="action">app.send_system_message</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Use Actions</attribute>
+        <attribute name="action">app.use_actions</attribute>
       </item>
     </section>
   </menu>
