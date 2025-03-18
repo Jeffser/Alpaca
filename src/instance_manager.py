@@ -103,19 +103,21 @@ class base_instance:
             "messages": messages,
             "max_tokens": 100
         }
-
+        new_chat_title = chat.get_name()
         try:
             completion = self.client.beta.chat.completions.parse(**params, response_format=chat_title)
             response = completion.choices[0].message
             if response.parsed:
                 emoji = response.parsed.emoji if len(response.parsed.emoji) == 1 else '💬'
-                window.chat_list_box.rename_chat(chat.get_name(), '{} {}'.format(emoji, response.parsed.title).strip())
+                new_chat_title = '{} {}'.format(emoji, response.parsed.title)
         except Exception as e:
             try:
                 response = self.client.chat.completions.create(**params)
-                window.chat_list_box.rename_chat(chat.get_name(), str(response.choices[0].message.content))
+                new_chat_title = str(response.choices[0].message.content)
             except Exception as e:
                 logger.error(e)
+        new_chat_title = re.sub(r'<think>.*?</think>', '', new_chat_title).strip()
+        window.chat_list_box.rename_chat(chat.get_name(), new_chat_title)
 
     def get_default_model(self):
         if not self.default_model:
