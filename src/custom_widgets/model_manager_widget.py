@@ -246,7 +246,6 @@ class local_model_page(Gtk.Box):
             selection_mode=0,
             homogeneous=True,
             row_spacing=10,
-            column_spacing=10,
             css_classes=['flowbox_no_padding']
         )
         self.append(information_container)
