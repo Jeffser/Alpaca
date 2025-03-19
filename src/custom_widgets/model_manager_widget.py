@@ -312,15 +312,14 @@ class local_model(Gtk.Box):
             halign=1
         )
         text_container.append(title_label)
-        if window.convert_model_name(name, 2)[1]:
-            subtitle_label = Gtk.Label(
-                label=window.convert_model_name(name, 2)[1],
-                css_classes=['dim-label'],
-                ellipsize=3,
-                hexpand=True,
-                halign=1
-            )
-            text_container.append(subtitle_label)
+        self.subtitle_label = Gtk.Label(
+            css_classes=['dim-label'],
+            ellipsize=3,
+            hexpand=True,
+            halign=1,
+            visible=False
+        )
+        text_container.append(self.subtitle_label)
         self.page = None
         self.row = local_model_row(self)
         GLib.idle_add(window.model_dropdown.get_model().append, self.row)
@@ -333,12 +332,25 @@ class local_model(Gtk.Box):
     def get_vision(self) -> bool:
         return self.data.get('projector_info', None) is not None
 
+    def update_subtitle(self):
+        tag = window.convert_model_name(self.get_name(), 2)[1]
+        parent_model = self.data.get('details', {}).get('parent_model')
+        family = self.data.get('details', {}).get('family')
+        if parent_model:
+            self.subtitle_label.set_label('{} • {}'.format(window.convert_model_name(parent_model, 0), tag))
+        elif family:
+            self.subtitle_label.set_label('{} • {}'.format(window.convert_model_name(family, 0), tag))
+        else:
+            self.subtitle_label.set_label(tag)
+        self.subtitle_label.set_visible(self.subtitle_label.get_label())
+
     def update_data(self):
         try:
             self.data = window.get_current_instance().get_model_info(self.get_name())
         except Exception as e:
             self.data = {'details': {}}
         self.update_profile_picture()
+        self.update_subtitle()
 
     def get_default_widget(self):
         return self.page.image_container
