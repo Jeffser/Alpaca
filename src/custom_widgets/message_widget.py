@@ -329,13 +329,13 @@ class attachment(Gtk.Button):
         super().__init__(
             vexpand=False,
             valign=3,
-            name=self.file_content if self.file_type == "link" else file_name,
+            name=file_name,
             css_classes=["flat"],
             tooltip_text=self.file_content if self.file_type == "link" else file_name,
             child=button_content
         )
         if self.file_type == "link":
-            self.connect("clicked", window.link_button_handler)
+            self.connect("clicked", lambda button, uri=self.file_content: Gio.AppInfo.launch_default_for_uri(uri))
         else:
             self.connect("clicked", lambda button, file_content=self.file_content, file_type=self.file_type: window.preview_file(self.get_name(), file_content, file_type, False))
 
