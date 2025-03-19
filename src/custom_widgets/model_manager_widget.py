@@ -355,7 +355,7 @@ class local_model(Gtk.Box):
         family = self.data.get('details', {}).get('family')
         if family:
             self.subtitle_label.set_label('{} • {}'.format(window.convert_model_name(family, 0), tag))
-        else:
+        elif tag:
             self.subtitle_label.set_label(tag)
         self.subtitle_label.set_visible(self.subtitle_label.get_label())
 
