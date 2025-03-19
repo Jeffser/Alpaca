@@ -90,6 +90,23 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="5.3.0" date="2025-03-19">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/5.3.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Updated runtime to Gnome 48</li>
+          <li>Added back 'category pills' to model manager</li>
+          <li>Better appearance for model manager sidebar</li>
+          <li>New models</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed bad title generation with chain-of-thought models</li>
+          <li>Hide page switcher in model manager if there's only one page (online instances)</li>
+        </ul>
+      </description>
+    </release>
     <release version="5.2.0" date="2025-03-12">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/5.2.0</url>
       <description>
