@@ -1167,8 +1167,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.chat_list_box = chat_widget.chat_list()
         self.chat_list_container.set_child(self.chat_list_box)
         enter_key_controller = Gtk.EventControllerKey.new()
-        enter_key_controller.connect("key-pressed", lambda controller, keyval, keycode, state: (self.send_message(None, bool(state & Gdk.ModifierType.CONTROL_MASK)) or True) if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK) else None)
+        def enter_key_handler(controller, keyval, keycode, state):
+            if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK): # Enter pressed without shift
+                if state & Gdk.ModifierType.CONTROL_MASK: # Ctrl, send system message
+                    self.send_message(None, 1)
+                elif state & Gdk.ModifierType.ALT_MASK and os.getenv('ALPACA_ACTION_TESTING', '0') == '1': # Alt, send tool message
+                    self.send_message(None, 2)
+                else: # Nothing, send normal message
+                    self.send_message(None, 0)
+        enter_key_controller.connect("key-pressed", enter_key_handler)
         self.message_text_view.add_controller(enter_key_controller)
+
+        if os.getenv('ALPACA_ACTION_TESTING', '0') == '1':
+            self.send_message_menu.append('Use Actions', 'app.use_actions')
 
         for name, data in {
             'send': {
@@ -1205,19 +1216,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'toggle_search': [lambda *_: self.toggle_searchbar(), ['<primary>f']],
             'send_message': [lambda *_: self.send_message(None, 0)],
             'send_system_message': [lambda *_: self.send_message(None, 1)],
-            'use_actions': [lambda *_: self.send_message(None, 2)],
             'attach_file': [lambda *_: self.attachment_request()],
             'attach_screenshot': [lambda *i: self.request_screenshot() if model_manager_widget.get_selected_model().get_vision() else self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)],
             'attach_url': [lambda *i: dialog_widget.simple_entry(_('Attach Website? (Experimental)'), _('Please enter a website URL'), self.cb_text_received, {'placeholder': 'https://jeffser.com/alpaca/'})],
             'attach_youtube': [lambda *i: dialog_widget.simple_entry(_('Attach YouTube Captions?'), _('Please enter a YouTube video URL'), self.cb_text_received, {'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})],
             'model_manager' : [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>m']],
             'instance_manager' : [lambda *i: self.show_instance_manager() if self.main_navigation_view.get_visible_page().get_tag() != 'instance_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>i']],
-            'action_manager': [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'action_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'action_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']],
             'download_model_from_name' : [lambda *i: dialog_widget.simple_entry(_('Download Model?'), _('Please enter the model name following this template: name:tag'), lambda name: threading.Thread(target=model_manager_widget.pull_model_confirm, args=(name,)).start(), {'placeholder': 'deepseek-r1:7b'})],
             'reload_added_models': [lambda *_: model_manager_widget.update_local_model_list()],
             'delete_all_chats': [lambda *i: dialog_widget.simple(_('Delete All Chats?'), _('Are you sure you want to delete all chats?'), lambda: [GLib.idle_add(self.chat_list_box.delete_chat, c.chat_window.get_name()) for c in self.chat_list_box.tab_list], _('Delete'), 'destructive')]
         }
-
+        if os.getenv('ALPACA_ACTION_TESTING', '0') == '1':
+            universal_actions['use_actions'] = [lambda *_: self.send_message(None, 2)]
+            universal_actions['action_manager'] = [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'action_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'action_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']]
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
