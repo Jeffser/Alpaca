@@ -585,7 +585,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                           </object>
                         </child>
                         <property name="title-widget">
-                          <object class="AdwViewSwitcher">
+                          <object class="AdwViewSwitcher" id="model_manager_top_view_switcher">
                             <property name="stack">model_manager_stack</property>
                             <property name="policy">wide</property>
                           </object>

@@ -152,6 +152,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     install_ollama_button = Gtk.Template.Child()
     action_listbox = Gtk.Template.Child()
     action_page_bin = Gtk.Template.Child()
+    model_manager_bottom_view_switcher = Gtk.Template.Child()
+    model_manager_top_view_switcher = Gtk.Template.Child()
     last_selected_instance_row = None
 
     sql_instance = sql_manager.Instance(os.path.join(data_dir, "alpaca.db"))
@@ -200,6 +202,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if row:
                 self.sql_instance.insert_or_update_preferences({'selected_instance': row.instance.instance_id})
             self.chat_list_box.update_profile_pictures()
+            visible_model_manger_switch = len([p for p in self.model_manager_stack.get_pages() if p.get_visible()]) > 1
+            self.model_manager_bottom_view_switcher.set_visible(visible_model_manger_switch)
+            self.model_manager_top_view_switcher.set_visible(visible_model_manger_switch)
         if listbox.get_sensitive():
             threading.Thread(target=change_instance).start()
 
