@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-18 23:56-0600\n"
+"POT-Creation-Date: 2025-03-19 00:06-0600\n"
 "PO-Revision-Date: 2025-02-05 18:26-0600\n"
 "Last-Translator: Harimanish Kathiravan harimanishhmp@gmail.com\n"
 "Language-Team: Tamil <tamil@systemreboot.net>\n"
@@ -34,7 +34,7 @@ msgid "A private AI client"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:11
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1044
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1061
 msgid "Features"
 msgstr "அம்சங்கள்"
 
@@ -43,12 +43,12 @@ msgid "Built in Ollama instance"
 msgstr "ஓல்லமா உள்ளீடாகும்"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:14
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1046
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1063
 msgid "Talk to multiple models in the same conversation"
 msgstr "ஒரே உரையாடலில் பல மாதிரிகளுடன் பேசுங்கள்"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:15
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1047
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1064
 msgid "Pull and delete models from the app"
 msgstr "பயன்பாட்டிலிருந்து மாதிரிகளை இழுத்து நீக்குங்கள்"
 
@@ -131,403 +131,428 @@ msgid "Model creator screen"
 msgstr "மாடல் உருவாக்கியாளர் திரை"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:96
-#: data/com.jeffser.Alpaca.metainfo.xml.in:126
-#: data/com.jeffser.Alpaca.metainfo.xml.in:136
-#: data/com.jeffser.Alpaca.metainfo.xml.in:147
-#: data/com.jeffser.Alpaca.metainfo.xml.in:174
-#: data/com.jeffser.Alpaca.metainfo.xml.in:194
-#: data/com.jeffser.Alpaca.metainfo.xml.in:220
-#: data/com.jeffser.Alpaca.metainfo.xml.in:235
-#: data/com.jeffser.Alpaca.metainfo.xml.in:260
-#: data/com.jeffser.Alpaca.metainfo.xml.in:288
-#: data/com.jeffser.Alpaca.metainfo.xml.in:298
-#: data/com.jeffser.Alpaca.metainfo.xml.in:309
-#: data/com.jeffser.Alpaca.metainfo.xml.in:323
-#: data/com.jeffser.Alpaca.metainfo.xml.in:335
-#: data/com.jeffser.Alpaca.metainfo.xml.in:351
-#: data/com.jeffser.Alpaca.metainfo.xml.in:366
-#: data/com.jeffser.Alpaca.metainfo.xml.in:401
-#: data/com.jeffser.Alpaca.metainfo.xml.in:426
-#: data/com.jeffser.Alpaca.metainfo.xml.in:457
-#: data/com.jeffser.Alpaca.metainfo.xml.in:483
-#: data/com.jeffser.Alpaca.metainfo.xml.in:505
-#: data/com.jeffser.Alpaca.metainfo.xml.in:536
-#: data/com.jeffser.Alpaca.metainfo.xml.in:558
-#: data/com.jeffser.Alpaca.metainfo.xml.in:579
-#: data/com.jeffser.Alpaca.metainfo.xml.in:594
-#: data/com.jeffser.Alpaca.metainfo.xml.in:619
+#: data/com.jeffser.Alpaca.metainfo.xml.in:113
+#: data/com.jeffser.Alpaca.metainfo.xml.in:143
+#: data/com.jeffser.Alpaca.metainfo.xml.in:153
+#: data/com.jeffser.Alpaca.metainfo.xml.in:164
+#: data/com.jeffser.Alpaca.metainfo.xml.in:191
+#: data/com.jeffser.Alpaca.metainfo.xml.in:211
+#: data/com.jeffser.Alpaca.metainfo.xml.in:237
+#: data/com.jeffser.Alpaca.metainfo.xml.in:252
+#: data/com.jeffser.Alpaca.metainfo.xml.in:277
+#: data/com.jeffser.Alpaca.metainfo.xml.in:305
+#: data/com.jeffser.Alpaca.metainfo.xml.in:315
+#: data/com.jeffser.Alpaca.metainfo.xml.in:326
+#: data/com.jeffser.Alpaca.metainfo.xml.in:340
+#: data/com.jeffser.Alpaca.metainfo.xml.in:352
+#: data/com.jeffser.Alpaca.metainfo.xml.in:368
+#: data/com.jeffser.Alpaca.metainfo.xml.in:383
+#: data/com.jeffser.Alpaca.metainfo.xml.in:418
+#: data/com.jeffser.Alpaca.metainfo.xml.in:443
+#: data/com.jeffser.Alpaca.metainfo.xml.in:474
+#: data/com.jeffser.Alpaca.metainfo.xml.in:500
+#: data/com.jeffser.Alpaca.metainfo.xml.in:522
+#: data/com.jeffser.Alpaca.metainfo.xml.in:553
+#: data/com.jeffser.Alpaca.metainfo.xml.in:575
+#: data/com.jeffser.Alpaca.metainfo.xml.in:596
+#: data/com.jeffser.Alpaca.metainfo.xml.in:611
+#: data/com.jeffser.Alpaca.metainfo.xml.in:636
 msgid "New"
 msgstr "புதிய"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
-msgid "Option to delete all chats"
+msgid "Updated runtime to Gnome 48"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
-msgid "Button to refresh sample prompts"
+msgid "Added back 'category pills' to model manager"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
+msgid "Better appearance for model manager sidebar"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:101
+#: data/com.jeffser.Alpaca.metainfo.xml.in:117
 msgid "New models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:102
-#: data/com.jeffser.Alpaca.metainfo.xml.in:114
-#: data/com.jeffser.Alpaca.metainfo.xml.in:164
-#: data/com.jeffser.Alpaca.metainfo.xml.in:210
-#: data/com.jeffser.Alpaca.metainfo.xml.in:241
-#: data/com.jeffser.Alpaca.metainfo.xml.in:250
-#: data/com.jeffser.Alpaca.metainfo.xml.in:313
-#: data/com.jeffser.Alpaca.metainfo.xml.in:341
-#: data/com.jeffser.Alpaca.metainfo.xml.in:355
+#: data/com.jeffser.Alpaca.metainfo.xml.in:103
+#: data/com.jeffser.Alpaca.metainfo.xml.in:119
+#: data/com.jeffser.Alpaca.metainfo.xml.in:131
+#: data/com.jeffser.Alpaca.metainfo.xml.in:181
+#: data/com.jeffser.Alpaca.metainfo.xml.in:227
+#: data/com.jeffser.Alpaca.metainfo.xml.in:258
+#: data/com.jeffser.Alpaca.metainfo.xml.in:267
+#: data/com.jeffser.Alpaca.metainfo.xml.in:330
+#: data/com.jeffser.Alpaca.metainfo.xml.in:358
 #: data/com.jeffser.Alpaca.metainfo.xml.in:372
-#: data/com.jeffser.Alpaca.metainfo.xml.in:383
-#: data/com.jeffser.Alpaca.metainfo.xml.in:392
+#: data/com.jeffser.Alpaca.metainfo.xml.in:389
+#: data/com.jeffser.Alpaca.metainfo.xml.in:400
 #: data/com.jeffser.Alpaca.metainfo.xml.in:409
-#: data/com.jeffser.Alpaca.metainfo.xml.in:419
+#: data/com.jeffser.Alpaca.metainfo.xml.in:426
 #: data/com.jeffser.Alpaca.metainfo.xml.in:436
-#: data/com.jeffser.Alpaca.metainfo.xml.in:446
-#: data/com.jeffser.Alpaca.metainfo.xml.in:493
-#: data/com.jeffser.Alpaca.metainfo.xml.in:518
-#: data/com.jeffser.Alpaca.metainfo.xml.in:543
-#: data/com.jeffser.Alpaca.metainfo.xml.in:565
-#: data/com.jeffser.Alpaca.metainfo.xml.in:583
-#: data/com.jeffser.Alpaca.metainfo.xml.in:601
-#: data/com.jeffser.Alpaca.metainfo.xml.in:613
-#: data/com.jeffser.Alpaca.metainfo.xml.in:629
+#: data/com.jeffser.Alpaca.metainfo.xml.in:453
+#: data/com.jeffser.Alpaca.metainfo.xml.in:463
+#: data/com.jeffser.Alpaca.metainfo.xml.in:510
+#: data/com.jeffser.Alpaca.metainfo.xml.in:535
+#: data/com.jeffser.Alpaca.metainfo.xml.in:560
+#: data/com.jeffser.Alpaca.metainfo.xml.in:582
+#: data/com.jeffser.Alpaca.metainfo.xml.in:600
+#: data/com.jeffser.Alpaca.metainfo.xml.in:618
+#: data/com.jeffser.Alpaca.metainfo.xml.in:630
+#: data/com.jeffser.Alpaca.metainfo.xml.in:646
 msgid "Fixes"
 msgstr "சரிசெய்தல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:104
-msgid "Fixed saving Ollama (Managed) instance might crash it"
-msgstr ""
-
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
-msgid "Fixed stop button"
+msgid "Fixed bad title generation with chain-of-thought models"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
-msgid "Fixed model search not working if there are only pulling models"
+msgid ""
+"Hide page switcher in model manager if there's only one page (online "
+"instances)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:107
-msgid "Fixed sample prompts sometimes not appearing"
+#: data/com.jeffser.Alpaca.metainfo.xml.in:115
+msgid "Option to delete all chats"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
+msgid "Button to refresh sample prompts"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:121
+msgid "Fixed saving Ollama (Managed) instance might crash it"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:122
+msgid "Fixed stop button"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:123
+msgid "Fixed model search not working if there are only pulling models"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:124
+msgid "Fixed sample prompts sometimes not appearing"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:133
 msgid "Don't clear the building output of C++ scripts"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:117
+#: data/com.jeffser.Alpaca.metainfo.xml.in:134
 msgid "Better handling of attachments"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:118
+#: data/com.jeffser.Alpaca.metainfo.xml.in:135
 msgid "Handle remote Ollama instance's API Key better"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:119
+#: data/com.jeffser.Alpaca.metainfo.xml.in:136
 msgid "Remove '\\n' characters in instance edit page"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:128
+#: data/com.jeffser.Alpaca.metainfo.xml.in:145
 msgid "Dynamic chat loading"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:129
+#: data/com.jeffser.Alpaca.metainfo.xml.in:146
 msgid "Updated Ollama instance"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:138
+#: data/com.jeffser.Alpaca.metainfo.xml.in:155
 msgid "Tweaked appearance of models in model manager"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:139
+#: data/com.jeffser.Alpaca.metainfo.xml.in:156
 msgid "Updated Ollama instance to 0.5.11"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:140
+#: data/com.jeffser.Alpaca.metainfo.xml.in:157
 msgid "Added new models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:149
+#: data/com.jeffser.Alpaca.metainfo.xml.in:166
 msgid "New instance manager"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:150
+#: data/com.jeffser.Alpaca.metainfo.xml.in:167
 msgid "New welcome screen"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:152
+#: data/com.jeffser.Alpaca.metainfo.xml.in:169
 msgid "New Instances"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:154
+#: data/com.jeffser.Alpaca.metainfo.xml.in:171
 msgid "OpenAI ChatGPT"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:155
+#: data/com.jeffser.Alpaca.metainfo.xml.in:172
 msgid "Google Gemini"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:156
+#: data/com.jeffser.Alpaca.metainfo.xml.in:173
 msgid "Together AI"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:157
+#: data/com.jeffser.Alpaca.metainfo.xml.in:174
 msgid "Venice"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:166
+#: data/com.jeffser.Alpaca.metainfo.xml.in:183
 msgid "Exporting chats with 'thoughts' attachment is fixed"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:167
+#: data/com.jeffser.Alpaca.metainfo.xml.in:184
 msgid "Fixed attachment filters"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:176
+#: data/com.jeffser.Alpaca.metainfo.xml.in:193
 msgid "New model manager"
 msgstr "புதிய மாடல் மேலாளர்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:177
+#: data/com.jeffser.Alpaca.metainfo.xml.in:194
 msgid "Changed GtkSpinner to AdwSpinner"
 msgstr "GtkSpinner-ஐ AdwSpinner ஆக மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:178
+#: data/com.jeffser.Alpaca.metainfo.xml.in:195
 msgid "Better handling of launch process"
 msgstr "தொடக்க செயல்முறையை சிறப்பாகக் கையாளுதல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:179
+#: data/com.jeffser.Alpaca.metainfo.xml.in:196
 msgid "New loading screen at launch"
 msgstr "தொடக்கத்தில் புதிய ஏற்றுதல் திரை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:180
+#: data/com.jeffser.Alpaca.metainfo.xml.in:197
 msgid "Better handling of file types"
 msgstr "கோப்பு வகைகளை சிறப்பாகக் கையாளுதல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:181
+#: data/com.jeffser.Alpaca.metainfo.xml.in:198
 msgid "Better regex expression for LaTeX equations"
 msgstr "LaTeX சமன்பாடுகளுக்கான சிறந்த ரெஜெக்ஸ் வெளிப்பாடு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:182
+#: data/com.jeffser.Alpaca.metainfo.xml.in:199
 msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
 msgstr ""
 "ஒரு மாடல் பதிவிறக்கம் செய்யப்படும்போது பயனர் அல்பாகாவை மூடினால் உறுதிப்படுத்தல் உரையாடல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:183
+#: data/com.jeffser.Alpaca.metainfo.xml.in:200
 msgid "Better handling of think tags in messages"
 msgstr "செய்திகளில் சிந்தனை குறிச்சொற்களை சிறப்பாகக் கையாளுதல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:184
+#: data/com.jeffser.Alpaca.metainfo.xml.in:201
 msgid "Default model is now in charge of generating titles"
 msgstr "தலைப்புகளை உருவாக்குவதற்கு இயல்புநிலை மாதிரி இப்போது பொறுப்பாகும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:185
+#: data/com.jeffser.Alpaca.metainfo.xml.in:202
 msgid "Message header is now shown whilst the message is being generated"
 msgstr "செய்தி உருவாக்கப்படும்போது செய்தி தலைப்பு இப்போது காட்டப்படும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:186
+#: data/com.jeffser.Alpaca.metainfo.xml.in:203
 msgid "Better handling of model profile pictures"
 msgstr "மாடல் சுயவிவரப் படங்களை சிறப்பாகக் கையாளுதல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:187
+#: data/com.jeffser.Alpaca.metainfo.xml.in:204
 msgid "New models in 'available models' list"
 msgstr "'கிடைக்கக்கூடிய மாதிரிகள்' பட்டியலில் புதிய மாதிரிகள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:196
+#: data/com.jeffser.Alpaca.metainfo.xml.in:213
 msgid "Added option for attaching screenshots"
 msgstr "திரைக்காட்சிகளை இணைப்பதற்கான விருப்பம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:197
+#: data/com.jeffser.Alpaca.metainfo.xml.in:214
 msgid "Basic LaTeX math equations are now rendered in messages"
 msgstr "அடிப்படை LaTeX கணித சமன்பாடுகள் இப்போது செய்திகளில் வழங்கப்படுகின்றன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:198
+#: data/com.jeffser.Alpaca.metainfo.xml.in:215
 msgid "HTML and C++ scripts can now be run inside Alpaca"
 msgstr "HTML மற்றும் C++ ஸ்கிரிப்ட்களை இப்போது அல்பாகாவிற்குள் இயக்க முடியும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:199
+#: data/com.jeffser.Alpaca.metainfo.xml.in:216
 msgid "Added option to open the environment directory from the terminal"
 msgstr "டெர்மினலில் இருந்து சூழல் கோப்பகத்தைத் திறப்பதற்கான விருப்பம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:200
+#: data/com.jeffser.Alpaca.metainfo.xml.in:217
 msgid "Added option to edit code blocks directly"
 msgstr "குறியீடு தொகுதிகளை நேரடியாகத் திருத்துவதற்கான விருப்பம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:201
+#: data/com.jeffser.Alpaca.metainfo.xml.in:218
 msgid "Complete keyboard shortcut list"
 msgstr "முழுமையான விசைப்பலகை குறுக்குவழி பட்டியல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:202
+#: data/com.jeffser.Alpaca.metainfo.xml.in:219
 msgid "Images are now attached in 640p resolution"
 msgstr "படங்கள் இப்போது 640p தெளிவுத்திறனில் இணைக்கப்பட்டுள்ளன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:203
+#: data/com.jeffser.Alpaca.metainfo.xml.in:220
 msgid "Website attachments now use extracted titles"
 msgstr "வலைத்தள இணைப்புகள் இப்போது பிரித்தெடுக்கப்பட்ட தலைப்புகளைப் பயன்படுத்துகின்றன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:204
+#: data/com.jeffser.Alpaca.metainfo.xml.in:221
 msgid "Better chat title generation"
 msgstr "சிறந்த அரட்டை தலைப்பு உருவாக்கம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:205
+#: data/com.jeffser.Alpaca.metainfo.xml.in:222
 msgid "Added option to attach any plain text files"
 msgstr "எந்தவொரு எளிய உரை கோப்புகளையும் இணைக்கும் விருப்பம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:206
+#: data/com.jeffser.Alpaca.metainfo.xml.in:223
 msgid "Added spellchecker to message entry"
 msgstr "செய்தி உள்ளீட்டிற்கு எழுத்துப்பிழை திருத்தி சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:207
+#: data/com.jeffser.Alpaca.metainfo.xml.in:224
 msgid "Alpaca's parameters are now stored using SQLite3"
 msgstr "அல்பாகாவின் அளவுருக்கள் இப்போது SQLite3 ஐப் பயன்படுத்தி சேமிக்கப்படுகின்றன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:208
+#: data/com.jeffser.Alpaca.metainfo.xml.in:225
 msgid "Small appearance changes in text entries"
 msgstr "உரை உள்ளீடுகளில் சிறிய தோற்ற மாற்றங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:212
+#: data/com.jeffser.Alpaca.metainfo.xml.in:229
 msgid "Alpaca's launch process is more reliable"
 msgstr "அல்பாகாவின் தொடக்க செயல்முறை மிகவும் நம்பகமானது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:213
+#: data/com.jeffser.Alpaca.metainfo.xml.in:230
 msgid "Closing the terminal now kills the script subprocess"
 msgstr "டெர்மினலை மூடுவது இப்போது ஸ்கிரிப்ட் துணைச்செயல்முறையை அழித்துவிடும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:222
+#: data/com.jeffser.Alpaca.metainfo.xml.in:239
 msgid "Transitioned chat backend from JSON to SQLite3"
 msgstr "அரட்டை பின்புலம் JSON இலிருந்து SQLite3 க்கு மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:223
+#: data/com.jeffser.Alpaca.metainfo.xml.in:240
 msgid "Changed appearance of messages"
 msgstr "செய்திகளின் தோற்றம் மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:224
+#: data/com.jeffser.Alpaca.metainfo.xml.in:241
 msgid "Added the option to add profile pictures to models"
 msgstr "மாதிரிகளுக்கு சுயவிவரப் படங்களைச் சேர்க்கும் விருப்பம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:226
-#: data/com.jeffser.Alpaca.metainfo.xml.in:698
-#: data/com.jeffser.Alpaca.metainfo.xml.in:747
+#: data/com.jeffser.Alpaca.metainfo.xml.in:243
+#: data/com.jeffser.Alpaca.metainfo.xml.in:715
+#: data/com.jeffser.Alpaca.metainfo.xml.in:764
 msgid "Fix"
 msgstr "சரிசெய்தல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:228
+#: data/com.jeffser.Alpaca.metainfo.xml.in:245
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
 msgstr "HIP_VISIBLE_DEVICES ஐ ROCR_VISIBLE_DEVICES ஆக மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:237
+#: data/com.jeffser.Alpaca.metainfo.xml.in:254
 msgid "Added categories to models"
 msgstr "மாதிரிகளுக்கு வகைகளைச் சேர்த்தது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:238
+#: data/com.jeffser.Alpaca.metainfo.xml.in:255
 msgid "Specified model's languages"
 msgstr "மாதிரியின் மொழிகள் குறிப்பிடப்பட்டுள்ளன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:239
+#: data/com.jeffser.Alpaca.metainfo.xml.in:256
 msgid "Added warning when downloading embedding models"
 msgstr "எம்பெடிங் மாதிரிகளைப் பதிவிறக்கும்போது எச்சரிக்கை சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:243
+#: data/com.jeffser.Alpaca.metainfo.xml.in:260
 msgid "Replaced low ram warning with big model warning"
 msgstr "குறைந்த ரேம் எச்சரிக்கை பெரிய மாதிரி எச்சரிக்கையுடன் மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:252
+#: data/com.jeffser.Alpaca.metainfo.xml.in:269
 msgid "Correctly escape markup before rendering message"
 msgstr "செய்தியை வழங்கும் முன் மார்க்கப்பை சரியாகத் தப்பிக்கவும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:253
+#: data/com.jeffser.Alpaca.metainfo.xml.in:270
 msgid "Fixed about dialog not working if log file was missing"
 msgstr "பதிவு கோப்பு காணவில்லை என்றால் தகவல் உரையாடல் செயல்படாததை சரிசெய்தது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:262
+#: data/com.jeffser.Alpaca.metainfo.xml.in:279
 msgid "System messages can now be sent directly from Alpaca"
 msgstr "அல்பாகாவிலிருந்து நேரடியாக கணினி செய்திகளை அனுப்பலாம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:263
+#: data/com.jeffser.Alpaca.metainfo.xml.in:280
 msgid "New redesign for messages and smaller minimum size"
 msgstr "செய்திகளுக்கான புதிய மறுவடிவமைப்பு மற்றும் சிறிய குறைந்தபட்ச அளவு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:264
+#: data/com.jeffser.Alpaca.metainfo.xml.in:281
 msgid "New models included in 'available models list'"
 msgstr "'கிடைக்கக்கூடிய மாதிரிகள் பட்டியலில்' புதிய மாதிரிகள் சேர்க்கப்பட்டுள்ளன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:265
+#: data/com.jeffser.Alpaca.metainfo.xml.in:282
 msgid "Added symbolic icon when attaching code files"
 msgstr "குறியீடு கோப்புகளை இணைக்கும்போது அடையாளச் சின்னம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:266
+#: data/com.jeffser.Alpaca.metainfo.xml.in:283
 msgid "When exporting a chat it now includes a markdown file"
 msgstr ""
 "ஒரு அரட்டையை ஏற்றுமதி செய்யும் போது அது இப்போது ஒரு மார்க்டவுன் கோப்பை உள்ளடக்கியது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:267
+#: data/com.jeffser.Alpaca.metainfo.xml.in:284
 msgid "Refresh button in model manager when using a remote instance"
 msgstr "தொலைநிலை நிகழ்வைப் பயன்படுத்தும் போது மாடல் மேலாளரில் புதுப்பிப்பு பொத்தான்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:268
+#: data/com.jeffser.Alpaca.metainfo.xml.in:285
 msgid "Assistant messages are now editable"
 msgstr "உதவியாளர் செய்திகளை இப்போது திருத்தலாம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:269
+#: data/com.jeffser.Alpaca.metainfo.xml.in:286
 msgid "Updated Ollama to v0.5.2"
 msgstr "ஓல்லமா v0.5.2 க்கு புதுப்பிக்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:270
+#: data/com.jeffser.Alpaca.metainfo.xml.in:287
 msgid "New option to change model directory"
 msgstr "மாடல் கோப்பகத்தை மாற்றுவதற்கான புதிய விருப்பம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:271
+#: data/com.jeffser.Alpaca.metainfo.xml.in:288
 msgid "File previewer now resizes dynamically to content"
 msgstr "கோப்பு முன்னோட்டம் இப்போது உள்ளடக்கத்திற்கு மாறும் வகையில் அளவை மாற்றுகிறது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:272
+#: data/com.jeffser.Alpaca.metainfo.xml.in:289
 msgid "Adapted Alpaca to work without integrated Ollama instance"
 msgstr "ஒருங்கிணைந்த ஓல்லமா நிகழ்வு இல்லாமல் வேலை செய்ய அல்பாகா மாற்றியமைக்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:273
+#: data/com.jeffser.Alpaca.metainfo.xml.in:290
 msgid "Compatibility added with ODT files"
 msgstr "ODT கோப்புகளுடன் இணக்கத்தன்மை சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:276
+#: data/com.jeffser.Alpaca.metainfo.xml.in:293
 msgid "Restored ROCm compatibility"
 msgstr "ROCm இணக்கத்தன்மை மீட்டமைக்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:277
+#: data/com.jeffser.Alpaca.metainfo.xml.in:294
 msgid ""
 "Added long press gesture to chat rows so actions can be done in touchscreens"
 msgstr ""
 "அரட்டை வரிசைகளுக்கு நீண்ட நேரம் அழுத்தும் சைகை சேர்க்கப்பட்டது, இதன் மூலம் தொடுதிரைகளில் "
 "செயல்களைச் செய்ய முடியும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:278
+#: data/com.jeffser.Alpaca.metainfo.xml.in:295
 msgid "Fixed edit button not saving changes"
 msgstr "மாற்றங்களைச் சேமிக்காத திருத்து பொத்தான் சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:279
+#: data/com.jeffser.Alpaca.metainfo.xml.in:296
 msgid "Changed max temperature value to 2"
 msgstr "அதிகபட்ச வெப்பநிலை மதிப்பு 2 ஆக மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:280
+#: data/com.jeffser.Alpaca.metainfo.xml.in:297
 msgid "Made seed 0 actually random"
 msgstr "விதை 0 உண்மையில் சீரற்றதாக மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:281
+#: data/com.jeffser.Alpaca.metainfo.xml.in:298
 msgid ""
 "Fixed Gnome search provider not working outside of Flatpak installations"
 msgstr "பிளாட்பாக் நிறுவலுக்கு வெளியே க்னோம் தேடல் வழங்குநர் செயல்படாதது சரிசெய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:290
+#: data/com.jeffser.Alpaca.metainfo.xml.in:307
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
 msgstr ""
 "--ask MESSAGE என்ற புதிய விருப்பம், ஒரு புதிய 'விரைவு கேள்வி' சாளரத்தைத் திறக்க"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:291
+#: data/com.jeffser.Alpaca.metainfo.xml.in:308
 msgid "Gnome Search integration now works whilst the app is opened"
 msgstr "பயன்பாடு திறந்திருக்கும்போது க்னோம் தேடல் ஒருங்கிணைப்பு இப்போது செயல்படும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:300
+#: data/com.jeffser.Alpaca.metainfo.xml.in:317
 msgid ""
 "Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
 "--list-chats, --version"
@@ -535,34 +560,34 @@ msgstr ""
 "தொடக்க அளவுருக்கள் சேர்க்கப்பட்டன --ask MESSAGE, --new-chat CHAT, --select-chat "
 "CHAT, --list-chats, --version"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:301
+#: data/com.jeffser.Alpaca.metainfo.xml.in:318
 msgid "Added integration as Gnome Search Provider"
 msgstr "க்னோம் தேடல் வழங்குநராக ஒருங்கிணைப்பு சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:302
+#: data/com.jeffser.Alpaca.metainfo.xml.in:319
 msgid "Updated Ollama to v0.4.2 with new models"
 msgstr "புதிய மாதிரிகளுடன் ஓல்லமா v0.4.2 க்கு புதுப்பிக்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:311
+#: data/com.jeffser.Alpaca.metainfo.xml.in:328
 msgid "User messages are now compacted into bubbles"
 msgstr "பயனர் செய்திகள் இப்போது குமிழிகளாக தொகுக்கப்பட்டுள்ளன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:315
+#: data/com.jeffser.Alpaca.metainfo.xml.in:332
 msgid ""
 "Fixed re connection dialog not working when 'use local instance' is selected"
 msgstr ""
 "'உள்ளூர் நிகழ்வைப் பயன்படுத்து' என்பதைத் தேர்ந்தெடுத்தால் மீண்டும் இணைப்பு உரையாடல் "
 "செயல்படாதது சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:316
+#: data/com.jeffser.Alpaca.metainfo.xml.in:333
 msgid "Fixed model manager not adapting to large system fonts"
 msgstr "பெரிய கணினி எழுத்துருக்களுக்கு மாடல் மேலாளர் பொருந்தாதது சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:325
+#: data/com.jeffser.Alpaca.metainfo.xml.in:342
 msgid "Details page for models"
 msgstr "மாதிரிகளுக்கான விவரங்கள் பக்கம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:326
+#: data/com.jeffser.Alpaca.metainfo.xml.in:343
 msgid ""
 "Model selector gets replaced with 'manage models' button when there are no "
 "models downloaded"
@@ -570,78 +595,78 @@ msgstr ""
 "மாதிரிகள் எதுவும் பதிவிறக்கம் செய்யப்படாவிட்டால், மாடல் தேர்வளர் 'நிர்வகி மாடல்கள்' "
 "பொத்தானால் மாற்றப்படும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:327
+#: data/com.jeffser.Alpaca.metainfo.xml.in:344
 msgid "Added warning when model is too big for the device"
 msgstr "சாதனத்திற்கு மாதிரி மிகவும் பெரியதாக இருக்கும்போது எச்சரிக்கை சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:328
+#: data/com.jeffser.Alpaca.metainfo.xml.in:345
 msgid "Added AMD GPU indicator in preferences"
 msgstr "விருப்பங்களில் AMD GPU காட்டி சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:337
+#: data/com.jeffser.Alpaca.metainfo.xml.in:354
 msgid "Better system for handling dialogs"
 msgstr "உரையாடல்களைக் கையாள்வதற்கான சிறந்த அமைப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:338
+#: data/com.jeffser.Alpaca.metainfo.xml.in:355
 msgid "Better system for handling instance switching"
 msgstr "நிகழ்வு மாறுதலைக் கையாள்வதற்கான சிறந்த அமைப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:339
+#: data/com.jeffser.Alpaca.metainfo.xml.in:356
 msgid "Remote connection dialog"
 msgstr "தொலைநிலை இணைப்பு உரையாடல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:343
+#: data/com.jeffser.Alpaca.metainfo.xml.in:360
 msgid "Fixed: Models get duplicated when switching remote and local instance"
 msgstr ""
 "சரி செய்யப்பட்டது: தொலைநிலை மற்றும் உள்ளூர் நிகழ்வுகளை மாற்றும்போது மாதிரிகள் "
 "நகலெடுக்கப்படுகின்றன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:344
+#: data/com.jeffser.Alpaca.metainfo.xml.in:361
 msgid "Better internal instance manager"
 msgstr "சிறந்த உள் நிகழ்வு மேலாளர்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:353
+#: data/com.jeffser.Alpaca.metainfo.xml.in:370
 msgid "Added 'Cancel' and 'Save' buttons when editing a message"
 msgstr "ஒரு செய்தியைத் திருத்தும்போது 'ரத்துசெய்' மற்றும் 'சேமி' பொத்தான்கள் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:357
+#: data/com.jeffser.Alpaca.metainfo.xml.in:374
 msgid "Better handling of image recognition"
 msgstr "பட அங்கீகாரத்தை சிறப்பாகக் கையாளுதல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:358
+#: data/com.jeffser.Alpaca.metainfo.xml.in:375
 msgid "Remove unused files when canceling a model download"
 msgstr "ஒரு மாடல் பதிவிறக்கத்தை ரத்து செய்யும்போது பயன்படுத்தப்படாத கோப்புகளை அகற்று"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:359
+#: data/com.jeffser.Alpaca.metainfo.xml.in:376
 msgid "Better message blocks rendering"
 msgstr "சிறந்த செய்தி தொகுதிகள் வழங்கப்படுகின்றன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:368
+#: data/com.jeffser.Alpaca.metainfo.xml.in:385
 msgid "Run bash and python scripts straight from chat"
 msgstr "அரட்டையிலிருந்து நேரடியாக பாஷ் மற்றும் பைதான் ஸ்கிரிப்ட்களை இயக்கவும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:369
+#: data/com.jeffser.Alpaca.metainfo.xml.in:386
 msgid "Updated Ollama to 0.3.12"
 msgstr "ஓல்லமா 0.3.12 க்கு புதுப்பிக்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:370
+#: data/com.jeffser.Alpaca.metainfo.xml.in:387
 msgid "New models!"
 msgstr "புதிய மாதிரிகள்!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:374
+#: data/com.jeffser.Alpaca.metainfo.xml.in:391
 msgid "Fixed and made faster the launch sequence"
 msgstr "தொடக்க வரிசை சரி செய்யப்பட்டு வேகப்படுத்தப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:375
+#: data/com.jeffser.Alpaca.metainfo.xml.in:392
 msgid "Better detection of code blocks in messages"
 msgstr "செய்திகளில் குறியீடு தொகுதிகளை சிறப்பாகக் கண்டறிதல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:376
+#: data/com.jeffser.Alpaca.metainfo.xml.in:393
 msgid "Fixed app not loading in certain setups with Nvidia GPUs"
 msgstr ""
 "Nvidia GPU களுடன் கூடிய சில அமைப்புகளில் பயன்பாடு ஏற்றப்படாதது சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:385
+#: data/com.jeffser.Alpaca.metainfo.xml.in:402
 msgid ""
 "Fixed message notification sometimes crashing text rendering because of them "
 "running on different threads"
@@ -649,31 +674,31 @@ msgstr ""
 "செய்தி அறிவிப்பு சில நேரங்களில் உரை வழங்குதலை செயலிழக்கச் செய்தது, ஏனெனில் அவை "
 "வெவ்வேறு திரெட்களில் இயங்கின"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:394
+#: data/com.jeffser.Alpaca.metainfo.xml.in:411
 msgid "Fixed message generation sometimes failing"
 msgstr "செய்தி உருவாக்கம் சில நேரங்களில் தோல்வியடைந்தது சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:403
+#: data/com.jeffser.Alpaca.metainfo.xml.in:420
 msgid "Sidebar resizes with the window"
 msgstr "பக்கவாட்டுப் பட்டி சாளரத்துடன் அளவை மாற்றுகிறது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:404
+#: data/com.jeffser.Alpaca.metainfo.xml.in:421
 msgid "New welcome dialog"
 msgstr "புதிய வரவேற்பு உரையாடல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:405
+#: data/com.jeffser.Alpaca.metainfo.xml.in:422
 msgid "Message search"
 msgstr "செய்தி தேடல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:406
+#: data/com.jeffser.Alpaca.metainfo.xml.in:423
 msgid "Updated Ollama to v0.3.11"
 msgstr "ஓல்லமா v0.3.11 க்கு புதுப்பிக்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:407
+#: data/com.jeffser.Alpaca.metainfo.xml.in:424
 msgid "A lot of new models provided by Ollama repository"
 msgstr "ஓல்லமா களஞ்சியத்தால் வழங்கப்பட்ட பல புதிய மாதிரிகள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:411
+#: data/com.jeffser.Alpaca.metainfo.xml.in:428
 msgid ""
 "Fixed text inside model manager when the accessibility option 'large text' "
 "is on"
@@ -681,462 +706,462 @@ msgstr ""
 "அணுகல்தன்மை விருப்பம் 'பெரிய உரை' இயக்கப்பட்டிருக்கும்போது, மாடல் மேலாளருக்குள் உள்ள உரை "
 "சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:412
+#: data/com.jeffser.Alpaca.metainfo.xml.in:429
 msgid "Fixed image recognition on unsupported models"
 msgstr "ஆதரவு அளிக்கப்படாத மாதிரிகளில் பட அங்கீகாரம் சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:421
+#: data/com.jeffser.Alpaca.metainfo.xml.in:438
 msgid "Fixed spinner not hiding if the back end fails"
 msgstr "பின் முனை தோல்வியுற்றால் சுழல் மறைக்கப்படாதது சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:422
+#: data/com.jeffser.Alpaca.metainfo.xml.in:439
 msgid "Fixed image recognition with local images"
 msgstr "உள்ளூர் படங்களுடன் பட அங்கீகாரம் சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:423
+#: data/com.jeffser.Alpaca.metainfo.xml.in:440
 msgid "Changed appearance of delete / stop model buttons"
 msgstr "நீக்கு / நிறுத்து மாடல் பொத்தான்களின் தோற்றம் மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:424
+#: data/com.jeffser.Alpaca.metainfo.xml.in:441
 msgid "Fixed stop button crashing the app"
 msgstr "நிறுத்து பொத்தான் பயன்பாட்டை செயலிழக்கச் செய்தது சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:428
+#: data/com.jeffser.Alpaca.metainfo.xml.in:445
 msgid "Made sidebar resize a little when the window is smaller"
 msgstr ""
 "சாளரம் சிறியதாக இருக்கும்போது பக்கவாட்டுப் பட்டி சிறிது சிறிதாக அளவு மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:429
+#: data/com.jeffser.Alpaca.metainfo.xml.in:446
 msgid "Instant launch"
 msgstr "உடனடி தொடக்கம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:438
+#: data/com.jeffser.Alpaca.metainfo.xml.in:455
 msgid "Fixed error on first run (welcome dialog)"
 msgstr "முதல் முறை இயக்கும்போது ஏற்பட்ட பிழை (வரவேற்பு உரையாடல்) சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:439
+#: data/com.jeffser.Alpaca.metainfo.xml.in:456
 msgid "Fixed checker for Ollama instance (used on system packages)"
 msgstr ""
 "ஓல்லமா நிகழ்வுக்கான சரிபார்ப்பு சரி செய்யப்பட்டது (கணினி தொகுப்புகளில் பயன்படுத்தப்பட்டது)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:448
+#: data/com.jeffser.Alpaca.metainfo.xml.in:465
 msgid "Fixed 'clear chat' option"
 msgstr "'அரட்டையை அழி' விருப்பம் சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:449
+#: data/com.jeffser.Alpaca.metainfo.xml.in:466
 msgid "Fixed welcome dialog causing the local instance to not launch"
 msgstr "உள்ளூர் நிகழ்வை தொடங்கவிடாமல் தடுக்கும் வரவேற்பு உரையாடல் சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:450
+#: data/com.jeffser.Alpaca.metainfo.xml.in:467
 msgid "Fixed support for AMD GPUs"
 msgstr "AMD GPUகளுக்கான ஆதரவு சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:459
+#: data/com.jeffser.Alpaca.metainfo.xml.in:476
 msgid "Model, message and chat systems have been rewritten"
 msgstr "மாதிரி, செய்தி மற்றும் அரட்டை அமைப்புகள் மீண்டும் எழுதப்பட்டுள்ளன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:460
+#: data/com.jeffser.Alpaca.metainfo.xml.in:477
 msgid "New models are available"
 msgstr "புதிய மாதிரிகள் கிடைக்கின்றன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:461
+#: data/com.jeffser.Alpaca.metainfo.xml.in:478
 msgid "Ollama updated to v0.3.9"
 msgstr "ஓல்லமா v0.3.9 க்கு புதுப்பிக்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:462
+#: data/com.jeffser.Alpaca.metainfo.xml.in:479
 msgid "Added support for multiple chat generations simultaneously"
 msgstr "ஒரே நேரத்தில் பல அரட்டை தலைமுறைகளுக்கான ஆதரவு சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:463
+#: data/com.jeffser.Alpaca.metainfo.xml.in:480
 msgid "Added experimental AMD GPU support"
 msgstr "சோதனை AMD GPU ஆதரவு சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:464
+#: data/com.jeffser.Alpaca.metainfo.xml.in:481
 msgid "Added message loading spinner and new message indicator to chat tab"
 msgstr "அரட்டை தாவலுக்கு செய்தி ஏற்றுதல் சுழலி மற்றும் புதிய செய்தி காட்டி சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:465
+#: data/com.jeffser.Alpaca.metainfo.xml.in:482
 msgid "Added animations"
 msgstr "அனிமேஷன்கள் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:466
+#: data/com.jeffser.Alpaca.metainfo.xml.in:483
 msgid "Changed model manager / model selector appearance"
 msgstr "மாடல் மேலாளர் / மாடல் தேர்வளர் தோற்றம் மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:467
+#: data/com.jeffser.Alpaca.metainfo.xml.in:484
 msgid "Changed message appearance"
 msgstr "செய்தி தோற்றம் மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:468
+#: data/com.jeffser.Alpaca.metainfo.xml.in:485
 msgid "Added markdown and code blocks to user messages"
 msgstr "பயனர் செய்திகளுக்கு மார்க்டவுன் மற்றும் குறியீடு தொகுதிகள் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:469
+#: data/com.jeffser.Alpaca.metainfo.xml.in:486
 msgid "Added loading dialog at launch so the app opens faster"
 msgstr "தொடக்கத்தில் ஏற்றுதல் உரையாடல் சேர்க்கப்பட்டது, அதனால் பயன்பாடு வேகமாக திறக்கும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:470
+#: data/com.jeffser.Alpaca.metainfo.xml.in:487
 msgid "Added warning when device is on 'battery saver' mode"
 msgstr "'பேட்டரி சேவர்' பயன்முறையில் சாதனம் இருக்கும்போது எச்சரிக்கை சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:471
+#: data/com.jeffser.Alpaca.metainfo.xml.in:488
 msgid "Added inactivity timer to integrated instance"
 msgstr "ஒருங்கிணைந்த நிகழ்விற்கு செயலற்ற நேரத்தை சேர்த்தது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:474
+#: data/com.jeffser.Alpaca.metainfo.xml.in:491
 msgid "The chat is now scrolled to the bottom when it's changed"
 msgstr "அரட்டை மாற்றப்படும்போது, அது இப்போது கீழே உருட்டப்படும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:475
+#: data/com.jeffser.Alpaca.metainfo.xml.in:492
 msgid "Better handling of focus on messages"
 msgstr "செய்திகளில் கவனத்தை சிறப்பாக கையாளுதல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:476
+#: data/com.jeffser.Alpaca.metainfo.xml.in:493
 msgid "Better general performance on the app"
 msgstr "பயன்பாட்டில் சிறந்த பொது செயல்திறன்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:485
+#: data/com.jeffser.Alpaca.metainfo.xml.in:502
 msgid "New duplicate chat option"
 msgstr "புதிய நகல் அரட்டை விருப்பம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:486
+#: data/com.jeffser.Alpaca.metainfo.xml.in:503
 msgid "Changed model selector appearance"
 msgstr "மாடல் தேர்வளர் தோற்றம் மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:487
+#: data/com.jeffser.Alpaca.metainfo.xml.in:504
 msgid "Message entry is focused on launch and chat change"
 msgstr "தொடக்கத்திலும், அரட்டை மாற்றத்தின்போதும் செய்தி நுழைவு கவனம் செலுத்தப்படுகிறது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:488
+#: data/com.jeffser.Alpaca.metainfo.xml.in:505
 msgid "Message is focused when it's being edited"
 msgstr "செய்தி திருத்தப்படும்போது கவனம் செலுத்தப்படுகிறது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:489
+#: data/com.jeffser.Alpaca.metainfo.xml.in:506
 msgid "Added loading spinner when regenerating a message"
 msgstr "ஒரு செய்தியை மீண்டும் உருவாக்கும்போது ஏற்றுதல் சுழலி சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:490
+#: data/com.jeffser.Alpaca.metainfo.xml.in:507
 msgid "Added Ollama debugging to 'About Alpaca' dialog"
 msgstr "'அல்பாகாவைப் பற்றி' உரையாடலுக்கு ஓல்லமா பிழைத்திருத்தம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:491
+#: data/com.jeffser.Alpaca.metainfo.xml.in:508
 msgid "Changed YouTube transcription dialog appearance and behavior"
 msgstr "யூடியூப் டிரான்ஸ்கிரிப்ஷன் உரையாடல் தோற்றம் மற்றும் நடத்தை மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:495
+#: data/com.jeffser.Alpaca.metainfo.xml.in:512
 msgid "CTRL+W and CTRL+Q stops local instance before closing the app"
 msgstr "பயன்பாட்டை மூடுவதற்கு முன் CTRL+W மற்றும் CTRL+Q உள்ளூர் நிகழ்வை நிறுத்துகிறது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:496
+#: data/com.jeffser.Alpaca.metainfo.xml.in:513
 msgid "Changed appearance of 'Open Model Manager' button on welcome screen"
 msgstr "வரவேற்பு திரையில் 'மாடல் மேலாளரைத் திற' பொத்தானின் தோற்றம் மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:497
+#: data/com.jeffser.Alpaca.metainfo.xml.in:514
 msgid "Fixed message generation not working consistently"
 msgstr "செய்தி உருவாக்கம் நிலையாக செயல்படாதது சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:498
+#: data/com.jeffser.Alpaca.metainfo.xml.in:515
 msgid "Fixed message edition not working consistently"
 msgstr "செய்தி பதிப்பு நிலையாக செயல்படாதது சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:507
+#: data/com.jeffser.Alpaca.metainfo.xml.in:524
 msgid "Model manager opens faster"
 msgstr "மாடல் மேலாளர் வேகமாக திறக்கிறது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:508
+#: data/com.jeffser.Alpaca.metainfo.xml.in:525
 msgid "Delete chat option in secondary menu"
 msgstr "இரண்டாம் நிலை மெனுவில் அரட்டை அழிக்கும் விருப்பம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:509
+#: data/com.jeffser.Alpaca.metainfo.xml.in:526
 msgid "New model selector popup"
 msgstr "புதிய மாடல் தேர்வளர் பாப்அப்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:510
+#: data/com.jeffser.Alpaca.metainfo.xml.in:527
 msgid "Standard shortcuts"
 msgstr "நிலையான குறுக்குவழிகள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:511
+#: data/com.jeffser.Alpaca.metainfo.xml.in:528
 msgid "Model manager is navigable with keyboard"
 msgstr "விசைப்பலகையைப் பயன்படுத்தி மாடல் மேலாளரை வழிநடத்தலாம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:512
+#: data/com.jeffser.Alpaca.metainfo.xml.in:529
 msgid "Changed sidebar collapsing behavior"
 msgstr "பக்கவாட்டுப் பட்டி சரிவு நடத்தை மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:513
+#: data/com.jeffser.Alpaca.metainfo.xml.in:530
 msgid "Focus indicators on messages"
 msgstr "செய்திகளில் கவனம் குறிகாட்டிகள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:514
+#: data/com.jeffser.Alpaca.metainfo.xml.in:531
 msgid "Welcome screen"
 msgstr "வரவேற்பு திரை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:515
+#: data/com.jeffser.Alpaca.metainfo.xml.in:532
 msgid "Give message entry focus at launch"
 msgstr "தொடக்கத்தில் செய்தி உள்ளீட்டுக்கு கவனம் கொடுங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:516
+#: data/com.jeffser.Alpaca.metainfo.xml.in:533
 msgid "Generally better code"
 msgstr "பொதுவாக சிறந்த குறியீடு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:520
+#: data/com.jeffser.Alpaca.metainfo.xml.in:537
 msgid "Better width for dialogs"
 msgstr "உரையாடல்களுக்கு சிறந்த அகலம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:521
+#: data/com.jeffser.Alpaca.metainfo.xml.in:538
 msgid "Better compatibility with screen readers"
 msgstr "திரை வாசகர்களுடன் சிறந்த இணக்கத்தன்மை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:522
+#: data/com.jeffser.Alpaca.metainfo.xml.in:539
 msgid "Fixed message regenerator"
 msgstr "செய்தி மறுஉருவாக்கி சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:523
+#: data/com.jeffser.Alpaca.metainfo.xml.in:540
 msgid "Removed 'Featured models' from welcome dialog"
 msgstr "வரவேற்பு உரையாடலில் இருந்து 'சிறப்பு மாதிரிகள்' அகற்றப்பட்டன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:524
+#: data/com.jeffser.Alpaca.metainfo.xml.in:541
 msgid "Added default buttons to dialogs"
 msgstr "உரையாடல்களுக்கு இயல்புநிலை பொத்தான்கள் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:525
+#: data/com.jeffser.Alpaca.metainfo.xml.in:542
 msgid "Fixed import / export of chats"
 msgstr "அரட்டைகளின் இறக்குமதி / ஏற்றுமதி சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:526
+#: data/com.jeffser.Alpaca.metainfo.xml.in:543
 msgid "Changed Python2 title to Python on code blocks"
 msgstr "குறியீடு தொகுதிகளில் பைதான்2 தலைப்பை பைதான் என மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:527
+#: data/com.jeffser.Alpaca.metainfo.xml.in:544
 msgid ""
 "Prevent regeneration of title when the user changed it to a custom title"
 msgstr ""
 "பயனர் தலைப்பை தனிப்பயன் தலைப்பாக மாற்றியிருந்தால் தலைப்பை மீண்டும் உருவாக்குவதைத் தடுக்கவும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:528
+#: data/com.jeffser.Alpaca.metainfo.xml.in:545
 msgid "Show date on stopped messages"
 msgstr "நிறுத்தப்பட்ட செய்திகளில் தேதியைக் காட்டு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:529
+#: data/com.jeffser.Alpaca.metainfo.xml.in:546
 msgid "Fix clear chat error"
 msgstr "அரட்டையை அழிப்பதில் ஏற்பட்ட பிழை சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:538
+#: data/com.jeffser.Alpaca.metainfo.xml.in:555
 msgid "Changed shortcuts to standards"
 msgstr "குறுக்குவழிகள் தரநிலைகளாக மாற்றப்பட்டன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:539
+#: data/com.jeffser.Alpaca.metainfo.xml.in:556
 msgid "Moved 'Manage Models' button to primary menu"
 msgstr "'மாடல்களை நிர்வகி' பொத்தான் முதன்மை மெனுவுக்கு நகர்த்தப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:540
-#: data/com.jeffser.Alpaca.metainfo.xml.in:562
+#: data/com.jeffser.Alpaca.metainfo.xml.in:557
+#: data/com.jeffser.Alpaca.metainfo.xml.in:579
 msgid "Stable support for GGUF model files"
 msgstr "GGUF மாடல் கோப்புகளுக்கான நிலையான ஆதரவு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:541
-#: data/com.jeffser.Alpaca.metainfo.xml.in:816
+#: data/com.jeffser.Alpaca.metainfo.xml.in:558
+#: data/com.jeffser.Alpaca.metainfo.xml.in:833
 msgid "General optimizations"
 msgstr "பொதுவான மேம்பாடுகள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:545
+#: data/com.jeffser.Alpaca.metainfo.xml.in:562
 msgid "Better handling of enter key (important for Japanese input)"
 msgstr "உள்ளீட்டு விசையை சிறப்பாகக் கையாளுதல் (ஜப்பானிய உள்ளீட்டிற்கு முக்கியம்)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:546
+#: data/com.jeffser.Alpaca.metainfo.xml.in:563
 msgid "Removed sponsor dialog"
 msgstr "நிதி வழங்குபவர் உரையாடல் அகற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:547
+#: data/com.jeffser.Alpaca.metainfo.xml.in:564
 msgid "Added sponsor link in about dialog"
 msgstr "தகவல் உரையாடலில் நிதி வழங்குபவர் இணைப்பு சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:548
+#: data/com.jeffser.Alpaca.metainfo.xml.in:565
 msgid "Changed window and elements dimensions"
 msgstr "சாளரம் மற்றும் கூறுகளின் அளவுகள் மாற்றப்பட்டன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:549
+#: data/com.jeffser.Alpaca.metainfo.xml.in:566
 msgid "Selected model changes when entering model manager"
 msgstr "மாடல் மேலாளருக்குள் நுழையும்போது தேர்ந்தெடுக்கப்பட்ட மாதிரி மாறுகிறது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:550
+#: data/com.jeffser.Alpaca.metainfo.xml.in:567
 msgid "Better image tooltips"
 msgstr "சிறந்த பட உதவிக்குறிப்புகள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:551
+#: data/com.jeffser.Alpaca.metainfo.xml.in:568
 msgid "GGUF Support"
 msgstr "GGUF ஆதரவு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:560
+#: data/com.jeffser.Alpaca.metainfo.xml.in:577
 msgid "Regenerate any response, even if they are incomplete"
 msgstr "எந்த பதிலையும் மீண்டும் உருவாக்கவும், அவை முழுமையற்றதாக இருந்தாலும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:561
+#: data/com.jeffser.Alpaca.metainfo.xml.in:578
 msgid "Support for pulling models by name:tag"
 msgstr "பெயர்: குறிச்சொல் மூலம் மாதிரிகளை இழுப்பதற்கான ஆதரவு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:563
+#: data/com.jeffser.Alpaca.metainfo.xml.in:580
 msgid "Restored sidebar toggle button"
 msgstr "பக்கவாட்டுப் பட்டி மாற்றும் பொத்தான் மீட்டமைக்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:567
+#: data/com.jeffser.Alpaca.metainfo.xml.in:584
 msgid "Reverted back to standard styles"
 msgstr "நிலையான பாணிகளுக்கு மீண்டும் மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:568
+#: data/com.jeffser.Alpaca.metainfo.xml.in:585
 msgid "Fixed generated titles having \"'S\" for some reason"
 msgstr ""
 "ஏதோ ஒரு காரணத்திற்காக உருவாக்கப்பட்ட தலைப்புகள் \"'S\" ஆக இருந்தது சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:569
+#: data/com.jeffser.Alpaca.metainfo.xml.in:586
 msgid "Changed min width for model dropdown"
 msgstr "மாடல் கீழ்தோன்றும் பட்டியலுக்கான குறைந்தபட்ச அகலம் மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:570
+#: data/com.jeffser.Alpaca.metainfo.xml.in:587
 msgid "Changed message entry shadow"
 msgstr "செய்தி உள்ளீட்டு நிழல் மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:571
+#: data/com.jeffser.Alpaca.metainfo.xml.in:588
 msgid "The last model used is now restored when the user changes chat"
 msgstr ""
 "பயனர் அரட்டையை மாற்றும்போது கடைசியாகப் பயன்படுத்தப்பட்ட மாதிரி இப்போது மீட்டமைக்கப்படுகிறது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:572
+#: data/com.jeffser.Alpaca.metainfo.xml.in:589
 msgid "Better check for message finishing"
 msgstr "செய்தி முடிவடைகிறது என்பதை சிறப்பாக சரிபார்க்கவும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:581
+#: data/com.jeffser.Alpaca.metainfo.xml.in:598
 msgid "Added table rendering (Thanks Nokse)"
 msgstr "அட்டவணை வழங்குதல் சேர்க்கப்பட்டது (நன்றி நோக்ஸ்)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:585
+#: data/com.jeffser.Alpaca.metainfo.xml.in:602
 msgid "Made support dialog more common"
 msgstr "ஆதரவு உரையாடல் மிகவும் பொதுவானதாக மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:586
+#: data/com.jeffser.Alpaca.metainfo.xml.in:603
 msgid ""
 "Dialog title on tag chooser when downloading models didn't display properly"
 msgstr ""
 "மாதிரிகளைப் பதிவிறக்கும்போது குறிச்சொல் தேர்வளரில் உரையாடல் தலைப்பு சரியாகக் "
 "காட்டப்படவில்லை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:587
+#: data/com.jeffser.Alpaca.metainfo.xml.in:604
 msgid "Prevent chat generation from generating a title with multiple lines"
 msgstr "பல வரிகளுடன் தலைப்பை உருவாக்குவதிலிருந்து அரட்டை உருவாக்கத்தைத் தடுக்கவும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:596
+#: data/com.jeffser.Alpaca.metainfo.xml.in:613
 msgid "Bearer Token entry on connection error dialog"
 msgstr "இணைப்பு பிழை உரையாடலில் Bearer டோக்கன் நுழைவு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:597
+#: data/com.jeffser.Alpaca.metainfo.xml.in:614
 msgid "Small appearance changes"
 msgstr "சிறிய தோற்ற மாற்றங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:598
+#: data/com.jeffser.Alpaca.metainfo.xml.in:615
 msgid "Compatibility with code blocks without explicit language"
 msgstr "வெளிப்படையான மொழி இல்லாமல் குறியீடு தொகுதிகளுடன் இணக்கத்தன்மை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:599
+#: data/com.jeffser.Alpaca.metainfo.xml.in:616
 msgid "Rare, optional and dismissible support dialog"
 msgstr "அரிதான, விருப்பமான மற்றும் நிராகரிக்கக்கூடிய ஆதரவு உரையாடல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:603
+#: data/com.jeffser.Alpaca.metainfo.xml.in:620
 msgid "Date format for Simplified Chinese translation"
 msgstr "எளிமைப்படுத்தப்பட்ட சீன மொழிபெயர்ப்பிற்கான தேதி வடிவம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:604
+#: data/com.jeffser.Alpaca.metainfo.xml.in:621
 msgid "Bug with unsupported localizations"
 msgstr "ஆதரவு அளிக்கப்படாத உள்ளூர்மயமாக்கலுடன் கூடிய பிழை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:605
+#: data/com.jeffser.Alpaca.metainfo.xml.in:622
 msgid "Min height being too large to be used on mobile"
 msgstr "குறைந்தபட்ச உயரம் மொபைலில் பயன்படுத்த மிகவும் பெரியதாக இருக்கிறது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:606
+#: data/com.jeffser.Alpaca.metainfo.xml.in:623
 msgid "Remote connection checker bug"
 msgstr "தொலைநிலை இணைப்பு சரிபார்ப்பு பிழை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:615
+#: data/com.jeffser.Alpaca.metainfo.xml.in:632
 msgid "Models with capital letters on their tag don't work"
 msgstr "அவற்றின் குறிச்சொல்லில் பெரிய எழுத்துக்களைக் கொண்ட மாதிரிகள் வேலை செய்யாது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:616
+#: data/com.jeffser.Alpaca.metainfo.xml.in:633
 msgid "Ollama fails to launch on some systems"
 msgstr "சில அமைப்புகளில் ஓல்லமாவை தொடங்க முடியவில்லை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:617
+#: data/com.jeffser.Alpaca.metainfo.xml.in:634
 msgid "YouTube transcripts are not being saved in the right TMP directory"
 msgstr "யூடியூப் டிரான்ஸ்கிரிப்டுகள் சரியான TMP கோப்பகத்தில் சேமிக்கப்படவில்லை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:621
+#: data/com.jeffser.Alpaca.metainfo.xml.in:638
 msgid "Debug messages are now shown on the 'About Alpaca' dialog"
 msgstr "'அல்பாகாவைப் பற்றி' உரையாடலில் பிழைத்திருத்த செய்திகள் இப்போது காட்டப்படும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:622
+#: data/com.jeffser.Alpaca.metainfo.xml.in:639
 msgid "Updated Ollama to v0.3.0 (new models)"
 msgstr "ஓல்லமா v0.3.0 க்கு புதுப்பிக்கப்பட்டது (புதிய மாதிரிகள்)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:631
+#: data/com.jeffser.Alpaca.metainfo.xml.in:648
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
 msgstr ""
 "பெயர்களில் '-' கொண்ட மாதிரிகள் சரியாக வேலை செய்யவில்லை, இது இப்போது சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:632
+#: data/com.jeffser.Alpaca.metainfo.xml.in:649
 msgid "Better connection check for Ollama"
 msgstr "ஓல்லமாவுக்கான சிறந்த இணைப்பு சரிபார்ப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:639
+#: data/com.jeffser.Alpaca.metainfo.xml.in:656
 msgid "Stable Release"
 msgstr "நிலையான வெளியீடு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:640
+#: data/com.jeffser.Alpaca.metainfo.xml.in:657
 msgid ""
 "The new icon was made by Tobias Bernard over the Gnome Gitlab, thanks for "
 "the great icon!"
 msgstr ""
 "புதிய ஐகானை க்னோம் கிட்லாப்பில் டோபியாஸ் பெர்னார்ட் உருவாக்கினார், சிறந்த ஐகானுக்கு நன்றி!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:641
+#: data/com.jeffser.Alpaca.metainfo.xml.in:658
 msgid "Features and fixes"
 msgstr "அம்சங்கள் மற்றும் திருத்தங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:643
+#: data/com.jeffser.Alpaca.metainfo.xml.in:660
 msgid "Updated Ollama instance to 0.2.8"
 msgstr "ஓல்லமா நிகழ்வு 0.2.8 க்கு புதுப்பிக்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:644
+#: data/com.jeffser.Alpaca.metainfo.xml.in:661
 msgid "Better model selector"
 msgstr "சிறந்த மாடல் தேர்வளர்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:645
+#: data/com.jeffser.Alpaca.metainfo.xml.in:662
 msgid "Model manager redesign"
 msgstr "மாடல் மேலாளர் மறுவடிவமைப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:646
+#: data/com.jeffser.Alpaca.metainfo.xml.in:663
 msgid "Better tag selector when pulling a model"
 msgstr "ஒரு மாதிரியை இழுக்கும்போது சிறந்த குறிச்சொல் தேர்வளர்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:647
+#: data/com.jeffser.Alpaca.metainfo.xml.in:664
 msgid "Model search"
 msgstr "மாடல் தேடல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:648
+#: data/com.jeffser.Alpaca.metainfo.xml.in:665
 msgid "Added support for bearer tokens on remote instances"
 msgstr "தொலைநிலை நிகழ்வுகளில் Bearer டோக்கன்களுக்கான ஆதரவு சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:649
+#: data/com.jeffser.Alpaca.metainfo.xml.in:666
 msgid "Preferences dialog redesign"
 msgstr "விருப்பங்கள் உரையாடல் மறுவடிவமைப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:650
+#: data/com.jeffser.Alpaca.metainfo.xml.in:667
 msgid "Added context menus to interact with a chat"
 msgstr "அரட்டையுடன் தொடர்பு கொள்ள சூழல் மெனுக்கள் சேர்க்கப்பட்டன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:651
+#: data/com.jeffser.Alpaca.metainfo.xml.in:668
 msgid "Redesigned primary and secondary menus"
 msgstr "முதன்மை மற்றும் இரண்டாம் நிலை மெனுக்கள் மறுவடிவமைப்பு செய்யப்பட்டன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:652
+#: data/com.jeffser.Alpaca.metainfo.xml.in:669
 msgid ""
 "YouTube integration: Paste the URL of a video with a transcript and it will "
 "be added to the prompt"
@@ -1144,7 +1169,7 @@ msgstr ""
 "யூடியூப் ஒருங்கிணைப்பு: டிரான்ஸ்கிரிப்ட் கொண்ட ஒரு வீடியோவின் URL ஐ ஒட்டவும், அது "
 "ப்ராம்ப்ட்டில் சேர்க்கப்படும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:653
+#: data/com.jeffser.Alpaca.metainfo.xml.in:670
 msgid ""
 "Website integration (Experimental): Extract the text from the body of a "
 "website by adding it's URL to the prompt"
@@ -1152,146 +1177,146 @@ msgstr ""
 "வலைத்தள ஒருங்கிணைப்பு (சோதனை): ஒரு வலைத்தளத்தின் URL ஐ ப்ராம்ப்ட்டில் சேர்ப்பதன் மூலம் அதன் "
 "உடலில் இருந்து உரையை பிரித்தெடுக்கவும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:654
+#: data/com.jeffser.Alpaca.metainfo.xml.in:671
 msgid "Chat title generation"
 msgstr "அரட்டை தலைப்பு உருவாக்கம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:655
+#: data/com.jeffser.Alpaca.metainfo.xml.in:672
 msgid "Auto resizing of message entry"
 msgstr "செய்தி உள்ளீட்டின் தானியங்கி அளவு மாற்றம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:656
+#: data/com.jeffser.Alpaca.metainfo.xml.in:673
 msgid "Chat notifications"
 msgstr "அரட்டை அறிவிப்புகள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:657
+#: data/com.jeffser.Alpaca.metainfo.xml.in:674
 msgid "Added indicator when an image is missing"
 msgstr "ஒரு படம் காணவில்லை என்றால் காட்டி சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:658
+#: data/com.jeffser.Alpaca.metainfo.xml.in:675
 msgid "Auto rearrange the order of chats when a message is received"
 msgstr "ஒரு செய்தி பெறப்படும்போது அரட்டைகளின் வரிசையை தானாகவே மறுசீரமைக்கவும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:659
+#: data/com.jeffser.Alpaca.metainfo.xml.in:676
 msgid "Redesigned file preview dialog"
 msgstr "மீண்டும் வடிவமைக்கப்பட்ட கோப்பு முன்னோட்ட உரையாடல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:660
+#: data/com.jeffser.Alpaca.metainfo.xml.in:677
 msgid "Credited new contributors"
 msgstr "புதிய பங்களிப்பாளர்களுக்கு கடன் வழங்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:661
+#: data/com.jeffser.Alpaca.metainfo.xml.in:678
 msgid "Better stability and optimization"
 msgstr "சிறந்த நிலைத்தன்மை மற்றும் மேம்பாடு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:662
+#: data/com.jeffser.Alpaca.metainfo.xml.in:679
 msgid "Edit messages to change the context of a conversation"
 msgstr "உரையாடலின் சூழலை மாற்ற செய்திகளைத் திருத்தவும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:663
+#: data/com.jeffser.Alpaca.metainfo.xml.in:680
 msgid "Added disclaimers when pulling models"
 msgstr "மாதிரிகளை இழுக்கும்போது மறுப்புக்கள் சேர்க்கப்பட்டன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:664
+#: data/com.jeffser.Alpaca.metainfo.xml.in:681
 msgid "Preview files before sending a message"
 msgstr "ஒரு செய்தியை அனுப்புவதற்கு முன் கோப்புகளை முன்னோட்டமிடவும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:665
+#: data/com.jeffser.Alpaca.metainfo.xml.in:682
 msgid "Better format for date and time on messages"
 msgstr "செய்திகளில் தேதி மற்றும் நேரத்திற்கான சிறந்த வடிவம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:666
+#: data/com.jeffser.Alpaca.metainfo.xml.in:683
 msgid "Error and debug logging on terminal"
 msgstr "டெர்மினலில் பிழை மற்றும் பிழைத்திருத்த பதிவு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:667
+#: data/com.jeffser.Alpaca.metainfo.xml.in:684
 msgid "Auto-hiding sidebar button"
 msgstr "தானாக மறைக்கும் பக்கவாட்டுப் பட்டி பொத்தான்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:668
+#: data/com.jeffser.Alpaca.metainfo.xml.in:685
 msgid "Various UI tweaks"
 msgstr "பல்வேறு UI மாற்றங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:670
+#: data/com.jeffser.Alpaca.metainfo.xml.in:687
 msgid "New Models"
 msgstr "புதிய மாதிரிகள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:672
+#: data/com.jeffser.Alpaca.metainfo.xml.in:689
 msgid "Gemma2"
 msgstr "ஜெம்மா2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:673
+#: data/com.jeffser.Alpaca.metainfo.xml.in:690
 msgid "GLM4"
 msgstr "GLM4"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:674
+#: data/com.jeffser.Alpaca.metainfo.xml.in:691
 msgid "Codegeex4"
 msgstr "கோடிகீக்ஸ்4"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:675
+#: data/com.jeffser.Alpaca.metainfo.xml.in:692
 msgid "InternLM2"
 msgstr "இன்டர்ன்எல்எம்2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:676
+#: data/com.jeffser.Alpaca.metainfo.xml.in:693
 msgid "Llama3-groq-tool-use"
 msgstr "லாமா3-கிரோக்-கருவி-பயன்பாடு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:677
+#: data/com.jeffser.Alpaca.metainfo.xml.in:694
 msgid "Mathstral"
 msgstr "மேத்ஸ்ட்ரல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:678
+#: data/com.jeffser.Alpaca.metainfo.xml.in:695
 msgid "Mistral-nemo"
 msgstr "மிஸ்ட்ரல்-நெமோ"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:679
+#: data/com.jeffser.Alpaca.metainfo.xml.in:696
 msgid "Firefunction-v2"
 msgstr "ஃபயர்ஃபங்க்ஷன்-v2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:680
+#: data/com.jeffser.Alpaca.metainfo.xml.in:697
 msgid "Nuextract"
 msgstr "நியுஎக்ஸ்ட்ராக்ட்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:682
+#: data/com.jeffser.Alpaca.metainfo.xml.in:699
 msgid "Translations"
 msgstr "மொழிபெயர்ப்புகள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:683
+#: data/com.jeffser.Alpaca.metainfo.xml.in:700
 msgid ""
 "These are all the available translations on 1.0.0, thanks to all the "
 "contributors!"
 msgstr ""
 "1.0.0 இல் கிடைக்கும் அனைத்து மொழிபெயர்ப்புகளும் இவை, அனைத்து பங்களிப்பாளர்களுக்கும் நன்றி!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:685
+#: data/com.jeffser.Alpaca.metainfo.xml.in:702
 msgid "Russian: Alex K"
 msgstr "ரஷ்யன்: அலெக்ஸ் கே"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:686
+#: data/com.jeffser.Alpaca.metainfo.xml.in:703
 msgid "Spanish: Jeffser"
 msgstr "ஸ்பானிஷ்: ஜெஃப்ஸர்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:687
+#: data/com.jeffser.Alpaca.metainfo.xml.in:704
 msgid "Brazilian Portuguese: Daimar Stein"
 msgstr "பிரேசிலிய போர்த்துகீசியம்: டைமர் ஸ்டெயின்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:688
+#: data/com.jeffser.Alpaca.metainfo.xml.in:705
 msgid "French: Louis Chauvet-Villaret"
 msgstr "பிரெஞ்சு: லூயிஸ் சாவெட்-வில்லாரெட்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:689
+#: data/com.jeffser.Alpaca.metainfo.xml.in:706
 msgid "Norwegian: CounterFlow64"
 msgstr "நார்வேஜியன்: கவுண்டர்ஃப்ளோ64"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:690
+#: data/com.jeffser.Alpaca.metainfo.xml.in:707
 msgid "Bengali: Aritra Saha"
 msgstr "பெங்காலி: அரித்ரா சாஹா"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:691
+#: data/com.jeffser.Alpaca.metainfo.xml.in:708
 msgid "Simplified Chinese: Yuehao Sui"
 msgstr "எளிமைப்படுத்தப்பட்ட சீனம்: யுயோஹாவோ சூய்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:699
+#: data/com.jeffser.Alpaca.metainfo.xml.in:716
 msgid ""
 "Removed DOCX compatibility temporally due to error with python-lxml "
 "dependency"
@@ -1299,32 +1324,32 @@ msgstr ""
 "பைத்தான்-எல்எக்ஸ்எம்எல் சார்புநிலையின் பிழை காரணமாக DOCX இணக்கத்தன்மை தற்காலிகமாக "
 "அகற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:705
-#: data/com.jeffser.Alpaca.metainfo.xml.in:735
-#: data/com.jeffser.Alpaca.metainfo.xml.in:756
-#: data/com.jeffser.Alpaca.metainfo.xml.in:961
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1018
+#: data/com.jeffser.Alpaca.metainfo.xml.in:722
+#: data/com.jeffser.Alpaca.metainfo.xml.in:752
+#: data/com.jeffser.Alpaca.metainfo.xml.in:773
+#: data/com.jeffser.Alpaca.metainfo.xml.in:978
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1035
 msgid "Big Update"
 msgstr "பெரிய புதுப்பிப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:707
+#: data/com.jeffser.Alpaca.metainfo.xml.in:724
 msgid "Added compatibility for PDF"
 msgstr "PDF க்கான இணக்கத்தன்மை சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:708
+#: data/com.jeffser.Alpaca.metainfo.xml.in:725
 msgid "Added compatibility for DOCX"
 msgstr "DOCX க்கான இணக்கத்தன்மை சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:709
+#: data/com.jeffser.Alpaca.metainfo.xml.in:726
 msgid "Merged 'file attachment' menu into one button"
 msgstr "'கோப்பு இணைப்பு' மெனுவை ஒரு பொத்தானாக இணைத்தது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:716
-#: data/com.jeffser.Alpaca.metainfo.xml.in:909
+#: data/com.jeffser.Alpaca.metainfo.xml.in:733
+#: data/com.jeffser.Alpaca.metainfo.xml.in:926
 msgid "Quick Fix"
 msgstr "விரைவான திருத்தம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:717
+#: data/com.jeffser.Alpaca.metainfo.xml.in:734
 msgid ""
 "There were some errors when transitioning from the old version of chats to "
 "the new version. I apologize if this caused any corruption in your chat "
@@ -1334,185 +1359,185 @@ msgstr ""
 "அரட்டை வரலாற்றில் ஏதேனும் ஊழல் ஏற்பட்டிருந்தால், அதற்கு நான் வருந்துகிறேன். இதுபோன்ற ஒரு "
 "மாற்றம் தேவைப்படுவது இதுவே கடைசி முறையாகும்."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:723
-#: data/com.jeffser.Alpaca.metainfo.xml.in:875
+#: data/com.jeffser.Alpaca.metainfo.xml.in:740
+#: data/com.jeffser.Alpaca.metainfo.xml.in:892
 msgid "Huge Update"
 msgstr "மிகப்பெரிய புதுப்பிப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:725
+#: data/com.jeffser.Alpaca.metainfo.xml.in:742
 msgid "Added: Support for plain text files"
 msgstr "சேர்க்கப்பட்டது: எளிய உரை கோப்புகளுக்கான ஆதரவு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:726
+#: data/com.jeffser.Alpaca.metainfo.xml.in:743
 msgid "Added: New backend system for storing messages"
 msgstr "சேர்க்கப்பட்டது: செய்திகளைச் சேமிப்பதற்கான புதிய பின்முனை அமைப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:727
+#: data/com.jeffser.Alpaca.metainfo.xml.in:744
 msgid "Added: Support for changing Ollama's overrides"
 msgstr "சேர்க்கப்பட்டது: ஓல்லமாவின் மேலொழுக்கங்களை மாற்றுவதற்கான ஆதரவு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:728
+#: data/com.jeffser.Alpaca.metainfo.xml.in:745
 msgid "General Optimization"
 msgstr "பொதுவான மேம்பாடு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:737
+#: data/com.jeffser.Alpaca.metainfo.xml.in:754
 msgid "Added: Support for GGUF models (experimental)"
 msgstr "சேர்க்கப்பட்டது: GGUF மாதிரிகளுக்கான ஆதரவு (சோதனை)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:738
+#: data/com.jeffser.Alpaca.metainfo.xml.in:755
 msgid "Added: Support for customization and creation of models"
 msgstr "சேர்க்கப்பட்டது: மாதிரிகளைத் தனிப்பயனாக்குதல் மற்றும் உருவாக்குவதற்கான ஆதரவு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:739
+#: data/com.jeffser.Alpaca.metainfo.xml.in:756
 msgid "Fixed: Icons don't appear on non Gnome systems"
 msgstr "சரி செய்யப்பட்டது: க்னோம் அல்லாத அமைப்புகளில் சின்னங்கள் தோன்றவில்லை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:740
+#: data/com.jeffser.Alpaca.metainfo.xml.in:757
 msgid "Update Ollama to v0.1.39"
 msgstr "ஓல்லமாவை v0.1.39 க்கு புதுப்பிக்கவும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:749
+#: data/com.jeffser.Alpaca.metainfo.xml.in:766
 msgid ""
 "Fixed: app didn't open if models tweaks wasn't present in the config files"
 msgstr ""
 "சரி செய்யப்பட்டது: கட்டமைப்பு கோப்புகளில் மாடல் மாற்றங்கள் இல்லாவிட்டால் பயன்பாடு "
 "திறக்கப்படவில்லை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:758
+#: data/com.jeffser.Alpaca.metainfo.xml.in:775
 msgid "Changed multiple icons (paper airplane for the send button)"
 msgstr "பல சின்னங்களை மாற்றியது (அனுப்பு பொத்தானுக்கு காகித விமானம்)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:759
+#: data/com.jeffser.Alpaca.metainfo.xml.in:776
 msgid "Combined export / import chat buttons into a menu"
 msgstr "ஏற்றுமதி / இறக்குமதி அரட்டை பொத்தான்களை ஒரு மெனுவில் இணைத்தது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:760
+#: data/com.jeffser.Alpaca.metainfo.xml.in:777
 msgid "Added 'model tweaks' (temperature, seed, keep_alive)"
 msgstr "'மாடல் மாற்றங்கள்' சேர்க்கப்பட்டது (வெப்பநிலை, விதை, keep_alive)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:761
+#: data/com.jeffser.Alpaca.metainfo.xml.in:778
 msgid "Fixed send / stop button"
 msgstr "அனுப்பு / நிறுத்து பொத்தான் சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:762
+#: data/com.jeffser.Alpaca.metainfo.xml.in:779
 msgid "Fixed app not checking if remote connection works when starting"
 msgstr "தொடக்கத்தில் தொலைநிலை இணைப்பு செயல்படுகிறதா என்பதை பயன்பாடு சரிபார்க்கவில்லை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:769
+#: data/com.jeffser.Alpaca.metainfo.xml.in:786
 msgid "Daily Update"
 msgstr "தினசரி புதுப்பிப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:771
+#: data/com.jeffser.Alpaca.metainfo.xml.in:788
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
 msgstr "அரட்டை பெயருக்கு உரை நீள்வட்டம் சேர்க்கப்பட்டது, அதனால் பொத்தான் அகலம் மாறாது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:772
+#: data/com.jeffser.Alpaca.metainfo.xml.in:789
 msgid "New shortcut for creating a chat (CTRL+N)"
 msgstr "ஒரு அரட்டையை உருவாக்குவதற்கான புதிய குறுக்குவழி (CTRL+N)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:773
+#: data/com.jeffser.Alpaca.metainfo.xml.in:790
 msgid "New message entry design"
 msgstr "புதிய செய்தி நுழைவு வடிவமைப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:774
+#: data/com.jeffser.Alpaca.metainfo.xml.in:791
 msgid "Fixed: Can't rename the same chat multiple times"
 msgstr "சரி செய்யப்பட்டது: ஒரே அரட்டையை பல முறை மறுபெயரிட முடியாது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:781
+#: data/com.jeffser.Alpaca.metainfo.xml.in:798
 msgid "The fix"
 msgstr "திருத்தம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:783
+#: data/com.jeffser.Alpaca.metainfo.xml.in:800
 msgid ""
 "Fixed: Ollama instance keeps running on the background even when it is "
 "disabled"
 msgstr "சரி செய்யப்பட்டது: முடக்கினாலும் ஓல்லமா நிகழ்வு பின்னணியில் தொடர்ந்து இயங்குகிறது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:784
+#: data/com.jeffser.Alpaca.metainfo.xml.in:801
 msgid "Fixed: Can't pull models on the integrated instance"
 msgstr "சரி செய்யப்பட்டது: ஒருங்கிணைந்த நிகழ்வில் மாதிரிகளை இழுக்க முடியாது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:791
+#: data/com.jeffser.Alpaca.metainfo.xml.in:808
 msgid "Quick tweaks"
 msgstr "விரைவான மாற்றங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:793
+#: data/com.jeffser.Alpaca.metainfo.xml.in:810
 msgid "Added progress bar to models that are being pulled"
 msgstr "இழுக்கப்படும் மாதிரிகளுக்கு முன்னேற்றப் பட்டை சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:794
+#: data/com.jeffser.Alpaca.metainfo.xml.in:811
 msgid "Added size to tags when pulling a model"
 msgstr "ஒரு மாதிரியை இழுக்கும்போது குறிச்சொற்களுக்கு அளவு சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:795
+#: data/com.jeffser.Alpaca.metainfo.xml.in:812
 msgid "General optimizations on the background"
 msgstr "பின்னணியில் பொதுவான மேம்பாடுகள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:802
+#: data/com.jeffser.Alpaca.metainfo.xml.in:819
 msgid "Quick fixes"
 msgstr "விரைவான திருத்தங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:804
+#: data/com.jeffser.Alpaca.metainfo.xml.in:821
 msgid "Fixed: Scroll when message is received"
 msgstr "சரி செய்யப்பட்டது: செய்தி பெறப்படும்போது உருள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:805
+#: data/com.jeffser.Alpaca.metainfo.xml.in:822
 msgid "Fixed: Content doesn't change when creating a new chat"
 msgstr "சரி செய்யப்பட்டது: புதிய அரட்டையை உருவாக்கும்போது உள்ளடக்கம் மாறவில்லை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:806
+#: data/com.jeffser.Alpaca.metainfo.xml.in:823
 msgid "Added 'Featured Models' page on welcome dialog"
 msgstr "வரவேற்பு உரையாடலில் 'சிறப்பு மாதிரிகள்' பக்கம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:813
+#: data/com.jeffser.Alpaca.metainfo.xml.in:830
 msgid "Nice Update"
 msgstr "நல்ல புதுப்பிப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:815
+#: data/com.jeffser.Alpaca.metainfo.xml.in:832
 msgid "UI tweaks (Thanks Nokse22)"
 msgstr "UI மாற்றங்கள் (நன்றி நோக்ஸ்22)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:817
+#: data/com.jeffser.Alpaca.metainfo.xml.in:834
 msgid "Metadata fixes"
 msgstr "மெட்டாடேட்டா திருத்தங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:824
+#: data/com.jeffser.Alpaca.metainfo.xml.in:841
 msgid "Quick fix"
 msgstr "விரைவான திருத்தம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:826
+#: data/com.jeffser.Alpaca.metainfo.xml.in:843
 msgid "Updated Spanish translation"
 msgstr "ஸ்பானிஷ் மொழிபெயர்ப்பு புதுப்பிக்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:827
+#: data/com.jeffser.Alpaca.metainfo.xml.in:844
 msgid "Added compatibility for PNG"
 msgstr "PNG க்கான இணக்கத்தன்மை சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:834
+#: data/com.jeffser.Alpaca.metainfo.xml.in:851
 msgid "New Update"
 msgstr "புதிய புதுப்பிப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:836
+#: data/com.jeffser.Alpaca.metainfo.xml.in:853
 msgid "Updated model list"
 msgstr "புதுப்பிக்கப்பட்ட மாதிரி பட்டியல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:837
+#: data/com.jeffser.Alpaca.metainfo.xml.in:854
 msgid "Added image recognition to more models"
 msgstr "மேலும் பல மாதிரிகளுக்கு பட அங்கீகாரம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:838
+#: data/com.jeffser.Alpaca.metainfo.xml.in:855
 msgid "Added Brazilian Portuguese translation (Thanks Daimaar Stein)"
 msgstr "பிரேசிலிய போர்த்துகீசிய மொழிபெயர்ப்பு சேர்க்கப்பட்டது (நன்றி டைமர் ஸ்டெயின்)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:839
+#: data/com.jeffser.Alpaca.metainfo.xml.in:856
 msgid "Refined the general UI (Thanks Nokse22)"
 msgstr "பொது UI சுத்திகரிக்கப்பட்டது (நன்றி நோக்ஸ்22)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:840
+#: data/com.jeffser.Alpaca.metainfo.xml.in:857
 msgid "Added 'delete message' feature"
 msgstr "'செய்தியை நீக்கு' அம்சம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:841
+#: data/com.jeffser.Alpaca.metainfo.xml.in:858
 msgid ""
 "Added metadata so that software distributors know that the app is compatible "
 "with mobile"
@@ -1520,7 +1545,7 @@ msgstr ""
 "மென்பொருள் விநியோகஸ்தர்களுக்கு பயன்பாடு மொபைலுடன் இணக்கமானது என்பதைத் தெரிந்துகொள்ள "
 "மெட்டாடேட்டா சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:842
+#: data/com.jeffser.Alpaca.metainfo.xml.in:859
 msgid ""
 "Changed 'send' shortcut to just the return/enter key (to add a new line use "
 "shift+return)"
@@ -1528,108 +1553,108 @@ msgstr ""
 "'அனுப்பு' குறுக்குவழி வெறும் return/enter விசைக்கு மாற்றப்பட்டது (ஒரு புதிய வரியைச் "
 "சேர்க்க shift+return ஐப் பயன்படுத்தவும்)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:849
+#: data/com.jeffser.Alpaca.metainfo.xml.in:866
 msgid "Bug Fixes"
 msgstr "பிழை திருத்தங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:851
+#: data/com.jeffser.Alpaca.metainfo.xml.in:868
 msgid "Fixed: Minor spelling mistake"
 msgstr "சரி செய்யப்பட்டது: சிறிய எழுத்துப் பிழை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:852
+#: data/com.jeffser.Alpaca.metainfo.xml.in:869
 msgid "Added 'mobile' as a supported form factor"
 msgstr "'மொபைல்' ஒரு ஆதரவான வடிவக் காரணியாக சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:853
+#: data/com.jeffser.Alpaca.metainfo.xml.in:870
 msgid "Fixed: 'Connection Error' dialog not working properly"
 msgstr "சரி செய்யப்பட்டது: 'இணைப்பு பிழை' உரையாடல் சரியாக வேலை செய்யவில்லை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:854
+#: data/com.jeffser.Alpaca.metainfo.xml.in:871
 msgid "Fixed: App might freeze randomly on startup"
 msgstr "சரி செய்யப்பட்டது: தொடக்கத்தில் பயன்பாடு சீரற்ற முறையில் முடக்கப்படலாம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:855
+#: data/com.jeffser.Alpaca.metainfo.xml.in:872
 msgid "Changed 'chats' label on sidebar for 'Alpaca'"
 msgstr "பக்கவாட்டுப் பட்டியில் உள்ள 'அரட்டைகள்' லேபிளை 'அல்பாகா' என்று மாற்றியது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:862
+#: data/com.jeffser.Alpaca.metainfo.xml.in:879
 msgid "Cool Update"
 msgstr "கூல் புதுப்பிப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:864
+#: data/com.jeffser.Alpaca.metainfo.xml.in:881
 msgid "Better design for chat window"
 msgstr "அரட்டை சாளரத்திற்கான சிறந்த வடிவமைப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:865
+#: data/com.jeffser.Alpaca.metainfo.xml.in:882
 msgid "Better design for chat sidebar"
 msgstr "அரட்டை பக்கவாட்டுப் பட்டிக்கான சிறந்த வடிவமைப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:866
+#: data/com.jeffser.Alpaca.metainfo.xml.in:883
 msgid "Fixed remote connections"
 msgstr "தொலைநிலை இணைப்புகள் சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:867
+#: data/com.jeffser.Alpaca.metainfo.xml.in:884
 msgid "Fixed Ollama restarting in loop"
 msgstr "ஓல்லமா மீண்டும் மீண்டும் சுழல்வதை சரி செய்தது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:868
+#: data/com.jeffser.Alpaca.metainfo.xml.in:885
 msgid "Other cool backend stuff"
 msgstr "மற்ற சிறந்த பின்முனை விஷயங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:877
+#: data/com.jeffser.Alpaca.metainfo.xml.in:894
 msgid "Added Ollama as part of Alpaca, Ollama will run in a sandbox"
 msgstr ""
 "அல்பாகாவின் ஒரு பகுதியாக ஓல்லமா சேர்க்கப்பட்டது, ஓல்லமா ஒரு மணல் பெட்டியில் இயங்கும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:878
+#: data/com.jeffser.Alpaca.metainfo.xml.in:895
 msgid "Added option to connect to remote instances (how it worked before)"
 msgstr ""
 "தொலைநிலை நிகழ்வுகளுடன் இணைக்கும் விருப்பம் சேர்க்கப்பட்டது (முன்பு அது எப்படி வேலை "
 "செய்தது)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:879
+#: data/com.jeffser.Alpaca.metainfo.xml.in:896
 msgid "Added option to import and export chats"
 msgstr "அரட்டைகளை இறக்குமதி மற்றும் ஏற்றுமதி செய்வதற்கான விருப்பம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:880
+#: data/com.jeffser.Alpaca.metainfo.xml.in:897
 msgid "Added option to run Alpaca with Ollama in the background"
 msgstr "பின்னணியில் ஓல்லமாவுடன் அல்பாகாவை இயக்குவதற்கான விருப்பம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:881
+#: data/com.jeffser.Alpaca.metainfo.xml.in:898
 msgid "Added preferences dialog"
 msgstr "விருப்பங்கள் உரையாடல் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:882
+#: data/com.jeffser.Alpaca.metainfo.xml.in:899
 msgid "Changed the welcome dialog"
 msgstr "வரவேற்பு உரையாடல் மாற்றப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:884
 #: data/com.jeffser.Alpaca.metainfo.xml.in:901
-#: data/com.jeffser.Alpaca.metainfo.xml.in:913
-#: data/com.jeffser.Alpaca.metainfo.xml.in:932
-#: data/com.jeffser.Alpaca.metainfo.xml.in:953
-#: data/com.jeffser.Alpaca.metainfo.xml.in:969
-#: data/com.jeffser.Alpaca.metainfo.xml.in:985
-#: data/com.jeffser.Alpaca.metainfo.xml.in:999
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1009
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1027
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1049
+#: data/com.jeffser.Alpaca.metainfo.xml.in:918
+#: data/com.jeffser.Alpaca.metainfo.xml.in:930
+#: data/com.jeffser.Alpaca.metainfo.xml.in:949
+#: data/com.jeffser.Alpaca.metainfo.xml.in:970
+#: data/com.jeffser.Alpaca.metainfo.xml.in:986
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1002
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1016
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1026
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1044
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1066
 msgid "Please report any errors to the issues page, thank you."
 msgstr "எந்தவொரு பிழையையும் சிக்கல்கள் பக்கத்தில் புகாரளிக்கவும், நன்றி."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:892
+#: data/com.jeffser.Alpaca.metainfo.xml.in:909
 msgid "Yet Another Daily Update"
 msgstr "மீண்டும் ஒரு தினசரி புதுப்பிப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:894
+#: data/com.jeffser.Alpaca.metainfo.xml.in:911
 msgid "Added better UI for 'Manage Models' dialog"
 msgstr "'மாடல்களை நிர்வகி' உரையாடலுக்கான சிறந்த UI சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:895
+#: data/com.jeffser.Alpaca.metainfo.xml.in:912
 msgid "Added better UI for the chat sidebar"
 msgstr "அரட்டை பக்கவாட்டுப் பட்டிக்கான சிறந்த UI சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:896
+#: data/com.jeffser.Alpaca.metainfo.xml.in:913
 msgid ""
 "Replaced model description with a button to open Ollama's website for the "
 "model"
@@ -1637,47 +1662,47 @@ msgstr ""
 "மாதிரி விளக்கத்தை மாதிரிக்கான ஓல்லமாவின் வலைத்தளத்தைத் திறப்பதற்கான ஒரு பொத்தானுடன் "
 "மாற்றியது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:897
+#: data/com.jeffser.Alpaca.metainfo.xml.in:914
 msgid "Added myself to the credits as the spanish translator"
 msgstr "ஸ்பானிஷ் மொழிபெயர்ப்பாளராக நான் வரவு வைக்கப்பட்டுள்ளேன்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:898
+#: data/com.jeffser.Alpaca.metainfo.xml.in:915
 msgid "Using XDG properly to get config folder"
 msgstr "கட்டமைப்பு கோப்புறையைப் பெற XDG ஐ சரியாகப் பயன்படுத்துதல்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:899
+#: data/com.jeffser.Alpaca.metainfo.xml.in:916
 msgid "Update for translations"
 msgstr "மொழிபெயர்ப்புகளுக்கான புதுப்பிப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:911
+#: data/com.jeffser.Alpaca.metainfo.xml.in:928
 msgid "The last update had some mistakes in the description of the update"
 msgstr "கடைசி புதுப்பிப்பில் புதுப்பிப்பு விளக்கத்தில் சில தவறுகள் இருந்தன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:921
+#: data/com.jeffser.Alpaca.metainfo.xml.in:938
 msgid "Another Daily Update"
 msgstr "மற்றொரு தினசரி புதுப்பிப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:923
+#: data/com.jeffser.Alpaca.metainfo.xml.in:940
 msgid "Added full Spanish translation"
 msgstr "முழு ஸ்பானிஷ் மொழிபெயர்ப்பு சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:924
+#: data/com.jeffser.Alpaca.metainfo.xml.in:941
 msgid "Added support for background pulling of multiple models"
 msgstr "பல மாதிரிகளை பின்னணியில் இழுப்பதற்கான ஆதரவு சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:925
+#: data/com.jeffser.Alpaca.metainfo.xml.in:942
 msgid "Added interrupt button"
 msgstr "இடைமறிப்பு பொத்தான் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:926
+#: data/com.jeffser.Alpaca.metainfo.xml.in:943
 msgid "Added basic shortcuts"
 msgstr "அடிப்படை குறுக்குவழிகள் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:927
+#: data/com.jeffser.Alpaca.metainfo.xml.in:944
 msgid "Better translation support"
 msgstr "சிறந்த மொழிபெயர்ப்பு ஆதரவு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:928
+#: data/com.jeffser.Alpaca.metainfo.xml.in:945
 msgid ""
 "User can now leave chat name empty when creating a new one, it will add a "
 "placeholder name"
@@ -1685,127 +1710,127 @@ msgstr ""
 "ஒரு புதிய அரட்டையை உருவாக்கும்போது பயனர் அரட்டை பெயரை காலியாக விடலாம், அது ஒரு "
 "இடத்தைக் குறிக்கும் பெயரைச் சேர்க்கும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:929
+#: data/com.jeffser.Alpaca.metainfo.xml.in:946
 msgid "Better scalling for different window sizes"
 msgstr "வெவ்வேறு சாளர அளவுகளுக்கு சிறந்த அளவீடு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:930
+#: data/com.jeffser.Alpaca.metainfo.xml.in:947
 msgid "Fixed: Can't close app if first time setup fails"
 msgstr "சரி செய்யப்பட்டது: முதல் முறை அமைப்பு தோல்வியுற்றால் பயன்பாட்டை மூட முடியாது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:940
+#: data/com.jeffser.Alpaca.metainfo.xml.in:957
 msgid "Really Big Update"
 msgstr "உண்மையில் பெரிய புதுப்பிப்பு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:942
+#: data/com.jeffser.Alpaca.metainfo.xml.in:959
 msgid "Added multiple chats support!"
 msgstr "பல அரட்டைகளுக்கான ஆதரவு சேர்க்கப்பட்டது!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:943
+#: data/com.jeffser.Alpaca.metainfo.xml.in:960
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
 msgstr ""
 "பாங்கோ மார்க்கப் ஆதரவு சேர்க்கப்பட்டது (தடித்த, பட்டியல், தலைப்பு, துணை தலைப்பு, மோனோஸ்பேஸ்)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:944
+#: data/com.jeffser.Alpaca.metainfo.xml.in:961
 msgid "Added autoscroll if the user is at the bottom of the chat"
 msgstr "பயனர் அரட்டையின் அடிப்பகுதியில் இருந்தால் தானாக ஸ்க்ரோல் செய்யும் அம்சம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:945
+#: data/com.jeffser.Alpaca.metainfo.xml.in:962
 msgid "Added support for multiple tags on a single model"
 msgstr "ஒரே மாதிரியில் பல குறிச்சொற்களுக்கான ஆதரவு சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:946
+#: data/com.jeffser.Alpaca.metainfo.xml.in:963
 msgid "Added better model management dialog"
 msgstr "சிறந்த மாடல் மேலாண்மை உரையாடல் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:947
+#: data/com.jeffser.Alpaca.metainfo.xml.in:964
 msgid "Added loading spinner when sending message"
 msgstr "செய்தியை அனுப்பும்போது ஏற்றுதல் சுழலி சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:948
+#: data/com.jeffser.Alpaca.metainfo.xml.in:965
 msgid "Added notifications if app is not active and a model pull finishes"
 msgstr ""
 "பயன்பாடு செயலில் இல்லை மற்றும் ஒரு மாடல் இழுப்பது முடிந்தால் அறிவிப்புகள் சேர்க்கப்பட்டன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:949
+#: data/com.jeffser.Alpaca.metainfo.xml.in:966
 msgid "Added new symbolic icon"
 msgstr "புதிய அடையாளச் சின்னம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:950
+#: data/com.jeffser.Alpaca.metainfo.xml.in:967
 msgid "Added frame to message textview widget"
 msgstr "செய்தி உரைக்காட்சி விட்ஜெட்டிற்கு ஃபிரேம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:951
+#: data/com.jeffser.Alpaca.metainfo.xml.in:968
 msgid "Fixed \"code blocks shouldn't be editable\""
 msgstr "\"குறியீடு தொகுதிகளைத் திருத்த முடியாது\" சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:963
+#: data/com.jeffser.Alpaca.metainfo.xml.in:980
 msgid "Added code highlighting"
 msgstr "குறியீடு சிறப்பம்சம் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:964
+#: data/com.jeffser.Alpaca.metainfo.xml.in:981
 msgid "Added image recognition (llava model)"
 msgstr "பட அங்கீகாரம் சேர்க்கப்பட்டது (ல்லாவா மாதிரி)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:965
+#: data/com.jeffser.Alpaca.metainfo.xml.in:982
 msgid "Added multiline prompt"
 msgstr "பல வரி ப்ராம்ப் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:966
+#: data/com.jeffser.Alpaca.metainfo.xml.in:983
 msgid "Fixed some small bugs"
 msgstr "சில சிறிய பிழைகள் சரிசெய்யப்பட்டன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:967
+#: data/com.jeffser.Alpaca.metainfo.xml.in:984
 msgid "General optimization"
 msgstr "பொதுவான மேம்பாடு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:977
+#: data/com.jeffser.Alpaca.metainfo.xml.in:994
 msgid "Fixes and features"
 msgstr "திருத்தங்கள் மற்றும் அம்சங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:979
+#: data/com.jeffser.Alpaca.metainfo.xml.in:996
 msgid "Russian translation (thanks github/alexkdeveloper)"
 msgstr "ரஷ்ய மொழிபெயர்ப்பு (நன்றி github/alexkdeveloper)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:980
+#: data/com.jeffser.Alpaca.metainfo.xml.in:997
 msgid "Fixed: Cannot close app on first setup"
 msgstr "சரி செய்யப்பட்டது: முதல் அமைப்பில் பயன்பாட்டை மூட முடியாது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:981
+#: data/com.jeffser.Alpaca.metainfo.xml.in:998
 msgid "Fixed: Brand colors for Flathub"
 msgstr "சரி செய்யப்பட்டது: Flathub க்கான பிராண்ட் வண்ணங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:982
+#: data/com.jeffser.Alpaca.metainfo.xml.in:999
 msgid "Fixed: App description"
 msgstr "சரி செய்யப்பட்டது: பயன்பாட்டு விளக்கம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:983
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1000
 msgid "Fixed: Only show 'save changes dialog' when you actually change the url"
 msgstr ""
 "சரி செய்யப்பட்டது: நீங்கள் உண்மையில் url ஐ மாற்றினால் மட்டுமே 'மாற்றங்களை சேமி' உரையாடலைக் "
 "காட்டு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:993
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1010
 msgid "0.2.2 Bug fixes"
 msgstr "0.2.2 பிழை திருத்தங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:995
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1012
 msgid "Toast messages appearing behind dialogs"
 msgstr "உரையாடல்களுக்குப் பின்னால் தோன்றும் டோஸ்ட் செய்திகள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:996
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1013
 msgid "Local model list not updating when changing servers"
 msgstr "சேவையகங்களை மாற்றும்போது உள்ளூர் மாதிரி பட்டியல் புதுப்பிக்கப்படவில்லை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:997
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1014
 msgid "Closing the setup dialog closes the whole app"
 msgstr "அமைப்பு உரையாடலை மூடுவது முழு பயன்பாட்டையும் மூடிவிடும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1007
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1024
 msgid "0.2.1 Data saving fix"
 msgstr "0.2.1 தரவு சேமிப்பு திருத்தம்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1008
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1025
 msgid ""
 "The app didn't save the config files and chat history to the right "
 "directory, this is now fixed"
@@ -1813,50 +1838,50 @@ msgstr ""
 "பயன்பாடு கட்டமைப்பு கோப்புகள் மற்றும் அரட்டை வரலாற்றை சரியான கோப்பகத்தில் சேமிக்கவில்லை, "
 "இது இப்போது சரி செய்யப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1017
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1034
 msgid "0.2.0"
 msgstr "0.2.0"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1019
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1036
 msgid "New Features"
 msgstr "புதிய அம்சங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1021
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1038
 msgid "Restore chat after closing the app"
 msgstr "பயன்பாட்டை மூடிய பின் அரட்டையை மீட்டமைக்கவும்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1022
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1039
 msgid "A button to clear the chat"
 msgstr "அரட்டையை அழிக்க ஒரு பொத்தான்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1023
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1040
 msgid "Fixed multiple bugs involving how messages are shown"
 msgstr "செய்திகள் எவ்வாறு காட்டப்படுகின்றன என்பது தொடர்பான பல பிழைகள் சரி செய்யப்பட்டன"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1024
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1041
 msgid "Added welcome dialog"
 msgstr "வரவேற்பு உரையாடல் சேர்க்கப்பட்டது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1025
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1042
 msgid "More stability"
 msgstr "மேலும் நிலைத்தன்மை"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1035
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1052
 msgid "0.1.2 Quick fixes"
 msgstr "0.1.2 விரைவான திருத்தங்கள்"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1036
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1053
 msgid ""
 "This release fixes some metadata needed to have a proper Flatpak application"
 msgstr ""
 "ஒரு சரியான Flatpak பயன்பாட்டைக் கொண்டிருக்கத் தேவையான சில மெட்டாடேட்டாவை இந்தப் பதிப்பு "
 "சரிசெய்கிறது"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1042
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1059
 msgid "0.1.1 Stable Release"
 msgstr "0.1.1 நிலையான வெளியீடு"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1043
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1060
 msgid "This is the first public version of Alpaca"
 msgstr "இது அல்பாகாவின் முதல் பொது பதிப்பாகும்"
 
