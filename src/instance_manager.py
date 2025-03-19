@@ -106,7 +106,7 @@ class base_instance:
                             )
                             window.sql_instance.add_attachment(bot_message, attachment)
         except Exception as e:
-
+            dialog_widget.simple_error(_('Action Error'), _('An error occurred while running action'), e)
             logger.error(e)
 
         action_manager.log_to_message("Generating message...", bot_message, True)

@@ -428,7 +428,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             m_element_bot = current_chat.add_message(bot_id, datetime.now(), current_model, False)
             m_element_bot.set_text()
             m_element_bot.footer.options_button.set_sensitive(False)
-            #self.sql_instance.insert_or_update_message(m_element_bot)
+            self.sql_instance.insert_or_update_message(m_element_bot)
             threading.Thread(target=self.get_current_instance().use_actions, args=(m_element_bot, current_model)).start()
 
     @Gtk.Template.Callback()
