@@ -252,7 +252,7 @@ class local_model_page(Gtk.Box):
         parent_model = self.model.data.get('details', {}).get('parent_model')
         metadata={
             _('Tag'): window.convert_model_name(self.model.get_name(), 2)[1],
-            _('Family'): self.model.data.get('details', {}).get('family'),
+            _('Family'): window.convert_model_name(self.model.data.get('details', {}).get('family'), 0),
             _('Parameter Size'): self.model.data.get('details', {}).get('parameter_size'),
             _('Quantization Level'): self.model.data.get('details', {}).get('quantization_level')
         }
