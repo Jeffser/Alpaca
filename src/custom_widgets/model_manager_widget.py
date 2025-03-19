@@ -8,6 +8,7 @@ gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject
 import logging, os, datetime, re, threading, json, sys, glob, icu, base64, hashlib
 from ..internal import source_dir
+from ..constants import Platforms
 from .. import available_models_descriptions
 from . import dialog_widget
 
@@ -272,6 +273,21 @@ class local_model_page(Gtk.Box):
         if self.model.data.get('description'):
             self.append(self.info_box(_('Description'), self.model.data.get('description'), False))
 
+        if sys.platform != Platforms.mac_os:
+            categories_box = Adw.WrapBox(
+                hexpand=True,
+                line_spacing=5,
+                child_spacing=5,
+                justify=0,
+                halign=1
+            )
+            self.append(categories_box)
+            categories = available_models.get(self.model.get_name().split(':')[0], {}).get('categories', [])
+            if not categories:
+                categories = available_models.get(self.model.data.get('details', {}).get('parent_model').split(':')[0], {}).get('categories', [])
+            for category in categories:
+                categories_box.append(category_pill(category, True))
+
         self.model.image_container.connect('notify::child', lambda *_: self.update_profile_picture())
 
     def update_profile_picture(self):
@@ -448,7 +464,7 @@ class category_pill(Adw.Bin):
         'vision': {'name': _('Vision'), 'css': ['accent'], 'icon': 'eye-open-negative-filled-symbolic'},
         'embedding': {'name': _('Embedding'), 'css': ['error'], 'icon': 'brain-augemnted-symbolic'},
         'small': {'name': _('Small'), 'css': ['success'], 'icon': 'leaf-symbolic'},
-        'medium': {'name': _('Medium'), 'css': ['success'], 'icon': 'sprout-symbolic'},
+        'medium': {'name': _('Medium'), 'css': ['brown'], 'icon': 'sprout-symbolic'},
         'big': {'name': _('Big'), 'css': ['warning'], 'icon': 'tree-circle-symbolic'},
         'huge': {'name': _('Huge'), 'css': ['error'], 'icon': 'weight-symbolic'},
         'language': {'css': [], 'icon': 'language-symbolic'}
@@ -469,10 +485,10 @@ class category_pill(Adw.Bin):
                 use_markup=True
             ))
         super().__init__(
-            css_classes=['subtitle', 'category_pill'] + self.metadata[name_id]['css'] + (['pill'] if show_label else ['circular']),
+            css_classes=['subtitle', 'category_pill'] + self.metadata[name_id]['css'] + ([] if show_label else ['circle']),
             tooltip_text=self.metadata[name_id]['name'],
             child=button_content,
-            halign=0,
+            halign=0 if show_label else 1,
             focusable=False,
             hexpand=True
         )
@@ -499,11 +515,19 @@ class available_model_page(Gtk.Box):
             justify=2
         )
         self.append(title_label)
-        categories_box = Gtk.FlowBox(
-            hexpand=True,
-            selection_mode=0,
-            max_children_per_line=2
-        )
+        if sys.platform == Platforms.mac_os:
+            categories_box = Gtk.FlowBox(
+                hexpand=True,
+                selection_mode=0,
+                max_children_per_line=2
+            )
+        else:
+            categories_box = Adw.WrapBox(
+                hexpand=True,
+                line_spacing=5,
+                child_spacing=5,
+                justify=1
+            )
         self.append(categories_box)
         for category in self.model.data.get('categories', []) + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in self.model.data.get('languages', [])]:
             categories_box.append(category_pill(category, True))
@@ -568,17 +592,17 @@ class available_model(Gtk.Box):
             halign=1
         )
         self.append(description_label)
-        if os.getenv('ALPACA_SHOW_TAGS_ON_LIST', '0') == '1':
-            categories_box = Gtk.FlowBox(
+        if sys.platform != Platforms.mac_os:
+            categories_box = Adw.WrapBox(
                 hexpand=True,
-                selection_mode=0,
-                vexpand=True,
-                row_spacing=5,
-                column_spacing=5
+                line_spacing=5,
+                child_spacing=5,
+                justify=0,
+                halign=1
             )
             self.append(categories_box)
             for category in self.data.get('categories', []):
-                categories_box.append(category_pill(category, True))
+                categories_box.append(category_pill(category, False))
         self.page = None
 
     def get_default_widget(self):

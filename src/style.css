@@ -39,7 +39,29 @@ stacksidebar {
   border: none;
 }
 .category_pill {
-  padding: 0px 10px;
+  padding: 5px 10px;
+  border-radius: 9999px;
+  background-color: mix(var(--window-fg-color), var(--window-bg-color), 0.9);
+}
+.category_pill.circle {
+  border-radius: 100%;
+  padding: 10px 10px;
+}
+.category_pill.success {
+  background-color: mix(var(--success-bg-color), var(--window-bg-color), 0.8);
+}
+.category_pill.error {
+  background-color: mix(var(--error-bg-color), var(--window-bg-color), 0.8);
+}
+.category_pill.warning {
+  background-color: mix(var(--warning-bg-color), var(--window-bg-color), 0.8);
+}
+.category_pill.accent {
+  background-color: mix(var(--accent-bg-color), var(--window-bg-color), 0.8);
+}
+.category_pill.brown {
+  color: mix(var(--brown-1), var(--window-fg-color), 0.4);
+  background-color: mix(var(--brown-2), var(--window-bg-color), 0.8);
 }
 .code_block {
   font-family: monospace;
