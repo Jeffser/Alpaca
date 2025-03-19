@@ -283,9 +283,11 @@ class local_model_page(Gtk.Box):
             )
             self.append(categories_box)
             categories = available_models.get(self.model.get_name().split(':')[0], {}).get('categories', [])
+            languages = available_models.get(self.model.get_name().split(':')[0], {}).get('languages', [])
             if not categories:
                 categories = available_models.get(self.model.data.get('details', {}).get('parent_model').split(':')[0], {}).get('categories', [])
-            for category in categories:
+                languages = available_models.get(self.model.data.get('details', {}).get('parent_model').split(':')[0], {}).get('languages', [])
+            for category in categories + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]:
                 if category not in ('small', 'medium', 'big', 'huge'):
                     categories_box.append(category_pill(category, True))
 
@@ -479,15 +481,15 @@ class category_pill(Adw.Bin):
             spacing=5,
             halign=3
         )
-        button_content.append(Gtk.Image.new_from_icon_name(self.metadata[name_id]['icon']))
+        button_content.append(Gtk.Image.new_from_icon_name(self.metadata.get(name_id, {}).get('icon', 'language-symbolic')))
         if show_label:
             button_content.append(Gtk.Label(
-                label='<span weight="bold">{}</span>'.format(self.metadata[name_id]['name']),
+                label='<span weight="bold">{}</span>'.format(self.metadata.get(name_id, {}).get('name')),
                 use_markup=True
             ))
         super().__init__(
-            css_classes=['subtitle', 'category_pill'] + self.metadata[name_id]['css'] + ([] if show_label else ['circle']),
-            tooltip_text=self.metadata[name_id]['name'],
+            css_classes=['subtitle', 'category_pill'] + self.metadata.get(name_id, {}).get('css', []) + ([] if show_label else ['circle']),
+            tooltip_text=self.metadata.get(name_id, {}).get('name'),
             child=button_content,
             halign=0 if show_label else 1,
             focusable=False,
