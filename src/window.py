@@ -109,6 +109,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     message_searchbar = Gtk.Template.Child()
     searchentry_messages = Gtk.Template.Child()
     title_stack = Gtk.Template.Child()
+    title_no_model_button = Gtk.Template.Child()
 
     file_filter_db = Gtk.Template.Child()
     file_filter_gguf = Gtk.Template.Child()
@@ -1147,6 +1148,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
         self.model_dropdown.set_factory(factory)
         list(list(self.model_dropdown)[1].get_child())[1].set_propagate_natural_width(True)
+        list(list(self.title_no_model_button.get_child())[0])[1].set_ellipsize(3)
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
