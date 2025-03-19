@@ -106,7 +106,7 @@ class base_instance:
                             )
                             window.sql_instance.add_attachment(bot_message, attachment)
         except Exception as e:
-            window.show_toast(_("'{}' does not support actions.").format(window.convert_model_name(model, 0)), window.main_overlay)
+
             logger.error(e)
 
         action_manager.log_to_message("Generating message...", bot_message, True)

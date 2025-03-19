@@ -387,6 +387,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             return
 
         current_model = model_manager_widget.get_selected_model().get_name()
+        if 'ollama' in self.get_current_instance().instance_type and mode == 2 and 'tools' not in model_manager_widget.available_models.get(current_model.split(':')[0], {}).get('categories', []):
+            self.show_toast(_("'{}' does not support actions.").format(self.convert_model_name(current_model, 0)), self.main_overlay)
+            return
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
             return
