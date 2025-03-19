@@ -5,7 +5,7 @@ logger = logging.getLogger(__name__)
 
 import datetime, time, random, threading, requests
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, Gtk, GLib
 
 window = None
 
@@ -235,7 +235,7 @@ class get_recipe_by_name(action):
 class get_recipes_by_category(action):
     tool = {
         "name": "get_recipes_by_category",
-        "description": "Gets a list of food recipes names and IDs filtered by category in JSON format",
+        "description": "Gets a list of food recipes names filtered by category",
         "parameters": {
             "type": "object",
             "properties": {
@@ -272,10 +272,7 @@ class get_recipes_by_category(action):
         if response.status_code == 200:
             data = []
             for meal in response.json().get("meals", []):
-                data.append({
-                    "name": meal.get("strMeal"),
-                    "id": meal.get("idMeal")
-                })
+                data.append('- {}'.format(meal.get("strMeal")))
 
             if arguments.get("mode", "list of meals") == "single recipe":
                 response2 = requests.get('www.themealdb.com/api/json/v1/1/lookup.php?i={}'.format(random.choice(data).get('id')))
@@ -295,7 +292,7 @@ class get_recipes_by_category(action):
                     if meal.get("strSource"):
                         attachment = bot_message.add_attachment(_("Source"), "link", meal.get("strSource"))
                         window.sql_instance.add_attachment(bot_message, attachment)
-            return json.dumps(data, indent=2)
+            return '\n'.join(data)
 
 available_actions = [get_current_datetime, get_recipes_by_category, get_recipe_by_name]
 

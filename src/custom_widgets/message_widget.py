@@ -791,6 +791,11 @@ class message(Gtk.Box):
             bf=self.content_children[-1].buffer
             bf.delete(bf.get_start_iter(), bf.get_end_iter())
         chat = self.get_chat()
+        if self.spinner and (data.get('done', False) or data.get('content', False)):
+            GLib.idle_add(self.container.remove, self.spinner)
+            self.spinner = None
+        self.content_children[-1].set_visible(True)
+
         if data.get('done', False):
             self.footer.options_button.set_sensitive(True)
             tab = window.chat_list_box.get_tab_by_name(chat.get_name())
@@ -811,12 +816,7 @@ class message(Gtk.Box):
             sys.exit()
         elif data.get('content', False):
             vadjustment = chat.scrolledwindow.get_vadjustment()
-            if self.spinner:
-                GLib.idle_add(self.container.remove, self.spinner)
-                self.spinner = None
-                self.content_children[-1].set_visible(True)
-                GLib.idle_add(vadjustment.set_value, vadjustment.get_upper())
-            elif vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
+            if vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
             GLib.idle_add(write, data.get('content', ''))
         elif data.get('clear', False):
@@ -916,10 +916,5 @@ class message(Gtk.Box):
             text_b = generating_text_block()
             text_b.set_visible(False)
             self.content_children.append(text_b)
-            if self.spinner:
-                self.container.remove(self.spinner)
-                self.spinner = None
-            self.spinner = Adw.Spinner(margin_top=10, margin_bottom=10, halign=3, hexpand=True)
-            self.container.append(self.spinner)
             self.container.append(text_b)
         self.container.queue_draw()

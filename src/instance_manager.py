@@ -71,50 +71,53 @@ class base_instance:
         tools_used = []
 
         try:
+            action_manager.log_to_message("Selecting action to use...", bot_message, True)
             completion = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
                 tools=tools
             )
-            action_manager.log_to_message("Selecting action to use...", bot_message, True)
-            for call in completion.choices[0].message.tool_calls:
-                action_manager.log_to_message("Using `{}`".format(call.function.name), bot_message, True)
-                response = action_manager.run_tool(call.function.name, json.loads(call.function.arguments), messages, bot_message)
-                arguments = json.loads(call.function.arguments)
-                messages.append({
-                    "role": "tool",
-                    "tool_call_id": call.id,
-                    "content": str(response)
-                })
-                tools_used.append({
-                    "name": call.function.name,
-                    "arguments": arguments,
-                    "response": str(response)
-                })
-                action = action_manager.get_action(call.function.name)
-                if action:
-                    attachment = bot_message.add_attachment(
-                        action.name,
-                        'action',
-                        '# {}\n\n## Arguments:\n{}\n\n## Result:\n\n```\n{}\n```'.format(
-                            call.function.name,
-                            '\n'.join(['- {}: {}'.format(k,v) for k, v in arguments.items()]),
-                            str(response)
-                        )
-                    )
-                    window.sql_instance.add_attachment(bot_message, attachment)
+            if completion.choices[0] and completion.choices[0].message:
+                if completion.choices[0].message.tool_calls:
+                    for call in completion.choices[0].message.tool_calls:
+                        action_manager.log_to_message("Using `{}`".format(call.function.name), bot_message, True)
+                        response = action_manager.run_tool(call.function.name, json.loads(call.function.arguments), messages, bot_message)
+                        arguments = json.loads(call.function.arguments)
+                        messages.append({
+                            "role": "tool",
+                            "tool_call_id": call.id,
+                            "content": str(response)
+                        })
+                        tools_used.append({
+                            "name": call.function.name,
+                            "arguments": arguments,
+                            "response": str(response)
+                        })
+                        action = action_manager.get_action(call.function.name)
+                        if action:
+                            attachment = bot_message.add_attachment(
+                                action.name,
+                                'action',
+                                '# {}\n\n## Arguments:\n{}\n\n## Result:\n\n{}'.format(
+                                    call.function.name,
+                                    '\n'.join(['- {}: {}'.format(k,v) for k, v in arguments.items()]),
+                                    str(response)
+                                )
+                            )
+                            window.sql_instance.add_attachment(bot_message, attachment)
         except Exception as e:
             window.show_toast(_("'{}' does not support actions.").format(window.convert_model_name(model, 0)), window.main_overlay)
             logger.error(e)
 
         action_manager.log_to_message("Generating message...", bot_message, True)
         bot_message.update_message({'remove_css': 'dim-label'})
-        if not bot_message.spinner:
-            bot_message.spinner = Adw.Spinner()
-            bot_message.container.append(bot_message.spinner)
         self.generate_response(bot_message, chat, messages, model, tools if len(tools_used) > 0 else None)
 
     def generate_response(self, bot_message, chat, messages:list, model:str, tools:list):
+        if not bot_message.spinner:
+            bot_message.spinner = Adw.Spinner()
+            bot_message.container.append(bot_message.spinner)
+
         if self.instance_type in ('gemini', 'venice'):
             for i in range(len(messages)):
                 if messages[i].get('role') == 'system':
