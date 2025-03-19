@@ -78,8 +78,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     available_model_stack = Gtk.Template.Child()
     model_manager_stack = Gtk.Template.Child()
     instance_manager_stack = Gtk.Template.Child()
-    model_manager_sidebar = Gtk.Template.Child()
-    model_manager_sidebar_bottom_bar : Gtk.ActionBar = None
     main_navigation_view = Gtk.Template.Child()
     local_model_flowbox = Gtk.Template.Child()
     available_model_flowbox = Gtk.Template.Child()
@@ -330,24 +328,35 @@ class AlpacaWindow(Adw.ApplicationWindow):
         def set_default_sidebar():
             time.sleep(1)
             if not self.split_view_overlay_model_manager.get_show_sidebar():
-                if self.model_manager_sidebar_bottom_bar and self.model_manager_sidebar_bottom_bar.get_parent():
-                    GLib.idle_add(self.model_manager_sidebar.remove, self.model_manager_sidebar_bottom_bar)
-                GLib.idle_add(self.model_manager_sidebar.get_content().set_child, Adw.StatusPage(icon_name='brain-augemnted-symbolic'))
+                tbv = Adw.ToolbarView()
+                tbv.add_top_bar(
+                    Adw.HeaderBar(
+                        show_back_button=False,
+                        show_title=False
+                    )
+                )
+                tbv.set_content(Adw.StatusPage(icon_name='brain-augemnted-symbolic'))
+                GLib.idle_add(self.split_view_overlay_model_manager.set_sidebar, tbv)
 
         selected_children = flowbox.get_selected_children()
         if len(selected_children) > 0:
-            if not self.split_view_overlay_model_manager.get_show_sidebar():
-                self.split_view_overlay_model_manager.set_show_sidebar(True)
+            self.split_view_overlay_model_manager.set_show_sidebar(True)
             model = selected_children[0].get_child()
+            buttons, content = model.get_page()
 
-            actionbar, content = model.get_page()
-
-            if self.model_manager_sidebar_bottom_bar and self.model_manager_sidebar_bottom_bar.get_parent():
-                self.model_manager_sidebar.remove(self.model_manager_sidebar_bottom_bar)
-            self.model_manager_sidebar_bottom_bar = actionbar
-            self.model_manager_sidebar.add_bottom_bar(self.model_manager_sidebar_bottom_bar)
-            self.model_manager_sidebar.get_content().set_child(content)
-
+            tbv = Adw.ToolbarView()
+            hb = Adw.HeaderBar(
+                show_back_button=False,
+                show_title=False
+            )
+            tbv.add_top_bar(hb)
+            for btn in buttons:
+                hb.pack_start(btn)
+            tbv.set_content(Gtk.ScrolledWindow(
+                vexpand=True
+            ))
+            tbv.get_content().set_child(content)
+            self.split_view_overlay_model_manager.set_sidebar(tbv)
         else:
             self.split_view_overlay_model_manager.set_show_sidebar(False)
             threading.Thread(target=set_default_sidebar).start()

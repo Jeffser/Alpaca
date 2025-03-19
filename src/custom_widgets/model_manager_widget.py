@@ -60,6 +60,29 @@ class pulling_model_page(Gtk.Box):
         self.progressbar = Gtk.ProgressBar(show_text=True)
         self.append(self.progressbar)
 
+        stop_button = Gtk.Button(
+            child=Adw.ButtonContent(
+                icon_name='media-playback-stop-symbolic',
+                label=_('Stop Download')
+            ),
+            tooltip_text=_('Stop Download'),
+            css_classes=['destructive-action'],
+            halign=3
+        )
+        stop_button.connect('clicked', lambda button: dialog_widget.simple(
+            _('Stop Download?'),
+            _("Are you sure you want to stop pulling '{}'?").format(window.convert_model_name(self.model.get_name(), 0)),
+            self.stop_download,
+            _('Stop'),
+            'destructive'
+        ))
+        self.append(stop_button)
+
+    def stop_download(self):
+        window.local_model_flowbox.remove(self.model)
+        if len(list(window.local_model_flowbox)) == 0:
+            window.local_model_stack.set_visible_child_name('no-models')
+
 class pulling_model(Gtk.Box):
     __gtype_name__ = 'AlpacaPullingModel'
 
@@ -145,34 +168,46 @@ class pulling_model(Gtk.Box):
                 window.show_notification(_('Download Completed'), _("Model '{}' downloaded successfully.").format(self.model_title), Gio.ThemedIcon.new('document-save-symbolic'))
 
     def get_page(self):
-        def stop_download():
-            window.local_model_flowbox.remove(self)
-            if len(list(window.local_model_flowbox)) == 0:
-                window.local_model_stack.set_visible_child_name('no-models')
-
-        actionbar = Gtk.ActionBar()
-        stop_button = Gtk.Button(
-            child=Adw.ButtonContent(
-                icon_name='media-playback-stop-symbolic',
-                label=_('Stop Download')
-            ),
-            tooltip_text=_('Stop Download'),
-            css_classes=['destructive-action']
-        )
-        stop_button.connect('clicked', lambda button: dialog_widget.simple(
-            _('Stop Download?'),
-            _("Are you sure you want to stop pulling '{}'?").format(window.convert_model_name(self.get_name(), 0)),
-            stop_download,
-            _('Stop'),
-            'destructive'
-        ))
-        actionbar.set_center_widget(stop_button)
         if not self.page:
             self.page = pulling_model_page(self)
-        return actionbar, self.page
+        return [], self.page
 
 class local_model_page(Gtk.Box):
     __gtype_name__ = 'AlpacaLocalModelPage'
+
+    class info_box(Gtk.Box):
+        __gtype_name__ = 'AlpacaInformationBox'
+
+        def __init__(self, title:str, description:str, single_line_description:bool):
+            super().__init__(
+                orientation=1,
+                spacing=5,
+                name=title
+            )
+            self.append(Gtk.Label(
+                label=title,
+                css_classes=['subtitle', 'caption', 'dim-label'],
+                hexpand=True,
+                ellipsize=3,
+                tooltip_text=title,
+                halign=1
+            ))
+            if single_line_description:
+                self.append(Gtk.Label(
+                    label=description,
+                    hexpand=True,
+                    ellipsize=3,
+                    tooltip_text=description,
+                    halign=1
+                ))
+            else:
+                self.append(Gtk.Label(
+                    label=description,
+                    hexpand=True,
+                    wrap=True,
+                    tooltip_text=description,
+                    halign=0
+                ))
 
     def __init__(self, model):
         self.model = model
@@ -208,7 +243,10 @@ class local_model_page(Gtk.Box):
         self.append(title_label)
         information_container = Gtk.FlowBox(
             selection_mode=0,
-            homogeneous=True
+            homogeneous=True,
+            row_spacing=10,
+            column_spacing=10,
+            css_classes=['flowbox_no_padding']
         )
         self.append(information_container)
         parent_model = self.model.data.get('details', {}).get('parent_model')
@@ -228,64 +266,11 @@ class local_model_page(Gtk.Box):
 
         for name, value in metadata.items():
             if value:
-                info_box = Gtk.Box(
-                    orientation=1,
-                    spacing=5,
-                    name=name
-                )
-                title_label = Gtk.Label(
-                    label=name,
-                    css_classes=['subtitle', 'caption', 'dim-label'],
-                    hexpand=True,
-                    margin_top=10,
-                    margin_start=0,
-                    margin_end=0,
-                    ellipsize=3,
-                    tooltip_text=name,
-                    halign=1
-                )
-                info_box.append(title_label)
-                subtitle_label = Gtk.Label(
-                    label=value,
-                    css_classes=['heading'],
-                    hexpand=True,
-                    margin_bottom=10,
-                    margin_start=0,
-                    margin_end=0,
-                    ellipsize=3,
-                    tooltip_text=value,
-                    halign=1
-                )
-                info_box.append(subtitle_label)
-                information_container.append(info_box)
+                information_container.append(self.info_box(name, value, True))
         if self.model.data.get('system'):
-            system_label = Adw.Bin(
-                css_classes=['card', 'p10'],
-                child = Gtk.Label(
-                    label=self.model.data.get('system'),
-                    hexpand=True,
-                    halign=0,
-                    wrap=True,
-                    wrap_mode=2,
-                    justify=2,
-                ),
-                focusable=True
-            )
-            self.append(system_label)
+            self.append(self.info_box(_('Context'), self.model.data.get('system'), False))
         if self.model.data.get('description'):
-            description_label = Adw.Bin(
-                css_classes=['card', 'p10'],
-                child = Gtk.Label(
-                    label=self.model.data.get('description'),
-                    hexpand=True,
-                    halign=0,
-                    wrap=True,
-                    wrap_mode=2,
-                    justify=2,
-                ),
-                focusable=True
-            )
-            self.append(description_label)
+            self.append(self.info_box(_('Description'), self.model.data.get('description'), False))
 
         self.model.image_container.connect('notify::child', lambda *_: self.update_profile_picture())
 
@@ -415,21 +400,19 @@ class local_model(Gtk.Box):
             threading.Thread(target=window.chat_list_box.update_profile_pictures).start()
 
     def get_page(self):
-        actionbar = Gtk.ActionBar()
+        buttons = []
         if window.model_creator_stack_page.get_visible():
             create_child_button = Gtk.Button(
                 icon_name='list-add-symbolic',
-                tooltip_text=_('Create Child'),
-                css_classes=['accent']
+                tooltip_text=_('Create Child')
             )
             create_child_button.connect('clicked', lambda button: window.model_creator_existing(button, self.get_name()))
-            actionbar.pack_start(create_child_button)
+            buttons.append(create_child_button)
 
         if window.available_models_stack_page.get_visible():
             remove_button = Gtk.Button(
                 icon_name='user-trash-symbolic',
-                tooltip_text=_('Remove Model'),
-                css_classes=['destructive-action']
+                tooltip_text=_('Remove Model')
             )
             remove_button.connect('clicked', lambda button: dialog_widget.simple(
                 _('Remove Model?'),
@@ -438,10 +421,10 @@ class local_model(Gtk.Box):
                 _('Remove'),
                 'destructive'
             ))
-            actionbar.pack_end(remove_button)
+            buttons.append(remove_button)
         if not self.page:
             self.page = local_model_page(self)
-        return actionbar, self.page
+        return buttons, self.page
 
 class category_pill(Adw.Bin):
     __gtype_name__ = 'AlpacaCategoryPill'
@@ -590,21 +573,15 @@ class available_model(Gtk.Box):
         return self.page.tag_list
 
     def get_page(self):
-        actionbar = Gtk.ActionBar()
         web_button = Gtk.Button(
-            child=Adw.ButtonContent(
-                icon_name='globe-symbolic',
-                label=_('Visit Website')
-            ),
-            tooltip_text=self.data.get('url'),
-            css_classes=['raised']
+            icon_name='globe-symbolic',
+            tooltip_text=self.data.get('url')
         )
         web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri(self.data.get('url')))
-        actionbar.set_center_widget(web_button)
 
         if not self.page:
             self.page = available_model_page(self)
-        return actionbar, self.page
+        return [web_button], self.page
 
     def get_search_string(self) -> str:
         return '{} {} {} {}'.format(self.get_name(), self.get_name().replace('-', ' ').title(), available_models_descriptions.descriptions[self.get_name()], ' '.join(self.data.get('categories')))

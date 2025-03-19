@@ -25,6 +25,7 @@
         <setter object="model_manager_header_bar" property="title-widget"/>
         <setter object="model_manager_bottom_view_switcher" property="reveal">true</setter>
         <setter object="available_model_flowbox" property="min-children-per-line">1</setter>
+        <setter object="local_model_flowbox" property="max-children-per-line">2</setter>
       </object>
     </child>
     <property name="content">
@@ -683,6 +684,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                                 <property name="min-children-per-line">1</property>
                                                 <property name="max-children-per-line">3</property>
                                                 <property name="selection-mode">1</property>
+                                                <property name="homogeneous">true</property>
                                                 <signal name="child-activated" handler="model_manager_child_activated"/>
                                                 <signal name="selected-children-changed" handler="model_manager_child_selected"/>
                                                 <style>
