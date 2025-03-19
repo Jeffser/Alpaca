@@ -207,7 +207,7 @@ class local_model_page(Gtk.Box):
                     hexpand=True,
                     wrap=True,
                     tooltip_text=description,
-                    halign=0
+                    halign=1
                 ))
 
     def __init__(self, model):
@@ -352,11 +352,8 @@ class local_model(Gtk.Box):
 
     def update_subtitle(self):
         tag = window.convert_model_name(self.get_name(), 2)[1]
-        parent_model = self.data.get('details', {}).get('parent_model')
         family = self.data.get('details', {}).get('family')
-        if parent_model:
-            self.subtitle_label.set_label('{} • {}'.format(window.convert_model_name(parent_model, 0), tag))
-        elif family:
+        if family:
             self.subtitle_label.set_label('{} • {}'.format(window.convert_model_name(family, 0), tag))
         else:
             self.subtitle_label.set_label(tag)
