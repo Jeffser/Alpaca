@@ -286,7 +286,8 @@ class local_model_page(Gtk.Box):
             if not categories:
                 categories = available_models.get(self.model.data.get('details', {}).get('parent_model').split(':')[0], {}).get('categories', [])
             for category in categories:
-                categories_box.append(category_pill(category, True))
+                if category not in ('small', 'medium', 'big', 'huge'):
+                    categories_box.append(category_pill(category, True))
 
         self.model.image_container.connect('notify::child', lambda *_: self.update_profile_picture())
 
