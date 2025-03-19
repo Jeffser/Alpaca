@@ -284,8 +284,8 @@ class local_model_page(Gtk.Box):
             categories = available_models.get(self.model.get_name().split(':')[0], {}).get('categories', [])
             languages = available_models.get(self.model.get_name().split(':')[0], {}).get('languages', [])
             if not categories:
-                categories = available_models.get(self.model.data.get('details', {}).get('parent_model').split(':')[0], {}).get('categories', [])
-                languages = available_models.get(self.model.data.get('details', {}).get('parent_model').split(':')[0], {}).get('languages', [])
+                categories = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('categories', [])
+                languages = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('languages', [])
             for category in categories + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]:
                 if category not in ('small', 'medium', 'big', 'huge'):
                     categories_box.append(category_pill(category, True))
@@ -451,6 +451,7 @@ class local_model(Gtk.Box):
             buttons.append(remove_button)
         if not self.page:
             self.page = local_model_page(self)
+        print(self.page)
         return buttons, self.page
 
 class category_pill(Adw.Bin):
