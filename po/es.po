@@ -1908,7 +1908,7 @@ msgstr "Seleccione un tipo de instancia para agregar"
 
 #: src/window.py:391
 msgid "'{}' does not support actions."
-msgstr ""
+msgstr "'{}' no admite acciones."
 
 #: src/window.py:394 src/window.py:969
 msgid "Please select a model before chatting"
@@ -3314,7 +3314,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:157
 msgid "The current, most capable model that runs on a single GPU."
-msgstr ""
+msgstr "El modelo actual más capaz que funciona con una sola GPU."
 
 #: src/available_models_descriptions.py:158
 msgid ""
@@ -3360,6 +3360,8 @@ msgid ""
 "111 billion parameter model optimized for demanding enterprises that require "
 "fast, secure, and high-quality AI"
 msgstr ""
+"Modelo de 111 mil millones de parámetros optimizado para empresas exigentes "
+"que requieren IA rápida, segura y de alta calidad"
 
 #: src/instance_manager.py:30
 msgid "Instance"
@@ -3372,11 +3374,11 @@ msgstr "Nuevo Chat"
 
 #: src/instance_manager.py:109
 msgid "Action Error"
-msgstr ""
+msgstr "Error de Acción"
 
 #: src/instance_manager.py:109
 msgid "An error occurred while running action"
-msgstr ""
+msgstr "Se produjo un error al ejecutar la acción"
 
 #: src/instance_manager.py:152 src/instance_manager.py:242
 #: src/instance_manager.py:252 src/instance_manager.py:395
@@ -3670,7 +3672,7 @@ msgstr "Gestionar Modelos"
 
 #: src/window.ui:233
 msgid "Add Models"
-msgstr ""
+msgstr "Agregar Modelos"
 
 #: src/window.ui:250
 msgid "Chat Menu"
@@ -3729,21 +3731,23 @@ msgstr ""
 
 #: src/window.ui:498
 msgid "Action Manager"
-msgstr ""
+msgstr "Gestor de Acciones"
 
 #: src/window.ui:509
 msgid "Available Actions"
-msgstr ""
+msgstr "Acciones Disponibles"
 
 #: src/window.ui:510
 msgid ""
 "Functions that AI models might use when sending a message by selecting \"Use "
 "Actions\" in the send button context menu."
 msgstr ""
+"Funciones que los modelos de IA pueden utilizar al enviar un mensaje "
+"seleccionando \"Usar acciones\" en el menú contextual del botón de envío."
 
 #: src/window.ui:529
 msgid "Action"
-msgstr ""
+msgstr "Acción"
 
 #: src/window.ui:545
 msgid "Model Manager"
@@ -4036,7 +4040,7 @@ msgstr "Gestor de Instancias"
 #: src/gtk/help-overlay.ui:38
 msgctxt "shortcut window"
 msgid "Action Manager"
-msgstr ""
+msgstr "Gestor de Acciones"
 
 #: src/gtk/help-overlay.ui:44
 msgctxt "shortcut window"
@@ -4323,7 +4327,7 @@ msgstr "Modificado en"
 
 #: src/custom_widgets/model_manager_widget.py:274
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: src/custom_widgets/model_manager_widget.py:413
 msgid "Change"
@@ -4375,7 +4379,7 @@ msgstr "Incrustación"
 
 #: src/custom_widgets/model_manager_widget.py:469
 msgid "Actions"
-msgstr ""
+msgstr "Acciones"
 
 #: src/custom_widgets/model_manager_widget.py:470
 msgid "Small"
