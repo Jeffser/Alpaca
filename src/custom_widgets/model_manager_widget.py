@@ -451,7 +451,6 @@ class local_model(Gtk.Box):
             buttons.append(remove_button)
         if not self.page:
             self.page = local_model_page(self)
-        print(self.page)
         return buttons, self.page
 
 class category_pill(Adw.Bin):
