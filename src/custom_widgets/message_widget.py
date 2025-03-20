@@ -909,7 +909,7 @@ class message(Gtk.Box):
                     latex_w = latex_image(part['text'])
                     self.content_children.append(latex_w)
                     self.container.append(latex_w)
-                elif part['type'] == 'think':
+                elif part['type'] == 'think' and part['text'].strip():
                     attachment = self.add_attachment(_('Thought'), 'thought', part['text'])
                     attachment.remove_css_class('flat')
         else:
