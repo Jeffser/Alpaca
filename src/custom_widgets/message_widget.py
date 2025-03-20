@@ -681,7 +681,7 @@ class footer(Gtk.Box):
             self.options_button = Gtk.MenuButton(
                 width_request=40,
                 height_request=40,
-                css_classes=['circular'],
+                css_classes=['circular', 'flat'],
                 valign=1,
                 popover=self.popup,
                 margin_top=5
