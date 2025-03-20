@@ -797,7 +797,7 @@ class gemini(base_openai):
             response = requests.get('https://generativelanguage.googleapis.com/v1beta/models?key={}'.format(self.api_key))
             models = []
             for model in response.json().get('models', []):
-                if "generateContent" in model.get("supportedGenerationMethods", []) and 'discontinued' not in model.get('description', []):
+                if "generateContent" in model.get("supportedGenerationMethods", []) and 'deprecated' not in model.get('description', ''):
                     model['name'] = model.get('name').removeprefix('models/')
                     models.append(model)
             return models
