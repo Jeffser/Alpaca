@@ -1153,6 +1153,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         list(list(self.model_dropdown)[1].get_child())[1].set_propagate_natural_width(True)
         list(list(self.title_no_model_button.get_child())[0])[1].set_ellipsize(3)
 
+        if sys.platform not in Platforms.ported:
+            self.model_manager_stack.set_enable_transitions(True)
+
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
         self.message_text_view = GtkSource.View(
