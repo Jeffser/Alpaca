@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.2.0\n"
+"Project-Id-Version: 5.3.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-19 00:06-0600\n"
 "PO-Revision-Date: 2025-01-07 15:12-0600\n"
@@ -162,20 +162,20 @@ msgstr "নতুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Updated runtime to Gnome 48"
-msgstr ""
+msgstr "রানটাইমকে গনোম ৪৮ এ আপডেট করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Added back 'category pills' to model manager"
-msgstr ""
+msgstr "মডেল ম্যানেজারে 'বিভাগ পিল' আবার যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Better appearance for model manager sidebar"
-msgstr ""
+msgstr "মডেল ম্যানেজার সাইডবারের জন্য আরও ভাল চেহারা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 #: data/com.jeffser.Alpaca.metainfo.xml.in:117
 msgid "New models"
-msgstr ""
+msgstr "নতুন মডেল"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 #: data/com.jeffser.Alpaca.metainfo.xml.in:119
@@ -207,37 +207,38 @@ msgstr "সংশোধন করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Fixed bad title generation with chain-of-thought models"
-msgstr ""
+msgstr "চেইন-অফ-থট মডেলগুলির সাথে খারাপ শিরোনাম তৈরি সমস্যা সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid ""
 "Hide page switcher in model manager if there's only one page (online "
 "instances)"
 msgstr ""
+"মডেল ম্যানেজারে পৃষ্ঠা স্যুইচার গুপ্ত করুন যদি শুধুমাত্র একটি পৃষ্ঠা থাকে (অনলাইন উদাহরণ)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Option to delete all chats"
-msgstr ""
+msgstr "সমস্ত চ্যাট মুছে ফেলার বিকল্প"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
 msgid "Button to refresh sample prompts"
-msgstr ""
+msgstr "নমুনা প্রম্পটগুলি পুনরায় লোড করার বাটন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:121
 msgid "Fixed saving Ollama (Managed) instance might crash it"
-msgstr ""
+msgstr "সংরক্ষিত Ollama (ম্যানেজড) উদাহরণ এটি বন্ধ করে দিতে পারে এমন সমস্যা সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
 msgid "Fixed stop button"
-msgstr ""
+msgstr "স্টপ বাটন সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Fixed model search not working if there are only pulling models"
-msgstr ""
+msgstr "মডেল সার্চ কাজ করছে না এমন সমস্যা সংশোধন করা হয়েছে যদি শুধুমাত্র পুলিং মডেল থাকে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Fixed sample prompts sometimes not appearing"
-msgstr ""
+msgstr "নমুনা প্রম্পট কখনো কখনো প্রদর্শিত না হওয়ার সমস্যা সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:133
 msgid "Don't clear the building output of C++ scripts"
@@ -253,7 +254,7 @@ msgstr "দূরবর্তী ওল্লামা ইনস্ট্যা�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:136
 msgid "Remove '\\n' characters in instance edit page"
-msgstr ""
+msgstr "ইনস্ট্যান্স এডিট পৃষ্ঠায় '\\n' অক্ষরগুলি সরান"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:145
 msgid "Dynamic chat loading"
@@ -440,8 +441,7 @@ msgstr "সংশোধন করুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:245
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
-msgstr ""
-"ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
+msgstr "ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:254
 msgid "Added categories to models"
@@ -1720,8 +1720,7 @@ msgstr "একাধিক চ্যাট সমর্থন যোগ কর�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:960
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
-msgstr ""
-"প্যাঙ্গো মার্কআপ সমর্থন যোগ করা হয়েছে (বোল্ড, তালিকা, শিরোনাম, উপশিরোনাম, মনোস্পেস)"
+msgstr "প্যাঙ্গো মার্কআপ সমর্থন যোগ করা হয়েছে (বোল্ড, তালিকা, শিরোনাম, উপশিরোনাম, মনোস্পেস)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:961
 msgid "Added autoscroll if the user is at the bottom of the chat"
@@ -1884,7 +1883,7 @@ msgstr "যোগ করার জন্য একটি ইনস্ট্য�
 
 #: src/window.py:391
 msgid "'{}' does not support actions."
-msgstr ""
+msgstr "'{}' অ্যাকশন সমর্থন করে না"
 
 #: src/window.py:394 src/window.py:969
 msgid "Please select a model before chatting"
@@ -3226,7 +3225,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:157
 msgid "The current, most capable model that runs on a single GPU."
-msgstr ""
+msgstr "বর্তমানে, একক জিপিইউতে চলমান সবচেয়ে দক্ষ মডেল"
 
 #: src/available_models_descriptions.py:158
 msgid ""
@@ -3234,6 +3233,7 @@ msgid ""
 "reasoning, and mathematics, and now, the long-awaited function calling "
 "feature is finally supported."
 msgstr ""
+"ফাই-৪-মিনি বহুভাষিক সমর্থন, যুক্তি এবং গণিতে উল্লেখযোগ্য উন্নতি নিয়ে আসে, এবং এখন, দীর্ঘসময় ধরে আশা করা ফাংশন কলিং বৈশিষ্ট্যটি অবশেষে সমর্থিত"
 
 #: src/available_models_descriptions.py:159
 msgid ""
@@ -3241,12 +3241,14 @@ msgid ""
 "visual document understanding, enabling automated content extraction from "
 "tables, charts, infographics, plots, diagrams, and more."
 msgstr ""
+"একটি কমপ্যাক্ট এবং দক্ষ ভিশন-ল্যাঙ্গুয়েজ মডেল, বিশেষভাবে ভিজ্যুয়াল ডকুমেন্ট বোঝার জন্য ডিজাইন করা হয়েছে, যা টেবিল, চার্ট, ইনফোগ্রাফিক, প্লট, ডায়াগ্রাম এবং আরও অনেক কিছু থেকে স্বয়ংক্রিয় বিষয়বস্তু নির্ণয় করতে সক্ষম করে"
 
 #: src/available_models_descriptions.py:160
 msgid ""
 "Granite-3.2 is a family of long-context AI models from IBM Granite fine-"
 "tuned for thinking capabilities."
 msgstr ""
+"গ্রানাইট-৩.২ হল আইবিএম গ্রানাইটের দীর্ঘ-প্রসঙ্গের এআই মডেলের একটি পরিবার, যা চিন্তা ক্ষমতার জন্য সূক্ষ্মভাবে টিউন করা হয়েছে"
 
 #: src/available_models_descriptions.py:161
 msgid ""
@@ -3254,12 +3256,14 @@ msgid ""
 "excels in advanced Arabic language capabilities for enterprises in the "
 "Middle East and Northern Africa."
 msgstr ""
+"মধ্যপ্রাচ্য ও উত্তর আফ্রিকার উদ্যোগের জন্য উন্নত আরবি ভাষা ক্ষমতায় অগ্রগতি লাভকারী হালকা কমান্ড আর৭বি মডেলের একটি নতুন সর্বশ্রেষ্ঠ সংস্করণ"
 
 #: src/available_models_descriptions.py:162
 msgid ""
 "111 billion parameter model optimized for demanding enterprises that require "
 "fast, secure, and high-quality AI"
 msgstr ""
+"১১১ বিলিয়ন প্যারামিটার মডেল যা দ্রুত, নিরাপদ এবং উচ্চ-মানের এআই প্রয়োজনীয় চাহিদাপূর্ণ উদ্যোগের জন্য অপ্টিমাইজ করা হয়েছে"
 
 #: src/instance_manager.py:30
 msgid "Instance"
@@ -3272,11 +3276,11 @@ msgstr "নতুন চ্যাট"
 
 #: src/instance_manager.py:109
 msgid "Action Error"
-msgstr ""
+msgstr "অ্যাকশন ত্রুটি"
 
 #: src/instance_manager.py:109
 msgid "An error occurred while running action"
-msgstr ""
+msgstr "অ্যাকশন চালানোর সময় একটি ত্রুটি ঘটেছে"
 
 #: src/instance_manager.py:152 src/instance_manager.py:242
 #: src/instance_manager.py:252 src/instance_manager.py:395
@@ -3565,7 +3569,7 @@ msgstr "মডেল পরিচালনা করুন"
 
 #: src/window.ui:233
 msgid "Add Models"
-msgstr ""
+msgstr "মডেল যোগ করুন"
 
 #: src/window.ui:250
 msgid "Chat Menu"
@@ -3623,21 +3627,22 @@ msgstr ""
 
 #: src/window.ui:498
 msgid "Action Manager"
-msgstr ""
+msgstr "অ্যাকশন ম্যানেজার"
 
 #: src/window.ui:509
 msgid "Available Actions"
-msgstr ""
+msgstr "উপলব্ধ অ্যাকশন"
 
 #: src/window.ui:510
 msgid ""
 "Functions that AI models might use when sending a message by selecting \"Use "
 "Actions\" in the send button context menu."
 msgstr ""
+"ফাংশন যা এআই মডেলগুলি ব্যবহার করতে পারে যখন পাঠানো বোতামের প্রসঙ্গ মেনুতে \"অ্যাকশন ব্যবহার করুন\" নির্বাচন করে একটি বার্তা পাঠায়"
 
 #: src/window.ui:529
 msgid "Action"
-msgstr ""
+msgstr "অ্যাকশন"
 
 #: src/window.ui:545
 msgid "Model Manager"
@@ -3927,7 +3932,7 @@ msgstr "ইনস্ট্যান্স ম্যানেজার"
 #: src/gtk/help-overlay.ui:38
 msgctxt "shortcut window"
 msgid "Action Manager"
-msgstr ""
+msgstr "অ্যাকশন ম্যানেজার"
 
 #: src/gtk/help-overlay.ui:44
 msgctxt "shortcut window"
@@ -4012,7 +4017,7 @@ msgstr "প্রম্পট পাঠান: '{}'"
 
 #: src/custom_widgets/chat_widget.py:109
 msgid "Refresh Prompts"
-msgstr ""
+msgstr "প্রম্পটগুলি পুনরায় লোড করুন"
 
 #: src/custom_widgets/chat_widget.py:164
 msgid "Chat exported successfully"
@@ -4212,7 +4217,7 @@ msgstr "সংশোধিত সময়"
 
 #: src/custom_widgets/model_manager_widget.py:274
 msgid "Description"
-msgstr ""
+msgstr "বিবরণ"
 
 #: src/custom_widgets/model_manager_widget.py:413
 msgid "Change"
@@ -4264,7 +4269,7 @@ msgstr "এমবেডিং"
 
 #: src/custom_widgets/model_manager_widget.py:469
 msgid "Actions"
-msgstr ""
+msgstr "অ্যাকশন"
 
 #: src/custom_widgets/model_manager_widget.py:470
 msgid "Small"
