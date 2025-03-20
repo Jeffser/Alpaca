@@ -660,10 +660,10 @@ class footer(Gtk.Box):
         date = GLib.DateTime.new(GLib.DateTime.new_now_local().get_timezone(), dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
         current_date = GLib.DateTime.new_now_local()
         if date.format("%Y/%m/%d") == current_date.format("%Y/%m/%d"):
-            return date.format("%H:%M %p")
+            return date.format("%I:%M %p")
         if date.format("%Y") == current_date.format("%Y"):
-            return date.format("%b %d, %H:%M %p")
-        return date.format("%b %d %Y, %H:%M %p")
+            return date.format("%b %d, %I:%M %p")
+        return date.format("%b %d %Y, %I:%M %p")
 
     def add_options_button(self):
         self.popup = option_popup(self.message_element)
