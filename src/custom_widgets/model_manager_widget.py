@@ -286,7 +286,7 @@ class local_model_page(Gtk.Box):
             if not categories:
                 categories = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('categories', [])
                 languages = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('languages', [])
-            for category in categories + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]:
+            for category in set(categories + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]):
                 if category not in ('small', 'medium', 'big', 'huge'):
                     categories_box.append(category_pill(category, True))
 
@@ -530,7 +530,7 @@ class available_model_page(Gtk.Box):
                 justify=1
             )
         self.append(categories_box)
-        for category in self.model.data.get('categories', []) + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in self.model.data.get('languages', [])]:
+        for category in set(self.model.data.get('categories', []) + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in self.model.data.get('languages', [])]):
             categories_box.append(category_pill(category, True))
 
         self.tag_list = Gtk.ListBox(
@@ -604,7 +604,7 @@ class available_model(Gtk.Box):
                 vexpand=True
             )
             self.append(categories_box)
-            for category in self.data.get('categories', []):
+            for category in set(self.data.get('categories', [])):
                 categories_box.append(category_pill(category, False))
         self.page = None
 
