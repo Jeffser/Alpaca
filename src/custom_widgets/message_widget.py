@@ -36,7 +36,7 @@ patterns = [
     ('code', re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
     ('code', re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)),
     ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
-    ('latex', re.compile(r'^\s+\\\[\n(.*?)\n\s+\\\]|^\s+\$(.*?)\$', re.MULTILINE))
+    ('latex', re.compile(r'\\\[(.*?)\\\]|\$(.*?)\$', re.DOTALL))
 ]
 
 SOLUTION_ENCLOSING_TAGS = [
@@ -855,6 +855,11 @@ class message(Gtk.Box):
                         )
                     elif pattern_name == "table":
                         parts.append({"type": pattern_name, "text": text[match_start:match_end]})
+                    elif pattern_name == "latex":
+                        expression = match.group(1)
+                        if not expression:
+                            expression = match.group(2)
+                        parts.append({"type": pattern_name, "text": expression})
                     else:
                         parts.append({"type": pattern_name, "text": match.group(1)})
 
