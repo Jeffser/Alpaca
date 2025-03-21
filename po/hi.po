@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.0.0\n"
+"Project-Id-Version: 5.3.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-19 00:06-0600\n"
 "PO-Revision-Date: 2025-01-08 HO:MI+ZONE\n"
@@ -162,20 +162,20 @@ msgstr "नया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Updated runtime to Gnome 48"
-msgstr ""
+msgstr "रनटाइम को जीएनओएम 48 में अपडेट किया गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Added back 'category pills' to model manager"
-msgstr ""
+msgstr "मॉडल मैनेजर में 'श्रेणी गोलियां' वापस जोड़ दी गई हैं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Better appearance for model manager sidebar"
-msgstr ""
+msgstr "मॉडल मैनेजर साइडबार के लिए बेहतर दिखाव"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 #: data/com.jeffser.Alpaca.metainfo.xml.in:117
 msgid "New models"
-msgstr ""
+msgstr "नए मॉडल"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 #: data/com.jeffser.Alpaca.metainfo.xml.in:119
@@ -207,37 +207,38 @@ msgstr "सुधार"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Fixed bad title generation with chain-of-thought models"
-msgstr ""
+msgstr "चेन-ऑफ-थॉट मॉडल्स के साथ खराब शीर्षक जनरेशन को ठीक किया गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid ""
 "Hide page switcher in model manager if there's only one page (online "
 "instances)"
 msgstr ""
+"मॉडल मैनेजर में पेज स्विचर को छुपाएं यदि केवल एक पेज है (ऑनलाइन इंस्टेंस)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Option to delete all chats"
-msgstr ""
+msgstr "सभी चैट्स को हटाने का विकल्प"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
 msgid "Button to refresh sample prompts"
-msgstr ""
+msgstr "नमूना प्रॉम्प्ट्स को ताज़ा करने के लिए बटन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:121
 msgid "Fixed saving Ollama (Managed) instance might crash it"
-msgstr ""
+msgstr "ओलामा (मैनेज्ड) इंस्टेंस को सेव करने से क्रैश होने की समस्या को ठीक किया गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
 msgid "Fixed stop button"
-msgstr ""
+msgstr "रोकने के बटन को ठीक किया गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Fixed model search not working if there are only pulling models"
-msgstr ""
+msgstr "मॉडल सर्च को ठीक किया गया यदि केवल पुलिंग मॉडल्स ही हैं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Fixed sample prompts sometimes not appearing"
-msgstr ""
+msgstr "नमूना प्रॉम्प्ट्स कभी-कभी दिखाई नहीं देने की समस्या को ठीक किया गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:133
 msgid "Don't clear the building output of C++ scripts"
@@ -1916,8 +1917,7 @@ msgstr "Alpaca बंद करें?"
 
 #: src/window.py:510
 msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
-msgstr ""
-"एक कार्य वर्तमान में प्रगति पर है। क्या आप सुनिश्चित हैं कि आप Alpaca बंद करना चाहते हैं?"
+msgstr "एक कार्य वर्तमान में प्रगति पर है। क्या आप सुनिश्चित हैं कि आप Alpaca बंद करना चाहते हैं?"
 
 #: src/window.py:736
 msgid "Cannot open image"
@@ -2100,7 +2100,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:3
 msgid "QwQ is the reasoning model of the Qwen series."
-msgstr ""
+msgstr "QwQ क्वेन श्रृंखला का तर्क मॉडल है।"
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -2333,8 +2333,7 @@ msgid ""
 "Command R is a Large Language Model optimized for conversational interaction "
 "and long context tasks."
 msgstr ""
-"कमांड आर एक बड़ा भाषा मॉडल है जो संवादात्मक इंटरैक्शन और लंबे कंटेक्स्ट कार्यों के लिए अनुकूलित "
-"है"
+"कमांड आर एक बड़ा भाषा मॉडल है जो संवादात्मक इंटरैक्शन और लंबे कंटेक्स्ट कार्यों के लिए अनुकूलित है"
 
 #: src/available_models_descriptions.py:37
 msgid ""
@@ -2349,8 +2348,7 @@ msgid ""
 "A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
 "benchmarks."
 msgstr ""
-"ल्लामा 3 इंस्ट्रक्ट से फाइन-ट्यून किया गया एलएलएवीए मॉडल जिसमें कई बेंचमार्क्स में बेहतर स्कोर "
-"हैं"
+"ल्लामा 3 इंस्ट्रक्ट से फाइन-ट्यून किया गया एलएलएवीए मॉडल जिसमें कई बेंचमार्क्स में बेहतर स्कोर हैं"
 
 #: src/available_models_descriptions.py:39
 msgid ""
@@ -3213,7 +3211,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:157
 msgid "The current, most capable model that runs on a single GPU."
-msgstr ""
+msgstr "वर्तमान में, एकल जीपीयू पर चलने वाला सबसे सक्षम मॉडल।"
 
 #: src/available_models_descriptions.py:158
 msgid ""
@@ -3221,6 +3219,7 @@ msgid ""
 "reasoning, and mathematics, and now, the long-awaited function calling "
 "feature is finally supported."
 msgstr ""
+"फाई-4-मिनी बहुभाषी समर्थन, तर्क, और गणित में महत्वपूर्ण सुधार लाता है, और अब, लंबे समय से प्रतीक्षित फंक्शन कॉलिंग सुविधा को अंततः समर्थन प्राप्त है।"
 
 #: src/available_models_descriptions.py:159
 msgid ""
@@ -3228,12 +3227,14 @@ msgid ""
 "visual document understanding, enabling automated content extraction from "
 "tables, charts, infographics, plots, diagrams, and more."
 msgstr ""
+"एक संक्षिप्त और कुशल दृष्टि-भाषा मॉडल, विशेष रूप से दृश्य दस्तावेज़ समझ के लिए डिज़ाइन किया गया है, जो टेबल, चार्ट, इंफोग्राफिक्स, प्लॉट, आरेख, और अधिक से स्वचालित सामग्री निकालने को सक्षम बनाता है।"
 
 #: src/available_models_descriptions.py:160
 msgid ""
 "Granite-3.2 is a family of long-context AI models from IBM Granite fine-"
 "tuned for thinking capabilities."
 msgstr ""
+"ग्रैनाइट-3.2 आईबीएम ग्रैनाइट से लंबे संदर्भ एआई मॉडल्स का एक परिवार है, जो सोच क्षमताओं के लिए फाइन-ट्यून किया गया है।"
 
 #: src/available_models_descriptions.py:161
 msgid ""
@@ -3241,12 +3242,14 @@ msgid ""
 "excels in advanced Arabic language capabilities for enterprises in the "
 "Middle East and Northern Africa."
 msgstr ""
+"लाइटवेट कमांड आर7बी मॉडल का एक नया राज्य-ऑफ-द-आर्ट संस्करण, जो मध्य पूर्व और उत्तरी अफ्रीका में उद्यमों के लिए उन्नत अरबी भाषा क्षमताओं में उत्कृष्टता प्राप्त करता है।"
 
 #: src/available_models_descriptions.py:162
 msgid ""
 "111 billion parameter model optimized for demanding enterprises that require "
 "fast, secure, and high-quality AI"
 msgstr ""
+"111 अरब पैरामीटर मॉडल, जो तेज, सुरक्षित, और उच्च-गुणवत्ता वाले एआई की आवश्यकता वाले मांग वाले उद्यमों के लिए अनुकूलित किया गया है।"
 
 #: src/instance_manager.py:30
 msgid "Instance"
@@ -3259,11 +3262,11 @@ msgstr "नई चैट शुरू करें"
 
 #: src/instance_manager.py:109
 msgid "Action Error"
-msgstr ""
+msgstr "क्रिया त्रुटि"
 
 #: src/instance_manager.py:109
 msgid "An error occurred while running action"
-msgstr ""
+msgstr "क्रिया चलाने के दौरान एक त्रुटि हुई"
 
 #: src/instance_manager.py:152 src/instance_manager.py:242
 #: src/instance_manager.py:252 src/instance_manager.py:395
@@ -3554,7 +3557,7 @@ msgstr "मॉडल्स प्रबंधित करें"
 
 #: src/window.ui:233
 msgid "Add Models"
-msgstr ""
+msgstr "मॉडल जोड़ें"
 
 #: src/window.ui:250
 msgid "Chat Menu"
@@ -3611,21 +3614,22 @@ msgstr ""
 
 #: src/window.ui:498
 msgid "Action Manager"
-msgstr ""
+msgstr "क्रिया प्रबंधक"
 
 #: src/window.ui:509
 msgid "Available Actions"
-msgstr ""
+msgstr "उपलब्ध क्रियाएं"
 
 #: src/window.ui:510
 msgid ""
 "Functions that AI models might use when sending a message by selecting \"Use "
 "Actions\" in the send button context menu."
 msgstr ""
+"फंक्शन जो एआई मॉडल्स द्वारा भेजने के बटन के संदर्भ मेनू में \"क्रियाएं का उपयोग करें\" का चयन करके एक संदेश भेजने के दौरान उपयोग किया जा सकता है।"
 
 #: src/window.ui:529
 msgid "Action"
-msgstr ""
+msgstr "क्रिया"
 
 #: src/window.ui:545
 msgid "Model Manager"
@@ -3999,7 +4003,7 @@ msgstr "प्रॉम्प्ट भेजें: '{}'"
 
 #: src/custom_widgets/chat_widget.py:109
 msgid "Refresh Prompts"
-msgstr ""
+msgstr "प्रॉम्प्ट्स को ताज़ा करें"
 
 #: src/custom_widgets/chat_widget.py:164
 msgid "Chat exported successfully"
@@ -4199,7 +4203,7 @@ msgstr "संशोधित समय"
 
 #: src/custom_widgets/model_manager_widget.py:274
 msgid "Description"
-msgstr ""
+msgstr "विवरण"
 
 #: src/custom_widgets/model_manager_widget.py:413
 msgid "Change"
@@ -4251,7 +4255,7 @@ msgstr "एम्बेडिंग"
 
 #: src/custom_widgets/model_manager_widget.py:469
 msgid "Actions"
-msgstr ""
+msgstr "क्रियाएं"
 
 #: src/custom_widgets/model_manager_widget.py:470
 msgid "Small"
