@@ -365,6 +365,12 @@ class local_model(Gtk.Box):
     def update_data(self):
         try:
             self.data = window.get_current_instance().get_model_info(self.get_name())
+            if not self.data.get('description'):
+                description = available_models_descriptions.descriptions.get(self.get_name().split(':')[0])
+                if not description:
+                    description = available_models_descriptions.descriptions.get(self.data.get('details', {}).get('parent_model', '').split(':')[0])
+                if description:
+                    self.data['description'] = description
         except Exception as e:
             self.data = {'details': {}}
         self.update_profile_picture()
@@ -587,7 +593,7 @@ class available_model(Gtk.Box):
         )
         self.append(title_label)
         description_label = Gtk.Label(
-            label=available_models_descriptions.descriptions[name],
+            label=available_models_descriptions.descriptions.get(name),
             css_classes=['dim-label'],
             hexpand=True,
             wrap=True,
@@ -625,7 +631,7 @@ class available_model(Gtk.Box):
         return [web_button], self.page
 
     def get_search_string(self) -> str:
-        return '{} {} {} {}'.format(self.get_name(), self.get_name().replace('-', ' ').title(), available_models_descriptions.descriptions[self.get_name()], ' '.join(self.data.get('categories')))
+        return '{} {} {} {}'.format(self.get_name(), self.get_name().replace('-', ' ').title(), available_models_descriptions.descriptions.get(self.get_name()), ' '.join(self.data.get('categories')))
 
 def add_local_model(model_name:str):
     model_element = local_model(model_name)
