@@ -887,7 +887,7 @@ class instance_row(Adw.ActionRow):
 
 def update_instance_list():
     window.instance_listbox.remove_all()
-    window.instance_listbox.set_sensitive(False)
+    window.instance_listbox.set_selection_mode(0)
     instances = window.sql_instance.get_instances()
     selected_instance = window.sql_instance.get_preference('selected_instance')
     openai_compatible_instances = {
@@ -898,7 +898,7 @@ def update_instance_list():
     }
     if len(instances) > 0:
         window.instance_manager_stack.set_visible_child_name('content')
-        window.instance_listbox.set_sensitive(True)
+        window.instance_listbox.set_selection_mode(1)
         for i, ins in enumerate(instances):
             row = None
             if ins.get('type') == 'ollama:managed' and shutil.which('ollama'):
@@ -912,14 +912,16 @@ def update_instance_list():
             if row:
                 window.instance_listbox.append(row)
                 if selected_instance == row.instance.instance_id:
-                    window.instance_listbox.select_row(row)
+                    row_to_select = row
+        if row_to_select:
+            window.instance_listbox.select_row(row_to_select)
         if not window.instance_listbox.get_selected_row():
             window.instance_listbox.select_row(window.instance_listbox.get_row_at_index(0))
     if len(list(window.instance_listbox)) == 0:
         window.instance_manager_stack.set_visible_child_name('no-instances')
         row = instance_row(empty())
         window.instance_listbox.append(row)
-        window.instance_listbox.set_sensitive(True)
+        window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
 ready_instances = [ollama, chatgpt, gemini, together, venice, generic_openai]

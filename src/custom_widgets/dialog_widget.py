@@ -16,7 +16,7 @@ button_appearance={
 }
 
 def get_dialog_showing() -> bool:
-    return any([True for dt in (Options, Entry, DropDown) if isinstance(window.get_visible_dialog(), dt)])
+    return any([True for dt in (Options, Entry, DropDown, Adw.Dialog) if isinstance(window.get_visible_dialog(), dt)])
 
 # Don't call this directly outside this script
 class baseDialog(Adw.AlertDialog):
@@ -181,6 +181,8 @@ def simple_dropdown(heading:str, body:str, callback:callable, items:list, button
     DropDown(heading, body, list(options.keys())[0], options, items)
 
 def simple_log(title:str, summary_text:str, summary_classes:list, log_text:str):
+    if get_dialog_showing():
+        return
     container = Gtk.Box(
         hexpand=True,
         vexpand=True,
@@ -225,6 +227,8 @@ def simple_log(title:str, summary_text:str, summary_classes:list, log_text:str):
     GLib.idle_add(dialog.present, window)
 
 def simple_error(title:str, body:str, error_log:str, callback:callable=None):
+    if get_dialog_showing():
+        return
     container = Gtk.Box(
         hexpand=True,
         vexpand=True,
