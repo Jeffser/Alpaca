@@ -415,6 +415,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.message_text_view.get_buffer().set_text("", 0)
 
         if mode==0:
+            # We need to check if the instance is still activated or whether
+            # it got deactivated (due to an error, for example)
+            if self.get_current_instance().instance_type == "empty":
+                self.show_toast(
+                    _("The selected instance got deactivated. Activate it in the Instance Manager."),
+                    self.main_overlay
+                )
+
+                return
+
             bot_id=self.generate_uuid()
             m_element_bot = current_chat.add_message(bot_id, datetime.now(), current_model, False)
             m_element_bot.set_text()
