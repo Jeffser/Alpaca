@@ -41,10 +41,10 @@ possible_prompts = [
     "What is nostalgia?",
     "Can you explain the concept of time dilation in physics?",
     "Can you explain the basics of machine learning?",
-    "what is photoelectric effect?",
+    "What is photoelectric effect?",
     "What is the history of the Great Wall of China?",
     "Tell me some Historical facts about Taj Mahal.",
-    "write a love story"    
+    "Write a love story"    
 ]
 
 class chat(Gtk.Stack):
