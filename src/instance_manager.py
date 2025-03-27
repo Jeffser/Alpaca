@@ -914,7 +914,7 @@ def update_instance_list():
         gemini.instance_type: gemini,
         together.instance_type: together,
         venice.instance_type: venice,
-        openrouter.instance_type: openrouter
+        openrouter.instance_type: openrouter,
     }
     if len(instances) > 0:
         window.instance_manager_stack.set_visible_child_name('content')
