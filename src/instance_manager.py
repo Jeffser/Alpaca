@@ -840,6 +840,25 @@ class venice(base_openai):
     instance_type_display = 'Venice'
     instance_url = 'https://api.venice.ai/api/v1/'
 
+class openrouter(base_openai):
+    instance_type = 'openrouter'
+    instance_type_display = 'OpenRouter AI'
+    instance_url = 'https://openrouter.ai/api/v1/'
+
+    def get_local_models(self) -> list:
+        try:
+            response = requests.get('https://openrouter.ai/api/v1/models')
+            models = []
+            for model in response.json().get('data', []):
+                if model.get('id'):
+                    models.append({'name': model.get('id'), 'display_name': model.get('name')})
+            return models
+        except Exception as e:
+            dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve models'), str(e))
+            logger.error(e)
+            window.instance_listbox.unselect_all()
+            return []
+
 class generic_openai(base_openai):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
@@ -895,6 +914,7 @@ def update_instance_list():
         gemini.instance_type: gemini,
         together.instance_type: together,
         venice.instance_type: venice,
+        openrouter.instance_type: openrouter
     }
     if len(instances) > 0:
         window.instance_manager_stack.set_visible_child_name('content')
@@ -924,7 +944,7 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama, chatgpt, gemini, together, venice, generic_openai]
+ready_instances = [ollama, chatgpt, gemini, together, venice, openrouter, generic_openai]
 
 if shutil.which('ollama'):
     ready_instances.insert(0, ollama_managed)
