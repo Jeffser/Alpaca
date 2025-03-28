@@ -119,7 +119,7 @@ class base_instance:
             bot_message.spinner = Adw.Spinner()
             bot_message.container.append(bot_message.spinner)
 
-        if self.instance_type in ('gemini', 'venice'):
+        if self.instance_type in ('gemini', 'venice', 'anthropic'):
             for i in range(len(messages)):
                 if messages[i].get('role') == 'system':
                     messages[i]['role'] = 'user'
