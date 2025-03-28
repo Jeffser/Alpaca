@@ -51,7 +51,7 @@ gi.require_version('Spelling', '1')
 
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelling, GObject
 
-from . import generic_actions, sql_manager, instance_manager, action_manager
+from . import generic_actions, sql_manager, instance_manager, tool_manager
 from .constants import AlpacaFolders, Platforms
 from .custom_widgets import message_widget, chat_widget, terminal_widget, dialog_widget, model_manager_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir, IN_FLATPAK
@@ -149,8 +149,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     available_models_stack_page = Gtk.Template.Child()
     model_creator_stack_page = Gtk.Template.Child()
     install_ollama_button = Gtk.Template.Child()
-    action_listbox = Gtk.Template.Child()
-    action_page_bin = Gtk.Template.Child()
+    tool_listbox = Gtk.Template.Child()
     model_manager_bottom_view_switcher = Gtk.Template.Child()
     model_manager_top_view_switcher = Gtk.Template.Child()
     last_selected_instance_row = None
@@ -388,7 +387,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         current_model = model_manager_widget.get_selected_model().get_name()
         if 'ollama' in self.get_current_instance().instance_type and mode == 2 and 'tools' not in model_manager_widget.available_models.get(current_model.split(':')[0], {}).get('categories', []):
-            self.show_toast(_("'{}' does not support actions.").format(self.convert_model_name(current_model, 0)), self.main_overlay)
+            self.show_toast(_("'{}' does not support tools.").format(self.convert_model_name(current_model, 0)), self.main_overlay)
             return
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
@@ -429,7 +428,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             m_element_bot.set_text()
             m_element_bot.footer.options_button.set_sensitive(False)
             self.sql_instance.insert_or_update_message(m_element_bot)
-            threading.Thread(target=self.get_current_instance().use_actions, args=(m_element_bot, current_model)).start()
+            threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model)).start()
 
     @Gtk.Template.Callback()
     def welcome_carousel_page_changed(self, carousel, index):
@@ -474,7 +473,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def opening_app(self, user_data):
-        threading.Thread(target=action_manager.update_available_tools).start()
+        threading.Thread(target=tool_manager.update_available_tools).start()
         if self.sql_instance.get_preference('skip_welcome_page', False):
             # Notice
             if not self.sql_instance.get_preference('last_notice_seen') == self.notice_dialog.get_name() and IN_FLATPAK and not shutil.which('ollama'):
@@ -1140,7 +1139,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         generic_actions.window = self
         model_manager_widget.window = self
         instance_manager.window = self
-        action_manager.window = self
+        tool_manager.window = self
 
         # Prepare model selector
         list(self.model_dropdown)[0].add_css_class('flat')
@@ -1182,7 +1181,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.message_text_view.add_controller(enter_key_controller)
 
         if os.getenv('ALPACA_ACTION_TESTING', '0') == '1':
-            self.send_message_menu.append('Use Actions', 'app.use_actions')
+            self.send_message_menu.append('Use Actions', 'app.use_tools')
 
         for name, data in {
             'send': {
@@ -1230,8 +1229,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'delete_all_chats': [lambda *i: dialog_widget.simple(_('Delete All Chats?'), _('Are you sure you want to delete all chats?'), lambda: [GLib.idle_add(self.chat_list_box.delete_chat, c.chat_window.get_name()) for c in self.chat_list_box.tab_list], _('Delete'), 'destructive')]
         }
         if os.getenv('ALPACA_ACTION_TESTING', '0') == '1':
-            universal_actions['use_actions'] = [lambda *_: self.send_message(None, 2)]
-            universal_actions['action_manager'] = [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'action_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'action_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']]
+            universal_actions['use_tools'] = [lambda *_: self.send_message(None, 2)]
+            universal_actions['tool_manager'] = [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'tool_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'tool_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']]
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 

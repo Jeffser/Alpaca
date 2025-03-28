@@ -322,7 +322,7 @@ class attachment(Gtk.Button):
                 "youtube": "play-symbolic",
                 "website": "globe-symbolic",
                 "thought": "brain-augemnted-symbolic",
-                "action": "processor-symbolic",
+                "tool": "processor-symbolic",
                 "link": "globe-symbolic"
             }.get(self.file_type, "document-text-symbolic")
         )

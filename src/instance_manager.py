@@ -13,7 +13,7 @@ from pydantic import BaseModel
 from .constants import AlpacaFolders
 from .internal import source_dir, data_dir, cache_dir
 from .custom_widgets import dialog_widget
-from . import available_models_descriptions, action_manager
+from . import available_models_descriptions, tool_manager
 
 logger = logging.getLogger(__name__)
 
@@ -61,18 +61,18 @@ class base_instance:
 
         self.generate_response(bot_message, chat, messages, model, None)
 
-    def use_actions(self, bot_message, model:str):
+    def use_tools(self, bot_message, model:str):
         chat, messages = self.prepare_chat(bot_message)
         bot_message.update_message({'add_css': 'dim-label'})
 
         if not chat.quick_chat and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
 
-        tools = action_manager.get_enabled_tools()
+        tools = tool_manager.get_enabled_tools()
         tools_used = []
 
         try:
-            action_manager.log_to_message("Selecting action to use...", bot_message, True)
+            tool_manager.log_to_message(_("Selecting tool to use..."), bot_message, True)
             completion = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -81,8 +81,8 @@ class base_instance:
             if completion.choices[0] and completion.choices[0].message:
                 if completion.choices[0].message.tool_calls:
                     for call in completion.choices[0].message.tool_calls:
-                        action_manager.log_to_message("Using `{}`".format(call.function.name), bot_message, True)
-                        response = action_manager.run_tool(call.function.name, json.loads(call.function.arguments), messages, bot_message)
+                        tool_manager.log_to_message(_("Using {}").format(call.function.name), bot_message, True)
+                        response = tool_manager.run_tool(call.function.name, json.loads(call.function.arguments), messages, bot_message)
                         arguments = json.loads(call.function.arguments)
                         messages.append({
                             "role": "tool",
@@ -94,11 +94,11 @@ class base_instance:
                             "arguments": arguments,
                             "response": str(response)
                         })
-                        action = action_manager.get_action(call.function.name)
-                        if action:
+                        tool = tool_manager.get_tool(call.function.name)
+                        if tool:
                             attachment = bot_message.add_attachment(
-                                action.name,
-                                'action',
+                                tool.name,
+                                'tool',
                                 '# {}\n\n## Arguments:\n{}\n\n## Result:\n\n{}'.format(
                                     call.function.name,
                                     '\n'.join(['- {}: {}'.format(k,v) for k, v in arguments.items()]),
@@ -107,10 +107,10 @@ class base_instance:
                             )
                             window.sql_instance.add_attachment(bot_message, attachment)
         except Exception as e:
-            dialog_widget.simple_error(_('Action Error'), _('An error occurred while running action'), e)
+            dialog_widget.simple_error(_('Tool Error'), _('An error occurred while running tool'), e)
             logger.error(e)
 
-        action_manager.log_to_message("Generating message...", bot_message, True)
+        tool_manager.log_to_message(_("Generating message..."), bot_message, True)
         bot_message.update_message({'remove_css': 'dim-label'})
         self.generate_response(bot_message, chat, messages, model, tools if len(tools_used) > 0 else None)
 

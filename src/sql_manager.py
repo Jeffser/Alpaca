@@ -145,7 +145,7 @@ class Instance:
                     "model_directory": "TEXT",
                     "pinned": "INTEGER NOT NULL",
                 },
-                "actions_parameters": {
+                "tool_parameters": {
                     "name": "TEXT NOT NULL PRIMARY KEY",
                     "variables": "TEXT NOT NULL",
                     "activated": "INTEGER NOT NULL"
@@ -662,37 +662,37 @@ class Instance:
                 "DELETE FROM instances WHERE id=?", (instance_id,)
             )
 
-    #############
-    ## Actions ##
-    #############
+    ###########
+    ## Tools ##
+    ###########
 
-    def get_actions_parameters(self) -> dict:
+    def get_tool_parameters(self) -> dict:
         with SQLiteConnection(self.sql_path) as c:
             result = c.cursor.execute(
-                "SELECT name, variables, activated FROM actions_parameters"
+                "SELECT name, variables, activated FROM tool_parameters"
             ).fetchall()
 
-        actions = {}
+        tools = {}
 
         for row in result:
-            actions[row[0]] = {
+            tools[row[0]] = {
                 'variables': json.loads(row[1]),
                 'activated': row[2] != 0
             }
 
-        return actions
+        return tools
 
-    def insert_or_update_actions_parameters(self, action_name:str, variables:dict, activated:bool):
+    def insert_or_update_tool_parameters(self, tool_name:str, variables:dict, activated:bool):
         with SQLiteConnection(self.sql_path) as c:
             if c.cursor.execute(
-                "SELECT * FROM actions_parameters WHERE name=?", (action_name,)
+                "SELECT * FROM tool_parameters WHERE name=?", (tool_name,)
             ).fetchone():
                 c.cursor.execute(
-                    "UPDATE actions_parameters SET variables=?, activated=? WHERE name=?",
-                    (json.dumps(variables), 1 if activated else 0, action_name)
+                    "UPDATE tool_parameters SET variables=?, activated=? WHERE name=?",
+                    (json.dumps(variables), 1 if activated else 0, tool_name)
                 )
             else:
                 c.cursor.execute(
-                    "INSERT INTO actions_parameters (name, variables, activated) VALUES (?, ?, ?)",
-                    (action_name, json.dumps(variables), 1 if activated else 0)
+                    "INSERT INTO tool_parameters (name, variables, activated) VALUES (?, ?, ?)",
+                    (tool_name, json.dumps(variables), 1 if activated else 0)
                 )

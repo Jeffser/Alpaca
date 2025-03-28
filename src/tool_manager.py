@@ -1,4 +1,4 @@
-# generation_actions.py
+# tool_manager.py
 
 import logging, json, os, tempfile, shutil
 logger = logging.getLogger(__name__)
@@ -9,7 +9,7 @@ from gi.repository import Adw, Gtk, GLib
 
 window = None
 
-class action(Adw.ActionRow):
+class tool(Adw.ActionRow):
 
     variables = {}
 
@@ -23,14 +23,14 @@ class action(Adw.ActionRow):
         )
 
         info_button = Gtk.Button(icon_name='edit-symbolic', css_classes=['flat', 'accent'], valign=3)
-        info_button.connect('clicked', lambda *_: self.show_action_page())
+        info_button.connect('clicked', lambda *_: self.show_tool_page())
         self.add_suffix(info_button)
         self.enable_switch = Gtk.Switch(active=enabled, valign=3)
         self.enable_switch.connect('state-set', lambda *_: self.enabled_changed())
         self.add_suffix(self.enable_switch)
 
     def enabled_changed(self):
-        window.sql_instance.insert_or_update_actions_parameters(self.name, self.extract_variables_for_sql(), self.is_enabled())
+        window.sql_instance.insert_or_update_tool_parameters(self.name, self.extract_variables_for_sql(), self.is_enabled())
 
     def is_enabled(self) -> bool:
         return self.enable_switch.get_active()
@@ -38,7 +38,7 @@ class action(Adw.ActionRow):
     def get_tool(self) -> dict:
         return {
             "type": "function",
-            "function": self.tool
+            "function": self.tool_metadata
         }
 
     def extract_variables_for_sql(self) -> dict:
@@ -57,40 +57,40 @@ class action(Adw.ActionRow):
                 elif isinstance(v, Adw.SwitchRow):
                     self.variables[v.get_name()]['value'] = v.get_active()
 
-        window.sql_instance.insert_or_update_actions_parameters(self.name, self.extract_variables_for_sql(), self.is_enabled())
+        window.sql_instance.insert_or_update_tool_parameters(self.name, self.extract_variables_for_sql(), self.is_enabled())
         window.main_navigation_view.pop()
 
-    def show_action_page(self):
-        action_page = Adw.PreferencesPage()
+    def show_tool_page(self):
+        tool_page = Adw.PreferencesPage()
         ai_description = Adw.PreferencesGroup(
             title=_("AI Description"),
-            description=_("The description the AI model will use to understand what the action does.")
+            description=_("The description the AI model will use to understand what the tool does.")
         )
         ai_description.add(
             Adw.Bin(
-                child=Gtk.Label(label=self.tool.get('description'), wrap=True, halign=1),
+                child=Gtk.Label(label=self.tool_metadata.get('description'), wrap=True, halign=1),
                 css_classes=["card", "p10"]
             )
         )
-        action_page.add(ai_description)
-        if len(list(self.tool.get('parameters'))) > 0:
+        tool_page.add(ai_description)
+        if len(list(self.tool_metadata.get('parameters'))) > 0:
             arguments = Adw.PreferencesGroup(
                 title=_("Arguments"),
                 description=_("Variables that are filled by the AI.")
             )
-            for name, data in self.tool.get('parameters', {}).get('properties', {}).items():
+            for name, data in self.tool_metadata.get('parameters', {}).get('properties', {}).items():
                 arguments.add(
                     Adw.ActionRow(
                         title=name.replace('_', ' ').title(),
                         subtitle=data.get('description')
                     )
                 )
-            action_page.add(arguments)
+            tool_page.add(arguments)
 
         if len(list(self.variables)) > 0:
             variables = Adw.PreferencesGroup(
                 title=_("Variables"),
-                description=_("User filled values that the action uses to work, the AI does not have access to these variables at all.")
+                description=_("User filled values that the tool uses to work, the AI does not have access to these variables at all.")
             )
             for name, data in self.variables.items():
                 if data.get('type', 'string') == 'string':
@@ -124,7 +124,7 @@ class action(Adw.ActionRow):
                             active=bool(data.get('value', False))
                         )
                     )
-            action_page.add(variables)
+            tool_page.add(variables)
 
             button_container = Gtk.Box(orientation=0, spacing=10, halign=3)
 
@@ -138,15 +138,15 @@ class action(Adw.ActionRow):
 
             button_group = Adw.PreferencesGroup()
             button_group.add(button_container)
-            action_page.add(button_group)
+            tool_page.add(button_group)
 
         page_widget = Adw.ToolbarView()
         page_widget.add_top_bar(Adw.HeaderBar())
-        page_widget.set_content(action_page)
+        page_widget.set_content(tool_page)
         window.main_navigation_view.push(Adw.NavigationPage.new(child=page_widget, title=self.name))
 
-class get_current_datetime(action):
-    tool = {
+class get_current_datetime(tool):
+    tool_metadata = {
         "name": "get_current_datetime",
         "description": "Gets the current date and/or time.",
         "parameters": {
@@ -184,8 +184,8 @@ class get_current_datetime(action):
         current_datetime = datetime.datetime.now().strftime(format_to_get)
         return current_datetime
 
-class get_recipe_by_name(action):
-    tool = {
+class get_recipe_by_name(tool):
+    tool_metadata = {
         "name": "get_recipe_by_name",
         "description": "Gets the recipe of a meal in JSON format by its name",
         "parameters": {
@@ -232,8 +232,8 @@ class get_recipe_by_name(action):
                 else:
                     return "{'error': '404: Not Found'}"
 
-class get_recipes_by_category(action):
-    tool = {
+class get_recipes_by_category(tool):
+    tool_metadata = {
         "name": "get_recipes_by_category",
         "description": "Gets a list of food recipes names filtered by category",
         "parameters": {
@@ -267,7 +267,7 @@ class get_recipes_by_category(action):
     def run(self, arguments, messages, bot_message) -> str:
         category = arguments.get('category', 'Random')
         if category == 'Random':
-            category = random.choice(self.tool.get('parameters', {}).get('properties', {}).get('category', {}).get('enum', [])[1:])
+            category = random.choice(self.tool_metadata.get('parameters', {}).get('properties', {}).get('category', {}).get('enum', [])[1:])
         response = requests.get('https://www.themealdb.com/api/json/v1/1/filter.php?c={}'.format(category))
         if response.status_code == 200:
             data = []
@@ -294,30 +294,30 @@ class get_recipes_by_category(action):
                         window.sql_instance.add_attachment(bot_message, attachment)
             return '\n'.join(data)
 
-available_actions = [get_current_datetime, get_recipes_by_category, get_recipe_by_name]
+available_tools = [get_current_datetime, get_recipes_by_category, get_recipe_by_name]
 
 def update_available_tools():
-    actions_parameters = window.sql_instance.get_actions_parameters()
-    for ac in available_actions:
-        action_element = ac(actions_parameters.get(ac.name, {}).get('variables', {}), actions_parameters.get(ac.name, {}).get('activated', False))
-        window.action_listbox.prepend(action_element)
+    tools_parameters = window.sql_instance.get_tool_parameters()
+    for ac in available_tools:
+        tool_element = ac(tools_parameters.get(ac.name, {}).get('variables', {}), tools_parameters.get(ac.name, {}).get('activated', False))
+        window.tool_listbox.prepend(tool_element)
 
 def get_enabled_tools() -> list:
     tools = []
-    for ac in list(window.action_listbox):
+    for ac in list(window.tool_listbox):
         if ac.is_enabled():
             tools.append(ac.get_tool())
     return tools
 
-def get_action(action_name:str):
-    actions = [a for a in list(window.action_listbox) if a.tool.get('name') == action_name]
-    if actions:
-        return actions[0]
+def get_tool(tool_name:str):
+    tools = [a for a in list(window.tool_listbox) if a.tool_metadata.get('name') == tool_name]
+    if tools:
+        return tools[0]
 
-def run_tool(action_name:str, arguments:dict, messages:list, bot_message):
-    action = get_action(action_name)
-    if action:
-        response = action.run(arguments, messages, bot_message)
+def run_tool(tool_name:str, arguments:dict, messages:list, bot_message):
+    tool = get_tool(tool_name)
+    if tool:
+        response = tool.run(arguments, messages, bot_message)
         return response
 
 def log_to_message(text:str, bot_message, animate:bool):
