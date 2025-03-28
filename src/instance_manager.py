@@ -826,7 +826,7 @@ class base_openai(base_instance):
 
     def get_local_models(self) -> list:
         try:
-            return [{'name': m.id} for m in self.client.models.list()]
+            return [{'name': m.id} for m in self.client.models.list() if 'whisper' not in m.id.lower()]
         except Exception as e:
             dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve added models'), str(e))
             logger.error(e)
@@ -1012,6 +1012,11 @@ class deepseek(base_openai):
     instance_type_display = 'Deepseek'
     instance_url = 'https://api.deepseek.com/v1/'
 
+class groq(base_openai):
+    instance_type = 'groq'
+    instance_type_display = 'Groq Cloud'
+    instance_url = 'https://api.groq.com/openai/v1'
+
 class openrouter(base_openai):
     instance_type = 'openrouter'
     instance_type_display = 'OpenRouter AI'
@@ -1088,6 +1093,7 @@ def update_instance_list():
         venice.instance_type: venice,
         deepseek.instance_type: deepseek,
         openrouter.instance_type: openrouter,
+        groq.instance_type: groq
     }
     if len(instances) > 0:
         window.instance_manager_stack.set_visible_child_name('content')
@@ -1121,7 +1127,7 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama, chatgpt, gemini, together, venice, deepseek, openrouter, base_anthropic, generic_openai]
+ready_instances = [ollama, chatgpt, gemini, together, venice, deepseek, openrouter, base_anthropic, groq, generic_openai]
 
 if shutil.which('ollama'):
     ready_instances.insert(0, ollama_managed)
