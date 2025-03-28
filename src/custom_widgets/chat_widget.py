@@ -43,7 +43,7 @@ possible_prompts = [
     "Can you explain the basics of machine learning?",
     "What is photoelectric effect?",
     "What is the history of the Great Wall of China?",
-    "Tell me some Historical facts about Taj Mahal.",
+    "Tell me some Historical facts about Taj Mahal",
     "Write a love story"    
 ]
 
