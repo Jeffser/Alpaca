@@ -26,7 +26,9 @@ possible_prompts = [
     "Can you write a poem?",
     "Can you write a story?",
     "What is GNU-Linux?",
+    "Compare windows vs linux in spreadsheet",
     "Which is the best Linux distro?",
+    "Give me butter chicken recipe",
     "Why is Pluto not a planet?",
     "What is a black-hole?",
     "Tell me how to stay fit",
@@ -38,7 +40,13 @@ possible_prompts = [
     "Explain the theory of relativity",
     "Explain how photosynthesis works",
     "Recommend a film about nature",
-    "What is nostalgia?"
+    "What is nostalgia?",
+    "Can you explain the concept of time dilation in physics?",
+    "Can you explain the basics of machine learning?",
+    "What is photoelectric effect?",
+    "What is the history of the Great Wall of China?",
+    "Tell me some Historical facts about Taj Mahal",
+    "Write a love story"    
 ]
 
 class chat(Gtk.Stack):
