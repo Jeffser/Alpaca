@@ -719,7 +719,7 @@ class base_anthropic(base_instance):
             adjustment=Gtk.Adjustment(
                 value=self.max_tokens,
                 lower=50,
-                upper=4096,
+                upper=8192,
                 step_increment=1
             )
         )
@@ -866,7 +866,7 @@ class base_openai(base_instance):
             adjustment=Gtk.Adjustment(
                 value=self.max_tokens,
                 lower=50,
-                upper=4096,
+                upper=8192,
                 step_increment=1
             )
         )
