@@ -26,7 +26,7 @@ possible_prompts = [
     "Can you write a poem?",
     "Can you write a story?",
     "What is GNU-Linux?",
-    "Compare windows vs linux in spreadsheet.",
+    "Compare windows vs linux in spreadsheet",
     "Which is the best Linux distro?",
     "Give me butter chicken recipe",
     "Why is Pluto not a planet?",
