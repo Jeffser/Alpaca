@@ -132,13 +132,12 @@ class base_instance:
         }
         if self.instance_type != 'anthropic':
             params["stream"] = True
-            params["tool_choice"] = "none"
+            if tools:
+                params["tools"] = tools
+                params["tool_choice"] = "none"
 
         if self.seed != 0 and self.instance_type not in ('gemini', 'venice'):
             params["seed"] = self.seed
-
-        if tools:
-            params["tools"] = tools
 
         try:
             bot_message.update_message({"clear": True})
