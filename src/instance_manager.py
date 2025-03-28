@@ -1007,6 +1007,11 @@ class venice(base_openai):
     instance_type_display = 'Venice'
     instance_url = 'https://api.venice.ai/api/v1/'
 
+class deepseek(base_openai):
+    instance_type = 'deepseek'
+    instance_type_display = 'Deepseek'
+    instance_url = 'https://api.deepseek.com/v1/'
+
 class openrouter(base_openai):
     instance_type = 'openrouter'
     instance_type_display = 'OpenRouter AI'
@@ -1081,6 +1086,7 @@ def update_instance_list():
         gemini.instance_type: gemini,
         together.instance_type: together,
         venice.instance_type: venice,
+        deepseek.instance_type: deepseek,
         openrouter.instance_type: openrouter,
     }
     if len(instances) > 0:
@@ -1115,7 +1121,7 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama, chatgpt, gemini, together, venice, openrouter, base_anthropic, generic_openai]
+ready_instances = [ollama, chatgpt, gemini, together, venice, deepseek, openrouter, base_anthropic, generic_openai]
 
 if shutil.which('ollama'):
     ready_instances.insert(0, ollama_managed)
