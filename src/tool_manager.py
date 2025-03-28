@@ -10,6 +10,7 @@ from gi.repository import Adw, Gtk, GLib
 window = None
 
 class tool(Adw.ActionRow):
+    __gtype_name__ = 'AlpacaToolRow'
 
     variables = {}
 
