@@ -250,7 +250,7 @@ class base_instance:
             url_el = Adw.EntryRow(title=_('Instance URL'), name='url', text=self.instance_url)
             groups[-1].add(url_el)
         if 'api' in elements and self.instance_type == 'ollama':
-            api_el = Adw.EntryRow(title=_('API Key (Unchanged)') if self.api_key else _('API Key (Optional)'), name='api')
+            api_el = Adw.PasswordEntryRow(title=_('API Key (Unchanged)') if self.api_key else _('API Key (Optional)'), name='api')
             link_button = Gtk.Button(
                 name='https://github.com/Jeffser/Alpaca/wiki/Instances#bearer-token-compatibility',
                 tooltip_text='https://github.com/Jeffser/Alpaca/wiki/Instances#bearer-token-compatibility',
@@ -388,7 +388,7 @@ class base_instance:
             for group in groups:
                 for el in list(list(list(list(group)[0])[1])[0]):
                     value = None
-                    if isinstance(el, Adw.EntryRow):
+                    if isinstance(el, Adw.EntryRow) or isinstance(el, Adw.PasswordEntryRow):
                         value = el.get_text().replace('\n', '')
                     elif isinstance(el, Adw.SpinRow):
                         value = el.get_value()
@@ -635,7 +635,13 @@ class ollama_managed(base_ollama):
         if self.instance_id:
             suffix_button = Gtk.Button(icon_name='terminal-symbolic', valign=1, css_classes=['flat'], tooltip_text=_('Ollama Log'))
             suffix_button.connect('clicked', lambda button: dialog_widget.simple_log(_('Ollama Log'), self.log_summary[0], self.log_summary[1], '\n'.join(self.log_raw.split('\n')[-50:])))
-        return self.generate_preferences_page(self=self, elements=('name', 'port', 'temperature', 'seed', 'overrides', 'model_directory'), suffix_element=suffix_button)
+        arguments = {
+            'elements': ('name', 'port', 'temperature', 'seed', 'overrides', 'model_directory'),
+            'suffix_element': suffix_button
+        }
+        if not self.instance_id:
+            arguments['self'] = self
+        return self.generate_preferences_page(**arguments)
 
 # Remote Connection Equivalent
 class ollama(base_ollama):
@@ -660,7 +666,12 @@ class ollama(base_ollama):
         )
 
     def get_preferences_page(self) -> Adw.PreferencesPage:
-        return self.generate_preferences_page(self=self, elements=('name', 'url', 'api', 'temperature', 'seed'))
+        arguments = {
+            'elements': ('name', 'url', 'api', 'temperature', 'seed')
+        }
+        if not self.instance_id:
+            arguments['self'] = self
+        return self.generate_preferences_page(**arguments)
 
 class base_openai(base_instance):
     max_tokens = 256
@@ -700,10 +711,14 @@ class base_openai(base_instance):
         return {}
 
     def get_preferences_page(self) -> Adw.PreferencesPage:
-        elements = ('name', 'api', 'temperature', 'max_tokens')
+        arguments = {
+            'elements': ('name', 'api', 'temperature', 'max_tokens')
+        }
         if self.instance_type not in ('gemini', 'venice'):
-            elements = elements + ('seed',)
-        return self.generate_preferences_page(self=self, elements=elements)
+            arguments['elements'] = arguments['elements'] + ('seed',)
+        if not self.instance_id:
+            arguments['self'] = self
+        return self.generate_preferences_page(**arguments)
 
 class chatgpt(base_openai):
     instance_type = 'chatgpt'
