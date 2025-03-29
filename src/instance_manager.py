@@ -716,6 +716,8 @@ class base_openai(base_instance):
         }
         if self.instance_type not in ('gemini', 'venice'):
             arguments['elements'] = arguments['elements'] + ('seed',)
+        if self.instance_type == 'openai:generic':
+            arguments['elements'] = arguments['elements'] + ('url',)
         if not self.instance_id:
             arguments['self'] = self
         return self.generate_preferences_page(**arguments)
@@ -816,6 +818,7 @@ class openrouter(base_openai):
 class generic_openai(base_openai):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
+    description = _('AI instance compatible with OpenAI library')
 
     def __init__(self, instance_id:str, name:str, instance_url:str, max_tokens:int, api_key:str, temperature:float, seed:int, default_model:str, title_model:str, pinned:bool):
         self.instance_url = instance_url
