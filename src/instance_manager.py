@@ -635,7 +635,7 @@ class ollama_managed(base_ollama):
         if self.instance_id:
             suffix_button = Gtk.Button(icon_name='terminal-symbolic', valign=1, css_classes=['flat'], tooltip_text=_('Ollama Log'))
             suffix_button.connect('clicked', lambda button: dialog_widget.simple_log(_('Ollama Log'), self.log_summary[0], self.log_summary[1], '\n'.join(self.log_raw.split('\n')[-50:])))
-        return self.generate_preferences_page(('name', 'port', 'temperature', 'seed', 'overrides', 'model_directory'), suffix_button)
+        return self.generate_preferences_page(self=self, elements=('name', 'port', 'temperature', 'seed', 'overrides', 'model_directory'), suffix_element=suffix_button)
 
 # Remote Connection Equivalent
 class ollama(base_ollama):
@@ -660,7 +660,7 @@ class ollama(base_ollama):
         )
 
     def get_preferences_page(self) -> Adw.PreferencesPage:
-        return self.generate_preferences_page(('name', 'url', 'api', 'temperature', 'seed'))
+        return self.generate_preferences_page(self=self, elements=('name', 'url', 'api', 'temperature', 'seed'))
 
 class base_openai(base_instance):
     max_tokens = 256
@@ -703,7 +703,7 @@ class base_openai(base_instance):
         elements = ('name', 'api', 'temperature', 'max_tokens')
         if self.instance_type not in ('gemini', 'venice'):
             elements = elements + ('seed',)
-        return self.generate_preferences_page(elements)
+        return self.generate_preferences_page(self=self, elements=elements)
 
 class chatgpt(base_openai):
     instance_type = 'chatgpt'
