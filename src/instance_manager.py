@@ -654,154 +654,6 @@ class ollama(base_ollama):
         pg.add(button_container)
         return pp
 
-class base_anthropic(base_instance):
-    api_key = ''
-    instance_type = 'anthropic'
-    instance_type_display = 'Anthropic'
-    instance_url = 'https://api.anthropic.com/v1/'
-
-    def __init__(self, instance_id: str, name: str, max_tokens: int, api_key: str, temperature: float, seed: int,
-                 default_model: str, title_model: str, pinned: bool):
-        self.instance_id = instance_id
-        self.name = name
-        self.max_tokens = max_tokens
-        self.api_key = api_key
-        self.temperature = temperature
-        self.seed = seed
-        self.default_model = default_model
-        self.title_model = title_model
-        self.pinned = pinned
-        self.client = anthropic.Anthropic(
-            api_key=self.api_key if self.api_key else 'NO_KEY'
-        )
-
-    def stop(self):
-        pass
-
-    def get_local_models(self) -> list:
-        try:
-            return [{'name': m.id} for m in self.client.models.list()]
-        except Exception as e:
-            dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve added models'), str(e))
-            logger.error(e)
-            window.instance_listbox.unselect_all()
-            return []
-
-    def get_available_models(self) -> dict:
-        return {}
-
-    def get_model_info(self, model_name: str) -> dict:
-        return {}
-
-    def get_preferences_page(self) -> Adw.PreferencesPage:
-        pp = Adw.PreferencesPage()
-        pg = Adw.PreferencesGroup(title=self.instance_type_display, description=self.instance_url)
-        pp.add(pg)
-
-        name_el = Adw.EntryRow(title=_('Name'), name='name', text=self.name)
-        pg.add(name_el)
-        api_el = Adw.EntryRow(title=_('API Key (Unchanged)') if self.api_key else _('API Key'), name='api')
-        if self.api_key:
-            api_el.connect('changed',
-                           lambda el: api_el.set_title(_('API Key') if api_el.get_text() else _('API Key (Unchanged)')))
-        pg.add(api_el)
-
-        pg = Adw.PreferencesGroup()
-        pp.add(pg)
-        max_tokens_el = Adw.SpinRow(
-            title=_('Max Tokens'),
-            subtitle=_(
-                'Defines the maximum number of tokens (words + spaces) the AI can generate in a response. More tokens allow longer replies but may take more time and cost more.'),
-            name='max_tokens',
-            digits=0,
-            numeric=True,
-            snap_to_ticks=True,
-            adjustment=Gtk.Adjustment(
-                value=self.max_tokens,
-                lower=50,
-                upper=8192,
-                step_increment=1
-            )
-        )
-        pg.add(max_tokens_el)
-
-        pg = Adw.PreferencesGroup()
-        pp.add(pg)
-
-        temperature_el = Adw.SpinRow(title=_('Temperature'), subtitle=_(
-            'Increasing the temperature will make the models answer more creatively.'), name='temperature', digits=2,
-                                     numeric=True, snap_to_ticks=True,
-                                     adjustment=Gtk.Adjustment(value=self.temperature, lower=0.01, upper=2,
-                                                               step_increment=0.01))
-        pg.add(temperature_el)
-
-        if self.instance_id:
-            pg = Adw.PreferencesGroup()
-            pp.add(pg)
-            default_model_el = Adw.ComboRow(title=_('Default Model'),
-                                            subtitle=_('Model to select when starting a new chat.'))
-            default_model_index = 0
-            title_model_el = Adw.ComboRow(title=_('Title Model'),
-                                          subtitle=_('Model to use when generating a chat title.'))
-            title_model_index = 0
-            string_list = Gtk.StringList()
-            for i, model in enumerate(self.get_local_models()):
-                string_list.append(window.convert_model_name(model.get('name'), 0))
-                if model.get('name') == self.default_model:
-                    default_model_index = i
-                if model.get('name') == self.title_model:
-                    title_model_index = i
-            default_model_el.set_model(string_list)
-            default_model_el.set_selected(default_model_index)
-            title_model_el.set_model(string_list)
-            title_model_el.set_selected(title_model_index)
-            pg.add(default_model_el)
-            pg.add(title_model_el)
-
-        pg = Adw.PreferencesGroup()
-        pp.add(pg)
-        button_container = Gtk.Box(spacing=10, halign=3)
-        cancel_button = Gtk.Button(
-            label=_('Cancel'),
-            tooltip_text=_('Cancel'),
-            css_classes=['pill']
-        )
-        cancel_button.connect('clicked', lambda button: window.main_navigation_view.pop_to_tag('instance_manager'))
-        button_container.append(cancel_button)
-        save_button = Gtk.Button(
-            label=_('Save'),
-            tooltip_text=_('Save'),
-            css_classes=['pill', 'suggested-action']
-        )
-
-        def save():
-            if self.instance_id:
-                if default_model_el.get_selected_item():
-                    self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
-                if title_model_el.get_selected_item():
-                    self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
-            else:
-                self.instance_id = window.generate_uuid()
-            if self.instance_type in ('openai:generic', 'llamacpp'):
-                self.instance_url = url_el.get_text().rstrip('/').replace('\n', '')
-                if not re.match(r'^(http|https)://', self.instance_url):
-                    self.instance_url = 'http://{}'.format(self.instance_url).replace('\n', '')
-            if name_el.get_text():
-                self.name = name_el.get_text().replace('\n', '')
-            if api_el.get_text():
-                self.api_key = api_el.get_text().replace('\n', '')
-            self.max_tokens = int(max_tokens_el.get_value())
-            self.temperature = temperature_el.get_value()
-
-            window.sql_instance.insert_or_update_instance(self)
-            update_instance_list()
-            window.main_navigation_view.pop_to_tag('instance_manager')
-
-        save_button.connect('clicked', lambda button: save())
-        button_container.append(save_button)
-        pg.add(button_container)
-        return pp
-
 class base_openai(base_instance):
     max_tokens = 256
     api_key = ''
@@ -1017,6 +869,12 @@ class groq(base_openai):
     instance_type_display = 'Groq Cloud'
     instance_url = 'https://api.groq.com/openai/v1'
 
+class anthropic(base_openai):
+    api_key = ''
+    instance_type = 'anthropic'
+    instance_type_display = 'Anthropic'
+    instance_url = 'https://api.anthropic.com/v1/'
+
 class openrouter(base_openai):
     instance_type = 'openrouter'
     instance_type_display = 'OpenRouter AI'
@@ -1093,6 +951,7 @@ def update_instance_list():
         venice.instance_type: venice,
         deepseek.instance_type: deepseek,
         openrouter.instance_type: openrouter,
+        anthropic.instance_type: anthropic,
         groq.instance_type: groq
     }
     if len(instances) > 0:
@@ -1106,10 +965,6 @@ def update_instance_list():
                 row = instance_row(ollama(ins.get('id'), ins.get('name'), ins.get('url'), ins.get('api'), ins.get('temperature'), ins.get('seed'), ins.get('default_model'), ins.get('title_model'), ins.get('pinned')))
             elif ins.get('type') == 'openai:generic':
                 row = instance_row(generic_openai(ins.get('id'), ins.get('name'), ins.get('url'), ins.get('max_tokens'), ins.get('api'), ins.get('temperature'), ins.get('seed'), ins.get('default_model'), ins.get('title_model'), ins.get('pinned')))
-            elif ins.get('type') == 'anthropic':
-                row = instance_row(base_anthropic(ins.get('id'), ins.get('name'), ins.get('max_tokens'), ins.get('api'),
-                                                  ins.get('temperature'), ins.get('seed'), ins.get('default_model'),
-                                                  ins.get('title_model'), ins.get('pinned')))
             elif openai_compatible_instances.get(ins.get('type')):
                 row = instance_row(openai_compatible_instances.get(ins.get('type'))(ins.get('id'), ins.get('name'), ins.get('max_tokens'), ins.get('api'), ins.get('temperature'), ins.get('seed'), ins.get('default_model'), ins.get('title_model'), ins.get('pinned')))
             if row:
@@ -1127,7 +982,7 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama, chatgpt, gemini, together, venice, deepseek, openrouter, base_anthropic, groq, generic_openai]
+ready_instances = [ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, generic_openai]
 
 if shutil.which('ollama'):
     ready_instances.insert(0, ollama_managed)
