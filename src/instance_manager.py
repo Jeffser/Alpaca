@@ -141,21 +141,14 @@ class base_instance:
 
         try:
             bot_message.update_message({"clear": True})
-            if self.instance_type == 'anthropic':
-                with self.client.messages.stream(**params) as response:
-                    for text in response.text_stream:
-                        bot_message.update_message({"content": text})
-                        if not chat.busy:
-                            break
-            else:
-                response = self.client.chat.completions.create(**params)
-                for chunk in response:
-                    if chunk.choices and chunk.choices[0].delta:
-                        delta = chunk.choices[0].delta
-                        if delta.content:
-                            bot_message.update_message({"content": delta.content})
-                    if not chat.busy:
-                        break
+            response = self.client.chat.completions.create(**params)
+            for chunk in response:
+                if chunk.choices and chunk.choices[0].delta:
+                    delta = chunk.choices[0].delta
+                    if delta.content:
+                        bot_message.update_message({"content": delta.content})
+                if not chat.busy:
+                    break
         except Exception as e:
             dialog_widget.simple_error(_('Instance Error'), _('Message generation failed'), e)
             logger.error(e)
@@ -182,22 +175,11 @@ class base_instance:
         }
         new_chat_title = chat.get_name()
         try:
-            if self.instance_type == 'anthropic':
-                response = self.client.messages.create(**params)
-                if response and response.content:
-                    content = response.content[0].text
-                    if len(content) > 2 and content[0].isalnum() == False:
-                        emoji = content[0]
-                        title = content[1:].strip()
-                        new_chat_title = f"{emoji} {title}"
-                    else:
-                        new_chat_title = content
-            else:
-                completion = self.client.beta.chat.completions.parse(**params, response_format=chat_title)
-                response = completion.choices[0].message
-                if response.parsed:
-                    emoji = response.parsed.emoji if len(response.parsed.emoji) == 1 else '💬'
-                    new_chat_title = '{} {}'.format(emoji, response.parsed.title)
+            completion = self.client.beta.chat.completions.parse(**params, response_format=chat_title)
+            response = completion.choices[0].message
+            if response.parsed:
+                emoji = response.parsed.emoji if len(response.parsed.emoji) == 1 else '💬'
+                new_chat_title = '{} {}'.format(emoji, response.parsed.title)
         except Exception as e:
             try:
                 response = self.client.chat.completions.create(**params)
