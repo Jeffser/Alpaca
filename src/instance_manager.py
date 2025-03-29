@@ -263,7 +263,7 @@ class base_instance:
                 api_el.connect('changed', lambda el: api_el.set_title(_('API Key (Optional)') if api_el.get_text() else _('API Key (Unchanged)')))
             groups[-1].add(api_el)
         elif 'api' in elements:
-            api_el = Adw.EntryRow(title=_('API Key (Unchanged)') if self.api_key else _('API Key'), name='api')
+            api_el = Adw.PasswordEntryRow(title=_('API Key (Unchanged)') if self.api_key else _('API Key'), name='api')
             if self.api_key:
                 api_el.connect('changed', lambda el: api_el.set_title(_('API Key') if api_el.get_text() else _('API Key (Unchanged)')))
             groups[-1].add(api_el)
