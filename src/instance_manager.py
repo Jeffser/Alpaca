@@ -4,10 +4,9 @@ Manages AI instances (only Ollama for now)
 """
 
 import gi
-from anthropic import Anthropic
 from gi.repository import Adw, Gtk, GLib
 
-import openai, anthropic, requests, json, logging, os, shutil, subprocess, threading, re, time
+import openai, requests, json, logging, os, shutil, subprocess, threading, re, time
 from pydantic import BaseModel
 
 from .constants import AlpacaFolders
@@ -39,6 +38,7 @@ class base_instance:
     default_model = None
     title_model = None
     pinned = False
+    description = None
 
     def prepare_chat(self, bot_message):
         chat = bot_message.get_chat()
@@ -214,6 +214,219 @@ class base_instance:
                 self.default_model = models[0].get('name')
         return self.default_model
 
+    def generate_preferences_page(self, elements:tuple, suffix_element=None) -> Adw.PreferencesPage:
+        pp = Adw.PreferencesPage()
+        pp.set_title(self.instance_type_display)
+        groups = []
+        groups.append(Adw.PreferencesGroup(title=self.instance_type_display, description=self.description if self.description else self.instance_url))
+        if suffix_element:
+            groups[-1].set_header_suffix(suffix_element)
+        pp.add(groups[-1])
+
+        if 'name' in elements:
+            name_el = Adw.EntryRow(title=_('Name'), name='name', text=self.name)
+            groups[-1].add(name_el)
+        if 'port' in elements:
+            try:
+                port = int(self.instance_url.split(':')[-1])
+            except Exception as e:
+                port = 11435
+            port_el = Adw.SpinRow(
+                title=_('Port'),
+                subtitle=_("Which network port will '{}' use").format(self.instance_type_display),
+                name='port',
+                digits=0,
+                numeric=True,
+                snap_to_ticks=True,
+                adjustment=Gtk.Adjustment(
+                    value=port,
+                    lower=1024,
+                    upper=65535,
+                    step_increment=1
+                )
+            )
+            groups[-1].add(port_el)
+        if 'url' in elements:
+            url_el = Adw.EntryRow(title=_('Instance URL'), name='url', text=self.instance_url)
+            groups[-1].add(url_el)
+        if 'api' in elements and self.instance_type == 'ollama':
+            api_el = Adw.EntryRow(title=_('API Key (Unchanged)') if self.api_key else _('API Key (Optional)'), name='api')
+            link_button = Gtk.Button(
+                name='https://github.com/Jeffser/Alpaca/wiki/Instances#bearer-token-compatibility',
+                tooltip_text='https://github.com/Jeffser/Alpaca/wiki/Instances#bearer-token-compatibility',
+                icon_name='globe-symbolic',
+                valign=3
+            )
+            link_button.connect('clicked', window.link_button_handler)
+            api_el.add_suffix(link_button)
+            if self.api_key:
+                api_el.connect('changed', lambda el: api_el.set_title(_('API Key (Optional)') if api_el.get_text() else _('API Key (Unchanged)')))
+            groups[-1].add(api_el)
+        elif 'api' in elements:
+            api_el = Adw.EntryRow(title=_('API Key (Unchanged)') if self.api_key else _('API Key'), name='api')
+            if self.api_key:
+                api_el.connect('changed', lambda el: api_el.set_title(_('API Key') if api_el.get_text() else _('API Key (Unchanged)')))
+            groups[-1].add(api_el)
+
+        groups.append(Adw.PreferencesGroup())
+        pp.add(groups[-1])
+
+        if 'max_tokens' in elements:
+            max_tokens_el = Adw.SpinRow(
+                title=_('Max Tokens'),
+                subtitle=_('Defines the maximum number of tokens (words + spaces) the AI can generate in a response. More tokens allow longer replies but may take more time and cost more.'),
+                name='max_tokens',
+                digits=0,
+                numeric=True,
+                snap_to_ticks=True,
+                adjustment=Gtk.Adjustment(
+                    value=self.max_tokens,
+                    lower=50,
+                    upper=8192,
+                    step_increment=1
+                )
+            )
+            groups[-1].add(max_tokens_el)
+        if 'temperature' in elements:
+            temperature_el = Adw.SpinRow(
+                title=_('Temperature'),
+                subtitle=_('Increasing the temperature will make the models answer more creatively.'),
+                name='temperature',
+                digits=2,
+                numeric=True,
+                snap_to_ticks=True,
+                adjustment=Gtk.Adjustment(
+                    value=self.temperature,
+                    lower=0.01,
+                    upper=2,
+                    step_increment=0.01
+                )
+            )
+            groups[-1].add(temperature_el)
+        if 'seed' in elements:
+            seed_el = Adw.SpinRow(
+                title=_('Seed'),
+                subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'),
+                name='seed',
+                digits=0,
+                numeric=True,
+                snap_to_ticks=True,
+                adjustment=Gtk.Adjustment(
+                    value=self.seed,
+                    lower=0,
+                    upper=99999999,
+                    step_increment=1
+                )
+            )
+            groups[-1].add(seed_el)
+
+        if 'overrides' in elements and self.overrides:
+            groups.append(Adw.PreferencesGroup(title=_('Overrides'), description=_('These entries are optional, they are used to troubleshoot GPU related problems with Ollama.')))
+            pp.add(groups[-1])
+            for name, value in self.overrides.items():
+                override_el = Adw.EntryRow(title=name, name='override:{}'.format(name), text=value)
+                if override_urls.get(name):
+                    link_button = Gtk.Button(
+                        name=override_urls.get(name),
+                        tooltip_text=override_urls.get(name),
+                        icon_name='globe-symbolic',
+                        valign=3
+                    )
+                    link_button.connect('clicked', window.link_button_handler)
+                    override_el.add_suffix(link_button)
+                groups[-1].add(override_el)
+
+        if 'model_directory' in elements:
+            groups.append(Adw.PreferencesGroup())
+            pp.add(groups[-1])
+            model_directory_el = Adw.ActionRow(title=_('Model Directory'), subtitle=self.model_directory, name="model_directory")
+            open_dir_button = Gtk.Button(
+                tooltip_text=_('Select Directory'),
+                icon_name='inode-directory-symbolic',
+                valign=3
+            )
+            open_dir_button.connect('clicked', lambda button, row=model_directory_el: dialog_widget.simple_directory(lambda res, row=model_directory_el: row.set_subtitle(res.get_path())))
+            model_directory_el.add_suffix(open_dir_button)
+            groups[-1].add(model_directory_el)
+
+        if self.instance_id:
+            groups.append(Adw.PreferencesGroup())
+            pp.add(groups[-1])
+            default_model_el = Adw.ComboRow(title=_('Default Model'), subtitle=_('Model to select when starting a new chat.'), name='default_model')
+            default_model_index = 0
+            title_model_el = Adw.ComboRow(title=_('Title Model'), subtitle=_('Model to use when generating a chat title.'), name='title_model')
+            title_model_index = 0
+            string_list = Gtk.StringList()
+            for i, model in enumerate(self.get_local_models()):
+                string_list.append(window.convert_model_name(model.get('name'), 0))
+                if model.get('name') == self.default_model:
+                    default_model_index = i
+                if model.get('name') == self.title_model:
+                    title_model_index = i
+            default_model_el.set_model(string_list)
+            default_model_el.set_selected(default_model_index)
+            title_model_el.set_model(string_list)
+            title_model_el.set_selected(title_model_index)
+            groups[-1].add(default_model_el)
+            groups[-1].add(title_model_el)
+
+        def save():
+            save_functions = {
+                'name': lambda val: setattr(self, 'name', val if val else _('Instance')),
+                'port': lambda val: setattr(self, 'instance_url', 'http://0.0.0.0:{}'.format(val)),
+                'url': lambda val: setattr(self, 'instance_url', '{}{}'.format('http://' if not re.match(r'^(http|https)://') else '', val.rstrip('/'))),
+                'api': lambda val: setattr(self, 'api_key', self.api_key if self.api_key and not val else (val if val else 'empty')),
+                'max_tokens': lambda val: setattr(self, 'max_tokens', val),
+                'temperature': lambda val: setattr(self, 'temperature', val),
+                'seed': lambda val: setattr(self, 'seed', val),
+                'override': lambda name, val: self.overrides.__setitem__(name, val),
+                'model_directory': lambda val: setattr(self, 'model_directory', val),
+                'default_model': lambda val: setattr(self, 'default_model', window.convert_model_name(val, 1)),
+                'title_model': lambda val: setattr(self, 'title_model', window.convert_model_name(val, 1))
+            }
+
+            for group in groups:
+                for el in list(list(list(list(group)[0])[1])[0]):
+                    value = None
+                    if isinstance(el, Adw.EntryRow):
+                        value = el.get_text().replace('\n', '')
+                    elif isinstance(el, Adw.SpinRow):
+                        value = el.get_value()
+                    elif isinstance(el, Adw.ActionRow):
+                        value = el.get_subtitle()
+                    elif isinstance(el, Adw.ComboRow):
+                        value = el.get_selected_item().get_string()
+                    if el.get_name().startswith('override:'):
+                        save_functions.get('override')(el.get_name().split(':')[1], value)
+                    elif save_functions.get(el.get_name()):
+                        save_functions.get(el.get_name())(value)
+
+            if not self.instance_id:
+                self.instance_id = window.generate_uuid()
+            window.sql_instance.insert_or_update_instance(self)
+            update_instance_list()
+            window.main_navigation_view.pop_to_tag('instance_manager')
+
+        pg = Adw.PreferencesGroup()
+        pp.add(pg)
+        button_container = Gtk.Box(spacing=10, halign=3)
+        cancel_button = Gtk.Button(
+            label=_('Cancel'),
+            tooltip_text=_('Cancel'),
+            css_classes=['pill']
+        )
+        cancel_button.connect('clicked', lambda button: window.main_navigation_view.pop_to_tag('instance_manager'))
+        button_container.append(cancel_button)
+        save_button = Gtk.Button(
+            label=_('Save'),
+            tooltip_text=_('Save'),
+            css_classes=['pill', 'suggested-action']
+        )
+        save_button.connect('clicked', lambda button: save())
+        button_container.append(save_button)
+        pg.add(button_container)
+        return pp
+
 # Fallback for when there are no instances
 class empty:
     instance_id = None
@@ -344,6 +557,7 @@ class ollama_managed(base_ollama):
         'ROCR_VISIBLE_DEVICES': ''
     }
     model_directory = os.path.join(data_dir, '.ollama', 'models')
+    description = _('Local AI instance managed directly by Alpaca')
 
     def __init__(self, instance_id:str, name:str, instance_url:str, temperature:float, seed:int, overrides:dict, model_directory:str, default_model:str, title_model:str, pinned:bool):
         self.instance_id = instance_id
@@ -417,131 +631,18 @@ class ollama_managed(base_ollama):
             self.log_summary = (_("Integrated Ollama instance is running"), ['dim-label', 'success'])
 
     def get_preferences_page(self) -> Adw.PreferencesPage:
-        pp = Adw.PreferencesPage()
-        pg = Adw.PreferencesGroup(title=self.instance_type_display, description=_('Local AI instance managed directly by Alpaca'))
-
+        suffix_button = None
         if self.instance_id:
-            logger_button = Gtk.Button(icon_name='terminal-symbolic', valign=1, css_classes=['flat'], tooltip_text=_('Ollama Log'))
-            logger_button.connect('clicked', lambda button: dialog_widget.simple_log(_('Ollama Log'), self.log_summary[0], self.log_summary[1], '\n'.join(self.log_raw.split('\n')[-50:])))
-            pg.set_header_suffix(logger_button)
-
-        pp.add(pg)
-
-        name_el = Adw.EntryRow(title=_('Name'), name='name', text=self.name)
-        pg.add(name_el)
-        try:
-            port = int(self.instance_url.split(':')[-1])
-        except Exception as e:
-            port = 11435
-        port_el = Adw.SpinRow(title=_('Port'), subtitle=_('Which network port will Ollama use'), name='port', digits=0, numeric=True, snap_to_ticks=True, adjustment=Gtk.Adjustment(value=port, lower=1024, upper=65535, step_increment=1))
-        pg.add(port_el)
-
-        pg = Adw.PreferencesGroup()
-        pp.add(pg)
-        temperature_el = Adw.SpinRow(title=_('Temperature'), subtitle=_('Increasing the temperature will make the models answer more creatively.'), name='temperature', digits=2, numeric=True, snap_to_ticks=True, adjustment=Gtk.Adjustment(value=self.temperature, lower=0.01, upper=2, step_increment=0.01))
-        pg.add(temperature_el)
-
-        seed_el = Adw.SpinRow(title=_('Seed'), subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'), name='seed', digits=0, numeric=True, snap_to_ticks=True, adjustment=Gtk.Adjustment(value=self.seed, lower=0, upper=99999999, step_increment=1))
-        pg.add(seed_el)
-
-        pg = Adw.PreferencesGroup()
-        pp.add(pg)
-        directory_el = Adw.ActionRow(title=_('Model Directory'), subtitle=self.model_directory)
-        open_dir_button = Gtk.Button(
-            tooltip_text=_('Select Directory'),
-            icon_name='inode-directory-symbolic',
-            valign=3
-        )
-        open_dir_button.connect('clicked', lambda button, row=directory_el: dialog_widget.simple_directory(lambda res, row=directory_el: row.set_subtitle(res.get_path())))
-        directory_el.add_suffix(open_dir_button)
-        pg.add(directory_el)
-
-        if self.instance_id:
-            pg = Adw.PreferencesGroup()
-            pp.add(pg)
-            default_model_el = Adw.ComboRow(title=_('Default Model'), subtitle=_('Model to select when starting a new chat.'))
-            default_model_index = 0
-            title_model_el = Adw.ComboRow(title=_('Title Model'), subtitle=_('Model to use when generating a chat title.'))
-            title_model_index = 0
-            string_list = Gtk.StringList()
-            for i, model in enumerate(self.get_local_models()):
-                string_list.append(window.convert_model_name(model.get('name'), 0))
-                if model.get('name') == self.default_model:
-                    default_model_index = i
-                if model.get('name') == self.title_model:
-                    title_model_index = i
-            default_model_el.set_model(string_list)
-            default_model_el.set_selected(default_model_index)
-            title_model_el.set_model(string_list)
-            title_model_el.set_selected(title_model_index)
-            pg.add(default_model_el)
-            pg.add(title_model_el)
-
-        pg = Adw.PreferencesGroup(title=_('Overrides'), description=_('These entries are optional, they are used to troubleshoot GPU related problems with Ollama.'))
-        pp.add(pg)
-        override_elements = {}
-        for name, value in self.overrides.items():
-            override_elements[name] = Adw.EntryRow(title=name, name='override:{}'.format(name), text=value)
-            if override_urls.get(name):
-                link_button = Gtk.Button(
-                    name=override_urls.get(name),
-                    tooltip_text=override_urls.get(name),
-                    icon_name='globe-symbolic',
-                    valign=3
-                )
-                link_button.connect('clicked', window.link_button_handler)
-                override_elements[name].add_suffix(link_button)
-            pg.add(override_elements[name])
-
-        pg = Adw.PreferencesGroup()
-        pp.add(pg)
-        button_container = Gtk.Box(spacing=10, halign=3)
-        cancel_button = Gtk.Button(
-            label=_('Cancel'),
-            tooltip_text=_('Cancel'),
-            css_classes=['pill']
-        )
-        cancel_button.connect('clicked', lambda button: window.main_navigation_view.pop_to_tag('instance_manager'))
-        button_container.append(cancel_button)
-        save_button = Gtk.Button(
-            label=_('Save'),
-            tooltip_text=_('Save'),
-            css_classes=['pill', 'suggested-action']
-        )
-
-        def save():
-            if name_el.get_text():
-                self.name = name_el.get_text().replace('\n', '')
-            self.instance_url = 'http://0.0.0.0:{}'.format(int(port_el.get_value()))
-            self.temperature = temperature_el.get_value()
-            self.seed = int(seed_el.get_value())
-            self.model_directory = directory_el.get_subtitle()
-            self.overrides = {}
-            for name, element in override_elements.items():
-                self.overrides[name] = element.get_text().replace('\n', '')
-            if self.instance_id:
-                if default_model_el.get_selected_item():
-                    self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
-                if title_model_el.get_selected_item():
-                    self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
-                #self.start()
-            else:
-                self.instance_id = window.generate_uuid()
-
-            window.sql_instance.insert_or_update_instance(self)
-            update_instance_list()
-            window.main_navigation_view.pop_to_tag('instance_manager')
-
-        save_button.connect('clicked', lambda button: save())
-        button_container.append(save_button)
-        pg.add(button_container)
-        return pp
+            suffix_button = Gtk.Button(icon_name='terminal-symbolic', valign=1, css_classes=['flat'], tooltip_text=_('Ollama Log'))
+            suffix_button.connect('clicked', lambda button: dialog_widget.simple_log(_('Ollama Log'), self.log_summary[0], self.log_summary[1], '\n'.join(self.log_raw.split('\n')[-50:])))
+        return self.generate_preferences_page(('name', 'port', 'temperature', 'seed', 'overrides', 'model_directory'), suffix_button)
 
 # Remote Connection Equivalent
 class ollama(base_ollama):
     instance_type = 'ollama'
     instance_type_display = 'Ollama'
     instance_url = 'http://0.0.0.0:11434'
+    description = _('Local or remote AI instance not managed by Alpaca')
 
     def __init__(self, instance_id:str, name:str, instance_url:str, api_key:str, temperature:float, seed:int, default_model:str, title_model:str, pinned:bool):
         self.instance_id = instance_id
@@ -559,100 +660,7 @@ class ollama(base_ollama):
         )
 
     def get_preferences_page(self) -> Adw.PreferencesPage:
-        pp = Adw.PreferencesPage()
-        pg = Adw.PreferencesGroup(title=self.instance_type_display, description=_('Local or remote AI instance not managed by Alpaca'))
-        pp.add(pg)
-
-        name_el = Adw.EntryRow(title=_('Name'), name='name', text=self.name)
-        pg.add(name_el)
-
-        url_el = Adw.EntryRow(title=_('Instance URL'), name='url', text=self.instance_url)
-        pg.add(url_el)
-
-        api_el = Adw.EntryRow(title=_('API Key (Optional)'), name='api', text=self.api_key)
-        link_button = Gtk.Button(
-            name='https://github.com/Jeffser/Alpaca/wiki/Instances#bearer-token-compatibility',
-            tooltip_text='https://github.com/Jeffser/Alpaca/wiki/Instances#bearer-token-compatibility',
-            icon_name='globe-symbolic',
-            valign=3
-        )
-        link_button.connect('clicked', window.link_button_handler)
-        api_el.add_suffix(link_button)
-        pg.add(api_el)
-
-        pg = Adw.PreferencesGroup()
-        pp.add(pg)
-
-        temperature_el = Adw.SpinRow(title=_('Temperature'), subtitle=_('Increasing the temperature will make the models answer more creatively.'), name='temperature', digits=2, numeric=True, snap_to_ticks=True, adjustment=Gtk.Adjustment(value=self.temperature, lower=0.01, upper=2, step_increment=0.01))
-        pg.add(temperature_el)
-
-        seed_el = Adw.SpinRow(title=_('Seed'), subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'), name='seed', digits=0, numeric=True, snap_to_ticks=True, adjustment=Gtk.Adjustment(value=self.seed, lower=0, upper=99999999, step_increment=1))
-        pg.add(seed_el)
-
-        if self.instance_id:
-            pg = Adw.PreferencesGroup()
-            pp.add(pg)
-            default_model_el = Adw.ComboRow(title=_('Default Model'), subtitle=_('Model to select when starting a new chat.'))
-            default_model_index = 0
-            title_model_el = Adw.ComboRow(title=_('Title Model'), subtitle=_('Model to use when generating a chat title.'))
-            title_model_index = 0
-            string_list = Gtk.StringList()
-            for i, model in enumerate(self.get_local_models()):
-                string_list.append(window.convert_model_name(model.get('name'), 0))
-                if model.get('name') == self.default_model:
-                    default_model_index = i
-                if model.get('name') == self.title_model:
-                    title_model_index = i
-            default_model_el.set_model(string_list)
-            default_model_el.set_selected(default_model_index)
-            title_model_el.set_model(string_list)
-            title_model_el.set_selected(title_model_index)
-            pg.add(default_model_el)
-            pg.add(title_model_el)
-
-        pg = Adw.PreferencesGroup()
-        pp.add(pg)
-        button_container = Gtk.Box(spacing=10, halign=3)
-        cancel_button = Gtk.Button(
-            label=_('Cancel'),
-            tooltip_text=_('Cancel'),
-            css_classes=['pill']
-        )
-        cancel_button.connect('clicked', lambda button: window.main_navigation_view.pop_to_tag('instance_manager'))
-        button_container.append(cancel_button)
-        save_button = Gtk.Button(
-            label=_('Save'),
-            tooltip_text=_('Save'),
-            css_classes=['pill', 'suggested-action']
-        )
-
-        def save():
-            if self.instance_id:
-                if default_model_el.get_selected_item():
-                    self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
-                if title_model_el.get_selected_item():
-                    self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
-            else:
-                self.instance_id = window.generate_uuid()
-            if name_el.get_text():
-                self.name = name_el.get_text().replace('\n', '')
-            self.instance_url = url_el.get_text().rstrip('/').replace('\n', '')
-            if not re.match(r'^(http|https)://', self.instance_url):
-                self.instance_url = 'http://{}'.format(self.instance_url).replace('\n', '')
-            self.api_key = api_el.get_text()
-            if not self.api_key:
-                self.api_key = 'ollama'
-            self.temperature = temperature_el.get_value()
-            self.seed = int(seed_el.get_value())
-
-            window.sql_instance.insert_or_update_instance(self)
-            update_instance_list()
-            window.main_navigation_view.pop_to_tag('instance_manager')
-
-        save_button.connect('clicked', lambda button: save())
-        button_container.append(save_button)
-        pg.add(button_container)
-        return pp
+        return self.generate_preferences_page(('name', 'url', 'api', 'temperature', 'seed'))
 
 class base_openai(base_instance):
     max_tokens = 256
@@ -692,114 +700,10 @@ class base_openai(base_instance):
         return {}
 
     def get_preferences_page(self) -> Adw.PreferencesPage:
-        pp = Adw.PreferencesPage()
-        pg = Adw.PreferencesGroup(title=self.instance_type_display, description=self.instance_url)
-        pp.add(pg)
-
-        name_el = Adw.EntryRow(title=_('Name'), name='name', text=self.name)
-        pg.add(name_el)
-        if self.instance_type in ('openai:generic',):
-            url_el = Adw.EntryRow(title=_('Instance URL'), name='url', text=self.instance_url)
-            pg.add(url_el)
-        api_el = Adw.EntryRow(title=_('API Key (Unchanged)') if self.api_key else _('API Key'), name='api')
-        if self.api_key:
-            api_el.connect('changed', lambda el: api_el.set_title(_('API Key') if api_el.get_text() else _('API Key (Unchanged)')))
-        pg.add(api_el)
-
-        pg = Adw.PreferencesGroup()
-        pp.add(pg)
-        max_tokens_el = Adw.SpinRow(
-            title=_('Max Tokens'),
-            subtitle=_('Defines the maximum number of tokens (words + spaces) the AI can generate in a response. More tokens allow longer replies but may take more time and cost more.'),
-            name='max_tokens',
-            digits=0,
-            numeric=True,
-            snap_to_ticks=True,
-            adjustment=Gtk.Adjustment(
-                value=self.max_tokens,
-                lower=50,
-                upper=8192,
-                step_increment=1
-            )
-        )
-        pg.add(max_tokens_el)
-
-        pg = Adw.PreferencesGroup()
-        pp.add(pg)
-
-        temperature_el = Adw.SpinRow(title=_('Temperature'), subtitle=_('Increasing the temperature will make the models answer more creatively.'), name='temperature', digits=2, numeric=True, snap_to_ticks=True, adjustment=Gtk.Adjustment(value=self.temperature, lower=0.01, upper=2, step_increment=0.01))
-        pg.add(temperature_el)
-
+        elements = ('name', 'api', 'temperature', 'max_tokens')
         if self.instance_type not in ('gemini', 'venice'):
-            seed_el = Adw.SpinRow(title=_('Seed'), subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'), name='seed', digits=0, numeric=True, snap_to_ticks=True, adjustment=Gtk.Adjustment(value=self.seed, lower=0, upper=99999999, step_increment=1))
-            pg.add(seed_el)
-
-        if self.instance_id:
-            pg = Adw.PreferencesGroup()
-            pp.add(pg)
-            default_model_el = Adw.ComboRow(title=_('Default Model'), subtitle=_('Model to select when starting a new chat.'))
-            default_model_index = 0
-            title_model_el = Adw.ComboRow(title=_('Title Model'), subtitle=_('Model to use when generating a chat title.'))
-            title_model_index = 0
-            string_list = Gtk.StringList()
-            for i, model in enumerate(self.get_local_models()):
-                string_list.append(window.convert_model_name(model.get('name'), 0))
-                if model.get('name') == self.default_model:
-                    default_model_index = i
-                if model.get('name') == self.title_model:
-                    title_model_index = i
-            default_model_el.set_model(string_list)
-            default_model_el.set_selected(default_model_index)
-            title_model_el.set_model(string_list)
-            title_model_el.set_selected(title_model_index)
-            pg.add(default_model_el)
-            pg.add(title_model_el)
-
-        pg = Adw.PreferencesGroup()
-        pp.add(pg)
-        button_container = Gtk.Box(spacing=10, halign=3)
-        cancel_button = Gtk.Button(
-            label=_('Cancel'),
-            tooltip_text=_('Cancel'),
-            css_classes=['pill']
-        )
-        cancel_button.connect('clicked', lambda button: window.main_navigation_view.pop_to_tag('instance_manager'))
-        button_container.append(cancel_button)
-        save_button = Gtk.Button(
-            label=_('Save'),
-            tooltip_text=_('Save'),
-            css_classes=['pill', 'suggested-action']
-        )
-
-        def save():
-            if self.instance_id:
-                if default_model_el.get_selected_item():
-                    self.default_model = window.convert_model_name(default_model_el.get_selected_item().get_string(), 1)
-                if title_model_el.get_selected_item():
-                    self.title_model = window.convert_model_name(title_model_el.get_selected_item().get_string(), 1)
-            else:
-                self.instance_id = window.generate_uuid()
-            if self.instance_type in ('openai:generic', 'llamacpp'):
-                self.instance_url = url_el.get_text().rstrip('/').replace('\n', '')
-                if not re.match(r'^(http|https)://', self.instance_url):
-                    self.instance_url = 'http://{}'.format(self.instance_url).replace('\n', '')
-            if name_el.get_text():
-                self.name = name_el.get_text().replace('\n', '')
-            if api_el.get_text():
-                self.api_key = api_el.get_text().replace('\n', '')
-            self.max_tokens = int(max_tokens_el.get_value())
-            self.temperature = temperature_el.get_value()
-            if self.instance_type not in ('gemini', 'venice'):
-                self.seed = int(seed_el.get_value())
-
-            window.sql_instance.insert_or_update_instance(self)
-            update_instance_list()
-            window.main_navigation_view.pop_to_tag('instance_manager')
-
-        save_button.connect('clicked', lambda button: save())
-        button_container.append(save_button)
-        pg.add(button_container)
-        return pp
+            elements = elements + ('seed',)
+        return self.generate_preferences_page(elements)
 
 class chatgpt(base_openai):
     instance_type = 'chatgpt'
