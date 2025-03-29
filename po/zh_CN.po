@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-27 20:30-0600\n"
+"POT-Creation-Date: 2025-03-29 13:24-0600\n"
 "PO-Revision-Date: 2025-03-11 16:57+0100\n"
 "Last-Translator: Yuehao Sui <8ar10der@amao.run>\n"
 "Language-Team: Chinese (China)\n"
@@ -1851,11 +1851,8 @@ msgstr "关闭"
 msgid "Next"
 msgstr "下一页"
 
-#: src/window.py:503 src/instance_manager.py:500 src/instance_manager.py:501
-#: src/instance_manager.py:617 src/instance_manager.py:618
-#: src/instance_manager.py:765 src/instance_manager.py:766
-#: src/instance_manager.py:910 src/instance_manager.py:911 src/window.ui:919
-#: src/window.ui:923 src/custom_widgets/message_widget.py:80
+#: src/window.py:503 src/instance_manager.py:414 src/instance_manager.py:415
+#: src/window.ui:919 src/window.ui:923 src/custom_widgets/message_widget.py:80
 #: src/custom_widgets/message_widget.py:219
 #: src/custom_widgets/model_manager_widget.py:416
 #: src/custom_widgets/dialog_widget.py:149
@@ -2039,7 +2036,7 @@ msgstr "移除附件？"
 msgid "Are you sure you want to remove attachment?"
 msgstr "你确定你想要移除附件？"
 
-#: src/window.py:1240 src/instance_manager.py:1058
+#: src/window.py:1240 src/instance_manager.py:825
 #: src/custom_widgets/model_manager_widget.py:417
 #: src/custom_widgets/model_manager_widget.py:457
 msgid "Remove"
@@ -3093,7 +3090,7 @@ msgid ""
 "fast, secure, and high-quality AI"
 msgstr ""
 
-#: src/instance_manager.py:31
+#: src/instance_manager.py:30 src/instance_manager.py:375
 msgid "Instance"
 msgstr "实例"
 
@@ -3122,11 +3119,10 @@ msgstr ""
 msgid "Generating message..."
 msgstr ""
 
-#: src/instance_manager.py:160 src/instance_manager.py:261
-#: src/instance_manager.py:271 src/instance_manager.py:414
-#: src/instance_manager.py:685 src/instance_manager.py:831
-#: src/instance_manager.py:972 src/instance_manager.py:1001
-#: src/instance_manager.py:1029
+#: src/instance_manager.py:160 src/instance_manager.py:474
+#: src/instance_manager.py:484 src/instance_manager.py:628
+#: src/instance_manager.py:691 src/instance_manager.py:728
+#: src/instance_manager.py:757 src/instance_manager.py:796
 msgid "Instance Error"
 msgstr "实例错误"
 
@@ -3134,168 +3130,40 @@ msgstr "实例错误"
 msgid "Message generation failed"
 msgstr "消息生成失败"
 
-#: src/instance_manager.py:261 src/instance_manager.py:685
-#: src/instance_manager.py:831 src/instance_manager.py:972
-#: src/instance_manager.py:1001
-msgid "Could not retrieve added models"
-msgstr "无法检索到已添加的模型"
-
-#: src/instance_manager.py:271
-msgid "Could not retrieve available models"
-msgstr "无法检索到可用的模型"
-
-#: src/instance_manager.py:339
-msgid "Ollama (Managed)"
-msgstr "Ollama（托管版）"
-
-#: src/instance_manager.py:368
-msgid "Alpaca Support"
-msgstr "Alpaca 支持文档"
-
-#: src/instance_manager.py:375
-msgid "Model request too large for system"
-msgstr "模型需求太大，超出系统处理能力"
-
-#: src/instance_manager.py:378
-msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
-msgstr "检测到 AMD GPU，但未安装支持扩展，Ollama 将使用 CPU。"
-
-#: src/instance_manager.py:380
-msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
-msgstr "检测到 AMD GPU，但缺少 ROCm，Ollama 将使用 CPU。"
-
-#: src/instance_manager.py:382
-msgid "Using AMD GPU type '{}'"
-msgstr "使用 AMD GPU 类型"
-
-#: src/instance_manager.py:392
-msgid "Integrated Ollama instance is not running"
-msgstr "集成的 Ollama 实例未运行"
-
-#: src/instance_manager.py:414
-msgid "Managed Ollama instance failed to start"
-msgstr "托管的 Ollama 实例启动失败"
-
-#: src/instance_manager.py:417
-msgid "Integrated Ollama instance is running"
-msgstr "集成的 Ollama 实例正在运行"
-
-#: src/instance_manager.py:421
-msgid "Local AI instance managed directly by Alpaca"
-msgstr "本地AI实例由 Alpaca 直接管理"
-
-#: src/instance_manager.py:424 src/instance_manager.py:425
-msgid "Ollama Log"
-msgstr "Ollama 日志"
-
-#: src/instance_manager.py:430 src/instance_manager.py:566
-#: src/instance_manager.py:701 src/instance_manager.py:847 src/window.ui:836
+#: src/instance_manager.py:227 src/window.ui:836
 msgid "Name"
 msgstr "名称"
 
-#: src/instance_manager.py:436
+#: src/instance_manager.py:235
 msgid "Port"
 msgstr "端口"
 
-#: src/instance_manager.py:436
-msgid "Which network port will Ollama use"
-msgstr "Ollama 将使用哪个网络端口？"
+#: src/instance_manager.py:236
+msgid "Which network port will '{}' use"
+msgstr ""
 
-#: src/instance_manager.py:441 src/instance_manager.py:586
-#: src/instance_manager.py:731 src/instance_manager.py:878
-msgid "Temperature"
-msgstr "温度（随机性控制参数）"
-
-#: src/instance_manager.py:441 src/instance_manager.py:586
-#: src/instance_manager.py:732 src/instance_manager.py:878
-msgid "Increasing the temperature will make the models answer more creatively."
-msgstr "提高温度会使模型的回答更具创造性。"
-
-#: src/instance_manager.py:444 src/instance_manager.py:589
-#: src/instance_manager.py:882
-msgid "Seed"
-msgstr "种子值"
-
-#: src/instance_manager.py:444 src/instance_manager.py:589
-#: src/instance_manager.py:882
-msgid ""
-"Setting this to a specific number other than 0 will make the model generate "
-"the same text for the same prompt."
-msgstr "将其设置为除0以外的具体数字可以确保在相同提示下模型生成相同的文本。"
-
-#: src/instance_manager.py:449
-msgid "Model Directory"
-msgstr "模型目录"
-
-#: src/instance_manager.py:451
-msgid "Select Directory"
-msgstr "选择目录"
-
-#: src/instance_manager.py:462 src/instance_manager.py:595
-#: src/instance_manager.py:741 src/instance_manager.py:888
-msgid "Default Model"
-msgstr "默认模型"
-
-#: src/instance_manager.py:462 src/instance_manager.py:595
-#: src/instance_manager.py:742 src/instance_manager.py:888
-msgid "Model to select when starting a new chat."
-msgstr "启动新聊天时选择的模型。"
-
-#: src/instance_manager.py:464 src/instance_manager.py:597
-#: src/instance_manager.py:744 src/instance_manager.py:890
-msgid "Title Model"
-msgstr "标题模型"
-
-#: src/instance_manager.py:464 src/instance_manager.py:597
-#: src/instance_manager.py:745 src/instance_manager.py:890
-msgid "Model to use when generating a chat title."
-msgstr "生成聊天标题时使用的模型。"
-
-#: src/instance_manager.py:480
-msgid "Overrides"
-msgstr "覆盖设置"
-
-#: src/instance_manager.py:480
-msgid ""
-"These entries are optional, they are used to troubleshoot GPU related "
-"problems with Ollama."
-msgstr "这些条目是可选的，它们用于排查与 Ollama 相关的 GPU 问题。"
-
-#: src/instance_manager.py:507 src/instance_manager.py:508
-#: src/instance_manager.py:624 src/instance_manager.py:625
-#: src/instance_manager.py:772 src/instance_manager.py:773
-#: src/instance_manager.py:917 src/instance_manager.py:918
-#: src/custom_widgets/message_widget.py:223
-msgid "Save"
-msgstr "保存"
-
-#: src/instance_manager.py:563
-msgid "Local or remote AI instance not managed by Alpaca"
-msgstr "本地或远程AI实例不由Alpaca管理"
-
-#: src/instance_manager.py:569 src/instance_manager.py:850
+#: src/instance_manager.py:250
 msgid "Instance URL"
 msgstr "实例 URL"
 
-#: src/instance_manager.py:572
-msgid "API Key (Optional)"
-msgstr "API密钥（可选）"
-
-#: src/instance_manager.py:703 src/instance_manager.py:706
-#: src/instance_manager.py:852 src/instance_manager.py:854
+#: src/instance_manager.py:253 src/instance_manager.py:263
+#: src/instance_manager.py:266 src/instance_manager.py:268
 msgid "API Key (Unchanged)"
 msgstr "API密钥（未更改）"
 
-#: src/instance_manager.py:703 src/instance_manager.py:706
-#: src/instance_manager.py:852 src/instance_manager.py:854
+#: src/instance_manager.py:253 src/instance_manager.py:263
+msgid "API Key (Optional)"
+msgstr "API密钥（可选）"
+
+#: src/instance_manager.py:266 src/instance_manager.py:268
 msgid "API Key"
 msgstr "API密钥"
 
-#: src/instance_manager.py:712 src/instance_manager.py:860
+#: src/instance_manager.py:276
 msgid "Max Tokens"
 msgstr "最大tokens数"
 
-#: src/instance_manager.py:714 src/instance_manager.py:861
+#: src/instance_manager.py:277
 msgid ""
 "Defines the maximum number of tokens (words + spaces) the AI can generate in "
 "a response. More tokens allow longer replies but may take more time and cost "
@@ -3304,23 +3172,137 @@ msgstr ""
 "定义了 AI 在响应中可以生成的最大 token 数（单词+空格）。更多的 token 允许更长"
 "的回复，但可能需要更多的时间并产生更高的成本。"
 
-#: src/instance_manager.py:1029
+#: src/instance_manager.py:292
+msgid "Temperature"
+msgstr "温度（随机性控制参数）"
+
+#: src/instance_manager.py:293
+msgid "Increasing the temperature will make the models answer more creatively."
+msgstr "提高温度会使模型的回答更具创造性。"
+
+#: src/instance_manager.py:308
+msgid "Seed"
+msgstr "种子值"
+
+#: src/instance_manager.py:309
+msgid ""
+"Setting this to a specific number other than 0 will make the model generate "
+"the same text for the same prompt."
+msgstr "将其设置为除0以外的具体数字可以确保在相同提示下模型生成相同的文本。"
+
+#: src/instance_manager.py:324
+msgid "Overrides"
+msgstr "覆盖设置"
+
+#: src/instance_manager.py:324
+msgid ""
+"These entries are optional, they are used to troubleshoot GPU related "
+"problems with Ollama."
+msgstr "这些条目是可选的，它们用于排查与 Ollama 相关的 GPU 问题。"
+
+#: src/instance_manager.py:342
+msgid "Model Directory"
+msgstr "模型目录"
+
+#: src/instance_manager.py:344
+msgid "Select Directory"
+msgstr "选择目录"
+
+#: src/instance_manager.py:355
+msgid "Default Model"
+msgstr "默认模型"
+
+#: src/instance_manager.py:355
+msgid "Model to select when starting a new chat."
+msgstr "启动新聊天时选择的模型。"
+
+#: src/instance_manager.py:357
+msgid "Title Model"
+msgstr "标题模型"
+
+#: src/instance_manager.py:357
+msgid "Model to use when generating a chat title."
+msgstr "生成聊天标题时使用的模型。"
+
+#: src/instance_manager.py:421 src/instance_manager.py:422
+#: src/custom_widgets/message_widget.py:223
+msgid "Save"
+msgstr "保存"
+
+#: src/instance_manager.py:474 src/instance_manager.py:691
+#: src/instance_manager.py:728 src/instance_manager.py:757
+msgid "Could not retrieve added models"
+msgstr "无法检索到已添加的模型"
+
+#: src/instance_manager.py:484
+msgid "Could not retrieve available models"
+msgstr "无法检索到可用的模型"
+
+#: src/instance_manager.py:552
+msgid "Ollama (Managed)"
+msgstr "Ollama（托管版）"
+
+#: src/instance_manager.py:560
+msgid "Local AI instance managed directly by Alpaca"
+msgstr "本地AI实例由 Alpaca 直接管理"
+
+#: src/instance_manager.py:582
+msgid "Alpaca Support"
+msgstr "Alpaca 支持文档"
+
+#: src/instance_manager.py:589
+msgid "Model request too large for system"
+msgstr "模型需求太大，超出系统处理能力"
+
+#: src/instance_manager.py:592
+msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
+msgstr "检测到 AMD GPU，但未安装支持扩展，Ollama 将使用 CPU。"
+
+#: src/instance_manager.py:594
+msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
+msgstr "检测到 AMD GPU，但缺少 ROCm，Ollama 将使用 CPU。"
+
+#: src/instance_manager.py:596
+msgid "Using AMD GPU type '{}'"
+msgstr "使用 AMD GPU 类型"
+
+#: src/instance_manager.py:606
+msgid "Integrated Ollama instance is not running"
+msgstr "集成的 Ollama 实例未运行"
+
+#: src/instance_manager.py:628
+msgid "Managed Ollama instance failed to start"
+msgstr "托管的 Ollama 实例启动失败"
+
+#: src/instance_manager.py:631
+msgid "Integrated Ollama instance is running"
+msgstr "集成的 Ollama 实例正在运行"
+
+#: src/instance_manager.py:636 src/instance_manager.py:637
+msgid "Ollama Log"
+msgstr "Ollama 日志"
+
+#: src/instance_manager.py:645
+msgid "Local or remote AI instance not managed by Alpaca"
+msgstr "本地或远程AI实例不由Alpaca管理"
+
+#: src/instance_manager.py:796
 msgid "Could not retrieve models"
 msgstr ""
 
-#: src/instance_manager.py:1036
+#: src/instance_manager.py:803
 msgid "OpenAI Compatible Instance"
 msgstr "兼容 OpenAI 的实例"
 
-#: src/instance_manager.py:1058
+#: src/instance_manager.py:825
 msgid "Remove Instance?"
 msgstr "移除实例？"
 
-#: src/instance_manager.py:1058
+#: src/instance_manager.py:825
 msgid "Are you sure you want to remove this instance?"
 msgstr "您确定要移除这个实例吗？"
 
-#: src/instance_manager.py:1073
+#: src/instance_manager.py:840
 msgid "Edit Instance"
 msgstr "编辑实例"
 
@@ -4146,6 +4128,9 @@ msgstr "使用 Flatpak 内置的 shell 环境"
 #: src/custom_widgets/terminal_widget.py:139
 msgid "Script Exited"
 msgstr "脚本已退出"
+
+#~ msgid "Which network port will Ollama use"
+#~ msgstr "Ollama 将使用哪个网络端口？"
 
 #~ msgid "Built in Ollama instance"
 #~ msgstr "内置 Ollama 实例"
