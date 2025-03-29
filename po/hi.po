@@ -1876,7 +1876,7 @@ msgstr "जोड़ने के लिए एक इंस्टेंस क�
 
 #: src/window.py:390
 msgid "'{}' does not support tools."
-msgstr ""
+msgstr "'{}' टूल्स का समर्थन नहीं करता।"
 
 #: src/window.py:393 src/window.py:968
 msgid "Please select a model before chatting"
@@ -2327,8 +2327,7 @@ msgid ""
 "Command R is a Large Language Model optimized for conversational interaction "
 "and long context tasks."
 msgstr ""
-"कमांड आर एक बड़ा भाषा मॉडल है जो संवादात्मक इंटरैक्शन और लंबे कंटेक्स्ट कार्यों के लिए अनुकूलित "
-"है"
+"कमांड आर एक बड़ा भाषा मॉडल है जो संवादात्मक इंटरैक्शन और लंबे कंटेक्स्ट कार्यों के लिए अनुकूलित है"
 
 #: src/available_models_descriptions.py:37
 msgid ""
@@ -2343,8 +2342,7 @@ msgid ""
 "A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
 "benchmarks."
 msgstr ""
-"ल्लामा 3 इंस्ट्रक्ट से फाइन-ट्यून किया गया एलएलएवीए मॉडल जिसमें कई बेंचमार्क्स में बेहतर स्कोर "
-"हैं"
+"ल्लामा 3 इंस्ट्रक्ट से फाइन-ट्यून किया गया एलएलएवीए मॉडल जिसमें कई बेंचमार्क्स में बेहतर स्कोर हैं"
 
 #: src/available_models_descriptions.py:39
 msgid ""
@@ -3264,23 +3262,23 @@ msgstr "नई चैट शुरू करें"
 
 #: src/instance_manager.py:75
 msgid "Selecting tool to use..."
-msgstr ""
+msgstr "उपयोग के लिए टूल चुन रहा है..."
 
 #: src/instance_manager.py:84
 msgid "Using {}"
-msgstr ""
+msgstr "{} का उपयोग कर रहा है"
 
 #: src/instance_manager.py:110
 msgid "Tool Error"
-msgstr ""
+msgstr "टूल त्रुटि"
 
 #: src/instance_manager.py:110
 msgid "An error occurred while running tool"
-msgstr ""
+msgstr "टूल चलाते समय एक त्रुटि हुई"
 
 #: src/instance_manager.py:113
 msgid "Generating message..."
-msgstr ""
+msgstr "संदेश जनरेट कर रहा है..."
 
 #: src/instance_manager.py:160 src/instance_manager.py:474
 #: src/instance_manager.py:484 src/instance_manager.py:628
@@ -3303,7 +3301,7 @@ msgstr "पोर्ट"
 
 #: src/instance_manager.py:236
 msgid "Which network port will '{}' use"
-msgstr ""
+msgstr "'{}' कौन सा नेटवर्क पोर्ट उपयोग करेगा?"
 
 #: src/instance_manager.py:250
 msgid "Instance URL"
@@ -3456,7 +3454,7 @@ msgstr "स्थानीय या दूरस्थ एआई इंस्�
 
 #: src/instance_manager.py:796
 msgid "Could not retrieve models"
-msgstr ""
+msgstr "मॉडल्स प्राप्त नहीं कर सका"
 
 #: src/instance_manager.py:803
 msgid "OpenAI Compatible Instance"
@@ -3622,17 +3620,19 @@ msgstr ""
 
 #: src/window.ui:498
 msgid "Tool Manager"
-msgstr ""
+msgstr "टूल प्रबंधक"
 
 #: src/window.ui:509
 msgid "Available Tools"
-msgstr ""
+msgstr "उपलब्ध टूल्स"
 
 #: src/window.ui:510
 msgid ""
 "Functions that AI models might use when sending a message by selecting \"Use "
 "Tools\" in the send button context menu."
 msgstr ""
+"वे फंक्शन्स जो AI मॉडल संदेश भेजते समय उपयोग कर सकते हैं, जब आप सेंड बटन के कॉन्टेक्स्ट मेनू में "
+"\"टूल्स का उपयोग करें\" चुनते हैं।"
 
 #: src/window.ui:529
 msgid "Model Manager"
@@ -3921,7 +3921,7 @@ msgstr "इंस्टेंस प्रबंधक"
 #: src/gtk/help-overlay.ui:38
 msgctxt "shortcut window"
 msgid "Action Manager"
-msgstr ""
+msgstr "एक्शन मैनेजर"
 
 #: src/gtk/help-overlay.ui:44
 msgctxt "shortcut window"
