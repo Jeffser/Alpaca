@@ -222,8 +222,7 @@ msgstr "নমুনা প্রম্পটগুলি পুনরায় 
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
 msgid "Fixed saving Ollama (Managed) instance might crash it"
-msgstr ""
-"সংরক্ষিত Ollama (ম্যানেজড) উদাহরণ এটি বন্ধ করে দিতে পারে এমন সমস্যা সংশোধন করা "
+msgstr "সংরক্ষিত Ollama (ম্যানেজড) উদাহরণ এটি বন্ধ করে দিতে পারে এমন সমস্যা সংশোধন করা "
 "হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:121
@@ -232,8 +231,7 @@ msgstr "স্টপ বাটন সংশোধন করা হয়েছ�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
 msgid "Fixed model search not working if there are only pulling models"
-msgstr ""
-"মডেল সার্চ কাজ করছে না এমন সমস্যা সংশোধন করা হয়েছে যদি শুধুমাত্র পুলিং মডেল থাকে"
+msgstr "মডেল সার্চ কাজ করছে না এমন সমস্যা সংশোধন করা হয়েছে যদি শুধুমাত্র পুলিং মডেল থাকে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Fixed sample prompts sometimes not appearing"
@@ -440,8 +438,7 @@ msgstr "সংশোধন করুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:244
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
-msgstr ""
-"ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
+msgstr "ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:253
 msgid "Added categories to models"
@@ -618,8 +615,7 @@ msgstr "রিমোট সংযোগ ডায়ালগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:359
 msgid "Fixed: Models get duplicated when switching remote and local instance"
-msgstr ""
-"সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
+msgstr "সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:360
 msgid "Better internal instance manager"
@@ -1422,8 +1418,7 @@ msgstr "প্রতিদিনের আপডেট"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:787
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
-msgstr ""
-"চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
+msgstr "চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:788
 msgid "New shortcut for creating a chat (CTRL+N)"
@@ -1720,8 +1715,7 @@ msgstr "একাধিক চ্যাট সমর্থন যোগ কর�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:959
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
-msgstr ""
-"প্যাঙ্গো মার্কআপ সমর্থন যোগ করা হয়েছে (বোল্ড, তালিকা, শিরোনাম, উপশিরোনাম, মনোস্পেস)"
+msgstr "প্যাঙ্গো মার্কআপ সমর্থন যোগ করা হয়েছে (বোল্ড, তালিকা, শিরোনাম, উপশিরোনাম, মনোস্পেস)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:960
 msgid "Added autoscroll if the user is at the bottom of the chat"
@@ -1884,7 +1878,7 @@ msgstr "যোগ করার জন্য একটি ইনস্ট্য�
 
 #: src/window.py:390
 msgid "'{}' does not support tools."
-msgstr ""
+msgstr "'{}' টুলগুলোকে সাপোর্ট করে না।"
 
 #: src/window.py:393 src/window.py:968
 msgid "Please select a model before chatting"
@@ -2103,7 +2097,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:3
 msgid "QwQ is the reasoning model of the Qwen series."
-msgstr ""
+msgstr "QwQ হলো Qwen সিরিজের রিজনিং মডেল।"
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -3281,23 +3275,23 @@ msgstr "নতুন চ্যাট"
 
 #: src/instance_manager.py:75
 msgid "Selecting tool to use..."
-msgstr ""
+msgstr "ব্যবহারের জন্য টুল নির্বাচন করা হচ্ছে..."
 
 #: src/instance_manager.py:84
 msgid "Using {}"
-msgstr ""
+msgstr "{} ব্যবহার করা হচ্ছে"
 
 #: src/instance_manager.py:110
 msgid "Tool Error"
-msgstr ""
+msgstr "টুল ত্রুটি"
 
 #: src/instance_manager.py:110
 msgid "An error occurred while running tool"
-msgstr ""
+msgstr "টুল চালানোর সময় একটি ত্রুটি ঘটেছে"
 
 #: src/instance_manager.py:113
 msgid "Generating message..."
-msgstr ""
+msgstr "বার্তা তৈরি করা হচ্ছে..."
 
 #: src/instance_manager.py:160 src/instance_manager.py:474
 #: src/instance_manager.py:484 src/instance_manager.py:628
@@ -3319,8 +3313,8 @@ msgid "Port"
 msgstr "পোর্ট"
 
 #: src/instance_manager.py:236
-msgid "Which network port will '{}' use"
-msgstr ""
+msgid "Which network port will '{}' use"  
+msgstr "'{}' কোন নেটওয়ার্ক পোর্ট ব্যবহার করবে"
 
 #: src/instance_manager.py:250
 msgid "Instance URL"
@@ -3472,7 +3466,7 @@ msgstr "আলপাকা দ্বারা পরিচালিত নয়
 
 #: src/instance_manager.py:796
 msgid "Could not retrieve models"
-msgstr ""
+msgstr "মডেলগুলি পুনরুদ্ধার করা যায়নি"
 
 #: src/instance_manager.py:803
 msgid "OpenAI Compatible Instance"
@@ -3638,17 +3632,18 @@ msgstr ""
 
 #: src/window.ui:498
 msgid "Tool Manager"
-msgstr ""
+msgstr "টুল ম্যানেজার"
 
 #: src/window.ui:509
 msgid "Available Tools"
-msgstr ""
+msgstr "উপলব্ধ টুলস"
 
 #: src/window.ui:510
 msgid ""
 "Functions that AI models might use when sending a message by selecting \"Use "
 "Tools\" in the send button context menu."
 msgstr ""
+"এআই মডেলগুলি যে ফাংশনগুলি ব্যবহার করতে পারে যখন সেন্ড বাটনের কনটেক্সট মেনুতে \"টুলস ব্যবহার করুন\" নির্বাচন করে একটি বার্তা পাঠায়।"
 
 #: src/window.ui:529
 msgid "Model Manager"
