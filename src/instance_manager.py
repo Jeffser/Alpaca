@@ -797,6 +797,26 @@ class openrouter(base_openai):
             window.instance_listbox.unselect_all()
             return []
 
+class fireworks(base_openai):
+    instance_type = 'fireworks'
+    instance_type_display = 'Fireworks AI'
+    instance_url = 'https://api.fireworks.ai/inference/v1/'
+    description = _('Fireworks AI inference platform')
+
+    def get_local_models(self) -> list:
+        try:
+            response = requests.get('https://api.fireworks.ai/inference/v1/models', headers={'Authorization': f'Bearer {self.api_key}'})
+            models = []
+            for model in response.json().get('data', []):
+                if model.get('id') and 'chat' in model.get('capabilities', []):
+                    models.append({'name': model.get('id'), 'display_name': model.get('name')})
+            return models
+        except Exception as e:
+            dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve models'), str(e))
+            logger.error(e)
+            window.instance_listbox.unselect_all()
+            return []
+
 class generic_openai(base_openai):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
@@ -857,6 +877,7 @@ def update_instance_list():
         openrouter.instance_type: openrouter,
         anthropic.instance_type: anthropic,
         groq.instance_type: groq
+        fireworks.instance_type: fireworks
     }
     if len(instances) > 0:
         window.instance_manager_stack.set_visible_child_name('content')
@@ -886,7 +907,7 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, generic_openai]
+ready_instances = [ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, fireworks, generic_openai]
 
 if shutil.which('ollama'):
     ready_instances.insert(0, ollama_managed)
