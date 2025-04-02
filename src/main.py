@@ -166,8 +166,9 @@ def on_about_action(self, widget, _):
                   f'© {current_year} Deepseek\n'
                   f'© {current_year} Openrouter\n'
                   f'© {current_year} Gorqcloud\n'
-                  f'© {current_year} anthropic\n'
-                  f'© {current_year} fireworks.ai',
+                  f'© {current_year} Anthropic\n'
+                  f'© {current_year} Lambda.ai\n'
+                  f'© {current_year} Fireworks.ai',
         issue_url='https://github.com/Jeffser/Alpaca/issues',
         license_type=Gtk.License.GPL_3_0,
         website="https://jeffser.com/alpaca"
