@@ -38,6 +38,7 @@ import time
 import sqlite3
 
 from pydbus import SessionBus
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -140,24 +141,47 @@ class AlpacaApplication(Adw.Application):
             win.powersaver_warning_switch.set_visible(False)
             win.background_switch.set_visible(False)
 
-    def on_about_action(self, widget, _):
-        about = Adw.AboutDialog(#transient_for=self.props.active_window,
-            application_name='Alpaca',
-            application_icon='com.jeffser.Alpaca',
-            developer_name='Jeffry Samuel Eduarte Rojas',
-            version=self.version,
-            support_url="https://github.com/Jeffser/Alpaca/discussions/155",
-            developers=['Jeffser https://jeffser.com'],
-            designers=['Jeffser https://jeffser.com', 'Tobias Bernard (App Icon) https://tobiasbernard.com/'],
-            translator_credits='\n'.join(TRANSLATORS),
-            copyright='© 2025 Alpaca Jeffry Samuel Eduarte Rojas\n© 2025 Ollama Meta Platforms, Inc.\n© 2025 ChatGPT OpenAI, Inc.\n© 2025 Gemini Google Alphabet, Inc.\n© 2025 Together.ai\n© 2025 Venice AI',
-            issue_url='https://github.com/Jeffser/Alpaca/issues',
-            license_type=3,
-            website="https://jeffser.com/alpaca")
-        about.add_link("Become a Sponsor", "https://github.com/sponsors/Jeffser")
-        about.present(parent=self.props.active_window)
+def on_about_action(self, widget, _):
+    current_year = str(datetime.now().year)
+    about = Adw.AboutDialog(
+        transient_for=self.props.active_window,
+        application_name='Alpaca',
+        application_icon='com.jeffser.Alpaca',
+        developer_name='Jeffry Samuel Eduarte Rojas',
+        version=self.version,
+        release_notes_version=self.version,
+        release_notes=_("""
+        <p>New features and improvements in this version:</p>
+        <ul>
+          <li>Automatic model loading when API key is added</li>
+          <li>Improved error handling</li>
+          <li>Better performance</li>
+        </ul>
+        """),
+        support_url="https://github.com/Jeffser/Alpaca/discussions/155",
+        developers=['Jeffser https://jeffser.com'],
+        designers=[
+            'Jeffser https://jeffser.com', 
+            'Tobias Bernard (App Icon) https://tobiasbernard.com/'
+        ],
+        translator_credits='\n'.join(TRANSLATORS),
+        copyright=f'© {current_year} Alpaca Jeffry Samuel Eduarte Rojas\n'
+                 f'© {current_year} Ollama Meta Platforms, Inc.\n'
+                 f'© {current_year} ChatGPT OpenAI, Inc.\n'
+                 f'© {current_year} Gemini Google Alphabet, Inc.\n'
+                 f'© {current_year} Together.ai\n'
+                 f'© {current_year} Venice AI',
+        issue_url='https://github.com/Jeffser/Alpaca/issues',
+        license_type=Gtk.License.GPL_3_0,
+        website="https://jeffser.com/alpaca"
+    )
+    
+    about.add_link(_("Documentation"), "https://github.com/Jeffser/Alpaca/wiki")
+    about.add_link(_("Become a Sponsor"), "https://github.com/sponsors/Jeffser")
+    about.add_link(_("Website"), "https://jeffser.com/alpaca/")
+    about.add_link(_("sponsor"), "https://github.com/sponsors/Jeffser")
 
-    def create_action(self, name, callback, shortcuts=None):
+def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
         action.connect("activate", callback)
         self.add_action(action)
