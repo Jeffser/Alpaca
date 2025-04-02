@@ -150,14 +150,6 @@ def on_about_action(self, widget, _):
         developer_name='Jeffry Samuel Eduarte Rojas',
         version=self.version,
         release_notes_version=self.version,
-        release_notes=_("""
-        <p>New features and improvements in this version:</p>
-        <ul>
-          <li>Automatic model loading when API key is added</li>
-          <li>Improved error handling</li>
-          <li>Better performance</li>
-        </ul>
-        """),
         support_url="https://github.com/Jeffser/Alpaca/discussions/155",
         developers=['Jeffser https://jeffser.com'],
         designers=[
@@ -166,11 +158,16 @@ def on_about_action(self, widget, _):
         ],
         translator_credits='\n'.join(TRANSLATORS),
         copyright=f'© {current_year} Alpaca Jeffry Samuel Eduarte Rojas\n'
-                 f'© {current_year} Ollama Meta Platforms, Inc.\n'
-                 f'© {current_year} ChatGPT OpenAI, Inc.\n'
-                 f'© {current_year} Gemini Google Alphabet, Inc.\n'
-                 f'© {current_year} Together.ai\n'
-                 f'© {current_year} Venice AI',
+                  f'© {current_year} Ollama Meta Platforms, Inc.\n'
+                  f'© {current_year} ChatGPT OpenAI, Inc.\n'
+                  f'© {current_year} Gemini Google Alphabet, Inc.\n'
+                  f'© {current_year} Together.ai\n'
+                  f'© {current_year} Venice AI\n'
+                  f'© {current_year} Deepseek\n'
+                  f'© {current_year} Openrouter\n'
+                  f'© {current_year} Gorqcloud\n'
+                  f'© {current_year} anthropic\n'
+                  f'© {current_year} fireworks.ai',
         issue_url='https://github.com/Jeffser/Alpaca/issues',
         license_type=Gtk.License.GPL_3_0,
         website="https://jeffser.com/alpaca"
