@@ -24,9 +24,9 @@ class tool(Adw.ActionRow):
             subtitle = self.description
         )
 
-        info_button = Gtk.Button(icon_name='edit-symbolic', css_classes=['flat', 'accent'], valign=3)
+        info_button = Gtk.Button(icon_name='info-outline-symbolic', css_classes=['flat'], valign=3)
         info_button.connect('clicked', lambda *_: self.show_tool_page())
-        self.add_suffix(info_button)
+        self.add_prefix(info_button)
         self.enable_switch = Gtk.Switch(active=enabled, valign=3)
         self.enable_switch.connect('state-set', lambda *_: self.enabled_changed())
         self.add_suffix(self.enable_switch)
