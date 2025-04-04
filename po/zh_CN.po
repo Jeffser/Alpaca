@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 5.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-29 13:24-0600\n"
-"PO-Revision-Date: 2025-03-11 16:57+0100\n"
+"PO-Revision-Date: 2025-04-03 21:23+0200\n"
 "Last-Translator: Yuehao Sui <8ar10der@amao.run>\n"
 "Language-Team: Chinese (China)\n"
 "Language: zh_CN\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 47.1\n"
+"X-Generator: Gtranslator 48.0\n"
 
 #: data/com.jeffser.Alpaca.desktop.in:2
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
@@ -2022,11 +2022,11 @@ msgstr "请按照以下模板输入模型名称：name:tag"
 
 #: src/window.py:1229
 msgid "Delete All Chats?"
-msgstr ""
+msgstr "要删除所有对话吗？"
 
 #: src/window.py:1229
 msgid "Are you sure you want to delete all chats?"
-msgstr ""
+msgstr "你确定要删除所有对话吗？"
 
 #: src/window.py:1240
 msgid "Remove Attachment?"
@@ -2044,7 +2044,7 @@ msgstr "移除"
 
 #: src/window.py:1255
 msgid "Already Installed!"
-msgstr ""
+msgstr "安装完成！"
 
 #: src/available_models_descriptions.py:2
 msgid ""
@@ -2056,7 +2056,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:3
 msgid "QwQ is the reasoning model of the Qwen series."
-msgstr ""
+msgstr "QwQ 是Qwen系列模型的推理模型。"
 
 #: src/available_models_descriptions.py:4
 msgid ""
@@ -3055,7 +3055,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:157
 msgid "The current, most capable model that runs on a single GPU."
-msgstr ""
+msgstr "这是当前单GPU环境下性能最优的模型。"
 
 #: src/available_models_descriptions.py:158
 msgid ""
@@ -3063,6 +3063,8 @@ msgid ""
 "reasoning, and mathematics, and now, the long-awaited function calling "
 "feature is finally supported."
 msgstr ""
+"Phi-4-mini 模型在多语言处理、推理能力及数学计算性能上均有显著提升，并新增了对"
+"函数调用机制的支持。"
 
 #: src/available_models_descriptions.py:159
 msgid ""
@@ -3070,12 +3072,16 @@ msgid ""
 "visual document understanding, enabling automated content extraction from "
 "tables, charts, infographics, plots, diagrams, and more."
 msgstr ""
+"一款紧凑高效的多模态视觉语言模型，专为视觉文档理解而设计，能够从表格、图表、"
+"信息图、曲线图、示意图等多种视觉元素中自动提取内容。"
 
 #: src/available_models_descriptions.py:160
 msgid ""
 "Granite-3.2 is a family of long-context AI models from IBM Granite fine-"
 "tuned for thinking capabilities."
 msgstr ""
+"Granite-3.2 是 IBM Granite 系列的长上下文 AI 模型，经过微调以增强思维推理能"
+"力。"
 
 #: src/available_models_descriptions.py:161
 msgid ""
@@ -3083,12 +3089,14 @@ msgid ""
 "excels in advanced Arabic language capabilities for enterprises in the "
 "Middle East and Northern Africa."
 msgstr ""
+"这是轻量级 Command R7B 模型的最新尖端版本，专为中东北非地区企业打造，在高级阿"
+"拉伯语处理能力方面表现卓越。"
 
 #: src/available_models_descriptions.py:162
 msgid ""
 "111 billion parameter model optimized for demanding enterprises that require "
 "fast, secure, and high-quality AI"
-msgstr ""
+msgstr "专为高要求企业优化的1110亿参数大模型，提供快速、安全且高质量的AI服务。"
 
 #: src/instance_manager.py:30 src/instance_manager.py:375
 msgid "Instance"
@@ -3101,23 +3109,23 @@ msgstr "新对话"
 
 #: src/instance_manager.py:75
 msgid "Selecting tool to use..."
-msgstr ""
+msgstr "正在选择使用工具…"
 
 #: src/instance_manager.py:84
 msgid "Using {}"
-msgstr ""
+msgstr "正在使用 {}"
 
 #: src/instance_manager.py:110
 msgid "Tool Error"
-msgstr ""
+msgstr "工具错误"
 
 #: src/instance_manager.py:110
 msgid "An error occurred while running tool"
-msgstr ""
+msgstr "运行工具过程中发生错误"
 
 #: src/instance_manager.py:113
 msgid "Generating message..."
-msgstr ""
+msgstr "正在生成消息..."
 
 #: src/instance_manager.py:160 src/instance_manager.py:474
 #: src/instance_manager.py:484 src/instance_manager.py:628
@@ -3140,7 +3148,7 @@ msgstr "端口"
 
 #: src/instance_manager.py:236
 msgid "Which network port will '{}' use"
-msgstr ""
+msgstr "'{}' 将会使用那哪一个网络端口"
 
 #: src/instance_manager.py:250
 msgid "Instance URL"
@@ -3288,7 +3296,7 @@ msgstr "本地或远程AI实例不由Alpaca管理"
 
 #: src/instance_manager.py:796
 msgid "Could not retrieve models"
-msgstr ""
+msgstr "无法获取模型列表"
 
 #: src/instance_manager.py:803
 msgid "OpenAI Compatible Instance"
@@ -3361,7 +3369,7 @@ msgstr ""
 
 #: src/window.ui:115
 msgid "Local AI"
-msgstr ""
+msgstr "本地 AI"
 
 #: src/window.ui:116
 msgid ""
@@ -3369,6 +3377,8 @@ msgid ""
 "locally on your machine, you'll need to install Ollama within Alpaca. We've "
 "made it super easy to do, so you can get started quickly!"
 msgstr ""
+"Alpaca 支持与 Gemini、ChatGPT 等 AI 服务商对接。若需在本地设备运行 AI 模型，"
+"您只需在 Alpaca 中安装 Ollama 即可。我们已大幅简化安装流程，助您快速上手！"
 
 #: src/window.ui:121 src/window.ui:122 src/window.ui:1039 src/window.ui:1040
 msgid "Install Ollama"
@@ -3392,7 +3402,7 @@ msgstr "管理模型"
 
 #: src/window.ui:233
 msgid "Add Models"
-msgstr ""
+msgstr "添加模型"
 
 #: src/window.ui:250
 msgid "Chat Menu"
@@ -3447,17 +3457,18 @@ msgstr "管理您的 AI 实例，在生成响应时，对话和交流会在不�
 
 #: src/window.ui:498
 msgid "Tool Manager"
-msgstr ""
+msgstr "工具管理器"
 
 #: src/window.ui:509
 msgid "Available Tools"
-msgstr ""
+msgstr "可用工具"
 
 #: src/window.ui:510
 msgid ""
 "Functions that AI models might use when sending a message by selecting \"Use "
 "Tools\" in the send button context menu."
 msgstr ""
+"当您在发送按钮的目录菜单中选择\"使用工具\"时，AI模型可能调用的功能模块。"
 
 #: src/window.ui:529
 msgid "Model Manager"
@@ -3600,7 +3611,7 @@ msgstr "缩放"
 
 #: src/window.ui:1010
 msgid "Delete All Chats"
-msgstr ""
+msgstr "删除所有对话"
 
 #: src/window.ui:1022
 msgid "Notice"
@@ -3743,7 +3754,7 @@ msgstr "实例管理器"
 #: src/gtk/help-overlay.ui:38
 msgctxt "shortcut window"
 msgid "Action Manager"
-msgstr ""
+msgstr "行为管理器"
 
 #: src/gtk/help-overlay.ui:44
 msgctxt "shortcut window"
@@ -3828,7 +3839,7 @@ msgstr "发送提示： '{}'"
 
 #: src/custom_widgets/chat_widget.py:117
 msgid "Refresh Prompts"
-msgstr ""
+msgstr "刷新提示词"
 
 #: src/custom_widgets/chat_widget.py:172
 msgid "Chat exported successfully"
@@ -4027,7 +4038,7 @@ msgstr "修改于"
 
 #: src/custom_widgets/model_manager_widget.py:273
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 #: src/custom_widgets/model_manager_widget.py:418
 msgid "Change"
@@ -4079,7 +4090,7 @@ msgstr "嵌入"
 
 #: src/custom_widgets/model_manager_widget.py:474
 msgid "Actions"
-msgstr ""
+msgstr "行为"
 
 #: src/custom_widgets/model_manager_widget.py:475
 msgid "Small"
