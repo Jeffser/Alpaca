@@ -177,7 +177,7 @@ class AlpacaApplication(Adw.Application):
         about.add_link(_("Documentation"), "https://github.com/Jeffser/Alpaca/wiki")
         about.add_link(_("Become a Sponsor"), "https://github.com/sponsors/Jeffser")
         about.add_link(_("Website"), "https://jeffser.com/alpaca/")
-        about.add_link(_("sponsor"), "https://github.com/sponsors/Jeffser")
+        about.present()
 
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
