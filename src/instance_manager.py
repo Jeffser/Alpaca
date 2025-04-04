@@ -356,7 +356,7 @@ class base_instance:
             save_functions = {
                 'name': lambda val: setattr(self, 'name', val if val else _('Instance')),
                 'port': lambda val: setattr(self, 'instance_url', 'http://0.0.0.0:{}'.format(val)),
-                'url': lambda val: setattr(self, 'instance_url', '{}{}'.format('http://' if not re.match(r'^(http|https)://') else '', val.rstrip('/'))),
+                'url': lambda val: setattr(self, 'instance_url', '{}{}'.format('http://' if not re.match(r'^(http|https)://', val) else '', val.rstrip('/'))),
                 'api': lambda val: setattr(self, 'api_key', self.api_key if self.api_key and not val else (val if val else 'empty')),
                 'max_tokens': lambda val: setattr(self, 'max_tokens', val),
                 'temperature': lambda val: setattr(self, 'temperature', val),
@@ -374,10 +374,10 @@ class base_instance:
                         value = el.get_text().replace('\n', '')
                     elif isinstance(el, Adw.SpinRow):
                         value = el.get_value()
-                    elif isinstance(el, Adw.ActionRow):
-                        value = el.get_subtitle()
                     elif isinstance(el, Adw.ComboRow):
                         value = el.get_selected_item().get_string()
+                    elif isinstance(el, Adw.ActionRow):
+                        value = el.get_subtitle()
                     if el.get_name().startswith('override:'):
                         save_functions.get('override')(el.get_name().split(':')[1], value)
                     elif save_functions.get(el.get_name()):
