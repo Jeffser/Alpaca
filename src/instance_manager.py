@@ -817,6 +817,34 @@ class fireworks(base_openai):
             window.instance_listbox.unselect_all()
             return []
 
+class lambda_labs(base_openai):
+    instance_type = 'lambda_labs'
+    instance_type_display = 'Lambda Labs'
+    instance_url = 'https://api.lambdalabs.com/v1/'
+    description = _('Lambda Labs cloud inference API')
+
+    def __init__(self, instance_id:str, name:str, max_tokens:int, api_key:str, temperature:float, seed:int, default_model:str, title_model:str, pinned:bool):
+        super().__init__(instance_id, name, max_tokens, api_key, temperature, seed, default_model, title_model, pinned)
+        self.client = openai.OpenAI(
+            base_url=self.instance_url.replace('\n', ''),
+            api_key=self.api_key if self.api_key else 'NO_KEY'
+        )
+
+    def get_local_models(self) -> list:
+        try:
+            response = requests.get('https://api.lambdalabs.com/v1/models', 
+                                  headers={'Authorization': f'Bearer {self.api_key}'})
+            models = []
+            for model in response.json().get('data', []):
+                if model.get('id'):
+                    models.append({'name': model.get('id'), 'display_name': model.get('name')})
+            return models
+        except Exception as e:
+            dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve models'), str(e))
+            logger.error(e)
+            window.instance_listbox.unselect_all()
+            return []
+
 class generic_openai(base_openai):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
@@ -876,8 +904,9 @@ def update_instance_list():
         deepseek.instance_type: deepseek,
         openrouter.instance_type: openrouter,
         anthropic.instance_type: anthropic,
-        groq.instance_type: groq
-        fireworks.instance_type: fireworks
+        groq.instance_type: groq,
+        fireworks.instance_type: fireworks,
+        lambda_labs.instance_type: lambda_labs,
     }
     if len(instances) > 0:
         window.instance_manager_stack.set_visible_child_name('content')
@@ -907,7 +936,7 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, fireworks, generic_openai]
+ready_instances = [ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, fireworks, lambda_labs, generic_openai]
 
 if shutil.which('ollama'):
     ready_instances.insert(0, ollama_managed)
