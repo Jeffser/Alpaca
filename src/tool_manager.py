@@ -4,6 +4,7 @@ import logging, json, os, tempfile, shutil
 logger = logging.getLogger(__name__)
 
 import datetime, time, random, threading, requests
+from html2text import html2text
 
 from gi.repository import Adw, Gtk, GLib
 
@@ -215,14 +216,7 @@ class get_recipe_by_name(tool):
                 meals = response.json().get('meals', [])
                 if len(meals) > 0:
                     meal = meals[0]
-                    image_response = requests.get(meal.get('strMealThumb'), stream=True)
-                    if image_response.status_code == 200:
-                        with tempfile.NamedTemporaryFile(delete=True, suffix='.jpg') as tmp_file:
-                            image_response.raw.decode_content = True
-                            shutil.copyfileobj(image_response.raw, tmp_file)
-                            raw_b64 = window.get_content_of_file(tmp_file.name, 'image')
-                            attachment = bot_message.add_attachment(meal.get('strMeal', 'Meal'), 'image', raw_b64)
-                            window.sql_instance.add_attachment(bot_message, attachment)
+                    attach_online_image(bot_message, meal.get('strMeal', 'Meal'), meal.get('strMealThumb'))
                     if meal.get("strYoutube"):
                         attachment = bot_message.add_attachment(_("YouTube Video"), "link", meal.get("strYoutube"))
                         window.sql_instance.add_attachment(bot_message, attachment)
@@ -279,14 +273,7 @@ class get_recipes_by_category(tool):
                 response2 = requests.get('www.themealdb.com/api/json/v1/1/lookup.php?i={}'.format(random.choice(data).get('id')))
                 if response2.json().get("meals", [False])[0]:
                     data = response2.json().get("meals")[0]
-                    image_response = requests.get(data.get('strMealThumb'), stream=True)
-                    if image_response.status_code == 200:
-                        with tempfile.NamedTemporaryFile(delete=True, suffix='.jpg') as tmp_file:
-                            image_response.raw.decode_content = True
-                            shutil.copyfileobj(image_response.raw, tmp_file)
-                            raw_b64 = window.get_content_of_file(tmp_file.name, 'image')
-                            attachment = bot_message.add_attachment(data.get('strMeal', 'Meal'), 'image', raw_b64)
-                            window.sql_instance.add_attachment(bot_message, attachment)
+                    attach_online_image(bot_message, data.get('strMeal', 'Meal'), data.get('strMealThumb'))
                     if meal.get("strYoutube"):
                         attachment = bot_message.add_attachment(_("YouTube Video"), "link", meal.get("strYoutube"))
                         window.sql_instance.add_attachment(bot_message, attachment)
@@ -295,7 +282,127 @@ class get_recipes_by_category(tool):
                         window.sql_instance.add_attachment(bot_message, attachment)
             return '\n'.join(data)
 
-available_tools = [get_current_datetime, get_recipes_by_category, get_recipe_by_name]
+class extract_wikipedia(tool):
+    tool_metadata = {
+        "name": "extract_wikipedia",
+        "description": "Extract an article from Wikipedia from it's title",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "The title of the Wikipedia Article"
+                }
+            },
+            "required": [
+                "title"
+            ]
+        },
+        "strict": True
+    }
+    name = _("Extract Wikipedia Article")
+    description = _("Extracts an article from Wikipedia by it's title")
+    variables = {}
+
+    def run(self, arguments, messages, bot_message) -> str:
+        article_title = arguments.get("title")
+        if not article_title:
+            return "Error: Article title was not provided"
+
+        response = requests.get("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles={}&formatversion=2".format(article_title.replace(" ", "_")))
+        data = response.json()
+
+        result_md = []
+
+        if len(data.get('query', {}).get('pages', [])) > 0:
+            for page in data.get('query', {}).get('pages', []):
+                if page.get('title') and page.get('extract'):
+                    result_md.append("# {}".format(page.get('title')))
+                    result_md.append(html2text(page.get('extract')))
+
+        if len(result_md) == 1:
+            return "Error: No results found"
+
+        return '\n\n'.join(result_md)
+
+class online_search(tool):
+    tool_metadata = {
+        "name": "online_search",
+        "description": "Search for a term online using DuckDuckGo returning results",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "search_term": {
+                    "type": "string",
+                    "description": "The term to search online, be punctual and use the least possible amount of words to get general results"
+                }
+            },
+            "required": [
+                "search_term"
+            ]
+        },
+        "strict": True
+    }
+    name = _("Online Search")
+    description = _("Search for a term online using DuckDuckGo")
+    variables = {}
+
+    def run(self, arguments, messages, bot_message) -> str:
+        search_term = arguments.get("search_term")
+        if not search_term:
+            return "Error: Search term was not provided"
+
+        response = requests.get('https://api.duckduckgo.com/?q={}&format=json'.format(search_term.replace(' ', '+')))
+        data = response.json()
+
+        result_md = [
+            "# {}".format(data.get('Heading', 'Abstract'))
+        ]
+
+        if data.get("AbstractURL"):
+            bot_message.add_attachment(data.get("AbstractSource", _("Abstract Source")), "link", data.get("AbstractURL"))
+
+        if data.get("AbstractText"):
+            result_md.append(data.get("AbstractText"))
+
+        if data.get("Image"):
+            attach_online_image(bot_message, data.get("Heading", "Web Result Image"), "https://duckduckgo.com{}".format(data.get("Image")))
+
+        if data.get("Infobox") and len(data.get("Infobox", {}).get("content")) > 0:
+            info_block = ""
+            for info in data.get("Infobox").get("content"):
+                if info.get("data_type") == "string" and info.get("label") and info.get("value"):
+                    info_block += "- **{}**: {}\n".format(info.get("label"), info.get("value"))
+            if len(info_block) > 0:
+                result_md.append("## General Information")
+                result_md.append(info_block)
+
+        if data.get("OfficialWebsite"):
+            attachment = bot_message.add_attachment(_("Official Website"), "link", data.get("OfficialWebsite"))
+            window.sql_instance.add_attachment(bot_message, attachment)
+
+        if len(result_md) == 1 and len(data.get("RelatedTopics", [])) > 0:
+            result_md.append("No direct results were found but there are some related topics.")
+            result_md.append("## Related Topics")
+            result_md.append("### Main Results")
+            for topic in data.get("RelatedTopics"):
+                if topic.get("FirstURL"):
+                    title = topic.get("FirstURL").split("/")[-1].replace("_", " ").title()
+                    result_md.append("#### {}".format(title))
+                    result_md.append(topic.get("Text"))
+                elif topic.get("Name"):
+                    result_md.append("### {}".format(topic.get("Name")))
+                    for topic2 in topic.get("Topics"):
+                        title = topic2.get("FirstURL").split("/")[-1].replace("_", " ").title()
+                        result_md.append("#### {}".format(title))
+                        result_md.append(topic2.get("Text"))
+
+        if len(result_md) == 1:
+            return "Error: No results found"
+
+        return '\n\n'.join(result_md)
+
+available_tools = [get_current_datetime, get_recipes_by_category, get_recipe_by_name, extract_wikipedia, online_search]
 
 def update_available_tools():
     tools_parameters = window.sql_instance.get_tool_parameters()
@@ -327,3 +434,13 @@ def log_to_message(text:str, bot_message, animate:bool):
         if animate:
             time.sleep(round(random.random()/4, 2))
     bot_message.update_message({"content": "\n"})
+
+def attach_online_image(bot_message, image_title:str, image_url:str):
+    image_response = requests.get(image_url, stream=True)
+    if image_response.status_code == 200:
+        with tempfile.NamedTemporaryFile(delete=True, suffix='.jpg') as tmp_file:
+            image_response.raw.decode_content = True
+            shutil.copyfileobj(image_response.raw, tmp_file)
+            raw_b64 = window.get_content_of_file(tmp_file.name, 'image')
+            attachment = bot_message.add_attachment(image_title, 'image', raw_b64)
+            window.sql_instance.add_attachment(bot_message, attachment)
