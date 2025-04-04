@@ -38,6 +38,7 @@ import time
 import sqlite3
 
 from pydbus import SessionBus
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -141,21 +142,43 @@ class AlpacaApplication(Adw.Application):
             win.background_switch.set_visible(False)
 
     def on_about_action(self, widget, _):
-        about = Adw.AboutDialog(#transient_for=self.props.active_window,
+        current_year = str(datetime.now().year)
+        about = Adw.AboutDialog(
+            transient_for=self.props.active_window,
             application_name='Alpaca',
             application_icon='com.jeffser.Alpaca',
             developer_name='Jeffry Samuel Eduarte Rojas',
             version=self.version,
+            release_notes_version=self.version,
             support_url="https://github.com/Jeffser/Alpaca/discussions/155",
             developers=['Jeffser https://jeffser.com'],
-            designers=['Jeffser https://jeffser.com', 'Tobias Bernard (App Icon) https://tobiasbernard.com/'],
+            designers=[
+                'Jeffser https://jeffser.com', 
+                'Tobias Bernard (App Icon) https://tobiasbernard.com/'
+            ],
             translator_credits='\n'.join(TRANSLATORS),
-            copyright='© 2025 Alpaca Jeffry Samuel Eduarte Rojas\n© 2025 Ollama Meta Platforms, Inc.\n© 2025 ChatGPT OpenAI, Inc.\n© 2025 Gemini Google Alphabet, Inc.\n© 2025 Together.ai\n© 2025 Venice AI',
+            copyright=f'© {current_year} Alpaca Jeffry Samuel Eduarte Rojas\n'
+                      f'© {current_year} Ollama Meta Platforms, Inc.\n'
+                      f'© {current_year} ChatGPT OpenAI, Inc.\n'
+                      f'© {current_year} Gemini Google Alphabet, Inc.\n'
+                      f'© {current_year} Together.ai\n'
+                      f'© {current_year} Venice AI\n'
+                      f'© {current_year} Deepseek\n'
+                      f'© {current_year} Openrouter\n'
+                      f'© {current_year} Gorqcloud\n'
+                      f'© {current_year} Anthropic\n'
+                      f'© {current_year} Lambda.ai\n'
+                      f'© {current_year} Fireworks.ai',
             issue_url='https://github.com/Jeffser/Alpaca/issues',
-            license_type=3,
-            website="https://jeffser.com/alpaca")
-        about.add_link("Become a Sponsor", "https://github.com/sponsors/Jeffser")
-        about.present(parent=self.props.active_window)
+            license_type=Gtk.License.GPL_3_0,
+            website="https://jeffser.com/alpaca"
+        )
+        
+        about.add_link(_("Website"), "https://jeffser.com/alpaca")
+        about.add_link(_("Documentation"), "https://github.com/Jeffser/Alpaca/wiki")
+        about.add_link(_("Become a Sponsor"), "https://github.com/sponsors/Jeffser")
+        about.add_link(_("Discussions"), "https://github.com/Jeffser/Alpaca/discussions")
+        about.present()
 
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
@@ -163,7 +186,6 @@ class AlpacaApplication(Adw.Application):
         self.add_action(action)
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
-
 
 def main(version):
     logging.basicConfig(
