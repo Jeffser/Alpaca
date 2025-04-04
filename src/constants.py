@@ -14,6 +14,7 @@ APP_ID = "com.jeffser.Alpaca"
 # "About Alpaca" > "Contributors".
 TRANSLATORS: "list[str]" = [
     "Alex K (Russian) https://github.com/alexkdeveloper",
+    "DasHi (Russian) https://github.com/col83",
     "Jeffry Samuel (Spanish) https://github.com/jeffser",
     "Louis Chauvet-Villaret (French) https://github.com/loulou64490",
     "Théo FORTIN (French) https://github.com/topiga",
@@ -33,7 +34,7 @@ TRANSLATORS: "list[str]" = [
     "Henk Leerssen (Dutch) https://github.com/Henkster72",
     "Nofal Briansah (Indonesian) https://github.com/nofalbriansah",
     "Harimanish (Tamil) https://github.com/harimanish",
-    "Ekaterine Papava (Georgian) https://github.com/EkaterinePapava",
+    "Ekaterine Papava (Georgian) https://github.com/EkaterinePapava"
 ]
 
 
