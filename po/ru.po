@@ -3216,15 +3216,6 @@ msgstr "Локальный экземпляр ИИ, управляемый не�
 msgid "Name"
 msgstr "Имя"
 
-#: src/instance_manager.py:266 src/instance_manager.py:268
-msgid "API Key"
-msgstr ""
-
-#: src/instance_manager.py:430 src/instance_manager.py:566
-#: src/instance_manager.py:701 src/instance_manager.py:847 src/window.ui:836
-msgid "Name"
-msgstr "Имя"
-
 #: src/instance_manager.py:436
 msgid "Port"
 msgstr "Порт"
@@ -3285,16 +3276,6 @@ msgstr ""
 msgid "Model to use when generating a chat title."
 msgstr "Модель, используемая при создании заголовка чата."
 
-#: src/instance_manager.py:421 src/instance_manager.py:422
-#: src/custom_widgets/message_widget.py:223
-msgid "Save"
-msgstr ""
-
-#: src/instance_manager.py:474 src/instance_manager.py:691
-#: src/instance_manager.py:728 src/instance_manager.py:757
-msgid "Could not retrieve added models"
-msgstr ""
-
 #: src/instance_manager.py:507 src/instance_manager.py:508
 #: src/instance_manager.py:624 src/instance_manager.py:625
 #: src/instance_manager.py:772 src/instance_manager.py:773
@@ -3315,42 +3296,13 @@ msgstr "URL-адрес экземпляра"
 msgid "API Key (Optional)"
 msgstr "API ключ (необязательный)"
 
-
-#: src/instance_manager.py:589
-msgid "Model request too large for system"
-msgstr ""
-
 #: src/instance_manager.py:703 src/instance_manager.py:706
 #: src/instance_manager.py:852 src/instance_manager.py:854
 msgid "API Key"
 msgstr "API ключ"
 
-#: src/instance_manager.py:594
-msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
-msgstr ""
-
-#: src/instance_manager.py:596
-msgid "Using AMD GPU type '{}'"
-msgstr ""
-
-#: src/instance_manager.py:606
-msgid "Integrated Ollama instance is not running"
-msgstr ""
-
-#: src/instance_manager.py:628
-msgid "Managed Ollama instance failed to start"
-msgstr ""
-
-#: src/instance_manager.py:631
-msgid "Integrated Ollama instance is running"
-msgstr ""
-
 #: src/instance_manager.py:636 src/instance_manager.py:637
 msgid "Ollama Log"
-msgstr ""
-
-#: src/instance_manager.py:645
-msgid "Local or remote AI instance not managed by Alpaca"
 msgstr ""
 
 #: src/instance_manager.py:796
