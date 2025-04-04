@@ -174,9 +174,10 @@ class AlpacaApplication(Adw.Application):
             website="https://jeffser.com/alpaca"
         )
         
+        about.add_link(_("Website"), "https://jeffser.com/alpaca")
         about.add_link(_("Documentation"), "https://github.com/Jeffser/Alpaca/wiki")
         about.add_link(_("Become a Sponsor"), "https://github.com/sponsors/Jeffser")
-        about.add_link(_("Website"), "https://jeffser.com/alpaca/")
+        about.add_link(_("Discussions"), "https://github.com/Jeffser/Alpaca/discussions")
         about.present()
 
     def create_action(self, name, callback, shortcuts=None):
