@@ -141,51 +141,50 @@ class AlpacaApplication(Adw.Application):
             win.powersaver_warning_switch.set_visible(False)
             win.background_switch.set_visible(False)
 
-def on_about_action(self, widget, _):
-    current_year = str(datetime.now().year)
-    about = Adw.AboutDialog(
-        transient_for=self.props.active_window,
-        application_name='Alpaca',
-        application_icon='com.jeffser.Alpaca',
-        developer_name='Jeffry Samuel Eduarte Rojas',
-        version=self.version,
-        release_notes_version=self.version,
-        support_url="https://github.com/Jeffser/Alpaca/discussions/155",
-        developers=['Jeffser https://jeffser.com'],
-        designers=[
-            'Jeffser https://jeffser.com', 
-            'Tobias Bernard (App Icon) https://tobiasbernard.com/'
-        ],
-        translator_credits='\n'.join(TRANSLATORS),
-        copyright=f'© {current_year} Alpaca Jeffry Samuel Eduarte Rojas\n'
-                  f'© {current_year} Ollama Meta Platforms, Inc.\n'
-                  f'© {current_year} ChatGPT OpenAI, Inc.\n'
-                  f'© {current_year} Gemini Google Alphabet, Inc.\n'
-                  f'© {current_year} Together.ai\n'
-                  f'© {current_year} Venice AI\n'
-                  f'© {current_year} Deepseek\n'
-                  f'© {current_year} Openrouter\n'
-                  f'© {current_year} Gorqcloud\n'
-                  f'© {current_year} Anthropic\n'
-                  f'© {current_year} Lambda.ai\n'
-                  f'© {current_year} Fireworks.ai',
-        issue_url='https://github.com/Jeffser/Alpaca/issues',
-        license_type=Gtk.License.GPL_3_0,
-        website="https://jeffser.com/alpaca"
-    )
-    
-    about.add_link(_("Documentation"), "https://github.com/Jeffser/Alpaca/wiki")
-    about.add_link(_("Become a Sponsor"), "https://github.com/sponsors/Jeffser")
-    about.add_link(_("Website"), "https://jeffser.com/alpaca/")
-    about.add_link(_("sponsor"), "https://github.com/sponsors/Jeffser")
+    def on_about_action(self, widget, _):
+        current_year = str(datetime.now().year)
+        about = Adw.AboutDialog(
+            transient_for=self.props.active_window,
+            application_name='Alpaca',
+            application_icon='com.jeffser.Alpaca',
+            developer_name='Jeffry Samuel Eduarte Rojas',
+            version=self.version,
+            release_notes_version=self.version,
+            support_url="https://github.com/Jeffser/Alpaca/discussions/155",
+            developers=['Jeffser https://jeffser.com'],
+            designers=[
+                'Jeffser https://jeffser.com', 
+                'Tobias Bernard (App Icon) https://tobiasbernard.com/'
+            ],
+            translator_credits='\n'.join(TRANSLATORS),
+            copyright=f'© {current_year} Alpaca Jeffry Samuel Eduarte Rojas\n'
+                      f'© {current_year} Ollama Meta Platforms, Inc.\n'
+                      f'© {current_year} ChatGPT OpenAI, Inc.\n'
+                      f'© {current_year} Gemini Google Alphabet, Inc.\n'
+                      f'© {current_year} Together.ai\n'
+                      f'© {current_year} Venice AI\n'
+                      f'© {current_year} Deepseek\n'
+                      f'© {current_year} Openrouter\n'
+                      f'© {current_year} Gorqcloud\n'
+                      f'© {current_year} Anthropic\n'
+                      f'© {current_year} Lambda.ai\n'
+                      f'© {current_year} Fireworks.ai',
+            issue_url='https://github.com/Jeffser/Alpaca/issues',
+            license_type=Gtk.License.GPL_3_0,
+            website="https://jeffser.com/alpaca"
+        )
+        
+        about.add_link(_("Documentation"), "https://github.com/Jeffser/Alpaca/wiki")
+        about.add_link(_("Become a Sponsor"), "https://github.com/sponsors/Jeffser")
+        about.add_link(_("Website"), "https://jeffser.com/alpaca/")
+        about.add_link(_("sponsor"), "https://github.com/sponsors/Jeffser")
 
-def create_action(self, name, callback, shortcuts=None):
+    def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
         action.connect("activate", callback)
         self.add_action(action)
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
-
 
 def main(version):
     logging.basicConfig(
