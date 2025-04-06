@@ -29,8 +29,8 @@
 - Regenerate messages
 - YouTube recognition (Ask questions about a YouTube video using the transcript)
 - Website recognition (Ask questions about a certain website by parsing the url)
-- Talk to cloud hosted models with openai compatible api keys
-
+- Talk to cloud-hosted models with OpenAI-compatible APIs using your own API keys
+  
 ## Screenies
 
 Normal conversation | Image recognition | Rich text formatting | Integrated script execution | YouTube transcription
