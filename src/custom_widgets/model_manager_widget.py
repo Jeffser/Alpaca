@@ -670,7 +670,6 @@ def update_available_model_list():
 
     # Category Filter
     window.model_filter_button.set_visible(len(available_models) > 0)
-
     container = Gtk.Box(
         orientation=1,
         spacing=5
@@ -688,8 +687,7 @@ def update_available_model_list():
                 pill_container.append(Gtk.Label(label=category.get('name')))
                 checkbtn = Gtk.CheckButton(
                     child=pill_container,
-                    name=name,
-                    #css_classes=['category_pill']# + category.get('css', [])
+                    name=name
                 )
                 checkbtn.connect('toggled', lambda *_: window.model_search_changed(window.searchentry_models))
                 container.append(checkbtn)
@@ -699,7 +697,6 @@ def update_available_model_list():
             has_arrow=True
         )
     )
-
 
     for name, model_info in available_models.items():
         if 'small' in model_info['categories'] or 'medium' in model_info['categories'] or 'big' in model_info['categories'] or os.getenv('ALPACA_SHOW_HUGE_MODELS', '0') == '1':
