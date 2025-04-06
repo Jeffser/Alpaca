@@ -124,6 +124,13 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Use Tools</property>
+                <property name="subtitle" translatable="yes">Ask model to use tools to generate a message</property>
+                <property name="accelerator">&lt;alt&gt;Return</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Send Message as User</property>
                 <property name="accelerator">Return</property>
               </object>
