@@ -123,6 +123,9 @@ class pulling_model(Gtk.Box):
     def get_search_string(self) -> str:
         return '{} {}'.format(self.get_name(), self.model_title)
 
+    def get_search_categories(self) -> set:
+        return set([c for c in available_models.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
+
     def update_progressbar(self, data:dict):
         if not self.get_parent():
             logger.info("Pulling of '{}' was canceled".format(self.get_name()))
@@ -346,6 +349,9 @@ class local_model(Gtk.Box):
 
     def get_search_string(self) -> str:
         return '{} {} {}'.format(self.get_name(), self.model_title, self.data.get('system', None))
+
+    def get_search_categories(self) -> set:
+        return set([c for c in available_models.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
 
     def get_vision(self) -> bool:
         categories = available_models.get(self.get_name().split(':')[0], {}).get('categories', [])
@@ -633,6 +639,9 @@ class available_model(Gtk.Box):
     def get_search_string(self) -> str:
         return '{} {} {} {}'.format(self.get_name(), self.get_name().replace('-', ' ').title(), available_models_descriptions.descriptions.get(self.get_name()), ' '.join(self.data.get('categories')))
 
+    def get_search_categories(self) -> set:
+        return set(self.data.get('categories', []))
+
 def add_local_model(model_name:str):
     model_element = local_model(model_name)
     window.local_model_flowbox.prepend(model_element)
@@ -658,6 +667,38 @@ def update_available_model_list():
     global available_models
     window.available_model_flowbox.remove_all()
     available_models = window.get_current_instance().get_available_models()
+
+    # Category Filter
+    categories = set()
+    for m in available_models.values():
+        for c in m.get('categories', []):
+            if c != 'embedding' or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1':
+                # Reuse the translated names from category_pill
+                categories.add(c)
+
+    window.model_filter_button.set_visible(len(categories) > 0)
+    container = Gtk.Box(
+        orientation=1,
+        spacing=5
+    )
+    for category in categories:
+        display_name = category_pill.metadata.get(category, {}).get('name', None)
+        if display_name:
+            checkbtn = Gtk.CheckButton(
+                label=display_name,
+                name=category,
+                active=True
+            )
+            checkbtn.connect('toggled', lambda *_: window.model_search_changed(window.searchentry_models))
+            container.append(checkbtn)
+    window.model_filter_button.set_popover(
+        Gtk.Popover(
+            child=container,
+            has_arrow=True
+        )
+    )
+
+
     for name, model_info in available_models.items():
         if 'small' in model_info['categories'] or 'medium' in model_info['categories'] or 'big' in model_info['categories'] or os.getenv('ALPACA_SHOW_HUGE_MODELS', '0') == '1':
             if 'embedding' not in model_info['categories'] or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1':

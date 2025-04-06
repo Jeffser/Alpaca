@@ -105,11 +105,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
     file_preview_open_button = Gtk.Template.Child()
     file_preview_remove_button = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
+    searchentry_models = Gtk.Template.Child()
     model_search_button = Gtk.Template.Child()
     message_searchbar = Gtk.Template.Child()
     searchentry_messages = Gtk.Template.Child()
     title_stack = Gtk.Template.Child()
     title_no_model_button = Gtk.Template.Child()
+    model_filter_button = Gtk.Template.Child()
 
     file_filter_db = Gtk.Template.Child()
     file_filter_gguf = Gtk.Template.Child()
@@ -526,10 +528,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def model_search_changed(self, entry):
+        filtered_categories = set()
+        if self.model_filter_button.get_popover():
+            filtered_categories = set([c.get_name() for c in list(self.model_filter_button.get_popover().get_child()) if c.get_active()])
         results_local = False
+
         if len(list(self.local_model_flowbox)) > 0:
             for model in list(self.local_model_flowbox):
-                model.set_visible(re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE))
+                string_search = re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE)
+                category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.model_searchbar.get_search_mode()
+                model.set_visible(string_search and category_filter)
                 results_local = results_local or model.get_visible()
                 if not model.get_visible() and model in self.local_model_flowbox.get_selected_children():
                     self.local_model_flowbox.unselect_all()
@@ -542,7 +550,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.available_models_stack_page.set_visible(True)
             self.model_creator_stack_page.set_visible(True)
             for model in list(self.available_model_flowbox):
-                model.set_visible(re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE))
+                string_search = re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE)
+                category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.model_searchbar.get_search_mode()
+                model.set_visible(string_search and category_filter)
                 results_available = results_available or model.get_visible()
                 if not model.get_visible() and model in self.available_model_flowbox.get_selected_children():
                     self.available_model_flowbox.unselect_all()
@@ -1146,6 +1156,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         model_manager_widget.window = self
         instance_manager.window = self
         tool_manager.window = self
+
+        self.model_searchbar.connect_entry(self.searchentry_models)
+        self.model_searchbar.connect('notify::search-mode-enabled', lambda *_: self.model_search_changed(self.searchentry_models))
 
         # Prepare model selector
         list(self.model_dropdown)[0].add_css_class('flat')
