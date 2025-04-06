@@ -29,7 +29,7 @@ class base_instance:
     instance_id = None
     name = _('Instance')
     instance_url = None
-    max_tokens = 4096
+    max_tokens = None
     api_key = None
     temperature = 0.7
     seed = 0
@@ -127,9 +127,10 @@ class base_instance:
         params = {
             "model": model,
             "messages": messages,
-            "temperature": self.temperature,
-            "max_tokens": self.max_tokens,
+            "temperature": self.temperature
         }
+        if self.max_tokens:
+            params["max_tokens"] = self.max_tokens
         if self.instance_type != 'anthropic':
             params["stream"] = True
             if tools:
@@ -171,7 +172,7 @@ class base_instance:
             "temperature": 0.2,
             "model": model,
             "messages": messages,
-            "max_tokens": 100
+            "max_tokens": 50
         }
         new_chat_title = chat.get_name()
         try:
@@ -264,7 +265,7 @@ class base_instance:
                 adjustment=Gtk.Adjustment(
                     value=self.max_tokens,
                     lower=50,
-                    upper=8192,
+                    upper=16384,
                     step_increment=1
                 )
             )
@@ -650,7 +651,7 @@ class ollama(base_ollama):
         return self.generate_preferences_page(**arguments)
 
 class base_openai(base_instance):
-    max_tokens = 256
+    max_tokens = 2048
     api_key = ''
 
     def __init__(self, data:dict={}):
