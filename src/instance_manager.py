@@ -552,10 +552,11 @@ class ollama_managed(base_ollama):
         self.process = None
         self.log_raw = ''
         self.log_summary = ('', ['dim-label'])
-        self.client = openai.OpenAI(
-            base_url='{}/v1/'.format(self.instance_url).replace('\n', ''),
-            api_key=self.api_key if self.api_key else 'NO_KEY'
-        )
+        if self.instance_id:
+            self.client = openai.OpenAI(
+                base_url='{}/v1/'.format(self.instance_url).replace('\n', ''),
+                api_key=self.api_key if self.api_key else 'NO_KEY'
+            )
 
     def log_output(self, pipe):
         AMD_support_label = "\n<a href='https://github.com/Jeffser/Alpaca/wiki/Installing-Ollama'>{}</a>".format(_('Alpaca Support'))
@@ -637,10 +638,11 @@ class ollama(base_ollama):
         self.default_model = data.get('default_model', self.default_model)
         self.title_model = data.get('title_model', self.title_model)
         self.pinned = data.get('pinned', self.pinned)
-        self.client = openai.OpenAI(
-            base_url='{}/v1/'.format(self.instance_url).replace('\n', ''),
-            api_key=self.api_key if self.api_key else 'NO_KEY'
-        )
+        if self.instance_id:
+            self.client = openai.OpenAI(
+                base_url='{}/v1/'.format(self.instance_url).replace('\n', ''),
+                api_key=self.api_key if self.api_key else 'NO_KEY'
+            )
 
     def get_preferences_page(self) -> Adw.PreferencesPage:
         arguments = {
@@ -662,10 +664,11 @@ class base_openai(base_instance):
         self.default_model = data.get('default_model', self.default_model)
         self.title_model = data.get('title_model', self.title_model)
         self.pinned = data.get('pinned', self.pinned)
-        self.client = openai.OpenAI(
-            base_url=self.instance_url.replace('\n', ''),
-            api_key=self.api_key if self.api_key else 'NO_KEY'
-        )
+        if self.instance_id:
+            self.client = openai.OpenAI(
+                base_url=self.instance_url.replace('\n', ''),
+                api_key=self.api_key if self.api_key else 'NO_KEY'
+            )
 
     def stop(self):
         pass

@@ -173,7 +173,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         def selected(ins):
             tbv=Adw.ToolbarView()
             tbv.add_top_bar(Adw.HeaderBar())
-            tbv.set_content(ins().get_preferences_page() )
+            tbv.set_content(ins().get_preferences_page())
             self.main_navigation_view.push(Adw.NavigationPage(title=_('Add Instance'), tag='instance', child=tbv))
 
         options = {}
