@@ -1201,6 +1201,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     self.send_message(None, 2)
                 else: # Nothing, send normal message
                     self.send_message(None, 0)
+                return True
         enter_key_controller.connect("key-pressed", enter_key_handler)
         self.message_text_view.add_controller(enter_key_controller)
 
