@@ -106,8 +106,13 @@ class chat(Gtk.Stack):
             halign=3
         )
         for prompt in random.sample(possible_prompts, 3):
+
             prompt_button = Gtk.Button(
-                label=prompt,
+                child=Gtk.Label(
+                    label=prompt,
+                    justify=2,
+                    wrap=True
+                ),
                 tooltip_text=_("Send prompt: '{}'").format(prompt)
             )
             prompt_button.connect('clicked', lambda *_, prompt=prompt : self.send_sample_prompt(prompt))
