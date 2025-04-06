@@ -75,7 +75,7 @@ def run_terminal(files:dict):
                 f.write(file_metadata['content'])
             if not os.path.isfile(os.path.join(data_dir, 'code runner', 'python', 'requirements.txt')):
                 with open(os.path.join(data_dir, 'code runner', 'python', 'requirements.txt'), 'w') as f:
-                    f.write('')
+                    f.write('matplotlib\npygobject')
             script += [
                 'echo -e "🦙 {}\n"'.format(_('Setting up Python environment...')),
                 'python3 -m venv "{}"'.format(os.path.join(data_dir, 'code runner', 'python')),
