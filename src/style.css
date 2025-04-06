@@ -109,6 +109,10 @@ stacksidebar {
 	background-color: unset;
 }
 
+.generating_text_shadow {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, var(--window-bg-color) 100%);
+}
+
 /*-----------MACOS STUFF-----------*/
 
 window.macos windowcontrols > button > image {

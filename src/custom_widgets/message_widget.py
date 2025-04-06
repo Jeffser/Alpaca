@@ -164,18 +164,29 @@ class text_block(Gtk.Label):
         self.set_selectable(False)
         self.set_selectable(True)
 
-class generating_text_block(Gtk.TextView):
+class generating_text_block(Gtk.Overlay):
     __gtype_name__ = 'AlpacaGeneratingTextBlock'
 
     def __init__(self):
-        super().__init__(
+        textview = Gtk.TextView(
             hexpand=True,
             halign=0,
             editable=False,
             wrap_mode=3,
             css_classes=['flat']
         )
-        self.buffer = self.get_buffer()
+        self.buffer = textview.get_buffer()
+
+        super().__init__(
+            child=textview
+        )
+
+        self.add_overlay(Gtk.Box(
+            valign=2,
+            halign=0,
+            height_request=25,
+            css_classes=['generating_text_shadow']
+        ))
 
     def get_text(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
