@@ -656,8 +656,8 @@ def update_local_model_list():
 
 def update_available_model_list():
     global available_models
+    window.available_model_flowbox.remove_all()
     available_models = window.get_current_instance().get_available_models()
-    GLib.idle_add(window.available_model_flowbox.remove_all)
     for name, model_info in available_models.items():
         if 'small' in model_info['categories'] or 'medium' in model_info['categories'] or 'big' in model_info['categories'] or os.getenv('ALPACA_SHOW_HUGE_MODELS', '0') == '1':
             if 'embedding' not in model_info['categories'] or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1':

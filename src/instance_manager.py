@@ -462,7 +462,6 @@ class base_ollama(base_instance):
         except Exception as e:
             dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve available models'), e)
             logger.error(e)
-            window.instance_listbox.unselect_all()
         return {}
 
     def get_model_info(self, model_name:str) -> dict:
