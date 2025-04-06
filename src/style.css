@@ -60,8 +60,10 @@ stacksidebar {
   background-color: mix(var(--accent-bg-color), var(--window-bg-color), 0.8);
 }
 .category_pill.brown {
-  color: mix(var(--brown-1), var(--window-fg-color), 0.4);
   background-color: mix(var(--brown-2), var(--window-bg-color), 0.8);
+}
+.brown {
+  color: mix(var(--brown-1), var(--window-fg-color), 0.4);
 }
 .code_block {
   font-family: monospace;

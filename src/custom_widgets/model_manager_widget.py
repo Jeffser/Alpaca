@@ -669,28 +669,30 @@ def update_available_model_list():
     available_models = window.get_current_instance().get_available_models()
 
     # Category Filter
-    categories = set()
-    for m in available_models.values():
-        for c in m.get('categories', []):
-            if c != 'embedding' or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1':
-                # Reuse the translated names from category_pill
-                categories.add(c)
+    window.model_filter_button.set_visible(len(available_models) > 0)
 
-    window.model_filter_button.set_visible(len(categories) > 0)
     container = Gtk.Box(
         orientation=1,
         spacing=5
     )
-    for category in categories:
-        display_name = category_pill.metadata.get(category, {}).get('name', None)
-        if display_name:
-            checkbtn = Gtk.CheckButton(
-                label=display_name,
-                name=category,
-                active=True
-            )
-            checkbtn.connect('toggled', lambda *_: window.model_search_changed(window.searchentry_models))
-            container.append(checkbtn)
+    if len(available_models) > 0:
+        for name, category in category_pill.metadata.items():
+            if category.get('name') and (name != 'embedding' or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1'):
+                pill_container = Gtk.Box(
+                    spacing=5,
+                    halign=3
+                )
+                icon = Gtk.Image.new_from_icon_name(category.get('icon', 'language-symbolic'))
+                icon.set_css_classes(category.get('css', []))
+                pill_container.append(icon)
+                pill_container.append(Gtk.Label(label=category.get('name')))
+                checkbtn = Gtk.CheckButton(
+                    child=pill_container,
+                    name=name,
+                    #css_classes=['category_pill']# + category.get('css', [])
+                )
+                checkbtn.connect('toggled', lambda *_: window.model_search_changed(window.searchentry_models))
+                container.append(checkbtn)
     window.model_filter_button.set_popover(
         Gtk.Popover(
             child=container,
