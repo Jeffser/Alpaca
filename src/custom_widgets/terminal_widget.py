@@ -75,13 +75,15 @@ def run_terminal(files:dict):
                 f.write(file_metadata['content'])
             if not os.path.isfile(os.path.join(data_dir, 'code runner', 'python', 'requirements.txt')):
                 with open(os.path.join(data_dir, 'code runner', 'python', 'requirements.txt'), 'w') as f:
-                    f.write('matplotlib\npygobject')
+                    f.write('')
             script += [
                 'echo -e "🦙 {}\n"'.format(_('Setting up Python environment...')),
                 'python3 -m venv "{}"'.format(os.path.join(data_dir, 'code runner', 'python')),
                 'source "{}"'.format(os.path.join(data_dir, 'code runner', 'python', 'bin', 'activate')),
-                'pip install -r "{}" | grep -v "already satisfied"'.format(os.path.join(data_dir, 'code runner', 'python', 'requirements.txt')),
                 'export MPLBACKEND=GTK4Agg',
+                'export PIP_DISABLE_PIP_VERSION_CHECK=1',
+                'pip install matplotlib pygobject | grep -v "already satisfied"',
+                'pip install -r "{}" | grep -v "already satisfied"'.format(os.path.join(data_dir, 'code runner', 'python', 'requirements.txt')),
                 'clear',
                 'echo -e "🦙 {}\n"'.format(file_name),
                 'python3 "{}"'.format(os.path.join(data_dir, 'code runner', 'python', file_name))
