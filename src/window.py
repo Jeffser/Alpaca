@@ -386,8 +386,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
             return
 
         current_model = model_manager_widget.get_selected_model().get_name()
+        if mode == 2 and len(tool_manager.get_enabled_tools()) == 0:
+            self.show_toast(_("No tools enabled."), self.main_overlay, 'app.tool_manager', _('Open Tool Manager'))
+            return
         if 'ollama' in self.get_current_instance().instance_type and mode == 2 and 'tools' not in model_manager_widget.available_models.get(current_model.split(':')[0], {}).get('categories', []):
-            self.show_toast(_("'{}' does not support tools.").format(self.convert_model_name(current_model, 0)), self.main_overlay)
+            self.show_toast(_("'{}' does not support tools.").format(self.convert_model_name(current_model, 0)), self.main_overlay, 'app.model_manager', _('Open Model Manager'))
             return
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
@@ -622,12 +625,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if new_text != text:
                 editable.stop_emission_by_name("insert-text")
 
-    def show_toast(self, message:str, overlay):
+    def show_toast(self, message:str, overlay, action:str=None, action_name:str=None):
         logger.info(message)
         toast = Adw.Toast(
             title=message,
             timeout=2
         )
+        if action and action_name:
+            toast.set_action_name(action)
+            toast.set_button_label(action_name)
         overlay.add_toast(toast)
 
     def show_notification(self, title:str, body:str, icon:Gio.ThemedIcon=None):
