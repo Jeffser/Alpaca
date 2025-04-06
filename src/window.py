@@ -170,10 +170,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def add_instance(self, button):
-        def selected(ins:str):
+        def selected(ins):
             tbv=Adw.ToolbarView()
             tbv.add_top_bar(Adw.HeaderBar())
-            tbv.set_content(ins.get_preferences_page(ins))
+            tbv.set_content(ins().get_preferences_page() )
             self.main_navigation_view.push(Adw.NavigationPage(title=_('Add Instance'), tag='instance', child=tbv))
 
         options = {}

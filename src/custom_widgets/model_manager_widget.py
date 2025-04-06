@@ -640,7 +640,7 @@ def add_local_model(model_name:str):
 
 def update_local_model_list():
     window.local_model_flowbox.remove_all()
-    window.model_dropdown.get_model().remove_all()
+    GLib.idle_add(window.model_dropdown.get_model().remove_all)
     default_model = window.sql_instance.get_preference('default_model')
     threads=[]
     local_models = window.get_current_instance().get_local_models()
@@ -657,7 +657,7 @@ def update_local_model_list():
 def update_available_model_list():
     global available_models
     available_models = window.get_current_instance().get_available_models()
-    window.available_model_flowbox.remove_all()
+    GLib.idle_add(window.available_model_flowbox.remove_all)
     for name, model_info in available_models.items():
         if 'small' in model_info['categories'] or 'medium' in model_info['categories'] or 'big' in model_info['categories'] or os.getenv('ALPACA_SHOW_HUGE_MODELS', '0') == '1':
             if 'embedding' not in model_info['categories'] or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1':
