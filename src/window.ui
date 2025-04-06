@@ -1206,10 +1206,10 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
         <attribute name="label" translatable="yes">Manage Models</attribute>
         <attribute name="action">app.model_manager</attribute>
       </item>
-      <!--<item>
-        <attribute name="label" translatable="yes">Manage Actions</attribute>
-        <attribute name="action">app.action_manager</attribute>
-      </item>-->
+      <item>
+        <attribute name="label" translatable="yes">Manage Tools</attribute>
+        <attribute name="action">app.tool_manager</attribute>
+      </item>
     </section>
     <section>
       <item>
@@ -1296,10 +1296,10 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
         <attribute name="label" translatable="yes">Send as System</attribute>
         <attribute name="action">app.send_system_message</attribute>
       </item>
-      <!--<item>
+      <item>
         <attribute name="label" translatable="yes">Use Tools</attribute>
         <attribute name="action">app.use_tools</attribute>
-      </item>-->
+      </item>
     </section>
   </menu>
   <menu id="attachment_menu">

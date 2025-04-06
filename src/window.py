@@ -1178,15 +1178,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK): # Enter pressed without shift
                 if state & Gdk.ModifierType.CONTROL_MASK: # Ctrl, send system message
                     self.send_message(None, 1)
-                elif state & Gdk.ModifierType.ALT_MASK and os.getenv('ALPACA_ACTION_TESTING', '0') == '1': # Alt, send tool message
+                elif state & Gdk.ModifierType.ALT_MASK: # Alt, send tool message
                     self.send_message(None, 2)
                 else: # Nothing, send normal message
                     self.send_message(None, 0)
         enter_key_controller.connect("key-pressed", enter_key_handler)
         self.message_text_view.add_controller(enter_key_controller)
-
-        if os.getenv('ALPACA_ACTION_TESTING', '0') == '1':
-            self.send_message_menu.append('Use Actions', 'app.use_tools')
 
         for name, data in {
             'send': {
@@ -1231,11 +1228,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'instance_manager' : [lambda *i: self.show_instance_manager() if self.main_navigation_view.get_visible_page().get_tag() != 'instance_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>i']],
             'download_model_from_name' : [lambda *i: dialog_widget.simple_entry(_('Download Model?'), _('Please enter the model name following this template: name:tag'), lambda name: threading.Thread(target=model_manager_widget.pull_model_confirm, args=(name,)).start(), {'placeholder': 'deepseek-r1:7b'})],
             'reload_added_models': [lambda *_: model_manager_widget.update_local_model_list()],
-            'delete_all_chats': [lambda *i: dialog_widget.simple(_('Delete All Chats?'), _('Are you sure you want to delete all chats?'), lambda: [GLib.idle_add(self.chat_list_box.delete_chat, c.chat_window.get_name()) for c in self.chat_list_box.tab_list], _('Delete'), 'destructive')]
+            'delete_all_chats': [lambda *i: dialog_widget.simple(_('Delete All Chats?'), _('Are you sure you want to delete all chats?'), lambda: [GLib.idle_add(self.chat_list_box.delete_chat, c.chat_window.get_name()) for c in self.chat_list_box.tab_list], _('Delete'), 'destructive')],
+            'use_tools': [lambda *_: self.send_message(None, 2)],
+            'tool_manager': [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'tool_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'tool_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']]
         }
-        if os.getenv('ALPACA_ACTION_TESTING', '0') == '1':
-            universal_actions['use_tools'] = [lambda *_: self.send_message(None, 2)]
-            universal_actions['tool_manager'] = [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'tool_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'tool_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']]
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
