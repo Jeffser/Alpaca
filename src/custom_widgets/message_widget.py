@@ -8,10 +8,9 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk, GdkPixbuf
 import logging, os, datetime, re, shutil, threading, sys, base64, tempfile, time, random
-import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import matplotlib.mathtext as mathtext
+from matplotlib.backends.backend_gtk4agg import FigureCanvasGTK4Agg as FigureCanvas
+from matplotlib.figure import Figure
 from PIL import Image
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .table_widget import TableWidget
@@ -445,90 +444,41 @@ class image_container(Gtk.ScrolledWindow):
         self.files.append(img)
         self.set_max_content_width(sum([f.width for f in self.files] + [12*(len(self.files)-1)]))
 
-class latex_image(Gtk.MenuButton):
-    __gtype_name__ = 'AlpacaLatexImage'
+class latex_renderer(Gtk.Button):
+    __gtype_name__ = 'AlpacaLatexRenderer'
 
-    def __init__(self, equation:str):
-        self.equation = equation
-        copy_button = Gtk.Button(
-            icon_name='edit-copy-symbolic',
-            tooltip_text=_('Copy Equation'),
-            css_classes=['flat']
-        )
-        copy_button.connect('clicked', lambda button: self.copy_equation())
-        regenerate_button = Gtk.Button(
-            icon_name='update-symbolic',
-            tooltip_text=_('Regenerate Equation'),
-            css_classes=['flat']
-        )
-        regenerate_button.connect('clicked', lambda button: self.generate_image(True))
-        popover_container = Gtk.Box(spacing=10)
-        popover_container.append(copy_button)
-        popover_container.append(regenerate_button)
-        self.popover = Gtk.Popover(child=popover_container)
+    class latex_canvas(FigureCanvas):
+        __gtype_name__ = 'AlpacaLatexCanvas'
+
+        def __init__(self, eq):
+            fig = Figure(dpi=100)
+            fig.patch.set_alpha(0)
+            ax = fig.add_subplot()
+            ax.axis('off')
+            text = ax.text(0.5, 0.5, eq, fontsize=24, ha='center', va='center')
+
+            fig.tight_layout()
+            fig.canvas.draw()
+            bbox = text.get_window_extent()
+            super().__init__(fig)
+            self.set_hexpand(True)
+            self.set_vexpand(False)
+            self.set_size_request(-1, bbox.height)
+            self.set_css_classes(['latex_renderer'])
+
+    def __init__(self, equation):
+        self.eq = '${}$'.format(equation.replace('\\[', '').replace('\\]', '').replace('$', '').replace('\n', ''))
         super().__init__(
-            halign=3,
-            popover=self.popover,
-            height_request=75,
-            css_classes=['flat'],
-            child=Adw.Spinner()
+            child=self.latex_canvas(self.eq),
+            css_classes=['flat', 'p10'],
+            tooltip_text=_('Copy Equation')
         )
-        threading.Thread(target=self.generate_image, args=(True,)).start()
+        self.connect('clicked', lambda button: self.copy_equation())
 
     def copy_equation(self):
-        self.popover.popdown()
         clipboard = Gdk.Display().get_default().get_clipboard()
-        clipboard.set(self.equation)
+        clipboard.set(self.eq[1:-1])
         window.show_toast(_("Equation copied to the clipboard"), window.main_overlay)
-
-    def generate_image(self, use_TeX:bool):
-        self.popover.popdown()
-        self.set_tooltip_text(_('LaTeX Equation'))
-        if use_TeX:
-            eq = self.equation
-        else:
-            eq = '${}$'.format(self.equation.replace('\\[', '').replace('\\]', '').replace('$', '').replace('\n', ''))
-        try:
-            picture = Gtk.Picture(
-                css_classes=['latex_equation'],
-                content_fit=1,
-                vexpand=True
-            )
-            with tempfile.TemporaryDirectory() as temp_path:
-                png_path = os.path.join(temp_path, 'equation.png')
-                fig, ax = plt.subplots()
-                ax.text(0.5, 0.5, eq, fontsize=24, ha='center', va='center', usetex=use_TeX)
-                ax.axis('off')
-                fig.patch.set_alpha(0.0)
-                plt.savefig(png_path, format='png', bbox_inches="tight", pad_inches=0, transparent=True)
-                plt.close(fig)
-
-                img = Image.open(png_path).convert("RGBA")
-                bbox = img.getbbox()
-                if bbox:
-                    cropped_image = img.crop(bbox)
-                    width, height = cropped_image.size
-                    cropped_image.save(png_path)
-
-                picture.set_filename(png_path)
-                picture.set_alternative_text(self.equation)
-                self.set_child(picture)
-        except Exception as e:
-            if use_TeX:
-                self.generate_image(False)
-            else:
-                logger.error(e)
-                label = Gtk.Label(
-                    label=eq,
-                    wrap_mode=2,
-                    wrap=True,
-                    ellipsize=3,
-                    css_classes=['error']
-                )
-                error = str(e)
-                if 'ParseSyntaxException' in error:
-                    self.set_tooltip_text(error.split('ParseSyntaxException: ')[-1])
-                self.set_child(label)
 
 class option_popup(Gtk.Popover):
     __gtype_name__ = 'AlpacaMessagePopup'
@@ -922,7 +872,7 @@ class message(Gtk.Box):
                     self.content_children.append(table_w)
                     self.container.append(table_w)
                 elif part['type'] == 'latex':
-                    latex_w = latex_image(part['text'])
+                    latex_w = latex_renderer(part['text'])
                     self.content_children.append(latex_w)
                     self.container.append(latex_w)
                 elif part['type'] == 'think' and part['text'].strip():

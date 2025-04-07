@@ -77,9 +77,6 @@ stacksidebar {
 .message > box {
   padding: 5px 5px 5px 5px;
 }
-.latex_equation {
-	padding: 10px;
-}
 .bottom_clamp {
 	padding: 12px;
 }
@@ -111,6 +108,10 @@ stacksidebar {
 
 .generating_text_shadow {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, var(--window-bg-color) 100%);
+}
+
+.latex_renderer {
+  background-color: transparent;
 }
 
 /*-----------MACOS STUFF-----------*/
