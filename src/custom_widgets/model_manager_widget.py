@@ -594,7 +594,8 @@ class available_model(Gtk.Box):
             label=name.replace('-', ' ').title(),
             css_classes=['title-3'],
             hexpand=True,
-            ellipsize=3,
+            wrap=True,
+            wrap_mode=2,
             halign=1
         )
         self.append(title_label)

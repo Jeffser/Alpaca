@@ -607,7 +607,6 @@ class footer(Gtk.Box):
         label = Gtk.Label(
             hexpand=True,
             wrap=True,
-            ellipsize=3,
             wrap_mode=2,
             margin_end=5,
             margin_start=5 if message_element.profile_picture_data else 0,
