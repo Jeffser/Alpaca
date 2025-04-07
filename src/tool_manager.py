@@ -309,18 +309,17 @@ class extract_wikipedia(tool):
         if not article_title:
             return "Error: Article title was not provided"
 
-        response = requests.get("https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles={}&formatversion=2".format(article_title.replace(" ", "_")))
+        response = requests.get("https://api.wikimedia.org/core/v1/wikipedia/en/search/title?q={}&limit=1".format(article_title))
         data = response.json()
 
         result_md = []
 
-        if len(data.get('query', {}).get('pages', [])) > 0:
-            for page in data.get('query', {}).get('pages', []):
-                if page.get('title') and page.get('extract'):
-                    result_md.append("# {}".format(page.get('title')))
-                    result_md.append(html2text(page.get('extract')))
+        if len(data.get("pages", [])) > 0:
+            page = requests.get("https://api.wikimedia.org/core/v1/wikipedia/en/page/{}/html".format(data.get("pages")[0].get("key")))
+            result_md.append("# {}".format(data.get("pages")[0].get("key")))
+            result_md.append(html2text(page.text))
 
-        if len(result_md) == 1:
+        else:
             return "Error: No results found"
 
         return '\n\n'.join(result_md)
@@ -360,7 +359,8 @@ class online_search(tool):
         ]
 
         if data.get("AbstractURL"):
-            bot_message.add_attachment(data.get("AbstractSource", _("Abstract Source")), "link", data.get("AbstractURL"))
+            attachment = bot_message.add_attachment(data.get("AbstractSource", _("Abstract Source")), "link", data.get("AbstractURL"))
+            window.sql_instance.add_attachment(bot_message, attachment)
 
         if data.get("AbstractText"):
             result_md.append(data.get("AbstractText"))
