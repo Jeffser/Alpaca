@@ -782,7 +782,8 @@ class message(Gtk.Box):
             self.text = self.content_children[-1].get_text()
             GLib.idle_add(self.set_text, self.content_children[-1].get_text())
             self.dt = datetime.datetime.now()
-            window.show_notification(chat.get_name(), self.text[:200] + (self.text[200:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
+            if self.text:
+                window.show_notification(chat.get_name(), self.text[:200] + (self.text[200:] and '...'), Gio.ThemedIcon.new("chat-message-new-symbolic"))
             if chat.quick_chat:
                 GLib.idle_add(window.quick_ask_save_button.set_sensitive, True)
             else:
