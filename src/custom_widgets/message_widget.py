@@ -468,8 +468,15 @@ class latex_renderer(Gtk.Button):
 
     def __init__(self, equation):
         self.eq = '${}$'.format(equation.replace('\\[', '').replace('\\]', '').replace('$', '').replace('\n', ''))
+
+        child = None
+        try:
+            child = self.latex_canvas(self.eq)
+        except Exception as e:
+            child = Gtk.Label(label=str(e).strip(), css_classes=['error'])
+
         super().__init__(
-            child=self.latex_canvas(self.eq),
+            child=child,
             css_classes=['flat', 'p10'],
             tooltip_text=_('Copy Equation')
         )
@@ -809,7 +816,7 @@ class message(Gtk.Box):
                     if pattern_name == "code":
                         parts.append(
                             {
-                                "type": pattern_name,
+                                "type": 'latex' if match.group(1).lower() == 'latex' else pattern_name,
                                 "text": match.group(2),
                                 "language": match.group(1),
                             }
