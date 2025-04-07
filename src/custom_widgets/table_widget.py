@@ -27,7 +27,11 @@ class Row(GObject.GObject):
     def __init__(self, _values):
         super().__init__()
 
-        self.values = _values
+        self.values = []
+
+        for value in _values:
+            value = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', value)
+            self.values.append(value)
 
     def get_column_value(self, index):
         return self.values[index]
@@ -112,7 +116,7 @@ class TableWidget(Gtk.Frame):
     def make_table(self):
 
         def _on_factory_setup(_factory, list_item, align):
-            label = Gtk.Label(xalign=align, ellipsize=3, selectable=True)
+            label = Gtk.Label(xalign=align, ellipsize=3, selectable=True, use_markup=True)
             list_item.set_child(label)
 
         def _on_factory_bind(_factory, list_item, index):
