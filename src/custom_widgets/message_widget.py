@@ -35,7 +35,7 @@ patterns = [
     ('code', re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
     ('code', re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)),
     ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
-    ('latex', re.compile(r'\\\[(.*?)\\\]|\$(.*?)\$', re.DOTALL))
+    ('latex', re.compile(r'\\\[(.*?)\\\]|\$+(.*?)\$+', re.DOTALL))
 ]
 
 SOLUTION_ENCLOSING_TAGS = [
@@ -827,7 +827,11 @@ class message(Gtk.Box):
                         expression = match.group(1)
                         if not expression:
                             expression = match.group(2)
-                        parts.append({"type": pattern_name, "text": expression})
+
+                        if '\\' not in expression:
+                            parts.append({"type": 'normal', "text": ' `{}` '.format(expression)})
+                        else:
+                            parts.append({"type": pattern_name, "text": expression})
                     else:
                         parts.append({"type": pattern_name, "text": match.group(1)})
 
@@ -843,7 +847,10 @@ class message(Gtk.Box):
 
             for part in parts:
                 if part['type'] == 'normal':
-                    text_b = text_block(self.bot, self.system)
+                    if len(self.content_children) > 0 and isinstance(self.content_children[-1], text_block):
+                        text_b = self.content_children[-1]
+                    else:
+                        text_b = text_block(self.bot, self.system)
                     part['text'] = GLib.markup_escape_text(part['text'])
                     part['text'] = part['text'].replace("\n* ", "\n• ")
                     part['text'] = re.sub(r'`([^`\n]*?)`', r'<tt>\1</tt>', part['text'])
@@ -866,10 +873,10 @@ class message(Gtk.Box):
 
                     if pos < len(part['text']):
                         text_b.raw_text += part['text'][pos:]
-                    if text_b.raw_text:
+                    if text_b.raw_text and not text_b.get_parent():
                         self.content_children.append(text_b)
                         self.container.append(text_b)
-                        GLib.idle_add(text_b.set_markup,text_b.raw_text)
+                    GLib.idle_add(text_b.set_markup,text_b.raw_text)
                 elif part['type'] == 'code':
                     code_b = code_block(part['text'], part['language'])
                     self.content_children.append(code_b)
