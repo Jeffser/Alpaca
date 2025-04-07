@@ -444,7 +444,7 @@ class image_container(Gtk.ScrolledWindow):
         self.files.append(img)
         self.set_max_content_width(sum([f.width for f in self.files] + [12*(len(self.files)-1)]))
 
-class latex_renderer(Gtk.Button):
+class latex_renderer(Adw.Bin):
     __gtype_name__ = 'AlpacaLatexRenderer'
 
     class latex_canvas(FigureCanvas):
@@ -462,8 +462,9 @@ class latex_renderer(Gtk.Button):
             bbox = text.get_window_extent()
             super().__init__(fig)
             self.set_hexpand(True)
-            self.set_vexpand(False)
+            self.set_vexpand(True)
             self.set_size_request(-1, bbox.height)
+            self.set_content_width(bbox.width)
             self.set_css_classes(['latex_renderer'])
 
     def __init__(self, equation):
@@ -471,16 +472,21 @@ class latex_renderer(Gtk.Button):
 
         child = None
         try:
-            child = self.latex_canvas(self.eq)
+            child = Gtk.ScrolledWindow(
+                propagate_natural_height=True,
+                hscrollbar_policy=1,
+                vscrollbar_policy=2,
+                child=self.latex_canvas(self.eq)
+            )
         except Exception as e:
-            child = Gtk.Label(label=str(e).strip(), css_classes=['error'])
+            child = Gtk.Label(label=str(e).strip(), css_classes=['error'], wrap=True)
 
         super().__init__(
             child=child,
             css_classes=['flat', 'p10'],
             tooltip_text=_('Copy Equation')
         )
-        self.connect('clicked', lambda button: self.copy_equation())
+        #self.connect('clicked', lambda button: self.copy_equation())
 
     def copy_equation(self):
         clipboard = Gdk.Display().get_default().get_clipboard()
