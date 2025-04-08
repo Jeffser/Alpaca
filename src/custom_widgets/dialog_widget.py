@@ -127,7 +127,6 @@ class DropDown(baseDialog):
         for item in items:
             string_list.append(item)
         self.set_extra_child(Gtk.DropDown(
-            enable_search=len(items) > 10,
             model=string_list
         ))
 
