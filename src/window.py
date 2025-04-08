@@ -168,6 +168,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def microphone_toggled(self, button):
+        language=self.sql_instance.get_preference('mic_language')
+        buffer=self.message_text_view.get_buffer()
+
         def show_pull_toast():
             if self.microphone_stack.get_visible_child_name() == "loading":
                 size = {
@@ -179,16 +182,22 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 }
                 self.show_toast(_("Speech recognition model is being downloaded ({})").format(size.get(os.getenv("ALPACA_SPEECH_MODEL", "base"), '~151mb')), self.main_overlay)
 
+        def recognize_audio(model, audio_data, current_iter):
+            result = model.transcribe(audio_data, language=language)
+            if len(result.get("text").encode('utf8')) == 0:
+                self.mic_timeout += 1
+            else:
+                GLib.idle_add(buffer.insert, current_iter, result.get("text"), len(result.get("text").encode('utf8')))
+                self.mic_timeout = 0
+
         def run_mic():
             GLib.idle_add(self.microphone_stack.set_visible_child_name, "loading")
             GLib.idle_add(button.add_css_class, 'accent')
 
             samplerate=16000
-            timeout=0
-            buffer=self.message_text_view.get_buffer()
             p = pyaudio.PyAudio()
             model = None
-            language=self.sql_instance.get_preference('mic_language')
+            self.mic_timeout=0
 
             try:
                 GLib.timeout_add(3000, show_pull_toast)
@@ -214,15 +223,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
                             data = stream.read(1024, exception_on_overflow=False)
                             frames.append(np.frombuffer(data, dtype=np.int16))
                         audio_data = np.concatenate(frames).astype(np.float32) / 32768.0
-                        result = model.transcribe(audio_data, language=language)
+                        threading.Thread(target=recognize_audio, args=(model, audio_data, buffer.get_end_iter())).start()
 
-                        if len(result.get("text").encode('utf8')) == 0:
-                            timeout += 1
-                        else:
-                            buffer.insert(buffer.get_end_iter(), result.get("text"), len(result.get("text").encode('utf8')))
-                            timeout = 0
-
-                        if timeout >= 2 and self.sql_instance.get_preference('mic_auto_send', False) and self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False):
+                        if self.mic_timeout >= 2 and self.sql_instance.get_preference('mic_auto_send', False) and buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False):
                             GLib.idle_add(self.send_message)
                             break
 
@@ -233,9 +236,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     stream.stop_stream()
                     stream.close()
                     p.terminate()
-
-                #if timeout >= 2 and self.sql_instance.get_preference('mic_auto_send', False) and button.get_active():
-
 
             if button.get_active():
                 button.set_active(False)
