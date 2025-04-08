@@ -367,6 +367,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                                       <object class="GtkToggleButton" id="microphone_button">
                                                         <property name="icon-name">audio-input-microphone-symbolic</property>
                                                         <signal name="toggled" handler="microphone_toggled"/>
+                                                        <property name="tooltip-text" translatable="yes">Use Speech Recognition</property>
                                                         <style>
                                                           <class name="microphone_button"/>
                                                         </style>
