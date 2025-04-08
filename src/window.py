@@ -36,6 +36,7 @@ import sqlite3
 import sys
 import whisper
 import pyaudio
+import icu
 import numpy as np
 
 from datetime import datetime
@@ -55,7 +56,7 @@ gi.require_version('Spelling', '1')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelling, GObject
 
 from . import generic_actions, sql_manager, instance_manager, tool_manager
-from .constants import AlpacaFolders, Platforms
+from .constants import AlpacaFolders, Platforms, SPEACH_RECOGNITION_LANGUAGES
 from .custom_widgets import message_widget, chat_widget, terminal_widget, dialog_widget, model_manager_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir, IN_FLATPAK
 
@@ -127,6 +128,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     background_switch = Gtk.Template.Child()
     powersaver_warning_switch = Gtk.Template.Child()
     mic_auto_send_switch = Gtk.Template.Child()
+    mic_language_combo = Gtk.Template.Child()
 
     banner = Gtk.Template.Child()
 
@@ -166,6 +168,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def microphone_toggled(self, button):
+        def show_pull_toast():
+            if self.microphone_stack.get_visible_child_name() == "loading":
+                size = {
+                    'tiny': '~75mb',
+                    'base': '~151mb',
+                    'small': '~488mb',
+                    'medium': '~1.5gb',
+                    'large': '~2.9gb'
+                }
+                self.show_toast(_("Speech recognition model is being downloaded ({})").format(size.get(os.getenv("ALPACA_SPEECH_MODEL", "base"), '~151mb')), self.main_overlay)
+
         def run_mic():
             GLib.idle_add(self.microphone_stack.set_visible_child_name, "loading")
             GLib.idle_add(button.add_css_class, 'accent')
@@ -175,8 +188,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             buffer=self.message_text_view.get_buffer()
             p = pyaudio.PyAudio()
             model = None
+            language=self.sql_instance.get_preference('mic_language')
 
             try:
+                GLib.timeout_add(3000, show_pull_toast)
                 model = whisper.load_model(os.getenv("ALPACA_SPEECH_MODEL", "base"))
             except Exception as e:
                 dialog_widget.simple_error(_('Speech Recognition Error'), _('An error occurred while pulling speech recognition model'), e)
@@ -199,7 +214,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                             data = stream.read(1024, exception_on_overflow=False)
                             frames.append(np.frombuffer(data, dtype=np.int16))
                         audio_data = np.concatenate(frames).astype(np.float32) / 32768.0
-                        result = model.transcribe(audio_data, language="en")
+                        result = model.transcribe(audio_data, language=language)
 
                         if len(result.get("text").encode('utf8')) == 0:
                             timeout += 1
@@ -207,7 +222,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                             buffer.insert(buffer.get_end_iter(), result.get("text"), len(result.get("text").encode('utf8')))
                             timeout = 0
 
-                        if timeout >= 2 and self.sql_instance.get_preference('mic_auto_send', False):
+                        if timeout >= 2 and self.sql_instance.get_preference('mic_auto_send', False) and self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False):
+                            GLib.idle_add(self.send_message)
                             break
 
                 except Exception as e:
@@ -218,8 +234,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     stream.close()
                     p.terminate()
 
-                if timeout >= 2 and self.sql_instance.get_preference('mic_auto_send', False):
-                    GLib.idle_add(self.send_message)
+                #if timeout >= 2 and self.sql_instance.get_preference('mic_auto_send', False) and button.get_active():
+
 
             if button.get_active():
                 button.set_active(False)
@@ -545,6 +561,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def switch_mic_auto_send(self, switch, user_data):
         logger.debug("Switching mic auto send")
         self.sql_instance.insert_or_update_preferences({'mic_auto_send': switch.get_active()})
+
+    @Gtk.Template.Callback()
+    def selected_mic_language(self, combo, user_data):
+        language = combo.get_selected_item().get_string().split(' (')[-1][:-1]
+        self.sql_instance.insert_or_update_preferences({'mic_language': language})
 
     @Gtk.Template.Callback()
     def switch_powersaver_warning(self, switch, user_data):
@@ -1071,6 +1092,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.mic_auto_send_switch.set_active(self.sql_instance.get_preference('mic_auto_send', False))
         self.zoom_spin.set_value(self.sql_instance.get_preference('zoom', 100))
         self.zoom_changed(self.zoom_spin, True)
+
+        selected_language = self.sql_instance.get_preference('mic_language', 'en')
+        selected_index = 0
+        string_list = Gtk.StringList()
+        for i, lan in enumerate(SPEACH_RECOGNITION_LANGUAGES):
+            if lan == selected_language:
+                selected_index = i
+            string_list.append('{} ({})'.format(icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title(), lan))
+
+        self.mic_language_combo.set_model(string_list)
+        self.mic_language_combo.set_selected(selected_index)
+
         instance_manager.update_instance_list()
 
         if self.get_application().args.ask:

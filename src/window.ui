@@ -1058,6 +1058,12 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                   <property name="title" translatable="yes">Auto Send Message After Talking</property>
                 </object>
               </child>
+              <child>
+                <object class="AdwComboRow" id="mic_language_combo">
+                  <signal name="notify::selected" handler="selected_mic_language"/>
+                  <property name="title" translatable="yes">Speech Recognition Language</property>
+                </object>
+              </child>
             </object>
           </child>
           <child>

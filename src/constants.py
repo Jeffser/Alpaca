@@ -37,6 +37,8 @@ TRANSLATORS: "list[str]" = [
     "Ekaterine Papava (Georgian) https://github.com/EkaterinePapava"
 ]
 
+# Used to populate SR language in preferences
+SPEACH_RECOGNITION_LANGUAGES = ('en', 'es', 'nl', 'ko', 'it', 'de', 'th', 'ru', 'pt', 'pl', 'id', 'zh', 'sv', 'cs', 'ja', 'fr', 'ro', 'tr', 'ca', 'hu', 'uk', 'el', 'bg', 'ar', 'sr', 'mk', 'lv', 'sl', 'hi', 'gl', 'da', 'ur', 'sk', 'he', 'fi', 'az', 'lt', 'et', 'nn', 'cy', 'pa', 'af', 'fa', 'eu', 'vi', 'bn', 'ne', 'mr', 'be', 'kk', 'hy', 'sw', 'ta', 'sq')
 
 # Used for identifying the platform running Alpaca.
 class Platforms:
