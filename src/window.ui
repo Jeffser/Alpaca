@@ -1052,6 +1052,16 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
           <child>
             <object class="AdwPreferencesGroup">
               <child>
+                <object class="AdwSwitchRow" id="mic_auto_send_switch">
+                  <signal name="notify::active" handler="switch_mic_auto_send"/>
+                  <property name="title" translatable="yes">Auto Send Message After Talking</property>
+                </object>
+              </child>
+            </object>
+          </child>
+          <child>
+            <object class="AdwPreferencesGroup">
+              <child>
                 <object class="AdwButtonRow">
                   <style>
                     <class name="destructive-action"/>

@@ -126,6 +126,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     background_switch = Gtk.Template.Child()
     powersaver_warning_switch = Gtk.Template.Child()
+    mic_auto_send_switch = Gtk.Template.Child()
 
     banner = Gtk.Template.Child()
 
@@ -170,6 +171,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(button.add_css_class, 'accent')
 
             samplerate=16000
+            timeout=0
             buffer=self.message_text_view.get_buffer()
             p = pyaudio.PyAudio()
             model = None
@@ -197,8 +199,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
                             data = stream.read(1024, exception_on_overflow=False)
                             frames.append(np.frombuffer(data, dtype=np.int16))
                         audio_data = np.concatenate(frames).astype(np.float32) / 32768.0
-                        result = model.transcribe(audio_data)
-                        buffer.insert(buffer.get_end_iter(), result.get("text"), len(result.get("text").encode('utf8')))
+                        result = model.transcribe(audio_data, language="en")
+
+                        if len(result.get("text").encode('utf8')) == 0:
+                            timeout += 1
+                        else:
+                            buffer.insert(buffer.get_end_iter(), result.get("text"), len(result.get("text").encode('utf8')))
+                            timeout = 0
+
+                        if timeout >= 2 and self.sql_instance.get_preference('mic_auto_send', False):
+                            break
+
                 except Exception as e:
                     dialog_widget.simple_error(_('Speech Recognition Error'), _('An error occurred while using speech recognition'), e)
                     logger.error(e)
@@ -206,6 +217,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     stream.stop_stream()
                     stream.close()
                     p.terminate()
+
+                if timeout >= 2 and self.sql_instance.get_preference('mic_auto_send', False):
+                    GLib.idle_add(self.send_message)
 
             if button.get_active():
                 button.set_active(False)
@@ -527,6 +541,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.set_hide_on_close(switch.get_active())
         self.sql_instance.insert_or_update_preferences({'run_on_background': switch.get_active()})
     
+    @Gtk.Template.Callback()
+    def switch_mic_auto_send(self, switch, user_data):
+        logger.debug("Switching mic auto send")
+        self.sql_instance.insert_or_update_preferences({'mic_auto_send': switch.get_active()})
+
     @Gtk.Template.Callback()
     def switch_powersaver_warning(self, switch, user_data):
         logger.debug("Switching powersaver warning banner")
@@ -1049,6 +1068,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         self.powersaver_warning_switch.set_active(self.sql_instance.get_preference('powersaver_warning', True))
         self.background_switch.set_active(self.sql_instance.get_preference('run_on_background', False))
+        self.mic_auto_send_switch.set_active(self.sql_instance.get_preference('mic_auto_send', False))
         self.zoom_spin.set_value(self.sql_instance.get_preference('zoom', 100))
         self.zoom_changed(self.zoom_spin, True)
         instance_manager.update_instance_list()
