@@ -99,9 +99,9 @@ class base_instance:
                             attachment = bot_message.add_attachment(
                                 tool.name,
                                 'tool',
-                                '# {}\n\n## Arguments:\n{}\n\n## Result:\n\n{}'.format(
-                                    call.function.name,
-                                    '\n'.join(['- {}: {}'.format(k,v) for k, v in arguments.items()]),
+                                '# {}\n\n## Arguments:\n\n{}\n\n## Result:\n\n{}'.format(
+                                    tool.name,
+                                    '\n'.join(['- {}: {}'.format(k.replace('_', ' ').title(), v) for k, v in arguments.items()]),
                                     str(response)
                                 )
                             )
