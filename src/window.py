@@ -1058,6 +1058,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.attach_file(file.get_path(), 'code')
             elif extension == 'pdf':
                 self.attach_file(file.get_path(), 'pdf')
+            elif extension == 'docx':
+                self.attach_file(file.get_path(), 'docx')
+            elif extension == 'pptx':
+                self.attach_file(file.get_path(), 'pptx')
+            elif extension == 'xlsx':
+                self.attach_file(file.get_path(), 'xlsx')
 
     def quick_chat(self, message:str):
         self.quick_ask_save_button.set_sensitive(False)
