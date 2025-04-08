@@ -1152,6 +1152,9 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
           </property>
           <child type="bottom">
             <object class="AdwCarouselIndicatorDots">
+              <style>
+                <class name="p10"/>
+              </style>
               <property name="carousel">notice_carousel</property>
             </object>
           </child>

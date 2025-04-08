@@ -588,9 +588,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def opening_app(self, user_data):
         threading.Thread(target=tool_manager.update_available_tools).start()
         if self.sql_instance.get_preference('skip_welcome_page', False):
-            # Notice
-            if not self.sql_instance.get_preference('last_notice_seen') == self.notice_dialog.get_name():
-                self.notice_dialog.present(self)
             self.prepare_alpaca()
         else:
             self.main_navigation_view.replace_with_tags(['welcome'])
@@ -1088,6 +1085,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def prepare_alpaca(self):
         self.main_navigation_view.replace_with_tags(['chat'])
+        # Notice
+        if not self.sql_instance.get_preference('last_notice_seen') == self.notice_dialog.get_name() or True:
+            self.notice_dialog.present(self)
 
         #Chat History
         self.load_history()
