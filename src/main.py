@@ -25,13 +25,16 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Gio, Adw, GLib
 
+from .internal import cache_dir, data_dir
+
+import os
+os.environ["TORCH_HOME"] = os.path.join(data_dir, "torch")
+
 from .constants import TRANSLATORS, Platforms
 from .window import AlpacaWindow
-from .internal import cache_dir, data_dir
 
 import sys
 import logging
-import os
 import argparse
 import json
 import time
@@ -43,6 +46,8 @@ from datetime import datetime
 logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser(description="Alpaca")
+
+
 
 class AlpacaService:
     """

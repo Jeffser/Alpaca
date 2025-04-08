@@ -34,6 +34,9 @@ import time
 import requests
 import sqlite3
 import sys
+import whisper
+import pyaudio
+import numpy as np
 
 from datetime import datetime
 from io import BytesIO
@@ -153,10 +156,67 @@ class AlpacaWindow(Adw.ApplicationWindow):
     tool_listbox = Gtk.Template.Child()
     model_manager_bottom_view_switcher = Gtk.Template.Child()
     model_manager_top_view_switcher = Gtk.Template.Child()
+    microphone_stack = Gtk.Template.Child()
+    microphone_button = Gtk.Template.Child()
     last_selected_instance_row = None
 
     sql_instance = sql_manager.Instance(os.path.join(data_dir, "alpaca.db"))
     mid = MarkItDown(enable_plugins=False)
+
+    @Gtk.Template.Callback()
+    def microphone_toggled(self, button):
+        def run_mic():
+            GLib.idle_add(self.microphone_stack.set_visible_child_name, "loading")
+            GLib.idle_add(button.add_css_class, 'accent')
+
+            samplerate=16000
+            buffer=self.message_text_view.get_buffer()
+            p = pyaudio.PyAudio()
+            model = None
+
+            try:
+                model = whisper.load_model(os.getenv("ALPACA_SPEECH_MODEL", "base"))
+            except Exception as e:
+                dialog_widget.simple_error(_('Speech Recognition Error'), _('An error occurred while pulling speech recognition model'), e)
+                logger.error(e)
+            GLib.idle_add(self.microphone_stack.set_visible_child_name, "button")
+
+            if model:
+                stream = p.open(
+                    format=pyaudio.paInt16,
+                    rate=samplerate,
+                    input=True,
+                    frames_per_buffer=1024,
+                    channels=1
+                )
+
+                try:
+                    while button.get_active():
+                        frames = []
+                        for i in range(0, int(samplerate / 1024 * 2)):
+                            data = stream.read(1024, exception_on_overflow=False)
+                            frames.append(np.frombuffer(data, dtype=np.int16))
+                        audio_data = np.concatenate(frames).astype(np.float32) / 32768.0
+                        result = model.transcribe(audio_data)
+                        buffer.insert(buffer.get_end_iter(), result.get("text"), len(result.get("text").encode('utf8')))
+                except Exception as e:
+                    dialog_widget.simple_error(_('Speech Recognition Error'), _('An error occurred while using speech recognition'), e)
+                    logger.error(e)
+                finally:
+                    stream.stop_stream()
+                    stream.close()
+                    p.terminate()
+
+            if button.get_active():
+                button.set_active(False)
+
+        if button.get_active():
+            threading.Thread(target=run_mic).start()
+        else:
+            button.remove_css_class('accent')
+            button.set_sensitive(False)
+            GLib.timeout_add(2000, lambda button: button.set_sensitive(True) and False, button)
+
 
     @Gtk.Template.Callback()
     def closing_notice(self, dialog):

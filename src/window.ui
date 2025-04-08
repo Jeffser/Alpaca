@@ -343,15 +343,51 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                           </object>
                                         </child>
                                         <child>
-                                          <object class="GtkScrolledWindow" id="message_text_view_scrolled_window">
-                                            <property name="max-content-height">150</property>
-                                            <property name="propagate-natural-height">true</property>
-                                            <property name="overflow">1</property>
-                                            <property name="min-content-height">1</property>
+                                          <object class="GtkBox">
                                             <style>
-                                              <class name="undershoot-bottom"/>
                                               <class name="card"/>
                                             </style>
+                                            <property name="overflow">1</property>
+                                            <child>
+                                              <object class="GtkScrolledWindow" id="message_text_view_scrolled_window">
+                                                <property name="max-content-height">150</property>
+                                                <property name="propagate-natural-height">true</property>
+                                                <property name="min-content-height">1</property>
+                                                <style>
+                                                  <class name="undershoot-bottom"/>
+                                                </style>
+                                              </object>
+                                            </child>
+                                            <child>
+                                              <object class="GtkStack" id="microphone_stack">
+                                                <child>
+                                                  <object class="GtkStackPage">
+                                                    <property name="name">button</property>
+                                                    <property name="child">
+                                                      <object class="GtkToggleButton" id="microphone_button">
+                                                        <property name="icon-name">audio-input-microphone-symbolic</property>
+                                                        <signal name="toggled" handler="microphone_toggled"/>
+                                                        <style>
+                                                          <class name="microphone_button"/>
+                                                        </style>
+                                                      </object>
+                                                    </property>
+                                                  </object>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkStackPage">
+                                                    <property name="name">loading</property>
+                                                    <property name="child">
+                                                      <object class="AdwSpinner">
+                                                        <style>
+                                                          <class name="p10"/>
+                                                        </style>
+                                                      </object>
+                                                    </property>
+                                                  </object>
+                                                </child>
+                                              </object>
+                                            </child>
                                           </object>
                                         </child>
                                         <child>
