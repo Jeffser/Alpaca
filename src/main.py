@@ -141,10 +141,9 @@ class AlpacaApplication(Adw.Application):
             win.powersaver_warning_switch.set_visible(False)
             win.background_switch.set_visible(False)
 
-    def on_about_action(self, widget, _):
+    def on_about_action(self, widget, a):
         current_year = str(datetime.now().year)
         about = Adw.AboutDialog(
-            transient_for=self.props.active_window,
             application_name='Alpaca',
             application_icon='com.jeffser.Alpaca',
             developer_name='Jeffry Samuel Eduarte Rojas',
@@ -168,17 +167,17 @@ class AlpacaApplication(Adw.Application):
                       f'© {current_year} Gorqcloud\n'
                       f'© {current_year} Anthropic\n'
                       f'© {current_year} Lambda.ai\n'
-                      f'© {current_year} Fireworks.ai',
+                      f'© {current_year} Fireworks.ai\n'
+                      f'© {current_year} Microsoft',
             issue_url='https://github.com/Jeffser/Alpaca/issues',
             license_type=Gtk.License.GPL_3_0,
             website="https://jeffser.com/alpaca"
         )
         
-        about.add_link(_("Website"), "https://jeffser.com/alpaca")
         about.add_link(_("Documentation"), "https://github.com/Jeffser/Alpaca/wiki")
         about.add_link(_("Become a Sponsor"), "https://github.com/sponsors/Jeffser")
         about.add_link(_("Discussions"), "https://github.com/Jeffser/Alpaca/discussions")
-        about.present()
+        about.present(self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
