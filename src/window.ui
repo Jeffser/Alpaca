@@ -1148,6 +1148,14 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                   <property name="description" translatable="yes">Get ready to connect Alpaca to a whole universe of AI providers! We've added support for over 5 new AI instance providers, including Anthropic, OpenRouter, and Fireworks. The possibilities are endless!</property>
                 </object>
               </child>
+              <child>
+                <object class="AdwStatusPage">
+                  <property name="hexpand">true</property>
+                  <property name="icon-name">document-text-symbolic</property>
+                  <property name="title" translatable="yes">Attachment Enhancement</property>
+                  <property name="description" translatable="yes">You can now attach and ask questions about even more file types, including .docx, .pptx, and .xlsx! Plus, when you preview an attachment, you'll see it with rich text styling, making it easier to understand the content before you send it.</property>
+                </object>
+              </child>
             </object>
           </property>
           <child type="bottom">
