@@ -889,7 +889,7 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         row_to_select = None
         for i, ins in enumerate(instances):
-            if ins.get('type') in list(instance_dictionary.keys()):
+            if ins.get('type') in list(instance_dictionary.keys()) and (ins.get('type') != 'ollama:managed' or shutil.which('ollama')):
                 row = instance_row(instance_dictionary.get(ins.get('type'))(ins))
                 window.instance_listbox.append(row)
                 if selected_instance == row.instance.instance_id:
@@ -905,8 +905,6 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, fireworks, lambda_labs, generic_openai]
+ready_instances = [ollama_managed, ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, fireworks, lambda_labs, generic_openai]
 
-if shutil.which('ollama'):
-    ready_instances.insert(0, ollama_managed)
 

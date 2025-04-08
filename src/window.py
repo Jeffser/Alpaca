@@ -263,10 +263,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def add_instance(self, button):
         def selected(ins):
-            tbv=Adw.ToolbarView()
-            tbv.add_top_bar(Adw.HeaderBar())
-            tbv.set_content(ins().get_preferences_page())
-            self.main_navigation_view.push(Adw.NavigationPage(title=_('Add Instance'), tag='instance', child=tbv))
+            if ins.instance_type == 'ollama:managed' and not shutil.which('ollama'):
+                dialog_widget.simple(
+                    _("Ollama Was Not Found"),
+                    _("To add a managed Ollama instance, you must have Ollama installed locally in your device, this is a simple process and should not take more than 5 minutes."),
+                    lambda: Gio.AppInfo.launch_default_for_uri('https://github.com/Jeffser/Alpaca/wiki/Installing-Ollama'),
+                    _("Open Tutorial in Web Browser")
+                )
+            else:
+                tbv=Adw.ToolbarView()
+                tbv.add_top_bar(Adw.HeaderBar())
+                tbv.set_content(ins().get_preferences_page())
+                self.main_navigation_view.push(Adw.NavigationPage(title=_('Add Instance'), tag='instance', child=tbv))
 
         options = {}
         for ins_type in instance_manager.ready_instances:
