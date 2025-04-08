@@ -1174,29 +1174,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                 <class name="undershoot-bottom"/>
               </style>
               <child>
-                <object class="GtkBox">
-                  <child>
-                    <object class="GtkTextView" id="file_preview_text">
-                      <property name="wrap-mode">2</property>
-                      <property name="editable">false</property>
-                      <property name="width-request">500</property>
-                      <style>
-                        <class name="flat"/>
-                        <class name="monospace"/>
-                        <class name="p10"/>
-                      </style>
-                    </object>
-                  </child>
-                  <child>
-                    <object class="GtkImage" id="file_preview_image">
-                      <property name="hexpand">true</property>
-                      <property name="vexpand">true</property>
-                      <style>
-                        <class name="rounded_image"/>
-                      </style>
-                    </object>
-                  </child>
-                </object>
+                <object class="AdwBin" id="preview_file_bin"/>
               </child>
             </object>
           </child>

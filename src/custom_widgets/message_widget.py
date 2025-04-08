@@ -676,7 +676,7 @@ class footer(Gtk.Box):
 class message(Gtk.Box):
     __gtype_name__ = 'AlpacaMessage'
 
-    def __init__(self, message_id:str, dt:datetime.datetime, model:str=None, system:bool=False):
+    def __init__(self, message_id:str, dt:datetime.datetime=None, model:str=None, system:bool=False, show_footer:bool=True):
         self.message_id = message_id
         self.bot = model != None
         self.system = system
@@ -711,7 +711,8 @@ class message(Gtk.Box):
         )
 
         self.append(self.container)
-        self.add_footer()
+        if show_footer:
+            self.add_footer()
 
     def update_profile_picture(self):
         if self.bot and self.model:

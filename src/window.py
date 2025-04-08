@@ -86,8 +86,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     selected_chat_row : Gtk.ListBoxRow = None
     preferences_dialog = Gtk.Template.Child()
     file_preview_dialog = Gtk.Template.Child()
-    file_preview_text = Gtk.Template.Child()
-    file_preview_image = Gtk.Template.Child()
+    preview_file_bin = Gtk.Template.Child()
     welcome_carousel = Gtk.Template.Child()
     welcome_previous_button = Gtk.Template.Child()
     welcome_next_button = Gtk.Template.Child()
@@ -666,30 +665,37 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.file_preview_remove_button.set_visible(False)
         if file_content:
             if file_type == 'image':
-                self.file_preview_image.set_visible(True)
-                self.file_preview_text.set_visible(False)
+                image_element = Gtk.Image(
+                    hexpand=True,
+                    vexpand=True,
+                    css_classes=['rounded_image']
+                )
                 image_data = base64.b64decode(file_content)
                 loader = GdkPixbuf.PixbufLoader.new()
                 loader.write(image_data)
                 loader.close()
                 pixbuf = loader.get_pixbuf()
                 texture = Gdk.Texture.new_for_pixbuf(pixbuf)
-                self.file_preview_image.set_from_paintable(texture)
-                self.file_preview_image.set_size_request(360, 360)
-                self.file_preview_image.set_overflow(1)
+                image_element.set_from_paintable(texture)
+                image_element.set_size_request(360, 360)
+                image_element.set_overflow(1)
+                self.preview_file_bin.set_child(image_element)
                 self.file_preview_dialog.set_title(file_name)
                 self.file_preview_open_button.set_visible(False)
             else:
-                self.file_preview_image.set_visible(False)
-                buffer = self.file_preview_text.get_buffer()
-                buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-                buffer.insert(buffer.get_end_iter(), file_content, len(file_content.encode('utf-8')))
-                self.file_preview_text.set_visible(True)
+                msg_element = message_widget.message(message_id=0, model="Alpaca File Preview", show_footer=False)
+                msg_element.set_text(file_content)
+                msg_element.set_vexpand(True)
+                self.preview_file_bin.set_child(msg_element)
+
                 if file_type == 'youtube':
                     self.file_preview_dialog.set_title(file_content.split('\n')[0])
                     self.file_preview_open_button.set_name(file_content.split('\n')[2])
+                    self.file_preview_open_button.set_visible(True)
                 elif file_type == 'website':
+                    self.file_preview_dialog.set_title(file_name)
                     self.file_preview_open_button.set_name(file_content.split('\n')[0])
+                    self.file_preview_open_button.set_visible(True)
                 else:
                     self.file_preview_dialog.set_title(file_name)
                     self.file_preview_open_button.set_visible(False)
