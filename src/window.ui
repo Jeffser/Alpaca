@@ -1084,9 +1084,9 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
     </object>
 
     <object class="AdwDialog" id="notice_dialog">
-      <property name="name">Ollama_Removal</property>
+      <property name="name">Alpaca6</property>
       <property name="title" translatable="yes">Notice</property>
-      <property name="width-request">400</property>
+      <property name="content-width">400</property>
       <signal name="closed" handler="closing_notice"/>
       <child>
         <object class="AdwToolbarView">
@@ -1094,25 +1094,67 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
             <object class="AdwHeaderBar"/>
           </child>
           <property name="content">
-            <object class="AdwStatusPage">
-              <property name="icon-name">com.jeffser.Alpaca</property>
-              <property name="title" translatable="yes">Removal of Ollama</property>
-              <property name="description" translatable="yes">Hey there! With Alpaca 5.1.0, we're making some changes. To keep using Ollama directly within Alpaca, you'll just need to install our new Ollama extension. Don't worry, your models remain untouched!</property>
+            <object class="AdwCarousel" id="notice_carousel">
+              <property name="hexpand">true</property>
+              <property name="vexpand">true</property>
+              <property name="allow-long-swipes">true</property>
+              <property name="allow-scroll-wheel">true</property>
+              <property name="spacing">12</property>
               <child>
-                <object class="GtkButton">
-                  <signal name="clicked" handler="link_button_handler"/>
-                  <property name="name">https://github.com/Jeffser/Alpaca/wiki/Installing-Ollama</property>
-                  <property name="label" translatable="yes">Install Ollama</property>
-                  <property name="tooltip-text" translatable="yes">Install Ollama</property>
-                  <property name="halign">3</property>
-                  <style>
-                    <class name="suggested-action"/>
-                    <class name="pill"/>
-                  </style>
+                <object class="AdwStatusPage">
+                  <property name="hexpand">true</property>
+                  <property name="icon-name">com.jeffser.Alpaca</property>
+                  <property name="title">Alpaca 6</property>
+                  <property name="description" translatable="yes">Hey Alpaca users! We're so excited to bring you a fresh update packed with awesome new features to explore! Get ready to experience Alpaca in a whole new way!</property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwStatusPage">
+                  <property name="hexpand">true</property>
+                  <property name="icon-name">wrench-wide-symbolic</property>
+                  <property name="title" translatable="yes">Smart Tools</property>
+                  <property name="description" translatable="yes">Supported AI models can use handy tools to grab information both locally and online. Head over to the brand new "Tool Manager" to toggle them on or off.</property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwStatusPage">
+                  <property name="hexpand">true</property>
+                  <property name="icon-name">audio-input-microphone-symbolic</property>
+                  <property name="title" translatable="yes">Talk to Models</property>
+                  <property name="description" translatable="yes">You can now dictate your messages using local speech recognition. It's super convenient! You can even customize your language and other settings in the Preferences dialog.</property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwStatusPage">
+                  <property name="hexpand">true</property>
+                  <property name="icon-name">funnel-symbolic</property>
+                  <property name="title" translatable="yes">Find Models Faster</property>
+                  <property name="description" translatable="yes">Browsing through your Ollama models just got easier! We've added the ability to filter models by their categories in the Model Manager. Now you can quickly find exactly the model you're looking for.</property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwStatusPage">
+                  <property name="hexpand">true</property>
+                  <property name="icon-name">accessories-calculator-symbolic</property>
+                  <property name="title" translatable="yes">Math Rendering</property>
+                  <property name="description" translatable="yes">We've improved how LaTeX equations are rendered in messages, making them look cleaner and more consistent. Your mathematical discussions will be clearer than ever!</property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwStatusPage">
+                  <property name="hexpand">true</property>
+                  <property name="icon-name">globe-symbolic</property>
+                  <property name="title" translatable="yes">More Instances</property>
+                  <property name="description" translatable="yes">Get ready to connect Alpaca to a whole universe of AI providers! We've added support for over 10 new AI instance providers, including Anthropic, OpenRouter, and Fireworks. The possibilities are endless!</property>
                 </object>
               </child>
             </object>
           </property>
+          <child type="bottom">
+            <object class="AdwCarouselIndicatorDots">
+              <property name="carousel">notice_carousel</property>
+            </object>
+          </child>
         </object>
       </child>
     </object>

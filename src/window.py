@@ -589,7 +589,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         threading.Thread(target=tool_manager.update_available_tools).start()
         if self.sql_instance.get_preference('skip_welcome_page', False):
             # Notice
-            if not self.sql_instance.get_preference('last_notice_seen') == self.notice_dialog.get_name() and IN_FLATPAK and not shutil.which('ollama'):
+            if not self.sql_instance.get_preference('last_notice_seen') == self.notice_dialog.get_name():
                 self.notice_dialog.present(self)
             self.prepare_alpaca()
         else:
