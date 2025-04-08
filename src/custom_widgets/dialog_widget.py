@@ -16,7 +16,7 @@ button_appearance={
 }
 
 def get_dialog_showing() -> bool:
-    return any([True for dt in (Options, Entry, DropDown) if isinstance(window.get_visible_dialog(), dt)])
+    return any([True for dt in (Options, Entry, DropDown, Adw.Dialog) if isinstance(window.get_visible_dialog(), dt)])
 
 # Don't call this directly outside this script
 class baseDialog(Adw.AlertDialog):
