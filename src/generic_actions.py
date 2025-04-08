@@ -87,7 +87,10 @@ def attach_file(file):
                 "yaml"],
         "image": ["png", "jpeg", "jpg", "webp", "gif"],
         "pdf": ["pdf"],
-        "odt": ["odt"]
+        "odt": ["odt"],
+        "docx": ["docx"],
+        "pptx": ["pptx"],
+        "xlsx": ["xlsx"]
     }
     if file.query_info("standard::content-type", 0, None).get_content_type() == 'text/plain':
         extension = 'txt'

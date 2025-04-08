@@ -326,9 +326,7 @@ class attachment(Gtk.Button):
         button_content = Adw.ButtonContent(
             label=file_name,
             icon_name={
-                "plain_text": "document-text-symbolic",
                 "code": "code-symbolic",
-                "pdf": "document-text-symbolic",
                 "youtube": "play-symbolic",
                 "website": "globe-symbolic",
                 "thought": "brain-augemnted-symbolic",

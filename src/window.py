@@ -42,7 +42,7 @@ from PIL import Image
 import gi
 import odf.opendocument as odfopen
 import odf.table as odftable
-from pypdf import PdfReader
+from markitdown import MarkItDown
 from pydbus import SessionBus, Variant
 
 gi.require_version('GtkSource', '5')
@@ -157,6 +157,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     last_selected_instance_row = None
 
     sql_instance = sql_manager.Instance(os.path.join(data_dir, "alpaca.db"))
+    mid = MarkItDown(enable_plugins=False)
 
     @Gtk.Template.Callback()
     def closing_notice(self, dialog):
@@ -730,11 +731,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def get_content_of_file(self, file_path, file_type):
         if not os.path.exists(file_path): return None
-        if file_type == 'image':
+        if file_type in ('image', 'profile_picture'):
+            max_size = {'image': 640, 'profile_picture': 128}.get(file_type)
             try:
                 with Image.open(file_path) as img:
                     width, height = img.size
-                    max_size = 640
                     if width > height:
                         new_width = max_size
                         new_height = int((max_size / width) * height)
@@ -749,35 +750,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
             except Exception as e:
                 logger.error(e)
                 self.show_toast(_("Cannot open image"), self.main_overlay)
-        elif file_type == 'profile_picture':
-            try:
-                with Image.open(file_path) as img:
-                    width, height = img.size
-                    max_size = 128
-                    if width > height:
-                        new_width = max_size
-                        new_height = int((max_size / width) * height)
-                    else:
-                        new_height = max_size
-                        new_width = int((max_size / height) * width)
-                    resized_img = img.resize((new_width, new_height), Image.LANCZOS)
-                    with BytesIO() as output:
-                        resized_img.save(output, format="PNG")
-                        image_data = output.getvalue()
-                    return base64.b64encode(image_data).decode("utf-8")
-            except Exception as e:
-                logger.error(e)
         elif file_type in ('plain_text', 'code', 'youtube', 'website'):
             with open(file_path, 'r', encoding="utf-8") as f:
                 return f.read()
-        elif file_type == 'pdf':
-            reader = PdfReader(file_path)
-            if len(reader.pages) == 0:
-                return None
-            text = ""
-            for i, page in enumerate(reader.pages):
-                text += f"\n- Page {i+1}\n{page.extract_text(extraction_mode='layout', layout_mode_space_vertically=False)}\n"
-            return text
+        elif file_type in ('pdf', 'docx', 'pptx', 'xlsx'):
+            return self.mid.convert(file_path).text_content
         elif file_type == 'odt':
             doc = odfopen.load(file_path)
             markdown_elements = []
@@ -827,13 +804,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 label=file_name,
                 icon_name={
                     "image": "image-x-generic-symbolic",
-                    "plain_text": "document-text-symbolic",
                     "code": "code-symbolic",
-                    "pdf": "document-text-symbolic",
-                    "odt": "document-text-symbolic",
                     "youtube": "play-symbolic",
                     "website": "globe-symbolic"
-                }[file_type]
+                }.get(file_type, "document-text-symbolic")
             )
             button = Gtk.Button(
                 vexpand=True,
@@ -1118,7 +1092,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
         ff = Gtk.FileFilter()
         ff.set_name(_('Any compatible Alpaca attachment'))
         file_filters = [ff]
-        for mime in ['text/plain', 'application/pdf', 'application/vnd.oasis.opendocument.text']:
+        mimes = (
+            'text/plain',
+            'application/pdf',
+            'application/vnd.oasis.opendocument.text',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+        for mime in mimes:
             ff = Gtk.FileFilter()
             ff.add_mime_type(mime)
             file_filters[0].add_mime_type(mime)
