@@ -489,7 +489,7 @@ class run_command(tool):
             with open(os.path.join(data_dir, "ssh_output.txt"), 'r') as f:
                 command_result = f.read()
 
-        return command_result
+        return '```\n{}\n```'.format(command_result)
 
 available_tools = [get_current_datetime, get_recipes_by_category, get_recipe_by_name, extract_wikipedia, online_search, run_command]
 
