@@ -1340,7 +1340,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             data.get('button').add_controller(gesture_long_press)
 
         universal_actions = {
-            'new_chat': [lambda *_: self.chat_list_box.new_chat(), ['<primary>n']],
+            'new_chat': [lambda *_: GLib.idle_add(lambda: self.chat_list_box.new_chat() and False), ['<primary>n']],
             'clear': [lambda *i: dialog_widget.simple(_('Clear Chat?'), _('Are you sure you want to clear the chat?'), self.chat_list_box.get_current_chat().clear_chat, _('Clear')), ['<primary>e']],
             'import_chat': [lambda *_: self.chat_list_box.import_chat()],
             'duplicate_chat': [self.chat_actions],
