@@ -54,12 +54,12 @@ if sys.platform != 'win32':
                 return True
             return False
 
-def show_terminal(script):
+def show_terminal(script, parent):
     if sys.platform != 'win32':
         window.terminal_scroller.set_child(terminal(script))
-        window.terminal_dialog.present(window)
+        window.terminal_dialog.present(parent)
 
-def run_terminal(files:dict):
+def run_terminal(files:dict, parent:Gtk.Widget=window):
     logger.info('Running Terminal')
     script = []
     if not os.path.isdir(os.path.join(data_dir, 'code runner')):
@@ -140,5 +140,5 @@ def run_terminal(files:dict):
                     show_terminal(['flatpak-spawn', '--host', 'bash', '-c', ';\n'.join(script)])
                     return
     script.append('echo -e "\n🦙 {}"'.format(_('Script Exited') ))
-    show_terminal(['bash', '-c', ';\n'.join(script)])
+    show_terminal(['bash', '-c', ';\n'.join(script)], parent)
 

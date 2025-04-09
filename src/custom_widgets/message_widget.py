@@ -303,7 +303,7 @@ class code_block(Gtk.Box):
                     file_name2, file_data2 = self.extract_code(block)
                     if file_data2['language'].lower() in ('css', 'js', 'javascript'):
                         files[file_name2] = file_data2
-        terminal_widget.run_terminal(files)
+        terminal_widget.run_terminal(files, self.get_root())
 
     def run_script(self, language_name):
         logger.debug("Running script")
@@ -314,7 +314,8 @@ class code_block(Gtk.Box):
             _('Make sure you understand what this script does before running it, Alpaca is not responsible for any damages to your device or data'),
             lambda *_: self.confirm_run_script(),
             _('Execute'),
-            'destructive'
+            'destructive',
+            self.get_root()
         )
 
 class attachment(Gtk.Button):

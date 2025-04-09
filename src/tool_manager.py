@@ -479,7 +479,7 @@ class run_command(tool):
         GLib.idle_add(terminal_widget.run_terminal, {self.name: {
             'language': 'ssh',
             'content': ';'.join(commands)
-        }})
+        }}, self.get_root())
 
         while isinstance(window.get_visible_dialog(), Adw.Dialog):
             time.sleep(1)

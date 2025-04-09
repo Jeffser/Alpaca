@@ -40,7 +40,7 @@ class baseDialog(Adw.AlertDialog):
 class Options(baseDialog):
     __gtype_name__ = 'AlpacaDialogOptions'
 
-    def __init__(self, heading:str, body:str, close_response:str, options:dict):
+    def __init__(self, heading:str, body:str, close_response:str, options:dict, parent:Gtk.Widget=window):
         super().__init__(
             heading,
             body,
@@ -49,7 +49,7 @@ class Options(baseDialog):
         )
         if not get_dialog_showing():
             self.choose(
-                parent = window,
+                parent = parent,
                 cancellable = None,
                 callback = lambda dialog, task: self.response(dialog.choose_finish(task))
             )
@@ -143,7 +143,7 @@ class DropDown(baseDialog):
         if 'callback' in self.options.get(result, {}):
             self.options[result]['callback'](item)
 
-def simple(heading:str, body:str, callback:callable, button_name:str=_('Accept'), button_appearance:str='suggested'):
+def simple(heading:str, body:str, callback:callable, button_name:str=_('Accept'), button_appearance:str='suggested', parent:Gtk.Widget=window):
     options = {
         _('Cancel'): {},
         button_name: {
@@ -153,7 +153,7 @@ def simple(heading:str, body:str, callback:callable, button_name:str=_('Accept')
         }
     }
 
-    Options(heading, body, list(options.keys())[0], options)
+    Options(heading, body, list(options.keys())[0], options, parent)
 
 def simple_entry(heading:str, body:str, callback:callable, entries:list or dict, button_name:str=_('Accept'), button_appearance:str='suggested'):
     options = {
