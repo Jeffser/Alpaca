@@ -1032,6 +1032,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                 <object class="AdwSwitchRow" id="powersaver_warning_switch">
                   <signal name="notify::active" handler="switch_powersaver_warning"/>
                   <property name="title" translatable="yes">Show Power Saver Warning</property>
+                  <property name="subtitle" translatable="yes">When running a managed Ollama instance</property>
                 </object>
               </child>
               <child>

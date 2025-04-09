@@ -1417,7 +1417,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         adapter.set_enabled(True)
         self.set_focus(self.message_text_view)
             
-        Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.banner.set_revealed(monitor.get_power_saver_enabled() and self.powersaver_warning_switch.get_active()))
+        Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.banner.set_revealed(monitor.get_power_saver_enabled() and self.powersaver_warning_switch.get_active() and self.get_current_instance().instance_type == 'ollama:managed'))
         self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
 
         if shutil.which('ollama'):
