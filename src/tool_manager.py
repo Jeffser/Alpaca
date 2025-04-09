@@ -35,7 +35,7 @@ class tool(Adw.ActionRow):
         self.add_suffix(self.enable_switch)
 
     def enabled_changed(self):
-        window.sql_instance.insert_or_update_tool_parameters(self.name, self.extract_variables_for_sql(), self.is_enabled())
+        window.sql_instance.insert_or_update_tool_parameters(self.tool_metadata.get('name'), self.extract_variables_for_sql(), self.is_enabled())
 
     def is_enabled(self) -> bool:
         return self.enable_switch.get_active()
@@ -496,7 +496,8 @@ available_tools = [get_current_datetime, get_recipes_by_category, get_recipe_by_
 def update_available_tools():
     tools_parameters = window.sql_instance.get_tool_parameters()
     for ac in available_tools:
-        tool_element = ac(tools_parameters.get(ac.name, {}).get('variables', {}), tools_parameters.get(ac.name, {}).get('activated', False))
+        tool_parameters = tools_parameters.get(ac.tool_metadata.get('name'), {})
+        tool_element = ac(tool_parameters.get('variables', {}), tool_parameters.get('activated', False))
         window.tool_listbox.prepend(tool_element)
 
 def get_enabled_tools() -> list:
