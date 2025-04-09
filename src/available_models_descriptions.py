@@ -160,4 +160,8 @@ descriptions = {
    'granite3.2': _("Granite-3.2 is a family of long-context AI models from IBM Granite fine-tuned for thinking capabilities."),
    'command-r7b-arabic': _("A new state-of-the-art version of the lightweight Command R7B model that excels in advanced Arabic language capabilities for enterprises in the Middle East and Northern Africa."),
    'command-a': _("111 billion parameter model optimized for demanding enterprises that require fast, secure, and high-quality AI"),
+   'exaone-deep': _("EXAONE Deep exhibits superior capabilities in various reasoning tasks including math and coding benchmarks, ranging from 2.4B to 32B parameters developed and released by LG AI Research."),
+   'mistral-small3.1': _("Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-art vision understanding and enhances long context capabilities up to 128k tokens without compromising text performance."),
+   'cogito': _("Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that outperform the best available open models of the same size, including counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."),
+   'deepcoder': _("DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a 1.5B version also available."),
 }
