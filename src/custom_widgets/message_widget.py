@@ -467,7 +467,13 @@ class latex_renderer(Gtk.Button):
             self.set_sensitive(False)
 
     def __init__(self, equation):
-        self.eq = '${}$'.format(equation.replace('\\[', '').replace('\\]', '').replace('$', '').replace('\n', ''))
+        equation = equation.strip()
+        for p in ('\\[', '$$', '$'):
+            equation.removeprefix(p)
+        for s in ('\\]', '$$', '$'):
+            equation.removesuffix(s)
+        self.eq = '${}$'.format(equation)
+        print(self.eq)
 
         child = None
         try:
