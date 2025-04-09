@@ -4,7 +4,6 @@
   <requires lib="Adw" version="1.0"/>
   <template class="AlpacaWindow" parent="AdwApplicationWindow">
     <signal name="close-request" handler="closing_app"/>
-    <signal name="show" handler="opening_app"/>
     <property name="resizable">True</property>
     <property name="width-request">320</property>
     <property name="height-request">240</property>
@@ -359,12 +358,12 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                               </object>
                                             </child>
                                             <child>
-                                              <object class="GtkStack" id="microphone_stack">
+                                              <object class="GtkStack">
                                                 <child>
                                                   <object class="GtkStackPage">
                                                     <property name="name">button</property>
                                                     <property name="child">
-                                                      <object class="GtkToggleButton" id="microphone_button">
+                                                      <object class="GtkToggleButton">
                                                         <property name="icon-name">audio-input-microphone-symbolic</property>
                                                         <signal name="toggled" handler="microphone_toggled"/>
                                                         <property name="tooltip-text" translatable="yes">Use Speech Recognition</property>
@@ -1187,6 +1186,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                 <object class="GtkButton" id="quick_ask_save_button">
                   <property name="icon-name">document-save-symbolic</property>
                   <property name="tooltip-text" translatable="yes">Save Conversation to Alpaca</property>
+                  <property name="sensitive">false</property>
                   <signal name="clicked" handler="quick_ask_save"/>
                 </object>
               </child>
@@ -1195,6 +1195,59 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
           <property name="content">
             <object class="AdwToastOverlay" id="quick_ask_overlay"/>
           </property>
+          <child type="bottom">
+            <object class="GtkBox">
+              <property name="margin-top">10</property>
+              <property name="margin-bottom">10</property>
+              <property name="margin-start">10</property>
+              <property name="margin-end">10</property>
+              <style>
+                <class name="card"/>
+              </style>
+              <property name="overflow">1</property>
+              <child>
+                <object class="GtkScrolledWindow" id="quick_ask_text_view_scrolled_window">
+                  <property name="max-content-height">150</property>
+                  <property name="propagate-natural-height">true</property>
+                  <property name="min-content-height">1</property>
+                  <style>
+                    <class name="undershoot-bottom"/>
+                  </style>
+                </object>
+              </child>
+              <child>
+                <object class="GtkStack">
+                  <child>
+                    <object class="GtkStackPage">
+                      <property name="name">button</property>
+                      <property name="child">
+                        <object class="GtkToggleButton">
+                          <property name="icon-name">audio-input-microphone-symbolic</property>
+                          <signal name="toggled" handler="microphone_toggled"/>
+                          <property name="tooltip-text" translatable="yes">Use Speech Recognition</property>
+                          <style>
+                            <class name="microphone_button"/>
+                          </style>
+                        </object>
+                      </property>
+                    </object>
+                  </child>
+                  <child>
+                    <object class="GtkStackPage">
+                      <property name="name">loading</property>
+                      <property name="child">
+                        <object class="AdwSpinner">
+                          <style>
+                            <class name="p10"/>
+                          </style>
+                        </object>
+                      </property>
+                    </object>
+                  </child>
+                </object>
+              </child>
+            </object>
+          </child>
         </object>
       </child>
     </object>
@@ -1292,6 +1345,10 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
   </template>
   <menu id="primary_menu">
     <section>
+      <item>
+        <attribute name="label" translatable="yes">Start Quick Ask</attribute>
+        <attribute name="action">app.start_quick_ask</attribute>
+      </item>
       <item>
         <attribute name="label" translatable="yes">Import Chat</attribute>
         <attribute name="action">app.import_chat</attribute>

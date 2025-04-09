@@ -146,10 +146,13 @@ class chat(Gtk.Stack):
 
     def send_sample_prompt(self, prompt):
         if len(list(window.local_model_flowbox)) > 0:
-            buffer = window.message_text_view.get_buffer()
-            buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-            buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
-            window.send_message()
+            if self.quick_chat:
+                window.quick_chat(prompt, 0)
+            else:
+                buffer = window.message_text_view.get_buffer()
+                buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+                buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
+                window.send_message()
         elif window.get_current_instance().instance_type == 'empty':
             window.get_application().lookup_action('instance_manager').activate()
         else:

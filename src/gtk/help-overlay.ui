@@ -23,6 +23,12 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Quick Ask</property>
+                <property name="action-name">app.start_quick_ask</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes" context="shortcut window">Model Manager</property>
                 <property name="action-name">app.model_manager</property>
               </object>

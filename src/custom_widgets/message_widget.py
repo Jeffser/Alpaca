@@ -345,7 +345,7 @@ class attachment(Gtk.Button):
         if self.file_type == "link":
             self.connect("clicked", lambda button, uri=self.file_content: Gio.AppInfo.launch_default_for_uri(uri))
         else:
-            self.connect("clicked", lambda button, file_content=self.file_content, file_type=self.file_type: window.preview_file(self.get_name(), file_content, file_type, False))
+            self.connect("clicked", lambda button, file_content=self.file_content, file_type=self.file_type: window.preview_file(self.get_name(), file_content, file_type, False, button.get_root()))
 
 class attachment_container(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentContainer'
@@ -394,7 +394,7 @@ class image(Gtk.Button):
                 tooltip_text=_("Image")
             )
             image.update_property([4], [_("Image")])
-            self.connect("clicked", lambda button, content=self.file_content: window.preview_file(self.get_name(), content, 'image', False))
+            self.connect("clicked", lambda button, content=self.file_content: window.preview_file(self.get_name(), content, 'image', False, button.get_root()))
         except Exception as e:
             logger.error(e)
             image_texture = Gtk.Image.new_from_icon_name("image-missing-symbolic")

@@ -67,6 +67,8 @@ class AlpacaService:
             </method>
             <method name='Present'>
             </method>
+            <method name='PresentAsk'>
+            </method>
         </interface>
     </node>
     """
@@ -79,6 +81,9 @@ class AlpacaService:
 
     def Present(self):
         self.app.props.active_window.present()
+
+    def PresentAsk(self):
+        self.app.props.active_window.quick_ask.present()
 
     def Open(self, chat_name:str):
         for chat_row in self.app.props.active_window.chat_list_box.tab_list:
@@ -123,13 +128,19 @@ class AlpacaApplication(Adw.Application):
                     app_service.Open(self.args.select_chat)
                 elif self.args.ask:
                     app_service.Ask(self.args.ask)
+                elif self.args.quick_ask:
+                    app_service.PresentAsk()
                 sys.exit(0)
 
     def do_activate(self):
         win = self.props.active_window
         if not win:
             win = AlpacaWindow(application=self)
-        win.present()
+
+        if self.args.ask or self.args.quick_ask:
+            win.quick_ask.present()
+        else:
+            win.present()
         if sys.platform == Platforms.mac_os: # MacOS
             settings = Gtk.Settings.get_default()
             if settings:
@@ -202,7 +213,8 @@ def main(version):
     parser.add_argument('--new-chat', type=str, metavar='"CHAT"', help="Start a new chat with the specified title.")
     parser.add_argument('--list-chats', action='store_true', help='Display all the current chats')
     parser.add_argument('--select-chat', type=str, metavar='"CHAT"', help="Select a chat on launch")
-    parser.add_argument('--ask', type=str, metavar='"MESSAGE"', help="Open quick ask with message")
+    parser.add_argument('--ask', type=str, metavar='"MESSAGE"', help="Open Quick Ask with message")
+    parser.add_argument('--quick-ask', action='store_true', help='Open Quick Ask')
     args = parser.parse_args()
 
     if args.version:

@@ -98,6 +98,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     chat_stack = Gtk.Template.Child()
     message_text_view = None
     message_text_view_scrolled_window = Gtk.Template.Child()
+    quick_ask_text_view_scrolled_window = Gtk.Template.Child()
     action_button_stack = Gtk.Template.Child()
     attachment_container = Gtk.Template.Child()
     attachment_box = Gtk.Template.Child()
@@ -159,8 +160,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     tool_listbox = Gtk.Template.Child()
     model_manager_bottom_view_switcher = Gtk.Template.Child()
     model_manager_top_view_switcher = Gtk.Template.Child()
-    microphone_stack = Gtk.Template.Child()
-    microphone_button = Gtk.Template.Child()
     last_selected_instance_row = None
 
     sql_instance = sql_manager.Instance(os.path.join(data_dir, "alpaca.db"))
@@ -169,10 +168,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def microphone_toggled(self, button):
         language=self.sql_instance.get_preference('mic_language')
-        buffer=self.message_text_view.get_buffer()
+        text_view = list(button.get_parent().get_parent())[0].get_child()
+        buffer = text_view.get_buffer()
 
         def show_pull_toast():
-            if self.microphone_stack.get_visible_child_name() == "loading":
+            if button.get_parent().get_visible_child_name() == "loading":
                 size = {
                     'tiny': '~75mb',
                     'base': '~151mb',
@@ -191,7 +191,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.mic_timeout = 0
 
         def run_mic():
-            GLib.idle_add(self.microphone_stack.set_visible_child_name, "loading")
+            GLib.idle_add(button.get_parent().set_visible_child_name, "loading")
             GLib.idle_add(button.add_css_class, 'accent')
 
             samplerate=16000
@@ -205,7 +205,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             except Exception as e:
                 dialog_widget.simple_error(_('Speech Recognition Error'), _('An error occurred while pulling speech recognition model'), e)
                 logger.error(e)
-            GLib.idle_add(self.microphone_stack.set_visible_child_name, "button")
+            GLib.idle_add(button.get_parent().set_visible_child_name, "button")
 
             if model:
                 stream = p.open(
@@ -226,7 +226,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                         threading.Thread(target=recognize_audio, args=(model, audio_data, buffer.get_end_iter())).start()
 
                         if self.mic_timeout >= 2 and self.sql_instance.get_preference('mic_auto_send', False) and buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False):
-                            GLib.idle_add(self.send_message)
+                            if text_view.get_name() == 'main_text_view':
+                                GLib.idle_add(self.send_message)
+                            elif text_view.get_name() == 'quick_chat_text_view':
+                                GLib.idle_add(self.quick_chat, buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False), 0)
                             break
 
                 except Exception as e:
@@ -585,14 +588,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.sql_instance.insert_or_update_preferences({'powersaver_warning': switch.get_active()})
 
     @Gtk.Template.Callback()
-    def opening_app(self, user_data):
-        threading.Thread(target=tool_manager.update_available_tools).start()
-        if self.sql_instance.get_preference('skip_welcome_page', False):
-            self.prepare_alpaca()
-        else:
-            self.main_navigation_view.replace_with_tags(['welcome'])
-
-    @Gtk.Template.Callback()
     def closing_app(self, user_data):
         def close():
             selected_chat = self.chat_list_box.get_selected_row().chat_window.get_name()
@@ -761,7 +756,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 notification.set_icon(icon)
             self.get_application().send_notification(None, notification)
 
-    def preview_file(self, file_name:str, file_content:str, file_type:str, show_remove:bool):
+    def preview_file(self, file_name:str, file_content:str, file_type:str, show_remove:bool, root:Gtk.Widget):
         logger.info(f"Previewing file: {file_name}")
         if show_remove:
             self.file_preview_remove_button.set_visible(True)
@@ -804,7 +799,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 else:
                     self.file_preview_dialog.set_title(file_name)
                     self.file_preview_open_button.set_visible(False)
-            self.file_preview_dialog.present(self)
+            self.file_preview_dialog.present(root)
 
     def switch_send_stop_button(self, send:bool):
         self.action_button_stack.set_visible_child_name('send' if send else 'stop')
@@ -929,7 +924,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 child=button_content
             )
             self.attachments[file_name] = {"path": file_path, "type": file_type, "content": content, "button": button}
-            button.connect("clicked", lambda button : self.preview_file(file_name, content, file_type, True))
+            button.connect("clicked", lambda button : self.preview_file(file_name, content, file_type, True, self))
             self.attachment_container.append(button)
             self.attachment_box.set_visible(True)
 
@@ -1065,23 +1060,37 @@ class AlpacaWindow(Adw.ApplicationWindow):
             elif extension == 'xlsx':
                 self.attach_file(file.get_path(), 'xlsx')
 
-    def quick_chat(self, message:str):
+    def prepare_quick_chat(self):
         self.quick_ask_save_button.set_sensitive(False)
+        chat = chat_widget.chat(_('Quick Ask'), 'QA', True)
+        chat.set_visible_child_name('welcome-screen')
+        self.quick_ask_overlay.set_child(chat)
+
+    def quick_chat(self, message:str, mode:int):
+        if not message:
+            return
+
+        buffer = self.quick_ask_message_text_view.get_buffer()
+        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
         self.quick_ask.present()
         default_model = self.get_current_instance().get_default_model()
+        current_model = None
         if default_model:
             current_model = self.convert_model_name(default_model, 1)
         if current_model is None:
             self.show_toast(_("Please select a model before chatting"), self.quick_ask_overlay)
             return
-        chat = chat_widget.chat(_('Quick Ask'), 'QA', True)
-        self.quick_ask_overlay.set_child(chat)
-        m_element = chat.add_message(self.generate_uuid(), datetime.now(), None, False)
+        chat = self.quick_ask_overlay.get_child()
+        m_element = chat.add_message(self.generate_uuid(), datetime.now(), None, mode == 1)
         m_element.set_text(message)
-        m_element_bot = chat.add_message(self.generate_uuid(), datetime.now(), current_model, False)
-        m_element_bot.set_text()
-        chat.busy = True
-        threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
+        if mode in (0, 2):
+            m_element_bot = chat.add_message(self.generate_uuid(), datetime.now(), current_model, False)
+            m_element_bot.set_text()
+            chat.busy = True
+            if mode == 0:
+                threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
+            else:
+                threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model)).start()
 
     def get_current_instance(self):
         if self.instance_listbox.get_selected_row():
@@ -1097,6 +1106,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         #Chat History
         self.load_history()
+
+        threading.Thread(target=tool_manager.update_available_tools).start()
 
         if self.get_application().args.new_chat:
             self.chat_list_box.new_chat(self.get_application().args.new_chat)
@@ -1120,8 +1131,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         instance_manager.update_instance_list()
 
-        if self.get_application().args.ask:
-            self.quick_chat(self.get_application().args.ask)
+        if self.get_application().args.ask or self.get_application().args.quick_ask:
+            self.prepare_quick_chat()
+            self.quick_chat(self.get_application().args.ask, 0)
 
     def open_button_menu(self, gesture, x, y, menu):
         button = gesture.get_widget()
@@ -1272,6 +1284,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         instance_manager.window = self
         tool_manager.window = self
 
+        self.prepare_quick_chat()
         self.model_searchbar.connect_entry(self.searchentry_models)
         self.model_searchbar.connect('notify::search-mode-enabled', lambda *_: self.model_search_changed(self.searchentry_models))
 
@@ -1289,6 +1302,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if sys.platform not in Platforms.ported:
             self.model_manager_stack.set_enable_transitions(True)
 
+        self.chat_list_box = chat_widget.chat_list()
+        self.chat_list_container.set_child(self.chat_list_box)
+
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
         self.message_text_view = GtkSource.View(
@@ -1297,7 +1313,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             bottom_margin=10,
             hexpand=True,
             wrap_mode=3,
-            valign=3
+            valign=3,
+            name="main_text_view"
         )
 
         self.message_text_view_scrolled_window.set_child(self.message_text_view)
@@ -1305,20 +1322,36 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.message_text_view.get_buffer().set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('adwaita'))
         self.message_text_view.connect('paste-clipboard', self.on_clipboard_paste)
 
-        self.chat_list_box = chat_widget.chat_list()
-        self.chat_list_container.set_child(self.chat_list_box)
-        enter_key_controller = Gtk.EventControllerKey.new()
-        def enter_key_handler(controller, keyval, keycode, state):
+        self.quick_ask_message_text_view = GtkSource.View(
+            css_classes=['message_text_view'],
+            top_margin=10,
+            bottom_margin=10,
+            hexpand=True,
+            wrap_mode=3,
+            valign=3,
+            name="quick_chat_text_view"
+        )
+        self.quick_ask_text_view_scrolled_window.set_child(self.quick_ask_message_text_view)
+        self.quick_ask_message_text_view.get_buffer().set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('adwaita'))
+
+        def enter_key_handler(controller, keyval, keycode, state, text_view):
             if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK): # Enter pressed without shift
+                mode = 0
                 if state & Gdk.ModifierType.CONTROL_MASK: # Ctrl, send system message
-                    self.send_message(None, 1)
+                    mode = 1
                 elif state & Gdk.ModifierType.ALT_MASK: # Alt, send tool message
-                    self.send_message(None, 2)
-                else: # Nothing, send normal message
-                    self.send_message(None, 0)
+                    mode = 2
+                if text_view.get_name() == 'main_text_view':
+                    self.send_message(None, mode)
+                elif text_view.get_name() == 'quick_chat_text_view':
+                    buffer = text_view.get_buffer()
+                    self.quick_chat(buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False), mode)
                 return True
-        enter_key_controller.connect("key-pressed", enter_key_handler)
-        self.message_text_view.add_controller(enter_key_controller)
+
+        for text_view in (self.message_text_view, self.quick_ask_message_text_view):
+            enter_key_controller = Gtk.EventControllerKey.new()
+            enter_key_controller.connect("key-pressed", lambda c, kv, kc, stt, tv=text_view: enter_key_handler(c, kv, kc, stt, tv))
+            text_view.add_controller(enter_key_controller)
 
         for name, data in {
             'send': {
@@ -1364,7 +1397,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'reload_added_models': [lambda *_: model_manager_widget.update_local_model_list()],
             'delete_all_chats': [lambda *i: self.get_visible_dialog().close() and dialog_widget.simple(_('Delete All Chats?'), _('Are you sure you want to delete all chats?'), lambda: [GLib.idle_add(self.chat_list_box.delete_chat, c.chat_window.get_name()) for c in self.chat_list_box.tab_list], _('Delete'), 'destructive')],
             'use_tools': [lambda *_: self.send_message(None, 2)],
-            'tool_manager': [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'tool_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'tool_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']]
+            'tool_manager': [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'tool_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'tool_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']],
+            'start_quick_ask': [lambda *_: self.quick_ask.present(), ['<primary><alt>a']]
         }
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
@@ -1391,3 +1425,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.install_ollama_button.set_label(text)
             self.install_ollama_button.set_tooltip_text(text)
             self.install_ollama_button.set_sensitive(False)
+
+        if self.sql_instance.get_preference('skip_welcome_page', False):
+            self.prepare_alpaca()
+        else:
+            self.main_navigation_view.replace_with_tags(['welcome'])
