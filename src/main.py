@@ -97,7 +97,7 @@ class AlpacaService:
 
     def Ask(self, message:str):
         time.sleep(1)
-        self.app.props.active_window.quick_chat(message)
+        self.app.props.active_window.quick_chat(message, 0)
 
 class AlpacaApplication(Adw.Application):
     __gtype_name__ = 'AlpacaApplication'
