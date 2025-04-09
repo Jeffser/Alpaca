@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-09 00:46-0600\n"
+"POT-Creation-Date: 2025-04-09 00:50-0600\n"
 "PO-Revision-Date: 2024-08-25 11:55-0600\n"
 "Last-Translator: Simon Bezruchenko <worcposj@gmail.com>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -236,23 +236,23 @@ msgstr ""
 msgid "New Tools"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:122
+#: data/com.jeffser.Alpaca.metainfo.xml.in:122 src/tool_manager.py:348
 msgid "Online Search"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:123
+#: data/com.jeffser.Alpaca.metainfo.xml.in:123 src/tool_manager.py:306
 msgid "Extract Wikipedia Article"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:124
+#: data/com.jeffser.Alpaca.metainfo.xml.in:124 src/tool_manager.py:210
 msgid "Get Recipe by Name"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:125
+#: data/com.jeffser.Alpaca.metainfo.xml.in:125 src/tool_manager.py:261
 msgid "Get Recipes by Category"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:126
+#: data/com.jeffser.Alpaca.metainfo.xml.in:126 src/tool_manager.py:176
 msgid "Get Current Datetime"
 msgstr ""
 
@@ -2104,7 +2104,8 @@ msgid "Next"
 msgstr "Далі"
 
 #: src/window.py:613 src/instance_manager.py:397 src/instance_manager.py:398
-#: src/window.ui:969 src/window.ui:973 src/custom_widgets/message_widget.py:79
+#: src/tool_manager.py:136 src/window.ui:969 src/window.ui:973
+#: src/custom_widgets/message_widget.py:79
 #: src/custom_widgets/message_widget.py:229
 #: src/custom_widgets/model_manager_widget.py:422
 #: src/custom_widgets/dialog_widget.py:148
@@ -3767,6 +3768,114 @@ msgstr "Ви впевнені, що хочете видалити цей екз�
 msgid "Edit Instance"
 msgstr "Редагувати екземпляр"
 
+#: src/tool_manager.py:71
+msgid "AI Description"
+msgstr ""
+
+#: src/tool_manager.py:72
+msgid "The description the AI model will use to understand what the tool does."
+msgstr ""
+
+#: src/tool_manager.py:83
+msgid "Arguments"
+msgstr ""
+
+#: src/tool_manager.py:84
+msgid "Variables that are filled by the AI."
+msgstr ""
+
+#: src/tool_manager.py:97
+msgid "Variables"
+msgstr ""
+
+#: src/tool_manager.py:98
+msgid ""
+"User filled values that the tool uses to work, the AI does not have access "
+"to these variables at all."
+msgstr ""
+
+#: src/tool_manager.py:140 src/custom_widgets/dialog_widget.py:146
+#: src/custom_widgets/dialog_widget.py:158
+#: src/custom_widgets/dialog_widget.py:170
+msgid "Accept"
+msgstr "Прийняти"
+
+#: src/tool_manager.py:177
+msgid "Gets the current date and/or time."
+msgstr ""
+
+#: src/tool_manager.py:211
+msgid "Gets a recipe by the meal's name"
+msgstr ""
+
+#: src/tool_manager.py:224 src/tool_manager.py:281
+msgid "YouTube Video"
+msgstr ""
+
+#: src/tool_manager.py:227 src/tool_manager.py:284
+msgid "Source"
+msgstr ""
+
+#: src/tool_manager.py:262
+msgid "Gets a list of food recipes by a specified category"
+msgstr ""
+
+#: src/tool_manager.py:307
+msgid "Extracts an article from Wikipedia by it's title"
+msgstr ""
+
+#: src/tool_manager.py:349
+msgid "Search for a term online using DuckDuckGo"
+msgstr ""
+
+#: src/tool_manager.py:365
+msgid "Abstract Source"
+msgstr ""
+
+#: src/tool_manager.py:384
+msgid "Official Website"
+msgstr ""
+
+#: src/tool_manager.py:431
+msgid "Run Command (Testing)"
+msgstr ""
+
+#: src/tool_manager.py:432
+msgid "Request to run a command using SSH to connect to the device"
+msgstr ""
+
+#: src/tool_manager.py:435
+msgid "IP Address"
+msgstr ""
+
+#: src/tool_manager.py:440
+msgid "Username"
+msgstr ""
+
+#: src/tool_manager.py:445
+msgid "Network Port"
+msgstr ""
+
+#: src/tool_manager.py:462
+msgid "Model Requested to Run Command"
+msgstr ""
+
+#: src/tool_manager.py:463
+msgid "Command"
+msgstr ""
+
+#: src/tool_manager.py:465
+msgid "Explanation"
+msgstr ""
+
+#: src/tool_manager.py:466
+msgid "No explanation was provided"
+msgstr ""
+
+#: src/tool_manager.py:467
+msgid "Make sure you understand what the command does before running it."
+msgstr ""
+
 #: src/window.ui:35
 msgid "Welcome"
 msgstr "Ласкаво просимо"
@@ -4659,12 +4768,6 @@ msgid ""
 msgstr ""
 "Завантажуючи цю модель, ви приймаєте ліцензійну угоду, що доступна на "
 "вебсайті моделі"
-
-#: src/custom_widgets/dialog_widget.py:146
-#: src/custom_widgets/dialog_widget.py:158
-#: src/custom_widgets/dialog_widget.py:170
-msgid "Accept"
-msgstr "Прийняти"
 
 #: src/custom_widgets/terminal_widget.py:80
 msgid "Setting up Python environment..."
