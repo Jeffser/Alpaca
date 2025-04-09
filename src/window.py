@@ -1373,7 +1373,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if sys.platform in Platforms.ported:
             self.get_application().lookup_action('attach_screenshot').set_enabled(False)
 
-        self.file_preview_remove_button.connect('clicked', lambda button : dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))
+        self.file_preview_remove_button.connect('clicked', lambda button: self.get_visible_dialog().close() and dialog_widget.simple(_('Remove Attachment?'), _("Are you sure you want to remove attachment?"), lambda button=button: self.remove_attached_file(button.get_name()), _('Remove'), 'destructive'))
         self.model_creator_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
         self.model_creator_tag.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
 
