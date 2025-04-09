@@ -229,31 +229,31 @@ msgstr "Documento de Microsoft PowerPoint (pptx)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:118
 msgid "Microsoft Excel Document (xlsx)"
-msgstr ""
+msgstr "Documento de Microsoft Excel (xlsx)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
 msgid "New Tools"
-msgstr ""
+msgstr "Nuevas Herramientas"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
 msgid "Online Search"
-msgstr ""
+msgstr "Búsqueda en Línea"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Extract Wikipedia Article"
-msgstr ""
+msgstr "Extracción de Artículos de Wikipedia"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Get Recipe by Name"
-msgstr ""
+msgstr "Obtener Receta por Nombre"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:125
 msgid "Get Recipes by Category"
-msgstr ""
+msgstr "Obtenga Recetas por Categoría"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:126
 msgid "Get Current Datetime"
-msgstr ""
+msgstr "Obtener Fecha y Hora Actual"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:128
 #: data/com.jeffser.Alpaca.metainfo.xml.in:146
@@ -286,15 +286,18 @@ msgstr "Arreglos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:130
 msgid "Fixed welcome screen not showing sometimes when deleting a message"
-msgstr ""
+msgstr "Se solucionó el problema de que la pantalla de bienvenida fija no se "
+"mostraba a veces al eliminar un mensaje."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:131
 msgid "Fixed bold text not rendering correctly in tables"
-msgstr ""
+msgstr "Se solucionó el problema del texto en negrita que no se representaba "
+"correctamente en las tablas."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:132
 msgid "Fixed sample prompt buttons overflowing on small screens"
-msgstr ""
+msgstr "Se corrigieron los botones de solicitud de muestra que se desbordaban "
+"en pantallas pequeñas"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:141
 msgid "Updated runtime to Gnome 48"
@@ -2032,35 +2035,35 @@ msgstr "Esta es la primera versión publica de Alpaca"
 
 #: src/main.py:182
 msgid "Documentation"
-msgstr ""
+msgstr "Documentación"
 
 #: src/main.py:183
 msgid "Become a Sponsor"
-msgstr ""
+msgstr "Conviértete en un Patrocinador"
 
 #: src/main.py:184
 msgid "Discussions"
-msgstr ""
+msgstr "Discusiones"
 
 #: src/window.py:183
 msgid "Speech recognition model is being downloaded ({})"
-msgstr ""
+msgstr "Se está descargando el modelo de reconocimiento de voz ({})"
 
 #: src/window.py:206 src/window.py:233
 msgid "Speech Recognition Error"
-msgstr ""
+msgstr "Error de Reconocimiento de Voz"
 
 #: src/window.py:206
 msgid "An error occurred while pulling speech recognition model"
-msgstr ""
+msgstr "Se produjo un error al descargar el modelo de reconocimiento de voz"
 
 #: src/window.py:233
 msgid "An error occurred while using speech recognition"
-msgstr ""
+msgstr "Se produjo un error al utilizar el reconocimiento de voz"
 
 #: src/window.py:268
 msgid "Ollama Was Not Found"
-msgstr ""
+msgstr "Ollama No Fue Encontrado"
 
 #: src/window.py:269
 msgid ""
@@ -2068,10 +2071,13 @@ msgid ""
 "your device, this is a simple process and should not take more than 5 "
 "minutes."
 msgstr ""
+"Para agregar una instancia de Ollama administrada, debe tener Ollama "
+"instalado localmente en su dispositivo, este es un proceso simple y no "
+"debería tomar más de 5 minutos."
 
 #: src/window.py:271
 msgid "Open Tutorial in Web Browser"
-msgstr ""
+msgstr "Abrir Tutorial en Navegador Web"
 
 #: src/window.py:277 src/window.py:284 src/window.ui:473 src/window.ui:483
 #: src/window.ui:505
@@ -2084,15 +2090,15 @@ msgstr "Seleccione un tipo de instancia para agregar"
 
 #: src/window.py:490
 msgid "No tools enabled."
-msgstr ""
+msgstr "No hay herramientas habilitadas."
 
 #: src/window.py:490
 msgid "Open Tool Manager"
-msgstr ""
+msgstr "Abrir el Gestor de herramientas"
 
 #: src/window.py:493
 msgid "'{}' does not support tools."
-msgstr ""
+msgstr "'{}' no admite herramientas."
 
 #: src/window.py:493
 msgid "Open Model Manager"
@@ -3555,6 +3561,10 @@ msgid ""
 "including math and coding benchmarks, ranging from 2.4B to 32B parameters "
 "developed and released by LG AI Research."
 msgstr ""
+"EXAONE Deep exhibe capacidades superiores en varias tareas de "
+"razonamiento, incluidos puntos de referencia de matemáticas y "
+"codificación, que van desde 2.4B a 32B de parámetros desarrollados y "
+"publicados por LG AI Research."
 
 #: src/available_models_descriptions.py:164
 msgid ""
@@ -3562,6 +3572,9 @@ msgid ""
 "art vision understanding and enhances long context capabilities up to 128k "
 "tokens without compromising text performance."
 msgstr ""
+"Basado en Mistral Small 3, Mistral Small 3.1 (2503) agrega comprensión de "
+"visión de última generación y mejora las capacidades de contexto largo "
+"hasta 128k tokens sin comprometer el rendimiento del texto."
 
 #: src/available_models_descriptions.py:165
 msgid ""
@@ -3569,12 +3582,18 @@ msgid ""
 "outperform the best available open models of the same size, including "
 "counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."
 msgstr ""
+"Cogito v1 Preview es una familia de modelos de razonamiento híbrido de Deep "
+"Cogito que superan a los mejores modelos abiertos disponibles del mismo "
+"tamaño, incluidos sus homólogos de LLaMA, DeepSeek y Qwen en la mayoría de "
+"los puntos de referencia estándar."
 
 #: src/available_models_descriptions.py:166
 msgid ""
 "DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
 "1.5B version also available."
 msgstr ""
+"DeepCoder es un modelo codificador 14B de código abierto a nivel O3-mini, "
+"con una versión 1.5B también disponible."
 
 #: src/instance_manager.py:30 src/instance_manager.py:358
 msgid "Instance"
@@ -3587,23 +3606,23 @@ msgstr "Nuevo Chat"
 
 #: src/instance_manager.py:75
 msgid "Selecting tool to use..."
-msgstr ""
+msgstr "Seleccionando la herramienta a utilizar..."
 
 #: src/instance_manager.py:84
 msgid "Using {}"
-msgstr ""
+msgstr "Usando {}"
 
 #: src/instance_manager.py:110
 msgid "Tool Error"
-msgstr ""
+msgstr "Error de Herramienta"
 
 #: src/instance_manager.py:110
 msgid "An error occurred while running tool"
-msgstr ""
+msgstr "Se produjo un error al ejecutar la herramienta"
 
 #: src/instance_manager.py:113
 msgid "Generating message..."
-msgstr ""
+msgstr "Generando mensaje..."
 
 #: src/instance_manager.py:154 src/instance_manager.py:454
 #: src/instance_manager.py:464 src/instance_manager.py:608
@@ -3627,7 +3646,7 @@ msgstr "Puerto"
 
 #: src/instance_manager.py:219
 msgid "Which network port will '{}' use"
-msgstr ""
+msgstr "Qué puerto de red utilizará '{}'"
 
 #: src/instance_manager.py:233
 msgid "Instance URL"
@@ -3783,15 +3802,15 @@ msgstr "Instancia de IA local o remota no administrada por Alpaca"
 #: src/instance_manager.py:789 src/instance_manager.py:809
 #: src/instance_manager.py:830
 msgid "Could not retrieve models"
-msgstr ""
+msgstr "No se pudieron recuperar los modelos"
 
 #: src/instance_manager.py:798
 msgid "Fireworks AI inference platform"
-msgstr ""
+msgstr "Plataforma de inferencia de IA de Fireworks"
 
 #: src/instance_manager.py:818
 msgid "Lambda Labs cloud inference API"
-msgstr ""
+msgstr "API de inferencia en la nube de Lambda Labs"
 
 #: src/instance_manager.py:837
 msgid "OpenAI Compatible Instance"
@@ -3799,7 +3818,7 @@ msgstr "Instancia Compatible con OpenAI"
 
 #: src/instance_manager.py:838
 msgid "AI instance compatible with OpenAI library"
-msgstr ""
+msgstr "Instancia de IA compatible con la biblioteca OpenAI"
 
 #: src/instance_manager.py:860
 msgid "Remove Instance?"
@@ -3932,7 +3951,7 @@ msgstr "Adjuntar Archivo"
 
 #: src/window.ui:370
 msgid "Use Speech Recognition"
-msgstr ""
+msgstr "Usar Reconocimiento de Voz"
 
 #: src/window.ui:405
 msgid "Send Message"
@@ -3968,17 +3987,19 @@ msgstr ""
 
 #: src/window.ui:536
 msgid "Tool Manager"
-msgstr ""
+msgstr "Gestor de Herramientas"
 
 #: src/window.ui:547
 msgid "Available Tools"
-msgstr ""
+msgstr "Herramientas Disponibles"
 
 #: src/window.ui:548
 msgid ""
 "Functions that AI models might use when sending a message by selecting \"Use "
 "Tools\" in the send button context menu."
 msgstr ""
+"Funciones que los modelos de IA pueden utilizar al enviar un mensaje "
+"seleccionando \"Usar Herramientas\" en el menú contextual del botón de envío."
 
 #: src/window.ui:567
 msgid "Model Manager"
@@ -4002,7 +4023,7 @@ msgstr "Buscar Modelos"
 
 #: src/window.ui:653
 msgid "Filter Models"
-msgstr ""
+msgstr "Filtrar Modelos"
 
 #: src/window.ui:669
 msgid "Added"
@@ -4131,11 +4152,11 @@ msgstr "Zoom"
 
 #: src/window.ui:1058
 msgid "Auto Send Message After Talking"
-msgstr ""
+msgstr "Enviar Mensaje Automáticamente Después de Hablar"
 
 #: src/window.ui:1064
 msgid "Speech Recognition Language"
-msgstr ""
+msgstr "Lenguaje de Reconocimiento de Voz"
 
 #: src/window.ui:1076
 msgid "Delete All Chats"
@@ -4151,20 +4172,26 @@ msgid ""
 "awesome new features to explore! Get ready to experience Alpaca in a whole "
 "new way!"
 msgstr ""
+"¡Hola, usuarios de Alpaca! ¡Nos emociona traerles una nueva actualización "
+"repleta de increíbles funciones nuevas para explorar! ¡Prepárense para "
+"experimentar Alpaca de una manera completamente nueva!"
 
 #: src/window.ui:1115
 msgid "Smart Tools"
-msgstr ""
+msgstr "Herramientas Inteligentes"
 
 #: src/window.ui:1116
 msgid ""
 "Supported AI models can use handy tools to grab information both locally and "
 "online. Head over to the brand new \"Tool Manager\" to toggle them on or off."
 msgstr ""
+"Los modelos de IA compatibles pueden usar herramientas útiles para "
+"recopilar información tanto localmente como en línea. Accede al nuevo "
+"\"Administrador de Herramientas\" para activarlas o desactivarlas."
 
 #: src/window.ui:1123
 msgid "Talk to Models"
-msgstr ""
+msgstr "Habla con Modelos"
 
 #: src/window.ui:1124
 msgid ""
@@ -4172,10 +4199,13 @@ msgid ""
 "convenient! You can even customize your language and other settings in the "
 "Preferences dialog."
 msgstr ""
+"Ahora puedes dictar tus mensajes con reconocimiento de voz local. "
+"¡Es súper práctico! Incluso puedes personalizar el idioma y otras opciones "
+"en el cuadro de diálogo Preferencias."
 
 #: src/window.ui:1131
 msgid "Find Models Faster"
-msgstr ""
+msgstr "Encuentra Modelos Más Rápido"
 
 #: src/window.ui:1132
 msgid ""
@@ -4183,10 +4213,13 @@ msgid ""
 "to filter models by their categories in the Model Manager. Now you can "
 "quickly find exactly the model you're looking for."
 msgstr ""
+"¡Explorar tus modelos de Ollama ahora es más fácil! Hemos añadido la "
+"posibilidad de filtrarlos por categorías en el Administrador de Modelos. "
+"Ahora puedes encontrar rápidamente el modelo que buscas."
 
 #: src/window.ui:1139
 msgid "Math Rendering"
-msgstr ""
+msgstr "Renderización Matemática"
 
 #: src/window.ui:1140
 msgid ""
@@ -4194,10 +4227,13 @@ msgid ""
 "look cleaner and more consistent. Your mathematical discussions will be "
 "clearer than ever!"
 msgstr ""
+"Hemos mejorado la representación de las ecuaciones LaTeX en los mensajes, "
+"haciéndolos más claros y consistentes. ¡Tus discusiones matemáticas serán "
+"más claras que nunca!"
 
 #: src/window.ui:1147
 msgid "More Instances"
-msgstr ""
+msgstr "Más Instancias"
 
 #: src/window.ui:1148
 msgid ""
@@ -4205,10 +4241,14 @@ msgid ""
 "support for over 5 new AI instance providers, including Anthropic, "
 "OpenRouter, and Fireworks. The possibilities are endless!"
 msgstr ""
+"¡Prepárate para conectar Alpaca con un universo completo de proveedores de "
+"IA! Hemos añadido compatibilidad con más de 5 nuevos proveedores de "
+"instancias de IA, como Anthropic, OpenRouter y Fireworks. ¡Las "
+"posibilidades son infinitas!"
 
 #: src/window.ui:1155
 msgid "Attachment Enhancement"
-msgstr ""
+msgstr "Mejora de Archivos Adjuntos"
 
 #: src/window.ui:1156
 msgid ""
@@ -4217,6 +4257,10 @@ msgid ""
 "you'll see it with rich text styling, making it easier to understand the "
 "content before you send it."
 msgstr ""
+"Ahora puedes adjuntar y hacer preguntas sobre más tipos de archivos, como "
+".docx, .pptx y .xlsx. Además, al previsualizar un archivo adjunto, lo "
+"verás con texto enriquecido, lo que facilita la comprensión del contenido "
+"antes de enviarlo."
 
 #: src/window.ui:1177
 msgid "Quick ask dialog"
@@ -4256,7 +4300,7 @@ msgstr "Importar chat"
 
 #: src/window.ui:1306
 msgid "Manage Tools"
-msgstr ""
+msgstr "Gestionar Herramientas"
 
 #: src/window.ui:1316
 msgid "Keyboard Shortcuts"
@@ -4300,7 +4344,7 @@ msgstr "Enviar Como Sistema"
 
 #: src/window.ui:1396 src/gtk/help-overlay.ui:127
 msgid "Use Tools"
-msgstr ""
+msgstr "Usar Herramientas"
 
 #: src/window.ui:1408
 msgid "Attach Website"
@@ -4425,7 +4469,7 @@ msgstr ""
 
 #: src/gtk/help-overlay.ui:128
 msgid "Ask model to use tools to generate a message"
-msgstr ""
+msgstr "Pidele al modelo que utilice herramientas para generar un mensaje"
 
 #: src/gtk/help-overlay.ui:134
 msgid "Send Message as User"
@@ -4685,7 +4729,7 @@ msgstr "Incrustación"
 
 #: src/custom_widgets/model_manager_widget.py:480
 msgid "Tools"
-msgstr ""
+msgstr "Herramientas"
 
 #: src/custom_widgets/model_manager_widget.py:481
 msgid "Small"
