@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alpaca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-08 18:25-0600\n"
+"POT-Creation-Date: 2025-04-09 00:46-0600\n"
 "PO-Revision-Date: 2025-02-24 12:04+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
@@ -2071,7 +2071,7 @@ msgstr "წავშალო ჩატი?"
 msgid "Are you sure you want to delete '{}'?"
 msgstr "მართლა გნებავთ, წაშალოთ '{}'?"
 
-#: src/window.py:945 src/window.py:1366
+#: src/window.py:945 src/window.py:1365
 msgid "Delete"
 msgstr "წაშლა"
 
@@ -2111,7 +2111,7 @@ msgstr "JSON"
 msgid "JSON (Include Metadata)"
 msgstr "JSON (მეტამონაცემების ჩათვლით)"
 
-#: src/window.py:968 src/window.ui:1336 src/window.ui:1374
+#: src/window.py:968 src/window.ui:1338 src/window.ui:1372
 msgid "Export Chat"
 msgstr "ჩატის გატანა"
 
@@ -2141,7 +2141,7 @@ msgstr ""
 msgid "Error attaching video, please try again"
 msgstr "ვიდეოს მიმაგრების შეცდომა. თავიდან სცადეთ"
 
-#: src/window.py:1020 src/window.py:1360
+#: src/window.py:1020 src/window.py:1359
 msgid "Attach Website? (Experimental)"
 msgstr "მივამაგრო ვებგვერდი? (ექსპერიმენტული)"
 
@@ -2153,7 +2153,7 @@ msgstr ""
 "მართლა გნებავთ, მიამაგროთ\n"
 "'{}'?"
 
-#: src/window.py:1039 src/window.py:1051 src/window.py:1359
+#: src/window.py:1039 src/window.py:1051 src/window.py:1358
 #: src/generic_actions.py:105
 msgid "Image recognition is only available on specific models"
 msgstr ""
@@ -2174,61 +2174,49 @@ msgstr ""
 msgid "Attach Screenshot"
 msgstr "ეკრანის ანაბეჭდის მიმაგრება"
 
-#: src/window.py:1344
-msgid "Clear Chat?"
-msgstr "გავასუფთაო ჩატი?"
-
-#: src/window.py:1344
-msgid "Are you sure you want to clear the chat?"
-msgstr "მართლა გნებავთ ჩატის გასუფთავება?"
-
-#: src/window.py:1344
-msgid "Clear"
-msgstr "გასუფთავება"
-
-#: src/window.py:1360
+#: src/window.py:1359
 msgid "Please enter a website URL"
 msgstr "შეიყვანეთ ვებგვერდის ბმული"
 
-#: src/window.py:1361
+#: src/window.py:1360
 msgid "Attach YouTube Captions?"
 msgstr "მივამაგრო YouTube-ის წარწერები?"
 
-#: src/window.py:1361
+#: src/window.py:1360
 msgid "Please enter a YouTube video URL"
 msgstr "შეიყვანეთ YouTube-ის ვიდეოს ბმული"
 
-#: src/window.py:1364
+#: src/window.py:1363
 msgid "Download Model?"
 msgstr "გადმოვწერო მოდელი?"
 
-#: src/window.py:1364
+#: src/window.py:1363
 msgid "Please enter the model name following this template: name:tag"
 msgstr ""
 
-#: src/window.py:1366
+#: src/window.py:1365
 msgid "Delete All Chats?"
 msgstr ""
 
-#: src/window.py:1366
+#: src/window.py:1365
 msgid "Are you sure you want to delete all chats?"
 msgstr ""
 
-#: src/window.py:1376
+#: src/window.py:1375
 msgid "Remove Attachment?"
 msgstr "წავშალო მიმაგრებული ფაილი?"
 
-#: src/window.py:1376
+#: src/window.py:1375
 msgid "Are you sure you want to remove attachment?"
 msgstr "მართლა გნებავთ მიმაგრებული ფაილის წაშლა?"
 
-#: src/window.py:1376 src/instance_manager.py:860
+#: src/window.py:1375 src/instance_manager.py:860
 #: src/custom_widgets/model_manager_widget.py:423
 #: src/custom_widgets/model_manager_widget.py:463
 msgid "Remove"
 msgstr "წაშლა"
 
-#: src/window.py:1391
+#: src/window.py:1390
 msgid "Already Installed!"
 msgstr ""
 
@@ -3480,7 +3468,7 @@ msgstr "გვერდითი პანელის ჩვენების 
 msgid "Search Messages"
 msgstr "შეტყობინებების ძებნა"
 
-#: src/window.ui:212 src/window.ui:237 src/window.ui:1302
+#: src/window.ui:212 src/window.ui:237 src/window.ui:1304
 msgid "Manage Models"
 msgstr "მოდელების მართვა"
 
@@ -3505,7 +3493,7 @@ msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr ""
 
-#: src/window.ui:337 src/window.ui:1404
+#: src/window.ui:337 src/window.ui:1402
 msgid "Attach File"
 msgstr "ფაილის მიმაგრება"
 
@@ -3595,7 +3583,7 @@ msgid ""
 "instance to get started!"
 msgstr ""
 
-#: src/window.ui:683 src/window.ui:693 src/window.ui:1298
+#: src/window.ui:683 src/window.ui:693 src/window.ui:1300
 msgid "Manage Instances"
 msgstr "გაშვებული ასლების მართვა"
 
@@ -3684,7 +3672,7 @@ msgstr ""
 msgid "Add Model"
 msgstr "მოდელის დამატება"
 
-#: src/window.ui:1021 src/window.ui:1312
+#: src/window.ui:1021 src/window.ui:1314
 msgid "Preferences"
 msgstr "მორგება"
 
@@ -3805,79 +3793,75 @@ msgstr "ტერმინალის დიალოგი"
 msgid "Terminal"
 msgstr "ტერმინალი"
 
-#: src/window.ui:1219
+#: src/window.ui:1221
 msgid "Open Environment Directory"
 msgstr "გარემოს საქაღალდის გახსნა"
 
-#: src/window.ui:1240
+#: src/window.ui:1242
 msgid "File preview dialog"
 msgstr "ფაილის გადახედვის დიალოგი"
 
-#: src/window.ui:1251
+#: src/window.ui:1253
 msgid "Open With Default App"
 msgstr "ნაგულისხმევი პროგრამით გახსნა"
 
-#: src/window.ui:1259
+#: src/window.ui:1261
 msgid "Remove Attachment"
 msgstr "მიმაგრებულის წაშლა"
 
-#: src/window.ui:1294
+#: src/window.ui:1296
 msgid "Import Chat"
 msgstr "ჩატის შემოტანა"
 
-#: src/window.ui:1306
+#: src/window.ui:1308
 msgid "Manage Tools"
 msgstr ""
 
-#: src/window.ui:1316
+#: src/window.ui:1318
 msgid "Keyboard Shortcuts"
 msgstr "კლავიატურის მალსახმობები"
 
-#: src/window.ui:1320
+#: src/window.ui:1322
 msgid "About Alpaca"
 msgstr "Alpaca-ის შესახებ"
 
-#: src/window.ui:1328 src/window.ui:1366
+#: src/window.ui:1330 src/window.ui:1364
 msgid "Rename Chat"
 msgstr "ჩატის სახელის გადარქმევა"
 
-#: src/window.ui:1332 src/window.ui:1370
+#: src/window.ui:1334 src/window.ui:1368
 msgid "Duplicate Chat"
 msgstr "ჩატის დუბლირება"
 
-#: src/window.ui:1340
-msgid "Clear Chat"
-msgstr "ჩატის გასუფთავება"
-
-#: src/window.ui:1346 src/window.ui:1380
+#: src/window.ui:1344 src/window.ui:1378
 msgid "Delete Chat"
 msgstr "საუბრის წაშლა"
 
-#: src/window.ui:1354
+#: src/window.ui:1352
 msgid "Reload Added Models"
 msgstr "დამატებული მოდელების თავიდან ჩატვირთვა"
 
-#: src/window.ui:1358
+#: src/window.ui:1356
 msgid "Download Model From Name"
 msgstr "მოდელის გადმოწერა სახელიდან"
 
-#: src/window.ui:1388
+#: src/window.ui:1386
 msgid "Send as User"
 msgstr "გაგზავნა მომხმარებლის სახელით"
 
-#: src/window.ui:1392
+#: src/window.ui:1390
 msgid "Send as System"
 msgstr "გაგზავნა სისტემის სახელით"
 
-#: src/window.ui:1396 src/gtk/help-overlay.ui:127
+#: src/window.ui:1394 src/gtk/help-overlay.ui:127
 msgid "Use Tools"
 msgstr ""
 
-#: src/window.ui:1408
+#: src/window.ui:1406
 msgid "Attach Website"
 msgstr "ვებგვერდის მიმაგრება"
 
-#: src/window.ui:1412
+#: src/window.ui:1410
 msgid "Attach YouTube Captions"
 msgstr "YouTube-ის წარწერების მიმაგრება"
 
@@ -4021,7 +4005,7 @@ msgid "User"
 msgstr "მომხმარებელი"
 
 #: src/custom_widgets/chat_widget.py:200
-#: src/custom_widgets/message_widget.py:623
+#: src/custom_widgets/message_widget.py:629
 msgid "System"
 msgstr "სისტემა"
 
@@ -4067,7 +4051,7 @@ msgid "Code Block"
 msgstr "კოდის ბლოკი"
 
 #: src/custom_widgets/message_widget.py:221
-#: src/custom_widgets/message_widget.py:523
+#: src/custom_widgets/message_widget.py:529
 msgid "Copy Message"
 msgstr "შეტყობინების კოპირება"
 
@@ -4108,35 +4092,35 @@ msgstr "ნაკლული გამოსახულება"
 msgid "Missing image"
 msgstr "ნაკლული გამოსახულება"
 
-#: src/custom_widgets/message_widget.py:486
+#: src/custom_widgets/message_widget.py:492
 msgid "Copy Equation"
 msgstr "ტოლობის კოპირება"
 
-#: src/custom_widgets/message_widget.py:493
+#: src/custom_widgets/message_widget.py:499
 msgid "Equation copied to the clipboard"
 msgstr "ტოლობა დაკოპირდა გაცვლის ბუფერში"
 
-#: src/custom_widgets/message_widget.py:513
+#: src/custom_widgets/message_widget.py:519
 msgid "Remove Message"
 msgstr "შეტყობინების წაშლა"
 
-#: src/custom_widgets/message_widget.py:533
+#: src/custom_widgets/message_widget.py:539
 msgid "Edit Message"
 msgstr "შეტყობინების შეცვლა"
 
-#: src/custom_widgets/message_widget.py:544
+#: src/custom_widgets/message_widget.py:550
 msgid "Regenerate Message"
 msgstr "შეტყობინების თავიდან გენერაცია"
 
-#: src/custom_widgets/message_widget.py:563
+#: src/custom_widgets/message_widget.py:569
 msgid "Message copied to the clipboard"
 msgstr "შეტყობინება დაკოპირდა გაცვლის ბუფერში"
 
-#: src/custom_widgets/message_widget.py:591
+#: src/custom_widgets/message_widget.py:597
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "პასუხის მიღებისას შეტყობინებას თავიდან ვერ დააგენერირებთ"
 
-#: src/custom_widgets/message_widget.py:900
+#: src/custom_widgets/message_widget.py:906
 msgid "Thought"
 msgstr "ფიქრი"
 
@@ -4298,9 +4282,25 @@ msgstr "გაშვებულია ლოკალური ვებსე�
 msgid "Using Flatpak contained shell"
 msgstr "გამოიყენება Flatpak-ში არსებული გარსი"
 
+#: src/custom_widgets/terminal_widget.py:136
+msgid "Using SSH to run command"
+msgstr ""
+
 #: src/custom_widgets/terminal_widget.py:142
 msgid "Script Exited"
 msgstr ""
+
+#~ msgid "Clear Chat?"
+#~ msgstr "გავასუფთაო ჩატი?"
+
+#~ msgid "Are you sure you want to clear the chat?"
+#~ msgstr "მართლა გნებავთ ჩატის გასუფთავება?"
+
+#~ msgid "Clear"
+#~ msgstr "გასუფთავება"
+
+#~ msgid "Clear Chat"
+#~ msgstr "ჩატის გასუფთავება"
 
 #~ msgid "Regenerate Equation"
 #~ msgstr "ტოლობის თავიდან გენერაცია"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-08 18:25-0600\n"
+"POT-Creation-Date: 2025-04-09 00:46-0600\n"
 "PO-Revision-Date: 2024-08-25 11:55-0600\n"
 "Last-Translator: Simon Bezruchenko <worcposj@gmail.com>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -2137,7 +2137,7 @@ msgstr "Видалити чат?"
 msgid "Are you sure you want to delete '{}'?"
 msgstr "Ви впевнені, що хочете видалити '{}'?"
 
-#: src/window.py:945 src/window.py:1366
+#: src/window.py:945 src/window.py:1365
 msgid "Delete"
 msgstr "Видалити"
 
@@ -2177,7 +2177,7 @@ msgstr "JSON"
 msgid "JSON (Include Metadata)"
 msgstr "JSON (Включити метадані)"
 
-#: src/window.py:968 src/window.ui:1336 src/window.ui:1374
+#: src/window.py:968 src/window.ui:1338 src/window.ui:1372
 msgid "Export Chat"
 msgstr "Експортувати чат"
 
@@ -2207,7 +2207,7 @@ msgstr ""
 msgid "Error attaching video, please try again"
 msgstr "Помилка при додаванні відео, будь ласка, спробуйте ще раз"
 
-#: src/window.py:1020 src/window.py:1360
+#: src/window.py:1020 src/window.py:1359
 msgid "Attach Website? (Experimental)"
 msgstr "Прикріпити вебсайт? (Експериментально)"
 
@@ -2219,7 +2219,7 @@ msgstr ""
 "Ви впевнені, що хочете прикріпити\n"
 "'{}'?"
 
-#: src/window.py:1039 src/window.py:1051 src/window.py:1359
+#: src/window.py:1039 src/window.py:1051 src/window.py:1358
 #: src/generic_actions.py:105
 msgid "Image recognition is only available on specific models"
 msgstr "Розпізнавання зображень доступне лише для певних моделей"
@@ -2240,61 +2240,49 @@ msgstr "Будь-яке сумісне прикріплення Alpaca"
 msgid "Attach Screenshot"
 msgstr "Прикріпити скріншот"
 
-#: src/window.py:1344
-msgid "Clear Chat?"
-msgstr "Очистити чат?"
-
-#: src/window.py:1344
-msgid "Are you sure you want to clear the chat?"
-msgstr "Ви впевнені, що хочете очистити чат?"
-
-#: src/window.py:1344
-msgid "Clear"
-msgstr "Очистити"
-
-#: src/window.py:1360
+#: src/window.py:1359
 msgid "Please enter a website URL"
 msgstr "Будь ласка, введіть URL вебсайту"
 
-#: src/window.py:1361
+#: src/window.py:1360
 msgid "Attach YouTube Captions?"
 msgstr "Прикріпити субтитри YouTube?"
 
-#: src/window.py:1361
+#: src/window.py:1360
 msgid "Please enter a YouTube video URL"
 msgstr "Будь ласка, введіть URL відео YouTube"
 
-#: src/window.py:1364
+#: src/window.py:1363
 msgid "Download Model?"
 msgstr "Завантажити модель?"
 
-#: src/window.py:1364
+#: src/window.py:1363
 msgid "Please enter the model name following this template: name:tag"
 msgstr "Будь ласка, введіть ім'я моделі, дотримуючись цього шаблону: name:tag"
 
-#: src/window.py:1366
+#: src/window.py:1365
 msgid "Delete All Chats?"
 msgstr "Видалити всі чати?"
 
-#: src/window.py:1366
+#: src/window.py:1365
 msgid "Are you sure you want to delete all chats?"
 msgstr "Ви впевнені, що хочете видалити всі чати?"
 
-#: src/window.py:1376
+#: src/window.py:1375
 msgid "Remove Attachment?"
 msgstr "Видалити вкладення?"
 
-#: src/window.py:1376
+#: src/window.py:1375
 msgid "Are you sure you want to remove attachment?"
 msgstr "Ви впевнені, що хочете видалити вкладення?"
 
-#: src/window.py:1376 src/instance_manager.py:860
+#: src/window.py:1375 src/instance_manager.py:860
 #: src/custom_widgets/model_manager_widget.py:423
 #: src/custom_widgets/model_manager_widget.py:463
 msgid "Remove"
 msgstr "Видалити"
 
-#: src/window.py:1391
+#: src/window.py:1390
 msgid "Already Installed!"
 msgstr "Вже встановлено!"
 
@@ -3866,7 +3854,7 @@ msgstr "Перемкнути бічну панель"
 msgid "Search Messages"
 msgstr "Пошук повідомлень"
 
-#: src/window.ui:212 src/window.ui:237 src/window.ui:1302
+#: src/window.ui:212 src/window.ui:237 src/window.ui:1304
 msgid "Manage Models"
 msgstr "Управління моделями"
 
@@ -3892,7 +3880,7 @@ msgid ""
 msgstr ""
 "Увага: Увімкнено режим енергозбереження, це уповільнить генерацію повідомлень"
 
-#: src/window.ui:337 src/window.ui:1404
+#: src/window.ui:337 src/window.ui:1402
 msgid "Attach File"
 msgstr "Прикріпити файл"
 
@@ -3988,7 +3976,7 @@ msgstr ""
 "Тут виглядає порожньо. Спробуйте завантажити кілька моделей або змініть "
 "екземпляр ШІ,щоб розпочати!"
 
-#: src/window.ui:683 src/window.ui:693 src/window.ui:1298
+#: src/window.ui:683 src/window.ui:693 src/window.ui:1300
 msgid "Manage Instances"
 msgstr "Керувати екземплярами"
 
@@ -4079,7 +4067,7 @@ msgstr "Більше значення розширює кількість мож
 msgid "Add Model"
 msgstr "Додати модель"
 
-#: src/window.ui:1021 src/window.ui:1312
+#: src/window.ui:1021 src/window.ui:1314
 msgid "Preferences"
 msgstr "Налаштування"
 
@@ -4200,79 +4188,75 @@ msgstr "Діалог терміналу"
 msgid "Terminal"
 msgstr "Термінал"
 
-#: src/window.ui:1219
+#: src/window.ui:1221
 msgid "Open Environment Directory"
 msgstr "Відкрити каталог середовища"
 
-#: src/window.ui:1240
+#: src/window.ui:1242
 msgid "File preview dialog"
 msgstr "Діалог попереднього перегляду файлу"
 
-#: src/window.ui:1251
+#: src/window.ui:1253
 msgid "Open With Default App"
 msgstr "Відкрити за допомогою програми за замовчуванням"
 
-#: src/window.ui:1259
+#: src/window.ui:1261
 msgid "Remove Attachment"
 msgstr "Видалити вкладення"
 
-#: src/window.ui:1294
+#: src/window.ui:1296
 msgid "Import Chat"
 msgstr "Імпорт чату"
 
-#: src/window.ui:1306
+#: src/window.ui:1308
 msgid "Manage Tools"
 msgstr ""
 
-#: src/window.ui:1316
+#: src/window.ui:1318
 msgid "Keyboard Shortcuts"
 msgstr "Гарячі клавіші"
 
-#: src/window.ui:1320
+#: src/window.ui:1322
 msgid "About Alpaca"
 msgstr "Про Alpaca"
 
-#: src/window.ui:1328 src/window.ui:1366
+#: src/window.ui:1330 src/window.ui:1364
 msgid "Rename Chat"
 msgstr "Перейменувати чат"
 
-#: src/window.ui:1332 src/window.ui:1370
+#: src/window.ui:1334 src/window.ui:1368
 msgid "Duplicate Chat"
 msgstr "Дублювати чат"
 
-#: src/window.ui:1340
-msgid "Clear Chat"
-msgstr "Очистити чат"
-
-#: src/window.ui:1346 src/window.ui:1380
+#: src/window.ui:1344 src/window.ui:1378
 msgid "Delete Chat"
 msgstr "Видалити чат"
 
-#: src/window.ui:1354
+#: src/window.ui:1352
 msgid "Reload Added Models"
 msgstr "Перезавантажити додані моделі"
 
-#: src/window.ui:1358
+#: src/window.ui:1356
 msgid "Download Model From Name"
 msgstr "Завантажити модель за назвою"
 
-#: src/window.ui:1388
+#: src/window.ui:1386
 msgid "Send as User"
 msgstr "Надіслати як користувач"
 
-#: src/window.ui:1392
+#: src/window.ui:1390
 msgid "Send as System"
 msgstr "Надіслати як система"
 
-#: src/window.ui:1396 src/gtk/help-overlay.ui:127
+#: src/window.ui:1394 src/gtk/help-overlay.ui:127
 msgid "Use Tools"
 msgstr ""
 
-#: src/window.ui:1408
+#: src/window.ui:1406
 msgid "Attach Website"
 msgstr "Прикріпити вебсайт"
 
-#: src/window.ui:1412
+#: src/window.ui:1410
 msgid "Attach YouTube Captions"
 msgstr "Прикріпити субтитри YouTube"
 
@@ -4416,7 +4400,7 @@ msgid "User"
 msgstr "Користувач"
 
 #: src/custom_widgets/chat_widget.py:200
-#: src/custom_widgets/message_widget.py:623
+#: src/custom_widgets/message_widget.py:629
 msgid "System"
 msgstr "Система"
 
@@ -4462,7 +4446,7 @@ msgid "Code Block"
 msgstr "Блок коду"
 
 #: src/custom_widgets/message_widget.py:221
-#: src/custom_widgets/message_widget.py:523
+#: src/custom_widgets/message_widget.py:529
 msgid "Copy Message"
 msgstr "Копіювати повідомлення"
 
@@ -4506,35 +4490,35 @@ msgstr "Відсутнє зображення"
 msgid "Missing image"
 msgstr "Відсутнє зображення"
 
-#: src/custom_widgets/message_widget.py:486
+#: src/custom_widgets/message_widget.py:492
 msgid "Copy Equation"
 msgstr "Копіювати рівняння"
 
-#: src/custom_widgets/message_widget.py:493
+#: src/custom_widgets/message_widget.py:499
 msgid "Equation copied to the clipboard"
 msgstr "Рівняння скопійовано в буфер обміну"
 
-#: src/custom_widgets/message_widget.py:513
+#: src/custom_widgets/message_widget.py:519
 msgid "Remove Message"
 msgstr "Видалити повідомлення"
 
-#: src/custom_widgets/message_widget.py:533
+#: src/custom_widgets/message_widget.py:539
 msgid "Edit Message"
 msgstr "Редагувати повідомлення"
 
-#: src/custom_widgets/message_widget.py:544
+#: src/custom_widgets/message_widget.py:550
 msgid "Regenerate Message"
 msgstr "Перегенерувати повідомлення"
 
-#: src/custom_widgets/message_widget.py:563
+#: src/custom_widgets/message_widget.py:569
 msgid "Message copied to the clipboard"
 msgstr "Повідомлення скопійоване в буфер обміну"
 
-#: src/custom_widgets/message_widget.py:591
+#: src/custom_widgets/message_widget.py:597
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "Повідомлення не може бути перегенероване під час отримання відповіді"
 
-#: src/custom_widgets/message_widget.py:900
+#: src/custom_widgets/message_widget.py:906
 msgid "Thought"
 msgstr "Думка"
 
@@ -4698,9 +4682,25 @@ msgstr "Запуск локального веб-сервера"
 msgid "Using Flatpak contained shell"
 msgstr "Використовуємо оболонку, що міститься в Flatpak"
 
+#: src/custom_widgets/terminal_widget.py:136
+msgid "Using SSH to run command"
+msgstr ""
+
 #: src/custom_widgets/terminal_widget.py:142
 msgid "Script Exited"
 msgstr "Скрипт завершив роботу"
+
+#~ msgid "Clear Chat?"
+#~ msgstr "Очистити чат?"
+
+#~ msgid "Are you sure you want to clear the chat?"
+#~ msgstr "Ви впевнені, що хочете очистити чат?"
+
+#~ msgid "Clear"
+#~ msgstr "Очистити"
+
+#~ msgid "Clear Chat"
+#~ msgstr "Очистити чат"
 
 #~ msgid "Removal of Ollama"
 #~ msgstr "Видалення Ollama"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-08 18:25-0600\n"
+"POT-Creation-Date: 2025-04-09 00:46-0600\n"
 "PO-Revision-Date: 2025-02-22 08:50+0000\n"
 "Last-Translator: Edoardo Brogiolo <edoardo@brogiolo.eu>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -2188,7 +2188,7 @@ msgstr "Eliminare la chat?"
 msgid "Are you sure you want to delete '{}'?"
 msgstr "Sei dicuro di voler eliminare '{}'?"
 
-#: src/window.py:945 src/window.py:1366
+#: src/window.py:945 src/window.py:1365
 msgid "Delete"
 msgstr "Elimina"
 
@@ -2228,7 +2228,7 @@ msgstr "JSON"
 msgid "JSON (Include Metadata)"
 msgstr "JSON (inclusi i metadati)"
 
-#: src/window.py:968 src/window.ui:1336 src/window.ui:1374
+#: src/window.py:968 src/window.ui:1338 src/window.ui:1372
 msgid "Export Chat"
 msgstr "Esporta la chat"
 
@@ -2258,7 +2258,7 @@ msgstr ""
 msgid "Error attaching video, please try again"
 msgstr "Errore nell'allegare il video, riprova"
 
-#: src/window.py:1020 src/window.py:1360
+#: src/window.py:1020 src/window.py:1359
 msgid "Attach Website? (Experimental)"
 msgstr "Allegare un sito web? (Sperimentale)"
 
@@ -2270,7 +2270,7 @@ msgstr ""
 "Sei sicuro di voler allegare\n"
 "'{}'?"
 
-#: src/window.py:1039 src/window.py:1051 src/window.py:1359
+#: src/window.py:1039 src/window.py:1051 src/window.py:1358
 #: src/generic_actions.py:105
 msgid "Image recognition is only available on specific models"
 msgstr ""
@@ -2292,61 +2292,49 @@ msgstr "Qualsiasi allegato compatibile con Alpaca"
 msgid "Attach Screenshot"
 msgstr "Allega uno screenshot"
 
-#: src/window.py:1344
-msgid "Clear Chat?"
-msgstr "Cancellare la chat?"
-
-#: src/window.py:1344
-msgid "Are you sure you want to clear the chat?"
-msgstr "Sei sicuro di voler cancellare la chat?"
-
-#: src/window.py:1344
-msgid "Clear"
-msgstr "Cancella"
-
-#: src/window.py:1360
+#: src/window.py:1359
 msgid "Please enter a website URL"
 msgstr "Inserisci l'URL di un sito web"
 
-#: src/window.py:1361
+#: src/window.py:1360
 msgid "Attach YouTube Captions?"
 msgstr "Allegare i sottotitoli di YouTube?"
 
-#: src/window.py:1361
+#: src/window.py:1360
 msgid "Please enter a YouTube video URL"
 msgstr "Inserisci l'URL di un video di YouTube"
 
-#: src/window.py:1364
+#: src/window.py:1363
 msgid "Download Model?"
 msgstr "Scaricare il modello?"
 
-#: src/window.py:1364
+#: src/window.py:1363
 msgid "Please enter the model name following this template: name:tag"
 msgstr "Inserisci il nome del modello seguendo in questo formato: name:tag"
 
-#: src/window.py:1366
+#: src/window.py:1365
 msgid "Delete All Chats?"
 msgstr ""
 
-#: src/window.py:1366
+#: src/window.py:1365
 msgid "Are you sure you want to delete all chats?"
 msgstr ""
 
-#: src/window.py:1376
+#: src/window.py:1375
 msgid "Remove Attachment?"
 msgstr "Rimuovere l'allegato?"
 
-#: src/window.py:1376
+#: src/window.py:1375
 msgid "Are you sure you want to remove attachment?"
 msgstr "Sei sicuro di voler rimuovere l'allegato?"
 
-#: src/window.py:1376 src/instance_manager.py:860
+#: src/window.py:1375 src/instance_manager.py:860
 #: src/custom_widgets/model_manager_widget.py:423
 #: src/custom_widgets/model_manager_widget.py:463
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: src/window.py:1391
+#: src/window.py:1390
 msgid "Already Installed!"
 msgstr ""
 
@@ -3919,7 +3907,7 @@ msgstr "Mostra o nascondi la barra laterale"
 msgid "Search Messages"
 msgstr "Cerca fra i messaggi"
 
-#: src/window.ui:212 src/window.ui:237 src/window.ui:1302
+#: src/window.ui:212 src/window.ui:237 src/window.ui:1304
 msgid "Manage Models"
 msgstr "Gestisci i modelli"
 
@@ -3946,7 +3934,7 @@ msgstr ""
 "Attenzione: La modalità risparmio energetico è attiva, questo rallenterà la "
 "generazione dei messaggi"
 
-#: src/window.ui:337 src/window.ui:1404
+#: src/window.ui:337 src/window.ui:1402
 msgid "Attach File"
 msgstr "Allega file"
 
@@ -4040,7 +4028,7 @@ msgstr ""
 "Sembra un po' vuoto qui. Prova a scaricare alcuni modelli o a cambiare "
 "l'istanza dell'IA per cominciare!"
 
-#: src/window.ui:683 src/window.ui:693 src/window.ui:1298
+#: src/window.ui:683 src/window.ui:693 src/window.ui:1300
 msgid "Manage Instances"
 msgstr "Gestisci le istanze"
 
@@ -4134,7 +4122,7 @@ msgstr "Un numero più alto amplia il numero di risposte possibili. (top_p)"
 msgid "Add Model"
 msgstr "Aggiungi un modello"
 
-#: src/window.ui:1021 src/window.ui:1312
+#: src/window.ui:1021 src/window.ui:1314
 msgid "Preferences"
 msgstr "Preferenze"
 
@@ -4255,79 +4243,75 @@ msgstr "Finestra di dialogo del terminale"
 msgid "Terminal"
 msgstr "Terminale"
 
-#: src/window.ui:1219
+#: src/window.ui:1221
 msgid "Open Environment Directory"
 msgstr "Apri la cartella dell'ambiente"
 
-#: src/window.ui:1240
+#: src/window.ui:1242
 msgid "File preview dialog"
 msgstr "Finestra di dialogo per l'anteprima del file"
 
-#: src/window.ui:1251
+#: src/window.ui:1253
 msgid "Open With Default App"
 msgstr "Aprire con l'app predefinita"
 
-#: src/window.ui:1259
+#: src/window.ui:1261
 msgid "Remove Attachment"
 msgstr "Rimouvi l'allegato"
 
-#: src/window.ui:1294
+#: src/window.ui:1296
 msgid "Import Chat"
 msgstr "Importa delle chat"
 
-#: src/window.ui:1306
+#: src/window.ui:1308
 msgid "Manage Tools"
 msgstr ""
 
-#: src/window.ui:1316
+#: src/window.ui:1318
 msgid "Keyboard Shortcuts"
 msgstr "Scorciatoie da tastiera"
 
-#: src/window.ui:1320
+#: src/window.ui:1322
 msgid "About Alpaca"
 msgstr "Informazioni su Alpaca"
 
-#: src/window.ui:1328 src/window.ui:1366
+#: src/window.ui:1330 src/window.ui:1364
 msgid "Rename Chat"
 msgstr "Rinomina la chat"
 
-#: src/window.ui:1332 src/window.ui:1370
+#: src/window.ui:1334 src/window.ui:1368
 msgid "Duplicate Chat"
 msgstr "Duplica la chat"
 
-#: src/window.ui:1340
-msgid "Clear Chat"
-msgstr "Cancella la chat"
-
-#: src/window.ui:1346 src/window.ui:1380
+#: src/window.ui:1344 src/window.ui:1378
 msgid "Delete Chat"
 msgstr "Elimina la chat"
 
-#: src/window.ui:1354
+#: src/window.ui:1352
 msgid "Reload Added Models"
 msgstr "Ricarica i modelli aggiunti"
 
-#: src/window.ui:1358
+#: src/window.ui:1356
 msgid "Download Model From Name"
 msgstr "Scarica il modello per nome"
 
-#: src/window.ui:1388
+#: src/window.ui:1386
 msgid "Send as User"
 msgstr "Manda come utente"
 
-#: src/window.ui:1392
+#: src/window.ui:1390
 msgid "Send as System"
 msgstr "Manda come sistema"
 
-#: src/window.ui:1396 src/gtk/help-overlay.ui:127
+#: src/window.ui:1394 src/gtk/help-overlay.ui:127
 msgid "Use Tools"
 msgstr ""
 
-#: src/window.ui:1408
+#: src/window.ui:1406
 msgid "Attach Website"
 msgstr "Allega un sito web"
 
-#: src/window.ui:1412
+#: src/window.ui:1410
 msgid "Attach YouTube Captions"
 msgstr "Allega i sottotitoli di YouTube"
 
@@ -4473,7 +4457,7 @@ msgid "User"
 msgstr "Utente"
 
 #: src/custom_widgets/chat_widget.py:200
-#: src/custom_widgets/message_widget.py:623
+#: src/custom_widgets/message_widget.py:629
 msgid "System"
 msgstr "Sistema"
 
@@ -4519,7 +4503,7 @@ msgid "Code Block"
 msgstr "Blocco di codice"
 
 #: src/custom_widgets/message_widget.py:221
-#: src/custom_widgets/message_widget.py:523
+#: src/custom_widgets/message_widget.py:529
 msgid "Copy Message"
 msgstr "Copia il messaggio"
 
@@ -4563,35 +4547,35 @@ msgstr "Immagine mancante"
 msgid "Missing image"
 msgstr "Immagine mancante"
 
-#: src/custom_widgets/message_widget.py:486
+#: src/custom_widgets/message_widget.py:492
 msgid "Copy Equation"
 msgstr "Copia l'equazione"
 
-#: src/custom_widgets/message_widget.py:493
+#: src/custom_widgets/message_widget.py:499
 msgid "Equation copied to the clipboard"
 msgstr "Equazione copiata negli appunti"
 
-#: src/custom_widgets/message_widget.py:513
+#: src/custom_widgets/message_widget.py:519
 msgid "Remove Message"
 msgstr "Rimuovi il messaggio"
 
-#: src/custom_widgets/message_widget.py:533
+#: src/custom_widgets/message_widget.py:539
 msgid "Edit Message"
 msgstr "Modifica il messaggio"
 
-#: src/custom_widgets/message_widget.py:544
+#: src/custom_widgets/message_widget.py:550
 msgid "Regenerate Message"
 msgstr "Rigenera il messaggio"
 
-#: src/custom_widgets/message_widget.py:563
+#: src/custom_widgets/message_widget.py:569
 msgid "Message copied to the clipboard"
 msgstr "Messaggio copiato negli appunti"
 
-#: src/custom_widgets/message_widget.py:591
+#: src/custom_widgets/message_widget.py:597
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "Il messaggio non può essere rigenerato mentre si riceve una risposta"
 
-#: src/custom_widgets/message_widget.py:900
+#: src/custom_widgets/message_widget.py:906
 msgid "Thought"
 msgstr "Ragionamento"
 
@@ -4755,9 +4739,25 @@ msgstr "Esecuzione del web server locale"
 msgid "Using Flatpak contained shell"
 msgstr "Si sta utilizzando la shell containerizzata in Flatpak"
 
+#: src/custom_widgets/terminal_widget.py:136
+msgid "Using SSH to run command"
+msgstr ""
+
 #: src/custom_widgets/terminal_widget.py:142
 msgid "Script Exited"
 msgstr ""
+
+#~ msgid "Clear Chat?"
+#~ msgstr "Cancellare la chat?"
+
+#~ msgid "Are you sure you want to clear the chat?"
+#~ msgstr "Sei sicuro di voler cancellare la chat?"
+
+#~ msgid "Clear"
+#~ msgstr "Cancella"
+
+#~ msgid "Clear Chat"
+#~ msgstr "Cancella la chat"
 
 #~ msgid "Regenerate Equation"
 #~ msgstr "Rigenera l'equazione"

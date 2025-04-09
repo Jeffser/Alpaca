@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-08 18:25-0600\n"
+"POT-Creation-Date: 2025-04-09 00:46-0600\n"
 "PO-Revision-Date: 2024-05-19 19:44-0600\n"
 "Last-Translator: Jeffry Samuel Eduarte Rojas <jeffrysamuer@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -286,18 +286,21 @@ msgstr "Arreglos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:130
 msgid "Fixed welcome screen not showing sometimes when deleting a message"
-msgstr "Se solucionó el problema de que la pantalla de bienvenida fija no se "
+msgstr ""
+"Se solucionó el problema de que la pantalla de bienvenida fija no se "
 "mostraba a veces al eliminar un mensaje."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:131
 msgid "Fixed bold text not rendering correctly in tables"
-msgstr "Se solucionó el problema del texto en negrita que no se representaba "
+msgstr ""
+"Se solucionó el problema del texto en negrita que no se representaba "
 "correctamente en las tablas."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:132
 msgid "Fixed sample prompt buttons overflowing on small screens"
-msgstr "Se corrigieron los botones de solicitud de muestra que se desbordaban "
-"en pantallas pequeñas"
+msgstr ""
+"Se corrigieron los botones de solicitud de muestra que se desbordaban en "
+"pantallas pequeñas"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:141
 msgid "Updated runtime to Gnome 48"
@@ -2150,7 +2153,7 @@ msgstr "¿Eliminar Chat?"
 msgid "Are you sure you want to delete '{}'?"
 msgstr "¿Estás seguro de que quieres eliminar '{}'?"
 
-#: src/window.py:945 src/window.py:1366
+#: src/window.py:945 src/window.py:1365
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -2190,7 +2193,7 @@ msgstr "JSON"
 msgid "JSON (Include Metadata)"
 msgstr "JSON (Incluir Metadata)"
 
-#: src/window.py:968 src/window.ui:1336 src/window.ui:1374
+#: src/window.py:968 src/window.ui:1338 src/window.ui:1372
 msgid "Export Chat"
 msgstr "Exportar chat"
 
@@ -2220,7 +2223,7 @@ msgstr ""
 msgid "Error attaching video, please try again"
 msgstr "Error adjuntando video, por favor intenta denuevo"
 
-#: src/window.py:1020 src/window.py:1360
+#: src/window.py:1020 src/window.py:1359
 msgid "Attach Website? (Experimental)"
 msgstr "¿Adjuntar Sitio Web? (Experimental)"
 
@@ -2232,7 +2235,7 @@ msgstr ""
 "¿Estás seguro de que quieres adjuntar\n"
 "'{}'?"
 
-#: src/window.py:1039 src/window.py:1051 src/window.py:1359
+#: src/window.py:1039 src/window.py:1051 src/window.py:1358
 #: src/generic_actions.py:105
 msgid "Image recognition is only available on specific models"
 msgstr ""
@@ -2254,63 +2257,51 @@ msgstr "Cualquier archivo compatible con Alpaca"
 msgid "Attach Screenshot"
 msgstr "Adjuntar Captura de Pantalla"
 
-#: src/window.py:1344
-msgid "Clear Chat?"
-msgstr "¿Limpiar Chat?"
-
-#: src/window.py:1344
-msgid "Are you sure you want to clear the chat?"
-msgstr "¿Estás seguro de que quieres limpiar el chat?"
-
-#: src/window.py:1344
-msgid "Clear"
-msgstr "Limpiar"
-
-#: src/window.py:1360
+#: src/window.py:1359
 msgid "Please enter a website URL"
 msgstr "Por favor, introduzca la URL de un sitio web"
 
-#: src/window.py:1361
+#: src/window.py:1360
 msgid "Attach YouTube Captions?"
 msgstr "¿Adjuntar subtítulos de YouTube?"
 
-#: src/window.py:1361
+#: src/window.py:1360
 msgid "Please enter a YouTube video URL"
 msgstr "Por favor, introduzca la URL de un vídeo de YouTube"
 
-#: src/window.py:1364
+#: src/window.py:1363
 msgid "Download Model?"
 msgstr "¿Descargar modelo?"
 
-#: src/window.py:1364
+#: src/window.py:1363
 msgid "Please enter the model name following this template: name:tag"
 msgstr ""
 "Por favor, introduzca el nombre del modelo siguiendo esta plantilla: "
 "nombre:etiqueta"
 
-#: src/window.py:1366
+#: src/window.py:1365
 msgid "Delete All Chats?"
 msgstr "¿Borrar Todos Los Chats?"
 
-#: src/window.py:1366
+#: src/window.py:1365
 msgid "Are you sure you want to delete all chats?"
 msgstr "¿Estás seguro de que quieres eliminar todos los chats?"
 
-#: src/window.py:1376
+#: src/window.py:1375
 msgid "Remove Attachment?"
 msgstr "¿Remover Adjunto?"
 
-#: src/window.py:1376
+#: src/window.py:1375
 msgid "Are you sure you want to remove attachment?"
 msgstr "¿Estás seguro de que quieres remover el adjunto?"
 
-#: src/window.py:1376 src/instance_manager.py:860
+#: src/window.py:1375 src/instance_manager.py:860
 #: src/custom_widgets/model_manager_widget.py:423
 #: src/custom_widgets/model_manager_widget.py:463
 msgid "Remove"
 msgstr "Remover"
 
-#: src/window.py:1391
+#: src/window.py:1390
 msgid "Already Installed!"
 msgstr "¡Ya instalado!"
 
@@ -3561,10 +3552,9 @@ msgid ""
 "including math and coding benchmarks, ranging from 2.4B to 32B parameters "
 "developed and released by LG AI Research."
 msgstr ""
-"EXAONE Deep exhibe capacidades superiores en varias tareas de "
-"razonamiento, incluidos puntos de referencia de matemáticas y "
-"codificación, que van desde 2.4B a 32B de parámetros desarrollados y "
-"publicados por LG AI Research."
+"EXAONE Deep exhibe capacidades superiores en varias tareas de razonamiento, "
+"incluidos puntos de referencia de matemáticas y codificación, que van desde "
+"2.4B a 32B de parámetros desarrollados y publicados por LG AI Research."
 
 #: src/available_models_descriptions.py:164
 msgid ""
@@ -3573,8 +3563,8 @@ msgid ""
 "tokens without compromising text performance."
 msgstr ""
 "Basado en Mistral Small 3, Mistral Small 3.1 (2503) agrega comprensión de "
-"visión de última generación y mejora las capacidades de contexto largo "
-"hasta 128k tokens sin comprometer el rendimiento del texto."
+"visión de última generación y mejora las capacidades de contexto largo hasta "
+"128k tokens sin comprometer el rendimiento del texto."
 
 #: src/available_models_descriptions.py:165
 msgid ""
@@ -3918,7 +3908,7 @@ msgstr "Alternar Barra Lateral"
 msgid "Search Messages"
 msgstr "Buscar Mensajes"
 
-#: src/window.ui:212 src/window.ui:237 src/window.ui:1302
+#: src/window.ui:212 src/window.ui:237 src/window.ui:1304
 msgid "Manage Models"
 msgstr "Gestionar Modelos"
 
@@ -3945,7 +3935,7 @@ msgstr ""
 "Advertencia: el modo de ahorro de energía está habilitado, esto ralentizará "
 "la generación de mensajes."
 
-#: src/window.ui:337 src/window.ui:1404
+#: src/window.ui:337 src/window.ui:1402
 msgid "Attach File"
 msgstr "Adjuntar Archivo"
 
@@ -4041,7 +4031,7 @@ msgstr ""
 "Parece un poco vacío aquí. ¡Prueba a descargar algunos modelos o cambia tu "
 "instancia de IA para comenzar!"
 
-#: src/window.ui:683 src/window.ui:693 src/window.ui:1298
+#: src/window.ui:683 src/window.ui:693 src/window.ui:1300
 msgid "Manage Instances"
 msgstr "Gestionar Instancias"
 
@@ -4134,7 +4124,7 @@ msgstr "Un número mayor amplía la cantidad de respuestas posibles. (top_p)"
 msgid "Add Model"
 msgstr "Agregar modelo"
 
-#: src/window.ui:1021 src/window.ui:1312
+#: src/window.ui:1021 src/window.ui:1314
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -4185,9 +4175,9 @@ msgid ""
 "Supported AI models can use handy tools to grab information both locally and "
 "online. Head over to the brand new \"Tool Manager\" to toggle them on or off."
 msgstr ""
-"Los modelos de IA compatibles pueden usar herramientas útiles para "
-"recopilar información tanto localmente como en línea. Accede al nuevo "
-"\"Administrador de Herramientas\" para activarlas o desactivarlas."
+"Los modelos de IA compatibles pueden usar herramientas útiles para recopilar "
+"información tanto localmente como en línea. Accede al nuevo \"Administrador "
+"de Herramientas\" para activarlas o desactivarlas."
 
 #: src/window.ui:1123
 msgid "Talk to Models"
@@ -4199,9 +4189,9 @@ msgid ""
 "convenient! You can even customize your language and other settings in the "
 "Preferences dialog."
 msgstr ""
-"Ahora puedes dictar tus mensajes con reconocimiento de voz local. "
-"¡Es súper práctico! Incluso puedes personalizar el idioma y otras opciones "
-"en el cuadro de diálogo Preferencias."
+"Ahora puedes dictar tus mensajes con reconocimiento de voz local. ¡Es súper "
+"práctico! Incluso puedes personalizar el idioma y otras opciones en el "
+"cuadro de diálogo Preferencias."
 
 #: src/window.ui:1131
 msgid "Find Models Faster"
@@ -4243,8 +4233,8 @@ msgid ""
 msgstr ""
 "¡Prepárate para conectar Alpaca con un universo completo de proveedores de "
 "IA! Hemos añadido compatibilidad con más de 5 nuevos proveedores de "
-"instancias de IA, como Anthropic, OpenRouter y Fireworks. ¡Las "
-"posibilidades son infinitas!"
+"instancias de IA, como Anthropic, OpenRouter y Fireworks. ¡Las posibilidades "
+"son infinitas!"
 
 #: src/window.ui:1155
 msgid "Attachment Enhancement"
@@ -4257,8 +4247,8 @@ msgid ""
 "you'll see it with rich text styling, making it easier to understand the "
 "content before you send it."
 msgstr ""
-"Ahora puedes adjuntar y hacer preguntas sobre más tipos de archivos, como "
-".docx, .pptx y .xlsx. Además, al previsualizar un archivo adjunto, lo "
+"Ahora puedes adjuntar y hacer preguntas sobre más tipos de archivos, "
+"como .docx, .pptx y .xlsx. Además, al previsualizar un archivo adjunto, lo "
 "verás con texto enriquecido, lo que facilita la comprensión del contenido "
 "antes de enviarlo."
 
@@ -4278,79 +4268,75 @@ msgstr "Diálogo de terminal"
 msgid "Terminal"
 msgstr "Terminal"
 
-#: src/window.ui:1219
+#: src/window.ui:1221
 msgid "Open Environment Directory"
 msgstr "Abrir Directorio del Ambiente"
 
-#: src/window.ui:1240
+#: src/window.ui:1242
 msgid "File preview dialog"
 msgstr "Dialogo de vista previa de archivos"
 
-#: src/window.ui:1251
+#: src/window.ui:1253
 msgid "Open With Default App"
 msgstr "Abrir con aplicación predeterminada"
 
-#: src/window.ui:1259
+#: src/window.ui:1261
 msgid "Remove Attachment"
 msgstr "Remover Adjunto"
 
-#: src/window.ui:1294
+#: src/window.ui:1296
 msgid "Import Chat"
 msgstr "Importar chat"
 
-#: src/window.ui:1306
+#: src/window.ui:1308
 msgid "Manage Tools"
 msgstr "Gestionar Herramientas"
 
-#: src/window.ui:1316
+#: src/window.ui:1318
 msgid "Keyboard Shortcuts"
 msgstr "Atajos de Teclado"
 
-#: src/window.ui:1320
+#: src/window.ui:1322
 msgid "About Alpaca"
 msgstr "Sobre Alpaca"
 
-#: src/window.ui:1328 src/window.ui:1366
+#: src/window.ui:1330 src/window.ui:1364
 msgid "Rename Chat"
 msgstr "Renombrar Chat"
 
-#: src/window.ui:1332 src/window.ui:1370
+#: src/window.ui:1334 src/window.ui:1368
 msgid "Duplicate Chat"
 msgstr "Duplicar Chat"
 
-#: src/window.ui:1340
-msgid "Clear Chat"
-msgstr "Limpiar Chat"
-
-#: src/window.ui:1346 src/window.ui:1380
+#: src/window.ui:1344 src/window.ui:1378
 msgid "Delete Chat"
 msgstr "Eliminar Chat"
 
-#: src/window.ui:1354
+#: src/window.ui:1352
 msgid "Reload Added Models"
 msgstr "Recargar Modelos Agregados"
 
-#: src/window.ui:1358
+#: src/window.ui:1356
 msgid "Download Model From Name"
 msgstr "Descargar Modelo Usando Nombre"
 
-#: src/window.ui:1388
+#: src/window.ui:1386
 msgid "Send as User"
 msgstr "Enviar Como Usuario"
 
-#: src/window.ui:1392
+#: src/window.ui:1390
 msgid "Send as System"
 msgstr "Enviar Como Sistema"
 
-#: src/window.ui:1396 src/gtk/help-overlay.ui:127
+#: src/window.ui:1394 src/gtk/help-overlay.ui:127
 msgid "Use Tools"
 msgstr "Usar Herramientas"
 
-#: src/window.ui:1408
+#: src/window.ui:1406
 msgid "Attach Website"
 msgstr "Adjuntar Sitio Web"
 
-#: src/window.ui:1412
+#: src/window.ui:1410
 msgid "Attach YouTube Captions"
 msgstr "Adjuntar Subtitulos de YouTube"
 
@@ -4496,7 +4482,7 @@ msgid "User"
 msgstr "Usuario"
 
 #: src/custom_widgets/chat_widget.py:200
-#: src/custom_widgets/message_widget.py:623
+#: src/custom_widgets/message_widget.py:629
 msgid "System"
 msgstr "Sistema"
 
@@ -4542,7 +4528,7 @@ msgid "Code Block"
 msgstr "Bloque de Código"
 
 #: src/custom_widgets/message_widget.py:221
-#: src/custom_widgets/message_widget.py:523
+#: src/custom_widgets/message_widget.py:529
 msgid "Copy Message"
 msgstr "Copiar Mensaje"
 
@@ -4585,35 +4571,35 @@ msgstr "Imagen no Encontrada"
 msgid "Missing image"
 msgstr "Imagen no Encontrada"
 
-#: src/custom_widgets/message_widget.py:486
+#: src/custom_widgets/message_widget.py:492
 msgid "Copy Equation"
 msgstr "Copiar Ecuación"
 
-#: src/custom_widgets/message_widget.py:493
+#: src/custom_widgets/message_widget.py:499
 msgid "Equation copied to the clipboard"
 msgstr "Ecuación copiada al portapapeles"
 
-#: src/custom_widgets/message_widget.py:513
+#: src/custom_widgets/message_widget.py:519
 msgid "Remove Message"
 msgstr "Remover Mensaje"
 
-#: src/custom_widgets/message_widget.py:533
+#: src/custom_widgets/message_widget.py:539
 msgid "Edit Message"
 msgstr "Editar Mensaje"
 
-#: src/custom_widgets/message_widget.py:544
+#: src/custom_widgets/message_widget.py:550
 msgid "Regenerate Message"
 msgstr "Regenerar Mensaje"
 
-#: src/custom_widgets/message_widget.py:563
+#: src/custom_widgets/message_widget.py:569
 msgid "Message copied to the clipboard"
 msgstr "Mensaje copiado"
 
-#: src/custom_widgets/message_widget.py:591
+#: src/custom_widgets/message_widget.py:597
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "Mensaje no puede ser regenerado mientras se recibe una respuesta"
 
-#: src/custom_widgets/message_widget.py:900
+#: src/custom_widgets/message_widget.py:906
 msgid "Thought"
 msgstr "Pensamiento"
 
@@ -4777,9 +4763,25 @@ msgstr "Ejecutar servidor web local"
 msgid "Using Flatpak contained shell"
 msgstr "Usando el shell contenido de Flatpak"
 
+#: src/custom_widgets/terminal_widget.py:136
+msgid "Using SSH to run command"
+msgstr ""
+
 #: src/custom_widgets/terminal_widget.py:142
 msgid "Script Exited"
 msgstr "El Script ha Terminado"
+
+#~ msgid "Clear Chat?"
+#~ msgstr "¿Limpiar Chat?"
+
+#~ msgid "Are you sure you want to clear the chat?"
+#~ msgstr "¿Estás seguro de que quieres limpiar el chat?"
+
+#~ msgid "Clear"
+#~ msgstr "Limpiar"
+
+#~ msgid "Clear Chat"
+#~ msgstr "Limpiar Chat"
 
 #~ msgid "Removal of Ollama"
 #~ msgstr "Eliminación de Ollama"

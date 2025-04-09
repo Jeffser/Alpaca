@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-08 18:25-0600\n"
+"POT-Creation-Date: 2025-04-09 00:46-0600\n"
 "PO-Revision-Date: 2025-01-07 15:12-0600\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Bengali\n"
@@ -2094,7 +2094,7 @@ msgstr "চ্যাট মুছে ফেলুন?"
 msgid "Are you sure you want to delete '{}'?"
 msgstr "আপনি কি নিশ্চিত যে আপনি '{}' মুছে ফেলতে চান?"
 
-#: src/window.py:945 src/window.py:1366
+#: src/window.py:945 src/window.py:1365
 msgid "Delete"
 msgstr "মুছে ফেলুন"
 
@@ -2134,7 +2134,7 @@ msgstr "JSON"
 msgid "JSON (Include Metadata)"
 msgstr "JSON (মেটাডেটা অন্তর্ভুক্ত)"
 
-#: src/window.py:968 src/window.ui:1336 src/window.ui:1374
+#: src/window.py:968 src/window.ui:1338 src/window.ui:1372
 msgid "Export Chat"
 msgstr "চ্যাট রপ্তানি করুন"
 
@@ -2164,7 +2164,7 @@ msgstr ""
 msgid "Error attaching video, please try again"
 msgstr "ভিডিও সংযুক্ত করতে ত্রুটি, দয়া করে আবার চেষ্টা করুন"
 
-#: src/window.py:1020 src/window.py:1360
+#: src/window.py:1020 src/window.py:1359
 msgid "Attach Website? (Experimental)"
 msgstr "ওয়েবসাইট সংযুক্ত করুন? (পরীক্ষামূলক)"
 
@@ -2176,7 +2176,7 @@ msgstr ""
 "আপনি কি নিশ্চিত যে আপনি সংযুক্ত করতে চান\n"
 "'{}'?"
 
-#: src/window.py:1039 src/window.py:1051 src/window.py:1359
+#: src/window.py:1039 src/window.py:1051 src/window.py:1358
 #: src/generic_actions.py:105
 msgid "Image recognition is only available on specific models"
 msgstr "নির্দিষ্ট মডেলগুলিতে ছবি সনাক্তকরণ উপলব্ধ"
@@ -2197,61 +2197,49 @@ msgstr "যেকোনো সামঞ্জস্যপূর্ণ আলপ�
 msgid "Attach Screenshot"
 msgstr "স্ক্রীনশট সংযুক্ত করুন"
 
-#: src/window.py:1344
-msgid "Clear Chat?"
-msgstr "চ্যাট পরিষ্কার করুন?"
-
-#: src/window.py:1344
-msgid "Are you sure you want to clear the chat?"
-msgstr "আপনি কি নিশ্চিত যে আপনি চ্যাটটি পরিষ্কার করতে চান?"
-
-#: src/window.py:1344
-msgid "Clear"
-msgstr "পরিষ্কার করুন"
-
-#: src/window.py:1360
+#: src/window.py:1359
 msgid "Please enter a website URL"
 msgstr "দয়া করে একটি ওয়েবসাইট URL লিখুন"
 
-#: src/window.py:1361
+#: src/window.py:1360
 msgid "Attach YouTube Captions?"
 msgstr "ইউটিউব ক্যাপশন সংযুক্ত করবেন?"
 
-#: src/window.py:1361
+#: src/window.py:1360
 msgid "Please enter a YouTube video URL"
 msgstr "দয়া করে একটি ইউটিউব ভিডিও URL লিখুন"
 
-#: src/window.py:1364
+#: src/window.py:1363
 msgid "Download Model?"
 msgstr "মডেল ডাউনলোড করুন?"
 
-#: src/window.py:1364
+#: src/window.py:1363
 msgid "Please enter the model name following this template: name:tag"
 msgstr "দয়া করে এই টেমপ্লেট অনুসরণ করে মডেলের নাম প্রবেশ করুন: নাম:ট্যাগ"
 
-#: src/window.py:1366
+#: src/window.py:1365
 msgid "Delete All Chats?"
 msgstr "সমস্ত চ্যাট মুছে ফেলুন?"
 
-#: src/window.py:1366
+#: src/window.py:1365
 msgid "Are you sure you want to delete all chats?"
 msgstr "আপনি কি নিশ্চিত যে আপনি সমস্ত চ্যাট মুছে ফেলতে চান?"
 
-#: src/window.py:1376
+#: src/window.py:1375
 msgid "Remove Attachment?"
 msgstr "সংযুক্তি মুছে ফেলুন?"
 
-#: src/window.py:1376
+#: src/window.py:1375
 msgid "Are you sure you want to remove attachment?"
 msgstr "আপনি কি নিশ্চিত যে আপনি সংযুক্তি মুছে ফেলতে চান?"
 
-#: src/window.py:1376 src/instance_manager.py:860
+#: src/window.py:1375 src/instance_manager.py:860
 #: src/custom_widgets/model_manager_widget.py:423
 #: src/custom_widgets/model_manager_widget.py:463
 msgid "Remove"
 msgstr "মুছে ফেলুন"
 
-#: src/window.py:1391
+#: src/window.py:1390
 msgid "Already Installed!"
 msgstr "ইতিমধ্যেই ইনস্টল করা হয়েছে!"
 
@@ -3777,7 +3765,7 @@ msgstr "সাইডবার টগল করুন"
 msgid "Search Messages"
 msgstr "মেসেজ অনুসন্ধান করুন"
 
-#: src/window.ui:212 src/window.ui:237 src/window.ui:1302
+#: src/window.ui:212 src/window.ui:237 src/window.ui:1304
 msgid "Manage Models"
 msgstr "মডেল পরিচালনা করুন"
 
@@ -3803,7 +3791,7 @@ msgid ""
 msgstr ""
 "সতর্কতা: পাওয়ার সেভার মোড সক্ষম করা হয়েছে, এটি বার্তা তৈরি করতে ধীর করে দেবে"
 
-#: src/window.ui:337 src/window.ui:1404
+#: src/window.ui:337 src/window.ui:1402
 msgid "Attach File"
 msgstr "ফাইল সংযুক্ত করুন"
 
@@ -3899,7 +3887,7 @@ msgstr ""
 "এখানে সামান্য ফাঁকা দেখাচ্ছে। শুরু করার জন্য কিছু মডেল ডাউনলোড করুন অথবা আপনার AI "
 "ইনস্ট্যান্স পরিবর্তন করুন!"
 
-#: src/window.ui:683 src/window.ui:693 src/window.ui:1298
+#: src/window.ui:683 src/window.ui:693 src/window.ui:1300
 msgid "Manage Instances"
 msgstr "ইনস্ট্যান্সগুলি পরিচালনা করুন"
 
@@ -3989,7 +3977,7 @@ msgstr "উচ্চ সংখ্যা সম্ভাব্য উত্তর
 msgid "Add Model"
 msgstr "মডেল যোগকরুন"
 
-#: src/window.ui:1021 src/window.ui:1312
+#: src/window.ui:1021 src/window.ui:1314
 msgid "Preferences"
 msgstr "পছন্দ"
 
@@ -4110,79 +4098,75 @@ msgstr "টার্মিনাল ডায়ালগ"
 msgid "Terminal"
 msgstr "টার্মিনাল"
 
-#: src/window.ui:1219
+#: src/window.ui:1221
 msgid "Open Environment Directory"
 msgstr "পরিবেশ ডিরেক্টরি খুলুন"
 
-#: src/window.ui:1240
+#: src/window.ui:1242
 msgid "File preview dialog"
 msgstr "ফাইল পূর্বরূপ ডায়ালগ"
 
-#: src/window.ui:1251
+#: src/window.ui:1253
 msgid "Open With Default App"
 msgstr "ডিফল্ট অ্যাপের সাথে খুলুন"
 
-#: src/window.ui:1259
+#: src/window.ui:1261
 msgid "Remove Attachment"
 msgstr "সংযুক্তি অপসারণ করুন"
 
-#: src/window.ui:1294
+#: src/window.ui:1296
 msgid "Import Chat"
 msgstr "চ্যাট আমদানি করুন"
 
-#: src/window.ui:1306
+#: src/window.ui:1308
 msgid "Manage Tools"
 msgstr ""
 
-#: src/window.ui:1316
+#: src/window.ui:1318
 msgid "Keyboard Shortcuts"
 msgstr "কীবোর্ড শর্টকাট"
 
-#: src/window.ui:1320
+#: src/window.ui:1322
 msgid "About Alpaca"
 msgstr "আলপাকা সম্পর্কে"
 
-#: src/window.ui:1328 src/window.ui:1366
+#: src/window.ui:1330 src/window.ui:1364
 msgid "Rename Chat"
 msgstr "চ্যাট নাম পরিবর্তন করুন"
 
-#: src/window.ui:1332 src/window.ui:1370
+#: src/window.ui:1334 src/window.ui:1368
 msgid "Duplicate Chat"
 msgstr "চ্যাট অনুলিপি করুন"
 
-#: src/window.ui:1340
-msgid "Clear Chat"
-msgstr "চ্যাট পরিষ্কার করুন"
-
-#: src/window.ui:1346 src/window.ui:1380
+#: src/window.ui:1344 src/window.ui:1378
 msgid "Delete Chat"
 msgstr "চ্যাট ডিলিট করুন"
 
-#: src/window.ui:1354
+#: src/window.ui:1352
 msgid "Reload Added Models"
 msgstr "যোগ করা মডেলগুলি পুনরায় লোড করুন"
 
-#: src/window.ui:1358
+#: src/window.ui:1356
 msgid "Download Model From Name"
 msgstr "নামের মাধ্যমে মডেল ডাউনলোড করুন"
 
-#: src/window.ui:1388
+#: src/window.ui:1386
 msgid "Send as User"
 msgstr "ব্যবহারকারী হিসাবে পাঠান"
 
-#: src/window.ui:1392
+#: src/window.ui:1390
 msgid "Send as System"
 msgstr "সিস্টেম হিসাবে পাঠান"
 
-#: src/window.ui:1396 src/gtk/help-overlay.ui:127
+#: src/window.ui:1394 src/gtk/help-overlay.ui:127
 msgid "Use Tools"
 msgstr ""
 
-#: src/window.ui:1408
+#: src/window.ui:1406
 msgid "Attach Website"
 msgstr "ওয়েবসাইট সংযুক্ত করুন"
 
-#: src/window.ui:1412
+#: src/window.ui:1410
 msgid "Attach YouTube Captions"
 msgstr "ইউটিউব ক্যাপশন সংযুক্ত করুন"
 
@@ -4326,7 +4310,7 @@ msgid "User"
 msgstr "ব্যবহারকারী"
 
 #: src/custom_widgets/chat_widget.py:200
-#: src/custom_widgets/message_widget.py:623
+#: src/custom_widgets/message_widget.py:629
 msgid "System"
 msgstr "সিস্টেম"
 
@@ -4372,7 +4356,7 @@ msgid "Code Block"
 msgstr "কোড ব্লক"
 
 #: src/custom_widgets/message_widget.py:221
-#: src/custom_widgets/message_widget.py:523
+#: src/custom_widgets/message_widget.py:529
 msgid "Copy Message"
 msgstr "বার্তা কপি করুন"
 
@@ -4415,35 +4399,35 @@ msgstr "ছবি খুঁজে পাওয়া যায়নি"
 msgid "Missing image"
 msgstr "ছবি খুঁজে পাওয়া যায়নি"
 
-#: src/custom_widgets/message_widget.py:486
+#: src/custom_widgets/message_widget.py:492
 msgid "Copy Equation"
 msgstr "সমীকরণ কপি করুন"
 
-#: src/custom_widgets/message_widget.py:493
+#: src/custom_widgets/message_widget.py:499
 msgid "Equation copied to the clipboard"
 msgstr "সমীকরণ ক্লিপবোর্ডে কপি করা হয়েছে"
 
-#: src/custom_widgets/message_widget.py:513
+#: src/custom_widgets/message_widget.py:519
 msgid "Remove Message"
 msgstr "বার্তা অপসারণ"
 
-#: src/custom_widgets/message_widget.py:533
+#: src/custom_widgets/message_widget.py:539
 msgid "Edit Message"
 msgstr "বার্তা সম্পাদনা করুন"
 
-#: src/custom_widgets/message_widget.py:544
+#: src/custom_widgets/message_widget.py:550
 msgid "Regenerate Message"
 msgstr "বার্তা পুনরুত্পাদন করুন"
 
-#: src/custom_widgets/message_widget.py:563
+#: src/custom_widgets/message_widget.py:569
 msgid "Message copied to the clipboard"
 msgstr "ক্লিপবোর্ডে কপি করা হয়েছে"
 
-#: src/custom_widgets/message_widget.py:591
+#: src/custom_widgets/message_widget.py:597
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "একটি প্রতিক্রিয়া পাওয়ার সময় বার্তা পুনরায় তৈরি করা যাবে না৷"
 
-#: src/custom_widgets/message_widget.py:900
+#: src/custom_widgets/message_widget.py:906
 msgid "Thought"
 msgstr "চিন্তা"
 
@@ -4607,9 +4591,25 @@ msgstr "লোকাল ওয়েব সার্ভার চালু হ�
 msgid "Using Flatpak contained shell"
 msgstr "ফ্ল্যাটপ্যাক অন্তর্ভুক্ত শেল ব্যবহার করা হচ্ছে"
 
+#: src/custom_widgets/terminal_widget.py:136
+msgid "Using SSH to run command"
+msgstr ""
+
 #: src/custom_widgets/terminal_widget.py:142
 msgid "Script Exited"
 msgstr "স্ক্রিপ্ট বন্ধ হয়েছে"
+
+#~ msgid "Clear Chat?"
+#~ msgstr "চ্যাট পরিষ্কার করুন?"
+
+#~ msgid "Are you sure you want to clear the chat?"
+#~ msgstr "আপনি কি নিশ্চিত যে আপনি চ্যাটটি পরিষ্কার করতে চান?"
+
+#~ msgid "Clear"
+#~ msgstr "পরিষ্কার করুন"
+
+#~ msgid "Clear Chat"
+#~ msgstr "চ্যাট পরিষ্কার করুন"
 
 #~ msgid "Removal of Ollama"
 #~ msgstr "ওল্লামা অপসারণ"

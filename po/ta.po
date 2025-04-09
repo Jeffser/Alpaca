@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-08 18:25-0600\n"
+"POT-Creation-Date: 2025-04-09 00:46-0600\n"
 "PO-Revision-Date: 2025-02-05 18:26-0600\n"
 "Last-Translator: Harimanish Kathiravan harimanishhmp@gmail.com\n"
 "Language-Team: Tamil <tamil@systemreboot.net>\n"
@@ -2102,7 +2102,7 @@ msgstr "அரட்டையை நீக்கவா?"
 msgid "Are you sure you want to delete '{}'?"
 msgstr "நீங்கள் '{}' ஐ நீக்க விரும்புகிறீர்களா?"
 
-#: src/window.py:945 src/window.py:1366
+#: src/window.py:945 src/window.py:1365
 msgid "Delete"
 msgstr "நீக்கு"
 
@@ -2142,7 +2142,7 @@ msgstr "JSON"
 msgid "JSON (Include Metadata)"
 msgstr "JSON (மெட்டாடேட்டாவை உள்ளடக்கு)"
 
-#: src/window.py:968 src/window.ui:1336 src/window.ui:1374
+#: src/window.py:968 src/window.ui:1338 src/window.ui:1372
 msgid "Export Chat"
 msgstr "அரட்டையை ஏற்றுமதி செய்"
 
@@ -2172,7 +2172,7 @@ msgstr ""
 msgid "Error attaching video, please try again"
 msgstr "வீடியோவை இணைப்பதில் பிழை ஏற்பட்டது, மீண்டும் முயற்சிக்கவும்"
 
-#: src/window.py:1020 src/window.py:1360
+#: src/window.py:1020 src/window.py:1359
 msgid "Attach Website? (Experimental)"
 msgstr "வலைத்தளத்தை இணைக்கவா? (சோதனை)"
 
@@ -2184,7 +2184,7 @@ msgstr ""
 "நீங்கள் இணைக்க விரும்புகிறீர்களா?\n"
 " '{}'?"
 
-#: src/window.py:1039 src/window.py:1051 src/window.py:1359
+#: src/window.py:1039 src/window.py:1051 src/window.py:1358
 #: src/generic_actions.py:105
 msgid "Image recognition is only available on specific models"
 msgstr "பட அங்கீகாரம் குறிப்பிட்ட மாதிரிகளில் மட்டுமே கிடைக்கும்"
@@ -2205,61 +2205,49 @@ msgstr "எந்தவொரு இணக்கமான அல்பாகா 
 msgid "Attach Screenshot"
 msgstr "திரைக்காட்சியை இணை"
 
-#: src/window.py:1344
-msgid "Clear Chat?"
-msgstr "அரட்டையை அழிக்கவா?"
-
-#: src/window.py:1344
-msgid "Are you sure you want to clear the chat?"
-msgstr "நீங்கள் அரட்டையை அழிக்க விரும்புகிறீர்களா?"
-
-#: src/window.py:1344
-msgid "Clear"
-msgstr "அழி"
-
-#: src/window.py:1360
+#: src/window.py:1359
 msgid "Please enter a website URL"
 msgstr "தயவுசெய்து ஒரு வலைத்தள URL ஐ உள்ளிடவும்"
 
-#: src/window.py:1361
+#: src/window.py:1360
 msgid "Attach YouTube Captions?"
 msgstr "யூடியூப் தலைப்புகளை இணைக்கவா?"
 
-#: src/window.py:1361
+#: src/window.py:1360
 msgid "Please enter a YouTube video URL"
 msgstr "தயவுசெய்து ஒரு யூடியூப் வீடியோ URL ஐ உள்ளிடவும்"
 
-#: src/window.py:1364
+#: src/window.py:1363
 msgid "Download Model?"
 msgstr "மாதிரியைப் பதிவிறக்கவா?"
 
-#: src/window.py:1364
+#: src/window.py:1363
 msgid "Please enter the model name following this template: name:tag"
 msgstr "தயவுசெய்து மாதிரி பெயரை இந்தப் படிவத்தைப் பின்பற்றி உள்ளிடவும்: பெயர்: குறிச்சொல்"
 
-#: src/window.py:1366
+#: src/window.py:1365
 msgid "Delete All Chats?"
 msgstr ""
 
-#: src/window.py:1366
+#: src/window.py:1365
 msgid "Are you sure you want to delete all chats?"
 msgstr ""
 
-#: src/window.py:1376
+#: src/window.py:1375
 msgid "Remove Attachment?"
 msgstr "இணைப்பை அகற்றவா?"
 
-#: src/window.py:1376
+#: src/window.py:1375
 msgid "Are you sure you want to remove attachment?"
 msgstr "நீங்கள் இணைப்பை அகற்ற விரும்புகிறீர்களா?"
 
-#: src/window.py:1376 src/instance_manager.py:860
+#: src/window.py:1375 src/instance_manager.py:860
 #: src/custom_widgets/model_manager_widget.py:423
 #: src/custom_widgets/model_manager_widget.py:463
 msgid "Remove"
 msgstr "அகற்று"
 
-#: src/window.py:1391
+#: src/window.py:1390
 msgid "Already Installed!"
 msgstr ""
 
@@ -3780,7 +3768,7 @@ msgstr "பக்கவாட்டுப் பட்டியை மாற்�
 msgid "Search Messages"
 msgstr "செய்திகளைத் தேடு"
 
-#: src/window.ui:212 src/window.ui:237 src/window.ui:1302
+#: src/window.ui:212 src/window.ui:237 src/window.ui:1304
 msgid "Manage Models"
 msgstr "மாடல்களை நிர்வகி"
 
@@ -3805,7 +3793,7 @@ msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr "எச்சரிக்கை: பவர் சேவர் முறை இயக்கப்பட்டது, இது செய்தி உருவாக்கத்தை மெதுவாக்கும்"
 
-#: src/window.ui:337 src/window.ui:1404
+#: src/window.ui:337 src/window.ui:1402
 msgid "Attach File"
 msgstr "கோப்பை இணைக்கவும்"
 
@@ -3895,7 +3883,7 @@ msgid ""
 "instance to get started!"
 msgstr ""
 
-#: src/window.ui:683 src/window.ui:693 src/window.ui:1298
+#: src/window.ui:683 src/window.ui:693 src/window.ui:1300
 msgid "Manage Instances"
 msgstr ""
 
@@ -3987,7 +3975,7 @@ msgstr "ஒரு பெரிய எண் சாத்தியமான ப�
 msgid "Add Model"
 msgstr "மாதிரியைச் சேர்"
 
-#: src/window.ui:1021 src/window.ui:1312
+#: src/window.ui:1021 src/window.ui:1314
 msgid "Preferences"
 msgstr "விருப்பத்தேர்வுகள்"
 
@@ -4108,79 +4096,75 @@ msgstr "டெர்மினல் உரையாடல்"
 msgid "Terminal"
 msgstr "டெர்மினல்"
 
-#: src/window.ui:1219
+#: src/window.ui:1221
 msgid "Open Environment Directory"
 msgstr "சூழல் கோப்பகத்தைத் திற"
 
-#: src/window.ui:1240
+#: src/window.ui:1242
 msgid "File preview dialog"
 msgstr "கோப்பு முன்னோட்ட உரையாடல்"
 
-#: src/window.ui:1251
+#: src/window.ui:1253
 msgid "Open With Default App"
 msgstr "இயல்புநிலை பயன்பாட்டுடன் திற"
 
-#: src/window.ui:1259
+#: src/window.ui:1261
 msgid "Remove Attachment"
 msgstr "இணைப்பை அகற்று"
 
-#: src/window.ui:1294
+#: src/window.ui:1296
 msgid "Import Chat"
 msgstr "அரட்டையை இறக்குமதி செய்"
 
-#: src/window.ui:1306
+#: src/window.ui:1308
 msgid "Manage Tools"
 msgstr ""
 
-#: src/window.ui:1316
+#: src/window.ui:1318
 msgid "Keyboard Shortcuts"
 msgstr "விசைப்பலகை குறுக்குவழிகள்"
 
-#: src/window.ui:1320
+#: src/window.ui:1322
 msgid "About Alpaca"
 msgstr "அல்பாகாவைப் பற்றி"
 
-#: src/window.ui:1328 src/window.ui:1366
+#: src/window.ui:1330 src/window.ui:1364
 msgid "Rename Chat"
 msgstr "அரட்டையை மறுபெயரிடு"
 
-#: src/window.ui:1332 src/window.ui:1370
+#: src/window.ui:1334 src/window.ui:1368
 msgid "Duplicate Chat"
 msgstr "அரட்டையை நகலெடு"
 
-#: src/window.ui:1340
-msgid "Clear Chat"
-msgstr "அரட்டையை அழி"
-
-#: src/window.ui:1346 src/window.ui:1380
+#: src/window.ui:1344 src/window.ui:1378
 msgid "Delete Chat"
 msgstr "அரட்டையை நீக்கு"
 
-#: src/window.ui:1354
+#: src/window.ui:1352
 msgid "Reload Added Models"
 msgstr ""
 
-#: src/window.ui:1358
+#: src/window.ui:1356
 msgid "Download Model From Name"
 msgstr "பெயரிலிருந்து மாதிரியைப் பதிவிறக்கு"
 
-#: src/window.ui:1388
+#: src/window.ui:1386
 msgid "Send as User"
 msgstr "பயனராக அனுப்பு"
 
-#: src/window.ui:1392
+#: src/window.ui:1390
 msgid "Send as System"
 msgstr "கணினியாக அனுப்பு"
 
-#: src/window.ui:1396 src/gtk/help-overlay.ui:127
+#: src/window.ui:1394 src/gtk/help-overlay.ui:127
 msgid "Use Tools"
 msgstr ""
 
-#: src/window.ui:1408
+#: src/window.ui:1406
 msgid "Attach Website"
 msgstr "வலைத்தளத்தை இணை"
 
-#: src/window.ui:1412
+#: src/window.ui:1410
 msgid "Attach YouTube Captions"
 msgstr "யூடியூப் தலைப்புகளை இணை"
 
@@ -4324,7 +4308,7 @@ msgid "User"
 msgstr "பயனர்"
 
 #: src/custom_widgets/chat_widget.py:200
-#: src/custom_widgets/message_widget.py:623
+#: src/custom_widgets/message_widget.py:629
 msgid "System"
 msgstr "கணினி"
 
@@ -4370,7 +4354,7 @@ msgid "Code Block"
 msgstr "குறியீடு தொகுதி"
 
 #: src/custom_widgets/message_widget.py:221
-#: src/custom_widgets/message_widget.py:523
+#: src/custom_widgets/message_widget.py:529
 msgid "Copy Message"
 msgstr "செய்தியை நகலெடு"
 
@@ -4413,35 +4397,35 @@ msgstr "படம் இல்லை"
 msgid "Missing image"
 msgstr "படம் இல்லை"
 
-#: src/custom_widgets/message_widget.py:486
+#: src/custom_widgets/message_widget.py:492
 msgid "Copy Equation"
 msgstr "சமன்பாட்டை நகலெடு"
 
-#: src/custom_widgets/message_widget.py:493
+#: src/custom_widgets/message_widget.py:499
 msgid "Equation copied to the clipboard"
 msgstr "சமன்பாடு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது"
 
-#: src/custom_widgets/message_widget.py:513
+#: src/custom_widgets/message_widget.py:519
 msgid "Remove Message"
 msgstr "செய்தியை அகற்று"
 
-#: src/custom_widgets/message_widget.py:533
+#: src/custom_widgets/message_widget.py:539
 msgid "Edit Message"
 msgstr "செய்தியைத் திருத்து"
 
-#: src/custom_widgets/message_widget.py:544
+#: src/custom_widgets/message_widget.py:550
 msgid "Regenerate Message"
 msgstr "செய்தியை மீண்டும் உருவாக்கு"
 
-#: src/custom_widgets/message_widget.py:563
+#: src/custom_widgets/message_widget.py:569
 msgid "Message copied to the clipboard"
 msgstr "செய்தி கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது"
 
-#: src/custom_widgets/message_widget.py:591
+#: src/custom_widgets/message_widget.py:597
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "பதிலைப் பெறும்போது செய்தியை மீண்டும் உருவாக்க முடியாது"
 
-#: src/custom_widgets/message_widget.py:900
+#: src/custom_widgets/message_widget.py:906
 msgid "Thought"
 msgstr "எண்ணம்"
 
@@ -4605,9 +4589,25 @@ msgstr "உள்ளூர் வலை சேவையகத்தை இயக
 msgid "Using Flatpak contained shell"
 msgstr "பிளாட்பாக் உள்ளடக்க ஷெல்லைப் பயன்படுத்துதல்"
 
+#: src/custom_widgets/terminal_widget.py:136
+msgid "Using SSH to run command"
+msgstr ""
+
 #: src/custom_widgets/terminal_widget.py:142
 msgid "Script Exited"
 msgstr ""
+
+#~ msgid "Clear Chat?"
+#~ msgstr "அரட்டையை அழிக்கவா?"
+
+#~ msgid "Are you sure you want to clear the chat?"
+#~ msgstr "நீங்கள் அரட்டையை அழிக்க விரும்புகிறீர்களா?"
+
+#~ msgid "Clear"
+#~ msgstr "அழி"
+
+#~ msgid "Clear Chat"
+#~ msgstr "அரட்டையை அழி"
 
 #~ msgid "Regenerate Equation"
 #~ msgstr "சமன்பாட்டை மீண்டும் உருவாக்கு"
