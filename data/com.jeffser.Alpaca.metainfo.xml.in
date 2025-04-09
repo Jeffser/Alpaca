@@ -89,6 +89,50 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="6.0.0" date="2025-04-08">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/6.0.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Smart tools for models</li>
+          <li>Speech recognition (message dictation)</li>
+          <li>Filter Ollama models by categories</li>
+          <li>Better math Latex rendering in messages</li>
+          <li>Rich text rendering in attachment preview</li>
+          <li>Matplotlib is now included in Python code runner</li>
+          <li>Styling for messages being generated</li>
+        </ul>
+        <p>New Instances</p>
+        <ul>
+          <li>Deepseek</li>
+          <li>OpenRouter AI</li>
+          <li>Anthropic</li>
+          <li>Groq Cloud</li>
+          <li>Fireworks AI</li>
+          <li>Lambda Labs</li>
+        </ul>
+        <p>New Attacchment Types</p>
+        <ul>
+          <li>Microsoft Word Document (docx)</li>
+          <li>Microsoft PowerPoint Document (pptx)</li>
+          <li>Microsoft Excel Document (xslsx)</li>
+        </ul>
+        <p>New Tools</p>
+        <ul>
+          <li>Online Search</li>
+          <li>Extract Wikipedia Article</li>
+          <li>Get Recipe by Name</li>
+          <li>Get Recipes by Category</li>
+          <li>Get Current Datetime</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed welcome screen not showing sometimes when deleting a message</li>
+          <li>Fixed bold text not rendering correctly in tables</li>
+          <li>Fixed sample prompt buttons overflowing on small screens</li>
+        </ul>
+      </description>
+    </release>
     <release version="5.3.0" date="2025-03-20">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/5.3.0</url>
       <description>
