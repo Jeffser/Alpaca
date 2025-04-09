@@ -47,7 +47,7 @@ if sys.platform != 'win32':
             ctrl = state & Gdk.ModifierType.CONTROL_MASK
             shift = state & Gdk.ModifierType.SHIFT_MASK
             if ctrl and keyval == Gdk.KEY_c:
-                self.copy_clipboard()
+                self.copy_clipboard_format(1)
                 return True
             elif ctrl and keyval == Gdk.KEY_v:
                 self.paste_clipboard()
@@ -124,16 +124,16 @@ def run_terminal(files:dict):
                 f.write(content)
             script.append('python -m http.server 8080 --directory "{}"'.format(os.path.join(data_dir, 'code runner', 'html')))
             Gio.AppInfo.launch_default_for_uri('http://0.0.0.0:8080')
-        elif file_metadata['language'].lower() in ('bash', 'sh'):
+        elif file_metadata['language'].lower() in ('bash', 'sh', 'ssh'):
             if shutil.which('flatpak-spawn'):
                 sandbox = True
-                try:
+                """try:
                     process = subprocess.run(['flatpak-spawn', '--host', 'bash', '-c', 'echo "test"'], check=True)
                     sandbox = False
                 except Exception as e:
-                    pass
+                    pass"""
                 if sandbox:
-                    script.append('echo "🦙 {}\n"'.format(_('Using Flatpak contained shell')))
+                    script.append('echo "🦙 {}\n"'.format(_('Using Flatpak contained shell') if file_metadata['language'].lower() in ('bash', 'sh') else _('Using SSH to run command') ))
                     script.append(file_metadata['content'])
                 else:
                     script.append(file_metadata['content'])

@@ -8,6 +8,9 @@ from html2text import html2text
 
 from gi.repository import Adw, Gtk, GLib
 
+from .custom_widgets import terminal_widget
+from .internal import data_dir
+
 window = None
 
 class tool(Adw.ActionRow):
@@ -99,7 +102,7 @@ class tool(Adw.ActionRow):
                     variables.add(
                         Adw.EntryRow(
                             name=name,
-                            title=name.replace('_', ' ').title(),
+                            title=data.get('display_name'),
                             text=data.get('value', '')
                         )
                     )
@@ -108,13 +111,13 @@ class tool(Adw.ActionRow):
                     row.set_digits(0 if data.get('type') == 'int' else 2)
                     row.set_value(float(data.get('value', data.get('min', 0) ) ) )
                     row.set_name(name)
-                    row.set_title(name.replace('_', ' ').title())
+                    row.set_title(data.get('display_name'))
                     variables.add(row)
                 elif data.get('type') == 'secret':
                     variables.add(
                         Adw.PasswordEntryRow(
                             name=name,
-                            title=name.replace('_', ' ').title(),
+                            title=data.get('display_name'),
                             text=data.get('value', '')
                         )
                     )
@@ -122,7 +125,7 @@ class tool(Adw.ActionRow):
                     variables.add(
                         Adw.SwitchRow(
                             name=name,
-                            title=name.replace('_', ' ').title(),
+                            title=data.get('display_name'),
                             active=bool(data.get('value', False))
                         )
                     )
@@ -402,7 +405,93 @@ class online_search(tool):
 
         return '\n\n'.join(result_md)
 
-available_tools = [get_current_datetime, get_recipes_by_category, get_recipe_by_name, extract_wikipedia, online_search]
+class run_command(tool):
+    tool_metadata = {
+        "name": "run_command",
+        "description": "Request permission to run a command in a terminal returning it's result",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "command": {
+                    "type": "string",
+                    "description": "The command to run and it's parameters"
+                },
+                "explanation": {
+                    "type": "string",
+                    "description": "Explain in simple words what the command will do to the system, be clear and honest"
+                }
+            },
+            "required": [
+                "command",
+                "explanation"
+            ]
+        },
+        "strict": True
+    }
+    name = _("Run Command (Testing)")
+    description = _("Request to run a command using SSH to connect to the device")
+    variables = {
+        'ip': {
+            'display_name': _("IP Address"),
+            'value': '127.0.0.1',
+            'type': 'string'
+        },
+        'username': {
+            'display_name': _("Username"),
+            'value': os.getenv('USER'),
+            'type': 'string'
+        },
+        'port': {
+            'display_name': _('Network Port'),
+            'value': 22,
+            'type': 'int',
+            'min': 1,
+            'max': 65535
+        }
+    }
+
+    def run(self, arguments, messages, bot_message) -> str:
+        if os.path.isfile(os.path.join(data_dir, "ssh_output.txt")):
+            os.remove(os.path.join(data_dir, "ssh_output.txt"))
+
+        if not arguments.get('command'):
+            return "Error: No command was provided"
+
+        commands = [
+            'echo -e "🦙 {}\n\n- {}\n{}\n\n- {}\n{}\n\n⚠️ {}\n\n"'.format(
+                _('Model Requested to Run Command'),
+                _('Command'),
+                arguments.get('command'),
+                _('Explanation'),
+                arguments.get('explanation', _('No explanation was provided')),
+                _('Make sure you understand what the command does before running it.')
+            ),
+            "ssh -t -p {} {}@{} -- '{}' 2>&1 | tee '{}'".format(
+               self.variables.get('port', {}).get('value', 22),
+               self.variables.get('username', {}).get('value', os.getenv('USER')),
+               self.variables.get('ip', {}).get('value', '127.0.0.1'),
+               arguments.get('command').replace("'", "\\'"),
+               os.path.join(data_dir, "ssh_output.txt")
+            )
+        ]
+
+        window.terminal_dialog.present(window)
+        GLib.idle_add(terminal_widget.run_terminal, {self.name: {
+            'language': 'ssh',
+            'content': ';'.join(commands)
+        }})
+
+        while isinstance(window.get_visible_dialog(), Adw.Dialog):
+            time.sleep(1)
+
+        command_result = '(No Output)'
+        if os.path.isfile(os.path.join(data_dir, "ssh_output.txt")):
+            with open(os.path.join(data_dir, "ssh_output.txt"), 'r') as f:
+                command_result = f.read()
+
+        return command_result
+
+available_tools = [get_current_datetime, get_recipes_by_category, get_recipe_by_name, extract_wikipedia, online_search, run_command]
 
 def update_available_tools():
     tools_parameters = window.sql_instance.get_tool_parameters()
