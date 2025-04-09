@@ -32,10 +32,10 @@ markup_pattern = re.compile(r'<(b|u|tt|a.*|span.*)>(.*?)<\/(b|u|tt|a|span)>')
 
 patterns = [
     ('think', re.compile(r'(?:<think>|<\|begin_of_thought\|>)\n+(.*?)\n+(?:<\/think>|<\|end_of_thought\|>)', re.DOTALL | re.IGNORECASE)),
+    ('latex', re.compile(r'\\\[\n*?(.*?)\n*?\\\]|\$+\n*?(.*?)\$+\n*?', re.DOTALL)),
     ('code', re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
     ('code', re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)),
-    ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
-    ('latex', re.compile(r'\\\[(.*?)\\\]|\$+(.*?)\$+', re.DOTALL))
+    ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE))
 ]
 
 SOLUTION_ENCLOSING_TAGS = [
