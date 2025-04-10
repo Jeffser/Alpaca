@@ -841,6 +841,11 @@ class generic_openai(base_openai):
         self.instance_url = data.get('url', self.instance_url)
         super().__init__(data)
 
+class klusterai(base_openai):
+    instance_type = 'klusterai'
+    instance_type_display = 'Kluster AI'
+    instance_url = 'https://api.kluster.ai/v1/'
+
 class instance_row(Adw.ActionRow):
     __gtype_name__ = 'AlpacaInstanceRow'
 
@@ -905,6 +910,6 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama_managed, ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, fireworks, lambda_labs, generic_openai]
+ready_instances = [ollama_managed, ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, fireworks, lambda_labs, klusterai, generic_openai]
 
 
