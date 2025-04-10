@@ -838,6 +838,12 @@ class cerebras(base_openai):
     instance_url = 'https://api.cerebras.ai/v1/'
     description = _('Cerebras AI cloud inference API')
 
+class klusterai(base_openai):
+    instance_type = 'klusterai'
+    instance_type_display = 'Kluster AI'
+    instance_url = 'https://api.kluster.ai/v1/'
+    description = _('Kluster AI cloud inference API')
+
 class generic_openai(base_openai):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
@@ -846,11 +852,6 @@ class generic_openai(base_openai):
     def __init__(self, data:dict={}):
         self.instance_url = data.get('url', self.instance_url)
         super().__init__(data)
-
-class klusterai(base_openai):
-    instance_type = 'klusterai'
-    instance_type_display = 'Kluster AI'
-    instance_url = 'https://api.kluster.ai/v1/'
 
 class instance_row(Adw.ActionRow):
     __gtype_name__ = 'AlpacaInstanceRow'
