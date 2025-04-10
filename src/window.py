@@ -34,8 +34,6 @@ import time
 import requests
 import sqlite3
 import sys
-import whisper
-import pyaudio
 import icu
 import numpy as np
 
@@ -196,6 +194,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         def run_mic():
             GLib.idle_add(button.get_parent().set_visible_child_name, "loading")
+            import whisper
+            import pyaudio
             GLib.idle_add(button.add_css_class, 'accent')
 
             samplerate=16000

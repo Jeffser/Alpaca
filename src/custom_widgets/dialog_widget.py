@@ -226,7 +226,6 @@ def simple_log(title:str, summary_text:str, summary_classes:list, log_text:str, 
     GLib.idle_add(dialog.present, parent if parent else window)
 
 def simple_error(title:str, body:str, error_log:str, callback:callable=None, parent:Gtk.Widget=None):
-    print(parent, window)
     if get_dialog_showing():
         return
     container = Gtk.Box(
