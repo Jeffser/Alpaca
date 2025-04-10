@@ -45,7 +45,9 @@ possible_prompts = [
     "What is photoelectric effect?",
     "What is the history of the Great Wall of China?",
     "Tell me some Historical facts about Taj Mahal",
-    "Write a love story"    
+    "Write a love story",
+    "Write Shrödinger's equation in LaTeX",
+    "Write Field Equation in LaTeX"
 ]
 
 class chat(Gtk.Stack):
