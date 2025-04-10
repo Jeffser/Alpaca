@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 01:19-0600\n"
+"POT-Creation-Date: 2025-04-10 16:47-0600\n"
 "PO-Revision-Date: 2025-01-07 15:12-0600\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Bengali\n"
@@ -2005,7 +2005,7 @@ msgstr "পৃষ্ঠপোষক হোন"
 msgid "Discussions"
 msgstr "আলোচনা"
 
-#: src/window.py:187
+#: src/window.py:185
 msgid "Speech recognition model is being downloaded ({})"
 msgstr "স্পীচ রিকগনিশন মডেল ডাউনলোড করা হচ্ছে ({})"
 
@@ -2077,8 +2077,8 @@ msgstr "পরবর্তী"
 
 #: src/window.py:618 src/instance_manager.py:397 src/instance_manager.py:398
 #: src/tool_manager.py:136 src/window.ui:968 src/window.ui:972
-#: src/custom_widgets/message_widget.py:81
-#: src/custom_widgets/message_widget.py:231
+#: src/custom_widgets/message_widget.py:79
+#: src/custom_widgets/message_widget.py:229
 #: src/custom_widgets/model_manager_widget.py:422
 #: src/custom_widgets/dialog_widget.py:148
 #: src/custom_widgets/dialog_widget.py:160
@@ -2249,7 +2249,7 @@ msgstr "সংযুক্তি মুছে ফেলুন?"
 msgid "Are you sure you want to remove attachment?"
 msgstr "আপনি কি নিশ্চিত যে আপনি সংযুক্তি মুছে ফেলতে চান?"
 
-#: src/window.py:1430 src/instance_manager.py:860
+#: src/window.py:1430 src/instance_manager.py:872
 #: src/custom_widgets/model_manager_widget.py:423
 #: src/custom_widgets/model_manager_widget.py:463
 msgid "Remove"
@@ -3468,7 +3468,7 @@ msgid "Instance"
 msgstr "ইনস্ট্যান্স"
 
 #: src/instance_manager.py:59 src/instance_manager.py:68 src/window.ui:154
-#: src/custom_widgets/chat_widget.py:417
+#: src/custom_widgets/chat_widget.py:419
 msgid "New Chat"
 msgstr "নতুন চ্যাট"
 
@@ -3603,7 +3603,7 @@ msgid "Model to use when generating a chat title."
 msgstr "একটি চ্যাট শিরোনাম তৈরি করার সময় ব্যবহার করার জন্য মডেল"
 
 #: src/instance_manager.py:404 src/instance_manager.py:405
-#: src/custom_widgets/message_widget.py:235
+#: src/custom_widgets/message_widget.py:233
 msgid "Save"
 msgstr "সংরক্ষণ করুন"
 
@@ -3677,23 +3677,31 @@ msgstr "ফায়ারওয়ার্কস এআই ইনফারেন্�
 msgid "Lambda Labs cloud inference API"
 msgstr "ল্যাম্বডা ল্যাবস ক্লাউড ইনফারেন্স এপিআই"
 
-#: src/instance_manager.py:837
+#: src/instance_manager.py:839
+msgid "Cerebras AI cloud inference API"
+msgstr ""
+
+#: src/instance_manager.py:845
+msgid "Kluster AI cloud inference API"
+msgstr ""
+
+#: src/instance_manager.py:849
 msgid "OpenAI Compatible Instance"
 msgstr "OpenAI সামঞ্জস্যপূর্ণ ইনস্ট্যান্স"
 
-#: src/instance_manager.py:838
+#: src/instance_manager.py:850
 msgid "AI instance compatible with OpenAI library"
 msgstr "OpenAI লাইব্রেরির সাথে সামঞ্জস্যপূর্ণ এআই ইনস্ট্যান্স"
 
-#: src/instance_manager.py:860
+#: src/instance_manager.py:872
 msgid "Remove Instance?"
 msgstr "ইনস্ট্যান্স অপসারণ করুন?"
 
-#: src/instance_manager.py:860
+#: src/instance_manager.py:872
 msgid "Are you sure you want to remove this instance?"
 msgstr "আপনি কি নিশ্চিত যে আপনি এই ইনস্ট্যান্সটি অপসারণ করতে চান?"
 
-#: src/instance_manager.py:875
+#: src/instance_manager.py:887
 msgid "Edit Instance"
 msgstr "ইনস্ট্যান্স এডিট করুন"
 
@@ -4448,91 +4456,91 @@ msgstr "একটি বার্তা তৈরি করতে মডেল�
 msgid "Send Message as User"
 msgstr "ব্যবহারকারী হিসাবে বার্তা পাঠান"
 
-#: src/custom_widgets/chat_widget.py:86
+#: src/custom_widgets/chat_widget.py:88
 msgid "Try one of these prompts"
 msgstr "এই প্রম্পটগুলির মধ্যে একটি চেষ্টা করুন"
 
-#: src/custom_widgets/chat_widget.py:115
+#: src/custom_widgets/chat_widget.py:117
 msgid "Send prompt: '{}'"
 msgstr "প্রম্পট পাঠান: '{}'"
 
-#: src/custom_widgets/chat_widget.py:121
+#: src/custom_widgets/chat_widget.py:123
 msgid "Refresh Prompts"
 msgstr "প্রম্পটগুলি পুনরায় লোড করুন"
 
-#: src/custom_widgets/chat_widget.py:179
+#: src/custom_widgets/chat_widget.py:181
 msgid "Chat exported successfully"
 msgstr "চ্যাট সফলভাবে রপ্তানি করা হয়েছে"
 
-#: src/custom_widgets/chat_widget.py:199
+#: src/custom_widgets/chat_widget.py:201
 msgid "User"
 msgstr "ব্যবহারকারী"
 
-#: src/custom_widgets/chat_widget.py:203
-#: src/custom_widgets/message_widget.py:677
+#: src/custom_widgets/chat_widget.py:205
+#: src/custom_widgets/message_widget.py:680
 msgid "System"
 msgstr "সিস্টেম"
 
-#: src/custom_widgets/chat_widget.py:291
+#: src/custom_widgets/chat_widget.py:293
 msgid "Regenerate Response"
 msgstr "উত্তর পুনরুত্পাদন করুন"
 
-#: src/custom_widgets/chat_widget.py:455
+#: src/custom_widgets/chat_widget.py:457
 msgid "Copy of {}"
 msgstr "{} এর অনুলিপি"
 
-#: src/custom_widgets/chat_widget.py:470
+#: src/custom_widgets/chat_widget.py:472
 msgid "Chat imported successfully"
 msgstr "চ্যাট সফলভাবে আমদানি করা হয়েছে"
 
-#: src/custom_widgets/message_widget.py:90
+#: src/custom_widgets/message_widget.py:88
 msgid "Save Message"
 msgstr "বার্তা সংরক্ষণ করুন"
 
-#: src/custom_widgets/message_widget.py:131
-#: src/custom_widgets/message_widget.py:270
+#: src/custom_widgets/message_widget.py:129
+#: src/custom_widgets/message_widget.py:268
 msgid "Message edited successfully"
 msgstr "বার্তা সফলভাবে সম্পাদিত হয়েছে"
 
-#: src/custom_widgets/message_widget.py:157
+#: src/custom_widgets/message_widget.py:155
 msgid "Response message"
 msgstr "প্রতিক্রিয়া বার্তা"
 
-#: src/custom_widgets/message_widget.py:159
+#: src/custom_widgets/message_widget.py:157
 msgid "System message"
 msgstr "সিস্টেম বার্তা"
 
-#: src/custom_widgets/message_widget.py:161
+#: src/custom_widgets/message_widget.py:159
 msgid "User message"
 msgstr "ব্যবহারকারীর বার্তা"
 
-#: src/custom_widgets/message_widget.py:220
+#: src/custom_widgets/message_widget.py:218
 msgid "{}Code Block"
 msgstr "{}কোড ব্লক"
 
-#: src/custom_widgets/message_widget.py:222
+#: src/custom_widgets/message_widget.py:220
 msgid "Code Block"
 msgstr "কোড ব্লক"
 
-#: src/custom_widgets/message_widget.py:223
-#: src/custom_widgets/message_widget.py:532
+#: src/custom_widgets/message_widget.py:221
+#: src/custom_widgets/message_widget.py:530
 msgid "Copy Message"
 msgstr "বার্তা কপি করুন"
 
-#: src/custom_widgets/message_widget.py:227
+#: src/custom_widgets/message_widget.py:225
 msgid "Edit Code Block"
 msgstr "কোড ব্লক সম্পাদনা করুন"
 
-#: src/custom_widgets/message_widget.py:239
-#: src/custom_widgets/message_widget.py:315
+#: src/custom_widgets/message_widget.py:237
+#: src/custom_widgets/message_widget.py:313
 msgid "Run Script"
 msgstr "স্ক্রিপ্ট চালান"
 
-#: src/custom_widgets/message_widget.py:279
+#: src/custom_widgets/message_widget.py:277
 msgid "Code copied to the clipboard"
 msgstr "ক্লিপবোর্ডে কোড কপি করা হয়েছে"
 
-#: src/custom_widgets/message_widget.py:316
+#: src/custom_widgets/message_widget.py:314
 msgid ""
 "Make sure you understand what this script does before running it, Alpaca is "
 "not responsible for any damages to your device or data"
@@ -4540,57 +4548,57 @@ msgstr ""
 "স্ক্রিপ্টটি চালানোর আগে আপনি এটি কী করে তা নিশ্চিত করুন, আপনার ডিভাইস বা ডেটার "
 "কোনো ক্ষতির জন্য Alpaca দায়ী নয়।"
 
-#: src/custom_widgets/message_widget.py:318
+#: src/custom_widgets/message_widget.py:316
 msgid "Execute"
 msgstr "কার্যকর করুন"
 
+#: src/custom_widgets/message_widget.py:395
 #: src/custom_widgets/message_widget.py:397
-#: src/custom_widgets/message_widget.py:399
 msgid "Image"
 msgstr "চিত্র"
 
-#: src/custom_widgets/message_widget.py:408
-#: src/custom_widgets/message_widget.py:420
+#: src/custom_widgets/message_widget.py:406
+#: src/custom_widgets/message_widget.py:418
 msgid "Missing Image"
 msgstr "ছবি খুঁজে পাওয়া যায়নি"
 
-#: src/custom_widgets/message_widget.py:422
+#: src/custom_widgets/message_widget.py:420
 msgid "Missing image"
 msgstr "ছবি খুঁজে পাওয়া যায়নি"
 
-#: src/custom_widgets/message_widget.py:495
+#: src/custom_widgets/message_widget.py:493
 msgid "Copy Equation"
 msgstr "সমীকরণ কপি করুন"
 
-#: src/custom_widgets/message_widget.py:502
+#: src/custom_widgets/message_widget.py:500
 msgid "Equation copied to the clipboard"
 msgstr "সমীকরণ ক্লিপবোর্ডে কপি করা হয়েছে"
 
-#: src/custom_widgets/message_widget.py:522
+#: src/custom_widgets/message_widget.py:520
 msgid "Remove Message"
 msgstr "বার্তা অপসারণ"
 
-#: src/custom_widgets/message_widget.py:542
+#: src/custom_widgets/message_widget.py:540
 msgid "Edit Message"
 msgstr "বার্তা সম্পাদনা করুন"
 
-#: src/custom_widgets/message_widget.py:553
+#: src/custom_widgets/message_widget.py:551
 msgid "Regenerate Message"
 msgstr "বার্তা পুনরুত্পাদন করুন"
 
-#: src/custom_widgets/message_widget.py:565
+#: src/custom_widgets/message_widget.py:563
 msgid "Dictate Message"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:585
+#: src/custom_widgets/message_widget.py:583
 msgid "Message copied to the clipboard"
 msgstr "ক্লিপবোর্ডে কপি করা হয়েছে"
 
-#: src/custom_widgets/message_widget.py:645
+#: src/custom_widgets/message_widget.py:648
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "একটি প্রতিক্রিয়া পাওয়ার সময় বার্তা পুনরায় তৈরি করা যাবে না৷"
 
-#: src/custom_widgets/message_widget.py:954
+#: src/custom_widgets/message_widget.py:957
 msgid "Thought"
 msgstr "চিন্তা"
 

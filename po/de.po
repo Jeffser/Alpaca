@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 01:19-0600\n"
+"POT-Creation-Date: 2025-04-10 16:47-0600\n"
 "PO-Revision-Date:  2025-03-14 09:08+0001\n"
 "Last-Translator: Magnus Schlinsog <magnusschlinsog@gmail.com>\n"
 "Language-Team: German\n"
@@ -2066,7 +2066,7 @@ msgstr ""
 msgid "Discussions"
 msgstr ""
 
-#: src/window.py:187
+#: src/window.py:185
 msgid "Speech recognition model is being downloaded ({})"
 msgstr ""
 
@@ -2136,8 +2136,8 @@ msgstr "Weiter"
 
 #: src/window.py:618 src/instance_manager.py:397 src/instance_manager.py:398
 #: src/tool_manager.py:136 src/window.ui:968 src/window.ui:972
-#: src/custom_widgets/message_widget.py:81
-#: src/custom_widgets/message_widget.py:231
+#: src/custom_widgets/message_widget.py:79
+#: src/custom_widgets/message_widget.py:229
 #: src/custom_widgets/model_manager_widget.py:422
 #: src/custom_widgets/dialog_widget.py:148
 #: src/custom_widgets/dialog_widget.py:160
@@ -2311,7 +2311,7 @@ msgstr "Anhang entfernen?"
 msgid "Are you sure you want to remove attachment?"
 msgstr "Sind Sie sicher, dass Sie den Anhang entfernen möchten?"
 
-#: src/window.py:1430 src/instance_manager.py:860
+#: src/window.py:1430 src/instance_manager.py:872
 #: src/custom_widgets/model_manager_widget.py:423
 #: src/custom_widgets/model_manager_widget.py:463
 msgid "Remove"
@@ -3604,7 +3604,7 @@ msgid "Instance"
 msgstr "Instanz"
 
 #: src/instance_manager.py:59 src/instance_manager.py:68 src/window.ui:154
-#: src/custom_widgets/chat_widget.py:417
+#: src/custom_widgets/chat_widget.py:419
 msgid "New Chat"
 msgstr "Neuer Chat"
 
@@ -3741,7 +3741,7 @@ msgid "Model to use when generating a chat title."
 msgstr "Zu nutzendes Modell, um die Chat-Titel zu generieren."
 
 #: src/instance_manager.py:404 src/instance_manager.py:405
-#: src/custom_widgets/message_widget.py:235
+#: src/custom_widgets/message_widget.py:233
 msgid "Save"
 msgstr "Speichern"
 
@@ -3816,23 +3816,31 @@ msgstr ""
 msgid "Lambda Labs cloud inference API"
 msgstr ""
 
-#: src/instance_manager.py:837
+#: src/instance_manager.py:839
+msgid "Cerebras AI cloud inference API"
+msgstr ""
+
+#: src/instance_manager.py:845
+msgid "Kluster AI cloud inference API"
+msgstr ""
+
+#: src/instance_manager.py:849
 msgid "OpenAI Compatible Instance"
 msgstr "OpenAI-kompatible Instanz"
 
-#: src/instance_manager.py:838
+#: src/instance_manager.py:850
 msgid "AI instance compatible with OpenAI library"
 msgstr ""
 
-#: src/instance_manager.py:860
+#: src/instance_manager.py:872
 msgid "Remove Instance?"
 msgstr "Instanz entfernen?"
 
-#: src/instance_manager.py:860
+#: src/instance_manager.py:872
 msgid "Are you sure you want to remove this instance?"
 msgstr "Sicher, dass diese Instanz entfernt werden soll?"
 
-#: src/instance_manager.py:875
+#: src/instance_manager.py:887
 msgid "Edit Instance"
 msgstr "Instanz bearbeiten"
 
@@ -4572,91 +4580,91 @@ msgstr ""
 msgid "Send Message as User"
 msgstr "Nachricht als Nutzer senden"
 
-#: src/custom_widgets/chat_widget.py:86
+#: src/custom_widgets/chat_widget.py:88
 msgid "Try one of these prompts"
 msgstr "Teste einen dieser Prompts"
 
-#: src/custom_widgets/chat_widget.py:115
+#: src/custom_widgets/chat_widget.py:117
 msgid "Send prompt: '{}'"
 msgstr "Sende Prompt: '{}'"
 
-#: src/custom_widgets/chat_widget.py:121
+#: src/custom_widgets/chat_widget.py:123
 msgid "Refresh Prompts"
 msgstr "Beispielprompts neu laden"
 
-#: src/custom_widgets/chat_widget.py:179
+#: src/custom_widgets/chat_widget.py:181
 msgid "Chat exported successfully"
 msgstr "Chatverlauf erfolgreich exportiert"
 
-#: src/custom_widgets/chat_widget.py:199
+#: src/custom_widgets/chat_widget.py:201
 msgid "User"
 msgstr "Nutzer"
 
-#: src/custom_widgets/chat_widget.py:203
-#: src/custom_widgets/message_widget.py:677
+#: src/custom_widgets/chat_widget.py:205
+#: src/custom_widgets/message_widget.py:680
 msgid "System"
 msgstr "System"
 
-#: src/custom_widgets/chat_widget.py:291
+#: src/custom_widgets/chat_widget.py:293
 msgid "Regenerate Response"
 msgstr "Antwort regenerieren"
 
-#: src/custom_widgets/chat_widget.py:455
+#: src/custom_widgets/chat_widget.py:457
 msgid "Copy of {}"
 msgstr "Kopie von {}"
 
-#: src/custom_widgets/chat_widget.py:470
+#: src/custom_widgets/chat_widget.py:472
 msgid "Chat imported successfully"
 msgstr "Chatverlauf erfolgreich importiert"
 
-#: src/custom_widgets/message_widget.py:90
+#: src/custom_widgets/message_widget.py:88
 msgid "Save Message"
 msgstr "Speichere Nachricht"
 
-#: src/custom_widgets/message_widget.py:131
-#: src/custom_widgets/message_widget.py:270
+#: src/custom_widgets/message_widget.py:129
+#: src/custom_widgets/message_widget.py:268
 msgid "Message edited successfully"
 msgstr "Nachricht erfolgreich editiert"
 
-#: src/custom_widgets/message_widget.py:157
+#: src/custom_widgets/message_widget.py:155
 msgid "Response message"
 msgstr "Antwortnachricht"
 
-#: src/custom_widgets/message_widget.py:159
+#: src/custom_widgets/message_widget.py:157
 msgid "System message"
 msgstr "Systemnachricht"
 
-#: src/custom_widgets/message_widget.py:161
+#: src/custom_widgets/message_widget.py:159
 msgid "User message"
 msgstr "Benutzernachricht"
 
-#: src/custom_widgets/message_widget.py:220
+#: src/custom_widgets/message_widget.py:218
 msgid "{}Code Block"
 msgstr "{}Code-Block"
 
-#: src/custom_widgets/message_widget.py:222
+#: src/custom_widgets/message_widget.py:220
 msgid "Code Block"
 msgstr "Code-Block"
 
-#: src/custom_widgets/message_widget.py:223
-#: src/custom_widgets/message_widget.py:532
+#: src/custom_widgets/message_widget.py:221
+#: src/custom_widgets/message_widget.py:530
 msgid "Copy Message"
 msgstr "Kopiere Nachricht"
 
-#: src/custom_widgets/message_widget.py:227
+#: src/custom_widgets/message_widget.py:225
 msgid "Edit Code Block"
 msgstr "Codeblock bearbeiten"
 
-#: src/custom_widgets/message_widget.py:239
-#: src/custom_widgets/message_widget.py:315
+#: src/custom_widgets/message_widget.py:237
+#: src/custom_widgets/message_widget.py:313
 msgid "Run Script"
 msgstr "Starte Script"
 
-#: src/custom_widgets/message_widget.py:279
+#: src/custom_widgets/message_widget.py:277
 msgid "Code copied to the clipboard"
 msgstr "Code in die Zwischenablage kopiert"
 
-#: src/custom_widgets/message_widget.py:316
+#: src/custom_widgets/message_widget.py:314
 msgid ""
 "Make sure you understand what this script does before running it, Alpaca is "
 "not responsible for any damages to your device or data"
@@ -4665,58 +4673,58 @@ msgstr ""
 "ausführen. Alpaca übernimmt keine Verantwortung für Schäden an Ihrem Gerät "
 "oder Ihren Daten."
 
-#: src/custom_widgets/message_widget.py:318
+#: src/custom_widgets/message_widget.py:316
 msgid "Execute"
 msgstr "Ausführen"
 
+#: src/custom_widgets/message_widget.py:395
 #: src/custom_widgets/message_widget.py:397
-#: src/custom_widgets/message_widget.py:399
 msgid "Image"
 msgstr "Bild"
 
-#: src/custom_widgets/message_widget.py:408
-#: src/custom_widgets/message_widget.py:420
+#: src/custom_widgets/message_widget.py:406
+#: src/custom_widgets/message_widget.py:418
 msgid "Missing Image"
 msgstr "Fehlendes Bild"
 
-#: src/custom_widgets/message_widget.py:422
+#: src/custom_widgets/message_widget.py:420
 msgid "Missing image"
 msgstr "Fehlendes Bild"
 
-#: src/custom_widgets/message_widget.py:495
+#: src/custom_widgets/message_widget.py:493
 msgid "Copy Equation"
 msgstr "Gleichung speichern"
 
-#: src/custom_widgets/message_widget.py:502
+#: src/custom_widgets/message_widget.py:500
 msgid "Equation copied to the clipboard"
 msgstr "Gleichung in Zwischenablage kopiert"
 
-#: src/custom_widgets/message_widget.py:522
+#: src/custom_widgets/message_widget.py:520
 msgid "Remove Message"
 msgstr "Nachricht entfernen"
 
-#: src/custom_widgets/message_widget.py:542
+#: src/custom_widgets/message_widget.py:540
 msgid "Edit Message"
 msgstr "Nachricht bearbeiten"
 
-#: src/custom_widgets/message_widget.py:553
+#: src/custom_widgets/message_widget.py:551
 msgid "Regenerate Message"
 msgstr "Nachricht regenerieren"
 
-#: src/custom_widgets/message_widget.py:565
+#: src/custom_widgets/message_widget.py:563
 msgid "Dictate Message"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:585
+#: src/custom_widgets/message_widget.py:583
 msgid "Message copied to the clipboard"
 msgstr "Nachricht in die Zwischenablage kopiert"
 
-#: src/custom_widgets/message_widget.py:645
+#: src/custom_widgets/message_widget.py:648
 msgid "Message cannot be regenerated while receiving a response"
 msgstr ""
 "Nachricht kann nicht regeneriert werden, während eine Antwort gesendet wird"
 
-#: src/custom_widgets/message_widget.py:954
+#: src/custom_widgets/message_widget.py:957
 msgid "Thought"
 msgstr "Gedanke"
 

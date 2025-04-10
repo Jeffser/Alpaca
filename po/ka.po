@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alpaca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 01:19-0600\n"
+"POT-Creation-Date: 2025-04-10 16:47-0600\n"
 "PO-Revision-Date: 2025-02-24 12:04+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
@@ -1981,7 +1981,7 @@ msgstr ""
 msgid "Discussions"
 msgstr ""
 
-#: src/window.py:187
+#: src/window.py:185
 msgid "Speech recognition model is being downloaded ({})"
 msgstr ""
 
@@ -2051,8 +2051,8 @@ msgstr "შემდეგი"
 
 #: src/window.py:618 src/instance_manager.py:397 src/instance_manager.py:398
 #: src/tool_manager.py:136 src/window.ui:968 src/window.ui:972
-#: src/custom_widgets/message_widget.py:81
-#: src/custom_widgets/message_widget.py:231
+#: src/custom_widgets/message_widget.py:79
+#: src/custom_widgets/message_widget.py:229
 #: src/custom_widgets/model_manager_widget.py:422
 #: src/custom_widgets/dialog_widget.py:148
 #: src/custom_widgets/dialog_widget.py:160
@@ -2223,7 +2223,7 @@ msgstr "წავშალო მიმაგრებული ფაილი?
 msgid "Are you sure you want to remove attachment?"
 msgstr "მართლა გნებავთ მიმაგრებული ფაილის წაშლა?"
 
-#: src/window.py:1430 src/instance_manager.py:860
+#: src/window.py:1430 src/instance_manager.py:872
 #: src/custom_widgets/model_manager_widget.py:423
 #: src/custom_widgets/model_manager_widget.py:463
 msgid "Remove"
@@ -3186,7 +3186,7 @@ msgid "Instance"
 msgstr "გაშვებული ასლი"
 
 #: src/instance_manager.py:59 src/instance_manager.py:68 src/window.ui:154
-#: src/custom_widgets/chat_widget.py:417
+#: src/custom_widgets/chat_widget.py:419
 msgid "New Chat"
 msgstr "ახალი ჩატი"
 
@@ -3315,7 +3315,7 @@ msgid "Model to use when generating a chat title."
 msgstr "მოდელი ჩატის სათაურის გენერაციისთვის."
 
 #: src/instance_manager.py:404 src/instance_manager.py:405
-#: src/custom_widgets/message_widget.py:235
+#: src/custom_widgets/message_widget.py:233
 msgid "Save"
 msgstr "შენახვა"
 
@@ -3389,23 +3389,31 @@ msgstr ""
 msgid "Lambda Labs cloud inference API"
 msgstr ""
 
-#: src/instance_manager.py:837
+#: src/instance_manager.py:839
+msgid "Cerebras AI cloud inference API"
+msgstr ""
+
+#: src/instance_manager.py:845
+msgid "Kluster AI cloud inference API"
+msgstr ""
+
+#: src/instance_manager.py:849
 msgid "OpenAI Compatible Instance"
 msgstr "OpenAI-სთან თავსებადი ასლი"
 
-#: src/instance_manager.py:838
+#: src/instance_manager.py:850
 msgid "AI instance compatible with OpenAI library"
 msgstr ""
 
-#: src/instance_manager.py:860
+#: src/instance_manager.py:872
 msgid "Remove Instance?"
 msgstr "წავშალო გაშვებული ასლი?"
 
-#: src/instance_manager.py:860
+#: src/instance_manager.py:872
 msgid "Are you sure you want to remove this instance?"
 msgstr "მართლა გნებავთ ამ გაშვებული ასლის წაშლა?"
 
-#: src/instance_manager.py:875
+#: src/instance_manager.py:887
 msgid "Edit Instance"
 msgstr "შემთხვევის ჩასწორება"
 
@@ -4118,147 +4126,147 @@ msgstr ""
 msgid "Send Message as User"
 msgstr "შეტყობინების გაგზავნა მომხმარებლის სახელით"
 
-#: src/custom_widgets/chat_widget.py:86
+#: src/custom_widgets/chat_widget.py:88
 msgid "Try one of these prompts"
 msgstr "სცადეთ ერთერთი მოთხოვნა"
 
-#: src/custom_widgets/chat_widget.py:115
+#: src/custom_widgets/chat_widget.py:117
 msgid "Send prompt: '{}'"
 msgstr "გაგზავნის მოთხოვნა: '{}'"
 
-#: src/custom_widgets/chat_widget.py:121
+#: src/custom_widgets/chat_widget.py:123
 msgid "Refresh Prompts"
 msgstr ""
 
-#: src/custom_widgets/chat_widget.py:179
+#: src/custom_widgets/chat_widget.py:181
 msgid "Chat exported successfully"
 msgstr "ჩატის გატანა წარმატებით დასრულდა"
 
-#: src/custom_widgets/chat_widget.py:199
+#: src/custom_widgets/chat_widget.py:201
 msgid "User"
 msgstr "მომხმარებელი"
 
-#: src/custom_widgets/chat_widget.py:203
-#: src/custom_widgets/message_widget.py:677
+#: src/custom_widgets/chat_widget.py:205
+#: src/custom_widgets/message_widget.py:680
 msgid "System"
 msgstr "სისტემა"
 
-#: src/custom_widgets/chat_widget.py:291
+#: src/custom_widgets/chat_widget.py:293
 msgid "Regenerate Response"
 msgstr "პასუხის თავიდან გენერაცია"
 
-#: src/custom_widgets/chat_widget.py:455
+#: src/custom_widgets/chat_widget.py:457
 msgid "Copy of {}"
 msgstr "{}-ის ასლი"
 
-#: src/custom_widgets/chat_widget.py:470
+#: src/custom_widgets/chat_widget.py:472
 msgid "Chat imported successfully"
 msgstr "ჩატის შემოტანა წარმატებით დასრულდა"
 
-#: src/custom_widgets/message_widget.py:90
+#: src/custom_widgets/message_widget.py:88
 msgid "Save Message"
 msgstr "შეტყობინების შენახვა"
 
-#: src/custom_widgets/message_widget.py:131
-#: src/custom_widgets/message_widget.py:270
+#: src/custom_widgets/message_widget.py:129
+#: src/custom_widgets/message_widget.py:268
 msgid "Message edited successfully"
 msgstr "შეტყობინების ჩასწორება წარმატებით დასრულდა"
 
-#: src/custom_widgets/message_widget.py:157
+#: src/custom_widgets/message_widget.py:155
 msgid "Response message"
 msgstr "პასუხი შეტყობინება"
 
-#: src/custom_widgets/message_widget.py:159
+#: src/custom_widgets/message_widget.py:157
 msgid "System message"
 msgstr "სისტემური შეტყობინება"
 
-#: src/custom_widgets/message_widget.py:161
+#: src/custom_widgets/message_widget.py:159
 msgid "User message"
 msgstr "მომხმარებლის შეტყობინება"
 
-#: src/custom_widgets/message_widget.py:220
+#: src/custom_widgets/message_widget.py:218
 msgid "{}Code Block"
 msgstr "{}კოდის ბლოკი"
 
-#: src/custom_widgets/message_widget.py:222
+#: src/custom_widgets/message_widget.py:220
 msgid "Code Block"
 msgstr "კოდის ბლოკი"
 
-#: src/custom_widgets/message_widget.py:223
-#: src/custom_widgets/message_widget.py:532
+#: src/custom_widgets/message_widget.py:221
+#: src/custom_widgets/message_widget.py:530
 msgid "Copy Message"
 msgstr "შეტყობინების კოპირება"
 
-#: src/custom_widgets/message_widget.py:227
+#: src/custom_widgets/message_widget.py:225
 msgid "Edit Code Block"
 msgstr "კოდის ბლოკის ჩასწორება"
 
-#: src/custom_widgets/message_widget.py:239
-#: src/custom_widgets/message_widget.py:315
+#: src/custom_widgets/message_widget.py:237
+#: src/custom_widgets/message_widget.py:313
 msgid "Run Script"
 msgstr "სკრიპტის გაშვება"
 
-#: src/custom_widgets/message_widget.py:279
+#: src/custom_widgets/message_widget.py:277
 msgid "Code copied to the clipboard"
 msgstr "კოდი დაკოპირდა ბუფერში"
 
-#: src/custom_widgets/message_widget.py:316
+#: src/custom_widgets/message_widget.py:314
 msgid ""
 "Make sure you understand what this script does before running it, Alpaca is "
 "not responsible for any damages to your device or data"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:318
+#: src/custom_widgets/message_widget.py:316
 msgid "Execute"
 msgstr "შესრულება"
 
+#: src/custom_widgets/message_widget.py:395
 #: src/custom_widgets/message_widget.py:397
-#: src/custom_widgets/message_widget.py:399
 msgid "Image"
 msgstr "გამოსახულება"
 
-#: src/custom_widgets/message_widget.py:408
-#: src/custom_widgets/message_widget.py:420
+#: src/custom_widgets/message_widget.py:406
+#: src/custom_widgets/message_widget.py:418
 msgid "Missing Image"
 msgstr "ნაკლული გამოსახულება"
 
-#: src/custom_widgets/message_widget.py:422
+#: src/custom_widgets/message_widget.py:420
 msgid "Missing image"
 msgstr "ნაკლული გამოსახულება"
 
-#: src/custom_widgets/message_widget.py:495
+#: src/custom_widgets/message_widget.py:493
 msgid "Copy Equation"
 msgstr "ტოლობის კოპირება"
 
-#: src/custom_widgets/message_widget.py:502
+#: src/custom_widgets/message_widget.py:500
 msgid "Equation copied to the clipboard"
 msgstr "ტოლობა დაკოპირდა გაცვლის ბუფერში"
 
-#: src/custom_widgets/message_widget.py:522
+#: src/custom_widgets/message_widget.py:520
 msgid "Remove Message"
 msgstr "შეტყობინების წაშლა"
 
-#: src/custom_widgets/message_widget.py:542
+#: src/custom_widgets/message_widget.py:540
 msgid "Edit Message"
 msgstr "შეტყობინების შეცვლა"
 
-#: src/custom_widgets/message_widget.py:553
+#: src/custom_widgets/message_widget.py:551
 msgid "Regenerate Message"
 msgstr "შეტყობინების თავიდან გენერაცია"
 
-#: src/custom_widgets/message_widget.py:565
+#: src/custom_widgets/message_widget.py:563
 msgid "Dictate Message"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:585
+#: src/custom_widgets/message_widget.py:583
 msgid "Message copied to the clipboard"
 msgstr "შეტყობინება დაკოპირდა გაცვლის ბუფერში"
 
-#: src/custom_widgets/message_widget.py:645
+#: src/custom_widgets/message_widget.py:648
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "პასუხის მიღებისას შეტყობინებას თავიდან ვერ დააგენერირებთ"
 
-#: src/custom_widgets/message_widget.py:954
+#: src/custom_widgets/message_widget.py:957
 msgid "Thought"
 msgstr "ფიქრი"
 

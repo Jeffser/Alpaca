@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-10 01:19-0600\n"
+"POT-Creation-Date: 2025-04-10 16:47-0600\n"
 "PO-Revision-Date: 2025-01-08 HO:MI+ZONE\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Hindi\n"
@@ -1996,7 +1996,7 @@ msgstr "प्रायोजक बनें"
 msgid "Discussions"
 msgstr "चर्चाएँ"
 
-#: src/window.py:187
+#: src/window.py:185
 msgid "Speech recognition model is being downloaded ({})"
 msgstr "वाक् पहचान मॉडल डाउनलोड किया जा रहा है ({})"
 
@@ -2068,8 +2068,8 @@ msgstr "अगला"
 
 #: src/window.py:618 src/instance_manager.py:397 src/instance_manager.py:398
 #: src/tool_manager.py:136 src/window.ui:968 src/window.ui:972
-#: src/custom_widgets/message_widget.py:81
-#: src/custom_widgets/message_widget.py:231
+#: src/custom_widgets/message_widget.py:79
+#: src/custom_widgets/message_widget.py:229
 #: src/custom_widgets/model_manager_widget.py:422
 #: src/custom_widgets/dialog_widget.py:148
 #: src/custom_widgets/dialog_widget.py:160
@@ -2239,7 +2239,7 @@ msgstr "संलग्नक हटाएं?"
 msgid "Are you sure you want to remove attachment?"
 msgstr "क्या आप संलग्नक हटाना चाहते हैं?"
 
-#: src/window.py:1430 src/instance_manager.py:860
+#: src/window.py:1430 src/instance_manager.py:872
 #: src/custom_widgets/model_manager_widget.py:423
 #: src/custom_widgets/model_manager_widget.py:463
 msgid "Remove"
@@ -3461,7 +3461,7 @@ msgid "Instance"
 msgstr "इंस्टेंस"
 
 #: src/instance_manager.py:59 src/instance_manager.py:68 src/window.ui:154
-#: src/custom_widgets/chat_widget.py:417
+#: src/custom_widgets/chat_widget.py:419
 msgid "New Chat"
 msgstr "नई चैट शुरू करें"
 
@@ -3597,7 +3597,7 @@ msgid "Model to use when generating a chat title."
 msgstr "चैट शीर्षक उत्पन्न करते समय उपयोग करने के लिए मॉडल।"
 
 #: src/instance_manager.py:404 src/instance_manager.py:405
-#: src/custom_widgets/message_widget.py:235
+#: src/custom_widgets/message_widget.py:233
 msgid "Save"
 msgstr "सहेजें"
 
@@ -3671,23 +3671,31 @@ msgstr "फायरवर्क्स एआई अनुमान प्ले
 msgid "Lambda Labs cloud inference API"
 msgstr "लैम्ब्डा लैब्स क्लाउड अनुमान एपीआई"
 
-#: src/instance_manager.py:837
+#: src/instance_manager.py:839
+msgid "Cerebras AI cloud inference API"
+msgstr ""
+
+#: src/instance_manager.py:845
+msgid "Kluster AI cloud inference API"
+msgstr ""
+
+#: src/instance_manager.py:849
 msgid "OpenAI Compatible Instance"
 msgstr "ओपनएआई संगत इंस्टेंस"
 
-#: src/instance_manager.py:838
+#: src/instance_manager.py:850
 msgid "AI instance compatible with OpenAI library"
 msgstr "ओपनएआई लाइब्रेरी के साथ संगत एआई इंस्टेंस"
 
-#: src/instance_manager.py:860
+#: src/instance_manager.py:872
 msgid "Remove Instance?"
 msgstr "इंस्टेंस हटाएं?"
 
-#: src/instance_manager.py:860
+#: src/instance_manager.py:872
 msgid "Are you sure you want to remove this instance?"
 msgstr "क्या आप वाकई इस इंस्टेंस को हटाना चाहते हैं?"
 
-#: src/instance_manager.py:875
+#: src/instance_manager.py:887
 msgid "Edit Instance"
 msgstr "इंस्टेंस संपादित करें"
 
@@ -4440,91 +4448,91 @@ msgstr "संदेश उत्पन्न करने के लिए म�
 msgid "Send Message as User"
 msgstr "उपयोगकर्ता के रूप में संदेश भेजें"
 
-#: src/custom_widgets/chat_widget.py:86
+#: src/custom_widgets/chat_widget.py:88
 msgid "Try one of these prompts"
 msgstr "इनमें से एक प्रॉम्प्ट आजमाएं"
 
-#: src/custom_widgets/chat_widget.py:115
+#: src/custom_widgets/chat_widget.py:117
 msgid "Send prompt: '{}'"
 msgstr "प्रॉम्प्ट भेजें: '{}'"
 
-#: src/custom_widgets/chat_widget.py:121
+#: src/custom_widgets/chat_widget.py:123
 msgid "Refresh Prompts"
 msgstr "प्रॉम्प्ट्स को ताज़ा करें"
 
-#: src/custom_widgets/chat_widget.py:179
+#: src/custom_widgets/chat_widget.py:181
 msgid "Chat exported successfully"
 msgstr "चैट सफलतापूर्वक निर्यात किया गया"
 
-#: src/custom_widgets/chat_widget.py:199
+#: src/custom_widgets/chat_widget.py:201
 msgid "User"
 msgstr "उपयोगकर्ता"
 
-#: src/custom_widgets/chat_widget.py:203
-#: src/custom_widgets/message_widget.py:677
+#: src/custom_widgets/chat_widget.py:205
+#: src/custom_widgets/message_widget.py:680
 msgid "System"
 msgstr "सिस्टम"
 
-#: src/custom_widgets/chat_widget.py:291
+#: src/custom_widgets/chat_widget.py:293
 msgid "Regenerate Response"
 msgstr "उत्तर पुनः उत्पन्न करें"
 
-#: src/custom_widgets/chat_widget.py:455
+#: src/custom_widgets/chat_widget.py:457
 msgid "Copy of {}"
 msgstr "{} की प्रति"
 
-#: src/custom_widgets/chat_widget.py:470
+#: src/custom_widgets/chat_widget.py:472
 msgid "Chat imported successfully"
 msgstr "चैट सफलतापूर्वक आयात किया गया"
 
-#: src/custom_widgets/message_widget.py:90
+#: src/custom_widgets/message_widget.py:88
 msgid "Save Message"
 msgstr "संदेश सहेजें"
 
-#: src/custom_widgets/message_widget.py:131
-#: src/custom_widgets/message_widget.py:270
+#: src/custom_widgets/message_widget.py:129
+#: src/custom_widgets/message_widget.py:268
 msgid "Message edited successfully"
 msgstr "संदेश सफलतापूर्वक संपादित किया गया है"
 
-#: src/custom_widgets/message_widget.py:157
+#: src/custom_widgets/message_widget.py:155
 msgid "Response message"
 msgstr "प्रतिक्रिया संदेश"
 
-#: src/custom_widgets/message_widget.py:159
+#: src/custom_widgets/message_widget.py:157
 msgid "System message"
 msgstr "सिस्टम संदेश"
 
-#: src/custom_widgets/message_widget.py:161
+#: src/custom_widgets/message_widget.py:159
 msgid "User message"
 msgstr "उपयोगकर्ता संदेश"
 
-#: src/custom_widgets/message_widget.py:220
+#: src/custom_widgets/message_widget.py:218
 msgid "{}Code Block"
 msgstr "{}कोड ब्लॉक"
 
-#: src/custom_widgets/message_widget.py:222
+#: src/custom_widgets/message_widget.py:220
 msgid "Code Block"
 msgstr "कोड ब्लॉक"
 
-#: src/custom_widgets/message_widget.py:223
-#: src/custom_widgets/message_widget.py:532
+#: src/custom_widgets/message_widget.py:221
+#: src/custom_widgets/message_widget.py:530
 msgid "Copy Message"
 msgstr "संदेश कॉपी करें"
 
-#: src/custom_widgets/message_widget.py:227
+#: src/custom_widgets/message_widget.py:225
 msgid "Edit Code Block"
 msgstr "कोड ब्लॉक संपादित करें"
 
-#: src/custom_widgets/message_widget.py:239
-#: src/custom_widgets/message_widget.py:315
+#: src/custom_widgets/message_widget.py:237
+#: src/custom_widgets/message_widget.py:313
 msgid "Run Script"
 msgstr "स्क्रिप्ट चलाएँ"
 
-#: src/custom_widgets/message_widget.py:279
+#: src/custom_widgets/message_widget.py:277
 msgid "Code copied to the clipboard"
 msgstr "कोड क्लिपबोर्ड में कॉपी किया गया"
 
-#: src/custom_widgets/message_widget.py:316
+#: src/custom_widgets/message_widget.py:314
 msgid ""
 "Make sure you understand what this script does before running it, Alpaca is "
 "not responsible for any damages to your device or data"
@@ -4532,57 +4540,57 @@ msgstr ""
 "यह सुनिश्चित करें कि आप स्क्रिप्ट क्या करती है, इसे चलाने से पहले समझते हैं, अल्पाका आपके "
 "डिवाइस या डेटा को होने वाले किसी भी नुकसान के लिए जिम्मेदार नहीं है।"
 
-#: src/custom_widgets/message_widget.py:318
+#: src/custom_widgets/message_widget.py:316
 msgid "Execute"
 msgstr "क्रियान्वित करें"
 
+#: src/custom_widgets/message_widget.py:395
 #: src/custom_widgets/message_widget.py:397
-#: src/custom_widgets/message_widget.py:399
 msgid "Image"
 msgstr "छवि"
 
-#: src/custom_widgets/message_widget.py:408
-#: src/custom_widgets/message_widget.py:420
+#: src/custom_widgets/message_widget.py:406
+#: src/custom_widgets/message_widget.py:418
 msgid "Missing Image"
 msgstr "छवि नहीं मिली"
 
-#: src/custom_widgets/message_widget.py:422
+#: src/custom_widgets/message_widget.py:420
 msgid "Missing image"
 msgstr "छवि नहीं मिली"
 
-#: src/custom_widgets/message_widget.py:495
+#: src/custom_widgets/message_widget.py:493
 msgid "Copy Equation"
 msgstr "समीकरण कॉपी करें"
 
-#: src/custom_widgets/message_widget.py:502
+#: src/custom_widgets/message_widget.py:500
 msgid "Equation copied to the clipboard"
 msgstr "समीकरण क्लिपबोर्ड में कॉपी किया गया है"
 
-#: src/custom_widgets/message_widget.py:522
+#: src/custom_widgets/message_widget.py:520
 msgid "Remove Message"
 msgstr "संदेश हटाएं"
 
-#: src/custom_widgets/message_widget.py:542
+#: src/custom_widgets/message_widget.py:540
 msgid "Edit Message"
 msgstr "संदेश संपादित करें"
 
-#: src/custom_widgets/message_widget.py:553
+#: src/custom_widgets/message_widget.py:551
 msgid "Regenerate Message"
 msgstr "संदेश पुनः उत्पन्न करें"
 
-#: src/custom_widgets/message_widget.py:565
+#: src/custom_widgets/message_widget.py:563
 msgid "Dictate Message"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:585
+#: src/custom_widgets/message_widget.py:583
 msgid "Message copied to the clipboard"
 msgstr "संदेश क्लिपबोर्ड में कॉपी किया गया"
 
-#: src/custom_widgets/message_widget.py:645
+#: src/custom_widgets/message_widget.py:648
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "उत्तर प्राप्त करते समय संदेश को पुनः उत्पन्न नहीं किया जा सकता"
 
-#: src/custom_widgets/message_widget.py:954
+#: src/custom_widgets/message_widget.py:957
 msgid "Thought"
 msgstr "विचार"
 
