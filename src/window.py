@@ -56,7 +56,7 @@ gi.require_version('Spelling', '1')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelling, GObject
 
 from . import generic_actions, sql_manager, instance_manager, tool_manager
-from .constants import AlpacaFolders, Platforms, SPEACH_RECOGNITION_LANGUAGES
+from .constants import AlpacaFolders, Platforms, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
 from .custom_widgets import message_widget, chat_widget, terminal_widget, dialog_widget, model_manager_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir, IN_FLATPAK
 
@@ -130,6 +130,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     powersaver_warning_switch = Gtk.Template.Child()
     mic_auto_send_switch = Gtk.Template.Child()
     mic_language_combo = Gtk.Template.Child()
+    tts_voice_combo = Gtk.Template.Child()
 
     banner = Gtk.Template.Child()
 
@@ -164,6 +165,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     sql_instance = sql_manager.Instance(os.path.join(data_dir, "alpaca.db"))
     mid = MarkItDown(enable_plugins=False)
+
+    # tts
+    message_dictated = None
 
     @Gtk.Template.Callback()
     def microphone_toggled(self, button):
@@ -577,6 +581,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def selected_mic_language(self, combo, user_data):
         language = combo.get_selected_item().get_string().split(' (')[-1][:-1]
         self.sql_instance.insert_or_update_preferences({'mic_language': language})
+
+    @Gtk.Template.Callback()
+    def selected_tts_voice(self, combo, user_data):
+        language = TTS_VOICES.get(combo.get_selected_item().get_string())
+        if language:
+            self.sql_instance.insert_or_update_preferences({'tts_voice': language})
 
     @Gtk.Template.Callback()
     def switch_powersaver_warning(self, switch, user_data):
@@ -1128,6 +1138,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         self.mic_language_combo.set_model(string_list)
         self.mic_language_combo.set_selected(selected_index)
+
+        selected_voice = self.sql_instance.get_preference('tts_voice', '')
+        selected_index = 0
+        string_list = Gtk.StringList()
+        for name, value in TTS_VOICES.items():
+            if value == selected_voice:
+                selected_index = 0
+            string_list.append(name)
+
+        self.tts_voice_combo.set_model(string_list)
+        self.tts_voice_combo.set_selected(selected_index)
 
         instance_manager.update_instance_list()
 

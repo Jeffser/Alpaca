@@ -12,6 +12,8 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_gtk4agg import FigureCanvasGTK4Agg as FigureCanvas
 from matplotlib.figure import Figure
 from PIL import Image
+import sounddevice as sd
+from kokoro import KPipeline
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .table_widget import TableWidget
 from . import dialog_widget, terminal_widget, model_manager_widget
@@ -553,6 +555,19 @@ class option_popup(Gtk.Popover):
             self.regenerate_button.connect('clicked', lambda *_: self.regenerate_message())
             container.append(self.regenerate_button)
 
+        self.tts_stack = Gtk.Stack()
+        container.append(self.tts_stack)
+        self.tts_button = Gtk.ToggleButton(
+            halign=1,
+            hexpand=True,
+            icon_name='bullhorn-symbolic',
+            css_classes=["flat"],
+            tooltip_text=_("Dictate Message")
+        )
+        self.tts_button.connect('toggled', self.dictate_message)
+        self.tts_stack.add_named(self.tts_button, 'button')
+        self.tts_stack.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
+
     def delete_message(self):
         logger.debug("Deleting message")
         chat = self.message_element.get_chat()
@@ -580,6 +595,38 @@ class option_popup(Gtk.Popover):
         self.message_element.content_children = []
         self.message_element.container.append(edit_text_b)
         window.set_focus(edit_text_b)
+
+    def dictate_message(self, button):
+        def run(text:str, btn):
+            GLib.idle_add(self.tts_stack.set_visible_child_name, 'loading')
+            voice = window.sql_instance.get_preference('tts_voice', 'af_heart')
+            tts_engine = KPipeline(lang_code=voice[0])
+
+            generator = tts_engine(
+                text,
+                voice=voice,
+                speed=1.2,
+                split_pattern=r'\n\n\n\n'
+            )
+            for gs, ps, audio in generator:
+                if not btn.get_active():
+                    break
+                sd.play(audio, samplerate=24000)
+                GLib.idle_add(self.tts_stack.set_visible_child_name, 'button')
+                sd.wait()
+            GLib.idle_add(self.tts_button.set_active, False)
+
+        if button.get_active():
+            GLib.idle_add(self.message_element.add_css_class, 'tts_message')
+            if window.message_dictated and window.message_dictated.footer.popup.tts_button.get_active():
+                 window.message_dictated.footer.popup.tts_button.set_active(False)
+            window.message_dictated = self.message_element
+            threading.Thread(target=run, args=(self.message_element.text, button)).start()
+        else:
+            GLib.idle_add(self.message_element.remove_css_class, 'tts_message')
+            GLib.idle_add(self.tts_stack.set_visible_child_name, 'button')
+            window.message_dictated = None
+            threading.Thread(target=sd.stop).start()
 
     def regenerate_message(self):
         chat = self.message_element.get_chat()

@@ -24,11 +24,10 @@
 .model_list_box > * {
 	margin: 0;
 }
-.user_message > label, .response_message > label, .response_message textview {
-  border-radius: 5px;
-  padding: 5px;
+.tts_message {
+  border-radius: 10px;
 }
-.user_message label:focus, .response_message label:focus, .editing_message_textview:focus, .code_block:focus {
+.editing_message_textview:focus, .code_block:focus, .tts_message {
 	box-shadow: 0 0 1px 2px mix(@accent_color, @window_bg_color, 0.5);
 }
 .model_popover {
@@ -80,7 +79,9 @@ stacksidebar {
 .bottom_clamp {
 	padding: 12px;
 }
-
+.user_message label, .response_message > label, .response_message textview {
+  padding: 5px;
+}
 .model_flowbox, .model_flowbox .model_box, .p10 {
   padding: 10px;
 }
