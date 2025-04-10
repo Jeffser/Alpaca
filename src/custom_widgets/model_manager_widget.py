@@ -715,8 +715,6 @@ def get_local_models() -> dict:
 def pull_model_confirm(model_name:str):
     if model_name:
         model_name = model_name.strip().replace('\n', '')
-        if ':' not in model_name:
-            model_name += ':latest'
         if model_name not in list(get_local_models().keys()):
             model = pulling_model(model_name)
             window.local_model_flowbox.prepend(model)
