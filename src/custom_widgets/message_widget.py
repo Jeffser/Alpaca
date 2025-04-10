@@ -12,8 +12,6 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_gtk4agg import FigureCanvasGTK4Agg as FigureCanvas
 from matplotlib.figure import Figure
 from PIL import Image
-import sounddevice as sd
-from kokoro import KPipeline
 from ..internal import config_dir, data_dir, cache_dir, source_dir
 from .table_widget import TableWidget
 from . import dialog_widget, terminal_widget, model_manager_widget
@@ -597,8 +595,12 @@ class option_popup(Gtk.Popover):
         window.set_focus(edit_text_b)
 
     def dictate_message(self, button):
+        # I know I'm not supposed to be importing stuff inside functions
+        # but these libraries take a while to import and make the app launch 2x slower
         def run(text:str, btn):
             GLib.idle_add(self.tts_stack.set_visible_child_name, 'loading')
+            import sounddevice as sd
+            from kokoro import KPipeline
             voice = window.sql_instance.get_preference('tts_voice', 'af_heart')
             tts_engine = KPipeline(lang_code=voice[0])
 
@@ -623,6 +625,7 @@ class option_popup(Gtk.Popover):
             window.message_dictated = self.message_element
             threading.Thread(target=run, args=(self.message_element.text, button)).start()
         else:
+            import sounddevice as sd
             GLib.idle_add(self.message_element.remove_css_class, 'tts_message')
             GLib.idle_add(self.tts_stack.set_visible_child_name, 'button')
             window.message_dictated = None
