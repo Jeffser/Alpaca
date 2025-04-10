@@ -221,6 +221,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 )
 
                 try:
+                    # Check if optional dependencies are met
+                    if not whisper or not pyaudio:
+                        raise ImportError(_("Whisper or PyAudio not installed. Cannot use microphone feature."))
                     while button.get_active():
                         frames = []
                         for i in range(0, int(samplerate / 1024 * 2)):
