@@ -44,10 +44,14 @@ possible_prompts = [
     "Can you explain the basics of machine learning?",
     "What is photoelectric effect?",
     "What is the history of the Great Wall of China?",
-    "Tell me some Historical facts about Taj Mahal",
+    "Tell me some historical facts about Taj Mahal",
     "Write a love story",
     "Write Shrödinger's equation in LaTeX",
-    "Write Field Equation in LaTeX"
+    "Write field equation in LaTeX",
+    "What is confirmation bias?",
+    "Tell me about your day",
+    "How to create a strong password",
+    "Tell me about sodium battery?"
 ]
 
 class chat(Gtk.Stack):
