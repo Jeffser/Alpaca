@@ -47,7 +47,8 @@ possible_prompts = [
     "Tell me some Historical facts about Taj Mahal",
     "Write a love story",
     "Write Shrödinger's equation in LaTeX",
-    "Write Field Equation in LaTeX"
+    "Write Field Equation in LaTeX",
+    "compare left vs right wing politics."
 ]
 
 class chat(Gtk.Stack):
