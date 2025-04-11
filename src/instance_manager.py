@@ -849,13 +849,13 @@ class grokai(base_openai):
     instance_type_display = 'Grok AI'
     instance_url = 'https://api.x.ai/v1/'
     reasoning_effort = 'none' # Add default reasoning effort
+    description = _('XAI Grok AI inference API')
 
     def __init__(self, data:dict={}):
         super().__init__(data) # Call base class init
         self.reasoning_effort = data.get('reasoning_effort', self.reasoning_effort) # Load reasoning effort
 
     def get_preferences_page(self) -> Adw.PreferencesPage:
-        # Get the base page elements
         pp = super().get_preferences_page()
         
         settings_group = pp.get_child_at_index(1)
