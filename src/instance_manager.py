@@ -156,7 +156,7 @@ class base_instance:
             window.instance_listbox.unselect_all()
         bot_message.update_message({"done": True})
 
-    def generate_chat_title(self, chat, prompt:str):
+    def generate_chat_title(self, chat, prompt:str) -> str | None:
         class chat_title(BaseModel): #Pydantic
             title:str
             emoji:str = ""
