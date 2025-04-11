@@ -462,7 +462,6 @@ class chat_list(Gtk.ListBox):
         new_chat_id = window.generate_uuid()
         new_chat = self.prepend_chat(new_chat_name, new_chat_id)
         window.sql_instance.duplicate_chat(old_chat_window, new_chat)
-        threading.Thread(target=new_chat.load_chat_messages).start()
 
     def on_chat_imported(self, file_dialog, result):
         file = file_dialog.open_finish(result)
@@ -472,7 +471,6 @@ class chat_list(Gtk.ListBox):
             file.copy(Gio.File.new_for_path(os.path.join(cache_dir, 'import.db')), Gio.FileCopyFlags.OVERWRITE, None, None, None, None)
             for chat in window.sql_instance.import_chat(os.path.join(cache_dir, 'import.db'), [tab.chat_window.get_name() for tab in self.tab_list]):
                 new_chat = self.prepend_chat(chat[1], chat[0])
-                threading.Thread(target=new_chat.load_chat_messages).start()
         window.show_toast(_("Chat imported successfully"), window.main_overlay)
 
     def import_chat(self):
