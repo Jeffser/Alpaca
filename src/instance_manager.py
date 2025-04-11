@@ -118,6 +118,7 @@ class base_instance:
         if not bot_message.spinner:
             bot_message.spinner = Adw.Spinner()
             bot_message.container.append(bot_message.spinner)
+            bot_message.reasoning_text = "" # Initialize temporary storage for reasoning
 
         if self.instance_type in ('gemini', 'venice', 'anthropic'):
             for i in range(len(messages)):
@@ -137,24 +138,44 @@ class base_instance:
                 params["tools"] = tools
                 params["tool_choice"] = "none"
 
+        if self.instance_type == 'grokai' and hasattr(self, 'reasoning_effort') and self.reasoning_effort and self.reasoning_effort.lower() != 'none':
+             params["reasoning_effort"] = self.reasoning_effort.lower()
+
         if self.seed != 0 and self.instance_type not in ('gemini', 'venice'):
             params["seed"] = self.seed
 
         try:
-            bot_message.update_message({"clear": True})
+            GLib.idle_add(bot_message.update_message, {"clear": True})
             response = self.client.chat.completions.create(**params)
             for chunk in response:
                 if chunk.choices and chunk.choices[0].delta:
                     delta = chunk.choices[0].delta
                     if delta.content:
-                        bot_message.update_message({"content": delta.content})
+                         GLib.idle_add(bot_message.update_message, {"content": delta.content})
+                    reasoning_chunk = getattr(delta, 'reasoning_content', None)
+                    if reasoning_chunk:
+                        # Make sure reasoning_text exists before appending
+                        if not hasattr(bot_message, 'reasoning_text'):
+                            bot_message.reasoning_text = ""
+                        bot_message.reasoning_text += reasoning_chunk
+                # Allow stopping the stream
                 if not chat.busy:
                     break
         except Exception as e:
             dialog_widget.simple_error(_('Instance Error'), _('Message generation failed'), e)
             logger.error(e)
-            window.instance_listbox.unselect_all()
-        bot_message.update_message({"done": True})
+            # Safely update UI from thread
+            GLib.idle_add(window.instance_listbox.unselect_all)
+            GLib.idle_add(bot_message.update_message, {"done": True, "error": True})
+            return # Exit the function on error
+
+        if hasattr(bot_message, 'reasoning_text') and bot_message.reasoning_text:
+            reasoning_formatted = f"\n\n---\n*Reasoning:*\n{bot_message.reasoning_text}"
+            # Use GLib.idle_add for the final update too
+            GLib.idle_add(bot_message.update_message, {"content": reasoning_formatted, "done": True})
+        else:
+            # Mark done if no reasoning text
+            GLib.idle_add(bot_message.update_message, {"done": True})
 
     def generate_chat_title(self, chat, prompt:str):
         class chat_title(BaseModel): #Pydantic
@@ -255,6 +276,7 @@ class base_instance:
         pp.add(groups[-1])
 
         if 'max_tokens' in elements:
+            current_max_tokens = self.max_tokens if self.max_tokens is not None else 2048
             max_tokens_el = Adw.SpinRow(
                 title=_('Max Tokens'),
                 subtitle=_('Defines the maximum number of tokens (words + spaces) the AI can generate in a response. More tokens allow longer replies but may take more time and cost more.'),
@@ -263,7 +285,7 @@ class base_instance:
                 numeric=True,
                 snap_to_ticks=True,
                 adjustment=Gtk.Adjustment(
-                    value=self.max_tokens,
+                    value=int(current_max_tokens),
                     lower=50,
                     upper=16384,
                     step_increment=1
@@ -322,13 +344,14 @@ class base_instance:
         if 'model_directory' in elements:
             groups.append(Adw.PreferencesGroup())
             pp.add(groups[-1])
-            model_directory_el = Adw.ActionRow(title=_('Model Directory'), subtitle=self.model_directory, name="model_directory")
+            current_model_dir = self.model_directory if self.model_directory else _("Default")
+            model_directory_el = Adw.ActionRow(title=_('Model Directory'), subtitle=current_model_dir, name="model_directory")
             open_dir_button = Gtk.Button(
                 tooltip_text=_('Select Directory'),
                 icon_name='inode-directory-symbolic',
                 valign=3
             )
-            open_dir_button.connect('clicked', lambda button, row=model_directory_el: dialog_widget.simple_directory(lambda res, row=model_directory_el: row.set_subtitle(res.get_path())))
+            open_dir_button.connect('clicked', lambda button, row=model_directory_el: dialog_widget.simple_directory(lambda res, row=row: row.set_subtitle(res.get_path()) if res else None))
             model_directory_el.add_suffix(open_dir_button)
             groups[-1].add(model_directory_el)
 
@@ -340,74 +363,129 @@ class base_instance:
             title_model_el = Adw.ComboRow(title=_('Title Model'), subtitle=_('Model to use when generating a chat title.'), name='title_model')
             title_model_index = 0
             string_list = Gtk.StringList()
-            for i, model in enumerate(self.get_local_models()):
-                string_list.append(window.convert_model_name(model.get('name'), 0))
-                if model.get('name') == self.default_model:
-                    default_model_index = i
-                if model.get('name') == self.title_model:
-                    title_model_index = i
-            default_model_el.set_model(string_list)
-            default_model_el.set_selected(default_model_index)
-            title_model_el.set_model(string_list)
-            title_model_el.set_selected(title_model_index)
+            try:
+                local_models = self.get_local_models()
+            except Exception as e:
+                logger.warning(f"Could not fetch models for {self.name} in preferences: {e}")
+                local_models = []
+
+            for i, model in enumerate(local_models):
+                model_name = model.get('name')
+                if model_name:
+                    string_list.append(window.convert_model_name(model_name, 0))
+                    if model_name == self.default_model:
+                        default_model_index = i
+                    if model_name == self.title_model:
+                        title_model_index = i
+
+            if string_list.get_n_items() > 0:
+                default_model_el.set_model(string_list)
+                if default_model_index < string_list.get_n_items():
+                    default_model_el.set_selected(default_model_index)
+                else:
+                    default_model_el.set_selected(0)
+
+                title_model_el.set_model(string_list)
+                if title_model_index < string_list.get_n_items():
+                     title_model_el.set_selected(title_model_index)
+                else:
+                     title_model_el.set_selected(0)
+            else:
+                default_model_el.set_subtitle(_("No models found or instance unavailable"))
+                title_model_el.set_subtitle(_("No models found or instance unavailable"))
+
             groups[-1].add(default_model_el)
             groups[-1].add(title_model_el)
 
         def save():
             save_functions = {
                 'name': lambda val: setattr(self, 'name', val if val else _('Instance')),
-                'port': lambda val: setattr(self, 'instance_url', 'http://0.0.0.0:{}'.format(val)),
-                'url': lambda val: setattr(self, 'instance_url', '{}{}'.format('http://' if not re.match(r'^(http|https)://', val) else '', val.rstrip('/'))),
-                'api': lambda val: setattr(self, 'api_key', self.api_key if self.api_key and not val else (val if val else 'empty')),
-                'max_tokens': lambda val: setattr(self, 'max_tokens', val),
-                'temperature': lambda val: setattr(self, 'temperature', val),
-                'seed': lambda val: setattr(self, 'seed', val),
+                'port': lambda val: setattr(self, 'instance_url', f'http://0.0.0.0:{int(val)}'),
+                'url': lambda val: setattr(self, 'instance_url', '{}{}'.format('http://' if val and not re.match(r'^(http|https)://', val) else '', val.rstrip('/') if val else '')),
+                'api': lambda val: setattr(self, 'api_key', self.api_key if self.api_key and not val else (val if val else None)),
+                'max_tokens': lambda val: setattr(self, 'max_tokens', int(val) if val is not None else None),
+                'temperature': lambda val: setattr(self, 'temperature', float(val) if val is not None else 0.7),
+                'seed': lambda val: setattr(self, 'seed', int(val) if val is not None else 0),
                 'override': lambda name, val: self.overrides.__setitem__(name, val),
-                'model_directory': lambda val: setattr(self, 'model_directory', val),
-                'default_model': lambda val: setattr(self, 'default_model', window.convert_model_name(val, 1)),
-                'title_model': lambda val: setattr(self, 'title_model', window.convert_model_name(val, 1))
+                'model_directory': lambda val: setattr(self, 'model_directory', val if val != _("Default") else None),
+                'default_model': lambda val: setattr(self, 'default_model', window.convert_model_name(val, 1) if val else None),
+                'title_model': lambda val: setattr(self, 'title_model', window.convert_model_name(val, 1) if val else None),
+                # ---> ADDED LINE for reasoning effort <---
+                'reasoning_effort': lambda val: setattr(self, 'reasoning_effort', val.lower() if val else 'none')
             }
 
             for group in groups:
-                for el in list(list(list(list(group)[0])[1])[0]):
-                    value = None
-                    if isinstance(el, Adw.EntryRow) or isinstance(el, Adw.PasswordEntryRow):
-                        value = el.get_text().replace('\n', '')
-                    elif isinstance(el, Adw.SpinRow):
-                        value = el.get_value()
-                    elif isinstance(el, Adw.ComboRow):
-                        value = el.get_selected_item().get_string()
-                    elif isinstance(el, Adw.ActionRow):
-                        value = el.get_subtitle()
-                    if el.get_name().startswith('override:'):
-                        save_functions.get('override')(el.get_name().split(':')[1], value)
-                    elif save_functions.get(el.get_name()):
-                        save_functions.get(el.get_name())(value)
+                 row_container = group.get_first_child()
+                 if isinstance(row_container, Gtk.Box):
+                     current_row = row_container.get_first_child()
+                 elif isinstance(row_container, Adw.PreferencesRow):
+                     current_row = row_container
+                     row_container = group
+                 else:
+                     continue
+
+                 while current_row:
+                     if isinstance(current_row, Adw.PreferencesRow):
+                         widget_name = current_row.get_name()
+                         value = None
+                         try:
+                             if isinstance(current_row, Adw.EntryRow) or isinstance(current_row, Adw.PasswordEntryRow):
+                                 value = current_row.get_text().replace('\n', '')
+                             elif isinstance(current_row, Adw.SpinRow):
+                                 value = current_row.get_value()
+                             elif isinstance(current_row, Adw.ComboRow):
+                                 selected_item = current_row.get_selected_item()
+                                 value = selected_item.get_string() if selected_item else None
+                             elif isinstance(current_row, Adw.ActionRow) and widget_name == "model_directory":
+                                  value = current_row.get_subtitle()
+
+                             if widget_name:
+                                 if widget_name.startswith('override:'):
+                                     override_name = widget_name.split(':')[1]
+                                     if save_functions.get('override'):
+                                         save_functions['override'](override_name, value)
+                                 elif save_functions.get(widget_name):
+                                     save_functions[widget_name](value)
+
+                         except Exception as e:
+                              logger.error(f"Error processing preference '{widget_name}' with value '{value}': {e}")
+
+                     current_row = current_row.get_next_sibling()
 
             if not self.instance_id:
                 self.instance_id = window.generate_uuid()
-            window.sql_instance.insert_or_update_instance(self)
-            update_instance_list()
-            window.main_navigation_view.pop_to_tag('instance_manager')
 
-        pg = Adw.PreferencesGroup()
-        pp.add(pg)
-        button_container = Gtk.Box(spacing=10, halign=3)
+            try:
+                window.sql_instance.insert_or_update_instance(self)
+                update_instance_list()
+                window.main_navigation_view.pop_to_tag('instance_manager')
+            except Exception as e:
+                logger.error(f"Failed to save instance {self.name} ({self.instance_id}): {e}")
+                dialog_widget.simple_error(_("Save Failed"), _("Could not save instance settings."), str(e))
+
+        pg_buttons = Adw.PreferencesGroup()
+        pp.add(pg_buttons)
+        button_container = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12, halign=Gtk.Align.END, valign=Gtk.Align.CENTER, margin_top=10, margin_bottom=10, margin_start=10, margin_end=10)
+        pg_buttons.add(button_container)
+
         cancel_button = Gtk.Button(
             label=_('Cancel'),
             tooltip_text=_('Cancel'),
+            valign=Gtk.Align.CENTER,
             css_classes=['pill']
         )
         cancel_button.connect('clicked', lambda button: window.main_navigation_view.pop_to_tag('instance_manager'))
         button_container.append(cancel_button)
+
         save_button = Gtk.Button(
             label=_('Save'),
             tooltip_text=_('Save'),
+            valign=Gtk.Align.CENTER,
             css_classes=['pill', 'suggested-action']
         )
         save_button.connect('clicked', lambda button: save())
         button_container.append(save_button)
-        pg.add(button_container)
+
         return pp
 
 # Fallback for when there are no instances
@@ -766,6 +844,39 @@ class groq(base_openai):
     instance_type_display = 'Groq Cloud'
     instance_url = 'https://api.groq.com/openai/v1'
 
+class grokai(base_openai):
+    instance_type = 'grokai'
+    instance_type_display = 'Grok AI'
+    instance_url = 'https://api.x.ai/v1/'
+    reasoning_effort = 'none' # Add default reasoning effort
+
+    def __init__(self, data:dict={}):
+        super().__init__(data) # Call base class init
+        self.reasoning_effort = data.get('reasoning_effort', self.reasoning_effort) # Load reasoning effort
+
+    def get_preferences_page(self) -> Adw.PreferencesPage:
+        # Get the base page elements
+        pp = super().get_preferences_page()
+        
+        settings_group = pp.get_child_at_index(1)
+        if not settings_group:
+             settings_group = Adw.PreferencesGroup(title=_("Generation Settings"))
+             pp.insert(settings_group, 1)
+
+        reasoning_el = Adw.ComboRow(
+            title=_('Reasoning Effort'),
+            subtitle=_('Request the model to show its reasoning process (if supported).'),
+            name='reasoning_effort'
+        )
+        reasoning_options = ["None", "Low", "High"]
+        reasoning_el.set_model(Gtk.StringList.new(reasoning_options))
+        try:
+            reasoning_el.set_selected(reasoning_options.index(self.reasoning_effort.capitalize()))
+        except ValueError:
+            reasoning_el.set_selected(0)
+        settings_group.add(reasoning_el)
+        return pp
+
 class anthropic(base_openai):
     api_key = ''
     instance_type = 'anthropic'
@@ -917,6 +1028,6 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama_managed, ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, fireworks, lambda_labs, cerebras, klusterai, generic_openai]
+ready_instances = [ollama_managed, ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, grokai, fireworks, lambda_labs, cerebras, klusterai, generic_openai]
 
 
