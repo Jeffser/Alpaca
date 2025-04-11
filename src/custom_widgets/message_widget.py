@@ -608,7 +608,7 @@ class option_popup(Gtk.Popover):
                 text,
                 voice=voice,
                 speed=1.2,
-                split_pattern=r'\n\n\n\n'
+                split_pattern=r'\n+'
             )
             for gs, ps, audio in generator:
                 if not btn.get_active():
