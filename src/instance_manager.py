@@ -766,6 +766,72 @@ class groq(base_openai):
     instance_type_display = 'Groq Cloud'
     instance_url = 'https://api.groq.com/openai/v1'
 
+class grokai(base_openai):
+    instance_type = 'grokai'
+    instance_type_display = 'Grok AI'
+    instance_url = 'https://api.x.ai/v1/'
+    reasoning_effort = 'none'  # Default to no reasoning
+    description = _('XAI Grok AI inference API')
+
+    def __init__(self, data:dict={}):
+        super().__init__(data)
+        self.reasoning_effort = data.get('reasoning_effort', self.reasoning_effort)
+
+    def get_local_models(self) -> list:
+        try:
+            models = super().get_local_models()  # Get base models
+            # Filter to only include Grok models if needed
+            return [m for m in models if 'grok' in m['name'].lower()]
+        except Exception as e:
+            dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve models'), str(e))
+            logger.error(e)
+            window.instance_listbox.unselect_all()
+            return []
+
+    def generate_response(self, bot_message, chat, messages: list, model: str, tools: list):
+        """Override to add reasoning_effort parameter"""
+        params = {
+            "model": model,
+            "messages": messages,
+            "temperature": self.temperature,
+            "stream": True,
+            "reasoning_effort": self.reasoning_effort.lower()  # This enables reasoning
+        }
+        
+        if self.max_tokens:
+            params["max_tokens"] = self.max_tokens
+            
+        try:
+            GLib.idle_add(bot_message.update_message, {"clear": True})
+            response = self.client.chat.completions.create(**params)
+            
+            for chunk in response:
+                if chunk.choices and chunk.choices[0].delta:
+                    delta = chunk.choices[0].delta
+                    if delta.content:
+                        GLib.idle_add(bot_message.update_message, {"content": delta.content})
+                    # This handles the reasoning output
+                    if hasattr(delta, 'reasoning_content') and delta.reasoning_content:
+                        if not hasattr(bot_message, 'reasoning_text'):
+                            bot_message.reasoning_text = ""
+                        bot_message.reasoning_text += delta.reasoning_content
+                
+                if not chat.busy:  # Allow stopping the stream
+                    break
+
+            # Append reasoning if any was collected
+            if hasattr(bot_message, 'reasoning_text') and bot_message.reasoning_text:
+                reasoning_formatted = f"\n\n---\n*Reasoning:*\n{bot_message.reasoning_text}"
+                GLib.idle_add(bot_message.update_message, {"content": reasoning_formatted, "done": True})
+            else:
+                GLib.idle_add(bot_message.update_message, {"done": True})
+
+        except Exception as e:
+            dialog_widget.simple_error(_('Instance Error'), _('Message generation failed'), e)
+            logger.error(e)
+            GLib.idle_add(window.instance_listbox.unselect_all)
+            GLib.idle_add(bot_message.update_message, {"done": True, "error": True})
+
 class anthropic(base_openai):
     api_key = ''
     instance_type = 'anthropic'
@@ -917,6 +983,6 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama_managed, ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, fireworks, lambda_labs, cerebras, klusterai, generic_openai]
+ready_instances = [ollama_managed, ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, grokai, fireworks, lambda_labs, cerebras, klusterai, generic_openai]
 
 
