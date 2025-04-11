@@ -156,39 +156,55 @@ class base_instance:
             window.instance_listbox.unselect_all()
         bot_message.update_message({"done": True})
 
-    def generate_chat_title(self, chat, prompt:str):
-        class chat_title(BaseModel): #Pydantic
-            title:str
-            emoji:str = ""
-
+    def generate_chat_title(self, chat, prompt: str) -> str:
+        class ChatTitle(BaseModel):
+            title: str
+            emoji: str = ""
+    
         messages = [
-            {"role": "system" if self.instance_type not in ('gemini', 'venice', 'anthropic') else "user", "content": "You are an assistant that generates short chat titles based on the first message from a user. If you want to add an emoji, use the emoji character directly (e.g., 😀) instead of its description (e.g., ':happy_face:')."},
-            {"role": "user", "content": "Generate a title for this prompt:\n{}".format(prompt)}
+            {"role": "system" if self.instance_type not in ('gemini', 'venice', 'anthropic') else "user",
+             "content": "You are an assistant that generates short chat titles based on the first message from a user. "
+                        "If you want to add an emoji, use the emoji character directly (e.g., 😀) instead of "
+                        "its description (e.g., ':happy_face:')."},
+            {"role": "user", "content": f"Generate a title for this prompt:\n{prompt}"}
         ]
-
-        model = self.title_model if self.title_model else self.get_default_model()
-
-        params = {
-            "temperature": 0.2,
-            "model": model,
-            "messages": messages,
-            "max_tokens": 50
-        }
+    
+        model = self.title_model or self.get_default_model()
         new_chat_title = chat.get_name()
+    
         try:
-            completion = self.client.beta.chat.completions.parse(**params, response_format=chat_title)
-            response = completion.choices[0].message
-            if response.parsed:
-                emoji = response.parsed.emoji if len(response.parsed.emoji) == 1 else '💬'
-                new_chat_title = '{} {}'.format(emoji, response.parsed.title)
-        except Exception as e:
-            try:
-                response = self.client.chat.completions.create(**params)
-                new_chat_title = str(response.choices[0].message.content)
-            except Exception as e:
-                logger.error(e)
-        new_chat_title = re.sub(r'<think>.*?</think>', '', new_chat_title).strip()
-        window.chat_list_box.rename_chat(chat.get_name(), new_chat_title)
+            completion = self.client.chat.completions.create(
+                model=model,
+                messages=messages,
+                temperature=0.2,
+                max_tokens=50,
+                response_format={"type": "json_object"}
+            )
+        
+        json_response = completion.choices[0].message.content
+        parsed = ChatTitle.model_validate_json(json_response)
+        
+        emoji = parsed.emoji if len(parsed.emoji) == 1 else '💬'
+        new_chat_title = f"{emoji} {parsed.title}"
+        
+    except Exception as structured_error:
+        logger.debug("Structured title failed, falling back to plain text", exc_info=structured_error)
+        try:
+            # Fallback to regular completion
+            completion = self.client.chat.completions.create(
+                model=model,
+                messages=messages,
+                temperature=0.2,
+                max_tokens=50
+            )
+            new_chat_title = str(completion.choices[0].message.content)
+        except Exception as fallback_error:
+            logger.error("Both title generation attempts failed", exc_info=fallback_error)
+            new_chat_title = chat.get_name()
+            
+    new_chat_title = re.sub(r'<think>.*?</think>', '', new_chat_title).strip()
+    window.chat_list_box.rename_chat(chat.get_name(), new_chat_title)
+    return new_chat_title
 
     def get_default_model(self):
         if not self.default_model:
