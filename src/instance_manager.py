@@ -39,6 +39,7 @@ class base_instance:
     title_model = None
     pinned = False
     description = None
+    limitations = ()
 
     def prepare_chat(self, bot_message):
         chat = bot_message.get_chat()
@@ -119,25 +120,32 @@ class base_instance:
             bot_message.spinner = Adw.Spinner()
             bot_message.container.append(bot_message.spinner)
 
-        if self.instance_type in ('gemini', 'venice', 'anthropic'):
+        if 'no-system-messages' in self.limitations:
             for i in range(len(messages)):
                 if messages[i].get('role') == 'system':
                     messages[i]['role'] = 'user'
 
+        if 'text-only' in self.limitations:
+            for i in range(len(messages)):
+                for c in range(len(messages[i].get('content', []))):
+                    if messages[i].get('content')[c].get('type') != 'text':
+                        del messages[i]['content'][c]
+                    else:
+                        messages[i]['content'] = messages[i].get('content')[c].get('text')
+
         params = {
             "model": model,
             "messages": messages,
-            "temperature": self.temperature
+            "temperature": self.temperature,
+            "stream": True
         }
         if self.max_tokens:
             params["max_tokens"] = self.max_tokens
-        if self.instance_type != 'anthropic':
-            params["stream"] = True
-            if tools:
-                params["tools"] = tools
-                params["tool_choice"] = "none"
+        if tools:
+            params["tools"] = tools
+            params["tool_choice"] = "none"
 
-        if self.seed != 0 and self.instance_type not in ('gemini', 'venice'):
+        if self.seed != 0 and 'no-seed' in self.limitations:
             params["seed"] = self.seed
 
         try:
@@ -162,7 +170,7 @@ class base_instance:
             emoji:str = ""
 
         messages = [
-            {"role": "system" if self.instance_type not in ('gemini', 'venice', 'anthropic') else "user", "content": "You are an assistant that generates short chat titles based on the first message from a user. If you want to add an emoji, use the emoji character directly (e.g., 😀) instead of its description (e.g., ':happy_face:')."},
+            {"role": "user" if 'no-system-messages' in self.limitations else "system", "content": "You are an assistant that generates short chat titles based on the first message from a user. If you want to add an emoji, use the emoji character directly (e.g., 😀) instead of its description (e.g., ':happy_face:')."},
             {"role": "user", "content": "Generate a title for this prompt:\n{}".format(prompt)}
         ]
 
@@ -692,7 +700,7 @@ class base_openai(base_instance):
         arguments = {
             'elements': ('name', 'api', 'temperature', 'max_tokens')
         }
-        if self.instance_type not in ('gemini', 'venice'):
+        if 'no-seed' in self.limitations:
             arguments['elements'] = arguments['elements'] + ('seed',)
         if self.instance_type == 'openai:generic':
             arguments['elements'] = arguments['elements'] + ('url',)
@@ -707,6 +715,7 @@ class gemini(base_openai):
     instance_type = 'gemini'
     instance_type_display = 'Google Gemini'
     instance_url = 'https://generativelanguage.googleapis.com/v1beta/openai/'
+    limitations = ('no-system-messages', 'no-seed')
 
     def get_local_models(self) -> list:
         try:
@@ -727,7 +736,7 @@ class gemini(base_openai):
         try:
             response = requests.get('https://generativelanguage.googleapis.com/v1beta/models/{}?key={}'.format(model_name, self.api_key))
             data = response.json()
-            data['projector_info'] = True
+            data['vision'] = True
             return data
         except Exception as e:
             logger.error(e)
@@ -755,22 +764,26 @@ class venice(base_openai):
     instance_type = 'venice'
     instance_type_display = 'Venice'
     instance_url = 'https://api.venice.ai/api/v1/'
+    limitations = ('no-system-messages', 'no-seed')
 
 class deepseek(base_openai):
     instance_type = 'deepseek'
     instance_type_display = 'Deepseek'
     instance_url = 'https://api.deepseek.com/v1/'
+    limitations = ('text-only', 'no-seed')
 
 class groq(base_openai):
     instance_type = 'groq'
     instance_type_display = 'Groq Cloud'
     instance_url = 'https://api.groq.com/openai/v1'
+    limitations = ('text-only')
 
 class anthropic(base_openai):
     api_key = ''
     instance_type = 'anthropic'
     instance_type_display = 'Anthropic'
     instance_url = 'https://api.anthropic.com/v1/'
+    limitations = ('no-system-messages')
 
 class openrouter(base_openai):
     instance_type = 'openrouter'
