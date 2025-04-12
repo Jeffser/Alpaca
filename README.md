@@ -44,6 +44,9 @@ Normal conversation | Image recognition | Rich text formatting | Integrated scri
 
 ## Launch in Quick Ask Mode
 
+> [!NOTE]
+> Available since Alpaca 6.0.0
+
 Quick Ask is a mini mode you can use to have a quick temporary chat that isn't save as a full chat.
 
 Great for asking something, getting a response and moving on with your work.
