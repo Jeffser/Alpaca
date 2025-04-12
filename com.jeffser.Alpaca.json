@@ -12,8 +12,6 @@
         "--socket=pulseaudio",
         "--socket=wayland",
         "--filesystem=/sys/module/amdgpu:ro",
-        "--talk-name=com.jeffser.Alpaca",
-        "--own-name=com.jeffser.Alpaca",
         "--env=LD_LIBRARY_PATH=/app/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/sdk/llvm15/lib:/app/plugins/lib",
         "--env=PATH=/app/bin:/usr/bin:/app/plugins/bin"
     ],
@@ -26,6 +24,9 @@
     		"subdirectories": true
     	}
     },
+    "cleanup-commands": [
+	"mkdir ${FLATPAK_DEST}/plugins"
+    ],
     "cleanup": [
         "/include",
         "/lib/pkgconfig",
