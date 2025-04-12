@@ -93,9 +93,9 @@ TTS_VOICES = {
     '🇮🇳 Psi': 'hm_psi',
     '🇮🇹 Sara': 'if_sara',
     '🇮🇹 Nicola': 'im_nicola',
-    '🇧🇷 Dora': 'pf_dora',
-    '🇧🇷 Alex': 'pm_alex',
-    '🇧🇷 Santa': 'pm_santa'
+    '🇵🇹 Dora': 'pf_dora',
+    '🇵🇹 Alex': 'pm_alex',
+    '🇵🇹 Santa': 'pm_santa'
 }
 
 # Used for identifying the platform running Alpaca.
