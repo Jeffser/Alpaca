@@ -603,6 +603,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             selected_chat = self.chat_list_box.get_selected_row().chat_window.get_name()
             self.sql_instance.insert_or_update_preferences({'selected_chat': selected_chat})
             self.get_current_instance().stop()
+            self.message_dictated.footer.popup.tts_button.set_active(False)
             self.get_application().quit()
 
         def switch_to_hide():
