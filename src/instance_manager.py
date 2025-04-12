@@ -364,7 +364,7 @@ class base_instance:
         def save():
             save_functions = {
                 'name': lambda val: setattr(self, 'name', val if val else _('Instance')),
-                'port': lambda val: setattr(self, 'instance_url', 'http://0.0.0.0:{}'.format(val)),
+                'port': lambda val: setattr(self, 'instance_url', 'http://0.0.0.0:{}'.format(int(val))),
                 'url': lambda val: setattr(self, 'instance_url', '{}{}'.format('http://' if not re.match(r'^(http|https)://', val) else '', val.rstrip('/'))),
                 'api': lambda val: setattr(self, 'api_key', self.api_key if self.api_key and not val else (val if val else 'empty')),
                 'max_tokens': lambda val: setattr(self, 'max_tokens', val if val else -1),
