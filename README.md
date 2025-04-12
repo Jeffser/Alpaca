@@ -33,8 +33,8 @@
   
 ## Screenies
 
-Normal conversation | Image recognition | Rich text formatting | Integrated script execution | YouTube transcription
-:------------------:|:-----------------:|:--------------------:|:---------------------------:|:--------------------:
+Normal conversation | Image recognition | Custom Character | Integrated script execution | YouTube transcription
+:------------------:|:-----------------:|:----------------:|:---------------------------:|:--------------------:
 ![screenie1](https://jeffser.com/images/alpaca/screenie1.png) | ![screenie2](https://jeffser.com/images/alpaca/screenie2.png) | ![screenie3](https://jeffser.com/images/alpaca/screenie3.png) | ![screenie4](https://jeffser.com/images/alpaca/screenie5.png) | ![screenie5](https://jeffser.com/images/alpaca/screenie6.png)
 
 ## Installation
