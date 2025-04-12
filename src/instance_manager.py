@@ -549,7 +549,7 @@ class ollama_managed(base_ollama):
     def __init__(self, data:dict={}):
         self.instance_id = data.get('id', self.instance_id)
         self.name = data.get('name', self.name)
-        self.instance_url = data.get('url', self.instance_url)
+        self.instance_url = data.get('url', self.instance_url).removesuffix('.0')
         self.temperature = data.get('temperature', self.temperature)
         self.seed = data.get('seed', self.seed)
         self.overrides = data.get('overrides', self.overrides)
