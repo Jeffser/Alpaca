@@ -42,6 +42,22 @@ Normal conversation | Image recognition | Rich text formatting | Integrated scri
 - [Alpaca Installation](https://github.com/Jeffser/Alpaca/wiki/Installation)
 - [Ollama Installation](https://github.com/Jeffser/Alpaca/wiki/Installing-Ollama)
 
+## Launch in Quick Ask Mode
+
+Quick Ask is a mini mode you can use to have a quick temporary chat that isn't save as a full chat.
+
+Great for asking something, getting a response and moving on with your work.
+
+```BASH
+# (Flatpak)
+flatpak run com.jeffser.Alpaca --quick-ask
+
+# (System Installations)
+alpaca --quick-ask
+```
+
+You can add your respective command as as keyboard shortcut in your system settings to quickly access Alpaca at anytime!
+
 ## Translators
 
 Language               | Contributors
