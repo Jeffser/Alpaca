@@ -624,7 +624,7 @@ class Instance:
             "name": ins.name,
             "type": ins.instance_type,
             "url": ins.instance_url,
-            "max_tokens": ins.max_tokens,
+            "max_tokens": ins.max_tokens if ins.max_tokens else -1,
             "api": ins.api_key,
             "temperature": ins.temperature,
             "seed": ins.seed,
