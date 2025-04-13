@@ -157,41 +157,13 @@ class Instance:
                 c.cursor.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_def})")
 
             # Ollama is available but there are no instances added
-            if len(self.get_instances()) == 0 and shutil.which("ollama"):
-                overrides = {
-                    "HSA_OVERRIDE_GFX_VERSION": "",
-                    "CUDA_VISIBLE_DEVICES": "",
-                    "ROCR_VISIBLE_DEVICES": "",
-                }
-                self.insert_or_update_instance(
-                    instance_manager.ollama_managed(
-                        generate_timestamped_uuid(),
-                        "Alpaca",
-                        "http://{}:11435".format("127.0.0.1" if sys.platform == "win32" else "0.0.0.0"),
-                        0.7,
-                        0,
-                        overrides,
-                        os.path.join(data_dir, ".ollama", "models"),
-                        None,
-                        None,
-                        True,
-                    )
-                )
-
-            if self.get_preference("run_remote"):
-                self.insert_or_update_instance(
-                    instance_manager.ollama(
-                        generate_timestamped_uuid(),
-                        _("Legacy Remote Instance"),
-                        self.get_preference("remote_url"),
-                        self.get_preference("remote_bearer_token"),
-                        0.7,
-                        0,
-                        None,
-                        None,
-                        False,
-                    )
-                )
+            if len(self.get_instances()) == 0 and not shutil.which("ollama"):
+                self.insert_or_update_instance(instance_manager.ollama_managed({
+                    "id": generate_timestamped_uuid(),
+                    "name": "Alpaca",
+                    "url": "http://{}:11435".format("127.0.0.1" if sys.platform == "win32" else "0.0.0.0"),
+                    "pinned": True
+                }))
 
             # Remove stuff from previous versions (cleaning)
             try:
