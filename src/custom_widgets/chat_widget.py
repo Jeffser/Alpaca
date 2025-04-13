@@ -52,7 +52,7 @@ possible_prompts = [
     "Tell me about your day",
     "How to create a strong password",
     "Tell me about sodium battery?",
-    "Prove Euler's identity."
+    "Prove Euler's identity"
 ]
 
 class chat(Gtk.Stack):
