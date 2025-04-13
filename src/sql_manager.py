@@ -157,7 +157,7 @@ class Instance:
                 c.cursor.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_def})")
 
             # Ollama is available but there are no instances added
-            if len(self.get_instances()) == 0 and not shutil.which("ollama"):
+            if not any(i.get("type") == "ollama:managed" for i in self.get_instances()) and shutil.which("ollama"):
                 self.insert_or_update_instance(instance_manager.ollama_managed({
                     "id": generate_timestamped_uuid(),
                     "name": "Alpaca",
