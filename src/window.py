@@ -45,7 +45,7 @@ import gi
 import odf.opendocument as odfopen
 import odf.table as odftable
 from markitdown import MarkItDown
-from pydbus import SessionBus, Variant
+from pydbus import SessionBus, SystemBus, Variant
 
 gi.require_version('GtkSource', '5')
 gi.require_version('GdkPixbuf', '2.0')
@@ -622,7 +622,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def switch_powersaver_warning(self, switch, user_data):
         logger.debug("Switching powersaver warning banner")
         if switch.get_active():
-            self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled())
+            self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled() and self.get_current_instance().instance_type == 'ollama:managed')
         else:
             self.banner.set_revealed(False)
         self.sql_instance.insert_or_update_preferences({'powersaver_warning': switch.get_active()})
@@ -1284,6 +1284,51 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
 
         portal.Screenshot("", {"interactive": Variant('b', True)})
+
+    def check_for_metered_connection(self):
+        try:
+            proxy = Gio.DBusProxy.new_for_bus_sync(
+                Gio.BusType.SYSTEM,
+                Gio.DBusProxyFlags.NONE,
+                None,
+                "org.freedesktop.NetworkManager",
+                "/org/freedesktop/NetworkManager",
+                "org.freedesktop.NetworkManager",
+                None
+            )
+
+            active_connections = proxy.get_cached_property("ActiveConnections").unpack()
+            for path in active_connections:
+                conn_proxy = Gio.DBusProxy.new_for_bus_sync(
+                    Gio.BusType.SYSTEM,
+                    Gio.DBusProxyFlags.NONE,
+                    None,
+                    "org.freedesktop.NetworkManager",
+                    path,
+                    "org.freedesktop.NetworkManager.Connection.Active",
+                    None
+                )
+
+                devices = conn_proxy.get_cached_property("Devices").unpack()
+                for device_path in devices:
+                    device_proxy = Gio.DBusProxy.new_for_bus_sync(
+                        Gio.BusType.SYSTEM,
+                        Gio.DBusProxyFlags.NONE,
+                        None,
+                        "org.freedesktop.NetworkManager",
+                        device_path,
+                        "org.freedesktop.NetworkManager.Device",
+                        None
+                    )
+
+                    metered = device_proxy.get_cached_property("Metered")
+                    if metered is not None:
+                        value = metered.unpack()
+                        return value  # 0–3, same as explained before
+            return None
+        except Exception as e:
+            print("Error checking metered state:", e)
+            return None
 
     def attachment_request(self):
         ff = Gtk.FileFilter()
