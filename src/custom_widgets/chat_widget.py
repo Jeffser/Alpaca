@@ -51,7 +51,8 @@ possible_prompts = [
     "What is confirmation bias?",
     "Tell me about your day",
     "How to create a strong password",
-    "Tell me about sodium battery?"
+    "Tell me about sodium battery?",
+    "Prove Euler's identity."
 ]
 
 class chat(Gtk.Stack):
