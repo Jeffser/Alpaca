@@ -444,6 +444,7 @@ class Instance:
     #################
 
     def insert_or_update_preferences(self, preferences: dict) -> None:
+        print(preferences)
         with SQLiteConnection(self.sql_path) as c:
             for preference_id, preference_value in preferences.items():
                 if c.cursor.execute(

@@ -98,6 +98,14 @@ TTS_VOICES = {
     '🇵🇹 Santa': 'pm_santa'
 }
 
+STT_MODELS = {
+    'tiny': '~75 MB',
+    'base': '~151 MB',
+    'small': '~488 MB',
+    'medium': '~1.5 GB',
+    'large': '~2.9 GB'
+}
+
 # Used for identifying the platform running Alpaca.
 class Platforms:
     windows: str = "win32"

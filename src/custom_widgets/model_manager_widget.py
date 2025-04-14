@@ -7,8 +7,8 @@ import gi
 gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject
 import logging, os, datetime, re, threading, json, sys, glob, icu, base64, hashlib
-from ..internal import source_dir
-from ..constants import Platforms
+from ..internal import source_dir, data_dir, cache_dir
+from ..constants import Platforms, STT_MODELS, TTS_VOICES
 from .. import available_models_descriptions
 from . import dialog_widget
 
@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 window = None
 
 available_models = {}
+tts_model_path = ""
 
 class local_model_row(GObject.Object):
     __gtype_name__ = 'AlpacaLocalModelRow'
@@ -30,6 +31,185 @@ class local_model_row(GObject.Object):
 
     def __str__(self):
         return self.model.model_title
+
+class text_to_speech_model(Gtk.Box):
+    __gtype_name__ = 'AlpacaTextToSpeechModel'
+
+    def __init__(self, name:str):
+        self.model_title = name.title()
+        super().__init__(
+            spacing=10,
+            css_classes=['card', 'model_box'],
+            name=name
+        )
+        self.image_container = Adw.Bin(
+            css_classes=['model_pfp'],
+            valign=3,
+            halign=3,
+            overflow=1,
+            child=Gtk.Image.new_from_icon_name("bullhorn-symbolic")
+        )
+        self.append(self.image_container)
+        text_container = Gtk.Box(
+            orientation=1,
+            spacing=5,
+            valign=3
+        )
+        self.append(text_container)
+        title_label = Gtk.Label(
+            label=self.model_title,
+            css_classes=['title-3'],
+            ellipsize=3,
+            hexpand=True,
+            halign=1
+        )
+        text_container.append(title_label)
+        self.subtitle_label = Gtk.Label(
+            label=_("Text to Speech"),
+            css_classes=['dim-label'],
+            ellipsize=3,
+            hexpand=True,
+            halign=1
+        )
+        text_container.append(self.subtitle_label)
+        self.page = None
+
+    def get_search_categories(self) -> set:
+        return set()
+
+    def get_search_string(self) -> str:
+        return self.get_name()
+
+    def get_default_widget(self) -> Gtk.Widget:
+        return None
+
+    def remove_model(self):
+        global tts_model_path
+        name = '{}.pt'.format(TTS_VOICES.get(self.get_name(), ''))
+        symlink_path = os.path.join(tts_model_path, name)
+
+        if os.path.islink(symlink_path):
+            target_path = os.readlink(symlink_path)
+            os.unlink(symlink_path)
+            if os.path.isfile(target_path):
+                os.remove(target_path)
+        window.local_model_flowbox.remove(self)
+
+    def get_page(self):
+        buttons = []
+        remove_button = Gtk.Button(
+            icon_name='user-trash-symbolic',
+            tooltip_text=_('Remove Model')
+        )
+        remove_button.connect('clicked', lambda button: dialog_widget.simple(
+            _('Remove Model?'),
+            _("Are you sure you want to remove '{}'?").format(self.model_title),
+            self.remove_model,
+            _('Remove'),
+            'destructive'
+        ))
+        buttons.append(remove_button)
+
+        web_button = Gtk.Button(
+            icon_name='globe-symbolic',
+            tooltip_text="https://github.com/hexgrad/kokoro"
+        )
+        web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri("https://github.com/hexgrad/kokoro"))
+        buttons.append(web_button)
+
+        page = Adw.StatusPage(
+            icon_name="bullhorn-symbolic",
+            title=self.model_title,
+            description=_("Local text to speech model provided by Kokoro.")
+        )
+        return buttons, page
+
+class speech_to_text_model(Gtk.Box):
+    __gtype_name__ = 'AlpacaSpeechToTextModel'
+
+    def __init__(self, name:str):
+        self.model_title = name.title()
+        super().__init__(
+            spacing=10,
+            css_classes=['card', 'model_box'],
+            name=name
+        )
+        self.image_container = Adw.Bin(
+            css_classes=['model_pfp'],
+            valign=3,
+            halign=3,
+            overflow=1,
+            child=Gtk.Image.new_from_icon_name("audio-input-microphone-symbolic")
+        )
+        self.append(self.image_container)
+        text_container = Gtk.Box(
+            orientation=1,
+            spacing=5,
+            valign=3
+        )
+        self.append(text_container)
+        title_label = Gtk.Label(
+            label=self.model_title,
+            css_classes=['title-3'],
+            ellipsize=3,
+            hexpand=True,
+            halign=1
+        )
+        text_container.append(title_label)
+        self.subtitle_label = Gtk.Label(
+            label=_("Speech to Text"),
+            css_classes=['dim-label'],
+            ellipsize=3,
+            hexpand=True,
+            halign=1
+        )
+        text_container.append(self.subtitle_label)
+        self.page = None
+
+    def get_search_categories(self) -> set:
+        return set()
+
+    def get_search_string(self) -> str:
+        return self.get_name()
+
+    def get_default_widget(self) -> Gtk.Widget:
+        return None
+
+    def remove_model(self):
+        model_path = os.path.join(data_dir, 'whisper', '{}.pt'.format(self.get_name()))
+        if os.path.isfile(model_path):
+            os.remove(model_path)
+        window.local_model_flowbox.remove(self)
+
+    def get_page(self):
+        buttons = []
+        remove_button = Gtk.Button(
+            icon_name='user-trash-symbolic',
+            tooltip_text=_('Remove Model')
+        )
+        remove_button.connect('clicked', lambda button: dialog_widget.simple(
+            _('Remove Model?'),
+            _("Are you sure you want to remove '{}'?").format(self.model_title),
+            self.remove_model,
+            _('Remove'),
+            'destructive'
+        ))
+        buttons.append(remove_button)
+
+        web_button = Gtk.Button(
+            icon_name='globe-symbolic',
+            tooltip_text="https://github.com/openai/whisper"
+        )
+        web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri("https://github.com/openai/whisper"))
+        buttons.append(web_button)
+
+        page = Adw.StatusPage(
+            icon_name="audio-input-microphone-symbolic",
+            title=self.model_title,
+            description=_("Local speech to text model provided by OpenAI Whisper."),
+            child=Gtk.Label(label=STT_MODELS.get(self.get_name(), '~151mb'), css_classes=["dim-label"])
+        )
+        return buttons, page
 
 class pulling_model_page(Gtk.Box):
     __gtype_name__ = 'AlpacaPullingModelPage'
@@ -77,7 +257,8 @@ class pulling_model_page(Gtk.Box):
             _('Stop'),
             'destructive'
         ))
-        self.append(stop_button)
+        if self.model.cancellable:
+            self.append(stop_button)
 
     def stop_download(self):
         window.local_model_flowbox.remove(self.model)
@@ -87,14 +268,14 @@ class pulling_model_page(Gtk.Box):
 class pulling_model(Gtk.Box):
     __gtype_name__ = 'AlpacaPullingModel'
 
-    def __init__(self, name:str):
+    def __init__(self, name:str, success_callback:callable, cancellable:bool=True):
         self.model_title = window.convert_model_name(name, 0)
         super().__init__(
             orientation=1,
             spacing=5,
             css_classes=['card', 'model_box'],
             name=name,
-            valign=3
+            valign=0
         )
         title_label = Gtk.Label(
             label=window.convert_model_name(name, 2)[0],
@@ -109,13 +290,16 @@ class pulling_model(Gtk.Box):
             css_classes=['dim-label'],
             ellipsize=3,
             hexpand=True,
-            halign=1
+            halign=1,
+            visible=window.convert_model_name(name, 2)[1]
         )
         self.append(subtitle_label)
         self.progressbar = Gtk.ProgressBar()
         self.append(self.progressbar)
         self.page = None
         self.digests = []
+        self.success_callback = success_callback
+        self.cancellable = cancellable
 
     def get_default_widget(self):
         return self.page
@@ -152,9 +336,9 @@ class pulling_model(Gtk.Box):
                 if self.page:
                     GLib.idle_add(self.page.progressbar.set_fraction, data.get('completed', 0) / data.get('total', 0))
             else:
-                GLib.idle_add(self.progressbar.pulse)
+                self.progressbar.pulse()
                 if self.page:
-                    GLib.idle_add(self.page.progressbar.pulse)
+                    self.page.progressbar.pulse()
             if self.page:
                 label_text = [line for line in self.page.status_label.get_text().split('\n') if line != '']
                 if data.get('status') and (len(label_text) == 0 or label_text[-1] != data.get('status')):
@@ -165,7 +349,8 @@ class pulling_model(Gtk.Box):
                 self.digests.append(data.get('digest').replace(':', '-'))
 
             if data.get('status') == 'success':
-                new_model = add_local_model(self.get_name())
+                #new_model = add_local_model(self.get_name())
+                new_model = self.success_callback(self.get_name())
                 GLib.idle_add(window.local_model_flowbox.remove, self.get_parent())
                 GLib.idle_add(window.local_model_flowbox.select_child, new_model.get_parent())
                 GLib.idle_add(window.title_stack.set_visible_child_name, 'model-selector')
@@ -648,9 +833,43 @@ def add_local_model(model_name:str):
     window.local_model_flowbox.prepend(model_element)
     return model_element
 
+def add_text_to_speech_model(model_name:str):
+    model_element = text_to_speech_model(model_name)
+    window.local_model_flowbox.prepend(model_element)
+    return model_element
+
+def add_speech_to_text_model(model_name:str):
+    model_element = speech_to_text_model(model_name)
+    window.local_model_flowbox.prepend(model_element)
+    return model_element
+
 def update_local_model_list():
+    global tts_model_path
     window.local_model_flowbox.remove_all()
     GLib.idle_add(window.model_dropdown.get_model().remove_all)
+
+    # Speech to Text
+    for model in os.listdir(os.path.join(data_dir, 'whisper')):
+        if model.endswith('.pt') and STT_MODELS.get(model.removesuffix('.pt')):
+            add_speech_to_text_model(model.removesuffix('.pt'))
+
+    # Text to Speech
+    tts_model_path = os.path.join(cache_dir, 'huggingface', 'hub')
+    if os.path.isdir(tts_model_path) and any([d for d in os.listdir(tts_model_path) if 'Kokoro' in d]):
+        # Kokoro has a directory
+        tts_model_path = os.path.join(tts_model_path, [d for d in os.listdir(tts_model_path) if 'Kokoro' in d][0], 'snapshots')
+        if os.path.isdir(tts_model_path) and len(os.listdir(tts_model_path)) > 0:
+            # Kokoro has snapshots
+            tts_model_path = os.path.join(tts_model_path, os.listdir(tts_model_path)[0], 'voices')
+            if os.path.isdir(tts_model_path):
+                # Kokoro has voices
+                for model in os.listdir(tts_model_path):
+                    pretty_name = [k for k, v in TTS_VOICES.items() if v == model.removesuffix('.pt')]
+                    if len(pretty_name) > 0:
+                        pretty_name = pretty_name[0]
+                        add_text_to_speech_model(pretty_name)
+
+    # Normal Models
     default_model = window.sql_instance.get_preference('default_model')
     threads=[]
     local_models = window.get_current_instance().get_local_models()
@@ -716,7 +935,7 @@ def pull_model_confirm(model_name:str):
     if model_name:
         model_name = model_name.strip().replace('\n', '')
         if model_name not in list(get_local_models().keys()):
-            model = pulling_model(model_name)
+            model = pulling_model(model_name, add_local_model)
             window.local_model_flowbox.prepend(model)
             GLib.idle_add(window.model_manager_stack.set_visible_child_name, 'added_models')
             GLib.idle_add(window.local_model_flowbox.select_child, model.get_parent())
@@ -732,7 +951,7 @@ def pull_model(row, icon):
 
 def create_model_confirm(data:dict, gguf_path:str):
     if data.get('model') and data.get('model') not in list(get_local_models().keys()):
-        model = pulling_model(data.get('model'))
+        model = pulling_model(data.get('model'), add_local_model)
         window.local_model_flowbox.prepend(model)
         GLib.idle_add(window.model_manager_stack.set_visible_child_name, 'added_models')
         GLib.idle_add(window.local_model_flowbox.select_child, model.get_parent())

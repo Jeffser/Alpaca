@@ -54,7 +54,7 @@ gi.require_version('Spelling', '1')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, GdkPixbuf, Spelling, GObject
 
 from . import generic_actions, sql_manager, instance_manager, tool_manager
-from .constants import AlpacaFolders, Platforms, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
+from .constants import AlpacaFolders, Platforms, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES, STT_MODELS
 from .custom_widgets import message_widget, chat_widget, terminal_widget, dialog_widget, model_manager_widget
 from .internal import config_dir, data_dir, cache_dir, source_dir, IN_FLATPAK
 
@@ -128,6 +128,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     powersaver_warning_switch = Gtk.Template.Child()
     mic_auto_send_switch = Gtk.Template.Child()
     mic_language_combo = Gtk.Template.Child()
+    mic_model_combo = Gtk.Template.Child()
     tts_voice_combo = Gtk.Template.Child()
 
     banner = Gtk.Template.Child()
@@ -172,17 +173,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         language=self.sql_instance.get_preference('mic_language')
         text_view = list(button.get_parent().get_parent())[0].get_child()
         buffer = text_view.get_buffer()
-
-        def show_pull_toast():
-            if button.get_parent().get_visible_child_name() == "loading":
-                size = {
-                    'tiny': '~75mb',
-                    'base': '~151mb',
-                    'small': '~488mb',
-                    'medium': '~1.5gb',
-                    'large': '~2.9gb'
-                }
-                self.show_toast(_("Speech recognition model is being downloaded ({})").format(size.get(os.getenv("ALPACA_SPEECH_MODEL", "base"), '~151mb')), self.main_overlay)
+        model_name = os.getenv("ALPACA_SPEECH_MODEL", "base")
 
         def recognize_audio(model, audio_data, current_iter):
             result = model.transcribe(audio_data, language=language)
@@ -192,7 +183,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 GLib.idle_add(buffer.insert, current_iter, result.get("text"), len(result.get("text").encode('utf8')))
                 self.mic_timeout = 0
 
-        def run_mic():
+        def run_mic(pulling_model:Gtk.Widget=None):
             GLib.idle_add(button.get_parent().set_visible_child_name, "loading")
             import whisper
             import pyaudio
@@ -201,11 +192,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             samplerate=16000
             p = pyaudio.PyAudio()
             model = None
+
             self.mic_timeout=0
 
             try:
-                GLib.timeout_add(3000, show_pull_toast)
-                model = whisper.load_model(os.getenv("ALPACA_SPEECH_MODEL", "base"))
+                model = whisper.load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
+                if pulling_model:
+                    GLib.idle_add(pulling_model.update_progressbar, {'status': 'success'})
             except Exception as e:
                 dialog_widget.simple_error(_('Speech Recognition Error'), _('An error occurred while pulling speech recognition model'), e)
                 logger.error(e)
@@ -247,8 +240,22 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if button.get_active():
                 button.set_active(False)
 
+        def prepare_download():
+            pulling_model = model_manager_widget.pulling_model(model_name, model_manager_widget.add_speech_to_text_model, False)
+            self.local_model_flowbox.prepend(pulling_model)
+            pulling_model.update_progressbar({"status": "Pulling {}".format(model_name.title()), 'digest': '{}.pt'.format(model_name)})
+            threading.Thread(target=run_mic, args=(pulling_model,)).start()
+
         if button.get_active():
-            threading.Thread(target=run_mic).start()
+            if os.path.isfile(os.path.join(data_dir, 'whisper', '{}.pt'.format(model_name))):
+                threading.Thread(target=run_mic).start()
+            else:
+                dialog_widget.simple(
+                    _("Download Speech Recognition Model"),
+                    _("To use speech recognition you'll need to download a special model ({})").format(STT_MODELS.get(model_name, '~151mb')),
+                    prepare_download,
+                    _("Download Model")
+                )
         else:
             button.remove_css_class('accent')
             button.set_sensitive(False)
@@ -258,14 +265,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def closing_notice(self, dialog):
         self.sql_instance.insert_or_update_preferences({"last_notice_seen": dialog.get_name()})
-
-    @Gtk.Template.Callback()
-    def zoom_changed(self, spinner, force:bool=False):
-        if force or self.sql_instance.get_preference('zoom', 100) != int(spinner.get_value()):
-            threading.Thread(target=self.sql_instance.insert_or_update_preferences, args=({'zoom': int(spinner.get_value())},)).start()
-            settings = Gtk.Settings.get_default()
-            settings.reset_property('gtk-xft-dpi')
-            settings.set_property('gtk-xft-dpi',  settings.get_property('gtk-xft-dpi') + (int(spinner.get_value()) - 100) * 400)
 
     @Gtk.Template.Callback()
     def add_instance(self, button):
@@ -597,35 +596,53 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.prepare_alpaca()
 
     @Gtk.Template.Callback()
+    def zoom_changed(self, spinner, force:bool=False):
+        if force or self.sql_instance.get_preference('zoom', 100) != int(spinner.get_value()):
+            threading.Thread(target=self.sql_instance.insert_or_update_preferences, args=({'zoom': int(spinner.get_value())},)).start()
+            settings = Gtk.Settings.get_default()
+            settings.reset_property('gtk-xft-dpi')
+            settings.set_property('gtk-xft-dpi',  settings.get_property('gtk-xft-dpi') + (int(spinner.get_value()) - 100) * 400)
+
+    @Gtk.Template.Callback()
     def switch_run_on_background(self, switch, user_data):
-        logger.debug("Switching run on background")
-        self.set_hide_on_close(switch.get_active())
-        self.sql_instance.insert_or_update_preferences({'run_on_background': switch.get_active()})
+        if switch.get_sensitive():
+            self.set_hide_on_close(switch.get_active())
+            self.sql_instance.insert_or_update_preferences({'run_on_background': switch.get_active()})
     
     @Gtk.Template.Callback()
     def switch_mic_auto_send(self, switch, user_data):
-        logger.debug("Switching mic auto send")
-        self.sql_instance.insert_or_update_preferences({'mic_auto_send': switch.get_active()})
+        if switch.get_sensitive():
+            self.sql_instance.insert_or_update_preferences({'mic_auto_send': switch.get_active()})
+
+    @Gtk.Template.Callback()
+    def selected_mic_model(self, combo, user_data):
+        if combo.get_sensitive():
+            model = combo.get_selected_item().get_string().split(' (')[0].lower()
+            if model:
+                self.sql_instance.insert_or_update_preferences({'mic_model': model})
 
     @Gtk.Template.Callback()
     def selected_mic_language(self, combo, user_data):
-        language = combo.get_selected_item().get_string().split(' (')[-1][:-1]
-        self.sql_instance.insert_or_update_preferences({'mic_language': language})
+        if combo.get_sensitive():
+            language = combo.get_selected_item().get_string().split(' (')[-1][:-1]
+            if language:
+                self.sql_instance.insert_or_update_preferences({'mic_language': language})
 
     @Gtk.Template.Callback()
     def selected_tts_voice(self, combo, user_data):
-        language = TTS_VOICES.get(combo.get_selected_item().get_string())
-        if language:
-            self.sql_instance.insert_or_update_preferences({'tts_voice': language})
+        if combo.get_sensitive():
+            language = TTS_VOICES.get(combo.get_selected_item().get_string())
+            if language:
+                self.sql_instance.insert_or_update_preferences({'tts_voice': language})
 
     @Gtk.Template.Callback()
     def switch_powersaver_warning(self, switch, user_data):
-        logger.debug("Switching powersaver warning banner")
-        if switch.get_active():
-            self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled() and self.get_current_instance().instance_type == 'ollama:managed')
-        else:
-            self.banner.set_revealed(False)
-        self.sql_instance.insert_or_update_preferences({'powersaver_warning': switch.get_active()})
+        if switch.get_sensitive():
+            if switch.get_active():
+                self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled() and self.get_current_instance().instance_type == 'ollama:managed')
+            else:
+                self.banner.set_revealed(False)
+            self.sql_instance.insert_or_update_preferences({'powersaver_warning': switch.get_active()})
 
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
@@ -633,7 +650,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             selected_chat = self.chat_list_box.get_selected_row().chat_window.get_name()
             self.sql_instance.insert_or_update_preferences({'selected_chat': selected_chat})
             self.get_current_instance().stop()
-            self.message_dictated.footer.popup.tts_button.set_active(False)
+            if self.message_dictated:
+                self.message_dictated.footer.popup.tts_button.set_active(False)
             self.get_application().quit()
 
         def switch_to_hide():
@@ -1154,10 +1172,26 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.chat_list_box.new_chat(self.get_application().args.new_chat)
 
         self.powersaver_warning_switch.set_active(self.sql_instance.get_preference('powersaver_warning', True))
+        self.powersaver_warning_switch.set_sensitive(True)
         self.background_switch.set_active(self.sql_instance.get_preference('run_on_background', False))
+        self.background_switch.set_sensitive(True)
         self.mic_auto_send_switch.set_active(self.sql_instance.get_preference('mic_auto_send', False))
+        self.mic_auto_send_switch.set_sensitive(True)
         self.zoom_spin.set_value(self.sql_instance.get_preference('zoom', 100))
+        self.zoom_spin.set_sensitive(True)
         self.zoom_changed(self.zoom_spin, True)
+
+        selected_mic_model = self.sql_instance.get_preference('mic_model', 'base')
+        selected_index = 0
+        string_list = Gtk.StringList()
+        for i, (model, size) in enumerate(STT_MODELS.items()):
+            if model == selected_mic_model:
+                selected_index = i
+            string_list.append('{} ({})'.format(model.title(), size))
+
+        self.mic_model_combo.set_model(string_list)
+        self.mic_model_combo.set_selected(selected_index)
+        self.mic_model_combo.set_sensitive(True)
 
         selected_language = self.sql_instance.get_preference('mic_language', 'en')
         selected_index = 0
@@ -1169,17 +1203,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         self.mic_language_combo.set_model(string_list)
         self.mic_language_combo.set_selected(selected_index)
+        self.mic_language_combo.set_sensitive(True)
 
         selected_voice = self.sql_instance.get_preference('tts_voice', '')
         selected_index = 0
         string_list = Gtk.StringList()
-        for name, value in TTS_VOICES.items():
+        for i, (name, value) in enumerate(TTS_VOICES.items()):
             if value == selected_voice:
-                selected_index = 0
+                selected_index = i
             string_list.append(name)
 
         self.tts_voice_combo.set_model(string_list)
         self.tts_voice_combo.set_selected(selected_index)
+        self.tts_voice_combo.set_sensitive(True)
 
         instance_manager.update_instance_list()
 
