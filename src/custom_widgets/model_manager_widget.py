@@ -235,10 +235,12 @@ class pulling_model_page(Gtk.Box):
         self.status_label = Gtk.Label(
             wrap=True,
             wrap_mode=2,
-            justify=2
+            justify=2,
+            label=_("Downloading…")
         )
         self.append(Adw.Bin(css_classes=['card', 'p10'], child=self.status_label))
-        self.progressbar = Gtk.ProgressBar(show_text=True)
+        self.progressbar = Gtk.ProgressBar(show_text=self.model.cancellable, pulse_step=0.5)
+        self.progressbar.pulse()
         self.append(self.progressbar)
 
         stop_button = Gtk.Button(
@@ -285,16 +287,21 @@ class pulling_model(Gtk.Box):
             halign=1
         )
         self.append(title_label)
+        if cancellable:
+            subtitle_text = window.convert_model_name(name, 2)[1]
+        else: # Probably STT
+            subtitle_text = _("Speech to Text")
         subtitle_label = Gtk.Label(
-            label=window.convert_model_name(name, 2)[1],
+            label=subtitle_text,
             css_classes=['dim-label'],
             ellipsize=3,
             hexpand=True,
             halign=1,
-            visible=window.convert_model_name(name, 2)[1]
+            visible=window.convert_model_name(name, 2)[1] or not cancellable
         )
         self.append(subtitle_label)
-        self.progressbar = Gtk.ProgressBar()
+        self.progressbar = Gtk.ProgressBar(pulse_step=0.5)
+        self.progressbar.pulse()
         self.append(self.progressbar)
         self.page = None
         self.digests = []
@@ -336,9 +343,9 @@ class pulling_model(Gtk.Box):
                 if self.page:
                     GLib.idle_add(self.page.progressbar.set_fraction, data.get('completed', 0) / data.get('total', 0))
             else:
-                self.progressbar.pulse()
+                GLib.idle_add(self.progressbar.pulse)
                 if self.page:
-                    self.page.progressbar.pulse()
+                    GLib.idle_add(self.page.progressbar.pulse)
             if self.page:
                 label_text = [line for line in self.page.status_label.get_text().split('\n') if line != '']
                 if data.get('status') and (len(label_text) == 0 or label_text[-1] != data.get('status')):

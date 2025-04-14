@@ -243,7 +243,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         def prepare_download():
             pulling_model = model_manager_widget.pulling_model(model_name, model_manager_widget.add_speech_to_text_model, False)
             self.local_model_flowbox.prepend(pulling_model)
-            pulling_model.update_progressbar({"status": "Pulling {}".format(model_name.title()), 'digest': '{}.pt'.format(model_name)})
+            #pulling_model.update_progressbar({"status": "Pulling {}".format(model_name.title()), 'digest': '{}.pt'.format(model_name)})
             threading.Thread(target=run_mic, args=(pulling_model,)).start()
 
         if button.get_active():
