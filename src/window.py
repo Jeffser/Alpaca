@@ -1445,7 +1445,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             data.get('button').add_controller(gesture_long_press)
 
         universal_actions = {
-            'new_chat': [lambda *_: threading.Thread(target=self.chat_list_box.new_chat).start(), ['<primary>n']],
+            'new_chat': [lambda *_: self.chat_list_box.new_chat(), ['<primary>n']],
             'import_chat': [lambda *_: self.chat_list_box.import_chat()],
             'duplicate_chat': [self.chat_actions],
             'duplicate_current_chat': [self.current_chat_actions],
