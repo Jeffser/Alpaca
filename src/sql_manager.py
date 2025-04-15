@@ -121,9 +121,10 @@ class Instance:
                     "name": "TEXT NOT NULL",
                     "content": "TEXT NOT NULL",
                 },
-                "model": {
+                "model_preferences": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
-                    "picture": "TEXT NOT NULL",
+                    "picture": "TEXT",
+                    "voice": "TEXT"
                 },
                 "preferences": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
@@ -174,6 +175,13 @@ class Instance:
                     'show_welcome_dialog')"
                 )
                 c.cursor.execute("DROP TABLE overrides")
+            except Exception:
+                pass
+            try:
+                model_pictures = c.cursor.execute("SELECT id, picture FROM model")
+                for p in model_pictures:
+                    c.cursor.execute("INSERT INTO model_preferences (id, picture) VALUES (?, ?)", (p[0], p[1]))
+                c.cursor.execute("DROP TABLE model")
             except Exception:
                 pass
 
@@ -444,7 +452,6 @@ class Instance:
     #################
 
     def insert_or_update_preferences(self, preferences: dict) -> None:
-        print(preferences)
         with SQLiteConnection(self.sql_path) as c:
             for preference_id, preference_value in preferences.items():
                 if c.cursor.execute(
@@ -533,17 +540,38 @@ class Instance:
                     (model_id, picture_content),
                 )
 
-    def get_model_picture(self, model_id: str) -> str:
+    def remove_model_preferences(self, model_id: str) -> None:
         with SQLiteConnection(self.sql_path) as c:
-            res = c.cursor.execute(
-                "SELECT picture FROM model WHERE id=?", (model_id,)
-            ).fetchone()
+            c.cursor.execute("DELETE FROM model_preferences WHERE id=?", (model_id))
 
-        return res[0] if res else None
-
-    def delete_model_picture(self, model_id: str):
+    def insert_or_update_model_picture(self, model_id: str, picture_content: str or None) -> None:
         with SQLiteConnection(self.sql_path) as c:
-            c.cursor.execute("DELETE FROM model WHERE id=?", (model_id,))
+            if c.cursor.execute("SELECT id FROM model_preferences WHERE id=?", (model_id,)).fetchone():
+                c.cursor.execute("UPDATE model_preferences SET picture=? WHERE id=?", (picture_content, model_id))
+            else:
+                c.cursor.execute("INSERT INTO model_preferences (id, picture) VALUES (?, ?)", (model_id, picture_content))
+
+    def insert_or_update_model_voice(self, model_id: str, voice_name: str or None) -> None:
+        with SQLiteConnection(self.sql_path) as c:
+            if c.cursor.execute("SELECT id FROM model_preferences WHERE id=?", (model_id,)).fetchone():
+                c.cursor.execute("UPDATE model_preferences SET voice=? WHERE id=?", (voice_name, model_id))
+            else:
+                c.cursor.execute("INSERT INTO model_preferences (id, voice) VALUES (?, ?)", (model_id, voice_name))
+
+    def get_model_preferences(self, model_id: str) -> dict:
+        with SQLiteConnection(self.sql_path) as c:
+            row = c.cursor.execute("SELECT picture, voice FROM model_preferences WHERE id=?", (model_id,)).fetchone()
+            if row:
+                return {
+                    'picture': row[0],
+                    'voice': row[1]
+                }
+            else:
+                return {
+                    'picture': None,
+                    'voice': None
+                }
+
 
     ###############
     ## Instances ##

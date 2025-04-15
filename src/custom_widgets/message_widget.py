@@ -602,7 +602,13 @@ class option_popup(Gtk.Popover):
             GLib.idle_add(self.tts_stack.set_visible_child_name, 'loading')
             import sounddevice as sd
             from kokoro import KPipeline
-            voice = window.sql_instance.get_preference('tts_voice', 'af_heart')
+            voice = None
+            if self.message_element.model:
+                voice = window.sql_instance.get_model_preferences(self.message_element.model).get('voice', 'af_heart')
+            else:
+                voice = window.sql_instance.get_preference('tts_voice', 'af_heart')
+            if not voice:
+                voice = 'af_heart'
             if model_manager_widget.tts_model_path:
                 if not os.path.islink(os.path.join(model_manager_widget.tts_model_path, '{}.pt'.format(voice))):
                     pretty_name = [k for k, v in TTS_VOICES.items() if v == voice]

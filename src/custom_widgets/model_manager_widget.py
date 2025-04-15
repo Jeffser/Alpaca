@@ -97,6 +97,13 @@ class text_to_speech_model(Gtk.Box):
 
     def get_page(self):
         buttons = []
+        web_button = Gtk.Button(
+            icon_name='globe-symbolic',
+            tooltip_text="https://github.com/hexgrad/kokoro"
+        )
+        web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri("https://github.com/hexgrad/kokoro"))
+        buttons.append(web_button)
+
         remove_button = Gtk.Button(
             icon_name='user-trash-symbolic',
             tooltip_text=_('Remove Model')
@@ -109,13 +116,6 @@ class text_to_speech_model(Gtk.Box):
             'destructive'
         ))
         buttons.append(remove_button)
-
-        web_button = Gtk.Button(
-            icon_name='globe-symbolic',
-            tooltip_text="https://github.com/hexgrad/kokoro"
-        )
-        web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri("https://github.com/hexgrad/kokoro"))
-        buttons.append(web_button)
 
         page = Adw.StatusPage(
             icon_name="bullhorn-symbolic",
@@ -183,6 +183,13 @@ class speech_to_text_model(Gtk.Box):
 
     def get_page(self):
         buttons = []
+        web_button = Gtk.Button(
+            icon_name='globe-symbolic',
+            tooltip_text="https://github.com/openai/whisper"
+        )
+        web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri("https://github.com/openai/whisper"))
+        buttons.append(web_button)
+
         remove_button = Gtk.Button(
             icon_name='user-trash-symbolic',
             tooltip_text=_('Remove Model')
@@ -195,13 +202,6 @@ class speech_to_text_model(Gtk.Box):
             'destructive'
         ))
         buttons.append(remove_button)
-
-        web_button = Gtk.Button(
-            icon_name='globe-symbolic',
-            tooltip_text="https://github.com/openai/whisper"
-        )
-        web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri("https://github.com/openai/whisper"))
-        buttons.append(web_button)
 
         page = Adw.StatusPage(
             icon_name="audio-input-microphone-symbolic",
@@ -410,7 +410,7 @@ class local_model_page(Gtk.Box):
         model_title = window.convert_model_name(self.model.get_name(), 0)
         super().__init__(
             orientation=1,
-            spacing=10,
+            spacing=15,
             valign=3,
             css_classes=['p10']
         )
@@ -485,6 +485,24 @@ class local_model_page(Gtk.Box):
                 if category not in ('small', 'medium', 'big', 'huge'):
                     categories_box.append(category_pill(category, True))
 
+        preferences_group = Adw.PreferencesGroup()
+        self.append(preferences_group)
+        self.voice_combo = Adw.ComboRow(
+            title=_("Voice")
+        )
+        selected_voice = window.sql_instance.get_model_preferences(self.model.get_name()).get('voice', None)
+        selected_index = 0
+        string_list = Gtk.StringList()
+        string_list.append(_("Default"))
+        for i, (name, value) in enumerate(TTS_VOICES.items()):
+            if value == selected_voice:
+                selected_index = i + 1
+            string_list.append(name)
+        self.voice_combo.set_model(string_list)
+        self.voice_combo.set_selected(selected_index)
+        self.voice_combo.connect("notify::selected", lambda *_: self.update_voice())
+        preferences_group.add(self.voice_combo)
+
         self.model.image_container.connect('notify::child', lambda *_: self.update_profile_picture())
 
     def update_profile_picture(self):
@@ -493,6 +511,13 @@ class local_model_page(Gtk.Box):
             image = Gtk.Image.new_from_icon_name('image-missing-symbolic')
             image.set_size_request(128, 128)
         self.image_container.set_child(image)
+
+    def update_voice(self):
+        if self.voice_combo.get_selected() == 0:
+            window.sql_instance.insert_or_update_model_voice(self.model.get_name(), None)
+        else:
+            voice = TTS_VOICES.get(self.voice_combo.get_selected_item().get_string())
+            window.sql_instance.insert_or_update_model_voice(self.model.get_name(), voice)
 
 class local_model(Gtk.Box):
     __gtype_name__ = 'AlpacaLocalModel'
@@ -591,7 +616,7 @@ class local_model(Gtk.Box):
             return image
 
     def update_profile_picture(self):
-        self.data['profile_picture'] = window.sql_instance.get_model_picture(self.get_name())
+        self.data['profile_picture'] = window.sql_instance.get_model_preferences(self.get_name()).get('picture', None)
         picture = self.create_profile_picture(64)
         self.image_container.set_visible(picture)
         self.image_container.set_child(picture)
@@ -605,7 +630,7 @@ class local_model(Gtk.Box):
                 threading.Thread(target=window.chat_list_box.update_profile_pictures).start()
 
         def remove_profile_picture():
-            window.sql_instance.delete_model_picture(self.get_name())
+            window.sql_instance.insert_or_update_model_picture(self.get_name(), None)
             self.update_profile_picture()
             threading.Thread(target=window.chat_list_box.update_profile_pictures).start()
 
@@ -630,7 +655,7 @@ class local_model(Gtk.Box):
             if len(list(window.local_model_flowbox)) == 0:
                 window.local_model_stack.set_visible_child_name('no-models')
                 window.title_stack.set_visible_child_name('no-models')
-            window.sql_instance.delete_model_picture(self.get_name())
+            window.sql_instance.remove_model_preferences(self.get_name())
             threading.Thread(target=window.chat_list_box.update_profile_pictures).start()
 
     def get_page(self):
