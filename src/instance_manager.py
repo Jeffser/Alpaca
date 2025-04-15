@@ -736,7 +736,7 @@ class gemini(base_openai):
         try:
             response = requests.get('https://generativelanguage.googleapis.com/v1beta/models/{}?key={}'.format(model_name, self.api_key))
             data = response.json()
-            data['vision'] = True
+            data['capabilities'] = ['completion', 'vision']
             return data
         except Exception as e:
             logger.error(e)

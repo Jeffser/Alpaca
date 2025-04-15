@@ -571,10 +571,7 @@ class local_model(Gtk.Box):
         return set([c for c in available_models.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
 
     def get_vision(self) -> bool:
-        categories = available_models.get(self.get_name().split(':')[0], {}).get('categories', [])
-        if not categories:
-            categories = available_models.get(self.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('categories', [])
-        return self.data.get('projector_info') or self.data.get('vision') or 'vision' in categories
+        return 'vision' in self.data.get('capabilities', [])
 
     def update_subtitle(self):
         tag = window.convert_model_name(self.get_name(), 2)[1]
