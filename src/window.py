@@ -938,8 +938,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         del self.attachments[name]
         if len(self.attachments) == 0:
             self.attachment_box.set_visible(False)
-        if self.file_preview_dialog.get_visible():
-            self.file_preview_dialog.close()
 
     def attach_file(self, file_path, file_type):
         logger.debug(f"Attaching file: {file_path}")
