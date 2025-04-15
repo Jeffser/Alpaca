@@ -292,23 +292,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             lambda option, options=options: selected(options[option]),
             options.keys()
         )
-    
-    def select_default_model(self) -> None:
-        """
-        Selects the default model of the instance to use.
-        """
-
-        # Automatically select instance default model
-        model_to_use = self.get_current_instance().get_default_model()
-        detected_models = [
-            i for i, el in enumerate(
-                list(self.model_dropdown.get_model())
-            ) if el.model.get_name() == model_to_use
-        ]
-
-        # Only if we found the specific model: select it
-        if len(detected_models) > 0:
-            self.model_dropdown.set_selected(detected_models[0])
 
     @Gtk.Template.Callback()
     def instance_changed(self, listbox, row):
@@ -337,8 +320,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             self.model_manager_bottom_view_switcher.set_visible(visible_model_manger_switch)
             self.model_manager_top_view_switcher.set_visible(visible_model_manger_switch)
-
-            self.select_default_model()
         if listbox.get_sensitive():
             threading.Thread(target=change_instance).start()
 

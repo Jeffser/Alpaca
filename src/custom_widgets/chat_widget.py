@@ -479,6 +479,13 @@ class chat_list(Gtk.ListBox):
         file_dialog = Gtk.FileDialog(default_filter=window.file_filter_db)
         file_dialog.open(window, None, self.on_chat_imported)
 
+    def find_model_index(self, model_name:str):
+        if len(list(window.model_dropdown.get_model())) == 0:
+            return None
+        detected_models = [i for i, future_row in enumerate(list(window.model_dropdown.get_model())) if future_row.model.get_name() == model_name]
+        if len(detected_models) > 0:
+            return detected_models[0]
+
     def chat_changed(self, future_row):
         if future_row:
             current_row = next((t for t in self.tab_list if t.chat_window == window.chat_stack.get_visible_child()), future_row)
@@ -489,9 +496,11 @@ class chat_list(Gtk.ListBox):
                     window.message_search_changed(window.searchentry_messages, window.chat_stack.get_visible_child())
                 window.message_searchbar.set_search_mode(False)
 
+                load_chat_thread = None
                 # Load future_row if not loaded already
                 if len(future_row.chat_window.messages) == 0:
-                    threading.Thread(target=future_row.chat_window.load_chat_messages).start()
+                    load_chat_thread = threading.Thread(target=future_row.chat_window.load_chat_messages)
+                    load_chat_thread.start()
 
                 # Unload current_row
                 if not current_row.chat_window.busy and current_row.chat_window.get_visible_child_name() == 'content' and len(current_row.chat_window.messages) > 0:
@@ -503,14 +512,19 @@ class chat_list(Gtk.ListBox):
 
                 # Sync stop/send button to chat's state
                 window.switch_send_stop_button(not future_row.chat_window.busy)
-
+                if load_chat_thread:
+                    load_chat_thread.join()
                 # Select the correct model for the chat
-                model_to_use = window.get_current_instance().get_default_model()
+                model_to_use_index = self.find_model_index(window.get_current_instance().get_default_model())
                 if len(future_row.chat_window.messages) > 0:
-                    model_to_use = future_row.chat_window.messages[list(future_row.chat_window.messages)[-1]].model
-                detected_models = [i for i, future_row in enumerate(list(window.model_dropdown.get_model())) if future_row.model.get_name() == model_to_use]
-                if len(detected_models) > 0:
-                    window.model_dropdown.set_selected(detected_models[0])
+                    message_model = self.find_model_index(future_row.chat_window.messages[list(future_row.chat_window.messages)[-1]].model)
+                    if message_model:
+                        model_to_use_index = message_model
+
+                if model_to_use_index is None:
+                    model_to_use_index = 0
+
+                window.model_dropdown.set_selected(model_to_use_index)
 
                 # If it has the "new message" indicator, hide it
                 if future_row.indicator.get_visible():
