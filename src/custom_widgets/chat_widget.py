@@ -51,7 +51,7 @@ possible_prompts = [
     "What is confirmation bias?",
     "Tell me about your day",
     "How to create a strong password",
-    "Tell me about sodium batteries",
+    "Explain how sodium batteries work",
     "Prove Euler's identity"
 ]
 
