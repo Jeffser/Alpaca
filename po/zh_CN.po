@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.1.0\n"
+"Project-Id-Version: 6.0.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-12 13:12-0600\n"
-"PO-Revision-Date: 2025-04-03 21:23+0200\n"
+"PO-Revision-Date: 2025-04-15 10:41+0200\n"
 "Last-Translator: Yuehao Sui <8ar10der@amao.run>\n"
 "Language-Team: Chinese (China)\n"
 "Language: zh_CN\n"
@@ -31,11 +31,11 @@ msgstr "ai;ollama;llm"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 msgid "Chat with AI models"
-msgstr "与AI模型聊天"
+msgstr "与 AI 模型聊天"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:10
 msgid "A private AI client"
-msgstr "私人AI客户端"
+msgstr "私人 AI 客户端"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:11
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1128
@@ -1969,35 +1969,35 @@ msgstr ""
 
 #: src/main.py:193
 msgid "Documentation"
-msgstr ""
+msgstr "文档"
 
 #: src/main.py:194
 msgid "Become a Sponsor"
-msgstr ""
+msgstr "成为赞助人"
 
 #: src/main.py:195
 msgid "Discussions"
-msgstr ""
+msgstr "讨论"
 
 #: src/window.py:185
 msgid "Speech recognition model is being downloaded ({})"
-msgstr ""
+msgstr "正在下载语音识别模型 ({})"
 
 #: src/window.py:210 src/window.py:240
 msgid "Speech Recognition Error"
-msgstr ""
+msgstr "语音识别错误"
 
 #: src/window.py:210
 msgid "An error occurred while pulling speech recognition model"
-msgstr ""
+msgstr "拉取语音识别模型时发生错误"
 
 #: src/window.py:240
 msgid "An error occurred while using speech recognition"
-msgstr ""
+msgstr "使用语音识别时发生错误"
 
 #: src/window.py:275
 msgid "Ollama Was Not Found"
-msgstr ""
+msgstr "未找到 Ollama"
 
 #: src/window.py:276
 msgid ""
@@ -2005,31 +2005,33 @@ msgid ""
 "your device, this is a simple process and should not take more than 5 "
 "minutes."
 msgstr ""
+"要添加一个托管的 Ollama 实例，您必须在您的设备上本地安装 Ollama。这是一个简单"
+"的过程，应该不会超过 5 分钟。"
 
 #: src/window.py:278
 msgid "Open Tutorial in Web Browser"
-msgstr ""
+msgstr "在网页浏览器中打开教程"
 
 #: src/window.py:284 src/window.py:291 src/window.ui:472 src/window.ui:482
 #: src/window.ui:504
 msgid "Add Instance"
-msgstr ""
+msgstr "添加实例"
 
 #: src/window.py:292
 msgid "Select a type of instance to add"
-msgstr ""
+msgstr "选择要添加的实例类型"
 
 #: src/window.py:527
 msgid "No tools enabled."
-msgstr ""
+msgstr "无已启用的工具。"
 
 #: src/window.py:527
 msgid "Open Tool Manager"
-msgstr ""
+msgstr "打开工具管理器"
 
 #: src/window.py:530
 msgid "'{}' does not support tools."
-msgstr ""
+msgstr "'{}' 不支持工具。"
 
 #: src/window.py:530
 msgid "Open Model Manager"
@@ -3289,6 +3291,9 @@ msgid ""
 "including math and coding benchmarks, ranging from 2.4B to 32B parameters "
 "developed and released by LG AI Research."
 msgstr ""
+"LG人工智能研究院（LG AI Research）开发并发布的 EXAONE Deep 模型，在数学与编程"
+"基准测试等多项推理任务中展现出卓越性能，其参数量级覆盖24亿至320亿"
+"（2.4B-32B）。"
 
 #: src/available_models_descriptions.py:164
 msgid ""
@@ -3296,6 +3301,8 @@ msgid ""
 "art vision understanding and enhances long context capabilities up to 128k "
 "tokens without compromising text performance."
 msgstr ""
+"基于Mistral Small 3升级的Mistral Small 3.1（2503）新增了业界领先的视觉理解能"
+"力以及将上下文处理长度扩展至12.8万词符的同时完整保留了原有文本处理性能。"
 
 #: src/available_models_descriptions.py:165
 msgid ""
@@ -3303,12 +3310,17 @@ msgid ""
 "outperform the best available open models of the same size, including "
 "counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."
 msgstr ""
+"由深度思考（Deep Cogito）研发的Cogito v1预览版系列混合推理模型，在多数标准基"
+"准测试中表现卓越，性能超越同体量最优开源模型（包括LLaMA、深度求索[DeepSeek]及"
+"通义千问[Qwen]等同类模型）。"
 
 #: src/available_models_descriptions.py:166
 msgid ""
 "DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
 "1.5B version also available."
 msgstr ""
+"DeepCoder 是一个完全开源的 140 亿参数（14B）代码模型，性能达到 O3-mini 级别，"
+"同时还提供 15 亿参数（1.5B）的轻量版本。"
 
 #: src/instance_manager.py:30 src/instance_manager.py:366
 msgid "Instance"
@@ -3465,7 +3477,7 @@ msgstr "Ollama（托管版）"
 
 #: src/instance_manager.py:547
 msgid "Local AI instance managed directly by Alpaca"
-msgstr "本地AI实例由 Alpaca 直接管理"
+msgstr "由 Alpaca 托管的本地 AI 实例"
 
 #: src/instance_manager.py:570
 msgid "Alpaca Support"
@@ -3514,19 +3526,19 @@ msgstr "无法获取模型列表"
 
 #: src/instance_manager.py:811
 msgid "Fireworks AI inference platform"
-msgstr ""
+msgstr "Fireworks AI 推理平台"
 
 #: src/instance_manager.py:831
 msgid "Lambda Labs cloud inference API"
-msgstr ""
+msgstr "Lambda Labs 云端推理 API"
 
 #: src/instance_manager.py:852
 msgid "Cerebras AI cloud inference API"
-msgstr ""
+msgstr "Cerebras AI 云端推理API"
 
 #: src/instance_manager.py:858
 msgid "Kluster AI cloud inference API"
-msgstr ""
+msgstr "Kluster AI 云端推理API"
 
 #: src/instance_manager.py:862
 msgid "OpenAI Compatible Instance"
@@ -3534,7 +3546,7 @@ msgstr "兼容 OpenAI 的实例"
 
 #: src/instance_manager.py:863
 msgid "AI instance compatible with OpenAI library"
-msgstr ""
+msgstr "兼容 OpenAI 库的 AI 实例"
 
 #: src/instance_manager.py:885
 msgid "Remove Instance?"
@@ -3550,29 +3562,29 @@ msgstr "编辑实例"
 
 #: src/tool_manager.py:71
 msgid "AI Description"
-msgstr ""
+msgstr "AI 描述说明"
 
 #: src/tool_manager.py:72
 msgid "The description the AI model will use to understand what the tool does."
-msgstr ""
+msgstr "AI 模型用于理解工具功能的描述说明"
 
 #: src/tool_manager.py:83
 msgid "Arguments"
-msgstr ""
+msgstr "参量"
 
 #: src/tool_manager.py:84
 msgid "Variables that are filled by the AI."
-msgstr ""
+msgstr "由 AI 填充的变量"
 
 #: src/tool_manager.py:97
 msgid "Variables"
-msgstr ""
+msgstr "变量"
 
 #: src/tool_manager.py:98
 msgid ""
 "User filled values that the tool uses to work, the AI does not have access "
 "to these variables at all."
-msgstr ""
+msgstr "用户填写的值是用于工具工作，人工智能无法访问这些变量。"
 
 #: src/tool_manager.py:140 src/custom_widgets/dialog_widget.py:146
 #: src/custom_widgets/dialog_widget.py:158
@@ -3582,75 +3594,75 @@ msgstr "接受"
 
 #: src/tool_manager.py:177
 msgid "Gets the current date and/or time."
-msgstr ""
+msgstr "获取当前日期和（或）时间。"
 
 #: src/tool_manager.py:211
 msgid "Gets a recipe by the meal's name"
-msgstr ""
+msgstr "根据餐点名称获取菜谱"
 
 #: src/tool_manager.py:224 src/tool_manager.py:281
 msgid "YouTube Video"
-msgstr ""
+msgstr "YouTube 视频"
 
 #: src/tool_manager.py:227 src/tool_manager.py:284
 msgid "Source"
-msgstr ""
+msgstr "来源"
 
 #: src/tool_manager.py:262
 msgid "Gets a list of food recipes by a specified category"
-msgstr ""
+msgstr "按指定类别获取食物食谱列表"
 
 #: src/tool_manager.py:307
 msgid "Extracts an article from Wikipedia by it's title"
-msgstr ""
+msgstr "根据标题从维基百科中提取文章"
 
 #: src/tool_manager.py:349
 msgid "Search for a term online using DuckDuckGo"
-msgstr ""
+msgstr "使用 DuckDuckGo 在线搜索术语"
 
 #: src/tool_manager.py:365
 msgid "Abstract Source"
-msgstr ""
+msgstr "摘要来源"
 
 #: src/tool_manager.py:384
 msgid "Official Website"
-msgstr ""
+msgstr "官方网站"
 
 #: src/tool_manager.py:432
 msgid "Request to run a command using SSH to connect to the device"
-msgstr ""
+msgstr "请求使用 SSH 运行命令连接设备"
 
 #: src/tool_manager.py:435
 msgid "IP Address"
-msgstr ""
+msgstr "IP 地址"
 
 #: src/tool_manager.py:440
 msgid "Username"
-msgstr ""
+msgstr "用户名"
 
 #: src/tool_manager.py:445
 msgid "Network Port"
-msgstr ""
+msgstr "网络端口"
 
 #: src/tool_manager.py:462
 msgid "Model Requested to Run Command"
-msgstr ""
+msgstr "要求运行命令的模型"
 
 #: src/tool_manager.py:463
 msgid "Command"
-msgstr ""
+msgstr "命令"
 
 #: src/tool_manager.py:465
 msgid "Explanation"
-msgstr ""
+msgstr "解释"
 
 #: src/tool_manager.py:466
 msgid "No explanation was provided"
-msgstr ""
+msgstr "未提供解释"
 
 #: src/tool_manager.py:467
 msgid "Make sure you understand what the command does before running it."
-msgstr ""
+msgstr "在运行该命令之前，请确保您了解它的作用。"
 
 #: src/window.ui:34
 msgid "Welcome"
@@ -3765,7 +3777,7 @@ msgstr "附加文件"
 
 #: src/window.ui:369 src/window.ui:1238
 msgid "Use Speech Recognition"
-msgstr ""
+msgstr "使用语音识别"
 
 #: src/window.ui:404
 msgid "Send Message"
@@ -3834,7 +3846,7 @@ msgstr "搜索模型"
 
 #: src/window.ui:652
 msgid "Filter Models"
-msgstr ""
+msgstr "过滤器模型"
 
 #: src/window.ui:668
 msgid "Added"
@@ -3953,7 +3965,7 @@ msgstr "显示省电警告"
 
 #: src/window.ui:1035
 msgid "When running a managed Ollama instance"
-msgstr ""
+msgstr "运行托管的 Ollama 实例时"
 
 #: src/window.ui:1041
 msgid "Zoom"
@@ -3961,15 +3973,15 @@ msgstr "缩放"
 
 #: src/window.ui:1058
 msgid "Auto Send Message After Talking"
-msgstr ""
+msgstr "通话后自动发送消息"
 
 #: src/window.ui:1064
 msgid "Speech Recognition Language"
-msgstr ""
+msgstr "语音识别语言"
 
 #: src/window.ui:1074
 msgid "Text to Speech Voice"
-msgstr ""
+msgstr "文本转语音"
 
 #: src/window.ui:1086
 msgid "Delete All Chats"
@@ -3977,7 +3989,7 @@ msgstr "删除所有对话"
 
 #: src/window.ui:1098
 msgid "Notice"
-msgstr "注意"
+msgstr "通知"
 
 #: src/window.ui:1118
 msgid ""
@@ -3985,20 +3997,24 @@ msgid ""
 "awesome new features to explore! Get ready to experience Alpaca in a whole "
 "new way!"
 msgstr ""
+"亲爱的Alpaca用户们！我们怀着无比激动的心情为您带来全新升级版本！本次更新包含"
+"一系列令人惊艳的新功能，等待您来探索！准备好以焕然一新的方式体验Alpaca吧！"
 
 #: src/window.ui:1125
 msgid "Smart Tools"
-msgstr ""
+msgstr "智能工具"
 
 #: src/window.ui:1126
 msgid ""
 "Supported AI models can use handy tools to grab information both locally and "
 "online. Head over to the brand new \"Tool Manager\" to toggle them on or off."
 msgstr ""
+"已支持的 AI 模型可使用便捷工具获取本地及在线信息。前往全新推出的\"工具管理器"
+"\"开启或关闭这些功能。"
 
 #: src/window.ui:1133
 msgid "Talk to Models"
-msgstr ""
+msgstr "与模型对话"
 
 #: src/window.ui:1134
 msgid ""
@@ -4006,10 +4022,12 @@ msgid ""
 "convenient! You can even customize your language and other settings in the "
 "Preferences dialog."
 msgstr ""
+"现在您可以使用本地语音识别口述消息，超级方便！您还可以在“偏好设置”对话框中自"
+"定义语言和其他选项"
 
 #: src/window.ui:1141
 msgid "Find Models Faster"
-msgstr ""
+msgstr "快速查找模型"
 
 #: src/window.ui:1142
 msgid ""
@@ -4017,10 +4035,12 @@ msgid ""
 "to filter models by their categories in the Model Manager. Now you can "
 "quickly find exactly the model you're looking for."
 msgstr ""
+"浏览您的 Ollama 模型变得更简单了！我们新增了在模型管理器中按类别筛选的功能，"
+"现在您可以快速找到所需模型"
 
 #: src/window.ui:1149
 msgid "Math Rendering"
-msgstr ""
+msgstr "数学公式渲染"
 
 #: src/window.ui:1150
 msgid ""
@@ -4028,10 +4048,12 @@ msgid ""
 "look cleaner and more consistent. Your mathematical discussions will be "
 "clearer than ever!"
 msgstr ""
+"我们优化了消息中LaTeX方程的渲染效果，使其更清晰、更统一。您的数学讨论将比以往"
+"更加一目了然！"
 
 #: src/window.ui:1157
 msgid "More Instances"
-msgstr ""
+msgstr "更多AI服务接入"
 
 #: src/window.ui:1158
 msgid ""
@@ -4039,18 +4061,22 @@ msgid ""
 "support for over 5 new AI instance providers, including Anthropic, "
 "OpenRouter, and Fireworks. The possibilities are endless!"
 msgstr ""
+"现在您可以将Alpaca连接到更多AI服务提供商了！我们新增支持Anthropic、"
+"OpenRouter、Fireworks等5家以上AI服务，可能性无限扩展！"
 
 #: src/window.ui:1165
 msgid "Attachment Enhancement"
-msgstr ""
+msgstr "文件附件功能升级"
 
 #: src/window.ui:1166
 msgid ""
-"You can now attach and ask questions about even more file types, "
-"including .docx, .pptx, and .xlsx! Plus, when you preview an attachment, "
-"you'll see it with rich text styling, making it easier to understand the "
-"content before you send it."
+"You can now attach and ask questions about even more file types, including ."
+"docx, .pptx, and .xlsx! Plus, when you preview an attachment, you'll see it "
+"with rich text styling, making it easier to understand the content before "
+"you send it."
 msgstr ""
+"现已支持更多文件类型（包括.docx、.pptx和.xlsx）的附件上传与提问！此外，预览附"
+"件时将显示富文本样式，让您在发送前更轻松理解内容。"
 
 #: src/window.ui:1187
 msgid "Quick ask dialog"
@@ -4086,7 +4112,7 @@ msgstr "移除附件"
 
 #: src/window.ui:1359
 msgid "Start Quick Ask"
-msgstr ""
+msgstr "开始快速提问"
 
 #: src/window.ui:1363
 msgid "Import Chat"
@@ -4094,7 +4120,7 @@ msgstr "导入对话"
 
 #: src/window.ui:1375
 msgid "Manage Tools"
-msgstr ""
+msgstr "管理工具"
 
 #: src/window.ui:1385
 msgid "Keyboard Shortcuts"
@@ -4134,7 +4160,7 @@ msgstr "以系统身份发送"
 
 #: src/window.ui:1461 src/gtk/help-overlay.ui:133
 msgid "Use Tools"
-msgstr ""
+msgstr "使用工具"
 
 #: src/window.ui:1473
 msgid "Attach Website"
@@ -4174,7 +4200,7 @@ msgstr "首选项"
 #: src/gtk/help-overlay.ui:26
 msgctxt "shortcut window"
 msgid "Quick Ask"
-msgstr ""
+msgstr "快速提问"
 
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
@@ -4262,7 +4288,7 @@ msgstr "系统消息会被模型视为严格的指令"
 
 #: src/gtk/help-overlay.ui:134
 msgid "Ask model to use tools to generate a message"
-msgstr ""
+msgstr "要求模型调用工具生成消息"
 
 #: src/gtk/help-overlay.ui:140
 msgid "Send Message as User"
@@ -4399,7 +4425,7 @@ msgstr "重新生成消息"
 
 #: src/custom_widgets/message_widget.py:563
 msgid "Dictate Message"
-msgstr ""
+msgstr "语音输入消息"
 
 #: src/custom_widgets/message_widget.py:583
 msgid "Message copied to the clipboard"
@@ -4525,7 +4551,7 @@ msgstr "嵌入"
 
 #: src/custom_widgets/model_manager_widget.py:480
 msgid "Tools"
-msgstr ""
+msgstr "工具"
 
 #: src/custom_widgets/model_manager_widget.py:481
 msgid "Small"
@@ -4567,7 +4593,7 @@ msgstr "使用 Flatpak 内置的 shell 环境"
 
 #: src/custom_widgets/terminal_widget.py:136
 msgid "Using SSH to run command"
-msgstr ""
+msgstr "使用 SSH 运行命令"
 
 #: src/custom_widgets/terminal_widget.py:142
 msgid "Script Exited"
