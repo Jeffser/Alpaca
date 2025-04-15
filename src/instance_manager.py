@@ -541,7 +541,8 @@ class ollama_managed(base_ollama):
     overrides = {
         'HSA_OVERRIDE_GFX_VERSION': '',
         'CUDA_VISIBLE_DEVICES': '',
-        'ROCR_VISIBLE_DEVICES': ''
+        'ROCR_VISIBLE_DEVICES': '1',
+        'HIP_VISIBLE_DEVICES': '1'
     }
     model_directory = os.path.join(data_dir, '.ollama', 'models')
     description = _('Local AI instance managed directly by Alpaca')
@@ -552,7 +553,8 @@ class ollama_managed(base_ollama):
         self.instance_url = data.get('url', self.instance_url).removesuffix('.0')
         self.temperature = data.get('temperature', self.temperature)
         self.seed = data.get('seed', self.seed)
-        self.overrides = data.get('overrides', self.overrides)
+        for key in self.overrides:
+            self.overrides[key] = data.get('overrides', self.overrides).get(key, self.overrides.get(key))
         self.model_directory = data.get('model_directory', self.model_directory)
         self.default_model = data.get('default_model', self.default_model)
         self.title_model = data.get('title_model', self.title_model)
