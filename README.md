@@ -47,7 +47,10 @@ Normal conversation | Image recognition | Custom Character | Integrated script e
 > [!NOTE]
 > Available since Alpaca 6.0.0
 
-Quick Ask is a mini mode you can use to have a quick temporary chat that isn't save as a full chat.
+> [!NOTE]
+> It uses the default model from the latest instance you've used to generate the messages
+
+Quick Ask is a mini mode you can use to have a quick temporary chat that isn't saved as a full chat.
 
 Great for asking something, getting a response and moving on with your work.
 
