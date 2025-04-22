@@ -8,9 +8,7 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, GObject, Gio, Adw, GtkSource, GLib, Gdk, GdkPixbuf
 import logging, os, datetime, re, shutil, threading, sys, base64, tempfile, time, random
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_gtk4agg import FigureCanvasGTK4Agg as FigureCanvas
-from matplotlib.figure import Figure
+
 from PIL import Image
 from ..constants import TTS_VOICES
 from ..internal import config_dir, data_dir, cache_dir, source_dir
@@ -135,61 +133,6 @@ class edit_text_block(Gtk.Box):
         message_element.set_hexpand(message_element.bot)
         message_element.set_halign(0 if message_element.bot else 2)
         self.get_parent().remove(self)
-
-class text_block(Gtk.Label):
-    __gtype_name__ = 'AlpacaTextBlock'
-
-    def __init__(self, bot:bool, system:bool):
-        super().__init__(
-            hexpand=True,
-            halign=0,
-            wrap=True,
-            wrap_mode=2,
-            xalign=0,
-            focusable=True,
-            selectable=True,
-            css_classes=['dim-label'] if system else [],
-            justify=2 if system else 0
-        )
-        self.raw_text = ''
-        if bot:
-            self.update_property([4, 7], [_("Response message"), False])
-        elif system:
-            self.update_property([4, 7], [_("System message"), False])
-        else:
-            self.update_property([4, 7], [_("User message"), False])
-        self.connect('notify::has-focus', lambda *_: GLib.idle_add(self.remove_selection) if self.has_focus() else None)
-
-    def remove_selection(self):
-        self.set_selectable(False)
-        self.set_selectable(True)
-
-class generating_text_block(Gtk.Overlay):
-    __gtype_name__ = 'AlpacaGeneratingTextBlock'
-
-    def __init__(self):
-        textview = Gtk.TextView(
-            hexpand=True,
-            halign=0,
-            editable=False,
-            wrap_mode=3,
-            css_classes=['flat']
-        )
-        self.buffer = textview.get_buffer()
-
-        super().__init__(
-            child=textview
-        )
-
-        self.add_overlay(Gtk.Box(
-            valign=2,
-            halign=0,
-            height_request=25,
-            css_classes=['generating_text_shadow']
-        ))
-
-    def get_text(self) -> str:
-        return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
 
 class code_block(Gtk.Box):
     __gtype_name__ = 'AlpacaCodeBlock'
@@ -443,62 +386,6 @@ class image_container(Gtk.ScrolledWindow):
         self.container.append(img)
         self.files.append(img)
         self.set_max_content_width(sum([f.width for f in self.files] + [12*(len(self.files)-1)]))
-
-class latex_renderer(Gtk.Button):
-    __gtype_name__ = 'AlpacaLatexRenderer'
-
-    class latex_canvas(FigureCanvas):
-        __gtype_name__ = 'AlpacaLatexCanvas'
-
-        def __init__(self, eq):
-            fig = Figure(dpi=100)
-            fig.patch.set_alpha(0)
-            ax = fig.add_subplot()
-            ax.axis('off')
-            text = ax.text(0.5, 0.5, eq, fontsize=24, ha='center', va='center')
-
-            fig.tight_layout()
-            fig.canvas.draw()
-            bbox = text.get_window_extent()
-            super().__init__(fig)
-            self.set_hexpand(True)
-            self.set_vexpand(True)
-            self.set_size_request(-1, bbox.height)
-            self.set_content_width(bbox.width)
-            self.set_css_classes(['latex_renderer'])
-            self.set_sensitive(False)
-
-    def __init__(self, equation):
-        equation = equation.strip()
-        for p in ('\\[', '$$', '$'):
-            equation.removeprefix(p)
-        for s in ('\\]', '$$', '$'):
-            equation.removesuffix(s)
-        self.eq = '${}$'.format(equation)
-        print(self.eq)
-
-        child = None
-        try:
-            child = Gtk.ScrolledWindow(
-                propagate_natural_height=True,
-                hscrollbar_policy=1,
-                vscrollbar_policy=2,
-                child=self.latex_canvas(self.eq)
-            )
-        except Exception as e:
-            child = Gtk.Label(label=str(e).strip(), css_classes=['error'], wrap=True)
-
-        super().__init__(
-            child=child,
-            css_classes=['flat', 'p10'],
-            tooltip_text=_('Copy Equation')
-        )
-        self.connect('clicked', lambda button: self.copy_equation())
-
-    def copy_equation(self):
-        clipboard = Gdk.Display().get_default().get_clipboard()
-        clipboard.set(self.eq[1:-1])
-        window.show_toast(_("Equation copied to the clipboard"), window.main_overlay)
 
 class option_popup(Gtk.Popover):
     __gtype_name__ = 'AlpacaMessagePopup'
