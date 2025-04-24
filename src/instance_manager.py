@@ -781,7 +781,6 @@ class groq(base_openai):
     limitations = ('text-only')
 
 class anthropic(base_openai):
-    api_key = ''
     instance_type = 'anthropic'
     instance_type_display = 'Anthropic'
     instance_url = 'https://api.anthropic.com/v1/'
