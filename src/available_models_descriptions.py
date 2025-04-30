@@ -13,6 +13,7 @@ descriptions = {
    'phi3': _("Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art open models by Microsoft."),
    'llama2': _("Llama 2 is a collection of foundation language models ranging from 7B to 70B parameters."),
    'qwen2.5': _("Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, encompassing up to 18 trillion tokens. The model supports up to 128K tokens and has multilingual support."),
+   'qwen3': _("Qwen3 is the latest generation of large language models in Qwen series, offering a comprehensive suite of dense and mixture-of-experts (MoE) models."),
    'gemma2': _("Google Gemma 2 is a high-performing and efficient model available in three sizes: 2B, 9B, and 27B."),
    'llava': _("🌋 LLaVA is a novel end-to-end trained large multimodal model that combines a vision encoder and Vicuna for general-purpose visual and language understanding. Updated to version 1.6."),
    'codellama': _("A large language model that can use text prompts to generate and discuss code."),
