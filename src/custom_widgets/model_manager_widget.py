@@ -638,7 +638,7 @@ class local_model(Gtk.Box):
                 _('Change'): {'callback': lambda: dialog_widget.simple_file([window.file_filter_image], set_profile_picture), 'appearance': 'suggested', 'default': True},
             }
 
-            dialog_widget.Options(_("Model Profile Picture"), _("What do you want to do with the model's profile picture?"), list(options.keys())[0], options)
+            dialog_widget.Options(_("Model Profile Picture"), _("What do you want to do with the model's profile picture?"), list(options.keys())[0], options, self)
         else:
             dialog_widget.simple_file([window.file_filter_image], set_profile_picture)
 
