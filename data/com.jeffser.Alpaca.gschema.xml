@@ -2,4 +2,18 @@
 <schemalist gettext-domain="alpaca">
 	<schema id="com.jeffser.Alpaca" path="/com/jeffser/Alpaca/">
 	</schema>
+	<schema id="com.jeffser.Alpaca.State" path="/com/jeffser/Alpaca/State/">
+		<key name="width" type="i">
+			<default>1300</default>
+		</key>
+		<key name="height" type="i">
+			<default>800</default>
+		</key>
+		<key name="is-maximized" type="b">
+			<default>false</default>
+		</key>
+		<key name="is-fullscreen" type="b">
+			<default>false</default>
+		</key>
+	</schema>
 </schemalist>
