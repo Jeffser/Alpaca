@@ -846,12 +846,6 @@ class lambda_labs(base_openai):
             window.instance_listbox.unselect_all()
             return []
 
-class cerebras(base_openai):
-    instance_type = 'cerebras'
-    instance_type_display = 'Cerebras AI'
-    instance_url = 'https://api.cerebras.ai/v1/'
-    description = _('Cerebras AI cloud inference API')
-
 class klusterai(base_openai):
     instance_type = 'klusterai'
     instance_type_display = 'Kluster AI'
@@ -933,6 +927,6 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama_managed, ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, fireworks, lambda_labs, cerebras, klusterai, generic_openai]
+ready_instances = [ollama_managed, ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, fireworks, lambda_labs, klusterai, generic_openai]
 
 
