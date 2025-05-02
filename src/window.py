@@ -1353,6 +1353,25 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if sys.platform not in Platforms.ported:
             self.model_manager_stack.set_enable_transitions(True)
 
+            # Logic to remember the window size upon application shutdown and
+            # startup; will restore the state of the app after closing and
+            # opening it again, especially useful for large, HiDPI displays.
+            self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca.State")
+
+            # Please also see the GNOME developer documentation:
+            # https://developer.gnome.org/documentation/tutorials/save-state.html
+            for el in [
+                ("width", "default-width"),
+                ("height", "default-height"),
+                ("is-maximized", "maximized")
+            ]:
+                self.settings.bind(
+                    el[0],
+                    self,
+                    el[1],
+                    Gio.SettingsBindFlags.DEFAULT
+                )
+
         self.chat_list_box = chat_widget.chat_list()
         self.chat_list_container.set_child(self.chat_list_box)
 
