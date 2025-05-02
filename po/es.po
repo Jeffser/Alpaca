@@ -166,11 +166,11 @@ msgstr "Lista de modelos actualizada"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Alpaca now remembers it's size"
-msgstr ""
+msgstr "Alpaca ahora recuerda su tamaño"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Added reasoning category for Ollama models"
-msgstr ""
+msgstr "Añadida la categoria de razonamiento para modelos de Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
@@ -207,19 +207,20 @@ msgstr "Arreglos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Improvements in sample prompts"
-msgstr ""
+msgstr "Mejoras en los mensajes de ejemplo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "Fixed auto creation of Ollama (Managed) instance"
-msgstr ""
+msgstr "Se corrigió la creación automática de la instancia de Ollama (administrada)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:113
 msgid "Removed legacy JSON to SQLite3 migration code"
-msgstr ""
+msgstr "Se eliminó el código de migración de JSON heredado a SQLite3"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid "Fixed power saving mode appearing whilst using online instances"
-msgstr ""
+msgstr "Se solucionó el problema del modo de ahorro de energía que "
+"aparecía al usar instancias en línea."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Fixed Ollama (Manged) instance not being able to be created"
@@ -2128,15 +2129,16 @@ msgstr "Se produjo un error al utilizar el reconocimiento de voz"
 
 #: src/window.py:254
 msgid "Download Speech Recognition Model"
-msgstr ""
+msgstr "Descargar Modelo de Reconocimiento de Voz"
 
 #: src/window.py:255
 msgid "To use speech recognition you'll need to download a special model ({})"
-msgstr ""
+msgstr "Para utilizar el reconocimiento de voz necesitarás descargar un "
+"modelo especial ({})"
 
 #: src/window.py:257
 msgid "Download Model"
-msgstr ""
+msgstr "Descargar Modelo"
 
 #: src/window.py:274
 msgid "Ollama Was Not Found"
@@ -3667,10 +3669,13 @@ msgid ""
 "Qwen3 is the latest generation of large language models in Qwen series, "
 "offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
 msgstr ""
+"Qwen3 es la última generación de modelos de lenguaje grandes de la serie "
+"Qwen y ofrece un conjunto integral de modelos densos y de mezcla de "
+"expertos (MoE)."
 
 #: src/available_models_descriptions.py:168
 msgid "Meta's latest collection of multimodal models."
-msgstr ""
+msgstr "La última colección de modelos multimodales de Meta."
 
 #: src/available_models_descriptions.py:169
 msgid ""
@@ -3678,18 +3683,26 @@ msgid ""
 "have been fine-tuned for improved reasoning and instruction-following "
 "capabilities."
 msgstr ""
+"Los modelos IBM Granite 2B y 8B son modelos de lenguaje con una longitud "
+"de contexto de 128 K que se han perfeccionado para mejorar las "
+"capacidades de razonamiento y seguimiento de instrucciones."
 
 #: src/available_models_descriptions.py:170
 msgid ""
 "Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
 "reasoning models that rival much larger models on complex reasoning tasks."
 msgstr ""
+"El razonamiento Phi 4 y el razonamiento plus son modelos de razonamiento de "
+"peso abierto de 14 mil millones de parámetros que rivalizan con modelos "
+"mucho más grandes en tareas de razonamiento complejas."
 
 #: src/available_models_descriptions.py:171
 msgid ""
 "Phi 4 mini reasoning is a lightweight open model that balances efficiency "
 "with advanced reasoning ability."
 msgstr ""
+"El mini razonamiento Phi 4 es un modelo abierto y liviano que equilibra "
+"la eficiencia con la capacidad de razonamiento avanzada."
 
 #: src/instance_manager.py:30 src/instance_manager.py:366
 msgid "Instance"
@@ -4370,13 +4383,15 @@ msgstr "Zoom"
 
 #: src/window.ui:1060
 msgid "Speech Recognition Model"
-msgstr ""
+msgstr "Modelo de Reconocimiento de Voz"
 
 #: src/window.ui:1061
 msgid ""
 "Models are downloaded upon first use, you can delete them from the model "
 "manager"
 msgstr ""
+"Los modelos se descargan en el primer uso, puedes eliminarlos desde el "
+"administrador de modelos"
 
 #: src/window.ui:1068
 msgid "Speech Recognition Language"
@@ -4395,6 +4410,8 @@ msgid ""
 "Voices are downloaded upon first use, each weighing around 1 MB, and you can "
 "delete them from the model manager"
 msgstr ""
+"Las voces se descargan durante el primer uso, cada una pesa alrededor de "
+"1 MB y puedes eliminarlas desde el administrador de modelos."
 
 #: src/window.ui:1100
 msgid "Delete All Chats"
@@ -4884,20 +4901,20 @@ msgstr "¿Estás seguro de que quieres eliminar '{}'?"
 
 #: src/custom_widgets/model_manager_widget.py:123
 msgid "Local text to speech model provided by Kokoro."
-msgstr ""
+msgstr "Modelo de texto a voz local proporcionado por Kokoro."
 
 #: src/custom_widgets/model_manager_widget.py:160
 #: src/custom_widgets/model_manager_widget.py:293
 msgid "Speech to Text"
-msgstr ""
+msgstr "Voz a Texto"
 
 #: src/custom_widgets/model_manager_widget.py:209
 msgid "Local speech to text model provided by OpenAI Whisper."
-msgstr ""
+msgstr "Modelo de voz a texto local proporcionado por OpenAI Whisper."
 
 #: src/custom_widgets/model_manager_widget.py:239
 msgid "Downloading…"
-msgstr ""
+msgstr "Descargando…"
 
 #: src/custom_widgets/model_manager_widget.py:249
 #: src/custom_widgets/model_manager_widget.py:251
@@ -4963,11 +4980,11 @@ msgstr "Descripción"
 
 #: src/custom_widgets/model_manager_widget.py:491
 msgid "Voice"
-msgstr ""
+msgstr "Voz"
 
 #: src/custom_widgets/model_manager_widget.py:496
 msgid "Default"
-msgstr ""
+msgstr "Predeterminado"
 
 #: src/custom_widgets/model_manager_widget.py:638
 msgid "Change"
@@ -5011,7 +5028,7 @@ msgstr "Herramientas"
 
 #: src/custom_widgets/model_manager_widget.py:695
 msgid "Reasoning"
-msgstr ""
+msgstr "Razonamiento"
 
 #: src/custom_widgets/model_manager_widget.py:696
 msgid "Small"
