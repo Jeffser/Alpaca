@@ -5,6 +5,7 @@ TODO DESCRIPTION
 
 import gi
 import blocks
+from . import AttachmentContainer, ImageAttachmentContainer, Attachment, ImageAttachment
 from gi.repository import GLib, Gtk, Adw
 
 patterns = (
@@ -49,7 +50,8 @@ class BlockContainer(Gtk.Box):
                     else:
                         self.append(blocks.Text(content=content[pos:(match_start)]))
                 if pattern_name == "think":
-                    print("think")
+                    ## TODO generate UUID and save on sql
+                    self.message.attachment_container.add_attachment(Attachment('-1', _('Thought'), 'thought', match.group(1)))
                 elif pattern_name == "code":
                     if match.group(1).lower() == 'latex':
                         self.append(blocks.Latex(content=match.group(2)))
@@ -75,9 +77,8 @@ class BlockContainer(Gtk.Box):
                         self.append(blocks.Text(content=expression))
                 pos = match_end
 
-    def get_content(self) -> str:
-        content = [block.get_content() for block in list(self) if not isinstance(block, None) and not isinstance(block, None)] # TODO if block is not image or attachment container
-        return '\n\n'.join(content)
+    def get_content(self) -> list:
+        return [block.get_content() for block in list(self)]
 
 class MessageHeader(Gtk.Box):
     __gtype_name__ = 'AlpacaMessageHeader'
@@ -190,10 +191,27 @@ class Message(Gtk.Box):
             hexpand=True
         )
         main_container.append(self.header_container)
+
+        self.main_stack = Gtk.Stack(
+            transition_type=1
+        )
+        main_container.append(self.main_stack)
+        self.main_stack.add_named(Adw.Spinner(), 'loading')
+        content_container = Gtk.Box(
+            orientation=1,
+            spacing=5
+        )
+
+        self.image_attachment_container = ImageAttachmentContainer()
+        content_container.append(self.image_attachment_container)
+        self.attachment_container = AttachmentContainer()
+        content_container.append(self.attachment_container)
+
         self.block_container = BlockContainer(
             message=self
         )
-        main_container.append(self.block_container)
+        content_container.append(self.block_container)
+        self.main_stack.add_named(content_container, 'content')
 
     def get_model(self) -> str or None:
         """
@@ -201,6 +219,9 @@ class Message(Gtk.Box):
         """
         if self.mode == 1:
             return self.author
+
+    def get_content(self) -> str:
+        return '\n\n'.join(self.block_container.get_content())
 
     def update_message(self, data:dict) -> None:
         """
@@ -211,7 +232,8 @@ class Message(Gtk.Box):
         {'add_css', 'css_class'}    = Adds CSS class to generating block
         {'remove_css': 'css_class'} = Removes CSS class from generating block
         """
-
+        if self.main_stack.get_visible_child_name() == 'loading':
+            self.main_stack.set_visible_child_name('content')
         if data.get('done'):
             print('Generation finished')
         elif data.get('content'):

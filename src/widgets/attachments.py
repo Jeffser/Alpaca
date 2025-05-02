@@ -218,7 +218,7 @@ class ImageAttachment(Gtk.Button)
             super().__init__(
                 child=image,
                 css_classes=["flat", "chat_image_button"],
-                name=file_name,
+                name=file_id,
                 tooltip_text=_("Image"),
                 overflow=1
             )
@@ -243,9 +243,72 @@ class ImageAttachment(Gtk.Button)
                 child=image_box,
                 css_classes=["flat", "chat_image_button"],
                 tooltip_text=_("Missing Image"),
-                overflow=1
+                overflow=1,
+                name=file_id
             )
-
 
     def get_content(self) -> str:
         return self.file_content
+
+class AttachmentContainer(Gtk.ScrolledWindow):
+    __gtype_name__ = 'AlpacaAttachmentContainer'
+
+    def __init__(self):
+        super().__init__(
+            hexpand=True,
+            child=Gtk.Box(
+                orientation=0,
+                spacing=10,
+                valign=1
+            ),
+            vscrollbar_policy=2,
+            propagate_natural_width=True,
+            visible=False
+        )
+
+    def get_content(self) -> list:
+        files = []
+        for f in list(self.get_child()):
+            files.append({
+                'id': f.get_name(),
+                'name': f.file_name,
+                'type': f.file_type,
+                'content': f.file_content
+            })
+        return files
+
+    def add_attachment(self, attachment:Attachment) -> None:
+        self.set_visible(True)
+        self.get_child().append(attachment)
+
+class ImageAttachmentContainer(Gtk.ScrolledWindow):
+    __gtype_name__ = 'AlpacaImageAttachmentContainer'
+
+    def __init__(self):
+        super().__init__(
+            height_request = 240,
+            child=Gtk.Box(
+                orientation=0,
+                spacing=12
+            ),
+            propagate_natural_width=True,
+            visible=False
+        )
+
+    def get_content(self) -> list:
+        files = []
+        for f in list(self.get_child()):
+            files.append({
+                'id': f.get_name(),
+                'name': f.file_name,
+                'type': f.file_type,
+                'content': f.file_content
+            })
+        return files
+
+    def add_attachment(self, attachment:ImageAttachment) -> None:
+        self.set_visible(True)
+        self.get_child().append(attachment)
+
+
+
