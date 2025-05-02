@@ -465,7 +465,12 @@ class chat_list(Gtk.ListBox):
         window.sql_instance.duplicate_chat(old_chat_window, new_chat)
 
     def on_chat_imported(self, file_dialog, result):
-        file = file_dialog.open_finish(result)
+        try:
+            file = file_dialog.open_finish(result)
+        except gi.repository.GLib.GError:
+            # The user (probably) dismissed the dialog
+            return
+
         if file:
             if os.path.isfile(os.path.join(cache_dir, 'import.db')):
                 os.remove(os.path.join(cache_dir, 'import.db'))

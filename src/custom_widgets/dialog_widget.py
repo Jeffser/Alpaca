@@ -273,10 +273,32 @@ def simple_error(title:str, body:str, error_log:str, callback:callable=None, par
 
 def simple_file(file_filters:list, callback:callable):
     filter_list = Gio.ListStore.new(Gtk.FileFilter)
+
     for item in file_filters:
         filter_list.append(item)
-    file_dialog = Gtk.FileDialog(default_filter=file_filters[0], filters=filter_list)
-    file_dialog.open(window, None, lambda file_dialog, result: callback(file_dialog.open_finish(result)) if result else None)
+
+    def __open_finish_wrapper(dialog, result):
+        """
+        Wrapper around file_dialog.open_finish to handle errors gracefully.
+        """
+
+        try:
+            return dialog.open_finish(result)
+        except gi.repository.GLib.GError:
+            # The user (probably) dismissed the dialog
+            return
+
+    file_dialog = Gtk.FileDialog(
+        default_filter=file_filters[0],
+        filters=filter_list
+    )
+
+    file_dialog.open(
+        window,
+        None,
+        lambda file_dialog,
+        result: callback(__open_finish_wrapper(file_dialog, result)) if result else None
+    )
 
 def simple_directory(callback:callable):
     directory_dialog = Gtk.FileDialog()
