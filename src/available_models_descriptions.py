@@ -164,4 +164,9 @@ descriptions = {
    'mistral-small3.1': _("Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-art vision understanding and enhances long context capabilities up to 128k tokens without compromising text performance."),
    'cogito': _("Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that outperform the best available open models of the same size, including counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."),
    'deepcoder': _("DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a 1.5B version also available."),
+   'qwen3': _("Qwen3 is the latest generation of large language models in Qwen series, offering a comprehensive suite of dense and mixture-of-experts (MoE) models."),
+   'llama4': _("Meta's latest collection of multimodal models."),
+   'granite3.3': _("IBM Granite 2B and 8B models are 128K context length language models that have been fine-tuned for improved reasoning and instruction-following capabilities."),
+   'phi4-reasoning': _("Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight reasoning models that rival much larger models on complex reasoning tasks."),
+   'phi4-mini-reasoning': _("Phi 4 mini reasoning is a lightweight open model that balances efficiency with advanced reasoning ability."),
 }

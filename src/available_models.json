@@ -3778,5 +3778,186 @@
         "languages": [
             "en"
         ]
+    },
+    "qwen3": {
+        "tags": [
+            [
+                "0.6b",
+                "523\u202fMB"
+            ],
+            [
+                "1.7b",
+                "1.4\u202fGB"
+            ],
+            [
+                "4b",
+                "2.6\u202fGB"
+            ],
+            [
+                "8b",
+                "5.2\u202fGB"
+            ],
+            [
+                "14b",
+                "9.3\u202fGB"
+            ],
+            [
+                "30b",
+                "19\u202fGB"
+            ],
+            [
+                "32b",
+                "20\u202fGB"
+            ],
+            [
+                "235b",
+                "142\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/qwen3",
+        "categories": [
+            "tools",
+            "small",
+            "medium",
+            "big",
+            "huge",
+            "code",
+            "math",
+            "multilingual"
+        ],
+        "author": "Alibaba",
+        "languages": [
+            "en",
+            "es",
+            "de",
+            "fr",
+            "pt",
+            "it",
+            "nl",
+            "ru",
+            "cs",
+            "pl",
+            "ar",
+            "fa",
+            "he",
+            "tr",
+            "ja",
+            "ko",
+            "vi",
+            "th",
+            "id",
+            "ms",
+            "lo",
+            "my",
+            "ceb",
+            "km",
+            "tl",
+            "hi",
+            "bn",
+            "ur"
+        ]
+    },
+    "llama4": {
+        "tags": [
+            [
+                "latest",
+                "67\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/llama4",
+        "categories": [
+            "vision",
+            "tools",
+            "huge",
+            "vision",
+            "multilingual",
+            "code"
+        ],
+        "author": "Meta",
+        "languages": [
+            "en",
+            "ar",
+            "fr",
+            "de",
+            "hi",
+            "it",
+            "pt",
+            "es",
+            "id",
+            "tl",
+            "th",
+            "vi"
+        ]
+    },
+    "granite3.3": {
+        "tags": [
+            [
+                "2b",
+                "1.5\u202fGB"
+            ],
+            [
+                "8b",
+                "4.9\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/granite3.3",
+        "categories": [
+            "tools",
+            "small",
+            "medium",
+            "code",
+            "math",
+            "multilingual"
+        ],
+        "author": "IBM for Code Intelligence",
+        "languages": [
+            "en",
+            "de",
+            "es",
+            "fr",
+            "ja",
+            "pt",
+            "ar",
+            "cs",
+            "it",
+            "ko",
+            "nl",
+            "zh"
+        ]
+    },
+    "phi4-reasoning": {
+        "tags": [
+            [
+                "14b",
+                "11\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/phi4-reasoning",
+        "categories": [
+            "big",
+            "math",
+            "code"
+        ],
+        "author": "Microsoft",
+        "languages": [
+            "en"
+        ]
+    },
+    "phi4-mini-reasoning": {
+        "tags": [
+            [
+                "3.8b",
+                "3.2\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/phi4-mini-reasoning",
+        "categories": [
+            "small",
+            "math"
+        ],
+        "author": "Microsoft",
+        "languages": [
+            "en"
+        ]
     }
 }
