@@ -879,9 +879,10 @@ def update_local_model_list():
     GLib.idle_add(window.model_dropdown.get_model().remove_all)
 
     # Speech to Text
-    for model in os.listdir(os.path.join(data_dir, 'whisper')):
-        if model.endswith('.pt') and STT_MODELS.get(model.removesuffix('.pt')):
-            add_speech_to_text_model(model.removesuffix('.pt'))
+    if os.path.isdir(os.path.join(data_dir, 'whisper')):
+        for model in os.listdir(os.path.join(data_dir, 'whisper')):
+            if model.endswith('.pt') and STT_MODELS.get(model.removesuffix('.pt')):
+                add_speech_to_text_model(model.removesuffix('.pt'))
 
     # Text to Speech
     tts_model_path = os.path.join(cache_dir, 'huggingface', 'hub')
