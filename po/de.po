@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 5.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-02 19:38-0600\n"
-"PO-Revision-Date:  2025-03-14 09:08+0001\n"
+"PO-Revision-Date: 2025-05-04 01:36+0200\n"
 "Last-Translator: Magnus Schlinsog <magnusschlinsog@gmail.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 48.0\n"
 
 #: data/com.jeffser.Alpaca.desktop.in:2
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
@@ -164,7 +165,7 @@ msgstr "Fehlerbehebungen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Fixed whisper directory not existing causing error"
-msgstr ""
+msgstr "Fehler durch fehlendes \"whisper\"-Verzeichnis behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 #: data/com.jeffser.Alpaca.metainfo.xml.in:151
@@ -205,84 +206,87 @@ msgstr "Modellliste aktualisiert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
 msgid "Alpaca now remembers it's size"
-msgstr ""
+msgstr "Alpaca merkt sich nun die Fenstergröße"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Added reasoning category for Ollama models"
-msgstr ""
+msgstr "Reasoning-Kategorie für Ollama-Modelle hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "Improvements in sample prompts"
-msgstr ""
+msgstr "Verbesserungen in Beispielprompts"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:121
 msgid "Fixed auto creation of Ollama (Managed) instance"
-msgstr ""
+msgstr "Automatische Erstellung einer Ollama (verwaltet)-Instanz behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
 msgid "Removed legacy JSON to SQLite3 migration code"
-msgstr ""
+msgstr "Alten JSON-zu-SQLite3-Migrationscode entfernt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Fixed power saving mode appearing whilst using online instances"
-msgstr ""
+msgstr "Warnung vor Energiesparmodus bei Nutzung von Online-Instanzen behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:132
 msgid "Fixed Ollama (Manged) instance not being able to be created"
-msgstr ""
+msgstr "Fehler bei der Erstellung der integrierten Ollama-Instanz behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:141
 msgid "Instance manager now follows default model"
-msgstr ""
+msgstr "Instanz-Manager befolgt nun das Standardmodell"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:142
 msgid "English text-to-speech voices not working"
-msgstr ""
+msgstr "Englische Text-zu-Sprache-Stimmen funktionieren nicht"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:143
 msgid "Instance manager sometimes not saving instances"
-msgstr ""
+msgstr "Instanz-Manager speichert manchmal Instanzen nicht"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:144
 msgid "Fixed Gorq and Deepseek instances not generating text"
 msgstr ""
+"Fehler behoben, durch den Groq- und Deepseek-Instanzen keinen Text "
+"generierten"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:153
 msgid "Smart tools for models"
-msgstr ""
+msgstr "Intelligente Werkzeuge für Modelle"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:154
 msgid "Speech recognition (message dictation)"
-msgstr ""
+msgstr "Spracherkennung (Diktieren der Eingabe)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:155
 #: src/custom_widgets/model_manager_widget.py:68
 msgid "Text to Speech"
-msgstr ""
+msgstr "Text-zu-Sprache"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:156
 msgid "New Quick Chat system"
-msgstr ""
+msgstr "Neues \"Flinke Frage\"-System"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:157
 msgid "Filter Ollama models by categories"
-msgstr ""
+msgstr "Filtern von Ollama-Modellen nach Kategorien"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:158
 msgid "Better math Latex rendering in messages"
-msgstr ""
+msgstr "Verbessertes Mathematik-LaTeX-Rendering in Nachrichten"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:159
 msgid "Rich text rendering in attachment preview"
-msgstr ""
+msgstr "Rich-Text-Rendering in Anhangsvorschau"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:160
 msgid "Matplotlib is now included in Python code runner"
 msgstr ""
+"Matplotlib ist nun in der integrierten Python-Codeausführung mitgeliefert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:161
 msgid "Styling for messages being generated"
-msgstr ""
+msgstr "Verschönerung von Nachrichten, die gerade noch generiert werden"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:163
 #: data/com.jeffser.Alpaca.metainfo.xml.in:271
@@ -291,95 +295,97 @@ msgstr "Neue Instanzen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:165
 msgid "Deepseek"
-msgstr ""
+msgstr "Deepseek"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:166
 msgid "OpenRouter AI"
-msgstr ""
+msgstr "OpenRouter AI"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:167
 msgid "Anthropic"
-msgstr ""
+msgstr "Anthropic"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:168
 msgid "Groq Cloud"
-msgstr ""
+msgstr "Groq Cloud"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:169
 msgid "Fireworks AI"
-msgstr ""
+msgstr "Fireworks AI"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:170
 msgid "Lambda Labs"
-msgstr ""
+msgstr "Lambda Labs"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:172
 msgid "New Attachment Types"
-msgstr ""
+msgstr "Neue Anhangstypen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:174
 msgid "Microsoft Word Document (docx)"
-msgstr ""
+msgstr "Microsoft Word-Dokument (docx)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:175
 msgid "Microsoft PowerPoint Document (pptx)"
-msgstr ""
+msgstr "Microsoft PowerPoint-Dokument (pptx)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:176
 msgid "Microsoft Excel Document (xlsx)"
-msgstr ""
+msgstr "Microsoft Excel-Dokument (xlsx)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:178
 msgid "New Tools"
-msgstr ""
+msgstr "Neue Werkzeuge"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:180 src/tool_manager.py:431
 msgid "Run Command (Testing)"
-msgstr ""
+msgstr "Befehl ausführen (Testing)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:181 src/tool_manager.py:348
 msgid "Online Search"
-msgstr ""
+msgstr "Online-Suche"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:182 src/tool_manager.py:306
 msgid "Extract Wikipedia Article"
-msgstr ""
+msgstr "Wikipedia-Artikel extrahieren"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:183 src/tool_manager.py:210
 msgid "Get Recipe by Name"
-msgstr ""
+msgstr "Rezept durch Namen finden"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:184 src/tool_manager.py:261
 msgid "Get Recipes by Category"
-msgstr ""
+msgstr "Rezept durch Kategorie finden"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:185 src/tool_manager.py:176
 msgid "Get Current Datetime"
-msgstr ""
+msgstr "Derzeitiges Datum samt Uhrzeit abrufen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:189
 msgid "Fixed welcome screen not showing sometimes when deleting a message"
 msgstr ""
+"Fehler behoben, durch den der Startbildschirm nach dem Löschen einer "
+"Nachricht manchmal nicht erschien"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:190
 msgid "Fixed bold text not rendering correctly in tables"
-msgstr ""
+msgstr "Fehlerhaftes Rendering von fettem Text in Tabellen behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:191
 msgid "Fixed sample prompt buttons overflowing on small screens"
-msgstr ""
+msgstr "Überlaufen von Beispielprompt-Buttons auf kleinen Bildschirmen behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:200
 msgid "Updated runtime to Gnome 48"
-msgstr ""
+msgstr "Laufzeit auf GNOME 48 aktualisiert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:201
 msgid "Added back 'category pills' to model manager"
-msgstr ""
+msgstr "Kategorie-Indikatoren zurück zum Modell-Manager gebracht"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:202
 msgid "Better appearance for model manager sidebar"
-msgstr ""
+msgstr "Besseres Erscheinungsbild der Seitenleiste im Modell-Manager"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:203
 #: data/com.jeffser.Alpaca.metainfo.xml.in:219
@@ -388,13 +394,15 @@ msgstr "Neue Modelle"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:207
 msgid "Fixed bad title generation with chain-of-thought models"
-msgstr ""
+msgstr "Schlechte Titelgenerierung von Chain-of-Thought-Modellen behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:208
 msgid ""
 "Hide page switcher in model manager if there's only one page (online "
 "instances)"
 msgstr ""
+"Seitenwechsler im Modell-Manager versteckt, wenn nur eine Seite vorhanden "
+"ist (Online-Instanzen)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:217
 msgid "Option to delete all chats"
@@ -2112,43 +2120,46 @@ msgstr "Dies ist die erste öffentliche Version von Alpaca"
 
 #: src/main.py:193
 msgid "Documentation"
-msgstr ""
+msgstr "Dokumentation"
 
 #: src/main.py:194
 msgid "Become a Sponsor"
-msgstr ""
+msgstr "Sponsor werden"
 
 #: src/main.py:195
 msgid "Discussions"
-msgstr ""
+msgstr "Diskussionen"
 
 #: src/window.py:203 src/window.py:233
 msgid "Speech Recognition Error"
-msgstr ""
+msgstr "Fehler bei der Spracherkennung"
 
 #: src/window.py:203
 msgid "An error occurred while pulling speech recognition model"
 msgstr ""
+"Ein Fehler ist beim Herunterladen des Spracherkennungsmodells aufgetreten"
 
 #: src/window.py:233
 msgid "An error occurred while using speech recognition"
-msgstr ""
+msgstr "Ein Fehler ist bei der Verwendung der Spracherkennung aufgetreten"
 
 #: src/window.py:254
 msgid "Download Speech Recognition Model"
-msgstr ""
+msgstr "Spracherkennungs-Modell herunterladen"
 
 #: src/window.py:255
 msgid "To use speech recognition you'll need to download a special model ({})"
 msgstr ""
+"Um die Spracherkennung zu nutzen, muss ein spezielles Modell heruntergeladen "
+"werden ({})"
 
 #: src/window.py:257
 msgid "Download Model"
-msgstr ""
+msgstr "Modell herunterladen"
 
 #: src/window.py:274
 msgid "Ollama Was Not Found"
-msgstr ""
+msgstr "Ollama wurde nicht gefunden"
 
 #: src/window.py:275
 msgid ""
@@ -2156,10 +2167,13 @@ msgid ""
 "your device, this is a simple process and should not take more than 5 "
 "minutes."
 msgstr ""
+"Um eine von Alpaca verwaltete, integrierte Ollama-Instanz zu nutzen, musst "
+"du Ollama auf deinem Gerät installiert haben. Das ist aber ganz einfach und "
+"sollte nicht länger als 5 Minuten dauern!"
 
 #: src/window.py:277
 msgid "Open Tutorial in Web Browser"
-msgstr ""
+msgstr "Anleitung im Browser öffnen"
 
 #: src/window.py:283 src/window.py:290 src/window.ui:472 src/window.ui:482
 #: src/window.ui:504
@@ -2172,15 +2186,15 @@ msgstr "Auswählen, welcher Typ von Instanz hinzugefügt werden soll"
 
 #: src/window.py:507
 msgid "No tools enabled."
-msgstr ""
+msgstr "Keine Werkzeuge aktiviert"
 
 #: src/window.py:507
 msgid "Open Tool Manager"
-msgstr ""
+msgstr "Werkzeug-Manager öffnen"
 
 #: src/window.py:510
 msgid "'{}' does not support tools."
-msgstr ""
+msgstr "'{}' unterstützt leider keine Werkzeuge."
 
 #: src/window.py:510
 msgid "Open Model Manager"
@@ -3592,7 +3606,7 @@ msgstr ""
 
 #: src/available_models_descriptions.py:157
 msgid "The current, most capable model that runs on a single GPU."
-msgstr ""
+msgstr "Das neue, leistungsstärkste Modell, das auf einer einzigen GPU läuft."
 
 #: src/available_models_descriptions.py:158
 msgid ""
@@ -3637,6 +3651,8 @@ msgid ""
 "111 billion parameter model optimized for demanding enterprises that require "
 "fast, secure, and high-quality AI"
 msgstr ""
+"111-Milliaren-Parameter-Modell optimiert für aufwändige Unternehmen, die "
+"schnelle, sichere und hochqualitative KI benötigen."
 
 #: src/available_models_descriptions.py:163
 msgid ""
@@ -3644,6 +3660,9 @@ msgid ""
 "including math and coding benchmarks, ranging from 2.4B to 32B parameters "
 "developed and released by LG AI Research."
 msgstr ""
+"EXAONE Deep zeigt überlegene Fähigkeiten in verschiedensten Denkaufgaben, "
+"darunter Mathematik- und Coding-Benchmarks, mit Größen von 2.4 bis 32 "
+"Milliaren Parametern - entwickelt und herausgegeben von LG AI Research."
 
 #: src/available_models_descriptions.py:164
 msgid ""
@@ -3651,6 +3670,10 @@ msgid ""
 "art vision understanding and enhances long context capabilities up to 128k "
 "tokens without compromising text performance."
 msgstr ""
+"Auf Mistral Small 3 aufbauend fügt Mistral Small 3.1 (2503) modernstes, "
+"visuelles Verstehen und Fähigkeiten, mit längerem Kontext von bis zu 128.000 "
+"Tokens umzugehen, ohne Kompromisse bei der Text-Leistungsfähigkeit "
+"einzugehen, hinzu."
 
 #: src/available_models_descriptions.py:165
 msgid ""
@@ -3658,22 +3681,31 @@ msgid ""
 "outperform the best available open models of the same size, including "
 "counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."
 msgstr ""
+"Cogito v1 Preview ist eine Familie an hybriden Reasoning-Modellen von Deep "
+"Cogito, die die besten verfügbaren, offenen Modelle derselben Größe "
+"übertreffen - dazu gehören Gegenstücke von Llama, Deepseek und Qwen über die "
+"Standard-Benchmarks hinweg."
 
 #: src/available_models_descriptions.py:166
 msgid ""
 "DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
 "1.5B version also available."
 msgstr ""
+"DeepCoder ist ein vollständig quelloffenes 14B-Coder-Modell auf dem Level "
+"von o3-mini - eine 1.5B-Version ist ebenfalls erhältlich."
 
 #: src/available_models_descriptions.py:167
 msgid ""
 "Qwen3 is the latest generation of large language models in Qwen series, "
 "offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
 msgstr ""
+"Qwen 3 ist die neueste Generation an großen Sprachmodellen der Qwen-Serie, "
+"welche mit einer umfassenden Sammlung an Dense- und Mixture-of-Experts-"
+"Modellen kommt."
 
 #: src/available_models_descriptions.py:168
 msgid "Meta's latest collection of multimodal models."
-msgstr ""
+msgstr "Meta's neueste Sammlung an multimodalen Modellen."
 
 #: src/available_models_descriptions.py:169
 msgid ""
@@ -3681,18 +3713,25 @@ msgid ""
 "have been fine-tuned for improved reasoning and instruction-following "
 "capabilities."
 msgstr ""
+"IBM Granite 2B und 8B sind Modelle mit 128K-Kontext-Länge, die auf das "
+"Nachdenken und Befolgen von Anweisungen feinabgestimmt wurden."
 
 #: src/available_models_descriptions.py:170
 msgid ""
 "Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
 "reasoning models that rival much larger models on complex reasoning tasks."
 msgstr ""
+"Phi 4 Reasoning und Reasoning Plus sind 14B-Parameter-Reasoning-Modelle mit "
+"offenen Gewichten, die deutlich größeren Modelle bei komplexen Denkaufgaben "
+"konkurrieren."
 
 #: src/available_models_descriptions.py:171
 msgid ""
 "Phi 4 mini reasoning is a lightweight open model that balances efficiency "
 "with advanced reasoning ability."
 msgstr ""
+"Phi 4 Mini Reasoning ist ein leichtgewichtiges Modell, das Effizienz mit "
+"fortschrittlicher Denkfähigkeit balanciert."
 
 #: src/instance_manager.py:30 src/instance_manager.py:366
 msgid "Instance"
@@ -3705,23 +3744,23 @@ msgstr "Neuer Chat"
 
 #: src/instance_manager.py:76
 msgid "Selecting tool to use..."
-msgstr ""
+msgstr "Wählt passendes Werkzeug aus..."
 
 #: src/instance_manager.py:85
 msgid "Using {}"
-msgstr ""
+msgstr "Benutzt {}"
 
 #: src/instance_manager.py:111
 msgid "Tool Error"
-msgstr ""
+msgstr "Werkzeug-Fehler"
 
 #: src/instance_manager.py:111
 msgid "An error occurred while running tool"
-msgstr ""
+msgstr "Ein Fehler ist beim Ausführen des Werkzeugs aufgetreten"
 
 #: src/instance_manager.py:114
 msgid "Generating message..."
-msgstr ""
+msgstr "Nachricht wird generiert..."
 
 #: src/instance_manager.py:162 src/instance_manager.py:462
 #: src/instance_manager.py:472 src/instance_manager.py:618
@@ -3745,7 +3784,7 @@ msgstr "Port"
 
 #: src/instance_manager.py:227
 msgid "Which network port will '{}' use"
-msgstr ""
+msgstr "Welchen Netzwerk-Port {} nutzen wird"
 
 #: src/instance_manager.py:241
 msgid "Instance URL"
@@ -3901,23 +3940,23 @@ msgstr "Lokale- oder Remoteinstanz, die nicht durch Alpaca verwaltet wird"
 #: src/instance_manager.py:803 src/instance_manager.py:823
 #: src/instance_manager.py:844
 msgid "Could not retrieve models"
-msgstr ""
+msgstr "Konnte Modelle nicht abrufen"
 
 #: src/instance_manager.py:812
 msgid "Fireworks AI inference platform"
-msgstr ""
+msgstr "Fireworks AI-Inferenzplattform"
 
 #: src/instance_manager.py:832
 msgid "Lambda Labs cloud inference API"
-msgstr ""
+msgstr "Lambda Labs-Cloud-Inferenz-API"
 
 #: src/instance_manager.py:853
 msgid "Cerebras AI cloud inference API"
-msgstr ""
+msgstr "Cerebras AI-Cloud-Inferenz-API"
 
 #: src/instance_manager.py:859
 msgid "Kluster AI cloud inference API"
-msgstr ""
+msgstr "Kluster AI-Cloud-Inferenz-API"
 
 #: src/instance_manager.py:863
 msgid "OpenAI Compatible Instance"
@@ -3925,7 +3964,7 @@ msgstr "OpenAI-kompatible Instanz"
 
 #: src/instance_manager.py:864
 msgid "AI instance compatible with OpenAI library"
-msgstr ""
+msgstr "KI-Instanz, die mit der OpenAI-Bibliothek kompatibel ist"
 
 #: src/instance_manager.py:886
 msgid "Remove Instance?"
@@ -3941,29 +3980,33 @@ msgstr "Instanz bearbeiten"
 
 #: src/tool_manager.py:71
 msgid "AI Description"
-msgstr ""
+msgstr "KI-Beschreibung"
 
 #: src/tool_manager.py:72
 msgid "The description the AI model will use to understand what the tool does."
 msgstr ""
+"Die Beschreibung, die das KI-Modell nutzen wird, um zu verstehen, was das "
+"Werkzeug tut."
 
 #: src/tool_manager.py:83
 msgid "Arguments"
-msgstr ""
+msgstr "Argumente"
 
 #: src/tool_manager.py:84
 msgid "Variables that are filled by the AI."
-msgstr ""
+msgstr "Variablen, die von dem Sprachmodell ausgefüllt werden."
 
 #: src/tool_manager.py:97
 msgid "Variables"
-msgstr ""
+msgstr "Variablen"
 
 #: src/tool_manager.py:98
 msgid ""
 "User filled values that the tool uses to work, the AI does not have access "
 "to these variables at all."
 msgstr ""
+"Nutzer-spezifizierte Werte, die das Tool zum Arbeiten nutzen wird - das "
+"Sprachmodell und dessen Anbieter hat auf diese keinen Zugriff."
 
 #: src/tool_manager.py:140 src/custom_widgets/dialog_widget.py:146
 #: src/custom_widgets/dialog_widget.py:158
@@ -3973,75 +4016,78 @@ msgstr "Akzeptieren"
 
 #: src/tool_manager.py:177
 msgid "Gets the current date and/or time."
-msgstr ""
+msgstr "Ruft das derzeitige Datum und die Zeit ab."
 
 #: src/tool_manager.py:211
 msgid "Gets a recipe by the meal's name"
-msgstr ""
+msgstr "Ruft ein Rezept, basierend auf dem Namen des Gerichts, ab"
 
 #: src/tool_manager.py:224 src/tool_manager.py:281
 msgid "YouTube Video"
-msgstr ""
+msgstr "YouTube-Video"
 
 #: src/tool_manager.py:227 src/tool_manager.py:284
 msgid "Source"
-msgstr ""
+msgstr "Quelle"
 
 #: src/tool_manager.py:262
 msgid "Gets a list of food recipes by a specified category"
-msgstr ""
+msgstr "Ruft eine Liste an Rezepten für eine spezifizierte Kategorie ab"
 
 #: src/tool_manager.py:307
 msgid "Extracts an article from Wikipedia by it's title"
-msgstr ""
+msgstr "Extrahiert einen Artikel von Wikipedia mithilfe des Titels"
 
 #: src/tool_manager.py:349
 msgid "Search for a term online using DuckDuckGo"
-msgstr ""
+msgstr "Sucht bei DuckDuckGo online nach einem Begriff"
 
 #: src/tool_manager.py:365
 msgid "Abstract Source"
-msgstr ""
+msgstr "Quelle der Zusammenfassung"
 
 #: src/tool_manager.py:384
 msgid "Official Website"
-msgstr ""
+msgstr "Offizielle Website"
 
 #: src/tool_manager.py:432
 msgid "Request to run a command using SSH to connect to the device"
 msgstr ""
+"Fragt an, einen Befehl mittels SSH auf einem verbundenen Gerät auszuführen"
 
 #: src/tool_manager.py:435
 msgid "IP Address"
-msgstr ""
+msgstr "IP-Adresse"
 
 #: src/tool_manager.py:440
 msgid "Username"
-msgstr ""
+msgstr "Nutzername"
 
 #: src/tool_manager.py:445
 msgid "Network Port"
-msgstr ""
+msgstr "Netzwerk-Port"
 
 #: src/tool_manager.py:462
 msgid "Model Requested to Run Command"
-msgstr ""
+msgstr "Modell hat angefragt, einen Befehl auszuführen"
 
 #: src/tool_manager.py:463
 msgid "Command"
-msgstr ""
+msgstr "Befehl"
 
 #: src/tool_manager.py:465
 msgid "Explanation"
-msgstr ""
+msgstr "Erklärung"
 
 #: src/tool_manager.py:466
 msgid "No explanation was provided"
-msgstr ""
+msgstr "Eine Erklärung wurde angegeben"
 
 #: src/tool_manager.py:467
 msgid "Make sure you understand what the command does before running it."
 msgstr ""
+"Bitte stellen Sie sicher, dass sie voll und ganz verstehen, was der Befehl "
+"tut, bevor Sie ihn ausführen."
 
 #: src/window.ui:34
 msgid "Welcome"
@@ -4136,7 +4182,7 @@ msgstr "Modelle verwalten"
 
 #: src/window.ui:232
 msgid "Add Models"
-msgstr ""
+msgstr "Modelle hinzufügen"
 
 #: src/window.ui:249
 msgid "Chat Menu"
@@ -4163,7 +4209,7 @@ msgstr "Datei anhängen"
 
 #: src/window.ui:369 src/window.ui:1252
 msgid "Use Speech Recognition"
-msgstr ""
+msgstr "Spracheingabe nutzen"
 
 #: src/window.ui:404
 msgid "Send Message"
@@ -4201,17 +4247,20 @@ msgstr ""
 
 #: src/window.ui:535
 msgid "Tool Manager"
-msgstr ""
+msgstr "Werkzeug-Manager"
 
 #: src/window.ui:546
 msgid "Available Tools"
-msgstr ""
+msgstr "Verfügbare Werkzeuge"
 
 #: src/window.ui:547
 msgid ""
 "Functions that AI models might use when sending a message by selecting \"Use "
 "Tools\" in the send button context menu."
 msgstr ""
+"Funktionen, die Sprachmodelle nutzen können, wenn eine Nachricht durch die "
+"\"Werkzeuge nutzen\"-Option im Kontextmenü des Senden-Buttons verschickt "
+"wird."
 
 #: src/window.ui:566
 msgid "Model Manager"
@@ -4235,7 +4284,7 @@ msgstr "Modelle suchen"
 
 #: src/window.ui:652
 msgid "Filter Models"
-msgstr ""
+msgstr "Nach Modellen filtern"
 
 #: src/window.ui:668
 msgid "Added"
@@ -4359,7 +4408,7 @@ msgstr "Zeige Energiesparmodus-Warnung"
 
 #: src/window.ui:1036
 msgid "When running a managed Ollama instance"
-msgstr ""
+msgstr "Beim Ausführen einer integrierten Ollama-Instanz"
 
 #: src/window.ui:1043
 msgid "Zoom"
@@ -4367,31 +4416,35 @@ msgstr "Vergrößerung"
 
 #: src/window.ui:1060
 msgid "Speech Recognition Model"
-msgstr ""
+msgstr "Spracherkennungsmodell"
 
 #: src/window.ui:1061
 msgid ""
 "Models are downloaded upon first use, you can delete them from the model "
 "manager"
 msgstr ""
+"Modelle werden bei der erstmaligen Nutzung heruntergeladen - sie können vom "
+"Modell-Manager aus gelöscht werden"
 
 #: src/window.ui:1068
 msgid "Speech Recognition Language"
-msgstr ""
+msgstr "Sprache für die Spracherkennung"
 
 #: src/window.ui:1075
 msgid "Auto Send Message After Talking"
-msgstr ""
+msgstr "Automatisch Nachricht nach dem Sprechen absenden"
 
 #: src/window.ui:1086
 msgid "Text to Speech Voice"
-msgstr ""
+msgstr "Stimme für Text-zu-Sprache"
 
 #: src/window.ui:1087
 msgid ""
 "Voices are downloaded upon first use, each weighing around 1 MB, and you can "
 "delete them from the model manager"
 msgstr ""
+"Sprachen werden bei der erstmaligen Nutzung heruntergeladen - jede benötigt "
+"ca. 1 MB - und sie können vom Modell-Manager aus gelöscht werden"
 
 #: src/window.ui:1100
 msgid "Delete All Chats"
@@ -4407,20 +4460,26 @@ msgid ""
 "awesome new features to explore! Get ready to experience Alpaca in a whole "
 "new way!"
 msgstr ""
+"Hey, Alpaca-Nutzer:innen! Wir freuen uns sehr, euch ein frisches Update - "
+"vollgestopft mit großartigen neuen Funktionen - zu bringen! Macht euch "
+"bereit, Alpaca in einem komplett neuen Weg zu erleben!"
 
 #: src/window.ui:1139
 msgid "Smart Tools"
-msgstr ""
+msgstr "Intelligente Werkzeuge"
 
 #: src/window.ui:1140
 msgid ""
 "Supported AI models can use handy tools to grab information both locally and "
 "online. Head over to the brand new \"Tool Manager\" to toggle them on or off."
 msgstr ""
+"Unterstützte Sprachmodelle können hilfreiche Werkzeuge nutzen, um "
+"Informationen von lokalen Quellen und aus dem Internet abzurufen! Wechseln "
+"Sie zum brandneuen \"Werkzeug-Manager\", um diese ein- oder auszuschalten."
 
 #: src/window.ui:1147
 msgid "Talk to Models"
-msgstr ""
+msgstr "Mit Modellen sprechen"
 
 #: src/window.ui:1148
 msgid ""
@@ -4428,10 +4487,13 @@ msgid ""
 "convenient! You can even customize your language and other settings in the "
 "Preferences dialog."
 msgstr ""
+"Ab jetzt können Nachrichten mittels lokal laufender Spracherkennung diktiert "
+"werden. Das ist sehr praktisch! Sogar Sprache und andere Einstellungen "
+"können angepasst werden."
 
 #: src/window.ui:1155
 msgid "Find Models Faster"
-msgstr ""
+msgstr "Modelle schneller finden"
 
 #: src/window.ui:1156
 msgid ""
@@ -4439,10 +4501,14 @@ msgid ""
 "to filter models by their categories in the Model Manager. Now you can "
 "quickly find exactly the model you're looking for."
 msgstr ""
+"Durch Ollama-Modelle zu stöbern, ist jetzt noch einfacher! Wir haben die "
+"Möglichkeit, nach Modellen anhand von Kategorien zu filtern, im Modell-"
+"Manager hinzugefügt. Jetzt findet man das Modell, nach dem man sucht, noch "
+"schneller."
 
 #: src/window.ui:1163
 msgid "Math Rendering"
-msgstr ""
+msgstr "Mathematik-Rendering"
 
 #: src/window.ui:1164
 msgid ""
@@ -4450,10 +4516,13 @@ msgid ""
 "look cleaner and more consistent. Your mathematical discussions will be "
 "clearer than ever!"
 msgstr ""
+"Wir haben verbessert, wie LaTeX-Gleichungen in Nachrichten gerendert werden, "
+"wodurch diese nun noch besser und konsistenter aussehen. Mathematische "
+"Diskussionen werden nun klarer denn je ablaufen können!"
 
 #: src/window.ui:1171
 msgid "More Instances"
-msgstr ""
+msgstr "Noch mehr Instanzen"
 
 #: src/window.ui:1172
 msgid ""
@@ -4461,18 +4530,25 @@ msgid ""
 "support for over 5 new AI instance providers, including Anthropic, "
 "OpenRouter, and Fireworks. The possibilities are endless!"
 msgstr ""
+"Machen Sie sich bereit, Alpaca mit einem Universum an KI-Providern zu "
+"verbinden. Wir haben über 5 neue KI-Instanz-Provider hinzugefügt, darunter "
+"Anthropic, OpenRouter und Fireworks. Die Möglichkeiten sind schier endlos!"
 
 #: src/window.ui:1179
 msgid "Attachment Enhancement"
-msgstr ""
+msgstr "Verbesserung der Anhänge"
 
 #: src/window.ui:1180
 msgid ""
-"You can now attach and ask questions about even more file types, "
-"including .docx, .pptx, and .xlsx! Plus, when you preview an attachment, "
-"you'll see it with rich text styling, making it easier to understand the "
-"content before you send it."
+"You can now attach and ask questions about even more file types, including ."
+"docx, .pptx, and .xlsx! Plus, when you preview an attachment, you'll see it "
+"with rich text styling, making it easier to understand the content before "
+"you send it."
 msgstr ""
+"Nun können Fragen zu noch mehr Dateitypen gestellt werden, darunter .docx, ."
+"pptx und .xlsx! Dazu kommt ein verbessertes Rendering von Rich Text in der "
+"Vorschau dieser Dateien - sodass es noch einfacher wird, den Inhalt vor dem "
+"Versenden zu verstehen."
 
 #: src/window.ui:1201
 msgid "Quick ask dialog"
@@ -4508,7 +4584,7 @@ msgstr "Anhang entfernen"
 
 #: src/window.ui:1373
 msgid "Start Quick Ask"
-msgstr ""
+msgstr "\"Flinke Frage\" starten"
 
 #: src/window.ui:1377
 msgid "Import Chat"
@@ -4516,7 +4592,7 @@ msgstr "Chat importieren"
 
 #: src/window.ui:1389
 msgid "Manage Tools"
-msgstr ""
+msgstr "Werkzeuge verwalten"
 
 #: src/window.ui:1399
 msgid "Keyboard Shortcuts"
@@ -4556,7 +4632,7 @@ msgstr "Als System senden"
 
 #: src/window.ui:1475 src/gtk/help-overlay.ui:133
 msgid "Use Tools"
-msgstr ""
+msgstr "Werkzeuge verwenden"
 
 #: src/window.ui:1487
 msgid "Attach Website"
@@ -4596,7 +4672,7 @@ msgstr "Einstellungen"
 #: src/gtk/help-overlay.ui:26
 msgctxt "shortcut window"
 msgid "Quick Ask"
-msgstr ""
+msgstr "Flinke Frage"
 
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
@@ -4611,7 +4687,7 @@ msgstr "Instanz-Manager"
 #: src/gtk/help-overlay.ui:44
 msgctxt "shortcut window"
 msgid "Action Manager"
-msgstr ""
+msgstr "Werkzeug-Manager"
 
 #: src/gtk/help-overlay.ui:50
 msgctxt "shortcut window"
@@ -4685,7 +4761,7 @@ msgstr ""
 
 #: src/gtk/help-overlay.ui:134
 msgid "Ask model to use tools to generate a message"
-msgstr ""
+msgstr "Modell anweisen, Werkzeuge zur Generierung einer Nachricht zu nutzen"
 
 #: src/gtk/help-overlay.ui:140
 msgid "Send Message as User"
@@ -4824,7 +4900,7 @@ msgstr "Nachricht regenerieren"
 
 #: src/custom_widgets/message_widget.py:564
 msgid "Dictate Message"
-msgstr ""
+msgstr "Nachricht diktieren"
 
 #: src/custom_widgets/message_widget.py:584
 msgid "Message copied to the clipboard"
@@ -4859,20 +4935,20 @@ msgstr "Sind Sie sich sicher, dass Sie '{}' entfernen möchten?"
 
 #: src/custom_widgets/model_manager_widget.py:123
 msgid "Local text to speech model provided by Kokoro."
-msgstr ""
+msgstr "Lokales Text-zu-Sprache-Modell wird von Kokoro bereitgestellt."
 
 #: src/custom_widgets/model_manager_widget.py:160
 #: src/custom_widgets/model_manager_widget.py:293
 msgid "Speech to Text"
-msgstr ""
+msgstr "Spracherkennung"
 
 #: src/custom_widgets/model_manager_widget.py:209
 msgid "Local speech to text model provided by OpenAI Whisper."
-msgstr ""
+msgstr "Lokales Spracherkennungsmodell wird von OpenAI Whisper bereitgestellt."
 
 #: src/custom_widgets/model_manager_widget.py:239
 msgid "Downloading…"
-msgstr ""
+msgstr "Lädt herunter..."
 
 #: src/custom_widgets/model_manager_widget.py:249
 #: src/custom_widgets/model_manager_widget.py:251
@@ -4934,15 +5010,15 @@ msgstr "Geändert am"
 
 #: src/custom_widgets/model_manager_widget.py:468
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: src/custom_widgets/model_manager_widget.py:491
 msgid "Voice"
-msgstr ""
+msgstr "Stimme"
 
 #: src/custom_widgets/model_manager_widget.py:496
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: src/custom_widgets/model_manager_widget.py:638
 msgid "Change"
@@ -4982,11 +5058,11 @@ msgstr "Eingebettet"
 
 #: src/custom_widgets/model_manager_widget.py:694
 msgid "Tools"
-msgstr ""
+msgstr "Werkzeuge"
 
 #: src/custom_widgets/model_manager_widget.py:695
 msgid "Reasoning"
-msgstr ""
+msgstr "Denken"
 
 #: src/custom_widgets/model_manager_widget.py:696
 msgid "Small"
@@ -5030,7 +5106,7 @@ msgstr "Nutzt Flatpak-beinhaltete Shell"
 
 #: src/custom_widgets/terminal_widget.py:136
 msgid "Using SSH to run command"
-msgstr ""
+msgstr "Nutzt SSH, um einen Befehl auszuführen"
 
 #: src/custom_widgets/terminal_widget.py:142
 msgid "Script Exited"
