@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 6.0.0\n"
+"Project-Id-Version: 6.0.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-02 19:38-0600\n"
 "PO-Revision-Date: 2025-04-12 HO:MI+ZONE\n"
@@ -162,7 +162,7 @@ msgstr "सुधार"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Fixed whisper directory not existing causing error"
-msgstr ""
+msgstr "विस्पर डायरेक्टरी के मौजूद न होने से होने वाली त्रुटि को ठीक किया गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 #: data/com.jeffser.Alpaca.metainfo.xml.in:151
@@ -203,27 +203,27 @@ msgstr "मॉडल सूची को अद्यतन किया गय�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
 msgid "Alpaca now remembers it's size"
-msgstr ""
+msgstr "अल्पाका अब अपना आकार याद रखता है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Added reasoning category for Ollama models"
-msgstr ""
+msgstr "ओलामा मॉडल के लिए तर्क श्रेणी जोड़ी गई"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "Improvements in sample prompts"
-msgstr ""
+msgstr "नमूना प्रॉम्प्ट्स में सुधार"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:121
 msgid "Fixed auto creation of Ollama (Managed) instance"
-msgstr ""
+msgstr "ओलामा (प्रबंधित) इंस्टेंस के ऑटो निर्माण को ठीक किया गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
 msgid "Removed legacy JSON to SQLite3 migration code"
-msgstr ""
+msgstr "लेगेसी JSON से SQLite3 माइग्रेशन कोड हटाया गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Fixed power saving mode appearing whilst using online instances"
-msgstr ""
+msgstr "ऑनलाइन इंस्टेंस का उपयोग करते समय पावर सेविंग मोड के दिखने को ठीक किया गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:132
 msgid "Fixed Ollama (Manged) instance not being able to be created"
@@ -392,7 +392,8 @@ msgstr "चेन-ऑफ-थॉट मॉडल्स के साथ खरा
 msgid ""
 "Hide page switcher in model manager if there's only one page (online "
 "instances)"
-msgstr "मॉडल मैनेजर में पेज स्विचर को छुपाएं यदि केवल एक पेज है (ऑनलाइन इंस्टेंस)"
+msgstr ""
+"मॉडल मैनेजर में पेज स्विचर को छुपाएं यदि केवल एक पेज है (ऑनलाइन इंस्टेंस)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:217
 msgid "Option to delete all chats"
@@ -1552,8 +1553,7 @@ msgstr "मॉडल्स के अनुकूलन और निर्म�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:858
 msgid "Fixed: Icons don't appear on non Gnome systems"
-msgstr ""
-"ग्नोम सिस्टम के अलावा अन्य सिस्टम पर आइकॉन नहीं दिखाई देते थे, यह समस्या अब ठीक हो गई है"
+msgstr "ग्नोम सिस्टम के अलावा अन्य सिस्टम पर आइकॉन नहीं दिखाई देते थे, यह समस्या अब ठीक हो गई है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:859
 msgid "Update Ollama to v0.1.39"
@@ -2066,15 +2066,15 @@ msgstr "वाक् पहचान का उपयोग करते सम�
 
 #: src/window.py:254
 msgid "Download Speech Recognition Model"
-msgstr ""
+msgstr "स्पीच रिकग्निशन मॉडल डाउनलोड करें"
 
 #: src/window.py:255
 msgid "To use speech recognition you'll need to download a special model ({})"
-msgstr ""
+msgstr "स्पीच रिकग्निशन का उपयोग करने के लिए आपको एक विशेष मॉडल ({}) डाउनलोड करना होगा"
 
 #: src/window.py:257
 msgid "Download Model"
-msgstr ""
+msgstr "मॉडल डाउनलोड करें"
 
 #: src/window.py:274
 msgid "Ollama Was Not Found"
@@ -2151,8 +2151,7 @@ msgstr "Alpaca बंद करें?"
 
 #: src/window.py:654
 msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
-msgstr ""
-"एक कार्य वर्तमान में प्रगति पर है। क्या आप सुनिश्चित हैं कि आप Alpaca बंद करना चाहते हैं?"
+msgstr "एक कार्य वर्तमान में प्रगति पर है। क्या आप सुनिश्चित हैं कि आप Alpaca बंद करना चाहते हैं?"
 
 #: src/window.py:898
 msgid "Cannot open image"
@@ -2558,8 +2557,7 @@ msgid ""
 "Command R is a Large Language Model optimized for conversational interaction "
 "and long context tasks."
 msgstr ""
-"कमांड आर एक बड़ा भाषा मॉडल है जो संवादात्मक इंटरैक्शन और लंबे कंटेक्स्ट कार्यों के लिए अनुकूलित "
-"है"
+"कमांड आर एक बड़ा भाषा मॉडल है जो संवादात्मक इंटरैक्शन और लंबे कंटेक्स्ट कार्यों के लिए अनुकूलित है"
 
 #: src/available_models_descriptions.py:37
 msgid ""
@@ -2574,8 +2572,7 @@ msgid ""
 "A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
 "benchmarks."
 msgstr ""
-"ल्लामा 3 इंस्ट्रक्ट से फाइन-ट्यून किया गया एलएलएवीए मॉडल जिसमें कई बेंचमार्क्स में बेहतर स्कोर "
-"हैं"
+"ल्लामा 3 इंस्ट्रक्ट से फाइन-ट्यून किया गया एलएलएवीए मॉडल जिसमें कई बेंचमार्क्स में बेहतर स्कोर हैं"
 
 #: src/available_models_descriptions.py:39
 msgid ""
@@ -2664,8 +2661,7 @@ msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
 msgstr ""
-"एक बहुमुखी मॉडल जो एआई सॉफ्टवेयर डेवलपमेंट सीनेरियो के लिए है, जिसमें कोड पूर्णता भी शामिल "
-"है।"
+"एक बहुमुखी मॉडल जो एआई सॉफ्टवेयर डेवलपमेंट सीनेरियो के लिए है, जिसमें कोड पूर्णता भी शामिल है।"
 
 #: src/available_models_descriptions.py:52
 msgid ""
@@ -2758,8 +2754,7 @@ msgid ""
 "A strong multi-lingual general language model with competitive performance "
 "to Llama 3."
 msgstr ""
-"एक मजबूत बहु-भाषाई सामान्य भाषा मॉडल जो एलएलएएमए 3 के साथ प्रत��स्पर्धी प्रदर्शन करता "
-"है।"
+"एक मजबूत बहु-भाषाई सामान्य भाषा मॉडल जो एलएलएएमए 3 के साथ प्रत��स्पर्धी प्रदर्शन करता है।"
 
 #: src/available_models_descriptions.py:64
 msgid ""
@@ -3527,10 +3522,12 @@ msgid ""
 "Qwen3 is the latest generation of large language models in Qwen series, "
 "offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
 msgstr ""
+"क्यूवेन3 क्यूवेन श्रृंखला में बड़े भाषा मॉडल की नवीनतम पीढ़ी है, "
+"जो डेंस और मिक्सचर-ऑफ-एक्सपर्ट्स (MoE) मॉडल का एक व्यापक सूट प्रदान करता है।"
 
 #: src/available_models_descriptions.py:168
 msgid "Meta's latest collection of multimodal models."
-msgstr ""
+msgstr "मेटा का मल्टीमॉडल मॉडल का नवीनतम संग्रह।"
 
 #: src/available_models_descriptions.py:169
 msgid ""
@@ -3538,18 +3535,24 @@ msgid ""
 "have been fine-tuned for improved reasoning and instruction-following "
 "capabilities."
 msgstr ""
+"आईबीएम ग्रैनाइट 2बी और 8बी मॉडल 128K संदर्भ लंबाई के भाषा मॉडल हैं जिन्हें "
+"बेहतर तर्क और निर्देश-पालन क्षमताओं के लिए फाइन-ट्यून किया गया है।"
 
 #: src/available_models_descriptions.py:170
 msgid ""
 "Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
 "reasoning models that rival much larger models on complex reasoning tasks."
 msgstr ""
+"फाई 4 रीज़निंग और रीज़निंग प्लस 14 अरब पैरामीटर ओपन-वेट "
+"रीज़निंग मॉडल हैं जो जटिल रीज़निंग कार्यों पर बड़े मॉडल को टक्कर देते हैं।"
 
 #: src/available_models_descriptions.py:171
 msgid ""
 "Phi 4 mini reasoning is a lightweight open model that balances efficiency "
 "with advanced reasoning ability."
 msgstr ""
+"फाई 4 मिनी रीज़निंग एक हल्का ओपन मॉडल है जो दक्षता के साथ"
+"उन्नत रीज़निंग क्षमता को संतुलित करता है।"
 
 #: src/instance_manager.py:30 src/instance_manager.py:366
 msgid "Instance"
@@ -4016,7 +4019,7 @@ msgstr "फ़ाइल संलग्न करें"
 
 #: src/window.ui:369 src/window.ui:1252
 msgid "Use Speech Recognition"
-msgstr ""
+msgstr "स्पीच रिकग्निशन का उपयोग करें"
 
 #: src/window.ui:404
 msgid "Send Message"
@@ -4209,7 +4212,7 @@ msgstr "पॉवर सेवर वार्निंग दिखाएं"
 
 #: src/window.ui:1036
 msgid "When running a managed Ollama instance"
-msgstr ""
+msgstr "एक प्रबंधित ओलामा इंस्टेंस चलाते समय"
 
 #: src/window.ui:1043
 msgid "Zoom"
@@ -4217,13 +4220,15 @@ msgstr "ज़ूम"
 
 #: src/window.ui:1060
 msgid "Speech Recognition Model"
-msgstr ""
+msgstr "वाक् पहचान मॉडल"
 
 #: src/window.ui:1061
 msgid ""
 "Models are downloaded upon first use, you can delete them from the model "
 "manager"
 msgstr ""
+"मॉडल पहली बार उपयोग करने पर डाउनलोड हो जाते हैं, आप उन्हें मॉडल "
+"प्रबंधक से हटा सकते हैं"
 
 #: src/window.ui:1068
 msgid "Speech Recognition Language"
@@ -4235,13 +4240,15 @@ msgstr "बात करने के बाद स्वतः संदेश 
 
 #: src/window.ui:1086
 msgid "Text to Speech Voice"
-msgstr ""
+msgstr "टेक्स्ट टू स्पीच वॉयस"
 
 #: src/window.ui:1087
 msgid ""
 "Voices are downloaded upon first use, each weighing around 1 MB, and you can "
 "delete them from the model manager"
 msgstr ""
+"आवाज़ पहली बार उपयोग करने पर डाउनलोड हो जाती है, प्रत्येक का वज़न लगभग 1 एमबी होता है, और आप "
+"उन्हें मॉडल प्रबंधक से हटा सकते हैं।"
 
 #: src/window.ui:1100
 msgid "Delete All Chats"
@@ -4377,7 +4384,7 @@ msgstr "अटैचमेंट हटाएं"
 
 #: src/window.ui:1373
 msgid "Start Quick Ask"
-msgstr ""
+msgstr "त्वरित पूछें शुरू करें"
 
 #: src/window.ui:1377
 msgid "Import Chat"
@@ -4465,7 +4472,7 @@ msgstr "प्राथमिकताएँ"
 #: src/gtk/help-overlay.ui:26
 msgctxt "shortcut window"
 msgid "Quick Ask"
-msgstr ""
+msgstr "त्वरित पूछें"
 
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
@@ -4691,7 +4698,7 @@ msgstr "संदेश पुनः उत्पन्न करें"
 
 #: src/custom_widgets/message_widget.py:564
 msgid "Dictate Message"
-msgstr ""
+msgstr "संदेश डिक्टेट करें"
 
 #: src/custom_widgets/message_widget.py:584
 msgid "Message copied to the clipboard"
@@ -4725,20 +4732,20 @@ msgstr "क्या आप सुनिश्चित हैं कि आप 
 
 #: src/custom_widgets/model_manager_widget.py:123
 msgid "Local text to speech model provided by Kokoro."
-msgstr ""
+msgstr "कोकोरो द्वारा प्रदान किया गया स्थानीय टेक्स्ट टू स्पीच मॉडल।"
 
 #: src/custom_widgets/model_manager_widget.py:160
 #: src/custom_widgets/model_manager_widget.py:293
 msgid "Speech to Text"
-msgstr ""
+msgstr "स्पीच टू टेक्स्ट"
 
 #: src/custom_widgets/model_manager_widget.py:209
 msgid "Local speech to text model provided by OpenAI Whisper."
-msgstr ""
+msgstr "ओपनएआई विस्पर द्वारा प्रदान किया गया स्थानीय स्पीच टू टेक्स्ट मॉडल।"
 
 #: src/custom_widgets/model_manager_widget.py:239
 msgid "Downloading…"
-msgstr ""
+msgstr "डाउनलोड हो रहा है…"
 
 #: src/custom_widgets/model_manager_widget.py:249
 #: src/custom_widgets/model_manager_widget.py:251
@@ -4804,11 +4811,11 @@ msgstr "विवरण"
 
 #: src/custom_widgets/model_manager_widget.py:491
 msgid "Voice"
-msgstr ""
+msgstr "आवाज़"
 
 #: src/custom_widgets/model_manager_widget.py:496
 msgid "Default"
-msgstr ""
+msgstr "डिफ़ॉल्ट"
 
 #: src/custom_widgets/model_manager_widget.py:638
 msgid "Change"
@@ -4852,7 +4859,7 @@ msgstr "उपकरण"
 
 #: src/custom_widgets/model_manager_widget.py:695
 msgid "Reasoning"
-msgstr ""
+msgstr "तर्क"
 
 #: src/custom_widgets/model_manager_widget.py:696
 msgid "Small"
