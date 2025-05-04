@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 6.0.0\n"
+"Project-Id-Version: 6.0.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-02 19:38-0600\n"
 "PO-Revision-Date: 2025-04-12 15:12-0600\n"
@@ -162,7 +162,7 @@ msgstr "সংশোধন করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Fixed whisper directory not existing causing error"
-msgstr ""
+msgstr "ত্রুটির কারণ হওয়া হুইস্পার ডিরেক্টরি না থাকা ঠিক করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 #: data/com.jeffser.Alpaca.metainfo.xml.in:151
@@ -203,27 +203,27 @@ msgstr "আপডেট মডেল তালিকা"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
 msgid "Alpaca now remembers it's size"
-msgstr ""
+msgstr "আলপাকা এখন তার আকার মনে রাখে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Added reasoning category for Ollama models"
-msgstr ""
+msgstr "ওলামা মডেলের জন্য যুক্তির বিভাগ যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "Improvements in sample prompts"
-msgstr ""
+msgstr "নমুনা প্রম্পটগুলিতে উন্নতি"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:121
 msgid "Fixed auto creation of Ollama (Managed) instance"
-msgstr ""
+msgstr "ওলামা (পরিচালিত) ইনস্ট্যান্সের স্বয়ংক্রিয় তৈরি ঠিক করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
 msgid "Removed legacy JSON to SQLite3 migration code"
-msgstr ""
+msgstr "লিগ্যাসি JSON থেকে SQLite3 মাইগ্রেশন কোড সরানো হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Fixed power saving mode appearing whilst using online instances"
-msgstr ""
+msgstr "অনলাইন ইনস্ট্যান্স ব্যবহার করার সময় পাওয়ার সেভিং মোড আসা ঠিক করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:132
 msgid "Fixed Ollama (Manged) instance not being able to be created"
@@ -357,8 +357,7 @@ msgstr "বর্তমান তারিখ ও সময় পান"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:189
 msgid "Fixed welcome screen not showing sometimes when deleting a message"
-msgstr ""
-"বার্তা মোছার সময় মাঝে মাঝে স্বাগতম স্ক্রিন না দেখানোর সমস্যা সমাধান করা হয়েছে"
+msgstr "বার্তা মোছার সময় মাঝে মাঝে স্বাগতম স্ক্রিন না দেখানোর সমস্যা সমাধান করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:190
 msgid "Fixed bold text not rendering correctly in tables"
@@ -406,9 +405,7 @@ msgstr "নমুনা প্রম্পটগুলি পুনরায় 
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:223
 msgid "Fixed saving Ollama (Managed) instance might crash it"
-msgstr ""
-"সংরক্ষিত Ollama (ম্যানেজড) উদাহরণ এটি বন্ধ করে দিতে পারে এমন সমস্যা সংশোধন করা "
-"হয়েছে"
+msgstr "সংরক্ষিত Ollama (ম্যানেজড) উদাহরণ এটি বন্ধ করে দিতে পারে এমন সমস্যা সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:224
 msgid "Fixed stop button"
@@ -416,8 +413,7 @@ msgstr "স্টপ বাটন সংশোধন করা হয়েছ�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:225
 msgid "Fixed model search not working if there are only pulling models"
-msgstr ""
-"মডেল সার্চ কাজ করছে না এমন সমস্যা সংশোধন করা হয়েছে যদি শুধুমাত্র পুলিং মডেল থাকে"
+msgstr "মডেল সার্চ কাজ করছে না এমন সমস্যা সংশোধন করা হয়েছে যদি শুধুমাত্র পুলিং মডেল থাকে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:226
 msgid "Fixed sample prompts sometimes not appearing"
@@ -517,8 +513,7 @@ msgstr "LaTeX সমীকরণের জন্য আরও ভাল রে�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:301
 msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
-msgstr ""
-"যখন একটি মডেল ডাউনলোড হচ্ছে, তখন ব্যবহারকারী আলপাকা বন্ধ করলে নিশ্চিতকরণ ডায়ালগ"
+msgstr "যখন একটি মডেল ডাউনলোড হচ্ছে, তখন ব্যবহারকারী আলপাকা বন্ধ করলে নিশ্চিতকরণ ডায়ালগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:302
 msgid "Better handling of think tags in messages"
@@ -620,8 +615,7 @@ msgstr "সংশোধন করুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:347
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
-msgstr ""
-"ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
+msgstr "ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:356
 msgid "Added categories to models"
@@ -798,8 +792,7 @@ msgstr "রিমোট সংযোগ ডায়ালগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:462
 msgid "Fixed: Models get duplicated when switching remote and local instance"
-msgstr ""
-"সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
+msgstr "সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:463
 msgid "Better internal instance manager"
@@ -1278,8 +1271,7 @@ msgstr "Ollama আপডেট করা হয়েছে v0.3.0 (নতুন
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:750
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
-msgstr ""
-"তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
+msgstr "তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:751
 msgid "Better connection check for Ollama"
@@ -1573,7 +1565,8 @@ msgstr "ওল্লামাকে v0.1.39-এ আপডেট করুন"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:868
 msgid ""
 "Fixed: app didn't open if models tweaks wasn't present in the config files"
-msgstr "সংশোধন: কনফিগার ফাইলগুলিতে মডেলের টুইকগুলি উপস্থিত না থাকলে অ্যাপটি খুলবে না"
+msgstr ""
+"সংশোধন: কনফিগার ফাইলগুলিতে মডেলের টুইকগুলি উপস্থিত না থাকলে অ্যাপটি খুলবে না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:877
 msgid "Changed multiple icons (paper airplane for the send button)"
@@ -1593,8 +1586,7 @@ msgstr "ঠিক করা হয়েছে পাঠান/স্টপ ব�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:881
 msgid "Fixed app not checking if remote connection works when starting"
-msgstr ""
-"ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
+msgstr "ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:888
 msgid "Daily Update"
@@ -1602,8 +1594,7 @@ msgstr "প্রতিদিনের আপডেট"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:890
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
-msgstr ""
-"চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
+msgstr "চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:891
 msgid "New shortcut for creating a chat (CTRL+N)"
@@ -1896,8 +1887,7 @@ msgstr "একাধিক চ্যাট সমর্থন যোগ কর�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1062
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
-msgstr ""
-"প্যাঙ্গো মার্কআপ সমর্থন যোগ করা হয়েছে (বোল্ড, তালিকা, শিরোনাম, উপশিরোনাম, মনোস্পেস)"
+msgstr "প্যাঙ্গো মার্কআপ সমর্থন যোগ করা হয়েছে (বোল্ড, তালিকা, শিরোনাম, উপশিরোনাম, মনোস্পেস)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1063
 msgid "Added autoscroll if the user is at the bottom of the chat"
@@ -2075,15 +2065,15 @@ msgstr "স্পীচ রিকগনিশন ব্যবহার করা
 
 #: src/window.py:254
 msgid "Download Speech Recognition Model"
-msgstr ""
+msgstr "স্পিচ রিকগনিশন মডেল ডাউনলোড করুন"
 
 #: src/window.py:255
 msgid "To use speech recognition you'll need to download a special model ({})"
-msgstr ""
+msgstr "স্পিচ রিকগনিশন ব্যবহার করতে আপনাকে একটি বিশেষ মডেল ({}) ডাউনলোড করতে হবে"
 
 #: src/window.py:257
 msgid "Download Model"
-msgstr ""
+msgstr "মডেল ডাউনলোড করুন"
 
 #: src/window.py:274
 msgid "Ollama Was Not Found"
@@ -3545,10 +3535,12 @@ msgid ""
 "Qwen3 is the latest generation of large language models in Qwen series, "
 "offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
 msgstr ""
+"কোয়েন সিরিজ়ে কোয়েন৩ হলো বৃহৎ ভাষার মডেলের নবীনতম প্রজন্ম, "
+"যা ডেন্স এবং মিক্সচার-অফ-এক্সপার্টস (MoE) মডেলের একটি বিস্তৃত স্যুট প্রদান করে।"
 
 #: src/available_models_descriptions.py:168
 msgid "Meta's latest collection of multimodal models."
-msgstr ""
+msgstr "মেটার মাল্টিমোডাল মডেলের সর্বশেষ সংগ্রহ।"
 
 #: src/available_models_descriptions.py:169
 msgid ""
@@ -3556,18 +3548,24 @@ msgid ""
 "have been fine-tuned for improved reasoning and instruction-following "
 "capabilities."
 msgstr ""
+"আইবিএম গ্রানাইট ২বি এবং ৮বি মডেল হলো ১২৮কে কন্টেন্ট দৈর্ঘ্যের ভাষার মডেল, যা"
+"উন্নত যুক্তি এবং নির্দেশাবলী অনুসরণ করার ক্ষমতার জন্য ফাইন-টিউন করা হয়েছে।"
 
 #: src/available_models_descriptions.py:170
 msgid ""
 "Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
 "reasoning models that rival much larger models on complex reasoning tasks."
 msgstr ""
+"ফাই ৪ রিজনিং এবং রিজনিং প্লাস হলো ১৪-বিলিয়ন প্যারামিটার ওপেন-ওয়েট "
+"রিজনিং মডেল, যা জটিল রিজনিংয়ের কাজগুলিতে অনেক বড় মডেলকে টেক্কা দেয়।"
 
 #: src/available_models_descriptions.py:171
 msgid ""
 "Phi 4 mini reasoning is a lightweight open model that balances efficiency "
 "with advanced reasoning ability."
 msgstr ""
+"ফাই ৪ মিনি রিজনিং হলো একটি হালকা ওপেন মডেল যা দক্ষতার সাথে"
+"উন্নত যুক্তি ক্ষমতার ভারসাম্য বজায় রাখে।"
 
 #: src/instance_manager.py:30 src/instance_manager.py:366
 msgid "Instance"
@@ -4227,7 +4225,7 @@ msgstr "পাওয়ার সেভার সতর্কতা দেখা
 
 #: src/window.ui:1036
 msgid "When running a managed Ollama instance"
-msgstr ""
+msgstr "একটি পরিচালিত ওলামা ইনস্ট্যান্স চালানোর সময়"
 
 #: src/window.ui:1043
 msgid "Zoom"
@@ -4235,13 +4233,15 @@ msgstr "জুম"
 
 #: src/window.ui:1060
 msgid "Speech Recognition Model"
-msgstr ""
+msgstr "স্পিচ রিকগনিশন মডেল"
 
 #: src/window.ui:1061
 msgid ""
 "Models are downloaded upon first use, you can delete them from the model "
 "manager"
 msgstr ""
+"মডেলগুলি প্রথমবার ব্যবহার করার সময় ডাউনলোড করা হয়, আপনি মডেল "
+"ম্যানেজার থেকে সেগুলি মুছে ফেলতে পারেন"
 
 #: src/window.ui:1068
 msgid "Speech Recognition Language"
@@ -4253,13 +4253,15 @@ msgstr "কথা বলার পরে স্বয়ংক্রিয়ভ
 
 #: src/window.ui:1086
 msgid "Text to Speech Voice"
-msgstr ""
+msgstr "টেক্সট টু স্পিচ ভয়েস"
 
 #: src/window.ui:1087
 msgid ""
 "Voices are downloaded upon first use, each weighing around 1 MB, and you can "
 "delete them from the model manager"
 msgstr ""
+"ভয়েসগুলি প্রথমবার ব্যবহার করার সময় ডাউনলোড করা হয়, প্রতিটির ওজন প্রায় ১ এমবি, এবং আপনি "
+"মডেল ম্যানেজার থেকে সেগুলি মুছে ফেলতে পারেন"
 
 #: src/window.ui:1100
 msgid "Delete All Chats"
@@ -4396,7 +4398,7 @@ msgstr "সংযুক্তি অপসারণ করুন"
 
 #: src/window.ui:1373
 msgid "Start Quick Ask"
-msgstr ""
+msgstr "দ্রুত জিজ্ঞাসা শুরু করুন"
 
 #: src/window.ui:1377
 msgid "Import Chat"
@@ -4484,7 +4486,7 @@ msgstr "পছন্দসমূহ"
 #: src/gtk/help-overlay.ui:26
 msgctxt "shortcut window"
 msgid "Quick Ask"
-msgstr ""
+msgstr "দ্রুত জিজ্ঞাসা"
 
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
@@ -4710,7 +4712,7 @@ msgstr "বার্তা পুনরুত্পাদন করুন"
 
 #: src/custom_widgets/message_widget.py:564
 msgid "Dictate Message"
-msgstr ""
+msgstr "বার্তা বলুন"
 
 #: src/custom_widgets/message_widget.py:584
 msgid "Message copied to the clipboard"
@@ -4744,20 +4746,20 @@ msgstr "আপনি কি নিশ্চিত যে '{}' মুছতে �
 
 #: src/custom_widgets/model_manager_widget.py:123
 msgid "Local text to speech model provided by Kokoro."
-msgstr ""
+msgstr "কোকোরো দ্বারা সরবরাহকৃত স্থানীয় টেক্সট টু স্পিচ মডেল।"
 
 #: src/custom_widgets/model_manager_widget.py:160
 #: src/custom_widgets/model_manager_widget.py:293
 msgid "Speech to Text"
-msgstr ""
+msgstr "স্পিচ টু টেক্সট"
 
 #: src/custom_widgets/model_manager_widget.py:209
 msgid "Local speech to text model provided by OpenAI Whisper."
-msgstr ""
+msgstr "ওপেনএআই হুইস্পার দ্বারা সরবরাহকৃত স্থানীয় স্পিচ টু টেক্সট মডেল।"
 
 #: src/custom_widgets/model_manager_widget.py:239
 msgid "Downloading…"
-msgstr ""
+msgstr "ডাউনলোড হচ্ছে…"
 
 #: src/custom_widgets/model_manager_widget.py:249
 #: src/custom_widgets/model_manager_widget.py:251
@@ -4823,11 +4825,11 @@ msgstr "বিবরণ"
 
 #: src/custom_widgets/model_manager_widget.py:491
 msgid "Voice"
-msgstr ""
+msgstr "ভয়েস"
 
 #: src/custom_widgets/model_manager_widget.py:496
 msgid "Default"
-msgstr ""
+msgstr "ডিফল্ট"
 
 #: src/custom_widgets/model_manager_widget.py:638
 msgid "Change"
@@ -4871,7 +4873,7 @@ msgstr "সরঞ্জাম"
 
 #: src/custom_widgets/model_manager_widget.py:695
 msgid "Reasoning"
-msgstr ""
+msgstr "যুক্তি"
 
 #: src/custom_widgets/model_manager_widget.py:696
 msgid "Small"
