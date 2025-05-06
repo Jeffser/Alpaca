@@ -49,6 +49,12 @@ from .sql_manager import generate_uuid, generate_numbered_name, Instance as SQL
 from . import widgets as Widgets
 from .constants import SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES, TTS_AUTO_MODES, STT_MODELS, data_dir, source_dir, cache_dir
 
+try:
+    import whisper
+except ImportError:
+    whisper = None
+
+
 logger = logging.getLogger(__name__)
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
@@ -111,6 +117,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     background_switch = Gtk.Template.Child()
     powersaver_warning_switch = Gtk.Template.Child()
+    mic_group = Gtk.Template.Child()
     mic_auto_send_switch = Gtk.Template.Child()
     mic_language_combo = Gtk.Template.Child()
     mic_model_combo = Gtk.Template.Child()
@@ -958,6 +965,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 selected_index = i
             string_list.append('{} ({})'.format(model.title(), size))
 
+        # Only display speech section if whisper is available
+        if not whisper:
+            self.mic_group.set_visible(False)
+
         self.mic_model_combo.set_model(string_list)
         self.mic_model_combo.set_selected(selected_index)
         self.mic_model_combo.set_sensitive(True)
@@ -1211,7 +1222,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         enter_key_controller = Gtk.EventControllerKey.new()
         enter_key_controller.connect("key-pressed", enter_key_handler)
         self.message_text_view.add_controller(enter_key_controller)
-        self.message_text_view_scrolled_window.get_parent().append(Widgets.speech_recognition.MicrophoneButton(self.message_text_view))
+
+        # Only display microphone button if whisper is available
+        if whisper:
+            self.message_text_view_scrolled_window.get_parent().append(Widgets.speech_recognition.MicrophoneButton(self.message_text_view))
 
         for name, data in {
             'send': {
