@@ -858,6 +858,21 @@ class klusterai(base_openai):
     instance_url = 'https://api.kluster.ai/v1/'
     description = _('Kluster AI cloud inference API')
 
+
+class LlamaAPI(base_openai):
+    """
+    Instance type for Meta AI's Llama API, using their backwards-compatible
+    OpenAI API endpoint.
+
+    https://llama.developer.meta.com/docs/sdks, see "Other supported libraries"
+    """
+
+    instance_type = 'llama-api'
+    instance_type_display = 'Llama API'
+    instance_url = 'https://api.llama.com/compat/v1/'
+    description = _('Meta AI Llama API')
+
+
 class generic_openai(base_openai):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
@@ -933,6 +948,25 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama_managed, ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, fireworks, lambda_labs, cerebras, klusterai, generic_openai]
+ready_instances = [
+    ollama_managed,
+    ollama,
+    chatgpt,
+    gemini,
+    together,
+    venice,
+    deepseek,
+    openrouter,
+    anthropic,
+    groq,
+    fireworks,
+    lambda_labs,
+    cerebras,
+    klusterai,
+    generic_openai
+]
 
-
+# TODO:
+# The LlamaAPI instance type is likely ready to use, but needs testing.
+# They currently keep it behind a waitlist. Once testing is done, it can be
+# added to ready_instances.
