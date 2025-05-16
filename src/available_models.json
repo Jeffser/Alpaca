@@ -35,7 +35,8 @@
         "author": "Qwen Team",
         "categories": [
             "tools",
-            "huge"
+            "huge",
+            "reasoning"
         ],
         "languages": [
             "en"
@@ -55,7 +56,6 @@
         ],
         "author": "Meta",
         "categories": [
-            "vision",
             "medium",
             "huge",
             "vision"
@@ -462,7 +462,6 @@
         ],
         "author": "Haotian Liu",
         "categories": [
-            "vision",
             "small",
             "medium",
             "huge",
@@ -961,7 +960,6 @@
         ],
         "author": "Xtuner",
         "categories": [
-            "vision",
             "medium",
             "vision"
         ],
@@ -1526,7 +1524,6 @@
         ],
         "author": "Skunkworks AI",
         "categories": [
-            "vision",
             "small",
             "vision"
         ],
@@ -1638,7 +1635,6 @@
         ],
         "author": "Vikhyatk",
         "categories": [
-            "vision",
             "small",
             "vision"
         ],
@@ -2034,7 +2030,6 @@
         ],
         "author": "Xtuner",
         "categories": [
-            "vision",
             "small",
             "vision"
         ],
@@ -2074,7 +2069,6 @@
         ],
         "author": "OpenBMB",
         "categories": [
-            "vision",
             "medium",
             "vision",
             "math",
@@ -3277,7 +3271,8 @@
         ],
         "url": "https://ollama.com/library/smallthinker",
         "categories": [
-            "small"
+            "small",
+            "reasoning"
         ],
         "author": "Power Infer",
         "languages": [
@@ -3340,7 +3335,8 @@
             "big",
             "huge",
             "code",
-            "math"
+            "math",
+            "reasoning"
         ],
         "author": "DeepSeek Team",
         "languages": [
@@ -3440,7 +3436,8 @@
         "url": "https://ollama.com/library/openthinker",
         "categories": [
             "small",
-            "huge"
+            "huge",
+            "reasoning"
         ],
         "author": "Open Thoughts Team",
         "languages": [
@@ -3457,7 +3454,8 @@
         "url": "https://ollama.com/library/deepscaler",
         "categories": [
             "small",
-            "math"
+            "math",
+            "reasoning"
         ],
         "author": "Agentica Project",
         "languages": [
@@ -3479,7 +3477,8 @@
         "categories": [
             "huge",
             "multilingual",
-            "math"
+            "math",
+            "reasoning"
         ],
         "author": "Perplexity AI",
         "languages": [
@@ -3509,7 +3508,6 @@
         ],
         "url": "https://ollama.com/library/gemma3",
         "categories": [
-            "vision",
             "small",
             "medium",
             "big",
@@ -3571,7 +3569,6 @@
         ],
         "url": "https://ollama.com/library/granite3.2-vision",
         "categories": [
-            "vision",
             "tools",
             "small",
             "vision"
@@ -3695,7 +3692,8 @@
             "medium",
             "big",
             "code",
-            "math"
+            "math",
+            "reasoning"
         ],
         "author": "LG AI Research",
         "languages": [
@@ -3713,8 +3711,7 @@
         "categories": [
             "vision",
             "tools",
-            "big",
-            "vision"
+            "big"
         ],
         "author": "Mistral AI",
         "languages": [
@@ -3772,9 +3769,193 @@
         "categories": [
             "small",
             "medium",
-            "code"
+            "code",
+            "reasoning"
         ],
         "author": "DeepCoder Team",
+        "languages": [
+            "en"
+        ]
+    },
+    "qwen3": {
+        "tags": [
+            [
+                "0.6b",
+                "523\u202fMB"
+            ],
+            [
+                "1.7b",
+                "1.4\u202fGB"
+            ],
+            [
+                "4b",
+                "2.6\u202fGB"
+            ],
+            [
+                "8b",
+                "5.2\u202fGB"
+            ],
+            [
+                "14b",
+                "9.3\u202fGB"
+            ],
+            [
+                "30b",
+                "19\u202fGB"
+            ],
+            [
+                "32b",
+                "20\u202fGB"
+            ],
+            [
+                "235b",
+                "142\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/qwen3",
+        "categories": [
+            "tools",
+            "small",
+            "medium",
+            "big",
+            "huge",
+            "code",
+            "math",
+            "multilingual",
+            "reasoning"
+        ],
+        "author": "Alibaba",
+        "languages": [
+            "en",
+            "es",
+            "de",
+            "fr",
+            "pt",
+            "it",
+            "nl",
+            "ru",
+            "cs",
+            "pl",
+            "ar",
+            "fa",
+            "he",
+            "tr",
+            "ja",
+            "ko",
+            "vi",
+            "th",
+            "id",
+            "ms",
+            "lo",
+            "my",
+            "ceb",
+            "km",
+            "tl",
+            "hi",
+            "bn",
+            "ur"
+        ]
+    },
+    "llama4": {
+        "tags": [
+            [
+                "latest",
+                "67\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/llama4",
+        "categories": [
+            "vision",
+            "tools",
+            "huge",
+            "multilingual",
+            "code"
+        ],
+        "author": "Meta",
+        "languages": [
+            "en",
+            "ar",
+            "fr",
+            "de",
+            "hi",
+            "it",
+            "pt",
+            "es",
+            "id",
+            "tl",
+            "th",
+            "vi"
+        ]
+    },
+    "granite3.3": {
+        "tags": [
+            [
+                "2b",
+                "1.5\u202fGB"
+            ],
+            [
+                "8b",
+                "4.9\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/granite3.3",
+        "categories": [
+            "tools",
+            "small",
+            "medium",
+            "code",
+            "math",
+            "multilingual"
+        ],
+        "author": "IBM for Code Intelligence",
+        "languages": [
+            "en",
+            "de",
+            "es",
+            "fr",
+            "ja",
+            "pt",
+            "ar",
+            "cs",
+            "it",
+            "ko",
+            "nl",
+            "zh"
+        ]
+    },
+    "phi4-reasoning": {
+        "tags": [
+            [
+                "14b",
+                "11\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/phi4-reasoning",
+        "categories": [
+            "big",
+            "math",
+            "code",
+            "reasoning"
+        ],
+        "author": "Microsoft",
+        "languages": [
+            "en"
+        ]
+    },
+    "phi4-mini-reasoning": {
+        "tags": [
+            [
+                "3.8b",
+                "3.2\u202fGB"
+            ]
+        ],
+        "url": "https://ollama.com/library/phi4-mini-reasoning",
+        "categories": [
+            "small",
+            "math",
+            "reasoning"
+        ],
+        "author": "Microsoft",
         "languages": [
             "en"
         ]

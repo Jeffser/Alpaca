@@ -638,7 +638,7 @@ class local_model(Gtk.Box):
                 _('Change'): {'callback': lambda: dialog_widget.simple_file([window.file_filter_image], set_profile_picture), 'appearance': 'suggested', 'default': True},
             }
 
-            dialog_widget.Options(_("Model Profile Picture"), _("What do you want to do with the model's profile picture?"), list(options.keys())[0], options)
+            dialog_widget.Options(_("Model Profile Picture"), _("What do you want to do with the model's profile picture?"), list(options.keys())[0], options, self)
         else:
             dialog_widget.simple_file([window.file_filter_image], set_profile_picture)
 
@@ -692,6 +692,7 @@ class category_pill(Adw.Bin):
         'vision': {'name': _('Vision'), 'css': ['accent'], 'icon': 'eye-open-negative-filled-symbolic'},
         'embedding': {'name': _('Embedding'), 'css': ['error'], 'icon': 'brain-augemnted-symbolic'},
         'tools': {'name': _('Tools'), 'css': ['accent'], 'icon': 'wrench-wide-symbolic'},
+        'reasoning': {'name': _('Reasoning'), 'css': ['accent'], 'icon': 'brain-augemnted-symbolic'},
         'small': {'name': _('Small'), 'css': ['success'], 'icon': 'leaf-symbolic'},
         'medium': {'name': _('Medium'), 'css': ['brown'], 'icon': 'sprout-symbolic'},
         'big': {'name': _('Big'), 'css': ['warning'], 'icon': 'tree-circle-symbolic'},
@@ -878,9 +879,10 @@ def update_local_model_list():
     GLib.idle_add(window.model_dropdown.get_model().remove_all)
 
     # Speech to Text
-    for model in os.listdir(os.path.join(data_dir, 'whisper')):
-        if model.endswith('.pt') and STT_MODELS.get(model.removesuffix('.pt')):
-            add_speech_to_text_model(model.removesuffix('.pt'))
+    if os.path.isdir(os.path.join(data_dir, 'whisper')):
+        for model in os.listdir(os.path.join(data_dir, 'whisper')):
+            if model.endswith('.pt') and STT_MODELS.get(model.removesuffix('.pt')):
+                add_speech_to_text_model(model.removesuffix('.pt'))
 
     # Text to Speech
     tts_model_path = os.path.join(cache_dir, 'huggingface', 'hub')

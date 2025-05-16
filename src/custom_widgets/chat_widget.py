@@ -41,13 +41,13 @@ possible_prompts = [
     "Recommend a film about nature",
     "What is nostalgia?",
     "Can you explain time dilation in physics?",
-    "Can you explain the basics of machine learning?",
+    "Explain the basics of machine learning",
     "What is photoelectric effect?",
-    "What is the history of the Great Wall of China?",
+    "What's the history of the Great Wall of China?",
     "Tell me some historical facts about Taj Mahal",
     "Write a love story",
-    "Write Shrödinger's equation in LaTeX",
-    "Write field equation in LaTeX",
+    "Write Schrödinger's equation in LaTeX",
+    "Write the field equation in LaTeX",
     "What is confirmation bias?",
     "Tell me about your day",
     "How to create a strong password",
@@ -465,7 +465,12 @@ class chat_list(Gtk.ListBox):
         window.sql_instance.duplicate_chat(old_chat_window, new_chat)
 
     def on_chat_imported(self, file_dialog, result):
-        file = file_dialog.open_finish(result)
+        try:
+            file = file_dialog.open_finish(result)
+        except gi.repository.GLib.GError:
+            # The user (probably) dismissed the dialog
+            return
+
         if file:
             if os.path.isfile(os.path.join(cache_dir, 'import.db')):
                 os.remove(os.path.join(cache_dir, 'import.db'))
