@@ -938,7 +938,7 @@ class message(Gtk.Box):
                     part['text'] = re.sub(r'^####\s+(.*)', r'<span size="medium" weight="bold">\1</span>', part['text'], flags=re.MULTILINE)
                     part['text'] = re.sub(r'_(\((.*?)\)|\d+)', r'<sub>\2\1</sub>', part['text'], flags=re.MULTILINE)
                     part['text'] = re.sub(r'\^(\((.*?)\)|\d+)', r'<sup>\2\1</sup>', part['text'], flags=re.MULTILINE)
-                    part['text'] = re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\1">\2</a>', part['text'], flags=re.MULTILINE)
+                    part['text'] = re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\2">\1</a>', part['text'], flags=re.MULTILINE)
                     pos = 0
 
                     for match in markup_pattern.finditer(part['text']):
