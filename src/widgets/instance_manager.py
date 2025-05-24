@@ -933,6 +933,12 @@ class GenericOpenAI(BaseOpenAI):
         self.instance_url = data.get('url', self.instance_url)
         super().__init__(data)
 
+class LlamaAPI(BaseOpenAI):
+    instance_type = 'llama-api'
+    instance_type_display = 'Llama API'
+    instance_url = 'https://api.llama.com/compat/v1/'
+    description = _('Meta AI Llama API')
+
 class InstanceRow(Adw.ActionRow):
     __gtype_name__ = 'AlpacaInstanceRow'
 
@@ -1007,6 +1013,6 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [OllamaManaged, Ollama, ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Fireworks, LambdaLabs, Cerebras, Klusterai, GenericOpenAI]
+ready_instances = [OllamaManaged, Ollama, ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Fireworks, LambdaLabs, Cerebras, Klusterai, GenericOpenAI, LlamaAPI]
 
 
