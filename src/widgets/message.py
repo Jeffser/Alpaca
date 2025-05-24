@@ -143,8 +143,8 @@ class OptionPopup(Gtk.Popover):
 
         if button.get_active():
             GLib.idle_add(self.message_element.add_css_class, 'tts_message')
-            if window.message_dictated and window.message_dictated.footer.popup.tts_button.get_active():
-                 window.message_dictated.footer.popup.tts_button.set_active(False)
+            if window.message_dictated and window.message_dictated.popup.tts_button.get_active():
+                 window.message_dictated.popup.tts_button.set_active(False)
             window.message_dictated = self.message_element
             threading.Thread(target=run, args=(self.message_element.get_content(), button)).start()
         else:
@@ -292,6 +292,7 @@ class Message(Gtk.Box):
         self.dt = dt
         self.options_button = None
         self.message_id = message_id
+        self.popup = None
 
         super().__init__(
             css_classes=["message"],
@@ -350,12 +351,12 @@ class Message(Gtk.Box):
             return self.author
 
     def update_header(self, pfp_b64:str = None) -> None:
-        popup = OptionPopup(self)
+        self.popup = OptionPopup(self)
         self.header_container.set_child(
             MessageHeader(
                 message=self,
                 dt=self.dt,
-                popover=None if pfp_b64 else popup
+                popover=None if pfp_b64 else self.popup
             )
         )
         if pfp_b64:
@@ -372,7 +373,7 @@ class Message(Gtk.Box):
                 height_request=40,
                 css_classes=['circular', 'flat'],
                 valign=1,
-                popover=popup,
+                popover=self.popup,
                 margin_top=5,
                 margin_start=5
             )
@@ -423,6 +424,11 @@ class Message(Gtk.Box):
                 GLib.idle_add(window.quick_ask_save_button.set_sensitive, True)
             else:
                 self.save()
+
+            tts_auto_mode = SQL.get_preference('tts_auto_mode', 'never')
+            if tts_auto_mode == 'always' or (tts_auto_mode == 'focused' and self.get_root().is_active()):
+                self.popup.tts_button.set_active(True)
+
             sys.exit()
 
         elif data.get('content', False):

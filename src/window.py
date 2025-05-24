@@ -47,7 +47,7 @@ from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, Spelling
 
 from .sql_manager import generate_uuid, generate_numbered_name, Instance as SQL
 from . import widgets as Widgets
-from .constants import SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES, STT_MODELS, data_dir, source_dir
+from .constants import SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES, TTS_AUTO_MODES, STT_MODELS, data_dir, source_dir
 
 logger = logging.getLogger(__name__)
 
@@ -117,6 +117,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     mic_language_combo = Gtk.Template.Child()
     mic_model_combo = Gtk.Template.Child()
     tts_voice_combo = Gtk.Template.Child()
+    tts_auto_mode_combo = Gtk.Template.Child()
 
     banner = Gtk.Template.Child()
 
@@ -628,6 +629,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 SQL.insert_or_update_preferences({'tts_voice': language})
 
     @Gtk.Template.Callback()
+    def selected_tts_auto_mode(self, combo, user_data):
+        if combo.get_sensitive():
+            mode = TTS_AUTO_MODES.get(combo.get_selected_item().get_string())
+            if mode:
+                SQL.insert_or_update_preferences({'tts_auto_mode': mode})
+
+    @Gtk.Template.Callback()
     def switch_powersaver_warning(self, switch, user_data):
         if switch.get_sensitive():
             if switch.get_active():
@@ -1055,6 +1063,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.tts_voice_combo.set_selected(selected_index)
         self.tts_voice_combo.set_sensitive(True)
 
+        selected_tts_mode = SQL.get_preference('tts_auto_mode', '')
+        selected_index = 0
+        string_list = Gtk.StringList()
+        for i, (name, value) in enumerate(TTS_AUTO_MODES.items()):
+            if value == selected_tts_mode:
+                selected_index = i
+            string_list.append(name)
+
+        self.tts_auto_mode_combo.set_model(string_list)
+        self.tts_auto_mode_combo.set_selected(selected_index)
+        self.tts_auto_mode_combo.set_sensitive(True)
+
         Widgets.instance_manager.update_instance_list()
 
         # Ollama is available but there are no instances added
@@ -1109,8 +1129,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         portal.Screenshot("", {"interactive": Variant('b', True)})
 
     def on_attachment(self, file:Gio.File):
-        print('on_attachment')
-        return
         file_types = {
             "plain_text": ["txt", "md"],
             "code": ["c", "h", "css", "html", "js", "ts", "py", "java", "json", "xml", "asm", "nasm",

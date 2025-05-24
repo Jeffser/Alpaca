@@ -1071,8 +1071,16 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
               <child>
                 <object class="AdwComboRow" id="tts_voice_combo">
                   <signal name="notify::selected" handler="selected_tts_voice"/>
-                  <property name="title" translatable="yes">Text to Speech Voice</property>
+                  <property name="title" translatable="yes">Default Text to Speech Voice</property>
                   <property name="subtitle" translatable="yes">Voices are downloaded upon first use, each weighing around 1 MB, and you can delete them from the model manager</property>
+                  <property name="sensitive">false</property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwComboRow" id="tts_auto_mode_combo">
+                  <signal name="notify::selected" handler="selected_tts_auto_mode"/>
+                  <property name="title" translatable="yes">Dictate New Messages Automatically</property>
+                  <property name="subtitle" translatable="yes">Dictate new messages once they have finished being generated</property>
                   <property name="sensitive">false</property>
                 </object>
               </child>

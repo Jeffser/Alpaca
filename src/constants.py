@@ -91,6 +91,12 @@ SPEACH_RECOGNITION_LANGUAGES = (
     'sq'
 )
 
+TTS_AUTO_MODES = {
+    _('Never'): 'never',
+    _('When Alpaca is Focused'): 'focused',
+    _('Always'): 'always'
+}
+
 # Japanese and Chinese require additional library, maybe later
 TTS_VOICES = {
     '🇺🇸 Heart': 'af_heart',
