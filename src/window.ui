@@ -311,21 +311,9 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                   <class name="bottom_clamp"/>
                                 </style>
                                 <child>
-                                  <object class="GtkBox">
+                                  <object class="GtkBox" id="bottom_chat_controls_container">
                                     <property name="orientation">1</property>
                                     <property name="spacing">12</property>
-                                    <child>
-                                      <object class="GtkScrolledWindow" id="attachment_box">
-                                        <property name="visible">false</property>
-                                        <child>
-                                          <object class="GtkBox" id="attachment_container">
-                                            <property name="orientation">0</property>
-                                            <property name="vexpand">false</property>
-                                            <property name="spacing">12</property>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
                                     <child>
                                       <object class="GtkBox">
                                         <property name="spacing">12</property>
@@ -1276,96 +1264,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
         </object>
       </child>
     </object>
-
-    <object class="AdwDialog" id="terminal_dialog">
-      <accessibility>
-        <property name="label" translatable="yes">Terminal dialog</property>
-      </accessibility>
-      <signal name="close-attempt" handler="closing_terminal"/>
-      <property name="title" translatable="yes">Terminal</property>
-      <property name="can-close">false</property>
-      <property name="content-width">700</property>
-      <property name="content-height">600</property>
-      <child>
-        <object class="AdwToolbarView">
-          <style>
-            <class name="osd"/>
-          </style>
-          <child type="top">
-            <object class="AdwHeaderBar">
-              <child type="start">
-                <object class="GtkButton" id="terminal_dir_button">
-                  <signal name="clicked" handler="link_button_handler"/>
-                  <property name="tooltip-text" translatable="yes">Open Environment Directory</property>
-                  <property name="icon-name">document-open-symbolic</property>
-                  <style>
-                    <class name="flat"/>
-                  </style>
-                </object>
-              </child>
-            </object>
-          </child>
-          <property name="content">
-            <object class="GtkScrolledWindow" id="terminal_scroller">
-              <property name="propagate-natural-height">true</property>
-              <property name="propagate-natural-width">true</property>
-            </object>
-          </property>
-        </object>
-      </child>
-    </object>
-
-    <object class="AdwDialog" id="file_preview_dialog">
-      <accessibility>
-        <property name="label" translatable="yes">File preview dialog</property>
-      </accessibility>
-      <property name="follows-content-size">true</property>
-      <property name="can-close">true</property>
-      <child>
-        <object class="AdwToolbarView">
-          <child type="top">
-            <object class="AdwHeaderBar">
-              <child type="start">
-                <object class="GtkButton" id="file_preview_open_button">
-                  <signal name="clicked" handler="link_button_handler"/>
-                  <property name="tooltip-text" translatable="yes">Open With Default App</property>
-                  <property name="vexpand">false</property>
-                  <property name="valign">3</property>
-                  <property name="icon-name">share-symbolic</property>
-                </object>
-              </child>
-              <child type="start">
-                <object class="GtkButton" id="file_preview_remove_button">
-                  <property name="tooltip-text" translatable="yes">Remove Attachment</property>
-                  <property name="vexpand">false</property>
-                  <property name="valign">3</property>
-                  <property name="icon-name">user-trash-symbolic</property>
-                </object>
-              </child>
-            </object>
-          </child>
-          <child>
-            <object class="GtkScrolledWindow">
-              <property name="hexpand">true</property>
-              <property name="vexpand">true</property>
-              <property name="propagate-natural-width">true</property>
-              <property name="propagate-natural-height">true</property>
-              <property name="overflow">1</property>
-              <style>
-                <class name="undershoot-bottom"/>
-              </style>
-              <child>
-                <object class="AdwBin" id="preview_file_bin">
-                  <style>
-                    <class name="p10"/>
-                  </style>
-                </object>
-              </child>
-            </object>
-          </child>
-        </object>
-      </child>
-    </object>
   </template>
   <menu id="primary_menu">
     <section>
@@ -1504,5 +1402,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
     </suffixes>
   </object>
 </interface>
+
 
 

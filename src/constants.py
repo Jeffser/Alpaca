@@ -2,17 +2,13 @@
 """
 Holds a few constant values that can be re-used all over the application.
 """
+
 import os
-
-
-# The app identifier
-APP_ID = "com.jeffser.Alpaca"
-
 
 # Big thanks to everyone contributing translations.
 # These translators will be shown inside of the app under
 # "About Alpaca" > "Contributors".
-TRANSLATORS: "list[str]" = [
+TRANSLATORS = [
     "Alex K (Russian) https://github.com/alexkdeveloper",
     "DasHi (Russian) https://github.com/col83",
     "Jeffry Samuel (Spanish) https://github.com/jeffser",
@@ -38,7 +34,62 @@ TRANSLATORS: "list[str]" = [
 ]
 
 # Used to populate SR language in preferences
-SPEACH_RECOGNITION_LANGUAGES = ('en', 'es', 'nl', 'ko', 'it', 'de', 'th', 'ru', 'pt', 'pl', 'id', 'zh', 'sv', 'cs', 'ja', 'fr', 'ro', 'tr', 'ca', 'hu', 'uk', 'el', 'bg', 'ar', 'sr', 'mk', 'lv', 'sl', 'hi', 'gl', 'da', 'ur', 'sk', 'he', 'fi', 'az', 'lt', 'et', 'nn', 'cy', 'pa', 'af', 'fa', 'eu', 'vi', 'bn', 'ne', 'mr', 'be', 'kk', 'hy', 'sw', 'ta', 'sq')
+SPEACH_RECOGNITION_LANGUAGES = (
+    'en',
+    'es',
+    'nl',
+    'ko',
+    'it',
+    'de',
+    'th',
+    'ru',
+    'pt',
+    'pl',
+    'id',
+    'zh',
+    'sv',
+    'cs',
+    'ja',
+    'fr',
+    'ro',
+    'tr',
+    'ca',
+    'hu',
+    'uk',
+    'el',
+    'bg',
+    'ar',
+    'sr',
+    'mk',
+    'lv',
+    'sl',
+    'hi',
+    'gl',
+    'da',
+    'ur',
+    'sk',
+    'he',
+    'fi',
+    'az',
+    'lt',
+    'et',
+    'nn',
+    'cy',
+    'pa',
+    'af',
+    'fa',
+    'eu',
+    'vi',
+    'bn',
+    'ne',
+    'mr',
+    'be',
+    'kk',
+    'hy',
+    'sw',
+    'ta',
+    'sq'
+)
 
 # Japanese and Chinese require additional library, maybe later
 TTS_VOICES = {
@@ -106,23 +157,60 @@ STT_MODELS = {
     'large': '~2.9 GB'
 }
 
-# Used for identifying the platform running Alpaca.
-class Platforms:
-    windows: str = "win32"
-    mac_os: str = "darwin"
-    linux: str = "linux"
+SAMPLE_PROMPTS = [
+    "What can you do?",
+    "Give me a pancake recipe",
+    "Why is the sky blue?",
+    "Can you tell me a joke?",
+    "Give me a healthy breakfast recipe",
+    "How to make a pizza",
+    "Can you write a poem?",
+    "Can you write a story?",
+    "What is GNU-Linux?",
+    "Which is the best Linux distro?",
+    "Give me butter chicken recipe",
+    "Why is Pluto not a planet?",
+    "What is a black-hole?",
+    "Tell me how to stay fit",
+    "Write a conversation between sun and Earth",
+    "Why is the grass green?",
+    "Write an Haïku about AI",
+    "What is the meaning of life?",
+    "Explain quantum physics in simple terms",
+    "Explain the theory of relativity",
+    "Explain how photosynthesis works",
+    "Recommend a film about nature",
+    "What is nostalgia?",
+    "Can you explain time dilation in physics?",
+    "Explain the basics of machine learning",
+    "What is photoelectric effect?",
+    "What's the history of the Great Wall of China?",
+    "Tell me some historical facts about Taj Mahal",
+    "Write a love story",
+    "Write Schrödinger's equation in LaTeX",
+    "Write the field equation in LaTeX",
+    "What is confirmation bias?",
+    "Tell me about your day",
+    "How to create a strong password",
+    "Explain how sodium batteries work",
+    "Prove Euler's identity"
+]
 
-    # Platforms Alpaca is ported to, but does not fully support yet.
-    ported: "tuple[str]" = (mac_os, windows)
+# The identifier when inside the Flatpak runtime
+IN_FLATPAK = bool(os.getenv("FLATPAK_ID"))
+
+def get_xdg_home(env, default):
+    if IN_FLATPAK:
+        return os.getenv(env)
+    base = os.getenv(env) or os.path.expanduser(default)
+    path = os.path.join(base, "com.jeffser.Alpaca")
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path
 
 
-# Folders Alpaca uses for its operation.
-class AlpacaFolders:
-    tmp_dir = os.path.join("/", "tmp", "alpaca")
-    website_temp: str = os.path.join(tmp_dir, "websites")
+data_dir = get_xdg_home("XDG_DATA_HOME", "~/.local/share")
+config_dir = get_xdg_home("XDG_CONFIG_HOME", "~/.config")
+cache_dir = get_xdg_home("XDG_CACHE_HOME", "~/.cache")
 
-    # extensions for paths are only meant to be used with a root path to be
-    # concatenated with simultaneously
-    youtube_temp_ext: str = "tmp/youtube"
-    ollama_temp_ext: str = "tmp/ollama"
-    images_temp_ext: str = "tmp/images"
+source_dir = os.path.abspath(os.path.dirname(__file__))

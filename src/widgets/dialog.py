@@ -1,25 +1,21 @@
-#dialog_widget.py
+#dialog.py
 """
 Handles all dialogs
 """
 
 import gi
-gi.require_version('Gtk', '4.0')
-gi.require_version('GtkSource', '5')
-from gi.repository import Gtk, Gio, Adw, Gdk, GLib
-
-window=None
+from gi.repository import Gtk, Gio, Adw, GLib
 
 button_appearance={
     'suggested': Adw.ResponseAppearance.SUGGESTED,
     'destructive': Adw.ResponseAppearance.DESTRUCTIVE
 }
 
-def get_dialog_showing() -> bool:
-    return any([True for dt in (Options, Entry, DropDown, Adw.Dialog) if isinstance(window.get_visible_dialog(), dt)])
+def get_dialog_showing(parent:Gtk.Widget) -> bool:
+    return any([True for dt in (Options, Entry, DropDown, Adw.Dialog) if isinstance(parent.get_visible_dialog(), dt)])
 
 # Don't call this directly outside this script
-class baseDialog(Adw.AlertDialog):
+class Base(Adw.AlertDialog):
     __gtype_name__ = 'AlpacaDialogBase'
 
     def __init__(self, heading:str, body:str, close_response:str, options:dict):
@@ -37,32 +33,34 @@ class baseDialog(Adw.AlertDialog):
                 self.set_default_response(option)
 
 
-class Options(baseDialog):
+class Options(Base):
     __gtype_name__ = 'AlpacaDialogOptions'
 
-    def __init__(self, heading:str, body:str, close_response:str, options:dict, parent:Gtk.Widget):
+    def __init__(self, heading:str, body:str, close_response:str, options:dict):
         super().__init__(
             heading,
             body,
             close_response,
             options
         )
-        if not get_dialog_showing():
-            self.choose(
-                parent = parent if parent else window,
-                cancellable = None,
-                callback = lambda dialog, task: self.response(dialog.choose_finish(task))
-            )
 
     def response(self, result:str):
         self.close()
         if 'callback' in self.options.get(result, {}):
             self.options[result]['callback']()
 
-class Entry(baseDialog):
+    def show(self, parent:Gtk.Widget):
+        if not get_dialog_showing(parent):
+            self.choose(
+                parent = parent,
+                cancellable = None,
+                callback = lambda dialog, task: self.response(dialog.choose_finish(task))
+            )
+
+class Entry(Base):
     __gtype_name__ = 'AlpacaDialogEntry'
 
-    def __init__(self, heading:str, body:str, close_response:str, options:dict, entries:list or dict, parent:Gtk.Widget):
+    def __init__(self, heading:str, body:str, close_response:str, options:dict, entries:list or dict):
         super().__init__(
             heading,
             body,
@@ -98,12 +96,6 @@ class Entry(baseDialog):
         self.set_extra_child(self.container)
 
         self.connect('realize', lambda *_: list(self.container)[0].grab_focus())
-        if not get_dialog_showing():
-            self.choose(
-                parent = parent if parent else window,
-                cancellable = None,
-                callback = lambda dialog, task: self.response(dialog.choose_finish(task))
-            )
 
     def response(self, result:str):
         self.close()
@@ -113,10 +105,18 @@ class Entry(baseDialog):
                 entry_results.append(entry.get_text())
             self.options[result]['callback'](*entry_results)
 
-class DropDown(baseDialog):
+    def show(self, parent:Gtk.Widget):
+        if not get_dialog_showing(parent):
+            self.choose(
+                parent = parent,
+                cancellable = None,
+                callback = lambda dialog, task: self.response(dialog.choose_finish(task))
+            )
+
+class DropDown(Base):
     __gtype_name__ = 'AlpacaDialogDropDown'
 
-    def __init__(self, heading:str, body:str, close_response:str, options:dict, items:list, parent:Gtk.Widget):
+    def __init__(self, heading:str, body:str, close_response:str, options:dict, items:list):
         super().__init__(
             heading,
             body,
@@ -131,19 +131,21 @@ class DropDown(baseDialog):
         ))
 
         self.connect('realize', lambda *_: self.get_extra_child().grab_focus())
-        if not get_dialog_showing():
-            self.choose(
-                parent = parent if parent else window,
-                cancellable = None,
-                callback = lambda dialog, task, dropdown=self.get_extra_child(): self.response(dialog.choose_finish(task), dropdown.get_selected_item().get_string())
-            )
 
     def response(self, result:str, item:str):
         self.close()
         if 'callback' in self.options.get(result, {}):
             self.options[result]['callback'](item)
 
-def simple(heading:str, body:str, callback:callable, button_name:str=_('Accept'), button_appearance:str='suggested', parent:Gtk.Widget=None):
+    def show(self, parent:Gtk.Widget):
+        if not get_dialog_showing(parent):
+            self.choose(
+                parent = parent,
+                cancellable = None,
+                callback = lambda dialog, task, dropdown=self.get_extra_child(): self.response(dialog.choose_finish(task), dropdown.get_selected_item().get_string())
+            )
+
+def simple(parent:Gtk.Widget, heading:str, body:str, callback:callable, button_name:str=_('Accept'), button_appearance:str='suggested'):
     options = {
         _('Cancel'): {},
         button_name: {
@@ -153,9 +155,10 @@ def simple(heading:str, body:str, callback:callable, button_name:str=_('Accept')
         }
     }
 
-    Options(heading, body, list(options.keys())[0], options, parent)
+    dialog = Options(heading, body, list(options.keys())[0], options)
+    dialog.show(parent)
 
-def simple_entry(heading:str, body:str, callback:callable, entries:list or dict, button_name:str=_('Accept'), button_appearance:str='suggested', parent:Gtk.Widget=None):
+def simple_entry(parent:Gtk.Widget, heading:str, body:str, callback:callable, entries:list or dict, button_name:str=_('Accept'), button_appearance:str='suggested'):
     options = {
         _('Cancel'): {},
         button_name: {
@@ -165,9 +168,10 @@ def simple_entry(heading:str, body:str, callback:callable, entries:list or dict,
         }
     }
 
-    Entry(heading, body, list(options.keys())[0], options, entries, parent)
+    dialog = Entry(heading, body, list(options.keys())[0], options, entries)
+    dialog.show(parent)
 
-def simple_dropdown(heading:str, body:str, callback:callable, items:list, button_name:str=_('Accept'), button_appearance:str='suggested', parent:Gtk.Widget=None):
+def simple_dropdown(parent:Gtk.Widget, heading:str, body:str, callback:callable, items:list, button_name:str=_('Accept'), button_appearance:str='suggested'):
     options = {
         _('Cancel'): {},
         button_name: {
@@ -177,10 +181,11 @@ def simple_dropdown(heading:str, body:str, callback:callable, items:list, button
         }
     }
 
-    DropDown(heading, body, list(options.keys())[0], options, items, parent)
+    dialog = DropDown(heading, body, list(options.keys())[0], options, items)
+    dialog.show(parent)
 
-def simple_log(title:str, summary_text:str, summary_classes:list, log_text:str, parent:Gtk.Widget=None):
-    if get_dialog_showing():
+def simple_log(parent:Gtk.Widget, title:str, summary_text:str, summary_classes:list, log_text:str):
+    if get_dialog_showing(parent):
         return
     container = Gtk.Box(
         hexpand=True,
@@ -223,10 +228,10 @@ def simple_log(title:str, summary_text:str, summary_classes:list, log_text:str, 
         child=tbv
     )
 
-    GLib.idle_add(dialog.present, parent if parent else window)
+    GLib.idle_add(dialog.present, parent)
 
-def simple_error(title:str, body:str, error_log:str, callback:callable=None, parent:Gtk.Widget=None):
-    if get_dialog_showing():
+def simple_error(parent:Gtk.Widget, title:str, body:str, error_log:str, callback:callable=None):
+    if get_dialog_showing(parent):
         return
     container = Gtk.Box(
         hexpand=True,
@@ -269,23 +274,18 @@ def simple_error(title:str, body:str, error_log:str, callback:callable=None, par
     if callback:
         dialog.connect('closed', lambda *_: callback())
 
-    GLib.idle_add(dialog.present, parent if parent else window)
+    GLib.idle_add(dialog.present, parent)
 
-def simple_file(file_filters:list, callback:callable):
+def simple_file(parent:Gtk.Widget, file_filters:list, callback:callable):
     filter_list = Gio.ListStore.new(Gtk.FileFilter)
 
     for item in file_filters:
         filter_list.append(item)
 
     def __open_finish_wrapper(dialog, result):
-        """
-        Wrapper around file_dialog.open_finish to handle errors gracefully.
-        """
-
         try:
             return dialog.open_finish(result)
         except gi.repository.GLib.GError:
-            # The user (probably) dismissed the dialog
             return
 
     file_dialog = Gtk.FileDialog(
@@ -294,12 +294,21 @@ def simple_file(file_filters:list, callback:callable):
     )
 
     file_dialog.open(
-        window,
+        parent,
         None,
-        lambda file_dialog,
-        result: callback(__open_finish_wrapper(file_dialog, result)) if result else None
+        lambda file_dialog, result: callback(__open_finish_wrapper(file_dialog, result)) if result else None
     )
 
-def simple_directory(callback:callable):
-    directory_dialog = Gtk.FileDialog()
-    directory_dialog.select_folder(window, None, lambda directory_dialog, result: callback(directory_dialog.select_folder_finish(result)))
+def simple_directory(parent:Gtk.Widget, callback:callable):
+    def __select_folder_finish_wrapper(dialog, result):
+        try:
+            return dialog.select_folder_finish(result)
+        except gi.repository.GLib.GError:
+            return
+
+    Gtk.FileDialog().select_folder(
+        parent,
+        None,
+        lambda directory_dialog, result: callback(__open_finish_wrapper(directory_dialog, result))
+    )
+

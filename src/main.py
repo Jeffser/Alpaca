@@ -23,20 +23,17 @@ Main script run at launch, handles actions, about dialog and the app itself (not
 import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
-from gi.repository import Gtk, Gio, Adw, GLib
+from gi.repository import Gtk, Gio, Adw
 
-from .internal import cache_dir, data_dir
+from .constants import TRANSLATORS, cache_dir, data_dir
+from .window import AlpacaWindow
 
 import os
 os.environ["TORCH_HOME"] = os.path.join(data_dir, "torch")
 
-from .constants import TRANSLATORS, Platforms
-from .window import AlpacaWindow
-
 import sys
 import logging
 import argparse
-import json
 import time
 import sqlite3
 
@@ -141,7 +138,7 @@ class AlpacaApplication(Adw.Application):
             win.quick_ask.present()
         else:
             win.present()
-        if sys.platform == Platforms.mac_os: # MacOS
+        if sys.platform == 'darwin': # MacOS
             settings = Gtk.Settings.get_default()
             if settings:
                 settings.set_property('gtk-xft-antialias', 1)
@@ -149,11 +146,11 @@ class AlpacaApplication(Adw.Application):
                 settings.set_property('gtk-font-name', 'Microsoft Sans Serif')
                 settings.set_property('gtk-xft-dpi', 110592)
             win.add_css_class('macos')
-        elif sys.platform == Platforms.windows: # Windows
+        elif sys.platform == 'win32': # Windows
             settings = Gtk.Settings.get_default()
             if settings:
                 settings.set_property('gtk-font-name', 'Segoe UI')
-        if sys.platform in Platforms.ported: # MacOS and Windows
+        if sys.platform in ('win32', 'darwin'): # MacOS and Windows
             win.powersaver_warning_switch.set_visible(False)
             win.background_switch.set_visible(False)
 

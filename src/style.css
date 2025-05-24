@@ -7,11 +7,7 @@
 .chat_image_button {
   padding: 0;
 }
-.chat_image_button, .chat_image_button image, .rounded_image {
-  border-radius: 10px;
-}
-.editing_message_textview {
-  padding: 7px;
+.chat_image_button, .chat_image_button image, .rounded_image, .r10 {
   border-radius: 10px;
 }
 .model_list_box {
@@ -27,7 +23,7 @@
 .tts_message {
   border-radius: 10px;
 }
-.editing_message_textview:focus, .code_block:focus, .tts_message {
+.code_block:focus, .tts_message {
 	box-shadow: 0 0 1px 2px mix(@accent_color, @window_bg_color, 0.5);
 }
 .model_popover {

@@ -1,10 +1,9 @@
-#table_widget.py
+#table.py
 """
-Handles the table widget shown in chat responses
+Handles the table widget shown in messages
 """
 
 import gi
-gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, GObject, Gio
 
 import re
@@ -24,7 +23,7 @@ class MarkdownTable:
         return table_repr
 
 class Row(GObject.GObject):
-    def __init__(self, _values):
+    def __init__(self, _values:list):
         super().__init__()
 
         self.values = []
@@ -36,14 +35,15 @@ class Row(GObject.GObject):
     def get_column_value(self, index):
         return self.values[index]
 
-class TableWidget(Gtk.Frame):
-    __gtype_name__ = 'TableWidget'
+class Table(Gtk.Frame):
+    __gtype_name__ = 'AlpacaTable'
 
-    def __init__(self, markdown):
+    def __init__(self, content:str=None):
         super().__init__()
         self.set_margin_start(5)
         self.set_margin_end(5)
         self.table = MarkdownTable()
+        self.markdown = ""
 
         self.set_halign(Gtk.Align.START)
 
@@ -57,23 +57,10 @@ class TableWidget(Gtk.Frame):
             propagate_natural_width=True
         )
         self.set_child(scrolled_window)
+        if content:
+            self.set_content(content)
 
-        try:
-            self.parse_markdown_table(markdown)
-            self.make_table()
-            scrolled_window.set_child(self.table_widget)
-        except:
-            label = Gtk.Label(
-                label=markdown.lstrip('\n').rstrip('\n'),
-                selectable=True,
-                margin_top=6,
-                margin_bottom=6,
-                margin_start=6,
-                margin_end=6
-            )
-            scrolled_window.set_child(label)
-
-    def parse_markdown_table(self, markdown_text):
+    def parse_markdown_table(self, markdown_text:str):
         # Define regex patterns for matching the table components
         header_pattern = r'^\|(.+?)\|$'
         separator_pattern = r'^\|(\s*[:-]+:?\s*\|)+$'
@@ -134,3 +121,23 @@ class TableWidget(Gtk.Frame):
 
         selection = Gtk.NoSelection.new(model=self.table.rows)
         self.table_widget.set_model(model=selection)
+
+    def get_content(self) -> str:
+        return self.markdown
+
+    def set_content(self, value:str) -> None:
+        self.markdown = value
+        try:
+            self.parse_markdown_table(self.markdown)
+            self.make_table()
+            self.get_child().set_child(self.table_widget)
+        except:
+            label = Gtk.Label(
+                label=self.markdown.lstrip('\n').rstrip('\n'),
+                selectable=True,
+                margin_top=6,
+                margin_bottom=6,
+                margin_start=6,
+                margin_end=6
+            )
+            self.get_child().set_child(label)

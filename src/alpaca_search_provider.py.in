@@ -1,13 +1,11 @@
 #!/usr/bin/python3
 
-import sys
 import subprocess
 import gettext
 import os
-import json
 import time
 from pydbus import SessionBus
-from gi.repository import GLib, Gio
+from gi.repository import GLib
 
 _ = gettext.gettext
 

@@ -14,17 +14,12 @@ import shutil
 import json
 import sys
 
-from .internal import data_dir
-from . import instance_manager
+from .constants import data_dir
+#from .widgets import instance_manager
 
 
-def generate_timestamped_uuid() -> str:
-    """
-    Returns a new, randomly generated UUID together with a timestamp.
-    """
-
+def generate_uuid() -> str:
     return f"{datetime.datetime.today().strftime('%Y%m%d%H%M%S%f')}{uuid.uuid4().hex}"
-
 
 def generate_numbered_name(name: str, compare_list: "list[str]") -> str:
     """
@@ -54,16 +49,9 @@ class SQLiteConnection:
     This class manages the context for SQLite database connections.
     """
 
-    def __init__(self, sql_path: str) -> None:
-        """
-        We define ourselves three attributes - a path for the database file, a
-        connection and a cursor instance. The two latter ones can be None if
-        the context is not entered yet.
-        """
-
-        self.sql_path: str = sql_path
-        self.sqlite_con: "Union[sqlite3.Connection, None]" = None
-        self.cursor: "Union[sqlite3.Cursor, None]" = None
+    sql_path: str = os.path.join(data_dir, "alpaca.db")
+    sqlite_con: "Union[sqlite3.Connection, None]" = None
+    cursor: "Union[sqlite3.Cursor, None]" = None
 
     def __enter__(self):
         """
@@ -94,13 +82,11 @@ class Instance:
     to interface with the database in a modular and extensible way.
     """
 
-    def __init__(self, sql_path: str):
-        self.sql_path = sql_path
-
+    def initialize():
         if os.path.exists(os.path.join(data_dir, "chats_test.db")) and not os.path.exists(os.path.join(data_dir, "alpaca.db")):
             shutil.move(os.path.join(data_dir, "chats_test.db"), os.path.join(data_dir, "alpaca.db"))
 
-        with SQLiteConnection(self.sql_path) as c:
+        with SQLiteConnection() as c:
             tables = {
                 "chat": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
@@ -157,15 +143,6 @@ class Instance:
                 columns_def = ", ".join([f"{col_name} {col_def}" for col_name, col_def in columns.items()])
                 c.cursor.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_def})")
 
-            # Ollama is available but there are no instances added
-            if not any(i.get("type") == "ollama:managed" for i in self.get_instances()) and shutil.which("ollama"):
-                self.insert_or_update_instance(instance_manager.ollama_managed({
-                    "id": generate_timestamped_uuid(),
-                    "name": "Alpaca",
-                    "url": "http://{}:11435".format("127.0.0.1" if sys.platform == "win32" else "0.0.0.0"),
-                    "pinned": True
-                }))
-
             # Remove stuff from previous versions (cleaning)
             try:
                 c.cursor.execute(
@@ -189,8 +166,8 @@ class Instance:
     ## CHATS ##
     ###########
 
-    def get_chats(self) -> list:
-        with SQLiteConnection(self.sql_path) as c:
+    def get_chats() -> list:
+        with SQLiteConnection() as c:
             chats = c.cursor.execute(
                 "SELECT chat.id, chat.name, MAX(message.date_time) AS \
                 latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id \
@@ -199,8 +176,8 @@ class Instance:
 
         return chats
 
-    def get_messages(self, chat) -> list:
-        with SQLiteConnection(self.sql_path) as c:
+    def get_messages(chat) -> list:
+        with SQLiteConnection() as c:
             messages = c.cursor.execute(
                 "SELECT id, role, model, date_time, content FROM message WHERE chat_id=?",
                 (chat.chat_id,),
@@ -208,8 +185,8 @@ class Instance:
 
         return messages
 
-    def get_attachments(self, message) -> list:
-        with SQLiteConnection(self.sql_path) as c:
+    def get_attachments(message) -> list:
+        with SQLiteConnection() as c:
             attachments = c.cursor.execute(
                 "SELECT id, type, name, content FROM attachment WHERE message_id=?",
                 (message.message_id,),
@@ -217,8 +194,8 @@ class Instance:
 
         return attachments
 
-    def export_db(self, chat, export_sql_path: str) -> None:
-        with SQLiteConnection(self.sql_path) as c:
+    def export_db(chat, export_sql_path: str) -> None:
+        with SQLiteConnection() as c:
             c.cursor.execute("ATTACH DATABASE ? AS export", (export_sql_path,))
             c.cursor.execute(
                 "CREATE TABLE export.chat AS SELECT * FROM chat WHERE id=?",
@@ -233,8 +210,8 @@ class Instance:
                 (chat.chat_id,),
             )
 
-    def insert_or_update_chat(self, chat) -> None:
-        with SQLiteConnection(self.sql_path) as c:
+    def insert_or_update_chat(chat) -> None:
+        with SQLiteConnection() as c:
             if c.cursor.execute(
                 "SELECT id FROM chat WHERE id=?", (chat.chat_id,)
             ).fetchone():
@@ -248,8 +225,8 @@ class Instance:
                     (chat.chat_id, chat.get_name()),
                 )
 
-    def delete_chat(self, chat) -> None:
-        with SQLiteConnection(self.sql_path) as c:
+    def delete_chat(chat) -> None:
+        with SQLiteConnection() as c:
             c.cursor.execute("DELETE FROM chat WHERE id=?", (chat.chat_id,))
 
             for message in c.cursor.execute(
@@ -263,8 +240,8 @@ class Instance:
                 "DELETE FROM message WHERE chat_id=?", (chat.chat_id,)
             )
 
-    def duplicate_chat(self, old_chat, new_chat) -> None:
-        with SQLiteConnection(self.sql_path) as c:
+    def duplicate_chat(old_chat, new_chat) -> None:
+        with SQLiteConnection() as c:
             c.cursor.execute(
                 "INSERT INTO chat (id, name) VALUES (?, ?)",
                 (new_chat.chat_id, new_chat.get_name()),
@@ -274,7 +251,7 @@ class Instance:
                 "SELECT id, role, model, date_time, content FROM message WHERE chat_id=?",
                 (old_chat.chat_id,),
             ).fetchall():
-                new_message_id = generate_timestamped_uuid()
+                new_message_id = generate_uuid()
 
                 c.cursor.execute(
                     "INSERT INTO message (id, chat_id, role, model, date_time, content) VALUES (?, ?, ?, ?, ?, ?)",
@@ -295,7 +272,7 @@ class Instance:
                     c.cursor.execute(
                         "INSERT INTO attachment (id, message_id, type, name, content) VALUES (?, ?, ?, ?, ?)",
                         (
-                            generate_timestamped_uuid(),
+                            generate_uuid(),
                             new_message_id,
                             attachment[0],
                             attachment[1],
@@ -303,8 +280,8 @@ class Instance:
                         ),
                     )
 
-    def import_chat(self, import_sql_path: str, chat_names: list) -> list:
-        with SQLiteConnection(self.sql_path) as c:
+    def import_chat(import_sql_path: str, chat_names: list) -> list:
+        with SQLiteConnection() as c:
             c.cursor.execute("ATTACH DATABASE ? AS import", (import_sql_path,))
             _chat_widgets = []
 
@@ -323,7 +300,7 @@ class Instance:
             for repeated_chat in c.cursor.execute(
                 "SELECT import.chat.id FROM import.chat JOIN chat dbchat ON import.chat.id = dbchat.id"
             ).fetchall():
-                new_id = generate_timestamped_uuid()
+                new_id = generate_uuid()
 
                 c.cursor.execute(
                     "UPDATE import.chat SET id=? WHERE id=?",
@@ -338,7 +315,7 @@ class Instance:
             for repeated_message in c.cursor.execute(
                 "SELECT import.message.id FROM import.message JOIN message dbmessage ON import.message.id = dbmessage.id"
             ).fetchall():
-                new_id = generate_timestamped_uuid()
+                new_id = generate_uuid()
 
                 c.cursor.execute(
                     "UPDATE import.attachment SET message_id=? WHERE message_id=?",
@@ -353,7 +330,7 @@ class Instance:
             for repeated_attachment in c.cursor.execute(
                 "SELECT import.attachment.id FROM import.attachment JOIN attachment dbattachment ON import.attachment.id = dbattachment.id"
             ).fetchall():
-                new_id = generate_timestamped_uuid()
+                new_id = generate_uuid()
 
                 c.cursor.execute(
                     "UPDATE import.attachment SET id=? WHERE id=?",
@@ -379,16 +356,10 @@ class Instance:
     ## MESSAGES ##
     ##############
 
-    def insert_or_update_message(
-        self, message, force_chat_id: str = None
-    ) -> None:
-        message_author = "user"
-        if message.bot:
-            message_author = "assistant"
-        if message.system:
-            message_author = "system"
+    def insert_or_update_message(message, force_chat_id: str = None) -> None:
+        message_author = ["user", "assistant", "system"][message.mode]
 
-        with SQLiteConnection(self.sql_path) as c:
+        with SQLiteConnection() as c:
             if c.cursor.execute(
                 "SELECT id FROM message WHERE id=?", (message.message_id,)
             ).fetchone():
@@ -398,12 +369,12 @@ class Instance:
                         (
                             force_chat_id
                             if force_chat_id
-                            else message.get_chat().chat_id
+                            else message.chat.chat_id
                         ),
                         message_author,
-                        message.model,
+                        message.get_model() or "",
                         message.dt.strftime("%Y/%m/%d %H:%M:%S"),
-                        message.text if message.text else "",
+                        message.get_content() or "",
                         message.message_id,
                     ),
                 )
@@ -415,17 +386,17 @@ class Instance:
                         (
                             force_chat_id
                             if force_chat_id
-                            else message.get_chat().chat_id
+                            else message.chat.chat_id
                         ),
                         message_author,
-                        message.model,
+                        message.get_model() or "",
                         message.dt.strftime("%Y/%m/%d %H:%M:%S"),
-                        message.text if message.text else "",
+                        message.get_content() or "",
                     ),
                 )
 
-    def delete_message(self, message) -> None:
-        with SQLiteConnection(self.sql_path) as c:
+    def delete_message(message) -> None:
+        with SQLiteConnection() as c:
             c.cursor.execute(
                 "DELETE FROM message WHERE id=?", (message.message_id,)
             )
@@ -434,25 +405,31 @@ class Instance:
                 (message.message_id,),
             )
 
-    def add_attachment(self, message, attachment) -> None:
-        with SQLiteConnection(self.sql_path) as c:
+    def add_attachment(message, attachment) -> None:
+        with SQLiteConnection() as c:
             c.cursor.execute(
                 "INSERT INTO attachment (id, message_id, type, name, content) VALUES (?, ?, ?, ?, ?)",
                 (
-                    generate_timestamped_uuid(),
+                    generate_uuid(),
                     message.message_id,
                     attachment.file_type,
-                    attachment.get_name(),
+                    attachment.file_name,
                     attachment.file_content,
                 ),
+            )
+
+    def delete_attachment(attachment) -> None:
+        with SQLiteConnection() as c:
+            c.cursor.execute(
+                "DELETE FROM attachment WHERE id=?", (attachment.get_name(),)
             )
 
     #################
     ## PREFERENCES ##
     #################
 
-    def insert_or_update_preferences(self, preferences: dict) -> None:
-        with SQLiteConnection(self.sql_path) as c:
+    def insert_or_update_preferences(preferences: dict) -> None:
+        with SQLiteConnection() as c:
             for preference_id, preference_value in preferences.items():
                 if c.cursor.execute(
                     "SELECT id FROM preferences WHERE id=?", (preference_id,)
@@ -475,8 +452,8 @@ class Instance:
                         ),
                     )
 
-    def get_preference(self, preference_name: str, default=None) -> object:
-        with SQLiteConnection(self.sql_path) as c:
+    def get_preference(preference_name: str, default=None) -> object:
+        with SQLiteConnection() as c:
             result = c.cursor.execute(
                 "SELECT value, type FROM preferences WHERE id=?",
                 (preference_name,),
@@ -495,8 +472,8 @@ class Instance:
 
         return default
 
-    def get_preferences(self) -> dict:
-        with SQLiteConnection(self.sql_path) as c:
+    def get_preferences() -> dict:
+        with SQLiteConnection() as c:
             result = c.cursor.execute(
                 "SELECT id, value, type FROM preferences"
             ).fetchall()
@@ -522,10 +499,8 @@ class Instance:
     ## MODEL ##
     ###########
 
-    def insert_or_update_model_picture(
-        self, model_id: str, picture_content: str
-    ) -> None:
-        with SQLiteConnection(self.sql_path) as c:
+    def insert_or_update_model_picture(model_id: str, picture_content: str) -> None:
+        with SQLiteConnection() as c:
             if c.cursor.execute(
                 "SELECT id FROM model WHERE id=?", (model_id,)
             ).fetchone():
@@ -540,26 +515,26 @@ class Instance:
                     (model_id, picture_content),
                 )
 
-    def remove_model_preferences(self, model_id: str) -> None:
-        with SQLiteConnection(self.sql_path) as c:
+    def remove_model_preferences(model_id: str) -> None:
+        with SQLiteConnection() as c:
             c.cursor.execute("DELETE FROM model_preferences WHERE id=?", (model_id))
 
-    def insert_or_update_model_picture(self, model_id: str, picture_content: str or None) -> None:
-        with SQLiteConnection(self.sql_path) as c:
+    def insert_or_update_model_picture(model_id: str, picture_content: str or None) -> None:
+        with SQLiteConnection() as c:
             if c.cursor.execute("SELECT id FROM model_preferences WHERE id=?", (model_id,)).fetchone():
                 c.cursor.execute("UPDATE model_preferences SET picture=? WHERE id=?", (picture_content, model_id))
             else:
                 c.cursor.execute("INSERT INTO model_preferences (id, picture) VALUES (?, ?)", (model_id, picture_content))
 
-    def insert_or_update_model_voice(self, model_id: str, voice_name: str or None) -> None:
-        with SQLiteConnection(self.sql_path) as c:
+    def insert_or_update_model_voice(model_id: str, voice_name: str or None) -> None:
+        with SQLiteConnection() as c:
             if c.cursor.execute("SELECT id FROM model_preferences WHERE id=?", (model_id,)).fetchone():
                 c.cursor.execute("UPDATE model_preferences SET voice=? WHERE id=?", (voice_name, model_id))
             else:
                 c.cursor.execute("INSERT INTO model_preferences (id, voice) VALUES (?, ?)", (model_id, voice_name))
 
-    def get_model_preferences(self, model_id: str) -> dict:
-        with SQLiteConnection(self.sql_path) as c:
+    def get_model_preferences(model_id: str) -> dict:
+        with SQLiteConnection() as c:
             row = c.cursor.execute("SELECT picture, voice FROM model_preferences WHERE id=?", (model_id,)).fetchone()
             if row:
                 return {
@@ -577,7 +552,7 @@ class Instance:
     ## Instances ##
     ###############
 
-    def get_instances(self) -> list:
+    def get_instances() -> list:
         columns = [
             "id",
             "name",
@@ -594,7 +569,7 @@ class Instance:
             "pinned",
         ]
 
-        with SQLiteConnection(self.sql_path) as c:
+        with SQLiteConnection() as c:
             result = c.cursor.execute(
                 "SELECT {} FROM instances".format(", ".join(columns))
             ).fetchall()
@@ -619,7 +594,7 @@ class Instance:
 
         return instances
 
-    def insert_or_update_instance(self, ins):
+    def insert_or_update_instance(ins):
         data = {
             "id": ins.instance_id,
             "name": ins.name,
@@ -636,7 +611,7 @@ class Instance:
             "pinned": ins.pinned,
         }
 
-        with SQLiteConnection(self.sql_path) as c:
+        with SQLiteConnection() as c:
             if c.cursor.execute(
                 "SELECT id FROM instances WHERE id=?", (data.get("id"),)
             ).fetchone():
@@ -657,8 +632,8 @@ class Instance:
                     values,
                 )
 
-    def delete_instance(self, instance_id: str):
-        with SQLiteConnection(self.sql_path) as c:
+    def delete_instance(instance_id: str):
+        with SQLiteConnection() as c:
             c.cursor.execute(
                 "DELETE FROM instances WHERE id=?", (instance_id,)
             )
@@ -667,8 +642,8 @@ class Instance:
     ## Tools ##
     ###########
 
-    def get_tool_parameters(self) -> dict:
-        with SQLiteConnection(self.sql_path) as c:
+    def get_tool_parameters() -> dict:
+        with SQLiteConnection() as c:
             result = c.cursor.execute(
                 "SELECT name, variables, activated FROM tool_parameters"
             ).fetchall()
@@ -683,8 +658,8 @@ class Instance:
 
         return tools
 
-    def insert_or_update_tool_parameters(self, tool_name:str, variables:dict, activated:bool):
-        with SQLiteConnection(self.sql_path) as c:
+    def insert_or_update_tool_parameters(tool_name:str, variables:dict, activated:bool):
+        with SQLiteConnection() as c:
             if c.cursor.execute(
                 "SELECT * FROM tool_parameters WHERE name=?", (tool_name,)
             ).fetchone():

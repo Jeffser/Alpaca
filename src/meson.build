@@ -18,7 +18,7 @@ conf.set('localedir', get_option('prefix') / get_option('localedir'))
 conf.set('pkgdatadir', pkgdatadir)
 
 configure_file(
-  input: 'alpaca.in',
+  input: 'alpaca.py.in',
   output: 'alpaca',
   configuration: conf,
   install: true,
@@ -36,27 +36,13 @@ configure_file(
 )
 
 alpaca_sources = [
-  '__init__.py',
   'main.py',
   'window.py',
   'constants.py',
-  'available_models.json',
-  'available_models_descriptions.py',
-  'internal.py',
-  'generic_actions.py',
-  'sql_manager.py',
-  'instance_manager.py',
-  'tool_manager.py'
-]
-
-custom_widgets = [
-  'custom_widgets/table_widget.py',
-  'custom_widgets/message_widget.py',
-  'custom_widgets/chat_widget.py',
-  'custom_widgets/terminal_widget.py',
-  'custom_widgets/dialog_widget.py',
-  'custom_widgets/model_manager_widget.py'
+  'ollama_models.py',
+  'sql_manager.py'
 ]
 
 install_data(alpaca_sources, install_dir: moduledir)
-install_data(custom_widgets, install_dir: moduledir / 'custom_widgets')
+
+subdir('widgets')

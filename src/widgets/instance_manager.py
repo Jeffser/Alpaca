@@ -6,13 +6,13 @@ Manages AI instances
 import gi
 from gi.repository import Adw, Gtk, GLib
 
-import openai, requests, json, logging, os, shutil, subprocess, threading, re, time
+import openai, requests, json, logging, os, shutil, subprocess, threading, re
 from pydantic import BaseModel
 
-from .constants import AlpacaFolders
-from .internal import source_dir, data_dir, cache_dir
-from .custom_widgets import dialog_widget
-from . import available_models_descriptions, tool_manager
+from ..ollama_models import OLLAMA_MODELS
+from . import dialog, tools
+from ..constants import data_dir, cache_dir
+from ..sql_manager import generate_uuid, Instance as SQL
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +25,7 @@ override_urls = {
 }
 
 # Base instance, don't use directly
-class base_instance:
+class BaseInstance:
     instance_id = None
     name = _('Instance')
     instance_url = None
@@ -42,48 +42,47 @@ class base_instance:
     limitations = ()
 
     def prepare_chat(self, bot_message):
-        chat = bot_message.get_chat()
-        chat.busy = True
-        if not chat.quick_chat:
-            window.chat_list_box.get_tab_by_name(chat.get_name()).spinner.set_visible(True)
-        chat.set_visible_child_name('content')
-        window.switch_send_stop_button(False)
-        if chat.regenerate_button:
-            chat.container.remove(chat.regenerate_button)
+        bot_message.chat.busy = True
+        if bot_message.chat.chat_id:
+            bot_message.chat.row.spinner.set_visible(True)
+            bot_message.get_root().switch_send_stop_button(False)
+        bot_message.chat.set_visible_child_name('content')
 
-        messages = chat.convert_to_ollama()[:list(chat.messages.values()).index(bot_message)]
-        return chat, messages
+        messages = bot_message.chat.convert_to_json()[:list(bot_message.chat.container).index(bot_message)]
+        return bot_message.chat, messages
 
     def generate_message(self, bot_message, model:str):
         chat, messages = self.prepare_chat(bot_message)
 
-        if not chat.quick_chat and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
+        if chat.chat_id and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
 
         self.generate_response(bot_message, chat, messages, model, None)
 
     def use_tools(self, bot_message, model:str):
         chat, messages = self.prepare_chat(bot_message)
+        if bot_message.options_button:
+            bot_message.options_button.set_active(False)
         bot_message.update_message({'add_css': 'dim-label'})
 
-        if not chat.quick_chat and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
+        if chat.chat_id and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
 
-        tools = tool_manager.get_enabled_tools()
+        available_tools = tools.get_enabled_tools(window.tool_listbox)
         tools_used = []
 
         try:
-            tool_manager.log_to_message(_("Selecting tool to use..."), bot_message, True)
+            tools.log_to_message(_("Selecting tool to use..."), bot_message, True)
             completion = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
-                tools=tools
+                tools=available_tools
             )
             if completion.choices[0] and completion.choices[0].message:
                 if completion.choices[0].message.tool_calls:
                     for call in completion.choices[0].message.tool_calls:
-                        tool_manager.log_to_message(_("Using {}").format(call.function.name), bot_message, True)
-                        response = tool_manager.run_tool(call.function.name, json.loads(call.function.arguments), messages, bot_message)
+                        tools.log_to_message(_("Using {}").format(call.function.name), bot_message, True)
+                        response = tools.run_tool(call.function.name, json.loads(call.function.arguments), messages, bot_message, window.listbox)
                         arguments = json.loads(call.function.arguments)
                         messages.append({
                             "role": "tool",
@@ -95,31 +94,37 @@ class base_instance:
                             "arguments": arguments,
                             "response": str(response)
                         })
-                        tool = tool_manager.get_tool(call.function.name)
+                        tool = tools.get_tool(call.function.name, window.tool_listbox)
                         if tool:
                             attachment = bot_message.add_attachment(
-                                tool.name,
-                                'tool',
-                                '# {}\n\n## Arguments:\n\n{}\n\n## Result:\n\n{}'.format(
+                                file_id = generate_uuid(),
+                                name = tool.name,
+                                attachment_type = 'tool',
+                                content = '# {}\n\n## Arguments:\n\n{}\n\n## Result:\n\n{}'.format(
                                     tool.name,
                                     '\n'.join(['- {}: {}'.format(k.replace('_', ' ').title(), v) for k, v in arguments.items()]),
                                     str(response)
                                 )
                             )
-                            window.sql_instance.add_attachment(bot_message, attachment)
+                            SQL.add_attachment(bot_message, attachment)
         except Exception as e:
-            dialog_widget.simple_error(_('Tool Error'), _('An error occurred while running tool'), e)
+            dialog.simple_error(
+                parent = bot_message.get_root(),
+                title = _('Tool Error'),
+                body = _('An error occurred while running tool'),
+                error_log = e
+            )
             logger.error(e)
 
-        tool_manager.log_to_message(_("Generating message..."), bot_message, True)
+        tools.log_to_message(_("Generating message..."), bot_message, True)
         bot_message.update_message({'remove_css': 'dim-label'})
-        self.generate_response(bot_message, chat, messages, model, tools if len(tools_used) > 0 else None)
+        self.generate_response(bot_message, chat, messages, model, tools_used if len(tools_used) > 0 else None)
 
-    def generate_response(self, bot_message, chat, messages:list, model:str, tools:list):
-        if not bot_message.spinner:
-            bot_message.spinner = Adw.Spinner()
-            bot_message.container.append(bot_message.spinner)
+    def generate_response(self, bot_message, chat, messages:list, model:str, tools_used:list):
+        if bot_message.options_button:
+            bot_message.options_button.set_active(False)
 
+        GLib.idle_add(bot_message.block_container.get_generating_block) # Generate generating text block
         if 'no-system-messages' in self.limitations:
             for i in range(len(messages)):
                 if messages[i].get('role') == 'system':
@@ -139,10 +144,11 @@ class base_instance:
             "temperature": self.temperature,
             "stream": True
         }
+
         if self.max_tokens:
             params["max_tokens"] = self.max_tokens
-        if tools:
-            params["tools"] = tools
+        if tools_used:
+            params["tools"] = tools_used
             params["tool_choice"] = "none"
 
         if self.seed != 0 and 'no-seed' in self.limitations:
@@ -159,13 +165,18 @@ class base_instance:
                 if not chat.busy:
                     break
         except Exception as e:
-            dialog_widget.simple_error(_('Instance Error'), _('Message generation failed'), e)
+            dialog.simple_error(
+                parent = bot_message.get_root(),
+                title = _('Instance Error'),
+                body = _('Message generation failed'),
+                error_log = e
+            )
             logger.error(e)
             window.instance_listbox.unselect_all()
         bot_message.update_message({"done": True})
 
     def generate_chat_title(self, chat, prompt:str):
-        class chat_title(BaseModel): #Pydantic
+        class ChatTitle(BaseModel): #Pydantic
             title:str
             emoji:str = ""
 
@@ -184,7 +195,7 @@ class base_instance:
         }
         new_chat_title = chat.get_name()
         try:
-            completion = self.client.beta.chat.completions.parse(**params, response_format=chat_title)
+            completion = self.client.beta.chat.completions.parse(**params, response_format=ChatTitle)
             response = completion.choices[0].message
             if response.parsed:
                 emoji = response.parsed.emoji if len(response.parsed.emoji) == 1 else '💬'
@@ -196,7 +207,7 @@ class base_instance:
             except Exception as e:
                 logger.error(e)
         new_chat_title = re.sub(r'<think>.*?</think>', '', new_chat_title).strip()
-        window.chat_list_box.rename_chat(chat.get_name(), new_chat_title)
+        chat.rename(new_chat_title)
 
     def get_default_model(self):
         if not self.default_model:
@@ -336,7 +347,11 @@ class base_instance:
                 icon_name='inode-directory-symbolic',
                 valign=3
             )
-            open_dir_button.connect('clicked', lambda button, row=model_directory_el: dialog_widget.simple_directory(lambda res, row=model_directory_el: row.set_subtitle(res.get_path())))
+            open_dir_button.connect('clicked', lambda button, row=model_directory_el: dialog.simple_directory(
+                    parent = open_dir.get_root(),#TODO TEST
+                    callback = lambda res, row=model_directory_el: row.set_subtitle(res.get_path())
+                )
+            )
             model_directory_el.add_suffix(open_dir_button)
             groups[-1].add(model_directory_el)
 
@@ -393,8 +408,8 @@ class base_instance:
                         save_functions.get(el.get_name())(value)
 
             if not self.instance_id:
-                self.instance_id = window.generate_uuid()
-            window.sql_instance.insert_or_update_instance(self)
+                self.instance_id = generate_uuid()
+            SQL.insert_or_update_instance(self)
             update_instance_list()
             window.main_navigation_view.pop_to_tag('instance_manager')
 
@@ -419,7 +434,7 @@ class base_instance:
         return pp
 
 # Fallback for when there are no instances
-class empty:
+class Empty:
     instance_id = None
     name = 'Fallback Instance'
     instance_type = 'empty'
@@ -441,7 +456,7 @@ class empty:
     def get_default_model(self) -> str:
         return ''
 
-class base_ollama(base_instance):
+class BaseOllama(BaseInstance):
     api_key = 'ollama'
     process = None
 
@@ -459,17 +474,26 @@ class base_ollama(base_instance):
             if response.status_code == 200:
                 return json.loads(response.text).get('models')
         except Exception as e:
-            dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve added models'), str(e))
+            dialog.simple_error(
+                parent = window, # TODO replace window with root, also in get_available_models
+                title = _('Instance Error'),
+                body = _('Could not retrieve added models'),
+                error_log = e
+            )
             logger.error(e)
             window.instance_listbox.unselect_all()
         return []
 
     def get_available_models(self) -> dict:
         try:
-            with open(os.path.join(source_dir, 'available_models.json'), 'r', encoding="utf-8") as f:
-                return json.load(f)
+            return OLLAMA_MODELS
         except Exception as e:
-            dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve available models'), e)
+            dialog.simple_error(
+                parent = window,
+                title = _('Instance Error'),
+                body = _('Could not retrieve available models'),
+                error_log = e
+            )
             logger.error(e)
         return {}
 
@@ -534,7 +558,7 @@ class base_ollama(base_instance):
             return False
 
 # Local ollama instance equivalent
-class ollama_managed(base_ollama):
+class OllamaManaged(BaseOllama):
     instance_type = 'ollama:managed'
     instance_type_display = _('Ollama (Managed)')
     instance_url = 'http://0.0.0.0:11434'
@@ -599,11 +623,11 @@ class ollama_managed(base_ollama):
     def start(self):
         self.stop()
         if shutil.which('ollama'):
-            if not os.path.isdir(os.path.join(cache_dir, AlpacaFolders.ollama_temp_ext)):
-                os.mkdir(os.path.join(cache_dir, AlpacaFolders.ollama_temp_ext))
+            if not os.path.isdir(os.path.join(cache_dir, 'tmp', 'ollama')):
+                os.mkdir(os.path.join(cache_dir, 'tmp', 'ollama'))
             params = self.overrides.copy()
             params["OLLAMA_HOST"] = self.instance_url
-            params["TMPDIR"] = os.path.join(cache_dir, AlpacaFolders.ollama_temp_ext)
+            params["TMPDIR"] = os.path.join(cache_dir, 'tmp', 'ollama')
             params["OLLAMA_MODELS"] = self.model_directory
             self.process = subprocess.Popen(["ollama", "serve"], env={**os.environ, **params}, stderr=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
             threading.Thread(target=self.log_output, args=(self.process.stdout,)).start()
@@ -615,7 +639,12 @@ class ollama_managed(base_ollama):
                 v_str = subprocess.check_output("ollama -v", shell=True).decode('utf-8')
                 logger.info(v_str.split('\n')[1].strip('Warning: ').strip())
             except Exception as e:
-                dialog_widget.simple_error(_('Instance Error'), _('Managed Ollama instance failed to start'), e)
+                dialog.simple_error(
+                    parent = window,
+                    title = _('Instance Error'),
+                    body = _('Managed Ollama instance failed to start'),
+                    error_log = e
+                )
                 logger.error(e)
                 window.instance_listbox.unselect_all()
             self.log_summary = (_("Integrated Ollama instance is running"), ['dim-label', 'success'])
@@ -624,7 +653,14 @@ class ollama_managed(base_ollama):
         suffix_button = None
         if self.instance_id:
             suffix_button = Gtk.Button(icon_name='terminal-symbolic', valign=1, css_classes=['flat'], tooltip_text=_('Ollama Log'))
-            suffix_button.connect('clicked', lambda button: dialog_widget.simple_log(_('Ollama Log'), self.log_summary[0], self.log_summary[1], '\n'.join(self.log_raw.split('\n')[-50:])))
+            suffix_button.connect('clicked', lambda button: dialog.simple_log(
+                    parent = window,
+                    title = _('Ollama Log'),
+                    summary_text = self.log_summary[0],
+                    summary_classes = self.log_summary[1],
+                    log_text = '\n'.join(self.log_raw.split('\n')[-50:])
+                )
+            )
         arguments = {
             'elements': ('name', 'port', 'temperature', 'seed', 'overrides', 'model_directory'),
             'suffix_element': suffix_button
@@ -632,7 +668,7 @@ class ollama_managed(base_ollama):
         return self.generate_preferences_page(**arguments)
 
 # Remote Connection Equivalent
-class ollama(base_ollama):
+class Ollama(BaseOllama):
     instance_type = 'ollama'
     instance_type_display = 'Ollama'
     instance_url = 'http://0.0.0.0:11434'
@@ -660,7 +696,7 @@ class ollama(base_ollama):
         }
         return self.generate_preferences_page(**arguments)
 
-class base_openai(base_instance):
+class BaseOpenAI(BaseInstance):
     max_tokens = 2048
     api_key = ''
 
@@ -687,7 +723,12 @@ class base_openai(base_instance):
         try:
             return [{'name': m.id} for m in self.client.models.list() if 'whisper' not in m.id.lower()]
         except Exception as e:
-            dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve added models'), str(e))
+            dialog.simple_error(
+                parent = window,
+                title = _('Instance Error'),
+                body = _('Could not retrieve added models'),
+                error_log = e
+            )
             logger.error(e)
             window.instance_listbox.unselect_all()
             return []
@@ -708,12 +749,12 @@ class base_openai(base_instance):
             arguments['elements'] = arguments['elements'] + ('url',)
         return self.generate_preferences_page(**arguments)
 
-class chatgpt(base_openai):
+class ChatGPT(BaseOpenAI):
     instance_type = 'chatgpt'
     instance_type_display = 'OpenAI ChatGPT'
     instance_url = 'https://api.openai.com/v1/'
 
-class gemini(base_openai):
+class Gemini(BaseOpenAI):
     instance_type = 'gemini'
     instance_type_display = 'Google Gemini'
     instance_url = 'https://generativelanguage.googleapis.com/v1beta/openai/'
@@ -729,7 +770,12 @@ class gemini(base_openai):
                     models.append(model)
             return models
         except Exception as e:
-            dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve added models'), str(e))
+            dialog.simple_error(
+                parent = window,
+                title = _('Instance Error'),
+                body = _('Could not retrieve added models'),
+                error_log = e
+            )
             logger.error(e)
             window.instance_listbox.unselect_all()
         return []
@@ -744,7 +790,7 @@ class gemini(base_openai):
             logger.error(e)
         return {}
 
-class together(base_openai):
+class Together(BaseOpenAI):
     instance_type = 'together'
     instance_type_display = 'Together AI'
     instance_url = 'https://api.together.xyz/v1/'
@@ -758,35 +804,40 @@ class together(base_openai):
                     models.append({'name': model.get('id'), 'display_name': model.get('display_name')})
             return models
         except Exception as e:
-            dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve added models'), str(e))
+            dialog.simple_error(
+                parent = window,
+                title = _('Instance Error'),
+                body = _('Could not retrieve added models'),
+                error_log = e
+            )
             logger.error(e)
             window.instance_listbox.unselect_all()
 
-class venice(base_openai):
+class Venice(BaseOpenAI):
     instance_type = 'venice'
     instance_type_display = 'Venice'
     instance_url = 'https://api.venice.ai/api/v1/'
     limitations = ('no-system-messages', 'no-seed')
 
-class deepseek(base_openai):
+class Deepseek(BaseOpenAI):
     instance_type = 'deepseek'
     instance_type_display = 'Deepseek'
     instance_url = 'https://api.deepseek.com/v1/'
     limitations = ('text-only', 'no-seed')
 
-class groq(base_openai):
+class Groq(BaseOpenAI):
     instance_type = 'groq'
     instance_type_display = 'Groq Cloud'
     instance_url = 'https://api.groq.com/openai/v1'
     limitations = ('text-only')
 
-class anthropic(base_openai):
+class Anthropic(BaseOpenAI):
     instance_type = 'anthropic'
     instance_type_display = 'Anthropic'
     instance_url = 'https://api.anthropic.com/v1/'
     limitations = ('no-system-messages')
 
-class openrouter(base_openai):
+class OpenRouter(BaseOpenAI):
     instance_type = 'openrouter'
     instance_type_display = 'OpenRouter AI'
     instance_url = 'https://openrouter.ai/api/v1/'
@@ -800,12 +851,17 @@ class openrouter(base_openai):
                     models.append({'name': model.get('id'), 'display_name': model.get('name')})
             return models
         except Exception as e:
-            dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve models'), str(e))
+            dialog.simple_error(
+                parent = window,
+                title = _('Instance Error'),
+                body = _('Could not retrieve models'),
+                error_log = e
+            )
             logger.error(e)
             window.instance_listbox.unselect_all()
             return []
 
-class fireworks(base_openai):
+class Fireworks(BaseOpenAI):
     instance_type = 'fireworks'
     instance_type_display = 'Fireworks AI'
     instance_url = 'https://api.fireworks.ai/inference/v1/'
@@ -820,12 +876,17 @@ class fireworks(base_openai):
                     models.append({'name': model.get('id'), 'display_name': model.get('name')})
             return models
         except Exception as e:
-            dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve models'), str(e))
+            dialog.simple_error(
+                parent = window,
+                title = _('Instance Error'),
+                body = _('Could not retrieve models'),
+                error_log = e
+            )
             logger.error(e)
             window.instance_listbox.unselect_all()
             return []
 
-class lambda_labs(base_openai):
+class LambdaLabs(BaseOpenAI):
     instance_type = 'lambda_labs'
     instance_type_display = 'Lambda Labs'
     instance_url = 'https://api.lambdalabs.com/v1/'
@@ -833,7 +894,7 @@ class lambda_labs(base_openai):
 
     def get_local_models(self) -> list:
         try:
-            response = requests.get('https://api.lambdalabs.com/v1/models', 
+            response = requests.get('https://api.lambdalabs.com/v1/models',
                                   headers={'Authorization': f'Bearer {self.api_key}'})
             models = []
             for model in response.json().get('data', []):
@@ -841,24 +902,29 @@ class lambda_labs(base_openai):
                     models.append({'name': model.get('id'), 'display_name': model.get('name')})
             return models
         except Exception as e:
-            dialog_widget.simple_error(_('Instance Error'), _('Could not retrieve models'), str(e))
+            dialog.simple_error(
+                parent = window,
+                title = _('Instance Error'),
+                body = _('Could not retrieve models'),
+                error_log = e
+            )
             logger.error(e)
             window.instance_listbox.unselect_all()
             return []
 
-class cerebras(base_openai):
+class Cerebras(BaseOpenAI):
     instance_type = 'cerebras'
     instance_type_display = 'Cerebras AI'
     instance_url = 'https://api.cerebras.ai/v1/'
     description = _('Cerebras AI cloud inference API')
 
-class klusterai(base_openai):
+class Klusterai(BaseOpenAI):
     instance_type = 'klusterai'
     instance_type_display = 'Kluster AI'
     instance_url = 'https://api.kluster.ai/v1/'
     description = _('Kluster AI cloud inference API')
 
-class generic_openai(base_openai):
+class GenericOpenAI(BaseOpenAI):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
     description = _('AI instance compatible with OpenAI library')
@@ -867,7 +933,7 @@ class generic_openai(base_openai):
         self.instance_url = data.get('url', self.instance_url)
         super().__init__(data)
 
-class instance_row(Adw.ActionRow):
+class InstanceRow(Adw.ActionRow):
     __gtype_name__ = 'AlpacaInstanceRow'
 
     def __init__(self, instance):
@@ -883,9 +949,17 @@ class instance_row(Adw.ActionRow):
                 valign=3,
                 css_classes=['destructive-action', 'flat']
             )
-            remove_button.connect('clicked', lambda button: dialog_widget.simple(_('Remove Instance?'), _('Are you sure you want to remove this instance?'), self.remove, _('Remove'), 'destructive'))
+            remove_button.connect('clicked', lambda button: dialog.simple(
+                    parent = self.get_root(),
+                    heading = _('Remove Instance?'),
+                    body = _('Are you sure you want to remove this instance?'),
+                    callback = self.remove,
+                    button_name = _('Remove'),
+                    button_appearance = 'destructive'
+                )
+            )
             self.add_suffix(remove_button)
-        if not isinstance(self.instance, empty):
+        if not isinstance(self.instance, Empty):
             edit_button = Gtk.Button(
                 icon_name='edit-symbolic',
                 valign=3,
@@ -901,14 +975,14 @@ class instance_row(Adw.ActionRow):
         window.main_navigation_view.push(Adw.NavigationPage(title=_('Edit Instance'), tag='instance', child=tbv))
 
     def remove(self):
-        window.sql_instance.delete_instance(self.instance.instance_id)
+        SQL.delete_instance(self.instance.instance_id)
         update_instance_list()
 
 def update_instance_list():
     window.instance_listbox.remove_all()
     window.instance_listbox.set_selection_mode(0)
-    instances = window.sql_instance.get_instances()
-    selected_instance = window.sql_instance.get_preference('selected_instance')
+    instances = SQL.get_instances()
+    selected_instance = SQL.get_preference('selected_instance')
     instance_dictionary = {i.instance_type: i for i in ready_instances}
     if len(instances) > 0:
         window.instance_manager_stack.set_visible_child_name('content')
@@ -918,7 +992,7 @@ def update_instance_list():
             if ins.get('max_tokens') == -1:
                 ins['max_tokens'] = None
             if ins.get('type') in list(instance_dictionary.keys()) and (ins.get('type') != 'ollama:managed' or shutil.which('ollama')):
-                row = instance_row(instance_dictionary.get(ins.get('type'))(ins))
+                row = InstanceRow(instance_dictionary.get(ins.get('type'))(ins))
                 window.instance_listbox.append(row)
                 if selected_instance == row.instance.instance_id:
                     row_to_select = row
@@ -928,11 +1002,11 @@ def update_instance_list():
             window.instance_listbox.select_row(window.instance_listbox.get_row_at_index(0))
     if len(list(window.instance_listbox)) == 0:
         window.instance_manager_stack.set_visible_child_name('no-instances')
-        row = instance_row(empty())
+        row = InstanceRow(Empty())
         window.instance_listbox.append(row)
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [ollama_managed, ollama, chatgpt, gemini, together, venice, deepseek, openrouter, anthropic, groq, fireworks, lambda_labs, cerebras, klusterai, generic_openai]
+ready_instances = [OllamaManaged, Ollama, ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Fireworks, LambdaLabs, Cerebras, Klusterai, GenericOpenAI]
 
 

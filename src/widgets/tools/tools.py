@@ -1,19 +1,17 @@
-# tool_manager.py
+# tools.py
 
-import logging, json, os, tempfile, shutil
-logger = logging.getLogger(__name__)
+from gi.repository import Adw, Gtk
 
-import datetime, time, random, threading, requests
+import datetime, time, random, requests, json, os
 from html2text import html2text
 
-from gi.repository import Adw, Gtk, GLib
+from gi.repository import Adw
 
-from .custom_widgets import terminal_widget
-from .internal import data_dir
+from .. import terminal, attachments
+from ...constants import data_dir
+from ...sql_manager import generate_uuid, Instance as SQL
 
-window = None
-
-class tool(Adw.ActionRow):
+class Base(Adw.ActionRow):
     __gtype_name__ = 'AlpacaToolRow'
 
     variables = {}
@@ -35,7 +33,7 @@ class tool(Adw.ActionRow):
         self.add_suffix(self.enable_switch)
 
     def enabled_changed(self):
-        window.sql_instance.insert_or_update_tool_parameters(self.tool_metadata.get('name'), self.extract_variables_for_sql(), self.is_enabled())
+        SQL.insert_or_update_tool_parameters(self.tool_metadata.get('name'), self.extract_variables_for_sql(), self.is_enabled())
 
     def is_enabled(self) -> bool:
         return self.enable_switch.get_active()
@@ -62,7 +60,7 @@ class tool(Adw.ActionRow):
                 elif isinstance(v, Adw.SwitchRow):
                     self.variables[v.get_name()]['value'] = v.get_active()
 
-        window.sql_instance.insert_or_update_tool_parameters(self.name, self.extract_variables_for_sql(), self.is_enabled())
+        SQL.insert_or_update_tool_parameters(self.name, self.extract_variables_for_sql(), self.is_enabled())
         window.main_navigation_view.pop()
 
     def show_tool_page(self):
@@ -150,7 +148,16 @@ class tool(Adw.ActionRow):
         page_widget.set_content(tool_page)
         window.main_navigation_view.push(Adw.NavigationPage.new(child=page_widget, title=self.name))
 
-class get_current_datetime(tool):
+    def attach_online_image(self, bot_message, image_title:str, image_url:str):
+        attachment = bot_message.add_attachment(
+            file_id = generate_uuid(),
+            name = image_title,
+            attachment_type = 'image',
+            content = attachments.extract_online_image(image_url, 640)
+        )
+        SQL.add_attachment(bot_message, attachment)
+
+class GetCurrentDatetime(Base):
     tool_metadata = {
         "name": "get_current_datetime",
         "description": "Gets the current date and/or time.",
@@ -185,11 +192,10 @@ class get_current_datetime(tool):
         }
         type_to_get = arguments.get("type", "date and time")
         format_to_get = formats.get(arguments.get("type", "date and time"), "%b %d %Y, %H:%M %p")
-        log_to_message('Getting {} using {} format...'.format(type_to_get, format_to_get), bot_message, True)
         current_datetime = datetime.datetime.now().strftime(format_to_get)
         return current_datetime
 
-class get_recipe_by_name(tool):
+class GetRecipeByName(Base):
     tool_metadata = {
         "name": "get_recipe_by_name",
         "description": "Gets the recipe of a meal in JSON format by its name",
@@ -219,18 +225,28 @@ class get_recipe_by_name(tool):
                 meals = response.json().get('meals', [])
                 if len(meals) > 0:
                     meal = meals[0]
-                    attach_online_image(bot_message, meal.get('strMeal', 'Meal'), meal.get('strMealThumb'))
+                    self.attach_online_image(bot_message, meal.get('strMeal', 'Meal'), meal.get('strMealThumb'))
                     if meal.get("strYoutube"):
-                        attachment = bot_message.add_attachment(_("YouTube Video"), "link", meal.get("strYoutube"))
-                        window.sql_instance.add_attachment(bot_message, attachment)
+                        attachment = bot_message.add_attachment(
+                            file_id = generate_uuid(),
+                            name = _("YouTube Video"),
+                            attachment_type = "link",
+                            content = meal.get("strYoutube")
+                        )
+                        SQL.add_attachment(bot_message, attachment)
                     if meal.get("strSource"):
-                        attachment = bot_message.add_attachment(_("Source"), "link", meal.get("strSource"))
-                        window.sql_instance.add_attachment(bot_message, attachment)
+                        attachment = bot_message.add_attachment(
+                            file_id = generate_uuid(),
+                            name = _("Source"),
+                            attachment_type = "link",
+                            content = meal.get("strSource")
+                        )
+                        SQL.add_attachment(bot_message, attachment)
                     return json.dumps(meal, indent=2)
                 else:
                     return "{'error': '404: Not Found'}"
 
-class get_recipes_by_category(tool):
+class GetRecipesByCategory(Base):
     tool_metadata = {
         "name": "get_recipes_by_category",
         "description": "Gets a list of food recipes names filtered by category",
@@ -276,16 +292,28 @@ class get_recipes_by_category(tool):
                 response2 = requests.get('www.themealdb.com/api/json/v1/1/lookup.php?i={}'.format(random.choice(data).get('id')))
                 if response2.json().get("meals", [False])[0]:
                     data = response2.json().get("meals")[0]
-                    attach_online_image(bot_message, data.get('strMeal', 'Meal'), data.get('strMealThumb'))
+                    self.attach_online_image(bot_message, data.get('strMeal', 'Meal'), data.get('strMealThumb'))
                     if meal.get("strYoutube"):
-                        attachment = bot_message.add_attachment(_("YouTube Video"), "link", meal.get("strYoutube"))
-                        window.sql_instance.add_attachment(bot_message, attachment)
+                        attachment = bot_message.add_attachment(
+                            file_id = generate_uuid(),
+                            name = _("YouTube Video"),
+                            attachment_type = "link",
+                            content = meal.get("strYoutube")
+                        )
+
+                        SQL.add_attachment(bot_message, attachment)
                     if meal.get("strSource"):
-                        attachment = bot_message.add_attachment(_("Source"), "link", meal.get("strSource"))
-                        window.sql_instance.add_attachment(bot_message, attachment)
+                        attachment = bot_message.add_attachment(
+                            file_id = generate_uuid(),
+                            name = _("Source"),
+                            attachment_type = "link",
+                            content = meal.get("strSource")
+                        )
+
+                        SQL.add_attachment(bot_message, attachment)
             return '\n'.join(data)
 
-class extract_wikipedia(tool):
+class ExtractWikipedia(Base):
     tool_metadata = {
         "name": "extract_wikipedia",
         "description": "Extract an article from Wikipedia from it's title",
@@ -327,7 +355,7 @@ class extract_wikipedia(tool):
 
         return '\n\n'.join(result_md)
 
-class online_search(tool):
+class OnlineSearch(Base):
     tool_metadata = {
         "name": "online_search",
         "description": "Search for a term online using DuckDuckGo returning results",
@@ -362,14 +390,19 @@ class online_search(tool):
         ]
 
         if data.get("AbstractURL"):
-            attachment = bot_message.add_attachment(data.get("AbstractSource", _("Abstract Source")), "link", data.get("AbstractURL"))
-            window.sql_instance.add_attachment(bot_message, attachment)
+            attachment = bot_message.add_attachment(
+                file_id = generate_uuid(),
+                name = data.get("AbstractSource", _("Abstract Source")),
+                attachment_type = "link",
+                content = data.get("AbstractURL")
+            )
+            SQL.add_attachment(bot_message, attachment)
 
         if data.get("AbstractText"):
             result_md.append(data.get("AbstractText"))
 
         if data.get("Image"):
-            attach_online_image(bot_message, data.get("Heading", "Web Result Image"), "https://duckduckgo.com{}".format(data.get("Image")))
+            self.attach_online_image(bot_message, data.get("Heading", "Web Result Image"), "https://duckduckgo.com{}".format(data.get("Image")))
 
         if data.get("Infobox") and len(data.get("Infobox", {}).get("content")) > 0:
             info_block = ""
@@ -381,8 +414,13 @@ class online_search(tool):
                 result_md.append(info_block)
 
         if data.get("OfficialWebsite"):
-            attachment = bot_message.add_attachment(_("Official Website"), "link", data.get("OfficialWebsite"))
-            window.sql_instance.add_attachment(bot_message, attachment)
+            attachment = bot_message.add_attachment(
+                file_id = generate_uuid(),
+                name = _("Official Website"),
+                attachment_type = "link",
+                content = data.get("OfficialWebsite")
+            )
+            SQL.add_attachment(bot_message, attachment)
 
         if len(result_md) == 1 and len(data.get("RelatedTopics", [])) > 0:
             result_md.append("No direct results were found but there are some related topics.")
@@ -405,7 +443,7 @@ class online_search(tool):
 
         return '\n\n'.join(result_md)
 
-class run_command(tool):
+class RunCommand(Base):
     tool_metadata = {
         "name": "run_command",
         "description": "Request permission to run a command in a terminal returning it's result",
@@ -475,13 +513,14 @@ class run_command(tool):
             )
         ]
 
-        window.terminal_dialog.present(window)
-        GLib.idle_add(terminal_widget.run_terminal, {self.name: {
-            'language': 'ssh',
-            'content': ';'.join(commands)
-        }}, self.get_root())
+        terminal_dialog = terminal.TerminalDialog()
+        terminal_dialog.present(self.get_root())
+        terminal_dialog.run(
+            code_language='ssh',
+            file_content=';'.join(commands)
+        )
 
-        while isinstance(window.get_visible_dialog(), Adw.Dialog):
+        while isinstance(self.get_root().get_visible_dialog(), terminal.TerminalDialog):
             time.sleep(1)
 
         command_result = '(No Output)'
@@ -490,47 +529,3 @@ class run_command(tool):
                 command_result = f.read()
 
         return '```\n{}\n```'.format(command_result)
-
-available_tools = [get_current_datetime, get_recipes_by_category, get_recipe_by_name, extract_wikipedia, online_search, run_command]
-
-def update_available_tools():
-    tools_parameters = window.sql_instance.get_tool_parameters()
-    for ac in available_tools:
-        tool_parameters = tools_parameters.get(ac.tool_metadata.get('name'), {})
-        tool_element = ac(tool_parameters.get('variables', {}), tool_parameters.get('activated', False))
-        window.tool_listbox.prepend(tool_element)
-
-def get_enabled_tools() -> list:
-    tools = []
-    for ac in list(window.tool_listbox):
-        if ac.is_enabled():
-            tools.append(ac.get_tool())
-    return tools
-
-def get_tool(tool_name:str):
-    tools = [a for a in list(window.tool_listbox) if a.tool_metadata.get('name') == tool_name]
-    if tools:
-        return tools[0]
-
-def run_tool(tool_name:str, arguments:dict, messages:list, bot_message):
-    tool = get_tool(tool_name)
-    if tool:
-        response = tool.run(arguments, messages, bot_message)
-        return response
-
-def log_to_message(text:str, bot_message, animate:bool):
-    for s in text.split(' '):
-        bot_message.update_message({"content": '{} '.format(s)})
-        if animate:
-            time.sleep(round(random.random()/4, 2))
-    bot_message.update_message({"content": "\n"})
-
-def attach_online_image(bot_message, image_title:str, image_url:str):
-    image_response = requests.get(image_url, stream=True)
-    if image_response.status_code == 200:
-        with tempfile.NamedTemporaryFile(delete=True, suffix='.jpg') as tmp_file:
-            image_response.raw.decode_content = True
-            shutil.copyfileobj(image_response.raw, tmp_file)
-            raw_b64 = window.get_content_of_file(tmp_file.name, 'image')
-            attachment = bot_message.add_attachment(image_title, 'image', raw_b64)
-            window.sql_instance.add_attachment(bot_message, attachment)
