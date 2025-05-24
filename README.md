@@ -15,6 +15,9 @@
 > [!IMPORTANT]
 > Please be aware that [GNOME Code of Conduct](https://conduct.gnome.org) applies to Alpaca before interacting with this repository.
 
+> [!WARNING]
+> AI generated issues and PRs will be denied, repeated offense will result in a ban from the repository, AI can be a useful tool but I don't want Alpaca to be vibe-developed, thanks.
+
 ## Features!
 
 - Talk to multiple models in the same conversation
