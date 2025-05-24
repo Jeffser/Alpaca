@@ -728,17 +728,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
             current_chat = self.chat_list_box.get_current_chat()
         if current_chat:
             try:
-                for key, message in current_chat.messages.items():
-                    if message and message.text:
-                        message.set_visible(re.search(search_term, message.text, re.IGNORECASE))
-                        for block in message.content_children:
-                            if isinstance(block, Widgets.message.text_block):
-                                if search_term:
-                                    highlighted_text = re.sub(f"({re.escape(search_term)})", r"<span background='yellow' bgalpha='30%'>\1</span>", block.get_text(),flags=re.IGNORECASE)
-                                    block.set_markup(highlighted_text)
-                                else:
-                                    block.set_markup(block.get_text())
+                for message in list(current_chat.container):
+                    if message:
+                        content = message.get_content()
+                        if content:
+                            message.set_visible(re.search(search_term, content, re.IGNORECASE))
+                            for block in list(message.block_container):
+                                if isinstance(block, Widgets.blocks.text.Text):
+                                    if search_term:
+                                        highlighted_text = re.sub(f"({re.escape(search_term)})", r"<span background='yellow' bgalpha='30%'>\1</span>", block.get_content(),flags=re.IGNORECASE)
+                                        block.set_markup(highlighted_text)
+                                    else:
+                                        block.set_content(block.get_content())
             except Exception as e:
+                print(e)
                 pass
 
     def convert_model_name(self, name:str, mode:int): # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag   |   mode=2 name:tag -> name, tag
