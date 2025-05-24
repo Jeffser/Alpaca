@@ -103,8 +103,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     file_filter_db = Gtk.Template.Child()
     file_filter_gguf = Gtk.Template.Child()
-    file_filter_image = Gtk.FileFilter()
-    file_filter_image.add_pixbuf_formats()
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = None
@@ -356,9 +354,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def model_creator_load_profile_picture(self, button):
+        file_filter = Gtk.FileFilter()
+        file_filter.add_pixbuf_formats()
         Widgets.dialog.simple_file(
             parent = button.get_root(),
-            file_filters = [self.file_filter_image],
+            file_filters = [file_filter],
             callback = lambda file: self.model_creator_profile_picture.set_subtitle(file.get_path())
         )
 
@@ -1182,7 +1182,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             file_filters.append(ff)
         if Widgets.model_manager.get_selected_model().get_vision():
             file_filters[0].add_pixbuf_formats()
-            file_filters.append(self.file_filter_image)
+            file_filter = Gtk.FileFilter()
+            file_filter.add_pixbuf_formats()
+            file_filters.append(file_filter)
         Widgets.dialog.simple_file(
             parent = self,
             file_filters = file_filters,

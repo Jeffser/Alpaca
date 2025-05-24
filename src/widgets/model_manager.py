@@ -632,12 +632,15 @@ class LocalModel(Gtk.Box):
             threading.Thread(target=window.chat_list_box.get_current_chat().update_profile_pictures()).start()
 
         if self.data['profile_picture']:
+            file_filter = Gtk.FileFilter()
+            file_filter.add_pixbuf_formats()
+
             options = {
                 _('Cancel'): {},
                 _('Remove'): {'callback': remove_profile_picture, 'appearance': 'destructive'},
                 _('Change'): {'callback': lambda: dialog.simple_file(
                     parent = self.get_root(),
-                    file_filters = [window.file_filter_image], #TODO replace with proper filter
+                    file_filters = [file_filter],
                     callback = set_profile_picture
                 ), 'appearance': 'suggested', 'default': True},
             }
@@ -649,9 +652,12 @@ class LocalModel(Gtk.Box):
                 options = options
             ).show(self.get_root())
         else:
+            file_filter = Gtk.FileFilter()
+            file_filter.add_pixbuf_formats()
+
             dialog.simple_file(
                 parent = self.get_root(),
-                file_filters = [window.file_filter_image],
+                file_filters = [file_filter],
                 callback = set_profile_picture
             )
 
