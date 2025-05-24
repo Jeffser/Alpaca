@@ -1013,6 +1013,9 @@ def update_instance_list():
         window.instance_listbox.set_selection_mode(1)
         window.instance_listbox.select_row(row)
 
-ready_instances = [OllamaManaged, Ollama, ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Fireworks, LambdaLabs, Cerebras, Klusterai, GenericOpenAI, LlamaAPI]
+if os.getenv('ALPACA_OLLAMA_ONLY', '0') == '1':
+    ready_instances = [OllamaManaged, Ollama]
+else:
+    ready_instances = [OllamaManaged, Ollama, ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Fireworks, LambdaLabs, Cerebras, Klusterai, GenericOpenAI, LlamaAPI]
 
 
