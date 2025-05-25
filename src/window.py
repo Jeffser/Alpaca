@@ -1229,7 +1229,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.model_dropdown.set_model(Gio.ListStore.new(Widgets.model_manager.LocalModelRow))
         self.model_dropdown.set_expression(Gtk.PropertyExpression.new(Widgets.model_manager.LocalModelRow, None, "name"))
         factory = Gtk.SignalListItemFactory()
-        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=2, xalign=0)))
+        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
         factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
         self.model_dropdown.set_factory(factory)
         list(list(self.model_dropdown)[1].get_child())[1].set_propagate_natural_width(True)
