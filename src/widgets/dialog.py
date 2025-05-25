@@ -309,6 +309,6 @@ def simple_directory(parent:Gtk.Widget, callback:callable):
     Gtk.FileDialog().select_folder(
         parent,
         None,
-        lambda directory_dialog, result: callback(__open_finish_wrapper(directory_dialog, result))
+        lambda directory_dialog, result: callback(__select_folder_finish_wrapper(directory_dialog, result))
     )
 

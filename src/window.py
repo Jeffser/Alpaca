@@ -678,7 +678,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     body = _('A task is currently in progress. Are you sure you want to close Alpaca?'),
                     close_response = list(options.keys())[0],
                     options = options,
-                ).show(self) #TODO maybe change this idk
+                ).show(self)
                 return True
             else:
                 close()
@@ -999,7 +999,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 transcriptions.insert(1, 'English (translate:en)')
 
             GLib.idle_add(Widgets.dialog.simple_dropdown,
-                parent = self, #TODO probably a good idea to implement attachments in quick chat
+                parent = self,
                 heading = _('Attach YouTube Video?'),
                 body = _('{}\n\nPlease select a transcript to include').format(data['title']),
                 callback = lambda caption_name, video_url=video_url: threading.Thread(target=self.attach_youtube, args=(video_url, caption_name.split(' (')[-1][:-1])).start(),

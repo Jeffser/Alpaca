@@ -349,7 +349,7 @@ class BaseInstance:
                 valign=3
             )
             open_dir_button.connect('clicked', lambda button, row=model_directory_el: dialog.simple_directory(
-                    parent = open_dir.get_root(),#TODO TEST
+                    parent = open_dir_button.get_root(),
                     callback = lambda res, row=model_directory_el: row.set_subtitle(res.get_path())
                 )
             )
@@ -476,13 +476,13 @@ class BaseOllama(BaseInstance):
                 return json.loads(response.text).get('models')
         except Exception as e:
             dialog.simple_error(
-                parent = window, # TODO replace window with root, also in get_available_models
+                parent = self.row.get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
                 error_log = e
             )
             logger.error(e)
-            window.instance_listbox.unselect_all()
+            self.row.get_parent().unselect_all()
         return []
 
     def get_available_models(self) -> dict:
@@ -490,7 +490,7 @@ class BaseOllama(BaseInstance):
             return OLLAMA_MODELS
         except Exception as e:
             dialog.simple_error(
-                parent = window,
+                parent = self.row.get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve available models'),
                 error_log = e

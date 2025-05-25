@@ -1,6 +1,6 @@
 # code.py
 """
-TODO DESCRIPTION
+Code block handling
 """
 
 import gi
