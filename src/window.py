@@ -810,7 +810,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def closing_quick_ask(self, user_data):
         if not self.get_visible():
-            self.close()
+            self.closing_app(None)
 
     @Gtk.Template.Callback()
     def chat_changed(self, listbox, future_row):
