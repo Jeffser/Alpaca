@@ -25,8 +25,9 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Gio, Adw
 
-from .constants import TRANSLATORS, cache_dir, data_dir
+from .constants import TRANSLATORS, cache_dir, data_dir, config_dir, source_dir
 from .window import AlpacaWindow
+from .sql_manager import Instance as SQL
 
 import os
 os.environ["TORCH_HOME"] = os.path.join(data_dir, "torch")
@@ -35,7 +36,6 @@ import sys
 import logging
 import argparse
 import time
-import sqlite3
 
 from pydbus import SessionBus
 from datetime import datetime
@@ -219,31 +219,21 @@ def main(version):
         sys.exit(0)
 
     if args.list_chats:
-        sqlite_con = sqlite3.connect(os.path.join(data_dir, "alpaca.db"))
-        cursor = sqlite_con.cursor()
-        chats = cursor.execute('SELECT chat.name, MAX(message.date_time) AS latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id GROUP BY chat.id ORDER BY latest_message_time DESC').fetchall()
+        chats = SQL.get_chats()
         if chats:
             for chat in chats:
                 print(chat[0])
         else:
             print()
-        sqlite_con.close()
         sys.exit(0)
 
     if args.select_chat:
-        sqlite_con = sqlite3.connect(os.path.join(data_dir, "alpaca.db"))
-        cursor = sqlite_con.cursor()
-        cursor.execute("UPDATE preferences SET value=? WHERE id=?", (args.select_chat, 'selected_chat'))
-        sqlite_con.commit()
-        sqlite_con.close()
+        SQL.insert_or_update_preferences({'selected_chat': args.select_chat})
 
-    cache_dir_path: str = os.path.join(cache_dir, 'tmp')
-    if os.path.isdir(cache_dir_path):
-        # TODO: Change this, this is error-prone.
-        # And very dangerous, if bwrap doesn't do a good job.
-        os.system('rm -rf ' + os.path.join(cache_dir, "tmp/*"))
-    else:
-        os.mkdir(cache_dir_path)
+    for directory in (cache_dir, data_dir, config_dir, source_dir):
+        if not os.path.isdir(directory):
+            os.mkdir(directory)
+
 
     app = AlpacaApplication(version)
     logger.info(f"Alpaca version: {app.version}")
