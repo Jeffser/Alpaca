@@ -91,6 +91,7 @@ class Instance:
                 "chat": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
                     "name": "TEXT NOT NULL",
+                    "type": "TEXT NOT NULL"
                 },
                 "message": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
@@ -143,6 +144,11 @@ class Instance:
                 columns_def = ", ".join([f"{col_name} {col_def}" for col_name, col_def in columns.items()])
                 c.cursor.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_def})")
 
+            # Add type to existing chat tables
+            c.cursor.execute("PRAGMA table_info(chat)")
+            if 'type' not in [col[1] for col in c.cursor.fetchall()]:
+                c.cursor.execute("ALTER TABLE chat ADD COLUMN type TEXT NOT NULL DEFAULT 'chat'")
+
             # Remove stuff from previous versions (cleaning)
             try:
                 c.cursor.execute(
@@ -169,7 +175,7 @@ class Instance:
     def get_chats() -> list:
         with SQLiteConnection() as c:
             chats = c.cursor.execute(
-                "SELECT chat.id, chat.name, MAX(message.date_time) AS \
+                "SELECT chat.id, chat.name, chat.type, MAX(message.date_time) AS \
                 latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id \
                 GROUP BY chat.id ORDER BY latest_message_time DESC"
             ).fetchall()
@@ -216,13 +222,13 @@ class Instance:
                 "SELECT id FROM chat WHERE id=?", (chat.chat_id,)
             ).fetchone():
                 c.cursor.execute(
-                    "UPDATE chat SET name=? WHERE id=?",
-                    (chat.get_name(), chat.chat_id),
+                    "UPDATE chat SET name=?, type=? WHERE id=?",
+                    (chat.get_name(), chat.chat_type, chat.chat_id),
                 )
             else:
                 c.cursor.execute(
-                    "INSERT INTO chat (id, name) VALUES (?, ?)",
-                    (chat.chat_id, chat.get_name()),
+                    "INSERT INTO chat (id, name, type) VALUES (?, ?, ?)",
+                    (chat.chat_id, chat.get_name(), chat.chat_type),
                 )
 
     def delete_chat(chat) -> None:
@@ -243,8 +249,8 @@ class Instance:
     def duplicate_chat(old_chat, new_chat) -> None:
         with SQLiteConnection() as c:
             c.cursor.execute(
-                "INSERT INTO chat (id, name) VALUES (?, ?)",
-                (new_chat.chat_id, new_chat.get_name()),
+                "INSERT INTO chat (id, name, type) VALUES (?, ?, ?)",
+                (new_chat.chat_id, new_chat.get_name(), new_chat.chat_type),
             )
 
             for message in c.cursor.execute(
@@ -280,7 +286,7 @@ class Instance:
                         ),
                     )
 
-    def import_chat(import_sql_path: str, chat_names: list) -> list:
+    def import_chat(import_sql_path: str, chat_names: list) -> list: #TODO adapt to use type if type in imported chat
         with SQLiteConnection() as c:
             c.cursor.execute("ATTACH DATABASE ? AS import", (import_sql_path,))
             _chat_widgets = []

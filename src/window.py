@@ -309,7 +309,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if row:
                 SQL.insert_or_update_preferences({'selected_instance': row.instance.instance_id})
 
-            self.chat_list_box.get_selected_row().chat.update_profile_pictures()
+            self.chat_list_box.get_selected_row().update_profile_pictures()
             visible_model_manger_switch = len([p for p in self.model_manager_stack.get_pages() if p.get_visible()]) > 1
 
             self.model_manager_bottom_view_switcher.set_visible(visible_model_manger_switch)
@@ -524,7 +524,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             chat=current_chat,
             mode=0 if mode in (0,2) else 2
         )
-        current_chat.container.append(m_element)
+        current_chat.add_message(m_element)
 
         for old_attachment in list(self.global_attachment_container.container):
             attachment = m_element.add_attachment(
@@ -550,7 +550,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 mode=1,
                 author=current_model
             )
-            current_chat.container.append(m_element_bot)
+            current_chat.add_message(m_element_bot)
             SQL.insert_or_update_message(m_element_bot)
             threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
         elif mode==1:
@@ -563,7 +563,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 mode=1,
                 author=current_model
             )
-            current_chat.container.append(m_element_bot)
+            current_chat.add_message(m_element_bot)
             SQL.insert_or_update_message(m_element_bot)
             threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model)).start()
 
@@ -900,27 +900,36 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def switch_send_stop_button(self, send:bool):
         self.action_button_stack.set_visible_child_name('send' if send else 'stop')
 
-    def add_chat(self, chat_name:str, chat_id:str, mode:int) -> Widgets.chat.Chat or None: #mode = 0: append, mode = 1: prepend
+    def add_chat(self, chat_name:str, chat_id:str, chat_type:str, mode:int) -> Widgets.chat.Chat or None: #mode = 0: append, mode = 1: prepend
         chat_name = chat_name.strip()
         if chat_name and mode in (0, 1):
             chat_name = generate_numbered_name(chat_name, [row.get_name() for row in list(self.chat_list_box)])
-            chat = Widgets.chat.Chat(
-                chat_id=chat_id,
-                name=chat_name
-            )
-            if mode == 0:
-                self.chat_list_box.append(chat.row)
-            else:
-                self.chat_list_box.prepend(chat.row)
-            self.chat_stack.add_child(chat)
-            return chat
+            chat = None
+            if chat_type == 'chat':
+                chat = Widgets.chat.Chat(
+                    chat_id=chat_id,
+                    name=chat_name
+                )
+            elif chat_type == 'notebook':
+                chat = Widgets.chat.Notebook(
+                    chat_id=chat_id,
+                    name=chat_name
+                )
+            if chat:
+                if mode == 0:
+                    self.chat_list_box.append(chat.row)
+                else:
+                    self.chat_list_box.prepend(chat.row)
+                self.chat_stack.add_child(chat)
+                return chat
 
-    def new_chat(self, chat_title:str=_("New Chat")) -> Widgets.chat.Chat or None:
+    def new_chat(self, chat_title:str=_("New Chat"), chat_type:str='chat') -> Widgets.chat.Chat or None:
         chat_title = chat_title.strip()
         if chat_title:
             chat = self.add_chat(
                 chat_name=chat_title,
                 chat_id=generate_uuid(),
+                chat_type=chat_type,
                 mode=1
             )
             SQL.insert_or_update_chat(chat)
@@ -938,24 +947,25 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.add_chat(
                     chat_name=row[1],
                     chat_id=row[0],
+                    chat_type=row[2],
                     mode=0
                 )
                 if row[1] == selected_chat:
                     self.chat_list_box.select_row(list(self.chat_list_box)[-1])
-        #else:
-            #self.chat_list_box.new_chat()
+        else:
+            self.chat_list_box.new_chat(chat_type='chat')
 
     def chat_actions(self, action, user_data):
         chat = self.selected_chat_row.chat
         action_name = action.get_name()
         if action_name in ('delete_chat', 'delete_current_chat'):
-            chat.prompt_delete()
+            chat.row.prompt_delete()
         elif action_name in ('duplicate_chat', 'duplicate_current_chat'):
-            chat.duplicate()
+            chat.row.duplicate()
         elif action_name in ('rename_chat', 'rename_current_chat'):
-            chat.prompt_rename()
+            chat.row.prompt_rename()
         elif action_name in ('export_chat', 'export_current_chat'):
-            chat.prompt_export()
+            chat.row.prompt_export()
 
     def current_chat_actions(self, action, user_data):
         self.selected_chat_row = self.chat_list_box.get_selected_row()
@@ -1088,7 +1098,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             chat=chat,
             mode=0 if mode in (0,2) else 2
         )
-        chat.container.append(m_element)
+        chat.add_message(m_element)
         m_element.block_container.set_content(message)
 
         if mode in (0, 2):
@@ -1099,7 +1109,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 mode=1,
                 author=current_model
             )
-            chat.container.append(m_element_bot)
+            chat.add_message(m_element_bot)
 
             chat.busy = True
             if mode == 0:
@@ -1225,6 +1235,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.add_chat(
                     chat_name=chat[1],
                     chat_id=chat[0],
+                    chat_type='chat', #TODO notebook
                     mode=1
                 )
             self.show_toast(_("Chat imported successfully"), self.main_overlay)
@@ -1444,7 +1455,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             data.get('button').add_controller(gesture_long_press)
 
         universal_actions = {
-            'new_chat': [lambda *_: self.new_chat(), ['<primary>n']],
+            'new_chat': [lambda *_: self.new_chat(chat_type='chat'), ['<primary>n']],
+            'new_notebook': [lambda *_: self.new_chat(chat_type='notebook'), ['<primary><shift>n']],
             'import_chat': [lambda *_: Widgets.dialog.simple_file(
                 parent=self,
                 file_filters=[self.file_filter_db],

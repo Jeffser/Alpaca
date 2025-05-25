@@ -149,20 +149,14 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                     <child type="top">
                       <object class="AdwHeaderBar">
                         <child type="start">
-                          <object class="GtkButton">
+                          <object class="AdwSplitButton">
                             <property name="action-name">app.new_chat</property>
                             <property name="tooltip-text" translatable="yes">New Chat</property>
                             <property name="icon-name">chat-message-new-symbolic</property>
+                            <property name="menu-model">new_chat_menu</property>
                             <style>
                               <class name="flat"/>
                             </style>
-                          </object>
-                        </child>
-                        <child type="start">
-                          <object class="GtkToggleButton" id="chat_search_button">
-                            <property name="icon-name">edit-find-symbolic</property>
-                            <property name="tooltip-text" translatable="yes">Search Chats</property>
-                            <property name="active" bind-source="chat_searchbar" bind-property="search-mode-enabled" bind-flags="sync-create"/>
                           </object>
                         </child>
                         <child type="end">
@@ -171,6 +165,13 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                             <property name="icon-name">open-menu-symbolic</property>
                             <property name="tooltip-text" translatable="yes">Menu</property>
                             <property name="menu-model">primary_menu</property>
+                          </object>
+                        </child>
+                        <child type="end">
+                          <object class="GtkToggleButton" id="chat_search_button">
+                            <property name="icon-name">edit-find-symbolic</property>
+                            <property name="tooltip-text" translatable="yes">Search Chats</property>
+                            <property name="active" bind-source="chat_searchbar" bind-property="search-mode-enabled" bind-flags="sync-create"/>
                           </object>
                         </child>
                       </object>
@@ -1331,6 +1332,18 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
       </child>
     </object>
   </template>
+  <menu id="new_chat_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">New Chat</attribute>
+        <attribute name="action">app.new_chat</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">New Notebook</attribute>
+        <attribute name="action">app.new_notebook</attribute>
+      </item>
+    </section>
+  </menu>
   <menu id="primary_menu">
     <section>
       <item>

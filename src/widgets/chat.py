@@ -15,8 +15,133 @@ logger = logging.getLogger(__name__)
 
 window = None
 
+class Notebook(Gtk.Stack):
+    __gtype_name__ = 'AlpacaNotebook'
+    chat_type = 'notebook'
+
+    def __init__(self, chat_id:str=None, name:str=_("New Notebook")):
+        super().__init__(
+            name=name,
+            transition_type=1
+        )
+        self.container = Gtk.Box(
+            orientation=1,
+            hexpand=True,
+            vexpand=True,
+            spacing=12,
+            css_classes=['p10']
+        )
+        message_scrolledwindow = Gtk.ScrolledWindow(
+            child=self.container,
+            propagate_natural_height=True,
+            kinetic_scrolling=True,
+            vexpand=True,
+            hexpand=True,
+            css_classes=["undershoot-bottom", "card", "view"],
+            hscrollbar_policy=2,
+            margin_start=10,
+            margin_end=10,
+            margin_top=10,
+            margin_bottom=10,
+            overflow=1
+        )
+
+        self.textview = Gtk.TextView(
+            css_classes=["p10"],
+            wrap_mode=3
+        )
+        book_scrolledwindow = Gtk.ScrolledWindow(
+            child=self.textview,
+            propagate_natural_height=True,
+            kinetic_scrolling=True,
+            vexpand=True,
+            hexpand=True,
+            css_classes=["undershoot-bottom", "card"],
+            hscrollbar_policy=2,
+            margin_start=10,
+            margin_end=10,
+            margin_top=10,
+            margin_bottom=10,
+            overflow=1
+        )
+
+        paned = Gtk.Paned(
+            wide_handle=True,
+            position=400
+        )
+        paned.set_start_child(message_scrolledwindow)
+        paned.set_end_child(book_scrolledwindow)
+        list(paned)[1].add_css_class('card')
+        window.split_view_overlay.connect('notify::collapsed', lambda *_: paned.set_orientation(window.split_view_overlay.get_collapsed()))
+
+        clamp = Adw.Clamp(
+            maximum_size=1000,
+            tightening_threshold=800,
+            child=paned
+        )
+        self.add_named(Adw.Spinner(), 'loading')
+        self.add_named(clamp, 'content')
+
+        welcome_screen = Adw.StatusPage(
+            icon_name="com.jeffser.Alpaca",
+            title="Alpaca",
+            description=_("Start a notebook with a message"),
+            vexpand=True
+        )
+        list(welcome_screen)[0].add_css_class('undershoot-bottom')
+        self.add_named(welcome_screen, 'welcome-screen')
+
+        self.add_named(Adw.StatusPage(
+            icon_name="sad-computer-symbolic",
+            title=_("No Messages Found"),
+            description=_("Uh oh! No messages found for your search.")
+        ), 'no-results')
+
+        self.busy = False
+        self.chat_id = chat_id
+        self.row = ChatRow(self)
+
+    def stop_message(self):
+        self.busy = False
+        window.switch_send_stop_button(True)
+
+    def unload_messages(self):
+        self.stop_message()
+        for widget in list(self.container):
+            self.container.remove(widget)
+        self.set_visible_child_name('loading')
+
+    def add_message(self, message):
+        self.container.append(message)
+
+    def load_messages(self):
+        messages = SQL.get_messages(self)
+        for message in messages:
+            message_element = Message(
+                dt=datetime.datetime.strptime(message[3] + (":00" if message[3].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'),
+                message_id=message[0],
+                chat=self,
+                mode=('user', 'assistant', 'system').index(message[1]),
+                author=message[2]
+            )
+            self.container.append(message_element)
+
+            attachments = SQL.get_attachments(message_element)
+            for attachment in attachments:
+                message_element.add_attachment(
+                    file_id=attachment[0],
+                    name=attachment[2],
+                    attachment_type=attachment[1],
+                    content=attachment[3]
+                )
+            GLib.idle_add(message_element.block_container.set_content, message[4])
+        self.set_visible_child_name('content' if len(messages) > 0 else 'welcome-screen')
+
+    #def convert_to_json(self, include_metadata:bool=False) -> dict:
+
 class Chat(Gtk.Stack):
     __gtype_name__ = 'AlpacaChat'
+    chat_type = 'chat'
 
     def __init__(self, chat_id:str=None, name:str=_("New Chat")):
         super().__init__(
@@ -30,13 +155,13 @@ class Chat(Gtk.Stack):
             spacing=12,
             css_classes=['p10']
         )
-        self.clamp = Adw.Clamp(
+        clamp = Adw.Clamp(
             maximum_size=1000,
             tightening_threshold=800,
             child=self.container
         )
-        self.scrolledwindow = Gtk.ScrolledWindow(
-            child=self.clamp,
+        scrolledwindow = Gtk.ScrolledWindow(
+            child=clamp,
             propagate_natural_height=True,
             kinetic_scrolling=True,
             vexpand=True,
@@ -45,7 +170,7 @@ class Chat(Gtk.Stack):
             hscrollbar_policy=2
         )
         self.add_named(Adw.Spinner(), 'loading')
-        self.add_named(self.scrolledwindow, 'content')
+        self.add_named(scrolledwindow, 'content')
 
         self.welcome_screen = Adw.StatusPage(
             icon_name="com.jeffser.Alpaca",
@@ -66,56 +191,6 @@ class Chat(Gtk.Stack):
         self.busy = False
         self.chat_id = chat_id
         self.row = ChatRow(self)
-
-    def rename(self, new_name:str):
-        new_name = generate_numbered_name(new_name, [row.chat.get_name() for row in list(self.row.get_parent())])
-        self.row.label.set_label(new_name)
-        self.row.label.set_tooltip_text(new_name)
-        self.set_name(new_name)
-        self.row.set_name(new_name)
-        SQL.insert_or_update_chat(self)
-
-    def prompt_rename(self):
-        dialog.simple_entry(
-            parent = self.get_root(),
-            heading = _('Rename Chat?'),
-            body = _("Renaming '{}'").format(self.get_name()),
-            callback = lambda new_name: self.rename(new_name),
-            entries = {'placeholder': _('Chat name'), 'default': True, 'text': self.get_name()},
-            button_name = _('Rename')
-        )
-
-    def delete(self):
-        self.stop_message()
-        list_box = self.row.get_parent()
-        list_box.remove(self.row)
-        self.get_parent().remove(self)
-        SQL.delete_chat(self)
-        if len(list(list_box)) == 0:
-            window.new_chat()
-        if not list_box.get_current_chat() or list_box.get_current_chat() == self:
-            list_box.select_row(list_box.get_row_at_index(0))
-
-    def prompt_delete(self):
-        dialog.simple(
-            parent = self.get_root(),
-            heading = _('Delete Chat?'),
-            body = _("Are you sure you want to delete '{}'?").format(self.get_name()),
-            callback = lambda: self.delete(),
-            button_name = _('Delete'),
-            button_appearance = 'destructive'
-        )
-
-    def duplicate(self):
-        new_chat_name = _("Copy of {}".format(self.get_name()))
-        new_chat_id = generate_uuid()
-        new_chat = window.add_chat(
-            chat_name=new_chat_name,
-            chat_id=new_chat_id,
-            mode=1
-        )
-        SQL.duplicate_chat(self, new_chat)
-        new_chat.load_messages()
 
     def refresh_welcome_screen_prompts(self):
         button_container = Gtk.Box(
@@ -153,6 +228,9 @@ class Chat(Gtk.Stack):
         for widget in list(self.container):
             self.container.remove(widget)
         self.set_visible_child_name('loading')
+
+    def add_message(self, message):
+        self.container.append(message)
 
     def load_messages(self):
         messages = SQL.get_messages(self)
@@ -219,6 +297,122 @@ class Chat(Gtk.Stack):
                 messages.append(message_data)
         return messages
 
+class ChatRow(Gtk.ListBoxRow):
+    __gtype_name__ = 'AlpacaChatRow'
+
+    def __init__(self, chat:Chat):
+        self.chat = chat
+        self.spinner = Adw.Spinner(visible=False)
+        self.label = Gtk.Label(
+            label=self.chat.get_name(),
+            tooltip_text=self.chat.get_name(),
+            hexpand=True,
+            halign=0,
+            wrap=True,
+            ellipsize=3,
+            wrap_mode=2,
+            xalign=0
+        )
+        self.indicator = Gtk.Image.new_from_icon_name("chat-bubble-text-symbolic")
+        self.indicator.set_visible(False)
+        self.indicator.set_css_classes(['accent'])
+        container = Gtk.Box(
+            spacing=5
+        )
+        if self.chat.chat_type == 'notebook':
+            container.append(Gtk.Image.new_from_icon_name("open-book-symbolic"))
+        container.append(self.label)
+        container.append(self.spinner)
+        container.append(self.indicator)
+        super().__init__(
+            css_classes = ['chat_row'],
+            height_request = 45,
+            child = container,
+            name=self.chat.get_name()
+        )
+
+        self.gesture_click = Gtk.GestureClick(button=3)
+        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.open_menu(gesture, x, y) if n_press == 1 else None)
+        self.add_controller(self.gesture_click)
+        self.gesture_long_press = Gtk.GestureLongPress()
+        self.gesture_long_press.connect("pressed", self.open_menu)
+        self.add_controller(self.gesture_long_press)
+
+    def open_menu(self, gesture, x, y):
+        position = Gdk.Rectangle()
+        position.x = x
+        position.y = y
+
+        popover = Gtk.PopoverMenu(
+            menu_model=window.chat_right_click_menu,
+            has_arrow=False,
+            halign=1,
+            height_request=155
+        )
+
+        popover.add_child(Gtk.Button(label='fun'), '1')
+
+        window.selected_chat_row = self
+
+        popover.set_parent(self.get_child())
+        popover.set_pointing_to(position)
+        popover.popup()
+
+    def update_profile_pictures(self):
+        for msg in list(self.chat.container):
+            msg.update_profile_picture()
+
+    def rename(self, new_name:str):
+        new_name = generate_numbered_name(new_name, [row.get_name() for row in list(self.get_parent())])
+        self.label.set_label(new_name)
+        self.label.set_tooltip_text(new_name)
+        self.chat.set_name(new_name)
+        self.set_name(new_name)
+        SQL.insert_or_update_chat(self.chat)
+
+    def prompt_rename(self):
+        dialog.simple_entry(
+            parent = self.get_root(),
+            heading = _('Rename Chat?'),
+            body = _("Renaming '{}'").format(self.get_name()),
+            callback = lambda new_name: self.rename(new_name),
+            entries = {'placeholder': _('Chat name'), 'default': True, 'text': self.get_name()},
+            button_name = _('Rename')
+        )
+
+    def delete(self):
+        self.chat.stop_message()
+        list_box = self.get_parent()
+        list_box.remove(self)
+        self.chat.get_parent().remove(self.chat)
+        SQL.delete_chat(self.chat)
+        if len(list(list_box)) == 0:
+            window.new_chat(chat_type='chat')
+        if not list_box.get_selected_row() or list_box.get_selected_row() == self:
+            list_box.select_row(list_box.get_row_at_index(0))
+
+    def prompt_delete(self):
+        dialog.simple(
+            parent = self.chat.get_root(),
+            heading = _('Delete Chat?'),
+            body = _("Are you sure you want to delete '{}'?").format(self.get_name()),
+            callback = lambda: self.delete(),
+            button_name = _('Delete'),
+            button_appearance = 'destructive'
+        )
+
+    def duplicate(self):
+        new_chat_name = _("Copy of {}".format(self.get_name()))
+        new_chat_id = generate_uuid()
+        new_chat = window.add_chat(
+            chat_name=new_chat_name,
+            chat_id=new_chat_id,
+            chat_type=self.chat.chat_type,
+            mode=1
+        )
+        SQL.duplicate_chat(self.chat, new_chat)
+        new_chat.load_messages()
+
     def on_export_successful(self, file, result):
         file.replace_contents_finish(result)
         window.show_toast(_("Chat exported successfully"), window.main_overlay)
@@ -239,7 +433,7 @@ class Chat(Gtk.Stack):
     def export_md(self, obsidian:bool):
         logger.info("Exporting chat (MD)")
         markdown = []
-        for message_element in list(self.container):
+        for message_element in list(self.chat.container):
             if message_element.text and message_element.dt:
                 message_author = _('User')
                 if message_element.bot:
@@ -280,14 +474,14 @@ class Chat(Gtk.Stack):
         logger.info("Exporting chat (DB)")
         if os.path.isfile(os.path.join(cache_dir, 'export.db')):
             os.remove(os.path.join(cache_dir, 'export.db'))
-        SQL.export_db(self, os.path.join(cache_dir, 'export.db'))
+        SQL.export_db(self.chat, os.path.join(cache_dir, 'export.db'))
         file_dialog = Gtk.FileDialog(initial_name=f"{self.get_name()}.db")
         file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.db'): self.on_export_chat(file_dialog, result, temp_path))
 
     def export_json(self, include_metadata:bool):
         logger.info("Exporting chat (JSON)")
         with open(os.path.join(cache_dir, 'export.json'), 'w') as f:
-            f.write(json.dumps({self.get_name() if include_metadata else 'messages': self.convert_to_json(include_metadata)}, indent=4))
+            f.write(json.dumps({self.get_name() if include_metadata else 'messages': self.chat.convert_to_json(include_metadata)}, indent=4))
         file_dialog = Gtk.FileDialog(initial_name=f"{self.get_name()}.json")
         file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.json'): self.on_export_chat(file_dialog, result, temp_path))
 
@@ -300,73 +494,9 @@ class Chat(Gtk.Stack):
             _("JSON (Include Metadata)"): lambda: self.export_json(True)
         }
         dialog.simple_dropdown(
-            parent = self.get_root(),
+            parent = self.chat.get_root(),
             heading = _("Export Chat"),
             body = _("Select a method to export the chat"),
             callback = lambda option, options=options: options[option](),
             items = options.keys()
         )
-
-    def update_profile_pictures(self):
-        for msg in list(self.container):
-            msg.update_profile_picture()
-
-class ChatRow(Gtk.ListBoxRow):
-    __gtype_name__ = 'AlpacaChatRow'
-
-    def __init__(self, chat:Chat):
-        self.chat = chat
-        self.spinner = Adw.Spinner(visible=False)
-        self.label = Gtk.Label(
-            label=self.chat.get_name(),
-            tooltip_text=self.chat.get_name(),
-            hexpand=True,
-            halign=0,
-            wrap=True,
-            ellipsize=3,
-            wrap_mode=2,
-            xalign=0
-        )
-        self.indicator = Gtk.Image.new_from_icon_name("chat-bubble-text-symbolic")
-        self.indicator.set_visible(False)
-        self.indicator.set_css_classes(['accent'])
-        container = Gtk.Box(
-            spacing=5
-        )
-        container.append(self.label)
-        container.append(self.spinner)
-        container.append(self.indicator)
-        super().__init__(
-            css_classes = ['chat_row'],
-            height_request = 45,
-            child = container,
-            name=self.chat.get_name()
-        )
-
-        self.gesture_click = Gtk.GestureClick(button=3)
-        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.open_menu(gesture, x, y) if n_press == 1 else None)
-        self.add_controller(self.gesture_click)
-        self.gesture_long_press = Gtk.GestureLongPress()
-        self.gesture_long_press.connect("pressed", self.open_menu)
-        self.add_controller(self.gesture_long_press)
-
-    def open_menu(self, gesture, x, y):
-        position = Gdk.Rectangle()
-        position.x = x
-        position.y = y
-
-        popover = Gtk.PopoverMenu(
-            menu_model=window.chat_right_click_menu,
-            has_arrow=False,
-            halign=1,
-            height_request=155
-        )
-
-        popover.add_child(Gtk.Button(label='fun'), '1')
-
-        window.selected_chat_row = self
-
-        popover.set_parent(self.get_child())
-        popover.set_pointing_to(position)
-        popover.popup()
-

@@ -208,7 +208,7 @@ class BaseInstance:
             except Exception as e:
                 logger.error(e)
         new_chat_title = re.sub(r'<think>.*?</think>', '', new_chat_title).strip()
-        chat.rename(new_chat_title)
+        chat.row.rename(new_chat_title)
 
     def get_default_model(self):
         if not self.default_model:
