@@ -622,12 +622,12 @@ class LocalModel(Gtk.Box):
                 picture_b64 = attachments.extract_image(file.get_path(), 128)
                 SQL.insert_or_update_model_picture(self.get_name(), picture_b64)
                 self.update_profile_picture()
-                threading.Thread(target=window.chat_list_box.get_current_chat().update_profile_pictures()).start()
+                threading.Thread(target=window.chat_list_box.get_selected_row().chat.update_profile_pictures()).start()
 
         def remove_profile_picture():
             SQL.insert_or_update_model_picture(self.get_name(), None)
             self.update_profile_picture()
-            threading.Thread(target=window.chat_list_box.get_current_chat().update_profile_pictures()).start()
+            threading.Thread(target=window.chat_list_box.get_selected_row().chat.update_profile_pictures()).start()
 
         if self.data['profile_picture']:
             file_filter = Gtk.FileFilter()
@@ -670,7 +670,7 @@ class LocalModel(Gtk.Box):
                 window.local_model_stack.set_visible_child_name('no-models')
                 window.title_stack.set_visible_child_name('no-models')
             SQL.remove_model_preferences(self.get_name())
-            threading.Thread(target=window.chat_list_box.get_current_chat().update_profile_pictures()).start()
+            threading.Thread(target=window.chat_list_box.get_selected_row().chat.update_profile_pictures()).start()
 
     def get_page(self):
         buttons = []

@@ -172,6 +172,15 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                       <object class="GtkScrolledWindow" id="chat_list_container">
                         <property name="vexpand">true</property>
                         <property name="hexpand">true</property>
+                        <property name="child">
+                          <object class="GtkListBox" id="chat_list_box">
+                            <signal name="row-selected" handler="chat_changed"/>
+                            <property name="selection-mode">1</property>
+                            <style>
+                              <class name="navigation-sidebar"/>
+                            </style>
+                          </object>
+                        </property>
                       </object>
                     </property>
                   </object>

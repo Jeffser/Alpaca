@@ -66,6 +66,7 @@ class Chat(Gtk.Stack):
         self.row.label.set_label(new_name)
         self.row.label.set_tooltip_text(new_name)
         self.set_name(new_name)
+        self.row.set_name(new_name)
         SQL.insert_or_update_chat(self)
 
     def prompt_rename(self):
@@ -85,7 +86,7 @@ class Chat(Gtk.Stack):
         self.get_parent().remove(self)
         SQL.delete_chat(self)
         if len(list(list_box)) == 0:
-            list_box.new_chat()
+            window.new_chat()
         if not list_box.get_current_chat() or list_box.get_current_chat() == self:
             list_box.select_row(list_box.get_row_at_index(0))
 
@@ -102,7 +103,11 @@ class Chat(Gtk.Stack):
     def duplicate(self):
         new_chat_name = _("Copy of {}".format(self.get_name()))
         new_chat_id = generate_uuid()
-        new_chat = self.row.get_parent().prepend_chat(new_chat_name, new_chat_id)
+        new_chat = window.add_chat(
+            chat_name=new_chat_name,
+            chat_id=new_chat_id,
+            mode=1
+        )
         SQL.duplicate_chat(self, new_chat)
         new_chat.load_messages()
 
@@ -328,7 +333,8 @@ class ChatRow(Gtk.ListBoxRow):
         super().__init__(
             css_classes = ['chat_row'],
             height_request = 45,
-            child = container
+            child = container,
+            name=self.chat.get_name()
         )
 
         self.gesture_click = Gtk.GestureClick(button=3)
@@ -358,117 +364,3 @@ class ChatRow(Gtk.ListBoxRow):
         popover.set_pointing_to(position)
         popover.popup()
 
-
-class ChatList(Gtk.ListBox):
-    __gtype_name__ = 'AlpacaChatList'
-
-    def __init__(self):
-        super().__init__(
-            selection_mode=1,
-            css_classes=["navigation-sidebar"]
-        )
-        self.connect("row-selected", lambda listbox, row: self.chat_changed(row))
-
-    def get_current_chat(self) -> Chat:
-        row = self.get_selected_row()
-        if row:
-            return self.get_selected_row().chat
-
-    def send_tab_to_top(self, tab:ChatRow):
-        self.unselect_all()
-        self.remove(tab)
-        self.prepend(tab)
-        self.select_row(tab)
-
-    def append_chat(self, chat_name:str, chat_id:str) -> Chat:
-        chat_name = chat_name.strip()
-        if chat_name:
-            chat_name = generate_numbered_name(chat_name, [row.chat.get_name() for row in list(self)])
-            chat = Chat(
-                chat_id=chat_id,
-                name=chat_name
-            )
-            self.append(chat.row)
-            window.chat_stack.add_child(chat)
-            return chat
-
-    def prepend_chat(self, chat_name:str, chat_id:str) -> Chat:
-        chat_name = chat_name.strip()
-        if chat_name:
-            chat_name = generate_numbered_name(chat_name, [row.chat.get_name() for row in list(self) ])
-            chat = Chat(
-                chat_id=chat_id,
-                name=chat_name
-            )
-            self.prepend(chat.row)
-            chat.set_visible_child_name('welcome-screen')
-            window.chat_stack.add_child(chat)
-            self.select_row(chat.row)
-            return chat
-
-    def new_chat(self, chat_title:str=_("New Chat")):
-        chat_title = chat_title.strip()
-        if chat_title:
-            chat = self.prepend_chat(chat_title, generate_uuid())
-            SQL.insert_or_update_chat(chat)
-            return chat
-
-    def on_chat_imported(self, file):
-        if file:
-            if os.path.isfile(os.path.join(cache_dir, 'import.db')):
-                os.remove(os.path.join(cache_dir, 'import.db'))
-            file.copy(Gio.File.new_for_path(os.path.join(cache_dir, 'import.db')), Gio.FileCopyFlags.OVERWRITE, None, None, None, None)
-            for chat in SQL.import_chat(os.path.join(cache_dir, 'import.db'), [tab.chat.get_name() for tab in list(self)]):
-                new_chat = self.prepend_chat(chat[1], chat[0])
-            window.show_toast(_("Chat imported successfully"), window.main_overlay)
-
-    def find_model_index(self, model_name:str):
-        if len(list(window.model_dropdown.get_model())) == 0:
-            return None
-        detected_models = [i for i, future_row in enumerate(list(window.model_dropdown.get_model())) if future_row.model.get_name() == model_name]
-        if len(detected_models) > 0:
-            return detected_models[0]
-
-    def chat_changed(self, future_row):
-        if future_row:
-            current_row = next((t for t in list(self) if t.chat == window.chat_stack.get_visible_child()), future_row)
-            if list(self).index(future_row) != list(self).index(current_row) or future_row.chat.get_visible_child_name() != 'content':
-                # Empty Search
-                if window.searchentry_messages.get_text() != '':
-                    window.searchentry_messages.set_text('')
-                    window.message_search_changed(window.searchentry_messages, window.chat_stack.get_visible_child())
-                window.message_searchbar.set_search_mode(False)
-
-                load_chat_thread = None
-                # Load future_row if not loaded already
-                if len(list(future_row.chat.container)) == 0:
-                    load_chat_thread = threading.Thread(target=future_row.chat.load_messages)
-                    load_chat_thread.start()
-
-                # Unload current_row
-                if not current_row.chat.busy and current_row.chat.get_visible_child_name() == 'content' and len(list(current_row.chat.container)) > 0:
-                    threading.Thread(target=current_row.chat.unload_messages).start()
-
-                # Select transition type and change chat
-                window.chat_stack.set_transition_type(4 if list(self).index(future_row) > list(self).index(current_row) else 5)
-                window.chat_stack.set_visible_child(future_row.chat)
-
-                # Sync stop/send button to chat's state
-                window.switch_send_stop_button(not future_row.chat.busy)
-                if load_chat_thread:
-                    load_chat_thread.join()
-                # Select the correct model for the chat
-                model_to_use_index = self.find_model_index(window.get_current_instance().get_default_model())
-                if len(list(future_row.chat.container)) > 0:
-                    message_model = self.find_model_index(list(future_row.chat.container)[-1].get_model())
-                    if message_model:
-                        model_to_use_index = message_model
-
-                if model_to_use_index is None:
-                    model_to_use_index = 0
-
-                window.model_dropdown.set_selected(model_to_use_index)
-
-                # If it has the "new message" indicator, hide it
-                if future_row.indicator.get_visible():
-                    future_row.indicator.set_visible(False)

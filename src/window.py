@@ -105,7 +105,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     file_filter_gguf = Gtk.Template.Child()
 
     chat_list_container = Gtk.Template.Child()
-    chat_list_box = None
+    chat_list_box = Gtk.Template.Child()
     model_manager = None
     global_attachment_container = None
 
@@ -308,7 +308,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if row:
                 SQL.insert_or_update_preferences({'selected_instance': row.instance.instance_id})
 
-            self.chat_list_box.get_current_chat().update_profile_pictures()
+            self.chat_list_box.get_selected_row().chat.update_profile_pictures()
             visible_model_manger_switch = len([p for p in self.model_manager_stack.get_pages() if p.get_visible()]) > 1
 
             self.model_manager_bottom_view_switcher.set_visible(visible_model_manger_switch)
@@ -483,7 +483,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def stop_message(self, button=None):
-        self.chat_list_box.get_current_chat().stop_message()
+        self.chat_list_box.get_selected_row().chat.stop_message()
 
     @Gtk.Template.Callback()
     def send_message(self, button=None, mode:int=0): #mode 0=user 1=system 2=tool
@@ -491,7 +491,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             return
         if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False):
             return
-        current_chat = self.chat_list_box.get_current_chat()
+        current_chat = self.chat_list_box.get_selected_row().chat
         if current_chat.busy == True:
             return
 
@@ -510,7 +510,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.show_toast(_("Please select a model before chatting"), self.main_overlay)
             return
 
-        self.chat_list_box.send_tab_to_top(self.chat_list_box.get_selected_row())
+        tab = self.chat_list_box.get_selected_row()
+        self.chat_list_box.unselect_all()
+        self.chat_list_box.remove(tab)
+        self.chat_list_box.prepend(tab)
+        self.chat_list_box.select_row(tab)
 
         raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
         m_element = Widgets.message.Message(
@@ -647,7 +651,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
         def close():
-            selected_chat = self.chat_list_box.get_selected_row().chat.get_name()
+            selected_chat = self.chat_list_box.get_selected_row().get_name()
             SQL.insert_or_update_preferences({'selected_chat': selected_chat})
             self.get_current_instance().stop()
             if self.message_dictated:
@@ -662,7 +666,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             logger.info("Hiding app...")
         else:
             logger.info("Closing app...")
-            if any([chat.chat.busy for chat in list(self.chat_list_box)]) or any([el for el in list(self.local_model_flowbox) if isinstance(el.get_child(), Widgets.model_manager.PullingModel)]):
+            if any([chat_row.chat.busy for chat_row in list(self.chat_list_box)]) or any([el for el in list(self.local_model_flowbox) if isinstance(el.get_child(), Widgets.model_manager.PullingModel)]):
                 options = {
                     _('Cancel'): {'default': True},
                     _('Hide'): {'callback': switch_to_hide},
@@ -724,8 +728,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def message_search_changed(self, entry, current_chat=None):
         search_term=entry.get_text()
         results = 0
-        if not current_chat:
-            current_chat = self.chat_list_box.get_current_chat()
+        if not current_chat and self.chat_list_box.get_selected_row():
+            current_chat = self.chat_list_box.get_selected_row().chat
         if current_chat:
             try:
                 for message in list(current_chat.container):
@@ -777,7 +781,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.quick_ask.close()
         chat = self.quick_ask_overlay.get_child()
         chat_name = generate_numbered_name(chat.get_name(), [tab.chat.get_name() for tab in list(self.chat_list_box)])
-        new_chat = self.chat_list_box.new_chat(chat_name)
+        new_chat = self.new_chat(chat_name)
         for message in chat.messages.values():
             SQL.insert_or_update_message(message, new_chat.chat_id)
         threading.Thread(target=new_chat.load_chat_messages).start()
@@ -787,6 +791,58 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def closing_quick_ask(self, user_data):
         if not self.get_visible():
             self.close()
+
+    @Gtk.Template.Callback()
+    def chat_changed(self, listbox, future_row):
+        def find_model_index(model_name:str):
+            if len(list(self.model_dropdown.get_model())) == 0:
+                return None
+            detected_models = [i for i, future_row in enumerate(list(self.model_dropdown.get_model())) if future_row.model.get_name() == model_name]
+            if len(detected_models) > 0:
+                return detected_models[0]
+
+        if future_row:
+            current_row = next((t for t in list(self.chat_list_box) if t.chat == self.chat_stack.get_visible_child()), future_row)
+            if list(self.chat_list_box).index(future_row) != list(self.chat_list_box).index(current_row) or future_row.chat.get_visible_child_name() != 'content':
+                # Empty Search
+                if self.searchentry_messages.get_text() != '':
+                    self.searchentry_messages.set_text('')
+                    self.message_search_changed(self.searchentry_messages, self.chat_stack.get_visible_child())
+                self.message_searchbar.set_search_mode(False)
+
+                load_chat_thread = None
+                # Load future_row if not loaded already
+                if len(list(future_row.chat.container)) == 0:
+                    load_chat_thread = threading.Thread(target=future_row.chat.load_messages)
+                    load_chat_thread.start()
+
+                # Unload current_row
+                if not current_row.chat.busy and current_row.chat.get_visible_child_name() == 'content' and len(list(current_row.chat.container)) > 0:
+                    threading.Thread(target=current_row.chat.unload_messages).start()
+
+                # Select transition type and change chat
+                self.chat_stack.set_transition_type(4 if list(self.chat_list_box).index(future_row) > list(self.chat_list_box).index(current_row) else 5)
+                self.chat_stack.set_visible_child(future_row.chat)
+
+                # Sync stop/send button to chat's state
+                self.switch_send_stop_button(not future_row.chat.busy)
+                if load_chat_thread:
+                    load_chat_thread.join()
+                # Select the correct model for the chat
+                model_to_use_index = find_model_index(self.get_current_instance().get_default_model())
+                if len(list(future_row.chat.container)) > 0:
+                    message_model = find_model_index(list(future_row.chat.container)[-1].get_model())
+                    if message_model:
+                        model_to_use_index = message_model
+
+                if model_to_use_index is None:
+                    model_to_use_index = 0
+
+                self.model_dropdown.set_selected(model_to_use_index)
+
+                # If it has the "new message" indicator, hide it
+                if future_row.indicator.get_visible():
+                    future_row.indicator.set_visible(False)
 
     def on_clipboard_paste(self, textview):
         logger.debug("Pasting from clipboard")
@@ -824,6 +880,32 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def switch_send_stop_button(self, send:bool):
         self.action_button_stack.set_visible_child_name('send' if send else 'stop')
 
+    def add_chat(self, chat_name:str, chat_id:str, mode:int) -> Widgets.chat.Chat or None: #mode = 0: append, mode = 1: prepend
+        chat_name = chat_name.strip()
+        if chat_name and mode in (0, 1):
+            chat_name = generate_numbered_name(chat_name, [row.get_name() for row in list(self.chat_list_box)])
+            chat = Widgets.chat.Chat(
+                chat_id=chat_id,
+                name=chat_name
+            )
+            if mode == 0:
+                self.chat_list_box.append(chat.row)
+            else:
+                self.chat_list_box.prepend(chat.row)
+            self.chat_stack.add_child(chat)
+            return chat
+
+    def new_chat(self, chat_title:str=_("New Chat")) -> Widgets.chat.Chat or None:
+        chat_title = chat_title.strip()
+        if chat_title:
+            chat = self.add_chat(
+                chat_name=chat_title,
+                chat_id=generate_uuid(),
+                mode=1
+            )
+            SQL.insert_or_update_chat(chat)
+            return chat
+
     def load_history(self):
         logger.debug("Loading history")
         selected_chat = SQL.get_preference('selected_chat')
@@ -833,11 +915,15 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if selected_chat not in [row[1] for row in chats]:
                 selected_chat = chats[0][1]
             for row in chats:
-                chat_container =self.chat_list_box.append_chat(row[1], row[0])
+                self.add_chat(
+                    chat_name=row[1],
+                    chat_id=row[0],
+                    mode=0
+                )
                 if row[1] == selected_chat:
                     self.chat_list_box.select_row(list(self.chat_list_box)[-1])
-        else:
-            self.chat_list_box.new_chat()
+        #else:
+            #self.chat_list_box.new_chat()
 
     def chat_actions(self, action, user_data):
         chat = self.selected_chat_row.chat
@@ -1019,7 +1105,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         threading.Thread(target=Widgets.tools.update_available_tools, args=(self.tool_listbox,)).start()
 
         if self.get_application().args.new_chat:
-            self.chat_list_box.new_chat(self.get_application().args.new_chat)
+            self.new_chat(self.get_application().args.new_chat)
 
         self.powersaver_warning_switch.set_active(SQL.get_preference('powersaver_warning', True))
         self.powersaver_warning_switch.set_sensitive(True)
@@ -1109,6 +1195,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
         popover.set_parent(button.get_child())
         popover.set_pointing_to(position)
         popover.popup()
+
+    def on_chat_imported(self, file):
+        if file:
+            if os.path.isfile(os.path.join(cache_dir, 'import.db')):
+                os.remove(os.path.join(cache_dir, 'import.db'))
+            file.copy(Gio.File.new_for_path(os.path.join(cache_dir, 'import.db')), Gio.FileCopyFlags.OVERWRITE, None, None, None, None)
+            for chat in SQL.import_chat(os.path.join(cache_dir, 'import.db'), [tab.chat.get_name() for tab in list(self)]):
+                self.add_chat(
+                    chat_name=chat[1],
+                    chat_id=chat[0],
+                    mode=1
+                )
+            self.show_toast(_("Chat imported successfully"), self.main_overlay)
 
     def request_screenshot(self):
         bus = SessionBus()
@@ -1257,9 +1356,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     Gio.SettingsBindFlags.DEFAULT
                 )
 
-        self.chat_list_box = Widgets.chat.ChatList()
-        self.chat_list_container.set_child(self.chat_list_box)
-
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
         self.message_text_view = GtkSource.View(
@@ -1328,11 +1424,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
             data.get('button').add_controller(gesture_long_press)
 
         universal_actions = {
-            'new_chat': [lambda *_: self.chat_list_box.new_chat(), ['<primary>n']],
+            'new_chat': [lambda *_: self.new_chat(), ['<primary>n']],
             'import_chat': [lambda *_: Widgets.dialog.simple_file(
                 parent=self,
                 file_filters=[self.file_filter_db],
-                callback=self.chat_list_box.on_chat_imported
+                callback=self.on_chat_imported
             )],
             'duplicate_chat': [self.chat_actions],
             'duplicate_current_chat': [self.current_chat_actions],

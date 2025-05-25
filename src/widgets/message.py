@@ -411,7 +411,7 @@ class Message(Gtk.Box):
             self.options_button.set_sensitive(True)
             if self.chat.chat_id and self.chat.row:
                 GLib.idle_add(self.chat.row.spinner.set_visible, False)
-                if window.chat_list_box.get_current_chat().get_name() != self.chat.get_name():
+                if window.chat_list_box.get_selected_row().get_name() != self.chat.get_name():
                     GLib.idle_add(self.chat.row.indicator.set_visible, True)
                 self.chat.set_visible_child_name('content')
             self.chat.stop_message()

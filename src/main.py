@@ -83,13 +83,13 @@ class AlpacaService:
         self.app.props.active_window.quick_ask.present()
 
     def Open(self, chat_name:str):
-        for chat_row in self.app.props.active_window.chat_list_box.tab_list:
+        for chat_row in list(self.app.props.active_window.chat_list_box):
             if chat_row.chat_window.get_name() == chat_name:
                 self.app.props.active_window.chat_list_box.select_row(chat_row)
                 self.Present()
 
     def Create(self, chat_name:str):
-        self.app.props.active_window.chat_list_box.new_chat(chat_name)
+        self.app.props.active_window.new_chat(chat_name)
         self.Present()
 
     def Ask(self, message:str):
