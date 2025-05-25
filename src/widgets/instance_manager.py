@@ -40,6 +40,7 @@ class BaseInstance:
     pinned = False
     description = None
     limitations = ()
+    row = None
 
     def prepare_chat(self, bot_message):
         bot_message.chat.busy = True
@@ -410,7 +411,7 @@ class BaseInstance:
             if not self.instance_id:
                 self.instance_id = generate_uuid()
             SQL.insert_or_update_instance(self)
-            update_instance_list()
+            self.row.set_title(self.name)
             window.main_navigation_view.pop_to_tag('instance_manager')
 
         pg = Adw.PreferencesGroup()
@@ -944,6 +945,7 @@ class InstanceRow(Adw.ActionRow):
 
     def __init__(self, instance):
         self.instance = instance
+        self.instance.row = self
         super().__init__(
             title = self.instance.name,
             subtitle = self.instance.instance_type_display,
@@ -982,7 +984,7 @@ class InstanceRow(Adw.ActionRow):
 
     def remove(self):
         SQL.delete_instance(self.instance.instance_id)
-        update_instance_list()
+        self.get_parent().remove(self)
 
 def update_instance_list():
     window.instance_listbox.remove_all()
