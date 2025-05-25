@@ -565,7 +565,7 @@ class OllamaManaged(BaseOllama):
     instance_url = 'http://0.0.0.0:11434'
     overrides = {
         'HSA_OVERRIDE_GFX_VERSION': '',
-        'CUDA_VISIBLE_DEVICES': '',
+        'CUDA_VISIBLE_DEVICES': '0',
         'ROCR_VISIBLE_DEVICES': '1',
         'HIP_VISIBLE_DEVICES': '1'
     }
