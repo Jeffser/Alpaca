@@ -800,9 +800,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def quick_ask_save(self, button):
         self.quick_ask.close()
         chat = self.quick_ask_overlay.get_child()
-        chat_name = generate_numbered_name(chat.get_name(), [tab.chat.get_name() for tab in list(self.chat_list_box)])
+        chat_name = generate_numbered_name(chat.get_name(), [tab.get_name() for tab in list(self.chat_list_box)])
         new_chat = self.new_chat(chat_name)
-        for message in chat.messages.values():
+        for message in list(chat.container):
             SQL.insert_or_update_message(message, new_chat.chat_id)
         threading.Thread(target=new_chat.load_chat_messages).start()
         self.present()
