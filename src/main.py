@@ -222,7 +222,7 @@ def main(version):
         chats = SQL.get_chats()
         if chats:
             for chat in chats:
-                print(chat[0])
+                print(chat[1])
         else:
             print()
         sys.exit(0)
