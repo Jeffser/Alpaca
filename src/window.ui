@@ -200,7 +200,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                         <property name="transition_type">1</property>
                         <child>
                           <object class="GtkStackPage">
-                            <property name="name">chats</property>
+                            <property name="name">content</property>
                             <property name="child">
                               <object class="GtkScrolledWindow" id="chat_list_container">
                                 <property name="vexpand">true</property>
@@ -220,7 +220,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                         </child>
                         <child>
                           <object class="GtkStackPage">
-                            <property name="name">no-chats</property>
+                            <property name="name">no-results</property>
                             <property name="child">
                               <object class="AdwStatusPage">
                                 <property name="icon-name">sad-computer-symbolic</property>

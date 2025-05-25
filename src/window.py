@@ -698,9 +698,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             row.set_visible(string_search)
             chat_results += 1 if string_search else 0
         if chat_results > 0:
-            self.chat_list_stack.set_visible_child_name('chats')
+            self.chat_list_stack.set_visible_child_name('content')
         else:
-            self.chat_list_stack.set_visible_child_name('no-chats')
+            self.chat_list_stack.set_visible_child_name('no-results')
 
     @Gtk.Template.Callback()
     def model_search_changed(self, entry):
@@ -740,16 +740,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def message_search_changed(self, entry, current_chat=None):
         search_term=entry.get_text()
-        results = 0
+        message_results = 0
         if not current_chat and self.chat_list_box.get_selected_row():
             current_chat = self.chat_list_box.get_selected_row().chat
-        if current_chat:
+        if current_chat and current_chat.get_visible_child_name() == 'content':
             try:
                 for message in list(current_chat.container):
                     if message:
                         content = message.get_content()
                         if content:
-                            message.set_visible(re.search(search_term, content, re.IGNORECASE))
+                            string_search = re.search(search_term, content, re.IGNORECASE)
+                            message.set_visible(string_search)
+                            message_results += 1 if string_search else 0
                             for block in list(message.block_container):
                                 if isinstance(block, Widgets.blocks.text.Text):
                                     if search_term:
@@ -757,9 +759,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
                                         block.set_markup(highlighted_text)
                                     else:
                                         block.set_content(block.get_content())
+                if message_results > 0 or not search_term:
+                    current_chat.set_visible_child_name('content')
+                else:
+                    current_chat.set_visible_child_name('no-results')
             except Exception as e:
                 print(e)
                 pass
+
 
     def convert_model_name(self, name:str, mode:int): # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag   |   mode=2 name:tag -> name, tag
         try:

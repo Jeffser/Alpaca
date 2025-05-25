@@ -57,6 +57,12 @@ class Chat(Gtk.Stack):
         self.add_named(self.welcome_screen, 'welcome-screen')
         self.refresh_welcome_screen_prompts()
 
+        self.add_named(Adw.StatusPage(
+            icon_name="sad-computer-symbolic",
+            title=_("No Messages Found"),
+            description=_("Uh oh! No messages found for your search.")
+        ), 'no-results')
+
         self.busy = False
         self.chat_id = chat_id
         self.row = ChatRow(self)
