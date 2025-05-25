@@ -158,6 +158,13 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                             </style>
                           </object>
                         </child>
+                        <child type="start">
+                          <object class="GtkToggleButton" id="chat_search_button">
+                            <property name="icon-name">edit-find-symbolic</property>
+                            <property name="tooltip-text" translatable="yes">Search Chats</property>
+                            <property name="active" bind-source="chat_searchbar" bind-property="search-mode-enabled" bind-flags="sync-create"/>
+                          </object>
+                        </child>
                         <child type="end">
                           <object class="GtkMenuButton">
                             <property name="primary">True</property>
@@ -168,19 +175,61 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                         </child>
                       </object>
                     </child>
-                    <property name="content">
-                      <object class="GtkScrolledWindow" id="chat_list_container">
-                        <property name="vexpand">true</property>
-                        <property name="hexpand">true</property>
-                        <property name="child">
-                          <object class="GtkListBox" id="chat_list_box">
-                            <signal name="row-selected" handler="chat_changed"/>
-                            <property name="selection-mode">1</property>
-                            <style>
-                              <class name="navigation-sidebar"/>
-                            </style>
+                    <child type="top">
+                      <object class="GtkSearchBar" id="chat_searchbar">
+                        <accessibility>
+                          <property name="label" translatable="yes">Chat search bar</property>
+                        </accessibility>
+                        <property name="search-mode-enabled" bind-source="chat_search_button" bind-property="active" bind-flags="sync-create"/>
+                        <child>
+                          <object class="GtkSearchEntry">
+                            <signal name="search-changed" handler="chat_search_changed"/>
+                            <property name="hexpand">true</property>
+                            <property name="search-delay">100</property>
+                            <property name="placeholder-text" translatable="yes">Search chats</property>
+                            <accessibility>
+                              <property name="label" translatable="yes">Search chats</property>
+                            </accessibility>
                           </object>
-                        </property>
+                        </child>
+                      </object>
+                    </child>
+                    <property name="content">
+                      <object class="GtkStack" id="chat_list_stack">
+                        <property name="transition_duration">100</property>
+                        <property name="transition_type">1</property>
+                        <child>
+                          <object class="GtkStackPage">
+                            <property name="name">chats</property>
+                            <property name="child">
+                              <object class="GtkScrolledWindow" id="chat_list_container">
+                                <property name="vexpand">true</property>
+                                <property name="hexpand">true</property>
+                                <property name="child">
+                                  <object class="GtkListBox" id="chat_list_box">
+                                    <signal name="row-selected" handler="chat_changed"/>
+                                    <property name="selection-mode">1</property>
+                                    <style>
+                                      <class name="navigation-sidebar"/>
+                                    </style>
+                                  </object>
+                                </property>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkStackPage">
+                            <property name="name">no-chats</property>
+                            <property name="child">
+                              <object class="AdwStatusPage">
+                                <property name="icon-name">sad-computer-symbolic</property>
+                                <property name="title" translatable="yes">No Chats Found</property>
+                                <property name="description" translatable="yes">Looks like there aren't any chats with that title. Try tweaking your keywords.</property>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
                       </object>
                     </property>
                   </object>

@@ -83,6 +83,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     welcome_next_button = Gtk.Template.Child()
     main_overlay = Gtk.Template.Child()
     chat_stack = Gtk.Template.Child()
+    chat_list_stack = Gtk.Template.Child()
     message_text_view = None
     message_text_view_scrolled_window = Gtk.Template.Child()
     quick_ask_text_view_scrolled_window = Gtk.Template.Child()
@@ -688,6 +689,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
             Gio.AppInfo.launch_default_for_uri(button.get_name())
         except Exception as e:
             logger.error(e)
+
+    @Gtk.Template.Callback()
+    def chat_search_changed(self, entry):
+        chat_results = 0
+        for row in list(self.chat_list_box):
+            string_search = re.search(entry.get_text(), row.get_name(), re.IGNORECASE)
+            row.set_visible(string_search)
+            chat_results += 1 if string_search else 0
+        if chat_results > 0:
+            self.chat_list_stack.set_visible_child_name('chats')
+        else:
+            self.chat_list_stack.set_visible_child_name('no-chats')
 
     @Gtk.Template.Callback()
     def model_search_changed(self, entry):
