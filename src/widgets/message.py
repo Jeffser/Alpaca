@@ -249,7 +249,8 @@ class BlockContainer(Gtk.Box):
         super().__init__(
             orientation=1,
             halign=0,
-            spacing=5
+            spacing=5,
+            css_classes=['dim-label'] if message.mode == 2 else []
         )
         self.generating_block = None
 
