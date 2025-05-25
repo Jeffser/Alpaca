@@ -47,7 +47,8 @@ OLLAMA_MODELS = {
         "author": "Qwen Team",
         "categories": [
                 "tools",
-                "huge"
+                "huge",
+                "reasoning"
         ],
         "languages": [
                 "en"
@@ -4132,7 +4133,8 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/smallthinker",
         "categories": [
                 "small",
-                "medium"
+                "medium",
+                "reasoning"
         ],
         "author": "Power Infer",
         "languages": [
@@ -4206,7 +4208,8 @@ OLLAMA_MODELS = {
                 "big",
                 "huge",
                 "code",
-                "math"
+                "math",
+                "reasoning"
         ],
         "author": "DeepSeek Team",
         "languages": [
@@ -4329,7 +4332,8 @@ OLLAMA_MODELS = {
         "categories": [
                 "small",
                 "medium",
-                "huge"
+                "huge",
+                "reasoning"
         ],
         "author": "Open Thoughts Team",
         "languages": [
@@ -4352,7 +4356,8 @@ OLLAMA_MODELS = {
         "categories": [
                 "small",
                 "medium",
-                "math"
+                "math",
+                "reasoning"
         ],
         "author": "Agentica Project",
         "languages": [
@@ -4379,7 +4384,8 @@ OLLAMA_MODELS = {
         "categories": [
                 "huge",
                 "multilingual",
-                "math"
+                "math",
+                "reasoning"
         ],
         "author": "Perplexity AI",
         "languages": [
@@ -4656,7 +4662,8 @@ OLLAMA_MODELS = {
                 "huge",
                 "code",
                 "math",
-                "multilingual"
+                "multilingual",
+                "reasoning"
         ],
         "author": "Alibaba",
         "languages": [
@@ -4904,7 +4911,8 @@ OLLAMA_MODELS = {
                 "medium",
                 "small",
                 "big",
-                "code"
+                "code",
+                "reasoning"
         ],
         "author": "Agentica and Together AI",
         "languages": [
@@ -5035,7 +5043,8 @@ OLLAMA_MODELS = {
                 "big",
                 "huge",
                 "math",
-                "code"
+                "code",
+                "reasoning"
         ],
         "author": "Microsoft",
         "languages": [
@@ -5069,7 +5078,8 @@ OLLAMA_MODELS = {
                 "big",
                 "huge",
                 "code",
-                "math"
+                "math",
+                "reasoning"
         ],
         "author": "LG AI Research",
         "languages": [
@@ -5092,7 +5102,8 @@ OLLAMA_MODELS = {
         "categories": [
                 "small",
                 "medium",
-                "math"
+                "math",
+                "reasoning"
         ],
         "author": "Microsoft",
         "languages": [
