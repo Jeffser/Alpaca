@@ -216,7 +216,6 @@ class PullingModelPage(Gtk.Box):
 
     def __init__(self, model):
         self.model = model
-        model_title = window.convert_model_name(self.model.get_name(), 0)
         super().__init__(
             orientation=1,
             spacing=10,
@@ -413,7 +412,6 @@ class LocalModelPage(Gtk.Box):
 
     def __init__(self, model):
         self.model = model
-        model_title = window.convert_model_name(self.model.get_name(), 0)
         super().__init__(
             orientation=1,
             spacing=15,
