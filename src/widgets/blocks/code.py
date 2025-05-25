@@ -25,12 +25,6 @@ language_properties = (
         'filename': 'main.py'
     },
     {
-        'id': 'cpp',
-        'aliases': ['cpp', 'c++'],
-        'executable': True,
-        'filename': 'script.cpp'
-    },
-    {
         'id': 'html',
         'aliases': ['html', 'htm'],
         'executable': True,
