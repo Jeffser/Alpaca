@@ -749,7 +749,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if mode == 0:
                 if ':' in name:
                     name = name.split(':')
-                    return '{} ({})'.format(name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title())
+                    if name[1].lower() in ('latest', 'custom'):
+                        return name[0].replace('-', ' ').title()
+                    else:
+                        return '{} ({})'.format(name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title())
                 else:
                     return name.replace('-', ' ').title()
             elif mode == 1:
