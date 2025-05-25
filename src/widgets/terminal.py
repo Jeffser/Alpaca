@@ -25,15 +25,9 @@ commands = {
         'echo -e "🦙 {sourcename}\n"',
         'python3 "{sourcepath}"'
     ],
-    'cpp': [
-        'echo -e "🦙 {}\n"'.format(_('Compiling C++ script...')),
-        'g++ "{sourcepath}" -o "{resultpath}"',
-        'chmod u+x "{resultpath}"',
-        'echo -e "🦙 {resultname}\n"',
-        '"{resultpath}"'
-    ],
     'html': [
         'echo -e "🦙 {}\n"'.format(_('Using Python HTTP server...')),
+        'xdg-open http://0.0.0.0:8080',
         'python -m http.server 8080 --directory "{sourcedir}"'
     ],
     'bash': [
@@ -151,14 +145,29 @@ class TerminalDialog(Adw.Dialog):
                     f.write('')
             for command in commands.get('python'):
                 script.append(command.format(sourcepath=sourcepath, sourcename=sourcename))
-        elif code_language == 'cpp':
-            sourcepath = os.path.join(self.sourcedir, 'source.cpp')
-            resultpath = os.path.join(self.sourcedir, 'script.bin')
-            resultname = 'script.bin'
+        elif code_language == 'mermaid':
+            sourcepath = os.path.join(self.sourcedir, 'index.html')
             with open(sourcepath, 'w') as f:
-                f.write(file_content)
-            for command in commands.get('cpp'):
-                script.append(command.format(sourcepath=sourcepath, resultpath=resultpath, resultname=resultname))
+                f.write("""
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {{background:#fafafb;}}
+    .mermaid {{display: flex; justify-content: center;}}
+  </style>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({{ startOnLoad: true }});
+  </script>
+</head>
+<body><div class="mermaid">{mermaid_content}</div></body>
+</html>
+                """.format(mermaid_content=file_content))
+            for command in commands.get('html'):
+                script.append(command.format(sourcedir=self.sourcedir))
+
+
         elif code_language == 'html':
             sourcepath = os.path.join(self.sourcedir, 'index.html')
             with open(sourcepath, 'w') as f:

@@ -25,6 +25,12 @@ language_properties = (
         'filename': 'main.py'
     },
     {
+        'id': 'mermaid',
+        'aliases': ['mermaid'],
+        'executable': True,
+        'filename': 'index.html'
+    },
+    {
         'id': 'html',
         'aliases': ['html', 'htm'],
         'executable': True,
@@ -160,12 +166,13 @@ class Code(Gtk.Box):
             css_classes=["code_block"]
         )
         self.append(self.source_view)
+        self.raw_language = language
         self.code_language = None
         self.pre_edit_code = None
         if content:
             self.set_content(content)
-        if language:
-            self.set_language(language)
+        if self.raw_language:
+            self.set_language(self.raw_language)
 
     def begin_edit(self) -> None:
         self.button_stack.set_visible_child_name("edit")
@@ -211,11 +218,11 @@ class Code(Gtk.Box):
             language_name = self.code_language.get_name()
             if language_name:
                 return language_name
-        return _('Code Block')
+        return self.raw_language
 
     def set_language(self, value:str) -> None:
         self.code_language = GtkSource.LanguageManager.get_default().get_language(language_fallback.get(value.lower(), value))
-        self.language_label.set_label(self.get_language())
+        self.language_label.set_label(self.get_language().title())
         self.buffer.set_language(self.code_language)
         self.run_button.set_visible(get_language_property(self.get_language()).get('executable'))
 
