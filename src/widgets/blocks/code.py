@@ -206,9 +206,12 @@ class Code(Gtk.Box):
     def get_code(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
 
-    def get_language(self) -> str or None:
+    def get_language(self) -> str:
         if self.code_language:
-            return self.code_language.get_name()
+            language_name = self.code_language.get_name()
+            if language_name:
+                return language_name
+        return _('Code Block')
 
     def set_language(self, value:str) -> None:
         self.code_language = GtkSource.LanguageManager.get_default().get_language(language_fallback.get(value.lower(), value))
