@@ -149,11 +149,19 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                     <child type="top">
                       <object class="AdwHeaderBar">
                         <child type="start">
-                          <object class="AdwSplitButton">
+                          <!--<object class="AdwSplitButton">
                             <property name="action-name">app.new_chat</property>
                             <property name="tooltip-text" translatable="yes">New Chat</property>
                             <property name="icon-name">chat-message-new-symbolic</property>
                             <property name="menu-model">new_chat_menu</property>
+                            <style>
+                              <class name="flat"/>
+                            </style>
+                          </object>-->
+                          <object class="GtkButton">
+                            <property name="action-name">app.new_chat</property>
+                            <property name="tooltip-text" translatable="yes">New Chat</property>
+                            <property name="icon-name">chat-message-new-symbolic</property>
                             <style>
                               <class name="flat"/>
                             </style>

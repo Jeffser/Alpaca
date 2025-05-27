@@ -3,6 +3,7 @@ from ...sql_manager import Instance as SQL
 import time, random
 
 from .tools import GetCurrentDatetime, GetRecipeByName, GetRecipesByCategory, ExtractWikipedia, OnlineSearch, RunCommand
+from .notebook_tools import tools as NotebookTools
 
 available_tools = [GetCurrentDatetime, GetRecipeByName, GetRecipesByCategory, ExtractWikipedia, OnlineSearch, RunCommand]
 
@@ -20,11 +21,11 @@ def update_available_tools(listbox):
         tool_element = ac(tool_parameters.get('variables', {}), tool_parameters.get('activated', False))
         listbox.prepend(tool_element)
 
-def get_enabled_tools(listbox) -> list:
-    tools = []
-    for ac in list(listbox):
-        if ac.is_enabled():
-            tools.append(ac.get_tool())
+def get_enabled_tools(listbox) -> dict:
+    tools = {}
+    for t in list(listbox):
+        if t.is_enabled():
+            tools[t.tool_metadata.get('name')] = t
     return tools
 
 def get_tool(tool_name:str, listbox):

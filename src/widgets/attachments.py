@@ -113,21 +113,36 @@ class AttachmentDialog(Adw.Dialog):
 
         super().__init__(
             title=self.attachment.file_name,
-            follows_content_size=True,
-            child = Adw.ToolbarView()
+            child = Adw.ToolbarView(),
+            content_height=420
         )
         header = Adw.HeaderBar()
 
-        if self.attachment.file_type != 'thought':
-            delete_button = Gtk.Button(
-                css_classes=['destructive-action'],
-                icon_name='user-trash-symbolic',
-                tooltip_text=_('Remove Attachment'),
-                vexpand=False,
-                valign=3
-            )
-            delete_button.connect('clicked', lambda *_: self.prompt_delete())
-            header.pack_start(delete_button)
+        delete_button = Gtk.Button(
+            css_classes=['error'],
+            icon_name='user-trash-symbolic',
+            tooltip_text=_('Remove Attachment'),
+            vexpand=False,
+            valign=3
+        )
+        delete_button.connect('clicked', lambda *_: self.prompt_delete())
+        header.pack_start(delete_button)
+
+        if self.attachment.file_type == 'notebook':
+            try:
+                chat = self.attachment.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().chat
+                if chat.chat_type == 'notebook':
+                    notebook_button = Gtk.Button(
+                        css_classes=['accent'],
+                        icon_name='open-book-symbolic',
+                        tooltip_text=_('Replace Notebook Content'),
+                        vexpand=False,
+                        valign=3
+                    )
+                    notebook_button.connect('clicked', lambda *_, notebook=chat: self.replace_notebook_content(notebook))
+                    header.pack_start(notebook_button)
+            except:
+                pass
 
         self.get_child().add_top_bar(header)
         self.get_child().set_content(
@@ -136,8 +151,9 @@ class AttachmentDialog(Adw.Dialog):
                 vexpand=True,
                 propagate_natural_width=True,
                 propagate_natural_height=True,
-                overflow=1,
                 css_classes=['undershoot-bottom'],
+                max_content_width=500,
+                min_content_width=300
             )
         )
 
@@ -196,6 +212,10 @@ class AttachmentDialog(Adw.Dialog):
             button_appearance = 'destructive'
         )
 
+    def replace_notebook_content(self, notebook):
+        notebook.set_notebook(self.attachment.file_content)
+        self.close()
+
 class Attachment(Gtk.Button):
     __gtype_name__ = 'AlpacaAttachment'
 
@@ -219,7 +239,8 @@ class Attachment(Gtk.Button):
                     "thought": "brain-augemnted-symbolic",
                     "tool": "processor-symbolic",
                     "link": "globe-symbolic",
-                    "image": "image-x-generic-symbolic"
+                    "image": "image-x-generic-symbolic",
+                    "notebook": "open-book-symbolic"
                 }.get(self.file_type, "document-text-symbolic")
             )
         )

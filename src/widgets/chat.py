@@ -31,13 +31,13 @@ class Notebook(Gtk.Stack):
             spacing=12,
             css_classes=['p10']
         )
-        message_scrolledwindow = Gtk.ScrolledWindow(
+        self.scrolledwindow = Gtk.ScrolledWindow(
             child=self.container,
             propagate_natural_height=True,
             kinetic_scrolling=True,
             vexpand=True,
             hexpand=True,
-            css_classes=["undershoot-bottom", "card", "view"],
+            css_classes=["undershoot-bottom"],
             hscrollbar_policy=2,
             margin_start=10,
             margin_end=10,
@@ -50,6 +50,7 @@ class Notebook(Gtk.Stack):
             css_classes=["p10"],
             wrap_mode=3
         )
+        self.textview.connect('notify::has-focus', lambda *_: self.textview_focus_changed())
         book_scrolledwindow = Gtk.ScrolledWindow(
             child=self.textview,
             propagate_natural_height=True,
@@ -69,7 +70,7 @@ class Notebook(Gtk.Stack):
             wide_handle=True,
             position=400
         )
-        paned.set_start_child(message_scrolledwindow)
+        paned.set_start_child(self.scrolledwindow)
         paned.set_end_child(book_scrolledwindow)
         list(paned)[1].add_css_class('card')
         window.split_view_overlay.connect('notify::collapsed', lambda *_: paned.set_orientation(window.split_view_overlay.get_collapsed()))
@@ -83,8 +84,8 @@ class Notebook(Gtk.Stack):
         self.add_named(clamp, 'content')
 
         welcome_screen = Adw.StatusPage(
-            icon_name="com.jeffser.Alpaca",
-            title="Alpaca",
+            icon_name="open-book-symbolic",
+            title=_("Notebook"),
             description=_("Start a notebook with a message"),
             vexpand=True
         )
@@ -101,6 +102,36 @@ class Notebook(Gtk.Stack):
         self.chat_id = chat_id
         self.row = ChatRow(self)
 
+    def textview_focus_changed(self):
+        print('focus', self.textview.get_sensitive())
+        return
+
+        if not self.textview.has_focus() and len(list(self.container)) > 0:
+            last_message = list(self.container)[-1]
+            if last_message:
+                last_notebook = None
+                for att in list(last_message.attachment_container.container):
+                    if att.file_type == 'notebook':
+                        last_notebook = att
+                if last_notebook:
+                    last_notebook.file_content = self.get_notebook()
+                    SQL.insert_or_update_attachment(last_message, last_notebook)
+
+
+    def append_notebook(self, content:str):
+        content += '\n\n'
+        buffer = self.textview.get_buffer()
+        buffer.insert(buffer.get_end_iter(), content, len(content.encode('utf8')))
+
+    def set_notebook(self, content:str):
+        content = content.replace('\n', '\n\n')
+        buffer = self.textview.get_buffer()
+        buffer.set_text(content, len(content.encode('utf8')))
+
+    def get_notebook(self) -> str:
+        buffer = self.textview.get_buffer()
+        return buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
+
     def stop_message(self):
         self.busy = False
         window.switch_send_stop_button(True)
@@ -116,6 +147,7 @@ class Notebook(Gtk.Stack):
 
     def load_messages(self):
         messages = SQL.get_messages(self)
+        last_notebook = None
         for message in messages:
             message_element = Message(
                 dt=datetime.datetime.strptime(message[3] + (":00" if message[3].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'),
@@ -134,10 +166,39 @@ class Notebook(Gtk.Stack):
                     attachment_type=attachment[1],
                     content=attachment[3]
                 )
+                if attachment[1] == 'notebook' and attachment[3]:
+                    last_notebook = attachment[3]
             GLib.idle_add(message_element.block_container.set_content, message[4])
         self.set_visible_child_name('content' if len(messages) > 0 else 'welcome-screen')
-
-    #def convert_to_json(self, include_metadata:bool=False) -> dict:
+        if last_notebook:
+            self.set_notebook(last_notebook)
+    def convert_to_json(self, include_metadata:bool=False) -> dict:
+        messages = []
+        for message in list(self.container)[-2:]:
+            if message.get_content() and message.dt:
+                message_data = {
+                    'role': ('user', 'assistant', 'system')[message.mode],
+                    'content': []
+                }
+                for image in message.image_attachment_container.get_content():
+                    message_data['content'].append({
+                        'type': 'image_url',
+                        'image_url': {
+                            'url': f'data:image/jpeg;base64,{image.get_content()}'
+                        }
+                    })
+                message_data['content'].append({
+                    'type': 'text',
+                    'text': ''
+                })
+                for attachment in message.attachment_container.get_content():
+                    message_data['content'][0]['text'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
+                message_data['content'][0 if ("text" in message_data["content"][0]) else 1]['text'] += message.get_content()
+                if include_metadata:
+                    message_data['date'] = message.dt.strftime("%Y/%m/%d %H:%M:%S")
+                    message_data['model'] = message.model
+                messages.append(message_data)
+        return messages
 
 class Chat(Gtk.Stack):
     __gtype_name__ = 'AlpacaChat'
@@ -160,7 +221,7 @@ class Chat(Gtk.Stack):
             tightening_threshold=800,
             child=self.container
         )
-        scrolledwindow = Gtk.ScrolledWindow(
+        self.scrolledwindow = Gtk.ScrolledWindow(
             child=clamp,
             propagate_natural_height=True,
             kinetic_scrolling=True,
@@ -170,7 +231,7 @@ class Chat(Gtk.Stack):
             hscrollbar_policy=2
         )
         self.add_named(Adw.Spinner(), 'loading')
-        self.add_named(scrolledwindow, 'content')
+        self.add_named(self.scrolledwindow, 'content')
 
         self.welcome_screen = Adw.StatusPage(
             icon_name="com.jeffser.Alpaca",

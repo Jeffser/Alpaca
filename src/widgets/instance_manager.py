@@ -60,7 +60,48 @@ class BaseInstance:
 
         self.generate_response(bot_message, chat, messages, model, None)
 
-    def use_tools(self, bot_message, model:str):
+    def notebook_generation(self, bot_message, model:str, available_tools:dict):
+        chat, messages = self.prepare_chat(bot_message)
+        chat.textview.set_sensitive(False)
+        if bot_message.options_button:
+            bot_message.options_button.set_active(False)
+
+        if chat.chat_id and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
+            threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
+
+        try:
+            completion = self.client.chat.completions.create(
+                model=model,
+                messages=messages,
+                tools=[v.get_tool() for v in available_tools.values()]
+            )
+            if completion.choices[0] and completion.choices[0].message:
+                if completion.choices[0].message.tool_calls:
+                    for call in completion.choices[0].message.tool_calls:
+                        current_tool = available_tools.get(call.function.name, None)
+                        print(call.function.name)
+                        if current_tool and call.function.arguments:
+                            current_tool.run(json.loads(call.function.arguments), bot_message)
+        except Exception as e:
+            dialog.simple_error(
+                parent = bot_message.get_root(),
+                title = _('Notebook Error'),
+                body = _('An error occurred while running tool'),
+                error_log = e
+            )
+            logger.error(e)
+
+        attachment = bot_message.add_attachment(
+            file_id = generate_uuid(),
+            name = _('Notebook'),
+            attachment_type = 'notebook',
+            content = str(bot_message.chat.get_notebook())
+        )
+        SQL.insert_or_update_attachment(bot_message, attachment)
+        bot_message.update_message({'done': True})
+        chat.textview.set_sensitive(True)
+
+    def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
         chat, messages = self.prepare_chat(bot_message)
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
@@ -69,7 +110,6 @@ class BaseInstance:
         if chat.chat_id and [m['role'] for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
 
-        available_tools = tools.get_enabled_tools(window.tool_listbox)
         tools_used = []
 
         try:
@@ -77,13 +117,17 @@ class BaseInstance:
             completion = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
-                tools=available_tools
+                tools=[v.get_tool() for v in available_tools.values()]
             )
             if completion.choices[0] and completion.choices[0].message:
                 if completion.choices[0].message.tool_calls:
                     for call in completion.choices[0].message.tool_calls:
                         tools.log_to_message(_("Using {}").format(call.function.name), bot_message, True)
-                        response = tools.run_tool(call.function.name, json.loads(call.function.arguments), messages, bot_message, window.listbox)
+                        if available_tools.get(call.function.name):
+                            response = available_tools.get(call.function.name).run(json.loads(call.function.arguments), messages, bot_message)
+                        else:
+                            response = ''
+
                         arguments = json.loads(call.function.arguments)
                         messages.append({
                             "role": "tool",
@@ -95,19 +139,19 @@ class BaseInstance:
                             "arguments": arguments,
                             "response": str(response)
                         })
-                        tool = tools.get_tool(call.function.name, window.tool_listbox)
-                        if tool:
+                        if available_tools.get(call.function.name):
                             attachment = bot_message.add_attachment(
                                 file_id = generate_uuid(),
-                                name = tool.name,
+                                name = available_tools.get(call.function.name).name,
                                 attachment_type = 'tool',
                                 content = '# {}\n\n## Arguments:\n\n{}\n\n## Result:\n\n{}'.format(
-                                    tool.name,
+                                    available_tools.get(call.function.name).name,
                                     '\n'.join(['- {}: {}'.format(k.replace('_', ' ').title(), v) for k, v in arguments.items()]),
                                     str(response)
                                 )
                             )
-                            SQL.add_attachment(bot_message, attachment)
+                            SQL.insert_or_update_attachment(bot_message, attachment)
+
         except Exception as e:
             dialog.simple_error(
                 parent = bot_message.get_root(),
@@ -117,9 +161,13 @@ class BaseInstance:
             )
             logger.error(e)
 
-        tools.log_to_message(_("Generating message..."), bot_message, True)
-        bot_message.update_message({'remove_css': 'dim-label'})
-        self.generate_response(bot_message, chat, messages, model, tools_used if len(tools_used) > 0 else None)
+        if generate_message:
+            tools.log_to_message(_("Generating message..."), bot_message, True)
+            bot_message.update_message({'remove_css': 'dim-label'})
+            self.generate_response(bot_message, chat, messages, model, tools_used if len(tools_used) > 0 else None)
+        else:
+            bot_message.update_message({'clear': True})
+            bot_message.update_message({'done': True})
 
     def generate_response(self, bot_message, chat, messages:list, model:str, tools_used:list):
         if bot_message.options_button:
@@ -199,7 +247,7 @@ class BaseInstance:
             completion = self.client.beta.chat.completions.parse(**params, response_format=ChatTitle)
             response = completion.choices[0].message
             if response.parsed:
-                emoji = response.parsed.emoji if len(response.parsed.emoji) == 1 else '💬'
+                emoji = response.parsed.emoji if len(response.parsed.emoji) == 1 else ''
                 new_chat_title = '{} {}'.format(emoji, response.parsed.title)
         except Exception as e:
             try:

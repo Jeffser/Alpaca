@@ -5,8 +5,6 @@ from gi.repository import Adw, Gtk
 import datetime, time, random, requests, json, os
 from html2text import html2text
 
-from gi.repository import Adw
-
 from .. import terminal, attachments
 from ...constants import data_dir
 from ...sql_manager import generate_uuid, Instance as SQL
@@ -155,7 +153,7 @@ class Base(Adw.ActionRow):
             attachment_type = 'image',
             content = attachments.extract_online_image(image_url, 640)
         )
-        SQL.add_attachment(bot_message, attachment)
+        SQL.insert_or_update_attachment(bot_message, attachment)
 
 class GetCurrentDatetime(Base):
     tool_metadata = {
@@ -233,7 +231,7 @@ class GetRecipeByName(Base):
                             attachment_type = "link",
                             content = meal.get("strYoutube")
                         )
-                        SQL.add_attachment(bot_message, attachment)
+                        SQL.insert_or_update_attachment(bot_message, attachment)
                     if meal.get("strSource"):
                         attachment = bot_message.add_attachment(
                             file_id = generate_uuid(),
@@ -241,7 +239,7 @@ class GetRecipeByName(Base):
                             attachment_type = "link",
                             content = meal.get("strSource")
                         )
-                        SQL.add_attachment(bot_message, attachment)
+                        SQL.insert_or_update_attachment(bot_message, attachment)
                     return json.dumps(meal, indent=2)
                 else:
                     return "{'error': '404: Not Found'}"
@@ -301,7 +299,7 @@ class GetRecipesByCategory(Base):
                             content = meal.get("strYoutube")
                         )
 
-                        SQL.add_attachment(bot_message, attachment)
+                        SQL.insert_or_update_attachment(bot_message, attachment)
                     if meal.get("strSource"):
                         attachment = bot_message.add_attachment(
                             file_id = generate_uuid(),
@@ -310,7 +308,7 @@ class GetRecipesByCategory(Base):
                             content = meal.get("strSource")
                         )
 
-                        SQL.add_attachment(bot_message, attachment)
+                        SQL.insert_or_update_attachment(bot_message, attachment)
             return '\n'.join(data)
 
 class ExtractWikipedia(Base):
@@ -396,7 +394,7 @@ class OnlineSearch(Base):
                 attachment_type = "link",
                 content = data.get("AbstractURL")
             )
-            SQL.add_attachment(bot_message, attachment)
+            SQL.insert_or_update_attachment(bot_message, attachment)
 
         if data.get("AbstractText"):
             result_md.append(data.get("AbstractText"))
@@ -420,7 +418,7 @@ class OnlineSearch(Base):
                 attachment_type = "link",
                 content = data.get("OfficialWebsite")
             )
-            SQL.add_attachment(bot_message, attachment)
+            SQL.insert_or_update_attachment(bot_message, attachment)
 
         if len(result_md) == 1 and len(data.get("RelatedTopics", [])) > 0:
             result_md.append("No direct results were found but there are some related topics.")

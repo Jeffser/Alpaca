@@ -534,7 +534,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 content = old_attachment.file_content
             )
             old_attachment.delete()
-            SQL.add_attachment(m_element, attachment)
+            SQL.insert_or_update_attachment(m_element, attachment)
 
         m_element.block_container.set_content(raw_message)
 
@@ -552,7 +552,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             )
             current_chat.add_message(m_element_bot)
             SQL.insert_or_update_message(m_element_bot)
-            threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
+            if current_chat.chat_type == 'chat':
+                threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
+            elif current_chat.chat_type == 'notebook':
+                tls = Widgets.tools.NotebookTools
+                if len(current_chat.get_notebook()) == 0:
+                    tls = {Widgets.tools.notebook_tools.WriteNotebook.tool_metadata.get('name'): Widgets.tools.notebook_tools.WriteNotebook()}
+                threading.Thread(target=self.get_current_instance().notebook_generation, args=(m_element_bot, current_model, tls)).start()
         elif mode==1:
             current_chat.set_visible_child_name('content')
         elif mode==2:
@@ -565,7 +571,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             )
             current_chat.add_message(m_element_bot)
             SQL.insert_or_update_message(m_element_bot)
-            threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model)).start()
+            threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.tool_listbox), True)).start()
 
     @Gtk.Template.Callback()
     def welcome_carousel_page_changed(self, carousel, index):
@@ -1115,7 +1121,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if mode == 0:
                 threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
             else:
-                threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model)).start()
+                threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.tool_listbox), True)).start()
 
     def get_current_instance(self):
         if self.instance_listbox.get_selected_row():
@@ -1456,7 +1462,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         universal_actions = {
             'new_chat': [lambda *_: self.new_chat(chat_type='chat'), ['<primary>n']],
-            'new_notebook': [lambda *_: self.new_chat(chat_type='notebook'), ['<primary><shift>n']],
+            'new_notebook': [lambda *_: self.new_chat(chat_type='notebook') if os.getenv("ALPACA_NOTEBOOK", "0") == "1" else None, ['<primary><shift>n']],
             'import_chat': [lambda *_: Widgets.dialog.simple_file(
                 parent=self,
                 file_filters=[self.file_filter_db],

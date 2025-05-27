@@ -411,18 +411,32 @@ class Instance:
                 (message.message_id,),
             )
 
-    def add_attachment(message, attachment) -> None:
+    def insert_or_update_attachment(message, attachment) -> None:
         with SQLiteConnection() as c:
-            c.cursor.execute(
-                "INSERT INTO attachment (id, message_id, type, name, content) VALUES (?, ?, ?, ?, ?)",
-                (
-                    generate_uuid(),
-                    message.message_id,
-                    attachment.file_type,
-                    attachment.file_name,
-                    attachment.file_content,
-                ),
-            )
+            if c.cursor.execute(
+                "SELECT id FROM attachment WHERE id=?", (attachment.get_name(),)
+            ).fetchone():
+                c.cursor.execute(
+                    "UPDATE attachment SET message_id=?, type=?, name=?, content=? WHERE id=?",
+                    (
+                        message.message_id,
+                        attachment.file_type,
+                        attachment.file_name,
+                        attachment.file_content,
+                        attachment.get_name()
+                    )
+                )
+            else:
+                c.cursor.execute(
+                    "INSERT INTO attachment (id, message_id, type, name, content) VALUES (?, ?, ?, ?, ?)",
+                    (
+                        generate_uuid(),
+                        message.message_id,
+                        attachment.file_type,
+                        attachment.file_name,
+                        attachment.file_content,
+                    ),
+                )
 
     def delete_attachment(attachment) -> None:
         with SQLiteConnection() as c:

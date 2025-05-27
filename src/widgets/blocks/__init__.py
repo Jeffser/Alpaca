@@ -38,7 +38,7 @@ def text_to_block_list(content:str, message=None) -> list:
                     match.group(1)
                 )
                 message.attachment_container.add_attachment(attachment)
-                SQL.add_attachment(message, attachment)
+                SQL.insert_or_update_attachment(message, attachment)
 
             elif pattern_name == "code":
                 if match.group(1).lower() == 'latex':
