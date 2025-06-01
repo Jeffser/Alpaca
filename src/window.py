@@ -769,7 +769,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 print(e)
                 pass
         if message_results > 0 or not search_term:
-            current_chat.set_visible_child_name('content')
+            if len(list(current_chat.container)) > 0:
+                current_chat.set_visible_child_name('content')
+            else:
+                current_chat.set_visible_child_name('welcome-screen')
         else:
             current_chat.set_visible_child_name('no-results')
 
