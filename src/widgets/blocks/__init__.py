@@ -60,7 +60,7 @@ def text_to_block_list(content:str, message=None) -> list:
                         blocks.append(Text(content=expression))
             else:
                 if len(blocks) > 0 and isinstance(blocks[-1], Text):
-                    blocks[-1].append_content('\n\n{}'.format(expression))
+                    blocks[-1].append_content(expression)
                 else:
                     blocks.append(Text(content=expression))
             pos = match_end
