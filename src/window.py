@@ -766,7 +766,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                                     else:
                                         block.set_content(block.get_content())
             except Exception as e:
-                print(e)
+                logger.error(e)
                 pass
         if message_results > 0 or not search_term:
             if len(list(current_chat.container)) > 0:
@@ -858,12 +858,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 if load_chat_thread:
                     load_chat_thread.join()
                 # Select the correct model for the chat
-                model_to_use_index = find_model_index(self.get_current_instance().get_default_model())
-                print(self.get_current_instance().get_default_model(), model_to_use_index)
+                model_to_use_index = None
                 if len(list(future_row.chat.container)) > 0:
-                    message_model = find_model_index(list(future_row.chat.container)[-1].get_model())
-                    if message_model:
-                        model_to_use_index = message_model
+                    model_to_use_index = find_model_index(list(future_row.chat.container)[-1].get_model())
+                else:
+                    model_to_use_index = find_model_index(self.get_current_instance().get_default_model())
 
                 if model_to_use_index is None:
                     model_to_use_index = 0
