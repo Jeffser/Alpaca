@@ -723,7 +723,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 results_local = results_local or model.get_visible()
                 if not model.get_visible() and model in self.local_model_flowbox.get_selected_children():
                     self.local_model_flowbox.unselect_all()
-            self.local_model_stack.set_visible_child_name('content' if results_local else 'no-results')
+            self.local_model_stack.set_visible_child_name('content' if results_local or not entry.get_text() else 'no-results')
         else:
             self.local_model_stack.set_visible_child_name('no-models')
 
