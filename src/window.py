@@ -47,7 +47,7 @@ from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, Spelling
 
 from .sql_manager import generate_uuid, generate_numbered_name, Instance as SQL
 from . import widgets as Widgets
-from .constants import SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES, TTS_AUTO_MODES, STT_MODELS, data_dir, source_dir
+from .constants import SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES, TTS_AUTO_MODES, STT_MODELS, data_dir, source_dir, cache_dir
 
 logger = logging.getLogger(__name__)
 
@@ -1229,7 +1229,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if os.path.isfile(os.path.join(cache_dir, 'import.db')):
                 os.remove(os.path.join(cache_dir, 'import.db'))
             file.copy(Gio.File.new_for_path(os.path.join(cache_dir, 'import.db')), Gio.FileCopyFlags.OVERWRITE, None, None, None, None)
-            for chat in SQL.import_chat(os.path.join(cache_dir, 'import.db'), [tab.chat.get_name() for tab in list(self)]):
+            for chat in SQL.import_chat(os.path.join(cache_dir, 'import.db'), [tab.chat.get_name() for tab in list(self.chat_list_box)]):
                 self.add_chat(
                     chat_name=chat[1],
                     chat_id=chat[0],
@@ -1502,7 +1502,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 parent=self,
                 heading=_('Delete All Chats?'),
                 body=_('Are you sure you want to delete all chats?'),
-                callback=lambda: [GLib.idle_add(c.chat.delete) for c in list(self.chat_list_box)],
+                callback=lambda: [GLib.idle_add(c.delete) for c in list(self.chat_list_box)],
                 button_name=_('Delete'),
                 button_appearance='destructive'
             )],

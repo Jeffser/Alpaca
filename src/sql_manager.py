@@ -286,7 +286,7 @@ class Instance:
                         ),
                     )
 
-    def import_chat(import_sql_path: str, chat_names: list) -> list: #TODO adapt to use type if type in imported chat
+    def import_chat(import_sql_path: str, chat_names: list) -> list:
         with SQLiteConnection() as c:
             c.cursor.execute("ATTACH DATABASE ? AS import", (import_sql_path,))
             _chat_widgets = []
@@ -344,7 +344,12 @@ class Instance:
                 )
 
             # Import
-            c.cursor.execute("INSERT INTO chat SELECT * FROM import.chat")
+            for chat in c.cursor.execute("SELECT * FROM import.chat").fetchall():
+                if len(chat) == 3:
+                    c.cursor.execute("INSERT INTO chat (id, name, type) VALUES (?, ?, ?)", (chat[0], chat[1], chat[2]))
+                else:
+                    c.cursor.execute("INSERT INTO chat (id, name) VALUES (?, ?)", (chat[0], chat[1]))
+
             c.cursor.execute(
                 "INSERT INTO message SELECT * FROM import.message"
             )
