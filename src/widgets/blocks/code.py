@@ -6,7 +6,7 @@ Code block handling
 import gi
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, Gdk, GtkSource
-from .. import terminal
+from .. import terminal, dialog
 
 language_fallback = {
     'bash': 'sh',
@@ -190,14 +190,13 @@ class Code(Gtk.Box):
         self.pre_edit_code = None
         self.source_view.set_editable(False)
         self.get_parent().message.save()
-        ##TODO Toast
+        dialog.show_toast(_("Changes saved successfully"), self.get_root())
 
     def copy_code(self) -> None:
         clipboard = Gdk.Display().get_default().get_clipboard()
         text = self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
         clipboard.set(text)
-        ##TODO you know what with toasts
-        #window.show_toast(_("Code copied to the clipboard"), window.main_overlay)
+        dialog.show_toast(_("Code copied to the clipboard"), self.get_root())
 
     def run_script(self) -> None:
         ##TODO add JS and CSS files as extra_files

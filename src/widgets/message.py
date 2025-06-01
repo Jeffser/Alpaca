@@ -8,7 +8,7 @@ from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
 import os, datetime, threading, sys, base64, logging
 from ..constants import TTS_VOICES
 from ..sql_manager import Instance as SQL
-from . import model_manager, attachments, blocks
+from . import model_manager, attachments, blocks, dialog
 
 logger = logging.getLogger(__name__)
 
@@ -94,7 +94,7 @@ class OptionPopup(Gtk.Popover):
         logger.debug("Copying message")
         clipboard = Gdk.Display().get_default().get_clipboard()
         clipboard.set(self.message_element.get_content())
-        window.show_toast(_("Message copied to the clipboard"), window.main_overlay)
+        dialog.show_toast(_("Message copied to the clipboard"), self.get_root())
 
     def edit_message(self):
         logger.debug("Editing message")
@@ -164,7 +164,7 @@ class OptionPopup(Gtk.Popover):
             self.message_element.options_button.set_sensitive(False)
             threading.Thread(target=window.get_current_instance().generate_message, args=(self.message_element, model)).start()
         else:
-            window.show_toast(_("Message cannot be regenerated while receiving a response"), window.main_overlay)
+            dialog.show_toast(_("Message cannot be regenerated while receiving a response"), self.get_root())
 
 class MessageHeader(Gtk.Box):
     __gtype_name__ = 'AlpacaMessageHeader'

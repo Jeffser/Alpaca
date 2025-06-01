@@ -649,7 +649,7 @@ class OllamaManaged(BaseOllama):
                     self.log_raw += line
                     print(line, end='')
                     if 'msg="model request too large for system"' in line:
-                        window.show_toast(_("Model request too large for system"), window.main_overlay)
+                        dialog.show_toast(_("Model request too large for system"), window)
                     elif 'msg="amdgpu detected, but no compatible rocm library found.' in line:
                         if bool(os.getenv("FLATPAK_ID")):
                             self.log_summary = (_("AMD GPU detected but the extension is missing, Ollama will use CPU.") + AMD_support_label, ['dim-label', 'error'])

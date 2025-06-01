@@ -502,13 +502,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         current_model = Widgets.model_manager.get_selected_model().get_name()
         if mode == 2 and len(Widgets.tools.get_enabled_tools(self.tool_listbox)) == 0:
-            self.show_toast(_("No tools enabled."), self.main_overlay, 'app.tool_manager', _('Open Tool Manager'))
+            Widgets.dialog.show_toast(_("No tools enabled."), current_chat.get_root(), 'app.tool_manager', _('Open Tool Manager'))
             return
         if 'ollama' in self.get_current_instance().instance_type and mode == 2 and 'tools' not in Widgets.model_manager.available_models.get(current_model.split(':')[0], {}).get('categories', []):
-            self.show_toast(_("'{}' does not support tools.").format(self.convert_model_name(current_model, 0)), self.main_overlay, 'app.model_manager', _('Open Model Manager'))
+            Widgets.dialog.show_toast(_("'{}' does not support tools.").format(self.convert_model_name(current_model, 0)), current_chat.get_root(), 'app.model_manager', _('Open Model Manager'))
             return
         if current_model is None:
-            self.show_toast(_("Please select a model before chatting"), self.main_overlay)
+            Widgets.dialog.show_toast(_("Please select a model before chatting"), current_chat.get_root())
             return
 
         tab = self.chat_list_box.get_selected_row()
@@ -859,6 +859,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     load_chat_thread.join()
                 # Select the correct model for the chat
                 model_to_use_index = find_model_index(self.get_current_instance().get_default_model())
+                print(self.get_current_instance().get_default_model(), model_to_use_index)
                 if len(list(future_row.chat.container)) > 0:
                     message_model = find_model_index(list(future_row.chat.container)[-1].get_model())
                     if message_model:
@@ -884,17 +885,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
             if new_text != text:
                 editable.stop_emission_by_name("insert-text")
-
-    def show_toast(self, message:str, overlay, action:str=None, action_name:str=None):
-        logger.info(message)
-        toast = Adw.Toast(
-            title=message,
-            timeout=2
-        )
-        if action and action_name:
-            toast.set_action_name(action)
-            toast.set_button_label(action_name)
-        overlay.add_toast(toast)
 
     def show_notification(self, title:str, body:str, icon:Gio.ThemedIcon=None):
         if not self.is_active() and not self.quick_ask.is_active():
@@ -1011,7 +1001,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             transcriptions = Widgets.attachments.get_youtube_transcripts(data['url'].split('=')[1])
             if len(transcriptions) == 0:
-                GLib.idle_add(self.show_toast, _("This video does not have any transcriptions"), self.main_overlay)
+                GLib.idle_add(Widgets.dialog.show_toast, _("This video does not have any transcriptions"), self)
                 return
 
             if not any(filter(lambda x: '(en' in x and 'auto-generated' not in x and len(transcriptions) > 1, transcriptions)):
@@ -1026,7 +1016,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             )
         except Exception as e:
             logger.error(e)
-            GLib.idle_add(self.show_toast, _("Error attaching video, please try again"), self.main_overlay)
+            GLib.idle_add(Widgets.dialog.show_toast, _("Error attaching video, please try again"), self)
         GLib.idle_add(self.message_text_view_scrolled_window.set_sensitive, True)
 
     def cb_text_received(self, text):
@@ -1068,7 +1058,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     self.on_attachment(file)
                     tdir.cleanup()
                 else:
-                    self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)
+                    Widgets.dialog.show_toast(_("Image recognition is only available on specific models"), self)
         except Exception as e:
             pass
 
@@ -1097,7 +1087,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if default_model:
             current_model = self.convert_model_name(default_model, 1)
         if current_model is None:
-            self.show_toast(_("Please select a model before chatting"), self.quick_ask_overlay)
+            Widgets.dialog.show_toast(_("Please select a model before chatting"), self.quick_ask)
             return
         chat = self.quick_ask_overlay.get_child()
 
@@ -1247,7 +1237,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     chat_type='chat', #TODO notebook
                     mode=1
                 )
-            self.show_toast(_("Chat imported successfully"), self.main_overlay)
+            Widgets.dialog.show_toast(_("Chat imported successfully"), self)
 
     def request_screenshot(self):
         bus = SessionBus()
@@ -1261,7 +1251,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.on_attachment(Gio.File.new_for_uri(uri))
             else:
                 logger.error(f"Screenshot request failed with response: {response}\n{sender}\n{obj}\n{iface}\n{signal}")
-                self.show_toast(_("Attachment failed, screenshot might be too big"), self.main_overlay)
+                Widgets.dialog.show_toast(_("Attachment failed, screenshot might be too big"), self)
             if subscription:
                 subscription.disconnect()
 
@@ -1484,7 +1474,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'send_message': [lambda *_: self.send_message(None, 0)],
             'send_system_message': [lambda *_: self.send_message(None, 1)],
             'attach_file': [lambda *_: self.attachment_request()],
-            'attach_screenshot': [lambda *i: self.request_screenshot() if Widgets.model_manager.get_selected_model().get_vision() else self.show_toast(_("Image recognition is only available on specific models"), self.main_overlay)],
+            'attach_screenshot': [lambda *i: self.request_screenshot() if Widgets.model_manager.get_selected_model().get_vision() else Widgets.dialog.show_toast(_("Image recognition is only available on specific models"), self)],
             'attach_url': [lambda *i: Widgets.dialog.simple_entry(
                 parent=self,
                 heading=_('Attach Website? (Experimental)'),

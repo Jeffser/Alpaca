@@ -8,6 +8,7 @@ from gi.repository import Gtk, Gdk, Adw
 
 from matplotlib.backends.backend_gtk4agg import FigureCanvasGTK4Agg as FigureCanvas
 from matplotlib.figure import Figure
+from .. import dialog
 
 class LatexRenderer(Gtk.Button):
     __gtype_name__ = 'AlpacaLatexRenderer'
@@ -72,5 +73,4 @@ class LatexRenderer(Gtk.Button):
     def copy_equation(self):
         clipboard = Gdk.Display().get_default().get_clipboard()
         clipboard.set(self.content)
-        ## TODO Show_toast solution
-        #window.show_toast(_("Equation copied to the clipboard"), window.main_overlay)
+        dialog.show_toast(_("Equation copied to the clipboard"), self.get_root())

@@ -312,3 +312,19 @@ def simple_directory(parent:Gtk.Widget, callback:callable):
         lambda directory_dialog, result: callback(__select_folder_finish_wrapper(directory_dialog, result))
     )
 
+def show_toast(message:str, root_widget, action:str=None, action_name:str=None):
+    try:
+        overlay = root_widget.main_overlay
+    except:
+        try:
+            overlay = root_widget.get_content().get_content()
+        except:
+            return
+    toast = Adw.Toast(
+        title=message,
+        timeout=2
+    )
+    if action and action_name:
+        toast.set_action_name(action)
+        toast.set_button_label(action_name)
+    overlay.add_toast(toast)
