@@ -25,7 +25,7 @@ def text_to_block_list(content:str, message=None) -> list:
     for pattern_name, pattern in patterns:
         for match in pattern.finditer(content[pos:]):
             match_start, match_end = match.span()
-            if pos < (match_start):
+            if pos < (match_start) and content[pos:(match_start)].strip():
                 if len(blocks) > 0 and isinstance(blocks[-1], Text):
                     blocks[-1].append_content(content[pos:(match_start)])
                 else:
@@ -53,16 +53,11 @@ def text_to_block_list(content:str, message=None) -> list:
                     expression = match.group(2)
                 if '\\' in expression:
                     blocks.append(LatexRenderer(content=expression))
-                else:
+                elif expression.strip():
                     if isinstance(blocks[-1], Text):
                         blocks[-1].append_content(expression)
                     else:
                         blocks.append(Text(content=expression))
-            else:
-                if len(blocks) > 0 and isinstance(blocks[-1], Text):
-                    blocks[-1].append_content(expression)
-                else:
-                    blocks.append(Text(content=expression))
             pos = match_end
 
     if pos < len(content):
