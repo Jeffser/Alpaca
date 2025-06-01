@@ -476,7 +476,7 @@ class ChatRow(Gtk.ListBoxRow):
 
     def on_export_successful(self, file, result):
         file.replace_contents_finish(result)
-        window.show_toast(_("Chat exported successfully"), window.main_overlay)
+        dialog.show_toast(_("Chat exported successfully"), self.get_root())
 
     def on_export_chat(self, file_dialog, result, temp_path):
         file = file_dialog.save_finish(result)
