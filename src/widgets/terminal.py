@@ -126,11 +126,11 @@ class TerminalDialog(Adw.Dialog):
         for file in extra_files:
             if code_language == 'html':
                 if file.get('language') == 'js':
-                    with os.path.join(self.sourcedir, 'script.js', 'w') as f:
+                    with open(os.path.join(self.sourcedir, 'script.js'), 'w') as f:
                         f.write(file.get('content'))
                     file_content += '<script src="script.js">'
                 if file.get('language') == 'css':
-                    with os.path.join(self.sourcedir, 'style.css', 'w') as f:
+                    with open(os.path.join(self.sourcedir, 'style.css'), 'w') as f:
                         f.write(file.get('content'))
                     file_content += '<link rel="stylesheet" href="style.css" type="text/css">'
 

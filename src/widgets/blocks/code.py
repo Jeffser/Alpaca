@@ -199,8 +199,12 @@ class Code(Gtk.Box):
         dialog.show_toast(_("Code copied to the clipboard"), self.get_root())
 
     def run_script(self) -> None:
-        ##TODO add JS and CSS files as extra_files
         extra_files = []
+        for blk in [blk for blk in list(self.get_parent().message.block_container) if isinstance(blk, Code) and blk.get_language().lower() in ('css', 'javascript', 'js') and blk != self]:
+            extra_files.append({
+                'language': 'js' if blk.get_language().lower() in ('javascript', 'js') else blk.get_language().lower(),
+                'content': blk.get_code()
+            })
         dialog = terminal.TerminalDialog()
         dialog.present(self.get_root())
         dialog.run(
