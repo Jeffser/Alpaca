@@ -1233,7 +1233,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.add_chat(
                     chat_name=chat[1],
                     chat_id=chat[0],
-                    chat_type='chat', #TODO notebook
+                    chat_type='chat' if len(chat) == 2 else chat[2],
                     mode=1
                 )
             Widgets.dialog.show_toast(_("Chat imported successfully"), self)
