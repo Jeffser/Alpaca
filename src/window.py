@@ -300,20 +300,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             self.last_selected_instance_row = row
 
-            Widgets.model_manager.update_local_model_list()
-            Widgets.model_manager.update_available_model_list()
-
-            self.available_models_stack_page.set_visible(len(Widgets.model_manager.available_models) > 0)
-            self.model_creator_stack_page.set_visible(len(Widgets.model_manager.available_models) > 0)
+            GLib.idle_add(Widgets.model_manager.update_local_model_list)
+            GLib.idle_add(Widgets.model_manager.update_available_model_list)
 
             if row:
                 SQL.insert_or_update_preferences({'selected_instance': row.instance.instance_id})
 
-            self.chat_list_box.get_selected_row().update_profile_pictures()
-            visible_model_manger_switch = len([p for p in self.model_manager_stack.get_pages() if p.get_visible()]) > 1
-
-            self.model_manager_bottom_view_switcher.set_visible(visible_model_manger_switch)
-            self.model_manager_top_view_switcher.set_visible(visible_model_manger_switch)
+            GLib.idle_add(self.chat_list_box.get_selected_row().update_profile_pictures)
         if listbox.get_sensitive():
             threading.Thread(target=change_instance).start()
 
@@ -1498,7 +1491,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 callback=lambda name: threading.Thread(target=Widgets.model_manager.pull_model_confirm, args=(name,)).start(),
                 entries={'placeholder': 'deepseek-r1:7b'}
             )],
-            'reload_added_models': [lambda *_: Widgets.model_manager.update_local_model_list()],
+            'reload_added_models': [lambda *_: GLib.idle_add(Widgets.model_manager.update_local_model_list)],
             'delete_all_chats': [lambda *i: self.get_visible_dialog().close() and Widgets.dialog.simple(
                 parent=self,
                 heading=_('Delete All Chats?'),
