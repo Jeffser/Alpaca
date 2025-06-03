@@ -133,12 +133,20 @@ class OptionPopup(Gtk.Popover):
                 speed=1.2,
                 split_pattern=r'\n+'
             )
-            for gs, ps, audio in generator:
-                if not btn.get_active():
-                    break
-                sd.play(audio, samplerate=24000)
-                GLib.idle_add(self.tts_stack.set_visible_child_name, 'button')
-                sd.wait()
+            try:
+                for gs, ps, audio in generator:
+                    if not btn.get_active():
+                        break
+                    sd.play(audio, samplerate=24000)
+                    GLib.idle_add(self.tts_stack.set_visible_child_name, 'button')
+                    sd.wait()
+            except Exception as e:
+                dialog.simple_error(
+                    parent=self.get_root(),
+                    title=_('Text to Speech Error'),
+                    body=_('An error occurred while running text to speech model'),
+                    error_log=e,
+                )
             GLib.idle_add(self.tts_button.set_active, False)
 
         if button.get_active():
