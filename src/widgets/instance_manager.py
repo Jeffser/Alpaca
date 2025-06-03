@@ -459,7 +459,8 @@ class BaseInstance:
             if not self.instance_id:
                 self.instance_id = generate_uuid()
             SQL.insert_or_update_instance(self)
-            self.row.set_title(self.name)
+            if not self.row:
+                window.instance_listbox.append(InstanceRow(self))
             window.main_navigation_view.pop_to_tag('instance_manager')
 
         pg = Adw.PreferencesGroup()
@@ -635,11 +636,10 @@ class OllamaManaged(BaseOllama):
         self.process = None
         self.log_raw = ''
         self.log_summary = ('', ['dim-label'])
-        if self.instance_id:
-            self.client = openai.OpenAI(
-                base_url='{}/v1/'.format(self.instance_url).replace('\n', ''),
-                api_key=self.api_key if self.api_key else 'NO_KEY'
-            )
+        self.client = openai.OpenAI(
+            base_url='{}/v1/'.format(self.instance_url).replace('\n', ''),
+            api_key=self.api_key if self.api_key else 'NO_KEY'
+        )
 
     def log_output(self, pipe):
         AMD_support_label = "\n<a href='https://github.com/Jeffser/Alpaca/wiki/Installing-Ollama'>{}</a>".format(_('Alpaca Support'))
@@ -733,11 +733,10 @@ class Ollama(BaseOllama):
         self.default_model = data.get('default_model', self.default_model)
         self.title_model = data.get('title_model', self.title_model)
         self.pinned = data.get('pinned', self.pinned)
-        if self.instance_id:
-            self.client = openai.OpenAI(
-                base_url='{}/v1/'.format(self.instance_url).replace('\n', ''),
-                api_key=self.api_key if self.api_key else 'NO_KEY'
-            )
+        self.client = openai.OpenAI(
+            base_url='{}/v1/'.format(self.instance_url).replace('\n', ''),
+            api_key=self.api_key if self.api_key else 'NO_KEY'
+        )
 
     def get_preferences_page(self) -> Adw.PreferencesPage:
         arguments = {
@@ -759,11 +758,10 @@ class BaseOpenAI(BaseInstance):
         self.default_model = data.get('default_model', self.default_model)
         self.title_model = data.get('title_model', self.title_model)
         self.pinned = data.get('pinned', self.pinned)
-        if self.instance_id:
-            self.client = openai.OpenAI(
-                base_url=self.instance_url.replace('\n', ''),
-                api_key=self.api_key if self.api_key else 'NO_KEY'
-            )
+        self.client = openai.OpenAI(
+            base_url=self.instance_url.replace('\n', ''),
+            api_key=self.api_key if self.api_key else 'NO_KEY'
+        )
 
     def stop(self):
         pass
