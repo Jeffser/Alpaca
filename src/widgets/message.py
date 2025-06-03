@@ -236,10 +236,19 @@ class MessageHeader(Gtk.Box):
         )
         current_date = GLib.DateTime.new_now_local()
         if date.format("%Y/%m/%d") == current_date.format("%Y/%m/%d"):
-            return date.format("%I:%M %p")
+            if os.getenv('ALPACA_USE_24H', '0') == '1':
+                return date.format("%H:%M")
+            else:
+                return date.format("%I:%M %p")
         if date.format("%Y") == current_date.format("%Y"):
-            return date.format("%b %d, %I:%M %p")
-        return date.format("%b %d %Y, %I:%M %p")
+            if os.getenv('ALPACA_USE_24H', '0') == '1':
+                return date.format("%b %d, %H:%M")
+            else:
+                return date.format("%b %d, %H:%M")
+        if os.getenv('ALPACA_USE_24H', '0') == '1':
+            return date.format("%b %d %Y, %H:%M")
+        else:
+            return date.format("%b %d %Y, %H:%M")
 
 class BlockContainer(Gtk.Box):
     __gtype_name__ = 'AlpacaBlockContainer'
