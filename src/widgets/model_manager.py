@@ -442,6 +442,25 @@ class LocalModelPage(Gtk.Box):
             justify=2
         )
         self.append(title_label)
+
+        preferences_group = Adw.PreferencesGroup()
+        self.append(preferences_group)
+        self.voice_combo = Adw.ComboRow(
+            title=_("Voice")
+        )
+        selected_voice = SQL.get_model_preferences(self.model.get_name()).get('voice', None)
+        selected_index = 0
+        string_list = Gtk.StringList()
+        string_list.append(_("Default"))
+        for i, (name, value) in enumerate(TTS_VOICES.items()):
+            if value == selected_voice:
+                selected_index = i + 1
+            string_list.append(name)
+        self.voice_combo.set_model(string_list)
+        self.voice_combo.set_selected(selected_index)
+        self.voice_combo.connect("notify::selected", lambda *_: self.update_voice())
+        preferences_group.add(self.voice_combo)
+
         information_container = Gtk.FlowBox(
             selection_mode=0,
             homogeneous=True,
@@ -489,24 +508,6 @@ class LocalModelPage(Gtk.Box):
             for category in set(categories + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]):
                 if category not in ('small', 'medium', 'big', 'huge'):
                     categories_box.append(CategoryPill(category, True))
-
-        preferences_group = Adw.PreferencesGroup()
-        self.append(preferences_group)
-        self.voice_combo = Adw.ComboRow(
-            title=_("Voice")
-        )
-        selected_voice = SQL.get_model_preferences(self.model.get_name()).get('voice', None)
-        selected_index = 0
-        string_list = Gtk.StringList()
-        string_list.append(_("Default"))
-        for i, (name, value) in enumerate(TTS_VOICES.items()):
-            if value == selected_voice:
-                selected_index = i + 1
-            string_list.append(name)
-        self.voice_combo.set_model(string_list)
-        self.voice_combo.set_selected(selected_index)
-        self.voice_combo.connect("notify::selected", lambda *_: self.update_voice())
-        preferences_group.add(self.voice_combo)
 
         self.model.image_container.connect('notify::child', lambda *_: self.update_profile_picture())
 
