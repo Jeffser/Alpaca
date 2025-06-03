@@ -124,7 +124,7 @@ class OptionPopup(Gtk.Popover):
                     pretty_name = [k for k, v in TTS_VOICES.items() if v == voice]
                     if len(pretty_name) > 0:
                         pretty_name = pretty_name[0]
-                        window.local_model_flowbox.append(model_manager.text_to_speech_model(pretty_name))
+                        window.local_model_flowbox.append(model_manager.TextToSpeechModel(pretty_name))
             tts_engine = KPipeline(lang_code=voice[0])
 
             generator = tts_engine(
