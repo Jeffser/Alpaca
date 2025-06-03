@@ -365,7 +365,8 @@ class PullingModel(Gtk.Box):
                 new_model = self.success_callback(self.get_name())
                 GLib.idle_add(window.local_model_flowbox.remove, self.get_parent())
                 GLib.idle_add(window.local_model_flowbox.select_child, new_model.get_parent())
-                GLib.idle_add(window.title_stack.set_visible_child_name, 'model-selector')
+                if len(get_local_models()) > 0:
+                    GLib.idle_add(window.title_stack.set_visible_child_name, 'model-selector')
                 window.show_notification(_('Download Completed'), _("Model '{}' downloaded successfully.").format(self.model_title), Gio.ThemedIcon.new('document-save-symbolic'))
 
     def get_page(self):
@@ -666,7 +667,7 @@ class LocalModel(Gtk.Box):
                 window.model_dropdown.get_model().remove(found_models[0])
 
             window.local_model_flowbox.remove(self)
-            if len(list(window.local_model_flowbox)) == 0:
+            if len(get_local_models()) == 0:
                 window.local_model_stack.set_visible_child_name('no-models')
                 window.title_stack.set_visible_child_name('no-models')
             SQL.remove_model_preferences(self.get_name())
