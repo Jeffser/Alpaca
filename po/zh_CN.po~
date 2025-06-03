@@ -1,85 +1,88 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Simplified Chinese Translation for Alpaca
+# Copyright (C) 2024 Jeffser
+# This file is distributed under the same license as the Alpaca package.
+# Aleksana <me@aleksana.moe>, 2024.
+# Yuehao Sui <8ar10der@amao.run>, 2024-2025.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 6.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-03 14:51-0600\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2025-05-02 19:38-0600\n"
+"PO-Revision-Date: 2025-04-24 11:43+0200\n"
+"Last-Translator: Yuehao Sui <8ar10der@amao.run>\n"
+"Language-Team: Chinese (China)\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 48.0\n"
 
 #: data/com.jeffser.Alpaca.desktop.in:2
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
 msgid "Alpaca"
-msgstr ""
+msgstr "Alpaca"
 
+# 建议不翻译
 #: data/com.jeffser.Alpaca.desktop.in:8
 msgid "ai;ollama;llm"
-msgstr ""
+msgstr "ai;ollama;llm"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 msgid "Chat with AI models"
-msgstr ""
+msgstr "与 AI 模型聊天"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:10
 msgid "A private AI client"
-msgstr ""
+msgstr "私人 AI 客户端"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:11
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1163
 msgid "Features"
-msgstr ""
+msgstr "功能特点"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:13
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1165
 msgid "Talk to multiple models in the same conversation"
-msgstr ""
+msgstr "在同一对话中与多个模型交谈"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:14
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1166
 msgid "Pull and delete models from the app"
-msgstr ""
+msgstr "在应用中拉取或删除模型"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:15
 msgid "Have multiple conversations"
-msgstr ""
+msgstr "进行多重对话"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:16
 msgid "Image recognition (Only available with compatible models)"
-msgstr ""
+msgstr "图像识别（仅适用于兼容模型）"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:17
 msgid "Plain text documents recognition"
-msgstr ""
+msgstr "纯文本文档识别"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:18
 msgid "Import and export chats"
-msgstr ""
+msgstr "导入导出对话记录"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:19
 msgid "Append YouTube transcripts to the prompt"
-msgstr ""
+msgstr "将 Youtube 的转录文本添加到提示中"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:20
 msgid "Append text from a website to the prompt"
-msgstr ""
+msgstr "将来自网站的文本添加到提示中"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:21
 msgid "PDF recognition"
-msgstr ""
+msgstr "PDF 识别"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:23 src/window.ui:90
 msgid "Disclaimer"
-msgstr ""
+msgstr "免责声明"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:24
 msgid ""
@@ -87,42 +90,44 @@ msgid ""
 "any damages to your device or software caused by running code given by any "
 "models."
 msgstr ""
+"本项目与 Ollama 没有任何关联，对于运行任何模型所提供的代码而对您的设备或软件"
+"造成的任何损害，我概不负责。"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:27
 msgid "Jeffry Samuel Eduarte Rojas"
-msgstr ""
+msgstr "Jeffry Samuel Eduarte Rojas"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:53
 msgid "A normal conversation with an AI Model"
-msgstr ""
+msgstr "一段与 AI 模型的普通对话"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:57
 msgid "A conversation involving image recognition"
-msgstr ""
+msgstr "一段带有图像识别的对话"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:61
 msgid "A conversation involving a custom model"
-msgstr ""
+msgstr "一段涉及自定义模型的对话"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:65
 msgid "A conversation showing code highlighting"
-msgstr ""
+msgstr "一段展示代码高亮的对话"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:69
 msgid "A Python script running inside integrated terminal"
-msgstr ""
+msgstr "一段在内置终端中运行的 Python 脚本"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:73
 msgid "A conversation involving a YouTube video transcript"
-msgstr ""
+msgstr "一段含有 YouTube 转录文本的对话"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:77
 msgid "Multiple models being downloaded"
-msgstr ""
+msgstr "已下载的多个模型"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:81
 msgid "Model creator screen"
-msgstr ""
+msgstr "模型创建者界面"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
@@ -251,7 +256,8 @@ msgstr ""
 msgid "Speech recognition (message dictation)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:155 src/widgets/model_manager.py:66
+#: data/com.jeffser.Alpaca.metainfo.xml.in:155
+#: src/custom_widgets/model_manager_widget.py:68
 msgid "Text to Speech"
 msgstr ""
 
@@ -328,27 +334,27 @@ msgstr ""
 msgid "New Tools"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:180 src/widgets/tools/tools.py:467
+#: data/com.jeffser.Alpaca.metainfo.xml.in:180 src/tool_manager.py:431
 msgid "Run Command (Testing)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:181 src/widgets/tools/tools.py:374
+#: data/com.jeffser.Alpaca.metainfo.xml.in:181 src/tool_manager.py:348
 msgid "Online Search"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:182 src/widgets/tools/tools.py:332
+#: data/com.jeffser.Alpaca.metainfo.xml.in:182 src/tool_manager.py:306
 msgid "Extract Wikipedia Article"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:183 src/widgets/tools/tools.py:214
+#: data/com.jeffser.Alpaca.metainfo.xml.in:183 src/tool_manager.py:210
 msgid "Get Recipe by Name"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:184 src/widgets/tools/tools.py:275
+#: data/com.jeffser.Alpaca.metainfo.xml.in:184 src/tool_manager.py:261
 msgid "Get Recipes by Category"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:185 src/widgets/tools/tools.py:181
+#: data/com.jeffser.Alpaca.metainfo.xml.in:185 src/tool_manager.py:176
 msgid "Get Current Datetime"
 msgstr ""
 
@@ -1995,1232 +2001,1757 @@ msgstr ""
 msgid "This is the first public version of Alpaca"
 msgstr ""
 
-#: src/alpaca_search_provider.py.in:41
-msgid "Open chat"
-msgstr ""
-
-#: src/alpaca_search_provider.py.in:42
-msgid "Quick ask"
-msgstr ""
-
-#: src/constants.py:95
-msgid "Never"
-msgstr ""
-
-#: src/constants.py:96
-msgid "When Alpaca is Focused"
-msgstr ""
-
-#: src/constants.py:97
-msgid "Always"
-msgstr ""
-
-#: src/main.py:190
+#: src/main.py:193
 msgid "Documentation"
-msgstr ""
+msgstr "文档"
 
-#: src/main.py:191
+#: src/main.py:194
 msgid "Become a Sponsor"
-msgstr ""
+msgstr "成为赞助人"
 
-#: src/main.py:192
+#: src/main.py:195
 msgid "Discussions"
+msgstr "讨论"
+
+#: src/window.py:203 src/window.py:233
+msgid "Speech Recognition Error"
+msgstr "语音识别错误"
+
+#: src/window.py:203
+msgid "An error occurred while pulling speech recognition model"
+msgstr "拉取语音识别模型时发生错误"
+
+#: src/window.py:233
+msgid "An error occurred while using speech recognition"
+msgstr "使用语音识别时发生错误"
+
+#: src/window.py:254
+msgid "Download Speech Recognition Model"
 msgstr ""
 
-#: src/ollama_models.py:33
+#: src/window.py:255
+msgid "To use speech recognition you'll need to download a special model ({})"
+msgstr ""
+
+#: src/window.py:257
+msgid "Download Model"
+msgstr ""
+
+#: src/window.py:274
+msgid "Ollama Was Not Found"
+msgstr "未找到 Ollama"
+
+#: src/window.py:275
+msgid ""
+"To add a managed Ollama instance, you must have Ollama installed locally in "
+"your device, this is a simple process and should not take more than 5 "
+"minutes."
+msgstr ""
+"要添加一个托管的 Ollama 实例，您必须在您的设备上本地安装 Ollama。这是一个简单"
+"的过程，应该不会超过 5 分钟。"
+
+#: src/window.py:277
+msgid "Open Tutorial in Web Browser"
+msgstr "在网页浏览器中打开教程"
+
+#: src/window.py:283 src/window.py:290 src/window.ui:472 src/window.ui:482
+#: src/window.ui:504
+msgid "Add Instance"
+msgstr "添加实例"
+
+#: src/window.py:291
+msgid "Select a type of instance to add"
+msgstr "选择要添加的实例类型"
+
+#: src/window.py:507
+msgid "No tools enabled."
+msgstr "无已启用的工具。"
+
+#: src/window.py:507
+msgid "Open Tool Manager"
+msgstr "打开工具管理器"
+
+#: src/window.py:510
+msgid "'{}' does not support tools."
+msgstr "'{}' 不支持工具。"
+
+#: src/window.py:510
+msgid "Open Model Manager"
+msgstr "打开模型管理器"
+
+#: src/window.py:513 src/window.py:1119
+msgid "Please select a model before chatting"
+msgstr "请在对话前先选择一个模型"
+
+#: src/window.py:561 src/window.py:562 src/window.py:650 src/window.ui:288
+msgid "Close"
+msgstr "关闭"
+
+#: src/window.py:564 src/window.py:565 src/window.ui:62 src/window.ui:63
+msgid "Next"
+msgstr "下一页"
+
+#: src/window.py:648 src/instance_manager.py:405 src/instance_manager.py:406
+#: src/tool_manager.py:136 src/window.ui:968 src/window.ui:972
+#: src/custom_widgets/message_widget.py:80
+#: src/custom_widgets/message_widget.py:230
+#: src/custom_widgets/model_manager_widget.py:636
+#: src/custom_widgets/dialog_widget.py:148
+#: src/custom_widgets/dialog_widget.py:160
+#: src/custom_widgets/dialog_widget.py:172
+msgid "Cancel"
+msgstr "取消"
+
+#: src/window.py:649
+msgid "Hide"
+msgstr "隐藏"
+
+#: src/window.py:653
+msgid "Close Alpaca?"
+msgstr "关闭 Alpaca？"
+
+#: src/window.py:654
+msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
+msgstr "当前有一个任务正在进行中。你确定要关闭 Alpaca 吗？"
+
+#: src/window.py:898
+msgid "Cannot open image"
+msgstr "无法打开图片"
+
+#: src/window.py:975
+msgid "Delete Chat?"
+msgstr "删除对话？"
+
+#: src/window.py:976
+msgid "Are you sure you want to delete '{}'?"
+msgstr "你确定你想要删除 '{}' 吗？"
+
+#: src/window.py:978 src/window.py:1468
+msgid "Delete"
+msgstr "删除"
+
+#: src/window.py:985
+msgid "Rename Chat?"
+msgstr "重命名对话？"
+
+#: src/window.py:986
+msgid "Renaming '{}'"
+msgstr "重命名 '{}'"
+
+#: src/window.py:988
+msgid "Chat name"
+msgstr "对话命名"
+
+#: src/window.py:989
+msgid "Rename"
+msgstr "重命名"
+
+#: src/window.py:994
+msgid "Importable (.db)"
+msgstr "可导入 (.db)"
+
+#: src/window.py:995
+msgid "Markdown"
+msgstr "Markdown格式"
+
+#: src/window.py:996
+msgid "Markdown (Obsidian Style)"
+msgstr "Markdown格式 （Obsidian 风格）"
+
+#: src/window.py:997
+msgid "JSON"
+msgstr "JSON"
+
+#: src/window.py:998
+msgid "JSON (Include Metadata)"
+msgstr "JSON（包含元数据）"
+
+#: src/window.py:1001 src/window.ui:1419 src/window.ui:1453
+msgid "Export Chat"
+msgstr "导出对话"
+
+#: src/window.py:1002
+msgid "Select a method to export the chat"
+msgstr "选择一个模型以导出对话"
+
+#: src/window.py:1018
+msgid "This video does not have any transcriptions"
+msgstr "本视频没有任何转录内容"
+
+#: src/window.py:1025
+msgid "Attach YouTube Video?"
+msgstr "附加 YouTube 视频？"
+
+#: src/window.py:1026
+msgid ""
+"{}\n"
+"\n"
+"Please select a transcript to include"
+msgstr ""
+"{}\n"
+"\n"
+"请选择要附加的转录"
+
+#: src/window.py:1032
+msgid "Error attaching video, please try again"
+msgstr "附加视频出错，请重试"
+
+#: src/window.py:1053 src/window.py:1462
+msgid "Attach Website? (Experimental)"
+msgstr "附加网站？（试验性）"
+
+#: src/window.py:1054
+msgid ""
+"Are you sure you want to attach\n"
+"'{}'?"
+msgstr ""
+"您确定要附加\n"
+"'{}'?"
+
+#: src/window.py:1072 src/window.py:1084 src/window.py:1461
+#: src/generic_actions.py:105
+msgid "Image recognition is only available on specific models"
+msgstr "图像识别功能仅适用于特定模型"
+
+#: src/window.py:1103 src/window.ui:1203
+msgid "Quick Ask"
+msgstr "快速提问"
+
+#: src/window.py:1231
+msgid "Attachment failed, screenshot might be too big"
+msgstr "添加附件失败，截图可能太大了。"
+
+#: src/window.py:1290
+msgid "Any compatible Alpaca attachment"
+msgstr "任何与 Alpaca 兼容的附件"
+
+#: src/window.py:1437
+msgid "Attach Screenshot"
+msgstr "附加屏幕截图"
+
+#: src/window.py:1462
+msgid "Please enter a website URL"
+msgstr "请输入一个网站地址"
+
+#: src/window.py:1463
+msgid "Attach YouTube Captions?"
+msgstr "附加上 YouTube 字幕？"
+
+#: src/window.py:1463
+msgid "Please enter a YouTube video URL"
+msgstr "请输入一个YouTube视频地址"
+
+#: src/window.py:1466
+msgid "Download Model?"
+msgstr "下载模型？"
+
+#: src/window.py:1466
+msgid "Please enter the model name following this template: name:tag"
+msgstr "请按照以下模板输入模型名称：name:tag"
+
+#: src/window.py:1468
+msgid "Delete All Chats?"
+msgstr "要删除所有对话吗？"
+
+#: src/window.py:1468
+msgid "Are you sure you want to delete all chats?"
+msgstr "你确定要删除所有对话吗？"
+
+#: src/window.py:1479
+msgid "Remove Attachment?"
+msgstr "移除附件？"
+
+#: src/window.py:1479
+msgid "Are you sure you want to remove attachment?"
+msgstr "你确定你想要移除附件？"
+
+#: src/window.py:1479 src/instance_manager.py:886
+#: src/custom_widgets/model_manager_widget.py:115
+#: src/custom_widgets/model_manager_widget.py:201
+#: src/custom_widgets/model_manager_widget.py:637
+#: src/custom_widgets/model_manager_widget.py:677
+msgid "Remove"
+msgstr "移除"
+
+#: src/window.py:1494
+msgid "Already Installed!"
+msgstr "安装完成！"
+
+#: src/available_models_descriptions.py:2
 msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to the Llama 3.1 405B model."
 msgstr ""
+"最新一代的70B参数模型。Llama 3.3 70B 与 Llama 3.1 405B 模型相比提供了相似的性"
+"能。"
 
-#: src/ollama_models.py:56
+#: src/available_models_descriptions.py:3
 msgid "QwQ is the reasoning model of the Qwen series."
-msgstr ""
+msgstr "QwQ 是Qwen系列模型的推理模型。"
 
-#: src/ollama_models.py:84
+#: src/available_models_descriptions.py:4
 msgid ""
 "Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
 "generative models in 11B and 90B sizes."
 msgstr ""
+"Llama 3.2 Vision 是一套经过指令调整的图像推理生成模型，有 11B 和 90B 大小。"
 
-#: src/ollama_models.py:120
+#: src/available_models_descriptions.py:5
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
-msgstr ""
+msgstr "Meta 的 Llama 3.2 采用小型 1B 和 3B 模型。"
 
-#: src/ollama_models.py:155
+#: src/available_models_descriptions.py:6
 msgid ""
 "Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and "
 "405B parameter sizes."
-msgstr ""
+msgstr "Llama 3.1 是新的来自 Meta 的先进模型，提供 8B, 70B, 和 405B 参数量。"
 
-#: src/ollama_models.py:182
+#: src/available_models_descriptions.py:7
 msgid "Meta Llama 3: The most capable openly available LLM to date"
-msgstr ""
+msgstr "Meta Llama 3：迄今能力最强的开源大模型"
 
-#: src/ollama_models.py:205
+#: src/available_models_descriptions.py:8
 msgid "The 7B model released by Mistral AI, updated to version 0.3."
-msgstr ""
+msgstr "Mistral AI 发布的 7B 模型，已更新至 0.3 版。"
 
-#: src/ollama_models.py:229
+#: src/available_models_descriptions.py:9
 msgid ""
 "A high-performing open embedding model with a large token context window."
-msgstr ""
+msgstr "具有大型标记上下文窗口的高性能开放式嵌入模型。"
 
-#: src/ollama_models.py:258
+#: src/available_models_descriptions.py:10
 msgid ""
 "Gemma is a family of lightweight, state-of-the-art open models built by "
 "Google DeepMind. Updated to version 1.1"
-msgstr ""
+msgstr "Gemma 是由 Google DeepMind 构建的轻量级先进开放模型系列。更新至 1.1 版"
 
-#: src/ollama_models.py:314
+#: src/available_models_descriptions.py:11
 msgid ""
 "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
 "0.5B to 110B parameters"
-msgstr ""
+msgstr "Qwen 1.5 是阿里云推出的一系列大型语言模型，参数从 0.5B 到 110B 不等"
 
-#: src/ollama_models.py:378
+#: src/available_models_descriptions.py:12
 msgid "Qwen2 is a new series of large language models from Alibaba group"
-msgstr ""
+msgstr "Qwen2 是阿里巴巴推出的新的大语言模型系列"
 
-#: src/ollama_models.py:407
+#: src/available_models_descriptions.py:13
 msgid ""
 "Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art "
 "open models by Microsoft."
 msgstr ""
+"Phi-3 是微软公司推出的一系列轻型 3B（迷你）和 14B（中型）先进开源模型。"
 
-#: src/ollama_models.py:439
+#: src/available_models_descriptions.py:14
 msgid ""
 "Llama 2 is a collection of foundation language models ranging from 7B to 70B "
 "parameters."
-msgstr ""
+msgstr "Llama 2 是一组基础语言模型，参数从 7B 到 70B 不等。"
 
-#: src/ollama_models.py:501
+#: src/available_models_descriptions.py:15
 msgid ""
 "Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, "
 "encompassing up to 18 trillion tokens. The model supports up to 128K tokens "
 "and has multilingual support."
 msgstr ""
+"Qwen2.5 模型在阿里巴巴最新的大规模数据集上进行了预训练，该数据集包含多达 18 "
+"万亿个token。该模型最大支持 128K token，并支持多种语言。"
 
-#: src/ollama_models.py:533
+#: src/available_models_descriptions.py:16
 msgid ""
 "Google Gemma 2 is a high-performing and efficient model available in three "
 "sizes: 2B, 9B, and 27B."
-msgstr ""
+msgstr "Google Gemma 2 是一款高性能、高效率的模型，有三种规格：2B、9B 和 27B。"
 
-#: src/ollama_models.py:567
+#: src/available_models_descriptions.py:17
 msgid ""
 "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines "
 "a vision encoder and Vicuna for general-purpose visual and language "
 "understanding. Updated to version 1.6."
 msgstr ""
+"🌋 LLaVA 是一种新颖的端到端训练型大型多模态模型，它将视觉编码器和 Vicuna 结合"
+"在一起，用于通用视觉和语言理解。已更新至 1.6 版。"
 
-#: src/ollama_models.py:604
+#: src/available_models_descriptions.py:18
 msgid ""
 "A large language model that can use text prompts to generate and discuss "
 "code."
-msgstr ""
+msgstr "大语言模型，可使用文本提示生成和讨论代码。"
 
-#: src/ollama_models.py:650
+#: src/available_models_descriptions.py:19
 msgid ""
 "The latest series of Code-Specific Qwen models, with significant "
 "improvements in code generation, code reasoning, and code fixing."
 msgstr ""
+"最新系列的代码专用 Qwen 模型，在代码生成、代码推理和代码修复方面都有显著改"
+"进。"
 
-#: src/ollama_models.py:674
+#: src/available_models_descriptions.py:20
 msgid ""
 "A state-of-the-art 12B model with 128k context length, built by Mistral AI "
 "in collaboration with NVIDIA."
-msgstr ""
+msgstr "一个具有 128k 上下文长度的先进模型，由 Mistral AI 与 NVIDIA 合作开发。"
 
-#: src/ollama_models.py:696
+#: src/available_models_descriptions.py:21
 msgid ""
 "The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
 "model on 3 trillion tokens."
 msgstr ""
+"TinyLlama 项目是一个开源的项目，旨在用 3 万亿标记训练一个 1.1B 的紧凑型 "
+"Llama 模型。"
 
-#: src/ollama_models.py:719
+#: src/available_models_descriptions.py:22
 msgid "State-of-the-art large embedding model from mixedbread.ai"
-msgstr ""
+msgstr "来自 mixedbread.ai 的最先进的大型嵌入模型"
 
-#: src/ollama_models.py:752
+#: src/available_models_descriptions.py:23
 msgid ""
 "StarCoder2 is the next generation of transparently trained open code LLMs "
 "that comes in three sizes: 3B, 7B and 15B parameters."
 msgstr ""
+"StarCoder2 是新一代透明训练的开放代码 LLM，有三种大小： 3B、7B 和 15B 参数。"
 
-#: src/ollama_models.py:778
+#: src/available_models_descriptions.py:24
 msgid ""
 "A set of Mixture of Experts (MoE) model with open weights by Mistral AI in "
 "8x7b and 8x22b parameter sizes."
 msgstr ""
+"Mistral AI 在 8x7b 和 8x22b 两种参数大小下建立的一套权重开放的专家混合模型"
+"（MoE）。"
 
-#: src/ollama_models.py:804
+#: src/available_models_descriptions.py:25
 msgid ""
 "Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
 "experts models that excels at coding tasks. Created by Eric Hartford."
 msgstr ""
+"基于 Mixtral 混合专家模型的无审查、8x7b 和 8x22b 的微调模型，擅长编码任务。"
+"由 Eric Hartford 创建。"
 
-#: src/ollama_models.py:833
+#: src/available_models_descriptions.py:26
 msgid ""
 "CodeGemma is a collection of powerful, lightweight models that can perform a "
 "variety of coding tasks like fill-in-the-middle code completion, code "
 "generation, natural language understanding, mathematical reasoning, and "
 "instruction following."
 msgstr ""
+"CodeGemma 是一系列功能强大的轻量级模型，可执行各种代码任务，如中间代码补全、"
+"代码生成、自然语言理解、数学推理和指令跟踪。"
 
-#: src/ollama_models.py:861
+#: src/available_models_descriptions.py:27
 msgid ""
 "An open-source Mixture-of-Experts code language model that achieves "
 "performance comparable to GPT4-Turbo in code-specific tasks."
 msgstr ""
+"开源的 Mixture-of-Experts 代码语言模型在特定代码任务中的性能可与 GPT4-Turbo "
+"相媲美。"
 
-#: src/ollama_models.py:883
+#: src/available_models_descriptions.py:28
 msgid ""
 "Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
 "outstanding reasoning and language understanding capabilities."
-msgstr ""
+msgstr "Phi-2：微软研究院开发的 27 亿语言模型，具有出色的推理和语言理解能力。"
 
-#: src/ollama_models.py:910
+#: src/available_models_descriptions.py:29
 msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
-msgstr ""
+msgstr "George Sung 和 Jarrad Hope 制作的无审查的 Llama 2 模型。"
 
-#: src/ollama_models.py:945
+#: src/available_models_descriptions.py:30
 msgid ""
 "DeepSeek Coder is a capable coding model trained on two trillion code and "
 "natural language tokens."
 msgstr ""
+"DeepSeek Coder 是一个基于两万亿个代码和自然语言标记训练而成的代码模型。"
 
-#: src/ollama_models.py:986
+#: src/available_models_descriptions.py:31
 msgid ""
 "A suite of text embedding models by Snowflake, optimized for performance."
-msgstr ""
+msgstr "一套由 Snowflake 提供的文本嵌入模型，并对性能进行了优化。"
 
-#: src/ollama_models.py:1014
+#: src/available_models_descriptions.py:32
 msgid ""
 "State of the art large language model from Microsoft AI with improved "
 "performance on complex chat, multilingual, reasoning and agent use cases."
 msgstr ""
+"来自 Microsoft AI 的最先进的大型语言模型，在复杂的对话、多语言、推理和代理用"
+"例中性能更佳。"
 
-#: src/ollama_models.py:1037
+#: src/available_models_descriptions.py:33
 msgid ""
 "The uncensored Dolphin model based on Mistral that excels at coding tasks. "
 "Updated to version 2.8."
-msgstr ""
+msgstr "基于 Mistral 的审查 Dolphin 模型，擅长代码任务。已更新至 2.8 版。"
 
-#: src/ollama_models.py:1065
+#: src/available_models_descriptions.py:34
 msgid ""
 "Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on "
 "Llama 3 that has a variety of instruction, conversational, and coding skills."
 msgstr ""
+"Dolphin 2.9 是 Eric Hartford 在 Llama 3 的基础上开发的新模型，有 8B 和 70B 大"
+"小，具有各种教学、会话和代码技能。"
 
-#: src/ollama_models.py:1099
+#: src/available_models_descriptions.py:35
 msgid "Yi 1.5 is a high-performing, bilingual language model."
-msgstr ""
+msgstr "Yi 1.5 是一个高性能的双语语言模型。"
 
-#: src/ollama_models.py:1122
+#: src/available_models_descriptions.py:36
 msgid ""
 "Command R is a Large Language Model optimized for conversational interaction "
 "and long context tasks."
-msgstr ""
+msgstr "Command R 是一种大语言模型，针对对话交互和长语境任务进行了优化。"
 
-#: src/ollama_models.py:1159
+#: src/available_models_descriptions.py:37
 msgid ""
 "A general-purpose model ranging from 3 billion parameters to 70 billion, "
 "suitable for entry-level hardware."
-msgstr ""
+msgstr "通用模型，参数范围从 30 亿到 700 亿，适合入门级硬件。"
 
-#: src/ollama_models.py:1182
+#: src/available_models_descriptions.py:38
 msgid ""
 "A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
 "benchmarks."
-msgstr ""
+msgstr "根据 Llama 3 进行微调的 LLaVA 模型在多个基准测试中取得了更好的成绩。"
 
-#: src/ollama_models.py:1209
+#: src/available_models_descriptions.py:39
 msgid ""
 "Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
 "that are trained to act as helpful assistants."
 msgstr ""
+"Zephyr 是一系列经过微调的 Mistral 和 Mixtral 模型，经过训练后可充当得力助手。"
 
-#: src/ollama_models.py:1231
+#: src/available_models_descriptions.py:40
 msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
 "overtaking similarly and larger sized models."
-msgstr ""
+msgstr "拥有 38 亿个参数的轻量人工智能模型，性能超越同类和更大规模的模型。"
 
-#: src/ollama_models.py:1259
+#: src/available_models_descriptions.py:41
 msgid "Embedding models on very large sentence level datasets."
-msgstr ""
+msgstr "在超大型语句级数据集上嵌入模型。"
 
-#: src/ollama_models.py:1282
+#: src/available_models_descriptions.py:42
 msgid ""
 "Codestral is Mistral AI’s first-ever code model designed for code generation "
 "tasks."
-msgstr ""
+msgstr "Codestral 是 Mistral AI 首次为代码生成任务设计的代码模型。"
 
-#: src/ollama_models.py:1319
+#: src/available_models_descriptions.py:43
 msgid ""
 "StarCoder is a code generation model trained on 80+ programming languages."
-msgstr ""
+msgstr "StarCoder 是一个经过 80 多种编程语言训练的代码生成模型。"
 
-#: src/ollama_models.py:1351
+#: src/available_models_descriptions.py:44
 msgid ""
 "General use chat model based on Llama and Llama 2 with 2K to 16K context "
 "sizes."
-msgstr ""
+msgstr "基于 Llama 和 Llama 2 的通用对话模型，上下文大小为 2K 至 16K。"
 
-#: src/ollama_models.py:1388
+#: src/available_models_descriptions.py:45
 msgid "A family of open foundation models by IBM for Code Intelligence"
-msgstr ""
+msgstr "IBM 代码智能开放式基础模型系列"
 
-#: src/ollama_models.py:1410
+#: src/available_models_descriptions.py:46
 msgid ""
 "Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
 "Mistral 7B model using the OpenOrca dataset."
 msgstr ""
+"Mistral OpenOrca 是一个 70 亿参数模型，利用 OpenOrca 数据集在 Mistral 7B 模型"
+"的基础上进行了微调。"
 
-#: src/ollama_models.py:1442
+#: src/available_models_descriptions.py:47
 msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
 msgstr ""
+"🪐 在一个新的高质量数据集上训练的一系列小型模型，参数分别为 1.35 亿、3.6 亿"
+"和 17 亿。"
 
-#: src/ollama_models.py:1474
+#: src/available_models_descriptions.py:48
 msgid ""
 "Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
 "Llama 2 uncensored by Eric Hartford."
 msgstr ""
+"Wizard Vicuna Uncensored 是一个 7B、13B 和 30B 参数模型，基于 Eric Hartford "
+"的 Llama 2 Uncensored。"
 
-#: src/ollama_models.py:1503
+#: src/available_models_descriptions.py:49
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
-msgstr ""
+msgstr "基于 Llama 2 的模型进行了微调，以提高中文对话能力。"
 
-#: src/ollama_models.py:1526
+#: src/available_models_descriptions.py:50
 msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
-msgstr ""
+msgstr "BGE-M3 是 BAAI 推出的新型模型，具有多功能、多语言和多地域性的特点。"
 
-#: src/ollama_models.py:1551
+#: src/available_models_descriptions.py:51
 msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
-msgstr ""
+msgstr "功能丰富的，适合应用于 AI 辅助开发的模型，包括代码补全。"
 
-#: src/ollama_models.py:1574
+#: src/available_models_descriptions.py:52
 msgid ""
 "A family of open-source models trained on a wide variety of data, surpassing "
 "ChatGPT on various benchmarks. Updated to version 3.5-0106."
 msgstr ""
+"在各种数据上训练有素的开源模型系列，在各种基准测试中超越了 ChatGPT。已更新至 "
+"3.5-0106 版。"
 
-#: src/ollama_models.py:1602
+#: src/available_models_descriptions.py:53
 msgid ""
 "Aya 23, released by Cohere, is a new family of state-of-the-art, "
 "multilingual models that support 23 languages."
-msgstr ""
+msgstr "由 Cohere 发布的 Aya 23 是最先进的多语言模型新系列，支持 23 种语言。"
 
-#: src/ollama_models.py:1625
+#: src/available_models_descriptions.py:54
 msgid ""
 "CodeQwen1.5 is a large language model pretrained on a large amount of code "
 "data."
-msgstr ""
+msgstr "CodeQwen1.5 是一个基于大量代码数据预训练的大型语言模型。"
 
-#: src/ollama_models.py:1653
+#: src/available_models_descriptions.py:55
 msgid ""
 "The powerful family of models by Nous Research that excels at scientific "
 "discussion and coding tasks."
-msgstr ""
+msgstr "Nous Research 强大的模型系列，擅长科学讨论和编码任务。"
 
-#: src/ollama_models.py:1675
+#: src/available_models_descriptions.py:56
 msgid ""
 "Command R+ is a powerful, scalable large language model purpose-built to "
 "excel at real-world enterprise use cases."
 msgstr ""
+"Command R+ 是一款功能强大、可扩展的大型语言模型，专为实际企业用例而设计。"
 
-#: src/ollama_models.py:1698
+#: src/available_models_descriptions.py:57
 msgid "State-of-the-art code generation model"
-msgstr ""
+msgstr "最先进的代码生成模型"
 
-#: src/ollama_models.py:1722
+#: src/available_models_descriptions.py:58
 msgid ""
 "Stable Code 3B is a coding model with instruct and code completion variants "
 "on par with models such as Code Llama 7B that are 2.5x larger."
 msgstr ""
+"Stable Code 3B 是一种代码模型，其指令和代码完成变体可与 Code Llama 7B 等模型"
+"相媲美，而后者的规模要大 2.5 倍。"
 
-#: src/ollama_models.py:1744
+#: src/available_models_descriptions.py:59
 msgid ""
 "An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
 "by Eric Hartford and based on TinyLlama."
 msgstr ""
+"Eric Hartford 基于 TinyLlama 在新的 Dolphin 2.8 数据集上训练的 1.1B 参数实验"
+"模型。"
 
-#: src/ollama_models.py:1771
+#: src/available_models_descriptions.py:60
 msgid ""
 "OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
 "open datasets."
 msgstr ""
+"OpenHermes 2.5 是 Teknium 在 Mistral 上使用完全开放的数据集微调的 7B 模型。"
 
-#: src/ollama_models.py:1795
+#: src/available_models_descriptions.py:61
 msgid ""
 "Mistral Large 2 is Mistral's new flagship model that is significantly more "
 "capable in code generation, mathematics, and reasoning with 128k context "
 "window and support for dozens of languages."
 msgstr ""
+"Mistral Large 2 是 Mistral 的新的旗舰模型，在代码生成、数学运算和逻辑推理方面"
+"具有显著优势，带有 128k 的上下文长度并支持多种语言。"
 
-#: src/ollama_models.py:1828
+#: src/available_models_descriptions.py:62
 msgid ""
 "Qwen2 Math is a series of specialized math language models built upon the "
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
 "open-source models and even closed-source models (e.g., GPT4o)."
 msgstr ""
+"Qwen2 Math 是建立在 Qwen2 LLMs 基础上的一系列专业数学语言模型，其数学能力大大"
+"超过开源模型甚至闭源模型（如 GPT4o）。"
 
-#: src/ollama_models.py:1852
+#: src/available_models_descriptions.py:63
 msgid ""
 "A strong multi-lingual general language model with competitive performance "
 "to Llama 3."
-msgstr ""
+msgstr "强大的多语言的通用模型，在性能上较 Llama 3 有竞争力。"
 
-#: src/ollama_models.py:1886
+#: src/available_models_descriptions.py:64
 msgid ""
 "Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model "
 "trained on multilingual data in English, Spanish, German, Italian, French, "
 "Portuguese, and Dutch."
 msgstr ""
+"Stable LM 2 是最先进的 1.6B 和 12B 参数语言模型，使用英语、西班牙语、德语、意"
+"大利语、法语、葡萄牙语和荷兰语的多语言数据进行训练。"
 
-#: src/ollama_models.py:1909
+#: src/available_models_descriptions.py:65
 msgid ""
 "BakLLaVA is a multimodal model consisting of the Mistral 7B base model "
 "augmented with the LLaVA architecture."
-msgstr ""
+msgstr "BakLLaVA 是一个多模式模型，由 Mistral 7B 基本模型和 LLaVA 架构组成。"
 
-#: src/ollama_models.py:1930
+#: src/available_models_descriptions.py:66
 msgid ""
 "A high-performing model trained with a new technique called Reflection-"
 "tuning that teaches a LLM to detect mistakes in its reasoning and correct "
 "course."
 msgstr ""
+"使用一种名为 “反思-调整 ”的新技术训练出的高性能模型，能教会 LLM 发现推理中的"
+"错误并纠正方向。"
 
-#: src/ollama_models.py:1961
+#: src/available_models_descriptions.py:67
 msgid "An advanced language model crafted with 2 trillion bilingual tokens."
-msgstr ""
+msgstr "先进的语言模型包含 2 万亿个双语词库。"
 
-#: src/ollama_models.py:1988
+#: src/available_models_descriptions.py:68
 msgid ""
 "This model extends LLama-3 8B's context length from 8k to over 1m tokens."
-msgstr ""
+msgstr "该模型将 LLama-3 8B 的上下文长度从 8k 扩展到超过 1m 的标记。"
 
-#: src/ollama_models.py:2021
+#: src/available_models_descriptions.py:69
 msgid "Model focused on math and logic problems"
-msgstr ""
+msgstr "侧重于数学和逻辑问题的模型"
 
-#: src/ollama_models.py:2044
+#: src/available_models_descriptions.py:70
 msgid ""
 "moondream2 is a small vision language model designed to run efficiently on "
 "edge devices."
-msgstr ""
+msgstr "moondream2 是一个小型视觉语言模型，被设计用于在边缘设备上高效运行。"
 
-#: src/ollama_models.py:2066
+#: src/available_models_descriptions.py:71
 msgid ""
 "A fine-tuned model based on Mistral with good coverage of domain and "
 "language."
-msgstr ""
+msgstr "基于 Mistral 的微调模型对领域和语言都有很好的覆盖。"
 
-#: src/ollama_models.py:2093
+#: src/available_models_descriptions.py:72
 msgid ""
 "A model from NVIDIA based on Llama 3 that excels at conversational question "
 "answering (QA) and retrieval-augmented generation (RAG)."
 msgstr ""
+"英伟达基于 Llama 3 的模型，擅长对话式问题解答（QA）和检索增强生成（RAG）。"
 
-#: src/ollama_models.py:2120
+#: src/available_models_descriptions.py:73
 msgid ""
 "Conversational model based on Llama 2 that performs competitively on various "
 "benchmarks."
-msgstr ""
+msgstr "对话模型基于 Llama 2，在各种基准测试中表现优异。"
 
-#: src/ollama_models.py:2148
+#: src/available_models_descriptions.py:74
 msgid ""
 "SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
 "generation tasks"
-msgstr ""
+msgstr "SQLCoder 是在 StarCoder 基础上微调的代码完成模型，用于 SQL 生成任务"
 
-#: src/ollama_models.py:2175
+#: src/available_models_descriptions.py:75
 msgid "General use models based on Llama and Llama 2 from Nous Research."
-msgstr ""
+msgstr "基于 Llama 和 Llama 2 的 Nous Research 公司的通用模型。"
 
-#: src/ollama_models.py:2198
+#: src/available_models_descriptions.py:76
 msgid "Code generation model based on Code Llama."
-msgstr ""
+msgstr "基于 Code Llama 的代码生成模型。"
 
-#: src/ollama_models.py:2225
+#: src/available_models_descriptions.py:77
 msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
-msgstr ""
+msgstr "Llama 2 的扩展，支持多达 128k 标记的上下文。"
 
-#: src/ollama_models.py:2253
+#: src/available_models_descriptions.py:78
 msgid ""
 "A 7B and 15B uncensored variant of the Dolphin model family that excels at "
 "coding, based on StarCoder2."
-msgstr ""
+msgstr "基于 StarCoder2 的 Dolphin 模型系列的 7B 和 15B 无删节变体，擅长编码。"
 
-#: src/ollama_models.py:2280
+#: src/available_models_descriptions.py:79
 msgid "General use model based on Llama 2."
-msgstr ""
+msgstr "基于 Llama 2 的通用模型。"
 
-#: src/ollama_models.py:2309
+#: src/available_models_descriptions.py:80
 msgid "A strong, economical, and efficient Mixture-of-Experts language model."
-msgstr ""
+msgstr "强大、经济、高效的专家混合语言模型。"
 
-#: src/ollama_models.py:2331
+#: src/available_models_descriptions.py:81
 msgid ""
 "Starling is a large language model trained by reinforcement learning from AI "
 "feedback focused on improving chatbot helpfulness."
 msgstr ""
+"Starling 是一个通过人工智能反馈强化学习训练出来的大型语言模型，专注于提高对话"
+"机器人的帮助性。"
 
-#: src/ollama_models.py:2353
+#: src/available_models_descriptions.py:82
 msgid ""
 "A companion assistant trained in philosophy, psychology, and personal "
 "relationships. Based on Mistral."
-msgstr ""
+msgstr "一名接受过哲学、心理学和人际关系培训的同伴助理。基于 Mistral。"
 
-#: src/ollama_models.py:2391
+#: src/available_models_descriptions.py:83
 msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
-msgstr ""
+msgstr "Hermes 3 是 Nous Research 旗舰产品 Hermes 系列 LLM 的最新版本"
 
-#: src/ollama_models.py:2419
+#: src/available_models_descriptions.py:84
 msgid ""
 "Yi-Coder is a series of open-source code language models that delivers state-"
 "of-the-art coding performance with fewer than 10 billion parameters."
 msgstr ""
+"Yi-Coder 是一系列开源代码语言模型，以不到 100 亿个参数提供最先进的编码性能。"
 
-#: src/ollama_models.py:2450
+#: src/available_models_descriptions.py:85
 msgid ""
 "A large language model built by the Technology Innovation Institute (TII) "
 "for use in summarization, text generation, and chat bots."
 msgstr ""
+"技术创新研究所（TII）建立的大型语言模型，用于摘要、文本生成和聊天机器人。"
 
-#: src/ollama_models.py:2487
+#: src/available_models_descriptions.py:86
 msgid ""
 "InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
 "outstanding reasoning capability."
-msgstr ""
+msgstr "InternLM2.5 是为实际场景量身定制的 7B 参数模型，具有出色的推理能力。"
 
-#: src/ollama_models.py:2509
+#: src/available_models_descriptions.py:87
 msgid ""
 "A compact, yet powerful 10.7B large language model designed for single-turn "
 "conversation."
-msgstr ""
+msgstr "结构紧凑、功能强大的 10.7B 大语言机型，专为单匝通话而设计。"
 
-#: src/ollama_models.py:2533
+#: src/available_models_descriptions.py:88
 msgid ""
 "Athene-V2 is a 72B parameter model which excels at code completion, "
 "mathematics, and log extraction tasks."
 msgstr ""
+"Athene-V2 是一个 72B 参数模型，在代码完成、数学和日志提取任务方面表现出色。"
 
-#: src/ollama_models.py:2556
+#: src/available_models_descriptions.py:89
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
-msgstr ""
+msgstr "新的从 Phi 3 Mini 微调而来的小型 LLaVA 模型。"
 
-#: src/ollama_models.py:2584
+#: src/available_models_descriptions.py:90
 msgid ""
 "Orca 2 is built by Microsoft research, and are a fine-tuned version of "
 "Meta's Llama 2 models. The model is designed to excel particularly in "
 "reasoning."
 msgstr ""
+"Orca 2 由微软研究部门开发，是 Meta 的 Llama 2 模型的微调版。该模型在设计上尤"
+"其擅长推理。"
 
-#: src/ollama_models.py:2615
+#: src/available_models_descriptions.py:91
 msgid ""
 "A series of multimodal LLMs (MLLMs) designed for vision-language "
 "understanding."
-msgstr ""
+msgstr "为视觉语言理解设计的一系列多模态 LLM（MLLM）。"
 
-#: src/ollama_models.py:2647
+#: src/available_models_descriptions.py:92
 msgid ""
 "Llama 2 based model fine tuned on an Orca-style dataset. Originally called "
 "Free Willy."
 msgstr ""
+"基于 Llama 2，在 Orca-style 数据集上进行了微调的基础模型。最初名为“Free "
+"Willy”。"
 
-#: src/ollama_models.py:2676
+#: src/available_models_descriptions.py:93
 msgid ""
 "Mistral Small 3 sets a new benchmark in the “small” Large Language Models "
 "category below 70B."
-msgstr ""
+msgstr "Mistral Small 3 在低于70B参数的“小型”大语言模型类别中设立了新的基准。"
 
-#: src/ollama_models.py:2698
+#: src/available_models_descriptions.py:94
 msgid ""
 "2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
 "model by Microsoft Research."
 msgstr ""
+"Eric Hartford 根据微软研究院的 Phi 语言模型制作的 2.7B 无审查 Dolphin 模型。"
 
-#: src/ollama_models.py:2731
+#: src/available_models_descriptions.py:95
 msgid ""
 "SmolLM2 is a family of compact language models available in three size: "
 "135M, 360M, and 1.7B parameters."
 msgstr ""
+"SmolLM2 是一个紧凑型语言模型系列，有三种尺寸：135M、360M 和 1.7B 参数。"
 
-#: src/ollama_models.py:2753
+#: src/available_models_descriptions.py:96
 msgid "Uncensored version of Wizard LM model"
-msgstr ""
+msgstr "未审查版 Wizard 大语言模型"
 
-#: src/ollama_models.py:2776
+#: src/available_models_descriptions.py:97
 msgid ""
 "A commercial-friendly small language model by NVIDIA optimized for roleplay, "
 "RAG QA, and function calling."
 msgstr ""
+"英伟达公司推出的商业友好型小语言模型，针对角色扮演、RAG QA 和函数调用进行了优"
+"化。"
 
-#: src/ollama_models.py:2798
+#: src/available_models_descriptions.py:98
 msgid "An extension of Mistral to support context windows of 64K or 128K."
-msgstr ""
+msgstr "Mistral 的扩展，支持 64K 或 128K 的上下文窗口。"
 
-#: src/ollama_models.py:2826
+#: src/available_models_descriptions.py:99
 msgid ""
 "An expansion of Llama 2 that specializes in integrating both general "
 "language understanding and domain-specific knowledge, particularly in "
 "programming and mathematics."
 msgstr ""
+"Llama 2 的扩展版，专门整合一般语言理解和特定领域知识，尤其是编程和数学知识。"
 
-#: src/ollama_models.py:2848
+#: src/available_models_descriptions.py:100
 msgid ""
 "Fine-tuned Llama 2 model to answer medical questions based on an open source "
 "medical dataset."
-msgstr ""
+msgstr "微调 Llama 2 模型，根据开源医疗数据集回答医疗问题。"
 
-#: src/ollama_models.py:2875
+#: src/available_models_descriptions.py:101
 msgid ""
 "Open-source medical large language model adapted from Llama 2 to the medical "
 "domain."
-msgstr ""
+msgstr "开源医疗大型语言模型，由 Llama 2 改编而来，适用于医疗领域。"
 
-#: src/ollama_models.py:2903
+#: src/available_models_descriptions.py:102
 msgid ""
 "A series of models from Groq that represent a significant advancement in "
 "open-source AI capabilities for tool use/function calling."
 msgstr ""
+"来自 Groq 的一系列模型，代表了开源人工智能能力在工具使用/功能调用方面的重大进"
+"步。"
 
-#: src/ollama_models.py:2925
+#: src/available_models_descriptions.py:103
 msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
 msgstr ""
+"Llama-3.1-Nemotron-70B-Instruct 是英伟达定制的大型语言模型，用于提高 LLM 生成"
+"的对用户查询的回复的帮助性。"
 
-#: src/ollama_models.py:2947
+#: src/available_models_descriptions.py:104
 msgid ""
 "Nexus Raven is a 13B instruction tuned model for function calling tasks."
-msgstr ""
+msgstr "Nexus Raven 是针对函数调用任务的 13B 指令调整模型。"
 
-#: src/ollama_models.py:2968
+#: src/available_models_descriptions.py:105
 msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
-msgstr ""
+msgstr "来自 Nous Research 的 Nous Hermes 2 模型，现在通过 Mixtral 进行训练。"
 
-#: src/ollama_models.py:2991
+#: src/available_models_descriptions.py:106
 msgid "Great code generation model based on Llama2."
-msgstr ""
+msgstr "基于 Llama2 的优秀的代码生成模型。"
 
-#: src/ollama_models.py:3013
+#: src/available_models_descriptions.py:107
 msgid "Uncensored Llama2 based model with support for a 16K context window."
-msgstr ""
+msgstr "基于 Llama2 的无删减模型，支持 16K 上下文窗口。"
 
-#: src/ollama_models.py:3054
+#: src/available_models_descriptions.py:108
 msgid ""
 "The IBM Granite 2B and 8B models are designed to support tool-based use "
 "cases and support for retrieval augmented generation (RAG), streamlining "
 "code generation, translation and bug fixing."
 msgstr ""
+"IBM Granite 2B 和 8B 模型旨在支持基于工具的用例，支持检索增强生成（RAG），简"
+"化代码生成、翻译和错误修复。"
 
-#: src/ollama_models.py:3077
+#: src/available_models_descriptions.py:109
 msgid ""
 "🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic "
 "instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
 "with open-source code snippets."
 msgstr ""
+"🎩 Magicoder 是一个 7B 参数模型系列，使用 OSS-Instruct 在 75K 个合成指令数据"
+"上进行训练，OSS-Instruct 是一种利用开源代码片段启发 LLM 的新方法。"
 
-#: src/ollama_models.py:3099
+#: src/available_models_descriptions.py:110
 msgid ""
 "A lightweight chat model allowing accurate, and responsive output without "
 "requiring high-end hardware."
-msgstr ""
+msgstr "轻量级聊天模式无需高端硬件即可实现准确、灵敏的输出。"
 
-#: src/ollama_models.py:3122
+#: src/available_models_descriptions.py:111
 msgid ""
 "A high-performing code instruct model created by merging two existing code "
 "models."
-msgstr ""
+msgstr "通过合并两个现有的代码模型，创建了一个高性能代码指导模型。"
 
-#: src/ollama_models.py:3145
+#: src/available_models_descriptions.py:112
 msgid ""
 "Falcon2 is an 11B parameters causal decoder-only model built by TII and "
 "trained over 5T tokens."
 msgstr ""
+"Falcon2 是一个由 TII 构建的 11B 参数因果解码器模型，并通过 5T 标记进行了训"
+"练。"
 
-#: src/ollama_models.py:3167
+#: src/available_models_descriptions.py:113
 msgid ""
 "Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
 "MelodysDreamj."
-msgstr ""
+msgstr "Wizard Vicuna 是一个 13B 参数模型，基于 MelodysDreamj 训练的 Llama 2。"
 
-#: src/ollama_models.py:3189
+#: src/available_models_descriptions.py:114
 msgid ""
 "MistralLite is a fine-tuned model based on Mistral with enhanced "
 "capabilities of processing long contexts."
-msgstr ""
+msgstr "MistralLite 是基于 Mistral 的微调模型，具有更强的长语境处理能力。"
 
-#: src/ollama_models.py:3212
+#: src/available_models_descriptions.py:115
 msgid ""
 "MathΣtral: a 7B model designed for math reasoning and scientific discovery "
 "by Mistral AI."
-msgstr ""
+msgstr "MathΣtral：Mistral AI 为数学推理和科学发现设计的 7B 模型。"
 
-#: src/ollama_models.py:3234
+#: src/available_models_descriptions.py:116
 msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
-msgstr ""
+msgstr "MotherDuck 和 Numbers Station 制作的 7B 参数文本到 SQL 模型。"
 
-#: src/ollama_models.py:3255
+#: src/available_models_descriptions.py:117
 msgid ""
 "MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
 "interleaving the model with itself."
 msgstr ""
+"MegaDolphin-2.2-120b 是 Dolphin-2.2-70b 的转换版本，通过将模型与自身交错创建"
+"而成。"
 
-#: src/ollama_models.py:3277
+#: src/available_models_descriptions.py:118
 msgid ""
 "Solar Pro Preview: an advanced large language model (LLM) with 22 billion "
 "parameters designed to fit into a single GPU"
 msgstr ""
+"Solar Pro 预览版：先进的大型语言模型 (LLM)，拥有 220 亿个参数，专为适合单个 "
+"GPU 而设计"
 
-#: src/ollama_models.py:3304
+#: src/available_models_descriptions.py:119
 msgid ""
 "A series of models that convert HTML content to Markdown content, which is "
 "useful for content conversion tasks."
 msgstr ""
+"一系列可将 HTML 内容转换为 Markdown 内容的模型，对内容转换任务非常有用。"
 
-#: src/ollama_models.py:3325
+#: src/available_models_descriptions.py:120
 msgid ""
 "A top-performing mixture of experts model, fine-tuned with high-quality data."
-msgstr ""
+msgstr "利用高质量数据对性能最佳的专家混合模型进行微调。"
 
-#: src/ollama_models.py:3347
+#: src/available_models_descriptions.py:121
 msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
-msgstr ""
+msgstr "以 Zephyr 为基础，利用高质量数据对 7B 聊天模型进行微调。"
 
-#: src/ollama_models.py:3370
+#: src/available_models_descriptions.py:122
 msgid ""
 "Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
 "Designed for chat and code generation."
 msgstr ""
+"由 Open Orca OpenChat 模型和 Garage-bAInd Platypus 2 模型合并而成。专为聊天和"
+"代码生成而设计。"
 
-#: src/ollama_models.py:3387
+#: src/available_models_descriptions.py:123
 msgid ""
 "A language model created by combining two fine-tuned Llama 2 70B models into "
 "one."
-msgstr ""
+msgstr "由两个经过微调的 Llama 2 70B 模型合并而成的语言模型。"
 
-#: src/ollama_models.py:3428
+#: src/available_models_descriptions.py:124
 msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
+"IBM Granite 1B 和 3B 模型是 IBM 首款专为低延迟使用而设计的混合专家（MoE）"
+"Granite 模型。"
 
-#: src/ollama_models.py:3450
+#: src/available_models_descriptions.py:125
 msgid ""
 "A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
 "information extraction, based on Phi-3."
 msgstr ""
+"在用于信息提取的私人高质量合成数据集上微调的 3.8B 模型，以 Phi-3 为基础。"
 
-#: src/ollama_models.py:3501
+#: src/available_models_descriptions.py:126
 msgid ""
 "Cohere For AI's language models trained to perform well across 23 different "
 "languages."
-msgstr ""
+msgstr "Cohere For AI 的语言模型经过训练，在 23 种不同语言中表现出色。"
 
-#: src/ollama_models.py:3523
+#: src/available_models_descriptions.py:127
 msgid "DBRX is an open, general-purpose LLM created by Databricks."
-msgstr ""
+msgstr "DBRX 是由 Databricks 创建的开放式通用 LLM。"
 
-#: src/ollama_models.py:3545
+#: src/available_models_descriptions.py:128
 msgid ""
 "An open large reasoning model for real-world solutions by the Alibaba "
 "International Digital Commerce Group (AIDC-AI)."
 msgstr ""
+"阿里巴巴国际数字商业集团（AIDC-AI）为现实世界解决方案建立的开放式大型推理模"
+"型。"
 
-#: src/ollama_models.py:3568
+#: src/available_models_descriptions.py:129
 msgid "Embedding model from BAAI mapping texts to vectors."
-msgstr ""
+msgstr "来自 BAAI 的嵌入模型，将文本映射为矢量。"
 
-#: src/ollama_models.py:3590
+#: src/available_models_descriptions.py:130
 msgid ""
 "An open weights function calling model based on Llama 3, competitive with "
 "GPT-4o function calling capabilities."
-msgstr ""
+msgstr "基于 Llama 3 的开放式权重函数调用模型，与 GPT-4o 函数调用能力相媲美。"
 
-#: src/ollama_models.py:3611
+#: src/available_models_descriptions.py:131
 msgid ""
 "A robust conversational model designed to be used for both chat and instruct "
 "use cases."
-msgstr ""
+msgstr "一个强大的对话模型，设计用于聊天和指示用例。"
 
-#: src/ollama_models.py:3633
+#: src/available_models_descriptions.py:132
 msgid ""
 "An upgraded version of DeekSeek-V2 that integrates the general and coding "
 "abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
 msgstr ""
+"DeekSeek-V2的升级版本，整合了DeepSeek-V2-Chat和DeepSeek-Coder-V2-Instruct的综"
+"合能力和编码能力。"
 
-#: src/ollama_models.py:3666
+#: src/available_models_descriptions.py:133
 msgid ""
 "ShieldGemma is set of instruction tuned models for evaluating the safety of "
 "text prompt input and text output responses against a set of defined safety "
 "policies."
 msgstr ""
+"ShieldGemma 是一套经过指令调整的模型，用于根据一组定义的安全策略评估文本提示"
+"输入和文本输出响应的安全性。"
 
-#: src/ollama_models.py:3688
+#: src/available_models_descriptions.py:134
 msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
-msgstr ""
+msgstr "Bespoke Labs 开发的最先进的事实核查模型。"
 
-#: src/ollama_models.py:3716
+#: src/available_models_descriptions.py:135
 msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
 msgstr ""
+"Llama Guard 3 是一系列针对 LLM 输入和响应的内容安全分类进行微调的模型。"
 
-#: src/ollama_models.py:3740
+#: src/available_models_descriptions.py:136
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
-msgstr ""
+msgstr "可用于聚类或语义搜索等任务的句子转换器模型。"
 
-#: src/ollama_models.py:3770
+#: src/available_models_descriptions.py:137
 msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
 msgstr ""
+"OpenCoder 是一个开放和可复制的代码 LLM 系列，包括 1.5B 和 8B 模型，支持中英文"
+"对话。"
 
-#: src/ollama_models.py:3799
+#: src/available_models_descriptions.py:138
 msgid ""
 "Tülu 3 is a leading instruction following model family, offering fully open-"
 "source data, code, and recipes by the The Allen Institute for AI."
 msgstr ""
+"Tülu 3 是一个领先的指令跟随模型系列，由艾伦人工智能研究所提供完全开源的数据、"
+"代码和配方。"
 
-#: src/ollama_models.py:3827
+#: src/available_models_descriptions.py:139
 msgid ""
 "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
 "support without sacrificing English performance or scalability."
 msgstr ""
+"Snowflake 的前沿嵌入模型。Arctic Embed 2.0 在不牺牲英语性能或可扩展性的情况下"
+"增加了多语言支持。"
 
-#: src/ollama_models.py:3855
+#: src/available_models_descriptions.py:140
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
-msgstr ""
+msgstr "IBM Granite Guardian 3.0 2B 和 8B 模型旨在检测提示和/或响应中的风险。"
 
-#: src/ollama_models.py:3889
+#: src/available_models_descriptions.py:141
 msgid ""
 "EXAONE 3.5 is a collection of instruction-tuned bilingual (English and "
 "Korean) generative models ranging from 2.4B to 32B parameters, developed and "
 "released by LG AI Research."
 msgstr ""
+"EXAONE 3.5 是一个经过指令调整的双语（英语和韩语）生成模型集合，参数从 2.4B "
+"到 32B 不等，由 LG AI Research 开发并发布。"
 
-#: src/ollama_models.py:3937
+#: src/available_models_descriptions.py:142
 msgid ""
 "Sailor2 are multilingual language models made for South-East Asia. Available "
 "in 1B, 8B, and 20B parameter sizes."
-msgstr ""
+msgstr "Sailor2 是专为东南亚制作的多语种语言模型。有 1B、8B 和 20B 参数规格。"
 
-#: src/ollama_models.py:3975
+#: src/available_models_descriptions.py:143
 msgid ""
 "A family of efficient AI models under 10B parameters performant in science, "
 "math, and coding through innovative training techniques."
 msgstr ""
+"通过创新的训练技术，在科学、数学和编码方面性能优越的 10B 参数以下的高效人工智"
+"能模型系列。"
 
-#: src/ollama_models.py:4016
+#: src/available_models_descriptions.py:144
 msgid ""
 "The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 "
 "trillion tokens of data, demonstrated significant improvements over their "
 "predecessors in performance and speed in IBM’s initial testing."
 msgstr ""
+"IBM Granite 2B 和 8B 模型是在超过 12 万亿个词组数据基础上训练的纯文本密集 "
+"LLM，在 IBM 的初步测试中，其性能和速度都较前代产品有了显著提高。"
 
-#: src/ollama_models.py:4057
+#: src/available_models_descriptions.py:145
 msgid ""
 "The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
+"IBM Granite 1B 和 3B 模型是 IBM 为低延迟使用而设计的长上下文混合专家（MoE）"
+"Granite 模型。"
 
-#: src/ollama_models.py:4098
+#: src/available_models_descriptions.py:146
 msgid ""
 "The IBM Granite Embedding 30M and 278M models models are text-only dense "
 "biencoder embedding models, with 30M available in English only and 278M "
 "serving multilingual use cases."
 msgstr ""
+"IBM Granite Embedding 30M 和 278M 模型是纯文本密集生物编码器嵌入模型，其中 "
+"30M 仅提供英语版本，而 278M 则服务于多语言使用案例。"
 
-#: src/ollama_models.py:4120
+#: src/available_models_descriptions.py:147
 msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
-msgstr ""
+msgstr "Phi-4 是微软发布的14B参数的最新开源模型。"
 
-#: src/ollama_models.py:4143
+#: src/available_models_descriptions.py:148
 msgid ""
 "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
-msgstr ""
+msgstr "一个新的小型推理模型，基于Qwen 2.5 3B指令模型微调而来。"
 
-#: src/ollama_models.py:4167
+#: src/available_models_descriptions.py:149
 msgid ""
 "Dolphin 3.0 Llama 3.1 8B 🐬 is the next generation of the Dolphin series of "
 "instruct-tuned models designed to be the ultimate general purpose local "
 "model, enabling coding, math, agentic, function calling, and general use "
 "cases."
 msgstr ""
+"Dolphin 3.0 Llama 3.1 8B 🐬 是 Dolphin 系列指令微调模型的下一代，旨在成为终极"
+"通用本地模型，能够支持编程、数学、代理行为、函数调用以及一般用途场景。"
 
-#: src/ollama_models.py:4218
+#: src/available_models_descriptions.py:150
 msgid ""
 "DeepSeek's first-generation of reasoning models with comparable performance "
 "to OpenAI-o1, including six dense models distilled from DeepSeek-R1 based on "
 "Llama and Qwen."
 msgstr ""
+"DeepSeek 的第一代推理模型，性能与 OpenAI-o1 相当，包括六个从基于 Llama 和 "
+"Qwen 的 DeepSeek-R1 提炼而来的大纲模型。"
 
-#: src/ollama_models.py:4239
+#: src/available_models_descriptions.py:151
 msgid ""
 "A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
 "with 37B activated for each token."
 msgstr ""
+"一个强大的Mixture-of-Experts（MoE）语言模型，总参数量为671B，每个词令牌激活"
+"37B参数。"
 
-#: src/ollama_models.py:4266
+#: src/available_models_descriptions.py:152
 msgid ""
 "OLMo 2 is a new family of 7B and 13B models trained on up to 5T tokens. "
 "These models are on par with or better than equivalently sized fully open "
 "models, and competitive with open-weight models such as Llama 3.1 on English "
 "academic benchmarks."
 msgstr ""
+"OLMo 2 是一个新的家族，包括7B和13B参数的模型，训练数据量高达5万亿个词令牌。这"
+"些模型与同等规模的完全开源模型相当或更优，并且在英语学术基准测试中与像 Llama "
+"3.1 这样的开放权重模型竞争激烈。"
 
-#: src/ollama_models.py:4314
+#: src/available_models_descriptions.py:153
 msgid ""
 "The smallest model in Cohere's R series delivers top-tier speed, efficiency, "
 "and quality to build powerful AI applications on commodity GPUs and edge "
 "devices."
 msgstr ""
+"Cohere R 系列中的最小模型提供了顶级的速度、效率和质量，使得在普通GPU和边缘设"
+"备上构建强大的AI应用变得可能。"
 
-#: src/ollama_models.py:4342
+#: src/available_models_descriptions.py:154
 msgid ""
 "A fully open-source family of reasoning models built using a dataset derived "
 "by distilling DeepSeek-R1."
 msgstr ""
+"一个完全开源的推理模型家族，使用了从 DeepSeek-R1 提炼出的数据集构建而成。"
 
-#: src/ollama_models.py:4366
+#: src/available_models_descriptions.py:155
 msgid ""
 "A fine-tuned version of Deepseek-R1-Distilled-Qwen-1.5B that surpasses the "
 "performance of OpenAI’s o1-preview with just 1.5B parameters on popular math "
 "evaluations."
 msgstr ""
+"基于 DeepSeek-R1 提炼的 Qwen-1.5B 微调版本，在流行的数学评估中性能超越了 "
+"OpenAI 的 o1-preview，仅使用1.5亿个参数。"
 
-#: src/ollama_models.py:4396
+#: src/available_models_descriptions.py:156
 msgid ""
 "A version of the DeepSeek-R1 model that has been post trained to provide "
 "unbiased, accurate, and factual information by Perplexity."
 msgstr ""
+"经过 Perplexity 后微调的 DeepSeek-R1 模型版本，能够提供\"无偏见、准确且事实"
+"\"的信息。"
 
-#: src/ollama_models.py:4433
+#: src/available_models_descriptions.py:157
 msgid "The current, most capable model that runs on a single GPU."
-msgstr ""
+msgstr "这是当前单GPU环境下性能最优的模型。"
 
-#: src/ollama_models.py:4480
+#: src/available_models_descriptions.py:158
 msgid ""
 "Phi-4-mini brings significant enhancements in multilingual support, "
 "reasoning, and mathematics, and now, the long-awaited function calling "
 "feature is finally supported."
 msgstr ""
+"Phi-4-mini 模型在多语言处理、推理能力及数学计算性能上均有显著提升，并新增了对"
+"函数调用机制的支持。"
 
-#: src/ollama_models.py:4504
+#: src/available_models_descriptions.py:159
 msgid ""
 "A compact and efficient vision-language model, specifically designed for "
 "visual document understanding, enabling automated content extraction from "
 "tables, charts, infographics, plots, diagrams, and more."
 msgstr ""
+"一款紧凑高效的多模态视觉语言模型，专为视觉文档理解而设计，能够从表格、图表、"
+"信息图、曲线图、示意图等多种视觉元素中自动提取内容。"
 
-#: src/ollama_models.py:4544
+#: src/available_models_descriptions.py:160
 msgid ""
 "Granite-3.2 is a family of long-context AI models from IBM Granite fine-"
 "tuned for thinking capabilities."
 msgstr ""
+"Granite-3.2 是 IBM Granite 系列的长上下文 AI 模型，经过微调以增强思维推理能"
+"力。"
 
-#: src/ollama_models.py:4568
+#: src/available_models_descriptions.py:161
 msgid ""
 "A new state-of-the-art version of the lightweight Command R7B model that "
 "excels in advanced Arabic language capabilities for enterprises in the "
 "Middle East and Northern Africa."
 msgstr ""
+"这是轻量级 Command R7B 模型的最新尖端版本，专为中东北非地区企业打造，在高级阿"
+"拉伯语处理能力方面表现卓越。"
 
-#: src/ollama_models.py:4614
+#: src/available_models_descriptions.py:162
 msgid ""
 "111 billion parameter model optimized for demanding enterprises that require "
 "fast, secure, and high-quality AI"
-msgstr ""
+msgstr "专为高要求企业优化的1110亿参数大模型，提供快速、安全且高质量的AI服务。"
 
-#: src/ollama_models.py:4655
+#: src/available_models_descriptions.py:163
 msgid ""
-"Qwen3 is the latest generation of large language models in Qwen series, "
-"offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
+"EXAONE Deep exhibits superior capabilities in various reasoning tasks "
+"including math and coding benchmarks, ranging from 2.4B to 32B parameters "
+"developed and released by LG AI Research."
 msgstr ""
+"LG人工智能研究院（LG AI Research）开发并发布的 EXAONE Deep 模型，在数学与编程"
+"基准测试等多项推理任务中展现出卓越性能，其参数量级覆盖24亿至320亿"
+"（2.4B-32B）。"
 
-#: src/ollama_models.py:4802
-msgid "Devstral: the best open source model for coding agents"
-msgstr ""
-
-#: src/ollama_models.py:4830
-msgid "Meta's latest collection of multimodal models."
-msgstr ""
-
-#: src/ollama_models.py:4878
-msgid ""
-"Flagship vision-language model of Qwen and also a significant leap from the "
-"previous Qwen2-VL."
-msgstr ""
-
-#: src/ollama_models.py:4908
-msgid ""
-"DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
-"1.5B version also available."
-msgstr ""
-
-#: src/ollama_models.py:4933
+#: src/available_models_descriptions.py:164
 msgid ""
 "Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-"
 "art vision understanding and enhances long context capabilities up to 128k "
 "tokens without compromising text performance."
 msgstr ""
+"基于Mistral Small 3升级的Mistral Small 3.1（2503）新增了业界领先的视觉理解能"
+"力以及将上下文处理长度扩展至12.8万词符的同时完整保留了原有文本处理性能。"
 
-#: src/ollama_models.py:4973
+#: src/available_models_descriptions.py:165
 msgid ""
 "Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that "
 "outperform the best available open models of the same size, including "
 "counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."
 msgstr ""
+"由深度思考（Deep Cogito）研发的Cogito v1预览版系列混合推理模型，在多数标准基"
+"准测试中表现卓越，性能超越同体量最优开源模型（包括LLaMA、深度求索[DeepSeek]及"
+"通义千问[Qwen]等同类模型）。"
 
-#: src/ollama_models.py:5002
+#: src/available_models_descriptions.py:166
+msgid ""
+"DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
+"1.5B version also available."
+msgstr ""
+"DeepCoder 是一个完全开源的 140 亿参数（14B）代码模型，性能达到 O3-mini 级别，"
+"同时还提供 15 亿参数（1.5B）的轻量版本。"
+
+#: src/available_models_descriptions.py:167
+msgid ""
+"Qwen3 is the latest generation of large language models in Qwen series, "
+"offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
+msgstr ""
+
+#: src/available_models_descriptions.py:168
+msgid "Meta's latest collection of multimodal models."
+msgstr ""
+
+#: src/available_models_descriptions.py:169
 msgid ""
 "IBM Granite 2B and 8B models are 128K context length language models that "
 "have been fine-tuned for improved reasoning and instruction-following "
 "capabilities."
 msgstr ""
 
-#: src/ollama_models.py:5040
+#: src/available_models_descriptions.py:170
 msgid ""
 "Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
 "reasoning models that rival much larger models on complex reasoning tasks."
 msgstr ""
 
-#: src/ollama_models.py:5073
-msgid ""
-"EXAONE Deep exhibits superior capabilities in various reasoning tasks "
-"including math and coding benchmarks, ranging from 2.4B to 32B parameters "
-"developed and released by LG AI Research."
-msgstr ""
-
-#: src/ollama_models.py:5100
+#: src/available_models_descriptions.py:171
 msgid ""
 "Phi 4 mini reasoning is a lightweight open model that balances efficiency "
 "with advanced reasoning ability."
 msgstr ""
 
-#: src/window.py:187 src/window.py:222
-msgid "Speech Recognition Error"
-msgstr ""
+#: src/instance_manager.py:30 src/instance_manager.py:366
+msgid "Instance"
+msgstr "实例"
 
-#: src/window.py:188
-msgid "An error occurred while pulling speech recognition model"
-msgstr ""
-
-#: src/window.py:223
-msgid "An error occurred while using speech recognition"
-msgstr ""
-
-#: src/window.py:246
-msgid "Download Speech Recognition Model"
-msgstr ""
-
-#: src/window.py:247
-msgid "To use speech recognition you'll need to download a special model ({})"
-msgstr ""
-
-#: src/window.py:249
-msgid "Download Model"
-msgstr ""
-
-#: src/window.py:267
-msgid "Ollama Was Not Found"
-msgstr ""
-
-#: src/window.py:268
-msgid ""
-"To add a managed Ollama instance, you must have Ollama installed locally in "
-"your device, this is a simple process and should not take more than 5 "
-"minutes."
-msgstr ""
-
-#: src/window.py:270
-msgid "Open Tutorial in Web Browser"
-msgstr ""
-
-#: src/window.py:276 src/window.py:284 src/window.ui:527 src/window.ui:537
-#: src/window.ui:559
-msgid "Add Instance"
-msgstr ""
-
-#: src/window.py:285
-msgid "Select a type of instance to add"
-msgstr ""
-
-#: src/window.py:505
-msgid "No tools enabled."
-msgstr ""
-
-#: src/window.py:505
-msgid "Open Tool Manager"
-msgstr ""
-
-#: src/window.py:508
-msgid "'{}' does not support tools."
-msgstr ""
-
-#: src/window.py:508
-msgid "Open Model Manager"
-msgstr ""
-
-#: src/window.py:511 src/window.py:1090
-msgid "Please select a model before chatting"
-msgstr ""
-
-#: src/window.py:584 src/window.py:585 src/window.py:680 src/window.ui:355
-msgid "Close"
-msgstr ""
-
-#: src/window.py:587 src/window.py:588 src/window.ui:62 src/window.ui:63
-msgid "Next"
-msgstr ""
-
-#: src/window.py:678 src/window.ui:1023 src/window.ui:1027
-#: src/widgets/dialog.py:150 src/widgets/dialog.py:163
-#: src/widgets/dialog.py:176 src/widgets/instance_manager.py:469
-#: src/widgets/instance_manager.py:470 src/widgets/model_manager.py:637
-#: src/widgets/blocks/code.py:136 src/widgets/blocks/text.py:111
-#: src/widgets/tools/tools.py:132
-msgid "Cancel"
-msgstr ""
-
-#: src/window.py:679
-msgid "Hide"
-msgstr ""
-
-#: src/window.py:683
-msgid "Close Alpaca?"
-msgstr ""
-
-#: src/window.py:684
-msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
-msgstr ""
-
-#: src/window.py:924 src/window.ui:163 src/window.ui:1346
-#: src/widgets/chat.py:207 src/widgets/instance_manager.py:58
-#: src/widgets/instance_manager.py:69 src/widgets/instance_manager.py:110
+#: src/instance_manager.py:60 src/instance_manager.py:69 src/window.ui:154
+#: src/custom_widgets/chat_widget.py:424
 msgid "New Chat"
-msgstr ""
+msgstr "新对话"
 
-#: src/window.py:1004
-msgid "This video does not have any transcriptions"
-msgstr ""
+#: src/instance_manager.py:76
+msgid "Selecting tool to use..."
+msgstr "正在选择使用工具…"
 
-#: src/window.py:1012
-msgid "Attach YouTube Video?"
-msgstr ""
+#: src/instance_manager.py:85
+msgid "Using {}"
+msgstr "正在使用 {}"
 
-#: src/window.py:1013
+#: src/instance_manager.py:111
+msgid "Tool Error"
+msgstr "工具错误"
+
+#: src/instance_manager.py:111
+msgid "An error occurred while running tool"
+msgstr "运行工具过程中发生错误"
+
+#: src/instance_manager.py:114
+msgid "Generating message..."
+msgstr "正在生成消息..."
+
+#: src/instance_manager.py:162 src/instance_manager.py:462
+#: src/instance_manager.py:472 src/instance_manager.py:618
+#: src/instance_manager.py:690 src/instance_manager.py:732
+#: src/instance_manager.py:761 src/instance_manager.py:803
+#: src/instance_manager.py:823 src/instance_manager.py:844
+msgid "Instance Error"
+msgstr "实例错误"
+
+#: src/instance_manager.py:162
+msgid "Message generation failed"
+msgstr "消息生成失败"
+
+#: src/instance_manager.py:218 src/window.ui:885
+msgid "Name"
+msgstr "名称"
+
+#: src/instance_manager.py:226
+msgid "Port"
+msgstr "端口"
+
+#: src/instance_manager.py:227
+msgid "Which network port will '{}' use"
+msgstr "'{}' 将会使用那哪一个网络端口"
+
+#: src/instance_manager.py:241
+msgid "Instance URL"
+msgstr "实例 URL"
+
+#: src/instance_manager.py:244 src/instance_manager.py:254
+#: src/instance_manager.py:257 src/instance_manager.py:259
+msgid "API Key (Unchanged)"
+msgstr "API密钥（未更改）"
+
+#: src/instance_manager.py:244 src/instance_manager.py:254
+msgid "API Key (Optional)"
+msgstr "API密钥（可选）"
+
+#: src/instance_manager.py:257 src/instance_manager.py:259
+msgid "API Key"
+msgstr "API密钥"
+
+#: src/instance_manager.py:267
+msgid "Max Tokens"
+msgstr "最大tokens数"
+
+#: src/instance_manager.py:268
 msgid ""
-"{}\n"
-"\n"
-"Please select a transcript to include"
+"Defines the maximum number of tokens (words + spaces) the AI can generate in "
+"a response. More tokens allow longer replies but may take more time and cost "
+"more."
 msgstr ""
+"定义了 AI 在响应中可以生成的最大 token 数（单词+空格）。更多的 token 允许更长"
+"的回复，但可能需要更多的时间并产生更高的成本。"
 
-#: src/window.py:1019
-msgid "Error attaching video, please try again"
-msgstr ""
+#: src/instance_manager.py:283
+msgid "Temperature"
+msgstr "温度（随机性控制参数）"
 
-#: src/window.py:1041 src/window.py:1480
-msgid "Attach Website? (Experimental)"
-msgstr ""
+#: src/instance_manager.py:284
+msgid "Increasing the temperature will make the models answer more creatively."
+msgstr "提高温度会使模型的回答更具创造性。"
 
-#: src/window.py:1042
+#: src/instance_manager.py:299
+msgid "Seed"
+msgstr "种子值"
+
+#: src/instance_manager.py:300
 msgid ""
-"Are you sure you want to attach\n"
-"'{}'?"
-msgstr ""
+"Setting this to a specific number other than 0 will make the model generate "
+"the same text for the same prompt."
+msgstr "将其设置为除0以外的具体数字可以确保在相同提示下模型生成相同的文本。"
 
-#: src/window.py:1061 src/window.py:1477
-msgid "Image recognition is only available on specific models"
-msgstr ""
+#: src/instance_manager.py:315
+msgid "Overrides"
+msgstr "覆盖设置"
 
-#: src/window.py:1073 src/window.ui:1266
-msgid "Quick Ask"
-msgstr ""
+#: src/instance_manager.py:315
+msgid ""
+"These entries are optional, they are used to troubleshoot GPU related "
+"problems with Ollama."
+msgstr "这些条目是可选的，它们用于排查与 Ollama 相关的 GPU 问题。"
 
-#: src/window.py:1240
-msgid "Chat imported successfully"
-msgstr ""
+#: src/instance_manager.py:333
+msgid "Model Directory"
+msgstr "模型目录"
 
-#: src/window.py:1254
-msgid "Attachment failed, screenshot might be too big"
-msgstr ""
+#: src/instance_manager.py:335
+msgid "Select Directory"
+msgstr "选择目录"
 
-#: src/window.py:1303
-msgid "Any compatible Alpaca attachment"
-msgstr ""
+#: src/instance_manager.py:346
+msgid "Default Model"
+msgstr "默认模型"
 
-#: src/window.py:1448
-msgid "Attach Screenshot"
-msgstr ""
+#: src/instance_manager.py:346
+msgid "Model to select when starting a new chat."
+msgstr "启动新聊天时选择的模型。"
 
-#: src/window.py:1481
-msgid "Please enter a website URL"
-msgstr ""
+#: src/instance_manager.py:348
+msgid "Title Model"
+msgstr "标题模型"
 
-#: src/window.py:1487
-msgid "Attach YouTube Captions?"
-msgstr ""
+#: src/instance_manager.py:348
+msgid "Model to use when generating a chat title."
+msgstr "生成聊天标题时使用的模型。"
 
-#: src/window.py:1488
-msgid "Please enter a YouTube video URL"
-msgstr ""
+#: src/instance_manager.py:412 src/instance_manager.py:413
+#: src/custom_widgets/message_widget.py:234
+msgid "Save"
+msgstr "保存"
 
-#: src/window.py:1496
-msgid "Download Model?"
-msgstr ""
+#: src/instance_manager.py:462 src/instance_manager.py:690
+#: src/instance_manager.py:732 src/instance_manager.py:761
+msgid "Could not retrieve added models"
+msgstr "无法检索到已添加的模型"
 
-#: src/window.py:1497
-msgid "Please enter the model name following this template: name:tag"
-msgstr ""
+#: src/instance_manager.py:472
+msgid "Could not retrieve available models"
+msgstr "无法检索到可用的模型"
 
-#: src/window.py:1504
-msgid "Delete All Chats?"
-msgstr ""
+#: src/instance_manager.py:539
+msgid "Ollama (Managed)"
+msgstr "Ollama（托管版）"
 
-#: src/window.py:1505
-msgid "Are you sure you want to delete all chats?"
-msgstr ""
+#: src/instance_manager.py:548
+msgid "Local AI instance managed directly by Alpaca"
+msgstr "由 Alpaca 托管的本地 AI 实例"
 
-#: src/window.py:1507 src/widgets/attachments.py:211 src/widgets/chat.py:461
-msgid "Delete"
-msgstr ""
+#: src/instance_manager.py:572
+msgid "Alpaca Support"
+msgstr "Alpaca 支持文档"
 
-#: src/window.py:1534
-msgid "Already Installed!"
-msgstr ""
+#: src/instance_manager.py:579
+msgid "Model request too large for system"
+msgstr "模型需求太大，超出系统处理能力"
+
+#: src/instance_manager.py:582
+msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
+msgstr "检测到 AMD GPU，但未安装支持扩展，Ollama 将使用 CPU。"
+
+#: src/instance_manager.py:584
+msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
+msgstr "检测到 AMD GPU，但缺少 ROCm，Ollama 将使用 CPU。"
+
+#: src/instance_manager.py:586
+msgid "Using AMD GPU type '{}'"
+msgstr "使用 AMD GPU 类型"
+
+#: src/instance_manager.py:596
+msgid "Integrated Ollama instance is not running"
+msgstr "集成的 Ollama 实例未运行"
+
+#: src/instance_manager.py:618
+msgid "Managed Ollama instance failed to start"
+msgstr "托管的 Ollama 实例启动失败"
+
+#: src/instance_manager.py:621
+msgid "Integrated Ollama instance is running"
+msgstr "集成的 Ollama 实例正在运行"
+
+#: src/instance_manager.py:626 src/instance_manager.py:627
+msgid "Ollama Log"
+msgstr "Ollama 日志"
+
+#: src/instance_manager.py:639
+msgid "Local or remote AI instance not managed by Alpaca"
+msgstr "本地或远程AI实例不由Alpaca管理"
+
+#: src/instance_manager.py:803 src/instance_manager.py:823
+#: src/instance_manager.py:844
+msgid "Could not retrieve models"
+msgstr "无法获取模型列表"
+
+#: src/instance_manager.py:812
+msgid "Fireworks AI inference platform"
+msgstr "Fireworks AI 推理平台"
+
+#: src/instance_manager.py:832
+msgid "Lambda Labs cloud inference API"
+msgstr "Lambda Labs 云端推理 API"
+
+#: src/instance_manager.py:853
+msgid "Cerebras AI cloud inference API"
+msgstr "Cerebras AI 云端推理API"
+
+#: src/instance_manager.py:859
+msgid "Kluster AI cloud inference API"
+msgstr "Kluster AI 云端推理API"
+
+#: src/instance_manager.py:863
+msgid "OpenAI Compatible Instance"
+msgstr "兼容 OpenAI 的实例"
+
+#: src/instance_manager.py:864
+msgid "AI instance compatible with OpenAI library"
+msgstr "兼容 OpenAI 库的 AI 实例"
+
+#: src/instance_manager.py:886
+msgid "Remove Instance?"
+msgstr "移除实例？"
+
+#: src/instance_manager.py:886
+msgid "Are you sure you want to remove this instance?"
+msgstr "您确定要移除这个实例吗？"
+
+#: src/instance_manager.py:901
+msgid "Edit Instance"
+msgstr "编辑实例"
+
+#: src/tool_manager.py:71
+msgid "AI Description"
+msgstr "AI 描述说明"
+
+#: src/tool_manager.py:72
+msgid "The description the AI model will use to understand what the tool does."
+msgstr "AI 模型用于理解工具功能的描述说明"
+
+#: src/tool_manager.py:83
+msgid "Arguments"
+msgstr "参量"
+
+#: src/tool_manager.py:84
+msgid "Variables that are filled by the AI."
+msgstr "由 AI 填充的变量"
+
+#: src/tool_manager.py:97
+msgid "Variables"
+msgstr "变量"
+
+#: src/tool_manager.py:98
+msgid ""
+"User filled values that the tool uses to work, the AI does not have access "
+"to these variables at all."
+msgstr "用户填写的值是用于工具工作，人工智能无法访问这些变量。"
+
+#: src/tool_manager.py:140 src/custom_widgets/dialog_widget.py:146
+#: src/custom_widgets/dialog_widget.py:158
+#: src/custom_widgets/dialog_widget.py:170
+msgid "Accept"
+msgstr "接受"
+
+#: src/tool_manager.py:177
+msgid "Gets the current date and/or time."
+msgstr "获取当前日期和（或）时间。"
+
+#: src/tool_manager.py:211
+msgid "Gets a recipe by the meal's name"
+msgstr "根据餐点名称获取菜谱"
+
+#: src/tool_manager.py:224 src/tool_manager.py:281
+msgid "YouTube Video"
+msgstr "YouTube 视频"
+
+#: src/tool_manager.py:227 src/tool_manager.py:284
+msgid "Source"
+msgstr "来源"
+
+#: src/tool_manager.py:262
+msgid "Gets a list of food recipes by a specified category"
+msgstr "按指定类别获取食物食谱列表"
+
+#: src/tool_manager.py:307
+msgid "Extracts an article from Wikipedia by it's title"
+msgstr "根据标题从维基百科中提取文章"
+
+#: src/tool_manager.py:349
+msgid "Search for a term online using DuckDuckGo"
+msgstr "使用 DuckDuckGo 在线搜索术语"
+
+#: src/tool_manager.py:365
+msgid "Abstract Source"
+msgstr "摘要来源"
+
+#: src/tool_manager.py:384
+msgid "Official Website"
+msgstr "官方网站"
+
+#: src/tool_manager.py:432
+msgid "Request to run a command using SSH to connect to the device"
+msgstr "请求使用 SSH 运行命令连接设备"
+
+#: src/tool_manager.py:435
+msgid "IP Address"
+msgstr "IP 地址"
+
+#: src/tool_manager.py:440
+msgid "Username"
+msgstr "用户名"
+
+#: src/tool_manager.py:445
+msgid "Network Port"
+msgstr "网络端口"
+
+#: src/tool_manager.py:462
+msgid "Model Requested to Run Command"
+msgstr "要求运行命令的模型"
+
+#: src/tool_manager.py:463
+msgid "Command"
+msgstr "命令"
+
+#: src/tool_manager.py:465
+msgid "Explanation"
+msgstr "解释"
+
+#: src/tool_manager.py:466
+msgid "No explanation was provided"
+msgstr "未提供解释"
+
+#: src/tool_manager.py:467
+msgid "Make sure you understand what the command does before running it."
+msgstr "在运行该命令之前，请确保您了解它的作用。"
 
 #: src/window.ui:34
 msgid "Welcome"
-msgstr ""
+msgstr "欢迎！"
 
 #: src/window.ui:46 src/window.ui:47
 msgid "Previous"
-msgstr ""
+msgstr "上一个"
 
 #: src/window.ui:82
 msgid "Welcome to Alpaca"
-msgstr ""
+msgstr "欢迎来到 Alpaca"
 
 #: src/window.ui:83
 msgid "Powering your potential"
-msgstr ""
+msgstr "助力您的潜力"
 
 #: src/window.ui:91
 msgid ""
@@ -3230,30 +3761,38 @@ msgid ""
 "\n"
 "Alpaca is distributed under GPL v3.0, this software comes with no warranty."
 msgstr ""
+"使用AI模型生成的代码执行导致的任何设备或软件损坏，Alpaca及其开发人员不承担任"
+"何责任。请在运行代码前谨慎检查并仔细审核。\n"
+"\n"
+"Alpaca 按照 GPLv3.0 协议分发，本软件不提供任何形式的保障。"
 
 #: src/window.ui:100
 msgid "Effortless Code Execution"
-msgstr ""
+msgstr "代码轻松执行"
 
 #: src/window.ui:101
 msgid ""
 "Alpaca can run Python, C++, and even HTML (with a live server) right from "
 "your conversations. Give it a try!"
 msgstr ""
+"Alpaca 可以直接从您的对话中运行Python、C++，甚至HTML（需要一个live服务器）。"
+"试试看！"
 
 #: src/window.ui:107
 msgid "Private by Design"
-msgstr ""
+msgstr "私密性设计"
 
 #: src/window.ui:108
 msgid ""
 "With Alpaca, your conversations are saved locally on your device, so you can "
 "be confident that your data is always secure and private."
 msgstr ""
+"使用 Alpaca，您的对话将保存在您设备的本地，因此您可以确保您的数据始终安全且私"
+"密。"
 
 #: src/window.ui:114
 msgid "Local AI"
-msgstr ""
+msgstr "本地 AI"
 
 #: src/window.ui:115
 msgid ""
@@ -3261,1316 +3800,928 @@ msgid ""
 "locally on your machine, you'll need to install Ollama within Alpaca. We've "
 "made it super easy to do, so you can get started quickly!"
 msgstr ""
+"Alpaca 支持与 Gemini、ChatGPT 等 AI 服务商对接。若需在本地设备运行 AI 模型，"
+"您只需在 Alpaca 中安装 Ollama 即可。我们已大幅简化安装流程，助您快速上手！"
 
 #: src/window.ui:120 src/window.ui:121
 msgid "Install Ollama"
-msgstr ""
+msgstr "安装 Ollama"
 
-#: src/window.ui:174
+#: src/window.ui:165
 msgid "Menu"
-msgstr ""
+msgstr "目录"
 
-#: src/window.ui:181
-msgid "Search Chats"
-msgstr ""
-
-#: src/window.ui:190
-msgid "Chat search bar"
-msgstr ""
-
-#: src/window.ui:198 src/window.ui:200
-msgid "Search chats"
-msgstr ""
-
-#: src/window.ui:236
-msgid "No Chats Found"
-msgstr ""
-
-#: src/window.ui:237
-msgid "Oh no! It looks like there are no chats found for your search."
-msgstr ""
-
-#: src/window.ui:254
+#: src/window.ui:187
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "切换侧边栏"
 
-#: src/window.ui:261
+#: src/window.ui:194
 msgid "Search Messages"
-msgstr ""
+msgstr "搜索消息"
 
-#: src/window.ui:278 src/window.ui:303 src/window.ui:1370
+#: src/window.ui:211 src/window.ui:236 src/window.ui:1385
 msgid "Manage Models"
-msgstr ""
+msgstr "管理模型"
 
-#: src/window.ui:299
+#: src/window.ui:232
 msgid "Add Models"
-msgstr ""
+msgstr "添加模型"
 
-#: src/window.ui:316
+#: src/window.ui:249
 msgid "Chat Menu"
-msgstr ""
+msgstr "对话列表"
 
-#: src/window.ui:329
+#: src/window.ui:262
 msgid "Message search bar"
-msgstr ""
+msgstr "消息搜索栏"
 
-#: src/window.ui:338 src/window.ui:340
+#: src/window.ui:271 src/window.ui:273
 msgid "Search messages"
-msgstr ""
+msgstr "搜索消息"
 
-#: src/window.ui:356
+#: src/window.ui:289
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
-msgstr ""
+msgstr "警告：省电模式已启用，消息生成速度将减慢"
 
-#: src/window.ui:391 src/window.ui:1468
+#: src/window.ui:336 src/window.ui:1483
 msgid "Attach File"
-msgstr ""
+msgstr "附加文件"
 
-#: src/window.ui:424 src/window.ui:1315
+#: src/window.ui:369 src/window.ui:1252
 msgid "Use Speech Recognition"
-msgstr ""
+msgstr "使用语音识别"
 
-#: src/window.ui:459
+#: src/window.ui:404
 msgid "Send Message"
-msgstr ""
+msgstr "发送消息"
 
-#: src/window.ui:478
+#: src/window.ui:423
 msgid "Stop Message"
-msgstr ""
+msgstr "停止消息"
 
-#: src/window.ui:508
+#: src/window.ui:453
 msgid "Instance Manager"
-msgstr ""
+msgstr "实例管理器"
 
-#: src/window.ui:523
+#: src/window.ui:468
 msgid "No Instances Found"
-msgstr ""
+msgstr "未找到任何实例"
 
-#: src/window.ui:524
+#: src/window.ui:469
 msgid "It looks a bit empty in here. Try adding an instance get started!"
-msgstr ""
+msgstr "这里看起来有点空荡。试试添加一个实例开始使用吧！"
 
-#: src/window.ui:553
+#: src/window.ui:498
 msgid "Added Instances"
-msgstr ""
+msgstr "已添加的实例"
 
-#: src/window.ui:554
+#: src/window.ui:499
 msgid ""
 "Manage your AI instances, chats and messages are shared between instances "
 "when generating responses."
-msgstr ""
+msgstr "管理您的 AI 实例，在生成响应时，对话和交流会在不同实例之间共享。"
 
-#: src/window.ui:590
+#: src/window.ui:535
 msgid "Tool Manager"
-msgstr ""
+msgstr "工具管理器"
 
-#: src/window.ui:601
+#: src/window.ui:546
 msgid "Available Tools"
-msgstr ""
+msgstr "可用工具"
 
-#: src/window.ui:602
+#: src/window.ui:547
 msgid ""
 "Functions that AI models might use when sending a message by selecting \"Use "
 "Tools\" in the send button context menu."
 msgstr ""
+"当您在发送按钮的目录菜单中选择\"使用工具\"时，AI模型可能调用的功能模块。"
 
-#: src/window.ui:621
+#: src/window.ui:566
 msgid "Model Manager"
-msgstr ""
+msgstr "模型管理器"
 
-#: src/window.ui:659
+#: src/window.ui:604
 msgid "Search Model"
-msgstr ""
+msgstr "搜索模型"
 
-#: src/window.ui:673
+#: src/window.ui:618
 msgid "Model Manager Menu"
-msgstr ""
+msgstr "模型管理菜单"
 
-#: src/window.ui:686
+#: src/window.ui:631
 msgid "Model search bar"
-msgstr ""
+msgstr "模型搜索框"
 
-#: src/window.ui:698 src/window.ui:700
+#: src/window.ui:643 src/window.ui:645
 msgid "Search models"
-msgstr ""
+msgstr "搜索模型"
 
-#: src/window.ui:707
+#: src/window.ui:652
 msgid "Filter Models"
-msgstr ""
+msgstr "过滤器模型"
 
-#: src/window.ui:723
+#: src/window.ui:668
 msgid "Added"
-msgstr ""
+msgstr "已添加"
 
-#: src/window.ui:733 src/window.ui:794 src/window.ui:848
+#: src/window.ui:678 src/window.ui:739 src/window.ui:793
 msgid "No Models Found"
-msgstr ""
+msgstr "未找到模型"
 
-#: src/window.ui:734
+#: src/window.ui:679
 msgid ""
 "It looks a bit empty in here. Try downloading some models or change your AI "
 "instance to get started!"
-msgstr ""
+msgstr "这里看起来有点空荡。试试下载一些模型或更改您的 AI 实例开始使用吧！"
 
-#: src/window.ui:737 src/window.ui:747 src/window.ui:1366
+#: src/window.ui:682 src/window.ui:692 src/window.ui:1381
 msgid "Manage Instances"
-msgstr ""
+msgstr "管理实例"
 
-#: src/window.ui:795 src/window.ui:849
+#: src/window.ui:740 src/window.ui:794
 msgid ""
 "Looks like we’re fresh out of models for that search. Try tweaking your "
 "keywords, or maybe explore something new!"
 msgstr ""
+"看来没有找到符合条件的模型。您可以尝试调整关键词，或者探索一些新的内容！"
 
-#: src/window.ui:807
+#: src/window.ui:752
 msgid "Available"
-msgstr ""
+msgstr "可获取"
 
-#: src/window.ui:861
+#: src/window.ui:806
 msgid "Creator"
-msgstr ""
+msgstr "创建者"
 
-#: src/window.ui:872
+#: src/window.ui:817
 msgid "Model Creator"
-msgstr ""
+msgstr "模型创建者"
 
-#: src/window.ui:873
+#: src/window.ui:818
 msgid "Select a method of importing a model to continue"
-msgstr ""
+msgstr "请选择一种导入模型的方法继续："
 
-#: src/window.ui:885
+#: src/window.ui:830
 msgid "GGUF File"
-msgstr ""
+msgstr "GGUF 文件"
 
-#: src/window.ui:896
+#: src/window.ui:841
 msgid "Existing Model"
-msgstr ""
+msgstr "已存在的模型"
 
-#: src/window.ui:914
+#: src/window.ui:859
 msgid "Identity"
-msgstr ""
+msgstr "识别信息"
 
-#: src/window.ui:917
+#: src/window.ui:862
 msgid "Base"
-msgstr ""
+msgstr "基础模型"
 
-#: src/window.ui:924
+#: src/window.ui:869
 msgid "Profile Picture"
-msgstr ""
+msgstr "简介图片"
 
-#: src/window.ui:929
+#: src/window.ui:874
 msgid "Open File"
-msgstr ""
+msgstr "打开文件"
 
-#: src/window.ui:940 src/widgets/instance_manager.py:278
-msgid "Name"
-msgstr ""
-
-#: src/window.ui:945 src/widgets/model_manager.py:453
+#: src/window.ui:890 src/custom_widgets/model_manager_widget.py:449
 msgid "Tag"
-msgstr ""
+msgstr "标签"
 
-#: src/window.ui:952 src/widgets/model_manager.py:470
+#: src/window.ui:897 src/custom_widgets/model_manager_widget.py:466
 msgid "Context"
-msgstr ""
+msgstr "上下文"
 
-#: src/window.ui:953
+#: src/window.ui:898
 msgid ""
 "Describe the desired behavior of the model in its primary language "
 "(typically English)."
-msgstr ""
+msgstr "用模型的主要语言（通常是英语）描述您希望的模型的行为。"
 
-#: src/window.ui:981
+#: src/window.ui:926
 msgid "Behavior"
-msgstr ""
+msgstr "行为"
 
-#: src/window.ui:984
+#: src/window.ui:929
 msgid "Imagination"
-msgstr ""
+msgstr "想象力"
 
-#: src/window.ui:985
+#: src/window.ui:930
 msgid "A higher number results in more diverse answers from the model. (top_k)"
-msgstr ""
+msgstr "较高的数字会导致模型生成更多样化的回答。（top_k）"
 
-#: src/window.ui:999
+#: src/window.ui:944
 msgid "Focus"
-msgstr ""
+msgstr "专注力"
 
-#: src/window.ui:1000
+#: src/window.ui:945
 msgid "A higher number widens the amount of possible answers. (top_p)"
-msgstr ""
+msgstr "较高的数字会增加可能的答案范围。（top_p）"
 
-#: src/window.ui:1033 src/window.ui:1041
+#: src/window.ui:978 src/window.ui:986
 msgid "Add Model"
-msgstr ""
+msgstr "添加模型"
 
-#: src/window.ui:1075 src/window.ui:1380
+#: src/window.ui:1020 src/window.ui:1395
 msgid "Preferences"
-msgstr ""
+msgstr "首选项"
 
-#: src/window.ui:1083
+#: src/window.ui:1028
 msgid "Run Alpaca In Background"
-msgstr ""
+msgstr "在后台运行 Alpaca"
 
-#: src/window.ui:1090
+#: src/window.ui:1035
 msgid "Show Power Saver Warning"
-msgstr ""
+msgstr "显示省电警告"
 
-#: src/window.ui:1091
+#: src/window.ui:1036
 msgid "When running a managed Ollama instance"
-msgstr ""
+msgstr "运行托管的 Ollama 实例时"
 
-#: src/window.ui:1098
+#: src/window.ui:1043
 msgid "Zoom"
-msgstr ""
+msgstr "缩放"
 
-#: src/window.ui:1115
+#: src/window.ui:1060
 msgid "Speech Recognition Model"
 msgstr ""
 
-#: src/window.ui:1116
+#: src/window.ui:1061
 msgid ""
 "Models are downloaded upon first use, you can delete them from the model "
 "manager"
 msgstr ""
 
-#: src/window.ui:1123
+#: src/window.ui:1068
 msgid "Speech Recognition Language"
-msgstr ""
+msgstr "语音识别语言"
 
-#: src/window.ui:1130
+#: src/window.ui:1075
 msgid "Auto Send Message After Talking"
-msgstr ""
+msgstr "通话后自动发送消息"
 
-#: src/window.ui:1141
-msgid "Default Text to Speech Voice"
-msgstr ""
+#: src/window.ui:1086
+msgid "Text to Speech Voice"
+msgstr "文本转语音"
 
-#: src/window.ui:1142
+#: src/window.ui:1087
 msgid ""
 "Voices are downloaded upon first use, each weighing around 1 MB, and you can "
 "delete them from the model manager"
 msgstr ""
 
-#: src/window.ui:1149
-msgid "Dictate New Messages Automatically"
-msgstr ""
-
-#: src/window.ui:1150
-msgid "Dictate new messages once they have finished being generated"
-msgstr ""
-
-#: src/window.ui:1163
+#: src/window.ui:1100
 msgid "Delete All Chats"
-msgstr ""
+msgstr "删除所有对话"
 
-#: src/window.ui:1175
+#: src/window.ui:1112
 msgid "Notice"
-msgstr ""
+msgstr "通知"
 
-#: src/window.ui:1195
+#: src/window.ui:1132
 msgid ""
 "Hey Alpaca users! We're so excited to bring you a fresh update packed with "
 "awesome new features to explore! Get ready to experience Alpaca in a whole "
 "new way!"
 msgstr ""
+"亲爱的Alpaca用户们！我们怀着无比激动的心情为您带来全新升级版本！本次更新包含"
+"一系列令人惊艳的新功能，等待您来探索！准备好以焕然一新的方式体验Alpaca吧！"
 
-#: src/window.ui:1202
+#: src/window.ui:1139
 msgid "Smart Tools"
-msgstr ""
+msgstr "智能工具"
 
-#: src/window.ui:1203
+#: src/window.ui:1140
 msgid ""
 "Supported AI models can use handy tools to grab information both locally and "
 "online. Head over to the brand new \"Tool Manager\" to toggle them on or off."
 msgstr ""
+"已支持的 AI 模型可使用便捷工具获取本地及在线信息。前往全新推出的\"工具管理器"
+"\"开启或关闭这些功能。"
 
-#: src/window.ui:1210
+#: src/window.ui:1147
 msgid "Talk to Models"
-msgstr ""
+msgstr "与模型对话"
 
-#: src/window.ui:1211
+#: src/window.ui:1148
 msgid ""
 "You can now dictate your messages using local speech recognition. It's super "
 "convenient! You can even customize your language and other settings in the "
 "Preferences dialog."
 msgstr ""
+"现在您可以使用本地语音识别口述消息，超级方便！您还可以在“偏好设置”对话框中自"
+"定义语言和其他选项"
 
-#: src/window.ui:1218
+#: src/window.ui:1155
 msgid "Find Models Faster"
-msgstr ""
+msgstr "快速查找模型"
 
-#: src/window.ui:1219
+#: src/window.ui:1156
 msgid ""
 "Browsing through your Ollama models just got easier! We've added the ability "
 "to filter models by their categories in the Model Manager. Now you can "
 "quickly find exactly the model you're looking for."
 msgstr ""
+"浏览您的 Ollama 模型变得更简单了！我们新增了在模型管理器中按类别筛选的功能，"
+"现在您可以快速找到所需模型"
 
-#: src/window.ui:1226
+#: src/window.ui:1163
 msgid "Math Rendering"
-msgstr ""
+msgstr "数学公式渲染"
 
-#: src/window.ui:1227
+#: src/window.ui:1164
 msgid ""
 "We've improved how LaTeX equations are rendered in messages, making them "
 "look cleaner and more consistent. Your mathematical discussions will be "
 "clearer than ever!"
 msgstr ""
+"我们优化了消息中LaTeX方程的渲染效果，使其更清晰、更统一。您的数学讨论将比以往"
+"更加一目了然！"
 
-#: src/window.ui:1234
+#: src/window.ui:1171
 msgid "More Instances"
-msgstr ""
+msgstr "更多AI服务接入"
 
-#: src/window.ui:1235
+#: src/window.ui:1172
 msgid ""
 "Get ready to connect Alpaca to a whole universe of AI providers! We've added "
 "support for over 5 new AI instance providers, including Anthropic, "
 "OpenRouter, and Fireworks. The possibilities are endless!"
 msgstr ""
+"现在您可以将Alpaca连接到更多AI服务提供商了！我们新增支持Anthropic、"
+"OpenRouter、Fireworks等5家以上AI服务，可能性无限扩展！"
 
-#: src/window.ui:1242
+#: src/window.ui:1179
 msgid "Attachment Enhancement"
-msgstr ""
+msgstr "文件附件功能升级"
 
-#: src/window.ui:1243
+#: src/window.ui:1180
 msgid ""
 "You can now attach and ask questions about even more file types, "
 "including .docx, .pptx, and .xlsx! Plus, when you preview an attachment, "
 "you'll see it with rich text styling, making it easier to understand the "
 "content before you send it."
 msgstr ""
+"现已支持更多文件类型（包括.docx、.pptx和.xlsx）的附件上传与提问！此外，预览附"
+"件时将显示富文本样式，让您在发送前更轻松理解内容。"
 
-#: src/window.ui:1264
+#: src/window.ui:1201
 msgid "Quick ask dialog"
-msgstr ""
+msgstr "快速问答框"
 
-#: src/window.ui:1276
+#: src/window.ui:1213
 msgid "Save Conversation to Alpaca"
-msgstr ""
+msgstr "保存对话至 Alpace"
 
-#: src/window.ui:1350 src/widgets/chat.py:22
-msgid "New Notebook"
-msgstr ""
+#: src/window.ui:1282
+msgid "Terminal dialog"
+msgstr "终端对话框"
 
-#: src/window.ui:1358
+#: src/window.ui:1285
+msgid "Terminal"
+msgstr "终端"
+
+#: src/window.ui:1299
+msgid "Open Environment Directory"
+msgstr "打开环境目录"
+
+#: src/window.ui:1320
+msgid "File preview dialog"
+msgstr "文件预览对话框"
+
+#: src/window.ui:1331
+msgid "Open With Default App"
+msgstr "用默认应用打开"
+
+#: src/window.ui:1339
+msgid "Remove Attachment"
+msgstr "移除附件"
+
+#: src/window.ui:1373
 msgid "Start Quick Ask"
-msgstr ""
+msgstr "开始快速提问"
 
-#: src/window.ui:1362
+#: src/window.ui:1377
 msgid "Import Chat"
-msgstr ""
+msgstr "导入对话"
 
-#: src/window.ui:1374
+#: src/window.ui:1389
 msgid "Manage Tools"
-msgstr ""
+msgstr "管理工具"
 
-#: src/window.ui:1384
+#: src/window.ui:1399
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "快捷键"
 
-#: src/window.ui:1388
+#: src/window.ui:1403
 msgid "About Alpaca"
-msgstr ""
+msgstr "关于 Alpaca"
 
-#: src/window.ui:1396 src/window.ui:1430
+#: src/window.ui:1411 src/window.ui:1445
 msgid "Rename Chat"
-msgstr ""
+msgstr "重命名对话"
 
-#: src/window.ui:1400 src/window.ui:1434
+#: src/window.ui:1415 src/window.ui:1449
 msgid "Duplicate Chat"
-msgstr ""
+msgstr "复制对话"
 
-#: src/window.ui:1404 src/window.ui:1438 src/widgets/chat.py:559
-msgid "Export Chat"
-msgstr ""
-
-#: src/window.ui:1410 src/window.ui:1444
+#: src/window.ui:1425 src/window.ui:1459
 msgid "Delete Chat"
-msgstr ""
+msgstr "删除对话"
 
-#: src/window.ui:1418
+#: src/window.ui:1433
 msgid "Reload Added Models"
-msgstr ""
+msgstr "重载已添加的模型"
 
-#: src/window.ui:1422
+#: src/window.ui:1437
 msgid "Download Model From Name"
-msgstr ""
+msgstr "根据名称下载模型"
 
-#: src/window.ui:1452
+#: src/window.ui:1467
 msgid "Send as User"
-msgstr ""
+msgstr "以用户身份发送"
 
-#: src/window.ui:1456
+#: src/window.ui:1471
 msgid "Send as System"
-msgstr ""
+msgstr "以系统身份发送"
 
-#: src/window.ui:1460 src/gtk/help-overlay.ui:133
+#: src/window.ui:1475 src/gtk/help-overlay.ui:133
 msgid "Use Tools"
-msgstr ""
+msgstr "使用工具"
 
-#: src/window.ui:1472
+#: src/window.ui:1487
 msgid "Attach Website"
-msgstr ""
+msgstr "附加网站"
 
-#: src/window.ui:1476
+#: src/window.ui:1491
 msgid "Attach YouTube Captions"
-msgstr ""
+msgstr "附加 YouTube 字幕"
+
+#: src/alpaca_search_provider.py.in:43
+msgid "Open chat"
+msgstr "打开对话"
+
+#: src/alpaca_search_provider.py.in:44
+msgid "Quick ask"
+msgstr "快速问答"
+
+#: src/generic_actions.py:79
+msgid "An error occurred while extracting text from the website"
+msgstr "从网站提取文本时发生错误"
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "通用"
 
 #: src/gtk/help-overlay.ui:14
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "显示快捷方式"
 
 #: src/gtk/help-overlay.ui:20
 msgctxt "shortcut window"
 msgid "Preferences"
-msgstr ""
+msgstr "首选项"
 
 #: src/gtk/help-overlay.ui:26
 msgctxt "shortcut window"
 msgid "Quick Ask"
-msgstr ""
+msgstr "快速提问"
 
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
 msgid "Model Manager"
-msgstr ""
+msgstr "模型管理器"
 
 #: src/gtk/help-overlay.ui:38
 msgctxt "shortcut window"
 msgid "Instance Manager"
-msgstr ""
+msgstr "实例管理器"
 
 #: src/gtk/help-overlay.ui:44
 msgctxt "shortcut window"
 msgid "Action Manager"
-msgstr ""
+msgstr "行为管理器"
 
 #: src/gtk/help-overlay.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "切换侧边栏"
 
 #: src/gtk/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "退出"
 
 #: src/gtk/help-overlay.ui:64
 msgctxt "shortcut window"
 msgid "Chat Management"
-msgstr ""
+msgstr "对话管理"
 
 #: src/gtk/help-overlay.ui:67
 msgctxt "shortcut window"
 msgid "Create Chat"
-msgstr ""
+msgstr "创建对话"
 
 #: src/gtk/help-overlay.ui:73
 msgctxt "shortcut window"
 msgid "Delete Chat"
-msgstr ""
+msgstr "删除对话"
 
 #: src/gtk/help-overlay.ui:79
 msgctxt "shortcut window"
 msgid "Clear Chat"
-msgstr ""
+msgstr "清除对话"
 
 #: src/gtk/help-overlay.ui:85
 msgctxt "shortcut window"
 msgid "Rename Chat"
-msgstr ""
+msgstr "重命名对话"
 
 #: src/gtk/help-overlay.ui:91
 msgctxt "shortcut window"
 msgid "Toggle Searchbars"
-msgstr ""
+msgstr "切换搜索栏"
 
 #: src/gtk/help-overlay.ui:99
 msgctxt "shortcut window"
 msgid "Message Entry"
-msgstr ""
+msgstr "消息输入框"
 
 #: src/gtk/help-overlay.ui:102
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 #: src/gtk/help-overlay.ui:108
 msgid "Paste"
-msgstr ""
+msgstr "粘贴"
 
 #: src/gtk/help-overlay.ui:114
 msgid "Open Emoji Menu"
-msgstr ""
+msgstr "打开 Emoji 目录"
 
 #: src/gtk/help-overlay.ui:120
 msgid "Insert new line"
-msgstr ""
+msgstr "插入新行"
 
 #: src/gtk/help-overlay.ui:126
 msgid "Send Message as System"
-msgstr ""
+msgstr "以系统身份发送消息"
 
 #: src/gtk/help-overlay.ui:127
 msgid "System messages are taken as literal instructions by models"
-msgstr ""
+msgstr "系统消息会被模型视为严格的指令"
 
 #: src/gtk/help-overlay.ui:134
 msgid "Ask model to use tools to generate a message"
-msgstr ""
+msgstr "要求模型调用工具生成消息"
 
 #: src/gtk/help-overlay.ui:140
 msgid "Send Message as User"
-msgstr ""
+msgstr "以用户身份发送消息"
 
-#: src/widgets/attachments.py:124
-msgid "Remove Attachment"
-msgstr ""
-
-#: src/widgets/attachments.py:138
-msgid "Replace Notebook Content"
-msgstr ""
-
-#: src/widgets/attachments.py:208
-msgid "Delete Attachment?"
-msgstr ""
-
-#: src/widgets/attachments.py:209 src/widgets/chat.py:459
-msgid "Are you sure you want to delete '{}'?"
-msgstr ""
-
-#: src/widgets/attachments.py:285
-msgid "Image"
-msgstr ""
-
-#: src/widgets/attachments.py:296 src/widgets/attachments.py:308
-msgid "Missing Image"
-msgstr ""
-
-#: src/widgets/chat.py:88 src/widgets/instance_manager.py:96
-msgid "Notebook"
-msgstr ""
-
-#: src/widgets/chat.py:89
-msgid "Start a notebook with a message"
-msgstr ""
-
-#: src/widgets/chat.py:97 src/widgets/chat.py:248
-msgid "No Messages Found"
-msgstr ""
-
-#: src/widgets/chat.py:98 src/widgets/chat.py:249
-msgid "Uh oh! No messages found for your search."
-msgstr ""
-
-#: src/widgets/chat.py:239
+#: src/custom_widgets/chat_widget.py:93
 msgid "Try one of these prompts"
-msgstr ""
+msgstr "试试这些提示"
 
-#: src/widgets/chat.py:269
+#: src/custom_widgets/chat_widget.py:122
 msgid "Send prompt: '{}'"
-msgstr ""
+msgstr "发送提示： '{}'"
 
-#: src/widgets/chat.py:275
+#: src/custom_widgets/chat_widget.py:128
 msgid "Refresh Prompts"
-msgstr ""
+msgstr "刷新提示词"
 
-#: src/widgets/chat.py:437
-msgid "Rename Chat?"
-msgstr ""
-
-#: src/widgets/chat.py:438
-msgid "Renaming '{}'"
-msgstr ""
-
-#: src/widgets/chat.py:440
-msgid "Chat name"
-msgstr ""
-
-#: src/widgets/chat.py:441
-msgid "Rename"
-msgstr ""
-
-#: src/widgets/chat.py:458
-msgid "Delete Chat?"
-msgstr ""
-
-#: src/widgets/chat.py:466
-msgid "Copy of {}"
-msgstr ""
-
-#: src/widgets/chat.py:479
+#: src/custom_widgets/chat_widget.py:186
 msgid "Chat exported successfully"
-msgstr ""
+msgstr "聊天记录已成功导出"
 
-#: src/widgets/chat.py:499
+#: src/custom_widgets/chat_widget.py:206
 msgid "User"
-msgstr ""
+msgstr "用户"
 
-#: src/widgets/chat.py:503
+#: src/custom_widgets/chat_widget.py:210
+#: src/custom_widgets/message_widget.py:693
 msgid "System"
-msgstr ""
-
-#: src/widgets/chat.py:551
-msgid "Importable (.db)"
-msgstr ""
-
-#: src/widgets/chat.py:552
-msgid "Markdown"
-msgstr ""
-
-#: src/widgets/chat.py:553
-msgid "Markdown (Obsidian Style)"
-msgstr ""
-
-#: src/widgets/chat.py:554
-msgid "JSON"
-msgstr ""
-
-#: src/widgets/chat.py:555
-msgid "JSON (Include Metadata)"
-msgstr ""
-
-#: src/widgets/chat.py:560
-msgid "Select a method to export the chat"
-msgstr ""
-
-#: src/widgets/dialog.py:148 src/widgets/dialog.py:161
-#: src/widgets/dialog.py:174 src/widgets/tools/tools.py:136
-msgid "Accept"
-msgstr ""
-
-#: src/widgets/instance_manager.py:30 src/widgets/instance_manager.py:430
-msgid "Instance"
-msgstr ""
-
-#: src/widgets/instance_manager.py:88
-msgid "Notebook Error"
-msgstr ""
-
-#: src/widgets/instance_manager.py:89 src/widgets/instance_manager.py:159
-msgid "An error occurred while running tool"
-msgstr ""
-
-#: src/widgets/instance_manager.py:116
-msgid "Selecting tool to use..."
-msgstr ""
-
-#: src/widgets/instance_manager.py:125
-msgid "Using {}"
-msgstr ""
-
-#: src/widgets/instance_manager.py:158
-msgid "Tool Error"
-msgstr ""
-
-#: src/widgets/instance_manager.py:165
-msgid "Generating message..."
-msgstr ""
-
-#: src/widgets/instance_manager.py:219 src/widgets/instance_manager.py:528
-#: src/widgets/instance_manager.py:542 src/widgets/instance_manager.py:693
-#: src/widgets/instance_manager.py:777 src/widgets/instance_manager.py:824
-#: src/widgets/instance_manager.py:858 src/widgets/instance_manager.py:905
-#: src/widgets/instance_manager.py:930 src/widgets/instance_manager.py:956
-msgid "Instance Error"
-msgstr ""
-
-#: src/widgets/instance_manager.py:220
-msgid "Message generation failed"
-msgstr ""
-
-#: src/widgets/instance_manager.py:286
-msgid "Port"
-msgstr ""
-
-#: src/widgets/instance_manager.py:287
-msgid "Which network port will '{}' use"
-msgstr ""
-
-#: src/widgets/instance_manager.py:301
-msgid "Instance URL"
-msgstr ""
-
-#: src/widgets/instance_manager.py:304 src/widgets/instance_manager.py:314
-#: src/widgets/instance_manager.py:317 src/widgets/instance_manager.py:319
-msgid "API Key (Unchanged)"
-msgstr ""
-
-#: src/widgets/instance_manager.py:304 src/widgets/instance_manager.py:314
-msgid "API Key (Optional)"
-msgstr ""
-
-#: src/widgets/instance_manager.py:317 src/widgets/instance_manager.py:319
-msgid "API Key"
-msgstr ""
-
-#: src/widgets/instance_manager.py:327
-msgid "Max Tokens"
-msgstr ""
-
-#: src/widgets/instance_manager.py:328
-msgid ""
-"Defines the maximum number of tokens (words + spaces) the AI can generate in "
-"a response. More tokens allow longer replies but may take more time and cost "
-"more."
-msgstr ""
-
-#: src/widgets/instance_manager.py:343
-msgid "Temperature"
-msgstr ""
-
-#: src/widgets/instance_manager.py:344
-msgid "Increasing the temperature will make the models answer more creatively."
-msgstr ""
-
-#: src/widgets/instance_manager.py:359
-msgid "Seed"
-msgstr ""
-
-#: src/widgets/instance_manager.py:360
-msgid ""
-"Setting this to a specific number other than 0 will make the model generate "
-"the same text for the same prompt."
-msgstr ""
-
-#: src/widgets/instance_manager.py:375
-msgid "Overrides"
-msgstr ""
-
-#: src/widgets/instance_manager.py:375
-msgid ""
-"These entries are optional, they are used to troubleshoot GPU related "
-"problems with Ollama."
-msgstr ""
-
-#: src/widgets/instance_manager.py:393
-msgid "Model Directory"
-msgstr ""
-
-#: src/widgets/instance_manager.py:395
-msgid "Select Directory"
-msgstr ""
-
-#: src/widgets/instance_manager.py:410
-msgid "Default Model"
-msgstr ""
-
-#: src/widgets/instance_manager.py:410
-msgid "Model to select when starting a new chat."
-msgstr ""
-
-#: src/widgets/instance_manager.py:412
-msgid "Title Model"
-msgstr ""
-
-#: src/widgets/instance_manager.py:412
-msgid "Model to use when generating a chat title."
-msgstr ""
-
-#: src/widgets/instance_manager.py:476 src/widgets/instance_manager.py:477
-#: src/widgets/blocks/code.py:145 src/widgets/blocks/text.py:120
-msgid "Save"
-msgstr ""
-
-#: src/widgets/instance_manager.py:529 src/widgets/instance_manager.py:778
-#: src/widgets/instance_manager.py:825 src/widgets/instance_manager.py:859
-msgid "Could not retrieve added models"
-msgstr ""
-
-#: src/widgets/instance_manager.py:543
-msgid "Could not retrieve available models"
-msgstr ""
-
-#: src/widgets/instance_manager.py:612
-msgid "Ollama (Managed)"
-msgstr ""
-
-#: src/widgets/instance_manager.py:621
-msgid "Local AI instance managed directly by Alpaca"
-msgstr ""
-
-#: src/widgets/instance_manager.py:645
-msgid "Alpaca Support"
-msgstr ""
-
-#: src/widgets/instance_manager.py:652
-msgid "Model request too large for system"
-msgstr ""
-
-#: src/widgets/instance_manager.py:655
-msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
-msgstr ""
-
-#: src/widgets/instance_manager.py:657
-msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
-msgstr ""
-
-#: src/widgets/instance_manager.py:659
-msgid "Using AMD GPU type '{}'"
-msgstr ""
-
-#: src/widgets/instance_manager.py:669
-msgid "Integrated Ollama instance is not running"
-msgstr ""
-
-#: src/widgets/instance_manager.py:694
-msgid "Managed Ollama instance failed to start"
-msgstr ""
-
-#: src/widgets/instance_manager.py:699
-msgid "Integrated Ollama instance is running"
-msgstr ""
-
-#: src/widgets/instance_manager.py:704 src/widgets/instance_manager.py:707
-msgid "Ollama Log"
-msgstr ""
-
-#: src/widgets/instance_manager.py:724
-msgid "Local or remote AI instance not managed by Alpaca"
-msgstr ""
-
-#: src/widgets/instance_manager.py:906 src/widgets/instance_manager.py:931
-#: src/widgets/instance_manager.py:957
-msgid "Could not retrieve models"
-msgstr ""
-
-#: src/widgets/instance_manager.py:917
-msgid "Fireworks AI inference platform"
-msgstr ""
-
-#: src/widgets/instance_manager.py:942
-msgid "Lambda Labs cloud inference API"
-msgstr ""
-
-#: src/widgets/instance_manager.py:968
-msgid "Cerebras AI cloud inference API"
-msgstr ""
-
-#: src/widgets/instance_manager.py:974
-msgid "Kluster AI cloud inference API"
-msgstr ""
-
-#: src/widgets/instance_manager.py:978
-msgid "OpenAI Compatible Instance"
-msgstr ""
-
-#: src/widgets/instance_manager.py:979
-msgid "AI instance compatible with OpenAI library"
-msgstr ""
-
-#: src/widgets/instance_manager.py:989
-msgid "Meta AI Llama API"
-msgstr ""
-
-#: src/widgets/instance_manager.py:1010
-msgid "Remove Instance?"
-msgstr ""
-
-#: src/widgets/instance_manager.py:1011
-msgid "Are you sure you want to remove this instance?"
-msgstr ""
-
-#: src/widgets/instance_manager.py:1013 src/widgets/model_manager.py:114
-#: src/widgets/model_manager.py:201 src/widgets/model_manager.py:638
-#: src/widgets/model_manager.py:695
-msgid "Remove"
-msgstr ""
-
-#: src/widgets/instance_manager.py:1031
-msgid "Edit Instance"
-msgstr ""
-
-#: src/widgets/message.py:35
-msgid "Remove Message"
-msgstr ""
-
-#: src/widgets/message.py:45
+msgstr "系统"
+
+#: src/custom_widgets/chat_widget.py:298
+msgid "Regenerate Response"
+msgstr "重新生成回复"
+
+#: src/custom_widgets/chat_widget.py:462
+msgid "Copy of {}"
+msgstr "{} 的副本"
+
+#: src/custom_widgets/chat_widget.py:480
+msgid "Chat imported successfully"
+msgstr "对话记录已成功导入"
+
+#: src/custom_widgets/message_widget.py:89
+msgid "Save Message"
+msgstr "保存消息"
+
+#: src/custom_widgets/message_widget.py:130
+#: src/custom_widgets/message_widget.py:269
+msgid "Message edited successfully"
+msgstr "更改消息成功"
+
+#: src/custom_widgets/message_widget.py:156
+msgid "Response message"
+msgstr "回复消息"
+
+#: src/custom_widgets/message_widget.py:158
+msgid "System message"
+msgstr "系统消息"
+
+#: src/custom_widgets/message_widget.py:160
+msgid "User message"
+msgstr "用户消息"
+
+#: src/custom_widgets/message_widget.py:219
+msgid "{}Code Block"
+msgstr "{} 代码块"
+
+#: src/custom_widgets/message_widget.py:221
+msgid "Code Block"
+msgstr "代码块"
+
+#: src/custom_widgets/message_widget.py:222
+#: src/custom_widgets/message_widget.py:531
 msgid "Copy Message"
-msgstr ""
+msgstr "复制消息"
 
-#: src/widgets/message.py:55
+#: src/custom_widgets/message_widget.py:226
+msgid "Edit Code Block"
+msgstr "编辑代码块"
+
+#: src/custom_widgets/message_widget.py:238
+#: src/custom_widgets/message_widget.py:314
+msgid "Run Script"
+msgstr "运行脚本"
+
+#: src/custom_widgets/message_widget.py:278
+msgid "Code copied to the clipboard"
+msgstr "代码已复制到剪切板"
+
+#: src/custom_widgets/message_widget.py:315
+msgid ""
+"Make sure you understand what this script does before running it, Alpaca is "
+"not responsible for any damages to your device or data"
+msgstr ""
+"在运行该脚本之前，请确保您已了解其功能，Alpaca 不对设备或数据的任何损坏负责"
+
+#: src/custom_widgets/message_widget.py:317
+msgid "Execute"
+msgstr "执行"
+
+#: src/custom_widgets/message_widget.py:396
+#: src/custom_widgets/message_widget.py:398
+msgid "Image"
+msgstr "图像"
+
+#: src/custom_widgets/message_widget.py:407
+#: src/custom_widgets/message_widget.py:419
+msgid "Missing Image"
+msgstr "无图像"
+
+#: src/custom_widgets/message_widget.py:421
+msgid "Missing image"
+msgstr "无图像"
+
+#: src/custom_widgets/message_widget.py:494
+msgid "Copy Equation"
+msgstr "复制公式"
+
+#: src/custom_widgets/message_widget.py:501
+msgid "Equation copied to the clipboard"
+msgstr "公式已复制到剪贴板。"
+
+#: src/custom_widgets/message_widget.py:521
+msgid "Remove Message"
+msgstr "移除消息"
+
+#: src/custom_widgets/message_widget.py:541
 msgid "Edit Message"
-msgstr ""
+msgstr "编辑消息"
 
-#: src/widgets/message.py:66
+#: src/custom_widgets/message_widget.py:552
 msgid "Regenerate Message"
-msgstr ""
+msgstr "重新生成消息"
 
-#: src/widgets/message.py:78
+#: src/custom_widgets/message_widget.py:564
 msgid "Dictate Message"
-msgstr ""
+msgstr "语音输入消息"
 
-#: src/widgets/message.py:97
+#: src/custom_widgets/message_widget.py:584
 msgid "Message copied to the clipboard"
-msgstr ""
+msgstr "消息已复制到剪切板"
 
-#: src/widgets/message.py:167
+#: src/custom_widgets/message_widget.py:661
 msgid "Message cannot be regenerated while receiving a response"
-msgstr ""
+msgstr "当收到回复时无法重新生成信息"
 
-#: src/widgets/model_manager.py:107 src/widgets/model_manager.py:194
-#: src/widgets/model_manager.py:688
+#: src/custom_widgets/message_widget.py:970
+msgid "Thought"
+msgstr "思考\t"
+
+#: src/custom_widgets/model_manager_widget.py:109
+#: src/custom_widgets/model_manager_widget.py:195
+#: src/custom_widgets/model_manager_widget.py:671
 msgid "Remove Model"
-msgstr ""
+msgstr "移除模型"
 
-#: src/widgets/model_manager.py:111 src/widgets/model_manager.py:198
-#: src/widgets/model_manager.py:692
+#: src/custom_widgets/model_manager_widget.py:112
+#: src/custom_widgets/model_manager_widget.py:198
+#: src/custom_widgets/model_manager_widget.py:674
 msgid "Remove Model?"
-msgstr ""
+msgstr "要移除该模型吗？"
 
-#: src/widgets/model_manager.py:112 src/widgets/model_manager.py:199
-#: src/widgets/model_manager.py:693
+#: src/custom_widgets/model_manager_widget.py:113
+#: src/custom_widgets/model_manager_widget.py:199
+#: src/custom_widgets/model_manager_widget.py:675
 msgid "Are you sure you want to remove '{}'?"
-msgstr ""
+msgstr "您确定要移除 '{}' 吗？"
 
-#: src/widgets/model_manager.py:122
+#: src/custom_widgets/model_manager_widget.py:123
 msgid "Local text to speech model provided by Kokoro."
 msgstr ""
 
-#: src/widgets/model_manager.py:159 src/widgets/model_manager.py:293
+#: src/custom_widgets/model_manager_widget.py:160
+#: src/custom_widgets/model_manager_widget.py:293
 msgid "Speech to Text"
 msgstr ""
 
-#: src/widgets/model_manager.py:209
+#: src/custom_widgets/model_manager_widget.py:209
 msgid "Local speech to text model provided by OpenAI Whisper."
 msgstr ""
 
-#: src/widgets/model_manager.py:238
+#: src/custom_widgets/model_manager_widget.py:239
 msgid "Downloading…"
 msgstr ""
 
-#: src/widgets/model_manager.py:248 src/widgets/model_manager.py:250
+#: src/custom_widgets/model_manager_widget.py:249
+#: src/custom_widgets/model_manager_widget.py:251
 msgid "Stop Download"
-msgstr ""
+msgstr "停止下载"
 
-#: src/widgets/model_manager.py:256
+#: src/custom_widgets/model_manager_widget.py:256
 msgid "Stop Download?"
-msgstr ""
+msgstr "停止下载？"
 
-#: src/widgets/model_manager.py:257
+#: src/custom_widgets/model_manager_widget.py:257
 msgid "Are you sure you want to stop pulling '{}'?"
-msgstr ""
+msgstr "你确定要停止拉取 '{}' 吗？"
 
-#: src/widgets/model_manager.py:259
+#: src/custom_widgets/model_manager_widget.py:259
 msgid "Stop"
-msgstr ""
+msgstr "停止"
 
-#: src/widgets/model_manager.py:341
+#: src/custom_widgets/model_manager_widget.py:338
 msgid "Model Manager Error"
-msgstr ""
+msgstr "模型管理错误"
 
-#: src/widgets/model_manager.py:342
+#: src/custom_widgets/model_manager_widget.py:338
 msgid "An error occurred whilst pulling '{}'"
-msgstr ""
+msgstr "从远程获取 '{}' 时发生错误。"
 
-#: src/widgets/model_manager.py:369
+#: src/custom_widgets/model_manager_widget.py:364
 msgid "Download Completed"
-msgstr ""
+msgstr "下载完成"
 
-#: src/widgets/model_manager.py:369
+#: src/custom_widgets/model_manager_widget.py:364
 msgid "Model '{}' downloaded successfully."
-msgstr ""
+msgstr "模型 '{}' 下载成功。"
 
-#: src/widgets/model_manager.py:431
+#: src/custom_widgets/model_manager_widget.py:427
 msgid "Change Profile Picture"
-msgstr ""
+msgstr "更改简介图片"
 
-#: src/widgets/model_manager.py:454
+#: src/custom_widgets/model_manager_widget.py:450
 msgid "Family"
-msgstr ""
+msgstr "系列"
 
-#: src/widgets/model_manager.py:455
+#: src/custom_widgets/model_manager_widget.py:451
 msgid "Parameter Size"
-msgstr ""
+msgstr "参数大小"
 
-#: src/widgets/model_manager.py:456
+#: src/custom_widgets/model_manager_widget.py:452
 msgid "Quantization Level"
-msgstr ""
+msgstr "量化级别"
 
-#: src/widgets/model_manager.py:459
+#: src/custom_widgets/model_manager_widget.py:455
 msgid "Parent Model"
-msgstr ""
+msgstr "父模型"
 
-#: src/widgets/model_manager.py:462 src/widgets/model_manager.py:464
+#: src/custom_widgets/model_manager_widget.py:458
+#: src/custom_widgets/model_manager_widget.py:460
 msgid "Modified At"
-msgstr ""
+msgstr "修改于"
 
-#: src/widgets/model_manager.py:472
+#: src/custom_widgets/model_manager_widget.py:468
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
-#: src/widgets/model_manager.py:495
+#: src/custom_widgets/model_manager_widget.py:491
 msgid "Voice"
 msgstr ""
 
-#: src/widgets/model_manager.py:500
+#: src/custom_widgets/model_manager_widget.py:496
 msgid "Default"
 msgstr ""
 
-#: src/widgets/model_manager.py:639
+#: src/custom_widgets/model_manager_widget.py:638
 msgid "Change"
-msgstr ""
+msgstr "更改"
 
-#: src/widgets/model_manager.py:647
+#: src/custom_widgets/model_manager_widget.py:641
 msgid "Model Profile Picture"
-msgstr ""
+msgstr "模型简介图片"
 
-#: src/widgets/model_manager.py:648
+#: src/custom_widgets/model_manager_widget.py:641
 msgid "What do you want to do with the model's profile picture?"
-msgstr ""
+msgstr "您想如何处理模型的简介照片？"
 
-#: src/widgets/model_manager.py:680
+#: src/custom_widgets/model_manager_widget.py:663
 msgid "Create Child"
-msgstr ""
+msgstr "创建子模型"
 
-#: src/widgets/model_manager.py:707
+#: src/custom_widgets/model_manager_widget.py:689
 msgid "Multilingual"
-msgstr ""
+msgstr "多语言"
 
-#: src/widgets/model_manager.py:708
+#: src/custom_widgets/model_manager_widget.py:690
 msgid "Code"
-msgstr ""
+msgstr "代码"
 
-#: src/widgets/model_manager.py:709
+#: src/custom_widgets/model_manager_widget.py:691
 msgid "Math"
-msgstr ""
+msgstr "数学"
 
-#: src/widgets/model_manager.py:710
+#: src/custom_widgets/model_manager_widget.py:692
 msgid "Vision"
-msgstr ""
+msgstr "视觉"
 
-#: src/widgets/model_manager.py:711
+#: src/custom_widgets/model_manager_widget.py:693
 msgid "Embedding"
-msgstr ""
+msgstr "嵌入"
 
-#: src/widgets/model_manager.py:712
+#: src/custom_widgets/model_manager_widget.py:694
 msgid "Tools"
-msgstr ""
+msgstr "工具"
 
-#: src/widgets/model_manager.py:713
+#: src/custom_widgets/model_manager_widget.py:695
 msgid "Reasoning"
 msgstr ""
 
-#: src/widgets/model_manager.py:714
+#: src/custom_widgets/model_manager_widget.py:696
 msgid "Small"
-msgstr ""
+msgstr "小型"
 
-#: src/widgets/model_manager.py:715
+#: src/custom_widgets/model_manager_widget.py:697
 msgid "Medium"
-msgstr ""
+msgstr "中型"
 
-#: src/widgets/model_manager.py:716
+#: src/custom_widgets/model_manager_widget.py:698
 msgid "Big"
-msgstr ""
+msgstr "大型"
 
-#: src/widgets/model_manager.py:717
+#: src/custom_widgets/model_manager_widget.py:699
 msgid "Huge"
-msgstr ""
+msgstr "巨型"
 
-#: src/widgets/model_manager.py:807
+#: src/custom_widgets/model_manager_widget.py:788
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website"
-msgstr ""
+msgstr "通过下载此模型，您将接受在该模型网站上提供的许可协议。"
 
-#: src/widgets/model_manager.py:888
-msgid "Languages"
-msgstr ""
-
-#: src/widgets/terminal.py:17
+#: src/custom_widgets/terminal_widget.py:80
 msgid "Setting up Python environment..."
-msgstr ""
+msgstr "设置 Python 环境……"
 
-#: src/widgets/terminal.py:29
-msgid "Using Python HTTP server..."
-msgstr ""
+#: src/custom_widgets/terminal_widget.py:98
+msgid "Compiling C++ script..."
+msgstr "正在编译C++脚本..."
 
-#: src/widgets/terminal.py:34
-msgid "Using Flatpak contained shell..."
-msgstr ""
+#: src/custom_widgets/terminal_widget.py:111
+msgid "Running local web server"
+msgstr "运行本地网页服务器"
 
-#: src/widgets/terminal.py:38
+#: src/custom_widgets/terminal_widget.py:136
+msgid "Using Flatpak contained shell"
+msgstr "使用 Flatpak 内置的 shell 环境"
+
+#: src/custom_widgets/terminal_widget.py:136
 msgid "Using SSH to run command"
-msgstr ""
+msgstr "使用 SSH 运行命令"
 
-#: src/widgets/terminal.py:85
-msgid "Terminal"
-msgstr ""
-
-#: src/widgets/terminal.py:97
-msgid "Open Environment Directory"
-msgstr ""
-
-#: src/widgets/terminal.py:181
+#: src/custom_widgets/terminal_widget.py:142
 msgid "Script Exited"
-msgstr ""
+msgstr "脚本已退出"
 
-#: src/widgets/terminal.py:192
-msgid "Alpaca Terminal is not compatible with Windows"
-msgstr ""
-
-#: src/widgets/blocks/code.py:84
-msgid "Code Block"
-msgstr ""
-
-#: src/widgets/blocks/code.py:111
-msgid "Edit Script"
-msgstr ""
-
-#: src/widgets/blocks/code.py:119
-msgid "Copy Script"
-msgstr ""
-
-#: src/widgets/blocks/code.py:127
-msgid "Run Script"
-msgstr ""
-
-#: src/widgets/blocks/code.py:193
-msgid "Changes saved successfully"
-msgstr ""
-
-#: src/widgets/blocks/code.py:199
-msgid "Code copied to the clipboard"
-msgstr ""
-
-#: src/widgets/blocks/latex.py:41
-msgid "Copy Equation"
-msgstr ""
-
-#: src/widgets/blocks/latex.py:76
-msgid "Equation copied to the clipboard"
-msgstr ""
-
-#: src/widgets/blocks/__init__.py:36
-msgid "Thought"
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:18
-msgid "Read Notebook"
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:19
-msgid "Reads the current notebook."
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:38
-msgid "Write Notebook"
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:39
-msgid "Overwrites the notebook with new text."
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:58
-msgid "Append to Notebook"
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:59
-msgid "Appends text to the notebook."
-msgstr ""
-
-#: src/widgets/tools/tools.py:67
-msgid "AI Description"
-msgstr ""
-
-#: src/widgets/tools/tools.py:68
-msgid "The description the AI model will use to understand what the tool does."
-msgstr ""
-
-#: src/widgets/tools/tools.py:79
-msgid "Arguments"
-msgstr ""
-
-#: src/widgets/tools/tools.py:80
-msgid "Variables that are filled by the AI."
-msgstr ""
-
-#: src/widgets/tools/tools.py:93
-msgid "Variables"
-msgstr ""
-
-#: src/widgets/tools/tools.py:94
-msgid ""
-"User filled values that the tool uses to work, the AI does not have access "
-"to these variables at all."
-msgstr ""
-
-#: src/widgets/tools/tools.py:182
-msgid "Gets the current date and/or time."
-msgstr ""
-
-#: src/widgets/tools/tools.py:215
-msgid "Gets a recipe by the meal's name"
-msgstr ""
-
-#: src/widgets/tools/tools.py:230 src/widgets/tools/tools.py:297
-msgid "YouTube Video"
-msgstr ""
-
-#: src/widgets/tools/tools.py:238 src/widgets/tools/tools.py:306
-msgid "Source"
-msgstr ""
-
-#: src/widgets/tools/tools.py:276
-msgid "Gets a list of food recipes by a specified category"
-msgstr ""
-
-#: src/widgets/tools/tools.py:333
-msgid "Extracts an article from Wikipedia by it's title"
-msgstr ""
-
-#: src/widgets/tools/tools.py:375
-msgid "Search for a term online using DuckDuckGo"
-msgstr ""
-
-#: src/widgets/tools/tools.py:393
-msgid "Abstract Source"
-msgstr ""
-
-#: src/widgets/tools/tools.py:417
-msgid "Official Website"
-msgstr ""
-
-#: src/widgets/tools/tools.py:468
-msgid "Request to run a command using SSH to connect to the device"
-msgstr ""
-
-#: src/widgets/tools/tools.py:471
-msgid "IP Address"
-msgstr ""
-
-#: src/widgets/tools/tools.py:476
-msgid "Username"
-msgstr ""
-
-#: src/widgets/tools/tools.py:481
-msgid "Network Port"
-msgstr ""
-
-#: src/widgets/tools/tools.py:498
-msgid "Model Requested to Run Command"
-msgstr ""
-
-#: src/widgets/tools/tools.py:499
-msgid "Command"
-msgstr ""
-
-#: src/widgets/tools/tools.py:501
-msgid "Explanation"
-msgstr ""
-
-#: src/widgets/tools/tools.py:502
-msgid "No explanation was provided"
-msgstr ""
-
-#: src/widgets/tools/tools.py:503
-msgid "Make sure you understand what the command does before running it."
-msgstr ""
+#~ msgid "Speech recognition model is being downloaded ({})"
+#~ msgstr "正在下载语音识别模型 ({})"

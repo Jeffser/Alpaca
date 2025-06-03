@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 6.0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-03 14:51-0600\n"
+"POT-Creation-Date: 2025-05-02 19:38-0600\n"
 "PO-Revision-Date: 2025-04-12 15:12-0600\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Bengali\n"
@@ -253,7 +253,8 @@ msgstr "মডেলগুলোর জন্য স্মার্ট সরঞ
 msgid "Speech recognition (message dictation)"
 msgstr "স্পীচ রিকগনিশন (বার্তার ডিকটেশন)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:155 src/widgets/model_manager.py:66
+#: data/com.jeffser.Alpaca.metainfo.xml.in:155
+#: src/custom_widgets/model_manager_widget.py:68
 msgid "Text to Speech"
 msgstr "পাঠ্য থেকে বক্তৃতা"
 
@@ -330,34 +331,33 @@ msgstr "মাইক্রোসফট এক্সেল ডকুমেন্�
 msgid "New Tools"
 msgstr "নতুন সরঞ্জাম"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:180 src/widgets/tools/tools.py:467
+#: data/com.jeffser.Alpaca.metainfo.xml.in:180 src/tool_manager.py:431
 msgid "Run Command (Testing)"
 msgstr "কমান্ড চালান (পরীক্ষামূলক)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:181 src/widgets/tools/tools.py:374
+#: data/com.jeffser.Alpaca.metainfo.xml.in:181 src/tool_manager.py:348
 msgid "Online Search"
 msgstr "অনলাইন অনুসন্ধান"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:182 src/widgets/tools/tools.py:332
+#: data/com.jeffser.Alpaca.metainfo.xml.in:182 src/tool_manager.py:306
 msgid "Extract Wikipedia Article"
 msgstr "উইকিপিডিয়া আর্টিকেল নিষ্কাশন করুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:183 src/widgets/tools/tools.py:214
+#: data/com.jeffser.Alpaca.metainfo.xml.in:183 src/tool_manager.py:210
 msgid "Get Recipe by Name"
 msgstr "নাম দিয়ে রেসিপি পান"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:184 src/widgets/tools/tools.py:275
+#: data/com.jeffser.Alpaca.metainfo.xml.in:184 src/tool_manager.py:261
 msgid "Get Recipes by Category"
 msgstr "শ্রেণী অনুযায়ী রেসিপি পান"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:185 src/widgets/tools/tools.py:181
+#: data/com.jeffser.Alpaca.metainfo.xml.in:185 src/tool_manager.py:176
 msgid "Get Current Datetime"
 msgstr "বর্তমান তারিখ ও সময় পান"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:189
 msgid "Fixed welcome screen not showing sometimes when deleting a message"
-msgstr ""
-"বার্তা মোছার সময় মাঝে মাঝে স্বাগতম স্ক্রিন না দেখানোর সমস্যা সমাধান করা হয়েছে"
+msgstr "বার্তা মোছার সময় মাঝে মাঝে স্বাগতম স্ক্রিন না দেখানোর সমস্যা সমাধান করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:190
 msgid "Fixed bold text not rendering correctly in tables"
@@ -405,9 +405,7 @@ msgstr "নমুনা প্রম্পটগুলি পুনরায় 
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:223
 msgid "Fixed saving Ollama (Managed) instance might crash it"
-msgstr ""
-"সংরক্ষিত Ollama (ম্যানেজড) উদাহরণ এটি বন্ধ করে দিতে পারে এমন সমস্যা সংশোধন করা "
-"হয়েছে"
+msgstr "সংরক্ষিত Ollama (ম্যানেজড) উদাহরণ এটি বন্ধ করে দিতে পারে এমন সমস্যা সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:224
 msgid "Fixed stop button"
@@ -415,8 +413,7 @@ msgstr "স্টপ বাটন সংশোধন করা হয়েছ�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:225
 msgid "Fixed model search not working if there are only pulling models"
-msgstr ""
-"মডেল সার্চ কাজ করছে না এমন সমস্যা সংশোধন করা হয়েছে যদি শুধুমাত্র পুলিং মডেল থাকে"
+msgstr "মডেল সার্চ কাজ করছে না এমন সমস্যা সংশোধন করা হয়েছে যদি শুধুমাত্র পুলিং মডেল থাকে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:226
 msgid "Fixed sample prompts sometimes not appearing"
@@ -516,8 +513,7 @@ msgstr "LaTeX সমীকরণের জন্য আরও ভাল রে�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:301
 msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
-msgstr ""
-"যখন একটি মডেল ডাউনলোড হচ্ছে, তখন ব্যবহারকারী আলপাকা বন্ধ করলে নিশ্চিতকরণ ডায়ালগ"
+msgstr "যখন একটি মডেল ডাউনলোড হচ্ছে, তখন ব্যবহারকারী আলপাকা বন্ধ করলে নিশ্চিতকরণ ডায়ালগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:302
 msgid "Better handling of think tags in messages"
@@ -619,8 +615,7 @@ msgstr "সংশোধন করুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:347
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
-msgstr ""
-"ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
+msgstr "ওভাররাইড HIP_VISIBLE_DEVICES কে ROCR_VISIBLE_DEVICES এ পরিবর্তন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:356
 msgid "Added categories to models"
@@ -797,8 +792,7 @@ msgstr "রিমোট সংযোগ ডায়ালগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:462
 msgid "Fixed: Models get duplicated when switching remote and local instance"
-msgstr ""
-"সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
+msgstr "সমস্যা সমাধান: রিমোট এবং লোকাল ইনস্ট্যান্স পরিবর্তনের সময় মডেলগুলি ডুপ্লিকেট হয়ে যায়"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:463
 msgid "Better internal instance manager"
@@ -1277,8 +1271,7 @@ msgstr "Ollama আপডেট করা হয়েছে v0.3.0 (নতুন
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:750
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
-msgstr ""
-"তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
+msgstr "তাদের নামে '-' থাকা মডেলগুলি সঠিকভাবে কাজ করে না, এটি এখন সংশোধন করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:751
 msgid "Better connection check for Ollama"
@@ -1572,7 +1565,8 @@ msgstr "ওল্লামাকে v0.1.39-এ আপডেট করুন"
 #: data/com.jeffser.Alpaca.metainfo.xml.in:868
 msgid ""
 "Fixed: app didn't open if models tweaks wasn't present in the config files"
-msgstr "সংশোধন: কনফিগার ফাইলগুলিতে মডেলের টুইকগুলি উপস্থিত না থাকলে অ্যাপটি খুলবে না"
+msgstr ""
+"সংশোধন: কনফিগার ফাইলগুলিতে মডেলের টুইকগুলি উপস্থিত না থাকলে অ্যাপটি খুলবে না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:877
 msgid "Changed multiple icons (paper airplane for the send button)"
@@ -1592,8 +1586,7 @@ msgstr "ঠিক করা হয়েছে পাঠান/স্টপ ব�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:881
 msgid "Fixed app not checking if remote connection works when starting"
-msgstr ""
-"ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
+msgstr "ঠিক করা হয়েছে অ্যাপ শুরু করার সময় দূরবর্তী সংযোগ কাজ করে কিনা তা পরীক্ষা করছে না"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:888
 msgid "Daily Update"
@@ -1601,8 +1594,7 @@ msgstr "প্রতিদিনের আপডেট"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:890
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
-msgstr ""
-"চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
+msgstr "চ্যাটের নামে পাঠ্য উপবৃত্ত যোগ করা হয়েছে যাতে এটি বোতামের প্রস্থ পরিবর্তন না করে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:891
 msgid "New shortcut for creating a chat (CTRL+N)"
@@ -1895,8 +1887,7 @@ msgstr "একাধিক চ্যাট সমর্থন যোগ কর�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1062
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
-msgstr ""
-"প্যাঙ্গো মার্কআপ সমর্থন যোগ করা হয়েছে (বোল্ড, তালিকা, শিরোনাম, উপশিরোনাম, মনোস্পেস)"
+msgstr "প্যাঙ্গো মার্কআপ সমর্থন যোগ করা হয়েছে (বোল্ড, তালিকা, শিরোনাম, উপশিরোনাম, মনোস্পেস)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1063
 msgid "Added autoscroll if the user is at the bottom of the chat"
@@ -2048,39 +2039,283 @@ msgstr "0.1.1 স্থিতিশীল রিলিজ"
 msgid "This is the first public version of Alpaca"
 msgstr "এটি আলপাকার প্রথম পাবলিক সংস্করণ"
 
-#: src/alpaca_search_provider.py.in:41
-msgid "Open chat"
-msgstr "চ্যাট খুলুন"
-
-#: src/alpaca_search_provider.py.in:42
-msgid "Quick ask"
-msgstr "দ্রুত জিজ্ঞাসা"
-
-#: src/constants.py:95
-msgid "Never"
-msgstr ""
-
-#: src/constants.py:96
-msgid "When Alpaca is Focused"
-msgstr ""
-
-#: src/constants.py:97
-msgid "Always"
-msgstr ""
-
-#: src/main.py:190
+#: src/main.py:193
 msgid "Documentation"
 msgstr "নথি"
 
-#: src/main.py:191
+#: src/main.py:194
 msgid "Become a Sponsor"
 msgstr "পৃষ্ঠপোষক হোন"
 
-#: src/main.py:192
+#: src/main.py:195
 msgid "Discussions"
 msgstr "আলোচনা"
 
-#: src/ollama_models.py:33
+#: src/window.py:203 src/window.py:233
+msgid "Speech Recognition Error"
+msgstr "স্পীচ রিকগনিশন ত্রুটি"
+
+#: src/window.py:203
+msgid "An error occurred while pulling speech recognition model"
+msgstr "স্পীচ রিকগনিশন মডেল টানার সময় একটি ত্রুটি ঘটেছে"
+
+#: src/window.py:233
+msgid "An error occurred while using speech recognition"
+msgstr "স্পীচ রিকগনিশন ব্যবহার করার সময় একটি ত্রুটি ঘটেছে"
+
+#: src/window.py:254
+msgid "Download Speech Recognition Model"
+msgstr "স্পিচ রিকগনিশন মডেল ডাউনলোড করুন"
+
+#: src/window.py:255
+msgid "To use speech recognition you'll need to download a special model ({})"
+msgstr "স্পিচ রিকগনিশন ব্যবহার করতে আপনাকে একটি বিশেষ মডেল ({}) ডাউনলোড করতে হবে"
+
+#: src/window.py:257
+msgid "Download Model"
+msgstr "মডেল ডাউনলোড করুন"
+
+#: src/window.py:274
+msgid "Ollama Was Not Found"
+msgstr "ওলামা খুঁজে পাওয়া যায়নি"
+
+#: src/window.py:275
+msgid ""
+"To add a managed Ollama instance, you must have Ollama installed locally in "
+"your device, this is a simple process and should not take more than 5 "
+"minutes."
+msgstr ""
+"একটি পরিচালিত ওলামা ইনস্ট্যান্স যোগ করতে, আপনার ডিভাইসে স্থানীয়ভাবে ওলামা ইনস্টল "
+"করা থাকতে হবে, এটি একটি সহজ প্রক্রিয়া এবং ৫ মিনিটের বেশি সময় লাগা উচিত নয়।"
+
+#: src/window.py:277
+msgid "Open Tutorial in Web Browser"
+msgstr "ওয়েব ব্রাউজারে টিউটোরিয়াল খুলুন"
+
+#: src/window.py:283 src/window.py:290 src/window.ui:472 src/window.ui:482
+#: src/window.ui:504
+msgid "Add Instance"
+msgstr "ইনস্ট্যান্স যোগ করুন"
+
+#: src/window.py:291
+msgid "Select a type of instance to add"
+msgstr "যোগ করার জন্য একটি ইনস্ট্যান্সের ধরন নির্বাচন করুন"
+
+#: src/window.py:507
+msgid "No tools enabled."
+msgstr "কোনো সরঞ্জাম সক্ষম করা হয়নি।"
+
+#: src/window.py:507
+msgid "Open Tool Manager"
+msgstr "সরঞ্জাম ব্যবস্থাপক খুলুন"
+
+#: src/window.py:510
+msgid "'{}' does not support tools."
+msgstr "'{}' টুলগুলোকে সাপোর্ট করে না।"
+
+#: src/window.py:510
+msgid "Open Model Manager"
+msgstr "মডেল ম্যানেজার খুলুন"
+
+#: src/window.py:513 src/window.py:1119
+msgid "Please select a model before chatting"
+msgstr "চ্যাটিং আগে একটি মডেল নির্বাচন করুন"
+
+#: src/window.py:561 src/window.py:562 src/window.py:650 src/window.ui:288
+msgid "Close"
+msgstr "বন্ধ"
+
+#: src/window.py:564 src/window.py:565 src/window.ui:62 src/window.ui:63
+msgid "Next"
+msgstr "পরবর্তী"
+
+#: src/window.py:648 src/instance_manager.py:405 src/instance_manager.py:406
+#: src/tool_manager.py:136 src/window.ui:968 src/window.ui:972
+#: src/custom_widgets/message_widget.py:80
+#: src/custom_widgets/message_widget.py:230
+#: src/custom_widgets/model_manager_widget.py:636
+#: src/custom_widgets/dialog_widget.py:148
+#: src/custom_widgets/dialog_widget.py:160
+#: src/custom_widgets/dialog_widget.py:172
+msgid "Cancel"
+msgstr "বাতিল করুন"
+
+#: src/window.py:649
+msgid "Hide"
+msgstr "লুকান"
+
+#: src/window.py:653
+msgid "Close Alpaca?"
+msgstr "আলপাকা বন্ধ করুন?"
+
+#: src/window.py:654
+msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
+msgstr "একটি কাজ বর্তমানে চলছে। আপনি কি নিশ্চিত যে আপনি আলপাকা বন্ধ করতে চান?"
+
+#: src/window.py:898
+msgid "Cannot open image"
+msgstr "ছবি খোলা যায়নি"
+
+#: src/window.py:975
+msgid "Delete Chat?"
+msgstr "চ্যাট মুছে ফেলুন?"
+
+#: src/window.py:976
+msgid "Are you sure you want to delete '{}'?"
+msgstr "আপনি কি নিশ্চিত যে আপনি '{}' মুছে ফেলতে চান?"
+
+#: src/window.py:978 src/window.py:1468
+msgid "Delete"
+msgstr "মুছে ফেলুন"
+
+#: src/window.py:985
+msgid "Rename Chat?"
+msgstr "চ্যাট পুনর্নামকরণ করুন?"
+
+#: src/window.py:986
+msgid "Renaming '{}'"
+msgstr "'{}' পুনর্নামকরণ করা হচ্ছে"
+
+#: src/window.py:988
+msgid "Chat name"
+msgstr "চ্যাটের নাম"
+
+#: src/window.py:989
+msgid "Rename"
+msgstr "পুনর্নামকরণ করুন"
+
+#: src/window.py:994
+msgid "Importable (.db)"
+msgstr "আমদানি করা যায় (.db)"
+
+#: src/window.py:995
+msgid "Markdown"
+msgstr "মার্কডাউন"
+
+#: src/window.py:996
+msgid "Markdown (Obsidian Style)"
+msgstr "মার্কডাউন (অবসিডিয়ান স্টাইল)"
+
+#: src/window.py:997
+msgid "JSON"
+msgstr "JSON"
+
+#: src/window.py:998
+msgid "JSON (Include Metadata)"
+msgstr "JSON (মেটাডেটা অন্তর্ভুক্ত)"
+
+#: src/window.py:1001 src/window.ui:1419 src/window.ui:1453
+msgid "Export Chat"
+msgstr "চ্যাট রপ্তানি করুন"
+
+#: src/window.py:1002
+msgid "Select a method to export the chat"
+msgstr "চ্যাট রপ্তানি করার জন্য একটি পদ্ধতি নির্বাচন করুন"
+
+#: src/window.py:1018
+msgid "This video does not have any transcriptions"
+msgstr "এই ভিডিওতে কোন লিপ্যন্তর নেই"
+
+#: src/window.py:1025
+msgid "Attach YouTube Video?"
+msgstr "ইউটিউব ভিডিও সংযুক্ত করুন?"
+
+#: src/window.py:1026
+msgid ""
+"{}\n"
+"\n"
+"Please select a transcript to include"
+msgstr ""
+"{}\n"
+"\n"
+"অন্তর্ভুক্ত করার জন্য একটি লিপ্যন্তর নির্বাচন করুন"
+
+#: src/window.py:1032
+msgid "Error attaching video, please try again"
+msgstr "ভিডিও সংযুক্ত করতে ত্রুটি, দয়া করে আবার চেষ্টা করুন"
+
+#: src/window.py:1053 src/window.py:1462
+msgid "Attach Website? (Experimental)"
+msgstr "ওয়েবসাইট সংযুক্ত করুন? (পরীক্ষামূলক)"
+
+#: src/window.py:1054
+msgid ""
+"Are you sure you want to attach\n"
+"'{}'?"
+msgstr ""
+"আপনি কি নিশ্চিত যে আপনি সংযুক্ত করতে চান\n"
+"'{}'?"
+
+#: src/window.py:1072 src/window.py:1084 src/window.py:1461
+#: src/generic_actions.py:105
+msgid "Image recognition is only available on specific models"
+msgstr "নির্দিষ্ট মডেলগুলিতে ছবি সনাক্তকরণ উপলব্ধ"
+
+#: src/window.py:1103 src/window.ui:1203
+msgid "Quick Ask"
+msgstr "দ্রুত জিজ্ঞাসা"
+
+#: src/window.py:1231
+msgid "Attachment failed, screenshot might be too big"
+msgstr "সংযুক্তি ব্যর্থ, স্ক্রীনশটটি খুব বড় হতে পারে"
+
+#: src/window.py:1290
+msgid "Any compatible Alpaca attachment"
+msgstr "যেকোনো সামঞ্জস্যপূর্ণ আলপাকা সংযোজন"
+
+#: src/window.py:1437
+msgid "Attach Screenshot"
+msgstr "স্ক্রীনশট সংযুক্ত করুন"
+
+#: src/window.py:1462
+msgid "Please enter a website URL"
+msgstr "দয়া করে একটি ওয়েবসাইট URL লিখুন"
+
+#: src/window.py:1463
+msgid "Attach YouTube Captions?"
+msgstr "ইউটিউব ক্যাপশন সংযুক্ত করবেন?"
+
+#: src/window.py:1463
+msgid "Please enter a YouTube video URL"
+msgstr "দয়া করে একটি ইউটিউব ভিডিও URL লিখুন"
+
+#: src/window.py:1466
+msgid "Download Model?"
+msgstr "মডেল ডাউনলোড করুন?"
+
+#: src/window.py:1466
+msgid "Please enter the model name following this template: name:tag"
+msgstr "দয়া করে এই টেমপ্লেট অনুসরণ করে মডেলের নাম প্রবেশ করুন: নাম:ট্যাগ"
+
+#: src/window.py:1468
+msgid "Delete All Chats?"
+msgstr "সমস্ত চ্যাট মুছে ফেলুন?"
+
+#: src/window.py:1468
+msgid "Are you sure you want to delete all chats?"
+msgstr "আপনি কি নিশ্চিত যে আপনি সমস্ত চ্যাট মুছে ফেলতে চান?"
+
+#: src/window.py:1479
+msgid "Remove Attachment?"
+msgstr "সংযুক্তি মুছে ফেলুন?"
+
+#: src/window.py:1479
+msgid "Are you sure you want to remove attachment?"
+msgstr "আপনি কি নিশ্চিত যে আপনি সংযুক্তি মুছে ফেলতে চান?"
+
+#: src/window.py:1479 src/instance_manager.py:886
+#: src/custom_widgets/model_manager_widget.py:115
+#: src/custom_widgets/model_manager_widget.py:201
+#: src/custom_widgets/model_manager_widget.py:637
+#: src/custom_widgets/model_manager_widget.py:677
+msgid "Remove"
+msgstr "মুছে ফেলুন"
+
+#: src/window.py:1494
+msgid "Already Installed!"
+msgstr "ইতিমধ্যেই ইনস্টল করা হয়েছে!"
+
+#: src/available_models_descriptions.py:2
 msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to the Llama 3.1 405B model."
@@ -2088,11 +2323,11 @@ msgstr ""
 "নতুন স্টেট অফ দ্য আর্ট 70B মডেল। ল্লামা 3.3 70B মডেলটি ল্লামা 3.1 405B মডেলের "
 "তুলনায় অনুরূপ কর্মক্ষমতা প্রদান করে।"
 
-#: src/ollama_models.py:56
+#: src/available_models_descriptions.py:3
 msgid "QwQ is the reasoning model of the Qwen series."
 msgstr "QwQ হলো Qwen সিরিজের রিজনিং মডেল।"
 
-#: src/ollama_models.py:84
+#: src/available_models_descriptions.py:4
 msgid ""
 "Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
 "generative models in 11B and 90B sizes."
@@ -2100,11 +2335,11 @@ msgstr ""
 "Llama 3.2 ভিশন হল 11B এবং 90B আকারের নির্দেশনা-টিউনড চিত্র যুক্তি জেনারেটিভ "
 "মডেলের একটি সংগ্রহ।"
 
-#: src/ollama_models.py:120
+#: src/available_models_descriptions.py:5
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
 msgstr "মেটার ল্লামা 3.2 1B এবং 3B মডেলের মাধ্যমে ছোট হয়েছে।"
 
-#: src/ollama_models.py:155
+#: src/available_models_descriptions.py:6
 msgid ""
 "Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and "
 "405B parameter sizes."
@@ -2112,20 +2347,20 @@ msgstr ""
 "ল্লামা 3.1 হল মেটা থেকে নতুন স্টেট-অফ-দ্য-আর্ট মডেল, 8B, 70B এবং 405B প্যারামিটার "
 "আকারে উপলব্ধ।"
 
-#: src/ollama_models.py:182
+#: src/available_models_descriptions.py:7
 msgid "Meta Llama 3: The most capable openly available LLM to date"
 msgstr "মেটা Llama 3: এখন পর্যন্ত সবচেয়ে ক্ষমতাসম্পন্ন উন্মুক্তভাবে উপলব্ধ LLM"
 
-#: src/ollama_models.py:205
+#: src/available_models_descriptions.py:8
 msgid "The 7B model released by Mistral AI, updated to version 0.3."
 msgstr "মিস্ট্রাল AI দ্বারা প্রকাশিত 7B মডেল, 0.3 সংস্করণে আপডেট করা হয়েছে।"
 
-#: src/ollama_models.py:229
+#: src/available_models_descriptions.py:9
 msgid ""
 "A high-performing open embedding model with a large token context window."
 msgstr "একটি উচ্চ-পারফর্মিং ওপেন এম্বেডিং মডেল বড় টোকেন কন্টেক্সট উইন্ডো সহ।"
 
-#: src/ollama_models.py:258
+#: src/available_models_descriptions.py:10
 msgid ""
 "Gemma is a family of lightweight, state-of-the-art open models built by "
 "Google DeepMind. Updated to version 1.1"
@@ -2133,7 +2368,7 @@ msgstr ""
 "জেমা হল গুগল ডিপমাইন্ড দ্বারা নির্মিত হালকা, স্টেট-অফ-দি-আর্ট ওপেন মডেলের একটি "
 "পরিবার। সংস্করণ ১.১ এ আপডেট করা হয়েছে।"
 
-#: src/ollama_models.py:314
+#: src/available_models_descriptions.py:11
 msgid ""
 "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
 "0.5B to 110B parameters"
@@ -2141,11 +2376,11 @@ msgstr ""
 "কুয়েন ১.৫ হল আলিবাবা ক্লাউড দ্বারা নির্মিত বড় ভাষা মডেলের একটি সিরিজ, ০.৫বি থেকে "
 "১১০বি প্যারামিটার পর্যন্ত বিস্তৃত।"
 
-#: src/ollama_models.py:378
+#: src/available_models_descriptions.py:12
 msgid "Qwen2 is a new series of large language models from Alibaba group"
 msgstr "Qwen2 হল আলিবাবা গ্রুপের থেকে বড় ভাষা মডেলের নতুন সিরিজ"
 
-#: src/ollama_models.py:407
+#: src/available_models_descriptions.py:13
 msgid ""
 "Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art "
 "open models by Microsoft."
@@ -2153,7 +2388,7 @@ msgstr ""
 "মাইক্রোসফট দ্বারা উন্মুক্ত মডেলের একটি পরিবার Phi-3, 3B (মিনি) এবং 14B (মিডিয়াম) "
 "হালকা স্টেট-অফ-দ্য-আর্ট উন্মুক্ত মডেল মাইক্রোসফট দ্বারা"
 
-#: src/ollama_models.py:439
+#: src/available_models_descriptions.py:14
 msgid ""
 "Llama 2 is a collection of foundation language models ranging from 7B to 70B "
 "parameters."
@@ -2161,7 +2396,7 @@ msgstr ""
 "ল্লামা ২ হল ৭বি থেকে ৭০বি প্যারামিটার পর্যন্ত বিস্তৃত ফাউন্ডেশন ভাষা মডেলের একটি "
 "সংগ্রহ।"
 
-#: src/ollama_models.py:501
+#: src/available_models_descriptions.py:15
 msgid ""
 "Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, "
 "encompassing up to 18 trillion tokens. The model supports up to 128K tokens "
@@ -2171,14 +2406,14 @@ msgstr ""
 "ট্রিলিয়ন টোকেন পর্যন্ত অন্তর্ভুক্ত করে। এই মডেলটি 128K টোকেন পর্যন্ত সমর্থন করে এবং বহু-"
 "ভাষার সমর্থন প্রদান করে।"
 
-#: src/ollama_models.py:533
+#: src/available_models_descriptions.py:16
 msgid ""
 "Google Gemma 2 is a high-performing and efficient model available in three "
 "sizes: 2B, 9B, and 27B."
 msgstr ""
 "গুগল জেমা 2 একটি উচ্চ-পারফরম্যান্স এবং দক্ষ মডেল, যা 2B, 9B এবং 27B আকারে উপলব্ধ।"
 
-#: src/ollama_models.py:567
+#: src/available_models_descriptions.py:17
 msgid ""
 "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines "
 "a vision encoder and Vicuna for general-purpose visual and language "
@@ -2188,7 +2423,7 @@ msgstr ""
 "ও ভাষা বোঝাপড়ার জন্য একটি দৃশ্য এনকোডার এবং Vicuna কে সংযুক্ত করে। ১.৬ সংস্করণে "
 "আপডেট করা হয়েছে।"
 
-#: src/ollama_models.py:604
+#: src/available_models_descriptions.py:18
 msgid ""
 "A large language model that can use text prompts to generate and discuss "
 "code."
@@ -2196,7 +2431,7 @@ msgstr ""
 "একটি বড় ভাষা মডেল যা টেক্সট প্রম্পটগুলি ব্যবহার করে কোড জেনারেট এবং আলোচনা করতে "
 "পারে।"
 
-#: src/ollama_models.py:650
+#: src/available_models_descriptions.py:19
 msgid ""
 "The latest series of Code-Specific Qwen models, with significant "
 "improvements in code generation, code reasoning, and code fixing."
@@ -2204,7 +2439,7 @@ msgstr ""
 "কোড তৈরির, কোড বিশ্লেষণের এবং কোড ঠিক করার ক্ষেত্রে উল্লেখযোগ্য উন্নতি সহ সর্বশেষ "
 "কোড-নির্দিষ্ট Qwen মডেল সিরিজ।"
 
-#: src/ollama_models.py:674
+#: src/available_models_descriptions.py:20
 msgid ""
 "A state-of-the-art 12B model with 128k context length, built by Mistral AI "
 "in collaboration with NVIDIA."
@@ -2212,7 +2447,7 @@ msgstr ""
 "একটি স্টেট-অফ-দ্য-আর্ট 12B মডেল, 128k কনটেক্সট দৈর্ঘ্য, মিস্ট্রাল এআই এবং এনভিডিয়ার "
 "সহযোগিতায় নির্মিত।"
 
-#: src/ollama_models.py:696
+#: src/available_models_descriptions.py:21
 msgid ""
 "The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
 "model on 3 trillion tokens."
@@ -2220,11 +2455,11 @@ msgstr ""
 "টাইনি লামা প্রকল্প হল 3 ট্রিলিয়ন টোকেনে একটি কম্প্যাক্ট 1.1B লামা মডেল প্রশিক্ষণের "
 "একটি উন্মুক্ত উদ্যোগ।"
 
-#: src/ollama_models.py:719
+#: src/available_models_descriptions.py:22
 msgid "State-of-the-art large embedding model from mixedbread.ai"
 msgstr "মিক্সডব্রেড.এআই থেকে সর্বাধুনিক বড় এম্বেডিং মডেল"
 
-#: src/ollama_models.py:752
+#: src/available_models_descriptions.py:23
 msgid ""
 "StarCoder2 is the next generation of transparently trained open code LLMs "
 "that comes in three sizes: 3B, 7B and 15B parameters."
@@ -2232,7 +2467,7 @@ msgstr ""
 "স্টারকোডার2 হল স্বচ্ছভাবে প্রশিক্ষিত ওপেন কোড LLMs এর পরবর্তী প্রজন্ম যা 3B, 7B এবং "
 "15B প্যারামিটারের তিনটি আকারে আসে"
 
-#: src/ollama_models.py:778
+#: src/available_models_descriptions.py:24
 msgid ""
 "A set of Mixture of Experts (MoE) model with open weights by Mistral AI in "
 "8x7b and 8x22b parameter sizes."
@@ -2240,7 +2475,7 @@ msgstr ""
 "মিস্ট্রাল AI দ্বারা 8x7b এবং 8x22b প্যারামিটার সাইজে উন্মুক্ত ওজনসহ এক্সপার্টসের "
 "মিক্সচার (MoE) মডেলের একটি সেট"
 
-#: src/ollama_models.py:804
+#: src/available_models_descriptions.py:25
 msgid ""
 "Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
 "experts models that excels at coding tasks. Created by Eric Hartford."
@@ -2248,7 +2483,7 @@ msgstr ""
 "অনসেন্সর্ড, ৮x৭b এবং ৮x২২b ফাইন-টিউনড মডেলগুলি মিক্সট্রাল বিশেষজ্ঞ মডেলগুলির উপর "
 "ভিত্তি করে যা কোডিং টাস্কগুলিতে উত্তম। এরিক হার্টফোর্ড দ্বারা তৈরি।"
 
-#: src/ollama_models.py:833
+#: src/available_models_descriptions.py:26
 msgid ""
 "CodeGemma is a collection of powerful, lightweight models that can perform a "
 "variety of coding tasks like fill-in-the-middle code completion, code "
@@ -2259,7 +2494,7 @@ msgstr ""
 "প্রাকৃতিক ভাষা বোঝাপড়া, গাণিতিক যুক্তি এবং নির্দেশনা অনুসরণের মতো বিভিন্ন কোডিং কাজ "
 "করতে পারে।"
 
-#: src/ollama_models.py:861
+#: src/available_models_descriptions.py:27
 msgid ""
 "An open-source Mixture-of-Experts code language model that achieves "
 "performance comparable to GPT4-Turbo in code-specific tasks."
@@ -2267,7 +2502,7 @@ msgstr ""
 "কোড-স্পেসিফিক টাস্কগুলিতে GPT4-Turbo এর সাথে তুলনীয় পারফরম্যান্স অর্জন করে একটি "
 "উন্মুক্ত-সোর্স মিক্সচার-অফ-এক্সপার্টস কোড ভাষা মডেল"
 
-#: src/ollama_models.py:883
+#: src/available_models_descriptions.py:28
 msgid ""
 "Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
 "outstanding reasoning and language understanding capabilities."
@@ -2275,11 +2510,11 @@ msgstr ""
 "ফাই-২: মাইক্রোসফট রিসার্চ দ্বারা একটি ২.৭বি ভাষা মডেল যা অসাধারণ যুক্তি এবং ভাষা "
 "বোঝার ক্ষমতা প্রদর্শন করে।"
 
-#: src/ollama_models.py:910
+#: src/available_models_descriptions.py:29
 msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
 msgstr "জর্জ সাং এবং জ্যারাড হোপ দ্বারা অনসেন্সর্ড ল্লামা ২ মডেল।"
 
-#: src/ollama_models.py:945
+#: src/available_models_descriptions.py:30
 msgid ""
 "DeepSeek Coder is a capable coding model trained on two trillion code and "
 "natural language tokens."
@@ -2287,14 +2522,14 @@ msgstr ""
 "ডিপসীক কোডার হল দুই ট্রিলিয়ন কোড এবং প্রাকৃতিক ভাষা টোকেনগুলির উপর প্রশিক্ষিত একটি "
 "সক্ষম কোডিং মডেল।"
 
-#: src/ollama_models.py:986
+#: src/available_models_descriptions.py:31
 msgid ""
 "A suite of text embedding models by Snowflake, optimized for performance."
 msgstr ""
 "স্নোফ্লেক(Snowflake) দ্বারা পারফরম্যান্সের জন্য অপ্টিমাইজড টেক্সট এম্বেডিং মডেলের "
 "একটি স্যুট।"
 
-#: src/ollama_models.py:1014
+#: src/available_models_descriptions.py:32
 msgid ""
 "State of the art large language model from Microsoft AI with improved "
 "performance on complex chat, multilingual, reasoning and agent use cases."
@@ -2302,7 +2537,7 @@ msgstr ""
 "মাইক্রোসফট এআই থেকে জটিল চ্যাট, বহুভাষিক, যুক্তি এবং এজেন্ট ব্যবহারের ক্ষেত্রে উন্নত "
 "পারফরম্যান্সসহ সর্বাধুনিক বড় ভাষা মডেল।"
 
-#: src/ollama_models.py:1037
+#: src/available_models_descriptions.py:33
 msgid ""
 "The uncensored Dolphin model based on Mistral that excels at coding tasks. "
 "Updated to version 2.8."
@@ -2310,7 +2545,7 @@ msgstr ""
 "মিস্ট্রাল ভিত্তিক অনসেন্সর্ড ডলফিন মডেল যা কোডিং কাজে সমৃদ্ধ। 2.8 সংস্করণে আপডেট করা "
 "হয়েছে"
 
-#: src/ollama_models.py:1065
+#: src/available_models_descriptions.py:34
 msgid ""
 "Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on "
 "Llama 3 that has a variety of instruction, conversational, and coding skills."
@@ -2318,11 +2553,11 @@ msgstr ""
 "ডলফিন 2.9 হল এরিক হার্টফোর্ড কর্তৃক ল্লামা 3 এর উপর ভিত্তি করে 8B এবং 70B আকারের "
 "নতুন মডেল যা নির্দেশনা, কনভার্সেশনাল এবং কোডিং দক্ষতার বিভিন্ন রকম আছে"
 
-#: src/ollama_models.py:1099
+#: src/available_models_descriptions.py:35
 msgid "Yi 1.5 is a high-performing, bilingual language model."
 msgstr "ইয়ি 1.5 হল একটি উচ্চ-পারফর্মিং, দ্বিভাষিক ভাষা মডেল"
 
-#: src/ollama_models.py:1122
+#: src/available_models_descriptions.py:36
 msgid ""
 "Command R is a Large Language Model optimized for conversational interaction "
 "and long context tasks."
@@ -2330,7 +2565,7 @@ msgstr ""
 "কমান্ড R হল একটি বৃহৎ ভাষা মডেল যা কথোপকথন ইন্টারঅ্যাকশন এবং দীর্ঘ প্রসঙ্গ কাজের "
 "জন্য অপ্টিমাইজ করা হয়েছে।"
 
-#: src/ollama_models.py:1159
+#: src/available_models_descriptions.py:37
 msgid ""
 "A general-purpose model ranging from 3 billion parameters to 70 billion, "
 "suitable for entry-level hardware."
@@ -2338,7 +2573,7 @@ msgstr ""
 "এন্ট্রি-লেভেল হার্ডওয়্যারের জন্য উপযুক্ত 3 বিলিয়ন থেকে 70 বিলিয়ন প্যারামিটার পর্যন্ত "
 "সাধারণ-উদ্দেশ্য মডেল"
 
-#: src/ollama_models.py:1182
+#: src/available_models_descriptions.py:38
 msgid ""
 "A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
 "benchmarks."
@@ -2346,7 +2581,7 @@ msgstr ""
 "এল্লামা ৩ ইন্সট্রাক্ট থেকে ফাইন-টিউনড এলএলভিএ মডেল, বেশ কয়েকটি বেঞ্চমার্কে উন্নত "
 "স্কোর সহ।"
 
-#: src/ollama_models.py:1209
+#: src/available_models_descriptions.py:39
 msgid ""
 "Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
 "that are trained to act as helpful assistants."
@@ -2354,7 +2589,7 @@ msgstr ""
 "জেফির হল মিস্ট্রাল এবং মিক্সট্রাল মডেলের সূক্ষ্ম-টিউন সংস্করণের একটি সিরিজ যা সহায়ক "
 "সহকারী হিসাবে কাজ করার জন্য প্রশিক্ষিত"
 
-#: src/ollama_models.py:1231
+#: src/available_models_descriptions.py:40
 msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
 "overtaking similarly and larger sized models."
@@ -2362,11 +2597,11 @@ msgstr ""
 "৩.৮ বিলিয়ন প্যারামিটার সহ একটি হালকা ওজনের এআই মডেল যার কর্মক্ষমতা একই এবং বড় "
 "আকারের মডেলগুলিকে ছাড়িয়ে গেছে।"
 
-#: src/ollama_models.py:1259
+#: src/available_models_descriptions.py:41
 msgid "Embedding models on very large sentence level datasets."
 msgstr "অত্যন্ত বড় বাক্য স্তরের ডেটাসেটগুলিতে এম্বেডিং মডেলসমূহ।"
 
-#: src/ollama_models.py:1282
+#: src/available_models_descriptions.py:42
 msgid ""
 "Codestral is Mistral AI’s first-ever code model designed for code generation "
 "tasks."
@@ -2374,12 +2609,12 @@ msgstr ""
 "কোডেস্ট্রাল হল মিস্ট্রাল এআই-এর প্রথম কোড মডেল যা কোড জেনারেশন টাস্কগুলির জন্য "
 "ডিজাইন করা হয়েছে।"
 
-#: src/ollama_models.py:1319
+#: src/available_models_descriptions.py:43
 msgid ""
 "StarCoder is a code generation model trained on 80+ programming languages."
 msgstr "স্টারকোডার হল 80+ প্রোগ্রামিং ভাষায় প্রশিক্ষিত একটি কোড জেনারেশন মডেল।"
 
-#: src/ollama_models.py:1351
+#: src/available_models_descriptions.py:44
 msgid ""
 "General use chat model based on Llama and Llama 2 with 2K to 16K context "
 "sizes."
@@ -2387,11 +2622,11 @@ msgstr ""
 "ল্লামা এবং ল্লামা 2 এর উপর ভিত্তি করে 2K থেকে 16K প্রসঙ্গ আকারের সাথে সাধারণ "
 "ব্যবহার চ্যাট মডেল"
 
-#: src/ollama_models.py:1388
+#: src/available_models_descriptions.py:45
 msgid "A family of open foundation models by IBM for Code Intelligence"
 msgstr "আইবিএম দ্বারা কোড ইন্টেলিজেন্সের জন্য ওপেন ফাউন্ডেশন মডেলের একটি পরিবার।"
 
-#: src/ollama_models.py:1410
+#: src/available_models_descriptions.py:46
 msgid ""
 "Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
 "Mistral 7B model using the OpenOrca dataset."
@@ -2399,7 +2634,7 @@ msgstr ""
 "মিস্ট্রাল ওপেনঅরকা হল 7 বিলিয়ন প্যারামিটার মডেল, মিস্ট্রাল 7B মডেলের উপরে "
 "ওপেনঅরকা ডেটাসেট ব্যবহার করে সূক্ষ্ম-টিউন করা হয়েছে"
 
-#: src/ollama_models.py:1442
+#: src/available_models_descriptions.py:47
 msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
@@ -2407,7 +2642,7 @@ msgstr ""
 "🪐 135M, 360M, এবং 1.7B প্যারামিটার সহ ছোট মডেলের একটি পরিবার, যা একটি নতুন "
 "উচ্চ-মানের ডেটাসেটে প্রশিক্ষিত।"
 
-#: src/ollama_models.py:1474
+#: src/available_models_descriptions.py:48
 msgid ""
 "Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
 "Llama 2 uncensored by Eric Hartford."
@@ -2415,12 +2650,12 @@ msgstr ""
 "উইজার্ড ভিকুনা আনসেন্সর্ড হল এরিক হার্টফোর্ড দ্বারা ল্লামা ২ আনসেন্সর্ড ভিত্তিক ৭বি, "
 "১৩বি এবং ৩০বি প্যারামিটার মডেল।"
 
-#: src/ollama_models.py:1503
+#: src/available_models_descriptions.py:49
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
 msgstr ""
 "ল্লামা 2 ভিত্তিক মডেল চীনা ডায়ালগ দক্ষতা উন্নত করার জন্য সূক্ষ্ম-টিউন করা হয়েছে"
 
-#: src/ollama_models.py:1526
+#: src/available_models_descriptions.py:50
 msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
@@ -2428,13 +2663,13 @@ msgstr ""
 "BGE-M3 হল BAAI থেকে একটি নতুন মডেল, যা এর বহু-কার্যকারিতা, বহু-ভাষাবিদ্যা এবং বহু-"
 "গ্রানুলারিটির ক্ষেত্রে এর বহুমুখীতার জন্য স্বীকৃত।"
 
-#: src/ollama_models.py:1551
+#: src/available_models_descriptions.py:51
 msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
 msgstr "এআই সফটওয়্যার উন্নয়ন দৃশ্যকল্পের জন্য বহুমুখী মডেল, কোড সম্পূর্ণতা সহ।"
 
-#: src/ollama_models.py:1574
+#: src/available_models_descriptions.py:52
 msgid ""
 "A family of open-source models trained on a wide variety of data, surpassing "
 "ChatGPT on various benchmarks. Updated to version 3.5-0106."
@@ -2442,7 +2677,7 @@ msgstr ""
 "একটি ওপেন-সোর্স মডেল পরিবার যা বিস্তৃত তথ্যের উপর প্রশিক্ষিত, বিভিন্ন বেঞ্চমার্কে "
 "চ্যাটজিপিটিকে ছাড়িয়ে গেছে। সংস্করণ ৩.৫-০১০৬ এ আপডেট করা হয়েছে।"
 
-#: src/ollama_models.py:1602
+#: src/available_models_descriptions.py:53
 msgid ""
 "Aya 23, released by Cohere, is a new family of state-of-the-art, "
 "multilingual models that support 23 languages."
@@ -2450,13 +2685,13 @@ msgstr ""
 "কোহের দ্বারা প্রকাশিত Aya 23, একটি নতুন পরিবার স্টেট-অফ-দ্য-আর্ট, বহুভাষিক মডেল যা "
 "23 টি ভাষাকে সমর্থন করে"
 
-#: src/ollama_models.py:1625
+#: src/available_models_descriptions.py:54
 msgid ""
 "CodeQwen1.5 is a large language model pretrained on a large amount of code "
 "data."
 msgstr "কোডকুইন ১.৫ হল একটি বড় ভাষা মডেল যা বড় পরিমাণের কোড ডেটার উপর প্রিট্রেনড।"
 
-#: src/ollama_models.py:1653
+#: src/available_models_descriptions.py:55
 msgid ""
 "The powerful family of models by Nous Research that excels at scientific "
 "discussion and coding tasks."
@@ -2464,7 +2699,7 @@ msgstr ""
 "নাউস রিসার্চ কর্তৃক পরিবারের শক্তিশালী মডেল যা বৈজ্ঞানিক আলোচনা এবং কোডিং কাজে "
 "সমৃদ্ধ"
 
-#: src/ollama_models.py:1675
+#: src/available_models_descriptions.py:56
 msgid ""
 "Command R+ is a powerful, scalable large language model purpose-built to "
 "excel at real-world enterprise use cases."
@@ -2472,11 +2707,11 @@ msgstr ""
 "কমান্ড R+ হল একটি শক্তিশালী, স্কেলেবল বৃহৎ ভাষা মডেল যা বাস্তব বিশ্বের উদ্যোগ "
 "ব্যবহার ক্ষেত্রে উৎকর্ষ করার জন্য তৈরি করা হয়েছে।"
 
-#: src/ollama_models.py:1698
+#: src/available_models_descriptions.py:57
 msgid "State-of-the-art code generation model"
 msgstr "সর্বাধুনিক কোড জেনারেশন মডেল"
 
-#: src/ollama_models.py:1722
+#: src/available_models_descriptions.py:58
 msgid ""
 "Stable Code 3B is a coding model with instruct and code completion variants "
 "on par with models such as Code Llama 7B that are 2.5x larger."
@@ -2484,7 +2719,7 @@ msgstr ""
 "স্টেবল কোড ৩বি হল একটি কোডিং মডেল যা ইন্সট্রাক্ট এবং কোড সম্পূর্ণ ভ্যারিয়েন্টসহ, যা "
 "কোড ল্লামা ৭বির মতো মডেলগুলির সমান যা ২.৫গুণ বড়।"
 
-#: src/ollama_models.py:1744
+#: src/available_models_descriptions.py:59
 msgid ""
 "An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
 "by Eric Hartford and based on TinyLlama."
@@ -2492,7 +2727,7 @@ msgstr ""
 "এরিক হার্টফোর্ড দ্বারা নতুন ডলফিন ২.৮ ডেটাসেটের উপর প্রশিক্ষিত একটি পরীক্ষামূলক "
 "১.১বি প্যারামিটার মডেল, যা টিনিল্লামা ভিত্তিক।"
 
-#: src/ollama_models.py:1771
+#: src/available_models_descriptions.py:60
 msgid ""
 "OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
 "open datasets."
@@ -2500,7 +2735,7 @@ msgstr ""
 "ওপেনহার্মিস ২.৫ হল টেকনিউম দ্বারা মিস্ট্রালের উপর ফুলি ওপেন ডেটাসেটসহ ৭বি মডেল যা "
 "ফাইন-টিউনড করা হয়েছে।"
 
-#: src/ollama_models.py:1795
+#: src/available_models_descriptions.py:61
 msgid ""
 "Mistral Large 2 is Mistral's new flagship model that is significantly more "
 "capable in code generation, mathematics, and reasoning with 128k context "
@@ -2510,7 +2745,7 @@ msgstr ""
 "যুক্তির ক্ষেত্রে উল্লেখযোগ্যভাবে আরও ক্ষমতাসম্পন্ন, 128k কনটেক্সট উইন্ডো এবং ডজনখানি "
 "ভাষার সমর্থন সহ।"
 
-#: src/ollama_models.py:1828
+#: src/available_models_descriptions.py:62
 msgid ""
 "Qwen2 Math is a series of specialized math language models built upon the "
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
@@ -2520,7 +2755,7 @@ msgstr ""
 "সিরিজ, যা উন্মুক্ত-উৎসের মডেল এবং এমনকি বন্ধ-উৎসের মডেলগুলির (যেমন, GPT4o) "
 "গাণিতিক ক্ষমতাকে উল্লেখযোগ্যভাবে ছাড়িয়ে যায়।"
 
-#: src/ollama_models.py:1852
+#: src/available_models_descriptions.py:63
 msgid ""
 "A strong multi-lingual general language model with competitive performance "
 "to Llama 3."
@@ -2528,7 +2763,7 @@ msgstr ""
 "ল্লামা ৩ এর সাথে প্রতিযোগিতামূলক কর্মক্ষমতা সহ একটি শক্তিশালী বহুভাষী সাধারণ ভাষা "
 "মডেল।"
 
-#: src/ollama_models.py:1886
+#: src/available_models_descriptions.py:64
 msgid ""
 "Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model "
 "trained on multilingual data in English, Spanish, German, Italian, French, "
@@ -2538,7 +2773,7 @@ msgstr ""
 "স্প্যানিশ, জার্মান, ইতালীয়, ফরাসি, পর্তুগিজ এবং ডাচ ভাষায় বহুভাষিক ডেটার উপর "
 "প্রশিক্ষিত।"
 
-#: src/ollama_models.py:1909
+#: src/available_models_descriptions.py:65
 msgid ""
 "BakLLaVA is a multimodal model consisting of the Mistral 7B base model "
 "augmented with the LLaVA architecture."
@@ -2546,7 +2781,7 @@ msgstr ""
 "বাকএলএভিএ(BakLLaVA) হল মিস্ট্রাল ৭বি বেস মডেল এবং এলএলভিএ আর্কিটেকচার দ্বারা "
 "সম্প্রসারিত একটি মাল্টিমোডাল মডেল।"
 
-#: src/ollama_models.py:1930
+#: src/available_models_descriptions.py:66
 msgid ""
 "A high-performing model trained with a new technique called Reflection-"
 "tuning that teaches a LLM to detect mistakes in its reasoning and correct "
@@ -2555,21 +2790,21 @@ msgstr ""
 "Reflection-tuning নামে একটি নতুন পদ্ধতির মাধ্যমে প্রশিক্ষিত একটি উচ্চ-পারফরম্যান্স "
 "মডেল, যা একটি LLM-কে তার যুক্তিতে ভুল সনাক্ত করতে এবং সঠিক পথে চলতে শেখায়।"
 
-#: src/ollama_models.py:1961
+#: src/available_models_descriptions.py:67
 msgid "An advanced language model crafted with 2 trillion bilingual tokens."
 msgstr "২ ট্রিলিয়ন দ্বিভাষিক টোকেন দিয়ে তৈরি করা একটি উন্নত ভাষা মডেল।"
 
-#: src/ollama_models.py:1988
+#: src/available_models_descriptions.py:68
 msgid ""
 "This model extends LLama-3 8B's context length from 8k to over 1m tokens."
 msgstr ""
 "এই মডেলটি এলএলএমএ-৩ ৮বি এর কন্টেক্সট দৈর্ঘ্য ৮কে থেকে ১ম টোকেন পর্যন্ত বাড়িয়েছে।"
 
-#: src/ollama_models.py:2021
+#: src/available_models_descriptions.py:69
 msgid "Model focused on math and logic problems"
 msgstr "গণিত ও যুক্তি সমস্যার উপর ফোকাসকৃত মডেল"
 
-#: src/ollama_models.py:2044
+#: src/available_models_descriptions.py:70
 msgid ""
 "moondream2 is a small vision language model designed to run efficiently on "
 "edge devices."
@@ -2577,7 +2812,7 @@ msgstr ""
 "মুন্ড্রিম ২ হল এজ ডিভাইসে দক্ষতার সাথে চলার জন্য ডিজাইন করা একটি ছোট ভিশন "
 "ল্যাঙ্গুয়েজ মডেল।"
 
-#: src/ollama_models.py:2066
+#: src/available_models_descriptions.py:71
 msgid ""
 "A fine-tuned model based on Mistral with good coverage of domain and "
 "language."
@@ -2585,7 +2820,7 @@ msgstr ""
 "মিস্ট্রালের উপর ভিত্তি করে একটি ফাইন-টিউনড মডেল যা ডোমেন এবং ভাষার ভাল কভারেজ "
 "আছে।"
 
-#: src/ollama_models.py:2093
+#: src/available_models_descriptions.py:72
 msgid ""
 "A model from NVIDIA based on Llama 3 that excels at conversational question "
 "answering (QA) and retrieval-augmented generation (RAG)."
@@ -2593,7 +2828,7 @@ msgstr ""
 "এনভিডিয়া থেকে ল্লামা ৩ ভিত্তিক একটি মডেল যা কনভার্সেশনাল প্রশ্ন উত্তর (কিউএ) এবং "
 "রিট্রিভাল-অগমেন্টেড জেনারেশন (র‍্যাগ) এ উৎকৃষ্ট।"
 
-#: src/ollama_models.py:2120
+#: src/available_models_descriptions.py:73
 msgid ""
 "Conversational model based on Llama 2 that performs competitively on various "
 "benchmarks."
@@ -2601,7 +2836,7 @@ msgstr ""
 "ল্লামা ২ ভিত্তিক একটি কনভার্সেশনাল মডেল যা বিভিন্ন বেঞ্চমার্কে প্রতিযোগিতামূলকভাবে "
 "পারফর্ম করে।"
 
-#: src/ollama_models.py:2148
+#: src/available_models_descriptions.py:74
 msgid ""
 "SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
 "generation tasks"
@@ -2609,19 +2844,19 @@ msgstr ""
 "এসকিউএলকোডার হল স্টারকোডারে এসকিউএল জেনারেশন টাস্কের জন্য ফাইন-টিউনড একটি কোড "
 "কমপ্লিশন মডেল।"
 
-#: src/ollama_models.py:2175
+#: src/available_models_descriptions.py:75
 msgid "General use models based on Llama and Llama 2 from Nous Research."
 msgstr "নাউস রিসার্চ থেকে ল্লামা এবং ল্লামা ২ ভিত্তিক সাধারণ ব্যবহারের মডেলসমূহ।"
 
-#: src/ollama_models.py:2198
+#: src/available_models_descriptions.py:76
 msgid "Code generation model based on Code Llama."
 msgstr "কোড ল্লামার উপর ভিত্তি করে কোড জেনারেশন মডেল"
 
-#: src/ollama_models.py:2225
+#: src/available_models_descriptions.py:77
 msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
 msgstr "ল্লামা ২ এর একটি সম্প্রসারণ যা ১২৮কে টোকেন পর্যন্ত কন্টেক্সট সমর্থন করে।"
 
-#: src/ollama_models.py:2253
+#: src/available_models_descriptions.py:78
 msgid ""
 "A 7B and 15B uncensored variant of the Dolphin model family that excels at "
 "coding, based on StarCoder2."
@@ -2629,15 +2864,15 @@ msgstr ""
 "স্টারকোডার ২ ভিত্তিক ডলফিন মডেল পরিবারের একটি ৭বি এবং ১৫বি আনসেন্সর্ড ভ্যারিয়েন্ট "
 "যা কোডিংয়ে উৎকৃষ্ট।"
 
-#: src/ollama_models.py:2280
+#: src/available_models_descriptions.py:79
 msgid "General use model based on Llama 2."
 msgstr "ল্লামা ২(llama 2) ভিত্তিক সাধারণ ব্যবহারের মডেল।"
 
-#: src/ollama_models.py:2309
+#: src/available_models_descriptions.py:80
 msgid "A strong, economical, and efficient Mixture-of-Experts language model."
 msgstr "একটি শক্তিশালী, অর্থনৈতিক এবং দক্ষ মিক্সচার-অফ-এক্সপার্টস ভাষা মডেল।"
 
-#: src/ollama_models.py:2331
+#: src/available_models_descriptions.py:81
 msgid ""
 "Starling is a large language model trained by reinforcement learning from AI "
 "feedback focused on improving chatbot helpfulness."
@@ -2645,7 +2880,7 @@ msgstr ""
 "স্টার্লিং হল এআই ফিডব্যাক থেকে শক্তি শিক্ষা দ্বারা প্রশিক্ষিত একটি বড় ভাষা মডেল, যা "
 "চ্যাটবট সহায়তাকে উন্নত করার উপর ফোকাস করে।"
 
-#: src/ollama_models.py:2353
+#: src/available_models_descriptions.py:82
 msgid ""
 "A companion assistant trained in philosophy, psychology, and personal "
 "relationships. Based on Mistral."
@@ -2653,14 +2888,14 @@ msgstr ""
 "দর্শন, মনোবিজ্ঞান এবং ব্যক্তিগত সম্পর্কে প্রশিক্ষিত একটি সহযোগী সহায়ক। মিস্ট্রালের উপর "
 "ভিত্তি করে।"
 
-#: src/ollama_models.py:2391
+#: src/available_models_descriptions.py:83
 msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
 msgstr ""
 "হার্মিস ৩ হল নাউস রিসার্চের এলএলএমগুলির ফ্ল্যাগশিপ হার্মিস সিরিজের সর্বশেষ সংস্করণ"
 
-#: src/ollama_models.py:2419
+#: src/available_models_descriptions.py:84
 msgid ""
 "Yi-Coder is a series of open-source code language models that delivers state-"
 "of-the-art coding performance with fewer than 10 billion parameters."
@@ -2668,7 +2903,7 @@ msgstr ""
 "Yi-Coder একটি খোলা উৎস কোড ভাষার মডেলের সিরিজ যা ১০ বিলিয়নের কম প্যারামিটার "
 "দিয়ে শ্রেষ্ঠ কোডিং কর্মক্ষমতা প্রদান করে।"
 
-#: src/ollama_models.py:2450
+#: src/available_models_descriptions.py:85
 msgid ""
 "A large language model built by the Technology Innovation Institute (TII) "
 "for use in summarization, text generation, and chat bots."
@@ -2676,7 +2911,7 @@ msgstr ""
 "টেকনোলজি ইনোভেশন ইনস্টিটিউট (টিআইআই) দ্বারা নির্মিত একটি বড় ভাষা মডেল যা "
 "সংক্ষিপ্তকরণ, পাঠ্য উৎপাদন এবং চ্যাট বটগুলিতে ব্যবহারের জন্য।"
 
-#: src/ollama_models.py:2487
+#: src/available_models_descriptions.py:86
 msgid ""
 "InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
 "outstanding reasoning capability."
@@ -2684,7 +2919,7 @@ msgstr ""
 "InternLM2.5 হল ৭বি প্যারামিটার মডেল যা ব্যবহারিক দৃশ্যপটের জন্য তৈরি করা হয়েছে "
 "এবং উল্লেখযোগ্য যুক্তি ক্ষমতা রয়েছে।"
 
-#: src/ollama_models.py:2509
+#: src/available_models_descriptions.py:87
 msgid ""
 "A compact, yet powerful 10.7B large language model designed for single-turn "
 "conversation."
@@ -2692,7 +2927,7 @@ msgstr ""
 "একটি কমপ্যাক্ট, কিন্তু শক্তিশালী ১০.৭বি লার্জ ল্যাঙ্গুয়েজ মডেল যা সিঙ্গল-টার্ন "
 "কনভার্সেশনের জন্য ডিজাইন করা হয়েছে।"
 
-#: src/ollama_models.py:2533
+#: src/available_models_descriptions.py:88
 msgid ""
 "Athene-V2 is a 72B parameter model which excels at code completion, "
 "mathematics, and log extraction tasks."
@@ -2700,11 +2935,11 @@ msgstr ""
 "Athene-V2 হল একটি 72B প্যারামিটার মডেল যা কোড সম্পূর্ণতা, গণিত এবং লগ নির্গমন "
 "কাজে উত্তম।"
 
-#: src/ollama_models.py:2556
+#: src/available_models_descriptions.py:89
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
 msgstr "ফাই ৩(Phi 3) মিনি থেকে ফাইন-টিউন করা একটি নতুন ছোট এলএলভিএ মডেল।"
 
-#: src/ollama_models.py:2584
+#: src/available_models_descriptions.py:90
 msgid ""
 "Orca 2 is built by Microsoft research, and are a fine-tuned version of "
 "Meta's Llama 2 models. The model is designed to excel particularly in "
@@ -2713,13 +2948,13 @@ msgstr ""
 "অরকা ২ হল মাইক্রোসফট রিসার্চ দ্বারা নির্মিত, এবং মেটার ল্লামা ২ মডেলের একটি ফাইন-"
 "টিউনড সংস্করণ। মডেলটি বিশেষত যুক্তি প্রদানে উৎকৃষ্ট হওয়ার জন্য ডিজাইন করা হয়েছে।"
 
-#: src/ollama_models.py:2615
+#: src/available_models_descriptions.py:91
 msgid ""
 "A series of multimodal LLMs (MLLMs) designed for vision-language "
 "understanding."
 msgstr "ভিশন-ল্যাঙ্গুয়েজ বোঝার জন্য ডিজাইন করা একটি মাল্টিমোডাল LLM (MLLM) সিরিজ।"
 
-#: src/ollama_models.py:2647
+#: src/available_models_descriptions.py:92
 msgid ""
 "Llama 2 based model fine tuned on an Orca-style dataset. Originally called "
 "Free Willy."
@@ -2727,7 +2962,7 @@ msgstr ""
 "অরকা-স্টাইল ডেটাসেটে ফাইন-টিউনড ল্লামা ২ ভিত্তিক মডেল। মূলত ফ্রি উইলি নামে পরিচিত "
 "ছিল।"
 
-#: src/ollama_models.py:2676
+#: src/available_models_descriptions.py:93
 msgid ""
 "Mistral Small 3 sets a new benchmark in the “small” Large Language Models "
 "category below 70B."
@@ -2735,7 +2970,7 @@ msgstr ""
 "মিস্ট্রাল স্মল ৩ ৭০বির নিচে 'ছোট' বিভাগে বড় ভাষা মডেলগুলির মধ্যে একটি নতুন মানদণ্ড "
 "স্থাপন করেছে।"
 
-#: src/ollama_models.py:2698
+#: src/available_models_descriptions.py:94
 msgid ""
 "2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
 "model by Microsoft Research."
@@ -2743,7 +2978,7 @@ msgstr ""
 "এরিক হার্টফোর্ড দ্বারা ২.৭বি আনসেন্সর্ড ডলফিন মডেল, মাইক্রোসফট রিসার্চ দ্বারা "
 "ফাই(phi) ভাষা মডেলের উপর ভিত্তি করে।"
 
-#: src/ollama_models.py:2731
+#: src/available_models_descriptions.py:95
 msgid ""
 "SmolLM2 is a family of compact language models available in three size: "
 "135M, 360M, and 1.7B parameters."
@@ -2751,11 +2986,11 @@ msgstr ""
 "SmolLM2 হল একটি কমপ্যাক্ট ভাষা মডেলের পরিবার যা তিনটি আকারে উপলব্ধ: 135M, 360M, "
 "এবং 1.7B প্যারামিটার।"
 
-#: src/ollama_models.py:2753
+#: src/available_models_descriptions.py:96
 msgid "Uncensored version of Wizard LM model"
 msgstr "উইজার্ড এলএম মডেলের আনসেন্সর্ড সংস্করণ।"
 
-#: src/ollama_models.py:2776
+#: src/available_models_descriptions.py:97
 msgid ""
 "A commercial-friendly small language model by NVIDIA optimized for roleplay, "
 "RAG QA, and function calling."
@@ -2763,12 +2998,12 @@ msgstr ""
 "রোলপ্লে, RAG QA এবং ফাংশন কলিংয়ের জন্য অপ্টিমাইজ করা NVIDIA-এর একটি বাণিজ্যিক-"
 "বান্ধব ছোট ভাষার মডেল।"
 
-#: src/ollama_models.py:2798
+#: src/available_models_descriptions.py:98
 msgid "An extension of Mistral to support context windows of 64K or 128K."
 msgstr ""
 "মিস্ট্রালের একটি সম্প্রসারণ, ৬৪কে বা ১২৮কে কন্টেক্সট উইন্ডোগুলির সমর্থন করার জন্য।"
 
-#: src/ollama_models.py:2826
+#: src/available_models_descriptions.py:99
 msgid ""
 "An expansion of Llama 2 that specializes in integrating both general "
 "language understanding and domain-specific knowledge, particularly in "
@@ -2777,7 +3012,7 @@ msgstr ""
 "প্রোগ্রামিং এবং গণিতে বিশেষত সাধারণ ভাষা বোঝাপড়া এবং ডোমেইন-স্পেসিফিক জ্ঞান "
 "একত্রিত করার জন্য ল্লামা ২ এর একটি সম্প্রসারণ।"
 
-#: src/ollama_models.py:2848
+#: src/available_models_descriptions.py:100
 msgid ""
 "Fine-tuned Llama 2 model to answer medical questions based on an open source "
 "medical dataset."
@@ -2785,14 +3020,14 @@ msgstr ""
 "ওপেন সোর্স মেডিক্যাল ডেটাসেট ভিত্তিক মেডিক্যাল প্রশ্নের উত্তর দেওয়ার জন্য ল্লামা ২ "
 "মডেল ফাইন-টিউনড।"
 
-#: src/ollama_models.py:2875
+#: src/available_models_descriptions.py:101
 msgid ""
 "Open-source medical large language model adapted from Llama 2 to the medical "
 "domain."
 msgstr ""
 "ল্লামা ২ থেকে মেডিক্যাল ডোমেইনে অভিযোজিত ওপেন-সোর্স মেডিক্যাল লার্জ ল্যাঙ্গুয়েজ মডেল।"
 
-#: src/ollama_models.py:2903
+#: src/available_models_descriptions.py:102
 msgid ""
 "A series of models from Groq that represent a significant advancement in "
 "open-source AI capabilities for tool use/function calling."
@@ -2800,7 +3035,7 @@ msgstr ""
 "Groq থেকে একটি মডেল সিরিজ যা টুল ব্যবহার/ফাংশন কলিংয়ের জন্য ওপেন-সোর্স AI ক্ষমতায় "
 "উল্লেখযোগ্য অগ্রগতি প্রতিনিধিত্ব করে।"
 
-#: src/ollama_models.py:2925
+#: src/available_models_descriptions.py:103
 msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
@@ -2808,24 +3043,24 @@ msgstr ""
 "Llama-3.1-Nemotron-70B-Instruct হল NVIDIA দ্বারা ব্যবহারকারীর প্রশ্নের উত্তরে LLM "
 "উৎপাদিত উত্তরের সাহায্যকারিতা উন্নত করার জন্য পরিবর্তিত একটি বড় ভাষা মডেল।"
 
-#: src/ollama_models.py:2947
+#: src/available_models_descriptions.py:104
 msgid ""
 "Nexus Raven is a 13B instruction tuned model for function calling tasks."
 msgstr "নেক্সাস রেভেন হল ১৩বি ইন্সট্রাকশন টিউনড মডেল ফাংশন কলিং টাস্কের জন্য।"
 
-#: src/ollama_models.py:2968
+#: src/available_models_descriptions.py:105
 msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
 msgstr "নাউস রিসার্চ থেকে নাউস হার্মিস ২ মডেল, এখন মিক্সট্রাল উপর প্রশিক্ষিত।"
 
-#: src/ollama_models.py:2991
+#: src/available_models_descriptions.py:106
 msgid "Great code generation model based on Llama2."
 msgstr "ল্লামা২ ভিত্তিক একটি দুর্দান্ত কোড জেনারেশন মডেল।"
 
-#: src/ollama_models.py:3013
+#: src/available_models_descriptions.py:107
 msgid "Uncensored Llama2 based model with support for a 16K context window."
 msgstr "১৬কে কন্টেক্সট উইন্ডোর জন্য সমর্থনসহ আনসেন্সর্ড ল্লামা২ ভিত্তিক মডেল।"
 
-#: src/ollama_models.py:3054
+#: src/available_models_descriptions.py:108
 msgid ""
 "The IBM Granite 2B and 8B models are designed to support tool-based use "
 "cases and support for retrieval augmented generation (RAG), streamlining "
@@ -2835,7 +3070,7 @@ msgstr ""
 "অগমেন্টেড জেনারেশন (RAG) এর জন্য সমর্থন প্রদানের জন্য ডিজাইন করা হয়েছে, কোড "
 "উৎপাদন, অনুবাদ এবং বাগ সংশোধনকে সহজ করে।"
 
-#: src/ollama_models.py:3077
+#: src/available_models_descriptions.py:109
 msgid ""
 "🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic "
 "instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
@@ -2845,20 +3080,20 @@ msgstr ""
 "করে ৭৫কে সিন্থেটিক ইন্সট্রাকশন ডেটাতে প্রশিক্ষিত, LLMs কে ওপেন-সোর্স কোড স্নিপেটস "
 "দিয়ে আলোকিত করার একটি নতুন পদ্ধতি।"
 
-#: src/ollama_models.py:3099
+#: src/available_models_descriptions.py:110
 msgid ""
 "A lightweight chat model allowing accurate, and responsive output without "
 "requiring high-end hardware."
 msgstr "হালকা চ্যাট মডেল যা সঠিক এবং সাড়া প্রদান করে উচ্চ-মানের হার্ডওয়্যার ছাড়াই।"
 
-#: src/ollama_models.py:3122
+#: src/available_models_descriptions.py:111
 msgid ""
 "A high-performing code instruct model created by merging two existing code "
 "models."
 msgstr ""
 "দুটি বিদ্যমান কোড মডেল একত্রিত করে তৈরি করা একটি উচ্চ-পারফর্মিং কোড ইন্সট্রাক্ট মডেল।"
 
-#: src/ollama_models.py:3145
+#: src/available_models_descriptions.py:112
 msgid ""
 "Falcon2 is an 11B parameters causal decoder-only model built by TII and "
 "trained over 5T tokens."
@@ -2866,7 +3101,7 @@ msgstr ""
 "ফ্যালকন2 হল টিআইআই দ্বারা নির্মিত এবং ৫টি টোকেনের উপর প্রশিক্ষিত ১১বি প্যারামিটার "
 "কার্যকারণ শুধুমাত্র-ডিকোডার মডেল।"
 
-#: src/ollama_models.py:3167
+#: src/available_models_descriptions.py:113
 msgid ""
 "Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
 "MelodysDreamj."
@@ -2874,7 +3109,7 @@ msgstr ""
 "উইজার্ড ভিকুনা হল মেলোডিসড্রিমজ দ্বারা প্রশিক্ষিত এলমা ২ ভিত্তিক ১৩বি প্যারামিটার "
 "মডেল।"
 
-#: src/ollama_models.py:3189
+#: src/available_models_descriptions.py:114
 msgid ""
 "MistralLite is a fine-tuned model based on Mistral with enhanced "
 "capabilities of processing long contexts."
@@ -2882,7 +3117,7 @@ msgstr ""
 "মিস্ট্রাললাইট হল মিস্ট্রাল ভিত্তিক একটি ফাইন-টিউন মডেল যা দীর্ঘ প্রসঙ্গ প্রক্রিয়াকরণের "
 "উন্নত ক্ষমতা রয়েছে।"
 
-#: src/ollama_models.py:3212
+#: src/available_models_descriptions.py:115
 msgid ""
 "MathΣtral: a 7B model designed for math reasoning and scientific discovery "
 "by Mistral AI."
@@ -2890,13 +3125,13 @@ msgstr ""
 "MathΣtral: Mistral AI দ্বারা গণিত যুক্তি এবং বৈজ্ঞানিক আবিষ্কারের জন্য ৭বি মডেল "
 "ডিজাইন করা হয়েছে।"
 
-#: src/ollama_models.py:3234
+#: src/available_models_descriptions.py:116
 msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
 msgstr ""
 "মাদারডাক এবং নাম্বারস স্টেশন দ্বারা তৈরি করা ৭বি প্যারামিটার টেক্সট-টু-এসকিউএল "
 "মডেল।"
 
-#: src/ollama_models.py:3255
+#: src/available_models_descriptions.py:117
 msgid ""
 "MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
 "interleaving the model with itself."
@@ -2904,7 +3139,7 @@ msgstr ""
 "মেগা ডলফিন-২.২-১২০বি হল ডলফিন-২.২-৭০বি এর একটি রূপান্তর যা মডেলটিকে নিজের সাথে "
 "ইন্টারলিভিং করে তৈরি করা হয়েছে।"
 
-#: src/ollama_models.py:3277
+#: src/available_models_descriptions.py:118
 msgid ""
 "Solar Pro Preview: an advanced large language model (LLM) with 22 billion "
 "parameters designed to fit into a single GPU"
@@ -2912,7 +3147,7 @@ msgstr ""
 "Solar Pro Preview: 22 বিলিয়ন প্যারামিটারের একটি উন্নত বড় ভাষার মডেল (LLM), যা "
 "একটি মাত্র GPU-তে ফিট করার জন্য ডিজাইন করা হয়েছে।"
 
-#: src/ollama_models.py:3304
+#: src/available_models_descriptions.py:119
 msgid ""
 "A series of models that convert HTML content to Markdown content, which is "
 "useful for content conversion tasks."
@@ -2920,18 +3155,18 @@ msgstr ""
 "একটি মডেল সিরিজ যা HTML কন্টেন্টকে Markdown কন্টেন্টে রূপান্তর করে, যা কন্টেন্ট "
 "রূপান্তর কাজের জন্য উপকারী।"
 
-#: src/ollama_models.py:3325
+#: src/available_models_descriptions.py:120
 msgid ""
 "A top-performing mixture of experts model, fine-tuned with high-quality data."
 msgstr ""
 "উচ্চ-পারফর্মিং বিশেষজ্ঞ মডেলের একটি মিশ্রণ, উচ্চ-মানের ডেটার সাথে ফাইন-টিউন করা "
 "হয়েছে।"
 
-#: src/ollama_models.py:3347
+#: src/available_models_descriptions.py:121
 msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
 msgstr "জেফির উপর ভিত্তি করে উচ্চ-মানের ডেটার সাথে ফাইন-টিউন করা ৭বি চ্যাট মডেল।"
 
-#: src/ollama_models.py:3370
+#: src/available_models_descriptions.py:122
 msgid ""
 "Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
 "Designed for chat and code generation."
@@ -2939,13 +3174,13 @@ msgstr ""
 "ওপেন অরকা ওপেনচ্যাট মডেল এবং গ্যারেজ-বিএআইন্ড প্ল্যাটিপাস ২ মডেলের সংমিশ্রণ। চ্যাট "
 "এবং কোড উৎপাদনের জন্য ডিজাইন করা হয়েছে।"
 
-#: src/ollama_models.py:3387
+#: src/available_models_descriptions.py:123
 msgid ""
 "A language model created by combining two fine-tuned Llama 2 70B models into "
 "one."
 msgstr "দুটি ফাইন-টিউন এলমা ২ ৭০বি মডেলকে একত্রিত করে তৈরি করা একটি ভাষা মডেল।"
 
-#: src/ollama_models.py:3428
+#: src/available_models_descriptions.py:124
 msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
@@ -2953,7 +3188,7 @@ msgstr ""
 "আইবিএম গ্রানাইট 1B এবং 3B মডেলগুলি হল আইবিএম থেকে কম বিলম্বনা ব্যবহারের জন্য "
 "ডিজাইন করা প্রথম বিশেষজ্ঞদের মিশ্রণ (MoE) গ্রানাইট মডেল।"
 
-#: src/ollama_models.py:3450
+#: src/available_models_descriptions.py:125
 msgid ""
 "A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
 "information extraction, based on Phi-3."
@@ -2961,20 +3196,20 @@ msgstr ""
 "তথ্য নির্যাসের জন্য ব্যক্তিগত উচ্চ-মানের সিন্থেটিক ডাটাসেটের উপর ফাইন-টিউন করা "
 "৩.৮বি মডেল, Phi-3 এর উপর ভিত্তি করে।"
 
-#: src/ollama_models.py:3501
+#: src/available_models_descriptions.py:126
 msgid ""
 "Cohere For AI's language models trained to perform well across 23 different "
 "languages."
 msgstr ""
 "Cohere For AI-এর ভাষা মডেলগুলি 23টি ভিন্ন ভাষায় ভাল কাজ করার জন্য প্রশিক্ষিত।"
 
-#: src/ollama_models.py:3523
+#: src/available_models_descriptions.py:127
 msgid "DBRX is an open, general-purpose LLM created by Databricks."
 msgstr ""
 "ডিবিআরএক্স হল ড্যাটাব্রিক্স(Databricks) দ্বারা তৈরি করা একটি ওপেন, সাধারণ উদ্দেশ্যে "
 "বৃহৎ ভাষা মডেল।"
 
-#: src/ollama_models.py:3545
+#: src/available_models_descriptions.py:128
 msgid ""
 "An open large reasoning model for real-world solutions by the Alibaba "
 "International Digital Commerce Group (AIDC-AI)."
@@ -2982,11 +3217,11 @@ msgstr ""
 "অলিবাবা আন্তর্জাতিক ডিজিটাল বাণিজ্য গ্রুপ (AIDC-AI) দ্বারা বাস্তব বিশ্বের সমাধানের "
 "জন্য একটি ওপেন বড় যুক্তি মডেল।"
 
-#: src/ollama_models.py:3568
+#: src/available_models_descriptions.py:129
 msgid "Embedding model from BAAI mapping texts to vectors."
 msgstr "বিএএআই থেকে পাঠ্যগুলিকে ভেক্টরে ম্যাপ করার জন্য এম্বেডিং মডেল।"
 
-#: src/ollama_models.py:3590
+#: src/available_models_descriptions.py:130
 msgid ""
 "An open weights function calling model based on Llama 3, competitive with "
 "GPT-4o function calling capabilities."
@@ -2994,7 +3229,7 @@ msgstr ""
 "Llama 3 এর উপর ভিত্তি করে ওপেন ওজন ফাংশন কলিং মডেল, GPT-4o ফাংশন কলিং ক্ষমতার "
 "সাথে প্রতিযোগিতামূলক।"
 
-#: src/ollama_models.py:3611
+#: src/available_models_descriptions.py:131
 msgid ""
 "A robust conversational model designed to be used for both chat and instruct "
 "use cases."
@@ -3002,7 +3237,7 @@ msgstr ""
 "চ্যাট এবং নির্দেশনা উভয় ব্যবহার ক্ষেত্রের জন্য ডিজাইন করা একটি শক্তিশালী কথোপকথন "
 "মডেল।"
 
-#: src/ollama_models.py:3633
+#: src/available_models_descriptions.py:132
 msgid ""
 "An upgraded version of DeekSeek-V2 that integrates the general and coding "
 "abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
@@ -3010,7 +3245,7 @@ msgstr ""
 "DeekSeek-V2-এর একটি আপগ্রেডেড সংস্করণ, যা DeepSeek-V2-Chat এবং DeepSeek-Coder-"
 "V2-Instruct উভয়ের সাধারণ এবং কোডিং দক্ষতাকে একীভূত করে।"
 
-#: src/ollama_models.py:3666
+#: src/available_models_descriptions.py:133
 msgid ""
 "ShieldGemma is set of instruction tuned models for evaluating the safety of "
 "text prompt input and text output responses against a set of defined safety "
@@ -3019,11 +3254,11 @@ msgstr ""
 "ShieldGemma হল নির্দেশনা-টিউনড মডেলের একটি সেট যা পাঠ্য প্রম্পট ইনপুট এবং পাঠ্য "
 "আউটপুট উত্তরগুলির নিরাপত্তা মূল্যায়ন করার জন্য একটি নির্দিষ্ট নিরাপত্তা নীতির বিরুদ্ধে।"
 
-#: src/ollama_models.py:3688
+#: src/available_models_descriptions.py:134
 msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
 msgstr "Bespoke Labs দ্বারা বিকশিত একটি অত্যাধুনিক তথ্য-যাচাই মডেল।"
 
-#: src/ollama_models.py:3716
+#: src/available_models_descriptions.py:135
 msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
@@ -3031,7 +3266,7 @@ msgstr ""
 "Llama Guard 3 হল এলএলএম ইনপুট এবং উত্তরগুলির বিষয়বস্তু নিরাপত্তা শ্রেণীবিভাগের জন্য "
 "সূক্ষ্ম-টিউনড মডেলের একটি সিরিজ।"
 
-#: src/ollama_models.py:3740
+#: src/available_models_descriptions.py:136
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
@@ -3039,7 +3274,7 @@ msgstr ""
 "ক্লাস্টারিং বা সেম্যান্টিক সার্চের মতো কাজের জন্য ব্যবহার করা যেতে পারে এমন সেন্টেন্স-"
 "ট্রান্সফর্মার্স মডেল"
 
-#: src/ollama_models.py:3770
+#: src/available_models_descriptions.py:137
 msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
@@ -3047,7 +3282,7 @@ msgstr ""
 "OpenCoder হল একটি উন্মুক্ত এবং পুনরুত্পাদনযোগ্য কোড এলএলএম পরিবার যা 1.5B এবং 8B "
 "মডেলগুলিকে অন্তর্ভুক্ত করে, ইংরেজি এবং চীনা ভাষায় চ্যাট সমর্থন করে।"
 
-#: src/ollama_models.py:3799
+#: src/available_models_descriptions.py:138
 msgid ""
 "Tülu 3 is a leading instruction following model family, offering fully open-"
 "source data, code, and recipes by the The Allen Institute for AI."
@@ -3055,7 +3290,7 @@ msgstr ""
 "টুলু ৩ একটি নেতৃস্থানীয় নির্দেশ অনুসরণকারী মডেল পরিবার, যা সম্পূর্ণরূপে উন্মুক্ত উত্সের "
 "ডেটা, কোড এবং রেসিপিগুলি অ্যালেন ইনস্টিটিউট ফর এআই দ্বারা প্রদান করে।"
 
-#: src/ollama_models.py:3827
+#: src/available_models_descriptions.py:139
 msgid ""
 "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
 "support without sacrificing English performance or scalability."
@@ -3063,7 +3298,7 @@ msgstr ""
 "স্নোফ্লেকের ফ্রন্টিয়ার এম্বেডিং মডেল। আর্কটিক এম্বেড ২.০ ইংরেজি কর্মক্ষমতা বা "
 "স্কেলেবিলিটি বলি দিয়ে বহুভাষিক সমর্থন যোগ করে।"
 
-#: src/ollama_models.py:3855
+#: src/available_models_descriptions.py:140
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
@@ -3071,7 +3306,7 @@ msgstr ""
 "আইবিএম গ্রানাইট গার্ডিয়ান ৩.০ ২বি এবং ৮বি মডেলগুলি প্রম্পট এবং/অথবা প্রতিক্রিয়ায় "
 "ঝুঁকি সনাক্ত করার জন্য ডিজাইন করা হয়েছে।"
 
-#: src/ollama_models.py:3889
+#: src/available_models_descriptions.py:141
 msgid ""
 "EXAONE 3.5 is a collection of instruction-tuned bilingual (English and "
 "Korean) generative models ranging from 2.4B to 32B parameters, developed and "
@@ -3081,7 +3316,7 @@ msgstr ""
 "জেনারেটিভ মডেল, ২.৪ বিলিয়ন থেকে ৩২ বিলিয়ন প্যারামিটার পর্যন্ত, এলজি এআই রিসার্চ "
 "দ্বারা বিকাশ এবং প্রকাশিত।"
 
-#: src/ollama_models.py:3937
+#: src/available_models_descriptions.py:142
 msgid ""
 "Sailor2 are multilingual language models made for South-East Asia. Available "
 "in 1B, 8B, and 20B parameter sizes."
@@ -3089,7 +3324,7 @@ msgstr ""
 "সেইলর ২ হল দক্ষিণ-পূর্ব এশিয়ার জন্য তৈরি বহুভাষিক ভাষা মডেল। ১ বিলিয়ন, ৮ বিলিয়ন "
 "এবং ২০ বিলিয়ন প্যারামিটার আকারে উপলব্ধ।"
 
-#: src/ollama_models.py:3975
+#: src/available_models_descriptions.py:143
 msgid ""
 "A family of efficient AI models under 10B parameters performant in science, "
 "math, and coding through innovative training techniques."
@@ -3097,7 +3332,7 @@ msgstr ""
 "১০ বিলিয়নের নিচে প্যারামিটার সহ কার্যকরী AI মডেলের একটি পরিবার, যা বিজ্ঞান, "
 "গণিত এবং কোডিংয়ে উদ্ভাবনী প্রশিক্ষণ কৌশলের মাধ্যমে কার্যকর।"
 
-#: src/ollama_models.py:4016
+#: src/available_models_descriptions.py:144
 msgid ""
 "The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 "
 "trillion tokens of data, demonstrated significant improvements over their "
@@ -3107,7 +3342,7 @@ msgstr ""
 "বেশি টোকেনের ডেটার উপর প্রশিক্ষিত, তাদের পূর্বসূরীদের তুলনায় পারফরম্যান্স এবং গতিতে "
 "উল্লেখযোগ্য উন্নতি প্রদর্শন করেছে আইবিএমের প্রাথমিক পরীক্ষায়।"
 
-#: src/ollama_models.py:4057
+#: src/available_models_descriptions.py:145
 msgid ""
 "The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
@@ -3115,7 +3350,7 @@ msgstr ""
 "আইবিএম গ্রানাইট ১বি এবং ৩বি মডেলগুলি দীর্ঘ-প্রসঙ্গ বিশেষজ্ঞদের মিশ্রণ (MoE) গ্রানাইট "
 "মডেল, যা কম লেটেন্সি ব্যবহারের জন্য ডিজাইন করা হয়েছে।"
 
-#: src/ollama_models.py:4098
+#: src/available_models_descriptions.py:146
 msgid ""
 "The IBM Granite Embedding 30M and 278M models models are text-only dense "
 "biencoder embedding models, with 30M available in English only and 278M "
@@ -3125,17 +3360,17 @@ msgstr ""
 "এমবেডিং মডেল, যার মধ্যে ৩০এম শুধুমাত্র ইংরেজিতে এবং ২৭৮এম বহুভাষিক ব্যবহারের জন্য "
 "উপলব্ধ।"
 
-#: src/ollama_models.py:4120
+#: src/available_models_descriptions.py:147
 msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
 msgstr "ফাই-৪ হল মাইক্রোসফ্টের একটি ১৪বি প্যারামিটার, স্টেট-অফ-দ্য-আর্ট ওপেন মডেল।"
 
-#: src/ollama_models.py:4143
+#: src/available_models_descriptions.py:148
 msgid ""
 "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
 msgstr ""
 "Qwen 2.5 3B ইনস্ট্রাক্ট মডেল থেকে সূক্ষ্মভাবে টিউন করা একটি নতুন ছোট রিজনিং মডেল।"
 
-#: src/ollama_models.py:4167
+#: src/available_models_descriptions.py:149
 msgid ""
 "Dolphin 3.0 Llama 3.1 8B 🐬 is the next generation of the Dolphin series of "
 "instruct-tuned models designed to be the ultimate general purpose local "
@@ -3146,7 +3381,7 @@ msgstr ""
 "মডেল, যা সর্বাধিক সাধারণ উদ্দেশ্যে স্থানীয় মডেল হিসেবে ডিজাইন করা হয়েছে, যা "
 "কোডিং, গাণিতিক হিসাব, এজেন্টিক, ফাংশন কলিং এবং সাধারণ ব্যবহার ক্ষেত্র সমর্থন করে।"
 
-#: src/ollama_models.py:4218
+#: src/available_models_descriptions.py:150
 msgid ""
 "DeepSeek's first-generation of reasoning models with comparable performance "
 "to OpenAI-o1, including six dense models distilled from DeepSeek-R1 based on "
@@ -3155,7 +3390,7 @@ msgstr ""
 "ডিপসিকের যুক্তি মডেলের প্রথম প্রজন্ম ওপেনএআই-ও১ এর তুলনাযোগ্য কর্মক্ষমতা সহ, যার মধ্যে "
 "ল্লামা এবং কোয়েনের উপর ভিত্তি করে ডিপসিক-আর১ থেকে বিশুদ্ধ ছয়টি ঘন মডেল রয়েছে।"
 
-#: src/ollama_models.py:4239
+#: src/available_models_descriptions.py:151
 msgid ""
 "A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
 "with 37B activated for each token."
@@ -3163,7 +3398,7 @@ msgstr ""
 "একটি শক্তিশালী মিক্সচার-অফ-এক্সপার্টস (এমওই) ভাষা মডেল যার ৬৭১বি মোট প্যারামিটার "
 "রয়েছে যার মধ্যে ৩৭বি প্রতিটি টোকেনের জন্য সক্রিয়।"
 
-#: src/ollama_models.py:4266
+#: src/available_models_descriptions.py:152
 msgid ""
 "OLMo 2 is a new family of 7B and 13B models trained on up to 5T tokens. "
 "These models are on par with or better than equivalently sized fully open "
@@ -3174,7 +3409,7 @@ msgstr ""
 "এই মডেলগুলি সমান বা সম্পূর্ণ খোলা মডেলের চেয়ে ভাল এবং ইংরেজি একাডেমিক বেঞ্চমার্কে "
 "ল্লামা ৩.১ এর মতো ওপেন-ওজন মডেলের সাথে প্রতিযোগিতামূলক।"
 
-#: src/ollama_models.py:4314
+#: src/available_models_descriptions.py:153
 msgid ""
 "The smallest model in Cohere's R series delivers top-tier speed, efficiency, "
 "and quality to build powerful AI applications on commodity GPUs and edge "
@@ -3183,7 +3418,7 @@ msgstr ""
 "কোহেরের আর সিরিজের ক্ষুদ্রতম মডেলটি কমোডিটি জিপিইউ এবং এজ ডিভাইসে শক্তিশালী এআই "
 "অ্যাপ্লিকেশন তৈরি করতে সর্বোচ্চ গতি, দক্ষতা এবং গুণমান প্রদান করে।"
 
-#: src/ollama_models.py:4342
+#: src/available_models_descriptions.py:154
 msgid ""
 "A fully open-source family of reasoning models built using a dataset derived "
 "by distilling DeepSeek-R1."
@@ -3191,7 +3426,7 @@ msgstr ""
 "ডিপসিক-আর১ থেকে বিশুদ্ধ করা একটি ডেটাসেট ব্যবহার করে তৈরি করা যুক্তি মডেলের একটি "
 "সম্পূর্ণ ওপেন-সোর্স পরিবার।"
 
-#: src/ollama_models.py:4366
+#: src/available_models_descriptions.py:155
 msgid ""
 "A fine-tuned version of Deepseek-R1-Distilled-Qwen-1.5B that surpasses the "
 "performance of OpenAI’s o1-preview with just 1.5B parameters on popular math "
@@ -3201,7 +3436,7 @@ msgstr ""
 "প্যারামিটার সহ জনপ্রিয় গণিত মূল্যায়নে ওপেনএআই-এর ও১-প্রিভিউ-এর কর্মক্ষমতা ছাড়িয়ে "
 "যায়।"
 
-#: src/ollama_models.py:4396
+#: src/available_models_descriptions.py:156
 msgid ""
 "A version of the DeepSeek-R1 model that has been post trained to provide "
 "unbiased, accurate, and factual information by Perplexity."
@@ -3209,11 +3444,11 @@ msgstr ""
 "পারপ্লেক্সিটি দ্বারা নিরপেক্ষ, সঠিক এবং তথ্যপূর্ণ তথ্য প্রদানের জন্য পোস্ট-ট্রেন করা "
 "ডিপসিক-আর১ মডেলের একটি সংস্করণ।"
 
-#: src/ollama_models.py:4433
+#: src/available_models_descriptions.py:157
 msgid "The current, most capable model that runs on a single GPU."
 msgstr "বর্তমানে, একক জিপিইউতে চলমান সবচেয়ে দক্ষ মডেল"
 
-#: src/ollama_models.py:4480
+#: src/available_models_descriptions.py:158
 msgid ""
 "Phi-4-mini brings significant enhancements in multilingual support, "
 "reasoning, and mathematics, and now, the long-awaited function calling "
@@ -3222,7 +3457,7 @@ msgstr ""
 "ফাই-৪-মিনি বহুভাষিক সমর্থন, যুক্তি এবং গণিতে উল্লেখযোগ্য উন্নতি নিয়ে আসে, এবং এখন, "
 "দীর্ঘসময় ধরে আশা করা ফাংশন কলিং বৈশিষ্ট্যটি অবশেষে সমর্থিত"
 
-#: src/ollama_models.py:4504
+#: src/available_models_descriptions.py:159
 msgid ""
 "A compact and efficient vision-language model, specifically designed for "
 "visual document understanding, enabling automated content extraction from "
@@ -3232,7 +3467,7 @@ msgstr ""
 "ডিজাইন করা হয়েছে, যা টেবিল, চার্ট, ইনফোগ্রাফিক, প্লট, ডায়াগ্রাম এবং আরও অনেক কিছু "
 "থেকে স্বয়ংক্রিয় বিষয়বস্তু নির্ণয় করতে সক্ষম করে"
 
-#: src/ollama_models.py:4544
+#: src/available_models_descriptions.py:160
 msgid ""
 "Granite-3.2 is a family of long-context AI models from IBM Granite fine-"
 "tuned for thinking capabilities."
@@ -3240,7 +3475,7 @@ msgstr ""
 "গ্রানাইট-৩.২ হল আইবিএম গ্রানাইটের দীর্ঘ-প্রসঙ্গের এআই মডেলের একটি পরিবার, যা "
 "চিন্তা ক্ষমতার জন্য সূক্ষ্মভাবে টিউন করা হয়েছে"
 
-#: src/ollama_models.py:4568
+#: src/available_models_descriptions.py:161
 msgid ""
 "A new state-of-the-art version of the lightweight Command R7B model that "
 "excels in advanced Arabic language capabilities for enterprises in the "
@@ -3249,7 +3484,7 @@ msgstr ""
 "মধ্যপ্রাচ্য ও উত্তর আফ্রিকার উদ্যোগের জন্য উন্নত আরবি ভাষা ক্ষমতায় অগ্রগতি লাভকারী "
 "হালকা কমান্ড আর৭বি মডেলের একটি নতুন সর্বশ্রেষ্ঠ সংস্করণ"
 
-#: src/ollama_models.py:4614
+#: src/available_models_descriptions.py:162
 msgid ""
 "111 billion parameter model optimized for demanding enterprises that require "
 "fast, secure, and high-quality AI"
@@ -3257,74 +3492,7 @@ msgstr ""
 "১১১ বিলিয়ন প্যারামিটার মডেল যা দ্রুত, নিরাপদ এবং উচ্চ-মানের এআই প্রয়োজনীয় "
 "চাহিদাপূর্ণ উদ্যোগের জন্য অপ্টিমাইজ করা হয়েছে"
 
-#: src/ollama_models.py:4655
-msgid ""
-"Qwen3 is the latest generation of large language models in Qwen series, "
-"offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
-msgstr ""
-"কোয়েন সিরিজ়ে কোয়েন৩ হলো বৃহৎ ভাষার মডেলের নবীনতম প্রজন্ম, যা ডেন্স এবং মিক্সচার-"
-"অফ-এক্সপার্টস (MoE) মডেলের একটি বিস্তৃত স্যুট প্রদান করে।"
-
-#: src/ollama_models.py:4802
-msgid "Devstral: the best open source model for coding agents"
-msgstr ""
-
-#: src/ollama_models.py:4830
-msgid "Meta's latest collection of multimodal models."
-msgstr "মেটার মাল্টিমোডাল মডেলের সর্বশেষ সংগ্রহ।"
-
-#: src/ollama_models.py:4878
-msgid ""
-"Flagship vision-language model of Qwen and also a significant leap from the "
-"previous Qwen2-VL."
-msgstr ""
-
-#: src/ollama_models.py:4908
-msgid ""
-"DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
-"1.5B version also available."
-msgstr ""
-"DeepCoder হল একটি সম্পূর্ণ ওপেন-সোর্স 14B কোডার মডেল যা O3-mini স্তরে রয়েছে, "
-"পাশাপাশি 1.5B সংস্করণও উপলব্ধ।"
-
-#: src/ollama_models.py:4933
-msgid ""
-"Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-"
-"art vision understanding and enhances long context capabilities up to 128k "
-"tokens without compromising text performance."
-msgstr ""
-"Mistral Small 3-এর উপর ভিত্তি করে, Mistral Small 3.1 (2503) সর্বাধুনিক ভিশন "
-"বোঝাপড়া যোগ করে এবং 128k টোকেন পর্যন্ত দীর্ঘ প্রসঙ্গ ক্ষমতা উন্নত করে, যাতে পাঠ্য "
-"পারফরম্যান্সে কোনো আপস করা না হয়।"
-
-#: src/ollama_models.py:4973
-msgid ""
-"Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that "
-"outperform the best available open models of the same size, including "
-"counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."
-msgstr ""
-"Cogito v1 Preview Deep Cogito-এর কর্তৃক তৈরি করা হাইব্রিড যুক্তি নির্ধারণ মডেলগুলির "
-"একটি পরিবার, যা একই সাইজের সেরা উপলব্ধ ওপেন মডেল যেমন LLaMA, DeepSeek, এবং "
-"Qwen-এর তুলনায় অধিক কার্যক্ষমতা প্রদর্শন করে, বেশিরভাগ মানদণ্ডে।"
-
-#: src/ollama_models.py:5002
-msgid ""
-"IBM Granite 2B and 8B models are 128K context length language models that "
-"have been fine-tuned for improved reasoning and instruction-following "
-"capabilities."
-msgstr ""
-"আইবিএম গ্রানাইট ২বি এবং ৮বি মডেল হলো ১২৮কে কন্টেন্ট দৈর্ঘ্যের ভাষার মডেল, যাউন্নত "
-"যুক্তি এবং নির্দেশাবলী অনুসরণ করার ক্ষমতার জন্য ফাইন-টিউন করা হয়েছে।"
-
-#: src/ollama_models.py:5040
-msgid ""
-"Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
-"reasoning models that rival much larger models on complex reasoning tasks."
-msgstr ""
-"ফাই ৪ রিজনিং এবং রিজনিং প্লাস হলো ১৪-বিলিয়ন প্যারামিটার ওপেন-ওয়েট রিজনিং মডেল, "
-"যা জটিল রিজনিংয়ের কাজগুলিতে অনেক বড় মডেলকে টেক্কা দেয়।"
-
-#: src/ollama_models.py:5073
+#: src/available_models_descriptions.py:163
 msgid ""
 "EXAONE Deep exhibits superior capabilities in various reasoning tasks "
 "including math and coding benchmarks, ranging from 2.4B to 32B parameters "
@@ -3334,212 +3502,418 @@ msgstr ""
 "মধ্যে গণিত ও কোডিং বেন্চমার্ক অন্তর্ভুক্ত। এটি LG AI Research দ্বারা উন্নয়ন এবং "
 "প্রকাশিত 2.4B থেকে 32B প্যারামিটারের মধ্যে বিস্তৃত।"
 
-#: src/ollama_models.py:5100
+#: src/available_models_descriptions.py:164
+msgid ""
+"Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-"
+"art vision understanding and enhances long context capabilities up to 128k "
+"tokens without compromising text performance."
+msgstr ""
+"Mistral Small 3-এর উপর ভিত্তি করে, Mistral Small 3.1 (2503) সর্বাধুনিক ভিশন "
+"বোঝাপড়া যোগ করে এবং 128k টোকেন পর্যন্ত দীর্ঘ প্রসঙ্গ ক্ষমতা উন্নত করে, যাতে পাঠ্য "
+"পারফরম্যান্সে কোনো আপস করা না হয়।"
+
+#: src/available_models_descriptions.py:165
+msgid ""
+"Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that "
+"outperform the best available open models of the same size, including "
+"counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."
+msgstr ""
+"Cogito v1 Preview Deep Cogito-এর কর্তৃক তৈরি করা হাইব্রিড যুক্তি নির্ধারণ মডেলগুলির "
+"একটি পরিবার, যা একই সাইজের সেরা উপলব্ধ ওপেন মডেল যেমন LLaMA, DeepSeek, এবং "
+"Qwen-এর তুলনায় অধিক কার্যক্ষমতা প্রদর্শন করে, বেশিরভাগ মানদণ্ডে।"
+
+#: src/available_models_descriptions.py:166
+msgid ""
+"DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
+"1.5B version also available."
+msgstr ""
+"DeepCoder হল একটি সম্পূর্ণ ওপেন-সোর্স 14B কোডার মডেল যা O3-mini স্তরে রয়েছে, "
+"পাশাপাশি 1.5B সংস্করণও উপলব্ধ।"
+
+#: src/available_models_descriptions.py:167
+msgid ""
+"Qwen3 is the latest generation of large language models in Qwen series, "
+"offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
+msgstr ""
+"কোয়েন সিরিজ়ে কোয়েন৩ হলো বৃহৎ ভাষার মডেলের নবীনতম প্রজন্ম, "
+"যা ডেন্স এবং মিক্সচার-অফ-এক্সপার্টস (MoE) মডেলের একটি বিস্তৃত স্যুট প্রদান করে।"
+
+#: src/available_models_descriptions.py:168
+msgid "Meta's latest collection of multimodal models."
+msgstr "মেটার মাল্টিমোডাল মডেলের সর্বশেষ সংগ্রহ।"
+
+#: src/available_models_descriptions.py:169
+msgid ""
+"IBM Granite 2B and 8B models are 128K context length language models that "
+"have been fine-tuned for improved reasoning and instruction-following "
+"capabilities."
+msgstr ""
+"আইবিএম গ্রানাইট ২বি এবং ৮বি মডেল হলো ১২৮কে কন্টেন্ট দৈর্ঘ্যের ভাষার মডেল, যা"
+"উন্নত যুক্তি এবং নির্দেশাবলী অনুসরণ করার ক্ষমতার জন্য ফাইন-টিউন করা হয়েছে।"
+
+#: src/available_models_descriptions.py:170
+msgid ""
+"Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
+"reasoning models that rival much larger models on complex reasoning tasks."
+msgstr ""
+"ফাই ৪ রিজনিং এবং রিজনিং প্লাস হলো ১৪-বিলিয়ন প্যারামিটার ওপেন-ওয়েট "
+"রিজনিং মডেল, যা জটিল রিজনিংয়ের কাজগুলিতে অনেক বড় মডেলকে টেক্কা দেয়।"
+
+#: src/available_models_descriptions.py:171
 msgid ""
 "Phi 4 mini reasoning is a lightweight open model that balances efficiency "
 "with advanced reasoning ability."
 msgstr ""
-"ফাই ৪ মিনি রিজনিং হলো একটি হালকা ওপেন মডেল যা দক্ষতার সাথেউন্নত যুক্তি ক্ষমতার "
-"ভারসাম্য বজায় রাখে।"
+"ফাই ৪ মিনি রিজনিং হলো একটি হালকা ওপেন মডেল যা দক্ষতার সাথে"
+"উন্নত যুক্তি ক্ষমতার ভারসাম্য বজায় রাখে।"
 
-#: src/window.py:187 src/window.py:222
-msgid "Speech Recognition Error"
-msgstr "স্পীচ রিকগনিশন ত্রুটি"
+#: src/instance_manager.py:30 src/instance_manager.py:366
+msgid "Instance"
+msgstr "ইনস্ট্যান্স"
 
-#: src/window.py:188
-msgid "An error occurred while pulling speech recognition model"
-msgstr "স্পীচ রিকগনিশন মডেল টানার সময় একটি ত্রুটি ঘটেছে"
-
-#: src/window.py:223
-msgid "An error occurred while using speech recognition"
-msgstr "স্পীচ রিকগনিশন ব্যবহার করার সময় একটি ত্রুটি ঘটেছে"
-
-#: src/window.py:246
-msgid "Download Speech Recognition Model"
-msgstr "স্পিচ রিকগনিশন মডেল ডাউনলোড করুন"
-
-#: src/window.py:247
-msgid "To use speech recognition you'll need to download a special model ({})"
-msgstr "স্পিচ রিকগনিশন ব্যবহার করতে আপনাকে একটি বিশেষ মডেল ({}) ডাউনলোড করতে হবে"
-
-#: src/window.py:249
-msgid "Download Model"
-msgstr "মডেল ডাউনলোড করুন"
-
-#: src/window.py:267
-msgid "Ollama Was Not Found"
-msgstr "ওলামা খুঁজে পাওয়া যায়নি"
-
-#: src/window.py:268
-msgid ""
-"To add a managed Ollama instance, you must have Ollama installed locally in "
-"your device, this is a simple process and should not take more than 5 "
-"minutes."
-msgstr ""
-"একটি পরিচালিত ওলামা ইনস্ট্যান্স যোগ করতে, আপনার ডিভাইসে স্থানীয়ভাবে ওলামা ইনস্টল "
-"করা থাকতে হবে, এটি একটি সহজ প্রক্রিয়া এবং ৫ মিনিটের বেশি সময় লাগা উচিত নয়।"
-
-#: src/window.py:270
-msgid "Open Tutorial in Web Browser"
-msgstr "ওয়েব ব্রাউজারে টিউটোরিয়াল খুলুন"
-
-#: src/window.py:276 src/window.py:284 src/window.ui:527 src/window.ui:537
-#: src/window.ui:559
-msgid "Add Instance"
-msgstr "ইনস্ট্যান্স যোগ করুন"
-
-#: src/window.py:285
-msgid "Select a type of instance to add"
-msgstr "যোগ করার জন্য একটি ইনস্ট্যান্সের ধরন নির্বাচন করুন"
-
-#: src/window.py:505
-msgid "No tools enabled."
-msgstr "কোনো সরঞ্জাম সক্ষম করা হয়নি।"
-
-#: src/window.py:505
-msgid "Open Tool Manager"
-msgstr "সরঞ্জাম ব্যবস্থাপক খুলুন"
-
-#: src/window.py:508
-msgid "'{}' does not support tools."
-msgstr "'{}' টুলগুলোকে সাপোর্ট করে না।"
-
-#: src/window.py:508
-msgid "Open Model Manager"
-msgstr "মডেল ম্যানেজার খুলুন"
-
-#: src/window.py:511 src/window.py:1090
-msgid "Please select a model before chatting"
-msgstr "চ্যাটিং আগে একটি মডেল নির্বাচন করুন"
-
-#: src/window.py:584 src/window.py:585 src/window.py:680 src/window.ui:355
-msgid "Close"
-msgstr "বন্ধ"
-
-#: src/window.py:587 src/window.py:588 src/window.ui:62 src/window.ui:63
-msgid "Next"
-msgstr "পরবর্তী"
-
-#: src/window.py:678 src/window.ui:1023 src/window.ui:1027
-#: src/widgets/dialog.py:150 src/widgets/dialog.py:163
-#: src/widgets/dialog.py:176 src/widgets/instance_manager.py:469
-#: src/widgets/instance_manager.py:470 src/widgets/model_manager.py:637
-#: src/widgets/blocks/code.py:136 src/widgets/blocks/text.py:111
-#: src/widgets/tools/tools.py:132
-msgid "Cancel"
-msgstr "বাতিল করুন"
-
-#: src/window.py:679
-msgid "Hide"
-msgstr "লুকান"
-
-#: src/window.py:683
-msgid "Close Alpaca?"
-msgstr "আলপাকা বন্ধ করুন?"
-
-#: src/window.py:684
-msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
-msgstr "একটি কাজ বর্তমানে চলছে। আপনি কি নিশ্চিত যে আপনি আলপাকা বন্ধ করতে চান?"
-
-#: src/window.py:924 src/window.ui:163 src/window.ui:1346
-#: src/widgets/chat.py:207 src/widgets/instance_manager.py:58
-#: src/widgets/instance_manager.py:69 src/widgets/instance_manager.py:110
+#: src/instance_manager.py:60 src/instance_manager.py:69 src/window.ui:154
+#: src/custom_widgets/chat_widget.py:424
 msgid "New Chat"
 msgstr "নতুন চ্যাট"
 
-#: src/window.py:1004
-msgid "This video does not have any transcriptions"
-msgstr "এই ভিডিওতে কোন লিপ্যন্তর নেই"
+#: src/instance_manager.py:76
+msgid "Selecting tool to use..."
+msgstr "ব্যবহারের জন্য টুল নির্বাচন করা হচ্ছে..."
 
-#: src/window.py:1012
-msgid "Attach YouTube Video?"
-msgstr "ইউটিউব ভিডিও সংযুক্ত করুন?"
+#: src/instance_manager.py:85
+msgid "Using {}"
+msgstr "{} ব্যবহার করা হচ্ছে"
 
-#: src/window.py:1013
+#: src/instance_manager.py:111
+msgid "Tool Error"
+msgstr "টুল ত্রুটি"
+
+#: src/instance_manager.py:111
+msgid "An error occurred while running tool"
+msgstr "টুল চালানোর সময় একটি ত্রুটি ঘটেছে"
+
+#: src/instance_manager.py:114
+msgid "Generating message..."
+msgstr "বার্তা তৈরি করা হচ্ছে..."
+
+#: src/instance_manager.py:162 src/instance_manager.py:462
+#: src/instance_manager.py:472 src/instance_manager.py:618
+#: src/instance_manager.py:690 src/instance_manager.py:732
+#: src/instance_manager.py:761 src/instance_manager.py:803
+#: src/instance_manager.py:823 src/instance_manager.py:844
+msgid "Instance Error"
+msgstr "ইনস্ট্যান্স ত্রুটি"
+
+#: src/instance_manager.py:162
+msgid "Message generation failed"
+msgstr "বার্তা তৈরি ব্যর্থ হয়েছে"
+
+#: src/instance_manager.py:218 src/window.ui:885
+msgid "Name"
+msgstr "নাম"
+
+#: src/instance_manager.py:226
+msgid "Port"
+msgstr "পোর্ট"
+
+#: src/instance_manager.py:227
+msgid "Which network port will '{}' use"
+msgstr "'{}' কোন নেটওয়ার্ক পোর্ট ব্যবহার করবে"
+
+#: src/instance_manager.py:241
+msgid "Instance URL"
+msgstr "ইনস্ট্যান্স URL"
+
+#: src/instance_manager.py:244 src/instance_manager.py:254
+#: src/instance_manager.py:257 src/instance_manager.py:259
+msgid "API Key (Unchanged)"
+msgstr "API কী (পরিবর্তন হয়নি)"
+
+#: src/instance_manager.py:244 src/instance_manager.py:254
+msgid "API Key (Optional)"
+msgstr "API কী (ঐচ্ছিক)"
+
+#: src/instance_manager.py:257 src/instance_manager.py:259
+msgid "API Key"
+msgstr "API কী"
+
+#: src/instance_manager.py:267
+msgid "Max Tokens"
+msgstr "সর্বোচ্চ টোকেন"
+
+#: src/instance_manager.py:268
 msgid ""
-"{}\n"
-"\n"
-"Please select a transcript to include"
+"Defines the maximum number of tokens (words + spaces) the AI can generate in "
+"a response. More tokens allow longer replies but may take more time and cost "
+"more."
 msgstr ""
-"{}\n"
-"\n"
-"অন্তর্ভুক্ত করার জন্য একটি লিপ্যন্তর নির্বাচন করুন"
+"একটি উত্তরে AI কতগুলি টোকেন (শব্দ + স্পেস) তৈরি করতে পারে তা নির্ধারণ করে। আরও "
+"টোকেন দীর্ঘ উত্তর দেয় কিন্তু আরও সময় নিতে পারে এবং আরও বেশি খরচ হতে পারে"
 
-#: src/window.py:1019
-msgid "Error attaching video, please try again"
-msgstr "ভিডিও সংযুক্ত করতে ত্রুটি, দয়া করে আবার চেষ্টা করুন"
+#: src/instance_manager.py:283
+msgid "Temperature"
+msgstr "তাপমাত্রা"
 
-#: src/window.py:1041 src/window.py:1480
-msgid "Attach Website? (Experimental)"
-msgstr "ওয়েবসাইট সংযুক্ত করুন? (পরীক্ষামূলক)"
+#: src/instance_manager.py:284
+msgid "Increasing the temperature will make the models answer more creatively."
+msgstr "তাপমাত্রা বাড়ানো মডেলগুলিকে আরও সৃজনশীলভাবে উত্তর দিতে সাহায্য করবে"
 
-#: src/window.py:1042
+#: src/instance_manager.py:299
+msgid "Seed"
+msgstr "বীজ"
+
+#: src/instance_manager.py:300
 msgid ""
-"Are you sure you want to attach\n"
-"'{}'?"
+"Setting this to a specific number other than 0 will make the model generate "
+"the same text for the same prompt."
 msgstr ""
-"আপনি কি নিশ্চিত যে আপনি সংযুক্ত করতে চান\n"
-"'{}'?"
+"0 ছাড়া অন্য একটি নির্দিষ্ট সংখ্যায় এটি সেট করলে মডেলটি একই প্রম্পটের জন্য একই টেক্সট "
+"তৈরি করবে"
 
-#: src/window.py:1061 src/window.py:1477
-msgid "Image recognition is only available on specific models"
-msgstr "নির্দিষ্ট মডেলগুলিতে ছবি সনাক্তকরণ উপলব্ধ"
+#: src/instance_manager.py:315
+msgid "Overrides"
+msgstr "ওভাররাইড"
 
-#: src/window.py:1073 src/window.ui:1266
-msgid "Quick Ask"
-msgstr "দ্রুত জিজ্ঞাসা"
+#: src/instance_manager.py:315
+msgid ""
+"These entries are optional, they are used to troubleshoot GPU related "
+"problems with Ollama."
+msgstr ""
+"এই এন্ট্রিগুলি ঐচ্ছিক, তারা Ollama এর সাথে GPU সম্পর্কিত সমস্যাগুলি সমাধান করতে "
+"ব্যবহৃত হয়"
 
-#: src/window.py:1240
-msgid "Chat imported successfully"
-msgstr "চ্যাট সফলভাবে আমদানি করা হয়েছে"
+#: src/instance_manager.py:333
+msgid "Model Directory"
+msgstr "মডেল ডিরেক্টরি"
 
-#: src/window.py:1254
-msgid "Attachment failed, screenshot might be too big"
-msgstr "সংযুক্তি ব্যর্থ, স্ক্রীনশটটি খুব বড় হতে পারে"
+#: src/instance_manager.py:335
+msgid "Select Directory"
+msgstr "ডিরেক্টরি নির্বাচন করুন"
 
-#: src/window.py:1303
-msgid "Any compatible Alpaca attachment"
-msgstr "যেকোনো সামঞ্জস্যপূর্ণ আলপাকা সংযোজন"
+#: src/instance_manager.py:346
+msgid "Default Model"
+msgstr "ডিফল্ট মডেল"
 
-#: src/window.py:1448
-msgid "Attach Screenshot"
-msgstr "স্ক্রীনশট সংযুক্ত করুন"
+#: src/instance_manager.py:346
+msgid "Model to select when starting a new chat."
+msgstr "নতুন একটি চ্যাট শুরু করার সময় বেছে নেওয়ার জন্য মডেল"
 
-#: src/window.py:1481
-msgid "Please enter a website URL"
-msgstr "দয়া করে একটি ওয়েবসাইট URL লিখুন"
+#: src/instance_manager.py:348
+msgid "Title Model"
+msgstr "শিরোনাম মডেল"
 
-#: src/window.py:1487
-msgid "Attach YouTube Captions?"
-msgstr "ইউটিউব ক্যাপশন সংযুক্ত করবেন?"
+#: src/instance_manager.py:348
+msgid "Model to use when generating a chat title."
+msgstr "একটি চ্যাট শিরোনাম তৈরি করার সময় ব্যবহার করার জন্য মডেল"
 
-#: src/window.py:1488
-msgid "Please enter a YouTube video URL"
-msgstr "দয়া করে একটি ইউটিউব ভিডিও URL লিখুন"
+#: src/instance_manager.py:412 src/instance_manager.py:413
+#: src/custom_widgets/message_widget.py:234
+msgid "Save"
+msgstr "সংরক্ষণ করুন"
 
-#: src/window.py:1496
-msgid "Download Model?"
-msgstr "মডেল ডাউনলোড করুন?"
+#: src/instance_manager.py:462 src/instance_manager.py:690
+#: src/instance_manager.py:732 src/instance_manager.py:761
+msgid "Could not retrieve added models"
+msgstr "যোগ করা মডেলগুলি পুনরুদ্ধার করা যায়নি"
 
-#: src/window.py:1497
-msgid "Please enter the model name following this template: name:tag"
-msgstr "দয়া করে এই টেমপ্লেট অনুসরণ করে মডেলের নাম প্রবেশ করুন: নাম:ট্যাগ"
+#: src/instance_manager.py:472
+msgid "Could not retrieve available models"
+msgstr "উপলব্ধ মডেলগুলি পুনরুদ্ধার করা যায়নি"
 
-#: src/window.py:1504
-msgid "Delete All Chats?"
-msgstr "সমস্ত চ্যাট মুছে ফেলুন?"
+#: src/instance_manager.py:539
+msgid "Ollama (Managed)"
+msgstr "Ollama (পরিচালিত)"
 
-#: src/window.py:1505
-msgid "Are you sure you want to delete all chats?"
-msgstr "আপনি কি নিশ্চিত যে আপনি সমস্ত চ্যাট মুছে ফেলতে চান?"
+#: src/instance_manager.py:548
+msgid "Local AI instance managed directly by Alpaca"
+msgstr "স্থানীয় AI ইনস্ট্যান্স যা সরাসরি Alpaca দ্বারা পরিচালিত"
 
-#: src/window.py:1507 src/widgets/attachments.py:211 src/widgets/chat.py:461
-msgid "Delete"
-msgstr "মুছে ফেলুন"
+#: src/instance_manager.py:572
+msgid "Alpaca Support"
+msgstr "আলপাকা সহায়তা"
 
-#: src/window.py:1534
-msgid "Already Installed!"
-msgstr "ইতিমধ্যেই ইনস্টল করা হয়েছে!"
+#: src/instance_manager.py:579
+msgid "Model request too large for system"
+msgstr "সিস্টেমের জন্য মডেল অনুরোধটি খুব বড়"
+
+#: src/instance_manager.py:582
+msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
+msgstr "AMD GPU সনাক্ত হয়েছে কিন্তু এক্সটেনশনটি অনুপস্থিত, Ollama CPU ব্যবহার করবে।"
+
+#: src/instance_manager.py:584
+msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
+msgstr "AMD GPU সনাক্ত হয়েছে কিন্তু ROCm অনুপস্থিত, Ollama CPU ব্যবহার করবে।"
+
+#: src/instance_manager.py:586
+msgid "Using AMD GPU type '{}'"
+msgstr "AMD GPU টাইপ '{}' ব্যবহার করা হচ্ছে"
+
+#: src/instance_manager.py:596
+msgid "Integrated Ollama instance is not running"
+msgstr "সমন্বিত অল্লামা উদাহরণ চলছে না"
+
+#: src/instance_manager.py:618
+msgid "Managed Ollama instance failed to start"
+msgstr "পরিচালিত Ollama ইনস্ট্যান্স শুরু করতে ব্যর্থ হয়েছে"
+
+#: src/instance_manager.py:621
+msgid "Integrated Ollama instance is running"
+msgstr "সমন্বিত Ollama ইনস্ট্যান্স চলছে"
+
+#: src/instance_manager.py:626 src/instance_manager.py:627
+msgid "Ollama Log"
+msgstr "Ollama লগ"
+
+#: src/instance_manager.py:639
+msgid "Local or remote AI instance not managed by Alpaca"
+msgstr "আলপাকা দ্বারা পরিচালিত নয় এমন স্থানীয় বা দূরবর্তী AI ইনস্ট্যান্স"
+
+#: src/instance_manager.py:803 src/instance_manager.py:823
+#: src/instance_manager.py:844
+msgid "Could not retrieve models"
+msgstr "মডেলগুলি পুনরুদ্ধার করা যায়নি"
+
+#: src/instance_manager.py:812
+msgid "Fireworks AI inference platform"
+msgstr "ফায়ারওয়ার্কস এআই ইনফারেন্স প্ল্যাটফর্ম"
+
+#: src/instance_manager.py:832
+msgid "Lambda Labs cloud inference API"
+msgstr "ল্যাম্বডা ল্যাবস ক্লাউড ইনফারেন্স এপিআই"
+
+#: src/instance_manager.py:853
+msgid "Cerebras AI cloud inference API"
+msgstr "Cerebras AI ক্লাউড ইনফারেন্স API"
+
+#: src/instance_manager.py:859
+msgid "Kluster AI cloud inference API"
+msgstr "Kluster AI ক্লাউড ইনফারেন্স API"
+
+#: src/instance_manager.py:863
+msgid "OpenAI Compatible Instance"
+msgstr "OpenAI সামঞ্জস্যপূর্ণ ইনস্ট্যান্স"
+
+#: src/instance_manager.py:864
+msgid "AI instance compatible with OpenAI library"
+msgstr "OpenAI লাইব্রেরির সাথে সামঞ্জস্যপূর্ণ এআই ইনস্ট্যান্স"
+
+#: src/instance_manager.py:886
+msgid "Remove Instance?"
+msgstr "ইনস্ট্যান্স অপসারণ করুন?"
+
+#: src/instance_manager.py:886
+msgid "Are you sure you want to remove this instance?"
+msgstr "আপনি কি নিশ্চিত যে আপনি এই ইনস্ট্যান্সটি অপসারণ করতে চান?"
+
+#: src/instance_manager.py:901
+msgid "Edit Instance"
+msgstr "ইনস্ট্যান্স এডিট করুন"
+
+#: src/tool_manager.py:71
+msgid "AI Description"
+msgstr "এআই বর্ণনা"
+
+#: src/tool_manager.py:72
+msgid "The description the AI model will use to understand what the tool does."
+msgstr "এআই মডেল সরঞ্জামটি কী করে তা বোঝার জন্য যে বর্ণনা ব্যবহার করবে।"
+
+#: src/tool_manager.py:83
+msgid "Arguments"
+msgstr "আর্গুমেন্ট"
+
+#: src/tool_manager.py:84
+msgid "Variables that are filled by the AI."
+msgstr "এআই দ্বারা পূরণ করা ভেরিয়েবল।"
+
+#: src/tool_manager.py:97
+msgid "Variables"
+msgstr "ভেরিয়েবল"
+
+#: src/tool_manager.py:98
+msgid ""
+"User filled values that the tool uses to work, the AI does not have access "
+"to these variables at all."
+msgstr ""
+"ব্যবহারকারী পূরণকৃত মান যা সরঞ্জামটি কাজ করার জন্য ব্যবহার করে, এআই এর এই "
+"ভেরিয়েবলগুলিতে কোনো অ্যাক্সেস নেই।"
+
+#: src/tool_manager.py:140 src/custom_widgets/dialog_widget.py:146
+#: src/custom_widgets/dialog_widget.py:158
+#: src/custom_widgets/dialog_widget.py:170
+msgid "Accept"
+msgstr "গ্রহণ করুন"
+
+#: src/tool_manager.py:177
+msgid "Gets the current date and/or time."
+msgstr "বর্তমান তারিখ এবং/অথবা সময় পায়।"
+
+#: src/tool_manager.py:211
+msgid "Gets a recipe by the meal's name"
+msgstr "খাবারের নাম অনুসারে একটি রেসিপি পায়"
+
+#: src/tool_manager.py:224 src/tool_manager.py:281
+msgid "YouTube Video"
+msgstr "ইউটিউব ভিডিও"
+
+#: src/tool_manager.py:227 src/tool_manager.py:284
+msgid "Source"
+msgstr "উৎস"
+
+#: src/tool_manager.py:262
+msgid "Gets a list of food recipes by a specified category"
+msgstr "একটি নির্দিষ্ট শ্রেণী দ্বারা খাদ্য রেসিপির একটি তালিকা পায়"
+
+#: src/tool_manager.py:307
+msgid "Extracts an article from Wikipedia by it's title"
+msgstr "উইকিপিডিয়া থেকে এর শিরোনাম অনুসারে একটি নিবন্ধ নিষ্কাশন করে"
+
+#: src/tool_manager.py:349
+msgid "Search for a term online using DuckDuckGo"
+msgstr "DuckDuckGo ব্যবহার করে অনলাইনে একটি শব্দ অনুসন্ধান করুন"
+
+#: src/tool_manager.py:365
+msgid "Abstract Source"
+msgstr "বিমূর্ত উৎস"
+
+#: src/tool_manager.py:384
+msgid "Official Website"
+msgstr "অফিসিয়াল ওয়েবসাইট"
+
+#: src/tool_manager.py:432
+msgid "Request to run a command using SSH to connect to the device"
+msgstr "ডিভাইসে সংযোগ করার জন্য SSH ব্যবহার করে একটি কমান্ড চালানোর অনুরোধ"
+
+#: src/tool_manager.py:435
+msgid "IP Address"
+msgstr "আইপি ঠিকানা"
+
+#: src/tool_manager.py:440
+msgid "Username"
+msgstr "ব্যবহারকারীর নাম"
+
+#: src/tool_manager.py:445
+msgid "Network Port"
+msgstr "নেটওয়ার্ক পোর্ট"
+
+#: src/tool_manager.py:462
+msgid "Model Requested to Run Command"
+msgstr "কমান্ড চালানোর জন্য মডেল অনুরোধ করা হয়েছে"
+
+#: src/tool_manager.py:463
+msgid "Command"
+msgstr "কমান্ড"
+
+#: src/tool_manager.py:465
+msgid "Explanation"
+msgstr "ব্যাখ্যা"
+
+#: src/tool_manager.py:466
+msgid "No explanation was provided"
+msgstr "কোনো ব্যাখ্যা দেওয়া হয়নি"
+
+#: src/tool_manager.py:467
+msgid "Make sure you understand what the command does before running it."
+msgstr "কমান্ড চালানোর আগে নিশ্চিত হয়ে নিন যে আপনি বুঝতে পেরেছেন এটি কী করে।"
 
 #: src/window.ui:34
 msgid "Welcome"
@@ -3613,97 +3987,77 @@ msgstr ""
 msgid "Install Ollama"
 msgstr "ওল্লামা ইনস্টল করুন"
 
-#: src/window.ui:174
+#: src/window.ui:165
 msgid "Menu"
 msgstr "মেনু"
 
-#: src/window.ui:181
-msgid "Search Chats"
-msgstr ""
-
-#: src/window.ui:190
-msgid "Chat search bar"
-msgstr ""
-
-#: src/window.ui:198 src/window.ui:200
-msgid "Search chats"
-msgstr ""
-
-#: src/window.ui:236
-msgid "No Chats Found"
-msgstr ""
-
-#: src/window.ui:237
-msgid "Oh no! It looks like there are no chats found for your search."
-msgstr ""
-
-#: src/window.ui:254
+#: src/window.ui:187
 msgid "Toggle Sidebar"
 msgstr "সাইডবার টগল করুন"
 
-#: src/window.ui:261
+#: src/window.ui:194
 msgid "Search Messages"
 msgstr "মেসেজ অনুসন্ধান করুন"
 
-#: src/window.ui:278 src/window.ui:303 src/window.ui:1370
+#: src/window.ui:211 src/window.ui:236 src/window.ui:1385
 msgid "Manage Models"
 msgstr "মডেল পরিচালনা করুন"
 
-#: src/window.ui:299
+#: src/window.ui:232
 msgid "Add Models"
 msgstr "মডেল যোগ করুন"
 
-#: src/window.ui:316
+#: src/window.ui:249
 msgid "Chat Menu"
 msgstr "চ্যাট মেনু"
 
-#: src/window.ui:329
+#: src/window.ui:262
 msgid "Message search bar"
 msgstr "মেসেজ সার্চ বার"
 
-#: src/window.ui:338 src/window.ui:340
+#: src/window.ui:271 src/window.ui:273
 msgid "Search messages"
 msgstr "মেসেজ অনুসন্ধান করুন"
 
-#: src/window.ui:356
+#: src/window.ui:289
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr ""
 "সতর্কতা: পাওয়ার সেভার মোড সক্ষম করা হয়েছে, এটি বার্তা তৈরি করতে ধীর করে দেবে"
 
-#: src/window.ui:391 src/window.ui:1468
+#: src/window.ui:336 src/window.ui:1483
 msgid "Attach File"
 msgstr "ফাইল সংযুক্ত করুন"
 
-#: src/window.ui:424 src/window.ui:1315
+#: src/window.ui:369 src/window.ui:1252
 msgid "Use Speech Recognition"
 msgstr "স্পীচ রিকগনিশন ব্যবহার করুন"
 
-#: src/window.ui:459
+#: src/window.ui:404
 msgid "Send Message"
 msgstr "বার্তা পাঠান"
 
-#: src/window.ui:478
+#: src/window.ui:423
 msgid "Stop Message"
 msgstr "বার্তা থামান"
 
-#: src/window.ui:508
+#: src/window.ui:453
 msgid "Instance Manager"
 msgstr "ইনস্ট্যান্স ম্যানেজার"
 
-#: src/window.ui:523
+#: src/window.ui:468
 msgid "No Instances Found"
 msgstr "কোনো ইনস্ট্যান্স পাওয়া যায়নি"
 
-#: src/window.ui:524
+#: src/window.ui:469
 msgid "It looks a bit empty in here. Try adding an instance get started!"
 msgstr "এখানে একটু খালি মনে হচ্ছে। শুরু করতে একটি ইনস্ট্যান্স যোগ করার চেষ্টা করুন!"
 
-#: src/window.ui:553
+#: src/window.ui:498
 msgid "Added Instances"
 msgstr "যোগ করা ইনস্ট্যান্স"
 
-#: src/window.ui:554
+#: src/window.ui:499
 msgid ""
 "Manage your AI instances, chats and messages are shared between instances "
 "when generating responses."
@@ -3711,15 +4065,15 @@ msgstr ""
 "আপনার AI ইনস্ট্যান্স পরিচালনা করুন, চ্যাট এবং বার্তাগুলি উত্তর তৈরি করার সময় "
 "ইনস্ট্যান্সগুলির মধ্যে ভাগ করা হয়"
 
-#: src/window.ui:590
+#: src/window.ui:535
 msgid "Tool Manager"
 msgstr "টুল ম্যানেজার"
 
-#: src/window.ui:601
+#: src/window.ui:546
 msgid "Available Tools"
 msgstr "উপলব্ধ টুলস"
 
-#: src/window.ui:602
+#: src/window.ui:547
 msgid ""
 "Functions that AI models might use when sending a message by selecting \"Use "
 "Tools\" in the send button context menu."
@@ -3727,39 +4081,39 @@ msgstr ""
 "এআই মডেলগুলি যে ফাংশনগুলি ব্যবহার করতে পারে যখন সেন্ড বাটনের কনটেক্সট মেনুতে \"টুলস "
 "ব্যবহার করুন\" নির্বাচন করে একটি বার্তা পাঠায়।"
 
-#: src/window.ui:621
+#: src/window.ui:566
 msgid "Model Manager"
 msgstr "মডেল ম্যানেজার"
 
-#: src/window.ui:659
+#: src/window.ui:604
 msgid "Search Model"
 msgstr "মডেল খুঁজুন"
 
-#: src/window.ui:673
+#: src/window.ui:618
 msgid "Model Manager Menu"
 msgstr "মডেল ম্যানেজার মেনু"
 
-#: src/window.ui:686
+#: src/window.ui:631
 msgid "Model search bar"
 msgstr "মডেল অনুসন্ধান বার"
 
-#: src/window.ui:698 src/window.ui:700
+#: src/window.ui:643 src/window.ui:645
 msgid "Search models"
 msgstr "মডেলগুলি খুঁজুন"
 
-#: src/window.ui:707
+#: src/window.ui:652
 msgid "Filter Models"
 msgstr "মডেল ফিল্টার করুন"
 
-#: src/window.ui:723
+#: src/window.ui:668
 msgid "Added"
 msgstr "যোগ করা হয়েছে"
 
-#: src/window.ui:733 src/window.ui:794 src/window.ui:848
+#: src/window.ui:678 src/window.ui:739 src/window.ui:793
 msgid "No Models Found"
 msgstr "কোন মডেল পাওয়া যায়নি"
 
-#: src/window.ui:734
+#: src/window.ui:679
 msgid ""
 "It looks a bit empty in here. Try downloading some models or change your AI "
 "instance to get started!"
@@ -3767,11 +4121,11 @@ msgstr ""
 "এখানে সামান্য ফাঁকা দেখাচ্ছে। শুরু করার জন্য কিছু মডেল ডাউনলোড করুন অথবা আপনার AI "
 "ইনস্ট্যান্স পরিবর্তন করুন!"
 
-#: src/window.ui:737 src/window.ui:747 src/window.ui:1366
+#: src/window.ui:682 src/window.ui:692 src/window.ui:1381
 msgid "Manage Instances"
 msgstr "ইনস্ট্যান্সগুলি পরিচালনা করুন"
 
-#: src/window.ui:795 src/window.ui:849
+#: src/window.ui:740 src/window.ui:794
 msgid ""
 "Looks like we’re fresh out of models for that search. Try tweaking your "
 "keywords, or maybe explore something new!"
@@ -3779,157 +4133,145 @@ msgstr ""
 "দেখছি, সেই অনুসন্ধানের জন্য আমাদের কাছে মডেল নেই। আপনার কীওয়ার্ডগুলি পরিবর্তন করার "
 "চেষ্টা করুন, অথবা হয়তো কিছু নতুন অনুসন্ধান করুন!"
 
-#: src/window.ui:807
+#: src/window.ui:752
 msgid "Available"
 msgstr "উপলব্ধ"
 
-#: src/window.ui:861
+#: src/window.ui:806
 msgid "Creator"
 msgstr "স্রষ্টা"
 
-#: src/window.ui:872
+#: src/window.ui:817
 msgid "Model Creator"
 msgstr "মডেল নির্মাতা"
 
-#: src/window.ui:873
+#: src/window.ui:818
 msgid "Select a method of importing a model to continue"
 msgstr "অগ্রসর হতে একটি মডেল আমদানি করার পদ্ধতি নির্বাচন করুন"
 
-#: src/window.ui:885
+#: src/window.ui:830
 msgid "GGUF File"
 msgstr "জিজিইউএফ ফাইল"
 
-#: src/window.ui:896
+#: src/window.ui:841
 msgid "Existing Model"
 msgstr "বিদ্যমান মডেল"
 
-#: src/window.ui:914
+#: src/window.ui:859
 msgid "Identity"
 msgstr "পরিচয়"
 
-#: src/window.ui:917
+#: src/window.ui:862
 msgid "Base"
 msgstr "ভিত্তি"
 
-#: src/window.ui:924
+#: src/window.ui:869
 msgid "Profile Picture"
 msgstr "প্রোফাইল ছবি"
 
-#: src/window.ui:929
+#: src/window.ui:874
 msgid "Open File"
 msgstr "ফাইল খুলুন"
 
-#: src/window.ui:940 src/widgets/instance_manager.py:278
-msgid "Name"
-msgstr "নাম"
-
-#: src/window.ui:945 src/widgets/model_manager.py:453
+#: src/window.ui:890 src/custom_widgets/model_manager_widget.py:449
 msgid "Tag"
 msgstr "ট্যাগ"
 
-#: src/window.ui:952 src/widgets/model_manager.py:470
+#: src/window.ui:897 src/custom_widgets/model_manager_widget.py:466
 msgid "Context"
 msgstr "প্রসঙ্গ"
 
-#: src/window.ui:953
+#: src/window.ui:898
 msgid ""
 "Describe the desired behavior of the model in its primary language "
 "(typically English)."
 msgstr "মডেলের কাঙ্ক্ষিত আচরণ তার প্রধান ভাষায় বর্ণনা করুন (সাধারণত ইংরেজি)।"
 
-#: src/window.ui:981
+#: src/window.ui:926
 msgid "Behavior"
 msgstr "আচরণ"
 
-#: src/window.ui:984
+#: src/window.ui:929
 msgid "Imagination"
 msgstr "কল্পনা"
 
-#: src/window.ui:985
+#: src/window.ui:930
 msgid "A higher number results in more diverse answers from the model. (top_k)"
 msgstr "উচ্চ সংখ্যা মডেল থেকে আরও বৈচিত্র্যময় উত্তর দেয়। (top_k)"
 
-#: src/window.ui:999
+#: src/window.ui:944
 msgid "Focus"
 msgstr "ফোকাস"
 
-#: src/window.ui:1000
+#: src/window.ui:945
 msgid "A higher number widens the amount of possible answers. (top_p)"
 msgstr "উচ্চ সংখ্যা সম্ভাব্য উত্তরের পরিমাণ বাড়িয়ে দেয়। (top_p)"
 
-#: src/window.ui:1033 src/window.ui:1041
+#: src/window.ui:978 src/window.ui:986
 msgid "Add Model"
 msgstr "মডেল যোগকরুন"
 
-#: src/window.ui:1075 src/window.ui:1380
+#: src/window.ui:1020 src/window.ui:1395
 msgid "Preferences"
 msgstr "পছন্দ"
 
-#: src/window.ui:1083
+#: src/window.ui:1028
 msgid "Run Alpaca In Background"
 msgstr "আলপাকা পটভূমিতে চালান"
 
-#: src/window.ui:1090
+#: src/window.ui:1035
 msgid "Show Power Saver Warning"
 msgstr "পাওয়ার সেভার সতর্কতা দেখান"
 
-#: src/window.ui:1091
+#: src/window.ui:1036
 msgid "When running a managed Ollama instance"
 msgstr "একটি পরিচালিত ওলামা ইনস্ট্যান্স চালানোর সময়"
 
-#: src/window.ui:1098
+#: src/window.ui:1043
 msgid "Zoom"
 msgstr "জুম"
 
-#: src/window.ui:1115
+#: src/window.ui:1060
 msgid "Speech Recognition Model"
 msgstr "স্পিচ রিকগনিশন মডেল"
 
-#: src/window.ui:1116
+#: src/window.ui:1061
 msgid ""
 "Models are downloaded upon first use, you can delete them from the model "
 "manager"
 msgstr ""
-"মডেলগুলি প্রথমবার ব্যবহার করার সময় ডাউনলোড করা হয়, আপনি মডেল ম্যানেজার থেকে "
-"সেগুলি মুছে ফেলতে পারেন"
+"মডেলগুলি প্রথমবার ব্যবহার করার সময় ডাউনলোড করা হয়, আপনি মডেল "
+"ম্যানেজার থেকে সেগুলি মুছে ফেলতে পারেন"
 
-#: src/window.ui:1123
+#: src/window.ui:1068
 msgid "Speech Recognition Language"
 msgstr "স্পীচ রিকগনিশন ভাষা"
 
-#: src/window.ui:1130
+#: src/window.ui:1075
 msgid "Auto Send Message After Talking"
 msgstr "কথা বলার পরে স্বয়ংক্রিয়ভাবে বার্তা পাঠান"
 
-#: src/window.ui:1141
-msgid "Default Text to Speech Voice"
-msgstr ""
+#: src/window.ui:1086
+msgid "Text to Speech Voice"
+msgstr "টেক্সট টু স্পিচ ভয়েস"
 
-#: src/window.ui:1142
+#: src/window.ui:1087
 msgid ""
 "Voices are downloaded upon first use, each weighing around 1 MB, and you can "
 "delete them from the model manager"
 msgstr ""
-"ভয়েসগুলি প্রথমবার ব্যবহার করার সময় ডাউনলোড করা হয়, প্রতিটির ওজন প্রায় ১ এমবি, এবং "
-"আপনি মডেল ম্যানেজার থেকে সেগুলি মুছে ফেলতে পারেন"
+"ভয়েসগুলি প্রথমবার ব্যবহার করার সময় ডাউনলোড করা হয়, প্রতিটির ওজন প্রায় ১ এমবি, এবং আপনি "
+"মডেল ম্যানেজার থেকে সেগুলি মুছে ফেলতে পারেন"
 
-#: src/window.ui:1149
-msgid "Dictate New Messages Automatically"
-msgstr ""
-
-#: src/window.ui:1150
-msgid "Dictate new messages once they have finished being generated"
-msgstr ""
-
-#: src/window.ui:1163
+#: src/window.ui:1100
 msgid "Delete All Chats"
 msgstr "সমস্ত চ্যাট মুছে ফেলুন"
 
-#: src/window.ui:1175
+#: src/window.ui:1112
 msgid "Notice"
 msgstr "নোটিশ"
 
-#: src/window.ui:1195
+#: src/window.ui:1132
 msgid ""
 "Hey Alpaca users! We're so excited to bring you a fresh update packed with "
 "awesome new features to explore! Get ready to experience Alpaca in a whole "
@@ -3939,11 +4281,11 @@ msgstr ""
 "আপডেট নিয়ে আসতে পেরে খুবই আনন্দিত! আলপাকাকে সম্পূর্ণ নতুন উপায়ে অনুভব করার জন্য "
 "প্রস্তুত হন!"
 
-#: src/window.ui:1202
+#: src/window.ui:1139
 msgid "Smart Tools"
 msgstr "স্মার্ট সরঞ্জাম"
 
-#: src/window.ui:1203
+#: src/window.ui:1140
 msgid ""
 "Supported AI models can use handy tools to grab information both locally and "
 "online. Head over to the brand new \"Tool Manager\" to toggle them on or off."
@@ -3951,11 +4293,11 @@ msgstr ""
 "সমর্থিত এআই মডেলগুলি স্থানীয়ভাবে এবং অনলাইনে তথ্য নেওয়ার জন্য সুবিধাজনক সরঞ্জাম "
 "ব্যবহার করতে পারে। এগুলি চালু বা বন্ধ করতে একেবারে নতুন \"সরঞ্জাম ব্যবস্থাপক\"-এ যান।"
 
-#: src/window.ui:1210
+#: src/window.ui:1147
 msgid "Talk to Models"
 msgstr "মডেলগুলোর সাথে কথা বলুন"
 
-#: src/window.ui:1211
+#: src/window.ui:1148
 msgid ""
 "You can now dictate your messages using local speech recognition. It's super "
 "convenient! You can even customize your language and other settings in the "
@@ -3965,11 +4307,11 @@ msgstr ""
 "এটি খুবই সুবিধাজনক! এমনকি আপনি পছন্দসই ডায়ালগে আপনার ভাষা এবং অন্যান্য সেটিংস "
 "কাস্টমাইজ করতে পারেন।"
 
-#: src/window.ui:1218
+#: src/window.ui:1155
 msgid "Find Models Faster"
 msgstr "আরও দ্রুত মডেল খুঁজুন"
 
-#: src/window.ui:1219
+#: src/window.ui:1156
 msgid ""
 "Browsing through your Ollama models just got easier! We've added the ability "
 "to filter models by their categories in the Model Manager. Now you can "
@@ -3979,11 +4321,11 @@ msgstr ""
 "ব্যবস্থাপকে তাদের শ্রেণী অনুসারে মডেলগুলি ফিল্টার করার ক্ষমতা যোগ করেছি। এখন আপনি "
 "দ্রুত আপনার পছন্দের মডেলটি খুঁজে নিতে পারেন।"
 
-#: src/window.ui:1226
+#: src/window.ui:1163
 msgid "Math Rendering"
 msgstr "গণিত রেন্ডারিং"
 
-#: src/window.ui:1227
+#: src/window.ui:1164
 msgid ""
 "We've improved how LaTeX equations are rendered in messages, making them "
 "look cleaner and more consistent. Your mathematical discussions will be "
@@ -3992,11 +4334,11 @@ msgstr ""
 "আমরা বার্তায় LaTeX সমীকরণগুলি রেন্ডার করার পদ্ধতি উন্নত করেছি, যা তাদের আরও "
 "পরিচ্ছন্ন এবং সামঞ্জস্যপূর্ণ দেখাচ্ছে। আপনার গাণিতিক আলোচনা আগের চেয়ে আরও স্পষ্ট হবে!"
 
-#: src/window.ui:1234
+#: src/window.ui:1171
 msgid "More Instances"
 msgstr "আরও ইনস্ট্যান্স"
 
-#: src/window.ui:1235
+#: src/window.ui:1172
 msgid ""
 "Get ready to connect Alpaca to a whole universe of AI providers! We've added "
 "support for over 5 new AI instance providers, including Anthropic, "
@@ -4006,11 +4348,11 @@ msgstr ""
 "আমরা অ্যানথ্রোপিক, ওপেনরাউটার এবং ফায়ারওয়ার্কস সহ ৫টির বেশি নতুন এআই ইনস্ট্যান্স "
 "প্রদানকারীর জন্য সমর্থন যুক্ত করেছি। সম্ভাবনা সীমাহীন!"
 
-#: src/window.ui:1242
+#: src/window.ui:1179
 msgid "Attachment Enhancement"
 msgstr "সংযুক্তি বর্ধিতকরণ"
 
-#: src/window.ui:1243
+#: src/window.ui:1180
 msgid ""
 "You can now attach and ask questions about even more file types, "
 "including .docx, .pptx, and .xlsx! Plus, when you preview an attachment, "
@@ -4022,81 +4364,109 @@ msgstr ""
 "এটিকে রিচ টেক্সট স্টাইলিং সহ দেখতে পাবেন, যা এটি পাঠানোর আগে বিষয়বস্তু বুঝতে আরও "
 "সহজ করে তুলবে।"
 
-#: src/window.ui:1264
+#: src/window.ui:1201
 msgid "Quick ask dialog"
 msgstr "দ্রুত জিজ্ঞাসা সংলাপ"
 
-#: src/window.ui:1276
+#: src/window.ui:1213
 msgid "Save Conversation to Alpaca"
 msgstr "কথোপকথন আলপাকাতে সংরক্ষণ করুন"
 
-#: src/window.ui:1350 src/widgets/chat.py:22
-msgid "New Notebook"
-msgstr ""
+#: src/window.ui:1282
+msgid "Terminal dialog"
+msgstr "টার্মিনাল ডায়ালগ"
 
-#: src/window.ui:1358
+#: src/window.ui:1285
+msgid "Terminal"
+msgstr "টার্মিনাল"
+
+#: src/window.ui:1299
+msgid "Open Environment Directory"
+msgstr "পরিবেশ ডিরেক্টরি খুলুন"
+
+#: src/window.ui:1320
+msgid "File preview dialog"
+msgstr "ফাইল পূর্বরূপ ডায়ালগ"
+
+#: src/window.ui:1331
+msgid "Open With Default App"
+msgstr "ডিফল্ট অ্যাপের সাথে খুলুন"
+
+#: src/window.ui:1339
+msgid "Remove Attachment"
+msgstr "সংযুক্তি অপসারণ করুন"
+
+#: src/window.ui:1373
 msgid "Start Quick Ask"
 msgstr "দ্রুত জিজ্ঞাসা শুরু করুন"
 
-#: src/window.ui:1362
+#: src/window.ui:1377
 msgid "Import Chat"
 msgstr "চ্যাট আমদানি করুন"
 
-#: src/window.ui:1374
+#: src/window.ui:1389
 msgid "Manage Tools"
 msgstr "সরঞ্জাম পরিচালনা করুন"
 
-#: src/window.ui:1384
+#: src/window.ui:1399
 msgid "Keyboard Shortcuts"
 msgstr "কীবোর্ড শর্টকাট"
 
-#: src/window.ui:1388
+#: src/window.ui:1403
 msgid "About Alpaca"
 msgstr "আলপাকা সম্পর্কে"
 
-#: src/window.ui:1396 src/window.ui:1430
+#: src/window.ui:1411 src/window.ui:1445
 msgid "Rename Chat"
 msgstr "চ্যাট নাম পরিবর্তন করুন"
 
-#: src/window.ui:1400 src/window.ui:1434
+#: src/window.ui:1415 src/window.ui:1449
 msgid "Duplicate Chat"
 msgstr "চ্যাট অনুলিপি করুন"
 
-#: src/window.ui:1404 src/window.ui:1438 src/widgets/chat.py:559
-msgid "Export Chat"
-msgstr "চ্যাট রপ্তানি করুন"
-
-#: src/window.ui:1410 src/window.ui:1444
+#: src/window.ui:1425 src/window.ui:1459
 msgid "Delete Chat"
 msgstr "চ্যাট ডিলিট করুন"
 
-#: src/window.ui:1418
+#: src/window.ui:1433
 msgid "Reload Added Models"
 msgstr "যোগ করা মডেলগুলি পুনরায় লোড করুন"
 
-#: src/window.ui:1422
+#: src/window.ui:1437
 msgid "Download Model From Name"
 msgstr "নামের মাধ্যমে মডেল ডাউনলোড করুন"
 
-#: src/window.ui:1452
+#: src/window.ui:1467
 msgid "Send as User"
 msgstr "ব্যবহারকারী হিসাবে পাঠান"
 
-#: src/window.ui:1456
+#: src/window.ui:1471
 msgid "Send as System"
 msgstr "সিস্টেম হিসাবে পাঠান"
 
-#: src/window.ui:1460 src/gtk/help-overlay.ui:133
+#: src/window.ui:1475 src/gtk/help-overlay.ui:133
 msgid "Use Tools"
 msgstr "সরঞ্জাম ব্যবহার করুন"
 
-#: src/window.ui:1472
+#: src/window.ui:1487
 msgid "Attach Website"
 msgstr "ওয়েবসাইট সংযুক্ত করুন"
 
-#: src/window.ui:1476
+#: src/window.ui:1491
 msgid "Attach YouTube Captions"
 msgstr "ইউটিউব ক্যাপশন সংযুক্ত করুন"
+
+#: src/alpaca_search_provider.py.in:43
+msgid "Open chat"
+msgstr "চ্যাট খুলুন"
+
+#: src/alpaca_search_provider.py.in:44
+msgid "Quick ask"
+msgstr "দ্রুত জিজ্ঞাসা"
+
+#: src/generic_actions.py:79
+msgid "An error occurred while extracting text from the website"
+msgstr "ওয়েবসাইট থেকে টেক্সট নিষ্কাশনের সময় একটি ত্রুটি ঘটেছে"
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
@@ -4210,558 +4580,318 @@ msgstr "একটি বার্তা তৈরি করতে মডেল�
 msgid "Send Message as User"
 msgstr "ব্যবহারকারী হিসাবে বার্তা পাঠান"
 
-#: src/widgets/attachments.py:124
-msgid "Remove Attachment"
-msgstr "সংযুক্তি অপসারণ করুন"
-
-#: src/widgets/attachments.py:138
-msgid "Replace Notebook Content"
-msgstr ""
-
-#: src/widgets/attachments.py:208
-msgid "Delete Attachment?"
-msgstr ""
-
-#: src/widgets/attachments.py:209 src/widgets/chat.py:459
-msgid "Are you sure you want to delete '{}'?"
-msgstr "আপনি কি নিশ্চিত যে আপনি '{}' মুছে ফেলতে চান?"
-
-#: src/widgets/attachments.py:285
-msgid "Image"
-msgstr "চিত্র"
-
-#: src/widgets/attachments.py:296 src/widgets/attachments.py:308
-msgid "Missing Image"
-msgstr "ছবি খুঁজে পাওয়া যায়নি"
-
-#: src/widgets/chat.py:88 src/widgets/instance_manager.py:96
-msgid "Notebook"
-msgstr ""
-
-#: src/widgets/chat.py:89
-msgid "Start a notebook with a message"
-msgstr ""
-
-#: src/widgets/chat.py:97 src/widgets/chat.py:248
-msgid "No Messages Found"
-msgstr ""
-
-#: src/widgets/chat.py:98 src/widgets/chat.py:249
-msgid "Uh oh! No messages found for your search."
-msgstr ""
-
-#: src/widgets/chat.py:239
+#: src/custom_widgets/chat_widget.py:93
 msgid "Try one of these prompts"
 msgstr "এই প্রম্পটগুলির মধ্যে একটি চেষ্টা করুন"
 
-#: src/widgets/chat.py:269
+#: src/custom_widgets/chat_widget.py:122
 msgid "Send prompt: '{}'"
 msgstr "প্রম্পট পাঠান: '{}'"
 
-#: src/widgets/chat.py:275
+#: src/custom_widgets/chat_widget.py:128
 msgid "Refresh Prompts"
 msgstr "প্রম্পটগুলি পুনরায় লোড করুন"
 
-#: src/widgets/chat.py:437
-msgid "Rename Chat?"
-msgstr "চ্যাট পুনর্নামকরণ করুন?"
-
-#: src/widgets/chat.py:438
-msgid "Renaming '{}'"
-msgstr "'{}' পুনর্নামকরণ করা হচ্ছে"
-
-#: src/widgets/chat.py:440
-msgid "Chat name"
-msgstr "চ্যাটের নাম"
-
-#: src/widgets/chat.py:441
-msgid "Rename"
-msgstr "পুনর্নামকরণ করুন"
-
-#: src/widgets/chat.py:458
-msgid "Delete Chat?"
-msgstr "চ্যাট মুছে ফেলুন?"
-
-#: src/widgets/chat.py:466
-msgid "Copy of {}"
-msgstr "{} এর অনুলিপি"
-
-#: src/widgets/chat.py:479
+#: src/custom_widgets/chat_widget.py:186
 msgid "Chat exported successfully"
 msgstr "চ্যাট সফলভাবে রপ্তানি করা হয়েছে"
 
-#: src/widgets/chat.py:499
+#: src/custom_widgets/chat_widget.py:206
 msgid "User"
 msgstr "ব্যবহারকারী"
 
-#: src/widgets/chat.py:503
+#: src/custom_widgets/chat_widget.py:210
+#: src/custom_widgets/message_widget.py:693
 msgid "System"
 msgstr "সিস্টেম"
 
-#: src/widgets/chat.py:551
-msgid "Importable (.db)"
-msgstr "আমদানি করা যায় (.db)"
-
-#: src/widgets/chat.py:552
-msgid "Markdown"
-msgstr "মার্কডাউন"
-
-#: src/widgets/chat.py:553
-msgid "Markdown (Obsidian Style)"
-msgstr "মার্কডাউন (অবসিডিয়ান স্টাইল)"
-
-#: src/widgets/chat.py:554
-msgid "JSON"
-msgstr "JSON"
-
-#: src/widgets/chat.py:555
-msgid "JSON (Include Metadata)"
-msgstr "JSON (মেটাডেটা অন্তর্ভুক্ত)"
-
-#: src/widgets/chat.py:560
-msgid "Select a method to export the chat"
-msgstr "চ্যাট রপ্তানি করার জন্য একটি পদ্ধতি নির্বাচন করুন"
-
-#: src/widgets/dialog.py:148 src/widgets/dialog.py:161
-#: src/widgets/dialog.py:174 src/widgets/tools/tools.py:136
-msgid "Accept"
-msgstr "গ্রহণ করুন"
-
-#: src/widgets/instance_manager.py:30 src/widgets/instance_manager.py:430
-msgid "Instance"
-msgstr "ইনস্ট্যান্স"
-
-#: src/widgets/instance_manager.py:88
-msgid "Notebook Error"
-msgstr ""
-
-#: src/widgets/instance_manager.py:89 src/widgets/instance_manager.py:159
-msgid "An error occurred while running tool"
-msgstr "টুল চালানোর সময় একটি ত্রুটি ঘটেছে"
-
-#: src/widgets/instance_manager.py:116
-msgid "Selecting tool to use..."
-msgstr "ব্যবহারের জন্য টুল নির্বাচন করা হচ্ছে..."
-
-#: src/widgets/instance_manager.py:125
-msgid "Using {}"
-msgstr "{} ব্যবহার করা হচ্ছে"
-
-#: src/widgets/instance_manager.py:158
-msgid "Tool Error"
-msgstr "টুল ত্রুটি"
-
-#: src/widgets/instance_manager.py:165
-msgid "Generating message..."
-msgstr "বার্তা তৈরি করা হচ্ছে..."
-
-#: src/widgets/instance_manager.py:219 src/widgets/instance_manager.py:528
-#: src/widgets/instance_manager.py:542 src/widgets/instance_manager.py:693
-#: src/widgets/instance_manager.py:777 src/widgets/instance_manager.py:824
-#: src/widgets/instance_manager.py:858 src/widgets/instance_manager.py:905
-#: src/widgets/instance_manager.py:930 src/widgets/instance_manager.py:956
-msgid "Instance Error"
-msgstr "ইনস্ট্যান্স ত্রুটি"
-
-#: src/widgets/instance_manager.py:220
-msgid "Message generation failed"
-msgstr "বার্তা তৈরি ব্যর্থ হয়েছে"
-
-#: src/widgets/instance_manager.py:286
-msgid "Port"
-msgstr "পোর্ট"
-
-#: src/widgets/instance_manager.py:287
-msgid "Which network port will '{}' use"
-msgstr "'{}' কোন নেটওয়ার্ক পোর্ট ব্যবহার করবে"
-
-#: src/widgets/instance_manager.py:301
-msgid "Instance URL"
-msgstr "ইনস্ট্যান্স URL"
-
-#: src/widgets/instance_manager.py:304 src/widgets/instance_manager.py:314
-#: src/widgets/instance_manager.py:317 src/widgets/instance_manager.py:319
-msgid "API Key (Unchanged)"
-msgstr "API কী (পরিবর্তন হয়নি)"
-
-#: src/widgets/instance_manager.py:304 src/widgets/instance_manager.py:314
-msgid "API Key (Optional)"
-msgstr "API কী (ঐচ্ছিক)"
-
-#: src/widgets/instance_manager.py:317 src/widgets/instance_manager.py:319
-msgid "API Key"
-msgstr "API কী"
-
-#: src/widgets/instance_manager.py:327
-msgid "Max Tokens"
-msgstr "সর্বোচ্চ টোকেন"
-
-#: src/widgets/instance_manager.py:328
-msgid ""
-"Defines the maximum number of tokens (words + spaces) the AI can generate in "
-"a response. More tokens allow longer replies but may take more time and cost "
-"more."
-msgstr ""
-"একটি উত্তরে AI কতগুলি টোকেন (শব্দ + স্পেস) তৈরি করতে পারে তা নির্ধারণ করে। আরও "
-"টোকেন দীর্ঘ উত্তর দেয় কিন্তু আরও সময় নিতে পারে এবং আরও বেশি খরচ হতে পারে"
-
-#: src/widgets/instance_manager.py:343
-msgid "Temperature"
-msgstr "তাপমাত্রা"
-
-#: src/widgets/instance_manager.py:344
-msgid "Increasing the temperature will make the models answer more creatively."
-msgstr "তাপমাত্রা বাড়ানো মডেলগুলিকে আরও সৃজনশীলভাবে উত্তর দিতে সাহায্য করবে"
-
-#: src/widgets/instance_manager.py:359
-msgid "Seed"
-msgstr "বীজ"
-
-#: src/widgets/instance_manager.py:360
-msgid ""
-"Setting this to a specific number other than 0 will make the model generate "
-"the same text for the same prompt."
-msgstr ""
-"0 ছাড়া অন্য একটি নির্দিষ্ট সংখ্যায় এটি সেট করলে মডেলটি একই প্রম্পটের জন্য একই টেক্সট "
-"তৈরি করবে"
-
-#: src/widgets/instance_manager.py:375
-msgid "Overrides"
-msgstr "ওভাররাইড"
-
-#: src/widgets/instance_manager.py:375
-msgid ""
-"These entries are optional, they are used to troubleshoot GPU related "
-"problems with Ollama."
-msgstr ""
-"এই এন্ট্রিগুলি ঐচ্ছিক, তারা Ollama এর সাথে GPU সম্পর্কিত সমস্যাগুলি সমাধান করতে "
-"ব্যবহৃত হয়"
-
-#: src/widgets/instance_manager.py:393
-msgid "Model Directory"
-msgstr "মডেল ডিরেক্টরি"
-
-#: src/widgets/instance_manager.py:395
-msgid "Select Directory"
-msgstr "ডিরেক্টরি নির্বাচন করুন"
-
-#: src/widgets/instance_manager.py:410
-msgid "Default Model"
-msgstr "ডিফল্ট মডেল"
-
-#: src/widgets/instance_manager.py:410
-msgid "Model to select when starting a new chat."
-msgstr "নতুন একটি চ্যাট শুরু করার সময় বেছে নেওয়ার জন্য মডেল"
-
-#: src/widgets/instance_manager.py:412
-msgid "Title Model"
-msgstr "শিরোনাম মডেল"
-
-#: src/widgets/instance_manager.py:412
-msgid "Model to use when generating a chat title."
-msgstr "একটি চ্যাট শিরোনাম তৈরি করার সময় ব্যবহার করার জন্য মডেল"
-
-#: src/widgets/instance_manager.py:476 src/widgets/instance_manager.py:477
-#: src/widgets/blocks/code.py:145 src/widgets/blocks/text.py:120
-msgid "Save"
-msgstr "সংরক্ষণ করুন"
-
-#: src/widgets/instance_manager.py:529 src/widgets/instance_manager.py:778
-#: src/widgets/instance_manager.py:825 src/widgets/instance_manager.py:859
-msgid "Could not retrieve added models"
-msgstr "যোগ করা মডেলগুলি পুনরুদ্ধার করা যায়নি"
-
-#: src/widgets/instance_manager.py:543
-msgid "Could not retrieve available models"
-msgstr "উপলব্ধ মডেলগুলি পুনরুদ্ধার করা যায়নি"
-
-#: src/widgets/instance_manager.py:612
-msgid "Ollama (Managed)"
-msgstr "Ollama (পরিচালিত)"
-
-#: src/widgets/instance_manager.py:621
-msgid "Local AI instance managed directly by Alpaca"
-msgstr "স্থানীয় AI ইনস্ট্যান্স যা সরাসরি Alpaca দ্বারা পরিচালিত"
-
-#: src/widgets/instance_manager.py:645
-msgid "Alpaca Support"
-msgstr "আলপাকা সহায়তা"
-
-#: src/widgets/instance_manager.py:652
-msgid "Model request too large for system"
-msgstr "সিস্টেমের জন্য মডেল অনুরোধটি খুব বড়"
-
-#: src/widgets/instance_manager.py:655
-msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
-msgstr "AMD GPU সনাক্ত হয়েছে কিন্তু এক্সটেনশনটি অনুপস্থিত, Ollama CPU ব্যবহার করবে।"
-
-#: src/widgets/instance_manager.py:657
-msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
-msgstr "AMD GPU সনাক্ত হয়েছে কিন্তু ROCm অনুপস্থিত, Ollama CPU ব্যবহার করবে।"
-
-#: src/widgets/instance_manager.py:659
-msgid "Using AMD GPU type '{}'"
-msgstr "AMD GPU টাইপ '{}' ব্যবহার করা হচ্ছে"
-
-#: src/widgets/instance_manager.py:669
-msgid "Integrated Ollama instance is not running"
-msgstr "সমন্বিত অল্লামা উদাহরণ চলছে না"
-
-#: src/widgets/instance_manager.py:694
-msgid "Managed Ollama instance failed to start"
-msgstr "পরিচালিত Ollama ইনস্ট্যান্স শুরু করতে ব্যর্থ হয়েছে"
-
-#: src/widgets/instance_manager.py:699
-msgid "Integrated Ollama instance is running"
-msgstr "সমন্বিত Ollama ইনস্ট্যান্স চলছে"
-
-#: src/widgets/instance_manager.py:704 src/widgets/instance_manager.py:707
-msgid "Ollama Log"
-msgstr "Ollama লগ"
-
-#: src/widgets/instance_manager.py:724
-msgid "Local or remote AI instance not managed by Alpaca"
-msgstr "আলপাকা দ্বারা পরিচালিত নয় এমন স্থানীয় বা দূরবর্তী AI ইনস্ট্যান্স"
-
-#: src/widgets/instance_manager.py:906 src/widgets/instance_manager.py:931
-#: src/widgets/instance_manager.py:957
-msgid "Could not retrieve models"
-msgstr "মডেলগুলি পুনরুদ্ধার করা যায়নি"
-
-#: src/widgets/instance_manager.py:917
-msgid "Fireworks AI inference platform"
-msgstr "ফায়ারওয়ার্কস এআই ইনফারেন্স প্ল্যাটফর্ম"
-
-#: src/widgets/instance_manager.py:942
-msgid "Lambda Labs cloud inference API"
-msgstr "ল্যাম্বডা ল্যাবস ক্লাউড ইনফারেন্স এপিআই"
-
-#: src/widgets/instance_manager.py:968
-msgid "Cerebras AI cloud inference API"
-msgstr "Cerebras AI ক্লাউড ইনফারেন্স API"
-
-#: src/widgets/instance_manager.py:974
-msgid "Kluster AI cloud inference API"
-msgstr "Kluster AI ক্লাউড ইনফারেন্স API"
-
-#: src/widgets/instance_manager.py:978
-msgid "OpenAI Compatible Instance"
-msgstr "OpenAI সামঞ্জস্যপূর্ণ ইনস্ট্যান্স"
-
-#: src/widgets/instance_manager.py:979
-msgid "AI instance compatible with OpenAI library"
-msgstr "OpenAI লাইব্রেরির সাথে সামঞ্জস্যপূর্ণ এআই ইনস্ট্যান্স"
-
-#: src/widgets/instance_manager.py:989
-msgid "Meta AI Llama API"
-msgstr ""
-
-#: src/widgets/instance_manager.py:1010
-msgid "Remove Instance?"
-msgstr "ইনস্ট্যান্স অপসারণ করুন?"
-
-#: src/widgets/instance_manager.py:1011
-msgid "Are you sure you want to remove this instance?"
-msgstr "আপনি কি নিশ্চিত যে আপনি এই ইনস্ট্যান্সটি অপসারণ করতে চান?"
-
-#: src/widgets/instance_manager.py:1013 src/widgets/model_manager.py:114
-#: src/widgets/model_manager.py:201 src/widgets/model_manager.py:638
-#: src/widgets/model_manager.py:695
-msgid "Remove"
-msgstr "মুছে ফেলুন"
-
-#: src/widgets/instance_manager.py:1031
-msgid "Edit Instance"
-msgstr "ইনস্ট্যান্স এডিট করুন"
-
-#: src/widgets/message.py:35
-msgid "Remove Message"
-msgstr "বার্তা অপসারণ"
-
-#: src/widgets/message.py:45
+#: src/custom_widgets/chat_widget.py:298
+msgid "Regenerate Response"
+msgstr "উত্তর পুনরুত্পাদন করুন"
+
+#: src/custom_widgets/chat_widget.py:462
+msgid "Copy of {}"
+msgstr "{} এর অনুলিপি"
+
+#: src/custom_widgets/chat_widget.py:480
+msgid "Chat imported successfully"
+msgstr "চ্যাট সফলভাবে আমদানি করা হয়েছে"
+
+#: src/custom_widgets/message_widget.py:89
+msgid "Save Message"
+msgstr "বার্তা সংরক্ষণ করুন"
+
+#: src/custom_widgets/message_widget.py:130
+#: src/custom_widgets/message_widget.py:269
+msgid "Message edited successfully"
+msgstr "বার্তা সফলভাবে সম্পাদিত হয়েছে"
+
+#: src/custom_widgets/message_widget.py:156
+msgid "Response message"
+msgstr "প্রতিক্রিয়া বার্তা"
+
+#: src/custom_widgets/message_widget.py:158
+msgid "System message"
+msgstr "সিস্টেম বার্তা"
+
+#: src/custom_widgets/message_widget.py:160
+msgid "User message"
+msgstr "ব্যবহারকারীর বার্তা"
+
+#: src/custom_widgets/message_widget.py:219
+msgid "{}Code Block"
+msgstr "{}কোড ব্লক"
+
+#: src/custom_widgets/message_widget.py:221
+msgid "Code Block"
+msgstr "কোড ব্লক"
+
+#: src/custom_widgets/message_widget.py:222
+#: src/custom_widgets/message_widget.py:531
 msgid "Copy Message"
 msgstr "বার্তা কপি করুন"
 
-#: src/widgets/message.py:55
+#: src/custom_widgets/message_widget.py:226
+msgid "Edit Code Block"
+msgstr "কোড ব্লক সম্পাদনা করুন"
+
+#: src/custom_widgets/message_widget.py:238
+#: src/custom_widgets/message_widget.py:314
+msgid "Run Script"
+msgstr "স্ক্রিপ্ট চালান"
+
+#: src/custom_widgets/message_widget.py:278
+msgid "Code copied to the clipboard"
+msgstr "ক্লিপবোর্ডে কোড কপি করা হয়েছে"
+
+#: src/custom_widgets/message_widget.py:315
+msgid ""
+"Make sure you understand what this script does before running it, Alpaca is "
+"not responsible for any damages to your device or data"
+msgstr ""
+"স্ক্রিপ্টটি চালানোর আগে আপনি এটি কী করে তা নিশ্চিত করুন, আপনার ডিভাইস বা ডেটার "
+"কোনো ক্ষতির জন্য Alpaca দায়ী নয়।"
+
+#: src/custom_widgets/message_widget.py:317
+msgid "Execute"
+msgstr "কার্যকর করুন"
+
+#: src/custom_widgets/message_widget.py:396
+#: src/custom_widgets/message_widget.py:398
+msgid "Image"
+msgstr "চিত্র"
+
+#: src/custom_widgets/message_widget.py:407
+#: src/custom_widgets/message_widget.py:419
+msgid "Missing Image"
+msgstr "ছবি খুঁজে পাওয়া যায়নি"
+
+#: src/custom_widgets/message_widget.py:421
+msgid "Missing image"
+msgstr "ছবি খুঁজে পাওয়া যায়নি"
+
+#: src/custom_widgets/message_widget.py:494
+msgid "Copy Equation"
+msgstr "সমীকরণ কপি করুন"
+
+#: src/custom_widgets/message_widget.py:501
+msgid "Equation copied to the clipboard"
+msgstr "সমীকরণ ক্লিপবোর্ডে কপি করা হয়েছে"
+
+#: src/custom_widgets/message_widget.py:521
+msgid "Remove Message"
+msgstr "বার্তা অপসারণ"
+
+#: src/custom_widgets/message_widget.py:541
 msgid "Edit Message"
 msgstr "বার্তা সম্পাদনা করুন"
 
-#: src/widgets/message.py:66
+#: src/custom_widgets/message_widget.py:552
 msgid "Regenerate Message"
 msgstr "বার্তা পুনরুত্পাদন করুন"
 
-#: src/widgets/message.py:78
+#: src/custom_widgets/message_widget.py:564
 msgid "Dictate Message"
 msgstr "বার্তা বলুন"
 
-#: src/widgets/message.py:97
+#: src/custom_widgets/message_widget.py:584
 msgid "Message copied to the clipboard"
 msgstr "ক্লিপবোর্ডে কপি করা হয়েছে"
 
-#: src/widgets/message.py:167
+#: src/custom_widgets/message_widget.py:661
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "একটি প্রতিক্রিয়া পাওয়ার সময় বার্তা পুনরায় তৈরি করা যাবে না৷"
 
-#: src/widgets/model_manager.py:107 src/widgets/model_manager.py:194
-#: src/widgets/model_manager.py:688
+#: src/custom_widgets/message_widget.py:970
+msgid "Thought"
+msgstr "চিন্তা"
+
+#: src/custom_widgets/model_manager_widget.py:109
+#: src/custom_widgets/model_manager_widget.py:195
+#: src/custom_widgets/model_manager_widget.py:671
 msgid "Remove Model"
 msgstr "মডেল মুছুন"
 
-#: src/widgets/model_manager.py:111 src/widgets/model_manager.py:198
-#: src/widgets/model_manager.py:692
+#: src/custom_widgets/model_manager_widget.py:112
+#: src/custom_widgets/model_manager_widget.py:198
+#: src/custom_widgets/model_manager_widget.py:674
 msgid "Remove Model?"
 msgstr "মডেল মুছবেন?"
 
-#: src/widgets/model_manager.py:112 src/widgets/model_manager.py:199
-#: src/widgets/model_manager.py:693
+#: src/custom_widgets/model_manager_widget.py:113
+#: src/custom_widgets/model_manager_widget.py:199
+#: src/custom_widgets/model_manager_widget.py:675
 msgid "Are you sure you want to remove '{}'?"
 msgstr "আপনি কি নিশ্চিত যে '{}' মুছতে চান?"
 
-#: src/widgets/model_manager.py:122
+#: src/custom_widgets/model_manager_widget.py:123
 msgid "Local text to speech model provided by Kokoro."
 msgstr "কোকোরো দ্বারা সরবরাহকৃত স্থানীয় টেক্সট টু স্পিচ মডেল।"
 
-#: src/widgets/model_manager.py:159 src/widgets/model_manager.py:293
+#: src/custom_widgets/model_manager_widget.py:160
+#: src/custom_widgets/model_manager_widget.py:293
 msgid "Speech to Text"
 msgstr "স্পিচ টু টেক্সট"
 
-#: src/widgets/model_manager.py:209
+#: src/custom_widgets/model_manager_widget.py:209
 msgid "Local speech to text model provided by OpenAI Whisper."
 msgstr "ওপেনএআই হুইস্পার দ্বারা সরবরাহকৃত স্থানীয় স্পিচ টু টেক্সট মডেল।"
 
-#: src/widgets/model_manager.py:238
+#: src/custom_widgets/model_manager_widget.py:239
 msgid "Downloading…"
 msgstr "ডাউনলোড হচ্ছে…"
 
-#: src/widgets/model_manager.py:248 src/widgets/model_manager.py:250
+#: src/custom_widgets/model_manager_widget.py:249
+#: src/custom_widgets/model_manager_widget.py:251
 msgid "Stop Download"
 msgstr "ডাউনলোড বন্ধ করুন"
 
-#: src/widgets/model_manager.py:256
+#: src/custom_widgets/model_manager_widget.py:256
 msgid "Stop Download?"
 msgstr "ডাউনলোড বন্ধ করুন?"
 
-#: src/widgets/model_manager.py:257
+#: src/custom_widgets/model_manager_widget.py:257
 msgid "Are you sure you want to stop pulling '{}'?"
 msgstr "আপনি কি নিশ্চিত যে আপনি '{}' পুল করা বন্ধ করতে চান?"
 
-#: src/widgets/model_manager.py:259
+#: src/custom_widgets/model_manager_widget.py:259
 msgid "Stop"
 msgstr "বন্ধ করুন"
 
-#: src/widgets/model_manager.py:341
+#: src/custom_widgets/model_manager_widget.py:338
 msgid "Model Manager Error"
 msgstr "মডেল ম্যানেজার ত্রুটি"
 
-#: src/widgets/model_manager.py:342
+#: src/custom_widgets/model_manager_widget.py:338
 msgid "An error occurred whilst pulling '{}'"
 msgstr "'{}' টানার সময় একটি ত্রুটি ঘটেছে"
 
-#: src/widgets/model_manager.py:369
+#: src/custom_widgets/model_manager_widget.py:364
 msgid "Download Completed"
 msgstr "ডাউনলোড সম্পন্ন"
 
-#: src/widgets/model_manager.py:369
+#: src/custom_widgets/model_manager_widget.py:364
 msgid "Model '{}' downloaded successfully."
 msgstr "মডেল '{}' সফলভাবে ডাউনলোড হয়েছে।"
 
-#: src/widgets/model_manager.py:431
+#: src/custom_widgets/model_manager_widget.py:427
 msgid "Change Profile Picture"
 msgstr "প্রোফাইল ছবি পরিবর্তন করুন"
 
-#: src/widgets/model_manager.py:454
+#: src/custom_widgets/model_manager_widget.py:450
 msgid "Family"
 msgstr "পরিবার"
 
-#: src/widgets/model_manager.py:455
+#: src/custom_widgets/model_manager_widget.py:451
 msgid "Parameter Size"
 msgstr "প্যারামিটার সাইজ"
 
-#: src/widgets/model_manager.py:456
+#: src/custom_widgets/model_manager_widget.py:452
 msgid "Quantization Level"
 msgstr "কোয়ান্টাইজেশন স্তর"
 
-#: src/widgets/model_manager.py:459
+#: src/custom_widgets/model_manager_widget.py:455
 msgid "Parent Model"
 msgstr "অভিভাবক মডেল"
 
-#: src/widgets/model_manager.py:462 src/widgets/model_manager.py:464
+#: src/custom_widgets/model_manager_widget.py:458
+#: src/custom_widgets/model_manager_widget.py:460
 msgid "Modified At"
 msgstr "সংশোধিত সময়"
 
-#: src/widgets/model_manager.py:472
+#: src/custom_widgets/model_manager_widget.py:468
 msgid "Description"
 msgstr "বিবরণ"
 
-#: src/widgets/model_manager.py:495
+#: src/custom_widgets/model_manager_widget.py:491
 msgid "Voice"
 msgstr "ভয়েস"
 
-#: src/widgets/model_manager.py:500
+#: src/custom_widgets/model_manager_widget.py:496
 msgid "Default"
 msgstr "ডিফল্ট"
 
-#: src/widgets/model_manager.py:639
+#: src/custom_widgets/model_manager_widget.py:638
 msgid "Change"
 msgstr "পরিবর্তন"
 
-#: src/widgets/model_manager.py:647
+#: src/custom_widgets/model_manager_widget.py:641
 msgid "Model Profile Picture"
 msgstr "মডেল প্রোফাইল ছবি"
 
-#: src/widgets/model_manager.py:648
+#: src/custom_widgets/model_manager_widget.py:641
 msgid "What do you want to do with the model's profile picture?"
 msgstr "আপনি মডেলের প্রোফাইল ছবির সাথে কী করতে চান?"
 
-#: src/widgets/model_manager.py:680
+#: src/custom_widgets/model_manager_widget.py:663
 msgid "Create Child"
 msgstr "শিশু তৈরি করুন"
 
-#: src/widgets/model_manager.py:707
+#: src/custom_widgets/model_manager_widget.py:689
 msgid "Multilingual"
 msgstr "বহুভাষিক"
 
-#: src/widgets/model_manager.py:708
+#: src/custom_widgets/model_manager_widget.py:690
 msgid "Code"
 msgstr "কোড"
 
-#: src/widgets/model_manager.py:709
+#: src/custom_widgets/model_manager_widget.py:691
 msgid "Math"
 msgstr "গণিত"
 
-#: src/widgets/model_manager.py:710
+#: src/custom_widgets/model_manager_widget.py:692
 msgid "Vision"
 msgstr "দৃষ্টি"
 
-#: src/widgets/model_manager.py:711
+#: src/custom_widgets/model_manager_widget.py:693
 msgid "Embedding"
 msgstr "এমবেডিং"
 
-#: src/widgets/model_manager.py:712
+#: src/custom_widgets/model_manager_widget.py:694
 msgid "Tools"
 msgstr "সরঞ্জাম"
 
-#: src/widgets/model_manager.py:713
+#: src/custom_widgets/model_manager_widget.py:695
 msgid "Reasoning"
 msgstr "যুক্তি"
 
-#: src/widgets/model_manager.py:714
+#: src/custom_widgets/model_manager_widget.py:696
 msgid "Small"
 msgstr "ছোট"
 
-#: src/widgets/model_manager.py:715
+#: src/custom_widgets/model_manager_widget.py:697
 msgid "Medium"
 msgstr "মাঝারি"
 
-#: src/widgets/model_manager.py:716
+#: src/custom_widgets/model_manager_widget.py:698
 msgid "Big"
 msgstr "বড়"
 
-#: src/widgets/model_manager.py:717
+#: src/custom_widgets/model_manager_widget.py:699
 msgid "Huge"
 msgstr "বিশাল"
 
-#: src/widgets/model_manager.py:807
+#: src/custom_widgets/model_manager_widget.py:788
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website"
@@ -4769,271 +4899,29 @@ msgstr ""
 "এই মডেলটি ডাউনলোড করার মাধ্যমে আপনি মডেলের ওয়েবসাইটে উপলব্ধ লাইসেন্স চুক্তি গ্রহণ "
 "করছেন।"
 
-#: src/widgets/model_manager.py:888
-msgid "Languages"
-msgstr ""
-
-#: src/widgets/terminal.py:17
+#: src/custom_widgets/terminal_widget.py:80
 msgid "Setting up Python environment..."
 msgstr "পাইথন এনভায়রনমেন্ট সেট আপ করা হচ্ছে..."
 
-#: src/widgets/terminal.py:29
-msgid "Using Python HTTP server..."
-msgstr ""
+#: src/custom_widgets/terminal_widget.py:98
+msgid "Compiling C++ script..."
+msgstr "C++ স্ক্রিপ্ট কম্পাইল হচ্ছে..."
 
-#: src/widgets/terminal.py:34
-msgid "Using Flatpak contained shell..."
-msgstr ""
+#: src/custom_widgets/terminal_widget.py:111
+msgid "Running local web server"
+msgstr "লোকাল ওয়েব সার্ভার চালু হচ্ছে"
 
-#: src/widgets/terminal.py:38
+#: src/custom_widgets/terminal_widget.py:136
+msgid "Using Flatpak contained shell"
+msgstr "ফ্ল্যাটপ্যাক অন্তর্ভুক্ত শেল ব্যবহার করা হচ্ছে"
+
+#: src/custom_widgets/terminal_widget.py:136
 msgid "Using SSH to run command"
 msgstr "কমান্ড চালানোর জন্য SSH ব্যবহার করা হচ্ছে"
 
-#: src/widgets/terminal.py:85
-msgid "Terminal"
-msgstr "টার্মিনাল"
-
-#: src/widgets/terminal.py:97
-msgid "Open Environment Directory"
-msgstr "পরিবেশ ডিরেক্টরি খুলুন"
-
-#: src/widgets/terminal.py:181
+#: src/custom_widgets/terminal_widget.py:142
 msgid "Script Exited"
 msgstr "স্ক্রিপ্ট বন্ধ হয়েছে"
-
-#: src/widgets/terminal.py:192
-msgid "Alpaca Terminal is not compatible with Windows"
-msgstr ""
-
-#: src/widgets/blocks/code.py:84
-msgid "Code Block"
-msgstr "কোড ব্লক"
-
-#: src/widgets/blocks/code.py:111
-msgid "Edit Script"
-msgstr ""
-
-#: src/widgets/blocks/code.py:119
-msgid "Copy Script"
-msgstr ""
-
-#: src/widgets/blocks/code.py:127
-msgid "Run Script"
-msgstr "স্ক্রিপ্ট চালান"
-
-#: src/widgets/blocks/code.py:193
-msgid "Changes saved successfully"
-msgstr ""
-
-#: src/widgets/blocks/code.py:199
-msgid "Code copied to the clipboard"
-msgstr "ক্লিপবোর্ডে কোড কপি করা হয়েছে"
-
-#: src/widgets/blocks/latex.py:41
-msgid "Copy Equation"
-msgstr "সমীকরণ কপি করুন"
-
-#: src/widgets/blocks/latex.py:76
-msgid "Equation copied to the clipboard"
-msgstr "সমীকরণ ক্লিপবোর্ডে কপি করা হয়েছে"
-
-#: src/widgets/blocks/__init__.py:36
-msgid "Thought"
-msgstr "চিন্তা"
-
-#: src/widgets/tools/notebook_tools.py:18
-msgid "Read Notebook"
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:19
-msgid "Reads the current notebook."
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:38
-msgid "Write Notebook"
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:39
-msgid "Overwrites the notebook with new text."
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:58
-msgid "Append to Notebook"
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:59
-msgid "Appends text to the notebook."
-msgstr ""
-
-#: src/widgets/tools/tools.py:67
-msgid "AI Description"
-msgstr "এআই বর্ণনা"
-
-#: src/widgets/tools/tools.py:68
-msgid "The description the AI model will use to understand what the tool does."
-msgstr "এআই মডেল সরঞ্জামটি কী করে তা বোঝার জন্য যে বর্ণনা ব্যবহার করবে।"
-
-#: src/widgets/tools/tools.py:79
-msgid "Arguments"
-msgstr "আর্গুমেন্ট"
-
-#: src/widgets/tools/tools.py:80
-msgid "Variables that are filled by the AI."
-msgstr "এআই দ্বারা পূরণ করা ভেরিয়েবল।"
-
-#: src/widgets/tools/tools.py:93
-msgid "Variables"
-msgstr "ভেরিয়েবল"
-
-#: src/widgets/tools/tools.py:94
-msgid ""
-"User filled values that the tool uses to work, the AI does not have access "
-"to these variables at all."
-msgstr ""
-"ব্যবহারকারী পূরণকৃত মান যা সরঞ্জামটি কাজ করার জন্য ব্যবহার করে, এআই এর এই "
-"ভেরিয়েবলগুলিতে কোনো অ্যাক্সেস নেই।"
-
-#: src/widgets/tools/tools.py:182
-msgid "Gets the current date and/or time."
-msgstr "বর্তমান তারিখ এবং/অথবা সময় পায়।"
-
-#: src/widgets/tools/tools.py:215
-msgid "Gets a recipe by the meal's name"
-msgstr "খাবারের নাম অনুসারে একটি রেসিপি পায়"
-
-#: src/widgets/tools/tools.py:230 src/widgets/tools/tools.py:297
-msgid "YouTube Video"
-msgstr "ইউটিউব ভিডিও"
-
-#: src/widgets/tools/tools.py:238 src/widgets/tools/tools.py:306
-msgid "Source"
-msgstr "উৎস"
-
-#: src/widgets/tools/tools.py:276
-msgid "Gets a list of food recipes by a specified category"
-msgstr "একটি নির্দিষ্ট শ্রেণী দ্বারা খাদ্য রেসিপির একটি তালিকা পায়"
-
-#: src/widgets/tools/tools.py:333
-msgid "Extracts an article from Wikipedia by it's title"
-msgstr "উইকিপিডিয়া থেকে এর শিরোনাম অনুসারে একটি নিবন্ধ নিষ্কাশন করে"
-
-#: src/widgets/tools/tools.py:375
-msgid "Search for a term online using DuckDuckGo"
-msgstr "DuckDuckGo ব্যবহার করে অনলাইনে একটি শব্দ অনুসন্ধান করুন"
-
-#: src/widgets/tools/tools.py:393
-msgid "Abstract Source"
-msgstr "বিমূর্ত উৎস"
-
-#: src/widgets/tools/tools.py:417
-msgid "Official Website"
-msgstr "অফিসিয়াল ওয়েবসাইট"
-
-#: src/widgets/tools/tools.py:468
-msgid "Request to run a command using SSH to connect to the device"
-msgstr "ডিভাইসে সংযোগ করার জন্য SSH ব্যবহার করে একটি কমান্ড চালানোর অনুরোধ"
-
-#: src/widgets/tools/tools.py:471
-msgid "IP Address"
-msgstr "আইপি ঠিকানা"
-
-#: src/widgets/tools/tools.py:476
-msgid "Username"
-msgstr "ব্যবহারকারীর নাম"
-
-#: src/widgets/tools/tools.py:481
-msgid "Network Port"
-msgstr "নেটওয়ার্ক পোর্ট"
-
-#: src/widgets/tools/tools.py:498
-msgid "Model Requested to Run Command"
-msgstr "কমান্ড চালানোর জন্য মডেল অনুরোধ করা হয়েছে"
-
-#: src/widgets/tools/tools.py:499
-msgid "Command"
-msgstr "কমান্ড"
-
-#: src/widgets/tools/tools.py:501
-msgid "Explanation"
-msgstr "ব্যাখ্যা"
-
-#: src/widgets/tools/tools.py:502
-msgid "No explanation was provided"
-msgstr "কোনো ব্যাখ্যা দেওয়া হয়নি"
-
-#: src/widgets/tools/tools.py:503
-msgid "Make sure you understand what the command does before running it."
-msgstr "কমান্ড চালানোর আগে নিশ্চিত হয়ে নিন যে আপনি বুঝতে পেরেছেন এটি কী করে।"
-
-#~ msgid "Cannot open image"
-#~ msgstr "ছবি খোলা যায়নি"
-
-#~ msgid "Remove Attachment?"
-#~ msgstr "সংযুক্তি মুছে ফেলুন?"
-
-#~ msgid "Are you sure you want to remove attachment?"
-#~ msgstr "আপনি কি নিশ্চিত যে আপনি সংযুক্তি মুছে ফেলতে চান?"
-
-#~ msgid "Text to Speech Voice"
-#~ msgstr "টেক্সট টু স্পিচ ভয়েস"
-
-#~ msgid "Terminal dialog"
-#~ msgstr "টার্মিনাল ডায়ালগ"
-
-#~ msgid "File preview dialog"
-#~ msgstr "ফাইল পূর্বরূপ ডায়ালগ"
-
-#~ msgid "Open With Default App"
-#~ msgstr "ডিফল্ট অ্যাপের সাথে খুলুন"
-
-#~ msgid "An error occurred while extracting text from the website"
-#~ msgstr "ওয়েবসাইট থেকে টেক্সট নিষ্কাশনের সময় একটি ত্রুটি ঘটেছে"
-
-#~ msgid "Regenerate Response"
-#~ msgstr "উত্তর পুনরুত্পাদন করুন"
-
-#~ msgid "Save Message"
-#~ msgstr "বার্তা সংরক্ষণ করুন"
-
-#~ msgid "Message edited successfully"
-#~ msgstr "বার্তা সফলভাবে সম্পাদিত হয়েছে"
-
-#~ msgid "Response message"
-#~ msgstr "প্রতিক্রিয়া বার্তা"
-
-#~ msgid "System message"
-#~ msgstr "সিস্টেম বার্তা"
-
-#~ msgid "User message"
-#~ msgstr "ব্যবহারকারীর বার্তা"
-
-#~ msgid "{}Code Block"
-#~ msgstr "{}কোড ব্লক"
-
-#~ msgid "Edit Code Block"
-#~ msgstr "কোড ব্লক সম্পাদনা করুন"
-
-#~ msgid ""
-#~ "Make sure you understand what this script does before running it, Alpaca "
-#~ "is not responsible for any damages to your device or data"
-#~ msgstr ""
-#~ "স্ক্রিপ্টটি চালানোর আগে আপনি এটি কী করে তা নিশ্চিত করুন, আপনার ডিভাইস বা ডেটার "
-#~ "কোনো ক্ষতির জন্য Alpaca দায়ী নয়।"
-
-#~ msgid "Execute"
-#~ msgstr "কার্যকর করুন"
-
-#~ msgid "Missing image"
-#~ msgstr "ছবি খুঁজে পাওয়া যায়নি"
-
-#~ msgid "Compiling C++ script..."
-#~ msgstr "C++ স্ক্রিপ্ট কম্পাইল হচ্ছে..."
-
-#~ msgid "Running local web server"
-#~ msgstr "লোকাল ওয়েব সার্ভার চালু হচ্ছে"
-
-#~ msgid "Using Flatpak contained shell"
-#~ msgstr "ফ্ল্যাটপ্যাক অন্তর্ভুক্ত শেল ব্যবহার করা হচ্ছে"
 
 #~ msgid "Speech recognition model is being downloaded ({})"
 #~ msgstr "স্পীচ রিকগনিশন মডেল ডাউনলোড করা হচ্ছে ({})"

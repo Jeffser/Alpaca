@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-02 19:38-0600\n"
+"POT-Creation-Date: 2025-06-03 14:51-0600\n"
 "PO-Revision-Date: 2025-01-09 19:51-0600\n"
 "Last-Translator: Henk Leerssen <henk@allroundwebsite.com>\n"
 "Language-Team: Dutch <henk@allroundwebsite.com>\n"
@@ -254,8 +254,7 @@ msgstr ""
 msgid "Speech recognition (message dictation)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:155
-#: src/custom_widgets/model_manager_widget.py:68
+#: data/com.jeffser.Alpaca.metainfo.xml.in:155 src/widgets/model_manager.py:66
 msgid "Text to Speech"
 msgstr ""
 
@@ -332,27 +331,27 @@ msgstr ""
 msgid "New Tools"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:180 src/tool_manager.py:431
+#: data/com.jeffser.Alpaca.metainfo.xml.in:180 src/widgets/tools/tools.py:467
 msgid "Run Command (Testing)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:181 src/tool_manager.py:348
+#: data/com.jeffser.Alpaca.metainfo.xml.in:181 src/widgets/tools/tools.py:374
 msgid "Online Search"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:182 src/tool_manager.py:306
+#: data/com.jeffser.Alpaca.metainfo.xml.in:182 src/widgets/tools/tools.py:332
 msgid "Extract Wikipedia Article"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:183 src/tool_manager.py:210
+#: data/com.jeffser.Alpaca.metainfo.xml.in:183 src/widgets/tools/tools.py:214
 msgid "Get Recipe by Name"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:184 src/tool_manager.py:261
+#: data/com.jeffser.Alpaca.metainfo.xml.in:184 src/widgets/tools/tools.py:275
 msgid "Get Recipes by Category"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:185 src/tool_manager.py:176
+#: data/com.jeffser.Alpaca.metainfo.xml.in:185 src/widgets/tools/tools.py:181
 msgid "Get Current Datetime"
 msgstr ""
 
@@ -2077,291 +2076,49 @@ msgstr "0.1.1 Stabiele versie"
 msgid "This is the first public version of Alpaca"
 msgstr "Dit is de eerste publieke versie van Alpaca"
 
-#: src/main.py:193
+#: src/alpaca_search_provider.py.in:41
+msgid "Open chat"
+msgstr "Chat openen"
+
+#: src/alpaca_search_provider.py.in:42
+msgid "Quick ask"
+msgstr "Snel vragen"
+
+#: src/constants.py:95
+msgid "Never"
+msgstr ""
+
+#: src/constants.py:96
+msgid "When Alpaca is Focused"
+msgstr ""
+
+#: src/constants.py:97
+msgid "Always"
+msgstr ""
+
+#: src/main.py:190
 msgid "Documentation"
 msgstr ""
 
-#: src/main.py:194
+#: src/main.py:191
 msgid "Become a Sponsor"
 msgstr ""
 
-#: src/main.py:195
+#: src/main.py:192
 msgid "Discussions"
 msgstr ""
 
-#: src/window.py:203 src/window.py:233
-msgid "Speech Recognition Error"
-msgstr ""
-
-#: src/window.py:203
-msgid "An error occurred while pulling speech recognition model"
-msgstr ""
-
-#: src/window.py:233
-msgid "An error occurred while using speech recognition"
-msgstr ""
-
-#: src/window.py:254
-msgid "Download Speech Recognition Model"
-msgstr ""
-
-#: src/window.py:255
-msgid "To use speech recognition you'll need to download a special model ({})"
-msgstr ""
-
-#: src/window.py:257
-msgid "Download Model"
-msgstr ""
-
-#: src/window.py:274
-msgid "Ollama Was Not Found"
-msgstr ""
-
-#: src/window.py:275
-msgid ""
-"To add a managed Ollama instance, you must have Ollama installed locally in "
-"your device, this is a simple process and should not take more than 5 "
-"minutes."
-msgstr ""
-
-#: src/window.py:277
-msgid "Open Tutorial in Web Browser"
-msgstr ""
-
-#: src/window.py:283 src/window.py:290 src/window.ui:472 src/window.ui:482
-#: src/window.ui:504
-msgid "Add Instance"
-msgstr ""
-
-#: src/window.py:291
-msgid "Select a type of instance to add"
-msgstr ""
-
-#: src/window.py:507
-msgid "No tools enabled."
-msgstr ""
-
-#: src/window.py:507
-msgid "Open Tool Manager"
-msgstr ""
-
-#: src/window.py:510
-msgid "'{}' does not support tools."
-msgstr ""
-
-#: src/window.py:510
-msgid "Open Model Manager"
-msgstr "Modelbeheer openen"
-
-#: src/window.py:513 src/window.py:1119
-msgid "Please select a model before chatting"
-msgstr "Selecteer een model voordat u gaat chatten"
-
-#: src/window.py:561 src/window.py:562 src/window.py:650 src/window.ui:288
-msgid "Close"
-msgstr "Sluit"
-
-#: src/window.py:564 src/window.py:565 src/window.ui:62 src/window.ui:63
-msgid "Next"
-msgstr "Volgende"
-
-#: src/window.py:648 src/instance_manager.py:405 src/instance_manager.py:406
-#: src/tool_manager.py:136 src/window.ui:968 src/window.ui:972
-#: src/custom_widgets/message_widget.py:80
-#: src/custom_widgets/message_widget.py:230
-#: src/custom_widgets/model_manager_widget.py:636
-#: src/custom_widgets/dialog_widget.py:148
-#: src/custom_widgets/dialog_widget.py:160
-#: src/custom_widgets/dialog_widget.py:172
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: src/window.py:649
-msgid "Hide"
-msgstr ""
-
-#: src/window.py:653
-msgid "Close Alpaca?"
-msgstr ""
-
-#: src/window.py:654
-msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
-msgstr ""
-
-#: src/window.py:898
-msgid "Cannot open image"
-msgstr "Kan afbeelding niet openen"
-
-#: src/window.py:975
-msgid "Delete Chat?"
-msgstr "Chat verwijderen?"
-
-#: src/window.py:976
-msgid "Are you sure you want to delete '{}'?"
-msgstr "Weet je zeker dat je '{}' wilt verwijderen?"
-
-#: src/window.py:978 src/window.py:1468
-msgid "Delete"
-msgstr "Verwijder"
-
-#: src/window.py:985
-msgid "Rename Chat?"
-msgstr "Chat hernoemen?"
-
-#: src/window.py:986
-msgid "Renaming '{}'"
-msgstr "Naam wijzigen van '{}'"
-
-#: src/window.py:988
-msgid "Chat name"
-msgstr "Chatnaam"
-
-#: src/window.py:989
-msgid "Rename"
-msgstr "Hernoemen"
-
-#: src/window.py:994
-msgid "Importable (.db)"
-msgstr "Importeren (.db)"
-
-#: src/window.py:995
-msgid "Markdown"
-msgstr "Markdown"
-
-#: src/window.py:996
-msgid "Markdown (Obsidian Style)"
-msgstr "Markdown (Obsidian-stijl)"
-
-#: src/window.py:997
-msgid "JSON"
-msgstr "JSON"
-
-#: src/window.py:998
-msgid "JSON (Include Metadata)"
-msgstr "JSON (inclusief metagegevens)"
-
-#: src/window.py:1001 src/window.ui:1419 src/window.ui:1453
-msgid "Export Chat"
-msgstr "Chat exporteren"
-
-#: src/window.py:1002
-msgid "Select a method to export the chat"
-msgstr "Selecteer een methode om de chat te exporteren"
-
-#: src/window.py:1018
-msgid "This video does not have any transcriptions"
-msgstr "Deze video heeft geen transcripties"
-
-#: src/window.py:1025
-msgid "Attach YouTube Video?"
-msgstr "YouTube-video bijvoegen?"
-
-#: src/window.py:1026
-msgid ""
-"{}\n"
-"\n"
-"Please select a transcript to include"
-msgstr ""
-"{}\n"
-"\n"
-"Selecteer een transcript om toe te voegen"
-
-#: src/window.py:1032
-msgid "Error attaching video, please try again"
-msgstr "Fout bij het toevoegen van video, probeer het opnieuw"
-
-#: src/window.py:1053 src/window.py:1462
-msgid "Attach Website? (Experimental)"
-msgstr "Website bijvoegen? (Experimenteel)"
-
-#: src/window.py:1054
-msgid ""
-"Are you sure you want to attach\n"
-"'{}'?"
-msgstr ""
-"Weet je zeker dat je\n"
-"'{}' wilt bijvoegen?"
-
-#: src/window.py:1072 src/window.py:1084 src/window.py:1461
-#: src/generic_actions.py:105
-msgid "Image recognition is only available on specific models"
-msgstr "Beeldherkenning is alleen beschikbaar op specifieke modellen"
-
-#: src/window.py:1103 src/window.ui:1203
-msgid "Quick Ask"
-msgstr "Snelle vraag"
-
-#: src/window.py:1231
-msgid "Attachment failed, screenshot might be too big"
-msgstr "Bijlage mislukt, schermafbeelding is mogelijk te groot"
-
-#: src/window.py:1290
-msgid "Any compatible Alpaca attachment"
-msgstr ""
-
-#: src/window.py:1437
-msgid "Attach Screenshot"
-msgstr "Screenshot bijvoegen"
-
-#: src/window.py:1462
-msgid "Please enter a website URL"
-msgstr "Voer een website-URL in"
-
-#: src/window.py:1463
-msgid "Attach YouTube Captions?"
-msgstr "YouTube bijvoegen?"
-
-#: src/window.py:1463
-msgid "Please enter a YouTube video URL"
-msgstr "Voer een YouTube video URL in"
-
-#: src/window.py:1466
-msgid "Download Model?"
-msgstr ""
-
-#: src/window.py:1466
-msgid "Please enter the model name following this template: name:tag"
-msgstr ""
-
-#: src/window.py:1468
-msgid "Delete All Chats?"
-msgstr ""
-
-#: src/window.py:1468
-msgid "Are you sure you want to delete all chats?"
-msgstr ""
-
-#: src/window.py:1479
-msgid "Remove Attachment?"
-msgstr "Bijlage verwijderen?"
-
-#: src/window.py:1479
-msgid "Are you sure you want to remove attachment?"
-msgstr "Weet je zeker dat je de bijlage wilt verwijderen?"
-
-#: src/window.py:1479 src/instance_manager.py:886
-#: src/custom_widgets/model_manager_widget.py:115
-#: src/custom_widgets/model_manager_widget.py:201
-#: src/custom_widgets/model_manager_widget.py:637
-#: src/custom_widgets/model_manager_widget.py:677
-msgid "Remove"
-msgstr "Verwijder"
-
-#: src/window.py:1494
-msgid "Already Installed!"
-msgstr ""
-
-#: src/available_models_descriptions.py:2
+#: src/ollama_models.py:33
 msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to the Llama 3.1 405B model."
 msgstr ""
 
-#: src/available_models_descriptions.py:3
+#: src/ollama_models.py:56
 msgid "QwQ is the reasoning model of the Qwen series."
 msgstr ""
 
-#: src/available_models_descriptions.py:4
+#: src/ollama_models.py:84
 msgid ""
 "Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
 "generative models in 11B and 90B sizes."
@@ -2369,11 +2126,11 @@ msgstr ""
 "Llama 3.2 Vision is een verzameling instructie-afgestemde generatieve "
 "beeldredeneringsmodellen in 11B- en 90B-formaat."
 
-#: src/available_models_descriptions.py:5
+#: src/ollama_models.py:120
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
 msgstr "Meta's Llama 3.2 gaat klein met 1B en 3B modellen."
 
-#: src/available_models_descriptions.py:6
+#: src/ollama_models.py:155
 msgid ""
 "Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and "
 "405B parameter sizes."
@@ -2381,21 +2138,21 @@ msgstr ""
 "Llama 3.1 is een nieuw, geavanceerd model van Meta dat verkrijgbaar is in de "
 "parametermaten 8B, 70B en 405B."
 
-#: src/available_models_descriptions.py:7
+#: src/ollama_models.py:182
 msgid "Meta Llama 3: The most capable openly available LLM to date"
 msgstr "Meta Llama 3: De meest capabele open LLM tot nu toe"
 
-#: src/available_models_descriptions.py:8
+#: src/ollama_models.py:205
 msgid "The 7B model released by Mistral AI, updated to version 0.3."
 msgstr "Het 7B model uitgebracht door Mistral AI, bijgewerkt tot versie 0.3."
 
-#: src/available_models_descriptions.py:9
+#: src/ollama_models.py:229
 msgid ""
 "A high-performing open embedding model with a large token context window."
 msgstr ""
 "Een goed presterend open embedding model met een groot tokencontextvenster."
 
-#: src/available_models_descriptions.py:10
+#: src/ollama_models.py:258
 msgid ""
 "Gemma is a family of lightweight, state-of-the-art open models built by "
 "Google DeepMind. Updated to version 1.1"
@@ -2403,7 +2160,7 @@ msgstr ""
 "Gemma is een familie van lichtgewicht, state-of-the-art open modellen "
 "gebouwd door Google DeepMind. Bijgewerkt naar versie 1.1"
 
-#: src/available_models_descriptions.py:11
+#: src/ollama_models.py:314
 msgid ""
 "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
 "0.5B to 110B parameters"
@@ -2411,11 +2168,11 @@ msgstr ""
 "Qwen 1.5 is een serie grote taalmodellen van Alibaba Cloud met parameters "
 "van 0.5B tot 110B."
 
-#: src/available_models_descriptions.py:12
+#: src/ollama_models.py:378
 msgid "Qwen2 is a new series of large language models from Alibaba group"
 msgstr "Qwen2 is een nieuwe serie grote taalmodellen van de Alibaba groep"
 
-#: src/available_models_descriptions.py:13
+#: src/ollama_models.py:407
 msgid ""
 "Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art "
 "open models by Microsoft."
@@ -2423,14 +2180,14 @@ msgstr ""
 "Phi-3 is een familie van lichtgewicht 3B (Mini) en 14B (Medium) state-of-the-"
 "art open modellen van Microsoft."
 
-#: src/available_models_descriptions.py:14
+#: src/ollama_models.py:439
 msgid ""
 "Llama 2 is a collection of foundation language models ranging from 7B to 70B "
 "parameters."
 msgstr ""
 "Llama 2 is een verzameling foundation taalmodellen met 7B tot 70B parameters."
 
-#: src/available_models_descriptions.py:15
+#: src/ollama_models.py:501
 msgid ""
 "Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, "
 "encompassing up to 18 trillion tokens. The model supports up to 128K tokens "
@@ -2440,7 +2197,7 @@ msgstr ""
 "dataset, die tot 18 biljoen tokens bevat. Het model ondersteunt tot 128K "
 "tokens en heeft meertalige ondersteuning."
 
-#: src/available_models_descriptions.py:16
+#: src/ollama_models.py:533
 msgid ""
 "Google Gemma 2 is a high-performing and efficient model available in three "
 "sizes: 2B, 9B, and 27B."
@@ -2448,7 +2205,7 @@ msgstr ""
 "Google Gemma 2 is een krachtig en efficiënt model dat verkrijgbaar is in "
 "drie maten: 2B, 9B en 27B."
 
-#: src/available_models_descriptions.py:17
+#: src/ollama_models.py:567
 msgid ""
 "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines "
 "a vision encoder and Vicuna for general-purpose visual and language "
@@ -2458,7 +2215,7 @@ msgstr ""
 "vision encoder en Vicuna combineert voor algemeen visueel en taalbegrip. "
 "Bijgewerkt naar versie 1.6."
 
-#: src/available_models_descriptions.py:18
+#: src/ollama_models.py:604
 msgid ""
 "A large language model that can use text prompts to generate and discuss "
 "code."
@@ -2466,7 +2223,7 @@ msgstr ""
 "Een groot taalmodel dat tekstaanwijzingen kan gebruiken om code te genereren "
 "en te bespreken."
 
-#: src/available_models_descriptions.py:19
+#: src/ollama_models.py:650
 msgid ""
 "The latest series of Code-Specific Qwen models, with significant "
 "improvements in code generation, code reasoning, and code fixing."
@@ -2474,7 +2231,7 @@ msgstr ""
 "De nieuwste serie Code-Specifieke Qwen-modellen, met aanzienlijke "
 "verbeteringen in codegeneratie, redeneren met code en code-fixing."
 
-#: src/available_models_descriptions.py:20
+#: src/ollama_models.py:674
 msgid ""
 "A state-of-the-art 12B model with 128k context length, built by Mistral AI "
 "in collaboration with NVIDIA."
@@ -2482,7 +2239,7 @@ msgstr ""
 "Een geavanceerd 12B-model met 128k contextlengte, gebouwd door Mistral AI in "
 "samenwerking met NVIDIA."
 
-#: src/available_models_descriptions.py:21
+#: src/ollama_models.py:696
 msgid ""
 "The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
 "model on 3 trillion tokens."
@@ -2490,11 +2247,11 @@ msgstr ""
 "Het TinyLlama project is een open onderneming om een compact 1.1B Llama "
 "model te trainen op 3 biljoen tokens."
 
-#: src/available_models_descriptions.py:22
+#: src/ollama_models.py:719
 msgid "State-of-the-art large embedding model from mixedbread.ai"
 msgstr "Geavanceerd groot inbeddingsmodel van mixedbread.ai"
 
-#: src/available_models_descriptions.py:23
+#: src/ollama_models.py:752
 msgid ""
 "StarCoder2 is the next generation of transparently trained open code LLMs "
 "that comes in three sizes: 3B, 7B and 15B parameters."
@@ -2502,7 +2259,7 @@ msgstr ""
 "StarCoder2 is the next generation of transparently trained open code LLMs "
 "that comes in three sizes: 3B, 7B and 15B parameters."
 
-#: src/available_models_descriptions.py:24
+#: src/ollama_models.py:778
 msgid ""
 "A set of Mixture of Experts (MoE) model with open weights by Mistral AI in "
 "8x7b and 8x22b parameter sizes."
@@ -2510,7 +2267,7 @@ msgstr ""
 "Een reeks Mixture of Experts (MoE)-modellen met open gewichten door Mistral "
 "AI in 8x7b en 8x22b parametergroottes."
 
-#: src/available_models_descriptions.py:25
+#: src/ollama_models.py:804
 msgid ""
 "Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
 "experts models that excels at coding tasks. Created by Eric Hartford."
@@ -2519,7 +2276,7 @@ msgstr ""
 "mix van expertmodellen die uitblinken in coderingstaken. Gemaakt door Eric "
 "Hartford."
 
-#: src/available_models_descriptions.py:26
+#: src/ollama_models.py:833
 msgid ""
 "CodeGemma is a collection of powerful, lightweight models that can perform a "
 "variety of coding tasks like fill-in-the-middle code completion, code "
@@ -2531,7 +2288,7 @@ msgstr ""
 "het genereren van code, het begrijpen van natuurlijke taal, wiskundig "
 "redeneren en het volgen van instructies."
 
-#: src/available_models_descriptions.py:27
+#: src/ollama_models.py:861
 msgid ""
 "An open-source Mixture-of-Experts code language model that achieves "
 "performance comparable to GPT4-Turbo in code-specific tasks."
@@ -2539,7 +2296,7 @@ msgstr ""
 "Een open-source Mixture-of-Experts codetaalmodel dat prestaties haalt die "
 "vergelijkbaar zijn met GPT4-Turbo in code specifieke taken."
 
-#: src/available_models_descriptions.py:28
+#: src/ollama_models.py:883
 msgid ""
 "Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
 "outstanding reasoning and language understanding capabilities."
@@ -2547,11 +2304,11 @@ msgstr ""
 "Phi-2: een 2.7B taalmodel van Microsoft Research dat uitstekende redeneer- "
 "en taalbegripscapaciteiten laat zien."
 
-#: src/available_models_descriptions.py:29
+#: src/ollama_models.py:910
 msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
 msgstr "Ongecensureerd Llama 2 model door George Sung en Jarrad Hope."
 
-#: src/available_models_descriptions.py:30
+#: src/ollama_models.py:945
 msgid ""
 "DeepSeek Coder is a capable coding model trained on two trillion code and "
 "natural language tokens."
@@ -2559,14 +2316,14 @@ msgstr ""
 "DeepSeek Coder is een capabel coderingsmodel dat is getraind op twee biljoen "
 "code en tokens in natuurlijke taal."
 
-#: src/available_models_descriptions.py:31
+#: src/ollama_models.py:986
 msgid ""
 "A suite of text embedding models by Snowflake, optimized for performance."
 msgstr ""
 "Een reeks tekstinbeddingsmodellen van Snowflake, geoptimaliseerd voor "
 "prestaties."
 
-#: src/available_models_descriptions.py:32
+#: src/ollama_models.py:1014
 msgid ""
 "State of the art large language model from Microsoft AI with improved "
 "performance on complex chat, multilingual, reasoning and agent use cases."
@@ -2574,7 +2331,7 @@ msgstr ""
 "Geavanceerd groot taalmodel van Microsoft AI met verbeterde prestaties op "
 "complexe chat-, meertaligheid-, redeneer- en agent-gebruikscases."
 
-#: src/available_models_descriptions.py:33
+#: src/ollama_models.py:1037
 msgid ""
 "The uncensored Dolphin model based on Mistral that excels at coding tasks. "
 "Updated to version 2.8."
@@ -2582,7 +2339,7 @@ msgstr ""
 "Het ongecensureerde Dolphin-model gebaseerd op Mistral dat uitblinkt in "
 "codeertaken. Bijgewerkt naar versie 2.8."
 
-#: src/available_models_descriptions.py:34
+#: src/ollama_models.py:1065
 msgid ""
 "Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on "
 "Llama 3 that has a variety of instruction, conversational, and coding skills."
@@ -2591,11 +2348,11 @@ msgstr ""
 "gebaseerd op Llama 3, met verschillende instructie-, conversatie- en "
 "codeervaardigheden."
 
-#: src/available_models_descriptions.py:35
+#: src/ollama_models.py:1099
 msgid "Yi 1.5 is a high-performing, bilingual language model."
 msgstr "Yi 1.5 is een goed presterend, tweetalig taalmodel."
 
-#: src/available_models_descriptions.py:36
+#: src/ollama_models.py:1122
 msgid ""
 "Command R is a Large Language Model optimized for conversational interaction "
 "and long context tasks."
@@ -2603,7 +2360,7 @@ msgstr ""
 "Command R is een groot taalmodel dat is geoptimaliseerd voor conversatie-"
 "interactie en taken met een lange context."
 
-#: src/available_models_descriptions.py:37
+#: src/ollama_models.py:1159
 msgid ""
 "A general-purpose model ranging from 3 billion parameters to 70 billion, "
 "suitable for entry-level hardware."
@@ -2611,7 +2368,7 @@ msgstr ""
 "Een model voor algemeen gebruik, variërend van 3 miljard (3B) parameters tot "
 "70 miljard (70B), geschikt voor hardware op instapniveau."
 
-#: src/available_models_descriptions.py:38
+#: src/ollama_models.py:1182
 msgid ""
 "A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
 "benchmarks."
@@ -2619,7 +2376,7 @@ msgstr ""
 "Een verfijnd LLaVA-model van Llama 3 Instruct met betere scores in "
 "verschillende benchmarks."
 
-#: src/available_models_descriptions.py:39
+#: src/ollama_models.py:1209
 msgid ""
 "Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
 "that are trained to act as helpful assistants."
@@ -2627,7 +2384,7 @@ msgstr ""
 "Zephyr is een serie verfijnde versies van de Mistral- en Mixtral-modellen "
 "die zijn getraind om te fungeren als behulpzame assistenten."
 
-#: src/available_models_descriptions.py:40
+#: src/ollama_models.py:1231
 msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
 "overtaking similarly and larger sized models."
@@ -2635,11 +2392,11 @@ msgstr ""
 "Een lichtgewicht AI-model met 3.8 miljard parameters waarvan de prestaties "
 "die van soortgelijke en grotere modellen overtreffen."
 
-#: src/available_models_descriptions.py:41
+#: src/ollama_models.py:1259
 msgid "Embedding models on very large sentence level datasets."
 msgstr "Modellen inbedden in zeer grote datasets op zinniveau."
 
-#: src/available_models_descriptions.py:42
+#: src/ollama_models.py:1282
 msgid ""
 "Codestral is Mistral AI’s first-ever code model designed for code generation "
 "tasks."
@@ -2647,13 +2404,13 @@ msgstr ""
 "Codestral is Mistral AI's allereerste coderingsmodel dat is ontworpen voor "
 "het genereren van code."
 
-#: src/available_models_descriptions.py:43
+#: src/ollama_models.py:1319
 msgid ""
 "StarCoder is a code generation model trained on 80+ programming languages."
 msgstr ""
 "StarCoder is een codegeneratiemodel dat is getraind op 80+ programmeertalen."
 
-#: src/available_models_descriptions.py:44
+#: src/ollama_models.py:1351
 msgid ""
 "General use chat model based on Llama and Llama 2 with 2K to 16K context "
 "sizes."
@@ -2661,11 +2418,11 @@ msgstr ""
 "Algemeen chatmodel gebaseerd op Llama en Llama 2 met 2K tot 16K "
 "contextgrootte."
 
-#: src/available_models_descriptions.py:45
+#: src/ollama_models.py:1388
 msgid "A family of open foundation models by IBM for Code Intelligence"
 msgstr "Een familie open modellen van IBM voor Code Intelligence"
 
-#: src/available_models_descriptions.py:46
+#: src/ollama_models.py:1410
 msgid ""
 "Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
 "Mistral 7B model using the OpenOrca dataset."
@@ -2673,7 +2430,7 @@ msgstr ""
 "Mistral OpenOrca is een model met 7 miljard parameters, verfijnd bovenop het "
 "Mistral 7B-model met behulp van de OpenOrca-dataset."
 
-#: src/available_models_descriptions.py:47
+#: src/ollama_models.py:1442
 msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
@@ -2681,7 +2438,7 @@ msgstr ""
 "🪐 Een familie van kleine modellen met 135M, 360M en 1.7B parameters, "
 "getraind op een nieuwe dataset van hoge kwaliteit."
 
-#: src/available_models_descriptions.py:48
+#: src/ollama_models.py:1474
 msgid ""
 "Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
 "Llama 2 uncensored by Eric Hartford."
@@ -2689,12 +2446,12 @@ msgstr ""
 "Wizard Vicuna Uncensored is een 7B, 13B en 30B parametermodel gebaseerd op "
 "Llama 2 ongecensureerd van Eric Hartford."
 
-#: src/available_models_descriptions.py:49
+#: src/ollama_models.py:1503
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
 msgstr ""
 "Op Llama 2 gebaseerd model, verfijnd om de Chinese dialoog te verbeteren."
 
-#: src/available_models_descriptions.py:50
+#: src/ollama_models.py:1526
 msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
@@ -2702,7 +2459,7 @@ msgstr ""
 "BGE-M3 is een nieuw model van BAAI dat zich onderscheidt door zijn "
 "veelzijdigheid in multifunctionaliteit, meertaligheid en multigranulariteit."
 
-#: src/available_models_descriptions.py:51
+#: src/ollama_models.py:1551
 msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
@@ -2710,7 +2467,7 @@ msgstr ""
 "Een veelzijdig model voor AI-softwareontwikkelingsscenario's, inclusief code "
 "voltooiing."
 
-#: src/available_models_descriptions.py:52
+#: src/ollama_models.py:1574
 msgid ""
 "A family of open-source models trained on a wide variety of data, surpassing "
 "ChatGPT on various benchmarks. Updated to version 3.5-0106."
@@ -2719,7 +2476,7 @@ msgstr ""
 "aan gegevens, die ChatGPT overtreft op verschillende benchmarks. Bijgewerkt "
 "naar versie 3.5-0106."
 
-#: src/available_models_descriptions.py:53
+#: src/ollama_models.py:1602
 msgid ""
 "Aya 23, released by Cohere, is a new family of state-of-the-art, "
 "multilingual models that support 23 languages."
@@ -2727,7 +2484,7 @@ msgstr ""
 "Aya 23, uitgebracht door Cohere, is een nieuwe familie van geavanceerde, "
 "meertalige modellen die 23 talen ondersteunen."
 
-#: src/available_models_descriptions.py:54
+#: src/ollama_models.py:1625
 msgid ""
 "CodeQwen1.5 is a large language model pretrained on a large amount of code "
 "data."
@@ -2735,7 +2492,7 @@ msgstr ""
 "CodeQwen1.5 is een groot taalmodel voorgetraind op een grote hoeveelheid "
 "codedata."
 
-#: src/available_models_descriptions.py:55
+#: src/ollama_models.py:1653
 msgid ""
 "The powerful family of models by Nous Research that excels at scientific "
 "discussion and coding tasks."
@@ -2743,7 +2500,7 @@ msgstr ""
 "De krachtige modellenfamilie van Nous Research die uitblinkt in "
 "wetenschappelijke discussies en coderingstaken."
 
-#: src/available_models_descriptions.py:56
+#: src/ollama_models.py:1675
 msgid ""
 "Command R+ is a powerful, scalable large language model purpose-built to "
 "excel at real-world enterprise use cases."
@@ -2751,11 +2508,11 @@ msgstr ""
 "Command R+ is een krachtig, schaalbaar groot taalmodel dat speciaal is "
 "gemaakt om uit te blinken in echte zakelijke gebruikssituaties."
 
-#: src/available_models_descriptions.py:57
+#: src/ollama_models.py:1698
 msgid "State-of-the-art code generation model"
 msgstr "Geavanceerd model voor het genereren van code"
 
-#: src/available_models_descriptions.py:58
+#: src/ollama_models.py:1722
 msgid ""
 "Stable Code 3B is a coding model with instruct and code completion variants "
 "on par with models such as Code Llama 7B that are 2.5x larger."
@@ -2764,7 +2521,7 @@ msgstr ""
 "codeaanvullingsvarianten die niet onderdoen voor modellen zoals Code Llama "
 "7B, die 2.5x zo groot zijn."
 
-#: src/available_models_descriptions.py:59
+#: src/ollama_models.py:1744
 msgid ""
 "An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
 "by Eric Hartford and based on TinyLlama."
@@ -2772,7 +2529,7 @@ msgstr ""
 "Een experimenteel 1.1B parametermodel getraind op de nieuwe Dolphin 2.8 "
 "dataset door Eric Hartford en gebaseerd op TinyLlama."
 
-#: src/available_models_descriptions.py:60
+#: src/ollama_models.py:1771
 msgid ""
 "OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
 "open datasets."
@@ -2780,7 +2537,7 @@ msgstr ""
 "OpenHermes 2.5 is een 7B model verfijnd door Teknium op Mistral met volledig "
 "open datasets."
 
-#: src/available_models_descriptions.py:61
+#: src/ollama_models.py:1795
 msgid ""
 "Mistral Large 2 is Mistral's new flagship model that is significantly more "
 "capable in code generation, mathematics, and reasoning with 128k context "
@@ -2790,7 +2547,7 @@ msgstr ""
 "staat is om code te genereren, te rekenen en te redeneren, met 128k "
 "contextvenster en ondersteuning voor tientallen talen."
 
-#: src/available_models_descriptions.py:62
+#: src/ollama_models.py:1828
 msgid ""
 "Qwen2 Math is a series of specialized math language models built upon the "
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
@@ -2800,7 +2557,7 @@ msgstr ""
 "de Qwen2 LLM's, die de wiskundige mogelijkheden van open-source modellen en "
 "zelfs closed-source modellen (bijv. GPT4o) aanzienlijk overtreft."
 
-#: src/available_models_descriptions.py:63
+#: src/ollama_models.py:1852
 msgid ""
 "A strong multi-lingual general language model with competitive performance "
 "to Llama 3."
@@ -2808,7 +2565,7 @@ msgstr ""
 "Een sterk meertalig algemeen taalmodel met vergelijkbare prestaties als "
 "Llama 3."
 
-#: src/available_models_descriptions.py:64
+#: src/ollama_models.py:1886
 msgid ""
 "Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model "
 "trained on multilingual data in English, Spanish, German, Italian, French, "
@@ -2818,7 +2575,7 @@ msgstr ""
 "getraind op meertalige data in Engels, Spaans, Duits, Italiaans, Frans, "
 "Portugees en Nederlands."
 
-#: src/available_models_descriptions.py:65
+#: src/ollama_models.py:1909
 msgid ""
 "BakLLaVA is a multimodal model consisting of the Mistral 7B base model "
 "augmented with the LLaVA architecture."
@@ -2826,7 +2583,7 @@ msgstr ""
 "BakLLaVA is een multimodaal model dat bestaat uit het Mistral 7B-basismodel "
 "aangevuld met de LLaVA-architectuur."
 
-#: src/available_models_descriptions.py:66
+#: src/ollama_models.py:1930
 msgid ""
 "A high-performing model trained with a new technique called Reflection-"
 "tuning that teaches a LLM to detect mistakes in its reasoning and correct "
@@ -2836,22 +2593,22 @@ msgstr ""
 "Reflection-tuning waarmee een LLM fouten in zijn redenering leert ontdekken "
 "en corrigeren."
 
-#: src/available_models_descriptions.py:67
+#: src/ollama_models.py:1961
 msgid "An advanced language model crafted with 2 trillion bilingual tokens."
 msgstr "Een geavanceerd taalmodel gemaakt met 2 biljoen tweetalige tokens."
 
-#: src/available_models_descriptions.py:68
+#: src/ollama_models.py:1988
 msgid ""
 "This model extends LLama-3 8B's context length from 8k to over 1m tokens."
 msgstr ""
 "Dit model breidt de contextlengte van LLama-3 8B uit van 8k tot meer dan 1m "
 "tokens."
 
-#: src/available_models_descriptions.py:69
+#: src/ollama_models.py:2021
 msgid "Model focused on math and logic problems"
 msgstr "Model gericht op wiskundige en logische problemen"
 
-#: src/available_models_descriptions.py:70
+#: src/ollama_models.py:2044
 msgid ""
 "moondream2 is a small vision language model designed to run efficiently on "
 "edge devices."
@@ -2859,7 +2616,7 @@ msgstr ""
 "Moondream2 is een klein vision-taalmodel dat is ontworpen om efficiënt te "
 "draaien op randapparaten."
 
-#: src/available_models_descriptions.py:71
+#: src/ollama_models.py:2066
 msgid ""
 "A fine-tuned model based on Mistral with good coverage of domain and "
 "language."
@@ -2867,7 +2624,7 @@ msgstr ""
 "Een verfijnd model gebaseerd op Mistral met een goede dekking van domein en "
 "taal."
 
-#: src/available_models_descriptions.py:72
+#: src/ollama_models.py:2093
 msgid ""
 "A model from NVIDIA based on Llama 3 that excels at conversational question "
 "answering (QA) and retrieval-augmented generation (RAG)."
@@ -2875,7 +2632,7 @@ msgstr ""
 "Een model van NVIDIA gebaseerd op Llama 3 dat uitblinkt in conversatie vraag "
 "beantwoorden (QA) en retrieval-augmented generation (RAG)."
 
-#: src/available_models_descriptions.py:73
+#: src/ollama_models.py:2120
 msgid ""
 "Conversational model based on Llama 2 that performs competitively on various "
 "benchmarks."
@@ -2883,7 +2640,7 @@ msgstr ""
 "Gespreksmodel gebaseerd op Llama 2 dat competitief presteert op "
 "verschillende benchmarks."
 
-#: src/available_models_descriptions.py:74
+#: src/ollama_models.py:2148
 msgid ""
 "SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
 "generation tasks"
@@ -2891,22 +2648,22 @@ msgstr ""
 "SQLCoder is een model voor het aanvullen van code dat is afgestemd op "
 "StarCoder voor SQL-generatietaken."
 
-#: src/available_models_descriptions.py:75
+#: src/ollama_models.py:2175
 msgid "General use models based on Llama and Llama 2 from Nous Research."
 msgstr ""
 "Modellen voor algemeen gebruik gebaseerd op Llama en Llama 2 van Nous "
 "Research."
 
-#: src/available_models_descriptions.py:76
+#: src/ollama_models.py:2198
 msgid "Code generation model based on Code Llama."
 msgstr "Codegeneratiemodel gebaseerd op Code Llama."
 
-#: src/available_models_descriptions.py:77
+#: src/ollama_models.py:2225
 msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
 msgstr ""
 "Een uitbreiding van Llama 2 die een context tot 128k tokens ondersteunt."
 
-#: src/available_models_descriptions.py:78
+#: src/ollama_models.py:2253
 msgid ""
 "A 7B and 15B uncensored variant of the Dolphin model family that excels at "
 "coding, based on StarCoder2."
@@ -2914,15 +2671,15 @@ msgstr ""
 "Een 7B en 15B ongecensureerde variant van de Dolphin modelfamilie die "
 "uitblinkt in codering, gebaseerd op StarCoder2."
 
-#: src/available_models_descriptions.py:79
+#: src/ollama_models.py:2280
 msgid "General use model based on Llama 2."
 msgstr "Algemeen gebruiksmodel gebaseerd op Llama 2."
 
-#: src/available_models_descriptions.py:80
+#: src/ollama_models.py:2309
 msgid "A strong, economical, and efficient Mixture-of-Experts language model."
 msgstr "Een sterk, zuinig en efficiënt Mixture-of-Experts taalmodel."
 
-#: src/available_models_descriptions.py:81
+#: src/ollama_models.py:2331
 msgid ""
 "Starling is a large language model trained by reinforcement learning from AI "
 "feedback focused on improving chatbot helpfulness."
@@ -2931,7 +2688,7 @@ msgstr ""
 "AI-feedback en is gericht op het verbeteren van de behulpzaamheid van "
 "chatbotten."
 
-#: src/available_models_descriptions.py:82
+#: src/ollama_models.py:2353
 msgid ""
 "A companion assistant trained in philosophy, psychology, and personal "
 "relationships. Based on Mistral."
@@ -2939,14 +2696,14 @@ msgstr ""
 "Een gezelschapsassistent opgeleid in filosofie, psychologie en persoonlijke "
 "relaties. Gebaseerd op Mistral."
 
-#: src/available_models_descriptions.py:83
+#: src/ollama_models.py:2391
 msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
 msgstr ""
 "Hermes 3 is de nieuwste versie van de Hermes-serie LLM's van Nous Research."
 
-#: src/available_models_descriptions.py:84
+#: src/ollama_models.py:2419
 msgid ""
 "Yi-Coder is a series of open-source code language models that delivers state-"
 "of-the-art coding performance with fewer than 10 billion parameters."
@@ -2954,7 +2711,7 @@ msgstr ""
 "Yi-Coder is een serie open-source codetaalmodellen die state-of-the-art "
 "codeerprestaties levert met minder dan 10 miljard parameters."
 
-#: src/available_models_descriptions.py:85
+#: src/ollama_models.py:2450
 msgid ""
 "A large language model built by the Technology Innovation Institute (TII) "
 "for use in summarization, text generation, and chat bots."
@@ -2962,7 +2719,7 @@ msgstr ""
 "Een groot taalmodel gebouwd door het Technology Innovation Institute (TII) "
 "voor gebruik in samenvattingen, tekstgeneratie en chatbots."
 
-#: src/available_models_descriptions.py:86
+#: src/ollama_models.py:2487
 msgid ""
 "InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
 "outstanding reasoning capability."
@@ -2970,7 +2727,7 @@ msgstr ""
 "InternLM2.5 is een 7B-parametermodel op maat van praktische scenario's met "
 "uitstekende redeneermogelijkheden."
 
-#: src/available_models_descriptions.py:87
+#: src/ollama_models.py:2509
 msgid ""
 "A compact, yet powerful 10.7B large language model designed for single-turn "
 "conversation."
@@ -2978,7 +2735,7 @@ msgstr ""
 "Een compact, maar krachtig 10,7B groot taalmodel ontworpen voor éénmalige "
 "conversatie."
 
-#: src/available_models_descriptions.py:88
+#: src/ollama_models.py:2533
 msgid ""
 "Athene-V2 is a 72B parameter model which excels at code completion, "
 "mathematics, and log extraction tasks."
@@ -2986,11 +2743,11 @@ msgstr ""
 "Athene-V2 is een 72B parametermodel dat uitblinkt in codeaanvulling, "
 "wiskunde en logboekextractietaken."
 
-#: src/available_models_descriptions.py:89
+#: src/ollama_models.py:2556
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
 msgstr "Een nieuw klein LLaVA-model verfijnd op basis van Phi 3 Mini."
 
-#: src/available_models_descriptions.py:90
+#: src/ollama_models.py:2584
 msgid ""
 "Orca 2 is built by Microsoft research, and are a fine-tuned version of "
 "Meta's Llama 2 models. The model is designed to excel particularly in "
@@ -3000,13 +2757,13 @@ msgstr ""
 "Meta's Llama 2 modellen. Het model is ontworpen om vooral uit te blinken in "
 "redeneren."
 
-#: src/available_models_descriptions.py:91
+#: src/ollama_models.py:2615
 msgid ""
 "A series of multimodal LLMs (MLLMs) designed for vision-language "
 "understanding."
 msgstr "Een serie multimodale LLM's (MLLM's) ontworpen voor vision-taalbegrip."
 
-#: src/available_models_descriptions.py:92
+#: src/ollama_models.py:2647
 msgid ""
 "Llama 2 based model fine tuned on an Orca-style dataset. Originally called "
 "Free Willy."
@@ -3014,13 +2771,13 @@ msgstr ""
 "Op Llama 2 gebaseerd model verfijnd op een dataset in Orka-stijl. "
 "Oorspronkelijk heette het Free Willy."
 
-#: src/available_models_descriptions.py:93
+#: src/ollama_models.py:2676
 msgid ""
 "Mistral Small 3 sets a new benchmark in the “small” Large Language Models "
 "category below 70B."
 msgstr ""
 
-#: src/available_models_descriptions.py:94
+#: src/ollama_models.py:2698
 msgid ""
 "2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
 "model by Microsoft Research."
@@ -3028,7 +2785,7 @@ msgstr ""
 "2.7B ongecensureerd Dolphin-model door Eric Hartford, gebaseerd op het Phi-"
 "taalmodel van Microsoft Research."
 
-#: src/available_models_descriptions.py:95
+#: src/ollama_models.py:2731
 msgid ""
 "SmolLM2 is a family of compact language models available in three size: "
 "135M, 360M, and 1.7B parameters."
@@ -3036,11 +2793,11 @@ msgstr ""
 "SmolLM2 is een familie van compacte taalmodellen die verkrijgbaar zijn in "
 "drie formaten: 135M, 360M en 1.7B parameters."
 
-#: src/available_models_descriptions.py:96
+#: src/ollama_models.py:2753
 msgid "Uncensored version of Wizard LM model"
 msgstr "Ongecensureerde versie van Wizard LM-model"
 
-#: src/available_models_descriptions.py:97
+#: src/ollama_models.py:2776
 msgid ""
 "A commercial-friendly small language model by NVIDIA optimized for roleplay, "
 "RAG QA, and function calling."
@@ -3048,13 +2805,13 @@ msgstr ""
 "Een commercieel vriendelijk klein taalmodel van NVIDIA, geoptimaliseerd voor "
 "rollenspel, RAG QA en het aanroepen van functies."
 
-#: src/available_models_descriptions.py:98
+#: src/ollama_models.py:2798
 msgid "An extension of Mistral to support context windows of 64K or 128K."
 msgstr ""
 "Een uitbreiding van Mistral om contextvensters van 64K of 128K te "
 "ondersteunen."
 
-#: src/available_models_descriptions.py:99
+#: src/ollama_models.py:2826
 msgid ""
 "An expansion of Llama 2 that specializes in integrating both general "
 "language understanding and domain-specific knowledge, particularly in "
@@ -3064,7 +2821,7 @@ msgstr ""
 "zowel algemeen taalbegrip als domeinspecifieke kennis, met name op het "
 "gebied van programmeren en wiskunde."
 
-#: src/available_models_descriptions.py:100
+#: src/ollama_models.py:2848
 msgid ""
 "Fine-tuned Llama 2 model to answer medical questions based on an open source "
 "medical dataset."
@@ -3072,7 +2829,7 @@ msgstr ""
 "Verfijnd Llama 2-model om medische vragen te beantwoorden op basis van een "
 "open source medische dataset."
 
-#: src/available_models_descriptions.py:101
+#: src/ollama_models.py:2875
 msgid ""
 "Open-source medical large language model adapted from Llama 2 to the medical "
 "domain."
@@ -3080,7 +2837,7 @@ msgstr ""
 "Open-source medisch groot taalmodel aangepast van Llama 2 naar het medische "
 "domein."
 
-#: src/available_models_descriptions.py:102
+#: src/ollama_models.py:2903
 msgid ""
 "A series of models from Groq that represent a significant advancement in "
 "open-source AI capabilities for tool use/function calling."
@@ -3089,7 +2846,7 @@ msgstr ""
 "open-source AI-mogelijkheden voor het gebruik van hulpmiddelen/functie-"
 "oproep."
 
-#: src/available_models_descriptions.py:103
+#: src/ollama_models.py:2925
 msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
@@ -3098,27 +2855,27 @@ msgstr ""
 "NVIDIA om de bruikbaarheid van LLM gegenereerde antwoorden op "
 "gebruikersvragen te verbeteren."
 
-#: src/available_models_descriptions.py:104
+#: src/ollama_models.py:2947
 msgid ""
 "Nexus Raven is a 13B instruction tuned model for function calling tasks."
 msgstr ""
 "Nexus Raven is een op 13B instructies afgestemd model voor functietaken."
 
-#: src/available_models_descriptions.py:105
+#: src/ollama_models.py:2968
 msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
 msgstr "Het Nous Hermes 2 model van Nous Research, nu getraind over Mixtral."
 
-#: src/available_models_descriptions.py:106
+#: src/ollama_models.py:2991
 msgid "Great code generation model based on Llama2."
 msgstr "Geweldig codegeneratiemodel gebaseerd op Llama2."
 
-#: src/available_models_descriptions.py:107
+#: src/ollama_models.py:3013
 msgid "Uncensored Llama2 based model with support for a 16K context window."
 msgstr ""
 "Ongecensureerd Llama2 gebaseerd model met ondersteuning voor een 16K "
 "contextvenster."
 
-#: src/available_models_descriptions.py:108
+#: src/ollama_models.py:3054
 msgid ""
 "The IBM Granite 2B and 8B models are designed to support tool-based use "
 "cases and support for retrieval augmented generation (RAG), streamlining "
@@ -3128,7 +2885,7 @@ msgstr ""
 "based use cases en ondersteuning voor retrieval augmented generation (RAG), "
 "het stroomlijnen van codegeneratie, vertaling en bug fixing."
 
-#: src/available_models_descriptions.py:109
+#: src/ollama_models.py:3077
 msgid ""
 "🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic "
 "instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
@@ -3138,7 +2895,7 @@ msgstr ""
 "synthetische instructiedata met behulp van OSS-Instruct, een nieuwe "
 "benadering om LLM's te verlichten met open-source codefragmenten."
 
-#: src/available_models_descriptions.py:110
+#: src/ollama_models.py:3099
 msgid ""
 "A lightweight chat model allowing accurate, and responsive output without "
 "requiring high-end hardware."
@@ -3146,7 +2903,7 @@ msgstr ""
 "Een lichtgewicht chatmodel dat nauwkeurige en responsieve uitvoer mogelijk "
 "maakt zonder dat er high-end hardware nodig is."
 
-#: src/available_models_descriptions.py:111
+#: src/ollama_models.py:3122
 msgid ""
 "A high-performing code instruct model created by merging two existing code "
 "models."
@@ -3154,7 +2911,7 @@ msgstr ""
 "Een krachtig code-instructiemodel dat is gemaakt door twee bestaande code-"
 "modellen samen te voegen."
 
-#: src/available_models_descriptions.py:112
+#: src/ollama_models.py:3145
 msgid ""
 "Falcon2 is an 11B parameters causal decoder-only model built by TII and "
 "trained over 5T tokens."
@@ -3162,7 +2919,7 @@ msgstr ""
 "Falcon2 is een causaal decodermodel met 11B parameters, gebouwd door TII en "
 "getraind op 5T tokens."
 
-#: src/available_models_descriptions.py:113
+#: src/ollama_models.py:3167
 msgid ""
 "Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
 "MelodysDreamj."
@@ -3170,7 +2927,7 @@ msgstr ""
 "Wizard Vicuna is een 13B parametermodel gebaseerd op Llama 2 getraind door "
 "MelodysDreamj."
 
-#: src/available_models_descriptions.py:114
+#: src/ollama_models.py:3189
 msgid ""
 "MistralLite is a fine-tuned model based on Mistral with enhanced "
 "capabilities of processing long contexts."
@@ -3178,7 +2935,7 @@ msgstr ""
 "MistralLite is een verfijnd model gebaseerd op Mistral met verbeterde "
 "mogelijkheden voor het verwerken van lange contexten."
 
-#: src/available_models_descriptions.py:115
+#: src/ollama_models.py:3212
 msgid ""
 "MathΣtral: a 7B model designed for math reasoning and scientific discovery "
 "by Mistral AI."
@@ -3186,12 +2943,12 @@ msgstr ""
 "MathΣtral: een 7B-model ontworpen voor wiskundig redeneren en "
 "wetenschappelijke ontdekking door Mistral AI."
 
-#: src/available_models_descriptions.py:116
+#: src/ollama_models.py:3234
 msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
 msgstr ""
 "7B parameter tekst-naar-SQL model gemaakt door MotherDuck en Numbers Station."
 
-#: src/available_models_descriptions.py:117
+#: src/ollama_models.py:3255
 msgid ""
 "MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
 "interleaving the model with itself."
@@ -3199,7 +2956,7 @@ msgstr ""
 "MegaDolphin-2.2-120b is een transformatie van Dolphin-2.2-70b gemaakt door "
 "het model met zichzelf te vervlechten."
 
-#: src/available_models_descriptions.py:118
+#: src/ollama_models.py:3277
 msgid ""
 "Solar Pro Preview: an advanced large language model (LLM) with 22 billion "
 "parameters designed to fit into a single GPU"
@@ -3207,7 +2964,7 @@ msgstr ""
 "Solar Pro Preview: een geavanceerd groot taalmodel (LLM) met 22 miljard "
 "(22B) parameters, ontworpen voor een enkele GPU"
 
-#: src/available_models_descriptions.py:119
+#: src/ollama_models.py:3304
 msgid ""
 "A series of models that convert HTML content to Markdown content, which is "
 "useful for content conversion tasks."
@@ -3215,20 +2972,20 @@ msgstr ""
 "Een reeks modellen die HTML-inhoud converteren naar Markdown-inhoud, wat "
 "handig is voor het converteren van inhoud."
 
-#: src/available_models_descriptions.py:120
+#: src/ollama_models.py:3325
 msgid ""
 "A top-performing mixture of experts model, fine-tuned with high-quality data."
 msgstr ""
 "Een topmodel van een mix van experts, verfijnd met gegevens van hoge "
 "kwaliteit."
 
-#: src/available_models_descriptions.py:121
+#: src/ollama_models.py:3347
 msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
 msgstr ""
 "Een 7B chatmodel verfijnd met gegevens van hoge kwaliteit en gebaseerd op "
 "Zephyr."
 
-#: src/available_models_descriptions.py:122
+#: src/ollama_models.py:3370
 msgid ""
 "Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
 "Designed for chat and code generation."
@@ -3236,7 +2993,7 @@ msgstr ""
 "Samenvoeging van het Open Orca OpenChat model en het Garage-bAInd Platypus 2 "
 "model. Ontworpen voor chat en het genereren van code."
 
-#: src/available_models_descriptions.py:123
+#: src/ollama_models.py:3387
 msgid ""
 "A language model created by combining two fine-tuned Llama 2 70B models into "
 "one."
@@ -3244,7 +3001,7 @@ msgstr ""
 "Een taalmodel gemaakt door twee verfijnde Llama 2 70B-modellen te combineren "
 "tot één."
 
-#: src/available_models_descriptions.py:124
+#: src/ollama_models.py:3428
 msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
@@ -3252,7 +3009,7 @@ msgstr ""
 "De IBM Granite 1B en 3B modellen zijn de eerste mixture of experts (MoE) "
 "Granite modellen van IBM die ontworpen zijn voor gebruik met lage latency."
 
-#: src/available_models_descriptions.py:125
+#: src/ollama_models.py:3450
 msgid ""
 "A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
 "information extraction, based on Phi-3."
@@ -3260,7 +3017,7 @@ msgstr ""
 "Een 3.8B model verfijnd op een eigen synthetische dataset van hoge kwaliteit "
 "voor informatie-extractie, gebaseerd op Phi-3."
 
-#: src/available_models_descriptions.py:126
+#: src/ollama_models.py:3501
 msgid ""
 "Cohere For AI's language models trained to perform well across 23 different "
 "languages."
@@ -3268,12 +3025,12 @@ msgstr ""
 "De taalmodellen van Cohere For AI zijn getraind om goed te presteren in 23 "
 "verschillende talen."
 
-#: src/available_models_descriptions.py:127
+#: src/ollama_models.py:3523
 msgid "DBRX is an open, general-purpose LLM created by Databricks."
 msgstr ""
 "DBRX is een open LLM voor algemene doeleinden, gemaakt door Databricks."
 
-#: src/available_models_descriptions.py:128
+#: src/ollama_models.py:3545
 msgid ""
 "An open large reasoning model for real-world solutions by the Alibaba "
 "International Digital Commerce Group (AIDC-AI)."
@@ -3281,11 +3038,11 @@ msgstr ""
 "Een open groot redeneermodel voor echte oplossingen door de Alibaba "
 "International Digital Commerce Group (AIDC-AI)."
 
-#: src/available_models_descriptions.py:129
+#: src/ollama_models.py:3568
 msgid "Embedding model from BAAI mapping texts to vectors."
 msgstr "Embedding model van BAAI dat teksten naar vectoren mapt."
 
-#: src/available_models_descriptions.py:130
+#: src/ollama_models.py:3590
 msgid ""
 "An open weights function calling model based on Llama 3, competitive with "
 "GPT-4o function calling capabilities."
@@ -3293,7 +3050,7 @@ msgstr ""
 "Een open gewogen functie-aanroepmodel gebaseerd op Llama 3, concurrerend met "
 "GPT-4o functie-aanroepmogelijkheden."
 
-#: src/available_models_descriptions.py:131
+#: src/ollama_models.py:3611
 msgid ""
 "A robust conversational model designed to be used for both chat and instruct "
 "use cases."
@@ -3301,7 +3058,7 @@ msgstr ""
 "Een robuust conversatiemodel dat is ontworpen om te worden gebruikt voor "
 "zowel chat- als instructiegebruikscases."
 
-#: src/available_models_descriptions.py:132
+#: src/ollama_models.py:3633
 msgid ""
 "An upgraded version of DeekSeek-V2 that integrates the general and coding "
 "abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
@@ -3310,7 +3067,7 @@ msgstr ""
 "coderingsvaardigheden van zowel DeepSeek-V2-Chat als DeepSeek-Coder-V2-"
 "Instruct integreert."
 
-#: src/available_models_descriptions.py:133
+#: src/ollama_models.py:3666
 msgid ""
 "ShieldGemma is set of instruction tuned models for evaluating the safety of "
 "text prompt input and text output responses against a set of defined safety "
@@ -3320,11 +3077,11 @@ msgstr ""
 "veiligheid van tekstinvoer en tekstuitvoerreacties aan de hand van een set "
 "gedefinieerde veiligheidsbeleidsregels."
 
-#: src/available_models_descriptions.py:134
+#: src/ollama_models.py:3688
 msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
 msgstr "Een state-of-the-art fact-checking model ontwikkeld door Bespoke Labs."
 
-#: src/available_models_descriptions.py:135
+#: src/ollama_models.py:3716
 msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
@@ -3332,7 +3089,7 @@ msgstr ""
 "Llama Guard 3 is een reeks modellen die zijn verfijnd voor inhoudelijke "
 "veiligheidsclassificatie van LLM-ingangen en -reacties."
 
-#: src/available_models_descriptions.py:136
+#: src/ollama_models.py:3740
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
@@ -3340,7 +3097,7 @@ msgstr ""
 "Zinvervormingsmodel dat kan worden gebruikt voor taken zoals clusteren of "
 "semantisch zoeken."
 
-#: src/available_models_descriptions.py:137
+#: src/ollama_models.py:3770
 msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
@@ -3348,7 +3105,7 @@ msgstr ""
 "OpenCoder is een open en reproduceerbare code LLM-familie die 1.5B- en 8B-"
 "modellen bevat en chat in het Engels en Chinees ondersteunt."
 
-#: src/available_models_descriptions.py:138
+#: src/ollama_models.py:3799
 msgid ""
 "Tülu 3 is a leading instruction following model family, offering fully open-"
 "source data, code, and recipes by the The Allen Institute for AI."
@@ -3356,7 +3113,7 @@ msgstr ""
 "Tülu 3 is een toonaangevende instructie-volgmodel familie, die volledig open-"
 "source data, code en recepten biedt door het Allen Institute for AI."
 
-#: src/available_models_descriptions.py:139
+#: src/ollama_models.py:3827
 msgid ""
 "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
 "support without sacrificing English performance or scalability."
@@ -3365,7 +3122,7 @@ msgstr ""
 "meertalige ondersteuning toe zonder in te boeten aan Engelse prestaties of "
 "schaalbaarheid."
 
-#: src/available_models_descriptions.py:140
+#: src/ollama_models.py:3855
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
@@ -3373,7 +3130,7 @@ msgstr ""
 "De IBM Granite Guardian 3.0 2B en 8B modellen zijn ontworpen om risico's te "
 "detecteren in prompts en/of reacties."
 
-#: src/available_models_descriptions.py:141
+#: src/ollama_models.py:3889
 msgid ""
 "EXAONE 3.5 is a collection of instruction-tuned bilingual (English and "
 "Korean) generative models ranging from 2.4B to 32B parameters, developed and "
@@ -3383,7 +3140,7 @@ msgstr ""
 "Koreaans) generatieve modellen met 2.4B tot 32B parameters, ontwikkeld en "
 "uitgebracht door LG AI Research."
 
-#: src/available_models_descriptions.py:142
+#: src/ollama_models.py:3937
 msgid ""
 "Sailor2 are multilingual language models made for South-East Asia. Available "
 "in 1B, 8B, and 20B parameter sizes."
@@ -3391,7 +3148,7 @@ msgstr ""
 "Sailor2 zijn meertalige taalmodellen gemaakt voor Zuidoost-Azië. "
 "Verkrijgbaar in de parametermaten 1B, 8B en 20B."
 
-#: src/available_models_descriptions.py:143
+#: src/ollama_models.py:3975
 msgid ""
 "A family of efficient AI models under 10B parameters performant in science, "
 "math, and coding through innovative training techniques."
@@ -3399,7 +3156,7 @@ msgstr ""
 "Een familie efficiënte AI-modellen onder 10B-parameters die presteren in "
 "wetenschap, wiskunde en codering via innovatieve trainingstechnieken."
 
-#: src/available_models_descriptions.py:144
+#: src/ollama_models.py:4016
 msgid ""
 "The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 "
 "trillion tokens of data, demonstrated significant improvements over their "
@@ -3410,7 +3167,7 @@ msgstr ""
 "ten opzichte van hun voorgangers in prestaties en snelheid tijdens IBM's "
 "eerste tests."
 
-#: src/available_models_descriptions.py:145
+#: src/ollama_models.py:4057
 msgid ""
 "The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
@@ -3418,7 +3175,7 @@ msgstr ""
 "De IBM Granite 1B en 3B modellen zijn long-context mixture of experts (MoE) "
 "Granite modellen van IBM, ontworpen voor gebruik met lage latency."
 
-#: src/available_models_descriptions.py:146
+#: src/ollama_models.py:4098
 msgid ""
 "The IBM Granite Embedding 30M and 278M models models are text-only dense "
 "biencoder embedding models, with 30M available in English only and 278M "
@@ -3428,16 +3185,16 @@ msgstr ""
 "biencoder embedding modellen, waarbij 30M alleen beschikbaar is in het "
 "Engels en 278M voor meertalige gebruikssituaties."
 
-#: src/available_models_descriptions.py:147
+#: src/ollama_models.py:4120
 msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
 msgstr ""
 
-#: src/available_models_descriptions.py:148
+#: src/ollama_models.py:4143
 msgid ""
 "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
 msgstr ""
 
-#: src/available_models_descriptions.py:149
+#: src/ollama_models.py:4167
 msgid ""
 "Dolphin 3.0 Llama 3.1 8B 🐬 is the next generation of the Dolphin series of "
 "instruct-tuned models designed to be the ultimate general purpose local "
@@ -3445,20 +3202,20 @@ msgid ""
 "cases."
 msgstr ""
 
-#: src/available_models_descriptions.py:150
+#: src/ollama_models.py:4218
 msgid ""
 "DeepSeek's first-generation of reasoning models with comparable performance "
 "to OpenAI-o1, including six dense models distilled from DeepSeek-R1 based on "
 "Llama and Qwen."
 msgstr ""
 
-#: src/available_models_descriptions.py:151
+#: src/ollama_models.py:4239
 msgid ""
 "A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
 "with 37B activated for each token."
 msgstr ""
 
-#: src/available_models_descriptions.py:152
+#: src/ollama_models.py:4266
 msgid ""
 "OLMo 2 is a new family of 7B and 13B models trained on up to 5T tokens. "
 "These models are on par with or better than equivalently sized fully open "
@@ -3466,464 +3223,330 @@ msgid ""
 "academic benchmarks."
 msgstr ""
 
-#: src/available_models_descriptions.py:153
+#: src/ollama_models.py:4314
 msgid ""
 "The smallest model in Cohere's R series delivers top-tier speed, efficiency, "
 "and quality to build powerful AI applications on commodity GPUs and edge "
 "devices."
 msgstr ""
 
-#: src/available_models_descriptions.py:154
+#: src/ollama_models.py:4342
 msgid ""
 "A fully open-source family of reasoning models built using a dataset derived "
 "by distilling DeepSeek-R1."
 msgstr ""
 
-#: src/available_models_descriptions.py:155
+#: src/ollama_models.py:4366
 msgid ""
 "A fine-tuned version of Deepseek-R1-Distilled-Qwen-1.5B that surpasses the "
 "performance of OpenAI’s o1-preview with just 1.5B parameters on popular math "
 "evaluations."
 msgstr ""
 
-#: src/available_models_descriptions.py:156
+#: src/ollama_models.py:4396
 msgid ""
 "A version of the DeepSeek-R1 model that has been post trained to provide "
 "unbiased, accurate, and factual information by Perplexity."
 msgstr ""
 
-#: src/available_models_descriptions.py:157
+#: src/ollama_models.py:4433
 msgid "The current, most capable model that runs on a single GPU."
 msgstr ""
 
-#: src/available_models_descriptions.py:158
+#: src/ollama_models.py:4480
 msgid ""
 "Phi-4-mini brings significant enhancements in multilingual support, "
 "reasoning, and mathematics, and now, the long-awaited function calling "
 "feature is finally supported."
 msgstr ""
 
-#: src/available_models_descriptions.py:159
+#: src/ollama_models.py:4504
 msgid ""
 "A compact and efficient vision-language model, specifically designed for "
 "visual document understanding, enabling automated content extraction from "
 "tables, charts, infographics, plots, diagrams, and more."
 msgstr ""
 
-#: src/available_models_descriptions.py:160
+#: src/ollama_models.py:4544
 msgid ""
 "Granite-3.2 is a family of long-context AI models from IBM Granite fine-"
 "tuned for thinking capabilities."
 msgstr ""
 
-#: src/available_models_descriptions.py:161
+#: src/ollama_models.py:4568
 msgid ""
 "A new state-of-the-art version of the lightweight Command R7B model that "
 "excels in advanced Arabic language capabilities for enterprises in the "
 "Middle East and Northern Africa."
 msgstr ""
 
-#: src/available_models_descriptions.py:162
+#: src/ollama_models.py:4614
 msgid ""
 "111 billion parameter model optimized for demanding enterprises that require "
 "fast, secure, and high-quality AI"
 msgstr ""
 
-#: src/available_models_descriptions.py:163
+#: src/ollama_models.py:4655
 msgid ""
-"EXAONE Deep exhibits superior capabilities in various reasoning tasks "
-"including math and coding benchmarks, ranging from 2.4B to 32B parameters "
-"developed and released by LG AI Research."
+"Qwen3 is the latest generation of large language models in Qwen series, "
+"offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
 msgstr ""
 
-#: src/available_models_descriptions.py:164
+#: src/ollama_models.py:4802
+msgid "Devstral: the best open source model for coding agents"
+msgstr ""
+
+#: src/ollama_models.py:4830
+msgid "Meta's latest collection of multimodal models."
+msgstr ""
+
+#: src/ollama_models.py:4878
+msgid ""
+"Flagship vision-language model of Qwen and also a significant leap from the "
+"previous Qwen2-VL."
+msgstr ""
+
+#: src/ollama_models.py:4908
+msgid ""
+"DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
+"1.5B version also available."
+msgstr ""
+
+#: src/ollama_models.py:4933
 msgid ""
 "Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-"
 "art vision understanding and enhances long context capabilities up to 128k "
 "tokens without compromising text performance."
 msgstr ""
 
-#: src/available_models_descriptions.py:165
+#: src/ollama_models.py:4973
 msgid ""
 "Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that "
 "outperform the best available open models of the same size, including "
 "counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."
 msgstr ""
 
-#: src/available_models_descriptions.py:166
-msgid ""
-"DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
-"1.5B version also available."
-msgstr ""
-
-#: src/available_models_descriptions.py:167
-msgid ""
-"Qwen3 is the latest generation of large language models in Qwen series, "
-"offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
-msgstr ""
-
-#: src/available_models_descriptions.py:168
-msgid "Meta's latest collection of multimodal models."
-msgstr ""
-
-#: src/available_models_descriptions.py:169
+#: src/ollama_models.py:5002
 msgid ""
 "IBM Granite 2B and 8B models are 128K context length language models that "
 "have been fine-tuned for improved reasoning and instruction-following "
 "capabilities."
 msgstr ""
 
-#: src/available_models_descriptions.py:170
+#: src/ollama_models.py:5040
 msgid ""
 "Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
 "reasoning models that rival much larger models on complex reasoning tasks."
 msgstr ""
 
-#: src/available_models_descriptions.py:171
+#: src/ollama_models.py:5073
+msgid ""
+"EXAONE Deep exhibits superior capabilities in various reasoning tasks "
+"including math and coding benchmarks, ranging from 2.4B to 32B parameters "
+"developed and released by LG AI Research."
+msgstr ""
+
+#: src/ollama_models.py:5100
 msgid ""
 "Phi 4 mini reasoning is a lightweight open model that balances efficiency "
 "with advanced reasoning ability."
 msgstr ""
 
-#: src/instance_manager.py:30 src/instance_manager.py:366
-msgid "Instance"
+#: src/window.py:187 src/window.py:222
+msgid "Speech Recognition Error"
 msgstr ""
 
-#: src/instance_manager.py:60 src/instance_manager.py:69 src/window.ui:154
-#: src/custom_widgets/chat_widget.py:424
+#: src/window.py:188
+msgid "An error occurred while pulling speech recognition model"
+msgstr ""
+
+#: src/window.py:223
+msgid "An error occurred while using speech recognition"
+msgstr ""
+
+#: src/window.py:246
+msgid "Download Speech Recognition Model"
+msgstr ""
+
+#: src/window.py:247
+msgid "To use speech recognition you'll need to download a special model ({})"
+msgstr ""
+
+#: src/window.py:249
+msgid "Download Model"
+msgstr ""
+
+#: src/window.py:267
+msgid "Ollama Was Not Found"
+msgstr ""
+
+#: src/window.py:268
+msgid ""
+"To add a managed Ollama instance, you must have Ollama installed locally in "
+"your device, this is a simple process and should not take more than 5 "
+"minutes."
+msgstr ""
+
+#: src/window.py:270
+msgid "Open Tutorial in Web Browser"
+msgstr ""
+
+#: src/window.py:276 src/window.py:284 src/window.ui:527 src/window.ui:537
+#: src/window.ui:559
+msgid "Add Instance"
+msgstr ""
+
+#: src/window.py:285
+msgid "Select a type of instance to add"
+msgstr ""
+
+#: src/window.py:505
+msgid "No tools enabled."
+msgstr ""
+
+#: src/window.py:505
+msgid "Open Tool Manager"
+msgstr ""
+
+#: src/window.py:508
+msgid "'{}' does not support tools."
+msgstr ""
+
+#: src/window.py:508
+msgid "Open Model Manager"
+msgstr "Modelbeheer openen"
+
+#: src/window.py:511 src/window.py:1090
+msgid "Please select a model before chatting"
+msgstr "Selecteer een model voordat u gaat chatten"
+
+#: src/window.py:584 src/window.py:585 src/window.py:680 src/window.ui:355
+msgid "Close"
+msgstr "Sluit"
+
+#: src/window.py:587 src/window.py:588 src/window.ui:62 src/window.ui:63
+msgid "Next"
+msgstr "Volgende"
+
+#: src/window.py:678 src/window.ui:1023 src/window.ui:1027
+#: src/widgets/dialog.py:150 src/widgets/dialog.py:163
+#: src/widgets/dialog.py:176 src/widgets/instance_manager.py:469
+#: src/widgets/instance_manager.py:470 src/widgets/model_manager.py:637
+#: src/widgets/blocks/code.py:136 src/widgets/blocks/text.py:111
+#: src/widgets/tools/tools.py:132
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: src/window.py:679
+msgid "Hide"
+msgstr ""
+
+#: src/window.py:683
+msgid "Close Alpaca?"
+msgstr ""
+
+#: src/window.py:684
+msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
+msgstr ""
+
+#: src/window.py:924 src/window.ui:163 src/window.ui:1346
+#: src/widgets/chat.py:207 src/widgets/instance_manager.py:58
+#: src/widgets/instance_manager.py:69 src/widgets/instance_manager.py:110
 msgid "New Chat"
 msgstr "Nieuwe chat"
 
-#: src/instance_manager.py:76
-msgid "Selecting tool to use..."
-msgstr ""
+#: src/window.py:1004
+msgid "This video does not have any transcriptions"
+msgstr "Deze video heeft geen transcripties"
 
-#: src/instance_manager.py:85
-msgid "Using {}"
-msgstr ""
+#: src/window.py:1012
+msgid "Attach YouTube Video?"
+msgstr "YouTube-video bijvoegen?"
 
-#: src/instance_manager.py:111
-msgid "Tool Error"
-msgstr ""
-
-#: src/instance_manager.py:111
-msgid "An error occurred while running tool"
-msgstr ""
-
-#: src/instance_manager.py:114
-msgid "Generating message..."
-msgstr ""
-
-#: src/instance_manager.py:162 src/instance_manager.py:462
-#: src/instance_manager.py:472 src/instance_manager.py:618
-#: src/instance_manager.py:690 src/instance_manager.py:732
-#: src/instance_manager.py:761 src/instance_manager.py:803
-#: src/instance_manager.py:823 src/instance_manager.py:844
-msgid "Instance Error"
-msgstr ""
-
-#: src/instance_manager.py:162
-msgid "Message generation failed"
-msgstr ""
-
-#: src/instance_manager.py:218 src/window.ui:885
-msgid "Name"
-msgstr "Naam"
-
-#: src/instance_manager.py:226
-msgid "Port"
-msgstr ""
-
-#: src/instance_manager.py:227
-msgid "Which network port will '{}' use"
-msgstr ""
-
-#: src/instance_manager.py:241
-msgid "Instance URL"
-msgstr ""
-
-#: src/instance_manager.py:244 src/instance_manager.py:254
-#: src/instance_manager.py:257 src/instance_manager.py:259
-msgid "API Key (Unchanged)"
-msgstr ""
-
-#: src/instance_manager.py:244 src/instance_manager.py:254
-msgid "API Key (Optional)"
-msgstr ""
-
-#: src/instance_manager.py:257 src/instance_manager.py:259
-msgid "API Key"
-msgstr ""
-
-#: src/instance_manager.py:267
-msgid "Max Tokens"
-msgstr ""
-
-#: src/instance_manager.py:268
+#: src/window.py:1013
 msgid ""
-"Defines the maximum number of tokens (words + spaces) the AI can generate in "
-"a response. More tokens allow longer replies but may take more time and cost "
-"more."
+"{}\n"
+"\n"
+"Please select a transcript to include"
 msgstr ""
+"{}\n"
+"\n"
+"Selecteer een transcript om toe te voegen"
 
-#: src/instance_manager.py:283
-msgid "Temperature"
-msgstr "Temperatuur"
+#: src/window.py:1019
+msgid "Error attaching video, please try again"
+msgstr "Fout bij het toevoegen van video, probeer het opnieuw"
 
-#: src/instance_manager.py:284
-msgid "Increasing the temperature will make the models answer more creatively."
-msgstr ""
+#: src/window.py:1041 src/window.py:1480
+msgid "Attach Website? (Experimental)"
+msgstr "Website bijvoegen? (Experimenteel)"
 
-#: src/instance_manager.py:299
-msgid "Seed"
-msgstr "Zaad"
-
-#: src/instance_manager.py:300
+#: src/window.py:1042
 msgid ""
-"Setting this to a specific number other than 0 will make the model generate "
-"the same text for the same prompt."
+"Are you sure you want to attach\n"
+"'{}'?"
+msgstr ""
+"Weet je zeker dat je\n"
+"'{}' wilt bijvoegen?"
+
+#: src/window.py:1061 src/window.py:1477
+msgid "Image recognition is only available on specific models"
+msgstr "Beeldherkenning is alleen beschikbaar op specifieke modellen"
+
+#: src/window.py:1073 src/window.ui:1266
+msgid "Quick Ask"
+msgstr "Snelle vraag"
+
+#: src/window.py:1240
+msgid "Chat imported successfully"
+msgstr "Chat succesvol geïmporteerd"
+
+#: src/window.py:1254
+msgid "Attachment failed, screenshot might be too big"
+msgstr "Bijlage mislukt, schermafbeelding is mogelijk te groot"
+
+#: src/window.py:1303
+msgid "Any compatible Alpaca attachment"
 msgstr ""
 
-#: src/instance_manager.py:315
-msgid "Overrides"
+#: src/window.py:1448
+msgid "Attach Screenshot"
+msgstr "Screenshot bijvoegen"
+
+#: src/window.py:1481
+msgid "Please enter a website URL"
+msgstr "Voer een website-URL in"
+
+#: src/window.py:1487
+msgid "Attach YouTube Captions?"
+msgstr "YouTube bijvoegen?"
+
+#: src/window.py:1488
+msgid "Please enter a YouTube video URL"
+msgstr "Voer een YouTube video URL in"
+
+#: src/window.py:1496
+msgid "Download Model?"
 msgstr ""
 
-#: src/instance_manager.py:315
-msgid ""
-"These entries are optional, they are used to troubleshoot GPU related "
-"problems with Ollama."
+#: src/window.py:1497
+msgid "Please enter the model name following this template: name:tag"
 msgstr ""
 
-#: src/instance_manager.py:333
-msgid "Model Directory"
-msgstr "Modeldirectory"
-
-#: src/instance_manager.py:335
-msgid "Select Directory"
+#: src/window.py:1504
+msgid "Delete All Chats?"
 msgstr ""
 
-#: src/instance_manager.py:346
-msgid "Default Model"
-msgstr "Standaardmodel"
-
-#: src/instance_manager.py:346
-msgid "Model to select when starting a new chat."
+#: src/window.py:1505
+msgid "Are you sure you want to delete all chats?"
 msgstr ""
 
-#: src/instance_manager.py:348
-msgid "Title Model"
-msgstr ""
+#: src/window.py:1507 src/widgets/attachments.py:211 src/widgets/chat.py:461
+msgid "Delete"
+msgstr "Verwijder"
 
-#: src/instance_manager.py:348
-msgid "Model to use when generating a chat title."
-msgstr ""
-
-#: src/instance_manager.py:412 src/instance_manager.py:413
-#: src/custom_widgets/message_widget.py:234
-msgid "Save"
-msgstr ""
-
-#: src/instance_manager.py:462 src/instance_manager.py:690
-#: src/instance_manager.py:732 src/instance_manager.py:761
-msgid "Could not retrieve added models"
-msgstr ""
-
-#: src/instance_manager.py:472
-msgid "Could not retrieve available models"
-msgstr ""
-
-#: src/instance_manager.py:539
-msgid "Ollama (Managed)"
-msgstr ""
-
-#: src/instance_manager.py:548
-msgid "Local AI instance managed directly by Alpaca"
-msgstr ""
-
-#: src/instance_manager.py:572
-msgid "Alpaca Support"
-msgstr "Alpaca ondersteuning"
-
-#: src/instance_manager.py:579
-msgid "Model request too large for system"
-msgstr "Modelaanvraag te groot voor systeem"
-
-#: src/instance_manager.py:582
-msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
-msgstr ""
-"AMD GPU gedetecteerd maar de extensie ontbreekt, Ollama zal CPU gebruiken."
-
-#: src/instance_manager.py:584
-msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
-msgstr "AMD GPU gedetecteerd maar ROCm ontbreekt, Ollama zal CPU gebruiken."
-
-#: src/instance_manager.py:586
-msgid "Using AMD GPU type '{}'"
-msgstr "Gebruik AMD GPU type '{}'."
-
-#: src/instance_manager.py:596
-msgid "Integrated Ollama instance is not running"
-msgstr "Geïntegreerde Ollama-instantie wordt niet uitgevoerd"
-
-#: src/instance_manager.py:618
-msgid "Managed Ollama instance failed to start"
-msgstr ""
-
-#: src/instance_manager.py:621
-msgid "Integrated Ollama instance is running"
-msgstr "Geïntegreerde Ollama-instantie wordt uitgevoerd"
-
-#: src/instance_manager.py:626 src/instance_manager.py:627
-msgid "Ollama Log"
-msgstr ""
-
-#: src/instance_manager.py:639
-msgid "Local or remote AI instance not managed by Alpaca"
-msgstr ""
-
-#: src/instance_manager.py:803 src/instance_manager.py:823
-#: src/instance_manager.py:844
-msgid "Could not retrieve models"
-msgstr ""
-
-#: src/instance_manager.py:812
-msgid "Fireworks AI inference platform"
-msgstr ""
-
-#: src/instance_manager.py:832
-msgid "Lambda Labs cloud inference API"
-msgstr ""
-
-#: src/instance_manager.py:853
-msgid "Cerebras AI cloud inference API"
-msgstr ""
-
-#: src/instance_manager.py:859
-msgid "Kluster AI cloud inference API"
-msgstr ""
-
-#: src/instance_manager.py:863
-msgid "OpenAI Compatible Instance"
-msgstr ""
-
-#: src/instance_manager.py:864
-msgid "AI instance compatible with OpenAI library"
-msgstr ""
-
-#: src/instance_manager.py:886
-msgid "Remove Instance?"
-msgstr ""
-
-#: src/instance_manager.py:886
-msgid "Are you sure you want to remove this instance?"
-msgstr ""
-
-#: src/instance_manager.py:901
-msgid "Edit Instance"
-msgstr ""
-
-#: src/tool_manager.py:71
-msgid "AI Description"
-msgstr ""
-
-#: src/tool_manager.py:72
-msgid "The description the AI model will use to understand what the tool does."
-msgstr ""
-
-#: src/tool_manager.py:83
-msgid "Arguments"
-msgstr ""
-
-#: src/tool_manager.py:84
-msgid "Variables that are filled by the AI."
-msgstr ""
-
-#: src/tool_manager.py:97
-msgid "Variables"
-msgstr ""
-
-#: src/tool_manager.py:98
-msgid ""
-"User filled values that the tool uses to work, the AI does not have access "
-"to these variables at all."
-msgstr ""
-
-#: src/tool_manager.py:140 src/custom_widgets/dialog_widget.py:146
-#: src/custom_widgets/dialog_widget.py:158
-#: src/custom_widgets/dialog_widget.py:170
-msgid "Accept"
-msgstr "Accepteer"
-
-#: src/tool_manager.py:177
-msgid "Gets the current date and/or time."
-msgstr ""
-
-#: src/tool_manager.py:211
-msgid "Gets a recipe by the meal's name"
-msgstr ""
-
-#: src/tool_manager.py:224 src/tool_manager.py:281
-msgid "YouTube Video"
-msgstr ""
-
-#: src/tool_manager.py:227 src/tool_manager.py:284
-msgid "Source"
-msgstr ""
-
-#: src/tool_manager.py:262
-msgid "Gets a list of food recipes by a specified category"
-msgstr ""
-
-#: src/tool_manager.py:307
-msgid "Extracts an article from Wikipedia by it's title"
-msgstr ""
-
-#: src/tool_manager.py:349
-msgid "Search for a term online using DuckDuckGo"
-msgstr ""
-
-#: src/tool_manager.py:365
-msgid "Abstract Source"
-msgstr ""
-
-#: src/tool_manager.py:384
-msgid "Official Website"
-msgstr ""
-
-#: src/tool_manager.py:432
-msgid "Request to run a command using SSH to connect to the device"
-msgstr ""
-
-#: src/tool_manager.py:435
-msgid "IP Address"
-msgstr ""
-
-#: src/tool_manager.py:440
-msgid "Username"
-msgstr ""
-
-#: src/tool_manager.py:445
-msgid "Network Port"
-msgstr ""
-
-#: src/tool_manager.py:462
-msgid "Model Requested to Run Command"
-msgstr ""
-
-#: src/tool_manager.py:463
-msgid "Command"
-msgstr ""
-
-#: src/tool_manager.py:465
-msgid "Explanation"
-msgstr ""
-
-#: src/tool_manager.py:466
-msgid "No explanation was provided"
-msgstr ""
-
-#: src/tool_manager.py:467
-msgid "Make sure you understand what the command does before running it."
+#: src/window.py:1534
+msgid "Already Installed!"
 msgstr ""
 
 #: src/window.ui:34
@@ -3986,345 +3609,377 @@ msgstr ""
 msgid "Install Ollama"
 msgstr ""
 
-#: src/window.ui:165
+#: src/window.ui:174
 msgid "Menu"
 msgstr "Menu"
 
-#: src/window.ui:187
+#: src/window.ui:181
+msgid "Search Chats"
+msgstr ""
+
+#: src/window.ui:190
+msgid "Chat search bar"
+msgstr ""
+
+#: src/window.ui:198 src/window.ui:200
+msgid "Search chats"
+msgstr ""
+
+#: src/window.ui:236
+msgid "No Chats Found"
+msgstr ""
+
+#: src/window.ui:237
+msgid "Oh no! It looks like there are no chats found for your search."
+msgstr ""
+
+#: src/window.ui:254
 msgid "Toggle Sidebar"
 msgstr "Zijbalk schakelen"
 
-#: src/window.ui:194
+#: src/window.ui:261
 msgid "Search Messages"
 msgstr "Zoek berichten"
 
-#: src/window.ui:211 src/window.ui:236 src/window.ui:1385
+#: src/window.ui:278 src/window.ui:303 src/window.ui:1370
 msgid "Manage Models"
 msgstr "Modellen beheren"
 
-#: src/window.ui:232
+#: src/window.ui:299
 msgid "Add Models"
 msgstr ""
 
-#: src/window.ui:249
+#: src/window.ui:316
 msgid "Chat Menu"
 msgstr "Chat menu"
 
-#: src/window.ui:262
+#: src/window.ui:329
 msgid "Message search bar"
 msgstr "Berichten zoekbalk"
 
-#: src/window.ui:271 src/window.ui:273
+#: src/window.ui:338 src/window.ui:340
 msgid "Search messages"
 msgstr "Berichten zoeken"
 
-#: src/window.ui:289
+#: src/window.ui:356
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr ""
 "Waarschuwing: De energiebesparingsmodus is ingeschakeld, hierdoor wordt het "
 "genereren van berichten vertraagd."
 
-#: src/window.ui:336 src/window.ui:1483
+#: src/window.ui:391 src/window.ui:1468
 msgid "Attach File"
 msgstr "Bestand bijvoegen"
 
-#: src/window.ui:369 src/window.ui:1252
+#: src/window.ui:424 src/window.ui:1315
 msgid "Use Speech Recognition"
 msgstr ""
 
-#: src/window.ui:404
+#: src/window.ui:459
 msgid "Send Message"
 msgstr "Bericht verzenden"
 
-#: src/window.ui:423
+#: src/window.ui:478
 msgid "Stop Message"
 msgstr "Bericht stoppen"
 
-#: src/window.ui:453
+#: src/window.ui:508
 msgid "Instance Manager"
 msgstr ""
 
-#: src/window.ui:468
+#: src/window.ui:523
 msgid "No Instances Found"
 msgstr ""
 
-#: src/window.ui:469
+#: src/window.ui:524
 msgid "It looks a bit empty in here. Try adding an instance get started!"
 msgstr ""
 
-#: src/window.ui:498
+#: src/window.ui:553
 msgid "Added Instances"
 msgstr ""
 
-#: src/window.ui:499
+#: src/window.ui:554
 msgid ""
 "Manage your AI instances, chats and messages are shared between instances "
 "when generating responses."
 msgstr ""
 
-#: src/window.ui:535
+#: src/window.ui:590
 msgid "Tool Manager"
 msgstr ""
 
-#: src/window.ui:546
+#: src/window.ui:601
 msgid "Available Tools"
 msgstr ""
 
-#: src/window.ui:547
+#: src/window.ui:602
 msgid ""
 "Functions that AI models might use when sending a message by selecting \"Use "
 "Tools\" in the send button context menu."
 msgstr ""
 
-#: src/window.ui:566
+#: src/window.ui:621
 msgid "Model Manager"
 msgstr ""
 
-#: src/window.ui:604
+#: src/window.ui:659
 msgid "Search Model"
 msgstr "Model zoeken"
 
-#: src/window.ui:618
+#: src/window.ui:673
 msgid "Model Manager Menu"
 msgstr ""
 
-#: src/window.ui:631
+#: src/window.ui:686
 msgid "Model search bar"
 msgstr "Model zoekbalk"
 
-#: src/window.ui:643 src/window.ui:645
+#: src/window.ui:698 src/window.ui:700
 msgid "Search models"
 msgstr "Modellen zoeken"
 
-#: src/window.ui:652
+#: src/window.ui:707
 msgid "Filter Models"
 msgstr ""
 
-#: src/window.ui:668
+#: src/window.ui:723
 msgid "Added"
 msgstr ""
 
-#: src/window.ui:678 src/window.ui:739 src/window.ui:793
+#: src/window.ui:733 src/window.ui:794 src/window.ui:848
 msgid "No Models Found"
 msgstr "Geen modellen gevonden"
 
-#: src/window.ui:679
+#: src/window.ui:734
 msgid ""
 "It looks a bit empty in here. Try downloading some models or change your AI "
 "instance to get started!"
 msgstr ""
 
-#: src/window.ui:682 src/window.ui:692 src/window.ui:1381
+#: src/window.ui:737 src/window.ui:747 src/window.ui:1366
 msgid "Manage Instances"
 msgstr ""
 
-#: src/window.ui:740 src/window.ui:794
+#: src/window.ui:795 src/window.ui:849
 msgid ""
 "Looks like we’re fresh out of models for that search. Try tweaking your "
 "keywords, or maybe explore something new!"
 msgstr ""
 
-#: src/window.ui:752
+#: src/window.ui:807
 msgid "Available"
 msgstr ""
 
-#: src/window.ui:806
+#: src/window.ui:861
 msgid "Creator"
 msgstr ""
 
-#: src/window.ui:817
+#: src/window.ui:872
 msgid "Model Creator"
 msgstr ""
 
-#: src/window.ui:818
+#: src/window.ui:873
 msgid "Select a method of importing a model to continue"
 msgstr ""
 
-#: src/window.ui:830
+#: src/window.ui:885
 msgid "GGUF File"
 msgstr ""
 
-#: src/window.ui:841
+#: src/window.ui:896
 msgid "Existing Model"
 msgstr ""
 
-#: src/window.ui:859
+#: src/window.ui:914
 msgid "Identity"
 msgstr ""
 
-#: src/window.ui:862
+#: src/window.ui:917
 msgid "Base"
 msgstr "Basis"
 
-#: src/window.ui:869
+#: src/window.ui:924
 msgid "Profile Picture"
 msgstr ""
 
-#: src/window.ui:874
+#: src/window.ui:929
 msgid "Open File"
 msgstr ""
 
-#: src/window.ui:890 src/custom_widgets/model_manager_widget.py:449
+#: src/window.ui:940 src/widgets/instance_manager.py:278
+msgid "Name"
+msgstr "Naam"
+
+#: src/window.ui:945 src/widgets/model_manager.py:453
 msgid "Tag"
 msgstr ""
 
-#: src/window.ui:897 src/custom_widgets/model_manager_widget.py:466
+#: src/window.ui:952 src/widgets/model_manager.py:470
 msgid "Context"
 msgstr "Context"
 
-#: src/window.ui:898
+#: src/window.ui:953
 msgid ""
 "Describe the desired behavior of the model in its primary language "
 "(typically English)."
 msgstr ""
 
-#: src/window.ui:926
+#: src/window.ui:981
 msgid "Behavior"
 msgstr ""
 
-#: src/window.ui:929
+#: src/window.ui:984
 msgid "Imagination"
 msgstr ""
 
-#: src/window.ui:930
+#: src/window.ui:985
 msgid "A higher number results in more diverse answers from the model. (top_k)"
 msgstr ""
 
-#: src/window.ui:944
+#: src/window.ui:999
 msgid "Focus"
 msgstr ""
 
-#: src/window.ui:945
+#: src/window.ui:1000
 msgid "A higher number widens the amount of possible answers. (top_p)"
 msgstr ""
 
-#: src/window.ui:978 src/window.ui:986
+#: src/window.ui:1033 src/window.ui:1041
 msgid "Add Model"
 msgstr ""
 
-#: src/window.ui:1020 src/window.ui:1395
+#: src/window.ui:1075 src/window.ui:1380
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: src/window.ui:1028
+#: src/window.ui:1083
 msgid "Run Alpaca In Background"
 msgstr "Alpaca op de achtergrond"
 
-#: src/window.ui:1035
+#: src/window.ui:1090
 msgid "Show Power Saver Warning"
 msgstr "Toon Spaarstand Waarschuwing"
 
-#: src/window.ui:1036
+#: src/window.ui:1091
 msgid "When running a managed Ollama instance"
 msgstr ""
 
-#: src/window.ui:1043
+#: src/window.ui:1098
 msgid "Zoom"
 msgstr ""
 
-#: src/window.ui:1060
+#: src/window.ui:1115
 msgid "Speech Recognition Model"
 msgstr ""
 
-#: src/window.ui:1061
+#: src/window.ui:1116
 msgid ""
 "Models are downloaded upon first use, you can delete them from the model "
 "manager"
 msgstr ""
 
-#: src/window.ui:1068
+#: src/window.ui:1123
 msgid "Speech Recognition Language"
 msgstr ""
 
-#: src/window.ui:1075
+#: src/window.ui:1130
 msgid "Auto Send Message After Talking"
 msgstr ""
 
-#: src/window.ui:1086
-msgid "Text to Speech Voice"
+#: src/window.ui:1141
+msgid "Default Text to Speech Voice"
 msgstr ""
 
-#: src/window.ui:1087
+#: src/window.ui:1142
 msgid ""
 "Voices are downloaded upon first use, each weighing around 1 MB, and you can "
 "delete them from the model manager"
 msgstr ""
 
-#: src/window.ui:1100
+#: src/window.ui:1149
+msgid "Dictate New Messages Automatically"
+msgstr ""
+
+#: src/window.ui:1150
+msgid "Dictate new messages once they have finished being generated"
+msgstr ""
+
+#: src/window.ui:1163
 msgid "Delete All Chats"
 msgstr ""
 
-#: src/window.ui:1112
+#: src/window.ui:1175
 msgid "Notice"
 msgstr ""
 
-#: src/window.ui:1132
+#: src/window.ui:1195
 msgid ""
 "Hey Alpaca users! We're so excited to bring you a fresh update packed with "
 "awesome new features to explore! Get ready to experience Alpaca in a whole "
 "new way!"
 msgstr ""
 
-#: src/window.ui:1139
+#: src/window.ui:1202
 msgid "Smart Tools"
 msgstr ""
 
-#: src/window.ui:1140
+#: src/window.ui:1203
 msgid ""
 "Supported AI models can use handy tools to grab information both locally and "
 "online. Head over to the brand new \"Tool Manager\" to toggle them on or off."
 msgstr ""
 
-#: src/window.ui:1147
+#: src/window.ui:1210
 msgid "Talk to Models"
 msgstr ""
 
-#: src/window.ui:1148
+#: src/window.ui:1211
 msgid ""
 "You can now dictate your messages using local speech recognition. It's super "
 "convenient! You can even customize your language and other settings in the "
 "Preferences dialog."
 msgstr ""
 
-#: src/window.ui:1155
+#: src/window.ui:1218
 msgid "Find Models Faster"
 msgstr ""
 
-#: src/window.ui:1156
+#: src/window.ui:1219
 msgid ""
 "Browsing through your Ollama models just got easier! We've added the ability "
 "to filter models by their categories in the Model Manager. Now you can "
 "quickly find exactly the model you're looking for."
 msgstr ""
 
-#: src/window.ui:1163
+#: src/window.ui:1226
 msgid "Math Rendering"
 msgstr ""
 
-#: src/window.ui:1164
+#: src/window.ui:1227
 msgid ""
 "We've improved how LaTeX equations are rendered in messages, making them "
 "look cleaner and more consistent. Your mathematical discussions will be "
 "clearer than ever!"
 msgstr ""
 
-#: src/window.ui:1171
+#: src/window.ui:1234
 msgid "More Instances"
 msgstr ""
 
-#: src/window.ui:1172
+#: src/window.ui:1235
 msgid ""
 "Get ready to connect Alpaca to a whole universe of AI providers! We've added "
 "support for over 5 new AI instance providers, including Anthropic, "
 "OpenRouter, and Fireworks. The possibilities are endless!"
 msgstr ""
 
-#: src/window.ui:1179
+#: src/window.ui:1242
 msgid "Attachment Enhancement"
 msgstr ""
 
-#: src/window.ui:1180
+#: src/window.ui:1243
 msgid ""
 "You can now attach and ask questions about even more file types, "
 "including .docx, .pptx, and .xlsx! Plus, when you preview an attachment, "
@@ -4332,110 +3987,81 @@ msgid ""
 "content before you send it."
 msgstr ""
 
-#: src/window.ui:1201
+#: src/window.ui:1264
 msgid "Quick ask dialog"
 msgstr "Snel vragen dialoog"
 
-#: src/window.ui:1213
+#: src/window.ui:1276
 msgid "Save Conversation to Alpaca"
 msgstr "Gesprek opslaan in Alpaca"
 
-#: src/window.ui:1282
-msgid "Terminal dialog"
+#: src/window.ui:1350 src/widgets/chat.py:22
+msgid "New Notebook"
 msgstr ""
 
-#: src/window.ui:1285
-msgid "Terminal"
-msgstr "Terminal"
-
-#: src/window.ui:1299
-msgid "Open Environment Directory"
-msgstr ""
-
-#: src/window.ui:1320
-msgid "File preview dialog"
-msgstr "Bestandsvoorbeeld dialoog"
-
-#: src/window.ui:1331
-msgid "Open With Default App"
-msgstr "Openen met standaardprogramma"
-
-#: src/window.ui:1339
-msgid "Remove Attachment"
-msgstr "Bijlage verwijderen"
-
-#: src/window.ui:1373
+#: src/window.ui:1358
 msgid "Start Quick Ask"
 msgstr ""
 
-#: src/window.ui:1377
+#: src/window.ui:1362
 msgid "Import Chat"
 msgstr "Import chat"
 
-#: src/window.ui:1389
+#: src/window.ui:1374
 msgid "Manage Tools"
 msgstr ""
 
-#: src/window.ui:1399
+#: src/window.ui:1384
 msgid "Keyboard Shortcuts"
 msgstr "Toetsenbord Snelkoppelingen"
 
-#: src/window.ui:1403
+#: src/window.ui:1388
 msgid "About Alpaca"
 msgstr "Over Alpaca"
 
-#: src/window.ui:1411 src/window.ui:1445
+#: src/window.ui:1396 src/window.ui:1430
 msgid "Rename Chat"
 msgstr "Chat hernoemen"
 
-#: src/window.ui:1415 src/window.ui:1449
+#: src/window.ui:1400 src/window.ui:1434
 msgid "Duplicate Chat"
 msgstr "Chat dupliceren"
 
-#: src/window.ui:1425 src/window.ui:1459
+#: src/window.ui:1404 src/window.ui:1438 src/widgets/chat.py:559
+msgid "Export Chat"
+msgstr "Chat exporteren"
+
+#: src/window.ui:1410 src/window.ui:1444
 msgid "Delete Chat"
 msgstr "Chat verwijderen"
 
-#: src/window.ui:1433
+#: src/window.ui:1418
 msgid "Reload Added Models"
 msgstr ""
 
-#: src/window.ui:1437
+#: src/window.ui:1422
 msgid "Download Model From Name"
 msgstr ""
 
-#: src/window.ui:1467
+#: src/window.ui:1452
 msgid "Send as User"
 msgstr "Verzenden als gebruiker"
 
-#: src/window.ui:1471
+#: src/window.ui:1456
 msgid "Send as System"
 msgstr "Verzenden als systeem"
 
-#: src/window.ui:1475 src/gtk/help-overlay.ui:133
+#: src/window.ui:1460 src/gtk/help-overlay.ui:133
 msgid "Use Tools"
 msgstr ""
 
-#: src/window.ui:1487
+#: src/window.ui:1472
 msgid "Attach Website"
 msgstr "Website bijvoegen"
 
-#: src/window.ui:1491
+#: src/window.ui:1476
 msgid "Attach YouTube Captions"
 msgstr "YouTube bijvoegen"
-
-#: src/alpaca_search_provider.py.in:43
-msgid "Open chat"
-msgstr "Chat openen"
-
-#: src/alpaca_search_provider.py.in:44
-msgid "Quick ask"
-msgstr "Snel vragen"
-
-#: src/generic_actions.py:79
-msgid "An error occurred while extracting text from the website"
-msgstr ""
-"Er is een fout opgetreden tijdens het extraheren van tekst van de website"
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
@@ -4550,348 +4176,806 @@ msgstr ""
 msgid "Send Message as User"
 msgstr "Bericht verzenden als gebruiker"
 
-#: src/custom_widgets/chat_widget.py:93
-msgid "Try one of these prompts"
-msgstr "Probeer een van deze aanwijzingen"
+#: src/widgets/attachments.py:124
+msgid "Remove Attachment"
+msgstr "Bijlage verwijderen"
 
-#: src/custom_widgets/chat_widget.py:122
-msgid "Send prompt: '{}'"
-msgstr "Verzend prompt: '{}'"
-
-#: src/custom_widgets/chat_widget.py:128
-msgid "Refresh Prompts"
+#: src/widgets/attachments.py:138
+msgid "Replace Notebook Content"
 msgstr ""
 
-#: src/custom_widgets/chat_widget.py:186
-msgid "Chat exported successfully"
-msgstr "Chat succesvol geëxporteerd"
-
-#: src/custom_widgets/chat_widget.py:206
-msgid "User"
-msgstr "Gebruiker"
-
-#: src/custom_widgets/chat_widget.py:210
-#: src/custom_widgets/message_widget.py:693
-msgid "System"
-msgstr "Systeem"
-
-#: src/custom_widgets/chat_widget.py:298
-msgid "Regenerate Response"
-msgstr "Reactie opnieuw genereren"
-
-#: src/custom_widgets/chat_widget.py:462
-msgid "Copy of {}"
-msgstr "Kopie van {}"
-
-#: src/custom_widgets/chat_widget.py:480
-msgid "Chat imported successfully"
-msgstr "Chat succesvol geïmporteerd"
-
-#: src/custom_widgets/message_widget.py:89
-msgid "Save Message"
-msgstr "Bericht opslaan"
-
-#: src/custom_widgets/message_widget.py:130
-#: src/custom_widgets/message_widget.py:269
-msgid "Message edited successfully"
-msgstr "Bericht succesvol bewerkt"
-
-#: src/custom_widgets/message_widget.py:156
-msgid "Response message"
-msgstr "Antwoordbericht"
-
-#: src/custom_widgets/message_widget.py:158
-msgid "System message"
-msgstr "Systeembericht"
-
-#: src/custom_widgets/message_widget.py:160
-msgid "User message"
-msgstr "Gebruikersbericht"
-
-#: src/custom_widgets/message_widget.py:219
-msgid "{}Code Block"
-msgstr "{}Codeblok"
-
-#: src/custom_widgets/message_widget.py:221
-msgid "Code Block"
-msgstr "Codeblok"
-
-#: src/custom_widgets/message_widget.py:222
-#: src/custom_widgets/message_widget.py:531
-msgid "Copy Message"
-msgstr "Kopieer bericht"
-
-#: src/custom_widgets/message_widget.py:226
-msgid "Edit Code Block"
+#: src/widgets/attachments.py:208
+msgid "Delete Attachment?"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:238
-#: src/custom_widgets/message_widget.py:314
-msgid "Run Script"
-msgstr "Script uitvoeren"
+#: src/widgets/attachments.py:209 src/widgets/chat.py:459
+msgid "Are you sure you want to delete '{}'?"
+msgstr "Weet je zeker dat je '{}' wilt verwijderen?"
 
-#: src/custom_widgets/message_widget.py:278
-msgid "Code copied to the clipboard"
-msgstr "Code gekopieerd naar het klembord"
-
-#: src/custom_widgets/message_widget.py:315
-msgid ""
-"Make sure you understand what this script does before running it, Alpaca is "
-"not responsible for any damages to your device or data"
-msgstr ""
-"Zorg ervoor dat u begrijpt wat dit script doet voordat u het uitvoert, "
-"Alpaca is niet verantwoordelijk voor enige schade aan uw apparaat of "
-"gegevens."
-
-#: src/custom_widgets/message_widget.py:317
-msgid "Execute"
-msgstr "uitvoeren"
-
-#: src/custom_widgets/message_widget.py:396
-#: src/custom_widgets/message_widget.py:398
+#: src/widgets/attachments.py:285
 msgid "Image"
 msgstr "Afbeelding"
 
-#: src/custom_widgets/message_widget.py:407
-#: src/custom_widgets/message_widget.py:419
+#: src/widgets/attachments.py:296 src/widgets/attachments.py:308
 msgid "Missing Image"
 msgstr "Ontbrekende afbeelding"
 
-#: src/custom_widgets/message_widget.py:421
-msgid "Missing image"
-msgstr "Ontbrekende afbeelding"
+#: src/widgets/chat.py:88 src/widgets/instance_manager.py:96
+msgid "Notebook"
+msgstr ""
 
-#: src/custom_widgets/message_widget.py:494
-msgid "Copy Equation"
-msgstr "Vergelijking kopiëren"
+#: src/widgets/chat.py:89
+msgid "Start a notebook with a message"
+msgstr ""
 
-#: src/custom_widgets/message_widget.py:501
-msgid "Equation copied to the clipboard"
-msgstr "Vergelijking gekopieerd naar het klembord"
+#: src/widgets/chat.py:97 src/widgets/chat.py:248
+msgid "No Messages Found"
+msgstr ""
 
-#: src/custom_widgets/message_widget.py:521
+#: src/widgets/chat.py:98 src/widgets/chat.py:249
+msgid "Uh oh! No messages found for your search."
+msgstr ""
+
+#: src/widgets/chat.py:239
+msgid "Try one of these prompts"
+msgstr "Probeer een van deze aanwijzingen"
+
+#: src/widgets/chat.py:269
+msgid "Send prompt: '{}'"
+msgstr "Verzend prompt: '{}'"
+
+#: src/widgets/chat.py:275
+msgid "Refresh Prompts"
+msgstr ""
+
+#: src/widgets/chat.py:437
+msgid "Rename Chat?"
+msgstr "Chat hernoemen?"
+
+#: src/widgets/chat.py:438
+msgid "Renaming '{}'"
+msgstr "Naam wijzigen van '{}'"
+
+#: src/widgets/chat.py:440
+msgid "Chat name"
+msgstr "Chatnaam"
+
+#: src/widgets/chat.py:441
+msgid "Rename"
+msgstr "Hernoemen"
+
+#: src/widgets/chat.py:458
+msgid "Delete Chat?"
+msgstr "Chat verwijderen?"
+
+#: src/widgets/chat.py:466
+msgid "Copy of {}"
+msgstr "Kopie van {}"
+
+#: src/widgets/chat.py:479
+msgid "Chat exported successfully"
+msgstr "Chat succesvol geëxporteerd"
+
+#: src/widgets/chat.py:499
+msgid "User"
+msgstr "Gebruiker"
+
+#: src/widgets/chat.py:503
+msgid "System"
+msgstr "Systeem"
+
+#: src/widgets/chat.py:551
+msgid "Importable (.db)"
+msgstr "Importeren (.db)"
+
+#: src/widgets/chat.py:552
+msgid "Markdown"
+msgstr "Markdown"
+
+#: src/widgets/chat.py:553
+msgid "Markdown (Obsidian Style)"
+msgstr "Markdown (Obsidian-stijl)"
+
+#: src/widgets/chat.py:554
+msgid "JSON"
+msgstr "JSON"
+
+#: src/widgets/chat.py:555
+msgid "JSON (Include Metadata)"
+msgstr "JSON (inclusief metagegevens)"
+
+#: src/widgets/chat.py:560
+msgid "Select a method to export the chat"
+msgstr "Selecteer een methode om de chat te exporteren"
+
+#: src/widgets/dialog.py:148 src/widgets/dialog.py:161
+#: src/widgets/dialog.py:174 src/widgets/tools/tools.py:136
+msgid "Accept"
+msgstr "Accepteer"
+
+#: src/widgets/instance_manager.py:30 src/widgets/instance_manager.py:430
+msgid "Instance"
+msgstr ""
+
+#: src/widgets/instance_manager.py:88
+msgid "Notebook Error"
+msgstr ""
+
+#: src/widgets/instance_manager.py:89 src/widgets/instance_manager.py:159
+msgid "An error occurred while running tool"
+msgstr ""
+
+#: src/widgets/instance_manager.py:116
+msgid "Selecting tool to use..."
+msgstr ""
+
+#: src/widgets/instance_manager.py:125
+msgid "Using {}"
+msgstr ""
+
+#: src/widgets/instance_manager.py:158
+msgid "Tool Error"
+msgstr ""
+
+#: src/widgets/instance_manager.py:165
+msgid "Generating message..."
+msgstr ""
+
+#: src/widgets/instance_manager.py:219 src/widgets/instance_manager.py:528
+#: src/widgets/instance_manager.py:542 src/widgets/instance_manager.py:693
+#: src/widgets/instance_manager.py:777 src/widgets/instance_manager.py:824
+#: src/widgets/instance_manager.py:858 src/widgets/instance_manager.py:905
+#: src/widgets/instance_manager.py:930 src/widgets/instance_manager.py:956
+msgid "Instance Error"
+msgstr ""
+
+#: src/widgets/instance_manager.py:220
+msgid "Message generation failed"
+msgstr ""
+
+#: src/widgets/instance_manager.py:286
+msgid "Port"
+msgstr ""
+
+#: src/widgets/instance_manager.py:287
+msgid "Which network port will '{}' use"
+msgstr ""
+
+#: src/widgets/instance_manager.py:301
+msgid "Instance URL"
+msgstr ""
+
+#: src/widgets/instance_manager.py:304 src/widgets/instance_manager.py:314
+#: src/widgets/instance_manager.py:317 src/widgets/instance_manager.py:319
+msgid "API Key (Unchanged)"
+msgstr ""
+
+#: src/widgets/instance_manager.py:304 src/widgets/instance_manager.py:314
+msgid "API Key (Optional)"
+msgstr ""
+
+#: src/widgets/instance_manager.py:317 src/widgets/instance_manager.py:319
+msgid "API Key"
+msgstr ""
+
+#: src/widgets/instance_manager.py:327
+msgid "Max Tokens"
+msgstr ""
+
+#: src/widgets/instance_manager.py:328
+msgid ""
+"Defines the maximum number of tokens (words + spaces) the AI can generate in "
+"a response. More tokens allow longer replies but may take more time and cost "
+"more."
+msgstr ""
+
+#: src/widgets/instance_manager.py:343
+msgid "Temperature"
+msgstr "Temperatuur"
+
+#: src/widgets/instance_manager.py:344
+msgid "Increasing the temperature will make the models answer more creatively."
+msgstr ""
+
+#: src/widgets/instance_manager.py:359
+msgid "Seed"
+msgstr "Zaad"
+
+#: src/widgets/instance_manager.py:360
+msgid ""
+"Setting this to a specific number other than 0 will make the model generate "
+"the same text for the same prompt."
+msgstr ""
+
+#: src/widgets/instance_manager.py:375
+msgid "Overrides"
+msgstr ""
+
+#: src/widgets/instance_manager.py:375
+msgid ""
+"These entries are optional, they are used to troubleshoot GPU related "
+"problems with Ollama."
+msgstr ""
+
+#: src/widgets/instance_manager.py:393
+msgid "Model Directory"
+msgstr "Modeldirectory"
+
+#: src/widgets/instance_manager.py:395
+msgid "Select Directory"
+msgstr ""
+
+#: src/widgets/instance_manager.py:410
+msgid "Default Model"
+msgstr "Standaardmodel"
+
+#: src/widgets/instance_manager.py:410
+msgid "Model to select when starting a new chat."
+msgstr ""
+
+#: src/widgets/instance_manager.py:412
+msgid "Title Model"
+msgstr ""
+
+#: src/widgets/instance_manager.py:412
+msgid "Model to use when generating a chat title."
+msgstr ""
+
+#: src/widgets/instance_manager.py:476 src/widgets/instance_manager.py:477
+#: src/widgets/blocks/code.py:145 src/widgets/blocks/text.py:120
+msgid "Save"
+msgstr ""
+
+#: src/widgets/instance_manager.py:529 src/widgets/instance_manager.py:778
+#: src/widgets/instance_manager.py:825 src/widgets/instance_manager.py:859
+msgid "Could not retrieve added models"
+msgstr ""
+
+#: src/widgets/instance_manager.py:543
+msgid "Could not retrieve available models"
+msgstr ""
+
+#: src/widgets/instance_manager.py:612
+msgid "Ollama (Managed)"
+msgstr ""
+
+#: src/widgets/instance_manager.py:621
+msgid "Local AI instance managed directly by Alpaca"
+msgstr ""
+
+#: src/widgets/instance_manager.py:645
+msgid "Alpaca Support"
+msgstr "Alpaca ondersteuning"
+
+#: src/widgets/instance_manager.py:652
+msgid "Model request too large for system"
+msgstr "Modelaanvraag te groot voor systeem"
+
+#: src/widgets/instance_manager.py:655
+msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
+msgstr ""
+"AMD GPU gedetecteerd maar de extensie ontbreekt, Ollama zal CPU gebruiken."
+
+#: src/widgets/instance_manager.py:657
+msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
+msgstr "AMD GPU gedetecteerd maar ROCm ontbreekt, Ollama zal CPU gebruiken."
+
+#: src/widgets/instance_manager.py:659
+msgid "Using AMD GPU type '{}'"
+msgstr "Gebruik AMD GPU type '{}'."
+
+#: src/widgets/instance_manager.py:669
+msgid "Integrated Ollama instance is not running"
+msgstr "Geïntegreerde Ollama-instantie wordt niet uitgevoerd"
+
+#: src/widgets/instance_manager.py:694
+msgid "Managed Ollama instance failed to start"
+msgstr ""
+
+#: src/widgets/instance_manager.py:699
+msgid "Integrated Ollama instance is running"
+msgstr "Geïntegreerde Ollama-instantie wordt uitgevoerd"
+
+#: src/widgets/instance_manager.py:704 src/widgets/instance_manager.py:707
+msgid "Ollama Log"
+msgstr ""
+
+#: src/widgets/instance_manager.py:724
+msgid "Local or remote AI instance not managed by Alpaca"
+msgstr ""
+
+#: src/widgets/instance_manager.py:906 src/widgets/instance_manager.py:931
+#: src/widgets/instance_manager.py:957
+msgid "Could not retrieve models"
+msgstr ""
+
+#: src/widgets/instance_manager.py:917
+msgid "Fireworks AI inference platform"
+msgstr ""
+
+#: src/widgets/instance_manager.py:942
+msgid "Lambda Labs cloud inference API"
+msgstr ""
+
+#: src/widgets/instance_manager.py:968
+msgid "Cerebras AI cloud inference API"
+msgstr ""
+
+#: src/widgets/instance_manager.py:974
+msgid "Kluster AI cloud inference API"
+msgstr ""
+
+#: src/widgets/instance_manager.py:978
+msgid "OpenAI Compatible Instance"
+msgstr ""
+
+#: src/widgets/instance_manager.py:979
+msgid "AI instance compatible with OpenAI library"
+msgstr ""
+
+#: src/widgets/instance_manager.py:989
+msgid "Meta AI Llama API"
+msgstr ""
+
+#: src/widgets/instance_manager.py:1010
+msgid "Remove Instance?"
+msgstr ""
+
+#: src/widgets/instance_manager.py:1011
+msgid "Are you sure you want to remove this instance?"
+msgstr ""
+
+#: src/widgets/instance_manager.py:1013 src/widgets/model_manager.py:114
+#: src/widgets/model_manager.py:201 src/widgets/model_manager.py:638
+#: src/widgets/model_manager.py:695
+msgid "Remove"
+msgstr "Verwijder"
+
+#: src/widgets/instance_manager.py:1031
+msgid "Edit Instance"
+msgstr ""
+
+#: src/widgets/message.py:35
 msgid "Remove Message"
 msgstr "Bericht verwijderen"
 
-#: src/custom_widgets/message_widget.py:541
+#: src/widgets/message.py:45
+msgid "Copy Message"
+msgstr "Kopieer bericht"
+
+#: src/widgets/message.py:55
 msgid "Edit Message"
 msgstr "Bericht bewerken"
 
-#: src/custom_widgets/message_widget.py:552
+#: src/widgets/message.py:66
 msgid "Regenerate Message"
 msgstr "Bericht opnieuw genereren"
 
-#: src/custom_widgets/message_widget.py:564
+#: src/widgets/message.py:78
 msgid "Dictate Message"
 msgstr ""
 
-#: src/custom_widgets/message_widget.py:584
+#: src/widgets/message.py:97
 msgid "Message copied to the clipboard"
 msgstr "Bericht gekopieerd naar het klembord"
 
-#: src/custom_widgets/message_widget.py:661
+#: src/widgets/message.py:167
 msgid "Message cannot be regenerated while receiving a response"
 msgstr ""
 "Bericht kan niet worden geregenereerd terwijl een antwoord wordt ontvangen"
 
-#: src/custom_widgets/message_widget.py:970
-msgid "Thought"
-msgstr ""
-
-#: src/custom_widgets/model_manager_widget.py:109
-#: src/custom_widgets/model_manager_widget.py:195
-#: src/custom_widgets/model_manager_widget.py:671
+#: src/widgets/model_manager.py:107 src/widgets/model_manager.py:194
+#: src/widgets/model_manager.py:688
 msgid "Remove Model"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:112
-#: src/custom_widgets/model_manager_widget.py:198
-#: src/custom_widgets/model_manager_widget.py:674
+#: src/widgets/model_manager.py:111 src/widgets/model_manager.py:198
+#: src/widgets/model_manager.py:692
 msgid "Remove Model?"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:113
-#: src/custom_widgets/model_manager_widget.py:199
-#: src/custom_widgets/model_manager_widget.py:675
+#: src/widgets/model_manager.py:112 src/widgets/model_manager.py:199
+#: src/widgets/model_manager.py:693
 msgid "Are you sure you want to remove '{}'?"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:123
+#: src/widgets/model_manager.py:122
 msgid "Local text to speech model provided by Kokoro."
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:160
-#: src/custom_widgets/model_manager_widget.py:293
+#: src/widgets/model_manager.py:159 src/widgets/model_manager.py:293
 msgid "Speech to Text"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:209
+#: src/widgets/model_manager.py:209
 msgid "Local speech to text model provided by OpenAI Whisper."
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:239
+#: src/widgets/model_manager.py:238
 msgid "Downloading…"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:249
-#: src/custom_widgets/model_manager_widget.py:251
+#: src/widgets/model_manager.py:248 src/widgets/model_manager.py:250
 msgid "Stop Download"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:256
+#: src/widgets/model_manager.py:256
 msgid "Stop Download?"
 msgstr "Downloaden stoppen?"
 
-#: src/custom_widgets/model_manager_widget.py:257
+#: src/widgets/model_manager.py:257
 msgid "Are you sure you want to stop pulling '{}'?"
 msgstr "Weet u zeker dat u wilt stoppen met het ophalen van '{}'?"
 
-#: src/custom_widgets/model_manager_widget.py:259
+#: src/widgets/model_manager.py:259
 msgid "Stop"
 msgstr "Stop"
 
-#: src/custom_widgets/model_manager_widget.py:338
+#: src/widgets/model_manager.py:341
 msgid "Model Manager Error"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:338
+#: src/widgets/model_manager.py:342
 msgid "An error occurred whilst pulling '{}'"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:364
+#: src/widgets/model_manager.py:369
 msgid "Download Completed"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:364
+#: src/widgets/model_manager.py:369
 msgid "Model '{}' downloaded successfully."
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:427
+#: src/widgets/model_manager.py:431
 msgid "Change Profile Picture"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:450
+#: src/widgets/model_manager.py:454
 msgid "Family"
 msgstr "Familie"
 
-#: src/custom_widgets/model_manager_widget.py:451
+#: src/widgets/model_manager.py:455
 msgid "Parameter Size"
 msgstr "Parameter Grootte"
 
-#: src/custom_widgets/model_manager_widget.py:452
+#: src/widgets/model_manager.py:456
 msgid "Quantization Level"
 msgstr "Kwantiseringsniveau"
 
-#: src/custom_widgets/model_manager_widget.py:455
+#: src/widgets/model_manager.py:459
 msgid "Parent Model"
 msgstr "Ouder model"
 
-#: src/custom_widgets/model_manager_widget.py:458
-#: src/custom_widgets/model_manager_widget.py:460
+#: src/widgets/model_manager.py:462 src/widgets/model_manager.py:464
 msgid "Modified At"
 msgstr "Gewijzigd op"
 
-#: src/custom_widgets/model_manager_widget.py:468
+#: src/widgets/model_manager.py:472
 msgid "Description"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:491
+#: src/widgets/model_manager.py:495
 msgid "Voice"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:496
+#: src/widgets/model_manager.py:500
 msgid "Default"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:638
+#: src/widgets/model_manager.py:639
 msgid "Change"
 msgstr "wijzigen"
 
-#: src/custom_widgets/model_manager_widget.py:641
+#: src/widgets/model_manager.py:647
 msgid "Model Profile Picture"
 msgstr "Profielfoto model"
 
-#: src/custom_widgets/model_manager_widget.py:641
+#: src/widgets/model_manager.py:648
 msgid "What do you want to do with the model's profile picture?"
 msgstr "Wat wilt u doen met de profielfoto van het model?"
 
-#: src/custom_widgets/model_manager_widget.py:663
+#: src/widgets/model_manager.py:680
 msgid "Create Child"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:689
+#: src/widgets/model_manager.py:707
 msgid "Multilingual"
 msgstr "Meertalig"
 
-#: src/custom_widgets/model_manager_widget.py:690
+#: src/widgets/model_manager.py:708
 msgid "Code"
 msgstr "Code"
 
-#: src/custom_widgets/model_manager_widget.py:691
+#: src/widgets/model_manager.py:709
 msgid "Math"
 msgstr "Wiskunde"
 
-#: src/custom_widgets/model_manager_widget.py:692
+#: src/widgets/model_manager.py:710
 msgid "Vision"
 msgstr "Vision"
 
-#: src/custom_widgets/model_manager_widget.py:693
+#: src/widgets/model_manager.py:711
 msgid "Embedding"
 msgstr "Insluiten"
 
-#: src/custom_widgets/model_manager_widget.py:694
+#: src/widgets/model_manager.py:712
 msgid "Tools"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:695
+#: src/widgets/model_manager.py:713
 msgid "Reasoning"
 msgstr ""
 
-#: src/custom_widgets/model_manager_widget.py:696
+#: src/widgets/model_manager.py:714
 msgid "Small"
 msgstr "Klein"
 
-#: src/custom_widgets/model_manager_widget.py:697
+#: src/widgets/model_manager.py:715
 msgid "Medium"
 msgstr "Middelgroot"
 
-#: src/custom_widgets/model_manager_widget.py:698
+#: src/widgets/model_manager.py:716
 msgid "Big"
 msgstr "Groot"
 
-#: src/custom_widgets/model_manager_widget.py:699
+#: src/widgets/model_manager.py:717
 msgid "Huge"
 msgstr "Groot"
 
-#: src/custom_widgets/model_manager_widget.py:788
+#: src/widgets/model_manager.py:807
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website"
 msgstr ""
 
-#: src/custom_widgets/terminal_widget.py:80
+#: src/widgets/model_manager.py:888
+msgid "Languages"
+msgstr ""
+
+#: src/widgets/terminal.py:17
 msgid "Setting up Python environment..."
 msgstr "Python-omgeving opzetten..."
 
-#: src/custom_widgets/terminal_widget.py:98
-msgid "Compiling C++ script..."
+#: src/widgets/terminal.py:29
+msgid "Using Python HTTP server..."
 msgstr ""
 
-#: src/custom_widgets/terminal_widget.py:111
-msgid "Running local web server"
+#: src/widgets/terminal.py:34
+msgid "Using Flatpak contained shell..."
 msgstr ""
 
-#: src/custom_widgets/terminal_widget.py:136
-msgid "Using Flatpak contained shell"
-msgstr ""
-
-#: src/custom_widgets/terminal_widget.py:136
+#: src/widgets/terminal.py:38
 msgid "Using SSH to run command"
 msgstr ""
 
-#: src/custom_widgets/terminal_widget.py:142
+#: src/widgets/terminal.py:85
+msgid "Terminal"
+msgstr "Terminal"
+
+#: src/widgets/terminal.py:97
+msgid "Open Environment Directory"
+msgstr ""
+
+#: src/widgets/terminal.py:181
 msgid "Script Exited"
 msgstr ""
+
+#: src/widgets/terminal.py:192
+msgid "Alpaca Terminal is not compatible with Windows"
+msgstr ""
+
+#: src/widgets/blocks/code.py:84
+msgid "Code Block"
+msgstr "Codeblok"
+
+#: src/widgets/blocks/code.py:111
+msgid "Edit Script"
+msgstr ""
+
+#: src/widgets/blocks/code.py:119
+msgid "Copy Script"
+msgstr ""
+
+#: src/widgets/blocks/code.py:127
+msgid "Run Script"
+msgstr "Script uitvoeren"
+
+#: src/widgets/blocks/code.py:193
+msgid "Changes saved successfully"
+msgstr ""
+
+#: src/widgets/blocks/code.py:199
+msgid "Code copied to the clipboard"
+msgstr "Code gekopieerd naar het klembord"
+
+#: src/widgets/blocks/latex.py:41
+msgid "Copy Equation"
+msgstr "Vergelijking kopiëren"
+
+#: src/widgets/blocks/latex.py:76
+msgid "Equation copied to the clipboard"
+msgstr "Vergelijking gekopieerd naar het klembord"
+
+#: src/widgets/blocks/__init__.py:36
+msgid "Thought"
+msgstr ""
+
+#: src/widgets/tools/notebook_tools.py:18
+msgid "Read Notebook"
+msgstr ""
+
+#: src/widgets/tools/notebook_tools.py:19
+msgid "Reads the current notebook."
+msgstr ""
+
+#: src/widgets/tools/notebook_tools.py:38
+msgid "Write Notebook"
+msgstr ""
+
+#: src/widgets/tools/notebook_tools.py:39
+msgid "Overwrites the notebook with new text."
+msgstr ""
+
+#: src/widgets/tools/notebook_tools.py:58
+msgid "Append to Notebook"
+msgstr ""
+
+#: src/widgets/tools/notebook_tools.py:59
+msgid "Appends text to the notebook."
+msgstr ""
+
+#: src/widgets/tools/tools.py:67
+msgid "AI Description"
+msgstr ""
+
+#: src/widgets/tools/tools.py:68
+msgid "The description the AI model will use to understand what the tool does."
+msgstr ""
+
+#: src/widgets/tools/tools.py:79
+msgid "Arguments"
+msgstr ""
+
+#: src/widgets/tools/tools.py:80
+msgid "Variables that are filled by the AI."
+msgstr ""
+
+#: src/widgets/tools/tools.py:93
+msgid "Variables"
+msgstr ""
+
+#: src/widgets/tools/tools.py:94
+msgid ""
+"User filled values that the tool uses to work, the AI does not have access "
+"to these variables at all."
+msgstr ""
+
+#: src/widgets/tools/tools.py:182
+msgid "Gets the current date and/or time."
+msgstr ""
+
+#: src/widgets/tools/tools.py:215
+msgid "Gets a recipe by the meal's name"
+msgstr ""
+
+#: src/widgets/tools/tools.py:230 src/widgets/tools/tools.py:297
+msgid "YouTube Video"
+msgstr ""
+
+#: src/widgets/tools/tools.py:238 src/widgets/tools/tools.py:306
+msgid "Source"
+msgstr ""
+
+#: src/widgets/tools/tools.py:276
+msgid "Gets a list of food recipes by a specified category"
+msgstr ""
+
+#: src/widgets/tools/tools.py:333
+msgid "Extracts an article from Wikipedia by it's title"
+msgstr ""
+
+#: src/widgets/tools/tools.py:375
+msgid "Search for a term online using DuckDuckGo"
+msgstr ""
+
+#: src/widgets/tools/tools.py:393
+msgid "Abstract Source"
+msgstr ""
+
+#: src/widgets/tools/tools.py:417
+msgid "Official Website"
+msgstr ""
+
+#: src/widgets/tools/tools.py:468
+msgid "Request to run a command using SSH to connect to the device"
+msgstr ""
+
+#: src/widgets/tools/tools.py:471
+msgid "IP Address"
+msgstr ""
+
+#: src/widgets/tools/tools.py:476
+msgid "Username"
+msgstr ""
+
+#: src/widgets/tools/tools.py:481
+msgid "Network Port"
+msgstr ""
+
+#: src/widgets/tools/tools.py:498
+msgid "Model Requested to Run Command"
+msgstr ""
+
+#: src/widgets/tools/tools.py:499
+msgid "Command"
+msgstr ""
+
+#: src/widgets/tools/tools.py:501
+msgid "Explanation"
+msgstr ""
+
+#: src/widgets/tools/tools.py:502
+msgid "No explanation was provided"
+msgstr ""
+
+#: src/widgets/tools/tools.py:503
+msgid "Make sure you understand what the command does before running it."
+msgstr ""
+
+#~ msgid "Cannot open image"
+#~ msgstr "Kan afbeelding niet openen"
+
+#~ msgid "Remove Attachment?"
+#~ msgstr "Bijlage verwijderen?"
+
+#~ msgid "Are you sure you want to remove attachment?"
+#~ msgstr "Weet je zeker dat je de bijlage wilt verwijderen?"
+
+#~ msgid "File preview dialog"
+#~ msgstr "Bestandsvoorbeeld dialoog"
+
+#~ msgid "Open With Default App"
+#~ msgstr "Openen met standaardprogramma"
+
+#~ msgid "An error occurred while extracting text from the website"
+#~ msgstr ""
+#~ "Er is een fout opgetreden tijdens het extraheren van tekst van de website"
+
+#~ msgid "Regenerate Response"
+#~ msgstr "Reactie opnieuw genereren"
+
+#~ msgid "Save Message"
+#~ msgstr "Bericht opslaan"
+
+#~ msgid "Message edited successfully"
+#~ msgstr "Bericht succesvol bewerkt"
+
+#~ msgid "Response message"
+#~ msgstr "Antwoordbericht"
+
+#~ msgid "System message"
+#~ msgstr "Systeembericht"
+
+#~ msgid "User message"
+#~ msgstr "Gebruikersbericht"
+
+#~ msgid "{}Code Block"
+#~ msgstr "{}Codeblok"
+
+#~ msgid ""
+#~ "Make sure you understand what this script does before running it, Alpaca "
+#~ "is not responsible for any damages to your device or data"
+#~ msgstr ""
+#~ "Zorg ervoor dat u begrijpt wat dit script doet voordat u het uitvoert, "
+#~ "Alpaca is niet verantwoordelijk voor enige schade aan uw apparaat of "
+#~ "gegevens."
+
+#~ msgid "Execute"
+#~ msgstr "uitvoeren"
+
+#~ msgid "Missing image"
+#~ msgstr "Ontbrekende afbeelding"
 
 #~ msgid "Clear Chat?"
 #~ msgstr "Chat wissen?"

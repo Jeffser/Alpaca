@@ -1,85 +1,86 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Georgian translations for Alpaca.
+# Copyright (C) 2024 Jeffry Samuel Eduarte Rojas
+# This file is distributed under the same license as the Alpaca package.
+# Ekaterine Papava <papava.e@gtu.ge>, 2025.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: alpaca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-03 14:51-0600\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2025-05-02 19:38-0600\n"
+"PO-Revision-Date: 2025-02-24 12:04+0100\n"
+"Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
+"Language-Team: Georgian <(nothing)>\n"
+"Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/com.jeffser.Alpaca.desktop.in:2
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
 msgid "Alpaca"
-msgstr ""
+msgstr "Alpaca"
 
 #: data/com.jeffser.Alpaca.desktop.in:8
 msgid "ai;ollama;llm"
-msgstr ""
+msgstr "ai;ollama;llm;ხი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:8
 msgid "Chat with AI models"
-msgstr ""
+msgstr "ჩატი AI მოდელებთან"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:10
 msgid "A private AI client"
-msgstr ""
+msgstr "კონფიდენციალური AI-ის კლიენტი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:11
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1163
 msgid "Features"
-msgstr ""
+msgstr "მახასიათებლები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:13
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1165
 msgid "Talk to multiple models in the same conversation"
-msgstr ""
+msgstr "ესაუბრეთ ერთზე მეტ მოდელს იგივე საუბარში"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:14
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1166
 msgid "Pull and delete models from the app"
-msgstr ""
+msgstr "გადმოწერეთ და წაშალეთ მოდელები აპიდან"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:15
 msgid "Have multiple conversations"
-msgstr ""
+msgstr "იქონიეთ ერთზე მეტი საუბარი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:16
 msgid "Image recognition (Only available with compatible models)"
 msgstr ""
+"გამოსახულებების ამოცნობა (ხელმისაწვდომია, მხოლოდ, თავსებად მოდელებთან ერთად)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:17
 msgid "Plain text documents recognition"
-msgstr ""
+msgstr "უბრალო ტექსტური დოკუმენტების ამოცნობა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:18
 msgid "Import and export chats"
-msgstr ""
+msgstr "ჩატების შემოტანა და გატანა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:19
 msgid "Append YouTube transcripts to the prompt"
-msgstr ""
+msgstr "YouTube-ის ტრანსკრიფციების ბოლოში მიწერა მოთხოვნისთვის"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:20
 msgid "Append text from a website to the prompt"
-msgstr ""
+msgstr "ვებგვერდიდან აღებული ტექსტის ბოლოში მიწერა მოთხოვნისთვის"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:21
 msgid "PDF recognition"
-msgstr ""
+msgstr "PDF-ის ამოცნობა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:23 src/window.ui:90
 msgid "Disclaimer"
-msgstr ""
+msgstr "უარყოფა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:24
 msgid ""
@@ -87,6 +88,9 @@ msgid ""
 "any damages to your device or software caused by running code given by any "
 "models."
 msgstr ""
+"ეს პროექტი არანაირ კავშირში არაა Ollama-სთან. მე არ ვაგებ პასუხს არანაირ "
+"ზიანზე, რომელიც, შეიძლება, ნებისმიერი მოდელის მიერ შექმნილმა კოდმა "
+"გამოიწვიოს."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:27
 msgid "Jeffry Samuel Eduarte Rojas"
@@ -94,35 +98,35 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:53
 msgid "A normal conversation with an AI Model"
-msgstr ""
+msgstr "ნორმალური საუბარი AI მოდელთან"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:57
 msgid "A conversation involving image recognition"
-msgstr ""
+msgstr "საუბარი, რომელიც გამოსახულების ამოცნობას ეხება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:61
 msgid "A conversation involving a custom model"
-msgstr ""
+msgstr "საუბარი, რომელიც მორგებულ მოდელს ეხება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:65
 msgid "A conversation showing code highlighting"
-msgstr ""
+msgstr "საუბარი, რომელიც კოდის გამოკვეთას აჩვენებს"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:69
 msgid "A Python script running inside integrated terminal"
-msgstr ""
+msgstr "ჩაშენებულ ტერმინალში გაშვებული Python-ის სკრიპტი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:73
 msgid "A conversation involving a YouTube video transcript"
-msgstr ""
+msgstr "საუბარი, რომელიც YouTube-ის ვიდეოს ტრანსკრიფციას ეხება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:77
 msgid "Multiple models being downloaded"
-msgstr ""
+msgstr "მიმდინარეობს ერთზე მეტი მოდელის გადმოწერა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:81
 msgid "Model creator screen"
-msgstr ""
+msgstr "მოდელის შემქმნელის ეკრანი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
@@ -156,7 +160,7 @@ msgstr ""
 #: data/com.jeffser.Alpaca.metainfo.xml.in:732
 #: data/com.jeffser.Alpaca.metainfo.xml.in:748
 msgid "Fixes"
-msgstr ""
+msgstr "გასწორებები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Fixed whisper directory not existing causing error"
@@ -192,12 +196,12 @@ msgstr ""
 #: data/com.jeffser.Alpaca.metainfo.xml.in:713
 #: data/com.jeffser.Alpaca.metainfo.xml.in:738
 msgid "New"
-msgstr ""
+msgstr "ახალი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 #: data/com.jeffser.Alpaca.metainfo.xml.in:955
 msgid "Updated model list"
-msgstr ""
+msgstr "განახლდა მოდელების სია"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
 msgid "Alpaca now remembers it's size"
@@ -251,7 +255,8 @@ msgstr ""
 msgid "Speech recognition (message dictation)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:155 src/widgets/model_manager.py:66
+#: data/com.jeffser.Alpaca.metainfo.xml.in:155
+#: src/custom_widgets/model_manager_widget.py:68
 msgid "Text to Speech"
 msgstr ""
 
@@ -282,7 +287,7 @@ msgstr ""
 #: data/com.jeffser.Alpaca.metainfo.xml.in:163
 #: data/com.jeffser.Alpaca.metainfo.xml.in:271
 msgid "New Instances"
-msgstr ""
+msgstr "ახალი გაშვებული ასლები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:165
 msgid "Deepseek"
@@ -328,27 +333,27 @@ msgstr ""
 msgid "New Tools"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:180 src/widgets/tools/tools.py:467
+#: data/com.jeffser.Alpaca.metainfo.xml.in:180 src/tool_manager.py:431
 msgid "Run Command (Testing)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:181 src/widgets/tools/tools.py:374
+#: data/com.jeffser.Alpaca.metainfo.xml.in:181 src/tool_manager.py:348
 msgid "Online Search"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:182 src/widgets/tools/tools.py:332
+#: data/com.jeffser.Alpaca.metainfo.xml.in:182 src/tool_manager.py:306
 msgid "Extract Wikipedia Article"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:183 src/widgets/tools/tools.py:214
+#: data/com.jeffser.Alpaca.metainfo.xml.in:183 src/tool_manager.py:210
 msgid "Get Recipe by Name"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:184 src/widgets/tools/tools.py:275
+#: data/com.jeffser.Alpaca.metainfo.xml.in:184 src/tool_manager.py:261
 msgid "Get Recipes by Category"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:185 src/widgets/tools/tools.py:181
+#: data/com.jeffser.Alpaca.metainfo.xml.in:185 src/tool_manager.py:176
 msgid "Get Current Datetime"
 msgstr ""
 
@@ -441,516 +446,541 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:257
 msgid "Tweaked appearance of models in model manager"
-msgstr ""
+msgstr "შეიცვალა მოდელების გარეგნობა მოდელების მმართველსი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:258
 msgid "Updated Ollama instance to 0.5.11"
-msgstr ""
+msgstr "განახლდა Ollama-ის ასლი 0.5.11-მდე"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:259
 msgid "Added new models"
-msgstr ""
+msgstr "დაემატა ახალი მოდელები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:268
 msgid "New instance manager"
-msgstr ""
+msgstr "ახალი გაშვებული ასლების მმართველი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:269
 msgid "New welcome screen"
-msgstr ""
+msgstr "ახალი მისალმების ეკრანი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:273
 msgid "OpenAI ChatGPT"
-msgstr ""
+msgstr "OpenAI ChatGPT"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:274
 msgid "Google Gemini"
-msgstr ""
+msgstr "Google Gemini"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:275
 msgid "Together AI"
-msgstr ""
+msgstr "Together AI"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:276
 msgid "Venice"
-msgstr ""
+msgstr "ვენეცია"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:285
 msgid "Exporting chats with 'thoughts' attachment is fixed"
-msgstr ""
+msgstr "გასწორდა 'აზრების' შემცველი ჩატების გატანა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:286
 msgid "Fixed attachment filters"
-msgstr ""
+msgstr "გასწორდა მიმაგრების ფილტრები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:295
 msgid "New model manager"
-msgstr ""
+msgstr "ახალი მოდელების მმართველი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:296
 msgid "Changed GtkSpinner to AdwSpinner"
-msgstr ""
+msgstr "GtkSpinner შეიცვალა AdwSpinner-ით"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:297
 msgid "Better handling of launch process"
-msgstr ""
+msgstr "გაშვების პროცესის უკეთესი მართვა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:298
 msgid "New loading screen at launch"
-msgstr ""
+msgstr "ახალი ჩატვირთვის ეკრანი გაშვებისას"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:299
 msgid "Better handling of file types"
-msgstr ""
+msgstr "ფაილის ტიპების უკეთესი მართვა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:300
 msgid "Better regex expression for LaTeX equations"
-msgstr ""
+msgstr "უკეთესი რეგგამოსის გამოსახულებები LaTeX-ის ტოლობებისთვის"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:301
 msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
 msgstr ""
+"დადასტურების დიალოგის ჩვენება, თუ მომხმარებელი Alpaca-ს მოდელის გადმოწერის "
+"დროს დახურავს"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:302
 msgid "Better handling of think tags in messages"
-msgstr ""
+msgstr "შეტყობინებებში აზრის ჭდეების უკეთესი აღქმა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:303
 msgid "Default model is now in charge of generating titles"
-msgstr ""
+msgstr "ახლა სათაურების გენერაციას ნაგულისხმევი მოდელი ახდენს"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:304
 msgid "Message header is now shown whilst the message is being generated"
-msgstr ""
+msgstr "ახლა შეტყობინების გენერაციისას მისი თავსართი ნაჩვენებია"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:305
 msgid "Better handling of model profile pictures"
-msgstr ""
+msgstr "მოდელის პროფილის სურათების უკეთესი დამუშავება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:306
 msgid "New models in 'available models' list"
-msgstr ""
+msgstr "ახალი მოდელები 'ხელმისაწვდომი მოდელების' სიაში"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:315
 msgid "Added option for attaching screenshots"
-msgstr ""
+msgstr "დაემატა ეკრანის ანაბეჭდის მიმაგრების შესაძლებლობა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:316
 msgid "Basic LaTeX math equations are now rendered in messages"
 msgstr ""
+"მარტივი LaTeX-ის მათემატიკური განტოლებები, ახლა, შეტყობინებებში რენდერდება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:317
 msgid "HTML and C++ scripts can now be run inside Alpaca"
-msgstr ""
+msgstr "ახლა Alpaca-ის შიგნით HTML და C++ სკრიპტების გაშვება შეგიძლიათ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:318
 msgid "Added option to open the environment directory from the terminal"
-msgstr ""
+msgstr "დაემატა შესაძლებლობა, რომ გარემოს საქაღალდე ტერმინალიდან გახსნათ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:319
 msgid "Added option to edit code blocks directly"
-msgstr ""
+msgstr "დაემატა შესაძლებლობა, კოდის ბლოკები პირდაპირ ჩაასწოროთ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:320
 msgid "Complete keyboard shortcut list"
-msgstr ""
+msgstr "სრული კლავიატურის მალსახმობების სია"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:321
 msgid "Images are now attached in 640p resolution"
-msgstr ""
+msgstr "ახლა გამოსახულებები 640p გაფართოებით მაგრდება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:322
 msgid "Website attachments now use extracted titles"
-msgstr ""
+msgstr "ვებსაიტის მიმაგრებული ფაილები ახლა ამოღებულ სათაურებს იყენებს"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:323
 msgid "Better chat title generation"
-msgstr ""
+msgstr "ჩატის სათაურის უკეთესი გენერაცია"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:324
 msgid "Added option to attach any plain text files"
-msgstr ""
+msgstr "დაემატა შესაძლებლობა, ნებისმიერი უბრალო ტექსტური ფაილი მიამაგროთ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:325
 msgid "Added spellchecker to message entry"
-msgstr ""
+msgstr "დაემატა მართლწერის შემოწმება შეტყობინების ჩანაწერისთვის"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:326
 msgid "Alpaca's parameters are now stored using SQLite3"
-msgstr ""
+msgstr "Alpaca-ის პარამეტრები ახლა SQLite3-ში ინახება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:327
 msgid "Small appearance changes in text entries"
-msgstr ""
+msgstr "მცირე გარეგნობის ცვლილებები ტექსტურ ჩანაწერებში"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:331
 msgid "Alpaca's launch process is more reliable"
-msgstr ""
+msgstr "Alpaca-ის გაშვების პროცესი ახლა უფრო სანდოა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:332
 msgid "Closing the terminal now kills the script subprocess"
-msgstr ""
+msgstr "ტერმინალის დახურვა ახლა სკრიპტის ქვეპროცესს კლავს"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:341
 msgid "Transitioned chat backend from JSON to SQLite3"
-msgstr ""
+msgstr "ჩატის უკანაბოლო გადაყვანილია JSON-დან SQLite3-ზე"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:342
 msgid "Changed appearance of messages"
-msgstr ""
+msgstr "შეიცვალა შეტყობინებების გარეგნობა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:343
 msgid "Added the option to add profile pictures to models"
-msgstr ""
+msgstr "დაემატა შესაძლებლობა, მოდელებს პროფილის სურათები დაამატოთ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:345
 #: data/com.jeffser.Alpaca.metainfo.xml.in:817
 #: data/com.jeffser.Alpaca.metainfo.xml.in:866
 msgid "Fix"
-msgstr ""
+msgstr "გასწორება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:347
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
-msgstr ""
+msgstr "შეიცვალა HIP_VISIBLE_DEVICES გადაფარვა ROCR_VISIBLE_DEVICES-ზე"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:356
 msgid "Added categories to models"
-msgstr ""
+msgstr "მოდელებს დაემატა კატეგორიები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:357
 msgid "Specified model's languages"
-msgstr ""
+msgstr "მითითებული მოდელის ენები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:358
 msgid "Added warning when downloading embedding models"
-msgstr ""
+msgstr "დაემატა გაფრთხილება ჩაშენებული მოდელების გადმოწერისას"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:362
 msgid "Replaced low ram warning with big model warning"
 msgstr ""
+"შეიცვალა არასაკმარისი მეხსიერების გაფრთხილება დიდი მოდელის გაფრთხილებით"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:371
 msgid "Correctly escape markup before rendering message"
-msgstr ""
+msgstr "სწორად გამოიყოფა სპეცსიბოლოები შეტყობინების რენდერამდე"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:372
 msgid "Fixed about dialog not working if log file was missing"
-msgstr ""
+msgstr "გასწორდა დიალოგი, რომელიც არ მუშაობდა, თუ ჟურნალის ფაილი არ არსებობს"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:381
 msgid "System messages can now be sent directly from Alpaca"
-msgstr ""
+msgstr "სისტემური შეტყობინებების გაგზავნა ახლა პირდაპირ Alpaca-დან შეგიძლიათ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:382
 msgid "New redesign for messages and smaller minimum size"
-msgstr ""
+msgstr "შეიცვალა დიზაინი შეტყობინებებზე და უფრო მცირე მინიმალური ზომა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:383
 msgid "New models included in 'available models list'"
-msgstr ""
+msgstr "ახალი მოდელები 'ხელმისაწვდომი მოდელების სიაში'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:384
 msgid "Added symbolic icon when attaching code files"
-msgstr ""
+msgstr "დაემატა სიმბოლური ხატულა კოდის ფაილის მიმაგრებისას"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:385
 msgid "When exporting a chat it now includes a markdown file"
-msgstr ""
+msgstr "ჩატის გატანისას ის ახლა მარკდაუნის ფაილს შეიცავს"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:386
 msgid "Refresh button in model manager when using a remote instance"
 msgstr ""
+"განახლების ღილაკი მოდელების მმართველში დაშორებული გაშვებული ასლის "
+"გამოყენებისას"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:387
 msgid "Assistant messages are now editable"
-msgstr ""
+msgstr "დამხმარის შეტყობინებები ახლა ჩასწორებადია"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:388
 msgid "Updated Ollama to v0.5.2"
-msgstr ""
+msgstr "განახლდა Ollama ვერსიამდე 0.5.2"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:389
 msgid "New option to change model directory"
-msgstr ""
+msgstr "ახალი შესაძლებლობა, შეცვალოთ მოდელის საქაღალდე"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:390
 msgid "File previewer now resizes dynamically to content"
-msgstr ""
+msgstr "ფაილის დამთვალიერებელი ახლა ზომას შემცველობის მიხედვით იცვლის"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:391
 msgid "Adapted Alpaca to work without integrated Ollama instance"
-msgstr ""
+msgstr "შესაძლებლობა, Alpaca-მა ჩაშენებული Ollama-ის გარეშე იმუშაოს"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:392
 msgid "Compatibility added with ODT files"
-msgstr ""
+msgstr "დაემატა თავსებადობა ODT ფაილებთან"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:395
 msgid "Restored ROCm compatibility"
-msgstr ""
+msgstr "აღდგა თავსებადობა ROCm-სთან"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:396
 msgid ""
 "Added long press gesture to chat rows so actions can be done in touchscreens"
 msgstr ""
+"დაემატა დიდხნიანია დაწოლის ჟესტი ჩატის მწკრივებზე, ასე, რომ ქმედებები ახლა "
+"სენსორულ ეკრანზეც შეგიძლიათ, განახორციელოთ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:397
 msgid "Fixed edit button not saving changes"
-msgstr ""
+msgstr "გასწორდა ჩასწორების ღილაკი, რომელიც არ ინახავდა ცვლილებებს"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:398
 msgid "Changed max temperature value to 2"
-msgstr ""
+msgstr "შეიცვალა მაქს. ტემპერატურის მნიშვნელობა 2-მდე"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:399
 msgid "Made seed 0 actually random"
-msgstr ""
+msgstr "seed 0 ახლა მართლა შემთხვევითია"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:400
 msgid ""
 "Fixed Gnome search provider not working outside of Flatpak installations"
-msgstr ""
+msgstr "გასწორდა GNOME-ის ძებნა, რომელიც Flatpak-ის გარეთ არ მუშაობდა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:409
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
 msgstr ""
+"ახალი შესაძლებლობა '--ask შეტყობინება' ახლა 'სწრაფი კითხვის' ფანჯარას ხსნის"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:410
 msgid "Gnome Search integration now works whilst the app is opened"
-msgstr ""
+msgstr "GNOME-ის ძებნის ინტეგრაცია ახლა მუშაობს, როცა აპი გახსნილია"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:419
 msgid ""
 "Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
 "--list-chats, --version"
 msgstr ""
+"დაემატა გაშვების პარამეტრები --ask MESSAGE, --new-chat CHAT, --select-chat "
+"CHAT, --list-chats, --version"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:420
 msgid "Added integration as Gnome Search Provider"
-msgstr ""
+msgstr "დაემატა GNOME-ის ძებნაში ინტეგრაცია"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:421
 msgid "Updated Ollama to v0.4.2 with new models"
-msgstr ""
+msgstr "განახლდა Ollama ვერსიამდე 0.4.2 ახალი მოდელებით"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:430
 msgid "User messages are now compacted into bubbles"
-msgstr ""
+msgstr "მომხმარებლის შეტყობინებები ახლა ბუშტებამდე პატარავდება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:434
 msgid ""
 "Fixed re connection dialog not working when 'use local instance' is selected"
 msgstr ""
+"გასწორდა თავიდან მიერთების დიალოგი, რომელიც არ მუშაობდა, როცა არჩეული იყო "
+"'ლოკალური გაშვებული ასლის გამოყენება'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:435
 msgid "Fixed model manager not adapting to large system fonts"
-msgstr ""
+msgstr "გასწორდა მოდელის მმართველი, რომელიც დიდ სისტემურ ფონტებს არ იყენებდა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:444
 msgid "Details page for models"
-msgstr ""
+msgstr "დეტალების გვერდი მოდელებისთვის"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:445
 msgid ""
 "Model selector gets replaced with 'manage models' button when there are no "
 "models downloaded"
 msgstr ""
+"მოდელის ამრჩევი ჩანაცვლდა 'მოდელების მართვის' ღილაკით, როცა მოდელები ჯერ "
+"გადმოწერილი არ გაქვთ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:446
 msgid "Added warning when model is too big for the device"
-msgstr ""
+msgstr "დაემატა გაფრთხილება, როცა მოდელი მეტისმეტად დიდია ამ მოწყობილობისთვის"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:447
 msgid "Added AMD GPU indicator in preferences"
-msgstr ""
+msgstr "დაემატა AMD GPU-ის მაჩვენებელი მორგების ფანჯარაში"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:456
 msgid "Better system for handling dialogs"
-msgstr ""
+msgstr "უკეთესი სისტემა დიალოგებთან სამუშაოდ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:457
 msgid "Better system for handling instance switching"
-msgstr ""
+msgstr "უკეთესი სისტემა გაშვებული ასლების გადასართველად"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:458
 msgid "Remote connection dialog"
-msgstr ""
+msgstr "დაშორებული მიერთების დიალოგი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:462
 msgid "Fixed: Models get duplicated when switching remote and local instance"
 msgstr ""
+"გასწორდა: მოდელები მეორდებოდა დაშორებულ და ლოკალურად გაშვებულ ასლებს შორის "
+"გადართვისას"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:463
 msgid "Better internal instance manager"
-msgstr ""
+msgstr "უკეთესი შიდა გაშვებული ასლის მმართველი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:472
 msgid "Added 'Cancel' and 'Save' buttons when editing a message"
-msgstr ""
+msgstr "დაემატა 'გაუქმების' და 'შენახვის' ღილაკები შეტყობინების ჩასწორებისას"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:476
 msgid "Better handling of image recognition"
-msgstr ""
+msgstr "გამოსახულების ამოცნობის უკეთესი გზა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:477
 msgid "Remove unused files when canceling a model download"
-msgstr ""
+msgstr "გამოუყენებელი ფაილების წაშლა მოდელის გადმოწერის გაუქმებისას"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:478
 msgid "Better message blocks rendering"
-msgstr ""
+msgstr "უკეთესი რენდერი შეტყობინების ბლოკებისთვის"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:487
 msgid "Run bash and python scripts straight from chat"
-msgstr ""
+msgstr "Bash-ის და Python-ის სკრიპტების გაშვება პირდაპირ ჩატიდან"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:488
 msgid "Updated Ollama to 0.3.12"
-msgstr ""
+msgstr "განახლდა Ollama ვერსიამდე 0.3.12"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:489
 msgid "New models!"
-msgstr ""
+msgstr "ახალი მოდელები!"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:493
 msgid "Fixed and made faster the launch sequence"
-msgstr ""
+msgstr "გასწორდა და გასწრაფდა გაშვების მიმდევრობა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:494
 msgid "Better detection of code blocks in messages"
-msgstr ""
+msgstr "შეტყობინებებში კოდის ბლოკების უკეთესი დადგენა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:495
 msgid "Fixed app not loading in certain setups with Nvidia GPUs"
-msgstr ""
+msgstr "გასწორდა Nvidia GPU-ების ზოგიერთ შემთხვევაში აპის პრობლემები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:504
 msgid ""
 "Fixed message notification sometimes crashing text rendering because of them "
 "running on different threads"
 msgstr ""
+"გასწორდა შეტყობინების გაფრთხილებები, რომლებიც ხანდახან აფუჭებდნენ ტექსტის "
+"რენდერს, რადგან ისინი სხვადასხვა ნაკადში იყო გაშვებული"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:513
 msgid "Fixed message generation sometimes failing"
-msgstr ""
+msgstr "გასწორდა შეტყობინების გენერაციის შეცდომები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:522
 msgid "Sidebar resizes with the window"
-msgstr ""
+msgstr "გვერდითი პანელი ზომას ფანჯარასთან ერთად იცვლის"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:523
 msgid "New welcome dialog"
-msgstr ""
+msgstr "ახალი მისალმების დიალოგი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:524
 msgid "Message search"
-msgstr ""
+msgstr "შეტყობინებების ძებნა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:525
 msgid "Updated Ollama to v0.3.11"
-msgstr ""
+msgstr "განახლდა Ollama ვერსიამდე 0.3.11"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:526
 msgid "A lot of new models provided by Ollama repository"
-msgstr ""
+msgstr "ბევრი ახალი მოდელი Ollama-ის რეპოზიტორიიდან"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:530
 msgid ""
 "Fixed text inside model manager when the accessibility option 'large text' "
 "is on"
 msgstr ""
+"გასწორდა ტექსტი მოდელის მმართველის შიგნით, როცა წვდომადობის პარამეტრი 'დიდი "
+"ტექსტი' ჩართულია"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:531
 msgid "Fixed image recognition on unsupported models"
-msgstr ""
+msgstr "გასწორდა გამოსახულების ამოცნობა მხარდაუჭერელ მოდელებზე"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:540
 msgid "Fixed spinner not hiding if the back end fails"
-msgstr ""
+msgstr "გასწორდა ტრიალას არდამალვა, თუ უკანაბოლო ჩავარდა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:541
 msgid "Fixed image recognition with local images"
-msgstr ""
+msgstr "გასწორდა გამოსახულების ამოცნობა ლოკალური გამოსახულებებით"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:542
 msgid "Changed appearance of delete / stop model buttons"
-msgstr ""
+msgstr "შეიცვალა მოდელის წაშლის / გაჩერების ღილაკების გარეგნობა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:543
 msgid "Fixed stop button crashing the app"
-msgstr ""
+msgstr "გასწორდა გაჩერების ღილაკი აპლიკაციას ასრულებდა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:547
 msgid "Made sidebar resize a little when the window is smaller"
-msgstr ""
+msgstr "გვერდითი პანელი ზომას ოდნავ იცვლის, როცა ფანჯარა უფრო პატარაა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:548
 msgid "Instant launch"
-msgstr ""
+msgstr "მყისიერი გაშვება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:557
 msgid "Fixed error on first run (welcome dialog)"
-msgstr ""
+msgstr "გასწორდა პირველი გაშვების (მისალმების დიალოგის) შეცდომა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:558
 msgid "Fixed checker for Ollama instance (used on system packages)"
 msgstr ""
+"გასწორდა Ollama-ის ასლის შემმოწმებლის შეცდომა (გამოიყენება სისტემურ "
+"პაკეტებზე)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:567
 msgid "Fixed 'clear chat' option"
-msgstr ""
+msgstr "გასწორდა შესაძლებლობა 'ჩატის გასუფთავება'"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:568
 msgid "Fixed welcome dialog causing the local instance to not launch"
-msgstr ""
+msgstr "გასწირდა მისალმების დიალოგის მიერ ლოკალური ასლების გაშვებაში ჩარევა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:569
 msgid "Fixed support for AMD GPUs"
-msgstr ""
+msgstr "გასწორდა AMD GPU-ების მხარდაჭერა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:578
 msgid "Model, message and chat systems have been rewritten"
-msgstr ""
+msgstr "თავიდან დაწერილია მოდელის, შეტყობინების და ჩატის სისტემები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:579
 msgid "New models are available"
-msgstr ""
+msgstr "ხელმისაწვდომია ახალი მოდელები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:580
 msgid "Ollama updated to v0.3.9"
-msgstr ""
+msgstr "Ollama განახლდა ვერსიამდე 0.3.9"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:581
 msgid "Added support for multiple chat generations simultaneously"
-msgstr ""
+msgstr "დაემატა ერთზე მეტი ჩატის ერთდროულად გაშვების მხარდაჭერა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:582
 msgid "Added experimental AMD GPU support"
-msgstr ""
+msgstr "დაემატა ექსპერიმენტული AMD GPU-ების მხარდაჭერა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:583
 msgid "Added message loading spinner and new message indicator to chat tab"
 msgstr ""
+"დაემატა შეტყობინების ჩატვირთვის ტრიალა და ახალი შეტყობინების მაჩვენებელი "
+"ჩატის ჩანართში"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:584
 msgid "Added animations"
-msgstr ""
+msgstr "დაემატა ანიმაციები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:585
 msgid "Changed model manager / model selector appearance"
-msgstr ""
+msgstr "შეიცვალა მოდელის მმართველის / მოდელის მმართველის გარეგნობა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:586
 msgid "Changed message appearance"
-msgstr ""
+msgstr "შეიცვალა შეტყობინებების გარეგნობა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:587
 msgid "Added markdown and code blocks to user messages"
-msgstr ""
+msgstr "დაემატა მარკდაუნის და კოდის ბლოკები მომხმარებლის შეტყობინებებს"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:588
 msgid "Added loading dialog at launch so the app opens faster"
-msgstr ""
+msgstr "დაემატა ჩატვირთვის დიალოგი გაშვებისას, რომ აპი უფრო სწრაფად გაეშვსა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:589
 msgid "Added warning when device is on 'battery saver' mode"
@@ -1018,19 +1048,19 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:626
 msgid "Model manager opens faster"
-msgstr ""
+msgstr "მოდელების მმართველი უფრო სწრაფად იხსნება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:627
 msgid "Delete chat option in secondary menu"
-msgstr ""
+msgstr "ჩატის წაშლის შესაძლებლობა მეორად მენიიში"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:628
 msgid "New model selector popup"
-msgstr ""
+msgstr "ახალი მოდელის ამრჩევის მხტუნარა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:629
 msgid "Standard shortcuts"
-msgstr ""
+msgstr "სტანდარტული მალსახმობები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:630
 msgid "Model manager is navigable with keyboard"
@@ -1046,7 +1076,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:633
 msgid "Welcome screen"
-msgstr ""
+msgstr "საწყისი ეკრანი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:634
 msgid "Give message entry focus at launch"
@@ -1258,7 +1288,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:758
 msgid "Stable Release"
-msgstr ""
+msgstr "სტაბილური რელიზი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:759
 msgid ""
@@ -1268,7 +1298,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:760
 msgid "Features and fixes"
-msgstr ""
+msgstr "ფუნქციები და შეცდომების გასწორება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:762
 msgid "Updated Ollama instance to 0.2.8"
@@ -1276,11 +1306,11 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:763
 msgid "Better model selector"
-msgstr ""
+msgstr "უკეთესი მოდელის ამრჩევი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:764
 msgid "Model manager redesign"
-msgstr ""
+msgstr "მოდელების მმართველის დიზაინი თავიდან"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:765
 msgid "Better tag selector when pulling a model"
@@ -1288,7 +1318,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:766
 msgid "Model search"
-msgstr ""
+msgstr "მოდელების ძებნა"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:767
 msgid "Added support for bearer tokens on remote instances"
@@ -1376,51 +1406,51 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:787
 msgid "Various UI tweaks"
-msgstr ""
+msgstr "სხვადასხვა ინტერფეისის გასწორებები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:789
 msgid "New Models"
-msgstr ""
+msgstr "ახალი მოდელები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:791
 msgid "Gemma2"
-msgstr ""
+msgstr "Gemma2"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:792
 msgid "GLM4"
-msgstr ""
+msgstr "GLM4"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:793
 msgid "Codegeex4"
-msgstr ""
+msgstr "Codegeex4"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:794
 msgid "InternLM2"
-msgstr ""
+msgstr "InternLM2"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:795
 msgid "Llama3-groq-tool-use"
-msgstr ""
+msgstr "Llama3-groq-tool-use"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:796
 msgid "Mathstral"
-msgstr ""
+msgstr "Mathstral"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:797
 msgid "Mistral-nemo"
-msgstr ""
+msgstr "Mistral-nemo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:798
 msgid "Firefunction-v2"
-msgstr ""
+msgstr "Firefunction-v2"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:799
 msgid "Nuextract"
-msgstr ""
+msgstr "Nuextract"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:801
 msgid "Translations"
-msgstr ""
+msgstr "თარგმანები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:802
 msgid ""
@@ -1430,31 +1460,31 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:804
 msgid "Russian: Alex K"
-msgstr ""
+msgstr "რუსული: საშა კ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:805
 msgid "Spanish: Jeffser"
-msgstr ""
+msgstr "ესპანური: Jeffser"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:806
 msgid "Brazilian Portuguese: Daimar Stein"
-msgstr ""
+msgstr "ბრაზილიური პორტუგალიური: Daimar Stein"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:807
 msgid "French: Louis Chauvet-Villaret"
-msgstr ""
+msgstr "ფრანგული: Louis Chauvet-Villaret"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:808
 msgid "Norwegian: CounterFlow64"
-msgstr ""
+msgstr "ნორვეგიული: CounterFlow64"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:809
 msgid "Bengali: Aritra Saha"
-msgstr ""
+msgstr "ბენგალური: Aritra Saha"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:810
 msgid "Simplified Chinese: Yuehao Sui"
-msgstr ""
+msgstr "გამარტივებული ჩინური: Yuehao Sui"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:818
 msgid ""
@@ -1468,15 +1498,15 @@ msgstr ""
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1080
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1137
 msgid "Big Update"
-msgstr ""
+msgstr "დიდი განახლება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:826
 msgid "Added compatibility for PDF"
-msgstr ""
+msgstr "დაემატა თავსებადობა PDF-თან"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:827
 msgid "Added compatibility for DOCX"
-msgstr ""
+msgstr "დაემატა თავსებადობა DOCX-თან"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:828
 msgid "Merged 'file attachment' menu into one button"
@@ -1485,7 +1515,7 @@ msgstr ""
 #: data/com.jeffser.Alpaca.metainfo.xml.in:835
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1028
 msgid "Quick Fix"
-msgstr ""
+msgstr "სწრაფი გასწორება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:836
 msgid ""
@@ -1497,7 +1527,7 @@ msgstr ""
 #: data/com.jeffser.Alpaca.metainfo.xml.in:842
 #: data/com.jeffser.Alpaca.metainfo.xml.in:994
 msgid "Huge Update"
-msgstr ""
+msgstr "უზარმაზარი განახლება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:844
 msgid "Added: Support for plain text files"
@@ -1513,7 +1543,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:847
 msgid "General Optimization"
-msgstr ""
+msgstr "ზოგადი ოპტიმიზაცია"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:856
 msgid "Added: Support for GGUF models (experimental)"
@@ -1550,7 +1580,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:880
 msgid "Fixed send / stop button"
-msgstr ""
+msgstr "გასწორდა გაგზავნის / გაჩერების ღილაკი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:881
 msgid "Fixed app not checking if remote connection works when starting"
@@ -1558,7 +1588,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:888
 msgid "Daily Update"
-msgstr ""
+msgstr "დღიური განახლება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:890
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
@@ -1570,7 +1600,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:892
 msgid "New message entry design"
-msgstr ""
+msgstr "ახალი შეტყობინების ჩანაწერის დიზაინი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:893
 msgid "Fixed: Can't rename the same chat multiple times"
@@ -1578,7 +1608,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:900
 msgid "The fix"
-msgstr ""
+msgstr "გასწორება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:902
 msgid ""
@@ -1592,7 +1622,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:910
 msgid "Quick tweaks"
-msgstr ""
+msgstr "სწრაფი ჩასწორებები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:912
 msgid "Added progress bar to models that are being pulled"
@@ -1608,7 +1638,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:921
 msgid "Quick fixes"
-msgstr ""
+msgstr "უცებ გასწორებული"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:923
 msgid "Fixed: Scroll when message is received"
@@ -1624,7 +1654,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:932
 msgid "Nice Update"
-msgstr ""
+msgstr "სასიამოვნო განახლება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:934
 msgid "UI tweaks (Thanks Nokse22)"
@@ -1632,23 +1662,23 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:936
 msgid "Metadata fixes"
-msgstr ""
+msgstr "გასწორდა მეტამონაცემები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:943
 msgid "Quick fix"
-msgstr ""
+msgstr "სწრაფი გასწორება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:945
 msgid "Updated Spanish translation"
-msgstr ""
+msgstr "განახლდა ესპანური თარგმანი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:946
 msgid "Added compatibility for PNG"
-msgstr ""
+msgstr "დაემატა თავსებადობა PNG-სთან"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:953
 msgid "New Update"
-msgstr ""
+msgstr "ახალი განახლება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:956
 msgid "Added image recognition to more models"
@@ -1680,7 +1710,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:968
 msgid "Bug Fixes"
-msgstr ""
+msgstr "შეცდომების გასწორება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:970
 msgid "Fixed: Minor spelling mistake"
@@ -1704,7 +1734,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:981
 msgid "Cool Update"
-msgstr ""
+msgstr "საკაიფო განახლება"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:983
 msgid "Better design for chat window"
@@ -1716,7 +1746,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:985
 msgid "Fixed remote connections"
-msgstr ""
+msgstr "გასწორდა დაშორებული კავსირები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:986
 msgid "Fixed Ollama restarting in loop"
@@ -1952,11 +1982,11 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1136
 msgid "0.2.0"
-msgstr ""
+msgstr "0.2.0"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1138
 msgid "New Features"
-msgstr ""
+msgstr "ახალი ფუნქციები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1140
 msgid "Restore chat after closing the app"
@@ -1964,7 +1994,7 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1141
 msgid "A button to clear the chat"
-msgstr ""
+msgstr "ღილაკი ჩატის გასასუფთავებლად"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1142
 msgid "Fixed multiple bugs involving how messages are shown"
@@ -1972,15 +2002,15 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1143
 msgid "Added welcome dialog"
-msgstr ""
+msgstr "დაემატა მისალმების დიალოგი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1144
 msgid "More stability"
-msgstr ""
+msgstr "უფრო სტაბილური"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1154
 msgid "0.1.2 Quick fixes"
-msgstr ""
+msgstr "0.1.2 სწრაფი შეცდომების გასწორებები"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1155
 msgid ""
@@ -1989,178 +2019,420 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1161
 msgid "0.1.1 Stable Release"
-msgstr ""
+msgstr "0.1.1 სტაბილური რელიზი"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1162
 msgid "This is the first public version of Alpaca"
-msgstr ""
+msgstr "Alpaca-ის პირველი საჯარო რელიზი"
 
-#: src/alpaca_search_provider.py.in:41
-msgid "Open chat"
-msgstr ""
-
-#: src/alpaca_search_provider.py.in:42
-msgid "Quick ask"
-msgstr ""
-
-#: src/constants.py:95
-msgid "Never"
-msgstr ""
-
-#: src/constants.py:96
-msgid "When Alpaca is Focused"
-msgstr ""
-
-#: src/constants.py:97
-msgid "Always"
-msgstr ""
-
-#: src/main.py:190
+#: src/main.py:193
 msgid "Documentation"
 msgstr ""
 
-#: src/main.py:191
+#: src/main.py:194
 msgid "Become a Sponsor"
 msgstr ""
 
-#: src/main.py:192
+#: src/main.py:195
 msgid "Discussions"
 msgstr ""
 
-#: src/ollama_models.py:33
+#: src/window.py:203 src/window.py:233
+msgid "Speech Recognition Error"
+msgstr ""
+
+#: src/window.py:203
+msgid "An error occurred while pulling speech recognition model"
+msgstr ""
+
+#: src/window.py:233
+msgid "An error occurred while using speech recognition"
+msgstr ""
+
+#: src/window.py:254
+msgid "Download Speech Recognition Model"
+msgstr ""
+
+#: src/window.py:255
+msgid "To use speech recognition you'll need to download a special model ({})"
+msgstr ""
+
+#: src/window.py:257
+msgid "Download Model"
+msgstr ""
+
+#: src/window.py:274
+msgid "Ollama Was Not Found"
+msgstr ""
+
+#: src/window.py:275
+msgid ""
+"To add a managed Ollama instance, you must have Ollama installed locally in "
+"your device, this is a simple process and should not take more than 5 "
+"minutes."
+msgstr ""
+
+#: src/window.py:277
+msgid "Open Tutorial in Web Browser"
+msgstr ""
+
+#: src/window.py:283 src/window.py:290 src/window.ui:472 src/window.ui:482
+#: src/window.ui:504
+msgid "Add Instance"
+msgstr "შემთხვევის დამატება"
+
+#: src/window.py:291
+msgid "Select a type of instance to add"
+msgstr "აირჩიეთ დასამატებელი ასლის ტიპი"
+
+#: src/window.py:507
+msgid "No tools enabled."
+msgstr ""
+
+#: src/window.py:507
+msgid "Open Tool Manager"
+msgstr ""
+
+#: src/window.py:510
+msgid "'{}' does not support tools."
+msgstr ""
+
+#: src/window.py:510
+msgid "Open Model Manager"
+msgstr "მოდელების მმართველის გახანა"
+
+#: src/window.py:513 src/window.py:1119
+msgid "Please select a model before chatting"
+msgstr "ჩატამდე აირჩიეთ მოდელი"
+
+#: src/window.py:561 src/window.py:562 src/window.py:650 src/window.ui:288
+msgid "Close"
+msgstr "დახურვა"
+
+#: src/window.py:564 src/window.py:565 src/window.ui:62 src/window.ui:63
+msgid "Next"
+msgstr "შემდეგი"
+
+#: src/window.py:648 src/instance_manager.py:405 src/instance_manager.py:406
+#: src/tool_manager.py:136 src/window.ui:968 src/window.ui:972
+#: src/custom_widgets/message_widget.py:80
+#: src/custom_widgets/message_widget.py:230
+#: src/custom_widgets/model_manager_widget.py:636
+#: src/custom_widgets/dialog_widget.py:148
+#: src/custom_widgets/dialog_widget.py:160
+#: src/custom_widgets/dialog_widget.py:172
+msgid "Cancel"
+msgstr "გაუქმება"
+
+#: src/window.py:649
+msgid "Hide"
+msgstr "დამალვა"
+
+#: src/window.py:653
+msgid "Close Alpaca?"
+msgstr "დავხურო Alpaca?"
+
+#: src/window.py:654
+msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
+msgstr "მიმდინარეობს ამოცანის შესრულება. მართლა გნებავთ Alpaca-ის დახურვა?"
+
+#: src/window.py:898
+msgid "Cannot open image"
+msgstr "გამოსახულების შექმნა შეუძლებელია"
+
+#: src/window.py:975
+msgid "Delete Chat?"
+msgstr "წავშალო ჩატი?"
+
+#: src/window.py:976
+msgid "Are you sure you want to delete '{}'?"
+msgstr "მართლა გნებავთ, წაშალოთ '{}'?"
+
+#: src/window.py:978 src/window.py:1468
+msgid "Delete"
+msgstr "წაშლა"
+
+#: src/window.py:985
+msgid "Rename Chat?"
+msgstr "გადავარქვა სახელი ჩატს?"
+
+#: src/window.py:986
+msgid "Renaming '{}'"
+msgstr "'{}'-ის სახელის გადარქმევა"
+
+#: src/window.py:988
+msgid "Chat name"
+msgstr "ჩატის სახელი"
+
+#: src/window.py:989
+msgid "Rename"
+msgstr "სახელის გადარქმევა"
+
+#: src/window.py:994
+msgid "Importable (.db)"
+msgstr "შემოტანადი (.db)"
+
+#: src/window.py:995
+msgid "Markdown"
+msgstr "Markdown"
+
+#: src/window.py:996
+msgid "Markdown (Obsidian Style)"
+msgstr "მარკდაუნი (ობსიდიანის სტილი)"
+
+#: src/window.py:997
+msgid "JSON"
+msgstr "JSON"
+
+#: src/window.py:998
+msgid "JSON (Include Metadata)"
+msgstr "JSON (მეტამონაცემების ჩათვლით)"
+
+#: src/window.py:1001 src/window.ui:1419 src/window.ui:1453
+msgid "Export Chat"
+msgstr "ჩატის გატანა"
+
+#: src/window.py:1002
+msgid "Select a method to export the chat"
+msgstr "აირჩიეთ მეთოდი ჩატის გასატანად"
+
+#: src/window.py:1018
+msgid "This video does not have any transcriptions"
+msgstr ""
+
+#: src/window.py:1025
+msgid "Attach YouTube Video?"
+msgstr "მივამაგრო YouTube-ის ვიდეო?"
+
+#: src/window.py:1026
+msgid ""
+"{}\n"
+"\n"
+"Please select a transcript to include"
+msgstr ""
+"{}\n"
+"\n"
+"აირჩიეთ ჩასასმელი ტრანსკრიპტი"
+
+#: src/window.py:1032
+msgid "Error attaching video, please try again"
+msgstr "ვიდეოს მიმაგრების შეცდომა. თავიდან სცადეთ"
+
+#: src/window.py:1053 src/window.py:1462
+msgid "Attach Website? (Experimental)"
+msgstr "მივამაგრო ვებგვერდი? (ექსპერიმენტული)"
+
+#: src/window.py:1054
+msgid ""
+"Are you sure you want to attach\n"
+"'{}'?"
+msgstr ""
+"მართლა გნებავთ, მიამაგროთ\n"
+"'{}'?"
+
+#: src/window.py:1072 src/window.py:1084 src/window.py:1461
+#: src/generic_actions.py:105
+msgid "Image recognition is only available on specific models"
+msgstr ""
+
+#: src/window.py:1103 src/window.ui:1203
+msgid "Quick Ask"
+msgstr "სწრაფი კითხვა"
+
+#: src/window.py:1231
+msgid "Attachment failed, screenshot might be too big"
+msgstr ""
+
+#: src/window.py:1290
+msgid "Any compatible Alpaca attachment"
+msgstr ""
+
+#: src/window.py:1437
+msgid "Attach Screenshot"
+msgstr "ეკრანის ანაბეჭდის მიმაგრება"
+
+#: src/window.py:1462
+msgid "Please enter a website URL"
+msgstr "შეიყვანეთ ვებგვერდის ბმული"
+
+#: src/window.py:1463
+msgid "Attach YouTube Captions?"
+msgstr "მივამაგრო YouTube-ის წარწერები?"
+
+#: src/window.py:1463
+msgid "Please enter a YouTube video URL"
+msgstr "შეიყვანეთ YouTube-ის ვიდეოს ბმული"
+
+#: src/window.py:1466
+msgid "Download Model?"
+msgstr "გადმოვწერო მოდელი?"
+
+#: src/window.py:1466
+msgid "Please enter the model name following this template: name:tag"
+msgstr ""
+
+#: src/window.py:1468
+msgid "Delete All Chats?"
+msgstr ""
+
+#: src/window.py:1468
+msgid "Are you sure you want to delete all chats?"
+msgstr ""
+
+#: src/window.py:1479
+msgid "Remove Attachment?"
+msgstr "წავშალო მიმაგრებული ფაილი?"
+
+#: src/window.py:1479
+msgid "Are you sure you want to remove attachment?"
+msgstr "მართლა გნებავთ მიმაგრებული ფაილის წაშლა?"
+
+#: src/window.py:1479 src/instance_manager.py:886
+#: src/custom_widgets/model_manager_widget.py:115
+#: src/custom_widgets/model_manager_widget.py:201
+#: src/custom_widgets/model_manager_widget.py:637
+#: src/custom_widgets/model_manager_widget.py:677
+msgid "Remove"
+msgstr "წაშლა"
+
+#: src/window.py:1494
+msgid "Already Installed!"
+msgstr ""
+
+#: src/available_models_descriptions.py:2
 msgid ""
 "New state of the art 70B model. Llama 3.3 70B offers similar performance "
 "compared to the Llama 3.1 405B model."
 msgstr ""
 
-#: src/ollama_models.py:56
+#: src/available_models_descriptions.py:3
 msgid "QwQ is the reasoning model of the Qwen series."
 msgstr ""
 
-#: src/ollama_models.py:84
+#: src/available_models_descriptions.py:4
 msgid ""
 "Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
 "generative models in 11B and 90B sizes."
 msgstr ""
 
-#: src/ollama_models.py:120
+#: src/available_models_descriptions.py:5
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
 msgstr ""
 
-#: src/ollama_models.py:155
+#: src/available_models_descriptions.py:6
 msgid ""
 "Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and "
 "405B parameter sizes."
 msgstr ""
 
-#: src/ollama_models.py:182
+#: src/available_models_descriptions.py:7
 msgid "Meta Llama 3: The most capable openly available LLM to date"
 msgstr ""
 
-#: src/ollama_models.py:205
+#: src/available_models_descriptions.py:8
 msgid "The 7B model released by Mistral AI, updated to version 0.3."
 msgstr ""
 
-#: src/ollama_models.py:229
+#: src/available_models_descriptions.py:9
 msgid ""
 "A high-performing open embedding model with a large token context window."
 msgstr ""
 
-#: src/ollama_models.py:258
+#: src/available_models_descriptions.py:10
 msgid ""
 "Gemma is a family of lightweight, state-of-the-art open models built by "
 "Google DeepMind. Updated to version 1.1"
 msgstr ""
 
-#: src/ollama_models.py:314
+#: src/available_models_descriptions.py:11
 msgid ""
 "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
 "0.5B to 110B parameters"
 msgstr ""
 
-#: src/ollama_models.py:378
+#: src/available_models_descriptions.py:12
 msgid "Qwen2 is a new series of large language models from Alibaba group"
 msgstr ""
 
-#: src/ollama_models.py:407
+#: src/available_models_descriptions.py:13
 msgid ""
 "Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art "
 "open models by Microsoft."
 msgstr ""
 
-#: src/ollama_models.py:439
+#: src/available_models_descriptions.py:14
 msgid ""
 "Llama 2 is a collection of foundation language models ranging from 7B to 70B "
 "parameters."
 msgstr ""
 
-#: src/ollama_models.py:501
+#: src/available_models_descriptions.py:15
 msgid ""
 "Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, "
 "encompassing up to 18 trillion tokens. The model supports up to 128K tokens "
 "and has multilingual support."
 msgstr ""
 
-#: src/ollama_models.py:533
+#: src/available_models_descriptions.py:16
 msgid ""
 "Google Gemma 2 is a high-performing and efficient model available in three "
 "sizes: 2B, 9B, and 27B."
 msgstr ""
 
-#: src/ollama_models.py:567
+#: src/available_models_descriptions.py:17
 msgid ""
 "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines "
 "a vision encoder and Vicuna for general-purpose visual and language "
 "understanding. Updated to version 1.6."
 msgstr ""
 
-#: src/ollama_models.py:604
+#: src/available_models_descriptions.py:18
 msgid ""
 "A large language model that can use text prompts to generate and discuss "
 "code."
 msgstr ""
 
-#: src/ollama_models.py:650
+#: src/available_models_descriptions.py:19
 msgid ""
 "The latest series of Code-Specific Qwen models, with significant "
 "improvements in code generation, code reasoning, and code fixing."
 msgstr ""
 
-#: src/ollama_models.py:674
+#: src/available_models_descriptions.py:20
 msgid ""
 "A state-of-the-art 12B model with 128k context length, built by Mistral AI "
 "in collaboration with NVIDIA."
 msgstr ""
 
-#: src/ollama_models.py:696
+#: src/available_models_descriptions.py:21
 msgid ""
 "The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
 "model on 3 trillion tokens."
 msgstr ""
 
-#: src/ollama_models.py:719
+#: src/available_models_descriptions.py:22
 msgid "State-of-the-art large embedding model from mixedbread.ai"
 msgstr ""
 
-#: src/ollama_models.py:752
+#: src/available_models_descriptions.py:23
 msgid ""
 "StarCoder2 is the next generation of transparently trained open code LLMs "
 "that comes in three sizes: 3B, 7B and 15B parameters."
 msgstr ""
 
-#: src/ollama_models.py:778
+#: src/available_models_descriptions.py:24
 msgid ""
 "A set of Mixture of Experts (MoE) model with open weights by Mistral AI in "
 "8x7b and 8x22b parameter sizes."
 msgstr ""
 
-#: src/ollama_models.py:804
+#: src/available_models_descriptions.py:25
 msgid ""
 "Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
 "experts models that excels at coding tasks. Created by Eric Hartford."
 msgstr ""
 
-#: src/ollama_models.py:833
+#: src/available_models_descriptions.py:26
 msgid ""
 "CodeGemma is a collection of powerful, lightweight models that can perform a "
 "variety of coding tasks like fill-in-the-middle code completion, code "
@@ -2168,695 +2440,695 @@ msgid ""
 "instruction following."
 msgstr ""
 
-#: src/ollama_models.py:861
+#: src/available_models_descriptions.py:27
 msgid ""
 "An open-source Mixture-of-Experts code language model that achieves "
 "performance comparable to GPT4-Turbo in code-specific tasks."
 msgstr ""
 
-#: src/ollama_models.py:883
+#: src/available_models_descriptions.py:28
 msgid ""
 "Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
 "outstanding reasoning and language understanding capabilities."
 msgstr ""
 
-#: src/ollama_models.py:910
+#: src/available_models_descriptions.py:29
 msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
 msgstr ""
 
-#: src/ollama_models.py:945
+#: src/available_models_descriptions.py:30
 msgid ""
 "DeepSeek Coder is a capable coding model trained on two trillion code and "
 "natural language tokens."
 msgstr ""
 
-#: src/ollama_models.py:986
+#: src/available_models_descriptions.py:31
 msgid ""
 "A suite of text embedding models by Snowflake, optimized for performance."
 msgstr ""
 
-#: src/ollama_models.py:1014
+#: src/available_models_descriptions.py:32
 msgid ""
 "State of the art large language model from Microsoft AI with improved "
 "performance on complex chat, multilingual, reasoning and agent use cases."
 msgstr ""
 
-#: src/ollama_models.py:1037
+#: src/available_models_descriptions.py:33
 msgid ""
 "The uncensored Dolphin model based on Mistral that excels at coding tasks. "
 "Updated to version 2.8."
 msgstr ""
 
-#: src/ollama_models.py:1065
+#: src/available_models_descriptions.py:34
 msgid ""
 "Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on "
 "Llama 3 that has a variety of instruction, conversational, and coding skills."
 msgstr ""
 
-#: src/ollama_models.py:1099
+#: src/available_models_descriptions.py:35
 msgid "Yi 1.5 is a high-performing, bilingual language model."
 msgstr ""
 
-#: src/ollama_models.py:1122
+#: src/available_models_descriptions.py:36
 msgid ""
 "Command R is a Large Language Model optimized for conversational interaction "
 "and long context tasks."
 msgstr ""
 
-#: src/ollama_models.py:1159
+#: src/available_models_descriptions.py:37
 msgid ""
 "A general-purpose model ranging from 3 billion parameters to 70 billion, "
 "suitable for entry-level hardware."
 msgstr ""
 
-#: src/ollama_models.py:1182
+#: src/available_models_descriptions.py:38
 msgid ""
 "A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
 "benchmarks."
 msgstr ""
 
-#: src/ollama_models.py:1209
+#: src/available_models_descriptions.py:39
 msgid ""
 "Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
 "that are trained to act as helpful assistants."
 msgstr ""
 
-#: src/ollama_models.py:1231
+#: src/available_models_descriptions.py:40
 msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
 "overtaking similarly and larger sized models."
 msgstr ""
 
-#: src/ollama_models.py:1259
+#: src/available_models_descriptions.py:41
 msgid "Embedding models on very large sentence level datasets."
 msgstr ""
 
-#: src/ollama_models.py:1282
+#: src/available_models_descriptions.py:42
 msgid ""
 "Codestral is Mistral AI’s first-ever code model designed for code generation "
 "tasks."
 msgstr ""
 
-#: src/ollama_models.py:1319
+#: src/available_models_descriptions.py:43
 msgid ""
 "StarCoder is a code generation model trained on 80+ programming languages."
 msgstr ""
 
-#: src/ollama_models.py:1351
+#: src/available_models_descriptions.py:44
 msgid ""
 "General use chat model based on Llama and Llama 2 with 2K to 16K context "
 "sizes."
 msgstr ""
 
-#: src/ollama_models.py:1388
+#: src/available_models_descriptions.py:45
 msgid "A family of open foundation models by IBM for Code Intelligence"
 msgstr ""
 
-#: src/ollama_models.py:1410
+#: src/available_models_descriptions.py:46
 msgid ""
 "Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
 "Mistral 7B model using the OpenOrca dataset."
 msgstr ""
 
-#: src/ollama_models.py:1442
+#: src/available_models_descriptions.py:47
 msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
 msgstr ""
 
-#: src/ollama_models.py:1474
+#: src/available_models_descriptions.py:48
 msgid ""
 "Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
 "Llama 2 uncensored by Eric Hartford."
 msgstr ""
 
-#: src/ollama_models.py:1503
+#: src/available_models_descriptions.py:49
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
 msgstr ""
 
-#: src/ollama_models.py:1526
+#: src/available_models_descriptions.py:50
 msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
 msgstr ""
 
-#: src/ollama_models.py:1551
+#: src/available_models_descriptions.py:51
 msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
 msgstr ""
 
-#: src/ollama_models.py:1574
+#: src/available_models_descriptions.py:52
 msgid ""
 "A family of open-source models trained on a wide variety of data, surpassing "
 "ChatGPT on various benchmarks. Updated to version 3.5-0106."
 msgstr ""
 
-#: src/ollama_models.py:1602
+#: src/available_models_descriptions.py:53
 msgid ""
 "Aya 23, released by Cohere, is a new family of state-of-the-art, "
 "multilingual models that support 23 languages."
 msgstr ""
 
-#: src/ollama_models.py:1625
+#: src/available_models_descriptions.py:54
 msgid ""
 "CodeQwen1.5 is a large language model pretrained on a large amount of code "
 "data."
 msgstr ""
 
-#: src/ollama_models.py:1653
+#: src/available_models_descriptions.py:55
 msgid ""
 "The powerful family of models by Nous Research that excels at scientific "
 "discussion and coding tasks."
 msgstr ""
 
-#: src/ollama_models.py:1675
+#: src/available_models_descriptions.py:56
 msgid ""
 "Command R+ is a powerful, scalable large language model purpose-built to "
 "excel at real-world enterprise use cases."
 msgstr ""
 
-#: src/ollama_models.py:1698
+#: src/available_models_descriptions.py:57
 msgid "State-of-the-art code generation model"
 msgstr ""
 
-#: src/ollama_models.py:1722
+#: src/available_models_descriptions.py:58
 msgid ""
 "Stable Code 3B is a coding model with instruct and code completion variants "
 "on par with models such as Code Llama 7B that are 2.5x larger."
 msgstr ""
 
-#: src/ollama_models.py:1744
+#: src/available_models_descriptions.py:59
 msgid ""
 "An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
 "by Eric Hartford and based on TinyLlama."
 msgstr ""
 
-#: src/ollama_models.py:1771
+#: src/available_models_descriptions.py:60
 msgid ""
 "OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
 "open datasets."
 msgstr ""
 
-#: src/ollama_models.py:1795
+#: src/available_models_descriptions.py:61
 msgid ""
 "Mistral Large 2 is Mistral's new flagship model that is significantly more "
 "capable in code generation, mathematics, and reasoning with 128k context "
 "window and support for dozens of languages."
 msgstr ""
 
-#: src/ollama_models.py:1828
+#: src/available_models_descriptions.py:62
 msgid ""
 "Qwen2 Math is a series of specialized math language models built upon the "
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
 "open-source models and even closed-source models (e.g., GPT4o)."
 msgstr ""
 
-#: src/ollama_models.py:1852
+#: src/available_models_descriptions.py:63
 msgid ""
 "A strong multi-lingual general language model with competitive performance "
 "to Llama 3."
 msgstr ""
 
-#: src/ollama_models.py:1886
+#: src/available_models_descriptions.py:64
 msgid ""
 "Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model "
 "trained on multilingual data in English, Spanish, German, Italian, French, "
 "Portuguese, and Dutch."
 msgstr ""
 
-#: src/ollama_models.py:1909
+#: src/available_models_descriptions.py:65
 msgid ""
 "BakLLaVA is a multimodal model consisting of the Mistral 7B base model "
 "augmented with the LLaVA architecture."
 msgstr ""
 
-#: src/ollama_models.py:1930
+#: src/available_models_descriptions.py:66
 msgid ""
 "A high-performing model trained with a new technique called Reflection-"
 "tuning that teaches a LLM to detect mistakes in its reasoning and correct "
 "course."
 msgstr ""
 
-#: src/ollama_models.py:1961
+#: src/available_models_descriptions.py:67
 msgid "An advanced language model crafted with 2 trillion bilingual tokens."
 msgstr ""
 
-#: src/ollama_models.py:1988
+#: src/available_models_descriptions.py:68
 msgid ""
 "This model extends LLama-3 8B's context length from 8k to over 1m tokens."
 msgstr ""
 
-#: src/ollama_models.py:2021
+#: src/available_models_descriptions.py:69
 msgid "Model focused on math and logic problems"
 msgstr ""
 
-#: src/ollama_models.py:2044
+#: src/available_models_descriptions.py:70
 msgid ""
 "moondream2 is a small vision language model designed to run efficiently on "
 "edge devices."
 msgstr ""
 
-#: src/ollama_models.py:2066
+#: src/available_models_descriptions.py:71
 msgid ""
 "A fine-tuned model based on Mistral with good coverage of domain and "
 "language."
 msgstr ""
 
-#: src/ollama_models.py:2093
+#: src/available_models_descriptions.py:72
 msgid ""
 "A model from NVIDIA based on Llama 3 that excels at conversational question "
 "answering (QA) and retrieval-augmented generation (RAG)."
 msgstr ""
 
-#: src/ollama_models.py:2120
+#: src/available_models_descriptions.py:73
 msgid ""
 "Conversational model based on Llama 2 that performs competitively on various "
 "benchmarks."
 msgstr ""
 
-#: src/ollama_models.py:2148
+#: src/available_models_descriptions.py:74
 msgid ""
 "SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
 "generation tasks"
 msgstr ""
 
-#: src/ollama_models.py:2175
+#: src/available_models_descriptions.py:75
 msgid "General use models based on Llama and Llama 2 from Nous Research."
 msgstr ""
 
-#: src/ollama_models.py:2198
+#: src/available_models_descriptions.py:76
 msgid "Code generation model based on Code Llama."
 msgstr ""
 
-#: src/ollama_models.py:2225
+#: src/available_models_descriptions.py:77
 msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
 msgstr ""
 
-#: src/ollama_models.py:2253
+#: src/available_models_descriptions.py:78
 msgid ""
 "A 7B and 15B uncensored variant of the Dolphin model family that excels at "
 "coding, based on StarCoder2."
 msgstr ""
 
-#: src/ollama_models.py:2280
+#: src/available_models_descriptions.py:79
 msgid "General use model based on Llama 2."
-msgstr ""
+msgstr "Llama 2-ზე დაფუძნებული ზოგადი გამოყენების მოდელი."
 
-#: src/ollama_models.py:2309
+#: src/available_models_descriptions.py:80
 msgid "A strong, economical, and efficient Mixture-of-Experts language model."
 msgstr ""
 
-#: src/ollama_models.py:2331
+#: src/available_models_descriptions.py:81
 msgid ""
 "Starling is a large language model trained by reinforcement learning from AI "
 "feedback focused on improving chatbot helpfulness."
 msgstr ""
 
-#: src/ollama_models.py:2353
+#: src/available_models_descriptions.py:82
 msgid ""
 "A companion assistant trained in philosophy, psychology, and personal "
 "relationships. Based on Mistral."
 msgstr ""
 
-#: src/ollama_models.py:2391
+#: src/available_models_descriptions.py:83
 msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
 msgstr ""
 
-#: src/ollama_models.py:2419
+#: src/available_models_descriptions.py:84
 msgid ""
 "Yi-Coder is a series of open-source code language models that delivers state-"
 "of-the-art coding performance with fewer than 10 billion parameters."
 msgstr ""
 
-#: src/ollama_models.py:2450
+#: src/available_models_descriptions.py:85
 msgid ""
 "A large language model built by the Technology Innovation Institute (TII) "
 "for use in summarization, text generation, and chat bots."
 msgstr ""
 
-#: src/ollama_models.py:2487
+#: src/available_models_descriptions.py:86
 msgid ""
 "InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
 "outstanding reasoning capability."
 msgstr ""
 
-#: src/ollama_models.py:2509
+#: src/available_models_descriptions.py:87
 msgid ""
 "A compact, yet powerful 10.7B large language model designed for single-turn "
 "conversation."
 msgstr ""
 
-#: src/ollama_models.py:2533
+#: src/available_models_descriptions.py:88
 msgid ""
 "Athene-V2 is a 72B parameter model which excels at code completion, "
 "mathematics, and log extraction tasks."
 msgstr ""
 
-#: src/ollama_models.py:2556
+#: src/available_models_descriptions.py:89
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
 msgstr ""
 
-#: src/ollama_models.py:2584
+#: src/available_models_descriptions.py:90
 msgid ""
 "Orca 2 is built by Microsoft research, and are a fine-tuned version of "
 "Meta's Llama 2 models. The model is designed to excel particularly in "
 "reasoning."
 msgstr ""
 
-#: src/ollama_models.py:2615
+#: src/available_models_descriptions.py:91
 msgid ""
 "A series of multimodal LLMs (MLLMs) designed for vision-language "
 "understanding."
 msgstr ""
 
-#: src/ollama_models.py:2647
+#: src/available_models_descriptions.py:92
 msgid ""
 "Llama 2 based model fine tuned on an Orca-style dataset. Originally called "
 "Free Willy."
 msgstr ""
 
-#: src/ollama_models.py:2676
+#: src/available_models_descriptions.py:93
 msgid ""
 "Mistral Small 3 sets a new benchmark in the “small” Large Language Models "
 "category below 70B."
 msgstr ""
 
-#: src/ollama_models.py:2698
+#: src/available_models_descriptions.py:94
 msgid ""
 "2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
 "model by Microsoft Research."
 msgstr ""
 
-#: src/ollama_models.py:2731
+#: src/available_models_descriptions.py:95
 msgid ""
 "SmolLM2 is a family of compact language models available in three size: "
 "135M, 360M, and 1.7B parameters."
 msgstr ""
 
-#: src/ollama_models.py:2753
+#: src/available_models_descriptions.py:96
 msgid "Uncensored version of Wizard LM model"
 msgstr ""
 
-#: src/ollama_models.py:2776
+#: src/available_models_descriptions.py:97
 msgid ""
 "A commercial-friendly small language model by NVIDIA optimized for roleplay, "
 "RAG QA, and function calling."
 msgstr ""
 
-#: src/ollama_models.py:2798
+#: src/available_models_descriptions.py:98
 msgid "An extension of Mistral to support context windows of 64K or 128K."
 msgstr ""
 
-#: src/ollama_models.py:2826
+#: src/available_models_descriptions.py:99
 msgid ""
 "An expansion of Llama 2 that specializes in integrating both general "
 "language understanding and domain-specific knowledge, particularly in "
 "programming and mathematics."
 msgstr ""
 
-#: src/ollama_models.py:2848
+#: src/available_models_descriptions.py:100
 msgid ""
 "Fine-tuned Llama 2 model to answer medical questions based on an open source "
 "medical dataset."
 msgstr ""
 
-#: src/ollama_models.py:2875
+#: src/available_models_descriptions.py:101
 msgid ""
 "Open-source medical large language model adapted from Llama 2 to the medical "
 "domain."
 msgstr ""
 
-#: src/ollama_models.py:2903
+#: src/available_models_descriptions.py:102
 msgid ""
 "A series of models from Groq that represent a significant advancement in "
 "open-source AI capabilities for tool use/function calling."
 msgstr ""
 
-#: src/ollama_models.py:2925
+#: src/available_models_descriptions.py:103
 msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
 msgstr ""
 
-#: src/ollama_models.py:2947
+#: src/available_models_descriptions.py:104
 msgid ""
 "Nexus Raven is a 13B instruction tuned model for function calling tasks."
 msgstr ""
 
-#: src/ollama_models.py:2968
+#: src/available_models_descriptions.py:105
 msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
 msgstr ""
 
-#: src/ollama_models.py:2991
+#: src/available_models_descriptions.py:106
 msgid "Great code generation model based on Llama2."
 msgstr ""
 
-#: src/ollama_models.py:3013
+#: src/available_models_descriptions.py:107
 msgid "Uncensored Llama2 based model with support for a 16K context window."
 msgstr ""
 
-#: src/ollama_models.py:3054
+#: src/available_models_descriptions.py:108
 msgid ""
 "The IBM Granite 2B and 8B models are designed to support tool-based use "
 "cases and support for retrieval augmented generation (RAG), streamlining "
 "code generation, translation and bug fixing."
 msgstr ""
 
-#: src/ollama_models.py:3077
+#: src/available_models_descriptions.py:109
 msgid ""
 "🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic "
 "instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
 "with open-source code snippets."
 msgstr ""
 
-#: src/ollama_models.py:3099
+#: src/available_models_descriptions.py:110
 msgid ""
 "A lightweight chat model allowing accurate, and responsive output without "
 "requiring high-end hardware."
 msgstr ""
 
-#: src/ollama_models.py:3122
+#: src/available_models_descriptions.py:111
 msgid ""
 "A high-performing code instruct model created by merging two existing code "
 "models."
 msgstr ""
 
-#: src/ollama_models.py:3145
+#: src/available_models_descriptions.py:112
 msgid ""
 "Falcon2 is an 11B parameters causal decoder-only model built by TII and "
 "trained over 5T tokens."
 msgstr ""
 
-#: src/ollama_models.py:3167
+#: src/available_models_descriptions.py:113
 msgid ""
 "Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
 "MelodysDreamj."
 msgstr ""
 
-#: src/ollama_models.py:3189
+#: src/available_models_descriptions.py:114
 msgid ""
 "MistralLite is a fine-tuned model based on Mistral with enhanced "
 "capabilities of processing long contexts."
 msgstr ""
 
-#: src/ollama_models.py:3212
+#: src/available_models_descriptions.py:115
 msgid ""
 "MathΣtral: a 7B model designed for math reasoning and scientific discovery "
 "by Mistral AI."
 msgstr ""
 
-#: src/ollama_models.py:3234
+#: src/available_models_descriptions.py:116
 msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
 msgstr ""
 
-#: src/ollama_models.py:3255
+#: src/available_models_descriptions.py:117
 msgid ""
 "MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
 "interleaving the model with itself."
 msgstr ""
 
-#: src/ollama_models.py:3277
+#: src/available_models_descriptions.py:118
 msgid ""
 "Solar Pro Preview: an advanced large language model (LLM) with 22 billion "
 "parameters designed to fit into a single GPU"
 msgstr ""
 
-#: src/ollama_models.py:3304
+#: src/available_models_descriptions.py:119
 msgid ""
 "A series of models that convert HTML content to Markdown content, which is "
 "useful for content conversion tasks."
 msgstr ""
 
-#: src/ollama_models.py:3325
+#: src/available_models_descriptions.py:120
 msgid ""
 "A top-performing mixture of experts model, fine-tuned with high-quality data."
 msgstr ""
 
-#: src/ollama_models.py:3347
+#: src/available_models_descriptions.py:121
 msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
 msgstr ""
 
-#: src/ollama_models.py:3370
+#: src/available_models_descriptions.py:122
 msgid ""
 "Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
 "Designed for chat and code generation."
 msgstr ""
 
-#: src/ollama_models.py:3387
+#: src/available_models_descriptions.py:123
 msgid ""
 "A language model created by combining two fine-tuned Llama 2 70B models into "
 "one."
 msgstr ""
 
-#: src/ollama_models.py:3428
+#: src/available_models_descriptions.py:124
 msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
 
-#: src/ollama_models.py:3450
+#: src/available_models_descriptions.py:125
 msgid ""
 "A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
 "information extraction, based on Phi-3."
 msgstr ""
 
-#: src/ollama_models.py:3501
+#: src/available_models_descriptions.py:126
 msgid ""
 "Cohere For AI's language models trained to perform well across 23 different "
 "languages."
 msgstr ""
 
-#: src/ollama_models.py:3523
+#: src/available_models_descriptions.py:127
 msgid "DBRX is an open, general-purpose LLM created by Databricks."
 msgstr ""
 
-#: src/ollama_models.py:3545
+#: src/available_models_descriptions.py:128
 msgid ""
 "An open large reasoning model for real-world solutions by the Alibaba "
 "International Digital Commerce Group (AIDC-AI)."
 msgstr ""
 
-#: src/ollama_models.py:3568
+#: src/available_models_descriptions.py:129
 msgid "Embedding model from BAAI mapping texts to vectors."
 msgstr ""
 
-#: src/ollama_models.py:3590
+#: src/available_models_descriptions.py:130
 msgid ""
 "An open weights function calling model based on Llama 3, competitive with "
 "GPT-4o function calling capabilities."
 msgstr ""
 
-#: src/ollama_models.py:3611
+#: src/available_models_descriptions.py:131
 msgid ""
 "A robust conversational model designed to be used for both chat and instruct "
 "use cases."
 msgstr ""
 
-#: src/ollama_models.py:3633
+#: src/available_models_descriptions.py:132
 msgid ""
 "An upgraded version of DeekSeek-V2 that integrates the general and coding "
 "abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
 msgstr ""
 
-#: src/ollama_models.py:3666
+#: src/available_models_descriptions.py:133
 msgid ""
 "ShieldGemma is set of instruction tuned models for evaluating the safety of "
 "text prompt input and text output responses against a set of defined safety "
 "policies."
 msgstr ""
 
-#: src/ollama_models.py:3688
+#: src/available_models_descriptions.py:134
 msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
 msgstr ""
 
-#: src/ollama_models.py:3716
+#: src/available_models_descriptions.py:135
 msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
 msgstr ""
 
-#: src/ollama_models.py:3740
+#: src/available_models_descriptions.py:136
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
 msgstr ""
 
-#: src/ollama_models.py:3770
+#: src/available_models_descriptions.py:137
 msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
 msgstr ""
 
-#: src/ollama_models.py:3799
+#: src/available_models_descriptions.py:138
 msgid ""
 "Tülu 3 is a leading instruction following model family, offering fully open-"
 "source data, code, and recipes by the The Allen Institute for AI."
 msgstr ""
 
-#: src/ollama_models.py:3827
+#: src/available_models_descriptions.py:139
 msgid ""
 "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
 "support without sacrificing English performance or scalability."
 msgstr ""
 
-#: src/ollama_models.py:3855
+#: src/available_models_descriptions.py:140
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
 msgstr ""
 
-#: src/ollama_models.py:3889
+#: src/available_models_descriptions.py:141
 msgid ""
 "EXAONE 3.5 is a collection of instruction-tuned bilingual (English and "
 "Korean) generative models ranging from 2.4B to 32B parameters, developed and "
 "released by LG AI Research."
 msgstr ""
 
-#: src/ollama_models.py:3937
+#: src/available_models_descriptions.py:142
 msgid ""
 "Sailor2 are multilingual language models made for South-East Asia. Available "
 "in 1B, 8B, and 20B parameter sizes."
 msgstr ""
 
-#: src/ollama_models.py:3975
+#: src/available_models_descriptions.py:143
 msgid ""
 "A family of efficient AI models under 10B parameters performant in science, "
 "math, and coding through innovative training techniques."
 msgstr ""
 
-#: src/ollama_models.py:4016
+#: src/available_models_descriptions.py:144
 msgid ""
 "The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 "
 "trillion tokens of data, demonstrated significant improvements over their "
 "predecessors in performance and speed in IBM’s initial testing."
 msgstr ""
 
-#: src/ollama_models.py:4057
+#: src/available_models_descriptions.py:145
 msgid ""
 "The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
 msgstr ""
 
-#: src/ollama_models.py:4098
+#: src/available_models_descriptions.py:146
 msgid ""
 "The IBM Granite Embedding 30M and 278M models models are text-only dense "
 "biencoder embedding models, with 30M available in English only and 278M "
 "serving multilingual use cases."
 msgstr ""
 
-#: src/ollama_models.py:4120
+#: src/available_models_descriptions.py:147
 msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
 msgstr ""
 
-#: src/ollama_models.py:4143
+#: src/available_models_descriptions.py:148
 msgid ""
 "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
 msgstr ""
 
-#: src/ollama_models.py:4167
+#: src/available_models_descriptions.py:149
 msgid ""
 "Dolphin 3.0 Llama 3.1 8B 🐬 is the next generation of the Dolphin series of "
 "instruct-tuned models designed to be the ultimate general purpose local "
@@ -2864,20 +3136,20 @@ msgid ""
 "cases."
 msgstr ""
 
-#: src/ollama_models.py:4218
+#: src/available_models_descriptions.py:150
 msgid ""
 "DeepSeek's first-generation of reasoning models with comparable performance "
 "to OpenAI-o1, including six dense models distilled from DeepSeek-R1 based on "
 "Llama and Qwen."
 msgstr ""
 
-#: src/ollama_models.py:4239
+#: src/available_models_descriptions.py:151
 msgid ""
 "A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
 "with 37B activated for each token."
 msgstr ""
 
-#: src/ollama_models.py:4266
+#: src/available_models_descriptions.py:152
 msgid ""
 "OLMo 2 is a new family of 7B and 13B models trained on up to 5T tokens. "
 "These models are on par with or better than equivalently sized fully open "
@@ -2885,342 +3157,480 @@ msgid ""
 "academic benchmarks."
 msgstr ""
 
-#: src/ollama_models.py:4314
+#: src/available_models_descriptions.py:153
 msgid ""
 "The smallest model in Cohere's R series delivers top-tier speed, efficiency, "
 "and quality to build powerful AI applications on commodity GPUs and edge "
 "devices."
 msgstr ""
 
-#: src/ollama_models.py:4342
+#: src/available_models_descriptions.py:154
 msgid ""
 "A fully open-source family of reasoning models built using a dataset derived "
 "by distilling DeepSeek-R1."
 msgstr ""
 
-#: src/ollama_models.py:4366
+#: src/available_models_descriptions.py:155
 msgid ""
 "A fine-tuned version of Deepseek-R1-Distilled-Qwen-1.5B that surpasses the "
 "performance of OpenAI’s o1-preview with just 1.5B parameters on popular math "
 "evaluations."
 msgstr ""
 
-#: src/ollama_models.py:4396
+#: src/available_models_descriptions.py:156
 msgid ""
 "A version of the DeepSeek-R1 model that has been post trained to provide "
 "unbiased, accurate, and factual information by Perplexity."
 msgstr ""
 
-#: src/ollama_models.py:4433
+#: src/available_models_descriptions.py:157
 msgid "The current, most capable model that runs on a single GPU."
 msgstr ""
 
-#: src/ollama_models.py:4480
+#: src/available_models_descriptions.py:158
 msgid ""
 "Phi-4-mini brings significant enhancements in multilingual support, "
 "reasoning, and mathematics, and now, the long-awaited function calling "
 "feature is finally supported."
 msgstr ""
 
-#: src/ollama_models.py:4504
+#: src/available_models_descriptions.py:159
 msgid ""
 "A compact and efficient vision-language model, specifically designed for "
 "visual document understanding, enabling automated content extraction from "
 "tables, charts, infographics, plots, diagrams, and more."
 msgstr ""
 
-#: src/ollama_models.py:4544
+#: src/available_models_descriptions.py:160
 msgid ""
 "Granite-3.2 is a family of long-context AI models from IBM Granite fine-"
 "tuned for thinking capabilities."
 msgstr ""
 
-#: src/ollama_models.py:4568
+#: src/available_models_descriptions.py:161
 msgid ""
 "A new state-of-the-art version of the lightweight Command R7B model that "
 "excels in advanced Arabic language capabilities for enterprises in the "
 "Middle East and Northern Africa."
 msgstr ""
 
-#: src/ollama_models.py:4614
+#: src/available_models_descriptions.py:162
 msgid ""
 "111 billion parameter model optimized for demanding enterprises that require "
 "fast, secure, and high-quality AI"
 msgstr ""
 
-#: src/ollama_models.py:4655
-msgid ""
-"Qwen3 is the latest generation of large language models in Qwen series, "
-"offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
-msgstr ""
-
-#: src/ollama_models.py:4802
-msgid "Devstral: the best open source model for coding agents"
-msgstr ""
-
-#: src/ollama_models.py:4830
-msgid "Meta's latest collection of multimodal models."
-msgstr ""
-
-#: src/ollama_models.py:4878
-msgid ""
-"Flagship vision-language model of Qwen and also a significant leap from the "
-"previous Qwen2-VL."
-msgstr ""
-
-#: src/ollama_models.py:4908
-msgid ""
-"DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
-"1.5B version also available."
-msgstr ""
-
-#: src/ollama_models.py:4933
-msgid ""
-"Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-"
-"art vision understanding and enhances long context capabilities up to 128k "
-"tokens without compromising text performance."
-msgstr ""
-
-#: src/ollama_models.py:4973
-msgid ""
-"Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that "
-"outperform the best available open models of the same size, including "
-"counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."
-msgstr ""
-
-#: src/ollama_models.py:5002
-msgid ""
-"IBM Granite 2B and 8B models are 128K context length language models that "
-"have been fine-tuned for improved reasoning and instruction-following "
-"capabilities."
-msgstr ""
-
-#: src/ollama_models.py:5040
-msgid ""
-"Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
-"reasoning models that rival much larger models on complex reasoning tasks."
-msgstr ""
-
-#: src/ollama_models.py:5073
+#: src/available_models_descriptions.py:163
 msgid ""
 "EXAONE Deep exhibits superior capabilities in various reasoning tasks "
 "including math and coding benchmarks, ranging from 2.4B to 32B parameters "
 "developed and released by LG AI Research."
 msgstr ""
 
-#: src/ollama_models.py:5100
+#: src/available_models_descriptions.py:164
+msgid ""
+"Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-"
+"art vision understanding and enhances long context capabilities up to 128k "
+"tokens without compromising text performance."
+msgstr ""
+
+#: src/available_models_descriptions.py:165
+msgid ""
+"Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that "
+"outperform the best available open models of the same size, including "
+"counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."
+msgstr ""
+
+#: src/available_models_descriptions.py:166
+msgid ""
+"DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
+"1.5B version also available."
+msgstr ""
+
+#: src/available_models_descriptions.py:167
+msgid ""
+"Qwen3 is the latest generation of large language models in Qwen series, "
+"offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
+msgstr ""
+
+#: src/available_models_descriptions.py:168
+msgid "Meta's latest collection of multimodal models."
+msgstr ""
+
+#: src/available_models_descriptions.py:169
+msgid ""
+"IBM Granite 2B and 8B models are 128K context length language models that "
+"have been fine-tuned for improved reasoning and instruction-following "
+"capabilities."
+msgstr ""
+
+#: src/available_models_descriptions.py:170
+msgid ""
+"Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
+"reasoning models that rival much larger models on complex reasoning tasks."
+msgstr ""
+
+#: src/available_models_descriptions.py:171
 msgid ""
 "Phi 4 mini reasoning is a lightweight open model that balances efficiency "
 "with advanced reasoning ability."
 msgstr ""
 
-#: src/window.py:187 src/window.py:222
-msgid "Speech Recognition Error"
-msgstr ""
+#: src/instance_manager.py:30 src/instance_manager.py:366
+msgid "Instance"
+msgstr "გაშვებული ასლი"
 
-#: src/window.py:188
-msgid "An error occurred while pulling speech recognition model"
-msgstr ""
-
-#: src/window.py:223
-msgid "An error occurred while using speech recognition"
-msgstr ""
-
-#: src/window.py:246
-msgid "Download Speech Recognition Model"
-msgstr ""
-
-#: src/window.py:247
-msgid "To use speech recognition you'll need to download a special model ({})"
-msgstr ""
-
-#: src/window.py:249
-msgid "Download Model"
-msgstr ""
-
-#: src/window.py:267
-msgid "Ollama Was Not Found"
-msgstr ""
-
-#: src/window.py:268
-msgid ""
-"To add a managed Ollama instance, you must have Ollama installed locally in "
-"your device, this is a simple process and should not take more than 5 "
-"minutes."
-msgstr ""
-
-#: src/window.py:270
-msgid "Open Tutorial in Web Browser"
-msgstr ""
-
-#: src/window.py:276 src/window.py:284 src/window.ui:527 src/window.ui:537
-#: src/window.ui:559
-msgid "Add Instance"
-msgstr ""
-
-#: src/window.py:285
-msgid "Select a type of instance to add"
-msgstr ""
-
-#: src/window.py:505
-msgid "No tools enabled."
-msgstr ""
-
-#: src/window.py:505
-msgid "Open Tool Manager"
-msgstr ""
-
-#: src/window.py:508
-msgid "'{}' does not support tools."
-msgstr ""
-
-#: src/window.py:508
-msgid "Open Model Manager"
-msgstr ""
-
-#: src/window.py:511 src/window.py:1090
-msgid "Please select a model before chatting"
-msgstr ""
-
-#: src/window.py:584 src/window.py:585 src/window.py:680 src/window.ui:355
-msgid "Close"
-msgstr ""
-
-#: src/window.py:587 src/window.py:588 src/window.ui:62 src/window.ui:63
-msgid "Next"
-msgstr ""
-
-#: src/window.py:678 src/window.ui:1023 src/window.ui:1027
-#: src/widgets/dialog.py:150 src/widgets/dialog.py:163
-#: src/widgets/dialog.py:176 src/widgets/instance_manager.py:469
-#: src/widgets/instance_manager.py:470 src/widgets/model_manager.py:637
-#: src/widgets/blocks/code.py:136 src/widgets/blocks/text.py:111
-#: src/widgets/tools/tools.py:132
-msgid "Cancel"
-msgstr ""
-
-#: src/window.py:679
-msgid "Hide"
-msgstr ""
-
-#: src/window.py:683
-msgid "Close Alpaca?"
-msgstr ""
-
-#: src/window.py:684
-msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
-msgstr ""
-
-#: src/window.py:924 src/window.ui:163 src/window.ui:1346
-#: src/widgets/chat.py:207 src/widgets/instance_manager.py:58
-#: src/widgets/instance_manager.py:69 src/widgets/instance_manager.py:110
+#: src/instance_manager.py:60 src/instance_manager.py:69 src/window.ui:154
+#: src/custom_widgets/chat_widget.py:424
 msgid "New Chat"
+msgstr "ახალი ჩატი"
+
+#: src/instance_manager.py:76
+msgid "Selecting tool to use..."
 msgstr ""
 
-#: src/window.py:1004
-msgid "This video does not have any transcriptions"
+#: src/instance_manager.py:85
+msgid "Using {}"
 msgstr ""
 
-#: src/window.py:1012
-msgid "Attach YouTube Video?"
+#: src/instance_manager.py:111
+msgid "Tool Error"
 msgstr ""
 
-#: src/window.py:1013
+#: src/instance_manager.py:111
+msgid "An error occurred while running tool"
+msgstr ""
+
+#: src/instance_manager.py:114
+msgid "Generating message..."
+msgstr ""
+
+#: src/instance_manager.py:162 src/instance_manager.py:462
+#: src/instance_manager.py:472 src/instance_manager.py:618
+#: src/instance_manager.py:690 src/instance_manager.py:732
+#: src/instance_manager.py:761 src/instance_manager.py:803
+#: src/instance_manager.py:823 src/instance_manager.py:844
+msgid "Instance Error"
+msgstr "გაშვებული ასლის შეცდომა"
+
+#: src/instance_manager.py:162
+msgid "Message generation failed"
+msgstr "შეტყობინების გენერაცია ჩავარდა"
+
+#: src/instance_manager.py:218 src/window.ui:885
+msgid "Name"
+msgstr "სახელი"
+
+#: src/instance_manager.py:226
+msgid "Port"
+msgstr "პორტი"
+
+#: src/instance_manager.py:227
+msgid "Which network port will '{}' use"
+msgstr ""
+
+#: src/instance_manager.py:241
+msgid "Instance URL"
+msgstr "გაშვებული ასლის URL"
+
+#: src/instance_manager.py:244 src/instance_manager.py:254
+#: src/instance_manager.py:257 src/instance_manager.py:259
+msgid "API Key (Unchanged)"
+msgstr "API-ის გასაღები (უცვლელი)"
+
+#: src/instance_manager.py:244 src/instance_manager.py:254
+msgid "API Key (Optional)"
+msgstr "API-ის გასაღები (არასავალდებულო)"
+
+#: src/instance_manager.py:257 src/instance_manager.py:259
+msgid "API Key"
+msgstr "API-ის გასაღები"
+
+#: src/instance_manager.py:267
+msgid "Max Tokens"
+msgstr "მაქს. კოდები"
+
+#: src/instance_manager.py:268
 msgid ""
-"{}\n"
-"\n"
-"Please select a transcript to include"
+"Defines the maximum number of tokens (words + spaces) the AI can generate in "
+"a response. More tokens allow longer replies but may take more time and cost "
+"more."
 msgstr ""
 
-#: src/window.py:1019
-msgid "Error attaching video, please try again"
+#: src/instance_manager.py:283
+msgid "Temperature"
+msgstr "ტემპერატურა"
+
+#: src/instance_manager.py:284
+msgid "Increasing the temperature will make the models answer more creatively."
 msgstr ""
 
-#: src/window.py:1041 src/window.py:1480
-msgid "Attach Website? (Experimental)"
-msgstr ""
+#: src/instance_manager.py:299
+msgid "Seed"
+msgstr "თესლი"
 
-#: src/window.py:1042
+#: src/instance_manager.py:300
 msgid ""
-"Are you sure you want to attach\n"
-"'{}'?"
+"Setting this to a specific number other than 0 will make the model generate "
+"the same text for the same prompt."
 msgstr ""
 
-#: src/window.py:1061 src/window.py:1477
-msgid "Image recognition is only available on specific models"
+#: src/instance_manager.py:315
+msgid "Overrides"
+msgstr "გადაფარავს"
+
+#: src/instance_manager.py:315
+msgid ""
+"These entries are optional, they are used to troubleshoot GPU related "
+"problems with Ollama."
 msgstr ""
 
-#: src/window.py:1073 src/window.ui:1266
-msgid "Quick Ask"
+#: src/instance_manager.py:333
+msgid "Model Directory"
+msgstr "მოდელის საქაღალდე"
+
+#: src/instance_manager.py:335
+msgid "Select Directory"
+msgstr "აირჩიეთ საქაღალდე"
+
+#: src/instance_manager.py:346
+msgid "Default Model"
+msgstr "ნაგულისხმევი მოდელი"
+
+#: src/instance_manager.py:346
+msgid "Model to select when starting a new chat."
 msgstr ""
 
-#: src/window.py:1240
-msgid "Chat imported successfully"
+#: src/instance_manager.py:348
+msgid "Title Model"
+msgstr "სათაურის მოდელი"
+
+#: src/instance_manager.py:348
+msgid "Model to use when generating a chat title."
+msgstr "მოდელი ჩატის სათაურის გენერაციისთვის."
+
+#: src/instance_manager.py:412 src/instance_manager.py:413
+#: src/custom_widgets/message_widget.py:234
+msgid "Save"
+msgstr "შენახვა"
+
+#: src/instance_manager.py:462 src/instance_manager.py:690
+#: src/instance_manager.py:732 src/instance_manager.py:761
+msgid "Could not retrieve added models"
+msgstr "დამატებული მოდელების მიღება შეუძლებელია"
+
+#: src/instance_manager.py:472
+msgid "Could not retrieve available models"
+msgstr "ხელმისაწვდომი მოდელების მიღება შეუძლებელია"
+
+#: src/instance_manager.py:539
+msgid "Ollama (Managed)"
+msgstr "Ollama (მართული)"
+
+#: src/instance_manager.py:548
+msgid "Local AI instance managed directly by Alpaca"
+msgstr "ლოკალური ხი-ის მართული პირდაპირ Alpaca-ის მიერ"
+
+#: src/instance_manager.py:572
+msgid "Alpaca Support"
+msgstr "Alpaca-ის მხარდაჭერა"
+
+#: src/instance_manager.py:579
+msgid "Model request too large for system"
+msgstr "მოდელის მოთხოვნა მეტისმეტად დიდია ამ სისტემისთვის"
+
+#: src/instance_manager.py:582
+msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
+msgstr "აღმოჩენილია AMD GPU, მაგრამ გაფართოება - არა. Ollama CPU-ზე იმუშაევბა."
+
+#: src/instance_manager.py:584
+msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
+msgstr "აღმოჩენილია AMD GPU, მაგრამ ROCm - არა. Ollama CPU-ზე იმუშაევბა."
+
+#: src/instance_manager.py:586
+msgid "Using AMD GPU type '{}'"
+msgstr "გამოიყენება AMD GPU ტიპით '{}'"
+
+#: src/instance_manager.py:596
+msgid "Integrated Ollama instance is not running"
+msgstr "ჩაშენებული Ollama-ის ასლი გაშვებული არაა"
+
+#: src/instance_manager.py:618
+msgid "Managed Ollama instance failed to start"
+msgstr "მართული Ollama-ის ასლის გაშვება ჩავარდა"
+
+#: src/instance_manager.py:621
+msgid "Integrated Ollama instance is running"
+msgstr "ჩაშენებული Ollama-ის ასლი გაშვებულია"
+
+#: src/instance_manager.py:626 src/instance_manager.py:627
+msgid "Ollama Log"
+msgstr "Ollama-ის ჟურნალი"
+
+#: src/instance_manager.py:639
+msgid "Local or remote AI instance not managed by Alpaca"
+msgstr "ლოკალური ან დაშორებული ხი-ის ასლი, რომელსაც Alpaca არ მართავს"
+
+#: src/instance_manager.py:803 src/instance_manager.py:823
+#: src/instance_manager.py:844
+msgid "Could not retrieve models"
 msgstr ""
 
-#: src/window.py:1254
-msgid "Attachment failed, screenshot might be too big"
+#: src/instance_manager.py:812
+msgid "Fireworks AI inference platform"
 msgstr ""
 
-#: src/window.py:1303
-msgid "Any compatible Alpaca attachment"
+#: src/instance_manager.py:832
+msgid "Lambda Labs cloud inference API"
 msgstr ""
 
-#: src/window.py:1448
-msgid "Attach Screenshot"
+#: src/instance_manager.py:853
+msgid "Cerebras AI cloud inference API"
 msgstr ""
 
-#: src/window.py:1481
-msgid "Please enter a website URL"
+#: src/instance_manager.py:859
+msgid "Kluster AI cloud inference API"
 msgstr ""
 
-#: src/window.py:1487
-msgid "Attach YouTube Captions?"
+#: src/instance_manager.py:863
+msgid "OpenAI Compatible Instance"
+msgstr "OpenAI-სთან თავსებადი ასლი"
+
+#: src/instance_manager.py:864
+msgid "AI instance compatible with OpenAI library"
 msgstr ""
 
-#: src/window.py:1488
-msgid "Please enter a YouTube video URL"
+#: src/instance_manager.py:886
+msgid "Remove Instance?"
+msgstr "წავშალო გაშვებული ასლი?"
+
+#: src/instance_manager.py:886
+msgid "Are you sure you want to remove this instance?"
+msgstr "მართლა გნებავთ ამ გაშვებული ასლის წაშლა?"
+
+#: src/instance_manager.py:901
+msgid "Edit Instance"
+msgstr "შემთხვევის ჩასწორება"
+
+#: src/tool_manager.py:71
+msgid "AI Description"
 msgstr ""
 
-#: src/window.py:1496
-msgid "Download Model?"
+#: src/tool_manager.py:72
+msgid "The description the AI model will use to understand what the tool does."
 msgstr ""
 
-#: src/window.py:1497
-msgid "Please enter the model name following this template: name:tag"
+#: src/tool_manager.py:83
+msgid "Arguments"
 msgstr ""
 
-#: src/window.py:1504
-msgid "Delete All Chats?"
+#: src/tool_manager.py:84
+msgid "Variables that are filled by the AI."
 msgstr ""
 
-#: src/window.py:1505
-msgid "Are you sure you want to delete all chats?"
+#: src/tool_manager.py:97
+msgid "Variables"
 msgstr ""
 
-#: src/window.py:1507 src/widgets/attachments.py:211 src/widgets/chat.py:461
-msgid "Delete"
+#: src/tool_manager.py:98
+msgid ""
+"User filled values that the tool uses to work, the AI does not have access "
+"to these variables at all."
 msgstr ""
 
-#: src/window.py:1534
-msgid "Already Installed!"
+#: src/tool_manager.py:140 src/custom_widgets/dialog_widget.py:146
+#: src/custom_widgets/dialog_widget.py:158
+#: src/custom_widgets/dialog_widget.py:170
+msgid "Accept"
+msgstr "დასტური"
+
+#: src/tool_manager.py:177
+msgid "Gets the current date and/or time."
+msgstr ""
+
+#: src/tool_manager.py:211
+msgid "Gets a recipe by the meal's name"
+msgstr ""
+
+#: src/tool_manager.py:224 src/tool_manager.py:281
+msgid "YouTube Video"
+msgstr ""
+
+#: src/tool_manager.py:227 src/tool_manager.py:284
+msgid "Source"
+msgstr ""
+
+#: src/tool_manager.py:262
+msgid "Gets a list of food recipes by a specified category"
+msgstr ""
+
+#: src/tool_manager.py:307
+msgid "Extracts an article from Wikipedia by it's title"
+msgstr ""
+
+#: src/tool_manager.py:349
+msgid "Search for a term online using DuckDuckGo"
+msgstr ""
+
+#: src/tool_manager.py:365
+msgid "Abstract Source"
+msgstr ""
+
+#: src/tool_manager.py:384
+msgid "Official Website"
+msgstr ""
+
+#: src/tool_manager.py:432
+msgid "Request to run a command using SSH to connect to the device"
+msgstr ""
+
+#: src/tool_manager.py:435
+msgid "IP Address"
+msgstr ""
+
+#: src/tool_manager.py:440
+msgid "Username"
+msgstr ""
+
+#: src/tool_manager.py:445
+msgid "Network Port"
+msgstr ""
+
+#: src/tool_manager.py:462
+msgid "Model Requested to Run Command"
+msgstr ""
+
+#: src/tool_manager.py:463
+msgid "Command"
+msgstr ""
+
+#: src/tool_manager.py:465
+msgid "Explanation"
+msgstr ""
+
+#: src/tool_manager.py:466
+msgid "No explanation was provided"
+msgstr ""
+
+#: src/tool_manager.py:467
+msgid "Make sure you understand what the command does before running it."
 msgstr ""
 
 #: src/window.ui:34
 msgid "Welcome"
-msgstr ""
+msgstr "მოგესალმებათ"
 
 #: src/window.ui:46 src/window.ui:47
 msgid "Previous"
-msgstr ""
+msgstr "წინა"
 
 #: src/window.ui:82
 msgid "Welcome to Alpaca"
-msgstr ""
+msgstr "მოგესალმებათ Alpaca"
 
 #: src/window.ui:83
 msgid "Powering your potential"
-msgstr ""
+msgstr "ენერგია თქვენი პოტენციალისთვის"
 
 #: src/window.ui:91
 msgid ""
@@ -3233,7 +3643,7 @@ msgstr ""
 
 #: src/window.ui:100
 msgid "Effortless Code Execution"
-msgstr ""
+msgstr "უპრობლემო კოდის გაშვება"
 
 #: src/window.ui:101
 msgid ""
@@ -3243,7 +3653,7 @@ msgstr ""
 
 #: src/window.ui:107
 msgid "Private by Design"
-msgstr ""
+msgstr "კონფიდენციალური საწყისებიდან"
 
 #: src/window.ui:108
 msgid ""
@@ -3266,375 +3676,344 @@ msgstr ""
 msgid "Install Ollama"
 msgstr ""
 
-#: src/window.ui:174
+#: src/window.ui:165
 msgid "Menu"
-msgstr ""
+msgstr "მენიუ"
 
-#: src/window.ui:181
-msgid "Search Chats"
-msgstr ""
-
-#: src/window.ui:190
-msgid "Chat search bar"
-msgstr ""
-
-#: src/window.ui:198 src/window.ui:200
-msgid "Search chats"
-msgstr ""
-
-#: src/window.ui:236
-msgid "No Chats Found"
-msgstr ""
-
-#: src/window.ui:237
-msgid "Oh no! It looks like there are no chats found for your search."
-msgstr ""
-
-#: src/window.ui:254
+#: src/window.ui:187
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "გვერდითი პანელის ჩვენების ჩართ/გამორთ"
 
-#: src/window.ui:261
+#: src/window.ui:194
 msgid "Search Messages"
-msgstr ""
+msgstr "შეტყობინებების ძებნა"
 
-#: src/window.ui:278 src/window.ui:303 src/window.ui:1370
+#: src/window.ui:211 src/window.ui:236 src/window.ui:1385
 msgid "Manage Models"
-msgstr ""
+msgstr "მოდელების მართვა"
 
-#: src/window.ui:299
+#: src/window.ui:232
 msgid "Add Models"
 msgstr ""
 
-#: src/window.ui:316
+#: src/window.ui:249
 msgid "Chat Menu"
-msgstr ""
+msgstr "ჩატის მენიუ"
 
-#: src/window.ui:329
+#: src/window.ui:262
 msgid "Message search bar"
-msgstr ""
+msgstr "შეტყობინების ძებნის პანელი"
 
-#: src/window.ui:338 src/window.ui:340
+#: src/window.ui:271 src/window.ui:273
 msgid "Search messages"
-msgstr ""
+msgstr "შეტყობინებებში ძებნა"
 
-#: src/window.ui:356
+#: src/window.ui:289
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr ""
 
-#: src/window.ui:391 src/window.ui:1468
+#: src/window.ui:336 src/window.ui:1483
 msgid "Attach File"
-msgstr ""
+msgstr "ფაილის მიმაგრება"
 
-#: src/window.ui:424 src/window.ui:1315
+#: src/window.ui:369 src/window.ui:1252
 msgid "Use Speech Recognition"
 msgstr ""
 
-#: src/window.ui:459
+#: src/window.ui:404
 msgid "Send Message"
-msgstr ""
+msgstr "შეტყობინების გაგზავნა"
 
-#: src/window.ui:478
+#: src/window.ui:423
 msgid "Stop Message"
-msgstr ""
+msgstr "გაჩერების შეტყობინება"
 
-#: src/window.ui:508
+#: src/window.ui:453
 msgid "Instance Manager"
-msgstr ""
+msgstr "გაშვებული ასლების მმართველი"
 
-#: src/window.ui:523
+#: src/window.ui:468
 msgid "No Instances Found"
-msgstr ""
+msgstr "გაშვებული ასლი აღმოჩენილი არაა"
 
-#: src/window.ui:524
+#: src/window.ui:469
 msgid "It looks a bit empty in here. Try adding an instance get started!"
 msgstr ""
 
-#: src/window.ui:553
+#: src/window.ui:498
 msgid "Added Instances"
-msgstr ""
+msgstr "დამატებული გაშვებული ასლები"
 
-#: src/window.ui:554
+#: src/window.ui:499
 msgid ""
 "Manage your AI instances, chats and messages are shared between instances "
 "when generating responses."
 msgstr ""
 
-#: src/window.ui:590
+#: src/window.ui:535
 msgid "Tool Manager"
 msgstr ""
 
-#: src/window.ui:601
+#: src/window.ui:546
 msgid "Available Tools"
 msgstr ""
 
-#: src/window.ui:602
+#: src/window.ui:547
 msgid ""
 "Functions that AI models might use when sending a message by selecting \"Use "
 "Tools\" in the send button context menu."
 msgstr ""
 
-#: src/window.ui:621
+#: src/window.ui:566
 msgid "Model Manager"
-msgstr ""
+msgstr "მოდელების მმართველი"
 
-#: src/window.ui:659
+#: src/window.ui:604
 msgid "Search Model"
-msgstr ""
+msgstr "მოდელის ძებნა"
 
-#: src/window.ui:673
+#: src/window.ui:618
 msgid "Model Manager Menu"
-msgstr ""
+msgstr "მოდელების მმართველის მენიუ"
 
-#: src/window.ui:686
+#: src/window.ui:631
 msgid "Model search bar"
-msgstr ""
+msgstr "მოდელების ძებნის პანელი"
 
-#: src/window.ui:698 src/window.ui:700
+#: src/window.ui:643 src/window.ui:645
 msgid "Search models"
-msgstr ""
+msgstr "მოდელების ძებნა"
 
-#: src/window.ui:707
+#: src/window.ui:652
 msgid "Filter Models"
 msgstr ""
 
-#: src/window.ui:723
+#: src/window.ui:668
 msgid "Added"
-msgstr ""
+msgstr "დამატებულია"
 
-#: src/window.ui:733 src/window.ui:794 src/window.ui:848
+#: src/window.ui:678 src/window.ui:739 src/window.ui:793
 msgid "No Models Found"
-msgstr ""
+msgstr "მოდელები აღმოჩენილი არაა"
 
-#: src/window.ui:734
+#: src/window.ui:679
 msgid ""
 "It looks a bit empty in here. Try downloading some models or change your AI "
 "instance to get started!"
 msgstr ""
 
-#: src/window.ui:737 src/window.ui:747 src/window.ui:1366
+#: src/window.ui:682 src/window.ui:692 src/window.ui:1381
 msgid "Manage Instances"
-msgstr ""
+msgstr "გაშვებული ასლების მართვა"
 
-#: src/window.ui:795 src/window.ui:849
+#: src/window.ui:740 src/window.ui:794
 msgid ""
 "Looks like we’re fresh out of models for that search. Try tweaking your "
 "keywords, or maybe explore something new!"
 msgstr ""
 
-#: src/window.ui:807
+#: src/window.ui:752
 msgid "Available"
-msgstr ""
+msgstr "ხელმისაწვდომია"
 
-#: src/window.ui:861
+#: src/window.ui:806
 msgid "Creator"
-msgstr ""
+msgstr "შემქმნელი"
 
-#: src/window.ui:872
+#: src/window.ui:817
 msgid "Model Creator"
-msgstr ""
+msgstr "მოდელის შემქმნელი"
 
-#: src/window.ui:873
+#: src/window.ui:818
 msgid "Select a method of importing a model to continue"
-msgstr ""
+msgstr "გასაგრძელებლად აირჩიეთ მოდელის შემოტანის მეთოდი"
 
-#: src/window.ui:885
+#: src/window.ui:830
 msgid "GGUF File"
-msgstr ""
+msgstr "GGUF ფაილი"
 
-#: src/window.ui:896
+#: src/window.ui:841
 msgid "Existing Model"
-msgstr ""
+msgstr "არსებული მოდელი"
 
-#: src/window.ui:914
+#: src/window.ui:859
 msgid "Identity"
-msgstr ""
+msgstr "იდენტიფიკაცია"
 
-#: src/window.ui:917
+#: src/window.ui:862
 msgid "Base"
-msgstr ""
+msgstr "საბაზისო"
 
-#: src/window.ui:924
+#: src/window.ui:869
 msgid "Profile Picture"
-msgstr ""
+msgstr "პროფილის სურათი"
 
-#: src/window.ui:929
+#: src/window.ui:874
 msgid "Open File"
-msgstr ""
+msgstr "ფაილის გახსნა"
 
-#: src/window.ui:940 src/widgets/instance_manager.py:278
-msgid "Name"
-msgstr ""
-
-#: src/window.ui:945 src/widgets/model_manager.py:453
+#: src/window.ui:890 src/custom_widgets/model_manager_widget.py:449
 msgid "Tag"
-msgstr ""
+msgstr "ჭდე"
 
-#: src/window.ui:952 src/widgets/model_manager.py:470
+#: src/window.ui:897 src/custom_widgets/model_manager_widget.py:466
 msgid "Context"
-msgstr ""
+msgstr "კონტექსტი"
 
-#: src/window.ui:953
+#: src/window.ui:898
 msgid ""
 "Describe the desired behavior of the model in its primary language "
 "(typically English)."
 msgstr ""
+"აღწერეთ მოდელის სასურველი ქცევა მის ძირითად ენაზე (ჩვეულებრივ, ინგლისურად)."
 
-#: src/window.ui:981
+#: src/window.ui:926
 msgid "Behavior"
-msgstr ""
+msgstr "ქცევა"
 
-#: src/window.ui:984
+#: src/window.ui:929
 msgid "Imagination"
-msgstr ""
+msgstr "წარმოდგენა"
 
-#: src/window.ui:985
+#: src/window.ui:930
 msgid "A higher number results in more diverse answers from the model. (top_k)"
 msgstr ""
 
-#: src/window.ui:999
+#: src/window.ui:944
 msgid "Focus"
-msgstr ""
+msgstr "ფოკუსი"
 
-#: src/window.ui:1000
+#: src/window.ui:945
 msgid "A higher number widens the amount of possible answers. (top_p)"
 msgstr ""
 
-#: src/window.ui:1033 src/window.ui:1041
+#: src/window.ui:978 src/window.ui:986
 msgid "Add Model"
-msgstr ""
+msgstr "მოდელის დამატება"
 
-#: src/window.ui:1075 src/window.ui:1380
+#: src/window.ui:1020 src/window.ui:1395
 msgid "Preferences"
-msgstr ""
+msgstr "მორგება"
 
-#: src/window.ui:1083
+#: src/window.ui:1028
 msgid "Run Alpaca In Background"
-msgstr ""
+msgstr "Alpaca-ის გაშვება ფონურად"
 
-#: src/window.ui:1090
+#: src/window.ui:1035
 msgid "Show Power Saver Warning"
-msgstr ""
+msgstr "ენერგიის შენახვის გაფრთხილების ჩვენება"
 
-#: src/window.ui:1091
+#: src/window.ui:1036
 msgid "When running a managed Ollama instance"
 msgstr ""
 
-#: src/window.ui:1098
+#: src/window.ui:1043
 msgid "Zoom"
-msgstr ""
+msgstr "მასშტაბი"
 
-#: src/window.ui:1115
+#: src/window.ui:1060
 msgid "Speech Recognition Model"
 msgstr ""
 
-#: src/window.ui:1116
+#: src/window.ui:1061
 msgid ""
 "Models are downloaded upon first use, you can delete them from the model "
 "manager"
 msgstr ""
 
-#: src/window.ui:1123
+#: src/window.ui:1068
 msgid "Speech Recognition Language"
 msgstr ""
 
-#: src/window.ui:1130
+#: src/window.ui:1075
 msgid "Auto Send Message After Talking"
 msgstr ""
 
-#: src/window.ui:1141
-msgid "Default Text to Speech Voice"
+#: src/window.ui:1086
+msgid "Text to Speech Voice"
 msgstr ""
 
-#: src/window.ui:1142
+#: src/window.ui:1087
 msgid ""
 "Voices are downloaded upon first use, each weighing around 1 MB, and you can "
 "delete them from the model manager"
 msgstr ""
 
-#: src/window.ui:1149
-msgid "Dictate New Messages Automatically"
-msgstr ""
-
-#: src/window.ui:1150
-msgid "Dictate new messages once they have finished being generated"
-msgstr ""
-
-#: src/window.ui:1163
+#: src/window.ui:1100
 msgid "Delete All Chats"
 msgstr ""
 
-#: src/window.ui:1175
+#: src/window.ui:1112
 msgid "Notice"
 msgstr ""
 
-#: src/window.ui:1195
+#: src/window.ui:1132
 msgid ""
 "Hey Alpaca users! We're so excited to bring you a fresh update packed with "
 "awesome new features to explore! Get ready to experience Alpaca in a whole "
 "new way!"
 msgstr ""
 
-#: src/window.ui:1202
+#: src/window.ui:1139
 msgid "Smart Tools"
 msgstr ""
 
-#: src/window.ui:1203
+#: src/window.ui:1140
 msgid ""
 "Supported AI models can use handy tools to grab information both locally and "
 "online. Head over to the brand new \"Tool Manager\" to toggle them on or off."
 msgstr ""
 
-#: src/window.ui:1210
+#: src/window.ui:1147
 msgid "Talk to Models"
 msgstr ""
 
-#: src/window.ui:1211
+#: src/window.ui:1148
 msgid ""
 "You can now dictate your messages using local speech recognition. It's super "
 "convenient! You can even customize your language and other settings in the "
 "Preferences dialog."
 msgstr ""
 
-#: src/window.ui:1218
+#: src/window.ui:1155
 msgid "Find Models Faster"
 msgstr ""
 
-#: src/window.ui:1219
+#: src/window.ui:1156
 msgid ""
 "Browsing through your Ollama models just got easier! We've added the ability "
 "to filter models by their categories in the Model Manager. Now you can "
 "quickly find exactly the model you're looking for."
 msgstr ""
 
-#: src/window.ui:1226
+#: src/window.ui:1163
 msgid "Math Rendering"
 msgstr ""
 
-#: src/window.ui:1227
+#: src/window.ui:1164
 msgid ""
 "We've improved how LaTeX equations are rendered in messages, making them "
 "look cleaner and more consistent. Your mathematical discussions will be "
 "clearer than ever!"
 msgstr ""
 
-#: src/window.ui:1234
+#: src/window.ui:1171
 msgid "More Instances"
 msgstr ""
 
-#: src/window.ui:1235
+#: src/window.ui:1172
 msgid ""
 "Get ready to connect Alpaca to a whole universe of AI providers! We've added "
 "support for over 5 new AI instance providers, including Anthropic, "
 "OpenRouter, and Fireworks. The possibilities are endless!"
 msgstr ""
 
-#: src/window.ui:1242
+#: src/window.ui:1179
 msgid "Attachment Enhancement"
 msgstr ""
 
-#: src/window.ui:1243
+#: src/window.ui:1180
 msgid ""
 "You can now attach and ask questions about even more file types, "
 "including .docx, .pptx, and .xlsx! Plus, when you preview an attachment, "
@@ -3642,96 +4021,124 @@ msgid ""
 "content before you send it."
 msgstr ""
 
-#: src/window.ui:1264
+#: src/window.ui:1201
 msgid "Quick ask dialog"
-msgstr ""
+msgstr "სწრაფი კითხვის დიალოგი"
 
-#: src/window.ui:1276
+#: src/window.ui:1213
 msgid "Save Conversation to Alpaca"
-msgstr ""
+msgstr "Alpaca-სთან საუბრის ჩაწერა"
 
-#: src/window.ui:1350 src/widgets/chat.py:22
-msgid "New Notebook"
-msgstr ""
+#: src/window.ui:1282
+msgid "Terminal dialog"
+msgstr "ტერმინალის დიალოგი"
 
-#: src/window.ui:1358
+#: src/window.ui:1285
+msgid "Terminal"
+msgstr "ტერმინალი"
+
+#: src/window.ui:1299
+msgid "Open Environment Directory"
+msgstr "გარემოს საქაღალდის გახსნა"
+
+#: src/window.ui:1320
+msgid "File preview dialog"
+msgstr "ფაილის გადახედვის დიალოგი"
+
+#: src/window.ui:1331
+msgid "Open With Default App"
+msgstr "ნაგულისხმევი პროგრამით გახსნა"
+
+#: src/window.ui:1339
+msgid "Remove Attachment"
+msgstr "მიმაგრებულის წაშლა"
+
+#: src/window.ui:1373
 msgid "Start Quick Ask"
 msgstr ""
 
-#: src/window.ui:1362
+#: src/window.ui:1377
 msgid "Import Chat"
-msgstr ""
+msgstr "ჩატის შემოტანა"
 
-#: src/window.ui:1374
+#: src/window.ui:1389
 msgid "Manage Tools"
 msgstr ""
 
-#: src/window.ui:1384
+#: src/window.ui:1399
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "კლავიატურის მალსახმობები"
 
-#: src/window.ui:1388
+#: src/window.ui:1403
 msgid "About Alpaca"
-msgstr ""
+msgstr "Alpaca-ის შესახებ"
 
-#: src/window.ui:1396 src/window.ui:1430
+#: src/window.ui:1411 src/window.ui:1445
 msgid "Rename Chat"
-msgstr ""
+msgstr "ჩატის სახელის გადარქმევა"
 
-#: src/window.ui:1400 src/window.ui:1434
+#: src/window.ui:1415 src/window.ui:1449
 msgid "Duplicate Chat"
-msgstr ""
+msgstr "ჩატის დუბლირება"
 
-#: src/window.ui:1404 src/window.ui:1438 src/widgets/chat.py:559
-msgid "Export Chat"
-msgstr ""
-
-#: src/window.ui:1410 src/window.ui:1444
+#: src/window.ui:1425 src/window.ui:1459
 msgid "Delete Chat"
-msgstr ""
+msgstr "საუბრის წაშლა"
 
-#: src/window.ui:1418
+#: src/window.ui:1433
 msgid "Reload Added Models"
-msgstr ""
+msgstr "დამატებული მოდელების თავიდან ჩატვირთვა"
 
-#: src/window.ui:1422
+#: src/window.ui:1437
 msgid "Download Model From Name"
-msgstr ""
+msgstr "მოდელის გადმოწერა სახელიდან"
 
-#: src/window.ui:1452
+#: src/window.ui:1467
 msgid "Send as User"
-msgstr ""
+msgstr "გაგზავნა მომხმარებლის სახელით"
 
-#: src/window.ui:1456
+#: src/window.ui:1471
 msgid "Send as System"
-msgstr ""
+msgstr "გაგზავნა სისტემის სახელით"
 
-#: src/window.ui:1460 src/gtk/help-overlay.ui:133
+#: src/window.ui:1475 src/gtk/help-overlay.ui:133
 msgid "Use Tools"
 msgstr ""
 
-#: src/window.ui:1472
+#: src/window.ui:1487
 msgid "Attach Website"
-msgstr ""
+msgstr "ვებგვერდის მიმაგრება"
 
-#: src/window.ui:1476
+#: src/window.ui:1491
 msgid "Attach YouTube Captions"
-msgstr ""
+msgstr "YouTube-ის წარწერების მიმაგრება"
+
+#: src/alpaca_search_provider.py.in:43
+msgid "Open chat"
+msgstr "ჩატის გახსნა"
+
+#: src/alpaca_search_provider.py.in:44
+msgid "Quick ask"
+msgstr "სწრაფი კითხვა"
+
+#: src/generic_actions.py:79
+msgid "An error occurred while extracting text from the website"
+msgstr "შეცდომა ვებსაიტიდან ტექსტის ამოღებისას"
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "ზოგადი"
 
 #: src/gtk/help-overlay.ui:14
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "მალსახმობების ჩვენება"
 
 #: src/gtk/help-overlay.ui:20
 msgctxt "shortcut window"
 msgid "Preferences"
-msgstr ""
+msgstr "მორგება"
 
 #: src/gtk/help-overlay.ui:26
 msgctxt "shortcut window"
@@ -3741,12 +4148,12 @@ msgstr ""
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
 msgid "Model Manager"
-msgstr ""
+msgstr "მოდელების მმართველი"
 
 #: src/gtk/help-overlay.ui:38
 msgctxt "shortcut window"
 msgid "Instance Manager"
-msgstr ""
+msgstr "გაშვებული ასლების მმართველი"
 
 #: src/gtk/help-overlay.ui:44
 msgctxt "shortcut window"
@@ -3756,67 +4163,67 @@ msgstr ""
 #: src/gtk/help-overlay.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Sidebar"
-msgstr ""
+msgstr "გვერდითი პანელის ჩვენების ჩართ/გამორთ"
 
 #: src/gtk/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "გასვლა"
 
 #: src/gtk/help-overlay.ui:64
 msgctxt "shortcut window"
 msgid "Chat Management"
-msgstr ""
+msgstr "ჩატის მართვა"
 
 #: src/gtk/help-overlay.ui:67
 msgctxt "shortcut window"
 msgid "Create Chat"
-msgstr ""
+msgstr "ჩატის შექმნა"
 
 #: src/gtk/help-overlay.ui:73
 msgctxt "shortcut window"
 msgid "Delete Chat"
-msgstr ""
+msgstr "საუბრის წაშლა"
 
 #: src/gtk/help-overlay.ui:79
 msgctxt "shortcut window"
 msgid "Clear Chat"
-msgstr ""
+msgstr "ჩატის გასუფთავება"
 
 #: src/gtk/help-overlay.ui:85
 msgctxt "shortcut window"
 msgid "Rename Chat"
-msgstr ""
+msgstr "ჩატის სახელის გადარქმევა"
 
 #: src/gtk/help-overlay.ui:91
 msgctxt "shortcut window"
 msgid "Toggle Searchbars"
-msgstr ""
+msgstr "ძებნის პანელების გადართვა"
 
 #: src/gtk/help-overlay.ui:99
 msgctxt "shortcut window"
 msgid "Message Entry"
-msgstr ""
+msgstr "შეტყობინების ჩანაწერი"
 
 #: src/gtk/help-overlay.ui:102
 msgid "Copy"
-msgstr ""
+msgstr "კოპირება"
 
 #: src/gtk/help-overlay.ui:108
 msgid "Paste"
-msgstr ""
+msgstr "ჩასმა"
 
 #: src/gtk/help-overlay.ui:114
 msgid "Open Emoji Menu"
-msgstr ""
+msgstr "ემოჯიების მენიუს გახსნა"
 
 #: src/gtk/help-overlay.ui:120
 msgid "Insert new line"
-msgstr ""
+msgstr "ახალი ხაზის ჩამატება"
 
 #: src/gtk/help-overlay.ui:126
 msgid "Send Message as System"
-msgstr ""
+msgstr "შეტყობინების გაგზავნა სისტემის სახელით"
 
 #: src/gtk/help-overlay.ui:127
 msgid "System messages are taken as literal instructions by models"
@@ -3828,749 +4235,382 @@ msgstr ""
 
 #: src/gtk/help-overlay.ui:140
 msgid "Send Message as User"
-msgstr ""
+msgstr "შეტყობინების გაგზავნა მომხმარებლის სახელით"
 
-#: src/widgets/attachments.py:124
-msgid "Remove Attachment"
-msgstr ""
-
-#: src/widgets/attachments.py:138
-msgid "Replace Notebook Content"
-msgstr ""
-
-#: src/widgets/attachments.py:208
-msgid "Delete Attachment?"
-msgstr ""
-
-#: src/widgets/attachments.py:209 src/widgets/chat.py:459
-msgid "Are you sure you want to delete '{}'?"
-msgstr ""
-
-#: src/widgets/attachments.py:285
-msgid "Image"
-msgstr ""
-
-#: src/widgets/attachments.py:296 src/widgets/attachments.py:308
-msgid "Missing Image"
-msgstr ""
-
-#: src/widgets/chat.py:88 src/widgets/instance_manager.py:96
-msgid "Notebook"
-msgstr ""
-
-#: src/widgets/chat.py:89
-msgid "Start a notebook with a message"
-msgstr ""
-
-#: src/widgets/chat.py:97 src/widgets/chat.py:248
-msgid "No Messages Found"
-msgstr ""
-
-#: src/widgets/chat.py:98 src/widgets/chat.py:249
-msgid "Uh oh! No messages found for your search."
-msgstr ""
-
-#: src/widgets/chat.py:239
+#: src/custom_widgets/chat_widget.py:93
 msgid "Try one of these prompts"
-msgstr ""
+msgstr "სცადეთ ერთერთი მოთხოვნა"
 
-#: src/widgets/chat.py:269
+#: src/custom_widgets/chat_widget.py:122
 msgid "Send prompt: '{}'"
-msgstr ""
+msgstr "გაგზავნის მოთხოვნა: '{}'"
 
-#: src/widgets/chat.py:275
+#: src/custom_widgets/chat_widget.py:128
 msgid "Refresh Prompts"
 msgstr ""
 
-#: src/widgets/chat.py:437
-msgid "Rename Chat?"
-msgstr ""
-
-#: src/widgets/chat.py:438
-msgid "Renaming '{}'"
-msgstr ""
-
-#: src/widgets/chat.py:440
-msgid "Chat name"
-msgstr ""
-
-#: src/widgets/chat.py:441
-msgid "Rename"
-msgstr ""
-
-#: src/widgets/chat.py:458
-msgid "Delete Chat?"
-msgstr ""
-
-#: src/widgets/chat.py:466
-msgid "Copy of {}"
-msgstr ""
-
-#: src/widgets/chat.py:479
+#: src/custom_widgets/chat_widget.py:186
 msgid "Chat exported successfully"
-msgstr ""
+msgstr "ჩატის გატანა წარმატებით დასრულდა"
 
-#: src/widgets/chat.py:499
+#: src/custom_widgets/chat_widget.py:206
 msgid "User"
-msgstr ""
+msgstr "მომხმარებელი"
 
-#: src/widgets/chat.py:503
+#: src/custom_widgets/chat_widget.py:210
+#: src/custom_widgets/message_widget.py:693
 msgid "System"
-msgstr ""
-
-#: src/widgets/chat.py:551
-msgid "Importable (.db)"
-msgstr ""
-
-#: src/widgets/chat.py:552
-msgid "Markdown"
-msgstr ""
-
-#: src/widgets/chat.py:553
-msgid "Markdown (Obsidian Style)"
-msgstr ""
-
-#: src/widgets/chat.py:554
-msgid "JSON"
-msgstr ""
-
-#: src/widgets/chat.py:555
-msgid "JSON (Include Metadata)"
-msgstr ""
-
-#: src/widgets/chat.py:560
-msgid "Select a method to export the chat"
-msgstr ""
-
-#: src/widgets/dialog.py:148 src/widgets/dialog.py:161
-#: src/widgets/dialog.py:174 src/widgets/tools/tools.py:136
-msgid "Accept"
-msgstr ""
-
-#: src/widgets/instance_manager.py:30 src/widgets/instance_manager.py:430
-msgid "Instance"
-msgstr ""
-
-#: src/widgets/instance_manager.py:88
-msgid "Notebook Error"
-msgstr ""
-
-#: src/widgets/instance_manager.py:89 src/widgets/instance_manager.py:159
-msgid "An error occurred while running tool"
-msgstr ""
-
-#: src/widgets/instance_manager.py:116
-msgid "Selecting tool to use..."
-msgstr ""
-
-#: src/widgets/instance_manager.py:125
-msgid "Using {}"
-msgstr ""
-
-#: src/widgets/instance_manager.py:158
-msgid "Tool Error"
-msgstr ""
-
-#: src/widgets/instance_manager.py:165
-msgid "Generating message..."
-msgstr ""
-
-#: src/widgets/instance_manager.py:219 src/widgets/instance_manager.py:528
-#: src/widgets/instance_manager.py:542 src/widgets/instance_manager.py:693
-#: src/widgets/instance_manager.py:777 src/widgets/instance_manager.py:824
-#: src/widgets/instance_manager.py:858 src/widgets/instance_manager.py:905
-#: src/widgets/instance_manager.py:930 src/widgets/instance_manager.py:956
-msgid "Instance Error"
-msgstr ""
-
-#: src/widgets/instance_manager.py:220
-msgid "Message generation failed"
-msgstr ""
-
-#: src/widgets/instance_manager.py:286
-msgid "Port"
-msgstr ""
-
-#: src/widgets/instance_manager.py:287
-msgid "Which network port will '{}' use"
-msgstr ""
-
-#: src/widgets/instance_manager.py:301
-msgid "Instance URL"
-msgstr ""
-
-#: src/widgets/instance_manager.py:304 src/widgets/instance_manager.py:314
-#: src/widgets/instance_manager.py:317 src/widgets/instance_manager.py:319
-msgid "API Key (Unchanged)"
-msgstr ""
-
-#: src/widgets/instance_manager.py:304 src/widgets/instance_manager.py:314
-msgid "API Key (Optional)"
-msgstr ""
-
-#: src/widgets/instance_manager.py:317 src/widgets/instance_manager.py:319
-msgid "API Key"
-msgstr ""
-
-#: src/widgets/instance_manager.py:327
-msgid "Max Tokens"
-msgstr ""
-
-#: src/widgets/instance_manager.py:328
-msgid ""
-"Defines the maximum number of tokens (words + spaces) the AI can generate in "
-"a response. More tokens allow longer replies but may take more time and cost "
-"more."
-msgstr ""
-
-#: src/widgets/instance_manager.py:343
-msgid "Temperature"
-msgstr ""
-
-#: src/widgets/instance_manager.py:344
-msgid "Increasing the temperature will make the models answer more creatively."
-msgstr ""
-
-#: src/widgets/instance_manager.py:359
-msgid "Seed"
-msgstr ""
-
-#: src/widgets/instance_manager.py:360
-msgid ""
-"Setting this to a specific number other than 0 will make the model generate "
-"the same text for the same prompt."
-msgstr ""
-
-#: src/widgets/instance_manager.py:375
-msgid "Overrides"
-msgstr ""
-
-#: src/widgets/instance_manager.py:375
-msgid ""
-"These entries are optional, they are used to troubleshoot GPU related "
-"problems with Ollama."
-msgstr ""
-
-#: src/widgets/instance_manager.py:393
-msgid "Model Directory"
-msgstr ""
-
-#: src/widgets/instance_manager.py:395
-msgid "Select Directory"
-msgstr ""
-
-#: src/widgets/instance_manager.py:410
-msgid "Default Model"
-msgstr ""
-
-#: src/widgets/instance_manager.py:410
-msgid "Model to select when starting a new chat."
-msgstr ""
-
-#: src/widgets/instance_manager.py:412
-msgid "Title Model"
-msgstr ""
-
-#: src/widgets/instance_manager.py:412
-msgid "Model to use when generating a chat title."
-msgstr ""
-
-#: src/widgets/instance_manager.py:476 src/widgets/instance_manager.py:477
-#: src/widgets/blocks/code.py:145 src/widgets/blocks/text.py:120
-msgid "Save"
-msgstr ""
-
-#: src/widgets/instance_manager.py:529 src/widgets/instance_manager.py:778
-#: src/widgets/instance_manager.py:825 src/widgets/instance_manager.py:859
-msgid "Could not retrieve added models"
-msgstr ""
-
-#: src/widgets/instance_manager.py:543
-msgid "Could not retrieve available models"
-msgstr ""
-
-#: src/widgets/instance_manager.py:612
-msgid "Ollama (Managed)"
-msgstr ""
-
-#: src/widgets/instance_manager.py:621
-msgid "Local AI instance managed directly by Alpaca"
-msgstr ""
-
-#: src/widgets/instance_manager.py:645
-msgid "Alpaca Support"
-msgstr ""
-
-#: src/widgets/instance_manager.py:652
-msgid "Model request too large for system"
-msgstr ""
-
-#: src/widgets/instance_manager.py:655
-msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
-msgstr ""
-
-#: src/widgets/instance_manager.py:657
-msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
-msgstr ""
-
-#: src/widgets/instance_manager.py:659
-msgid "Using AMD GPU type '{}'"
-msgstr ""
-
-#: src/widgets/instance_manager.py:669
-msgid "Integrated Ollama instance is not running"
-msgstr ""
-
-#: src/widgets/instance_manager.py:694
-msgid "Managed Ollama instance failed to start"
-msgstr ""
-
-#: src/widgets/instance_manager.py:699
-msgid "Integrated Ollama instance is running"
-msgstr ""
-
-#: src/widgets/instance_manager.py:704 src/widgets/instance_manager.py:707
-msgid "Ollama Log"
-msgstr ""
-
-#: src/widgets/instance_manager.py:724
-msgid "Local or remote AI instance not managed by Alpaca"
-msgstr ""
-
-#: src/widgets/instance_manager.py:906 src/widgets/instance_manager.py:931
-#: src/widgets/instance_manager.py:957
-msgid "Could not retrieve models"
-msgstr ""
-
-#: src/widgets/instance_manager.py:917
-msgid "Fireworks AI inference platform"
-msgstr ""
-
-#: src/widgets/instance_manager.py:942
-msgid "Lambda Labs cloud inference API"
-msgstr ""
-
-#: src/widgets/instance_manager.py:968
-msgid "Cerebras AI cloud inference API"
-msgstr ""
-
-#: src/widgets/instance_manager.py:974
-msgid "Kluster AI cloud inference API"
-msgstr ""
-
-#: src/widgets/instance_manager.py:978
-msgid "OpenAI Compatible Instance"
-msgstr ""
-
-#: src/widgets/instance_manager.py:979
-msgid "AI instance compatible with OpenAI library"
-msgstr ""
-
-#: src/widgets/instance_manager.py:989
-msgid "Meta AI Llama API"
-msgstr ""
-
-#: src/widgets/instance_manager.py:1010
-msgid "Remove Instance?"
-msgstr ""
-
-#: src/widgets/instance_manager.py:1011
-msgid "Are you sure you want to remove this instance?"
-msgstr ""
-
-#: src/widgets/instance_manager.py:1013 src/widgets/model_manager.py:114
-#: src/widgets/model_manager.py:201 src/widgets/model_manager.py:638
-#: src/widgets/model_manager.py:695
-msgid "Remove"
-msgstr ""
-
-#: src/widgets/instance_manager.py:1031
-msgid "Edit Instance"
-msgstr ""
-
-#: src/widgets/message.py:35
-msgid "Remove Message"
-msgstr ""
-
-#: src/widgets/message.py:45
+msgstr "სისტემა"
+
+#: src/custom_widgets/chat_widget.py:298
+msgid "Regenerate Response"
+msgstr "პასუხის თავიდან გენერაცია"
+
+#: src/custom_widgets/chat_widget.py:462
+msgid "Copy of {}"
+msgstr "{}-ის ასლი"
+
+#: src/custom_widgets/chat_widget.py:480
+msgid "Chat imported successfully"
+msgstr "ჩატის შემოტანა წარმატებით დასრულდა"
+
+#: src/custom_widgets/message_widget.py:89
+msgid "Save Message"
+msgstr "შეტყობინების შენახვა"
+
+#: src/custom_widgets/message_widget.py:130
+#: src/custom_widgets/message_widget.py:269
+msgid "Message edited successfully"
+msgstr "შეტყობინების ჩასწორება წარმატებით დასრულდა"
+
+#: src/custom_widgets/message_widget.py:156
+msgid "Response message"
+msgstr "პასუხი შეტყობინება"
+
+#: src/custom_widgets/message_widget.py:158
+msgid "System message"
+msgstr "სისტემური შეტყობინება"
+
+#: src/custom_widgets/message_widget.py:160
+msgid "User message"
+msgstr "მომხმარებლის შეტყობინება"
+
+#: src/custom_widgets/message_widget.py:219
+msgid "{}Code Block"
+msgstr "{}კოდის ბლოკი"
+
+#: src/custom_widgets/message_widget.py:221
+msgid "Code Block"
+msgstr "კოდის ბლოკი"
+
+#: src/custom_widgets/message_widget.py:222
+#: src/custom_widgets/message_widget.py:531
 msgid "Copy Message"
+msgstr "შეტყობინების კოპირება"
+
+#: src/custom_widgets/message_widget.py:226
+msgid "Edit Code Block"
+msgstr "კოდის ბლოკის ჩასწორება"
+
+#: src/custom_widgets/message_widget.py:238
+#: src/custom_widgets/message_widget.py:314
+msgid "Run Script"
+msgstr "სკრიპტის გაშვება"
+
+#: src/custom_widgets/message_widget.py:278
+msgid "Code copied to the clipboard"
+msgstr "კოდი დაკოპირდა ბუფერში"
+
+#: src/custom_widgets/message_widget.py:315
+msgid ""
+"Make sure you understand what this script does before running it, Alpaca is "
+"not responsible for any damages to your device or data"
 msgstr ""
 
-#: src/widgets/message.py:55
+#: src/custom_widgets/message_widget.py:317
+msgid "Execute"
+msgstr "შესრულება"
+
+#: src/custom_widgets/message_widget.py:396
+#: src/custom_widgets/message_widget.py:398
+msgid "Image"
+msgstr "გამოსახულება"
+
+#: src/custom_widgets/message_widget.py:407
+#: src/custom_widgets/message_widget.py:419
+msgid "Missing Image"
+msgstr "ნაკლული გამოსახულება"
+
+#: src/custom_widgets/message_widget.py:421
+msgid "Missing image"
+msgstr "ნაკლული გამოსახულება"
+
+#: src/custom_widgets/message_widget.py:494
+msgid "Copy Equation"
+msgstr "ტოლობის კოპირება"
+
+#: src/custom_widgets/message_widget.py:501
+msgid "Equation copied to the clipboard"
+msgstr "ტოლობა დაკოპირდა გაცვლის ბუფერში"
+
+#: src/custom_widgets/message_widget.py:521
+msgid "Remove Message"
+msgstr "შეტყობინების წაშლა"
+
+#: src/custom_widgets/message_widget.py:541
 msgid "Edit Message"
-msgstr ""
+msgstr "შეტყობინების შეცვლა"
 
-#: src/widgets/message.py:66
+#: src/custom_widgets/message_widget.py:552
 msgid "Regenerate Message"
-msgstr ""
+msgstr "შეტყობინების თავიდან გენერაცია"
 
-#: src/widgets/message.py:78
+#: src/custom_widgets/message_widget.py:564
 msgid "Dictate Message"
 msgstr ""
 
-#: src/widgets/message.py:97
+#: src/custom_widgets/message_widget.py:584
 msgid "Message copied to the clipboard"
-msgstr ""
+msgstr "შეტყობინება დაკოპირდა გაცვლის ბუფერში"
 
-#: src/widgets/message.py:167
+#: src/custom_widgets/message_widget.py:661
 msgid "Message cannot be regenerated while receiving a response"
-msgstr ""
+msgstr "პასუხის მიღებისას შეტყობინებას თავიდან ვერ დააგენერირებთ"
 
-#: src/widgets/model_manager.py:107 src/widgets/model_manager.py:194
-#: src/widgets/model_manager.py:688
+#: src/custom_widgets/message_widget.py:970
+msgid "Thought"
+msgstr "ფიქრი"
+
+#: src/custom_widgets/model_manager_widget.py:109
+#: src/custom_widgets/model_manager_widget.py:195
+#: src/custom_widgets/model_manager_widget.py:671
 msgid "Remove Model"
-msgstr ""
+msgstr "მოდელის წაშლა"
 
-#: src/widgets/model_manager.py:111 src/widgets/model_manager.py:198
-#: src/widgets/model_manager.py:692
+#: src/custom_widgets/model_manager_widget.py:112
+#: src/custom_widgets/model_manager_widget.py:198
+#: src/custom_widgets/model_manager_widget.py:674
 msgid "Remove Model?"
-msgstr ""
+msgstr "წავშალო მოდელი?"
 
-#: src/widgets/model_manager.py:112 src/widgets/model_manager.py:199
-#: src/widgets/model_manager.py:693
+#: src/custom_widgets/model_manager_widget.py:113
+#: src/custom_widgets/model_manager_widget.py:199
+#: src/custom_widgets/model_manager_widget.py:675
 msgid "Are you sure you want to remove '{}'?"
-msgstr ""
+msgstr "დარწმუნებული ბრძანდებით, რომ გნებავთ წაშალოთ \"{}\"?"
 
-#: src/widgets/model_manager.py:122
+#: src/custom_widgets/model_manager_widget.py:123
 msgid "Local text to speech model provided by Kokoro."
 msgstr ""
 
-#: src/widgets/model_manager.py:159 src/widgets/model_manager.py:293
+#: src/custom_widgets/model_manager_widget.py:160
+#: src/custom_widgets/model_manager_widget.py:293
 msgid "Speech to Text"
 msgstr ""
 
-#: src/widgets/model_manager.py:209
+#: src/custom_widgets/model_manager_widget.py:209
 msgid "Local speech to text model provided by OpenAI Whisper."
 msgstr ""
 
-#: src/widgets/model_manager.py:238
+#: src/custom_widgets/model_manager_widget.py:239
 msgid "Downloading…"
 msgstr ""
 
-#: src/widgets/model_manager.py:248 src/widgets/model_manager.py:250
+#: src/custom_widgets/model_manager_widget.py:249
+#: src/custom_widgets/model_manager_widget.py:251
 msgid "Stop Download"
-msgstr ""
+msgstr "გადმოწერის შეჩერება"
 
-#: src/widgets/model_manager.py:256
+#: src/custom_widgets/model_manager_widget.py:256
 msgid "Stop Download?"
-msgstr ""
+msgstr "გავაჩერო გადმოწერა?"
 
-#: src/widgets/model_manager.py:257
+#: src/custom_widgets/model_manager_widget.py:257
 msgid "Are you sure you want to stop pulling '{}'?"
-msgstr ""
+msgstr "მართლა გნებავთ '{}'-ის გადმოწერის გაჩერება?"
 
-#: src/widgets/model_manager.py:259
+#: src/custom_widgets/model_manager_widget.py:259
 msgid "Stop"
-msgstr ""
+msgstr "გაჩერება"
 
-#: src/widgets/model_manager.py:341
+#: src/custom_widgets/model_manager_widget.py:338
 msgid "Model Manager Error"
-msgstr ""
+msgstr "მოდელების მმართველის შეცდომა"
 
-#: src/widgets/model_manager.py:342
+#: src/custom_widgets/model_manager_widget.py:338
 msgid "An error occurred whilst pulling '{}'"
-msgstr ""
+msgstr "შეცდომა '{}'-ის გამოთხოვისას"
 
-#: src/widgets/model_manager.py:369
+#: src/custom_widgets/model_manager_widget.py:364
 msgid "Download Completed"
-msgstr ""
+msgstr "გადმოწერა დასრულდა"
 
-#: src/widgets/model_manager.py:369
+#: src/custom_widgets/model_manager_widget.py:364
 msgid "Model '{}' downloaded successfully."
-msgstr ""
+msgstr "მოდელის '{}' გადმოწერა წარმატებით დასრულდა."
 
-#: src/widgets/model_manager.py:431
+#: src/custom_widgets/model_manager_widget.py:427
 msgid "Change Profile Picture"
-msgstr ""
+msgstr "პროფილის სურათის შეცვლა"
 
-#: src/widgets/model_manager.py:454
+#: src/custom_widgets/model_manager_widget.py:450
 msgid "Family"
-msgstr ""
+msgstr "ოჯახი"
 
-#: src/widgets/model_manager.py:455
+#: src/custom_widgets/model_manager_widget.py:451
 msgid "Parameter Size"
-msgstr ""
+msgstr "პარამეტრის ზომა"
 
-#: src/widgets/model_manager.py:456
+#: src/custom_widgets/model_manager_widget.py:452
 msgid "Quantization Level"
-msgstr ""
+msgstr "კვანტიზაციის დონე"
 
-#: src/widgets/model_manager.py:459
+#: src/custom_widgets/model_manager_widget.py:455
 msgid "Parent Model"
-msgstr ""
+msgstr "მშობელი მოდელი"
 
-#: src/widgets/model_manager.py:462 src/widgets/model_manager.py:464
+#: src/custom_widgets/model_manager_widget.py:458
+#: src/custom_widgets/model_manager_widget.py:460
 msgid "Modified At"
-msgstr ""
+msgstr "ცვლილების დრო"
 
-#: src/widgets/model_manager.py:472
+#: src/custom_widgets/model_manager_widget.py:468
 msgid "Description"
 msgstr ""
 
-#: src/widgets/model_manager.py:495
+#: src/custom_widgets/model_manager_widget.py:491
 msgid "Voice"
 msgstr ""
 
-#: src/widgets/model_manager.py:500
+#: src/custom_widgets/model_manager_widget.py:496
 msgid "Default"
 msgstr ""
 
-#: src/widgets/model_manager.py:639
+#: src/custom_widgets/model_manager_widget.py:638
 msgid "Change"
-msgstr ""
+msgstr "ცვლილება"
 
-#: src/widgets/model_manager.py:647
+#: src/custom_widgets/model_manager_widget.py:641
 msgid "Model Profile Picture"
-msgstr ""
+msgstr "მოდელის პროფილის სურათი"
 
-#: src/widgets/model_manager.py:648
+#: src/custom_widgets/model_manager_widget.py:641
 msgid "What do you want to do with the model's profile picture?"
-msgstr ""
+msgstr "რა გნებავთ უქნათ მოდელის პროფილის სურათს?"
 
-#: src/widgets/model_manager.py:680
+#: src/custom_widgets/model_manager_widget.py:663
 msgid "Create Child"
-msgstr ""
+msgstr "შვილის შექმნა"
 
-#: src/widgets/model_manager.py:707
+#: src/custom_widgets/model_manager_widget.py:689
 msgid "Multilingual"
-msgstr ""
+msgstr "მრავალენოვანი"
 
-#: src/widgets/model_manager.py:708
+#: src/custom_widgets/model_manager_widget.py:690
 msgid "Code"
-msgstr ""
+msgstr "კოდი"
 
-#: src/widgets/model_manager.py:709
+#: src/custom_widgets/model_manager_widget.py:691
 msgid "Math"
-msgstr ""
+msgstr "მათემატიკა"
 
-#: src/widgets/model_manager.py:710
+#: src/custom_widgets/model_manager_widget.py:692
 msgid "Vision"
-msgstr ""
+msgstr "ხედვა"
 
-#: src/widgets/model_manager.py:711
+#: src/custom_widgets/model_manager_widget.py:693
 msgid "Embedding"
-msgstr ""
+msgstr "ჩაშენება"
 
-#: src/widgets/model_manager.py:712
+#: src/custom_widgets/model_manager_widget.py:694
 msgid "Tools"
 msgstr ""
 
-#: src/widgets/model_manager.py:713
+#: src/custom_widgets/model_manager_widget.py:695
 msgid "Reasoning"
 msgstr ""
 
-#: src/widgets/model_manager.py:714
+#: src/custom_widgets/model_manager_widget.py:696
 msgid "Small"
-msgstr ""
+msgstr "პატარა"
 
-#: src/widgets/model_manager.py:715
+#: src/custom_widgets/model_manager_widget.py:697
 msgid "Medium"
-msgstr ""
+msgstr "საშუალო"
 
-#: src/widgets/model_manager.py:716
+#: src/custom_widgets/model_manager_widget.py:698
 msgid "Big"
-msgstr ""
+msgstr "დიდი"
 
-#: src/widgets/model_manager.py:717
+#: src/custom_widgets/model_manager_widget.py:699
 msgid "Huge"
-msgstr ""
+msgstr "უზარმაზარი"
 
-#: src/widgets/model_manager.py:807
+#: src/custom_widgets/model_manager_widget.py:788
 msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website"
 msgstr ""
 
-#: src/widgets/model_manager.py:888
-msgid "Languages"
-msgstr ""
-
-#: src/widgets/terminal.py:17
+#: src/custom_widgets/terminal_widget.py:80
 msgid "Setting up Python environment..."
-msgstr ""
+msgstr "მიმდინარეობს Python-ის გარემოს მორგება..."
 
-#: src/widgets/terminal.py:29
-msgid "Using Python HTTP server..."
-msgstr ""
+#: src/custom_widgets/terminal_widget.py:98
+msgid "Compiling C++ script..."
+msgstr "მიმდინარეობს C++ სკრიპტის კომპილაცია..."
 
-#: src/widgets/terminal.py:34
-msgid "Using Flatpak contained shell..."
-msgstr ""
+#: src/custom_widgets/terminal_widget.py:111
+msgid "Running local web server"
+msgstr "გაშვებულია ლოკალური ვებსერვერი"
 
-#: src/widgets/terminal.py:38
+#: src/custom_widgets/terminal_widget.py:136
+msgid "Using Flatpak contained shell"
+msgstr "გამოიყენება Flatpak-ში არსებული გარსი"
+
+#: src/custom_widgets/terminal_widget.py:136
 msgid "Using SSH to run command"
 msgstr ""
 
-#: src/widgets/terminal.py:85
-msgid "Terminal"
-msgstr ""
-
-#: src/widgets/terminal.py:97
-msgid "Open Environment Directory"
-msgstr ""
-
-#: src/widgets/terminal.py:181
+#: src/custom_widgets/terminal_widget.py:142
 msgid "Script Exited"
 msgstr ""
 
-#: src/widgets/terminal.py:192
-msgid "Alpaca Terminal is not compatible with Windows"
-msgstr ""
+#~ msgid "Clear Chat?"
+#~ msgstr "გავასუფთაო ჩატი?"
 
-#: src/widgets/blocks/code.py:84
-msgid "Code Block"
-msgstr ""
+#~ msgid "Are you sure you want to clear the chat?"
+#~ msgstr "მართლა გნებავთ ჩატის გასუფთავება?"
 
-#: src/widgets/blocks/code.py:111
-msgid "Edit Script"
-msgstr ""
+#~ msgid "Clear"
+#~ msgstr "გასუფთავება"
 
-#: src/widgets/blocks/code.py:119
-msgid "Copy Script"
-msgstr ""
+#~ msgid "Clear Chat"
+#~ msgstr "ჩატის გასუფთავება"
 
-#: src/widgets/blocks/code.py:127
-msgid "Run Script"
-msgstr ""
+#~ msgid "Regenerate Equation"
+#~ msgstr "ტოლობის თავიდან გენერაცია"
 
-#: src/widgets/blocks/code.py:193
-msgid "Changes saved successfully"
-msgstr ""
+#~ msgid "LaTeX Equation"
+#~ msgstr "LaTeX-ის ტოლობა"
 
-#: src/widgets/blocks/code.py:199
-msgid "Code copied to the clipboard"
-msgstr ""
+#~ msgid "Which network port will Ollama use"
+#~ msgstr "რომელ ქსელის პორტს გამოიყენებს Ollama"
 
-#: src/widgets/blocks/latex.py:41
-msgid "Copy Equation"
-msgstr ""
+#~ msgid "Built in Ollama instance"
+#~ msgstr "ჩაშენებული Ollama-ის ასლი"
 
-#: src/widgets/blocks/latex.py:76
-msgid "Equation copied to the clipboard"
-msgstr ""
+#~ msgid "Visit Website"
+#~ msgstr "საიტზე გადასვლა"
 
-#: src/widgets/blocks/__init__.py:36
-msgid "Thought"
-msgstr ""
+#~ msgid "Your AI, Your Choice"
+#~ msgstr "თქვენი AI, თქვენი არჩევანი"
 
-#: src/widgets/tools/notebook_tools.py:18
-msgid "Read Notebook"
-msgstr ""
+#~ msgid ""
+#~ "It looks like you don't have any models downloaded yet. Download models "
+#~ "to get started!"
+#~ msgstr ""
+#~ "როგორც ჩანს, მოდელები არ გადმოგიწერიათ. დასაწყებად გადმოწერეთ მოდელები!"
 
-#: src/widgets/tools/notebook_tools.py:19
-msgid "Reads the current notebook."
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:38
-msgid "Write Notebook"
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:39
-msgid "Overwrites the notebook with new text."
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:58
-msgid "Append to Notebook"
-msgstr ""
-
-#: src/widgets/tools/notebook_tools.py:59
-msgid "Appends text to the notebook."
-msgstr ""
-
-#: src/widgets/tools/tools.py:67
-msgid "AI Description"
-msgstr ""
-
-#: src/widgets/tools/tools.py:68
-msgid "The description the AI model will use to understand what the tool does."
-msgstr ""
-
-#: src/widgets/tools/tools.py:79
-msgid "Arguments"
-msgstr ""
-
-#: src/widgets/tools/tools.py:80
-msgid "Variables that are filled by the AI."
-msgstr ""
-
-#: src/widgets/tools/tools.py:93
-msgid "Variables"
-msgstr ""
-
-#: src/widgets/tools/tools.py:94
-msgid ""
-"User filled values that the tool uses to work, the AI does not have access "
-"to these variables at all."
-msgstr ""
-
-#: src/widgets/tools/tools.py:182
-msgid "Gets the current date and/or time."
-msgstr ""
-
-#: src/widgets/tools/tools.py:215
-msgid "Gets a recipe by the meal's name"
-msgstr ""
-
-#: src/widgets/tools/tools.py:230 src/widgets/tools/tools.py:297
-msgid "YouTube Video"
-msgstr ""
-
-#: src/widgets/tools/tools.py:238 src/widgets/tools/tools.py:306
-msgid "Source"
-msgstr ""
-
-#: src/widgets/tools/tools.py:276
-msgid "Gets a list of food recipes by a specified category"
-msgstr ""
-
-#: src/widgets/tools/tools.py:333
-msgid "Extracts an article from Wikipedia by it's title"
-msgstr ""
-
-#: src/widgets/tools/tools.py:375
-msgid "Search for a term online using DuckDuckGo"
-msgstr ""
-
-#: src/widgets/tools/tools.py:393
-msgid "Abstract Source"
-msgstr ""
-
-#: src/widgets/tools/tools.py:417
-msgid "Official Website"
-msgstr ""
-
-#: src/widgets/tools/tools.py:468
-msgid "Request to run a command using SSH to connect to the device"
-msgstr ""
-
-#: src/widgets/tools/tools.py:471
-msgid "IP Address"
-msgstr ""
-
-#: src/widgets/tools/tools.py:476
-msgid "Username"
-msgstr ""
-
-#: src/widgets/tools/tools.py:481
-msgid "Network Port"
-msgstr ""
-
-#: src/widgets/tools/tools.py:498
-msgid "Model Requested to Run Command"
-msgstr ""
-
-#: src/widgets/tools/tools.py:499
-msgid "Command"
-msgstr ""
-
-#: src/widgets/tools/tools.py:501
-msgid "Explanation"
-msgstr ""
-
-#: src/widgets/tools/tools.py:502
-msgid "No explanation was provided"
-msgstr ""
-
-#: src/widgets/tools/tools.py:503
-msgid "Make sure you understand what the command does before running it."
-msgstr ""
+#~ msgid "Loading"
+#~ msgstr "იტვირთება"
