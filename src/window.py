@@ -768,13 +768,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             except Exception as e:
                 logger.error(e)
                 pass
-        if message_results > 0 or not search_term:
-            if len(list(current_chat.container)) > 0:
-                current_chat.set_visible_child_name('content')
+            if message_results > 0 or not search_term:
+                if len(list(current_chat.container)) > 0:
+                    current_chat.set_visible_child_name('content')
+                else:
+                    current_chat.set_visible_child_name('welcome-screen')
             else:
-                current_chat.set_visible_child_name('welcome-screen')
-        else:
-            current_chat.set_visible_child_name('no-results')
+                current_chat.set_visible_child_name('no-results')
 
 
     def convert_model_name(self, name:str, mode:int): # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag   |   mode=2 name:tag -> name, tag
@@ -951,7 +951,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 if row[1] == selected_chat:
                     self.chat_list_box.select_row(list(self.chat_list_box)[-1])
         else:
-            self.chat_list_box.new_chat(chat_type='chat')
+            self.chat_list_box.select_row(self.new_chat().row)
+            self.chat_list_stack.set_visible_child_name('content')
 
     def chat_actions(self, action, user_data):
         chat = self.selected_chat_row.chat
