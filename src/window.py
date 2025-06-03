@@ -497,9 +497,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if mode == 2 and len(Widgets.tools.get_enabled_tools(self.tool_listbox)) == 0:
             Widgets.dialog.show_toast(_("No tools enabled."), current_chat.get_root(), 'app.tool_manager', _('Open Tool Manager'))
             return
-        if 'ollama' in self.get_current_instance().instance_type and mode == 2 and 'tools' not in Widgets.model_manager.available_models.get(current_model.split(':')[0], {}).get('categories', []):
-            Widgets.dialog.show_toast(_("'{}' does not support tools.").format(self.convert_model_name(current_model, 0)), current_chat.get_root(), 'app.model_manager', _('Open Model Manager'))
-            return
         if current_model is None:
             Widgets.dialog.show_toast(_("Please select a model before chatting"), current_chat.get_root())
             return
