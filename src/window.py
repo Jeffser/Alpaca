@@ -1444,7 +1444,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             data.get('button').add_controller(gesture_long_press)
 
         universal_actions = {
-            'new_chat': [lambda *_: self.new_chat(chat_type='chat'), ['<primary>n']],
+            'new_chat': [lambda *_: self.chat_list_box.select_row(self.new_chat().row), ['<primary>n']],
             'new_notebook': [lambda *_: self.new_chat(chat_type='notebook') if os.getenv("ALPACA_NOTEBOOK", "0") == "1" else None, ['<primary><shift>n']],
             'import_chat': [lambda *_: Widgets.dialog.simple_file(
                 parent=self,
