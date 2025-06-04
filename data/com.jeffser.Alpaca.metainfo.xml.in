@@ -23,7 +23,7 @@
     <p>Disclaimer</p>
 	  <p>This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any models.</p>
 	</description>
-  <developer id="tld.vendor">
+  <developer id="com.jeffser">
     <name>Jeffry Samuel Eduarte Rojas</name>
   </developer>
   <provides>
@@ -89,6 +89,30 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="6.1.0" date="2025-06-03">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/6.1.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Chat Search</li>
+          <li>Hide "latest" and "custom" tags from model selector</li>
+          <li>Hide model's languages behind popup</li>
+          <li>New models listed for Ollama</li>
+          <li>Added option to autodictate new mesages</li>
+          <li>Added Meta Llama API to list of instances</li>
+          <li>Added new env variables options ("24H hour formatting" and "only Ollama mode")</li>
+          <li>Made Mermaid scripts executable using Python HTTP server</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Better stability when switching instances</li>
+          <li>Better performance when navigating menus</li>
+          <li>Fixed some dialogs not appearing in Quick Ask window</li>
+          <li>Faster message search</li>
+          <li>Faster message rendering</li>
+        </ul>
+      </description>
+    </release>
     <release version="6.0.5" date="2025-05-02">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/6.0.5</url>
       <description>
