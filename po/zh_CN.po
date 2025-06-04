@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 6.0.2\n"
+"Project-Id-Version: 6.1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-04 01:32-0600\n"
-"PO-Revision-Date: 2025-04-24 11:43+0200\n"
+"PO-Revision-Date: 2025-06-05 00:28+0200\n"
 "Last-Translator: Yuehao Sui <8ar10der@amao.run>\n"
 "Language-Team: Chinese (China)\n"
 "Language: zh_CN\n"
@@ -2080,15 +2080,15 @@ msgstr "快速问答"
 
 #: src/constants.py:95
 msgid "Never"
-msgstr ""
+msgstr "从不"
 
 #: src/constants.py:96
 msgid "When Alpaca is Focused"
-msgstr ""
+msgstr "当 Alpaca 是焦点窗口时"
 
 #: src/constants.py:97
 msgid "Always"
-msgstr ""
+msgstr "总是"
 
 #: src/main.py:204
 msgid "Documentation"
@@ -3159,20 +3159,22 @@ msgid ""
 "Qwen3 is the latest generation of large language models in Qwen series, "
 "offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
 msgstr ""
+"Qwen3是通义千问系列大语言模型的最新版本，提供包含稠密型和专家混合（MoE）架构"
+"在内的完整模型组合。"
 
 #: src/ollama_models.py:4802
 msgid "Devstral: the best open source model for coding agents"
-msgstr ""
+msgstr "Devstral：专为代码智能体打造的最强开源模型"
 
 #: src/ollama_models.py:4830
 msgid "Meta's latest collection of multimodal models."
-msgstr ""
+msgstr "Meta的最新多模态模型套件"
 
 #: src/ollama_models.py:4878
 msgid ""
 "Flagship vision-language model of Qwen and also a significant leap from the "
 "previous Qwen2-VL."
-msgstr ""
+msgstr "Qwen系列旗舰级视觉语言模型，较前代Qwen2-VL实现重大突破"
 
 #: src/ollama_models.py:4908
 msgid ""
@@ -3207,12 +3209,16 @@ msgid ""
 "have been fine-tuned for improved reasoning and instruction-following "
 "capabilities."
 msgstr ""
+"IBM Granite 2B与8B模型是支持128K上下文长度的大语言模型，经过专门优化以提升推"
+"理能力和指令遵循性能。"
 
 #: src/ollama_models.py:5040
 msgid ""
 "Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
 "reasoning models that rival much larger models on complex reasoning tasks."
 msgstr ""
+"Phi-4 Reasoning与Reasoning Plus是两款14B参数的开源推理模型，在复杂推理任务上"
+"可媲美规模更大的模型。"
 
 #: src/ollama_models.py:5073
 msgid ""
@@ -3229,6 +3235,8 @@ msgid ""
 "Phi 4 mini reasoning is a lightweight open model that balances efficiency "
 "with advanced reasoning ability."
 msgstr ""
+"Phi-4 Mini Reasoning 是一款轻量级开源模型，在高效运行与先进推理能力之间实现了"
+"出色平衡。"
 
 #: src/window.py:156
 msgid "Ollama Was Not Found"
@@ -3469,23 +3477,23 @@ msgstr "目录"
 
 #: src/window.ui:181
 msgid "Search Chats"
-msgstr ""
+msgstr "搜索对话"
 
 #: src/window.ui:190
 msgid "Chat search bar"
-msgstr ""
+msgstr "对话搜索栏"
 
 #: src/window.ui:198 src/window.ui:200
 msgid "Search chats"
-msgstr ""
+msgstr "搜索对话"
 
 #: src/window.ui:236
 msgid "No Chats Found"
-msgstr ""
+msgstr "未找到对话"
 
 #: src/window.ui:237
 msgid "Oh no! It looks like there are no chats found for your search."
-msgstr ""
+msgstr "哎呀！似乎没有找到符合您搜索条件的聊天记录呢"
 
 #: src/window.ui:254
 msgid "Toggle Sidebar"
@@ -3722,13 +3730,13 @@ msgstr "缩放"
 
 #: src/window.ui:1084
 msgid "Speech Recognition Model"
-msgstr ""
+msgstr "语音识别模型\t"
 
 #: src/window.ui:1085
 msgid ""
 "Models are downloaded upon first use, you can delete them from the model "
 "manager"
-msgstr ""
+msgstr "模型将在首次使用时自动下载，您可通过模型管理器随时删除。"
 
 #: src/window.ui:1092
 msgid "Speech Recognition Language"
@@ -3740,21 +3748,22 @@ msgstr "通话后自动发送消息"
 
 #: src/window.ui:1110
 msgid "Default Text to Speech Voice"
-msgstr ""
+msgstr "默认文本转语音声线"
 
 #: src/window.ui:1111
 msgid ""
 "Voices are downloaded upon first use, each weighing around 1 MB, and you can "
 "delete them from the model manager"
 msgstr ""
+"语音模型将在首次使用时自动下载（每个约1MB大小），您可通过模型管理器随时删除。"
 
 #: src/window.ui:1118
 msgid "Dictate New Messages Automatically"
-msgstr ""
+msgstr "自动听写新消息"
 
 #: src/window.ui:1119
 msgid "Dictate new messages once they have finished being generated"
-msgstr ""
+msgstr "消息生成后自动听写"
 
 #: src/window.ui:1132
 msgid "Delete All Chats"
@@ -3843,17 +3852,17 @@ msgstr "文件附件功能升级"
 
 #: src/window.ui:1212
 msgid ""
-"You can now attach and ask questions about even more file types, "
-"including .docx, .pptx, and .xlsx! Plus, when you preview an attachment, "
-"you'll see it with rich text styling, making it easier to understand the "
-"content before you send it."
+"You can now attach and ask questions about even more file types, including ."
+"docx, .pptx, and .xlsx! Plus, when you preview an attachment, you'll see it "
+"with rich text styling, making it easier to understand the content before "
+"you send it."
 msgstr ""
 "现已支持更多文件类型（包括.docx、.pptx和.xlsx）的附件上传与提问！此外，预览附"
 "件时将显示富文本样式，让您在发送前更轻松理解内容。"
 
 #: src/window.ui:1236 src/widgets/chat.py:20
 msgid "New Notebook"
-msgstr ""
+msgstr "新建笔记本"
 
 #: src/window.ui:1244
 msgid "Start Quick Ask"
@@ -4037,11 +4046,11 @@ msgstr "移除附件"
 
 #: src/widgets/attachments.py:138
 msgid "Replace Notebook Content"
-msgstr ""
+msgstr "更换笔记本内容"
 
 #: src/widgets/attachments.py:208
 msgid "Delete Attachment?"
-msgstr ""
+msgstr "删除附件吗？"
 
 #: src/widgets/attachments.py:209 src/widgets/chat.py:457
 msgid "Are you sure you want to delete '{}'?"
@@ -4057,19 +4066,19 @@ msgstr "无图像"
 
 #: src/widgets/chat.py:86 src/widgets/instance_manager.py:96
 msgid "Notebook"
-msgstr ""
+msgstr "笔记"
 
 #: src/widgets/chat.py:87
 msgid "Start a notebook with a message"
-msgstr ""
+msgstr "根据消息创建笔记本"
 
 #: src/widgets/chat.py:95 src/widgets/chat.py:247
 msgid "No Messages Found"
-msgstr ""
+msgstr "未找到相关消息"
 
 #: src/widgets/chat.py:96 src/widgets/chat.py:248
 msgid "Uh oh! No messages found for your search."
-msgstr ""
+msgstr "哎呀！没有找到符合搜索条件的消息"
 
 #: src/widgets/chat.py:238
 msgid "Try one of these prompts"
@@ -4154,7 +4163,7 @@ msgstr "实例"
 
 #: src/widgets/instance_manager.py:88
 msgid "Notebook Error"
-msgstr ""
+msgstr "笔记本发生错误"
 
 #: src/widgets/instance_manager.py:89 src/widgets/instance_manager.py:159
 msgid "An error occurred while running tool"
@@ -4371,7 +4380,7 @@ msgstr "兼容 OpenAI 库的 AI 实例"
 
 #: src/widgets/instance_manager.py:987
 msgid "Meta AI Llama API"
-msgstr ""
+msgstr "Meta AI Llama API"
 
 #: src/widgets/instance_manager.py:1008
 msgid "Remove Instance?"
@@ -4417,11 +4426,11 @@ msgstr "消息已复制到剪切板"
 
 #: src/widgets/message.py:144
 msgid "Text to Speech Error"
-msgstr ""
+msgstr "文本转语音错误"
 
 #: src/widgets/message.py:145
 msgid "An error occurred while running text to speech model"
-msgstr ""
+msgstr "运行文本转语音(TTS)模型时发生错误"
 
 #: src/widgets/message.py:173
 msgid "Message cannot be regenerated while receiving a response"
@@ -4444,19 +4453,19 @@ msgstr "您确定要移除 '{}' 吗？"
 
 #: src/widgets/model_manager.py:122
 msgid "Local text to speech model provided by Kokoro."
-msgstr ""
+msgstr "由Kokoro提供的本地文本转语音(TTS)模型"
 
 #: src/widgets/model_manager.py:159 src/widgets/model_manager.py:293
 msgid "Speech to Text"
-msgstr ""
+msgstr "语言转文本"
 
 #: src/widgets/model_manager.py:209
 msgid "Local speech to text model provided by OpenAI Whisper."
-msgstr ""
+msgstr "OpenAI Whisper 提供的本地语音转文本（STT）模型"
 
 #: src/widgets/model_manager.py:238
 msgid "Downloading…"
-msgstr ""
+msgstr "下载中......"
 
 #: src/widgets/model_manager.py:248 src/widgets/model_manager.py:250
 msgid "Stop Download"
@@ -4496,11 +4505,11 @@ msgstr "更改简介图片"
 
 #: src/widgets/model_manager.py:454
 msgid "Voice"
-msgstr ""
+msgstr "语音"
 
 #: src/widgets/model_manager.py:459
 msgid "Default"
-msgstr ""
+msgstr "默认"
 
 #: src/widgets/model_manager.py:479
 msgid "Family"
@@ -4568,7 +4577,7 @@ msgstr "工具"
 
 #: src/widgets/model_manager.py:720
 msgid "Reasoning"
-msgstr ""
+msgstr "推理"
 
 #: src/widgets/model_manager.py:721
 msgid "Small"
@@ -4594,7 +4603,7 @@ msgstr "通过下载此模型，您将接受在该模型网站上提供的许可
 
 #: src/widgets/model_manager.py:895
 msgid "Languages"
-msgstr ""
+msgstr "语言"
 
 #: src/widgets/terminal.py:17
 msgid "Setting up Python environment..."
@@ -4602,11 +4611,11 @@ msgstr "设置 Python 环境……"
 
 #: src/widgets/terminal.py:29
 msgid "Using Python HTTP server..."
-msgstr ""
+msgstr "正在使用 Python HTTP 服务器..."
 
 #: src/widgets/terminal.py:34
 msgid "Using Flatpak contained shell..."
-msgstr ""
+msgstr "正在使用 Flatpak 容器化的 Shell 环境..."
 
 #: src/widgets/terminal.py:38
 msgid "Using SSH to run command"
@@ -4626,7 +4635,7 @@ msgstr "脚本已退出"
 
 #: src/widgets/terminal.py:192
 msgid "Alpaca Terminal is not compatible with Windows"
-msgstr ""
+msgstr "Alpaca 终端与 Windows 系统不兼容"
 
 #: src/widgets/blocks/code.py:84
 msgid "Code Block"
@@ -4634,11 +4643,11 @@ msgstr "代码块"
 
 #: src/widgets/blocks/code.py:111
 msgid "Edit Script"
-msgstr ""
+msgstr "编辑脚本"
 
 #: src/widgets/blocks/code.py:119
 msgid "Copy Script"
-msgstr ""
+msgstr "复制脚本"
 
 #: src/widgets/blocks/code.py:127
 msgid "Run Script"
@@ -4646,7 +4655,7 @@ msgstr "运行脚本"
 
 #: src/widgets/blocks/code.py:193
 msgid "Changes saved successfully"
-msgstr ""
+msgstr "修改已成功保存"
 
 #: src/widgets/blocks/code.py:199
 msgid "Code copied to the clipboard"
@@ -4666,27 +4675,27 @@ msgstr "思考\t"
 
 #: src/widgets/tools/notebook_tools.py:18
 msgid "Read Notebook"
-msgstr ""
+msgstr "阅读笔记本"
 
 #: src/widgets/tools/notebook_tools.py:19
 msgid "Reads the current notebook."
-msgstr ""
+msgstr "阅读当前笔记本。"
 
 #: src/widgets/tools/notebook_tools.py:38
 msgid "Write Notebook"
-msgstr ""
+msgstr "写入笔记本"
 
 #: src/widgets/tools/notebook_tools.py:39
 msgid "Overwrites the notebook with new text."
-msgstr ""
+msgstr "使用新文本覆盖笔记本内容"
 
 #: src/widgets/tools/notebook_tools.py:58
 msgid "Append to Notebook"
-msgstr ""
+msgstr "追加笔记本内容"
 
 #: src/widgets/tools/notebook_tools.py:59
 msgid "Appends text to the notebook."
-msgstr ""
+msgstr "向笔记本追加文本"
 
 #: src/widgets/tools/tools.py:67
 msgid "AI Description"
