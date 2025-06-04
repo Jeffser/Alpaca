@@ -162,37 +162,41 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Chat Search"
-msgstr ""
+msgstr "Busqueda de Chats"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Hide \"latest\" and \"custom\" tags from model selector"
-msgstr ""
+msgstr "Etiquetas \"latest\" y \"custom\" fueron escondidas del selector de "
+"modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Hide model's languages behind popup"
-msgstr ""
+msgstr "Ocultar los idiomas del modelo tras una ventana emergente"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "New models listed for Ollama"
-msgstr ""
+msgstr "Nuevos modelos listados para Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Added option to autodictate new mesages"
-msgstr ""
+msgstr "Se agregó la opción para dictar automáticamente nuevos mensajes"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Added Meta Llama API to list of instances"
-msgstr ""
+msgstr "Se agregó la API de Meta Llama a la lista de instancias"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid ""
 "Added new env variables options (\"24H hour formatting\" and \"only Ollama "
 "mode\")"
 msgstr ""
+"Se agregaron nuevas opciones de variables de entorno (\"formato de hora de "
+"24 horas\" y \"solo modo Ollama\")"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Made Mermaid scripts executable using Python HTTP server"
-msgstr ""
+msgstr "Se hicieron los scripts de Mermaid ejecutables mediante el servidor "
+"HTTP de Python"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 #: data/com.jeffser.Alpaca.metainfo.xml.in:119
@@ -231,23 +235,24 @@ msgstr "Arreglos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Better stability when switching instances"
-msgstr ""
+msgstr "Mejor estabilidad al cambiar de instancia"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:109
 msgid "Better performance when navigating menus"
-msgstr ""
+msgstr "Mejor rendimiento al navegar por los menús"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
 msgid "Fixed some dialogs not appearing in Quick Ask window"
-msgstr ""
+msgstr "Se corrigieron algunos cuadros de diálogo que no aparecían en la "
+"ventana de Pregunta Rápida"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "Faster message search"
-msgstr ""
+msgstr "Búsqueda de mensajes más rápida"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "Faster message rendering"
-msgstr ""
+msgstr "Renderización de mensajes más rápida"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:121
 msgid "Fixed whisper directory not existing causing error"
@@ -4799,11 +4804,11 @@ msgstr "Mensaje copiado"
 
 #: src/widgets/message.py:146
 msgid "Text to Speech Error"
-msgstr ""
+msgstr "Error de Texto a Voz"
 
 #: src/widgets/message.py:147
 msgid "An error occurred while running text to speech model"
-msgstr ""
+msgstr "Se produjo un error al ejecutar el modelo de texto a voz"
 
 #: src/widgets/message.py:175
 msgid "Message cannot be regenerated while receiving a response"
