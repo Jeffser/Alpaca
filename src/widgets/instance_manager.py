@@ -259,11 +259,11 @@ class BaseInstance:
         chat.row.rename(new_chat_title)
 
     def get_default_model(self):
-        if not self.default_model:
-            models = self.get_local_models()
-            if len(models) > 0:
-                self.default_model = models[0].get('name')
-        return self.default_model
+        local_models = self.get_local_models()
+        if len(local_models) > 0:
+            if not self.default_model or not self.default_model in [m.get('name') for m in local_models]:
+                self.default_model = local_models[0].get('name')
+            return self.default_model
 
     def generate_preferences_page(self, elements:tuple, suffix_element=None) -> Adw.PreferencesPage:
         pp = Adw.PreferencesPage()
@@ -1032,21 +1032,25 @@ class InstanceRow(Adw.ActionRow):
         SQL.delete_instance(self.instance.instance_id)
         self.get_parent().remove(self)
 
+def create_instance_row(ins) -> InstanceRow or None:
+    instance_dictionary = {i.instance_type: i for i in ready_instances}
+    if ins.get('max_tokens') == -1:
+        ins['max_tokens'] = None
+    if ins.get('type') in list(instance_dictionary.keys()) and (ins.get('type') != 'ollama:managed' or shutil.which('ollama')):
+        return InstanceRow(instance_dictionary.get(ins.get('type'))(ins))
+
 def update_instance_list():
     window.instance_listbox.remove_all()
     window.instance_listbox.set_selection_mode(0)
     instances = SQL.get_instances()
     selected_instance = SQL.get_preference('selected_instance')
-    instance_dictionary = {i.instance_type: i for i in ready_instances}
     if len(instances) > 0:
         window.instance_manager_stack.set_visible_child_name('content')
         window.instance_listbox.set_selection_mode(1)
         row_to_select = None
         for i, ins in enumerate(instances):
-            if ins.get('max_tokens') == -1:
-                ins['max_tokens'] = None
-            if ins.get('type') in list(instance_dictionary.keys()) and (ins.get('type') != 'ollama:managed' or shutil.which('ollama')):
-                row = InstanceRow(instance_dictionary.get(ins.get('type'))(ins))
+            row = create_instance_row(ins)
+            if row:
                 window.instance_listbox.append(row)
                 if selected_instance == row.instance.instance_id:
                     row_to_select = row

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+  <template class="AlpacaQuickAskWindow" parent="AdwApplicationWindow">
+    <property name="name">AlpacaQuickAsk</property>
+      <accessibility>
+        <property name="label" translatable="yes">Quick ask dialog</property>
+      </accessibility>
+      <property name="title" translatable="yes">Quick Ask</property>
+      <property name="width-request">320</property>
+      <property name="height-request">240</property>
+      <child>
+        <object class="AdwToolbarView">
+          <child type="top">
+            <object class="AdwHeaderBar">
+              <child type="start">
+                <object class="GtkButton" id="save_button">
+                  <property name="icon-name">document-save-symbolic</property>
+                  <property name="tooltip-text" translatable="yes">Save Conversation to Alpaca</property>
+                  <property name="sensitive">false</property>
+                  <signal name="clicked" handler="save_chat"/>
+                </object>
+              </child>
+            </object>
+          </child>
+          <property name="content">
+            <object class="AdwToastOverlay" id="toast_overlay"/>
+          </property>
+          <child type="bottom">
+            <object class="GtkBox">
+              <property name="margin-top">10</property>
+              <property name="margin-bottom">10</property>
+              <property name="margin-start">10</property>
+              <property name="margin-end">10</property>
+              <style>
+                <class name="card"/>
+              </style>
+              <property name="overflow">1</property>
+              <child>
+                <object class="GtkScrolledWindow" id="message_text_view_scrolled_window">
+                  <property name="max-content-height">150</property>
+                  <property name="propagate-natural-height">true</property>
+                  <property name="min-content-height">1</property>
+                  <style>
+                    <class name="undershoot-bottom"/>
+                  </style>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+  </template>
+</interface>

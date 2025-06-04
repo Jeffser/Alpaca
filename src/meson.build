@@ -38,6 +38,7 @@ configure_file(
 alpaca_sources = [
   'main.py',
   'window.py',
+  'quick_ask.py',
   'constants.py',
   'ollama_models.py',
   'sql_manager.py'

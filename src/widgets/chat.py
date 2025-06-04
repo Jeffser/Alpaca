@@ -13,8 +13,6 @@ from .message import Message
 
 logger = logging.getLogger(__name__)
 
-window = None
-
 class Notebook(Gtk.Stack):
     __gtype_name__ = 'AlpacaNotebook'
     chat_type = 'notebook'
@@ -73,7 +71,7 @@ class Notebook(Gtk.Stack):
         paned.set_start_child(self.scrolledwindow)
         paned.set_end_child(book_scrolledwindow)
         list(paned)[1].add_css_class('card')
-        window.split_view_overlay.connect('notify::collapsed', lambda *_: paned.set_orientation(window.split_view_overlay.get_collapsed()))
+        self.get_root().split_view_overlay.connect('notify::collapsed', lambda *_: paned.set_orientation(self.get_root().split_view_overlay.get_collapsed()))
 
         clamp = Adw.Clamp(
             maximum_size=1000,
@@ -134,7 +132,8 @@ class Notebook(Gtk.Stack):
 
     def stop_message(self):
         self.busy = False
-        window.switch_send_stop_button(True)
+        if self.get_root().get_name() == 'AlpacaWindow':
+            self.get_root().switch_send_stop_button(True)
 
     def unload_messages(self):
         self.stop_message()
@@ -282,7 +281,8 @@ class Chat(Gtk.Stack):
 
     def stop_message(self):
         self.busy = False
-        window.switch_send_stop_button(True)
+        if self.get_root().get_name() == 'AlpacaWindow':
+            self.get_root().switch_send_stop_button(True)
 
     def unload_messages(self):
         self.stop_message()
@@ -317,18 +317,16 @@ class Chat(Gtk.Stack):
         self.set_visible_child_name('content' if len(messages) > 0 else 'welcome-screen')
 
     def send_sample_prompt(self, prompt:str):
-        if len(list(window.local_model_flowbox)) > 0:
-            if not self.chat_id:
-                window.quick_chat(prompt, 0)
-            else:
-                buffer = window.message_text_view.get_buffer()
-                buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-                buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
-                window.send_message()
-        elif window.get_current_instance().instance_type == 'empty':
-            window.get_application().lookup_action('instance_manager').activate()
-        else:
-            window.get_application().lookup_action('model_manager').activate()
+        if self.get_root().get_name() == 'AlpacaWindow':
+            if len(list(self.get_root().local_model_flowbox)) == 0:
+                if self.get_root().get_current_instance().instance_type == 'empty':
+                    self.get_root().get_application().lookup_action('instance_manager').activate()
+                else:
+                    self.get_root().get_application().lookup_action('model_manager').activate()
+        buffer = self.get_root().message_text_view.get_buffer()
+        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+        buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
+        self.get_root().send_message()
 
     def convert_to_json(self, include_metadata:bool=False) -> dict:
         messages = []
@@ -405,7 +403,7 @@ class ChatRow(Gtk.ListBoxRow):
         position.y = y
 
         popover = Gtk.PopoverMenu(
-            menu_model=window.chat_right_click_menu,
+            menu_model=self.get_root().chat_right_click_menu,
             has_arrow=False,
             halign=1,
             height_request=155
@@ -413,7 +411,7 @@ class ChatRow(Gtk.ListBoxRow):
 
         popover.add_child(Gtk.Button(label='fun'), '1')
 
-        window.selected_chat_row = self
+        self.get_root().selected_chat_row = self
 
         popover.set_parent(self.get_child())
         popover.set_pointing_to(position)
@@ -448,7 +446,7 @@ class ChatRow(Gtk.ListBoxRow):
         self.chat.get_parent().remove(self.chat)
         SQL.delete_chat(self.chat)
         if len(list(list_box)) == 0:
-            window.new_chat(chat_type='chat')
+            self.get_root().new_chat(chat_type='chat')
         if not list_box.get_selected_row() or list_box.get_selected_row() == self:
             list_box.select_row(list_box.get_row_at_index(0))
 
@@ -465,7 +463,7 @@ class ChatRow(Gtk.ListBoxRow):
     def duplicate(self):
         new_chat_name = _("Copy of {}".format(self.get_name()))
         new_chat_id = generate_uuid()
-        new_chat = window.add_chat(
+        new_chat = self.get_root().add_chat(
             chat_name=new_chat_name,
             chat_id=new_chat_id,
             chat_type=self.chat.chat_type,
@@ -498,7 +496,7 @@ class ChatRow(Gtk.ListBoxRow):
             if message_element.text and message_element.dt:
                 message_author = _('User')
                 if message_element.bot:
-                    message_author = window.convert_model_name(message_element.model, 0)
+                    message_author = self.get_root().convert_model_name(message_element.model, 0)
                 if message_element.system:
                     message_author = _('System')
 

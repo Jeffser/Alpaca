@@ -81,12 +81,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     welcome_carousel = Gtk.Template.Child()
     welcome_previous_button = Gtk.Template.Child()
     welcome_next_button = Gtk.Template.Child()
-    main_overlay = Gtk.Template.Child()
+    toast_overlay = Gtk.Template.Child()
     chat_stack = Gtk.Template.Child()
     chat_list_stack = Gtk.Template.Child()
     message_text_view = None
     message_text_view_scrolled_window = Gtk.Template.Child()
-    quick_ask_text_view_scrolled_window = Gtk.Template.Child()
     action_button_stack = Gtk.Template.Child()
     bottom_chat_controls_container = Gtk.Template.Child()
     attachment_button = Gtk.Template.Child()
@@ -120,10 +119,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     banner = Gtk.Template.Child()
 
-    quick_ask = Gtk.Template.Child()
-    quick_ask_overlay = Gtk.Template.Child()
-    quick_ask_save_button = Gtk.Template.Child()
-
     model_creator_stack = Gtk.Template.Child()
     model_creator_base = Gtk.Template.Child()
     model_creator_profile_picture = Gtk.Template.Child()
@@ -145,114 +140,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_manager_top_view_switcher = Gtk.Template.Child()
     last_selected_instance_row = None
 
-    SQL.initialize()
-
     # tts
     message_dictated = None
-
-    @Gtk.Template.Callback()
-    def microphone_toggled(self, button):
-        language=SQL.get_preference('mic_language')
-        text_view = list(button.get_parent().get_parent())[0].get_child()
-        buffer = text_view.get_buffer()
-        model_name = os.getenv("ALPACA_SPEECH_MODEL", "base")
-
-        def recognize_audio(model, audio_data, current_iter):
-            result = model.transcribe(audio_data, language=language)
-            if len(result.get("text").encode('utf8')) == 0:
-                self.mic_timeout += 1
-            else:
-                GLib.idle_add(buffer.insert, current_iter, result.get("text"), len(result.get("text").encode('utf8')))
-                self.mic_timeout = 0
-
-        def run_mic(pulling_model:Gtk.Widget=None):
-            GLib.idle_add(button.get_parent().set_visible_child_name, "loading")
-            import whisper
-            import pyaudio
-            GLib.idle_add(button.add_css_class, 'accent')
-
-            samplerate=16000
-            p = pyaudio.PyAudio()
-            model = None
-
-            self.mic_timeout=0
-
-            try:
-                model = whisper.load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
-                if pulling_model:
-                    GLib.idle_add(pulling_model.update_progressbar, {'status': 'success'})
-            except Exception as e:
-                Widgets.dialog.simple_error(
-                    parent = button.get_root(),
-                    title = _('Speech Recognition Error'),
-                    body = _('An error occurred while pulling speech recognition model'),
-                    error_log = e
-                )
-                logger.error(e)
-            GLib.idle_add(button.get_parent().set_visible_child_name, "button")
-
-            if model:
-                stream = p.open(
-                    format=pyaudio.paInt16,
-                    rate=samplerate,
-                    input=True,
-                    frames_per_buffer=1024,
-                    channels=1
-                )
-
-                try:
-                    while button.get_active():
-                        frames = []
-                        for i in range(0, int(samplerate / 1024 * 2)):
-                            data = stream.read(1024, exception_on_overflow=False)
-                            frames.append(np.frombuffer(data, dtype=np.int16))
-                        audio_data = np.concatenate(frames).astype(np.float32) / 32768.0
-                        threading.Thread(target=recognize_audio, args=(model, audio_data, buffer.get_end_iter())).start()
-
-                        if self.mic_timeout >= 2 and SQL.get_preference('mic_auto_send', False) and buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False):
-                            if text_view.get_name() == 'main_text_view':
-                                GLib.idle_add(self.send_message)
-                            elif text_view.get_name() == 'quick_chat_text_view':
-                                GLib.idle_add(self.quick_chat, buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False), 0)
-                            break
-
-                except Exception as e:
-                    Widgets.dialog.simple_error(
-                        parent = button.get_root(),
-                        heading = _('Speech Recognition Error'),
-                        body = _('An error occurred while using speech recognition'),
-                        error_log = e
-                    )
-                    logger.error(e)
-                finally:
-                    stream.stop_stream()
-                    stream.close()
-                    p.terminate()
-
-            if button.get_active():
-                button.set_active(False)
-
-        def prepare_download():
-            pulling_model = Widgets.model_manager.PullingModel(model_name, Widgets.model_manager.add_speech_to_text_model, False)
-            self.local_model_flowbox.prepend(pulling_model)
-            threading.Thread(target=run_mic, args=(pulling_model,)).start()
-
-        if button.get_active():
-            if os.path.isfile(os.path.join(data_dir, 'whisper', '{}.pt'.format(model_name))):
-                threading.Thread(target=run_mic).start()
-            else:
-                Widgets.dialog.simple(
-                    parent = button.get_root(),
-                    heading = _("Download Speech Recognition Model"),
-                    body = _("To use speech recognition you'll need to download a special model ({})").format(STT_MODELS.get(model_name, '~151mb')),
-                    callback = prepare_download,
-                    button_name = _("Download Model")
-                )
-        else:
-            button.remove_css_class('accent')
-            button.set_sensitive(False)
-            GLib.timeout_add(2000, lambda button: button.set_sensitive(True) and False, button)
-
 
     @Gtk.Template.Callback()
     def closing_notice(self, dialog):
@@ -790,26 +679,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     return name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title()
                 else:
                     return name.replace('-', ' ').title(), None
-
-
         except Exception as e:
             pass
-
-    @Gtk.Template.Callback()
-    def quick_ask_save(self, button):
-        self.quick_ask.close()
-        chat = self.quick_ask_overlay.get_child()
-        chat_name = generate_numbered_name(chat.get_name(), [tab.get_name() for tab in list(self.chat_list_box)])
-        new_chat = self.new_chat(chat_name)
-        for message in list(chat.container):
-            SQL.insert_or_update_message(message, new_chat.chat_id)
-        threading.Thread(target=new_chat.load_chat_messages).start()
-        self.present()
-
-    @Gtk.Template.Callback()
-    def closing_quick_ask(self, user_data):
-        if not self.get_visible():
-            self.closing_app(None)
 
     @Gtk.Template.Callback()
     def chat_changed(self, listbox, future_row):
@@ -874,16 +745,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
             if new_text != text:
                 editable.stop_emission_by_name("insert-text")
-
-    def show_notification(self, title:str, body:str, icon:Gio.ThemedIcon=None):
-        if not self.is_active() and not self.quick_ask.is_active():
-            body = body.replace('<span>', '').replace('</span>', '')
-            logger.info(f"{title}, {body}")
-            notification = Gio.Notification.new(title)
-            notification.set_body(body)
-            if icon:
-                notification.set_icon(icon)
-            self.get_application().send_notification(None, notification)
 
     def switch_send_stop_button(self, send:bool):
         self.action_button_stack.set_visible_child_name('send' if send else 'stop')
@@ -1057,55 +918,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for file in files:
             self.on_attachment(file)
 
-    def prepare_quick_chat(self):
-        self.quick_ask_save_button.set_sensitive(False)
-        chat = Widgets.chat.Chat(
-            name=_('Quick Ask')
-        )
-        chat.set_visible_child_name('welcome-screen')
-        self.quick_ask_overlay.set_child(chat)
-
-    def quick_chat(self, message:str, mode:int):
-        if not message:
-            return
-
-        buffer = self.quick_ask_message_text_view.get_buffer()
-        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-        self.quick_ask.present()
-        default_model = self.get_current_instance().get_default_model()
-        current_model = None
-        if default_model:
-            current_model = self.convert_model_name(default_model, 1)
-        if current_model is None:
-            Widgets.dialog.show_toast(_("Please select a model before chatting"), self.quick_ask)
-            return
-        chat = self.quick_ask_overlay.get_child()
-
-        m_element = Widgets.message.Message(
-            dt=datetime.now(),
-            message_id=generate_uuid(),
-            chat=chat,
-            mode=0 if mode in (0,2) else 2
-        )
-        chat.add_message(m_element)
-        m_element.block_container.set_content(message)
-
-        if mode in (0, 2):
-            m_element_bot = Widgets.message.Message(
-                dt=datetime.now(),
-                message_id=generate_uuid(),
-                chat=chat,
-                mode=1,
-                author=current_model
-            )
-            chat.add_message(m_element_bot)
-
-            chat.busy = True
-            if mode == 0:
-                threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
-            else:
-                threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.tool_listbox), True)).start()
-
     def get_current_instance(self):
         if self.instance_listbox.get_selected_row():
             return self.instance_listbox.get_selected_row().instance
@@ -1196,10 +1008,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 "url": "http://{}:11435".format("127.0.0.1" if sys.platform == "win32" else "0.0.0.0"),
                 "pinned": True
             }))
-
-        if self.get_application().args.ask or self.get_application().args.quick_ask:
-            self.prepare_quick_chat()
-            self.quick_chat(self.get_application().args.ask, 0)
 
     def open_button_menu(self, gesture, x, y, menu):
         button = gesture.get_widget()
@@ -1334,12 +1142,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         GtkSource.init()
-        Widgets.message.window = self
-        Widgets.chat.window = self
         Widgets.model_manager.window = self
         Widgets.instance_manager.window = self
 
-        self.prepare_quick_chat()
         self.model_searchbar.connect_entry(self.searchentry_models)
         self.model_searchbar.connect('notify::search-mode-enabled', lambda *_: self.model_search_changed(self.searchentry_models))
 
@@ -1393,36 +1198,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.message_text_view.get_buffer().set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('adwaita'))
         self.message_text_view.connect('paste-clipboard', self.on_clipboard_paste)
 
-        self.quick_ask_message_text_view = GtkSource.View(
-            css_classes=['message_text_view'],
-            top_margin=10,
-            bottom_margin=10,
-            hexpand=True,
-            wrap_mode=3,
-            valign=3,
-            name="quick_chat_text_view"
-        )
-        self.quick_ask_text_view_scrolled_window.set_child(self.quick_ask_message_text_view)
-        self.quick_ask_message_text_view.get_buffer().set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('adwaita'))
-
-        def enter_key_handler(controller, keyval, keycode, state, text_view):
+        def enter_key_handler(controller, keyval, keycode, state):
             if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK): # Enter pressed without shift
                 mode = 0
                 if state & Gdk.ModifierType.CONTROL_MASK: # Ctrl, send system message
                     mode = 1
                 elif state & Gdk.ModifierType.ALT_MASK: # Alt, send tool message
                     mode = 2
-                if text_view.get_name() == 'main_text_view':
-                    self.send_message(None, mode)
-                elif text_view.get_name() == 'quick_chat_text_view':
-                    buffer = text_view.get_buffer()
-                    self.quick_chat(buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False), mode)
+                self.send_message(None, mode)
                 return True
 
-        for text_view in (self.message_text_view, self.quick_ask_message_text_view):
-            enter_key_controller = Gtk.EventControllerKey.new()
-            enter_key_controller.connect("key-pressed", lambda c, kv, kc, stt, tv=text_view: enter_key_handler(c, kv, kc, stt, tv))
-            text_view.add_controller(enter_key_controller)
+        enter_key_controller = Gtk.EventControllerKey.new()
+        enter_key_controller.connect("key-pressed", enter_key_handler)
+        self.message_text_view.add_controller(enter_key_controller)
+        self.message_text_view_scrolled_window.get_parent().append(Widgets.speech_recognition.MicrophoneButton(self.message_text_view))
 
         for name, data in {
             'send': {
@@ -1499,7 +1288,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             )],
             'use_tools': [lambda *_: self.send_message(None, 2)],
             'tool_manager': [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'tool_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'tool_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']],
-            'start_quick_ask': [lambda *_: self.quick_ask.present(), ['<primary><alt>a']]
+            'start_quick_ask': [lambda *_: self.get_application().get_quick_ask_window(), ['<primary><alt>a']]
         }
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)

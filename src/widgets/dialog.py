@@ -314,12 +314,10 @@ def simple_directory(parent:Gtk.Widget, callback:callable):
 
 def show_toast(message:str, root_widget, action:str=None, action_name:str=None):
     try:
-        overlay = root_widget.main_overlay
-    except:
-        try:
-            overlay = root_widget.get_content().get_content()
-        except:
-            return
+        overlay = root_widget.toast_overlay
+    except Exception as e:
+        print(e)
+        return
     toast = Adw.Toast(
         title=message,
         timeout=2
@@ -328,3 +326,12 @@ def show_toast(message:str, root_widget, action:str=None, action_name:str=None):
         toast.set_action_name(action)
         toast.set_button_label(action_name)
     overlay.add_toast(toast)
+
+def show_notification(root_widget, title:str, body:str, icon:Gio.ThemedIcon=None):
+    if not root_widget.is_active():
+        body = body.replace('<span>', '').replace('</span>', '')
+        notification = Gio.Notification.new(title)
+        notification.set_body(body)
+        if icon:
+            notification.set_icon(icon)
+        root_widget.get_application().send_notification(None, notification)

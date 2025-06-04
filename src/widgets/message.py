@@ -7,12 +7,10 @@ import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
 import os, datetime, threading, sys, base64, logging
 from ..constants import TTS_VOICES
-from ..sql_manager import Instance as SQL
+from ..sql_manager import convert_model_name, Instance as SQL
 from . import model_manager, attachments, blocks, dialog
 
 logger = logging.getLogger(__name__)
-
-window = None
 
 class OptionPopup(Gtk.Popover):
     __gtype_name__ = 'AlpacaMessagePopup'
@@ -120,11 +118,11 @@ class OptionPopup(Gtk.Popover):
             if not voice:
                 voice = 'af_heart'
             if model_manager.tts_model_path:
-                if not os.path.islink(os.path.join(model_manager.tts_model_path, '{}.pt'.format(voice))):
+                if not os.path.islink(os.path.join(model_manager.tts_model_path, '{}.pt'.format(voice))) and self.get_root().get_name() == 'AlpacaWindow':
                     pretty_name = [k for k, v in TTS_VOICES.items() if v == voice]
                     if len(pretty_name) > 0:
                         pretty_name = pretty_name[0]
-                        window.local_model_flowbox.append(model_manager.TextToSpeechModel(pretty_name))
+                        self.get_root().local_model_flowbox.append(model_manager.TextToSpeechModel(pretty_name))
             tts_engine = KPipeline(lang_code=voice[0])
 
             generator = tts_engine(
@@ -151,15 +149,15 @@ class OptionPopup(Gtk.Popover):
 
         if button.get_active():
             GLib.idle_add(self.message_element.add_css_class, 'tts_message')
-            if window.message_dictated and window.message_dictated.popup.tts_button.get_active():
-                 window.message_dictated.popup.tts_button.set_active(False)
-            window.message_dictated = self.message_element
+            if self.get_root().message_dictated and self.get_root().message_dictated.popup.tts_button.get_active():
+                 self.get_root().message_dictated.popup.tts_button.set_active(False)
+            self.get_root().message_dictated = self.message_element
             threading.Thread(target=run, args=(self.message_element.get_content(), button)).start()
         else:
             import sounddevice as sd
             GLib.idle_add(self.message_element.remove_css_class, 'tts_message')
             GLib.idle_add(self.tts_stack.set_visible_child_name, 'button')
-            window.message_dictated = None
+            self.get_root().message_dictated = None
             threading.Thread(target=sd.stop).start()
 
     def regenerate_message(self):
@@ -170,7 +168,7 @@ class OptionPopup(Gtk.Popover):
             self.message_element.author = model
             self.message_element.update_profile_picture()
             self.message_element.options_button.set_sensitive(False)
-            threading.Thread(target=window.get_current_instance().generate_message, args=(self.message_element, model)).start()
+            threading.Thread(target=self.get_root().get_current_instance().generate_message, args=(self.message_element, model)).start()
         else:
             dialog.show_toast(_("Message cannot be regenerated while receiving a response"), self.get_root())
 
@@ -204,7 +202,7 @@ class MessageHeader(Gtk.Box):
             css_classes=['dim-label'] if popover else []
         )
 
-        author = window.convert_model_name(self.message.get_model(), 0)
+        author = convert_model_name(self.message.get_model(), 0)
         if not author:
             author = ""
 
@@ -404,15 +402,9 @@ class Message(Gtk.Box):
             self.pfp_container.set_child()
 
     def update_profile_picture(self):
-        model_name = self.get_model()
-        if model_name:
-            found_models = [model for model in list(model_manager.get_local_models().values()) if model.get_name() == model_name]
-            if found_models:
-                self.update_header(
-                    pfp_b64=found_models[0].data.get('profile_picture')
-                )
-                return
-        self.update_header()
+        self.update_header(
+            pfp_b64=SQL.get_model_preferences(self.get_model()).get('picture')
+        )
 
     def add_attachment(self, file_id:str, name:str, attachment_type:str, content:str):
         if attachment_type == 'image':
@@ -427,21 +419,26 @@ class Message(Gtk.Box):
     def update_message(self, data:dict):
         if data.get('done'):
             self.options_button.set_sensitive(True)
-            if self.chat.chat_id and self.chat.row:
+            if self.get_root().get_name() == 'AlpacaWindow':
                 GLib.idle_add(self.chat.row.spinner.set_visible, False)
-                if window.chat_list_box.get_selected_row().get_name() != self.chat.get_name():
+                if self.get_root().chat_list_box.get_selected_row().get_name() != self.chat.get_name():
                     GLib.idle_add(self.chat.row.indicator.set_visible, True)
-                self.chat.set_visible_child_name('content')
+                self.save()
+            else:
+                GLib.idle_add(self.get_root().save_button.set_sensitive, True)
+
             self.chat.stop_message()
             result_text = self.get_content()
             GLib.idle_add(self.block_container.set_content, result_text)
             self.dt = datetime.datetime.now()
+            self.update_profile_picture()
             if result_text:
-                window.show_notification(self.chat.get_name(), result_text[:200] + (result_text[200:] and '…'), Gio.ThemedIcon.new('chat-message-new-symbolic'))
-            if not self.chat.chat_id:
-                GLib.idle_add(window.quick_ask_save_button.set_sensitive, True)
-            else:
-                self.save()
+                dialog.show_notification(
+                    root_widget=self.get_root(),
+                    title=self.chat.get_name(),
+                    body=result_text[:200] + (result_text[200:] and '…'),
+                    icon=Gio.ThemedIcon.new('chat-message-new-symbolic')
+                )
 
             tts_auto_mode = SQL.get_preference('tts_auto_mode', 'never')
             if tts_auto_mode == 'always' or (tts_auto_mode == 'focused' and self.get_root().is_active()):

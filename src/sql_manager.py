@@ -43,6 +43,31 @@ def generate_numbered_name(name: str, compare_list: "list[str]") -> str:
                     break
     return name
 
+def convert_model_name(name:str, mode:int): # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag   |   mode=2 name:tag -> name, tag
+    try:
+        if mode == 0:
+            if ':' in name:
+                name = name.split(':')
+                if name[1].lower() in ('latest', 'custom'):
+                    return name[0].replace('-', ' ').title()
+                else:
+                    return '{} ({})'.format(name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title())
+            else:
+                return name.replace('-', ' ').title()
+        elif mode == 1:
+            if ' (' in name:
+                name = name.split(' (')
+                return '{}:{}'.format(name[0].replace(' ', '-').lower(), name[1][:-1].replace(' ', '-').lower())
+            else:
+                return name.replace(' ', '-').lower()
+        elif mode == 2:
+            if ':' in name:
+                name = name.split(':')
+                return name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title()
+            else:
+                return name.replace('-', ' ').title(), None
+    except Exception as e:
+        pass
 
 class SQLiteConnection:
     """

@@ -27,7 +27,10 @@ from gi.repository import Gtk, Gio, Adw
 
 from .constants import TRANSLATORS, cache_dir, data_dir, config_dir, source_dir
 from .window import AlpacaWindow
+from .quick_ask import QuickAskWindow
 from .sql_manager import Instance as SQL
+
+SQL.initialize()
 
 import os
 os.environ["TORCH_HOME"] = os.path.join(data_dir, "torch")
@@ -80,7 +83,7 @@ class AlpacaService:
         self.app.props.active_window.present()
 
     def PresentAsk(self):
-        self.app.props.active_window.quick_ask.present()
+        self.get_quick_ask_window()
 
     def Open(self, chat_name:str):
         for chat_row in list(self.app.props.active_window.chat_list_box):
@@ -94,11 +97,15 @@ class AlpacaService:
 
     def Ask(self, message:str):
         time.sleep(1)
-        self.app.props.active_window.quick_chat(message, 0)
+        quick_ask_window = self.get_quick_ask_window()
+        for message in quick_ask_window.toast_overlay.get_child().container:
+            message.get_parent().remove(message)
+        quick_ask_window.write_and_send_message(message)
 
 class AlpacaApplication(Adw.Application):
     __gtype_name__ = 'AlpacaApplication'
-    """The main application singleton class."""
+
+    quick_ask_app = None
 
     def __init__(self, version):
         super().__init__(application_id='com.jeffser.Alpaca',
@@ -129,15 +136,22 @@ class AlpacaApplication(Adw.Application):
                     app_service.PresentAsk()
                 sys.exit(0)
 
+    def get_quick_ask_app(self):
+        if not self.quick_ask_app:
+            self.quick_ask_app = QuickAskApplication(self.version)
+            self.quick_ask_app.alpaca_app = self
+            self.quick_ask_app.run([])
+        return self.quick_ask_app
+
+    def get_quick_ask_window(self):
+        return QuickAskWindow(application=self.get_quick_ask_app()).present()
+
     def do_activate(self):
         win = self.props.active_window
         if not win:
             win = AlpacaWindow(application=self)
+        win.present()
 
-        if self.args.ask or self.args.quick_ask:
-            win.quick_ask.present()
-        else:
-            win.present()
         if sys.platform == 'darwin': # MacOS
             settings = Gtk.Settings.get_default()
             if settings:
@@ -199,6 +213,37 @@ class AlpacaApplication(Adw.Application):
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
+class QuickAskApplication(Adw.Application):
+    __gtype_name__ = 'AlpacaQuickAskApplication'
+
+    alpaca_app = None
+
+    def __init__(self, version):
+        super().__init__(application_id='com.jeffser.Alpaca.QuickAsk',
+            flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
+        self.version = version
+        self.args = parser.parse_args()
+
+    def do_activate(self):
+        win = self.props.active_window
+        if not win:
+            win = QuickAskWindow(application=self)
+        win.present()
+
+    def get_alpaca_app(self):
+        if not self.alpaca_app:
+            self.alpaca_app = AlpacaApplication(self.version)
+            self.alpaca_app.quick_ask_app = self
+            self.alpaca_app.run([])
+        return self.alpaca_app
+
+    def get_alpaca_window(self):
+        app = self.get_alpaca_app()
+        win = app.props.active_window
+        if not win:
+            win = AlpacaWindow(application=app)
+        return win
+
 def main(version):
     logging.basicConfig(
         format="%(levelname)s\t[%(filename)s | %(funcName)s] %(message)s",
@@ -206,11 +251,15 @@ def main(version):
         handlers=[logging.StreamHandler(stream=sys.stdout)]
     )
 
+    for directory in (cache_dir, data_dir, config_dir, source_dir):
+        if not os.path.isdir(directory):
+            os.mkdir(directory)
+
     parser.add_argument('--version', action='store_true', help='Display the application version and exit.')
     parser.add_argument('--new-chat', type=str, metavar='"CHAT"', help="Start a new chat with the specified title.")
     parser.add_argument('--list-chats', action='store_true', help='Display all the current chats')
     parser.add_argument('--select-chat', type=str, metavar='"CHAT"', help="Select a chat on launch")
-    parser.add_argument('--ask', type=str, metavar='"MESSAGE"', help="Open Quick Ask with message")
+    parser.add_argument('--ask', type=str, metavar='"MESSAGE"', help="Open Quick Ask with message")##TODO
     parser.add_argument('--quick-ask', action='store_true', help='Open Quick Ask')
     args = parser.parse_args()
 
@@ -230,11 +279,9 @@ def main(version):
     if args.select_chat:
         SQL.insert_or_update_preferences({'selected_chat': args.select_chat})
 
-    for directory in (cache_dir, data_dir, config_dir, source_dir):
-        if not os.path.isdir(directory):
-            os.mkdir(directory)
+    logger.info(f"Alpaca version: {version}")
 
-
-    app = AlpacaApplication(version)
-    logger.info(f"Alpaca version: {app.version}")
-    return app.run([])
+    if args.quick_ask or args.ask:
+        return QuickAskApplication(version).run([])
+    else:
+        return AlpacaApplication(version).run([])
