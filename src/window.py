@@ -1013,7 +1013,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         # Ollama is available but there are no instances added
         if not any(i.get("type") == "ollama:managed" for i in SQL.get_instances()) and shutil.which("ollama"):
-            SQL.insert_or_update_instance(instance_manager.OllamaManaged({
+            SQL.insert_or_update_instance(Widgets.instance_manager.OllamaManaged({
                 "id": generate_uuid(),
                 "name": "Alpaca",
                 "url": "http://{}:11435".format("127.0.0.1" if sys.platform == "win32" else "0.0.0.0"),
