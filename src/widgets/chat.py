@@ -195,7 +195,7 @@ class Notebook(Gtk.Stack):
                 message_data['content'][0 if ("text" in message_data["content"][0]) else 1]['text'] += message.get_content()
                 if include_metadata:
                     message_data['date'] = message.dt.strftime("%Y/%m/%d %H:%M:%S")
-                    message_data['model'] = message.model
+                    message_data['model'] = message.get_model()
                 messages.append(message_data)
         return messages
 
@@ -352,7 +352,7 @@ class Chat(Gtk.Stack):
                 message_data['content'][0 if ("text" in message_data["content"][0]) else 1]['text'] += message.get_content()
                 if include_metadata:
                     message_data['date'] = message.dt.strftime("%Y/%m/%d %H:%M:%S")
-                    message_data['model'] = message.model
+                    message_data['model'] = message.get_model()
                 messages.append(message_data)
         return messages
 
@@ -493,41 +493,39 @@ class ChatRow(Gtk.ListBoxRow):
         logger.info("Exporting chat (MD)")
         markdown = []
         for message_element in list(self.chat.container):
-            if message_element.text and message_element.dt:
+            if message_element.get_content() and message_element.dt:
                 message_author = _('User')
-                if message_element.bot:
-                    message_author = self.get_root().convert_model_name(message_element.model, 0)
-                if message_element.system:
+                if message_element.get_model():
+                    message_author = self.get_root().convert_model_name(message_element.get_model(), 0)
+                if message_element.mode == 2:
                     message_author = _('System')
 
                 markdown.append('### **{}** | {}'.format(message_author, message_element.dt.strftime("%Y/%m/%d %H:%M:%S")))
-                markdown.append(message_element.text)
-                if message_element.image_c:
-                    for file in message_element.image_c.files:
-                        markdown.append('![🖼️ {}](data:image/{};base64,{})'.format(file.get_name(), file.get_name().split('.')[1], file.file_content))
-                if message_element.attachment_c:
-                    emojis = {
-                        'plain_text': '📃',
-                        'code': '💻',
-                        'pdf': '📕',
-                        'youtube': '📹',
-                        'website': '🌐',
-                        'thought': '🧠'
-                    }
-                    for file in message_element.attachment_c.files:
-                        if obsidian:
-                            file_block = "> [!quote]- {}\n".format(file.get_name())
-                            for line in file.file_content.split("\n"):
-                                file_block += "> {}\n".format(line)
-                            markdown.append(file_block)
-                        else:
-                            markdown.append('<details>\n\n<summary>{} {}</summary>\n\n```TXT\n{}\n```\n\n</details>'.format(emojis.get(file.file_type, ''), file.get_name(), file.file_content))
+                markdown.append(message_element.get_content())
+                for file in message_element.image_attachment_container.get_content():
+                    markdown.append('![🖼️ {}](data:image/{};base64,{})'.format(file.get('name'), file.get('name').split('.')[1], file.get('content')))
+                emojis = {
+                    'plain_text': '📃',
+                    'code': '💻',
+                    'pdf': '📕',
+                    'youtube': '📹',
+                    'website': '🌐',
+                    'thought': '🧠'
+                }
+                for file in message_element.attachment_container.get_content():
+                    if obsidian:
+                        file_block = "> [!quote]- {}\n".format(file.get('name'))
+                        for line in file.get('content').split("\n"):
+                            file_block += "> {}\n".format(line)
+                        markdown.append(file_block)
+                    else:
+                        markdown.append('<details>\n\n<summary>{} {}</summary>\n\n```TXT\n{}\n```\n\n</details>'.format(emojis.get(file.get('type'), '📃'), file.get('name'), file.get('content')))
                 markdown.append('----')
         markdown.append('Generated from [Alpaca](https://github.com/Jeffser/Alpaca)')
         with open(os.path.join(cache_dir, 'export.md'), 'w') as f:
             f.write('\n\n'.join(markdown))
         file_dialog = Gtk.FileDialog(initial_name=f"{self.get_name()}.md")
-        file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.md'): self.on_export_chat(file_dialog, result, temp_path))
+        file_dialog.save(parent=self.get_root(), cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.md'): self.on_export_chat(file_dialog, result, temp_path))
 
     def export_db(self):
         logger.info("Exporting chat (DB)")
@@ -535,14 +533,14 @@ class ChatRow(Gtk.ListBoxRow):
             os.remove(os.path.join(cache_dir, 'export.db'))
         SQL.export_db(self.chat, os.path.join(cache_dir, 'export.db'))
         file_dialog = Gtk.FileDialog(initial_name=f"{self.get_name()}.db")
-        file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.db'): self.on_export_chat(file_dialog, result, temp_path))
+        file_dialog.save(parent=self.get_root(), cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.db'): self.on_export_chat(file_dialog, result, temp_path))
 
     def export_json(self, include_metadata:bool):
         logger.info("Exporting chat (JSON)")
         with open(os.path.join(cache_dir, 'export.json'), 'w') as f:
             f.write(json.dumps({self.get_name() if include_metadata else 'messages': self.chat.convert_to_json(include_metadata)}, indent=4))
         file_dialog = Gtk.FileDialog(initial_name=f"{self.get_name()}.json")
-        file_dialog.save(parent=window, cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.json'): self.on_export_chat(file_dialog, result, temp_path))
+        file_dialog.save(parent=self.get_root(), cancellable=None, callback=lambda file_dialog, result, temp_path=os.path.join(cache_dir, 'export.json'): self.on_export_chat(file_dialog, result, temp_path))
 
     def prompt_export(self):
         options = {
