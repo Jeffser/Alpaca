@@ -25,6 +25,8 @@ TRANSLATORS = [
     "Simon (Ukrainian) https://github.com/OriginalSimon",
     "Marcel Margenberg (German) https://github.com/MehrzweckMandala",
     "Magnus Schlinsog (German) https://github.com/mags0ft",
+    "Yosef Or Boczko (Hebrew) https://github.com/yoseforb",
+    "Aryan Karamtoth (Telugu) https://github.com/SpaciousCoder78",
     "Edoardo Brogiolo (Italian) https://github.com/edo0",
     "Shidore (Japanese) https://github.com/sh1d0re",
     "Henk Leerssen (Dutch) https://github.com/Henkster72",
