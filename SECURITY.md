@@ -2,8 +2,8 @@
 
 ## Supported Packaging and distribution methods
 
-Alpaca only supports [Flatpak](https://flatpak.org/), [Snap](https://snapcraft.io/) and Apple MacOS packaging officially, any other packaging methods might not behave as expected.
-Thus, official security-related support is only provided to the Flatpak, Snap and MacOS distribution as of right now.
+Alpaca only supports [Flatpak](https://flatpak.org/) officially, any other packaging methods might not behave as expected.
+Thus, official security-related support is only provided to the Flatpak distribution as of right now.
 This may be subject to change in the future.
 
 ## Data Handling
