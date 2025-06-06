@@ -3,7 +3,7 @@
 import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
 from ..sql_manager import Instance as SQL
-from ..constants import data_dir
+from ..constants import data_dir, STT_MODELS
 from . import dialog, model_manager
 
 import os, threading
