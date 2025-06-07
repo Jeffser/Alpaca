@@ -441,12 +441,13 @@ class ChatRow(Gtk.ListBoxRow):
 
     def delete(self):
         self.chat.stop_message()
+        window = self.get_root()
         list_box = self.get_parent()
         list_box.remove(self)
         self.chat.get_parent().remove(self.chat)
         SQL.delete_chat(self.chat)
         if len(list(list_box)) == 0:
-            self.get_root().new_chat(chat_type='chat')
+            window.new_chat(chat_type='chat')
         if not list_box.get_selected_row() or list_box.get_selected_row() == self:
             list_box.select_row(list_box.get_row_at_index(0))
 
