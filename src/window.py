@@ -387,6 +387,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             Widgets.dialog.show_toast(_("Please select a model before chatting"), current_chat.get_root())
             return
 
+        # Bring tab to top
         tab = self.chat_list_box.get_selected_row()
         self.chat_list_box.unselect_all()
         self.chat_list_box.remove(tab)
@@ -640,7 +641,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         if future_row:
             current_row = next((t for t in list(self.chat_list_box) if t.chat == self.chat_stack.get_visible_child()), future_row)
-            if list(self.chat_list_box).index(future_row) != list(self.chat_list_box).index(current_row) or future_row.chat.get_visible_child_name() != 'content':
+            if future_row.chat.chat_id != current_row.chat.chat_id or future_row.chat.get_visible_child_name() == 'loading':
                 # Empty Search
                 if self.searchentry_messages.get_text() != '':
                     self.searchentry_messages.set_text('')
