@@ -874,9 +874,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def prepare_alpaca(self):
         self.main_navigation_view.replace_with_tags(['chat'])
-        # Notice
-        if not self.settings.get_value('last-notice-seen').unpack() == self.notice_dialog.get_name():
-            self.notice_dialog.present(self)
 
         #Chat History
         self.load_history()
@@ -1232,5 +1229,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.install_ollama_button.set_sensitive(False)
 
         self.prepare_alpaca()
-        if not self.settings.get_value('skip-welcome').unpack():
+        if self.settings.get_value('skip-welcome').unpack():
+            if not self.settings.get_value('last-notice-seen').unpack() == self.notice_dialog.get_name():
+                self.notice_dialog.present(self)
+        else:
             self.main_navigation_view.replace_with_tags(['welcome'])
+

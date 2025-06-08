@@ -19,7 +19,7 @@ class DictateToggleButton(Gtk.Stack):
     def __init__(self, message_element):
         self.message_element = message_element
         super().__init__(
-            visible = importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice')
+            visible = importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice') and False
         )
         self.button = Gtk.ToggleButton(
             halign=1,
