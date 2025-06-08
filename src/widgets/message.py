@@ -429,7 +429,7 @@ class Message(Gtk.Box):
             result_text = self.get_content()
             GLib.idle_add(self.block_container.set_content, result_text)
             self.dt = datetime.datetime.now()
-            self.message.save()
+            self.save()
             self.update_profile_picture()
             if result_text:
                 dialog.show_notification(
