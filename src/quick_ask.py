@@ -115,7 +115,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
         self.message_text_view.set_extra_menu(adapter.get_menu_model())
         self.message_text_view.insert_action_group('spelling', adapter)
         adapter.set_enabled(True)
-        self.message_text_view_scrolled_window.get_parent().append(Widgets.speech_recognition.MicrophoneButton(self.message_text_view))
+        self.message_text_view_scrolled_window.get_parent().append(Widgets.voice.MicrophoneButton(self.message_text_view))
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         self.set_focus(self.message_text_view)
 

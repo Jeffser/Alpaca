@@ -1119,7 +1119,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         enter_key_controller.connect("key-pressed", enter_key_handler)
         self.message_text_view.add_controller(enter_key_controller)
 
-        self.message_text_view_scrolled_window.get_parent().append(Widgets.speech_recognition.MicrophoneButton(self.message_text_view))
+        self.message_text_view_scrolled_window.get_parent().append(Widgets.voice.MicrophoneButton(self.message_text_view))
 
         for name, data in {
             'send': {

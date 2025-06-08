@@ -9,7 +9,7 @@ widgets = [
   'attachments.py',
   'model_manager.py',
   'instance_manager.py',
-  'speech_recognition.py'
+  'voice.py'
 ]
 
 install_data(widgets, install_dir: moduledir)

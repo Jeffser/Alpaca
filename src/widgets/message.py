@@ -8,7 +8,7 @@ from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
 import os, datetime, threading, sys, base64, logging
 from ..constants import TTS_VOICES, TTS_AUTO_MODES
 from ..sql_manager import convert_model_name, Instance as SQL
-from . import model_manager, attachments, blocks, dialog
+from . import model_manager, attachments, blocks, dialog, voice
 
 logger = logging.getLogger(__name__)
 
@@ -65,19 +65,8 @@ class OptionPopup(Gtk.Popover):
             )
             self.regenerate_button.connect('clicked', lambda *_: self.regenerate_message())
             container.append(self.regenerate_button)
-
-        self.tts_stack = Gtk.Stack()
-        container.append(self.tts_stack)
-        self.tts_button = Gtk.ToggleButton(
-            halign=1,
-            hexpand=True,
-            icon_name='bullhorn-symbolic',
-            css_classes=["flat"],
-            tooltip_text=_("Dictate Message")
-        )
-        self.tts_button.connect('toggled', self.dictate_message)
-        self.tts_stack.add_named(self.tts_button, 'button')
-        self.tts_stack.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
+        self.tts_button = voice.DictateToggleButton(self.message_element)
+        container.append(self.tts_button)
 
     def delete_message(self):
         logger.debug("Deleting message")
@@ -102,62 +91,6 @@ class OptionPopup(Gtk.Popover):
         self.message_element.main_stack.get_child_by_name('editing').set_visible(True)
         self.message_element.main_stack.get_child_by_name('editing').set_content(self.message_element.get_content())
         self.message_element.main_stack.set_visible_child_name('editing')
-
-    def dictate_message(self, button):
-        # I know I'm not supposed to be importing stuff inside functions
-        # but these libraries take a while to import and make the app launch 2x slower
-        def run(text:str, btn):
-            GLib.idle_add(self.tts_stack.set_visible_child_name, 'loading')
-            import sounddevice as sd
-            from kokoro import KPipeline
-            voice = None
-            if self.message_element.get_model():
-                voice = SQL.get_model_preferences(self.message_element.get_model()).get('voice', None)
-            if not voice:
-                voice = TTS_VOICES.get(list(TTS_VOICES.keys())[self.get_root().settings.get_value('tts-model').unpack()])
-
-            if model_manager.tts_model_path:
-                if not os.path.islink(os.path.join(model_manager.tts_model_path, '{}.pt'.format(voice))) and self.get_root().get_name() == 'AlpacaWindow':
-                    pretty_name = [k for k, v in TTS_VOICES.items() if v == voice]
-                    if len(pretty_name) > 0:
-                        pretty_name = pretty_name[0]
-                        self.get_root().local_model_flowbox.append(model_manager.TextToSpeechModel(pretty_name))
-            tts_engine = KPipeline(lang_code=voice[0])
-
-            generator = tts_engine(
-                text,
-                voice=voice,
-                speed=1.2,
-                split_pattern=r'\n+'
-            )
-            try:
-                for gs, ps, audio in generator:
-                    if not btn.get_active():
-                        break
-                    sd.play(audio, samplerate=24000)
-                    GLib.idle_add(self.tts_stack.set_visible_child_name, 'button')
-                    sd.wait()
-            except Exception as e:
-                dialog.simple_error(
-                    parent=self.get_root(),
-                    title=_('Text to Speech Error'),
-                    body=_('An error occurred while running text to speech model'),
-                    error_log=e,
-                )
-            GLib.idle_add(self.tts_button.set_active, False)
-
-        if button.get_active():
-            GLib.idle_add(self.message_element.add_css_class, 'tts_message')
-            if self.get_root().message_dictated and self.get_root().message_dictated.popup.tts_button.get_active():
-                 self.get_root().message_dictated.popup.tts_button.set_active(False)
-            self.get_root().message_dictated = self.message_element
-            threading.Thread(target=run, args=(self.message_element.get_content(), button)).start()
-        else:
-            import sounddevice as sd
-            GLib.idle_add(self.message_element.remove_css_class, 'tts_message')
-            GLib.idle_add(self.tts_stack.set_visible_child_name, 'button')
-            self.get_root().message_dictated = None
-            threading.Thread(target=sd.stop).start()
 
     def regenerate_message(self):
         chat = self.message_element.chat
