@@ -6,7 +6,7 @@ from ..sql_manager import Instance as SQL
 from ..constants import data_dir, STT_MODELS
 from . import dialog, model_manager
 
-import os, threading
+import os, threading, importlib.util
 import numpy as np
 
 class MicrophoneButton(Gtk.Stack):
@@ -15,7 +15,9 @@ class MicrophoneButton(Gtk.Stack):
     def __init__(self, text_view):
         self.text_view = text_view
 
-        super().__init__()
+        super().__init__(
+            visible = importlib.util.find_spec('whisper')
+        )
         button = Gtk.ToggleButton(
             icon_name='audio-input-microphone-symbolic',
             tooltip_text=_('Use Speech Recognition'),
