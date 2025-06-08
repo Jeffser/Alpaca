@@ -1043,7 +1043,7 @@ def update_instance_list():
     window.instance_listbox.remove_all()
     window.instance_listbox.set_selection_mode(0)
     instances = SQL.get_instances()
-    selected_instance = SQL.get_preference('selected_instance')
+    selected_instance = window.settings.get_value('selected-instance').unpack()
     if len(instances) > 0:
         window.instance_manager_stack.set_visible_child_name('content')
         window.instance_listbox.set_selection_mode(1)

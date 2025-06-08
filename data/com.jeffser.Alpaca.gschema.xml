@@ -1,19 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="alpaca">
 	<schema id="com.jeffser.Alpaca" path="/com/jeffser/Alpaca/">
-	</schema>
-	<schema id="com.jeffser.Alpaca.State" path="/com/jeffser/Alpaca/State/">
-		<key name="width" type="i">
+		<key name="default-width" type="i">
 			<default>1300</default>
 		</key>
-		<key name="height" type="i">
+		<key name="default-height" type="i">
 			<default>800</default>
 		</key>
-		<key name="is-maximized" type="b">
+		<key name="maximized" type="b">
 			<default>false</default>
 		</key>
-		<key name="is-fullscreen" type="b">
+	  <key name="hide-on-close" type="b">
 			<default>false</default>
+		</key>
+	  <key name="skip-welcome" type="b">
+			<default>false</default>
+		</key>
+	  <key name="last-notice-seen" type="s">
+			<default>""</default>
+		</key>
+	  <key name="powersaver-warning" type="b">
+			<default>true</default>
+		</key>
+	  <key name="zoom" type="i">
+			<default>100</default>
+		</key>
+	  <key name="stt-model" type="i">
+			<default>1</default>
+		</key>
+	  <key name="stt-language" type="i">
+			<default>0</default>
+		</key>
+	  <key name="stt-auto-send" type="b">
+			<default>false</default>
+		</key>
+	  <key name="tts-model" type="i">
+			<default>0</default>
+		</key>
+	  <key name="tts-auto-mode" type="i">
+			<default>0</default>
+		</key>
+	  <key name="default-chat" type="s">
+			<default>""</default>
+		</key>
+	  <key name="selected-instance" type="s">
+			<default>""</default>
 		</key>
 	</schema>
 </schemalist>

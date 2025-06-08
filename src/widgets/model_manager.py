@@ -947,7 +947,6 @@ def update_local_model_list():
                         add_text_to_speech_model(pretty_name)
 
     # Normal Models
-    default_model = SQL.get_preference('default_model')
     threads=[]
     local_models = window.get_current_instance().get_local_models()
     for model in local_models:

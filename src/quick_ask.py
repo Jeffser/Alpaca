@@ -37,7 +37,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
         self.close()
 
     def get_current_instance(self):
-        selected_instance = SQL.get_preference('selected_instance')
+        selected_instance = self.settings.get_value('selected-instance').unpack()
         instances = SQL.get_instances()
         if len(instances) > 0:
             matching_instances = [i for i in instances if i.get('id') == selected_instance]
@@ -116,7 +116,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
         self.message_text_view.insert_action_group('spelling', adapter)
         adapter.set_enabled(True)
         self.message_text_view_scrolled_window.get_parent().append(Widgets.speech_recognition.MicrophoneButton(self.message_text_view))
-
+        self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         self.set_focus(self.message_text_view)
 
         chat = Widgets.chat.Chat(

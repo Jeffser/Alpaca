@@ -111,7 +111,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_manager = None
     global_attachment_container = None
 
-    background_switch = Gtk.Template.Child()
     powersaver_warning_switch = Gtk.Template.Child()
     mic_group = Gtk.Template.Child()
     mic_auto_send_switch = Gtk.Template.Child()
@@ -148,7 +147,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def closing_notice(self, dialog):
-        SQL.insert_or_update_preferences({"last_notice_seen": dialog.get_name()})
+        self.settings.set_string('last-notice-seen', dialog.get_name())
 
     @Gtk.Template.Callback()
     def add_instance(self, button):
@@ -181,11 +180,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def instance_changed(self, listbox, row):
-        """
-        This method is called when the selected instance changes.
-        It updates corresponding UI elements, selections and internal variables.
-        """
-
         def change_instance():
             if self.last_selected_instance_row:
                 self.last_selected_instance_row.instance.stop()
@@ -196,7 +190,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             GLib.idle_add(Widgets.model_manager.update_available_model_list)
 
             if row:
-                SQL.insert_or_update_preferences({'selected_instance': row.instance.instance_id})
+                self.settings.set_string('selected-instance', row.instance.instance_id)
 
             GLib.idle_add(self.chat_list_box.get_selected_row().update_profile_pictures)
         if listbox.get_sensitive():
@@ -478,70 +472,20 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if button.get_label() == "Next":
             self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
         else:
-            SQL.insert_or_update_preferences({'skip_welcome_page': True})
-            self.prepare_alpaca()
+            self.settings.set_boolean('skip-welcome', True)
+            self.main_navigation_view.replace_with_tags(['chat'])
 
     @Gtk.Template.Callback()
-    def zoom_changed(self, spinner, force:bool=False):
-        if force or SQL.get_preference('zoom', 100) != int(spinner.get_value()):
-            threading.Thread(target=SQL.insert_or_update_preferences, args=({'zoom': int(spinner.get_value())},)).start()
-            settings = Gtk.Settings.get_default()
-            settings.reset_property('gtk-xft-dpi')
-            settings.set_property('gtk-xft-dpi',  settings.get_property('gtk-xft-dpi') + (int(spinner.get_value()) - 100) * 400)
-
-    @Gtk.Template.Callback()
-    def switch_run_on_background(self, switch, user_data):
-        if switch.get_sensitive():
-            self.set_hide_on_close(switch.get_active())
-            SQL.insert_or_update_preferences({'run_on_background': switch.get_active()})
-    
-    @Gtk.Template.Callback()
-    def switch_mic_auto_send(self, switch, user_data):
-        if switch.get_sensitive():
-            SQL.insert_or_update_preferences({'mic_auto_send': switch.get_active()})
-
-    @Gtk.Template.Callback()
-    def selected_mic_model(self, combo, user_data):
-        if combo.get_sensitive():
-            model = combo.get_selected_item().get_string().split(' (')[0].lower()
-            if model:
-                SQL.insert_or_update_preferences({'mic_model': model})
-
-    @Gtk.Template.Callback()
-    def selected_mic_language(self, combo, user_data):
-        if combo.get_sensitive():
-            language = combo.get_selected_item().get_string().split(' (')[-1][:-1]
-            if language:
-                SQL.insert_or_update_preferences({'mic_language': language})
-
-    @Gtk.Template.Callback()
-    def selected_tts_voice(self, combo, user_data):
-        if combo.get_sensitive():
-            language = TTS_VOICES.get(combo.get_selected_item().get_string())
-            if language:
-                SQL.insert_or_update_preferences({'tts_voice': language})
-
-    @Gtk.Template.Callback()
-    def selected_tts_auto_mode(self, combo, user_data):
-        if combo.get_sensitive():
-            mode = TTS_AUTO_MODES.get(combo.get_selected_item().get_string())
-            if mode:
-                SQL.insert_or_update_preferences({'tts_auto_mode': mode})
-
-    @Gtk.Template.Callback()
-    def switch_powersaver_warning(self, switch, user_data):
-        if switch.get_sensitive():
-            if switch.get_active():
-                self.banner.set_revealed(Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled() and self.get_current_instance().instance_type == 'ollama:managed')
-            else:
-                self.banner.set_revealed(False)
-            SQL.insert_or_update_preferences({'powersaver_warning': switch.get_active()})
+    def zoom_changed(self, spinner):
+        settings = Gtk.Settings.get_default()
+        settings.reset_property('gtk-xft-dpi')
+        settings.set_property('gtk-xft-dpi',  settings.get_property('gtk-xft-dpi') + (int(spinner.get_value()) - 100) * 400)
 
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
         def close():
-            selected_chat = self.chat_list_box.get_selected_row().get_name()
-            SQL.insert_or_update_preferences({'selected_chat': selected_chat})
+            selected_chat = self.chat_list_box.get_selected_row()
+            self.settings.set_string('default-chat', selected_chat.chat.chat_id)
             self.get_current_instance().stop()
             if self.message_dictated:
                 self.message_dictated.footer.popup.tts_button.set_active(False)
@@ -789,12 +733,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def load_history(self):
         logger.debug("Loading history")
-        selected_chat = SQL.get_preference('selected_chat')
+        selected_chat = self.settings.get_value('default-chat').unpack()
         chats = SQL.get_chats()
         if len(chats) > 0:
             threads = []
-            if selected_chat not in [row[1] for row in chats]:
-                selected_chat = chats[0][1]
+            if selected_chat not in [row[0] for row in chats]:
+                selected_chat = chats[0][0]
             for row in chats:
                 self.add_chat(
                     chat_name=row[1],
@@ -802,7 +746,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     chat_type=row[2],
                     mode=0
                 )
-                if row[1] == selected_chat:
+                if row[0] == selected_chat:
                     self.chat_list_box.select_row(list(self.chat_list_box)[-1])
         else:
             self.chat_list_box.select_row(self.new_chat().row)
@@ -930,7 +874,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def prepare_alpaca(self):
         self.main_navigation_view.replace_with_tags(['chat'])
         # Notice
-        if not SQL.get_preference('last_notice_seen') == self.notice_dialog.get_name():
+        if not self.settings.get_value('last-notice-seen').unpack() == self.notice_dialog.get_name():
             self.notice_dialog.present(self)
 
         #Chat History
@@ -941,67 +885,36 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.get_application().args.new_chat:
             self.new_chat(self.get_application().args.new_chat)
 
-        self.powersaver_warning_switch.set_active(SQL.get_preference('powersaver_warning', True))
-        self.powersaver_warning_switch.set_sensitive(True)
-        self.background_switch.set_active(SQL.get_preference('run_on_background', False))
-        self.background_switch.set_sensitive(True)
-        self.mic_auto_send_switch.set_active(SQL.get_preference('mic_auto_send', False))
-        self.mic_auto_send_switch.set_sensitive(True)
-        self.zoom_spin.set_value(SQL.get_preference('zoom', 100))
-        self.zoom_spin.set_sensitive(True)
-        self.zoom_changed(self.zoom_spin, True)
         self.global_attachment_container = Widgets.attachments.AttachmentContainer()
         self.bottom_chat_controls_container.prepend(self.global_attachment_container)
 
-        selected_mic_model = SQL.get_preference('mic_model', 'base')
-        selected_index = 0
-        string_list = Gtk.StringList()
-        for i, (model, size) in enumerate(STT_MODELS.items()):
-            if model == selected_mic_model:
-                selected_index = i
-            string_list.append('{} ({})'.format(model.title(), size))
-
         self.mic_group.set_visible(importlib.util.find_spec('whisper'))
 
+        string_list = Gtk.StringList()
+        for model, size in STT_MODELS.items():
+            string_list.append('{} ({})'.format(model.title(), size))
         self.mic_model_combo.set_model(string_list)
-        self.mic_model_combo.set_selected(selected_index)
-        self.mic_model_combo.set_sensitive(True)
+        self.settings.bind('stt-model', self.mic_model_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
 
-        selected_language = SQL.get_preference('mic_language', 'en')
-        selected_index = 0
         string_list = Gtk.StringList()
-        for i, lan in enumerate(SPEACH_RECOGNITION_LANGUAGES):
-            if lan == selected_language:
-                selected_index = i
+        for lan in SPEACH_RECOGNITION_LANGUAGES:
             string_list.append('{} ({})'.format(icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title(), lan))
-
         self.mic_language_combo.set_model(string_list)
-        self.mic_language_combo.set_selected(selected_index)
-        self.mic_language_combo.set_sensitive(True)
+        self.settings.bind('stt-language', self.mic_language_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
 
-        selected_voice = SQL.get_preference('tts_voice', '')
-        selected_index = 0
+        self.settings.bind('stt-auto-send', self.mic_auto_send_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
+
         string_list = Gtk.StringList()
-        for i, (name, value) in enumerate(TTS_VOICES.items()):
-            if value == selected_voice:
-                selected_index = i
+        for name in TTS_VOICES:
             string_list.append(name)
-
         self.tts_voice_combo.set_model(string_list)
-        self.tts_voice_combo.set_selected(selected_index)
-        self.tts_voice_combo.set_sensitive(True)
+        self.settings.bind('tts-model', self.tts_voice_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
 
-        selected_tts_mode = SQL.get_preference('tts_auto_mode', '')
-        selected_index = 0
         string_list = Gtk.StringList()
-        for i, (name, value) in enumerate(TTS_AUTO_MODES.items()):
-            if value == selected_tts_mode:
-                selected_index = i
+        for name in TTS_AUTO_MODES:
             string_list.append(name)
-
         self.tts_auto_mode_combo.set_model(string_list)
-        self.tts_auto_mode_combo.set_selected(selected_index)
-        self.tts_auto_mode_combo.set_sensitive(True)
+        self.settings.bind('tts-auto-mode', self.tts_auto_mode_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
 
         Widgets.instance_manager.update_instance_list()
 
@@ -1166,25 +1079,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         if sys.platform not in ('win32', 'darwin'):
             self.model_manager_stack.set_enable_transitions(True)
+            self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
+            for el in ("default-width", "default-height", "maximized", "hide-on-close"):
+                self.settings.bind(el, self, el, Gio.SettingsBindFlags.DEFAULT)
 
-            # Logic to remember the window size upon application shutdown and
-            # startup; will restore the state of the app after closing and
-            # opening it again, especially useful for large, HiDPI displays.
-            self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca.State")
+            self.settings.bind('powersaver-warning', self.powersaver_warning_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
+            self.settings.bind('zoom', self.zoom_spin, 'value', Gio.SettingsBindFlags.DEFAULT)
 
-            # Please also see the GNOME developer documentation:
-            # https://developer.gnome.org/documentation/tutorials/save-state.html
-            for el in [
-                ("width", "default-width"),
-                ("height", "default-height"),
-                ("is-maximized", "maximized")
-            ]:
-                self.settings.bind(
-                    el[0],
-                    self,
-                    el[1],
-                    Gio.SettingsBindFlags.DEFAULT
-                )
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
@@ -1312,8 +1213,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
         adapter.set_enabled(True)
         self.set_focus(self.message_text_view)
             
-        Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda monitor, *_: self.banner.set_revealed(monitor.get_power_saver_enabled() and self.powersaver_warning_switch.get_active() and self.get_current_instance().instance_type == 'ollama:managed'))
+
+        def verify_powersaver_mode():
+            self.banner.set_revealed(
+                Gio.PowerProfileMonitor.dup_default().get_power_saver_enabled() and
+                self.settings.get_value('powersaver-warning').unpack() and
+                self.get_current_instance().instance_type == 'ollama:managed'
+            )
+        Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda *_: verify_powersaver_mode())
         self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
+
 
         if shutil.which('ollama'):
             text = _('Already Installed!')
@@ -1321,7 +1230,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.install_ollama_button.set_tooltip_text(text)
             self.install_ollama_button.set_sensitive(False)
 
-        if SQL.get_preference('skip_welcome_page', False):
-            self.prepare_alpaca()
-        else:
+        self.prepare_alpaca()
+        if not self.settings.get_value('skip-welcome').unpack():
             self.main_navigation_view.replace_with_tags(['welcome'])

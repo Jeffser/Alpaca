@@ -3,7 +3,7 @@
 import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
 from ..sql_manager import Instance as SQL
-from ..constants import data_dir, STT_MODELS
+from ..constants import data_dir, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES
 from . import dialog, model_manager
 
 import os, threading, importlib.util
@@ -29,7 +29,7 @@ class MicrophoneButton(Gtk.Stack):
         self.mic_timeout = 0
 
     def toggled(self, button):
-        language=SQL.get_preference('mic_language')
+        language=SPEACH_RECOGNITION_LANGUAGES[self.get_root().settings.get_value('stt-language').unpack()]
         buffer = self.text_view.get_buffer()
         model_name = os.getenv("ALPACA_SPEECH_MODEL", "base")
 
@@ -77,7 +77,7 @@ class MicrophoneButton(Gtk.Stack):
                 )
 
                 try:
-                    mic_auto_send = SQL.get_preference('mic_auto_send', False)
+                    mic_auto_send = self.get_root().settings.get_value('stt-auto-send').unpack()
                     while button.get_active():
                         frames = []
                         for i in range(0, int(samplerate / 1024 * 2)):

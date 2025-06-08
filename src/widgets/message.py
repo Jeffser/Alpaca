@@ -6,7 +6,7 @@ Handles the message widget
 import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
 import os, datetime, threading, sys, base64, logging
-from ..constants import TTS_VOICES
+from ..constants import TTS_VOICES, TTS_AUTO_MODES
 from ..sql_manager import convert_model_name, Instance as SQL
 from . import model_manager, attachments, blocks, dialog
 
@@ -112,11 +112,10 @@ class OptionPopup(Gtk.Popover):
             from kokoro import KPipeline
             voice = None
             if self.message_element.get_model():
-                voice = SQL.get_model_preferences(self.message_element.get_model()).get('voice', 'af_heart')
-            else:
-                voice = SQL.get_preference('tts_voice', 'af_heart')
+                voice = SQL.get_model_preferences(self.message_element.get_model()).get('voice', None)
             if not voice:
-                voice = 'af_heart'
+                voice = TTS_VOICES.get(list(TTS_VOICES.keys())[self.get_root().settings.get_value('tts-model').unpack()])
+
             if model_manager.tts_model_path:
                 if not os.path.islink(os.path.join(model_manager.tts_model_path, '{}.pt'.format(voice))) and self.get_root().get_name() == 'AlpacaWindow':
                     pretty_name = [k for k, v in TTS_VOICES.items() if v == voice]
@@ -440,7 +439,7 @@ class Message(Gtk.Box):
                     icon=Gio.ThemedIcon.new('chat-message-new-symbolic')
                 )
 
-            tts_auto_mode = SQL.get_preference('tts_auto_mode', 'never')
+            tts_auto_mode = TTS_AUTO_MODES.get(list(TTS_AUTO_MODES.keys())[self.get_root().settings.get_value('tts-auto-mode').unpack()])
             if tts_auto_mode == 'always' or (tts_auto_mode == 'focused' and self.get_root().is_active()):
                 self.popup.tts_button.set_active(True)
 

@@ -15,8 +15,7 @@ import json
 import sys
 
 from .constants import data_dir
-#from .widgets import instance_manager
-
+from gi.repository import Gio
 
 def generate_uuid() -> str:
     return f"{datetime.datetime.today().strftime('%Y%m%d%H%M%S%f')}{uuid.uuid4().hex}"
@@ -138,11 +137,6 @@ class Instance:
                     "picture": "TEXT",
                     "voice": "TEXT"
                 },
-                "preferences": {
-                    "id": "TEXT NOT NULL PRIMARY KEY",
-                    "value": "TEXT",
-                    "type": "TEXT",
-                },
                 "instances": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
                     "name": "TEXT NOT NULL",
@@ -176,22 +170,37 @@ class Instance:
 
             # Remove stuff from previous versions (cleaning)
             try:
-                c.cursor.execute(
-                    "DELETE FROM preferences WHERE id IN ('default_model', \
-                    'local_port', 'remote_url', 'remote_bearer_token', 'run_remote', \
-                    'idle_timer', 'model_directory', 'temperature', 'seed', 'keep_alive', \
-                    'show_welcome_dialog')"
-                )
-                c.cursor.execute("DROP TABLE overrides")
-            except Exception:
-                pass
-            try:
                 model_pictures = c.cursor.execute("SELECT id, picture FROM model")
                 for p in model_pictures:
                     c.cursor.execute("INSERT INTO model_preferences (id, picture) VALUES (?, ?)", (p[0], p[1]))
                 c.cursor.execute("DROP TABLE model")
             except Exception:
                 pass
+
+            # Move preferences to GLib
+            if c.cursor.execute("SELECT name FROM sqlite_master WHERE type='table' and name='preferences';").fetchall() != []:
+                settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
+                settings_keys = {
+                    'skip_welcome_page': 'skip-welcome',
+                    'selected_instance': 'selected-instance',
+                    'last_notice_seen': 'last-notice-seen',
+                    'selected_chat': 'default-chat',
+                    'zoom': 'zoom',
+                    'run_on_background': 'hide-on-close',
+                    'powersaver_warning': 'powersaver-warning',
+                    'mic_auto_send': 'stt-auto-send',
+                }
+                old_preferences = Instance.get_preferences()
+                for old_key, new_key in settings_keys.items():
+                    old_value = old_preferences.get(old_key)
+                    if old_value:
+                        if isinstance(old_value, bool):
+                            settings.set_boolean(new_key, old_value)
+                        elif isinstance(old_value, int):
+                            settings.set_int(new_key, old_value)
+                        elif isinstance(old_value, str):
+                            settings.set_string(new_key, old_value)
+                c.cursor.execute("DROP TABLE preferences")
 
     ###########
     ## CHATS ##
@@ -474,53 +483,9 @@ class Instance:
                 "DELETE FROM attachment WHERE id=?", (attachment.get_name(),)
             )
 
-    #################
-    ## PREFERENCES ##
-    #################
-
-    def insert_or_update_preferences(preferences: dict) -> None:
-        with SQLiteConnection() as c:
-            for preference_id, preference_value in preferences.items():
-                if c.cursor.execute(
-                    "SELECT id FROM preferences WHERE id=?", (preference_id,)
-                ).fetchone():
-                    c.cursor.execute(
-                        "UPDATE preferences SET value=?, type=? WHERE id=?",
-                        (
-                            preference_value,
-                            str(type(preference_value)),
-                            preference_id,
-                        ),
-                    )
-                else:
-                    c.cursor.execute(
-                        "INSERT INTO preferences (id, value, type) VALUES (?, ?, ?)",
-                        (
-                            preference_id,
-                            preference_value,
-                            str(type(preference_value)),
-                        ),
-                    )
-
-    def get_preference(preference_name: str, default=None) -> object:
-        with SQLiteConnection() as c:
-            result = c.cursor.execute(
-                "SELECT value, type FROM preferences WHERE id=?",
-                (preference_name,),
-            ).fetchone()
-
-        if result:
-            type_map = {
-                "<class 'int'>": int,
-                "<class 'float'>": float,
-                "<class 'bool'>": lambda x: x == "1",
-            }
-            if result[1] in type_map:
-                return type_map[result[1]](result[0])
-
-            return result[0]
-
-        return default
+    ##############################
+    ## PREFERENCES (DEPRECATED) ##
+    ##############################
 
     def get_preferences() -> dict:
         with SQLiteConnection() as c:
