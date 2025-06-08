@@ -422,7 +422,6 @@ class Message(Gtk.Box):
                 GLib.idle_add(self.chat.row.spinner.set_visible, False)
                 if self.get_root().chat_list_box.get_selected_row().get_name() != self.chat.get_name():
                     GLib.idle_add(self.chat.row.indicator.set_visible, True)
-                self.save()
             else:
                 GLib.idle_add(self.get_root().save_button.set_sensitive, True)
 
@@ -430,6 +429,7 @@ class Message(Gtk.Box):
             result_text = self.get_content()
             GLib.idle_add(self.block_container.set_content, result_text)
             self.dt = datetime.datetime.now()
+            self.message.save()
             self.update_profile_picture()
             if result_text:
                 dialog.show_notification(
