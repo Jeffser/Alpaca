@@ -12,7 +12,7 @@ from pydantic import BaseModel
 from ..ollama_models import OLLAMA_MODELS
 from . import dialog, tools
 from ..constants import data_dir, cache_dir
-from ..sql_manager import generate_uuid, Instance as SQL
+from ..sql_manager import generate_uuid, convert_model_name, Instance as SQL
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +46,7 @@ class BaseInstance:
         bot_message.chat.busy = True
         if bot_message.chat.chat_id:
             bot_message.chat.row.spinner.set_visible(True)
-            bot_message.get_root().switch_send_stop_button(False)
+            bot_message.get_root().action_button_stack.set_visible_child_name('stop')
         bot_message.chat.set_visible_child_name('content')
 
         messages = bot_message.chat.convert_to_json()[:list(bot_message.chat.container).index(bot_message)]
@@ -413,7 +413,7 @@ class BaseInstance:
             title_model_index = 0
             string_list = Gtk.StringList()
             for i, model in enumerate(self.get_local_models()):
-                string_list.append(window.convert_model_name(model.get('name'), 0))
+                string_list.append(convert_model_name(model.get('name'), 0))
                 if model.get('name') == self.default_model:
                     default_model_index = i
                 if model.get('name') == self.title_model:
@@ -436,8 +436,8 @@ class BaseInstance:
                 'seed': lambda val: setattr(self, 'seed', val),
                 'override': lambda name, val: self.overrides.__setitem__(name, val),
                 'model_directory': lambda val: setattr(self, 'model_directory', val),
-                'default_model': lambda val: setattr(self, 'default_model', window.convert_model_name(val, 1)),
-                'title_model': lambda val: setattr(self, 'title_model', window.convert_model_name(val, 1))
+                'default_model': lambda val: setattr(self, 'default_model', convert_model_name(val, 1)),
+                'title_model': lambda val: setattr(self, 'title_model', convert_model_name(val, 1))
             }
 
             for group in groups:

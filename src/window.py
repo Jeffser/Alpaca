@@ -40,12 +40,11 @@ from datetime import datetime
 
 import gi
 
-gi.require_version('GtkSource', '5')
 gi.require_version('Spelling', '1')
 
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, Spelling
 
-from .sql_manager import generate_uuid, generate_numbered_name, Instance as SQL
+from .sql_manager import generate_uuid, generate_numbered_name, convert_model_name, Instance as SQL
 from . import widgets as Widgets
 from .constants import SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES, TTS_AUTO_MODES, STT_MODELS, data_dir, source_dir, cache_dir
 
@@ -219,7 +218,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 gguf_path = self.model_creator_base.get_subtitle()
                 Widgets.model_manager.create_model(data_json, gguf_path)
             else:
-                data_json['from'] = self.convert_model_name(self.model_creator_base.get_selected_item().get_string(), 1)
+                data_json['from'] = convert_model_name(self.model_creator_base.get_selected_item().get_string(), 1)
                 Widgets.model_manager.create_model(data_json)
 
     @Gtk.Template.Callback()
@@ -240,7 +239,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def model_creator_base_changed(self, comborow, params):
         model_name = comborow.get_selected_item().get_string()
         if model_name != 'GGUF' and not comborow.get_subtitle():
-            model_name = self.convert_model_name(model_name, 1)
+            model_name = convert_model_name(model_name, 1)
 
             GLib.idle_add(self.model_creator_name.set_text, model_name.split(':')[0])
             GLib.idle_add(self.model_creator_tag.set_text, 'custom')
@@ -298,7 +297,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GLib.idle_add(self.model_creator_base.set_subtitle, '')
         string_list = Gtk.StringList()
         if selected_model:
-            GLib.idle_add(string_list.append, self.convert_model_name(selected_model, 0))
+            GLib.idle_add(string_list.append, convert_model_name(selected_model, 0))
         else:
             [GLib.idle_add(string_list.append, value.model_title) for value in Widgets.model_manager.get_local_models().values()]
         GLib.idle_add(self.model_creator_base.set_model, string_list)
@@ -592,32 +591,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             SQL.insert_or_update_message(m_element_bot)
             threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.tool_listbox), True)).start()
 
-    def convert_model_name(self, name:str, mode:int): # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag   |   mode=2 name:tag -> name, tag
-        try:
-            if mode == 0:
-                if ':' in name:
-                    name = name.split(':')
-                    if name[1].lower() in ('latest', 'custom'):
-                        return name[0].replace('-', ' ').title()
-                    else:
-                        return '{} ({})'.format(name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title())
-                else:
-                    return name.replace('-', ' ').title()
-            elif mode == 1:
-                if ' (' in name:
-                    name = name.split(' (')
-                    return '{}:{}'.format(name[0].replace(' ', '-').lower(), name[1][:-1].replace(' ', '-').lower())
-                else:
-                    return name.replace(' ', '-').lower()
-            elif mode == 2:
-                if ':' in name:
-                    name = name.split(':')
-                    return name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title()
-                else:
-                    return name.replace('-', ' ').title(), None
-        except Exception as e:
-            pass
-
     @Gtk.Template.Callback()
     def chat_changed(self, listbox, future_row):
         def find_model_index(model_name:str):
@@ -651,7 +624,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.chat_stack.set_visible_child(future_row.chat)
 
                 # Sync stop/send button to chat's state
-                self.switch_send_stop_button(not future_row.chat.busy)
+                self.action_button_stack.set_visible_child_name('stop' if future_row.chat.busy else 'send')
                 if load_chat_thread:
                     load_chat_thread.join()
                 # Select the correct model for the chat
@@ -675,9 +648,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
             if new_text != text:
                 editable.stop_emission_by_name("insert-text")
-
-    def switch_send_stop_button(self, send:bool):
-        self.action_button_stack.set_visible_child_name('send' if send else 'stop')
 
     def add_chat(self, chat_name:str, chat_id:str, chat_type:str, mode:int) -> Widgets.chat.Chat or None: #mode = 0: append, mode = 1: prepend
         chat_name = chat_name.strip()
@@ -836,7 +806,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        GtkSource.init()
         Widgets.model_manager.window = self
         Widgets.instance_manager.window = self
 

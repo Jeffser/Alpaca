@@ -23,7 +23,9 @@ Main script run at launch, handles actions, about dialog and the app itself (not
 import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
-from gi.repository import Gtk, Gio, Adw
+gi.require_version('GtkSource', '5')
+from gi.repository import Gtk, Gio, Adw, GtkSource
+GtkSource.init()
 
 from .constants import TRANSLATORS, cache_dir, data_dir, config_dir, source_dir
 from .window import AlpacaWindow
