@@ -484,5 +484,54 @@ class GlobalMessageTextView(GtkSource.View):
                 mode = 1
             elif state & Gdk.ModifierType.ALT_MASK: # Alt, send tool message
                 mode = 2
-            self.get_root().send_message(mode=mode)
+            self.get_root().send_message(mode)
             return True
+
+class GlobalActionStack(Gtk.Stack):
+    __gtype_name__ = 'AlpacaGlobalActionStack'
+
+    def __init__(self):
+        super().__init__(
+            transition_type=1
+        )
+        send_button = Gtk.Button(
+            vexpand=False,
+            valign=3,
+            tooltip_text=_('Send Message'),
+            icon_name='paper-plane-symbolic',
+            css_classes=['accent', 'circular', 'suggested-action']
+        )
+        self.add_named(send_button, 'send')
+
+        stop_button = Gtk.Button(
+            vexpand=False,
+            valign=3,
+            tooltip_text=_('Stop Message'),
+            icon_name='media-playback-stop-symbolic',
+            css_classes=['destructive-action', 'circular']
+        )
+        self.add_named(stop_button, 'stop')
+
+        stop_button.connect('clicked', lambda button: self.chat_list_box.get_selected_row().chat.stop_message()) #TODO port quick
+
+        send_button.connect('clicked', lambda button: self.get_root().send_message(0))
+        gesture_click = Gtk.GestureClick(button=3)
+        gesture_click.connect("released", lambda gesture, _n_press, x, y: self.show_popup(gesture, x, y))
+        send_button.add_controller(gesture_click)
+        gesture_long_press = Gtk.GestureLongPress()
+        gesture_long_press.connect("pressed", self.show_popup)
+        send_button.add_controller(gesture_long_press)
+
+    def show_popup(self, gesture, x, y):
+        rect = Gdk.Rectangle()
+        rect.x, rect.y, = x, y
+        actions = {
+            _('Send as User'): lambda: self.get_root().send_message(0),
+            _('Send as System'): lambda: self.get_root().send_message(1),
+            _('Use Tools'): lambda: self.get_root().send_message(2)
+        }
+        popup = dialog.Popover(actions)
+        popup.set_parent(self)
+        popup.set_pointing_to(rect)
+        popup.popup()
+

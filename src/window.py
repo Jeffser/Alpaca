@@ -87,10 +87,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     chat_list_stack = Gtk.Template.Child()
     message_text_view = None
     message_text_view_scrolled_window = Gtk.Template.Child()
-    action_button_stack = Gtk.Template.Child()
     bottom_chat_controls_container = Gtk.Template.Child()
     chat_right_click_menu = Gtk.Template.Child()
-    send_message_menu = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
     searchentry_models = Gtk.Template.Child()
     model_search_button = Gtk.Template.Child()
@@ -359,95 +357,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             threading.Thread(target=set_default_sidebar).start()
 
     @Gtk.Template.Callback()
-    def stop_message(self, button=None):
-        self.chat_list_box.get_selected_row().chat.stop_message()
-
-    @Gtk.Template.Callback()
-    def send_message(self, button=None, mode:int=0): #mode 0=user 1=system 2=tool
-        if button and not button.get_visible():
-            return
-        if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False):
-            return
-        current_chat = self.chat_list_box.get_selected_row().chat
-        if current_chat.busy == True:
-            return
-
-        if self.get_current_instance().instance_type == 'empty':
-            self.get_application().lookup_action('instance_manager').activate()
-            return
-
-        current_model = Widgets.model_manager.get_selected_model().get_name()
-        if mode == 2 and len(Widgets.tools.get_enabled_tools(self.tool_listbox)) == 0:
-            Widgets.dialog.show_toast(_("No tools enabled."), current_chat.get_root(), 'app.tool_manager', _('Open Tool Manager'))
-            return
-        if current_model is None:
-            Widgets.dialog.show_toast(_("Please select a model before chatting"), current_chat.get_root())
-            return
-
-        # Bring tab to top
-        tab = self.chat_list_box.get_selected_row()
-        self.chat_list_box.unselect_all()
-        self.chat_list_box.remove(tab)
-        self.chat_list_box.prepend(tab)
-        self.chat_list_box.select_row(tab)
-
-        raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
-        m_element = Widgets.message.Message(
-            dt=datetime.now(),
-            message_id=generate_uuid(),
-            chat=current_chat,
-            mode=0 if mode in (0,2) else 2
-        )
-        current_chat.add_message(m_element)
-
-        for old_attachment in list(self.global_attachment_container.container):
-            attachment = m_element.add_attachment(
-                file_id = generate_uuid(),
-                name = old_attachment.file_name,
-                attachment_type = old_attachment.file_type,
-                content = old_attachment.file_content
-            )
-            old_attachment.delete()
-            SQL.insert_or_update_attachment(m_element, attachment)
-
-        m_element.block_container.set_content(raw_message)
-
-        SQL.insert_or_update_message(m_element)
-
-        self.message_text_view.get_buffer().set_text("", 0)
-
-        if mode==0:
-            m_element_bot = Widgets.message.Message(
-                dt=datetime.now(),
-                message_id=generate_uuid(),
-                chat=current_chat,
-                mode=1,
-                author=current_model
-            )
-            current_chat.add_message(m_element_bot)
-            SQL.insert_or_update_message(m_element_bot)
-            if current_chat.chat_type == 'chat':
-                threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
-            elif current_chat.chat_type == 'notebook':
-                tls = Widgets.tools.NotebookTools
-                if len(current_chat.get_notebook()) == 0:
-                    tls = {Widgets.tools.notebook_tools.WriteNotebook.tool_metadata.get('name'): Widgets.tools.notebook_tools.WriteNotebook()}
-                threading.Thread(target=self.get_current_instance().notebook_generation, args=(m_element_bot, current_model, tls)).start()
-        elif mode==1:
-            current_chat.set_visible_child_name('content')
-        elif mode==2:
-            m_element_bot = Widgets.message.Message(
-                dt=datetime.now(),
-                message_id=generate_uuid(),
-                chat=current_chat,
-                mode=1,
-                author=current_model
-            )
-            current_chat.add_message(m_element_bot)
-            SQL.insert_or_update_message(m_element_bot)
-            threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.tool_listbox), True)).start()
-
-    @Gtk.Template.Callback()
     def welcome_carousel_page_changed(self, carousel, index):
         logger.debug("Showing welcome carousel")
         if index == 0:
@@ -600,6 +509,89 @@ class AlpacaWindow(Adw.ApplicationWindow):
             else:
                 current_chat.set_visible_child_name('no-results')
 
+    def send_message(self, mode:int=0): #mode 0=user 1=system 2=tool
+        if button and not button.get_visible():
+            return
+        if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False):
+            return
+        current_chat = self.chat_list_box.get_selected_row().chat
+        if current_chat.busy == True:
+            return
+
+        if self.get_current_instance().instance_type == 'empty':
+            self.get_application().lookup_action('instance_manager').activate()
+            return
+
+        current_model = Widgets.model_manager.get_selected_model().get_name()
+        if mode == 2 and len(Widgets.tools.get_enabled_tools(self.tool_listbox)) == 0:
+            Widgets.dialog.show_toast(_("No tools enabled."), current_chat.get_root(), 'app.tool_manager', _('Open Tool Manager'))
+            return
+        if current_model is None:
+            Widgets.dialog.show_toast(_("Please select a model before chatting"), current_chat.get_root())
+            return
+
+        # Bring tab to top
+        tab = self.chat_list_box.get_selected_row()
+        self.chat_list_box.unselect_all()
+        self.chat_list_box.remove(tab)
+        self.chat_list_box.prepend(tab)
+        self.chat_list_box.select_row(tab)
+
+        raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
+        m_element = Widgets.message.Message(
+            dt=datetime.now(),
+            message_id=generate_uuid(),
+            chat=current_chat,
+            mode=0 if mode in (0,2) else 2
+        )
+        current_chat.add_message(m_element)
+
+        for old_attachment in list(self.global_attachment_container.container):
+            attachment = m_element.add_attachment(
+                file_id = generate_uuid(),
+                name = old_attachment.file_name,
+                attachment_type = old_attachment.file_type,
+                content = old_attachment.file_content
+            )
+            old_attachment.delete()
+            SQL.insert_or_update_attachment(m_element, attachment)
+
+        m_element.block_container.set_content(raw_message)
+
+        SQL.insert_or_update_message(m_element)
+
+        self.message_text_view.get_buffer().set_text("", 0)
+
+        if mode==0:
+            m_element_bot = Widgets.message.Message(
+                dt=datetime.now(),
+                message_id=generate_uuid(),
+                chat=current_chat,
+                mode=1,
+                author=current_model
+            )
+            current_chat.add_message(m_element_bot)
+            SQL.insert_or_update_message(m_element_bot)
+            if current_chat.chat_type == 'chat':
+                threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
+            elif current_chat.chat_type == 'notebook':
+                tls = Widgets.tools.NotebookTools
+                if len(current_chat.get_notebook()) == 0:
+                    tls = {Widgets.tools.notebook_tools.WriteNotebook.tool_metadata.get('name'): Widgets.tools.notebook_tools.WriteNotebook()}
+                threading.Thread(target=self.get_current_instance().notebook_generation, args=(m_element_bot, current_model, tls)).start()
+        elif mode==1:
+            current_chat.set_visible_child_name('content')
+        elif mode==2:
+            m_element_bot = Widgets.message.Message(
+                dt=datetime.now(),
+                message_id=generate_uuid(),
+                chat=current_chat,
+                mode=1,
+                author=current_model
+            )
+            current_chat.add_message(m_element_bot)
+            SQL.insert_or_update_message(m_element_bot)
+            threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.tool_listbox), True)).start()
 
     def convert_model_name(self, name:str, mode:int): # mode=0 name:tag -> Name (tag)   |   mode=1 Name (tag) -> name:tag   |   mode=2 name:tag -> name, tag
         try:
@@ -891,6 +883,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.global_attachment_container = Widgets.attachments.GlobalAttachmentContainer()
         self.bottom_chat_controls_container.prepend(self.global_attachment_container)
         list(self.bottom_chat_controls_container)[1].prepend(Widgets.attachments.GlobalAttachmentButton())
+        self.action_button_stack = Widgets.message.GlobalActionStack()
+        list(self.bottom_chat_controls_container)[1].append(self.action_button_stack)
 
         self.model_manager_stack.set_enable_transitions(True)
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
@@ -904,19 +898,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.message_text_view_scrolled_window.set_child(self.message_text_view)
 
         self.message_text_view_scrolled_window.get_parent().append(Widgets.voice.MicrophoneButton(self.message_text_view))
-
-        for name, data in {
-            'send': {
-                'button': self.action_button_stack.get_child_by_name('send'),
-                'menu': self.send_message_menu
-            }
-        }.items():
-            gesture_click = Gtk.GestureClick(button=3)
-            gesture_click.connect("released", lambda gesture, _n_press, x, y, menu=data.get('menu'): self.open_button_menu(gesture, x, y, menu))
-            data.get('button').add_controller(gesture_click)
-            gesture_long_press = Gtk.GestureLongPress()
-            gesture_long_press.connect("pressed", lambda gesture, x, y, menu=data.get('menu'): self.open_button_menu(gesture, x, y, menu))
-            data.get('button').add_controller(gesture_long_press)
 
         universal_actions = {
             'new_chat': [lambda *_: self.chat_list_box.select_row(self.new_chat().row), ['<primary>n']],
@@ -936,8 +917,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'export_current_chat': [self.current_chat_actions],
             'toggle_sidebar': [lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9']],
             'toggle_search': [lambda *_: self.toggle_searchbar(), ['<primary>f']],
-            'send_message': [lambda *_: self.send_message(None, 0)],
-            'send_system_message': [lambda *_: self.send_message(None, 1)],
             'model_manager' : [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>m']],
             'instance_manager' : [lambda *i: self.show_instance_manager() if self.main_navigation_view.get_visible_page().get_tag() != 'instance_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>i']],
             'download_model_from_name' : [lambda *i: Widgets.dialog.simple_entry(
@@ -956,7 +935,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 button_name=_('Delete'),
                 button_appearance='destructive'
             )],
-            'use_tools': [lambda *_: self.send_message(None, 2)],
             'tool_manager': [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'tool_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'tool_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']],
             'start_quick_ask': [lambda *_: self.get_application().get_quick_ask_window(), ['<primary><alt>a']]
         }

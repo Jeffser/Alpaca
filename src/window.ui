@@ -402,48 +402,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                             </child>
                                           </object>
                                         </child>
-                                        <child>
-                                          <object class="GtkStack" id="action_button_stack">
-                                            <property name="transition_type">1</property>
-                                            <child>
-                                              <object class="GtkStackPage">
-                                                <property name="name">send</property>
-                                                <property name="child">
-                                                  <object class="GtkButton">
-                                                    <signal name="clicked" handler="send_message"/>
-                                                    <property name="vexpand">false</property>
-                                                    <property name="valign">3</property>
-                                                    <property name="tooltip-text" translatable="yes">Send Message</property>
-                                                    <property name="icon-name">paper-plane-symbolic</property>
-                                                    <style>
-                                                      <class name="accent"/>
-                                                      <class name="circular"/>
-                                                      <class name="suggested-action"/>
-                                                    </style>
-                                                  </object>
-                                                </property>
-                                              </object>
-                                            </child>
-                                            <child>
-                                              <object class="GtkStackPage">
-                                                <property name="name">stop</property>
-                                                <property name="child">
-                                                  <object class="GtkButton">
-                                                    <signal name="clicked" handler="stop_message"/>
-                                                    <property name="vexpand">false</property>
-                                                    <property name="valign">3</property>
-                                                    <property name="tooltip-text" translatable="yes">Stop Message</property>
-                                                    <property name="icon-name">media-playback-stop-symbolic</property>
-                                                    <style>
-                                                      <class name="destructive-action"/>
-                                                      <class name="circular"/>
-                                                    </style>
-                                                  </object>
-                                                </property>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </child>
                                       </object>
                                     </child>
                                   </object>
@@ -1306,22 +1264,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
       <item>
         <attribute name="label" translatable="yes">Delete Chat</attribute>
         <attribute name="action">app.delete_chat</attribute>
-      </item>
-    </section>
-  </menu>
-  <menu id="send_message_menu">
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">Send as User</attribute>
-        <attribute name="action">app.send_message</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Send as System</attribute>
-        <attribute name="action">app.send_system_message</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Use Tools</attribute>
-        <attribute name="action">app.use_tools</attribute>
       </item>
     </section>
   </menu>
