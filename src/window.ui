@@ -1245,28 +1245,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
       </item>
     </section>
   </menu>
-  <menu id="chat_right_click_menu">
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">Rename Chat</attribute>
-        <attribute name="action">app.rename_chat</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Duplicate Chat</attribute>
-        <attribute name="action">app.duplicate_chat</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Export Chat</attribute>
-        <attribute name="action">app.export_chat</attribute>
-      </item>
-    </section>
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">Delete Chat</attribute>
-        <attribute name="action">app.delete_chat</attribute>
-      </item>
-    </section>
-  </menu>
   <object class="GtkFileFilter" id="file_filter_db">
     <mime-types>
       <mime-type>application/vnd.sqlite3</mime-type>

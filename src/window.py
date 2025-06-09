@@ -88,7 +88,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     message_text_view = None
     message_text_view_scrolled_window = Gtk.Template.Child()
     bottom_chat_controls_container = Gtk.Template.Child()
-    chat_right_click_menu = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
     searchentry_models = Gtk.Template.Child()
     model_search_button = Gtk.Template.Child()
@@ -671,8 +670,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 if future_row.indicator.get_visible():
                     future_row.indicator.set_visible(False)
 
-
-
     def check_alphanumeric(self, editable, text, length, position, allowed_chars):
         if length == 1:
             new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
@@ -737,28 +734,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             self.chat_list_box.select_row(self.new_chat().row)
             self.chat_list_stack.set_visible_child_name('content')
-
-    def chat_actions(self, action, user_data):
-        chat = self.selected_chat_row.chat
-        action_name = action.get_name()
-        if action_name in ('delete_chat', 'delete_current_chat'):
-            chat.row.prompt_delete()
-        elif action_name in ('duplicate_chat', 'duplicate_current_chat'):
-            chat.row.duplicate()
-        elif action_name in ('rename_chat', 'rename_current_chat'):
-            chat.row.prompt_rename()
-        elif action_name in ('export_chat', 'export_current_chat'):
-            chat.row.prompt_export()
-
-    def current_chat_actions(self, action, user_data):
-        self.selected_chat_row = self.chat_list_box.get_selected_row()
-        self.chat_actions(action, user_data)
-
-
-
-
-
-
 
     def get_current_instance(self):
         if self.instance_listbox.get_selected_row():
@@ -907,14 +882,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 file_filters=[self.file_filter_db],
                 callback=self.on_chat_imported
             )],
-            'duplicate_chat': [self.chat_actions],
-            'duplicate_current_chat': [self.current_chat_actions],
-            'delete_chat': [self.chat_actions],
-            'delete_current_chat': [self.current_chat_actions, ['<primary>w']],
-            'rename_chat': [self.chat_actions],
-            'rename_current_chat': [self.current_chat_actions, ['F2']],
-            'export_chat': [self.chat_actions],
-            'export_current_chat': [self.current_chat_actions],
+            'duplicate_current_chat': [lambda *_: self.chat_list_box.get_selected_row().duplicate()],
+            'delete_current_chat': [lambda *_: self.chat_list_box.get_selected_row().prompt_delete(), ['<primary>w']],
+            'rename_current_chat': [lambda *_: self.chat_list_box.get_selected_row().prompt_rename(), ['F2']],
+            'export_current_chat': [lambda *_: self.chat_list_box.get_selected_row().prompt_export()],
             'toggle_sidebar': [lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9']],
             'toggle_search': [lambda *_: self.toggle_searchbar(), ['<primary>f']],
             'model_manager' : [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>m']],

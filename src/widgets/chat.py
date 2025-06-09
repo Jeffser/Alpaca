@@ -391,31 +391,25 @@ class ChatRow(Gtk.ListBoxRow):
         )
 
         self.gesture_click = Gtk.GestureClick(button=3)
-        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.open_menu(gesture, x, y) if n_press == 1 else None)
+        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
         self.add_controller(self.gesture_click)
         self.gesture_long_press = Gtk.GestureLongPress()
-        self.gesture_long_press.connect("pressed", self.open_menu)
+        self.gesture_long_press.connect("pressed", self.show_popup)
         self.add_controller(self.gesture_long_press)
 
-    def open_menu(self, gesture, x, y):
-        position = Gdk.Rectangle()
-        position.x = x
-        position.y = y
-
-        popover = Gtk.PopoverMenu(
-            menu_model=self.get_root().chat_right_click_menu,
-            has_arrow=False,
-            halign=1,
-            height_request=155
-        )
-
-        popover.add_child(Gtk.Button(label='fun'), '1')
-
-        self.get_root().selected_chat_row = self
-
-        popover.set_parent(self.get_child())
-        popover.set_pointing_to(position)
-        popover.popup()
+    def show_popup(self, gesture, x, y):
+        rect = Gdk.Rectangle()
+        rect.x, rect.y, = x, y
+        actions = {
+            _('Rename Chat'): self.prompt_rename,
+            _('Duplicate Chat'): self.duplicate,
+            _('Export Chat'): self.prompt_export,
+            _('Delete Chat'): self.prompt_delete
+        }
+        popup = dialog.Popover(actions)
+        popup.set_parent(self)
+        popup.set_pointing_to(rect)
+        popup.popup()
 
     def update_profile_pictures(self):
         for msg in list(self.chat.container):
