@@ -398,12 +398,32 @@ class ChatRow(Gtk.ListBoxRow):
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()
         rect.x, rect.y, = x, y
-        actions = {
-            _('Rename Chat'): self.prompt_rename,
-            _('Duplicate Chat'): self.duplicate,
-            _('Export Chat'): self.prompt_export,
-            _('Delete Chat'): self.prompt_delete
-        }
+        actions = [
+            [
+                {
+                    'label': _('Rename Chat'),
+                    'callback': self.prompt_rename,
+                    'icon': 'document-edit-symbolic'
+                },
+                {
+                    'label': _('Duplicate Chat'),
+                    'callback': self.duplicate,
+                    'icon': 'edit-copy-symbolic'
+                },
+                {
+                    'label': _('Export Chat'),
+                    'callback': self.prompt_export,
+                    'icon': 'folder-download-symbolic'
+                }
+            ],
+            [
+                {
+                    'label': _('Delete Chat'),
+                    'callback': self.prompt_delete,
+                    'icon': 'user-trash-symbolic'
+                }
+            ]
+        ]
         popup = dialog.Popover(actions)
         popup.set_parent(self)
         popup.set_pointing_to(rect)

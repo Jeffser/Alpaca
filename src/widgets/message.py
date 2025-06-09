@@ -525,11 +525,25 @@ class GlobalActionStack(Gtk.Stack):
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()
         rect.x, rect.y, = x, y
-        actions = {
-            _('Send as User'): lambda: self.get_root().send_message(0),
-            _('Send as System'): lambda: self.get_root().send_message(1),
-            _('Use Tools'): lambda: self.get_root().send_message(2)
-        }
+        actions = [
+            [
+                {
+                    'label': _('Send as User'),
+                    'callback': lambda: self.get_root().send_message(0),
+                    'icon': None
+                },
+                {
+                    'label': _('Send as System'),
+                    'callback': lambda: self.get_root().send_message(1),
+                    'icon': None
+                },
+                {
+                    'label': _('Use Tools'),
+                    'callback': lambda: self.get_root().send_message(2),
+                    'icon': None
+                }
+            ]
+        ]
         popup = dialog.Popover(actions)
         popup.set_parent(self)
         popup.set_pointing_to(rect)

@@ -552,24 +552,42 @@ class GlobalAttachmentButton(Gtk.Button):
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()
         rect.x, rect.y, = x, y
-        actions = {
-            _('Attach File'): lambda: self.get_root().global_footer.attachment_container.attachment_request(),
-            _('Attach Website'): lambda: dialog.simple_entry(
-                parent=self.get_root(),
-                heading=_('Attach Website? (Experimental)'),
-                body=_('Please enter a website URL'),
-                callback=self.get_root().global_footer.attachment_container.attach_website,
-                entries={'placeholder': 'https://jeffser.com/alpaca/'}
-            ),
-            _('Attach YouTube Captions'): lambda: dialog.simple_entry(
-                parent=self,
-                heading=_('Attach YouTube Captions?'),
-                body=_('Please enter a YouTube video URL'),
-                callback=self.get_root().global_footer.attachment_container.youtube_detected,
-                entries={'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
-            ),
-            _('Attach Screenshot'): lambda: self.get_root().global_footer.attachment_container.request_screenshot() #TODO only show if model has vision
-        }
+        actions = [
+            [
+                {
+                    'label': _('Attach File'),
+                    'callback': lambda: self.get_root().global_footer.attachment_container.attachment_request(),
+                    'icon': 'document-text-symbolic'
+                },
+                {
+                    'label': _('Attach Website'),
+                    'callback': lambda: dialog.simple_entry(
+                        parent=self.get_root(),
+                        heading=_('Attach Website? (Experimental)'),
+                        body=_('Please enter a website URL'),
+                        callback=self.get_root().global_footer.attachment_container.attach_website,
+                        entries={'placeholder': 'https://jeffser.com/alpaca/'}
+                    ),
+                    'icon': 'globe-symbolic'
+                },
+                {
+                    'label': _('Attach YouTube Captions'),
+                    'callback': lambda: dialog.simple_entry(
+                        parent=self.get_root(),
+                        heading=_('Attach YouTube Captions?'),
+                        body=_('Please enter a YouTube video URL'),
+                        callback=self.get_root().global_footer.attachment_container.youtube_detected,
+                        entries={'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
+                    ),
+                    'icon': 'play-symbolic'
+                },
+                {
+                    'label': _('Attach Screenshot'),
+                    'callback': lambda: self.get_root().global_footer.attachment_container.request_screenshot(), #TODO only show if model has vision
+                    'icon': 'image-x-generic-symbolic'
+                }
+            ]
+        ]
         popup = dialog.Popover(actions)
         popup.set_parent(self)
         popup.set_pointing_to(rect)

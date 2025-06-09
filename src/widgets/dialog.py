@@ -148,21 +148,37 @@ class DropDown(Base):
 class Popover(Gtk.Popover):
     __gtype_name__ = 'AlpacaPopover'
 
-    def __init__(self, actions:dict):
+    def __init__(self, action_groups:list):
         button_container = Gtk.Box(
             orientation=1
         )
-        for label, callback in actions.items():
-            button = Gtk.Button(
-                child=Gtk.Label(
-                    label=label,
-                    halign=1,
-                    css_classes=['body']
-                ),
-                css_classes=['small', 'flat']
-            )
-            button_container.append(button)
-            button.connect('clicked', lambda button, callback=callback: self.item_selected(callback))
+        for i, actions in enumerate(action_groups):
+            for metadata in actions:
+                if metadata.get('icon'):
+                    button_content = Adw.ButtonContent(
+                        label=metadata.get('label'),
+                        halign=1,
+                        icon_name=metadata.get('icon')
+                    )
+                else:
+                    button_content = Gtk.Label(
+                        label=metadata.get('label'),
+                        halign=1
+                    )
+
+                button = Gtk.Button(
+                    child=button_content,
+                    css_classes=['small', 'flat', 'button_no_bold']
+                )
+                if metadata.get('icon') == 'user-trash-symbolic':
+                    button.add_css_class('error')
+                button_container.append(button)
+                button.connect('clicked', lambda button, callback=metadata.get('callback'): self.item_selected(callback))
+            if i < len(action_groups)-1:
+                button_container.append(Gtk.Separator(
+                    margin_top=5,
+                    margin_bottom=5
+                ))
 
         super().__init__(
             child=button_container,
