@@ -5,7 +5,8 @@ blocks = [
   'table.py',
   'latex.py',
   'text.py',
-  'code.py'
+  'code.py',
+  'separator.py'
 ]
 
 install_data(blocks, install_dir: moduledir)

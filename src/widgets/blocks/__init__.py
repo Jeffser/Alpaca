@@ -6,6 +6,7 @@ from .latex import LatexRenderer
 from .text import Text, GeneratingText, EditingText
 from .table import Table
 from .code import Code
+from .separator import Separator
 
 from .. import attachments
 from ...sql_manager import generate_uuid, Instance as SQL
@@ -15,7 +16,8 @@ patterns = [
     ('code', re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
     ('code', re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)),
     ('latex', re.compile(r'\\\[\n*?(.*?)\n*?\\\]|\$+\n*?(.*?)\$+\n*?', re.DOTALL)),
-    ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE))
+    ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
+    ('line', re.compile(r'\n\n(-{3,})\n\n', re.MULTILINE))
 ]
 
 
@@ -58,6 +60,8 @@ def text_to_block_list(content:str, message=None) -> list:
                         blocks[-1].append_content(expression)
                     else:
                         blocks.append(Text(content=expression))
+            elif pattern_name == "line":
+                blocks.append(Separator(content=match.group(1)))
             pos = match_end
 
     if pos < len(content):
