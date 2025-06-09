@@ -31,9 +31,9 @@
 - Delete / Edit messages
 - Regenerate messages
 - YouTube recognition (Ask questions about a YouTube video using the transcript)
-- Website recognition (Ask questions about a certain website by parsing the url)
+- Website recognition (Ask questions about a certain website by pasting the URL)
 - Talk to cloud-hosted models with OpenAI-compatible APIs using your own API keys
-  
+
 ## Screenies
 
 Normal conversation | Image recognition | Custom Character | Integrated script execution | YouTube transcription
