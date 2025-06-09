@@ -965,7 +965,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
           <child>
             <object class="AdwPreferencesGroup">
               <child>
-                <object class="AdwSwitchRow">
+                <object class="AdwSwitchRow" id="background_switch">
                   <property name="title" translatable="yes">Run Alpaca In Background</property>
                   <property name="active" bind-source="AlpacaWindow" bind-property="hide-on-close" bind-flags="bidirectional"/>
                 </object>

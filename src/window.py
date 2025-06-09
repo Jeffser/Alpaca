@@ -93,6 +93,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     title_stack = Gtk.Template.Child()
     title_no_model_button = Gtk.Template.Child()
     model_filter_button = Gtk.Template.Child()
+    background_switch = Gtk.Template.Child()
 
     file_filter_db = Gtk.Template.Child()
     file_filter_gguf = Gtk.Template.Child()
