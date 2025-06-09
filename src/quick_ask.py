@@ -29,11 +29,11 @@ class QuickAskWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def save_chat(self, button):
         chat = self.toast_overlay.get_child()
-        window = self.get_application().get_alpaca_window()
-        new_chat = window.new_chat(chat.get_name())
+        new_chat = self.get_application().main_alpaca_window.new_chat(chat.get_name())
         for message in list(chat.container):
             SQL.insert_or_update_message(message, new_chat.chat_id)
-        window.chat_list_box.select_row(new_chat.row)
+        self.get_application().main_alpaca_window.chat_list_box.select_row(new_chat.row)
+        self.get_application().main_alpaca_window.present()
         self.close()
 
     def get_current_instance(self):

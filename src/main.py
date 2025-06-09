@@ -49,8 +49,6 @@ logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser(description="Alpaca")
 
-
-
 class AlpacaService:
     """
     <node>
@@ -85,7 +83,7 @@ class AlpacaService:
         self.app.props.active_window.present()
 
     def PresentAsk(self):
-        self.get_quick_ask_window()
+        self.app.create_quick_ask().present()
 
     def Open(self, chat_name:str):
         for chat_row in list(self.app.props.active_window.chat_list_box):
@@ -99,15 +97,14 @@ class AlpacaService:
 
     def Ask(self, message:str):
         time.sleep(1)
-        quick_ask_window = self.get_quick_ask_window()
-        for message in quick_ask_window.toast_overlay.get_child().container:
-            message.get_parent().remove(message)
+        quick_ask_window = self.app.create_quick_ask()
+        quick_ask_window.present()
         quick_ask_window.write_and_send_message(message)
 
 class AlpacaApplication(Adw.Application):
     __gtype_name__ = 'AlpacaApplication'
 
-    quick_ask_app = None
+    main_alpaca_window = None
 
     def __init__(self, version):
         super().__init__(application_id='com.jeffser.Alpaca',
@@ -138,21 +135,17 @@ class AlpacaApplication(Adw.Application):
                     app_service.PresentAsk()
                 sys.exit(0)
 
-    def get_quick_ask_app(self):
-        if not self.quick_ask_app:
-            self.quick_ask_app = QuickAskApplication(self.version)
-            self.quick_ask_app.alpaca_app = self
-            self.quick_ask_app.run([])
-        return self.quick_ask_app
-
-    def get_quick_ask_window(self):
-        return QuickAskWindow(application=self.get_quick_ask_app()).present()
+    def create_quick_ask(self):
+        return QuickAskWindow(application=self)
 
     def do_activate(self):
-        win = self.props.active_window
-        if not win:
-            win = AlpacaWindow(application=self)
-        win.present()
+        self.main_alpaca_window = self.props.active_window
+        if not self.main_alpaca_window:
+            self.main_alpaca_window = AlpacaWindow(application=self)
+        if self.args.quick_ask or self.args.ask:
+            self.create_quick_ask().present()
+        else:
+            self.main_alpaca_window.present()
 
         if sys.platform == 'darwin': # MacOS
             settings = Gtk.Settings.get_default()
@@ -215,37 +208,6 @@ class AlpacaApplication(Adw.Application):
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
-class QuickAskApplication(Adw.Application):
-    __gtype_name__ = 'AlpacaQuickAskApplication'
-
-    alpaca_app = None
-
-    def __init__(self, version):
-        super().__init__(application_id='com.jeffser.Alpaca.QuickAsk',
-            flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
-        self.version = version
-        self.args = parser.parse_args()
-
-    def do_activate(self):
-        win = self.props.active_window
-        if not win:
-            win = QuickAskWindow(application=self)
-        win.present()
-
-    def get_alpaca_app(self):
-        if not self.alpaca_app:
-            self.alpaca_app = AlpacaApplication(self.version)
-            self.alpaca_app.quick_ask_app = self
-            self.alpaca_app.run([])
-        return self.alpaca_app
-
-    def get_alpaca_window(self):
-        app = self.get_alpaca_app()
-        win = app.props.active_window
-        if not win:
-            win = AlpacaWindow(application=app)
-        return win
-
 def main(version):
     logging.basicConfig(
         format="%(levelname)s\t[%(filename)s | %(funcName)s] %(message)s",
@@ -279,7 +241,4 @@ def main(version):
 
     logger.info(f"Alpaca version: {version}")
 
-    if args.quick_ask or args.ask:
-        return QuickAskApplication(version).run([])
-    else:
-        return AlpacaApplication(version).run([])
+    return AlpacaApplication(version).run([])

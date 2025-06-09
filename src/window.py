@@ -866,7 +866,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 button_appearance='destructive'
             )],
             'tool_manager': [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'tool_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'tool_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']],
-            'start_quick_ask': [lambda *_: self.get_application().get_quick_ask_window(), ['<primary><alt>a']]
+            'start_quick_ask': [lambda *_: self.get_application().create_quick_ask().present(), ['<primary><alt>a']]
         }
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)

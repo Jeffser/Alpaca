@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/jeffser/Alpaca/QuickAsk">
-    <file>style.css</file>
-    <file>style-dark.css</file>
     <file preprocess="xml-stripblanks" alias="window.ui">quick_ask.ui</file>
-    <file alias="icons/scalable/status/audio-input-microphone-symbolic.svg">icons/audio-input-microphone-symbolic.svg</file>
-    <file alias="icons/scalable/status/document-save-symbolic.svg">icons/document-save-symbolic.svg</file>
-    <file alias="icons/scalable/status/view-refresh-symbolic.svg">icons/view-refresh-symbolic.svg</file>
-    <file alias="icons/scalable/status/view-more-horizontal-symbolic.svg">icons/view-more-horizontal-symbolic.svg</file>
-    <file alias="icons/scalable/status/user-trash-symbolic.svg">icons/user-trash-symbolic.svg</file>
-    <file alias="icons/scalable/status/edit-copy-symbolic.svg">icons/edit-copy-symbolic.svg</file>
-    <file alias="icons/scalable/status/edit-symbolic.svg">icons/edit-symbolic.svg</file>
-    <file alias="icons/scalable/status/update-symbolic.svg">icons/update-symbolic.svg</file>
-    <file alias="icons/scalable/status/bullhorn-symbolic.svg">icons/bullhorn-symbolic.svg</file>
-    <file alias="icons/scalable/status/chat-message-new-symbolic.svg">icons/chat-message-new-symbolic.svg</file>
   </gresource>
   <gresource prefix="/com/jeffser/Alpaca">
     <file>style.css</file>
