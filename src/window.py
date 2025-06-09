@@ -39,7 +39,6 @@ import numpy as np
 from datetime import datetime
 
 import gi
-from pydbus import SessionBus, Variant
 
 gi.require_version('GtkSource', '5')
 gi.require_version('Spelling', '1')
@@ -90,10 +89,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
     message_text_view_scrolled_window = Gtk.Template.Child()
     action_button_stack = Gtk.Template.Child()
     bottom_chat_controls_container = Gtk.Template.Child()
-    attachment_button = Gtk.Template.Child()
     chat_right_click_menu = Gtk.Template.Child()
     send_message_menu = Gtk.Template.Child()
-    attachment_menu = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
     searchentry_models = Gtk.Template.Child()
     model_search_button = Gtk.Template.Child()
@@ -682,11 +679,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 if future_row.indicator.get_visible():
                     future_row.indicator.set_visible(False)
 
-    def on_clipboard_paste(self, textview):
-        logger.debug("Pasting from clipboard")
-        clipboard = Gdk.Display.get_default().get_clipboard()
-        #clipboard.read_text_async(None, lambda clipboard, result: self.cb_text_received(clipboard.read_text_finish(result)))
-        clipboard.read_texture_async(None, self.cb_image_received)
+
 
     def check_alphanumeric(self, editable, text, length, position, allowed_chars):
         if length == 1:
@@ -769,102 +762,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.selected_chat_row = self.chat_list_box.get_selected_row()
         self.chat_actions(action, user_data)
 
-    def attach_youtube(self, yt_url:str, caption_id:str):
-        file_name, content = Widgets.attachments.extract_youtube_content(yt_url, caption_id)
-        attachment = Widgets.attachments.Attachment(
-            file_id="-1",
-            file_name=file_name,
-            file_type='youtube',
-            file_content=content
-        )
-        self.global_attachment_container.add_attachment(attachment)
 
-    def attach_website(self, url:str):
-        content = Widgets.attachments.extract_content("website", url)
-        website_title = 'website'
-        match = re.search(r'https?://(?:www\.)?([^/]+)', url)
-        if match:
-            website_title = match.group(1)
-        attachment = Widgets.attachments.Attachment(
-            file_id="-1",
-            file_name=website_title,
-            file_type="website",
-            file_content=content
-        )
-        self.global_attachment_container.add_attachment(attachment)
 
-    def youtube_detected(self, video_url:str):
-        try:
-            response = requests.get('https://noembed.com/embed?url={}'.format(video_url))
-            data = json.loads(response.text)
 
-            transcriptions = Widgets.attachments.get_youtube_transcripts(data['url'].split('=')[1])
-            if len(transcriptions) == 0:
-                GLib.idle_add(Widgets.dialog.show_toast, _("This video does not have any transcriptions"), self)
-                return
 
-            if not any(filter(lambda x: '(en' in x and 'auto-generated' not in x and len(transcriptions) > 1, transcriptions)):
-                transcriptions.insert(1, 'English (translate:en)')
 
-            GLib.idle_add(Widgets.dialog.simple_dropdown,
-                parent = self,
-                heading = _('Attach YouTube Video?'),
-                body = _('{}\n\nPlease select a transcript to include').format(data['title']),
-                callback = lambda caption_name, video_url=video_url: threading.Thread(target=self.attach_youtube, args=(video_url, caption_name.split(' (')[-1][:-1])).start(),
-                items = transcriptions
-            )
-        except Exception as e:
-            logger.error(e)
-            GLib.idle_add(Widgets.dialog.show_toast, _("Error attaching video, please try again"), self)
-        GLib.idle_add(self.message_text_view_scrolled_window.set_sensitive, True)
-
-    def cb_text_received(self, text):
-        try:
-            #Check if text is a Youtube URL
-            youtube_regex = re.compile(
-                r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/'
-                r'(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
-            url_regex = re.compile(
-                r'http[s]?://'
-                r'(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|'
-                r'(?:%[0-9a-fA-F][0-9a-fA-F]))+'
-                r'(?:\\:[0-9]{1,5})?'
-                r'(?:/[^\\s]*)?'
-            )
-            if youtube_regex.match(text):
-                self.message_text_view_scrolled_window.set_sensitive(False)
-                threading.Thread(target=self.youtube_detected, args=(text,)).start()
-            elif url_regex.match(text):
-                Widgets.dialog.simple(
-                    parent = self,
-                    heading = _('Attach Website? (Experimental)'),
-                    body = _("Are you sure you want to attach\n'{}'?").format(text),
-                    callback = lambda url=text: threading.Thread(target=self.attach_website, args=(url,)).start()
-                )
-        except Exception as e:
-            logger.error(e)
-
-    def cb_image_received(self, clipboard, result):
-        try:
-            texture = clipboard.read_texture_finish(result)
-            if texture:
-                if Widgets.model_manager.get_selected_model().get_vision():
-                    pixbuf = Gdk.pixbuf_get_from_texture(texture)
-                    tdir = tempfile.TemporaryDirectory()
-                    pixbuf.savev(os.path.join(tdir.name, 'image.png'), 'png', [], [])
-                    os.system('ls {}'.format(tdir.name))
-                    file = Gio.File.new_for_path(os.path.join(tdir.name, 'image.png'))
-                    self.on_attachment(file)
-                    tdir.cleanup()
-                else:
-                    Widgets.dialog.show_toast(_("Image recognition is only available on specific models"), self)
-        except Exception as e:
-            pass
-
-    def on_file_drop(self, drop_target, value, x, y):
-        files = value.get_files()
-        for file in files:
-            self.on_attachment(file)
 
     def get_current_instance(self):
         if self.instance_listbox.get_selected_row():
@@ -882,9 +784,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         if self.get_application().args.new_chat:
             self.new_chat(self.get_application().args.new_chat)
-
-        self.global_attachment_container = Widgets.attachments.AttachmentContainer()
-        self.bottom_chat_controls_container.prepend(self.global_attachment_container)
 
         self.mic_group.set_visible(importlib.util.find_spec('whisper'))
 
@@ -953,93 +852,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 )
             Widgets.dialog.show_toast(_("Chat imported successfully"), self)
 
-    def request_screenshot(self):
-        bus = SessionBus()
-        portal = bus.get("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop")
-        subscription = None
-
-        def on_response(sender, obj, iface, signal, *params):
-            response = params[0]
-            if response[0] == 0:
-                uri = response[1].get("uri")
-                self.on_attachment(Gio.File.new_for_uri(uri))
-            else:
-                logger.error(f"Screenshot request failed with response: {response}\n{sender}\n{obj}\n{iface}\n{signal}")
-                Widgets.dialog.show_toast(_("Attachment failed, screenshot might be too big"), self)
-            if subscription:
-                subscription.disconnect()
-
-        subscription = bus.subscribe(
-            iface="org.freedesktop.portal.Request",
-            signal="Response",
-            signal_fired=on_response
-        )
-
-        portal.Screenshot("", {"interactive": Variant('b', True)})
-
-    def on_attachment(self, file:Gio.File):
-        file_types = {
-            "plain_text": ["txt", "md"],
-            "code": ["c", "h", "css", "html", "js", "ts", "py", "java", "json", "xml", "asm", "nasm",
-                    "cs", "csx", "cpp", "cxx", "cp", "hxx", "inc", "csv", "lsp", "lisp", "el", "emacs",
-                    "l", "cu", "dockerfile", "glsl", "g", "lua", "php", "rb", "ru", "rs", "sql", "sh", "p8",
-                    "yaml"],
-            "image": ["png", "jpeg", "jpg", "webp", "gif"],
-            "pdf": ["pdf"],
-            "odt": ["odt"],
-            "docx": ["docx"],
-            "pptx": ["pptx"],
-            "xlsx": ["xlsx"]
-        }
-        if file.query_info("standard::content-type", 0, None).get_content_type() == 'text/plain':
-            extension = 'txt'
-        else:
-            extension = file.get_path().split(".")[-1]
-        found_types = [key for key, value in file_types.items() if extension in value]
-        if len(found_types) == 0:
-            file_type = 'plain_text'
-        else:
-            file_type = found_types[0]
-        if file_type == 'image':
-            content = Widgets.attachments.extract_image(file.get_path(), 256)
-        else:
-            content = Widgets.attachments.extract_content(file_type, file.get_path())
-        attachment = Widgets.attachments.Attachment(
-            file_id="-1",
-            file_name=os.path.basename(file.get_path()),
-            file_type=file_type,
-            file_content=content
-        )
-        self.global_attachment_container.add_attachment(attachment)
-
-    def attachment_request(self):
-        ff = Gtk.FileFilter()
-        ff.set_name(_('Any compatible Alpaca attachment'))
-        file_filters = [ff]
-        mimes = (
-            'text/plain',
-            'application/pdf',
-            'application/vnd.oasis.opendocument.text',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        )
-        for mime in mimes:
-            ff = Gtk.FileFilter()
-            ff.add_mime_type(mime)
-            file_filters[0].add_mime_type(mime)
-            file_filters.append(ff)
-        if Widgets.model_manager.get_selected_model().get_vision():
-            file_filters[0].add_pixbuf_formats()
-            file_filter = Gtk.FileFilter()
-            file_filter.add_pixbuf_formats()
-            file_filters.append(file_filter)
-        Widgets.dialog.simple_file(
-            parent = self,
-            file_filters = file_filters,
-            callback = self.on_attachment
-        )
-
     def show_instance_manager(self):
         self.instance_preferences_page.set_sensitive(not any([tab.chat.busy for tab in list(self.chat_list_box)]))
         GLib.idle_add(self.main_navigation_view.push_by_tag, 'instance_manager')
@@ -1075,46 +887,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
         list(list(self.model_dropdown)[1].get_child())[1].set_propagate_natural_width(True)
         list(list(self.title_no_model_button.get_child())[0])[1].set_ellipsize(3)
 
-        if sys.platform not in ('win32', 'darwin'):
-            self.model_manager_stack.set_enable_transitions(True)
-            self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
-            for el in ("default-width", "default-height", "maximized", "hide-on-close"):
-                self.settings.bind(el, self, el, Gio.SettingsBindFlags.DEFAULT)
+        # Global Attachment Container
+        self.global_attachment_container = Widgets.attachments.GlobalAttachmentContainer()
+        self.bottom_chat_controls_container.prepend(self.global_attachment_container)
+        list(self.bottom_chat_controls_container)[1].prepend(Widgets.attachments.GlobalAttachmentButton())
 
-            self.settings.bind('powersaver-warning', self.powersaver_warning_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
-            self.settings.bind('zoom', self.zoom_spin, 'value', Gio.SettingsBindFlags.DEFAULT)
+        self.model_manager_stack.set_enable_transitions(True)
+        self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
+        for el in ("default-width", "default-height", "maximized", "hide-on-close"):
+            self.settings.bind(el, self, el, Gio.SettingsBindFlags.DEFAULT)
 
+        self.settings.bind('powersaver-warning', self.powersaver_warning_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind('zoom', self.zoom_spin, 'value', Gio.SettingsBindFlags.DEFAULT)
 
-        drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
-        drop_target.connect('drop', self.on_file_drop)
-        self.message_text_view = GtkSource.View(
-            css_classes=['message_text_view'],
-            top_margin=10,
-            bottom_margin=10,
-            hexpand=True,
-            wrap_mode=3,
-            valign=3,
-            name="main_text_view"
-        )
-
+        self.message_text_view = Widgets.message.GlobalMessageTextView()
         self.message_text_view_scrolled_window.set_child(self.message_text_view)
-        self.message_text_view.add_controller(drop_target)
-        self.message_text_view.get_buffer().set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('adwaita'))
-        self.message_text_view.connect('paste-clipboard', self.on_clipboard_paste)
-
-        def enter_key_handler(controller, keyval, keycode, state):
-            if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK): # Enter pressed without shift
-                mode = 0
-                if state & Gdk.ModifierType.CONTROL_MASK: # Ctrl, send system message
-                    mode = 1
-                elif state & Gdk.ModifierType.ALT_MASK: # Alt, send tool message
-                    mode = 2
-                self.send_message(None, mode)
-                return True
-
-        enter_key_controller = Gtk.EventControllerKey.new()
-        enter_key_controller.connect("key-pressed", enter_key_handler)
-        self.message_text_view.add_controller(enter_key_controller)
 
         self.message_text_view_scrolled_window.get_parent().append(Widgets.voice.MicrophoneButton(self.message_text_view))
 
@@ -1122,14 +909,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'send': {
                 'button': self.action_button_stack.get_child_by_name('send'),
                 'menu': self.send_message_menu
-            },
-            'attachment': {
-                'button': self.attachment_button,
-                'menu': self.attachment_menu
             }
         }.items():
-            if name == 'attachment' and sys.platform not in ('win32', 'darwin'):
-                data['menu'].append(_('Attach Screenshot'), 'app.attach_screenshot')
             gesture_click = Gtk.GestureClick(button=3)
             gesture_click.connect("released", lambda gesture, _n_press, x, y, menu=data.get('menu'): self.open_button_menu(gesture, x, y, menu))
             data.get('button').add_controller(gesture_click)
@@ -1157,22 +938,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'toggle_search': [lambda *_: self.toggle_searchbar(), ['<primary>f']],
             'send_message': [lambda *_: self.send_message(None, 0)],
             'send_system_message': [lambda *_: self.send_message(None, 1)],
-            'attach_file': [lambda *_: self.attachment_request()],
-            'attach_screenshot': [lambda *i: self.request_screenshot() if Widgets.model_manager.get_selected_model().get_vision() else Widgets.dialog.show_toast(_("Image recognition is only available on specific models"), self)],
-            'attach_url': [lambda *i: Widgets.dialog.simple_entry(
-                parent=self,
-                heading=_('Attach Website? (Experimental)'),
-                body=_('Please enter a website URL'),
-                callback=self.cb_text_received,
-                entries={'placeholder': 'https://jeffser.com/alpaca/'}
-            )],
-            'attach_youtube': [lambda *i: Widgets.dialog.simple_entry(
-                parent=self,
-                heading=_('Attach YouTube Captions?'),
-                body=_('Please enter a YouTube video URL'),
-                callback=self.cb_text_received,
-                entries={'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
-            )],
             'model_manager' : [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>m']],
             'instance_manager' : [lambda *i: self.show_instance_manager() if self.main_navigation_view.get_visible_page().get_tag() != 'instance_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>i']],
             'download_model_from_name' : [lambda *i: Widgets.dialog.simple_entry(
@@ -1198,17 +963,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
-        if sys.platform in ('win32', 'darwin'):
-            self.get_application().lookup_action('attach_screenshot').set_enabled(False)
-
         self.model_creator_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
         self.model_creator_tag.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
 
-        checker = Spelling.Checker.get_default()
-        adapter = Spelling.TextBufferAdapter.new(self.message_text_view.get_buffer(), checker)
-        self.message_text_view.set_extra_menu(adapter.get_menu_model())
-        self.message_text_view.insert_action_group('spelling', adapter)
-        adapter.set_enabled(True)
+
         self.set_focus(self.message_text_view)
             
 

@@ -99,22 +99,9 @@ class QuickAskWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.message_text_view = GtkSource.View(
-            css_classes=['message_text_view'],
-            top_margin=10,
-            bottom_margin=10,
-            hexpand=True,
-            wrap_mode=3,
-            valign=3,
-            name="main_text_view"
-        )
+        self.message_text_view = Widgets.message.GlobalMessageTextView()
 
-        adapter = Spelling.TextBufferAdapter.new(self.message_text_view.get_buffer(), Spelling.Checker.get_default())
         self.message_text_view_scrolled_window.set_child(self.message_text_view)
-        self.message_text_view.get_buffer().set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('adwaita'))
-        self.message_text_view.set_extra_menu(adapter.get_menu_model())
-        self.message_text_view.insert_action_group('spelling', adapter)
-        adapter.set_enabled(True)
         self.message_text_view_scrolled_window.get_parent().append(Widgets.voice.MicrophoneButton(self.message_text_view))
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         self.set_focus(self.message_text_view)

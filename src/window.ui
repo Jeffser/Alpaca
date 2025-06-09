@@ -385,18 +385,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                       <object class="GtkBox">
                                         <property name="spacing">12</property>
                                         <child>
-                                          <object class="GtkButton" id="attachment_button">
-                                            <property name="vexpand">false</property>
-                                            <property name="valign">3</property>
-                                            <property name="tooltip-text" translatable="yes">Attach File</property>
-                                            <property name="action-name">app.attach_file</property>
-                                            <property name="icon-name">chain-link-loose-symbolic</property>
-                                            <style>
-                                              <class name="circular"/>
-                                            </style>
-                                          </object>
-                                        </child>
-                                        <child>
                                           <object class="GtkBox">
                                             <style>
                                               <class name="card"/>
@@ -1334,22 +1322,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
       <item>
         <attribute name="label" translatable="yes">Use Tools</attribute>
         <attribute name="action">app.use_tools</attribute>
-      </item>
-    </section>
-  </menu>
-  <menu id="attachment_menu">
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">Attach File</attribute>
-        <attribute name="action">app.attach_file</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Attach Website</attribute>
-        <attribute name="action">app.attach_url</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Attach YouTube Captions</attribute>
-        <attribute name="action">app.attach_youtube</attribute>
       </item>
     </section>
   </menu>

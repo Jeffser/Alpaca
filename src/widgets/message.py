@@ -4,8 +4,8 @@ Handles the message widget
 """
 
 import gi
-from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
-import os, datetime, threading, sys, base64, logging
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GtkSource, Spelling
+import os, datetime, threading, sys, base64, logging, re, tempfile
 from ..constants import TTS_VOICES, TTS_AUTO_MODES
 from ..sql_manager import convert_model_name, Instance as SQL
 from . import model_manager, attachments, blocks, dialog, voice
@@ -394,3 +394,95 @@ class Message(Gtk.Box):
     def save(self):
         if self.chat.chat_id:
             SQL.insert_or_update_message(self)
+
+class GlobalMessageTextView(GtkSource.View):
+    __gtype_name__ = 'AlpacaGlobalMessageTextView'
+
+    def __init__(self):
+        super().__init__(
+            css_classes=['message_text_view'],
+            top_margin=10,
+            bottom_margin=10,
+            hexpand=True,
+            wrap_mode=3,
+            valign=3,
+            name="main_text_view"
+        )
+
+        drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
+        drop_target.connect('drop', self.on_file_drop)
+        self.add_controller(drop_target)
+        self.get_buffer().set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('adwaita'))
+        self.connect('paste-clipboard', self.on_clipboard_paste)
+        enter_key_controller = Gtk.EventControllerKey.new()
+        enter_key_controller.connect("key-pressed", self.enter_key_handler)
+        self.add_controller(enter_key_controller)
+        checker = Spelling.Checker.get_default()
+        adapter = Spelling.TextBufferAdapter.new(self.get_buffer(), checker)
+        self.set_extra_menu(adapter.get_menu_model())
+        self.insert_action_group('spelling', adapter)
+        adapter.set_enabled(True)
+
+    def on_file_drop(self, drop_target, value, x, y):
+        files = value.get_files()
+        for file in files:
+            self.get_root().global_attachment_container.on_attachment(file)
+
+    def cb_text_received(self, clipboard, result):
+        try:
+            text = clipboard.read_text_finish(result)
+            #Check if text is a Youtube URL
+            youtube_regex = re.compile(
+                r'(https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/'
+                r'(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
+            url_regex = re.compile(
+                r'http[s]?://'
+                r'(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|'
+                r'(?:%[0-9a-fA-F][0-9a-fA-F]))+'
+                r'(?:\\:[0-9]{1,5})?'
+                r'(?:/[^\\s]*)?'
+            )
+            if youtube_regex.match(text):
+                self.get_parent().set_sensitive(False)
+                threading.Thread(target=self.get_root().global_attachment_container.youtube_detected, args=(text,)).start()
+            elif url_regex.match(text):
+                dialog.simple(
+                    parent = self.get_root(),
+                    heading = _('Attach Website? (Experimental)'),
+                    body = _("Are you sure you want to attach\n'{}'?").format(text),
+                    callback = lambda url=text: threading.Thread(target=self.get_root().global_attachment_container.attach_website, args=(url,)).start()
+                )
+        except Exception as e:
+            pass
+
+    def cb_image_received(self, clipboard, result):
+        try:
+            texture = clipboard.read_texture_finish(result)
+            if texture:
+                if model_manager.get_selected_model().get_vision():
+                    pixbuf = Gdk.pixbuf_get_from_texture(texture)
+                    tdir = tempfile.TemporaryDirectory()
+                    pixbuf.savev(os.path.join(tdir.name, 'image.png'), 'png', [], [])
+                    os.system('ls {}'.format(tdir.name))
+                    file = Gio.File.new_for_path(os.path.join(tdir.name, 'image.png'))
+                    self.get_root().global_attachment_container.on_attachment(file)
+                    tdir.cleanup()
+                else:
+                    dialog.show_toast(_("Image recognition is only available on specific models"), self.get_root())
+        except Exception as e:
+            pass
+
+    def on_clipboard_paste(self, textview):
+        clipboard = Gdk.Display.get_default().get_clipboard()
+        clipboard.read_texture_async(None, self.cb_image_received)
+        clipboard.read_text_async(None, self.cb_text_received)
+
+    def enter_key_handler(self, controller, keyval, keycode, state):
+        if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK): # Enter pressed without shift
+            mode = 0
+            if state & Gdk.ModifierType.CONTROL_MASK: # Ctrl, send system message
+                mode = 1
+            elif state & Gdk.ModifierType.ALT_MASK: # Alt, send tool message
+                mode = 2
+            self.get_root().send_message(mode=mode)
+            return True

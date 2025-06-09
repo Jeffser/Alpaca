@@ -145,6 +145,35 @@ class DropDown(Base):
                 callback = lambda dialog, task, dropdown=self.get_extra_child(): self.response(dialog.choose_finish(task), dropdown.get_selected_item().get_string())
             )
 
+class Popover(Gtk.Popover):
+    __gtype_name__ = 'AlpacaPopover'
+
+    def __init__(self, actions:dict):
+        button_container = Gtk.Box(
+            orientation=1
+        )
+        for label, callback in actions.items():
+            button = Gtk.Button(
+                child=Gtk.Label(
+                    label=label,
+                    halign=1,
+                    css_classes=['body']
+                ),
+                css_classes=['small', 'flat']
+            )
+            button_container.append(button)
+            button.connect('clicked', lambda button, callback=callback: self.item_selected(callback))
+
+        super().__init__(
+            child=button_container,
+            has_arrow=False,
+            halign=1
+        )
+
+    def item_selected(self, callback:callable):
+        self.popdown()
+        callback()
+
 def simple(parent:Gtk.Widget, heading:str, body:str, callback:callable, button_name:str=_('Accept'), button_appearance:str='suggested'):
     options = {
         _('Cancel'): {},

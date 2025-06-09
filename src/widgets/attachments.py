@@ -1,20 +1,23 @@
 # attachments.py
 
 import gi
-from gi.repository import Adw, Gtk, Gio, Gdk, GdkPixbuf
+from gi.repository import Adw, Gtk, Gio, Gdk, GdkPixbuf, GLib
 
 import odf.opendocument as odfopen
 import odf.table as odftable
+from pydbus import SessionBus, Variant
 from markitdown import MarkItDown
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api.formatters import TextFormatter
 from html2text import html2text
 from io import BytesIO
 from PIL import Image
-import requests, json, base64, tempfile, shutil
+import requests, json, base64, tempfile, shutil, logging, threading, os, re
 
-from . import blocks, dialog
+from . import blocks, dialog, model_manager
 from ..sql_manager import Instance as SQL
+
+logger = logging.getLogger(__name__)
 
 def extract_content(file_type:str, file_path:str) -> str:
     if file_type in ('plain_text', 'code'):
@@ -384,3 +387,192 @@ class ImageAttachmentContainer(Gtk.ScrolledWindow):
     def add_attachment(self, attachment:ImageAttachment) -> None:
         self.set_visible(True)
         self.container.append(attachment)
+
+class GlobalAttachmentContainer(AttachmentContainer):
+    __gtype_name__ = 'AlpacaGlobalAttachmentContainer'
+
+    def attach_website(self, url:str): ##TODO DELETE LINK AFTER ATTACHING
+        content = extract_content("website", url)
+        website_title = 'website'
+        match = re.search(r'https?://(?:www\.)?([^/]+)', url)
+        if match:
+            website_title = match.group(1)
+        attachment = Attachment(
+            file_id="-1",
+            file_name=website_title,
+            file_type="website",
+            file_content=content
+        )
+        self.add_attachment(attachment)
+
+    def attach_youtube(self, yt_url:str, caption_id:str): ##UNTESTED
+        file_name, content = extract_youtube_content(yt_url, caption_id)
+        attachment = Attachment(
+            file_id="-1",
+            file_name=file_name,
+            file_type='youtube',
+            file_content=content
+        )
+        self.add_attachment(attachment)
+
+    def youtube_detected(self, video_url:str): ##UNTESTED ##TODO FAILED: library deprecated stuff
+        try:
+            response = requests.get('https://noembed.com/embed?url={}'.format(video_url))
+            data = json.loads(response.text)
+
+            transcriptions = get_youtube_transcripts(data['url'].split('=')[1])
+            if len(transcriptions) == 0:
+                GLib.idle_add(dialog.show_toast, _("This video does not have any transcriptions"), self.get_root())
+                return
+
+            if not any(filter(lambda x: '(en' in x and 'auto-generated' not in x and len(transcriptions) > 1, transcriptions)):
+                transcriptions.insert(1, 'English (translate:en)')
+
+            GLib.idle_add(dialog.simple_dropdown,
+                self.get_root(),
+                _('Attach YouTube Video?'),
+                _('{}\n\nPlease select a transcript to include').format(data['title']),
+                lambda caption_name, video_url=video_url: threading.Thread(target=self.attach_youtube, args=(video_url, caption_name.split(' (')[-1][:-1])).start(),
+                transcriptions
+            )
+        except Exception as e:
+            logger.error(e)
+            GLib.idle_add(dialog.show_toast, _("Error attaching video, please try again"), self.get_root())
+        GLib.idle_add(self.get_root().message_text_view_scrolled_window.set_sensitive, True) #TODO quck port
+
+    def on_attachment(self, file:Gio.File):
+        if not file:
+            return
+        file_types = {
+            "plain_text": ["txt", "md"],
+            "code": ["c", "h", "css", "html", "js", "ts", "py", "java", "json", "xml", "asm", "nasm",
+                    "cs", "csx", "cpp", "cxx", "cp", "hxx", "inc", "csv", "lsp", "lisp", "el", "emacs",
+                    "l", "cu", "dockerfile", "glsl", "g", "lua", "php", "rb", "ru", "rs", "sql", "sh", "p8",
+                    "yaml"],
+            "image": ["png", "jpeg", "jpg", "webp", "gif"],
+            "pdf": ["pdf"],
+            "odt": ["odt"],
+            "docx": ["docx"],
+            "pptx": ["pptx"],
+            "xlsx": ["xlsx"]
+        }
+        if file.query_info("standard::content-type", 0, None).get_content_type() == 'text/plain':
+            extension = 'txt'
+        else:
+            extension = file.get_path().split(".")[-1]
+        found_types = [key for key, value in file_types.items() if extension in value]
+        if len(found_types) == 0:
+            file_type = 'plain_text'
+        else:
+            file_type = found_types[0]
+        if file_type == 'image':
+            content = extract_image(file.get_path(), 256)
+        else:
+            content = extract_content(file_type, file.get_path())
+        attachment = Attachment(
+            file_id="-1",
+            file_name=os.path.basename(file.get_path()),
+            file_type=file_type,
+            file_content=content
+        )
+        self.add_attachment(attachment)
+
+    def attachment_request(self):
+        ff = Gtk.FileFilter()
+        ff.set_name(_('Any compatible Alpaca attachment'))
+        file_filters = [ff]
+        mimes = (
+            'text/plain',
+            'application/pdf',
+            'application/vnd.oasis.opendocument.text',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+        for mime in mimes:
+            ff = Gtk.FileFilter()
+            ff.add_mime_type(mime)
+            file_filters[0].add_mime_type(mime)
+            file_filters.append(ff)
+        if model_manager.get_selected_model().get_vision():
+            file_filters[0].add_pixbuf_formats()
+            file_filter = Gtk.FileFilter()
+            file_filter.add_pixbuf_formats()
+            file_filters.append(file_filter)
+        dialog.simple_file(
+            parent = self.get_root(),
+            file_filters = file_filters,
+            callback = self.on_attachment
+        )
+
+    def request_screenshot(self):
+        if model_manager.get_selected_model().get_vision():
+            bus = SessionBus()
+            portal = bus.get("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop")
+            subscription = None
+
+            def on_response(sender, obj, iface, signal, *params):
+                response = params[0]
+                if response[0] == 0:
+                    uri = response[1].get("uri")
+                    self.on_attachment(Gio.File.new_for_uri(uri))
+                else:
+                    logger.error(f"Screenshot request failed with response: {response}\n{sender}\n{obj}\n{iface}\n{signal}")
+                    dialog.show_toast(_("Attachment failed, screenshot might be too big"), self)
+                if subscription:
+                    subscription.disconnect()
+
+            subscription = bus.subscribe(
+                iface="org.freedesktop.portal.Request",
+                signal="Response",
+                signal_fired=on_response
+            )
+
+            portal.Screenshot("", {"interactive": Variant('b', True)})
+        else:
+            dialog.show_toast(_("Image recognition is only available on specific models"), self.get_root())
+
+class GlobalAttachmentButton(Gtk.Button):
+    __gtype_name__ = 'AlpacaGlobalAttachmentButton'
+
+    def __init__(self):
+        super().__init__(
+            vexpand=False,
+            valign=3,
+            icon_name='chain-link-loose-symbolic',
+            css_classes=['circular']
+        )
+        self.connect('clicked', lambda button: self.get_root().global_attachment_container.attachment_request())
+        gesture_click = Gtk.GestureClick(button=3)
+        gesture_click.connect("released", lambda gesture, _n_press, x, y: self.show_popup(gesture, x, y))
+        self.add_controller(gesture_click)
+        gesture_long_press = Gtk.GestureLongPress()
+        gesture_long_press.connect("pressed", self.show_popup)
+        self.add_controller(gesture_long_press)
+
+    def show_popup(self, gesture, x, y):
+        rect = Gdk.Rectangle()
+        rect.x, rect.y, = x, y
+        actions = {
+            _('Attach File'): lambda: self.get_root().global_attachment_container.attachment_request(),
+            _('Attach Website'): lambda: dialog.simple_entry(
+                parent=self.get_root(),
+                heading=_('Attach Website? (Experimental)'),
+                body=_('Please enter a website URL'),
+                callback=self.get_root().global_attachment_container.attach_website,
+                entries={'placeholder': 'https://jeffser.com/alpaca/'}
+            ),
+            _('Attach YouTube Captions'): lambda: dialog.simple_entry(
+                parent=self,
+                heading=_('Attach YouTube Captions?'),
+                body=_('Please enter a YouTube video URL'),
+                callback=self.get_root().global_attachment_container.youtube_detected,
+                entries={'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
+            ),
+            _('Attach Screenshot'): lambda: self.get_root().global_attachment_container.request_screenshot() #TODO only show if model has vision
+        }
+        popup = dialog.Popover(actions)
+        popup.set_parent(self)
+        popup.set_pointing_to(rect)
+        popup.popup()
+
