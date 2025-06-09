@@ -132,8 +132,7 @@ class Notebook(Gtk.Stack):
 
     def stop_message(self):
         self.busy = False
-        if self.get_root().get_name() == 'AlpacaWindow':
-            self.get_root().action_button_stack.set_visible_child_name('send')
+        self.get_root().global_footer.toggle_action_button(True)
 
     def unload_messages(self):
         self.stop_message()
@@ -281,8 +280,7 @@ class Chat(Gtk.Stack):
 
     def stop_message(self):
         self.busy = False
-        if self.get_root().get_name() == 'AlpacaWindow':
-            self.get_root().action_button_stack.set_visible_child_name('send')
+        self.get_root().global_footer.toggle_action_button(True)
 
     def unload_messages(self):
         self.stop_message()
@@ -323,7 +321,7 @@ class Chat(Gtk.Stack):
                     self.get_root().get_application().lookup_action('instance_manager').activate()
                 else:
                     self.get_root().get_application().lookup_action('model_manager').activate()
-        buffer = self.get_root().message_text_view.get_buffer()
+        buffer = self.get_root().global_footer.get_buffer()
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
         buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
         self.get_root().send_message()

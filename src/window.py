@@ -84,9 +84,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     toast_overlay = Gtk.Template.Child()
     chat_stack = Gtk.Template.Child()
     chat_list_stack = Gtk.Template.Child()
-    message_text_view = None
-    message_text_view_scrolled_window = Gtk.Template.Child()
-    bottom_chat_controls_container = Gtk.Template.Child()
+    global_footer_container = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
     searchentry_models = Gtk.Template.Child()
     model_search_button = Gtk.Template.Child()
@@ -102,7 +100,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     chat_list_container = Gtk.Template.Child()
     chat_list_box = Gtk.Template.Child()
     model_manager = None
-    global_attachment_container = None
 
     powersaver_warning_switch = Gtk.Template.Child()
     mic_group = Gtk.Template.Child()
@@ -508,10 +505,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 current_chat.set_visible_child_name('no-results')
 
     def send_message(self, mode:int=0): #mode 0=user 1=system 2=tool
-        if button and not button.get_visible():
+        buffer = self.global_footer.get_buffer()
+
+        raw_message = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
+        if not raw_message:
             return
-        if not self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False):
-            return
+
         current_chat = self.chat_list_box.get_selected_row().chat
         if current_chat.busy == True:
             return
@@ -535,7 +534,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.chat_list_box.prepend(tab)
         self.chat_list_box.select_row(tab)
 
-        raw_message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
         m_element = Widgets.message.Message(
             dt=datetime.now(),
             message_id=generate_uuid(),
@@ -544,7 +542,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
         current_chat.add_message(m_element)
 
-        for old_attachment in list(self.global_attachment_container.container):
+        for old_attachment in list(self.global_footer.attachment_container.container):
             attachment = m_element.add_attachment(
                 file_id = generate_uuid(),
                 name = old_attachment.file_name,
@@ -558,7 +556,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         SQL.insert_or_update_message(m_element)
 
-        self.message_text_view.get_buffer().set_text("", 0)
+        buffer.set_text("", 0)
 
         if mode==0:
             m_element_bot = Widgets.message.Message(
@@ -624,7 +622,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.chat_stack.set_visible_child(future_row.chat)
 
                 # Sync stop/send button to chat's state
-                self.action_button_stack.set_visible_child_name('stop' if future_row.chat.busy else 'send')
+                self.global_footer.toggle_action_button(not future_row.chat.busy)
                 if load_chat_thread:
                     load_chat_thread.join()
                 # Select the correct model for the chat
@@ -823,25 +821,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
         list(list(self.model_dropdown)[1].get_child())[1].set_propagate_natural_width(True)
         list(list(self.title_no_model_button.get_child())[0])[1].set_ellipsize(3)
 
-        # Global Attachment Container
-        self.global_attachment_container = Widgets.attachments.GlobalAttachmentContainer()
-        self.bottom_chat_controls_container.prepend(self.global_attachment_container)
-        list(self.bottom_chat_controls_container)[1].prepend(Widgets.attachments.GlobalAttachmentButton())
-        self.action_button_stack = Widgets.message.GlobalActionStack()
-        list(self.bottom_chat_controls_container)[1].append(self.action_button_stack)
+        # Global Footer
+        self.global_footer = Widgets.message.GlobalFooter()
+        self.global_footer_container.set_child(self.global_footer)
+        self.set_focus(self.global_footer.message_text_view)
 
-        self.model_manager_stack.set_enable_transitions(True)
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         for el in ("default-width", "default-height", "maximized", "hide-on-close"):
             self.settings.bind(el, self, el, Gio.SettingsBindFlags.DEFAULT)
 
         self.settings.bind('powersaver-warning', self.powersaver_warning_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind('zoom', self.zoom_spin, 'value', Gio.SettingsBindFlags.DEFAULT)
-
-        self.message_text_view = Widgets.message.GlobalMessageTextView()
-        self.message_text_view_scrolled_window.set_child(self.message_text_view)
-
-        self.message_text_view_scrolled_window.get_parent().append(Widgets.voice.MicrophoneButton(self.message_text_view))
 
         universal_actions = {
             'new_chat': [lambda *_: self.chat_list_box.select_row(self.new_chat().row), ['<primary>n']],
@@ -883,10 +873,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         self.model_creator_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
         self.model_creator_tag.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
-
-
-        self.set_focus(self.message_text_view)
-            
 
         def verify_powersaver_mode():
             self.banner.set_revealed(

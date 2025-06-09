@@ -346,7 +346,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                       </object>
                     </child>
                     <property name="content">
-                      <object class="GtkBox"><!--ACTUAL CONTENT-->
+                      <object class="GtkBox">
                         <property name="orientation">1</property>
                         <property name="vexpand">true</property>
                         <property name="hexpand">true</property>
@@ -371,41 +371,12 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                               </object>
                             </child>
                             <child>
-                              <object class="AdwClamp">
+                              <object class="AdwClamp" id="global_footer_container">
                                 <property name="maximum-size">1000</property>
                                 <property name="tightening-threshold">800</property>
                                 <style>
                                   <class name="bottom_clamp"/>
                                 </style>
-                                <child>
-                                  <object class="GtkBox" id="bottom_chat_controls_container">
-                                    <property name="orientation">1</property>
-                                    <property name="spacing">12</property>
-                                    <child>
-                                      <object class="GtkBox">
-                                        <property name="spacing">12</property>
-                                        <child>
-                                          <object class="GtkBox">
-                                            <style>
-                                              <class name="card"/>
-                                            </style>
-                                            <property name="overflow">1</property>
-                                            <child>
-                                              <object class="GtkScrolledWindow" id="message_text_view_scrolled_window">
-                                                <property name="max-content-height">150</property>
-                                                <property name="propagate-natural-height">true</property>
-                                                <property name="min-content-height">1</property>
-                                                <style>
-                                                  <class name="undershoot-bottom"/>
-                                                </style>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
                               </object>
                             </child>
                           </object>
@@ -631,6 +602,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                     </child>
                     <property name="content">
                       <object class="AdwViewStack" id="model_manager_stack">
+                        <property name="enable-transitions">true</property>
                         <signal name="notify::visible-child" handler="model_manager_stack_changed"/>
                         <child>
                           <object class="AdwViewStackPage">

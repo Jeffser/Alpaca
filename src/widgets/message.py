@@ -426,7 +426,7 @@ class GlobalMessageTextView(GtkSource.View):
     def on_file_drop(self, drop_target, value, x, y):
         files = value.get_files()
         for file in files:
-            self.get_root().global_attachment_container.on_attachment(file)
+            self.get_root().global_footer.attachment_container.on_attachment(file)
 
     def cb_text_received(self, clipboard, result):
         try:
@@ -444,13 +444,13 @@ class GlobalMessageTextView(GtkSource.View):
             )
             if youtube_regex.match(text):
                 self.get_parent().set_sensitive(False)
-                threading.Thread(target=self.get_root().global_attachment_container.youtube_detected, args=(text,)).start()
+                threading.Thread(target=self.get_root().global_footer.attachment_container.youtube_detected, args=(text,)).start()
             elif url_regex.match(text):
                 dialog.simple(
                     parent = self.get_root(),
                     heading = _('Attach Website? (Experimental)'),
                     body = _("Are you sure you want to attach\n'{}'?").format(text),
-                    callback = lambda url=text: threading.Thread(target=self.get_root().global_attachment_container.attach_website, args=(url,)).start()
+                    callback = lambda url=text: threading.Thread(target=self.get_root().global_footer.attachment_container.attach_website, args=(url,)).start()
                 )
         except Exception as e:
             pass
@@ -465,7 +465,7 @@ class GlobalMessageTextView(GtkSource.View):
                     pixbuf.savev(os.path.join(tdir.name, 'image.png'), 'png', [], [])
                     os.system('ls {}'.format(tdir.name))
                     file = Gio.File.new_for_path(os.path.join(tdir.name, 'image.png'))
-                    self.get_root().global_attachment_container.on_attachment(file)
+                    self.get_root().global_footer.attachment_container.on_attachment(file)
                     tdir.cleanup()
                 else:
                     dialog.show_toast(_("Image recognition is only available on specific models"), self.get_root())
@@ -512,7 +512,7 @@ class GlobalActionStack(Gtk.Stack):
         )
         self.add_named(stop_button, 'stop')
 
-        stop_button.connect('clicked', lambda button: self.chat_list_box.get_selected_row().chat.stop_message()) #TODO port quick
+        stop_button.connect('clicked', lambda button: self.chat_list_box.get_selected_row().chat.stop_message())
 
         send_button.connect('clicked', lambda button: self.get_root().send_message(0))
         gesture_click = Gtk.GestureClick(button=3)
@@ -535,3 +535,44 @@ class GlobalActionStack(Gtk.Stack):
         popup.set_pointing_to(rect)
         popup.popup()
 
+class GlobalFooter(Gtk.Box):
+    __gtype_name__ = 'AlpacaGlobalFooter'
+
+    def __init__(self):
+        super().__init__(
+            spacing=12,
+            orientation=1
+        )
+        self.attachment_container = attachments.GlobalAttachmentContainer()
+        self.append(self.attachment_container)
+
+        controls_container = Gtk.Box(spacing=12)
+        self.append(controls_container)
+        controls_container.append(attachments.GlobalAttachmentButton())
+
+        message_text_view_container = Gtk.Box(
+            overflow=1,
+            css_classes=['card']
+        )
+        controls_container.append(message_text_view_container)
+        self.message_text_view = GlobalMessageTextView()
+        message_text_view_scroller = Gtk.ScrolledWindow(
+            max_content_height=150,
+            propagate_natural_height=True,
+            min_content_height=1,
+            css_classes=['undershoot-bottom'],
+            child=self.message_text_view
+        )
+        message_text_view_container.append(message_text_view_scroller)
+
+        self.microphone_button = voice.MicrophoneButton(self.message_text_view)
+        message_text_view_container.append(self.microphone_button)
+
+        self.action_stack = GlobalActionStack()
+        controls_container.append(self.action_stack)
+
+    def toggle_action_button(self, state:bool):
+        self.action_stack.set_visible_child_name('send' if state else 'stop')
+
+    def get_buffer(self):
+        return self.message_text_view.get_buffer()

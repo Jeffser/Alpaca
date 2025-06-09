@@ -21,7 +21,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
 
     toast_overlay = Gtk.Template.Child()
     save_button = Gtk.Template.Child()
-    message_text_view_scrolled_window = Gtk.Template.Child()
+    global_footer_container = Gtk.Template.Child()
 
     # tts
     message_dictated = None
@@ -46,8 +46,9 @@ class QuickAskWindow(Adw.ApplicationWindow):
             return Widgets.instance_manager.create_instance_row(instances[0]).instance
 
     def send_message(self, mode:int=0):
-        #Mode = 0 (normal), Mode = 1 (System), Mode = 2 (Use Tools)
-        message = self.message_text_view.get_buffer().get_text(self.message_text_view.get_buffer().get_start_iter(), self.message_text_view.get_buffer().get_end_iter(), False)
+        #Mode = 0 (normal), Mode = 1 (System), Mode = 2 (Use Tools)3
+        buffer = self.global_footer.get_buffer()
+        message = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
         if not message:
             return
 
@@ -60,7 +61,6 @@ class QuickAskWindow(Adw.ApplicationWindow):
             Widgets.dialog.show_toast(_("Please select add a model for this instance in Alpaca before chatting"), self)
             return
 
-        buffer = self.message_text_view.get_buffer()
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
 
         chat = self.toast_overlay.get_child()
@@ -91,20 +91,19 @@ class QuickAskWindow(Adw.ApplicationWindow):
                 threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.tool_listbox), True)).start()
 
     def write_and_send_message(self, message:str):
-        buffer = self.message_text_view.get_buffer()
+        buffer = self.global_footer.get_buffer()
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
         buffer.insert(buffer.get_start_iter(), message, len(message.encode('utf-8')))
         self.send_message()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.global_footer = Widgets.message.GlobalFooter()
+        self.global_footer.action_stack.set_visible(False)
+        self.global_footer_container.set_child(self.global_footer)
 
-        self.message_text_view = Widgets.message.GlobalMessageTextView()
-
-        self.message_text_view_scrolled_window.set_child(self.message_text_view)
-        self.message_text_view_scrolled_window.get_parent().append(Widgets.voice.MicrophoneButton(self.message_text_view))
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
-        self.set_focus(self.message_text_view)
+        self.set_focus(self.global_footer.message_text_view)
 
         chat = Widgets.chat.Chat(
             name=_('Quick Ask')

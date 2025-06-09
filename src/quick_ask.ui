@@ -28,25 +28,11 @@
             <object class="AdwToastOverlay" id="toast_overlay"/>
           </property>
           <child type="bottom">
-            <object class="GtkBox">
+            <object class="AdwBin" id="global_footer_container">
               <property name="margin-top">10</property>
               <property name="margin-bottom">10</property>
               <property name="margin-start">10</property>
               <property name="margin-end">10</property>
-              <style>
-                <class name="card"/>
-              </style>
-              <property name="overflow">1</property>
-              <child>
-                <object class="GtkScrolledWindow" id="message_text_view_scrolled_window">
-                  <property name="max-content-height">150</property>
-                  <property name="propagate-natural-height">true</property>
-                  <property name="min-content-height">1</property>
-                  <style>
-                    <class name="undershoot-bottom"/>
-                  </style>
-                </object>
-              </child>
             </object>
           </child>
         </object>

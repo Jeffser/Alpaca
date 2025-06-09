@@ -438,7 +438,6 @@ class GlobalAttachmentContainer(AttachmentContainer):
         except Exception as e:
             logger.error(e)
             GLib.idle_add(dialog.show_toast, _("Error attaching video, please try again"), self.get_root())
-        GLib.idle_add(self.get_root().message_text_view_scrolled_window.set_sensitive, True) #TODO quck port
 
     def on_attachment(self, file:Gio.File):
         if not file:
@@ -542,7 +541,7 @@ class GlobalAttachmentButton(Gtk.Button):
             icon_name='chain-link-loose-symbolic',
             css_classes=['circular']
         )
-        self.connect('clicked', lambda button: self.get_root().global_attachment_container.attachment_request())
+        self.connect('clicked', lambda button: self.get_root().global_footer.attachment_container.attachment_request())
         gesture_click = Gtk.GestureClick(button=3)
         gesture_click.connect("released", lambda gesture, _n_press, x, y: self.show_popup(gesture, x, y))
         self.add_controller(gesture_click)
@@ -554,22 +553,22 @@ class GlobalAttachmentButton(Gtk.Button):
         rect = Gdk.Rectangle()
         rect.x, rect.y, = x, y
         actions = {
-            _('Attach File'): lambda: self.get_root().global_attachment_container.attachment_request(),
+            _('Attach File'): lambda: self.get_root().global_footer.attachment_container.attachment_request(),
             _('Attach Website'): lambda: dialog.simple_entry(
                 parent=self.get_root(),
                 heading=_('Attach Website? (Experimental)'),
                 body=_('Please enter a website URL'),
-                callback=self.get_root().global_attachment_container.attach_website,
+                callback=self.get_root().global_footer.attachment_container.attach_website,
                 entries={'placeholder': 'https://jeffser.com/alpaca/'}
             ),
             _('Attach YouTube Captions'): lambda: dialog.simple_entry(
                 parent=self,
                 heading=_('Attach YouTube Captions?'),
                 body=_('Please enter a YouTube video URL'),
-                callback=self.get_root().global_attachment_container.youtube_detected,
+                callback=self.get_root().global_footer.attachment_container.youtube_detected,
                 entries={'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
             ),
-            _('Attach Screenshot'): lambda: self.get_root().global_attachment_container.request_screenshot() #TODO only show if model has vision
+            _('Attach Screenshot'): lambda: self.get_root().global_footer.attachment_container.request_screenshot() #TODO only show if model has vision
         }
         popup = dialog.Popover(actions)
         popup.set_parent(self)
