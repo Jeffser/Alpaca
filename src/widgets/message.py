@@ -410,7 +410,7 @@ class GlobalMessageTextView(GtkSource.View):
         )
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
-        drop_target.connect('drop', self.on_file_drop)
+        drop_target.connect('drop', lambda *_: self.get_root().global_footer.on_file_drop(*_))
         self.add_controller(drop_target)
         self.get_buffer().set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('adwaita'))
         self.connect('paste-clipboard', self.on_clipboard_paste)
@@ -422,11 +422,6 @@ class GlobalMessageTextView(GtkSource.View):
         self.set_extra_menu(adapter.get_menu_model())
         self.insert_action_group('spelling', adapter)
         adapter.set_enabled(True)
-
-    def on_file_drop(self, drop_target, value, x, y):
-        files = value.get_files()
-        for file in files:
-            self.get_root().global_footer.attachment_container.on_attachment(file)
 
     def cb_text_received(self, clipboard, result):
         try:
@@ -555,8 +550,13 @@ class GlobalFooter(Gtk.Box):
     def __init__(self):
         super().__init__(
             spacing=12,
-            orientation=1
+            orientation=1,
+            css_classes=['p10']
         )
+        drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
+        drop_target.connect('drop', self.on_file_drop)
+        self.add_controller(drop_target)
+
         self.attachment_container = attachments.GlobalAttachmentContainer()
         self.append(self.attachment_container)
 
@@ -584,6 +584,11 @@ class GlobalFooter(Gtk.Box):
 
         self.action_stack = GlobalActionStack()
         controls_container.append(self.action_stack)
+
+    def on_file_drop(self, drop_target, value, x, y):
+        files = value.get_files()
+        for file in files:
+            self.get_root().global_footer.attachment_container.on_attachment(file)
 
     def toggle_action_button(self, state:bool):
         self.action_stack.set_visible_child_name('send' if state else 'stop')
