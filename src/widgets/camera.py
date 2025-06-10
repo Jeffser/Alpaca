@@ -5,7 +5,7 @@ Manages the camera feature to send pictures to AI
 import gi
 gi.require_version('Gst', '1.0')
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject, Gst
-from . import attachments
+from . import attachments, dialog
 import cv2, threading, base64
 import numpy as np
 
@@ -15,7 +15,8 @@ pipeline = Gst.parse_launch('pipewiresrc ! videoconvert ! appsink name=sink')
 class CameraDialog(Adw.Dialog):
     __gtype_name___ = 'AlpacaCameraDialog'
 
-    def __init__(self):
+    def __init__(self, capture):
+        self.capture = capture
         self.image = Gtk.Picture(
             content_fit=2
         )
@@ -56,7 +57,6 @@ class CameraDialog(Adw.Dialog):
         threading.Thread(target=self.update_frame, daemon=True).start()
 
     def update_frame(self):
-        self.capture = cv2.VideoCapture(0)
         while self.running and self.capture.isOpened():
             ret, frame = self.capture.read()
             if ret:
@@ -109,3 +109,19 @@ class CameraDialog(Adw.Dialog):
     def on_closed(self):
         self.capture.release()
         self.running = False
+
+def show_webcam_dialog(root_widget:Gtk.Widget):
+    capture = cv2.VideoCapture(0)
+    if capture.isOpened():
+        CameraDialog(capture).present(root_widget)
+    else:
+        options = {
+            _('Close'): {'default': True},
+        }
+        dialog.Options(
+            heading=_('No Camera Detected'),
+            body=_('Please check if camera is plugged in and turned on'),
+            close_response=list(options.keys())[0],
+            options=options
+        ).show(root_widget)
+

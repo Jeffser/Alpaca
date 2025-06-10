@@ -580,19 +580,24 @@ class GlobalAttachmentButton(Gtk.Button):
                         entries={'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
                     ),
                     'icon': 'play-symbolic'
-                },
-                {
-                    'label': _('Attach Screenshot'),
-                    'callback': lambda: self.get_root().global_footer.attachment_container.request_screenshot(), #TODO only show if model has vision
-                    'icon': 'image-x-generic-symbolic'
-                },
-                {
-                    'label': _('Attach Photo From Camera'),
-                    'callback': lambda: camera.CameraDialog().present(self.get_root()),
-                    'icon': 'camera-photo-symbolic'
                 }
             ]
         ]
+        if model_manager.get_selected_model().get_vision():
+            actions[0].append(
+                {
+                    'label': _('Attach Screenshot'),
+                    'callback': lambda: self.get_root().global_footer.attachment_container.request_screenshot(),
+                    'icon': 'image-x-generic-symbolic'
+                }
+            )
+            actions[0].append(
+                {
+                    'label': _('Attach Photo From Camera'),
+                    'callback': lambda: camera.show_webcam_dialog(self.get_root()),
+                    'icon': 'camera-photo-symbolic'
+                }
+            )
         popup = dialog.Popover(actions)
         popup.set_parent(self)
         popup.set_pointing_to(rect)

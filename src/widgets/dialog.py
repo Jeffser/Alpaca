@@ -27,9 +27,9 @@ class Base(Adw.AlertDialog):
         )
         for option, data in self.options.items():
             self.add_response(option, option)
-            if 'appearance' in data:
+            if data.get('appearance'):
                 self.set_response_appearance(option, button_appearance[data['appearance']])
-            if 'default' in data and data['default']:
+            if data.get('default'):
                 self.set_default_response(option)
 
 
@@ -290,21 +290,22 @@ def simple_error(parent:Gtk.Widget, title:str, body:str, error_log:str, callback
         wrap=True,
         wrap_mode=2
     ))
-    container.append(Gtk.ScrolledWindow(
-        min_content_width=300,
-        hscrollbar_policy=2,
-        propagate_natural_height=True,
-        propagate_natural_width=True,
-        css_classes=['card', 'undershoot-bottom'],
-        overflow=True,
-        child=Gtk.Label(
-            css_classes=['p10', 'monospace', 'error'],
-            label=error_log,
-            wrap=True,
-            wrap_mode=2,
-            selectable=True
-        )
-    ))
+    if error_log:
+        container.append(Gtk.ScrolledWindow(
+            min_content_width=300,
+            hscrollbar_policy=2,
+            propagate_natural_height=True,
+            propagate_natural_width=True,
+            css_classes=['card', 'undershoot-bottom'],
+            overflow=True,
+            child=Gtk.Label(
+                css_classes=['p10', 'monospace', 'error'],
+                label=error_log,
+                wrap=True,
+                wrap_mode=2,
+                selectable=True
+            )
+        ))
 
     tbv = Adw.ToolbarView()
     tbv.add_top_bar(Adw.HeaderBar())
