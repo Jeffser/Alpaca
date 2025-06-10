@@ -337,9 +337,7 @@ class Chat(Gtk.Stack):
                 for image in message.image_attachment_container.get_content():
                     message_data['content'].append({
                         'type': 'image_url',
-                        'image_url': {
-                            'url': f'data:image/jpeg;base64,{image.get("content")}'
-                        }
+                        'image_url': f'data:image/png;base64,{image.get("content")}'
                     })
                 message_data['content'].append({
                     'type': 'text',

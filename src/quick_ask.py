@@ -32,6 +32,8 @@ class QuickAskWindow(Adw.ApplicationWindow):
         new_chat = self.get_application().main_alpaca_window.new_chat(chat.get_name())
         for message in list(chat.container):
             SQL.insert_or_update_message(message, new_chat.chat_id)
+            for attachment in list(message.attachment_container.container) + list(message.image_attachment_container.container):
+                SQL.insert_or_update_attachment(message, attachment)
         self.get_application().main_alpaca_window.chat_list_box.select_row(new_chat.row)
         self.get_application().main_alpaca_window.present()
         self.close()
@@ -72,6 +74,16 @@ class QuickAskWindow(Adw.ApplicationWindow):
             mode=0 if mode in (0,2) else 2
         )
         chat.add_message(m_element)
+
+        for old_attachment in list(self.global_footer.attachment_container.container):
+            attachment = m_element.add_attachment(
+                file_id = generate_uuid(),
+                name = old_attachment.file_name,
+                attachment_type = old_attachment.file_type,
+                content = old_attachment.file_content
+            )
+            old_attachment.delete()
+
         m_element.block_container.set_content(message)
 
         if mode in (0, 2):
