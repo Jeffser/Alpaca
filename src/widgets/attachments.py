@@ -14,7 +14,7 @@ from io import BytesIO
 from PIL import Image
 import requests, json, base64, tempfile, shutil, logging, threading, os, re
 
-from . import blocks, dialog, model_manager
+from . import blocks, dialog, model_manager, camera
 from ..sql_manager import Instance as SQL
 
 logger = logging.getLogger(__name__)
@@ -585,6 +585,11 @@ class GlobalAttachmentButton(Gtk.Button):
                     'label': _('Attach Screenshot'),
                     'callback': lambda: self.get_root().global_footer.attachment_container.request_screenshot(), #TODO only show if model has vision
                     'icon': 'image-x-generic-symbolic'
+                },
+                {
+                    'label': _('Attach Photo From Camera'),
+                    'callback': lambda: camera.CameraDialog().present(self.get_root()),
+                    'icon': 'camera-photo-symbolic'
                 }
             ]
         ]
