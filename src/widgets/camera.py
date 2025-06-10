@@ -37,7 +37,7 @@ class CameraDialog(Adw.Dialog):
             ),
             halign=3,
             valign=2,
-            css_classes=['circular', 'flat', 'camera_button'],
+            css_classes=['circular', 'flat', 'camera_button', 'accent'],
             margin_bottom=10
         )
         capture_button.connect('clicked', lambda *_: self.take_photo())
