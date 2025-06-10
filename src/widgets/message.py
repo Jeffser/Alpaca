@@ -438,8 +438,12 @@ class GlobalMessageTextView(GtkSource.View):
                 r'(?:/[^\\s]*)?'
             )
             if youtube_regex.match(text):
-                self.get_parent().set_sensitive(False)
-                threading.Thread(target=self.get_root().global_footer.attachment_container.youtube_detected, args=(text,)).start()
+                dialog.simple(
+                    parent = self.get_root(),
+                    heading = _('Attach YouTube Video?'),
+                    body = _('Note that YouTube might block access to captions, please check output'),
+                    callback = lambda url=text: threading.Thread(target=self.get_root().global_footer.attachment_container.attach_youtube, args=(url,)).start()
+                )
             elif url_regex.match(text):
                 dialog.simple(
                     parent = self.get_root(),
@@ -595,3 +599,12 @@ class GlobalFooter(Gtk.Box):
 
     def get_buffer(self):
         return self.message_text_view.get_buffer()
+
+    def remove_text(self, text:str):
+        buffer = self.get_buffer()
+        current_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
+        current_text = current_text.replace(text, '')
+        buffer.set_text(current_text, len(current_text.encode('utf-8')))
+
+
+

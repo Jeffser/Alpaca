@@ -7,8 +7,6 @@ import odf.opendocument as odfopen
 import odf.table as odftable
 from pydbus import SessionBus, Variant
 from markitdown import MarkItDown
-from youtube_transcript_api import YouTubeTranscriptApi
-from youtube_transcript_api.formatters import TextFormatter
 from html2text import html2text
 from io import BytesIO
 from PIL import Image
@@ -23,7 +21,7 @@ def extract_content(file_type:str, file_path:str) -> str:
     if file_type in ('plain_text', 'code'):
         with open(file_path, 'r') as f:
             return f.read()
-    elif file_type in ('pdf', 'docx', 'pptx', 'xlsx'):
+    elif file_type in ('pdf', 'docx', 'pptx', 'xlsx', 'youtube'):
         return MarkItDown(enable_plugins=False).convert(file_path).text_content
     elif file_type == 'odt':
         doc = odfopen.load(file_path)
@@ -82,31 +80,6 @@ def extract_image(image_path:str, max_size:int) -> str:
             resized_img.save(output, format="PNG")
             image_data = output.getvalue()
         return base64.b64encode(image_data).decode("utf-8")
-
-def extract_youtube_content(youtube_url:str, caption_id:str) -> tuple:
-    try:
-        metadata = requests.get('https://noembed.com/embed?url={}'.format(youtube_url)).json()
-    except Exception as e:
-        print(e)
-        metadata = {}
-
-    video_id = youtube_url.split('?v=')[-1]
-    if caption_id.lower().startswith('translate:'):
-        available_captions = get_youtube_transcripts(video_id)
-        original_caption_name = available_captions[0].split(' (')[-1][:-1]
-        transcript = YouTubeTranscriptApi.list_transcripts(video_id).find_transcript([original_caption_name]).translate(caption_id.split(':')[-1]).fetch()
-    else:
-        transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=[caption_id])
-
-    return metadata.get('title'), "{}\n{}\n{}\n\n{}".format(
-        metadata.get('title'),
-        metadata.get('author_name'),
-        metadata.get('url'),
-        TextFormatter().format_transcript(transcript)
-    )
-
-def get_youtube_transcripts(youtube_url:str) -> list:
-    return ['{} ({})'.format(t.language, t.language_code) for t in YouTubeTranscriptApi.list_transcripts(youtube_url)]
 
 class AttachmentDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaAttachmentDialog'
@@ -391,7 +364,8 @@ class ImageAttachmentContainer(Gtk.ScrolledWindow):
 class GlobalAttachmentContainer(AttachmentContainer):
     __gtype_name__ = 'AlpacaGlobalAttachmentContainer'
 
-    def attach_website(self, url:str): ##TODO DELETE LINK AFTER ATTACHING
+    def attach_website(self, url:str):
+        GLib.idle_add(self.get_root().global_footer.remove_text, url)
         content = extract_content("website", url)
         website_title = 'website'
         match = re.search(r'https?://(?:www\.)?([^/]+)', url)
@@ -405,39 +379,17 @@ class GlobalAttachmentContainer(AttachmentContainer):
         )
         self.add_attachment(attachment)
 
-    def attach_youtube(self, yt_url:str, caption_id:str): ##UNTESTED
-        file_name, content = extract_youtube_content(yt_url, caption_id)
+    def attach_youtube(self, video_url:str):
+        GLib.idle_add(self.get_root().global_footer.remove_text, video_url)
+        content = extract_content('youtube', video_url)
+        title = requests.get('https://noembed.com/embed?url={}'.format(video_url)).json().get('title', 'YouTube')
         attachment = Attachment(
             file_id="-1",
-            file_name=file_name,
-            file_type='youtube',
+            file_name=title,
+            file_type="youtube",
             file_content=content
         )
         self.add_attachment(attachment)
-
-    def youtube_detected(self, video_url:str): ##UNTESTED ##TODO FAILED: library deprecated stuff
-        try:
-            response = requests.get('https://noembed.com/embed?url={}'.format(video_url))
-            data = json.loads(response.text)
-
-            transcriptions = get_youtube_transcripts(data['url'].split('=')[1])
-            if len(transcriptions) == 0:
-                GLib.idle_add(dialog.show_toast, _("This video does not have any transcriptions"), self.get_root())
-                return
-
-            if not any(filter(lambda x: '(en' in x and 'auto-generated' not in x and len(transcriptions) > 1, transcriptions)):
-                transcriptions.insert(1, 'English (translate:en)')
-
-            GLib.idle_add(dialog.simple_dropdown,
-                self.get_root(),
-                _('Attach YouTube Video?'),
-                _('{}\n\nPlease select a transcript to include').format(data['title']),
-                lambda caption_name, video_url=video_url: threading.Thread(target=self.attach_youtube, args=(video_url, caption_name.split(' (')[-1][:-1])).start(),
-                transcriptions
-            )
-        except Exception as e:
-            logger.error(e)
-            GLib.idle_add(dialog.show_toast, _("Error attaching video, please try again"), self.get_root())
 
     def on_attachment(self, file:Gio.File):
         if not file:
@@ -576,7 +528,7 @@ class GlobalAttachmentButton(Gtk.Button):
                         parent=self.get_root(),
                         heading=_('Attach YouTube Captions?'),
                         body=_('Please enter a YouTube video URL'),
-                        callback=self.get_root().global_footer.attachment_container.youtube_detected,
+                        callback=lambda url: threading.Thread(target=self.get_root().global_footer.attachment_container.attach_youtube, args=(url,)).start(),
                         entries={'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
                     ),
                     'icon': 'play-symbolic'

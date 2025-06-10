@@ -436,7 +436,7 @@
 	    "name": "python3-markitdown",
 	    "buildsystem": "simple",
 	    "build-commands": [
-		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --no-build-isolation markitdown[pptx,docx,xlsx,pdf]"
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --no-build-isolation markitdown[pptx,docx,xlsx,pdf,youtube-transcription]"
 	    ],
 	    "sources": [
 		{
