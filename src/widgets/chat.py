@@ -182,7 +182,7 @@ class Notebook(Gtk.Stack):
                     message_data['content'].append({
                         'type': 'image_url',
                         'image_url': {
-                            'url': f'data:image/jpeg;base64,{image.get_content()}'
+                            'url': f'data:image/jpeg;base64,{image["content"]}'
                         }
                     })
                 message_data['content'].append({
@@ -338,7 +338,7 @@ class Chat(Gtk.Stack):
                     message_data['content'].append({
                         'type': 'image_url',
                         'image_url': {
-                            'url': f'data:image/jpeg;base64,{image.get_content()}'
+                            'url': f'data:image/jpeg;base64,{image["content"]}'
                         }
                     })
                 message_data['content'].append({
