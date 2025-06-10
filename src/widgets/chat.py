@@ -338,7 +338,7 @@ class Chat(Gtk.Stack):
                     message_data['content'].append({
                         'type': 'image_url',
                         'image_url': {
-                            'url': f'data:image/jpeg;base64,{image["content"]}'
+                            'url': f'data:image/jpeg;base64,{image.get("content")}'
                         }
                     })
                 message_data['content'].append({
@@ -347,7 +347,7 @@ class Chat(Gtk.Stack):
                 })
                 for attachment in message.attachment_container.get_content():
                     message_data['content'][0]['text'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
-                message_data['content'][0 if ("text" in message_data["content"][0]) else 1]['text'] += message.get_content()
+                message_data['content'][0 if ("text" in message_data.get("content", [''])[0]) else 1]['text'] += message.get_content()
                 if include_metadata:
                     message_data['date'] = message.dt.strftime("%Y/%m/%d %H:%M:%S")
                     message_data['model'] = message.get_model()
