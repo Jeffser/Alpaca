@@ -496,23 +496,22 @@ class LocalModelPage(Gtk.Box):
         if self.model.data.get('description'):
             self.append(self.InfoBox(_('Description'), self.model.data.get('description'), False))
 
-        if sys.platform != 'darwin':
-            categories_box = Adw.WrapBox(
-                hexpand=True,
-                line_spacing=5,
-                child_spacing=5,
-                justify=0,
-                halign=1
-            )
-            self.append(categories_box)
-            categories = available_models.get(self.model.get_name().split(':')[0], {}).get('categories', [])
-            languages = available_models.get(self.model.get_name().split(':')[0], {}).get('languages', [])
-            if not categories:
-                categories = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('categories', [])
-                languages = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('languages', [])
-            for category in set(categories + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]):
-                if category not in ('small', 'medium', 'big', 'huge'):
-                    categories_box.append(CategoryPill(category, True))
+        categories_box = Adw.WrapBox(
+            hexpand=True,
+            line_spacing=5,
+            child_spacing=5,
+            justify=0,
+            halign=1
+        )
+        self.append(categories_box)
+        categories = available_models.get(self.model.get_name().split(':')[0], {}).get('categories', [])
+        languages = available_models.get(self.model.get_name().split(':')[0], {}).get('languages', [])
+        if not categories:
+            categories = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('categories', [])
+            languages = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('languages', [])
+        for category in set(categories + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]):
+            if category not in ('small', 'medium', 'big', 'huge'):
+                categories_box.append(CategoryPill(category, True))
 
         self.model.image_container.connect('notify::child', lambda *_: self.update_profile_picture())
 
@@ -771,19 +770,12 @@ class AvailableModelPage(Gtk.Box):
             justify=2
         )
         self.append(title_label)
-        if sys.platform == 'darwin':
-            categories_box = Gtk.FlowBox(
-                hexpand=True,
-                selection_mode=0,
-                max_children_per_line=2
-            )
-        else:
-            categories_box = Adw.WrapBox(
-                hexpand=True,
-                line_spacing=5,
-                child_spacing=5,
-                justify=1
-            )
+        categories_box = Adw.WrapBox(
+            hexpand=True,
+            line_spacing=5,
+            child_spacing=5,
+            justify=1
+        )
         self.append(categories_box)
         for category in set(self.model.data.get('categories', [])):
             categories_box.append(CategoryPill(category, True))
@@ -849,19 +841,18 @@ class AvailableModel(Gtk.Box):
             halign=1
         )
         self.append(description_label)
-        if sys.platform != 'darwin':
-            categories_box = Adw.WrapBox(
-                hexpand=True,
-                line_spacing=5,
-                child_spacing=5,
-                justify=0,
-                halign=1,
-                valign=3,
-                vexpand=True
-            )
-            self.append(categories_box)
-            for category in set(self.data.get('categories', [])):
-                categories_box.append(CategoryPill(category, False))
+        categories_box = Adw.WrapBox(
+            hexpand=True,
+            line_spacing=5,
+            child_spacing=5,
+            justify=0,
+            halign=1,
+            valign=3,
+            vexpand=True
+        )
+        self.append(categories_box)
+        for category in set(self.data.get('categories', [])):
+            categories_box.append(CategoryPill(category, False))
         self.page = None
 
     def get_default_widget(self):
