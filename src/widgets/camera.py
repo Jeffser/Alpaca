@@ -75,8 +75,27 @@ class CameraDialog(Adw.Dialog):
             else:
                 break
 
+    def get_new_resolution(self, width:int, height:int) -> tuple:
+        size = 640
+        if width <= size and height <= size:
+            return width, height
+
+        if height >= width:
+            new_width = size
+            new_height = int((size / width) * height)
+        else:
+            new_height = size
+            new_width = int((size / height) * width)
+
+        return new_width, new_height
+
     def take_photo(self):
-        picture_bytes = bytes(self.image.get_paintable().save_to_png_bytes().get_data())
+        self.capture.release()
+        texture = self.image.get_paintable()
+        width, height = self.get_new_resolution(texture.get_width(), texture.get_height())
+        texture.compute_concrete_size(width, height, width, height)
+
+        picture_bytes = bytes(texture.save_to_png_bytes().get_data())
 
         attachment = attachments.Attachment(
             file_id="-1",
