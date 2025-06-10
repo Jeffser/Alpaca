@@ -100,7 +100,7 @@ class OptionPopup(Gtk.Popover):
             self.message_element.author = model
             self.message_element.update_profile_picture()
             self.message_element.options_button.set_sensitive(False)
-            threading.Thread(target=self.get_root().get_current_instance().generate_message, args=(self.message_element, model)).start()
+            threading.Thread(target=self.message_element.get_root().get_current_instance().generate_message, args=(self.message_element, model)).start()
         else:
             dialog.show_toast(_("Message cannot be regenerated while receiving a response"), self.get_root())
 
