@@ -971,6 +971,13 @@ class Klusterai(BaseOpenAI):
     instance_url = 'https://api.kluster.ai/v1/'
     description = _('Kluster AI cloud inference API')
 
+class NovitaAI(BaseOpenAI):
+    instance_type = 'novitaai'
+    instance_type_display = 'Novita AI'
+    instance_url = 'https://api.novita.ai/v3/openai/'
+    description = _('Novita AI cloud inference API')
+    limitations = ('no-seed',)
+
 class GenericOpenAI(BaseOpenAI):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
@@ -1068,6 +1075,4 @@ def update_instance_list():
 if os.getenv('ALPACA_OLLAMA_ONLY', '0') == '1':
     ready_instances = [OllamaManaged, Ollama]
 else:
-    ready_instances = [OllamaManaged, Ollama, ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Fireworks, LambdaLabs, Cerebras, Klusterai, GenericOpenAI, LlamaAPI]
-
-
+    ready_instances = [OllamaManaged, Ollama, ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Fireworks, LambdaLabs, Cerebras, Klusterai, NovitaAI, GenericOpenAI, LlamaAPI]
