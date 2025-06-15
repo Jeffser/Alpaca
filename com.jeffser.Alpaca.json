@@ -693,9 +693,6 @@
             "name": "alpaca",
             "builddir": true,
             "buildsystem": "meson",
-            "post-install": [
-                "mkdir -p ${FLATPAK_DEST}/plugins"
-            ],
             "sources": [
                 {
                     "type": "git",
