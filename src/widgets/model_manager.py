@@ -448,11 +448,12 @@ class LocalModelPage(Gtk.Box):
         )
         self.append(title_label)
 
-        preferences_group = Adw.PreferencesGroup()
+        preferences_group = Adw.PreferencesGroup(
+            visible=importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice')
+        )
         self.append(preferences_group)
         self.voice_combo = Adw.ComboRow(
-            title=_("Voice"),
-            visible=importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice')
+            title=_("Voice")
         )
         selected_voice = SQL.get_model_preferences(self.model.get_name()).get('voice', None)
         selected_index = 0
