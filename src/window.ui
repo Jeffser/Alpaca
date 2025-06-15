@@ -1011,7 +1011,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
             </object>
           </child>
           <child>
-            <object class="AdwPreferencesGroup">
+            <object class="AdwPreferencesGroup" id="tts_group">
               <child>
                 <object class="AdwComboRow" id="tts_voice_combo">
                   <property name="title" translatable="yes">Default Text to Speech Voice</property>

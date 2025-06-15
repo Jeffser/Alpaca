@@ -104,6 +104,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     powersaver_warning_switch = Gtk.Template.Child()
     mic_group = Gtk.Template.Child()
+    tts_group = Gtk.Template.Child()
     mic_auto_send_switch = Gtk.Template.Child()
     mic_language_combo = Gtk.Template.Child()
     mic_model_combo = Gtk.Template.Child()
@@ -722,6 +723,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.new_chat(self.get_application().args.new_chat)
 
         self.mic_group.set_visible(importlib.util.find_spec('whisper'))
+        self.tts_group.set_visible(importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'))
 
         string_list = Gtk.StringList()
         for model, size in STT_MODELS.items():

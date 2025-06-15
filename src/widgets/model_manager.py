@@ -5,7 +5,7 @@ Handles models
 
 import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject
-import logging, os, datetime, threading, sys, glob, icu, base64, hashlib
+import logging, os, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util
 from ..constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ..sql_manager import convert_model_name, Instance as SQL
 from . import dialog, attachments
@@ -451,7 +451,8 @@ class LocalModelPage(Gtk.Box):
         preferences_group = Adw.PreferencesGroup()
         self.append(preferences_group)
         self.voice_combo = Adw.ComboRow(
-            title=_("Voice")
+            title=_("Voice"),
+            visible=importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice')
         )
         selected_voice = SQL.get_model_preferences(self.model.get_name()).get('voice', None)
         selected_index = 0
@@ -915,27 +916,28 @@ def update_local_model_list():
     window.local_model_flowbox.remove_all()
     GLib.idle_add(window.model_dropdown.get_model().remove_all)
 
-    # Speech to Text
-    if os.path.isdir(os.path.join(data_dir, 'whisper')):
-        for model in os.listdir(os.path.join(data_dir, 'whisper')):
-            if model.endswith('.pt') and STT_MODELS.get(model.removesuffix('.pt')):
-                add_speech_to_text_model(model.removesuffix('.pt'))
+    if importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'):
+        # Speech to Text
+        if os.path.isdir(os.path.join(data_dir, 'whisper')):
+            for model in os.listdir(os.path.join(data_dir, 'whisper')):
+                if model.endswith('.pt') and STT_MODELS.get(model.removesuffix('.pt')):
+                    add_speech_to_text_model(model.removesuffix('.pt'))
 
-    # Text to Speech
-    tts_model_path = os.path.join(cache_dir, 'huggingface', 'hub')
-    if os.path.isdir(tts_model_path) and any([d for d in os.listdir(tts_model_path) if 'Kokoro' in d]):
-        # Kokoro has a directory
-        tts_model_path = os.path.join(tts_model_path, [d for d in os.listdir(tts_model_path) if 'Kokoro' in d][0], 'snapshots')
-        if os.path.isdir(tts_model_path) and len(os.listdir(tts_model_path)) > 0:
-            # Kokoro has snapshots
-            tts_model_path = os.path.join(tts_model_path, os.listdir(tts_model_path)[0], 'voices')
-            if os.path.isdir(tts_model_path):
-                # Kokoro has voices
-                for model in os.listdir(tts_model_path):
-                    pretty_name = [k for k, v in TTS_VOICES.items() if v == model.removesuffix('.pt')]
-                    if len(pretty_name) > 0:
-                        pretty_name = pretty_name[0]
-                        add_text_to_speech_model(pretty_name)
+        # Text to Speech
+        tts_model_path = os.path.join(cache_dir, 'huggingface', 'hub')
+        if os.path.isdir(tts_model_path) and any([d for d in os.listdir(tts_model_path) if 'Kokoro' in d]):
+            # Kokoro has a directory
+            tts_model_path = os.path.join(tts_model_path, [d for d in os.listdir(tts_model_path) if 'Kokoro' in d][0], 'snapshots')
+            if os.path.isdir(tts_model_path) and len(os.listdir(tts_model_path)) > 0:
+                # Kokoro has snapshots
+                tts_model_path = os.path.join(tts_model_path, os.listdir(tts_model_path)[0], 'voices')
+                if os.path.isdir(tts_model_path):
+                    # Kokoro has voices
+                    for model in os.listdir(tts_model_path):
+                        pretty_name = [k for k, v in TTS_VOICES.items() if v == model.removesuffix('.pt')]
+                        if len(pretty_name) > 0:
+                            pretty_name = pretty_name[0]
+                            add_text_to_speech_model(pretty_name)
 
     # Normal Models
     threads=[]
