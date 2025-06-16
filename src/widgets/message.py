@@ -215,6 +215,7 @@ class BlockContainer(Gtk.Box):
         self.message.main_stack.set_visible_child_name('loading')
         for child in list(self):
             self.remove(child)
+        self.generating_block = None
 
     def set_content(self, content:str) -> None:
         self.clear()
@@ -234,9 +235,40 @@ class BlockContainer(Gtk.Box):
 
         clean_content = re.sub(think_pattern, '', content, flags=re.DOTALL).strip()
 
-        for block in blocks.text_to_block_list(clean_content, self.message):
+        for block in blocks.text_to_block_list(clean_content):
             self.append(block)
         self.message.main_stack.set_visible_child_name('content')
+
+    def add_content(self, content:str) -> None:
+        """
+        Used for live generation rendering
+        """
+
+        #Thought
+        think_pattern = r'(<think>(.*?)</think>)|(<\|begin_of_thought\|>(.*?)<\|end_of_thought\|>)'
+        matches = re.findall(think_pattern, content, flags=re.DOTALL)
+        for thought in [m[1].strip() if m[1] else m[3].strip() for m in matches]:
+            attachment = attachments.Attachment(
+                generate_uuid(),
+                _('Thought'),
+                'thought',
+                thought
+            )
+            self.message.attachment_container.add_attachment(attachment)
+            SQL.insert_or_update_attachment(self.message, attachment)
+
+        clean_content = re.sub(think_pattern, '', content, flags=re.DOTALL)
+
+        for block in blocks.text_to_block_list(clean_content):
+            if len(list(self)) <= 1:
+                self.prepend(block)
+            else:
+                if isinstance(list(self)[-2], blocks.Text) and isinstance(block, blocks.Text):
+                    list(self)[-2].append_content(block.get_content())
+                elif isinstance(list(self)[-2], blocks.Text):
+                    list(self)[-2].set_content(list(self)[-2].get_content().strip())
+                else:
+                    self.insert_child_after(block, list(self)[-2])
 
     def get_content(self) -> list:
         return [block.get_content() for block in list(self)]
@@ -376,9 +408,12 @@ class Message(Gtk.Box):
 
             self.chat.stop_message()
             result_text = self.get_content()
-            GLib.idle_add(self.block_container.set_content, result_text)
+            buffer = self.block_container.get_generating_block().buffer
+            GLib.idle_add(self.block_container.add_content, buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
+            GLib.idle_add(self.block_container.remove, self.block_container.get_generating_block())
+            self.block_container.generating_block = None
             self.dt = datetime.datetime.now()
-            self.save()
+            GLib.idle_add(self.save)
             self.update_profile_picture()
             if result_text:
                 dialog.show_notification(
@@ -527,7 +562,7 @@ class GlobalActionStack(Gtk.Stack):
         )
         self.add_named(stop_button, 'stop')
 
-        stop_button.connect('clicked', lambda button: self.chat_list_box.get_selected_row().chat.stop_message())
+        stop_button.connect('clicked', lambda button: self.get_root().chat_list_box.get_selected_row().chat.stop_message())
 
         send_button.connect('clicked', lambda button: self.get_root().send_message(0))
         gesture_click = Gtk.GestureClick(button=3)

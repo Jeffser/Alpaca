@@ -35,7 +35,7 @@ class GeneratingText(Gtk.Overlay):
             editable=False,
             cursor_visible=False,
             wrap_mode=2,
-            css_classes=['flat']
+            css_classes=['flat', 'dim-label']
         )
         self.buffer = textview.get_buffer()
         super().__init__(
@@ -51,8 +51,13 @@ class GeneratingText(Gtk.Overlay):
             self.set_content(content)
 
     def append_content(self, value:str) -> None:
-        text = markdown_to_pango(value)
+        text = GLib.markup_escape_text(value)
         self.buffer.insert_markup(self.buffer.get_end_iter(), text, len(text.encode('utf-8')))
+        if value.endswith('\n'):
+            current_text = self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
+            if current_text.endswith('\n') and (not current_text.startswith('<think>') or current_text.strip().endswith('</think>')) and (not current_text.startswith('<|begin_of_thought|>') or current_text.strip().endswith('<|end_of_thought|>')):
+                GLib.idle_add(self.set_content)
+                GLib.idle_add(self.get_parent().add_content, current_text)
 
     def get_content(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)

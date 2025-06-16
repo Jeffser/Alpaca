@@ -16,11 +16,12 @@ patterns = [
     ('code', re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)),
     ('latex', re.compile(r'\\\[\n*?(.*?)\n*?\\\]|\$+\n*?(.*?)\$+\n*?', re.DOTALL)),
     ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
-    ('line', re.compile(r'\n\n(\-{3,})\n\n', re.DOTALL))
+    ('line', re.compile(r'\n\n(\-{3,})\n\n', re.DOTALL)),
+    ('line', re.compile(r'^(\-{3,})',  re.DOTALL))
 ]
 
 
-def text_to_block_list(content:str, message=None) -> list:
+def text_to_block_list(content:str) -> list:
     blocks = []
     pos = 0
     for pattern_name, pattern in patterns:
@@ -45,7 +46,7 @@ def text_to_block_list(content:str, message=None) -> list:
                 if '\\' in expression:
                     blocks.append(LatexRenderer(content=expression))
                 elif expression.strip():
-                    if isinstance(blocks[-1], Text):
+                    if len(blocks) > 0 and isinstance(blocks[-1], Text):
                         blocks[-1].append_content(expression)
                     else:
                         blocks.append(Text(content=expression))
