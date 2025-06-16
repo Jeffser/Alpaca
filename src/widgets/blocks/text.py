@@ -22,7 +22,7 @@ def markdown_to_pango(text:str) -> str:
     text = re.sub(r'^#\s+(.*)', r'<span size="xx-large">\1</span>', text, flags=re.MULTILINE)
     text = re.sub(r'_(\((.*?)\)|\d+)', r'<sub>\2\1</sub>', text, flags=re.MULTILINE)
     text = re.sub(r'\^(\((.*?)\)|\d+)', r'<sup>\2\1</sup>', text, flags=re.MULTILINE)
-    #text = re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\2">\1</a>', text, flags=re.MULTILINE)
+    text = re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\2">\1</a>', text, flags=re.MULTILINE)
     return text
 
 class GeneratingText(Gtk.Overlay):
