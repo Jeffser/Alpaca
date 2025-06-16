@@ -72,5 +72,5 @@ class LatexRenderer(Gtk.Button):
 
     def copy_equation(self):
         clipboard = Gdk.Display().get_default().get_clipboard()
-        clipboard.set(self.content)
+        clipboard.set(self.get_content())
         dialog.show_toast(_("Equation copied to the clipboard"), self.get_root())
