@@ -362,13 +362,14 @@ class PullingModel(Gtk.Box):
                 self.digests.append(data.get('digest').replace(':', '-'))
 
             if data.get('status') == 'success':
+                root_widget = self.get_root()
                 new_model = self.success_callback(self.get_name())
                 GLib.idle_add(window.local_model_flowbox.remove, self.get_parent())
                 GLib.idle_add(window.local_model_flowbox.select_child, new_model.get_parent())
                 if len(get_local_models()) > 0:
                     GLib.idle_add(window.title_stack.set_visible_child_name, 'model-selector')
                 dialog.show_notification(
-                    root_widget=self.get_root(),
+                    root_widget=root_widget,
                     title=_('Download Completed'),
                     body=_("Model '{}' downloaded successfully.").format(self.model_title),
                     icon=Gio.ThemedIcon.new('document-save-symbolic')

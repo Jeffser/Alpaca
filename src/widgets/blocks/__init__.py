@@ -17,7 +17,7 @@ patterns = [
     ('code', re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)),
     ('latex', re.compile(r'\\\[\n*?(.*?)\n*?\\\]|\$+\n*?(.*?)\$+\n*?', re.DOTALL)),
     ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
-    ('line', re.compile(r'\n\n(-{3,})\n\n', re.MULTILINE))
+    ('line', re.compile(r'\n\n(\-{3,})\n\n', re.MULTILINE))
 ]
 
 
