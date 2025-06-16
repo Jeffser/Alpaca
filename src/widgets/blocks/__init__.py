@@ -12,12 +12,11 @@ from .. import attachments
 from ...sql_manager import generate_uuid, Instance as SQL
 
 patterns = [
-    ('think', re.compile(r'(?:<think>|<\|begin_of_thought\|>)\n+(.*?)\n+(?:<\/think>|<\|end_of_thought\|>)', re.DOTALL | re.IGNORECASE)),
     ('code', re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
     ('code', re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)),
     ('latex', re.compile(r'\\\[\n*?(.*?)\n*?\\\]|\$+\n*?(.*?)\$+\n*?', re.DOTALL)),
     ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
-    ('line', re.compile(r'\n\n(\-{3,})\n\n', re.MULTILINE))
+    ('line', re.compile(r'\n\n(\-{3,})\n\n', re.DOTALL))
 ]
 
 
@@ -32,17 +31,7 @@ def text_to_block_list(content:str, message=None) -> list:
                     blocks[-1].append_content(content[pos:(match_start)])
                 else:
                     blocks.append(Text(content=content[pos:(match_start)]))
-            if pattern_name == "think" and message:
-                attachment = attachments.Attachment(
-                    generate_uuid(),
-                    _('Thought'),
-                    'thought',
-                    match.group(1)
-                )
-                message.attachment_container.add_attachment(attachment)
-                SQL.insert_or_update_attachment(message, attachment)
-
-            elif pattern_name == "code":
+            if pattern_name == "code":
                 if match.group(1).lower() == 'latex':
                     blocks.append(LatexRenderer(content=match.group(2)))
                 else:

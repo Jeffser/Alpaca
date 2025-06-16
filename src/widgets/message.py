@@ -7,7 +7,7 @@ import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GtkSource, Spelling
 import os, datetime, threading, sys, base64, logging, re, tempfile
 from ..constants import TTS_VOICES, TTS_AUTO_MODES
-from ..sql_manager import convert_model_name, Instance as SQL
+from ..sql_manager import convert_model_name, generate_uuid, Instance as SQL
 from . import model_manager, attachments, blocks, dialog, voice
 
 logger = logging.getLogger(__name__)
@@ -218,7 +218,23 @@ class BlockContainer(Gtk.Box):
 
     def set_content(self, content:str) -> None:
         self.clear()
-        for block in blocks.text_to_block_list(content.strip(), self.message):
+
+        #Thought
+        think_pattern = r'(<think>(.*?)</think>)|(<\|begin_of_thought\|>(.*?)<\|end_of_thought\|>)'
+        matches = re.findall(think_pattern, content, flags=re.DOTALL)
+        for thought in [m[1].strip() if m[1] else m[3].strip() for m in matches]:
+            attachment = attachments.Attachment(
+                generate_uuid(),
+                _('Thought'),
+                'thought',
+                thought
+            )
+            self.message.attachment_container.add_attachment(attachment)
+            SQL.insert_or_update_attachment(self.message, attachment)
+
+        clean_content = re.sub(think_pattern, '', content, flags=re.DOTALL).strip()
+
+        for block in blocks.text_to_block_list(clean_content, self.message):
             self.append(block)
         self.message.main_stack.set_visible_child_name('content')
 
