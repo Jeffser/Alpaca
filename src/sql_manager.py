@@ -532,7 +532,7 @@ class Instance:
 
     def remove_model_preferences(model_id: str) -> None:
         with SQLiteConnection() as c:
-            c.cursor.execute("DELETE FROM model_preferences WHERE id=?", (model_id))
+            c.cursor.execute("DELETE FROM model_preferences WHERE id=?", (model_id,))
 
     def insert_or_update_model_picture(model_id: str, picture_content: str or None) -> None:
         with SQLiteConnection() as c:
