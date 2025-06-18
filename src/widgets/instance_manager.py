@@ -10,7 +10,7 @@ import openai, requests, json, logging, os, shutil, subprocess, threading, re
 from pydantic import BaseModel
 
 from ..ollama_models import OLLAMA_MODELS
-from . import dialog, tools
+from . import dialog, tools, model_manager
 from ..constants import data_dir, cache_dir
 from ..sql_manager import generate_uuid, convert_model_name, Instance as SQL
 

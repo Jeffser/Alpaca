@@ -217,8 +217,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 gguf_path = self.model_creator_base.get_subtitle()
                 Widgets.model_manager.create_model(data_json, gguf_path)
             else:
-                data_json['from'] = convert_model_name(self.model_creator_base.get_selected_item().get_string(), 1)
-                Widgets.model_manager.create_model(data_json)
+                pretty_name = self.model_creator_base.get_selected_item().get_string()
+                found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.name == pretty_name]
+                if found_models:
+                    data_json['from'] = found_models[0].get_name()
+                    Widgets.model_manager.create_model(data_json)
 
     @Gtk.Template.Callback()
     def model_creator_cancel(self, button):
@@ -236,18 +239,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def model_creator_base_changed(self, comborow, params):
-        model_name = comborow.get_selected_item().get_string()
-        if model_name != 'GGUF' and not comborow.get_subtitle():
-            model_name = convert_model_name(model_name, 1)
-
-            GLib.idle_add(self.model_creator_name.set_text, model_name.split(':')[0])
+        pretty_name = comborow.get_selected_item().get_string()
+        if pretty_name != 'GGUF' and not comborow.get_subtitle():
             GLib.idle_add(self.model_creator_tag.set_text, 'custom')
 
             system = None
             modelfile = None
 
-            found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.model.get_name() == model_name]
+            found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.name == pretty_name]
             if found_models:
+                GLib.idle_add(self.model_creator_name.set_text, found_models[0].get_name().split(':')[0])
                 system = found_models[0].data.get('system')
                 modelfile = found_models[0].data.get('modelfile')
 
