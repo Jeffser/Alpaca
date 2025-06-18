@@ -438,8 +438,8 @@ class BaseInstance:
                 'seed': lambda val: setattr(self, 'seed', val),
                 'override': lambda name, val: self.overrides.__setitem__(name, val),
                 'model_directory': lambda val: setattr(self, 'model_directory', val),
-                'default_model': lambda val: setattr(self, 'default_model', temp_local_models_list[val].get('name')),
-                'title_model': lambda val: setattr(self, 'title_model', temp_local_models_list[val].get('name'))
+                'default_model': lambda val: setattr(self, 'default_model', temp_local_models_list[val].get('name')) if val >= 0 else None,
+                'title_model': lambda val: setattr(self, 'title_model', temp_local_models_list[val].get('name')) if val >= 0 else None
             }
 
             for group in groups:
@@ -450,7 +450,10 @@ class BaseInstance:
                     elif isinstance(el, Adw.SpinRow):
                         value = el.get_value()
                     elif isinstance(el, Adw.ComboRow):
-                        value = el.get_selected()
+                        if len(list(el.get_model())) <= 0:
+                            value = -1
+                        else:
+                            value = el.get_selected()
                     elif isinstance(el, Adw.ActionRow):
                         value = el.get_subtitle()
                     if el.get_name().startswith('override:'):
