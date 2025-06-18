@@ -799,7 +799,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                             <child>
                                               <object class="AdwComboRow" id="model_creator_base">
                                                 <property name="title" translatable="yes">Base</property>
-                                                <property name="enable-search">true</property>
                                                 <signal name="notify::selected-item" handler="model_creator_base_changed"/>
                                               </object>
                                             </child>
