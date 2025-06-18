@@ -28,7 +28,7 @@ override_urls = {
 class BaseInstance:
     instance_id = None
     name = _('Instance')
-    instance_url = None
+    instance_url = ''
     max_tokens = None
     api_key = None
     temperature = 0.7
