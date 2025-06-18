@@ -7,7 +7,7 @@ import gi
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 import logging, os, datetime, random, json, threading
 from ..constants import SAMPLE_PROMPTS, cache_dir
-from ..sql_manager import generate_uuid, generate_numbered_name, Instance as SQL
+from ..sql_manager import generate_uuid, prettify_model_name, generate_numbered_name, Instance as SQL
 from . import dialog
 from .message import Message
 
@@ -507,7 +507,7 @@ class ChatRow(Gtk.ListBoxRow):
             if message_element.get_content() and message_element.dt:
                 message_author = _('User')
                 if message_element.get_model():
-                    message_author = self.get_root().convert_model_name(message_element.get_model(), 0)
+                    message_author = prettify_model_name(message_element.get_model())
                 if message_element.mode == 2:
                     message_author = _('System')
 

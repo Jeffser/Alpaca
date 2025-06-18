@@ -7,7 +7,7 @@ import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject
 import logging, os, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util
 from ..constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
-from ..sql_manager import convert_model_name, Instance as SQL
+from ..sql_manager import prettify_model_name, Instance as SQL
 from . import dialog, attachments
 
 logger = logging.getLogger(__name__)
@@ -223,8 +223,8 @@ class PullingModelPage(Gtk.Box):
             css_classes=['p10']
         )
         title_label = Gtk.Label(
-            label=convert_model_name(self.model.get_name(), 2)[0],
-            tooltip_text=convert_model_name(self.model.get_name(), 2)[0],
+            label=prettify_model_name(self.model.get_name()),
+            tooltip_text=prettify_model_name(self.model.get_name()),
             css_classes=['title-1'],
             wrap=True,
             wrap_mode=2,
@@ -254,7 +254,7 @@ class PullingModelPage(Gtk.Box):
         stop_button.connect('clicked', lambda button: dialog.simple(
             parent = self.get_root(),
             heading = _('Stop Download?'),
-            body = _("Are you sure you want to stop pulling '{}'?").format(convert_model_name(self.model.get_name(), 0)),
+            body = _("Are you sure you want to stop pulling '{}'?").format(prettify_model_name(self.model.get_name())),
             callback = self.stop_download,
             button_name = _('Stop'),
             button_appearance = 'destructive'
@@ -271,7 +271,7 @@ class PullingModel(Gtk.Box):
     __gtype_name__ = 'AlpacaPullingModel'
 
     def __init__(self, name:str, success_callback:callable, cancellable:bool=True):
-        self.model_title = convert_model_name(name, 0)
+        self.model_title = prettify_model_name(name)
         super().__init__(
             orientation=1,
             spacing=5,
@@ -280,7 +280,7 @@ class PullingModel(Gtk.Box):
             valign=0
         )
         title_label = Gtk.Label(
-            label=convert_model_name(name, 2)[0],
+            label=prettify_model_name(name, True)[0],
             css_classes=['title-3'],
             ellipsize=3,
             hexpand=True,
@@ -288,7 +288,7 @@ class PullingModel(Gtk.Box):
         )
         self.append(title_label)
         if cancellable:
-            subtitle_text = convert_model_name(name, 2)[1]
+            subtitle_text = prettify_model_name(name, True)[1]
         else: # Probably STT
             subtitle_text = _("Speech to Text")
         subtitle_label = Gtk.Label(
@@ -297,7 +297,7 @@ class PullingModel(Gtk.Box):
             ellipsize=3,
             hexpand=True,
             halign=1,
-            visible=convert_model_name(name, 2)[1] or not cancellable
+            visible=prettify_model_name(name, True)[1] or not cancellable
         )
         self.append(subtitle_label)
         self.progressbar = Gtk.ProgressBar(pulse_step=0.5)
@@ -440,8 +440,8 @@ class LocalModelPage(Gtk.Box):
         self.append(self.image_container)
         self.image_container.connect('clicked', lambda *_: self.model.change_profile_picture())
         title_label = Gtk.Label(
-            label=convert_model_name(self.model.get_name(), 2)[0],
-            tooltip_text=convert_model_name(self.model.get_name(), 2)[0],
+            label=prettify_model_name(self.model.get_name(), True)[0],
+            tooltip_text=prettify_model_name(self.model.get_name(), True)[0],
             css_classes=['title-1'],
             wrap=True,
             wrap_mode=2,
@@ -478,13 +478,13 @@ class LocalModelPage(Gtk.Box):
         self.append(information_container)
         parent_model = self.model.data.get('details', {}).get('parent_model')
         metadata={
-            _('Tag'): convert_model_name(self.model.get_name(), 2)[1],
-            _('Family'): convert_model_name(self.model.data.get('details', {}).get('family'), 0),
+            _('Tag'): prettify_model_name(self.model.get_name(), True)[1],
+            _('Family'): prettify_model_name(self.model.data.get('details', {}).get('family')),
             _('Parameter Size'): self.model.data.get('details', {}).get('parameter_size'),
             _('Quantization Level'): self.model.data.get('details', {}).get('quantization_level')
         }
         if parent_model and '/' not in parent_model:
-            metadata[_('Parent Model')] = convert_model_name(parent_model, 0)
+            metadata[_('Parent Model')] = prettify_model_name(parent_model)
 
         if 'modified_at' in self.model.data:
             metadata[_('Modified At')] = datetime.datetime.strptime(':'.join(self.model.data['modified_at'].split(':')[:2]), '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
@@ -536,7 +536,7 @@ class LocalModel(Gtk.Box):
     __gtype_name__ = 'AlpacaLocalModel'
 
     def __init__(self, name:str):
-        self.model_title = convert_model_name(name, 0)
+        self.model_title = prettify_model_name(name)
         super().__init__(
             spacing=10,
             css_classes=['card', 'model_box'],
@@ -556,7 +556,7 @@ class LocalModel(Gtk.Box):
         )
         self.append(text_container)
         title_label = Gtk.Label(
-            label=convert_model_name(name, 2)[0],
+            label=prettify_model_name(name, True)[0],
             css_classes=['title-3'],
             ellipsize=3,
             hexpand=True,
@@ -587,10 +587,10 @@ class LocalModel(Gtk.Box):
         return 'vision' in self.data.get('capabilities', [])
 
     def update_subtitle(self):
-        tag = convert_model_name(self.get_name(), 2)[1]
+        tag = prettify_model_name(self.get_name(), True)[1]
         family = self.data.get('details', {}).get('family')
         if family:
-            self.subtitle_label.set_label('{} • {}'.format(convert_model_name(family, 0), tag))
+            self.subtitle_label.set_label('{} • {}'.format(prettify_model_name(family), tag))
         elif tag:
             self.subtitle_label.set_label(tag)
         self.subtitle_label.set_visible(self.subtitle_label.get_label())
@@ -699,7 +699,7 @@ class LocalModel(Gtk.Box):
             remove_button.connect('clicked', lambda button: dialog.simple(
                 parent = self.get_root(),
                 heading = _('Remove Model?'),
-                body = _("Are you sure you want to remove '{}'?").format(convert_model_name(self.get_name(), 0)),
+                body = _("Are you sure you want to remove '{}'?").format(prettify_model_name(self.get_name())),
                 callback = self.remove_model,
                 button_name = _('Remove'),
                 button_appearance = 'destructive'

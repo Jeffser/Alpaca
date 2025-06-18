@@ -44,7 +44,7 @@ gi.require_version('Spelling', '1')
 
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, Spelling
 
-from .sql_manager import generate_uuid, generate_numbered_name, convert_model_name, Instance as SQL
+from .sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from . import widgets as Widgets
 from .constants import SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES, TTS_AUTO_MODES, STT_MODELS, data_dir, source_dir, cache_dir
 
@@ -297,7 +297,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         GLib.idle_add(self.model_creator_base.set_subtitle, '')
         string_list = Gtk.StringList()
         if selected_model:
-            GLib.idle_add(string_list.append, convert_model_name(selected_model, 0))
+            GLib.idle_add(string_list.append, prettify_model_name(selected_model))
         else:
             [GLib.idle_add(string_list.append, value.model_title) for value in Widgets.model_manager.get_local_models().values()]
         GLib.idle_add(self.model_creator_base.set_model, string_list)

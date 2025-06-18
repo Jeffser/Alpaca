@@ -7,7 +7,7 @@ import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GtkSource, Spelling
 import os, datetime, threading, sys, base64, logging, re, tempfile
 from ..constants import TTS_VOICES, TTS_AUTO_MODES
-from ..sql_manager import convert_model_name, generate_uuid, Instance as SQL
+from ..sql_manager import prettify_model_name, generate_uuid, Instance as SQL
 from . import model_manager, attachments, blocks, dialog, voice
 
 logger = logging.getLogger(__name__)
@@ -134,7 +134,7 @@ class MessageHeader(Gtk.Box):
             css_classes=['dim-label'] if popover else []
         )
 
-        author = convert_model_name(self.message.get_model(), 0)
+        author = prettify_model_name(self.message.get_model())
         if not author:
             author = ""
 

@@ -12,7 +12,7 @@ from pydantic import BaseModel
 from ..ollama_models import OLLAMA_MODELS
 from . import dialog, tools, model_manager
 from ..constants import data_dir, cache_dir
-from ..sql_manager import generate_uuid, convert_model_name, Instance as SQL
+from ..sql_manager import generate_uuid, prettify_model_name, Instance as SQL
 
 logger = logging.getLogger(__name__)
 
@@ -415,7 +415,7 @@ class BaseInstance:
             title_model_index = 0
             string_list = Gtk.StringList()
             for i, model in enumerate(temp_local_models_list):
-                string_list.append(convert_model_name(model.get('name'), 0))
+                string_list.append(prettify_model_name(model.get('name')))
                 if model.get('name') == self.default_model:
                     default_model_index = i
                 if model.get('name') == self.title_model:
