@@ -295,6 +295,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         context_buffer.delete(context_buffer.get_start_iter(), context_buffer.get_end_iter())
         GLib.idle_add(self.model_creator_profile_picture.set_subtitle, '')
         GLib.idle_add(self.model_creator_base.set_subtitle, '')
+        factory = Gtk.SignalListItemFactory()
+        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
+        factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
+        GLib.idle_add(self.model_creator_base.set_factory, factory)
         string_list = Gtk.StringList()
         if selected_model:
             GLib.idle_add(string_list.append, prettify_model_name(selected_model))

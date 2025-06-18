@@ -409,9 +409,16 @@ class BaseInstance:
             temp_local_models_list = self.get_local_models()
             groups.append(Adw.PreferencesGroup())
             pp.add(groups[-1])
+
+            factory = Gtk.SignalListItemFactory()
+            factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
+            factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
+
             default_model_el = Adw.ComboRow(title=_('Default Model'), subtitle=_('Model to select when starting a new chat.'), name='default_model')
+            default_model_el.set_factory(factory)
             default_model_index = 0
             title_model_el = Adw.ComboRow(title=_('Title Model'), subtitle=_('Model to use when generating a chat title.'), name='title_model')
+            title_model_el.set_factory(factory)
             title_model_index = 0
             string_list = Gtk.StringList()
             for i, model in enumerate(temp_local_models_list):
