@@ -404,7 +404,9 @@ class BaseInstance:
             model_directory_el.add_suffix(open_dir_button)
             groups[-1].add(model_directory_el)
 
+        temp_local_models_list = []
         if self.instance_id:
+            temp_local_models_list = self.get_local_models()
             groups.append(Adw.PreferencesGroup())
             pp.add(groups[-1])
             default_model_el = Adw.ComboRow(title=_('Default Model'), subtitle=_('Model to select when starting a new chat.'), name='default_model')
@@ -412,7 +414,7 @@ class BaseInstance:
             title_model_el = Adw.ComboRow(title=_('Title Model'), subtitle=_('Model to use when generating a chat title.'), name='title_model')
             title_model_index = 0
             string_list = Gtk.StringList()
-            for i, model in enumerate(self.get_local_models()):
+            for i, model in enumerate(temp_local_models_list):
                 string_list.append(convert_model_name(model.get('name'), 0))
                 if model.get('name') == self.default_model:
                     default_model_index = i
@@ -436,8 +438,8 @@ class BaseInstance:
                 'seed': lambda val: setattr(self, 'seed', val),
                 'override': lambda name, val: self.overrides.__setitem__(name, val),
                 'model_directory': lambda val: setattr(self, 'model_directory', val),
-                'default_model': lambda val: setattr(self, 'default_model', self.get_local_models()[val].get('name')),
-                'title_model': lambda val: setattr(self, 'title_model', self.get_local_models()[val].get('name'))
+                'default_model': lambda val: setattr(self, 'default_model', temp_local_models_list[val].get('name')),
+                'title_model': lambda val: setattr(self, 'title_model', temp_local_models_list[val].get('name'))
             }
 
             for group in groups:
