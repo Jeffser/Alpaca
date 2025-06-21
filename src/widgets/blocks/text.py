@@ -54,9 +54,15 @@ class GeneratingText(Gtk.Overlay):
     def append_content(self, value:str) -> None:
         text = GLib.markup_escape_text(value)
         self.buffer.insert_markup(self.buffer.get_end_iter(), text, len(text.encode('utf-8')))
-        if value.endswith('\n\n'):
+        if value.endswith('\n'):
             current_text = self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
-            if current_text.endswith('\n\n') and (not current_text.startswith('<think>') or current_text.strip().endswith('</think>')) and (not current_text.startswith('<|begin_of_thought|>') or current_text.strip().endswith('<|end_of_thought|>')):
+
+            think_block_complete = not current_text.strip().startswith('<think>') or current_text.strip().endswith('</think>')
+            think_block_complete_v2 = not current_text.strip().startswith('<|begin_of_thought|>') or current_text.strip().endswith('<|end_of_thought|>')
+            code_block_complete = not current_text.strip().startswith('```') or (current_text.strip().endswith('```') and len(current_text.strip()) > 3)
+            table_block_complete = not current_text.strip().startswith('|') or '|\n\n' in current_text
+
+            if think_block_complete and think_block_complete_v2 and code_block_complete and table_block_complete:
                 GLib.idle_add(self.set_content)
                 GLib.idle_add(self.get_parent().add_content, current_text)
 

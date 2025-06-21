@@ -270,7 +270,7 @@ class BlockContainer(Gtk.Box):
             else:
                 if isinstance(list(self)[-2], blocks.Text) and isinstance(block, blocks.Text):
                     if not list(self)[-2].get_content().endswith('\n') and not block.get_content().startswith('\n'):
-                        list(self)[-2].append_content('\n\n{}'.format(block.get_content()))
+                        list(self)[-2].append_content('\n{}'.format(block.get_content()))
                     else:
                         list(self)[-2].append_content(block.get_content())
                 elif isinstance(list(self)[-2], blocks.Text) and not isinstance(block, blocks.Text):

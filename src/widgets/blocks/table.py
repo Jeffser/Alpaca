@@ -29,6 +29,7 @@ class Row(GObject.GObject):
         self.values = []
 
         for value in _values:
+            value = GLib.markup_escape_text(value)
             value = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', value)
             self.values.append(value)
 
