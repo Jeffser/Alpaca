@@ -12,8 +12,7 @@ class Separator(Gtk.Separator):
         self.content = content
         super().__init__(
             margin_top=10,
-            margin_bottom=10,
-            css_classes=['card']
+            margin_bottom=10
         )
 
     def get_content(self) -> str:
