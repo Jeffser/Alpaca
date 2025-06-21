@@ -391,8 +391,7 @@ class InstanceRow(Adw.ActionRow):
 
 def create_instance_row(ins:dict) -> InstanceRow or None:
     instance_dictionary = {i.instance_type: i for i in ready_instances}
-    # instance_id:str, properties:dict):
-    if ins.get('type') in list(instance_dictionary.keys()) and (ins.get('type') != 'ollama:managed' or not shutil.which('ollama')):
+    if ins.get('type') in list(instance_dictionary.keys()) and (ins.get('type') != 'ollama:managed' or shutil.which('ollama')):
         return InstanceRow(
             instance=instance_dictionary.get(ins.get('type'))(
                 instance_id=ins.get('id'),
