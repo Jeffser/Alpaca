@@ -512,7 +512,7 @@ class LocalModelPage(Gtk.Box):
         if not categories:
             categories = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('categories', [])
             languages = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('languages', [])
-        for category in set(categories + ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]):
+        for category in set(categories):
             if category not in ('small', 'medium', 'big', 'huge'):
                 categories_box.append(CategoryPill(category, True))
 
@@ -707,6 +707,25 @@ class LocalModel(Gtk.Box):
                 button_appearance = 'destructive'
             ))
             buttons.append(remove_button)
+        if len(available_models.get(self.get_name().split(':')[0], {}).get('languages', [])) > 1:
+            languages_container = Gtk.FlowBox(
+                max_children_per_line=3,
+                selection_mode=0
+            )
+            for language in ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in available_models.get(self.get_name().split(':')[0], {}).get('languages', [])]:
+                languages_container.append(CategoryPill(language, True))
+            languages_scroller = Gtk.ScrolledWindow(
+                child=languages_container,
+                propagate_natural_width=True,
+                propagate_natural_height=True
+            )
+
+            languages_button = Gtk.MenuButton(
+                icon_name='language-symbolic',
+                tooltip_text=_('Languages'),
+                popover=Gtk.Popover(child=languages_scroller)
+            )
+            buttons.append(languages_button)
         if not self.page:
             self.page = LocalModelPage(self)
         return buttons, self.page
