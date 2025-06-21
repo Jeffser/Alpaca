@@ -5,6 +5,7 @@ Handles the table widget shown in messages
 
 import gi
 from gi.repository import Gtk, GObject, Gio
+from .text import markdown_to_pango
 
 import re
 
@@ -29,9 +30,7 @@ class Row(GObject.GObject):
         self.values = []
 
         for value in _values:
-            value = GLib.markup_escape_text(value)
-            value = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', value)
-            self.values.append(value)
+            self.values.append(markdown_to_pango(value))
 
     def get_column_value(self, index):
         return self.values[index]
