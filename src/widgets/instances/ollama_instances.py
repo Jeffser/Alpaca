@@ -495,8 +495,7 @@ class OllamaManaged(BaseInstance):
     def start(self):
         self.stop()
         if shutil.which('ollama'):
-            if not os.path.isdir(os.path.join(cache_dir, 'tmp', 'ollama')):
-                os.mkdir(os.path.join(cache_dir, 'tmp', 'ollama'))
+            os.makedirs(os.path.join(cache_dir, 'tmp', 'ollama'), exist_ok=True)
             params = self.properties.get('overrides').copy()
             params["OLLAMA_HOST"] = self.properties.get('url')
             params["TMPDIR"] = os.path.join(cache_dir, 'tmp', 'ollama')
