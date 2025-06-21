@@ -321,6 +321,9 @@ class Empty:
     instance_id = ''
     instance_type = 'empty'
     instance_type_display = 'Empty'
+    properties = {
+        'name': _('Fallback Instance')
+    }
 
     def stop(self):
         pass
