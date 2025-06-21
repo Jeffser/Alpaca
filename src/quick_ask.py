@@ -44,8 +44,8 @@ class QuickAskWindow(Adw.ApplicationWindow):
         if len(instances) > 0:
             matching_instances = [i for i in instances if i.get('id') == selected_instance]
             if len(matching_instances) > 0:
-                return Widgets.instance_manager.create_instance_row(matching_instances[0]).instance
-            return Widgets.instance_manager.create_instance_row(instances[0]).instance
+                return Widgets.instances.create_instance_row(matching_instances[0]).instance
+            return Widgets.instances.create_instance_row(instances[0]).instance
 
     def send_message(self, mode:int=0):
         #Mode = 0 (normal), Mode = 1 (System), Mode = 2 (Use Tools)3

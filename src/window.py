@@ -155,11 +155,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
             else:
                 tbv=Adw.ToolbarView()
                 tbv.add_top_bar(Adw.HeaderBar())
-                tbv.set_content(ins().get_preferences_page())
+
+                instance = ins(
+                    instance_id=generate_uuid(),
+                    properties={}
+                )
+                #instance
+                tbv.set_content(Widgets.instances.InstancePreferencesPage(instance))
                 self.main_navigation_view.push(Adw.NavigationPage(title=_('Add Instance'), tag='instance', child=tbv))
 
         options = {}
-        for ins_type in Widgets.instance_manager.ready_instances:
+        for ins_type in Widgets.instances.ready_instances:
             options[ins_type.instance_type_display] = ins_type
 
         Widgets.dialog.simple_dropdown(
@@ -714,7 +720,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.instance_listbox.get_selected_row():
             return self.instance_listbox.get_selected_row().instance
         else:
-            return Widgets.instance_manager.Empty()
+            return Widgets.instances.Empty()
 
     def prepare_alpaca(self):
         self.main_navigation_view.replace_with_tags(['chat'])
@@ -756,16 +762,22 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.tts_auto_mode_combo.set_model(string_list)
         self.settings.bind('tts-auto-mode', self.tts_auto_mode_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
 
-        Widgets.instance_manager.update_instance_list()
-
         # Ollama is available but there are no instances added
         if not any(i.get("type") == "ollama:managed" for i in SQL.get_instances()) and shutil.which("ollama"):
-            SQL.insert_or_update_instance(Widgets.instance_manager.OllamaManaged({
-                "id": generate_uuid(),
-                "name": "Alpaca",
-                "url": "http://{}:11435".format("127.0.0.1" if sys.platform == "win32" else "0.0.0.0"),
-                "pinned": True
-            }))
+            SQL.insert_or_update_instance(
+                instance_id=generate_uuid(),
+                pinned=True,
+                instance_type='ollama:managed',
+                properties={
+                    'name': 'Alpaca',
+                    'url': 'http://127.0.0.1:11435',
+                }
+            )
+
+        Widgets.instances.update_instance_list(
+            instance_listbox=self.instance_listbox,
+            selected_instance_id=self.settings.get_value('selected-instance').unpack()
+        )
 
     def open_button_menu(self, gesture, x, y, menu):
         button = gesture.get_widget()
@@ -813,7 +825,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         Widgets.model_manager.window = self
-        Widgets.instance_manager.window = self
 
         self.model_searchbar.connect_entry(self.searchentry_models)
         self.model_searchbar.connect('notify::search-mode-enabled', lambda *_: self.model_search_changed(self.searchentry_models))

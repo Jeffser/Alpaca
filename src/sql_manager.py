@@ -131,20 +131,11 @@ class Instance:
                     "picture": "TEXT",
                     "voice": "TEXT"
                 },
-                "instances": {
+                "instance": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
-                    "name": "TEXT NOT NULL",
-                    "type": "TEXT NOT NULL",
-                    "url": "TEXT",
-                    "max_tokens": "INTEGER NOT NULL",
-                    "api": "TEXT",
-                    "temperature": "REAL NOT NULL",
-                    "seed": "INTEGER NOT NULL",
-                    "overrides": "TEXT NOT NULL",
-                    "default_model": "TEXT",
-                    "title_model": "TEXT",
-                    "model_directory": "TEXT",
                     "pinned": "INTEGER NOT NULL",
+                    "type": "TEXT NOT NULL",
+                    "properties": "TEXT NOT NULL" #JSON
                 },
                 "tool_parameters": {
                     "name": "TEXT NOT NULL PRIMARY KEY",
@@ -195,6 +186,31 @@ class Instance:
                         elif isinstance(old_value, str):
                             settings.set_string(new_key, old_value)
                 c.cursor.execute("DROP TABLE preferences")
+
+            # Move Instances to new table
+            if c.cursor.execute("SELECT name FROM sqlite_master WHERE type='table' and name='instances';").fetchall() != []:
+                for old_ins in Instance.get_instances_DEPRECATED():
+                    properties = {
+                        'name': old_ins.get('name'),
+                        'temperature': old_ins.get('temperature'),
+                        'default_model': old_ins.get('default_model'),
+                        'title_model': old_ins.get('title_model')
+                    }
+                    if old_ins.get('max_tokens', -1) != -1:
+                        properties['max_tokens'] = old_ins.get('max_tokens')
+                    if old_ins.get('type') in ('openai:generic', 'ollama:managed', 'ollama') and old_ins.get('url'):
+                        properties['url'] = old_ins.get('url')
+                    if old_ins.get('type') != 'ollama:managed':
+                        properties['api'] = old_ins.get('api')
+                    if old_ins.get('type') not in ('venice', 'deepseek', 'gemini') and old_ins.get('seed'):
+                        properties['seed'] = old_ins.get('seed')
+                    if old_ins.get('type') == 'ollama:managed':
+                        properties['overrides'] = old_ins.get('overrides')
+                        properties['model_directory'] = old_ins.get('model_directory')
+
+                    c.cursor.execute("INSERT INTO instance (id, pinned, type, properties) VALUES (?, ?, ?, ?)", (old_ins.get('id'), old_ins.get('pinned'), old_ins.get('type'), json.dumps(properties)))
+                c.cursor.execute("DROP TABLE instances")
+
 
     ###########
     ## CHATS ##
@@ -561,7 +577,7 @@ class Instance:
     ## Instances ##
     ###############
 
-    def get_instances() -> list:
+    def get_instances_DEPRECATED() -> list:
         columns = [
             "id",
             "name",
@@ -603,48 +619,39 @@ class Instance:
 
         return instances
 
-    def insert_or_update_instance(ins):
-        data = {
-            "id": ins.instance_id,
-            "name": ins.name,
-            "type": ins.instance_type,
-            "url": ins.instance_url,
-            "max_tokens": ins.max_tokens if ins.max_tokens else -1,
-            "api": ins.api_key,
-            "temperature": ins.temperature,
-            "seed": ins.seed,
-            "overrides": json.dumps(ins.overrides),
-            "model_directory": ins.model_directory,
-            "default_model": ins.default_model,
-            "title_model": ins.title_model,
-            "pinned": ins.pinned,
-        }
+    def get_instances() -> list:
+        with SQLiteConnection() as c:
+            result = c.cursor.execute("SELECT * FROM instance").fetchall()
+            instances = []
+            for row in result:
+                instances.append({
+                    'id': row[0],
+                    'pinned': row[1] == 1,
+                    'type': row[2],
+                    'properties': json.loads(row[3])
+                })
+            return instances
+        return []
 
+    def insert_or_update_instance(instance_id:str, pinned:bool, instance_type:str, properties:dict):
         with SQLiteConnection() as c:
             if c.cursor.execute(
-                "SELECT id FROM instances WHERE id=?", (data.get("id"),)
+                "SELECT id FROM instance WHERE id=?", (instance_id,)
             ).fetchone():
-                instance_id = data.pop("id", None)
-                set_clause = ", ".join(f"{key} = ?" for key in data)
-                values = list(data.values()) + [instance_id]
-
                 c.cursor.execute(
-                    f"UPDATE instances SET {set_clause} WHERE id=?", values
+                    f"UPDATE instance SET properties=? WHERE id=?",
+                    (json.dumps(properties), instance_id)
                 )
             else:
-                columns = ", ".join(data.keys())
-                placeholders = ", ".join("?" for _ in data)
-                values = tuple(data.values())
-
                 c.cursor.execute(
-                    f"INSERT INTO instances ({columns}) VALUES ({placeholders})",
-                    values,
+                    f"INSERT INTO instance (id, pinned, type, properties) VALUES (?, ?, ?, ?)",
+                    (instance_id, 1 if pinned else 0, instance_type, json.dumps(properties))
                 )
 
     def delete_instance(instance_id: str):
         with SQLiteConnection() as c:
             c.cursor.execute(
-                "DELETE FROM instances WHERE id=?", (instance_id,)
+                "DELETE FROM instance WHERE id=?", (instance_id,)
             )
 
     ###########

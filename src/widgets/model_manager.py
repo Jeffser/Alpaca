@@ -589,8 +589,10 @@ class LocalModel(Gtk.Box):
     def update_subtitle(self):
         tag = prettify_model_name(self.get_name(), True)[1]
         family = self.data.get('details', {}).get('family')
-        if family:
+        if family and tag:
             self.subtitle_label.set_label('{} • {}'.format(prettify_model_name(family), tag))
+        elif family:
+            self.subtitle_label.set_label(prettify_model_name(family))
         elif tag:
             self.subtitle_label.set_label(tag)
         self.subtitle_label.set_visible(self.subtitle_label.get_label())
@@ -943,6 +945,7 @@ def update_local_model_list():
 
     # Normal Models
     threads=[]
+    window.get_current_instance().local_models = None # To reset cache
     local_models = window.get_current_instance().get_local_models()
     for model in local_models:
         thread = threading.Thread(target=add_local_model, args=(model['name'], ))

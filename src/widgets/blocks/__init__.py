@@ -16,8 +16,7 @@ patterns = [
     ('code', re.compile(r'`(\w*)\n(.*?)\n\s*`', re.DOTALL)),
     ('latex', re.compile(r'\\\[\n*?(.*?)\n*?\\\]|\$+\n*?(.*?)\$+\n*?', re.DOTALL)),
     ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
-    ('line', re.compile(r'\n\n(\-{3,})\n\n', re.DOTALL)),
-    ('line', re.compile(r'^(\-{3,})',  re.DOTALL))
+    ('line', re.compile(r'(\n\n-{3,}\n\n)'))
 ]
 
 
@@ -25,7 +24,7 @@ def text_to_block_list(content:str) -> list:
     blocks = []
     pos = 0
     for pattern_name, pattern in patterns:
-        for match in pattern.finditer(content[pos:]):
+        for match in pattern.finditer(content):
             match_start, match_end = match.span()
             if pos < (match_start) and content[pos:(match_start)].strip():
                 if len(blocks) > 0 and isinstance(blocks[-1], Text):

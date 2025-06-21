@@ -103,7 +103,7 @@ class Table(Gtk.Frame):
     def make_table(self):
 
         def _on_factory_setup(_factory, list_item, align):
-            label = Gtk.Label(xalign=align, ellipsize=3, selectable=True, use_markup=True)
+            label = Gtk.Label(xalign=align, selectable=True, use_markup=True)
             list_item.set_child(label)
 
         def _on_factory_bind(_factory, list_item, index):

@@ -175,8 +175,7 @@ class GetCurrentDatetime(Base):
             "required": [
                 "type"
             ],
-        },
-        "strict": True
+        }
     }
     name = _("Get Current Datetime")
     description = _("Gets the current date and/or time.")
@@ -208,8 +207,7 @@ class GetRecipeByName(Base):
             "required": [
                 "meal"
             ]
-        },
-        "strict": True
+        }
     }
     name = _("Get Recipe by Name")
     description = _("Gets a recipe by the meal's name")
@@ -269,8 +267,7 @@ class GetRecipesByCategory(Base):
             "required": [
                 "category", "mode"
             ]
-        },
-        "strict": True
+        }
     }
     name = _("Get Recipes by Category")
     description = _("Gets a list of food recipes by a specified category")
@@ -326,8 +323,7 @@ class ExtractWikipedia(Base):
             "required": [
                 "title"
             ]
-        },
-        "strict": True
+        }
     }
     name = _("Extract Wikipedia Article")
     description = _("Extracts an article from Wikipedia by it's title")
@@ -368,8 +364,7 @@ class OnlineSearch(Base):
             "required": [
                 "search_term"
             ]
-        },
-        "strict": True
+        }
     }
     name = _("Online Search")
     description = _("Search for a term online using DuckDuckGo")
@@ -461,8 +456,7 @@ class RunCommand(Base):
                 "command",
                 "explanation"
             ]
-        },
-        "strict": True
+        }
     }
     name = _("Run Command (Testing)")
     description = _("Request to run a command using SSH to connect to the device")
