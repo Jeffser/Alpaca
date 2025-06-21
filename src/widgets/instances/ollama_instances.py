@@ -2,7 +2,7 @@
 
 from gi.repository import Adw, Gtk, GLib
 
-import requests, json, logging, os, shutil, subprocess, threading, re
+import requests, json, logging, os, shutil, subprocess, threading, re, signal
 from .. import dialog, tools
 from ...ollama_models import OLLAMA_MODELS
 from ...constants import data_dir, cache_dir
@@ -486,7 +486,7 @@ class OllamaManaged(BaseInstance):
     def stop(self):
         if self.process:
             logger.info("Stopping Alpaca's Ollama instance")
-            self.process.terminate()
+            os.killpg(os.getpgid(self.process.pid), signal.SIGTERM)
             self.process.wait()
             self.process = None
             self.log_summary = (_("Integrated Ollama instance is not running"), ['dim-label'])
@@ -495,18 +495,23 @@ class OllamaManaged(BaseInstance):
     def start(self):
         self.stop()
         if shutil.which('ollama'):
-            os.makedirs(os.path.join(cache_dir, 'tmp', 'ollama'), exist_ok=True)
-            params = self.properties.get('overrides').copy()
-            params["OLLAMA_HOST"] = self.properties.get('url')
-            params["TMPDIR"] = os.path.join(cache_dir, 'tmp', 'ollama')
-            params["OLLAMA_MODELS"] = self.properties.get('model_directory')
-            self.process = subprocess.Popen(["ollama", "serve"], env={**os.environ, **params}, stderr=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
-            threading.Thread(target=self.log_output, args=(self.process.stdout,)).start()
-            threading.Thread(target=self.log_output, args=(self.process.stderr,)).start()
-            logger.info("Starting Alpaca's Ollama instance...")
-            logger.debug(params)
-            logger.info("Started Alpaca's Ollama instance")
             try:
+                params = self.properties.get('overrides', {}).copy()
+                params["OLLAMA_HOST"] = self.properties.get('url')
+                params["OLLAMA_MODELS"] = self.properties.get('model_directory')
+                self.process = subprocess.Popen(
+                    ["ollama", "serve"],
+                    env={**os.environ, **params},
+                    stderr=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    text=True,
+                    preexec_fn=os.setsid
+                )
+
+                threading.Thread(target=self.log_output, args=(self.process.stdout,)).start()
+                threading.Thread(target=self.log_output, args=(self.process.stderr,)).start()
+                logger.info("Starting Alpaca's Ollama instance...")
+                logger.info("Started Alpaca's Ollama instance")
                 v_str = subprocess.check_output("ollama -v", shell=True).decode('utf-8')
                 logger.info(v_str.split('\n')[1].strip('Warning: ').strip())
             except Exception as e:
