@@ -95,10 +95,10 @@ class OptionPopup(Gtk.Popover):
     def regenerate_message(self):
         chat = self.message_element.chat
         model = model_manager.get_selected_model().get_name()
-        for att in list(self.image_attachment_container.container):
+        for att in list(self.message_element.image_attachment_container.container):
             SQL.delete_attachment(att)
             att.get_parent().remove(att)
-        for att in list(self.attachment_container.container):
+        for att in list(self.message_element.attachment_container.container):
             SQL.delete_attachment(att)
             att.get_parent().remove(att)
         if not chat.busy and model:
