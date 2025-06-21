@@ -684,8 +684,7 @@ class OllamaManaged(BaseOllama):
     def start(self):
         self.stop()
         if shutil.which('ollama'):
-            if not os.path.isdir(os.path.join(cache_dir, 'tmp', 'ollama')):
-                os.mkdir(os.path.join(cache_dir, 'tmp', 'ollama'))
+            os.makedirs(os.path.join(cache_dir, 'tmp', 'ollama'), exist_ok=True)
             params = self.overrides.copy()
             params["OLLAMA_HOST"] = self.instance_url
             params["TMPDIR"] = os.path.join(cache_dir, 'tmp', 'ollama')
@@ -1081,5 +1080,3 @@ if os.getenv('ALPACA_OLLAMA_ONLY', '0') == '1':
     ready_instances = [OllamaManaged, Ollama]
 else:
     ready_instances = [OllamaManaged, Ollama, ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Fireworks, LambdaLabs, Cerebras, Klusterai, GenericOpenAI, LlamaAPI]
-
-
