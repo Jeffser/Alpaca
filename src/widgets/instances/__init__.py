@@ -244,30 +244,30 @@ class InstancePreferencesGroup(Adw.Dialog):
             self.groups[-1].add(default_model_el)
             self.groups[-1].add(title_model_el)
 
-        pg = Adw.PreferencesGroup()
-        button_container = Gtk.Box(
-            spacing=10,
-            halign=3
-        )
-
-        save_button = Gtk.Button(
-            label=_('Save'),
-            tooltip_text=_('Save'),
-            css_classes=['pill', 'suggested-action']
-        )
-        save_button.connect('clicked', lambda button: self.save())
-        button_container.append(save_button)
-        pg.add(button_container)
-
-
         pp = Adw.PreferencesPage()
         for group in self.groups:
             pp.add(group)
 
-        pp.add(pg)
+        cancel_button = Gtk.Button(
+            label=_('Cancel'),
+            tooltip_text=_('Cancel'),
+            css_classes=['raised']
+        )
+        cancel_button.connect('clicked', lambda button: self.close())
+
+        save_button = Gtk.Button(
+            label=_('Save'),
+            tooltip_text=_('Save'),
+            css_classes=['suggested-action']
+        )
+        save_button.connect('clicked', lambda button: self.save())
+
+        ab = Gtk.ActionBar()
+        ab.pack_start(cancel_button)
+        ab.pack_end(save_button)
 
         tbv=Adw.ToolbarView()
-        tbv.add_top_bar(Adw.HeaderBar())
+        tbv.add_bottom_bar(ab)
         tbv.set_content(pp)
         super().__init__(
             child=tbv,
@@ -331,7 +331,7 @@ class InstancePreferencesGroup(Adw.Dialog):
         else:
             self.get_root().instance_listbox.append(InstanceRow(instance=self.instance))
 
-        self.close()
+        self.force_close()
 
 # Fallback for when there are no instances
 class Empty:
