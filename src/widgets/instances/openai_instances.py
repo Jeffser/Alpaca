@@ -303,7 +303,8 @@ class Gemini(BaseInstance):
 
     def __init__(self, instance_id:str, properties:dict):
         super().__init__(instance_id, properties)
-        del self.properties['seed']
+        if 'seed' in self.properties:
+            del self.properties['seed']
 
     def get_local_models(self) -> list:
         try:
@@ -379,7 +380,8 @@ class Venice(BaseInstance):
 
     def __init__(self, instance_id:str, properties:dict):
         super().__init__(instance_id, properties)
-        del self.properties['seed']
+        if 'seed' in self.properties:
+            del self.properties['seed']
 
 class Deepseek(BaseInstance):
     instance_type = 'deepseek'
@@ -389,7 +391,8 @@ class Deepseek(BaseInstance):
 
     def __init__(self, instance_id:str, properties:dict):
         super().__init__(instance_id, properties)
-        del self.properties['seed']
+        if 'seed' in self.properties:
+            del self.properties['seed']
 
 class Groq(BaseInstance):
     instance_type = 'groq'
