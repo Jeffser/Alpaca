@@ -6,7 +6,6 @@ Handles the message widget
 import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GtkSource, Spelling
 import os, datetime, threading, sys, base64, logging, re, tempfile
-from ..constants import TTS_VOICES, TTS_AUTO_MODES
 from ..sql_manager import prettify_model_name, generate_uuid, Instance as SQL
 from . import model_manager, attachments, blocks, dialog, voice
 
