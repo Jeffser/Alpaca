@@ -6,7 +6,7 @@ Text blocks with PangoMarkup styling
 import gi
 from gi.repository import GLib, Gtk
 
-import re
+import re, unicodedata
 
 def markdown_to_pango(text:str) -> str:
     """Converts Markdown text to a limited version of PangoMarkup"""
@@ -35,7 +35,7 @@ class GeneratingText(Gtk.Overlay):
             editable=False,
             cursor_visible=False,
             wrap_mode=2,
-            css_classes=['flat', 'dim-label', 'p0']
+            css_classes=['flat', 'dim-label', 'p0', 'lh']
         )
         self.buffer = textview.get_buffer()
         super().__init__(
@@ -85,7 +85,8 @@ class Text(Gtk.Label):
             wrap_mode=2,
             focusable=True,
             selectable=True,
-            xalign=0
+            xalign=0,
+            css_classes=['lh']
         )
         self.raw_text=""
         if content:
@@ -97,6 +98,17 @@ class Text(Gtk.Label):
 
     def get_content(self) -> str:
         return self.raw_text
+
+    def get_content_for_dictation(self) -> str:
+        allowed_characters = ('\n', ',', '.', ':', ';', '+', '/', '-', '(', ')', '[', ']', '=', '<', '>')
+        cleaned_text = ''.join(c for c in self.raw_text if unicodedata.category(c).startswith(('L', 'N', 'Zs')) or c in allowed_characters)
+        lines = []
+        for line in cleaned_text.split('\n'):
+            if line and line.strip() not in allowed_characters:
+                if not line.endswith('.'):
+                    line += '.'
+                lines.append(line)
+        return '\n'.join(lines)
 
     def set_content(self, value:str) -> None:
         self.raw_text = value
@@ -137,7 +149,7 @@ class EditingText(Gtk.Box):
 
         self.textview = Gtk.TextView(
             halign=0,
-            css_classes=["osd", "p10", "r10"],
+            css_classes=["osd", "p10", "r10", 'lh'],
             wrap_mode=2
         )
         self.append(self.textview)

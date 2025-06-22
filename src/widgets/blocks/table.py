@@ -17,7 +17,7 @@ class MarkdownTable:
 
     def __repr__(self):
         table_repr = 'Headers: {}\n'.format(self.headers)
-        table_repr += 'Alignments: {}\n'.format(self.alignments)
+        #table_repr += 'Alignments: {}\n'.format(self.alignments)
         table_repr += 'Rows:\n'
         for row in self.rows:
             table_repr += ' | '.join(row) + '\n'
@@ -59,6 +59,9 @@ class Table(Gtk.Frame):
         self.set_child(scrolled_window)
         if content:
             self.set_content(content)
+
+    def get_content_for_dictation(self) -> str:
+        return str(self.table)
 
     def parse_markdown_table(self, markdown_text:str):
         # Define regex patterns for matching the table components

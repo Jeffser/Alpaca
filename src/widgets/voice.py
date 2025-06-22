@@ -8,9 +8,9 @@ import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
 from ..sql_manager import Instance as SQL
 from ..constants import data_dir, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
-from . import dialog, model_manager
+from . import dialog, model_manager, blocks
 
-import os, threading, importlib.util
+import os, threading, importlib.util, re, unicodedata
 import numpy as np
 
 class DictateToggleButton(Gtk.Stack):
@@ -39,9 +39,9 @@ class DictateToggleButton(Gtk.Stack):
         return self.button.get_active()
 
     def dictate_message(self, button):
-        def run(text:str, btn):
+        import sounddevice as sd
+        def run():
             GLib.idle_add(self.set_visible_child_name, 'loading')
-            import sounddevice as sd
             from kokoro import KPipeline
             voice = None
             if self.message_element.get_model():
@@ -56,27 +56,29 @@ class DictateToggleButton(Gtk.Stack):
                         pretty_name = pretty_name[0]
                         self.get_root().local_model_flowbox.append(model_manager.TextToSpeechModel(pretty_name))
             tts_engine = KPipeline(lang_code=voice[0])
-
-            generator = tts_engine(
-                text,
-                voice=voice,
-                speed=1.2,
-                split_pattern=r'\n+'
-            )
-            try:
-                for gs, ps, audio in generator:
-                    if not btn.get_active():
-                        break
-                    sd.play(audio, samplerate=24000)
-                    GLib.idle_add(self.set_visible_child_name, 'button')
-                    sd.wait()
-            except Exception as e:
-                dialog.simple_error(
-                    parent=self.get_root(),
-                    title=_('Text to Speech Error'),
-                    body=_('An error occurred while running text to speech model'),
-                    error_log=e,
-                )
+            for block in list(self.message_element.block_container):
+                text = block.get_content_for_dictation()
+                if text:
+                    try:
+                        generator = tts_engine(
+                            text,
+                            voice=voice,
+                            speed=1.2,
+                            split_pattern=r'\n+'
+                        )
+                        for gs, ps, audio in generator:
+                            if not button.get_active():
+                                return
+                            sd.play(audio, samplerate=24000)
+                            GLib.idle_add(self.set_visible_child_name, 'button')
+                            sd.wait()
+                    except Exception as e:
+                        dialog.simple_error(
+                            parent=self.get_root(),
+                            title=_('Text to Speech Error'),
+                            body=_('An error occurred while running text to speech model'),
+                            error_log=e,
+                        )
             GLib.idle_add(self.set_active, False)
 
         if button.get_active():
@@ -84,9 +86,8 @@ class DictateToggleButton(Gtk.Stack):
             if self.get_root().message_dictated and self.get_root().message_dictated.popup.tts_button.get_active():
                  self.get_root().message_dictated.popup.tts_button.set_active(False)
             self.get_root().message_dictated = self.message_element
-            threading.Thread(target=run, args=(self.message_element.get_content(), button)).start()
+            threading.Thread(target=run).start()
         else:
-            import sounddevice as sd
             GLib.idle_add(self.message_element.remove_css_class, 'tts_message')
             GLib.idle_add(self.set_visible_child_name, 'button')
             self.get_root().message_dictated = None

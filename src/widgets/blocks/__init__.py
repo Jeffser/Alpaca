@@ -13,11 +13,11 @@ from .. import attachments
 from ...sql_manager import generate_uuid, Instance as SQL
 
 patterns = [
-    ('code', re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
+    ('code', re.compile(r'\n```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
     ('latex', re.compile(r'\\\[\n*?(.*?)\n*?\\\]|\$+\n*?(.*?)\$+\n*?', re.DOTALL)),
     ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
-    ('line', re.compile(r'^(\s*-{3,}\s*)$')), # For live rendering
-    ('line', re.compile(r'(\n-{3,}\n)')) # For normal rendering
+    ('line', re.compile(r'^\s*-{3,}\s*$')), # For live rendering
+    ('line', re.compile(r'\n-{3,}\n')) # For normal rendering
 ]
 
 # Match holder
@@ -64,7 +64,7 @@ def text_to_block_list(content: str):
         elif mb.name == "table":
             blocks.append(Table(content=content[mb.start:mb.end]))
         elif mb.name == "line":
-            blocks.append(Separator(content=match.group(1)))
+            blocks.append(Separator())
 
         pos = mb.end
 

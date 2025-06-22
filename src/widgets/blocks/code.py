@@ -7,6 +7,7 @@ import gi
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, Gdk, GtkSource
 from .. import terminal, dialog
+import re, unicodedata
 
 language_fallback = {
     'bash': 'sh',
@@ -231,6 +232,15 @@ class Code(Gtk.Box):
 
     def get_content(self) -> str:
         return "```{}\n{}\n```".format(self.get_language().lower(), self.get_code())
+
+    def get_content_for_dictation(self) -> str:
+        allowed_characters = ('\n', ',', '.', ':', ';', '+', '/', '-', '(', ')', '[', ']', '=', '<', '>')
+        cleaned_text = ''.join(c for c in self.get_code() if unicodedata.category(c).startswith(('L', 'N', 'Zs')) or c in allowed_characters)
+        lines = ['{}.'.format(self.get_language())]
+        for line in cleaned_text.split('\n'):
+            if line and line.strip() not in allowed_characters:
+                lines.append(line)
+        return '\n'.join(lines)
 
     def set_content(self, value:str) -> None:
         self.buffer.set_text(value, len(value.encode('utf-8')))
