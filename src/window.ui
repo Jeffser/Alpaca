@@ -1018,9 +1018,9 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                 </object>
               </child>
               <child>
-                <object class="AdwComboRow" id="tts_auto_mode_combo">
+                <object class="AdwSwitchRow" id="tts_auto_mode_combo">
                   <property name="title" translatable="yes">Dictate New Messages Automatically</property>
-                  <property name="subtitle" translatable="yes">Dictate new messages once they have finished being generated</property>
+                  <property name="subtitle" translatable="yes">Dictate new messages as they are generated</property>
                 </object>
               </child>
             </object>

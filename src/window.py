@@ -751,11 +751,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.tts_voice_combo.set_model(string_list)
         self.settings.bind('tts-model', self.tts_voice_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
 
-        string_list = Gtk.StringList()
-        for name in TTS_AUTO_MODES:
-            string_list.append(name)
-        self.tts_auto_mode_combo.set_model(string_list)
-        self.settings.bind('tts-auto-mode', self.tts_auto_mode_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind('tts-auto-dictate', self.tts_auto_mode_combo, 'active', Gio.SettingsBindFlags.DEFAULT)
 
         # Ollama is available but there are no instances added
         if not any(i.get("type") == "ollama:managed" for i in SQL.get_instances()) and shutil.which("ollama"):
@@ -910,4 +906,3 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.notice_dialog.present(self)
         else:
             self.main_navigation_view.replace_with_tags(['welcome'])
-

@@ -17,5 +17,5 @@ class Separator(Gtk.Separator):
     def get_content(self) -> str:
         return '---'
 
-    def get_content_for_dictation(self) -> None:
-        return None
+    def get_content_for_dictation(self) -> str:
+        return ''

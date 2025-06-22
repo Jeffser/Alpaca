@@ -13,6 +13,8 @@ from . import dialog, model_manager, blocks
 import os, threading, importlib.util, re, unicodedata
 import numpy as np
 
+message_dictated = None
+
 class DictateToggleButton(Gtk.Stack):
     __gtype_name__ = 'AlpacaDictateToggleButton'
 
@@ -39,6 +41,7 @@ class DictateToggleButton(Gtk.Stack):
         return self.button.get_active()
 
     def dictate_message(self, button):
+        global message_dictated
         import sounddevice as sd
         def run():
             GLib.idle_add(self.set_visible_child_name, 'loading')
@@ -47,21 +50,22 @@ class DictateToggleButton(Gtk.Stack):
             if self.message_element.get_model():
                 voice = SQL.get_model_preferences(self.message_element.get_model()).get('voice', None)
             if not voice:
-                voice = TTS_VOICES.get(list(TTS_VOICES.keys())[self.get_root().settings.get_value('tts-model').unpack()])
+                voice = TTS_VOICES.get(list(TTS_VOICES.keys())[self.message_element.get_root().settings.get_value('tts-model').unpack()])
 
             if model_manager.tts_model_path:
-                if not os.path.islink(os.path.join(model_manager.tts_model_path, '{}.pt'.format(voice))) and self.get_root().get_name() == 'AlpacaWindow':
+                if not os.path.islink(os.path.join(model_manager.tts_model_path, '{}.pt'.format(voice))) and self.message_element.get_root().get_name() == 'AlpacaWindow':
                     pretty_name = [k for k, v in TTS_VOICES.items() if v == voice]
                     if len(pretty_name) > 0:
                         pretty_name = pretty_name[0]
-                        self.get_root().local_model_flowbox.append(model_manager.TextToSpeechModel(pretty_name))
+                        self.message_element.get_root().local_model_flowbox.append(model_manager.TextToSpeechModel(pretty_name))
             tts_engine = KPipeline(lang_code=voice[0])
-            for block in list(self.message_element.block_container):
-                text = block.get_content_for_dictation()
-                if text:
+            queue_index = 0
+            while queue_index < len(self.message_element.get_content_for_dictation()):
+                text = self.message_element.get_content_for_dictation()
+                if text[queue_index:]:
                     try:
                         generator = tts_engine(
-                            text,
+                            text[queue_index:],
                             voice=voice,
                             speed=1.2,
                             split_pattern=r'\n+'
@@ -74,23 +78,25 @@ class DictateToggleButton(Gtk.Stack):
                             sd.wait()
                     except Exception as e:
                         dialog.simple_error(
-                            parent=self.get_root(),
+                            parent=self.message_element.get_root(),
                             title=_('Text to Speech Error'),
                             body=_('An error occurred while running text to speech model'),
                             error_log=e,
                         )
+                        break
+                queue_index = len(text)
             GLib.idle_add(self.set_active, False)
 
         if button.get_active():
             GLib.idle_add(self.message_element.add_css_class, 'tts_message')
-            if self.get_root().message_dictated and self.get_root().message_dictated.popup.tts_button.get_active():
-                 self.get_root().message_dictated.popup.tts_button.set_active(False)
-            self.get_root().message_dictated = self.message_element
+            if message_dictated and message_dictated.popup.tts_button.get_active():
+                 message_dictated.popup.tts_button.set_active(False)
+            message_dictated = self.message_element
             threading.Thread(target=run).start()
         else:
             GLib.idle_add(self.message_element.remove_css_class, 'tts_message')
             GLib.idle_add(self.set_visible_child_name, 'button')
-            self.get_root().message_dictated = None
+            message_dictated = None
             threading.Thread(target=sd.stop).start()
 
 class MicrophoneButton(Gtk.Stack):

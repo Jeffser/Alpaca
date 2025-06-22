@@ -234,7 +234,7 @@ class Code(Gtk.Box):
         return "```{}\n{}\n```".format(self.get_language().lower(), self.get_code())
 
     def get_content_for_dictation(self) -> str:
-        allowed_characters = ('\n', ',', '.', ':', ';', '+', '/', '-', '(', ')', '[', ']', '=', '<', '>')
+        allowed_characters = ('\n', ',', '.', ':', ';', '+', '/', '-', '(', ')', '[', ']', '=', '<', '>', '’', '\'', '"')
         cleaned_text = ''.join(c for c in self.get_code() if unicodedata.category(c).startswith(('L', 'N', 'Zs')) or c in allowed_characters)
         lines = ['{}.'.format(self.get_language())]
         for line in cleaned_text.split('\n'):
