@@ -2,7 +2,7 @@
 
 from gi.repository import Adw, Gtk, GLib
 
-import requests, json, logging, os, shutil, subprocess, threading, re, signal
+import requests, json, logging, os, shutil, subprocess, threading, re, signal, pwd, getpass
 from .. import dialog, tools
 from ...ollama_models import OLLAMA_MODELS
 from ...constants import data_dir, cache_dir
@@ -163,6 +163,21 @@ class BaseInstance:
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         GLib.idle_add(bot_message.update_message, {'clear': True})
+
+        if self.properties.get('share_name', 0) > 0:
+            user_display_name = None
+            if self.properties.get('share_name') == 1:
+                user_display_name = getpass.getuser().title()
+            elif self.properties.get('share_name') == 2:
+                gecos_temp = pwd.getpwnam(getpass.getuser()).pw_gecos.split(',')
+                if len(gecos_temp) > 0:
+                    user_display_name = pwd.getpwnam(getpass.getuser()).pw_gecos.split(',')[0].title()
+
+            if user_display_name:
+                messages.insert(0, {
+                    'role': 'system',
+                    'content': 'The user is called {}'.format(user_display_name)
+                })
 
         params = {
             "model": model,
@@ -435,7 +450,8 @@ class OllamaManaged(BaseInstance):
             'ROCR_VISIBLE_DEVICES': '1',
             'HIP_VISIBLE_DEVICES': '1'
         },
-        'think': False
+        'think': False,
+        'share_name': 0
     }
 
     def __init__(self, instance_id:str, properties:dict):
@@ -524,7 +540,8 @@ class Ollama(BaseInstance):
         'seed': 0,
         'default_model': None,
         'title_model': None,
-        'think': False
+        'think': False,
+        'share_name': 0
     }
 
     def __init__(self, instance_id:str, properties:dict):

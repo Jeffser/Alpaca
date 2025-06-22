@@ -100,6 +100,22 @@ class InstancePreferencesPage(Adw.PreferencesPage):
                 active=self.instance.properties.get('think')
             ))
 
+        if 'share_name' in self.instance.properties: #SHARE NAME
+            share_name_el = Adw.ComboRow(
+                title=_('Share Name'),
+                subtitle=_('Automatically share your name with the AI models.'),
+                name='share_name'
+            )
+
+            string_list = Gtk.StringList()
+            string_list.append('Do Not Share')
+            string_list.append('Username')
+            string_list.append('Full Name')
+
+            share_name_el.set_model(string_list)
+            share_name_el.set_selected(self.instance.properties.get('share_name'))
+            self.groups[-1].add(share_name_el)
+
         if 'max_tokens' in self.instance.properties: #MAX TOKENS
             self.groups[-1].add(Adw.SpinRow(
                 title=_('Max Tokens'),
@@ -266,6 +282,7 @@ class InstancePreferencesPage(Adw.PreferencesPage):
             'url': lambda val: '{}{}'.format('http://' if not re.match(r'^(http|https)://', val) else '', val.rstrip('/')),
             'api': lambda val: self.instance.properties.get('api') if self.instance.properties.get('api') and not val else (val if val else 'empty'),
             'think': lambda val: val,
+            'share_name': lambda val: val,
             'max_tokens': lambda val: val,
             'temperature': lambda val: val,
             'seed': lambda val: val,
