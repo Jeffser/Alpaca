@@ -204,6 +204,8 @@ class MicrophoneButton(Gtk.Stack):
 
         if button.get_active():
             if os.path.isfile(os.path.join(data_dir, 'whisper', '{}.pt'.format(model_name))):
+                if message_dictated:
+                    message_dictated.popup.tts_button.set_active(False)
                 threading.Thread(target=run_mic).start()
             else:
                 dialog.simple(

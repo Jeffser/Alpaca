@@ -5,7 +5,7 @@
   <template class="AlpacaWindow" parent="AdwApplicationWindow">
     <signal name="close-request" handler="closing_app"/>
     <property name="resizable">True</property>
-    <property name="width-request">320</property>
+    <property name="width-request">360</property>
     <property name="height-request">240</property>
     <property name="default-width">1300</property>
     <property name="default-height">800</property>

@@ -46,7 +46,7 @@ from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, Spelling
 
 from .sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from . import widgets as Widgets
-from .constants import SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES, TTS_AUTO_MODES, STT_MODELS, data_dir, source_dir, cache_dir
+from .constants import SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES, STT_MODELS, data_dir, source_dir, cache_dir
 
 
 logger = logging.getLogger(__name__)
@@ -134,8 +134,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_manager_top_view_switcher = Gtk.Template.Child()
     last_selected_instance_row = None
 
-    # tts
-    message_dictated = None
 
     @Gtk.Template.Callback()
     def closing_notice(self, dialog):
@@ -397,8 +395,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             selected_chat = self.chat_list_box.get_selected_row()
             self.settings.set_string('default-chat', selected_chat.chat.chat_id)
             self.get_current_instance().stop()
-            if self.message_dictated:
-                self.message_dictated.footer.popup.tts_button.set_active(False)
+            if Widgets.voice.message_dictated:
+                Widgets.voice.message_dictated.popup.tts_button.set_active(False)
             self.get_application().quit()
 
         def switch_to_hide():
