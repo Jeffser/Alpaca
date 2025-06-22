@@ -14,7 +14,6 @@ logger = logging.getLogger(__name__)
 class BaseInstance:
     instance_id = None
     description = None
-    limitations = ()
     row = None
     process = None
     local_models = None
@@ -134,7 +133,7 @@ class BaseInstance:
                     response = ''
 
                 messages.append({
-                    'role': 'assistant',
+                    'role': 'tool',
                     'content': response,
                     'tool_calls': [tc]
                 })
@@ -154,7 +153,6 @@ class BaseInstance:
             logger.error(e)
 
         if generate_message:
-            tools.log_to_message(_("Generating message..."), bot_message, True)
             bot_message.update_message({'remove_css': 'dim-label'})
             self.generate_response(bot_message, chat, messages, model, tools_used if len(tools_used) > 0 else None)
         else:
@@ -164,19 +162,7 @@ class BaseInstance:
     def generate_response(self, bot_message, chat, messages:list, model:str, tools_used:list):
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
-
-        if 'no-system-messages' in self.limitations:
-            for i in range(len(messages)):
-                if messages[i].get('role') == 'system':
-                    messages[i]['role'] = 'user'
-
-        if 'text-only' in self.limitations:
-            for i in range(len(messages)):
-                for c in range(len(messages[i].get('content', []))):
-                    if messages[i].get('content')[c].get('type') != 'text':
-                        del messages[i]['content'][c]
-                    else:
-                        messages[i]['content'] = messages[i].get('content')[c].get('text')
+        GLib.idle_add(bot_message.update_message, {'clear': True})
 
         params = {
             "model": model,

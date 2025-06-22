@@ -59,7 +59,7 @@ class Base(Adw.ActionRow):
                     self.variables[v.get_name()]['value'] = v.get_active()
 
         SQL.insert_or_update_tool_parameters(self.name, self.extract_variables_for_sql(), self.is_enabled())
-        window.main_navigation_view.pop()
+        self.get_root().main_navigation_view.pop()
 
     def show_tool_page(self):
         tool_page = Adw.PreferencesPage()
@@ -130,7 +130,7 @@ class Base(Adw.ActionRow):
             button_container = Gtk.Box(orientation=0, spacing=10, halign=3)
 
             cancel_button = Gtk.Button(label=_("Cancel"), css_classes=['pill'])
-            cancel_button.connect('clicked', lambda *_: window.main_navigation_view.pop())
+            cancel_button.connect('clicked', lambda *_: self.get_root().main_navigation_view.pop())
             button_container.append(cancel_button)
 
             accept_button = Gtk.Button(label=_("Accept"), css_classes=['pill', 'suggested-action'])
@@ -144,7 +144,7 @@ class Base(Adw.ActionRow):
         page_widget = Adw.ToolbarView()
         page_widget.add_top_bar(Adw.HeaderBar())
         page_widget.set_content(tool_page)
-        window.main_navigation_view.push(Adw.NavigationPage.new(child=page_widget, title=self.name))
+        self.get_root().main_navigation_view.push(Adw.NavigationPage.new(child=page_widget, title=self.name))
 
     def attach_online_image(self, bot_message, image_title:str, image_url:str):
         attachment = bot_message.add_attachment(

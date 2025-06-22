@@ -445,7 +445,7 @@ class Message(Gtk.Box):
         elif data.get('content', False):
             GLib.idle_add(self.main_stack.set_visible_child_name, 'content')
             vadjustment = self.chat.scrolledwindow.get_vadjustment()
-            if vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
+            if vadjustment.get_value() + 150 >= vadjustment.get_upper() - vadjustment.get_page_size():
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
             GLib.idle_add(self.block_container.get_generating_block().append_content, data.get('content', ''))
         elif data.get('clear', False):
