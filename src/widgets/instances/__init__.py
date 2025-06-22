@@ -262,12 +262,15 @@ class InstancePreferencesGroup(Adw.Dialog):
         )
         save_button.connect('clicked', lambda button: self.save())
 
-        ab = Gtk.ActionBar()
-        ab.pack_start(cancel_button)
-        ab.pack_end(save_button)
+        hb = Adw.HeaderBar(
+            show_start_title_buttons=False,
+            show_end_title_buttons=False
+        )
+        hb.pack_start(cancel_button)
+        hb.pack_end(save_button)
 
         tbv=Adw.ToolbarView()
-        tbv.add_bottom_bar(ab)
+        tbv.add_top_bar(hb)
         tbv.set_content(pp)
         super().__init__(
             child=tbv,

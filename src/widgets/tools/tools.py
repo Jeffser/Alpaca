@@ -9,91 +9,44 @@ from .. import terminal, attachments
 from ...constants import data_dir
 from ...sql_manager import generate_uuid, Instance as SQL
 
-class Base(Adw.ActionRow):
-    __gtype_name__ = 'AlpacaToolRow'
+class ToolPreferencesDialog(Adw.Dialog):
+    __gtype_name__ = 'AlpacaToolPreferencesDialog'
 
-    variables = {}
-
-    def __init__(self, variables:dict, enabled:bool):
-        for name, data in self.variables.items():
-            self.variables[name]['value'] = variables.get(name, data.get('value'))
-
-        super().__init__(
-            title = self.name,
-            subtitle = self.description
-        )
-
-        info_button = Gtk.Button(icon_name='info-outline-symbolic', css_classes=['flat'], valign=3)
-        info_button.connect('clicked', lambda *_: self.show_tool_page())
-        self.add_prefix(info_button)
-        self.enable_switch = Gtk.Switch(active=enabled, valign=3)
-        self.enable_switch.connect('state-set', lambda *_: self.enabled_changed())
-        self.add_suffix(self.enable_switch)
-
-    def enabled_changed(self):
-        SQL.insert_or_update_tool_parameters(self.tool_metadata.get('name'), self.extract_variables_for_sql(), self.is_enabled())
-
-    def is_enabled(self) -> bool:
-        return self.enable_switch.get_active()
-
-    def get_tool(self) -> dict:
-        return {
-            "type": "function",
-            "function": self.tool_metadata
-        }
-
-    def extract_variables_for_sql(self) -> dict:
-        variables_for_sql = {}
-        for name, data in self.variables.items():
-            variables_for_sql[name] = data.get('value')
-        return variables_for_sql
-
-    def save_variables(self, variables_group):
-        for v in list(list(list(variables_group)[0])[1])[0]:
-            if v.get_name() in list(self.variables.keys()):
-                if isinstance(v, Adw.EntryRow) or isinstance(v, Adw.PasswordEntryRow):
-                    self.variables[v.get_name()]['value'] = v.get_text()
-                elif isinstance(v, Adw.SpinRow):
-                    self.variables[v.get_name()]['value'] = v.get_value()
-                elif isinstance(v, Adw.SwitchRow):
-                    self.variables[v.get_name()]['value'] = v.get_active()
-
-        SQL.insert_or_update_tool_parameters(self.name, self.extract_variables_for_sql(), self.is_enabled())
-        self.get_root().main_navigation_view.pop()
-
-    def show_tool_page(self):
-        tool_page = Adw.PreferencesPage()
+    def __init__(self, tool):
+        self.tool = tool
+        pp = Adw.PreferencesPage()
         ai_description = Adw.PreferencesGroup(
             title=_("AI Description"),
             description=_("The description the AI model will use to understand what the tool does.")
         )
         ai_description.add(
             Adw.Bin(
-                child=Gtk.Label(label=self.tool_metadata.get('description'), wrap=True, halign=1),
-                css_classes=["card", "p10"]
+                child=Gtk.Label(label=self.tool.tool_metadata.get('description'), wrap=True, halign=1),
+                css_classes=["card", "p10", "dim-label"]
             )
         )
-        tool_page.add(ai_description)
-        if len(list(self.tool_metadata.get('parameters'))) > 0:
+        pp.add(ai_description)
+
+        if len(list(self.tool.tool_metadata.get('parameters'))) > 0:
             arguments = Adw.PreferencesGroup(
                 title=_("Arguments"),
                 description=_("Variables that are filled by the AI.")
             )
-            for name, data in self.tool_metadata.get('parameters', {}).get('properties', {}).items():
+            for name, data in self.tool.tool_metadata.get('parameters', {}).get('properties', {}).items():
                 arguments.add(
                     Adw.ActionRow(
                         title=name.replace('_', ' ').title(),
                         subtitle=data.get('description')
                     )
                 )
-            tool_page.add(arguments)
+            pp.add(arguments)
 
-        if len(list(self.variables)) > 0:
+        if len(list(self.tool.variables)) > 0:
             variables = Adw.PreferencesGroup(
                 title=_("Variables"),
                 description=_("User filled values that the tool uses to work, the AI does not have access to these variables at all.")
             )
-            for name, data in self.variables.items():
+            for name, data in self.tool.variables.items():
                 if data.get('type', 'string') == 'string':
                     variables.add(
                         Adw.EntryRow(
@@ -125,26 +78,94 @@ class Base(Adw.ActionRow):
                             active=bool(data.get('value', False))
                         )
                     )
-            tool_page.add(variables)
+            pp.add(variables)
 
-            button_container = Gtk.Box(orientation=0, spacing=10, halign=3)
+            cancel_button = Gtk.Button(
+                label=_('Cancel'),
+                tooltip_text=_('Cancel'),
+                css_classes=['raised']
+            )
+            cancel_button.connect('clicked', lambda button: self.close())
 
-            cancel_button = Gtk.Button(label=_("Cancel"), css_classes=['pill'])
-            cancel_button.connect('clicked', lambda *_: self.get_root().main_navigation_view.pop())
-            button_container.append(cancel_button)
+            save_button = Gtk.Button(
+                label=_('Save'),
+                tooltip_text=_('Save'),
+                css_classes=['suggested-action']
+            )
+            save_button.connect('clicked', lambda button: self.save_variables(variables))
 
-            accept_button = Gtk.Button(label=_("Accept"), css_classes=['pill', 'suggested-action'])
-            accept_button.connect('clicked', lambda *_: self.save_variables(variables))
-            button_container.append(accept_button)
+            hb = Adw.HeaderBar(
+                show_start_title_buttons=False,
+                show_end_title_buttons=False
+            )
+            hb.pack_start(cancel_button)
+            hb.pack_end(save_button)
 
-            button_group = Adw.PreferencesGroup()
-            button_group.add(button_container)
-            tool_page.add(button_group)
+        else:
+            hb = Adw.HeaderBar()
 
-        page_widget = Adw.ToolbarView()
-        page_widget.add_top_bar(Adw.HeaderBar())
-        page_widget.set_content(tool_page)
-        self.get_root().main_navigation_view.push(Adw.NavigationPage.new(child=page_widget, title=self.name))
+        tbv=Adw.ToolbarView()
+        tbv.add_top_bar(hb)
+        tbv.set_content(pp)
+        super().__init__(
+            child=tbv,
+            title=self.tool.name,
+            content_width=500
+        )
+
+    def save_variables(self, variables_group):
+        for v in list(list(list(variables_group)[0])[1])[0]:
+            if v.get_name() in list(self.tool.variables.keys()):
+                if isinstance(v, Adw.EntryRow) or isinstance(v, Adw.PasswordEntryRow):
+                    self.tool.variables[v.get_name()]['value'] = v.get_text()
+                elif isinstance(v, Adw.SpinRow):
+                    self.tool.variables[v.get_name()]['value'] = v.get_value()
+                elif isinstance(v, Adw.SwitchRow):
+                    self.tool.variables[v.get_name()]['value'] = v.get_active()
+
+        SQL.insert_or_update_tool_parameters(self.tool.name, self.tool.extract_variables_for_sql(), self.tool.is_enabled())
+        self.close()
+
+class Base(Adw.ActionRow):
+    __gtype_name__ = 'AlpacaToolRow'
+
+    variables = {}
+
+    def __init__(self, variables:dict, enabled:bool):
+        for name, data in self.variables.items():
+            self.variables[name]['value'] = variables.get(name, data.get('value'))
+
+        super().__init__(
+            title = self.name,
+            subtitle = self.description
+        )
+
+        info_button = Gtk.Button(icon_name='info-outline-symbolic', css_classes=['flat'], valign=3)
+        info_button.connect('clicked', lambda *_: ToolPreferencesDialog(self).present(self.get_root()))
+        self.add_prefix(info_button)
+        self.enable_switch = Gtk.Switch(active=enabled, valign=3)
+        self.enable_switch.connect('state-set', lambda *_: self.enabled_changed())
+        self.add_suffix(self.enable_switch)
+
+    def enabled_changed(self):
+        SQL.insert_or_update_tool_parameters(self.tool_metadata.get('name'), self.extract_variables_for_sql(), self.is_enabled())
+
+    def is_enabled(self) -> bool:
+        return self.enable_switch.get_active()
+
+    def get_tool(self) -> dict:
+        return {
+            "type": "function",
+            "function": self.tool_metadata
+        }
+
+    def extract_variables_for_sql(self) -> dict:
+        variables_for_sql = {}
+        for name, data in self.variables.items():
+            variables_for_sql[name] = data.get('value')
+        return variables_for_sql
+
+
 
     def attach_online_image(self, bot_message, image_title:str, image_url:str):
         attachment = bot_message.add_attachment(
