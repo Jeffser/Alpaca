@@ -7,7 +7,7 @@ import gi
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 import logging, os, datetime, random, json, threading
 from ..constants import SAMPLE_PROMPTS, cache_dir
-from ..sql_manager import generate_uuid, generate_numbered_name, Instance as SQL
+from ..sql_manager import generate_uuid, prettify_model_name, generate_numbered_name, Instance as SQL
 from . import dialog
 from .message import Message
 
@@ -170,7 +170,30 @@ class Notebook(Gtk.Stack):
         self.set_visible_child_name('content' if len(messages) > 0 else 'welcome-screen')
         if last_notebook:
             self.set_notebook(last_notebook)
-    def convert_to_json(self, include_metadata:bool=False) -> dict:
+
+    def convert_to_ollama(self) -> list:
+        messages = []
+        for message in list(self.container)[-2:]:
+            if message.get_content() and message.dt:
+                message_data = {
+                    'role': ('user', 'assistant', 'system')[message.mode],
+                    'content': ''
+                }
+
+                for image in message.image_attachment_container.get_content():
+                    if 'images' not in message_data:
+                        message_data['images'] = []
+
+                    message_data['images'].append(image['content'])
+
+                for attachment in message.attachment_container.get_content():
+                    if attachment.get('type') != 'thought':
+                        message_data['content'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
+                message_data['content'] += message.get_content()
+                messages.append(message_data)
+        return messages
+
+    def convert_to_json(self, include_metadata:bool=False) -> list:
         messages = []
         for message in list(self.container)[-2:]:
             if message.get_content() and message.dt:
@@ -190,7 +213,8 @@ class Notebook(Gtk.Stack):
                     'text': ''
                 })
                 for attachment in message.attachment_container.get_content():
-                    message_data['content'][0]['text'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
+                    if attachment.get('type') != 'thought':
+                        message_data['content'][0]['text'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
                 message_data['content'][0 if ("text" in message_data["content"][0]) else 1]['text'] += message.get_content()
                 if include_metadata:
                     message_data['date'] = message.dt.strftime("%Y/%m/%d %H:%M:%S")
@@ -326,7 +350,29 @@ class Chat(Gtk.Stack):
         buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
         self.get_root().send_message()
 
-    def convert_to_json(self, include_metadata:bool=False) -> dict:
+    def convert_to_ollama(self) -> list:
+        messages = []
+        for message in list(self.container):
+            if message.get_content() and message.dt:
+                message_data = {
+                    'role': ('user', 'assistant', 'system')[message.mode],
+                    'content': ''
+                }
+
+                for image in message.image_attachment_container.get_content():
+                    if 'images' not in message_data:
+                        message_data['images'] = []
+
+                    message_data['images'].append(image['content'])
+
+                for attachment in message.attachment_container.get_content():
+                    if attachment.get('type') != 'thought':
+                        message_data['content'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
+                message_data['content'] += message.get_content()
+                messages.append(message_data)
+        return messages
+
+    def convert_to_json(self, include_metadata:bool=False) -> list:
         messages = []
         for message in list(self.container):
             if message.get_content() and message.dt:
@@ -344,7 +390,8 @@ class Chat(Gtk.Stack):
                     'text': ''
                 })
                 for attachment in message.attachment_container.get_content():
-                    message_data['content'][0]['text'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
+                    if attachment.get('type') != 'thought':
+                        message_data['content'][0]['text'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
                 message_data['content'][0 if ("text" in message_data.get("content", [''])[0]) else 1]['text'] += message.get_content()
                 if include_metadata:
                     message_data['date'] = message.dt.strftime("%Y/%m/%d %H:%M:%S")
@@ -507,7 +554,7 @@ class ChatRow(Gtk.ListBoxRow):
             if message_element.get_content() and message_element.dt:
                 message_author = _('User')
                 if message_element.get_model():
-                    message_author = self.get_root().convert_model_name(message_element.get_model(), 0)
+                    message_author = prettify_model_name(message_element.get_model())
                 if message_element.mode == 2:
                     message_author = _('System')
 

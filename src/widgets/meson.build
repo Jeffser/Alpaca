@@ -8,7 +8,6 @@ widgets = [
   'dialog.py',
   'attachments.py',
   'model_manager.py',
-  'instance_manager.py',
   'voice.py',
   'camera.py'
 ]
@@ -17,3 +16,4 @@ install_data(widgets, install_dir: moduledir)
 
 subdir('blocks')
 subdir('tools')
+subdir('instances')

@@ -44,7 +44,7 @@ gi.require_version('Spelling', '1')
 
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, Spelling
 
-from .sql_manager import generate_uuid, generate_numbered_name, convert_model_name, Instance as SQL
+from .sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from . import widgets as Widgets
 from .constants import SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES, TTS_AUTO_MODES, STT_MODELS, data_dir, source_dir, cache_dir
 
@@ -153,13 +153,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     button_name = _("Open Tutorial in Web Browser")
                 )
             else:
-                tbv=Adw.ToolbarView()
-                tbv.add_top_bar(Adw.HeaderBar())
-                tbv.set_content(ins().get_preferences_page())
-                self.main_navigation_view.push(Adw.NavigationPage(title=_('Add Instance'), tag='instance', child=tbv))
+                instance = ins(
+                    instance_id=generate_uuid(),
+                    properties={}
+                )
+                Widgets.instances.InstancePreferencesGroup(instance).present(self)
 
         options = {}
-        for ins_type in Widgets.instance_manager.ready_instances:
+        for ins_type in Widgets.instances.ready_instances:
             options[ins_type.instance_type_display] = ins_type
 
         Widgets.dialog.simple_dropdown(
@@ -217,8 +218,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 gguf_path = self.model_creator_base.get_subtitle()
                 Widgets.model_manager.create_model(data_json, gguf_path)
             else:
-                data_json['from'] = convert_model_name(self.model_creator_base.get_selected_item().get_string(), 1)
-                Widgets.model_manager.create_model(data_json)
+                pretty_name = self.model_creator_base.get_selected_item().get_string()
+                found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.name == pretty_name]
+                if found_models:
+                    data_json['from'] = found_models[0].get_name()
+                    Widgets.model_manager.create_model(data_json)
 
     @Gtk.Template.Callback()
     def model_creator_cancel(self, button):
@@ -236,18 +240,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def model_creator_base_changed(self, comborow, params):
-        model_name = comborow.get_selected_item().get_string()
-        if model_name != 'GGUF' and not comborow.get_subtitle():
-            model_name = convert_model_name(model_name, 1)
-
-            GLib.idle_add(self.model_creator_name.set_text, model_name.split(':')[0])
+        pretty_name = comborow.get_selected_item().get_string()
+        if pretty_name != 'GGUF' and not comborow.get_subtitle():
             GLib.idle_add(self.model_creator_tag.set_text, 'custom')
 
             system = None
             modelfile = None
 
-            found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.model.get_name() == model_name]
+            found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.name == pretty_name]
             if found_models:
+                GLib.idle_add(self.model_creator_name.set_text, found_models[0].get_name().split(':')[0])
                 system = found_models[0].data.get('system')
                 modelfile = found_models[0].data.get('modelfile')
 
@@ -294,9 +296,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
         context_buffer.delete(context_buffer.get_start_iter(), context_buffer.get_end_iter())
         GLib.idle_add(self.model_creator_profile_picture.set_subtitle, '')
         GLib.idle_add(self.model_creator_base.set_subtitle, '')
+        factory = Gtk.SignalListItemFactory()
+        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
+        factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
+        GLib.idle_add(self.model_creator_base.set_factory, factory)
         string_list = Gtk.StringList()
         if selected_model:
-            GLib.idle_add(string_list.append, convert_model_name(selected_model, 0))
+            GLib.idle_add(string_list.append, prettify_model_name(selected_model))
         else:
             [GLib.idle_add(string_list.append, value.model_title) for value in Widgets.model_manager.get_local_models().values()]
         GLib.idle_add(self.model_creator_base.set_model, string_list)
@@ -709,7 +715,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.instance_listbox.get_selected_row():
             return self.instance_listbox.get_selected_row().instance
         else:
-            return Widgets.instance_manager.Empty()
+            return Widgets.instances.Empty()
 
     def prepare_alpaca(self):
         self.main_navigation_view.replace_with_tags(['chat'])
@@ -751,16 +757,22 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.tts_auto_mode_combo.set_model(string_list)
         self.settings.bind('tts-auto-mode', self.tts_auto_mode_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
 
-        Widgets.instance_manager.update_instance_list()
-
         # Ollama is available but there are no instances added
         if not any(i.get("type") == "ollama:managed" for i in SQL.get_instances()) and shutil.which("ollama"):
-            SQL.insert_or_update_instance(Widgets.instance_manager.OllamaManaged({
-                "id": generate_uuid(),
-                "name": "Alpaca",
-                "url": "http://{}:11435".format("127.0.0.1" if sys.platform == "win32" else "0.0.0.0"),
-                "pinned": True
-            }))
+            SQL.insert_or_update_instance(
+                instance_id=generate_uuid(),
+                pinned=True,
+                instance_type='ollama:managed',
+                properties={
+                    'name': 'Alpaca',
+                    'url': 'http://127.0.0.1:11435',
+                }
+            )
+
+        Widgets.instances.update_instance_list(
+            instance_listbox=self.instance_listbox,
+            selected_instance_id=self.settings.get_value('selected-instance').unpack()
+        )
 
     def open_button_menu(self, gesture, x, y, menu):
         button = gesture.get_widget()
@@ -808,7 +820,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         Widgets.model_manager.window = self
-        Widgets.instance_manager.window = self
 
         self.model_searchbar.connect_entry(self.searchentry_models)
         self.model_searchbar.connect('notify::search-mode-enabled', lambda *_: self.model_search_changed(self.searchentry_models))

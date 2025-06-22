@@ -5,6 +5,7 @@ Handles the table widget shown in messages
 
 import gi
 from gi.repository import Gtk, GObject, Gio
+from .text import markdown_to_pango
 
 import re
 
@@ -29,8 +30,7 @@ class Row(GObject.GObject):
         self.values = []
 
         for value in _values:
-            value = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', value)
-            self.values.append(value)
+            self.values.append(markdown_to_pango(value))
 
     def get_column_value(self, index):
         return self.values[index]
@@ -103,7 +103,7 @@ class Table(Gtk.Frame):
     def make_table(self):
 
         def _on_factory_setup(_factory, list_item, align):
-            label = Gtk.Label(xalign=align, ellipsize=3, selectable=True, use_markup=True)
+            label = Gtk.Label(xalign=align, selectable=True, use_markup=True)
             list_item.set_child(label)
 
         def _on_factory_bind(_factory, list_item, index):

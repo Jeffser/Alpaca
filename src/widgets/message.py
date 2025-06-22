@@ -7,7 +7,7 @@ import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GtkSource, Spelling
 import os, datetime, threading, sys, base64, logging, re, tempfile
 from ..constants import TTS_VOICES, TTS_AUTO_MODES
-from ..sql_manager import convert_model_name, generate_uuid, Instance as SQL
+from ..sql_manager import prettify_model_name, generate_uuid, Instance as SQL
 from . import model_manager, attachments, blocks, dialog, voice
 
 logger = logging.getLogger(__name__)
@@ -95,6 +95,12 @@ class OptionPopup(Gtk.Popover):
     def regenerate_message(self):
         chat = self.message_element.chat
         model = model_manager.get_selected_model().get_name()
+        for att in list(self.message_element.image_attachment_container.container):
+            SQL.delete_attachment(att)
+            att.get_parent().remove(att)
+        for att in list(self.message_element.attachment_container.container):
+            SQL.delete_attachment(att)
+            att.get_parent().remove(att)
         if not chat.busy and model:
             self.message_element.block_container.clear()
             self.message_element.author = model
@@ -134,7 +140,7 @@ class MessageHeader(Gtk.Box):
             css_classes=['dim-label'] if popover else []
         )
 
-        author = convert_model_name(self.message.get_model(), 0)
+        author = prettify_model_name(self.message.get_model())
         if not author:
             author = ""
 
@@ -234,7 +240,6 @@ class BlockContainer(Gtk.Box):
             SQL.insert_or_update_attachment(self.message, attachment)
 
         clean_content = re.sub(think_pattern, '', content, flags=re.DOTALL).strip()
-
         for block in blocks.text_to_block_list(clean_content):
             self.append(block)
         self.message.main_stack.set_visible_child_name('content')
@@ -264,9 +269,13 @@ class BlockContainer(Gtk.Box):
                 self.prepend(block)
             else:
                 if isinstance(list(self)[-2], blocks.Text) and isinstance(block, blocks.Text):
-                    list(self)[-2].append_content(block.get_content())
-                elif isinstance(list(self)[-2], blocks.Text):
+                    if not list(self)[-2].get_content().endswith('\n') and not block.get_content().startswith('\n'):
+                        list(self)[-2].append_content('\n{}'.format(block.get_content()))
+                    else:
+                        list(self)[-2].append_content(block.get_content())
+                elif isinstance(list(self)[-2], blocks.Text) and not isinstance(block, blocks.Text):
                     list(self)[-2].set_content(list(self)[-2].get_content().strip())
+                    self.insert_child_after(block, list(self)[-2])
                 else:
                     self.insert_child_after(block, list(self)[-2])
 
@@ -414,6 +423,10 @@ class Message(Gtk.Box):
             self.block_container.generating_block = None
             self.dt = datetime.datetime.now()
             GLib.idle_add(self.save)
+            #content = self.get_content()
+            #GLib.idle_add(self.block_container.clear)
+            #GLib.idle_add(self.block_container.set_content, content)
+
             self.update_profile_picture()
             if result_text:
                 dialog.show_notification(
@@ -432,11 +445,11 @@ class Message(Gtk.Box):
         elif data.get('content', False):
             GLib.idle_add(self.main_stack.set_visible_child_name, 'content')
             vadjustment = self.chat.scrolledwindow.get_vadjustment()
-            if vadjustment.get_value() + 50 >= vadjustment.get_upper() - vadjustment.get_page_size():
+            if vadjustment.get_value() + 150 >= vadjustment.get_upper() - vadjustment.get_page_size():
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
             GLib.idle_add(self.block_container.get_generating_block().append_content, data.get('content', ''))
         elif data.get('clear', False):
-            GLib.idle_add(self.block_container.get_generating_block().set_content)
+            GLib.idle_add(self.block_container.clear)
         elif data.get('add_css', False):
             GLib.idle_add(self.block_container.add_css_class, data.get('add_css'))
         elif data.get('remove_css', False):
