@@ -16,8 +16,8 @@ override_urls = {
     'ROCR_VISIBLE_DEVICES': 'https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection-1'
 }
 
-class InstancePreferencesPage(Adw.PreferencesPage):
-    __gtype_name__ = 'AlpacaInstancePreferencesPage'
+class InstancePreferencesGroup(Adw.Dialog):
+    __gtype_name__ = 'AlpacaInstancePreferencesGroup'
 
     def __init__(self, instance):
         self.instance = instance
@@ -206,7 +206,7 @@ class InstancePreferencesPage(Adw.PreferencesPage):
             model_directory_el.add_suffix(open_dir_button)
             self.groups[-1].add(model_directory_el)
 
-        if 'default_model' in self.instance.properties or 'title_model' in self.instance.properties:
+        if self.instance.row and ('default_model' in self.instance.properties or 'title_model' in self.instance.properties):
             self.groups.append(Adw.PreferencesGroup())
 
             factory = Gtk.SignalListItemFactory()
@@ -250,14 +250,6 @@ class InstancePreferencesPage(Adw.PreferencesPage):
             halign=3
         )
 
-        cancel_button = Gtk.Button(
-            label=_('Cancel'),
-            tooltip_text=_('Cancel'),
-            css_classes=['pill']
-        )
-        cancel_button.connect('clicked', lambda button: self.get_root().main_navigation_view.pop_to_tag('instance_manager'))
-        button_container.append(cancel_button)
-
         save_button = Gtk.Button(
             label=_('Save'),
             tooltip_text=_('Save'),
@@ -267,13 +259,21 @@ class InstancePreferencesPage(Adw.PreferencesPage):
         button_container.append(save_button)
         pg.add(button_container)
 
-        super().__init__(
-            title=self.instance.instance_type_display
-        )
-        for group in self.groups:
-            self.add(group)
 
-        self.add(pg)
+        pp = Adw.PreferencesPage()
+        for group in self.groups:
+            pp.add(group)
+
+        pp.add(pg)
+
+        tbv=Adw.ToolbarView()
+        tbv.add_top_bar(Adw.HeaderBar())
+        tbv.set_content(pp)
+        super().__init__(
+            child=tbv,
+            title=_('Edit Instance') if self.instance.row else _('Create Instance'),
+            content_width=500
+        )
 
     def save(self):
         save_functions = {
@@ -331,7 +331,7 @@ class InstancePreferencesPage(Adw.PreferencesPage):
         else:
             self.get_root().instance_listbox.append(InstanceRow(instance=self.instance))
 
-        self.get_root().main_navigation_view.pop_to_tag('instance_manager')
+        self.close()
 
 # Fallback for when there are no instances
 class Empty:
@@ -397,10 +397,7 @@ class InstanceRow(Adw.ActionRow):
             self.add_suffix(edit_button)
 
     def show_edit(self):
-        tbv=Adw.ToolbarView()
-        tbv.add_top_bar(Adw.HeaderBar())
-        tbv.set_content(InstancePreferencesPage(self.instance))
-        self.get_root().main_navigation_view.push(Adw.NavigationPage(title=_('Edit Instance'), tag='instance', child=tbv))
+        InstancePreferencesGroup(self.instance).present(self.get_root())
 
     def remove(self):
         SQL.delete_instance(self.instance.instance_id)

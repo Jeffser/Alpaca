@@ -153,16 +153,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     button_name = _("Open Tutorial in Web Browser")
                 )
             else:
-                tbv=Adw.ToolbarView()
-                tbv.add_top_bar(Adw.HeaderBar())
-
                 instance = ins(
                     instance_id=generate_uuid(),
                     properties={}
                 )
-                #instance
-                tbv.set_content(Widgets.instances.InstancePreferencesPage(instance))
-                self.main_navigation_view.push(Adw.NavigationPage(title=_('Add Instance'), tag='instance', child=tbv))
+                Widgets.instances.InstancePreferencesGroup(instance).present(self)
 
         options = {}
         for ins_type in Widgets.instances.ready_instances:
