@@ -54,9 +54,8 @@ class GeneratingText(Gtk.Overlay):
     def append_content(self, value:str) -> None:
         text = GLib.markup_escape_text(value)
         self.buffer.insert_markup(self.buffer.get_end_iter(), text, len(text.encode('utf-8')))
+        current_text = self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
         if value.endswith('\n'):
-            current_text = self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
-
             think_block_complete = not current_text.strip().startswith('<think>') or current_text.strip().endswith('</think>')
             think_block_complete_v2 = not current_text.strip().startswith('<|begin_of_thought|>') or current_text.strip().endswith('<|end_of_thought|>')
             code_block_complete = not current_text.strip().startswith('```') or (current_text.strip().endswith('```') and len(current_text.strip()) > 3)
@@ -65,6 +64,8 @@ class GeneratingText(Gtk.Overlay):
             if think_block_complete and think_block_complete_v2 and code_block_complete and table_block_complete:
                 GLib.idle_add(self.set_content)
                 GLib.idle_add(self.get_parent().add_content, current_text)
+        elif not self.get_parent().message.popup.tts_button.get_active() and '.' in current_text and (self.get_root().settings.get_value('tts-auto-dictate').unpack() or self.get_root().get_name() == 'AlpacaLiveChat'):
+            GLib.idle_add(self.get_parent().message.popup.tts_button.set_active, True)
 
     def get_content(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
@@ -75,7 +76,14 @@ class GeneratingText(Gtk.Overlay):
             self.append_content(value)
 
     def get_content_for_dictation(self) -> str:
-        return ''
+        raw_text = self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
+        allowed_characters = ('\n', ',', '.', ':', ';', '+', '/', '-', '(', ')', '[', ']', '=', '<', '>', '’', '\'', '"', '¿', '?', '¡', '!')
+        cleaned_text = ''.join(c for c in raw_text if unicodedata.category(c).startswith(('L', 'N', 'Zs')) or c in allowed_characters)
+        lines = []
+        for line in cleaned_text.split('\n'):
+            if line and line.strip() not in allowed_characters:
+                lines.append(line)
+        return '\n'.join(lines)
 
 class Text(Gtk.Label):
     __gtype_name__ = 'AlpacaText'

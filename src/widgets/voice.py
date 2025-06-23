@@ -80,7 +80,10 @@ class DictateToggleButton(Gtk.Stack):
             queue_index = 0
             while queue_index < len(self.message_element.get_content_for_dictation()):
                 text = self.message_element.get_content_for_dictation()
-                if text[queue_index:]:
+                end_index = max(text.rfind("\n"), text.rfind("."), text.rfind(","), text.rfind(":"))
+                if end_index == -1:
+                    end_index = len(text)
+                if text[queue_index:end_index]:
                     try:
                         generator = tts_engine(
                             text[queue_index:],
@@ -102,7 +105,7 @@ class DictateToggleButton(Gtk.Stack):
                             error_log=e,
                         )
                         break
-                queue_index = len(text)
+                queue_index = end_index
             GLib.idle_add(self.set_active, False)
 
         if button.get_active():
