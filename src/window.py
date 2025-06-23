@@ -200,7 +200,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.model.get_name() == model_name]
         if not found_models:
             if profile_picture:
-                SQL.insert_or_update_model_picture(model_name, Widgets.attachments.extract_image(profile_picture, 128))
+                SQL.insert_or_update_model_picture(model_name, Widgets.attachments.extract_image(profile_picture, 480))
 
             data_json = {
                 'model': model_name,

@@ -179,12 +179,23 @@ class BaseInstance:
                     'content': 'The user is called {}'.format(user_display_name)
                 })
 
+        model_info = self.get_model_info(model)
+        if model_info:
+            if model_info.get('system'):
+                messages.insert(0, {
+                    'role': 'system',
+                    'content': model_info.get('system')
+                })
+
         params = {
             "model": model,
             "messages": messages,
             "temperature": self.properties.get('temperature', 0.7),
             "stream": True,
-            "think": self.properties.get('think', False)
+            "think": self.properties.get('think', False),
+            "options": {
+                "num_ctx": 16384
+            }
         }
 
         if self.properties.get('seed', 0) != 0:
@@ -224,6 +235,8 @@ class BaseInstance:
         bot_message.update_message({"done": True})
 
     def generate_chat_title(self, chat, prompt:str):
+        if not chat.row or not chat.row.get_parent():
+            return
         params = {
             "temperature": 0.2,
             "model": self.get_title_model(),

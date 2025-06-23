@@ -32,6 +32,9 @@ class LiveChatWindow(Adw.ApplicationWindow):
 
     __gtype_name__ = 'AlpacaLiveChatWindow'
 
+    live_chat_background = Gtk.Template.Child()
+    response_label = Gtk.Template.Child()
+
     microphone_container = Gtk.Template.Child()
 
     global_footer = None
@@ -60,10 +63,12 @@ class LiveChatWindow(Adw.ApplicationWindow):
                     GLib.Bytes.new(base64.b64decode(model_picture_data))
                 )
                 self.model_avatar.set_custom_image(texture)
+                self.live_chat_background.set_paintable(texture)
                 self.model_avatar.set_show_initials(False)
             else:
                 self.model_avatar.set_custom_image(None)
                 self.model_avatar.set_text(prettify_model_name(model_name))
+                self.live_chat_background.set_paintable(None)
                 self.model_avatar.set_show_initials(True)
 
     def get_current_instance(self):
@@ -225,4 +230,3 @@ class LiveChatWindow(Adw.ApplicationWindow):
         #Widgets.voice.message_dictated.connect('active', lambda button: print(button))
 
         self.update_model_list()
-        
