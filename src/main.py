@@ -151,6 +151,8 @@ class AlpacaApplication(Adw.Application):
             self.main_alpaca_window = AlpacaWindow(application=self)
         if self.args.quick_ask or self.args.ask:
             self.create_quick_ask().present()
+        elif self.args.live_chat:
+            self.create_live_chat().present()
         else:
             self.main_alpaca_window.present()
 
@@ -231,6 +233,7 @@ def main(version):
     parser.add_argument('--list-chats', action='store_true', help='Display all the current chats')
     parser.add_argument('--ask', type=str, metavar='"MESSAGE"', help="Open Quick Ask with message")
     parser.add_argument('--quick-ask', action='store_true', help='Open Quick Ask')
+    parser.add_argument('--live-chat', action='store_true', help='Open Live Chat')
     args = parser.parse_args()
 
     if args.version:

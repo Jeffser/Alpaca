@@ -1389,33 +1389,6 @@
 	    ]
 	},
 	{
-            "name": "ollama",
-            "buildsystem": "simple",
-	    "build-commands": [
-            	"cp -rf --remove-destination ./* ${FLATPAK_DEST}/"
-            ],
-            "sources": [
-                {
-            		"type": "archive",
-            		"url": "https://github.com/ollama/ollama/releases/download/v0.9.0/ollama-linux-amd64.tgz",
-            		"sha256": "ae9cebd61552d6cf3c527cb88e3a4865a25f22950aa8bb5328887ffd96cfd22a",
-		    	"strip-components": 0,
-			"only-arches": [
-		    		"x86_64"
-		    	]
-            	},
-            	{
-            		"type": "archive",
-            		"url": "https://github.com/ollama/ollama/releases/download/v0.9.0/ollama-linux-arm64.tgz",
-            		"sha256": "288b6f7ed9175476943c0c01f21df1de21df590b0b3ed5dee16a5285d5da84e4",
-		    	"strip-components": 0,
-			"only-arches": [
-		    		"aarch64"
-		    	]
-            	}
-            ]
-        },
-	{
             "name": "libspelling",
             "builddir": true,
             "buildsystem": "meson",
