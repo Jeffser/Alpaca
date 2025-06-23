@@ -314,6 +314,7 @@ class Chat(Gtk.Stack):
 
     def add_message(self, message):
         self.container.append(message)
+        self.set_visible_child_name('content')
 
     def load_messages(self):
         messages = SQL.get_messages(self)

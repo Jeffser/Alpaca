@@ -30,6 +30,7 @@ GtkSource.init()
 from .constants import TRANSLATORS, cache_dir, data_dir, config_dir, source_dir
 from .window import AlpacaWindow
 from .quick_ask import QuickAskWindow
+from .live_chat import LiveChatWindow
 from .sql_manager import Instance as SQL
 
 SQL.initialize()
@@ -85,6 +86,9 @@ class AlpacaService:
     def PresentAsk(self):
         self.app.create_quick_ask().present()
 
+    def PresentLive(self):
+        self.app.create_live_chat().present()
+
     def Open(self, chat_name:str):
         for chat_row in list(self.app.props.active_window.chat_list_box):
             if chat_row.chat_window.get_name() == chat_name:
@@ -137,6 +141,9 @@ class AlpacaApplication(Adw.Application):
 
     def create_quick_ask(self):
         return QuickAskWindow(application=self)
+
+    def create_live_chat(self):
+        return LiveChatWindow(application=self)
 
     def do_activate(self):
         self.main_alpaca_window = self.props.active_window

@@ -14,6 +14,22 @@ import os, threading, importlib.util, re, unicodedata
 import numpy as np
 
 message_dictated = None
+libraries = {
+    'kokoro': None,
+    'sounddevice': None,
+    'whisper': None,
+    'pyaudio': None
+}
+library_waiting_queue = [] # For every widget that requires the libraries
+
+def preload_heavy_libraries():
+    for library_name in libraries:
+        if importlib.util.find_spec(library_name):
+            libraries[library_name] = importlib.import_module(library_name)
+    for widget in library_waiting_queue:
+        widget.set_sensitive(True)
+
+threading.Thread(target=preload_heavy_libraries).start()
 
 class DictateToggleButton(Gtk.Stack):
     __gtype_name__ = 'AlpacaDictateToggleButton'
@@ -34,6 +50,10 @@ class DictateToggleButton(Gtk.Stack):
         self.add_named(self.button, 'button')
         self.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
 
+        if self.get_visible() and (libraries.get('kokoro') is None or libraries.get('sounddevice') is None):
+            library_waiting_queue.append(self)
+            self.set_sensitive(False)
+
     def set_active(self, state):
         self.button.set_active(state)
 
@@ -42,10 +62,8 @@ class DictateToggleButton(Gtk.Stack):
 
     def dictate_message(self, button):
         global message_dictated
-        import sounddevice as sd
         def run():
             GLib.idle_add(self.set_visible_child_name, 'loading')
-            from kokoro import KPipeline
             voice = None
             if self.message_element.get_model():
                 voice = SQL.get_model_preferences(self.message_element.get_model()).get('voice', None)
@@ -58,7 +76,7 @@ class DictateToggleButton(Gtk.Stack):
                     if len(pretty_name) > 0:
                         pretty_name = pretty_name[0]
                         self.message_element.get_root().local_model_flowbox.append(model_manager.TextToSpeechModel(pretty_name))
-            tts_engine = KPipeline(lang_code=voice[0])
+            tts_engine = libraries.get('kokoro').KPipeline(lang_code=voice[0], repo_id='hexgrad/Kokoro-82M')
             queue_index = 0
             while queue_index < len(self.message_element.get_content_for_dictation()):
                 text = self.message_element.get_content_for_dictation()
@@ -73,9 +91,9 @@ class DictateToggleButton(Gtk.Stack):
                         for gs, ps, audio in generator:
                             if not button.get_active():
                                 return
-                            sd.play(audio, samplerate=24000)
+                            libraries.get('sounddevice').play(audio, samplerate=24000)
                             GLib.idle_add(self.set_visible_child_name, 'button')
-                            sd.wait()
+                            libraries.get('sounddevice').wait()
                     except Exception as e:
                         dialog.simple_error(
                             parent=self.message_element.get_root(),
@@ -97,7 +115,7 @@ class DictateToggleButton(Gtk.Stack):
             GLib.idle_add(self.message_element.remove_css_class, 'tts_message')
             GLib.idle_add(self.set_visible_child_name, 'button')
             message_dictated = None
-            threading.Thread(target=sd.stop).start()
+            threading.Thread(target=libraries.get('sounddevice').stop).start()
 
 class MicrophoneButton(Gtk.Stack):
     __gtype_name__ = 'AlpacaMicrophoneButton'
@@ -108,15 +126,19 @@ class MicrophoneButton(Gtk.Stack):
         super().__init__(
             visible = importlib.util.find_spec('whisper')
         )
-        button = Gtk.ToggleButton(
+        self.button = Gtk.ToggleButton(
             icon_name='audio-input-microphone-symbolic',
             tooltip_text=_('Use Speech Recognition'),
             css_classes=['br0']
         )
-        button.connect('toggled', self.toggled)
-        self.add_named(button, 'button')
+        self.button.connect('toggled', self.toggled)
+        self.add_named(self.button, 'button')
         self.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
         self.mic_timeout = 0
+
+        if self.get_visible() and (libraries.get('whisper') is None or libraries.get('pyaudio') is None):
+            library_waiting_queue.append(self)
+            self.set_sensitive(False)
 
     def toggled(self, button):
         language=SPEACH_RECOGNITION_LANGUAGES[self.get_root().settings.get_value('stt-language').unpack()]
@@ -133,18 +155,16 @@ class MicrophoneButton(Gtk.Stack):
 
         def run_mic(pulling_model:Gtk.Widget=None):
             GLib.idle_add(button.get_parent().set_visible_child_name, "loading")
-            import whisper
-            import pyaudio
             GLib.idle_add(button.add_css_class, 'accent')
 
             samplerate=16000
-            p = pyaudio.PyAudio()
+            p = libraries.get('pyaudio').PyAudio()
             model = None
 
             self.mic_timeout=0
 
             try:
-                model = whisper.load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
+                model = libraries.get('whisper').load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
                 if pulling_model:
                     GLib.idle_add(pulling_model.update_progressbar, {'status': 'success'})
             except Exception as e:
@@ -159,7 +179,7 @@ class MicrophoneButton(Gtk.Stack):
 
             if model:
                 stream = p.open(
-                    format=pyaudio.paInt16,
+                    format=libraries.get('pyaudio').paInt16,
                     rate=samplerate,
                     input=True,
                     frames_per_buffer=1024,

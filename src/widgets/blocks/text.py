@@ -103,7 +103,7 @@ class Text(Gtk.Label):
         return self.raw_text
 
     def get_content_for_dictation(self) -> str:
-        allowed_characters = ('\n', ',', '.', ':', ';', '+', '/', '-', '(', ')', '[', ']', '=', '<', '>', '’', '\'', '"')
+        allowed_characters = ('\n', ',', '.', ':', ';', '+', '/', '-', '(', ')', '[', ']', '=', '<', '>', '’', '\'', '"', '¿', '?', '¡', '!')
         cleaned_text = ''.join(c for c in self.raw_text if unicodedata.category(c).startswith(('L', 'N', 'Zs')) or c in allowed_characters)
         lines = []
         for line in cleaned_text.split('\n'):

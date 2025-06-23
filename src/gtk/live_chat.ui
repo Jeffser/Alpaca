@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+  <template class="AlpacaLiveChatWindow" parent="AdwApplicationWindow">
+    <accessibility>
+      <property name="label" translatable="yes">Live chat dialog</property>
+    </accessibility>
+    <property name="name">AlpacaLiveChat</property>
+    <property name="title" translatable="true">Live Chat</property>
+    <property name="content">
+      <object class="AdwToastOverlay" id="toast_overlay">
+        <property name="child">
+          <object class="AdwBottomSheet" id="bottom_sheet">
+            <property name="can-open">true</property>
+            <property name="can-close">true</property>
+            <property name="open">false</property>
+            <property name="show-drag-handle">true</property>
+            <property name="content">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <child type="start">
+                      <object class="GtkButton">
+                        <property name="icon-name">chat-bubble-text-symbolic</property>
+                        <property name="tooltip-text" translatable="true">Show Messages</property>
+                        <signal name="clicked" handler="show_messages"/>
+                      </object>
+                    </child>
+                    <child type="title">
+                      <object class="GtkDropDown" id="model_dropdown">
+                        <signal name="notify::selected" handler="model_dropdown_changed"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <property name="content">
+                  <object class="GtkBox">
+                    <property name="orientation">1</property>
+                    <child>
+                      <object class="AdwBin">
+                        <property name="vexpand">true</property>
+                        <property name="child">
+                          <object class="GtkOverlay">
+                            <property name="margin-top">20</property>
+                            <property name="margin-bottom">20</property>
+                            <property name="halign">3</property>
+                            <property name="valign">3</property>
+                            <style>
+                              <class name="model_pfp"/>
+                            </style>
+                            <property name="overflow">1</property>
+                            <property name="child">
+                              <object class="AdwAvatar" id="model_avatar">
+                                <property name="valign">3</property>
+                                <property name="size">200</property>
+                              </object>
+                            </property>
+                            <child type="overlay">
+                              <object class="AdwSpinner" id="model_avatar_spinner">
+                                <property name="visible">false</property>
+                                <property name="overflow">1</property>
+                                <style>
+                                  <class name="osd"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwBin" id="microphone_container"/>
+                    </child>
+                    <child>
+                      <object class="AdwBin" id="global_footer_container"/>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </property>
+          </object>
+        </property>
+      </object>
+    </property>
+  </template>
+</interface>
+

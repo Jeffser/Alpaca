@@ -39,6 +39,7 @@ alpaca_sources = [
   'main.py',
   'window.py',
   'quick_ask.py',
+  'live_chat.py',
   'constants.py',
   'ollama_models.py',
   'sql_manager.py'

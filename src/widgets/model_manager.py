@@ -630,7 +630,7 @@ class LocalModel(Gtk.Box):
     def change_profile_picture(self):
         def set_profile_picture(file):
             if file:
-                picture_b64 = attachments.extract_image(file.get_path(), 128)
+                picture_b64 = attachments.extract_image(file.get_path(), 480)
                 SQL.insert_or_update_model_picture(self.get_name(), picture_b64)
                 self.update_profile_picture()
                 threading.Thread(target=window.chat_list_box.get_selected_row().update_profile_pictures()).start()
@@ -1086,3 +1086,4 @@ def get_selected_model():
         return selected_item.model
     else:
         return FallbackModel
+

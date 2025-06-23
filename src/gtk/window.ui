@@ -1144,10 +1144,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
   <menu id="primary_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Start Quick Ask</attribute>
-        <attribute name="action">app.start_quick_ask</attribute>
-      </item>
-      <item>
         <attribute name="label" translatable="yes">Import Chat</attribute>
         <attribute name="action">app.import_chat</attribute>
       </item>
@@ -1165,6 +1161,14 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
       </item>
     </section>
     <section>
+      <item>
+        <attribute name="label" translatable="yes">Start Quick Ask</attribute>
+        <attribute name="action">app.start_quick_ask</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Start Live Chat</attribute>
+        <attribute name="action">app.start_live_chat</attribute>
+      </item>
       <item>
         <attribute name="label" translatable="yes">Preferences</attribute>
         <attribute name="action">app.preferences</attribute>

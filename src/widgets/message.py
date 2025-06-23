@@ -283,7 +283,7 @@ class BlockContainer(Gtk.Box):
                 else:
                     self.insert_child_after(block, list(self)[-2])
 
-        if not self.message.popup.tts_button.get_active() and self.get_root().settings.get_value('tts-auto-dictate').unpack():
+        if not self.message.popup.tts_button.get_active() and (self.get_root().settings.get_value('tts-auto-dictate').unpack() or self.get_root().get_name() == 'AlpacaLiveChat'):
             self.message.popup.tts_button.set_active(True)
 
     def get_content(self) -> list:
@@ -425,7 +425,7 @@ class Message(Gtk.Box):
                 GLib.idle_add(self.chat.row.spinner.set_visible, False)
                 if self.get_root().chat_list_box.get_selected_row().get_name() != self.chat.get_name():
                     GLib.idle_add(self.chat.row.indicator.set_visible, True)
-            else:
+            elif self.get_root().get_name() == 'AlpacaQuickAsk':
                 GLib.idle_add(self.get_root().save_button.set_sensitive, True)
 
             self.chat.stop_message()
@@ -635,13 +635,15 @@ class GlobalFooter(Gtk.Box):
 
         controls_container = Gtk.Box(spacing=12)
         self.append(controls_container)
-        controls_container.append(attachments.GlobalAttachmentButton())
 
-        message_text_view_container = Gtk.Box(
+        self.attachment_button = attachments.GlobalAttachmentButton()
+        controls_container.append(self.attachment_button)
+
+        self.message_text_view_container = Gtk.Box(
             overflow=1,
             css_classes=['card']
         )
-        controls_container.append(message_text_view_container)
+        controls_container.append(self.message_text_view_container)
         self.message_text_view = GlobalMessageTextView()
         message_text_view_scroller = Gtk.ScrolledWindow(
             max_content_height=150,
@@ -650,10 +652,10 @@ class GlobalFooter(Gtk.Box):
             css_classes=['undershoot-bottom'],
             child=self.message_text_view
         )
-        message_text_view_container.append(message_text_view_scroller)
+        self.message_text_view_container.append(message_text_view_scroller)
 
         self.microphone_button = voice.MicrophoneButton(self.message_text_view)
-        message_text_view_container.append(self.microphone_button)
+        self.message_text_view_container.append(self.microphone_button)
 
         self.action_stack = GlobalActionStack()
         controls_container.append(self.action_stack)
