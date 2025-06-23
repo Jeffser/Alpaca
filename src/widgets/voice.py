@@ -81,7 +81,7 @@ class DictateToggleButton(Gtk.Stack):
             while queue_index < len(self.message_element.get_content_for_dictation()):
                 text = self.message_element.get_content_for_dictation()
                 end_index = max(text.rfind("\n"), text.rfind("."), text.rfind(","), text.rfind(":"))
-                if end_index == -1:
+                if end_index == -1 or end_index < queue_index:
                     end_index = len(text)
                 if text[queue_index:end_index]:
                     try:
