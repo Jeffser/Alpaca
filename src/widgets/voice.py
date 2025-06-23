@@ -105,6 +105,8 @@ class DictateToggleButton(Gtk.Stack):
                             error_log=e,
                         )
                         break
+                else:
+                    break
                 queue_index = end_index
             GLib.idle_add(self.set_active, False)
 
