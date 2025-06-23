@@ -450,7 +450,7 @@ class OnlineSearch(Base):
         images = DDGS().images(
             keywords=search_term,
             max_results=self.variables.get('max_results', {}).get('value', 1),
-            safesearch=('on', 'moderate', 'off')[self.variables.get('safesearch', {}).get('value', 1)]
+            safesearch=('on', 'moderate', 'off')[self.variables.get('safesearch', {}).get('value', 1)],
             size='Medium',
             layout='Square'
         )
