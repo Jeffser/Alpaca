@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/com/jeffser/Alpaca/QuickAsk">
-    <file preprocess="xml-stripblanks" alias="window.ui">quick_ask.ui</file>
-  </gresource>
   <gresource prefix="/com/jeffser/Alpaca">
     <file>style.css</file>
     <file>style-dark.css</file>
@@ -63,7 +60,8 @@
     <file alias="icons/scalable/status/open-book-symbolic.svg">icons/open-book-symbolic.svg</file>
     <file alias="icons/scalable/status/big-dot-symbolic.svg">icons/big-dot-symbolic.svg</file>
     <file alias="icons/scalable/status/camera-photo-symbolic.svg">icons/camera-photo-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">window.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
+    <file preprocess="xml-stripblanks" alias="window.ui">gtk/window.ui</file>
+    <file preprocess="xml-stripblanks" alias="quick_ask.ui">gtk/quick_ask.ui</file>
   </gresource>
 </gresources>

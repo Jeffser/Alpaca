@@ -14,7 +14,7 @@ from datetime import datetime
 
 import threading
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/QuickAsk/window.ui')
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/quick_ask.ui')
 class QuickAskWindow(Adw.ApplicationWindow):
 
     __gtype_name__ = 'AlpacaQuickAskWindow'
