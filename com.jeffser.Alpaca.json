@@ -1359,6 +1359,36 @@
 	    ]
 	},
 	{
+	    "name": "python3-duckduckgo-search",
+	    "buildsystem": "simple",
+	    "build-commands": [
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --no-build-isolation duckduckgo_search"
+	    ],
+	    "sources": [
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/14/f0/1332de2dc7e7cbcabcf3993b3383dbce6b43d91cb3759fb53916be02845d/duckduckgo_search-8.0.4-py3-none-any.whl",
+		    "sha256": "22490e83c0ca885998d6623d8274f24934faffc43dac3c3482fe24ea4f6799bb"
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/1b/6e/a6221c612e61303aec2bcac3f0a02e8b67aee8c0db7bdc174aeb8010f975/primp-0.15.0-cp38-abi3-manylinux_2_34_aarch64.whl",
+		    "sha256": "e985a9cba2e3f96a323722e5440aa9eccaac3178e74b884778e926b5249df080",
+		    "only-arches": [
+		        "aarch64"
+		    ]
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/c3/7b/cbd5d999a07ff2a21465975d4eb477ae6f69765e8fe8c9087dab250180d8/primp-0.15.0-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+		    "sha256": "c18b45c23f94016215f62d2334552224236217aaeb716871ce0e4dcfa08eb161",
+		    "only-arches": [
+		        "x86_64"
+		    ]
+		}
+	    ]
+	},
+	{
             "name": "ollama",
             "buildsystem": "simple",
 	    "build-commands": [

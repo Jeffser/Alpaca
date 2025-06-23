@@ -4,6 +4,7 @@ from gi.repository import Adw, Gtk
 
 import datetime, time, random, requests, json, os
 from html2text import html2text
+from duckduckgo_search import DDGS
 
 from .. import terminal, attachments
 from ...constants import data_dir
@@ -47,7 +48,7 @@ class ToolPreferencesDialog(Adw.Dialog):
                 description=_("User filled values that the tool uses to work, the AI does not have access to these variables at all.")
             )
             for name, data in self.tool.variables.items():
-                if data.get('type', 'string') == 'string':
+                if data.get('type') == 'string':
                     variables.add(
                         Adw.EntryRow(
                             name=name,
@@ -78,6 +79,17 @@ class ToolPreferencesDialog(Adw.Dialog):
                             active=bool(data.get('value', False))
                         )
                     )
+                elif data.get('type') == 'options':
+                    combo = Adw.ComboRow(
+                        name=name,
+                        title=data.get('display_name')
+                    )
+                    string_list = Gtk.StringList()
+                    for option in data.get('options'):
+                        string_list.append(option)
+                    combo.set_model(string_list)
+                    combo.set_selected(data.get('value'))
+                    variables.add(combo)
             pp.add(variables)
 
             cancel_button = Gtk.Button(
@@ -122,8 +134,10 @@ class ToolPreferencesDialog(Adw.Dialog):
                     self.tool.variables[v.get_name()]['value'] = v.get_value()
                 elif isinstance(v, Adw.SwitchRow):
                     self.tool.variables[v.get_name()]['value'] = v.get_active()
+                elif isinstance(v, Adw.ComboRow):
+                    self.tool.variables[v.get_name()]['value'] = v.get_selected()
 
-        SQL.insert_or_update_tool_parameters(self.tool.name, self.tool.extract_variables_for_sql(), self.tool.is_enabled())
+        SQL.insert_or_update_tool_parameters(self.tool.tool_metadata.get('name'), self.tool.extract_variables_for_sql(), self.tool.is_enabled())
         self.close()
 
 class Base(Adw.ActionRow):
@@ -389,68 +403,58 @@ class OnlineSearch(Base):
     }
     name = _("Online Search")
     description = _("Search for a term online using DuckDuckGo")
-    variables = {}
+    variables = {
+        'safesearch': {
+            'display_name': _("Safe Search"),
+            'value': 0,
+            'type': 'options',
+            'options': [
+                _('On'),
+                _('Moderate'),
+                _('Off')
+            ]
+        },
+        'max_results': {
+            'display_name': _("Max Results"),
+            'value': 1,
+            'type': 'int',
+            'min': 1,
+            'max': 5
+        }
+    }
 
     def run(self, arguments, messages, bot_message) -> str:
         search_term = arguments.get("search_term")
         if not search_term:
             return "Error: Search term was not provided"
 
-        response = requests.get('https://api.duckduckgo.com/?q={}&format=json'.format(search_term.replace(' ', '+')))
-        data = response.json()
+        result_md = []
 
-        result_md = [
-            "# {}".format(data.get('Heading', 'Abstract'))
-        ]
+        text_results = DDGS().text(
+            keywords=search_term,
+            max_results=1
+        )
 
-        if data.get("AbstractURL"):
+        for text_result in text_results:
             attachment = bot_message.add_attachment(
                 file_id = generate_uuid(),
-                name = data.get("AbstractSource", _("Abstract Source")),
+                name = _("Abstract Source"),
                 attachment_type = "link",
-                content = data.get("AbstractURL")
+                content = text_result.get('href')
             )
             SQL.insert_or_update_attachment(bot_message, attachment)
+            result_md.append('### {}'.format(text_result.get('title')))
+            result_md.append(text_result.get('body'))
 
-        if data.get("AbstractText"):
-            result_md.append(data.get("AbstractText"))
+        images = DDGS().images(
+            keywords=search_term,
+            max_results=1,
+            size='Medium',
+            layout='Square'
+        )
 
-        if data.get("Image"):
-            self.attach_online_image(bot_message, data.get("Heading", "Web Result Image"), "https://duckduckgo.com{}".format(data.get("Image")))
-
-        if data.get("Infobox") and len(data.get("Infobox", {}).get("content")) > 0:
-            info_block = ""
-            for info in data.get("Infobox").get("content"):
-                if info.get("data_type") == "string" and info.get("label") and info.get("value"):
-                    info_block += "- **{}**: {}\n".format(info.get("label"), info.get("value"))
-            if len(info_block) > 0:
-                result_md.append("## General Information")
-                result_md.append(info_block)
-
-        if data.get("OfficialWebsite"):
-            attachment = bot_message.add_attachment(
-                file_id = generate_uuid(),
-                name = _("Official Website"),
-                attachment_type = "link",
-                content = data.get("OfficialWebsite")
-            )
-            SQL.insert_or_update_attachment(bot_message, attachment)
-
-        if len(result_md) == 1 and len(data.get("RelatedTopics", [])) > 0:
-            result_md.append("No direct results were found but there are some related topics.")
-            result_md.append("## Related Topics")
-            result_md.append("### Main Results")
-            for topic in data.get("RelatedTopics"):
-                if topic.get("FirstURL"):
-                    title = topic.get("FirstURL").split("/")[-1].replace("_", " ").title()
-                    result_md.append("#### {}".format(title))
-                    result_md.append(topic.get("Text"))
-                elif topic.get("Name"):
-                    result_md.append("### {}".format(topic.get("Name")))
-                    for topic2 in topic.get("Topics"):
-                        title = topic2.get("FirstURL").split("/")[-1].replace("_", " ").title()
-                        result_md.append("#### {}".format(title))
-                        result_md.append(topic2.get("Text"))
+        for image_result in images:
+            self.attach_online_image(bot_message, text_result.get('title', _('Web Result Image')), image_result.get('image'))
 
         if len(result_md) == 1:
             return "Error: No results found"
