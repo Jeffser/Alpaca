@@ -12,7 +12,9 @@ button_appearance={
 }
 
 def get_dialog_showing(parent:Gtk.Widget) -> bool:
-    return any([True for dt in (Options, Entry, DropDown) if isinstance(parent.get_visible_dialog(), dt)])
+    if parent:
+        return any([True for dt in (Options, Entry, DropDown) if isinstance(parent.get_visible_dialog(), dt)])
+    return False
 
 # Don't call this directly outside this script
 class Base(Adw.AlertDialog):
