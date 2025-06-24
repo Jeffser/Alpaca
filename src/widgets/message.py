@@ -283,7 +283,7 @@ class BlockContainer(Gtk.Box):
                 else:
                     self.insert_child_after(block, list(self)[-2])
 
-        if not self.message.popup.tts_button.get_active() and (self.get_root().settings.get_value('tts-auto-dictate').unpack() or self.get_root().get_name() == 'AlpacaLiveChat'):
+        if not self.message.popup.tts_button.get_active() and (self.message.get_root().settings.get_value('tts-auto-dictate').unpack() or self.message.get_root().get_name() == 'AlpacaLiveChat'):
             self.message.popup.tts_button.set_active(True)
 
     def get_content(self) -> list:
@@ -351,6 +351,12 @@ class Message(Gtk.Box):
         self.main_stack.add_named(content_container, 'content')
         self.main_stack.add_named(blocks.EditingText(self), 'editing')
         self.update_profile_picture()
+
+    def get_root(self) -> Gtk.Widget | None:
+        root = super().get_root()
+        if not root:
+            root = self.chat.row.get_root()
+        return root
 
     def get_content(self) -> str:
         return '\n\n'.join(self.block_container.get_content())

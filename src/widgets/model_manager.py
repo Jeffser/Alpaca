@@ -975,6 +975,7 @@ def update_local_model_list():
     window.title_stack.set_visible_child_name('model-selector' if len(get_local_models()) > 0 else 'no-models')
     window.local_model_stack.set_visible_child_name('content' if len(list(window.local_model_flowbox)) > 0 else 'no-models')
     window.model_dropdown.set_enable_search(len(local_models) > 10)
+    GLib.idle_add(window.auto_select_model)
 
 def update_available_model_list():
     global available_models

@@ -62,6 +62,8 @@ class DictateToggleButton(Gtk.Stack):
 
     def dictate_message(self, button):
         global message_dictated
+        if not self.message_element.get_root():
+            return
         def run():
             GLib.idle_add(self.set_visible_child_name, 'loading')
             voice = None
