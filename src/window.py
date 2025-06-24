@@ -606,7 +606,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         chat = self.chat_stack.get_child_by_name('content').get_child()
         if chat:
-            model_index = find_model_index(list(chat.container)[-1].get_model())
+            model_index = -1
+            if len(list(chat.container)) > 0:
+                model_index = find_model_index(list(chat.container)[-1].get_model())
             if model_index == -1:
                 model_index = find_model_index(self.get_current_instance().get_default_model())
 
