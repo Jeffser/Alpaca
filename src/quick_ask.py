@@ -27,6 +27,11 @@ class QuickAskWindow(Adw.ApplicationWindow):
     message_dictated = None
 
     @Gtk.Template.Callback()
+    def closing_app(self, element):
+        if self.get_application().main_alpaca_window.get_visible() == False:
+            self.get_application().quit()
+
+    @Gtk.Template.Callback()
     def save_chat(self, button):
         chat = self.toast_overlay.get_child()
         new_chat = self.get_application().main_alpaca_window.new_chat(chat.get_name())

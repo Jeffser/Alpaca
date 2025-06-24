@@ -3,6 +3,7 @@
   <requires lib="gtk" version="4.0"/>
   <requires lib="Adw" version="1.0"/>
   <template class="AlpacaLiveChatWindow" parent="AdwApplicationWindow">
+    <signal name="close-request" handler="closing_app"/>
     <accessibility>
       <property name="label" translatable="yes">Live chat dialog</property>
     </accessibility>

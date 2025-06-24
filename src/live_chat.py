@@ -50,6 +50,11 @@ class LiveChatWindow(Adw.ApplicationWindow):
     animation_signals = {}
 
     @Gtk.Template.Callback()
+    def closing_app(self, element):
+        if self.get_application().main_alpaca_window.get_visible() == False:
+            self.get_application().quit()
+
+    @Gtk.Template.Callback()
     def show_messages(self, button):
         self.bottom_sheet.set_open(True)
 
