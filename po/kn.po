@@ -1,0 +1,5022 @@
+# Kannada translations for Alpaca.
+# Copyright (C) 2024 Jeffry Samuel Edurate Rojas
+# This file is distributed under the same license as the PACKAGE package.
+# Jeethan Roche <jeethanroche@gmail.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: alpaca\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-04 01:32-0600\n"
+"PO-Revision-Date: 2025-06-22 11:40+0530\n"
+"Last-Translator: Jeethan Roche <jeethanroche@gmail.com>\n"
+"Language-Team: Kannada\n"
+"Language: kn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Gtranslator 48.0\n"
+
+#: data/com.jeffser.Alpaca.desktop.in:2
+#: data/com.jeffser.Alpaca.metainfo.xml.in:7
+msgid "Alpaca"
+msgstr "ಅಲ್ಪಕಾ"
+
+#: data/com.jeffser.Alpaca.desktop.in:8
+msgid "ai;ollama;llm"
+msgstr "ai;ollama;llm"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:8
+msgid "Chat with AI models"
+msgstr "ಆರ್ಟಿಫಿಕಲ್ ಇಂಟೆಲಿಜೆನ್ಸ್ ಮಾದರಿಗಳೊಂದಿಗೆ ಚಾಟ್ ಮಾಡಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:10
+msgid "A private AI client"
+msgstr "ಖಾಸಗಿ fಇಂಟೆಲಿಟೆನೆಸ್ ಕ್ಲೈಂಟ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:11
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1201
+msgid "Features"
+msgstr "ವೈಶಿಷ್ಟ್ಯಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:13
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1203
+msgid "Talk to multiple models in the same conversation"
+msgstr "ಒಂದೇ ಸಂಭಾಷಣೆಯಲ್ಲಿ ಅನೇಕ ಮಾದರಿಗಳೊಂದಿಗೆ ಮಾತನಾಡಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:14
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1204
+msgid "Pull and delete models from the app"
+msgstr "ಅಪ್ಲಿಕೇಶನ್‌ನಿಂದ ಮಾದರಿಗಳನ್ನು ಎಳೆಯಿರಿ ಮತ್ತು ಅಳಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:15
+msgid "Have multiple conversations"
+msgstr "ಬಹು ಸಂಭಾಷಣೆಗಳನ್ನು ಮಾಡಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:16
+msgid "Image recognition (Only available with compatible models)"
+msgstr "ಚಿತ್ರ ಗುರುತಿಸುವಿಕೆ (ಹೊಂದಾಣಿಕೆಯ ಮಾದರಿಗಳೊಂದಿಗೆ ಮಾತ್ರ ಲಭ್ಯವಿದೆ)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:17
+msgid "Plain text documents recognition"
+msgstr "ಸರಳ ಪಠ್ಯ ದಾಖಲೆಗಳ ಗುರುತಿಸುವಿಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:18
+msgid "Import and export chats"
+msgstr "ಚಾಟ್‌ಗಳನ್ನು ಆಮದು ಮಾಡಿ ರಫ್ತು ಮಾಡಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:19
+msgid "Append YouTube transcripts to the prompt"
+msgstr "ಪ್ರಾಂಪ್ಟ್‌ಗೆ ಯೂಟ್ಯೂಬ್ ಪ್ರತಿಗಳನ್ನು ಸೇರಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:20
+msgid "Append text from a website to the prompt"
+msgstr "ವೆಬ್‌ಸೈಟ್‌ನಿಂದ ಪ್ರಾಂಪ್ಟ್‌ಗೆ ಪಠ್ಯವನ್ನು ಸೇರಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:21
+msgid "PDF recognition"
+msgstr "ಪಿಡಿಎಫ್ ಗುರುತಿಸುವಿಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:23 src/window.ui:90
+msgid "Disclaimer"
+msgstr "ಹಕ್ಕು ನಿರಾಕರಣೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24
+msgid ""
+"This project is not affiliated at all with Ollama, I'm not responsible for "
+"any damages to your device or software caused by running code given by any "
+"models."
+msgstr ""
+"ಈ ಪ್ರಾಜೆಕ್ಟ್ ಒಲ್ಲಾಮಾದೊಂದಿಗೆ ಸಂಬಂಧ ಹೊಂದಿಲ್ಲ, ಯಾವುದೇ ಮಾದರಿಗಳು ನೀಡಿದ ಕೋಡ್ ಅನ್ನು ಚಾಲನೆ "
+"ಮಾಡುವುದರಿಂದ ಉಂಟಾಗುವ ನಿಮ್ಮ ಸಾಧನ ಅಥವಾ ಸಾಫ್ಟ್‌ವೇರ್‌ಗೆ ಯಾವುದೇ ಹಾನಿಗಳಿಗೆ ನಾನು "
+"ಜವಾಬ್ದಾರನಾಗಿಲ್ಲ."
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:27
+msgid "Jeffry Samuel Eduarte Rojas"
+msgstr "ಜೆಫ್ರಿ ಸ್ಯಾಮ್ಯುಯೆಲ್ ಎಡ್ವಾರ್ಟೆ ರೋಜಾಸ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:53
+msgid "A normal conversation with an AI Model"
+msgstr "AI ಮಾದರಿಯೊಂದಿಗೆ ಸಾಮಾನ್ಯ ಸಂಭಾಷಣೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:57
+msgid "A conversation involving image recognition"
+msgstr "ಚಿತ್ರ ಗುರುತಿಸುವಿಕೆಯನ್ನು ಒಳಗೊಂಡ ಸಂಭಾಷಣೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:61
+msgid "A conversation involving a custom model"
+msgstr "ಕಸ್ಟಮ್ ಮಾದರಿಯನ್ನು ಒಳಗೊಂಡ ಸಂಭಾಷಣೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:65
+msgid "A conversation showing code highlighting"
+msgstr "ಕೋಡ್ ಹೈಲೈಟ್ ಮಾಡುವ ಸಂಭಾಷಣೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:69
+msgid "A Python script running inside integrated terminal"
+msgstr "ಸಂಯೋಜಿತ ಟರ್ಮಿನಲ್ ಒಳಗೆ ಚಾಲನೆಯಲ್ಲಿರುವ ಪೈಥಾನ್ ಸ್ಕ್ರಿಪ್ಟ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:73
+msgid "A conversation involving a YouTube video transcript"
+msgstr "ಯೂಟ್ಯೂಬ್ ವೀಡಿಯೊ ಪ್ರತಿಲೇಖನವನ್ನು ಒಳಗೊಂಡ ಸಂಭಾಷಣೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:77
+msgid "Multiple models being downloaded"
+msgstr "ಬಹು ಮಾದರಿಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:81
+msgid "Model creator screen"
+msgstr "ಮಾದರಿ ಸೃಷ್ಟಿಕರ್ತ ಪರದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:95
+#: data/com.jeffser.Alpaca.metainfo.xml.in:109
+#: data/com.jeffser.Alpaca.metainfo.xml.in:142
+#: data/com.jeffser.Alpaca.metainfo.xml.in:189
+#: data/com.jeffser.Alpaca.metainfo.xml.in:236
+#: data/com.jeffser.Alpaca.metainfo.xml.in:253
+#: data/com.jeffser.Alpaca.metainfo.xml.in:283
+#: data/com.jeffser.Alpaca.metainfo.xml.in:293
+#: data/com.jeffser.Alpaca.metainfo.xml.in:304
+#: data/com.jeffser.Alpaca.metainfo.xml.in:331
+#: data/com.jeffser.Alpaca.metainfo.xml.in:351
+#: data/com.jeffser.Alpaca.metainfo.xml.in:377
+#: data/com.jeffser.Alpaca.metainfo.xml.in:392
+#: data/com.jeffser.Alpaca.metainfo.xml.in:417
+#: data/com.jeffser.Alpaca.metainfo.xml.in:445
+#: data/com.jeffser.Alpaca.metainfo.xml.in:455
+#: data/com.jeffser.Alpaca.metainfo.xml.in:466
+#: data/com.jeffser.Alpaca.metainfo.xml.in:480
+#: data/com.jeffser.Alpaca.metainfo.xml.in:492
+#: data/com.jeffser.Alpaca.metainfo.xml.in:508
+#: data/com.jeffser.Alpaca.metainfo.xml.in:523
+#: data/com.jeffser.Alpaca.metainfo.xml.in:558
+#: data/com.jeffser.Alpaca.metainfo.xml.in:583
+#: data/com.jeffser.Alpaca.metainfo.xml.in:614
+#: data/com.jeffser.Alpaca.metainfo.xml.in:640
+#: data/com.jeffser.Alpaca.metainfo.xml.in:662
+#: data/com.jeffser.Alpaca.metainfo.xml.in:693
+#: data/com.jeffser.Alpaca.metainfo.xml.in:715
+#: data/com.jeffser.Alpaca.metainfo.xml.in:736
+#: data/com.jeffser.Alpaca.metainfo.xml.in:751
+#: data/com.jeffser.Alpaca.metainfo.xml.in:776
+msgid "New"
+msgstr "ಹೊಸದಾದ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:97
+msgid "Multiple QuickAsk window rendering"
+msgstr "ಬಹು ಕ್ವಿಕಾಸ್ಕ್ ವಿಂಡೋ ರೆಂಡರಿಂಗ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:99
+#: data/com.jeffser.Alpaca.metainfo.xml.in:120
+#: data/com.jeffser.Alpaca.metainfo.xml.in:133
+#: data/com.jeffser.Alpaca.metainfo.xml.in:148
+#: data/com.jeffser.Alpaca.metainfo.xml.in:157
+#: data/com.jeffser.Alpaca.metainfo.xml.in:168
+#: data/com.jeffser.Alpaca.metainfo.xml.in:177
+#: data/com.jeffser.Alpaca.metainfo.xml.in:225
+#: data/com.jeffser.Alpaca.metainfo.xml.in:243
+#: data/com.jeffser.Alpaca.metainfo.xml.in:259
+#: data/com.jeffser.Alpaca.metainfo.xml.in:271
+#: data/com.jeffser.Alpaca.metainfo.xml.in:321
+#: data/com.jeffser.Alpaca.metainfo.xml.in:367
+#: data/com.jeffser.Alpaca.metainfo.xml.in:398
+#: data/com.jeffser.Alpaca.metainfo.xml.in:407
+#: data/com.jeffser.Alpaca.metainfo.xml.in:470
+#: data/com.jeffser.Alpaca.metainfo.xml.in:498
+#: data/com.jeffser.Alpaca.metainfo.xml.in:512
+#: data/com.jeffser.Alpaca.metainfo.xml.in:529
+#: data/com.jeffser.Alpaca.metainfo.xml.in:540
+#: data/com.jeffser.Alpaca.metainfo.xml.in:549
+#: data/com.jeffser.Alpaca.metainfo.xml.in:566
+#: data/com.jeffser.Alpaca.metainfo.xml.in:576
+#: data/com.jeffser.Alpaca.metainfo.xml.in:593
+#: data/com.jeffser.Alpaca.metainfo.xml.in:603
+#: data/com.jeffser.Alpaca.metainfo.xml.in:650
+#: data/com.jeffser.Alpaca.metainfo.xml.in:675
+#: data/com.jeffser.Alpaca.metainfo.xml.in:700
+#: data/com.jeffser.Alpaca.metainfo.xml.in:722
+#: data/com.jeffser.Alpaca.metainfo.xml.in:740
+#: data/com.jeffser.Alpaca.metainfo.xml.in:758
+#: data/com.jeffser.Alpaca.metainfo.xml.in:770
+#: data/com.jeffser.Alpaca.metainfo.xml.in:786
+msgid "Fixes"
+msgstr "ಪರಿಹಾರ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:101
+msgid "Better stability for QuickAsk"
+msgstr "ಕ್ವಿಕಾಸ್ಕ್‌ಗೆ ಉತ್ತಮ ಸ್ಥಿರತೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:102
+msgid "Creating a new chat now selects it"
+msgstr "ಹೊಸ ಚಾಟ್ ರಚಿಸುವುದು ಈಗ ಅದನ್ನು ಆಯ್ಕೆ ಮಾಡುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:111
+msgid "Chat Search"
+msgstr "ಚಾಟ್ ಹುಡುಕಾಟ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:112
+msgid "Hide \"latest\" and \"custom\" tags from model selector"
+msgstr "ಮಾದರಿ ಸೆಲೆಕ್ಟರ್‌ನಿಂದ \"ಇತ್ತೀಚಿನ\" ಮತ್ತು \"ಕಸ್ಟಮ್\" ಟ್ಯಾಗ್‌ಗಳನ್ನು ಮರೆಮಾಡಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:113
+msgid "Hide model's languages behind popup"
+msgstr "ಪಾಪ್ಅಪ್ ಹಿಂದೆ ಮಾದರಿಯ ಭಾಷೆಗಳನ್ನು ಮರೆಮಾಡಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:114
+msgid "New models listed for Ollama"
+msgstr "ಆಲಾಮಾಗೆ ಪಟ್ಟಿ ಮಾಡಲಾದ ಹೊಸ ಮಾದರಿಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:115
+msgid "Added option to autodictate new mesages"
+msgstr "ಹೊಸ ಮೆಸೇಜ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮಾಡಲು ಆಯ್ಕೆ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:116
+msgid "Added Meta Llama API to list of instances"
+msgstr "ನಿದರ್ಶನಗಳ ಪಟ್ಟಿಗೆ ಮೆಟಾ ಲಾಮಾ API ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:117
+msgid ""
+"Added new env variables options (\"24H hour formatting\" and \"only Ollama "
+"mode\")"
+msgstr ""
+"ಹೊಸ ಇಎನ್ವಿ ವೇರಿಯೇಬಲ್ಸ್ ಆಯ್ಕೆಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ (\"24 ಗಂ ಗಂಟೆ ಫಾರ್ಮ್ಯಾಟಿಂಗ್\" ಮತ್ತು "
+"\"ಓನ್ಲಿ ಒಲ್ಲಾಮಾ ಮೋಡ್\")"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:118
+msgid "Made Mermaid scripts executable using Python HTTP server"
+msgstr ""
+"ಪೈಥಾನ್ HTTP ಸರ್ವರ್ ಬಳಸಿ ಕಾರ್ಯಗತಗೊಳಿಸಬಹುದಾದ ಮತ್ಸ್ಯಕನ್ಯೆ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನು ತಯಾರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:122
+msgid "Better stability when switching instances"
+msgstr "ನಿದರ್ಶನಗಳನ್ನು ಬದಲಾಯಿಸುವಾಗ ಉತ್ತಮ ಸ್ಥಿರತೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:123
+msgid "Better performance when navigating menus"
+msgstr "ಮೆನುಗಳನ್ನು ನ್ಯಾವಿಗೇಟ್ ಮಾಡುವಾಗ ಉತ್ತಮ ಕಾರ್ಯಕ್ಷಮತೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:124
+msgid "Fixed some dialogs not appearing in Quick Ask window"
+msgstr "ತ್ವರಿತ ಆಸ್ಕ್ ವಿಂಡೋದಲ್ಲಿ ಗೋಚರಿಸದ ಕೆಲವು ಸಂವಾದಗಳನ್ನು ಪರಿಹರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:125
+msgid "Faster message search"
+msgstr "ವೇಗವಾಗಿ ಸಂದೇಶ ಹುಡುಕಾಟ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:126
+msgid "Faster message rendering"
+msgstr "ವೇಗವಾಗಿ ಸಂದೇಶ ರೆಂಡರಿಂಗ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:135
+msgid "Fixed whisper directory not existing causing error"
+msgstr "ಸ್ಥಿರ ಪಿಸುಮಾತು ಡೈರೆಕ್ಟರಿ ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ ದೋಷಕ್ಕೆ ಕಾರಣವಾಗುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:144
+#: data/com.jeffser.Alpaca.metainfo.xml.in:993
+msgid "Updated model list"
+msgstr "ಮಾದರಿ ಪಟ್ಟಿ ನವೀಕರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:145
+msgid "Alpaca now remembers it's size"
+msgstr "ಅಲ್ಪಕಾ ಈಗ ಅದರ ಗಾತ್ರವನ್ನು ನೆನಪಿಸಿಕೊಳ್ಳುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:146
+msgid "Added reasoning category for Ollama models"
+msgstr "ಒಲ್ಲಾಮಾ ಮಾದರಿಗಳಿಗಾಗಿ ತಾರ್ಕಿಕ ವರ್ಗವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:150
+msgid "Improvements in sample prompts"
+msgstr "ಮಾದರಿ ಅಪೇಕ್ಷೆಗಳಲ್ಲಿನ ಸುಧಾರಣೆಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:159
+msgid "Fixed auto creation of Ollama (Managed) instance"
+msgstr "ಆಲಾಮಾ (ನಿರ್ವಹಿಸಿದ) ನಿದರ್ಶನದ ಸ್ಥಿರ ಸ್ವಯಂ ರಚನೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:160
+msgid "Removed legacy JSON to SQLite3 migration code"
+msgstr "ಲೆಗಸಿ JSON ಅನ್ನು SQLite3 ವಲಸೆ ಕೋಡ್‌ಗೆ ತೆಗೆದುಹಾಕಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:161
+msgid "Fixed power saving mode appearing whilst using online instances"
+msgstr "ಆನ್‌ಲೈನ್ ನಿದರ್ಶನಗಳನ್ನು ಬಳಸುವಾಗ ಸ್ಥಿರ ವಿದ್ಯುತ್ ಉಳಿತಾಯ ಮೋಡ್ ಗೋಚರಿಸುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:170
+msgid "Fixed Ollama (Manged) instance not being able to be created"
+msgstr "ಸ್ಥಿರ ಒಲ್ಲಮಾ (ಮ್ಯಾನ್ಡ್) ನಿದರ್ಶನವನ್ನು ರಚಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:179
+msgid "Instance manager now follows default model"
+msgstr "ನಿದರ್ಶನ ವ್ಯವಸ್ಥಾಪಕ ಈಗ ಡೀಫಾಲ್ಟ್ ಮಾದರಿಯನ್ನು ಅನುಸರಿಸುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:180
+msgid "English text-to-speech voices not working"
+msgstr "ಇಂಗ್ಲಿಷ್ ಪಠ್ಯದಿಂದ ಭಾಷಣ ಧ್ವನಿಗಳು ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:181
+msgid "Instance manager sometimes not saving instances"
+msgstr "ನಿದರ್ಶನ ವ್ಯವಸ್ಥಾಪಕ ಕೆಲವೊಮ್ಮೆ ನಿದರ್ಶನಗಳನ್ನು ಉಳಿಸುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:182
+msgid "Fixed Gorq and Deepseek instances not generating text"
+msgstr "ಸ್ಥಿರ GORQ ಮತ್ತು DEEPSEEK ನಿದರ್ಶನಗಳು ಪಠ್ಯವನ್ನು ರಚಿಸುತ್ತಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:191
+msgid "Smart tools for models"
+msgstr "ಮಾದರಿಗಳಿಗಾಗಿ ಸ್ಮಾರ್ಟ್ ಪರಿಕರಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:192
+msgid "Speech recognition (message dictation)"
+msgstr "ಭಾಷಣ ಗುರುತಿಸುವಿಕೆ (ಸಂದೇಶ ನಿರ್ದೇಶನ)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:193 src/widgets/model_manager.py:66
+msgid "Text to Speech"
+msgstr "ಭಾಷಣಕ್ಕೆ ಪಠ್ಯ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:194
+msgid "New Quick Chat system"
+msgstr "ಹೊಸ ತ್ವರಿತ ಚಾಟ್ ವ್ಯವಸ್ಥೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:195
+msgid "Filter Ollama models by categories"
+msgstr "ಒಲ್ಲಾಮಾ ಮಾದರಿಗಳನ್ನು ವರ್ಗಗಳ ಪ್ರಕಾರ ಫಿಲ್ಟರ್ ಮಾಡಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:196
+msgid "Better math Latex rendering in messages"
+msgstr "ಸಂದೇಶಗಳಲ್ಲಿ ಉತ್ತಮ ಗಣಿತ ಲ್ಯಾಟೆಕ್ಸ್ ರೆಂಡರಿಂಗ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:197
+msgid "Rich text rendering in attachment preview"
+msgstr "ಲಗತ್ತು ಪೂರ್ವವೀಕ್ಷಣೆಯಲ್ಲಿ ಶ್ರೀಮಂತ ಪಠ್ಯ ರೆಂಡರಿಂಗ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:198
+msgid "Matplotlib is now included in Python code runner"
+msgstr "ಮ್ಯಾಟ್ಪ್ಲಾಟ್ಲಿಬ್ ಅನ್ನು ಈಗ ಪೈಥಾನ್ ಕೋಡ್ ರನ್ನರ್ನಲ್ಲಿ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:199
+msgid "Styling for messages being generated"
+msgstr "ಸಂದೇಶಗಳನ್ನು ರಚಿಸಲಾಗುತ್ತಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:201
+#: data/com.jeffser.Alpaca.metainfo.xml.in:309
+msgid "New Instances"
+msgstr "ಹೊಸ ನಿದರ್ಶನಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:203
+msgid "Deepseek"
+msgstr "Deepseek"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:204
+msgid "OpenRouter AI"
+msgstr "ಓಪನ್ ರೌಟರ್ ಎಐ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:205
+msgid "Anthropic"
+msgstr "Anthropic"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:206
+msgid "Groq Cloud"
+msgstr "ಗ್ರಾಕ್ ಮೋಡ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:207
+msgid "Fireworks AI"
+msgstr "Fireworks ಎಐ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:208
+msgid "Lambda Labs"
+msgstr "ಲ್ಯಾಂಬ್ಡಾ ಲ್ಯಾಂಬ್ಸ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:210
+msgid "New Attachment Types"
+msgstr "ಹೊಸ ಲಗತ್ತು ಪ್ರಕಾರಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:212
+msgid "Microsoft Word Document (docx)"
+msgstr "ಮೈಕ್ರೋಸಾಫ್ಟ್ ವರ್ಡ್ ಡಾಕ್ಯುಮೆಂಟ್ (ಡಾಕ್ಸ್)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:213
+msgid "Microsoft PowerPoint Document (pptx)"
+msgstr "ಮೈಕ್ರೋಸಾಫ್ಟ್ ಪವರ್ಪಾಯಿಂಟ್ ಡಾಕ್ಯುಮೆಂಟ್ (ಪಿಪಿಟಿಎಕ್ಸ್)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:214
+msgid "Microsoft Excel Document (xlsx)"
+msgstr "ಮೈಕ್ರೋಸಾಫ್ಟ್ ಎಕ್ಸೆಲ್ ಡಾಕ್ಯುಮೆಂಟ್ (ಎಕ್ಸ್‌ಎಲ್‌ಎಸ್‌ಎಕ್ಸ್)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:216
+msgid "New Tools"
+msgstr "ಹೊಸ ಪರಿಕರಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:218 src/widgets/tools/tools.py:467
+msgid "Run Command (Testing)"
+msgstr "ರನ್ ಕಮಾಂಡ್ (ಪರೀಕ್ಷೆ)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:219 src/widgets/tools/tools.py:374
+msgid "Online Search"
+msgstr "ಆನ್‌ಲೈನ್ ಹುಡುಕಾಟ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:220 src/widgets/tools/tools.py:332
+msgid "Extract Wikipedia Article"
+msgstr "ವಿಕಿಪೀಡಿಯ ಲೇಖನವನ್ನು ಹೊರತೆಗೆಯಿರಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:221 src/widgets/tools/tools.py:214
+msgid "Get Recipe by Name"
+msgstr "ಹೆಸರಿನಿಂದ ಪಾಕವಿಧಾನವನ್ನು ಪಡೆಯಿರಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:222 src/widgets/tools/tools.py:275
+msgid "Get Recipes by Category"
+msgstr "ವರ್ಗದ ಪ್ರಕಾರ ಪಾಕವಿಧಾನಗಳನ್ನು ಪಡೆಯಿರಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:223 src/widgets/tools/tools.py:181
+msgid "Get Current Datetime"
+msgstr "ಪ್ರಸ್ತುತ ಡೇಟ್‌ಟೈಮ್ ಪಡೆಯಿರಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:227
+msgid "Fixed welcome screen not showing sometimes when deleting a message"
+msgstr "ಸಂದೇಶವನ್ನು ಅಳಿಸುವಾಗ ಸ್ಥಿರ ಸ್ವಾಗತ ಪರದೆ ಕೆಲವೊಮ್ಮೆ ತೋರಿಸುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:228
+msgid "Fixed bold text not rendering correctly in tables"
+msgstr "ಸ್ಥಿರ ದಪ್ಪ ಪಠ್ಯ ಕೋಷ್ಟಕಗಳಲ್ಲಿ ಸರಿಯಾಗಿ ನಿರೂಪಿಸುತ್ತಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:229
+msgid "Fixed sample prompt buttons overflowing on small screens"
+msgstr "ಸ್ಥಿರ ಮಾದರಿ ಪ್ರಾಂಪ್ಟ್ ಗುಂಡಿಗಳು ಸಣ್ಣ ಪರದೆಗಳಲ್ಲಿ ತುಂಬಿ ಹರಿಯುತ್ತವೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:238
+msgid "Updated runtime to Gnome 48"
+msgstr "ಗ್ನೋಮ್ 48 ಗೆ ರನ್ಟೈಮ್ ಅನ್ನು ನವೀಕರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:239
+msgid "Added back 'category pills' to model manager"
+msgstr "ಮಾಡೆಲ್ ಮ್ಯಾನೇಜರ್‌ಗೆ 'ವರ್ಗ ಮಾತ್ರೆಗಳನ್ನು' ಮತ್ತೆ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:240
+msgid "Better appearance for model manager sidebar"
+msgstr "ಮಾಡೆಲ್ ಮ್ಯಾನೇಜರ್ ಸೈಡ್‌ಬಾರ್‌ಗೆ ಉತ್ತಮ ನೋಟ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:241
+#: data/com.jeffser.Alpaca.metainfo.xml.in:257
+msgid "New models"
+msgstr "ಹೊಸ ಮಾದರಿಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:245
+msgid "Fixed bad title generation with chain-of-thought models"
+msgstr "ಚೈನ್-ಆಫ್-ಥಾಟ್ ಮಾದರಿಗಳೊಂದಿಗೆ ಸ್ಥಿರ ಕೆಟ್ಟ ಶೀರ್ಷಿಕೆ ಉತ್ಪಾದನೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:246
+msgid ""
+"Hide page switcher in model manager if there's only one page (online "
+"instances)"
+msgstr ""
+"ಕೇವಲ ಒಂದು ಪುಟ (ಆನ್‌ಲೈನ್ ನಿದರ್ಶನಗಳು) ಇದ್ದರೆ ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕದಲ್ಲಿ ಪುಟ ಸ್ವಿಚರ್ ಅನ್ನು "
+"ಮರೆಮಾಡಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:255
+msgid "Option to delete all chats"
+msgstr "ಎಲ್ಲಾ ಚಾಟ್‌ಗಳನ್ನು ಅಳಿಸುವ ಆಯ್ಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:256
+msgid "Button to refresh sample prompts"
+msgstr "ಮಾದರಿ ಅಪೇಕ್ಷೆಗಳನ್ನು ರಿಫ್ರೆಶ್ ಮಾಡಲು ಬಟನ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:261
+msgid "Fixed saving Ollama (Managed) instance might crash it"
+msgstr "ಸ್ಥಿರ ಉಳಿತಾಯ ಆಲಮಾ (ನಿರ್ವಹಿಸಿದ) ನಿದರ್ಶನವು ಅದನ್ನು ಕ್ರ್ಯಾಶ್ ಮಾಡಬಹುದು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:262
+msgid "Fixed stop button"
+msgstr "ಸ್ಥಿರ ನಿಲುಗಡೆ ಬಟನ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:263
+msgid "Fixed model search not working if there are only pulling models"
+msgstr "ಎಳೆಯುವ ಮಾದರಿಗಳು ಮಾತ್ರ ಇದ್ದರೆ ಸ್ಥಿರ ಮಾದರಿ ಹುಡುಕಾಟ ಕಾರ್ಯನಿರ್ವಹಿಸುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:264
+msgid "Fixed sample prompts sometimes not appearing"
+msgstr "ಸ್ಥಿರ ಮಾದರಿ ಅಪೇಕ್ಷಿಸುತ್ತದೆ ಕೆಲವೊಮ್ಮೆ ಕಾಣಿಸುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:273
+msgid "Don't clear the building output of C++ scripts"
+msgstr "ಸಿ ++ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳ ಕಟ್ಟಡ ಉತ್ಪಾದನೆಯನ್ನು ತೆರವುಗೊಳಿಸಬೇಡಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:274
+msgid "Better handling of attachments"
+msgstr "ಲಗತ್ತುಗಳನ್ನು ಉತ್ತಮವಾಗಿ ನಿರ್ವಹಿಸುವುದು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:275
+msgid "Handle remote Ollama instance's API Key better"
+msgstr "ರಿಮೋಟ್ ಆಲಾಮಾ ನಿದರ್ಶನದ ಎಪಿಐ ಕೀಲಿಯನ್ನು ಉತ್ತಮವಾಗಿ ನಿರ್ವಹಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:276
+msgid "Remove '\\n' characters in instance edit page"
+msgstr "ಉದಾಹರಣೆಗೆ ಸಂಪಾದಿಸು ಪುಟದಲ್ಲಿ '\\ n' ಅಕ್ಷರಗಳನ್ನು ತೆಗೆದುಹಾಕಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:285
+msgid "Dynamic chat loading"
+msgstr "ಡೈನಾಮಿಕ್ ಚಾಟ್ ಲೋಡಿಂಗ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:286
+msgid "Updated Ollama instance"
+msgstr "ಒಲ್ಲಾಮಾ ನಿದರ್ಶನವನ್ನು ನವೀಕರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:295
+msgid "Tweaked appearance of models in model manager"
+msgstr "ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕದಲ್ಲಿ ಮಾದರಿಗಳ ತಿರುಚಿದ ನೋಟ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:296
+msgid "Updated Ollama instance to 0.5.11"
+msgstr "ಒಲ್ಲಾಮಾ ನಿದರ್ಶನವನ್ನು 0.5.11 ಕ್ಕೆ ನವೀಕರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:297
+msgid "Added new models"
+msgstr "ಹೊಸ ಮಾದರಿಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:306
+msgid "New instance manager"
+msgstr "ಹೊಸ ನಿದರ್ಶನ ವ್ಯವಸ್ಥಾಪಕ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:307
+msgid "New welcome screen"
+msgstr "ಹೊಸ ಸ್ವಾಗತ ಪರದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:311
+msgid "OpenAI ChatGPT"
+msgstr "ಓಪನ್ಐ ಚಾಟ್ಜಿಪಿಟಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:312
+msgid "Google Gemini"
+msgstr "ಗೂಗಲ್ ಜೆಮಿನಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:313
+msgid "Together AI"
+msgstr "Together AI"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:314
+msgid "Venice"
+msgstr "ವೆನಿಸ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:323
+msgid "Exporting chats with 'thoughts' attachment is fixed"
+msgstr "'ಆಲೋಚನೆಗಳು' ಲಗತ್ತಿನೊಂದಿಗೆ ಚಾಟ್‌ಗಳನ್ನು ರಫ್ತು ಮಾಡುವುದನ್ನು ನಿವಾರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:324
+msgid "Fixed attachment filters"
+msgstr "ಸ್ಥಿರ ಲಗತ್ತು ಫಿಲ್ಟರ್‌ಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:333
+msgid "New model manager"
+msgstr "ಹೊಸ ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:334
+msgid "Changed GtkSpinner to AdwSpinner"
+msgstr "Gtkspinner ಅನ್ನು adwspinner ಗೆ ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:335
+msgid "Better handling of launch process"
+msgstr "ಉಡಾವಣಾ ಪ್ರಕ್ರಿಯೆಯ ಉತ್ತಮ ನಿರ್ವಹಣೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:336
+msgid "New loading screen at launch"
+msgstr "ಉಡಾವಣೆಯಲ್ಲಿ ಹೊಸ ಲೋಡಿಂಗ್ ಪರದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:337
+msgid "Better handling of file types"
+msgstr "ಫೈಲ್ ಪ್ರಕಾರಗಳನ್ನು ಉತ್ತಮವಾಗಿ ನಿರ್ವಹಿಸುವುದು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:338
+msgid "Better regex expression for LaTeX equations"
+msgstr "ಲ್ಯಾಟೆಕ್ಸ್ ಸಮೀಕರಣಗಳಿಗಾಗಿ ಉತ್ತಮ ರಿಜೆಕ್ಸ್ ಅಭಿವ್ಯಕ್ತಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:339
+msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
+msgstr " ದೃಢೀಕರಣ ಸಂವಾದವು ಬಳಕೆದಾರರು ಅಲ್ಪಕಾವನ್ನು ಮುಚ್ಚಿದರೆ ಒಂದು ಮಾದರಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡುವಾಗ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:340
+msgid "Better handling of think tags in messages"
+msgstr "ಸಂದೇಶಗಳಲ್ಲಿ ಥಿಂಕ್ ಟ್ಯಾಗ್‌ಗಳನ್ನು ಉತ್ತಮವಾಗಿ ನಿರ್ವಹಿಸುವುದು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:341
+msgid "Default model is now in charge of generating titles"
+msgstr "ಡೀಫಾಲ್ಟ್ ಮಾದರಿ ಈಗ ಶೀರ್ಷಿಕೆಗಳನ್ನು ಉತ್ಪಾದಿಸುವ ಉಸ್ತುವಾರಿ ವಹಿಸಿಕೊಂಡಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:342
+msgid "Message header is now shown whilst the message is being generated"
+msgstr "ಸಂದೇಶವನ್ನು ರಚಿಸುವಾಗ ಸಂದೇಶ ಹೆಡರ್ ಅನ್ನು ಈಗ ತೋರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:343
+msgid "Better handling of model profile pictures"
+msgstr "ಮಾದರಿ ಪ್ರೊಫೈಲ್ ಚಿತ್ರಗಳ ಉತ್ತಮ ನಿರ್ವಹಣೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:344
+msgid "New models in 'available models' list"
+msgstr "'ಲಭ್ಯವಿರುವ ಮಾದರಿಗಳು' ಪಟ್ಟಿಯಲ್ಲಿ ಹೊಸ ಮಾದರಿಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:353
+msgid "Added option for attaching screenshots"
+msgstr "ಸ್ಕ್ರೀನ್‌ಶಾಟ್‌ಗಳನ್ನು ಲಗತ್ತಿಸಲು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:354
+msgid "Basic LaTeX math equations are now rendered in messages"
+msgstr "ಮೂಲ ಲ್ಯಾಟೆಕ್ಸ್ ಗಣಿತ ಸಮೀಕರಣಗಳನ್ನು ಈಗ ಸಂದೇಶಗಳಲ್ಲಿ ಪ್ರದರ್ಶಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:355
+msgid "HTML and C++ scripts can now be run inside Alpaca"
+msgstr "HTML ಮತ್ತು C ++ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನು ಈಗ ಅಲ್ಪಕಾ ಒಳಗೆ ಚಲಾಯಿಸಬಹುದು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:356
+msgid "Added option to open the environment directory from the terminal"
+msgstr "ಟರ್ಮಿನಲ್‌ನಿಂದ ಪರಿಸರ ಡೈರೆಕ್ಟರಿಯನ್ನು ತೆರೆಯಲು ಆಯ್ಕೆ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:357
+msgid "Added option to edit code blocks directly"
+msgstr "ಕೋಡ್ ಬ್ಲಾಕ್‌ಗಳನ್ನು ನೇರವಾಗಿ ಸಂಪಾದಿಸಲು ಆಯ್ಕೆ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:358
+msgid "Complete keyboard shortcut list"
+msgstr "ಕೀಬೋರ್ಡ್ ಶಾರ್ಟ್‌ಕಟ್ ಪಟ್ಟಿಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:359
+msgid "Images are now attached in 640p resolution"
+msgstr "ಚಿತ್ರಗಳನ್ನು ಈಗ 640p ರೆಸಲ್ಯೂಶನ್‌ನಲ್ಲಿ ಲಗತ್ತಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:360
+msgid "Website attachments now use extracted titles"
+msgstr "ವೆಬ್‌ಸೈಟ್ ಲಗತ್ತುಗಳು ಈಗ ಹೊರತೆಗೆದ ಶೀರ್ಷಿಕೆಗಳನ್ನು ಬಳಸುತ್ತವೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:361
+msgid "Better chat title generation"
+msgstr "ಉತ್ತಮ ಚಾಟ್ ಶೀರ್ಷಿಕೆ ಉತ್ಪಾದನೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:362
+msgid "Added option to attach any plain text files"
+msgstr "ಯಾವುದೇ ಸರಳ ಪಠ್ಯ ಫೈಲ್‌ಗಳನ್ನು ಲಗತ್ತಿಸುವ ಆಯ್ಕೆಯನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:363
+msgid "Added spellchecker to message entry"
+msgstr "ಸಂದೇಶ ಪ್ರವೇಶಕ್ಕೆ ಕಾಗುಣಿತ ಚೆಕರ್ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:364
+msgid "Alpaca's parameters are now stored using SQLite3"
+msgstr "ಅಲ್ಪಕಾದ ನಿಯತಾಂಕಗಳನ್ನು ಈಗ SQLite3 ಬಳಸಿ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:365
+msgid "Small appearance changes in text entries"
+msgstr "ಪಠ್ಯ ನಮೂದುಗಳಲ್ಲಿ ಸಣ್ಣ ನೋಟ ಬದಲಾವಣೆಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:369
+msgid "Alpaca's launch process is more reliable"
+msgstr "ಅಲ್ಪಕಾ ಉಡಾವಣಾ ಪ್ರಕ್ರಿಯೆಯು ಹೆಚ್ಚು ವಿಶ್ವಾಸಾರ್ಹವಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:370
+msgid "Closing the terminal now kills the script subprocess"
+msgstr "ಟರ್ಮಿನಲ್ ಅನ್ನು ಮುಚ್ಚುವುದು ಈಗ ಸ್ಕ್ರಿಪ್ಟ್ ಉಪ -ಪ್ರೊಸೆಸ್ ಅನ್ನು ಕೊಲ್ಲುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:379
+msgid "Transitioned chat backend from JSON to SQLite3"
+msgstr "JSON ನಿಂದ SQLite3 ಗೆ ಪರಿವರ್ತಿಸಿದ ಚಾಟ್ ಬ್ಯಾಕೆಂಡ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:380
+msgid "Changed appearance of messages"
+msgstr "ಸಂದೇಶಗಳ ಬದಲಾದ ನೋಟ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:381
+msgid "Added the option to add profile pictures to models"
+msgstr "ಮಾದರಿಗಳಿಗೆ ಪ್ರೊಫೈಲ್ ಚಿತ್ರಗಳನ್ನು ಸೇರಿಸುವ ಆಯ್ಕೆಯನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:383
+#: data/com.jeffser.Alpaca.metainfo.xml.in:855
+#: data/com.jeffser.Alpaca.metainfo.xml.in:904
+msgid "Fix"
+msgstr "ಸರಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:385
+msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
+msgstr "ROCR_VISIBLE_DEVICES ಗೆ ಅತಿಕ್ರಮಣ HIP_VISIBLE_DEVICES ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:394
+msgid "Added categories to models"
+msgstr "ಮಾದರಿಗಳಿಗೆ ವರ್ಗಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:395
+msgid "Specified model's languages"
+msgstr "ನಿರ್ದಿಷ್ಟ ಮಾದರಿಯ ಭಾಷೆಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:396
+msgid "Added warning when downloading embedding models"
+msgstr "ಎಂಬೆಡಿಂಗ್ ಮಾದರಿಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡುವಾಗ ಎಚ್ಚರಿಕೆ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:400
+msgid "Replaced low ram warning with big model warning"
+msgstr "ಕಡಿಮೆ ರಾಮ್ ಎಚ್ಚರಿಕೆಯನ್ನು ದೊಡ್ಡ ಮಾದರಿ ಎಚ್ಚರಿಕೆಯೊಂದಿಗೆ ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:409
+msgid "Correctly escape markup before rendering message"
+msgstr "ಸಂದೇಶವನ್ನು ಸಲ್ಲಿಸುವ ಮೊದಲು ಸರಿಯಾಗಿ ತಪ್ಪಿಸಿಕೊಳ್ಳಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:410
+msgid "Fixed about dialog not working if log file was missing"
+msgstr "ಲಾಗ್ ಫೈಲ್ ಕಾಣೆಯಾಗಿದ್ದರೆ ಸಂವಾದ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:419
+msgid "System messages can now be sent directly from Alpaca"
+msgstr "ಸಿಸ್ಟಮ್ ಸಂದೇಶಗಳನ್ನು ಈಗ ನೇರವಾಗಿ ಅಲ್ಪಕಾದಿಂದ ಕಳುಹಿಸಬಹುದು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:420
+msgid "New redesign for messages and smaller minimum size"
+msgstr "ಸಂದೇಶಗಳು ಮತ್ತು ಸಣ್ಣ ಕನಿಷ್ಠ ಗಾತ್ರಕ್ಕಾಗಿ ಹೊಸ ಮರುವಿನ್ಯಾಸ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:421
+msgid "New models included in 'available models list'"
+msgstr "'ಲಭ್ಯವಿರುವ ಮಾದರಿಗಳು ಪಟ್ಟಿ' ನಲ್ಲಿ ಹೊಸ ಮಾದರಿಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:422
+msgid "Added symbolic icon when attaching code files"
+msgstr "ಕೋಡ್ ಫೈಲ್‌ಗಳನ್ನು ಲಗತ್ತಿಸುವಾಗ ಸಾಂಕೇತಿಕ ಐಕಾನ್ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:423
+msgid "When exporting a chat it now includes a markdown file"
+msgstr "ಚಾಟ್ ಅನ್ನು ರಫ್ತು ಮಾಡುವಾಗ ಅದು ಈಗ ಮಾರ್ಕ್‌ಡೌನ್ ಫೈಲ್ ಅನ್ನು ಒಳಗೊಂಡಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:424
+msgid "Refresh button in model manager when using a remote instance"
+msgstr "ರಿಮೋಟ್ ನಿದರ್ಶನವನ್ನು ಬಳಸುವಾಗ ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕದಲ್ಲಿ ರಿಫ್ರೆಶ್ ಬಟನ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:425
+msgid "Assistant messages are now editable"
+msgstr "ಸಹಾಯಕ ಸಂದೇಶಗಳು ಈಗ ಸಂಪಾದಿಸಬಹುದಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:426
+msgid "Updated Ollama to v0.5.2"
+msgstr "ಒಲ್ಲಾಮಾವನ್ನು V0.5.2 ಗೆ ನವೀಕರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:427
+msgid "New option to change model directory"
+msgstr "ಮಾದರಿ ಡೈರೆಕ್ಟರಿಯನ್ನು ಬದಲಾಯಿಸಲು ಹೊಸ ಆಯ್ಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:428
+msgid "File previewer now resizes dynamically to content"
+msgstr "ಫೈಲ್ ಪೂರ್ವವೀಕ್ಷಣೆ ಈಗ ವಿಷಯಕ್ಕೆ ಕ್ರಿಯಾತ್ಮಕವಾಗಿ ಮರುಗಾತ್ರಗೊಳಿಸುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:429
+msgid "Adapted Alpaca to work without integrated Ollama instance"
+msgstr "ಸಂಯೋಜಿತ ಆಲಾಮಾ ನಿದರ್ಶನವಿಲ್ಲದೆ ಕೆಲಸ ಮಾಡಲು ಆಲ್ಪಾಕಾವನ್ನು ಅಳವಡಿಸಿಕೊಂಡಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:430
+msgid "Compatibility added with ODT files"
+msgstr "ಒಡಿಟಿ ಫೈಲ್‌ಗಳೊಂದಿಗೆ ಹೊಂದಾಣಿಕೆಯನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:433
+msgid "Restored ROCm compatibility"
+msgstr "ಮರುಸ್ಥಾಪಿಸಿದ ROCM ಹೊಂದಾಣಿಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:434
+msgid ""
+"Added long press gesture to chat rows so actions can be done in touchscreens"
+msgstr ""
+"ಚಾಟ್ ಸಾಲುಗಳಿಗೆ ಲಾಂಗ್ ಪ್ರೆಸ್ ಗೆಸ್ಚರ್ ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ ಆದ್ದರಿಂದ ಟಚ್‌ಸ್ಕ್ರೀನ್‌ಗಳಲ್ಲಿ "
+"ಕ್ರಿಯೆಗಳನ್ನು ಮಾಡಬಹುದು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:435
+msgid "Fixed edit button not saving changes"
+msgstr "ಸ್ಥಿರ ಸಂಪಾದನೆ ಬಟನ್ ಬದಲಾವಣೆಗಳನ್ನು ಉಳಿಸುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:436
+msgid "Changed max temperature value to 2"
+msgstr "ಗರಿಷ್ಠ ತಾಪಮಾನ ಮೌಲ್ಯವನ್ನು 2 ಕ್ಕೆ ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:437
+msgid "Made seed 0 actually random"
+msgstr "ಬೀಜ 0 ಅನ್ನು ಯಾದೃಚ್ om ಿಕವಾಗಿ ಮಾಡಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:438
+msgid ""
+"Fixed Gnome search provider not working outside of Flatpak installations"
+msgstr "ಸ್ಥಿರ ಗ್ನೋಮ್ ಹುಡುಕಾಟ ಒದಗಿಸುವವರು ಫ್ಲಾಟ್‌ಪ್ಯಾಕ್ ಸ್ಥಾಪನೆಗಳ ಹೊರಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:447
+msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
+msgstr "ಹೊಸ ಆಯ್ಕೆ -ಸಂದೇಶ ಸಂದೇಶ, ಹೊಸ 'ತ್ವರಿತ ಕೇಳಿ' ವಿಂಡೋವನ್ನು ತೆರೆಯಲು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:448
+msgid "Gnome Search integration now works whilst the app is opened"
+msgstr "ಅಪ್ಲಿಕೇಶನ್ ತೆರೆದಾಗ ಗ್ನೋಮ್ ಹುಡುಕಾಟ ಏಕೀಕರಣವು ಈಗ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:457
+msgid ""
+"Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
+"--list-chats, --version"
+msgstr ""
+"ಲಾಂಚ್ ಪ್ಯಾರಾಮೆಂಟರ್‌ಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ-ಕಾಸ್ಕ್ ಸಂದೇಶ,-ಹೊಸ-ಚಾಟ್ ಚಾಟ್,-ಸೆಲೆಕ್ಟ್-ಚಾಟ್ ಚಾಟ್,-"
+"ಲಿಸ್ಟ್-ಚಾಟ್ಸ್, --ವರ್ಷನ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:458
+msgid "Added integration as Gnome Search Provider"
+msgstr "ಗ್ನೋಮ್ ಹುಡುಕಾಟ ಪೂರೈಕೆದಾರರಾಗಿ ಏಕೀಕರಣವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:459
+msgid "Updated Ollama to v0.4.2 with new models"
+msgstr "ಹೊಸ ಮಾದರಿಗಳೊಂದಿಗೆ ಆಲಾಮಾವನ್ನು V0.4.2 ಗೆ ನವೀಕರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:468
+msgid "User messages are now compacted into bubbles"
+msgstr "ಬಳಕೆದಾರರ ಸಂದೇಶಗಳನ್ನು ಈಗ ಗುಳ್ಳೆಗಳಾಗಿ ಸಂಕ್ಷೇಪಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:472
+msgid ""
+"Fixed re connection dialog not working when 'use local instance' is selected"
+msgstr ""
+"'ಸ್ಥಳೀಯ ನಿದರ್ಶನವನ್ನು ಬಳಸಿ' ಆಯ್ಕೆಮಾಡಿದಾಗ ಸ್ಥಿರ ಮರು ಸಂಪರ್ಕ ಸಂವಾದ ಕಾರ್ಯನಿರ್ವಹಿಸುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:473
+msgid "Fixed model manager not adapting to large system fonts"
+msgstr "ಸ್ಥಿರ ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕ ದೊಡ್ಡ ಸಿಸ್ಟಮ್ ಫಾಂಟ್‌ಗಳಿಗೆ ಹೊಂದಿಕೊಳ್ಳುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:482
+msgid "Details page for models"
+msgstr "ಮಾದರಿಗಳಿಗಾಗಿ ವಿವರಗಳ ಪುಟ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:483
+msgid ""
+"Model selector gets replaced with 'manage models' button when there are no "
+"models downloaded"
+msgstr ""
+"ಯಾವುದೇ ಮಾದರಿಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡದಿದ್ದಾಗ ಮಾದರಿ ಸೆಲೆಕ್ಟರ್ ಅನ್ನು 'ಮ್ಯಾನೇಜ್ ಮಾಡೆಲ್ ಮಾಡೆಲ್' "
+"ಗುಂಡಿಯೊಂದಿಗೆ ಬದಲಾಯಿಸಲಾಗುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:484
+msgid "Added warning when model is too big for the device"
+msgstr "ಸಾಧನಕ್ಕೆ ಮಾದರಿ ತುಂಬಾ ದೊಡ್ಡದಾದಾಗ ಎಚ್ಚರಿಕೆ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:485
+msgid "Added AMD GPU indicator in preferences"
+msgstr "ಆದ್ಯತೆಗಳಲ್ಲಿ ಎಎಮ್‌ಡಿ ಜಿಪಿಯು ಸೂಚಕವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:494
+msgid "Better system for handling dialogs"
+msgstr "ಸಂವಾದಗಳನ್ನು ನಿರ್ವಹಿಸಲು ಉತ್ತಮ ವ್ಯವಸ್ಥೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:495
+msgid "Better system for handling instance switching"
+msgstr "ನಿದರ್ಶನ ಸ್ವಿಚಿಂಗ್ ಅನ್ನು ನಿರ್ವಹಿಸಲು ಉತ್ತಮ ವ್ಯವಸ್ಥೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:496
+msgid "Remote connection dialog"
+msgstr "ದೂರಸ್ಥ ಸಂಪರ್ಕ ಸಂವಾದ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:500
+msgid "Fixed: Models get duplicated when switching remote and local instance"
+msgstr "ಸ್ಥಿರ: ರಿಮೋಟ್ ಮತ್ತು ಸ್ಥಳೀಯ ನಿದರ್ಶನವನ್ನು ಬದಲಾಯಿಸುವಾಗ ಮಾದರಿಗಳು ನಕಲು ಮಾಡುತ್ತವೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:501
+msgid "Better internal instance manager"
+msgstr "ಉತ್ತಮ ಆಂತರಿಕ ನಿದರ್ಶನ ವ್ಯವಸ್ಥಾಪಕ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:510
+msgid "Added 'Cancel' and 'Save' buttons when editing a message"
+msgstr "ಸಂದೇಶವನ್ನು ಸಂಪಾದಿಸುವಾಗ 'ರದ್ದುಗೊಳಿಸಿ' ಮತ್ತು 'ಉಳಿಸು' ಗುಂಡಿಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:514
+msgid "Better handling of image recognition"
+msgstr "ಚಿತ್ರ ಗುರುತಿಸುವಿಕೆಯನ್ನು ಉತ್ತಮವಾಗಿ ನಿರ್ವಹಿಸುವುದು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:515
+msgid "Remove unused files when canceling a model download"
+msgstr "ಮಾದರಿ ಡೌನ್‌ಲೋಡ್ ಅನ್ನು ರದ್ದುಗೊಳಿಸುವಾಗ ಬಳಕೆಯಾಗದ ಫೈಲ್‌ಗಳನ್ನು ತೆಗೆದುಹಾಕಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:516
+msgid "Better message blocks rendering"
+msgstr "ಉತ್ತಮ ಸಂದೇಶ ಬ್ಲಾಕ್ಗಳು ​​ರೆಂಡರಿಂಗ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:525
+msgid "Run bash and python scripts straight from chat"
+msgstr "ಚಾಟ್‌ನಿಂದ ನೇರವಾಗಿ ಬ್ಯಾಷ್ ಮತ್ತು ಪೈಥಾನ್ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನು ಚಲಾಯಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:526
+msgid "Updated Ollama to 0.3.12"
+msgstr "ಒಲ್ಲಾಮಾವನ್ನು 0.3.12 ಕ್ಕೆ ನವೀಕರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:527
+msgid "New models!"
+msgstr "ಹೊಸ ಮಾದರಿಗಳು!"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:531
+msgid "Fixed and made faster the launch sequence"
+msgstr ""
+"ಪ್ರಾರಂಭಿಸಿದ ಅನುಕ್ರಮವನ್ನು ಪರಿಹರಿಸಲಾಗಿದೆ ಮತ್ತು ವೇಗವಾಗಿ ಮಾಡಿದೆಪ್ರಾರಂಭಿಸಿದ ಅನುಕ್ರಮವನ್ನು "
+"ಪರಿಹರಿಸಲಾಗಿದೆ ಮತ್ತು ವೇಗವಾಗಿ ಮಾಡಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:532
+msgid "Better detection of code blocks in messages"
+msgstr "ಸಂದೇಶಗಳಲ್ಲಿ ಕೋಡ್ ಬ್ಲಾಕ್‌ಗಳ ಉತ್ತಮ ಪತ್ತೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:533
+msgid "Fixed app not loading in certain setups with Nvidia GPUs"
+msgstr "ಸ್ಥಿರ ಅಪ್ಲಿಕೇಶನ್ ಎನ್ವಿಡಿಯಾ ಜಿಪಿಯುಗಳೊಂದಿಗೆ ಕೆಲವು ಸೆಟಪ್‌ಗಳಲ್ಲಿ ಲೋಡ್ ಆಗುತ್ತಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:542
+msgid ""
+"Fixed message notification sometimes crashing text rendering because of them "
+"running on different threads"
+msgstr ""
+"ಸ್ಥಿರ ಸಂದೇಶ ಅಧಿಸೂಚನೆ ಕೆಲವೊಮ್ಮೆ ವಿಭಿನ್ನ ಎಳೆಗಳಲ್ಲಿ ಚಲಿಸುವ ಕಾರಣ ಪಠ್ಯ ರೆಂಡರಿಂಗ್ ಅನ್ನು "
+"ಕ್ರ್ಯಾಶ್ ಮಾಡುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:551
+msgid "Fixed message generation sometimes failing"
+msgstr "ಸ್ಥಿರ ಸಂದೇಶ ಉತ್ಪಾದನೆ ಕೆಲವೊಮ್ಮೆ ವಿಫಲಗೊಳ್ಳುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:560
+msgid "Sidebar resizes with the window"
+msgstr "ಸೈಡ್‌ಬಾರ್ ಕಿಟಕಿಯೊಂದಿಗೆ ಮರುಗಾತ್ರಗೊಳಿಸುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:561
+msgid "New welcome dialog"
+msgstr "ಹೊಸ ಸ್ವಾಗತ ಸಂವಾದ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:562
+msgid "Message search"
+msgstr "ಸಂದೇಶ ಹುಡುಕಾಟ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:563
+msgid "Updated Ollama to v0.3.11"
+msgstr "ಒಲ್ಲಾಮಾವನ್ನು V0.3.11 ಗೆ ನವೀಕರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:564
+msgid "A lot of new models provided by Ollama repository"
+msgstr "ಒಲ್ಲಾಮಾ ರೆಪೊಸಿಟರಿ ಒದಗಿಸಿದ ಬಹಳಷ್ಟು ಹೊಸ ಮಾದರಿಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:568
+msgid ""
+"Fixed text inside model manager when the accessibility option 'large text' "
+"is on"
+msgstr "ಪ್ರವೇಶಿಸುವಿಕೆ ಆಯ್ಕೆ 'ದೊಡ್ಡ ಪಠ್ಯ' ಆನ್ ಆಗಿರುವಾಗ ಮಾಡೆಲ್ ಮ್ಯಾನೇಜರ್ ಒಳಗೆ ಸ್ಥಿರ ಪಠ್ಯ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:569
+msgid "Fixed image recognition on unsupported models"
+msgstr "ಬೆಂಬಲಿಸದ ಮಾದರಿಗಳಲ್ಲಿ ಸ್ಥಿರ ಚಿತ್ರ ಗುರುತಿಸುವಿಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:578
+msgid "Fixed spinner not hiding if the back end fails"
+msgstr "ಬ್ಯಾಕ್ ಎಂಡ್ ವಿಫಲವಾದರೆ ಸ್ಥಿರ ಸ್ಪಿನ್ನರ್ ಅಡಗಿಕೊಳ್ಳುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:579
+msgid "Fixed image recognition with local images"
+msgstr "ಸ್ಥಳೀಯ ಚಿತ್ರಗಳೊಂದಿಗೆ ಸ್ಥಿರ ಚಿತ್ರ ಗುರುತಿಸುವಿಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:580
+msgid "Changed appearance of delete / stop model buttons"
+msgstr "ಅಳತೆ / ನಿಲುಗಡೆ ಮಾದರಿ ಗುಂಡಿಗಳ ಬದಲಾದ ನೋಟ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:581
+msgid "Fixed stop button crashing the app"
+msgstr "ಅಪ್ಲಿಕೇಶನ್ ಕ್ರ್ಯಾಶ್ ಮಾಡುವ ಸ್ಥಿರ ಸ್ಟಾಪ್ ಬಟನ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:585
+msgid "Made sidebar resize a little when the window is smaller"
+msgstr "ವಿಂಡೋ ಚಿಕ್ಕದಾಗಿದ್ದಾಗ ಸೈಡ್‌ಬಾರ್ ಸ್ವಲ್ಪ ಮರುಗಾತ್ರಗೊಳಿಸಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:586
+msgid "Instant launch"
+msgstr "ತ್ವರಿತ ಉಡಾವಣೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:595
+msgid "Fixed error on first run (welcome dialog)"
+msgstr "ಮೊದಲ ಓಟದಲ್ಲಿ ಸ್ಥಿರ ದೋಷ (ಸ್ವಾಗತ ಸಂವಾದ)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:596
+msgid "Fixed checker for Ollama instance (used on system packages)"
+msgstr "ಒಲ್ಲಾಮಾ ನಿದರ್ಶನಕ್ಕಾಗಿ ಸ್ಥಿರ ಚೆಕರ್ (ಸಿಸ್ಟಮ್ ಪ್ಯಾಕೇಜ್‌ಗಳಲ್ಲಿ ಬಳಸಲಾಗುತ್ತದೆ)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:605
+msgid "Fixed 'clear chat' option"
+msgstr "ಸ್ಥಿರ 'ಸ್ಪಷ್ಟ ಚಾಟ್' ಆಯ್ಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:606
+msgid "Fixed welcome dialog causing the local instance to not launch"
+msgstr "ಸ್ಥಿರ ಸ್ವಾಗತ ಸಂವಾದವು ಸ್ಥಳೀಯ ನಿದರ್ಶನವನ್ನು ಪ್ರಾರಂಭಿಸದಿರಲು ಕಾರಣವಾಗುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:607
+msgid "Fixed support for AMD GPUs"
+msgstr "ಎಎಮ್‌ಡಿ ಜಿಪಿಯುಗಳಿಗೆ ಸ್ಥಿರ ಬೆಂಬಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:616
+msgid "Model, message and chat systems have been rewritten"
+msgstr "ಮಾದರಿ, ಸಂದೇಶ ಮತ್ತು ಚಾಟ್ ವ್ಯವಸ್ಥೆಗಳನ್ನು ಪುನಃ ಬರೆಯಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:617
+msgid "New models are available"
+msgstr "ಹೊಸ ಮಾದರಿಗಳು ಲಭ್ಯವಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:618
+msgid "Ollama updated to v0.3.9"
+msgstr "ಒಲ್ಲಾಮಾ V0.3.9 ಗೆ ನವೀಕರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:619
+msgid "Added support for multiple chat generations simultaneously"
+msgstr "ಏಕಕಾಲದಲ್ಲಿ ಬಹು ಚಾಟ್ ಪೀಳಿಗೆಗೆ ಬೆಂಬಲವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:620
+msgid "Added experimental AMD GPU support"
+msgstr "ಪ್ರಾಯೋಗಿಕ ಎಎಮ್‌ಡಿ ಜಿಪಿಯು ಬೆಂಬಲವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:621
+msgid "Added message loading spinner and new message indicator to chat tab"
+msgstr "ಚಾಟ್ ಟ್ಯಾಬ್‌ಗೆ ಸ್ಪಿನ್ನರ್ ಮತ್ತು ಹೊಸ ಸಂದೇಶ ಸೂಚಕವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:622
+msgid "Added animations"
+msgstr "ಅನಿಮೇಷನ್‌ಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:623
+msgid "Changed model manager / model selector appearance"
+msgstr "ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕ / ಮಾದರಿ ಸೆಲೆಕ್ಟರ್ ನೋಟವನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:624
+msgid "Changed message appearance"
+msgstr "ಸಂದೇಶದ ನೋಟವನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:625
+msgid "Added markdown and code blocks to user messages"
+msgstr "ಬಳಕೆದಾರ ಸಂದೇಶಗಳಿಗೆ ಮಾರ್ಕ್‌ಡೌನ್ ಮತ್ತು ಕೋಡ್ ಬ್ಲಾಕ್‌ಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:626
+msgid "Added loading dialog at launch so the app opens faster"
+msgstr ""
+"ಪ್ರಾರಂಭದಲ್ಲಿ ಲೋಡಿಂಗ್ ಸಂವಾದವನ್ನು ಸೇರಿಸಲಾಗಿದೆ ಆದ್ದರಿಂದ ಅಪ್ಲಿಕೇಶನ್ ವೇಗವಾಗಿ ತೆರೆಯುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:627
+msgid "Added warning when device is on 'battery saver' mode"
+msgstr "ಸಾಧನವು 'ಬ್ಯಾಟರಿ ಸೇವರ್' ಮೋಡ್‌ನಲ್ಲಿರುವಾಗ ಎಚ್ಚರಿಕೆ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:628
+msgid "Added inactivity timer to integrated instance"
+msgstr "ಸಂಯೋಜಿತ ನಿದರ್ಶನಕ್ಕೆ ನಿಷ್ಕ್ರಿಯತೆಯ ಟೈಮರ್ ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:631
+msgid "The chat is now scrolled to the bottom when it's changed"
+msgstr "ಅದನ್ನು ಬದಲಾಯಿಸಿದಾಗ ಚಾಟ್ ಅನ್ನು ಈಗ ಕೆಳಕ್ಕೆ ಸ್ಕ್ರಾಲ್ ಮಾಡಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:632
+msgid "Better handling of focus on messages"
+msgstr "ಸಂದೇಶಗಳ ಮೇಲೆ ಕೇಂದ್ರೀಕರಿಸುವ ಉತ್ತಮ ನಿರ್ವಹಣೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:633
+msgid "Better general performance on the app"
+msgstr "ಅಪ್ಲಿಕೇಶನ್‌ನಲ್ಲಿ ಉತ್ತಮ ಸಾಮಾನ್ಯ ಕಾರ್ಯಕ್ಷಮತೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:642
+msgid "New duplicate chat option"
+msgstr "ಹೊಸ ನಕಲಿ ಚಾಟ್ ಆಯ್ಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:643
+msgid "Changed model selector appearance"
+msgstr "ಮಾದರಿ ಸೆಲೆಕ್ಟರ್ ನೋಟವನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:644
+msgid "Message entry is focused on launch and chat change"
+msgstr "ಸಂದೇಶ ನಮೂದು ಉಡಾವಣಾ ಮತ್ತು ಚಾಟ್ ಬದಲಾವಣೆಯ ಮೇಲೆ ಕೇಂದ್ರೀಕರಿಸಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:645
+msgid "Message is focused when it's being edited"
+msgstr "ಸಂದೇಶವನ್ನು ಸಂಪಾದಿಸಿದಾಗ ಅದನ್ನು ಕೇಂದ್ರೀಕರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:646
+msgid "Added loading spinner when regenerating a message"
+msgstr "ಸಂದೇಶವನ್ನು ಪುನರುತ್ಪಾದಿಸುವಾಗ ಲೋಡಿಂಗ್ ಸ್ಪಿನ್ನರ್ ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:647
+msgid "Added Ollama debugging to 'About Alpaca' dialog"
+msgstr "'ಬಗ್ಗೆ ಅಲ್ಪಕಾ' ಸಂವಾದಕ್ಕೆ ಡೀಬಗ್ ಮಾಡುವುದನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:648
+msgid "Changed YouTube transcription dialog appearance and behavior"
+msgstr "ಯುಟ್ಯೂಬ್ ಪ್ರತಿಲೇಖನ ಸಂವಾದ ಮತ್ತು ನಡವಳಿಕೆಯನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:652
+msgid "CTRL+W and CTRL+Q stops local instance before closing the app"
+msgstr "Ctrl+W ಮತ್ತು CTRL+Q ಅಪ್ಲಿಕೇಶನ್ ಮುಚ್ಚುವ ಮೊದಲು ಸ್ಥಳೀಯ ನಿದರ್ಶನವನ್ನು ನಿಲ್ಲಿಸುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:653
+msgid "Changed appearance of 'Open Model Manager' button on welcome screen"
+msgstr "ಸ್ವಾಗತ ಪರದೆಯಲ್ಲಿ 'ಓಪನ್ ಮಾಡೆಲ್ ಮ್ಯಾನೇಜರ್' ಬಟನ್‌ನ ಬದಲಾದ ನೋಟ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:654
+msgid "Fixed message generation not working consistently"
+msgstr "ಸ್ಥಿರ ಸಂದೇಶ ಉತ್ಪಾದನೆಯು ಸ್ಥಿರವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:655
+msgid "Fixed message edition not working consistently"
+msgstr "ಸ್ಥಿರ ಸಂದೇಶ ಆವೃತ್ತಿ ಸ್ಥಿರವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:664
+msgid "Model manager opens faster"
+msgstr "ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕ ವೇಗವಾಗಿ ತೆರೆಯುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:665
+msgid "Delete chat option in secondary menu"
+msgstr "ದ್ವಿತೀಯ ಮೆನುವಿನಲ್ಲಿ ಚಾಟ್ ಆಯ್ಕೆಯನ್ನು ಅಳಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:666
+msgid "New model selector popup"
+msgstr "ಹೊಸ ಮಾದರಿ ಸೆಲೆಕ್ಟರ್ ಪಾಪ್ಅಪ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:667
+msgid "Standard shortcuts"
+msgstr "ಸ್ಟ್ಯಾಂಡರ್ಡ್ ಶಾರ್ಟ್‌ಕಟ್‌ಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:668
+msgid "Model manager is navigable with keyboard"
+msgstr "ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕ ಕೀಬೋರ್ಡ್‌ನೊಂದಿಗೆ ಸಂಚರಿಸಬಹುದಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:669
+msgid "Changed sidebar collapsing behavior"
+msgstr "ಸೈಡ್‌ಬಾರ್ ಕುಸಿಯುತ್ತಿರುವ ನಡವಳಿಕೆಯನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:670
+msgid "Focus indicators on messages"
+msgstr "ಸಂದೇಶಗಳ ಮೇಲೆ ಸೂಚಕಗಳನ್ನು ಕೇಂದ್ರೀಕರಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:671
+msgid "Welcome screen"
+msgstr "ಸ್ವಾಗತ ಪರದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:672
+msgid "Give message entry focus at launch"
+msgstr "ಪ್ರಾರಂಭದಲ್ಲಿ ಸಂದೇಶ ಪ್ರವೇಶ ಗಮನವನ್ನು ನೀಡಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:673
+msgid "Generally better code"
+msgstr "ಸಾಮಾನ್ಯವಾಗಿ ಉತ್ತಮ ಕೋಡ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:677
+msgid "Better width for dialogs"
+msgstr "ಸಂವಾದಗಳಿಗೆ ಉತ್ತಮ ಅಗಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:678
+msgid "Better compatibility with screen readers"
+msgstr "ಸ್ಕ್ರೀನ್ ಓದುಗರೊಂದಿಗೆ ಉತ್ತಮ ಹೊಂದಾಣಿಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:679
+msgid "Fixed message regenerator"
+msgstr "ಸ್ಥಿರ ಸಂದೇಶ ಪುನರುತ್ಪಾದಕ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:680
+msgid "Removed 'Featured models' from welcome dialog"
+msgstr "ಸ್ವಾಗತ ಸಂವಾದದಿಂದ 'ವೈಶಿಷ್ಟ್ಯಗೊಳಿಸಿದ ಮಾದರಿಗಳನ್ನು' ತೆಗೆದುಹಾಕಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:681
+msgid "Added default buttons to dialogs"
+msgstr "ಸಂವಾದಗಳಿಗೆ ಡೀಫಾಲ್ಟ್ ಬಟನ್‌ಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:682
+msgid "Fixed import / export of chats"
+msgstr "ಸ್ಥಿರ ಆಮದು / ಚಾಟ್‌ಗಳ ರಫ್ತು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:683
+msgid "Changed Python2 title to Python on code blocks"
+msgstr "ಕೋಡ್ ಬ್ಲಾಕ್‌ಗಳಲ್ಲಿ ಪೈಥಾನ್‌ಗೆ ಪೈಥಾನ್ 2 ಶೀರ್ಷಿಕೆಯನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:684
+msgid ""
+"Prevent regeneration of title when the user changed it to a custom title"
+msgstr ""
+"ಬಳಕೆದಾರರು ಅದನ್ನು ಕಸ್ಟಮ್ ಶೀರ್ಷಿಕೆಗೆ ಬದಲಾಯಿಸಿದಾಗ ಶೀರ್ಷಿಕೆಯ ಪುನರುತ್ಪಾದನೆಯನ್ನು ತಡೆಯಿರಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:685
+msgid "Show date on stopped messages"
+msgstr "ನಿಲ್ಲಿಸಿದ ಸಂದೇಶಗಳಲ್ಲಿ ದಿನಾಂಕವನ್ನು ತೋರಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:686
+msgid "Fix clear chat error"
+msgstr "ಸ್ಪಷ್ಟ ಚಾಟ್ ದೋಷವನ್ನು ಸರಿಪಡಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:695
+msgid "Changed shortcuts to standards"
+msgstr "ಶಾರ್ಟ್‌ಕಟ್‌ಗಳನ್ನು ಮಾನದಂಡಗಳಿಗೆ ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:696
+msgid "Moved 'Manage Models' button to primary menu"
+msgstr "ಪ್ರಾಥಮಿಕ ಮೆನುಗೆ 'ಮಾದರಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ' ಗುಂಡಿಯನ್ನು ಸರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:697
+#: data/com.jeffser.Alpaca.metainfo.xml.in:719
+msgid "Stable support for GGUF model files"
+msgstr "GGUF ಮಾದರಿ ಫೈಲ್‌ಗಳಿಗೆ ಸ್ಥಿರ ಬೆಂಬಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:698
+#: data/com.jeffser.Alpaca.metainfo.xml.in:973
+msgid "General optimizations"
+msgstr "ಸಾಮಾನ್ಯ ಆಪ್ಟಿಮೈಸೇಷನ್‌ಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:702
+msgid "Better handling of enter key (important for Japanese input)"
+msgstr "ಎಂಟರ್ ಕೀಲಿಯನ್ನು ಉತ್ತಮ ನಿರ್ವಹಿಸುವುದು (ಜಪಾನೀಸ್ ಇನ್ಪುಟ್ಗೆ ಮುಖ್ಯ)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:703
+msgid "Removed sponsor dialog"
+msgstr "ತೆಗೆದುಹಾಕಲಾಗಿದೆ ಪ್ರಾಯೋಜಕ ಸಂವಾದ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:704
+msgid "Added sponsor link in about dialog"
+msgstr "ಸಂವಾದದ ಬಗ್ಗೆ ಪ್ರಾಯೋಜಕ ಲಿಂಕ್ ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:705
+msgid "Changed window and elements dimensions"
+msgstr "ಬದಲಾದ ವಿಂಡೋ ಮತ್ತು ಅಂಶಗಳ ಆಯಾಮಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:706
+msgid "Selected model changes when entering model manager"
+msgstr "ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕವನ್ನು ನಮೂದಿಸುವಾಗ ಆಯ್ದ ಮಾದರಿ ಬದಲಾವಣೆಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:707
+msgid "Better image tooltips"
+msgstr "ಉತ್ತಮ ಇಮೇಜ್ ಟೂಲ್ಟಿಪ್ಸ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:708
+msgid "GGUF Support"
+msgstr "Gguf ಬೆಂಬಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:717
+msgid "Regenerate any response, even if they are incomplete"
+msgstr "ಯಾವುದೇ ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ಪುನರುತ್ಪಾದಿಸಿ, ಅವು ಅಪೂರ್ಣವಾಗಿದ್ದರೂ ಸಹ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:718
+msgid "Support for pulling models by name:tag"
+msgstr "ಮಾದರಿಗಳನ್ನು ಹೆಸರಿನಿಂದ ಎಳೆಯಲು ಬೆಂಬಲ: ಟ್ಯಾಗ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:720
+msgid "Restored sidebar toggle button"
+msgstr "ಮರುಸ್ಥಾಪಿಸಿದ ಸೈಡ್‌ಬಾರ್ ಟಾಗಲ್ ಬಟನ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:724
+msgid "Reverted back to standard styles"
+msgstr "ಸ್ಟ್ಯಾಂಡರ್ಡ್ ಶೈಲಿಗಳಿಗೆ ಹಿಂತಿರುಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:725
+msgid "Fixed generated titles having \"'S\" for some reason"
+msgstr "ಕೆಲವು ಕಾರಣಗಳಿಗಾಗಿ \"'S\"ಅನ್ನು ಹೊಂದಿರುವ ಸ್ಥಿರ ರಚಿಸಿದ ಶೀರ್ಷಿಕೆಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:726
+msgid "Changed min width for model dropdown"
+msgstr "ಮಾದರಿ ಡ್ರಾಪ್‌ಡೌನ್‌ಗಾಗಿ ಕನಿಷ್ಠ ಅಗಲವನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:727
+msgid "Changed message entry shadow"
+msgstr "ಸಂದೇಶ ಪ್ರವೇಶ ನೆರಳು ಬದಲಾಯಿಸಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:728
+msgid "The last model used is now restored when the user changes chat"
+msgstr "ಬಳಕೆದಾರರು ಚಾಟ್ ಬದಲಾಯಿಸಿದಾಗ ಬಳಸಿದ ಕೊನೆಯ ಮಾದರಿಯನ್ನು ಈಗ ಪುನಃಸ್ಥಾಪಿಸಲಾಗುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:729
+msgid "Better check for message finishing"
+msgstr "ಸಂದೇಶ ಮುಗಿಸಲು ಉತ್ತಮ ಪರಿಶೀಲಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:738
+msgid "Added table rendering (Thanks Nokse)"
+msgstr "ಟೇಬಲ್ ರೆಂಡರಿಂಗ್ ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ (ಧನ್ಯವಾದಗಳು ನೋಕ್ಸೆ)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:742
+msgid "Made support dialog more common"
+msgstr "ಬೆಂಬಲ ಸಂವಾದ ಹೆಚ್ಚು ಸಾಮಾನ್ಯವಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:743
+msgid ""
+"Dialog title on tag chooser when downloading models didn't display properly"
+msgstr ""
+"ಮಾದರಿಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡುವಾಗ ಟ್ಯಾಗ್ ಚೂಸರ್ನಲ್ಲಿ ಸಂವಾದ ಶೀರ್ಷಿಕೆ ಸರಿಯಾಗಿ ಪ್ರದರ್ಶಿಸಲಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:744
+msgid "Prevent chat generation from generating a title with multiple lines"
+msgstr "ಚಾಟ್ ಉತ್ಪಾದನೆಯು ಬಹು ಸಾಲುಗಳೊಂದಿಗೆ ಶೀರ್ಷಿಕೆಯನ್ನು ಉತ್ಪಾದಿಸುವುದನ್ನು ತಡೆಯಿರಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:753
+msgid "Bearer Token entry on connection error dialog"
+msgstr "ಸಂಪರ್ಕ ದೋಷ ಸಂವಾದದಲ್ಲಿ ಬೇರರ್ ಟೋಕನ್ ನಮೂದು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:754
+msgid "Small appearance changes"
+msgstr "ಸಣ್ಣ ನೋಟ ಬದಲಾವಣೆಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:755
+msgid "Compatibility with code blocks without explicit language"
+msgstr "ಸ್ಪಷ್ಟ ಭಾಷೆ ಇಲ್ಲದೆ ಕೋಡ್ ಬ್ಲಾಕ್‌ಗಳೊಂದಿಗೆ ಹೊಂದಾಣಿಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:756
+msgid "Rare, optional and dismissible support dialog"
+msgstr "ಅಪರೂಪದ, ಐಚ್ al ಿಕ ಮತ್ತು ತಳ್ಳಿಹಾಕುವ ಬೆಂಬಲ ಸಂವಾದ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:760
+msgid "Date format for Simplified Chinese translation"
+msgstr "ಸರಳೀಕೃತ ಚೀನೀ ಅನುವಾದಕ್ಕಾಗಿ ದಿನಾಂಕ ಸ್ವರೂಪ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:761
+msgid "Bug with unsupported localizations"
+msgstr "ಬೆಂಬಲಿಸದ ಸ್ಥಳೀಕರಣಗಳೊಂದಿಗೆ ದೋಷ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:762
+msgid "Min height being too large to be used on mobile"
+msgstr "ಮೊಬೈಲ್‌ನಲ್ಲಿ ಬಳಸಲು ಕನಿಷ್ಠ ಎತ್ತರವು ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:763
+msgid "Remote connection checker bug"
+msgstr "ರಿಮೋಟ್ ಕನೆಕ್ಷನ್ ಚೆಕರ್ ದೋಷ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:772
+msgid "Models with capital letters on their tag don't work"
+msgstr "ಅವರ ಟ್ಯಾಗ್‌ನಲ್ಲಿ ಬಂಡವಾಳ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿರುವ ಮಾದರಿಗಳು ಕಾರ್ಯನಿರ್ವಹಿಸುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:773
+msgid "Ollama fails to launch on some systems"
+msgstr "ಒಲ್ಲಾಮಾ ಕೆಲವು ವ್ಯವಸ್ಥೆಗಳಲ್ಲಿ ಪ್ರಾರಂಭಿಸಲು ವಿಫಲವಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:774
+msgid "YouTube transcripts are not being saved in the right TMP directory"
+msgstr "ಸರಿಯಾದ ಟಿಎಂಪಿ ಡೈರೆಕ್ಟರಿಯಲ್ಲಿ ಯೂಟ್ಯೂಬ್ ಪ್ರತಿಗಳನ್ನು ಉಳಿಸಲಾಗುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:778
+msgid "Debug messages are now shown on the 'About Alpaca' dialog"
+msgstr "ಡೀಬಗ್ ಸಂದೇಶಗಳನ್ನು ಈಗ 'ಆಲ್ಪಾಕಾ ಬಗ್ಗೆ' ಸಂವಾದದಲ್ಲಿ ತೋರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:779
+msgid "Updated Ollama to v0.3.0 (new models)"
+msgstr "ಒಲ್ಲಾಮಾವನ್ನು V0.3.0 ಗೆ ನವೀಕರಿಸಲಾಗಿದೆ (ಹೊಸ ಮಾದರಿಗಳು)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:788
+msgid "Models with '-' in their names didn't work properly, this is now fixed"
+msgstr ""
+"ಅವರ ಹೆಸರಿನಲ್ಲಿ '-' ಹೊಂದಿರುವ ಮಾದರಿಗಳು ಸರಿಯಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸಲಿಲ್ಲ, ಇದನ್ನು ಈಗ "
+"ನಿವಾರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:789
+msgid "Better connection check for Ollama"
+msgstr "ಒಲ್ಲಾಮಾಗೆ ಉತ್ತಮ ಸಂಪರ್ಕ ಪರಿಶೀಲಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:796
+msgid "Stable Release"
+msgstr "ಸ್ಥಿರ ಬಿಡುಗಡೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:797
+msgid ""
+"The new icon was made by Tobias Bernard over the Gnome Gitlab, thanks for "
+"the great icon!"
+msgstr ""
+"ಹೊಸ ಐಕಾನ್ ಅನ್ನು ಟೋಬಿಯಾಸ್ ಬರ್ನಾರ್ಡ್ ಅವರು ಗ್ನೋಮ್ ಗಿಟ್ಲ್ಯಾಬ್ ಮೇಲೆ ಮಾಡಿದ್ದಾರೆ, ಗ್ರೇಟ್ ಐಕಾನ್ಗೆ "
+"ಧನ್ಯವಾದಗಳು!"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:798
+msgid "Features and fixes"
+msgstr "ವೈಶಿಷ್ಟ್ಯಗಳು ಮತ್ತು ಪರಿಹಾರಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:800
+msgid "Updated Ollama instance to 0.2.8"
+msgstr "ಒಲ್ಲಾಮಾ ನಿದರ್ಶನವನ್ನು 0.2.8 ಕ್ಕೆ ನವೀಕರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:801
+msgid "Better model selector"
+msgstr "ಉತ್ತಮ ಮಾದರಿ ಸೆಲೆಕ್ಟರ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:802
+msgid "Model manager redesign"
+msgstr "ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕ ಮರುವಿನ್ಯಾಸ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:803
+msgid "Better tag selector when pulling a model"
+msgstr "ಮಾದರಿಯನ್ನು ಎಳೆಯುವಾಗ ಉತ್ತಮ ಟ್ಯಾಗ್ ಸೆಲೆಕ್ಟರ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:804
+msgid "Model search"
+msgstr "ಮಾದರಿ ಹುಡುಕಾಟ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:805
+msgid "Added support for bearer tokens on remote instances"
+msgstr "ದೂರಸ್ಥ ನಿದರ್ಶನಗಳಲ್ಲಿ ಧಾರಕ ಟೋಕನ್‌ಗಳಿಗೆ ಬೆಂಬಲವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:806
+msgid "Preferences dialog redesign"
+msgstr "ಆದ್ಯತೆಗಳ ಸಂವಾದ ಮರುವಿನ್ಯಾಸ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:807
+msgid "Added context menus to interact with a chat"
+msgstr "ಚಾಟ್‌ನೊಂದಿಗೆ ಸಂವಹನ ನಡೆಸಲು ಸಂದರ್ಭ ಮೆನುಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:808
+msgid "Redesigned primary and secondary menus"
+msgstr "ಮರುವಿನ್ಯಾಸಗೊಳಿಸಲಾದ ಪ್ರಾಥಮಿಕ ಮತ್ತು ದ್ವಿತೀಯಕ ಮೆನುಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:809
+msgid ""
+"YouTube integration: Paste the URL of a video with a transcript and it will "
+"be added to the prompt"
+msgstr ""
+"ಯೂಟ್ಯೂಬ್ ಏಕೀಕರಣ: ವೀಡಿಯೊದ URL ಅನ್ನು ಪ್ರತಿಲೇಖನದೊಂದಿಗೆ ಅಂಟಿಸಿ ಮತ್ತು ಅದನ್ನು ಪ್ರಾಂಪ್ಟ್‌ಗೆ "
+"ಸೇರಿಸಲಾಗುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:810
+msgid ""
+"Website integration (Experimental): Extract the text from the body of a "
+"website by adding it's URL to the prompt"
+msgstr ""
+"ವೆಬ್‌ಸೈಟ್ ಏಕೀಕರಣ (ಪ್ರಾಯೋಗಿಕ): ವೆಬ್‌ಸೈಟ್‌ನ ದೇಹದಿಂದ ಪಠ್ಯವನ್ನು ಪ್ರಾಂಪ್ಟ್‌ಗೆ ಸೇರಿಸುವ ಮೂಲಕ "
+"ಹೊರತೆಗೆಯಿರಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:811
+msgid "Chat title generation"
+msgstr "ಚಾಟ್ ಶೀರ್ಷಿಕೆ ಉತ್ಪಾದನೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:812
+msgid "Auto resizing of message entry"
+msgstr "ಸಂದೇಶ ಪ್ರವೇಶದ ಆಟೋ ಮರುಗಾತ್ರಗೊಳಿಸುವಿಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:813
+msgid "Chat notifications"
+msgstr "ಚಾಟ್ ಅಧಿಸೂಚನೆಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:814
+msgid "Added indicator when an image is missing"
+msgstr "ಚಿತ್ರ ಕಾಣೆಯಾದಾಗ ಸೂಚಕವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:815
+msgid "Auto rearrange the order of chats when a message is received"
+msgstr "ಸಂದೇಶವನ್ನು ಸ್ವೀಕರಿಸಿದಾಗ ಚಾಟ್‌ಗಳ ಕ್ರಮವನ್ನು ಸ್ವಯಂ ಮರುಹೊಂದಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:816
+msgid "Redesigned file preview dialog"
+msgstr "ಮರುವಿನ್ಯಾಸಗೊಳಿಸಲಾದ ಫೈಲ್ ಪೂರ್ವವೀಕ್ಷಣೆ ಸಂವಾದ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:817
+msgid "Credited new contributors"
+msgstr "ಹೊಸ ಕೊಡುಗೆದಾರರಿಗೆ ಸಲ್ಲುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:818
+msgid "Better stability and optimization"
+msgstr "ಉತ್ತಮ ಸ್ಥಿರತೆ ಮತ್ತು ಆಪ್ಟಿಮೈಸೇಶನ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:819
+msgid "Edit messages to change the context of a conversation"
+msgstr "ಸಂಭಾಷಣೆಯ ಸಂದರ್ಭವನ್ನು ಬದಲಾಯಿಸಲು ಸಂದೇಶಗಳನ್ನು ಸಂಪಾದಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:820
+msgid "Added disclaimers when pulling models"
+msgstr "ಮಾದರಿಗಳನ್ನು ಎಳೆಯುವಾಗ ಹಕ್ಕು ನಿರಾಕರಣೆಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:821
+msgid "Preview files before sending a message"
+msgstr "ಸಂದೇಶವನ್ನು ಕಳುಹಿಸುವ ಮೊದಲು ಫೈಲ್‌ಗಳನ್ನು ಪೂರ್ವವೀಕ್ಷಣೆ ಮಾಡಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:822
+msgid "Better format for date and time on messages"
+msgstr "ಸಂದೇಶಗಳಲ್ಲಿ ದಿನಾಂಕ ಮತ್ತು ಸಮಯಕ್ಕೆ ಉತ್ತಮ ಸ್ವರೂಪ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:823
+msgid "Error and debug logging on terminal"
+msgstr "ಟರ್ಮಿನಲ್‌ನಲ್ಲಿ ದೋಷ ಮತ್ತು ಡೀಬಗ್ ಲಾಗಿಂಗ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:824
+msgid "Auto-hiding sidebar button"
+msgstr "ಸ್ವಯಂ-ಮರೆಮಾಚುವ ಸೈಡ್‌ಬಾರ್ ಬಟನ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:825
+msgid "Various UI tweaks"
+msgstr "ವಿವಿಧ ಯುಐ ಟ್ವೀಕ್‌ಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:827
+msgid "New Models"
+msgstr "ಹೊಸ ಮಾದರಿಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:829
+msgid "Gemma2"
+msgstr "ಗೆಮ್ಮಾ 2"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:830
+msgid "GLM4"
+msgstr "Glm4"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:831
+msgid "Codegeex4"
+msgstr "ಕೋಡ್‌ಜೆಕ್ಸ್ 4"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:832
+msgid "InternLM2"
+msgstr "ಇಂಟರ್ನ್ಲ್ಮ್ 2"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:833
+msgid "Llama3-groq-tool-use"
+msgstr "Llama3-groq-tool-use"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:834
+msgid "Mathstral"
+msgstr "Mathstral"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:835
+msgid "Mistral-nemo"
+msgstr "Mistral-nemo"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:836
+msgid "Firefunction-v2"
+msgstr "Firefunction-v2"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:837
+msgid "Nuextract"
+msgstr "Nuextract"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:839
+msgid "Translations"
+msgstr "ಭಾಷಾಂತರ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:840
+msgid ""
+"These are all the available translations on 1.0.0, thanks to all the "
+"contributors!"
+msgstr ""
+"ಇವೆಲ್ಲವೂ 1.0.0 ರಂದು ಲಭ್ಯವಿರುವ ಅನುವಾದಗಳಾಗಿವೆ, ಎಲ್ಲಾ ಕೊಡುಗೆದಾರರಿಗೆ ಧನ್ಯವಾದಗಳು!"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:842
+msgid "Russian: Alex K"
+msgstr "ರಷ್ಯನ್: ಅಲೆಕ್ಸ್ ಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:843
+msgid "Spanish: Jeffser"
+msgstr "ಸ್ಪ್ಯಾನಿಷ್: ಜೆಫ್ಸರ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:844
+msgid "Brazilian Portuguese: Daimar Stein"
+msgstr "ಬ್ರೆಜಿಲಿಯನ್ ಪೋರ್ಚುಗೀಸ್: ಡೈಮಾರ್ ಸ್ಟೈನ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:845
+msgid "French: Louis Chauvet-Villaret"
+msgstr "ಫ್ರೆಂಚ್: ಲೂಯಿಸ್ ಚೌವೆಟ್-ವಿಲ್ಲರೆಟ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:846
+msgid "Norwegian: CounterFlow64"
+msgstr "ನಾರ್ವೇಜಿಯನ್: ಕೌಂಟರ್ ಫ್ಲೋ 64"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:847
+msgid "Bengali: Aritra Saha"
+msgstr "ಬಂಗಾಳಿ: ಆರಿತ್ರಾ ಸಹಾ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:848
+msgid "Simplified Chinese: Yuehao Sui"
+msgstr "ಸರಳೀಕೃತ ಚೈನೀಸ್: ಯುಹಾವೊ ಸುಯಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:856
+msgid ""
+"Removed DOCX compatibility temporally due to error with python-lxml "
+"dependency"
+msgstr ""
+"ಪೈಥಾನ್-ಎಲ್ಎಕ್ಸ್ಎಂಎಲ್ ಅವಲಂಬನೆಯೊಂದಿಗೆ ದೋಷದಿಂದಾಗಿ ತಾತ್ಕಾಲಿಕವಾಗಿ ತೆಗೆದುಹಾಕಲಾದ ಡಾಕ್ಸ್ "
+"ಹೊಂದಾಣಿಕೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:862
+#: data/com.jeffser.Alpaca.metainfo.xml.in:892
+#: data/com.jeffser.Alpaca.metainfo.xml.in:913
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1118
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1175
+msgid "Big Update"
+msgstr "ದೊಡ್ಡ ನವೀಕರಣ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:864
+msgid "Added compatibility for PDF"
+msgstr "ಪಿಡಿಎಫ್‌ಗೆ ಹೊಂದಾಣಿಕೆ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:865
+msgid "Added compatibility for DOCX"
+msgstr "DOCX ಗಾಗಿ ಹೊಂದಾಣಿಕೆಯನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:866
+msgid "Merged 'file attachment' menu into one button"
+msgstr "'ಫೈಲ್ ಲಗತ್ತು' ಮೆನುವನ್ನು ಒಂದು ಬಟನ್ ಆಗಿ ವಿಲೀನಗೊಳಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:873
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1066
+msgid "Quick Fix"
+msgstr "ತ್ವರಿತ ಫಿಕ್ಸ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:874
+msgid ""
+"There were some errors when transitioning from the old version of chats to "
+"the new version. I apologize if this caused any corruption in your chat "
+"history. This should be the only time such a transition is needed."
+msgstr ""
+"ಚಾಟ್‌ಗಳ ಹಳೆಯ ಆವೃತ್ತಿಯಿಂದ ಹೊಸ ಆವೃತ್ತಿಗೆ ಪರಿವರ್ತಿಸುವಾಗ ಕೆಲವು ದೋಷಗಳಿವೆ. ಇದು ನಿಮ್ಮ ಚಾಟ್ "
+"ಇತಿಹಾಸದಲ್ಲಿ ಯಾವುದೇ ಭ್ರಷ್ಟಾಚಾರವನ್ನು ಉಂಟುಮಾಡಿದರೆ ನಾನು ಕ್ಷಮೆಯಾಚಿಸುತ್ತೇನೆ. ಅಂತಹ "
+"ಪರಿವರ್ತನೆಯ ಅಗತ್ಯವಿರುವ ಏಕೈಕ ಸಮಯ ಇದು."
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:880
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1032
+msgid "Huge Update"
+msgstr "ಬೃಹತ್ ನವೀಕರಣ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:882
+msgid "Added: Support for plain text files"
+msgstr "ಸೇರಿಸಲಾಗಿದೆ: ಸರಳ ಪಠ್ಯ ಫೈಲ್‌ಗಳಿಗೆ ಬೆಂಬಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:883
+msgid "Added: New backend system for storing messages"
+msgstr "ಸೇರಿಸಲಾಗಿದೆ: ಸಂದೇಶಗಳನ್ನು ಸಂಗ್ರಹಿಸಲು ಹೊಸ ಬ್ಯಾಕೆಂಡ್ ಸಿಸ್ಟಮ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:884
+msgid "Added: Support for changing Ollama's overrides"
+msgstr "ಸೇರಿಸಲಾಗಿದೆ: ಆಲಾಮಾ ಅವರ ಅತಿಕ್ರಮಣಗಳನ್ನು ಬದಲಾಯಿಸಲು ಬೆಂಬಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:885
+msgid "General Optimization"
+msgstr "ಸಾಮಾನ್ಯ ಆಪ್ಟಿಮೈಸೇಶನ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:894
+msgid "Added: Support for GGUF models (experimental)"
+msgstr "ಸೇರಿಸಲಾಗಿದೆ: GGUF ಮಾದರಿಗಳಿಗೆ ಬೆಂಬಲ (ಪ್ರಾಯೋಗಿಕ)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:895
+msgid "Added: Support for customization and creation of models"
+msgstr "ಸೇರಿಸಲಾಗಿದೆ: ಮಾದರಿಗಳ ಗ್ರಾಹಕೀಕರಣ ಮತ್ತು ರಚನೆಗೆ ಬೆಂಬಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:896
+msgid "Fixed: Icons don't appear on non Gnome systems"
+msgstr "ಸ್ಥಿರ: ಗ್ನೋಮ್ ಅಲ್ಲದ ವ್ಯವಸ್ಥೆಗಳಲ್ಲಿ ಐಕಾನ್‌ಗಳು ಗೋಚರಿಸುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:897
+msgid "Update Ollama to v0.1.39"
+msgstr "ಒಲ್ಲಾಮಾವನ್ನು v0.1.39 ಗೆ ನವೀಕರಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:906
+msgid ""
+"Fixed: app didn't open if models tweaks wasn't present in the config files"
+msgstr "ಸ್ಥಿರ: ಸಂರಚನಾ ಫೈಲ್‌ಗಳಲ್ಲಿ ಮಾದರಿಗಳು ಟ್ವೀಕ್‌ಗಳು ಇಲ್ಲದಿದ್ದರೆ ಅಪ್ಲಿಕೇಶನ್ ತೆರೆಯಲಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:915
+msgid "Changed multiple icons (paper airplane for the send button)"
+msgstr "ಬಹು ಐಕಾನ್‌ಗಳನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ (ಕಳುಹಿಸುವ ಗುಂಡಿಗಾಗಿ ಪೇಪರ್ ಏರೋಪ್ಲೇನ್)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:916
+msgid "Combined export / import chat buttons into a menu"
+msgstr "ರಫ್ತು / ಆಮದು ಚಾಟ್ ಗುಂಡಿಗಳನ್ನು ಮೆನುವಿನಲ್ಲಿ ಸಂಯೋಜಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:917
+msgid "Added 'model tweaks' (temperature, seed, keep_alive)"
+msgstr "'ಮಾದರಿ ಟ್ವೀಕ್ಸ್' (ತಾಪಮಾನ, ಬೀಜ, ಕೀಪ್_ಅಲಿವ್) ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:918
+msgid "Fixed send / stop button"
+msgstr "ಸ್ಥಿರ ಕಳುಹಿಸಿ / ನಿಲ್ಲಿಸಿ ಬಟನ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:919
+msgid "Fixed app not checking if remote connection works when starting"
+msgstr ""
+"ಸ್ಥಿರ ಅಪ್ಲಿಕೇಶನ್ ಪ್ರಾರಂಭಿಸುವಾಗ ರಿಮೋಟ್ ಸಂಪರ್ಕ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆಯೇ ಎಂದು "
+"ಪರಿಶೀಲಿಸಲಾಗುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:926
+msgid "Daily Update"
+msgstr "ದೈನಂದಿನ ನವೀಕರಣ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:928
+msgid "Added text ellipsis to chat name so it doesn't change the button width"
+msgstr ""
+"ಚಾಟ್ ಹೆಸರಿಗೆ ಪಠ್ಯ ಎಲಿಪ್ಸಿಸ್ ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ ಆದ್ದರಿಂದ ಅದು ಬಟನ್ ಅಗಲವನ್ನು "
+"ಬದಲಾಯಿಸುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:929
+msgid "New shortcut for creating a chat (CTRL+N)"
+msgstr "ಚಾಟ್ ರಚಿಸಲು ಹೊಸ ಶಾರ್ಟ್‌ಕಟ್ (Ctrl+n)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:930
+msgid "New message entry design"
+msgstr "ಹೊಸ ಸಂದೇಶ ಪ್ರವೇಶ ವಿನ್ಯಾಸ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:931
+msgid "Fixed: Can't rename the same chat multiple times"
+msgstr "ಸ್ಥಿರ: ಒಂದೇ ಚಾಟ್ ಅನ್ನು ಅನೇಕ ಬಾರಿ ಮರುಹೆಸರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:938
+msgid "The fix"
+msgstr "ಫಿಕ್ಸ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:940
+msgid ""
+"Fixed: Ollama instance keeps running on the background even when it is "
+"disabled"
+msgstr "ಸ್ಥಿರ: ಒಲ್ಲಾಮಾ ನಿದರ್ಶನವು ನಿಷ್ಕ್ರಿಯಗೊಂಡಾಗಲೂ ಹಿನ್ನೆಲೆಯಲ್ಲಿ ಚಾಲನೆಯಲ್ಲಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:941
+msgid "Fixed: Can't pull models on the integrated instance"
+msgstr "ಸ್ಥಿರ: ಸಂಯೋಜಿತ ನಿದರ್ಶನದಲ್ಲಿ ಮಾದರಿಗಳನ್ನು ಎಳೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:948
+msgid "Quick tweaks"
+msgstr "ತ್ವರಿತ ಟ್ವೀಕ್ಸ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:950
+msgid "Added progress bar to models that are being pulled"
+msgstr "ಎಳೆಯಲಾಗುತ್ತಿರುವ ಮಾದರಿಗಳಿಗೆ ಪ್ರಗತಿ ಪಟ್ಟಿಯನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:951
+msgid "Added size to tags when pulling a model"
+msgstr "ಮಾದರಿಯನ್ನು ಎಳೆಯುವಾಗ ಟ್ಯಾಗ್‌ಗಳಿಗೆ ಗಾತ್ರವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:952
+msgid "General optimizations on the background"
+msgstr "ಹಿನ್ನೆಲೆಯಲ್ಲಿ ಸಾಮಾನ್ಯ ಆಪ್ಟಿಮೈಸೇಶನ್‌ಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:959
+msgid "Quick fixes"
+msgstr "ತ್ವರಿತ ಪರಿಹಾರಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:961
+msgid "Fixed: Scroll when message is received"
+msgstr "ಸ್ಥಿರ: ಸಂದೇಶವನ್ನು ಸ್ವೀಕರಿಸಿದಾಗ ಸ್ಕ್ರಾಲ್ ಮಾಡಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:962
+msgid "Fixed: Content doesn't change when creating a new chat"
+msgstr "ಸ್ಥಿರ: ಹೊಸ ಚಾಟ್ ರಚಿಸುವಾಗ ವಿಷಯ ಬದಲಾಗುವುದಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:963
+msgid "Added 'Featured Models' page on welcome dialog"
+msgstr "ಸ್ವಾಗತ ಸಂವಾದದಲ್ಲಿ 'ವೈಶಿಷ್ಟ್ಯಗೊಳಿಸಿದ ಮಾದರಿಗಳು' ಪುಟವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:970
+msgid "Nice Update"
+msgstr "ಉತ್ತಮ ನವೀಕರಣ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:972
+msgid "UI tweaks (Thanks Nokse22)"
+msgstr "ಯುಐ ಟ್ವೀಕ್ಸ್ (ಧನ್ಯವಾದಗಳು ನೋಕ್ಸೆ 22)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:974
+msgid "Metadata fixes"
+msgstr "ಮೆಟಾಡೇಟಾ ಪರಿಹಾರಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:981
+msgid "Quick fix"
+msgstr "ತ್ವರಿತ ಫಿಕ್ಸ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:983
+msgid "Updated Spanish translation"
+msgstr "ಸ್ಪ್ಯಾನಿಷ್ ಅನುವಾದವನ್ನು ನವೀಕರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:984
+msgid "Added compatibility for PNG"
+msgstr "ಪಿಎನ್‌ಜಿಗೆ ಹೊಂದಾಣಿಕೆ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:991
+msgid "New Update"
+msgstr "ಹೊಸ ನವೀಕರಣ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:994
+msgid "Added image recognition to more models"
+msgstr "ಹೆಚ್ಚಿನ ಮಾದರಿಗಳಿಗೆ ಚಿತ್ರ ಗುರುತಿಸುವಿಕೆಯನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:995
+msgid "Added Brazilian Portuguese translation (Thanks Daimaar Stein)"
+msgstr "ಬ್ರೆಜಿಲಿಯನ್ ಪೋರ್ಚುಗೀಸ್ ಅನುವಾದವನ್ನು ಸೇರಿಸಲಾಗಿದೆ (ಧನ್ಯವಾದಗಳು ಡೈಮಾರ್ ಸ್ಟೈನ್)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:996
+msgid "Refined the general UI (Thanks Nokse22)"
+msgstr "ಸಾಮಾನ್ಯ ಯುಐ ಅನ್ನು ಪರಿಷ್ಕರಿಸಲಾಗಿದೆ (ಧನ್ಯವಾದಗಳು ನೋಕ್ಸೆ 22)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:997
+msgid "Added 'delete message' feature"
+msgstr "'ಸಂದೇಶವನ್ನು ಅಳಿಸು' ವೈಶಿಷ್ಟ್ಯವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:998
+msgid ""
+"Added metadata so that software distributors know that the app is compatible "
+"with mobile"
+msgstr ""
+"ಮೆಟಾಡೇಟಾವನ್ನು ಸೇರಿಸಲಾಗಿದೆ ಆದ್ದರಿಂದ ಅಪ್ಲಿಕೇಶನ್ ಮೊಬೈಲ್‌ನೊಂದಿಗೆ ಹೊಂದಿಕೊಳ್ಳುತ್ತದೆ ಎಂದು "
+"ಸಾಫ್ಟ್‌ವೇರ್ ವಿತರಕರು ತಿಳಿದಿದ್ದಾರೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:999
+msgid ""
+"Changed 'send' shortcut to just the return/enter key (to add a new line use "
+"shift+return)"
+msgstr ""
+"ಕೇವಲ ರಿಟರ್ನ್/ಎಂಟರ್ ಕೀಲಿಗೆ 'ಕಳುಹಿಸು' ಶಾರ್ಟ್‌ಕಟ್ ಅನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ (ಹೊಸ ಸಾಲನ್ನು "
+"ಸೇರಿಸಲು ಶಿಫ್ಟ್+ರಿಟರ್ನ್ ಬಳಸಿ)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1006
+msgid "Bug Fixes"
+msgstr "ದೋಷ ಪರಿಹಾರಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1008
+msgid "Fixed: Minor spelling mistake"
+msgstr "ಸ್ಥಿರ: ಸಣ್ಣ ಕಾಗುಣಿತ ತಪ್ಪು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1009
+msgid "Added 'mobile' as a supported form factor"
+msgstr "ಬೆಂಬಲಿತ ಫಾರ್ಮ್ ಅಂಶವಾಗಿ 'ಮೊಬೈಲ್' ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1010
+msgid "Fixed: 'Connection Error' dialog not working properly"
+msgstr "ಸ್ಥಿರ: 'ಸಂಪರ್ಕ ದೋಷ' ಸಂವಾದ ಸರಿಯಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1011
+msgid "Fixed: App might freeze randomly on startup"
+msgstr "ಸ್ಥಿರ: ಅಪ್ಲಿಕೇಶನ್ ಪ್ರಾರಂಭದಲ್ಲಿ ಯಾದೃಚ್ ly ಿಕವಾಗಿ ಫ್ರೀಜ್ ಮಾಡಬಹುದು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1012
+msgid "Changed 'chats' label on sidebar for 'Alpaca'"
+msgstr "'ಅಲ್ಪಕಾ' ಗಾಗಿ ಸೈಡ್‌ಬಾರ್‌ನಲ್ಲಿ 'ಚಾಟ್ಸ್' ಲೇಬಲ್ ಅನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1019
+msgid "Cool Update"
+msgstr "ತಂಪಾದ ನವೀಕರಣ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1021
+msgid "Better design for chat window"
+msgstr "ಚಾಟ್ ವಿಂಡೋಗಾಗಿ ಉತ್ತಮ ವಿನ್ಯಾಸ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1022
+msgid "Better design for chat sidebar"
+msgstr "ಚಾಟ್ ಸೈಡ್‌ಬಾರ್‌ಗಾಗಿ ಉತ್ತಮ ವಿನ್ಯಾಸ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1023
+msgid "Fixed remote connections"
+msgstr "ಸ್ಥಿರ ದೂರಸ್ಥ ಸಂಪರ್ಕಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1024
+msgid "Fixed Ollama restarting in loop"
+msgstr "ಸ್ಥಿರ ಒಲ್ಲಾಮಾ ಲೂಪ್‌ನಲ್ಲಿ ಮರುಪ್ರಾರಂಭಿಸಲಾಗುತ್ತಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1025
+msgid "Other cool backend stuff"
+msgstr "ಇತರ ಕೂಲ್ ಬ್ಯಾಕೆಂಡ್ ಸ್ಟಫ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1034
+msgid "Added Ollama as part of Alpaca, Ollama will run in a sandbox"
+msgstr "ಅಲ್ಪಕಾ ಭಾಗವಾಗಿ ಒಲ್ಲಾಮಾವನ್ನು ಸೇರಿಸಲಾಗಿದೆ, ಒಲ್ಲಾಮಾ ಸ್ಯಾಂಡ್‌ಬಾಕ್ಸ್‌ನಲ್ಲಿ ಓಡುತ್ತಾರೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1035
+msgid "Added option to connect to remote instances (how it worked before)"
+msgstr ""
+"ದೂರಸ್ಥ ನಿದರ್ಶನಗಳಿಗೆ ಸಂಪರ್ಕಿಸಲು ಆಯ್ಕೆ ಸೇರಿಸಲಾಗಿದೆ (ಅದು ಮೊದಲು ಹೇಗೆ ಕೆಲಸ ಮಾಡಿದೆ)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1036
+msgid "Added option to import and export chats"
+msgstr "ಚಾಟ್‌ಗಳನ್ನು ಆಮದು ಮಾಡಲು ಮತ್ತು ರಫ್ತು ಮಾಡಲು ಆಯ್ಕೆ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1037
+msgid "Added option to run Alpaca with Ollama in the background"
+msgstr "ಹಿನ್ನೆಲೆಯಲ್ಲಿ ಆಲಾಮಾ ಅವರೊಂದಿಗೆ ಅಲ್ಪಕಾವನ್ನು ಚಲಾಯಿಸಲು ಆಯ್ಕೆ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1038
+msgid "Added preferences dialog"
+msgstr "ಆದ್ಯತೆಗಳ ಸಂವಾದವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1039
+msgid "Changed the welcome dialog"
+msgstr "ಸ್ವಾಗತ ಸಂವಾದವನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1041
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1058
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1070
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1089
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1110
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1126
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1142
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1156
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1166
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1184
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1206
+msgid "Please report any errors to the issues page, thank you."
+msgstr "ದಯವಿಟ್ಟು ಯಾವುದೇ ದೋಷಗಳನ್ನು ಸಮಸ್ಯೆಗಳ ಪುಟಕ್ಕೆ ವರದಿ ಮಾಡಿ, ಧನ್ಯವಾದಗಳು."
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1049
+msgid "Yet Another Daily Update"
+msgstr "ಮತ್ತೊಂದು ದೈನಂದಿನ ನವೀಕರಣ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1051
+msgid "Added better UI for 'Manage Models' dialog"
+msgstr "'ಮಾದರಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ' ಸಂವಾದಕ್ಕಾಗಿ ಉತ್ತಮ UI ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1052
+msgid "Added better UI for the chat sidebar"
+msgstr "ಚಾಟ್ ಸೈಡ್‌ಬಾರ್‌ಗಾಗಿ ಉತ್ತಮ ಯುಐ ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1053
+msgid ""
+"Replaced model description with a button to open Ollama's website for the "
+"model"
+msgstr ""
+"ಮಾದರಿಗಾಗಿ ಒಲ್ಲಾಮಾ ಅವರ ವೆಬ್‌ಸೈಟ್ ತೆರೆಯಲು ಬಟನ್‌ನೊಂದಿಗೆ ಮಾದರಿ ವಿವರಣೆಯನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1054
+msgid "Added myself to the credits as the spanish translator"
+msgstr "ಸ್ಪ್ಯಾನಿಷ್ ಭಾಷಾಂತರಕಾರನಾಗಿ ಕ್ರೆಡಿಟ್‌ಗಳಿಗೆ ನನ್ನನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1055
+msgid "Using XDG properly to get config folder"
+msgstr "ಸಂರಚನಾ ಫೋಲ್ಡರ್ ಪಡೆಯಲು XDG ಅನ್ನು ಸರಿಯಾಗಿ ಬಳಸುವುದು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1056
+msgid "Update for translations"
+msgstr "ಅನುವಾದಗಳಿಗಾಗಿ ನವೀಕರಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1068
+msgid "The last update had some mistakes in the description of the update"
+msgstr "ಕೊನೆಯ ನವೀಕರಣವು ನವೀಕರಣದ ವಿವರಣೆಯಲ್ಲಿ ಕೆಲವು ತಪ್ಪುಗಳನ್ನು ಹೊಂದಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1078
+msgid "Another Daily Update"
+msgstr "ಮತ್ತೊಂದು ದೈನಂದಿನ ನವೀಕರಣ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1080
+msgid "Added full Spanish translation"
+msgstr "ಪೂರ್ಣ ಸ್ಪ್ಯಾನಿಷ್ ಅನುವಾದವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1081
+msgid "Added support for background pulling of multiple models"
+msgstr "ಬಹು ಮಾದರಿಗಳ ಹಿನ್ನೆಲೆ ಎಳೆಯಲು ಬೆಂಬಲವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1082
+msgid "Added interrupt button"
+msgstr "ಅಡಚಣೆ ಬಟನ್ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1083
+msgid "Added basic shortcuts"
+msgstr "ಮೂಲ ಶಾರ್ಟ್‌ಕಟ್‌ಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1084
+msgid "Better translation support"
+msgstr "ಉತ್ತಮ ಅನುವಾದ ಬೆಂಬಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1085
+msgid ""
+"User can now leave chat name empty when creating a new one, it will add a "
+"placeholder name"
+msgstr ""
+"ಹೊಸದನ್ನು ರಚಿಸುವಾಗ ಬಳಕೆದಾರರು ಈಗ ಚಾಟ್ ಹೆಸರನ್ನು ಖಾಲಿ ಬಿಡಬಹುದು, ಅದು ಪ್ಲೇಸ್‌ಹೋಲ್ಡರ್ "
+"ಹೆಸರನ್ನು ಸೇರಿಸುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1086
+msgid "Better scalling for different window sizes"
+msgstr "ವಿಭಿನ್ನ ವಿಂಡೋ ಗಾತ್ರಗಳಿಗೆ ಉತ್ತಮ ಸ್ಕಲ್ಲಿಂಗ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1087
+msgid "Fixed: Can't close app if first time setup fails"
+msgstr "ಸ್ಥಿರ: ಮೊದಲ ಬಾರಿಗೆ ಸೆಟಪ್ ವಿಫಲವಾದರೆ ಅಪ್ಲಿಕೇಶನ್ ಮುಚ್ಚಲು ಸಾಧ್ಯವಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1097
+msgid "Really Big Update"
+msgstr "ನಿಜವಾಗಿಯೂ ದೊಡ್ಡ ನವೀಕರಣ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1099
+msgid "Added multiple chats support!"
+msgstr "ಬಹು ಚಾಟ್‌ಗಳ ಬೆಂಬಲವನ್ನು ಸೇರಿಸಲಾಗಿದೆ!"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1100
+msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
+msgstr ""
+"ಪ್ಯಾಂಗೋ ಮಾರ್ಕ್ಅಪ್ ಬೆಂಬಲವನ್ನು ಸೇರಿಸಲಾಗಿದೆ (ದಪ್ಪ, ಪಟ್ಟಿ, ಶೀರ್ಷಿಕೆ, ಉಪಶೀರ್ಷಿಕೆ, ಮೊನೊಸ್ಪೇಸ್)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1101
+msgid "Added autoscroll if the user is at the bottom of the chat"
+msgstr "ಬಳಕೆದಾರರು ಚಾಟ್‌ನ ಕೆಳಭಾಗದಲ್ಲಿದ್ದರೆ ಆಟೊಸ್ಕ್ರಾಲ್ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1102
+msgid "Added support for multiple tags on a single model"
+msgstr "ಒಂದೇ ಮಾದರಿಯಲ್ಲಿ ಬಹು ಟ್ಯಾಗ್‌ಗಳಿಗೆ ಬೆಂಬಲವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1103
+msgid "Added better model management dialog"
+msgstr "ಉತ್ತಮ ಮಾದರಿ ನಿರ್ವಹಣಾ ಸಂವಾದವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1104
+msgid "Added loading spinner when sending message"
+msgstr "ಸಂದೇಶ ಕಳುಹಿಸುವಾಗ ಲೋಡಿಂಗ್ ಸ್ಪಿನ್ನರ್ ಅನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1105
+msgid "Added notifications if app is not active and a model pull finishes"
+msgstr ""
+"ಅಪ್ಲಿಕೇಶನ್ ಸಕ್ರಿಯವಾಗಿಲ್ಲದಿದ್ದರೆ ಮತ್ತು ಮಾದರಿ ಪುಲ್ ಮುಗಿದಿದ್ದರೆ ಅಧಿಸೂಚನೆಗಳನ್ನು "
+"ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1106
+msgid "Added new symbolic icon"
+msgstr "ಹೊಸ ಸಾಂಕೇತಿಕ ಐಕಾನ್ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1107
+msgid "Added frame to message textview widget"
+msgstr "ಸಂದೇಶ ಪಠ್ಯ ವೀಕ್ಷಣೆ ವಿಜೆಟ್‌ಗೆ ಫ್ರೇಮ್ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1108
+msgid "Fixed \"code blocks shouldn't be editable\""
+msgstr "ಸ್ಥಿರ: \"ಕೋಡ್ ಬ್ಲಾಕ್ಗಳನ್ನು ಸಂಪಾದಿಸಬಾರದು\""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1120
+msgid "Added code highlighting"
+msgstr "ಕೋಡ್ ಹೈಲೈಟ್ ಮಾಡಲಾದ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1121
+msgid "Added image recognition (llava model)"
+msgstr "ಚಿತ್ರ ಗುರುತಿಸುವಿಕೆ (ಲಾವಾ ಮಾದರಿ) ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1122
+msgid "Added multiline prompt"
+msgstr "ಮಲ್ಟಿಲೈನ್ ಪ್ರಾಂಪ್ಟ್ ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1123
+msgid "Fixed some small bugs"
+msgstr "ಕೆಲವು ಸಣ್ಣ ದೋಷಗಳನ್ನು ಪರಿಹರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1124
+msgid "General optimization"
+msgstr "ಸಾಮಾನ್ಯ ಆಪ್ಟಿಮೈಸೇಶನ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1134
+msgid "Fixes and features"
+msgstr "ಪರಿಹಾರಗಳು ಮತ್ತು ವೈಶಿಷ್ಟ್ಯಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1136
+msgid "Russian translation (thanks github/alexkdeveloper)"
+msgstr "ರಷ್ಯಾದ ಅನುವಾದ (ಧನ್ಯವಾದಗಳು ಗಿಟ್‌ಹಬ್/ಅಲೆಕ್ಸ್‌ಕ್ ಡೆವಲಪರ್)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1137
+msgid "Fixed: Cannot close app on first setup"
+msgstr "ಸ್ಥಿರ: ಮೊದಲ ಸೆಟಪ್‌ನಲ್ಲಿ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಮುಚ್ಚಲು ಸಾಧ್ಯವಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1138
+msgid "Fixed: Brand colors for Flathub"
+msgstr "ಸ್ಥಿರ: ಫ್ಲಾಥಬ್‌ಗಾಗಿ ಬ್ರಾಂಡ್ ಬಣ್ಣಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1139
+msgid "Fixed: App description"
+msgstr "ಸ್ಥಿರ: ಅಪ್ಲಿಕೇಶನ್ ವಿವರಣೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1140
+msgid "Fixed: Only show 'save changes dialog' when you actually change the url"
+msgstr ""
+"ಸ್ಥಿರ: ನೀವು ನಿಜವಾಗಿಯೂ URL ಅನ್ನು ಬದಲಾಯಿಸಿದಾಗ 'ಬದಲಾವಣೆಗಳ ಸಂವಾದ' ಅನ್ನು ಮಾತ್ರ ತೋರಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1150
+msgid "0.2.2 Bug fixes"
+msgstr "0.2.2 ದೋಷ ಪರಿಹಾರಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1152
+msgid "Toast messages appearing behind dialogs"
+msgstr "ಟೋಸ್ಟ್ ಸಂದೇಶಗಳು ಸಂವಾದಗಳ ಹಿಂದೆ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತವೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1153
+msgid "Local model list not updating when changing servers"
+msgstr "ಸರ್ವರ್‌ಗಳನ್ನು ಬದಲಾಯಿಸುವಾಗ ಸ್ಥಳೀಯ ಮಾದರಿ ಪಟ್ಟಿ ನವೀಕರಿಸುತ್ತಿಲ್ಲ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1154
+msgid "Closing the setup dialog closes the whole app"
+msgstr "ಸೆಟಪ್ ಸಂವಾದವನ್ನು ಮುಚ್ಚುವುದು ಇಡೀ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಮುಚ್ಚುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1164
+msgid "0.2.1 Data saving fix"
+msgstr "0.2.1 ಡೇಟಾ ಉಳಿತಾಯ ಫಿಕ್ಸ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1165
+msgid ""
+"The app didn't save the config files and chat history to the right "
+"directory, this is now fixed"
+msgstr ""
+"ಅಪ್ಲಿಕೇಶನ್ ಸಂರಚನಾ ಫೈಲ್‌ಗಳನ್ನು ಮತ್ತು ಚಾಟ್ ಇತಿಹಾಸವನ್ನು ಸರಿಯಾದ ಡೈರೆಕ್ಟರಿಗೆ ಉಳಿಸಲಿಲ್ಲ, "
+"ಇದನ್ನು ಈಗ ನಿವಾರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1174
+msgid "0.2.0"
+msgstr "0.2.0"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1176
+msgid "New Features"
+msgstr "ಹೊಸ ವೈಶಿಷ್ಟ್ಯಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1178
+msgid "Restore chat after closing the app"
+msgstr "ಅಪ್ಲಿಕೇಶನ್ ಮುಚ್ಚಿದ ನಂತರ ಚಾಟ್ ಅನ್ನು ಮರುಸ್ಥಾಪಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1179
+msgid "A button to clear the chat"
+msgstr "ಚಾಟ್ ಅನ್ನು ತೆರವುಗೊಳಿಸಲು ಒಂದು ಬಟನ್"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1180
+msgid "Fixed multiple bugs involving how messages are shown"
+msgstr ""
+"ಸಂದೇಶಗಳನ್ನು ಹೇಗೆ ತೋರಿಸಲಾಗುತ್ತದೆ ಎಂಬುದನ್ನು ಒಳಗೊಂಡಿರುವ ಬಹು ದೋಷಗಳನ್ನು ಸ್ಥಿರವಾಗಿ "
+"ಸ್ಥಿರಗೊಳಿಸಿ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1181
+msgid "Added welcome dialog"
+msgstr "ಸ್ವಾಗತ ಸಂವಾದವನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1182
+msgid "More stability"
+msgstr "ಹೆಚ್ಚು ಸ್ಥಿರತೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1192
+msgid "0.1.2 Quick fixes"
+msgstr "0.1.2 ತ್ವರಿತ ಪರಿಹಾರಗಳು"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1193
+msgid ""
+"This release fixes some metadata needed to have a proper Flatpak application"
+msgstr ""
+"ಈ ಬಿಡುಗಡೆಯು ಸರಿಯಾದ ಫ್ಲಾಟ್‌ಪ್ಯಾಕ್ ಅಪ್ಲಿಕೇಶನ್ ಹೊಂದಲು ಅಗತ್ಯವಿರುವ ಕೆಲವು ಮೆಟಾಡೇಟಾವನ್ನು "
+"ಸರಿಪಡಿಸುತ್ತದೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1199
+msgid "0.1.1 Stable Release"
+msgstr "0.1.1 ಸ್ಥಿರ ಬಿಡುಗಡೆ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1200
+msgid "This is the first public version of Alpaca"
+msgstr "ಇದು ಅಲ್ಪಕಾದ ಮೊದಲ ಸಾರ್ವಜನಿಕ ಆವೃತ್ತಿಯಾಗಿದೆ"
+
+#: src/alpaca_search_provider.py.in:41
+msgid "Open chat"
+msgstr "ಓಪನ್ ಚಾಟ್"
+
+#: src/alpaca_search_provider.py.in:42
+msgid "Quick ask"
+msgstr "ತ್ವರಿತ ಕೇಳಿ"
+
+#: src/constants.py:95
+msgid "Never"
+msgstr "ಎಂದಿಗೂ"
+
+#: src/constants.py:96
+msgid "When Alpaca is Focused"
+msgstr "ಅಲ್ಪಕಾ ಕೇಂದ್ರೀಕರಿಸಿದಾಗ"
+
+#: src/constants.py:97
+msgid "Always"
+msgstr "ಯಾವಾಗಲೂ"
+
+#: src/main.py:204
+msgid "Documentation"
+msgstr "ದಸ್ತಾವತಿ"
+
+#: src/main.py:205
+msgid "Become a Sponsor"
+msgstr "ಪ್ರಾಯೋಜಕರಾಗಿ"
+
+#: src/main.py:206
+msgid "Discussions"
+msgstr "ಚರ್ಚೆ"
+
+#: src/ollama_models.py:33
+msgid ""
+"New state of the art 70B model. Llama 3.3 70B offers similar performance "
+"compared to the Llama 3.1 405B model."
+msgstr ""
+"ಕಲೆಯ ಹೊಸ ಸ್ಥಿತಿ 70 ಬಿ ಮಾದರಿ. ಲಾಮಾ 3.3 70 ಬಿ ಲಾಮಾ 3.1 405 ಬಿ ಮಾದರಿಗೆ ಹೋಲಿಸಿದರೆ "
+"ಇದೇ ರೀತಿಯ ಕಾರ್ಯಕ್ಷಮತೆಯನ್ನು ನೀಡುತ್ತದೆ."
+
+#: src/ollama_models.py:56
+msgid "QwQ is the reasoning model of the Qwen series."
+msgstr "QWQ ಕ್ವೆನ್ ಸರಣಿಯ ತಾರ್ಕಿಕ ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:84
+msgid ""
+"Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
+"generative models in 11B and 90B sizes."
+msgstr ""
+"ಲಾಮಾ 3.2 ವಿಷನ್ ಎನ್ನುವುದು 11 ಬಿ ಮತ್ತು 90 ಬಿ ಗಾತ್ರಗಳಲ್ಲಿ ಸೂಚನಾ-ಟ್ಯೂನ್ಡ್ ಇಮೇಜ್ ರೀಸನಿಂಗ್ "
+"ಉತ್ಪಾದಕ ಮಾದರಿಗಳ ಸಂಗ್ರಹವಾಗಿದೆ."
+
+#: src/ollama_models.py:120
+msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
+msgstr "ಮೆಟಾದ ಲಾಮಾ 3.2 1 ಬಿ ಮತ್ತು 3 ಬಿ ಮಾದರಿಗಳೊಂದಿಗೆ ಚಿಕ್ಕದಾಗಿದೆ."
+
+#: src/ollama_models.py:155
+msgid ""
+"Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and "
+"405B parameter sizes."
+msgstr ""
+"ಲಾಮಾ 3.1 ಎನ್ನುವುದು 8 ಬಿ, 70 ಬಿ ಮತ್ತು 405 ಬಿ ಪ್ಯಾರಾಮೀಟರ್ ಗಾತ್ರಗಳಲ್ಲಿ ಲಭ್ಯವಿರುವ ಮೆಟಾದ "
+"ಹೊಸ ಅತ್ಯಾಧುನಿಕ ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:182
+msgid "Meta Llama 3: The most capable openly available LLM to date"
+msgstr "ಮೆಟಾ ಲಾಮಾ 3: ಇಲ್ಲಿಯವರೆಗೆ ಹೆಚ್ಚು ಸಮರ್ಥವಾಗಿ ಲಭ್ಯವಿರುವ ಎಲ್ಎಲ್ಎಂ"
+
+#: src/ollama_models.py:205
+msgid "The 7B model released by Mistral AI, updated to version 0.3."
+msgstr "ಮಿಸ್ಟ್ರಲ್ ಎಐ ಬಿಡುಗಡೆ ಮಾಡಿದ 7 ಬಿ ಮಾದರಿಯನ್ನು ಆವೃತ್ತಿ 0.3 ಗೆ ನವೀಕರಿಸಲಾಗಿದೆ."
+
+#: src/ollama_models.py:229
+msgid ""
+"A high-performing open embedding model with a large token context window."
+msgstr "ದೊಡ್ಡ ಟೋಕನ್ ಸಂದರ್ಭ ವಿಂಡೋದೊಂದಿಗೆ ಹೆಚ್ಚಿನ ಕಾರ್ಯಕ್ಷಮತೆಯ ತೆರೆದ ಎಂಬೆಡಿಂಗ್ ಮಾದರಿ."
+
+#: src/ollama_models.py:258
+msgid ""
+"Gemma is a family of lightweight, state-of-the-art open models built by "
+"Google DeepMind. Updated to version 1.1"
+msgstr ""
+"ಗೆಮ್ಮಾ ಗೂಗಲ್ ಡೀಪ್ ಮೈಂಡ್ ನಿರ್ಮಿಸಿದ ಹಗುರವಾದ, ಅತ್ಯಾಧುನಿಕ ಮುಕ್ತ ಮಾದರಿಗಳ ಕುಟುಂಬವಾಗಿದೆ. "
+"ಆವೃತ್ತಿ 1.1 ಗೆ ನವೀಕರಿಸಲಾಗಿದೆ"
+
+#: src/ollama_models.py:314
+msgid ""
+"Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
+"0.5B to 110B parameters"
+msgstr ""
+"ಕ್ವೆನ್ 1.5 ಅಲಿಬಾಬಾ ಮೇಘವು 0.5 ಬಿ ಯಿಂದ 110 ಬಿ ನಿಯತಾಂಕಗಳವರೆಗೆ ವ್ಯಾಪಿಸಿರುವ ದೊಡ್ಡ "
+"ಭಾಷಾ ಮಾದರಿಗಳ ಸರಣಿಯಾಗಿದೆ"
+
+#: src/ollama_models.py:378
+msgid "Qwen2 is a new series of large language models from Alibaba group"
+msgstr "QWEN2 ಅಲಿಬಾಬಾ ಗ್ರೂಪ್‌ನ ದೊಡ್ಡ ಭಾಷಾ ಮಾದರಿಗಳ ಹೊಸ ಸರಣಿಯಾಗಿದೆ"
+
+#: src/ollama_models.py:407
+msgid ""
+"Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art "
+"open models by Microsoft."
+msgstr ""
+"ಫಿ -3 ಎನ್ನುವುದು ಮೈಕ್ರೋಸಾಫ್ಟ್‌ನ ಹಗುರವಾದ 3 ಬಿ (ಮಿನಿ) ಮತ್ತು 14 ಬಿ (ಮಧ್ಯಮ) ಅತ್ಯಾಧುನಿಕ "
+"ತೆರೆದ ಮಾದರಿಗಳ ಕುಟುಂಬವಾಗಿದೆ."
+
+#: src/ollama_models.py:439
+msgid ""
+"Llama 2 is a collection of foundation language models ranging from 7B to 70B "
+"parameters."
+msgstr ""
+"ಲಾಮಾ 2 ಎನ್ನುವುದು 7 ಬಿ ಯಿಂದ 70 ಬಿ ನಿಯತಾಂಕಗಳವರೆಗಿನ ಅಡಿಪಾಯ ಭಾಷಾ ಮಾದರಿಗಳ "
+"ಸಂಗ್ರಹವಾಗಿದೆ."
+
+#: src/ollama_models.py:501
+msgid ""
+"Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, "
+"encompassing up to 18 trillion tokens. The model supports up to 128K tokens "
+"and has multilingual support."
+msgstr ""
+"QWEN2.5 ಮಾದರಿಗಳನ್ನು ಅಲಿಬಾಬಾದ ಇತ್ತೀಚಿನ ದೊಡ್ಡ-ಪ್ರಮಾಣದ ಡೇಟಾಸೆಟ್‌ನಲ್ಲಿ ಪೂರ್ವಭಾವಿಯಾಗಿ "
+"ಮಾಡಲಾಗಿದೆ, ಇದು 18 ಟ್ರಿಲಿಯನ್ ಟೋಕನ್‌ಗಳನ್ನು ಒಳಗೊಂಡಿದೆ. ಮಾದರಿಯು 128 ಕೆ ಟೋಕನ್‌ಗಳನ್ನು "
+"ಬೆಂಬಲಿಸುತ್ತದೆ ಮತ್ತು ಬಹುಭಾಷಾ ಬೆಂಬಲವನ್ನು ಹೊಂದಿದೆ."
+
+#: src/ollama_models.py:533
+msgid ""
+"Google Gemma 2 is a high-performing and efficient model available in three "
+"sizes: 2B, 9B, and 27B."
+msgstr ""
+"ಗೂಗಲ್ ಗೆಮ್ಮಾ 2 ಮೂರು ಗಾತ್ರಗಳಲ್ಲಿ ಲಭ್ಯವಿರುವ ಉನ್ನತ-ಕಾರ್ಯಕ್ಷಮತೆ ಮತ್ತು ಪರಿಣಾಮಕಾರಿ "
+"ಮಾದರಿಯಾಗಿದೆ: 2 ಬಿ, 9 ಬಿ, ಮತ್ತು 27 ಬಿ."
+
+#: src/ollama_models.py:567
+msgid ""
+"🌋 LLaVA is a novel end-to-end trained large multimodal model that combines "
+"a vision encoder and Vicuna for general-purpose visual and language "
+"understanding. Updated to version 1.6."
+msgstr ""
+"🌋 ಲಾವಾ ಒಂದು ಕಾದಂಬರಿ ಎಂಡ್-ಟು-ಎಂಡ್ ತರಬೇತಿ ಪಡೆದ ದೊಡ್ಡ ಮಲ್ಟಿಮೋಡಲ್ ಮಾದರಿಯಾಗಿದ್ದು, ಇದು "
+"ಸಾಮಾನ್ಯ ಉದ್ದೇಶದ ದೃಶ್ಯ ಮತ್ತು ಭಾಷಾ ತಿಳುವಳಿಕೆಗಾಗಿ ದೃಷ್ಟಿ ಎನ್‌ಕೋಡರ್ ಮತ್ತು ವಿಕುನಾಳನ್ನು "
+"ಸಂಯೋಜಿಸುತ್ತದೆ. ಆವೃತ್ತಿ 1.6 ಗೆ ನವೀಕರಿಸಲಾಗಿದೆ."
+
+#: src/ollama_models.py:604
+msgid ""
+"A large language model that can use text prompts to generate and discuss "
+"code."
+msgstr ""
+"ಪಠ್ಯವನ್ನು ಬಳಸಬಹುದಾದ ದೊಡ್ಡ ಭಾಷಾ ಮಾದರಿಯು ಕೋಡ್ ಅನ್ನು ಉತ್ಪಾದಿಸಲು ಮತ್ತು ಚರ್ಚಿಸಲು ಕೇಳುತ್ತದೆ."
+
+#: src/ollama_models.py:650
+msgid ""
+"The latest series of Code-Specific Qwen models, with significant "
+"improvements in code generation, code reasoning, and code fixing."
+msgstr ""
+"ಕೋಡ್ ಉತ್ಪಾದನೆ, ಕೋಡ್ ತಾರ್ಕಿಕ ಕ್ರಿಯೆ ಮತ್ತು ಕೋಡ್ ಫಿಕ್ಸಿಂಗ್‌ನಲ್ಲಿ ಗಮನಾರ್ಹ ಸುಧಾರಣೆಗಳೊಂದಿಗೆ "
+"ಕೋಡ್-ನಿರ್ದಿಷ್ಟ ಕ್ವೆನ್ ಮಾದರಿಗಳ ಇತ್ತೀಚಿನ ಸರಣಿ."
+
+#: src/ollama_models.py:674
+msgid ""
+"A state-of-the-art 12B model with 128k context length, built by Mistral AI "
+"in collaboration with NVIDIA."
+msgstr ""
+"128 ಕೆ ಸಂದರ್ಭದ ಉದ್ದವನ್ನು ಹೊಂದಿರುವ ಅತ್ಯಾಧುನಿಕ 12 ಬಿ ಮಾದರಿ, ಎನ್‌ವಿಡಿಯಾ ಸಹಯೋಗದೊಂದಿಗೆ "
+"ಮಿಸ್ಟ್ರಲ್ ಎಐ ನಿರ್ಮಿಸಿದೆ."
+
+#: src/ollama_models.py:696
+msgid ""
+"The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
+"model on 3 trillion tokens."
+msgstr ""
+"ಟೈನಿಲ್ಲಮಾ ಪ್ರಾಜೆಕ್ಟ್ 3 ಟ್ರಿಲಿಯನ್ ಟೋಕನ್‌ಗಳಲ್ಲಿ ಕಾಂಪ್ಯಾಕ್ಟ್ 1.1 ಬಿ ಲಾಮಾ ಮಾದರಿಯನ್ನು ತರಬೇತಿ "
+"ಮಾಡಲು ಮುಕ್ತ ಪ್ರಯತ್ನವಾಗಿದೆ."
+
+#: src/ollama_models.py:719
+msgid "State-of-the-art large embedding model from mixedbread.ai"
+msgstr "ಮಿಕ್ಸ್ಟೆಬ್ರೆಡ್.ಎಐನಿಂದ ಅತ್ಯಾಧುನಿಕ ದೊಡ್ಡ ಎಂಬೆಡಿಂಗ್ ಮಾದರಿ"
+
+#: src/ollama_models.py:752
+msgid ""
+"StarCoder2 is the next generation of transparently trained open code LLMs "
+"that comes in three sizes: 3B, 7B and 15B parameters."
+msgstr ""
+"ಸ್ಟಾರ್‌ಕೋಡರ್ 2 ಮುಂದಿನ ಪೀಳಿಗೆಯ ಪಾರದರ್ಶಕವಾಗಿ ತರಬೇತಿ ಪಡೆದ ಓಪನ್ ಕೋಡ್ ಎಲ್‌ಎಮ್ಸ್ ಆಗಿದ್ದು ಅದು "
+"ಮೂರು ಗಾತ್ರಗಳಲ್ಲಿ ಬರುತ್ತದೆ: 3 ಬಿ, 7 ಬಿ ಮತ್ತು 15 ಬಿ ನಿಯತಾಂಕಗಳು."
+
+#: src/ollama_models.py:778
+msgid ""
+"A set of Mixture of Experts (MoE) model with open weights by Mistral AI in "
+"8x7b and 8x22b parameter sizes."
+msgstr ""
+"8x7b ಮತ್ತು 8x22b ಪ್ಯಾರಾಮೀಟರ್ ಗಾತ್ರಗಳಲ್ಲಿ ಮಿಸ್ಟ್ರಾಲ್ AI ಅವರಿಂದ ತೆರೆದ ತೂಕದೊಂದಿಗೆ ತಜ್ಞರ "
+"(MOE) ಮಾದರಿಯ ಮಿಶ್ರಣ."
+
+#: src/ollama_models.py:804
+msgid ""
+"Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
+"experts models that excels at coding tasks. Created by Eric Hartford."
+msgstr ""
+"ಕೋಡಿಂಗ್ ಕಾರ್ಯಗಳಲ್ಲಿ ಉತ್ಕೃಷ್ಟವಾಗಿರುವ ತಜ್ಞರ ಮಾದರಿಗಳ ಮಿಕ್ಸ್ಟ್ರಲ್ ಮಿಶ್ರಣದ ಆಧಾರದ ಮೇಲೆ ಸೆನ್ಸಾರ್ "
+"ಮಾಡದ, 8x7b ಮತ್ತು 8x22b ಸೂಕ್ಷ್ಮ-ಟ್ಯೂನ್ಡ್ ಮಾದರಿಗಳು. ಎರಿಕ್ ಹಾರ್ಟ್ಫೋರ್ಡ್ ರಚಿಸಿದ್ದಾರೆ."
+
+#: src/ollama_models.py:833
+msgid ""
+"CodeGemma is a collection of powerful, lightweight models that can perform a "
+"variety of coding tasks like fill-in-the-middle code completion, code "
+"generation, natural language understanding, mathematical reasoning, and "
+"instruction following."
+msgstr ""
+"ಕೋಡ್‌ಜೆಮ್ಮಾ ಎನ್ನುವುದು ಶಕ್ತಿಯುತ, ಹಗುರವಾದ ಮಾದರಿಗಳ ಸಂಗ್ರಹವಾಗಿದ್ದು, ಫಿಲ್-ಇನ್-ದಿ-ಮಿಡಲ್ ಕೋಡ್ "
+"ಪೂರ್ಣಗೊಳಿಸುವಿಕೆ, ಕೋಡ್ ಉತ್ಪಾದನೆ, ನೈಸರ್ಗಿಕ ಭಾಷಾ ತಿಳುವಳಿಕೆ, ಗಣಿತದ ತಾರ್ಕಿಕತೆ ಮತ್ತು "
+"ಸೂಚನಾ ಅನುಸರಣೆಯಂತಹ ವಿವಿಧ ಕೋಡಿಂಗ್ ಕಾರ್ಯಗಳನ್ನು ನಿರ್ವಹಿಸಬಲ್ಲದು."
+
+#: src/ollama_models.py:861
+msgid ""
+"An open-source Mixture-of-Experts code language model that achieves "
+"performance comparable to GPT4-Turbo in code-specific tasks."
+msgstr ""
+"ಕೋಡ್-ನಿರ್ದಿಷ್ಟ ಕಾರ್ಯಗಳಲ್ಲಿ ಜಿಪಿಟಿ 4-ಟರ್ಬೊಗೆ ಹೋಲಿಸಬಹುದಾದ ಕಾರ್ಯಕ್ಷಮತೆಯನ್ನು ಸಾಧಿಸುವ "
+"ತೆರೆದ ಮೂಲ ಮಿಶ್ರಣ-ತಜ್ಞ ಕೋಡ್ ಭಾಷಾ ಮಾದರಿ."
+
+#: src/ollama_models.py:883
+msgid ""
+"Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
+"outstanding reasoning and language understanding capabilities."
+msgstr ""
+"ಪಿಹೆಚ್‌ಐ -2: ಮೈಕ್ರೋಸಾಫ್ಟ್ ರಿಸರ್ಚ್‌ನ 2.7 ಬಿ ಭಾಷಾ ಮಾದರಿ, ಇದು ಅತ್ಯುತ್ತಮ ತಾರ್ಕಿಕತೆ ಮತ್ತು "
+"ಭಾಷಾ ತಿಳುವಳಿಕೆ ಸಾಮರ್ಥ್ಯಗಳನ್ನು ತೋರಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:910
+msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
+msgstr "ಜಾರ್ಜ್ ಸಂಗ್ ಮತ್ತು ಜರ್ರಾಡ್ ಹೋಪ್ ಅವರಿಂದ ಸೆನ್ಸಾರ್ ಮಾಡದ ಲಾಮಾ 2 ಮಾದರಿ."
+
+#: src/ollama_models.py:945
+msgid ""
+"DeepSeek Coder is a capable coding model trained on two trillion code and "
+"natural language tokens."
+msgstr ""
+"ಡೀಪ್‌ಸೀಕ್ ಕೋಡರ್ ಎರಡು ಟ್ರಿಲಿಯನ್ ಕೋಡ್ ಮತ್ತು ನೈಸರ್ಗಿಕ ಭಾಷಾ ಟೋಕನ್‌ಗಳಲ್ಲಿ ತರಬೇತಿ ಪಡೆದ ಸಮರ್ಥ "
+"ಕೋಡಿಂಗ್ ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:986
+msgid ""
+"A suite of text embedding models by Snowflake, optimized for performance."
+msgstr ""
+"ಸ್ನೋಫ್ಲೇಕ್ ಅವರಿಂದ ಪಠ್ಯ ಎಂಬೆಡಿಂಗ್ ಮಾದರಿಗಳ ಸೂಟ್, ಕಾರ್ಯಕ್ಷಮತೆಗಾಗಿ ಹೊಂದುವಂತೆ ಮಾಡಲಾಗಿದೆ."
+
+#: src/ollama_models.py:1014
+msgid ""
+"State of the art large language model from Microsoft AI with improved "
+"performance on complex chat, multilingual, reasoning and agent use cases."
+msgstr ""
+"ಸಂಕೀರ್ಣ ಚಾಟ್, ಬಹುಭಾಷಾ, ತಾರ್ಕಿಕ ಮತ್ತು ದಳ್ಳಾಲಿ ಬಳಕೆಯ ಸಂದರ್ಭಗಳಲ್ಲಿ ಸುಧಾರಿತ "
+"ಕಾರ್ಯಕ್ಷಮತೆಯೊಂದಿಗೆ ಮೈಕ್ರೋಸಾಫ್ಟ್ ಎಐನಿಂದ ಆರ್ಟ್ ಆಫ್ ಆರ್ಟ್ ದೊಡ್ಡ ಭಾಷಾ ಮಾದರಿ."
+
+#: src/ollama_models.py:1037
+msgid ""
+"The uncensored Dolphin model based on Mistral that excels at coding tasks. "
+"Updated to version 2.8."
+msgstr ""
+"ಕೋಡಿಂಗ್ ಕಾರ್ಯಗಳಲ್ಲಿ ಉತ್ಕೃಷ್ಟವಾಗಿರುವ ಮಿಸ್ಟ್ರಾಲ್ ಆಧಾರಿತ ಸೆನ್ಸಾರ್ ಮಾಡದ ಡಾಲ್ಫಿನ್ ಮಾದರಿ. "
+"ಆವೃತ್ತಿ 2.8 ಗೆ ನವೀಕರಿಸಲಾಗಿದೆ."
+
+#: src/ollama_models.py:1065
+msgid ""
+"Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on "
+"Llama 3 that has a variety of instruction, conversational, and coding skills."
+msgstr ""
+"ಡಾಲ್ಫಿನ್ 2.9 ಎನ್ನುವುದು ಲಾಮಾ 3 ರ ಆಧಾರದ ಮೇಲೆ ಎರಿಕ್ ಹಾರ್ಟ್ಫೋರ್ಡ್ ಅವರ 8 ಬಿ ಮತ್ತು 70 ಬಿ "
+"ಗಾತ್ರಗಳನ್ನು ಹೊಂದಿರುವ ಹೊಸ ಮಾದರಿಯಾಗಿದ್ದು, ಇದು ವಿವಿಧ ಸೂಚನೆಗಳು, ಸಂಭಾಷಣೆ ಮತ್ತು ಕೋಡಿಂಗ್ "
+"ಕೌಶಲ್ಯಗಳನ್ನು ಹೊಂದಿದೆ."
+
+#: src/ollama_models.py:1099
+msgid "Yi 1.5 is a high-performing, bilingual language model."
+msgstr "YI 1.5 ಹೆಚ್ಚಿನ ಕಾರ್ಯಕ್ಷಮತೆಯ, ದ್ವಿಭಾಷಾ ಭಾಷಾ ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:1122
+msgid ""
+"Command R is a Large Language Model optimized for conversational interaction "
+"and long context tasks."
+msgstr ""
+"ಕಮಾಂಡ್ ಆರ್ ಎನ್ನುವುದು ಸಂಭಾಷಣಾ ಸಂವಹನ ಮತ್ತು ದೀರ್ಘ ಸಂದರ್ಭ ಕಾರ್ಯಗಳಿಗಾಗಿ ಹೊಂದುವಂತೆ ದೊಡ್ಡ "
+"ಭಾಷಾ ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:1159
+msgid ""
+"A general-purpose model ranging from 3 billion parameters to 70 billion, "
+"suitable for entry-level hardware."
+msgstr ""
+"3 ಬಿಲಿಯನ್ ನಿಯತಾಂಕಗಳಿಂದ 70 ಬಿಲಿಯನ್ ವರೆಗಿನ ಸಾಮಾನ್ಯ ಉದ್ದೇಶದ ಮಾದರಿ, ಪ್ರವೇಶ ಮಟ್ಟದ "
+"ಯಂತ್ರಾಂಶಕ್ಕೆ ಸೂಕ್ತವಾಗಿದೆ."
+
+#: src/ollama_models.py:1182
+msgid ""
+"A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
+"benchmarks."
+msgstr ""
+"ಲಾಮಾ 3 ರಿಂದ ಉತ್ತಮವಾಗಿ ಟ್ಯೂನ್ ಮಾಡಲಾದ ಲಾವಾ ಮಾದರಿಯು ಹಲವಾರು ಮಾನದಂಡಗಳಲ್ಲಿ ಉತ್ತಮ "
+"ಸ್ಕೋರ್‌ಗಳೊಂದಿಗೆ ಸೂಚಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:1209
+msgid ""
+"Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
+"that are trained to act as helpful assistants."
+msgstr ""
+"ಜೆಫಿರ್ ಎನ್ನುವುದು ಮಿಸ್ಟ್ರಾಲ್ ಮತ್ತು ಮಿಕ್ಸ್ಟ್ರಲ್ ಮಾದರಿಗಳ ಉತ್ತಮ-ಟ್ಯೂನ್ಡ್ ಆವೃತ್ತಿಗಳ ಸರಣಿಯಾಗಿದ್ದು, "
+"ಇದು ಸಹಾಯಕ ಸಹಾಯಕರಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸಲು ತರಬೇತಿ ಪಡೆದಿದೆ."
+
+#: src/ollama_models.py:1231
+msgid ""
+"A lightweight AI model with 3.8 billion parameters with performance "
+"overtaking similarly and larger sized models."
+msgstr ""
+"3.8 ಬಿಲಿಯನ್ ನಿಯತಾಂಕಗಳನ್ನು ಹೊಂದಿರುವ ಹಗುರವಾದ ಎಐ ಮಾದರಿ ಇದೇ ರೀತಿ ಮತ್ತು ದೊಡ್ಡ ಗಾತ್ರದ "
+"ಮಾದರಿಗಳನ್ನು ಹಿಂದಿಕ್ಕುತ್ತದೆ."
+
+#: src/ollama_models.py:1259
+msgid "Embedding models on very large sentence level datasets."
+msgstr "ದೊಡ್ಡ ವಾಕ್ಯ ಮಟ್ಟದ ಡೇಟಾಸೆಟ್‌ಗಳಲ್ಲಿ ಮಾದರಿಗಳನ್ನು ಎಂಬೆಡ್ ಮಾಡುವುದು."
+
+#: src/ollama_models.py:1282
+msgid ""
+"Codestral is Mistral AI’s first-ever code model designed for code generation "
+"tasks."
+msgstr ""
+"ಕೋಡ್‌ಸ್ಟ್ರಾಲ್ ಎನ್ನುವುದು ಕೋಡ್ ಪೀಳಿಗೆಯ ಕಾರ್ಯಗಳಿಗಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾದ ಮಿಸ್ಟ್ರಲ್ ಎಐನ ಮೊದಲ ಕೋಡ್ "
+"ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:1319
+msgid ""
+"StarCoder is a code generation model trained on 80+ programming languages."
+msgstr ""
+"ಸ್ಟಾರ್‌ಕೋಡರ್ ಎನ್ನುವುದು 80+ ಪ್ರೋಗ್ರಾಮಿಂಗ್ ಭಾಷೆಗಳಲ್ಲಿ ತರಬೇತಿ ಪಡೆದ ಕೋಡ್ ಜನರೇಷನ್ "
+"ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:1351
+msgid ""
+"General use chat model based on Llama and Llama 2 with 2K to 16K context "
+"sizes."
+msgstr ""
+"ಸಾಮಾನ್ಯ ಬಳಕೆ ಚಾಟ್ ಮಾದರಿ ಲಾಮಾ ಮತ್ತು ಲಾಮಾ 2 ಅನ್ನು ಆಧರಿಸಿ 2 ಕೆ ನಿಂದ 16 ಕೆ ಸಂದರ್ಭದ "
+"ಗಾತ್ರಗಳೊಂದಿಗೆ."
+
+#: src/ollama_models.py:1388
+msgid "A family of open foundation models by IBM for Code Intelligence"
+msgstr "ಕೋಡ್ ಇಂಟೆಲಿಜೆನ್ಸ್‌ಗಾಗಿ ಐಬಿಎಂನಿಂದ ಓಪನ್ ಫೌಂಡೇಶನ್ ಮಾದರಿಗಳ ಕುಟುಂಬ"
+
+#: src/ollama_models.py:1410
+msgid ""
+"Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
+"Mistral 7B model using the OpenOrca dataset."
+msgstr ""
+"ಮಿಸ್ಟ್ರಲ್ ಓಪನ್ಒರ್ಕಾ 7 ಬಿಲಿಯನ್ ಪ್ಯಾರಾಮೀಟರ್ ಮಾದರಿಯಾಗಿದ್ದು, ಓಪನ್ಒರ್ಕಾ ಡೇಟಾಸೆಟ್ ಬಳಸಿ ಮಿಸ್ಟ್ರಾಲ್ "
+"7 ಬಿ ಮಾದರಿಯ ಮೇಲೆ ಉತ್ತಮವಾಗಿ ಟ್ಯೂನ್ ಮಾಡಲಾಗಿದೆ."
+
+#: src/ollama_models.py:1442
+msgid ""
+"🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
+"a new high-quality dataset."
+msgstr ""
+"135 135 ಮೀ, 360 ಮೀ, ಮತ್ತು 1.7 ಬಿ 🪐 ನಿಯತಾಂಕಗಳನ್ನು ಹೊಂದಿರುವ ಸಣ್ಣ ಮಾದರಿಗಳ ಕುಟುಂಬ, "
+"ಹೊಸ ಉತ್ತಮ-ಗುಣಮಟ್ಟದ ಡೇಟಾಸೆಟ್‌ನಲ್ಲಿ ತರಬೇತಿ ಪಡೆದಿದೆ."
+
+#: src/ollama_models.py:1474
+msgid ""
+"Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
+"Llama 2 uncensored by Eric Hartford."
+msgstr ""
+"Wizard Vicuna ಸೆನ್ಸಾರ್ಸೆಲ್ಡ್ 7 ಬಿ, 13 ಬಿ, ಮತ್ತು 30 ಬಿ ಪ್ಯಾರಾಮೀಟರ್ ಮಾದರಿಯಾಗಿದ್ದು, "
+"ಎರಿಕ್ ಹಾರ್ಟ್ಫೋರ್ಡ್ ಸೆನ್ಸಾರ್ ಮಾಡಿದ ಲಾಮಾ 2 ಅನ್ನು ಆಧರಿಸಿದೆ."
+
+#: src/ollama_models.py:1503
+msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
+msgstr ""
+"ಚೀನೀ ಸಂವಾದ ಸಾಮರ್ಥ್ಯವನ್ನು ಸುಧಾರಿಸಲು ಲಾಮಾ 2 ಆಧಾರಿತ ಮಾದರಿ ದಂಡವನ್ನು ಟ್ಯೂನ್ ಮಾಡಲಾಗಿದೆ."
+
+#: src/ollama_models.py:1526
+msgid ""
+"BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
+"Functionality, Multi-Linguality, and Multi-Granularity."
+msgstr ""
+"ಬಿಜಿಇ-ಎಂ 3 ಎನ್ನುವುದು BAAI ಯ ಹೊಸ ಮಾದರಿಯಾಗಿದ್ದು, ಬಹು-ಕ್ರಿಯಾತ್ಮಕತೆ, ಬಹು-ಭಾಷಾ ಮತ್ತು "
+"ಬಹು-ಗ್ರ್ಯಾನ್ಯುಲಾರಿಟಿಯಲ್ಲಿ ಅದರ ಬಹುಮುಖತೆಗಾಗಿ ಗುರುತಿಸಲಾಗಿದೆ."
+
+#: src/ollama_models.py:1551
+msgid ""
+"A versatile model for AI software development scenarios, including code "
+"completion."
+msgstr ""
+"ಕೋಡ್ ಪೂರ್ಣಗೊಳಿಸುವಿಕೆ ಸೇರಿದಂತೆ ಎಐ ಸಾಫ್ಟ್‌ವೇರ್ ಅಭಿವೃದ್ಧಿ ಸನ್ನಿವೇಶಗಳಿಗೆ ಬಹುಮುಖ ಮಾದರಿ."
+
+#: src/ollama_models.py:1574
+msgid ""
+"A family of open-source models trained on a wide variety of data, surpassing "
+"ChatGPT on various benchmarks. Updated to version 3.5-0106."
+msgstr ""
+"ತೆರೆದ ಮೂಲ ಮಾದರಿಗಳ ಕುಟುಂಬವು ವಿವಿಧ ರೀತಿಯ ದತ್ತಾಂಶಗಳ ಮೇಲೆ ತರಬೇತಿ ಪಡೆದಿದೆ, ವಿವಿಧ "
+"ಮಾನದಂಡಗಳ ಮೇಲೆ ಚಾಟ್‌ಜಿಪಿಟಿಯನ್ನು ಮೀರಿಸಿದೆ. ಆವೃತ್ತಿ 3.5-0106 ಗೆ ನವೀಕರಿಸಲಾಗಿದೆ."
+
+#: src/ollama_models.py:1602
+msgid ""
+"Aya 23, released by Cohere, is a new family of state-of-the-art, "
+"multilingual models that support 23 languages."
+msgstr ""
+"ಕೊಹೆರೆ ಬಿಡುಗಡೆ ಮಾಡಿದ ಅಯಾ 23, ಅತ್ಯಾಧುನಿಕ, ಬಹುಭಾಷಾ ಮಾದರಿಗಳ ಹೊಸ ಕುಟುಂಬವಾಗಿದ್ದು, "
+"ಇದು 23 ಭಾಷೆಗಳನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:1625
+msgid ""
+"CodeQwen1.5 is a large language model pretrained on a large amount of code "
+"data."
+msgstr ""
+"ಕೋಡ್‌ಕ್ವೆನ್ 1.5 ದೊಡ್ಡ ಪ್ರಮಾಣದ ಕೋಡ್ ಡೇಟಾದಲ್ಲಿ ಪೂರ್ವಭಾವಿಯಾಗಿರುವ ದೊಡ್ಡ ಭಾಷಾ ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:1653
+msgid ""
+"The powerful family of models by Nous Research that excels at scientific "
+"discussion and coding tasks."
+msgstr ""
+"ವೈಜ್ಞಾನಿಕ ಚರ್ಚೆ ಮತ್ತು ಕೋಡಿಂಗ್ ಕಾರ್ಯಗಳಲ್ಲಿ ಉತ್ಕೃಷ್ಟವಾಗಿರುವ ನೌಸ್ ಸಂಶೋಧನೆಯ ಮಾದರಿಗಳ ಪ್ರಬಲ "
+"ಕುಟುಂಬ."
+
+#: src/ollama_models.py:1675
+msgid ""
+"Command R+ is a powerful, scalable large language model purpose-built to "
+"excel at real-world enterprise use cases."
+msgstr ""
+"ಕಮಾಂಡ್ ಆರ್+ ಎನ್ನುವುದು ನೈಜ-ಪ್ರಪಂಚದ ಉದ್ಯಮ ಬಳಕೆಯ ಸಂದರ್ಭಗಳಲ್ಲಿ ಉತ್ತಮ ಸಾಧನೆ ಮಾಡಲು "
+"ಶಕ್ತಿಯುತ, ಸ್ಕೇಲೆಬಲ್ ದೊಡ್ಡ ಭಾಷಾ ಮಾದರಿ ಉದ್ದೇಶಿತವಾಗಿದೆ."
+
+#: src/ollama_models.py:1698
+msgid "State-of-the-art code generation model"
+msgstr "ಅತ್ಯಾಧುನಿಕ ಕೋಡ್ ಉತ್ಪಾದನಾ ಮಾದರಿ"
+
+#: src/ollama_models.py:1722
+msgid ""
+"Stable Code 3B is a coding model with instruct and code completion variants "
+"on par with models such as Code Llama 7B that are 2.5x larger."
+msgstr ""
+"ಸ್ಟೇಬಲ್ ಕೋಡ್ 3 ಬಿ ಎನ್ನುವುದು ಕೋಡಿಂಗ್ ಮಾದರಿಯಾಗಿದ್ದು, 2.5x ದೊಡ್ಡದಾದ ಕೋಡ್ ಲಾಮಾ 7 ಬಿ ಯಂತಹ "
+"ಮಾದರಿಗಳಿಗೆ ಸಮನಾಗಿರುತ್ತದೆ ಮತ್ತು ಕೋಡ್ ಪೂರ್ಣಗೊಳಿಸುವ ರೂಪಾಂತರಗಳು."
+
+#: src/ollama_models.py:1744
+msgid ""
+"An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
+"by Eric Hartford and based on TinyLlama."
+msgstr ""
+"ಹೊಸ ಡಾಲ್ಫಿನ್ 2.8 ಡೇಟಾಸೆಟ್‌ನಲ್ಲಿ ಎರಿಕ್ ಹಾರ್ಟ್ಫೋರ್ಡ್ ಮತ್ತು ಟೈನಿಲ್ಲಾಮಾವನ್ನು ಆಧರಿಸಿದ ಪ್ರಾಯೋಗಿಕ "
+"1.1 ಬಿ ಪ್ಯಾರಾಮೀಟರ್ ಮಾದರಿ."
+
+#: src/ollama_models.py:1771
+msgid ""
+"OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
+"open datasets."
+msgstr ""
+"ಓಪನ್ಹೆರ್ಮ್ಸ್ 2.5 ಎನ್ನುವುದು 7 ಬಿ ಮಾದರಿಯಾಗಿದ್ದು, ಟೆಕ್ನಿಯಮ್ ಆನ್ ಮಿಸ್ಟ್ರಾಲ್ನಲ್ಲಿ ಸಂಪೂರ್ಣ ತೆರೆದ "
+"ಡೇಟಾಸೆಟ್‌ಗಳೊಂದಿಗೆ ಉತ್ತಮವಾಗಿದೆ."
+
+#: src/ollama_models.py:1795
+msgid ""
+"Mistral Large 2 is Mistral's new flagship model that is significantly more "
+"capable in code generation, mathematics, and reasoning with 128k context "
+"window and support for dozens of languages."
+msgstr ""
+"ಮಿಸ್ಟ್ರಾಲ್ ಲಾರ್ಜ್ 2 ಮಿಸ್ಟ್ರಾಲ್ನ ಹೊಸ ಪ್ರಮುಖ ಮಾದರಿಯಾಗಿದ್ದು, ಇದು ಕೋಡ್ ಉತ್ಪಾದನೆ, ಗಣಿತ ಮತ್ತು "
+"128 ಕೆ ಸಂದರ್ಭ ವಿಂಡೋ ಮತ್ತು ಡಜನ್ಗಟ್ಟಲೆ ಭಾಷೆಗಳಿಗೆ ಬೆಂಬಲದೊಂದಿಗೆ ತಾರ್ಕಿಕ ಕ್ರಿಯೆಯಲ್ಲಿ "
+"ಗಮನಾರ್ಹವಾಗಿ ಹೆಚ್ಚು ಸಮರ್ಥವಾಗಿದೆ."
+
+#: src/ollama_models.py:1828
+msgid ""
+"Qwen2 Math is a series of specialized math language models built upon the "
+"Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
+"open-source models and even closed-source models (e.g., GPT4o)."
+msgstr ""
+"QWEN2 MATH ಎನ್ನುವುದು QWEN2 LLM ಗಳ ಮೇಲೆ ನಿರ್ಮಿಸಲಾದ ವಿಶೇಷ ಗಣಿತ ಭಾಷಾ ಮಾದರಿಗಳ "
+"ಸರಣಿಯಾಗಿದೆ, ಇದು ಮುಕ್ತ-ಮೂಲ ಮಾದರಿಗಳು ಮತ್ತು ಮುಚ್ಚಿದ ಮೂಲ ಮಾದರಿಗಳ ಗಣಿತ ಸಾಮರ್ಥ್ಯಗಳನ್ನು "
+"ಗಮನಾರ್ಹವಾಗಿ ಮೀರಿಸುತ್ತದೆ (ಉದಾ., GPT4O)."
+
+#: src/ollama_models.py:1852
+msgid ""
+"A strong multi-lingual general language model with competitive performance "
+"to Llama 3."
+msgstr "ಲಾಮಾ 3 ಗೆ ಸ್ಪರ್ಧಾತ್ಮಕ ಕಾರ್ಯಕ್ಷಮತೆಯೊಂದಿಗೆ ಬಲವಾದ ಬಹುಭಾಷಾ ಸಾಮಾನ್ಯ ಭಾಷಾ ಮಾದರಿ."
+
+#: src/ollama_models.py:1886
+msgid ""
+"Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model "
+"trained on multilingual data in English, Spanish, German, Italian, French, "
+"Portuguese, and Dutch."
+msgstr ""
+"ಸ್ಟೇಬಲ್ ಎಲ್ಎಂ 2 ಎನ್ನುವುದು ಅತ್ಯಾಧುನಿಕ 1.6 ಬಿ ಮತ್ತು ಇಂಗ್ಲಿಷ್, ಸ್ಪ್ಯಾನಿಷ್, ಜರ್ಮನ್, ಇಟಾಲಿಯನ್, "
+"ಫ್ರೆಂಚ್, ಪೋರ್ಚುಗೀಸ್ ಮತ್ತು ಡಚ್ಗಳಲ್ಲಿ ಬಹುಭಾಷಾ ಡೇಟಾದ ಬಗ್ಗೆ ತರಬೇತಿ ಪಡೆದ 12 ಬಿ ಪ್ಯಾರಾಮೀಟರ್ "
+"ಭಾಷಾ ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:1909
+msgid ""
+"BakLLaVA is a multimodal model consisting of the Mistral 7B base model "
+"augmented with the LLaVA architecture."
+msgstr ""
+"ಬಕ್ಲಾವಾ ಎನ್ನುವುದು ಮಲ್ಟಿಮೋಡಲ್ ಮಾದರಿಯಾಗಿದ್ದು, ಲಾವಾ ವಾಸ್ತುಶಿಲ್ಪದೊಂದಿಗೆ ವರ್ಧಿಸಲ್ಪಟ್ಟ "
+"ಮಿಸ್ಟ್ರಾಲ್ 7 ಬಿ ಬೇಸ್ ಮಾದರಿಯನ್ನು ಒಳಗೊಂಡಿದೆ."
+
+#: src/ollama_models.py:1930
+msgid ""
+"A high-performing model trained with a new technique called Reflection-"
+"tuning that teaches a LLM to detect mistakes in its reasoning and correct "
+"course."
+msgstr ""
+"ಪ್ರತಿಫಲನ-ಟ್ಯೂನಿಂಗ್ ಎಂಬ ಹೊಸ ತಂತ್ರದೊಂದಿಗೆ ತರಬೇತಿ ಪಡೆದ ಉನ್ನತ-ಕಾರ್ಯಕ್ಷಮತೆಯ ಮಾದರಿಯು ಅದರ "
+"ತಾರ್ಕಿಕ ಕ್ರಿಯೆ ಮತ್ತು ಸರಿಯಾದ ಕೋರ್ಸ್‌ನಲ್ಲಿನ ತಪ್ಪುಗಳನ್ನು ಕಂಡುಹಿಡಿಯಲು ಎಲ್‌ಎಲ್‌ಎಂ ಅನ್ನು "
+"ಕಲಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:1961
+msgid "An advanced language model crafted with 2 trillion bilingual tokens."
+msgstr "2 ಟ್ರಿಲಿಯನ್ ದ್ವಿಭಾಷಾ ಟೋಕನ್‌ಗಳೊಂದಿಗೆ ರಚಿಸಲಾದ ಸುಧಾರಿತ ಭಾಷಾ ಮಾದರಿ."
+
+#: src/ollama_models.py:1988
+msgid ""
+"This model extends LLama-3 8B's context length from 8k to over 1m tokens."
+msgstr ""
+"ಈ ಮಾದರಿಯು ಲಾಮಾ -3 8 ಬಿ ಯ ಸಂದರ್ಭದ ಉದ್ದವನ್ನು 8 ಕೆ ಯಿಂದ 1 ಎಂ ಟೋಕನ್‌ಗಳವರೆಗೆ "
+"ವಿಸ್ತರಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:2021
+msgid "Model focused on math and logic problems"
+msgstr "ಮಾದರಿ ಗಣಿತ ಮತ್ತು ತರ್ಕ ಸಮಸ್ಯೆಗಳ ಮೇಲೆ ಕೇಂದ್ರೀಕರಿಸಿದೆ"
+
+#: src/ollama_models.py:2044
+msgid ""
+"moondream2 is a small vision language model designed to run efficiently on "
+"edge devices."
+msgstr ""
+"ಮೂಂಡ್ರೀಮ್ 2 ಎನ್ನುವುದು ಎಡ್ಜ್ ಸಾಧನಗಳಲ್ಲಿ ಪರಿಣಾಮಕಾರಿಯಾಗಿ ಚಲಾಯಿಸಲು ವಿನ್ಯಾಸಗೊಳಿಸಲಾದ ಒಂದು "
+"ಸಣ್ಣ ದೃಷ್ಟಿ ಭಾಷಾ ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:2066
+msgid ""
+"A fine-tuned model based on Mistral with good coverage of domain and "
+"language."
+msgstr "ಡೊಮೇನ್ ಮತ್ತು ಭಾಷೆಯ ಉತ್ತಮ ವ್ಯಾಪ್ತಿಯೊಂದಿಗೆ ಮಿಸ್ಟ್ರಾಲ್ ಆಧಾರಿತ ಉತ್ತಮ-ಟ್ಯೂನ್ ಮಾಡೆಲ್."
+
+#: src/ollama_models.py:2093
+msgid ""
+"A model from NVIDIA based on Llama 3 that excels at conversational question "
+"answering (QA) and retrieval-augmented generation (RAG)."
+msgstr ""
+"ಲಾಮಾ 3 ಅನ್ನು ಆಧರಿಸಿದ ಎನ್ವಿಡಿಯಾದ ಒಂದು ಮಾದರಿ ಸಂವಾದಾತ್ಮಕ ಪ್ರಶ್ನೆಗೆ ಉತ್ತರಿಸುವ (ಕ್ಯೂಎ) "
+"ಮತ್ತು ಮರುಪಡೆಯುವಿಕೆ-ಹೆಚ್ಚಳ ಪೀಳಿಗೆಗೆ (ರಾಗ್) ಉತ್ಕೃಷ್ಟವಾಗಿದೆ."
+
+#: src/ollama_models.py:2120
+msgid ""
+"Conversational model based on Llama 2 that performs competitively on various "
+"benchmarks."
+msgstr ""
+"ವಿವಿಧ ಮಾನದಂಡಗಳ ಮೇಲೆ ಸ್ಪರ್ಧಾತ್ಮಕವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಲಾಮಾ 2 ಅನ್ನು ಆಧರಿಸಿದ ಸಂವಾದಾತ್ಮಕ "
+"ಮಾದರಿ."
+
+#: src/ollama_models.py:2148
+msgid ""
+"SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
+"generation tasks"
+msgstr ""
+"SQLCODER ಎನ್ನುವುದು SQL ಪೀಳಿಗೆಯ ಕಾರ್ಯಗಳಿಗಾಗಿ ಸ್ಟಾರ್‌ಕೋಡರ್‌ನಲ್ಲಿ ದಂಡ ವಿಧಿಸಲಾದ ಕೋಡ್ "
+"ಪೂರ್ಣಗೊಳಿಸುವಿಕೆಯ ಮಾದರಿಯಾಗಿದೆ"
+
+#: src/ollama_models.py:2175
+msgid "General use models based on Llama and Llama 2 from Nous Research."
+msgstr "ನೌಸ್ ಸಂಶೋಧನೆಯಿಂದ ಲಾಮಾ ಮತ್ತು ಲಾಮಾ 2 ಆಧಾರಿತ ಸಾಮಾನ್ಯ ಬಳಕೆಯ ಮಾದರಿಗಳು."
+
+#: src/ollama_models.py:2198
+msgid "Code generation model based on Code Llama."
+msgstr "ಕೋಡ್ ಲಾಮಾ ಆಧಾರಿತ ಕೋಡ್ ಜನರೇಷನ್ ಮಾದರಿ."
+
+#: src/ollama_models.py:2225
+msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
+msgstr "128 ಕೆ ಟೋಕನ್‌ಗಳ ಸಂದರ್ಭವನ್ನು ಬೆಂಬಲಿಸುವ ಲಾಮಾ 2 ರ ವಿಸ್ತರಣೆ."
+
+#: src/ollama_models.py:2253
+msgid ""
+"A 7B and 15B uncensored variant of the Dolphin model family that excels at "
+"coding, based on StarCoder2."
+msgstr ""
+"ಸ್ಟಾರ್‌ಕೋಡರ್ 2 ಅನ್ನು ಆಧರಿಸಿ ಕೋಡಿಂಗ್‌ನಲ್ಲಿ ಉತ್ಕೃಷ್ಟವಾಗಿರುವ ಡಾಲ್ಫಿನ್ ಮಾದರಿ ಕುಟುಂಬದ 7 ಬಿ "
+"ಮತ್ತು 15 ಬಿ ಸೆನ್ಸಾರ್ ಮಾಡದ ರೂಪಾಂತರ."
+
+#: src/ollama_models.py:2280
+msgid "General use model based on Llama 2."
+msgstr "ಲಾಮಾ 2 ಆಧಾರಿತ ಸಾಮಾನ್ಯ ಬಳಕೆಯ ಮಾದರಿ."
+
+#: src/ollama_models.py:2309
+msgid "A strong, economical, and efficient Mixture-of-Experts language model."
+msgstr "ಬಲವಾದ, ಆರ್ಥಿಕ ಮತ್ತು ಪರಿಣಾಮಕಾರಿ ಮಿಶ್ರಣ-ತಜ್ಞರ ಭಾಷಾ ಮಾದರಿ."
+
+#: src/ollama_models.py:2331
+msgid ""
+"Starling is a large language model trained by reinforcement learning from AI "
+"feedback focused on improving chatbot helpfulness."
+msgstr ""
+"ಸ್ಟಾರ್ಲಿಂಗ್ ಎನ್ನುವುದು ಎಐ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ಬಲವರ್ಧನೆಯ ಕಲಿಕೆಯಿಂದ ತರಬೇತಿ ಪಡೆದ ದೊಡ್ಡ ಭಾಷಾ "
+"ಮಾದರಿಯಾಗಿದ್ದು, ಚಾಟ್‌ಬಾಟ್ ಸಹಾಯವನ್ನು ಸುಧಾರಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:2353
+msgid ""
+"A companion assistant trained in philosophy, psychology, and personal "
+"relationships. Based on Mistral."
+msgstr ""
+"ತತ್ವಶಾಸ್ತ್ರ, ಮನೋವಿಜ್ಞಾನ ಮತ್ತು ವೈಯಕ್ತಿಕ ಸಂಬಂಧಗಳಲ್ಲಿ ತರಬೇತಿ ಪಡೆದ ಒಡನಾಡಿ ಸಹಾಯಕ. "
+"ಮಿಸ್ಟ್ರಾಲ್ ಆಧರಿಸಿದೆ."
+
+#: src/ollama_models.py:2391
+msgid ""
+"Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
+"Research"
+msgstr "ಹರ್ಮ್ಸ್ 3 ನಸ್ ರಿಸರ್ಚ್ ಅವರ ಪ್ರಮುಖ ಹರ್ಮ್ಸ್ ಸರಣಿಯ ಎಲ್ಎಲ್ಎಂಎಸ್ನ ಇತ್ತೀಚಿನ ಆವೃತ್ತಿಯಾಗಿದೆ"
+
+#: src/ollama_models.py:2419
+msgid ""
+"Yi-Coder is a series of open-source code language models that delivers state-"
+"of-the-art coding performance with fewer than 10 billion parameters."
+msgstr ""
+"YI-CODER ಎನ್ನುವುದು ಓಪನ್-ಸೋರ್ಸ್ ಕೋಡ್ ಭಾಷಾ ಮಾದರಿಗಳ ಸರಣಿಯಾಗಿದ್ದು, ಇದು ಅತ್ಯಾಧುನಿಕ "
+"ಕೋಡಿಂಗ್ ಕಾರ್ಯಕ್ಷಮತೆಯನ್ನು 10 ಶತಕೋಟಿಗಿಂತ ಕಡಿಮೆ ನಿಯತಾಂಕಗಳೊಂದಿಗೆ ನೀಡುತ್ತದೆ."
+
+#: src/ollama_models.py:2450
+msgid ""
+"A large language model built by the Technology Innovation Institute (TII) "
+"for use in summarization, text generation, and chat bots."
+msgstr ""
+"ಸಾರಾಂಶ, ಪಠ್ಯ ಉತ್ಪಾದನೆ ಮತ್ತು ಚಾಟ್ ಬಾಟ್‌ಗಳಲ್ಲಿ ಬಳಸಲು ಟೆಕ್ನಾಲಜಿ ಇನ್ನೋವೇಶನ್ ಇನ್ಸ್ಟಿಟ್ಯೂಟ್ "
+"(ಟಿಐಐ) ನಿರ್ಮಿಸಿದ ದೊಡ್ಡ ಭಾಷಾ ಮಾದರಿ."
+
+#: src/ollama_models.py:2487
+msgid ""
+"InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
+"outstanding reasoning capability."
+msgstr ""
+"ಇಂಟರ್ನ್ಎಲ್ಎಂ 2.5 ಎನ್ನುವುದು ಅತ್ಯುತ್ತಮ ತಾರ್ಕಿಕ ಸಾಮರ್ಥ್ಯದೊಂದಿಗೆ ಪ್ರಾಯೋಗಿಕ ಸನ್ನಿವೇಶಗಳಿಗೆ "
+"ಅನುಗುಣವಾಗಿ 7 ಬಿ ಪ್ಯಾರಾಮೀಟರ್ ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:2509
+msgid ""
+"A compact, yet powerful 10.7B large language model designed for single-turn "
+"conversation."
+msgstr ""
+"ಏಕ-ತಿರುವು ಸಂಭಾಷಣೆಗಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾದ ಕಾಂಪ್ಯಾಕ್ಟ್, ಆದರೆ ಶಕ್ತಿಯುತ 10.7 ಬಿ ದೊಡ್ಡ "
+"ಭಾಷಾ ಮಾದರಿ."
+
+#: src/ollama_models.py:2533
+msgid ""
+"Athene-V2 is a 72B parameter model which excels at code completion, "
+"mathematics, and log extraction tasks."
+msgstr ""
+"ಅಥೆನ್-ವಿ 2 72 ಬಿ ಪ್ಯಾರಾಮೀಟರ್ ಮಾದರಿಯಾಗಿದ್ದು, ಇದು ಕೋಡ್ ಪೂರ್ಣಗೊಳಿಸುವಿಕೆ, ಗಣಿತ ಮತ್ತು "
+"ಲಾಗ್ ಹೊರತೆಗೆಯುವ ಕಾರ್ಯಗಳಲ್ಲಿ ಉತ್ತಮವಾಗಿದೆ."
+
+#: src/ollama_models.py:2556
+msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
+msgstr "ಫಿ 3 ಮಿನಿಯಿಂದ ಉತ್ತಮವಾಗಿ ಟ್ಯೂನ್ ಮಾಡಿದ ಹೊಸ ಸಣ್ಣ ಲಾವಾ ಮಾದರಿ."
+
+#: src/ollama_models.py:2584
+msgid ""
+"Orca 2 is built by Microsoft research, and are a fine-tuned version of "
+"Meta's Llama 2 models. The model is designed to excel particularly in "
+"reasoning."
+msgstr ""
+"ORCA 2 ಅನ್ನು ಮೈಕ್ರೋಸಾಫ್ಟ್ ರಿಸರ್ಚ್ ನಿರ್ಮಿಸಿದೆ, ಮತ್ತು ಇದು ಮೆಟಾದ ಲಾಮಾ 2 ಮಾದರಿಗಳ ಉತ್ತಮ-"
+"ಟ್ಯೂನ್ ಆವೃತ್ತಿಯಾಗಿದೆ. ಮಾದರಿಯನ್ನು ವಿಶೇಷವಾಗಿ ತಾರ್ಕಿಕ ಕ್ರಿಯೆಯಲ್ಲಿ ಉತ್ತಮಗೊಳಿಸಲು "
+"ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ."
+
+#: src/ollama_models.py:2615
+msgid ""
+"A series of multimodal LLMs (MLLMs) designed for vision-language "
+"understanding."
+msgstr ""
+"ದೃಷ್ಟಿ-ಭಾಷೆಯ ತಿಳುವಳಿಕೆಗಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾದ ಮಲ್ಟಿಮೋಡಲ್ ಎಲ್ಎಲ್ಎಂಎಸ್ (ಎಂಎಲ್ಎಲ್ಎಂಎಸ್) ಸರಣಿ."
+
+#: src/ollama_models.py:2647
+msgid ""
+"Llama 2 based model fine tuned on an Orca-style dataset. Originally called "
+"Free Willy."
+msgstr ""
+"ಲಾಮಾ 2 ಆಧಾರಿತ ಮಾದರಿ ದಂಡವನ್ನು ಓರ್ಕಾ-ಶೈಲಿಯ ಡೇಟಾಸೆಟ್‌ನಲ್ಲಿ ಟ್ಯೂನ್ ಮಾಡಲಾಗಿದೆ. ಮೂಲತಃ ಫ್ರೀ "
+"ವಿಲ್ಲಿ ಎಂದು ಕರೆಯಲಾಗುತ್ತದೆ."
+
+#: src/ollama_models.py:2676
+msgid ""
+"Mistral Small 3 sets a new benchmark in the “small” Large Language Models "
+"category below 70B."
+msgstr ""
+"ಮಿಸ್ಟ್ರಾಲ್ ಸ್ಮಾಲ್ 3 70 ಬಿ ಗಿಂತ ಕೆಳಗಿನ “ಸಣ್ಣ” ದೊಡ್ಡ ಭಾಷಾ ಮಾದರಿಗಳಲ್ಲಿ ಹೊಸ ಮಾನದಂಡವನ್ನು "
+"ಹೊಂದಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:2698
+msgid ""
+"2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
+"model by Microsoft Research."
+msgstr ""
+"ಮೈಕ್ರೋಸಾಫ್ಟ್ ರಿಸರ್ಚ್ ಅವರ ಪಿಹೆಚ್‌ಐ ಭಾಷಾ ಮಾದರಿಯನ್ನು ಆಧರಿಸಿದ ಎರಿಕ್ ಹಾರ್ಟ್ಫೋರ್ಡ್ ಅವರಿಂದ 2.7 "
+"ಬಿ ಸೆನ್ಸಾರ್ ಮಾಡದ ಡಾಲ್ಫಿನ್ ಮಾದರಿ."
+
+#: src/ollama_models.py:2731
+msgid ""
+"SmolLM2 is a family of compact language models available in three size: "
+"135M, 360M, and 1.7B parameters."
+msgstr ""
+"ಸ್ಮೋಲ್ಮ್ 2 ಎನ್ನುವುದು ಮೂರು ಗಾತ್ರದಲ್ಲಿ ಲಭ್ಯವಿರುವ ಕಾಂಪ್ಯಾಕ್ಟ್ ಭಾಷಾ ಮಾದರಿಗಳ ಕುಟುಂಬವಾಗಿದೆ: "
+"135 ಮೀ, 360 ಮೀ, ಮತ್ತು 1.7 ಬಿ ನಿಯತಾಂಕಗಳು."
+
+#: src/ollama_models.py:2753
+msgid "Uncensored version of Wizard LM model"
+msgstr "Wizard ಎಲ್ಎಂ ಮಾದರಿಯ ಸೆನ್ಸಾರ್ ಮಾಡದ ಆವೃತ್ತಿ"
+
+#: src/ollama_models.py:2776
+msgid ""
+"A commercial-friendly small language model by NVIDIA optimized for roleplay, "
+"RAG QA, and function calling."
+msgstr ""
+"ರೋಲ್ ಪ್ಲೇ, ರಾಗ್ ಕ್ಯೂಎ ಮತ್ತು ಫಂಕ್ಷನ್ ಕರೆಗಾಗಿ ಎನ್ವಿಡಿಯಾ ಅವರ ವಾಣಿಜ್ಯ ಸ್ನೇಹಿ ಸಣ್ಣ ಭಾಷಾ "
+"ಮಾದರಿ."
+
+#: src/ollama_models.py:2798
+msgid "An extension of Mistral to support context windows of 64K or 128K."
+msgstr "64 ಕೆ ಅಥವಾ 128 ಕೆ ಸಂದರ್ಭದ ಕಿಟಕಿಗಳನ್ನು ಬೆಂಬಲಿಸಲು ಮಿಸ್ಟ್ರಾಲ್ ವಿಸ್ತರಣೆ."
+
+#: src/ollama_models.py:2826
+msgid ""
+"An expansion of Llama 2 that specializes in integrating both general "
+"language understanding and domain-specific knowledge, particularly in "
+"programming and mathematics."
+msgstr "64 ಕೆ 128 ಕೆ ಸಂದರ್ಭದ ಕಿಟಕಿಗಳನ್ನು ಬೆಂಬಲಿಸಲು."
+
+#: src/ollama_models.py:2848
+msgid ""
+"Fine-tuned Llama 2 model to answer medical questions based on an open source "
+"medical dataset."
+msgstr ""
+"ಓಪನ್ ಸೋರ್ಸ್ ಮೆಡಿಕಲ್ ಡೇಟಾಸೆಟ್ ಆಧರಿಸಿ ವೈದ್ಯಕೀಯ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಲು ಉತ್ತಮವಾದ ಟ್ಯೂನ್ಡ್ "
+"ಲಾಮಾ 2 ಮಾದರಿ."
+
+#: src/ollama_models.py:2875
+msgid ""
+"Open-source medical large language model adapted from Llama 2 to the medical "
+"domain."
+msgstr ""
+"ಓಪನ್-ಸೋರ್ಸ್ ವೈದ್ಯಕೀಯ ದೊಡ್ಡ ಭಾಷಾ ಮಾದರಿ ಲಾಮಾ 2 ರಿಂದ ವೈದ್ಯಕೀಯ ಡೊಮೇನ್‌ಗೆ ಅಳವಡಿಸಿಕೊಂಡಿದೆ."
+
+#: src/ollama_models.py:2903
+msgid ""
+"A series of models from Groq that represent a significant advancement in "
+"open-source AI capabilities for tool use/function calling."
+msgstr ""
+"ಟೂಲ್ ಬಳಕೆ/ಕಾರ್ಯ ಕರೆಗಾಗಿ ತೆರೆದ ಮೂಲ ಎಐ ಸಾಮರ್ಥ್ಯಗಳಲ್ಲಿ ಗಮನಾರ್ಹ ಪ್ರಗತಿಯನ್ನು ಪ್ರತಿನಿಧಿಸುವ "
+"GROQ ಯ ಮಾದರಿಗಳ ಸರಣಿ."
+
+#: src/ollama_models.py:2925
+msgid ""
+"Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
+"NVIDIA to improve the helpfulness of LLM generated responses to user queries."
+msgstr ""
+"ಲಾಮಾ -3.1-ನೆಮೊಟ್ರಾನ್ -70 ಬಿ-ಇನ್ಸ್ಟ್ರಕ್ಟ್ ಎನ್ನುವುದು ಬಳಕೆದಾರರ ಪ್ರಶ್ನೆಗಳಿಗೆ ಎಲ್ಎಲ್ಎಂ ರಚಿಸಿದ "
+"ಪ್ರತಿಕ್ರಿಯೆಗಳ ಸಹಾಯವನ್ನು ಸುಧಾರಿಸಲು ಎನ್ವಿಡಿಯಾ ಕಸ್ಟಮೈಸ್ ಮಾಡಿದ ದೊಡ್ಡ ಭಾಷಾ ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:2947
+msgid ""
+"Nexus Raven is a 13B instruction tuned model for function calling tasks."
+msgstr ""
+"ನೆಕ್ಸಸ್ ರಾವೆನ್ ಎನ್ನುವುದು ಕಾರ್ಯ ಕರೆ ಮಾಡುವ ಕಾರ್ಯಗಳಿಗಾಗಿ 13 ಬಿ ಸೂಚನಾ ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:2968
+msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
+msgstr "ನೌಸ್ ರಿಸರ್ಚ್‌ನ ನೌಸ್ ಹರ್ಮ್ಸ್ 2 ಮಾದರಿ, ಈಗ ಮಿಕ್ಸ್ಟ್ರಲ್ ಮೇಲೆ ತರಬೇತಿ ಪಡೆದಿದೆ."
+
+#: src/ollama_models.py:2991
+msgid "Great code generation model based on Llama2."
+msgstr "LLAMA2 ಅನ್ನು ಆಧರಿಸಿದ ಉತ್ತಮ ಕೋಡ್ ಉತ್ಪಾದನಾ ಮಾದರಿ."
+
+#: src/ollama_models.py:3013
+msgid "Uncensored Llama2 based model with support for a 16K context window."
+msgstr "16 ಕೆ ಸಂದರ್ಭ ವಿಂಡೋಗೆ ಬೆಂಬಲದೊಂದಿಗೆ ಸೆನ್ಸಾರ್ ಮಾಡದ ಲಾಮಾ 2 ಆಧಾರಿತ ಮಾದರಿ."
+
+#: src/ollama_models.py:3054
+msgid ""
+"The IBM Granite 2B and 8B models are designed to support tool-based use "
+"cases and support for retrieval augmented generation (RAG), streamlining "
+"code generation, translation and bug fixing."
+msgstr ""
+"ಐಬಿಎಂ ಗ್ರಾನೈಟ್ 2 ಬಿ ಮತ್ತು 8 ಬಿ ಮಾದರಿಗಳನ್ನು ಸಾಧನ-ಆಧಾರಿತ ಬಳಕೆಯ ಪ್ರಕರಣಗಳನ್ನು "
+"ಬೆಂಬಲಿಸಲು ಮತ್ತು ಮರುಪಡೆಯುವಿಕೆ ವರ್ಧಿತ ಪೀಳಿಗೆಗೆ (RAG) ಬೆಂಬಲಿಸಲು "
+"ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ, ಕೋಡ್ ಉತ್ಪಾದನೆ, ಅನುವಾದ ಮತ್ತು ದೋಷ ಫಿಕ್ಸಿಂಗ್ ಅನ್ನು ಸುಗಮಗೊಳಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:3077
+msgid ""
+"🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic "
+"instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
+"with open-source code snippets."
+msgstr ""
+"🎩 ಮ್ಯಾಜಿಕೋಡರ್ ಎನ್ನುವುದು 7 ಬಿ ಪ್ಯಾರಾಮೀಟರ್ ಮಾದರಿಗಳ ಕುಟುಂಬವಾಗಿದ್ದು, ಒಎಸ್ಎಸ್-ಇನ್ಸ್ಟ್ರಕ್ಟ್ "
+"ಬಳಸಿ 75 ಕೆ ಸಂಶ್ಲೇಷಿತ ಸೂಚನಾ ದತ್ತಾಂಶದಲ್ಲಿ ತರಬೇತಿ ಪಡೆದಿದೆ, ಇದು ತೆರೆದ ಮೂಲ ಕೋಡ್ "
+"ತುಣುಕುಗಳೊಂದಿಗೆ ಎಲ್ಎಲ್ಎಂಗಳನ್ನು ಪ್ರಬುದ್ಧಗೊಳಿಸುವ ಒಂದು ಹೊಸ ವಿಧಾನವಾಗಿದೆ."
+
+#: src/ollama_models.py:3099
+msgid ""
+"A lightweight chat model allowing accurate, and responsive output without "
+"requiring high-end hardware."
+msgstr ""
+"ಉನ್ನತ ಮಟ್ಟದ ಯಂತ್ರಾಂಶದ ಅಗತ್ಯವಿಲ್ಲದೇ ನಿಖರ ಮತ್ತು ಸ್ಪಂದಿಸುವ output ಟ್‌ಪುಟ್ ಅನ್ನು ಅನುಮತಿಸುವ "
+"ಹಗುರವಾದ ಚಾಟ್ ಮಾದರಿ."
+
+#: src/ollama_models.py:3122
+msgid ""
+"A high-performing code instruct model created by merging two existing code "
+"models."
+msgstr ""
+"ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಎರಡು ಕೋಡ್ ಮಾದರಿಗಳನ್ನು ವಿಲೀನಗೊಳಿಸುವ ಮೂಲಕ ರಚಿಸಲಾದ ಉನ್ನತ-ಕಾರ್ಯಕ್ಷಮತೆಯ "
+"ಕೋಡ್ ಸೂಚನೆ ಮಾದರಿಯನ್ನು ಸೂಚಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:3145
+msgid ""
+"Falcon2 is an 11B parameters causal decoder-only model built by TII and "
+"trained over 5T tokens."
+msgstr ""
+"ಫಾಲ್ಕನ್ 2 ಎನ್ನುವುದು 11 ಬಿ ನಿಯತಾಂಕಗಳಾದ ಸಾಂದರ್ಭಿಕ ಡಿಕೋಡರ್-ಮಾತ್ರ ಮಾದರಿಯಾಗಿದ್ದು, ಟಿಐಐ "
+"ನಿರ್ಮಿಸಿದೆ ಮತ್ತು 5 ಟಿ ಟೋಕನ್‌ಗಳಿಗಿಂತ ಹೆಚ್ಚು ತರಬೇತಿ ಪಡೆದಿದೆ."
+
+#: src/ollama_models.py:3167
+msgid ""
+"Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
+"MelodysDreamj."
+msgstr ""
+"Wizard ವಿಕುನಾ ಎನ್ನುವುದು ಲಾಮಾ 2 ಅನ್ನು ಆಧರಿಸಿದ 13 ಬಿ ಪ್ಯಾರಾಮೀಟರ್ ಮಾದರಿಯಾಗಿದ್ದು, "
+"ಮೆಲೊಡಿಸ್ಡ್ರೀಮ್ಜೆ ತರಬೇತಿ ಪಡೆದಿದೆ."
+
+#: src/ollama_models.py:3189
+msgid ""
+"MistralLite is a fine-tuned model based on Mistral with enhanced "
+"capabilities of processing long contexts."
+msgstr ""
+"ಮಿಸ್ಟ್ರಾಲೈಟ್ ಎನ್ನುವುದು ದೀರ್ಘ ಸಂದರ್ಭಗಳನ್ನು ಸಂಸ್ಕರಿಸುವ ವರ್ಧಿತ ಸಾಮರ್ಥ್ಯಗಳನ್ನು ಹೊಂದಿರುವ "
+"ಮಿಸ್ಟ್ರಲ್ ಆಧಾರಿತ ಉತ್ತಮ-ಟ್ಯೂನ್ಡ್ ಮಾದರಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:3212
+msgid ""
+"MathΣtral: a 7B model designed for math reasoning and scientific discovery "
+"by Mistral AI."
+msgstr ""
+"MathΣtral: ಮಿಸ್ಟ್ರಲ್ ಎಐ ಅವರಿಂದ ಗಣಿತ ತಾರ್ಕಿಕ ಮತ್ತು ವೈಜ್ಞಾನಿಕ ಆವಿಷ್ಕಾರಕ್ಕಾಗಿ "
+"ವಿನ್ಯಾಸಗೊಳಿಸಲಾದ 7 ಬಿ ಮಾದರಿ."
+
+#: src/ollama_models.py:3234
+msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
+msgstr ""
+"ಮದರ್‌ಡಕ್ ಮತ್ತು ಸಂಖ್ಯೆಗಳ ನಿಲ್ದಾಣದಿಂದ ತಯಾರಿಸಿದ 7 ಬಿ ಪ್ಯಾರಾಮೀಟರ್ ಪಠ್ಯದಿಂದ ಎಸ್‌ಕ್ಯೂಎಲ್ ಮಾದರಿ."
+
+#: src/ollama_models.py:3255
+msgid ""
+"MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
+"interleaving the model with itself."
+msgstr ""
+"ಮೆಗಾಡೊಲ್ಫಿನ್ -2.2-120 ಬಿ ಎನ್ನುವುದು ಡಾಲ್ಫಿನ್ -2.2-70 ಬಿ ಯ ರೂಪಾಂತರವಾಗಿದ್ದು, "
+"ಮಾದರಿಯನ್ನು ಸ್ವತಃ ಇಂಟರ್ಲೀವಿಂಗ್ ಮಾಡುವ ಮೂಲಕ ರಚಿಸಲಾಗಿದೆ."
+
+#: src/ollama_models.py:3277
+msgid ""
+"Solar Pro Preview: an advanced large language model (LLM) with 22 billion "
+"parameters designed to fit into a single GPU"
+msgstr ""
+"ಸೋಲಾರ್ ಪ್ರೊ ಪೂರ್ವವೀಕ್ಷಣೆ: ಒಂದೇ ಜಿಪಿಯುಗೆ ಹೊಂದಿಕೊಳ್ಳಲು ವಿನ್ಯಾಸಗೊಳಿಸಲಾದ 22 ಬಿಲಿಯನ್ "
+"ನಿಯತಾಂಕಗಳನ್ನು ಹೊಂದಿರುವ ಸುಧಾರಿತ ದೊಡ್ಡ ಭಾಷಾ ಮಾದರಿ (ಎಲ್ಎಲ್ಎಂ)"
+
+#: src/ollama_models.py:3304
+msgid ""
+"A series of models that convert HTML content to Markdown content, which is "
+"useful for content conversion tasks."
+msgstr ""
+"HTML ವಿಷಯವನ್ನು ಮಾರ್ಕ್‌ಡೌನ್ ವಿಷಯಕ್ಕೆ ಪರಿವರ್ತಿಸುವ ಮಾದರಿಗಳ ಸರಣಿ, ಇದು ವಿಷಯ ಪರಿವರ್ತನೆ "
+"ಕಾರ್ಯಗಳಿಗೆ ಉಪಯುಕ್ತವಾಗಿದೆ."
+
+#: src/ollama_models.py:3325
+msgid ""
+"A top-performing mixture of experts model, fine-tuned with high-quality data."
+msgstr ""
+"ತಜ್ಞರ ಮಾದರಿಯ ಉನ್ನತ-ಕಾರ್ಯಕ್ಷಮತೆಯ ಮಿಶ್ರಣ, ಉತ್ತಮ-ಗುಣಮಟ್ಟದ ಡೇಟಾದೊಂದಿಗೆ ಉತ್ತಮವಾಗಿ ಟ್ಯೂನ್ "
+"ಮಾಡಲಾಗಿದೆ."
+
+#: src/ollama_models.py:3347
+msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
+msgstr ""
+"7 ಬಿ ಚಾಟ್ ಮಾದರಿಯು ಉತ್ತಮ-ಗುಣಮಟ್ಟದ ಡೇಟಾದೊಂದಿಗೆ ಉತ್ತಮವಾಗಿ ಟ್ಯೂನ್ ಮಾಡಲಾಗಿದೆ ಮತ್ತು ಜೆಫಿರ್ "
+"ಅನ್ನು ಆಧರಿಸಿದೆ."
+
+#: src/ollama_models.py:3370
+msgid ""
+"Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
+"Designed for chat and code generation."
+msgstr ""
+"ಓಪನ್ ಓರ್ಕಾ ಓಪನ್‌ಚಾಟ್ ಮಾದರಿ ಮತ್ತು ಗ್ಯಾರೇಜ್-ಬೈರ್ಡ್ ಪ್ಲ್ಯಾಟಿಪಸ್ 2 ಮಾದರಿಯ ವಿಲೀನ. ಚಾಟ್ ಮತ್ತು ಕೋಡ್ "
+"ಉತ್ಪಾದನೆಗಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ."
+
+#: src/ollama_models.py:3387
+msgid ""
+"A language model created by combining two fine-tuned Llama 2 70B models into "
+"one."
+msgstr ""
+"ಎರಡು ಉತ್ತಮ-ಟ್ಯೂನ್ಡ್ ಲಾಮಾ 2 70 ಬಿ ಮಾದರಿಗಳನ್ನು ಒಂದಾಗಿ ಸಂಯೋಜಿಸುವ ಮೂಲಕ ರಚಿಸಲಾದ ಭಾಷಾ "
+"ಮಾದರಿ."
+
+#: src/ollama_models.py:3428
+msgid ""
+"The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
+"Granite models from IBM designed for low latency usage."
+msgstr ""
+"ಐಬಿಎಂ ಗ್ರಾನೈಟ್ 1 ಬಿ ಮತ್ತು 3 ಬಿ ಮಾದರಿಗಳು ಕಡಿಮೆ ಸುಪ್ತ ಬಳಕೆಗಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾದ "
+"ಐಬಿಎಂನಿಂದ ತಜ್ಞರ (ಎಂಒಇ) ಗ್ರಾನೈಟ್ ಮಾದರಿಗಳ ಮೊದಲ ಮಿಶ್ರಣವಾಗಿದೆ."
+
+#: src/ollama_models.py:3450
+msgid ""
+"A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
+"information extraction, based on Phi-3."
+msgstr ""
+"ಪಿಹೆಚ್‌ಐ -3 ಆಧಾರಿತ ಮಾಹಿತಿ ಹೊರತೆಗೆಯಲು ಖಾಸಗಿ ಉತ್ತಮ-ಗುಣಮಟ್ಟದ ಸಂಶ್ಲೇಷಿತ ಡೇಟಾಸೆಟ್‌ನಲ್ಲಿ "
+"3.8 ಬಿ ಮಾದರಿಯು ಉತ್ತಮವಾಗಿ ಟ್ಯೂನ್ ಮಾಡಲಾಗಿದೆ."
+
+#: src/ollama_models.py:3501
+msgid ""
+"Cohere For AI's language models trained to perform well across 23 different "
+"languages."
+msgstr ""
+"AI ನ ಭಾಷಾ ಮಾದರಿಗಳಿಗೆ ಕೋಹೆರ್ 23 ವಿವಿಧ ಭಾಷೆಗಳಲ್ಲಿ ಉತ್ತಮ ಪ್ರದರ್ಶನ ನೀಡಲು ತರಬೇತಿ "
+"ಪಡೆದಿದೆ."
+
+#: src/ollama_models.py:3523
+msgid "DBRX is an open, general-purpose LLM created by Databricks."
+msgstr "ಡಿಬಿಆರ್ಎಕ್ಸ್ ಎನ್ನುವುದು ಡಾಟಾಬ್ರಿಕ್ಸ್ ರಚಿಸಿದ ಮುಕ್ತ, ಸಾಮಾನ್ಯ ಉದ್ದೇಶದ ಎಲ್ಎಲ್ಎಂ ಆಗಿದೆ."
+
+#: src/ollama_models.py:3545
+msgid ""
+"An open large reasoning model for real-world solutions by the Alibaba "
+"International Digital Commerce Group (AIDC-AI)."
+msgstr ""
+"ಅಲಿಬಾಬಾ ಇಂಟರ್ನ್ಯಾಷನಲ್ ಡಿಜಿಟಲ್ ಕಾಮರ್ಸ್ ಗ್ರೂಪ್ (ಎಐಡಿಸಿ-ಎಐ) ಯ ನೈಜ-ಪ್ರಪಂಚದ ಪರಿಹಾರಗಳಿಗಾಗಿ "
+"ಮುಕ್ತ ದೊಡ್ಡ ತಾರ್ಕಿಕ ಮಾದರಿ."
+
+#: src/ollama_models.py:3568
+msgid "Embedding model from BAAI mapping texts to vectors."
+msgstr "ಬಾಯ್ ಮ್ಯಾಪಿಂಗ್ ಪಠ್ಯಗಳಿಂದ ವಾಹಕಗಳಿಗೆ ಎಂಬೆಡಿಂಗ್ ಮಾದರಿ."
+
+#: src/ollama_models.py:3590
+msgid ""
+"An open weights function calling model based on Llama 3, competitive with "
+"GPT-4o function calling capabilities."
+msgstr ""
+"ಜಿಪಿಟಿ -4 ಒ ಫಂಕ್ಷನ್ ಕರೆ ಸಾಮರ್ಥ್ಯಗಳೊಂದಿಗೆ ಸ್ಪರ್ಧಾತ್ಮಕವಾದ ಲಾಮಾ 3 ಆಧಾರಿತ ಮುಕ್ತ ತೂಕದ "
+"ಕಾರ್ಯ ಕರೆ ಮಾದರಿ."
+
+#: src/ollama_models.py:3611
+msgid ""
+"A robust conversational model designed to be used for both chat and instruct "
+"use cases."
+msgstr ""
+"ಚಾಟ್ ಮತ್ತು ಸೂಚನೆ ಬಳಕೆಯ ಪ್ರಕರಣಗಳಿಗೆ ಬಳಸಲು ವಿನ್ಯಾಸಗೊಳಿಸಲಾದ ದೃ saic ವಾದ ಸಂವಾದಾತ್ಮಕ "
+"ಮಾದರಿ."
+
+#: src/ollama_models.py:3633
+msgid ""
+"An upgraded version of DeekSeek-V2 that integrates the general and coding "
+"abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
+msgstr ""
+"ಡೀಪ್ಸೀಕ್-ವಿ 2-ಚಾಟ್ ಮತ್ತು ಡೀಪ್ಸೀಕ್-ಕೋಡರ್-ವಿ 2-ಇನ್ಸ್ಟ್ರಕ್ಟ್ ಎರಡರ ಸಾಮಾನ್ಯ ಮತ್ತು ಕೋಡಿಂಗ್ "
+"ಸಾಮರ್ಥ್ಯಗಳನ್ನು ಸಂಯೋಜಿಸುವ ಡೀಕ್ಸೀಕ್-ವಿ 2 ನ ನವೀಕರಿಸಿದ ಆವೃತ್ತಿ."
+
+#: src/ollama_models.py:3666
+msgid ""
+"ShieldGemma is set of instruction tuned models for evaluating the safety of "
+"text prompt input and text output responses against a set of defined safety "
+"policies."
+msgstr ""
+"ಶೀಲ್ಡ್ಜೆಮ್ಮಾ ವಿವರಿಸಿದ ಸುರಕ್ಷತಾ ನೀತಿಗಳ ವಿರುದ್ಧ ಪಠ್ಯ ಪ್ರಾಂಪ್ಟ್ ಇನ್ಪುಟ್ ಮತ್ತು ಪಠ್ಯ output "
+"ಟ್ಪುಟ್ ಪ್ರತಿಕ್ರಿಯೆಗಳ ಸುರಕ್ಷತೆಯನ್ನು ಮೌಲ್ಯಮಾಪನ ಮಾಡಲು ಸೂಚನಾ ಟ್ಯೂನ್ ಮಾದರಿಗಳ ಗುಂಪಾಗಿದೆ."
+
+#: src/ollama_models.py:3688
+msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
+msgstr "ಬೆಸ್ಪೋಕ್ ಲ್ಯಾಬ್ಸ್ ಅಭಿವೃದ್ಧಿಪಡಿಸಿದ ಅತ್ಯಾಧುನಿಕ ಸತ್ಯ-ಪರಿಶೀಲನಾ ಮಾದರಿ."
+
+#: src/ollama_models.py:3716
+msgid ""
+"Llama Guard 3 is a series of models fine-tuned for content safety "
+"classification of LLM inputs and responses."
+msgstr ""
+"ಲಾಮಾ ಗಾರ್ಡ್ 3 ಎಲ್‌ಎಲ್‌ಎಂ ಒಳಹರಿವು ಮತ್ತು ಪ್ರತಿಕ್ರಿಯೆಗಳ ವಿಷಯ ಸುರಕ್ಷತಾ ವರ್ಗೀಕರಣಕ್ಕಾಗಿ "
+"ಉತ್ತಮವಾಗಿ ಟ್ಯೂನ್ ಮಾಡಲಾದ ಮಾದರಿಗಳ ಸರಣಿಯಾಗಿದೆ."
+
+#: src/ollama_models.py:3740
+msgid ""
+"Sentence-transformers model that can be used for tasks like clustering or "
+"semantic search."
+msgstr ""
+"ಕ್ಲಸ್ಟರಿಂಗ್ ಅಥವಾ ಲಾಕ್ಷಣಿಕ ಹುಡುಕಾಟದಂತಹ ಕಾರ್ಯಗಳಿಗೆ ಬಳಸಬಹುದಾದ ವಾಕ್ಯ-ಪರಿವರ್ತಕಗಳ ಮಾದರಿ."
+
+#: src/ollama_models.py:3770
+msgid ""
+"OpenCoder is an open and reproducible code LLM family which includes 1.5B "
+"and 8B models, supporting chat in English and Chinese languages."
+msgstr ""
+"ಓಪನ್‌ಕೋಡರ್ ಮುಕ್ತ ಮತ್ತು ಪುನರುತ್ಪಾದಕ ಕೋಡ್ ಎಲ್ಎಲ್ಎಂ ಕುಟುಂಬವಾಗಿದ್ದು, ಇದು 1.5 ಬಿ ಮತ್ತು 8 ಬಿ "
+"ಮಾದರಿಗಳನ್ನು ಒಳಗೊಂಡಿದೆ, ಇಂಗ್ಲಿಷ್ ಮತ್ತು ಚೀನೀ ಭಾಷೆಗಳಲ್ಲಿ ಚಾಟ್ ಅನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:3799
+msgid ""
+"Tülu 3 is a leading instruction following model family, offering fully open-"
+"source data, code, and recipes by the The Allen Institute for AI."
+msgstr ""
+"ಟಲು 3 ಮಾದರಿ ಕುಟುಂಬವನ್ನು ಅನುಸರಿಸುವ ಪ್ರಮುಖ ಸೂಚನೆಯಾಗಿದ್ದು, ಅಲೆನ್ ಇನ್ಸ್ಟಿಟ್ಯೂಟ್ ಫಾರ್ "
+"ಎಐನಿಂದ ಸಂಪೂರ್ಣ ತೆರೆದ ಮೂಲ ಡೇಟಾ, ಕೋಡ್ ಮತ್ತು ಪಾಕವಿಧಾನಗಳನ್ನು ನೀಡುತ್ತದೆ."
+
+#: src/ollama_models.py:3827
+msgid ""
+"Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
+"support without sacrificing English performance or scalability."
+msgstr ""
+"ಸ್ನೋಫ್ಲೇಕ್‌ನ ಗಡಿನಾಡಿನ ಎಂಬೆಡಿಂಗ್ ಮಾದರಿ. ಆರ್ಕ್ಟಿಕ್ ಎಂಬೆಡ್ 2.0 ಇಂಗ್ಲಿಷ್ ಕಾರ್ಯಕ್ಷಮತೆ ಅಥವಾ "
+"ಸ್ಕೇಲೆಬಿಲಿಟಿ ತ್ಯಾಗ ಮಾಡದೆ ಬಹುಭಾಷಾ ಬೆಂಬಲವನ್ನು ಸೇರಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:3855
+msgid ""
+"The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
+"in prompts and/or responses."
+msgstr ""
+"ಐಬಿಎಂ ಗ್ರಾನೈಟ್ ಗಾರ್ಡಿಯನ್ 3.0 2 ಬಿ ಮತ್ತು 8 ಬಿ ಮಾದರಿಗಳನ್ನು ಅಪೇಕ್ಷೆಗಳು ಮತ್ತು/ಅಥವಾ "
+"ಪ್ರತಿಕ್ರಿಯೆಗಳಲ್ಲಿನ ಅಪಾಯಗಳನ್ನು ಕಂಡುಹಿಡಿಯಲು ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ."
+
+#: src/ollama_models.py:3889
+msgid ""
+"EXAONE 3.5 is a collection of instruction-tuned bilingual (English and "
+"Korean) generative models ranging from 2.4B to 32B parameters, developed and "
+"released by LG AI Research."
+msgstr ""
+"EXAONE 3.5 ಎನ್ನುವುದು ಎಲ್ಜಿ ಎಐ ಸಂಶೋಧನೆಯಿಂದ ಅಭಿವೃದ್ಧಿಪಡಿಸಿದ ಮತ್ತು ಬಿಡುಗಡೆಯಾದ 2.4 "
+"ಬಿ ಯಿಂದ 32 ಬಿ ನಿಯತಾಂಕಗಳವರೆಗಿನ ಸೂಚನಾ-ಟ್ಯೂನ್ಡ್ ದ್ವಿಭಾಷಾ (ಇಂಗ್ಲಿಷ್ ಮತ್ತು ಕೊರಿಯನ್) "
+"ಉತ್ಪಾದಕ ಮಾದರಿಗಳ ಸಂಗ್ರಹವಾಗಿದೆ."
+
+#: src/ollama_models.py:3937
+msgid ""
+"Sailor2 are multilingual language models made for South-East Asia. Available "
+"in 1B, 8B, and 20B parameter sizes."
+msgstr ""
+"ಸೈಲರ್ 2 ಆಗ್ನೇಯ ಏಷ್ಯಾಕ್ಕಾಗಿ ತಯಾರಿಸಿದ ಬಹುಭಾಷಾ ಭಾಷಾ ಮಾದರಿಗಳು. 1 ಬಿ, 8 ಬಿ, ಮತ್ತು 20 "
+"ಬಿ ಪ್ಯಾರಾಮೀಟರ್ ಗಾತ್ರಗಳಲ್ಲಿ ಲಭ್ಯವಿದೆ."
+
+#: src/ollama_models.py:3975
+msgid ""
+"A family of efficient AI models under 10B parameters performant in science, "
+"math, and coding through innovative training techniques."
+msgstr ""
+"ನವೀನ ತರಬೇತಿ ತಂತ್ರಗಳ ಮೂಲಕ ವಿಜ್ಞಾನ, ಗಣಿತ ಮತ್ತು ಕೋಡಿಂಗ್‌ನಲ್ಲಿ 10 ಬಿ ನಿಯತಾಂಕಗಳ ಅಡಿಯಲ್ಲಿ "
+"ದಕ್ಷ ಎಐ ಮಾದರಿಗಳ ಕುಟುಂಬ."
+
+#: src/ollama_models.py:4016
+msgid ""
+"The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 "
+"trillion tokens of data, demonstrated significant improvements over their "
+"predecessors in performance and speed in IBM’s initial testing."
+msgstr ""
+"ಐಬಿಎಂ ಗ್ರಾನೈಟ್ 2 ಬಿ ಮತ್ತು 8 ಬಿ ಮಾದರಿಗಳು ಪಠ್ಯ-ಮಾತ್ರ ದಟ್ಟವಾದ ಎಲ್ಎಲ್ಎಂಎಸ್ ಆಗಿದ್ದು, 12 "
+"ಟ್ರಿಲಿಯನ್ ಟೋಕನ್ಗಳ ದತ್ತಾಂಶಗಳಲ್ಲಿ ತರಬೇತಿ ಪಡೆದವು, ಐಬಿಎಂನ ಆರಂಭಿಕ ಪರೀಕ್ಷೆಯಲ್ಲಿ ಕಾರ್ಯಕ್ಷಮತೆ "
+"ಮತ್ತು ವೇಗದಲ್ಲಿ ತಮ್ಮ ಪೂರ್ವವರ್ತಿಗಳ ಮೇಲೆ ಗಮನಾರ್ಹ ಸುಧಾರಣೆಗಳನ್ನು ತೋರಿಸಿದೆ."
+
+#: src/ollama_models.py:4057
+msgid ""
+"The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) "
+"Granite models from IBM designed for low latency usage."
+msgstr ""
+"ಐಬಿಎಂ ಗ್ರಾನೈಟ್ 1 ಬಿ ಮತ್ತು 3 ಬಿ ಮಾದರಿಗಳು ಕಡಿಮೆ ಸುಪ್ತ ಬಳಕೆಗಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾದ "
+"ಐಬಿಎಂನಿಂದ ತಜ್ಞರ (ಎಂಒಇ) ಗ್ರಾನೈಟ್ ಮಾದರಿಗಳ ದೀರ್ಘ-ಸಂದರ್ಭದ ಮಿಶ್ರಣವಾಗಿದೆ."
+
+#: src/ollama_models.py:4098
+msgid ""
+"The IBM Granite Embedding 30M and 278M models models are text-only dense "
+"biencoder embedding models, with 30M available in English only and 278M "
+"serving multilingual use cases."
+msgstr ""
+"ಐಬಿಎಂ ಗ್ರಾನೈಟ್ ಎಂಬೆಡಿಂಗ್ 30 ಎಂ ಮತ್ತು 278 ಎಂ ಮಾದರಿಗಳ ಮಾದರಿಗಳು ಪಠ್ಯ-ಮಾತ್ರ ದಟ್ಟವಾದ "
+"ಬೈನ್ಕೋಡರ್ ಎಂಬೆಡಿಂಗ್ ಮಾದರಿಗಳಾಗಿದ್ದು, 30 ಎಂ ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ಮಾತ್ರ ಲಭ್ಯವಿದೆ ಮತ್ತು 278 ಮೀಟರ್ "
+"ಸೇವೆ ಸಲ್ಲಿಸುವ ಬಹುಭಾಷಾ ಬಳಕೆಯ ಪ್ರಕರಣಗಳು."
+
+#: src/ollama_models.py:4120
+msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
+msgstr "ಫಿ -4 ಎನ್ನುವುದು ಮೈಕ್ರೋಸಾಫ್ಟ್‌ನಿಂದ 14 ಬಿ ನಿಯತಾಂಕ, ಅತ್ಯಾಧುನಿಕ ತೆರೆದ ಮಾದರಿ."
+
+#: src/ollama_models.py:4143
+msgid ""
+"A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
+msgstr ""
+"ಕ್ವೆನ್ 2.5 3 ಬಿ ಸೂಚನೆ ಮಾದರಿಯಿಂದ ಹೊಸ ಸಣ್ಣ ತಾರ್ಕಿಕ ಮಾದರಿ ಉತ್ತಮವಾಗಿ ಟ್ಯೂನ್ ಮಾಡಲಾಗಿದೆ."
+
+#: src/ollama_models.py:4167
+msgid ""
+"Dolphin 3.0 Llama 3.1 8B 🐬 is the next generation of the Dolphin series of "
+"instruct-tuned models designed to be the ultimate general purpose local "
+"model, enabling coding, math, agentic, function calling, and general use "
+"cases."
+msgstr ""
+"ಡಾಲ್ಫಿನ್ 3.0 ಲಾಮಾ 3.1 8 ಬಿ the ಮುಂದಿನ ಪೀಳಿಗೆಯ ಡಾಲ್ಫಿನ್ ಸರಣಿಯ ಸೂಚನೆ-ಟ್ಯೂನ್ ಮಾಡಲಾದ "
+"ಮಾದರಿಗಳಾಗಿದ್ದು, ಅಂತಿಮ ಸಾಮಾನ್ಯ ಉದ್ದೇಶದ ಸ್ಥಳೀಯ ಮಾದರಿಯಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ, "
+"ಕೋಡಿಂಗ್, ಗಣಿತ, ಏಜೆಂಟರ, ಕಾರ್ಯ ಕರೆ ಮತ್ತು ಸಾಮಾನ್ಯ ಬಳಕೆಯ ಪ್ರಕರಣಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:4218
+msgid ""
+"DeepSeek's first-generation of reasoning models with comparable performance "
+"to OpenAI-o1, including six dense models distilled from DeepSeek-R1 based on "
+"Llama and Qwen."
+msgstr ""
+"ಲಾಮಾ ಮತ್ತು ಕ್ವೆನ್ ಆಧಾರಿತ ಡೀಪ್ಸೀಕ್-ಆರ್ 1 ನಿಂದ ಬಟ್ಟಿ ಇಳಿಸಿದ ಆರು ದಟ್ಟವಾದ ಮಾದರಿಗಳನ್ನು "
+"ಒಳಗೊಂಡಂತೆ ಓಪನ್ಐ-ಒ 1 ಗೆ ಹೋಲಿಸಬಹುದಾದ ಕಾರ್ಯಕ್ಷಮತೆಯೊಂದಿಗೆ ಡೀಪ್ಸೀಕ್ ಮೊದಲ ತಲೆಮಾರಿನ "
+"ತಾರ್ಕಿಕ ಮಾದರಿಗಳ ಮೊದಲ ತಲೆಮಾರಿನ ಮೊದಲ ತಲೆಮಾರಿನ."
+
+#: src/ollama_models.py:4239
+msgid ""
+"A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
+"with 37B activated for each token."
+msgstr ""
+"ಪ್ರತಿ ಟೋಕನ್‌ಗೆ 37 ಬಿ ಒಟ್ಟು ನಿಯತಾಂಕಗಳನ್ನು ಹೊಂದಿರುವ 671 ಬಿ ಒಟ್ಟು ನಿಯತಾಂಕಗಳನ್ನು "
+"ಹೊಂದಿರುವ ಬಲವಾದ ಮಿಶ್ರಣ-ತಜ್ಞ (ಎಂಒಇ) ಭಾಷಾ ಮಾದರಿ."
+
+#: src/ollama_models.py:4266
+msgid ""
+"OLMo 2 is a new family of 7B and 13B models trained on up to 5T tokens. "
+"These models are on par with or better than equivalently sized fully open "
+"models, and competitive with open-weight models such as Llama 3.1 on English "
+"academic benchmarks."
+msgstr ""
+"ಓಲ್ಮೋ 2 7 ಬಿ ಮತ್ತು 13 ಬಿ ಮಾದರಿಗಳ ಹೊಸ ಕುಟುಂಬವಾಗಿದ್ದು, 5 ಟಿ ಟೋಕನ್‌ಗಳವರೆಗೆ ತರಬೇತಿ "
+"ಪಡೆದಿದೆ. ಈ ಮಾದರಿಗಳು ಸಮಾನ ಗಾತ್ರದ ಸಂಪೂರ್ಣ ತೆರೆದ ಮಾದರಿಗಳಿಗಿಂತ ಸಮನಾಗಿವೆ ಅಥವಾ "
+"ಉತ್ತಮವಾಗಿವೆ ಮತ್ತು ಇಂಗ್ಲಿಷ್ ಶೈಕ್ಷಣಿಕ ಮಾನದಂಡಗಳಲ್ಲಿ ಲಾಮಾ 3.1 ನಂತಹ ಮುಕ್ತ-ತೂಕದ "
+"ಮಾದರಿಗಳೊಂದಿಗೆ ಸ್ಪರ್ಧಾತ್ಮಕವಾಗಿವೆ."
+
+#: src/ollama_models.py:4314
+msgid ""
+"The smallest model in Cohere's R series delivers top-tier speed, efficiency, "
+"and quality to build powerful AI applications on commodity GPUs and edge "
+"devices."
+msgstr ""
+"ಕೊಹೆರ್‌ನ ಆರ್ ಸರಣಿಯಲ್ಲಿನ ಚಿಕ್ಕ ಮಾದರಿಯು ಸರಕು ಜಿಪಿಯುಗಳು ಮತ್ತು ಎಡ್ಜ್ ಸಾಧನಗಳಲ್ಲಿ ಪ್ರಬಲ ಎಐ "
+"ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿರ್ಮಿಸಲು ಉನ್ನತ-ಶ್ರೇಣಿಯ ವೇಗ, ದಕ್ಷತೆ ಮತ್ತು ಗುಣಮಟ್ಟವನ್ನು ನೀಡುತ್ತದೆ."
+
+#: src/ollama_models.py:4342
+msgid ""
+"A fully open-source family of reasoning models built using a dataset derived "
+"by distilling DeepSeek-R1."
+msgstr ""
+"ಡೀಪ್ಸೀಕ್-ಆರ್ 1 ಅನ್ನು ಬಟ್ಟಿ ಇಳಿಸುವ ಮೂಲಕ ಪಡೆದ ಡೇಟಾಸೆಟ್ ಬಳಸಿ ನಿರ್ಮಿಸಲಾದ ತಾರ್ಕಿಕ ಮಾದರಿಗಳ "
+"ಸಂಪೂರ್ಣ ತೆರೆದ ಮೂಲ ಕುಟುಂಬ."
+
+#: src/ollama_models.py:4366
+msgid ""
+"A fine-tuned version of Deepseek-R1-Distilled-Qwen-1.5B that surpasses the "
+"performance of OpenAI’s o1-preview with just 1.5B parameters on popular math "
+"evaluations."
+msgstr ""
+"ಡೀಪ್ಸೀಕ್-ಆರ್ 1-ಡಿಸ್ಟಿಲ್ಡ್-ಕ್ಯೂವೆನ್ -1.5 ಬಿ ಯ ಉತ್ತಮ-ಟ್ಯೂನ್ಡ್ ಆವೃತ್ತಿ, ಇದು ಓಪನ್ಎಐನ ಒ 1-"
+"ಪ್ರಿವ್ಯೂನ ಕಾರ್ಯಕ್ಷಮತೆಯನ್ನು ಜನಪ್ರಿಯ ಗಣಿತ ಮೌಲ್ಯಮಾಪನಗಳ ಮೇಲೆ ಕೇವಲ 1.5 ಬಿ ನಿಯತಾಂಕಗಳೊಂದಿಗೆ "
+"ಮೀರಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:4396
+msgid ""
+"A version of the DeepSeek-R1 model that has been post trained to provide "
+"unbiased, accurate, and factual information by Perplexity."
+msgstr ""
+"ಡೀಪ್ಸೀಕ್-ಆರ್ 1 ಮಾದರಿಯ ಒಂದು ಆವೃತ್ತಿ, ಪಕ್ಷಪಾತವಿಲ್ಲದ, ನಿಖರ ಮತ್ತು ವಾಸ್ತವಿಕ ಮಾಹಿತಿಯನ್ನು "
+"ಗೊಂದಲದಿಂದ ಒದಗಿಸಲು ಪೋಸ್ಟ್ ತರಬೇತಿ ಪಡೆದಿದೆ."
+
+#: src/ollama_models.py:4433
+msgid "The current, most capable model that runs on a single GPU."
+msgstr "ಒಂದೇ ಜಿಪಿಯುನಲ್ಲಿ ಚಲಿಸುವ ಪ್ರಸ್ತುತ, ಅತ್ಯಂತ ಸಮರ್ಥ ಮಾದರಿ."
+
+#: src/ollama_models.py:4480
+msgid ""
+"Phi-4-mini brings significant enhancements in multilingual support, "
+"reasoning, and mathematics, and now, the long-awaited function calling "
+"feature is finally supported."
+msgstr ""
+"ಫಿ -4-ಮಿನಿ ಬಹುಭಾಷಾ ಬೆಂಬಲ, ತಾರ್ಕಿಕತೆ ಮತ್ತು ಗಣಿತಶಾಸ್ತ್ರದಲ್ಲಿ ಗಮನಾರ್ಹ ವರ್ಧನೆಗಳನ್ನು "
+"ತರುತ್ತದೆ, ಮತ್ತು ಈಗ, ಬಹುನಿರೀಕ್ಷಿತ ಕಾರ್ಯ ಕರೆ ಮಾಡುವ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಅಂತಿಮವಾಗಿ "
+"ಬೆಂಬಲಿಸಲಾಗುತ್ತದೆ."
+
+#: src/ollama_models.py:4504
+msgid ""
+"A compact and efficient vision-language model, specifically designed for "
+"visual document understanding, enabling automated content extraction from "
+"tables, charts, infographics, plots, diagrams, and more."
+msgstr ""
+"ಕಾಂಪ್ಯಾಕ್ಟ್ ಮತ್ತು ಪರಿಣಾಮಕಾರಿ ದೃಷ್ಟಿ-ಭಾಷೆಯ ಮಾದರಿ, ನಿರ್ದಿಷ್ಟವಾಗಿ ದೃಶ್ಯ ಡಾಕ್ಯುಮೆಂಟ್ "
+"ತಿಳುವಳಿಕೆ, ಕೋಷ್ಟಕಗಳು, ಚಾರ್ಟ್‌ಗಳು, ಇನ್ಫೋಗ್ರಾಫಿಕ್ಸ್, ಪ್ಲಾಟ್‌ಗಳು, ರೇಖಾಚಿತ್ರಗಳು ಮತ್ತು "
+"ಹೆಚ್ಚಿನವುಗಳಿಂದ ಸ್ವಯಂಚಾಲಿತ ವಿಷಯ ಹೊರತೆಗೆಯುವಿಕೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:4544
+msgid ""
+"Granite-3.2 is a family of long-context AI models from IBM Granite fine-"
+"tuned for thinking capabilities."
+msgstr ""
+"ಗ್ರಾನೈಟ್ -3.2 ಎನ್ನುವುದು ಐಬಿಎಂ ಗ್ರಾನೈಟ್‌ನಿಂದ ದೀರ್ಘ-ಸಂದರ್ಭದ ಎಐ ಮಾದರಿಗಳ ಕುಟುಂಬವಾಗಿದ್ದು, "
+"ಆಲೋಚನಾ ಸಾಮರ್ಥ್ಯಗಳಿಗಾಗಿ ಉತ್ತಮವಾಗಿ ಟ್ಯೂನ್ ಮಾಡಲಾಗಿದೆ."
+
+#: src/ollama_models.py:4568
+msgid ""
+"A new state-of-the-art version of the lightweight Command R7B model that "
+"excels in advanced Arabic language capabilities for enterprises in the "
+"Middle East and Northern Africa."
+msgstr ""
+"ಮಧ್ಯಪ್ರಾಚ್ಯ ಮತ್ತು ಉತ್ತರ ಆಫ್ರಿಕಾದ ಉದ್ಯಮಗಳಿಗೆ ಸುಧಾರಿತ ಅರೇಬಿಕ್ ಭಾಷಾ ಸಾಮರ್ಥ್ಯಗಳಲ್ಲಿ "
+"ಉತ್ಕೃಷ್ಟವಾಗಿರುವ ಹಗುರವಾದ ಕಮಾಂಡ್ ಆರ್ 7 ಬಿ ಮಾದರಿಯ ಹೊಸ ಅತ್ಯಾಧುನಿಕ ಆವೃತ್ತಿ."
+
+#: src/ollama_models.py:4614
+msgid ""
+"111 billion parameter model optimized for demanding enterprises that require "
+"fast, secure, and high-quality AI"
+msgstr ""
+"111 ಬಿಲಿಯನ್ ಪ್ಯಾರಾಮೀಟರ್ ಮಾದರಿಯನ್ನು ವೇಗವಾಗಿ, ಸುರಕ್ಷಿತ ಮತ್ತು ಉತ್ತಮ-ಗುಣಮಟ್ಟದ AI "
+"ಅಗತ್ಯವಿರುವ ಬೇಡಿಕೆಯ ಉದ್ಯಮಗಳಿಗೆ ಹೊಂದುವಂತೆ ಮಾಡಲಾಗಿದೆ"
+
+#: src/ollama_models.py:4655
+msgid ""
+"Qwen3 is the latest generation of large language models in Qwen series, "
+"offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
+msgstr ""
+"ಕ್ವೆನ್ 3 ಕ್ವೆನ್ ಸರಣಿಯಲ್ಲಿನ ಇತ್ತೀಚಿನ ಪೀಳಿಗೆಯ ದೊಡ್ಡ ಭಾಷಾ ಮಾದರಿಗಳಾಗಿದ್ದು, ದಟ್ಟವಾದ ಮತ್ತು "
+"ಮಿಶ್ರಣ-ತಜ್ಞ (ಎಂಒಇ) ಮಾದರಿಗಳ ಸಮಗ್ರ ಸೂಟ್ ಅನ್ನು ನೀಡುತ್ತದೆ."
+
+#: src/ollama_models.py:4802
+msgid "Devstral: the best open source model for coding agents"
+msgstr "ಡೆವ್‌ಸ್ಟ್ರಾಲ್: ಕೋಡಿಂಗ್ ಏಜೆಂಟ್‌ಗಳಿಗೆ ಅತ್ಯುತ್ತಮ ಓಪನ್ ಸೋರ್ಸ್ ಮಾದರಿ"
+
+#: src/ollama_models.py:4830
+msgid "Meta's latest collection of multimodal models."
+msgstr "ಮೆಟಾದ ಮಲ್ಟಿಮೋಡಲ್ ಮಾದರಿಗಳ ಇತ್ತೀಚಿನ ಸಂಗ್ರಹ."
+
+#: src/ollama_models.py:4878
+msgid ""
+"Flagship vision-language model of Qwen and also a significant leap from the "
+"previous Qwen2-VL."
+msgstr ""
+"ಕ್ವೆನ್‌ನ ಪ್ರಮುಖ ದೃಷ್ಟಿ-ಭಾಷೆಯ ಮಾದರಿ ಮತ್ತು ಹಿಂದಿನ QWEN2-VL ನಿಂದ ಗಮನಾರ್ಹವಾದ ಅಧಿಕ."
+
+#: src/ollama_models.py:4908
+msgid ""
+"DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
+"1.5B version also available."
+msgstr ""
+"ಡೀಪ್‌ಕೋಡರ್ ಒ 3-ಮಿನಿ ಮಟ್ಟದಲ್ಲಿ ಸಂಪೂರ್ಣ ತೆರೆದ ಮೂಲ 14 ಬಿ ಕೋಡರ್ ಮಾದರಿಯಾಗಿದ್ದು, 1.5 ಬಿ "
+"ಆವೃತ್ತಿಯು ಸಹ ಲಭ್ಯವಿದೆ."
+
+#: src/ollama_models.py:4933
+msgid ""
+"Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-"
+"art vision understanding and enhances long context capabilities up to 128k "
+"tokens without compromising text performance."
+msgstr ""
+"ಮಿಸ್ಟ್ರಲ್ ಸಣ್ಣ 3 ಅನ್ನು ನಿರ್ಮಿಸಿ, ಮಿಸ್ಟ್ರಾಲ್ ಸ್ಮಾಲ್ 3.1 (2503) ಅತ್ಯಾಧುನಿಕ ದೃಷ್ಟಿ "
+"ತಿಳುವಳಿಕೆಯನ್ನು ಸೇರಿಸುತ್ತದೆ ಮತ್ತು ಪಠ್ಯ ಕಾರ್ಯಕ್ಷಮತೆಯನ್ನು ರಾಜಿ ಮಾಡಿಕೊಳ್ಳದೆ 128 ಕೆ "
+"ಟೋಕನ್‌ಗಳವರೆಗೆ ದೀರ್ಘ ಸಂದರ್ಭ ಸಾಮರ್ಥ್ಯಗಳನ್ನು ಹೆಚ್ಚಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:4973
+msgid ""
+"Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that "
+"outperform the best available open models of the same size, including "
+"counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."
+msgstr ""
+"ಕೊಗಿಟೊ ವಿ 1 ಪೂರ್ವವೀಕ್ಷಣೆ ಡೀಪ್ ಕೊಗಿಟೊ ಅವರ ಹೈಬ್ರಿಡ್ ತಾರ್ಕಿಕ ಮಾದರಿಗಳ ಕುಟುಂಬವಾಗಿದ್ದು, "
+"ಅದೇ ಗಾತ್ರದ ಲಭ್ಯವಿರುವ ಅತ್ಯುತ್ತಮ ತೆರೆದ ಮಾದರಿಗಳನ್ನು ಮೀರಿಸುತ್ತದೆ, ಇದರಲ್ಲಿ ಲಾಮಾ, ಡೀಪ್ಸೀಕ್ "
+"ಮತ್ತು ಕ್ವೆನ್ ಅವರ ಪ್ರತಿರೂಪಗಳು ಹೆಚ್ಚಿನ ಪ್ರಮಾಣಿತ ಮಾನದಂಡಗಳಲ್ಲಿ."
+
+#: src/ollama_models.py:5002
+msgid ""
+"IBM Granite 2B and 8B models are 128K context length language models that "
+"have been fine-tuned for improved reasoning and instruction-following "
+"capabilities."
+msgstr ""
+"ಐಬಿಎಂ ಗ್ರಾನೈಟ್ 2 ಬಿ ಮತ್ತು 8 ಬಿ ಮಾದರಿಗಳು 128 ಕೆ ಸಂದರ್ಭದ ಉದ್ದದ ಭಾಷಾ ಮಾದರಿಗಳಾಗಿದ್ದು, "
+"ಸುಧಾರಿತ ತಾರ್ಕಿಕತೆ ಮತ್ತು ಸೂಚನಾ-ಅನುಸರಿಸುವ ಸಾಮರ್ಥ್ಯಗಳಿಗಾಗಿ ಉತ್ತಮವಾಗಿ ಟ್ಯೂನ್ ಮಾಡಲಾಗಿದೆ."
+
+#: src/ollama_models.py:5040
+msgid ""
+"Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
+"reasoning models that rival much larger models on complex reasoning tasks."
+msgstr ""
+"ಪಿಹೆಚ್‌ಐ 4 ತಾರ್ಕಿಕ ಮತ್ತು ತಾರ್ಕಿಕ ಪ್ಲಸ್ 14-ಬಿಲಿಯನ್ ಪ್ಯಾರಾಮೀಟರ್ ಮುಕ್ತ-ತೂಕದ ತಾರ್ಕಿಕ "
+"ಮಾದರಿಗಳಾಗಿದ್ದು, ಸಂಕೀರ್ಣ ತಾರ್ಕಿಕ ಕಾರ್ಯಗಳಲ್ಲಿ ಹೆಚ್ಚು ದೊಡ್ಡ ಮಾದರಿಗಳನ್ನು ಪ್ರತಿಸ್ಪರ್ಧಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:5073
+msgid ""
+"EXAONE Deep exhibits superior capabilities in various reasoning tasks "
+"including math and coding benchmarks, ranging from 2.4B to 32B parameters "
+"developed and released by LG AI Research."
+msgstr ""
+"ಎಲ್ಜಿ ಎಐ ಸಂಶೋಧನೆಯಿಂದ ಅಭಿವೃದ್ಧಿಪಡಿಸಿದ ಮತ್ತು ಬಿಡುಗಡೆ ಮಾಡಿದ 2.4 ಬಿ ಯಿಂದ 32 ಬಿ "
+"ನಿಯತಾಂಕಗಳವರೆಗೆ ಗಣಿತ ಮತ್ತು ಕೋಡಿಂಗ್ ಮಾನದಂಡಗಳು ಸೇರಿದಂತೆ ವಿವಿಧ ತಾರ್ಕಿಕ ಕಾರ್ಯಗಳಲ್ಲಿ "
+"ಎಕ್ಸಾಸೊನ್ ಡೀಪ್ ಉತ್ತಮ ಸಾಮರ್ಥ್ಯಗಳನ್ನು ಪ್ರದರ್ಶಿಸುತ್ತದೆ."
+
+#: src/ollama_models.py:5100
+msgid ""
+"Phi 4 mini reasoning is a lightweight open model that balances efficiency "
+"with advanced reasoning ability."
+msgstr ""
+"PHI 4 ಮಿನಿ ತಾರ್ಕಿಕತೆಯು ಹಗುರವಾದ ಮುಕ್ತ ಮಾದರಿಯಾಗಿದ್ದು ಅದು ಸುಧಾರಿತ ತಾರ್ಕಿಕ "
+"ಸಾಮರ್ಥ್ಯದೊಂದಿಗೆ ದಕ್ಷತೆಯನ್ನು ಸಮತೋಲನಗೊಳಿಸುತ್ತದೆ."
+
+#: src/window.py:156
+msgid "Ollama Was Not Found"
+msgstr "ಒಲ್ಲಾಮಾ ಕಂಡುಬಂದಿಲ್ಲ"
+
+#: src/window.py:157
+msgid ""
+"To add a managed Ollama instance, you must have Ollama installed locally in "
+"your device, this is a simple process and should not take more than 5 "
+"minutes."
+msgstr ""
+"ನಿರ್ವಹಿಸಿದ ಒಲ್ಲಾಮಾ ನಿದರ್ಶನವನ್ನು ಸೇರಿಸಲು, ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸ್ಥಳೀಯವಾಗಿ ಒಲ್ಲಾಮಾವನ್ನು "
+"ಸ್ಥಾಪಿಸಿರಬೇಕು, ಇದು ಸರಳ ಪ್ರಕ್ರಿಯೆ ಮತ್ತು 5 ನಿಮಿಷಗಳಿಗಿಂತ ಹೆಚ್ಚು ಸಮಯ ತೆಗೆದುಕೊಳ್ಳಬಾರದು."
+
+#: src/window.py:159
+msgid "Open Tutorial in Web Browser"
+msgstr "ವೆಬ್ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಟ್ಯುಟೋರಿಯಲ್ ತೆರೆಯಿರಿ"
+
+#: src/window.py:165 src/window.py:173 src/window.ui:496 src/window.ui:506
+#: src/window.ui:528
+msgid "Add Instance"
+msgstr "ಉದಾಹರಣೆಗೆ ಸೇರಿಸಿ"
+
+#: src/window.py:174
+msgid "Select a type of instance to add"
+msgstr "ಸೇರಿಸಲು ಒಂದು ರೀತಿಯ ಉದಾಹರಣೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ"
+
+#: src/window.py:387
+msgid "No tools enabled."
+msgstr "ಯಾವುದೇ ಸಾಧನಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿಲ್ಲ."
+
+#: src/window.py:387
+msgid "Open Tool Manager"
+msgstr "ಓಪನ್ ಟೂಲ್ ಮ್ಯಾನೇಜರ್"
+
+#: src/window.py:390
+msgid "Please select a model before chatting"
+msgstr "ಚಾಟ್ ಮಾಡುವ ಮೊದಲು ದಯವಿಟ್ಟು ಮಾದರಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ"
+
+#: src/window.py:463 src/window.py:464 src/window.py:559 src/window.ui:355
+msgid "Close"
+msgstr "ಮುಚ್ಚಿಡು"
+
+#: src/window.py:466 src/window.py:467 src/window.ui:62 src/window.ui:63
+msgid "Next"
+msgstr "ನೆನ್ನಿಯ"
+
+#: src/window.py:557 src/window.ui:992 src/window.ui:996
+#: src/widgets/dialog.py:150 src/widgets/dialog.py:163
+#: src/widgets/dialog.py:176 src/widgets/instance_manager.py:470
+#: src/widgets/instance_manager.py:471 src/widgets/model_manager.py:644
+#: src/widgets/blocks/code.py:136 src/widgets/blocks/text.py:111
+#: src/widgets/tools/tools.py:132
+msgid "Cancel"
+msgstr "ರದ್ದುಮಾಡು"
+
+#: src/window.py:558
+msgid "Hide"
+msgstr "ಆಡು"
+
+#: src/window.py:562
+msgid "Close Alpaca?"
+msgstr "ಅಲ್ಪಕಾವನ್ನು ಮುಚ್ಚಿ?"
+
+#: src/window.py:563
+msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
+msgstr "ಒಂದು ಕಾರ್ಯವು ಪ್ರಸ್ತುತ ಪ್ರಗತಿಯಲ್ಲಿದೆ. ನೀವು ಅಲ್ಪಕಾವನ್ನು ಮುಚ್ಚಲು ಬಯಸುತ್ತೀರಾ?"
+
+#: src/window.py:775 src/window.ui:163 src/window.ui:1232
+#: src/widgets/chat.py:206 src/widgets/instance_manager.py:58
+#: src/widgets/instance_manager.py:69 src/widgets/instance_manager.py:110
+msgid "New Chat"
+msgstr "ಹೊಸ ಚಾಟ್"
+
+#: src/window.py:855
+msgid "This video does not have any transcriptions"
+msgstr "ಈ ವೀಡಿಯೊಗೆ ಯಾವುದೇ ಪ್ರತಿಲೇಖನಗಳಿಲ್ಲ"
+
+#: src/window.py:863
+msgid "Attach YouTube Video?"
+msgstr "ಯೂಟ್ಯೂಬ್ ವೀಡಿಯೊವನ್ನು ಲಗತ್ತಿಸುವುದೇ?"
+
+#: src/window.py:864
+msgid ""
+"{}\n"
+"\n"
+"Please select a transcript to include"
+msgstr ""
+"{}\n"
+"\n"
+"ದಯವಿಟ್ಟು ಸೇರಿಸಲು ಪ್ರತಿಲೇಖನವನ್ನು ಆಯ್ಕೆಮಾಡಿ"
+
+#: src/window.py:870
+msgid "Error attaching video, please try again"
+msgstr "ವೀಡಿಯೊ ಲಗತ್ತಿಸುವಲ್ಲಿ ದೋಷ, ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ"
+
+#: src/window.py:892 src/window.py:1259
+msgid "Attach Website? (Experimental)"
+msgstr "ವೆಬ್‌ಸೈಟ್ ಲಗತ್ತಿಸುವುದೇ? (ಪ್ರಾಯೋಗಿಕ)"
+
+#: src/window.py:893
+msgid ""
+"Are you sure you want to attach\n"
+"'{}'?"
+msgstr "ನೀವು '{}' ಅನ್ನು ಲಗತ್ತಿಸಲು ಬಯಸುವಿರಾ?"
+
+#: src/window.py:912 src/window.py:1256
+msgid "Image recognition is only available on specific models"
+msgstr "ಚಿತ್ರ ಗುರುತಿಸುವಿಕೆ ನಿರ್ದಿಷ್ಟ ಮಾದರಿಗಳಲ್ಲಿ ಮಾತ್ರ ಲಭ್ಯವಿದೆ"
+
+#: src/window.py:1038
+msgid "Chat imported successfully"
+msgstr "ಚಾಟ್ ಯಶಸ್ವಿಯಾಗಿ ಆಮದು ಮಾಡಿಕೊಳ್ಳಲಾಗಿದೆ"
+
+#: src/window.py:1052
+msgid "Attachment failed, screenshot might be too big"
+msgstr "ಲಗತ್ತು ವಿಫಲವಾಗಿದೆ, ಸ್ಕ್ರೀನ್‌ಶಾಟ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿರಬಹುದು"
+
+#: src/window.py:1101
+msgid "Any compatible Alpaca attachment"
+msgstr "ಯಾವುದೇ ಹೊಂದಾಣಿಕೆಯ ಅಲ್ಪಕಾ ಲಗತ್ತು"
+
+#: src/window.py:1227
+msgid "Attach Screenshot"
+msgstr "ಸ್ಕ್ರೀನ್‌ಶಾಟ್ ಅನ್ನು ಲಗತ್ತಿಸಿ"
+
+#: src/window.py:1260
+msgid "Please enter a website URL"
+msgstr "ದಯವಿಟ್ಟು ವೆಬ್‌ಸೈಟ್ URL ಅನ್ನು ನಮೂದಿಸಿ"
+
+#: src/window.py:1266
+msgid "Attach YouTube Captions?"
+msgstr "ಯೂಟ್ಯೂಬ್ ಶೀರ್ಷಿಕೆಗಳನ್ನು ಲಗತ್ತಿಸುವುದೇ?"
+
+#: src/window.py:1267
+msgid "Please enter a YouTube video URL"
+msgstr "ದಯವಿಟ್ಟು ಯೂಟ್ಯೂಬ್ ವೀಡಿಯೊ URL ಅನ್ನು ನಮೂದಿಸಿ"
+
+#: src/window.py:1275
+msgid "Download Model?"
+msgstr "ಮಾದರಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡುವುದೇ?"
+
+#: src/window.py:1276
+msgid "Please enter the model name following this template: name:tag"
+msgstr "ಈ ಟೆಂಪ್ಲೇಟ್ ಅನ್ನು ಅನುಸರಿಸಿ ದಯವಿಟ್ಟು ಮಾದರಿ ಹೆಸರನ್ನು ನಮೂದಿಸಿ: ಹೆಸರು: ಟ್ಯಾಗ್"
+
+#: src/window.py:1283
+msgid "Delete All Chats?"
+msgstr "ಎಲ್ಲಾ ಚಾಟ್‌ಗಳನ್ನು ಅಳಿಸುವುದೇ?"
+
+#: src/window.py:1284
+msgid "Are you sure you want to delete all chats?"
+msgstr "ನೀವು ಎಲ್ಲಾ ಚಾಟ್‌ಗಳನ್ನು ಅಳಿಸಲು ಬಯಸುತ್ತೀರಾ?"
+
+#: src/window.py:1286 src/widgets/attachments.py:211 src/widgets/chat.py:459
+msgid "Delete"
+msgstr "ಅಳಿಸು"
+
+#: src/window.py:1313
+msgid "Already Installed!"
+msgstr "ಈಗಾಗಲೇ ಸ್ಥಾಪಿಸಲಾಗಿದೆ!"
+
+#: src/window.ui:34
+msgid "Welcome"
+msgstr "ಸುಧನ"
+
+#: src/window.ui:46 src/window.ui:47
+msgid "Previous"
+msgstr "ಹಿಂದಿನ"
+
+#: src/window.ui:82
+msgid "Welcome to Alpaca"
+msgstr "ಅಲ್ಪಕಾಗೆ ಸುಸ್ವಾಗತ"
+
+#: src/window.ui:83
+msgid "Powering your potential"
+msgstr "ನಿಮ್ಮ ಸಾಮರ್ಥ್ಯವನ್ನು ಹೆಚ್ಚಿಸುವುದು"
+
+#: src/window.ui:91
+msgid ""
+"Alpaca and its developers are not liable for any damages to devices or "
+"software resulting from the execution of code generated by an AI model. "
+"Please exercise caution and review the code carefully before running it.\n"
+"\n"
+"Alpaca is distributed under GPL v3.0, this software comes with no warranty."
+msgstr ""
+"ಎಐ ಮಾದರಿಯಿಂದ ಉತ್ಪತ್ತಿಯಾಗುವ ಕೋಡ್‌ನ ಕಾರ್ಯಗತಗೊಳಿಸುವಿಕೆಯಿಂದ ಉಂಟಾಗುವ ಸಾಧನಗಳು ಅಥವಾ "
+"ಸಾಫ್ಟ್‌ವೇರ್‌ಗಳಿಗೆ ಯಾವುದೇ ಹಾನಿಗಳಿಗೆ ಅಲ್ಪಕಾ ಮತ್ತು ಅದರ ಡೆವಲಪರ್‌ಗಳು ಜವಾಬ್ದಾರರಾಗಿರುವುದಿಲ್ಲ. "
+"ದಯವಿಟ್ಟು ಎಚ್ಚರಿಕೆಯಿಂದ ಚಲಾಯಿಸಿ ಮತ್ತು ಕೋಡ್ ಅನ್ನು ಚಲಾಯಿಸುವ ಮೊದಲು ಅದನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ "
+"ಪರಿಶೀಲಿಸಿ.  Aಲ್ಪಾಕಾವನ್ನು ಜಿಪಿಎಲ್ ವಿ 3.0 ಅಡಿಯಲ್ಲಿ ವಿತರಿಸಲಾಗುತ್ತದೆ, ಈ ಸಾಫ್ಟ್‌ವೇರ್ "
+"ಯಾವುದೇ ಖಾತರಿಯಿಲ್ಲದೆ ಬರುತ್ತದೆ."
+
+#: src/window.ui:100
+msgid "Effortless Code Execution"
+msgstr "ಪ್ರಯತ್ನವಿಲ್ಲದ ಕೋಡ್ ಮರಣದಂಡನೆ"
+
+#: src/window.ui:101
+msgid ""
+"Alpaca can run Python, C++, and even HTML (with a live server) right from "
+"your conversations. Give it a try!"
+msgstr ""
+"ನಿಮ್ಮ ಸಂಭಾಷಣೆಗಳಿಂದಲೇ ಅಲ್ಪಕಾ ಪೈಥಾನ್, ಸಿ ++ ಮತ್ತು HTML ಅನ್ನು (ಲೈವ್ ಸರ್ವರ್‌ನೊಂದಿಗೆ) "
+"ಚಲಾಯಿಸಬಹುದು. ಒಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ!"
+
+#: src/window.ui:107
+msgid "Private by Design"
+msgstr "ವಿನ್ಯಾಸದಿಂದ ಖಾಸಗಿ"
+
+#: src/window.ui:108
+msgid ""
+"With Alpaca, your conversations are saved locally on your device, so you can "
+"be confident that your data is always secure and private."
+msgstr ""
+"ಅಲ್ಪಾಕಾದೊಂದಿಗೆ, ನಿಮ್ಮ ಸಂಭಾಷಣೆಗಳನ್ನು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಸ್ಥಳೀಯವಾಗಿ ಉಳಿಸಲಾಗಿದೆ, ಆದ್ದರಿಂದ "
+"ನಿಮ್ಮ ಡೇಟಾ ಯಾವಾಗಲೂ ಸುರಕ್ಷಿತ ಮತ್ತು ಖಾಸಗಿಯಾಗಿರುತ್ತದೆ ಎಂದು ನೀವು ನಂಬಬಹುದು."
+
+#: src/window.ui:114
+msgid "Local AI"
+msgstr "ಸ್ಥಳೀಯ ಎಐ"
+
+#: src/window.ui:115
+msgid ""
+"Alpaca works with AI providers such as Gemini and ChatGPT.  To run AI models "
+"locally on your machine, you'll need to install Ollama within Alpaca. We've "
+"made it super easy to do, so you can get started quickly!"
+msgstr ""
+"ಆಲ್ಪಾಕಾ ಎಐ ಪೂರೈಕೆದಾರರಾದ ಜೆಮಿನಿ ಮತ್ತು ಚಾಟ್‌ಜಿಪಿಟಿಯೊಂದಿಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ.  ನಿಮ್ಮ "
+"ಯಂತ್ರದಲ್ಲಿ ಸ್ಥಳೀಯವಾಗಿ AI ಮಾದರಿಗಳನ್ನು ಚಲಾಯಿಸಲು, ನೀವು ಆಲ್ಪಾಕಾದಲ್ಲಿ ಆಲಾಮಾವನ್ನು "
+"ಸ್ಥಾಪಿಸಬೇಕಾಗುತ್ತದೆ. ನಾವು ಅದನ್ನು ಸುಲಭಗೊಳಿಸಿದ್ದೇವೆ, ಆದ್ದರಿಂದ ನೀವು ಬೇಗನೆ "
+"ಪ್ರಾರಂಭಿಸಬಹುದು!"
+
+#: src/window.ui:120 src/window.ui:121
+msgid "Install Ollama"
+msgstr "ಆಲಾಮಾವನ್ನು ಸ್ಥಾಪಿಸಿ"
+
+#: src/window.ui:174
+msgid "Menu"
+msgstr "ಮೆಳ್ಳಿ"
+
+#: src/window.ui:181
+msgid "Search Chats"
+msgstr "ಚಾಟ್‌ಗಳನ್ನು ಹುಡುಕಿ"
+
+#: src/window.ui:190
+msgid "Chat search bar"
+msgstr "ಚಾಟ್ ಹುಡುಕಾಟ ಬಾರ್"
+
+#: src/window.ui:198 src/window.ui:200
+msgid "Search chats"
+msgstr "ಚಾಟ್‌ಗಳನ್ನು ಹುಡುಕಿ"
+
+#: src/window.ui:236
+msgid "No Chats Found"
+msgstr "ಯಾವುದೇ ಚಾಟ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ"
+
+#: src/window.ui:237
+msgid "Oh no! It looks like there are no chats found for your search."
+msgstr "ಓಹ್ ಇಲ್ಲ! ನಿಮ್ಮ ಹುಡುಕಾಟಕ್ಕಾಗಿ ಯಾವುದೇ ಚಾಟ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ ಎಂದು ತೋರುತ್ತಿದೆ."
+
+#: src/window.ui:254
+msgid "Toggle Sidebar"
+msgstr "ಸೈಡ್ಬಾರ್ ಅನ್ನು ಟಾಗಲ್ ಮಾಡಿ"
+
+#: src/window.ui:261
+msgid "Search Messages"
+msgstr "ಸಂದೇಶಗಳನ್ನು ಹುಡುಕಿ"
+
+#: src/window.ui:278 src/window.ui:303 src/window.ui:1256
+msgid "Manage Models"
+msgstr "ಮಾದರಿಗಳನ್ನು ನಿರ್ವಹಿಸಿ"
+
+#: src/window.ui:299
+msgid "Add Models"
+msgstr "ಮಾದರಿಗಳನ್ನು ಸೇರಿಸಿ"
+
+#: src/window.ui:316
+msgid "Chat Menu"
+msgstr "ಚಾಟ್ ಮೆನು"
+
+#: src/window.ui:329
+msgid "Message search bar"
+msgstr "ಸಂದೇಶ ಹುಡುಕಾಟ ಬಾರ್"
+
+#: src/window.ui:338 src/window.ui:340
+msgid "Search messages"
+msgstr "ಸಂದೇಶಗಳನ್ನು ಹುಡುಕಿ"
+
+#: src/window.ui:356
+msgid ""
+"Warning: Power saver mode is enabled, this will slow down message generation"
+msgstr ""
+"ಎಚ್ಚರಿಕೆ: ಪವರ್ ಸೇವರ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ, ಇದು ಸಂದೇಶ ಉತ್ಪಾದನೆಯನ್ನು "
+"ನಿಧಾನಗೊಳಿಸುತ್ತದೆ"
+
+#: src/window.ui:391 src/window.ui:1354
+msgid "Attach File"
+msgstr "ಫೈಲ್ ಲಗತ್ತಿಸಿ"
+
+#: src/window.ui:428
+msgid "Send Message"
+msgstr "ಸಂದೇಶ ಕಳುಹಿಸಿ"
+
+#: src/window.ui:447
+msgid "Stop Message"
+msgstr "ಸಂದೇಶವನ್ನು ನಿಲ್ಲಿಸಿ"
+
+#: src/window.ui:477
+msgid "Instance Manager"
+msgstr "ಉದಾಹರಣೆಗೆ ವ್ಯವಸ್ಥಾಪಕ"
+
+#: src/window.ui:492
+msgid "No Instances Found"
+msgstr "ಯಾವುದೇ ನಿದರ್ಶನಗಳು ಕಂಡುಬಂದಿಲ್ಲ"
+
+#: src/window.ui:493
+msgid "It looks a bit empty in here. Try adding an instance get started!"
+msgstr ""
+"ಇದು ಇಲ್ಲಿ ಸ್ವಲ್ಪ ಖಾಲಿಯಾಗಿ ಕಾಣುತ್ತದೆ. ಒಂದು ಉದಾಹರಣೆಯನ್ನು ಸೇರಿಸಲು ಪ್ರಯತ್ನಿಸಿ ಪ್ರಾರಂಭಿಸಿ!"
+
+#: src/window.ui:522
+msgid "Added Instances"
+msgstr "ನಿದರ್ಶನಗಳನ್ನು ಸೇರಿಸಲಾಗಿದೆ"
+
+#: src/window.ui:523
+msgid ""
+"Manage your AI instances, chats and messages are shared between instances "
+"when generating responses."
+msgstr ""
+"ನಿಮ್ಮ AI ನಿದರ್ಶನಗಳು, ಚಾಟ್‌ಗಳು ಮತ್ತು ಸಂದೇಶಗಳನ್ನು ಪ್ರತಿಕ್ರಿಯೆಗಳನ್ನು ರಚಿಸುವಾಗ ನಿದರ್ಶನಗಳ "
+"ನಡುವೆ ಹಂಚಿಕೊಳ್ಳಲಾಗುತ್ತದೆ."
+
+#: src/window.ui:559
+msgid "Tool Manager"
+msgstr "ಸಾಧನ ವ್ಯವಸ್ಥಾಪಕ"
+
+#: src/window.ui:570
+msgid "Available Tools"
+msgstr "ಲಭ್ಯವಿರುವ ಪರಿಕರಗಳು"
+
+#: src/window.ui:571
+msgid ""
+"Functions that AI models might use when sending a message by selecting \"Use "
+"Tools\" in the send button context menu."
+msgstr ""
+"ಕಳುಹಿಸುವ ಬಟನ್ ಸಂದರ್ಭ ಮೆನುವಿನಲ್ಲಿ \"ಪರಿಕರಗಳನ್ನು ಬಳಸಿ\" ಆಯ್ಕೆ ಮಾಡುವ ಮೂಲಕ ಸಂದೇಶವನ್ನು "
+"ಕಳುಹಿಸುವಾಗ AI ಮಾದರಿಗಳು ಬಳಸಬಹುದಾದ ಕಾರ್ಯಗಳು."
+
+#: src/window.ui:590
+msgid "Model Manager"
+msgstr "ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕ"
+
+#: src/window.ui:628
+msgid "Search Model"
+msgstr "ಹುಡುಕಾಟ ಮಾದರಿ"
+
+#: src/window.ui:642
+msgid "Model Manager Menu"
+msgstr "ಮಾಡೆಲ್ ಮ್ಯಾನೇಜರ್ ಮೆನು"
+
+#: src/window.ui:655
+msgid "Model search bar"
+msgstr "ಮಾದರಿ ಹುಡುಕಾಟ ಬಾರ್"
+
+#: src/window.ui:667 src/window.ui:669
+msgid "Search models"
+msgstr "ಹುಡುಕಾಟ ಮಾದರಿಗಳು"
+
+#: src/window.ui:676
+msgid "Filter Models"
+msgstr "ಫಿಲ್ಟರ್ ಮಾದರಿಗಳು"
+
+#: src/window.ui:692
+msgid "Added"
+msgstr "ಸೇರಿಸಿದ"
+
+#: src/window.ui:702 src/window.ui:763 src/window.ui:817
+msgid "No Models Found"
+msgstr "ಯಾವುದೇ ಮಾದರಿಗಳು ಕಂಡುಬಂದಿಲ್ಲ"
+
+#: src/window.ui:703
+msgid ""
+"It looks a bit empty in here. Try downloading some models or change your AI "
+"instance to get started!"
+msgstr ""
+"ಇದು ಇಲ್ಲಿ ಸ್ವಲ್ಪ ಖಾಲಿಯಾಗಿ ಕಾಣುತ್ತದೆ. ಕೆಲವು ಮಾದರಿಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ಪ್ರಯತ್ನಿಸಿ ಅಥವಾ "
+"ಪ್ರಾರಂಭಿಸಲು ನಿಮ್ಮ AI ನಿದರ್ಶನವನ್ನು ಬದಲಾಯಿಸಿ!"
+
+#: src/window.ui:706 src/window.ui:716 src/window.ui:1252
+msgid "Manage Instances"
+msgstr "ನಿದರ್ಶನಗಳನ್ನು ನಿರ್ವಹಿಸಿ"
+
+#: src/window.ui:764 src/window.ui:818
+msgid ""
+"Looks like we’re fresh out of models for that search. Try tweaking your "
+"keywords, or maybe explore something new!"
+msgstr ""
+"ಆ ಹುಡುಕಾಟಕ್ಕಾಗಿ ನಾವು ಮಾದರಿಗಳಿಂದ ಹೊಸದಾಗಿರುತ್ತೇವೆ ಎಂದು ತೋರುತ್ತಿದೆ. ನಿಮ್ಮ "
+"ಕೀವರ್ಡ್‌ಗಳನ್ನು ಟ್ವೀಕ್ ಮಾಡಲು ಪ್ರಯತ್ನಿಸಿ, ಅಥವಾ ಹೊಸದನ್ನು ಅನ್ವೇಷಿಸಿ!"
+
+#: src/window.ui:776
+msgid "Available"
+msgstr "ಲಭ್ಯ"
+
+#: src/window.ui:830
+msgid "Creator"
+msgstr "ಸೃಷ್ಟಿಕರ್ತ"
+
+#: src/window.ui:841
+msgid "Model Creator"
+msgstr "ಮಾದರಿ ಸೃಷ್ಟಿಕರ್ತ"
+
+#: src/window.ui:842
+msgid "Select a method of importing a model to continue"
+msgstr "ಮುಂದುವರಿಸಲು ಮಾದರಿಯನ್ನು ಆಮದು ಮಾಡುವ ವಿಧಾನವನ್ನು ಆಯ್ಕೆಮಾಡಿ"
+
+#: src/window.ui:854
+msgid "GGUF File"
+msgstr "Gguf ಫೈಲ್"
+
+#: src/window.ui:865
+msgid "Existing Model"
+msgstr "ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಮಾದರಿ"
+
+#: src/window.ui:883
+msgid "Identity"
+msgstr "ಗುರುತು"
+
+#: src/window.ui:886
+msgid "Base"
+msgstr "ಬೇನೆ"
+
+#: src/window.ui:893
+msgid "Profile Picture"
+msgstr "ಪ್ರೊಫೈಲ್ ಚಿತ್ರ"
+
+#: src/window.ui:898
+msgid "Open File"
+msgstr "ತೆರೆ"
+
+#: src/window.ui:909 src/widgets/instance_manager.py:278
+msgid "Name"
+msgstr "ಹೆಸರು"
+
+#: src/window.ui:914 src/widgets/model_manager.py:478
+msgid "Tag"
+msgstr "ತ೦ತ್ರ"
+
+#: src/window.ui:921 src/widgets/model_manager.py:495
+msgid "Context"
+msgstr "ಸನ್ನಿವೇಶ"
+
+#: src/window.ui:922
+msgid ""
+"Describe the desired behavior of the model in its primary language "
+"(typically English)."
+msgstr ""
+"ಮಾದರಿಯ ಅಪೇಕ್ಷಿತ ನಡವಳಿಕೆಯನ್ನು ಅದರ ಪ್ರಾಥಮಿಕ ಭಾಷೆಯಲ್ಲಿ ವಿವರಿಸಿ (ಸಾಮಾನ್ಯವಾಗಿ ಇಂಗ್ಲಿಷ್)."
+
+#: src/window.ui:950
+msgid "Behavior"
+msgstr "ವರ್ತನೆ"
+
+#: src/window.ui:953
+msgid "Imagination"
+msgstr "ಕಲ್ಪನೆ"
+
+#: src/window.ui:954
+msgid "A higher number results in more diverse answers from the model. (top_k)"
+msgstr ""
+"ಹೆಚ್ಚಿನ ಸಂಖ್ಯೆಯು ಮಾದರಿಯಿಂದ ಹೆಚ್ಚು ವೈವಿಧ್ಯಮಯ ಉತ್ತರಗಳಿಗೆ ಕಾರಣವಾಗುತ್ತದೆ. (top_k)"
+
+#: src/window.ui:968
+msgid "Focus"
+msgstr "ಕೇಂದ್ರೀಕರಿಸು"
+
+#: src/window.ui:969
+msgid "A higher number widens the amount of possible answers. (top_p)"
+msgstr "ಹೆಚ್ಚಿನ ಸಂಖ್ಯೆಯು ಸಂಭವನೀಯ ಉತ್ತರಗಳ ಪ್ರಮಾಣವನ್ನು ವಿಸ್ತರಿಸುತ್ತದೆ. (top_p)"
+
+#: src/window.ui:1002 src/window.ui:1010
+msgid "Add Model"
+msgstr "ಮಾದರಿ ಸೇರಿಸಿ"
+
+#: src/window.ui:1044 src/window.ui:1266
+msgid "Preferences"
+msgstr "ಆದ್ಯತೆ"
+
+#: src/window.ui:1052
+msgid "Run Alpaca In Background"
+msgstr "ಹಿನ್ನೆಲೆಯಲ್ಲಿ ಅಲ್ಪಕಾವನ್ನು ಚಲಾಯಿಸಿ"
+
+#: src/window.ui:1059
+msgid "Show Power Saver Warning"
+msgstr "ಪವರ್ ಸೇವರ್ ಎಚ್ಚರಿಕೆ ತೋರಿಸಿ"
+
+#: src/window.ui:1060
+msgid "When running a managed Ollama instance"
+msgstr "ನಿರ್ವಹಿಸಿದ ಒಲ್ಲಾಮಾ ನಿದರ್ಶನವನ್ನು ಚಲಾಯಿಸುವಾಗ"
+
+#: src/window.ui:1067
+msgid "Zoom"
+msgstr "ಗುಂಜಾನೆ"
+
+#: src/window.ui:1084
+msgid "Speech Recognition Model"
+msgstr "ಭಾಷಣ ಗುರುತಿಸುವಿಕೆ ಮಾದರಿ"
+
+#: src/window.ui:1085
+msgid ""
+"Models are downloaded upon first use, you can delete them from the model "
+"manager"
+msgstr ""
+"ಮೊದಲ ಬಳಕೆಯ ನಂತರ ಮಾದರಿಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಲಾಗುತ್ತದೆ, ನೀವು ಅವುಗಳನ್ನು ಮಾದರಿ "
+"ವ್ಯವಸ್ಥಾಪಕರಿಂದ ಅಳಿಸಬಹುದು"
+
+#: src/window.ui:1092
+msgid "Speech Recognition Language"
+msgstr "ಭಾಷಣ ಗುರುತಿಸುವಿಕೆ ಭಾಷೆ"
+
+#: src/window.ui:1099
+msgid "Auto Send Message After Talking"
+msgstr "ಮಾತನಾಡಿದ ನಂತರ ಸ್ವಯಂ ಕಳುಹಿಸಿ ಸಂದೇಶ ಕಳುಹಿಸಿ"
+
+#: src/window.ui:1110
+msgid "Default Text to Speech Voice"
+msgstr "ಭಾಷಣ ಧ್ವನಿಗೆ ಡೀಫಾಲ್ಟ್ ಪಠ್ಯ"
+
+#: src/window.ui:1111
+msgid ""
+"Voices are downloaded upon first use, each weighing around 1 MB, and you can "
+"delete them from the model manager"
+msgstr ""
+"ಮೊದಲ ಬಳಕೆಯ ನಂತರ ಧ್ವನಿಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಲಾಗುತ್ತದೆ, ಪ್ರತಿಯೊಂದೂ 1 MB ತೂಕವಿರುತ್ತದೆ, "
+"ಮತ್ತು ನೀವು ಅವುಗಳನ್ನು ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕರಿಂದ ಅಳಿಸಬಹುದು"
+
+#: src/window.ui:1118
+msgid "Dictate New Messages Automatically"
+msgstr "ಹೊಸ ಸಂದೇಶಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ನಿರ್ದೇಶಿಸಿ"
+
+#: src/window.ui:1119
+msgid "Dictate new messages once they have finished being generated"
+msgstr "ಹೊಸ ಸಂದೇಶಗಳು ರಚನೆಯಾದ ನಂತರ ಅವುಗಳನ್ನು ನಿರ್ದೇಶಿಸಿ"
+
+#: src/window.ui:1132
+msgid "Delete All Chats"
+msgstr "ಎಲ್ಲಾ ಚಾಟ್‌ಗಳನ್ನು ಅಳಿಸಿ"
+
+#: src/window.ui:1144
+msgid "Notice"
+msgstr "ಗಮನಿಸು"
+
+#: src/window.ui:1164
+msgid ""
+"Hey Alpaca users! We're so excited to bring you a fresh update packed with "
+"awesome new features to explore! Get ready to experience Alpaca in a whole "
+"new way!"
+msgstr ""
+"ಹೇ ಅಲ್ಪಕಾ ಬಳಕೆದಾರರು! ಅನ್ವೇಷಿಸಲು ಅದ್ಭುತವಾದ ಹೊಸ ವೈಶಿಷ್ಟ್ಯಗಳೊಂದಿಗೆ ಪ್ಯಾಕ್ ಮಾಡಿದ ಹೊಸ "
+"ನವೀಕರಣವನ್ನು ನಿಮಗೆ ತರಲು ನಾವು ತುಂಬಾ ಉತ್ಸುಕರಾಗಿದ್ದೇವೆ! ಅಲ್ಪಕಾವನ್ನು ಸಂಪೂರ್ಣ ಹೊಸ "
+"ರೀತಿಯಲ್ಲಿ ಅನುಭವಿಸಲು ಸಿದ್ಧರಾಗಿ!"
+
+#: src/window.ui:1171
+msgid "Smart Tools"
+msgstr "ಸ್ಮಾರ್ಟ್ ಪರಿಕರಗಳು"
+
+#: src/window.ui:1172
+msgid ""
+"Supported AI models can use handy tools to grab information both locally and "
+"online. Head over to the brand new \"Tool Manager\" to toggle them on or off."
+msgstr ""
+"ಬೆಂಬಲಿತ ಎಐ ಮಾದರಿಗಳು ಸ್ಥಳೀಯವಾಗಿ ಮತ್ತು ಆನ್‌ಲೈನ್ ಮಾಹಿತಿಯನ್ನು ಪಡೆದುಕೊಳ್ಳಲು ಸೂಕ್ತ "
+"ಸಾಧನಗಳನ್ನು ಬಳಸಬಹುದು. ಅವುಗಳನ್ನು ಆನ್ ಅಥವಾ ಆಫ್ ಮಾಡಲು ಹೊಚ್ಚ ಹೊಸ \"ಟೂಲ್ ಮ್ಯಾನೇಜರ್\" ಗೆ "
+"ಹೋಗಿ."
+
+#: src/window.ui:1179
+msgid "Talk to Models"
+msgstr "ಮಾದರಿಗಳೊಂದಿಗೆ ಮಾತನಾಡಿ"
+
+#: src/window.ui:1180
+msgid ""
+"You can now dictate your messages using local speech recognition. It's super "
+"convenient! You can even customize your language and other settings in the "
+"Preferences dialog."
+msgstr ""
+"ಸ್ಥಳೀಯ ಭಾಷಣ ಗುರುತಿಸುವಿಕೆಯನ್ನು ಬಳಸಿಕೊಂಡು ನೀವು ಈಗ ನಿಮ್ಮ ಸಂದೇಶಗಳನ್ನು ನಿರ್ದೇಶಿಸಬಹುದು. "
+"ಇದು ತುಂಬಾ ಅನುಕೂಲಕರವಾಗಿದೆ! ಆದ್ಯತೆಗಳ ಸಂವಾದದಲ್ಲಿ ನಿಮ್ಮ ಭಾಷೆ ಮತ್ತು ಇತರ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು "
+"ಸಹ ನೀವು ಕಸ್ಟಮೈಸ್ ಮಾಡಬಹುದು."
+
+#: src/window.ui:1187
+msgid "Find Models Faster"
+msgstr "ಮಾದರಿಗಳನ್ನು ವೇಗವಾಗಿ ಹುಡುಕಿ"
+
+#: src/window.ui:1188
+msgid ""
+"Browsing through your Ollama models just got easier! We've added the ability "
+"to filter models by their categories in the Model Manager. Now you can "
+"quickly find exactly the model you're looking for."
+msgstr ""
+"ನಿಮ್ಮ ಆಲಾಮಾ ಮಾದರಿಗಳ ಮೂಲಕ ಬ್ರೌಸ್ ಮಾಡುವುದು ಸುಲಭವಾಗಿದೆ! ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕರಲ್ಲಿ "
+"ಮಾದರಿಗಳನ್ನು ಅವುಗಳ ವರ್ಗಗಳಿಂದ ಫಿಲ್ಟರ್ ಮಾಡುವ ಸಾಮರ್ಥ್ಯವನ್ನು ನಾವು ಸೇರಿಸಿದ್ದೇವೆ. ಈಗ ನೀವು "
+"ಹುಡುಕುತ್ತಿರುವ ಮಾದರಿಯನ್ನು ತ್ವರಿತವಾಗಿ ಕಂಡುಹಿಡಿಯಬಹುದು."
+
+#: src/window.ui:1195
+msgid "Math Rendering"
+msgstr "ಗಣಿತ ನಿರೂಪಣೆ"
+
+#: src/window.ui:1196
+msgid ""
+"We've improved how LaTeX equations are rendered in messages, making them "
+"look cleaner and more consistent. Your mathematical discussions will be "
+"clearer than ever!"
+msgstr ""
+"ಲ್ಯಾಟೆಕ್ಸ್ ಸಮೀಕರಣಗಳನ್ನು ಸಂದೇಶಗಳಲ್ಲಿ ಹೇಗೆ ಪ್ರದರ್ಶಿಸಲಾಗುತ್ತದೆ ಎಂಬುದನ್ನು ನಾವು "
+"ಸುಧಾರಿಸಿದ್ದೇವೆ, ಅವುಗಳನ್ನು ಸ್ವಚ್ er ವಾಗಿ ಮತ್ತು ಹೆಚ್ಚು ಸ್ಥಿರವಾಗಿ ಕಾಣುವಂತೆ ಮಾಡುತ್ತದೆ. "
+"ನಿಮ್ಮ ಗಣಿತದ ಚರ್ಚೆಗಳು ಎಂದಿಗಿಂತಲೂ ಸ್ಪಷ್ಟವಾಗಿರುತ್ತದೆ!"
+
+#: src/window.ui:1203
+msgid "More Instances"
+msgstr "ಹೆಚ್ಚಿನ ನಿದರ್ಶನಗಳು"
+
+#: src/window.ui:1204
+msgid ""
+"Get ready to connect Alpaca to a whole universe of AI providers! We've added "
+"support for over 5 new AI instance providers, including Anthropic, "
+"OpenRouter, and Fireworks. The possibilities are endless!"
+msgstr ""
+"ಎಐ ಪೂರೈಕೆದಾರರ ಇಡೀ ವಿಶ್ವಕ್ಕೆ ಅಲ್ಪಕಾವನ್ನು ಸಂಪರ್ಕಿಸಲು ಸಿದ್ಧರಾಗಿ! ಮಾನವ, ಓಪನ್‌ರೌಟರ್ ಮತ್ತು "
+"ಪಟಾಕಿ ಸೇರಿದಂತೆ 5 ಹೊಸ AI ನಿದರ್ಶನ ಪೂರೈಕೆದಾರರಿಗೆ ನಾವು ಬೆಂಬಲವನ್ನು ಸೇರಿಸಿದ್ದೇವೆ. "
+"ಸಾಧ್ಯತೆಗಳು ಅಂತ್ಯವಿಲ್ಲ!"
+
+#: src/window.ui:1211
+msgid "Attachment Enhancement"
+msgstr "ಲಗತ್ತು ವರ್ಧನೆ"
+
+#: src/window.ui:1212
+msgid ""
+"You can now attach and ask questions about even more file types, including ."
+"docx, .pptx, and .xlsx! Plus, when you preview an attachment, you'll see it "
+"with rich text styling, making it easier to understand the content before "
+"you send it."
+msgstr ""
+".Docx, .pptx, ಮತ್ತು .xlsx ಸೇರಿದಂತೆ ಇನ್ನೂ ಹೆಚ್ಚಿನ ಫೈಲ್ ಪ್ರಕಾರಗಳ ಬಗ್ಗೆ ನೀವು ಈಗ "
+"ಲಗತ್ತಿಸಬಹುದು ಮತ್ತು ಪ್ರಶ್ನೆಗಳನ್ನು ಕೇಳಬಹುದು! ಜೊತೆಗೆ, ನೀವು ಲಗತ್ತನ್ನು ಪೂರ್ವವೀಕ್ಷಣೆ "
+"ಮಾಡಿದಾಗ, ನೀವು ಅದನ್ನು ಶ್ರೀಮಂತ ಪಠ್ಯ ಸ್ಟೈಲಿಂಗ್‌ನೊಂದಿಗೆ ನೋಡುತ್ತೀರಿ, ನೀವು ಅದನ್ನು ಕಳುಹಿಸುವ "
+"ಮೊದಲು ವಿಷಯವನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು ಸುಲಭವಾಗುತ್ತದೆ."
+
+#: src/window.ui:1236 src/widgets/chat.py:20
+msgid "New Notebook"
+msgstr "ಹೊಸ ನೋಟ್ಬುಕ್"
+
+#: src/window.ui:1244
+msgid "Start Quick Ask"
+msgstr "ತ್ವರಿತ ಕೇಳಿ ಪ್ರಾರಂಭಿಸಿ"
+
+#: src/window.ui:1248
+msgid "Import Chat"
+msgstr "ಆಮದು ಚಾಟ್"
+
+#: src/window.ui:1260
+msgid "Manage Tools"
+msgstr "ಪರಿಕರಗಳನ್ನು ನಿರ್ವಹಿಸಿ"
+
+#: src/window.ui:1270
+msgid "Keyboard Shortcuts"
+msgstr "ಕೀಬೋರ್ಡ್ ಶಾರ್ಟ್‌ಕಟ್‌ಗಳು"
+
+#: src/window.ui:1274
+msgid "About Alpaca"
+msgstr "ಅಲ್ಪಕಾ ಬಗ್ಗೆ"
+
+#: src/window.ui:1282 src/window.ui:1316
+msgid "Rename Chat"
+msgstr "ಚಾಟ್ ಮರುಹೆಸರಿಸಿ"
+
+#: src/window.ui:1286 src/window.ui:1320
+msgid "Duplicate Chat"
+msgstr "ನಕಲಿ ಚಾಟ್"
+
+#: src/window.ui:1290 src/window.ui:1324 src/widgets/chat.py:557
+msgid "Export Chat"
+msgstr "ರಫ್ತು ಚಾಟ್"
+
+#: src/window.ui:1296 src/window.ui:1330
+msgid "Delete Chat"
+msgstr "ಚಾಟ್ ಅಳಿಸಿ"
+
+#: src/window.ui:1304
+msgid "Reload Added Models"
+msgstr "ಸೇರಿಸಿದ ಮಾದರಿಗಳನ್ನು ಮರುಲೋಡ್ ಮಾಡಿ"
+
+#: src/window.ui:1308
+msgid "Download Model From Name"
+msgstr "ಹೆಸರಿನಿಂದ ಮಾದರಿಯನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ"
+
+#: src/window.ui:1338
+msgid "Send as User"
+msgstr "ಬಳಕೆದಾರರಾಗಿ ಕಳುಹಿಸಿ"
+
+#: src/window.ui:1342
+msgid "Send as System"
+msgstr "ಸಿಸ್ಟಮ್ ಆಗಿ ಕಳುಹಿಸಿ"
+
+#: src/window.ui:1346 src/gtk/help-overlay.ui:133
+msgid "Use Tools"
+msgstr "ಪರಿಕರಗಳನ್ನು ಬಳಸಿ"
+
+#: src/window.ui:1358
+msgid "Attach Website"
+msgstr "ವೆಬ್‌ಸೈಟ್ ಲಗತ್ತಿಸಿ"
+
+#: src/window.ui:1362
+msgid "Attach YouTube Captions"
+msgstr "ಯೂಟ್ಯೂಬ್ ಶೀರ್ಷಿಕೆಗಳನ್ನು ಲಗತ್ತಿಸಿ"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "ಸಾಮಾನ್ಯ"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "ಶಾರ್ಟ್‌ಕಟ್‌ಗಳನ್ನು ತೋರಿಸಿ"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "ಆದ್ಯತೆ"
+
+#: src/gtk/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Quick Ask"
+msgstr "ತ್ವರಿತ ಕೇಳಿ"
+
+#: src/gtk/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Model Manager"
+msgstr "ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕ"
+
+#: src/gtk/help-overlay.ui:38
+msgctxt "shortcut window"
+msgid "Instance Manager"
+msgstr "ಉದಾಹರಣೆಗೆ ವ್ಯವಸ್ಥಾಪಕ"
+
+#: src/gtk/help-overlay.ui:44
+msgctxt "shortcut window"
+msgid "Action Manager"
+msgstr "ಆಕ್ಷನ್ ವ್ಯವಸ್ಥಾಪಕ"
+
+#: src/gtk/help-overlay.ui:50
+msgctxt "shortcut window"
+msgid "Toggle Sidebar"
+msgstr "ಸೈಡ್ಬಾರ್ ಅನ್ನು ಟಾಗಲ್ ಮಾಡಿ"
+
+#: src/gtk/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "ತೊರೆದು"
+
+#: src/gtk/help-overlay.ui:64
+msgctxt "shortcut window"
+msgid "Chat Management"
+msgstr "ಚಾಟ್ ನಿರ್ವಹಣೆ"
+
+#: src/gtk/help-overlay.ui:67
+msgctxt "shortcut window"
+msgid "Create Chat"
+msgstr "ಚಾಟ್ ರಚಿಸಿ"
+
+#: src/gtk/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Delete Chat"
+msgstr "ಚಾಟ್ ಅಳಿಸಿ"
+
+#: src/gtk/help-overlay.ui:79
+msgctxt "shortcut window"
+msgid "Clear Chat"
+msgstr "ಸ್ಪಷ್ಟ ಚಾಟ್"
+
+#: src/gtk/help-overlay.ui:85
+msgctxt "shortcut window"
+msgid "Rename Chat"
+msgstr "ಚಾಟ್ ಮರುಹೆಸರಿಸಿ"
+
+#: src/gtk/help-overlay.ui:91
+msgctxt "shortcut window"
+msgid "Toggle Searchbars"
+msgstr "ಸರ್ಚ್ಬಾರ್ಗಳನ್ನು ಟಾಗಲ್ ಮಾಡಿ"
+
+#: src/gtk/help-overlay.ui:99
+msgctxt "shortcut window"
+msgid "Message Entry"
+msgstr "ಸಂದೇಶ ಪ್ರವೇಶ"
+
+#: src/gtk/help-overlay.ui:102
+msgid "Copy"
+msgstr "ನಕಲು"
+
+#: src/gtk/help-overlay.ui:108
+msgid "Paste"
+msgstr "ಅಂಟಿಸು"
+
+#: src/gtk/help-overlay.ui:114
+msgid "Open Emoji Menu"
+msgstr "ಎಮೋಜಿ ಮೆನು ತೆರೆಯಿರಿ"
+
+#: src/gtk/help-overlay.ui:120
+msgid "Insert new line"
+msgstr "ಹೊಸ ಸಾಲನ್ನು ಸೇರಿಸಿ"
+
+#: src/gtk/help-overlay.ui:126
+msgid "Send Message as System"
+msgstr "ಸಂದೇಶವನ್ನು ಸಿಸ್ಟಮ್ ಆಗಿ ಕಳುಹಿಸಿ"
+
+#: src/gtk/help-overlay.ui:127
+msgid "System messages are taken as literal instructions by models"
+msgstr "ಸಿಸ್ಟಮ್ ಸಂದೇಶಗಳನ್ನು ಮಾದರಿಗಳಿಂದ ಅಕ್ಷರಶಃ ಸೂಚನೆಗಳಾಗಿ ತೆಗೆದುಕೊಳ್ಳಲಾಗುತ್ತದೆ"
+
+#: src/gtk/help-overlay.ui:134
+msgid "Ask model to use tools to generate a message"
+msgstr "ಸಂದೇಶವನ್ನು ರಚಿಸಲು ಸಾಧನಗಳನ್ನು ಬಳಸಲು ಮಾದರಿಯನ್ನು ಕೇಳಿ"
+
+#: src/gtk/help-overlay.ui:140
+msgid "Send Message as User"
+msgstr "ಬಳಕೆದಾರರಾಗಿ ಸಂದೇಶ ಕಳುಹಿಸಿ"
+
+#: src/widgets/attachments.py:124
+msgid "Remove Attachment"
+msgstr "ಲಗತ್ತನ್ನು ತೆಗೆದುಹಾಕಿ"
+
+#: src/widgets/attachments.py:138
+msgid "Replace Notebook Content"
+msgstr "ನೋಟ್ಬುಕ್ ವಿಷಯವನ್ನು ಬದಲಾಯಿಸಿ"
+
+#: src/widgets/attachments.py:208
+msgid "Delete Attachment?"
+msgstr "ಲಗತ್ತನ್ನು ಅಳಿಸುವುದೇ?"
+
+#: src/widgets/attachments.py:209 src/widgets/chat.py:457
+msgid "Are you sure you want to delete '{}'?"
+msgstr "ನೀವು '{}' ಅನ್ನು ಅಳಿಸಲು ಬಯಸುತ್ತೀರಾ?"
+
+#: src/widgets/attachments.py:285
+msgid "Image"
+msgstr "ಚಿತ್ರ"
+
+#: src/widgets/attachments.py:296 src/widgets/attachments.py:308
+msgid "Missing Image"
+msgstr "ಕಾಣೆಯಾದ ಚಿತ್ರ"
+
+#: src/widgets/chat.py:86 src/widgets/instance_manager.py:96
+msgid "Notebook"
+msgstr "ಟಿಪ್ಪಣಿ ಪುಸ್ತಕ"
+
+#: src/widgets/chat.py:87
+msgid "Start a notebook with a message"
+msgstr "ಸಂದೇಶದೊಂದಿಗೆ ನೋಟ್ಬುಕ್ ಪ್ರಾರಂಭಿಸಿ"
+
+#: src/widgets/chat.py:95 src/widgets/chat.py:247
+msgid "No Messages Found"
+msgstr "ಯಾವುದೇ ಸಂದೇಶಗಳು ಕಂಡುಬಂದಿಲ್ಲ"
+
+#: src/widgets/chat.py:96 src/widgets/chat.py:248
+msgid "Uh oh! No messages found for your search."
+msgstr "ಓಹ್! ನಿಮ್ಮ ಹುಡುಕಾಟಕ್ಕಾಗಿ ಯಾವುದೇ ಸಂದೇಶಗಳು ಕಂಡುಬಂದಿಲ್ಲ."
+
+#: src/widgets/chat.py:238
+msgid "Try one of these prompts"
+msgstr "ಈ ಅಪೇಕ್ಷೆಗಳಲ್ಲಿ ಒಂದನ್ನು ಪ್ರಯತ್ನಿಸಿ"
+
+#: src/widgets/chat.py:268
+msgid "Send prompt: '{}'"
+msgstr "ಪ್ರಾಂಪ್ಟ್ ಕಳುಹಿಸಿ: '{}'"
+
+#: src/widgets/chat.py:274
+msgid "Refresh Prompts"
+msgstr "ರಿಫ್ರೆಶ್ ಪ್ರಾಂಪ್ಟ್"
+
+#: src/widgets/chat.py:435
+msgid "Rename Chat?"
+msgstr "ಚಾಟ್ ಮರುಹೆಸರಿಸುವುದೇ?"
+
+#: src/widgets/chat.py:436
+msgid "Renaming '{}'"
+msgstr "'{}' ಎಂದು ಮರುನಾಮಕರಣ ಮಾಡಲಾಗುತ್ತಿದೆ"
+
+#: src/widgets/chat.py:438
+msgid "Chat name"
+msgstr "ಚಾಟ್ ಹೆಸರು"
+
+#: src/widgets/chat.py:439
+msgid "Rename"
+msgstr "ಮರುನಾಮಕರಣ ಮಾಡು"
+
+#: src/widgets/chat.py:456
+msgid "Delete Chat?"
+msgstr "ಚಾಟ್ ಅಳಿಸುವುದೇ?"
+
+#: src/widgets/chat.py:464
+msgid "Copy of {}"
+msgstr "{}  ನ  ಪ್ರತಿ"
+
+#: src/widgets/chat.py:477
+msgid "Chat exported successfully"
+msgstr "ಚಾಟ್ ಯಶಸ್ವಿಯಾಗಿ ರಫ್ತು ಮಾಡಲಾಗಿದೆ"
+
+#: src/widgets/chat.py:497
+msgid "User"
+msgstr "ಉಪಾಧ್ಯಾಯ"
+
+#: src/widgets/chat.py:501
+msgid "System"
+msgstr "ವ್ಯವಸ್ಥೆ"
+
+#: src/widgets/chat.py:549
+msgid "Importable (.db)"
+msgstr "ಆಮದು ಮಾಡಿಕೊಳ್ಳಬಹುದು (.ಡಿಬಿ)"
+
+#: src/widgets/chat.py:550
+msgid "Markdown"
+msgstr "ಮುಸುಕಿನ ಗುರುತು"
+
+#: src/widgets/chat.py:551
+msgid "Markdown (Obsidian Style)"
+msgstr "ಮಾರ್ಕ್‌ಡೌನ್ (ಅಬ್ಸಿಡಿಯನ್ ಶೈಲಿ)"
+
+#: src/widgets/chat.py:552
+msgid "JSON"
+msgstr "JSON"
+
+#: src/widgets/chat.py:553
+msgid "JSON (Include Metadata)"
+msgstr "JSON (ಮೆಟಾಡೇಟಾವನ್ನು ಸೇರಿಸಿ)"
+
+#: src/widgets/chat.py:558
+msgid "Select a method to export the chat"
+msgstr "ಚಾಟ್ ರಫ್ತು ಮಾಡುವ ವಿಧಾನವನ್ನು ಆಯ್ಕೆಮಾಡಿ"
+
+#: src/widgets/dialog.py:148 src/widgets/dialog.py:161
+#: src/widgets/dialog.py:174 src/widgets/tools/tools.py:136
+msgid "Accept"
+msgstr "ಒಪ್ಪಿಸು"
+
+#: src/widgets/instance_manager.py:30 src/widgets/instance_manager.py:430
+msgid "Instance"
+msgstr "ನಿದರ್ಶನ"
+
+#: src/widgets/instance_manager.py:88
+msgid "Notebook Error"
+msgstr "ನೋಟ್ಬುಕ್ ದೋಷ"
+
+#: src/widgets/instance_manager.py:89 src/widgets/instance_manager.py:159
+msgid "An error occurred while running tool"
+msgstr "ಉಪಕರಣವನ್ನು ಚಲಾಯಿಸುವಾಗ ದೋಷ ಸಂಭವಿಸಿದೆ"
+
+#: src/widgets/instance_manager.py:116
+msgid "Selecting tool to use..."
+msgstr "ಬಳಸಲು ಸಾಧನವನ್ನು ಆರಿಸುವುದು ..."
+
+#: src/widgets/instance_manager.py:125
+msgid "Using {}"
+msgstr "{} ಅನ್ನು ಬಳಸುವುದು"
+
+#: src/widgets/instance_manager.py:158
+msgid "Tool Error"
+msgstr "ಉಪಕರಣ ದೋಷ"
+
+#: src/widgets/instance_manager.py:165
+msgid "Generating message..."
+msgstr "ಸಂದೇಶವನ್ನು ರಚಿಸುವುದು ..."
+
+#: src/widgets/instance_manager.py:219 src/widgets/instance_manager.py:529
+#: src/widgets/instance_manager.py:543 src/widgets/instance_manager.py:693
+#: src/widgets/instance_manager.py:775 src/widgets/instance_manager.py:822
+#: src/widgets/instance_manager.py:856 src/widgets/instance_manager.py:903
+#: src/widgets/instance_manager.py:928 src/widgets/instance_manager.py:954
+msgid "Instance Error"
+msgstr "ಉದಾಹರಣೆಗೆ ದೋಷ"
+
+#: src/widgets/instance_manager.py:220
+msgid "Message generation failed"
+msgstr "ಸಂದೇಶ ಉತ್ಪಾದನೆ ವಿಫಲವಾಗಿದೆ"
+
+#: src/widgets/instance_manager.py:286
+msgid "Port"
+msgstr "ಬಂದರು"
+
+#: src/widgets/instance_manager.py:287
+msgid "Which network port will '{}' use"
+msgstr "ಯಾವ ನೆಟ್‌ವರ್ಕ್ ಪೋರ್ಟ್ '{}' ಅನ್ನು ಬಳಸುತ್ತದೆ"
+
+#: src/widgets/instance_manager.py:301
+msgid "Instance URL"
+msgstr "ಉದಾಹರಣೆಗೆ URL"
+
+#: src/widgets/instance_manager.py:304 src/widgets/instance_manager.py:314
+#: src/widgets/instance_manager.py:317 src/widgets/instance_manager.py:319
+msgid "API Key (Unchanged)"
+msgstr "ಎಪಿಐ ಕೀ (ಬದಲಾಗದ)"
+
+#: src/widgets/instance_manager.py:304 src/widgets/instance_manager.py:314
+msgid "API Key (Optional)"
+msgstr "ಎಪಿಐ ಕೀ (ಐಚ್ಛಿಕ)"
+
+#: src/widgets/instance_manager.py:317 src/widgets/instance_manager.py:319
+msgid "API Key"
+msgstr "ಎಪಿಐ ಕೀ "
+
+#: src/widgets/instance_manager.py:327
+msgid "Max Tokens"
+msgstr "ಗರಿಷ್ಠ ಟೋಕನ್ಸ್"
+
+#: src/widgets/instance_manager.py:328
+msgid ""
+"Defines the maximum number of tokens (words + spaces) the AI can generate in "
+"a response. More tokens allow longer replies but may take more time and cost "
+"more."
+msgstr ""
+"ಎಐ ಪ್ರತಿಕ್ರಿಯೆಯಲ್ಲಿ ಉತ್ಪಾದಿಸಬಹುದಾದ ಗರಿಷ್ಠ ಸಂಖ್ಯೆಯ ಟೋಕನ್‌ಗಳನ್ನು (ಪದಗಳು + ಸ್ಥಳಗಳು) "
+"ವ್ಯಾಖ್ಯಾನಿಸುತ್ತದೆ. ಹೆಚ್ಚಿನ ಟೋಕನ್‌ಗಳು ಹೆಚ್ಚಿನ ಪ್ರತ್ಯುತ್ತರಗಳನ್ನು ಅನುಮತಿಸುತ್ತವೆ ಆದರೆ ಹೆಚ್ಚು "
+"ಸಮಯ ತೆಗೆದುಕೊಳ್ಳಬಹುದು ಮತ್ತು ಹೆಚ್ಚು ವೆಚ್ಚವಾಗಬಹುದು."
+
+#: src/widgets/instance_manager.py:343
+msgid "Temperature"
+msgstr "ಉಷ್ಣ"
+
+#: src/widgets/instance_manager.py:344
+msgid "Increasing the temperature will make the models answer more creatively."
+msgstr ""
+"ತಾಪಮಾನವನ್ನು ಹೆಚ್ಚಿಸುವುದರಿಂದ ಮಾದರಿಗಳು ಹೆಚ್ಚು ಸೃಜನಾತ್ಮಕವಾಗಿ ಉತ್ತರಿಸುವಂತೆ ಮಾಡುತ್ತದೆ.s"
+
+#: src/widgets/instance_manager.py:359
+msgid "Seed"
+msgstr "ಬೀಜ"
+
+#: src/widgets/instance_manager.py:360
+msgid ""
+"Setting this to a specific number other than 0 will make the model generate "
+"the same text for the same prompt."
+msgstr ""
+"ಇದನ್ನು 0 ಹೊರತುಪಡಿಸಿ ನಿರ್ದಿಷ್ಟ ಸಂಖ್ಯೆಗೆ ಹೊಂದಿಸುವುದರಿಂದ ಮಾದರಿಯು ಒಂದೇ ಪ್ರಾಂಪ್ಟ್‌ಗಾಗಿ "
+"ಒಂದೇ ಪಠ್ಯವನ್ನು ರಚಿಸುತ್ತದೆ."
+
+#: src/widgets/instance_manager.py:375
+msgid "Overrides"
+msgstr "ಅತಿಕ್ರಮಿಸು"
+
+#: src/widgets/instance_manager.py:375
+msgid ""
+"These entries are optional, they are used to troubleshoot GPU related "
+"problems with Ollama."
+msgstr ""
+"ಈ ನಮೂದುಗಳು  ಐಚ್ಛಿಕ ಿಕವಾಗಿರುತ್ತವೆ, ಒಲ್ಲಾಮಾದೊಂದಿಗಿನ ಜಿಪಿಯು ಸಂಬಂಧಿತ ಸಮಸ್ಯೆಗಳನ್ನು "
+"ನಿವಾರಿಸಲು ಅವುಗಳನ್ನು ಬಳಸಲಾಗುತ್ತದೆ."
+
+#: src/widgets/instance_manager.py:393
+msgid "Model Directory"
+msgstr "ಮಾದರಿ ಡೈರೆಕ್ಟರಿ"
+
+#: src/widgets/instance_manager.py:395
+msgid "Select Directory"
+msgstr "ಡೈರೆಕ್ಟರಿ ಆಯ್ಕೆಮಾಡಿ"
+
+#: src/widgets/instance_manager.py:410
+msgid "Default Model"
+msgstr "ಡೀಫಾಲ್ಟ್ ಮಾದರಿ"
+
+#: src/widgets/instance_manager.py:410
+msgid "Model to select when starting a new chat."
+msgstr "ಹೊಸ ಚಾಟ್ ಪ್ರಾರಂಭಿಸುವಾಗ ಆಯ್ಕೆ ಮಾಡಲು ಮಾದರಿ."
+
+#: src/widgets/instance_manager.py:412
+msgid "Title Model"
+msgstr "ಶೀರ್ಷಿಕೆ ಮಾದರಿ"
+
+#: src/widgets/instance_manager.py:412
+msgid "Model to use when generating a chat title."
+msgstr "ಚಾಟ್ ಶೀರ್ಷಿಕೆಯನ್ನು ರಚಿಸುವಾಗ ಬಳಸಬೇಕಾದ ಮಾದರಿ."
+
+#: src/widgets/instance_manager.py:477 src/widgets/instance_manager.py:478
+#: src/widgets/blocks/code.py:145 src/widgets/blocks/text.py:120
+msgid "Save"
+msgstr "ಉಳಿಸು"
+
+#: src/widgets/instance_manager.py:530 src/widgets/instance_manager.py:776
+#: src/widgets/instance_manager.py:823 src/widgets/instance_manager.py:857
+msgid "Could not retrieve added models"
+msgstr "ಸೇರಿಸಿದ ಮಾದರಿಗಳನ್ನು ಹಿಂಪಡೆಯಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"
+
+#: src/widgets/instance_manager.py:544
+msgid "Could not retrieve available models"
+msgstr "ಲಭ್ಯವಿರುವ ಮಾದರಿಗಳನ್ನು ಹಿಂಪಡೆಯಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"
+
+#: src/widgets/instance_manager.py:613
+msgid "Ollama (Managed)"
+msgstr "ಒಲ್ಲಮಾ (ನಿರ್ವಹಿಸಲಾಗಿದೆ)"
+
+#: src/widgets/instance_manager.py:622
+msgid "Local AI instance managed directly by Alpaca"
+msgstr "ಸ್ಥಳೀಯ AI ನಿದರ್ಶನವನ್ನು ನೇರವಾಗಿ ಅಲ್ಪಕಾ ನಿರ್ವಹಿಸುತ್ತದೆ"
+
+#: src/widgets/instance_manager.py:645
+msgid "Alpaca Support"
+msgstr "ಅಲ್ಪಕಾ ಬೆಂಬಲ"
+
+#: src/widgets/instance_manager.py:652
+msgid "Model request too large for system"
+msgstr "ಮಾದರಿ ವಿನಂತಿ ವ್ಯವಸ್ಥೆಗೆ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ"
+
+#: src/widgets/instance_manager.py:655
+msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
+msgstr ""
+"ಎಎಮ್‌ಡಿ ಜಿಪಿಯು ಪತ್ತೆಯಾಗಿದೆ ಆದರೆ ವಿಸ್ತರಣೆ ಕಾಣೆಯಾಗಿದೆ, ಒಲ್ಲಾಮಾ ಸಿಪಿಯು ಬಳಸುತ್ತಾರೆ."
+
+#: src/widgets/instance_manager.py:657
+msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
+msgstr ""
+"ಎಎಮ್‌ಡಿ ಜಿಪಿಯು ಪತ್ತೆಯಾಗಿದೆ ಆದರೆ ಆರ್‌ಒಸಿಎಂ ಕಾಣೆಯಾಗಿದೆ, ಒಲ್ಲಾಮಾ ಸಿಪಿಯು ಬಳಸುತ್ತಾರೆ."
+
+#: src/widgets/instance_manager.py:659
+msgid "Using AMD GPU type '{}'"
+msgstr "ಎಎಮ್‌ಡಿ ಜಿಪಿಯು  ಪ್ರಕಾರ '{}'"
+
+#: src/widgets/instance_manager.py:669
+msgid "Integrated Ollama instance is not running"
+msgstr "ಸಂಯೋಜಿತ ಆಲಾಮಾ ನಿದರ್ಶನವು ಚಾಲನೆಯಲ್ಲಿಲ್ಲ"
+
+#: src/widgets/instance_manager.py:694
+msgid "Managed Ollama instance failed to start"
+msgstr "ನಿರ್ವಹಿಸಿದ ಆಲಾಮಾ ನಿದರ್ಶನವು ಪ್ರಾರಂಭಿಸಲು ವಿಫಲವಾಗಿದೆ"
+
+#: src/widgets/instance_manager.py:699
+msgid "Integrated Ollama instance is running"
+msgstr "ಸಂಯೋಜಿತ ಆಲಾಮಾ ನಿದರ್ಶನವು ಚಾಲನೆಯಲ್ಲಿದೆ"
+
+#: src/widgets/instance_manager.py:704 src/widgets/instance_manager.py:707
+msgid "Ollama Log"
+msgstr "ಆಲಾಮಾ ಲಾಗ್"
+
+#: src/widgets/instance_manager.py:724
+msgid "Local or remote AI instance not managed by Alpaca"
+msgstr "ಸ್ಥಳೀಯ ಅಥವಾ ರಿಮೋಟ್ ಎಐ ನಿದರ್ಶನವನ್ನು ಅಲ್ಪಕಾ ನಿರ್ವಹಿಸುವುದಿಲ್ಲ"
+
+#: src/widgets/instance_manager.py:904 src/widgets/instance_manager.py:929
+#: src/widgets/instance_manager.py:955
+msgid "Could not retrieve models"
+msgstr "ಮಾದರಿಗಳನ್ನು ಹಿಂಪಡೆಯಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"
+
+#: src/widgets/instance_manager.py:915
+msgid "Fireworks AI inference platform"
+msgstr "Fireworks AI ಅನುಮಾನ ವೇದಿಕೆ"
+
+#: src/widgets/instance_manager.py:940
+msgid "Lambda Labs cloud inference API"
+msgstr "ಲ್ಯಾಂಬ್ಡಾ ಲ್ಯಾಬ್ಸ್ ಕ್ಲೌಡ್ ಅನುಮಾನ ಎಪಿಐ"
+
+#: src/widgets/instance_manager.py:966
+msgid "Cerebras AI cloud inference API"
+msgstr "ಸೆರೆಬ್ರಾಸ್ AI ಕ್ಲೌಡ್ ಅನುಮಾನ ಎಪಿಐ"
+
+#: src/widgets/instance_manager.py:972
+msgid "Kluster AI cloud inference API"
+msgstr "ಕ್ಲಸ್ಟರ್ AI ಕ್ಲೌಡ್ ಅನುಮಾನ ಎಪಿಐ"
+
+#: src/widgets/instance_manager.py:976
+msgid "OpenAI Compatible Instance"
+msgstr "ಓಪನ್ಎಐ ಹೊಂದಾಣಿಕೆಯ ನಿದರ್ಶನ"
+
+#: src/widgets/instance_manager.py:977
+msgid "AI instance compatible with OpenAI library"
+msgstr "ಎಐ ನಿದರ್ಶನ ಓಪನ್ಐ ಲೈಬ್ರರಿಯೊಂದಿಗೆ ಹೊಂದಿಕೊಳ್ಳುತ್ತದೆ"
+
+#: src/widgets/instance_manager.py:987
+msgid "Meta AI Llama API"
+msgstr "ಮೆಟಾ ಎಐ ಲಾಮಾ ಎಪಿಐ"
+
+#: src/widgets/instance_manager.py:1008
+msgid "Remove Instance?"
+msgstr "ನಿದರ್ಶನವನ್ನು ತೆಗೆದುಹಾಕುವುದೇ?"
+
+#: src/widgets/instance_manager.py:1009
+msgid "Are you sure you want to remove this instance?"
+msgstr "ಈ ನಿದರ್ಶನವನ್ನು ತೆಗೆದುಹಾಕಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?"
+
+#: src/widgets/instance_manager.py:1011 src/widgets/model_manager.py:114
+#: src/widgets/model_manager.py:201 src/widgets/model_manager.py:645
+#: src/widgets/model_manager.py:702
+msgid "Remove"
+msgstr "ತೆಗೆದುಹಾಕು"
+
+#: src/widgets/instance_manager.py:1029
+msgid "Edit Instance"
+msgstr "ಉದಾಹರಣೆಗೆ ಸಂಪಾದಿಸಿ"
+
+#: src/widgets/message.py:33
+msgid "Remove Message"
+msgstr "ಸಂದೇಶವನ್ನು ತೆಗೆದುಹಾಕಿ"
+
+#: src/widgets/message.py:43
+msgid "Copy Message"
+msgstr "ಸಂದೇಶವನ್ನು ನಕಲಿಸಿ"
+
+#: src/widgets/message.py:53
+msgid "Edit Message"
+msgstr "ಸಂದೇಶವನ್ನು ಸಂಪಾದಿಸಿ"
+
+#: src/widgets/message.py:64
+msgid "Regenerate Message"
+msgstr "ಸಂದೇಶವನ್ನು ಪುನರುತ್ಪಾದಿಸಿ"
+
+#: src/widgets/message.py:76
+msgid "Dictate Message"
+msgstr "ಸಂದೇಶವನ್ನು ನಿರ್ದೇಶಿಸಿ"
+
+#: src/widgets/message.py:95
+msgid "Message copied to the clipboard"
+msgstr "ಸಂದೇಶವನ್ನು ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಲಾಗಿದೆ"
+
+#: src/widgets/message.py:144
+msgid "Text to Speech Error"
+msgstr "ಭಾಷಣ ದೋಷಕ್ಕೆ ಪಠ್ಯ"
+
+#: src/widgets/message.py:145
+msgid "An error occurred while running text to speech model"
+msgstr "ಪಠ್ಯಕ್ಕೆ ಪಠ್ಯವನ್ನು ಚಲಾಯಿಸುವಾಗ ದೋಷ ಸಂಭವಿಸಿದೆ"
+
+#: src/widgets/message.py:173
+msgid "Message cannot be regenerated while receiving a response"
+msgstr "ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ಸ್ವೀಕರಿಸುವಾಗ ಸಂದೇಶವನ್ನು ಪುನರುತ್ಪಾದಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"
+
+#: src/widgets/model_manager.py:107 src/widgets/model_manager.py:194
+#: src/widgets/model_manager.py:695
+msgid "Remove Model"
+msgstr "ಮಾದರಿಯನ್ನು ತೆಗೆದುಹಾಕಿ"
+
+#: src/widgets/model_manager.py:111 src/widgets/model_manager.py:198
+#: src/widgets/model_manager.py:699
+msgid "Remove Model?"
+msgstr "ಮಾದರಿಯನ್ನು ತೆಗೆದುಹಾಕಿ?"
+
+#: src/widgets/model_manager.py:112 src/widgets/model_manager.py:199
+#: src/widgets/model_manager.py:700
+msgid "Are you sure you want to remove '{}'?"
+msgstr "ನೀವು '{}' ಅನ್ನು ತೆಗೆದುಹಾಕಲು ಬಯಸುವಿರಾ?"
+
+#: src/widgets/model_manager.py:122
+msgid "Local text to speech model provided by Kokoro."
+msgstr "ಕೊಕೊರೊ ಒದಗಿಸಿದ ಸ್ಥಳೀಯ ಪಠ್ಯದಿಂದ ಭಾಷಣ ಮಾದರಿ."
+
+#: src/widgets/model_manager.py:159 src/widgets/model_manager.py:293
+msgid "Speech to Text"
+msgstr "ಪಠ್ಯಕ್ಕೆ ಭಾಷಣ"
+
+#: src/widgets/model_manager.py:209
+msgid "Local speech to text model provided by OpenAI Whisper."
+msgstr "ಓಪನ್ಐ ಪಿಸುಮಾತು ಒದಗಿಸಿದ ಪಠ್ಯ ಮಾದರಿಗೆ ಸ್ಥಳೀಯ ಭಾಷಣ."
+
+#: src/widgets/model_manager.py:238
+msgid "Downloading…"
+msgstr "ಡೌನ್‌ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ…"
+
+#: src/widgets/model_manager.py:248 src/widgets/model_manager.py:250
+msgid "Stop Download"
+msgstr "ಡೌನ್‌ಲೋಡ್ ನಿಲ್ಲಿಸಿ"
+
+#: src/widgets/model_manager.py:256
+msgid "Stop Download?"
+msgstr "ಡೌನ್‌ಲೋಡ್ ನಿಲ್ಲಿಸಿ?"
+
+#: src/widgets/model_manager.py:257
+msgid "Are you sure you want to stop pulling '{}'?"
+msgstr "'{}' ಎಳೆಯುವುದನ್ನು ನಿಲ್ಲಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?"
+
+#: src/widgets/model_manager.py:259
+msgid "Stop"
+msgstr "ನಿಲ್ಲಿಸು"
+
+#: src/widgets/model_manager.py:341
+msgid "Model Manager Error"
+msgstr "ಮಾದರಿ ವ್ಯವಸ್ಥಾಪಕ ದೋಷ"
+
+#: src/widgets/model_manager.py:342
+msgid "An error occurred whilst pulling '{}'"
+msgstr "'{}' ಅನ್ನು ಎಳೆಯುವಾಗ ದೋಷ ಸಂಭವಿಸಿದೆ"
+
+#: src/widgets/model_manager.py:372
+msgid "Download Completed"
+msgstr "ಡೌನ್‌ಲೋಡ್ ಪೂರ್ಣಗೊಂಡಿದೆ"
+
+#: src/widgets/model_manager.py:373
+msgid "Model '{}' downloaded successfully."
+msgstr "ಮಾದರಿ '{}' ಯಶಸ್ವಿಯಾಗಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡಲಾಗಿದೆ."
+
+#: src/widgets/model_manager.py:437
+msgid "Change Profile Picture"
+msgstr "ಪ್ರೊಫೈಲ್ ಚಿತ್ರವನ್ನು ಬದಲಾಯಿಸಿ"
+
+#: src/widgets/model_manager.py:454
+msgid "Voice"
+msgstr "ಧ್ವನಿ"
+
+#: src/widgets/model_manager.py:459
+msgid "Default"
+msgstr "ಡಯೆಲು"
+
+#: src/widgets/model_manager.py:479
+msgid "Family"
+msgstr "ಕುಟುಂಬ"
+
+#: src/widgets/model_manager.py:480
+msgid "Parameter Size"
+msgstr "ನಿಯತಾಂಕ ಗಾತ್ರ"
+
+#: src/widgets/model_manager.py:481
+msgid "Quantization Level"
+msgstr "ಪರಿಮಾಣ ಮಟ್ಟ"
+
+#: src/widgets/model_manager.py:484
+msgid "Parent Model"
+msgstr "ಪೋಷಕ ಮಾದರಿ"
+
+#: src/widgets/model_manager.py:487 src/widgets/model_manager.py:489
+msgid "Modified At"
+msgstr "ನಲ್ಲಿ ಮಾರ್ಪಡಿಸಲಾಗಿದೆ"
+
+#: src/widgets/model_manager.py:497
+msgid "Description"
+msgstr "ವಿವರಣೆ"
+
+#: src/widgets/model_manager.py:646
+msgid "Change"
+msgstr "ಬದಲಾವಣೆ"
+
+#: src/widgets/model_manager.py:654
+msgid "Model Profile Picture"
+msgstr "ಮಾದರಿ ಪ್ರೊಫೈಲ್ ಚಿತ್ರ"
+
+#: src/widgets/model_manager.py:655
+msgid "What do you want to do with the model's profile picture?"
+msgstr "ಮಾದರಿಯ ಪ್ರೊಫೈಲ್ ಚಿತ್ರದೊಂದಿಗೆ ನೀವು ಏನು ಮಾಡಲು ಬಯಸುತ್ತೀರಿ?"
+
+#: src/widgets/model_manager.py:687
+msgid "Create Child"
+msgstr "ಮಗುವನ್ನು ರಚಿಸಿ"
+
+#: src/widgets/model_manager.py:714
+msgid "Multilingual"
+msgstr "ಬಹುಭಾಷಿಕ"
+
+#: src/widgets/model_manager.py:715
+msgid "Code"
+msgstr "ಸಂಹಿತೆ"
+
+#: src/widgets/model_manager.py:716
+msgid "Math"
+msgstr "ಗಣಿತ"
+
+#: src/widgets/model_manager.py:717
+msgid "Vision"
+msgstr "ದೃಷ್ಟಿ"
+
+#: src/widgets/model_manager.py:718
+msgid "Embedding"
+msgstr "ಹುದುಗಿಸುವುದು"
+
+#: src/widgets/model_manager.py:719
+msgid "Tools"
+msgstr "ಸಾಧನಗಳು"
+
+#: src/widgets/model_manager.py:720
+msgid "Reasoning"
+msgstr "ತಾರ್ಕಿಕ"
+
+#: src/widgets/model_manager.py:721
+msgid "Small"
+msgstr "ಸಣ್ಣ"
+
+#: src/widgets/model_manager.py:722
+msgid "Medium"
+msgstr "ಮಧ್ಯಮ"
+
+#: src/widgets/model_manager.py:723
+msgid "Big"
+msgstr "ದೊಡ್ಡ"
+
+#: src/widgets/model_manager.py:724
+msgid "Huge"
+msgstr "ದೊಡ್ಡ"
+
+#: src/widgets/model_manager.py:814
+msgid ""
+"By downloading this model you accept the license agreement available on the "
+"model's website"
+msgstr ""
+"ಈ ಮಾದರಿಯನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡುವ ಮೂಲಕ ನೀವು ಮಾದರಿಯ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಲಭ್ಯವಿರುವ ಪರವಾನಗಿ "
+"ಒಪ್ಪಂದವನ್ನು ಸ್ವೀಕರಿಸುತ್ತೀರಿ"
+
+#: src/widgets/model_manager.py:895
+msgid "Languages"
+msgstr "ಭಾಷೆಗಳ"
+
+#: src/widgets/terminal.py:17
+msgid "Setting up Python environment..."
+msgstr "ಪೈಥಾನ್ ಪರಿಸರವನ್ನು ಹೊಂದಿಸಲಾಗುತ್ತಿದೆ ..."
+
+#: src/widgets/terminal.py:29
+msgid "Using Python HTTP server..."
+msgstr "ಪೈಥಾನ್ HTTP ಸರ್ವರ್ ಬಳಸುವುದು ..."
+
+#: src/widgets/terminal.py:34
+msgid "Using Flatpak contained shell..."
+msgstr "ಫ್ಲಾಟ್‌ಪ್ಯಾಕ್ ಬಳಸಿ ಶೆಲ್ ಇದೆ ..."
+
+#: src/widgets/terminal.py:38
+msgid "Using SSH to run command"
+msgstr "ಆಜ್ಞೆಯನ್ನು ಚಲಾಯಿಸಲು ssh ಅನ್ನು ಬಳಸುವುದು"
+
+#: src/widgets/terminal.py:85
+msgid "Terminal"
+msgstr "ಟರ್ಮಿನಲ್"
+
+#: src/widgets/terminal.py:97
+msgid "Open Environment Directory"
+msgstr "ಪರಿಸರ ಡೈರೆಕ್ಟರಿ ತೆರೆಯಿರಿ"
+
+#: src/widgets/terminal.py:181
+msgid "Script Exited"
+msgstr "ಸ್ಕ್ರಿಪ್ಟ್ ನಿರ್ಗಮಿಸಿದೆ"
+
+#: src/widgets/terminal.py:192
+msgid "Alpaca Terminal is not compatible with Windows"
+msgstr "ಅಲ್ಪಕಾ ಟರ್ಮಿನಲ್ ವಿಂಡೋಗಳೊಂದಿಗೆ ಹೊಂದಿಕೆಯಾಗುವುದಿಲ್ಲ"
+
+#: src/widgets/blocks/code.py:84
+msgid "Code Block"
+msgstr "ಕೋಡ್ ಬ್ಲಾಕ್"
+
+#: src/widgets/blocks/code.py:111
+msgid "Edit Script"
+msgstr "ಸ್ಕ್ರಿಪ್ಟ್ ಸಂಪಾದಿಸಿ"
+
+#: src/widgets/blocks/code.py:119
+msgid "Copy Script"
+msgstr "ಸ್ಕ್ರಿಪ್ಟ್ ನಕಲಿಸಿ"
+
+#: src/widgets/blocks/code.py:127
+msgid "Run Script"
+msgstr "ಸ್ಕ್ರಿಪ್ಟ್ ರನ್"
+
+#: src/widgets/blocks/code.py:193
+msgid "Changes saved successfully"
+msgstr "ಬದಲಾವಣೆಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಉಳಿಸಲಾಗಿದೆ"
+
+#: src/widgets/blocks/code.py:199
+msgid "Code copied to the clipboard"
+msgstr "ಕೋಡ್ ಅನ್ನು ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಲಾಗಿದೆ"
+
+#: src/widgets/blocks/latex.py:41
+msgid "Copy Equation"
+msgstr "ಸಮೀಕರಣವನ್ನು ನಕಲಿಸಿ"
+
+#: src/widgets/blocks/latex.py:76
+msgid "Equation copied to the clipboard"
+msgstr "ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ಸಮೀಕರಣವನ್ನು ನಕಲಿಸಲಾಗಿದೆ"
+
+#: src/widgets/blocks/__init__.py:36
+msgid "Thought"
+msgstr "ಆಲೋಚನೆ"
+
+#: src/widgets/tools/notebook_tools.py:18
+msgid "Read Notebook"
+msgstr "ನೋಟ್ಬುಕ್ ಓದಿ"
+
+#: src/widgets/tools/notebook_tools.py:19
+msgid "Reads the current notebook."
+msgstr "ಪ್ರಸ್ತುತ ನೋಟ್ಬುಕ್ ಅನ್ನು ಓದುತ್ತದೆ."
+
+#: src/widgets/tools/notebook_tools.py:38
+msgid "Write Notebook"
+msgstr "ನೋಟ್ಬುಕ್ ಬರೆಯಿರಿ"
+
+#: src/widgets/tools/notebook_tools.py:39
+msgid "Overwrites the notebook with new text."
+msgstr "ಹೊಸ ಪಠ್ಯದೊಂದಿಗೆ ನೋಟ್‌ಬುಕ್ ಅನ್ನು ತಿದ್ದಿ ಬರೆಯುತ್ತದೆ."
+
+#: src/widgets/tools/notebook_tools.py:58
+msgid "Append to Notebook"
+msgstr "ನೋಟ್ಬುಕ್ಗೆ ಸೇರಿಸಿ"
+
+#: src/widgets/tools/notebook_tools.py:59
+msgid "Appends text to the notebook."
+msgstr "ನೋಟ್‌ಬುಕ್‌ಗೆ ಪಠ್ಯವನ್ನು ಸೇರಿಸುತ್ತದೆ."
+
+#: src/widgets/tools/tools.py:67
+msgid "AI Description"
+msgstr "AI ವಿವರಣೆ"
+
+#: src/widgets/tools/tools.py:68
+msgid "The description the AI model will use to understand what the tool does."
+msgstr "ಸಾಧನವು ಏನು ಮಾಡುತ್ತದೆ ಎಂಬುದನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು AI ಮಾದರಿಯು ಬಳಸುವ ವಿವರಣೆ."
+
+#: src/widgets/tools/tools.py:79
+msgid "Arguments"
+msgstr "ವಾದ"
+
+#: src/widgets/tools/tools.py:80
+msgid "Variables that are filled by the AI."
+msgstr "AI ನಿಂದ ತುಂಬಿದ ಅಸ್ಥಿರಗಳು."
+
+#: src/widgets/tools/tools.py:93
+msgid "Variables"
+msgstr "ಅಸ್ಥಿರ"
+
+#: src/widgets/tools/tools.py:94
+msgid ""
+"User filled values that the tool uses to work, the AI does not have access "
+"to these variables at all."
+msgstr ""
+"ಸಾಧನವು ಕೆಲಸ ಮಾಡಲು ಬಳಸುವ ಬಳಕೆದಾರರು ತುಂಬಿದ ಮೌಲ್ಯಗಳು, AI ಗೆ ಈ ಅಸ್ಥಿರಗಳಿಗೆ "
+"ಪ್ರವೇಶವಿಲ್ಲ."
+
+#: src/widgets/tools/tools.py:182
+msgid "Gets the current date and/or time."
+msgstr "ಪ್ರಸ್ತುತ ದಿನಾಂಕ ಮತ್ತು/ಅಥವಾ ಸಮಯವನ್ನು ಪಡೆಯುತ್ತದೆ."
+
+#: src/widgets/tools/tools.py:215
+msgid "Gets a recipe by the meal's name"
+msgstr "Meal ಹೆಸರಿನಿಂದ ಪಾಕವಿಧಾನವನ್ನು ಪಡೆಯುತ್ತದೆ"
+
+#: src/widgets/tools/tools.py:230 src/widgets/tools/tools.py:297
+msgid "YouTube Video"
+msgstr "ಯೂಟ್ಯೂಬ್ ವಿಡಿಯೋ"
+
+#: src/widgets/tools/tools.py:238 src/widgets/tools/tools.py:306
+msgid "Source"
+msgstr "ಮೂಲ"
+
+#: src/widgets/tools/tools.py:276
+msgid "Gets a list of food recipes by a specified category"
+msgstr "ನಿರ್ದಿಷ್ಟ ವರ್ಗದಿಂದ ಆಹಾರ ಪಾಕವಿಧಾನಗಳ ಪಟ್ಟಿಯನ್ನು ಪಡೆಯುತ್ತದೆ"
+
+#: src/widgets/tools/tools.py:333
+msgid "Extracts an article from Wikipedia by it's title"
+msgstr "ವಿಕಿಪೀಡಿಯಾದ ಲೇಖನವನ್ನು ಅದರ ಶೀರ್ಷಿಕೆಯಿಂದ ಹೊರತೆಗೆಯುತ್ತದೆ"
+
+#: src/widgets/tools/tools.py:375
+msgid "Search for a term online using DuckDuckGo"
+msgstr "ಡಕ್ಡಕ್ಗೊ ಬಳಸಿ ಆನ್‌ಲೈನ್ ಪದಕ್ಕಾಗಿ ಹುಡುಕಿ"
+
+#: src/widgets/tools/tools.py:393
+msgid "Abstract Source"
+msgstr "ಅಮೂರ್ತ ಮೂಲ"
+
+#: src/widgets/tools/tools.py:417
+msgid "Official Website"
+msgstr "ಅಧಿಕೃತ ವೆಬ್‌ಸೈಟ್"
+
+#: src/widgets/tools/tools.py:468
+msgid "Request to run a command using SSH to connect to the device"
+msgstr "ಸಾಧನಕ್ಕೆ ಸಂಪರ್ಕಿಸಲು SSH ಬಳಸಿ ಆಜ್ಞೆಯನ್ನು ಚಲಾಯಿಸಲು ವಿನಂತಿಸಿ"
+
+#: src/widgets/tools/tools.py:471
+msgid "IP Address"
+msgstr "ಐಪಿ ವಿಳಾಸ"
+
+#: src/widgets/tools/tools.py:476
+msgid "Username"
+msgstr "ಬಳಕೆದಾರಹೆಸರು"
+
+#: src/widgets/tools/tools.py:481
+msgid "Network Port"
+msgstr "ನೆಟ್ವರ್ವರ್ ಪೋರ್ಟ್"
+
+#: src/widgets/tools/tools.py:498
+msgid "Model Requested to Run Command"
+msgstr "ಆಜ್ಞೆಯನ್ನು ಚಲಾಯಿಸಲು ಮಾದರಿ ವಿನಂತಿಸಲಾಗಿದೆ"
+
+#: src/widgets/tools/tools.py:499
+msgid "Command"
+msgstr "ಆಜ್ಞೆ"
+
+#: src/widgets/tools/tools.py:501
+msgid "Explanation"
+msgstr "ವಿವರಣೆ"
+
+#: src/widgets/tools/tools.py:502
+msgid "No explanation was provided"
+msgstr "ಯಾವುದೇ ವಿವರಣೆಯನ್ನು ಒದಗಿಸಲಾಗಿಲ್ಲ"
+
+#: src/widgets/tools/tools.py:503
+msgid "Make sure you understand what the command does before running it."
+msgstr ""
+"ಆಜ್ಞೆಯನ್ನು ಚಲಾಯಿಸುವ ಮೊದಲು ಏನು ಮಾಡುತ್ತದೆ ಎಂಬುದನ್ನು ನೀವು ಅರ್ಥಮಾಡಿಕೊಂಡಿದ್ದೀರಿ ಎಂದು "
+"ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ."
