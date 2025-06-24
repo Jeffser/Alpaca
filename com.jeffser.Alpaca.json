@@ -1359,10 +1359,24 @@
 	    ]
 	},
 	{
+            "name": "python3-lxml",
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"lxml>=5.3.0\" --ignore-installed --no-build-isolation"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/ef/f6/c15ca8e5646e937c148e147244817672cf920b56ac0bf2cc1512ae674be8/lxml-5.3.1.tar.gz",
+                    "sha256": "106b7b5d2977b339f1e97efe2778e2ab20e99994cbb0ec5e55771ed0795920c8"
+                }
+            ]
+        },
+	{
 	    "name": "python3-duckduckgo-search",
 	    "buildsystem": "simple",
 	    "build-commands": [
-		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --no-build-isolation lxml duckduckgo_search"
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --no-build-isolation duckduckgo_search"
 	    ],
 	    "sources": [
 		{
@@ -1382,22 +1396,6 @@
 		    "type": "file",
 		    "url": "https://files.pythonhosted.org/packages/c3/7b/cbd5d999a07ff2a21465975d4eb477ae6f69765e8fe8c9087dab250180d8/primp-0.15.0-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
 		    "sha256": "c18b45c23f94016215f62d2334552224236217aaeb716871ce0e4dcfa08eb161",
-		    "only-arches": [
-		        "x86_64"
-		    ]
-		},
-		{
-		    "type": "file",
-		    "url": "https://files.pythonhosted.org/packages/24/a2/8263f351b4ffe0ed3e32ea7b7830f845c795349034f912f490180d88a877/lxml-5.4.0-cp312-cp312-manylinux_2_28_aarch64.whl",
-		    "sha256": "c5681160758d3f6ac5b4fea370495c48aac0989d6a0f01bb9a72ad8ef5ab75c4",
-		    "only-arches": [
-		        "aarch64"
-		    ]
-		},
-		{
-		    "type": "file",
-		    "url": "https://files.pythonhosted.org/packages/ad/36/239820114bf1d71f38f12208b9c58dec033cbcf80101cde006b9bde5cffd/lxml-5.4.0-cp312-cp312-manylinux_2_28_x86_64.whl",
-		    "sha256": "79d5bfa9c1b455336f52343130b2067164040604e41f6dc4d8313867ed540079",
 		    "only-arches": [
 		        "x86_64"
 		    ]
