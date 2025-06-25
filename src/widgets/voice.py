@@ -115,7 +115,6 @@ class DictateToggleButton(Gtk.Stack):
                 )
                 for gs, ps, audio in generator:
                     self.play_queue.put(audio)
-                    print('put AUDIO')
             else:
                 time.sleep(1)
                 if not any([isinstance(b, blocks.text.GeneratingText) for b in list(self.message_element.block_container)]):
@@ -125,9 +124,7 @@ class DictateToggleButton(Gtk.Stack):
             del generator
         gc.collect()
         self.play_queue.put(None)
-        print('waiting')
         play_thread.join()
-        print('joined')
         self.set_active(False)
 
     def dictate_message(self, button):
