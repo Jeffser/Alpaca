@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 6.0.6\n"
+"Project-Id-Version: 6.1.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-04 01:32-0600\n"
 "PO-Revision-Date: 2025-04-12 HO:MI+ZONE\n"
@@ -162,7 +162,7 @@ msgstr "नया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Multiple QuickAsk window rendering"
-msgstr ""
+msgstr "एकाधिक क्विकआस्क विंडो रेंडरिंग"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
@@ -202,65 +202,65 @@ msgstr "सुधार"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Better stability for QuickAsk"
-msgstr ""
+msgstr "क्विकआस्क के लिए बेहतर स्थिरता"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Creating a new chat now selects it"
-msgstr ""
+msgstr "नई चैट बनाने पर अब वह स्वतः चयनित हो जाती है"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "Chat Search"
-msgstr ""
+msgstr "चैट खोज"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:112
 msgid "Hide \"latest\" and \"custom\" tags from model selector"
-msgstr ""
+msgstr "मॉडल चयनकर्ता से 'नवीनतम' और 'कस्टम' टैग छिपाएँ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:113
 msgid "Hide model's languages behind popup"
-msgstr ""
+msgstr "मॉडल की भाषाओं को पॉपअप के पीछे छिपाएँ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid "New models listed for Ollama"
-msgstr ""
+msgstr "ओलामा के लिए नए मॉडल सूचीबद्ध किए गए हैं"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Added option to autodictate new mesages"
-msgstr ""
+msgstr "नए संदेशों को स्वतः श्रुतलेख करने का विकल्प जोड़ा गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
 msgid "Added Meta Llama API to list of instances"
-msgstr ""
+msgstr "इंस्टेंसेस की सूची में मेटा लामा एपीआई जोड़ा गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:117
 msgid ""
 "Added new env variables options (\"24H hour formatting\" and \"only Ollama "
 "mode\")"
-msgstr ""
+msgstr "नए एनवायरनमेंट वेरिएबल विकल्प जोड़े गए ('24 घंटे का समय प्रारूपण' और 'केवल ओलामा मोड')"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:118
 msgid "Made Mermaid scripts executable using Python HTTP server"
-msgstr ""
+msgstr "मर्मेड स्क्रिप्ट को पायथन HTTP सर्वर का उपयोग करके निष्पादन योग्य बनाया गया"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:122
 msgid "Better stability when switching instances"
-msgstr ""
+msgstr "इंस्टेंसेस बदलते समय बेहतर स्थिरता"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Better performance when navigating menus"
-msgstr ""
+msgstr "मेनू नेविगेट करते समय बेहतर प्रदर्शन"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Fixed some dialogs not appearing in Quick Ask window"
-msgstr ""
+msgstr "क्विक आस्क विंडो में कुछ संवादों के दिखाई न देने की समस्या ठीक की गई"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:125
 msgid "Faster message search"
-msgstr ""
+msgstr "तेज़ संदेश खोज"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:126
 msgid "Faster message rendering"
-msgstr ""
+msgstr "तेज़ संदेश रेंडरिंग"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:135
 msgid "Fixed whisper directory not existing causing error"
@@ -2119,15 +2119,15 @@ msgstr "त्वरित पूछें"
 
 #: src/constants.py:95
 msgid "Never"
-msgstr ""
+msgstr "कभी नहीं"
 
 #: src/constants.py:96
 msgid "When Alpaca is Focused"
-msgstr ""
+msgstr "जब अल्पाका केंद्रित हो"
 
 #: src/constants.py:97
 msgid "Always"
-msgstr ""
+msgstr "हमेशा"
 
 #: src/main.py:204
 msgid "Documentation"
@@ -3460,8 +3460,7 @@ msgstr "Alpaca बंद करें?"
 
 #: src/window.py:563
 msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
-msgstr ""
-"एक कार्य वर्तमान में प्रगति पर है। क्या आप सुनिश्चित हैं कि आप Alpaca बंद करना चाहते हैं?"
+msgstr "एक कार्य वर्तमान में प्रगति पर है। क्या आप सुनिश्चित हैं कि आप Alpaca बंद करना चाहते हैं?"
 
 #: src/window.py:775 src/window.ui:163 src/window.ui:1232
 #: src/widgets/chat.py:206 src/widgets/instance_manager.py:58
@@ -3636,23 +3635,23 @@ msgstr "मेनू"
 
 #: src/window.ui:181
 msgid "Search Chats"
-msgstr ""
+msgstr "चैट खोजें"
 
 #: src/window.ui:190
 msgid "Chat search bar"
-msgstr ""
+msgstr "चैट खोज बार"
 
 #: src/window.ui:198 src/window.ui:200
 msgid "Search chats"
-msgstr ""
+msgstr "चैट खोजें"
 
 #: src/window.ui:236
 msgid "No Chats Found"
-msgstr ""
+msgstr "कोई चैट नहीं मिली"
 
 #: src/window.ui:237
 msgid "Oh no! It looks like there are no chats found for your search."
-msgstr ""
+msgstr "अरे नहीं! ऐसा लगता है कि आपकी खोज के लिए कोई चैट नहीं मिली है।"
 
 #: src/window.ui:254
 msgid "Toggle Sidebar"
@@ -3685,7 +3684,8 @@ msgstr "संदेश खोजें"
 #: src/window.ui:356
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
-msgstr "चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
+msgstr ""
+"चेतावनी: पॉवर सेवर मोड सक्षम है, इससे संदेश उत्पादन में देरी होगी"
 
 #: src/window.ui:391 src/window.ui:1354
 msgid "Attach File"
@@ -3913,23 +3913,21 @@ msgstr "बात करने के बाद स्वतः संदेश 
 
 #: src/window.ui:1110
 msgid "Default Text to Speech Voice"
-msgstr ""
+msgstr "डिफ़ॉल्ट पाठ-से-भाषण आवाज़"
 
 #: src/window.ui:1111
 msgid ""
 "Voices are downloaded upon first use, each weighing around 1 MB, and you can "
 "delete them from the model manager"
-msgstr ""
-"आवाज़ पहली बार उपयोग करने पर डाउनलोड हो जाती है, प्रत्येक का वज़न लगभग 1 एमबी होता "
-"है, और आप उन्हें मॉडल प्रबंधक से हटा सकते हैं।"
+msgstr "आवाज़ पहली बार उपयोग करने पर डाउनलोड हो जाती है, प्रत्येक का वज़न लगभग 1 एमबी होता है, और आप उन्हें मॉडल प्रबंधक से हटा सकते हैं।"
 
 #: src/window.ui:1118
 msgid "Dictate New Messages Automatically"
-msgstr ""
+msgstr "नए संदेशों का स्वतः श्रुतलेख करें"
 
 #: src/window.ui:1119
 msgid "Dictate new messages once they have finished being generated"
-msgstr ""
+msgstr "नए संदेश जनरेट होने के बाद उनका श्रुतलेख करें"
 
 #: src/window.ui:1132
 msgid "Delete All Chats"
@@ -4033,7 +4031,7 @@ msgstr ""
 
 #: src/window.ui:1236 src/widgets/chat.py:20
 msgid "New Notebook"
-msgstr ""
+msgstr "नई नोटबुक"
 
 #: src/window.ui:1244
 msgid "Start Quick Ask"
@@ -4217,11 +4215,11 @@ msgstr "अटैचमेंट हटाएं"
 
 #: src/widgets/attachments.py:138
 msgid "Replace Notebook Content"
-msgstr ""
+msgstr "नोटबुक सामग्री बदलें"
 
 #: src/widgets/attachments.py:208
 msgid "Delete Attachment?"
-msgstr ""
+msgstr "संलग्नक हटाएँ?"
 
 #: src/widgets/attachments.py:209 src/widgets/chat.py:457
 msgid "Are you sure you want to delete '{}'?"
@@ -4237,19 +4235,19 @@ msgstr "छवि नहीं मिली"
 
 #: src/widgets/chat.py:86 src/widgets/instance_manager.py:96
 msgid "Notebook"
-msgstr ""
+msgstr "नोटबुक"
 
 #: src/widgets/chat.py:87
 msgid "Start a notebook with a message"
-msgstr ""
+msgstr "एक संदेश के साथ एक नोटबुक शुरू करें"
 
 #: src/widgets/chat.py:95 src/widgets/chat.py:247
 msgid "No Messages Found"
-msgstr ""
+msgstr "कोई संदेश नहीं मिला"
 
 #: src/widgets/chat.py:96 src/widgets/chat.py:248
 msgid "Uh oh! No messages found for your search."
-msgstr ""
+msgstr "अरे नहीं! आपकी खोज के लिए कोई संदेश नहीं मिला।"
 
 #: src/widgets/chat.py:238
 msgid "Try one of these prompts"
@@ -4334,7 +4332,7 @@ msgstr "इंस्टेंस"
 
 #: src/widgets/instance_manager.py:88
 msgid "Notebook Error"
-msgstr ""
+msgstr "नोटबुक त्रुटि"
 
 #: src/widgets/instance_manager.py:89 src/widgets/instance_manager.py:159
 msgid "An error occurred while running tool"
@@ -4556,7 +4554,7 @@ msgstr "ओपनएआई लाइब्रेरी के साथ सं�
 
 #: src/widgets/instance_manager.py:987
 msgid "Meta AI Llama API"
-msgstr ""
+msgstr "मेटा एआई लामा एपीआई"
 
 #: src/widgets/instance_manager.py:1008
 msgid "Remove Instance?"
@@ -4602,11 +4600,11 @@ msgstr "संदेश क्लिपबोर्ड में कॉपी �
 
 #: src/widgets/message.py:144
 msgid "Text to Speech Error"
-msgstr ""
+msgstr "पाठ-से-भाषण त्रुटि"
 
 #: src/widgets/message.py:145
 msgid "An error occurred while running text to speech model"
-msgstr ""
+msgstr "पाठ-से-भाषण मॉडल चलाते समय एक त्रुटि हुई"
 
 #: src/widgets/message.py:173
 msgid "Message cannot be regenerated while receiving a response"
@@ -4776,12 +4774,11 @@ msgid ""
 "By downloading this model you accept the license agreement available on the "
 "model's website"
 msgstr ""
-"इस मॉडल को डाउनलोड करके आप मॉडल की वेबसाइट पर उपलब्ध लाइसेंस समझौते को स्वीकार करते "
-"हैं।"
+"इस मॉडल को डाउनलोड करके आप मॉडल की वेबसाइट पर उपलब्ध लाइसेंस समझौते को स्वीकार करते हैं।"
 
 #: src/widgets/model_manager.py:895
 msgid "Languages"
-msgstr ""
+msgstr "भाषाएँ"
 
 #: src/widgets/terminal.py:17
 msgid "Setting up Python environment..."
@@ -4789,11 +4786,11 @@ msgstr "पायथन वातावरण सेट कर रहा हू�
 
 #: src/widgets/terminal.py:29
 msgid "Using Python HTTP server..."
-msgstr ""
+msgstr "पायथन HTTP सर्वर का उपयोग कर रहा हूँ..."
 
 #: src/widgets/terminal.py:34
 msgid "Using Flatpak contained shell..."
-msgstr ""
+msgstr "फ्लैटपैक समाहित शेल का उपयोग कर रहा हूँ..."
 
 #: src/widgets/terminal.py:38
 msgid "Using SSH to run command"
@@ -4813,7 +4810,7 @@ msgstr "स्क्रिप्ट समाप्त हुई"
 
 #: src/widgets/terminal.py:192
 msgid "Alpaca Terminal is not compatible with Windows"
-msgstr ""
+msgstr "अल्पाका टर्मिनल विंडोज के साथ संगत नहीं है"
 
 #: src/widgets/blocks/code.py:84
 msgid "Code Block"
@@ -4821,11 +4818,11 @@ msgstr "कोड ब्लॉक"
 
 #: src/widgets/blocks/code.py:111
 msgid "Edit Script"
-msgstr ""
+msgstr "स्क्रिप्ट संपादित करें"
 
 #: src/widgets/blocks/code.py:119
 msgid "Copy Script"
-msgstr ""
+msgstr "स्क्रिप्ट कॉपी करें"
 
 #: src/widgets/blocks/code.py:127
 msgid "Run Script"
@@ -4833,7 +4830,7 @@ msgstr "स्क्रिप्ट चलाएँ"
 
 #: src/widgets/blocks/code.py:193
 msgid "Changes saved successfully"
-msgstr ""
+msgstr "परिवर्तन सफलतापूर्वक सहेजे गए"
 
 #: src/widgets/blocks/code.py:199
 msgid "Code copied to the clipboard"
@@ -4853,27 +4850,27 @@ msgstr "विचार"
 
 #: src/widgets/tools/notebook_tools.py:18
 msgid "Read Notebook"
-msgstr ""
+msgstr "नोटबुक पढ़ें"
 
 #: src/widgets/tools/notebook_tools.py:19
 msgid "Reads the current notebook."
-msgstr ""
+msgstr "वर्तमान नोटबुक को पढ़ता है।"
 
 #: src/widgets/tools/notebook_tools.py:38
 msgid "Write Notebook"
-msgstr ""
+msgstr "नोटबुक लिखें"
 
 #: src/widgets/tools/notebook_tools.py:39
 msgid "Overwrites the notebook with new text."
-msgstr ""
+msgstr "नोटबुक को नए पाठ से अधिलेखित करता है।"
 
 #: src/widgets/tools/notebook_tools.py:58
 msgid "Append to Notebook"
-msgstr ""
+msgstr "नोटबुक में जोड़ें"
 
 #: src/widgets/tools/notebook_tools.py:59
 msgid "Appends text to the notebook."
-msgstr ""
+msgstr "नोटबुक में पाठ जोड़ता है।"
 
 #: src/widgets/tools/tools.py:67
 msgid "AI Description"
