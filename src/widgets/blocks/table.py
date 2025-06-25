@@ -20,17 +20,19 @@ class MarkdownTable:
         #table_repr += 'Alignments: {}\n'.format(self.alignments)
         table_repr += 'Rows:\n'
         for row in self.rows:
-            table_repr += ' | '.join(row) + '\n'
-        return table_repr
+            table_repr += ' | '.join(row.raw_values) + '\n'
+        return table_repr.replace('*', '')
 
 class Row(GObject.GObject):
     def __init__(self, _values:list):
         super().__init__()
 
         self.values = []
+        self.raw_values = []
 
         for value in _values:
             self.values.append(markdown_to_pango(value))
+            self.raw_values.append(value)
 
     def get_column_value(self, index):
         return self.values[index]
