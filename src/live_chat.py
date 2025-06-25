@@ -33,7 +33,6 @@ class LiveChatWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'AlpacaLiveChatWindow'
 
     live_chat_background = Gtk.Template.Child()
-    response_label = Gtk.Template.Child()
 
     microphone_container = Gtk.Template.Child()
 

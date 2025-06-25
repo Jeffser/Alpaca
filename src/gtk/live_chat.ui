@@ -11,12 +11,6 @@
     <property name="height-request">460</property>
     <property name="name">AlpacaLiveChat</property>
     <property name="title" translatable="true">Live Chat</property>
-    <child>
-      <object class="AdwBreakpoint">
-        <condition>max-height: 600sp</condition>
-        <setter object="response_label_scrolled_window" property="visible">false</setter>
-      </object>
-    </child>
     <property name="content">
       <object class="AdwToastOverlay" id="toast_overlay">
         <property name="child">
@@ -65,32 +59,6 @@
                         <property name="child">
                           <object class="GtkBox">
                             <property name="orientation">1</property>
-                            <child>
-                              <object class="GtkScrolledWindow" id="response_label_scrolled_window">
-                                <property name="margin-start">10</property>
-                                <property name="margin-end">10</property>
-                                <property name="margin-bottom">10</property>
-                                <property name="hexpand">true</property>
-                                <property name="valign">1</property>
-                                <property name="propagate-natural-height">true</property>
-                                <property name="overflow">1</property>
-                                <style>
-                                  <class name="r10"/>
-                                  <class name="osd"/>
-                                  <class name="undershoot-bottom"/>
-                                </style>
-                                <property name="child">
-                                  <object class="GtkLabel" id="response_label">
-                                    <property name="wrap">true</property>
-                                    <property name="selectable">true</property>
-                                    <property name="justify">2</property>
-                                    <style>
-                                      <class name="p10"/>
-                                    </style>
-                                  </object>
-                                </property>
-                              </object>
-                            </child>
                             <child>
                               <object class="AdwBin">
                                 <property name="vexpand">true</property>

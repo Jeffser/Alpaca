@@ -77,13 +77,15 @@ class GeneratingText(Gtk.Overlay):
 
     def get_content_for_dictation(self) -> str:
         raw_text = self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
-        allowed_characters = ('\n', ',', '.', ':', ';', '+', '/', '-', '(', ')', '[', ']', '=', '<', '>', '’', '\'', '"', '¿', '?', '¡', '!')
-        cleaned_text = ''.join(c for c in raw_text if unicodedata.category(c).startswith(('L', 'N', 'Zs')) or c in allowed_characters)
-        lines = []
-        for line in cleaned_text.split('\n'):
-            if line and line.strip() not in allowed_characters:
-                lines.append(line)
-        return '\n'.join(lines)
+        if raw_text:
+            allowed_characters = ('\n', ',', '.', ':', ';', '+', '/', '-', '(', ')', '[', ']', '=', '<', '>', '’', '\'', '"', '¿', '?', '¡', '!')
+            cleaned_text = ''.join(c for c in raw_text if unicodedata.category(c).startswith(('L', 'N', 'Zs')) or c in allowed_characters)
+            lines = []
+            for line in cleaned_text.split('\n'):
+                if line and line.strip() not in allowed_characters:
+                    lines.append(line)
+            return '\n'.join(lines)
+        return ''
 
 class Text(Gtk.Label):
     __gtype_name__ = 'AlpacaText'
@@ -111,13 +113,15 @@ class Text(Gtk.Label):
         return self.raw_text
 
     def get_content_for_dictation(self) -> str:
-        allowed_characters = ('\n', ',', '.', ':', ';', '+', '/', '-', '(', ')', '[', ']', '=', '<', '>', '’', '\'', '"', '¿', '?', '¡', '!')
-        cleaned_text = ''.join(c for c in self.raw_text if unicodedata.category(c).startswith(('L', 'N', 'Zs')) or c in allowed_characters)
-        lines = []
-        for line in cleaned_text.split('\n'):
-            if line and line.strip() not in allowed_characters:
-                lines.append(line)
-        return '\n'.join(lines)
+        if self.raw_text:
+            allowed_characters = ('\n', ',', '.', ':', ';', '+', '/', '-', '(', ')', '[', ']', '=', '<', '>', '’', '\'', '"', '¿', '?', '¡', '!')
+            cleaned_text = ''.join(c for c in self.raw_text if unicodedata.category(c).startswith(('L', 'N', 'Zs')) or c in allowed_characters)
+            lines = []
+            for line in cleaned_text.split('\n'):
+                if line and line.strip() not in allowed_characters:
+                    lines.append(line)
+            return '\n'.join(lines)
+        return ''
 
     def set_content(self, value:str) -> None:
         self.raw_text = value

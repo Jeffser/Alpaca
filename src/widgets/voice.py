@@ -10,7 +10,7 @@ from ..sql_manager import Instance as SQL
 from ..constants import data_dir, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
 from . import dialog, model_manager, blocks
 
-import os, threading, importlib.util, re, unicodedata, gc
+import os, threading, importlib.util, re, unicodedata, gc, queue, time
 import numpy as np
 
 message_dictated = None
@@ -52,9 +52,7 @@ class DictateToggleButton(Gtk.Stack):
         self.button.connect('toggled', self.dictate_message)
         self.add_named(self.button, 'button')
         self.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
-        self.generated_audio_queue = []
-        self.audio_playing = False
-        self.audio_index = 0
+        self.play_queue = queue.Queue()
 
         if self.get_visible() and (libraries.get('kokoro') is None or libraries.get('sounddevice') is None):
             library_waiting_queue.append(self)
@@ -67,88 +65,83 @@ class DictateToggleButton(Gtk.Stack):
         return self.button.get_active()
 
     def play_audio_queue(self):
-        def get_length() -> int:
-            return len(self.generated_audio_queue)
-        self.audio_playing = True
-        while self.audio_index < get_length():
-            libraries.get('sounddevice').play(self.generated_audio_queue[self.audio_index], samplerate=24000)
+        while True:
+            audio = self.play_queue.get()
+            if audio is None or not self.get_active():
+                return
+            libraries.get('sounddevice').play(audio, samplerate=24000)
             libraries.get('sounddevice').wait()
-            self.audio_index += 1
-            if not self.get_active():
-                break
-        self.audio_playing = False
+
+    def run_tts(self):
+        global tts_engine, tts_engine_language
+        GLib.idle_add(self.set_visible_child_name, 'loading')
+
+        # Get Voice
+        voice = None
+        if self.message_element.get_model():
+            voice = SQL.get_model_preferences(self.message_element.get_model()).get('voice', None)
+        if not voice:
+            voice = TTS_VOICES.get(list(TTS_VOICES.keys())[self.message_element.get_root().settings.get_value('tts-model').unpack()])
+
+        # Show Voice in Model Manager if Needed
+        if model_manager.tts_model_path:
+            if not os.path.islink(os.path.join(model_manager.tts_model_path, '{}.pt'.format(voice))) and self.message_element.get_root().get_name() == 'AlpacaWindow':
+                pretty_name = [k for k, v in TTS_VOICES.items() if v == voice]
+                if len(pretty_name) > 0:
+                    pretty_name = pretty_name[0]
+                    self.message_element.get_root().local_model_flowbox.append(model_manager.TextToSpeechModel(pretty_name))
+
+        # Generate TTS_ENGINE if needed
+        if not tts_engine or tts_engine_language != voice[0]:
+            tts_engine = libraries.get('kokoro').KPipeline(lang_code=voice[0], repo_id='hexgrad/Kokoro-82M')
+            tts_engine_language=voice[0]
+
+        # Start Generation of Audio and Start Playing
+        play_thread = threading.Thread(target=self.play_audio_queue)
+        play_thread.start()
+        queue_index = 0
+        GLib.idle_add(self.set_visible_child_name, 'button')
+        while queue_index + 1 < len(self.message_element.get_content_for_dictation()) or any([isinstance(b, blocks.text.GeneratingText) for b in list(self.message_element.block_container)]):
+            text = self.message_element.get_content_for_dictation()
+            end_index = max(text.rfind("\n"), text.rfind("."), text.rfind("?"), text.rfind("!"), text.rfind(":"))
+            if end_index == -1 or end_index < queue_index:
+                end_index = len(text)
+            if text[queue_index:end_index]:
+                generator = tts_engine(
+                    text[queue_index:end_index],
+                    voice=voice,
+                    speed=1.2,
+                    split_pattern=r'\n+'
+                )
+                for gs, ps, audio in generator:
+                    self.play_queue.put(audio)
+                    print('put AUDIO')
+            else:
+                time.sleep(1)
+                if not any([isinstance(b, blocks.text.GeneratingText) for b in list(self.message_element.block_container)]):
+                    break
+            queue_index = end_index
+        if generator:
+            del generator
+        gc.collect()
+        self.play_queue.put(None)
+        print('waiting')
+        play_thread.join()
+        print('joined')
         self.set_active(False)
 
     def dictate_message(self, button):
         global message_dictated
         if not self.message_element.get_root():
             return
-        def run():
-            global tts_engine, tts_engine_language
-            GLib.idle_add(self.set_visible_child_name, 'loading')
-            voice = None
-            if self.message_element.get_model():
-                voice = SQL.get_model_preferences(self.message_element.get_model()).get('voice', None)
-            if not voice:
-                voice = TTS_VOICES.get(list(TTS_VOICES.keys())[self.message_element.get_root().settings.get_value('tts-model').unpack()])
-
-            if model_manager.tts_model_path:
-                if not os.path.islink(os.path.join(model_manager.tts_model_path, '{}.pt'.format(voice))) and self.message_element.get_root().get_name() == 'AlpacaWindow':
-                    pretty_name = [k for k, v in TTS_VOICES.items() if v == voice]
-                    if len(pretty_name) > 0:
-                        pretty_name = pretty_name[0]
-                        self.message_element.get_root().local_model_flowbox.append(model_manager.TextToSpeechModel(pretty_name))
-            if not tts_engine or tts_engine_language != voice[0]:
-                tts_engine = libraries.get('kokoro').KPipeline(lang_code=voice[0], repo_id='hexgrad/Kokoro-82M')
-                tts_engine_language=voice[0]
-            self.generated_audio_queue = []
-            queue_index = 0
-            self.audio_index = 0
-            self.audio_playing = False
-            while queue_index < len(self.message_element.get_content_for_dictation()):
-                text = self.message_element.get_content_for_dictation()
-                end_index = max(text.rfind("\n"), text.rfind("."), text.rfind("?"), text.rfind("!"), text.rfind(":"))
-                if end_index == -1 or end_index < queue_index:
-                    end_index = len(text)
-                if text[queue_index:end_index]:
-                    if self.message_element.get_root().get_name() == 'AlpacaLiveChat':
-                        self.message_element.get_root().response_label.set_label(text[queue_index:end_index])
-                    try:
-                        generator = tts_engine(
-                            text[queue_index:end_index],
-                            voice=voice,
-                            speed=1.2,
-                            split_pattern=r'\n+'
-                        )
-                        GLib.idle_add(self.set_visible_child_name, 'button')
-                        for gs, ps, audio in generator:
-                            if not button.get_active():
-                                return
-                            self.generated_audio_queue.append(audio)
-                            if not self.audio_playing:
-                                threading.Thread(target=self.play_audio_queue).start()
-                    except Exception as e:
-                        dialog.simple_error(
-                            parent=self.message_element.get_root(),
-                            title=_('Text to Speech Error'),
-                            body=_('An error occurred while running text to speech model'),
-                            error_log=e,
-                        )
-                        break
-                else:
-                    break
-                queue_index = end_index
-            if generator:
-                del generator
-            gc.collect()
-            #GLib.idle_add(self.set_active, False)
 
         if button.get_active():
             GLib.idle_add(self.message_element.add_css_class, 'tts_message')
             if message_dictated and message_dictated.popup.tts_button.get_active():
                  message_dictated.popup.tts_button.set_active(False)
             message_dictated = self.message_element
-            threading.Thread(target=run).start()
+            self.play_queue = queue.Queue()
+            generation_thread = threading.Thread(target=self.run_tts).start()
         else:
             GLib.idle_add(self.message_element.remove_css_class, 'tts_message')
             GLib.idle_add(self.set_visible_child_name, 'button')
