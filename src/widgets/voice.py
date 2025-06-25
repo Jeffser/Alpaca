@@ -52,6 +52,9 @@ class DictateToggleButton(Gtk.Stack):
         self.button.connect('toggled', self.dictate_message)
         self.add_named(self.button, 'button')
         self.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
+        self.generated_audio_queue = []
+        self.audio_playing = False
+        self.audio_index = 0
 
         if self.get_visible() and (libraries.get('kokoro') is None or libraries.get('sounddevice') is None):
             library_waiting_queue.append(self)
@@ -63,11 +66,25 @@ class DictateToggleButton(Gtk.Stack):
     def get_active(self) -> bool:
         return self.button.get_active()
 
+    def play_audio_queue(self):
+        def get_length() -> int:
+            return len(self.generated_audio_queue)
+        self.audio_playing = True
+        while self.audio_index < get_length():
+            libraries.get('sounddevice').play(self.generated_audio_queue[self.audio_index], samplerate=24000)
+            libraries.get('sounddevice').wait()
+            self.audio_index += 1
+            if not self.get_active():
+                break
+        self.audio_playing = False
+        self.set_active(False)
+
     def dictate_message(self, button):
-        global message_dictated, tts_engine
+        global message_dictated
         if not self.message_element.get_root():
             return
         def run():
+            global tts_engine, tts_engine_language
             GLib.idle_add(self.set_visible_child_name, 'loading')
             voice = None
             if self.message_element.get_model():
@@ -84,7 +101,10 @@ class DictateToggleButton(Gtk.Stack):
             if not tts_engine or tts_engine_language != voice[0]:
                 tts_engine = libraries.get('kokoro').KPipeline(lang_code=voice[0], repo_id='hexgrad/Kokoro-82M')
                 tts_engine_language=voice[0]
+            self.generated_audio_queue = []
             queue_index = 0
+            self.audio_index = 0
+            self.audio_playing = False
             while queue_index < len(self.message_element.get_content_for_dictation()):
                 text = self.message_element.get_content_for_dictation()
                 end_index = max(text.rfind("\n"), text.rfind("."), text.rfind("?"), text.rfind("!"), text.rfind(":"))
@@ -100,12 +120,13 @@ class DictateToggleButton(Gtk.Stack):
                             speed=1.2,
                             split_pattern=r'\n+'
                         )
+                        GLib.idle_add(self.set_visible_child_name, 'button')
                         for gs, ps, audio in generator:
                             if not button.get_active():
                                 return
-                            libraries.get('sounddevice').play(audio, samplerate=24000)
-                            GLib.idle_add(self.set_visible_child_name, 'button')
-                            libraries.get('sounddevice').wait()
+                            self.generated_audio_queue.append(audio)
+                            if not self.audio_playing:
+                                threading.Thread(target=self.play_audio_queue).start()
                     except Exception as e:
                         dialog.simple_error(
                             parent=self.message_element.get_root(),
@@ -120,7 +141,7 @@ class DictateToggleButton(Gtk.Stack):
             if generator:
                 del generator
             gc.collect()
-            GLib.idle_add(self.set_active, False)
+            #GLib.idle_add(self.set_active, False)
 
         if button.get_active():
             GLib.idle_add(self.message_element.add_css_class, 'tts_message')
