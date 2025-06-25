@@ -10,8 +10,10 @@ from ..sql_manager import Instance as SQL
 from ..constants import data_dir, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
 from . import dialog, model_manager, blocks
 
-import os, threading, importlib.util, re, unicodedata, gc, queue, time
+import os, threading, importlib.util, re, unicodedata, gc, queue, time, logging
 import numpy as np
+
+logger = logging.getLogger(__name__)
 
 message_dictated = None
 libraries = {
@@ -26,11 +28,13 @@ tts_engine = None
 tts_engine_language = None
 
 def preload_heavy_libraries():
+    global library_waiting_queue, libraries
     for library_name in libraries:
         if importlib.util.find_spec(library_name):
             libraries[library_name] = importlib.import_module(library_name)
     for widget in library_waiting_queue:
         widget.set_sensitive(True)
+    library_waiting_queue = []
 
 threading.Thread(target=preload_heavy_libraries).start()
 
@@ -157,7 +161,7 @@ class MicrophoneButton(Gtk.Stack):
         self.text_view = text_view
 
         super().__init__(
-            visible = importlib.util.find_spec('whisper')
+            visible = importlib.util.find_spec('whisper') and importlib.util.find_spec('pyaudio')
         )
         self.button = Gtk.ToggleButton(
             icon_name='audio-input-microphone-symbolic',

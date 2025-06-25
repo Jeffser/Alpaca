@@ -50,6 +50,13 @@
                             <signal name="notify::selected" handler="model_dropdown_changed"/>
                           </object>
                         </child>
+                        <child type="end">
+                          <object class="GtkButton">
+                            <property name="icon-name">sliders-horizontal-symbolic</property>
+                            <property name="tooltip-text" translatable="true">Preferences</property>
+                            <signal name="clicked" handler="show_preferences"/>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <property name="content">
@@ -114,5 +121,36 @@
       </object>
     </property>
   </template>
+
+   <object class="AdwPreferencesDialog" id="preferences_dialog">
+      <property name="can-close">true</property>
+      <property name="title" translatable="yes">Preferences</property>
+      <child>
+        <object class="AdwPreferencesPage">
+          <child>
+            <object class="AdwPreferencesGroup">
+              <child>
+                <object class="AdwSwitchRow" id="dyanamic_background_switch">
+                  <property name="title" translatable="yes">Use Dynamic Backgrounds</property>
+                  <property name="subtitle" translatable="yes">When using a model with a profile picture</property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwSwitchRow" id="auto_mic_switch">
+                  <property name="title" translatable="yes">Turn on Microphone Automatically</property>
+                  <property name="subtitle" translatable="yes">When launching Live Chat and after dictation</property>
+                </object>
+              </child>
+              <child>
+                <object class="AdwButtonRow">
+                  <property name="title" translatable="yes">Reload Added Models</property>
+                  <signal name="activated" handler="reload_models"/>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+   </object>
 </interface>
 

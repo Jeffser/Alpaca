@@ -12,7 +12,7 @@ from .sql_manager import generate_uuid, prettify_model_name, Instance as SQL
 
 from datetime import datetime
 
-import threading, base64
+import threading, base64, time
 
 class LiveChatModelRow(GObject.Object):
     __gtype_name__ = 'AlpacaLiveChatModelRow'
@@ -45,6 +45,10 @@ class LiveChatWindow(Adw.ApplicationWindow):
     model_avatar = Gtk.Template.Child()
     model_avatar_spinner = Gtk.Template.Child()
 
+    preferences_dialog = Gtk.Template.Child()
+    dyanamic_background_switch = Gtk.Template.Child()
+    auto_mic_switch = Gtk.Template.Child()
+
     model_avatar_animation:Adw.TimedAnimation = None
     animation_signals = {}
 
@@ -58,6 +62,26 @@ class LiveChatWindow(Adw.ApplicationWindow):
         self.bottom_sheet.set_open(True)
 
     @Gtk.Template.Callback()
+    def show_preferences(self, button):
+        self.preferences_dialog.present(self)
+
+    @Gtk.Template.Callback()
+    def reload_models(self, button=None):
+        self.model_dropdown.get_model().remove_all()
+        instance = self.get_current_instance()
+        models = instance.get_local_models()
+        default_model = instance.properties.get('default_model')
+        selected_model_index = -1
+        for i, model in enumerate(models):
+            self.model_dropdown.get_model().append(LiveChatModelRow(model.get('name')))
+            if model.get('name') == default_model:
+                selected_model_index = i
+        self.model_dropdown.set_visible(len(models) > 0)
+        self.model_dropdown.set_enable_search(len(models) > 10)
+        if selected_model_index >= 0:
+            self.model_dropdown.set_selected(selected_model_index)
+
+    @Gtk.Template.Callback()
     def model_dropdown_changed(self, dropdown, user_data):
         if dropdown.get_selected_item():
             model_name = str(dropdown.get_selected_item())
@@ -67,8 +91,12 @@ class LiveChatWindow(Adw.ApplicationWindow):
                     GLib.Bytes.new(base64.b64decode(model_picture_data))
                 )
                 self.model_avatar.set_custom_image(texture)
-                self.live_chat_background.set_paintable(texture)
-                self.model_avatar.set_show_initials(False)
+                if self.settings.get_value('live-chat-dynamic-background').unpack():
+                    self.live_chat_background.set_paintable(texture)
+                    self.model_avatar.set_show_initials(False)
+                else:
+                    self.live_chat_background.set_paintable(None)
+                    self.model_avatar.set_show_initials(True)
             else:
                 self.model_avatar.set_custom_image(None)
                 self.model_avatar.set_text(prettify_model_name(model_name))
@@ -84,13 +112,15 @@ class LiveChatWindow(Adw.ApplicationWindow):
                 return Widgets.instances.create_instance_row(matching_instances[0]).instance
             return Widgets.instances.create_instance_row(instances[0]).instance
 
-    def update_model_list(self):
-        self.model_dropdown.get_model().remove_all()
-        models = self.get_current_instance().get_local_models()
-        for model in models:
-            self.model_dropdown.get_model().append(LiveChatModelRow(model.get('name')))
-        self.model_dropdown.set_visible(len(models) > 0)
-        self.model_dropdown.set_enable_search(len(models) > 10)
+    def try_turning_on_mic(self):
+        tries = 0
+        while tries < 6:
+            if len(Widgets.voice.library_waiting_queue) == 0:
+                self.global_footer.microphone_button.button.set_active(True)
+                break
+            else:
+                tries += 1
+                time.sleep(1)
 
     def toggle_avatar_state(self, state:bool):
         if state:
@@ -99,6 +129,8 @@ class LiveChatWindow(Adw.ApplicationWindow):
         else:
             GLib.idle_add(self.model_avatar_animation.reset)
             GLib.idle_add(self.global_footer.microphone_button.button.set_active, False)
+            if self.settings.get_value('live-chat-auto-mic').unpack():
+                threading.Thread(target=self.try_turning_on_mic).start()
 
     def send_message(self, mode:int=0):
         #Mode = 0 (normal), Mode = 1 (System), Mode = 2 (Use Tools)3
@@ -176,7 +208,12 @@ class LiveChatWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        # Prepare Settings
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
+
+        self.settings.bind('live-chat-dynamic-background', self.dyanamic_background_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind('live-chat-auto-mic', self.auto_mic_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
 
         # Prepare Chat
         self.bottom_sheet.set_sheet(Widgets.chat.Chat(chat_id='LC'))
@@ -231,6 +268,5 @@ class LiveChatWindow(Adw.ApplicationWindow):
             repeat_count=0
         )
 
-        #Widgets.voice.message_dictated.connect('active', lambda button: print(button))
-
-        self.update_model_list()
+        self.reload_models()
+        self.toggle_avatar_state(False)

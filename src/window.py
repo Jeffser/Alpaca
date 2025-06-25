@@ -803,6 +803,18 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if searchbars.get(current_tag):
             searchbars.get(current_tag).set_search_mode(not searchbars.get(current_tag).get_search_mode())
 
+    def start_live_chat(self):
+        if importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'):
+            self.get_application().create_live_chat().present()
+        else:
+            options = {_('Cancel'): {'default': True}}
+            Widgets.dialog.Options(
+                heading=_("Can't Run Live Chat"),
+                body=_("You are missing TTS libraries"),
+                close_response=list(options.keys())[0],
+                options=options
+            ).show(self)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         Widgets.model_manager.window = self
@@ -867,7 +879,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             )],
             'tool_manager': [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'tool_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'tool_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']],
             'start_quick_ask': [lambda *_: self.get_application().create_quick_ask().present(), ['<primary><alt>a']],
-            'start_live_chat': [lambda *_: self.get_application().create_live_chat().present(), ['<primary><alt>l']]
+            'start_live_chat': [lambda *_: self.start_live_chat(), ['<primary><alt>l']]
         }
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
