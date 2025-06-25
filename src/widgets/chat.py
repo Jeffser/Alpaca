@@ -4,7 +4,7 @@ Handles the chat widget
 """
 
 import gi
-from gi.repository import Gtk, Gio, Adw, Gdk, GLib
+from gi.repository import Gtk, Gio, Adw, Gdk
 import logging, os, datetime, random, json, threading
 from ..constants import SAMPLE_PROMPTS, cache_dir
 from ..sql_manager import generate_uuid, prettify_model_name, generate_numbered_name, Instance as SQL
@@ -136,7 +136,8 @@ class Notebook(Gtk.Stack):
 
     def unload_messages(self):
         for widget in list(self.container):
-            self.container.remove(widget)
+            widget.unparent()
+            widget.unrealize()
         self.set_visible_child_name('loading')
 
     def add_message(self, message):
@@ -228,7 +229,8 @@ class Chat(Gtk.Stack):
     def __init__(self, chat_id:str=None, name:str=_("New Chat")):
         super().__init__(
             name=name,
-            transition_type=1
+            transition_type=1,
+            vexpand=True
         )
         self.container = Gtk.Box(
             orientation=1,
@@ -307,7 +309,8 @@ class Chat(Gtk.Stack):
 
     def unload_messages(self):
         for widget in list(self.container):
-            self.container.remove(widget)
+            widget.unparent()
+            widget.unrealize()
         self.set_visible_child_name('loading')
 
     def add_message(self, message):
@@ -334,7 +337,7 @@ class Chat(Gtk.Stack):
                     attachment_type=attachment[1],
                     content=attachment[3]
                 )
-            GLib.idle_add(message_element.block_container.set_content, message[4])
+            message_element.block_container.set_content(message[4])
         self.set_visible_child_name('content' if len(messages) > 0 else 'welcome-screen')
 
     def send_sample_prompt(self, prompt:str):
@@ -496,7 +499,6 @@ class ChatRow(Gtk.ListBoxRow):
         )
 
     def delete(self):
-        self.chat.stop_message()
         window = self.get_root()
         list_box = self.get_parent()
         list_box.remove(self)

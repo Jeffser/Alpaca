@@ -82,7 +82,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     welcome_previous_button = Gtk.Template.Child()
     welcome_next_button = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
-    chat_stack = Gtk.Template.Child()
+    chat_bin = Gtk.Template.Child()
     chat_list_stack = Gtk.Template.Child()
     global_footer_container = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
@@ -604,7 +604,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 return detected_models[0]
             return -1
 
-        chat = self.chat_stack.get_child_by_name('content').get_child()
+        chat = self.chat_bin.get_child()
         if chat:
             model_index = -1
             if len(list(chat.container)) > 0:
@@ -615,83 +615,30 @@ class AlpacaWindow(Adw.ApplicationWindow):
             if model_index and model_index != -1:
                 self.model_dropdown.set_selected(model_index)
 
-
     @Gtk.Template.Callback()
     def chat_changed(self, listbox, row):
         if row:
-            # Show Spinner
-            self.chat_stack.set_visible_child_name('loading')
-
-            # Discard Old Chat
-            old_chat = self.chat_stack.get_child_by_name('content').get_child()
+            # Discard Old Chat if Not Busy
+            old_chat = self.chat_bin.get_child()
             if old_chat and not old_chat.busy:
                 old_chat.unload_messages()
+                old_chat.unrealize()
 
             # Load New Chat
             new_chat = row.chat
-            self.chat_stack.get_child_by_name('content').set_child(new_chat)
+            if new_chat.get_parent():
+                new_chat.get_parent().set_child(None)
             if new_chat.busy:
                 self.get_root().global_footer.toggle_action_button(False)
             else:
                 self.get_root().global_footer.toggle_action_button(True)
                 new_chat.load_messages()
 
+            # Show New Stack Page
+            self.chat_bin.set_child(new_chat)
+
             # Select Model
             self.auto_select_model()
-
-            # Show Results
-            self.chat_stack.set_visible_child_name('content')
-
-    def chat_changed_OLD(self, listbox, future_row):
-        def find_model_index(model_name:str):
-            if len(list(self.model_dropdown.get_model())) == 0:
-                return None
-            detected_models = [i for i, future_row in enumerate(list(self.model_dropdown.get_model())) if future_row.model.get_name() == model_name]
-            if len(detected_models) > 0:
-                return detected_models[0]
-
-        if future_row:
-            current_row = next((t for t in list(self.chat_list_box) if t.chat == self.chat_stack.get_visible_child()), future_row)
-            if future_row.chat.chat_id != current_row.chat.chat_id or future_row.chat.get_visible_child_name() == 'loading':
-                # Empty Search
-                if self.searchentry_messages.get_text() != '':
-                    self.searchentry_messages.set_text('')
-                    self.message_search_changed(self.searchentry_messages, self.chat_stack.get_visible_child())
-                self.message_searchbar.set_search_mode(False)
-
-                load_chat_thread = None
-                # Load future_row if not loaded already
-                if len(list(future_row.chat.container)) == 0:
-                    load_chat_thread = threading.Thread(target=future_row.chat.loadOLD_messages)
-                    load_chat_thread.start()
-
-                # Unload current_row
-                if not current_row.chat.busy and current_row.chat.get_visible_child_name() == 'content' and len(list(current_row.chat.container)) > 0:
-                    threading.Thread(target=current_row.chat.unloadOLD_messages).start()
-
-                # Select transition type and change chat
-                self.chat_stack.set_transition_type(4 if list(self.chat_list_box).index(future_row) > list(self.chat_list_box).index(current_row) else 5)
-                self.chat_stack.set_visible_child(future_row.chat)
-
-                # Sync stop/send button to chat's state
-                self.global_footer.toggle_action_button(not future_row.chat.busy)
-                if load_chat_thread:
-                    load_chat_thread.join()
-                # Select the correct model for the chat
-                model_to_use_index = None
-                if len(list(future_row.chat.container)) > 0:
-                    model_to_use_index = find_model_index(list(future_row.chat.container)[-1].get_model())
-                else:
-                    model_to_use_index = find_model_index(self.get_current_instance().get_default_model())
-
-                if model_to_use_index is None:
-                    model_to_use_index = 0
-
-                self.model_dropdown.set_selected(model_to_use_index)
-
-                # If it has the "new message" indicator, hide it
-                if future_row.indicator.get_visible():
-                    future_row.indicator.set_visible(False)
 
     def check_alphanumeric(self, editable, text, length, position, allowed_chars):
         if length == 1:
@@ -719,7 +666,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     self.chat_list_box.append(chat.row)
                 else:
                     self.chat_list_box.prepend(chat.row)
-                #self.chat_stack.add_child(chat)
                 return chat
 
     def new_chat(self, chat_title:str=_("New Chat"), chat_type:str='chat') -> Widgets.chat.Chat or None:

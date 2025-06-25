@@ -10,7 +10,7 @@ from ..sql_manager import Instance as SQL
 from ..constants import data_dir, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
 from . import dialog, model_manager, blocks
 
-import os, threading, importlib.util, re, unicodedata
+import os, threading, importlib.util, re, unicodedata, gc
 import numpy as np
 
 message_dictated = None
@@ -21,6 +21,9 @@ libraries = {
     'pyaudio': None
 }
 library_waiting_queue = [] # For every widget that requires the libraries
+loaded_whisper_models = {}
+tts_engine = None
+tts_engine_language = None
 
 def preload_heavy_libraries():
     for library_name in libraries:
@@ -61,7 +64,7 @@ class DictateToggleButton(Gtk.Stack):
         return self.button.get_active()
 
     def dictate_message(self, button):
-        global message_dictated
+        global message_dictated, tts_engine
         if not self.message_element.get_root():
             return
         def run():
@@ -78,7 +81,9 @@ class DictateToggleButton(Gtk.Stack):
                     if len(pretty_name) > 0:
                         pretty_name = pretty_name[0]
                         self.message_element.get_root().local_model_flowbox.append(model_manager.TextToSpeechModel(pretty_name))
-            tts_engine = libraries.get('kokoro').KPipeline(lang_code=voice[0], repo_id='hexgrad/Kokoro-82M')
+            if not tts_engine or tts_engine_language != voice[0]:
+                tts_engine = libraries.get('kokoro').KPipeline(lang_code=voice[0], repo_id='hexgrad/Kokoro-82M')
+                tts_engine_language=voice[0]
             queue_index = 0
             while queue_index < len(self.message_element.get_content_for_dictation()):
                 text = self.message_element.get_content_for_dictation()
@@ -112,6 +117,9 @@ class DictateToggleButton(Gtk.Stack):
                 else:
                     break
                 queue_index = end_index
+            if generator:
+                del generator
+            gc.collect()
             GLib.idle_add(self.set_active, False)
 
         if button.get_active():
@@ -150,9 +158,12 @@ class MicrophoneButton(Gtk.Stack):
             self.set_sensitive(False)
 
     def toggled(self, button):
+        global loaded_whisper_models
         language=SPEACH_RECOGNITION_LANGUAGES[self.get_root().settings.get_value('stt-language').unpack()]
         buffer = self.text_view.get_buffer()
         model_name = os.getenv("ALPACA_SPEECH_MODEL", "base")
+        p = None
+        stream = None
 
         def recognize_audio(model, audio_data, current_iter):
             result = model.transcribe(audio_data, language=language)
@@ -167,13 +178,13 @@ class MicrophoneButton(Gtk.Stack):
             GLib.idle_add(button.add_css_class, 'accent')
 
             samplerate=16000
-            p = libraries.get('pyaudio').PyAudio()
             model = None
 
             self.mic_timeout=0
 
             try:
-                model = libraries.get('whisper').load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
+                if not loaded_whisper_models.get(model_name):
+                    loaded_whisper_models[model_name] = libraries.get('whisper').load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
                 if pulling_model:
                     GLib.idle_add(pulling_model.update_progressbar, {'status': 'success'})
             except Exception as e:
@@ -186,8 +197,8 @@ class MicrophoneButton(Gtk.Stack):
                 logger.error(e)
             GLib.idle_add(button.get_parent().set_visible_child_name, "button")
 
-            if model:
-                stream = p.open(
+            if loaded_whisper_models.get(model_name):
+                stream = libraries.get('pyaudio').PyAudio().open(
                     format=libraries.get('pyaudio').paInt16,
                     rate=samplerate,
                     input=True,
@@ -203,7 +214,7 @@ class MicrophoneButton(Gtk.Stack):
                             data = stream.read(1024, exception_on_overflow=False)
                             frames.append(np.frombuffer(data, dtype=np.int16))
                         audio_data = np.concatenate(frames).astype(np.float32) / 32768.0
-                        threading.Thread(target=recognize_audio, args=(model, audio_data, buffer.get_end_iter())).start()
+                        threading.Thread(target=recognize_audio, args=(loaded_whisper_models.get(model_name), audio_data, buffer.get_end_iter())).start()
 
                         if self.mic_timeout >= 2 and mic_auto_send and buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False):
                             GLib.idle_add(button.get_root().send_message)
@@ -220,7 +231,10 @@ class MicrophoneButton(Gtk.Stack):
                 finally:
                     stream.stop_stream()
                     stream.close()
-                    p.terminate()
+                    libraries.get('pyaudio').PyAudio().terminate()
+                    if stream:
+                        del stream
+                    gc.collect()
 
             if button.get_active():
                 button.set_active(False)

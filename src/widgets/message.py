@@ -225,6 +225,8 @@ class BlockContainer(Gtk.Box):
         self.message.main_stack.set_visible_child_name('loading')
         for child in list(self):
             self.remove(child)
+            child.unmap()
+            child.unrealize()
         self.generating_block = None
 
     def set_content(self, content:str) -> None:
