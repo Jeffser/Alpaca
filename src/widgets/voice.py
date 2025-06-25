@@ -100,6 +100,8 @@ class DictateToggleButton(Gtk.Stack):
         play_thread = threading.Thread(target=self.play_audio_queue)
         play_thread.start()
         queue_index = 0
+        GLib.idle_add(self.message_element.remove_css_class, 'tts_message_loading')
+        GLib.idle_add(self.message_element.add_css_class, 'tts_message')
         GLib.idle_add(self.set_visible_child_name, 'button')
         while queue_index + 1 < len(self.message_element.get_content_for_dictation()) or any([isinstance(b, blocks.text.GeneratingText) for b in list(self.message_element.block_container)]):
             text = self.message_element.get_content_for_dictation()
@@ -119,6 +121,8 @@ class DictateToggleButton(Gtk.Stack):
                 time.sleep(1)
                 if not any([isinstance(b, blocks.text.GeneratingText) for b in list(self.message_element.block_container)]):
                     break
+            if not self.get_active():
+                return
             queue_index = end_index
         if generator:
             del generator
@@ -133,13 +137,14 @@ class DictateToggleButton(Gtk.Stack):
             return
 
         if button.get_active():
-            GLib.idle_add(self.message_element.add_css_class, 'tts_message')
+            GLib.idle_add(self.message_element.add_css_class, 'tts_message_loading')
             if message_dictated and message_dictated.popup.tts_button.get_active():
                  message_dictated.popup.tts_button.set_active(False)
             message_dictated = self.message_element
             self.play_queue = queue.Queue()
             generation_thread = threading.Thread(target=self.run_tts).start()
         else:
+            GLib.idle_add(self.message_element.remove_css_class, 'tts_message_loading')
             GLib.idle_add(self.message_element.remove_css_class, 'tts_message')
             GLib.idle_add(self.set_visible_child_name, 'button')
             message_dictated = None

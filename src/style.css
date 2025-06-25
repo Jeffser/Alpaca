@@ -26,6 +26,10 @@
 .code_block:focus, .tts_message {
 	box-shadow: 0 0 1px 2px mix(@accent_color, @window_bg_color, 0.5);
 }
+.tts_message_loading {
+  border-radius: 10px;
+	box-shadow: 0 0 1px 2px mix(@window_fg_color, @window_bg_color, 0.5);
+}
 .model_popover {
   margin-top: 6px;
   margin-bottom: 6px;
