@@ -433,6 +433,12 @@ class OpenRouter(BaseInstance):
                 self.row.get_parent().unselect_all()
             return []
 
+class Qwen(BaseInstance):
+    instance_type = 'qwen'
+    instance_type_display = _('Qwen (DashScope)')
+    instance_url = 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1'
+    description = _('Alibaba Cloud Qwen large language models via DashScope')
+    
 class Fireworks(BaseInstance):
     instance_type = 'fireworks'
     instance_type_display = 'Fireworks AI'
@@ -533,4 +539,3 @@ class GenericOpenAI(BaseInstance):
     def __init__(self, instance_id:str, properties:dict):
         self.instance_url = properties.get('url', '')
         super().__init__(instance_id, properties)
-
