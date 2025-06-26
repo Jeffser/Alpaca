@@ -1042,7 +1042,7 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
     </object>
 
     <object class="AdwDialog" id="notice_dialog">
-      <property name="name">Alpaca6</property>
+      <property name="name">Alpaca7</property>
       <property name="title" translatable="yes">Notice</property>
       <property name="content-width">400</property>
       <signal name="closed" handler="closing_notice"/>
@@ -1062,56 +1062,48 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                 <object class="AdwStatusPage">
                   <property name="hexpand">true</property>
                   <property name="icon-name">com.jeffser.Alpaca</property>
-                  <property name="title">Alpaca 6</property>
-                  <property name="description" translatable="yes">Hey Alpaca users! We're so excited to bring you a fresh update packed with awesome new features to explore! Get ready to experience Alpaca in a whole new way!</property>
-                </object>
-              </child>
-              <child>
-                <object class="AdwStatusPage">
-                  <property name="hexpand">true</property>
-                  <property name="icon-name">wrench-wide-symbolic</property>
-                  <property name="title" translatable="yes">Smart Tools</property>
-                  <property name="description" translatable="yes">Supported AI models can use handy tools to grab information both locally and online. Head over to the brand new "Tool Manager" to toggle them on or off.</property>
+                  <property name="title">Alpaca 7</property>
+                  <property name="description" translatable="yes">Hey Alpaca users! Get ready for a huge update packed with enhancements and exciting new features designed to make your experience even better.</property>
                 </object>
               </child>
               <child>
                 <object class="AdwStatusPage">
                   <property name="hexpand">true</property>
                   <property name="icon-name">audio-input-microphone-symbolic</property>
-                  <property name="title" translatable="yes">Talk to Models</property>
-                  <property name="description" translatable="yes">You can now dictate your messages using local speech recognition. It's super convenient! You can even customize your language and other settings in the Preferences dialog.</property>
+                  <property name="title" translatable="yes">Introducing Live Chat</property>
+                  <property name="description" translatable="yes">Experience a whole new way to interact with your AI models! Live Chat lets you converse as if you're on a call, with a strong focus on real-time speech recognition and live message dictation. Access it easily by selecting "Live Chat" from the primary menu.</property>
                 </object>
               </child>
               <child>
                 <object class="AdwStatusPage">
                   <property name="hexpand">true</property>
-                  <property name="icon-name">funnel-symbolic</property>
-                  <property name="title" translatable="yes">Find Models Faster</property>
-                  <property name="description" translatable="yes">Browsing through your Ollama models just got easier! We've added the ability to filter models by their categories in the Model Manager. Now you can quickly find exactly the model you're looking for.</property>
+                  <property name="icon-name">chat-bubble-text-symbolic</property>
+                  <property name="title" translatable="yes">Live Message Rendering</property>
+                  <property name="description" translatable="yes">See your conversations unfold in real-time! Messages are now rendered as they're being generated, and you can even use dictation simultaneously for a more fluid interaction.</property>
                 </object>
               </child>
               <child>
                 <object class="AdwStatusPage">
                   <property name="hexpand">true</property>
-                  <property name="icon-name">accessories-calculator-symbolic</property>
-                  <property name="title" translatable="yes">Math Rendering</property>
-                  <property name="description" translatable="yes">We've improved how LaTeX equations are rendered in messages, making them look cleaner and more consistent. Your mathematical discussions will be clearer than ever!</property>
+                  <property name="icon-name">camera-photo-symbolic</property>
+                  <property name="title" translatable="yes">Camera Attachment</property>
+                  <property name="description" translatable="yes">You can now take pictures directly within Alpaca and attach them to your messages with the new Camera Attachment feature.</property>
                 </object>
               </child>
               <child>
                 <object class="AdwStatusPage">
                   <property name="hexpand">true</property>
-                  <property name="icon-name">globe-symbolic</property>
-                  <property name="title" translatable="yes">More Instances</property>
-                  <property name="description" translatable="yes">Get ready to connect Alpaca to a whole universe of AI providers! We've added support for over 5 new AI instance providers, including Anthropic, OpenRouter, and Fireworks. The possibilities are endless!</property>
+                  <property name="icon-name">wrench-wide-symbolic</property>
+                  <property name="title" translatable="yes">Enhanced Web Search Tool</property>
+                  <property name="description" translatable="yes">Our Web Search Tool just got a major upgrade! Enjoy more accurate results and powerful new options to find exactly what you're looking for.</property>
                 </object>
               </child>
               <child>
                 <object class="AdwStatusPage">
                   <property name="hexpand">true</property>
-                  <property name="icon-name">document-text-symbolic</property>
-                  <property name="title" translatable="yes">Attachment Enhancement</property>
-                  <property name="description" translatable="yes">You can now attach and ask questions about even more file types, including .docx, .pptx, and .xlsx! Plus, when you preview an attachment, you'll see it with rich text styling, making it easier to understand the content before you send it.</property>
+                  <property name="icon-name">sliders-horizontal-symbolic</property>
+                  <property name="title" translatable="yes">Redesign</property>
+                  <property name="description" translatable="yes">Alpaca has a brand new look! Enjoy a redesigned interface with updated popups and sleek new dialogs for managing your AI instances and tools.</property>
                 </object>
               </child>
             </object>

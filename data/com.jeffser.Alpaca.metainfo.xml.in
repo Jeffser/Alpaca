@@ -89,6 +89,37 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="7.0.0" date="2025-06-27">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/7.0.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+            <li>Live Chat (Talk to models as if you were on a call)</li>
+            <li>Live message rendering</li>
+            <li>Faster dictation</li>
+            <li>Dictation whilst message is being generated</li>
+            <li>Camera picture attachment</li>
+            <li>Quick Ask now supports attachments</li>
+            <li>Separator element for message and attachment rendering</li>
+            <li>Redesigned popups</li>
+            <li>Thought switch for Ollama instances</li>
+            <li>Username sharing for Ollama instances</li>
+            <li>Redesign for instance manager and tool manager</li>
+            <li>Better web searching tool with options</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+            <li>Fixed duplication of thought attachments</li>
+            <li>Fixed weird behavior with model selector</li>
+            <li>Ollama (Managed) instances behave better</li>
+            <li>Better optimizations for RAM (~2GB difference)</li>
+            <li>Instant chat rendering</li>
+            <li>Models profile pictures are now saved at a higher resolution</li>
+            <li>Quick Ask messages can now be sent by using the enter key</li>
+            <li>Alpaca is less prone to crashes now</li>
+        </ul>
+      </description>
+    </release>
     <release version="6.1.7" date="2025-06-07">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/6.1.7</url>
       <description>
