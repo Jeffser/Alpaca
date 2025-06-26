@@ -181,7 +181,7 @@ class MicrophoneButton(Gtk.Stack):
         global loaded_whisper_models
         language=SPEACH_RECOGNITION_LANGUAGES[self.get_root().settings.get_value('stt-language').unpack()]
         buffer = self.text_view.get_buffer()
-        model_name = os.getenv("ALPACA_SPEECH_MODEL", "base")
+        model_name = list(STT_MODELS)[self.get_root().settings.get_value('stt-model').unpack()]
         p = None
         stream = None
 
