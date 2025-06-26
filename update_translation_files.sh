@@ -42,3 +42,5 @@ echo "Updating Tamil"
 msgmerge --no-fuzzy-matching -U po/ta.po po/alpaca.pot
 echo "Updating Georgian"
 msgmerge --no-fuzzy-matching -U po/ka.po po/alpaca.pot
+echo "Updating Kannada"
+msgmerge --no-fuzzy-matching -U po/kn.po po/alpaca.pot
