@@ -517,6 +517,13 @@ class Klusterai(BaseInstance):
     instance_url = 'https://api.kluster.ai/v1/'
     description = _('Kluster AI cloud inference API')
 
+class Mistral(BaseInstance):
+    instance_type = 'mistral'
+    instance_type_display = 'Mistral AI'
+    instance_url = 'https://api.mistral.ai/v1/'
+    description = _('Mistral AI large language models')
+    limitations = ('text-only')
+
 class LlamaAPI(BaseInstance):
     instance_type = 'llama-api'
     instance_type_display = 'Llama API'
