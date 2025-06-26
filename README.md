@@ -58,11 +58,20 @@ Quick Ask is a mini mode you can use to have a quick temporary chat that isn't s
 Great for asking something, getting a response and moving on with your work.
 
 ```BASH
-# (Flatpak)
 flatpak run com.jeffser.Alpaca --quick-ask
+```
 
-# (System Installations)
-alpaca --quick-ask
+## Launch in Live Chat Mode
+
+> [!NOTE]
+> Available since Alpaca 7.0.0
+
+Live Chat is a great way of having a live conversation with your models as if you were in a call with them.
+
+Great for natural conversations with models and roleplay.
+
+```BASH
+flatpak run com.jeffser.Alpaca --live-chat
 ```
 
 You can add your respective command as as keyboard shortcut in your system settings to quickly access Alpaca at anytime!
