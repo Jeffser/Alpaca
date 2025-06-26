@@ -435,7 +435,7 @@ class OpenRouter(BaseInstance):
 
 class Qwen(BaseInstance):
     instance_type = 'qwen'
-    instance_type_display = _('Qwen (DashScope)')
+    instance_type_display = 'Qwen (DashScope)'
     instance_url = 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1'
     description = _('Alibaba Cloud Qwen large language models via DashScope')
     
