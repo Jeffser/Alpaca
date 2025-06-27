@@ -320,8 +320,8 @@ class PullingModel(Gtk.Box):
     def update_progressbar(self, data:dict):
         if not self.get_parent():
             logger.info("Pulling of '{}' was canceled".format(self.get_name()))
-            if window.get_current_instance().model_directory:
-                directory = os.path.join(window.get_current_instance().model_directory, 'blobs')
+            if window.get_current_instance().properties.get('model_directory'):
+                directory = os.path.join(window.get_current_instance().properties.get('model_directory'), 'blobs')
                 for digest in self.digests:
                     files_to_delete = glob.glob(os.path.join(directory, digest + '*'))
                     for file in files_to_delete:
