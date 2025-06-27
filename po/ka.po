@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alpaca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-26 19:03-0600\n"
+"POT-Creation-Date: 2025-06-27 11:50-0600\n"
 "PO-Revision-Date: 2025-02-24 12:04+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
@@ -3349,7 +3349,7 @@ msgstr ""
 msgid "Are you sure you want to delete all chats?"
 msgstr ""
 
-#: src/window.py:877 src/widgets/attachments.py:192 src/widgets/chat.py:519
+#: src/window.py:877 src/widgets/attachments.py:201 src/widgets/chat.py:519
 msgid "Delete"
 msgstr "წაშლა"
 
@@ -3973,71 +3973,79 @@ msgstr "Alpaca-სთან საუბრის ჩაწერა"
 msgid "Remove Attachment"
 msgstr "მიმაგრებულის წაშლა"
 
-#: src/widgets/attachments.py:119
+#: src/widgets/attachments.py:114
+msgid "Download Attachment"
+msgstr ""
+
+#: src/widgets/attachments.py:128
 msgid "Replace Notebook Content"
 msgstr ""
 
-#: src/widgets/attachments.py:189
+#: src/widgets/attachments.py:198
 msgid "Delete Attachment?"
 msgstr ""
 
-#: src/widgets/attachments.py:190 src/widgets/chat.py:517
+#: src/widgets/attachments.py:199 src/widgets/chat.py:517
 msgid "Are you sure you want to delete '{}'?"
 msgstr "მართლა გნებავთ, წაშალოთ '{}'?"
 
-#: src/widgets/attachments.py:266
+#: src/widgets/attachments.py:231
+msgid "Save Attachment"
+msgstr ""
+
+#: src/widgets/attachments.py:306
 msgid "Image"
 msgstr "გამოსახულება"
 
-#: src/widgets/attachments.py:277 src/widgets/attachments.py:289
+#: src/widgets/attachments.py:317 src/widgets/attachments.py:329
 msgid "Missing Image"
 msgstr "ნაკლული გამოსახულება"
 
-#: src/widgets/attachments.py:438
+#: src/widgets/attachments.py:478
 msgid "Any compatible Alpaca attachment"
 msgstr ""
 
-#: src/widgets/attachments.py:477
+#: src/widgets/attachments.py:517
 msgid "Attachment failed, screenshot might be too big"
 msgstr ""
 
-#: src/widgets/attachments.py:489 src/widgets/message.py:547
+#: src/widgets/attachments.py:529 src/widgets/message.py:547
 msgid "Image recognition is only available on specific models"
 msgstr ""
 
-#: src/widgets/attachments.py:515
+#: src/widgets/attachments.py:555
 msgid "Attach File"
 msgstr "ფაილის მიმაგრება"
 
-#: src/widgets/attachments.py:520
+#: src/widgets/attachments.py:560
 msgid "Attach Website"
 msgstr "ვებგვერდის მიმაგრება"
 
-#: src/widgets/attachments.py:523 src/widgets/message.py:527
+#: src/widgets/attachments.py:563 src/widgets/message.py:527
 msgid "Attach Website? (Experimental)"
 msgstr "მივამაგრო ვებგვერდი? (ექსპერიმენტული)"
 
-#: src/widgets/attachments.py:524
+#: src/widgets/attachments.py:564
 msgid "Please enter a website URL"
 msgstr "შეიყვანეთ ვებგვერდის ბმული"
 
-#: src/widgets/attachments.py:531
+#: src/widgets/attachments.py:571
 msgid "Attach YouTube Captions"
 msgstr "YouTube-ის წარწერების მიმაგრება"
 
-#: src/widgets/attachments.py:534
+#: src/widgets/attachments.py:574
 msgid "Attach YouTube Captions?"
 msgstr "მივამაგრო YouTube-ის წარწერები?"
 
-#: src/widgets/attachments.py:535
+#: src/widgets/attachments.py:575
 msgid "Please enter a YouTube video URL"
 msgstr "შეიყვანეთ YouTube-ის ვიდეოს ბმული"
 
-#: src/widgets/attachments.py:546
+#: src/widgets/attachments.py:586
 msgid "Attach Screenshot"
 msgstr "ეკრანის ანაბეჭდის მიმაგრება"
 
-#: src/widgets/attachments.py:553
+#: src/widgets/attachments.py:593
 msgid "Attach Photo From Camera"
 msgstr ""
 

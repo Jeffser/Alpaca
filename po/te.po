@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-26 19:03-0600\n"
+"POT-Creation-Date: 2025-06-27 11:50-0600\n"
 "PO-Revision-Date: 2025-06-27 07:31+0530\n"
 "Last-Translator: Aryan Karamtoth <aryankmmiv@outlook.com>\n"
-"Language-Team: Telugu l10n Translation Team <ubuntu-l10n-te@lists.launchpad."
-"net>\n"
+"Language-Team: Telugu l10n Translation Team <ubuntu-l10n-"
+"te@lists.launchpad.net>\n"
 "Language: te\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3548,7 +3548,7 @@ msgstr "అన్ని చాట్‌లను తొలగించాలా?
 msgid "Are you sure you want to delete all chats?"
 msgstr "మీరు అన్ని చాట్‌లను తొలగించాలనుకుంటున్నారా?"
 
-#: src/window.py:877 src/widgets/attachments.py:192 src/widgets/chat.py:519
+#: src/window.py:877 src/widgets/attachments.py:201 src/widgets/chat.py:519
 msgid "Delete"
 msgstr "తొలగించు"
 
@@ -4206,71 +4206,79 @@ msgstr "సంభాషణను అల్పాకాకు సేవ్ చే
 msgid "Remove Attachment"
 msgstr "జోడింపుని తీసివేయండి"
 
-#: src/widgets/attachments.py:119
+#: src/widgets/attachments.py:114
+msgid "Download Attachment"
+msgstr ""
+
+#: src/widgets/attachments.py:128
 msgid "Replace Notebook Content"
 msgstr "నోట్‌బుక్ కంటెంట్‌ను భర్తీ చేయండి"
 
-#: src/widgets/attachments.py:189
+#: src/widgets/attachments.py:198
 msgid "Delete Attachment?"
 msgstr "జోడింపుని తొలగించాలా?"
 
-#: src/widgets/attachments.py:190 src/widgets/chat.py:517
+#: src/widgets/attachments.py:199 src/widgets/chat.py:517
 msgid "Are you sure you want to delete '{}'?"
 msgstr "మీరు ఖచ్చితంగా '{}'ని తొలగించాలనుకుంటున్నారా?"
 
-#: src/widgets/attachments.py:266
+#: src/widgets/attachments.py:231
+msgid "Save Attachment"
+msgstr ""
+
+#: src/widgets/attachments.py:306
 msgid "Image"
 msgstr "చిత్రం"
 
-#: src/widgets/attachments.py:277 src/widgets/attachments.py:289
+#: src/widgets/attachments.py:317 src/widgets/attachments.py:329
 msgid "Missing Image"
 msgstr "చిత్రం లేదు"
 
-#: src/widgets/attachments.py:438
+#: src/widgets/attachments.py:478
 msgid "Any compatible Alpaca attachment"
 msgstr "ఏదైనా అనుకూలమైన అల్పాకా అటాచ్‌మెంట్"
 
-#: src/widgets/attachments.py:477
+#: src/widgets/attachments.py:517
 msgid "Attachment failed, screenshot might be too big"
 msgstr "అటాచ్‌మెంట్ విఫలమైంది, స్క్రీన్‌షాట్ చాలా పెద్దదిగా ఉండవచ్చు"
 
-#: src/widgets/attachments.py:489 src/widgets/message.py:547
+#: src/widgets/attachments.py:529 src/widgets/message.py:547
 msgid "Image recognition is only available on specific models"
 msgstr "నిర్దిష్ట మోడల్‌లలో మాత్రమే చిత్ర గుర్తింపు అందుబాటులో ఉంటుంది"
 
-#: src/widgets/attachments.py:515
+#: src/widgets/attachments.py:555
 msgid "Attach File"
 msgstr "ఫైల్‌ని అటాచ్ చేయండి"
 
-#: src/widgets/attachments.py:520
+#: src/widgets/attachments.py:560
 msgid "Attach Website"
 msgstr "వెబ్‌సైట్‌ను అటాచ్ చేయండి"
 
-#: src/widgets/attachments.py:523 src/widgets/message.py:527
+#: src/widgets/attachments.py:563 src/widgets/message.py:527
 msgid "Attach Website? (Experimental)"
 msgstr "వెబ్‌సైట్‌ను జోడించాలా? (ప్రయోగాత్మకం)"
 
-#: src/widgets/attachments.py:524
+#: src/widgets/attachments.py:564
 msgid "Please enter a website URL"
 msgstr "దయచేసి వెబ్‌సైట్ URLని నమోదు చేయండి"
 
-#: src/widgets/attachments.py:531
+#: src/widgets/attachments.py:571
 msgid "Attach YouTube Captions"
 msgstr "YouTube శీర్షికలను అటాచ్ చేయండి"
 
-#: src/widgets/attachments.py:534
+#: src/widgets/attachments.py:574
 msgid "Attach YouTube Captions?"
 msgstr "YouTube శీర్షికలను జోడించాలా?"
 
-#: src/widgets/attachments.py:535
+#: src/widgets/attachments.py:575
 msgid "Please enter a YouTube video URL"
 msgstr "దయచేసి YouTube వీడియో URLని నమోదు చేయండి"
 
-#: src/widgets/attachments.py:546
+#: src/widgets/attachments.py:586
 msgid "Attach Screenshot"
 msgstr "స్క్రీన్‌షాట్‌ని అటాచ్ చేయండి"
 
-#: src/widgets/attachments.py:553
+#: src/widgets/attachments.py:593
 msgid "Attach Photo From Camera"
 msgstr "కెమెరా నుండి ఫోటోను అటాచ్ చేయండి"
 
