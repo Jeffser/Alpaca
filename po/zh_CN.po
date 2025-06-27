@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 6.1.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-26 01:26-0600\n"
+"POT-Creation-Date: 2025-06-26 19:03-0600\n"
 "PO-Revision-Date: 2025-06-05 00:28+0200\n"
 "Last-Translator: Yuehao Sui <8ar10der@amao.run>\n"
 "Language-Team: Chinese (China)\n"
@@ -118,16 +118,16 @@ msgid "A Python script running inside integrated terminal"
 msgstr "一段在内置终端中运行的 Python 脚本"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:73
-msgid "A conversation involving a YouTube video transcript"
-msgstr "一段含有 YouTube 转录文本的对话"
+msgid "A conversation with web search"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:77
 msgid "Multiple models being downloaded"
 msgstr "已下载的多个模型"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:81
-msgid "Model creator screen"
-msgstr "模型创建者界面"
+msgid "A Live Chat conversation with a character"
+msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 #: data/com.jeffser.Alpaca.metainfo.xml.in:147
@@ -2222,70 +2222,70 @@ msgstr ""
 "最新一代的70B参数模型。Llama 3.3 70B 与 Llama 3.1 405B 模型相比提供了相似的性"
 "能。"
 
-#: src/ollama_models.py:56
+#: src/ollama_models.py:55
 msgid "QwQ is the reasoning model of the Qwen series."
 msgstr "QwQ 是Qwen系列模型的推理模型。"
 
-#: src/ollama_models.py:84
+#: src/ollama_models.py:83
 msgid ""
 "Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
 "generative models in 11B and 90B sizes."
 msgstr ""
 "Llama 3.2 Vision 是一套经过指令调整的图像推理生成模型，有 11B 和 90B 大小。"
 
-#: src/ollama_models.py:120
+#: src/ollama_models.py:119
 msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
 msgstr "Meta 的 Llama 3.2 采用小型 1B 和 3B 模型。"
 
-#: src/ollama_models.py:155
+#: src/ollama_models.py:154
 msgid ""
 "Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and "
 "405B parameter sizes."
 msgstr "Llama 3.1 是新的来自 Meta 的先进模型，提供 8B, 70B, 和 405B 参数量。"
 
-#: src/ollama_models.py:182
+#: src/ollama_models.py:181
 msgid "Meta Llama 3: The most capable openly available LLM to date"
 msgstr "Meta Llama 3：迄今能力最强的开源大模型"
 
-#: src/ollama_models.py:205
+#: src/ollama_models.py:204
 msgid "The 7B model released by Mistral AI, updated to version 0.3."
 msgstr "Mistral AI 发布的 7B 模型，已更新至 0.3 版。"
 
-#: src/ollama_models.py:229
+#: src/ollama_models.py:228
 msgid ""
 "A high-performing open embedding model with a large token context window."
 msgstr "具有大型标记上下文窗口的高性能开放式嵌入模型。"
 
-#: src/ollama_models.py:258
+#: src/ollama_models.py:257
 msgid ""
 "Gemma is a family of lightweight, state-of-the-art open models built by "
 "Google DeepMind. Updated to version 1.1"
 msgstr "Gemma 是由 Google DeepMind 构建的轻量级先进开放模型系列。更新至 1.1 版"
 
-#: src/ollama_models.py:314
+#: src/ollama_models.py:313
 msgid ""
 "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
 "0.5B to 110B parameters"
 msgstr "Qwen 1.5 是阿里云推出的一系列大型语言模型，参数从 0.5B 到 110B 不等"
 
-#: src/ollama_models.py:378
+#: src/ollama_models.py:377
 msgid "Qwen2 is a new series of large language models from Alibaba group"
 msgstr "Qwen2 是阿里巴巴推出的新的大语言模型系列"
 
-#: src/ollama_models.py:407
+#: src/ollama_models.py:406
 msgid ""
 "Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art "
 "open models by Microsoft."
 msgstr ""
 "Phi-3 是微软公司推出的一系列轻型 3B（迷你）和 14B（中型）先进开源模型。"
 
-#: src/ollama_models.py:439
+#: src/ollama_models.py:438
 msgid ""
 "Llama 2 is a collection of foundation language models ranging from 7B to 70B "
 "parameters."
 msgstr "Llama 2 是一组基础语言模型，参数从 7B 到 70B 不等。"
 
-#: src/ollama_models.py:501
+#: src/ollama_models.py:500
 msgid ""
 "Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, "
 "encompassing up to 18 trillion tokens. The model supports up to 128K tokens "
@@ -2294,13 +2294,13 @@ msgstr ""
 "Qwen2.5 模型在阿里巴巴最新的大规模数据集上进行了预训练，该数据集包含多达 18 "
 "万亿个token。该模型最大支持 128K token，并支持多种语言。"
 
-#: src/ollama_models.py:533
+#: src/ollama_models.py:532
 msgid ""
 "Google Gemma 2 is a high-performing and efficient model available in three "
 "sizes: 2B, 9B, and 27B."
 msgstr "Google Gemma 2 是一款高性能、高效率的模型，有三种规格：2B、9B 和 27B。"
 
-#: src/ollama_models.py:567
+#: src/ollama_models.py:566
 msgid ""
 "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines "
 "a vision encoder and Vicuna for general-purpose visual and language "
@@ -2309,13 +2309,13 @@ msgstr ""
 "🌋 LLaVA 是一种新颖的端到端训练型大型多模态模型，它将视觉编码器和 Vicuna 结合"
 "在一起，用于通用视觉和语言理解。已更新至 1.6 版。"
 
-#: src/ollama_models.py:604
+#: src/ollama_models.py:603
 msgid ""
 "A large language model that can use text prompts to generate and discuss "
 "code."
 msgstr "大语言模型，可使用文本提示生成和讨论代码。"
 
-#: src/ollama_models.py:650
+#: src/ollama_models.py:649
 msgid ""
 "The latest series of Code-Specific Qwen models, with significant "
 "improvements in code generation, code reasoning, and code fixing."
@@ -2323,13 +2323,13 @@ msgstr ""
 "最新系列的代码专用 Qwen 模型，在代码生成、代码推理和代码修复方面都有显著改"
 "进。"
 
-#: src/ollama_models.py:674
+#: src/ollama_models.py:673
 msgid ""
 "A state-of-the-art 12B model with 128k context length, built by Mistral AI "
 "in collaboration with NVIDIA."
 msgstr "一个具有 128k 上下文长度的先进模型，由 Mistral AI 与 NVIDIA 合作开发。"
 
-#: src/ollama_models.py:696
+#: src/ollama_models.py:695
 msgid ""
 "The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
 "model on 3 trillion tokens."
@@ -2337,18 +2337,18 @@ msgstr ""
 "TinyLlama 项目是一个开源的项目，旨在用 3 万亿标记训练一个 1.1B 的紧凑型 "
 "Llama 模型。"
 
-#: src/ollama_models.py:719
+#: src/ollama_models.py:718
 msgid "State-of-the-art large embedding model from mixedbread.ai"
 msgstr "来自 mixedbread.ai 的最先进的大型嵌入模型"
 
-#: src/ollama_models.py:752
+#: src/ollama_models.py:751
 msgid ""
 "StarCoder2 is the next generation of transparently trained open code LLMs "
 "that comes in three sizes: 3B, 7B and 15B parameters."
 msgstr ""
 "StarCoder2 是新一代透明训练的开放代码 LLM，有三种大小： 3B、7B 和 15B 参数。"
 
-#: src/ollama_models.py:778
+#: src/ollama_models.py:777
 msgid ""
 "A set of Mixture of Experts (MoE) model with open weights by Mistral AI in "
 "8x7b and 8x22b parameter sizes."
@@ -2356,7 +2356,7 @@ msgstr ""
 "Mistral AI 在 8x7b 和 8x22b 两种参数大小下建立的一套权重开放的专家混合模型"
 "（MoE）。"
 
-#: src/ollama_models.py:804
+#: src/ollama_models.py:803
 msgid ""
 "Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
 "experts models that excels at coding tasks. Created by Eric Hartford."
@@ -2364,7 +2364,7 @@ msgstr ""
 "基于 Mixtral 混合专家模型的无审查、8x7b 和 8x22b 的微调模型，擅长编码任务。"
 "由 Eric Hartford 创建。"
 
-#: src/ollama_models.py:833
+#: src/ollama_models.py:832
 msgid ""
 "CodeGemma is a collection of powerful, lightweight models that can perform a "
 "variety of coding tasks like fill-in-the-middle code completion, code "
@@ -2374,7 +2374,7 @@ msgstr ""
 "CodeGemma 是一系列功能强大的轻量级模型，可执行各种代码任务，如中间代码补全、"
 "代码生成、自然语言理解、数学推理和指令跟踪。"
 
-#: src/ollama_models.py:861
+#: src/ollama_models.py:860
 msgid ""
 "An open-source Mixture-of-Experts code language model that achieves "
 "performance comparable to GPT4-Turbo in code-specific tasks."
@@ -2382,29 +2382,29 @@ msgstr ""
 "开源的 Mixture-of-Experts 代码语言模型在特定代码任务中的性能可与 GPT4-Turbo "
 "相媲美。"
 
-#: src/ollama_models.py:883
+#: src/ollama_models.py:882
 msgid ""
 "Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
 "outstanding reasoning and language understanding capabilities."
 msgstr "Phi-2：微软研究院开发的 27 亿语言模型，具有出色的推理和语言理解能力。"
 
-#: src/ollama_models.py:910
+#: src/ollama_models.py:909
 msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
 msgstr "George Sung 和 Jarrad Hope 制作的无审查的 Llama 2 模型。"
 
-#: src/ollama_models.py:945
+#: src/ollama_models.py:944
 msgid ""
 "DeepSeek Coder is a capable coding model trained on two trillion code and "
 "natural language tokens."
 msgstr ""
 "DeepSeek Coder 是一个基于两万亿个代码和自然语言标记训练而成的代码模型。"
 
-#: src/ollama_models.py:986
+#: src/ollama_models.py:985
 msgid ""
 "A suite of text embedding models by Snowflake, optimized for performance."
 msgstr "一套由 Snowflake 提供的文本嵌入模型，并对性能进行了优化。"
 
-#: src/ollama_models.py:1014
+#: src/ollama_models.py:1013
 msgid ""
 "State of the art large language model from Microsoft AI with improved "
 "performance on complex chat, multilingual, reasoning and agent use cases."
@@ -2412,13 +2412,13 @@ msgstr ""
 "来自 Microsoft AI 的最先进的大型语言模型，在复杂的对话、多语言、推理和代理用"
 "例中性能更佳。"
 
-#: src/ollama_models.py:1037
+#: src/ollama_models.py:1036
 msgid ""
 "The uncensored Dolphin model based on Mistral that excels at coding tasks. "
 "Updated to version 2.8."
 msgstr "基于 Mistral 的审查 Dolphin 模型，擅长代码任务。已更新至 2.8 版。"
 
-#: src/ollama_models.py:1065
+#: src/ollama_models.py:1064
 msgid ""
 "Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on "
 "Llama 3 that has a variety of instruction, conversational, and coding skills."
@@ -2426,67 +2426,67 @@ msgstr ""
 "Dolphin 2.9 是 Eric Hartford 在 Llama 3 的基础上开发的新模型，有 8B 和 70B 大"
 "小，具有各种教学、会话和代码技能。"
 
-#: src/ollama_models.py:1099
+#: src/ollama_models.py:1098
 msgid "Yi 1.5 is a high-performing, bilingual language model."
 msgstr "Yi 1.5 是一个高性能的双语语言模型。"
 
-#: src/ollama_models.py:1122
+#: src/ollama_models.py:1121
 msgid ""
 "Command R is a Large Language Model optimized for conversational interaction "
 "and long context tasks."
 msgstr "Command R 是一种大语言模型，针对对话交互和长语境任务进行了优化。"
 
-#: src/ollama_models.py:1159
+#: src/ollama_models.py:1158
 msgid ""
 "A general-purpose model ranging from 3 billion parameters to 70 billion, "
 "suitable for entry-level hardware."
 msgstr "通用模型，参数范围从 30 亿到 700 亿，适合入门级硬件。"
 
-#: src/ollama_models.py:1182
+#: src/ollama_models.py:1181
 msgid ""
 "A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
 "benchmarks."
 msgstr "根据 Llama 3 进行微调的 LLaVA 模型在多个基准测试中取得了更好的成绩。"
 
-#: src/ollama_models.py:1209
+#: src/ollama_models.py:1208
 msgid ""
 "Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
 "that are trained to act as helpful assistants."
 msgstr ""
 "Zephyr 是一系列经过微调的 Mistral 和 Mixtral 模型，经过训练后可充当得力助手。"
 
-#: src/ollama_models.py:1231
+#: src/ollama_models.py:1230
 msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
 "overtaking similarly and larger sized models."
 msgstr "拥有 38 亿个参数的轻量人工智能模型，性能超越同类和更大规模的模型。"
 
-#: src/ollama_models.py:1259
+#: src/ollama_models.py:1258
 msgid "Embedding models on very large sentence level datasets."
 msgstr "在超大型语句级数据集上嵌入模型。"
 
-#: src/ollama_models.py:1282
+#: src/ollama_models.py:1281
 msgid ""
 "Codestral is Mistral AI’s first-ever code model designed for code generation "
 "tasks."
 msgstr "Codestral 是 Mistral AI 首次为代码生成任务设计的代码模型。"
 
-#: src/ollama_models.py:1319
+#: src/ollama_models.py:1318
 msgid ""
 "StarCoder is a code generation model trained on 80+ programming languages."
 msgstr "StarCoder 是一个经过 80 多种编程语言训练的代码生成模型。"
 
-#: src/ollama_models.py:1351
+#: src/ollama_models.py:1350
 msgid ""
 "General use chat model based on Llama and Llama 2 with 2K to 16K context "
 "sizes."
 msgstr "基于 Llama 和 Llama 2 的通用对话模型，上下文大小为 2K 至 16K。"
 
-#: src/ollama_models.py:1388
+#: src/ollama_models.py:1387
 msgid "A family of open foundation models by IBM for Code Intelligence"
 msgstr "IBM 代码智能开放式基础模型系列"
 
-#: src/ollama_models.py:1410
+#: src/ollama_models.py:1409
 msgid ""
 "Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
 "Mistral 7B model using the OpenOrca dataset."
@@ -2494,7 +2494,7 @@ msgstr ""
 "Mistral OpenOrca 是一个 70 亿参数模型，利用 OpenOrca 数据集在 Mistral 7B 模型"
 "的基础上进行了微调。"
 
-#: src/ollama_models.py:1442
+#: src/ollama_models.py:1441
 msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
@@ -2502,7 +2502,7 @@ msgstr ""
 "🪐 在一个新的高质量数据集上训练的一系列小型模型，参数分别为 1.35 亿、3.6 亿"
 "和 17 亿。"
 
-#: src/ollama_models.py:1474
+#: src/ollama_models.py:1473
 msgid ""
 "Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
 "Llama 2 uncensored by Eric Hartford."
@@ -2510,23 +2510,23 @@ msgstr ""
 "Wizard Vicuna Uncensored 是一个 7B、13B 和 30B 参数模型，基于 Eric Hartford "
 "的 Llama 2 Uncensored。"
 
-#: src/ollama_models.py:1503
+#: src/ollama_models.py:1502
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
 msgstr "基于 Llama 2 的模型进行了微调，以提高中文对话能力。"
 
-#: src/ollama_models.py:1526
+#: src/ollama_models.py:1525
 msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
 msgstr "BGE-M3 是 BAAI 推出的新型模型，具有多功能、多语言和多地域性的特点。"
 
-#: src/ollama_models.py:1551
+#: src/ollama_models.py:1550
 msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
 msgstr "功能丰富的，适合应用于 AI 辅助开发的模型，包括代码补全。"
 
-#: src/ollama_models.py:1574
+#: src/ollama_models.py:1573
 msgid ""
 "A family of open-source models trained on a wide variety of data, surpassing "
 "ChatGPT on various benchmarks. Updated to version 3.5-0106."
@@ -2534,36 +2534,36 @@ msgstr ""
 "在各种数据上训练有素的开源模型系列，在各种基准测试中超越了 ChatGPT。已更新至 "
 "3.5-0106 版。"
 
-#: src/ollama_models.py:1602
+#: src/ollama_models.py:1601
 msgid ""
 "Aya 23, released by Cohere, is a new family of state-of-the-art, "
 "multilingual models that support 23 languages."
 msgstr "由 Cohere 发布的 Aya 23 是最先进的多语言模型新系列，支持 23 种语言。"
 
-#: src/ollama_models.py:1625
+#: src/ollama_models.py:1624
 msgid ""
 "CodeQwen1.5 is a large language model pretrained on a large amount of code "
 "data."
 msgstr "CodeQwen1.5 是一个基于大量代码数据预训练的大型语言模型。"
 
-#: src/ollama_models.py:1653
+#: src/ollama_models.py:1652
 msgid ""
 "The powerful family of models by Nous Research that excels at scientific "
 "discussion and coding tasks."
 msgstr "Nous Research 强大的模型系列，擅长科学讨论和编码任务。"
 
-#: src/ollama_models.py:1675
+#: src/ollama_models.py:1674
 msgid ""
 "Command R+ is a powerful, scalable large language model purpose-built to "
 "excel at real-world enterprise use cases."
 msgstr ""
 "Command R+ 是一款功能强大、可扩展的大型语言模型，专为实际企业用例而设计。"
 
-#: src/ollama_models.py:1698
+#: src/ollama_models.py:1697
 msgid "State-of-the-art code generation model"
 msgstr "最先进的代码生成模型"
 
-#: src/ollama_models.py:1722
+#: src/ollama_models.py:1721
 msgid ""
 "Stable Code 3B is a coding model with instruct and code completion variants "
 "on par with models such as Code Llama 7B that are 2.5x larger."
@@ -2571,7 +2571,7 @@ msgstr ""
 "Stable Code 3B 是一种代码模型，其指令和代码完成变体可与 Code Llama 7B 等模型"
 "相媲美，而后者的规模要大 2.5 倍。"
 
-#: src/ollama_models.py:1744
+#: src/ollama_models.py:1743
 msgid ""
 "An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
 "by Eric Hartford and based on TinyLlama."
@@ -2579,14 +2579,14 @@ msgstr ""
 "Eric Hartford 基于 TinyLlama 在新的 Dolphin 2.8 数据集上训练的 1.1B 参数实验"
 "模型。"
 
-#: src/ollama_models.py:1771
+#: src/ollama_models.py:1770
 msgid ""
 "OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
 "open datasets."
 msgstr ""
 "OpenHermes 2.5 是 Teknium 在 Mistral 上使用完全开放的数据集微调的 7B 模型。"
 
-#: src/ollama_models.py:1795
+#: src/ollama_models.py:1794
 msgid ""
 "Mistral Large 2 is Mistral's new flagship model that is significantly more "
 "capable in code generation, mathematics, and reasoning with 128k context "
@@ -2595,7 +2595,7 @@ msgstr ""
 "Mistral Large 2 是 Mistral 的新的旗舰模型，在代码生成、数学运算和逻辑推理方面"
 "具有显著优势，带有 128k 的上下文长度并支持多种语言。"
 
-#: src/ollama_models.py:1828
+#: src/ollama_models.py:1827
 msgid ""
 "Qwen2 Math is a series of specialized math language models built upon the "
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
@@ -2604,13 +2604,13 @@ msgstr ""
 "Qwen2 Math 是建立在 Qwen2 LLMs 基础上的一系列专业数学语言模型，其数学能力大大"
 "超过开源模型甚至闭源模型（如 GPT4o）。"
 
-#: src/ollama_models.py:1852
+#: src/ollama_models.py:1851
 msgid ""
 "A strong multi-lingual general language model with competitive performance "
 "to Llama 3."
 msgstr "强大的多语言的通用模型，在性能上较 Llama 3 有竞争力。"
 
-#: src/ollama_models.py:1886
+#: src/ollama_models.py:1885
 msgid ""
 "Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model "
 "trained on multilingual data in English, Spanish, German, Italian, French, "
@@ -2619,13 +2619,13 @@ msgstr ""
 "Stable LM 2 是最先进的 1.6B 和 12B 参数语言模型，使用英语、西班牙语、德语、意"
 "大利语、法语、葡萄牙语和荷兰语的多语言数据进行训练。"
 
-#: src/ollama_models.py:1909
+#: src/ollama_models.py:1908
 msgid ""
 "BakLLaVA is a multimodal model consisting of the Mistral 7B base model "
 "augmented with the LLaVA architecture."
 msgstr "BakLLaVA 是一个多模式模型，由 Mistral 7B 基本模型和 LLaVA 架构组成。"
 
-#: src/ollama_models.py:1930
+#: src/ollama_models.py:1929
 msgid ""
 "A high-performing model trained with a new technique called Reflection-"
 "tuning that teaches a LLM to detect mistakes in its reasoning and correct "
@@ -2634,77 +2634,77 @@ msgstr ""
 "使用一种名为 “反思-调整 ”的新技术训练出的高性能模型，能教会 LLM 发现推理中的"
 "错误并纠正方向。"
 
-#: src/ollama_models.py:1961
+#: src/ollama_models.py:1960
 msgid "An advanced language model crafted with 2 trillion bilingual tokens."
 msgstr "先进的语言模型包含 2 万亿个双语词库。"
 
-#: src/ollama_models.py:1988
+#: src/ollama_models.py:1987
 msgid ""
 "This model extends LLama-3 8B's context length from 8k to over 1m tokens."
 msgstr "该模型将 LLama-3 8B 的上下文长度从 8k 扩展到超过 1m 的标记。"
 
-#: src/ollama_models.py:2021
+#: src/ollama_models.py:2020
 msgid "Model focused on math and logic problems"
 msgstr "侧重于数学和逻辑问题的模型"
 
-#: src/ollama_models.py:2044
+#: src/ollama_models.py:2043
 msgid ""
 "moondream2 is a small vision language model designed to run efficiently on "
 "edge devices."
 msgstr "moondream2 是一个小型视觉语言模型，被设计用于在边缘设备上高效运行。"
 
-#: src/ollama_models.py:2066
+#: src/ollama_models.py:2065
 msgid ""
 "A fine-tuned model based on Mistral with good coverage of domain and "
 "language."
 msgstr "基于 Mistral 的微调模型对领域和语言都有很好的覆盖。"
 
-#: src/ollama_models.py:2093
+#: src/ollama_models.py:2092
 msgid ""
 "A model from NVIDIA based on Llama 3 that excels at conversational question "
 "answering (QA) and retrieval-augmented generation (RAG)."
 msgstr ""
 "英伟达基于 Llama 3 的模型，擅长对话式问题解答（QA）和检索增强生成（RAG）。"
 
-#: src/ollama_models.py:2120
+#: src/ollama_models.py:2119
 msgid ""
 "Conversational model based on Llama 2 that performs competitively on various "
 "benchmarks."
 msgstr "对话模型基于 Llama 2，在各种基准测试中表现优异。"
 
-#: src/ollama_models.py:2148
+#: src/ollama_models.py:2147
 msgid ""
 "SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
 "generation tasks"
 msgstr "SQLCoder 是在 StarCoder 基础上微调的代码完成模型，用于 SQL 生成任务"
 
-#: src/ollama_models.py:2175
+#: src/ollama_models.py:2174
 msgid "General use models based on Llama and Llama 2 from Nous Research."
 msgstr "基于 Llama 和 Llama 2 的 Nous Research 公司的通用模型。"
 
-#: src/ollama_models.py:2198
+#: src/ollama_models.py:2197
 msgid "Code generation model based on Code Llama."
 msgstr "基于 Code Llama 的代码生成模型。"
 
-#: src/ollama_models.py:2225
+#: src/ollama_models.py:2224
 msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
 msgstr "Llama 2 的扩展，支持多达 128k 标记的上下文。"
 
-#: src/ollama_models.py:2253
+#: src/ollama_models.py:2252
 msgid ""
 "A 7B and 15B uncensored variant of the Dolphin model family that excels at "
 "coding, based on StarCoder2."
 msgstr "基于 StarCoder2 的 Dolphin 模型系列的 7B 和 15B 无删节变体，擅长编码。"
 
-#: src/ollama_models.py:2280
+#: src/ollama_models.py:2279
 msgid "General use model based on Llama 2."
 msgstr "基于 Llama 2 的通用模型。"
 
-#: src/ollama_models.py:2309
+#: src/ollama_models.py:2308
 msgid "A strong, economical, and efficient Mixture-of-Experts language model."
 msgstr "强大、经济、高效的专家混合语言模型。"
 
-#: src/ollama_models.py:2331
+#: src/ollama_models.py:2330
 msgid ""
 "Starling is a large language model trained by reinforcement learning from AI "
 "feedback focused on improving chatbot helpfulness."
@@ -2712,56 +2712,56 @@ msgstr ""
 "Starling 是一个通过人工智能反馈强化学习训练出来的大型语言模型，专注于提高对话"
 "机器人的帮助性。"
 
-#: src/ollama_models.py:2353
+#: src/ollama_models.py:2352
 msgid ""
 "A companion assistant trained in philosophy, psychology, and personal "
 "relationships. Based on Mistral."
 msgstr "一名接受过哲学、心理学和人际关系培训的同伴助理。基于 Mistral。"
 
-#: src/ollama_models.py:2391
+#: src/ollama_models.py:2390
 msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
 msgstr "Hermes 3 是 Nous Research 旗舰产品 Hermes 系列 LLM 的最新版本"
 
-#: src/ollama_models.py:2419
+#: src/ollama_models.py:2418
 msgid ""
 "Yi-Coder is a series of open-source code language models that delivers state-"
 "of-the-art coding performance with fewer than 10 billion parameters."
 msgstr ""
 "Yi-Coder 是一系列开源代码语言模型，以不到 100 亿个参数提供最先进的编码性能。"
 
-#: src/ollama_models.py:2450
+#: src/ollama_models.py:2449
 msgid ""
 "A large language model built by the Technology Innovation Institute (TII) "
 "for use in summarization, text generation, and chat bots."
 msgstr ""
 "技术创新研究所（TII）建立的大型语言模型，用于摘要、文本生成和聊天机器人。"
 
-#: src/ollama_models.py:2487
+#: src/ollama_models.py:2486
 msgid ""
 "InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
 "outstanding reasoning capability."
 msgstr "InternLM2.5 是为实际场景量身定制的 7B 参数模型，具有出色的推理能力。"
 
-#: src/ollama_models.py:2509
+#: src/ollama_models.py:2508
 msgid ""
 "A compact, yet powerful 10.7B large language model designed for single-turn "
 "conversation."
 msgstr "结构紧凑、功能强大的 10.7B 大语言机型，专为单匝通话而设计。"
 
-#: src/ollama_models.py:2533
+#: src/ollama_models.py:2532
 msgid ""
 "Athene-V2 is a 72B parameter model which excels at code completion, "
 "mathematics, and log extraction tasks."
 msgstr ""
 "Athene-V2 是一个 72B 参数模型，在代码完成、数学和日志提取任务方面表现出色。"
 
-#: src/ollama_models.py:2556
+#: src/ollama_models.py:2555
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
 msgstr "新的从 Phi 3 Mini 微调而来的小型 LLaVA 模型。"
 
-#: src/ollama_models.py:2584
+#: src/ollama_models.py:2583
 msgid ""
 "Orca 2 is built by Microsoft research, and are a fine-tuned version of "
 "Meta's Llama 2 models. The model is designed to excel particularly in "
@@ -2770,13 +2770,13 @@ msgstr ""
 "Orca 2 由微软研究部门开发，是 Meta 的 Llama 2 模型的微调版。该模型在设计上尤"
 "其擅长推理。"
 
-#: src/ollama_models.py:2615
+#: src/ollama_models.py:2614
 msgid ""
 "A series of multimodal LLMs (MLLMs) designed for vision-language "
 "understanding."
 msgstr "为视觉语言理解设计的一系列多模态 LLM（MLLM）。"
 
-#: src/ollama_models.py:2647
+#: src/ollama_models.py:2646
 msgid ""
 "Llama 2 based model fine tuned on an Orca-style dataset. Originally called "
 "Free Willy."
@@ -2784,31 +2784,31 @@ msgstr ""
 "基于 Llama 2，在 Orca-style 数据集上进行了微调的基础模型。最初名为“Free "
 "Willy”。"
 
-#: src/ollama_models.py:2676
+#: src/ollama_models.py:2675
 msgid ""
 "Mistral Small 3 sets a new benchmark in the “small” Large Language Models "
 "category below 70B."
 msgstr "Mistral Small 3 在低于70B参数的“小型”大语言模型类别中设立了新的基准。"
 
-#: src/ollama_models.py:2698
+#: src/ollama_models.py:2697
 msgid ""
 "2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
 "model by Microsoft Research."
 msgstr ""
 "Eric Hartford 根据微软研究院的 Phi 语言模型制作的 2.7B 无审查 Dolphin 模型。"
 
-#: src/ollama_models.py:2731
+#: src/ollama_models.py:2730
 msgid ""
 "SmolLM2 is a family of compact language models available in three size: "
 "135M, 360M, and 1.7B parameters."
 msgstr ""
 "SmolLM2 是一个紧凑型语言模型系列，有三种尺寸：135M、360M 和 1.7B 参数。"
 
-#: src/ollama_models.py:2753
+#: src/ollama_models.py:2752
 msgid "Uncensored version of Wizard LM model"
 msgstr "未审查版 Wizard 大语言模型"
 
-#: src/ollama_models.py:2776
+#: src/ollama_models.py:2775
 msgid ""
 "A commercial-friendly small language model by NVIDIA optimized for roleplay, "
 "RAG QA, and function calling."
@@ -2816,11 +2816,11 @@ msgstr ""
 "英伟达公司推出的商业友好型小语言模型，针对角色扮演、RAG QA 和函数调用进行了优"
 "化。"
 
-#: src/ollama_models.py:2798
+#: src/ollama_models.py:2797
 msgid "An extension of Mistral to support context windows of 64K or 128K."
 msgstr "Mistral 的扩展，支持 64K 或 128K 的上下文窗口。"
 
-#: src/ollama_models.py:2826
+#: src/ollama_models.py:2825
 msgid ""
 "An expansion of Llama 2 that specializes in integrating both general "
 "language understanding and domain-specific knowledge, particularly in "
@@ -2828,19 +2828,19 @@ msgid ""
 msgstr ""
 "Llama 2 的扩展版，专门整合一般语言理解和特定领域知识，尤其是编程和数学知识。"
 
-#: src/ollama_models.py:2848
+#: src/ollama_models.py:2847
 msgid ""
 "Fine-tuned Llama 2 model to answer medical questions based on an open source "
 "medical dataset."
 msgstr "微调 Llama 2 模型，根据开源医疗数据集回答医疗问题。"
 
-#: src/ollama_models.py:2875
+#: src/ollama_models.py:2874
 msgid ""
 "Open-source medical large language model adapted from Llama 2 to the medical "
 "domain."
 msgstr "开源医疗大型语言模型，由 Llama 2 改编而来，适用于医疗领域。"
 
-#: src/ollama_models.py:2903
+#: src/ollama_models.py:2902
 msgid ""
 "A series of models from Groq that represent a significant advancement in "
 "open-source AI capabilities for tool use/function calling."
@@ -2848,7 +2848,7 @@ msgstr ""
 "来自 Groq 的一系列模型，代表了开源人工智能能力在工具使用/功能调用方面的重大进"
 "步。"
 
-#: src/ollama_models.py:2925
+#: src/ollama_models.py:2924
 msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
@@ -2856,24 +2856,24 @@ msgstr ""
 "Llama-3.1-Nemotron-70B-Instruct 是英伟达定制的大型语言模型，用于提高 LLM 生成"
 "的对用户查询的回复的帮助性。"
 
-#: src/ollama_models.py:2947
+#: src/ollama_models.py:2946
 msgid ""
 "Nexus Raven is a 13B instruction tuned model for function calling tasks."
 msgstr "Nexus Raven 是针对函数调用任务的 13B 指令调整模型。"
 
-#: src/ollama_models.py:2968
+#: src/ollama_models.py:2967
 msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
 msgstr "来自 Nous Research 的 Nous Hermes 2 模型，现在通过 Mixtral 进行训练。"
 
-#: src/ollama_models.py:2991
+#: src/ollama_models.py:2990
 msgid "Great code generation model based on Llama2."
 msgstr "基于 Llama2 的优秀的代码生成模型。"
 
-#: src/ollama_models.py:3013
+#: src/ollama_models.py:3012
 msgid "Uncensored Llama2 based model with support for a 16K context window."
 msgstr "基于 Llama2 的无删减模型，支持 16K 上下文窗口。"
 
-#: src/ollama_models.py:3054
+#: src/ollama_models.py:3053
 msgid ""
 "The IBM Granite 2B and 8B models are designed to support tool-based use "
 "cases and support for retrieval augmented generation (RAG), streamlining "
@@ -2882,7 +2882,7 @@ msgstr ""
 "IBM Granite 2B 和 8B 模型旨在支持基于工具的用例，支持检索增强生成（RAG），简"
 "化代码生成、翻译和错误修复。"
 
-#: src/ollama_models.py:3077
+#: src/ollama_models.py:3076
 msgid ""
 "🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic "
 "instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
@@ -2891,19 +2891,19 @@ msgstr ""
 "🎩 Magicoder 是一个 7B 参数模型系列，使用 OSS-Instruct 在 75K 个合成指令数据"
 "上进行训练，OSS-Instruct 是一种利用开源代码片段启发 LLM 的新方法。"
 
-#: src/ollama_models.py:3099
+#: src/ollama_models.py:3098
 msgid ""
 "A lightweight chat model allowing accurate, and responsive output without "
 "requiring high-end hardware."
 msgstr "轻量级聊天模式无需高端硬件即可实现准确、灵敏的输出。"
 
-#: src/ollama_models.py:3122
+#: src/ollama_models.py:3121
 msgid ""
 "A high-performing code instruct model created by merging two existing code "
 "models."
 msgstr "通过合并两个现有的代码模型，创建了一个高性能代码指导模型。"
 
-#: src/ollama_models.py:3145
+#: src/ollama_models.py:3144
 msgid ""
 "Falcon2 is an 11B parameters causal decoder-only model built by TII and "
 "trained over 5T tokens."
@@ -2911,29 +2911,29 @@ msgstr ""
 "Falcon2 是一个由 TII 构建的 11B 参数因果解码器模型，并通过 5T 标记进行了训"
 "练。"
 
-#: src/ollama_models.py:3167
+#: src/ollama_models.py:3166
 msgid ""
 "Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
 "MelodysDreamj."
 msgstr "Wizard Vicuna 是一个 13B 参数模型，基于 MelodysDreamj 训练的 Llama 2。"
 
-#: src/ollama_models.py:3189
+#: src/ollama_models.py:3188
 msgid ""
 "MistralLite is a fine-tuned model based on Mistral with enhanced "
 "capabilities of processing long contexts."
 msgstr "MistralLite 是基于 Mistral 的微调模型，具有更强的长语境处理能力。"
 
-#: src/ollama_models.py:3212
+#: src/ollama_models.py:3211
 msgid ""
 "MathΣtral: a 7B model designed for math reasoning and scientific discovery "
 "by Mistral AI."
 msgstr "MathΣtral：Mistral AI 为数学推理和科学发现设计的 7B 模型。"
 
-#: src/ollama_models.py:3234
+#: src/ollama_models.py:3233
 msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
 msgstr "MotherDuck 和 Numbers Station 制作的 7B 参数文本到 SQL 模型。"
 
-#: src/ollama_models.py:3255
+#: src/ollama_models.py:3254
 msgid ""
 "MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
 "interleaving the model with itself."
@@ -2941,7 +2941,7 @@ msgstr ""
 "MegaDolphin-2.2-120b 是 Dolphin-2.2-70b 的转换版本，通过将模型与自身交错创建"
 "而成。"
 
-#: src/ollama_models.py:3277
+#: src/ollama_models.py:3276
 msgid ""
 "Solar Pro Preview: an advanced large language model (LLM) with 22 billion "
 "parameters designed to fit into a single GPU"
@@ -2949,23 +2949,23 @@ msgstr ""
 "Solar Pro 预览版：先进的大型语言模型 (LLM)，拥有 220 亿个参数，专为适合单个 "
 "GPU 而设计"
 
-#: src/ollama_models.py:3304
+#: src/ollama_models.py:3303
 msgid ""
 "A series of models that convert HTML content to Markdown content, which is "
 "useful for content conversion tasks."
 msgstr ""
 "一系列可将 HTML 内容转换为 Markdown 内容的模型，对内容转换任务非常有用。"
 
-#: src/ollama_models.py:3325
+#: src/ollama_models.py:3324
 msgid ""
 "A top-performing mixture of experts model, fine-tuned with high-quality data."
 msgstr "利用高质量数据对性能最佳的专家混合模型进行微调。"
 
-#: src/ollama_models.py:3347
+#: src/ollama_models.py:3346
 msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
 msgstr "以 Zephyr 为基础，利用高质量数据对 7B 聊天模型进行微调。"
 
-#: src/ollama_models.py:3370
+#: src/ollama_models.py:3369
 msgid ""
 "Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
 "Designed for chat and code generation."
@@ -2973,13 +2973,13 @@ msgstr ""
 "由 Open Orca OpenChat 模型和 Garage-bAInd Platypus 2 模型合并而成。专为聊天和"
 "代码生成而设计。"
 
-#: src/ollama_models.py:3387
+#: src/ollama_models.py:3386
 msgid ""
 "A language model created by combining two fine-tuned Llama 2 70B models into "
 "one."
 msgstr "由两个经过微调的 Llama 2 70B 模型合并而成的语言模型。"
 
-#: src/ollama_models.py:3428
+#: src/ollama_models.py:3427
 msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
@@ -2987,24 +2987,24 @@ msgstr ""
 "IBM Granite 1B 和 3B 模型是 IBM 首款专为低延迟使用而设计的混合专家（MoE）"
 "Granite 模型。"
 
-#: src/ollama_models.py:3450
+#: src/ollama_models.py:3449
 msgid ""
 "A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
 "information extraction, based on Phi-3."
 msgstr ""
 "在用于信息提取的私人高质量合成数据集上微调的 3.8B 模型，以 Phi-3 为基础。"
 
-#: src/ollama_models.py:3501
+#: src/ollama_models.py:3500
 msgid ""
 "Cohere For AI's language models trained to perform well across 23 different "
 "languages."
 msgstr "Cohere For AI 的语言模型经过训练，在 23 种不同语言中表现出色。"
 
-#: src/ollama_models.py:3523
+#: src/ollama_models.py:3522
 msgid "DBRX is an open, general-purpose LLM created by Databricks."
 msgstr "DBRX 是由 Databricks 创建的开放式通用 LLM。"
 
-#: src/ollama_models.py:3545
+#: src/ollama_models.py:3544
 msgid ""
 "An open large reasoning model for real-world solutions by the Alibaba "
 "International Digital Commerce Group (AIDC-AI)."
@@ -3012,23 +3012,23 @@ msgstr ""
 "阿里巴巴国际数字商业集团（AIDC-AI）为现实世界解决方案建立的开放式大型推理模"
 "型。"
 
-#: src/ollama_models.py:3568
+#: src/ollama_models.py:3567
 msgid "Embedding model from BAAI mapping texts to vectors."
 msgstr "来自 BAAI 的嵌入模型，将文本映射为矢量。"
 
-#: src/ollama_models.py:3590
+#: src/ollama_models.py:3589
 msgid ""
 "An open weights function calling model based on Llama 3, competitive with "
 "GPT-4o function calling capabilities."
 msgstr "基于 Llama 3 的开放式权重函数调用模型，与 GPT-4o 函数调用能力相媲美。"
 
-#: src/ollama_models.py:3611
+#: src/ollama_models.py:3610
 msgid ""
 "A robust conversational model designed to be used for both chat and instruct "
 "use cases."
 msgstr "一个强大的对话模型，设计用于聊天和指示用例。"
 
-#: src/ollama_models.py:3633
+#: src/ollama_models.py:3632
 msgid ""
 "An upgraded version of DeekSeek-V2 that integrates the general and coding "
 "abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
@@ -3036,7 +3036,7 @@ msgstr ""
 "DeekSeek-V2的升级版本，整合了DeepSeek-V2-Chat和DeepSeek-Coder-V2-Instruct的综"
 "合能力和编码能力。"
 
-#: src/ollama_models.py:3666
+#: src/ollama_models.py:3665
 msgid ""
 "ShieldGemma is set of instruction tuned models for evaluating the safety of "
 "text prompt input and text output responses against a set of defined safety "
@@ -3045,24 +3045,24 @@ msgstr ""
 "ShieldGemma 是一套经过指令调整的模型，用于根据一组定义的安全策略评估文本提示"
 "输入和文本输出响应的安全性。"
 
-#: src/ollama_models.py:3688
+#: src/ollama_models.py:3687
 msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
 msgstr "Bespoke Labs 开发的最先进的事实核查模型。"
 
-#: src/ollama_models.py:3716
+#: src/ollama_models.py:3715
 msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
 msgstr ""
 "Llama Guard 3 是一系列针对 LLM 输入和响应的内容安全分类进行微调的模型。"
 
-#: src/ollama_models.py:3740
+#: src/ollama_models.py:3739
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
 msgstr "可用于聚类或语义搜索等任务的句子转换器模型。"
 
-#: src/ollama_models.py:3770
+#: src/ollama_models.py:3769
 msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
@@ -3070,7 +3070,7 @@ msgstr ""
 "OpenCoder 是一个开放和可复制的代码 LLM 系列，包括 1.5B 和 8B 模型，支持中英文"
 "对话。"
 
-#: src/ollama_models.py:3799
+#: src/ollama_models.py:3798
 msgid ""
 "Tülu 3 is a leading instruction following model family, offering fully open-"
 "source data, code, and recipes by the The Allen Institute for AI."
@@ -3078,7 +3078,7 @@ msgstr ""
 "Tülu 3 是一个领先的指令跟随模型系列，由艾伦人工智能研究所提供完全开源的数据、"
 "代码和配方。"
 
-#: src/ollama_models.py:3827
+#: src/ollama_models.py:3826
 msgid ""
 "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
 "support without sacrificing English performance or scalability."
@@ -3086,13 +3086,13 @@ msgstr ""
 "Snowflake 的前沿嵌入模型。Arctic Embed 2.0 在不牺牲英语性能或可扩展性的情况下"
 "增加了多语言支持。"
 
-#: src/ollama_models.py:3855
+#: src/ollama_models.py:3854
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
 msgstr "IBM Granite Guardian 3.0 2B 和 8B 模型旨在检测提示和/或响应中的风险。"
 
-#: src/ollama_models.py:3889
+#: src/ollama_models.py:3888
 msgid ""
 "EXAONE 3.5 is a collection of instruction-tuned bilingual (English and "
 "Korean) generative models ranging from 2.4B to 32B parameters, developed and "
@@ -3101,13 +3101,13 @@ msgstr ""
 "EXAONE 3.5 是一个经过指令调整的双语（英语和韩语）生成模型集合，参数从 2.4B "
 "到 32B 不等，由 LG AI Research 开发并发布。"
 
-#: src/ollama_models.py:3937
+#: src/ollama_models.py:3936
 msgid ""
 "Sailor2 are multilingual language models made for South-East Asia. Available "
 "in 1B, 8B, and 20B parameter sizes."
 msgstr "Sailor2 是专为东南亚制作的多语种语言模型。有 1B、8B 和 20B 参数规格。"
 
-#: src/ollama_models.py:3975
+#: src/ollama_models.py:3974
 msgid ""
 "A family of efficient AI models under 10B parameters performant in science, "
 "math, and coding through innovative training techniques."
@@ -3115,7 +3115,7 @@ msgstr ""
 "通过创新的训练技术，在科学、数学和编码方面性能优越的 10B 参数以下的高效人工智"
 "能模型系列。"
 
-#: src/ollama_models.py:4016
+#: src/ollama_models.py:4015
 msgid ""
 "The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 "
 "trillion tokens of data, demonstrated significant improvements over their "
@@ -3124,7 +3124,7 @@ msgstr ""
 "IBM Granite 2B 和 8B 模型是在超过 12 万亿个词组数据基础上训练的纯文本密集 "
 "LLM，在 IBM 的初步测试中，其性能和速度都较前代产品有了显著提高。"
 
-#: src/ollama_models.py:4057
+#: src/ollama_models.py:4056
 msgid ""
 "The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
@@ -3132,7 +3132,7 @@ msgstr ""
 "IBM Granite 1B 和 3B 模型是 IBM 为低延迟使用而设计的长上下文混合专家（MoE）"
 "Granite 模型。"
 
-#: src/ollama_models.py:4098
+#: src/ollama_models.py:4097
 msgid ""
 "The IBM Granite Embedding 30M and 278M models models are text-only dense "
 "biencoder embedding models, with 30M available in English only and 278M "
@@ -3141,16 +3141,16 @@ msgstr ""
 "IBM Granite Embedding 30M 和 278M 模型是纯文本密集生物编码器嵌入模型，其中 "
 "30M 仅提供英语版本，而 278M 则服务于多语言使用案例。"
 
-#: src/ollama_models.py:4120
+#: src/ollama_models.py:4119
 msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
 msgstr "Phi-4 是微软发布的14B参数的最新开源模型。"
 
-#: src/ollama_models.py:4143
+#: src/ollama_models.py:4141
 msgid ""
 "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
 msgstr "一个新的小型推理模型，基于Qwen 2.5 3B指令模型微调而来。"
 
-#: src/ollama_models.py:4167
+#: src/ollama_models.py:4165
 msgid ""
 "Dolphin 3.0 Llama 3.1 8B 🐬 is the next generation of the Dolphin series of "
 "instruct-tuned models designed to be the ultimate general purpose local "
@@ -3160,16 +3160,13 @@ msgstr ""
 "Dolphin 3.0 Llama 3.1 8B 🐬 是 Dolphin 系列指令微调模型的下一代，旨在成为终极"
 "通用本地模型，能够支持编程、数学、代理行为、函数调用以及一般用途场景。"
 
-#: src/ollama_models.py:4218
+#: src/ollama_models.py:4215
 msgid ""
-"DeepSeek's first-generation of reasoning models with comparable performance "
-"to OpenAI-o1, including six dense models distilled from DeepSeek-R1 based on "
-"Llama and Qwen."
+"DeepSeek-R1 is a family of open reasoning models with performance "
+"approaching that of leading models, such as O3 and Gemini 2.5 Pro."
 msgstr ""
-"DeepSeek 的第一代推理模型，性能与 OpenAI-o1 相当，包括六个从基于 Llama 和 "
-"Qwen 的 DeepSeek-R1 提炼而来的大纲模型。"
 
-#: src/ollama_models.py:4239
+#: src/ollama_models.py:4236
 msgid ""
 "A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
 "with 37B activated for each token."
@@ -3177,7 +3174,7 @@ msgstr ""
 "一个强大的Mixture-of-Experts（MoE）语言模型，总参数量为671B，每个词令牌激活"
 "37B参数。"
 
-#: src/ollama_models.py:4266
+#: src/ollama_models.py:4263
 msgid ""
 "OLMo 2 is a new family of 7B and 13B models trained on up to 5T tokens. "
 "These models are on par with or better than equivalently sized fully open "
@@ -3188,7 +3185,7 @@ msgstr ""
 "些模型与同等规模的完全开源模型相当或更优，并且在英语学术基准测试中与像 Llama "
 "3.1 这样的开放权重模型竞争激烈。"
 
-#: src/ollama_models.py:4314
+#: src/ollama_models.py:4311
 msgid ""
 "The smallest model in Cohere's R series delivers top-tier speed, efficiency, "
 "and quality to build powerful AI applications on commodity GPUs and edge "
@@ -3197,14 +3194,14 @@ msgstr ""
 "Cohere R 系列中的最小模型提供了顶级的速度、效率和质量，使得在普通GPU和边缘设"
 "备上构建强大的AI应用变得可能。"
 
-#: src/ollama_models.py:4342
+#: src/ollama_models.py:4338
 msgid ""
 "A fully open-source family of reasoning models built using a dataset derived "
 "by distilling DeepSeek-R1."
 msgstr ""
 "一个完全开源的推理模型家族，使用了从 DeepSeek-R1 提炼出的数据集构建而成。"
 
-#: src/ollama_models.py:4366
+#: src/ollama_models.py:4361
 msgid ""
 "A fine-tuned version of Deepseek-R1-Distilled-Qwen-1.5B that surpasses the "
 "performance of OpenAI’s o1-preview with just 1.5B parameters on popular math "
@@ -3213,7 +3210,7 @@ msgstr ""
 "基于 DeepSeek-R1 提炼的 Qwen-1.5B 微调版本，在流行的数学评估中性能超越了 "
 "OpenAI 的 o1-preview，仅使用1.5亿个参数。"
 
-#: src/ollama_models.py:4396
+#: src/ollama_models.py:4390
 msgid ""
 "A version of the DeepSeek-R1 model that has been post trained to provide "
 "unbiased, accurate, and factual information by Perplexity."
@@ -3221,11 +3218,11 @@ msgstr ""
 "经过 Perplexity 后微调的 DeepSeek-R1 模型版本，能够提供\"无偏见、准确且事实"
 "\"的信息。"
 
-#: src/ollama_models.py:4433
+#: src/ollama_models.py:4427
 msgid "The current, most capable model that runs on a single GPU."
 msgstr "这是当前单GPU环境下性能最优的模型。"
 
-#: src/ollama_models.py:4480
+#: src/ollama_models.py:4474
 msgid ""
 "Phi-4-mini brings significant enhancements in multilingual support, "
 "reasoning, and mathematics, and now, the long-awaited function calling "
@@ -3234,7 +3231,7 @@ msgstr ""
 "Phi-4-mini 模型在多语言处理、推理能力及数学计算性能上均有显著提升，并新增了对"
 "函数调用机制的支持。"
 
-#: src/ollama_models.py:4504
+#: src/ollama_models.py:4498
 msgid ""
 "A compact and efficient vision-language model, specifically designed for "
 "visual document understanding, enabling automated content extraction from "
@@ -3243,7 +3240,7 @@ msgstr ""
 "一款紧凑高效的多模态视觉语言模型，专为视觉文档理解而设计，能够从表格、图表、"
 "信息图、曲线图、示意图等多种视觉元素中自动提取内容。"
 
-#: src/ollama_models.py:4544
+#: src/ollama_models.py:4538
 msgid ""
 "Granite-3.2 is a family of long-context AI models from IBM Granite fine-"
 "tuned for thinking capabilities."
@@ -3251,7 +3248,7 @@ msgstr ""
 "Granite-3.2 是 IBM Granite 系列的长上下文 AI 模型，经过微调以增强思维推理能"
 "力。"
 
-#: src/ollama_models.py:4568
+#: src/ollama_models.py:4562
 msgid ""
 "A new state-of-the-art version of the lightweight Command R7B model that "
 "excels in advanced Arabic language capabilities for enterprises in the "
@@ -3260,13 +3257,13 @@ msgstr ""
 "这是轻量级 Command R7B 模型的最新尖端版本，专为中东北非地区企业打造，在高级阿"
 "拉伯语处理能力方面表现卓越。"
 
-#: src/ollama_models.py:4614
+#: src/ollama_models.py:4608
 msgid ""
 "111 billion parameter model optimized for demanding enterprises that require "
 "fast, secure, and high-quality AI"
 msgstr "专为高要求企业优化的1110亿参数大模型，提供快速、安全且高质量的AI服务。"
 
-#: src/ollama_models.py:4655
+#: src/ollama_models.py:4649
 msgid ""
 "Qwen3 is the latest generation of large language models in Qwen series, "
 "offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
@@ -3274,21 +3271,21 @@ msgstr ""
 "Qwen3是通义千问系列大语言模型的最新版本，提供包含稠密型和专家混合（MoE）架构"
 "在内的完整模型组合。"
 
-#: src/ollama_models.py:4802
+#: src/ollama_models.py:4795
 msgid "Devstral: the best open source model for coding agents"
 msgstr "Devstral：专为代码智能体打造的最强开源模型"
 
-#: src/ollama_models.py:4830
+#: src/ollama_models.py:4823
 msgid "Meta's latest collection of multimodal models."
 msgstr "Meta的最新多模态模型套件"
 
-#: src/ollama_models.py:4878
+#: src/ollama_models.py:4871
 msgid ""
 "Flagship vision-language model of Qwen and also a significant leap from the "
 "previous Qwen2-VL."
 msgstr "Qwen系列旗舰级视觉语言模型，较前代Qwen2-VL实现重大突破"
 
-#: src/ollama_models.py:4908
+#: src/ollama_models.py:4901
 msgid ""
 "DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
 "1.5B version also available."
@@ -3296,7 +3293,7 @@ msgstr ""
 "DeepCoder 是一个完全开源的 140 亿参数（14B）代码模型，性能达到 O3-mini 级别，"
 "同时还提供 15 亿参数（1.5B）的轻量版本。"
 
-#: src/ollama_models.py:4933
+#: src/ollama_models.py:4925
 msgid ""
 "Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-"
 "art vision understanding and enhances long context capabilities up to 128k "
@@ -3305,7 +3302,7 @@ msgstr ""
 "基于Mistral Small 3升级的Mistral Small 3.1（2503）新增了业界领先的视觉理解能"
 "力以及将上下文处理长度扩展至12.8万词符的同时完整保留了原有文本处理性能。"
 
-#: src/ollama_models.py:4973
+#: src/ollama_models.py:4965
 msgid ""
 "Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that "
 "outperform the best available open models of the same size, including "
@@ -3315,7 +3312,7 @@ msgstr ""
 "准测试中表现卓越，性能超越同体量最优开源模型（包括LLaMA、深度求索[DeepSeek]及"
 "通义千问[Qwen]等同类模型）。"
 
-#: src/ollama_models.py:5002
+#: src/ollama_models.py:4994
 msgid ""
 "IBM Granite 2B and 8B models are 128K context length language models that "
 "have been fine-tuned for improved reasoning and instruction-following "
@@ -3324,7 +3321,7 @@ msgstr ""
 "IBM Granite 2B与8B模型是支持128K上下文长度的大语言模型，经过专门优化以提升推"
 "理能力和指令遵循性能。"
 
-#: src/ollama_models.py:5040
+#: src/ollama_models.py:5032
 msgid ""
 "Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
 "reasoning models that rival much larger models on complex reasoning tasks."
@@ -3332,7 +3329,7 @@ msgstr ""
 "Phi-4 Reasoning与Reasoning Plus是两款14B参数的开源推理模型，在复杂推理任务上"
 "可媲美规模更大的模型。"
 
-#: src/ollama_models.py:5073
+#: src/ollama_models.py:5064
 msgid ""
 "EXAONE Deep exhibits superior capabilities in various reasoning tasks "
 "including math and coding benchmarks, ranging from 2.4B to 32B parameters "
@@ -3342,13 +3339,29 @@ msgstr ""
 "基准测试等多项推理任务中展现出卓越性能，其参数量级覆盖24亿至320亿"
 "（2.4B-32B）。"
 
-#: src/ollama_models.py:5100
+#: src/ollama_models.py:5090
 msgid ""
 "Phi 4 mini reasoning is a lightweight open model that balances efficiency "
 "with advanced reasoning ability."
 msgstr ""
 "Phi-4 Mini Reasoning 是一款轻量级开源模型，在高效运行与先进推理能力之间实现了"
 "出色平衡。"
+
+#: src/ollama_models.py:5117
+msgid ""
+"Gemma 3n models are designed for efficient execution on everyday devices "
+"such as laptops, tablets or phones."
+msgstr ""
+
+#: src/ollama_models.py:5140
+msgid "Magistral is a small, efficient reasoning model with 24B parameters."
+msgstr ""
+
+#: src/ollama_models.py:5187
+msgid ""
+"An update to Mistral Small that improves on function calling, instruction "
+"following, and less repetition errors."
+msgstr ""
 
 #: src/quick_ask.py:126 src/gtk/quick_ask.ui:11
 msgid "Quick Ask"
@@ -4606,8 +4619,8 @@ msgstr "工具错误"
 #: src/widgets/instances/openai_instances.py:322
 #: src/widgets/instances/openai_instances.py:367
 #: src/widgets/instances/openai_instances.py:427
-#: src/widgets/instances/openai_instances.py:460
-#: src/widgets/instances/openai_instances.py:493
+#: src/widgets/instances/openai_instances.py:466
+#: src/widgets/instances/openai_instances.py:499
 msgid "Instance Error"
 msgstr "实例错误"
 
@@ -4686,40 +4699,48 @@ msgid "Generating message..."
 msgstr "正在生成消息..."
 
 #: src/widgets/instances/openai_instances.py:428
-#: src/widgets/instances/openai_instances.py:461
-#: src/widgets/instances/openai_instances.py:494
+#: src/widgets/instances/openai_instances.py:467
+#: src/widgets/instances/openai_instances.py:500
 msgid "Could not retrieve models"
 msgstr "无法获取模型列表"
 
 #: src/widgets/instances/openai_instances.py:440
+msgid "Alibaba Cloud Qwen large language models via DashScope"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:446
 msgid "Fireworks AI inference platform"
 msgstr "Fireworks AI 推理平台"
 
-#: src/widgets/instances/openai_instances.py:473
+#: src/widgets/instances/openai_instances.py:479
 msgid "Lambda Labs cloud inference API"
 msgstr "Lambda Labs 云端推理 API"
 
-#: src/widgets/instances/openai_instances.py:506
+#: src/widgets/instances/openai_instances.py:512
 msgid "Cerebras AI cloud inference API"
 msgstr "Cerebras AI 云端推理API"
 
-#: src/widgets/instances/openai_instances.py:512
+#: src/widgets/instances/openai_instances.py:518
 msgid "Kluster AI cloud inference API"
 msgstr "Kluster AI 云端推理API"
 
-#: src/widgets/instances/openai_instances.py:518
+#: src/widgets/instances/openai_instances.py:524
+msgid "Mistral AI large language models"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:531
 msgid "Meta AI Llama API"
 msgstr "Meta AI Llama API"
 
-#: src/widgets/instances/openai_instances.py:524
+#: src/widgets/instances/openai_instances.py:537
 msgid "Novita AI cloud inference API"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:529
+#: src/widgets/instances/openai_instances.py:542
 msgid "OpenAI Compatible Instance"
 msgstr "兼容 OpenAI 的实例"
 
-#: src/widgets/instances/openai_instances.py:531
+#: src/widgets/instances/openai_instances.py:544
 msgid "AI instance compatible with OpenAI library"
 msgstr "兼容 OpenAI 库的 AI 实例"
 
@@ -5033,6 +5054,20 @@ msgstr "未提供解释"
 #: src/widgets/tools/tools.py:524
 msgid "Make sure you understand what the command does before running it."
 msgstr "在运行该命令之前，请确保您了解它的作用。"
+
+#~ msgid "A conversation involving a YouTube video transcript"
+#~ msgstr "一段含有 YouTube 转录文本的对话"
+
+#~ msgid "Model creator screen"
+#~ msgstr "模型创建者界面"
+
+#~ msgid ""
+#~ "DeepSeek's first-generation of reasoning models with comparable "
+#~ "performance to OpenAI-o1, including six dense models distilled from "
+#~ "DeepSeek-R1 based on Llama and Qwen."
+#~ msgstr ""
+#~ "DeepSeek 的第一代推理模型，性能与 OpenAI-o1 相当，包括六个从基于 Llama 和 "
+#~ "Qwen 的 DeepSeek-R1 提炼而来的大纲模型。"
 
 #~ msgid "Never"
 #~ msgstr "从不"
