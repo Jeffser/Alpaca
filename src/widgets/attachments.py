@@ -109,6 +109,15 @@ class AttachmentDialog(Adw.Dialog):
         delete_button.connect('clicked', lambda *_: self.prompt_delete())
         header.pack_start(delete_button)
 
+        download_button = Gtk.Button(
+            icon_name='folder-download-symbolic',
+            tooltip_text=_('Download Attachment'),
+            vexpand=False,
+            valign=3
+        )
+        download_button.connect('clicked', lambda *_: self.prompt_download())
+        header.pack_start(download_button)
+
         if self.attachment.file_type == 'notebook':
             try:
                 chat = self.attachment.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().chat
@@ -192,6 +201,37 @@ class AttachmentDialog(Adw.Dialog):
             button_name = _('Delete'),
             button_appearance = 'destructive'
         )
+
+    def on_download(self, dialog, result, user_data):
+        try:
+            file = dialog.save_finish(result)
+            path = file.get_path()
+            if path:
+                if self.attachment.file_type == 'image':
+                    with open(path, "wb") as f:
+                        f.write(base64.b64decode(self.attachment.file_content))
+                else:
+                    with open(path, "w") as f:
+                        f.write(self.attachment.file_content)
+                Gio.AppInfo.launch_default_for_uri('file://{}'.format(path))
+        except GLib.Error as e:
+            logger.error(e)
+
+    def prompt_download(self):
+        name = self.attachment.file_name
+        if '.' not in name: #No extension
+            if self.attachment.file_type == 'image':
+                name += '.png'
+            else:
+                name += '.md'
+
+        name = re.sub(r'[<>:"/\\|?*\x00-\x1F]', '_', name)
+
+        dialog = Gtk.FileDialog(
+            title=_("Save Attachment"),
+            initial_name=name
+        )
+        dialog.save(self.get_root(), None, self.on_download, None)
 
     def replace_notebook_content(self, notebook):
         notebook.set_notebook(self.attachment.file_content)
