@@ -47,8 +47,7 @@ OLLAMA_MODELS = {
         "author": "Qwen Team",
         "categories": [
                 "tools",
-                "huge",
-                "reasoning"
+                "huge"
         ],
         "languages": [
                 "en"
@@ -612,7 +611,7 @@ OLLAMA_MODELS = {
                 ],
                 [
                         "0.5b",
-                        "531 MB"
+                        "398 MB"
                 ],
                 [
                         "1.5b",
@@ -4133,8 +4132,7 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/smallthinker",
         "categories": [
                 "small",
-                "medium",
-                "reasoning"
+                "medium"
         ],
         "author": "Power Infer",
         "languages": [
@@ -4170,7 +4168,7 @@ OLLAMA_MODELS = {
         "tags": [
                 [
                         "latest",
-                        "4.7 GB"
+                        "5.2 GB"
                 ],
                 [
                         "1.5b",
@@ -4182,7 +4180,7 @@ OLLAMA_MODELS = {
                 ],
                 [
                         "8b",
-                        "4.9 GB"
+                        "5.2 GB"
                 ],
                 [
                         "14b",
@@ -4203,19 +4201,18 @@ OLLAMA_MODELS = {
         ],
         "url": "https://ollama.com/library/deepseek-r1",
         "categories": [
-                "small",
+                "tools",
                 "medium",
+                "small",
                 "big",
                 "huge",
-                "code",
-                "math",
-                "reasoning"
+                "math"
         ],
         "author": "DeepSeek Team",
         "languages": [
                 "en"
         ],
-        "description": _("DeepSeek's first-generation of reasoning models with comparable performance to OpenAI-o1, including six dense models distilled from DeepSeek-R1 based on Llama and Qwen."),
+        "description": _("DeepSeek-R1 is a family of open reasoning models with performance approaching that of leading models, such as O3 and Gemini 2.5 Pro."),
     },
     "deepseek-v3": {
         "tags": [
@@ -4332,8 +4329,7 @@ OLLAMA_MODELS = {
         "categories": [
                 "small",
                 "medium",
-                "huge",
-                "reasoning"
+                "huge"
         ],
         "author": "Open Thoughts Team",
         "languages": [
@@ -4356,8 +4352,7 @@ OLLAMA_MODELS = {
         "categories": [
                 "small",
                 "medium",
-                "math",
-                "reasoning"
+                "math"
         ],
         "author": "Agentica Project",
         "languages": [
@@ -4384,8 +4379,7 @@ OLLAMA_MODELS = {
         "categories": [
                 "huge",
                 "multilingual",
-                "math",
-                "reasoning"
+                "math"
         ],
         "author": "Perplexity AI",
         "languages": [
@@ -4662,8 +4656,7 @@ OLLAMA_MODELS = {
                 "huge",
                 "code",
                 "math",
-                "multilingual",
-                "reasoning"
+                "multilingual"
         ],
         "author": "Alibaba",
         "languages": [
@@ -4819,12 +4812,12 @@ OLLAMA_MODELS = {
                         "67 GB"
                 ],
                 [
-                        "maverick",
-                        "245 GB"
+                        "16x17b",
+                        "67 GB"
                 ],
                 [
-                        "scout",
-                        "67 GB"
+                        "128x17b",
+                        "245 GB"
                 ]
         ],
         "description": _("Meta's latest collection of multimodal models."),
@@ -4911,8 +4904,7 @@ OLLAMA_MODELS = {
                 "medium",
                 "small",
                 "big",
-                "code",
-                "reasoning"
+                "code"
         ],
         "author": "Agentica and Together AI",
         "languages": [
@@ -5043,8 +5035,7 @@ OLLAMA_MODELS = {
                 "big",
                 "huge",
                 "math",
-                "code",
-                "reasoning"
+                "code"
         ],
         "author": "Microsoft",
         "languages": [
@@ -5078,8 +5069,7 @@ OLLAMA_MODELS = {
                 "big",
                 "huge",
                 "code",
-                "math",
-                "reasoning"
+                "math"
         ],
         "author": "LG AI Research",
         "languages": [
@@ -5102,10 +5092,107 @@ OLLAMA_MODELS = {
         "categories": [
                 "small",
                 "medium",
-                "math",
-                "reasoning"
+                "math"
         ],
         "author": "Microsoft",
+        "languages": [
+                "en"
+        ],
+    },
+    "gemma3n": {
+        "tags": [
+                [
+                        "latest",
+                        "7.5 GB"
+                ],
+                [
+                        "e2b",
+                        "5.6 GB"
+                ],
+                [
+                        "e4b",
+                        "7.5 GB"
+                ]
+        ],
+        "description": _("Gemma 3n models are designed for efficient execution on everyday devices such as laptops, tablets or phones."),
+        "url": "https://ollama.com/library/gemma3n",
+        "categories": [
+                "medium",
+                "big",
+                "huge"
+        ],
+        "author": "Google DeepMind",
+        "languages": [
+                "en"
+        ],
+    },
+    "magistral": {
+        "tags": [
+                [
+                        "latest",
+                        "14 GB"
+                ],
+                [
+                        "24b",
+                        "14 GB"
+                ]
+        ],
+        "description": _("Magistral is a small, efficient reasoning model with 24B parameters."),
+        "url": "https://ollama.com/library/magistral",
+        "categories": [
+                "tools",
+                "big",
+                "huge",
+                "multilingual",
+                "code"
+        ],
+        "author": "Mistral AI",
+        "languages": [
+                "en",
+                "ar",
+                "zh",
+                "cs",
+                "da",
+                "nl",
+                "fi",
+                "fr",
+                "de",
+                "he",
+                "hu",
+                "it",
+                "ja",
+                "ko",
+                "no",
+                "pl",
+                "pt",
+                "ru",
+                "es",
+                "sv",
+                "th",
+                "tr",
+                "uk"
+        ],
+    },
+    "mistral-small3.2": {
+        "tags": [
+                [
+                        "latest",
+                        "15 GB"
+                ],
+                [
+                        "24b",
+                        "15 GB"
+                ]
+        ],
+        "description": _("An update to Mistral Small that improves on function calling, instruction following, and less repetition errors."),
+        "url": "https://ollama.com/library/mistral-small3.2",
+        "categories": [
+                "vision",
+                "tools",
+                "big",
+                "huge"
+        ],
+        "author": "Mistral AI",
         "languages": [
                 "en"
         ],
