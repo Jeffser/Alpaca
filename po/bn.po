@@ -116,7 +116,7 @@ msgstr "একটি পাইথন স্ক্রিপ্ট যা ইন�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:73
 msgid "A conversation with web search"
-msgstr ""
+msgstr "ওয়েব অনুসন্ধান সহ একটি কথোপকথন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:77
 msgid "Multiple models being downloaded"
@@ -124,7 +124,7 @@ msgstr "একাধিক মডেল ডাউনলোড হচ্ছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:81
 msgid "A Live Chat conversation with a character"
-msgstr ""
+msgstr "একটি চরিত্রের সাথে লাইভ চ্যাট কথোপকথন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 #: data/com.jeffser.Alpaca.metainfo.xml.in:147
@@ -592,8 +592,7 @@ msgstr "স্টপ বাটন সংশোধন করা হয়েছ�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:315
 msgid "Fixed model search not working if there are only pulling models"
-msgstr ""
-"মডেল সার্চ কাজ করছে না এমন সমস্যা সংশোধন করা হয়েছে যদি শুধুমাত্র পুলিং মডেল থাকে"
+msgstr "মডেল সার্চ কাজ করছে না এমন সমস্যা সংশোধন করা হয়েছে যদি শুধুমাত্র পুলিং মডেল থাকে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:316
 msgid "Fixed sample prompts sometimes not appearing"
@@ -693,8 +692,7 @@ msgstr "LaTeX সমীকরণের জন্য আরও ভাল রে�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:391
 msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
-msgstr ""
-"যখন একটি মডেল ডাউনলোড হচ্ছে, তখন ব্যবহারকারী আলপাকা বন্ধ করলে নিশ্চিতকরণ ডায়ালগ"
+msgstr "যখন একটি মডেল ডাউনলোড হচ্ছে, তখন ব্যবহারকারী আলপাকা বন্ধ করলে নিশ্চিতকরণ ডায়ালগ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:392
 msgid "Better handling of think tags in messages"
@@ -2603,8 +2601,7 @@ msgstr ""
 
 #: src/ollama_models.py:1502
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
-msgstr ""
-"ল্লামা 2 ভিত্তিক মডেল চীনা ডায়ালগ দক্ষতা উন্নত করার জন্য সূক্ষ্ম-টিউন করা হয়েছে"
+msgstr "ল্লামা 2 ভিত্তিক মডেল চীনা ডায়ালগ দক্ষতা উন্নত করার জন্য সূক্ষ্ম-টিউন করা হয়েছে"
 
 #: src/ollama_models.py:1525
 msgid ""
@@ -3333,10 +3330,10 @@ msgstr ""
 "কোডিং, গাণিতিক হিসাব, এজেন্টিক, ফাংশন কলিং এবং সাধারণ ব্যবহার ক্ষেত্র সমর্থন করে।"
 
 #: src/ollama_models.py:4215
-msgid ""
-"DeepSeek-R1 is a family of open reasoning models with performance "
+msgid "DeepSeek-R1 is a family of open reasoning models with performance "
 "approaching that of leading models, such as O3 and Gemini 2.5 Pro."
-msgstr ""
+msgstr "DeepSeek-R1 হল উন্মুক্ত যুক্তি মডেলের একটি পরিবার যার কর্মক্ষমতা শীর্ষস্থানীয় মডেলগুলির মতো, "
+"যেমন O3 এবং Gemini 2.5 Pro।"
 
 #: src/ollama_models.py:4236
 msgid ""
@@ -3528,20 +3525,19 @@ msgstr ""
 "ভারসাম্য বজায় রাখে।"
 
 #: src/ollama_models.py:5117
-msgid ""
-"Gemma 3n models are designed for efficient execution on everyday devices "
+msgid "Gemma 3n models are designed for efficient execution on everyday devices "
 "such as laptops, tablets or phones."
-msgstr ""
+msgstr "জেমা 3n মডেলগুলি ল্যাপটপ, ট্যাবলেট বা ফোনের মতো প্রতিদিনের ডিভাইসগুলিতে কার্যকরভাবে "
+"কার্যকর করার জন্য ডিজাইন করা হয়েছে।"
 
 #: src/ollama_models.py:5140
 msgid "Magistral is a small, efficient reasoning model with 24B parameters."
-msgstr ""
+msgstr "ম্যাজিস্ট্রাল হল একটি ছোট, কার্যকর যুক্তি মডেল যার 24B প্যারামিটার রয়েছে।"
 
 #: src/ollama_models.py:5187
-msgid ""
-"An update to Mistral Small that improves on function calling, instruction "
+msgid "An update to Mistral Small that improves on function calling, instruction "
 "following, and less repetition errors."
-msgstr ""
+msgstr "মিস্ট্রাল স্মলের একটি আপডেট যা ফাংশন কলিং, নির্দেশনা অনুসরণ এবং কম পুনরাবৃত্তি ত্রুটিগুলিকে উন্নত করে।"
 
 #: src/quick_ask.py:126 src/gtk/quick_ask.ui:11
 msgid "Quick Ask"
@@ -4936,7 +4932,7 @@ msgstr "Kluster AI ক্লাউড ইনফারেন্স API"
 
 #: src/widgets/instances/openai_instances.py:524
 msgid "Mistral AI large language models"
-msgstr ""
+msgstr "মিস্ট্রাল এআই বড় ভাষা মডেল"
 
 #: src/widgets/instances/openai_instances.py:531
 msgid "Meta AI Llama API"
