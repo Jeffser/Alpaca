@@ -6,7 +6,7 @@ import os, shutil, json, re, logging
 from ...sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from .. import dialog
 from .ollama_instances import Ollama, OllamaManaged
-from .openai_instances import ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Qwen, Fireworks, LambdaLabs, Cerebras, Klusterai, Mistral, LlamaAPI, NovitaAI, GenericOpenAI
+from .openai_instances import ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Qwen, Fireworks, LambdaLabs, Cerebras, Klusterai, Mistral, LlamaAPI, NovitaAI, DeepInfra, GenericOpenAI
 
 logger = logging.getLogger(__name__)
 
@@ -440,5 +440,5 @@ def update_instance_list(instance_listbox:Gtk.ListBox, selected_instance_id:str)
 if os.getenv('ALPACA_OLLAMA_ONLY', '0') == '1':
     ready_instances = [OllamaManaged, Ollama]
 else:
-    ready_instances = [OllamaManaged, Ollama, ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Qwen, Fireworks, LambdaLabs, Cerebras, Klusterai, Mistral, LlamaAPI, NovitaAI, GenericOpenAI]
+    ready_instances = [OllamaManaged, Ollama, ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Qwen, Fireworks, LambdaLabs, Cerebras, Klusterai, Mistral, LlamaAPI, NovitaAI, DeepInfra, GenericOpenAI]
 
