@@ -199,26 +199,27 @@ class BaseInstance:
         if self.properties.get('seed', 0) != 0:
             params["seed"] = self.properties.get('seed')
 
-        try:
-            bot_message.update_message({"clear": True})
-            response = self.client.chat.completions.create(**params)
-            for chunk in response:
-                if chunk.choices and chunk.choices[0].delta:
-                    delta = chunk.choices[0].delta
-                    if delta.content:
-                        bot_message.update_message({"content": delta.content})
-                if not chat.busy:
-                    break
-        except Exception as e:
-            dialog.simple_error(
-                parent = bot_message.get_root(),
-                title = _('Instance Error'),
-                body = _('Message generation failed'),
-                error_log = e
-            )
-            logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+        if chat.busy:
+            try:
+                bot_message.update_message({"clear": True})
+                response = self.client.chat.completions.create(**params)
+                for chunk in response:
+                    if chunk.choices and chunk.choices[0].delta:
+                        delta = chunk.choices[0].delta
+                        if delta.content:
+                            bot_message.update_message({"content": delta.content})
+                    if not chat.busy:
+                        break
+            except Exception as e:
+                dialog.simple_error(
+                    parent = bot_message.get_root(),
+                    title = _('Instance Error'),
+                    body = _('Message generation failed'),
+                    error_log = e
+                )
+                logger.error(e)
+                if self.row:
+                    self.row.get_parent().unselect_all()
         bot_message.update_message({"done": True})
 
     def generate_chat_title(self, chat, prompt:str):

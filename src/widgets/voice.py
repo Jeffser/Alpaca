@@ -107,6 +107,7 @@ class DictateToggleButton(Gtk.Stack):
         GLib.idle_add(self.message_element.remove_css_class, 'tts_message_loading')
         GLib.idle_add(self.message_element.add_css_class, 'tts_message')
         GLib.idle_add(self.set_visible_child_name, 'button')
+        generator = None
         while queue_index + 1 < len(self.message_element.get_content_for_dictation()) or any([isinstance(b, blocks.text.GeneratingText) for b in list(self.message_element.block_container)]):
             text = self.message_element.get_content_for_dictation()
             end_index = max(text.rfind("\n"), text.rfind("."), text.rfind("?"), text.rfind("!"), text.rfind(":"))

@@ -201,37 +201,38 @@ class BaseInstance:
         if self.properties.get('seed', 0) != 0:
             params["seed"] = self.properties.get('seed')
 
-        try:
-            bot_message.update_message({"clear": True})
-            response = requests.post(
-                '{}/api/chat'.format(self.properties.get('url')),
-                headers={
-                    "Authorization": "Bearer {}".format(self.properties.get('api')),
-                    "Content-Type": "application/json"
-                },
-                data=json.dumps(params),
-                stream=True
-            )
+        if chat.busy:
+            try:
+                bot_message.update_message({"clear": True})
+                response = requests.post(
+                    '{}/api/chat'.format(self.properties.get('url')),
+                    headers={
+                        "Authorization": "Bearer {}".format(self.properties.get('api')),
+                        "Content-Type": "application/json"
+                    },
+                    data=json.dumps(params),
+                    stream=True
+                )
 
-            if response.status_code == 200:
-                for line in response.iter_lines():
-                    if line:
-                        data = json.loads(line.decode('utf-8'))
-                        bot_message.update_message({"content": data.get('message', {}).get('content')})
-                    if not chat.busy:
-                        break
-            else:
-                logger.error(response.content)
-        except Exception as e:
-            dialog.simple_error(
-                parent = bot_message.get_root(),
-                title = _('Instance Error'),
-                body = _('Message generation failed'),
-                error_log = e
-            )
-            logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+                if response.status_code == 200:
+                    for line in response.iter_lines():
+                        if line:
+                            data = json.loads(line.decode('utf-8'))
+                            bot_message.update_message({"content": data.get('message', {}).get('content')})
+                        if not chat.busy:
+                            break
+                else:
+                    logger.error(response.content)
+            except Exception as e:
+                dialog.simple_error(
+                    parent = bot_message.get_root(),
+                    title = _('Instance Error'),
+                    body = _('Message generation failed'),
+                    error_log = e
+                )
+                logger.error(e)
+                if self.row:
+                    self.row.get_parent().unselect_all()
         bot_message.update_message({"done": True})
 
     def generate_chat_title(self, chat, prompt:str):
