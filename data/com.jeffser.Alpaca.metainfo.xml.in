@@ -89,6 +89,17 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="7.0.1" date="2025-06-29">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/7.0.1</url>
+      <description>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed Alpaca crashing when chats database has incorrect metadata (type)</li>
+          <li>Fixed Quick Ask and Live Chat not running when opened from terminal whilst Alpaca is running</li>
+          <li>Fixed stop button not working when pressed before text generation beggins</li>
+        </ul>
+      </description>
+    </release>
     <release version="7.0.0" date="2025-06-27">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/7.0.0</url>
       <description>
