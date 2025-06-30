@@ -651,16 +651,17 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if chat_name and mode in (0, 1):
             chat_name = generate_numbered_name(chat_name, [row.get_name() for row in list(self.chat_list_box)])
             chat = None
-            if chat_type == 'chat':
-                chat = Widgets.chat.Chat(
-                    chat_id=chat_id,
-                    name=chat_name
-                )
-            elif chat_type == 'notebook':
+            if chat_type == 'notebook':
                 chat = Widgets.chat.Notebook(
                     chat_id=chat_id,
                     name=chat_name
                 )
+            else:
+                chat = Widgets.chat.Chat(
+                    chat_id=chat_id,
+                    name=chat_name
+                )
+
             if chat:
                 if mode == 0:
                     self.chat_list_box.append(chat.row)
@@ -695,9 +696,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     chat_type=row[2],
                     mode=0
                 )
-                if row[0] == selected_chat:
+                if row[0] == selected_chat and len(list(self.chat_list_box)) > 0:
                     self.chat_list_box.select_row(list(self.chat_list_box)[-1])
-        else:
+
+        if len(list(self.chat_list_box)) == 0:
             self.chat_list_box.select_row(self.new_chat().row)
             self.chat_list_stack.set_visible_child_name('content')
 
