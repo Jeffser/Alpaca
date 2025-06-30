@@ -68,9 +68,13 @@ class LiveChatWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def reload_models(self, button=None):
         self.model_dropdown.get_model().remove_all()
-        instance = self.get_current_instance()
-        models = instance.get_local_models()
-        default_model = instance.properties.get('default_model')
+        current_instance = self.get_current_instance()
+        if not current_instance:
+            Widgets.dialog.show_toast(_("Please select an instance in Alpaca before chatting"), self)
+            self.model_dropdown.set_visible(False)
+            return
+        models = current_instance.get_local_models()
+        default_model = current_instance.properties.get('default_model')
         selected_model_index = -1
         for i, model in enumerate(models):
             self.model_dropdown.get_model().append(LiveChatModelRow(model.get('name')))
@@ -129,7 +133,7 @@ class LiveChatWindow(Adw.ApplicationWindow):
         else:
             GLib.idle_add(self.model_avatar_animation.reset)
             GLib.idle_add(self.global_footer.microphone_button.button.set_active, False)
-            if self.settings.get_value('live-chat-auto-mic').unpack():
+            if self.settings.get_value('live-chat-auto-mic').unpack() and self.get_current_instance():
                 threading.Thread(target=self.try_turning_on_mic).start()
 
     def send_message(self, mode:int=0):

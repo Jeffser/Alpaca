@@ -28,9 +28,6 @@ from gi.repository import Gtk, Gio, Adw, GtkSource
 GtkSource.init()
 
 from .constants import TRANSLATORS, cache_dir, data_dir, config_dir, source_dir
-from .window import AlpacaWindow
-from .quick_ask import QuickAskWindow
-from .live_chat import LiveChatWindow
 from .sql_manager import Instance as SQL
 
 SQL.initialize()
@@ -49,6 +46,23 @@ from datetime import datetime
 logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser(description="Alpaca")
+
+_loaded_window_libraries = {}
+
+_window_loaders = {
+    'alpaca': lambda: __import__('alpaca.window', fromlist=['AlpacaWindow']).AlpacaWindow,
+    'quick-ask': lambda: __import__('alpaca.quick_ask', fromlist=['QuickAskWindow']).QuickAskWindow,
+    'live-chat': lambda: __import__('alpaca.live_chat', fromlist=['LiveChatWindow']).LiveChatWindow,
+}
+
+def get_window_library(name: str) -> Adw.Window:
+    if name not in _window_loaders:
+        raise ValueError(f"Unknown window library: {name}")
+
+    if name not in _loaded_window_libraries:
+        _loaded_window_libraries[name] = _window_loaders[name]()
+
+    return _loaded_window_libraries[name]
 
 class AlpacaService:
     """
@@ -69,6 +83,8 @@ class AlpacaService:
             <method name='Present'>
             </method>
             <method name='PresentAsk'>
+            </method>
+            <method name='PresentLive'>
             </method>
         </interface>
     </node>
@@ -131,24 +147,24 @@ class AlpacaApplication(Adw.Application):
                     raise Exception('Alpaca not running')
                 if self.args.new_chat:
                     app_service.Create(self.args.new_chat)
-                elif self.args.select_chat:
-                    app_service.Open(self.args.select_chat)
                 elif self.args.ask:
                     app_service.Ask(self.args.ask)
                 elif self.args.quick_ask:
                     app_service.PresentAsk()
+                elif self.args.live_chat:
+                    app_service.PresentLive()
                 sys.exit(0)
 
     def create_quick_ask(self):
-        return QuickAskWindow(application=self)
+        return get_window_library('quick-ask')(application=self)
 
     def create_live_chat(self):
-        return LiveChatWindow(application=self)
+        return get_window_library('live-chat')(application=self)
 
     def do_activate(self):
         self.main_alpaca_window = self.props.active_window
         if not self.main_alpaca_window:
-            self.main_alpaca_window = AlpacaWindow(application=self)
+            self.main_alpaca_window = get_window_library('alpaca')(application=self)
         if self.args.quick_ask or self.args.ask:
             self.create_quick_ask().present()
         elif self.args.live_chat:

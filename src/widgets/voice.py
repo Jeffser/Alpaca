@@ -30,7 +30,7 @@ tts_engine_language = None
 def preload_heavy_libraries():
     global library_waiting_queue, libraries
     for library_name in libraries:
-        if importlib.util.find_spec(library_name):
+        if libraries.get(library_name) is None and importlib.util.find_spec(library_name):
             libraries[library_name] = importlib.import_module(library_name)
     for widget in library_waiting_queue:
         widget.set_sensitive(True)
