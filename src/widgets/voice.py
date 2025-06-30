@@ -264,7 +264,8 @@ class MicrophoneButton(Gtk.Stack):
             if button.get_root().get_name() == 'AlpacaWindow':
                 pulling_model = model_manager.PullingModel(model_name, model_manager.add_speech_to_text_model, False)
                 button.get_root().local_model_flowbox.prepend(pulling_model)
-            threading.Thread(target=run_mic, args=(pulling_model,)).start()
+                threading.Thread(target=run_mic, args=(pulling_model,)).start()
+            threading.Thread(target=run_mic).start()
 
         if button.get_active():
             if os.path.isfile(os.path.join(data_dir, 'whisper', '{}.pt'.format(model_name))):
