@@ -332,7 +332,15 @@ class InstancePreferencesGroup(Adw.Dialog):
         if self.instance.row:
             self.instance.row.set_title(self.instance.properties.get('name'))
         else:
-            self.get_root().instance_listbox.append(InstanceRow(instance=self.instance))
+            row = InstanceRow(instance=self.instance)
+            self.get_root().instance_listbox.append(row)
+            self.get_root().instance_listbox.select_row(row)
+
+        if len(list(self.get_root().instance_listbox)) > 0:
+            self.get_root().instance_manager_stack.set_visible_child_name('content')
+
+        else:
+            self.get_root().instance_manager_stack.set_visible_child_name('no-instances')
 
         self.force_close()
 
@@ -370,7 +378,8 @@ class InstanceRow(Adw.ActionRow):
         super().__init__(
             title = self.instance.properties.get('name'),
             subtitle = self.instance.instance_type_display,
-            name = self.instance.properties.get('name')
+            name = self.instance.properties.get('name'),
+            visible = self.instance.instance_type != 'empty'
         )
 
         if not self.pinned:
@@ -404,6 +413,10 @@ class InstanceRow(Adw.ActionRow):
 
     def remove(self):
         SQL.delete_instance(self.instance.instance_id)
+        if len(list(self.get_root().instance_listbox)) > 1:
+            self.get_root().instance_manager_stack.set_visible_child_name('content')
+        else:
+            self.get_root().instance_manager_stack.set_visible_child_name('no-instances')
         self.get_parent().remove(self)
 
 def create_instance_row(ins:dict) -> InstanceRow or None:
