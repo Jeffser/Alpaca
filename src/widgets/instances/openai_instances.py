@@ -537,6 +537,12 @@ class NovitaAI(BaseInstance):
     description = _('Novita AI cloud inference API')
     limitations = ('no-seed',)
 
+class DeepInfra(BaseInstance):
+    instance_type = 'deepinfra'
+    instance_type_display = 'DeepInfra'
+    instance_url = 'https://api.deepinfra.com/v1/openai'
+    description = _('DeepInfra cloud inference API')
+
 class GenericOpenAI(BaseInstance):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
