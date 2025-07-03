@@ -192,7 +192,7 @@ class BaseInstance:
             "messages": messages,
             "temperature": self.properties.get('temperature', 0.7),
             "stream": True,
-            "think": self.properties.get('think', False),
+            "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', []),
             "options": {
                 "num_ctx": 16384
             }
