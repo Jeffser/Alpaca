@@ -46,16 +46,12 @@ def prettify_model_name(name:str, separated:bool=False) -> str or tuple:
     if name:
         if ':' in name:
             name = name.split(':')
-            if name[1].lower() in ('latest', 'custom'):
-                if separated:
-                    return name[0].replace('-', ' ').title(), None
-                else:
-                    return name[0].replace('-', ' ').title()
+            if separated:
+                return name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title()
+            elif name[1].lower() in ('latest', 'custom'):
+                return name[0].replace('-', ' ').title()
             else:
-                if separated:
-                    return name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title()
-                else:
-                    return '{} ({})'.format(name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title())
+                return '{} ({})'.format(name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title())
         else:
             if separated:
                 return name.replace('-', ' ').title(), None

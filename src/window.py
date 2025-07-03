@@ -74,7 +74,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     main_navigation_view = Gtk.Template.Child()
     local_model_flowbox = Gtk.Template.Child()
     available_model_flowbox = Gtk.Template.Child()
-    split_view_overlay_model_manager = Gtk.Template.Child()
     split_view_overlay = Gtk.Template.Child()
     selected_chat_row : Gtk.ListBoxRow = None
     preferences_dialog = Gtk.Template.Child()
@@ -313,49 +312,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.model_creator_stack.set_visible_child_name('introduction')
         self.model_search_button.set_sensitive(viewstack.get_visible_child_name() not in ('model_creator', 'instances'))
         self.model_search_button.set_active(self.model_search_button.get_active() and viewstack.get_visible_child_name() not in ('model_creator', 'instances'))
-
-    @Gtk.Template.Callback()
-    def model_manager_child_activated(self, flowbox, selected_child):
-        self.split_view_overlay_model_manager.set_show_sidebar(selected_child)
-        self.set_focus(selected_child.get_child().get_default_widget())
-
-    @Gtk.Template.Callback()
-    def model_manager_child_selected(self, flowbox):
-        def set_default_sidebar():
-            time.sleep(1)
-            if not self.split_view_overlay_model_manager.get_show_sidebar():
-                tbv = Adw.ToolbarView()
-                tbv.add_top_bar(
-                    Adw.HeaderBar(
-                        show_back_button=False,
-                        show_title=False
-                    )
-                )
-                tbv.set_content(Adw.StatusPage(icon_name='brain-augemnted-symbolic'))
-                GLib.idle_add(self.split_view_overlay_model_manager.set_sidebar, tbv)
-
-        selected_children = flowbox.get_selected_children()
-        if len(selected_children) > 0:
-            self.split_view_overlay_model_manager.set_show_sidebar(True)
-            model = selected_children[0].get_child()
-            buttons, content = model.get_page()
-
-            tbv = Adw.ToolbarView()
-            hb = Adw.HeaderBar(
-                show_back_button=False,
-                show_title=False
-            )
-            tbv.add_top_bar(hb)
-            for btn in buttons:
-                hb.pack_start(btn)
-            tbv.set_content(Gtk.ScrolledWindow(
-                vexpand=True
-            ))
-            tbv.get_content().set_child(content)
-            self.split_view_overlay_model_manager.set_sidebar(tbv)
-        else:
-            self.split_view_overlay_model_manager.set_show_sidebar(False)
-            threading.Thread(target=set_default_sidebar).start()
 
     @Gtk.Template.Callback()
     def welcome_carousel_page_changed(self, carousel, index):

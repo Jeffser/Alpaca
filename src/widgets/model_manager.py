@@ -8,7 +8,7 @@ from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject
 import logging, os, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util
 from ..constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ..sql_manager import prettify_model_name, Instance as SQL
-from . import dialog, attachments
+from . import dialog, attachments, models as MODELSTEST
 
 logger = logging.getLogger(__name__)
 
@@ -931,7 +931,7 @@ def add_text_to_speech_model(model_name:str):
 
 def add_speech_to_text_model(model_name:str):
     model_element = SpeechToTextModel(model_name)
-    window.local_model_flowbox.prepend(model_element)
+    #window.local_model_flowbox.prepend(model_element)
     return model_element
 
 def update_local_model_list():
@@ -962,16 +962,16 @@ def update_local_model_list():
                             pretty_name = pretty_name[0]
                             add_text_to_speech_model(pretty_name)
 
+    available_models = window.get_current_instance().get_available_models()
+    MODELSTEST.added.available_models = available_models
     # Normal Models
     threads=[]
     window.get_current_instance().local_models = None # To reset cache
     local_models = window.get_current_instance().get_local_models()
     for model in local_models:
-        thread = threading.Thread(target=add_local_model, args=(model['name'], ))
-        thread.start()
-        threads.append(thread)
-    for thread in threads:
-        thread.join()
+        model_element = MODELSTEST.added.AddedModelButton(model, window.get_current_instance())
+        window.local_model_flowbox.prepend(model_element)
+        model_element.get_parent().set_focusable(False)
     window.title_stack.set_visible_child_name('model-selector' if len(get_local_models()) > 0 else 'no-models')
     window.local_model_stack.set_visible_child_name('content' if len(list(window.local_model_flowbox)) > 0 else 'no-models')
     window.model_dropdown.set_enable_search(len(local_models) > 10)
@@ -981,6 +981,7 @@ def update_available_model_list():
     global available_models
     window.available_model_flowbox.remove_all()
     available_models = window.get_current_instance().get_available_models()
+    MODELSTEST.added.available_models = available_models
 
     # Category Filter
     window.model_filter_button.set_visible(len(available_models) > 0)
