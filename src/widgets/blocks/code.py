@@ -15,7 +15,8 @@ language_fallback = {
     'batch': 'powershell',
     'c#': 'csharp',
     'vb.net': 'vbnet',
-    'python': 'python3'
+    'python': 'python3',
+    'javascript': 'js',
 }
 
 language_properties = (
