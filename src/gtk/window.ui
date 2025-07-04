@@ -261,6 +261,24 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                             <property name="transition_type">1</property>
                             <child>
                               <object class="GtkStackPage">
+                                <property name="name">no-models</property>
+                                <property name="child">
+                                  <object class="GtkButton" id="title_no_model_button">
+                                    <property name="child">
+                                      <object class="AdwButtonContent">
+                                        <property name="label" translatable="yes">Add Models</property>
+                                        <property name="icon-name">brain-augemnted-symbolic</property>
+                                      </object>
+                                    </property>
+                                    <property name="tooltip-text" translatable="yes">Manage Models</property>
+                                    <property name="action-name">app.model_manager</property>
+                                    <property name="halign">3</property>
+                                  </object>
+                                </property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkStackPage">
                                 <property name="name">model-selector</property>
                                 <property name="child">
                                   <object class="GtkBox">
@@ -278,24 +296,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                     <child>
                                       <object class="GtkDropDown" id="model_dropdown"/>
                                     </child>
-                                  </object>
-                                </property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkStackPage">
-                                <property name="name">no-models</property>
-                                <property name="child">
-                                  <object class="GtkButton" id="title_no_model_button">
-                                    <property name="child">
-                                      <object class="AdwButtonContent">
-                                        <property name="label" translatable="yes">Add Models</property>
-                                        <property name="icon-name">brain-augemnted-symbolic</property>
-                                      </object>
-                                    </property>
-                                    <property name="tooltip-text" translatable="yes">Manage Models</property>
-                                    <property name="action-name">app.model_manager</property>
-                                    <property name="halign">3</property>
                                   </object>
                                 </property>
                               </object>
