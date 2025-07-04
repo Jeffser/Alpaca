@@ -22,14 +22,25 @@ class PullingModelDialog(Adw.Dialog):
             css_classes=['p10']
         )
         title_label = Gtk.Label(
-            label=prettify_model_name(self.model.get_name()),
-            tooltip_text=prettify_model_name(self.model.get_name()),
+            label=prettify_model_name(self.model.get_name(), True)[0],
             css_classes=['title-1'],
             wrap=True,
             wrap_mode=2,
             justify=2
         )
         main_container.append(title_label)
+        tag_name = prettify_model_name(self.model.get_name(), True)[1]
+        if tag_name:
+            subtitle_label = Gtk.Label(
+                label=tag_name,
+                css_classes=['dim-label'],
+                wrap=True,
+                wrap_mode=2,
+                justify=2
+            )
+            main_container.append(subtitle_label)
+
+
         self.status_label = Gtk.Label(
             wrap=True,
             wrap_mode=2,
@@ -234,7 +245,7 @@ class PullingModelButton(Gtk.Button):
                 if len(get_local_models(self)) > 0:
                     self.get_root().get_application().main_alpaca_window.title_stack.set_visible_child_name('model-selector')
                 if self.dialog.get_root():
-                    GLib.idle_add(self.dialog.close)
+                    self.dialog.close()
 
                 dialog.show_notification(
                     root_widget=self.get_root(),
