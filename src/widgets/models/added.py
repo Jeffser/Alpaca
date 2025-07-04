@@ -74,7 +74,7 @@ class AddedModelDialog(Adw.Dialog):
 
         main_page = Gtk.Box(
             orientation=1,
-            spacing=10,
+            spacing=20,
             hexpand=True
         )
 

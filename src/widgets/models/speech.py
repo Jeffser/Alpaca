@@ -17,12 +17,6 @@ class TextToSpeechModelDialog(Adw.Dialog):
         header_bar = Adw.HeaderBar(
             show_title=False
         )
-        web_button = Gtk.Button(
-            icon_name='globe-symbolic',
-            tooltip_text="https://github.com/hexgrad/kokoro"
-        )
-        web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri("https://github.com/hexgrad/kokoro"))
-        header_bar.pack_start(web_button)
 
         remove_button = Gtk.Button(
             icon_name='user-trash-symbolic',
@@ -30,6 +24,13 @@ class TextToSpeechModelDialog(Adw.Dialog):
         )
         remove_button.connect('clicked', lambda button: self.model.prompt_remove_model())
         header_bar.pack_start(remove_button)
+
+        web_button = Gtk.Button(
+            icon_name='globe-symbolic',
+            tooltip_text="https://github.com/hexgrad/kokoro"
+        )
+        web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri("https://github.com/hexgrad/kokoro"))
+        header_bar.pack_start(web_button)
 
         tbv.add_top_bar(header_bar)
         tbv.set_content(
@@ -164,19 +165,19 @@ class SpeechToTextModelDialog(Adw.Dialog):
         header_bar = Adw.HeaderBar(
             show_title=False
         )
-        web_button = Gtk.Button(
-            icon_name='globe-symbolic',
-            tooltip_text="https://github.com/openai/whisper"
-        )
-        web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri("https://github.com/openai/whisper"))
-        header_bar.pack_start(web_button)
-
         remove_button = Gtk.Button(
             icon_name='user-trash-symbolic',
             tooltip_text=_('Remove Model')
         )
         remove_button.connect('clicked', lambda button: self.model.prompt_remove_model())
         header_bar.pack_start(remove_button)
+
+        web_button = Gtk.Button(
+            icon_name='globe-symbolic',
+            tooltip_text="https://github.com/openai/whisper"
+        )
+        web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri("https://github.com/openai/whisper"))
+        header_bar.pack_start(web_button)
 
         tbv.add_top_bar(header_bar)
         tbv.set_content(
