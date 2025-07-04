@@ -17,19 +17,6 @@ window = None
 available_models = {}
 tts_model_path = ""
 
-class LocalModelRow(GObject.Object):
-    __gtype_name__ = 'AlpacaLocalModelRow'
-
-    name = GObject.Property(type=str)
-
-    def __init__(self, model):
-        super().__init__()
-        self.model = model
-        self.name = model.model_title
-
-    def __str__(self):
-        return self.model.model_title
-
 class TextToSpeechModel(Gtk.Box):
     __gtype_name__ = 'AlpacaTextToSpeechModel'
 
@@ -380,200 +367,6 @@ class PullingModel(Gtk.Box):
             self.page = PullingModelPage(self)
         return [], self.page
 
-class CategoryPill(Adw.Bin):
-    __gtype_name__ = 'AlpacaCategoryPill'
-
-    metadata = {
-        'multilingual': {'name': _('Multilingual'), 'css': ['accent'], 'icon': 'language-symbolic'},
-        'code': {'name': _('Code'), 'css': ['accent'], 'icon': 'code-symbolic'},
-        'math': {'name': _('Math'), 'css': ['accent'], 'icon': 'accessories-calculator-symbolic'},
-        'vision': {'name': _('Vision'), 'css': ['accent'], 'icon': 'eye-open-negative-filled-symbolic'},
-        'embedding': {'name': _('Embedding'), 'css': ['error'], 'icon': 'brain-augemnted-symbolic'},
-        'tools': {'name': _('Tools'), 'css': ['accent'], 'icon': 'wrench-wide-symbolic'},
-        'reasoning': {'name': _('Reasoning'), 'css': ['accent'], 'icon': 'brain-augemnted-symbolic'},
-        'small': {'name': _('Small'), 'css': ['success'], 'icon': 'leaf-symbolic'},
-        'medium': {'name': _('Medium'), 'css': ['brown'], 'icon': 'sprout-symbolic'},
-        'big': {'name': _('Big'), 'css': ['warning'], 'icon': 'tree-circle-symbolic'},
-        'huge': {'name': _('Huge'), 'css': ['error'], 'icon': 'weight-symbolic'},
-        'language': {'css': [], 'icon': 'language-symbolic'}
-    }
-
-    def __init__(self, name_id:str, show_label:bool):
-        if 'language:' in name_id:
-            self.metadata['language']['name'] = name_id.split(':')[1]
-            name_id = 'language'
-        button_content = Gtk.Box(
-            spacing=5,
-            halign=3
-        )
-        button_content.append(Gtk.Image.new_from_icon_name(self.metadata.get(name_id, {}).get('icon', 'language-symbolic')))
-        if show_label:
-            button_content.append(Gtk.Label(
-                label='<span weight="bold">{}</span>'.format(self.metadata.get(name_id, {}).get('name')),
-                use_markup=True
-            ))
-        super().__init__(
-            css_classes=['subtitle', 'category_pill'] + self.metadata.get(name_id, {}).get('css', []) + ([] if show_label else ['circle']),
-            tooltip_text=self.metadata.get(name_id, {}).get('name'),
-            child=button_content,
-            halign=0 if show_label else 1,
-            focusable=False,
-            hexpand=True
-        )
-
-
-class AvailableModelPage(Gtk.Box):
-    __gtype_name__ = 'AlpacaAvailableModelPage'
-
-    def __init__(self, model):
-        self.model = model
-        super().__init__(
-            orientation=1,
-            spacing=10,
-            valign=3,
-            css_classes=['p10'],
-            vexpand=True
-        )
-        title_label = Gtk.Label(
-            label=self.model.get_name().replace('-', ' ').title(),
-            tooltip_text=self.model.get_name().replace('-', ' ').title(),
-            css_classes=['title-1'],
-            vexpand=True,
-            wrap=True,
-            wrap_mode=2,
-            justify=2
-        )
-        self.append(title_label)
-        categories_box = Adw.WrapBox(
-            hexpand=True,
-            line_spacing=5,
-            child_spacing=5,
-            justify=1
-        )
-        self.append(categories_box)
-        for category in set(self.model.data.get('categories', [])):
-            categories_box.append(CategoryPill(category, True))
-
-        self.tag_list = Gtk.ListBox(
-            css_classes=["boxed-list"],
-            selection_mode=0
-        )
-        model_list = get_local_models()
-        for tag in self.model.data.get('tags', []):
-            downloaded = '{}:{}'.format(self.model.get_name(), tag[0]) in list(model_list.keys())
-            row = Adw.ActionRow(
-                title=tag[0],
-                subtitle=tag[1],
-                sensitive=not downloaded,
-                name='{}:{}'.format(self.model.get_name(), tag[0])
-            )
-            icon = Gtk.Image.new_from_icon_name('check-plain-symbolic' if downloaded else 'folder-download-symbolic')
-            row.add_suffix(icon)
-            if not downloaded:
-                row.connect('activate', lambda *_, row=row, icon=icon: pull_model(row, icon))
-                gesture_click = Gtk.GestureClick.new()
-                gesture_click.connect("pressed", lambda *_, row=row, icon=icon: pull_model(row, icon))
-                row.add_controller(gesture_click)
-            self.tag_list.append(row)
-        self.append(self.tag_list)
-        self.append(Gtk.Label(
-            label=_("By downloading this model you accept the license agreement available on the model's website"),
-            wrap=True,
-            wrap_mode=2,
-            css_classes=['dim-label', 'p10'],
-            justify=2,
-            use_markup=True
-        ))
-
-class AvailableModel(Gtk.Box):
-    __gtype_name__ = 'AlpacaAvailableModel'
-
-    def __init__(self, name:str, data:dict):
-        self.data = data
-        super().__init__(
-            orientation=1,
-            spacing=5,
-            css_classes=['card', 'model_box'],
-            name=name,
-            tooltip_text=name.replace('-', ' ').title()
-        )
-        title_label = Gtk.Label(
-            label=name.replace('-', ' ').title(),
-            css_classes=['title-3'],
-            hexpand=True,
-            wrap=True,
-            wrap_mode=2,
-            halign=1
-        )
-        self.append(title_label)
-        description_label = Gtk.Label(
-            label=self.data.get('description'),
-            css_classes=['dim-label'],
-            hexpand=True,
-            wrap=True,
-            wrap_mode=2,
-            halign=1
-        )
-        self.append(description_label)
-        categories_box = Adw.WrapBox(
-            hexpand=True,
-            line_spacing=5,
-            child_spacing=5,
-            justify=0,
-            halign=1,
-            valign=3,
-            vexpand=True
-        )
-        self.append(categories_box)
-        for category in set(self.data.get('categories', [])):
-            categories_box.append(CategoryPill(category, False))
-        self.page = None
-
-    def get_default_widget(self):
-        return self.page.tag_list
-
-    def get_page(self):
-        if not self.page:
-            self.page = AvailableModelPage(self)
-
-        web_button = Gtk.Button(
-            icon_name='globe-symbolic',
-            tooltip_text=self.data.get('url')
-        )
-        web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri(self.data.get('url')))
-
-        if len(self.data.get('languages', [])) > 1:
-            languages_container = Gtk.FlowBox(
-                max_children_per_line=3,
-                selection_mode=0
-            )
-            for language in ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in self.data.get('languages', [])]:
-                languages_container.append(CategoryPill(language, True))
-            languages_scroller = Gtk.ScrolledWindow(
-                child=languages_container,
-                propagate_natural_width=True,
-                propagate_natural_height=True
-            )
-
-            languages_button = Gtk.MenuButton(
-                icon_name='language-symbolic',
-                tooltip_text=_('Languages'),
-                popover=Gtk.Popover(child=languages_scroller)
-            )
-            return [web_button, languages_button], self.page
-        return [web_button], self.page
-
-    def get_search_string(self) -> str:
-        return '{} {} {} {}'.format(self.get_name(), self.get_name().replace('-', ' ').title(), self.data.get('description'), ' '.join(self.data.get('categories')))
-
-    def get_search_categories(self) -> set:
-        return set(self.data.get('categories', []))
-
-def add_local_model(model_name:str):
-    model_element = LocalModel(model_name)
-    window.local_model_flowbox.prepend(model_element)
-    return model_element
-
 def add_text_to_speech_model(model_name:str):
     model_element = TextToSpeechModel(model_name)
     window.local_model_flowbox.prepend(model_element)
@@ -621,6 +414,7 @@ def update_local_model_list():
     for model in local_models:
         model_element = MODELSTEST.added.AddedModelButton(model, window.get_current_instance())
         window.local_model_flowbox.prepend(model_element)
+        GLib.idle_add(window.model_dropdown.get_model().append,model_element.row)
         model_element.get_parent().set_focusable(False)
     window.title_stack.set_visible_child_name('model-selector' if len(get_local_models()) > 0 else 'no-models')
     window.local_model_stack.set_visible_child_name('content' if len(list(window.local_model_flowbox)) > 0 else 'no-models')
@@ -640,7 +434,7 @@ def update_available_model_list():
         spacing=5
     )
     if len(available_models) > 0:
-        for name, category in CategoryPill.metadata.items():
+        for name, category in MODELSTEST.common.CategoryPill.metadata.items():
             if category.get('name') and (name != 'embedding' or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1'):
                 pill_container = Gtk.Box(
                     spacing=5,
@@ -666,8 +460,9 @@ def update_available_model_list():
     for name, model_info in available_models.items():
         if 'small' in model_info['categories'] or 'medium' in model_info['categories'] or 'big' in model_info['categories'] or os.getenv('ALPACA_SHOW_HUGE_MODELS', '0') == '1':
             if 'embedding' not in model_info['categories'] or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1':
-                model_element = AvailableModel(name, model_info)
+                model_element = MODELSTEST.available.AvailableModelButton(name, model_info)
                 window.available_model_flowbox.append(model_element)
+                model_element.get_parent().set_focusable(False)
     window.get_application().lookup_action('download_model_from_name').set_enabled(len(available_models) > 0)
     window.available_models_stack_page.set_visible(len(available_models) > 0)
     window.model_creator_stack_page.set_visible(len(available_models) > 0)
@@ -677,7 +472,7 @@ def update_available_model_list():
 
 def get_local_models() -> dict:
     results = {}
-    for model in [item.get_child() for item in list(window.local_model_flowbox) if isinstance(item.get_child(), LocalModel)]:
+    for model in [item.get_child() for item in list(window.local_model_flowbox) if isinstance(item.get_child(), MODELSTEST.added.AddedModelButton)]:
         results[model.get_name()] = model
     return results
 

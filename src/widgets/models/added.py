@@ -11,6 +11,19 @@ logger = logging.getLogger(__name__)
 
 available_models = {}
 
+class LocalModelRow(GObject.Object):
+    __gtype_name__ = 'AlpacaLocalModelRowNEW'
+
+    name = GObject.Property(type=str)
+
+    def __init__(self, model):
+        super().__init__()
+        self.model = model
+        self.name = model.model_title
+
+    def __str__(self):
+        return self.model.model_title
+
 class InfoBox(Gtk.Box):
     __gtype_name__ = 'AlpacaInformationBoxNEW'
 
@@ -207,7 +220,13 @@ class AddedModelDialog(Adw.Dialog):
             header_bar.pack_start(languages_button)
 
         tbv.add_top_bar(header_bar)
-        tbv.set_content(Gtk.ScrolledWindow(child=main_container,propagate_natural_height=True, propagate_natural_width=True))
+        tbv.set_content(
+            Gtk.ScrolledWindow(
+                child=main_container,
+                propagate_natural_height=True,
+                propagate_natural_width=True
+            )
+        )
         super().__init__(
             child=tbv,
             title=self.model.model_title,
@@ -295,10 +314,9 @@ class AddedModelButton(Gtk.Button):
         subtitle_label.set_visible(subtitle_label.get_label())
         text_container.append(subtitle_label)
 
-        self.dialog = None
-        #self.row = LocalModelRow(self)
+        self.row = LocalModelRow(self)
 
-        self.connect('clicked', lambda btn: self.get_dialog().present(self.get_root()))
+        self.connect('clicked', lambda btn: AddedModelDialog(self).present(self.get_root()))
         self.update_profile_picture()
         self.details = self.instance.get_model_info(self.get_name())
 
@@ -309,6 +327,12 @@ class AddedModelButton(Gtk.Button):
             self.gesture_long_press = Gtk.GestureLongPress()
             self.gesture_long_press.connect("pressed", self.show_popup)
             self.add_controller(self.gesture_long_press)
+
+    def get_search_string(self) -> str:
+        return '{} {} {}'.format(self.get_name(), self.model_title, self.data.get('system', None))
+
+    def get_search_categories(self) -> set:
+        return set([c for c in available_models.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
 
     def create_profile_picture(self, size:int):
         profile_picture = SQL.get_model_preferences(self.get_name()).get('picture', None)
@@ -374,8 +398,9 @@ class AddedModelButton(Gtk.Button):
             )
 
     def remove_model(self):
-        if self.dialog and self.dialog.get_parent():
-            self.dialog.close()
+        dialog = self.get_root().get_visible_dialog()
+        if dialog and isinstance(dialog, AddedModelDialog):
+            dialog.close()
 
         window = self.get_root().get_application().main_alpaca_window
 
@@ -401,11 +426,6 @@ class AddedModelButton(Gtk.Button):
             button_appearance = 'destructive'
         )
 
-    def get_dialog(self):
-        if not self.dialog:
-            self.dialog = AddedModelDialog(self)
-        return self.dialog
-
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()
         rect.x, rect.y, = x, y
@@ -422,3 +442,10 @@ class AddedModelButton(Gtk.Button):
         popup.set_parent(self)
         popup.set_pointing_to(rect)
         popup.popup()
+
+def get_local_models(widget) -> dict:
+    window = widget.get_root().get_application().main_alpaca_window
+    results = {}
+    for model in [item.get_child() for item in list(window.local_model_flowbox) if isinstance(item.get_child(), AddedModelButton)]:
+        results[model.get_name()] = model
+    return results
