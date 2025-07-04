@@ -5,8 +5,11 @@ import logging, os, datetime, threading, sys, glob, icu, base64, hashlib, import
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
-from .common import CategoryPill
-from .added import get_local_models
+from .common import CategoryPill, get_local_models
+from .pulling import PullingModelButton
+from .added import AddedModelButton
+
+logger = logging.getLogger(__name__)
 
 class PullModelButton(Gtk.Button):
     __gtype_name__ = 'AlpacaPullModelButton'
@@ -192,8 +195,8 @@ class AvailableModelButton(Gtk.Button):
         container.append(description_label)
         categories_box = Adw.WrapBox(
             hexpand=True,
-            line_spacing=5,
-            child_spacing=5,
+            line_spacing=10,
+            child_spacing=10,
             justify=0,
             halign=1,
             valign=3,
@@ -236,8 +239,31 @@ class AvailableModelButton(Gtk.Button):
             popup.set_pointing_to(rect)
             popup.popup()
 
-def pull_model(self, tag_name):
-    dialog = self.get_root().get_visible_dialog()
-    if dialog and isinstance(dialog, AvailableModelDialog):
-        dialog.close()
+    def pull_model(self, tag_name):
+        dialog = self.get_root().get_visible_dialog()
+        if dialog and isinstance(dialog, AvailableModelDialog):
+            dialog.close()
 
+        if tag_name is None:
+            tag_name = ''
+        model_name = '{}:{}'.format(self.get_name(), tag_name).removesuffix(':').strip()
+        window = self.get_root().get_application().main_alpaca_window
+        threading.Thread(target=pull_model_confirm, args=(
+            model_name,
+            window.get_current_instance(),
+            window
+        )).start()
+
+def pull_model_confirm(model_name:str, instance, window):
+    if model_name:
+        if model_name not in list(get_local_models(window.get_content())):
+            model = PullingModelButton(
+                model_name,
+                lambda model_name, window=window, instance=instance: window.local_model_flowbox.prepend(AddedModelButton(model_name, instance)),
+                instance,
+                True
+            )
+            window.local_model_flowbox.prepend(model)
+            GLib.idle_add(window.model_manager_stack.set_visible_child_name, 'added_models')
+            GLib.idle_add(window.local_model_stack.set_visible_child_name, 'content')
+            instance.pull_model(model_name, model.update_progressbar)

@@ -145,28 +145,28 @@ class AddedModelDialog(Adw.Dialog):
             max_children_per_line=2
         )
         metadata_container.append(information_container)
-        parent_model = self.model.details.get('details', {}).get('parent_model')
+        parent_model = self.model.data.get('details', {}).get('parent_model')
         metadata={
             _('Tag'): prettify_model_name(self.model.get_name(), True)[1],
-            _('Family'): prettify_model_name(self.model.details.get('details', {}).get('family')),
-            _('Parameter Size'): self.model.details.get('details', {}).get('parameter_size'),
-            _('Quantization Level'): self.model.details.get('details', {}).get('quantization_level')
+            _('Family'): prettify_model_name(self.model.data.get('details', {}).get('family')),
+            _('Parameter Size'): self.model.data.get('details', {}).get('parameter_size'),
+            _('Quantization Level'): self.model.data.get('details', {}).get('quantization_level')
         }
         if parent_model and '/' not in parent_model:
             metadata[_('Parent Model')] = prettify_model_name(parent_model)
 
-        if 'modified_at' in self.model.details:
-            metadata[_('Modified At')] = datetime.datetime.strptime(':'.join(self.model.details['modified_at'].split(':')[:2]), '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
+        if 'modified_at' in self.model.data:
+            metadata[_('Modified At')] = datetime.datetime.strptime(':'.join(self.model.data['modified_at'].split(':')[:2]), '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
         else:
             metadata[_('Modified At')] = None
 
         for name, value in metadata.items():
             if value:
                 information_container.append(InfoBox(name, value, True))
-        if self.model.details.get('system'):
-            metadata_container.append(InfoBox(_('Context'), self.model.details.get('system'), False))
-        if self.model.details.get('description'):
-            metadata_container.append(InfoBox(_('Description'), self.model.details.get('description'), False))
+        if self.model.data.get('system'):
+            metadata_container.append(InfoBox(_('Context'), self.model.data.get('system'), False))
+        if self.model.data.get('description'):
+            metadata_container.append(InfoBox(_('Description'), self.model.data.get('description'), False))
 
         categories_box = Adw.WrapBox(
             hexpand=True,
@@ -179,8 +179,8 @@ class AddedModelDialog(Adw.Dialog):
         categories = available_models.get(self.model.get_name().split(':')[0], {}).get('categories', [])
         languages = available_models.get(self.model.get_name().split(':')[0], {}).get('languages', [])
         if not categories:
-            categories = available_models.get(self.model.details.get('details', {}).get('parent_model', '').split(':')[0], {}).get('categories', [])
-            languages = available_models.get(self.model.details.get('details', {}).get('parent_model', '').split(':')[0], {}).get('languages', [])
+            categories = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('categories', [])
+            languages = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('languages', [])
         for category in set(categories):
             if category not in ('small', 'medium', 'big', 'huge'):
                 categories_box.append(CategoryPill(category, True))
@@ -224,7 +224,7 @@ class AddedModelDialog(Adw.Dialog):
             Gtk.ScrolledWindow(
                 child=main_container,
                 propagate_natural_height=True,
-                propagate_natural_width=True
+                max_content_width=500
             )
         )
         super().__init__(
@@ -252,10 +252,10 @@ class AddedModelDialog(Adw.Dialog):
 class AddedModelButton(Gtk.Button):
     __gtype_name__ = 'AlpacaAddedModelButton'
 
-    def __init__(self, data:dict, instance):
-        self.data = data
+    def __init__(self, model_name:str, instance):
         self.instance = instance
-        self.model_title = prettify_model_name(data.get('name'))
+        self.data = self.instance.get_model_info(model_name)
+        self.model_title = prettify_model_name(model_name)
         container = Gtk.Box(
             spacing=5,
             margin_start=5,
@@ -265,7 +265,7 @@ class AddedModelButton(Gtk.Button):
         )
 
         super().__init__(
-            name=data.get('name'),
+            name=model_name,
             child=container,
             css_classes=['p0', 'card']
         )
@@ -289,7 +289,7 @@ class AddedModelButton(Gtk.Button):
         )
         container.append(text_container)
         title_label = Gtk.Label(
-            label=prettify_model_name(data.get('name'), True)[0],
+            label=prettify_model_name(model_name, True)[0],
             css_classes=['title-3'],
             ellipsize=3,
             hexpand=True,
@@ -318,7 +318,6 @@ class AddedModelButton(Gtk.Button):
 
         self.connect('clicked', lambda btn: AddedModelDialog(self).present(self.get_root()))
         self.update_profile_picture()
-        self.details = self.instance.get_model_info(self.get_name())
 
         if 'ollama' in self.instance.instance_type:
             self.gesture_click = Gtk.GestureClick(button=3)
@@ -443,9 +442,3 @@ class AddedModelButton(Gtk.Button):
         popup.set_pointing_to(rect)
         popup.popup()
 
-def get_local_models(widget) -> dict:
-    window = widget.get_root().get_application().main_alpaca_window
-    results = {}
-    for model in [item.get_child() for item in list(window.local_model_flowbox) if isinstance(item.get_child(), AddedModelButton)]:
-        results[model.get_name()] = model
-    return results

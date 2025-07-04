@@ -4,6 +4,7 @@ models = [
   '__init__.py',
   'added.py',
   'available.py',
+  'pulling.py',
   'common.py'
 ]
 
