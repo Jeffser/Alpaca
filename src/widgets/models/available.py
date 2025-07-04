@@ -225,7 +225,7 @@ class AvailableModelButton(Gtk.Button):
             actions = [
                 [
                     {
-                        'label': _("Pull latest"),
+                        'label': _("Pull Latest"),
                         'callback': lambda: self.pull_model('latest'),
                         'icon': 'folder-download-symbolic'
                     }
