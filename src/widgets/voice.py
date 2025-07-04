@@ -195,8 +195,8 @@ class MicrophoneButton(Gtk.Stack):
                 self.mic_timeout = 0
 
         def run_mic(pulling_model:Gtk.Widget=None):
-            GLib.idle_add(button.get_parent().set_visible_child_name, "loading")
-            GLib.idle_add(button.add_css_class, 'accent')
+            button.get_parent().set_visible_child_name("loading")
+            button.add_css_class('accent')
 
             samplerate=16000
             model = None
@@ -207,7 +207,7 @@ class MicrophoneButton(Gtk.Stack):
                 if not loaded_whisper_models.get(model_name):
                     loaded_whisper_models[model_name] = libraries.get('whisper').load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
                 if pulling_model:
-                    GLib.idle_add(pulling_model.update_progressbar, {'status': 'success'})
+                    threading.Thread(target=pulling_model.update_progressbar, args=({'status': 'success'},)).start()
             except Exception as e:
                 dialog.simple_error(
                     parent = button.get_root(),
@@ -216,7 +216,8 @@ class MicrophoneButton(Gtk.Stack):
                     error_log = e
                 )
                 logger.error(e)
-            GLib.idle_add(button.get_parent().set_visible_child_name, "button")
+                return
+            button.get_parent().set_visible_child_name("button")
 
             if loaded_whisper_models.get(model_name):
                 stream = libraries.get('pyaudio').PyAudio().open(
@@ -270,7 +271,8 @@ class MicrophoneButton(Gtk.Stack):
                 )
                 button.get_root().local_model_flowbox.prepend(pulling_model)
                 threading.Thread(target=run_mic, args=(pulling_model,)).start()
-            threading.Thread(target=run_mic).start()
+            else:
+                threading.Thread(target=run_mic).start()
 
         if button.get_active():
             if os.path.isfile(os.path.join(data_dir, 'whisper', '{}.pt'.format(model_name))):

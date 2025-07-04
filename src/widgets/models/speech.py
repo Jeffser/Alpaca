@@ -113,6 +113,9 @@ class TextToSpeechModelButton(Gtk.Button):
         return self.get_name()
 
     def remove_model(self):
+        dialog = self.get_root().get_visible_dialog()
+        if dialog and isinstance(dialog, TextToSpeechModelDialog):
+            dialog.close()
         name = '{}.pt'.format(TTS_VOICES.get(self.get_name(), ''))
         symlink_path = os.path.join(os.path.join(cache_dir, 'huggingface', 'hub'), name)
 
@@ -258,6 +261,9 @@ class SpeechToTextModelButton(Gtk.Button):
         return self.get_name()
 
     def remove_model(self):
+        dialog = self.get_root().get_visible_dialog()
+        if dialog and isinstance(dialog, SpeechToTextModelDialog):
+            dialog.close()
         model_path = os.path.join(data_dir, 'whisper', '{}.pt'.format(self.get_name()))
         if os.path.isfile(model_path):
             os.remove(model_path)

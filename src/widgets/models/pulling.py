@@ -58,21 +58,21 @@ class PullingModelDialog(Adw.Dialog):
             show_text=self.model.cancellable,
             pulse_step=0.5
         )
-        self.progressbar.pulse()
+        GLib.idle_add(self.progressbar.pulse)
         status_container.append(self.progressbar)
 
         main_container.append(status_container)
 
+        stop_button = Gtk.Button(
+            child=Adw.ButtonContent(
+                icon_name='media-playback-stop-symbolic',
+                label=_('Stop Download')
+            ),
+            tooltip_text=_('Stop Download'),
+            css_classes=['destructive-action'],
+            halign=3
+        )
         if self.model.cancellable:
-            stop_button = Gtk.Button(
-                child=Adw.ButtonContent(
-                    icon_name='media-playback-stop-symbolic',
-                    label=_('Stop Download')
-                ),
-                tooltip_text=_('Stop Download'),
-                css_classes=['destructive-action'],
-                halign=3
-            )
             stop_button.connect('clicked', lambda button: self.model.prompt_stop_download())
             main_container.append(stop_button)
 
@@ -140,21 +140,23 @@ class PullingModelButton(Gtk.Button):
         )
         container.append(subtitle_label)
         self.progressbar = Gtk.ProgressBar(pulse_step=0.5)
-        self.progressbar.pulse()
+        GLib.idle_add(self.progressbar.pulse)
         container.append(self.progressbar)
         self.digests = []
         self.success_callback = success_callback
         self.cancellable = cancellable
 
         self.dialog = PullingModelDialog(self)
-        self.connect('clicked', lambda btn: self.dialog.present(self.get_root()))
 
-        self.gesture_click = Gtk.GestureClick(button=3)
-        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
-        self.add_controller(self.gesture_click)
-        self.gesture_long_press = Gtk.GestureLongPress()
-        self.gesture_long_press.connect("pressed", self.show_popup)
-        self.add_controller(self.gesture_long_press)
+        if self.cancellable:
+            self.connect('clicked', lambda btn: self.dialog.present(self.get_root()))
+
+            self.gesture_click = Gtk.GestureClick(button=3)
+            self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
+            self.add_controller(self.gesture_click)
+            self.gesture_long_press = Gtk.GestureLongPress()
+            self.gesture_long_press.connect("pressed", self.show_popup)
+            self.add_controller(self.gesture_long_press)
 
     def get_search_string(self) -> str:
         return '{} {}'.format(self.get_name(), self.model_title)
@@ -192,7 +194,8 @@ class PullingModelButton(Gtk.Button):
 
     def stop_download(self):
         local_model_flowbox = self.get_parent().get_parent()
-        self.dialog.close()
+        if self.dialog.get_root():
+            self.dialog.close()
         if len(list(local_model_flowbox)) == 1:
             self.get_root().get_application().main_alpaca_window.local_model_stack.set_visible_child_name('no-models')
         local_model_flowbox.remove(self.get_parent())
