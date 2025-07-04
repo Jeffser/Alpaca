@@ -11,8 +11,8 @@ logger = logging.getLogger(__name__)
 
 available_models = {}
 
-class LocalModelRow(GObject.Object):
-    __gtype_name__ = 'AlpacaLocalModelRowNEW'
+class AddedModelRow(GObject.Object):
+    __gtype_name__ = 'AlpacaAddedModelRow'
 
     name = GObject.Property(type=str)
 
@@ -314,7 +314,7 @@ class AddedModelButton(Gtk.Button):
         subtitle_label.set_visible(subtitle_label.get_label())
         text_container.append(subtitle_label)
 
-        self.row = LocalModelRow(self)
+        self.row = AddedModelRow(self)
 
         self.connect('clicked', lambda btn: AddedModelDialog(self).present(self.get_root()))
         self.update_profile_picture()

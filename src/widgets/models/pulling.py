@@ -156,13 +156,11 @@ class PullingModelButton(Gtk.Button):
         self.gesture_long_press.connect("pressed", self.show_popup)
         self.add_controller(self.gesture_long_press)
 
-
     def get_search_string(self) -> str:
         return '{} {}'.format(self.get_name(), self.model_title)
 
     def get_search_categories(self) -> set:
         return set([c for c in available_models.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
-
 
     def show_popup(self, gesture, x, y):
         if '{}:latest'.format(self.get_name()) not in list(get_local_models(self.get_root())):

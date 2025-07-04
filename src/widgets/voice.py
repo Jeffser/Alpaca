@@ -7,8 +7,8 @@ Manages TTS and STT code
 import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
 from ..sql_manager import Instance as SQL
-from ..constants import data_dir, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
-from . import dialog, model_manager, blocks
+from ..constants import data_dir, cache_dir, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
+from . import dialog, models, blocks
 
 import os, threading, importlib.util, re, unicodedata, gc, queue, time, logging
 import numpy as np
@@ -88,12 +88,12 @@ class DictateToggleButton(Gtk.Stack):
             voice = TTS_VOICES.get(list(TTS_VOICES.keys())[self.message_element.get_root().settings.get_value('tts-model').unpack()])
 
         # Show Voice in Model Manager if Needed
-        if model_manager.tts_model_path:
-            if not os.path.islink(os.path.join(model_manager.tts_model_path, '{}.pt'.format(voice))) and self.message_element.get_root().get_name() == 'AlpacaWindow':
+        if os.path.join(cache_dir, 'huggingface', 'hub'):
+            if not os.path.islink(os.path.join(cache_dir, 'huggingface', 'hub', '{}.pt'.format(voice))) and self.message_element.get_root().get_name() == 'AlpacaWindow':
                 pretty_name = [k for k, v in TTS_VOICES.items() if v == voice]
                 if len(pretty_name) > 0:
                     pretty_name = pretty_name[0]
-                    self.message_element.get_root().local_model_flowbox.append(model_manager.TextToSpeechModel(pretty_name))
+                    self.message_element.get_root().local_model_flowbox.append(models.speech.TextToSpeechModelButton(pretty_name))
 
         # Generate TTS_ENGINE if needed
         if not tts_engine or tts_engine_language != voice[0]:
@@ -262,7 +262,12 @@ class MicrophoneButton(Gtk.Stack):
 
         def prepare_download():
             if button.get_root().get_name() == 'AlpacaWindow':
-                pulling_model = model_manager.PullingModel(model_name, model_manager.add_speech_to_text_model, False)
+                pulling_model = models.pulling.PullingModelButton(
+                    model_name,
+                    lambda model_name, window=button.get_root(): window.local_model_flowbox.prepend(models.speech.SpeechToTextModelButton(model_name)),
+                    None,
+                    False
+                )
                 button.get_root().local_model_flowbox.prepend(pulling_model)
                 threading.Thread(target=run_mic, args=(pulling_model,)).start()
             threading.Thread(target=run_mic).start()

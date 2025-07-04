@@ -5,6 +5,7 @@ models = [
   'added.py',
   'available.py',
   'pulling.py',
+  'speech.py',
   'common.py'
 ]
 
