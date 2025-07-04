@@ -88,7 +88,7 @@ class AvailableModelDialog(Adw.Dialog):
             selection_mode=0,
             halign=3
         )
-        model_list = get_local_models(self.model)
+        model_list = get_local_models(self.model.get_root())
         for tag in self.model.data.get('tags', []):
             downloaded = '{}:{}'.format(self.model.get_name(), tag[0]) in list(model_list.keys())
             button = PullModelButton(tag[0], tag[1], downloaded)
@@ -222,7 +222,7 @@ class AvailableModelButton(Gtk.Button):
         return set(self.data.get('categories', []))
 
     def show_popup(self, gesture, x, y):
-        if '{}:latest'.format(self.get_name()) not in list(get_local_models(self)):
+        if '{}:latest'.format(self.get_name()) not in list(get_local_models(self.get_root())):
             rect = Gdk.Rectangle()
             rect.x, rect.y, = x, y
             actions = [
@@ -256,7 +256,7 @@ class AvailableModelButton(Gtk.Button):
 
 def pull_model_confirm(model_name:str, instance, window):
     if model_name:
-        if model_name not in list(get_local_models(window.get_content())):
+        if model_name not in list(get_local_models(window)):
             model = PullingModelButton(
                 model_name,
                 lambda model_name, window=window, instance=instance: window.local_model_flowbox.prepend(AddedModelButton(model_name, instance)),

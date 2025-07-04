@@ -165,7 +165,7 @@ class PullingModelButton(Gtk.Button):
 
 
     def show_popup(self, gesture, x, y):
-        if '{}:latest'.format(self.get_name()) not in list(get_local_models(self)):
+        if '{}:latest'.format(self.get_name()) not in list(get_local_models(self.get_root())):
             rect = Gdk.Rectangle()
             rect.x, rect.y, = x, y
             actions = [
@@ -242,7 +242,7 @@ class PullingModelButton(Gtk.Button):
 
             if data.get('status') == 'success':
                 new_model = self.success_callback(self.get_name())
-                if len(get_local_models(self)) > 0:
+                if len(get_local_models(self.get_root())) > 0:
                     self.get_root().get_application().main_alpaca_window.title_stack.set_visible_child_name('model-selector')
                 if self.dialog.get_root():
                     self.dialog.close()
