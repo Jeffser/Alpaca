@@ -176,8 +176,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             self.last_selected_instance_row = row
 
-            GLib.idle_add(Widgets.model_manager.update_local_model_list)
-            GLib.idle_add(Widgets.model_manager.update_available_model_list)
+            GLib.idle_add(Widgets.models.update_added_model_list, self)
+            GLib.idle_add(Widgets.models.update_available_model_list, self)
 
             if row:
                 self.settings.set_string('selected-instance', row.instance.instance_id)
@@ -418,7 +418,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.local_model_stack.set_visible_child_name('no-models')
 
         results_available = False
-        if len(Widgets.model_manager.available_models) > 0:
+        if len(Widgets.models.common.available_models_data) > 0:
             self.available_models_stack_page.set_visible(True)
             self.model_creator_stack_page.set_visible(True)
             for model in list(self.available_model_flowbox):

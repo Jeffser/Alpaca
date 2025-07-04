@@ -5,11 +5,9 @@ import logging, os, datetime, threading, sys, glob, icu, base64, hashlib, import
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
-from .common import CategoryPill
+from .common import CategoryPill, available_models_data
 
 logger = logging.getLogger(__name__)
-
-available_models = {}
 
 class AddedModelRow(GObject.Object):
     __gtype_name__ = 'AlpacaAddedModelRow'
@@ -176,11 +174,11 @@ class AddedModelDialog(Adw.Dialog):
             halign=1
         )
         metadata_container.append(categories_box)
-        categories = available_models.get(self.model.get_name().split(':')[0], {}).get('categories', [])
-        languages = available_models.get(self.model.get_name().split(':')[0], {}).get('languages', [])
+        categories = available_models_data.get(self.model.get_name().split(':')[0], {}).get('categories', [])
+        languages = available_models_data.get(self.model.get_name().split(':')[0], {}).get('languages', [])
         if not categories:
-            categories = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('categories', [])
-            languages = available_models.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('languages', [])
+            categories = available_models_data.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('categories', [])
+            languages = available_models_data.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('languages', [])
         for category in set(categories):
             if category not in ('small', 'medium', 'big', 'huge'):
                 categories_box.append(CategoryPill(category, True))
@@ -199,12 +197,12 @@ class AddedModelDialog(Adw.Dialog):
             remove_button.connect('clicked', lambda button: self.model.prompt_remove_model())
             header_bar.pack_start(remove_button)
 
-        if len(available_models.get(self.model.get_name().split(':')[0], {}).get('languages', [])) > 1:
+        if len(available_models_data.get(self.model.get_name().split(':')[0], {}).get('languages', [])) > 1:
             languages_container = Gtk.FlowBox(
                 max_children_per_line=3,
                 selection_mode=0
             )
-            for language in ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in available_models.get(self.model.get_name().split(':')[0], {}).get('languages', [])]:
+            for language in ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in available_models_data.get(self.model.get_name().split(':')[0], {}).get('languages', [])]:
                 languages_container.append(CategoryPill(language, True))
             languages_scroller = Gtk.ScrolledWindow(
                 child=languages_container,
@@ -331,7 +329,7 @@ class AddedModelButton(Gtk.Button):
         return '{} {} {}'.format(self.get_name(), self.model_title, self.data.get('system', None))
 
     def get_search_categories(self) -> set:
-        return set([c for c in available_models.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
+        return set([c for c in available_models_data.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
 
     def create_profile_picture(self, size:int):
         profile_picture = SQL.get_model_preferences(self.get_name()).get('picture', None)

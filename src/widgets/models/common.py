@@ -2,6 +2,8 @@
 
 from gi.repository import Gtk, Gio, Adw
 
+available_models_data = {}
+
 class CategoryPill(Adw.Bin):
     __gtype_name__ = 'AlpacaCategoryPillNEW'
 
@@ -44,7 +46,7 @@ class CategoryPill(Adw.Bin):
         )
 
 def get_local_models(root) -> dict:
-    window = root.get_root().get_application().main_alpaca_window
+    window = root.get_application().main_alpaca_window
     results = {}
     for model in [item.get_child() for item in list(window.local_model_flowbox) if item.get_child().__gtype_name__ == 'AlpacaAddedModelButton']:
         results[model.get_name()] = model
