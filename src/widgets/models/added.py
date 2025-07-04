@@ -5,51 +5,11 @@ import logging, os, datetime, threading, sys, glob, icu, base64, hashlib, import
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
+from .common import CategoryPill
 
 logger = logging.getLogger(__name__)
 
 available_models = {}
-
-class CategoryPill(Adw.Bin):
-    __gtype_name__ = 'AlpacaCategoryPillNEW'
-
-    metadata = {
-        'multilingual': {'name': _('Multilingual'), 'css': ['accent'], 'icon': 'language-symbolic'},
-        'code': {'name': _('Code'), 'css': ['accent'], 'icon': 'code-symbolic'},
-        'math': {'name': _('Math'), 'css': ['accent'], 'icon': 'accessories-calculator-symbolic'},
-        'vision': {'name': _('Vision'), 'css': ['accent'], 'icon': 'eye-open-negative-filled-symbolic'},
-        'embedding': {'name': _('Embedding'), 'css': ['error'], 'icon': 'brain-augemnted-symbolic'},
-        'tools': {'name': _('Tools'), 'css': ['accent'], 'icon': 'wrench-wide-symbolic'},
-        'reasoning': {'name': _('Reasoning'), 'css': ['accent'], 'icon': 'brain-augemnted-symbolic'},
-        'small': {'name': _('Small'), 'css': ['success'], 'icon': 'leaf-symbolic'},
-        'medium': {'name': _('Medium'), 'css': ['brown'], 'icon': 'sprout-symbolic'},
-        'big': {'name': _('Big'), 'css': ['warning'], 'icon': 'tree-circle-symbolic'},
-        'huge': {'name': _('Huge'), 'css': ['error'], 'icon': 'weight-symbolic'},
-        'language': {'css': [], 'icon': 'language-symbolic'}
-    }
-
-    def __init__(self, name_id:str, show_label:bool):
-        if 'language:' in name_id:
-            self.metadata['language']['name'] = name_id.split(':')[1]
-            name_id = 'language'
-        button_content = Gtk.Box(
-            spacing=5,
-            halign=3
-        )
-        button_content.append(Gtk.Image.new_from_icon_name(self.metadata.get(name_id, {}).get('icon', 'language-symbolic')))
-        if show_label:
-            button_content.append(Gtk.Label(
-                label='<span weight="bold">{}</span>'.format(self.metadata.get(name_id, {}).get('name')),
-                use_markup=True
-            ))
-        super().__init__(
-            css_classes=['subtitle', 'category_pill'] + self.metadata.get(name_id, {}).get('css', []) + ([] if show_label else ['circle']),
-            tooltip_text=self.metadata.get(name_id, {}).get('name'),
-            child=button_content,
-            halign=0 if show_label else 1,
-            focusable=False,
-            hexpand=True
-        )
 
 class InfoBox(Gtk.Box):
     __gtype_name__ = 'AlpacaInformationBoxNEW'
@@ -215,7 +175,38 @@ class AddedModelDialog(Adw.Dialog):
         main_container.append(metadata_container)
 
         tbv=Adw.ToolbarView()
-        tbv.add_top_bar(Adw.HeaderBar(show_title=False))
+        header_bar = Adw.HeaderBar(
+            show_title=False
+        )
+        if 'ollama' in self.model.instance.instance_type:
+            remove_button = Gtk.Button(
+                icon_name='user-trash-symbolic',
+                tooltip_text=_('Remove Model')
+            )
+            remove_button.connect('clicked', lambda button: self.model.prompt_remove_model())
+            header_bar.pack_start(remove_button)
+
+        if len(available_models.get(self.model.get_name().split(':')[0], {}).get('languages', [])) > 1:
+            languages_container = Gtk.FlowBox(
+                max_children_per_line=3,
+                selection_mode=0
+            )
+            for language in ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in available_models.get(self.model.get_name().split(':')[0], {}).get('languages', [])]:
+                languages_container.append(CategoryPill(language, True))
+            languages_scroller = Gtk.ScrolledWindow(
+                child=languages_container,
+                propagate_natural_width=True,
+                propagate_natural_height=True
+            )
+
+            languages_button = Gtk.MenuButton(
+                icon_name='language-symbolic',
+                tooltip_text=_('Languages'),
+                popover=Gtk.Popover(child=languages_scroller)
+            )
+            header_bar.pack_start(languages_button)
+
+        tbv.add_top_bar(header_bar)
         tbv.set_content(Gtk.ScrolledWindow(child=main_container,propagate_natural_height=True, propagate_natural_width=True))
         super().__init__(
             child=tbv,
@@ -224,6 +215,20 @@ class AddedModelDialog(Adw.Dialog):
             height_request=240,
             follows_content_size=True
         )
+
+    def update_profile_picture(self):
+        image = self.model.create_profile_picture(192)
+        if not image:
+            image = Gtk.Image.new_from_icon_name('image-missing-symbolic')
+            image.set_size_request(192, 192)
+        self.image_container.set_child(image)
+
+    def update_voice(self):
+        if self.voice_combo.get_selected() == 0:
+            SQL.insert_or_update_model_voice(self.model.get_name(), None)
+        else:
+            voice = TTS_VOICES.get(self.voice_combo.get_selected_item().get_string())
+            SQL.insert_or_update_model_voice(self.model.get_name(), voice)
 
 class AddedModelButton(Gtk.Button):
     __gtype_name__ = 'AlpacaAddedModelButton'
@@ -297,9 +302,16 @@ class AddedModelButton(Gtk.Button):
         self.update_profile_picture()
         self.details = self.instance.get_model_info(self.get_name())
 
+        if 'ollama' in self.instance.instance_type:
+            self.gesture_click = Gtk.GestureClick(button=3)
+            self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
+            self.add_controller(self.gesture_click)
+            self.gesture_long_press = Gtk.GestureLongPress()
+            self.gesture_long_press.connect("pressed", self.show_popup)
+            self.add_controller(self.gesture_long_press)
+
     def create_profile_picture(self, size:int):
         profile_picture = SQL.get_model_preferences(self.get_name()).get('picture', None)
-        print(self.get_name(), bool(profile_picture))
         if profile_picture:
             image_data = base64.b64decode(profile_picture)
             loader = GdkPixbuf.PixbufLoader.new()
@@ -318,6 +330,7 @@ class AddedModelButton(Gtk.Button):
         self.image_container.set_child(picture)
 
     def change_profile_picture(self):
+        window = self.get_root().get_application().main_alpaca_window
         def set_profile_picture(file):
             if file:
                 picture_b64 = attachments.extract_image(file.get_path(), 480)
@@ -361,20 +374,51 @@ class AddedModelButton(Gtk.Button):
             )
 
     def remove_model(self):
-        #TODO port so it doesn't use window
+        if self.dialog and self.dialog.get_parent():
+            self.dialog.close()
+
+        window = self.get_root().get_application().main_alpaca_window
+
         if self.instance.delete_model(self.get_name()):
             found_models = [i for i, row in enumerate(list(window.model_dropdown.get_model())) if row.model.get_name() == self.get_name()]
             if found_models:
                 window.model_dropdown.get_model().remove(found_models[0])
 
-            self.get_parent().get_parent().remove(self)
-            if len(get_local_models()) == 0:
+            if len(list(self.get_parent().get_parent())) == 1:
                 window.local_model_stack.set_visible_child_name('no-models')
                 window.title_stack.set_visible_child_name('no-models')
+            self.get_parent().get_parent().remove(self)
             SQL.remove_model_preferences(self.get_name())
             threading.Thread(target=window.chat_list_box.get_selected_row().update_profile_pictures()).start()
+
+    def prompt_remove_model(self):
+        dialog.simple(
+            parent = self.get_root(),
+            heading = _('Remove Model?'),
+            body = _("Are you sure you want to remove '{}'?").format(self.model_title),
+            callback = self.remove_model,
+            button_name = _('Remove'),
+            button_appearance = 'destructive'
+        )
 
     def get_dialog(self):
         if not self.dialog:
             self.dialog = AddedModelDialog(self)
         return self.dialog
+
+    def show_popup(self, gesture, x, y):
+        rect = Gdk.Rectangle()
+        rect.x, rect.y, = x, y
+        actions = [
+            [
+                {
+                    'label': _('Delete Model'),
+                    'callback': self.prompt_remove_model,
+                    'icon': 'user-trash-symbolic'
+                }
+            ]
+        ]
+        popup = dialog.Popover(actions)
+        popup.set_parent(self)
+        popup.set_pointing_to(rect)
+        popup.popup()
