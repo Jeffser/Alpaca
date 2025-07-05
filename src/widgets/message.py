@@ -98,7 +98,7 @@ class OptionPopup(Gtk.Popover):
 
     def regenerate_message(self):
         chat = self.message_element.chat
-        model = model_manager.get_selected_model().get_name()
+        model = self.get_root().get_selected_model().get_name()
         for att in list(self.message_element.image_attachment_container.container):
             SQL.delete_attachment(att)
             att.get_parent().remove(att)
@@ -535,7 +535,7 @@ class GlobalMessageTextView(GtkSource.View):
         try:
             texture = clipboard.read_texture_finish(result)
             if texture:
-                if model_manager.get_selected_model().get_vision():
+                if self.get_root().get_selected_model().get_vision():
                     pixbuf = Gdk.pixbuf_get_from_texture(texture)
                     tdir = tempfile.TemporaryDirectory()
                     pixbuf.savev(os.path.join(tdir.name, 'image.png'), 'png', [], [])

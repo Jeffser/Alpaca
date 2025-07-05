@@ -5,7 +5,7 @@ import logging, os, datetime, threading, sys, glob, icu, base64, hashlib, import
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
-from .common import CategoryPill, available_models_data
+from .common import CategoryPill, get_available_models_data
 
 logger = logging.getLogger(__name__)
 
@@ -174,6 +174,7 @@ class AddedModelDialog(Adw.Dialog):
             halign=1
         )
         metadata_container.append(categories_box)
+        available_models_data = get_available_models_data()
         categories = available_models_data.get(self.model.get_name().split(':')[0], {}).get('categories', [])
         languages = available_models_data.get(self.model.get_name().split(':')[0], {}).get('languages', [])
         if not categories:
@@ -440,3 +441,19 @@ class AddedModelButton(Gtk.Button):
         popup.set_pointing_to(rect)
         popup.popup()
 
+class FallbackModel:
+    def get_name(): return None
+    def get_vision() -> bool: return False
+
+class LiteAddedModel: #For LiveChat and QuickChat
+
+    def __init__(self, name:str, vision:bool):
+        self.name = name
+        self.vision = vision
+        self.model_title = prettify_model_name(self.name)
+
+    def get_name(self) -> str:
+        return self.name
+
+    def get_vision(self) -> bool:
+        return self.vision

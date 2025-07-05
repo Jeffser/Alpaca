@@ -99,7 +99,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = Gtk.Template.Child()
-    model_manager = None
 
     powersaver_warning_switch = Gtk.Template.Child()
     mic_group = Gtk.Template.Child()
@@ -301,7 +300,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if selected_model:
             GLib.idle_add(string_list.append, prettify_model_name(selected_model))
         else:
-            [GLib.idle_add(string_list.append, value.model_title) for value in Widgets.model_manager.get_local_models().values()]
+            [GLib.idle_add(string_list.append, value.model_title) for value in Widgets.models.common.get_local_models(self).values()]
         GLib.idle_add(self.model_creator_base.set_model, string_list)
         GLib.idle_add(self.model_creator_stack.set_visible_child_name, 'content')
 
@@ -481,7 +480,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.get_application().lookup_action('instance_manager').activate()
             return
 
-        current_model = Widgets.model_manager.get_selected_model().get_name()
+        current_model = self.get_selected_model().get_name()
         if mode == 2 and len(Widgets.tools.get_enabled_tools(self.tool_listbox)) == 0:
             Widgets.dialog.show_toast(_("No tools enabled."), current_chat.get_root(), 'app.tool_manager', _('Open Tool Manager'))
             return
@@ -595,6 +594,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             # Select Model
             self.auto_select_model()
+
+    def get_selected_model(self):
+        selected_item = self.model_dropdown.get_selected_item()
+        if selected_item:
+            return selected_item.model
+        else:
+            return Widgets.models.added.FallbackModel
 
     def check_alphanumeric(self, editable, text, length, position, allowed_chars):
         if length == 1:
@@ -775,7 +781,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        Widgets.model_manager.window = self
 
         self.model_searchbar.connect_entry(self.searchentry_models)
         self.model_searchbar.connect('notify::search-mode-enabled', lambda *_: self.model_search_changed(self.searchentry_models))
@@ -823,10 +828,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 parent=self,
                 heading=_('Download Model?'),
                 body=_('Please enter the model name following this template: name:tag'),
-                callback=lambda name: threading.Thread(target=Widgets.model_manager.pull_model_confirm, args=(name,)).start(),
+                callback=lambda name: threading.Thread(target=Widgets.models.available.pull_model_confirm, args=(name, self.get_current_instance(), self)).start(),
                 entries={'placeholder': 'deepseek-r1:7b'}
             )],
-            'reload_added_models': [lambda *_: GLib.idle_add(Widgets.model_manager.update_local_model_list)],
+            'reload_added_models': [lambda *_: GLib.idle_add(Widgets.models.update_added_model_list)],
             'delete_all_chats': [lambda *i: self.get_visible_dialog().close() and Widgets.dialog.simple(
                 parent=self,
                 heading=_('Delete All Chats?'),

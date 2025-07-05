@@ -51,3 +51,10 @@ def get_local_models(root) -> dict:
     for model in [item.get_child() for item in list(window.local_model_flowbox) if item.get_child().__gtype_name__ == 'AlpacaAddedModelButton']:
         results[model.get_name()] = model
     return results
+
+def get_available_models_data() -> list:
+    return available_models_data
+
+def set_available_models_data(data:list):
+    global available_models_data
+    available_models_data = data

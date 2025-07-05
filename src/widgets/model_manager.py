@@ -49,12 +49,7 @@ def create_model_confirm(data:dict, gguf_path:str):
 def create_model(data:dict, gguf_path:str=None):
     threading.Thread(target=create_model_confirm, args=(data, gguf_path)).start()
 
-class FallbackModel:
-    def get_name():
-        return None
 
-    def get_vision() -> bool:
-        return False
 
 def get_selected_model():
     selected_item = window.model_dropdown.get_selected_item()

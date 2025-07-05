@@ -1,15 +1,16 @@
 # __init__.py
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 from . import added, available, pulling, common, speech
-from .common import available_models_data
+from .common import set_available_models_data, get_available_models_data
 
 import os, importlib.util
 from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES
 
 def update_available_model_list(root):
-    global available_models_data
     window = root.get_application().main_alpaca_window
-    available_models_data = window.get_current_instance().get_available_models()
+
+    set_available_models_data(window.get_current_instance().get_available_models())
+    available_models_data = get_available_models_data()
 
     window.model_filter_button.set_visible(len(available_models_data) > 0)
     container = Gtk.Box(

@@ -13,7 +13,7 @@ from PIL import Image
 from ..constants import cache_dir
 import requests, json, base64, tempfile, shutil, logging, threading, os, re
 
-from . import blocks, dialog, model_manager, camera
+from . import blocks, dialog, camera
 from ..sql_manager import Instance as SQL
 
 logger = logging.getLogger(__name__)
@@ -490,7 +490,7 @@ class GlobalAttachmentContainer(AttachmentContainer):
             ff.add_mime_type(mime)
             file_filters[0].add_mime_type(mime)
             file_filters.append(ff)
-        if model_manager.get_selected_model().get_vision():
+        if self.get_root().get_selected_model().get_vision():
             file_filters[0].add_pixbuf_formats()
             file_filter = Gtk.FileFilter()
             file_filter.add_pixbuf_formats()
@@ -502,7 +502,7 @@ class GlobalAttachmentContainer(AttachmentContainer):
         )
 
     def request_screenshot(self):
-        if model_manager.get_selected_model().get_vision():
+        if self.get_root().get_selected_model().get_vision():
             bus = SessionBus()
             portal = bus.get("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop")
             subscription = None
@@ -580,7 +580,7 @@ class GlobalAttachmentButton(Gtk.Button):
                 }
             ]
         ]
-        if model_manager.get_selected_model().get_vision():
+        if self.get_root().get_selected_model().get_vision():
             actions[0].append(
                 {
                     'label': _('Attach Screenshot'),
