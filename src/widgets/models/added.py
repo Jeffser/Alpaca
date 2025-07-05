@@ -332,6 +332,9 @@ class AddedModelButton(Gtk.Button):
     def get_search_categories(self) -> set:
         return set([c for c in available_models_data.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
 
+    def get_vision(self) -> bool:
+        return 'vision' in self.data.get('capabilities', [])
+
     def create_profile_picture(self, size:int):
         profile_picture = SQL.get_model_preferences(self.get_name()).get('picture', None)
         if profile_picture:
