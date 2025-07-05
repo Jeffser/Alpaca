@@ -14,15 +14,6 @@ logger = logging.getLogger(__name__)
 
 window = None
 
-available_models = {}
-tts_model_path = os.path.join(cache_dir, 'huggingface', 'hub')
-
-def get_local_models() -> dict:
-    results = {}
-    for model in [item.get_child() for item in list(window.local_model_flowbox) if isinstance(item.get_child(), MODELSTEST.added.AddedModelButton)]:
-        results[model.get_name()] = model
-    return results
-
 def create_model_confirm(data:dict, gguf_path:str):
     if data.get('model') and data.get('model') not in list(get_local_models().keys()):
         model = PullingModel(data.get('model'), add_local_model)
@@ -48,13 +39,4 @@ def create_model_confirm(data:dict, gguf_path:str):
 
 def create_model(data:dict, gguf_path:str=None):
     threading.Thread(target=create_model_confirm, args=(data, gguf_path)).start()
-
-
-
-def get_selected_model():
-    selected_item = window.model_dropdown.get_selected_item()
-    if selected_item:
-        return selected_item.model
-    else:
-        return FallbackModel
 

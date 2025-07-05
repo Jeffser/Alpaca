@@ -771,7 +771,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                         <child>
                                           <object class="AdwComboRow" id="model_creator_base">
                                             <property name="title" translatable="yes">Base</property>
-                                            <signal name="notify::selected-item" handler="model_creator_base_changed"/>
                                           </object>
                                         </child>
                                         <child>
@@ -779,7 +778,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                             <property name="title" translatable="yes">Profile Picture</property>
                                             <child type="suffix">
                                               <object class="GtkButton">
-                                                <signal name="clicked" handler="model_creator_load_profile_picture"/>
                                                 <property name="icon-name">document-open-symbolic</property>
                                                 <property name="tooltip-text" translatable="yes">Open File</property>
                                                 <property name="valign">3</property>
@@ -874,7 +872,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                             <property name="halign">3</property>
                                             <child>
                                               <object class="GtkButton">
-                                                <signal name="clicked" handler="model_creator_cancel"/>
                                                 <property name="tooltip-text" translatable="yes">Cancel</property>
                                                 <style>
                                                   <class name="pill"/>

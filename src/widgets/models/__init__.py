@@ -1,6 +1,6 @@
 # __init__.py
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
-from . import added, available, pulling, common, speech
+from . import added, available, pulling, common, speech, creator
 from .common import set_available_models_data, get_available_models_data
 
 import os, importlib.util

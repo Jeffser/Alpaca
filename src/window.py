@@ -167,6 +167,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             items = options.keys()
         )
 
+    def temptest(self):
+        Widgets.models.creator.ModelCreatorDialog(self.get_current_instance()).present(self)
+
     @Gtk.Template.Callback()
     def instance_changed(self, listbox, row):
         def change_instance():
@@ -177,6 +180,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             GLib.idle_add(Widgets.models.update_added_model_list, self)
             GLib.idle_add(Widgets.models.update_available_model_list, self)
+            GLib.idle_add(self.temptest)
 
             if row:
                 self.settings.set_string('selected-instance', row.instance.instance_id)
@@ -219,49 +223,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 if found_models:
                     data_json['from'] = found_models[0].get_name()
                     Widgets.model_manager.create_model(data_json)
-
-    @Gtk.Template.Callback()
-    def model_creator_cancel(self, button):
-        self.model_creator_stack.set_visible_child_name('introduction')
-
-    @Gtk.Template.Callback()
-    def model_creator_load_profile_picture(self, button):
-        file_filter = Gtk.FileFilter()
-        file_filter.add_pixbuf_formats()
-        Widgets.dialog.simple_file(
-            parent = button.get_root(),
-            file_filters = [file_filter],
-            callback = lambda file: self.model_creator_profile_picture.set_subtitle(file.get_path())
-        )
-
-    @Gtk.Template.Callback()
-    def model_creator_base_changed(self, comborow, params):
-        pretty_name = comborow.get_selected_item().get_string()
-        if pretty_name != 'GGUF' and not comborow.get_subtitle():
-            GLib.idle_add(self.model_creator_tag.set_text, 'custom')
-
-            system = None
-            modelfile = None
-
-            found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.name == pretty_name]
-            if found_models:
-                GLib.idle_add(self.model_creator_name.set_text, found_models[0].get_name().split(':')[0])
-                system = found_models[0].data.get('system')
-                modelfile = found_models[0].data.get('modelfile')
-
-            if system:
-                context_buffer = self.model_creator_context.get_buffer()
-                GLib.idle_add(context_buffer.delete, context_buffer.get_start_iter(), context_buffer.get_end_iter())
-                GLib.idle_add(context_buffer.insert_at_cursor, system, len(system))
-
-            if modelfile:
-                for line in modelfile.splitlines():
-                    if line.startswith('PARAMETER top_k'):
-                        top_k = int(line.split(' ')[2])
-                        GLib.idle_add(self.model_creator_imagination.set_value, top_k)
-                    elif line.startswith('PARAMETER top_p'):
-                        top_p = int(float(line.split(' ')[2]) * 100)
-                        GLib.idle_add(self.model_creator_focus.set_value, top_p)
 
     @Gtk.Template.Callback()
     def model_creator_gguf(self, button):
@@ -831,7 +792,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 callback=lambda name: threading.Thread(target=Widgets.models.available.pull_model_confirm, args=(name, self.get_current_instance(), self)).start(),
                 entries={'placeholder': 'deepseek-r1:7b'}
             )],
-            'reload_added_models': [lambda *_: GLib.idle_add(Widgets.models.update_added_model_list)],
+            'reload_added_models': [lambda *_: GLib.idle_add(Widgets.models.update_added_model_list, self)],
             'delete_all_chats': [lambda *i: self.get_visible_dialog().close() and Widgets.dialog.simple(
                 parent=self,
                 heading=_('Delete All Chats?'),
@@ -872,3 +833,5 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.notice_dialog.present(self)
         else:
             self.main_navigation_view.replace_with_tags(['welcome'])
+
+

@@ -45,7 +45,7 @@ class PullingModelDialog(Adw.Dialog):
             wrap=True,
             wrap_mode=2,
             justify=2,
-            label=_("Downloading…")
+            label=_("Downloading...")
         )
         status_container = Gtk.Box(
             orientation=1,
@@ -233,7 +233,7 @@ class PullingModelButton(Gtk.Button):
                 GLib.idle_add(self.progressbar.pulse)
                 GLib.idle_add(self.dialog.progressbar.pulse)
 
-            label_text = [line for line in self.dialog.status_label.get_text().split('\n') if line != '']
+            label_text = [line for line in self.dialog.status_label.get_label().split('\n') if line != '']
             if data.get('status') and (len(label_text) == 0 or label_text[-1] != data.get('status')):
                 label_text.append(data.get('status'))
                 GLib.idle_add(self.dialog.status_label.set_label, '\n'.join(label_text))
