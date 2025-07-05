@@ -148,7 +148,7 @@ class ModelCreatorDialog(Adw.Dialog):
 
         super().__init__(
             child=tbv,
-            title=_('Model Creator'),
+            title=_('Create Model'),
             width_request=360,
             height_request=240,
             content_width=500,

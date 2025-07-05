@@ -451,6 +451,11 @@ class AddedModelButton(Gtk.Button):
         actions = [
             [
                 {
+                    'label': _('Create Child'),
+                    'callback': self.create_child,
+                    'icon': 'list-add-symbolic'
+                },
+                {
                     'label': _('Delete Model'),
                     'callback': self.prompt_remove_model,
                     'icon': 'user-trash-symbolic'
