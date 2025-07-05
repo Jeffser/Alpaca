@@ -198,6 +198,13 @@ class AddedModelDialog(Adw.Dialog):
             remove_button.connect('clicked', lambda button: self.model.prompt_remove_model())
             header_bar.pack_start(remove_button)
 
+            create_child_button = Gtk.Button(
+                icon_name='list-add-symbolic',
+                tooltip_text=_('Create Child')
+            )
+            create_child_button.connect('clicked', lambda button: self.model.create_child())
+            header_bar.pack_start(create_child_button)
+
         if len(available_models_data.get(self.model.get_name().split(':')[0], {}).get('languages', [])) > 1:
             languages_container = Gtk.FlowBox(
                 max_children_per_line=3,
@@ -231,7 +238,8 @@ class AddedModelDialog(Adw.Dialog):
             title=self.model.model_title,
             width_request=360,
             height_request=240,
-            follows_content_size=True
+            follows_content_size=True,
+            default_widget=self.image_container
         )
 
     def update_profile_picture(self):
@@ -425,6 +433,16 @@ class AddedModelButton(Gtk.Button):
             callback = self.remove_model,
             button_name = _('Remove'),
             button_appearance = 'destructive'
+        )
+
+    def create_child(self):
+        dialog = self.get_root().get_visible_dialog()
+        if dialog and isinstance(dialog, AddedModelDialog):
+            dialog.close()
+        self.get_root().get_application().main_alpaca_window.model_creator_existing(
+            widget=self,
+            selected_model=self.model_title,
+            instance=self.instance
         )
 
     def show_popup(self, gesture, x, y):

@@ -190,8 +190,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         )
 
     @Gtk.Template.Callback()
-    def model_creator_existing(self, button, selected_model:str=None):
-        Widgets.models.creator.ModelCreatorDialog(self.get_current_instance(), selected_model, False).present(self)
+    def model_creator_existing(self, widget, selected_model:str=None, instance=None):
+        if not instance:
+            instance = self.get_current_instance()
+        Widgets.models.creator.ModelCreatorDialog(instance, selected_model, False).present(widget.get_root())
 
     @Gtk.Template.Callback()
     def model_manager_stack_changed(self, viewstack, params):
