@@ -1,7 +1,7 @@
 # creator.py
 
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject
-import logging, os, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util
+import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
@@ -61,17 +61,31 @@ class ModelCreatorDialog(Adw.Dialog):
         self.name_element.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
         self.tag_element.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
 
+        context_attachment_button = Gtk.Button(
+            valign=3,
+            icon_name='chain-link-loose-symbolic',
+            tooltip_text=_('Add Files'),
+            css_classes=['flat']
+        )
+        context_attachment_button.connect('clicked', lambda button: self.context_attachment_container.attachment_request(True))
+
         pg = Adw.PreferencesGroup(
             title=_('Context'),
-            description=_('Describe the desired behavior of the model in its primary language (typically English).')
+            description=_('Describe the desired behavior of the model in its primary language (typically English).'),
+            header_suffix=context_attachment_button
         )
         pp.add(pg)
 
         #CONTEXT
+        self.context_attachment_container = attachments.GlobalAttachmentContainer()
+        self.context_attachment_container.set_margin_bottom(10)
+        pg.add(self.context_attachment_container)
+
         self.context_element = Gtk.TextView(
             wrap_mode=3,
             accepts_tab=False,
             overflow=1,
+            vexpand=True,
             css_classes=['p10', 'modelfile_textview']
         )
 
@@ -201,6 +215,21 @@ class ModelCreatorDialog(Adw.Dialog):
                 modelfile = found_models[0].data.get('modelfile')
 
             if system:
+                for attachment in list(self.context_attachment_container.container):
+                    attachment.get_parent().remove(attachment)
+
+                pattern = re.compile(r"```(.+?)\n(.*?)```", re.DOTALL)
+                matches = pattern.finditer(system)
+                for match in matches:
+                    attachment = attachments.Attachment(
+                        file_id='-1',
+                        file_name=match.group(1).strip(),
+                        file_type='plain_text',
+                        file_content=match.group(2).strip()
+                    )
+                    self.context_attachment_container.add_attachment(attachment)
+
+                system = pattern.sub('', system).strip()
                 context_buffer = self.context_element.get_buffer()
                 context_buffer.delete(context_buffer.get_start_iter(), context_buffer.get_end_iter())
                 context_buffer.insert_at_cursor(system, len(system.encode('utf-8')))
@@ -223,7 +252,13 @@ class ModelCreatorDialog(Adw.Dialog):
         profile_picture = self.profile_picture_element.get_subtitle()
 
         context_buffer = self.context_element.get_buffer()
-        system_message = context_buffer.get_text(context_buffer.get_start_iter(), context_buffer.get_end_iter(), False).replace('"', '\\"')
+        system_message = []
+
+        for attachment in self.context_attachment_container.get_content():
+            system_message.append('```{}\n{}\n```'.format(attachment.get('name'), attachment.get('content').strip()))
+
+        system_message.append(context_buffer.get_text(context_buffer.get_start_iter(), context_buffer.get_end_iter(), False).replace('"', '\\"'))
+        system_message = '\n\n'.join(system_message).strip()
 
         top_k = self.imagination_element.get_value()
         top_p = self.focus_element.get_value() / 100

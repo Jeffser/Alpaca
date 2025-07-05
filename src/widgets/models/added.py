@@ -1,7 +1,7 @@
 # added.py
 
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject
-import logging, os, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util
+import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
@@ -161,10 +161,42 @@ class AddedModelDialog(Adw.Dialog):
         for name, value in metadata.items():
             if value:
                 information_container.append(InfoBox(name, value, True))
-        if self.model.data.get('system'):
-            metadata_container.append(InfoBox(_('Context'), self.model.data.get('system'), False))
         if self.model.data.get('description'):
             metadata_container.append(InfoBox(_('Description'), self.model.data.get('description'), False))
+        if self.model.data.get('system'):
+            system = self.model.data.get('system')
+
+            context_attachment_box = Gtk.Box(
+                orientation=1,
+                spacing=5
+            )
+            metadata_container.append(context_attachment_box)
+
+            context_attachment_box.append(Gtk.Label(
+                label=_('Files'),
+                css_classes=['subtitle', 'caption', 'dim-label'],
+                hexpand=True,
+                ellipsize=3,
+                tooltip_text=_('Files'),
+                halign=1
+            ))
+
+            context_attachment_container = attachments.GlobalAttachmentContainer()
+            context_attachment_box.append(context_attachment_container)
+
+            pattern = re.compile(r"```(.+?)\n(.*?)```", re.DOTALL)
+            matches = pattern.finditer(system)
+            for match in matches:
+                attachment = attachments.Attachment(
+                    file_id='-1',
+                    file_name=match.group(1).strip(),
+                    file_type='model_context',
+                    file_content=match.group(2).strip()
+                )
+                context_attachment_container.add_attachment(attachment)
+
+            system = pattern.sub('', system).strip()
+            metadata_container.append(InfoBox(_('Context'), system, False))
 
         categories_box = Adw.WrapBox(
             hexpand=True,
