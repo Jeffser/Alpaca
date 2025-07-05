@@ -111,14 +111,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     banner = Gtk.Template.Child()
 
-    model_creator_stack = Gtk.Template.Child()
-    model_creator_base = Gtk.Template.Child()
-    model_creator_profile_picture = Gtk.Template.Child()
-    model_creator_name = Gtk.Template.Child()
-    model_creator_tag = Gtk.Template.Child()
-    model_creator_context = Gtk.Template.Child()
-    model_creator_imagination = Gtk.Template.Child()
-    model_creator_focus = Gtk.Template.Child()
     model_dropdown = Gtk.Template.Child()
     notice_dialog = Gtk.Template.Child()
 
@@ -167,9 +159,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             items = options.keys()
         )
 
-    def temptest(self):
-        Widgets.models.creator.ModelCreatorDialog(self.get_current_instance()).present(self)
-
     @Gtk.Template.Callback()
     def instance_changed(self, listbox, row):
         def change_instance():
@@ -180,7 +169,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             GLib.idle_add(Widgets.models.update_added_model_list, self)
             GLib.idle_add(Widgets.models.update_available_model_list, self)
-            GLib.idle_add(self.temptest)
 
             if row:
                 self.settings.set_string('selected-instance', row.instance.instance_id)
@@ -189,41 +177,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if listbox.get_sensitive():
             threading.Thread(target=change_instance).start()
 
-
-    @Gtk.Template.Callback()
-    def model_creator_accept(self, button):
-        profile_picture = self.model_creator_profile_picture.get_subtitle()
-        model_name = '{}:{}'.format(self.model_creator_name.get_text(), self.model_creator_tag.get_text() if self.model_creator_tag.get_text() else 'latest').replace(' ', '-').lower()
-        context_buffer = self.model_creator_context.get_buffer()
-        system_message = context_buffer.get_text(context_buffer.get_start_iter(), context_buffer.get_end_iter(), False).replace('"', '\\"')
-        top_k = self.model_creator_imagination.get_value()
-        top_p = self.model_creator_focus.get_value() / 100
-
-        found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.model.get_name() == model_name]
-        if not found_models:
-            if profile_picture:
-                SQL.insert_or_update_model_picture(model_name, Widgets.attachments.extract_image(profile_picture, 480))
-
-            data_json = {
-                'model': model_name,
-                'system': system_message,
-                'parameters': {
-                    'top_k': top_k,
-                    'top_p': top_p
-                },
-                'stream': True
-            }
-
-            if self.model_creator_base.get_subtitle():
-                gguf_path = self.model_creator_base.get_subtitle()
-                Widgets.model_manager.create_model(data_json, gguf_path)
-            else:
-                pretty_name = self.model_creator_base.get_selected_item().get_string()
-                found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.name == pretty_name]
-                if found_models:
-                    data_json['from'] = found_models[0].get_name()
-                    Widgets.model_manager.create_model(data_json)
-
     @Gtk.Template.Callback()
     def model_creator_gguf(self, button):
         def result(file):
@@ -231,45 +184,22 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 file_path = file.get_path()
             except Exception as e:
                 return
-            context_buffer = self.model_creator_context.get_buffer()
-            context_buffer.delete(context_buffer.get_start_iter(), context_buffer.get_end_iter())
-            self.model_creator_profile_picture.set_subtitle('')
-            string_list = Gtk.StringList()
-            string_list.append('GGUF')
-            self.model_creator_base.set_model(string_list)
-            self.model_creator_base.set_subtitle(file_path)
-            self.model_creator_stack.set_visible_child_name('content')
+            Widgets.models.creator.ModelCreatorDialog(self.get_current_instance(), file_path, True).present(self)
 
         Widgets.dialog.simple_file(
-            parent = button.get_root(),
+            parent = self,
             file_filters = [self.file_filter_gguf],
             callback = result
         )
 
     @Gtk.Template.Callback()
     def model_creator_existing(self, button, selected_model:str=None):
-        GLib.idle_add(self.model_manager_stack.set_visible_child_name, 'model_creator')
-        context_buffer = self.model_creator_context.get_buffer()
-        context_buffer.delete(context_buffer.get_start_iter(), context_buffer.get_end_iter())
-        GLib.idle_add(self.model_creator_profile_picture.set_subtitle, '')
-        GLib.idle_add(self.model_creator_base.set_subtitle, '')
-        factory = Gtk.SignalListItemFactory()
-        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
-        factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
-        GLib.idle_add(self.model_creator_base.set_factory, factory)
-        string_list = Gtk.StringList()
-        if selected_model:
-            GLib.idle_add(string_list.append, prettify_model_name(selected_model))
-        else:
-            [GLib.idle_add(string_list.append, value.model_title) for value in Widgets.models.common.get_local_models(self).values()]
-        GLib.idle_add(self.model_creator_base.set_model, string_list)
-        GLib.idle_add(self.model_creator_stack.set_visible_child_name, 'content')
+        Widgets.models.creator.ModelCreatorDialog(self.get_current_instance(), selected_model, False).present(self)
 
     @Gtk.Template.Callback()
     def model_manager_stack_changed(self, viewstack, params):
         self.local_model_flowbox.unselect_all()
         self.available_model_flowbox.unselect_all()
-        self.model_creator_stack.set_visible_child_name('introduction')
         self.model_search_button.set_sensitive(viewstack.get_visible_child_name() not in ('model_creator', 'instances'))
         self.model_search_button.set_active(self.model_search_button.get_active() and viewstack.get_visible_child_name() not in ('model_creator', 'instances'))
 
@@ -808,8 +738,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
-        self.model_creator_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
-        self.model_creator_tag.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
+        #self.model_creator_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
+        #self.model_creator_tag.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
+        #TODO
 
         def verify_powersaver_mode():
             self.banner.set_revealed(

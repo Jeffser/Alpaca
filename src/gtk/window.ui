@@ -717,192 +717,39 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                         <property name="title" translatable="yes">Creator</property>
                         <property name="icon-name">brain-augemnted-symbolic</property>
                         <property name="child">
-                          <object class="GtkStack" id="model_creator_stack">
-                            <property name="transition_type">7</property>
-                            <child>
-                              <object class="GtkStackPage">
-                                <property name="name">introduction</property>
-                                <property name="child">
-                                  <object class="AdwStatusPage">
-                                    <property name="hexpand">true</property>
-                                    <property name="title" translatable="yes">Model Creator</property>
-                                    <property name="description" translatable="yes">Select a method of importing a model to continue</property>
-                                    <property name="icon-name">brain-augemnted-symbolic</property>
+                          <object class="AdwStatusPage">
+                            <property name="hexpand">true</property>
+                            <property name="title" translatable="yes">Model Creator</property>
+                            <property name="description" translatable="yes">Select a method of importing a model to continue</property>
+                            <property name="icon-name">brain-augemnted-symbolic</property>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="halign">3</property>
+                                <property name="spacing">10</property>
+                                <child>
+                                  <object class="GtkButton">
+                                    <signal name="clicked" handler="model_creator_gguf"/>
                                     <property name="child">
-                                      <object class="GtkBox">
-                                        <property name="halign">3</property>
-                                        <property name="spacing">10</property>
-                                        <child>
-                                          <object class="GtkButton">
-                                            <signal name="clicked" handler="model_creator_gguf"/>
-                                            <property name="child">
-                                              <object class="AdwButtonContent">
-                                                <property name="icon-name">document-open-symbolic</property>
-                                                <property name="label" translatable="yes">GGUF File</property>
-                                              </object>
-                                            </property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="GtkButton">
-                                            <signal name="clicked" handler="model_creator_existing"/>
-                                            <property name="child">
-                                              <object class="AdwButtonContent">
-                                                <property name="icon-name">chain-link-loose-symbolic</property>
-                                                <property name="label" translatable="yes">Existing Model</property>
-                                              </object>
-                                            </property>
-                                          </object>
-                                        </child>
+                                      <object class="AdwButtonContent">
+                                        <property name="icon-name">document-open-symbolic</property>
+                                        <property name="label" translatable="yes">GGUF File</property>
                                       </object>
                                     </property>
                                   </object>
-                                </property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkStackPage">
-                                <property name="name">content</property>
-                                <property name="child">
-                                  <object class="AdwPreferencesPage">
-                                    <child>
-                                      <object class="AdwPreferencesGroup">
-                                        <property name="title" translatable="yes">Identity</property>
-                                        <child>
-                                          <object class="AdwComboRow" id="model_creator_base">
-                                            <property name="title" translatable="yes">Base</property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="AdwActionRow" id="model_creator_profile_picture">
-                                            <property name="title" translatable="yes">Profile Picture</property>
-                                            <child type="suffix">
-                                              <object class="GtkButton">
-                                                <property name="icon-name">document-open-symbolic</property>
-                                                <property name="tooltip-text" translatable="yes">Open File</property>
-                                                <property name="valign">3</property>
-                                                <style>
-                                                  <class name="flat"/>
-                                                </style>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="AdwEntryRow" id="model_creator_name">
-                                            <property name="title" translatable="yes">Name</property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="AdwEntryRow" id="model_creator_tag">
-                                            <property name="title" translatable="yes">Tag</property>
-                                          </object>
-                                        </child>
+                                </child>
+                                <child>
+                                  <object class="GtkButton">
+                                    <signal name="clicked" handler="model_creator_existing"/>
+                                    <property name="child">
+                                      <object class="AdwButtonContent">
+                                        <property name="icon-name">chain-link-loose-symbolic</property>
+                                        <property name="label" translatable="yes">Existing Model</property>
                                       </object>
-                                    </child>
-                                    <child>
-                                      <object class="AdwPreferencesGroup">
-                                        <property name="title" translatable="yes">Context</property>
-                                        <property name="description" translatable="yes">Describe the desired behavior of the model in its primary language (typically English).</property>
-                                        <child>
-                                          <object class="GtkScrolledWindow">
-                                            <property name="min-content-height">100</property>
-                                            <property name="vexpand">true</property>
-                                            <property name="propagate-natural-height">true</property>
-                                            <property name="overflow">1</property>
-                                            <style>
-                                              <class name="undershoot-bottom"/>
-                                              <class name="card"/>
-                                            </style>
-                                            <property name="child">
-                                              <object class="GtkTextView" id="model_creator_context">
-                                                <property name="wrap-mode">3</property>
-                                                <property name="overflow">1</property>
-                                                <property name="accepts-tab">false</property>
-                                                <style>
-                                                  <class name="p10"/>
-                                                  <class name="modelfile_textview"/>
-                                                </style>
-                                              </object>
-                                            </property>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="AdwPreferencesGroup">
-                                        <property name="title" translatable="yes">Behavior</property>
-                                        <child>
-                                          <object class="AdwSpinRow" id="model_creator_imagination">
-                                            <property name="title" translatable="yes">Imagination</property>
-                                            <property name="subtitle" translatable="yes">A higher number results in more diverse answers from the model. (top_k)</property>
-                                            <property name="digits">0</property>
-                                            <property name="adjustment">
-                                              <object class="GtkAdjustment">
-                                                <property name="lower">0</property>
-                                                <property name="upper">100</property>
-                                                <property name="step-increment">1</property>
-                                              </object>
-                                            </property>
-                                            <property name="value">40</property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="AdwSpinRow" id="model_creator_focus">
-                                            <property name="title" translatable="yes">Focus</property>
-                                            <property name="subtitle" translatable="yes">A higher number widens the amount of possible answers. (top_p)</property>
-                                            <property name="digits">0</property>
-                                            <property name="adjustment">
-                                              <object class="GtkAdjustment">
-                                                <property name="lower">0</property>
-                                                <property name="upper">100</property>
-                                                <property name="step-increment">1</property>
-                                              </object>
-                                            </property>
-                                            <property name="value">90</property>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="AdwPreferencesGroup">
-                                        <child>
-                                          <object class="GtkBox">
-                                            <property name="spacing">10</property>
-                                            <property name="halign">3</property>
-                                            <child>
-                                              <object class="GtkButton">
-                                                <property name="tooltip-text" translatable="yes">Cancel</property>
-                                                <style>
-                                                  <class name="pill"/>
-                                                </style>
-                                                <property name="label" translatable="yes">Cancel</property>
-                                              </object>
-                                            </child>
-                                            <child>
-                                              <object class="GtkButton">
-                                                <signal name="clicked" handler="model_creator_accept"/>
-                                                <property name="tooltip-text" translatable="yes">Add Model</property>
-                                                <style>
-                                                  <class name="pill"/>
-                                                  <class name="suggested-action"/>
-                                                </style>
-                                                <property name="child">
-                                                  <object class="AdwButtonContent">
-                                                    <property name="icon-name">list-add-symbolic</property>
-                                                    <property name="label" translatable="yes">Add Model</property>
-                                                  </object>
-                                                </property>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
+                                    </property>
                                   </object>
-                                </property>
+                                </child>
                               </object>
-                            </child>
+                            </property>
                           </object>
                         </property>
                       </object>
