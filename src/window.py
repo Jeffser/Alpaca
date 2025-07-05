@@ -62,9 +62,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     gettext.textdomain('com.jeffser.Alpaca')
     _ = gettext.gettext
 
-    #Variables
-    attachments = {}
-
     #Elements
     zoom_spin = Gtk.Template.Child()
     local_model_stack = Gtk.Template.Child()
@@ -122,7 +119,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_manager_bottom_view_switcher = Gtk.Template.Child()
     model_manager_top_view_switcher = Gtk.Template.Child()
     last_selected_instance_row = None
-
 
     @Gtk.Template.Callback()
     def closing_notice(self, dialog):

@@ -7,7 +7,6 @@ widgets = [
   'terminal.py',
   'dialog.py',
   'attachments.py',
-  'model_manager.py',
   'voice.py',
   'camera.py'
 ]
