@@ -95,7 +95,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     background_switch = Gtk.Template.Child()
 
     file_filter_db = Gtk.Template.Child()
-    file_filter_gguf = Gtk.Template.Child()
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = Gtk.Template.Child()
@@ -186,9 +185,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 return
             Widgets.models.creator.ModelCreatorDialog(self.get_current_instance(), file_path, True).present(self)
 
+        file_filter = Gtk.FileFilter()
+        file_filter.add_suffix('gguf')
         Widgets.dialog.simple_file(
             parent = self,
-            file_filters = [self.file_filter_gguf],
+            file_filters = [file_filter],
             callback = result
         )
 
@@ -493,12 +494,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             return Widgets.models.added.FallbackModel
 
-    def check_alphanumeric(self, editable, text, length, position, allowed_chars):
-        if length == 1:
-            new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
-            if new_text != text:
-                editable.stop_emission_by_name("insert-text")
-
     def add_chat(self, chat_name:str, chat_id:str, chat_type:str, mode:int) -> Widgets.chat.Chat or None: #mode = 0: append, mode = 1: prepend
         chat_name = chat_name.strip()
         if chat_name and mode in (0, 1):
@@ -737,10 +732,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         }
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
-
-        #self.model_creator_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
-        #self.model_creator_tag.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
-        #TODO
 
         def verify_powersaver_mode():
             self.banner.set_revealed(

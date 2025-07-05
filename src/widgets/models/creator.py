@@ -58,6 +58,9 @@ class ModelCreatorDialog(Adw.Dialog):
         )
         pg.add(self.tag_element)
 
+        self.name_element.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
+        self.tag_element.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
+
         pg = Adw.PreferencesGroup(
             title=_('Context'),
             description=_('Describe the desired behavior of the model in its primary language (typically English).')
@@ -277,3 +280,9 @@ class ModelCreatorDialog(Adw.Dialog):
                     GLib.idle_add(window.local_model_flowbox.remove, model.get_parent())
                     return
             self.instance.create_model(data, model.update_progressbar)
+
+    def check_alphanumeric(self, editable, text, length, position, allowed_chars):
+        if length == 1:
+            new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
+            if new_text != text:
+                editable.stop_emission_by_name("insert-text")
