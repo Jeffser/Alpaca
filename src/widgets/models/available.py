@@ -22,7 +22,8 @@ class PullModelButton(Gtk.Button):
             Gtk.Image.new_from_icon_name('check-plain-symbolic' if downloaded else 'folder-download-symbolic')
         )
         text_container = Gtk.Box(
-            orientation=1
+            orientation=1,
+            valign=3
         )
         main_container.append(text_container)
         text_container.append(
@@ -36,12 +37,21 @@ class PullModelButton(Gtk.Button):
             Gtk.Label(
                 label=size,
                 css_classes=['dimmed', 'caption'],
-                hexpand=True
+                hexpand=True,
+                visible=bool(size)
             )
         )
+        tooltip_text = ''
+        if downloaded:
+            tooltip_text = _('Already Added')
+        elif size:
+            tooltip_text = _("Pull '{}'").format(tag_name.title())
+        else:
+            tooltip_text = _('Add Model')
+
         super().__init__(
             child=main_container,
-            tooltip_text=_('Already Downloaded') if downloaded else _("Pull '{}'").format(tag_name.title()),
+            tooltip_text=tooltip_text,
             sensitive=not downloaded,
             name=tag_name
         )
@@ -89,34 +99,44 @@ class AvailableModelDialog(Adw.Dialog):
             halign=3
         )
         model_list = get_local_models(self.model.get_root())
-        for tag in self.model.data.get('tags', []):
-            downloaded = '{}:{}'.format(self.model.get_name(), tag[0]) in list(model_list.keys())
-            button = PullModelButton(tag[0], tag[1], downloaded)
-            button.connect('clicked', lambda button: self.model.pull_model(button.get_name()))
+        if len(self.model.data.get('tags', [])) > 0:
+            for tag in self.model.data.get('tags', []):
+                downloaded = '{}:{}'.format(self.model.get_name(), tag[0]) in list(model_list.keys())
+                button = PullModelButton(tag[0], tag[1], downloaded)
+                button.connect('clicked', lambda button: self.model.pull_model(button.get_name()))
+                tag_list.append(button)
+                button.get_parent().set_focusable(False)
+        else:
+            downloaded = self.model.get_name() in list(model_list.keys())
+            button = PullModelButton(_('Added') if downloaded else _('Add'), None, downloaded)
+            button.connect('clicked', lambda button: self.model.pull_model(None))
             tag_list.append(button)
             button.get_parent().set_focusable(False)
+
         main_container.append(tag_list)
 
-        main_container.append(Gtk.Label(
-            label=_("By downloading this model you accept the license agreement available on the model's website"),
-            wrap=True,
-            wrap_mode=2,
-            css_classes=['dim-label', 'p10'],
-            justify=2,
-            use_markup=True
-        ))
+        if self.model.data.get('url'):
+            main_container.append(Gtk.Label(
+                label=_("By downloading this model you accept the license agreement available on the model's website"),
+                wrap=True,
+                wrap_mode=2,
+                css_classes=['dim-label', 'p10'],
+                justify=2,
+                use_markup=True
+            ))
 
         tbv=Adw.ToolbarView()
         header_bar = Adw.HeaderBar(
             show_title=False
         )
 
-        web_button = Gtk.Button(
-            icon_name='globe-symbolic',
-            tooltip_text=self.model.data.get('url')
-        )
-        web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri(self.model.data.get('url')))
-        header_bar.pack_start(web_button)
+        if self.model.data.get('url'):
+            web_button = Gtk.Button(
+                icon_name='globe-symbolic',
+                tooltip_text=self.model.data.get('url')
+            )
+            web_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri(self.model.data.get('url')))
+            header_bar.pack_start(web_button)
 
         if len(self.model.data.get('languages', [])) > 1:
             languages_container = Gtk.FlowBox(
@@ -190,7 +210,8 @@ class AvailableModelButton(Gtk.Button):
             hexpand=True,
             wrap=True,
             wrap_mode=2,
-            halign=1
+            halign=1,
+            visible=self.data.get('description')
         )
         container.append(description_label)
         categories_box = Adw.WrapBox(
@@ -200,7 +221,8 @@ class AvailableModelButton(Gtk.Button):
             justify=0,
             halign=1,
             valign=3,
-            vexpand=True
+            vexpand=True,
+            visible=len(self.data.get('categories', [])) > 0
         )
         container.append(categories_box)
         for category in set(self.data.get('categories', [])):

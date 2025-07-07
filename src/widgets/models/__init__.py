@@ -42,8 +42,8 @@ def update_available_model_list(root):
     )
 
     for name, model_info in available_models_data.items():
-        if 'small' in model_info['categories'] or 'medium' in model_info['categories'] or 'big' in model_info['categories'] or os.getenv('ALPACA_SHOW_HUGE_MODELS', '0') == '1':
-            if 'embedding' not in model_info['categories'] or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1':
+        if len(model_info.get('categories', [])) == 0 or 'small' in model_info.get('categories', []) or 'medium' in model_info.get('categories', []) or 'big' in model_info.get('categories', []) or os.getenv('ALPACA_SHOW_HUGE_MODELS', '0') == '1':
+            if 'embedding' not in model_info.get('categories', []) or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1':
                 model_element = available.AvailableModelButton(name, model_info)
                 window.available_model_flowbox.append(model_element)
                 model_element.get_parent().set_focusable(False)

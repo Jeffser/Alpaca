@@ -99,7 +99,7 @@ class AttachmentDialog(Adw.Dialog):
         )
         header = Adw.HeaderBar()
 
-        if self.attachment.file_type == 'model_context':
+        if self.attachment.file_type != 'model_context':
             delete_button = Gtk.Button(
                 css_classes=['error'],
                 icon_name='user-trash-symbolic',

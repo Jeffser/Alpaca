@@ -222,14 +222,14 @@ class AddedModelDialog(Adw.Dialog):
         header_bar = Adw.HeaderBar(
             show_title=False
         )
-        if 'ollama' in self.model.instance.instance_type:
-            remove_button = Gtk.Button(
-                icon_name='user-trash-symbolic',
-                tooltip_text=_('Remove Model')
-            )
-            remove_button.connect('clicked', lambda button: self.model.prompt_remove_model())
-            header_bar.pack_start(remove_button)
+        remove_button = Gtk.Button(
+            icon_name='user-trash-symbolic',
+            tooltip_text=_('Remove Model')
+        )
+        remove_button.connect('clicked', lambda button: self.model.prompt_remove_model())
+        header_bar.pack_start(remove_button)
 
+        if 'ollama' in self.model.instance.instance_type:
             create_child_button = Gtk.Button(
                 icon_name='list-add-symbolic',
                 tooltip_text=_('Create Child')
@@ -358,13 +358,12 @@ class AddedModelButton(Gtk.Button):
         self.connect('clicked', lambda btn: AddedModelDialog(self).present(self.get_root()))
         self.update_profile_picture()
 
-        if 'ollama' in self.instance.instance_type:
-            self.gesture_click = Gtk.GestureClick(button=3)
-            self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
-            self.add_controller(self.gesture_click)
-            self.gesture_long_press = Gtk.GestureLongPress()
-            self.gesture_long_press.connect("pressed", self.show_popup)
-            self.add_controller(self.gesture_long_press)
+        self.gesture_click = Gtk.GestureClick(button=3)
+        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
+        self.add_controller(self.gesture_click)
+        self.gesture_long_press = Gtk.GestureLongPress()
+        self.gesture_long_press.connect("pressed", self.show_popup)
+        self.add_controller(self.gesture_long_press)
 
     def get_search_string(self) -> str:
         return '{} {} {}'.format(self.get_name(), self.model_title, self.data.get('system', None))
@@ -483,17 +482,19 @@ class AddedModelButton(Gtk.Button):
         actions = [
             [
                 {
-                    'label': _('Create Child'),
-                    'callback': self.create_child,
-                    'icon': 'list-add-symbolic'
-                },
-                {
-                    'label': _('Delete Model'),
+                    'label': _('Remove Model'),
                     'callback': self.prompt_remove_model,
                     'icon': 'user-trash-symbolic'
                 }
             ]
         ]
+        if 'ollama' in self.instance.instance_type:
+            actions[0].insert(0, {
+                'label': _('Create Child'),
+                'callback': self.create_child,
+                'icon': 'list-add-symbolic'
+            })
+
         popup = dialog.Popover(actions)
         popup.set_parent(self)
         popup.set_pointing_to(rect)
