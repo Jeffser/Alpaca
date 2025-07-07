@@ -5,7 +5,7 @@ from gi.repository import Gtk, Gio, Adw
 available_models_data = {}
 
 class CategoryPill(Adw.Bin):
-    __gtype_name__ = 'AlpacaCategoryPillNEW'
+    __gtype_name__ = 'AlpacaCategoryPill'
 
     metadata = {
         'multilingual': {'name': _('Multilingual'), 'css': ['accent'], 'icon': 'language-symbolic'},

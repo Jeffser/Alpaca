@@ -23,7 +23,7 @@ class AddedModelRow(GObject.Object):
         return self.model.model_title
 
 class InfoBox(Gtk.Box):
-    __gtype_name__ = 'AlpacaInformationBoxNEW'
+    __gtype_name__ = 'AlpacaInformationBox'
 
     def __init__(self, title:str, description:str, single_line_description:bool):
         super().__init__(
