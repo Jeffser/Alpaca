@@ -5,7 +5,7 @@ import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, im
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
-from .common import CategoryPill, get_local_models
+from .common import CategoryPill, get_local_models, prepend_added_model
 from .pulling import PullingModelButton
 from .added import AddedModelButton
 
@@ -294,7 +294,7 @@ class ModelCreatorDialog(Adw.Dialog):
         if data.get('model') and data.get('model') not in list(get_local_models(self.get_root()).keys()):
             model = PullingModelButton(
                 data.get('model'),
-                lambda model_name, window=window, instance=self.instance: window.local_model_flowbox.prepend(AddedModelButton(model_name, instance)),
+                lambda model_name, window=window, instance=self.instance: prepend_added_model(window, AddedModelButton(model_name, instance)),
                 self.instance
             )
             window.local_model_flowbox.prepend(model)

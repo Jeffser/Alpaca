@@ -8,7 +8,7 @@ from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES
 
 def update_available_model_list(root):
     window = root.get_application().main_alpaca_window
-
+    window.available_model_flowbox.remove_all()
     set_available_models_data(window.get_current_instance().get_available_models())
     available_models_data = get_available_models_data()
 

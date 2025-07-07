@@ -5,7 +5,7 @@ import logging, os, datetime, threading, sys, glob, icu, base64, hashlib, import
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
-from .common import CategoryPill, get_local_models
+from .common import CategoryPill, get_local_models, prepend_added_model
 from .pulling import PullingModelButton
 from .added import AddedModelButton
 
@@ -281,7 +281,7 @@ def pull_model_confirm(model_name:str, instance, window):
         if model_name not in list(get_local_models(window)):
             model = PullingModelButton(
                 model_name,
-                lambda model_name, window=window, instance=instance: window.local_model_flowbox.prepend(AddedModelButton(model_name, instance)),
+                lambda model_name, window=window, instance=instance: prepend_added_model(window, AddedModelButton(model_name, instance)),
                 instance,
                 True
             )

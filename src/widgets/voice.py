@@ -93,7 +93,7 @@ class DictateToggleButton(Gtk.Stack):
                 pretty_name = [k for k, v in TTS_VOICES.items() if v == voice]
                 if len(pretty_name) > 0:
                     pretty_name = pretty_name[0]
-                    self.message_element.get_root().local_model_flowbox.append(models.speech.TextToSpeechModelButton(pretty_name))
+                    models.common.prepend_added_model(self.message_element.get_root(), models.speech.TextToSpeechModelButton(pretty_name))
 
         # Generate TTS_ENGINE if needed
         if not tts_engine or tts_engine_language != voice[0]:
@@ -265,7 +265,7 @@ class MicrophoneButton(Gtk.Stack):
             if button.get_root().get_name() == 'AlpacaWindow':
                 pulling_model = models.pulling.PullingModelButton(
                     model_name,
-                    lambda model_name, window=button.get_root(): window.local_model_flowbox.prepend(models.speech.SpeechToTextModelButton(model_name)),
+                    lambda model_name, window=button.get_root(): models.common.prepend_added_model(window, models.speech.SpeechToTextModelButton(model_name)),
                     None,
                     False
                 )
