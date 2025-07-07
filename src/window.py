@@ -164,6 +164,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             GLib.idle_add(Widgets.models.update_added_model_list, self)
             GLib.idle_add(Widgets.models.update_available_model_list, self)
+            GLib.idle_add(self.model_creator_stack_page.set_visible, 'ollama' in row.instance.instance_type)
 
             if row:
                 self.settings.set_string('selected-instance', row.instance.instance_id)
@@ -309,7 +310,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         results_available = False
         if len(Widgets.models.common.available_models_data) > 0:
             self.available_models_stack_page.set_visible(True)
-            self.model_creator_stack_page.set_visible(True)
             for model in list(self.available_model_flowbox):
                 string_search = re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE)
                 category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.model_searchbar.get_search_mode()
@@ -320,7 +320,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.available_model_stack.set_visible_child_name('content' if results_available else 'no-results')
         else:
             self.available_models_stack_page.set_visible(False)
-            self.model_creator_stack_page.set_visible(False)
 
     @Gtk.Template.Callback()
     def message_search_changed(self, entry, current_chat=None):
