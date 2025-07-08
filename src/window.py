@@ -162,16 +162,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             self.last_selected_instance_row = row
 
-            GLib.idle_add(Widgets.models.update_added_model_list, self)
-            GLib.idle_add(Widgets.models.update_available_model_list, self)
-            GLib.idle_add(self.model_creator_stack_page.set_visible, 'ollama' in row.instance.instance_type)
+            Widgets.models.update_added_model_list(self)
+            Widgets.models.update_available_model_list(self)
+            self.model_creator_stack_page.set_visible('ollama' in row.instance.instance_type)
 
             if row:
                 self.settings.set_string('selected-instance', row.instance.instance_id)
 
-            GLib.idle_add(self.chat_list_box.get_selected_row().update_profile_pictures)
+            self.chat_list_box.get_selected_row().update_profile_pictures()
         if listbox.get_sensitive():
-            threading.Thread(target=change_instance).start()
+            GLib.idle_add(threading.Thread(target=change_instance).start)
 
     @Gtk.Template.Callback()
     def model_creator_gguf(self, button):
