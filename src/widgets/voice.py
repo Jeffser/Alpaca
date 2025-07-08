@@ -89,7 +89,7 @@ class DictateToggleButton(Gtk.Stack):
 
         # Show Voice in Model Manager if Needed
         if os.path.join(cache_dir, 'huggingface', 'hub'):
-            if not os.path.islink(os.path.join(cache_dir, 'huggingface', 'hub', '{}.pt'.format(voice))) and self.message_element.get_root().get_name() == 'AlpacaWindow':
+            if not os.path.islink(os.path.join(cache_dir, 'huggingface', 'hub', '{}.pt'.format(voice))):
                 pretty_name = [k for k, v in TTS_VOICES.items() if v == voice]
                 if len(pretty_name) > 0:
                     pretty_name = pretty_name[0]
@@ -262,17 +262,14 @@ class MicrophoneButton(Gtk.Stack):
                 button.set_active(False)
 
         def prepare_download():
-            if button.get_root().get_name() == 'AlpacaWindow':
-                pulling_model = models.pulling.PullingModelButton(
-                    model_name,
-                    lambda model_name, window=button.get_root(): models.common.prepend_added_model(window, models.speech.SpeechToTextModelButton(model_name)),
-                    None,
-                    False
-                )
-                button.get_root().local_model_flowbox.prepend(pulling_model)
-                threading.Thread(target=run_mic, args=(pulling_model,)).start()
-            else:
-                threading.Thread(target=run_mic).start()
+            pulling_model = models.pulling.PullingModelButton(
+                model_name,
+                lambda model_name, window=button.get_root(): models.common.prepend_added_model(window, models.speech.SpeechToTextModelButton(model_name)),
+                None,
+                False
+            )
+            models.common.prepend_added_model(button.get_root(), pulling_model)
+            threading.Thread(target=run_mic, args=(pulling_model,)).start()
 
         if button.get_active():
             if os.path.isfile(os.path.join(data_dir, 'whisper', '{}.pt'.format(model_name))):

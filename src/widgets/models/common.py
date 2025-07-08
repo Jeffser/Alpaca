@@ -62,4 +62,5 @@ def set_available_models_data(data:list):
 def prepend_added_model(root, model):
     window = root.get_application().main_alpaca_window
     window.local_model_flowbox.prepend(model)
-    window.model_dropdown.get_model().append(model.row)
+    if model.__gtype_name__ == 'AlpacaAddedModelButton':
+        window.model_dropdown.get_model().append(model.row)

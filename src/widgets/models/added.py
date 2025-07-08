@@ -123,12 +123,6 @@ class AddedModelDialog(Adw.Dialog):
         preferences_group.add(self.voice_combo)
 
         main_container.append(main_page)
-        main_container.append(Gtk.Separator(
-            margin_top=5,
-            margin_bottom=5,
-            margin_start=5,
-            margin_end=5
-        ))
 
         metadata_container = Gtk.Box(
             orientation=1,
