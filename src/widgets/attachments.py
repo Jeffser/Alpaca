@@ -13,7 +13,7 @@ from PIL import Image
 from ..constants import cache_dir
 import requests, json, base64, tempfile, shutil, logging, threading, os, re
 
-from . import blocks, dialog, model_manager, camera
+from . import blocks, dialog, camera
 from ..sql_manager import Instance as SQL
 
 logger = logging.getLogger(__name__)
@@ -99,15 +99,16 @@ class AttachmentDialog(Adw.Dialog):
         )
         header = Adw.HeaderBar()
 
-        delete_button = Gtk.Button(
-            css_classes=['error'],
-            icon_name='user-trash-symbolic',
-            tooltip_text=_('Remove Attachment'),
-            vexpand=False,
-            valign=3
-        )
-        delete_button.connect('clicked', lambda *_: self.prompt_delete())
-        header.pack_start(delete_button)
+        if self.attachment.file_type != 'model_context':
+            delete_button = Gtk.Button(
+                css_classes=['error'],
+                icon_name='user-trash-symbolic',
+                tooltip_text=_('Remove Attachment'),
+                vexpand=False,
+                valign=3
+            )
+            delete_button.connect('clicked', lambda *_: self.prompt_delete())
+            header.pack_start(delete_button)
 
         download_button = Gtk.Button(
             icon_name='folder-download-symbolic',
@@ -473,7 +474,7 @@ class GlobalAttachmentContainer(AttachmentContainer):
         )
         self.add_attachment(attachment)
 
-    def attachment_request(self):
+    def attachment_request(self, block_images:bool=False):
         ff = Gtk.FileFilter()
         ff.set_name(_('Any compatible Alpaca attachment'))
         file_filters = [ff]
@@ -490,7 +491,7 @@ class GlobalAttachmentContainer(AttachmentContainer):
             ff.add_mime_type(mime)
             file_filters[0].add_mime_type(mime)
             file_filters.append(ff)
-        if model_manager.get_selected_model().get_vision():
+        if self.get_root().get_selected_model().get_vision() and not block_images:
             file_filters[0].add_pixbuf_formats()
             file_filter = Gtk.FileFilter()
             file_filter.add_pixbuf_formats()
@@ -502,7 +503,7 @@ class GlobalAttachmentContainer(AttachmentContainer):
         )
 
     def request_screenshot(self):
-        if model_manager.get_selected_model().get_vision():
+        if self.get_root().get_selected_model().get_vision():
             bus = SessionBus()
             portal = bus.get("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop")
             subscription = None
@@ -580,7 +581,7 @@ class GlobalAttachmentButton(Gtk.Button):
                 }
             ]
         ]
-        if model_manager.get_selected_model().get_vision():
+        if self.get_root().get_selected_model().get_vision():
             actions[0].append(
                 {
                     'label': _('Attach Screenshot'),

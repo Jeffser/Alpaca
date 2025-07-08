@@ -16,7 +16,6 @@ class BaseInstance:
     description = None
     row = None
     process = None
-    local_models = None
 
     def prepare_chat(self, bot_message):
         bot_message.chat.busy = True
@@ -302,16 +301,14 @@ class BaseInstance:
         if not self.process:
             self.start()
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                response = requests.get(
-                    '{}/api/tags'.format(self.properties.get('url')),
-                    headers={
-                        'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                    }
-                )
-                if response.status_code == 200:
-                    self.local_models = json.loads(response.text).get('models')
-            return self.local_models
+            response = requests.get(
+                '{}/api/tags'.format(self.properties.get('url')),
+                headers={
+                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
+                }
+            )
+            if response.status_code == 200:
+                return json.loads(response.text).get('models')
         except Exception as e:
             dialog.simple_error(
                 parent = self.row.get_root(),
@@ -409,23 +406,23 @@ class BaseInstance:
     def create_model(self, data:dict, callback:callable):
         if not self.process:
             self.start()
-        try:
-            response = requests.post(
-                '{}/api/create'.format(self.properties.get('url')),
-                headers={
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                },
-                data=json.dumps(data),
-                stream=True
-            )
-            if response.status_code == 200:
-                for line in response.iter_lines():
-                    if line:
-                        callback(json.loads(line.decode("utf-8")))
-        except Exception as e:
-            callback({'error': e})
-            logger.error(e)
+        #try:
+        response = requests.post(
+            '{}/api/create'.format(self.properties.get('url')),
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer {}'.format(self.properties.get('api'))
+            },
+            data=json.dumps(data),
+            stream=True
+        )
+        if response.status_code == 200:
+            for line in response.iter_lines():
+                if line:
+                    callback(json.loads(line.decode("utf-8")))
+        #except Exception as e:
+            #callback({'error': e})
+            #logger.error(e)
 
     def delete_model(self, model_name:str):
         if not self.process:

@@ -12,15 +12,8 @@
     <property name="title">Alpaca</property>
     <child>
       <object class="AdwBreakpoint">
-        <condition>min-width: 690sp</condition>
-        <setter object="split_view_overlay_model_manager" property="show-sidebar">false</setter>
-      </object>
-    </child>
-    <child>
-      <object class="AdwBreakpoint">
         <condition>max-width: 690sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
-        <setter object="split_view_overlay_model_manager" property="collapsed">true</setter>
         <setter object="model_manager_header_bar" property="title-widget"/>
         <setter object="model_manager_bottom_view_switcher" property="reveal">true</setter>
         <setter object="available_model_flowbox" property="min-children-per-line">1</setter>
@@ -268,23 +261,12 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                             <property name="transition_type">1</property>
                             <child>
                               <object class="GtkStackPage">
-                                <property name="name">model-selector</property>
+                                <property name="name">loading</property>
                                 <property name="child">
-                                  <object class="GtkBox">
-                                    <property name="halign">3</property>
-                                    <child>
-                                      <object class="GtkButton">
-                                        <property name="icon-name">brain-augemnted-symbolic</property>
-                                        <property name="tooltip-text" translatable="yes">Manage Models</property>
-                                        <property name="action-name">app.model_manager</property>
-                                        <style>
-                                          <class name="flat"/>
-                                        </style>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkDropDown" id="model_dropdown"/>
-                                    </child>
+                                  <object class="AdwSpinner">
+                                    <style>
+                                      <class name="p10"/>
+                                    </style>
                                   </object>
                                 </property>
                               </object>
@@ -303,6 +285,29 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                                     <property name="tooltip-text" translatable="yes">Manage Models</property>
                                     <property name="action-name">app.model_manager</property>
                                     <property name="halign">3</property>
+                                  </object>
+                                </property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkStackPage">
+                                <property name="name">model-selector</property>
+                                <property name="child">
+                                  <object class="GtkBox">
+                                    <property name="halign">3</property>
+                                    <child>
+                                      <object class="GtkButton">
+                                        <property name="icon-name">brain-augemnted-symbolic</property>
+                                        <property name="tooltip-text" translatable="yes">Manage Models</property>
+                                        <property name="action-name">app.model_manager</property>
+                                        <style>
+                                          <class name="flat"/>
+                                        </style>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkDropDown" id="model_dropdown"/>
+                                    </child>
                                   </object>
                                 </property>
                               </object>
@@ -503,432 +508,242 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
             <property name="title" translatable="yes">Model Manager</property>
             <property name="tag">model_manager</property>
             <property name="child">
-              <object class="AdwOverlaySplitView" id="split_view_overlay_model_manager">
-                <property name="sidebar-width-fraction">0.3</property>
-                <property name="show-sidebar">false</property>
-                <property name="collapsed">false</property>
-                <property name="enable-hide-gesture">true</property>
-                <property name="enable-show-gesture">true</property>
-                <property name="sidebar-position">end</property>
-                <property name="sidebar">
-                  <object class="AdwToolbarView" id="model_manager_sidebar">
-                    <child type="top">
-                      <object class="AdwHeaderBar">
-                        <property name="show-back-button">false</property>
-                        <property name="show-title">false</property>
+              <object class="AdwToolbarView">
+                <property name="height-request">140</property>
+                <child type="top">
+                  <object class="AdwHeaderBar" id="model_manager_header_bar">
+                    <child type="start">
+                      <object class="GtkToggleButton" id="model_search_button">
+                        <property name="icon-name">edit-find-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Search Model</property>
+                        <property name="active" bind-source="model_searchbar" bind-property="search-mode-enabled" bind-flags="sync-create"/>
                       </object>
                     </child>
-                    <property name="content">
-                      <object class="GtkScrolledWindow">
-                        <property name="vexpand">true</property>
-                        <child>
-                          <object class="AdwStatusPage">
-                            <property name="icon-name">brain-augemnted-symbolic</property>
-                          </object>
-                        </child>
+                    <property name="title-widget">
+                      <object class="AdwViewSwitcher" id="model_manager_top_view_switcher">
+                        <property name="stack">model_manager_stack</property>
+                        <property name="policy">wide</property>
                       </object>
                     </property>
-                  </object>
-                </property>
-                <property name="content">
-                  <object class="AdwToolbarView">
-                    <property name="height-request">140</property>
-                    <child type="top">
-                      <object class="AdwHeaderBar" id="model_manager_header_bar">
-                        <child type="start">
-                          <object class="GtkToggleButton" id="model_search_button">
-                            <property name="icon-name">edit-find-symbolic</property>
-                            <property name="tooltip-text" translatable="yes">Search Model</property>
-                            <property name="active" bind-source="model_searchbar" bind-property="search-mode-enabled" bind-flags="sync-create"/>
-                          </object>
-                        </child>
-                        <property name="title-widget">
-                          <object class="AdwViewSwitcher" id="model_manager_top_view_switcher">
-                            <property name="stack">model_manager_stack</property>
-                            <property name="policy">wide</property>
-                          </object>
-                        </property>
-                        <child type="end">
-                          <object class="GtkMenuButton">
-                            <property name="primary">False</property>
-                            <property name="icon-name">view-more-symbolic</property>
-                            <property name="tooltip-text" translatable="yes">Model Manager Menu</property>
-                            <property name="menu-model">model_manager_menu</property>
-                          </object>
-                        </child>
+                    <child type="end">
+                      <object class="GtkMenuButton">
+                        <property name="primary">False</property>
+                        <property name="icon-name">view-more-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Model Manager Menu</property>
+                        <property name="menu-model">model_manager_menu</property>
                       </object>
                     </child>
-                    <child type="top">
-                      <object class="AdwClamp">
-                        <property name="maximum-size">1000</property>
-                        <property name="tightening-threshold">800</property>
+                  </object>
+                </child>
+                <child type="top">
+                  <object class="AdwClamp">
+                    <property name="maximum-size">1000</property>
+                    <property name="tightening-threshold">800</property>
+                    <child>
+                      <object class="GtkSearchBar" id="model_searchbar">
+                        <accessibility>
+                          <property name="label" translatable="yes">Model search bar</property>
+                        </accessibility>
+                        <property name="search-mode-enabled" bind-source="model_search_button" bind-property="active" bind-flags="sync-create"/>
+                        <property name="key-capture-widget">AlpacaWindow</property>
                         <child>
-                          <object class="GtkSearchBar" id="model_searchbar">
-                            <accessibility>
-                              <property name="label" translatable="yes">Model search bar</property>
-                            </accessibility>
-                            <property name="search-mode-enabled" bind-source="model_search_button" bind-property="active" bind-flags="sync-create"/>
-                            <property name="key-capture-widget">AlpacaWindow</property>
+                          <object class="GtkBox">
+                            <property name="spacing">10</property>
                             <child>
-                              <object class="GtkBox">
-                                <property name="spacing">10</property>
-                                <child>
-                                  <object class="GtkSearchEntry" id="searchentry_models">
-                                    <property name="hexpand">true</property>
-                                    <signal name="search-changed" handler="model_search_changed"/>
-                                    <property name="search-delay">100</property>
-                                    <property name="placeholder-text" translatable="yes">Search models</property>
-                                    <accessibility>
-                                      <property name="label" translatable="yes">Search models</property>
-                                    </accessibility>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkMenuButton" id="model_filter_button">
-                                    <property name="icon-name">funnel-symbolic</property>
-                                    <property name="tooltip-text" translatable="yes">Filter Models</property>
-                                    <property name="visible">false</property>
-                                  </object>
-                                </child>
+                              <object class="GtkSearchEntry" id="searchentry_models">
+                                <property name="hexpand">true</property>
+                                <signal name="search-changed" handler="model_search_changed"/>
+                                <property name="search-delay">100</property>
+                                <property name="placeholder-text" translatable="yes">Search models</property>
+                                <accessibility>
+                                  <property name="label" translatable="yes">Search models</property>
+                                </accessibility>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkMenuButton" id="model_filter_button">
+                                <property name="icon-name">funnel-symbolic</property>
+                                <property name="tooltip-text" translatable="yes">Filter Models</property>
+                                <property name="visible">false</property>
                               </object>
                             </child>
                           </object>
                         </child>
                       </object>
                     </child>
-                    <property name="content">
-                      <object class="AdwViewStack" id="model_manager_stack">
-                        <property name="enable-transitions">true</property>
-                        <signal name="notify::visible-child" handler="model_manager_stack_changed"/>
-                        <child>
-                          <object class="AdwViewStackPage">
-                            <property name="name">added_models</property>
-                            <property name="title" translatable="yes">Added</property>
-                            <property name="icon-name">folder-download-symbolic</property>
-                            <property name="child">
-                              <object class="GtkStack" id="local_model_stack">
-                                <child>
-                                  <object class="GtkStackPage">
-                                    <property name="name">no-models</property>
+                  </object>
+                </child>
+                <property name="content">
+                  <object class="AdwViewStack" id="model_manager_stack">
+                    <property name="enable-transitions">true</property>
+                    <signal name="notify::visible-child" handler="model_manager_stack_changed"/>
+                    <child>
+                      <object class="AdwViewStackPage">
+                        <property name="name">added_models</property>
+                        <property name="title" translatable="yes">Added</property>
+                        <property name="icon-name">folder-download-symbolic</property>
+                        <property name="child">
+                          <object class="GtkStack" id="local_model_stack">
+                            <child>
+                              <object class="GtkStackPage">
+                                <property name="name">no-models</property>
+                                <property name="child">
+                                  <object class="AdwStatusPage">
+                                    <property name="icon-name">sad-computer-symbolic</property>
+                                    <property name="title" translatable="yes">No Models Found</property>
+                                    <property name="description" translatable="yes">It looks a bit empty in here. Try downloading some models or change your AI instance to get started!</property>
                                     <property name="child">
-                                      <object class="AdwStatusPage">
-                                        <property name="icon-name">sad-computer-symbolic</property>
-                                        <property name="title" translatable="yes">No Models Found</property>
-                                        <property name="description" translatable="yes">It looks a bit empty in here. Try downloading some models or change your AI instance to get started!</property>
+                                      <object class="GtkButton">
+                                        <property name="tooltip-text" translatable="yes">Manage Instances</property>
+                                        <property name="action-name">app.instance_manager</property>
+                                        <property name="halign">3</property>
+                                        <style>
+                                          <class name="pill"/>
+                                          <class name="suggested-action"/>
+                                        </style>
                                         <property name="child">
-                                          <object class="GtkButton">
-                                            <property name="tooltip-text" translatable="yes">Manage Instances</property>
-                                            <property name="action-name">app.instance_manager</property>
-                                            <property name="halign">3</property>
+                                          <object class="AdwButtonContent">
+                                            <property name="icon-name">processor-symbolic</property>
+                                            <property name="label" translatable="yes">Manage Instances</property>
+                                          </object>
+                                        </property>
+                                      </object>
+                                    </property>
+                                  </object>
+                                </property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkStackPage">
+                                <property name="name">content</property>
+                                <property name="child">
+                                  <object class="GtkScrolledWindow">
+                                    <property name="child">
+                                      <object class="AdwClamp">
+                                        <property name="maximum-size">1000</property>
+                                        <property name="tightening-threshold">800</property>
+                                        <child>
+                                          <object class="GtkFlowBox" id="local_model_flowbox">
+                                            <property name="row-spacing">0</property>
+                                            <property name="column-spacing">0</property>
+                                            <property name="hexpand">true</property>
+                                            <property name="valign">1</property>
+                                            <property name="min-children-per-line">1</property>
+                                            <property name="max-children-per-line">3</property>
+                                            <property name="selection-mode">0</property>
+                                            <property name="homogeneous">true</property>
                                             <style>
-                                              <class name="pill"/>
-                                              <class name="suggested-action"/>
+                                              <class name="p10"/>
                                             </style>
-                                            <property name="child">
-                                              <object class="AdwButtonContent">
-                                                <property name="icon-name">processor-symbolic</property>
-                                                <property name="label" translatable="yes">Manage Instances</property>
-                                              </object>
-                                            </property>
                                           </object>
-                                        </property>
+                                        </child>
                                       </object>
                                     </property>
                                   </object>
-                                </child>
-                                <child>
-                                  <object class="GtkStackPage">
-                                    <property name="name">content</property>
-                                    <property name="child">
-                                      <object class="GtkScrolledWindow">
-                                        <property name="child">
-                                          <object class="AdwClamp">
-                                            <property name="maximum-size">1000</property>
-                                            <property name="tightening-threshold">800</property>
-                                            <child>
-                                              <object class="GtkFlowBox" id="local_model_flowbox">
-                                                <property name="row-spacing">5</property>
-                                                <property name="column-spacing">5</property>
-                                                <property name="hexpand">true</property>
-                                                <property name="valign">1</property>
-                                                <property name="min-children-per-line">1</property>
-                                                <property name="max-children-per-line">3</property>
-                                                <property name="selection-mode">1</property>
-                                                <property name="homogeneous">true</property>
-                                                <signal name="child-activated" handler="model_manager_child_activated"/>
-                                                <signal name="selected-children-changed" handler="model_manager_child_selected"/>
-                                                <style>
-                                                  <class name="model_flowbox"/>
-                                                </style>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </property>
-                                      </object>
-                                    </property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkStackPage">
-                                    <property name="name">no-results</property>
-                                    <property name="child">
-                                      <object class="AdwStatusPage">
-                                        <property name="icon-name">sad-computer-symbolic</property>
-                                        <property name="title" translatable="yes">No Models Found</property>
-                                        <property name="description" translatable="yes">Looks like we’re fresh out of models for that search. Try tweaking your keywords, or maybe explore something new!</property>
-                                      </object>
-                                    </property>
-                                  </object>
-                                </child>
+                                </property>
                               </object>
-                            </property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="AdwViewStackPage" id="available_models_stack_page">
-                            <property name="name">available_models</property>
-                            <property name="title" translatable="yes">Available</property>
-                            <property name="icon-name">globe-symbolic</property>
-                            <property name="child">
-                              <object class="GtkStack" id="available_model_stack">
-                                <child>
-                                  <object class="GtkStackPage">
-                                    <property name="name">content</property>
-                                    <property name="child">
-                                      <object class="GtkScrolledWindow">
-                                        <property name="child">
-                                          <object class="AdwClamp">
-                                            <property name="maximum-size">1000</property>
-                                            <property name="tightening-threshold">800</property>
-                                            <child>
-                                              <object class="GtkFlowBox" id="available_model_flowbox">
-                                                <property name="row-spacing">5</property>
-                                                <property name="column-spacing">5</property>
-                                                <property name="hexpand">true</property>
-                                                <property name="valign">1</property>
-                                                <property name="min-children-per-line">2</property>
-                                                <property name="max-children-per-line">3</property>
-                                                <property name="selection-mode">1</property>
-                                                <signal name="child-activated" handler="model_manager_child_activated"/>
-                                                <signal name="selected-children-changed" handler="model_manager_child_selected"/>
-                                                <style>
-                                                  <class name="model_flowbox"/>
-                                                </style>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </property>
-                                      </object>
-                                    </property>
+                            </child>
+                            <child>
+                              <object class="GtkStackPage">
+                                <property name="name">no-results</property>
+                                <property name="child">
+                                  <object class="AdwStatusPage">
+                                    <property name="icon-name">sad-computer-symbolic</property>
+                                    <property name="title" translatable="yes">No Models Found</property>
+                                    <property name="description" translatable="yes">Looks like we’re fresh out of models for that search. Try tweaking your keywords, or maybe explore something new!</property>
                                   </object>
-                                </child>
-                                <child>
-                                  <object class="GtkStackPage">
-                                    <property name="name">no-results</property>
-                                    <property name="child">
-                                      <object class="AdwStatusPage">
-                                        <property name="icon-name">sad-computer-symbolic</property>
-                                        <property name="title" translatable="yes">No Models Found</property>
-                                        <property name="description" translatable="yes">Looks like we’re fresh out of models for that search. Try tweaking your keywords, or maybe explore something new!</property>
-                                      </object>
-                                    </property>
-                                  </object>
-                                </child>
+                                </property>
                               </object>
-                            </property>
+                            </child>
                           </object>
-                        </child>
-                        <child>
-                          <object class="AdwViewStackPage"  id="model_creator_stack_page">
-                            <property name="name">model_creator</property>
-                            <property name="title" translatable="yes">Creator</property>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwViewStackPage" id="available_models_stack_page">
+                        <property name="name">available_models</property>
+                        <property name="title" translatable="yes">Available</property>
+                        <property name="icon-name">globe-symbolic</property>
+                        <property name="child">
+                          <object class="GtkStack" id="available_model_stack">
+                            <child>
+                              <object class="GtkStackPage">
+                                <property name="name">content</property>
+                                <property name="child">
+                                  <object class="GtkScrolledWindow">
+                                    <property name="child">
+                                      <object class="AdwClamp">
+                                        <property name="maximum-size">1000</property>
+                                        <property name="tightening-threshold">800</property>
+                                        <child>
+                                          <object class="GtkFlowBox" id="available_model_flowbox">
+                                            <property name="row-spacing">0</property>
+                                            <property name="column-spacing">0</property>
+                                            <property name="hexpand">true</property>
+                                            <property name="valign">1</property>
+                                            <property name="min-children-per-line">2</property>
+                                            <property name="max-children-per-line">3</property>
+                                            <property name="selection-mode">0</property>
+                                            <style>
+                                              <class name="p10"/>
+                                            </style>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </property>
+                                  </object>
+                                </property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkStackPage">
+                                <property name="name">no-results</property>
+                                <property name="child">
+                                  <object class="AdwStatusPage">
+                                    <property name="icon-name">sad-computer-symbolic</property>
+                                    <property name="title" translatable="yes">No Models Found</property>
+                                    <property name="description" translatable="yes">Looks like we’re fresh out of models for that search. Try tweaking your keywords, or maybe explore something new!</property>
+                                  </object>
+                                </property>
+                              </object>
+                            </child>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwViewStackPage"  id="model_creator_stack_page">
+                        <property name="name">model_creator</property>
+                        <property name="title" translatable="yes">Creator</property>
+                        <property name="icon-name">brain-augemnted-symbolic</property>
+                        <property name="child">
+                          <object class="AdwStatusPage">
+                            <property name="hexpand">true</property>
+                            <property name="title" translatable="yes">Model Creator</property>
+                            <property name="description" translatable="yes">Select a method of importing a model to continue</property>
                             <property name="icon-name">brain-augemnted-symbolic</property>
                             <property name="child">
-                              <object class="GtkStack" id="model_creator_stack">
-                                <property name="transition_type">7</property>
+                              <object class="GtkBox">
+                                <property name="halign">3</property>
+                                <property name="spacing">10</property>
                                 <child>
-                                  <object class="GtkStackPage">
-                                    <property name="name">introduction</property>
+                                  <object class="GtkButton">
+                                    <signal name="clicked" handler="model_creator_gguf"/>
                                     <property name="child">
-                                      <object class="AdwStatusPage">
-                                        <property name="hexpand">true</property>
-                                        <property name="title" translatable="yes">Model Creator</property>
-                                        <property name="description" translatable="yes">Select a method of importing a model to continue</property>
-                                        <property name="icon-name">brain-augemnted-symbolic</property>
-                                        <property name="child">
-                                          <object class="GtkBox">
-                                            <property name="halign">3</property>
-                                            <property name="spacing">10</property>
-                                            <child>
-                                              <object class="GtkButton">
-                                                <signal name="clicked" handler="model_creator_gguf"/>
-                                                <property name="child">
-                                                  <object class="AdwButtonContent">
-                                                    <property name="icon-name">document-open-symbolic</property>
-                                                    <property name="label" translatable="yes">GGUF File</property>
-                                                  </object>
-                                                </property>
-                                              </object>
-                                            </child>
-                                            <child>
-                                              <object class="GtkButton">
-                                                <signal name="clicked" handler="model_creator_existing"/>
-                                                <property name="child">
-                                                  <object class="AdwButtonContent">
-                                                    <property name="icon-name">chain-link-loose-symbolic</property>
-                                                    <property name="label" translatable="yes">Existing Model</property>
-                                                  </object>
-                                                </property>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </property>
+                                      <object class="AdwButtonContent">
+                                        <property name="icon-name">document-open-symbolic</property>
+                                        <property name="label" translatable="yes">GGUF File</property>
                                       </object>
                                     </property>
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkStackPage">
-                                    <property name="name">content</property>
+                                  <object class="GtkButton">
+                                    <signal name="clicked" handler="model_creator_existing"/>
                                     <property name="child">
-                                      <object class="AdwPreferencesPage">
-                                        <child>
-                                          <object class="AdwPreferencesGroup">
-                                            <property name="title" translatable="yes">Identity</property>
-                                            <child>
-                                              <object class="AdwComboRow" id="model_creator_base">
-                                                <property name="title" translatable="yes">Base</property>
-                                                <signal name="notify::selected-item" handler="model_creator_base_changed"/>
-                                              </object>
-                                            </child>
-                                            <child>
-                                              <object class="AdwActionRow" id="model_creator_profile_picture">
-                                                <property name="title" translatable="yes">Profile Picture</property>
-                                                <child type="suffix">
-                                                  <object class="GtkButton">
-                                                    <signal name="clicked" handler="model_creator_load_profile_picture"/>
-                                                    <property name="icon-name">document-open-symbolic</property>
-                                                    <property name="tooltip-text" translatable="yes">Open File</property>
-                                                    <property name="valign">3</property>
-                                                    <style>
-                                                      <class name="flat"/>
-                                                    </style>
-                                                  </object>
-                                                </child>
-                                              </object>
-                                            </child>
-                                            <child>
-                                              <object class="AdwEntryRow" id="model_creator_name">
-                                                <property name="title" translatable="yes">Name</property>
-                                              </object>
-                                            </child>
-                                            <child>
-                                              <object class="AdwEntryRow" id="model_creator_tag">
-                                                <property name="title" translatable="yes">Tag</property>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="AdwPreferencesGroup">
-                                            <property name="title" translatable="yes">Context</property>
-                                            <property name="description" translatable="yes">Describe the desired behavior of the model in its primary language (typically English).</property>
-                                            <child>
-                                              <object class="GtkScrolledWindow">
-                                                <property name="min-content-height">100</property>
-                                                <property name="vexpand">true</property>
-                                                <property name="propagate-natural-height">true</property>
-                                                <property name="overflow">1</property>
-                                                <style>
-                                                  <class name="undershoot-bottom"/>
-                                                  <class name="card"/>
-                                                </style>
-                                                <property name="child">
-                                                  <object class="GtkTextView" id="model_creator_context">
-                                                    <property name="wrap-mode">3</property>
-                                                    <property name="overflow">1</property>
-                                                    <property name="accepts-tab">false</property>
-                                                    <style>
-                                                      <class name="p10"/>
-                                                      <class name="modelfile_textview"/>
-                                                    </style>
-                                                  </object>
-                                                </property>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="AdwPreferencesGroup">
-                                            <property name="title" translatable="yes">Behavior</property>
-                                            <child>
-                                              <object class="AdwSpinRow" id="model_creator_imagination">
-                                                <property name="title" translatable="yes">Imagination</property>
-                                                <property name="subtitle" translatable="yes">A higher number results in more diverse answers from the model. (top_k)</property>
-                                                <property name="digits">0</property>
-                                                <property name="adjustment">
-                                                  <object class="GtkAdjustment">
-                                                    <property name="lower">0</property>
-                                                    <property name="upper">100</property>
-                                                    <property name="step-increment">1</property>
-                                                  </object>
-                                                </property>
-                                                <property name="value">40</property>
-                                              </object>
-                                            </child>
-                                            <child>
-                                              <object class="AdwSpinRow" id="model_creator_focus">
-                                                <property name="title" translatable="yes">Focus</property>
-                                                <property name="subtitle" translatable="yes">A higher number widens the amount of possible answers. (top_p)</property>
-                                                <property name="digits">0</property>
-                                                <property name="adjustment">
-                                                  <object class="GtkAdjustment">
-                                                    <property name="lower">0</property>
-                                                    <property name="upper">100</property>
-                                                    <property name="step-increment">1</property>
-                                                  </object>
-                                                </property>
-                                                <property name="value">90</property>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="AdwPreferencesGroup">
-                                            <child>
-                                              <object class="GtkBox">
-                                                <property name="spacing">10</property>
-                                                <property name="halign">3</property>
-                                                <child>
-                                                  <object class="GtkButton">
-                                                    <signal name="clicked" handler="model_creator_cancel"/>
-                                                    <property name="tooltip-text" translatable="yes">Cancel</property>
-                                                    <style>
-                                                      <class name="pill"/>
-                                                    </style>
-                                                    <property name="label" translatable="yes">Cancel</property>
-                                                  </object>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkButton">
-                                                    <signal name="clicked" handler="model_creator_accept"/>
-                                                    <property name="tooltip-text" translatable="yes">Add Model</property>
-                                                    <style>
-                                                      <class name="pill"/>
-                                                      <class name="suggested-action"/>
-                                                    </style>
-                                                    <property name="child">
-                                                      <object class="AdwButtonContent">
-                                                        <property name="icon-name">list-add-symbolic</property>
-                                                        <property name="label" translatable="yes">Add Model</property>
-                                                      </object>
-                                                    </property>
-                                                  </object>
-                                                </child>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </child>
+                                      <object class="AdwButtonContent">
+                                        <property name="icon-name">chain-link-loose-symbolic</property>
+                                        <property name="label" translatable="yes">Existing Model</property>
                                       </object>
                                     </property>
                                   </object>
@@ -936,16 +751,16 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                               </object>
                             </property>
                           </object>
-                        </child>
-                      </object>
-                    </property>
-                    <child type="bottom">
-                      <object class="AdwViewSwitcherBar" id="model_manager_bottom_view_switcher">
-                        <property name="stack">model_manager_stack</property>
+                        </property>
                       </object>
                     </child>
                   </object>
                 </property>
+                <child type="bottom">
+                  <object class="AdwViewSwitcherBar" id="model_manager_bottom_view_switcher">
+                    <property name="stack">model_manager_stack</property>
+                  </object>
+                </child>
               </object>
             </property>
           </object>
@@ -1212,11 +1027,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
     <mime-types>
       <mime-type>application/vnd.sqlite3</mime-type>
     </mime-types>
-  </object>
-  <object class="GtkFileFilter" id="file_filter_gguf">
-    <suffixes>
-      <suffix>gguf</suffix>
-    </suffixes>
   </object>
 </interface>
 

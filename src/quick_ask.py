@@ -43,6 +43,18 @@ class QuickAskWindow(Adw.ApplicationWindow):
         self.get_application().main_alpaca_window.present()
         self.close()
 
+    def get_selected_model(self, current_instance=None):
+        if not current_instance:
+            current_instance = self.get_current_instance()
+
+        if current_instance:
+            model_name = current_instance.get_default_model()
+            vision = 'vision' in current_instance.get_model_info(model_name).get('capabilities')
+            current_model = Widgets.models.added.LiteAddedModel(model_name, vision)
+            return current_model
+
+        return Widgets.models.added.FallbackModel
+
     def get_current_instance(self):
         selected_instance = self.settings.get_value('selected-instance').unpack()
         instances = SQL.get_instances()
@@ -63,7 +75,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
         if not current_instance:
             Widgets.dialog.show_toast(_("Please select an instance in Alpaca before chatting"), self)
             return
-        current_model = current_instance.get_default_model()
+        current_model = self.get_selected_model(current_instance)
         if current_model is None:
             Widgets.dialog.show_toast(_("Please select add a model for this instance in Alpaca before chatting"), self)
             return

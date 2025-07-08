@@ -15,7 +15,7 @@ class BaseInstance:
     instance_id = None
     description = None
     row = None
-    local_models = None
+    available_models = None
     properties = {
         'name': _('Instances'),
         'api': '',
@@ -268,11 +268,14 @@ class BaseInstance:
                 self.properties['title_model'] = local_models[0].get('name')
             return self.properties.get('title_model')
 
-    def get_local_models(self) -> list:
+    def get_available_models(self) -> dict:
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                self.local_models = [{'name': m.id} for m in self.client.models.list() if 'whisper' not in m.id.lower()]
-            return self.local_models
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
+                for m in self.client.models.list():
+                    if 'whisper' not in m.id.lower():
+                        self.available_models[m.id] = {}
+            return self.available_models
         except Exception as e:
             dialog.simple_error(
                 parent = self.row.get_root(),
@@ -285,8 +288,19 @@ class BaseInstance:
                 self.row.get_parent().unselect_all()
             return []
 
-    def get_available_models(self) -> dict:
-        return {}
+    def pull_model(self, model_name:str, callback:callable):
+        SQL.append_online_instance_model_list(self.instance_id, model_name)
+        callback({'status': 'success'})
+
+    def get_local_models(self) -> list:
+        local_models = []
+        for model in SQL.get_online_instance_model_list(self.instance_id):
+            local_models.append({'name': model})
+        return local_models
+
+    def delete_model(self, model_name:str) -> bool:
+        SQL.remove_online_instance_model_list(self.instance_id, model_name)
+        return True
 
     def get_model_info(self, model_name:str) -> dict:
         return {}
@@ -307,16 +321,16 @@ class Gemini(BaseInstance):
         if 'seed' in self.properties:
             del self.properties['seed']
 
-    def get_local_models(self) -> list:
+    def get_available_models(self) -> dict:
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                self.local_models = []
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
                 response = requests.get('https://generativelanguage.googleapis.com/v1beta/models?key={}'.format(self.properties.get('api')))
                 for model in response.json().get('models', []):
                     if "generateContent" in model.get("supportedGenerationMethods", []) and 'deprecated' not in model.get('description', ''):
                         model['name'] = model.get('name').removeprefix('models/')
-                        self.local_models.append(model)
-            return self.local_models
+                        self.available_models[model.get('name')] = model
+            return self.available_models
         except Exception as e:
             dialog.simple_error(
                 parent = self.row.get_root(),
@@ -344,10 +358,10 @@ class Together(BaseInstance):
     instance_type_display = 'Together AI'
     instance_url = 'https://api.together.xyz/v1/'
 
-    def get_local_models(self) -> list:
+    def get_available_models(self) -> dict:
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                self.local_models = []
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
                 response = requests.get(
                     'https://api.together.xyz/v1/models',
                     headers={
@@ -357,8 +371,8 @@ class Together(BaseInstance):
                 )
                 for model in response.json():
                     if model.get('id') and model.get('type') == 'chat':
-                        self.local_models.append({'name': model.get('id'), 'display_name': model.get('display_name')})
-            return self.local_models
+                        self.available_models[model.get('id')] = {'display_name': model.get('display_name')}
+            return self.available_models
 
 
             return models
@@ -412,16 +426,16 @@ class OpenRouter(BaseInstance):
     instance_type_display = 'OpenRouter AI'
     instance_url = 'https://openrouter.ai/api/v1/'
 
-    def get_local_models(self) -> list:
+    def get_available_models(self) -> list:
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                self.local_models = []
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
                 response = requests.get('https://openrouter.ai/api/v1/models')
                 for model in response.json().get('data', []):
                     if model.get('id'):
-                        self.local_models.append({'name': model.get('id'), 'display_name': model.get('name')})
+                        self.available_models[model.get('id')] = {'display_name': model.get('name')}
 
-            return self.local_models
+            return self.available_models
         except Exception as e:
             dialog.simple_error(
                 parent = self.row.get_root(),
@@ -446,10 +460,10 @@ class Fireworks(BaseInstance):
     instance_url = 'https://api.fireworks.ai/inference/v1/'
     description = _('Fireworks AI inference platform')
 
-    def get_local_models(self) -> list:
+    def get_available_models(self) -> list:
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                self.local_models = []
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
                 response = requests.get(
                     'https://api.fireworks.ai/inference/v1/models',
                     headers={
@@ -458,9 +472,9 @@ class Fireworks(BaseInstance):
                 )
                 for model in response.json().get('data', []):
                     if model.get('id') and 'chat' in model.get('capabilities', []):
-                        self.local_models.append({'name': model.get('id'), 'display_name': model.get('name')})
+                        self.available_models[model.get('id')] = {'display_name': model.get('name')}
 
-            return self.local_models
+            return self.available_models
         except Exception as e:
             dialog.simple_error(
                 parent = self.row.get_root(),
@@ -479,10 +493,10 @@ class LambdaLabs(BaseInstance):
     instance_url = 'https://api.lambdalabs.com/v1/'
     description = _('Lambda Labs cloud inference API')
 
-    def get_local_models(self) -> list:
+    def get_available_models(self) -> list:
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                self.local_models = []
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = []
                 response = requests.get(
                     'https://api.lambdalabs.com/v1/models',
                     headers={
@@ -491,9 +505,9 @@ class LambdaLabs(BaseInstance):
                 )
                 for model in response.json().get('data', []):
                     if model.get('id'):
-                        self.local_models.append({'name': model.get('id'), 'display_name': model.get('name')})
+                        self.available_models[model.get('id')] = {'display_name': model.get('name')}
 
-            return self.local_models
+            return self.available_models
         except Exception as e:
             dialog.simple_error(
                 parent = self.row.get_root(),

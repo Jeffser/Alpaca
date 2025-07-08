@@ -46,16 +46,12 @@ def prettify_model_name(name:str, separated:bool=False) -> str or tuple:
     if name:
         if ':' in name:
             name = name.split(':')
-            if name[1].lower() in ('latest', 'custom'):
-                if separated:
-                    return name[0].replace('-', ' ').title(), None
-                else:
-                    return name[0].replace('-', ' ').title()
+            if separated:
+                return name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title()
+            elif name[1].lower() in ('latest', 'custom'):
+                return name[0].replace('-', ' ').title()
             else:
-                if separated:
-                    return name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title()
-                else:
-                    return '{} ({})'.format(name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title())
+                return '{} ({})'.format(name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title())
         else:
             if separated:
                 return name.replace('-', ' ').title(), None
@@ -141,6 +137,10 @@ class Instance:
                     "name": "TEXT NOT NULL PRIMARY KEY",
                     "variables": "TEXT NOT NULL",
                     "activated": "INTEGER NOT NULL"
+                },
+                "online_instance_model_list": {
+                    "id": "TEXT NOT NULL PRIMARY KEY",
+                    "list": "TEXT NOT NULL" #JSON
                 }
             }
 
@@ -687,4 +687,55 @@ class Instance:
                 c.cursor.execute(
                     "INSERT INTO tool_parameters (name, variables, activated) VALUES (?, ?, ?)",
                     (tool_name, json.dumps(variables), 1 if activated else 0)
+                )
+
+    ################################
+    ## ONLINE INSTANCE MODEL LIST ##
+    ################################
+
+    def get_online_instance_model_list(instance_id:str) -> list:
+        with SQLiteConnection() as c:
+            result = c.cursor.execute(
+                "SELECT list FROM online_instance_model_list WHERE id=?",
+                (instance_id,)
+            ).fetchone()
+
+            if result:
+                return json.loads(result[0])
+        return []
+
+    def append_online_instance_model_list(instance_id:str, model_name:str) -> None:
+        with SQLiteConnection() as c:
+            result = c.cursor.execute(
+                "SELECT list FROM online_instance_model_list WHERE id=?",
+                (instance_id,)
+            ).fetchone()
+
+            if result:
+                model_list = json.loads(result[0])
+                model_list.append(model_name)
+                c.cursor.execute(
+                    f"UPDATE online_instance_model_list SET list=? WHERE id=?",
+                    (json.dumps(model_list), instance_id)
+                )
+            else:
+                c.cursor.execute(
+                    "INSERT INTO online_instance_model_list (id, list) VALUES (?, ?)",
+                    (instance_id, json.dumps([model_name]))
+                )
+
+    def remove_online_instance_model_list(instance_id:str, model_name:str) -> None:
+        with SQLiteConnection() as c:
+            result = c.cursor.execute(
+                "SELECT list FROM online_instance_model_list WHERE id=?",
+                (instance_id,)
+            ).fetchone()
+
+            if result:
+                model_list = json.loads(result[0])
+                if model_name in model_list:
+                    model_list.remove(model_name)
+                c.cursor.execute(
+                    f"UPDATE online_instance_model_list SET list=? WHERE id=?",
+                    (json.dumps(model_list), instance_id)
                 )
