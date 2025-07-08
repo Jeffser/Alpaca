@@ -227,12 +227,12 @@ class BaseInstance:
         bot_message.update_message({"done": True})
 
     def generate_chat_title(self, chat, prompt:str):
-        class ChatTitle(BaseModel): #Pydantic
-            title:str
-            emoji:str = ""
+        class ChatTitle(BaseModel): # Pydantic
+            title: str
+            emoji: str = ""
 
         messages = [
-            {"role": "user" if 'no-system-messages' in self.limitations else "system", "content": "You are an assistant that generates short chat titles based on the first message from a user. If you want to, you can add a single emoji."},
+            {"role": "user" if 'no-system-messages' in self.limitations else "system", "content": TITLE_GENERATION_PROMPT_OPENAI},
             {"role": "user", "content": "Generate a title for this prompt:\n{}".format(prompt)}
         ]
 
@@ -243,6 +243,7 @@ class BaseInstance:
             "max_tokens": 50
         }
         new_chat_title = chat.get_name()
+
         try:
             completion = self.client.beta.chat.completions.parse(**params, response_format=ChatTitle)
             response = completion.choices[0].message
@@ -255,7 +256,12 @@ class BaseInstance:
                 new_chat_title = str(response.choices[0].message.content)
             except Exception as e:
                 logger.error(e)
+        
         new_chat_title = re.sub(r'<think>.*?</think>', '', new_chat_title).strip()
+
+        if len(new_chat_title) > 30:
+            new_chat_title = new_chat_title[:30].strip() + '...'
+
         chat.row.rename(new_chat_title)
 
     def get_default_model(self):

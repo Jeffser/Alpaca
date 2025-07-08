@@ -202,6 +202,15 @@ SAMPLE_PROMPTS = [
 # The identifier when inside the Flatpak runtime
 IN_FLATPAK = bool(os.getenv("FLATPAK_ID"))
 
+TITLE_GENERATION_PROMPT_OLLAMA = (
+    "You are an assistant that generates short chat titles based on the "
+    "prompt. If you want to, you can add a single emoji.\n\n{}"
+)
+TITLE_GENERATION_PROMPT_OPENAI = (
+    "You are an assistant that generates short chat titles based on the first "
+    "message from a user. If you want to, you can add a single emoji."
+)
+
 def get_xdg_home(env, default):
     if IN_FLATPAK:
         return os.getenv(env)
