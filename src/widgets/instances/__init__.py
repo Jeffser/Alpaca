@@ -5,8 +5,8 @@ from gi.repository import Adw, Gtk, GLib, Gio
 import os, shutil, json, re, logging
 from ...sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from .. import dialog
-from .ollama_instances import Ollama, OllamaManaged
-from .openai_instances import ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Qwen, Fireworks, LambdaLabs, Cerebras, Klusterai, Mistral, LlamaAPI, NovitaAI, DeepInfra, GenericOpenAI
+from .ollama_instances import BaseInstance as BaseOllama
+from .openai_instances import BaseInstance as BaseOpenAI
 
 logger = logging.getLogger(__name__)
 
@@ -373,7 +373,7 @@ class InstanceRow(Adw.ActionRow):
 
     def __init__(self, instance, pinned:bool=False):
         self.instance = instance
-        self.instance.row = self
+        self.instance.set_row(self)
         self.pinned = pinned
         super().__init__(
             title = self.instance.properties.get('name'),
@@ -420,13 +420,25 @@ class InstanceRow(Adw.ActionRow):
         self.get_parent().remove(self)
 
 def create_instance_row(ins:dict) -> InstanceRow or None:
-    instance_dictionary = {i.instance_type: i for i in ready_instances}
-    if ins.get('type') in list(instance_dictionary.keys()) and (ins.get('type') != 'ollama:managed' or shutil.which('ollama')):
-        return InstanceRow(
-            instance=instance_dictionary.get(ins.get('type'))(
-                instance_id=ins.get('id'),
-                properties=ins.get('properties')
-            ))
+    if 'ollama' in ins.get('type'):
+        if ins.get('type') != 'ollama:managed' or shutil.which('ollama'):
+            for instance_cls in BaseOllama.__subclasses__():
+                if getattr(instance_cls, 'instance_type', None) == ins.get('type'):
+                    return InstanceRow(
+                        instance=instance_cls(
+                            instance_id=ins.get('id'),
+                            properties=ins.get('properties')
+                        )
+                    )
+    elif os.getenv('ALPACA_OLLAMA_ONLY', '0') != '1':
+        for instance_cls in BaseOpenAI.__subclasses__():
+            if getattr(instance_cls, 'instance_type', None) == ins.get('type'):
+                return InstanceRow(
+                    instance=instance_cls(
+                        instance_id=ins.get('id'),
+                        properties=ins.get('properties')
+                    )
+                )
 
 def update_instance_list(instance_listbox:Gtk.ListBox, selected_instance_id:str):
     instance_listbox.remove_all()
@@ -449,9 +461,4 @@ def update_instance_list(instance_listbox:Gtk.ListBox, selected_instance_id:str)
 
     if not instance_listbox.get_selected_row():
         instance_listbox.select_row(instance_listbox.get_row_at_index(0))
-
-if os.getenv('ALPACA_OLLAMA_ONLY', '0') == '1':
-    ready_instances = [OllamaManaged, Ollama]
-else:
-    ready_instances = [OllamaManaged, Ollama, ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Qwen, Fireworks, LambdaLabs, Cerebras, Klusterai, Mistral, LlamaAPI, NovitaAI, DeepInfra, GenericOpenAI]
 

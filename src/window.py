@@ -143,7 +143,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 Widgets.instances.InstancePreferencesGroup(instance).present(self)
 
         options = {}
-        for ins_type in Widgets.instances.ready_instances:
+        instance_list = Widgets.instances.ollama_instances.BaseInstance.__subclasses__()
+        if os.getenv('ALPACA_OLLAMA_ONLY', '0') != '1':
+            instance_list += Widgets.instances.openai_instances.BaseInstance.__subclasses__()
+        for ins_type in instance_list:
             options[ins_type.instance_type_display] = ins_type
 
         Widgets.dialog.simple_dropdown(

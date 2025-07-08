@@ -14,9 +14,8 @@ logger = logging.getLogger(__name__)
 class BaseInstance:
     instance_id = None
     description = None
-    row = None
-    available_models = None
-    properties = {
+
+    default_properties = {
         'name': _('Instances'),
         'api': '',
         'max_tokens': 2048,
@@ -28,14 +27,19 @@ class BaseInstance:
 
     def __init__(self, instance_id:str, properties:dict):
         self.instance_id = instance_id
-        for key in self.properties:
-            self.properties[key] = properties.get(key, self.properties.get(key))
+        self.available_models = None
+        self.properties = {}
+        for key in self.default_properties:
+            self.properties[key] = properties.get(key, self.default_properties.get(key))
         self.properties['url'] = self.instance_url
 
         self.client = openai.OpenAI(
             base_url=self.properties.get('url').strip(),
             api_key=self.properties.get('api') if self.properties.get('api') else 'NO_KEY'
         )
+
+    def set_row(self, row):
+        self.row = row
 
     def stop(self):
         pass

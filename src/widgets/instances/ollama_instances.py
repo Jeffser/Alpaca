@@ -12,10 +12,11 @@ logger = logging.getLogger(__name__)
 
 # Base instance, don't use directly
 class BaseInstance:
-    instance_id = None
     description = None
-    row = None
     process = None
+
+    def set_row(self, row):
+        self.row = row
 
     def prepare_chat(self, bot_message):
         bot_message.chat.busy = True
@@ -447,7 +448,8 @@ class OllamaManaged(BaseInstance):
     instance_type = 'ollama:managed'
     instance_type_display = _('Ollama (Managed)')
     description = _('Local AI instance managed directly by Alpaca')
-    properties = {
+
+    default_properties = {
         'name': _('Instance'),
         'url': 'http://0.0.0.0:11434',
         'temperature': 0.7,
@@ -470,12 +472,14 @@ class OllamaManaged(BaseInstance):
         self.process = None
         self.log_raw = ''
         self.log_summary = ('', ['dim-label'])
-        for key in self.properties:
+        self.properties = {}
+        for key in self.default_properties:
             if key == 'overrides':
-                for override in self.properties.get(key):
-                    self.properties[key][override] = properties.get(key, {}).get(override, self.properties.get(key).get(override))
+                self.properties[key] = {}
+                for override in self.default_properties.get(key):
+                    self.properties[key][override] = properties.get(key, {}).get(override, self.default_properties.get(key).get(override))
             else:
-                self.properties[key] = properties.get(key, self.properties.get(key))
+                self.properties[key] = properties.get(key, self.default_properties.get(key))
 
     def log_output(self, pipe):
         AMD_support_label = "\n<a href='https://github.com/Jeffser/Alpaca/wiki/Installing-Ollama'>{}</a>".format(_('Alpaca Support'))
@@ -543,7 +547,8 @@ class Ollama(BaseInstance):
     instance_type = 'ollama'
     instance_type_display = 'Ollama'
     description = _('Local or remote AI instance not managed by Alpaca')
-    properties = {
+
+    default_properties = {
         'name': _('Instance'),
         'url': 'http://0.0.0.0:11434',
         'api': '',
@@ -557,6 +562,7 @@ class Ollama(BaseInstance):
 
     def __init__(self, instance_id:str, properties:dict):
         self.instance_id = instance_id
-        for key in self.properties:
-            self.properties[key] = properties.get(key, self.properties.get(key))
+        self.properties = {}
+        for key in self.default_properties:
+            self.properties[key] = properties.get(key, self.default_properties.get(key))
 
