@@ -9,7 +9,8 @@ from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES
 def update_available_model_list(root):
     window = root.get_application().main_alpaca_window
     window.available_model_flowbox.remove_all()
-    set_available_models_data(window.get_current_instance().get_available_models())
+    instance = window.get_current_instance()
+    set_available_models_data(instance.get_available_models())
     available_models_data = get_available_models_data()
 
     window.model_filter_button.set_visible(len(available_models_data) > 0)
@@ -54,6 +55,8 @@ def update_available_model_list(root):
     visible_model_manger_switch = len([p for p in window.model_manager_stack.get_pages() if p.get_visible()]) > 1
     window.model_manager_bottom_view_switcher.set_visible(visible_model_manger_switch)
     window.model_manager_top_view_switcher.set_visible(visible_model_manger_switch)
+
+    window.model_filter_button.set_visible('ollama' in instance.instance_type)
 
 def update_added_model_list(root):
     window = root.get_application().main_alpaca_window

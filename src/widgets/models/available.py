@@ -238,7 +238,7 @@ class AvailableModelButton(Gtk.Button):
         self.add_controller(self.gesture_long_press)
 
     def get_search_string(self) -> str:
-        return '{} {} {} {}'.format(self.get_name(), self.get_name().replace('-', ' ').title(), self.data.get('description'), ' '.join(self.data.get('categories')))
+        return '{} {} {} {}'.format(self.get_name(), self.get_name().replace('-', ' ').title(), self.data.get('description'), ' '.join(self.data.get('categories', [])))
 
     def get_search_categories(self) -> set:
         return set(self.data.get('categories', []))
