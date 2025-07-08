@@ -7,6 +7,7 @@ from pydantic import BaseModel
 
 from .. import dialog, tools
 from ...sql_manager import generate_uuid, Instance as SQL
+from ...constants import MAX_TOKENS_TITLE_GENERATION, TITLE_GENERATION_PROMPT_OPENAI
 
 logger = logging.getLogger(__name__)
 
@@ -240,7 +241,7 @@ class BaseInstance:
             "temperature": 0.2,
             "model": self.get_title_model(),
             "messages": messages,
-            "max_tokens": 50
+            "max_tokens": MAX_TOKENS_TITLE_GENERATION
         }
         new_chat_title = chat.get_name()
 

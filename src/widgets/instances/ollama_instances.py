@@ -5,7 +5,7 @@ from gi.repository import Adw, Gtk, GLib
 import requests, json, logging, os, shutil, subprocess, threading, re, signal, pwd, getpass
 from .. import dialog, tools
 from ...ollama_models import OLLAMA_MODELS
-from ...constants import data_dir, cache_dir, TITLE_GENERATION_PROMPT
+from ...constants import data_dir, cache_dir, TITLE_GENERATION_PROMPT_OLLAMA, MAX_TOKENS_TITLE_GENERATION
 from ...sql_manager import generate_uuid, Instance as SQL
 
 logger = logging.getLogger(__name__)
@@ -241,7 +241,7 @@ class BaseInstance:
         params = {
             "temperature": 0.2,
             "model": self.get_title_model(),
-            "max_tokens": 50,
+            "max_tokens": MAX_TOKENS_TITLE_GENERATION,
             "stream": False,
             "prompt": TITLE_GENERATION_PROMPT.format(prompt),
             "format": {
