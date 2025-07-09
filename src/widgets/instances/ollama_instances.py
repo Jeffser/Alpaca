@@ -521,6 +521,9 @@ class OllamaManaged(BaseInstance):
                 params = self.properties.get('overrides', {}).copy()
                 params["OLLAMA_HOST"] = self.properties.get('url')
                 params["OLLAMA_MODELS"] = self.properties.get('model_directory')
+                for key in list(params):
+                    if not params.get(key):
+                        del params[key]
                 self.process = subprocess.Popen(
                     ["ollama", "serve"],
                     env={**os.environ, **params},

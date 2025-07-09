@@ -757,4 +757,3 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             self.main_navigation_view.replace_with_tags(['welcome'])
 
-
