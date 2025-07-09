@@ -49,9 +49,7 @@ def update_available_model_list(root):
                 window.available_model_flowbox.append(model_element)
                 model_element.get_parent().set_focusable(False)
 
-    window.get_application().lookup_action('download_model_from_name').set_enabled(len(available_models_data) > 0)
     window.available_models_stack_page.set_visible(len(available_models_data) > 0)
-    window.model_creator_stack_page.set_visible(len(available_models_data) > 0)
     visible_model_manger_switch = len([p for p in window.model_manager_stack.get_pages() if p.get_visible()]) > 1
     window.model_manager_bottom_view_switcher.set_visible(visible_model_manger_switch)
     window.model_manager_top_view_switcher.set_visible(visible_model_manger_switch)

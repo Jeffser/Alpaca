@@ -113,7 +113,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     instance_preferences_page = Gtk.Template.Child()
     instance_listbox = Gtk.Template.Child()
     available_models_stack_page = Gtk.Template.Child()
-    model_creator_stack_page = Gtk.Template.Child()
     install_ollama_button = Gtk.Template.Child()
     tool_listbox = Gtk.Template.Child()
     model_manager_bottom_view_switcher = Gtk.Template.Child()
@@ -168,37 +167,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
             Widgets.models.update_added_model_list(self)
             Widgets.models.update_available_model_list(self)
 
-            self.model_creator_stack_page.set_visible(row and 'ollama' in row.instance.instance_type)
-
             if row:
                 self.settings.set_string('selected-instance', row.instance.instance_id)
+                self.get_application().lookup_action('pull_model_from_name').set_enabled('ollama' in row.instance.instance_type)
+                self.get_application().lookup_action('model_creator_existing').set_enabled('ollama' in row.instance.instance_type)
+                self.get_application().lookup_action('model_creator_gguf').set_enabled('ollama' in row.instance.instance_type)
+
 
             self.chat_list_box.get_selected_row().update_profile_pictures()
         if listbox.get_sensitive():
             GLib.idle_add(threading.Thread(target=change_instance).start)
-
-    @Gtk.Template.Callback()
-    def model_creator_gguf(self, button):
-        def result(file):
-            try:
-                file_path = file.get_path()
-            except Exception as e:
-                return
-            Widgets.models.creator.ModelCreatorDialog(self.get_current_instance(), file_path, True).present(self)
-
-        file_filter = Gtk.FileFilter()
-        file_filter.add_suffix('gguf')
-        Widgets.dialog.simple_file(
-            parent = self,
-            file_filters = [file_filter],
-            callback = result
-        )
-
-    @Gtk.Template.Callback()
-    def model_creator_existing(self, widget, selected_model:str=None, instance=None):
-        if not instance:
-            instance = self.get_current_instance()
-        Widgets.models.creator.ModelCreatorDialog(instance, selected_model, False).present(widget.get_root())
 
     @Gtk.Template.Callback()
     def model_manager_stack_changed(self, viewstack, params):
@@ -711,9 +689,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'toggle_search': [lambda *_: self.toggle_searchbar(), ['<primary>f']],
             'model_manager' : [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>m']],
             'instance_manager' : [lambda *i: self.show_instance_manager() if self.main_navigation_view.get_visible_page().get_tag() != 'instance_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>i']],
-            'download_model_from_name' : [lambda *i: Widgets.dialog.simple_entry(
+            'pull_model_from_name' : [lambda *i: Widgets.dialog.simple_entry(
                 parent=self,
-                heading=_('Download Model?'),
+                heading=_('Pull Model'),
                 body=_('Please enter the model name following this template: name:tag'),
                 callback=lambda name: threading.Thread(target=Widgets.models.available.pull_model_confirm, args=(name, self.get_current_instance(), self)).start(),
                 entries={'placeholder': 'deepseek-r1:7b'}
@@ -729,7 +707,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             )],
             'tool_manager': [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'tool_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'tool_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']],
             'start_quick_ask': [lambda *_: self.get_application().create_quick_ask().present(), ['<primary><alt>a']],
-            'start_live_chat': [lambda *_: self.start_live_chat(), ['<primary><alt>l']]
+            'start_live_chat': [lambda *_: self.start_live_chat(), ['<primary><alt>l']],
+            'model_creator_existing': [lambda *_: Widgets.models.creator.prompt_existing(self)],
+            'model_creator_gguf': [lambda *_: Widgets.models.creator.prompt_gguf(self)]
         }
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)

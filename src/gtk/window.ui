@@ -711,49 +711,6 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
                         </property>
                       </object>
                     </child>
-                    <child>
-                      <object class="AdwViewStackPage"  id="model_creator_stack_page">
-                        <property name="name">model_creator</property>
-                        <property name="title" translatable="yes">Creator</property>
-                        <property name="icon-name">brain-augemnted-symbolic</property>
-                        <property name="child">
-                          <object class="AdwStatusPage">
-                            <property name="hexpand">true</property>
-                            <property name="title" translatable="yes">Model Creator</property>
-                            <property name="description" translatable="yes">Select a method of importing a model to continue</property>
-                            <property name="icon-name">brain-augemnted-symbolic</property>
-                            <property name="child">
-                              <object class="GtkBox">
-                                <property name="halign">3</property>
-                                <property name="spacing">10</property>
-                                <child>
-                                  <object class="GtkButton">
-                                    <signal name="clicked" handler="model_creator_gguf"/>
-                                    <property name="child">
-                                      <object class="AdwButtonContent">
-                                        <property name="icon-name">document-open-symbolic</property>
-                                        <property name="label" translatable="yes">GGUF File</property>
-                                      </object>
-                                    </property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkButton">
-                                    <signal name="clicked" handler="model_creator_existing"/>
-                                    <property name="child">
-                                      <object class="AdwButtonContent">
-                                        <property name="icon-name">chain-link-loose-symbolic</property>
-                                        <property name="label" translatable="yes">Existing Model</property>
-                                      </object>
-                                    </property>
-                                  </object>
-                                </child>
-                              </object>
-                            </property>
-                          </object>
-                        </property>
-                      </object>
-                    </child>
                   </object>
                 </property>
                 <child type="bottom">
@@ -1018,8 +975,18 @@ Alpaca is distributed under GPL v3.0, this software comes with no warranty.</pro
         <attribute name="action">app.reload_added_models</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Download Model From Name</attribute>
-        <attribute name="action">app.download_model_from_name</attribute>
+        <attribute name="label" translatable="yes">Pull Model From Name</attribute>
+        <attribute name="action">app.pull_model_from_name</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Create Model from Existing</attribute>
+        <attribute name="action">app.model_creator_existing</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Create Model from GGUF File</attribute>
+        <attribute name="action">app.model_creator_gguf</attribute>
       </item>
     </section>
   </menu>
