@@ -167,7 +167,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             Widgets.models.update_added_model_list(self)
             Widgets.models.update_available_model_list(self)
-            self.model_creator_stack_page.set_visible('ollama' in row.instance.instance_type)
+
+            self.model_creator_stack_page.set_visible(row and 'ollama' in row.instance.instance_type)
 
             if row:
                 self.settings.set_string('selected-instance', row.instance.instance_id)
