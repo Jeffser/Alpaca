@@ -5,7 +5,7 @@ from gi.repository import Adw, Gtk, GLib
 import requests, json, logging, os, shutil, subprocess, threading, re, signal, pwd, getpass
 from .. import dialog, tools
 from ...ollama_models import OLLAMA_MODELS
-from ...constants import data_dir, cache_dir
+from ...constants import data_dir, cache_dir, TITLE_GENERATION_PROMPT_OLLAMA, MAX_TOKENS_TITLE_GENERATION
 from ...sql_manager import generate_uuid, Instance as SQL
 
 logger = logging.getLogger(__name__)
@@ -241,9 +241,9 @@ class BaseInstance:
         params = {
             "temperature": 0.2,
             "model": self.get_title_model(),
-            "max_tokens": 50,
+            "max_tokens": MAX_TOKENS_TITLE_GENERATION,
             "stream": False,
-            "prompt": "You are an assistant that generates short chat titles based on the prompt. If you want to, you can add a single emoji.\n\n{}".format(prompt),
+            "prompt": TITLE_GENERATION_PROMPT.format(prompt),
             "format": {
                 "type": "object",
                 "properties": {
@@ -270,10 +270,15 @@ class BaseInstance:
                 data=json.dumps(params)
             )
             data = json.loads(response.json().get('response', '{"title": ""}'))
+            generated_title = data.get('title').replace('\n', '').strip()
+
+            if len(generated_title) > 30:
+                generated_title = generated_title[:30].strip() + '...'
+
             if data.get('emoji'):
-                chat.row.rename('{} {}'.format(data.get('emoji').replace('\n', '').strip(), data.get('title').replace('\n', '').strip()))
+                chat.row.rename('{} {}'.format(data.get('emoji').replace('\n', '').strip(), generated_title))
             else:
-                chat.row.rename(data.get('title').replace('\n', '').strip())
+                chat.row.rename(generated_title)
         except Exception as e:
             logger.error(e)
 
