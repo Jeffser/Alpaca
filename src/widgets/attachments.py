@@ -13,7 +13,7 @@ from PIL import Image
 from ..constants import cache_dir
 import requests, json, base64, tempfile, shutil, logging, threading, os, re
 
-from . import blocks, dialog, camera
+from . import blocks, dialog, camera, voice
 from ..sql_manager import Instance as SQL
 
 logger = logging.getLogger(__name__)
@@ -220,6 +220,7 @@ class Attachment(Gtk.Button):
                     "tool": "processor-symbolic",
                     "link": "globe-symbolic",
                     "image": "image-x-generic-symbolic",
+                    "audio": "music-note-single-symbolic",
                     "notebook": "open-book-symbolic"
                 }.get(self.file_type, "document-text-symbolic")
             )
@@ -276,12 +277,11 @@ class Attachment(Gtk.Button):
             logger.error(e)
 
     def prompt_download(self):
-        name = self.file_name
-        if '.' not in name: #No extension
-            if self.file_type == 'image':
-                name += '.png'
-            else:
-                name += '.md'
+        name = os.path.splitext(self.file_name)[0]
+        if self.file_type == 'image':
+            name += '.png'
+        else:
+            name += '.md'
 
         name = re.sub(r'[<>:"/\\|?*\x00-\x1F]', '_', name)
 
@@ -406,10 +406,7 @@ class ImageAttachment(Gtk.Button):
             logger.error(e)
 
     def prompt_download(self):
-        name = self.file_name
-        if '.' not in name: #No extension
-            name += '.png'
-
+        name = os.path.splitext(self.file_name)[0] + '.png'
         name = re.sub(r'[<>:"/\\|?*\x00-\x1F]', '_', name)
 
         dialog = Gtk.FileDialog(
@@ -549,7 +546,8 @@ class GlobalAttachmentContainer(AttachmentContainer):
             "odt": ["odt"],
             "docx": ["docx"],
             "pptx": ["pptx"],
-            "xlsx": ["xlsx"]
+            "xlsx": ["xlsx"],
+            'audio': ['mp3']
         }
         if file.query_info("standard::content-type", 0, None).get_content_type() == 'text/plain':
             extension = 'txt'
@@ -562,28 +560,36 @@ class GlobalAttachmentContainer(AttachmentContainer):
             file_type = found_types[0]
         if file_type == 'image':
             content = extract_image(file.get_path(), 256)
+        elif file_type == 'audio':
+            content = 'AUDIO NOT TRANSCRIBED'
         else:
             content = extract_content(file_type, file.get_path())
-        attachment = Attachment(
-            file_id="-1",
-            file_name=os.path.basename(file.get_path()),
-            file_type=file_type,
-            file_content=content
-        )
-        self.add_attachment(attachment)
+        if content and (file_type != 'audio' or voice.libraries.get('whisper')):
+            file_name = os.path.splitext(os.path.basename(file.get_path()))[0]
+            attachment = Attachment(
+                file_id="-1",
+                file_name=file_name,
+                file_type=file_type,
+                file_content=content
+            )
+            self.add_attachment(attachment)
+            if file_type == 'audio':
+                threading.Thread(target=voice.transcribe_audio_file, args=(attachment, file.get_path())).start()
 
     def attachment_request(self, block_images:bool=False):
         ff = Gtk.FileFilter()
         ff.set_name(_('Any compatible Alpaca attachment'))
         file_filters = [ff]
-        mimes = (
+        mimes = [
             'text/plain',
             'application/pdf',
             'application/vnd.oasis.opendocument.text',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'application/vnd.openxmlformats-officedocument.presentationml.presentation',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        )
+        ]
+        if voice.libraries.get('whisper'):
+            mimes.append('audio/mpeg')
         for mime in mimes:
             ff = Gtk.FileFilter()
             ff.add_mime_type(mime)
