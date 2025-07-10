@@ -107,7 +107,7 @@ class AttachmentDialog(Adw.Dialog):
                 vexpand=False,
                 valign=3
             )
-            delete_button.connect('clicked', lambda *_: self.prompt_delete())
+            delete_button.connect('clicked', lambda *_: self.attachment.prompt_delete())
             header.pack_start(delete_button)
 
         download_button = Gtk.Button(
@@ -116,7 +116,7 @@ class AttachmentDialog(Adw.Dialog):
             vexpand=False,
             valign=3
         )
-        download_button.connect('clicked', lambda *_: self.prompt_download())
+        download_button.connect('clicked', lambda *_: self.attachment.prompt_download())
         header.pack_start(download_button)
 
         if self.attachment.file_type == 'notebook':
@@ -192,48 +192,6 @@ class AttachmentDialog(Adw.Dialog):
 
             self.get_child().get_content().set_child(container)
 
-    def prompt_delete(self):
-        self.close()
-        dialog.simple(
-            parent = self.get_root(),
-            heading = _('Delete Attachment?'),
-            body = _("Are you sure you want to delete '{}'?").format(self.attachment.file_name),
-            callback = lambda: self.attachment.delete(),
-            button_name = _('Delete'),
-            button_appearance = 'destructive'
-        )
-
-    def on_download(self, dialog, result, user_data):
-        try:
-            file = dialog.save_finish(result)
-            path = file.get_path()
-            if path:
-                if self.attachment.file_type == 'image':
-                    with open(path, "wb") as f:
-                        f.write(base64.b64decode(self.attachment.file_content))
-                else:
-                    with open(path, "w") as f:
-                        f.write(self.attachment.file_content)
-                Gio.AppInfo.launch_default_for_uri('file://{}'.format(path))
-        except GLib.Error as e:
-            logger.error(e)
-
-    def prompt_download(self):
-        name = self.attachment.file_name
-        if '.' not in name: #No extension
-            if self.attachment.file_type == 'image':
-                name += '.png'
-            else:
-                name += '.md'
-
-        name = re.sub(r'[<>:"/\\|?*\x00-\x1F]', '_', name)
-
-        dialog = Gtk.FileDialog(
-            title=_("Save Attachment"),
-            initial_name=name
-        )
-        dialog.save(self.get_root(), None, self.on_download, None)
-
     def replace_notebook_content(self, notebook):
         notebook.set_notebook(self.attachment.file_content)
         self.close()
@@ -272,15 +230,89 @@ class Attachment(Gtk.Button):
         else:
             self.connect("clicked", lambda button: AttachmentDialog(self).present(self.get_root()))
 
+        self.gesture_click = Gtk.GestureClick(button=3)
+        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
+        self.add_controller(self.gesture_click)
+        self.gesture_long_press = Gtk.GestureLongPress()
+        self.gesture_long_press.connect("pressed", self.show_popup)
+        self.add_controller(self.gesture_long_press)
+
     def get_content(self) -> str:
         return self.file_content
 
     def delete(self):
+        dialog = self.get_root().get_visible_dialog()
+        if dialog and isinstance(dialog, AttachmentDialog):
+            dialog.close()
         if len(list(self.get_parent())) == 1:
             self.get_parent().get_parent().get_parent().set_visible(False)
         self.get_parent().remove(self)
         if self.get_name() != "-1":
             SQL.delete_attachment(self)
+
+    def prompt_delete(self):
+        dialog.simple(
+            parent = self.get_root(),
+            heading = _('Delete Attachment?'),
+            body = _("Are you sure you want to delete '{}'?").format(self.file_name),
+            callback = lambda: self.delete(),
+            button_name = _('Delete'),
+            button_appearance = 'destructive'
+        )
+
+    def on_download(self, dialog, result, user_data):
+        try:
+            file = dialog.save_finish(result)
+            path = file.get_path()
+            if path:
+                if self.file_type == 'image':
+                    with open(path, "wb") as f:
+                        f.write(base64.b64decode(self.file_content))
+                else:
+                    with open(path, "w") as f:
+                        f.write(self.file_content)
+                Gio.AppInfo.launch_default_for_uri('file://{}'.format(path))
+        except GLib.Error as e:
+            logger.error(e)
+
+    def prompt_download(self):
+        name = self.file_name
+        if '.' not in name: #No extension
+            if self.file_type == 'image':
+                name += '.png'
+            else:
+                name += '.md'
+
+        name = re.sub(r'[<>:"/\\|?*\x00-\x1F]', '_', name)
+
+        dialog = Gtk.FileDialog(
+            title=_("Save Attachment"),
+            initial_name=name
+        )
+        dialog.save(self.get_root(), None, self.on_download, None)
+
+    def show_popup(self, gesture, x, y):
+        rect = Gdk.Rectangle()
+        rect.x, rect.y, = x, y
+        actions = [
+            [
+                {
+                    'label': _('Download Attachment'),
+                    'callback': self.prompt_download,
+                    'icon': 'folder-download-symbolic'
+                }
+            ]
+        ]
+        if self.file_type != 'model_context':
+            actions[0].append({
+                'label': _('Remove Attachment'),
+                'callback': self.prompt_delete,
+                'icon': 'user-trash-symbolic'
+            })
+        popup = dialog.Popover(actions)
+        popup.set_parent(self)
+        popup.set_pointing_to(rect)
+        popup.popup()
 
 class ImageAttachment(Gtk.Button):
     __gtype_name__ = 'AlpacaImageAttachment'
@@ -332,15 +364,82 @@ class ImageAttachment(Gtk.Button):
                 name=file_id
             )
 
+        self.gesture_click = Gtk.GestureClick(button=3)
+        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
+        self.add_controller(self.gesture_click)
+        self.gesture_long_press = Gtk.GestureLongPress()
+        self.gesture_long_press.connect("pressed", self.show_popup)
+        self.add_controller(self.gesture_long_press)
+
     def get_content(self) -> str:
         return self.file_content
 
     def delete(self):
+        dialog = self.get_root().get_visible_dialog()
+        if dialog and isinstance(dialog, AttachmentDialog):
+            dialog.close()
         if len(list(self.get_parent())) == 1:
             self.get_parent().get_parent().get_parent().set_visible(False)
         self.get_parent().remove(self)
         if self.get_name() != "-1":
             SQL.delete_attachment(self)
+
+    def prompt_delete(self):
+        self.close()
+        dialog.simple(
+            parent = self.get_root(),
+            heading = _('Delete Image?'),
+            body = _("Are you sure you want to delete '{}'?").format(self.file_name),
+            callback = lambda: self.delete(),
+            button_name = _('Delete'),
+            button_appearance = 'destructive'
+        )
+
+    def on_download(self, dialog, result, user_data):
+        try:
+            file = dialog.save_finish(result)
+            path = file.get_path()
+            if path:
+                with open(path, "wb") as f:
+                    f.write(base64.b64decode(self.file_content))
+                Gio.AppInfo.launch_default_for_uri('file://{}'.format(path))
+        except GLib.Error as e:
+            logger.error(e)
+
+    def prompt_download(self):
+        name = self.file_name
+        if '.' not in name: #No extension
+            name += '.png'
+
+        name = re.sub(r'[<>:"/\\|?*\x00-\x1F]', '_', name)
+
+        dialog = Gtk.FileDialog(
+            title=_("Save Image"),
+            initial_name=name
+        )
+        dialog.save(self.get_root(), None, self.on_download, None)
+
+    def show_popup(self, gesture, x, y):
+        rect = Gdk.Rectangle()
+        rect.x, rect.y, = x, y
+        actions = [
+            [
+                {
+                    'label': _('Download Attachment'),
+                    'callback': self.prompt_download,
+                    'icon': 'folder-download-symbolic'
+                },
+                {
+                    'label': _('Remove Attachment'),
+                    'callback': self.prompt_delete,
+                    'icon': 'user-trash-symbolic'
+                }
+            ]
+        ]
+        popup = dialog.Popover(actions)
+        popup.set_parent(self)
+        popup.set_pointing_to(rect)
+        popup.popup()
 
 class AttachmentContainer(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentContainer'
@@ -504,28 +603,36 @@ class GlobalAttachmentContainer(AttachmentContainer):
 
     def request_screenshot(self):
         if self.get_root().get_selected_model().get_vision():
+            loop = GLib.MainLoop()
             bus = SessionBus()
-            portal = bus.get("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop")
-            subscription = None
+            portal = bus.get("org.freedesktop.portal.Desktop",
+                                  "/org/freedesktop/portal/desktop")
 
-            def on_response(sender, obj, iface, signal, *params):
-                response = params[0]
-                if response[0] == 0:
-                    uri = response[1].get("uri")
-                    self.on_attachment(Gio.File.new_for_uri(uri))
+            options = {
+                "interactive": GLib.Variant('b', True)
+            }
+            handle = portal.Screenshot("", options)
+
+            def on_response(sender, object_path, interface_name, signal_name, parameters):
+                response_code = parameters[0]
+                results = parameters[1]
+                if response_code == 0 and "uri" in results:
+                    uri = results["uri"]
+                    file = Gio.File.new_for_uri(uri)
+                    self.on_attachment(file)
                 else:
                     logger.error(f"Screenshot request failed with response: {response}\n{sender}\n{obj}\n{iface}\n{signal}")
                     dialog.show_toast(_("Attachment failed, screenshot might be too big"), self)
-                if subscription:
-                    subscription.disconnect()
+                loop.quit()
 
-            subscription = bus.subscribe(
+            bus.subscribe(
                 iface="org.freedesktop.portal.Request",
                 signal="Response",
+                object=handle,
                 signal_fired=on_response
             )
 
-            portal.Screenshot("", {"interactive": Variant('b', True)})
+            loop.run()
         else:
             dialog.show_toast(_("Image recognition is only available on specific models"), self.get_root())
 
