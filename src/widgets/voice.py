@@ -351,9 +351,22 @@ class TranscriptionDialog(Adw.Dialog):
             self.cancel()
             return
         try:
-            result = loaded_whisper_models.get(model_name).transcribe(self.file_path)
+            result = loaded_whisper_models.get(model_name).transcribe(self.file_path, word_timestamps=False)
+            segments = result['segments']
+            paragraphs = []
+            current_para = []
+
+            for i, seg in enumerate(segments):
+                current_para.append(seg['text'].strip())
+                if i + 1 < len(segments):
+                    if segments[i+1]['start'] - seg['end'] > 1.2:
+                        paragraphs.append(' '.join(current_para))
+                        current_para = []
+            if current_para:
+                paragraphs.append(' '.join(current_para))
+
             if self.attachment.get_root():
-                self.attachment.file_content = result['text']
+                self.attachment.file_content = '\n\n'.join(paragraphs)
             if self.get_root():
                 self.force_close()
         except Exception as e:
