@@ -203,7 +203,6 @@ class BaseInstance:
 
         if chat.busy:
             try:
-                bot_message.update_message({"clear": True})
                 response = requests.post(
                     '{}/api/chat'.format(self.properties.get('url')),
                     headers={
@@ -213,7 +212,7 @@ class BaseInstance:
                     data=json.dumps(params),
                     stream=True
                 )
-
+                bot_message.update_message({"clear": True})
                 if response.status_code == 200:
                     for line in response.iter_lines():
                         if line:
@@ -243,7 +242,7 @@ class BaseInstance:
             "model": self.get_title_model(),
             "max_tokens": MAX_TOKENS_TITLE_GENERATION,
             "stream": False,
-            "prompt": TITLE_GENERATION_PROMPT.format(prompt),
+            "prompt": TITLE_GENERATION_PROMPT_OLLAMA.format(prompt),
             "format": {
                 "type": "object",
                 "properties": {

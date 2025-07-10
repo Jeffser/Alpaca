@@ -2,10 +2,8 @@ from ...sql_manager import Instance as SQL
 
 import time, random
 
-from .tools import GetCurrentDatetime, GetRecipeByName, GetRecipesByCategory, ExtractWikipedia, OnlineSearch, RunCommand, SpotifyController
+from .tools import Base
 from .notebook_tools import tools as NotebookTools
-
-available_tools = [GetCurrentDatetime, GetRecipeByName, GetRecipesByCategory, ExtractWikipedia, OnlineSearch, RunCommand, SpotifyController]
 
 def log_to_message(text:str, bot_message, animate:bool):
     for s in text.split(' '):
@@ -16,7 +14,7 @@ def log_to_message(text:str, bot_message, animate:bool):
 
 def update_available_tools(listbox):
     tools_parameters = SQL.get_tool_parameters()
-    for ac in available_tools:
+    for ac in Base.__subclasses__():
         tool_parameters = tools_parameters.get(ac.tool_metadata.get('name'), {})
         tool_element = ac(tool_parameters.get('variables', {}), tool_parameters.get('activated', False))
         listbox.prepend(tool_element)
