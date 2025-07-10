@@ -5,7 +5,7 @@ import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, im
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
-from .common import CategoryPill, get_available_models_data
+from .common import CategoryPill, get_available_models_data, prompt_existing
 
 logger = logging.getLogger(__name__)
 
@@ -464,11 +464,7 @@ class AddedModelButton(Gtk.Button):
         dialog = self.get_root().get_visible_dialog()
         if dialog and isinstance(dialog, AddedModelDialog):
             dialog.close()
-        self.get_root().get_application().main_alpaca_window.model_creator_existing(
-            widget=self,
-            selected_model=self.model_title,
-            instance=self.instance
-        )
+        prompt_existing(self.get_root(), self.instance, self.model_title)
 
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()

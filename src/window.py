@@ -708,8 +708,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'tool_manager': [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'tool_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'tool_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']],
             'start_quick_ask': [lambda *_: self.get_application().create_quick_ask().present(), ['<primary><alt>a']],
             'start_live_chat': [lambda *_: self.start_live_chat(), ['<primary><alt>l']],
-            'model_creator_existing': [lambda *_: Widgets.models.creator.prompt_existing(self)],
-            'model_creator_gguf': [lambda *_: Widgets.models.creator.prompt_gguf(self)]
+            'model_creator_existing': [lambda *_: Widgets.models.common.prompt_existing(self)],
+            'model_creator_gguf': [lambda *_: Widgets.models.common.prompt_gguf(self)]
         }
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)

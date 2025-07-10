@@ -1,6 +1,8 @@
 # common.py
 
 from gi.repository import Gtk, Gio, Adw
+import importlib.util
+from .. import dialog
 
 available_models_data = {}
 
@@ -64,3 +66,29 @@ def prepend_added_model(root, model):
     window.local_model_flowbox.prepend(model)
     if model.__gtype_name__ == 'AlpacaAddedModelButton':
         window.model_dropdown.get_model().append(model.row)
+
+def prompt_gguf(root, instance=None):
+    creator = importlib.import_module('alpaca.widgets.models.creator')
+    if not instance:
+        instance = root.get_application().main_alpaca_window.get_current_instance()
+
+    def result(file):
+        try:
+            file_path = file.get_path()
+        except Exception as e:
+            return
+        creator.ModelCreatorDialog(instance, file_path, True).present(root)
+
+    file_filter = Gtk.FileFilter()
+    file_filter.add_suffix('gguf')
+    dialog.simple_file(
+        parent = root,
+        file_filters = [file_filter],
+        callback = result
+    )
+
+def prompt_existing(root, instance=None, model_name:str=None):
+    creator = importlib.import_module('alpaca.widgets.models.creator')
+    if not instance:
+        instance = root.get_application().main_alpaca_window.get_current_instance()
+    creator.ModelCreatorDialog(instance, model_name, False).present(root)
