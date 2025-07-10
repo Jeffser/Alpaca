@@ -569,6 +569,20 @@ class DeepInfra(BaseInstance):
     instance_url = 'https://api.deepinfra.com/v1/openai'
     description = _('DeepInfra cloud inference API')
 
+class XAI(BaseInstance):
+    instance_type = 'xai'
+    instance_type_display = 'xAI'
+    instance_url = 'https://api.x.ai/v1/'
+    description = _('xAI Grok models')
+
+    def __init__(self, instance_id:str, properties:dict):
+        super().__init__(instance_id, properties)
+        self.client = openai.OpenAI(
+            base_url=self.properties.get('url').strip(),
+            api_key=self.properties.get('api') if self.properties.get('api') else 'NO_KEY',
+            timeout=3600
+        )
+
 class GenericOpenAI(BaseInstance):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
