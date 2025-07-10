@@ -130,7 +130,6 @@ class AlpacaApplication(Adw.Application):
         super().__init__(application_id='com.jeffser.Alpaca',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.props.active_window.closing_app(None), ['<primary>q'])
-        self.create_action('preferences', lambda *_: self.props.active_window.preferences_dialog.present(self.props.active_window), ['<primary>comma'])
         self.create_action('about', self.on_about_action)
         self.set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.version = version
@@ -184,9 +183,6 @@ class AlpacaApplication(Adw.Application):
             settings = Gtk.Settings.get_default()
             if settings:
                 settings.set_property('gtk-font-name', 'Segoe UI')
-        if sys.platform in ('win32', 'darwin'): # MacOS and Windows
-            win.powersaver_warning_switch.set_visible(False)
-            win.background_switch.set_visible(False)
 
     def on_about_action(self, widget, a):
         current_year = str(datetime.now().year)

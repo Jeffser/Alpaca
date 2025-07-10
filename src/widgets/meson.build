@@ -8,7 +8,9 @@ widgets = [
   'dialog.py',
   'attachments.py',
   'voice.py',
-  'camera.py'
+  'camera.py',
+  'welcome.py',
+  'preferences.py'
 ]
 
 install_data(widgets, install_dir: moduledir)

@@ -21,39 +21,23 @@
 Handles the main window
 """
 
-import json
-import threading
-import os
-import re
-import gettext
-import shutil
-import logging
-import time
-import requests
-import sys
-import icu
-import tempfile
-import importlib.util
+import json, threading, os, re, gettext, shutil, logging, time, requests, sys, tempfile, importlib.util
 import numpy as np
 
 from datetime import datetime
 
 import gi
-
 gi.require_version('Spelling', '1')
-
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, Spelling
 
 from .sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from . import widgets as Widgets
-from .constants import SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES, STT_MODELS, data_dir, source_dir, cache_dir
-
+from .constants import data_dir, source_dir, cache_dir
 
 logger = logging.getLogger(__name__)
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
-
     __gtype_name__ = 'AlpacaWindow'
 
     localedir = os.path.join(source_dir, 'locale')
@@ -63,7 +47,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     _ = gettext.gettext
 
     #Elements
-    zoom_spin = Gtk.Template.Child()
     local_model_stack = Gtk.Template.Child()
     available_model_stack = Gtk.Template.Child()
     model_manager_stack = Gtk.Template.Child()
@@ -72,11 +55,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     local_model_flowbox = Gtk.Template.Child()
     available_model_flowbox = Gtk.Template.Child()
     split_view_overlay = Gtk.Template.Child()
-    selected_chat_row : Gtk.ListBoxRow = None
-    preferences_dialog = Gtk.Template.Child()
-    welcome_carousel = Gtk.Template.Child()
-    welcome_previous_button = Gtk.Template.Child()
-    welcome_next_button = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     chat_bin = Gtk.Template.Child()
     chat_list_stack = Gtk.Template.Child()
@@ -89,39 +67,23 @@ class AlpacaWindow(Adw.ApplicationWindow):
     title_stack = Gtk.Template.Child()
     title_no_model_button = Gtk.Template.Child()
     model_filter_button = Gtk.Template.Child()
-    background_switch = Gtk.Template.Child()
 
     file_filter_db = Gtk.Template.Child()
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = Gtk.Template.Child()
 
-    powersaver_warning_switch = Gtk.Template.Child()
-    mic_group = Gtk.Template.Child()
-    tts_group = Gtk.Template.Child()
-    mic_auto_send_switch = Gtk.Template.Child()
-    mic_language_combo = Gtk.Template.Child()
-    mic_model_combo = Gtk.Template.Child()
-    tts_voice_combo = Gtk.Template.Child()
-    tts_auto_mode_combo = Gtk.Template.Child()
-
     banner = Gtk.Template.Child()
 
     model_dropdown = Gtk.Template.Child()
-    notice_dialog = Gtk.Template.Child()
 
     instance_preferences_page = Gtk.Template.Child()
     instance_listbox = Gtk.Template.Child()
     available_models_stack_page = Gtk.Template.Child()
-    install_ollama_button = Gtk.Template.Child()
     tool_listbox = Gtk.Template.Child()
     model_manager_bottom_view_switcher = Gtk.Template.Child()
     model_manager_top_view_switcher = Gtk.Template.Child()
     last_selected_instance_row = None
-
-    @Gtk.Template.Callback()
-    def closing_notice(self, dialog):
-        self.settings.set_string('last-notice-seen', dialog.get_name())
 
     @Gtk.Template.Callback()
     def add_instance(self, button):
@@ -186,38 +148,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.model_search_button.set_active(self.model_search_button.get_active() and viewstack.get_visible_child_name() not in ('model_creator', 'instances'))
 
     @Gtk.Template.Callback()
-    def welcome_carousel_page_changed(self, carousel, index):
-        logger.debug("Showing welcome carousel")
-        if index == 0:
-            self.welcome_previous_button.set_sensitive(False)
-        else:
-            self.welcome_previous_button.set_sensitive(True)
-        if index == carousel.get_n_pages()-1:
-            self.welcome_next_button.set_label(_("Close"))
-            self.welcome_next_button.set_tooltip_text(_("Close"))
-        else:
-            self.welcome_next_button.set_label(_("Next"))
-            self.welcome_next_button.set_tooltip_text(_("Next"))
-
-    @Gtk.Template.Callback()
-    def welcome_previous_button_activate(self, button):
-        self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()-1), True)
-
-    @Gtk.Template.Callback()
-    def welcome_next_button_activate(self, button):
-        if button.get_label() == "Next":
-            self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
-        else:
-            self.settings.set_boolean('skip-welcome', True)
-            self.main_navigation_view.replace_with_tags(['chat'])
-
-    @Gtk.Template.Callback()
-    def zoom_changed(self, spinner):
-        settings = Gtk.Settings.get_default()
-        settings.reset_property('gtk-xft-dpi')
-        settings.set_property('gtk-xft-dpi',  settings.get_property('gtk-xft-dpi') + (int(spinner.get_value()) - 100) * 400)
-
-    @Gtk.Template.Callback()
     def closing_app(self, user_data):
         def close():
             selected_chat = self.chat_list_box.get_selected_row()
@@ -250,13 +180,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 return True
             else:
                 close()
-
-    @Gtk.Template.Callback()
-    def link_button_handler(self, button):
-        try:
-            Gio.AppInfo.launch_default_for_uri(button.get_name())
-        except Exception as e:
-            logger.error(e)
 
     @Gtk.Template.Callback()
     def chat_search_changed(self, entry):
@@ -547,31 +470,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.get_application().args.new_chat:
             self.new_chat(self.get_application().args.new_chat)
 
-        self.mic_group.set_visible(importlib.util.find_spec('whisper'))
-        self.tts_group.set_visible(importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'))
-
-        string_list = Gtk.StringList()
-        for model, size in STT_MODELS.items():
-            string_list.append('{} ({})'.format(model.title(), size))
-        self.mic_model_combo.set_model(string_list)
-        self.settings.bind('stt-model', self.mic_model_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
-
-        string_list = Gtk.StringList()
-        for lan in SPEACH_RECOGNITION_LANGUAGES:
-            string_list.append('{} ({})'.format(icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title(), lan))
-        self.mic_language_combo.set_model(string_list)
-        self.settings.bind('stt-language', self.mic_language_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
-
-        self.settings.bind('stt-auto-send', self.mic_auto_send_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
-
-        string_list = Gtk.StringList()
-        for name in TTS_VOICES:
-            string_list.append(name)
-        self.tts_voice_combo.set_model(string_list)
-        self.settings.bind('tts-model', self.tts_voice_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
-
-        self.settings.bind('tts-auto-dictate', self.tts_auto_mode_combo, 'active', Gio.SettingsBindFlags.DEFAULT)
-
         # Ollama is available but there are no instances added
         if not any(i.get("type") == "ollama:managed" for i in SQL.get_instances()) and shutil.which("ollama"):
             SQL.insert_or_update_instance(
@@ -588,20 +486,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             instance_listbox=self.instance_listbox,
             selected_instance_id=self.settings.get_value('selected-instance').unpack()
         )
-
-    def open_button_menu(self, gesture, x, y, menu):
-        button = gesture.get_widget()
-        popover = Gtk.PopoverMenu(
-            menu_model=menu,
-            has_arrow=False,
-            halign=1
-        )
-        position = Gdk.Rectangle()
-        position.x = x
-        position.y = y
-        popover.set_parent(button.get_child())
-        popover.set_pointing_to(position)
-        popover.popup()
 
     def on_chat_imported(self, file):
         if file:
@@ -670,8 +554,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for el in ("default-width", "default-height", "maximized", "hide-on-close"):
             self.settings.bind(el, self, el, Gio.SettingsBindFlags.DEFAULT)
 
-        self.settings.bind('powersaver-warning', self.powersaver_warning_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
-        self.settings.bind('zoom', self.zoom_spin, 'value', Gio.SettingsBindFlags.DEFAULT)
 
         universal_actions = {
             'new_chat': [lambda *_: self.chat_list_box.select_row(self.new_chat().row), ['<primary>n']],
@@ -709,7 +591,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'start_quick_ask': [lambda *_: self.get_application().create_quick_ask().present(), ['<primary><alt>a']],
             'start_live_chat': [lambda *_: self.start_live_chat(), ['<primary><alt>l']],
             'model_creator_existing': [lambda *_: Widgets.models.common.prompt_existing(self)],
-            'model_creator_gguf': [lambda *_: Widgets.models.common.prompt_gguf(self)]
+            'model_creator_gguf': [lambda *_: Widgets.models.common.prompt_gguf(self)],
+            'preferences': [lambda *_: Widgets.preferences.PreferencesDialog().present(self), ['<primary>comma']]
         }
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
@@ -723,17 +606,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda *_: verify_powersaver_mode())
         self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
 
-
-        if shutil.which('ollama'):
-            text = _('Already Installed!')
-            self.install_ollama_button.set_label(text)
-            self.install_ollama_button.set_tooltip_text(text)
-            self.install_ollama_button.set_sensitive(False)
-
         self.prepare_alpaca()
         if self.settings.get_value('skip-welcome').unpack():
-            if not self.settings.get_value('last-notice-seen').unpack() == self.notice_dialog.get_name():
-                self.notice_dialog.present(self)
+            notice_dialog = Widgets.welcome.Notice()
+            if not self.settings.get_value('last-notice-seen').unpack() == notice_dialog.get_name():
+                notice_dialog.present(self)
         else:
-            self.main_navigation_view.replace_with_tags(['welcome'])
+            self.main_navigation_view.replace([Widgets.welcome.Welcome()])
 
