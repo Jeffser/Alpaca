@@ -385,7 +385,6 @@ class ImageAttachment(Gtk.Button):
             SQL.delete_attachment(self)
 
     def prompt_delete(self):
-        self.close()
         dialog.simple(
             parent = self.get_root(),
             heading = _('Delete Image?'),
