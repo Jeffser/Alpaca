@@ -547,7 +547,8 @@ class GlobalAttachmentContainer(AttachmentContainer):
             "docx": ["docx"],
             "pptx": ["pptx"],
             "xlsx": ["xlsx"],
-            'audio': ['mp3']
+            'audio': ["wav", "mp3", "flac", "ogg", "oga", "m4a", "acc", "aiff", "aif", "opus", "webm",
+                    "mp4", "mkv", "mov", "avi"]
         }
         if file.query_info("standard::content-type", 0, None).get_content_type() == 'text/plain':
             extension = 'txt'
@@ -589,7 +590,13 @@ class GlobalAttachmentContainer(AttachmentContainer):
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         ]
         if voice.libraries.get('whisper'):
-            mimes.append('audio/mpeg')
+            audio_mimes = ('wav', 'x-wav', 'mpeg', 'flac', 'x-flac', 'ogg', 'mp4', 'x-m4a', 'aac', 'aiff', 'x-aiff', 'opus', 'webm')
+            for m in audio_mimes:
+                mimes.append('audio/{}'.format(m))
+            video_mimes = ('mp4', 'x-matroska', 'quicktime', 'x-msvideo', 'webm')
+            for m in video_mimes:
+                mimes.append('video/{}'.format(m))
+
         for mime in mimes:
             ff = Gtk.FileFilter()
             ff.add_mime_type(mime)
