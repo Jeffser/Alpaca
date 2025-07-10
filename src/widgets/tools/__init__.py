@@ -2,10 +2,10 @@ from ...sql_manager import Instance as SQL
 
 import time, random
 
-from .tools import GetCurrentDatetime, GetRecipeByName, GetRecipesByCategory, ExtractWikipedia, OnlineSearch, RunCommand
+from .tools import GetCurrentDatetime, GetRecipeByName, GetRecipesByCategory, ExtractWikipedia, OnlineSearch, RunCommand, SpotifyController
 from .notebook_tools import tools as NotebookTools
 
-available_tools = [GetCurrentDatetime, GetRecipeByName, GetRecipesByCategory, ExtractWikipedia, OnlineSearch, RunCommand]
+available_tools = [GetCurrentDatetime, GetRecipeByName, GetRecipesByCategory, ExtractWikipedia, OnlineSearch, RunCommand, SpotifyController]
 
 def log_to_message(text:str, bot_message, animate:bool):
     for s in text.split(' '):

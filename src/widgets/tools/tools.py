@@ -1,12 +1,14 @@
 # tools.py
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, Gtk, Gio
 
-import datetime, time, random, requests, json, os
+import datetime, time, random, requests, json, os, threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
+from urllib.parse import urlparse, parse_qs
 from html2text import html2text
 from duckduckgo_search import DDGS
 
-from .. import terminal, attachments
+from .. import terminal, attachments, dialog
 from ...constants import data_dir
 from ...sql_manager import generate_uuid, Instance as SQL
 
@@ -43,13 +45,13 @@ class ToolPreferencesDialog(Adw.Dialog):
             pp.add(arguments)
 
         if len(list(self.tool.variables)) > 0:
-            variables = Adw.PreferencesGroup(
+            self.variables = Adw.PreferencesGroup(
                 title=_("Variables"),
                 description=_("User filled values that the tool uses to work, the AI does not have access to these variables at all.")
             )
             for name, data in self.tool.variables.items():
                 if data.get('type') == 'string':
-                    variables.add(
+                    self.variables.add(
                         Adw.EntryRow(
                             name=name,
                             title=data.get('display_name'),
@@ -62,9 +64,9 @@ class ToolPreferencesDialog(Adw.Dialog):
                     row.set_value(float(data.get('value', data.get('min', 0) ) ) )
                     row.set_name(name)
                     row.set_title(data.get('display_name'))
-                    variables.add(row)
+                    self.variables.add(row)
                 elif data.get('type') == 'secret':
-                    variables.add(
+                    self.variables.add(
                         Adw.PasswordEntryRow(
                             name=name,
                             title=data.get('display_name'),
@@ -72,7 +74,7 @@ class ToolPreferencesDialog(Adw.Dialog):
                         )
                     )
                 elif data.get('type') == 'bool':
-                    variables.add(
+                    self.variables.add(
                         Adw.SwitchRow(
                             name=name,
                             title=data.get('display_name'),
@@ -89,8 +91,8 @@ class ToolPreferencesDialog(Adw.Dialog):
                         string_list.append(option)
                     combo.set_model(string_list)
                     combo.set_selected(data.get('value'))
-                    variables.add(combo)
-            pp.add(variables)
+                    self.variables.add(combo)
+            pp.add(self.variables)
 
             cancel_button = Gtk.Button(
                 label=_('Cancel'),
@@ -104,7 +106,7 @@ class ToolPreferencesDialog(Adw.Dialog):
                 tooltip_text=_('Save'),
                 css_classes=['suggested-action']
             )
-            save_button.connect('clicked', lambda button: self.save_variables(variables))
+            save_button.connect('clicked', lambda button: self.save_variables())
 
             hb = Adw.HeaderBar(
                 show_start_title_buttons=False,
@@ -125,8 +127,8 @@ class ToolPreferencesDialog(Adw.Dialog):
             content_width=500
         )
 
-    def save_variables(self, variables_group):
-        for v in list(list(list(variables_group)[0])[1])[0]:
+    def save_variables(self):
+        for v in list(list(list(self.variables)[0])[1])[0]:
             if v.get_name() in list(self.tool.variables.keys()):
                 if isinstance(v, Adw.EntryRow) or isinstance(v, Adw.PasswordEntryRow):
                     self.tool.variables[v.get_name()]['value'] = v.get_text()
@@ -155,11 +157,14 @@ class Base(Adw.ActionRow):
         )
 
         info_button = Gtk.Button(icon_name='info-outline-symbolic', css_classes=['flat'], valign=3)
-        info_button.connect('clicked', lambda *_: ToolPreferencesDialog(self).present(self.get_root()))
+        info_button.connect('clicked', lambda *_: self.show_dialog())
         self.add_prefix(info_button)
         self.enable_switch = Gtk.Switch(active=enabled, valign=3)
         self.enable_switch.connect('state-set', lambda *_: self.enabled_changed())
         self.add_suffix(self.enable_switch)
+
+    def show_dialog(self):
+        ToolPreferencesDialog(self).present(self.get_root())
 
     def enabled_changed(self):
         SQL.insert_or_update_tool_parameters(self.tool_metadata.get('name'), self.extract_variables_for_sql(), self.is_enabled())
@@ -178,8 +183,6 @@ class Base(Adw.ActionRow):
         for name, data in self.variables.items():
             variables_for_sql[name] = data.get('value')
         return variables_for_sql
-
-
 
     def attach_online_image(self, bot_message, image_title:str, image_url:str):
         attachment = bot_message.add_attachment(
@@ -548,3 +551,218 @@ class RunCommand(Base):
                 command_result = f.read()
 
         return '```\n{}\n```'.format(command_result)
+
+class SpotifyController(Base):
+    tool_metadata = {
+        "name": "spotify_controller",
+        "description": "Control the user's music playback and retrieve information about the song playing and it's status",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "description": "The action to be done in Spotify",
+                    "enum": ["next", "previous", "get_track"]
+                }
+            },
+            "required": [
+                "action"
+            ]
+        }
+    }
+    name = _("Spotify Controller")
+    description = _("Control your music's playback")
+    variables = {
+        'client_id': {
+            'display_name': "Client ID",
+            'value': '',
+            'type': 'secret'
+        },
+        'client_secret': {
+            'display_name': "Client Secret",
+            'value': '',
+            'type': 'secret'
+        },
+        'refresh_token': {
+            'display_name': '',
+            'value': '',
+            'type': 'hidden'
+        }
+    }
+    access_token = ''
+    token_expiration = 0
+    login_row = None
+
+    def refresh_access_token(self):
+        self.access_token = ''
+        self.token_expiration = 0
+        if self.variables.get('refresh_token').get('value'):
+            payload = {
+                "grant_type": "refresh_token",
+                "refresh_token": self.variables.get('refresh_token').get('value'),
+                "client_id": self.variables.get('client_id').get('value'),
+                "client_secret": self.variables.get('client_secret').get('value')
+            }
+
+            response = requests.post('https://accounts.spotify.com/api/token', data=payload)
+            if response.status_code == 200:
+                self.access_token = response.json().get('access_token')
+                self.token_expiration = int(time.time()) + response.json().get("expires_in", 3600)
+
+    def get_access_token(self):
+        if int(time.time()) >= self.token_expiration:
+            self.refresh_access_token()
+        return self.access_token
+
+    def show_dialog(self):
+        self.dialog = ToolPreferencesDialog(self)
+
+        login_button = Gtk.Button(
+            icon_name='',
+            valign=3,
+            css_classes=['flat']
+        )
+        login_button.connect('clicked', lambda button: self.login_request())
+        self.login_row = Adw.ActionRow(
+            title=_('Not logged in')
+        )
+        self.login_row.add_suffix(login_button)
+
+        self.dialog.variables.add(self.login_row)
+        self.dialog.present(self.get_root())
+        self.refresh_user()
+
+    def refresh_user(self):
+        access_token = self.get_access_token()
+        if access_token:
+            headers = {
+                "Authorization": f"Bearer {access_token}"
+            }
+            response = requests.get("https://api.spotify.com/v1/me", headers=headers)
+            if response.status_code != 200:
+                return
+
+            if self.login_row:
+                self.login_row.set_title(response.json().get('display_name'))
+
+                product = response.json().get('product')
+                if product:
+                    if product == 'premium':
+                        self.login_row.set_subtitle('Spotify Premium')
+                    else:
+                        self.login_row.set_subtitle('Spotify Free')
+                else:
+                    self.login_row.set_subtitle(_('Spotify User'))
+
+    def on_login(self, code):
+        payload = {
+            "grant_type": "authorization_code",
+            "code": code,
+            "redirect_uri": "http://127.0.0.1:8888/callback",
+            "client_id": self.variables.get('client_id').get('value'),
+            "client_secret": self.variables.get('client_secret').get('value')
+        }
+        response = requests.post("https://accounts.spotify.com/api/token", data=payload)
+        if response.status_code != 200:
+            #TODO ERROR
+            return
+
+        self.access_token = response.json().get('access_token') # Doesn't save to SQL
+        self.variables['refresh_token']['value'] = response.json().get('refresh_token')
+        SQL.insert_or_update_tool_parameters(self.tool_metadata.get('name'), self.extract_variables_for_sql(), self.is_enabled())
+
+        self.refresh_user()
+
+    def make_handler_class(self):
+        outer_self = self
+        class SpotifyAuthHandler(BaseHTTPRequestHandler):
+            def do_GET(server):
+                query = urlparse(server.path).query
+                params = parse_qs(query)
+                if "code" in params:
+                    server.send_response(200)
+                    server.send_header("Content-type", "text/html")
+                    server.end_headers()
+                    server.wfile.write(b"<h1>Authentication complete. You can close this window.</h1>")
+                    outer_self.on_login(params["code"][0])
+                else:
+                    server.send_response(400)
+                    server.end_headers()
+                    server.wfile.write(b"<h1>Error during authentication</h1>")
+        return SpotifyAuthHandler
+
+    def login_request(self):
+        self.dialog.save_variables()
+        if not self.variables.get('client_id').get('value') or not self.variables.get('client_secret').get('value'):
+            dialog.simple_error(
+                parent=self.get_root(),
+                title=_('Login Error'),
+                body=_("Couldn't log in to Spotify"),
+                error_log=_("Specify a Client ID and Client Secret")
+            )
+            return
+        server = HTTPServer(("127.0.0.1", 8888), self.make_handler_class())
+        threading.Thread(target=server.handle_request).start()
+
+        SCOPE="user-read-playback-state user-modify-playback-state user-read-currently-playing"
+        auth_url = (
+            "https://accounts.spotify.com/authorize"
+            f"?client_id={self.variables.get('client_id').get('value')}"
+            f"&response_type=code"
+            f"&redirect_uri=http://127.0.0.1:8888/callback"
+            f"&scope={SCOPE.replace(' ', '%20')}"
+        )
+        Gio.AppInfo.launch_default_for_uri(auth_url)
+
+    def run(self, arguments, messages, bot_message) -> str:
+        if not arguments.get('action'):
+            return 'Error: No action was specified'
+        if arguments.get('action') not in self.tool_metadata.get('parameters').get('properties').get('action').get('enum'):
+            return 'Error: Invalid action'
+
+        access_token = self.get_access_token()
+        if not access_token:
+            return 'Error: Spotify account is not logged in'
+        headers = {"Authorization": f"Bearer {access_token}"}
+
+        if arguments.get('action') == 'next':
+            response = requests.post("https://api.spotify.com/v1/me/player/next", headers=headers)
+            if response.status_code == 204:
+                return 'Success: Skipped to the next track'
+            elif response.status_code == 403:
+                return response.json().get('error').get('message')
+        elif arguments.get('action') == 'previous':
+            response = requests.post("https://api.spotify.com/v1/me/player/previous", headers=headers)
+            if response.status_code == 204:
+                return 'Success: Skipped to the previous track'
+            elif response.status_code == 403:
+                return response.json().get('error').get('message')
+        elif arguments.get('action') == 'get_track':
+            response = requests.get("https://api.spotify.com/v1/me/player/currently-playing", headers=headers)
+            if response.status_code == 204 or not response.content:
+                return 'Nothing is playing'
+
+            if response.status_code == 200:
+                data = response.json()
+                item = data.get("item")
+                if item:
+                    if item.get('album').get('images'):
+                        self.attach_online_image(bot_message, item.get('album', {}).get('name', _('Album Art')), item.get('album').get('images')[0].get('url'))
+                    if item.get('external_urls', {}).get('spotify'):
+                        attachment = bot_message.add_attachment(
+                            file_id = generate_uuid(),
+                            name = item.get("name"),
+                            attachment_type = "link",
+                            content = item.get('external_urls', {}).get('spotify')
+                        )
+                        SQL.insert_or_update_attachment(bot_message, attachment)
+
+                    track_information = [
+                        f'- Name: {item.get("name")}',
+                        f'- Artists: {", ".join([artist["name"] for artist in item.get("artists", [])])}',
+                        f'- Album: {item.get("album", {}).get("name")}'
+                    ]
+                    return '\n'.join(track_information)
+                return 'Nothing is playing'
+        return 'Error: Could not do action'
+
