@@ -284,7 +284,7 @@ class BaseInstance:
             if not self.available_models or len(self.available_models) == 0:
                 self.available_models = {}
                 for m in self.client.models.list():
-                    if 'whisper' not in m.id.lower():
+                    if all(s not in m.id.lower() for s in ['embedding', 'davinci', 'dall', 'tts', 'whisper', 'image']):
                         self.available_models[m.id] = {}
             return self.available_models
         except Exception as e:

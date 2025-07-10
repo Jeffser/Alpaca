@@ -131,7 +131,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             if row:
                 self.settings.set_string('selected-instance', row.instance.instance_id)
-                self.get_application().lookup_action('pull_model_from_name').set_enabled('ollama' in row.instance.instance_type)
                 self.get_application().lookup_action('model_creator_existing').set_enabled('ollama' in row.instance.instance_type)
                 self.get_application().lookup_action('model_creator_gguf').set_enabled('ollama' in row.instance.instance_type)
 
@@ -571,7 +570,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'toggle_search': [lambda *_: self.toggle_searchbar(), ['<primary>f']],
             'model_manager' : [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>m']],
             'instance_manager' : [lambda *i: self.show_instance_manager() if self.main_navigation_view.get_visible_page().get_tag() != 'instance_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>i']],
-            'pull_model_from_name' : [lambda *i: Widgets.dialog.simple_entry(
+            'add_model_by_name' : [lambda *i: Widgets.dialog.simple_entry(
                 parent=self,
                 heading=_('Pull Model'),
                 body=_('Please enter the model name following this template: name:tag'),
