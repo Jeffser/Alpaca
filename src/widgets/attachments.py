@@ -94,8 +94,8 @@ class AttachmentDialog(Adw.Dialog):
 
         super().__init__(
             title=self.attachment.file_name,
-            child = Adw.ToolbarView(),
-            content_height=420
+            child=Adw.ToolbarView(),
+            follows_content_size=True
         )
         header = Adw.HeaderBar()
 
@@ -566,7 +566,9 @@ class GlobalAttachmentContainer(AttachmentContainer):
         else:
             content = extract_content(file_type, file.get_path())
         if content and (file_type != 'audio' or voice.libraries.get('whisper')):
-            file_name = os.path.splitext(os.path.basename(file.get_path()))[0]
+            file_name = os.path.basename(file.get_path())
+            if file_type != 'code':
+                file_name = os.path.splitext(file_name)[0]
             attachment = Attachment(
                 file_id="-1",
                 file_name=file_name,
