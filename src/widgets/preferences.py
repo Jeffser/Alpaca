@@ -11,6 +11,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
     background_switch = Gtk.Template.Child()
     powersaver_warning_switch = Gtk.Template.Child()
     zoom_spin = Gtk.Template.Child()
+    prefer_tools = Gtk.Template.Child()
     mic_group = Gtk.Template.Child()
     mic_model_combo = Gtk.Template.Child()
     mic_language_combo = Gtk.Template.Child()
@@ -18,6 +19,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
     tts_group = Gtk.Template.Child()
     tts_voice_combo = Gtk.Template.Child()
     tts_auto_mode_combo = Gtk.Template.Child()
+    audio_page = Gtk.Template.Child()
 
     @Gtk.Template.Callback()
     def zoom_changed(self, spinner):
@@ -33,6 +35,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.settings.bind('hide-on-close', self.background_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind('powersaver-warning', self.powersaver_warning_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind('zoom', self.zoom_spin, 'value', Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind('prefer-tools', self.prefer_tools, 'active', Gio.SettingsBindFlags.DEFAULT)
         self.mic_group.set_visible(importlib.util.find_spec('whisper'))
 
         string_list = Gtk.StringList()
@@ -50,6 +53,8 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.settings.bind('stt-auto-send', self.mic_auto_send_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
 
         self.tts_group.set_visible(importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'))
+
+        self.audio_page.set_visible(importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice') and importlib.util.find_spec('whisper'))
 
         string_list = Gtk.StringList()
         for name in TTS_VOICES:

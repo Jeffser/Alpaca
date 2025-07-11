@@ -558,7 +558,7 @@ class GlobalMessageTextView(GtkSource.View):
             mode = 0
             if state & Gdk.ModifierType.CONTROL_MASK: # Ctrl, send system message
                 mode = 1
-            elif state & Gdk.ModifierType.ALT_MASK: # Alt, send tool message
+            elif state & Gdk.ModifierType.ALT_MASK or self.get_root().settings.get_value('prefer-tools').unpack(): # Alt, send tool message
                 mode = 2
             self.get_root().send_message(mode)
             return True
@@ -590,13 +590,19 @@ class GlobalActionStack(Gtk.Stack):
 
         stop_button.connect('clicked', lambda button: self.get_root().chat_list_box.get_selected_row().chat.stop_message())
 
-        send_button.connect('clicked', lambda button: self.get_root().send_message(0))
+        send_button.connect('clicked', lambda button: self.use_default_mode())
         gesture_click = Gtk.GestureClick(button=3)
         gesture_click.connect("released", lambda gesture, _n_press, x, y: self.show_popup(gesture, x, y))
         send_button.add_controller(gesture_click)
         gesture_long_press = Gtk.GestureLongPress()
         gesture_long_press.connect("pressed", self.show_popup)
         send_button.add_controller(gesture_long_press)
+
+    def use_default_mode(self):
+        if self.get_root().settings.get_value('prefer-tools').unpack():
+            self.get_root().send_message(2)
+        else:
+            self.get_root().send_message(0)
 
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()

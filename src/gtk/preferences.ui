@@ -7,6 +7,8 @@
     <property name="title" translatable="yes">Preferences</property>
     <child>
       <object class="AdwPreferencesPage">
+        <property name="icon-name">settings-symbolic</property>
+        <property name="title" translatable="yes">General</property>
         <child>
           <object class="AdwPreferencesGroup">
             <child>
@@ -33,8 +35,33 @@
                 </property>
               </object>
             </child>
+            <child>
+              <object class="AdwSwitchRow" id="prefer_tools">
+                <property name="title" translatable="yes">Prefer to Use Tools</property>
+                <property name="subtitle" translatable="yes">Always try to use tools when sending a message</property>
+              </object>
+            </child>
           </object>
         </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="AdwButtonRow">
+                <style>
+                  <class name="destructive-action"/>
+                </style>
+                <property name="title" translatable="yes">Delete All Chats</property>
+                <property name="action-name">app.delete_all_chats</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="AdwPreferencesPage" id="audio_page">
+        <property name="icon-name">music-note-single-symbolic</property>
+        <property name="title" translatable="yes">Audio</property>
         <child>
           <object class="AdwPreferencesGroup" id="mic_group">
             <child>
@@ -69,19 +96,6 @@
               <object class="AdwSwitchRow" id="tts_auto_mode_combo">
                 <property name="title" translatable="yes">Dictate New Messages Automatically</property>
                 <property name="subtitle" translatable="yes">Dictate new messages as they are generated</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesGroup">
-            <child>
-              <object class="AdwButtonRow">
-                <style>
-                  <class name="destructive-action"/>
-                </style>
-                <property name="title" translatable="yes">Delete All Chats</property>
-                <property name="action-name">app.delete_all_chats</property>
               </object>
             </child>
           </object>
