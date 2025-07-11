@@ -390,6 +390,20 @@
                             </style>
                           </object>
                         </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label" translatable="yes">Help us build better AI tools! Submit your ideas here.</property>
+                            <property name="wrap">true</property>
+                            <property name="wrap-mode">2</property>
+                            <property name="margin-top">15</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLinkButton">
+                            <property name="label" translatable="yes">Request Form</property>
+                            <property name="uri">https://github.com/Jeffser/Alpaca/issues/new?template=request_tool.md</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
