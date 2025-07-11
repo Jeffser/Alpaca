@@ -1,8 +1,8 @@
 # tools.py
 
-from gi.repository import Adw, Gtk, Gio
+from gi.repository import Adw, Gtk, Gio, Gdk, GdkPixbuf, GLib
 
-import datetime, time, random, requests, json, os, threading
+import datetime, time, random, requests, json, os, threading, base64
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 from html2text import html2text
@@ -592,6 +592,7 @@ class SpotifyController(Base):
     access_token = ''
     token_expiration = 0
     login_row = None
+    pfp_widget = None
 
     def refresh_access_token(self):
         self.access_token = ''
@@ -618,9 +619,10 @@ class SpotifyController(Base):
         self.dialog = ToolPreferencesDialog(self)
 
         login_button = Gtk.Button(
-            icon_name='',
+            icon_name='view-refresh-symbolic',
             valign=3,
-            css_classes=['flat']
+            css_classes=['flat'],
+            tooltip_text=_('Log Back In')
         )
         login_button.connect('clicked', lambda button: self.login_request())
         self.login_row = Adw.ActionRow(
@@ -654,17 +656,33 @@ class SpotifyController(Base):
                 else:
                     self.login_row.set_subtitle(_('Spotify User'))
 
+                image_url = response.json().get('images', [{}])[0].get('url')
+                if image_url:
+                    image_data = base64.b64decode(attachments.extract_online_image(image_url, 64))
+                    loader = GdkPixbuf.PixbufLoader.new()
+                    loader.write(image_data)
+                    loader.close()
+                    pixbuf = loader.get_pixbuf()
+                    texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+                    if self.pfp_widget:
+                        self.pfp_widget.get_parent().remove(self.pfp_widget)
+                    self.pfp_widget = Gtk.Picture.new_for_paintable(texture)
+                    self.pfp_widget.set_margin_top(5)
+                    self.pfp_widget.set_margin_bottom(5)
+                    self.pfp_widget.add_css_class('model_pfp')
+                    self.login_row.add_prefix(self.pfp_widget)
+
     def on_login(self, code):
         payload = {
             "grant_type": "authorization_code",
             "code": code,
-            "redirect_uri": "http://127.0.0.1:8888/callback",
+            "redirect_uri": "http://127.0.0.1:8888",
             "client_id": self.variables.get('client_id').get('value'),
             "client_secret": self.variables.get('client_secret').get('value')
         }
         response = requests.post("https://accounts.spotify.com/api/token", data=payload)
         if response.status_code != 200:
-            #TODO ERROR
+            logger.error(response.json())
             return
 
         self.access_token = response.json().get('access_token') # Doesn't save to SQL
@@ -672,6 +690,7 @@ class SpotifyController(Base):
         SQL.insert_or_update_tool_parameters(self.tool_metadata.get('name'), self.extract_variables_for_sql(), self.is_enabled())
 
         self.refresh_user()
+        GLib.idle_add(self.dialog.present, self.get_root())
 
     def make_handler_class(self):
         outer_self = self
@@ -709,7 +728,7 @@ class SpotifyController(Base):
             "https://accounts.spotify.com/authorize"
             f"?client_id={self.variables.get('client_id').get('value')}"
             f"&response_type=code"
-            f"&redirect_uri=http://127.0.0.1:8888/callback"
+            f"&redirect_uri=http://127.0.0.1:8888"
             f"&scope={SCOPE.replace(' ', '%20')}"
         )
         Gio.AppInfo.launch_default_for_uri(auth_url)
