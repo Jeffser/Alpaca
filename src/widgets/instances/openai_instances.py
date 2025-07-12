@@ -543,6 +543,18 @@ class Klusterai(BaseInstance):
     instance_url = 'https://api.kluster.ai/v1/'
     description = _('Kluster AI cloud inference API')
 
+class Kimi(BaseInstance):
+    instance_type = 'kimi'
+    instance_type_display = 'Kimi (Moonshot AI)'
+    instance_url = 'https://api.moonshot.ai/v1/'
+    description = _('Kimi large language models by Moonshot AI')
+    limitations = ('no-seed',)
+
+    def __init__(self, instance_id:str, properties:dict):
+        super().__init__(instance_id, properties)
+        if 'seed' in self.properties:
+            del self.properties['seed']
+
 class Mistral(BaseInstance):
     instance_type = 'mistral'
     instance_type_display = 'Mistral AI'
