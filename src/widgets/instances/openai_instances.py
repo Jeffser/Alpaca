@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 class BaseInstance:
     instance_id = None
     description = None
+    limitations = ()
 
     default_properties = {
         'name': _('Instances'),
@@ -32,6 +33,8 @@ class BaseInstance:
         self.properties = {}
         for key in self.default_properties:
             self.properties[key] = properties.get(key, self.default_properties.get(key))
+        if 'no-seed' in self.limitations and 'seed' in self.properties:
+            del self.properties['seed']
         self.properties['url'] = self.instance_url
 
         self.client = openai.OpenAI(
@@ -549,11 +552,6 @@ class Kimi(BaseInstance):
     instance_url = 'https://api.moonshot.ai/v1/'
     description = _('Kimi large language models by Moonshot AI')
     limitations = ('no-seed',)
-
-    def __init__(self, instance_id:str, properties:dict):
-        super().__init__(instance_id, properties)
-        if 'seed' in self.properties:
-            del self.properties['seed']
 
 class Mistral(BaseInstance):
     instance_type = 'mistral'
