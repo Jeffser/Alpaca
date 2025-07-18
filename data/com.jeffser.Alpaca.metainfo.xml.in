@@ -89,6 +89,22 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="7.5.0" date="2025-07-18">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/7.5.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Added option to use tools by default</li>
+          <li>Redesign model manager</li>
+          <li>Added option to attach audio and video files (audio transcription)</li>
+          <li>Added Spotify controller tool</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed thinking mode being on bugs out normal models</li>
+        </ul>
+      </description>
+    </release>
     <release version="7.0.1" date="2025-06-29">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/7.0.1</url>
       <description>
