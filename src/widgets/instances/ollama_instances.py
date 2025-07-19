@@ -411,23 +411,23 @@ class BaseInstance:
     def create_model(self, data:dict, callback:callable):
         if not self.process:
             self.start()
-        #try:
-        response = requests.post(
-            '{}/api/create'.format(self.properties.get('url')),
-            headers={
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-            },
-            data=json.dumps(data),
-            stream=True
-        )
-        if response.status_code == 200:
-            for line in response.iter_lines():
-                if line:
-                    callback(json.loads(line.decode("utf-8")))
-        #except Exception as e:
-            #callback({'error': e})
-            #logger.error(e)
+        try:
+            response = requests.post(
+                '{}/api/create'.format(self.properties.get('url')),
+                headers={
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
+                },
+                data=json.dumps(data),
+                stream=True
+            )
+            if response.status_code == 200:
+                for line in response.iter_lines():
+                    if line:
+                        callback(json.loads(line.decode("utf-8")))
+        except Exception as e:
+            callback({'error': e})
+            logger.error(e)
 
     def delete_model(self, model_name:str):
         if not self.process:
