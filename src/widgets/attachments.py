@@ -533,7 +533,7 @@ class GlobalAttachmentContainer(AttachmentContainer):
         )
         self.add_attachment(attachment)
 
-    def on_attachment(self, file:Gio.File):
+    def on_attachment(self, file:Gio.File, remove_original:bool=False):
         if not file:
             return
         file_types = {
@@ -622,7 +622,6 @@ class GlobalAttachmentContainer(AttachmentContainer):
                 filename = portal.take_screenshot_finish(res)
                 if filename:
                     self.on_attachment(Gio.File.new_for_uri(filename))
-                    os.remove(filename)
 
             Xdp.Portal().take_screenshot(
                 None,
