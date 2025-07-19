@@ -22,10 +22,17 @@ src/widgets/camera.py
 src/widgets/chat.py
 src/widgets/dialog.py
 src/widgets/message.py
-src/widgets/model_manager.py
 src/widgets/terminal.py
 src/widgets/voice.py
 src/widgets/__init__.py
+
+src/widgets/models/added.py
+src/widgets/models/available.py
+src/widgets/models/common.py
+src/widgets/models/creator.py
+src/widgets/models/pulling.py
+src/widgets/models/speech.py
+src/widgets/models/__init__.py
 
 src/widgets/instances/ollama_instances.py
 src/widgets/instances/openai_instances.py

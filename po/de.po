@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 19:55-0600\n"
+"POT-Creation-Date: 2025-07-18 18:00-0600\n"
 "PO-Revision-Date: 2025-05-04 01:36+0200\n"
 "Last-Translator: Magnus Schlinsog <magnusschlinsog@gmail.com>\n"
 "Language-Team: German\n"
@@ -37,17 +37,17 @@ msgid "A private AI client"
 msgstr "Ein privater KI-Client"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:11
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1265
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1281
 msgid "Features"
 msgstr "Funktionen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:13
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1267
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1283
 msgid "Talk to multiple models in the same conversation"
 msgstr "Sprechen Sie mit mehreren Modellen in derselben Konversation"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:14
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1268
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1284
 msgid "Pull and delete models from the app"
 msgstr "Modelle aus der App abrufen und löschen"
 
@@ -79,7 +79,7 @@ msgstr "Text von einer Website zur Eingabeaufforderung hinzufügen"
 msgid "PDF recognition"
 msgstr "PDF-Erkennung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:23 src/gtk/window.ui:90
+#: data/com.jeffser.Alpaca.metainfo.xml.in:23
 msgid "Disclaimer"
 msgstr "Haftungsausschluss"
 
@@ -130,466 +130,488 @@ msgid "A Live Chat conversation with a character"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
-#: data/com.jeffser.Alpaca.metainfo.xml.in:122
-#: data/com.jeffser.Alpaca.metainfo.xml.in:138
-#: data/com.jeffser.Alpaca.metainfo.xml.in:147
-#: data/com.jeffser.Alpaca.metainfo.xml.in:163
-#: data/com.jeffser.Alpaca.metainfo.xml.in:184
-#: data/com.jeffser.Alpaca.metainfo.xml.in:197
-#: data/com.jeffser.Alpaca.metainfo.xml.in:212
-#: data/com.jeffser.Alpaca.metainfo.xml.in:221
-#: data/com.jeffser.Alpaca.metainfo.xml.in:232
-#: data/com.jeffser.Alpaca.metainfo.xml.in:241
-#: data/com.jeffser.Alpaca.metainfo.xml.in:289
-#: data/com.jeffser.Alpaca.metainfo.xml.in:307
-#: data/com.jeffser.Alpaca.metainfo.xml.in:323
-#: data/com.jeffser.Alpaca.metainfo.xml.in:335
-#: data/com.jeffser.Alpaca.metainfo.xml.in:385
+#: data/com.jeffser.Alpaca.metainfo.xml.in:123
+#: data/com.jeffser.Alpaca.metainfo.xml.in:175
+#: data/com.jeffser.Alpaca.metainfo.xml.in:189
+#: data/com.jeffser.Alpaca.metainfo.xml.in:222
+#: data/com.jeffser.Alpaca.metainfo.xml.in:269
+#: data/com.jeffser.Alpaca.metainfo.xml.in:316
+#: data/com.jeffser.Alpaca.metainfo.xml.in:333
+#: data/com.jeffser.Alpaca.metainfo.xml.in:363
+#: data/com.jeffser.Alpaca.metainfo.xml.in:373
+#: data/com.jeffser.Alpaca.metainfo.xml.in:384
+#: data/com.jeffser.Alpaca.metainfo.xml.in:411
 #: data/com.jeffser.Alpaca.metainfo.xml.in:431
-#: data/com.jeffser.Alpaca.metainfo.xml.in:462
-#: data/com.jeffser.Alpaca.metainfo.xml.in:471
-#: data/com.jeffser.Alpaca.metainfo.xml.in:534
-#: data/com.jeffser.Alpaca.metainfo.xml.in:562
-#: data/com.jeffser.Alpaca.metainfo.xml.in:576
-#: data/com.jeffser.Alpaca.metainfo.xml.in:593
-#: data/com.jeffser.Alpaca.metainfo.xml.in:604
-#: data/com.jeffser.Alpaca.metainfo.xml.in:613
-#: data/com.jeffser.Alpaca.metainfo.xml.in:630
-#: data/com.jeffser.Alpaca.metainfo.xml.in:640
-#: data/com.jeffser.Alpaca.metainfo.xml.in:657
-#: data/com.jeffser.Alpaca.metainfo.xml.in:667
-#: data/com.jeffser.Alpaca.metainfo.xml.in:714
-#: data/com.jeffser.Alpaca.metainfo.xml.in:739
-#: data/com.jeffser.Alpaca.metainfo.xml.in:764
-#: data/com.jeffser.Alpaca.metainfo.xml.in:786
-#: data/com.jeffser.Alpaca.metainfo.xml.in:804
-#: data/com.jeffser.Alpaca.metainfo.xml.in:822
-#: data/com.jeffser.Alpaca.metainfo.xml.in:834
-#: data/com.jeffser.Alpaca.metainfo.xml.in:850
-msgid "Fixes"
-msgstr "Fehlerbehebungen"
+#: data/com.jeffser.Alpaca.metainfo.xml.in:457
+#: data/com.jeffser.Alpaca.metainfo.xml.in:472
+#: data/com.jeffser.Alpaca.metainfo.xml.in:497
+#: data/com.jeffser.Alpaca.metainfo.xml.in:525
+#: data/com.jeffser.Alpaca.metainfo.xml.in:535
+#: data/com.jeffser.Alpaca.metainfo.xml.in:546
+#: data/com.jeffser.Alpaca.metainfo.xml.in:560
+#: data/com.jeffser.Alpaca.metainfo.xml.in:572
+#: data/com.jeffser.Alpaca.metainfo.xml.in:588
+#: data/com.jeffser.Alpaca.metainfo.xml.in:603
+#: data/com.jeffser.Alpaca.metainfo.xml.in:638
+#: data/com.jeffser.Alpaca.metainfo.xml.in:663
+#: data/com.jeffser.Alpaca.metainfo.xml.in:694
+#: data/com.jeffser.Alpaca.metainfo.xml.in:720
+#: data/com.jeffser.Alpaca.metainfo.xml.in:742
+#: data/com.jeffser.Alpaca.metainfo.xml.in:773
+#: data/com.jeffser.Alpaca.metainfo.xml.in:795
+#: data/com.jeffser.Alpaca.metainfo.xml.in:816
+#: data/com.jeffser.Alpaca.metainfo.xml.in:831
+#: data/com.jeffser.Alpaca.metainfo.xml.in:856
+msgid "New"
+msgstr "Neu"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
-msgid "Fixed Alpaca crashing when chats database has incorrect metadata (type)"
+msgid "Added option to use tools by default"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
+msgid "Redesign model manager"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:99
+msgid "Added option to attach audio and video files (audio transcription)"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:100
+msgid "Added Spotify controller tool"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:102
+#: data/com.jeffser.Alpaca.metainfo.xml.in:111
+#: data/com.jeffser.Alpaca.metainfo.xml.in:138
+#: data/com.jeffser.Alpaca.metainfo.xml.in:154
+#: data/com.jeffser.Alpaca.metainfo.xml.in:163
+#: data/com.jeffser.Alpaca.metainfo.xml.in:179
+#: data/com.jeffser.Alpaca.metainfo.xml.in:200
+#: data/com.jeffser.Alpaca.metainfo.xml.in:213
+#: data/com.jeffser.Alpaca.metainfo.xml.in:228
+#: data/com.jeffser.Alpaca.metainfo.xml.in:237
+#: data/com.jeffser.Alpaca.metainfo.xml.in:248
+#: data/com.jeffser.Alpaca.metainfo.xml.in:257
+#: data/com.jeffser.Alpaca.metainfo.xml.in:305
+#: data/com.jeffser.Alpaca.metainfo.xml.in:323
+#: data/com.jeffser.Alpaca.metainfo.xml.in:339
+#: data/com.jeffser.Alpaca.metainfo.xml.in:351
+#: data/com.jeffser.Alpaca.metainfo.xml.in:401
+#: data/com.jeffser.Alpaca.metainfo.xml.in:447
+#: data/com.jeffser.Alpaca.metainfo.xml.in:478
+#: data/com.jeffser.Alpaca.metainfo.xml.in:487
+#: data/com.jeffser.Alpaca.metainfo.xml.in:550
+#: data/com.jeffser.Alpaca.metainfo.xml.in:578
+#: data/com.jeffser.Alpaca.metainfo.xml.in:592
+#: data/com.jeffser.Alpaca.metainfo.xml.in:609
+#: data/com.jeffser.Alpaca.metainfo.xml.in:620
+#: data/com.jeffser.Alpaca.metainfo.xml.in:629
+#: data/com.jeffser.Alpaca.metainfo.xml.in:646
+#: data/com.jeffser.Alpaca.metainfo.xml.in:656
+#: data/com.jeffser.Alpaca.metainfo.xml.in:673
+#: data/com.jeffser.Alpaca.metainfo.xml.in:683
+#: data/com.jeffser.Alpaca.metainfo.xml.in:730
+#: data/com.jeffser.Alpaca.metainfo.xml.in:755
+#: data/com.jeffser.Alpaca.metainfo.xml.in:780
+#: data/com.jeffser.Alpaca.metainfo.xml.in:802
+#: data/com.jeffser.Alpaca.metainfo.xml.in:820
+#: data/com.jeffser.Alpaca.metainfo.xml.in:838
+#: data/com.jeffser.Alpaca.metainfo.xml.in:850
+#: data/com.jeffser.Alpaca.metainfo.xml.in:866
+msgid "Fixes"
+msgstr "Fehlerbehebungen"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:104
+msgid "Fixed thinking mode being on bugs out normal models"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:113
+msgid "Fixed Alpaca crashing when chats database has incorrect metadata (type)"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid ""
 "Fixed Quick Ask and Live Chat not running when opened from terminal whilst "
 "Alpaca is running"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:99
+#: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid ""
 "Fixed stop button not working when pressed before text generation beggins"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:100
+#: data/com.jeffser.Alpaca.metainfo.xml.in:116
 msgid "Fixed instances sometimes not appearing"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:107
-#: data/com.jeffser.Alpaca.metainfo.xml.in:159
-#: data/com.jeffser.Alpaca.metainfo.xml.in:173
-#: data/com.jeffser.Alpaca.metainfo.xml.in:206
-#: data/com.jeffser.Alpaca.metainfo.xml.in:253
-#: data/com.jeffser.Alpaca.metainfo.xml.in:300
-#: data/com.jeffser.Alpaca.metainfo.xml.in:317
-#: data/com.jeffser.Alpaca.metainfo.xml.in:347
-#: data/com.jeffser.Alpaca.metainfo.xml.in:357
-#: data/com.jeffser.Alpaca.metainfo.xml.in:368
-#: data/com.jeffser.Alpaca.metainfo.xml.in:395
-#: data/com.jeffser.Alpaca.metainfo.xml.in:415
-#: data/com.jeffser.Alpaca.metainfo.xml.in:441
-#: data/com.jeffser.Alpaca.metainfo.xml.in:456
-#: data/com.jeffser.Alpaca.metainfo.xml.in:481
-#: data/com.jeffser.Alpaca.metainfo.xml.in:509
-#: data/com.jeffser.Alpaca.metainfo.xml.in:519
-#: data/com.jeffser.Alpaca.metainfo.xml.in:530
-#: data/com.jeffser.Alpaca.metainfo.xml.in:544
-#: data/com.jeffser.Alpaca.metainfo.xml.in:556
-#: data/com.jeffser.Alpaca.metainfo.xml.in:572
-#: data/com.jeffser.Alpaca.metainfo.xml.in:587
-#: data/com.jeffser.Alpaca.metainfo.xml.in:622
-#: data/com.jeffser.Alpaca.metainfo.xml.in:647
-#: data/com.jeffser.Alpaca.metainfo.xml.in:678
-#: data/com.jeffser.Alpaca.metainfo.xml.in:704
-#: data/com.jeffser.Alpaca.metainfo.xml.in:726
-#: data/com.jeffser.Alpaca.metainfo.xml.in:757
-#: data/com.jeffser.Alpaca.metainfo.xml.in:779
-#: data/com.jeffser.Alpaca.metainfo.xml.in:800
-#: data/com.jeffser.Alpaca.metainfo.xml.in:815
-#: data/com.jeffser.Alpaca.metainfo.xml.in:840
-msgid "New"
-msgstr "Neu"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:109
+#: data/com.jeffser.Alpaca.metainfo.xml.in:125
 msgid "Live Chat (Talk to models as if you were on a call)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:110
+#: data/com.jeffser.Alpaca.metainfo.xml.in:126
 msgid "Live message rendering"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:111
+#: data/com.jeffser.Alpaca.metainfo.xml.in:127
 msgid "Faster dictation"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:112
+#: data/com.jeffser.Alpaca.metainfo.xml.in:128
 msgid "Dictation whilst message is being generated"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:113
+#: data/com.jeffser.Alpaca.metainfo.xml.in:129
 msgid "Camera picture attachment"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:114
+#: data/com.jeffser.Alpaca.metainfo.xml.in:130
 msgid "Quick Ask now supports attachments"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:115
+#: data/com.jeffser.Alpaca.metainfo.xml.in:131
 msgid "Separator element for message and attachment rendering"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:116
+#: data/com.jeffser.Alpaca.metainfo.xml.in:132
 msgid "Redesigned popups"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:117
+#: data/com.jeffser.Alpaca.metainfo.xml.in:133
 msgid "Thought switch for Ollama instances"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:118
+#: data/com.jeffser.Alpaca.metainfo.xml.in:134
 msgid "Username sharing for Ollama instances"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:119
+#: data/com.jeffser.Alpaca.metainfo.xml.in:135
 msgid "Redesign for instance manager and tool manager"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:120
+#: data/com.jeffser.Alpaca.metainfo.xml.in:136
 msgid "Better web searching tool with options"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:124
+#: data/com.jeffser.Alpaca.metainfo.xml.in:140
 msgid "Fixed duplication of thought attachments"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:125
+#: data/com.jeffser.Alpaca.metainfo.xml.in:141
 msgid "Fixed weird behavior with model selector"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:126
+#: data/com.jeffser.Alpaca.metainfo.xml.in:142
 msgid "Ollama (Managed) instances behave better"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:127
+#: data/com.jeffser.Alpaca.metainfo.xml.in:143
 msgid "Better optimizations for RAM (~2GB difference)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:128
+#: data/com.jeffser.Alpaca.metainfo.xml.in:144
 msgid "Instant chat rendering"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:129
+#: data/com.jeffser.Alpaca.metainfo.xml.in:145
 msgid "Models profile pictures are now saved at a higher resolution"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:130
+#: data/com.jeffser.Alpaca.metainfo.xml.in:146
 msgid "Quick Ask messages can now be sent by using the enter key"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:131
+#: data/com.jeffser.Alpaca.metainfo.xml.in:147
 msgid "Alpaca is less prone to crashes now"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:140
+#: data/com.jeffser.Alpaca.metainfo.xml.in:156
 msgid "Fixed new chat not being created when the chat list is empty"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:149
+#: data/com.jeffser.Alpaca.metainfo.xml.in:165
 msgid "Chat exporting now works as expected"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:150
+#: data/com.jeffser.Alpaca.metainfo.xml.in:166
 msgid "Fixed automatic creation of Ollama instance"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:151
+#: data/com.jeffser.Alpaca.metainfo.xml.in:167
 msgid "Added Hebrew and Telugu credits"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:152
+#: data/com.jeffser.Alpaca.metainfo.xml.in:168
 msgid "Fixed STT model selector"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:161
+#: data/com.jeffser.Alpaca.metainfo.xml.in:177
 msgid "Multiple QuickAsk window rendering"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:165
+#: data/com.jeffser.Alpaca.metainfo.xml.in:181
 msgid "Better stability for QuickAsk"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:166
+#: data/com.jeffser.Alpaca.metainfo.xml.in:182
 msgid "Creating a new chat now selects it"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:175
+#: data/com.jeffser.Alpaca.metainfo.xml.in:191
 msgid "Chat Search"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:176
+#: data/com.jeffser.Alpaca.metainfo.xml.in:192
 msgid "Hide \"latest\" and \"custom\" tags from model selector"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:177
+#: data/com.jeffser.Alpaca.metainfo.xml.in:193
 msgid "Hide model's languages behind popup"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:178
+#: data/com.jeffser.Alpaca.metainfo.xml.in:194
 msgid "New models listed for Ollama"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:179
+#: data/com.jeffser.Alpaca.metainfo.xml.in:195
 msgid "Added option to autodictate new mesages"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:180
+#: data/com.jeffser.Alpaca.metainfo.xml.in:196
 msgid "Added Meta Llama API to list of instances"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:181
+#: data/com.jeffser.Alpaca.metainfo.xml.in:197
 msgid ""
 "Added new env variables options (\"24H hour formatting\" and \"only Ollama "
 "mode\")"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:182
+#: data/com.jeffser.Alpaca.metainfo.xml.in:198
 msgid "Made Mermaid scripts executable using Python HTTP server"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:186
+#: data/com.jeffser.Alpaca.metainfo.xml.in:202
 msgid "Better stability when switching instances"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:187
+#: data/com.jeffser.Alpaca.metainfo.xml.in:203
 msgid "Better performance when navigating menus"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:188
+#: data/com.jeffser.Alpaca.metainfo.xml.in:204
 msgid "Fixed some dialogs not appearing in Quick Ask window"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:189
+#: data/com.jeffser.Alpaca.metainfo.xml.in:205
 msgid "Faster message search"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:190
+#: data/com.jeffser.Alpaca.metainfo.xml.in:206
 msgid "Faster message rendering"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:199
+#: data/com.jeffser.Alpaca.metainfo.xml.in:215
 msgid "Fixed whisper directory not existing causing error"
 msgstr "Fehler durch fehlendes \"whisper\"-Verzeichnis behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:208
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1057
+#: data/com.jeffser.Alpaca.metainfo.xml.in:224
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1073
 msgid "Updated model list"
 msgstr "Modellliste aktualisiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:209
+#: data/com.jeffser.Alpaca.metainfo.xml.in:225
 msgid "Alpaca now remembers it's size"
 msgstr "Alpaca merkt sich nun die Fenstergröße"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:210
+#: data/com.jeffser.Alpaca.metainfo.xml.in:226
 msgid "Added reasoning category for Ollama models"
 msgstr "Reasoning-Kategorie für Ollama-Modelle hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:214
+#: data/com.jeffser.Alpaca.metainfo.xml.in:230
 msgid "Improvements in sample prompts"
 msgstr "Verbesserungen in Beispielprompts"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:223
+#: data/com.jeffser.Alpaca.metainfo.xml.in:239
 msgid "Fixed auto creation of Ollama (Managed) instance"
 msgstr "Automatische Erstellung einer Ollama (verwaltet)-Instanz behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:224
+#: data/com.jeffser.Alpaca.metainfo.xml.in:240
 msgid "Removed legacy JSON to SQLite3 migration code"
 msgstr "Alten JSON-zu-SQLite3-Migrationscode entfernt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:225
+#: data/com.jeffser.Alpaca.metainfo.xml.in:241
 msgid "Fixed power saving mode appearing whilst using online instances"
 msgstr "Warnung vor Energiesparmodus bei Nutzung von Online-Instanzen behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:234
+#: data/com.jeffser.Alpaca.metainfo.xml.in:250
 msgid "Fixed Ollama (Manged) instance not being able to be created"
 msgstr "Fehler bei der Erstellung der integrierten Ollama-Instanz behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:243
+#: data/com.jeffser.Alpaca.metainfo.xml.in:259
 msgid "Instance manager now follows default model"
 msgstr "Instanz-Manager befolgt nun das Standardmodell"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:244
+#: data/com.jeffser.Alpaca.metainfo.xml.in:260
 msgid "English text-to-speech voices not working"
 msgstr "Englische Text-zu-Sprache-Stimmen funktionieren nicht"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:245
+#: data/com.jeffser.Alpaca.metainfo.xml.in:261
 msgid "Instance manager sometimes not saving instances"
 msgstr "Instanz-Manager speichert manchmal Instanzen nicht"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:246
+#: data/com.jeffser.Alpaca.metainfo.xml.in:262
 msgid "Fixed Gorq and Deepseek instances not generating text"
 msgstr ""
 "Fehler behoben, durch den Groq- und Deepseek-Instanzen keinen Text "
 "generierten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:255
+#: data/com.jeffser.Alpaca.metainfo.xml.in:271
 msgid "Smart tools for models"
 msgstr "Intelligente Werkzeuge für Modelle"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:256
+#: data/com.jeffser.Alpaca.metainfo.xml.in:272
 msgid "Speech recognition (message dictation)"
 msgstr "Spracherkennung (Diktieren der Eingabe)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:257 src/widgets/model_manager.py:66
+#: data/com.jeffser.Alpaca.metainfo.xml.in:273 src/widgets/models/speech.py:94
 msgid "Text to Speech"
 msgstr "Text-zu-Sprache"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:258
+#: data/com.jeffser.Alpaca.metainfo.xml.in:274
 msgid "New Quick Chat system"
 msgstr "Neues \"Flinke Frage\"-System"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:259
+#: data/com.jeffser.Alpaca.metainfo.xml.in:275
 msgid "Filter Ollama models by categories"
 msgstr "Filtern von Ollama-Modellen nach Kategorien"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:260
+#: data/com.jeffser.Alpaca.metainfo.xml.in:276
 msgid "Better math Latex rendering in messages"
 msgstr "Verbessertes Mathematik-LaTeX-Rendering in Nachrichten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:261
+#: data/com.jeffser.Alpaca.metainfo.xml.in:277
 msgid "Rich text rendering in attachment preview"
 msgstr "Rich-Text-Rendering in Anhangsvorschau"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:262
+#: data/com.jeffser.Alpaca.metainfo.xml.in:278
 msgid "Matplotlib is now included in Python code runner"
 msgstr ""
 "Matplotlib ist nun in der integrierten Python-Codeausführung mitgeliefert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:263
+#: data/com.jeffser.Alpaca.metainfo.xml.in:279
 msgid "Styling for messages being generated"
 msgstr "Verschönerung von Nachrichten, die gerade noch generiert werden"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:265
-#: data/com.jeffser.Alpaca.metainfo.xml.in:373
+#: data/com.jeffser.Alpaca.metainfo.xml.in:281
+#: data/com.jeffser.Alpaca.metainfo.xml.in:389
 msgid "New Instances"
 msgstr "Neue Instanzen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:267
+#: data/com.jeffser.Alpaca.metainfo.xml.in:283
 msgid "Deepseek"
 msgstr "Deepseek"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:268
+#: data/com.jeffser.Alpaca.metainfo.xml.in:284
 msgid "OpenRouter AI"
 msgstr "OpenRouter AI"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:269
+#: data/com.jeffser.Alpaca.metainfo.xml.in:285
 msgid "Anthropic"
 msgstr "Anthropic"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:270
+#: data/com.jeffser.Alpaca.metainfo.xml.in:286
 msgid "Groq Cloud"
 msgstr "Groq Cloud"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:271
+#: data/com.jeffser.Alpaca.metainfo.xml.in:287
 msgid "Fireworks AI"
 msgstr "Fireworks AI"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:272
+#: data/com.jeffser.Alpaca.metainfo.xml.in:288
 msgid "Lambda Labs"
 msgstr "Lambda Labs"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:274
+#: data/com.jeffser.Alpaca.metainfo.xml.in:290
 msgid "New Attachment Types"
 msgstr "Neue Anhangstypen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:276
+#: data/com.jeffser.Alpaca.metainfo.xml.in:292
 msgid "Microsoft Word Document (docx)"
 msgstr "Microsoft Word-Dokument (docx)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:277
+#: data/com.jeffser.Alpaca.metainfo.xml.in:293
 msgid "Microsoft PowerPoint Document (pptx)"
 msgstr "Microsoft PowerPoint-Dokument (pptx)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:278
+#: data/com.jeffser.Alpaca.metainfo.xml.in:294
 msgid "Microsoft Excel Document (xlsx)"
 msgstr "Microsoft Excel-Dokument (xlsx)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:280
+#: data/com.jeffser.Alpaca.metainfo.xml.in:296
 msgid "New Tools"
 msgstr "Neue Werkzeuge"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:282 src/widgets/tools/tools.py:488
+#: data/com.jeffser.Alpaca.metainfo.xml.in:298 src/widgets/tools/tools.py:491
 msgid "Run Command (Testing)"
 msgstr "Befehl ausführen (Testing)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:283 src/widgets/tools/tools.py:404
+#: data/com.jeffser.Alpaca.metainfo.xml.in:299 src/widgets/tools/tools.py:407
 msgid "Online Search"
 msgstr "Online-Suche"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:284 src/widgets/tools/tools.py:363
+#: data/com.jeffser.Alpaca.metainfo.xml.in:300 src/widgets/tools/tools.py:366
 msgid "Extract Wikipedia Article"
 msgstr "Wikipedia-Artikel extrahieren"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:285 src/widgets/tools/tools.py:247
+#: data/com.jeffser.Alpaca.metainfo.xml.in:301 src/widgets/tools/tools.py:250
 msgid "Get Recipe by Name"
 msgstr "Rezept durch Namen finden"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:286 src/widgets/tools/tools.py:307
+#: data/com.jeffser.Alpaca.metainfo.xml.in:302 src/widgets/tools/tools.py:310
 msgid "Get Recipes by Category"
 msgstr "Rezept durch Kategorie finden"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:287 src/widgets/tools/tools.py:215
+#: data/com.jeffser.Alpaca.metainfo.xml.in:303 src/widgets/tools/tools.py:218
 msgid "Get Current Datetime"
 msgstr "Derzeitiges Datum samt Uhrzeit abrufen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:291
+#: data/com.jeffser.Alpaca.metainfo.xml.in:307
 msgid "Fixed welcome screen not showing sometimes when deleting a message"
 msgstr ""
 "Fehler behoben, durch den der Startbildschirm nach dem Löschen einer "
 "Nachricht manchmal nicht erschien"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:292
+#: data/com.jeffser.Alpaca.metainfo.xml.in:308
 msgid "Fixed bold text not rendering correctly in tables"
 msgstr "Fehlerhaftes Rendering von fettem Text in Tabellen behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:293
+#: data/com.jeffser.Alpaca.metainfo.xml.in:309
 msgid "Fixed sample prompt buttons overflowing on small screens"
 msgstr "Überlaufen von Beispielprompt-Buttons auf kleinen Bildschirmen behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:302
+#: data/com.jeffser.Alpaca.metainfo.xml.in:318
 msgid "Updated runtime to Gnome 48"
 msgstr "Laufzeit auf GNOME 48 aktualisiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:303
+#: data/com.jeffser.Alpaca.metainfo.xml.in:319
 msgid "Added back 'category pills' to model manager"
 msgstr "Kategorie-Indikatoren zurück zum Modell-Manager gebracht"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:304
+#: data/com.jeffser.Alpaca.metainfo.xml.in:320
 msgid "Better appearance for model manager sidebar"
 msgstr "Besseres Erscheinungsbild der Seitenleiste im Modell-Manager"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:305
 #: data/com.jeffser.Alpaca.metainfo.xml.in:321
+#: data/com.jeffser.Alpaca.metainfo.xml.in:337
 msgid "New models"
 msgstr "Neue Modelle"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:309
+#: data/com.jeffser.Alpaca.metainfo.xml.in:325
 msgid "Fixed bad title generation with chain-of-thought models"
 msgstr "Schlechte Titelgenerierung von Chain-of-Thought-Modellen behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:310
+#: data/com.jeffser.Alpaca.metainfo.xml.in:326
 msgid ""
 "Hide page switcher in model manager if there's only one page (online "
 "instances)"
@@ -597,351 +619,351 @@ msgstr ""
 "Seitenwechsler im Modell-Manager versteckt, wenn nur eine Seite vorhanden "
 "ist (Online-Instanzen)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:319
+#: data/com.jeffser.Alpaca.metainfo.xml.in:335
 msgid "Option to delete all chats"
 msgstr "Option, alle Chats zu löschen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:320
+#: data/com.jeffser.Alpaca.metainfo.xml.in:336
 msgid "Button to refresh sample prompts"
 msgstr "Knopf, um Beispielprompts neu zu laden"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:325
+#: data/com.jeffser.Alpaca.metainfo.xml.in:341
 msgid "Fixed saving Ollama (Managed) instance might crash it"
 msgstr "Behoben, dass integrierte Ollama-Instanz beim Speichern absürzt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:326
+#: data/com.jeffser.Alpaca.metainfo.xml.in:342
 msgid "Fixed stop button"
 msgstr "Stopp-Knopf behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:327
+#: data/com.jeffser.Alpaca.metainfo.xml.in:343
 msgid "Fixed model search not working if there are only pulling models"
 msgstr ""
 "Nicht funktionierenden Modellsuche behoben, wenn es nur zu ladende Modelle "
 "gibt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:328
+#: data/com.jeffser.Alpaca.metainfo.xml.in:344
 msgid "Fixed sample prompts sometimes not appearing"
 msgstr "Nicht erscheinende Beispielprompts behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:337
+#: data/com.jeffser.Alpaca.metainfo.xml.in:353
 msgid "Don't clear the building output of C++ scripts"
 msgstr "Build-Ausgabe von C++-Skripten wird nicht mehr geleert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:338
+#: data/com.jeffser.Alpaca.metainfo.xml.in:354
 msgid "Better handling of attachments"
 msgstr "Bessere Handhabung von Anhängen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:339
+#: data/com.jeffser.Alpaca.metainfo.xml.in:355
 msgid "Handle remote Ollama instance's API Key better"
 msgstr "Bessere Handhabung des API-Schlüssels einer Ollama-Remoteinstanz"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:340
+#: data/com.jeffser.Alpaca.metainfo.xml.in:356
 msgid "Remove '\\n' characters in instance edit page"
 msgstr "Entferne '\\n'-Buchstaben in Instanzbearbeitungsseite"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:349
+#: data/com.jeffser.Alpaca.metainfo.xml.in:365
 msgid "Dynamic chat loading"
 msgstr "Dynamisches Laden von Chats"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:350
+#: data/com.jeffser.Alpaca.metainfo.xml.in:366
 msgid "Updated Ollama instance"
 msgstr "Ollama-Instanz aktualisiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:359
+#: data/com.jeffser.Alpaca.metainfo.xml.in:375
 msgid "Tweaked appearance of models in model manager"
 msgstr "Aussehen der Modelle im Modell-Manager angepasst"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:360
+#: data/com.jeffser.Alpaca.metainfo.xml.in:376
 msgid "Updated Ollama instance to 0.5.11"
 msgstr "Ollama-Instanz auf 0.5.11 aktualisiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:361
+#: data/com.jeffser.Alpaca.metainfo.xml.in:377
 msgid "Added new models"
 msgstr "Neue Modelle hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:370
+#: data/com.jeffser.Alpaca.metainfo.xml.in:386
 msgid "New instance manager"
 msgstr "Neuer Instanz-Manager"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:371
+#: data/com.jeffser.Alpaca.metainfo.xml.in:387
 msgid "New welcome screen"
 msgstr "Neuer Willkommensbildschirm"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:375
+#: data/com.jeffser.Alpaca.metainfo.xml.in:391
 msgid "OpenAI ChatGPT"
 msgstr "Open AI ChatGPT"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:376
+#: data/com.jeffser.Alpaca.metainfo.xml.in:392
 msgid "Google Gemini"
 msgstr "Google Gemini"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:377
+#: data/com.jeffser.Alpaca.metainfo.xml.in:393
 msgid "Together AI"
 msgstr "Together AI"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:378
+#: data/com.jeffser.Alpaca.metainfo.xml.in:394
 msgid "Venice"
 msgstr "Venice"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:387
+#: data/com.jeffser.Alpaca.metainfo.xml.in:403
 msgid "Exporting chats with 'thoughts' attachment is fixed"
 msgstr "Das Exportieren von Chats mit 'Gedanken'-Anhängen ist behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:388
+#: data/com.jeffser.Alpaca.metainfo.xml.in:404
 msgid "Fixed attachment filters"
 msgstr "Anhangs-Filter behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:397
+#: data/com.jeffser.Alpaca.metainfo.xml.in:413
 msgid "New model manager"
 msgstr "Neuer KI-Modell-Manager"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:398
+#: data/com.jeffser.Alpaca.metainfo.xml.in:414
 msgid "Changed GtkSpinner to AdwSpinner"
 msgstr "Von GtkSpinner auf AdwSpinner gewechselt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:399
+#: data/com.jeffser.Alpaca.metainfo.xml.in:415
 msgid "Better handling of launch process"
 msgstr "Besserer Ablauf des Startprozesses"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:400
+#: data/com.jeffser.Alpaca.metainfo.xml.in:416
 msgid "New loading screen at launch"
 msgstr "Neuer Ladebildschirm beim Start"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:401
+#: data/com.jeffser.Alpaca.metainfo.xml.in:417
 msgid "Better handling of file types"
 msgstr "Bessere Handhabung von Dateitypen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:402
+#: data/com.jeffser.Alpaca.metainfo.xml.in:418
 msgid "Better regex expression for LaTeX equations"
 msgstr "Bessere RegEx-Ausdrücke für LaTeX-Gleichungen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:403
+#: data/com.jeffser.Alpaca.metainfo.xml.in:419
 msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
 msgstr ""
 "Bestätigungsdialog, sollte Alpaca während des Downloads eines Modells "
 "geschlossen werden"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:404
+#: data/com.jeffser.Alpaca.metainfo.xml.in:420
 msgid "Better handling of think tags in messages"
 msgstr "Bessere Handhabung von Reasoning-Tags in Nachrichten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:405
+#: data/com.jeffser.Alpaca.metainfo.xml.in:421
 msgid "Default model is now in charge of generating titles"
 msgstr "Das Standard-Modell generiert nun Titel"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:406
+#: data/com.jeffser.Alpaca.metainfo.xml.in:422
 msgid "Message header is now shown whilst the message is being generated"
 msgstr "Die Nachrichtenkopfzeile wird nun während der Generierung angezeigt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:407
+#: data/com.jeffser.Alpaca.metainfo.xml.in:423
 msgid "Better handling of model profile pictures"
 msgstr "Bessere Handhabung von Profilbildern der Modelle"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:408
+#: data/com.jeffser.Alpaca.metainfo.xml.in:424
 msgid "New models in 'available models' list"
 msgstr "Neue Modelle in der 'Verfügbare Modelle'-Liste"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:417
+#: data/com.jeffser.Alpaca.metainfo.xml.in:433
 msgid "Added option for attaching screenshots"
 msgstr "Option zum Anfügen von Screenshots hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:418
+#: data/com.jeffser.Alpaca.metainfo.xml.in:434
 msgid "Basic LaTeX math equations are now rendered in messages"
 msgstr ""
 "Grundlegende LaTeX-Mathematikgleichungen werden nun in Nachrichten gerendert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:419
+#: data/com.jeffser.Alpaca.metainfo.xml.in:435
 msgid "HTML and C++ scripts can now be run inside Alpaca"
 msgstr ""
 "HTML sowie C++-Skripte können nun innerhalb von Alpaca ausgeführt werden"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:420
+#: data/com.jeffser.Alpaca.metainfo.xml.in:436
 msgid "Added option to open the environment directory from the terminal"
 msgstr "Option hinzugefügt, den Umgebungsordner vom Terminal aus zu öffnen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:421
+#: data/com.jeffser.Alpaca.metainfo.xml.in:437
 msgid "Added option to edit code blocks directly"
 msgstr "Option hinzugefügt, um Codeblöcke direkt bearbeiten zu können"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:422
+#: data/com.jeffser.Alpaca.metainfo.xml.in:438
 msgid "Complete keyboard shortcut list"
 msgstr "Tastenkürzelliste vervollständigt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:423
+#: data/com.jeffser.Alpaca.metainfo.xml.in:439
 msgid "Images are now attached in 640p resolution"
 msgstr "Bilder werden nun in 640p-Auflösung angehangen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:424
+#: data/com.jeffser.Alpaca.metainfo.xml.in:440
 msgid "Website attachments now use extracted titles"
 msgstr "Website-Anhänge nutzen nun auch extrahierte Titel"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:425
+#: data/com.jeffser.Alpaca.metainfo.xml.in:441
 msgid "Better chat title generation"
 msgstr "Bessere Generierung der Chat-Titel"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:426
+#: data/com.jeffser.Alpaca.metainfo.xml.in:442
 msgid "Added option to attach any plain text files"
 msgstr "Option hinzugefügt, um Klartextdateien anzuhängen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:427
+#: data/com.jeffser.Alpaca.metainfo.xml.in:443
 msgid "Added spellchecker to message entry"
 msgstr "Rechtschreiberkennung zum Nachrichtenfeld hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:428
+#: data/com.jeffser.Alpaca.metainfo.xml.in:444
 msgid "Alpaca's parameters are now stored using SQLite3"
 msgstr "Alpaca's Einstellungen werden nun mittels SQLite3 gespeichert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:429
+#: data/com.jeffser.Alpaca.metainfo.xml.in:445
 msgid "Small appearance changes in text entries"
 msgstr "Geringfügige Aussehensanpassungen in Textfeldern"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:433
+#: data/com.jeffser.Alpaca.metainfo.xml.in:449
 msgid "Alpaca's launch process is more reliable"
 msgstr "Alpaca's Startprozess ist zuverlässiger"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:434
+#: data/com.jeffser.Alpaca.metainfo.xml.in:450
 msgid "Closing the terminal now kills the script subprocess"
 msgstr ""
 "Das Terminal zu schließen führt nun zum Beenden des Skript-Subprozesses"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:443
+#: data/com.jeffser.Alpaca.metainfo.xml.in:459
 msgid "Transitioned chat backend from JSON to SQLite3"
 msgstr "Chat-Backend von JSON zu SQLite migriert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:444
+#: data/com.jeffser.Alpaca.metainfo.xml.in:460
 msgid "Changed appearance of messages"
 msgstr "Erscheinungsbild der Nachrichten geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:445
+#: data/com.jeffser.Alpaca.metainfo.xml.in:461
 msgid "Added the option to add profile pictures to models"
 msgstr "Option hinzugefügt, um Profilbilder zu Modellen hinzuzufügen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:447
-#: data/com.jeffser.Alpaca.metainfo.xml.in:919
-#: data/com.jeffser.Alpaca.metainfo.xml.in:968
+#: data/com.jeffser.Alpaca.metainfo.xml.in:463
+#: data/com.jeffser.Alpaca.metainfo.xml.in:935
+#: data/com.jeffser.Alpaca.metainfo.xml.in:984
 msgid "Fix"
 msgstr "Fehlerbehebung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:449
+#: data/com.jeffser.Alpaca.metainfo.xml.in:465
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
 msgstr "Override HIP_VISIBLE_DEVICES zu ROCR_VISIBLE_DEVICES gewechselt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:458
+#: data/com.jeffser.Alpaca.metainfo.xml.in:474
 msgid "Added categories to models"
 msgstr "Kategorien zu Modellen hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:459
+#: data/com.jeffser.Alpaca.metainfo.xml.in:475
 msgid "Specified model's languages"
 msgstr "Sprachen der Modelle spezifiziert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:460
+#: data/com.jeffser.Alpaca.metainfo.xml.in:476
 msgid "Added warning when downloading embedding models"
 msgstr "Warnung beim Download von Embedding-Modellen hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:464
+#: data/com.jeffser.Alpaca.metainfo.xml.in:480
 msgid "Replaced low ram warning with big model warning"
 msgstr ""
 "Warnung über geringen Arbeitsspeicher mit Warnung zu großem Modell ersetzt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:473
+#: data/com.jeffser.Alpaca.metainfo.xml.in:489
 msgid "Correctly escape markup before rendering message"
 msgstr "Markup richtig escapen, bevor es in der Nachricht gerendert wird"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:474
+#: data/com.jeffser.Alpaca.metainfo.xml.in:490
 msgid "Fixed about dialog not working if log file was missing"
 msgstr ""
 "Nicht funktionierenden 'Über Alpaca'-Dialog behoben, sollte die Log-Datei "
 "fehlen."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:483
+#: data/com.jeffser.Alpaca.metainfo.xml.in:499
 msgid "System messages can now be sent directly from Alpaca"
 msgstr "Systemnachrichten können nun direkt mit Alpaca gesendet werden"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:484
+#: data/com.jeffser.Alpaca.metainfo.xml.in:500
 msgid "New redesign for messages and smaller minimum size"
 msgstr "Neues Design für Nachrichten und kleinere Minimalgröße"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:485
+#: data/com.jeffser.Alpaca.metainfo.xml.in:501
 msgid "New models included in 'available models list'"
 msgstr "Neue Modelle in 'Verfügbare Modelle'-Liste aufgenommen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:486
+#: data/com.jeffser.Alpaca.metainfo.xml.in:502
 msgid "Added symbolic icon when attaching code files"
 msgstr "Symbolische Icons beim Anhang von Codedateien hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:487
+#: data/com.jeffser.Alpaca.metainfo.xml.in:503
 msgid "When exporting a chat it now includes a markdown file"
 msgstr "Der Export eines Chats beinhaltet nun eine Markdown-Datei"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:488
+#: data/com.jeffser.Alpaca.metainfo.xml.in:504
 msgid "Refresh button in model manager when using a remote instance"
 msgstr "'Neu laden'-Knopf im Modellmanager bei Nutzung einer Remoteinstanz"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:489
+#: data/com.jeffser.Alpaca.metainfo.xml.in:505
 msgid "Assistant messages are now editable"
 msgstr "Assistentnachrichten können nun bearbeitet werden"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:490
+#: data/com.jeffser.Alpaca.metainfo.xml.in:506
 msgid "Updated Ollama to v0.5.2"
 msgstr "Ollama auf v0.5.2 aktualisiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:491
+#: data/com.jeffser.Alpaca.metainfo.xml.in:507
 msgid "New option to change model directory"
 msgstr "Neue Option zum Wechseln des Modellordners"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:492
+#: data/com.jeffser.Alpaca.metainfo.xml.in:508
 msgid "File previewer now resizes dynamically to content"
 msgstr "Größe der Dateivorschau wird nun dynamisch zum Inhalt angepasst"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:493
+#: data/com.jeffser.Alpaca.metainfo.xml.in:509
 msgid "Adapted Alpaca to work without integrated Ollama instance"
 msgstr "Alpaca angepasst, sodass es ohne integrierte Instanz arbeiten kann"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:494
+#: data/com.jeffser.Alpaca.metainfo.xml.in:510
 msgid "Compatibility added with ODT files"
 msgstr "Kompatibilität mit ODT-Dateien hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:497
+#: data/com.jeffser.Alpaca.metainfo.xml.in:513
 msgid "Restored ROCm compatibility"
 msgstr "ROCm-Kompatibilität wiederhergestellt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:498
+#: data/com.jeffser.Alpaca.metainfo.xml.in:514
 msgid ""
 "Added long press gesture to chat rows so actions can be done in touchscreens"
 msgstr ""
 "Langes Drücken-Geste zu Chatzeilen hinzugefügt, sodass Aktionen auch auf "
 "Touchscreens durchgeführt werden können."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:499
+#: data/com.jeffser.Alpaca.metainfo.xml.in:515
 msgid "Fixed edit button not saving changes"
 msgstr ""
 "Fehler des Bearbeiten-Knopfes behoben, der die Änderungen nicht speicherte"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:500
+#: data/com.jeffser.Alpaca.metainfo.xml.in:516
 msgid "Changed max temperature value to 2"
 msgstr "Maximal-Modelltemperaturwert auf 2 geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:501
+#: data/com.jeffser.Alpaca.metainfo.xml.in:517
 msgid "Made seed 0 actually random"
 msgstr "Seed '0' tatsächlich zufällig gemacht"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:502
+#: data/com.jeffser.Alpaca.metainfo.xml.in:518
 msgid ""
 "Fixed Gnome search provider not working outside of Flatpak installations"
 msgstr ""
 "Nicht funktionierenden GNOME-Search-Provider außerhalb von Flatpak-"
 "Installationen behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:511
+#: data/com.jeffser.Alpaca.metainfo.xml.in:527
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
 msgstr ""
 "Neue Option '--ask MESSAGE', um ein neues 'Quick Ask'-Fenster zu öffnen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:512
+#: data/com.jeffser.Alpaca.metainfo.xml.in:528
 msgid "Gnome Search integration now works whilst the app is opened"
 msgstr "GNOME-Suche-Integration funktioniert nun, wenn die App geöffnet ist"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:521
+#: data/com.jeffser.Alpaca.metainfo.xml.in:537
 msgid ""
 "Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
 "--list-chats, --version"
@@ -949,36 +971,36 @@ msgstr ""
 "Startparameter '--ask MESSAGE', '--new-chat CHAT', '--select-chat CHAT', '--"
 "list-chats', '--version' hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:522
+#: data/com.jeffser.Alpaca.metainfo.xml.in:538
 msgid "Added integration as Gnome Search Provider"
 msgstr "Integration als GNOME-Suche-Provider hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:523
+#: data/com.jeffser.Alpaca.metainfo.xml.in:539
 msgid "Updated Ollama to v0.4.2 with new models"
 msgstr "Ollama auf Version v0.4.2 mit neuen Modellen aktualisiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:532
+#: data/com.jeffser.Alpaca.metainfo.xml.in:548
 msgid "User messages are now compacted into bubbles"
 msgstr "Nutzernachrichten sind nun kleiner in Sprechblasen komprimiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:536
+#: data/com.jeffser.Alpaca.metainfo.xml.in:552
 msgid ""
 "Fixed re connection dialog not working when 'use local instance' is selected"
 msgstr ""
 "Bei Auswahl von 'Nutzung lokaler Instanz' nicht funktionierenden re-"
 "Verbindungsdialog behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:537
+#: data/com.jeffser.Alpaca.metainfo.xml.in:553
 msgid "Fixed model manager not adapting to large system fonts"
 msgstr ""
 "Nicht mit zu großen Systemschriftgrößen funktionierenden Modellmanager "
 "behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:546
+#: data/com.jeffser.Alpaca.metainfo.xml.in:562
 msgid "Details page for models"
 msgstr "Detailseite für Modelle"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:547
+#: data/com.jeffser.Alpaca.metainfo.xml.in:563
 msgid ""
 "Model selector gets replaced with 'manage models' button when there are no "
 "models downloaded"
@@ -986,80 +1008,80 @@ msgstr ""
 "Die Modellauswahl wird durch die Schaltfläche Modelle verwalten ersetzt, "
 "wenn keine Modelle heruntergeladen wurden"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:548
+#: data/com.jeffser.Alpaca.metainfo.xml.in:564
 msgid "Added warning when model is too big for the device"
 msgstr "Warnung hinzugefügt, wenn das Modell zu groß für das Gerät ist"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:549
+#: data/com.jeffser.Alpaca.metainfo.xml.in:565
 msgid "Added AMD GPU indicator in preferences"
 msgstr "AMD-GPU-Anzeige in den Einstellungen hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:558
+#: data/com.jeffser.Alpaca.metainfo.xml.in:574
 msgid "Better system for handling dialogs"
 msgstr "Besseres System zur Handhabung von Dialogen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:559
+#: data/com.jeffser.Alpaca.metainfo.xml.in:575
 msgid "Better system for handling instance switching"
 msgstr "Besseres System für die Handhabung des Instanzenwechsels"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:560
+#: data/com.jeffser.Alpaca.metainfo.xml.in:576
 msgid "Remote connection dialog"
 msgstr "Dialog zur Remoteverbindung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:564
+#: data/com.jeffser.Alpaca.metainfo.xml.in:580
 msgid "Fixed: Models get duplicated when switching remote and local instance"
 msgstr ""
 "Behoben: Modelle werden beim Wechsel zwischen lokaler und entfernter Instanz "
 "dupliziert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:565
+#: data/com.jeffser.Alpaca.metainfo.xml.in:581
 msgid "Better internal instance manager"
 msgstr "Besserer interner Instanzmanager"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:574
+#: data/com.jeffser.Alpaca.metainfo.xml.in:590
 msgid "Added 'Cancel' and 'Save' buttons when editing a message"
 msgstr ""
 "Schaltflächen Abbrechen und Speichern beim Bearbeiten einer Nachricht "
 "hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:578
+#: data/com.jeffser.Alpaca.metainfo.xml.in:594
 msgid "Better handling of image recognition"
 msgstr "Bessere Handhabung der Bilderkennung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:579
+#: data/com.jeffser.Alpaca.metainfo.xml.in:595
 msgid "Remove unused files when canceling a model download"
 msgstr "Entfernen unbenutzter Dateien beim Abbrechen eines Modell-Downloads"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:580
+#: data/com.jeffser.Alpaca.metainfo.xml.in:596
 msgid "Better message blocks rendering"
 msgstr "Bessere Darstellung von Nachrichtenblöcken"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:589
+#: data/com.jeffser.Alpaca.metainfo.xml.in:605
 msgid "Run bash and python scripts straight from chat"
 msgstr "Bash- und Python-Skripte direkt aus dem Chat ausführen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:590
+#: data/com.jeffser.Alpaca.metainfo.xml.in:606
 msgid "Updated Ollama to 0.3.12"
 msgstr "Ollama auf 0.3.12 aktualisiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:591
+#: data/com.jeffser.Alpaca.metainfo.xml.in:607
 msgid "New models!"
 msgstr "Neue Modelle!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:595
+#: data/com.jeffser.Alpaca.metainfo.xml.in:611
 msgid "Fixed and made faster the launch sequence"
 msgstr "Startsequenz behoben und beschleunigt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:596
+#: data/com.jeffser.Alpaca.metainfo.xml.in:612
 msgid "Better detection of code blocks in messages"
 msgstr "Verbesserte Erkennung von Codeblöcken in Nachrichten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:597
+#: data/com.jeffser.Alpaca.metainfo.xml.in:613
 msgid "Fixed app not loading in certain setups with Nvidia GPUs"
 msgstr ""
 "Behoben, dass die App in bestimmten Setups mit Nvidia-GPUs nicht geladen wird"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:606
+#: data/com.jeffser.Alpaca.metainfo.xml.in:622
 msgid ""
 "Fixed message notification sometimes crashing text rendering because of them "
 "running on different threads"
@@ -1067,31 +1089,31 @@ msgstr ""
 "Behoben, dass die Nachrichtenbenachrichtigung manchmal die Textrendering "
 "abstürzen lässt, da sie auf unterschiedlichen Threads ausgeführt wird"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:615
+#: data/com.jeffser.Alpaca.metainfo.xml.in:631
 msgid "Fixed message generation sometimes failing"
 msgstr "Behoben, dass die Nachrichtenerstellung manchmal fehlschlägt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:624
+#: data/com.jeffser.Alpaca.metainfo.xml.in:640
 msgid "Sidebar resizes with the window"
 msgstr "Seitenleiste passt sich der Fenstergröße an"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:625
+#: data/com.jeffser.Alpaca.metainfo.xml.in:641
 msgid "New welcome dialog"
 msgstr "Neuer Begrüßungsdialog"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:626
+#: data/com.jeffser.Alpaca.metainfo.xml.in:642
 msgid "Message search"
 msgstr "Nachrichtensuche"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:627
+#: data/com.jeffser.Alpaca.metainfo.xml.in:643
 msgid "Updated Ollama to v0.3.11"
 msgstr "Ollama auf v0.3.11 aktualisiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:628
+#: data/com.jeffser.Alpaca.metainfo.xml.in:644
 msgid "A lot of new models provided by Ollama repository"
 msgstr "Viele neue Modelle aus dem Ollama-Repository"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:632
+#: data/com.jeffser.Alpaca.metainfo.xml.in:648
 msgid ""
 "Fixed text inside model manager when the accessibility option 'large text' "
 "is on"
@@ -1099,428 +1121,428 @@ msgstr ""
 "Behoben, dass der Text im Modell-Manager bei aktivierter "
 "Barrierefreiheitseinstellung 'Großer Text' angezeigt wird"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:633
+#: data/com.jeffser.Alpaca.metainfo.xml.in:649
 msgid "Fixed image recognition on unsupported models"
 msgstr "Bild-Erkennung bei nicht unterstützten Modellen behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:642
+#: data/com.jeffser.Alpaca.metainfo.xml.in:658
 msgid "Fixed spinner not hiding if the back end fails"
 msgstr ""
 "Behoben, dass der Ladeindikator nicht ausgeblendet wird, wenn das Backend "
 "fehlschlägt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:643
+#: data/com.jeffser.Alpaca.metainfo.xml.in:659
 msgid "Fixed image recognition with local images"
 msgstr "Bild-Erkennung bei lokalen Bildern behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:644
+#: data/com.jeffser.Alpaca.metainfo.xml.in:660
 msgid "Changed appearance of delete / stop model buttons"
 msgstr "Aussehen der Löschen-/Stopp-Modell-Buttons geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:645
+#: data/com.jeffser.Alpaca.metainfo.xml.in:661
 msgid "Fixed stop button crashing the app"
 msgstr "Behoben, dass der Stopp-Button die App abstürzen lässt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:649
+#: data/com.jeffser.Alpaca.metainfo.xml.in:665
 msgid "Made sidebar resize a little when the window is smaller"
 msgstr "Seitenleiste passt sich etwas an, wenn das Fenster kleiner ist"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:650
+#: data/com.jeffser.Alpaca.metainfo.xml.in:666
 msgid "Instant launch"
 msgstr "Sofortiger Start"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:659
+#: data/com.jeffser.Alpaca.metainfo.xml.in:675
 msgid "Fixed error on first run (welcome dialog)"
 msgstr "Fehler beim ersten Start (Begrüßungsdialog) behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:660
+#: data/com.jeffser.Alpaca.metainfo.xml.in:676
 msgid "Fixed checker for Ollama instance (used on system packages)"
 msgstr "Prüfer für Ollama-Instanz (verwendet in Systempaketen) behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:669
+#: data/com.jeffser.Alpaca.metainfo.xml.in:685
 msgid "Fixed 'clear chat' option"
 msgstr "'Chat leeren'-Option behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:670
+#: data/com.jeffser.Alpaca.metainfo.xml.in:686
 msgid "Fixed welcome dialog causing the local instance to not launch"
 msgstr "Behoben, dass der Begrüßungsdialog die lokale Instanz am Start hindert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:671
+#: data/com.jeffser.Alpaca.metainfo.xml.in:687
 msgid "Fixed support for AMD GPUs"
 msgstr "Unterstützung für AMD-GPUs behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:680
+#: data/com.jeffser.Alpaca.metainfo.xml.in:696
 msgid "Model, message and chat systems have been rewritten"
 msgstr "Modell-, Nachrichten und Chatsysteme wurden neugeschrieben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:681
+#: data/com.jeffser.Alpaca.metainfo.xml.in:697
 msgid "New models are available"
 msgstr "Neue Modelle verfügbar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:682
+#: data/com.jeffser.Alpaca.metainfo.xml.in:698
 msgid "Ollama updated to v0.3.9"
 msgstr "Ollama zu Version v0.3.9 aktualisiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:683
+#: data/com.jeffser.Alpaca.metainfo.xml.in:699
 msgid "Added support for multiple chat generations simultaneously"
 msgstr "Support für simultane Multi-Chat-Generationen hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:684
+#: data/com.jeffser.Alpaca.metainfo.xml.in:700
 msgid "Added experimental AMD GPU support"
 msgstr "Experimenteller AMD GPU Support hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:685
+#: data/com.jeffser.Alpaca.metainfo.xml.in:701
 msgid "Added message loading spinner and new message indicator to chat tab"
 msgstr ""
 "Statusladebalken als Indikator für Nachrichten zum Chat-Tab hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:686
+#: data/com.jeffser.Alpaca.metainfo.xml.in:702
 msgid "Added animations"
 msgstr "Animationen hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:687
+#: data/com.jeffser.Alpaca.metainfo.xml.in:703
 msgid "Changed model manager / model selector appearance"
 msgstr "Die Gestaltung des Modell Manager / Modellauswähler geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:688
+#: data/com.jeffser.Alpaca.metainfo.xml.in:704
 msgid "Changed message appearance"
 msgstr "Die Gestaltung der Nachrichten geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:689
+#: data/com.jeffser.Alpaca.metainfo.xml.in:705
 msgid "Added markdown and code blocks to user messages"
 msgstr "Markdown und Codeblöcke für Benutzernachrichten hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:690
+#: data/com.jeffser.Alpaca.metainfo.xml.in:706
 msgid "Added loading dialog at launch so the app opens faster"
 msgstr "Ladedialog beim Start hinzugefügt, damit sich die App schneller öffnet"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:691
+#: data/com.jeffser.Alpaca.metainfo.xml.in:707
 msgid "Added warning when device is on 'battery saver' mode"
 msgstr ""
 "Warnung hinzugefügt, wenn sich das Gerät im 'Batteriesparmodus' befindet"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:692
+#: data/com.jeffser.Alpaca.metainfo.xml.in:708
 msgid "Added inactivity timer to integrated instance"
 msgstr "Inaktivitäts-Timer zur integrierten Instanz hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:695
+#: data/com.jeffser.Alpaca.metainfo.xml.in:711
 msgid "The chat is now scrolled to the bottom when it's changed"
 msgstr "Der Chat wird jetzt nach unten gescrollt, wenn er geändert wird"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:696
+#: data/com.jeffser.Alpaca.metainfo.xml.in:712
 msgid "Better handling of focus on messages"
 msgstr "Bessere Handhabung von Nachrichten, die im Fokus stehen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:697
+#: data/com.jeffser.Alpaca.metainfo.xml.in:713
 msgid "Better general performance on the app"
 msgstr "Bessere Grundperformance der App"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:706
+#: data/com.jeffser.Alpaca.metainfo.xml.in:722
 msgid "New duplicate chat option"
 msgstr "Option zum Duplizieren von Chats"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:707
+#: data/com.jeffser.Alpaca.metainfo.xml.in:723
 msgid "Changed model selector appearance"
 msgstr "Erscheinungsbild des Modellselektors geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:708
+#: data/com.jeffser.Alpaca.metainfo.xml.in:724
 msgid "Message entry is focused on launch and chat change"
 msgstr "Nachrichteneingabe wird beim Start und Chatwechsel fokussiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:709
+#: data/com.jeffser.Alpaca.metainfo.xml.in:725
 msgid "Message is focused when it's being edited"
 msgstr "Nachricht wird beim Bearbeiten fokussiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:710
+#: data/com.jeffser.Alpaca.metainfo.xml.in:726
 msgid "Added loading spinner when regenerating a message"
 msgstr "Ladeanimation beim erneuten Generieren einer Nachricht hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:711
+#: data/com.jeffser.Alpaca.metainfo.xml.in:727
 msgid "Added Ollama debugging to 'About Alpaca' dialog"
 msgstr "Ollama-Debugging zum 'Über Alpaca'-Dialog hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:712
+#: data/com.jeffser.Alpaca.metainfo.xml.in:728
 msgid "Changed YouTube transcription dialog appearance and behavior"
 msgstr ""
 "Erscheinungsbild und Verhalten des YouTube-Transkriptionsdialogs geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:716
+#: data/com.jeffser.Alpaca.metainfo.xml.in:732
 msgid "CTRL+W and CTRL+Q stops local instance before closing the app"
 msgstr "STRG+W und STRG+Q stoppen die lokale Instanz vor dem Schließen der App"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:717
+#: data/com.jeffser.Alpaca.metainfo.xml.in:733
 msgid "Changed appearance of 'Open Model Manager' button on welcome screen"
 msgstr ""
 "Erscheinungsbild der Schaltfläche 'Modell-Manager öffnen' auf dem "
 "Begrüßungsbildschirm geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:718
+#: data/com.jeffser.Alpaca.metainfo.xml.in:734
 msgid "Fixed message generation not working consistently"
 msgstr "Nachrichtengenerierung funktioniert nicht konsistent - behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:719
+#: data/com.jeffser.Alpaca.metainfo.xml.in:735
 msgid "Fixed message edition not working consistently"
 msgstr "Nachrichtenbearbeitung funktioniert nicht konsistent - behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:728
+#: data/com.jeffser.Alpaca.metainfo.xml.in:744
 msgid "Model manager opens faster"
 msgstr "Modell-Manager öffnet sich schneller"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:729
+#: data/com.jeffser.Alpaca.metainfo.xml.in:745
 msgid "Delete chat option in secondary menu"
 msgstr "Option 'Chat löschen' im sekundären Menü"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:730
+#: data/com.jeffser.Alpaca.metainfo.xml.in:746
 msgid "New model selector popup"
 msgstr "Neues Popup für die Modellauswahl"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:731
+#: data/com.jeffser.Alpaca.metainfo.xml.in:747
 msgid "Standard shortcuts"
 msgstr "Standard-Tastenkombinationen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:732
+#: data/com.jeffser.Alpaca.metainfo.xml.in:748
 msgid "Model manager is navigable with keyboard"
 msgstr "Modell-Manager ist mit der Tastatur navigierbar"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:733
+#: data/com.jeffser.Alpaca.metainfo.xml.in:749
 msgid "Changed sidebar collapsing behavior"
 msgstr "Verhalten beim Ausblenden der Seitenleiste geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:734
+#: data/com.jeffser.Alpaca.metainfo.xml.in:750
 msgid "Focus indicators on messages"
 msgstr "Fokus-Indikatoren auf Nachrichten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:735
+#: data/com.jeffser.Alpaca.metainfo.xml.in:751
 msgid "Welcome screen"
 msgstr "Begrüßungsbildschirm"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:736
+#: data/com.jeffser.Alpaca.metainfo.xml.in:752
 msgid "Give message entry focus at launch"
 msgstr "Nachrichteneingabe beim Start fokussieren"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:737
+#: data/com.jeffser.Alpaca.metainfo.xml.in:753
 msgid "Generally better code"
 msgstr "Allgemein besserer Code"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:741
+#: data/com.jeffser.Alpaca.metainfo.xml.in:757
 msgid "Better width for dialogs"
 msgstr "Bessere Breite für Dialoge"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:742
+#: data/com.jeffser.Alpaca.metainfo.xml.in:758
 msgid "Better compatibility with screen readers"
 msgstr "Bessere Kompatibilität mit Bildschirmlesern"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:743
+#: data/com.jeffser.Alpaca.metainfo.xml.in:759
 msgid "Fixed message regenerator"
 msgstr "Nachrichtengenerator repariert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:744
+#: data/com.jeffser.Alpaca.metainfo.xml.in:760
 msgid "Removed 'Featured models' from welcome dialog"
 msgstr "'Empfohlene Modelle' aus dem Begrüßungsdialog entfernt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:745
+#: data/com.jeffser.Alpaca.metainfo.xml.in:761
 msgid "Added default buttons to dialogs"
 msgstr "Standard-Schaltflächen zu Dialogen hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:746
+#: data/com.jeffser.Alpaca.metainfo.xml.in:762
 msgid "Fixed import / export of chats"
 msgstr "Import/Export von Chats behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:747
+#: data/com.jeffser.Alpaca.metainfo.xml.in:763
 msgid "Changed Python2 title to Python on code blocks"
 msgstr "Titel 'Python2' in Codeblöcken zu 'Python' geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:748
+#: data/com.jeffser.Alpaca.metainfo.xml.in:764
 msgid ""
 "Prevent regeneration of title when the user changed it to a custom title"
 msgstr ""
 "Verhindern Sie die erneute Generierung des Titels, wenn der Benutzer ihn in "
 "einen benutzerdefinierten Titel geändert hat"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:749
+#: data/com.jeffser.Alpaca.metainfo.xml.in:765
 msgid "Show date on stopped messages"
 msgstr "Datum bei gestoppten Nachrichten anzeigen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:750
+#: data/com.jeffser.Alpaca.metainfo.xml.in:766
 msgid "Fix clear chat error"
 msgstr "Fehler beim Leeren des Chats behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:759
+#: data/com.jeffser.Alpaca.metainfo.xml.in:775
 msgid "Changed shortcuts to standards"
 msgstr "Tastenkombinationen auf Standards geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:760
+#: data/com.jeffser.Alpaca.metainfo.xml.in:776
 msgid "Moved 'Manage Models' button to primary menu"
 msgstr "Schaltfläche 'Modelle verwalten' in das Hauptmenü verschoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:761
-#: data/com.jeffser.Alpaca.metainfo.xml.in:783
+#: data/com.jeffser.Alpaca.metainfo.xml.in:777
+#: data/com.jeffser.Alpaca.metainfo.xml.in:799
 msgid "Stable support for GGUF model files"
 msgstr "Stabile Unterstützung für GGUF-Modelldateien"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:762
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1037
+#: data/com.jeffser.Alpaca.metainfo.xml.in:778
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1053
 msgid "General optimizations"
 msgstr "Allgemeine Optimierungen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:766
+#: data/com.jeffser.Alpaca.metainfo.xml.in:782
 msgid "Better handling of enter key (important for Japanese input)"
 msgstr ""
 "Bessere Behandlung der Eingabetaste (wichtig für die japanische Eingabe)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:767
+#: data/com.jeffser.Alpaca.metainfo.xml.in:783
 msgid "Removed sponsor dialog"
 msgstr "Sponsorendialog entfernt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:768
+#: data/com.jeffser.Alpaca.metainfo.xml.in:784
 msgid "Added sponsor link in about dialog"
 msgstr "Sponsorenlink im Info-Dialog hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:769
+#: data/com.jeffser.Alpaca.metainfo.xml.in:785
 msgid "Changed window and elements dimensions"
 msgstr "Fenster- und Elementabmessungen geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:770
+#: data/com.jeffser.Alpaca.metainfo.xml.in:786
 msgid "Selected model changes when entering model manager"
 msgstr "Ausgewähltes Modell ändert sich beim Aufrufen des Modell-Managers"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:771
+#: data/com.jeffser.Alpaca.metainfo.xml.in:787
 msgid "Better image tooltips"
 msgstr "Bessere Bild-Tooltips"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:772
+#: data/com.jeffser.Alpaca.metainfo.xml.in:788
 msgid "GGUF Support"
 msgstr "GGUF-Unterstützung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:781
+#: data/com.jeffser.Alpaca.metainfo.xml.in:797
 msgid "Regenerate any response, even if they are incomplete"
 msgstr "Jede Antwort neu generieren, auch wenn sie unvollständig sind"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:782
+#: data/com.jeffser.Alpaca.metainfo.xml.in:798
 msgid "Support for pulling models by name:tag"
 msgstr "Unterstützung für das Abrufen von Modellen nach Name:Tag"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:784
+#: data/com.jeffser.Alpaca.metainfo.xml.in:800
 msgid "Restored sidebar toggle button"
 msgstr "Seitenleisten-Umschalttaste wiederhergestellt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:788
+#: data/com.jeffser.Alpaca.metainfo.xml.in:804
 msgid "Reverted back to standard styles"
 msgstr "Zu Standardstilen zurückgekehrt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:789
+#: data/com.jeffser.Alpaca.metainfo.xml.in:805
 msgid "Fixed generated titles having \"'S\" for some reason"
 msgstr ""
 "Es wurde behoben, dass generierte Titel aus irgendeinem Grund \"'S\" "
 "enthalten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:790
+#: data/com.jeffser.Alpaca.metainfo.xml.in:806
 msgid "Changed min width for model dropdown"
 msgstr "Minimale Breite für Modell-Dropdown geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:791
+#: data/com.jeffser.Alpaca.metainfo.xml.in:807
 msgid "Changed message entry shadow"
 msgstr "Schatten der Nachrichteneingabe geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:792
+#: data/com.jeffser.Alpaca.metainfo.xml.in:808
 msgid "The last model used is now restored when the user changes chat"
 msgstr ""
 "Das zuletzt verwendete Modell wird nun wiederhergestellt, wenn der Benutzer "
 "den Chat wechselt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:793
+#: data/com.jeffser.Alpaca.metainfo.xml.in:809
 msgid "Better check for message finishing"
 msgstr "Bessere Prüfung auf Nachrichtenende"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:802
+#: data/com.jeffser.Alpaca.metainfo.xml.in:818
 msgid "Added table rendering (Thanks Nokse)"
 msgstr "Tabellen-Rendering hinzugefügt (Danke Nokse)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:806
+#: data/com.jeffser.Alpaca.metainfo.xml.in:822
 msgid "Made support dialog more common"
 msgstr "Support-Dialog gängiger gemacht"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:807
+#: data/com.jeffser.Alpaca.metainfo.xml.in:823
 msgid ""
 "Dialog title on tag chooser when downloading models didn't display properly"
 msgstr ""
 "Dialog-Titel auf Tag-Auswahl beim Herunterladen von Modellen wurde nicht "
 "richtig angezeigt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:808
+#: data/com.jeffser.Alpaca.metainfo.xml.in:824
 msgid "Prevent chat generation from generating a title with multiple lines"
 msgstr ""
 "Verhindern, dass bei der Chat-Generierung ein mehrzeiliger Titel generiert "
 "wird"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:817
+#: data/com.jeffser.Alpaca.metainfo.xml.in:833
 msgid "Bearer Token entry on connection error dialog"
 msgstr "Eingabe des Bearer-Tokens im Verbindungsfehler-Dialog"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:818
+#: data/com.jeffser.Alpaca.metainfo.xml.in:834
 msgid "Small appearance changes"
 msgstr "Kleine Änderungen am Erscheinungsbild"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:819
+#: data/com.jeffser.Alpaca.metainfo.xml.in:835
 msgid "Compatibility with code blocks without explicit language"
 msgstr "Kompatibilität mit Codeblöcken ohne explizite Sprache"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:820
+#: data/com.jeffser.Alpaca.metainfo.xml.in:836
 msgid "Rare, optional and dismissible support dialog"
 msgstr "Seltener, optionaler und entfernbarer Support-Dialog"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:824
+#: data/com.jeffser.Alpaca.metainfo.xml.in:840
 msgid "Date format for Simplified Chinese translation"
 msgstr "Datumsformat für vereinfachte chinesische Übersetzung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:825
+#: data/com.jeffser.Alpaca.metainfo.xml.in:841
 msgid "Bug with unsupported localizations"
 msgstr "Fehler bei nicht unterstützten Lokalisierungen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:826
+#: data/com.jeffser.Alpaca.metainfo.xml.in:842
 msgid "Min height being too large to be used on mobile"
 msgstr "Mindesthöhe zu groß für die Verwendung auf Mobilgeräten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:827
+#: data/com.jeffser.Alpaca.metainfo.xml.in:843
 msgid "Remote connection checker bug"
 msgstr "Fehler beim Prüfen der Remoteverbindung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:836
+#: data/com.jeffser.Alpaca.metainfo.xml.in:852
 msgid "Models with capital letters on their tag don't work"
 msgstr "Modelle mit Großbuchstaben in ihrem Tag funktionieren nicht"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:837
+#: data/com.jeffser.Alpaca.metainfo.xml.in:853
 msgid "Ollama fails to launch on some systems"
 msgstr "Ollama startet auf einigen Systemen nicht"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:838
+#: data/com.jeffser.Alpaca.metainfo.xml.in:854
 msgid "YouTube transcripts are not being saved in the right TMP directory"
 msgstr ""
 "YouTube-Transkripte werden nicht im richtigen TMP-Verzeichnis gespeichert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:842
+#: data/com.jeffser.Alpaca.metainfo.xml.in:858
 msgid "Debug messages are now shown on the 'About Alpaca' dialog"
 msgstr "Debug-Meldungen werden jetzt im 'Über Alpaca'-Dialog angezeigt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:843
+#: data/com.jeffser.Alpaca.metainfo.xml.in:859
 msgid "Updated Ollama to v0.3.0 (new models)"
 msgstr "Ollama auf v0.3.0 aktualisiert (neue Modelle)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:852
+#: data/com.jeffser.Alpaca.metainfo.xml.in:868
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
 msgstr ""
 "Modelle mit '-' in ihren Namen funktionierten nicht richtig, dies ist jetzt "
 "behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:853
+#: data/com.jeffser.Alpaca.metainfo.xml.in:869
 msgid "Better connection check for Ollama"
 msgstr "Bessere Verbindungsprüfung für Ollama"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:860
+#: data/com.jeffser.Alpaca.metainfo.xml.in:876
 msgid "Stable Release"
 msgstr "Stabiles Release"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:861
+#: data/com.jeffser.Alpaca.metainfo.xml.in:877
 msgid ""
 "The new icon was made by Tobias Bernard over the Gnome Gitlab, thanks for "
 "the great icon!"
@@ -1528,47 +1550,47 @@ msgstr ""
 "Das neue Icon wurde von Tobias Bernard über Gnome Gitlab erstellt, vielen "
 "Dank für das tolle Icon!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:862
+#: data/com.jeffser.Alpaca.metainfo.xml.in:878
 msgid "Features and fixes"
 msgstr "Funktionen und Fehlerbehebungen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:864
+#: data/com.jeffser.Alpaca.metainfo.xml.in:880
 msgid "Updated Ollama instance to 0.2.8"
 msgstr "Ollama-Instanz auf 0.2.8 aktualisiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:865
+#: data/com.jeffser.Alpaca.metainfo.xml.in:881
 msgid "Better model selector"
 msgstr "Besserer Modellselektor"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:866
+#: data/com.jeffser.Alpaca.metainfo.xml.in:882
 msgid "Model manager redesign"
 msgstr "Überarbeitung des Modell-Managers"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:867
+#: data/com.jeffser.Alpaca.metainfo.xml.in:883
 msgid "Better tag selector when pulling a model"
 msgstr "Besserer Tag-Selektor beim Abrufen eines Modells"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:868
+#: data/com.jeffser.Alpaca.metainfo.xml.in:884
 msgid "Model search"
 msgstr "Modellsuche"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:869
+#: data/com.jeffser.Alpaca.metainfo.xml.in:885
 msgid "Added support for bearer tokens on remote instances"
 msgstr "Unterstützung für Bearer-Token auf Remote-Instanzen hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:870
+#: data/com.jeffser.Alpaca.metainfo.xml.in:886
 msgid "Preferences dialog redesign"
 msgstr "Überarbeitung des Einstellungsdialogs"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:871
+#: data/com.jeffser.Alpaca.metainfo.xml.in:887
 msgid "Added context menus to interact with a chat"
 msgstr "Kontextmenüs zur Interaktion mit einem Chat hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:872
+#: data/com.jeffser.Alpaca.metainfo.xml.in:888
 msgid "Redesigned primary and secondary menus"
 msgstr "Überarbeitete primäre und sekundäre Menüs"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:873
+#: data/com.jeffser.Alpaca.metainfo.xml.in:889
 msgid ""
 "YouTube integration: Paste the URL of a video with a transcript and it will "
 "be added to the prompt"
@@ -1576,7 +1598,7 @@ msgstr ""
 "YouTube-Integration: Fügen Sie die URL eines Videos mit Transkript ein und "
 "es wird zur Eingabeaufforderung hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:874
+#: data/com.jeffser.Alpaca.metainfo.xml.in:890
 msgid ""
 "Website integration (Experimental): Extract the text from the body of a "
 "website by adding it's URL to the prompt"
@@ -1584,113 +1606,113 @@ msgstr ""
 "Website-Integration (experimentell): Extrahieren Sie den Text aus dem Body "
 "einer Website durch Hinzufügen der URL zur Eingabeaufforderung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:875
+#: data/com.jeffser.Alpaca.metainfo.xml.in:891
 msgid "Chat title generation"
 msgstr "Generierung von Chat-Titeln"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:876
+#: data/com.jeffser.Alpaca.metainfo.xml.in:892
 msgid "Auto resizing of message entry"
 msgstr "Automatische Größenänderung der Nachrichteneingabe"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:877
+#: data/com.jeffser.Alpaca.metainfo.xml.in:893
 msgid "Chat notifications"
 msgstr "Chat-Benachrichtigungen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:878
+#: data/com.jeffser.Alpaca.metainfo.xml.in:894
 msgid "Added indicator when an image is missing"
 msgstr "Indikator hinzugefügt, wenn ein Bild fehlt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:879
+#: data/com.jeffser.Alpaca.metainfo.xml.in:895
 msgid "Auto rearrange the order of chats when a message is received"
 msgstr ""
 "Automatisches Neuanordnen der Reihenfolge der Chats beim Empfang einer "
 "Nachricht"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:880
+#: data/com.jeffser.Alpaca.metainfo.xml.in:896
 msgid "Redesigned file preview dialog"
 msgstr "Überarbeiteter Dateivorschau-Dialog"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:881
+#: data/com.jeffser.Alpaca.metainfo.xml.in:897
 msgid "Credited new contributors"
 msgstr "Neue Mitwirkende aufgeführt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:882
+#: data/com.jeffser.Alpaca.metainfo.xml.in:898
 msgid "Better stability and optimization"
 msgstr "Bessere Stabilität und Optimierung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:883
+#: data/com.jeffser.Alpaca.metainfo.xml.in:899
 msgid "Edit messages to change the context of a conversation"
 msgstr "Nachrichten bearbeiten, um den Kontext einer Unterhaltung zu ändern"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:884
+#: data/com.jeffser.Alpaca.metainfo.xml.in:900
 msgid "Added disclaimers when pulling models"
 msgstr "Haftungsausschlüsse beim Abrufen von Modellen hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:885
+#: data/com.jeffser.Alpaca.metainfo.xml.in:901
 msgid "Preview files before sending a message"
 msgstr "Vorschau von Dateien vor dem Senden einer Nachricht"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:886
+#: data/com.jeffser.Alpaca.metainfo.xml.in:902
 msgid "Better format for date and time on messages"
 msgstr "Besseres Format für Datum und Uhrzeit in Nachrichten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:887
+#: data/com.jeffser.Alpaca.metainfo.xml.in:903
 msgid "Error and debug logging on terminal"
 msgstr "Fehler- und Debug-Protokollierung im Terminal"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:888
+#: data/com.jeffser.Alpaca.metainfo.xml.in:904
 msgid "Auto-hiding sidebar button"
 msgstr "Automatisch ausblendbare Seitenleisten-Schaltfläche"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:889
+#: data/com.jeffser.Alpaca.metainfo.xml.in:905
 msgid "Various UI tweaks"
 msgstr "Verschiedene Verbesserungen der Benutzeroberfläche"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:891
+#: data/com.jeffser.Alpaca.metainfo.xml.in:907
 msgid "New Models"
 msgstr "Neue Modelle"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:893
+#: data/com.jeffser.Alpaca.metainfo.xml.in:909
 msgid "Gemma2"
 msgstr "Gemma2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:894
+#: data/com.jeffser.Alpaca.metainfo.xml.in:910
 msgid "GLM4"
 msgstr "GLM4"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:895
+#: data/com.jeffser.Alpaca.metainfo.xml.in:911
 msgid "Codegeex4"
 msgstr "Codegeex4"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:896
+#: data/com.jeffser.Alpaca.metainfo.xml.in:912
 msgid "InternLM2"
 msgstr "InternLM2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:897
+#: data/com.jeffser.Alpaca.metainfo.xml.in:913
 msgid "Llama3-groq-tool-use"
 msgstr "Llama3-groq-tool-use"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:898
+#: data/com.jeffser.Alpaca.metainfo.xml.in:914
 msgid "Mathstral"
 msgstr "Mathstral"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:899
+#: data/com.jeffser.Alpaca.metainfo.xml.in:915
 msgid "Mistral-nemo"
 msgstr "Mistral-nemo"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:900
+#: data/com.jeffser.Alpaca.metainfo.xml.in:916
 msgid "Firefunction-v2"
 msgstr "Firefunction-v2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:901
+#: data/com.jeffser.Alpaca.metainfo.xml.in:917
 msgid "Nuextract"
 msgstr "Nuextract"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:903
+#: data/com.jeffser.Alpaca.metainfo.xml.in:919
 msgid "Translations"
 msgstr "Übersetzungen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:904
+#: data/com.jeffser.Alpaca.metainfo.xml.in:920
 msgid ""
 "These are all the available translations on 1.0.0, thanks to all the "
 "contributors!"
@@ -1698,35 +1720,35 @@ msgstr ""
 "Das sind alle verfügbaren Übersetzungen in Version 1.0.0, vielen Dank an "
 "alle Mitwirkenden!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:906
+#: data/com.jeffser.Alpaca.metainfo.xml.in:922
 msgid "Russian: Alex K"
 msgstr "Russisch: Alex K"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:907
+#: data/com.jeffser.Alpaca.metainfo.xml.in:923
 msgid "Spanish: Jeffser"
 msgstr "Spanisch: Jeffser"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:908
+#: data/com.jeffser.Alpaca.metainfo.xml.in:924
 msgid "Brazilian Portuguese: Daimar Stein"
 msgstr "Brasilianisches Portugiesisch: Daimar Stein"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:909
+#: data/com.jeffser.Alpaca.metainfo.xml.in:925
 msgid "French: Louis Chauvet-Villaret"
 msgstr "Französisch: Louis Chauvet-Villaret"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:910
+#: data/com.jeffser.Alpaca.metainfo.xml.in:926
 msgid "Norwegian: CounterFlow64"
 msgstr "Norwegisch: CounterFlow64"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:911
+#: data/com.jeffser.Alpaca.metainfo.xml.in:927
 msgid "Bengali: Aritra Saha"
 msgstr "Bengalisch: Aritra Saha"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:912
+#: data/com.jeffser.Alpaca.metainfo.xml.in:928
 msgid "Simplified Chinese: Yuehao Sui"
 msgstr "Vereinfachtes Chinesisch: Yuehao Sui"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:920
+#: data/com.jeffser.Alpaca.metainfo.xml.in:936
 msgid ""
 "Removed DOCX compatibility temporally due to error with python-lxml "
 "dependency"
@@ -1734,32 +1756,32 @@ msgstr ""
 "DOCX-Kompatibilität vorübergehend entfernt aufgrund eines Fehlers mit der "
 "python-lxml-Abhängigkeit"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:926
-#: data/com.jeffser.Alpaca.metainfo.xml.in:956
-#: data/com.jeffser.Alpaca.metainfo.xml.in:977
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1182
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1239
+#: data/com.jeffser.Alpaca.metainfo.xml.in:942
+#: data/com.jeffser.Alpaca.metainfo.xml.in:972
+#: data/com.jeffser.Alpaca.metainfo.xml.in:993
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1198
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1255
 msgid "Big Update"
 msgstr "Großes Update"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:928
+#: data/com.jeffser.Alpaca.metainfo.xml.in:944
 msgid "Added compatibility for PDF"
 msgstr "Kompatibilität für PDF hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:929
+#: data/com.jeffser.Alpaca.metainfo.xml.in:945
 msgid "Added compatibility for DOCX"
 msgstr "Kompatibilität für DOCX hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:930
+#: data/com.jeffser.Alpaca.metainfo.xml.in:946
 msgid "Merged 'file attachment' menu into one button"
 msgstr "Menü 'Dateianhang' in eine Schaltfläche zusammengeführt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:937
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1130
+#: data/com.jeffser.Alpaca.metainfo.xml.in:953
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1146
 msgid "Quick Fix"
 msgstr "Schnelle Fehlerbehebung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:938
+#: data/com.jeffser.Alpaca.metainfo.xml.in:954
 msgid ""
 "There were some errors when transitioning from the old version of chats to "
 "the new version. I apologize if this caused any corruption in your chat "
@@ -1770,100 +1792,100 @@ msgstr ""
 "Verlaufs geführt hat. Dies sollte das einzige Mal sein, dass ein solcher "
 "Übergang erforderlich ist."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:944
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1096
+#: data/com.jeffser.Alpaca.metainfo.xml.in:960
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1112
 msgid "Huge Update"
 msgstr "Riesiges Update"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:946
+#: data/com.jeffser.Alpaca.metainfo.xml.in:962
 msgid "Added: Support for plain text files"
 msgstr "Hinzugefügt: Unterstützung für reine Textdateien"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:947
+#: data/com.jeffser.Alpaca.metainfo.xml.in:963
 msgid "Added: New backend system for storing messages"
 msgstr "Hinzugefügt: Neues Backend-System zum Speichern von Nachrichten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:948
+#: data/com.jeffser.Alpaca.metainfo.xml.in:964
 msgid "Added: Support for changing Ollama's overrides"
 msgstr "Hinzugefügt: Unterstützung zum Ändern der Überschreibungen von Ollama"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:949
+#: data/com.jeffser.Alpaca.metainfo.xml.in:965
 msgid "General Optimization"
 msgstr "Allgemeine Optimierung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:958
+#: data/com.jeffser.Alpaca.metainfo.xml.in:974
 msgid "Added: Support for GGUF models (experimental)"
 msgstr "Hinzugefügt: Unterstützung für GGUF-Modelle (experimentell)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:959
+#: data/com.jeffser.Alpaca.metainfo.xml.in:975
 msgid "Added: Support for customization and creation of models"
 msgstr ""
 "Hinzugefügt: Unterstützung für die Anpassung und Erstellung von Modellen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:960
+#: data/com.jeffser.Alpaca.metainfo.xml.in:976
 msgid "Fixed: Icons don't appear on non Gnome systems"
 msgstr "Behoben: Symbole werden auf Nicht-Gnome-Systemen nicht angezeigt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:961
+#: data/com.jeffser.Alpaca.metainfo.xml.in:977
 msgid "Update Ollama to v0.1.39"
 msgstr "Ollama auf v0.1.39 aktualisiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:970
+#: data/com.jeffser.Alpaca.metainfo.xml.in:986
 msgid ""
 "Fixed: app didn't open if models tweaks wasn't present in the config files"
 msgstr ""
 "Behoben: App öffnete sich nicht, wenn Modellanpassungen nicht in den "
 "Konfigurationsdateien vorhanden waren"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:979
+#: data/com.jeffser.Alpaca.metainfo.xml.in:995
 msgid "Changed multiple icons (paper airplane for the send button)"
 msgstr "Mehrere Symbole geändert (Papierflugzeug für die Senden-Schaltfläche)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:980
+#: data/com.jeffser.Alpaca.metainfo.xml.in:996
 msgid "Combined export / import chat buttons into a menu"
 msgstr "Export-/Import-Chat-Schaltflächen in ein Menü zusammengefasst"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:981
+#: data/com.jeffser.Alpaca.metainfo.xml.in:997
 msgid "Added 'model tweaks' (temperature, seed, keep_alive)"
 msgstr "'Modellanpassungen' (Temperatur, Seed, Keep_Alive) hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:982
+#: data/com.jeffser.Alpaca.metainfo.xml.in:998
 msgid "Fixed send / stop button"
 msgstr "Senden-/Stopp-Schaltfläche behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:983
+#: data/com.jeffser.Alpaca.metainfo.xml.in:999
 msgid "Fixed app not checking if remote connection works when starting"
 msgstr ""
 "Behoben, dass die App beim Start nicht prüft, ob die Remoteverbindung "
 "funktioniert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:990
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1006
 msgid "Daily Update"
 msgstr "Tägliches Update"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:992
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1008
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
 msgstr ""
 "Text-Ellipse zum Chatnamen hinzugefügt, damit sich die Schaltflächenbreite "
 "nicht ändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:993
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1009
 msgid "New shortcut for creating a chat (CTRL+N)"
 msgstr "Neue Verknüpfung zum Erstellen eines Chats (STRG+N)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:994
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1010
 msgid "New message entry design"
 msgstr "Neues Design für die Nachrichteneingabe"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:995
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1011
 msgid "Fixed: Can't rename the same chat multiple times"
 msgstr "Behoben: Derselbe Chat kann nicht mehrmals umbenannt werden"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1002
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1018
 msgid "The fix"
 msgstr "Die Fehlerbehebung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1004
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1020
 msgid ""
 "Fixed: Ollama instance keeps running on the background even when it is "
 "disabled"
@@ -1871,89 +1893,89 @@ msgstr ""
 "Behoben: Ollama-Instanz läuft weiter im Hintergrund, auch wenn sie "
 "deaktiviert ist"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1005
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1021
 msgid "Fixed: Can't pull models on the integrated instance"
 msgstr ""
 "Behoben: Modelle können nicht in die integrierte Instanz gezogen werden"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1012
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1028
 msgid "Quick tweaks"
 msgstr "Schnelle Anpassungen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1014
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1030
 msgid "Added progress bar to models that are being pulled"
 msgstr "Fortschrittsbalken für Modelle hinzugefügt, die abgerufen werden"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1015
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1031
 msgid "Added size to tags when pulling a model"
 msgstr "Größe zu Tags hinzugefügt, wenn ein Modell abgerufen wird"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1016
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1032
 msgid "General optimizations on the background"
 msgstr "Allgemeine Optimierungen im Hintergrund"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1023
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1039
 msgid "Quick fixes"
 msgstr "Schnelle Fehlerbehebungen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1025
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1041
 msgid "Fixed: Scroll when message is received"
 msgstr "Behoben: Scrollen, wenn eine Nachricht empfangen wird"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1026
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1042
 msgid "Fixed: Content doesn't change when creating a new chat"
 msgstr "Behoben: Inhalt ändert sich nicht beim Erstellen eines neuen Chats"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1027
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1043
 msgid "Added 'Featured Models' page on welcome dialog"
 msgstr "Seite 'Empfohlene Modelle' im Begrüßungsdialog hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1034
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1050
 msgid "Nice Update"
 msgstr "Schönes Update"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1036
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1052
 msgid "UI tweaks (Thanks Nokse22)"
 msgstr "UI-Anpassungen (Danke Nokse22)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1038
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1054
 msgid "Metadata fixes"
 msgstr "Fehlerbehebungen bei den Metadaten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1045
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1061
 msgid "Quick fix"
 msgstr "Schnelle Fehlerbehebung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1047
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1063
 msgid "Updated Spanish translation"
 msgstr "Spanische Übersetzung aktualisiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1048
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1064
 msgid "Added compatibility for PNG"
 msgstr "Kompatibilität für PNG hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1055
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1071
 msgid "New Update"
 msgstr "Neues Update"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1058
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1074
 msgid "Added image recognition to more models"
 msgstr "Bilderkennung zu weiteren Modellen hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1059
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1075
 msgid "Added Brazilian Portuguese translation (Thanks Daimaar Stein)"
 msgstr ""
 "Brasilianische portugiesische Übersetzung hinzugefügt (Danke Daimaar Stein)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1060
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1076
 msgid "Refined the general UI (Thanks Nokse22)"
 msgstr "Allgemeine Benutzeroberfläche verfeinert (Danke Nokse22)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1061
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1077
 msgid "Added 'delete message' feature"
 msgstr "Funktion 'Nachricht löschen' hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1062
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1078
 msgid ""
 "Added metadata so that software distributors know that the app is compatible "
 "with mobile"
@@ -1961,7 +1983,7 @@ msgstr ""
 "Metadaten hinzugefügt, damit Softwareanbieter wissen, dass die App mit "
 "Mobilgeräten kompatibel ist"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1063
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1079
 msgid ""
 "Changed 'send' shortcut to just the return/enter key (to add a new line use "
 "shift+return)"
@@ -1969,110 +1991,110 @@ msgstr ""
 "'Senden'-Verknüpfung auf die Eingabetaste geändert (für einen Zeilenumbruch "
 "Umschalttaste+Eingabetaste verwenden)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1070
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1086
 msgid "Bug Fixes"
 msgstr "Fehlerbehebungen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1072
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1088
 msgid "Fixed: Minor spelling mistake"
 msgstr "Behoben: Kleiner Rechtschreibfehler"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1073
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1089
 msgid "Added 'mobile' as a supported form factor"
 msgstr "'Mobil' als unterstützten Formfaktor hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1074
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1090
 msgid "Fixed: 'Connection Error' dialog not working properly"
 msgstr "Behoben: Dialog 'Verbindungsfehler' funktioniert nicht richtig"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1075
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1091
 msgid "Fixed: App might freeze randomly on startup"
 msgstr "Behoben: App kann beim Start zufällig einfrieren"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1076
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1092
 msgid "Changed 'chats' label on sidebar for 'Alpaca'"
 msgstr "Bezeichnung 'Chats' in der Seitenleiste in 'Alpaca' geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1083
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1099
 msgid "Cool Update"
 msgstr "Cooles Update"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1085
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1101
 msgid "Better design for chat window"
 msgstr "Besseres Design für das Chatfenster"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1086
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1102
 msgid "Better design for chat sidebar"
 msgstr "Besseres Design für die Chat-Seitenleiste"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1087
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1103
 msgid "Fixed remote connections"
 msgstr "Remote-Verbindungen repariert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1088
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1104
 msgid "Fixed Ollama restarting in loop"
 msgstr "Ollama-Neustart in Schleife behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1089
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1105
 msgid "Other cool backend stuff"
 msgstr "Andere coole Backend-Sachen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1098
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1114
 msgid "Added Ollama as part of Alpaca, Ollama will run in a sandbox"
 msgstr ""
 "Ollama als Teil von Alpaca hinzugefügt, Ollama wird in einer Sandbox "
 "ausgeführt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1099
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1115
 msgid "Added option to connect to remote instances (how it worked before)"
 msgstr ""
 "Option zum Verbinden mit Remote-Instanzen hinzugefügt (wie es vorher "
 "funktionierte)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1100
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1116
 msgid "Added option to import and export chats"
 msgstr "Option zum Importieren und Exportieren von Chats hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1101
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1117
 msgid "Added option to run Alpaca with Ollama in the background"
 msgstr "Option hinzugefügt, Alpaca mit Ollama im Hintergrund auszuführen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1102
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1118
 msgid "Added preferences dialog"
 msgstr "Einstellungsdialog hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1103
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1119
 msgid "Changed the welcome dialog"
 msgstr "Begrüßungsdialog geändert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1105
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1122
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1134
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1153
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1174
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1121
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1138
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1150
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1169
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1190
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1206
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1220
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1230
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1248
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1270
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1222
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1236
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1246
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1264
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1286
 msgid "Please report any errors to the issues page, thank you."
 msgstr "Bitte melden Sie alle Fehler auf der Problemseite, danke."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1113
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1129
 msgid "Yet Another Daily Update"
 msgstr "Noch ein tägliches Update"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1115
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1131
 msgid "Added better UI for 'Manage Models' dialog"
 msgstr ""
 "Bessere Benutzeroberfläche für den Dialog 'Modelle verwalten' hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1116
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1132
 msgid "Added better UI for the chat sidebar"
 msgstr "Bessere Benutzeroberfläche für die Chat-Seitenleiste hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1117
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1133
 msgid ""
 "Replaced model description with a button to open Ollama's website for the "
 "model"
@@ -2080,49 +2102,49 @@ msgstr ""
 "Modellbeschreibung durch eine Schaltfläche zum Öffnen der Ollama-Website für "
 "das Modell ersetzt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1118
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1134
 msgid "Added myself to the credits as the spanish translator"
 msgstr "Mich selbst als spanischen Übersetzer zu den Credits hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1119
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1135
 msgid "Using XDG properly to get config folder"
 msgstr "XDG korrekt verwenden, um den Konfigurationsordner zu erhalten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1120
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1136
 msgid "Update for translations"
 msgstr "Update für Übersetzungen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1132
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1148
 msgid "The last update had some mistakes in the description of the update"
 msgstr ""
 "Das letzte Update enthielt einige Fehler in der Beschreibung des Updates"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1142
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1158
 msgid "Another Daily Update"
 msgstr "Ein weiteres tägliches Update"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1144
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1160
 msgid "Added full Spanish translation"
 msgstr "Vollständige spanische Übersetzung hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1145
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1161
 msgid "Added support for background pulling of multiple models"
 msgstr ""
 "Unterstützung für das Abrufen mehrerer Modelle im Hintergrund hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1146
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1162
 msgid "Added interrupt button"
 msgstr "Schaltfläche zum Unterbrechen hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1147
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1163
 msgid "Added basic shortcuts"
 msgstr "Grundlegende Tastenkürzel hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1148
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1164
 msgid "Better translation support"
 msgstr "Bessere Unterstützung für Übersetzungen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1149
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1165
 msgid ""
 "User can now leave chat name empty when creating a new one, it will add a "
 "placeholder name"
@@ -2130,133 +2152,133 @@ msgstr ""
 "Benutzer können jetzt den Chatnamen beim Erstellen eines neuen Chats leer "
 "lassen, es wird ein Platzhalter-Name hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1150
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1166
 msgid "Better scalling for different window sizes"
 msgstr "Bessere Skalierung für verschiedene Fenstergrößen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1151
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1167
 msgid "Fixed: Can't close app if first time setup fails"
 msgstr ""
 "Behoben: App kann nicht geschlossen werden, wenn die Ersteinrichtung "
 "fehlschlägt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1161
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1177
 msgid "Really Big Update"
 msgstr "Wirklich großes Update"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1163
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1179
 msgid "Added multiple chats support!"
 msgstr "Unterstützung für mehrere Chats hinzugefügt!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1164
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1180
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
 msgstr ""
 "Unterstützung für Pango Markup hinzugefügt (fett, Liste, Titel, Untertitel, "
 "Monospace)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1165
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1181
 msgid "Added autoscroll if the user is at the bottom of the chat"
 msgstr ""
 "Automatisches Scrollen hinzugefügt, wenn der Benutzer am unteren Rand des "
 "Chats ist"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1166
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1182
 msgid "Added support for multiple tags on a single model"
 msgstr "Unterstützung für mehrere Tags bei einem einzelnen Modell hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1167
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1183
 msgid "Added better model management dialog"
 msgstr "Besseren Dialog zur Modellverwaltung hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1168
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1184
 msgid "Added loading spinner when sending message"
 msgstr "Ladespinner beim Senden einer Nachricht hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1169
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1185
 msgid "Added notifications if app is not active and a model pull finishes"
 msgstr ""
 "Benachrichtigungen hinzugefügt, wenn die App nicht aktiv ist und ein Modell-"
 "Pull abgeschlossen ist"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1170
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1186
 msgid "Added new symbolic icon"
 msgstr "Neues symbolisches Icon hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1171
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1187
 msgid "Added frame to message textview widget"
 msgstr "Rahmen zum Nachrichten-Textansichts-Widget hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1172
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1188
 msgid "Fixed \"code blocks shouldn't be editable\""
 msgstr "Behoben: \"Code-Blöcke sollten nicht editierbar sein\""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1184
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1200
 msgid "Added code highlighting"
 msgstr "Code-Highlighting hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1185
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1201
 msgid "Added image recognition (llava model)"
 msgstr "Bilderkennung hinzugefügt (LLaVA-Modell)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1186
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1202
 msgid "Added multiline prompt"
 msgstr "Mehrzeilige Eingabe hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1187
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1203
 msgid "Fixed some small bugs"
 msgstr "Einige kleine Fehler behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1188
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1204
 msgid "General optimization"
 msgstr "Allgemeine Optimierung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1198
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1214
 msgid "Fixes and features"
 msgstr "Fehlerbehebungen und Funktionen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1200
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1216
 msgid "Russian translation (thanks github/alexkdeveloper)"
 msgstr "Russische Übersetzung (Danke github/alexkdeveloper)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1201
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1217
 msgid "Fixed: Cannot close app on first setup"
 msgstr "Behoben: App kann bei der Ersteinrichtung nicht geschlossen werden"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1202
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1218
 msgid "Fixed: Brand colors for Flathub"
 msgstr "Behoben: Markenfarben für Flathub"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1203
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1219
 msgid "Fixed: App description"
 msgstr "Behoben: App-Beschreibung"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1204
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1220
 msgid "Fixed: Only show 'save changes dialog' when you actually change the url"
 msgstr ""
 "Behoben: Dialog 'Änderungen speichern' nur anzeigen, wenn die URL "
 "tatsächlich geändert wurde"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1214
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1230
 msgid "0.2.2 Bug fixes"
 msgstr "0.2.2 Fehlerbehebungen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1216
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1232
 msgid "Toast messages appearing behind dialogs"
 msgstr "Toast-Nachrichten erscheinen hinter Dialogen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1217
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1233
 msgid "Local model list not updating when changing servers"
 msgstr "Lokale Modellliste wird beim Wechseln der Server nicht aktualisiert"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1218
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1234
 msgid "Closing the setup dialog closes the whole app"
 msgstr "Das Schließen des Einrichtungsdialogs schließt die gesamte App"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1228
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1244
 msgid "0.2.1 Data saving fix"
 msgstr "0.2.1 Korrektur beim Speichern von Daten"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1229
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1245
 msgid ""
 "The app didn't save the config files and chat history to the right "
 "directory, this is now fixed"
@@ -2264,50 +2286,50 @@ msgstr ""
 "Die App hat die Konfigurationsdateien und den Chatverlauf nicht im richtigen "
 "Verzeichnis gespeichert, dies ist jetzt behoben"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1238
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1254
 msgid "0.2.0"
 msgstr "0.2.0"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1240
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1256
 msgid "New Features"
 msgstr "Neue Funktionen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1242
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1258
 msgid "Restore chat after closing the app"
 msgstr "Chat nach dem Schließen der App wiederherstellen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1243
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1259
 msgid "A button to clear the chat"
 msgstr "Eine Schaltfläche zum Leeren des Chats"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1244
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1260
 msgid "Fixed multiple bugs involving how messages are shown"
 msgstr "Mehrere Fehler behoben, die die Darstellung von Nachrichten betreffen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1245
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1261
 msgid "Added welcome dialog"
 msgstr "Begrüßungsdialog hinzugefügt"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1246
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1262
 msgid "More stability"
 msgstr "Mehr Stabilität"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1256
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1272
 msgid "0.1.2 Quick fixes"
 msgstr "0.1.2 Schnelle Korrekturen"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1257
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1273
 msgid ""
 "This release fixes some metadata needed to have a proper Flatpak application"
 msgstr ""
 "Diese Version behebt einige Metadaten, die für eine ordnungsgemäße Flatpak-"
 "Anwendung erforderlich sind"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1263
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1279
 msgid "0.1.1 Stable Release"
 msgstr "0.1.1 Stabiles Release"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1264
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1280
 msgid "This is the first public version of Alpaca"
 msgstr "Dies ist die erste öffentliche Version von Alpaca"
 
@@ -2319,35 +2341,35 @@ msgstr "Chat öffnen"
 msgid "Quick ask"
 msgstr "Flinke Frage"
 
-#: src/live_chat.py:73 src/live_chat.py:150 src/quick_ask.py:64
+#: src/live_chat.py:60 src/live_chat.py:152 src/quick_ask.py:76
 msgid "Please select an instance in Alpaca before chatting"
 msgstr ""
 
-#: src/live_chat.py:154 src/quick_ask.py:68
+#: src/live_chat.py:156 src/quick_ask.py:80
 msgid "Please select add a model for this instance in Alpaca before chatting"
 msgstr ""
 
-#: src/live_chat.py:157
+#: src/live_chat.py:159
 msgid "Selected model is not available"
 msgstr ""
 
-#: src/live_chat.py:225
+#: src/live_chat.py:227
 msgid "No Messages"
 msgstr ""
 
-#: src/live_chat.py:226
+#: src/live_chat.py:228
 msgid "Begin by speaking to the model"
 msgstr ""
 
-#: src/main.py:224
+#: src/main.py:220
 msgid "Documentation"
 msgstr "Dokumentation"
 
-#: src/main.py:225
+#: src/main.py:221
 msgid "Become a Sponsor"
 msgstr "Sponsor werden"
 
-#: src/main.py:226
+#: src/main.py:222
 msgid "Discussions"
 msgstr "Diskussionen"
 
@@ -3705,15 +3727,15 @@ msgid ""
 "following, and less repetition errors."
 msgstr ""
 
-#: src/quick_ask.py:126 src/gtk/quick_ask.ui:11
+#: src/quick_ask.py:138 src/gtk/quick_ask.ui:11
 msgid "Quick Ask"
 msgstr "Flinke Frage"
 
-#: src/window.py:148
+#: src/window.py:94
 msgid "Ollama Was Not Found"
 msgstr "Ollama wurde nicht gefunden"
 
-#: src/window.py:149
+#: src/window.py:95
 msgid ""
 "To add a managed Ollama instance, you must have Ollama installed locally in "
 "your device, this is a simple process and should not take more than 5 "
@@ -3723,109 +3745,101 @@ msgstr ""
 "du Ollama auf deinem Gerät installiert haben. Das ist aber ganz einfach und "
 "sollte nicht länger als 5 Minuten dauern!"
 
-#: src/window.py:151
+#: src/window.py:97
 msgid "Open Tutorial in Web Browser"
 msgstr "Anleitung im Browser öffnen"
 
-#: src/window.py:166 src/gtk/window.ui:409 src/gtk/window.ui:419
-#: src/gtk/window.ui:441
+#: src/window.py:115 src/gtk/window.ui:309 src/gtk/window.ui:319
+#: src/gtk/window.ui:341
 msgid "Add Instance"
 msgstr "Instanz hinzufügen"
 
-#: src/window.py:167
+#: src/window.py:116
 msgid "Select a type of instance to add"
 msgstr "Auswählen, welcher Typ von Instanz hinzugefügt werden soll"
 
-#: src/window.py:368 src/window.py:369 src/window.py:414 src/gtk/window.ui:355
-#: src/widgets/camera.py:119
-msgid "Close"
-msgstr "Schließen"
-
-#: src/window.py:371 src/window.py:372 src/gtk/window.ui:62
-#: src/gtk/window.ui:63
-msgid "Next"
-msgstr "Weiter"
-
-#: src/window.py:412 src/window.py:812 src/gtk/window.ui:905
-#: src/gtk/window.ui:909 src/widgets/dialog.py:197 src/widgets/dialog.py:210
-#: src/widgets/dialog.py:223 src/widgets/model_manager.py:648
+#: src/window.py:169 src/window.py:522 src/widgets/dialog.py:197
+#: src/widgets/dialog.py:210 src/widgets/dialog.py:223 src/widgets/voice.py:307
+#: src/widgets/voice.py:310 src/widgets/models/added.py:409
+#: src/widgets/models/creator.py:140 src/widgets/models/creator.py:141
 #: src/widgets/instances/__init__.py:252 src/widgets/instances/__init__.py:253
-#: src/widgets/blocks/code.py:137 src/widgets/blocks/text.py:148
-#: src/widgets/tools/tools.py:96 src/widgets/tools/tools.py:97
+#: src/widgets/blocks/code.py:138 src/widgets/blocks/text.py:148
+#: src/widgets/tools/tools.py:98 src/widgets/tools/tools.py:99
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/window.py:413
+#: src/window.py:170
 msgid "Hide"
 msgstr "Verbergen"
 
-#: src/window.py:417
+#: src/window.py:171 src/gtk/window.ui:255 src/widgets/camera.py:119
+msgid "Close"
+msgstr "Schließen"
+
+#: src/window.py:174
 msgid "Close Alpaca?"
 msgstr "Alpaca schließen?"
 
-#: src/window.py:418
+#: src/window.py:175
 msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
 msgstr ""
 "Eine Aufgabe wird derzeit bearbeitet. Sind Sie sicher, dass Sie Alpaca "
 "schließen möchten?"
 
-#: src/window.py:530
+#: src/window.py:278
 msgid "No tools enabled."
 msgstr "Keine Werkzeuge aktiviert"
 
-#: src/window.py:530
+#: src/window.py:278
 msgid "Open Tool Manager"
 msgstr "Werkzeug-Manager öffnen"
 
-#: src/window.py:533
+#: src/window.py:281
 msgid "Please select a model before chatting"
 msgstr "Bitte wählen Sie ein Modell aus, bevor Sie chatten"
 
-#: src/window.py:672 src/gtk/window.ui:163 src/gtk/window.ui:1126
+#: src/window.py:421 src/gtk/window.ui:51 src/gtk/window.ui:640
 #: src/widgets/chat.py:229 src/widgets/instances/ollama_instances.py:34
 #: src/widgets/instances/ollama_instances.py:50
 #: src/widgets/instances/ollama_instances.py:86
-#: src/widgets/instances/openai_instances.py:56
-#: src/widgets/instances/openai_instances.py:67
-#: src/widgets/instances/openai_instances.py:108
+#: src/widgets/instances/openai_instances.py:64
+#: src/widgets/instances/openai_instances.py:75
+#: src/widgets/instances/openai_instances.py:116
 msgid "New Chat"
 msgstr "Neuer Chat"
 
-#: src/window.py:791
+#: src/window.py:501
 msgid "Chat imported successfully"
 msgstr "Chatverlauf erfolgreich importiert"
 
-#: src/window.py:814
+#: src/window.py:524
 msgid "Can't Run Live Chat"
 msgstr ""
 
-#: src/window.py:815
+#: src/window.py:525
 msgid "You are missing TTS libraries"
 msgstr ""
 
-#: src/window.py:868
-msgid "Download Model?"
-msgstr "Modell herunterladen?"
+#: src/window.py:575
+msgid "Pull Model"
+msgstr "Modell abrufen"
 
-#: src/window.py:869
+#: src/window.py:576
 msgid "Please enter the model name following this template: name:tag"
 msgstr "Bitte geben Sie den Modellnamen nach folgendem Schema an: name:tag"
 
-#: src/window.py:876
+#: src/window.py:583
 msgid "Delete All Chats?"
 msgstr "Alle Chats löschen?"
 
-#: src/window.py:877
+#: src/window.py:584
 msgid "Are you sure you want to delete all chats?"
 msgstr "Sind Sie sich sicher, dass Sie alle Chats löschen möchten?"
 
-#: src/window.py:879 src/widgets/attachments.py:201 src/widgets/chat.py:519
+#: src/window.py:586 src/widgets/attachments.py:260
+#: src/widgets/attachments.py:393 src/widgets/chat.py:519
 msgid "Delete"
 msgstr "Löschen"
-
-#: src/window.py:903
-msgid "Already Installed!"
-msgstr "Bereits installiert!"
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
@@ -3932,7 +3946,7 @@ msgid "System messages are taken as literal instructions by models"
 msgstr ""
 "Systemnachrichten werden als tatsächliche Anweisung vom Modell interpretiert."
 
-#: src/gtk/help-overlay.ui:133 src/widgets/message.py:617
+#: src/gtk/help-overlay.ui:133 src/widgets/message.py:623
 msgid "Use Tools"
 msgstr "Werkzeuge verwenden"
 
@@ -3944,159 +3958,84 @@ msgstr "Modell anweisen, Werkzeuge zur Generierung einer Nachricht zu nutzen"
 msgid "Send Message as User"
 msgstr "Nachricht als Nutzer senden"
 
-#: src/gtk/window.ui:34
-msgid "Welcome"
-msgstr "Willkommen"
-
-#: src/gtk/window.ui:46 src/gtk/window.ui:47
-msgid "Previous"
-msgstr "Zurück"
-
-#: src/gtk/window.ui:82
-msgid "Welcome to Alpaca"
-msgstr "Willkommen bei Alpaca"
-
-#: src/gtk/window.ui:83
-msgid "Powering your potential"
-msgstr "Entfache dein Potenzial"
-
-#: src/gtk/window.ui:91
-msgid ""
-"Alpaca and its developers are not liable for any damages to devices or "
-"software resulting from the execution of code generated by an AI model. "
-"Please exercise caution and review the code carefully before running it.\n"
-"\n"
-"Alpaca is distributed under GPL v3.0, this software comes with no warranty."
-msgstr ""
-"Alpaca und dessen Entwickler:innen sind nicht für Schäden jeglicher Art und "
-"Weise an Geräten oder Software, entstehend durch die Ausführung KI-"
-"generierter Software, verantwortlich. Besondere Vorsicht bei der Ausführung "
-"solches Codes ist oberstes Gebot und obliegt Alpacas Nutzer:innen.\n"
-"Alpaca wird unter der GPL v3.0 distributiert. Diese Software kommt ohne "
-"jegliche Garantie."
-
-#: src/gtk/window.ui:100
-msgid "Effortless Code Execution"
-msgstr "Mühelose Codeausführung"
-
-#: src/gtk/window.ui:101
-msgid ""
-"Alpaca can run Python, C++, and even HTML (with a live server) right from "
-"your conversations. Give it a try!"
-msgstr ""
-"Alpaca kann Python, C++ und sogar HTML (mit einem Live-Server) direkt von "
-"ihren Konversationen aus ausführen. Probieren Sie es aus!"
-
-#: src/gtk/window.ui:107
-msgid "Private by Design"
-msgstr "Privat durch Design"
-
-#: src/gtk/window.ui:108
-msgid ""
-"With Alpaca, your conversations are saved locally on your device, so you can "
-"be confident that your data is always secure and private."
-msgstr ""
-"Mit Alpaca werden ihre Konversationen immer lokal auf ihrem Gerät "
-"gespeichert, sodass Sie sich sicher sein können, dass ihre Daten immer "
-"sicher und privat bleiben."
-
-#: src/gtk/window.ui:114
-msgid "Local AI"
-msgstr "Lokale KI"
-
-#: src/gtk/window.ui:115
-msgid ""
-"Alpaca works with AI providers such as Gemini and ChatGPT.  To run AI models "
-"locally on your machine, you'll need to install Ollama within Alpaca. We've "
-"made it super easy to do, so you can get started quickly!"
-msgstr ""
-"Alpaca arbeitet mit KI-Anbietern wie Gemini oder ChatGPT. Um KI-Modelle "
-"lokal auf Ihrem Gerät ausführen zu können, müssen Sie Ollama innerhalb von "
-"Alpaca installieren. Das haben wir sehr einfach gemacht, sodass Sie ganz "
-"schnell loslegen können!"
-
-#: src/gtk/window.ui:120 src/gtk/window.ui:121
-msgid "Install Ollama"
-msgstr "Ollama installieren"
-
-#: src/gtk/window.ui:174
+#: src/gtk/window.ui:62
 msgid "Menu"
 msgstr "Menü"
 
-#: src/gtk/window.ui:181
+#: src/gtk/window.ui:69
 msgid "Search Chats"
 msgstr ""
 
-#: src/gtk/window.ui:190
+#: src/gtk/window.ui:78
 msgid "Chat search bar"
 msgstr ""
 
-#: src/gtk/window.ui:198 src/gtk/window.ui:200
+#: src/gtk/window.ui:86 src/gtk/window.ui:88
 msgid "Search chats"
 msgstr ""
 
-#: src/gtk/window.ui:236
+#: src/gtk/window.ui:124
 msgid "No Chats Found"
 msgstr ""
 
-#: src/gtk/window.ui:237
+#: src/gtk/window.ui:125
 msgid "Oh no! It looks like there are no chats found for your search."
 msgstr ""
 
-#: src/gtk/window.ui:254
+#: src/gtk/window.ui:142
 msgid "Toggle Sidebar"
 msgstr "Seitenleiste ein-/ausblenden"
 
-#: src/gtk/window.ui:261
+#: src/gtk/window.ui:149
 msgid "Search Messages"
 msgstr "Suche Nachrichten"
 
-#: src/gtk/window.ui:278 src/gtk/window.ui:303 src/gtk/window.ui:1146
-msgid "Manage Models"
-msgstr "Modelle verwalten"
-
-#: src/gtk/window.ui:299
+#: src/gtk/window.ui:176
 msgid "Add Models"
 msgstr "Modelle hinzufügen"
 
-#: src/gtk/window.ui:316
+#: src/gtk/window.ui:180 src/gtk/window.ui:196 src/gtk/window.ui:660
+msgid "Manage Models"
+msgstr "Modelle verwalten"
+
+#: src/gtk/window.ui:216
 msgid "Chat Menu"
 msgstr "Chat-Menü"
 
-#: src/gtk/window.ui:329
+#: src/gtk/window.ui:229
 msgid "Message search bar"
 msgstr "Nachrichtensuchleiste"
 
-#: src/gtk/window.ui:338 src/gtk/window.ui:340
+#: src/gtk/window.ui:238 src/gtk/window.ui:240
 msgid "Search messages"
 msgstr "Nachrichten durchsuchen"
 
-#: src/gtk/window.ui:356
+#: src/gtk/window.ui:256
 msgid ""
 "Warning: Power saver mode is enabled, this will slow down message generation"
 msgstr ""
 "Warnung: Der Energiesparmodus ist aktiviert, dies verlangsamt die "
 "Nachrichtenerstellung"
 
-#: src/gtk/window.ui:390
+#: src/gtk/window.ui:290
 msgid "Instance Manager"
 msgstr "Instanz-Manager"
 
-#: src/gtk/window.ui:405
+#: src/gtk/window.ui:305
 msgid "No Instances Found"
 msgstr "Keine Instanzen gefunden"
 
-#: src/gtk/window.ui:406
+#: src/gtk/window.ui:306
 msgid "It looks a bit empty in here. Try adding an instance get started!"
 msgstr ""
 "Hier sieht es ein wenig leer aus. Versuchen Sie, eine Instanz hinzuzufügen, "
 "um loszulegen!"
 
-#: src/gtk/window.ui:435
+#: src/gtk/window.ui:335
 msgid "Added Instances"
 msgstr "Hinzugefügte Instanzen"
 
-#: src/gtk/window.ui:436
+#: src/gtk/window.ui:336
 msgid ""
 "Manage your AI instances, chats and messages are shared between instances "
 "when generating responses."
@@ -4104,15 +4043,15 @@ msgstr ""
 "Verwalten Sie ihre KI-Instanzen - Chats und Nachrichten sind zwischen diesen "
 "geteilt, wenn Antworten generiert werden."
 
-#: src/gtk/window.ui:472
+#: src/gtk/window.ui:372
 msgid "Tool Manager"
 msgstr "Werkzeug-Manager"
 
-#: src/gtk/window.ui:483
+#: src/gtk/window.ui:383
 msgid "Available Tools"
 msgstr "Verfügbare Werkzeuge"
 
-#: src/gtk/window.ui:484
+#: src/gtk/window.ui:384
 msgid ""
 "Functions that AI models might use when sending a message by selecting \"Use "
 "Tools\" in the send button context menu."
@@ -4121,39 +4060,47 @@ msgstr ""
 "\"Werkzeuge nutzen\"-Option im Kontextmenü des Senden-Buttons verschickt "
 "wird."
 
-#: src/gtk/window.ui:503
+#: src/gtk/window.ui:395
+msgid "Help us build better AI tools! Submit your ideas here."
+msgstr ""
+
+#: src/gtk/window.ui:403
+msgid "Request Form"
+msgstr ""
+
+#: src/gtk/window.ui:417
 msgid "Model Manager"
 msgstr "Modellmanager"
 
-#: src/gtk/window.ui:541
+#: src/gtk/window.ui:427
 msgid "Search Model"
 msgstr "Modell suchen"
 
-#: src/gtk/window.ui:555
+#: src/gtk/window.ui:441
 msgid "Model Manager Menu"
 msgstr "Modellmanager-Menü"
 
-#: src/gtk/window.ui:568
+#: src/gtk/window.ui:454
 msgid "Model search bar"
 msgstr "Modell-Suchleiste"
 
-#: src/gtk/window.ui:580 src/gtk/window.ui:582
+#: src/gtk/window.ui:466 src/gtk/window.ui:468
 msgid "Search models"
 msgstr "Modelle suchen"
 
-#: src/gtk/window.ui:589
+#: src/gtk/window.ui:475
 msgid "Filter Models"
 msgstr "Nach Modellen filtern"
 
-#: src/gtk/window.ui:606
+#: src/gtk/window.ui:492 src/widgets/models/available.py:111
 msgid "Added"
 msgstr "Hinzugefügt"
 
-#: src/gtk/window.ui:616 src/gtk/window.ui:677 src/gtk/window.ui:731
+#: src/gtk/window.ui:502 src/gtk/window.ui:561 src/gtk/window.ui:613
 msgid "No Models Found"
 msgstr "Keine Modelle gefunden"
 
-#: src/gtk/window.ui:617
+#: src/gtk/window.ui:503
 msgid ""
 "It looks a bit empty in here. Try downloading some models or change your AI "
 "instance to get started!"
@@ -4161,11 +4108,11 @@ msgstr ""
 "Hier sieht es ein wenig leer aus! Versuchen Sie, ein paar Modelle "
 "herunterzuladen, oder ändern Sie die ausgewählte Instanz, um loszulegen!"
 
-#: src/gtk/window.ui:620 src/gtk/window.ui:630 src/gtk/window.ui:1142
+#: src/gtk/window.ui:506 src/gtk/window.ui:516 src/gtk/window.ui:656
 msgid "Manage Instances"
 msgstr "Instanzen verwalten"
 
-#: src/gtk/window.ui:678 src/gtk/window.ui:732
+#: src/gtk/window.ui:562 src/gtk/window.ui:614
 msgid ""
 "Looks like we’re fresh out of models for that search. Try tweaking your "
 "keywords, or maybe explore something new!"
@@ -4173,269 +4120,73 @@ msgstr ""
 "Es scheint, als gäbe es für's Erste keine Modelle für diese Anfrage. "
 "Probieren Sie, die Suche etwas abzuändern oder entdecken Sie etwas Neues!"
 
-#: src/gtk/window.ui:690
+#: src/gtk/window.ui:574
 msgid "Available"
 msgstr "Verfügbar"
 
-#: src/gtk/window.ui:744
-msgid "Creator"
-msgstr "Ersteller"
-
-#: src/gtk/window.ui:755
-msgid "Model Creator"
-msgstr "Modell-Ersteller"
-
-#: src/gtk/window.ui:756
-msgid "Select a method of importing a model to continue"
-msgstr "Wählen Sie eine Methode, ein Modell zu importieren, um fortzufahren."
-
-#: src/gtk/window.ui:768
-msgid "GGUF File"
-msgstr "GGUF-Datei"
-
-#: src/gtk/window.ui:779
-msgid "Existing Model"
-msgstr "Existierendes Modell"
-
-#: src/gtk/window.ui:797
-msgid "Identity"
-msgstr "Identität"
-
-#: src/gtk/window.ui:800
-msgid "Base"
-msgstr "Basis"
-
-#: src/gtk/window.ui:806
-msgid "Profile Picture"
-msgstr "Profilbild"
-
-#: src/gtk/window.ui:811
-msgid "Open File"
-msgstr "Datei öffnen"
-
-#: src/gtk/window.ui:822 src/widgets/instances/__init__.py:45
-msgid "Name"
-msgstr "Name"
-
-#: src/gtk/window.ui:827 src/widgets/model_manager.py:481
-msgid "Tag"
-msgstr "Tag"
-
-#: src/gtk/window.ui:834 src/widgets/model_manager.py:498
-msgid "Context"
-msgstr "Kontext"
-
-#: src/gtk/window.ui:835
-msgid ""
-"Describe the desired behavior of the model in its primary language "
-"(typically English)."
-msgstr ""
-"Beschreiben Sie das gewollte Verhalten des Modells in seiner Hauptsprache "
-"(meist ist dies Englisch)."
-
-#: src/gtk/window.ui:863
-msgid "Behavior"
-msgstr "Verhalten"
-
-#: src/gtk/window.ui:866
-msgid "Imagination"
-msgstr "Vorstellungskraft"
-
-#: src/gtk/window.ui:867
-msgid "A higher number results in more diverse answers from the model. (top_k)"
-msgstr "Ein höherer Wert ergibt diversere Antworten vom Modell. (top_k)"
-
-#: src/gtk/window.ui:881
-msgid "Focus"
-msgstr "Fokus"
-
-#: src/gtk/window.ui:882
-msgid "A higher number widens the amount of possible answers. (top_p)"
-msgstr "Ein höherer Wert erweitert die Menge an möglichen Antworten. (top_p)"
-
-#: src/gtk/window.ui:915 src/gtk/window.ui:923
-msgid "Add Model"
-msgstr "Modell hinzufügen"
-
-#: src/gtk/window.ui:957 src/gtk/window.ui:1164 src/gtk/live_chat.ui:56
-#: src/gtk/live_chat.ui:127
-msgid "Preferences"
-msgstr "Einstellungen"
-
-#: src/gtk/window.ui:964
-msgid "Run Alpaca In Background"
-msgstr "Alpaca im Hintergrund ausführen"
-
-#: src/gtk/window.ui:970
-msgid "Show Power Saver Warning"
-msgstr "Zeige Energiesparmodus-Warnung"
-
-#: src/gtk/window.ui:971
-msgid "When running a managed Ollama instance"
-msgstr "Beim Ausführen einer integrierten Ollama-Instanz"
-
-#: src/gtk/window.ui:977
-msgid "Zoom"
-msgstr "Vergrößerung"
-
-#: src/gtk/window.ui:993
-msgid "Speech Recognition Model"
-msgstr "Spracherkennungsmodell"
-
-#: src/gtk/window.ui:994
-msgid ""
-"Models are downloaded upon first use, you can delete them from the model "
-"manager"
-msgstr ""
-"Modelle werden bei der erstmaligen Nutzung heruntergeladen - sie können vom "
-"Modell-Manager aus gelöscht werden"
-
-#: src/gtk/window.ui:999
-msgid "Speech Recognition Language"
-msgstr "Sprache für die Spracherkennung"
-
-#: src/gtk/window.ui:1005
-msgid "Auto Send Message After Talking"
-msgstr "Automatisch Nachricht nach dem Sprechen absenden"
-
-#: src/gtk/window.ui:1015
-msgid "Default Text to Speech Voice"
-msgstr ""
-
-#: src/gtk/window.ui:1016
-msgid ""
-"Voices are downloaded upon first use, each weighing around 1 MB, and you can "
-"delete them from the model manager"
-msgstr ""
-"Sprachen werden bei der erstmaligen Nutzung heruntergeladen - jede benötigt "
-"ca. 1 MB - und sie können vom Modell-Manager aus gelöscht werden"
-
-#: src/gtk/window.ui:1021
-msgid "Dictate New Messages Automatically"
-msgstr ""
-
-#: src/gtk/window.ui:1022
-msgid "Dictate new messages as they are generated"
-msgstr ""
-
-#: src/gtk/window.ui:1034
-msgid "Delete All Chats"
-msgstr "Alle Chats löschen"
-
-#: src/gtk/window.ui:1046
-msgid "Notice"
-msgstr "Information"
-
-#: src/gtk/window.ui:1066
-msgid ""
-"Hey Alpaca users! Get ready for a huge update packed with enhancements and "
-"exciting new features designed to make your experience even better."
-msgstr ""
-
-#: src/gtk/window.ui:1073
-msgid "Introducing Live Chat"
-msgstr ""
-
-#: src/gtk/window.ui:1074
-msgid ""
-"Experience a whole new way to interact with your AI models! Live Chat lets "
-"you converse as if you're on a call, with a strong focus on real-time speech "
-"recognition and live message dictation. Access it easily by selecting \"Live "
-"Chat\" from the primary menu."
-msgstr ""
-
-#: src/gtk/window.ui:1081
-msgid "Live Message Rendering"
-msgstr ""
-
-#: src/gtk/window.ui:1082
-msgid ""
-"See your conversations unfold in real-time! Messages are now rendered as "
-"they're being generated, and you can even use dictation simultaneously for a "
-"more fluid interaction."
-msgstr ""
-
-#: src/gtk/window.ui:1089
-msgid "Camera Attachment"
-msgstr ""
-
-#: src/gtk/window.ui:1090
-msgid ""
-"You can now take pictures directly within Alpaca and attach them to your "
-"messages with the new Camera Attachment feature."
-msgstr ""
-
-#: src/gtk/window.ui:1097
-msgid "Enhanced Web Search Tool"
-msgstr ""
-
-#: src/gtk/window.ui:1098
-msgid ""
-"Our Web Search Tool just got a major upgrade! Enjoy more accurate results "
-"and powerful new options to find exactly what you're looking for."
-msgstr ""
-
-#: src/gtk/window.ui:1105
-msgid "Redesign"
-msgstr ""
-
-#: src/gtk/window.ui:1106
-msgid ""
-"Alpaca has a brand new look! Enjoy a redesigned interface with updated "
-"popups and sleek new dialogs for managing your AI instances and tools."
-msgstr ""
-
-#: src/gtk/window.ui:1130 src/widgets/chat.py:20
+#: src/gtk/window.ui:644 src/widgets/chat.py:20
 msgid "New Notebook"
 msgstr ""
 
-#: src/gtk/window.ui:1138
+#: src/gtk/window.ui:652
 msgid "Import Chat"
 msgstr "Chat importieren"
 
-#: src/gtk/window.ui:1150
+#: src/gtk/window.ui:664
 msgid "Manage Tools"
 msgstr "Werkzeuge verwalten"
 
-#: src/gtk/window.ui:1156
+#: src/gtk/window.ui:670
 msgid "Start Quick Ask"
 msgstr "\"Flinke Frage\" starten"
 
-#: src/gtk/window.ui:1160
+#: src/gtk/window.ui:674
 msgid "Start Live Chat"
 msgstr ""
 
-#: src/gtk/window.ui:1168
+#: src/gtk/window.ui:678 src/gtk/live_chat.ui:56 src/gtk/live_chat.ui:127
+msgid "Preferences"
+msgstr "Einstellungen"
+
+#: src/gtk/window.ui:682
 msgid "Keyboard Shortcuts"
 msgstr "Tastenkombinationen"
 
-#: src/gtk/window.ui:1172
+#: src/gtk/window.ui:686
 msgid "About Alpaca"
 msgstr "Über Alpaca"
 
-#: src/gtk/window.ui:1180 src/widgets/chat.py:451
+#: src/gtk/window.ui:694 src/widgets/chat.py:451
 msgid "Rename Chat"
 msgstr "Chat umbenennen"
 
-#: src/gtk/window.ui:1184 src/widgets/chat.py:456
+#: src/gtk/window.ui:698 src/widgets/chat.py:456
 msgid "Duplicate Chat"
 msgstr "Chat duplizieren"
 
-#: src/gtk/window.ui:1188 src/widgets/chat.py:461 src/widgets/chat.py:614
+#: src/gtk/window.ui:702 src/widgets/chat.py:461 src/widgets/chat.py:614
 msgid "Export Chat"
 msgstr "Chat exportieren"
 
-#: src/gtk/window.ui:1194 src/widgets/chat.py:468
+#: src/gtk/window.ui:708 src/widgets/chat.py:468
 msgid "Delete Chat"
 msgstr "Chat löschen"
 
-#: src/gtk/window.ui:1202 src/gtk/live_chat.ui:146
+#: src/gtk/window.ui:716 src/gtk/live_chat.ui:146
 msgid "Reload Added Models"
 msgstr "Neu hinzugefügte Modelle neu laden"
 
-#: src/gtk/window.ui:1206
-msgid "Download Model From Name"
-msgstr "Modell anhand eines Namens herunterladen"
+#: src/gtk/window.ui:720
+msgid "Add Model by Name"
+msgstr ""
+
+#: src/gtk/window.ui:726
+msgid "Create Model from Existing"
+msgstr ""
+
+#: src/gtk/window.ui:730
+msgid "Create Model from GGUF File"
+msgstr ""
 
 #: src/gtk/live_chat.ui:8
 msgid "Live chat dialog"
@@ -4473,83 +4224,94 @@ msgstr "Flinke Frage-Dialog"
 msgid "Save Conversation to Alpaca"
 msgstr "Konversation in Alpaca speichern"
 
-#: src/widgets/attachments.py:105
+#: src/widgets/attachments.py:106 src/widgets/attachments.py:308
+#: src/widgets/attachments.py:429
 msgid "Remove Attachment"
 msgstr "Anhang entfernen"
 
-#: src/widgets/attachments.py:114
+#: src/widgets/attachments.py:115 src/widgets/attachments.py:300
+#: src/widgets/attachments.py:424
 msgid "Download Attachment"
 msgstr ""
 
-#: src/widgets/attachments.py:128
+#: src/widgets/attachments.py:129
 msgid "Replace Notebook Content"
 msgstr ""
 
-#: src/widgets/attachments.py:198
+#: src/widgets/attachments.py:257
 msgid "Delete Attachment?"
 msgstr ""
 
-#: src/widgets/attachments.py:199 src/widgets/chat.py:517
+#: src/widgets/attachments.py:258 src/widgets/attachments.py:391
+#: src/widgets/chat.py:517
 msgid "Are you sure you want to delete '{}'?"
 msgstr "Sind Sie sicher, dass Sie '{}' löschen möchten?"
 
-#: src/widgets/attachments.py:231
+#: src/widgets/attachments.py:289
 msgid "Save Attachment"
 msgstr ""
 
-#: src/widgets/attachments.py:306
+#: src/widgets/attachments.py:339
 msgid "Image"
 msgstr "Bild"
 
-#: src/widgets/attachments.py:317 src/widgets/attachments.py:329
+#: src/widgets/attachments.py:350 src/widgets/attachments.py:362
 msgid "Missing Image"
 msgstr "Fehlendes Bild"
 
-#: src/widgets/attachments.py:478
+#: src/widgets/attachments.py:390
+msgid "Delete Image?"
+msgstr ""
+
+#: src/widgets/attachments.py:413
+msgid "Save Image"
+msgstr ""
+
+#: src/widgets/attachments.py:584
 msgid "Any compatible Alpaca attachment"
 msgstr "Jeglicher Alpaca-kompatibler Anhang"
 
-#: src/widgets/attachments.py:517
+#: src/widgets/attachments.py:639
 msgid "Attachment failed, screenshot might be too big"
 msgstr "Anhängen schlug fehl; das Bildschirmfoto ist womöglich zu groß."
 
-#: src/widgets/attachments.py:529 src/widgets/message.py:547
+#: src/widgets/attachments.py:651 src/widgets/message.py:547
 msgid "Image recognition is only available on specific models"
 msgstr "Bilderkennung ist nur bei bestimmten Modellen verfügbar"
 
-#: src/widgets/attachments.py:555
+#: src/widgets/attachments.py:677
 msgid "Attach File"
 msgstr "Datei anhängen"
 
-#: src/widgets/attachments.py:560
+#: src/widgets/attachments.py:682
 msgid "Attach Website"
 msgstr "Website anhängen"
 
-#: src/widgets/attachments.py:563 src/widgets/message.py:527
+#: src/widgets/attachments.py:685 src/widgets/message.py:527
 msgid "Attach Website? (Experimental)"
 msgstr "Website anhängen? (Experimentell)"
 
-#: src/widgets/attachments.py:564
+#: src/widgets/attachments.py:686
 msgid "Please enter a website URL"
 msgstr "Bitte geben Sie eine Website-URL an"
 
-#: src/widgets/attachments.py:571
+#: src/widgets/attachments.py:693
 msgid "Attach YouTube Captions"
 msgstr "YouTube-Videountertitel anhängen"
 
-#: src/widgets/attachments.py:574
+#: src/widgets/attachments.py:696
 msgid "Attach YouTube Captions?"
 msgstr "YouTube-Untertitel anhängen?"
 
-#: src/widgets/attachments.py:575
+#: src/widgets/attachments.py:697
 msgid "Please enter a YouTube video URL"
 msgstr "Bitte geben Sie eine YouTube-Video-URL ein"
 
-#: src/widgets/attachments.py:586
+#: src/widgets/attachments.py:708
 msgid "Attach Screenshot"
 msgstr "Bildschirmfoto anhängen"
 
-#: src/widgets/attachments.py:593
+#: src/widgets/attachments.py:715
 msgid "Attach Photo From Camera"
 msgstr ""
 
@@ -4566,7 +4328,7 @@ msgid "Please check if camera is plugged in and turned on"
 msgstr ""
 
 #: src/widgets/chat.py:86 src/widgets/instances/ollama_instances.py:72
-#: src/widgets/instances/openai_instances.py:94
+#: src/widgets/instances/openai_instances.py:102
 msgid "Notebook"
 msgstr ""
 
@@ -4712,190 +4474,13 @@ msgstr "Nachricht senden"
 msgid "Stop Message"
 msgstr "Nachricht anhalten"
 
-#: src/widgets/message.py:607
+#: src/widgets/message.py:613
 msgid "Send as User"
 msgstr "Als Nutzer senden"
 
-#: src/widgets/message.py:612
+#: src/widgets/message.py:618
 msgid "Send as System"
 msgstr "Als System senden"
-
-#: src/widgets/model_manager.py:107 src/widgets/model_manager.py:194
-#: src/widgets/model_manager.py:699
-msgid "Remove Model"
-msgstr "Modell entfernen"
-
-#: src/widgets/model_manager.py:111 src/widgets/model_manager.py:198
-#: src/widgets/model_manager.py:703
-msgid "Remove Model?"
-msgstr "Modell wirklich entfernen?"
-
-#: src/widgets/model_manager.py:112 src/widgets/model_manager.py:199
-#: src/widgets/model_manager.py:704
-msgid "Are you sure you want to remove '{}'?"
-msgstr "Sind Sie sich sicher, dass Sie '{}' entfernen möchten?"
-
-#: src/widgets/model_manager.py:114 src/widgets/model_manager.py:201
-#: src/widgets/model_manager.py:649 src/widgets/model_manager.py:706
-#: src/widgets/instances/__init__.py:396
-msgid "Remove"
-msgstr "Entfernen"
-
-#: src/widgets/model_manager.py:122
-msgid "Local text to speech model provided by Kokoro."
-msgstr "Lokales Text-zu-Sprache-Modell wird von Kokoro bereitgestellt."
-
-#: src/widgets/model_manager.py:159 src/widgets/model_manager.py:293
-msgid "Speech to Text"
-msgstr "Spracherkennung"
-
-#: src/widgets/model_manager.py:209
-msgid "Local speech to text model provided by OpenAI Whisper."
-msgstr "Lokales Spracherkennungsmodell wird von OpenAI Whisper bereitgestellt."
-
-#: src/widgets/model_manager.py:238
-msgid "Downloading…"
-msgstr "Lädt herunter..."
-
-#: src/widgets/model_manager.py:248 src/widgets/model_manager.py:250
-msgid "Stop Download"
-msgstr "Download anhalten"
-
-#: src/widgets/model_manager.py:256
-msgid "Stop Download?"
-msgstr "Download stoppen?"
-
-#: src/widgets/model_manager.py:257
-msgid "Are you sure you want to stop pulling '{}'?"
-msgstr "Bist du Dir sicher, das beziehen von '{}' abzubrechen?"
-
-#: src/widgets/model_manager.py:259
-msgid "Stop"
-msgstr "Stoppen"
-
-#: src/widgets/model_manager.py:341
-msgid "Model Manager Error"
-msgstr "Modellmanager-Fehler"
-
-#: src/widgets/model_manager.py:342
-msgid "An error occurred whilst pulling '{}'"
-msgstr "Ein Fehler trat beim Download von '{}' auf"
-
-#: src/widgets/model_manager.py:373
-msgid "Download Completed"
-msgstr "Download abgeschlossen"
-
-#: src/widgets/model_manager.py:374
-msgid "Model '{}' downloaded successfully."
-msgstr "Modell '{}' erfolgreich heruntergeladen."
-
-#: src/widgets/model_manager.py:438
-msgid "Change Profile Picture"
-msgstr "Profilbilder ändern"
-
-#: src/widgets/model_manager.py:457
-msgid "Voice"
-msgstr "Stimme"
-
-#: src/widgets/model_manager.py:462
-msgid "Default"
-msgstr "Standard"
-
-#: src/widgets/model_manager.py:482
-msgid "Family"
-msgstr "Familie"
-
-#: src/widgets/model_manager.py:483
-msgid "Parameter Size"
-msgstr "Parametergröße"
-
-#: src/widgets/model_manager.py:484
-msgid "Quantization Level"
-msgstr "Quantisierungsstufe"
-
-#: src/widgets/model_manager.py:487
-msgid "Parent Model"
-msgstr "Elternmodell"
-
-#: src/widgets/model_manager.py:490 src/widgets/model_manager.py:492
-msgid "Modified At"
-msgstr "Geändert am"
-
-#: src/widgets/model_manager.py:500
-msgid "Description"
-msgstr "Beschreibung"
-
-#: src/widgets/model_manager.py:650
-msgid "Change"
-msgstr "Ändern"
-
-#: src/widgets/model_manager.py:658
-msgid "Model Profile Picture"
-msgstr "Modell-Profilbild"
-
-#: src/widgets/model_manager.py:659
-msgid "What do you want to do with the model's profile picture?"
-msgstr "Was möchten Sie mit dem Profilbild des Modells tun?"
-
-#: src/widgets/model_manager.py:691
-msgid "Create Child"
-msgstr "Abstammendes Modell aus diesem erstellen"
-
-#: src/widgets/model_manager.py:725 src/widgets/model_manager.py:910
-msgid "Languages"
-msgstr ""
-
-#: src/widgets/model_manager.py:737
-msgid "Multilingual"
-msgstr "Multilingual"
-
-#: src/widgets/model_manager.py:738
-msgid "Code"
-msgstr "Code"
-
-#: src/widgets/model_manager.py:739
-msgid "Math"
-msgstr "Mathematik"
-
-#: src/widgets/model_manager.py:740
-msgid "Vision"
-msgstr "Sehen"
-
-#: src/widgets/model_manager.py:741
-msgid "Embedding"
-msgstr "Eingebettet"
-
-#: src/widgets/model_manager.py:742
-msgid "Tools"
-msgstr "Werkzeuge"
-
-#: src/widgets/model_manager.py:743
-msgid "Reasoning"
-msgstr "Denken"
-
-#: src/widgets/model_manager.py:744
-msgid "Small"
-msgstr "Klein"
-
-#: src/widgets/model_manager.py:745
-msgid "Medium"
-msgstr "Mittel"
-
-#: src/widgets/model_manager.py:746
-msgid "Big"
-msgstr "Groß"
-
-#: src/widgets/model_manager.py:747
-msgid "Huge"
-msgstr "Riesig"
-
-#: src/widgets/model_manager.py:830
-msgid ""
-"By downloading this model you accept the license agreement available on the "
-"model's website"
-msgstr ""
-"Durch das Herunterladen dieses Modells akzeptieren Sie die "
-"Lizenzbestimmungen auf der Website des Modells."
 
 #: src/widgets/terminal.py:17
 msgid "Setting up Python environment..."
@@ -4937,196 +4522,493 @@ msgstr "Nachricht diktieren"
 msgid "Use Speech Recognition"
 msgstr "Spracheingabe nutzen"
 
-#: src/widgets/voice.py:214 src/widgets/voice.py:247
+#: src/widgets/voice.py:214 src/widgets/voice.py:248
 msgid "Speech Recognition Error"
 msgstr "Fehler bei der Spracherkennung"
 
-#: src/widgets/voice.py:215
+#: src/widgets/voice.py:215 src/widgets/voice.py:347
 msgid "An error occurred while pulling speech recognition model"
 msgstr ""
 "Ein Fehler ist beim Herunterladen des Spracherkennungsmodells aufgetreten"
 
-#: src/widgets/voice.py:248
+#: src/widgets/voice.py:249
 msgid "An error occurred while using speech recognition"
 msgstr "Ein Fehler ist bei der Verwendung der Spracherkennung aufgetreten"
 
-#: src/widgets/voice.py:277
+#: src/widgets/voice.py:282 src/widgets/voice.py:405
 msgid "Download Speech Recognition Model"
 msgstr "Spracherkennungs-Modell herunterladen"
 
-#: src/widgets/voice.py:278
+#: src/widgets/voice.py:283 src/widgets/voice.py:406
 msgid "To use speech recognition you'll need to download a special model ({})"
 msgstr ""
 "Um die Spracherkennung zu nutzen, muss ein spezielles Modell heruntergeladen "
 "werden ({})"
 
-#: src/widgets/voice.py:280
+#: src/widgets/voice.py:285 src/widgets/voice.py:408
 msgid "Download Model"
 msgstr "Modell herunterladen"
 
+#: src/widgets/voice.py:320
+msgid "Transcribing Audio"
+msgstr ""
+
+#: src/widgets/voice.py:346 src/widgets/voice.py:375
+msgid "Transcription Error"
+msgstr ""
+
+#: src/widgets/voice.py:376
+msgid "An error occurred while transcribing audio"
+msgstr ""
+
+#: src/widgets/models/added.py:89
+msgid "Change Profile Picture"
+msgstr "Profilbilder ändern"
+
+#: src/widgets/models/added.py:110
+msgid "Voice"
+msgstr "Stimme"
+
+#: src/widgets/models/added.py:115
+msgid "Default"
+msgstr "Standard"
+
+#: src/widgets/models/added.py:142 src/widgets/models/creator.py:57
+msgid "Tag"
+msgstr "Tag"
+
+#: src/widgets/models/added.py:143
+msgid "Family"
+msgstr "Familie"
+
+#: src/widgets/models/added.py:144
+msgid "Parameter Size"
+msgstr "Parametergröße"
+
+#: src/widgets/models/added.py:145
+msgid "Quantization Level"
+msgstr "Quantisierungsstufe"
+
+#: src/widgets/models/added.py:148
+msgid "Parent Model"
+msgstr "Elternmodell"
+
+#: src/widgets/models/added.py:151 src/widgets/models/added.py:153
+msgid "Modified At"
+msgstr "Geändert am"
+
+#: src/widgets/models/added.py:159
+msgid "Description"
+msgstr "Beschreibung"
+
+#: src/widgets/models/added.py:170 src/widgets/models/added.py:174
+msgid "Files"
+msgstr ""
+
+#: src/widgets/models/added.py:193 src/widgets/models/creator.py:73
+msgid "Context"
+msgstr "Kontext"
+
+#: src/widgets/models/added.py:221 src/widgets/models/added.py:475
+#: src/widgets/models/speech.py:23 src/widgets/models/speech.py:170
+msgid "Remove Model"
+msgstr "Modell entfernen"
+
+#: src/widgets/models/added.py:229 src/widgets/models/added.py:483
+msgid "Create Child"
+msgstr "Abstammendes Modell aus diesem erstellen"
+
+#: src/widgets/models/added.py:249 src/widgets/models/available.py:156
+msgid "Languages"
+msgstr ""
+
+#: src/widgets/models/added.py:410 src/widgets/models/added.py:459
+#: src/widgets/models/speech.py:136 src/widgets/models/speech.py:279
+#: src/widgets/instances/__init__.py:396
+msgid "Remove"
+msgstr "Entfernen"
+
+#: src/widgets/models/added.py:411
+msgid "Change"
+msgstr "Ändern"
+
+#: src/widgets/models/added.py:419
+msgid "Model Profile Picture"
+msgstr "Modell-Profilbild"
+
+#: src/widgets/models/added.py:420
+msgid "What do you want to do with the model's profile picture?"
+msgstr "Was möchten Sie mit dem Profilbild des Modells tun?"
+
+#: src/widgets/models/added.py:456 src/widgets/models/speech.py:133
+#: src/widgets/models/speech.py:276
+msgid "Remove Model?"
+msgstr "Modell wirklich entfernen?"
+
+#: src/widgets/models/added.py:457 src/widgets/models/speech.py:134
+#: src/widgets/models/speech.py:277
+msgid "Are you sure you want to remove '{}'?"
+msgstr "Sind Sie sich sicher, dass Sie '{}' entfernen möchten?"
+
+#: src/widgets/models/available.py:46
+msgid "Already Added"
+msgstr ""
+
+#: src/widgets/models/available.py:48
+msgid "Pull '{}'"
+msgstr ""
+
+#: src/widgets/models/available.py:50
+msgid "Add Model"
+msgstr "Modell hinzufügen"
+
+#: src/widgets/models/available.py:111
+msgid "Add"
+msgstr ""
+
+#: src/widgets/models/available.py:120
+msgid ""
+"By downloading this model you accept the license agreement available on the "
+"model's website"
+msgstr ""
+"Durch das Herunterladen dieses Modells akzeptieren Sie die "
+"Lizenzbestimmungen auf der Website des Modells."
+
+#: src/widgets/models/available.py:253
+msgid "Pull Latest"
+msgstr ""
+
+#: src/widgets/models/common.py:13
+msgid "Multilingual"
+msgstr "Multilingual"
+
+#: src/widgets/models/common.py:14
+msgid "Code"
+msgstr "Code"
+
+#: src/widgets/models/common.py:15
+msgid "Math"
+msgstr "Mathematik"
+
+#: src/widgets/models/common.py:16
+msgid "Vision"
+msgstr "Sehen"
+
+#: src/widgets/models/common.py:17
+msgid "Embedding"
+msgstr "Eingebettet"
+
+#: src/widgets/models/common.py:18
+msgid "Tools"
+msgstr "Werkzeuge"
+
+#: src/widgets/models/common.py:19
+msgid "Reasoning"
+msgstr "Denken"
+
+#: src/widgets/models/common.py:20
+msgid "Small"
+msgstr "Klein"
+
+#: src/widgets/models/common.py:21
+msgid "Medium"
+msgstr "Mittel"
+
+#: src/widgets/models/common.py:22
+msgid "Big"
+msgstr "Groß"
+
+#: src/widgets/models/common.py:23
+msgid "Huge"
+msgstr "Riesig"
+
+#: src/widgets/models/creator.py:24
+msgid "Identity"
+msgstr "Identität"
+
+#: src/widgets/models/creator.py:30
+msgid "Base"
+msgstr "Basis"
+
+#: src/widgets/models/creator.py:37
+msgid "Profile Picture"
+msgstr "Profilbild"
+
+#: src/widgets/models/creator.py:41
+msgid "Open File"
+msgstr "Datei öffnen"
+
+#: src/widgets/models/creator.py:51 src/widgets/instances/__init__.py:45
+msgid "Name"
+msgstr "Name"
+
+#: src/widgets/models/creator.py:67
+msgid "Add Files"
+msgstr ""
+
+#: src/widgets/models/creator.py:74
+msgid ""
+"Describe the desired behavior of the model in its primary language "
+"(typically English)."
+msgstr ""
+"Beschreiben Sie das gewollte Verhalten des Modells in seiner Hauptsprache "
+"(meist ist dies Englisch)."
+
+#: src/widgets/models/creator.py:103
+msgid "Behavior"
+msgstr "Verhalten"
+
+#: src/widgets/models/creator.py:109
+msgid "Imagination"
+msgstr "Vorstellungskraft"
+
+#: src/widgets/models/creator.py:110
+msgid "A higher number results in more diverse answers from the model. (top_k)"
+msgstr "Ein höherer Wert ergibt diversere Antworten vom Modell. (top_k)"
+
+#: src/widgets/models/creator.py:124
+msgid "Focus"
+msgstr "Fokus"
+
+#: src/widgets/models/creator.py:125
+msgid "A higher number widens the amount of possible answers. (top_p)"
+msgstr "Ein höherer Wert erweitert die Menge an möglichen Antworten. (top_p)"
+
+#: src/widgets/models/creator.py:147 src/widgets/models/creator.py:148
+#: src/widgets/instances/__init__.py:259 src/widgets/instances/__init__.py:260
+#: src/widgets/blocks/code.py:147 src/widgets/blocks/text.py:157
+#: src/widgets/tools/tools.py:105 src/widgets/tools/tools.py:106
+msgid "Save"
+msgstr "Speichern"
+
+#: src/widgets/models/creator.py:165
+msgid "Create Model"
+msgstr "Modell erstellen"
+
+#: src/widgets/models/pulling.py:48
+msgid "Downloading..."
+msgstr ""
+
+#: src/widgets/models/pulling.py:69 src/widgets/models/pulling.py:71
+#: src/widgets/models/pulling.py:174
+msgid "Stop Download"
+msgstr "Download anhalten"
+
+#: src/widgets/models/pulling.py:132
+msgid "Dictation Model"
+msgstr ""
+
+#: src/widgets/models/pulling.py:188
+msgid "Stop Download?"
+msgstr "Download stoppen?"
+
+#: src/widgets/models/pulling.py:189
+msgid "Are you sure you want to stop pulling '{}'?"
+msgstr "Bist du Dir sicher, das beziehen von '{}' abzubrechen?"
+
+#: src/widgets/models/pulling.py:191
+msgid "Stop"
+msgstr "Stoppen"
+
+#: src/widgets/models/pulling.py:224
+msgid "Model Manager Error"
+msgstr "Modellmanager-Fehler"
+
+#: src/widgets/models/pulling.py:225
+msgid "An error occurred whilst pulling '{}'"
+msgstr "Ein Fehler trat beim Download von '{}' auf"
+
+#: src/widgets/models/pulling.py:253
+msgid "Download Completed"
+msgstr "Download abgeschlossen"
+
+#: src/widgets/models/pulling.py:254
+msgid "Model '{}' downloaded successfully."
+msgstr "Modell '{}' erfolgreich heruntergeladen."
+
+#: src/widgets/models/speech.py:40
+msgid "Local text to speech model provided by Kokoro."
+msgstr "Lokales Text-zu-Sprache-Modell wird von Kokoro bereitgestellt."
+
+#: src/widgets/models/speech.py:146 src/widgets/models/speech.py:289
+msgid "Delete Model"
+msgstr ""
+
+#: src/widgets/models/speech.py:187
+msgid "Local speech to text model provided by OpenAI Whisper."
+msgstr "Lokales Spracherkennungsmodell wird von OpenAI Whisper bereitgestellt."
+
+#: src/widgets/models/speech.py:242
+msgid "Speech to Text"
+msgstr "Spracherkennung"
+
 #: src/widgets/instances/ollama_instances.py:64
-#: src/widgets/instances/openai_instances.py:86
+#: src/widgets/instances/openai_instances.py:94
 msgid "Notebook Error"
 msgstr ""
 
 #: src/widgets/instances/ollama_instances.py:65
 #: src/widgets/instances/ollama_instances.py:150
-#: src/widgets/instances/openai_instances.py:87
-#: src/widgets/instances/openai_instances.py:156
+#: src/widgets/instances/openai_instances.py:95
+#: src/widgets/instances/openai_instances.py:164
 msgid "An error occurred while running tool"
 msgstr "Ein Fehler ist beim Ausführen des Werkzeugs aufgetreten"
 
 #: src/widgets/instances/ollama_instances.py:98
-#: src/widgets/instances/openai_instances.py:114
+#: src/widgets/instances/openai_instances.py:122
 msgid "Selecting tool to use..."
 msgstr "Wählt passendes Werkzeug aus..."
 
 #: src/widgets/instances/ollama_instances.py:117
-#: src/widgets/instances/openai_instances.py:123
+#: src/widgets/instances/openai_instances.py:131
 msgid "Using {}"
 msgstr "Benutzt {}"
 
 #: src/widgets/instances/ollama_instances.py:149
-#: src/widgets/instances/openai_instances.py:155
+#: src/widgets/instances/openai_instances.py:163
 msgid "Tool Error"
 msgstr "Werkzeug-Fehler"
 
-#: src/widgets/instances/ollama_instances.py:229
-#: src/widgets/instances/ollama_instances.py:318
-#: src/widgets/instances/ollama_instances.py:332
-#: src/widgets/instances/ollama_instances.py:536
-#: src/widgets/instances/openai_instances.py:216
-#: src/widgets/instances/openai_instances.py:279
-#: src/widgets/instances/openai_instances.py:323
-#: src/widgets/instances/openai_instances.py:368
-#: src/widgets/instances/openai_instances.py:428
-#: src/widgets/instances/openai_instances.py:467
-#: src/widgets/instances/openai_instances.py:500
+#: src/widgets/instances/ollama_instances.py:228
+#: src/widgets/instances/ollama_instances.py:320
+#: src/widgets/instances/ollama_instances.py:334
+#: src/widgets/instances/ollama_instances.py:544
+#: src/widgets/instances/openai_instances.py:224
+#: src/widgets/instances/openai_instances.py:296
+#: src/widgets/instances/openai_instances.py:351
+#: src/widgets/instances/openai_instances.py:396
+#: src/widgets/instances/openai_instances.py:456
+#: src/widgets/instances/openai_instances.py:495
+#: src/widgets/instances/openai_instances.py:528
 msgid "Instance Error"
 msgstr "Instanzfehler"
 
-#: src/widgets/instances/ollama_instances.py:230
-#: src/widgets/instances/openai_instances.py:217
+#: src/widgets/instances/ollama_instances.py:229
+#: src/widgets/instances/openai_instances.py:225
 msgid "Message generation failed"
 msgstr "Nachrichtengenerierung fehlgeschlagen"
 
-#: src/widgets/instances/ollama_instances.py:319
-#: src/widgets/instances/openai_instances.py:280
-#: src/widgets/instances/openai_instances.py:324
-#: src/widgets/instances/openai_instances.py:369
+#: src/widgets/instances/ollama_instances.py:321
+#: src/widgets/instances/openai_instances.py:297
+#: src/widgets/instances/openai_instances.py:352
+#: src/widgets/instances/openai_instances.py:397
 msgid "Could not retrieve added models"
 msgstr "Konnte die hinzugefügten Modelle nicht abrufen"
 
-#: src/widgets/instances/ollama_instances.py:333
+#: src/widgets/instances/ollama_instances.py:335
 msgid "Could not retrieve available models"
 msgstr "Konnte die verfügbaren Modelle nicht abrufen"
 
-#: src/widgets/instances/ollama_instances.py:451
+#: src/widgets/instances/ollama_instances.py:453
 msgid "Ollama (Managed)"
 msgstr "Ollama (Verwaltet)"
 
-#: src/widgets/instances/ollama_instances.py:452
+#: src/widgets/instances/ollama_instances.py:454
 msgid "Local AI instance managed directly by Alpaca"
 msgstr "Lokale KI-Instanz, direkt von Alpaca selbst verwaltet"
 
-#: src/widgets/instances/ollama_instances.py:454
-#: src/widgets/instances/ollama_instances.py:550
+#: src/widgets/instances/ollama_instances.py:457
+#: src/widgets/instances/ollama_instances.py:559
 #: src/widgets/instances/__init__.py:283
 msgid "Instance"
 msgstr "Instanz"
 
-#: src/widgets/instances/ollama_instances.py:484
+#: src/widgets/instances/ollama_instances.py:489
 msgid "Alpaca Support"
 msgstr "Alpaca-Support"
 
-#: src/widgets/instances/ollama_instances.py:491
+#: src/widgets/instances/ollama_instances.py:496
 msgid "Model request too large for system"
 msgstr "Modellanfrage zu groß für das System"
 
-#: src/widgets/instances/ollama_instances.py:494
+#: src/widgets/instances/ollama_instances.py:499
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
 msgstr ""
 "AMD-GPU erkannt, aber die Erweiterung fehlt; Ollama wird die CPU verwenden."
 
-#: src/widgets/instances/ollama_instances.py:496
+#: src/widgets/instances/ollama_instances.py:501
 msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
 msgstr "AMD-GPU erkannt, aber ROCm fehlt; Ollama wird die CPU verwenden."
 
-#: src/widgets/instances/ollama_instances.py:498
+#: src/widgets/instances/ollama_instances.py:503
 msgid "Using AMD GPU type '{}'"
 msgstr "Verwende AMD-GPU-Typ '{}'"
 
-#: src/widgets/instances/ollama_instances.py:508
+#: src/widgets/instances/ollama_instances.py:513
 msgid "Integrated Ollama instance is not running"
 msgstr "Integrierte Ollama-Instanz läuft nicht"
 
-#: src/widgets/instances/ollama_instances.py:537
+#: src/widgets/instances/ollama_instances.py:545
 msgid "Managed Ollama instance failed to start"
 msgstr "Mitverwaltete Ollama-Instanz konnte nicht starten"
 
-#: src/widgets/instances/ollama_instances.py:543
+#: src/widgets/instances/ollama_instances.py:551
 msgid "Integrated Ollama instance is running"
 msgstr "Integrierte Ollama-Instanz läuft"
 
-#: src/widgets/instances/ollama_instances.py:548
+#: src/widgets/instances/ollama_instances.py:556
 msgid "Local or remote AI instance not managed by Alpaca"
 msgstr "Lokale- oder Remoteinstanz, die nicht durch Alpaca verwaltet wird"
 
-#: src/widgets/instances/openai_instances.py:20
+#: src/widgets/instances/openai_instances.py:21
 msgid "Instances"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:162
+#: src/widgets/instances/openai_instances.py:170
 msgid "Generating message..."
 msgstr "Nachricht wird generiert..."
 
-#: src/widgets/instances/openai_instances.py:429
-#: src/widgets/instances/openai_instances.py:468
-#: src/widgets/instances/openai_instances.py:501
+#: src/widgets/instances/openai_instances.py:457
+#: src/widgets/instances/openai_instances.py:496
+#: src/widgets/instances/openai_instances.py:529
 msgid "Could not retrieve models"
 msgstr "Konnte Modelle nicht abrufen"
 
-#: src/widgets/instances/openai_instances.py:441
+#: src/widgets/instances/openai_instances.py:469
 msgid "Alibaba Cloud Qwen large language models via DashScope"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:447
+#: src/widgets/instances/openai_instances.py:475
 msgid "Fireworks AI inference platform"
 msgstr "Fireworks AI-Inferenzplattform"
 
-#: src/widgets/instances/openai_instances.py:480
+#: src/widgets/instances/openai_instances.py:508
 msgid "Lambda Labs cloud inference API"
 msgstr "Lambda Labs-Cloud-Inferenz-API"
 
-#: src/widgets/instances/openai_instances.py:513
+#: src/widgets/instances/openai_instances.py:541
 msgid "Cerebras AI cloud inference API"
 msgstr "Cerebras AI-Cloud-Inferenz-API"
 
-#: src/widgets/instances/openai_instances.py:519
+#: src/widgets/instances/openai_instances.py:547
 msgid "Kluster AI cloud inference API"
 msgstr "Kluster AI-Cloud-Inferenz-API"
 
-#: src/widgets/instances/openai_instances.py:525
+#: src/widgets/instances/openai_instances.py:553
+msgid "Kimi large language models by Moonshot AI"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:560
 msgid "Mistral AI large language models"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:532
+#: src/widgets/instances/openai_instances.py:567
 msgid "Meta AI Llama API"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:538
+#: src/widgets/instances/openai_instances.py:573
 msgid "Novita AI cloud inference API"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:545
+#: src/widgets/instances/openai_instances.py:580
 msgid "DeepInfra cloud inference API"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:549
+#: src/widgets/instances/openai_instances.py:584
 msgid "OpenAI Compatible Instance"
 msgstr "OpenAI-kompatible Instanz"
 
-#: src/widgets/instances/openai_instances.py:551
+#: src/widgets/instances/openai_instances.py:586
 msgid "AI instance compatible with OpenAI library"
 msgstr "KI-Instanz, die mit der OpenAI-Bibliothek kompatibel ist"
 
@@ -5247,12 +5129,6 @@ msgstr "Titel-Modell"
 msgid "Model to use when generating a chat title."
 msgstr "Zu nutzendes Modell, um die Chat-Titel zu generieren."
 
-#: src/widgets/instances/__init__.py:259 src/widgets/instances/__init__.py:260
-#: src/widgets/blocks/code.py:146 src/widgets/blocks/text.py:157
-#: src/widgets/tools/tools.py:103 src/widgets/tools/tools.py:104
-msgid "Save"
-msgstr "Speichern"
-
 #: src/widgets/instances/__init__.py:277
 msgid "Edit Instance"
 msgstr "Instanz bearbeiten"
@@ -5273,27 +5149,27 @@ msgstr "Instanz entfernen?"
 msgid "Are you sure you want to remove this instance?"
 msgstr "Sicher, dass diese Instanz entfernt werden soll?"
 
-#: src/widgets/blocks/code.py:85
+#: src/widgets/blocks/code.py:86
 msgid "Code Block"
 msgstr "Code-Block"
 
-#: src/widgets/blocks/code.py:112
+#: src/widgets/blocks/code.py:113
 msgid "Edit Script"
 msgstr ""
 
-#: src/widgets/blocks/code.py:120
+#: src/widgets/blocks/code.py:121
 msgid "Copy Script"
 msgstr ""
 
-#: src/widgets/blocks/code.py:128
+#: src/widgets/blocks/code.py:129
 msgid "Run Script"
 msgstr "Starte Script"
 
-#: src/widgets/blocks/code.py:194
+#: src/widgets/blocks/code.py:195
 msgid "Changes saved successfully"
 msgstr ""
 
-#: src/widgets/blocks/code.py:200
+#: src/widgets/blocks/code.py:201
 msgid "Code copied to the clipboard"
 msgstr "Code in die Zwischenablage kopiert"
 
@@ -5329,29 +5205,29 @@ msgstr ""
 msgid "Appends text to the notebook."
 msgstr ""
 
-#: src/widgets/tools/tools.py:20
+#: src/widgets/tools/tools.py:22
 msgid "AI Description"
 msgstr "KI-Beschreibung"
 
-#: src/widgets/tools/tools.py:21
+#: src/widgets/tools/tools.py:23
 msgid "The description the AI model will use to understand what the tool does."
 msgstr ""
 "Die Beschreibung, die das KI-Modell nutzen wird, um zu verstehen, was das "
 "Werkzeug tut."
 
-#: src/widgets/tools/tools.py:33
+#: src/widgets/tools/tools.py:35
 msgid "Arguments"
 msgstr "Argumente"
 
-#: src/widgets/tools/tools.py:34
+#: src/widgets/tools/tools.py:36
 msgid "Variables that are filled by the AI."
 msgstr "Variablen, die von dem Sprachmodell ausgefüllt werden."
 
-#: src/widgets/tools/tools.py:47
+#: src/widgets/tools/tools.py:49
 msgid "Variables"
 msgstr "Variablen"
 
-#: src/widgets/tools/tools.py:48
+#: src/widgets/tools/tools.py:50
 msgid ""
 "User filled values that the tool uses to work, the AI does not have access "
 "to these variables at all."
@@ -5359,100 +5235,277 @@ msgstr ""
 "Nutzer-spezifizierte Werte, die das Tool zum Arbeiten nutzen wird - das "
 "Sprachmodell und dessen Anbieter hat auf diese keinen Zugriff."
 
-#: src/widgets/tools/tools.py:216
+#: src/widgets/tools/tools.py:219
 msgid "Gets the current date and/or time."
 msgstr "Ruft das derzeitige Datum und die Zeit ab."
 
-#: src/widgets/tools/tools.py:248
+#: src/widgets/tools/tools.py:251
 msgid "Gets a recipe by the meal's name"
 msgstr "Ruft ein Rezept, basierend auf dem Namen des Gerichts, ab"
 
-#: src/widgets/tools/tools.py:263 src/widgets/tools/tools.py:329
+#: src/widgets/tools/tools.py:266 src/widgets/tools/tools.py:332
 msgid "YouTube Video"
 msgstr "YouTube-Video"
 
-#: src/widgets/tools/tools.py:271 src/widgets/tools/tools.py:338
+#: src/widgets/tools/tools.py:274 src/widgets/tools/tools.py:341
 msgid "Source"
 msgstr "Quelle"
 
-#: src/widgets/tools/tools.py:308
+#: src/widgets/tools/tools.py:311
 msgid "Gets a list of food recipes by a specified category"
 msgstr "Ruft eine Liste an Rezepten für eine spezifizierte Kategorie ab"
 
-#: src/widgets/tools/tools.py:364
+#: src/widgets/tools/tools.py:367
 msgid "Extracts an article from Wikipedia by it's title"
 msgstr "Extrahiert einen Artikel von Wikipedia mithilfe des Titels"
 
-#: src/widgets/tools/tools.py:405
+#: src/widgets/tools/tools.py:408
 msgid "Search for a term online using DuckDuckGo"
 msgstr "Sucht bei DuckDuckGo online nach einem Begriff"
 
-#: src/widgets/tools/tools.py:408
+#: src/widgets/tools/tools.py:411
 msgid "Safe Search"
 msgstr ""
 
-#: src/widgets/tools/tools.py:412
+#: src/widgets/tools/tools.py:415
 msgid "On"
 msgstr ""
 
-#: src/widgets/tools/tools.py:413
+#: src/widgets/tools/tools.py:416
 msgid "Moderate"
 msgstr ""
 
-#: src/widgets/tools/tools.py:414
+#: src/widgets/tools/tools.py:417
 msgid "Off"
 msgstr ""
 
-#: src/widgets/tools/tools.py:418
+#: src/widgets/tools/tools.py:421
 msgid "Max Results"
 msgstr ""
 
-#: src/widgets/tools/tools.py:442
+#: src/widgets/tools/tools.py:445
 msgid "Abstract Source"
 msgstr "Quelle der Zusammenfassung"
 
-#: src/widgets/tools/tools.py:459
+#: src/widgets/tools/tools.py:462
 msgid "Web Result Image"
 msgstr ""
 
-#: src/widgets/tools/tools.py:489
+#: src/widgets/tools/tools.py:492
 msgid "Request to run a command using SSH to connect to the device"
 msgstr ""
 "Fragt an, einen Befehl mittels SSH auf einem verbundenen Gerät auszuführen"
 
-#: src/widgets/tools/tools.py:492
+#: src/widgets/tools/tools.py:495
 msgid "IP Address"
 msgstr "IP-Adresse"
 
-#: src/widgets/tools/tools.py:497
+#: src/widgets/tools/tools.py:500
 msgid "Username"
 msgstr "Nutzername"
 
-#: src/widgets/tools/tools.py:502
+#: src/widgets/tools/tools.py:505
 msgid "Network Port"
 msgstr "Netzwerk-Port"
 
-#: src/widgets/tools/tools.py:519
+#: src/widgets/tools/tools.py:522
 msgid "Model Requested to Run Command"
 msgstr "Modell hat angefragt, einen Befehl auszuführen"
 
-#: src/widgets/tools/tools.py:520
+#: src/widgets/tools/tools.py:523
 msgid "Command"
 msgstr "Befehl"
 
-#: src/widgets/tools/tools.py:522
+#: src/widgets/tools/tools.py:525
 msgid "Explanation"
 msgstr "Erklärung"
 
-#: src/widgets/tools/tools.py:523
+#: src/widgets/tools/tools.py:526
 msgid "No explanation was provided"
 msgstr "Eine Erklärung wurde angegeben"
 
-#: src/widgets/tools/tools.py:524
+#: src/widgets/tools/tools.py:527
 msgid "Make sure you understand what the command does before running it."
 msgstr ""
 "Bitte stellen Sie sicher, dass sie voll und ganz verstehen, was der Befehl "
 "tut, bevor Sie ihn ausführen."
+
+#: src/widgets/tools/tools.py:573
+msgid "Spotify Controller"
+msgstr ""
+
+#: src/widgets/tools/tools.py:574
+msgid "Control your music's playback"
+msgstr ""
+
+#: src/widgets/tools/tools.py:625
+msgid "Log Back In"
+msgstr ""
+
+#: src/widgets/tools/tools.py:629
+msgid "Not logged in"
+msgstr ""
+
+#: src/widgets/tools/tools.py:636
+msgid "Tutorial"
+msgstr ""
+
+#: src/widgets/tools/tools.py:663
+msgid "Spotify User"
+msgstr ""
+
+#: src/widgets/tools/tools.py:724
+msgid "Login Error"
+msgstr ""
+
+#: src/widgets/tools/tools.py:725
+msgid "Couldn't log in to Spotify"
+msgstr ""
+
+#: src/widgets/tools/tools.py:726
+msgid "Specify a Client ID and Client Secret"
+msgstr ""
+
+#: src/widgets/tools/tools.py:775
+msgid "Album Art"
+msgstr ""
+
+#~ msgid "Next"
+#~ msgstr "Weiter"
+
+#~ msgid "Download Model?"
+#~ msgstr "Modell herunterladen?"
+
+#~ msgid "Already Installed!"
+#~ msgstr "Bereits installiert!"
+
+#~ msgid "Welcome"
+#~ msgstr "Willkommen"
+
+#~ msgid "Previous"
+#~ msgstr "Zurück"
+
+#~ msgid "Welcome to Alpaca"
+#~ msgstr "Willkommen bei Alpaca"
+
+#~ msgid "Powering your potential"
+#~ msgstr "Entfache dein Potenzial"
+
+#~ msgid ""
+#~ "Alpaca and its developers are not liable for any damages to devices or "
+#~ "software resulting from the execution of code generated by an AI model. "
+#~ "Please exercise caution and review the code carefully before running it.\n"
+#~ "\n"
+#~ "Alpaca is distributed under GPL v3.0, this software comes with no "
+#~ "warranty."
+#~ msgstr ""
+#~ "Alpaca und dessen Entwickler:innen sind nicht für Schäden jeglicher Art "
+#~ "und Weise an Geräten oder Software, entstehend durch die Ausführung KI-"
+#~ "generierter Software, verantwortlich. Besondere Vorsicht bei der "
+#~ "Ausführung solches Codes ist oberstes Gebot und obliegt Alpacas "
+#~ "Nutzer:innen.\n"
+#~ "Alpaca wird unter der GPL v3.0 distributiert. Diese Software kommt ohne "
+#~ "jegliche Garantie."
+
+#~ msgid "Effortless Code Execution"
+#~ msgstr "Mühelose Codeausführung"
+
+#~ msgid ""
+#~ "Alpaca can run Python, C++, and even HTML (with a live server) right from "
+#~ "your conversations. Give it a try!"
+#~ msgstr ""
+#~ "Alpaca kann Python, C++ und sogar HTML (mit einem Live-Server) direkt von "
+#~ "ihren Konversationen aus ausführen. Probieren Sie es aus!"
+
+#~ msgid "Private by Design"
+#~ msgstr "Privat durch Design"
+
+#~ msgid ""
+#~ "With Alpaca, your conversations are saved locally on your device, so you "
+#~ "can be confident that your data is always secure and private."
+#~ msgstr ""
+#~ "Mit Alpaca werden ihre Konversationen immer lokal auf ihrem Gerät "
+#~ "gespeichert, sodass Sie sich sicher sein können, dass ihre Daten immer "
+#~ "sicher und privat bleiben."
+
+#~ msgid "Local AI"
+#~ msgstr "Lokale KI"
+
+#~ msgid ""
+#~ "Alpaca works with AI providers such as Gemini and ChatGPT.  To run AI "
+#~ "models locally on your machine, you'll need to install Ollama within "
+#~ "Alpaca. We've made it super easy to do, so you can get started quickly!"
+#~ msgstr ""
+#~ "Alpaca arbeitet mit KI-Anbietern wie Gemini oder ChatGPT. Um KI-Modelle "
+#~ "lokal auf Ihrem Gerät ausführen zu können, müssen Sie Ollama innerhalb "
+#~ "von Alpaca installieren. Das haben wir sehr einfach gemacht, sodass Sie "
+#~ "ganz schnell loslegen können!"
+
+#~ msgid "Install Ollama"
+#~ msgstr "Ollama installieren"
+
+#~ msgid "Creator"
+#~ msgstr "Ersteller"
+
+#~ msgid "Model Creator"
+#~ msgstr "Modell-Ersteller"
+
+#~ msgid "Select a method of importing a model to continue"
+#~ msgstr ""
+#~ "Wählen Sie eine Methode, ein Modell zu importieren, um fortzufahren."
+
+#~ msgid "GGUF File"
+#~ msgstr "GGUF-Datei"
+
+#~ msgid "Existing Model"
+#~ msgstr "Existierendes Modell"
+
+#~ msgid "Run Alpaca In Background"
+#~ msgstr "Alpaca im Hintergrund ausführen"
+
+#~ msgid "Show Power Saver Warning"
+#~ msgstr "Zeige Energiesparmodus-Warnung"
+
+#~ msgid "When running a managed Ollama instance"
+#~ msgstr "Beim Ausführen einer integrierten Ollama-Instanz"
+
+#~ msgid "Zoom"
+#~ msgstr "Vergrößerung"
+
+#~ msgid "Speech Recognition Model"
+#~ msgstr "Spracherkennungsmodell"
+
+#~ msgid ""
+#~ "Models are downloaded upon first use, you can delete them from the model "
+#~ "manager"
+#~ msgstr ""
+#~ "Modelle werden bei der erstmaligen Nutzung heruntergeladen - sie können "
+#~ "vom Modell-Manager aus gelöscht werden"
+
+#~ msgid "Speech Recognition Language"
+#~ msgstr "Sprache für die Spracherkennung"
+
+#~ msgid "Auto Send Message After Talking"
+#~ msgstr "Automatisch Nachricht nach dem Sprechen absenden"
+
+#~ msgid ""
+#~ "Voices are downloaded upon first use, each weighing around 1 MB, and you "
+#~ "can delete them from the model manager"
+#~ msgstr ""
+#~ "Sprachen werden bei der erstmaligen Nutzung heruntergeladen - jede "
+#~ "benötigt ca. 1 MB - und sie können vom Modell-Manager aus gelöscht werden"
+
+#~ msgid "Delete All Chats"
+#~ msgstr "Alle Chats löschen"
+
+#~ msgid "Notice"
+#~ msgstr "Information"
+
+#~ msgid "Download Model From Name"
+#~ msgstr "Modell anhand eines Namens herunterladen"
+
+#~ msgid "Downloading…"
+#~ msgstr "Lädt herunter..."
 
 #~ msgid "A conversation involving a YouTube video transcript"
 #~ msgstr "Eine Konversation mit einem YouTube-Video-Transkript"
@@ -5920,9 +5973,6 @@ msgstr ""
 #~ msgid "This model will be used as the base for the new model"
 #~ msgstr "Dieses Modell wird als Basis für das neue Modell verwendet"
 
-#~ msgid "Pull Model"
-#~ msgstr "Modell abrufen"
-
 #~ msgid ""
 #~ "Input the name of the model in this format\n"
 #~ "name:tag"
@@ -5932,9 +5982,6 @@ msgstr ""
 
 #~ msgid "Manage models dialog"
 #~ msgstr "Modelle verwalten-Dialog"
-
-#~ msgid "Create Model"
-#~ msgstr "Modell erstellen"
 
 #~ msgid "Try a different search or pull an unlisted model from it's name"
 #~ msgstr ""
