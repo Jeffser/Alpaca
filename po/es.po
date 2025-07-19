@@ -165,19 +165,20 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added option to use tools by default"
-msgstr ""
+msgstr "Se agregó la opción para usar herramientas por defecto"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Redesign model manager"
-msgstr ""
+msgstr "Rediseño del gestor de modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Added option to attach audio and video files (audio transcription)"
-msgstr ""
+msgstr "Se agregó la opción para adjuntar archivos de audio y video "
+"(transcripción de audio)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Added Spotify controller tool"
-msgstr ""
+msgstr "Se agregó la herramienta de control de Spotify"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
@@ -222,7 +223,8 @@ msgstr "Arreglos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Fixed thinking mode being on bugs out normal models"
-msgstr ""
+msgstr "Se arreglo l modo de pensamiento que al estar activado "
+"genera errores en los modelos normales."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:113
 msgid "Fixed Alpaca crashing when chats database has incorrect metadata (type)"
@@ -4071,11 +4073,12 @@ msgstr ""
 
 #: src/gtk/window.ui:395
 msgid "Help us build better AI tools! Submit your ideas here."
-msgstr ""
+msgstr "¡Ayúdanos a desarrollar mejores herramientas de IA! Envía tus ideas "
+"aquí."
 
 #: src/gtk/window.ui:403
 msgid "Request Form"
-msgstr ""
+msgstr "Formulario"
 
 #: src/gtk/window.ui:417
 msgid "Model Manager"
@@ -4187,15 +4190,15 @@ msgstr "Recargar Modelos Agregados"
 
 #: src/gtk/window.ui:720
 msgid "Add Model by Name"
-msgstr ""
+msgstr "Agregar Modelo por Nombre"
 
 #: src/gtk/window.ui:726
 msgid "Create Model from Existing"
-msgstr ""
+msgstr "Crear un Modelo a Partir de uno Existente"
 
 #: src/gtk/window.ui:730
 msgid "Create Model from GGUF File"
-msgstr ""
+msgstr "Crear un Modelo a Partir de un Archivo GGUF"
 
 #: src/gtk/live_chat.ui:8
 msgid "Live chat dialog"
@@ -4270,11 +4273,11 @@ msgstr "Imagen no Encontrada"
 
 #: src/widgets/attachments.py:390
 msgid "Delete Image?"
-msgstr ""
+msgstr "¿Borrar Imagen?"
 
 #: src/widgets/attachments.py:413
 msgid "Save Image"
-msgstr ""
+msgstr "Guardar Imagen"
 
 #: src/widgets/attachments.py:584
 msgid "Any compatible Alpaca attachment"
@@ -4561,15 +4564,15 @@ msgstr "Descargar Modelo"
 
 #: src/widgets/voice.py:320
 msgid "Transcribing Audio"
-msgstr ""
+msgstr "Transcribiendo Audio"
 
 #: src/widgets/voice.py:346 src/widgets/voice.py:375
 msgid "Transcription Error"
-msgstr ""
+msgstr "Error de Transcripción"
 
 #: src/widgets/voice.py:376
 msgid "An error occurred while transcribing audio"
-msgstr ""
+msgstr "Se produjo un error al transcribir el audio"
 
 #: src/widgets/models/added.py:89
 msgid "Change Profile Picture"
@@ -4613,7 +4616,7 @@ msgstr "Descripción"
 
 #: src/widgets/models/added.py:170 src/widgets/models/added.py:174
 msgid "Files"
-msgstr ""
+msgstr "Archivos"
 
 #: src/widgets/models/added.py:193 src/widgets/models/creator.py:73
 msgid "Context"
@@ -4662,11 +4665,11 @@ msgstr "¿Estás seguro de que quieres eliminar '{}'?"
 
 #: src/widgets/models/available.py:46
 msgid "Already Added"
-msgstr ""
+msgstr "Añadido"
 
 #: src/widgets/models/available.py:48
 msgid "Pull '{}'"
-msgstr ""
+msgstr "Descarga '{}'"
 
 #: src/widgets/models/available.py:50
 msgid "Add Model"
@@ -4674,7 +4677,7 @@ msgstr "Agregar modelo"
 
 #: src/widgets/models/available.py:111
 msgid "Add"
-msgstr ""
+msgstr "Añade"
 
 #: src/widgets/models/available.py:120
 msgid ""
@@ -4686,7 +4689,7 @@ msgstr ""
 
 #: src/widgets/models/available.py:253
 msgid "Pull Latest"
-msgstr ""
+msgstr "Añade Último"
 
 #: src/widgets/models/common.py:13
 msgid "Multilingual"
@@ -4754,7 +4757,7 @@ msgstr "Nombre"
 
 #: src/widgets/models/creator.py:67
 msgid "Add Files"
-msgstr ""
+msgstr "Añade Archivos"
 
 #: src/widgets/models/creator.py:74
 msgid ""
@@ -4798,7 +4801,7 @@ msgstr "Crear Modelo"
 
 #: src/widgets/models/pulling.py:48
 msgid "Downloading..."
-msgstr ""
+msgstr "Descargando..."
 
 #: src/widgets/models/pulling.py:69 src/widgets/models/pulling.py:71
 #: src/widgets/models/pulling.py:174
@@ -4807,7 +4810,7 @@ msgstr "Detener la descarga"
 
 #: src/widgets/models/pulling.py:132
 msgid "Dictation Model"
-msgstr ""
+msgstr "Model de Dictado"
 
 #: src/widgets/models/pulling.py:188
 msgid "Stop Download?"
@@ -4843,7 +4846,7 @@ msgstr "Modelo de texto a voz local proporcionado por Kokoro."
 
 #: src/widgets/models/speech.py:146 src/widgets/models/speech.py:289
 msgid "Delete Model"
-msgstr ""
+msgstr "Eliminar Modelo"
 
 #: src/widgets/models/speech.py:187
 msgid "Local speech to text model provided by OpenAI Whisper."
@@ -4997,7 +5000,7 @@ msgstr "API de inferencia en la nube de Kluster AI"
 
 #: src/widgets/instances/openai_instances.py:553
 msgid "Kimi large language models by Moonshot AI"
-msgstr ""
+msgstr "Modelos de lenguaje grandes de Kimi de Moonshot AI"
 
 #: src/widgets/instances/openai_instances.py:560
 msgid "Mistral AI large language models"
@@ -5344,43 +5347,43 @@ msgstr "Asegúrese de comprender lo que hace el comando antes de ejecutarlo."
 
 #: src/widgets/tools/tools.py:573
 msgid "Spotify Controller"
-msgstr ""
+msgstr "Control Spotify"
 
 #: src/widgets/tools/tools.py:574
 msgid "Control your music's playback"
-msgstr ""
+msgstr "Controla la reproducción de tu música"
 
 #: src/widgets/tools/tools.py:625
 msgid "Log Back In"
-msgstr ""
+msgstr "Volver a Iniciar Sesión"
 
 #: src/widgets/tools/tools.py:629
 msgid "Not logged in"
-msgstr ""
+msgstr "No has iniciado sesión"
 
 #: src/widgets/tools/tools.py:636
 msgid "Tutorial"
-msgstr ""
+msgstr "Tutorial"
 
 #: src/widgets/tools/tools.py:663
 msgid "Spotify User"
-msgstr ""
+msgstr "Usuario de Spotify"
 
 #: src/widgets/tools/tools.py:724
 msgid "Login Error"
-msgstr ""
+msgstr "Error de Inicio de Sesión"
 
 #: src/widgets/tools/tools.py:725
 msgid "Couldn't log in to Spotify"
-msgstr ""
+msgstr "No pude iniciar sesión en Spotify"
 
 #: src/widgets/tools/tools.py:726
 msgid "Specify a Client ID and Client Secret"
-msgstr ""
+msgstr "Especifique un ID de cliente y un secreto de cliente"
 
 #: src/widgets/tools/tools.py:775
 msgid "Album Art"
-msgstr ""
+msgstr "Arte del Álbum"
 
 #~ msgid "Next"
 #~ msgstr "Siguiente"
