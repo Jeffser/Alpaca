@@ -413,7 +413,7 @@ class Message(Gtk.Box):
 
     def update_profile_picture(self):
         self.update_header(
-            pfp_b64=SQL.get_model_preferences(self.get_model()).get('picture')
+            pfp_b64=SQL.get_model_preferences(self.get_model().get_name()).get('picture')
         )
 
     def add_attachment(self, file_id:str, name:str, attachment_type:str, content:str):
