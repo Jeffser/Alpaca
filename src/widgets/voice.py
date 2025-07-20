@@ -83,7 +83,7 @@ class DictateToggleButton(Gtk.Stack):
         # Get Voice
         voice = None
         if self.message_element.get_model():
-            voice = SQL.get_model_preferences(self.message_element.get_model().get_name()).get('voice', None)
+            voice = SQL.get_model_preferences(self.message_element.get_model()).get('voice', None)
         if not voice:
             voice = TTS_VOICES.get(list(TTS_VOICES.keys())[self.message_element.get_root().settings.get_value('tts-model').unpack()])
 
