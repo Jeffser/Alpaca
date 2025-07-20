@@ -45,6 +45,10 @@ class BaseInstance:
     def set_row(self, row):
         self.row = row
 
+    def get_row(self):
+        if hasattr(self, 'row'):
+            return self.row
+
     def stop(self):
         pass
 
@@ -226,8 +230,8 @@ class BaseInstance:
                     error_log = e
                 )
                 logger.error(e)
-                if self.row:
-                    self.row.get_parent().unselect_all()
+                if self.get_row():
+                    self.get_row().get_parent().unselect_all()
         bot_message.update_message({"done": True})
 
     def generate_chat_title(self, chat, prompt:str):
@@ -292,14 +296,14 @@ class BaseInstance:
             return self.available_models
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
                 error_log = e
             )
             logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+            if self.get_row():
+                self.get_row().get_parent().unselect_all()
             return []
 
     def pull_model(self, model_name:str, callback:callable):
@@ -347,14 +351,14 @@ class Gemini(BaseInstance):
             return self.available_models
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
                 error_log = e
             )
             logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+            if self.get_row():
+                self.get_row().get_parent().unselect_all()
         return []
 
     def get_model_info(self, model_name:str) -> dict:
@@ -392,14 +396,14 @@ class Together(BaseInstance):
             return models
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
                 error_log = e
             )
             logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+            if self.get_row():
+                self.get_row().get_parent().unselect_all()
 
 class Venice(BaseInstance):
     instance_type = 'venice'
@@ -452,14 +456,14 @@ class OpenRouter(BaseInstance):
             return self.available_models
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve models'),
                 error_log = e
             )
             logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+            if self.get_row():
+                self.get_row().get_parent().unselect_all()
             return []
 
 class Qwen(BaseInstance):
@@ -491,14 +495,14 @@ class Fireworks(BaseInstance):
             return self.available_models
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve models'),
                 error_log = e
             )
             logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+            if self.get_row():
+                self.get_row().get_parent().unselect_all()
             return []
 
 class LambdaLabs(BaseInstance):
@@ -524,14 +528,14 @@ class LambdaLabs(BaseInstance):
             return self.available_models
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve models'),
                 error_log = e
             )
             logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+            if self.get_row():
+                self.get_row().get_parent().unselect_all()
             return []
 
 class Cerebras(BaseInstance):

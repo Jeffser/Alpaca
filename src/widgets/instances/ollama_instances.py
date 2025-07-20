@@ -18,6 +18,10 @@ class BaseInstance:
     def set_row(self, row):
         self.row = row
 
+    def get_row(self):
+        if hasattr(self, 'row'):
+            return self.row
+
     def prepare_chat(self, bot_message):
         bot_message.chat.busy = True
         if bot_message.chat.chat_id:
@@ -230,8 +234,8 @@ class BaseInstance:
                     error_log = e
                 )
                 logger.error(e)
-                if self.row:
-                    self.row.get_parent().unselect_all()
+                if self.get_row():
+                    self.get_row().get_parent().unselect_all()
         bot_message.update_message({"done": True})
 
     def generate_chat_title(self, chat, prompt:str):
@@ -316,13 +320,13 @@ class BaseInstance:
                 return json.loads(response.text).get('models')
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
                 error_log = e
             )
             logger.error(e)
-            self.row.get_parent().unselect_all()
+            self.get_row().get_parent().unselect_all()
         return []
 
     def get_available_models(self) -> dict:
@@ -330,7 +334,7 @@ class BaseInstance:
             return OLLAMA_MODELS
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve available models'),
                 error_log = e
@@ -493,7 +497,7 @@ class OllamaManaged(BaseInstance):
                     self.log_raw += line
                     print(line, end='')
                     if 'msg="model request too large for system"' in line:
-                        dialog.show_toast(_("Model request too large for system"), self.row.get_root())
+                        dialog.show_toast(_("Model request too large for system"), self.get_row().get_root())
                     elif 'msg="amdgpu detected, but no compatible rocm library found.' in line:
                         if bool(os.getenv("FLATPAK_ID")):
                             self.log_summary = (_("AMD GPU detected but the extension is missing, Ollama will use CPU.") + AMD_support_label, ['dim-label', 'error'])
@@ -540,14 +544,14 @@ class OllamaManaged(BaseInstance):
                 logger.info(v_str.split('\n')[1].strip('Warning: ').strip())
             except Exception as e:
                 dialog.simple_error(
-                    parent = self.row.get_root(),
+                    parent = self.get_row().get_root(),
                     title = _('Instance Error'),
                     body = _('Managed Ollama instance failed to start'),
                     error_log = e
                 )
                 logger.error(e)
-                if self.row:
-                    self.row.get_parent().unselect_all()
+                if self.get_row():
+                    self.get_row().get_parent().unselect_all()
             self.log_summary = (_("Integrated Ollama instance is running"), ['dim-label', 'success'])
 
 class Ollama(BaseInstance):
