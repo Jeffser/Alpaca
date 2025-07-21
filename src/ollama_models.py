@@ -185,11 +185,11 @@ OLLAMA_MODELS = {
         "tags": [
                 [
                         "latest",
-                        "4.1 GB"
+                        "4.4 GB"
                 ],
                 [
                         "7b",
-                        "4.1 GB"
+                        "4.4 GB"
                 ]
         ],
         "author": "Mistral AI",
