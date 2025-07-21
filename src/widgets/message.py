@@ -211,7 +211,7 @@ class BlockContainer(Gtk.Box):
         )
         self.generating_block = None
 
-    def get_generating_block(self) -> blocks.Text:
+    def get_generating_block(self) -> blocks.GeneratingText:
         """
         Gets the generating text block, creates it if it does not exist
         """
