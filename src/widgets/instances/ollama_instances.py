@@ -391,12 +391,12 @@ class BaseInstance:
         if not self.process:
             self.start()
         try:
-            return requests.get(
+            return requests.head(
                 '{}/api/blobs/sha256:{}'.format(self.properties.get('url'), sha256),
                 headers={
                     'Authorization': 'Bearer {}'.format(self.properties.get('api'))
                 }
-            ).status_code != 404
+            ).status_code == 200
         except Exception as e:
             return False
 
