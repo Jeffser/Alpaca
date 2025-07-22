@@ -217,7 +217,7 @@ class BlockContainer(Gtk.Box):
         """
         if not self.generating_block:
             self.generating_block = blocks.GeneratingText()
-            GLib.idle_add(self.append, self.generating_block)
+            self.append(self.generating_block)
             GLib.idle_add(self.message.popup.change_status, False)
         return self.generating_block
 
