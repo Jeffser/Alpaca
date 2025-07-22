@@ -448,8 +448,8 @@ def update_instance_list(instance_listbox:Gtk.ListBox, selected_instance_id:str)
         row_to_select = None
         for i, ins in enumerate(instances):
             row = create_instance_row(ins)
-            row.instance.set_row(row)
             if row:
+                row.instance.set_row(row)
                 instance_listbox.append(row)
                 if row.instance.instance_id == selected_instance_id:
                     row_to_select = row
