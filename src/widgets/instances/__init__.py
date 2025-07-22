@@ -443,23 +443,24 @@ def create_instance_row(ins:dict) -> InstanceRow or None:
 def update_instance_list(instance_listbox:Gtk.ListBox, selected_instance_id:str):
     instance_listbox.remove_all()
     instances = SQL.get_instances()
+    instance_added = False
     if len(instances) > 0:
         instance_listbox.get_root().instance_manager_stack.set_visible_child_name('content')
-        row_to_select = None
         for i, ins in enumerate(instances):
             row = create_instance_row(ins)
             if row:
                 row.instance.set_row(row)
-                instance_listbox.append(row)
+                GLib.idle_add(instance_listbox.append, row)
+                instance_added = True
                 if row.instance.instance_id == selected_instance_id:
-                    row_to_select = row
-        if row_to_select:
-            instance_listbox.select_row(row_to_select)
+                    GLib.idle_add(instance_listbox.select_row, row)
 
-    if len(list(instance_listbox)) == 0:
-        instance_listbox.get_root().instance_manager_stack.set_visible_child_name('no-instances')
-        instance_listbox.append(InstanceRow(Empty()))
+    if not instance_added:
+        GLib.idle_add(instance_listbox.get_root().instance_manager_stack.set_visible_child_name, 'no-instances')
+        GLib.idle_add(instance_listbox.append, InstanceRow(Empty()))
 
-    if not instance_listbox.get_selected_row():
-        instance_listbox.select_row(instance_listbox.get_row_at_index(0))
+    def check_row_is_selected():
+        if not instance_listbox.get_selected_row():
+            instance_listbox.select_row(instance_listbox.get_row_at_index(0))
+    GLib.idle_add(check_row_is_selected)
 
