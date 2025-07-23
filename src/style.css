@@ -79,7 +79,7 @@ stacksidebar {
 .user_message label, .response_message > label, .response_message textview {
   padding: 5px;
 }
-.model_flowbox, .model_flowbox .model_box, .p10 {
+.p10 {
   padding: 10px;
 }
 
@@ -91,25 +91,12 @@ stacksidebar {
   padding: 0px;
 }
 
-.model_flowbox flowboxchild {
-	border-radius: 12px;
-	padding: 0;
-}
-
-.flowbox_no_padding flowboxchild {
-  padding: 0;
-}
-
 .model_pfp {
   border-radius: 100%;
 }
 
 .local_model_selector {
   border-radius: 6px;
-}
-
-.model_flowbox flowboxchild:selected > * {
-	background-color: unset;
 }
 
 .generating_text_shadow {

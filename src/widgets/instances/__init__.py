@@ -5,8 +5,8 @@ from gi.repository import Adw, Gtk, GLib, Gio
 import os, shutil, json, re, logging
 from ...sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from .. import dialog
-from .ollama_instances import Ollama, OllamaManaged
-from .openai_instances import ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Qwen, Fireworks, LambdaLabs, Cerebras, Klusterai, Mistral, LlamaAPI, NovitaAI, GenericOpenAI
+from .ollama_instances import BaseInstance as BaseOllama
+from .openai_instances import BaseInstance as BaseOpenAI
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             description=self.instance.description if self.instance.description else self.instance.properties.get('url')
         ))
 
-        if self.instance.instance_type == 'ollama:managed' and self.instance.row and self.instance.process:
+        if self.instance.instance_type == 'ollama:managed' and self.instance.get_row() and self.instance.process:
             suffix_button = Gtk.Button(icon_name='terminal-symbolic', valign=1, css_classes=['flat'], tooltip_text=_('Ollama Log'))
             suffix_button.connect('clicked', lambda button: dialog.simple_log(
                     parent = self.get_root(),
@@ -206,7 +206,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             model_directory_el.add_suffix(open_dir_button)
             self.groups[-1].add(model_directory_el)
 
-        if self.instance.row and ('default_model' in self.instance.properties or 'title_model' in self.instance.properties):
+        if self.instance.get_row() and ('default_model' in self.instance.properties or 'title_model' in self.instance.properties):
             self.groups.append(Adw.PreferencesGroup())
 
             factory = Gtk.SignalListItemFactory()
@@ -274,7 +274,7 @@ class InstancePreferencesGroup(Adw.Dialog):
         tbv.set_content(pp)
         super().__init__(
             child=tbv,
-            title=_('Edit Instance') if self.instance.row else _('Create Instance'),
+            title=_('Edit Instance') if self.instance.get_row() else _('Create Instance'),
             content_width=500
         )
 
@@ -324,15 +324,23 @@ class InstancePreferencesGroup(Adw.Dialog):
 
         SQL.insert_or_update_instance(
             instance_id=self.instance.instance_id,
-            pinned=self.instance.row.pinned if self.instance.row else False,
+            pinned=self.instance.get_row().pinned if self.instance.get_row() else False,
             instance_type=self.instance.instance_type,
             properties=self.instance.properties
         )
 
-        if self.instance.row:
-            self.instance.row.set_title(self.instance.properties.get('name'))
+        if self.instance.get_row():
+            self.instance.get_row().set_title(self.instance.properties.get('name'))
         else:
-            self.get_root().instance_listbox.append(InstanceRow(instance=self.instance))
+            row = InstanceRow(instance=self.instance)
+            self.get_root().instance_listbox.append(row)
+            self.get_root().instance_listbox.select_row(row)
+
+        if len(list(self.get_root().instance_listbox)) > 0:
+            self.get_root().instance_manager_stack.set_visible_child_name('content')
+
+        else:
+            self.get_root().instance_manager_stack.set_visible_child_name('no-instances')
 
         self.force_close()
 
@@ -365,12 +373,13 @@ class InstanceRow(Adw.ActionRow):
 
     def __init__(self, instance, pinned:bool=False):
         self.instance = instance
-        self.instance.row = self
+        #self.instance.set_row(self)
         self.pinned = pinned
         super().__init__(
             title = self.instance.properties.get('name'),
             subtitle = self.instance.instance_type_display,
-            name = self.instance.properties.get('name')
+            name = self.instance.properties.get('name'),
+            visible = self.instance.instance_type != 'empty'
         )
 
         if not self.pinned:
@@ -404,41 +413,54 @@ class InstanceRow(Adw.ActionRow):
 
     def remove(self):
         SQL.delete_instance(self.instance.instance_id)
+        if len(list(self.get_root().instance_listbox)) > 1:
+            self.get_root().instance_manager_stack.set_visible_child_name('content')
+        else:
+            self.get_root().instance_manager_stack.set_visible_child_name('no-instances')
         self.get_parent().remove(self)
 
 def create_instance_row(ins:dict) -> InstanceRow or None:
-    instance_dictionary = {i.instance_type: i for i in ready_instances}
-    if ins.get('type') in list(instance_dictionary.keys()) and (ins.get('type') != 'ollama:managed' or shutil.which('ollama')):
-        return InstanceRow(
-            instance=instance_dictionary.get(ins.get('type'))(
-                instance_id=ins.get('id'),
-                properties=ins.get('properties')
-            ))
+    if 'ollama' in ins.get('type'):
+        if ins.get('type') != 'ollama:managed' or shutil.which('ollama'):
+            for instance_cls in BaseOllama.__subclasses__():
+                if getattr(instance_cls, 'instance_type', None) == ins.get('type'):
+                    return InstanceRow(
+                        instance=instance_cls(
+                            instance_id=ins.get('id'),
+                            properties=ins.get('properties')
+                        )
+                    )
+    elif os.getenv('ALPACA_OLLAMA_ONLY', '0') != '1':
+        for instance_cls in BaseOpenAI.__subclasses__():
+            if getattr(instance_cls, 'instance_type', None) == ins.get('type'):
+                return InstanceRow(
+                    instance=instance_cls(
+                        instance_id=ins.get('id'),
+                        properties=ins.get('properties')
+                    )
+                )
 
 def update_instance_list(instance_listbox:Gtk.ListBox, selected_instance_id:str):
     instance_listbox.remove_all()
     instances = SQL.get_instances()
+    instance_added = False
     if len(instances) > 0:
         instance_listbox.get_root().instance_manager_stack.set_visible_child_name('content')
-        row_to_select = None
         for i, ins in enumerate(instances):
             row = create_instance_row(ins)
             if row:
-                instance_listbox.append(row)
+                row.instance.set_row(row)
+                GLib.idle_add(instance_listbox.append, row)
+                instance_added = True
                 if row.instance.instance_id == selected_instance_id:
-                    row_to_select = row
-        if row_to_select:
-            instance_listbox.select_row(row_to_select)
+                    GLib.idle_add(instance_listbox.select_row, row)
 
-    if len(list(instance_listbox)) == 0:
-        instance_listbox.get_root().instance_manager_stack.set_visible_child_name('no-instances')
-        instance_listbox.append(InstanceRow(Empty()))
+    if not instance_added:
+        GLib.idle_add(instance_listbox.get_root().instance_manager_stack.set_visible_child_name, 'no-instances')
+        GLib.idle_add(instance_listbox.append, InstanceRow(Empty()))
 
-    if not instance_listbox.get_selected_row():
-        instance_listbox.select_row(instance_listbox.get_row_at_index(0))
-
-if os.getenv('ALPACA_OLLAMA_ONLY', '0') == '1':
-    ready_instances = [OllamaManaged, Ollama]
-else:
-    ready_instances = [OllamaManaged, Ollama, ChatGPT, Gemini, Together, Venice, Deepseek, OpenRouter, Anthropic, Groq, Qwen, Fireworks, LambdaLabs, Cerebras, Klusterai, Mistral, LlamaAPI, NovitaAI, GenericOpenAI]
+    def check_row_is_selected():
+        if not instance_listbox.get_selected_row():
+            instance_listbox.select_row(instance_listbox.get_row_at_index(0))
+    GLib.idle_add(check_row_is_selected)
 

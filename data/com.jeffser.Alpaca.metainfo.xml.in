@@ -89,6 +89,57 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="7.5.2" date="2025-07-22">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/7.5.2</url>
+      <description>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed inconsistent message generation rendering</li>
+        </ul>
+      </description>
+    </release>
+    <release version="7.5.1" date="2025-07-20">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/7.5.1</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Save message edit with ctrl+enter</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed Live Chat and Quick Ask not working sometimes</li>
+          <li>Fixed model creation and GGUF import</li>
+        </ul>
+      </description>
+    </release>
+    <release version="7.5.0" date="2025-07-18">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/7.5.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Added option to use tools by default</li>
+          <li>Redesign model manager</li>
+          <li>Added option to attach audio and video files (audio transcription)</li>
+          <li>Added Spotify controller tool</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed thinking mode being on bugs out normal models</li>
+        </ul>
+      </description>
+    </release>
+    <release version="7.0.1" date="2025-06-29">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/7.0.1</url>
+      <description>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed Alpaca crashing when chats database has incorrect metadata (type)</li>
+          <li>Fixed Quick Ask and Live Chat not running when opened from terminal whilst Alpaca is running</li>
+          <li>Fixed stop button not working when pressed before text generation beggins</li>
+          <li>Fixed instances sometimes not appearing</li>
+        </ul>
+      </description>
+    </release>
     <release version="7.0.0" date="2025-06-27">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/7.0.0</url>
       <description>

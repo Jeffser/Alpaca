@@ -14,19 +14,6 @@ from datetime import datetime
 
 import threading, base64, time
 
-class LiveChatModelRow(GObject.Object):
-    __gtype_name__ = 'AlpacaLiveChatModelRow'
-
-    name = GObject.Property(type=str)
-
-    def __init__(self, model_name:str):
-        super().__init__()
-        self.model_name = model_name
-        self.name = prettify_model_name(self.model_name)
-
-    def __str__(self):
-        return self.model_name
-
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/live_chat.ui')
 class LiveChatWindow(Adw.ApplicationWindow):
 
@@ -68,12 +55,24 @@ class LiveChatWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def reload_models(self, button=None):
         self.model_dropdown.get_model().remove_all()
-        instance = self.get_current_instance()
-        models = instance.get_local_models()
-        default_model = instance.properties.get('default_model')
+        current_instance = self.get_current_instance()
+        if not current_instance:
+            Widgets.dialog.show_toast(_("Please select an instance in Alpaca before chatting"), self)
+            self.model_dropdown.set_visible(False)
+            return
+        models = current_instance.get_local_models()
+        default_model = current_instance.properties.get('default_model')
         selected_model_index = -1
         for i, model in enumerate(models):
-            self.model_dropdown.get_model().append(LiveChatModelRow(model.get('name')))
+            info = current_instance.get_model_info(model.get('name'))
+            self.model_dropdown.get_model().append(
+                Widgets.models.added.AddedModelRow(
+                    Widgets.models.added.LiteAddedModel(
+                        name=model.get('name'),
+                        vision='vision' in info.get('capabilities', [])
+                    )
+                )
+            )
             if model.get('name') == default_model:
                 selected_model_index = i
         self.model_dropdown.set_visible(len(models) > 0)
@@ -84,7 +83,7 @@ class LiveChatWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def model_dropdown_changed(self, dropdown, user_data):
         if dropdown.get_selected_item():
-            model_name = str(dropdown.get_selected_item())
+            model_name = dropdown.get_selected_item().model.get_name()
             model_picture_data = SQL.get_model_preferences(model_name).get('picture')
             if model_picture_data:
                 texture = Gdk.Texture.new_from_bytes(
@@ -112,6 +111,13 @@ class LiveChatWindow(Adw.ApplicationWindow):
                 return Widgets.instances.create_instance_row(matching_instances[0]).instance
             return Widgets.instances.create_instance_row(instances[0]).instance
 
+    def get_selected_model(self):
+        selected_item = self.model_dropdown.get_selected_item()
+        if selected_item:
+            return selected_item.model
+        else:
+            return Widgets.models.added.FallbackModel
+
     def try_turning_on_mic(self):
         tries = 0
         while tries < 6:
@@ -129,11 +135,11 @@ class LiveChatWindow(Adw.ApplicationWindow):
         else:
             GLib.idle_add(self.model_avatar_animation.reset)
             GLib.idle_add(self.global_footer.microphone_button.button.set_active, False)
-            if self.settings.get_value('live-chat-auto-mic').unpack():
+            if self.settings.get_value('live-chat-auto-mic').unpack() and self.get_current_instance():
                 threading.Thread(target=self.try_turning_on_mic).start()
 
     def send_message(self, mode:int=0):
-        #Mode = 0 (normal), Mode = 1 (System), Mode = 2 (Use Tools)3
+        #Mode = 0 (normal), Mode = 1 (System), Mode = 2 (Use Tools)
         buffer = self.global_footer.get_buffer()
         message = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
         if not message:
@@ -145,7 +151,7 @@ class LiveChatWindow(Adw.ApplicationWindow):
         if not current_instance:
             Widgets.dialog.show_toast(_("Please select an instance in Alpaca before chatting"), self)
             return
-        current_model = str(self.model_dropdown.get_selected_item())
+        current_model = self.get_selected_model().get_name()
         if not current_model:
             Widgets.dialog.show_toast(_("Please select add a model for this instance in Alpaca before chatting"), self)
             return
@@ -204,7 +210,7 @@ class LiveChatWindow(Adw.ApplicationWindow):
             if mode == 0:
                 threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
             else:
-                threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.tool_listbox), True)).start()
+                threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.get_application().main_alpaca_window.tool_listbox), True)).start()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -233,8 +239,8 @@ class LiveChatWindow(Adw.ApplicationWindow):
 
         # Prepare Model Selector
         list(self.model_dropdown)[0].add_css_class('flat')
-        self.model_dropdown.set_model(Gio.ListStore.new(LiveChatModelRow))
-        self.model_dropdown.set_expression(Gtk.PropertyExpression.new(LiveChatModelRow, None, "name"))
+        self.model_dropdown.set_model(Gio.ListStore.new(Widgets.models.added.AddedModelRow))
+        self.model_dropdown.set_expression(Gtk.PropertyExpression.new(Widgets.models.added.AddedModelRow, None, "name"))
         factory = Gtk.SignalListItemFactory()
         factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
         factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))

@@ -172,7 +172,7 @@ class Popover(Gtk.Popover):
                     child=button_content,
                     css_classes=['small', 'flat', 'button_no_bold']
                 )
-                if metadata.get('icon') == 'user-trash-symbolic':
+                if metadata.get('icon') in ('user-trash-symbolic', 'media-playback-stop-symbolic'):
                     button.add_css_class('error')
                 button_container.append(button)
                 button.connect('clicked', lambda button, callback=metadata.get('callback'): self.item_selected(callback))

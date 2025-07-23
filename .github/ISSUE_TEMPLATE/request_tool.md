@@ -11,22 +11,24 @@ assignees: ''
 
 A clear and concise description of what you want the tool to do.
 
-**Requeriments**
+**Requirements**
 
 Check with an X what the tool might need to use
 
-[ ] Code Runner (Internal Terminal)
-[ ] Network Access
-[ ] API Key
-[ ] Message History (Access to Chat)
-[ ] Image Manipulation
-[ ] Python Library (Mention it below)
+- [ ] Code Runner (Internal Terminal)
+- [ ] Network Access
+- [ ] API Key
+- [ ] Message History (Access to Chat)
+- [ ] Image Manipulation
+- [ ] Python Library (Mention it below)
 
 **Write the Expected Result**
 
 What the AI model might expect when the tool is executed correctly
 
-<!--Example: This tool requests the current time-->
+<!--
+Example: This tool requests the current time
 ```
 The current time is 20:00
 ```
+-->

@@ -21,39 +21,23 @@
 Handles the main window
 """
 
-import json
-import threading
-import os
-import re
-import gettext
-import shutil
-import logging
-import time
-import requests
-import sys
-import icu
-import tempfile
-import importlib.util
+import json, threading, os, re, gettext, shutil, logging, time, requests, sys, tempfile, importlib.util
 import numpy as np
 
 from datetime import datetime
 
 import gi
-
 gi.require_version('Spelling', '1')
-
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, Spelling
 
 from .sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from . import widgets as Widgets
-from .constants import SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES, STT_MODELS, data_dir, source_dir, cache_dir
-
+from .constants import data_dir, source_dir, cache_dir
 
 logger = logging.getLogger(__name__)
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/window.ui')
 class AlpacaWindow(Adw.ApplicationWindow):
-
     __gtype_name__ = 'AlpacaWindow'
 
     localedir = os.path.join(source_dir, 'locale')
@@ -62,11 +46,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     gettext.textdomain('com.jeffser.Alpaca')
     _ = gettext.gettext
 
-    #Variables
-    attachments = {}
-
     #Elements
-    zoom_spin = Gtk.Template.Child()
     local_model_stack = Gtk.Template.Child()
     available_model_stack = Gtk.Template.Child()
     model_manager_stack = Gtk.Template.Child()
@@ -74,13 +54,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     main_navigation_view = Gtk.Template.Child()
     local_model_flowbox = Gtk.Template.Child()
     available_model_flowbox = Gtk.Template.Child()
-    split_view_overlay_model_manager = Gtk.Template.Child()
     split_view_overlay = Gtk.Template.Child()
-    selected_chat_row : Gtk.ListBoxRow = None
-    preferences_dialog = Gtk.Template.Child()
-    welcome_carousel = Gtk.Template.Child()
-    welcome_previous_button = Gtk.Template.Child()
-    welcome_next_button = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     chat_bin = Gtk.Template.Child()
     chat_list_stack = Gtk.Template.Child()
@@ -93,51 +67,23 @@ class AlpacaWindow(Adw.ApplicationWindow):
     title_stack = Gtk.Template.Child()
     title_no_model_button = Gtk.Template.Child()
     model_filter_button = Gtk.Template.Child()
-    background_switch = Gtk.Template.Child()
 
     file_filter_db = Gtk.Template.Child()
-    file_filter_gguf = Gtk.Template.Child()
 
     chat_list_container = Gtk.Template.Child()
     chat_list_box = Gtk.Template.Child()
-    model_manager = None
-
-    powersaver_warning_switch = Gtk.Template.Child()
-    mic_group = Gtk.Template.Child()
-    tts_group = Gtk.Template.Child()
-    mic_auto_send_switch = Gtk.Template.Child()
-    mic_language_combo = Gtk.Template.Child()
-    mic_model_combo = Gtk.Template.Child()
-    tts_voice_combo = Gtk.Template.Child()
-    tts_auto_mode_combo = Gtk.Template.Child()
 
     banner = Gtk.Template.Child()
 
-    model_creator_stack = Gtk.Template.Child()
-    model_creator_base = Gtk.Template.Child()
-    model_creator_profile_picture = Gtk.Template.Child()
-    model_creator_name = Gtk.Template.Child()
-    model_creator_tag = Gtk.Template.Child()
-    model_creator_context = Gtk.Template.Child()
-    model_creator_imagination = Gtk.Template.Child()
-    model_creator_focus = Gtk.Template.Child()
     model_dropdown = Gtk.Template.Child()
-    notice_dialog = Gtk.Template.Child()
 
     instance_preferences_page = Gtk.Template.Child()
     instance_listbox = Gtk.Template.Child()
     available_models_stack_page = Gtk.Template.Child()
-    model_creator_stack_page = Gtk.Template.Child()
-    install_ollama_button = Gtk.Template.Child()
     tool_listbox = Gtk.Template.Child()
     model_manager_bottom_view_switcher = Gtk.Template.Child()
     model_manager_top_view_switcher = Gtk.Template.Child()
     last_selected_instance_row = None
-
-
-    @Gtk.Template.Callback()
-    def closing_notice(self, dialog):
-        self.settings.set_string('last-notice-seen', dialog.get_name())
 
     @Gtk.Template.Callback()
     def add_instance(self, button):
@@ -158,7 +104,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 Widgets.instances.InstancePreferencesGroup(instance).present(self)
 
         options = {}
-        for ins_type in Widgets.instances.ready_instances:
+        instance_list = Widgets.instances.ollama_instances.BaseInstance.__subclasses__()
+        if os.getenv('ALPACA_OLLAMA_ONLY', '0') != '1':
+            instance_list += Widgets.instances.openai_instances.BaseInstance.__subclasses__()
+        for ins_type in instance_list:
             options[ins_type.instance_type_display] = ins_type
 
         Widgets.dialog.simple_dropdown(
@@ -177,217 +126,25 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             self.last_selected_instance_row = row
 
-            GLib.idle_add(Widgets.model_manager.update_local_model_list)
-            GLib.idle_add(Widgets.model_manager.update_available_model_list)
+            Widgets.models.update_added_model_list(self)
+            Widgets.models.update_available_model_list(self)
 
             if row:
                 self.settings.set_string('selected-instance', row.instance.instance_id)
+                self.get_application().lookup_action('model_creator_existing').set_enabled('ollama' in row.instance.instance_type)
+                self.get_application().lookup_action('model_creator_gguf').set_enabled('ollama' in row.instance.instance_type)
 
-            GLib.idle_add(self.chat_list_box.get_selected_row().update_profile_pictures)
+
+            self.chat_list_box.get_selected_row().update_profile_pictures()
         if listbox.get_sensitive():
-            threading.Thread(target=change_instance).start()
-
-
-    @Gtk.Template.Callback()
-    def model_creator_accept(self, button):
-        profile_picture = self.model_creator_profile_picture.get_subtitle()
-        model_name = '{}:{}'.format(self.model_creator_name.get_text(), self.model_creator_tag.get_text() if self.model_creator_tag.get_text() else 'latest').replace(' ', '-').lower()
-        context_buffer = self.model_creator_context.get_buffer()
-        system_message = context_buffer.get_text(context_buffer.get_start_iter(), context_buffer.get_end_iter(), False).replace('"', '\\"')
-        top_k = self.model_creator_imagination.get_value()
-        top_p = self.model_creator_focus.get_value() / 100
-
-        found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.model.get_name() == model_name]
-        if not found_models:
-            if profile_picture:
-                SQL.insert_or_update_model_picture(model_name, Widgets.attachments.extract_image(profile_picture, 480))
-
-            data_json = {
-                'model': model_name,
-                'system': system_message,
-                'parameters': {
-                    'top_k': top_k,
-                    'top_p': top_p
-                },
-                'stream': True
-            }
-
-            if self.model_creator_base.get_subtitle():
-                gguf_path = self.model_creator_base.get_subtitle()
-                Widgets.model_manager.create_model(data_json, gguf_path)
-            else:
-                pretty_name = self.model_creator_base.get_selected_item().get_string()
-                found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.name == pretty_name]
-                if found_models:
-                    data_json['from'] = found_models[0].get_name()
-                    Widgets.model_manager.create_model(data_json)
-
-    @Gtk.Template.Callback()
-    def model_creator_cancel(self, button):
-        self.model_creator_stack.set_visible_child_name('introduction')
-
-    @Gtk.Template.Callback()
-    def model_creator_load_profile_picture(self, button):
-        file_filter = Gtk.FileFilter()
-        file_filter.add_pixbuf_formats()
-        Widgets.dialog.simple_file(
-            parent = button.get_root(),
-            file_filters = [file_filter],
-            callback = lambda file: self.model_creator_profile_picture.set_subtitle(file.get_path())
-        )
-
-    @Gtk.Template.Callback()
-    def model_creator_base_changed(self, comborow, params):
-        pretty_name = comborow.get_selected_item().get_string()
-        if pretty_name != 'GGUF' and not comborow.get_subtitle():
-            GLib.idle_add(self.model_creator_tag.set_text, 'custom')
-
-            system = None
-            modelfile = None
-
-            found_models = [row.model for row in list(self.model_dropdown.get_model()) if row.name == pretty_name]
-            if found_models:
-                GLib.idle_add(self.model_creator_name.set_text, found_models[0].get_name().split(':')[0])
-                system = found_models[0].data.get('system')
-                modelfile = found_models[0].data.get('modelfile')
-
-            if system:
-                context_buffer = self.model_creator_context.get_buffer()
-                GLib.idle_add(context_buffer.delete, context_buffer.get_start_iter(), context_buffer.get_end_iter())
-                GLib.idle_add(context_buffer.insert_at_cursor, system, len(system))
-
-            if modelfile:
-                for line in modelfile.splitlines():
-                    if line.startswith('PARAMETER top_k'):
-                        top_k = int(line.split(' ')[2])
-                        GLib.idle_add(self.model_creator_imagination.set_value, top_k)
-                    elif line.startswith('PARAMETER top_p'):
-                        top_p = int(float(line.split(' ')[2]) * 100)
-                        GLib.idle_add(self.model_creator_focus.set_value, top_p)
-
-    @Gtk.Template.Callback()
-    def model_creator_gguf(self, button):
-        def result(file):
-            try:
-                file_path = file.get_path()
-            except Exception as e:
-                return
-            context_buffer = self.model_creator_context.get_buffer()
-            context_buffer.delete(context_buffer.get_start_iter(), context_buffer.get_end_iter())
-            self.model_creator_profile_picture.set_subtitle('')
-            string_list = Gtk.StringList()
-            string_list.append('GGUF')
-            self.model_creator_base.set_model(string_list)
-            self.model_creator_base.set_subtitle(file_path)
-            self.model_creator_stack.set_visible_child_name('content')
-
-        Widgets.dialog.simple_file(
-            parent = button.get_root(),
-            file_filters = [self.file_filter_gguf],
-            callback = result
-        )
-
-    @Gtk.Template.Callback()
-    def model_creator_existing(self, button, selected_model:str=None):
-        GLib.idle_add(self.model_manager_stack.set_visible_child_name, 'model_creator')
-        context_buffer = self.model_creator_context.get_buffer()
-        context_buffer.delete(context_buffer.get_start_iter(), context_buffer.get_end_iter())
-        GLib.idle_add(self.model_creator_profile_picture.set_subtitle, '')
-        GLib.idle_add(self.model_creator_base.set_subtitle, '')
-        factory = Gtk.SignalListItemFactory()
-        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
-        factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
-        GLib.idle_add(self.model_creator_base.set_factory, factory)
-        string_list = Gtk.StringList()
-        if selected_model:
-            GLib.idle_add(string_list.append, prettify_model_name(selected_model))
-        else:
-            [GLib.idle_add(string_list.append, value.model_title) for value in Widgets.model_manager.get_local_models().values()]
-        GLib.idle_add(self.model_creator_base.set_model, string_list)
-        GLib.idle_add(self.model_creator_stack.set_visible_child_name, 'content')
+            GLib.idle_add(threading.Thread(target=change_instance).start)
 
     @Gtk.Template.Callback()
     def model_manager_stack_changed(self, viewstack, params):
         self.local_model_flowbox.unselect_all()
         self.available_model_flowbox.unselect_all()
-        self.model_creator_stack.set_visible_child_name('introduction')
         self.model_search_button.set_sensitive(viewstack.get_visible_child_name() not in ('model_creator', 'instances'))
         self.model_search_button.set_active(self.model_search_button.get_active() and viewstack.get_visible_child_name() not in ('model_creator', 'instances'))
-
-    @Gtk.Template.Callback()
-    def model_manager_child_activated(self, flowbox, selected_child):
-        self.split_view_overlay_model_manager.set_show_sidebar(selected_child)
-        self.set_focus(selected_child.get_child().get_default_widget())
-
-    @Gtk.Template.Callback()
-    def model_manager_child_selected(self, flowbox):
-        def set_default_sidebar():
-            time.sleep(1)
-            if not self.split_view_overlay_model_manager.get_show_sidebar():
-                tbv = Adw.ToolbarView()
-                tbv.add_top_bar(
-                    Adw.HeaderBar(
-                        show_back_button=False,
-                        show_title=False
-                    )
-                )
-                tbv.set_content(Adw.StatusPage(icon_name='brain-augemnted-symbolic'))
-                GLib.idle_add(self.split_view_overlay_model_manager.set_sidebar, tbv)
-
-        selected_children = flowbox.get_selected_children()
-        if len(selected_children) > 0:
-            self.split_view_overlay_model_manager.set_show_sidebar(True)
-            model = selected_children[0].get_child()
-            buttons, content = model.get_page()
-
-            tbv = Adw.ToolbarView()
-            hb = Adw.HeaderBar(
-                show_back_button=False,
-                show_title=False
-            )
-            tbv.add_top_bar(hb)
-            for btn in buttons:
-                hb.pack_start(btn)
-            tbv.set_content(Gtk.ScrolledWindow(
-                vexpand=True
-            ))
-            tbv.get_content().set_child(content)
-            self.split_view_overlay_model_manager.set_sidebar(tbv)
-        else:
-            self.split_view_overlay_model_manager.set_show_sidebar(False)
-            threading.Thread(target=set_default_sidebar).start()
-
-    @Gtk.Template.Callback()
-    def welcome_carousel_page_changed(self, carousel, index):
-        logger.debug("Showing welcome carousel")
-        if index == 0:
-            self.welcome_previous_button.set_sensitive(False)
-        else:
-            self.welcome_previous_button.set_sensitive(True)
-        if index == carousel.get_n_pages()-1:
-            self.welcome_next_button.set_label(_("Close"))
-            self.welcome_next_button.set_tooltip_text(_("Close"))
-        else:
-            self.welcome_next_button.set_label(_("Next"))
-            self.welcome_next_button.set_tooltip_text(_("Next"))
-
-    @Gtk.Template.Callback()
-    def welcome_previous_button_activate(self, button):
-        self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()-1), True)
-
-    @Gtk.Template.Callback()
-    def welcome_next_button_activate(self, button):
-        if button.get_label() == "Next":
-            self.welcome_carousel.scroll_to(self.welcome_carousel.get_nth_page(self.welcome_carousel.get_position()+1), True)
-        else:
-            self.settings.set_boolean('skip-welcome', True)
-            self.main_navigation_view.replace_with_tags(['chat'])
-
-    @Gtk.Template.Callback()
-    def zoom_changed(self, spinner):
-        settings = Gtk.Settings.get_default()
-        settings.reset_property('gtk-xft-dpi')
-        settings.set_property('gtk-xft-dpi',  settings.get_property('gtk-xft-dpi') + (int(spinner.get_value()) - 100) * 400)
 
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
@@ -407,7 +164,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             logger.info("Hiding app...")
         else:
             logger.info("Closing app...")
-            if any([chat_row.chat.busy for chat_row in list(self.chat_list_box)]) or any([el for el in list(self.local_model_flowbox) if isinstance(el.get_child(), Widgets.model_manager.PullingModel)]):
+            if any([chat_row.chat.busy for chat_row in list(self.chat_list_box)]) or any([el for el in list(self.local_model_flowbox) if isinstance(el.get_child(), Widgets.models.pulling.PullingModelButton)]):
                 options = {
                     _('Cancel'): {'default': True},
                     _('Hide'): {'callback': switch_to_hide},
@@ -422,13 +179,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 return True
             else:
                 close()
-
-    @Gtk.Template.Callback()
-    def link_button_handler(self, button):
-        try:
-            Gio.AppInfo.launch_default_for_uri(button.get_name())
-        except Exception as e:
-            logger.error(e)
 
     @Gtk.Template.Callback()
     def chat_search_changed(self, entry):
@@ -462,9 +212,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.local_model_stack.set_visible_child_name('no-models')
 
         results_available = False
-        if len(Widgets.model_manager.available_models) > 0:
+        if len(Widgets.models.common.available_models_data) > 0:
             self.available_models_stack_page.set_visible(True)
-            self.model_creator_stack_page.set_visible(True)
             for model in list(self.available_model_flowbox):
                 string_search = re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE)
                 category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.model_searchbar.get_search_mode()
@@ -475,7 +224,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.available_model_stack.set_visible_child_name('content' if results_available else 'no-results')
         else:
             self.available_models_stack_page.set_visible(False)
-            self.model_creator_stack_page.set_visible(False)
 
     @Gtk.Template.Callback()
     def message_search_changed(self, entry, current_chat=None):
@@ -525,7 +273,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.get_application().lookup_action('instance_manager').activate()
             return
 
-        current_model = Widgets.model_manager.get_selected_model().get_name()
+        current_model = self.get_selected_model().get_name()
         if mode == 2 and len(Widgets.tools.get_enabled_tools(self.tool_listbox)) == 0:
             Widgets.dialog.show_toast(_("No tools enabled."), current_chat.get_root(), 'app.tool_manager', _('Open Tool Manager'))
             return
@@ -640,27 +388,29 @@ class AlpacaWindow(Adw.ApplicationWindow):
             # Select Model
             self.auto_select_model()
 
-    def check_alphanumeric(self, editable, text, length, position, allowed_chars):
-        if length == 1:
-            new_text = ''.join([char for char in text if char.isalnum() or char in allowed_chars])
-            if new_text != text:
-                editable.stop_emission_by_name("insert-text")
+    def get_selected_model(self):
+        selected_item = self.model_dropdown.get_selected_item()
+        if selected_item:
+            return selected_item.model
+        else:
+            return Widgets.models.added.FallbackModel
 
     def add_chat(self, chat_name:str, chat_id:str, chat_type:str, mode:int) -> Widgets.chat.Chat or None: #mode = 0: append, mode = 1: prepend
         chat_name = chat_name.strip()
         if chat_name and mode in (0, 1):
             chat_name = generate_numbered_name(chat_name, [row.get_name() for row in list(self.chat_list_box)])
             chat = None
-            if chat_type == 'chat':
-                chat = Widgets.chat.Chat(
-                    chat_id=chat_id,
-                    name=chat_name
-                )
-            elif chat_type == 'notebook':
+            if chat_type == 'notebook':
                 chat = Widgets.chat.Notebook(
                     chat_id=chat_id,
                     name=chat_name
                 )
+            else:
+                chat = Widgets.chat.Chat(
+                    chat_id=chat_id,
+                    name=chat_name
+                )
+
             if chat:
                 if mode == 0:
                     self.chat_list_box.append(chat.row)
@@ -695,9 +445,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     chat_type=row[2],
                     mode=0
                 )
-                if row[0] == selected_chat:
+                if row[0] == selected_chat and len(list(self.chat_list_box)) > 0:
                     self.chat_list_box.select_row(list(self.chat_list_box)[-1])
-        else:
+
+        if len(list(self.chat_list_box)) == 0:
             self.chat_list_box.select_row(self.new_chat().row)
             self.chat_list_stack.set_visible_child_name('content')
 
@@ -718,31 +469,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.get_application().args.new_chat:
             self.new_chat(self.get_application().args.new_chat)
 
-        self.mic_group.set_visible(importlib.util.find_spec('whisper'))
-        self.tts_group.set_visible(importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'))
-
-        string_list = Gtk.StringList()
-        for model, size in STT_MODELS.items():
-            string_list.append('{} ({})'.format(model.title(), size))
-        self.mic_model_combo.set_model(string_list)
-        self.settings.bind('stt-model', self.mic_model_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
-
-        string_list = Gtk.StringList()
-        for lan in SPEACH_RECOGNITION_LANGUAGES:
-            string_list.append('{} ({})'.format(icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title(), lan))
-        self.mic_language_combo.set_model(string_list)
-        self.settings.bind('stt-language', self.mic_language_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
-
-        self.settings.bind('stt-auto-send', self.mic_auto_send_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
-
-        string_list = Gtk.StringList()
-        for name in TTS_VOICES:
-            string_list.append(name)
-        self.tts_voice_combo.set_model(string_list)
-        self.settings.bind('tts-model', self.tts_voice_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
-
-        self.settings.bind('tts-auto-dictate', self.tts_auto_mode_combo, 'active', Gio.SettingsBindFlags.DEFAULT)
-
         # Ollama is available but there are no instances added
         if not any(i.get("type") == "ollama:managed" for i in SQL.get_instances()) and shutil.which("ollama"):
             SQL.insert_or_update_instance(
@@ -759,20 +485,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             instance_listbox=self.instance_listbox,
             selected_instance_id=self.settings.get_value('selected-instance').unpack()
         )
-
-    def open_button_menu(self, gesture, x, y, menu):
-        button = gesture.get_widget()
-        popover = Gtk.PopoverMenu(
-            menu_model=menu,
-            has_arrow=False,
-            halign=1
-        )
-        position = Gdk.Rectangle()
-        position.x = x
-        position.y = y
-        popover.set_parent(button.get_child())
-        popover.set_pointing_to(position)
-        popover.popup()
 
     def on_chat_imported(self, file):
         if file:
@@ -817,15 +529,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        Widgets.model_manager.window = self
 
         self.model_searchbar.connect_entry(self.searchentry_models)
         self.model_searchbar.connect('notify::search-mode-enabled', lambda *_: self.model_search_changed(self.searchentry_models))
 
         # Prepare model selector
         list(self.model_dropdown)[0].add_css_class('flat')
-        self.model_dropdown.set_model(Gio.ListStore.new(Widgets.model_manager.LocalModelRow))
-        self.model_dropdown.set_expression(Gtk.PropertyExpression.new(Widgets.model_manager.LocalModelRow, None, "name"))
+        self.model_dropdown.set_model(Gio.ListStore.new(Widgets.models.added.AddedModelRow))
+        self.model_dropdown.set_expression(Gtk.PropertyExpression.new(Widgets.models.added.AddedModelRow, None, "name"))
         factory = Gtk.SignalListItemFactory()
         factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
         factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
@@ -842,8 +553,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for el in ("default-width", "default-height", "maximized", "hide-on-close"):
             self.settings.bind(el, self, el, Gio.SettingsBindFlags.DEFAULT)
 
-        self.settings.bind('powersaver-warning', self.powersaver_warning_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
-        self.settings.bind('zoom', self.zoom_spin, 'value', Gio.SettingsBindFlags.DEFAULT)
 
         universal_actions = {
             'new_chat': [lambda *_: self.chat_list_box.select_row(self.new_chat().row), ['<primary>n']],
@@ -861,14 +570,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'toggle_search': [lambda *_: self.toggle_searchbar(), ['<primary>f']],
             'model_manager' : [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'model_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'model_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>m']],
             'instance_manager' : [lambda *i: self.show_instance_manager() if self.main_navigation_view.get_visible_page().get_tag() != 'instance_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>i']],
-            'download_model_from_name' : [lambda *i: Widgets.dialog.simple_entry(
+            'add_model_by_name' : [lambda *i: Widgets.dialog.simple_entry(
                 parent=self,
-                heading=_('Download Model?'),
+                heading=_('Pull Model'),
                 body=_('Please enter the model name following this template: name:tag'),
-                callback=lambda name: threading.Thread(target=Widgets.model_manager.pull_model_confirm, args=(name,)).start(),
+                callback=lambda name: threading.Thread(target=Widgets.models.available.pull_model_confirm, args=(name, self.get_current_instance(), self)).start(),
                 entries={'placeholder': 'deepseek-r1:7b'}
             )],
-            'reload_added_models': [lambda *_: GLib.idle_add(Widgets.model_manager.update_local_model_list)],
+            'reload_added_models': [lambda *_: GLib.idle_add(Widgets.models.update_added_model_list, self)],
             'delete_all_chats': [lambda *i: self.get_visible_dialog().close() and Widgets.dialog.simple(
                 parent=self,
                 heading=_('Delete All Chats?'),
@@ -879,13 +588,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
             )],
             'tool_manager': [lambda *i: GLib.idle_add(self.main_navigation_view.push_by_tag, 'tool_manager') if self.main_navigation_view.get_visible_page().get_tag() != 'tool_manager' else GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat'), ['<primary>t']],
             'start_quick_ask': [lambda *_: self.get_application().create_quick_ask().present(), ['<primary><alt>a']],
-            'start_live_chat': [lambda *_: self.start_live_chat(), ['<primary><alt>l']]
+            'start_live_chat': [lambda *_: self.start_live_chat(), ['<primary><alt>l']],
+            'model_creator_existing': [lambda *_: Widgets.models.common.prompt_existing(self)],
+            'model_creator_gguf': [lambda *_: Widgets.models.common.prompt_gguf(self)],
+            'preferences': [lambda *_: Widgets.preferences.PreferencesDialog().present(self), ['<primary>comma']]
         }
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
-
-        self.model_creator_name.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
-        self.model_creator_tag.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
 
         def verify_powersaver_mode():
             self.banner.set_revealed(
@@ -896,16 +605,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda *_: verify_powersaver_mode())
         self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
 
-
-        if shutil.which('ollama'):
-            text = _('Already Installed!')
-            self.install_ollama_button.set_label(text)
-            self.install_ollama_button.set_tooltip_text(text)
-            self.install_ollama_button.set_sensitive(False)
-
         self.prepare_alpaca()
         if self.settings.get_value('skip-welcome').unpack():
-            if not self.settings.get_value('last-notice-seen').unpack() == self.notice_dialog.get_name():
-                self.notice_dialog.present(self)
+            notice_dialog = Widgets.welcome.Notice()
+            if not self.settings.get_value('last-notice-seen').unpack() == notice_dialog.get_name():
+                notice_dialog.present(self)
         else:
-            self.main_navigation_view.replace_with_tags(['welcome'])
+            self.main_navigation_view.replace([Widgets.welcome.Welcome()])
+

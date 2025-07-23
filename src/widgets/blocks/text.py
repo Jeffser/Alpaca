@@ -4,7 +4,7 @@ Text blocks with PangoMarkup styling
 """
 
 import gi
-from gi.repository import GLib, Gtk
+from gi.repository import GLib, Gtk, Gdk
 
 import re, unicodedata
 
@@ -166,6 +166,14 @@ class EditingText(Gtk.Box):
             wrap_mode=2
         )
         self.append(self.textview)
+
+        enter_key_controller = Gtk.EventControllerKey.new()
+        enter_key_controller.connect("key-pressed", self.enter_key_handler)
+        self.textview.add_controller(enter_key_controller)
+
+    def enter_key_handler(self, controller, keyval, keycode, state):
+        if keyval==Gdk.KEY_Return and state & Gdk.ModifierType.CONTROL_MASK:
+            self.save_edit()
 
     def set_content(self, content:str):
         self.textview.get_buffer().set_text(content, len(content.encode('utf8')))

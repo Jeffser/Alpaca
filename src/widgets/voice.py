@@ -7,8 +7,8 @@ Manages TTS and STT code
 import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
 from ..sql_manager import Instance as SQL
-from ..constants import data_dir, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
-from . import dialog, model_manager, blocks
+from ..constants import data_dir, cache_dir, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
+from . import dialog, models, blocks
 
 import os, threading, importlib.util, re, unicodedata, gc, queue, time, logging
 import numpy as np
@@ -30,7 +30,7 @@ tts_engine_language = None
 def preload_heavy_libraries():
     global library_waiting_queue, libraries
     for library_name in libraries:
-        if importlib.util.find_spec(library_name):
+        if libraries.get(library_name) is None and importlib.util.find_spec(library_name):
             libraries[library_name] = importlib.import_module(library_name)
     for widget in library_waiting_queue:
         widget.set_sensitive(True)
@@ -88,12 +88,12 @@ class DictateToggleButton(Gtk.Stack):
             voice = TTS_VOICES.get(list(TTS_VOICES.keys())[self.message_element.get_root().settings.get_value('tts-model').unpack()])
 
         # Show Voice in Model Manager if Needed
-        if model_manager.tts_model_path:
-            if not os.path.islink(os.path.join(model_manager.tts_model_path, '{}.pt'.format(voice))) and self.message_element.get_root().get_name() == 'AlpacaWindow':
+        if os.path.join(cache_dir, 'huggingface', 'hub'):
+            if not os.path.islink(os.path.join(cache_dir, 'huggingface', 'hub', '{}.pt'.format(voice))):
                 pretty_name = [k for k, v in TTS_VOICES.items() if v == voice]
                 if len(pretty_name) > 0:
                     pretty_name = pretty_name[0]
-                    self.message_element.get_root().local_model_flowbox.append(model_manager.TextToSpeechModel(pretty_name))
+                    models.common.prepend_added_model(self.message_element.get_root(), models.speech.TextToSpeechModelButton(pretty_name))
 
         # Generate TTS_ENGINE if needed
         if not tts_engine or tts_engine_language != voice[0]:
@@ -107,6 +107,7 @@ class DictateToggleButton(Gtk.Stack):
         GLib.idle_add(self.message_element.remove_css_class, 'tts_message_loading')
         GLib.idle_add(self.message_element.add_css_class, 'tts_message')
         GLib.idle_add(self.set_visible_child_name, 'button')
+        generator = None
         while queue_index + 1 < len(self.message_element.get_content_for_dictation()) or any([isinstance(b, blocks.text.GeneratingText) for b in list(self.message_element.block_container)]):
             text = self.message_element.get_content_for_dictation()
             end_index = max(text.rfind("\n"), text.rfind("."), text.rfind("?"), text.rfind("!"), text.rfind(":"))
@@ -194,8 +195,8 @@ class MicrophoneButton(Gtk.Stack):
                 self.mic_timeout = 0
 
         def run_mic(pulling_model:Gtk.Widget=None):
-            GLib.idle_add(button.get_parent().set_visible_child_name, "loading")
-            GLib.idle_add(button.add_css_class, 'accent')
+            button.get_parent().set_visible_child_name("loading")
+            button.add_css_class('accent')
 
             samplerate=16000
             model = None
@@ -206,7 +207,7 @@ class MicrophoneButton(Gtk.Stack):
                 if not loaded_whisper_models.get(model_name):
                     loaded_whisper_models[model_name] = libraries.get('whisper').load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
                 if pulling_model:
-                    GLib.idle_add(pulling_model.update_progressbar, {'status': 'success'})
+                    threading.Thread(target=pulling_model.update_progressbar, args=({'status': 'success'},)).start()
             except Exception as e:
                 dialog.simple_error(
                     parent = button.get_root(),
@@ -215,7 +216,8 @@ class MicrophoneButton(Gtk.Stack):
                     error_log = e
                 )
                 logger.error(e)
-            GLib.idle_add(button.get_parent().set_visible_child_name, "button")
+                return
+            button.get_parent().set_visible_child_name("button")
 
             if loaded_whisper_models.get(model_name):
                 stream = libraries.get('pyaudio').PyAudio().open(
@@ -260,9 +262,13 @@ class MicrophoneButton(Gtk.Stack):
                 button.set_active(False)
 
         def prepare_download():
-            if button.get_root().get_name() == 'AlpacaWindow':
-                pulling_model = model_manager.PullingModel(model_name, model_manager.add_speech_to_text_model, False)
-                button.get_root().local_model_flowbox.prepend(pulling_model)
+            pulling_model = models.pulling.PullingModelButton(
+                model_name,
+                lambda model_name, window=button.get_root(): models.common.prepend_added_model(window, models.speech.SpeechToTextModelButton(model_name)),
+                None,
+                False
+            )
+            models.common.prepend_added_model(button.get_root(), pulling_model)
             threading.Thread(target=run_mic, args=(pulling_model,)).start()
 
         if button.get_active():
@@ -282,3 +288,123 @@ class MicrophoneButton(Gtk.Stack):
             button.remove_css_class('accent')
             button.set_sensitive(False)
             GLib.timeout_add(2000, lambda button: button.set_sensitive(True) and False, button)
+
+class TranscriptionDialog(Adw.Dialog):
+    __gtype_name__ = 'AlpacaTranscriptionDialog'
+
+    def __init__(self, attachment, file_path):
+        self.attachment = attachment
+        self.file_path = file_path
+        self.pulling_model = None
+
+        container = Gtk.Box(
+            orientation=1,
+            spacing=30
+        )
+        container.append(Adw.Spinner())
+
+        cancel_button = Gtk.Button(
+            tooltip_text=_('Cancel'),
+            child=Adw.ButtonContent(
+                icon_name='media-playback-stop-symbolic',
+                label=_('Cancel')
+            ),
+            halign=3,
+            css_classes=['error']
+        )
+        cancel_button.connect('clicked', self.cancel)
+        container.append(cancel_button)
+
+        super().__init__(
+            child=Adw.StatusPage(
+                title=_('Transcribing Audio'),
+                description=self.attachment.file_name,
+                child=container
+            ),
+            content_width=300,
+            can_close=False
+        )
+
+    def cancel(self, button=None):
+        self.attachment.delete()
+        self.force_close()
+
+    def prepare_transcription(self, pulling_model:Gtk.Widget=None):
+        self.pulling_model = pulling_model
+        threading.Thread(target=self.run_transcription).start()
+
+    def run_transcription(self):
+        model_name = list(STT_MODELS)[self.attachment.get_root().settings.get_value('stt-model').unpack()]
+        try:
+            if not loaded_whisper_models.get(model_name):
+                loaded_whisper_models[model_name] = libraries.get('whisper').load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
+            if self.pulling_model:
+                threading.Thread(target=self.pulling_model.update_progressbar, args=({'status': 'success'},)).start()
+        except Exception as e:
+            dialog.simple_error(
+                parent = self.get_root(),
+                title = _('Transcription Error'),
+                body = _('An error occurred while pulling speech recognition model'),
+                error_log = e
+            )
+            logger.error(e)
+            self.cancel()
+            return
+        try:
+            result = loaded_whisper_models.get(model_name).transcribe(self.file_path, word_timestamps=False)
+            segments = result['segments']
+            paragraphs = []
+            current_para = []
+
+            for i, seg in enumerate(segments):
+                current_para.append(seg['text'].strip())
+                if i + 1 < len(segments):
+                    if segments[i+1]['start'] - seg['end'] > 1.2:
+                        paragraphs.append(' '.join(current_para))
+                        current_para = []
+            if current_para:
+                paragraphs.append(' '.join(current_para))
+
+            if self.attachment.get_root():
+                self.attachment.file_content = '\n\n'.join(paragraphs)
+            if self.get_root():
+                self.force_close()
+        except Exception as e:
+            dialog.simple_error(
+                parent = self.get_root(),
+                title = _('Transcription Error'),
+                body = _('An error occurred while transcribing audio'),
+                error_log = e
+            )
+            logger.error(e)
+            self.cancel()
+            return
+
+def transcribe_audio_file(attachment, file_path:str):
+    def show_dialog(pulling_model=None):
+        dialog = TranscriptionDialog(attachment, file_path)
+        dialog.present(attachment.get_root())
+        dialog.prepare_transcription(pulling_model)
+
+    def prepare_download():
+        pulling_model = models.pulling.PullingModelButton(
+            model_name,
+            lambda model_name, window=attachment.get_root(): models.common.prepend_added_model(window, models.speech.SpeechToTextModelButton(model_name)),
+            None,
+            False
+        )
+        models.common.prepend_added_model(attachment.get_root(), pulling_model)
+        show_dialog(pulling_model)
+
+    model_name = list(STT_MODELS)[attachment.get_root().settings.get_value('stt-model').unpack()]
+    if os.path.isfile(os.path.join(data_dir, 'whisper', '{}.pt'.format(model_name))):
+        show_dialog()
+    else:
+        dialog.simple(
+            parent = attachment.get_root(),
+            heading = _("Download Speech Recognition Model"),
+            body = _("To use speech recognition you'll need to download a special model ({})").format(STT_MODELS.get(model_name, '~151mb')),
+            callback = prepare_download,
+            button_name = _("Download Model")
+        )
+

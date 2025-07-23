@@ -1,7 +1,8 @@
 # attachments.py
 
 import gi
-from gi.repository import Adw, Gtk, Gio, Gdk, GdkPixbuf, GLib
+gi.require_version('Xdp', '1.0')
+from gi.repository import Adw, Gtk, Gio, Gdk, GdkPixbuf, GLib, Xdp
 
 import odf.opendocument as odfopen
 import odf.table as odftable
@@ -13,7 +14,7 @@ from PIL import Image
 from ..constants import cache_dir
 import requests, json, base64, tempfile, shutil, logging, threading, os, re
 
-from . import blocks, dialog, model_manager, camera
+from . import blocks, dialog, camera, voice
 from ..sql_manager import Instance as SQL
 
 logger = logging.getLogger(__name__)
@@ -94,20 +95,30 @@ class AttachmentDialog(Adw.Dialog):
 
         super().__init__(
             title=self.attachment.file_name,
-            child = Adw.ToolbarView(),
-            content_height=420
+            child=Adw.ToolbarView(),
+            follows_content_size=True
         )
         header = Adw.HeaderBar()
 
-        delete_button = Gtk.Button(
-            css_classes=['error'],
-            icon_name='user-trash-symbolic',
-            tooltip_text=_('Remove Attachment'),
+        if self.attachment.file_type != 'model_context':
+            delete_button = Gtk.Button(
+                css_classes=['error'],
+                icon_name='user-trash-symbolic',
+                tooltip_text=_('Remove Attachment'),
+                vexpand=False,
+                valign=3
+            )
+            delete_button.connect('clicked', lambda *_: self.attachment.prompt_delete())
+            header.pack_start(delete_button)
+
+        download_button = Gtk.Button(
+            icon_name='folder-download-symbolic',
+            tooltip_text=_('Download Attachment'),
             vexpand=False,
             valign=3
         )
-        delete_button.connect('clicked', lambda *_: self.prompt_delete())
-        header.pack_start(delete_button)
+        download_button.connect('clicked', lambda *_: self.attachment.prompt_download())
+        header.pack_start(download_button)
 
         if self.attachment.file_type == 'notebook':
             try:
@@ -182,17 +193,6 @@ class AttachmentDialog(Adw.Dialog):
 
             self.get_child().get_content().set_child(container)
 
-    def prompt_delete(self):
-        self.close()
-        dialog.simple(
-            parent = self.get_root(),
-            heading = _('Delete Attachment?'),
-            body = _("Are you sure you want to delete '{}'?").format(self.attachment.file_name),
-            callback = lambda: self.attachment.delete(),
-            button_name = _('Delete'),
-            button_appearance = 'destructive'
-        )
-
     def replace_notebook_content(self, notebook):
         notebook.set_notebook(self.attachment.file_content)
         self.close()
@@ -221,6 +221,7 @@ class Attachment(Gtk.Button):
                     "tool": "processor-symbolic",
                     "link": "globe-symbolic",
                     "image": "image-x-generic-symbolic",
+                    "audio": "music-note-single-symbolic",
                     "notebook": "open-book-symbolic"
                 }.get(self.file_type, "document-text-symbolic")
             )
@@ -231,15 +232,88 @@ class Attachment(Gtk.Button):
         else:
             self.connect("clicked", lambda button: AttachmentDialog(self).present(self.get_root()))
 
+        self.gesture_click = Gtk.GestureClick(button=3)
+        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
+        self.add_controller(self.gesture_click)
+        self.gesture_long_press = Gtk.GestureLongPress()
+        self.gesture_long_press.connect("pressed", self.show_popup)
+        self.add_controller(self.gesture_long_press)
+
     def get_content(self) -> str:
         return self.file_content
 
     def delete(self):
+        dialog = self.get_root().get_visible_dialog()
+        if dialog and isinstance(dialog, AttachmentDialog):
+            dialog.close()
         if len(list(self.get_parent())) == 1:
             self.get_parent().get_parent().get_parent().set_visible(False)
         self.get_parent().remove(self)
         if self.get_name() != "-1":
             SQL.delete_attachment(self)
+
+    def prompt_delete(self):
+        dialog.simple(
+            parent = self.get_root(),
+            heading = _('Delete Attachment?'),
+            body = _("Are you sure you want to delete '{}'?").format(self.file_name),
+            callback = lambda: self.delete(),
+            button_name = _('Delete'),
+            button_appearance = 'destructive'
+        )
+
+    def on_download(self, dialog, result, user_data):
+        try:
+            file = dialog.save_finish(result)
+            path = file.get_path()
+            if path:
+                if self.file_type == 'image':
+                    with open(path, "wb") as f:
+                        f.write(base64.b64decode(self.file_content))
+                else:
+                    with open(path, "w") as f:
+                        f.write(self.file_content)
+                Gio.AppInfo.launch_default_for_uri('file://{}'.format(path))
+        except GLib.Error as e:
+            logger.error(e)
+
+    def prompt_download(self):
+        name = os.path.splitext(self.file_name)[0]
+        if self.file_type == 'image':
+            name += '.png'
+        else:
+            name += '.md'
+
+        name = re.sub(r'[<>:"/\\|?*\x00-\x1F]', '_', name)
+
+        dialog = Gtk.FileDialog(
+            title=_("Save Attachment"),
+            initial_name=name
+        )
+        dialog.save(self.get_root(), None, self.on_download, None)
+
+    def show_popup(self, gesture, x, y):
+        rect = Gdk.Rectangle()
+        rect.x, rect.y, = x, y
+        actions = [
+            [
+                {
+                    'label': _('Download Attachment'),
+                    'callback': self.prompt_download,
+                    'icon': 'folder-download-symbolic'
+                }
+            ]
+        ]
+        if self.file_type != 'model_context':
+            actions[0].append({
+                'label': _('Remove Attachment'),
+                'callback': self.prompt_delete,
+                'icon': 'user-trash-symbolic'
+            })
+        popup = dialog.Popover(actions)
+        popup.set_parent(self)
+        popup.set_pointing_to(rect)
+        popup.popup()
 
 class ImageAttachment(Gtk.Button):
     __gtype_name__ = 'AlpacaImageAttachment'
@@ -291,15 +365,78 @@ class ImageAttachment(Gtk.Button):
                 name=file_id
             )
 
+        self.gesture_click = Gtk.GestureClick(button=3)
+        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
+        self.add_controller(self.gesture_click)
+        self.gesture_long_press = Gtk.GestureLongPress()
+        self.gesture_long_press.connect("pressed", self.show_popup)
+        self.add_controller(self.gesture_long_press)
+
     def get_content(self) -> str:
         return self.file_content
 
     def delete(self):
+        dialog = self.get_root().get_visible_dialog()
+        if dialog and isinstance(dialog, AttachmentDialog):
+            dialog.close()
         if len(list(self.get_parent())) == 1:
             self.get_parent().get_parent().get_parent().set_visible(False)
         self.get_parent().remove(self)
         if self.get_name() != "-1":
             SQL.delete_attachment(self)
+
+    def prompt_delete(self):
+        dialog.simple(
+            parent = self.get_root(),
+            heading = _('Delete Image?'),
+            body = _("Are you sure you want to delete '{}'?").format(self.file_name),
+            callback = lambda: self.delete(),
+            button_name = _('Delete'),
+            button_appearance = 'destructive'
+        )
+
+    def on_download(self, dialog, result, user_data):
+        try:
+            file = dialog.save_finish(result)
+            path = file.get_path()
+            if path:
+                with open(path, "wb") as f:
+                    f.write(base64.b64decode(self.file_content))
+                Gio.AppInfo.launch_default_for_uri('file://{}'.format(path))
+        except GLib.Error as e:
+            logger.error(e)
+
+    def prompt_download(self):
+        name = os.path.splitext(self.file_name)[0] + '.png'
+        name = re.sub(r'[<>:"/\\|?*\x00-\x1F]', '_', name)
+
+        dialog = Gtk.FileDialog(
+            title=_("Save Image"),
+            initial_name=name
+        )
+        dialog.save(self.get_root(), None, self.on_download, None)
+
+    def show_popup(self, gesture, x, y):
+        rect = Gdk.Rectangle()
+        rect.x, rect.y, = x, y
+        actions = [
+            [
+                {
+                    'label': _('Download Attachment'),
+                    'callback': self.prompt_download,
+                    'icon': 'folder-download-symbolic'
+                },
+                {
+                    'label': _('Remove Attachment'),
+                    'callback': self.prompt_delete,
+                    'icon': 'user-trash-symbolic'
+                }
+            ]
+        ]
+        popup = dialog.Popover(actions)
+        popup.set_parent(self)
+        popup.set_pointing_to(rect)
+        popup.popup()
 
 class AttachmentContainer(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentContainer'
@@ -396,7 +533,7 @@ class GlobalAttachmentContainer(AttachmentContainer):
         )
         self.add_attachment(attachment)
 
-    def on_attachment(self, file:Gio.File):
+    def on_attachment(self, file:Gio.File, remove_original:bool=False):
         if not file:
             return
         file_types = {
@@ -410,7 +547,9 @@ class GlobalAttachmentContainer(AttachmentContainer):
             "odt": ["odt"],
             "docx": ["docx"],
             "pptx": ["pptx"],
-            "xlsx": ["xlsx"]
+            "xlsx": ["xlsx"],
+            'audio': ["wav", "mp3", "flac", "ogg", "oga", "m4a", "acc", "aiff", "aif", "opus", "webm",
+                    "mp4", "mkv", "mov", "avi"]
         }
         if file.query_info("standard::content-type", 0, None).get_content_type() == 'text/plain':
             extension = 'txt'
@@ -423,34 +562,50 @@ class GlobalAttachmentContainer(AttachmentContainer):
             file_type = found_types[0]
         if file_type == 'image':
             content = extract_image(file.get_path(), 256)
+        elif file_type == 'audio':
+            content = 'AUDIO NOT TRANSCRIBED'
         else:
             content = extract_content(file_type, file.get_path())
-        attachment = Attachment(
-            file_id="-1",
-            file_name=os.path.basename(file.get_path()),
-            file_type=file_type,
-            file_content=content
-        )
-        self.add_attachment(attachment)
+        if content and (file_type != 'audio' or voice.libraries.get('whisper')):
+            file_name = os.path.basename(file.get_path())
+            if file_type != 'code':
+                file_name = os.path.splitext(file_name)[0]
+            attachment = Attachment(
+                file_id="-1",
+                file_name=file_name,
+                file_type=file_type,
+                file_content=content
+            )
+            self.add_attachment(attachment)
+            if file_type == 'audio':
+                threading.Thread(target=voice.transcribe_audio_file, args=(attachment, file.get_path())).start()
 
-    def attachment_request(self):
+    def attachment_request(self, block_images:bool=False):
         ff = Gtk.FileFilter()
         ff.set_name(_('Any compatible Alpaca attachment'))
         file_filters = [ff]
-        mimes = (
+        mimes = [
             'text/plain',
             'application/pdf',
             'application/vnd.oasis.opendocument.text',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'application/vnd.openxmlformats-officedocument.presentationml.presentation',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        )
+        ]
+        if voice.libraries.get('whisper'):
+            audio_mimes = ('wav', 'x-wav', 'mpeg', 'flac', 'x-flac', 'ogg', 'mp4', 'x-m4a', 'aac', 'aiff', 'x-aiff', 'opus', 'webm')
+            for m in audio_mimes:
+                mimes.append('audio/{}'.format(m))
+            video_mimes = ('mp4', 'x-matroska', 'quicktime', 'x-msvideo', 'webm')
+            for m in video_mimes:
+                mimes.append('video/{}'.format(m))
+
         for mime in mimes:
             ff = Gtk.FileFilter()
             ff.add_mime_type(mime)
             file_filters[0].add_mime_type(mime)
             file_filters.append(ff)
-        if model_manager.get_selected_model().get_vision():
+        if self.get_root().get_selected_model().get_vision() and not block_images:
             file_filters[0].add_pixbuf_formats()
             file_filter = Gtk.FileFilter()
             file_filter.add_pixbuf_formats()
@@ -462,29 +617,19 @@ class GlobalAttachmentContainer(AttachmentContainer):
         )
 
     def request_screenshot(self):
-        if model_manager.get_selected_model().get_vision():
-            bus = SessionBus()
-            portal = bus.get("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop")
-            subscription = None
+        if self.get_root().get_selected_model().get_vision():
+            def on_response(portal, res, user_data):
+                filename = portal.take_screenshot_finish(res)
+                if filename:
+                    self.on_attachment(Gio.File.new_for_uri(filename))
 
-            def on_response(sender, obj, iface, signal, *params):
-                response = params[0]
-                if response[0] == 0:
-                    uri = response[1].get("uri")
-                    self.on_attachment(Gio.File.new_for_uri(uri))
-                else:
-                    logger.error(f"Screenshot request failed with response: {response}\n{sender}\n{obj}\n{iface}\n{signal}")
-                    dialog.show_toast(_("Attachment failed, screenshot might be too big"), self)
-                if subscription:
-                    subscription.disconnect()
-
-            subscription = bus.subscribe(
-                iface="org.freedesktop.portal.Request",
-                signal="Response",
-                signal_fired=on_response
+            Xdp.Portal().take_screenshot(
+                None,
+                Xdp.ScreenshotFlags.INTERACTIVE,
+                None,
+                on_response,
+                None
             )
-
-            portal.Screenshot("", {"interactive": Variant('b', True)})
         else:
             dialog.show_toast(_("Image recognition is only available on specific models"), self.get_root())
 
@@ -540,7 +685,7 @@ class GlobalAttachmentButton(Gtk.Button):
                 }
             ]
         ]
-        if model_manager.get_selected_model().get_vision():
+        if self.get_root().get_selected_model().get_vision():
             actions[0].append(
                 {
                     'label': _('Attach Screenshot'),

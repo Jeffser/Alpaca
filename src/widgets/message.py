@@ -7,7 +7,7 @@ import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GtkSource, Spelling
 import os, datetime, threading, sys, base64, logging, re, tempfile
 from ..sql_manager import prettify_model_name, generate_uuid, Instance as SQL
-from . import model_manager, attachments, blocks, dialog, voice
+from . import attachments, blocks, dialog, voice
 
 logger = logging.getLogger(__name__)
 
@@ -98,7 +98,7 @@ class OptionPopup(Gtk.Popover):
 
     def regenerate_message(self):
         chat = self.message_element.chat
-        model = model_manager.get_selected_model().get_name()
+        model = self.get_root().get_selected_model().get_name()
         for att in list(self.message_element.image_attachment_container.container):
             SQL.delete_attachment(att)
             att.get_parent().remove(att)
@@ -211,13 +211,13 @@ class BlockContainer(Gtk.Box):
         )
         self.generating_block = None
 
-    def get_generating_block(self) -> blocks.Text:
+    def get_generating_block(self) -> blocks.GeneratingText:
         """
         Gets the generating text block, creates it if it does not exist
         """
         if not self.generating_block:
             self.generating_block = blocks.GeneratingText()
-            GLib.idle_add(self.append, self.generating_block)
+            self.append(self.generating_block)
             GLib.idle_add(self.message.popup.change_status, False)
         return self.generating_block
 
@@ -535,7 +535,7 @@ class GlobalMessageTextView(GtkSource.View):
         try:
             texture = clipboard.read_texture_finish(result)
             if texture:
-                if model_manager.get_selected_model().get_vision():
+                if self.get_root().get_selected_model().get_vision():
                     pixbuf = Gdk.pixbuf_get_from_texture(texture)
                     tdir = tempfile.TemporaryDirectory()
                     pixbuf.savev(os.path.join(tdir.name, 'image.png'), 'png', [], [])
@@ -558,7 +558,7 @@ class GlobalMessageTextView(GtkSource.View):
             mode = 0
             if state & Gdk.ModifierType.CONTROL_MASK: # Ctrl, send system message
                 mode = 1
-            elif state & Gdk.ModifierType.ALT_MASK: # Alt, send tool message
+            elif state & Gdk.ModifierType.ALT_MASK or self.get_root().settings.get_value('prefer-tools').unpack(): # Alt, send tool message
                 mode = 2
             self.get_root().send_message(mode)
             return True
@@ -590,13 +590,19 @@ class GlobalActionStack(Gtk.Stack):
 
         stop_button.connect('clicked', lambda button: self.get_root().chat_list_box.get_selected_row().chat.stop_message())
 
-        send_button.connect('clicked', lambda button: self.get_root().send_message(0))
+        send_button.connect('clicked', lambda button: self.use_default_mode())
         gesture_click = Gtk.GestureClick(button=3)
         gesture_click.connect("released", lambda gesture, _n_press, x, y: self.show_popup(gesture, x, y))
         send_button.add_controller(gesture_click)
         gesture_long_press = Gtk.GestureLongPress()
         gesture_long_press.connect("pressed", self.show_popup)
         send_button.add_controller(gesture_long_press)
+
+    def use_default_mode(self):
+        if self.get_root().settings.get_value('prefer-tools').unpack():
+            self.get_root().send_message(2)
+        else:
+            self.get_root().send_message(0)
 
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()

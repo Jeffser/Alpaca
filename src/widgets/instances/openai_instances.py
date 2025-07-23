@@ -7,6 +7,7 @@ from pydantic import BaseModel
 
 from .. import dialog, tools
 from ...sql_manager import generate_uuid, Instance as SQL
+from ...constants import MAX_TOKENS_TITLE_GENERATION, TITLE_GENERATION_PROMPT_OPENAI
 
 logger = logging.getLogger(__name__)
 
@@ -14,9 +15,9 @@ logger = logging.getLogger(__name__)
 class BaseInstance:
     instance_id = None
     description = None
-    row = None
-    local_models = None
-    properties = {
+    limitations = ()
+
+    default_properties = {
         'name': _('Instances'),
         'api': '',
         'max_tokens': 2048,
@@ -28,14 +29,25 @@ class BaseInstance:
 
     def __init__(self, instance_id:str, properties:dict):
         self.instance_id = instance_id
-        for key in self.properties:
-            self.properties[key] = properties.get(key, self.properties.get(key))
+        self.available_models = None
+        self.properties = {}
+        for key in self.default_properties:
+            self.properties[key] = properties.get(key, self.default_properties.get(key))
+        if 'no-seed' in self.limitations and 'seed' in self.properties:
+            del self.properties['seed']
         self.properties['url'] = self.instance_url
 
         self.client = openai.OpenAI(
             base_url=self.properties.get('url').strip(),
             api_key=self.properties.get('api') if self.properties.get('api') else 'NO_KEY'
         )
+
+    def set_row(self, row):
+        self.row = row
+
+    def get_row(self):
+        if hasattr(self, 'row'):
+            return self.row
 
     def stop(self):
         pass
@@ -104,6 +116,7 @@ class BaseInstance:
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         bot_message.update_message({'add_css': 'dim-label'})
+        bot_message.block_container.get_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
@@ -169,6 +182,8 @@ class BaseInstance:
     def generate_response(self, bot_message, chat, messages:list, model:str, tools_used:list):
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
+        GLib.idle_add(bot_message.update_message, {'clear': True})
+        bot_message.block_container.get_generating_block()
 
         if 'no-system-messages' in self.limitations:
             for i in range(len(messages)):
@@ -199,35 +214,36 @@ class BaseInstance:
         if self.properties.get('seed', 0) != 0:
             params["seed"] = self.properties.get('seed')
 
-        try:
-            bot_message.update_message({"clear": True})
-            response = self.client.chat.completions.create(**params)
-            for chunk in response:
-                if chunk.choices and chunk.choices[0].delta:
-                    delta = chunk.choices[0].delta
-                    if delta.content:
-                        bot_message.update_message({"content": delta.content})
-                if not chat.busy:
-                    break
-        except Exception as e:
-            dialog.simple_error(
-                parent = bot_message.get_root(),
-                title = _('Instance Error'),
-                body = _('Message generation failed'),
-                error_log = e
-            )
-            logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+        if chat.busy:
+            try:
+                bot_message.update_message({"clear": True})
+                response = self.client.chat.completions.create(**params)
+                for chunk in response:
+                    if chunk.choices and chunk.choices[0].delta:
+                        delta = chunk.choices[0].delta
+                        if delta.content:
+                            bot_message.update_message({"content": delta.content})
+                    if not chat.busy:
+                        break
+            except Exception as e:
+                dialog.simple_error(
+                    parent = bot_message.get_root(),
+                    title = _('Instance Error'),
+                    body = _('Message generation failed'),
+                    error_log = e
+                )
+                logger.error(e)
+                if self.get_row():
+                    self.get_row().get_parent().unselect_all()
         bot_message.update_message({"done": True})
 
     def generate_chat_title(self, chat, prompt:str):
-        class ChatTitle(BaseModel): #Pydantic
-            title:str
-            emoji:str = ""
+        class ChatTitle(BaseModel): # Pydantic
+            title: str
+            emoji: str = ""
 
         messages = [
-            {"role": "user" if 'no-system-messages' in self.limitations else "system", "content": "You are an assistant that generates short chat titles based on the first message from a user. If you want to, you can add a single emoji."},
+            {"role": "user" if 'no-system-messages' in self.limitations else "system", "content": TITLE_GENERATION_PROMPT_OPENAI},
             {"role": "user", "content": "Generate a title for this prompt:\n{}".format(prompt)}
         ]
 
@@ -235,9 +251,10 @@ class BaseInstance:
             "temperature": 0.2,
             "model": self.get_title_model(),
             "messages": messages,
-            "max_tokens": 50
+            "max_tokens": MAX_TOKENS_TITLE_GENERATION
         }
         new_chat_title = chat.get_name()
+
         try:
             completion = self.client.beta.chat.completions.parse(**params, response_format=ChatTitle)
             response = completion.choices[0].message
@@ -250,7 +267,12 @@ class BaseInstance:
                 new_chat_title = str(response.choices[0].message.content)
             except Exception as e:
                 logger.error(e)
+        
         new_chat_title = re.sub(r'<think>.*?</think>', '', new_chat_title).strip()
+
+        if len(new_chat_title) > 30:
+            new_chat_title = new_chat_title[:30].strip() + '...'
+
         chat.row.rename(new_chat_title)
 
     def get_default_model(self):
@@ -267,25 +289,39 @@ class BaseInstance:
                 self.properties['title_model'] = local_models[0].get('name')
             return self.properties.get('title_model')
 
-    def get_local_models(self) -> list:
+    def get_available_models(self) -> dict:
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                self.local_models = [{'name': m.id} for m in self.client.models.list() if 'whisper' not in m.id.lower()]
-            return self.local_models
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
+                for m in self.client.models.list():
+                    if all(s not in m.id.lower() for s in ['embedding', 'davinci', 'dall', 'tts', 'whisper', 'image']):
+                        self.available_models[m.id] = {}
+            return self.available_models
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
                 error_log = e
             )
             logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+            if self.get_row():
+                self.get_row().get_parent().unselect_all()
             return []
 
-    def get_available_models(self) -> dict:
-        return {}
+    def pull_model(self, model_name:str, callback:callable):
+        SQL.append_online_instance_model_list(self.instance_id, model_name)
+        callback({'status': 'success'})
+
+    def get_local_models(self) -> list:
+        local_models = []
+        for model in SQL.get_online_instance_model_list(self.instance_id):
+            local_models.append({'name': model})
+        return local_models
+
+    def delete_model(self, model_name:str) -> bool:
+        SQL.remove_online_instance_model_list(self.instance_id, model_name)
+        return True
 
     def get_model_info(self, model_name:str) -> dict:
         return {}
@@ -306,26 +342,26 @@ class Gemini(BaseInstance):
         if 'seed' in self.properties:
             del self.properties['seed']
 
-    def get_local_models(self) -> list:
+    def get_available_models(self) -> dict:
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                self.local_models = []
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
                 response = requests.get('https://generativelanguage.googleapis.com/v1beta/models?key={}'.format(self.properties.get('api')))
                 for model in response.json().get('models', []):
                     if "generateContent" in model.get("supportedGenerationMethods", []) and 'deprecated' not in model.get('description', ''):
                         model['name'] = model.get('name').removeprefix('models/')
-                        self.local_models.append(model)
-            return self.local_models
+                        self.available_models[model.get('name')] = model
+            return self.available_models
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
                 error_log = e
             )
             logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+            if self.get_row():
+                self.get_row().get_parent().unselect_all()
         return []
 
     def get_model_info(self, model_name:str) -> dict:
@@ -343,10 +379,10 @@ class Together(BaseInstance):
     instance_type_display = 'Together AI'
     instance_url = 'https://api.together.xyz/v1/'
 
-    def get_local_models(self) -> list:
+    def get_available_models(self) -> dict:
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                self.local_models = []
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
                 response = requests.get(
                     'https://api.together.xyz/v1/models',
                     headers={
@@ -356,21 +392,21 @@ class Together(BaseInstance):
                 )
                 for model in response.json():
                     if model.get('id') and model.get('type') == 'chat':
-                        self.local_models.append({'name': model.get('id'), 'display_name': model.get('display_name')})
-            return self.local_models
+                        self.available_models[model.get('id')] = {'display_name': model.get('display_name')}
+            return self.available_models
 
 
             return models
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
                 error_log = e
             )
             logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+            if self.get_row():
+                self.get_row().get_parent().unselect_all()
 
 class Venice(BaseInstance):
     instance_type = 'venice'
@@ -411,26 +447,26 @@ class OpenRouter(BaseInstance):
     instance_type_display = 'OpenRouter AI'
     instance_url = 'https://openrouter.ai/api/v1/'
 
-    def get_local_models(self) -> list:
+    def get_available_models(self) -> list:
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                self.local_models = []
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
                 response = requests.get('https://openrouter.ai/api/v1/models')
                 for model in response.json().get('data', []):
                     if model.get('id'):
-                        self.local_models.append({'name': model.get('id'), 'display_name': model.get('name')})
+                        self.available_models[model.get('id')] = {'display_name': model.get('name')}
 
-            return self.local_models
+            return self.available_models
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve models'),
                 error_log = e
             )
             logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+            if self.get_row():
+                self.get_row().get_parent().unselect_all()
             return []
 
 class Qwen(BaseInstance):
@@ -445,10 +481,10 @@ class Fireworks(BaseInstance):
     instance_url = 'https://api.fireworks.ai/inference/v1/'
     description = _('Fireworks AI inference platform')
 
-    def get_local_models(self) -> list:
+    def get_available_models(self) -> list:
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                self.local_models = []
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
                 response = requests.get(
                     'https://api.fireworks.ai/inference/v1/models',
                     headers={
@@ -457,19 +493,19 @@ class Fireworks(BaseInstance):
                 )
                 for model in response.json().get('data', []):
                     if model.get('id') and 'chat' in model.get('capabilities', []):
-                        self.local_models.append({'name': model.get('id'), 'display_name': model.get('name')})
+                        self.available_models[model.get('id')] = {'display_name': model.get('name')}
 
-            return self.local_models
+            return self.available_models
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve models'),
                 error_log = e
             )
             logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+            if self.get_row():
+                self.get_row().get_parent().unselect_all()
             return []
 
 class LambdaLabs(BaseInstance):
@@ -478,10 +514,10 @@ class LambdaLabs(BaseInstance):
     instance_url = 'https://api.lambdalabs.com/v1/'
     description = _('Lambda Labs cloud inference API')
 
-    def get_local_models(self) -> list:
+    def get_available_models(self) -> list:
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                self.local_models = []
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = []
                 response = requests.get(
                     'https://api.lambdalabs.com/v1/models',
                     headers={
@@ -490,19 +526,19 @@ class LambdaLabs(BaseInstance):
                 )
                 for model in response.json().get('data', []):
                     if model.get('id'):
-                        self.local_models.append({'name': model.get('id'), 'display_name': model.get('name')})
+                        self.available_models[model.get('id')] = {'display_name': model.get('name')}
 
-            return self.local_models
+            return self.available_models
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve models'),
                 error_log = e
             )
             logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+            if self.get_row():
+                self.get_row().get_parent().unselect_all()
             return []
 
 class Cerebras(BaseInstance):
@@ -516,6 +552,13 @@ class Klusterai(BaseInstance):
     instance_type_display = 'Kluster AI'
     instance_url = 'https://api.kluster.ai/v1/'
     description = _('Kluster AI cloud inference API')
+
+class Kimi(BaseInstance):
+    instance_type = 'kimi'
+    instance_type_display = 'Kimi (Moonshot AI)'
+    instance_url = 'https://api.moonshot.ai/v1/'
+    description = _('Kimi large language models by Moonshot AI')
+    limitations = ('no-seed',)
 
 class Mistral(BaseInstance):
     instance_type = 'mistral'
@@ -536,6 +579,12 @@ class NovitaAI(BaseInstance):
     instance_url = 'https://api.novita.ai/v3/openai/'
     description = _('Novita AI cloud inference API')
     limitations = ('no-seed',)
+
+class DeepInfra(BaseInstance):
+    instance_type = 'deepinfra'
+    instance_type_display = 'DeepInfra'
+    instance_url = 'https://api.deepinfra.com/v1/openai'
+    description = _('DeepInfra cloud inference API')
 
 class GenericOpenAI(BaseInstance):
     instance_type = 'openai:generic'

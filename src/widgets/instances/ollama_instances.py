@@ -5,18 +5,22 @@ from gi.repository import Adw, Gtk, GLib
 import requests, json, logging, os, shutil, subprocess, threading, re, signal, pwd, getpass
 from .. import dialog, tools
 from ...ollama_models import OLLAMA_MODELS
-from ...constants import data_dir, cache_dir
+from ...constants import data_dir, cache_dir, TITLE_GENERATION_PROMPT_OLLAMA, MAX_TOKENS_TITLE_GENERATION
 from ...sql_manager import generate_uuid, Instance as SQL
 
 logger = logging.getLogger(__name__)
 
 # Base instance, don't use directly
 class BaseInstance:
-    instance_id = None
     description = None
-    row = None
     process = None
-    local_models = None
+
+    def set_row(self, row):
+        self.row = row
+
+    def get_row(self):
+        if hasattr(self, 'row'):
+            return self.row
 
     def prepare_chat(self, bot_message):
         bot_message.chat.busy = True
@@ -82,6 +86,7 @@ class BaseInstance:
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         bot_message.update_message({'add_css': 'dim-label'})
+        bot_message.block_container.get_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(
@@ -163,6 +168,7 @@ class BaseInstance:
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         GLib.idle_add(bot_message.update_message, {'clear': True})
+        bot_message.block_container.get_generating_block()
 
         if self.properties.get('share_name', 0) > 0:
             user_display_name = None
@@ -192,7 +198,7 @@ class BaseInstance:
             "messages": messages,
             "temperature": self.properties.get('temperature', 0.7),
             "stream": True,
-            "think": self.properties.get('think', False),
+            "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', []),
             "options": {
                 "num_ctx": 16384
             }
@@ -201,37 +207,37 @@ class BaseInstance:
         if self.properties.get('seed', 0) != 0:
             params["seed"] = self.properties.get('seed')
 
-        try:
-            bot_message.update_message({"clear": True})
-            response = requests.post(
-                '{}/api/chat'.format(self.properties.get('url')),
-                headers={
-                    "Authorization": "Bearer {}".format(self.properties.get('api')),
-                    "Content-Type": "application/json"
-                },
-                data=json.dumps(params),
-                stream=True
-            )
-
-            if response.status_code == 200:
-                for line in response.iter_lines():
-                    if line:
-                        data = json.loads(line.decode('utf-8'))
-                        bot_message.update_message({"content": data.get('message', {}).get('content')})
-                    if not chat.busy:
-                        break
-            else:
-                logger.error(response.content)
-        except Exception as e:
-            dialog.simple_error(
-                parent = bot_message.get_root(),
-                title = _('Instance Error'),
-                body = _('Message generation failed'),
-                error_log = e
-            )
-            logger.error(e)
-            if self.row:
-                self.row.get_parent().unselect_all()
+        if chat.busy:
+            try:
+                response = requests.post(
+                    '{}/api/chat'.format(self.properties.get('url')),
+                    headers={
+                        "Authorization": "Bearer {}".format(self.properties.get('api')),
+                        "Content-Type": "application/json"
+                    },
+                    data=json.dumps(params),
+                    stream=True
+                )
+                bot_message.update_message({"clear": True})
+                if response.status_code == 200:
+                    for line in response.iter_lines():
+                        if line:
+                            data = json.loads(line.decode('utf-8'))
+                            bot_message.update_message({"content": data.get('message', {}).get('content')})
+                        if not chat.busy:
+                            break
+                else:
+                    logger.error(response.content)
+            except Exception as e:
+                dialog.simple_error(
+                    parent = bot_message.get_root(),
+                    title = _('Instance Error'),
+                    body = _('Message generation failed'),
+                    error_log = e
+                )
+                logger.error(e)
+                if self.get_row():
+                    self.get_row().get_parent().unselect_all()
         bot_message.update_message({"done": True})
 
     def generate_chat_title(self, chat, prompt:str):
@@ -240,9 +246,9 @@ class BaseInstance:
         params = {
             "temperature": 0.2,
             "model": self.get_title_model(),
-            "max_tokens": 50,
+            "max_tokens": MAX_TOKENS_TITLE_GENERATION,
             "stream": False,
-            "prompt": "You are an assistant that generates short chat titles based on the prompt. If you want to, you can add a single emoji.\n\n{}".format(prompt),
+            "prompt": TITLE_GENERATION_PROMPT_OLLAMA.format(prompt),
             "format": {
                 "type": "object",
                 "properties": {
@@ -269,10 +275,15 @@ class BaseInstance:
                 data=json.dumps(params)
             )
             data = json.loads(response.json().get('response', '{"title": ""}'))
+            generated_title = data.get('title').replace('\n', '').strip()
+
+            if len(generated_title) > 30:
+                generated_title = generated_title[:30].strip() + '...'
+
             if data.get('emoji'):
-                chat.row.rename('{} {}'.format(data.get('emoji').replace('\n', '').strip(), data.get('title').replace('\n', '').strip()))
+                chat.row.rename('{} {}'.format(data.get('emoji').replace('\n', '').strip(), generated_title))
             else:
-                chat.row.rename(data.get('title').replace('\n', '').strip())
+                chat.row.rename(generated_title)
         except Exception as e:
             logger.error(e)
 
@@ -301,25 +312,23 @@ class BaseInstance:
         if not self.process:
             self.start()
         try:
-            if not self.local_models or len(self.local_models) == 0:
-                response = requests.get(
-                    '{}/api/tags'.format(self.properties.get('url')),
-                    headers={
-                        'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                    }
-                )
-                if response.status_code == 200:
-                    self.local_models = json.loads(response.text).get('models')
-            return self.local_models
+            response = requests.get(
+                '{}/api/tags'.format(self.properties.get('url')),
+                headers={
+                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
+                }
+            )
+            if response.status_code == 200:
+                return json.loads(response.text).get('models')
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
                 error_log = e
             )
             logger.error(e)
-            self.row.get_parent().unselect_all()
+            self.get_row().get_parent().unselect_all()
         return []
 
     def get_available_models(self) -> dict:
@@ -327,7 +336,7 @@ class BaseInstance:
             return OLLAMA_MODELS
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve available models'),
                 error_log = e
@@ -384,12 +393,12 @@ class BaseInstance:
         if not self.process:
             self.start()
         try:
-            return requests.get(
+            return requests.head(
                 '{}/api/blobs/sha256:{}'.format(self.properties.get('url'), sha256),
                 headers={
                     'Authorization': 'Bearer {}'.format(self.properties.get('api'))
                 }
-            ).status_code != 404
+            ).status_code == 200
         except Exception as e:
             return False
 
@@ -449,7 +458,8 @@ class OllamaManaged(BaseInstance):
     instance_type = 'ollama:managed'
     instance_type_display = _('Ollama (Managed)')
     description = _('Local AI instance managed directly by Alpaca')
-    properties = {
+
+    default_properties = {
         'name': _('Instance'),
         'url': 'http://0.0.0.0:11434',
         'temperature': 0.7,
@@ -472,12 +482,14 @@ class OllamaManaged(BaseInstance):
         self.process = None
         self.log_raw = ''
         self.log_summary = ('', ['dim-label'])
-        for key in self.properties:
+        self.properties = {}
+        for key in self.default_properties:
             if key == 'overrides':
-                for override in self.properties.get(key):
-                    self.properties[key][override] = properties.get(key, {}).get(override, self.properties.get(key).get(override))
+                self.properties[key] = {}
+                for override in self.default_properties.get(key):
+                    self.properties[key][override] = properties.get(key, {}).get(override, self.default_properties.get(key).get(override))
             else:
-                self.properties[key] = properties.get(key, self.properties.get(key))
+                self.properties[key] = properties.get(key, self.default_properties.get(key))
 
     def log_output(self, pipe):
         AMD_support_label = "\n<a href='https://github.com/Jeffser/Alpaca/wiki/Installing-Ollama'>{}</a>".format(_('Alpaca Support'))
@@ -487,7 +499,7 @@ class OllamaManaged(BaseInstance):
                     self.log_raw += line
                     print(line, end='')
                     if 'msg="model request too large for system"' in line:
-                        dialog.show_toast(_("Model request too large for system"), self.row.get_root())
+                        dialog.show_toast(_("Model request too large for system"), self.get_row().get_root())
                     elif 'msg="amdgpu detected, but no compatible rocm library found.' in line:
                         if bool(os.getenv("FLATPAK_ID")):
                             self.log_summary = (_("AMD GPU detected but the extension is missing, Ollama will use CPU.") + AMD_support_label, ['dim-label', 'error'])
@@ -514,6 +526,9 @@ class OllamaManaged(BaseInstance):
                 params = self.properties.get('overrides', {}).copy()
                 params["OLLAMA_HOST"] = self.properties.get('url')
                 params["OLLAMA_MODELS"] = self.properties.get('model_directory')
+                for key in list(params):
+                    if not params.get(key):
+                        del params[key]
                 self.process = subprocess.Popen(
                     ["ollama", "serve"],
                     env={**os.environ, **params},
@@ -531,21 +546,22 @@ class OllamaManaged(BaseInstance):
                 logger.info(v_str.split('\n')[1].strip('Warning: ').strip())
             except Exception as e:
                 dialog.simple_error(
-                    parent = self.row.get_root(),
+                    parent = self.get_row().get_root(),
                     title = _('Instance Error'),
                     body = _('Managed Ollama instance failed to start'),
                     error_log = e
                 )
                 logger.error(e)
-                if self.row:
-                    self.row.get_parent().unselect_all()
+                if self.get_row():
+                    self.get_row().get_parent().unselect_all()
             self.log_summary = (_("Integrated Ollama instance is running"), ['dim-label', 'success'])
 
 class Ollama(BaseInstance):
     instance_type = 'ollama'
     instance_type_display = 'Ollama'
     description = _('Local or remote AI instance not managed by Alpaca')
-    properties = {
+
+    default_properties = {
         'name': _('Instance'),
         'url': 'http://0.0.0.0:11434',
         'api': '',
@@ -559,6 +575,7 @@ class Ollama(BaseInstance):
 
     def __init__(self, instance_id:str, properties:dict):
         self.instance_id = instance_id
-        for key in self.properties:
-            self.properties[key] = properties.get(key, self.properties.get(key))
+        self.properties = {}
+        for key in self.default_properties:
+            self.properties[key] = properties.get(key, self.default_properties.get(key))
 
