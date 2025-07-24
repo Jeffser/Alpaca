@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-24 16:45-0600\n"
-"PO-Revision-Date: 2025-06-27 07:31+0530\n"
+"POT-Creation-Date: 2025-07-22 14:33-0600\n"
+"PO-Revision-Date: 2025-07-23 13:49+0530\n"
 "Last-Translator: Aryan Karamtoth <aryankmmiv@outlook.com>\n"
-"Language-Team: Telugu l10n Translation Team <ubuntu-l10n-"
-"te@lists.launchpad.net>\n"
+"Language-Team: Telugu l10n Translation Team <ubuntu-l10n-te@lists.launchpad."
+"net>\n"
 "Language: te\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Gtranslator 46.0\n"
+"X-Generator: Gtranslator 48.0\n"
 
 #: data/com.jeffser.Alpaca.desktop.in:2
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
@@ -213,6 +213,10 @@ msgstr ""
 msgid "Fixes"
 msgstr "పరిష్కారాలు"
 
+#: data/com.jeffser.Alpaca.metainfo.xml.in:97
+msgid "Fixed inconsistent message generation rendering"
+msgstr "అస్థిరమైన సందేశ జనరేషన్ రెండరింగ్ పరిష్కరించబడింది"
+
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Fixed message rendering problems"
 msgstr ""
@@ -223,54 +227,56 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:119
 msgid "Save message edit with ctrl+enter"
-msgstr ""
+msgstr "ctrl+enter తో మెసేజ్ ఎడిట్ సేవ్ చేయండి"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Fixed Live Chat and Quick Ask not working sometimes"
-msgstr ""
+msgstr "కొన్నిసార్లు పనిచేయని లైవ్ చాట్ మరియు క్విక్ ఆస్క్ పరిష్కరించబడ్డాయి"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Fixed model creation and GGUF import"
-msgstr ""
+msgstr "స్థిర మోడల్ సృష్టి మరియు GGUF దిగుమతి"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:133
 msgid "Added option to use tools by default"
-msgstr ""
+msgstr "డిఫాల్ట్‌గా సాధనాలను ఉపయోగించడానికి ఎంపిక జోడించబడింది"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:134
 msgid "Redesign model manager"
-msgstr ""
+msgstr "రీడిజైన్ మోడల్ మేనేజర్"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:135
 msgid "Added option to attach audio and video files (audio transcription)"
-msgstr ""
+msgstr "ఆడియో మరియు వీడియో ఫైళ్లను అటాచ్ చేయడానికి ఎంపిక జోడించబడింది (ఆడియో ట్రాన్స్క్రిప్షన్)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:136
 msgid "Added Spotify controller tool"
-msgstr ""
+msgstr "Spotify కంట్రోలర్ సాధనం జోడించబడింది"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:140
 msgid "Fixed thinking mode being on bugs out normal models"
-msgstr ""
+msgstr "సాధారణ మోడళ్లలో బగ్ అవుట్ అవుతున్న థింకింగ్ మోడ్ పరిష్కరించబడింది"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:149
 msgid "Fixed Alpaca crashing when chats database has incorrect metadata (type)"
-msgstr ""
+msgstr "చాట్స్ డేటాబేస్ తప్పు మెటాడేటా (రకం) కలిగి ఉన్నప్పుడు అల్పాకా క్రాష్‌ను పరిష్కరించారు."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:150
 msgid ""
 "Fixed Quick Ask and Live Chat not running when opened from terminal whilst "
 "Alpaca is running"
 msgstr ""
+"అల్పాకా నడుస్తున్నప్పుడు టెర్మినల్ నుండి తెరిచినప్పుడు క్విక్ ఆస్క్ మరియు లైవ్ చాట్ పనిచేయకపోవడం "
+"పరిష్కరించబడింది."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:151
 msgid ""
 "Fixed stop button not working when pressed before text generation beggins"
-msgstr ""
+msgstr "టెక్స్ట్ జనరేషన్ ప్రారంభం కావడానికి ముందు నొక్కినప్పుడు స్థిర స్టాప్ బటన్ పనిచేయడం లేదు."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:152
 msgid "Fixed instances sometimes not appearing"
-msgstr ""
+msgstr "కొన్నిసార్లు కనిపించని సందర్భాలు పరిష్కరించబడ్డాయి"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:161
 msgid "Live Chat (Talk to models as if you were on a call)"
@@ -3835,10 +3841,12 @@ msgstr ""
 #: src/gtk/window.ui:395
 msgid "Help us build better AI tools! Submit your ideas here."
 msgstr ""
+"మెరుగైన AI సాధనాలను రూపొందించడంలో మాకు సహాయపడండి! మీ ఆలోచనలను ఇక్కడ సమర్పించండి.మెరుగైన AI "
+"సాధనాలను రూపొందించడంలో మాకు సహాయపడండి! మీ ఆలోచనలను ఇక్కడ సమర్పించండి."
 
 #: src/gtk/window.ui:403
 msgid "Request Form"
-msgstr ""
+msgstr "అభ్యర్థన ఫారమ్"
 
 #: src/gtk/window.ui:417
 msgid "Model Manager"
@@ -3950,15 +3958,15 @@ msgstr "జోడించిన మోడల్‌లను మళ్లీ ల
 
 #: src/gtk/window.ui:720
 msgid "Add Model by Name"
-msgstr ""
+msgstr "పేరు ద్వారా మోడల్‌ని జోడించండి"
 
 #: src/gtk/window.ui:726
 msgid "Create Model from Existing"
-msgstr ""
+msgstr "ఇప్పటికే ఉన్న దాని నుండి మోడల్‌ని సృష్టించండి"
 
 #: src/gtk/window.ui:730
 msgid "Create Model from GGUF File"
-msgstr ""
+msgstr "GGUF ఫైల్ నుండి మోడల్‌ను సృష్టించండి"
 
 #: src/gtk/live_chat.ui:8
 msgid "Live chat dialog"
@@ -4004,7 +4012,7 @@ msgstr "జోడింపుని తీసివేయండి"
 #: src/widgets/attachments.py:116 src/widgets/attachments.py:301
 #: src/widgets/attachments.py:425
 msgid "Download Attachment"
-msgstr ""
+msgstr "జోడింపుని డౌన్‌లోడ్ చేయండి"
 
 #: src/widgets/attachments.py:130
 msgid "Replace Notebook Content"
@@ -4022,7 +4030,7 @@ msgstr "మీరు ఖచ్చితంగా '{}'ని తొలగిం�
 
 #: src/widgets/attachments.py:290
 msgid "Save Attachment"
-msgstr ""
+msgstr "అటాచ్‌మెంట్‌ను సేవ్ చేయండి"
 
 #: src/widgets/attachments.py:340
 msgid "Image"
@@ -4034,11 +4042,11 @@ msgstr "చిత్రం లేదు"
 
 #: src/widgets/attachments.py:391
 msgid "Delete Image?"
-msgstr ""
+msgstr "చిత్రాన్ని తొలగించాలా?"
 
 #: src/widgets/attachments.py:414
 msgid "Save Image"
-msgstr ""
+msgstr "చిత్రాన్ని సేవ్ చేయండి"
 
 #: src/widgets/attachments.py:585
 msgid "Any compatible Alpaca attachment"
@@ -4321,15 +4329,15 @@ msgstr "మోడల్‌ని డౌన్‌లోడ్ చేయండి"
 
 #: src/widgets/voice.py:320
 msgid "Transcribing Audio"
-msgstr ""
+msgstr "ఆడియో లిప్యంతరీకరణ"
 
 #: src/widgets/voice.py:346 src/widgets/voice.py:375
 msgid "Transcription Error"
-msgstr ""
+msgstr "లిప్యంతరీకరణ లోపం"
 
 #: src/widgets/voice.py:376
 msgid "An error occurred while transcribing audio"
-msgstr ""
+msgstr "ఆడియోను లిప్యంతరీకరిస్తున్నప్పుడు లోపం సంభవించింది."
 
 #: src/widgets/models/added.py:89
 msgid "Change Profile Picture"
@@ -4373,7 +4381,7 @@ msgstr "వివరణ"
 
 #: src/widgets/models/added.py:170 src/widgets/models/added.py:174
 msgid "Files"
-msgstr ""
+msgstr "ఫైళ్లు"
 
 #: src/widgets/models/added.py:193 src/widgets/models/creator.py:73
 msgid "Context"
@@ -4423,12 +4431,12 @@ msgstr "మీరు ఖచ్చితంగా '{}'ని తీసివే�
 
 #: src/widgets/models/available.py:46
 msgid "Already Added"
-msgstr ""
+msgstr "ఇప్పటికే చేర్చబడింది"
 
 #: src/widgets/models/available.py:48
 #, python-brace-format
 msgid "Pull '{}'"
-msgstr ""
+msgstr "'{}' లాగండి"
 
 #: src/widgets/models/available.py:50
 msgid "Add Model"
@@ -4436,7 +4444,7 @@ msgstr "మోడల్‌ని జోడించండి"
 
 #: src/widgets/models/available.py:111
 msgid "Add"
-msgstr ""
+msgstr "జోడించు"
 
 #: src/widgets/models/available.py:120
 msgid ""
@@ -4447,7 +4455,7 @@ msgstr ""
 
 #: src/widgets/models/available.py:253
 msgid "Pull Latest"
-msgstr ""
+msgstr "తాజాగా లాగండి"
 
 #: src/widgets/models/common.py:13
 msgid "Multilingual"
@@ -4515,7 +4523,7 @@ msgstr "పేరు"
 
 #: src/widgets/models/creator.py:67
 msgid "Add Files"
-msgstr ""
+msgstr "ఫైల్‌లను జోడించండి"
 
 #: src/widgets/models/creator.py:74
 msgid ""
@@ -4556,7 +4564,7 @@ msgstr "మోడల్‌ని సృష్టించండి"
 
 #: src/widgets/models/pulling.py:48
 msgid "Downloading..."
-msgstr ""
+msgstr "డౌన్‌లోడ్ చేస్తోంది..."
 
 #: src/widgets/models/pulling.py:69 src/widgets/models/pulling.py:71
 #: src/widgets/models/pulling.py:174
@@ -4565,7 +4573,7 @@ msgstr "డౌన్‌లోడ్ ఆపండి"
 
 #: src/widgets/models/pulling.py:132
 msgid "Dictation Model"
-msgstr ""
+msgstr "డిక్టేషన్ మోడల్"
 
 #: src/widgets/models/pulling.py:188
 msgid "Stop Download?"
@@ -4604,7 +4612,7 @@ msgstr "కోకోరో అందించిన స్థానిక టె
 
 #: src/widgets/models/speech.py:146 src/widgets/models/speech.py:289
 msgid "Delete Model"
-msgstr ""
+msgstr "మోడల్‌ను తొలగించండి"
 
 #: src/widgets/models/speech.py:187
 msgid "Local speech to text model provided by OpenAI Whisper."
@@ -4759,7 +4767,7 @@ msgstr "క్లస్టర్ AI క్లౌడ్ అనుమితి API
 
 #: src/widgets/instances/openai_instances.py:559
 msgid "Kimi large language models by Moonshot AI"
-msgstr ""
+msgstr "మూన్‌షాట్ AI ద్వారా కిమి పెద్ద భాషా నమూనాలు"
 
 #: src/widgets/instances/openai_instances.py:566
 msgid "Mistral AI large language models"
@@ -4775,7 +4783,7 @@ msgstr "నోవిటా AI క్లౌడ్ అనుమితి API"
 
 #: src/widgets/instances/openai_instances.py:586
 msgid "DeepInfra cloud inference API"
-msgstr ""
+msgstr "డీప్‌ఇన్‌ఫ్రా క్లౌడ్ ఇన్ఫెరెన్స్ API"
 
 #: src/widgets/instances/openai_instances.py:590
 msgid "OpenAI Compatible Instance"
@@ -5096,43 +5104,43 @@ msgstr "కమాండ్ ని రన్ చేసే ముందు అద�
 
 #: src/widgets/tools/tools.py:573
 msgid "Spotify Controller"
-msgstr ""
+msgstr "Spotify కంట్రోలర్"
 
 #: src/widgets/tools/tools.py:574
 msgid "Control your music's playback"
-msgstr ""
+msgstr "మీ సంగీత ప్లేబ్యాక్‌ను నియంత్రించండి"
 
 #: src/widgets/tools/tools.py:625
 msgid "Log Back In"
-msgstr ""
+msgstr "తిరిగి లాగిన్ చేయండి"
 
 #: src/widgets/tools/tools.py:629
 msgid "Not logged in"
-msgstr ""
+msgstr "లాగిన్ కాలేదు"
 
 #: src/widgets/tools/tools.py:636
 msgid "Tutorial"
-msgstr ""
+msgstr "ట్యుటోరియల్"
 
 #: src/widgets/tools/tools.py:663
 msgid "Spotify User"
-msgstr ""
+msgstr "Spotify వినియోగదారు"
 
 #: src/widgets/tools/tools.py:724
 msgid "Login Error"
-msgstr ""
+msgstr "లాగిన్ లోపం"
 
 #: src/widgets/tools/tools.py:725
 msgid "Couldn't log in to Spotify"
-msgstr ""
+msgstr "Spotifyకి లాగిన్ అవ్వలేకపోయింది"
 
 #: src/widgets/tools/tools.py:726
 msgid "Specify a Client ID and Client Secret"
-msgstr ""
+msgstr "క్లయింట్ ID మరియు క్లయింట్ రహస్యాన్ని పేర్కొనండి"
 
 #: src/widgets/tools/tools.py:775
 msgid "Album Art"
-msgstr ""
+msgstr "ఆల్బమ్ ఆర్ట్"
 
 #~ msgid "Attachment failed, screenshot might be too big"
 #~ msgstr "అటాచ్‌మెంట్ విఫలమైంది, స్క్రీన్‌షాట్ చాలా పెద్దదిగా ఉండవచ్చు"
