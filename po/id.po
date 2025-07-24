@@ -114,17 +114,17 @@ msgstr "Percakapan yang menampilkan penyorotan kode"
 msgid "A Python script running inside integrated terminal"
 msgstr "Skrip Python berjalan di dalam terminal terintegrasi"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:73
-msgid "A conversation with web search"
-msgstr ""
+#: data/com.jeffser.Alpaca.metainfo.xml.in:73  
+msgid "A conversation with web search"  
+msgstr "Percakapan dengan pencarian web"  
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:77
 msgid "Multiple models being downloaded"
 msgstr "Beberapa model sedang diunduh"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:81
-msgid "A Live Chat conversation with a character"
-msgstr ""
+#: data/com.jeffser.Alpaca.metainfo.xml.in:81  
+msgid "A Live Chat conversation with a character"  
+msgstr "Percakapan Obrolan Langsung dengan sebuah karakter"  
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 #: data/com.jeffser.Alpaca.metainfo.xml.in:117
@@ -212,9 +212,13 @@ msgstr ""
 msgid "Fixes"
 msgstr "Perbaikan"
 
+#: data/com.jeffser.Alpaca.metainfo.xml.in:97  
+msgid "Fixed inconsistent message generation rendering"  
+msgstr "Memperbaiki render pembuatan pesan yang tidak konsisten"  
+
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Fixed message rendering problems"
-msgstr ""
+msgstr "
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
 msgid "Fixed inconsistent message generation rendering"
@@ -222,224 +226,224 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:119
 msgid "Save message edit with ctrl+enter"
-msgstr ""
+msgstr "Simpan suntingan pesan dengan ctrl+enter"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Fixed Live Chat and Quick Ask not working sometimes"
-msgstr ""
+msgstr "Memperbaiki Live Chat dan Quick Ask yang kadang tidak berfungsi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Fixed model creation and GGUF import"
-msgstr ""
+msgstr "Memperbaiki pembuatan model dan impor GGUF"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:133
 msgid "Added option to use tools by default"
-msgstr ""
+msgstr "Menambahkan opsi untuk menggunakan alat secara default"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:134
 msgid "Redesign model manager"
-msgstr ""
+msgstr "Desain ulang pengelola model"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:135
 msgid "Added option to attach audio and video files (audio transcription)"
-msgstr ""
+msgstr "Menambahkan opsi untuk melampirkan file audio dan video (transkripsi audio)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:136
 msgid "Added Spotify controller tool"
-msgstr ""
+msgstr "Menambahkan alat pengontrol Spotify"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:140
 msgid "Fixed thinking mode being on bugs out normal models"
-msgstr ""
+msgstr "Memperbaiki mode berpikir yang menyebabkan bug pada model normal"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:149
 msgid "Fixed Alpaca crashing when chats database has incorrect metadata (type)"
-msgstr ""
+msgstr "Memperbaiki Alpaca yang crash ketika basis data percakapan memiliki metadata yang salah (tipe)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:150
 msgid ""
 "Fixed Quick Ask and Live Chat not running when opened from terminal whilst "
 "Alpaca is running"
-msgstr ""
+msgstr "Memperbaiki Quick Ask dan Live Chat yang tidak berjalan saat dibuka dari terminal ketika Alpaca sedang berjalan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:151
 msgid ""
 "Fixed stop button not working when pressed before text generation beggins"
-msgstr ""
+msgstr "Memperbaiki tombol berhenti yang tidak berfungsi saat ditekan sebelum proses pembuatan teks dimulai"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:152
 msgid "Fixed instances sometimes not appearing"
-msgstr ""
+msgstr "Memperbaiki instance yang terkadang tidak muncul"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:161
 msgid "Live Chat (Talk to models as if you were on a call)"
-msgstr ""
+msgstr "Obrolan Langsung (Berbicara dengan model seolah-olah sedang menelepon)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:162
 msgid "Live message rendering"
-msgstr ""
+msgstr "Perenderan pesan secara langsung"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:163
 msgid "Faster dictation"
-msgstr ""
+msgstr "Dikte yang lebih cepat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:164
 msgid "Dictation whilst message is being generated"
-msgstr ""
+msgstr "Dikte saat pesan sedang dibuat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:165
 msgid "Camera picture attachment"
-msgstr ""
+msgstr "Lampiran gambar dari kamera"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:166
 msgid "Quick Ask now supports attachments"
-msgstr ""
+msgstr "Quick Ask kini mendukung lampiran"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:167
 msgid "Separator element for message and attachment rendering"
-msgstr ""
+msgstr "Elemen pemisah untuk perenderan pesan dan lampiran"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:168
 msgid "Redesigned popups"
-msgstr ""
+msgstr "Desain ulang jendela pop-up"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:169
 msgid "Thought switch for Ollama instances"
-msgstr ""
+msgstr "Saklar pemikiran untuk instance Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:170
 msgid "Username sharing for Ollama instances"
-msgstr ""
+msgstr "Berbagi nama pengguna untuk instance Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:171
 msgid "Redesign for instance manager and tool manager"
-msgstr ""
+msgstr "Desain ulang untuk pengelola instance dan pengelola alat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:172
 msgid "Better web searching tool with options"
-msgstr ""
+msgstr "Alat pencarian web yang lebih baik dengan opsi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:176
 msgid "Fixed duplication of thought attachments"
-msgstr ""
+msgstr "Memperbaiki duplikasi lampiran pemikiran"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:177
 msgid "Fixed weird behavior with model selector"
-msgstr ""
+msgstr "Memperbaiki perilaku aneh pada pemilih model"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:178
 msgid "Ollama (Managed) instances behave better"
-msgstr ""
+msgstr "Instance Ollama (Terkelola) berperilaku lebih baik"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:179
 msgid "Better optimizations for RAM (~2GB difference)"
-msgstr ""
+msgstr "Optimasi RAM yang lebih baik (~2GB perbedaan)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:180
 msgid "Instant chat rendering"
-msgstr ""
+msgstr "Perenderan obrolan instan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:181
 msgid "Models profile pictures are now saved at a higher resolution"
-msgstr ""
+msgstr "Foto profil model kini disimpan dengan resolusi lebih tinggi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:182
 msgid "Quick Ask messages can now be sent by using the enter key"
-msgstr ""
+msgstr "Pesan Quick Ask kini dapat dikirim dengan menggunakan tombol enter"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:183
 msgid "Alpaca is less prone to crashes now"
-msgstr ""
+msgstr "Alpaca kini lebih jarang mengalami crash"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:192
 msgid "Fixed new chat not being created when the chat list is empty"
-msgstr ""
+msgstr "Memperbaiki obrolan baru yang tidak dibuat saat daftar obrolan kosong"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:201
 msgid "Chat exporting now works as expected"
-msgstr ""
+msgstr "Ekspor obrolan kini berfungsi sesuai harapan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:202
 msgid "Fixed automatic creation of Ollama instance"
-msgstr ""
+msgstr "Memperbaiki pembuatan instance Ollama otomatis"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:203
 msgid "Added Hebrew and Telugu credits"
-msgstr ""
+msgstr "Menambahkan kredit bahasa Ibrani dan Telugu"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:204
 msgid "Fixed STT model selector"
-msgstr ""
+msgstr "Memperbaiki pemilih model STT"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:213
 msgid "Multiple QuickAsk window rendering"
-msgstr ""
+msgstr "Perenderan beberapa jendela QuickAsk"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:217
 msgid "Better stability for QuickAsk"
-msgstr ""
+msgstr "Stabilitas lebih baik untuk QuickAsk"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:218
 msgid "Creating a new chat now selects it"
-msgstr ""
+msgstr "Membuat obrolan baru sekarang langsung memilihnya"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:227
 msgid "Chat Search"
-msgstr ""
+msgstr "Pencarian Obrolan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:228
 msgid "Hide \"latest\" and \"custom\" tags from model selector"
-msgstr ""
+msgstr "Sembunyikan tag \"terbaru\" dan \"kustom\" dari pemilih model"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:229
 msgid "Hide model's languages behind popup"
-msgstr ""
+msgstr "Sembunyikan bahasa model di balik pop-up"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:230
 msgid "New models listed for Ollama"
-msgstr ""
+msgstr "Model baru terdaftar untuk Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:231
 msgid "Added option to autodictate new mesages"
-msgstr ""
+msgstr "Menambahkan opsi untuk mendikte otomatis pesan baru"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:232
 msgid "Added Meta Llama API to list of instances"
-msgstr ""
+msgstr "Menambahkan Meta Llama API ke daftar instance"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:233
 msgid ""
 "Added new env variables options (\"24H hour formatting\" and \"only Ollama "
 "mode\")"
-msgstr ""
+msgstr "Menambahkan opsi variabel lingkungan baru (\"format jam 24 jam\" dan \"mode Ollama saja\")"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:234
 msgid "Made Mermaid scripts executable using Python HTTP server"
-msgstr ""
+msgstr "Membuat skrip Mermaid dapat dijalankan menggunakan server HTTP Python"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:238
 msgid "Better stability when switching instances"
-msgstr ""
+msgstr "Stabilitas lebih baik saat berganti instance"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:239
 msgid "Better performance when navigating menus"
-msgstr ""
+msgstr "Performa lebih baik saat menavigasi menu"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:240
 msgid "Fixed some dialogs not appearing in Quick Ask window"
-msgstr ""
+msgstr "Memperbaiki beberapa dialog yang tidak muncul di jendela Quick Ask"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:241
 msgid "Faster message search"
-msgstr ""
+msgstr "Pencarian pesan lebih cepat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:242
 msgid "Faster message rendering"
-msgstr ""
+msgstr "Perenderan pesan lebih cepat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:251
 msgid "Fixed whisper directory not existing causing error"
-msgstr ""
+msgstr "Memperbaiki error akibat direktori whisper yang tidak ada"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:260
 #: data/com.jeffser.Alpaca.metainfo.xml.in:1109
@@ -448,83 +452,83 @@ msgstr "Daftar model diperbarui"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:261
 msgid "Alpaca now remembers it's size"
-msgstr ""
+msgstr "Alpaca kini mengingat ukurannya"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:262
 msgid "Added reasoning category for Ollama models"
-msgstr ""
+msgstr "Menambahkan kategori penalaran untuk model Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:266
 msgid "Improvements in sample prompts"
-msgstr ""
+msgstr "Peningkatan pada contoh prompt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:275
 msgid "Fixed auto creation of Ollama (Managed) instance"
-msgstr ""
+msgstr "Memperbaiki pembuatan otomatis instance Ollama (Terkelola)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:276
 msgid "Removed legacy JSON to SQLite3 migration code"
-msgstr ""
+msgstr "Menghapus kode migrasi legacy dari JSON ke SQLite3"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:277
 msgid "Fixed power saving mode appearing whilst using online instances"
-msgstr ""
+msgstr "Memperbaiki mode hemat daya yang muncul saat menggunakan instance online"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:286
 msgid "Fixed Ollama (Manged) instance not being able to be created"
-msgstr ""
+msgstr "Memperbaiki instance Ollama (Terkelola) yang tidak bisa dibuat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:295
 msgid "Instance manager now follows default model"
-msgstr ""
+msgstr "Pengelola instance kini mengikuti model default"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:296
 msgid "English text-to-speech voices not working"
-msgstr ""
+msgstr "Suara teks ke ucapan bahasa Inggris tidak berfungsi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:297
 msgid "Instance manager sometimes not saving instances"
-msgstr ""
+msgstr "Pengelola instance terkadang tidak menyimpan instance"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:298
 msgid "Fixed Gorq and Deepseek instances not generating text"
-msgstr ""
+msgstr "Memperbaiki instance Gorq dan Deepseek yang tidak menghasilkan teks"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:307
 msgid "Smart tools for models"
-msgstr ""
+msgstr "Alat pintar untuk model"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:308
 msgid "Speech recognition (message dictation)"
-msgstr ""
+msgstr "Pengenalan suara (dikte pesan)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:309 src/widgets/models/speech.py:94
 msgid "Text to Speech"
-msgstr ""
+msgstr "Teks ke Ucapan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:310
 msgid "New Quick Chat system"
-msgstr ""
+msgstr "Sistem Quick Chat baru"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:311
 msgid "Filter Ollama models by categories"
-msgstr ""
+msgstr "Filter model Ollama berdasarkan kategori"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:312
 msgid "Better math Latex rendering in messages"
-msgstr ""
+msgstr "Perenderan Latex matematika yang lebih baik dalam pesan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:313
 msgid "Rich text rendering in attachment preview"
-msgstr ""
+msgstr "Perenderan teks kaya pada pratinjau lampiran"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:314
 msgid "Matplotlib is now included in Python code runner"
-msgstr ""
+msgstr "Matplotlib kini sudah termasuk dalam pemroses kode Python"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:315
 msgid "Styling for messages being generated"
-msgstr ""
+msgstr "Gaya untuk pesan yang sedang dibuat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:317
 #: data/com.jeffser.Alpaca.metainfo.xml.in:425
@@ -533,83 +537,83 @@ msgstr "Instance Baru"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:319
 msgid "Deepseek"
-msgstr ""
+msgstr "Deepseek"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:320
 msgid "OpenRouter AI"
-msgstr ""
+msgstr "OpenRouter AI"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:321
 msgid "Anthropic"
-msgstr ""
+msgstr "Anthropic"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:322
 msgid "Groq Cloud"
-msgstr ""
+msgstr "Groq Cloud"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:323
 msgid "Fireworks AI"
-msgstr ""
+msgstr "Fireworks AI"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:324
 msgid "Lambda Labs"
-msgstr ""
+msgstr "Lambda Labs"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:326
 msgid "New Attachment Types"
-msgstr ""
+msgstr "Tipe Lampiran Baru"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:328
 msgid "Microsoft Word Document (docx)"
-msgstr ""
+msgstr "Dokumen Microsoft Word (docx)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:329
 msgid "Microsoft PowerPoint Document (pptx)"
-msgstr ""
+msgstr "Dokumen Microsoft PowerPoint (pptx)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:330
 msgid "Microsoft Excel Document (xlsx)"
-msgstr ""
+msgstr "Dokumen Microsoft Excel (xlsx)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:332
 msgid "New Tools"
-msgstr ""
+msgstr "Alat Baru"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:334 src/widgets/tools/tools.py:491
 msgid "Run Command (Testing)"
-msgstr ""
+msgstr "Jalankan Perintah (Pengujian)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:335 src/widgets/tools/tools.py:407
 msgid "Online Search"
-msgstr ""
+msgstr "Pencarian Online"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:336 src/widgets/tools/tools.py:366
 msgid "Extract Wikipedia Article"
-msgstr ""
+msgstr "Ekstrak Artikel Wikipedia"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:337 src/widgets/tools/tools.py:250
 msgid "Get Recipe by Name"
-msgstr ""
+msgstr "Dapatkan Resep berdasarkan Nama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:338 src/widgets/tools/tools.py:310
 msgid "Get Recipes by Category"
-msgstr ""
+msgstr "Dapatkan Resep berdasarkan Kategori"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:339 src/widgets/tools/tools.py:218
 msgid "Get Current Datetime"
-msgstr ""
+msgstr "Dapatkan Tanggal dan Waktu Saat Ini"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:343
 msgid "Fixed welcome screen not showing sometimes when deleting a message"
-msgstr ""
+msgstr "Memperbaiki layar sambutan yang kadang tidak muncul saat menghapus pesan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:344
 msgid "Fixed bold text not rendering correctly in tables"
-msgstr ""
+msgstr "Memperbaiki teks tebal yang tidak tampil dengan benar di tabel"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:345
 msgid "Fixed sample prompt buttons overflowing on small screens"
-msgstr ""
+msgstr "Memperbaiki tombol contoh prompt yang meluap pada layar kecil"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:354
 msgid "Updated runtime to Gnome 48"
@@ -985,6 +989,8 @@ msgid ""
 "Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
 "--list-chats, --version"
 msgstr ""
+"Menambahkan parameter peluncuran --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
+"--list-chats, --version"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:574
 msgid "Added integration as Gnome Search Provider"
@@ -2334,35 +2340,35 @@ msgstr "Tanya cepat"
 
 #: src/live_chat.py:60 src/live_chat.py:152 src/quick_ask.py:76
 msgid "Please select an instance in Alpaca before chatting"
-msgstr ""
+msgstr "Silakan pilih sebuah instance di Alpaca sebelum mengobrol"
 
 #: src/live_chat.py:156 src/quick_ask.py:80
 msgid "Please select add a model for this instance in Alpaca before chatting"
-msgstr ""
+msgstr "Silakan tambahkan model untuk instance ini di Alpaca sebelum mengobrol"
 
 #: src/live_chat.py:159
 msgid "Selected model is not available"
-msgstr ""
+msgstr "Model yang dipilih tidak tersedia"
 
 #: src/live_chat.py:227
 msgid "No Messages"
-msgstr ""
+msgstr "Tidak ada Pesan"
 
 #: src/live_chat.py:228
 msgid "Begin by speaking to the model"
-msgstr ""
+msgstr "Mulai dengan berbicara kepada model"
 
 #: src/main.py:220
 msgid "Documentation"
-msgstr ""
+msgstr "Dokumentasi"
 
 #: src/main.py:221
 msgid "Become a Sponsor"
-msgstr ""
+msgstr "Jadilah Sponsor"
 
 #: src/main.py:222
 msgid "Discussions"
-msgstr ""
+msgstr "Diskusi"
 
 #: src/ollama_models.py:33
 msgid ""
@@ -3583,83 +3589,83 @@ msgstr ""
 msgid ""
 "Qwen3 is the latest generation of large language models in Qwen series, "
 "offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
-msgstr ""
+msgstr "Qwen3 adalah generasi terbaru dari model bahasa besar dalam seri Qwen, menawarkan rangkaian lengkap model padat dan mixture-of-experts (MoE)."
 
 #: src/ollama_models.py:4795
 msgid "Devstral: the best open source model for coding agents"
-msgstr ""
+msgstr "Devstral: model open source terbaik untuk agen pengkodean"
 
 #: src/ollama_models.py:4823
 msgid "Meta's latest collection of multimodal models."
-msgstr ""
+msgstr "Koleksi terbaru model multimodal dari Meta."
 
 #: src/ollama_models.py:4871
 msgid ""
 "Flagship vision-language model of Qwen and also a significant leap from the "
 "previous Qwen2-VL."
-msgstr ""
+msgstr "Model unggulan visi-bahasa dari Qwen dan juga lompatan signifikan dari Qwen2-VL sebelumnya."
 
 #: src/ollama_models.py:4901
 msgid ""
 "DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
 "1.5B version also available."
-msgstr ""
+msgstr "DeepCoder adalah model pengkode 14 miliar parameter open source sepenuhnya pada level O3-mini, dengan versi 1,5 miliar juga tersedia."
 
 #: src/ollama_models.py:4925
 msgid ""
 "Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-"
 "art vision understanding and enhances long context capabilities up to 128k "
 "tokens without compromising text performance."
-msgstr ""
+msgstr "Berbasis pada Mistral Small 3, Mistral Small 3.1 (2503) menambahkan pemahaman visi mutakhir dan meningkatkan kemampuan konteks panjang hingga 128k token tanpa mengorbankan performa teks."
 
 #: src/ollama_models.py:4965
 msgid ""
 "Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that "
 "outperform the best available open models of the same size, including "
 "counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."
-msgstr ""
+msgstr "Cogito v1 Preview adalah keluarga model penalaran hibrida oleh Deep Cogito yang mengungguli model open terbaik dengan ukuran sama, termasuk rekan dari LLaMA, DeepSeek, dan Qwen di sebagian besar benchmark standar."
 
 #: src/ollama_models.py:4994
 msgid ""
 "IBM Granite 2B and 8B models are 128K context length language models that "
 "have been fine-tuned for improved reasoning and instruction-following "
 "capabilities."
-msgstr ""
+msgstr "Model IBM Granite 2B dan 8B adalah model bahasa dengan konteks panjang 128K yang telah di-tuning untuk meningkatkan kemampuan penalaran dan mengikuti instruksi."
 
 #: src/ollama_models.py:5032
 msgid ""
 "Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
 "reasoning models that rival much larger models on complex reasoning tasks."
-msgstr ""
+msgstr "Phi 4 reasoning dan reasoning plus adalah model penalaran dengan bobot terbuka 14 miliar parameter yang menyaingi model jauh lebih besar pada tugas penalaran kompleks."
 
 #: src/ollama_models.py:5064
 msgid ""
 "EXAONE Deep exhibits superior capabilities in various reasoning tasks "
 "including math and coding benchmarks, ranging from 2.4B to 32B parameters "
 "developed and released by LG AI Research."
-msgstr ""
+msgstr "EXAONE Deep menunjukkan kemampuan unggul dalam berbagai tugas penalaran termasuk benchmark matematika dan pengkodean, dengan parameter antara 2,4 miliar hingga 32 miliar yang dikembangkan dan dirilis oleh LG AI Research."
 
 #: src/ollama_models.py:5090
 msgid ""
 "Phi 4 mini reasoning is a lightweight open model that balances efficiency "
 "with advanced reasoning ability."
-msgstr ""
+msgstr "Phi 4 mini reasoning adalah model ringan terbuka yang menyeimbangkan efisiensi dengan kemampuan penalaran tingkat lanjut."
 
 #: src/ollama_models.py:5117
 msgid ""
 "Gemma 3n models are designed for efficient execution on everyday devices "
 "such as laptops, tablets or phones."
-msgstr ""
+msgstr "Model Gemma 3n dirancang untuk eksekusi efisien pada perangkat sehari-hari seperti laptop, tablet, atau ponsel."
 
 #: src/ollama_models.py:5140
 msgid "Magistral is a small, efficient reasoning model with 24B parameters."
-msgstr ""
+msgstr "Magistral adalah model penalaran kecil dan efisien dengan 24 miliar parameter."
 
 #: src/ollama_models.py:5187
 msgid ""
 "An update to Mistral Small that improves on function calling, instruction "
 "following, and less repetition errors."
-msgstr ""
+msgstr "Pembaruan untuk Mistral Small yang memperbaiki pemanggilan fungsi, mengikuti instruksi, dan mengurangi kesalahan pengulangan."
 
 #: src/quick_ask.py:138 src/gtk/quick_ask.ui:11
 msgid "Quick Ask"
@@ -3667,18 +3673,18 @@ msgstr "Tanya Cepat"
 
 #: src/window.py:94
 msgid "Ollama Was Not Found"
-msgstr ""
+msgstr "Ollama Tidak Ditemukan"
 
 #: src/window.py:95
 msgid ""
 "To add a managed Ollama instance, you must have Ollama installed locally in "
 "your device, this is a simple process and should not take more than 5 "
 "minutes."
-msgstr ""
+msgstr "Untuk menambahkan instance Ollama yang dikelola, Anda harus menginstal Ollama secara lokal di perangkat Anda, ini adalah proses sederhana dan seharusnya tidak memakan waktu lebih dari 5 menit."
 
 #: src/window.py:97
 msgid "Open Tutorial in Web Browser"
-msgstr ""
+msgstr "Buka Tutorial di Peramban Web"
 
 #: src/window.py:115 src/gtk/window.ui:309 src/gtk/window.ui:319
 #: src/gtk/window.ui:341
@@ -3719,11 +3725,11 @@ msgstr ""
 
 #: src/window.py:278
 msgid "No tools enabled."
-msgstr ""
+msgstr "Tidak ada alat yang diaktifkan."
 
 #: src/window.py:278
 msgid "Open Tool Manager"
-msgstr ""
+msgstr "Buka Pengelola Alat"
 
 #: src/window.py:281
 msgid "Please select a model before chatting"
@@ -3745,15 +3751,15 @@ msgstr "Obrolan berhasil diimpor"
 
 #: src/window.py:524
 msgid "Can't Run Live Chat"
-msgstr ""
+msgstr "Tidak dapat menjalankan Live Chat"
 
 #: src/window.py:525
 msgid "You are missing TTS libraries"
-msgstr ""
+msgstr "Anda kekurangan pustaka TTS"
 
 #: src/window.py:575
 msgid "Pull Model"
-msgstr ""
+msgstr "Tarik Model"
 
 #: src/window.py:576
 msgid "Please enter the model name following this template: name:tag"
@@ -3790,7 +3796,7 @@ msgstr "Preferensi"
 #: src/gtk/help-overlay.ui:26
 msgctxt "shortcut window"
 msgid "Quick Ask"
-msgstr ""
+msgstr "Tanya Cepat"
 
 #: src/gtk/help-overlay.ui:32
 msgctxt "shortcut window"
@@ -3878,11 +3884,11 @@ msgstr "Pesan sistem dianggap sebagai instruksi literal oleh model"
 
 #: src/gtk/help-overlay.ui:133 src/widgets/message.py:628
 msgid "Use Tools"
-msgstr ""
+msgstr "Gunakan Alat"
 
 #: src/gtk/help-overlay.ui:134
 msgid "Ask model to use tools to generate a message"
-msgstr ""
+msgstr "Minta model menggunakan alat untuk membuat pesan"
 
 #: src/gtk/help-overlay.ui:140
 msgid "Send Message as User"
@@ -3894,23 +3900,23 @@ msgstr "Menu"
 
 #: src/gtk/window.ui:69
 msgid "Search Chats"
-msgstr ""
+msgstr "Cari Obrolan"
 
 #: src/gtk/window.ui:78
 msgid "Chat search bar"
-msgstr ""
+msgstr "Bar pencarian obrolan"
 
 #: src/gtk/window.ui:86 src/gtk/window.ui:88
 msgid "Search chats"
-msgstr ""
+msgstr "Cari obrolan"
 
 #: src/gtk/window.ui:124
 msgid "No Chats Found"
-msgstr ""
+msgstr "Obrolan Tidak Ditemukan"
 
 #: src/gtk/window.ui:125
 msgid "Oh no! It looks like there are no chats found for your search."
-msgstr ""
+msgstr "Oh tidak! Sepertinya tidak ada obrolan yang ditemukan untuk pencarian Anda."
 
 #: src/gtk/window.ui:142
 msgid "Toggle Sidebar"
@@ -3957,7 +3963,7 @@ msgstr "Tidak Ada Instance Ditemukan"
 
 #: src/gtk/window.ui:306
 msgid "It looks a bit empty in here. Try adding an instance get started!"
-msgstr ""
+msgstr "Rasanya agak kosong di sini. Coba tambahkan sebuah instance untuk memulai!"
 
 #: src/gtk/window.ui:335
 msgid "Added Instances"
@@ -3987,11 +3993,11 @@ msgstr ""
 
 #: src/gtk/window.ui:395
 msgid "Help us build better AI tools! Submit your ideas here."
-msgstr ""
+msgstr "Bantu kami membangun alat AI yang lebih baik! Kirimkan ide Anda di sini."
 
 #: src/gtk/window.ui:403
 msgid "Request Form"
-msgstr ""
+msgstr "Formulir Permintaan"
 
 #: src/gtk/window.ui:417
 msgid "Model Manager"
@@ -4015,7 +4021,7 @@ msgstr "Cari model"
 
 #: src/gtk/window.ui:475
 msgid "Filter Models"
-msgstr ""
+msgstr "Filter Model"
 
 #: src/gtk/window.ui:492 src/widgets/models/available.py:111
 msgid "Added"
@@ -4051,7 +4057,7 @@ msgstr "Tersedia"
 
 #: src/gtk/window.ui:644 src/widgets/chat.py:20
 msgid "New Notebook"
-msgstr ""
+msgstr "Buku Catatan Baru"
 
 #: src/gtk/window.ui:652
 msgid "Import Chat"
@@ -4059,15 +4065,15 @@ msgstr "Impor Obrolan"
 
 #: src/gtk/window.ui:664
 msgid "Manage Tools"
-msgstr ""
+msgstr "Kelola Alat"
 
 #: src/gtk/window.ui:670
 msgid "Start Quick Ask"
-msgstr ""
+msgstr "Mulai Tanya Cepat"
 
 #: src/gtk/window.ui:674
 msgid "Start Live Chat"
-msgstr ""
+msgstr "Mulai Obrolan Langsung"
 
 #: src/gtk/window.ui:678 src/gtk/live_chat.ui:56 src/gtk/live_chat.ui:127
 msgid "Preferences"
@@ -4103,43 +4109,43 @@ msgstr "Muat Ulang Model yang Ditambahkan"
 
 #: src/gtk/window.ui:720
 msgid "Add Model by Name"
-msgstr ""
+msgstr "Tambah Model berdasarkan Nama"
 
 #: src/gtk/window.ui:726
 msgid "Create Model from Existing"
-msgstr ""
+msgstr "Buat Model dari yang Ada"
 
 #: src/gtk/window.ui:730
 msgid "Create Model from GGUF File"
-msgstr ""
+msgstr "Buat Model dari File GGUF"
 
 #: src/gtk/live_chat.ui:8
 msgid "Live chat dialog"
-msgstr ""
+msgstr "Dialog Obrolan Langsung"
 
 #: src/gtk/live_chat.ui:13
 msgid "Live Chat"
-msgstr ""
+msgstr "Obrolan Langsung"
 
 #: src/gtk/live_chat.ui:44
 msgid "Show Messages"
-msgstr ""
+msgstr "Tampilkan Pesan"
 
 #: src/gtk/live_chat.ui:134
 msgid "Use Dynamic Backgrounds"
-msgstr ""
+msgstr "Gunakan Latar Dinamis"
 
 #: src/gtk/live_chat.ui:135
 msgid "When using a model with a profile picture"
-msgstr ""
+msgstr "Saat menggunakan model dengan gambar profil"
 
 #: src/gtk/live_chat.ui:140
 msgid "Turn on Microphone Automatically"
-msgstr ""
+msgstr "Nyalakan Mikrofon secara Otomatis"
 
 #: src/gtk/live_chat.ui:141
 msgid "When launching Live Chat and after dictation"
-msgstr ""
+msgstr "Saat memulai Obrolan Langsung dan setelah mendikte"
 
 #: src/gtk/quick_ask.ui:8
 msgid "Quick ask dialog"
@@ -4157,15 +4163,15 @@ msgstr "Hapus Lampiran"
 #: src/widgets/attachments.py:116 src/widgets/attachments.py:301
 #: src/widgets/attachments.py:425
 msgid "Download Attachment"
-msgstr ""
+msgstr "Unduh Lampiran"
 
 #: src/widgets/attachments.py:130
 msgid "Replace Notebook Content"
-msgstr ""
+msgstr "Ganti Konten Buku Catatan"
 
 #: src/widgets/attachments.py:258
 msgid "Delete Attachment?"
-msgstr ""
+msgstr "Hapus Lampiran?"
 
 #: src/widgets/attachments.py:259 src/widgets/attachments.py:392
 #: src/widgets/chat.py:517
@@ -4175,7 +4181,7 @@ msgstr "Apakah Anda yakin ingin menghapus '{}'?"
 
 #: src/widgets/attachments.py:290
 msgid "Save Attachment"
-msgstr ""
+msgstr "Simpan Lampiran"
 
 #: src/widgets/attachments.py:340
 msgid "Image"
@@ -4187,11 +4193,11 @@ msgstr "Gambar Hilang"
 
 #: src/widgets/attachments.py:391
 msgid "Delete Image?"
-msgstr ""
+msgstr "Hapus Gambar?"
 
 #: src/widgets/attachments.py:414
 msgid "Save Image"
-msgstr ""
+msgstr "Simpan Gambar"
 
 #: src/widgets/attachments.py:585
 msgid "Any compatible Alpaca attachment"
@@ -4235,36 +4241,36 @@ msgstr "Lampirkan Screenshot"
 
 #: src/widgets/attachments.py:698
 msgid "Attach Photo From Camera"
-msgstr ""
+msgstr "Lampirkan Foto dari Kamera"
 
 #: src/widgets/camera.py:102
 msgid "Photo"
-msgstr ""
+msgstr "Foto"
 
 #: src/widgets/camera.py:122
 msgid "No Camera Detected"
-msgstr ""
+msgstr "Kamera Tidak Terdeteksi"
 
 #: src/widgets/camera.py:123
 msgid "Please check if camera is plugged in and turned on"
-msgstr ""
+msgstr "Harap periksa apakah kamera terpasang dan menyala"
 
 #: src/widgets/chat.py:86 src/widgets/instances/ollama_instances.py:76
 #: src/widgets/instances/openai_instances.py:106
 msgid "Notebook"
-msgstr ""
+msgstr "Buku Catatan"
 
 #: src/widgets/chat.py:87
 msgid "Start a notebook with a message"
-msgstr ""
+msgstr "Mulai buku catatan dengan sebuah pesan"
 
 #: src/widgets/chat.py:95 src/widgets/chat.py:271
 msgid "No Messages Found"
-msgstr ""
+msgstr "Pesan Tidak Ditemukan"
 
 #: src/widgets/chat.py:96 src/widgets/chat.py:272
 msgid "Uh oh! No messages found for your search."
-msgstr ""
+msgstr "Ups! Tidak ada pesan yang ditemukan untuk pencarian Anda."
 
 #: src/widgets/chat.py:262
 msgid "Try one of these prompts"
@@ -4413,15 +4419,15 @@ msgstr "Menyiapkan lingkungan Python..."
 
 #: src/widgets/terminal.py:29
 msgid "Using Python HTTP server..."
-msgstr ""
+msgstr "Menggunakan server HTTP Python..."
 
 #: src/widgets/terminal.py:34
 msgid "Using Flatpak contained shell..."
-msgstr ""
+msgstr "Menggunakan shell yang terkandung dalam Flatpak..."
 
 #: src/widgets/terminal.py:38
 msgid "Using SSH to run command"
-msgstr ""
+msgstr "Menggunakan SSH untuk menjalankan perintah"
 
 #: src/widgets/terminal.py:85
 msgid "Terminal"
@@ -4437,52 +4443,52 @@ msgstr "Skrip Keluar"
 
 #: src/widgets/terminal.py:192
 msgid "Alpaca Terminal is not compatible with Windows"
-msgstr ""
+msgstr "Alpaca Terminal tidak kompatibel dengan Windows"
 
 #: src/widgets/voice.py:54
 msgid "Dictate Message"
-msgstr ""
+msgstr "Mendikte Pesan"
 
 #: src/widgets/voice.py:169
 msgid "Use Speech Recognition"
-msgstr ""
+msgstr "Gunakan Pengenalan Suara"
 
 #: src/widgets/voice.py:214 src/widgets/voice.py:248
 msgid "Speech Recognition Error"
-msgstr ""
+msgstr "Kesalahan Pengenalan Suara"
 
 #: src/widgets/voice.py:215 src/widgets/voice.py:347
 msgid "An error occurred while pulling speech recognition model"
-msgstr ""
+msgstr "Terjadi kesalahan saat mengunduh model pengenalan suara"
 
 #: src/widgets/voice.py:249
 msgid "An error occurred while using speech recognition"
-msgstr ""
+msgstr "Terjadi kesalahan saat menggunakan pengenalan suara"
 
 #: src/widgets/voice.py:282 src/widgets/voice.py:405
 msgid "Download Speech Recognition Model"
-msgstr ""
+msgstr "Unduh Model Pengenalan Suara"
 
 #: src/widgets/voice.py:283 src/widgets/voice.py:406
 #, python-brace-format
 msgid "To use speech recognition you'll need to download a special model ({})"
-msgstr ""
+msgstr "Untuk menggunakan pengenalan suara, Anda perlu mengunduh model khusus ({})"
 
 #: src/widgets/voice.py:285 src/widgets/voice.py:408
 msgid "Download Model"
-msgstr ""
+msgstr "Unduh Model"
 
 #: src/widgets/voice.py:320
 msgid "Transcribing Audio"
-msgstr ""
+msgstr "Mentranskripsi Audio"
 
 #: src/widgets/voice.py:346 src/widgets/voice.py:375
 msgid "Transcription Error"
-msgstr ""
+msgstr "Kesalahan Transkripsi"
 
 #: src/widgets/voice.py:376
 msgid "An error occurred while transcribing audio"
-msgstr ""
+msgstr "Terjadi kesalahan saat mentranskripsi audio"
 
 #: src/widgets/models/added.py:89
 msgid "Change Profile Picture"
@@ -4490,11 +4496,11 @@ msgstr "Ganti Foto Profil"
 
 #: src/widgets/models/added.py:110
 msgid "Voice"
-msgstr ""
+msgstr "Suara"
 
 #: src/widgets/models/added.py:115
 msgid "Default"
-msgstr ""
+msgstr "Default"
 
 #: src/widgets/models/added.py:142 src/widgets/models/creator.py:57
 msgid "Tag"
@@ -4526,7 +4532,7 @@ msgstr "Deskripsi"
 
 #: src/widgets/models/added.py:170 src/widgets/models/added.py:174
 msgid "Files"
-msgstr ""
+msgstr "Berkas"
 
 #: src/widgets/models/added.py:193 src/widgets/models/creator.py:73
 msgid "Context"
@@ -4543,7 +4549,7 @@ msgstr "Buat Anak"
 
 #: src/widgets/models/added.py:249 src/widgets/models/available.py:156
 msgid "Languages"
-msgstr ""
+msgstr "Bahasa"
 
 #: src/widgets/models/added.py:410 src/widgets/models/added.py:459
 #: src/widgets/models/speech.py:136 src/widgets/models/speech.py:279
@@ -4576,12 +4582,12 @@ msgstr "Apakah Anda yakin ingin menghapus '{}'?"
 
 #: src/widgets/models/available.py:46
 msgid "Already Added"
-msgstr ""
+msgstr "Sudah Ditambahkan"
 
 #: src/widgets/models/available.py:48
 #, python-brace-format
 msgid "Pull '{}'"
-msgstr ""
+msgstr "Tarik '{}'"
 
 #: src/widgets/models/available.py:50
 msgid "Add Model"
@@ -4589,7 +4595,7 @@ msgstr "Tambah Model"
 
 #: src/widgets/models/available.py:111
 msgid "Add"
-msgstr ""
+msgstr "Tambah"
 
 #: src/widgets/models/available.py:120
 msgid ""
@@ -4601,7 +4607,7 @@ msgstr ""
 
 #: src/widgets/models/available.py:253
 msgid "Pull Latest"
-msgstr ""
+msgstr "Tarik Terbaru"
 
 #: src/widgets/models/common.py:13
 msgid "Multilingual"
@@ -4625,11 +4631,11 @@ msgstr "Penyematan"
 
 #: src/widgets/models/common.py:18
 msgid "Tools"
-msgstr ""
+msgstr "Alat"
 
 #: src/widgets/models/common.py:19
 msgid "Reasoning"
-msgstr ""
+msgstr "Penalaran"
 
 #: src/widgets/models/common.py:20
 msgid "Small"
@@ -4669,7 +4675,7 @@ msgstr "Nama"
 
 #: src/widgets/models/creator.py:67
 msgid "Add Files"
-msgstr ""
+msgstr "Tambah Berkas"
 
 #: src/widgets/models/creator.py:74
 msgid ""
@@ -4711,11 +4717,11 @@ msgstr "Simpan"
 
 #: src/widgets/models/creator.py:165
 msgid "Create Model"
-msgstr ""
+msgstr "Buat Model"
 
 #: src/widgets/models/pulling.py:48
 msgid "Downloading..."
-msgstr ""
+msgstr "Mengunduh..."
 
 #: src/widgets/models/pulling.py:69 src/widgets/models/pulling.py:71
 #: src/widgets/models/pulling.py:174
@@ -4724,7 +4730,7 @@ msgstr "Hentikan Unduhan"
 
 #: src/widgets/models/pulling.py:132
 msgid "Dictation Model"
-msgstr ""
+msgstr "Model Mendikte"
 
 #: src/widgets/models/pulling.py:188
 msgid "Stop Download?"
@@ -4759,24 +4765,24 @@ msgstr "Model '{}' berhasil diunduh."
 
 #: src/widgets/models/speech.py:40
 msgid "Local text to speech model provided by Kokoro."
-msgstr ""
+msgstr "Model teks ke suara lokal yang disediakan oleh Kokoro."
 
 #: src/widgets/models/speech.py:146 src/widgets/models/speech.py:289
 msgid "Delete Model"
-msgstr ""
+msgstr "Hapus Model"
 
 #: src/widgets/models/speech.py:187
 msgid "Local speech to text model provided by OpenAI Whisper."
-msgstr ""
+msgstr "Model suara ke teks lokal yang disediakan oleh OpenAI Whisper."
 
 #: src/widgets/models/speech.py:242
 msgid "Speech to Text"
-msgstr ""
+msgstr "Suara ke Teks"
 
 #: src/widgets/instances/ollama_instances.py:68
 #: src/widgets/instances/openai_instances.py:98
 msgid "Notebook Error"
-msgstr ""
+msgstr "Kesalahan Buku Catatan"
 
 #: src/widgets/instances/ollama_instances.py:69
 #: src/widgets/instances/ollama_instances.py:155
@@ -4885,7 +4891,7 @@ msgstr "Instance AI lokal atau jarak jauh yang tidak dikelola oleh Alpaca"
 
 #: src/widgets/instances/openai_instances.py:21
 msgid "Instances"
-msgstr ""
+msgstr "Instance"
 
 #: src/widgets/instances/openai_instances.py:175
 msgid "Generating message..."
@@ -4899,43 +4905,43 @@ msgstr "Tidak dapat mengambil model"
 
 #: src/widgets/instances/openai_instances.py:475
 msgid "Alibaba Cloud Qwen large language models via DashScope"
-msgstr ""
+msgstr "Model bahasa besar Alibaba Cloud Qwen melalui DashScope"
 
 #: src/widgets/instances/openai_instances.py:481
 msgid "Fireworks AI inference platform"
-msgstr ""
+msgstr "Platform inferensi Fireworks AI"
 
 #: src/widgets/instances/openai_instances.py:514
 msgid "Lambda Labs cloud inference API"
-msgstr ""
+msgstr "API inferensi cloud Lambda Labs"
 
 #: src/widgets/instances/openai_instances.py:547
 msgid "Cerebras AI cloud inference API"
-msgstr ""
+msgstr "API inferensi cloud Cerebras AI"
 
 #: src/widgets/instances/openai_instances.py:553
 msgid "Kluster AI cloud inference API"
-msgstr ""
+msgstr "API inferensi cloud Kluster AI"
 
 #: src/widgets/instances/openai_instances.py:559
 msgid "Kimi large language models by Moonshot AI"
-msgstr ""
+msgstr "Model bahasa besar Kimi oleh Moonshot AI"
 
 #: src/widgets/instances/openai_instances.py:566
 msgid "Mistral AI large language models"
-msgstr ""
+msgstr "Model bahasa besar Mistral AI"
 
 #: src/widgets/instances/openai_instances.py:573
 msgid "Meta AI Llama API"
-msgstr ""
+msgstr "API Meta AI Llama"
 
 #: src/widgets/instances/openai_instances.py:579
 msgid "Novita AI cloud inference API"
-msgstr ""
+msgstr "API inferensi cloud Novita AI"
 
 #: src/widgets/instances/openai_instances.py:586
 msgid "DeepInfra cloud inference API"
-msgstr ""
+msgstr "API inferensi cloud DeepInfra"
 
 #: src/widgets/instances/openai_instances.py:590
 msgid "OpenAI Compatible Instance"
@@ -4943,7 +4949,7 @@ msgstr "Instance Kompatibel dengan OpenAI"
 
 #: src/widgets/instances/openai_instances.py:592
 msgid "AI instance compatible with OpenAI library"
-msgstr ""
+msgstr "Instance AI yang kompatibel dengan pustaka OpenAI"
 
 #: src/widgets/instances/__init__.py:32 src/widgets/instances/__init__.py:35
 msgid "Ollama Log"
@@ -4976,21 +4982,21 @@ msgstr "Kunci API (Opsional)"
 
 #: src/widgets/instances/__init__.py:97
 msgid "Thought Processing"
-msgstr ""
+msgstr "Pemrosesan Pemikiran"
 
 #: src/widgets/instances/__init__.py:98
 msgid ""
 "Have compatible reasoning models think about their response before "
 "generating a message"
-msgstr ""
+msgstr "Meminta model penalaran yang kompatibel untuk memikirkan jawabannya sebelum menghasilkan pesan"
 
 #: src/widgets/instances/__init__.py:105
 msgid "Share Name"
-msgstr ""
+msgstr "Bagikan Nama"
 
 #: src/widgets/instances/__init__.py:106
 msgid "Automatically share your name with the AI models."
-msgstr ""
+msgstr "Secara otomatis membagikan nama Anda dengan model AI."
 
 #: src/widgets/instances/__init__.py:121
 msgid "Max Tokens"
@@ -5070,11 +5076,11 @@ msgstr "Edit Instance"
 
 #: src/widgets/instances/__init__.py:277
 msgid "Create Instance"
-msgstr ""
+msgstr "Buat Instance"
 
 #: src/widgets/instances/__init__.py:353
 msgid "Fallback Instance"
-msgstr ""
+msgstr "Instance Cadangan"
 
 #: src/widgets/instances/__init__.py:393
 msgid "Remove Instance?"
@@ -5090,11 +5096,11 @@ msgstr "Blok Kode"
 
 #: src/widgets/blocks/code.py:113
 msgid "Edit Script"
-msgstr ""
+msgstr "Sunting Skrip"
 
 #: src/widgets/blocks/code.py:121
 msgid "Copy Script"
-msgstr ""
+msgstr "Salin Skrip"
 
 #: src/widgets/blocks/code.py:129
 msgid "Run Script"
@@ -5102,7 +5108,7 @@ msgstr "Jalankan Skrip"
 
 #: src/widgets/blocks/code.py:195
 msgid "Changes saved successfully"
-msgstr ""
+msgstr "Perubahan berhasil disimpan"
 
 #: src/widgets/blocks/code.py:201
 msgid "Code copied to the clipboard"
@@ -5118,185 +5124,183 @@ msgstr "Persamaan disalin ke papan klip"
 
 #: src/widgets/tools/notebook_tools.py:18
 msgid "Read Notebook"
-msgstr ""
+msgstr "Baca Buku Catatan"
 
 #: src/widgets/tools/notebook_tools.py:19
 msgid "Reads the current notebook."
-msgstr ""
+msgstr "Membaca buku catatan saat ini."
 
 #: src/widgets/tools/notebook_tools.py:38
 msgid "Write Notebook"
-msgstr ""
+msgstr "Tulis Buku Catatan"
 
 #: src/widgets/tools/notebook_tools.py:39
 msgid "Overwrites the notebook with new text."
-msgstr ""
+msgstr "Menimpa buku catatan dengan teks baru."
 
 #: src/widgets/tools/notebook_tools.py:58
 msgid "Append to Notebook"
-msgstr ""
+msgstr "Tambahkan ke Buku Catatan"
 
 #: src/widgets/tools/notebook_tools.py:59
 msgid "Appends text to the notebook."
-msgstr ""
+msgstr "Menambahkan teks ke buku catatan."
 
 #: src/widgets/tools/tools.py:22
 msgid "AI Description"
-msgstr ""
+msgstr "Deskripsi AI"
 
 #: src/widgets/tools/tools.py:23
 msgid "The description the AI model will use to understand what the tool does."
-msgstr ""
+msgstr "Deskripsi yang digunakan model AI untuk memahami fungsi alat ini."
 
 #: src/widgets/tools/tools.py:35
 msgid "Arguments"
-msgstr ""
+msgstr "Argumen"
 
 #: src/widgets/tools/tools.py:36
 msgid "Variables that are filled by the AI."
-msgstr ""
+msgstr "Variabel yang diisi oleh AI."
 
 #: src/widgets/tools/tools.py:49
 msgid "Variables"
-msgstr ""
+msgstr "Variabel"
 
 #: src/widgets/tools/tools.py:50
-msgid ""
-"User filled values that the tool uses to work, the AI does not have access "
-"to these variables at all."
-msgstr ""
+msgid "User filled values that the tool uses to work, the AI does not have access to these variables at all."
+msgstr "Nilai yang diisi pengguna dan digunakan alat ini, AI tidak memiliki akses ke variabel ini."
 
 #: src/widgets/tools/tools.py:219
 msgid "Gets the current date and/or time."
-msgstr ""
+msgstr "Mengambil tanggal dan/atau waktu saat ini."
 
 #: src/widgets/tools/tools.py:251
 msgid "Gets a recipe by the meal's name"
-msgstr ""
+msgstr "Mengambil resep berdasarkan nama hidangan"
 
 #: src/widgets/tools/tools.py:266 src/widgets/tools/tools.py:332
 msgid "YouTube Video"
-msgstr ""
+msgstr "Video YouTube"
 
 #: src/widgets/tools/tools.py:274 src/widgets/tools/tools.py:341
 msgid "Source"
-msgstr ""
+msgstr "Sumber"
 
 #: src/widgets/tools/tools.py:311
 msgid "Gets a list of food recipes by a specified category"
-msgstr ""
+msgstr "Mengambil daftar resep makanan berdasarkan kategori tertentu"
 
 #: src/widgets/tools/tools.py:367
 msgid "Extracts an article from Wikipedia by it's title"
-msgstr ""
+msgstr "Mengambil artikel dari Wikipedia berdasarkan judulnya"
 
 #: src/widgets/tools/tools.py:408
 msgid "Search for a term online using DuckDuckGo"
-msgstr ""
+msgstr "Mencari istilah secara online menggunakan DuckDuckGo"
 
 #: src/widgets/tools/tools.py:411
 msgid "Safe Search"
-msgstr ""
+msgstr "Pencarian Aman"
 
 #: src/widgets/tools/tools.py:415
 msgid "On"
-msgstr ""
+msgstr "Aktif"
 
 #: src/widgets/tools/tools.py:416
 msgid "Moderate"
-msgstr ""
+msgstr "Sedang"
 
 #: src/widgets/tools/tools.py:417
 msgid "Off"
-msgstr ""
+msgstr "Nonaktif"
 
 #: src/widgets/tools/tools.py:421
 msgid "Max Results"
-msgstr ""
+msgstr "Hasil Maksimal"
 
 #: src/widgets/tools/tools.py:445
 msgid "Abstract Source"
-msgstr ""
+msgstr "Sumber Abstrak"
 
 #: src/widgets/tools/tools.py:462
 msgid "Web Result Image"
-msgstr ""
+msgstr "Gambar Hasil Web"
 
 #: src/widgets/tools/tools.py:492
 msgid "Request to run a command using SSH to connect to the device"
-msgstr ""
+msgstr "Permintaan menjalankan perintah menggunakan SSH untuk menghubungkan ke perangkat"
 
 #: src/widgets/tools/tools.py:495
 msgid "IP Address"
-msgstr ""
+msgstr "Alamat IP"
 
 #: src/widgets/tools/tools.py:500
 msgid "Username"
-msgstr ""
+msgstr "Nama Pengguna"
 
 #: src/widgets/tools/tools.py:505
 msgid "Network Port"
-msgstr ""
+msgstr "Port Jaringan"
 
 #: src/widgets/tools/tools.py:522
 msgid "Model Requested to Run Command"
-msgstr ""
+msgstr "Model yang Diminta untuk Menjalankan Perintah"
 
 #: src/widgets/tools/tools.py:523
 msgid "Command"
-msgstr ""
+msgstr "Perintah"
 
 #: src/widgets/tools/tools.py:525
 msgid "Explanation"
-msgstr ""
+msgstr "Penjelasan"
 
 #: src/widgets/tools/tools.py:526
 msgid "No explanation was provided"
-msgstr ""
+msgstr "Tidak ada penjelasan yang diberikan"
 
 #: src/widgets/tools/tools.py:527
 msgid "Make sure you understand what the command does before running it."
-msgstr ""
+msgstr "Pastikan Anda memahami apa yang dilakukan perintah sebelum menjalankannya."
 
 #: src/widgets/tools/tools.py:573
 msgid "Spotify Controller"
-msgstr ""
+msgstr "Pengontrol Spotify"
 
 #: src/widgets/tools/tools.py:574
 msgid "Control your music's playback"
-msgstr ""
+msgstr "Mengontrol pemutaran musik Anda"
 
 #: src/widgets/tools/tools.py:625
 msgid "Log Back In"
-msgstr ""
+msgstr "Masuk Kembali"
 
 #: src/widgets/tools/tools.py:629
 msgid "Not logged in"
-msgstr ""
+msgstr "Belum masuk"
 
 #: src/widgets/tools/tools.py:636
 msgid "Tutorial"
-msgstr ""
+msgstr "Tutorial"
 
 #: src/widgets/tools/tools.py:663
 msgid "Spotify User"
-msgstr ""
+msgstr "Pengguna Spotify"
 
 #: src/widgets/tools/tools.py:724
 msgid "Login Error"
-msgstr ""
+msgstr "Kesalahan Masuk"
 
 #: src/widgets/tools/tools.py:725
 msgid "Couldn't log in to Spotify"
-msgstr ""
+msgstr "Gagal masuk ke Spotify"
 
 #: src/widgets/tools/tools.py:726
 msgid "Specify a Client ID and Client Secret"
-msgstr ""
+msgstr "Tentukan Client ID dan Client Secret"
 
 #: src/widgets/tools/tools.py:775
 msgid "Album Art"
-msgstr ""
+msgstr "Sampul Album"
 
 #~ msgid "Attachment failed, screenshot might be too big"
 #~ msgstr "Lampiran gagal, tangkapan layar mungkin terlalu besar"
