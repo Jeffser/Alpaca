@@ -62,8 +62,8 @@ class GeneratingText(Gtk.Overlay):
             table_block_complete = not current_text.strip().startswith('|') or '|\n\n' in current_text
 
             if think_block_complete and think_block_complete_v2 and code_block_complete and table_block_complete:
-                GLib.idle_add(self.set_content)
-                GLib.idle_add(self.get_parent().add_content, current_text)
+                self.set_content()
+                self.get_parent().add_content(current_text)
         elif not self.get_parent().message.popup.tts_button.get_active() and '.' in current_text and (self.get_parent().message.get_root().settings.get_value('tts-auto-dictate').unpack() or self.get_parent().message.get_root().get_name() == 'AlpacaLiveChat'):
             GLib.idle_add(self.get_parent().message.popup.tts_button.set_active, True)
 
