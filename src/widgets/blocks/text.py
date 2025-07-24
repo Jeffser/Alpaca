@@ -186,10 +186,16 @@ class EditingText(Gtk.Box):
 
     def save_edit(self):
         buffer = self.textview.get_buffer()
-        self.message.block_container.set_content(buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
+        GLib.idle_add(self.message.block_container.set_content, buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
         self.message.set_halign(2 if self.message.mode == 0 else 0)
         self.set_visible(False)
         self.message.header_container.set_visible(True)
         self.message.main_stack.set_visible_child_name('content')
-        self.message.save()
-        
+        GLib.idle_add(self.message.save)
+        return
+        response_index = list(self.message.get_parent()).index(self.message) + 1
+        if len(list(self.message.get_parent())) > response_index:
+            next_message = list(self.message.get_parent())[response_index]
+            if next_message.mode == 1 and next_message.get_root().settings.get_value('regenerate-after-edit').unpack():
+                next_message.popup.regenerate_message()
+

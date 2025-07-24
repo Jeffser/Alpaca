@@ -182,7 +182,6 @@ class BaseInstance:
     def generate_response(self, bot_message, chat, messages:list, model:str, tools_used:list):
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
-        GLib.idle_add(bot_message.update_message, {'clear': True})
         bot_message.block_container.prepare_generating_block()
 
         if 'no-system-messages' in self.limitations:
