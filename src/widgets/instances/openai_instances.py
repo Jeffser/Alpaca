@@ -116,7 +116,7 @@ class BaseInstance:
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         bot_message.update_message({'add_css': 'dim-label'})
-        bot_message.block_container.get_generating_block()
+        bot_message.block_container.prepare_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
@@ -183,7 +183,7 @@ class BaseInstance:
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         GLib.idle_add(bot_message.update_message, {'clear': True})
-        bot_message.block_container.get_generating_block()
+        bot_message.block_container.prepare_generating_block()
 
         if 'no-system-messages' in self.limitations:
             for i in range(len(messages)):

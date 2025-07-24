@@ -86,7 +86,7 @@ class BaseInstance:
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         bot_message.update_message({'add_css': 'dim-label'})
-        bot_message.block_container.get_generating_block()
+        bot_message.block_container.prepare_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(
@@ -168,7 +168,7 @@ class BaseInstance:
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         GLib.idle_add(bot_message.update_message, {'clear': True})
-        bot_message.block_container.get_generating_block()
+        bot_message.block_container.prepare_generating_block()
 
         if self.properties.get('share_name', 0) > 0:
             user_display_name = None
