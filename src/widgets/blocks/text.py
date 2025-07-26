@@ -51,9 +51,7 @@ class GeneratingText(Gtk.Overlay):
         if content:
             self.set_content(content)
 
-    def append_content(self, value:str) -> None:
-        text = GLib.markup_escape_text(value)
-        self.buffer.insert_markup(self.buffer.get_end_iter(), text, len(text.encode('utf-8')))
+    def process_content(self, value:str) -> None:
         current_text = self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
         if value.endswith('\n'):
             think_block_complete = not current_text.strip().startswith('<think>') or current_text.strip().endswith('</think>')
@@ -65,7 +63,12 @@ class GeneratingText(Gtk.Overlay):
                 self.set_content()
                 self.get_parent().add_content(current_text)
         elif not self.get_parent().message.popup.tts_button.get_active() and '.' in current_text and (self.get_parent().message.get_root().settings.get_value('tts-auto-dictate').unpack() or self.get_parent().message.get_root().get_name() == 'AlpacaLiveChat'):
-            GLib.idle_add(self.get_parent().message.popup.tts_button.set_active, True)
+            self.get_parent().message.popup.tts_button.set_active(True)
+
+    def append_content(self, value:str) -> None:
+        text = GLib.markup_escape_text(value)
+        GLib.idle_add(self.buffer.insert_markup, self.buffer.get_end_iter(), text, len(text.encode('utf-8')))
+        GLib.idle_add(self.process_content, value)
 
     def get_content(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
