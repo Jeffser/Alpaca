@@ -306,7 +306,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             old_attachment.delete()
             SQL.insert_or_update_attachment(m_element, attachment)
 
-        GLib.idle_add(m_element.block_container.set_content, raw_message)
+        m_element.block_container.set_content(raw_message)
 
         SQL.insert_or_update_message(m_element)
 
