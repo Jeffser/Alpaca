@@ -257,6 +257,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     current_chat.set_visible_child_name('welcome-screen')
             else:
                 current_chat.set_visible_child_name('no-results')
+            print('search')
 
     def send_message(self, mode:int=0): #mode 0=user 1=system 2=tool
         buffer = self.global_footer.get_buffer()
@@ -323,6 +324,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             current_chat.add_message(m_element_bot)
             SQL.insert_or_update_message(m_element_bot)
             if current_chat.chat_type == 'chat':
+                return
                 threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
             elif current_chat.chat_type == 'notebook':
                 tls = Widgets.tools.NotebookTools
@@ -365,7 +367,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def chat_changed(self, listbox, row):
-        if row:
+        if row and row.chat != self.chat_bin.get_child():
             # Discard Old Chat if Not Busy
             old_chat = self.chat_bin.get_child()
             if old_chat and not old_chat.busy:
