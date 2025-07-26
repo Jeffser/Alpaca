@@ -205,7 +205,7 @@ class BaseInstance:
         }
 
         if self.properties.get('max_tokens', 0) > 0:
-            params["max_tokens"] = self.properties.get('max_tokens', 0)
+            params["max_tokens"] = int(self.properties.get('max_tokens', 0))
         if tools_used:
             params["tools"] = tools_used
             params["tool_choice"] = "none"
