@@ -168,7 +168,6 @@ class BaseInstance:
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         bot_message.block_container.prepare_generating_block()
-        print('prepared')
 
         if self.properties.get('share_name', 0) > 0:
             user_display_name = None

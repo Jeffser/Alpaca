@@ -247,13 +247,13 @@ class BlockContainer(Gtk.Box):
                 'thought',
                 thought
             )
-            GLib.idle_add(self.message.attachment_container.add_attachment, attachment)
+            self.message.attachment_container.add_attachment(attachment)
             SQL.insert_or_update_attachment(self.message, attachment)
 
         clean_content = re.sub(think_pattern, '', content, flags=re.DOTALL).strip()
         for block in blocks.text_to_block_list(clean_content):
-            GLib.idle_add(self.append, block)
-        GLib.idle_add(self.message.main_stack.set_visible_child_name, 'content')
+            self.append(block)
+        self.message.main_stack.set_visible_child_name('content')
 
     def add_content(self, content:str) -> None:
         """
@@ -432,7 +432,6 @@ class Message(Gtk.Box):
             return new_attachment
 
     def update_message(self, data:dict):
-        print(data)
         if data.get('done'):
             self.popup.change_status(True)
             if self.get_root().get_name() == 'AlpacaWindow':
