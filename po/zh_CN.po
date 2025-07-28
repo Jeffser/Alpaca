@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 6.1.5\n"
+"Project-Id-Version: 7.5.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-24 16:45-0600\n"
-"PO-Revision-Date: 2025-06-05 00:28+0200\n"
+"PO-Revision-Date: 2025-07-28 23:08+0200\n"
 "Last-Translator: Yuehao Sui <8ar10der@amao.run>\n"
 "Language-Team: Chinese (China)\n"
 "Language: zh_CN\n"
@@ -119,7 +119,7 @@ msgstr "一段在内置终端中运行的 Python 脚本"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:73
 msgid "A conversation with web search"
-msgstr ""
+msgstr "带有网络搜索的对话"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:77
 msgid "Multiple models being downloaded"
@@ -127,7 +127,7 @@ msgstr "已下载的多个模型"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:81
 msgid "A Live Chat conversation with a character"
-msgstr ""
+msgstr "与角色的实时聊天对话"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 #: data/com.jeffser.Alpaca.metainfo.xml.in:117
@@ -165,11 +165,11 @@ msgstr ""
 #: data/com.jeffser.Alpaca.metainfo.xml.in:867
 #: data/com.jeffser.Alpaca.metainfo.xml.in:892
 msgid "New"
-msgstr ""
+msgstr "新增功能"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added option to regenerate responses when messages are edited"
-msgstr ""
+msgstr "添加了在编辑消息时重新生成回复的选项"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
@@ -213,51 +213,51 @@ msgstr ""
 #: data/com.jeffser.Alpaca.metainfo.xml.in:886
 #: data/com.jeffser.Alpaca.metainfo.xml.in:902
 msgid "Fixes"
-msgstr ""
+msgstr "修复"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Fixed message rendering problems"
-msgstr ""
+msgstr "修复了消息渲染问题"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
 msgid "Fixed inconsistent message generation rendering"
-msgstr ""
+msgstr "修复了消息生成渲染不一致的问题"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:119
 msgid "Save message edit with ctrl+enter"
-msgstr ""
+msgstr "使用 Ctrl+Enter 保存消息编辑"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Fixed Live Chat and Quick Ask not working sometimes"
-msgstr ""
+msgstr "修复了实时聊天和快速询问有时不工作的问题"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Fixed model creation and GGUF import"
-msgstr ""
+msgstr "修复了模型创建和 GGUF 导入功能"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:133
 msgid "Added option to use tools by default"
-msgstr ""
+msgstr "添加了默认使用工具的选项"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:134
 msgid "Redesign model manager"
-msgstr ""
+msgstr "重新设计了模型管理器"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:135
 msgid "Added option to attach audio and video files (audio transcription)"
-msgstr ""
+msgstr "添加了附加音频和视频文件的选项（音频转录）"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:136
 msgid "Added Spotify controller tool"
-msgstr ""
+msgstr "添加了 Spotify 控制工具"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:140
 msgid "Fixed thinking mode being on bugs out normal models"
-msgstr ""
+msgstr "修复了思考模式对普通模型造成错误的问题"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:149
 msgid "Fixed Alpaca crashing when chats database has incorrect metadata (type)"
-msgstr ""
+msgstr "修复了当聊天数据库的元数据（类型）不正确时 Alpaca 崩溃的问题"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:150
 msgid ""
@@ -272,47 +272,47 @@ msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:152
 msgid "Fixed instances sometimes not appearing"
-msgstr ""
+msgstr "修复了实例有时不显示的问题"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:161
 msgid "Live Chat (Talk to models as if you were on a call)"
-msgstr ""
+msgstr "实时聊天（像通话一样与模型交谈）"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:162
 msgid "Live message rendering"
-msgstr ""
+msgstr "实时消息渲染"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:163
 msgid "Faster dictation"
-msgstr ""
+msgstr "更快的语音输入"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:164
 msgid "Dictation whilst message is being generated"
-msgstr ""
+msgstr "在生成消息时语音输入"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:165
 msgid "Camera picture attachment"
-msgstr ""
+msgstr "相机图片附件"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:166
 msgid "Quick Ask now supports attachments"
-msgstr ""
+msgstr "快速询问现已支持附件"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:167
 msgid "Separator element for message and attachment rendering"
-msgstr ""
+msgstr "消息和附件渲染的分隔元素"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:168
 msgid "Redesigned popups"
-msgstr ""
+msgstr "重新设计的弹出框"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:169
 msgid "Thought switch for Ollama instances"
-msgstr ""
+msgstr "Ollama 实例的思考开关"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:170
 msgid "Username sharing for Ollama instances"
-msgstr ""
+msgstr "Ollama 实例的用户名共享"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:171
 msgid "Redesign for instance manager and tool manager"
@@ -2255,23 +2255,23 @@ msgstr "快速问答"
 
 #: src/live_chat.py:60 src/live_chat.py:152 src/quick_ask.py:76
 msgid "Please select an instance in Alpaca before chatting"
-msgstr ""
+msgstr "聊天前请在 Alpaca 中选择一个实例"
 
 #: src/live_chat.py:156 src/quick_ask.py:80
 msgid "Please select add a model for this instance in Alpaca before chatting"
-msgstr ""
+msgstr "聊天前请在 Alpaca 中为此实例添加一个模型"
 
 #: src/live_chat.py:159
 msgid "Selected model is not available"
-msgstr ""
+msgstr "所选模型不可用"
 
 #: src/live_chat.py:227
 msgid "No Messages"
-msgstr ""
+msgstr "无消息"
 
 #: src/live_chat.py:228
 msgid "Begin by speaking to the model"
-msgstr ""
+msgstr "开始与模型对话"
 
 #: src/main.py:220
 msgid "Documentation"
@@ -3236,6 +3236,8 @@ msgid ""
 "DeepSeek-R1 is a family of open reasoning models with performance "
 "approaching that of leading models, such as O3 and Gemini 2.5 Pro."
 msgstr ""
+"DeepSeek-R1 是一系列开源推理模型，其性能接近领先的模型，如 O3 和 Gemini 2.5 "
+"Pro。"
 
 #: src/ollama_models.py:4236
 msgid ""
@@ -3423,16 +3425,19 @@ msgid ""
 "Gemma 3n models are designed for efficient execution on everyday devices "
 "such as laptops, tablets or phones."
 msgstr ""
+"Gemma 3n 模型专为在日常设备（如笔记本电脑、平板电脑或手机）上高效运行而设计。"
 
 #: src/ollama_models.py:5140
 msgid "Magistral is a small, efficient reasoning model with 24B parameters."
-msgstr ""
+msgstr "Magistral 是一款参数量为 24B 的小型高效推理模型。"
 
 #: src/ollama_models.py:5187
 msgid ""
 "An update to Mistral Small that improves on function calling, instruction "
 "following, and less repetition errors."
 msgstr ""
+"这是 Mistral Small 的一次更新，改进了函数调用、指令遵循能力，并减少了重复错"
+"误。"
 
 #: src/quick_ask.py:138 src/gtk/quick_ask.ui:11
 msgid "Quick Ask"
@@ -3518,15 +3523,15 @@ msgstr "对话记录已成功导入"
 
 #: src/window.py:524
 msgid "Can't Run Live Chat"
-msgstr ""
+msgstr "无法运行实时聊天"
 
 #: src/window.py:525
 msgid "You are missing TTS libraries"
-msgstr ""
+msgstr "您缺少 TTS（文本转语音）库"
 
 #: src/window.py:575
 msgid "Pull Model"
-msgstr ""
+msgstr "拉取模型"
 
 #: src/window.py:576
 msgid "Please enter the model name following this template: name:tag"
@@ -3757,11 +3762,11 @@ msgstr ""
 
 #: src/gtk/window.ui:395
 msgid "Help us build better AI tools! Submit your ideas here."
-msgstr ""
+msgstr "帮助我们构建更好的 AI 工具！在此提交您的想法。"
 
 #: src/gtk/window.ui:403
 msgid "Request Form"
-msgstr ""
+msgstr "请求表单"
 
 #: src/gtk/window.ui:417
 msgid "Model Manager"
@@ -3834,7 +3839,7 @@ msgstr "开始快速提问"
 
 #: src/gtk/window.ui:674
 msgid "Start Live Chat"
-msgstr ""
+msgstr "开始实时聊天"
 
 #: src/gtk/window.ui:678 src/gtk/live_chat.ui:56 src/gtk/live_chat.ui:127
 msgid "Preferences"
@@ -3870,43 +3875,43 @@ msgstr "重载已添加的模型"
 
 #: src/gtk/window.ui:720
 msgid "Add Model by Name"
-msgstr ""
+msgstr "按名称添加模型"
 
 #: src/gtk/window.ui:726
 msgid "Create Model from Existing"
-msgstr ""
+msgstr "从现有模型创建"
 
 #: src/gtk/window.ui:730
 msgid "Create Model from GGUF File"
-msgstr ""
+msgstr "从 GGUF 文件创建模型"
 
 #: src/gtk/live_chat.ui:8
 msgid "Live chat dialog"
-msgstr ""
+msgstr "实时聊天对话框"
 
 #: src/gtk/live_chat.ui:13
 msgid "Live Chat"
-msgstr ""
+msgstr "实时聊天"
 
 #: src/gtk/live_chat.ui:44
 msgid "Show Messages"
-msgstr ""
+msgstr "显示消息"
 
 #: src/gtk/live_chat.ui:134
 msgid "Use Dynamic Backgrounds"
-msgstr ""
+msgstr "使用动态背景"
 
 #: src/gtk/live_chat.ui:135
 msgid "When using a model with a profile picture"
-msgstr ""
+msgstr "使用带有头像的模型时"
 
 #: src/gtk/live_chat.ui:140
 msgid "Turn on Microphone Automatically"
-msgstr ""
+msgstr "自动开启麦克风"
 
 #: src/gtk/live_chat.ui:141
 msgid "When launching Live Chat and after dictation"
-msgstr ""
+msgstr "启动实时聊天和语音输入后"
 
 #: src/gtk/quick_ask.ui:8
 msgid "Quick ask dialog"
@@ -3924,7 +3929,7 @@ msgstr "移除附件"
 #: src/widgets/attachments.py:116 src/widgets/attachments.py:301
 #: src/widgets/attachments.py:425
 msgid "Download Attachment"
-msgstr ""
+msgstr "下载附件"
 
 #: src/widgets/attachments.py:130
 msgid "Replace Notebook Content"
@@ -3942,7 +3947,7 @@ msgstr "你确定你想要删除 '{}' 吗？"
 
 #: src/widgets/attachments.py:290
 msgid "Save Attachment"
-msgstr ""
+msgstr "保存附件"
 
 #: src/widgets/attachments.py:340
 msgid "Image"
@@ -3954,11 +3959,11 @@ msgstr "无图像"
 
 #: src/widgets/attachments.py:391
 msgid "Delete Image?"
-msgstr ""
+msgstr "删除图像？"
 
 #: src/widgets/attachments.py:414
 msgid "Save Image"
-msgstr ""
+msgstr "保存图像"
 
 #: src/widgets/attachments.py:585
 msgid "Any compatible Alpaca attachment"
@@ -4002,19 +4007,19 @@ msgstr "附加屏幕截图"
 
 #: src/widgets/attachments.py:698
 msgid "Attach Photo From Camera"
-msgstr ""
+msgstr "从相机附加照片"
 
 #: src/widgets/camera.py:102
 msgid "Photo"
-msgstr ""
+msgstr "照片"
 
 #: src/widgets/camera.py:122
 msgid "No Camera Detected"
-msgstr ""
+msgstr "未检测到相机"
 
 #: src/widgets/camera.py:123
 msgid "Please check if camera is plugged in and turned on"
-msgstr ""
+msgstr "请检查相机是否已插入并开启"
 
 #: src/widgets/chat.py:86 src/widgets/instances/ollama_instances.py:76
 #: src/widgets/instances/openai_instances.py:106
@@ -4147,7 +4152,7 @@ msgstr "附加 YouTube 视频？"
 
 #: src/widgets/message.py:526
 msgid "Note that YouTube might block access to captions, please check output"
-msgstr ""
+msgstr "注意：YouTube 可能会阻止访问字幕，请检查输出"
 
 #: src/widgets/message.py:533
 #, python-brace-format
@@ -4228,28 +4233,28 @@ msgstr "使用语音识别时发生错误"
 
 #: src/widgets/voice.py:282 src/widgets/voice.py:405
 msgid "Download Speech Recognition Model"
-msgstr ""
+msgstr "下载语音识别模型"
 
 #: src/widgets/voice.py:283 src/widgets/voice.py:406
 #, python-brace-format
 msgid "To use speech recognition you'll need to download a special model ({})"
-msgstr ""
+msgstr "要使用语音识别功能，您需要下载一个专用模型（{}）。"
 
 #: src/widgets/voice.py:285 src/widgets/voice.py:408
 msgid "Download Model"
-msgstr ""
+msgstr "下载模型"
 
 #: src/widgets/voice.py:320
 msgid "Transcribing Audio"
-msgstr ""
+msgstr "正在转录音频"
 
 #: src/widgets/voice.py:346 src/widgets/voice.py:375
 msgid "Transcription Error"
-msgstr ""
+msgstr "转录错误"
 
 #: src/widgets/voice.py:376
 msgid "An error occurred while transcribing audio"
-msgstr ""
+msgstr "转录音频时发生错误"
 
 #: src/widgets/models/added.py:89
 msgid "Change Profile Picture"
@@ -4293,7 +4298,7 @@ msgstr "描述"
 
 #: src/widgets/models/added.py:170 src/widgets/models/added.py:174
 msgid "Files"
-msgstr ""
+msgstr "文件"
 
 #: src/widgets/models/added.py:193 src/widgets/models/creator.py:73
 msgid "Context"
@@ -4343,12 +4348,12 @@ msgstr "您确定要移除 '{}' 吗？"
 
 #: src/widgets/models/available.py:46
 msgid "Already Added"
-msgstr ""
+msgstr "已添加"
 
 #: src/widgets/models/available.py:48
 #, python-brace-format
 msgid "Pull '{}'"
-msgstr ""
+msgstr "拉取 '{}'"
 
 #: src/widgets/models/available.py:50
 msgid "Add Model"
@@ -4356,7 +4361,7 @@ msgstr "添加模型"
 
 #: src/widgets/models/available.py:111
 msgid "Add"
-msgstr ""
+msgstr "添加"
 
 #: src/widgets/models/available.py:120
 msgid ""
@@ -4366,7 +4371,7 @@ msgstr "通过下载此模型，您将接受在该模型网站上提供的许可
 
 #: src/widgets/models/available.py:253
 msgid "Pull Latest"
-msgstr ""
+msgstr "拉取最新版本"
 
 #: src/widgets/models/common.py:13
 msgid "Multilingual"
@@ -4434,7 +4439,7 @@ msgstr "名称"
 
 #: src/widgets/models/creator.py:67
 msgid "Add Files"
-msgstr ""
+msgstr "添加文件"
 
 #: src/widgets/models/creator.py:74
 msgid ""
@@ -4471,11 +4476,11 @@ msgstr "保存"
 
 #: src/widgets/models/creator.py:165
 msgid "Create Model"
-msgstr ""
+msgstr "创建模型"
 
 #: src/widgets/models/pulling.py:48
 msgid "Downloading..."
-msgstr ""
+msgstr "正在下载..."
 
 #: src/widgets/models/pulling.py:69 src/widgets/models/pulling.py:71
 #: src/widgets/models/pulling.py:174
@@ -4484,7 +4489,7 @@ msgstr "停止下载"
 
 #: src/widgets/models/pulling.py:132
 msgid "Dictation Model"
-msgstr ""
+msgstr "语音输入模型"
 
 #: src/widgets/models/pulling.py:188
 msgid "Stop Download?"
@@ -4523,7 +4528,7 @@ msgstr "由Kokoro提供的本地文本转语音(TTS)模型"
 
 #: src/widgets/models/speech.py:146 src/widgets/models/speech.py:289
 msgid "Delete Model"
-msgstr ""
+msgstr "删除模型"
 
 #: src/widgets/models/speech.py:187
 msgid "Local speech to text model provided by OpenAI Whisper."
@@ -4622,9 +4627,9 @@ msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
 msgstr "检测到 AMD GPU，但缺少 ROCm，Ollama 将使用 CPU。"
 
 #: src/widgets/instances/ollama_instances.py:509
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Using AMD GPU type '{}'"
-msgstr "使用 AMD GPU 类型"
+msgstr "使用 AMD GPU 类型 '{}'"
 
 #: src/widgets/instances/ollama_instances.py:519
 msgid "Integrated Ollama instance is not running"
@@ -4644,7 +4649,7 @@ msgstr "本地或远程AI实例不由Alpaca管理"
 
 #: src/widgets/instances/openai_instances.py:21
 msgid "Instances"
-msgstr ""
+msgstr "实例"
 
 #: src/widgets/instances/openai_instances.py:175
 msgid "Generating message..."
@@ -4658,7 +4663,7 @@ msgstr "无法获取模型列表"
 
 #: src/widgets/instances/openai_instances.py:475
 msgid "Alibaba Cloud Qwen large language models via DashScope"
-msgstr ""
+msgstr "通过 DashScope 使用阿里云 Qwen 大语言模型"
 
 #: src/widgets/instances/openai_instances.py:481
 msgid "Fireworks AI inference platform"
@@ -4678,11 +4683,11 @@ msgstr "Kluster AI 云端推理API"
 
 #: src/widgets/instances/openai_instances.py:559
 msgid "Kimi large language models by Moonshot AI"
-msgstr ""
+msgstr "由 Moonshot AI 开发的 Kimi 大语言模型"
 
 #: src/widgets/instances/openai_instances.py:566
 msgid "Mistral AI large language models"
-msgstr ""
+msgstr "Mistral AI 大语言模型"
 
 #: src/widgets/instances/openai_instances.py:573
 msgid "Meta AI Llama API"
@@ -4690,11 +4695,11 @@ msgstr "Meta AI Llama API"
 
 #: src/widgets/instances/openai_instances.py:579
 msgid "Novita AI cloud inference API"
-msgstr ""
+msgstr "Novita AI 云端推理 API"
 
 #: src/widgets/instances/openai_instances.py:586
 msgid "DeepInfra cloud inference API"
-msgstr ""
+msgstr "DeepInfra AI 云端推理 API"
 
 #: src/widgets/instances/openai_instances.py:590
 msgid "OpenAI Compatible Instance"
@@ -4735,21 +4740,21 @@ msgstr "API密钥（可选）"
 
 #: src/widgets/instances/__init__.py:97
 msgid "Thought Processing"
-msgstr ""
+msgstr "思维处理"
 
 #: src/widgets/instances/__init__.py:98
 msgid ""
 "Have compatible reasoning models think about their response before "
 "generating a message"
-msgstr ""
+msgstr "让兼容的推理模型在生成消息前对回应进行思考"
 
 #: src/widgets/instances/__init__.py:105
 msgid "Share Name"
-msgstr ""
+msgstr "分享名称"
 
 #: src/widgets/instances/__init__.py:106
 msgid "Automatically share your name with the AI models."
-msgstr ""
+msgstr "自动向 AI 模型分享你的名称。"
 
 #: src/widgets/instances/__init__.py:121
 msgid "Max Tokens"
@@ -4822,11 +4827,11 @@ msgstr "编辑实例"
 
 #: src/widgets/instances/__init__.py:277
 msgid "Create Instance"
-msgstr ""
+msgstr "创建实例"
 
 #: src/widgets/instances/__init__.py:353
 msgid "Fallback Instance"
-msgstr ""
+msgstr "备用实例"
 
 #: src/widgets/instances/__init__.py:393
 msgid "Remove Instance?"
@@ -4948,23 +4953,23 @@ msgstr "使用 DuckDuckGo 在线搜索术语"
 
 #: src/widgets/tools/tools.py:411
 msgid "Safe Search"
-msgstr ""
+msgstr "安全搜索"
 
 #: src/widgets/tools/tools.py:415
 msgid "On"
-msgstr ""
+msgstr "开启"
 
 #: src/widgets/tools/tools.py:416
 msgid "Moderate"
-msgstr ""
+msgstr "适度的"
 
 #: src/widgets/tools/tools.py:417
 msgid "Off"
-msgstr ""
+msgstr "关闭"
 
 #: src/widgets/tools/tools.py:421
 msgid "Max Results"
-msgstr ""
+msgstr "最大结果数"
 
 #: src/widgets/tools/tools.py:445
 msgid "Abstract Source"
@@ -4972,7 +4977,7 @@ msgstr "摘要来源"
 
 #: src/widgets/tools/tools.py:462
 msgid "Web Result Image"
-msgstr ""
+msgstr "网页搜索结果图片"
 
 #: src/widgets/tools/tools.py:492
 msgid "Request to run a command using SSH to connect to the device"
@@ -5012,43 +5017,43 @@ msgstr "在运行该命令之前，请确保您了解它的作用。"
 
 #: src/widgets/tools/tools.py:573
 msgid "Spotify Controller"
-msgstr ""
+msgstr "Spotify 控制器"
 
 #: src/widgets/tools/tools.py:574
 msgid "Control your music's playback"
-msgstr ""
+msgstr "控制您的音乐播放"
 
 #: src/widgets/tools/tools.py:625
 msgid "Log Back In"
-msgstr ""
+msgstr "重新登录"
 
 #: src/widgets/tools/tools.py:629
 msgid "Not logged in"
-msgstr ""
+msgstr "未登录"
 
 #: src/widgets/tools/tools.py:636
 msgid "Tutorial"
-msgstr ""
+msgstr "教程"
 
 #: src/widgets/tools/tools.py:663
 msgid "Spotify User"
-msgstr ""
+msgstr "Spotify 用户"
 
 #: src/widgets/tools/tools.py:724
 msgid "Login Error"
-msgstr ""
+msgstr "登陆失败"
 
 #: src/widgets/tools/tools.py:725
 msgid "Couldn't log in to Spotify"
-msgstr ""
+msgstr "无法登陆 Spotify"
 
 #: src/widgets/tools/tools.py:726
 msgid "Specify a Client ID and Client Secret"
-msgstr ""
+msgstr "指定一个客户端 ID 以及客户端密码"
 
 #: src/widgets/tools/tools.py:775
 msgid "Album Art"
-msgstr ""
+msgstr "专辑封面"
 
 #~ msgid "Attachment failed, screenshot might be too big"
 #~ msgstr "添加附件失败，截图可能太大了。"
