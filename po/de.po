@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 5.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-24 16:45-0600\n"
-"PO-Revision-Date: 2025-05-04 01:36+0200\n"
+"PO-Revision-Date: 2025-07-29 23:19+0200\n"
 "Last-Translator: Magnus Schlinsog <magnusschlinsog@gmail.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -119,7 +119,7 @@ msgstr "Ein Python-Skript, das im integrierten Terminal läuft"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:73
 msgid "A conversation with web search"
-msgstr ""
+msgstr "Eine Unterhaltung mit Websuche"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:77
 msgid "Multiple models being downloaded"
@@ -127,7 +127,7 @@ msgstr "Mehrere Modelle werden heruntergeladen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:81
 msgid "A Live Chat conversation with a character"
-msgstr ""
+msgstr "Ein Live-Chat mit einem Charakter"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
 #: data/com.jeffser.Alpaca.metainfo.xml.in:117
@@ -169,7 +169,7 @@ msgstr "Neu"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added option to regenerate responses when messages are edited"
-msgstr ""
+msgstr "Option zum Regenerieren von Nachrichten durch Bearbeitung hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
@@ -217,228 +217,245 @@ msgstr "Fehlerbehebungen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Fixed message rendering problems"
-msgstr ""
+msgstr "Nachrichten-Renderingprobleme behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
 msgid "Fixed inconsistent message generation rendering"
-msgstr ""
+msgstr "Inkonsistente Nachrichtengenerierung behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:119
 msgid "Save message edit with ctrl+enter"
-msgstr ""
+msgstr "Nachrichtenbearbeitungen können nun mit Strg+Enter gespeichert werden"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
 msgid "Fixed Live Chat and Quick Ask not working sometimes"
-msgstr ""
+msgstr "Behoben, dass Live Chat und Flinke Frage manchmal nicht funktionierten"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Fixed model creation and GGUF import"
-msgstr ""
+msgstr "Modellerstellung und GGUF-Import behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:133
 msgid "Added option to use tools by default"
-msgstr ""
+msgstr "Option, Tools standardmäßig zu nutzen, hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:134
 msgid "Redesign model manager"
-msgstr ""
+msgstr "Modellmanager neu designt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:135
 msgid "Added option to attach audio and video files (audio transcription)"
 msgstr ""
+"Option, Audio- und Videodateien mittels Transkription an Nachrichten "
+"anzuhängen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:136
 msgid "Added Spotify controller tool"
-msgstr ""
+msgstr "Spotify-Tool hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:140
 msgid "Fixed thinking mode being on bugs out normal models"
 msgstr ""
+"Behoben, dass der Reasoning-Modus dafür sorgte, dass normale Modelle nicht "
+"mehr antworten konnten"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:149
 msgid "Fixed Alpaca crashing when chats database has incorrect metadata (type)"
-msgstr ""
+msgstr "Abstürze bei inkorrekten Metadaten der Alpaca-Datenbank behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:150
 msgid ""
 "Fixed Quick Ask and Live Chat not running when opened from terminal whilst "
 "Alpaca is running"
 msgstr ""
+"Behoben, dass Flinke Frage und Live Chat nicht aus dem Terminal gestartet "
+"werden konnten, wenn Alpaca bereits lief"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:151
 msgid ""
 "Fixed stop button not working when pressed before text generation beggins"
 msgstr ""
+"Bug behoben, der Stopp-Schaltfläche nicht funktionieren ließ, wenn diese vor "
+"der Textgenerierung betätigt wurde"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:152
 msgid "Fixed instances sometimes not appearing"
-msgstr ""
+msgstr "Behoben, dass Instanzen manchmal nicht angezeigt wurden"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:161
 msgid "Live Chat (Talk to models as if you were on a call)"
-msgstr ""
+msgstr "Live Chat (sprechen Sie mit Modellen, als wäre es ein Anruf)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:162
 msgid "Live message rendering"
-msgstr ""
+msgstr "Live-Nachrichten-Rendering"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:163
 msgid "Faster dictation"
-msgstr ""
+msgstr "Schnellere Diktierfunktion"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:164
 msgid "Dictation whilst message is being generated"
-msgstr ""
+msgstr "Ermöglicht, zu diktieren, während eine Nachricht generiert wird"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:165
 msgid "Camera picture attachment"
-msgstr ""
+msgstr "Kameraaufnahmen als Anhänge hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:166
 msgid "Quick Ask now supports attachments"
-msgstr ""
+msgstr "Flinke Frage unterstützt nun Anhänge"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:167
 msgid "Separator element for message and attachment rendering"
-msgstr ""
+msgstr "Trennelement für Nachrichten- und Anhangrendering"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:168
 msgid "Redesigned popups"
-msgstr ""
+msgstr "Neu designte Pop-ups"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:169
 msgid "Thought switch for Ollama instances"
-msgstr ""
+msgstr "Reasoning-Schalter für Ollama-Instanzen hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:170
 msgid "Username sharing for Ollama instances"
-msgstr ""
+msgstr "Teilen des Nutzernamens an Ollama-Instanzen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:171
 msgid "Redesign for instance manager and tool manager"
-msgstr ""
+msgstr "Neu designte Instanzen- und Toolverwaltung"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:172
 msgid "Better web searching tool with options"
-msgstr ""
+msgstr "Bessere Websuche mit neuen Optionen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:176
 msgid "Fixed duplication of thought attachments"
-msgstr ""
+msgstr "Verdopplung von Reasoning-Anhängen behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:177
 msgid "Fixed weird behavior with model selector"
-msgstr ""
+msgstr "Merkwürdiges Verhalten des Modell-Managers behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:178
 msgid "Ollama (Managed) instances behave better"
-msgstr ""
+msgstr "Ollama (integriert)-Instanzen verhalten sich nun besser"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:179
 msgid "Better optimizations for RAM (~2GB difference)"
-msgstr ""
+msgstr "Bessere Speicheroptimierungen (ca. 2 GB Unterschied)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:180
 msgid "Instant chat rendering"
-msgstr ""
+msgstr "Sofortiges Chat-Rendering"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:181
 msgid "Models profile pictures are now saved at a higher resolution"
-msgstr ""
+msgstr "Profilbilder der Modelle werden nun mit höherer Auflösung gespeichert"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:182
 msgid "Quick Ask messages can now be sent by using the enter key"
-msgstr ""
+msgstr "Flinke Frage-Nachrichten können nun mit Enter gesendet werden"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:183
 msgid "Alpaca is less prone to crashes now"
-msgstr ""
+msgstr "Alpaca ist nun weniger absturzanfällig"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:192
 msgid "Fixed new chat not being created when the chat list is empty"
 msgstr ""
+"Behoben, dass neue Chats nicht erstellt werden, wenn die Chat-Liste leer ist"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:201
 msgid "Chat exporting now works as expected"
-msgstr ""
+msgstr "Exportieren von Chats funktioniert nun wie erwartet"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:202
 msgid "Fixed automatic creation of Ollama instance"
-msgstr ""
+msgstr "Automatische Erstellung der Ollama-Instanz behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:203
 msgid "Added Hebrew and Telugu credits"
 msgstr ""
+"Vermerk an die Autor:innen für Hebräische und Telugu-Übersetzungen "
+"hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:204
 msgid "Fixed STT model selector"
-msgstr ""
+msgstr "Modellauswahl für Spracherkennung behoben"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:213
 msgid "Multiple QuickAsk window rendering"
-msgstr ""
+msgstr "Mehrere \"Flinke Frage\"-Fenster können nun zugleich angezeigt werden"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:217
 msgid "Better stability for QuickAsk"
-msgstr ""
+msgstr "Bessere Stabilität für \"Flinke Frage\""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:218
 msgid "Creating a new chat now selects it"
-msgstr ""
+msgstr "Erstellung eines neuen Chats wählt diesen nun automatisch aus"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:227
 msgid "Chat Search"
-msgstr ""
+msgstr "Chatsuche"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:228
 msgid "Hide \"latest\" and \"custom\" tags from model selector"
 msgstr ""
+"\"latest\" und \"custom\"-Bezeichner werden nun von der Modellauswahl "
+"versteckt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:229
 msgid "Hide model's languages behind popup"
-msgstr ""
+msgstr "Sprache des Modells nun hinter Pop-Up verborgen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:230
 msgid "New models listed for Ollama"
-msgstr ""
+msgstr "Neue Ollama-Modelle in die Liste aufgenommen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:231
 msgid "Added option to autodictate new mesages"
-msgstr ""
+msgstr "Option zur automatischen Diktierung neuer Nachrichten hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:232
 msgid "Added Meta Llama API to list of instances"
-msgstr ""
+msgstr "Meta Llama API zur Liste an Instanzen hinzugefügt"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:233
 msgid ""
 "Added new env variables options (\"24H hour formatting\" and \"only Ollama "
 "mode\")"
 msgstr ""
+"Neue Umgebungsvariablenoptionen (bzgl. 24h-Format für Uhrzeiten und ein nur-"
+"Ollama-Modus)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:234
 msgid "Made Mermaid scripts executable using Python HTTP server"
-msgstr ""
+msgstr "Mermaid-Grafiken mit dem Python-HTTP-Server sichtbar gemacht"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:238
 msgid "Better stability when switching instances"
-msgstr ""
+msgstr "Bessere Stabilität beim Wechseln von Instanzen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:239
 msgid "Better performance when navigating menus"
-msgstr ""
+msgstr "Bessere Leistung beim Navigieren von Menüs"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:240
 msgid "Fixed some dialogs not appearing in Quick Ask window"
 msgstr ""
+"Behoben, dass einige Dialoge im \"Flinke Frage\"-Fenster nicht angezeigt "
+"werden"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:241
 msgid "Faster message search"
-msgstr ""
+msgstr "Schnellere Nachrichtensuche"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:242
 msgid "Faster message rendering"
-msgstr ""
+msgstr "Schnelleres Nachrichten-Rendering"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:251
 msgid "Fixed whisper directory not existing causing error"
@@ -2372,23 +2389,25 @@ msgstr "Flinke Frage"
 
 #: src/live_chat.py:60 src/live_chat.py:152 src/quick_ask.py:76
 msgid "Please select an instance in Alpaca before chatting"
-msgstr ""
+msgstr "Bitte wählen Sie eine Instanz aus, bevor sie Chatten"
 
 #: src/live_chat.py:156 src/quick_ask.py:80
 msgid "Please select add a model for this instance in Alpaca before chatting"
 msgstr ""
+"Bitte wählen Sie \"Modell hinzufügen\" für diese Instanz in Alpaca aus, "
+"bevor Sie chatten"
 
 #: src/live_chat.py:159
 msgid "Selected model is not available"
-msgstr ""
+msgstr "Ausgewähltes Modell ist nicht verfügbar"
 
 #: src/live_chat.py:227
 msgid "No Messages"
-msgstr ""
+msgstr "Keine Nachrichten"
 
 #: src/live_chat.py:228
 msgid "Begin by speaking to the model"
-msgstr ""
+msgstr "Beginnen Sie, indem Sie mit dem Modell sprechen"
 
 #: src/main.py:220
 msgid "Documentation"
@@ -3542,6 +3561,8 @@ msgid ""
 "DeepSeek-R1 is a family of open reasoning models with performance "
 "approaching that of leading models, such as O3 and Gemini 2.5 Pro."
 msgstr ""
+"DeepSeek-R1 ist eine Familie offener Reasoning-Modelle, deren Leistung sich "
+"der von führenden Modellen wie o3 und Gemini 2.5 Pro annähert."
 
 #: src/ollama_models.py:4236
 msgid ""
@@ -3662,7 +3683,7 @@ msgstr ""
 
 #: src/ollama_models.py:4795
 msgid "Devstral: the best open source model for coding agents"
-msgstr ""
+msgstr "Devstral: das beste Open-Source-Modell für Coding-Agents."
 
 #: src/ollama_models.py:4823
 msgid "Meta's latest collection of multimodal models."
@@ -3673,6 +3694,8 @@ msgid ""
 "Flagship vision-language model of Qwen and also a significant leap from the "
 "previous Qwen2-VL."
 msgstr ""
+"Flaggschiff-Vision-Language-Modell von Qwen und ein deutlicher Sprung "
+"gegenüber dem vorherigen Qwen2-VL."
 
 #: src/ollama_models.py:4901
 msgid ""
@@ -3745,16 +3768,22 @@ msgid ""
 "Gemma 3n models are designed for efficient execution on everyday devices "
 "such as laptops, tablets or phones."
 msgstr ""
+"Gemma 3n-Modelle sind für eine effiziente Ausführung auf Alltagsgeräten wie "
+"Laptops, Tablets oder Smartphones konzipiert."
 
 #: src/ollama_models.py:5140
 msgid "Magistral is a small, efficient reasoning model with 24B parameters."
 msgstr ""
+"Magistral ist ein kleines, effizientes Reasoning-Modell mit 24 Milliarden "
+"Parametern."
 
 #: src/ollama_models.py:5187
 msgid ""
 "An update to Mistral Small that improves on function calling, instruction "
 "following, and less repetition errors."
 msgstr ""
+"Ein Update für Mistral Small, das Funktionsaufrufe, Befolgung von "
+"Anweisungen und weniger Wiederholungsfehler verbessert."
 
 #: src/quick_ask.py:138 src/gtk/quick_ask.ui:11
 msgid "Quick Ask"
@@ -3843,11 +3872,11 @@ msgstr "Chatverlauf erfolgreich importiert"
 
 #: src/window.py:524
 msgid "Can't Run Live Chat"
-msgstr ""
+msgstr "Kann den Live-Chat nicht ausführen"
 
 #: src/window.py:525
 msgid "You are missing TTS libraries"
-msgstr ""
+msgstr "Ihnen fehlen Text-zu-Sprache-Bibliotheken"
 
 #: src/window.py:575
 msgid "Pull Model"
@@ -3993,23 +4022,25 @@ msgstr "Menü"
 
 #: src/gtk/window.ui:69
 msgid "Search Chats"
-msgstr ""
+msgstr "Chats durchsuchen"
 
 #: src/gtk/window.ui:78
 msgid "Chat search bar"
-msgstr ""
+msgstr "Chat-Suchleiste"
 
 #: src/gtk/window.ui:86 src/gtk/window.ui:88
 msgid "Search chats"
-msgstr ""
+msgstr "Chats suchen"
 
 #: src/gtk/window.ui:124
 msgid "No Chats Found"
-msgstr ""
+msgstr "Keine Chats gefunden"
 
 #: src/gtk/window.ui:125
 msgid "Oh no! It looks like there are no chats found for your search."
 msgstr ""
+"Oh nein! Es sieht so aus, als wären für die Suche keine Chats gefunden "
+"worden."
 
 #: src/gtk/window.ui:142
 msgid "Toggle Sidebar"
@@ -4092,10 +4123,11 @@ msgstr ""
 #: src/gtk/window.ui:395
 msgid "Help us build better AI tools! Submit your ideas here."
 msgstr ""
+"Helfen Sie uns, bessere KI-Tools zu bauen! Geben Sie hier ihre Ideen ab."
 
 #: src/gtk/window.ui:403
 msgid "Request Form"
-msgstr ""
+msgstr "Anfrageformular"
 
 #: src/gtk/window.ui:417
 msgid "Model Manager"
@@ -4155,7 +4187,7 @@ msgstr "Verfügbar"
 
 #: src/gtk/window.ui:644 src/widgets/chat.py:20
 msgid "New Notebook"
-msgstr ""
+msgstr "Neues Notizbuch"
 
 #: src/gtk/window.ui:652
 msgid "Import Chat"
@@ -4171,7 +4203,7 @@ msgstr "\"Flinke Frage\" starten"
 
 #: src/gtk/window.ui:674
 msgid "Start Live Chat"
-msgstr ""
+msgstr "Live-Chat starten"
 
 #: src/gtk/window.ui:678 src/gtk/live_chat.ui:56 src/gtk/live_chat.ui:127
 msgid "Preferences"
@@ -4207,43 +4239,43 @@ msgstr "Neu hinzugefügte Modelle neu laden"
 
 #: src/gtk/window.ui:720
 msgid "Add Model by Name"
-msgstr ""
+msgstr "Modell mittels Namen hinzufügen"
 
 #: src/gtk/window.ui:726
 msgid "Create Model from Existing"
-msgstr ""
+msgstr "Modell aus Bestehendem erstellen"
 
 #: src/gtk/window.ui:730
 msgid "Create Model from GGUF File"
-msgstr ""
+msgstr "Modell aus GGUF-Datei erstellen"
 
 #: src/gtk/live_chat.ui:8
 msgid "Live chat dialog"
-msgstr ""
+msgstr "Live-Chat-Dialog"
 
 #: src/gtk/live_chat.ui:13
 msgid "Live Chat"
-msgstr ""
+msgstr "Live-Chat"
 
 #: src/gtk/live_chat.ui:44
 msgid "Show Messages"
-msgstr ""
+msgstr "Nachrichten anzeigen"
 
 #: src/gtk/live_chat.ui:134
 msgid "Use Dynamic Backgrounds"
-msgstr ""
+msgstr "Dynamische Hintergründe nutzen"
 
 #: src/gtk/live_chat.ui:135
 msgid "When using a model with a profile picture"
-msgstr ""
+msgstr "Wenn ein Modell mit einem Profilbild verwendet wird"
 
 #: src/gtk/live_chat.ui:140
 msgid "Turn on Microphone Automatically"
-msgstr ""
+msgstr "Mikrofon automatisch einschalten"
 
 #: src/gtk/live_chat.ui:141
 msgid "When launching Live Chat and after dictation"
-msgstr ""
+msgstr "Wenn der Live-Chat nach der Diktierung gestartet wird"
 
 #: src/gtk/quick_ask.ui:8
 msgid "Quick ask dialog"
@@ -4261,15 +4293,15 @@ msgstr "Anhang entfernen"
 #: src/widgets/attachments.py:116 src/widgets/attachments.py:301
 #: src/widgets/attachments.py:425
 msgid "Download Attachment"
-msgstr ""
+msgstr "Anhang speichern"
 
 #: src/widgets/attachments.py:130
 msgid "Replace Notebook Content"
-msgstr ""
+msgstr "Notizbuch-Inhalte ersetzen"
 
 #: src/widgets/attachments.py:258
 msgid "Delete Attachment?"
-msgstr ""
+msgstr "Anhang löschen?"
 
 #: src/widgets/attachments.py:259 src/widgets/attachments.py:392
 #: src/widgets/chat.py:517
@@ -4279,7 +4311,7 @@ msgstr "Sind Sie sicher, dass Sie '{}' löschen möchten?"
 
 #: src/widgets/attachments.py:290
 msgid "Save Attachment"
-msgstr ""
+msgstr "Anhang speichern"
 
 #: src/widgets/attachments.py:340
 msgid "Image"
@@ -4291,11 +4323,11 @@ msgstr "Fehlendes Bild"
 
 #: src/widgets/attachments.py:391
 msgid "Delete Image?"
-msgstr ""
+msgstr "Bild löschen?"
 
 #: src/widgets/attachments.py:414
 msgid "Save Image"
-msgstr ""
+msgstr "Bild speichern"
 
 #: src/widgets/attachments.py:585
 msgid "Any compatible Alpaca attachment"
@@ -4339,36 +4371,36 @@ msgstr "Bildschirmfoto anhängen"
 
 #: src/widgets/attachments.py:698
 msgid "Attach Photo From Camera"
-msgstr ""
+msgstr "Foto von Kamera anhängen"
 
 #: src/widgets/camera.py:102
 msgid "Photo"
-msgstr ""
+msgstr "Foto"
 
 #: src/widgets/camera.py:122
 msgid "No Camera Detected"
-msgstr ""
+msgstr "Keine Kamera erkannt"
 
 #: src/widgets/camera.py:123
 msgid "Please check if camera is plugged in and turned on"
-msgstr ""
+msgstr "Bitte überprüfen Sie, ob die Kamera eingesteckt und eingeschaltet ist"
 
 #: src/widgets/chat.py:86 src/widgets/instances/ollama_instances.py:76
 #: src/widgets/instances/openai_instances.py:106
 msgid "Notebook"
-msgstr ""
+msgstr "Notizbuch"
 
 #: src/widgets/chat.py:87
 msgid "Start a notebook with a message"
-msgstr ""
+msgstr "Neues Notizbuch mit einer Nachricht starten"
 
 #: src/widgets/chat.py:95 src/widgets/chat.py:271
 msgid "No Messages Found"
-msgstr ""
+msgstr "Keine Nachrichten gefunden"
 
 #: src/widgets/chat.py:96 src/widgets/chat.py:272
 msgid "Uh oh! No messages found for your search."
-msgstr ""
+msgstr "Oh nein! Für diese Suche konnten keine Nachrichten gefunden werden."
 
 #: src/widgets/chat.py:262
 msgid "Try one of these prompts"
@@ -4486,6 +4518,8 @@ msgstr "YouTube-Video anhängen?"
 #: src/widgets/message.py:526
 msgid "Note that YouTube might block access to captions, please check output"
 msgstr ""
+"YouTube könnte den Zugriff auf die Untertitel blockieren - bitte Ausgabe "
+"überprüfen!"
 
 #: src/widgets/message.py:533
 #, python-brace-format
@@ -4518,11 +4552,11 @@ msgstr "Python-Umgebung wird eingerichtet..."
 
 #: src/widgets/terminal.py:29
 msgid "Using Python HTTP server..."
-msgstr ""
+msgstr "Nutzt den Python-HTTP-Server..."
 
 #: src/widgets/terminal.py:34
 msgid "Using Flatpak contained shell..."
-msgstr ""
+msgstr "Nutzt die isolierte Flatpak-Eingabeaufforderung..."
 
 #: src/widgets/terminal.py:38
 msgid "Using SSH to run command"
@@ -4542,7 +4576,7 @@ msgstr "Skript beendet"
 
 #: src/widgets/terminal.py:192
 msgid "Alpaca Terminal is not compatible with Windows"
-msgstr ""
+msgstr "Das Alpaca-Terminal ist nicht mit Windows kompatibel"
 
 #: src/widgets/voice.py:54
 msgid "Dictate Message"
@@ -4582,15 +4616,15 @@ msgstr "Modell herunterladen"
 
 #: src/widgets/voice.py:320
 msgid "Transcribing Audio"
-msgstr ""
+msgstr "Audio transkribieren"
 
 #: src/widgets/voice.py:346 src/widgets/voice.py:375
 msgid "Transcription Error"
-msgstr ""
+msgstr "Transkriptionsfehler"
 
 #: src/widgets/voice.py:376
 msgid "An error occurred while transcribing audio"
-msgstr ""
+msgstr "Ein Fehler ist bei der Transkription des Audios aufgetreten"
 
 #: src/widgets/models/added.py:89
 msgid "Change Profile Picture"
@@ -4634,7 +4668,7 @@ msgstr "Beschreibung"
 
 #: src/widgets/models/added.py:170 src/widgets/models/added.py:174
 msgid "Files"
-msgstr ""
+msgstr "Dateien"
 
 #: src/widgets/models/added.py:193 src/widgets/models/creator.py:73
 msgid "Context"
@@ -4651,7 +4685,7 @@ msgstr "Abstammendes Modell aus diesem erstellen"
 
 #: src/widgets/models/added.py:249 src/widgets/models/available.py:156
 msgid "Languages"
-msgstr ""
+msgstr "Sprachen"
 
 #: src/widgets/models/added.py:410 src/widgets/models/added.py:459
 #: src/widgets/models/speech.py:136 src/widgets/models/speech.py:279
@@ -4684,12 +4718,12 @@ msgstr "Sind Sie sich sicher, dass Sie '{}' entfernen möchten?"
 
 #: src/widgets/models/available.py:46
 msgid "Already Added"
-msgstr ""
+msgstr "Bereits hinzugefügt"
 
 #: src/widgets/models/available.py:48
 #, python-brace-format
 msgid "Pull '{}'"
-msgstr ""
+msgstr "'{}' herunterladen"
 
 #: src/widgets/models/available.py:50
 msgid "Add Model"
@@ -4697,7 +4731,7 @@ msgstr "Modell hinzufügen"
 
 #: src/widgets/models/available.py:111
 msgid "Add"
-msgstr ""
+msgstr "Hinzufügen"
 
 #: src/widgets/models/available.py:120
 msgid ""
@@ -4709,7 +4743,7 @@ msgstr ""
 
 #: src/widgets/models/available.py:253
 msgid "Pull Latest"
-msgstr ""
+msgstr "Neueste Version herunterladen"
 
 #: src/widgets/models/common.py:13
 msgid "Multilingual"
@@ -4777,7 +4811,7 @@ msgstr "Name"
 
 #: src/widgets/models/creator.py:67
 msgid "Add Files"
-msgstr ""
+msgstr "Dateien hinzufügen"
 
 #: src/widgets/models/creator.py:74
 msgid ""
@@ -4820,7 +4854,7 @@ msgstr "Modell erstellen"
 
 #: src/widgets/models/pulling.py:48
 msgid "Downloading..."
-msgstr ""
+msgstr "Herunterladen..."
 
 #: src/widgets/models/pulling.py:69 src/widgets/models/pulling.py:71
 #: src/widgets/models/pulling.py:174
@@ -4829,7 +4863,7 @@ msgstr "Download anhalten"
 
 #: src/widgets/models/pulling.py:132
 msgid "Dictation Model"
-msgstr ""
+msgstr "Diktierungsmodell"
 
 #: src/widgets/models/pulling.py:188
 msgid "Stop Download?"
@@ -4868,7 +4902,7 @@ msgstr "Lokales Text-zu-Sprache-Modell wird von Kokoro bereitgestellt."
 
 #: src/widgets/models/speech.py:146 src/widgets/models/speech.py:289
 msgid "Delete Model"
-msgstr ""
+msgstr "Modell löschen"
 
 #: src/widgets/models/speech.py:187
 msgid "Local speech to text model provided by OpenAI Whisper."
@@ -4881,7 +4915,7 @@ msgstr "Spracherkennung"
 #: src/widgets/instances/ollama_instances.py:68
 #: src/widgets/instances/openai_instances.py:98
 msgid "Notebook Error"
-msgstr ""
+msgstr "Notizbuchfehler"
 
 #: src/widgets/instances/ollama_instances.py:69
 #: src/widgets/instances/ollama_instances.py:155
@@ -4990,7 +5024,7 @@ msgstr "Lokale- oder Remoteinstanz, die nicht durch Alpaca verwaltet wird"
 
 #: src/widgets/instances/openai_instances.py:21
 msgid "Instances"
-msgstr ""
+msgstr "Instanzen"
 
 #: src/widgets/instances/openai_instances.py:175
 msgid "Generating message..."
@@ -5004,7 +5038,7 @@ msgstr "Konnte Modelle nicht abrufen"
 
 #: src/widgets/instances/openai_instances.py:475
 msgid "Alibaba Cloud Qwen large language models via DashScope"
-msgstr ""
+msgstr "Alibaba Cloud Qwen LLMs über DashScope"
 
 #: src/widgets/instances/openai_instances.py:481
 msgid "Fireworks AI inference platform"
@@ -5024,23 +5058,23 @@ msgstr "Kluster AI-Cloud-Inferenz-API"
 
 #: src/widgets/instances/openai_instances.py:559
 msgid "Kimi large language models by Moonshot AI"
-msgstr ""
+msgstr "Kimi-LLMs von Moonshot AI"
 
 #: src/widgets/instances/openai_instances.py:566
 msgid "Mistral AI large language models"
-msgstr ""
+msgstr "Mistral AI-LLMs"
 
 #: src/widgets/instances/openai_instances.py:573
 msgid "Meta AI Llama API"
-msgstr ""
+msgstr "Meta AI Llama API"
 
 #: src/widgets/instances/openai_instances.py:579
 msgid "Novita AI cloud inference API"
-msgstr ""
+msgstr "Novita AI Cloud-Inference-API"
 
 #: src/widgets/instances/openai_instances.py:586
 msgid "DeepInfra cloud inference API"
-msgstr ""
+msgstr "DeepInfra-Cloud-Inference-API"
 
 #: src/widgets/instances/openai_instances.py:590
 msgid "OpenAI Compatible Instance"
@@ -5081,21 +5115,23 @@ msgstr "API-Schlüssel (optional)"
 
 #: src/widgets/instances/__init__.py:97
 msgid "Thought Processing"
-msgstr ""
+msgstr "Gedankenverarbeitung"
 
 #: src/widgets/instances/__init__.py:98
 msgid ""
 "Have compatible reasoning models think about their response before "
 "generating a message"
 msgstr ""
+"Lässt kompatible Modelle über ihre Antwort nachdenken, bevor sie eine "
+"Nachricht generieren"
 
 #: src/widgets/instances/__init__.py:105
 msgid "Share Name"
-msgstr ""
+msgstr "Namen teilen"
 
 #: src/widgets/instances/__init__.py:106
 msgid "Automatically share your name with the AI models."
-msgstr ""
+msgstr "Teilt den Nutzernamen automatisch mit den KI-Modellen."
 
 #: src/widgets/instances/__init__.py:121
 msgid "Max Tokens"
@@ -5174,11 +5210,11 @@ msgstr "Instanz bearbeiten"
 
 #: src/widgets/instances/__init__.py:277
 msgid "Create Instance"
-msgstr ""
+msgstr "Instanz erstellen"
 
 #: src/widgets/instances/__init__.py:353
 msgid "Fallback Instance"
-msgstr ""
+msgstr "Ersatzinstanz"
 
 #: src/widgets/instances/__init__.py:393
 msgid "Remove Instance?"
@@ -5194,11 +5230,11 @@ msgstr "Code-Block"
 
 #: src/widgets/blocks/code.py:113
 msgid "Edit Script"
-msgstr ""
+msgstr "Skript bearbeiten"
 
 #: src/widgets/blocks/code.py:121
 msgid "Copy Script"
-msgstr ""
+msgstr "Skript kopieren"
 
 #: src/widgets/blocks/code.py:129
 msgid "Run Script"
@@ -5206,7 +5242,7 @@ msgstr "Starte Script"
 
 #: src/widgets/blocks/code.py:195
 msgid "Changes saved successfully"
-msgstr ""
+msgstr "Änderungen erfolgreich gespeichert"
 
 #: src/widgets/blocks/code.py:201
 msgid "Code copied to the clipboard"
@@ -5222,27 +5258,27 @@ msgstr "Gleichung in Zwischenablage kopiert"
 
 #: src/widgets/tools/notebook_tools.py:18
 msgid "Read Notebook"
-msgstr ""
+msgstr "Notizbuch lesen"
 
 #: src/widgets/tools/notebook_tools.py:19
 msgid "Reads the current notebook."
-msgstr ""
+msgstr "Liest das derzeitige Notizbuch aus."
 
 #: src/widgets/tools/notebook_tools.py:38
 msgid "Write Notebook"
-msgstr ""
+msgstr "Notizbuch schreiben"
 
 #: src/widgets/tools/notebook_tools.py:39
 msgid "Overwrites the notebook with new text."
-msgstr ""
+msgstr "Überschreibt das gesamte Notizbuch mit neuem Text."
 
 #: src/widgets/tools/notebook_tools.py:58
 msgid "Append to Notebook"
-msgstr ""
+msgstr "Zum Notizbuch hinzufügen"
 
 #: src/widgets/tools/notebook_tools.py:59
 msgid "Appends text to the notebook."
-msgstr ""
+msgstr "Fügt Text in das Notizbuch hinzu."
 
 #: src/widgets/tools/tools.py:22
 msgid "AI Description"
@@ -5304,23 +5340,23 @@ msgstr "Sucht bei DuckDuckGo online nach einem Begriff"
 
 #: src/widgets/tools/tools.py:411
 msgid "Safe Search"
-msgstr ""
+msgstr "Sichere Suche"
 
 #: src/widgets/tools/tools.py:415
 msgid "On"
-msgstr ""
+msgstr "An"
 
 #: src/widgets/tools/tools.py:416
 msgid "Moderate"
-msgstr ""
+msgstr "Moderat"
 
 #: src/widgets/tools/tools.py:417
 msgid "Off"
-msgstr ""
+msgstr "Aus"
 
 #: src/widgets/tools/tools.py:421
 msgid "Max Results"
-msgstr ""
+msgstr "Maximale Anzahl an Ergebnissen"
 
 #: src/widgets/tools/tools.py:445
 msgid "Abstract Source"
@@ -5328,7 +5364,7 @@ msgstr "Quelle der Zusammenfassung"
 
 #: src/widgets/tools/tools.py:462
 msgid "Web Result Image"
-msgstr ""
+msgstr "Web-Ergebnis-Bild"
 
 #: src/widgets/tools/tools.py:492
 msgid "Request to run a command using SSH to connect to the device"
@@ -5371,43 +5407,43 @@ msgstr ""
 
 #: src/widgets/tools/tools.py:573
 msgid "Spotify Controller"
-msgstr ""
+msgstr "Spotify-Steuerung"
 
 #: src/widgets/tools/tools.py:574
 msgid "Control your music's playback"
-msgstr ""
+msgstr "Steuern Sie das Abspielen ihrer Musik"
 
 #: src/widgets/tools/tools.py:625
 msgid "Log Back In"
-msgstr ""
+msgstr "Erneut anmelden"
 
 #: src/widgets/tools/tools.py:629
 msgid "Not logged in"
-msgstr ""
+msgstr "Nicht angemeldet"
 
 #: src/widgets/tools/tools.py:636
 msgid "Tutorial"
-msgstr ""
+msgstr "Anleitung"
 
 #: src/widgets/tools/tools.py:663
 msgid "Spotify User"
-msgstr ""
+msgstr "Spotify-Nutzer"
 
 #: src/widgets/tools/tools.py:724
 msgid "Login Error"
-msgstr ""
+msgstr "Anmeldefehler"
 
 #: src/widgets/tools/tools.py:725
 msgid "Couldn't log in to Spotify"
-msgstr ""
+msgstr "Konnte sich nicht bei Spotify anmelden"
 
 #: src/widgets/tools/tools.py:726
 msgid "Specify a Client ID and Client Secret"
-msgstr ""
+msgstr "Client-ID und Client-Geheimnis angeben"
 
 #: src/widgets/tools/tools.py:775
 msgid "Album Art"
-msgstr ""
+msgstr "Album-Artwork"
 
 #~ msgid "Attachment failed, screenshot might be too big"
 #~ msgstr "Anhängen schlug fehl; das Bildschirmfoto ist womöglich zu groß."
@@ -5444,8 +5480,8 @@ msgstr ""
 #~ "Alpaca und dessen Entwickler:innen sind nicht für Schäden jeglicher Art "
 #~ "und Weise an Geräten oder Software, entstehend durch die Ausführung KI-"
 #~ "generierter Software, verantwortlich. Besondere Vorsicht bei der "
-#~ "Ausführung solches Codes ist oberstes Gebot und obliegt Alpacas "
-#~ "Nutzer:innen.\n"
+#~ "Ausführung solches Codes ist oberstes Gebot und obliegt Alpacas Nutzer:"
+#~ "innen.\n"
 #~ "Alpaca wird unter der GPL v3.0 distributiert. Diese Software kommt ohne "
 #~ "jegliche Garantie."
 
@@ -5662,10 +5698,10 @@ msgstr ""
 #~ "you'll see it with rich text styling, making it easier to understand the "
 #~ "content before you send it."
 #~ msgstr ""
-#~ "Nun können Fragen zu noch mehr Dateitypen gestellt werden, "
-#~ "darunter .docx, .pptx und .xlsx! Dazu kommt ein verbessertes Rendering "
-#~ "von Rich Text in der Vorschau dieser Dateien - sodass es noch einfacher "
-#~ "wird, den Inhalt vor dem Versenden zu verstehen."
+#~ "Nun können Fragen zu noch mehr Dateitypen gestellt werden, darunter ."
+#~ "docx, .pptx und .xlsx! Dazu kommt ein verbessertes Rendering von Rich "
+#~ "Text in der Vorschau dieser Dateien - sodass es noch einfacher wird, den "
+#~ "Inhalt vor dem Versenden zu verstehen."
 
 #~ msgid "Official Website"
 #~ msgstr "Offizielle Website"
