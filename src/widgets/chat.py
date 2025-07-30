@@ -4,7 +4,7 @@ Handles the chat widget
 """
 
 import gi
-from gi.repository import Gtk, Gio, Adw, Gdk
+from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 import logging, os, datetime, random, json, threading
 from ..constants import SAMPLE_PROMPTS, cache_dir
 from ..sql_manager import generate_uuid, prettify_model_name, generate_numbered_name, Instance as SQL
@@ -136,8 +136,8 @@ class Notebook(Gtk.Stack):
 
     def unload_messages(self):
         for widget in list(self.container):
-            widget.unparent()
-            widget.unrealize()
+            GLib.idle_add(widget.unparent)
+            GLib.idle_add(widget.unrealize)
         self.set_visible_child_name('loading')
 
     def add_message(self, message):
@@ -154,22 +154,24 @@ class Notebook(Gtk.Stack):
                 mode=('user', 'assistant', 'system').index(message[1]),
                 author=message[2]
             )
-            self.container.append(message_element)
+            GLib.idle_add(self.container.append, message_element)
 
             attachments = SQL.get_attachments(message_element)
             for attachment in attachments:
-                message_element.add_attachment(
-                    file_id=attachment[0],
-                    name=attachment[2],
-                    attachment_type=attachment[1],
-                    content=attachment[3]
+                GLib.idle_add(
+                    lambda: message_element.add_attachment(
+                        file_id=attachment[0],
+                        name=attachment[2],
+                        attachment_type=attachment[1],
+                        content=attachment[3]
+                    ) and False
                 )
                 if attachment[1] == 'notebook' and attachment[3]:
                     last_notebook = attachment[3]
-            message_element.block_container.set_content(message[4])
-        self.set_visible_child_name('content' if len(messages) > 0 else 'welcome-screen')
+            GLib.idle_add(message_element.block_container.set_content, message[4])
+        GLib.idle_add(self.set_visible_child_name, 'content' if len(messages) > 0 else 'welcome-screen')
         if last_notebook:
-            self.set_notebook(last_notebook)
+            GLib.idle_add(self.set_notebook, last_notebook)
 
     def convert_to_ollama(self) -> list:
         messages = []
@@ -309,13 +311,13 @@ class Chat(Gtk.Stack):
 
     def unload_messages(self):
         for widget in list(self.container):
-            widget.unparent()
-            widget.unrealize()
+            GLib.idle_add(widget.unparent)
+            GLib.idle_add(widget.unrealize)
         self.set_visible_child_name('loading')
 
     def add_message(self, message):
         self.container.append(message)
-        self.set_visible_child_name('content')
+        GLib.idle_add(self.set_visible_child_name, 'content')
 
     def load_messages(self):
         messages = SQL.get_messages(self)
@@ -327,18 +329,20 @@ class Chat(Gtk.Stack):
                 mode=('user', 'assistant', 'system').index(message[1]),
                 author=message[2]
             )
-            self.container.append(message_element)
+            GLib.idle_add(self.container.append, message_element)
 
             attachments = SQL.get_attachments(message_element)
             for attachment in attachments:
-                message_element.add_attachment(
-                    file_id=attachment[0],
-                    name=attachment[2],
-                    attachment_type=attachment[1],
-                    content=attachment[3]
+                GLib.idle_add(
+                    lambda: message_element.add_attachment(
+                        file_id=attachment[0],
+                        name=attachment[2],
+                        attachment_type=attachment[1],
+                        content=attachment[3]
+                    ) and False
                 )
-            message_element.block_container.set_content(message[4])
-        self.set_visible_child_name('content' if len(messages) > 0 else 'welcome-screen')
+            GLib.idle_add(message_element.block_container.set_content, message[4])
+        GLib.idle_add(self.set_visible_child_name, 'content' if len(messages) > 0 else 'welcome-screen')
 
     def send_sample_prompt(self, prompt:str):
         if self.get_root().get_name() == 'AlpacaWindow':

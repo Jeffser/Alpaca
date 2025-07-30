@@ -631,6 +631,12 @@ class SpotifyController(Base):
         self.login_row.add_suffix(login_button)
 
         self.dialog.variables.add(self.login_row)
+        self.dialog.variables.add(Gtk.LinkButton(
+            uri='https://github.com/Jeffser/Alpaca/wiki/Tools#spotify-controller',
+            label=_('Tutorial'),
+            margin_top=10
+        ))
+
         self.dialog.present(self.get_root())
         self.refresh_user()
 

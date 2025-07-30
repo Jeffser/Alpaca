@@ -1,7 +1,8 @@
 # attachments.py
 
 import gi
-from gi.repository import Adw, Gtk, Gio, Gdk, GdkPixbuf, GLib
+gi.require_version('Xdp', '1.0')
+from gi.repository import Adw, Gtk, Gio, Gdk, GdkPixbuf, GLib, Xdp
 
 import odf.opendocument as odfopen
 import odf.table as odftable
@@ -532,7 +533,7 @@ class GlobalAttachmentContainer(AttachmentContainer):
         )
         self.add_attachment(attachment)
 
-    def on_attachment(self, file:Gio.File):
+    def on_attachment(self, file:Gio.File, remove_original:bool=False):
         if not file:
             return
         file_types = {
@@ -617,36 +618,18 @@ class GlobalAttachmentContainer(AttachmentContainer):
 
     def request_screenshot(self):
         if self.get_root().get_selected_model().get_vision():
-            loop = GLib.MainLoop()
-            bus = SessionBus()
-            portal = bus.get("org.freedesktop.portal.Desktop",
-                                  "/org/freedesktop/portal/desktop")
+            def on_response(portal, res, user_data):
+                filename = portal.take_screenshot_finish(res)
+                if filename:
+                    self.on_attachment(Gio.File.new_for_uri(filename))
 
-            options = {
-                "interactive": GLib.Variant('b', True)
-            }
-            handle = portal.Screenshot("", options)
-
-            def on_response(sender, object_path, interface_name, signal_name, parameters):
-                response_code = parameters[0]
-                results = parameters[1]
-                if response_code == 0 and "uri" in results:
-                    uri = results["uri"]
-                    file = Gio.File.new_for_uri(uri)
-                    self.on_attachment(file)
-                else:
-                    logger.error(f"Screenshot request failed with response: {response}\n{sender}\n{obj}\n{iface}\n{signal}")
-                    dialog.show_toast(_("Attachment failed, screenshot might be too big"), self)
-                loop.quit()
-
-            bus.subscribe(
-                iface="org.freedesktop.portal.Request",
-                signal="Response",
-                object=handle,
-                signal_fired=on_response
+            Xdp.Portal().take_screenshot(
+                None,
+                Xdp.ScreenshotFlags.INTERACTIVE,
+                None,
+                on_response,
+                None
             )
-
-            loop.run()
         else:
             dialog.show_toast(_("Image recognition is only available on specific models"), self.get_root())
 

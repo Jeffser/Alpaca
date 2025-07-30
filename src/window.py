@@ -365,7 +365,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def chat_changed(self, listbox, row):
-        if row:
+        if row and row.chat != self.chat_bin.get_child():
             # Discard Old Chat if Not Busy
             old_chat = self.chat_bin.get_child()
             if old_chat and not old_chat.busy:

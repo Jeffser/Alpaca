@@ -139,7 +139,7 @@ class LiveChatWindow(Adw.ApplicationWindow):
                 threading.Thread(target=self.try_turning_on_mic).start()
 
     def send_message(self, mode:int=0):
-        #Mode = 0 (normal), Mode = 1 (System), Mode = 2 (Use Tools)3
+        #Mode = 0 (normal), Mode = 1 (System), Mode = 2 (Use Tools)
         buffer = self.global_footer.get_buffer()
         message = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
         if not message:
@@ -151,7 +151,7 @@ class LiveChatWindow(Adw.ApplicationWindow):
         if not current_instance:
             Widgets.dialog.show_toast(_("Please select an instance in Alpaca before chatting"), self)
             return
-        current_model = self.get_selected_model()
+        current_model = self.get_selected_model().get_name()
         if not current_model:
             Widgets.dialog.show_toast(_("Please select add a model for this instance in Alpaca before chatting"), self)
             return
@@ -210,7 +210,7 @@ class LiveChatWindow(Adw.ApplicationWindow):
             if mode == 0:
                 threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
             else:
-                threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.tool_listbox), True)).start()
+                threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.get_application().main_alpaca_window.tool_listbox), True)).start()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

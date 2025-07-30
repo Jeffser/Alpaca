@@ -1428,6 +1428,23 @@
             ]
         },
         {
+            "name": "libportal",
+            "buildsystem": "meson",
+            "builddir": true,
+            "config-opts": [
+            	"-Ddocs=false",
+            	"-Dtests=false",
+            	"-Dvapi=false"
+            ],
+            "sources": [
+            	{
+		   "type": "git",
+		   "url": "https://github.com/flatpak/libportal.git",
+		   "tag": "0.9.1"
+            	}
+            ]
+	},
+        {
             "name": "alpaca",
             "builddir": true,
             "buildsystem": "meson",

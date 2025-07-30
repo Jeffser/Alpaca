@@ -4,7 +4,7 @@ Text blocks with PangoMarkup styling
 """
 
 import gi
-from gi.repository import GLib, Gtk
+from gi.repository import GLib, Gtk, Gdk
 
 import re, unicodedata
 
@@ -51,9 +51,7 @@ class GeneratingText(Gtk.Overlay):
         if content:
             self.set_content(content)
 
-    def append_content(self, value:str) -> None:
-        text = GLib.markup_escape_text(value)
-        self.buffer.insert_markup(self.buffer.get_end_iter(), text, len(text.encode('utf-8')))
+    def process_content(self, value:str) -> None:
         current_text = self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
         if value.endswith('\n'):
             think_block_complete = not current_text.strip().startswith('<think>') or current_text.strip().endswith('</think>')
@@ -62,10 +60,15 @@ class GeneratingText(Gtk.Overlay):
             table_block_complete = not current_text.strip().startswith('|') or '|\n\n' in current_text
 
             if think_block_complete and think_block_complete_v2 and code_block_complete and table_block_complete:
-                GLib.idle_add(self.set_content)
-                GLib.idle_add(self.get_parent().add_content, current_text)
+                self.set_content()
+                self.get_parent().add_content(current_text)
         elif not self.get_parent().message.popup.tts_button.get_active() and '.' in current_text and (self.get_parent().message.get_root().settings.get_value('tts-auto-dictate').unpack() or self.get_parent().message.get_root().get_name() == 'AlpacaLiveChat'):
-            GLib.idle_add(self.get_parent().message.popup.tts_button.set_active, True)
+            self.get_parent().message.popup.tts_button.set_active(True)
+
+    def append_content(self, value:str) -> None:
+        text = GLib.markup_escape_text(value)
+        GLib.idle_add(self.buffer.insert_markup, self.buffer.get_end_iter(), text, len(text.encode('utf-8')))
+        GLib.idle_add(self.process_content, value)
 
     def get_content(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
@@ -167,6 +170,14 @@ class EditingText(Gtk.Box):
         )
         self.append(self.textview)
 
+        enter_key_controller = Gtk.EventControllerKey.new()
+        enter_key_controller.connect("key-pressed", self.enter_key_handler)
+        self.textview.add_controller(enter_key_controller)
+
+    def enter_key_handler(self, controller, keyval, keycode, state):
+        if keyval==Gdk.KEY_Return and state & Gdk.ModifierType.CONTROL_MASK:
+            self.save_edit()
+
     def set_content(self, content:str):
         self.textview.get_buffer().set_text(content, len(content.encode('utf8')))
 
@@ -178,10 +189,16 @@ class EditingText(Gtk.Box):
 
     def save_edit(self):
         buffer = self.textview.get_buffer()
-        self.message.block_container.set_content(buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
+        GLib.idle_add(self.message.block_container.set_content, buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
         self.message.set_halign(2 if self.message.mode == 0 else 0)
         self.set_visible(False)
         self.message.header_container.set_visible(True)
         self.message.main_stack.set_visible_child_name('content')
-        self.message.save()
-        
+        GLib.idle_add(self.message.save)
+        return
+        response_index = list(self.message.get_parent()).index(self.message) + 1
+        if len(list(self.message.get_parent())) > response_index:
+            next_message = list(self.message.get_parent())[response_index]
+            if next_message.mode == 1 and next_message.get_root().settings.get_value('regenerate-after-edit').unpack():
+                next_message.popup.regenerate_message()
+

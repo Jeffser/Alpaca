@@ -18,6 +18,10 @@ class BaseInstance:
     def set_row(self, row):
         self.row = row
 
+    def get_row(self):
+        if hasattr(self, 'row'):
+            return self.row
+
     def prepare_chat(self, bot_message):
         bot_message.chat.busy = True
         if bot_message.chat.chat_id:
@@ -82,6 +86,7 @@ class BaseInstance:
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         bot_message.update_message({'add_css': 'dim-label'})
+        bot_message.block_container.prepare_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(
@@ -162,7 +167,7 @@ class BaseInstance:
     def generate_response(self, bot_message, chat, messages:list, model:str, tools_used:list):
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
-        GLib.idle_add(bot_message.update_message, {'clear': True})
+        bot_message.block_container.prepare_generating_block()
 
         if self.properties.get('share_name', 0) > 0:
             user_display_name = None
@@ -230,8 +235,8 @@ class BaseInstance:
                     error_log = e
                 )
                 logger.error(e)
-                if self.row:
-                    self.row.get_parent().unselect_all()
+                if self.get_row():
+                    self.get_row().get_parent().unselect_all()
         bot_message.update_message({"done": True})
 
     def generate_chat_title(self, chat, prompt:str):
@@ -316,13 +321,13 @@ class BaseInstance:
                 return json.loads(response.text).get('models')
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
                 error_log = e
             )
             logger.error(e)
-            self.row.get_parent().unselect_all()
+            self.get_row().get_parent().unselect_all()
         return []
 
     def get_available_models(self) -> dict:
@@ -330,7 +335,7 @@ class BaseInstance:
             return OLLAMA_MODELS
         except Exception as e:
             dialog.simple_error(
-                parent = self.row.get_root(),
+                parent = self.get_row().get_root(),
                 title = _('Instance Error'),
                 body = _('Could not retrieve available models'),
                 error_log = e
@@ -387,12 +392,12 @@ class BaseInstance:
         if not self.process:
             self.start()
         try:
-            return requests.get(
+            return requests.head(
                 '{}/api/blobs/sha256:{}'.format(self.properties.get('url'), sha256),
                 headers={
                     'Authorization': 'Bearer {}'.format(self.properties.get('api'))
                 }
-            ).status_code != 404
+            ).status_code == 200
         except Exception as e:
             return False
 
@@ -411,23 +416,23 @@ class BaseInstance:
     def create_model(self, data:dict, callback:callable):
         if not self.process:
             self.start()
-        #try:
-        response = requests.post(
-            '{}/api/create'.format(self.properties.get('url')),
-            headers={
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-            },
-            data=json.dumps(data),
-            stream=True
-        )
-        if response.status_code == 200:
-            for line in response.iter_lines():
-                if line:
-                    callback(json.loads(line.decode("utf-8")))
-        #except Exception as e:
-            #callback({'error': e})
-            #logger.error(e)
+        try:
+            response = requests.post(
+                '{}/api/create'.format(self.properties.get('url')),
+                headers={
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
+                },
+                data=json.dumps(data),
+                stream=True
+            )
+            if response.status_code == 200:
+                for line in response.iter_lines():
+                    if line:
+                        callback(json.loads(line.decode("utf-8")))
+        except Exception as e:
+            callback({'error': e})
+            logger.error(e)
 
     def delete_model(self, model_name:str):
         if not self.process:
@@ -493,7 +498,7 @@ class OllamaManaged(BaseInstance):
                     self.log_raw += line
                     print(line, end='')
                     if 'msg="model request too large for system"' in line:
-                        dialog.show_toast(_("Model request too large for system"), self.row.get_root())
+                        dialog.show_toast(_("Model request too large for system"), self.get_row().get_root())
                     elif 'msg="amdgpu detected, but no compatible rocm library found.' in line:
                         if bool(os.getenv("FLATPAK_ID")):
                             self.log_summary = (_("AMD GPU detected but the extension is missing, Ollama will use CPU.") + AMD_support_label, ['dim-label', 'error'])
@@ -540,14 +545,14 @@ class OllamaManaged(BaseInstance):
                 logger.info(v_str.split('\n')[1].strip('Warning: ').strip())
             except Exception as e:
                 dialog.simple_error(
-                    parent = self.row.get_root(),
+                    parent = self.get_row().get_root(),
                     title = _('Instance Error'),
                     body = _('Managed Ollama instance failed to start'),
                     error_log = e
                 )
                 logger.error(e)
-                if self.row:
-                    self.row.get_parent().unselect_all()
+                if self.get_row():
+                    self.get_row().get_parent().unselect_all()
             self.log_summary = (_("Integrated Ollama instance is running"), ['dim-label', 'success'])
 
 class Ollama(BaseInstance):
