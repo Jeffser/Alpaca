@@ -1,0 +1,4860 @@
+# Belarusian translations for Alpaca package.
+# Copyright (C) 2024-2025 Jeffry Samuel Eduarte Rojas
+# This file is distributed under the same license as the Alpaca package.
+# ALIAKSANDR KLIUJEŬ <katoshrodingera@protonmail.ch>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-29 19:55-0600\n"
+"PO-Revision-Date: 2025-07-30 02:15+0200\n"
+"Last-Translator: Aliaksandr Kliujeŭ <katoshrodingera@protonmail.ch>\n"
+"Language-Team: Belarusian <katoshrodingera@protonmail.ch>\n"
+"Language: be\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.6\n"
+
+#: data/com.jeffser.Alpaca.desktop.in:2 data/com.jeffser.Alpaca.metainfo.xml.in:7
+msgid "Alpaca"
+msgstr "Alpaca"
+
+#: data/com.jeffser.Alpaca.desktop.in:8
+msgid "ai;ollama;llm"
+msgstr "ai;ollama;llm"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:8
+msgid "Chat with AI models"
+msgstr "Размаўляйце з мадэлямі ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:10
+msgid "A private AI client"
+msgstr "Прыватны кліент ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:11 data/com.jeffser.Alpaca.metainfo.xml.in:1265
+msgid "Features"
+msgstr "Функцыі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:13 data/com.jeffser.Alpaca.metainfo.xml.in:1267
+msgid "Talk to multiple models in the same conversation"
+msgstr "Размаўляйце з некалькімі мадэлямі ў адной размове"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:14 data/com.jeffser.Alpaca.metainfo.xml.in:1268
+msgid "Pull and delete models from the app"
+msgstr "Атрымлівайце і выдаляйце мадэлі непасрэдна ў праграме"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:15
+msgid "Have multiple conversations"
+msgstr "Вядзіце некалькі размоў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:16
+msgid "Image recognition (Only available with compatible models)"
+msgstr "Распазнаванне відарысаў (даступна толькі ў сумяшчальных мадэлях)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:17
+msgid "Plain text documents recognition"
+msgstr "Распазнаванне тэкставых дакументаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:18
+msgid "Import and export chats"
+msgstr "Імпарт і экспарт чатаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:19
+msgid "Append YouTube transcripts to the prompt"
+msgstr "Дадавайце да запыту расшыфроўкі з YouTube"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:20
+msgid "Append text from a website to the prompt"
+msgstr "Дадавайце тэкст з сайта да запыту"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:21
+msgid "PDF recognition"
+msgstr "Распазнаванне PDF"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:23 src/gtk/window.ui:90
+msgid "Disclaimer"
+msgstr "Адмова ад адказнасці"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24
+msgid "This project is not affiliated at all with Ollama, I'm not responsible for any damages to your device or software caused by running code given by any models."
+msgstr "Гэты праект ніяк не звязаны з Ollama; я не нясу адказнасці за любую шкоду вашай прыладзе ці праграмнаму забеспячэнню, выкліканую выкананнем кода, які ідзе разам з якой-небудзь мадэллю."
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:27
+msgid "Jeffry Samuel Eduarte Rojas"
+msgstr "Jeffry Samuel Eduarte Rojas"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:53
+msgid "A normal conversation with an AI Model"
+msgstr "Звычайная размова з мадэллю ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:57
+msgid "A conversation involving image recognition"
+msgstr "Размова з выкарыстаннем распазнання відарысаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:61
+msgid "A conversation involving a custom model"
+msgstr "Размова з выкарыстаннем карыстальніцкай мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:65
+msgid "A conversation showing code highlighting"
+msgstr "Размова з падсветкай кода"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:69
+msgid "A Python script running inside integrated terminal"
+msgstr "Выкананне Python-сцэнарыя ў інтэграваным тэрмінале"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:73
+msgid "A conversation with web search"
+msgstr "Размова з пошукам у інтэрнэце"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:77
+msgid "Multiple models being downloaded"
+msgstr "Спампоўванне некалькіх мадэляў адначасова"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:81
+msgid "A Live Chat conversation with a character"
+msgstr "Размова з персанажам у «Чаце ўжывую»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:95 data/com.jeffser.Alpaca.metainfo.xml.in:122 data/com.jeffser.Alpaca.metainfo.xml.in:138 data/com.jeffser.Alpaca.metainfo.xml.in:147 data/com.jeffser.Alpaca.metainfo.xml.in:163
+#: data/com.jeffser.Alpaca.metainfo.xml.in:184 data/com.jeffser.Alpaca.metainfo.xml.in:197 data/com.jeffser.Alpaca.metainfo.xml.in:212 data/com.jeffser.Alpaca.metainfo.xml.in:221 data/com.jeffser.Alpaca.metainfo.xml.in:232
+#: data/com.jeffser.Alpaca.metainfo.xml.in:241 data/com.jeffser.Alpaca.metainfo.xml.in:289 data/com.jeffser.Alpaca.metainfo.xml.in:307 data/com.jeffser.Alpaca.metainfo.xml.in:323 data/com.jeffser.Alpaca.metainfo.xml.in:335
+#: data/com.jeffser.Alpaca.metainfo.xml.in:385 data/com.jeffser.Alpaca.metainfo.xml.in:431 data/com.jeffser.Alpaca.metainfo.xml.in:462 data/com.jeffser.Alpaca.metainfo.xml.in:471 data/com.jeffser.Alpaca.metainfo.xml.in:534
+#: data/com.jeffser.Alpaca.metainfo.xml.in:562 data/com.jeffser.Alpaca.metainfo.xml.in:576 data/com.jeffser.Alpaca.metainfo.xml.in:593 data/com.jeffser.Alpaca.metainfo.xml.in:604 data/com.jeffser.Alpaca.metainfo.xml.in:613
+#: data/com.jeffser.Alpaca.metainfo.xml.in:630 data/com.jeffser.Alpaca.metainfo.xml.in:640 data/com.jeffser.Alpaca.metainfo.xml.in:657 data/com.jeffser.Alpaca.metainfo.xml.in:667 data/com.jeffser.Alpaca.metainfo.xml.in:714
+#: data/com.jeffser.Alpaca.metainfo.xml.in:739 data/com.jeffser.Alpaca.metainfo.xml.in:764 data/com.jeffser.Alpaca.metainfo.xml.in:786 data/com.jeffser.Alpaca.metainfo.xml.in:804 data/com.jeffser.Alpaca.metainfo.xml.in:822
+#: data/com.jeffser.Alpaca.metainfo.xml.in:834 data/com.jeffser.Alpaca.metainfo.xml.in:850
+msgid "Fixes"
+msgstr "Выпраўленні"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:97
+#, fuzzy
+msgid "Fixed Alpaca crashing when chats database has incorrect metadata (type)"
+msgstr "Выпраўлены збой Alpaca пры няправільных метаданных у базе чатаў (тып)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:98
+msgid "Fixed Quick Ask and Live Chat not running when opened from terminal whilst Alpaca is running"
+msgstr "Выпраўлена адсутнасць запуску дыялогаў «Хуткае пытанне» і «Чат ужывую» з тэрмінала пры ўжо запушчаным Alpaca"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:99
+#, fuzzy
+msgid "Fixed stop button not working when pressed before text generation beggins"
+msgstr "Выпраўлена адсутнасць спрацоўвання кнопкі стоп, калі яе націснуць да пачатку генерыравання тэксту"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:100
+#, fuzzy
+msgid "Fixed instances sometimes not appearing"
+msgstr "Выпраўлена часовая адсутнасць экзэмпляраў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:107 data/com.jeffser.Alpaca.metainfo.xml.in:159 data/com.jeffser.Alpaca.metainfo.xml.in:173 data/com.jeffser.Alpaca.metainfo.xml.in:206 data/com.jeffser.Alpaca.metainfo.xml.in:253
+#: data/com.jeffser.Alpaca.metainfo.xml.in:300 data/com.jeffser.Alpaca.metainfo.xml.in:317 data/com.jeffser.Alpaca.metainfo.xml.in:347 data/com.jeffser.Alpaca.metainfo.xml.in:357 data/com.jeffser.Alpaca.metainfo.xml.in:368
+#: data/com.jeffser.Alpaca.metainfo.xml.in:395 data/com.jeffser.Alpaca.metainfo.xml.in:415 data/com.jeffser.Alpaca.metainfo.xml.in:441 data/com.jeffser.Alpaca.metainfo.xml.in:456 data/com.jeffser.Alpaca.metainfo.xml.in:481
+#: data/com.jeffser.Alpaca.metainfo.xml.in:509 data/com.jeffser.Alpaca.metainfo.xml.in:519 data/com.jeffser.Alpaca.metainfo.xml.in:530 data/com.jeffser.Alpaca.metainfo.xml.in:544 data/com.jeffser.Alpaca.metainfo.xml.in:556
+#: data/com.jeffser.Alpaca.metainfo.xml.in:572 data/com.jeffser.Alpaca.metainfo.xml.in:587 data/com.jeffser.Alpaca.metainfo.xml.in:622 data/com.jeffser.Alpaca.metainfo.xml.in:647 data/com.jeffser.Alpaca.metainfo.xml.in:678
+#: data/com.jeffser.Alpaca.metainfo.xml.in:704 data/com.jeffser.Alpaca.metainfo.xml.in:726 data/com.jeffser.Alpaca.metainfo.xml.in:757 data/com.jeffser.Alpaca.metainfo.xml.in:779 data/com.jeffser.Alpaca.metainfo.xml.in:800
+#: data/com.jeffser.Alpaca.metainfo.xml.in:815 data/com.jeffser.Alpaca.metainfo.xml.in:840
+msgid "New"
+msgstr "Новае"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:109
+msgid "Live Chat (Talk to models as if you were on a call)"
+msgstr "Чат ужывую (размова з мадэлямі як па тэлефоне)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:110
+msgid "Live message rendering"
+msgstr "Візуалізацыя паведамленняў ужывую"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:111
+#, fuzzy
+msgid "Faster dictation"
+msgstr "Хутчэйшае дыктаванне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:112
+#, fuzzy
+msgid "Dictation whilst message is being generated"
+msgstr "Дыктаванне падчас генерыравання паведамлення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:113
+msgid "Camera picture attachment"
+msgstr "Далучанае фота з камеры"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:114
+msgid "Quick Ask now supports attachments"
+msgstr "Quick Ask цяпер падтрымлівае далучаныя файлы"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:115
+#, fuzzy
+msgid "Separator element for message and attachment rendering"
+msgstr "Элемент-раздзяляльнік для адлюстравання паведамленняў і ўкладанняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:116
+#, fuzzy
+msgid "Redesigned popups"
+msgstr "Перароблены ўсплывальныя вокны"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:117
+msgid "Thought switch for Ollama instances"
+msgstr "Пераключальнік думак для экзэмпляраў Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:118
+msgid "Username sharing for Ollama instances"
+msgstr "Сумеснае выкарыстанне імя карыстальніка для экзэмпляраў Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:119
+msgid "Redesign for instance manager and tool manager"
+msgstr "Рэдызайн менеджара экзэмпляраў і менеджара інструментаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:120
+#, fuzzy
+msgid "Better web searching tool with options"
+msgstr "Лепшы інструмент вэб-пошуку з параметрамі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:124
+#, fuzzy
+msgid "Fixed duplication of thought attachments"
+msgstr "Выпраўлена дубляванне ўкладанняў думак"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:125
+#, fuzzy
+msgid "Fixed weird behavior with model selector"
+msgstr "Выпраўлена некарэктная праца выбару мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:126
+msgid "Ollama (Managed) instances behave better"
+msgstr "Кіруемыя экзэмпляры Ollama працуюць лепш"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:127
+#, fuzzy
+msgid "Better optimizations for RAM (~2GB difference)"
+msgstr "Лепшая аптымізацыя RAM (розніца прыблізна 2 ГБ)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:128
+#, fuzzy
+msgid "Instant chat rendering"
+msgstr "Імгненнае адлюстраванне чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:129
+#, fuzzy
+msgid "Models profile pictures are now saved at a higher resolution"
+msgstr "Здымкі профіля мадэляў цяпер захоўваюцца ў больш высокім разрозненні"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:130
+#, fuzzy
+msgid "Quick Ask messages can now be sent by using the enter key"
+msgstr "Паведамленні Quick Ask цяпер можна адпраўляць клавішай Enter"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:131
+#, fuzzy
+msgid "Alpaca is less prone to crashes now"
+msgstr "Alpaca цяпер радзей падае"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:140
+#, fuzzy
+msgid "Fixed new chat not being created when the chat list is empty"
+msgstr "Выпраўлена праблема, калі новы чат не ствараўся пры пустым спісе чатаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:149
+#, fuzzy
+msgid "Chat exporting now works as expected"
+msgstr "Экспарт чата цяпер працуе як трэба"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:150
+msgid "Fixed automatic creation of Ollama instance"
+msgstr "Выпраўлена аўтаматычнае стварэнне экзэмпляраў Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:151
+#, fuzzy
+msgid "Added Hebrew and Telugu credits"
+msgstr "Дададзены падзякі на іўрыце і тэлугу"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:152
+#, fuzzy
+msgid "Fixed STT model selector"
+msgstr "Выпраўлены выбар мадэлі STT"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:161
+#, fuzzy
+msgid "Multiple QuickAsk window rendering"
+msgstr "Адлюстраванне некалькіх вокнаў Quick Ask"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:165
+#, fuzzy
+msgid "Better stability for QuickAsk"
+msgstr "Лепшая стабільнасць Quick Ask"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:166
+#, fuzzy
+msgid "Creating a new chat now selects it"
+msgstr "Стварэнне новага чата цяпер адразу яго выбірае"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:175
+msgid "Chat Search"
+msgstr "Пошук па чатах"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:176
+#, fuzzy
+msgid "Hide \"latest\" and \"custom\" tags from model selector"
+msgstr "Схаваць цэтлікі «latest» і «custom» у выбары мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:177
+#, fuzzy
+msgid "Hide model's languages behind popup"
+msgstr "Схаваць мовы мадэлі за ўсплывальным акном"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:178
+#, fuzzy
+msgid "New models listed for Ollama"
+msgstr "Новыя мадэлі, даступныя для Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:179
+#, fuzzy
+msgid "Added option to autodictate new mesages"
+msgstr "Дададзены параметр аўтадыктацыі новых паведамленняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:180
+msgid "Added Meta Llama API to list of instances"
+msgstr "Дададзены Meta Llama API ў спіс экзэмпляраў ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:181
+msgid "Added new env variables options (\"24H hour formatting\" and \"only Ollama mode\")"
+msgstr "Дададзены новыя пераменныя асяроддзя («фармат 24 гадзіны» і «рэжым толькі Ollama»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:182
+#, fuzzy
+msgid "Made Mermaid scripts executable using Python HTTP server"
+msgstr "Зроблена магчымым выкананне скрыптоў Mermaid праз HTTP-сервер Python"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:186
+msgid "Better stability when switching instances"
+msgstr "Большая стабільнасць пры пераключэнні экзэмпляраў ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:187
+#, fuzzy
+msgid "Better performance when navigating menus"
+msgstr "Лепшая прадукцыйнасць пры пераходзе па меню"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:188
+#, fuzzy
+msgid "Fixed some dialogs not appearing in Quick Ask window"
+msgstr "Выпраўлена неадлюстраванне некаторых дыялогаў у акне Quick Ask"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:189
+#, fuzzy
+msgid "Faster message search"
+msgstr "Хутчэйшы пошук па паведамленнях"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:190
+#, fuzzy
+msgid "Faster message rendering"
+msgstr "Хутчэйшае адлюстраванне паведамленняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:199
+#, fuzzy
+msgid "Fixed whisper directory not existing causing error"
+msgstr "Выпраўлена памылка адсутнасці каталога whisper"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:208 data/com.jeffser.Alpaca.metainfo.xml.in:1057
+msgid "Updated model list"
+msgstr "Абноўлены спіс мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:209
+msgid "Alpaca now remembers it's size"
+msgstr "Alpaca цяпер запамінае свой памер"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:210
+msgid "Added reasoning category for Ollama models"
+msgstr "Дададзена катэгорыя «Лагічны вывад» для мадэляў Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:214
+#, fuzzy
+msgid "Improvements in sample prompts"
+msgstr "Палепшаны прыкладныя запыты"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:223
+msgid "Fixed auto creation of Ollama (Managed) instance"
+msgstr "Выпраўлена аўтаматычнае стварэнне кіраванага экзэмпляра Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:224
+#, fuzzy
+msgid "Removed legacy JSON to SQLite3 migration code"
+msgstr "Выдалены састарэлы код міграцыі з JSON у SQLite3"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:225
+msgid "Fixed power saving mode appearing whilst using online instances"
+msgstr "Выпраўлена з’яўленне рэжыму энергазберажэння пры выкарыстанні анлайн-экзэмпляраў ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:234
+msgid "Fixed Ollama (Manged) instance not being able to be created"
+msgstr "Выпраўлена немагчымасць стварэння кіраванага экзэмпляра Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:243
+msgid "Instance manager now follows default model"
+msgstr "Менеджар экзэмпляраў ШІ цяпер улічвае прадвызначаную мадэль"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:244
+#, fuzzy
+msgid "English text-to-speech voices not working"
+msgstr "Выпраўлены галасы англійскай TTS"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:245
+msgid "Instance manager sometimes not saving instances"
+msgstr "Менеджар экзэмпляраў часам не захоўваў экзэмпляры ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:246
+#, fuzzy
+msgid "Fixed Gorq and Deepseek instances not generating text"
+msgstr "Выпраўлена адсутнасць генерыравання тэксту экзэмплярамі Groq і Deepseek"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:255
+#, fuzzy
+msgid "Smart tools for models"
+msgstr "Разумныя інструменты для мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:256
+#, fuzzy
+msgid "Speech recognition (message dictation)"
+msgstr "Распазнаванне маўлення (дыктаванне паведамленняў)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:257 src/widgets/model_manager.py:66
+msgid "Text to Speech"
+msgstr "Сінтэз маўлення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:258
+#, fuzzy
+msgid "New Quick Chat system"
+msgstr "Новая сістэма хуткага чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:259
+#, fuzzy
+msgid "Filter Ollama models by categories"
+msgstr "Фільтр мадэляў Ollama па катэгорыях"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:260
+#, fuzzy
+msgid "Better math Latex rendering in messages"
+msgstr "Лепшае адлюстраванне формул LaTeX у паведамленнях"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:261
+#, fuzzy
+msgid "Rich text rendering in attachment preview"
+msgstr "Адлюстраванне фарматаванага тэксту ў папярэднім праглядзе ўкладання"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:262
+#, fuzzy
+msgid "Matplotlib is now included in Python code runner"
+msgstr "Matplotlib цяпер уключаны ў выконвальнік кода Python"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:263
+#, fuzzy
+msgid "Styling for messages being generated"
+msgstr "Стылізацыя паведамленняў падчас генерыравання"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:265 data/com.jeffser.Alpaca.metainfo.xml.in:373
+msgid "New Instances"
+msgstr "Новыя экзэмпляры ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:267
+msgid "Deepseek"
+msgstr "Deepseek"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:268
+msgid "OpenRouter AI"
+msgstr "OpenRouter AI"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:269
+msgid "Anthropic"
+msgstr "Anthropic"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:270
+msgid "Groq Cloud"
+msgstr "Groq Cloud"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:271
+msgid "Fireworks AI"
+msgstr "Fireworks AI"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:272
+msgid "Lambda Labs"
+msgstr "Lambda Labs"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:274
+msgid "New Attachment Types"
+msgstr "Новыя тыпы далучэнняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:276
+msgid "Microsoft Word Document (docx)"
+msgstr "Дакумент Microsoft Word (docx)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:277
+msgid "Microsoft PowerPoint Document (pptx)"
+msgstr "Прэзентацыя Microsoft PowerPoint (pptx)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:278
+msgid "Microsoft Excel Document (xlsx)"
+msgstr "Дакумент Microsoft Excel (xlsx)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:280
+msgid "New Tools"
+msgstr "Новыя інструменты"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:282 src/widgets/tools/tools.py:488
+msgid "Run Command (Testing)"
+msgstr "Выканаць каманду (тэсціруецца)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:283 src/widgets/tools/tools.py:404
+msgid "Online Search"
+msgstr "Анлайн-пошук"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:284 src/widgets/tools/tools.py:363
+msgid "Extract Wikipedia Article"
+msgstr "Вымайце артыкулы з Вікіпедыі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:285 src/widgets/tools/tools.py:247
+msgid "Get Recipe by Name"
+msgstr "Атрымлівайце рэцэпт па назве"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:286 src/widgets/tools/tools.py:307
+msgid "Get Recipes by Category"
+msgstr "Атрымлівайце рэцэпты па катэгорыі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:287 src/widgets/tools/tools.py:215
+msgid "Get Current Datetime"
+msgstr "Атрымлівайце бягучыя дату і час"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:291
+#, fuzzy
+msgid "Fixed welcome screen not showing sometimes when deleting a message"
+msgstr "Выпраўлена, што пры выдаленні паведамлення часам не з'яўляўся экран вітання"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:292
+#, fuzzy
+msgid "Fixed bold text not rendering correctly in tables"
+msgstr "Выпраўлена няправільнае адлюстраванне паўтлустага тэксту ў табліцах"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:293
+#, fuzzy
+msgid "Fixed sample prompt buttons overflowing on small screens"
+msgstr "Выпраўлена перапаўненне кнопак прыкладных запытаў на маленькіх экранах"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:302
+#, fuzzy
+msgid "Updated runtime to Gnome 48"
+msgstr "Абноўлена асяроддзе выканання да Gnome 48"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:303
+#, fuzzy
+msgid "Added back 'category pills' to model manager"
+msgstr "У менеджар мадэляў вернуты «таблеткі» катэгорый"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:304
+#, fuzzy
+msgid "Better appearance for model manager sidebar"
+msgstr "Лепшы выгляд бакавой панэлі менеджара мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:305 data/com.jeffser.Alpaca.metainfo.xml.in:321
+msgid "New models"
+msgstr "Новыя мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:309
+#, fuzzy
+msgid "Fixed bad title generation with chain-of-thought models"
+msgstr "Выпраўлена няправільнае генерыраванне загалоўкаў у мадэлях з ланцугом думак"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:310
+msgid "Hide page switcher in model manager if there's only one page (online instances)"
+msgstr "Схаваць пераключальнік старонак у менеджары мадэляў, калі ёсць толькі адна старонка (анлайн-экзэмпляры ШІ)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:319
+#, fuzzy
+msgid "Option to delete all chats"
+msgstr "Параметр для выдалення ўсіх чатаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:320
+#, fuzzy
+msgid "Button to refresh sample prompts"
+msgstr "Кнопка для абнаўлення прыкладных запытаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:325
+msgid "Fixed saving Ollama (Managed) instance might crash it"
+msgstr "Выпраўлена, што захаванне кіраванага экзэмпляра Ollama магло выклікаць яго збой"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:326
+msgid "Fixed stop button"
+msgstr "Выпраўлена кнопка спынення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:327
+msgid "Fixed model search not working if there are only pulling models"
+msgstr "Выпраўлены пошук мадэляў, калі даступныя толькі мадэлі для атрымання з сервера"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:328
+#, fuzzy
+msgid "Fixed sample prompts sometimes not appearing"
+msgstr "Выпраўлена, што прыкладныя запыты часам не адлюстроўваліся"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:337
+#, fuzzy
+msgid "Don't clear the building output of C++ scripts"
+msgstr "Не ачышчаць вывад зборкі скрыптоў C++"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:338
+#, fuzzy
+msgid "Better handling of attachments"
+msgstr "Лепшая апрацоўка ўкладанняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:339
+msgid "Handle remote Ollama instance's API Key better"
+msgstr "Лепшая апрацоўка ключа API аддаленага экзэмпляра Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:340
+msgid "Remove '\\n' characters in instance edit page"
+msgstr "Выдаліць знакі «\\n» на старонцы рэдагавання экзэмпляраў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:349
+msgid "Dynamic chat loading"
+msgstr "Дынамічная загрузка чатаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:350
+msgid "Updated Ollama instance"
+msgstr "Абноўлены экзэмпляр Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:359
+#, fuzzy
+msgid "Tweaked appearance of models in model manager"
+msgstr "Скарэкціраваны выгляд мадэляў у менеджары мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:360
+msgid "Updated Ollama instance to 0.5.11"
+msgstr "Экзэмпляр Ollama абноўлены да 0.5.11"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:361
+msgid "Added new models"
+msgstr "Дададзены новыя мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:370
+msgid "New instance manager"
+msgstr "Новы менеджар экзэмпляраў ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:371
+msgid "New welcome screen"
+msgstr "Новы экран вітання"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:375
+msgid "OpenAI ChatGPT"
+msgstr "OpenAI ChatGPT"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:376
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:377
+msgid "Together AI"
+msgstr "Together AI"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:378
+msgid "Venice"
+msgstr "Venice"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:387
+#, fuzzy
+msgid "Exporting chats with 'thoughts' attachment is fixed"
+msgstr "Выпраўлена экспартаванне чатаў з далучэннем «thoughts»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:388
+#, fuzzy
+msgid "Fixed attachment filters"
+msgstr "Выпраўлены фільтры ўкладанняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:397
+msgid "New model manager"
+msgstr "Новы менеджар мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:398
+#, fuzzy
+msgid "Changed GtkSpinner to AdwSpinner"
+msgstr "GtkSpinner заменены на AdwSpinner"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:399
+#, fuzzy
+msgid "Better handling of launch process"
+msgstr "Лепшая апрацоўка працэсу запуску"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:400
+msgid "New loading screen at launch"
+msgstr "Новы экран загрузкі пры запуску"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:401
+#, fuzzy
+msgid "Better handling of file types"
+msgstr "Лепшая апрацоўка тыпаў файлаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:402
+#, fuzzy
+msgid "Better regex expression for LaTeX equations"
+msgstr "Палепшаны рэгулярны выраз для формул LaTeX"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:403
+msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
+msgstr "Дыялог пацвярджэння пры закрыцці Alpaca падчас спампоўвання мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:404
+#, fuzzy
+msgid "Better handling of think tags in messages"
+msgstr "Лепшая апрацоўка тэгаў think у паведамленнях"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:405
+msgid "Default model is now in charge of generating titles"
+msgstr "Цяпер загалоўкі генеруе прадвызначаная мадэль"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:406
+#, fuzzy
+msgid "Message header is now shown whilst the message is being generated"
+msgstr "Загаловак паведамлення цяпер паказваецца падчас генерыравання"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:407
+#, fuzzy
+msgid "Better handling of model profile pictures"
+msgstr "Лепшая апрацоўка відарысаў профіляў мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:408
+#, fuzzy
+msgid "New models in 'available models' list"
+msgstr "Новыя мадэлі ў спісе «даступных мадэляў»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:417
+#, fuzzy
+msgid "Added option for attaching screenshots"
+msgstr "Дададзены параметр для прыкладаць скрыншоты"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:418
+#, fuzzy
+msgid "Basic LaTeX math equations are now rendered in messages"
+msgstr "Базавыя матэматычныя формулы LaTeX цяпер адлюстроўваюцца ў паведамленнях"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:419
+#, fuzzy
+msgid "HTML and C++ scripts can now be run inside Alpaca"
+msgstr "HTML- і C++-скрыпты цяпер можна запускаць у Alpaca"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:420
+#, fuzzy
+msgid "Added option to open the environment directory from the terminal"
+msgstr "Дададзены параметр для адкрыцця каталога асяроддзя з тэрмінала"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:421
+#, fuzzy
+msgid "Added option to edit code blocks directly"
+msgstr "Дададзена магчымасць непасрэдна рэдагаваць блокі кода"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:422
+#, fuzzy
+msgid "Complete keyboard shortcut list"
+msgstr "Поўны спіс спалучэнняў клавіш"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:423
+#, fuzzy
+msgid "Images are now attached in 640p resolution"
+msgstr "Відарысы цяпер прыкладаюцца ў разрозненні 640p"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:424
+#, fuzzy
+msgid "Website attachments now use extracted titles"
+msgstr "Далучэнні сайтаў цяпер выкарыстоўваюць вынятыя загалоўкі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:425
+#, fuzzy
+msgid "Better chat title generation"
+msgstr "Лепшае генерыраванне загалоўкаў чатаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:426
+#, fuzzy
+msgid "Added option to attach any plain text files"
+msgstr "Дададзены параметр для далучэння любых тэкставых файлаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:427
+#, fuzzy
+msgid "Added spellchecker to message entry"
+msgstr "У поле ўводу паведамленняў дададзена праверка правапісу"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:428
+#, fuzzy
+msgid "Alpaca's parameters are now stored using SQLite3"
+msgstr "Параметры Alpaca цяпер захоўваюцца ў SQLite3"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:429
+#, fuzzy
+msgid "Small appearance changes in text entries"
+msgstr "Невялікія змены выгляду палёў тэксту"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:433
+#, fuzzy
+msgid "Alpaca's launch process is more reliable"
+msgstr "Працэс запуску Alpaca стаў больш надзейным"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:434
+#, fuzzy
+msgid "Closing the terminal now kills the script subprocess"
+msgstr "Пры закрыцці тэрмінала цяпер забіваецца падпрацэс скрыпту"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:443
+#, fuzzy
+msgid "Transitioned chat backend from JSON to SQLite3"
+msgstr "Бэкэнд чата пераведзены з JSON на SQLite3"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:444
+#, fuzzy
+msgid "Changed appearance of messages"
+msgstr "Зменены выгляд паведамленняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:445
+#, fuzzy
+msgid "Added the option to add profile pictures to models"
+msgstr "Дададзена магчымасць дадаваць відарысы профілю да мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:447 data/com.jeffser.Alpaca.metainfo.xml.in:919 data/com.jeffser.Alpaca.metainfo.xml.in:968
+msgid "Fix"
+msgstr "Выпраўленне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:449
+#, fuzzy
+msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
+msgstr "Параметр HIP_VISIBLE_DEVICES заменены на ROCR_VISIBLE_DEVICES"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:458
+#, fuzzy
+msgid "Added categories to models"
+msgstr "Дададзены катэгорыі для мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:459
+#, fuzzy
+msgid "Specified model's languages"
+msgstr "Удакладнены мовы мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:460
+msgid "Added warning when downloading embedding models"
+msgstr "Дададзена папярэджанне пры спампоўванні мадэляў з убудовамі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:464
+#, fuzzy
+msgid "Replaced low ram warning with big model warning"
+msgstr "Папярэджанне аб нізкай RAM заменена на папярэджанне аб вялікай мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:473
+#, fuzzy
+msgid "Correctly escape markup before rendering message"
+msgstr "Правільнае экраніраванне разметкі перад адлюстраваннем паведамлення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:474
+#, fuzzy
+msgid "Fixed about dialog not working if log file was missing"
+msgstr "Выпраўлена, што акно «Пра праграму» не адкрывалася без файла журнала"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:483
+#, fuzzy
+msgid "System messages can now be sent directly from Alpaca"
+msgstr "Сістэмныя паведамленні цяпер можна адпраўляць непасрэдна з Alpaca"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:484
+#, fuzzy
+msgid "New redesign for messages and smaller minimum size"
+msgstr "Новы дызайн паведамленняў і меншы мінімальны памер"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:485
+#, fuzzy
+msgid "New models included in 'available models list'"
+msgstr "У спіс «даступных мадэляў» дададзены новыя мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:486
+#, fuzzy
+msgid "Added symbolic icon when attaching code files"
+msgstr "Пры далучэнні файлаў кода дададзены сімвалічны значок"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:487
+#, fuzzy
+msgid "When exporting a chat it now includes a markdown file"
+msgstr "Пры экспарце чата цяпер дадаецца файл Markdown"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:488
+msgid "Refresh button in model manager when using a remote instance"
+msgstr "Кнопка абнаўлення ў менеджары мадэляў пры выкарыстанні аддаленага экзэмпляра ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:489
+#, fuzzy
+msgid "Assistant messages are now editable"
+msgstr "Паведамленні памочніка цяпер можна рэдагаваць"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:490
+#, fuzzy
+msgid "Updated Ollama to v0.5.2"
+msgstr "Абноўлена Ollama да v0.5.2"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:491
+#, fuzzy
+msgid "New option to change model directory"
+msgstr "Новы параметр для змены каталога мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:492
+#, fuzzy
+msgid "File previewer now resizes dynamically to content"
+msgstr "Папярэдні прагляд файлаў цяпер дынамічна падладжваецца пад змесціва"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:493
+msgid "Adapted Alpaca to work without integrated Ollama instance"
+msgstr "Адаптаванне Alpaca для працы без убудаванага экзэмпляра Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:494
+#, fuzzy
+msgid "Compatibility added with ODT files"
+msgstr "Дададзена сумяшчальнасць з файламі ODT"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:497
+#, fuzzy
+msgid "Restored ROCm compatibility"
+msgstr "Аднаўленая сумяшчальнасць з ROCm"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:498
+#, fuzzy
+msgid "Added long press gesture to chat rows so actions can be done in touchscreens"
+msgstr "Дададзены жэст доўгага націску на радкі чата для сэнсарных экранаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:499
+#, fuzzy
+msgid "Fixed edit button not saving changes"
+msgstr "Выпраўлена, што кнопка «Рэдагаваць» не захоўвала змены"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:500
+#, fuzzy
+msgid "Changed max temperature value to 2"
+msgstr "Максімальнае значэнне тэмпературы змянёна да 2"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:501
+#, fuzzy
+msgid "Made seed 0 actually random"
+msgstr "Seed 0 цяпер сапраўды выпадковы"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:502
+#, fuzzy
+msgid "Fixed Gnome search provider not working outside of Flatpak installations"
+msgstr "Выпраўлена, што пастаўшчык пошуку GNOME не працаваў па-за ўсталёўкамі Flatpak"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:511
+#, fuzzy
+msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
+msgstr "Новы параметр --ask MESSAGE для адкрыцця акна «Quick Ask»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:512
+#, fuzzy
+msgid "Gnome Search integration now works whilst the app is opened"
+msgstr "Інтэграцыя з пошукам GNOME цяпер працуе, пакуль прыкладанне адкрыта"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:521
+#, fuzzy
+msgid "Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, --list-chats, --version"
+msgstr "Дададзены параметры запуску --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, --list-chats, --version"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:522
+#, fuzzy
+msgid "Added integration as Gnome Search Provider"
+msgstr "Дададзена інтэграцыя як пастаўшчыка пошуку GNOME"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:523
+#, fuzzy
+msgid "Updated Ollama to v0.4.2 with new models"
+msgstr "Абноўлена Ollama да v0.4.2 з новымі мадэлямі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:532
+#, fuzzy
+msgid "User messages are now compacted into bubbles"
+msgstr "Паведамленні карыстальніка цяпер кампактуюцца ў баблы"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:536
+#, fuzzy
+msgid "Fixed re connection dialog not working when 'use local instance' is selected"
+msgstr "Выпраўлена, што дыялог паўторнага злучэння не працаваў пры выбары «выкарыстоўваць лакальны экзэмпляр ШІ»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:537
+msgid "Fixed model manager not adapting to large system fonts"
+msgstr "Выпраўлена, што менеджар мадэляў не падладжваўся пад вялікія сістэмныя шрыфты"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:546
+#, fuzzy
+msgid "Details page for models"
+msgstr "Старонка з дэталямі мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:547
+msgid "Model selector gets replaced with 'manage models' button when there are no models downloaded"
+msgstr "Калі мадэлі не спампаваныя, інструмент выбару мадэляў замяняецца кнопкай «Кіраванне мадэлямі»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:548
+#, fuzzy
+msgid "Added warning when model is too big for the device"
+msgstr "Дададзена папярэджанне, калі мадэль занадта вялікая для прылады"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:549
+#, fuzzy
+msgid "Added AMD GPU indicator in preferences"
+msgstr "У наладах дададзены індыкатар GPU AMD"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:558
+msgid "Better system for handling dialogs"
+msgstr "Палепшана сістэма апрацоўкі дыялогаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:559
+msgid "Better system for handling instance switching"
+msgstr "Палепшана сістэма пераключэння экзэмпляраў ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:560
+#, fuzzy
+msgid "Remote connection dialog"
+msgstr "Дыялог аддаленага злучэння"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:564
+#, fuzzy
+msgid "Fixed: Models get duplicated when switching remote and local instance"
+msgstr "Выпраўлена: мадэлі дублююцца пры пераключэнні паміж аддаленым і лакальным экзэмплярам ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:565
+msgid "Better internal instance manager"
+msgstr "Лепшы ўнутраны менеджар экзэмпляраў ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:574
+#, fuzzy
+msgid "Added 'Cancel' and 'Save' buttons when editing a message"
+msgstr "Пры рэдагаванні паведамлення дададзены кнопкі «Адмяніць» і «Захаваць»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:578
+#, fuzzy
+msgid "Better handling of image recognition"
+msgstr "Лепшая апрацоўка распазнавання відарысаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:579
+msgid "Remove unused files when canceling a model download"
+msgstr "Пры скасаванні спампоўвання мадэлі выдаляюцца непатрэбныя файлы"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:580
+#, fuzzy
+msgid "Better message blocks rendering"
+msgstr "Лепшае адлюстраванне блокаў паведамленняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:589
+#, fuzzy
+msgid "Run bash and python scripts straight from chat"
+msgstr "Запуск скрыптоў bash і python непасрэдна з чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:590
+msgid "Updated Ollama to 0.3.12"
+msgstr "Ollama абноўлена да 0.3.12"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:591
+msgid "New models!"
+msgstr "Новыя мадэлі!"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:595
+#, fuzzy
+msgid "Fixed and made faster the launch sequence"
+msgstr "Выпраўлена і паскорана паслядоўнасць запуску"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:596
+#, fuzzy
+msgid "Better detection of code blocks in messages"
+msgstr "Лепшае выяўленне блокаў кода ў паведамленнях"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:597
+msgid "Fixed app not loading in certain setups with Nvidia GPUs"
+msgstr "Выпраўленне таго, што праграма не загружалася ў некаторых канфігурацыях з GPU Nvidia"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:606
+#, fuzzy
+msgid "Fixed message notification sometimes crashing text rendering because of them running on different threads"
+msgstr "Выпраўленне таго, што апавяшчэнні паведамленняў часам выклікалі падзенне рэндэрынгу тэксту з-за розных патокаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:615
+#, fuzzy
+msgid "Fixed message generation sometimes failing"
+msgstr "Выпраўленне таго, што генерыраванне паведамленняў часам не ўдавалася"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:624
+#, fuzzy
+msgid "Sidebar resizes with the window"
+msgstr "Бакавая панэль змяняе памер разам з акном"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:625
+#, fuzzy
+msgid "New welcome dialog"
+msgstr "Новы дыялог вітання"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:626
+#, fuzzy
+msgid "Message search"
+msgstr "Пошук паведамленняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:627
+#, fuzzy
+msgid "Updated Ollama to v0.3.11"
+msgstr "Абноўлена Ollama да v0.3.11"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:628
+#, fuzzy
+msgid "A lot of new models provided by Ollama repository"
+msgstr "Шмат новых мадэляў з рэпазіторыя Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:632
+msgid "Fixed text inside model manager when the accessibility option 'large text' is on"
+msgstr "Выпраўлены тэкст у менеджары мадэляў пры ўключанай спецыяльнай магчымасці «вялікі тэкст»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:633
+#, fuzzy
+msgid "Fixed image recognition on unsupported models"
+msgstr "Выпраўлена распазнаванне відарысаў на непадтрыманых мадэлях"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:642
+msgid "Fixed spinner not hiding if the back end fails"
+msgstr "Выпраўлена тое, што індыкатар загрузкі не хаваўся пры памылцы сервернай часткі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:643
+#, fuzzy
+msgid "Fixed image recognition with local images"
+msgstr "Выпраўлена распазнаванне відарысаў з лакальных файлаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:644
+#, fuzzy
+msgid "Changed appearance of delete / stop model buttons"
+msgstr "Зменены выгляд кнопак выдалення / спынення мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:645
+#, fuzzy
+msgid "Fixed stop button crashing the app"
+msgstr "Выпраўлена падзенне праграмы пры націску кнопкі спынення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:649
+#, fuzzy
+msgid "Made sidebar resize a little when the window is smaller"
+msgstr "Бакавая панэль цяпер крыху сціскаецца, калі акно робіцца меншым"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:650
+msgid "Instant launch"
+msgstr "Імгненны запуск"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:659
+#, fuzzy
+msgid "Fixed error on first run (welcome dialog)"
+msgstr "Выпраўлена памылка пры першым запуску (дыялог вітанне)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:660
+#, fuzzy
+msgid "Fixed checker for Ollama instance (used on system packages)"
+msgstr "Выпраўлены правяральнік экзэмпляра Ollama (у сістэмных пакетах)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:669
+#, fuzzy
+msgid "Fixed 'clear chat' option"
+msgstr "Выпраўлена функцыя «Ачысціць чат»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:670
+#, fuzzy
+msgid "Fixed welcome dialog causing the local instance to not launch"
+msgstr "Выпраўлена, што дыялог вітанне блакіраваў запуск лакальнага экзэмпляра ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:671
+#, fuzzy
+msgid "Fixed support for AMD GPUs"
+msgstr "Выпраўлена падтрымка GPU AMD"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:680
+#, fuzzy
+msgid "Model, message and chat systems have been rewritten"
+msgstr "Сістэмы мадэляў, паведамленняў і чатаў перапісаныя"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:681
+msgid "New models are available"
+msgstr "Даступны новыя мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:682
+msgid "Ollama updated to v0.3.9"
+msgstr "Ollama абноўлена да v0.3.9"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:683
+msgid "Added support for multiple chat generations simultaneously"
+msgstr "Дададзена падтрымка адначасовага генерыравання некалькіх чатаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:684
+#, fuzzy
+msgid "Added experimental AMD GPU support"
+msgstr "Дададзена эксперыментальная падтрымка GPU AMD"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:685
+msgid "Added message loading spinner and new message indicator to chat tab"
+msgstr "Укладцы чата дададзены індыкатар загрузкі і паказчык новага паведамлення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:686
+msgid "Added animations"
+msgstr "Дададзены анімацыі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:687
+msgid "Changed model manager / model selector appearance"
+msgstr "Зменены выгляд менеджара / інструмента выбару мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:688
+#, fuzzy
+msgid "Changed message appearance"
+msgstr "Зменены выгляд паведамленняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:689
+#, fuzzy
+msgid "Added markdown and code blocks to user messages"
+msgstr "У паведамленні карыстальніка дададзена падтрымка Markdown і блокаў кода"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:690
+msgid "Added loading dialog at launch so the app opens faster"
+msgstr "Пры запуску дададзены дыялог загрузкі, каб праграма адкрывалася хутчэй"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:691
+#, fuzzy
+msgid "Added warning when device is on 'battery saver' mode"
+msgstr "Дададзена папярэджанне пры ўключаным рэжыме «Эканомія батарэі»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:692
+#, fuzzy
+msgid "Added inactivity timer to integrated instance"
+msgstr "Ва ўбудаваны экзэмпляр ШІ дададзены таймер бяздзейнасці"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:695
+#, fuzzy
+msgid "The chat is now scrolled to the bottom when it's changed"
+msgstr "Пры пераключэнні чата пракрутка цяпер аўтаматычна ўнізе"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:696
+#, fuzzy
+msgid "Better handling of focus on messages"
+msgstr "Лепшая апрацоўка фокусу на паведамленнях"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:697
+#, fuzzy
+msgid "Better general performance on the app"
+msgstr "Агульная прадукцыйнасць праграмы палепшана"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:706
+#, fuzzy
+msgid "New duplicate chat option"
+msgstr "Новая опцыя дублявання чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:707
+#, fuzzy
+msgid "Changed model selector appearance"
+msgstr "Зменены выгляд селектара мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:708
+#, fuzzy
+msgid "Message entry is focused on launch and chat change"
+msgstr "Поле ўводу паведамленняў атрымлівае фокус пры запуску і пры змене чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:709
+#, fuzzy
+msgid "Message is focused when it's being edited"
+msgstr "Паведамленне атрымлівае фокус падчас рэдагавання"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:710
+msgid "Added loading spinner when regenerating a message"
+msgstr "Дададзены індыкатар загрузкі пры паўторным генерыраванні паведамлення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:711
+#, fuzzy
+msgid "Added Ollama debugging to 'About Alpaca' dialog"
+msgstr "У дыялог «Пра Alpaca» дададзена адладка Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:712
+#, fuzzy
+msgid "Changed YouTube transcription dialog appearance and behavior"
+msgstr "Зменены выгляд і паводзіны дыялогу транскрыпцыі YouTube"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:716
+#, fuzzy
+msgid "CTRL+W and CTRL+Q stops local instance before closing the app"
+msgstr "CTRL+W і CTRL+Q спыняюць лакальны экзэмпляр ШІ перад закрыццём праграмы"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:717
+msgid "Changed appearance of 'Open Model Manager' button on welcome screen"
+msgstr "Зменены выгляд кнопкі «Адкрыць менеджар мадэляў» на экране вітання"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:718
+msgid "Fixed message generation not working consistently"
+msgstr "Выпраўлена нестабільнае генерыраванне паведамленняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:719
+#, fuzzy
+msgid "Fixed message edition not working consistently"
+msgstr "Выпраўлена нестабільнае рэдагаванне паведамленняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:728
+msgid "Model manager opens faster"
+msgstr "Менеджар мадэляў адкрываецца хутчэй"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:729
+#, fuzzy
+msgid "Delete chat option in secondary menu"
+msgstr "Опцыя выдалення чата ў другасным меню"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:730
+#, fuzzy
+msgid "New model selector popup"
+msgstr "Новае ўсплывальнае акно выбару мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:731
+msgid "Standard shortcuts"
+msgstr "Стандартныя спалучэнні клавіш"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:732
+msgid "Model manager is navigable with keyboard"
+msgstr "У менеджары мадэляў даступна навігацыя з дапамогай клавіятуры"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:733
+#, fuzzy
+msgid "Changed sidebar collapsing behavior"
+msgstr "Зменены алгарытм згортвання бакавой панэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:734
+#, fuzzy
+msgid "Focus indicators on messages"
+msgstr "Індыкатары фокусу на паведамленнях"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:735
+#, fuzzy
+msgid "Welcome screen"
+msgstr "Экран вітання"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:736
+#, fuzzy
+msgid "Give message entry focus at launch"
+msgstr "Пры запуску поле ўводу паведамленняў атрымлівае фокус"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:737
+#, fuzzy
+msgid "Generally better code"
+msgstr "Код у цэлым стаў лепшы"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:741
+#, fuzzy
+msgid "Better width for dialogs"
+msgstr "Аптымізаваная шырыня дыялогаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:742
+#, fuzzy
+msgid "Better compatibility with screen readers"
+msgstr "Лепшая сумяшчальнасць з экраннымі чыталкамі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:743
+#, fuzzy
+msgid "Fixed message regenerator"
+msgstr "Выпраўлены рэгенератар паведамленняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:744
+#, fuzzy
+msgid "Removed 'Featured models' from welcome dialog"
+msgstr "З дыялогу вітання выдалены «Рэкамендаваныя мадэлі»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:745
+msgid "Added default buttons to dialogs"
+msgstr "У дыялогі дададзены прадвызначаныя кнопкі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:746
+#, fuzzy
+msgid "Fixed import / export of chats"
+msgstr "Выпраўлены імпарт і экспарт чатаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:747
+#, fuzzy
+msgid "Changed Python2 title to Python on code blocks"
+msgstr "Загаловак «Python2» у блоках кода заменены на «Python»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:748
+msgid "Prevent regeneration of title when the user changed it to a custom title"
+msgstr "Прадухіляе паўторнае генерыраванне загалоўка, калі карыстальнік усталяваў уласны"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:749
+#, fuzzy
+msgid "Show date on stopped messages"
+msgstr "Паказ даты ў спыненых паведамленнях"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:750
+msgid "Fix clear chat error"
+msgstr "Выпраўлена памылка ачысткі чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:759
+msgid "Changed shortcuts to standards"
+msgstr "Спалучэнні клавіш змененыя да стандартных"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:760
+msgid "Moved 'Manage Models' button to primary menu"
+msgstr "Кнопка «Кіраванне мадэлямі» перанесена ў галоўнае меню"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:761 data/com.jeffser.Alpaca.metainfo.xml.in:783
+#, fuzzy
+msgid "Stable support for GGUF model files"
+msgstr "Стабільная падтрымка файлаў мадэляў GGUF"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:762 data/com.jeffser.Alpaca.metainfo.xml.in:1037
+#, fuzzy
+msgid "General optimizations"
+msgstr "Агульныя аптымізацыі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:766
+#, fuzzy
+msgid "Better handling of enter key (important for Japanese input)"
+msgstr "Лепшая апрацоўка клавішы Enter (важна для японскага ўводу)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:767
+#, fuzzy
+msgid "Removed sponsor dialog"
+msgstr "Выдалены дыялог спонсара"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:768
+#, fuzzy
+msgid "Added sponsor link in about dialog"
+msgstr "У дыялог «Пра праграму» дададзена спасылка спонсара"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:769
+#, fuzzy
+msgid "Changed window and elements dimensions"
+msgstr "Зменены памеры акна і элементаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:770
+msgid "Selected model changes when entering model manager"
+msgstr "Выбраная мадэль змяняецца пры ўваходзе ў менеджар мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:771
+msgid "Better image tooltips"
+msgstr "Лепшыя падказкі для відарысаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:772
+msgid "GGUF Support"
+msgstr "Падтрымка GGUF"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:781
+#, fuzzy
+msgid "Regenerate any response, even if they are incomplete"
+msgstr "Паўторнае генерыраванне любога адказу, нават калі ён няпоўны"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:782
+msgid "Support for pulling models by name:tag"
+msgstr "Падтрымка атрымання мадэляў па схеме name:tag"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:784
+#, fuzzy
+msgid "Restored sidebar toggle button"
+msgstr "Вернута кнопка пераключэння бакавой панэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:788
+#, fuzzy
+msgid "Reverted back to standard styles"
+msgstr "Вяртанне да стандартных стыляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:789
+#, fuzzy
+msgid "Fixed generated titles having \"'S\" for some reason"
+msgstr "Выпраўлена з'яўленне «'S» у згенераваных загалоўках"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:790
+#, fuzzy
+msgid "Changed min width for model dropdown"
+msgstr "Зменена мінімальная шырыня выпадальнага спісу мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:791
+#, fuzzy
+msgid "Changed message entry shadow"
+msgstr "Зменены цень поля ўводу паведамленняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:792
+#, fuzzy
+msgid "The last model used is now restored when the user changes chat"
+msgstr "Пры пераключэнні чата аднаўляецца апошняя выкарыстаная мадэль"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:793
+#, fuzzy
+msgid "Better check for message finishing"
+msgstr "Лепшая праверка завяршэння паведамлення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:802
+#, fuzzy
+msgid "Added table rendering (Thanks Nokse)"
+msgstr "Дададзена адлюстраванне табліц (дзякуй Nokse)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:806
+#, fuzzy
+msgid "Made support dialog more common"
+msgstr "Дыялог падтрымкі цяпер паказваецца часцей"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:807
+msgid "Dialog title on tag chooser when downloading models didn't display properly"
+msgstr "Загаловак дыялогу выбару тэга пры спампоўванні мадэляў адлюстроўваўся няправільна"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:808
+#, fuzzy
+msgid "Prevent chat generation from generating a title with multiple lines"
+msgstr "Прадухіляе стварэнне шматрадковых загалоўкаў чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:817
+#, fuzzy
+msgid "Bearer Token entry on connection error dialog"
+msgstr "Поле ўводу Bearer Token у дыялогу памылкі злучэння"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:818
+#, fuzzy
+msgid "Small appearance changes"
+msgstr "Невялікія змены выгляду"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:819
+#, fuzzy
+msgid "Compatibility with code blocks without explicit language"
+msgstr "Сумяшчальнасць з блокамі кода без указання мовы"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:820
+#, fuzzy
+msgid "Rare, optional and dismissible support dialog"
+msgstr "Рэдкі неабавязковы і закрывальны дыялог падтрымкі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:824
+#, fuzzy
+msgid "Date format for Simplified Chinese translation"
+msgstr "Фармат даты для перакладу на спрошчаны кітайскі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:825
+#, fuzzy
+msgid "Bug with unsupported localizations"
+msgstr "Памылка з непадтрыманымі лакалямі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:826
+#, fuzzy
+msgid "Min height being too large to be used on mobile"
+msgstr "Мінімальная вышыня занадта вялікая для выкарыстання на мабільных прыладах"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:827
+#, fuzzy
+msgid "Remote connection checker bug"
+msgstr "Памылка праверкі аддаленага злучэння"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:836
+#, fuzzy
+msgid "Models with capital letters on their tag don't work"
+msgstr "Мадэлі з вялікімі літарамі ў тэгу не працуюць"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:837
+#, fuzzy
+msgid "Ollama fails to launch on some systems"
+msgstr "Ollama не запускаецца на некаторых сістэмах"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:838
+#, fuzzy
+msgid "YouTube transcripts are not being saved in the right TMP directory"
+msgstr "Транскрыпты YouTube не захоўваюцца ў правільным каталогу TMP"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:842
+#, fuzzy
+msgid "Debug messages are now shown on the 'About Alpaca' dialog"
+msgstr "Адладкавыя паведамленні цяпер паказваюцца ў дыялогу «Пра Alpaca»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:843
+#, fuzzy
+msgid "Updated Ollama to v0.3.0 (new models)"
+msgstr "Ollama абноўлена да v0.3.0 (новыя мадэлі)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:852
+#, fuzzy
+msgid "Models with '-' in their names didn't work properly, this is now fixed"
+msgstr "Мадэлі з «-» у назве працавалі няправільна; гэта выпраўлена"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:853
+#, fuzzy
+msgid "Better connection check for Ollama"
+msgstr "Лепшая праверка злучэння для Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:860
+#, fuzzy
+msgid "Stable Release"
+msgstr "Стабільны выпуск"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:861
+#, fuzzy
+msgid "The new icon was made by Tobias Bernard over the Gnome Gitlab, thanks for the great icon!"
+msgstr "Новы значок стварыў Tobias Bernard у Gnome Gitlab — дзякуй за выдатны значок!"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:862
+msgid "Features and fixes"
+msgstr "Функцыі і выпраўленні"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:864
+msgid "Updated Ollama instance to 0.2.8"
+msgstr "Экзэмпляр Ollama абноўлена да 0.2.8"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:865
+msgid "Better model selector"
+msgstr "Лепшы інструмент выбару мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:866
+msgid "Model manager redesign"
+msgstr "Рэдызайн менеджара мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:867
+msgid "Better tag selector when pulling a model"
+msgstr "Лепшы інструмент выбару тэга пры атрыманні мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:868
+msgid "Model search"
+msgstr "Пошук мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:869
+#, fuzzy
+msgid "Added support for bearer tokens on remote instances"
+msgstr "Дададзена падтрымка Bearer-Token для аддаленых экзэмпляраў ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:870
+#, fuzzy
+msgid "Preferences dialog redesign"
+msgstr "Рэдызайн дыялогу налад"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:871
+#, fuzzy
+msgid "Added context menus to interact with a chat"
+msgstr "Дададзены кантэкстныя меню для ўзаемадзеяння з чатам"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:872
+#, fuzzy
+msgid "Redesigned primary and secondary menus"
+msgstr "Рэдызайн асноўнага і другаснага меню"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:873
+#, fuzzy
+msgid "YouTube integration: Paste the URL of a video with a transcript and it will be added to the prompt"
+msgstr "Інтэграцыя з YouTube: устаўце URL відэа з транскрыптам — ён будзе дададзены ў запыт"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:874
+#, fuzzy
+msgid "Website integration (Experimental): Extract the text from the body of a website by adding it's URL to the prompt"
+msgstr "Інтэграцыя з сайтамі (эксперыментальна): устаўце URL сайта — тэкст з яго будзе выняты і дададзены ў запыт"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:875
+msgid "Chat title generation"
+msgstr "Генерыраванне загалоўкаў чатаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:876
+#, fuzzy
+msgid "Auto resizing of message entry"
+msgstr "Аўтаматычнае змяненне памеру поля ўводу"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:877
+msgid "Chat notifications"
+msgstr "Апавяшчэнні чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:878
+msgid "Added indicator when an image is missing"
+msgstr "Дададзены індыкатар адсутнасці відарыса"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:879
+#, fuzzy
+msgid "Auto rearrange the order of chats when a message is received"
+msgstr "Аўтаматычная перастаноўка чатаў пры атрыманні паведамлення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:880
+#, fuzzy
+msgid "Redesigned file preview dialog"
+msgstr "Рэдызайн дыялогу прагляду файла"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:881
+#, fuzzy
+msgid "Credited new contributors"
+msgstr "Дададзены новыя ўдзельнікі ў спіс аўтараў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:882
+#, fuzzy
+msgid "Better stability and optimization"
+msgstr "Лепшая стабільнасць і аптымізацыя"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:883
+#, fuzzy
+msgid "Edit messages to change the context of a conversation"
+msgstr "Рэдагаванне паведамленняў для змены кантэксту размовы"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:884
+msgid "Added disclaimers when pulling models"
+msgstr "Дададзены папярэджанні пры атрыманні мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:885
+#, fuzzy
+msgid "Preview files before sending a message"
+msgstr "Папярэдні прагляд файлаў перад адпраўкай паведамлення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:886
+#, fuzzy
+msgid "Better format for date and time on messages"
+msgstr "Лепшы фармат даты і часу ў паведамленнях"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:887
+#, fuzzy
+msgid "Error and debug logging on terminal"
+msgstr "Запіс памылак і адладкі ў тэрмінале"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:888
+#, fuzzy
+msgid "Auto-hiding sidebar button"
+msgstr "Кнопка аўтаматычнага схавання бакавой панэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:889
+msgid "Various UI tweaks"
+msgstr "Розныя паляпшэнні інтэрфейсу"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:891
+msgid "New Models"
+msgstr "Новыя мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:893
+msgid "Gemma2"
+msgstr "Gemma2"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:894
+msgid "GLM4"
+msgstr "GLM4"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:895
+msgid "Codegeex4"
+msgstr "Codegeex4"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:896
+msgid "InternLM2"
+msgstr "InternLM2"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:897
+msgid "Llama3-groq-tool-use"
+msgstr "Llama3-groq-tool-use"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:898
+msgid "Mathstral"
+msgstr "Mathstral"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:899
+msgid "Mistral-nemo"
+msgstr "Mistral-nemo"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:900
+msgid "Firefunction-v2"
+msgstr "Firefunction-v2"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:901
+msgid "Nuextract"
+msgstr "Nuextract"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:903
+msgid "Translations"
+msgstr "Пераклады"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:904
+msgid "These are all the available translations on 1.0.0, thanks to all the contributors!"
+msgstr "Гэта ўсе пераклады, даступныя ў 1.0.0 — дзякуй усім удзельнікам!"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:906
+msgid "Russian: Alex K"
+msgstr "Руская: Alex K"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:907
+msgid "Spanish: Jeffser"
+msgstr "Іспанская: Jeffser"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:908
+msgid "Brazilian Portuguese: Daimar Stein"
+msgstr "Бразільская партугальская: Daimar Stein"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:909
+msgid "French: Louis Chauvet-Villaret"
+msgstr "Французская: Louis Chauvet-Villaret"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:910
+msgid "Norwegian: CounterFlow64"
+msgstr "Нарвежская: CounterFlow64"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:911
+msgid "Bengali: Aritra Saha"
+msgstr "Бенгальская: Aritra Saha"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:912
+msgid "Simplified Chinese: Yuehao Sui"
+msgstr "Спрошчаная кітайская: Yuehao Sui"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:926 data/com.jeffser.Alpaca.metainfo.xml.in:956 data/com.jeffser.Alpaca.metainfo.xml.in:977 data/com.jeffser.Alpaca.metainfo.xml.in:1182 data/com.jeffser.Alpaca.metainfo.xml.in:1239
+msgid "Big Update"
+msgstr "Вялікае абнаўленне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:928
+msgid "Added compatibility for PDF"
+msgstr "Дададзена сумяшчальнасць з PDF"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:929
+msgid "Added compatibility for DOCX"
+msgstr "Дададзена сумяшчальнасць з DOCX"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:930
+#, fuzzy
+msgid "Merged 'file attachment' menu into one button"
+msgstr "Меню «далучыць файл» аб’яднана ў адну кнопку"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:937 data/com.jeffser.Alpaca.metainfo.xml.in:1130
+msgid "Quick Fix"
+msgstr "Хуткае выпраўленне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:938
+#, fuzzy
+msgid "There were some errors when transitioning from the old version of chats to the new version. I apologize if this caused any corruption in your chat history. This should be the only time such a transition is needed."
+msgstr "Пры пераходзе са старой версіі чатаў на новую ўзніклі памылкі. Даруйце, калі гэта пашкодзіла вашу гісторыю чатаў. Падобны перанос спатрэбіцца толькі адзін раз."
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:944 data/com.jeffser.Alpaca.metainfo.xml.in:1096
+msgid "Huge Update"
+msgstr "Вялізарнае абнаўленне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:946
+#, fuzzy
+msgid "Added: Support for plain text files"
+msgstr "Дададзена: падтрымка тэкставых файлаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:947
+#, fuzzy
+msgid "Added: New backend system for storing messages"
+msgstr "Дададзена: новы бэкэнд для захоўвання паведамленняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:948
+#, fuzzy
+msgid "Added: Support for changing Ollama's overrides"
+msgstr "Дададзена: магчымасць змяняць перазапісы Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:949
+#, fuzzy
+msgid "General Optimization"
+msgstr "Агульная аптымізацыя"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:958
+#, fuzzy
+msgid "Added: Support for GGUF models (experimental)"
+msgstr "Дададзена: эксперыментальная падтрымка мадэляў GGUF"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:959
+#, fuzzy
+msgid "Added: Support for customization and creation of models"
+msgstr "Дададзена: магчымасць наладжвання і стварэння мадэляў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:960
+#, fuzzy
+msgid "Fixed: Icons don't appear on non Gnome systems"
+msgstr "Выпраўлена: значкі не адлюстроўваліся ў сістэмах без GNOME"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:961
+#, fuzzy
+msgid "Update Ollama to v0.1.39"
+msgstr "Абноўлена Ollama да v0.1.39"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:970
+#, fuzzy
+msgid "Fixed: app didn't open if models tweaks wasn't present in the config files"
+msgstr "Выпраўлена: праграма не адкрывалася, калі ў файлах канфігурацыі не было налад мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:979
+#, fuzzy
+msgid "Changed multiple icons (paper airplane for the send button)"
+msgstr "Заменены некалькі значкоў (кнопка адпраўкі цяпер з папяровым самалёцікам)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:980
+#, fuzzy
+msgid "Combined export / import chat buttons into a menu"
+msgstr "Кнопкі экспарту/імпарту чатаў абʼяднаны ў меню"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:981
+#, fuzzy
+msgid "Added 'model tweaks' (temperature, seed, keep_alive)"
+msgstr "Дададзены «наладкі мадэлі» (temperature, seed, keep_alive)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:982
+#, fuzzy
+msgid "Fixed send / stop button"
+msgstr "Выпраўлена кнопка адпраўкі/спынення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:983
+#, fuzzy
+msgid "Fixed app not checking if remote connection works when starting"
+msgstr "Выпраўлена: пры запуску праграма не правярала працаздольнасць аддаленага злучэння"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:990
+msgid "Daily Update"
+msgstr "Штодзённае абнаўленне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:992
+#, fuzzy
+msgid "Added text ellipsis to chat name so it doesn't change the button width"
+msgstr "У назву чата дададзены ўразок (… ), каб шырыня кнопкі не змянялася"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:993
+#, fuzzy
+msgid "New shortcut for creating a chat (CTRL+N)"
+msgstr "Новае спалучэнне клавіш для стварэння чата (CTRL+N)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:994
+#, fuzzy
+msgid "New message entry design"
+msgstr "Новы дызайн поля ўводу паведамлення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:995
+#, fuzzy
+msgid "Fixed: Can't rename the same chat multiple times"
+msgstr "Выпраўлена: немагчыма было перайменаваць той самы чат некалькі разоў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1002
+msgid "The fix"
+msgstr "Выпраўленне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1005
+#, fuzzy
+msgid "Fixed: Can't pull models on the integrated instance"
+msgstr "Выпраўлена: немагчымасць атрымаць мадэль для ўбудаванага экзэмпляра ШІ"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1012
+#, fuzzy
+msgid "Quick tweaks"
+msgstr "Хуткія наладкі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1014
+#, fuzzy
+msgid "Added progress bar to models that are being pulled"
+msgstr "Дададзена паласа прагрэсу для мадэляў, якія атрымоўваюцца з сервера"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1015
+#, fuzzy
+msgid "Added size to tags when pulling a model"
+msgstr "Пры атрыманні мадэлі ў тэгах паказваецца памер"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1016
+#, fuzzy
+msgid "General optimizations on the background"
+msgstr "Агульныя аптымізацыі ў фонавым рэжыме"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1023
+#, fuzzy
+msgid "Quick fixes"
+msgstr "Хуткія выпраўленні"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1025
+#, fuzzy
+msgid "Fixed: Scroll when message is received"
+msgstr "Выпраўлена: пракрутка пры атрыманні паведамлення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1026
+#, fuzzy
+msgid "Fixed: Content doesn't change when creating a new chat"
+msgstr "Выпраўлена: змесціва не абнаўлялася пры стварэнні новага чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1027
+#, fuzzy
+msgid "Added 'Featured Models' page on welcome dialog"
+msgstr "У дыялогу вітанне дададзена старонка «Рэкамендаваныя мадэлі»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1034
+msgid "Nice Update"
+msgstr "Прыемнае абнаўленне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1036
+#, fuzzy
+msgid "UI tweaks (Thanks Nokse22)"
+msgstr "Наладкі інтэрфейсу (дзякуй Nokse22)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1038
+msgid "Metadata fixes"
+msgstr "Выпраўленні метаданых"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1045
+msgid "Quick fix"
+msgstr "Хуткае выпраўленне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1047
+msgid "Updated Spanish translation"
+msgstr "Абноўлены іспанскі пераклад"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1048
+msgid "Added compatibility for PNG"
+msgstr "Дададзена сумяшчальнасць з PNG"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1055
+msgid "New Update"
+msgstr "Новае абнаўленне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1058
+#, fuzzy
+msgid "Added image recognition to more models"
+msgstr "Да большай колькасці мадэляў дададзена распазнаванне відарысаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1059
+#, fuzzy
+msgid "Added Brazilian Portuguese translation (Thanks Daimaar Stein)"
+msgstr "Дададзены бразільска-партугальскі пераклад (дзякуй Daimaar Stein)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1060
+#, fuzzy
+msgid "Refined the general UI (Thanks Nokse22)"
+msgstr "Удасканалены агульны інтэрфейс (дзякуй Nokse22)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1061
+#, fuzzy
+msgid "Added 'delete message' feature"
+msgstr "Дададзена функцыя «Выдаліць паведамленне»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1062
+#, fuzzy
+msgid "Added metadata so that software distributors know that the app is compatible with mobile"
+msgstr "Дададзены метаданыя, каб дыстрыбутары ведалі пра сумяшчальнасць праграмы з мабільнымі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1063
+msgid "Changed 'send' shortcut to just the return/enter key (to add a new line use shift+return)"
+msgstr "Спалучэнне «Адправіць» заменена на націсканне клавішы «Enter» (для новага радка выкарыстоўвайце Shift+Enter)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1070
+#, fuzzy
+msgid "Bug Fixes"
+msgstr "Выпраўленні памылак"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1072
+#, fuzzy
+msgid "Fixed: Minor spelling mistake"
+msgstr "Выпраўлена: дробная арфаграфічная памылка"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1073
+#, fuzzy
+msgid "Added 'mobile' as a supported form factor"
+msgstr "Дададзены фарм-фактар «mobile»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1074
+#, fuzzy
+msgid "Fixed: 'Connection Error' dialog not working properly"
+msgstr "Выпраўлена: дыялог «Памылка злучэння» працаваў некарэктна"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1075
+#, fuzzy
+msgid "Fixed: App might freeze randomly on startup"
+msgstr "Выпраўлена: праграма магла выпадкова завісаць пры запуску"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1076
+#, fuzzy
+msgid "Changed 'chats' label on sidebar for 'Alpaca'"
+msgstr "У бакавой панэлі надпіс «чаты» заменены на «Alpaca»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1083
+msgid "Cool Update"
+msgstr "Крутое абнаўленне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1085
+#, fuzzy
+msgid "Better design for chat window"
+msgstr "Лепшы дызайн акна чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1086
+#, fuzzy
+msgid "Better design for chat sidebar"
+msgstr "Лепшы дызайн бакавой панэлі чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1087
+#, fuzzy
+msgid "Fixed remote connections"
+msgstr "Выпраўлены аддаленыя злучэнні"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1088
+#, fuzzy
+msgid "Fixed Ollama restarting in loop"
+msgstr "Выпраўлена зацыкленае перазапусканне Ollama"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1089
+#, fuzzy
+msgid "Other cool backend stuff"
+msgstr "Іншыя цікавыя змены ў бэкэндзе"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1098
+#, fuzzy
+msgid "Added Ollama as part of Alpaca, Ollama will run in a sandbox"
+msgstr "Ollama уключана ў склад Alpaca, будзе запускацца ў пясочніцы"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1099
+#, fuzzy
+msgid "Added option to connect to remote instances (how it worked before)"
+msgstr "Дададзена магчымасць злучэння з аддаленымі экзэмплярамі ШІ (як раней)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1100
+#, fuzzy
+msgid "Added option to import and export chats"
+msgstr "Дададзена магчымасць імпарту і экспарту чатаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1101
+#, fuzzy
+msgid "Added option to run Alpaca with Ollama in the background"
+msgstr "Дададзена магчымасць запускаць Alpaca з Ollama ў фоне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1102
+#, fuzzy
+msgid "Added preferences dialog"
+msgstr "Дададзены дыялог налад"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1103
+#, fuzzy
+msgid "Changed the welcome dialog"
+msgstr "Зменены дыялог вітання"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1105 data/com.jeffser.Alpaca.metainfo.xml.in:1122 data/com.jeffser.Alpaca.metainfo.xml.in:1134 data/com.jeffser.Alpaca.metainfo.xml.in:1153 data/com.jeffser.Alpaca.metainfo.xml.in:1174
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1190 data/com.jeffser.Alpaca.metainfo.xml.in:1206 data/com.jeffser.Alpaca.metainfo.xml.in:1220 data/com.jeffser.Alpaca.metainfo.xml.in:1230 data/com.jeffser.Alpaca.metainfo.xml.in:1248
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1270
+msgid "Please report any errors to the issues page, thank you."
+msgstr "Паведамляйце пра памылкі на старонцы issues, дзякуй."
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1113
+#, fuzzy
+msgid "Yet Another Daily Update"
+msgstr "Яшчэ адно штодзённае абнаўленне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1115
+msgid "Added better UI for 'Manage Models' dialog"
+msgstr "Палепшаны інтэрфейс у дыялогу «Кіраванне мадэлямі»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1116
+#, fuzzy
+msgid "Added better UI for the chat sidebar"
+msgstr "Палепшаны інтэрфейс бакавой панэлі чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1118
+#, fuzzy
+msgid "Added myself to the credits as the spanish translator"
+msgstr "Дадаў сябе ў крэдыты як іспанскага перакладчыка"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1119
+#, fuzzy
+msgid "Using XDG properly to get config folder"
+msgstr "Правільнае выкарыстанне XDG для атрымання каталога налад"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1120
+#, fuzzy
+msgid "Update for translations"
+msgstr "Абноўлены пераклады"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1132
+#, fuzzy
+msgid "The last update had some mistakes in the description of the update"
+msgstr "У мінулым абнаўленні былі памылкі ў апісанні"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1142
+#, fuzzy
+msgid "Another Daily Update"
+msgstr "Чарговае штодзённае абнаўленне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1144
+#, fuzzy
+msgid "Added full Spanish translation"
+msgstr "Дададзены поўны іспанскі пераклад"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1145
+#, fuzzy
+msgid "Added support for background pulling of multiple models"
+msgstr "Дададзена падтрымка фонавага атрымання некалькіх мадэляў з сервера"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1146
+#, fuzzy
+msgid "Added interrupt button"
+msgstr "Дададзена кнопка перапынку"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1147
+#, fuzzy
+msgid "Added basic shortcuts"
+msgstr "Дададзены асноўныя спалучэнні клавіш"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1148
+#, fuzzy
+msgid "Better translation support"
+msgstr "Паляпшэнне падтрымкі перакладаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1149
+#, fuzzy
+msgid "User can now leave chat name empty when creating a new one, it will add a placeholder name"
+msgstr "Карыстальнік можа пакінуць назву чата пустой пры стварэнні новага – будзе дададзена назва-запаўняльнік"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1150
+#, fuzzy
+msgid "Better scalling for different window sizes"
+msgstr "Лепшае маштабаванне для розных памераў акна"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1151
+#, fuzzy
+msgid "Fixed: Can't close app if first time setup fails"
+msgstr "Выпраўлена: немагчыма зачыніць праграму, калі першая налада не атрымліваецца"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1161
+msgid "Really Big Update"
+msgstr "Вельмі вялікае абнаўленне"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1163
+#, fuzzy
+msgid "Added multiple chats support!"
+msgstr "Дададзена падтрымка некалькіх чатаў!"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1164
+#, fuzzy
+msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
+msgstr "Дададзена падтрымка Pango Markup (полужырны, спіс, загаловак, падзагаловак, манаспейс)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1165
+#, fuzzy
+msgid "Added autoscroll if the user is at the bottom of the chat"
+msgstr "Дададзена аўтапракрутка, калі карыстальнік знаходзіцца ўнізе чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1166
+#, fuzzy
+msgid "Added support for multiple tags on a single model"
+msgstr "Дададзена падтрымка некалькіх тэгаў для адной мадэлі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1167
+msgid "Added better model management dialog"
+msgstr "Дададзены палепшаны дыялог кіруення мадэлямі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1168
+msgid "Added loading spinner when sending message"
+msgstr "Дададзены індыкатар загрузкі падчас адпраўкі паведамлення"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1169
+msgid "Added notifications if app is not active and a model pull finishes"
+msgstr "Дададзены апавяшчэнні, калі праграма неактыўная і атрыманне мадэлі з сервера завершана"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1170
+#, fuzzy
+msgid "Added new symbolic icon"
+msgstr "Дададзены новы сімвалічны значок"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1171
+#, fuzzy
+msgid "Added frame to message textview widget"
+msgstr "Дададзена аблямоўка вакол віджэта тэкставага поля паведамленняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1172
+#, fuzzy
+msgid "Fixed \"code blocks shouldn't be editable\""
+msgstr "Выпраўлена: «блокі кода не павінны быць рэдагаванымі»"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1184
+msgid "Added code highlighting"
+msgstr "Дададзена падсветка кода"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1185
+msgid "Added image recognition (llava model)"
+msgstr "Дададзена распазнаванне відарысаў (мадэль llava)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1186
+#, fuzzy
+msgid "Added multiline prompt"
+msgstr "Дададзена падтрымка шматрадковых запытаў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1187
+msgid "Fixed some small bugs"
+msgstr "Выпраўлены некаторыя дробныя памылкі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1188
+msgid "General optimization"
+msgstr "Агульная аптымізацыя"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1198
+msgid "Fixes and features"
+msgstr "Выпраўленні і новыя магчымасці"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1200
+msgid "Russian translation (thanks github/alexkdeveloper)"
+msgstr "Рускі пераклад (дзякуй github/alexkdeveloper)"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1201
+#, fuzzy
+msgid "Fixed: Cannot close app on first setup"
+msgstr "Выпраўлена: нельга зачыніць праграму пасля першай налады"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1202
+#, fuzzy
+msgid "Fixed: Brand colors for Flathub"
+msgstr "Выпраўлена: колеры брэнда для Flathub"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1203
+msgid "Fixed: App description"
+msgstr "Выпраўлена: апісанне праграмы"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1204
+#, fuzzy
+msgid "Fixed: Only show 'save changes dialog' when you actually change the url"
+msgstr "Выпраўлена: дыялог «Захаваць змены» паказваецца толькі пры змяненні URL"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1214
+msgid "0.2.2 Bug fixes"
+msgstr "0.2.2: выпраўленні памылак"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1216
+#, fuzzy
+msgid "Toast messages appearing behind dialogs"
+msgstr "Апавяшчэнні з'яўляюцца за дыялогамі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1217
+#, fuzzy
+msgid "Local model list not updating when changing servers"
+msgstr "Лакальны спіс мадэляў не абнаўляецца пры змене сервераў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1218
+#, fuzzy
+msgid "Closing the setup dialog closes the whole app"
+msgstr "Зачыненне дыялогу налад зачыняе ўсю праграму"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1228
+msgid "0.2.1 Data saving fix"
+msgstr "0.2.1: выпраўленне захавання даных"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1229
+#, fuzzy
+msgid "The app didn't save the config files and chat history to the right directory, this is now fixed"
+msgstr "Выпраўлена захаванне канфігурацыйных файлаў і гісторыі чатаў у правільны каталог"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1238
+msgid "0.2.0"
+msgstr "0.2.0"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1240
+msgid "New Features"
+msgstr "Новыя функцыі"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1242
+#, fuzzy
+msgid "Restore chat after closing the app"
+msgstr "Аднаўленне чата пасля закрыцця праграмы"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1243
+msgid "A button to clear the chat"
+msgstr "Кнопка для ачысткі чата"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1244
+#, fuzzy
+msgid "Fixed multiple bugs involving how messages are shown"
+msgstr "Выпраўлена некалькі памылак адлюстравання паведамленняў"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1245
+msgid "Added welcome dialog"
+msgstr "Дададзены дыялог вітання"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1246
+msgid "More stability"
+msgstr "Больш стабільнасці"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1256
+msgid "0.1.2 Quick fixes"
+msgstr "0.1.2: хуткія выпраўленні"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1257
+#, fuzzy
+msgid "This release fixes some metadata needed to have a proper Flatpak application"
+msgstr "Гэта версія выпраўляе метаданыя для карэктнай Flatpak-праграмы"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1263
+#, fuzzy
+msgid "0.1.1 Stable Release"
+msgstr "0.1.1: стабільны выпуск"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1264
+#, fuzzy
+msgid "This is the first public version of Alpaca"
+msgstr "Гэта першая публічная версія Alpaca"
+
+#: src/alpaca_search_provider.py.in:41
+msgid "Open chat"
+msgstr "Адкрыць чат"
+
+#: src/alpaca_search_provider.py.in:42
+msgid "Quick ask"
+msgstr "Хуткае пытанне"
+
+#: src/live_chat.py:73 src/live_chat.py:150 src/quick_ask.py:64
+msgid "Please select an instance in Alpaca before chatting"
+msgstr "Выберыце экзэмпляр ШІ ў Alpaca перад тым, каб пачаць чат"
+
+#: src/live_chat.py:154 src/quick_ask.py:68
+msgid "Please select add a model for this instance in Alpaca before chatting"
+msgstr "Дадайце мадэль для гэтага экзэмпляра ШІ ў Alpaca перад тым, каб пачаць чат"
+
+#: src/live_chat.py:157
+msgid "Selected model is not available"
+msgstr "Абраная мадэль недаступная"
+
+#: src/live_chat.py:225
+msgid "No Messages"
+msgstr "Паведамленняў няма"
+
+#: src/live_chat.py:226
+msgid "Begin by speaking to the model"
+msgstr "Пачніце з размовы з мадэллю"
+
+#: src/main.py:224
+msgid "Documentation"
+msgstr "Дакументацыя"
+
+#: src/main.py:225
+msgid "Become a Sponsor"
+msgstr "Стаць спонсарам"
+
+#: src/main.py:226
+msgid "Discussions"
+msgstr "Абмеркаванні"
+
+#: src/ollama_models.py:33
+#, fuzzy
+msgid "New state of the art 70B model. Llama 3.3 70B offers similar performance compared to the Llama 3.1 405B model."
+msgstr "Новая перадавая мадэль на 70B параметраў. Llama 3.3 70B забяспечвае падобную прадукцыйнасць на ўзроўні Llama 3.1 405B."
+
+#: src/ollama_models.py:55
+msgid "QwQ is the reasoning model of the Qwen series."
+msgstr "QwQ — гэта мадэль для лагічнага вываду ў серыі Qwen."
+
+#: src/ollama_models.py:83
+msgid "Llama 3.2 Vision is a collection of instruction-tuned image reasoning generative models in 11B and 90B sizes."
+msgstr "Llama 3.2 Vision — гэта набор інструкцыйна-наладжаных генератыўных мадэляў для візуальнага лагічнага вываду з памерамі 11B і 90B."
+
+#: src/ollama_models.py:119
+#, fuzzy
+msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
+msgstr "Meta Llama 3.2 прапануе кампактныя мадэлі з 1B і 3B параметраў."
+
+#: src/ollama_models.py:154
+#, fuzzy
+msgid "Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and 405B parameter sizes."
+msgstr "Llama 3.1 — новая перадавая мадэль ад Meta, даступная ў памерах 8B, 70B і 405B."
+
+#: src/ollama_models.py:181
+#, fuzzy
+msgid "Meta Llama 3: The most capable openly available LLM to date"
+msgstr "Meta Llama 3: найлепшая адкрытая LLM на сённяшні дзень"
+
+#: src/ollama_models.py:204
+#, fuzzy
+msgid "The 7B model released by Mistral AI, updated to version 0.3."
+msgstr "7B-мадэль ад Mistral AI, абноўлена да версіі 0.3."
+
+#: src/ollama_models.py:228
+#, fuzzy
+msgid "A high-performing open embedding model with a large token context window."
+msgstr "Высокаэфектыўная адкрытая эмбедынг-мадэль з вялікім акном кантэксту."
+
+#: src/ollama_models.py:257
+#, fuzzy
+msgid "Gemma is a family of lightweight, state-of-the-art open models built by Google DeepMind. Updated to version 1.1"
+msgstr "Gemma — сямейства лёгкіх, перадавых адкрытых мадэляў ад Google DeepMind. Абноўлена да 1.1"
+
+#: src/ollama_models.py:313
+#, fuzzy
+msgid "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from 0.5B to 110B parameters"
+msgstr "Qwen 1.5 — серыя вялікіх моўных мадэляў ад Alibaba Cloud з памерамі ад 0.5B да 110B"
+
+#: src/ollama_models.py:377
+#, fuzzy
+msgid "Qwen2 is a new series of large language models from Alibaba group"
+msgstr "Qwen2 — новая серыя вялікіх моўных мадэляў ад Alibaba Group"
+
+#: src/ollama_models.py:406
+#, fuzzy
+msgid "Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art open models by Microsoft."
+msgstr "Phi-3 — сямейства лёгкіх адкрытых мадэляў ад Microsoft з памерамі 3B (Mini) і 14B (Medium)."
+
+#: src/ollama_models.py:438
+#, fuzzy
+msgid "Llama 2 is a collection of foundation language models ranging from 7B to 70B parameters."
+msgstr "Llama 2 — набор базавых моўных мадэляў з памерамі ад 7B да 70B."
+
+#: src/ollama_models.py:500
+#, fuzzy
+msgid "Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, encompassing up to 18 trillion tokens. The model supports up to 128K tokens and has multilingual support."
+msgstr "Мадэлі Qwen2.5 папярэдне навучаны на апошнім маштабным наборы дадзеных Alibaba, які ахоплівае да 18 трыльёнаў токенаў. Падтрымліваюць да 128K токенаў і мультылангі."
+
+#: src/ollama_models.py:532
+#, fuzzy
+msgid "Google Gemma 2 is a high-performing and efficient model available in three sizes: 2B, 9B, and 27B."
+msgstr "Google Gemma 2 — эфектыўная высокапрадукцыйная мадэль у памерах 2B, 9B і 27B."
+
+#: src/ollama_models.py:566
+#, fuzzy
+msgid "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines a vision encoder and Vicuna for general-purpose visual and language understanding. Updated to version 1.6."
+msgstr "🌋 LLaVA — новая канчаткова навучаная вялікая мультымадальная мадэль, якая спалучае візуальны энкодэр і Vicuna для агульных візуальных і мовазнаўчых задач. Абноўлена да 1.6."
+
+#: src/ollama_models.py:649
+#, fuzzy
+msgid "The latest series of Code-Specific Qwen models, with significant improvements in code generation, code reasoning, and code fixing."
+msgstr "Апошняя серыя спецыялізаваных Qwen-мадэляў для кода з істотнымі паляпшэннямі ў генерыраванні, аналізе і выпраўленні кода."
+
+#: src/ollama_models.py:673
+#, fuzzy
+msgid "A state-of-the-art 12B model with 128k context length, built by Mistral AI in collaboration with NVIDIA."
+msgstr "Перадавая мадэль 12B з кантэкстам 128k, створаная Mistral AI у супрацоўніцтве з NVIDIA."
+
+#: src/ollama_models.py:695
+#, fuzzy
+msgid "The TinyLlama project is an open endeavor to train a compact 1.1B Llama model on 3 trillion tokens."
+msgstr "Праект TinyLlama — адкрытая ініцыятыва па навучанні кампактнай мадэлі 1.1B Llama на 3 трыльёнах токенаў."
+
+#: src/ollama_models.py:718
+#, fuzzy
+msgid "State-of-the-art large embedding model from mixedbread.ai"
+msgstr "Перадавая вялікая эмбедынг-мадэль ад mixedbread.ai"
+
+#: src/ollama_models.py:751
+#, fuzzy
+msgid "StarCoder2 is the next generation of transparently trained open code LLMs that comes in three sizes: 3B, 7B and 15B parameters."
+msgstr "StarCoder2 — наступнае пакаленне адкрытых кода-мадэляў LLM з памерамі 3B, 7B і 15B."
+
+#: src/ollama_models.py:777
+#, fuzzy
+msgid "A set of Mixture of Experts (MoE) model with open weights by Mistral AI in 8x7b and 8x22b parameter sizes."
+msgstr "Набор мадэляў Mixture of Experts (MoE) з адкрытымі вагамі ад Mistral AI ў памерах 8×7B і 8×22B."
+
+#: src/ollama_models.py:803
+#, fuzzy
+msgid "Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of experts models that excels at coding tasks. Created by Eric Hartford."
+msgstr "Нецэнзурныя мадэлі 8×7B і 8×22B, адаптаваныя на аснове Mixtral Mixture of Experts, выдатна спраўляюцца з задачамі па кадаванні. Створаны Эрыкам Хартфордам."
+
+#: src/ollama_models.py:832
+#, fuzzy
+msgid ""
+"CodeGemma is a collection of powerful, lightweight models that can perform a variety of coding tasks like fill-in-the-middle code completion, code generation, natural language understanding, mathematical reasoning, and instruction following."
+msgstr "CodeGemma — зборка магутных лёгкіх мадэляў, якія выконваюць розныя задачы па кадаванні: дапісванне кода, генерыраванне кода, разуменне натуральнай мовы, матэматычнае разважанне і выкананне інструкцый."
+
+#: src/ollama_models.py:860
+#, fuzzy
+msgid "An open-source Mixture-of-Experts code language model that achieves performance comparable to GPT4-Turbo in code-specific tasks."
+msgstr "Адкрытая мадэль Mixture-of-Experts для кода, якая дасягае прадукцыйнасці, параўнальнай з GPT4-Turbo ў спецыфічных задачах кадавання."
+
+#: src/ollama_models.py:882
+#, fuzzy
+msgid "Phi-2: a 2.7B language model by Microsoft Research that demonstrates outstanding reasoning and language understanding capabilities."
+msgstr "Phi-2 — моўная мадэль 2.7B ад Microsoft Research, якая дэманструе выдатныя здольнасці да разважання і разумення мовы."
+
+#: src/ollama_models.py:909
+#, fuzzy
+msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
+msgstr "Нецэнзурная мадэль Llama 2 ад George Sung і Jarrad Hope."
+
+#: src/ollama_models.py:944
+#, fuzzy
+msgid "DeepSeek Coder is a capable coding model trained on two trillion code and natural language tokens."
+msgstr "DeepSeek Coder — здольная мадэль для кадавання, навучаная на двух трыльёнах токенаў кода і натуральнай мовы."
+
+#: src/ollama_models.py:985
+#, fuzzy
+msgid "A suite of text embedding models by Snowflake, optimized for performance."
+msgstr "Набор тэкставых эмбедынг-мадэляў ад Snowflake, аптымізаваных для прадукцыйнасці."
+
+#: src/ollama_models.py:1013
+#, fuzzy
+msgid "State of the art large language model from Microsoft AI with improved performance on complex chat, multilingual, reasoning and agent use cases."
+msgstr "Перадавая вялікая моўная мадэль ад Microsoft AI з палепшанай прадукцыйнасцю ў складаных чатах, мультылінгвістыцы, разважанні і рэжысуры агентаў."
+
+#: src/ollama_models.py:1036
+#, fuzzy
+msgid "The uncensored Dolphin model based on Mistral that excels at coding tasks. Updated to version 2.8."
+msgstr "Нецэнзурная мадэль Dolphin на базе Mistral, выдатна спраўляецца з задачамі кадавання. Абноўлена да 2.8."
+
+#: src/ollama_models.py:1064
+#, fuzzy
+msgid "Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on Llama 3 that has a variety of instruction, conversational, and coding skills."
+msgstr "Dolphin 2.9 — новая мадэль з памерамі 8B і 70B ад Эрыка Хартфорда на базе Llama 3, якая валодае разнастайнымі навыкамі інструктажу, размоў і кадавання."
+
+#: src/ollama_models.py:1098
+#, fuzzy
+msgid "Yi 1.5 is a high-performing, bilingual language model."
+msgstr "Yi 1.5 — высокапрадукцыйная двухмоўная моўная мадэль."
+
+#: src/ollama_models.py:1121
+#, fuzzy
+msgid "Command R is a Large Language Model optimized for conversational interaction and long context tasks."
+msgstr "Command R — вялікая моўная мадэль, аптымізаваная для размоўнага ўзаемадзеяння і задач з доўгім кантэкстам."
+
+#: src/ollama_models.py:1158
+#, fuzzy
+msgid "A general-purpose model ranging from 3 billion parameters to 70 billion, suitable for entry-level hardware."
+msgstr "Агульнага прызначэння мадэль з памерамі ад 3 млрд да 70 млрд параметраў, прыдатная для абсталявання пачатковага ўзроўню."
+
+#: src/ollama_models.py:1181
+#, fuzzy
+msgid "A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several benchmarks."
+msgstr "LLaVA — мадэль, дапрацаваная на аснове Llama 3 Instruct, з палепшанымі паказчыкамі ў некалькіх бенчмарках."
+
+#: src/ollama_models.py:1208
+#, fuzzy
+msgid "Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models that are trained to act as helpful assistants."
+msgstr "Zephyr — серыя дапрацаваных версій мадэляў Mistral і Mixtral, навучаных выступаць карыснымі памочнікамі."
+
+#: src/ollama_models.py:1230
+#, fuzzy
+msgid "A lightweight AI model with 3.8 billion parameters with performance overtaking similarly and larger sized models."
+msgstr "Лёгкая ІІ-мадэль з 3,8 млрд параметраў, прадукцыйнасцю якая пераўзыходзіць аналагічныя і большыя мадэлі."
+
+#: src/ollama_models.py:1258
+#, fuzzy
+msgid "Embedding models on very large sentence level datasets."
+msgstr "Эмбедынг-мадэлі для вельмі вялікіх карпусоў на ўзроўні сказаў."
+
+#: src/ollama_models.py:1281
+msgid "Codestral is Mistral AI’s first-ever code model designed for code generation tasks."
+msgstr "Codestral — першая код-мадэль ад Mistral AI, прызначаная для задач, звязаных з генерыраваннем кода."
+
+#: src/ollama_models.py:1318
+msgid "StarCoder is a code generation model trained on 80+ programming languages."
+msgstr "StarCoder — мадэль генерыравання кода, навучаная на 80+ мовах праграмавання."
+
+#: src/ollama_models.py:1350
+#, fuzzy
+msgid "General use chat model based on Llama and Llama 2 with 2K to 16K context sizes."
+msgstr "Агульнапрызначаная чат-мадэль на базе Llama і Llama 2 з кантэкстам ад 2K да 16K."
+
+#: src/ollama_models.py:1387
+#, fuzzy
+msgid "A family of open foundation models by IBM for Code Intelligence"
+msgstr "Сямейства адкрытых фундаментальных мадэляў ад IBM для Code Intelligence"
+
+#: src/ollama_models.py:1409
+#, fuzzy
+msgid "Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the Mistral 7B model using the OpenOrca dataset."
+msgstr "Mistral OpenOrca — мадэль на 7 млрд параметраў, дапрацаваная на аснове Mistral 7B з выкарыстаннем датасэта OpenOrca."
+
+#: src/ollama_models.py:1441
+#, fuzzy
+msgid "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on a new high-quality dataset."
+msgstr "🪐 Сямейства малых мадэляў з 135M, 360M і 1.7B параметраў, навучаных на новым якасным датасэце."
+
+#: src/ollama_models.py:1473
+#, fuzzy
+msgid "Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on Llama 2 uncensored by Eric Hartford."
+msgstr "Wizard Vicuna Uncensored — мадэль на 7B, 13B і 30B параметраў на базе Llama 2 без цэнзуры, створаная Эрыкам Хартфордам."
+
+#: src/ollama_models.py:1502
+#, fuzzy
+msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
+msgstr "Мадэль на базе Llama 2, дапрацаваная для паляпшэння здольнасцей да дыялогу на кітайскай."
+
+#: src/ollama_models.py:1525
+#, fuzzy
+msgid "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-Functionality, Multi-Linguality, and Multi-Granularity."
+msgstr "BGE-M3 — новая мадэль ад BAAI, вылучаецца сваёй шматфункцыянальнасцю, мультылінгвістычнасцю і мультагранулярнасцю."
+
+#: src/ollama_models.py:1550
+#, fuzzy
+msgid "A versatile model for AI software development scenarios, including code completion."
+msgstr "Універсальная мадэль для сцэнарыяў распрацоўкі ІІ-праграмнага забеспячэння, уключаючы дапісванне кода."
+
+#: src/ollama_models.py:1573
+#, fuzzy
+msgid "A family of open-source models trained on a wide variety of data, surpassing ChatGPT on various benchmarks. Updated to version 3.5-0106."
+msgstr "Сямейства адкрытых мадэляў, навучаных на розных дадзеных, пераўзыходзіць ChatGPT у некалькіх бенчмарках. Абноўлена да 3.5-0106."
+
+#: src/ollama_models.py:1601
+#, fuzzy
+msgid "Aya 23, released by Cohere, is a new family of state-of-the-art, multilingual models that support 23 languages."
+msgstr "Aya 23 — новая сямейства перадавых мультылінгвістычных мадэляў ад Cohere, якія падтрымліваюць 23 мовы."
+
+#: src/ollama_models.py:1624
+#, fuzzy
+msgid "CodeQwen1.5 is a large language model pretrained on a large amount of code data."
+msgstr "CodeQwen1.5 — вялікая моўная мадэль, папярэдне навучаная на вялікім масіве кода."
+
+#: src/ollama_models.py:1652
+#, fuzzy
+msgid "The powerful family of models by Nous Research that excels at scientific discussion and coding tasks."
+msgstr "Магутная сямейства мадэляў ад Nous Research, выдатна падыходзіць для навуковых абмеркаванняў і кадавання."
+
+#: src/ollama_models.py:1674
+#, fuzzy
+msgid "Command R+ is a powerful, scalable large language model purpose-built to excel at real-world enterprise use cases."
+msgstr "Command R+ — магутная маштабаваная моўная мадэль, створаная для эфектыўнай працы ў рэальных бізнес-сцэнарыях."
+
+#: src/ollama_models.py:1697
+msgid "State-of-the-art code generation model"
+msgstr "Перадавая мадэль генерыравання кода"
+
+#: src/ollama_models.py:1721
+#, fuzzy
+msgid "Stable Code 3B is a coding model with instruct and code completion variants on par with models such as Code Llama 7B that are 2.5x larger."
+msgstr "Stable Code 3B — мадэль для кадавання з варыянтамі інструкцый і дапісвання кода на ўзроўні мадэляў, як Code Llama 7B, што ў 2.5× большыя."
+
+#: src/ollama_models.py:1743
+#, fuzzy
+msgid "An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset by Eric Hartford and based on TinyLlama."
+msgstr "Эксперыментальная мадэль 1.1B параметраў, навучаная на новым датасэце Dolphin 2.8 Эрыкам Хартфордам на базе TinyLlama."
+
+#: src/ollama_models.py:1770
+#, fuzzy
+msgid "OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully open datasets."
+msgstr "OpenHermes 2.5 — мадэль 7B, дапрацаваная Teknium на базе Mistral з цалкам адкрытымі датасэтамі."
+
+#: src/ollama_models.py:1794
+#, fuzzy
+msgid "Mistral Large 2 is Mistral's new flagship model that is significantly more capable in code generation, mathematics, and reasoning with 128k context window and support for dozens of languages."
+msgstr "Mistral Large 2 — новая флагманская мадэль Mistral з лепшымі магчымасцямі генерыравання кода, матэматыкі і разважання з кантэкстам 128K і падтрымкай дзясяткаў моў."
+
+#: src/ollama_models.py:1827
+#, fuzzy
+msgid "Qwen2 Math is a series of specialized math language models built upon the Qwen2 LLMs, which significantly outperforms the mathematical capabilities of open-source models and even closed-source models (e.g., GPT4o)."
+msgstr "Qwen2 Math — серыя спецыялізаваных матэматычных моўных мадэляў на базе Qwen2 LLM, якія значна пераўзыходзяць матэматычныя здольнасці адкрытых і зачыненых мадэляў (напрыклад, GPT4o)."
+
+#: src/ollama_models.py:1851
+#, fuzzy
+msgid "A strong multi-lingual general language model with competitive performance to Llama 3."
+msgstr "Моцная шматмоўная агульнапрызначаная мадэль з канкурэнтаздольнай прадукцыйнасцю ў параўнанні з Llama 3."
+
+#: src/ollama_models.py:1885
+#, fuzzy
+msgid "Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model trained on multilingual data in English, Spanish, German, Italian, French, Portuguese, and Dutch."
+msgstr "Stable LM 2 — перадавая моўная мадэль 1.6B і 12B параметраў, навучаная на мультымоўных дадзеных (англійская, іспанская, нямецкая, італьянская, французская, партугальская, нідэрландская)."
+
+#: src/ollama_models.py:1908
+#, fuzzy
+msgid "BakLLaVA is a multimodal model consisting of the Mistral 7B base model augmented with the LLaVA architecture."
+msgstr "BakLLaVA — мультымадальная мадэль на базе Mistral 7B з дапаўненнем архітэктуры LLaVA."
+
+#: src/ollama_models.py:1929
+#, fuzzy
+msgid "A high-performing model trained with a new technique called Reflection-tuning that teaches a LLM to detect mistakes in its reasoning and correct course."
+msgstr "Высокапрадукцыйная мадэль, навучаная з выкарыстаннем новай тэхнікі Reflection-tuning, якая вучыць LLM выяўляць памылкі ў разважаннях і выпраўляць курс."
+
+#: src/ollama_models.py:1960
+#, fuzzy
+msgid "An advanced language model crafted with 2 trillion bilingual tokens."
+msgstr "Перадавая моўная мадэль, навучаная на двух трыльёнах двухмоўных токенаў."
+
+#: src/ollama_models.py:1987
+#, fuzzy
+msgid "This model extends LLama-3 8B's context length from 8k to over 1m tokens."
+msgstr "Гэтая мадэль пашырае даўжыню кантэксту Llama-3 8B з 8k да больш за 1M токенаў."
+
+#: src/ollama_models.py:2020
+#, fuzzy
+msgid "Model focused on math and logic problems"
+msgstr "Мадэль, арыентаваная на матэматычныя і лагічныя задачы"
+
+#: src/ollama_models.py:2043
+#, fuzzy
+msgid "moondream2 is a small vision language model designed to run efficiently on edge devices."
+msgstr "moondream2 — лёгкая мультымадальная мадэль, распрацаваная для эфектыўнага запуску на edge-прыладах."
+
+#: src/ollama_models.py:2065
+#, fuzzy
+msgid "A fine-tuned model based on Mistral with good coverage of domain and language."
+msgstr "Адаптаваная мадэль на базе Mistral з добрым пакрыццём даменаў і моў."
+
+#: src/ollama_models.py:2092
+#, fuzzy
+msgid "A model from NVIDIA based on Llama 3 that excels at conversational question answering (QA) and retrieval-augmented generation (RAG)."
+msgstr "Мадэль NVIDIA на базе Llama 3, якая выдатна падыходзіць для адказаў на пытанні (QA) ў размове і генерыравання з падтрымкай RAG."
+
+#: src/ollama_models.py:2119
+#, fuzzy
+msgid "Conversational model based on Llama 2 that performs competitively on various benchmarks."
+msgstr "Размоўная мадэль на базе Llama 2, якая дэманструе канкурэнтную прадукцыйнасць у розных бенчмарках."
+
+#: src/ollama_models.py:2147
+#, fuzzy
+msgid "SQLCoder is a code completion model fined-tuned on StarCoder for SQL generation tasks"
+msgstr "SQLCoder — мадэль дапісвання кода, адаптаваная з StarCoder для задач генерыравання SQL"
+
+#: src/ollama_models.py:2174
+#, fuzzy
+msgid "General use models based on Llama and Llama 2 from Nous Research."
+msgstr "Агульнапрызначаныя мадэлі на базе Llama і Llama 2 ад Nous Research."
+
+#: src/ollama_models.py:2197
+msgid "Code generation model based on Code Llama."
+msgstr "Мадэль генерыравання кода на базе Code Llama."
+
+#: src/ollama_models.py:2224
+#, fuzzy
+msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
+msgstr "Пашырэнне Llama 2 з падтрымкай кантэксту да 128K токенаў."
+
+#: src/ollama_models.py:2252
+#, fuzzy
+msgid "A 7B and 15B uncensored variant of the Dolphin model family that excels at coding, based on StarCoder2."
+msgstr "Нецэнзурны варыянт сямейства Dolphin з 7B і 15B параметраў на базе StarCoder2, выдатна падыходзіць для кадавання."
+
+#: src/ollama_models.py:2279
+#, fuzzy
+msgid "General use model based on Llama 2."
+msgstr "Агульнапрызначаная мадэль на базе Llama 2."
+
+#: src/ollama_models.py:2308
+#, fuzzy
+msgid "A strong, economical, and efficient Mixture-of-Experts language model."
+msgstr "Магутная, эканамічная і эфектыўная мадэль Mixture-of-Experts."
+
+#: src/ollama_models.py:2330
+#, fuzzy
+msgid "Starling is a large language model trained by reinforcement learning from AI feedback focused on improving chatbot helpfulness."
+msgstr "Starling — вялікая моўная мадэль, навучаная падмацаваннем па водгуках ІІ, арыентаваная на павышэнне карыснасці чат-ботаў."
+
+#: src/ollama_models.py:2352
+#, fuzzy
+msgid "A companion assistant trained in philosophy, psychology, and personal relationships. Based on Mistral."
+msgstr "Кампаньён-памочнік, навучаны ў галіне філасофіі, псіхалогіі і асабістых адносін. На базе Mistral."
+
+#: src/ollama_models.py:2390
+#, fuzzy
+msgid "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous Research"
+msgstr "Hermes 3 — апошняя версія флагманскай серыі Hermes LLM ад Nous Research"
+
+#: src/ollama_models.py:2418
+#, fuzzy
+msgid "Yi-Coder is a series of open-source code language models that delivers state-of-the-art coding performance with fewer than 10 billion parameters."
+msgstr "Yi-Coder — серыя адкрытых код-мадэляў, якія даюць перадавую прадукцыйнасць з менш чым 10 млрд параметраў."
+
+#: src/ollama_models.py:2449
+msgid "A large language model built by the Technology Innovation Institute (TII) for use in summarization, text generation, and chat bots."
+msgstr "Вялікая моўная мадэль ад Technology Innovation Institute (TII) для рэзюміравання, генерыравання тэксту і чат-ботаў."
+
+#: src/ollama_models.py:2486
+#, fuzzy
+msgid "InternLM2.5 is a 7B parameter model tailored for practical scenarios with outstanding reasoning capability."
+msgstr "InternLM2.5 — мадэль з 7B параметраў, прыстасаваная да практычных сцэнарыяў з выдатнымі здольнасцямі разважання."
+
+#: src/ollama_models.py:2508
+#, fuzzy
+msgid "A compact, yet powerful 10.7B large language model designed for single-turn conversation."
+msgstr "Кампактная, але магутная моўная мадэль 10.7B для аднаразовых размоў."
+
+#: src/ollama_models.py:2532
+#, fuzzy
+msgid "Athene-V2 is a 72B parameter model which excels at code completion, mathematics, and log extraction tasks."
+msgstr "Athene-V2 — мадэль з 72B параметраў, выдатная для дапісвання кода, матэматыкі і вылучэння лаг-даных."
+
+#: src/ollama_models.py:2555
+#, fuzzy
+msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
+msgstr "Новая кампактная мадэль LLaVA, дапрацаваная з Phi 3 Mini."
+
+#: src/ollama_models.py:2583
+#, fuzzy
+msgid "Orca 2 is built by Microsoft research, and are a fine-tuned version of Meta's Llama 2 models. The model is designed to excel particularly in reasoning."
+msgstr "Orca 2 — мадэль Microsoft Research, дапрацаваная версія Llama 2 ад Meta. Мадэль выдатна падыходзіць для разважання."
+
+#: src/ollama_models.py:2614
+#, fuzzy
+msgid "A series of multimodal LLMs (MLLMs) designed for vision-language understanding."
+msgstr "Серыя мультымадальных LLM (MLLM), прызначаных для візуальна-моўнага разумення."
+
+#: src/ollama_models.py:2646
+#, fuzzy
+msgid "Llama 2 based model fine tuned on an Orca-style dataset. Originally called Free Willy."
+msgstr "Мадэль на базе Llama 2, дапрацаваная на датасэце ў стылі Orca. Першапачаткова называлася Free Willy."
+
+#: src/ollama_models.py:2675
+#, fuzzy
+msgid "Mistral Small 3 sets a new benchmark in the “small” Large Language Models category below 70B."
+msgstr "Mistral Small 3 усталёўвае новы эталон у катэгорыі «малых» LLM з менш чым 70B."
+
+#: src/ollama_models.py:2697
+#, fuzzy
+msgid "2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language model by Microsoft Research."
+msgstr "Нецэнзурная мадэль Dolphin 2.7B ад Эрыка Хартфорда на базе Phi ад Microsoft Research."
+
+#: src/ollama_models.py:2730
+#, fuzzy
+msgid "SmolLM2 is a family of compact language models available in three size: 135M, 360M, and 1.7B parameters."
+msgstr "SmolLM2 — сямейства кампактных моўных мадэляў з памерамі 135M, 360M і 1.7B."
+
+#: src/ollama_models.py:2752
+#, fuzzy
+msgid "Uncensored version of Wizard LM model"
+msgstr "Нецэнзурная версія мадэлі Wizard LM"
+
+#: src/ollama_models.py:2775
+#, fuzzy
+msgid "A commercial-friendly small language model by NVIDIA optimized for roleplay, RAG QA, and function calling."
+msgstr "Камэрцыйна прыязная кампактная моўная мадэль NVIDIA, аптымізаваная для ролевага гульнявання, RAG QA і выкліку функцый."
+
+#: src/ollama_models.py:2797
+#, fuzzy
+msgid "An extension of Mistral to support context windows of 64K or 128K."
+msgstr "Пашырэнне Mistral з падтрымкай кантэксту 64K і 128K."
+
+#: src/ollama_models.py:2825
+#, fuzzy
+msgid "An expansion of Llama 2 that specializes in integrating both general language understanding and domain-specific knowledge, particularly in programming and mathematics."
+msgstr "Пашырэнне Llama 2, спецыялізаванае на інтэграцыі агульнага разумення мовы і спецыялізаваных ведаў, асабліва ў праграмаванні і матэматыцы."
+
+#: src/ollama_models.py:2847
+#, fuzzy
+msgid "Fine-tuned Llama 2 model to answer medical questions based on an open source medical dataset."
+msgstr "Адаптаваная мадэль Llama 2 для адказу на медыцынскія пытанні на базе адкрытага медыцынскага датасэта."
+
+#: src/ollama_models.py:2874
+#, fuzzy
+msgid "Open-source medical large language model adapted from Llama 2 to the medical domain."
+msgstr "Адкрытая вялікая медыцынская моўная мадэль, адаптаваная з Llama 2 для медыцынскай галіны."
+
+#: src/ollama_models.py:2902
+#, fuzzy
+msgid "A series of models from Groq that represent a significant advancement in open-source AI capabilities for tool use/function calling."
+msgstr "Серыя мадэляў ад Groq, якія прадстаўляюць значны прагрэс у адкрытых магчымасцях ІІ для выкарыстання інструментаў/выкліку функцый."
+
+#: src/ollama_models.py:2924
+#, fuzzy
+msgid "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by NVIDIA to improve the helpfulness of LLM generated responses to user queries."
+msgstr "Llama-3.1-Nemotron-70B-Instruct — вялікая моўная мадэль, адаптаваная NVIDIA для павышэння карыснасці адказаў LLM на запыты карыстальнікаў."
+
+#: src/ollama_models.py:2946
+#, fuzzy
+msgid "Nexus Raven is a 13B instruction tuned model for function calling tasks."
+msgstr "Nexus Raven — мадэль з 13B параметраў, адаптаваная для задач выкліку функцый."
+
+#: src/ollama_models.py:2967
+#, fuzzy
+msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
+msgstr "Мадэль Nous Hermes 2 ад Nous Research, цяпер навучаная на Mixtral."
+
+#: src/ollama_models.py:2990
+msgid "Great code generation model based on Llama2."
+msgstr "Выдатная мадэль генерыравання кода на базе Llama 2."
+
+#: src/ollama_models.py:3012
+#, fuzzy
+msgid "Uncensored Llama2 based model with support for a 16K context window."
+msgstr "Нецэнзурная мадэль на базе Llama 2 з падтрымкай кантэксту ў 16K токенаў."
+
+#: src/ollama_models.py:3053
+#, fuzzy
+msgid "The IBM Granite 2B and 8B models are designed to support tool-based use cases and support for retrieval augmented generation (RAG), streamlining code generation, translation and bug fixing."
+msgstr "Мадэлі IBM Granite 2B і 8B распрацаваны для падтрымкі выкарыстання інструментаў і RAG (retrieval-augmented generation), спрашчаючы генерыраванне кода, пераклад і выпраўленне памылак."
+
+#: src/ollama_models.py:3076
+#, fuzzy
+msgid "🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic instruction data using OSS-Instruct, a novel approach to enlightening LLMs with open-source code snippets."
+msgstr "🎩 Magicoder — сямейства мадэляў з 7B параметраў, навучаных на 75K сінтэтычных інструкцыйных дадзеных з выкарыстаннем OSS-Instruct — новага падыходу для навучання LLM адкрытымі фрагментамі кода."
+
+#: src/ollama_models.py:3098
+#, fuzzy
+msgid "A lightweight chat model allowing accurate, and responsive output without requiring high-end hardware."
+msgstr "Лёгкая чат-мадэль, якая забяспечвае дакладны і хуткі вывад без патрэбы ў магутным абсталяванні."
+
+#: src/ollama_models.py:3121
+#, fuzzy
+msgid "A high-performing code instruct model created by merging two existing code models."
+msgstr "Высокапрадукцыйная мадэль для інструкцый па коду, створаная шляхам аб’яднання двух існуючых мадэляў."
+
+#: src/ollama_models.py:3144
+#, fuzzy
+msgid "Falcon2 is an 11B parameters causal decoder-only model built by TII and trained over 5T tokens."
+msgstr "Falcon2 — мадэль толькі-дэкадара з 11B параметраў ад TII, навучаная на 5 трыльёнах токенаў."
+
+#: src/ollama_models.py:3166
+#, fuzzy
+msgid "Wizard Vicuna is a 13B parameter model based on Llama 2 trained by MelodysDreamj."
+msgstr "Wizard Vicuna — мадэль з 13B параметраў на базе Llama 2, навучаная MelodysDreamj."
+
+#: src/ollama_models.py:3188
+#, fuzzy
+msgid "MistralLite is a fine-tuned model based on Mistral with enhanced capabilities of processing long contexts."
+msgstr "MistralLite — адаптаваная мадэль на базе Mistral з палепшанай магчымасцю апрацоўкі доўгіх кантэкстаў."
+
+#: src/ollama_models.py:3211
+#, fuzzy
+msgid "MathΣtral: a 7B model designed for math reasoning and scientific discovery by Mistral AI."
+msgstr "MathΣtral — мадэль з 7B параметраў ад Mistral AI, прызначаная для матэматычнага разважання і навуковых даследаванняў."
+
+#: src/ollama_models.py:3233
+#, fuzzy
+msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
+msgstr "Мадэль text-to-SQL з 7B параметраў ад MotherDuck і Numbers Station."
+
+#: src/ollama_models.py:3254
+#, fuzzy
+msgid "MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by interleaving the model with itself."
+msgstr "MegaDolphin-2.2-120b — трансфармацыя Dolphin-2.2-70b, створаная шляхам узаемнага перапляцення мадэлі з сабой."
+
+#: src/ollama_models.py:3276
+#, fuzzy
+msgid "Solar Pro Preview: an advanced large language model (LLM) with 22 billion parameters designed to fit into a single GPU"
+msgstr "Solar Pro Preview — перадавая LLM з 22 млрд параметраў, распрацаваная для працы на адной GPU"
+
+#: src/ollama_models.py:3303
+#, fuzzy
+msgid "A series of models that convert HTML content to Markdown content, which is useful for content conversion tasks."
+msgstr "Серыя мадэляў для пераўтварэння HTML у Markdown, карысныя для задач канвертацыі кантэнту."
+
+#: src/ollama_models.py:3324
+#, fuzzy
+msgid "A top-performing mixture of experts model, fine-tuned with high-quality data."
+msgstr "Вядучая мадэль Mixture-of-Experts, адаптаваная на высокакласных дадзеных."
+
+#: src/ollama_models.py:3346
+#, fuzzy
+msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
+msgstr "Чат-мадэль з 7B параметраў, адаптаваная на высокакласных дадзеных і на базе Zephyr."
+
+#: src/ollama_models.py:3369
+msgid "Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. Designed for chat and code generation."
+msgstr "Аб’яднанне мадэляў Open Orca OpenChat і Garage-bAInd Platypus 2, прызначанае для чатаў і генерыравання кода."
+
+#: src/ollama_models.py:3386
+#, fuzzy
+msgid "A language model created by combining two fine-tuned Llama 2 70B models into one."
+msgstr "Моўная мадэль, створаная аб’яднаннем дзвюх адаптаваных мадэляў Llama 2 70B у адну."
+
+#: src/ollama_models.py:3427
+#, fuzzy
+msgid "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) Granite models from IBM designed for low latency usage."
+msgstr "Мадэлі IBM Granite 1B і 3B — першыя MoE Granite-мадэлі ад IBM, распрацаваныя для нізкай затрымкі."
+
+#: src/ollama_models.py:3449
+#, fuzzy
+msgid "A 3.8B model fine-tuned on a private high-quality synthetic dataset for information extraction, based on Phi-3."
+msgstr "Мадэль з 3.8B параметраў, адаптаваная на прыватным якасным сінтэтычным датасэце для інфармацыйнага выцягвання, на базе Phi-3."
+
+#: src/ollama_models.py:3500
+#, fuzzy
+msgid "Cohere For AI's language models trained to perform well across 23 different languages."
+msgstr "Моўныя мадэлі Cohere For AI, навучаныя працаваць на высокім узроўні на 23 мовах."
+
+#: src/ollama_models.py:3522
+#, fuzzy
+msgid "DBRX is an open, general-purpose LLM created by Databricks."
+msgstr "DBRX — адкрытая агульнапрызначаная LLM ад Databricks."
+
+#: src/ollama_models.py:3544
+#, fuzzy
+msgid "An open large reasoning model for real-world solutions by the Alibaba International Digital Commerce Group (AIDC-AI)."
+msgstr "Адкрытая вялікая мадэль разважання для рэальных задач ад Alibaba International Digital Commerce Group (AIDC-AI)."
+
+#: src/ollama_models.py:3567
+#, fuzzy
+msgid "Embedding model from BAAI mapping texts to vectors."
+msgstr "Эмбедынг-мадэль ад BAAI для адлюстравання тэкстаў у вектары."
+
+#: src/ollama_models.py:3589
+#, fuzzy
+msgid "An open weights function calling model based on Llama 3, competitive with GPT-4o function calling capabilities."
+msgstr "Мадэль з адкрытымі вагамі для выкліку функцый на базе Llama 3, якая канкурэнтуе з магчымасцямі GPT-4o па выкліку функцый."
+
+#: src/ollama_models.py:3610
+#, fuzzy
+msgid "A robust conversational model designed to be used for both chat and instruct use cases."
+msgstr "Надзейная размоўная мадэль, прызначаная як для чата, так і для інструкцыйных сцэнарыяў."
+
+#: src/ollama_models.py:3632
+#, fuzzy
+msgid "An upgraded version of DeekSeek-V2 that integrates the general and coding abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
+msgstr "Абноўленая версія DeepSeek-V2, якая аб’ядноўвае агульныя і кодаўскія здольнасці DeepSeek-V2-Chat і DeepSeek-Coder-V2-Instruct."
+
+#: src/ollama_models.py:3665
+#, fuzzy
+msgid "ShieldGemma is set of instruction tuned models for evaluating the safety of text prompt input and text output responses against a set of defined safety policies."
+msgstr "ShieldGemma — набор мадэляў з інструкцыйнай налады для ацэнкі бяспекі ўваходных і выхадных тэкставых падказак у адпаведнасці з усталяванымі палітыкамі бяспекі."
+
+#: src/ollama_models.py:3687
+#, fuzzy
+msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
+msgstr "Перадавая мадэль праверкі фактаў, распрацаваная Bespoke Labs."
+
+#: src/ollama_models.py:3715
+#, fuzzy
+msgid "Llama Guard 3 is a series of models fine-tuned for content safety classification of LLM inputs and responses."
+msgstr "Llama Guard 3 — серыя мадэляў, адаптаваных для класіфікацыі бяспекі зместу ўваходаў і адказаў LLM."
+
+#: src/ollama_models.py:3739
+#, fuzzy
+msgid "Sentence-transformers model that can be used for tasks like clustering or semantic search."
+msgstr "Мадэль Sentence-transformers для задач кластэрызацыі і сэмантычнага пошуку."
+
+#: src/ollama_models.py:3769
+#, fuzzy
+msgid "OpenCoder is an open and reproducible code LLM family which includes 1.5B and 8B models, supporting chat in English and Chinese languages."
+msgstr "OpenCoder — сямейства адкрытых і паўтаральных LLM для кода з 1.5B і 8B параметраў, падтрымлівае чат на англійскай і кітайскай."
+
+#: src/ollama_models.py:3798
+#, fuzzy
+msgid "Tülu 3 is a leading instruction following model family, offering fully open-source data, code, and recipes by the The Allen Institute for AI."
+msgstr "Tülu 3 — вядучая сямейства мадэляў для выканання інструкцый, з поўнымі адкрытымі дадзенымі, кодам і рэцэптамі ад Allen Institute for AI."
+
+#: src/ollama_models.py:3826
+#, fuzzy
+msgid "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual support without sacrificing English performance or scalability."
+msgstr "Фронтавая эмбедынг-мадэль Snowflake. Arctic Embed 2.0 дадае мультылінгвістычную падтрымку без страты прадукцыйнасці на англійскай і маштабаванасці."
+
+#: src/ollama_models.py:3854
+#, fuzzy
+msgid "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks in prompts and/or responses."
+msgstr "Мадэлі IBM Granite Guardian 3.0 2B і 8B прызначаны для выяўлення рызык у падказках і/або адказах."
+
+#: src/ollama_models.py:3888
+#, fuzzy
+msgid "EXAONE 3.5 is a collection of instruction-tuned bilingual (English and Korean) generative models ranging from 2.4B to 32B parameters, developed and released by LG AI Research."
+msgstr "EXAONE 3.5 — калекцыя інструкцыйна наладжаных двухмоўных (англійска-карэйскіх) генератыўных мадэляў ад 2.4B да 32B параметраў, распрацаваная і выпушчаная LG AI Research."
+
+#: src/ollama_models.py:3936
+#, fuzzy
+msgid "Sailor2 are multilingual language models made for South-East Asia. Available in 1B, 8B, and 20B parameter sizes."
+msgstr "Sailor2 — мультымоўныя мадэлі для Паўднёва-Усходняй Азіі. Даступныя ў памерах 1B, 8B і 20B."
+
+#: src/ollama_models.py:3974
+#, fuzzy
+msgid "A family of efficient AI models under 10B parameters performant in science, math, and coding through innovative training techniques."
+msgstr "Сямейства эфектыўных AI-мадэляў да 10B параметраў з высокай прадукцыйнасцю ў навуцы, матэматыцы і кодзіраванні дзякуючы інавацыйным тэхнікам навучання."
+
+#: src/ollama_models.py:4015
+#, fuzzy
+msgid "The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 trillion tokens of data, demonstrated significant improvements over their predecessors in performance and speed in IBM’s initial testing."
+msgstr "Мадэлі IBM Granite 2B і 8B — тэкстава-арыентаваныя шчыльныя LLM, навучаныя на больш за 12 трыльёнаў токенаў, паказалі значнае паляпшэнне прадукцыйнасці і хуткасці ў першых выпрабаваннях IBM."
+
+#: src/ollama_models.py:4056
+#, fuzzy
+msgid "The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) Granite models from IBM designed for low latency usage."
+msgstr "Мадэлі IBM Granite 1B і 3B — MoE Granite-мадэлі з доўгім кантэкстам, распрацаваныя для нізкай затрымкі."
+
+#: src/ollama_models.py:4097
+#, fuzzy
+msgid "The IBM Granite Embedding 30M and 278M models models are text-only dense biencoder embedding models, with 30M available in English only and 278M serving multilingual use cases."
+msgstr "Мадэлі IBM Granite Embedding 30M і 278M — тэкстава-арыентаваныя шчыльныя біэнкодэр-эмбедынг мадэлі: 30M толькі на англійскай, 278M для мультылінгвістычных сцэнарыяў."
+
+#: src/ollama_models.py:4119
+#, fuzzy
+msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
+msgstr "Phi-4 — перадавая 14B-параметровая адкрытая мадэль ад Microsoft."
+
+#: src/ollama_models.py:4141
+#, fuzzy
+msgid "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
+msgstr "Новая кампактная мадэль для разважання, адаптаваная з Qwen 2.5 3B Instruct."
+
+#: src/ollama_models.py:4165
+#, fuzzy
+msgid "Dolphin 3.0 Llama 3.1 8B 🐬 is the next generation of the Dolphin series of instruct-tuned models designed to be the ultimate general purpose local model, enabling coding, math, agentic, function calling, and general use cases."
+msgstr "Dolphin 3.0 Llama 3.1 8B 🐬 — наступнае пакаленне серыі Dolphin інструкцыйна наладжаных мадэляў для ўніверсальнага лакальнага выкарыстання: коды, матэматыка, агентныя сцэнары, выклік функцый і агульныя задачы."
+
+#: src/ollama_models.py:4215
+msgid "DeepSeek-R1 is a family of open reasoning models with performance approaching that of leading models, such as O3 and Gemini 2.5 Pro."
+msgstr "DeepSeek-R1 — сямейства адкрытых мадэляў лагічнага вываду з прадукцыйнасцю, блізкай да вядучых мадэляў, такіх як O3 і Gemini 2.5 Pro."
+
+#: src/ollama_models.py:4236
+#, fuzzy
+msgid "A strong Mixture-of-Experts (MoE) language model with 671B total parameters with 37B activated for each token."
+msgstr "Моцная MoE-мадэль з 671B агульных параметраў, з актывацыяй 37B на кожны токен."
+
+#: src/ollama_models.py:4263
+#, fuzzy
+msgid ""
+"OLMo 2 is a new family of 7B and 13B models trained on up to 5T tokens. These models are on par with or better than equivalently sized fully open models, and competitive with open-weight models such as Llama 3.1 on English academic "
+"benchmarks."
+msgstr ""
+"OLMo 2 — новая сямейства мадэляў 7B і 13B, навучаная на да 5T токенаў. Гэтыя мадэлі не саступаюць ці пераўзыходзяць аналагічныя адкрытыя мадэлі і канкурэнтуюць з мадэлямі з адкрытымі вагамі, як Llama 3.1, па англійскіх акадэмічных бенчмарках."
+
+#: src/ollama_models.py:4311
+#, fuzzy
+msgid "The smallest model in Cohere's R series delivers top-tier speed, efficiency, and quality to build powerful AI applications on commodity GPUs and edge devices."
+msgstr "Найменшая мадэль з серыі R ад Cohere забяспечвае высокую хуткасць, эфектыўнасць і якасць для стварэння магутных AI-прыкладанняў на звычайных GPU і edge-прыладах."
+
+#: src/ollama_models.py:4338
+msgid "A fully open-source family of reasoning models built using a dataset derived by distilling DeepSeek-R1."
+msgstr "Поўнасцю адкрытая сямейства мадэляў лагічнага вываду, створаная на наборы даных, заснаваных на ачышчаным DeepSeek-R1."
+
+#: src/ollama_models.py:4361
+msgid "A fine-tuned version of Deepseek-R1-Distilled-Qwen-1.5B that surpasses the performance of OpenAI’s o1-preview with just 1.5B parameters on popular math evaluations."
+msgstr "Адаптаваная версія DeepSeek-R1-Distilled-Qwen-1.5B, якая пераўзыходзіць прадукцыйнасць o1-preview OpenAI з усяго 1.5B параметраў у папулярных матэматычных ацэнках."
+
+#: src/ollama_models.py:4390
+msgid "A version of the DeepSeek-R1 model that has been post trained to provide unbiased, accurate, and factual information by Perplexity."
+msgstr "Версія DeepSeek-R1, дадаткова напучаная Perplexity для забеспячэння непрыхільнай, дакладнай і фактычна-правільнай інфармацыі."
+
+#: src/ollama_models.py:4427
+#, fuzzy
+msgid "The current, most capable model that runs on a single GPU."
+msgstr "Бягучая, найбольш здольная мадэль, якая працуе на адной GPU."
+
+#: src/ollama_models.py:4474
+#, fuzzy
+msgid "Phi-4-mini brings significant enhancements in multilingual support, reasoning, and mathematics, and now, the long-awaited function calling feature is finally supported."
+msgstr "Phi-4-mini забяспечвае значныя паляпшэнні ў мультылінгвістычнай падтрымцы, разважанні і матэматыцы, і зараз доўгачаканая магчымасць выкліку функцый нарэшце падтрымліваецца."
+
+#: src/ollama_models.py:4498
+#, fuzzy
+msgid "A compact and efficient vision-language model, specifically designed for visual document understanding, enabling automated content extraction from tables, charts, infographics, plots, diagrams, and more."
+msgstr "Кампактная і эфектыўная візуальна-моўная мадэль, спецыяльна распрацаваная для разумення візуальных дакументаў і аўтаматычнага выцягвання кантэнту з табліц, графікаў, інфаграфікі, дыяграм і іншага."
+
+#: src/ollama_models.py:4538
+#, fuzzy
+msgid "Granite-3.2 is a family of long-context AI models from IBM Granite fine-tuned for thinking capabilities."
+msgstr "Granite-3.2 — сямейства AI-мадэляў з доўгім кантэкстам ад IBM Granite, адаптаваных для здольнасцей разважання."
+
+#: src/ollama_models.py:4562
+#, fuzzy
+msgid "A new state-of-the-art version of the lightweight Command R7B model that excels in advanced Arabic language capabilities for enterprises in the Middle East and Northern Africa."
+msgstr "Новая перадавая версія кампактнай мадэлі Command R7B, якая вылучаецца ў прасунутых магчымасцях арабскай мовы для прадпрыемстваў Блізкага Усходу і Паўночнай Афрыкі."
+
+#: src/ollama_models.py:4608
+#, fuzzy
+msgid "111 billion parameter model optimized for demanding enterprises that require fast, secure, and high-quality AI"
+msgstr "Мадэль з 111 млрд параметраў, аптымізаваная для патрабавальных прадпрыемстваў, што патрабуюць хуткага, бяспечнага і якаснага AI"
+
+#: src/ollama_models.py:4649
+#, fuzzy
+msgid "Qwen3 is the latest generation of large language models in Qwen series, offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
+msgstr "Qwen3 — апошняе пакаленне вялікіх моўных мадэляў серыі Qwen, прапануе комплексны набор шчыльных і MoE-мадэляў."
+
+#: src/ollama_models.py:4795
+#, fuzzy
+msgid "Devstral: the best open source model for coding agents"
+msgstr "Devstral — лепшая адкрытая мадэль для агентаў кадавання"
+
+#: src/ollama_models.py:4823
+#, fuzzy
+msgid "Meta's latest collection of multimodal models."
+msgstr "Апошняя калекцыя мультымадальных мадэляў ад Meta."
+
+#: src/ollama_models.py:4871
+#, fuzzy
+msgid "Flagship vision-language model of Qwen and also a significant leap from the previous Qwen2-VL."
+msgstr "Флагманская візуальна-моўная мадэль Qwen, якая становіць значны крок наперад у параўнанні з Qwen2-VL."
+
+#: src/ollama_models.py:4901
+#, fuzzy
+msgid "DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a 1.5B version also available."
+msgstr "DeepCoder — поўнасцю адкрытая мадэль кадавання 14B узроўню O3-mini, таксама даступная ў версіі 1.5B."
+
+#: src/ollama_models.py:4925
+#, fuzzy
+msgid "Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-art vision understanding and enhances long context capabilities up to 128k tokens without compromising text performance."
+msgstr "На базе Mistral Small 3, Mistral Small 3.1 (2503) дадае перадавыя магчымасці візуальнага разумення і пашырае здольнасці доўгага кантэксту да 128K токенаў без страт прадукцыйнасці тэксту."
+
+#: src/ollama_models.py:4965
+#, fuzzy
+msgid "Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that outperform the best available open models of the same size, including counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."
+msgstr "Cogito v1 Preview — сямейства гібрыдных мадэляў разважання ад Deep Cogito, якія пераўзыходзяць лепшыя адкрытыя мадэлі таго ж памеру, уключаючы аналагі ад LLaMA, DeepSeek і Qwen па большасці стандартных бенчмаркаў."
+
+#: src/ollama_models.py:4994
+#, fuzzy
+msgid "IBM Granite 2B and 8B models are 128K context length language models that have been fine-tuned for improved reasoning and instruction-following capabilities."
+msgstr "Мадэлі IBM Granite 2B і 8B — LLM з кантэкстам 128K, адаптаваныя для палепшанага разважання і выканання інструкцый."
+
+#: src/ollama_models.py:5032
+#, fuzzy
+msgid "Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight reasoning models that rival much larger models on complex reasoning tasks."
+msgstr "Phi 4 Reasoning і Reasoning Plus — 14B-параметровыя мадэлі з адкрытымі вагамі, якія канкурэнтуць з значна большымі мадэлямі ў складаных задачах разважання."
+
+#: src/ollama_models.py:5064
+msgid "EXAONE Deep exhibits superior capabilities in various reasoning tasks including math and coding benchmarks, ranging from 2.4B to 32B parameters developed and released by LG AI Research."
+msgstr "EXAONE Deep паказвае выдатныя здольнасці ў розных задачах лагічнага вываду, уключаючы параўнаўчыя тэсты для задач па матэматыцы і напісанні кода, ад 2.4B да 32B параметраў, распрацаваны і выпушчаны LG AI Research."
+
+#: src/ollama_models.py:5090
+msgid "Phi 4 mini reasoning is a lightweight open model that balances efficiency with advanced reasoning ability."
+msgstr "Phi 4 mini Reasoning — лёгкая адкрытая мадэль, якая спалучае эфектыўнасць з прасунутымі здольнасцямі лагічныга вываду."
+
+#: src/ollama_models.py:5117
+#, fuzzy
+msgid "Gemma 3n models are designed for efficient execution on everyday devices such as laptops, tablets or phones."
+msgstr "Мадэлі Gemma 3n распрацаваны для эфектыўнага выканання на паўсядзённых прыладах: ноўтбуках, планшэтах ці смартфонах."
+
+#: src/ollama_models.py:5140
+msgid "Magistral is a small, efficient reasoning model with 24B parameters."
+msgstr "Magistral — кампактная эфектыўная мадэль лагічныга вываду на 24B параметраў."
+
+#: src/ollama_models.py:5187
+#, fuzzy
+msgid "An update to Mistral Small that improves on function calling, instruction following, and less repetition errors."
+msgstr "Абнаўленне Mistral Small, якое паляпшае выклік функцый, выкананне інструкцый і зменшвае памылкі паўтарэння."
+
+#: src/quick_ask.py:126 src/gtk/quick_ask.ui:11
+msgid "Quick Ask"
+msgstr "Хуткае пытанне"
+
+#: src/window.py:148
+msgid "Ollama Was Not Found"
+msgstr "Ollama не знойдзены"
+
+#: src/window.py:149
+msgid "To add a managed Ollama instance, you must have Ollama installed locally in your device, this is a simple process and should not take more than 5 minutes."
+msgstr "Каб дадаць кіруемы экзэмпляр Ollama, трэба ўсталяваць Ollama лакальна на прыладзе. Гэта просты працэс, які не павінен заняць больш за 5 хвілін."
+
+#: src/window.py:151
+#, fuzzy
+msgid "Open Tutorial in Web Browser"
+msgstr "Адкрыць кіраўніцтва ў браўзеры"
+
+#: src/window.py:166 src/gtk/window.ui:409 src/gtk/window.ui:419 src/gtk/window.ui:441
+msgid "Add Instance"
+msgstr "Дадаць экзэмпляр ШІ"
+
+#: src/window.py:167
+msgid "Select a type of instance to add"
+msgstr "Выберыце, які тып экзэмпляра ШІ трэба дадаць"
+
+#: src/window.py:368 src/window.py:369 src/window.py:414 src/gtk/window.ui:355 src/widgets/camera.py:119
+msgid "Close"
+msgstr "Закрыць"
+
+#: src/window.py:371 src/window.py:372 src/gtk/window.ui:62 src/gtk/window.ui:63
+msgid "Next"
+msgstr "Далей"
+
+#: src/window.py:412 src/window.py:812 src/gtk/window.ui:905 src/gtk/window.ui:909 src/widgets/dialog.py:197 src/widgets/dialog.py:210 src/widgets/dialog.py:223 src/widgets/model_manager.py:648 src/widgets/instances/__init__.py:252
+#: src/widgets/instances/__init__.py:253 src/widgets/blocks/code.py:137 src/widgets/blocks/text.py:148 src/widgets/tools/tools.py:96 src/widgets/tools/tools.py:97
+msgid "Cancel"
+msgstr "Скасаваць"
+
+#: src/window.py:413
+msgid "Hide"
+msgstr "Схаваць"
+
+#: src/window.py:417
+msgid "Close Alpaca?"
+msgstr "Закрыць Alpaca?"
+
+#: src/window.py:418
+#, fuzzy
+msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
+msgstr "Зараз выконваецца задача. Вы ўпэўнены, што хочаце закрыць Alpaca?"
+
+#: src/window.py:530
+msgid "No tools enabled."
+msgstr "Інструменты не ўключаны."
+
+#: src/window.py:530
+msgid "Open Tool Manager"
+msgstr "Адкрыць менеджар інструментаў"
+
+#: src/window.py:533
+msgid "Please select a model before chatting"
+msgstr "Выберыце мадэль перад тым, каб пачаць чат"
+
+#: src/window.py:672 src/gtk/window.ui:163 src/gtk/window.ui:1126 src/widgets/chat.py:229 src/widgets/instances/ollama_instances.py:34 src/widgets/instances/ollama_instances.py:50 src/widgets/instances/ollama_instances.py:86
+#: src/widgets/instances/openai_instances.py:56 src/widgets/instances/openai_instances.py:67 src/widgets/instances/openai_instances.py:108
+msgid "New Chat"
+msgstr "Новы чат"
+
+#: src/window.py:791
+msgid "Chat imported successfully"
+msgstr "Чат паспяхова імпартаваны"
+
+#: src/window.py:814
+msgid "Can't Run Live Chat"
+msgstr "Не ўдалося запусціць «Чат ужывую»"
+
+#: src/window.py:815
+msgid "You are missing TTS libraries"
+msgstr "Адсутнічаюць бібліятэкі TTS"
+
+#: src/window.py:868
+msgid "Download Model?"
+msgstr "Спампаваць мадэль?"
+
+#: src/window.py:869
+msgid "Please enter the model name following this template: name:tag"
+msgstr "Увядзіце назву мадэлі паводле шаблону: name:tag"
+
+#: src/window.py:876
+msgid "Delete All Chats?"
+msgstr "Выдаліць усе чаты?"
+
+#: src/window.py:877
+msgid "Are you sure you want to delete all chats?"
+msgstr "Вы ўпэўнены, што хочаце выдаліць усе чаты?"
+
+#: src/window.py:879 src/widgets/attachments.py:201 src/widgets/chat.py:519
+msgid "Delete"
+msgstr "Выдаліць"
+
+#: src/window.py:903
+msgid "Already Installed!"
+msgstr "Ужо ўсталявана!"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Агульнае"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Паказаць спалучэнні клавіш"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "Налады"
+
+#: src/gtk/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Quick Ask"
+msgstr "Хуткае пытанне"
+
+#: src/gtk/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Model Manager"
+msgstr "Менеджар мадэляў"
+
+#: src/gtk/help-overlay.ui:38
+msgctxt "shortcut window"
+msgid "Instance Manager"
+msgstr "Менеджар экзэмпляраў ШІ"
+
+#: src/gtk/help-overlay.ui:44
+msgctxt "shortcut window"
+msgid "Action Manager"
+msgstr "Менеджар дзеянняў"
+
+#: src/gtk/help-overlay.ui:50
+msgctxt "shortcut window"
+msgid "Toggle Sidebar"
+msgstr "Паказаць/схаваць бакавую панэль"
+
+#: src/gtk/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Выйсці"
+
+#: src/gtk/help-overlay.ui:64
+msgctxt "shortcut window"
+msgid "Chat Management"
+msgstr "Кіраванне чатамі"
+
+#: src/gtk/help-overlay.ui:67
+msgctxt "shortcut window"
+msgid "Create Chat"
+msgstr "Стварыць чат"
+
+#: src/gtk/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Delete Chat"
+msgstr "Выдаліць чат"
+
+#: src/gtk/help-overlay.ui:79
+msgctxt "shortcut window"
+msgid "Clear Chat"
+msgstr "Ачысціць чат"
+
+#: src/gtk/help-overlay.ui:85
+msgctxt "shortcut window"
+msgid "Rename Chat"
+msgstr "Перайменаваць чат"
+
+#: src/gtk/help-overlay.ui:91
+msgctxt "shortcut window"
+msgid "Toggle Searchbars"
+msgstr "Паказаць/схаваць радкі пошуку"
+
+#: src/gtk/help-overlay.ui:99
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Message Entry"
+msgstr "Увод паведамлення"
+
+#: src/gtk/help-overlay.ui:102
+msgid "Copy"
+msgstr "Капіяваць"
+
+#: src/gtk/help-overlay.ui:108
+msgid "Paste"
+msgstr "Уставіць"
+
+#: src/gtk/help-overlay.ui:114
+msgid "Open Emoji Menu"
+msgstr "Адкрыць меню эмодзі"
+
+#: src/gtk/help-overlay.ui:120
+msgid "Insert new line"
+msgstr "Уставіць новы радок"
+
+#: src/gtk/help-overlay.ui:126
+msgid "Send Message as System"
+msgstr "Адправіць паведамленне як сістэмнае"
+
+#: src/gtk/help-overlay.ui:127
+msgid "System messages are taken as literal instructions by models"
+msgstr "Сістэмныя паведамленні ўспрымаюцца мадэлямі як дослоўныя інструкцыі"
+
+#: src/gtk/help-overlay.ui:133 src/widgets/message.py:617
+msgid "Use Tools"
+msgstr "Выкарыстоўваць інструменты"
+
+#: src/gtk/help-overlay.ui:134
+msgid "Ask model to use tools to generate a message"
+msgstr "Папрасіць мадэль выкарыстоўваць інструменты для генерыравання паведамлення"
+
+#: src/gtk/help-overlay.ui:140
+msgid "Send Message as User"
+msgstr "Адправіць паведамленне як карыстальнік"
+
+#: src/gtk/window.ui:34
+msgid "Welcome"
+msgstr "Вітаем"
+
+#: src/gtk/window.ui:46 src/gtk/window.ui:47
+msgid "Previous"
+msgstr "Папярэдняе"
+
+#: src/gtk/window.ui:82
+msgid "Welcome to Alpaca"
+msgstr "Вітаем у Alpaca"
+
+#: src/gtk/window.ui:83
+msgid "Powering your potential"
+msgstr "Раскрый свой патэнцыял"
+
+#: src/gtk/window.ui:91
+msgid ""
+"Alpaca and its developers are not liable for any damages to devices or software resulting from the execution of code generated by an AI model. Please exercise caution and review the code carefully before running it.\n"
+"\n"
+"Alpaca is distributed under GPL v3.0, this software comes with no warranty."
+msgstr ""
+
+#: src/gtk/window.ui:100
+msgid "Effortless Code Execution"
+msgstr "Лёгкае выкананне кода"
+
+#: src/gtk/window.ui:101
+msgid "Alpaca can run Python, C++, and even HTML (with a live server) right from your conversations. Give it a try!"
+msgstr ""
+
+#: src/gtk/window.ui:107
+msgid "Private by Design"
+msgstr "Прыватны ў дызайне"
+
+#: src/gtk/window.ui:108
+msgid "With Alpaca, your conversations are saved locally on your device, so you can be confident that your data is always secure and private."
+msgstr ""
+
+#: src/gtk/window.ui:114
+msgid "Local AI"
+msgstr "Лакальны ШІ"
+
+#: src/gtk/window.ui:115
+msgid "Alpaca works with AI providers such as Gemini and ChatGPT.  To run AI models locally on your machine, you'll need to install Ollama within Alpaca. We've made it super easy to do, so you can get started quickly!"
+msgstr ""
+
+#: src/gtk/window.ui:120 src/gtk/window.ui:121
+msgid "Install Ollama"
+msgstr "Усталяваць Ollama"
+
+#: src/gtk/window.ui:174
+msgid "Menu"
+msgstr "Меню"
+
+#: src/gtk/window.ui:181
+msgid "Search Chats"
+msgstr "Пошук чатаў"
+
+#: src/gtk/window.ui:190
+msgid "Chat search bar"
+msgstr "Радок пошуку чатаў"
+
+#: src/gtk/window.ui:198 src/gtk/window.ui:200
+msgid "Search chats"
+msgstr "Пошук чатаў"
+
+#: src/gtk/window.ui:236
+msgid "No Chats Found"
+msgstr "Чаты не знойдзены"
+
+#: src/gtk/window.ui:237
+msgid "Oh no! It looks like there are no chats found for your search."
+msgstr "Ой! Па вашым запыце не знойдзена чатаў."
+
+#: src/gtk/window.ui:254
+msgid "Toggle Sidebar"
+msgstr "Паказаць/схаваць бакавую панэль"
+
+#: src/gtk/window.ui:261
+msgid "Search Messages"
+msgstr "Пошук паведамленняў"
+
+#: src/gtk/window.ui:278 src/gtk/window.ui:303 src/gtk/window.ui:1146
+msgid "Manage Models"
+msgstr "Кіраванне мадэлямі"
+
+#: src/gtk/window.ui:299
+msgid "Add Models"
+msgstr "Дадаць мадэлі"
+
+#: src/gtk/window.ui:316
+msgid "Chat Menu"
+msgstr "Меню чата"
+
+#: src/gtk/window.ui:329
+msgid "Message search bar"
+msgstr "Радок пошуку паведамленняў"
+
+#: src/gtk/window.ui:338 src/gtk/window.ui:340
+msgid "Search messages"
+msgstr "Пошук паведамленняў"
+
+#: src/gtk/window.ui:356
+msgid "Warning: Power saver mode is enabled, this will slow down message generation"
+msgstr "Увага: уключаны рэжым эканоміі энергіі, гэта запаволіць генерыраванне паведамленняў"
+
+#: src/gtk/window.ui:390
+msgid "Instance Manager"
+msgstr "Менеджар экзэмпляраў ШІ"
+
+#: src/gtk/window.ui:405
+msgid "No Instances Found"
+msgstr "Экземпляраў ШІ не знойдзена"
+
+#: src/gtk/window.ui:406
+msgid "It looks a bit empty in here. Try adding an instance get started!"
+msgstr "Тут пакуль пуста. Паспрабуйце дадаць экзэмпляр ШІ, каб пачаць!"
+
+#: src/gtk/window.ui:435
+msgid "Added Instances"
+msgstr "Дададзеныя экзэмпляры ШІ"
+
+#: src/gtk/window.ui:436
+msgid "Manage your AI instances, chats and messages are shared between instances when generating responses."
+msgstr ""
+
+#: src/gtk/window.ui:472
+msgid "Tool Manager"
+msgstr "Менеджар інструментаў"
+
+#: src/gtk/window.ui:483
+msgid "Available Tools"
+msgstr "Даступныя інструменты"
+
+#: src/gtk/window.ui:484
+msgid "Functions that AI models might use when sending a message by selecting \"Use Tools\" in the send button context menu."
+msgstr ""
+
+#: src/gtk/window.ui:503
+msgid "Model Manager"
+msgstr "Менеджар мадэляў"
+
+#: src/gtk/window.ui:541
+msgid "Search Model"
+msgstr "Пошук мадэлі"
+
+#: src/gtk/window.ui:555
+msgid "Model Manager Menu"
+msgstr "Меню менеджара мадэляў"
+
+#: src/gtk/window.ui:568
+msgid "Model search bar"
+msgstr "Радок пошуку мадэляў"
+
+#: src/gtk/window.ui:580 src/gtk/window.ui:582
+msgid "Search models"
+msgstr "Пошук мадэляў"
+
+#: src/gtk/window.ui:589
+msgid "Filter Models"
+msgstr "Фільтр мадэляў"
+
+#: src/gtk/window.ui:606
+msgid "Added"
+msgstr "Дададзена"
+
+#: src/gtk/window.ui:616 src/gtk/window.ui:677 src/gtk/window.ui:731
+msgid "No Models Found"
+msgstr "Мадэлі не знойдзены"
+
+#: src/gtk/window.ui:617
+msgid "It looks a bit empty in here. Try downloading some models or change your AI instance to get started!"
+msgstr "Неяк пуста тут. Для пачатку паспрабуйце спампаваць нейкія мадэлі або змяніце экзэмпляр ШІ!"
+
+#: src/gtk/window.ui:620 src/gtk/window.ui:630 src/gtk/window.ui:1142
+msgid "Manage Instances"
+msgstr "Кіраванне экзэмплярамі ШІ"
+
+#: src/gtk/window.ui:678 src/gtk/window.ui:732
+msgid "Looks like we’re fresh out of models for that search. Try tweaking your keywords, or maybe explore something new!"
+msgstr ""
+
+#: src/gtk/window.ui:690
+msgid "Available"
+msgstr "Даступна"
+
+#: src/gtk/window.ui:744
+msgid "Creator"
+msgstr "Стваральнік"
+
+#: src/gtk/window.ui:755
+msgid "Model Creator"
+msgstr "Стваральнік мадэлі"
+
+#: src/gtk/window.ui:756
+msgid "Select a method of importing a model to continue"
+msgstr "Каб працягнуць, абярыце спосаб імпартавання мадэлі"
+
+#: src/gtk/window.ui:768
+msgid "GGUF File"
+msgstr "Файл GGUF"
+
+#: src/gtk/window.ui:779
+msgid "Existing Model"
+msgstr "Існуючая мадэль"
+
+#: src/gtk/window.ui:797
+#, fuzzy
+msgid "Identity"
+msgstr "Ідэнтыфікацыя"
+
+#: src/gtk/window.ui:800
+msgid "Base"
+msgstr "База"
+
+#: src/gtk/window.ui:806
+msgid "Profile Picture"
+msgstr "Аватар профілю"
+
+#: src/gtk/window.ui:811
+msgid "Open File"
+msgstr "Адкрыць файл"
+
+#: src/gtk/window.ui:822 src/widgets/instances/__init__.py:45
+msgid "Name"
+msgstr "Назва"
+
+#: src/gtk/window.ui:827 src/widgets/model_manager.py:481
+msgid "Tag"
+msgstr "Тэг"
+
+#: src/gtk/window.ui:834 src/widgets/model_manager.py:498
+msgid "Context"
+msgstr "Кантэкст"
+
+#: src/gtk/window.ui:835
+msgid "Describe the desired behavior of the model in its primary language (typically English)."
+msgstr "Апішыце жаданае паводзіны мадэлі на яе асноўнай мове (звычайна англійскай)."
+
+#: src/gtk/window.ui:863
+msgid "Behavior"
+msgstr "Паводзіны"
+
+#: src/gtk/window.ui:866
+msgid "Imagination"
+msgstr "Фантазія"
+
+#: src/gtk/window.ui:867
+msgid "A higher number results in more diverse answers from the model. (top_k)"
+msgstr "Большае значэнне вядзе да большай разнастайнасці адказаў ад мадэлі. (top_k)"
+
+#: src/gtk/window.ui:881
+msgid "Focus"
+msgstr "Фокус"
+
+#: src/gtk/window.ui:882
+msgid "A higher number widens the amount of possible answers. (top_p)"
+msgstr "Большае значэнне пашырае спектр магчымых адказаў. (top_p)"
+
+#: src/gtk/window.ui:915 src/gtk/window.ui:923
+msgid "Add Model"
+msgstr "Дадаць мадэль"
+
+#: src/gtk/window.ui:957 src/gtk/window.ui:1164 src/gtk/live_chat.ui:56 src/gtk/live_chat.ui:127
+msgid "Preferences"
+msgstr "Параметры"
+
+#: src/gtk/window.ui:964
+msgid "Run Alpaca In Background"
+msgstr "Запускаць Alpaca ў фонавым рэжыме"
+
+#: src/gtk/window.ui:970
+msgid "Show Power Saver Warning"
+msgstr "Паказваць папярэджанне аб эканоміі энергіі"
+
+#: src/gtk/window.ui:971
+msgid "When running a managed Ollama instance"
+msgstr "Пры запуску кіруемага экзэмпляра Ollama"
+
+#: src/gtk/window.ui:977
+msgid "Zoom"
+msgstr "Маштаб"
+
+#: src/gtk/window.ui:993
+msgid "Speech Recognition Model"
+msgstr "Мадэль распазнання маўлення"
+
+#: src/gtk/window.ui:994
+msgid "Models are downloaded upon first use, you can delete them from the model manager"
+msgstr "Мадэлі спампоўваюцца пры першым выкарыстанні, вы можаце выдаліць іх у менеджары мадэляў"
+
+#: src/gtk/window.ui:999
+msgid "Speech Recognition Language"
+msgstr "Мова распазнавання маўлення"
+
+#: src/gtk/window.ui:1005
+msgid "Auto Send Message After Talking"
+msgstr "Аўтаматычная адпраўка паведамлення пасля прамовы"
+
+#: src/gtk/window.ui:1015
+msgid "Default Text to Speech Voice"
+msgstr "Прадвызначаны голас для сінтэзу маўлення"
+
+#: src/gtk/window.ui:1016
+msgid "Voices are downloaded upon first use, each weighing around 1 MB, and you can delete them from the model manager"
+msgstr "Галасы спампоўваюцца пры першым выкарыстанні, кожны прыблізна 1 МБ; вы можаце выдаліць іх у менеджары мадэляў"
+
+#: src/gtk/window.ui:1021
+msgid "Dictate New Messages Automatically"
+msgstr "Аўтаматычна дыктаваць новыя паведамленні"
+
+#: src/gtk/window.ui:1022
+msgid "Dictate new messages as they are generated"
+msgstr "Дыктаваць новыя паведамленні па меры іх генерыравання"
+
+#: src/gtk/window.ui:1034
+msgid "Delete All Chats"
+msgstr "Выдаліць усе чаты"
+
+#: src/gtk/window.ui:1046
+msgid "Notice"
+msgstr "Заўвага"
+
+#: src/gtk/window.ui:1066
+msgid "Hey Alpaca users! Get ready for a huge update packed with enhancements and exciting new features designed to make your experience even better."
+msgstr ""
+
+#: src/gtk/window.ui:1073
+msgid "Introducing Live Chat"
+msgstr "Знаёмцеся з Чатамі ўжывую"
+
+#: src/gtk/window.ui:1074
+msgid ""
+"Experience a whole new way to interact with your AI models! Live Chat lets you converse as if you're on a call, with a strong focus on real-time speech recognition and live message dictation. Access it easily by selecting \"Live Chat\" from "
+"the primary menu."
+msgstr ""
+
+#: src/gtk/window.ui:1081
+msgid "Live Message Rendering"
+msgstr "Візуалізацыя паведамленняў ужывую"
+
+#: src/gtk/window.ui:1082
+msgid "See your conversations unfold in real-time! Messages are now rendered as they're being generated, and you can even use dictation simultaneously for a more fluid interaction."
+msgstr ""
+
+#: src/gtk/window.ui:1089
+msgid "Camera Attachment"
+msgstr "Далучэнне з камеры"
+
+#: src/gtk/window.ui:1090
+msgid "You can now take pictures directly within Alpaca and attach them to your messages with the new Camera Attachment feature."
+msgstr ""
+
+#: src/gtk/window.ui:1097
+msgid "Enhanced Web Search Tool"
+msgstr "Палепшаны інструмент вэб-пошуку"
+
+#: src/gtk/window.ui:1098
+msgid "Our Web Search Tool just got a major upgrade! Enjoy more accurate results and powerful new options to find exactly what you're looking for."
+msgstr ""
+
+#: src/gtk/window.ui:1105
+msgid "Redesign"
+msgstr "Рэдызайн"
+
+#: src/gtk/window.ui:1106
+msgid "Alpaca has a brand new look! Enjoy a redesigned interface with updated popups and sleek new dialogs for managing your AI instances and tools."
+msgstr ""
+
+#: src/gtk/window.ui:1130 src/widgets/chat.py:20
+msgid "New Notebook"
+msgstr "Новы ноўтбук"
+
+#: src/gtk/window.ui:1138
+msgid "Import Chat"
+msgstr "Імпартаваць чат"
+
+#: src/gtk/window.ui:1150
+msgid "Manage Tools"
+msgstr "Кіраваць інструментамі"
+
+#: src/gtk/window.ui:1156
+msgid "Start Quick Ask"
+msgstr "Пачаць «Хуткае пытанне»"
+
+#: src/gtk/window.ui:1160
+msgid "Start Live Chat"
+msgstr "Пачаць «Чат ужывую»"
+
+#: src/gtk/window.ui:1168
+msgid "Keyboard Shortcuts"
+msgstr "Спалучэнні клавіш"
+
+#: src/gtk/window.ui:1172
+msgid "About Alpaca"
+msgstr "Пра Alpaca"
+
+#: src/gtk/window.ui:1180 src/widgets/chat.py:451
+msgid "Rename Chat"
+msgstr "Перайменаваць чат"
+
+#: src/gtk/window.ui:1184 src/widgets/chat.py:456
+msgid "Duplicate Chat"
+msgstr "Дубляваць чат"
+
+#: src/gtk/window.ui:1188 src/widgets/chat.py:461 src/widgets/chat.py:614
+msgid "Export Chat"
+msgstr "Экспартаваць чат"
+
+#: src/gtk/window.ui:1194 src/widgets/chat.py:468
+msgid "Delete Chat"
+msgstr "Выдаліць чат"
+
+#: src/gtk/window.ui:1202 src/gtk/live_chat.ui:146
+msgid "Reload Added Models"
+msgstr "Перазагрузіць дададзеныя мадэлі"
+
+#: src/gtk/window.ui:1206
+msgid "Download Model From Name"
+msgstr "Спампаваць мадэль па назве"
+
+#: src/gtk/live_chat.ui:8
+msgid "Live chat dialog"
+msgstr "Дыялог «Чата ўжывую»"
+
+#: src/gtk/live_chat.ui:13
+msgid "Live Chat"
+msgstr "Чат ужывую"
+
+#: src/gtk/live_chat.ui:44
+msgid "Show Messages"
+msgstr "Паказаць паведамленні"
+
+#: src/gtk/live_chat.ui:134
+msgid "Use Dynamic Backgrounds"
+msgstr "Выкарыстоўваць дынамічныя фоны"
+
+#: src/gtk/live_chat.ui:135
+msgid "When using a model with a profile picture"
+msgstr "Пры выкарыстанні мадэлі з аватарам профілю"
+
+#: src/gtk/live_chat.ui:140
+msgid "Turn on Microphone Automatically"
+msgstr "Уключаць мікрафон аўтаматычна"
+
+#: src/gtk/live_chat.ui:141
+msgid "When launching Live Chat and after dictation"
+msgstr "Пры запуску «Чата ўжывую» і пасля дыктавання"
+
+#: src/gtk/quick_ask.ui:8
+msgid "Quick ask dialog"
+msgstr "Дыялог «Хуткае пытанне»"
+
+#: src/gtk/quick_ask.ui:21
+msgid "Save Conversation to Alpaca"
+msgstr "Захаваць размову ў Alpaca"
+
+#: src/widgets/attachments.py:105
+msgid "Remove Attachment"
+msgstr "Выдаліць далучаны файл"
+
+#: src/widgets/attachments.py:114
+msgid "Download Attachment"
+msgstr "Спампаваць далучаны файл"
+
+#: src/widgets/attachments.py:128
+msgid "Replace Notebook Content"
+msgstr "Замяніць змест нататніка"
+
+#: src/widgets/attachments.py:198
+msgid "Delete Attachment?"
+msgstr "Выдаліць далучаны файл?"
+
+#: src/widgets/attachments.py:199 src/widgets/chat.py:517
+msgid "Are you sure you want to delete '{}'?"
+msgstr "Вы ўпэўнены, што хочаце выдаліць '{}'?"
+
+#: src/widgets/attachments.py:231
+msgid "Save Attachment"
+msgstr "Захаваць далучаны файл"
+
+#: src/widgets/attachments.py:306
+msgid "Image"
+msgstr "Відарыс"
+
+#: src/widgets/attachments.py:317 src/widgets/attachments.py:329
+msgid "Missing Image"
+msgstr "Відарыс адсутнічае"
+
+#: src/widgets/attachments.py:478
+msgid "Any compatible Alpaca attachment"
+msgstr "Любое далучэнне, сумяшчальнае з Alpaca"
+
+#: src/widgets/attachments.py:517
+msgid "Attachment failed, screenshot might be too big"
+msgstr "Не ўдалося дадаць далучэнне, імаверна здымак экрана занадта вялікі"
+
+#: src/widgets/attachments.py:529 src/widgets/message.py:547
+msgid "Image recognition is only available on specific models"
+msgstr "Распазнанне відарысаў даступна толькі для пэўных мадэляў"
+
+#: src/widgets/attachments.py:555
+msgid "Attach File"
+msgstr "Далучыць файл"
+
+#: src/widgets/attachments.py:560
+msgid "Attach Website"
+msgstr "Далучыць вэб-сайт"
+
+#: src/widgets/attachments.py:563 src/widgets/message.py:527
+msgid "Attach Website? (Experimental)"
+msgstr "Далучыць вэб-сайт? (эксперыментальная функцыя)"
+
+#: src/widgets/attachments.py:564
+msgid "Please enter a website URL"
+msgstr "Увядзіце URL сайта"
+
+#: src/widgets/attachments.py:571
+msgid "Attach YouTube Captions"
+msgstr "Далучыць субцітры з YouTube"
+
+#: src/widgets/attachments.py:574
+msgid "Attach YouTube Captions?"
+msgstr "Далучыць субцітры з YouTube?"
+
+#: src/widgets/attachments.py:575
+msgid "Please enter a YouTube video URL"
+msgstr "Увядзіце URL відэа з YouTube"
+
+#: src/widgets/attachments.py:586
+msgid "Attach Screenshot"
+msgstr "Далучыць скрыншот"
+
+#: src/widgets/attachments.py:593
+msgid "Attach Photo From Camera"
+msgstr "Далучыць фота з камеры"
+
+#: src/widgets/camera.py:102
+msgid "Photo"
+msgstr "Фота"
+
+#: src/widgets/camera.py:122
+msgid "No Camera Detected"
+msgstr "Камера не выяўлена"
+
+#: src/widgets/camera.py:123
+msgid "Please check if camera is plugged in and turned on"
+msgstr "Праверце, ці ваша камера падключана і працуе"
+
+#: src/widgets/chat.py:86 src/widgets/instances/ollama_instances.py:72 src/widgets/instances/openai_instances.py:94
+msgid "Notebook"
+msgstr "Нататнік"
+
+#: src/widgets/chat.py:87
+msgid "Start a notebook with a message"
+msgstr "Пачніце нататнік паведамленнем"
+
+#: src/widgets/chat.py:95 src/widgets/chat.py:271
+msgid "No Messages Found"
+msgstr "Паведамленні не знойдзены"
+
+#: src/widgets/chat.py:96 src/widgets/chat.py:272
+msgid "Uh oh! No messages found for your search."
+msgstr "Ой! Паведамленні па вашым пошуку не знойдзены."
+
+#: src/widgets/chat.py:262
+msgid "Try one of these prompts"
+msgstr "Паспрабуйце адзін з гэтых запытаў"
+
+#: src/widgets/chat.py:292
+msgid "Send prompt: '{}'"
+msgstr "Адправіць запыт: '{}'"
+
+#: src/widgets/chat.py:298
+msgid "Refresh Prompts"
+msgstr "Абнавіць запыты"
+
+#: src/widgets/chat.py:494
+msgid "Rename Chat?"
+msgstr "Перайменаваць чат?"
+
+#: src/widgets/chat.py:495
+msgid "Renaming '{}'"
+msgstr "Перайменаванне ‘{}'"
+
+#: src/widgets/chat.py:497
+msgid "Chat name"
+msgstr "Назва чата"
+
+#: src/widgets/chat.py:498
+msgid "Rename"
+msgstr "Перайменаваць"
+
+#: src/widgets/chat.py:516
+msgid "Delete Chat?"
+msgstr "Выдаліць чат?"
+
+#: src/widgets/chat.py:524
+msgid "Copy of {}"
+msgstr "Копія {}"
+
+#: src/widgets/chat.py:536
+msgid "Chat exported successfully"
+msgstr "Чат экспартаваны"
+
+#: src/widgets/chat.py:556
+msgid "User"
+msgstr "Карыстальнік"
+
+#: src/widgets/chat.py:560
+msgid "System"
+msgstr "Сістэма"
+
+#: src/widgets/chat.py:606
+#, fuzzy
+msgid "Importable (.db)"
+msgstr "Імпартуемае (.db)"
+
+#: src/widgets/chat.py:607
+msgid "Markdown"
+msgstr "Markdown"
+
+#: src/widgets/chat.py:608
+msgid "Markdown (Obsidian Style)"
+msgstr "Markdown (стыль Obsidian)"
+
+#: src/widgets/chat.py:609
+msgid "JSON"
+msgstr "JSON"
+
+#: src/widgets/chat.py:610
+msgid "JSON (Include Metadata)"
+msgstr "JSON (разам з метаданымі)"
+
+#: src/widgets/chat.py:615
+msgid "Select a method to export the chat"
+msgstr "Выберыце спосаб экспарту чата"
+
+#: src/widgets/dialog.py:195 src/widgets/dialog.py:208 src/widgets/dialog.py:221
+msgid "Accept"
+msgstr "Прыняць"
+
+#: src/widgets/message.py:32
+msgid "Remove Message"
+msgstr "Выдаліць паведамленне"
+
+#: src/widgets/message.py:42
+msgid "Copy Message"
+msgstr "Капіяваць паведамленне"
+
+#: src/widgets/message.py:52
+msgid "Edit Message"
+msgstr "Рэдагаваць паведамленне"
+
+#: src/widgets/message.py:62
+msgid "Regenerate Message"
+msgstr "Перагенерыраваць паведамленне"
+
+#: src/widgets/message.py:88
+msgid "Message copied to the clipboard"
+msgstr "Паведамленне скапіявана ў буфер абмену"
+
+#: src/widgets/message.py:115
+msgid "Message cannot be regenerated while receiving a response"
+msgstr "Немагчыма перагенерыраваць паведамленне падчас атрымання адказу"
+
+#: src/widgets/message.py:241 src/widgets/message.py:264
+msgid "Thought"
+msgstr "Думка"
+
+#: src/widgets/message.py:520
+msgid "Attach YouTube Video?"
+msgstr "Далучыць відэа YouTube?"
+
+#: src/widgets/message.py:521
+msgid "Note that YouTube might block access to captions, please check output"
+msgstr "Звярніце ўвагу, што YouTube можа заблакіраваць доступ да субцітраў, праверце вынік"
+
+#: src/widgets/message.py:528
+msgid ""
+"Are you sure you want to attach\n"
+"'{}'?"
+msgstr ""
+"Вы ўпэўнены, што хочаце далучыць\n"
+"'{}'?"
+
+#: src/widgets/message.py:576
+msgid "Send Message"
+msgstr "Адправіць паведамленне"
+
+#: src/widgets/message.py:585
+msgid "Stop Message"
+msgstr "Спыніць паведамленне"
+
+#: src/widgets/message.py:607
+msgid "Send as User"
+msgstr "Адправіць як карыстальнік"
+
+#: src/widgets/message.py:612
+msgid "Send as System"
+msgstr "Адправіць як сістэма"
+
+#: src/widgets/model_manager.py:107 src/widgets/model_manager.py:194 src/widgets/model_manager.py:699
+msgid "Remove Model"
+msgstr "Выдаліць мадэль"
+
+#: src/widgets/model_manager.py:111 src/widgets/model_manager.py:198 src/widgets/model_manager.py:703
+msgid "Remove Model?"
+msgstr "Выдаліць мадэль?"
+
+#: src/widgets/model_manager.py:112 src/widgets/model_manager.py:199 src/widgets/model_manager.py:704
+msgid "Are you sure you want to remove '{}'?"
+msgstr "Вы ўпэўнены, што хочаце выдаліць '{}'?"
+
+#: src/widgets/model_manager.py:114 src/widgets/model_manager.py:201 src/widgets/model_manager.py:649 src/widgets/model_manager.py:706 src/widgets/instances/__init__.py:396
+msgid "Remove"
+msgstr "Выдаліць"
+
+#: src/widgets/model_manager.py:122
+msgid "Local text to speech model provided by Kokoro."
+msgstr "Лакальная мадэль ператварэння тэксту ў маўленне ад Kokoro."
+
+#: src/widgets/model_manager.py:159 src/widgets/model_manager.py:293
+msgid "Speech to Text"
+msgstr "Маўленне ў тэкст"
+
+#: src/widgets/model_manager.py:209
+msgid "Local speech to text model provided by OpenAI Whisper."
+msgstr "Лакальная мадэль ператварэння маўлення ў тэкст ад OpenAI Whisper."
+
+#: src/widgets/model_manager.py:238
+msgid "Downloading…"
+msgstr "Ідзе спампоўванне…"
+
+#: src/widgets/model_manager.py:248 src/widgets/model_manager.py:250
+msgid "Stop Download"
+msgstr "Спыніць спампоўванне"
+
+#: src/widgets/model_manager.py:256
+msgid "Stop Download?"
+msgstr "Спыніць спампоўванне?"
+
+#: src/widgets/model_manager.py:257
+msgid "Are you sure you want to stop pulling '{}'?"
+msgstr "Вы ўпэўнены, што хочаце спыніць атрыманне '{}'?"
+
+#: src/widgets/model_manager.py:259
+msgid "Stop"
+msgstr "Спыніць"
+
+#: src/widgets/model_manager.py:341
+msgid "Model Manager Error"
+msgstr "Памылка менеджара мадэляў"
+
+#: src/widgets/model_manager.py:342
+msgid "An error occurred whilst pulling '{}'"
+msgstr "Адбылася памылка падчас атрымання '{}'"
+
+#: src/widgets/model_manager.py:373
+msgid "Download Completed"
+msgstr "Спампоўванне завершана"
+
+#: src/widgets/model_manager.py:374
+msgid "Model '{}' downloaded successfully."
+msgstr "Мадэль '{}' паспяхова спампавана."
+
+#: src/widgets/model_manager.py:438
+msgid "Change Profile Picture"
+msgstr "Змяніць аватар профілю мадэлі"
+
+#: src/widgets/model_manager.py:457
+msgid "Voice"
+msgstr "Голас"
+
+#: src/widgets/model_manager.py:462
+msgid "Default"
+msgstr "Прадвызначанае"
+
+#: src/widgets/model_manager.py:482
+msgid "Family"
+msgstr "Сям’я"
+
+#: src/widgets/model_manager.py:483
+msgid "Parameter Size"
+msgstr "Памер параметраў"
+
+#: src/widgets/model_manager.py:484
+msgid "Quantization Level"
+msgstr "Узровень квантавання"
+
+#: src/widgets/model_manager.py:487
+msgid "Parent Model"
+msgstr "Бацькоўская мадэль"
+
+#: src/widgets/model_manager.py:490 src/widgets/model_manager.py:492
+msgid "Modified At"
+msgstr "Зменена"
+
+#: src/widgets/model_manager.py:500
+msgid "Description"
+msgstr "Апісанне"
+
+#: src/widgets/model_manager.py:650
+msgid "Change"
+msgstr "Змяніць"
+
+#: src/widgets/model_manager.py:658
+msgid "Model Profile Picture"
+msgstr "Аватар профілю мадэлі"
+
+#: src/widgets/model_manager.py:659
+msgid "What do you want to do with the model's profile picture?"
+msgstr "Што вы хочаце зрабіць з аватарам профілю мадэлі?"
+
+#: src/widgets/model_manager.py:691
+msgid "Create Child"
+msgstr "Стварыць даччыную мадэль"
+
+#: src/widgets/model_manager.py:725 src/widgets/model_manager.py:910
+msgid "Languages"
+msgstr "Мовы"
+
+#: src/widgets/model_manager.py:737
+msgid "Multilingual"
+msgstr "Шматмоўны"
+
+#: src/widgets/model_manager.py:738
+msgid "Code"
+msgstr "Код"
+
+#: src/widgets/model_manager.py:739
+msgid "Math"
+msgstr "Матэматыка"
+
+#: src/widgets/model_manager.py:740
+msgid "Vision"
+msgstr "Бачанне"
+
+#: src/widgets/model_manager.py:741
+msgid "Embedding"
+msgstr "Убудоўванне"
+
+#: src/widgets/model_manager.py:742
+msgid "Tools"
+msgstr "Інструменты"
+
+#: src/widgets/model_manager.py:743
+msgid "Reasoning"
+msgstr "Лагічны вывад"
+
+#: src/widgets/model_manager.py:744
+msgid "Small"
+msgstr "Малае"
+
+#: src/widgets/model_manager.py:745
+msgid "Medium"
+msgstr "Сярэдняе"
+
+#: src/widgets/model_manager.py:746
+msgid "Big"
+msgstr "Вялікае"
+
+#: src/widgets/model_manager.py:747
+msgid "Huge"
+msgstr "Вельмі вялікае"
+
+#: src/widgets/model_manager.py:830
+msgid "By downloading this model you accept the license agreement available on the model's website"
+msgstr "Спампоўваючы гэтую мадэль, вы прымаеце ліцэнзійнае пагадненне з вэб-сайта мадэлі"
+
+#: src/widgets/terminal.py:17
+msgid "Setting up Python environment..."
+msgstr "Ідзе наладжванне асяроддзя Python…"
+
+#: src/widgets/terminal.py:29
+#, fuzzy
+msgid "Using Python HTTP server..."
+msgstr "Выкарыстоўваецца HTTP-сервер Python…"
+
+#: src/widgets/terminal.py:34
+#, fuzzy
+msgid "Using Flatpak contained shell..."
+msgstr "Выкарыстоўваецца абалонка ў Flatpak…"
+
+#: src/widgets/terminal.py:38
+#, fuzzy
+msgid "Using SSH to run command"
+msgstr "Выкарыстоўваецца SSH для выканання каманды"
+
+#: src/widgets/terminal.py:85
+msgid "Terminal"
+msgstr "Тэрмінал"
+
+#: src/widgets/terminal.py:97
+msgid "Open Environment Directory"
+msgstr "Адкрыць дырэкторыю асяроддзя"
+
+#: src/widgets/terminal.py:181
+msgid "Script Exited"
+msgstr "Сцэнарый завершаны"
+
+#: src/widgets/terminal.py:192
+msgid "Alpaca Terminal is not compatible with Windows"
+msgstr "Тэрмінал Alpaca несумяшчальны з Windows"
+
+#: src/widgets/voice.py:54
+msgid "Dictate Message"
+msgstr "Дыктаваць паведамленне"
+
+#: src/widgets/voice.py:169
+msgid "Use Speech Recognition"
+msgstr "Ужываць распазнаванне маўлення"
+
+#: src/widgets/voice.py:214 src/widgets/voice.py:247
+msgid "Speech Recognition Error"
+msgstr "Памылка распазнавання маўлення"
+
+#: src/widgets/voice.py:215
+msgid "An error occurred while pulling speech recognition model"
+msgstr "Адбылася памылка падчас атрымання мадэлі распазнавання маўлення з сервера"
+
+#: src/widgets/voice.py:248
+msgid "An error occurred while using speech recognition"
+msgstr "Адбылася памылка падчас выкарыстання распазнавання маўлення"
+
+#: src/widgets/voice.py:277
+msgid "Download Speech Recognition Model"
+msgstr "Спампаваць мадэль распазнавання маўлення"
+
+#: src/widgets/voice.py:278
+msgid "To use speech recognition you'll need to download a special model ({})"
+msgstr "Каб выкарыстоўваць распазнаванне маўлення, неабходна спампаваць спецыяльную мадэль ({})"
+
+#: src/widgets/voice.py:280
+msgid "Download Model"
+msgstr "Спампаваць мадэль"
+
+#: src/widgets/instances/ollama_instances.py:64 src/widgets/instances/openai_instances.py:86
+msgid "Notebook Error"
+msgstr "Памылка нататніка"
+
+#: src/widgets/instances/ollama_instances.py:65 src/widgets/instances/ollama_instances.py:150 src/widgets/instances/openai_instances.py:87 src/widgets/instances/openai_instances.py:156
+msgid "An error occurred while running tool"
+msgstr "Адбылася памылка падчас працы інструмента"
+
+#: src/widgets/instances/ollama_instances.py:98 src/widgets/instances/openai_instances.py:114
+msgid "Selecting tool to use..."
+msgstr "Ідзе выбар інструмента..."
+
+#: src/widgets/instances/ollama_instances.py:117 src/widgets/instances/openai_instances.py:123
+msgid "Using {}"
+msgstr "Выкарыстоўваецца {}"
+
+#: src/widgets/instances/ollama_instances.py:149 src/widgets/instances/openai_instances.py:155
+msgid "Tool Error"
+msgstr "Памылка інструмента"
+
+#: src/widgets/instances/ollama_instances.py:229 src/widgets/instances/ollama_instances.py:318 src/widgets/instances/ollama_instances.py:332 src/widgets/instances/ollama_instances.py:536 src/widgets/instances/openai_instances.py:216
+#: src/widgets/instances/openai_instances.py:279 src/widgets/instances/openai_instances.py:323 src/widgets/instances/openai_instances.py:368 src/widgets/instances/openai_instances.py:428 src/widgets/instances/openai_instances.py:467
+#: src/widgets/instances/openai_instances.py:500
+msgid "Instance Error"
+msgstr "Памылка экзэмпляра ШІ"
+
+#: src/widgets/instances/ollama_instances.py:230 src/widgets/instances/openai_instances.py:217
+msgid "Message generation failed"
+msgstr "Не атрымалася згенерыраваць паведамленне"
+
+#: src/widgets/instances/ollama_instances.py:319 src/widgets/instances/openai_instances.py:280 src/widgets/instances/openai_instances.py:324 src/widgets/instances/openai_instances.py:369
+msgid "Could not retrieve added models"
+msgstr "Не ўдалося атрымаць даданыя мадэлі"
+
+#: src/widgets/instances/ollama_instances.py:333
+msgid "Could not retrieve available models"
+msgstr "Не ўдалося атрымаць даступныя мадэлі"
+
+#: src/widgets/instances/ollama_instances.py:451
+msgid "Ollama (Managed)"
+msgstr "Ollama (кіруемая)"
+
+#: src/widgets/instances/ollama_instances.py:452
+msgid "Local AI instance managed directly by Alpaca"
+msgstr "Лакальны экзэмпляр ШІ, кіруемы непасрэдна Alpaca"
+
+#: src/widgets/instances/ollama_instances.py:454 src/widgets/instances/ollama_instances.py:550 src/widgets/instances/__init__.py:283
+msgid "Instance"
+msgstr "Экзэмпляр ШІ"
+
+#: src/widgets/instances/ollama_instances.py:484
+msgid "Alpaca Support"
+msgstr "Падтрымка Alpaca"
+
+#: src/widgets/instances/ollama_instances.py:491
+msgid "Model request too large for system"
+msgstr "Запыт мадэлі занадта вялікі для сістэмы"
+
+#: src/widgets/instances/ollama_instances.py:494
+msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
+msgstr "Знойдзена відэакарта AMD, але пашырэнне адсутнічае, Ollama будзе выкарыстоўваць цэнтральны працэсар."
+
+#: src/widgets/instances/ollama_instances.py:496
+msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
+msgstr "Знойдзена відэакарта AMD, але ROCm адсутнічае, Ollama будзе выкарыстоўваць CPU."
+
+#: src/widgets/instances/ollama_instances.py:498
+msgid "Using AMD GPU type '{}'"
+msgstr "Выкарыстоўваецца відэакарта AMD тыпу '{}'"
+
+#: src/widgets/instances/ollama_instances.py:508
+msgid "Integrated Ollama instance is not running"
+msgstr "Інтэгрыраваны экзэмпляр Ollama не працуе"
+
+#: src/widgets/instances/ollama_instances.py:537
+msgid "Managed Ollama instance failed to start"
+msgstr "Не ўдалося запусціць кіруемы экзэмпляр Ollama"
+
+#: src/widgets/instances/ollama_instances.py:543
+msgid "Integrated Ollama instance is running"
+msgstr "Інтэгрыраваны экзэмпляр Ollama запушчаны"
+
+#: src/widgets/instances/ollama_instances.py:548
+msgid "Local or remote AI instance not managed by Alpaca"
+msgstr "Лакальны або дыстанцыйны экзэмпляр ШІ, які не кіруецца Alpaca"
+
+#: src/widgets/instances/openai_instances.py:20
+msgid "Instances"
+msgstr "Экзэмпляры ШІ"
+
+#: src/widgets/instances/openai_instances.py:162
+msgid "Generating message..."
+msgstr "Ідзе генерыраванне паведамлення..."
+
+#: src/widgets/instances/openai_instances.py:429 src/widgets/instances/openai_instances.py:468 src/widgets/instances/openai_instances.py:501
+msgid "Could not retrieve models"
+msgstr "Не ўдалося атрымаць мадэлі"
+
+#: src/widgets/instances/openai_instances.py:441
+msgid "Alibaba Cloud Qwen large language models via DashScope"
+msgstr "Вялікія моўныя мадэлі Alibaba Cloud Qwen праз DashScope"
+
+#: src/widgets/instances/openai_instances.py:447
+#, fuzzy
+msgid "Fireworks AI inference platform"
+msgstr "Платформа Fireworks AI"
+
+#: src/widgets/instances/openai_instances.py:480
+msgid "Lambda Labs cloud inference API"
+msgstr "API Lambda Labs"
+
+#: src/widgets/instances/openai_instances.py:513
+msgid "Cerebras AI cloud inference API"
+msgstr "API Cerebras AI"
+
+#: src/widgets/instances/openai_instances.py:519
+msgid "Kluster AI cloud inference API"
+msgstr "API Kluster AI"
+
+#: src/widgets/instances/openai_instances.py:525
+msgid "Mistral AI large language models"
+msgstr "Вялікія моўныя мадэлі Mistral AI"
+
+#: src/widgets/instances/openai_instances.py:532
+msgid "Meta AI Llama API"
+msgstr "API Meta AI Llama"
+
+#: src/widgets/instances/openai_instances.py:538
+msgid "Novita AI cloud inference API"
+msgstr "API Novita AI"
+
+#: src/widgets/instances/openai_instances.py:545
+msgid "DeepInfra cloud inference API"
+msgstr "API DeepInfra"
+
+#: src/widgets/instances/openai_instances.py:549
+msgid "OpenAI Compatible Instance"
+msgstr "Сумяшчальны экзэмпляр ШІ OpenAI"
+
+#: src/widgets/instances/openai_instances.py:551
+msgid "AI instance compatible with OpenAI library"
+msgstr "Экзэмпляр ШІ, сумяшчальны з бібліятэкай OpenAI"
+
+#: src/widgets/instances/__init__.py:32 src/widgets/instances/__init__.py:35
+msgid "Ollama Log"
+msgstr "Журнал Ollama"
+
+#: src/widgets/instances/__init__.py:57
+msgid "Port"
+msgstr "Порт"
+
+#: src/widgets/instances/__init__.py:58
+msgid "Which network port will '{}' use"
+msgstr "Сеткавы порт, які будзе выкарыстоўваць '{}'"
+
+#: src/widgets/instances/__init__.py:72
+msgid "Instance URL"
+msgstr "URL-адрас экзэмпляра ШІ"
+
+#: src/widgets/instances/__init__.py:78
+msgid "API Key"
+msgstr "Ключ API"
+
+#: src/widgets/instances/__init__.py:79
+msgid "API Key (Unchanged)"
+msgstr "Ключ API (без змянення)"
+
+#: src/widgets/instances/__init__.py:83
+msgid "API Key (Optional)"
+msgstr "Ключ API (неабавязкова)"
+
+#: src/widgets/instances/__init__.py:97
+msgid "Thought Processing"
+msgstr "Апрацоўка думак"
+
+#: src/widgets/instances/__init__.py:98
+msgid "Have compatible reasoning models think about their response before generating a message"
+msgstr "Дазволіць сумяшчальным мадэлям рабіць лагічны вывад для адказаў перад генерыраваннем паведамлення"
+
+#: src/widgets/instances/__init__.py:105
+msgid "Share Name"
+msgstr "Падзяліцца імем"
+
+#: src/widgets/instances/__init__.py:106
+msgid "Automatically share your name with the AI models."
+msgstr "Аўтаматычна дзяліцца вашым імем з мадэлямі AI."
+
+#: src/widgets/instances/__init__.py:121
+msgid "Max Tokens"
+msgstr "Максімум токенаў"
+
+#: src/widgets/instances/__init__.py:122
+msgid "Defines the maximum number of tokens (words + spaces) the AI can generate in a response. More tokens allow longer replies but may take more time and cost more."
+msgstr "Вызначае максімальную колькасць токенаў (слоў + прабелаў), якую AI можа згенерыраваць у адказ. Больш токенаў дазваляе даўжэйшыя адказы, але патрабуе болей часу і рэсурсаў."
+
+#: src/widgets/instances/__init__.py:137
+msgid "Temperature"
+msgstr "Тэмпература"
+
+#: src/widgets/instances/__init__.py:138
+#, fuzzy
+msgid "Increasing the temperature will make the models answer more creatively."
+msgstr "Павышэнне тэмпературы зробіць адказы мадэляў больш крэатыўнымі."
+
+#: src/widgets/instances/__init__.py:153
+msgid "Seed"
+msgstr "Пачатковае значэнне"
+
+#: src/widgets/instances/__init__.py:154
+#, fuzzy
+msgid "Setting this to a specific number other than 0 will make the model generate the same text for the same prompt."
+msgstr "Калі задаць не 0, мадэль будзе генерыраваць той жа тэкст для таго ж запыту."
+
+#: src/widgets/instances/__init__.py:169
+msgid "Overrides"
+msgstr "Перазапісы"
+
+#: src/widgets/instances/__init__.py:170
+#, fuzzy
+msgid "These entries are optional, they are used to troubleshoot GPU related problems with Ollama."
+msgstr "Гэтыя запісы неабавязковыя і выкарыстоўваюцца для дыягностыкі праблем з GPU у Ollama."
+
+#: src/widgets/instances/__init__.py:192
+msgid "Model Directory"
+msgstr "Каталог мадэлі"
+
+#: src/widgets/instances/__init__.py:197
+msgid "Select Directory"
+msgstr "Выбраць каталог"
+
+#: src/widgets/instances/__init__.py:217
+msgid "Default Model"
+msgstr "Прадвызначаная мадэль"
+
+#: src/widgets/instances/__init__.py:218
+msgid "Model to select when starting a new chat."
+msgstr "Мадэль, якую трэба выбіраць пры запуску новага чата."
+
+#: src/widgets/instances/__init__.py:225
+msgid "Title Model"
+msgstr "Мадэль для назвы"
+
+#: src/widgets/instances/__init__.py:226
+msgid "Model to use when generating a chat title."
+msgstr "Мадэль для генерыравання назвы чата."
+
+#: src/widgets/instances/__init__.py:259 src/widgets/instances/__init__.py:260 src/widgets/blocks/code.py:146 src/widgets/blocks/text.py:157 src/widgets/tools/tools.py:103 src/widgets/tools/tools.py:104
+msgid "Save"
+msgstr "Захаваць"
+
+#: src/widgets/instances/__init__.py:277
+msgid "Edit Instance"
+msgstr "Рэдагаваць экзэмпляр ШІ"
+
+#: src/widgets/instances/__init__.py:277
+msgid "Create Instance"
+msgstr "Стварыць экзэмпляр ШІ"
+
+#: src/widgets/instances/__init__.py:353
+msgid "Fallback Instance"
+msgstr "Рэзервовы экзэмпляр ШІ"
+
+#: src/widgets/instances/__init__.py:393
+msgid "Remove Instance?"
+msgstr "Выдаліць экзэмпляр ШІ?"
+
+#: src/widgets/instances/__init__.py:394
+msgid "Are you sure you want to remove this instance?"
+msgstr "Ці вы ўпэўненыя, што хочаце выдаліць гэты экзэмпляр ШІ?"
+
+#: src/widgets/blocks/code.py:85
+msgid "Code Block"
+msgstr "Блок кода"
+
+#: src/widgets/blocks/code.py:112
+msgid "Edit Script"
+msgstr "Рэдагаваць сцэнарый"
+
+#: src/widgets/blocks/code.py:120
+msgid "Copy Script"
+msgstr "Скапіяваць сцэнарый"
+
+#: src/widgets/blocks/code.py:128
+msgid "Run Script"
+msgstr "Запусціць сцэнарый"
+
+#: src/widgets/blocks/code.py:194
+msgid "Changes saved successfully"
+msgstr "Змены захаваны"
+
+#: src/widgets/blocks/code.py:200
+msgid "Code copied to the clipboard"
+msgstr "Код скапіяваны ў буфер абмену"
+
+#: src/widgets/blocks/latex.py:41
+msgid "Copy Equation"
+msgstr "Скапіяваць ураўненне"
+
+#: src/widgets/blocks/latex.py:76
+msgid "Equation copied to the clipboard"
+msgstr "Ураўненне скапіявана ў буфер абмену"
+
+#: src/widgets/tools/notebook_tools.py:18
+msgid "Read Notebook"
+msgstr "Чытаць нататнік"
+
+#: src/widgets/tools/notebook_tools.py:19
+msgid "Reads the current notebook."
+msgstr "Чытае бягучы нататнік."
+
+#: src/widgets/tools/notebook_tools.py:38
+msgid "Write Notebook"
+msgstr "Запісаць у нататнік"
+
+#: src/widgets/tools/notebook_tools.py:39
+msgid "Overwrites the notebook with new text."
+msgstr "Перазапісвае нататнік новым тэкстам."
+
+#: src/widgets/tools/notebook_tools.py:58
+msgid "Append to Notebook"
+msgstr "Дабавіць у нататнік"
+
+#: src/widgets/tools/notebook_tools.py:59
+msgid "Appends text to the notebook."
+msgstr "Дабаўляе тэкст у нататнік."
+
+#: src/widgets/tools/tools.py:20
+msgid "AI Description"
+msgstr "Апісанне ШІ"
+
+#: src/widgets/tools/tools.py:21
+msgid "The description the AI model will use to understand what the tool does."
+msgstr "Апісанне, якое мадэль ШІ выкарыстоўвае для разумення прызначэння інструмента."
+
+#: src/widgets/tools/tools.py:33
+msgid "Arguments"
+msgstr "Пераменныя"
+
+#: src/widgets/tools/tools.py:34
+msgid "Variables that are filled by the AI."
+msgstr "Пераменныя, значэнні якіх задае ШІ."
+
+#: src/widgets/tools/tools.py:47
+msgid "Variables"
+msgstr "Пераменныя"
+
+#: src/widgets/tools/tools.py:48
+msgid "User filled values that the tool uses to work, the AI does not have access to these variables at all."
+msgstr "Значэнні, якія карыстальнік ўводзіць для працы інструмента; AI не мае даступу да гэтых пераменных."
+
+#: src/widgets/tools/tools.py:216
+msgid "Gets the current date and/or time."
+msgstr "Атрымлівае бягучую дату і/або час."
+
+#: src/widgets/tools/tools.py:248
+msgid "Gets a recipe by the meal's name"
+msgstr "Атрымлівае рэцэпт па назве стравы"
+
+#: src/widgets/tools/tools.py:263 src/widgets/tools/tools.py:329
+msgid "YouTube Video"
+msgstr "Відэа з YouTube"
+
+#: src/widgets/tools/tools.py:271 src/widgets/tools/tools.py:338
+msgid "Source"
+msgstr "Крыніца"
+
+#: src/widgets/tools/tools.py:308
+msgid "Gets a list of food recipes by a specified category"
+msgstr "Атрымлівае спіс кулінарных рэцэптаў па зададзенай катэгорыі"
+
+#: src/widgets/tools/tools.py:364
+msgid "Extracts an article from Wikipedia by it's title"
+msgstr "Атрымлівае артыкул з Вікіпедыі па яго назве"
+
+#: src/widgets/tools/tools.py:405
+msgid "Search for a term online using DuckDuckGo"
+msgstr "Шукае тэрмін у інтэрнэце з дапамогай DuckDuckGo"
+
+#: src/widgets/tools/tools.py:408
+msgid "Safe Search"
+msgstr "Бяспечны пошук"
+
+#: src/widgets/tools/tools.py:412
+msgid "On"
+msgstr "Уключаны"
+
+#: src/widgets/tools/tools.py:413
+msgid "Moderate"
+msgstr "Умераны"
+
+#: src/widgets/tools/tools.py:414
+msgid "Off"
+msgstr "Выключаны"
+
+#: src/widgets/tools/tools.py:418
+msgid "Max Results"
+msgstr "Максімум вынікаў"
+
+#: src/widgets/tools/tools.py:442
+#, fuzzy
+msgid "Abstract Source"
+msgstr "Анатацыя крыніцы"
+
+#: src/widgets/tools/tools.py:459
+msgid "Web Result Image"
+msgstr "Відарыс з вэб-пошуку"
+
+#: src/widgets/tools/tools.py:489
+msgid "Request to run a command using SSH to connect to the device"
+msgstr "Запыт на выкананне каманды праз SSH для падключэння да прылады"
+
+#: src/widgets/tools/tools.py:492
+msgid "IP Address"
+msgstr "IP-адрас"
+
+#: src/widgets/tools/tools.py:497
+msgid "Username"
+msgstr "Імя карыстальніка"
+
+#: src/widgets/tools/tools.py:502
+msgid "Network Port"
+msgstr "Сеткавы порт"
+
+#: src/widgets/tools/tools.py:519
+msgid "Model Requested to Run Command"
+msgstr "Мадэль, якая атрымлівае запыт на выкананне каманды"
+
+#: src/widgets/tools/tools.py:520
+msgid "Command"
+msgstr "Каманда"
+
+#: src/widgets/tools/tools.py:522
+msgid "Explanation"
+msgstr "Тлумачэнне"
+
+#: src/widgets/tools/tools.py:523
+msgid "No explanation was provided"
+msgstr "Тлумачэнне не дадзена"
+
+#: src/widgets/tools/tools.py:524
+msgid "Make sure you understand what the command does before running it."
+msgstr "Перад выкананнем упэўніцеся, што разумееце прызначэнне каманды."
