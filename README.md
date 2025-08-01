@@ -100,6 +100,8 @@ Language               | Contributors
 🌐 Tamil                | [Harimanish](https://github.com/harimanish)
 🇬🇪 Georgian             | [Ekaterine Papava](https://github.com/EkaterinePapava)
 🇮🇳 Kannada              | [Jeethan Roche](https://github.com/roche-jeethan)
+🌐 Arabic               | [Ahmed Najmawi](https://github.com/x9a)
+🌐 Belarusian           | [Aliaksandr Kliujeŭ](https://github.com/PlagaMedicum)
 
 Want to add a language? Visit [this discussion](https://github.com/Jeffser/Alpaca/discussions/153) to get started!
 

@@ -33,7 +33,9 @@ TRANSLATORS = [
     "Nofal Briansah (Indonesian) https://github.com/nofalbriansah",
     "Harimanish (Tamil) https://github.com/harimanish",
     "Ekaterine Papava (Georgian) https://github.com/EkaterinePapava",
-    "Jeethan Roche (Kannada) https://github.com/roche-jeethan"
+    "Jeethan Roche (Kannada) https://github.com/roche-jeethan",
+    "Ahmed Najmawi (Arabic) https://github.com/x9a",
+    "Aliaksandr Kliujeŭ (Belarusian) https://github.com/PlagaMedicum"
 ]
 
 # Used to populate SR language in preferences
