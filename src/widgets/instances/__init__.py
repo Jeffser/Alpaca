@@ -237,17 +237,20 @@ class InstancePreferencesGroup(Adw.Dialog):
             )
             title_model_index = 0
 
-            string_list = Gtk.StringList()
+            string_list_default = Gtk.StringList()
+            string_list_title = Gtk.StringList()
+            string_list_title.append(_('Use Current Model'))
             for i, model in enumerate(self.instance.get_local_models()):
-                string_list.append(prettify_model_name(model.get('name')))
+                string_list_default.append(prettify_model_name(model.get('name')))
+                string_list_title.append(prettify_model_name(model.get('name')))
                 if model.get('name') == self.instance.properties.get('default_model'):
                     default_model_index = i
                 if model.get('name') == self.instance.properties.get('title_model'):
-                    default_model_index = i
+                    title_model_index = i
 
-            default_model_el.set_model(string_list)
+            default_model_el.set_model(string_list_default)
             default_model_el.set_selected(default_model_index)
-            title_model_el.set_model(string_list)
+            title_model_el.set_model(string_list_title)
             title_model_el.set_selected(title_model_index)
             self.groups[-1].add(default_model_el)
             self.groups[-1].add(title_model_el)
@@ -301,7 +304,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             'override': lambda val: val.strip(),
             'model_directory': lambda val: val.strip(),
             'default_model': lambda val: self.instance.get_local_models()[val].get('name') if val >= 0 else None,
-            'title_model': lambda val: self.instance.get_local_models()[val].get('name') if val >= 0 else None
+            'title_model': lambda val: self.instance.get_local_models()[val].get('name') if val >= 1 else None
         }
 
         for group in self.groups:

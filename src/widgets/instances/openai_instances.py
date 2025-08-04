@@ -66,7 +66,14 @@ class BaseInstance:
         chat, messages = self.prepare_chat(bot_message)
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
-            threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
+            threading.Thread(
+                target=self.generate_chat_title,
+                args=(
+                    chat,
+                    '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']),
+                    model
+                )
+            ).start()
 
         self.generate_response(bot_message, chat, messages, model, None)
 
@@ -77,7 +84,14 @@ class BaseInstance:
             bot_message.options_button.set_active(False)
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
-            threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
+            threading.Thread(
+                target=self.generate_chat_title,
+                args=(
+                    chat,
+                    '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']),
+                    model
+                )
+            ).start()
 
         try:
             completion = self.client.chat.completions.create(
@@ -119,7 +133,14 @@ class BaseInstance:
         bot_message.block_container.prepare_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
-            threading.Thread(target=self.generate_chat_title, args=(chat, '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']))).start()
+            threading.Thread(
+                target=self.generate_chat_title,
+                args=(
+                    chat,
+                    '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']),
+                    model
+                )
+            ).start()
 
         tools_used = []
 
@@ -236,7 +257,7 @@ class BaseInstance:
                     self.get_row().get_parent().unselect_all()
         bot_message.finish_generation()
 
-    def generate_chat_title(self, chat, prompt:str):
+    def generate_chat_title(self, chat, prompt:str, fallback_model:str):
         class ChatTitle(BaseModel): # Pydantic
             title: str
             emoji: str = ""
@@ -245,10 +266,10 @@ class BaseInstance:
             {"role": "user" if 'no-system-messages' in self.limitations else "system", "content": TITLE_GENERATION_PROMPT_OPENAI},
             {"role": "user", "content": "Generate a title for this prompt:\n{}".format(prompt)}
         ]
-
+        model = self.get_title_model()
         params = {
             "temperature": 0.2,
-            "model": self.get_title_model(),
+            "model": model if model else fallback_model,
             "messages": messages,
             "max_tokens": MAX_TOKENS_TITLE_GENERATION
         }
@@ -284,7 +305,7 @@ class BaseInstance:
     def get_title_model(self):
         local_models = self.get_local_models()
         if len(local_models) > 0:
-            if not self.properties.get('title_model') or not self.properties.get('title_model') in [m.get('name') for m in local_models]:
+            if self.properties.get('title_model') and not self.properties.get('title_model') in [m.get('name') for m in local_models]:
                 self.properties['title_model'] = local_models[0].get('name')
             return self.properties.get('title_model')
 

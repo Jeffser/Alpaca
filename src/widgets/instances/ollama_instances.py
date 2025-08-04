@@ -40,7 +40,8 @@ class BaseInstance:
                 target=self.generate_chat_title,
                 args=(
                     chat,
-                    messages[-1].get('content')
+                    messages[-1].get('content'),
+                    model
                 )
             ).start()
         self.generate_response(bot_message, chat, messages, model, None)
@@ -56,7 +57,8 @@ class BaseInstance:
                 target=self.generate_chat_title,
                 args=(
                     chat,
-                    messages[-1].get('content')
+                    messages[-1].get('content'),
+                    model
                 )
             ).start()
 
@@ -93,7 +95,8 @@ class BaseInstance:
                 target=self.generate_chat_title,
                 args=(
                     chat,
-                    messages[-1].get('content')
+                    messages[-1].get('content'),
+                    model
                 )
             ).start()
 
@@ -245,12 +248,13 @@ class BaseInstance:
             metadata_string = dict_to_metadata_string(data)
         bot_message.finish_generation(metadata_string)
 
-    def generate_chat_title(self, chat, prompt:str):
+    def generate_chat_title(self, chat, prompt:str, fallback_model:str):
         if not chat.row or not chat.row.get_parent():
             return
+        model = self.get_title_model()
         params = {
             "temperature": 0.2,
-            "model": self.get_title_model(),
+            "model": model if model else fallback_model,
             "max_tokens": MAX_TOKENS_TITLE_GENERATION,
             "stream": False,
             "prompt": TITLE_GENERATION_PROMPT_OLLAMA.format(prompt),
@@ -303,7 +307,7 @@ class BaseInstance:
     def get_title_model(self):
         local_models = self.get_local_models()
         if len(local_models) > 0:
-            if not self.properties.get('title_model') or not self.properties.get('title_model') in [m.get('name') for m in local_models]:
+            if self.properties.get('title_model') and not self.properties.get('title_model') in [m.get('name') for m in local_models]:
                 self.properties['title_model'] = local_models[0].get('name')
             return self.properties.get('title_model')
 
