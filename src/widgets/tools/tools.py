@@ -2,11 +2,10 @@
 
 from gi.repository import Adw, Gtk, Gio, Gdk, GdkPixbuf, GLib
 
-import datetime, time, random, requests, json, os, threading, base64
+import datetime, time, random, requests, json, os, threading, base64, importlib.util
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 from html2text import html2text
-from duckduckgo_search import DDGS
 
 from .. import terminal, attachments, dialog
 from ...constants import data_dir
@@ -387,84 +386,86 @@ class ExtractWikipedia(Base):
 
         return '\n\n'.join(result_md)
 
-class OnlineSearch(Base):
-    tool_metadata = {
-        "name": "online_search",
-        "description": "Search for a term online using DuckDuckGo returning results",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "search_term": {
-                    "type": "string",
-                    "description": "The term to search online, be punctual and use the least possible amount of words to get general results"
-                }
+if importlib.util.find_spec('duckduckgo_search'):
+    from duckduckgo_search import DDGS
+    class OnlineSearch(Base):
+        tool_metadata = {
+            "name": "online_search",
+            "description": "Search for a term online using DuckDuckGo returning results",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "search_term": {
+                        "type": "string",
+                        "description": "The term to search online, be punctual and use the least possible amount of words to get general results"
+                    }
+                },
+                "required": [
+                    "search_term"
+                ]
+            }
+        }
+        name = _("Online Search")
+        description = _("Search for a term online using DuckDuckGo")
+        variables = {
+            'safesearch': {
+                'display_name': _("Safe Search"),
+                'value': 1,
+                'type': 'options',
+                'options': [
+                    _('On'),
+                    _('Moderate'),
+                    _('Off')
+                ]
             },
-            "required": [
-                "search_term"
-            ]
+            'max_results': {
+                'display_name': _("Max Results"),
+                'value': 1,
+                'type': 'int',
+                'min': 1,
+                'max': 5
+            }
         }
-    }
-    name = _("Online Search")
-    description = _("Search for a term online using DuckDuckGo")
-    variables = {
-        'safesearch': {
-            'display_name': _("Safe Search"),
-            'value': 1,
-            'type': 'options',
-            'options': [
-                _('On'),
-                _('Moderate'),
-                _('Off')
-            ]
-        },
-        'max_results': {
-            'display_name': _("Max Results"),
-            'value': 1,
-            'type': 'int',
-            'min': 1,
-            'max': 5
-        }
-    }
 
-    def run(self, arguments, messages, bot_message) -> str:
-        search_term = arguments.get("search_term")
-        if not search_term:
-            return "Error: Search term was not provided"
+        def run(self, arguments, messages, bot_message) -> str:
+            search_term = arguments.get("search_term")
+            if not search_term:
+                return "Error: Search term was not provided"
 
-        result_md = []
+            result_md = []
 
-        text_results = DDGS().text(
-            keywords=search_term,
-            max_results=self.variables.get('max_results', {}).get('value', 1),
-            safesearch=('on', 'moderate', 'off')[self.variables.get('safesearch', {}).get('value', 1)]
-        )
-
-        for text_result in text_results:
-            attachment = bot_message.add_attachment(
-                file_id = generate_uuid(),
-                name = _("Abstract Source"),
-                attachment_type = "link",
-                content = text_result.get('href')
+            text_results = DDGS().text(
+                keywords=search_term,
+                max_results=self.variables.get('max_results', {}).get('value', 1),
+                safesearch=('on', 'moderate', 'off')[self.variables.get('safesearch', {}).get('value', 1)]
             )
-            SQL.insert_or_update_attachment(bot_message, attachment)
-            result_md.append('### {}'.format(text_result.get('title')))
-            result_md.append(text_result.get('body'))
 
-        images = DDGS().images(
-            keywords=search_term,
-            max_results=self.variables.get('max_results', {}).get('value', 1),
-            safesearch=('on', 'moderate', 'off')[self.variables.get('safesearch', {}).get('value', 1)],
-            size='Medium',
-            layout='Square'
-        )
+            for text_result in text_results:
+                attachment = bot_message.add_attachment(
+                    file_id = generate_uuid(),
+                    name = _("Abstract Source"),
+                    attachment_type = "link",
+                    content = text_result.get('href')
+                )
+                SQL.insert_or_update_attachment(bot_message, attachment)
+                result_md.append('### {}'.format(text_result.get('title')))
+                result_md.append(text_result.get('body'))
 
-        for image_result in images:
-            self.attach_online_image(bot_message, text_result.get('title', _('Web Result Image')), image_result.get('image'))
+            images = DDGS().images(
+                keywords=search_term,
+                max_results=self.variables.get('max_results', {}).get('value', 1),
+                safesearch=('on', 'moderate', 'off')[self.variables.get('safesearch', {}).get('value', 1)],
+                size='Medium',
+                layout='Square'
+            )
 
-        if len(result_md) == 1:
-            return "Error: No results found"
+            for image_result in images:
+                self.attach_online_image(bot_message, text_result.get('title', _('Web Result Image')), image_result.get('image'))
 
-        return '\n\n'.join(result_md)
+            if len(result_md) == 1:
+                return "Error: No results found"
+
+            return '\n\n'.join(result_md)
 
 class RunCommand(Base):
     tool_metadata = {
