@@ -108,14 +108,14 @@ class BaseInstance:
             content = str(bot_message.chat.get_notebook())
         )
         SQL.insert_or_update_attachment(bot_message, attachment)
-        bot_message.update_message({'done': True})
+        bot_message.finish_generation()
         chat.textview.set_sensitive(True)
 
     def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
         chat, messages = self.prepare_chat(bot_message)
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
-        bot_message.update_message({'add_css': 'dim-label'})
+        GLib.idle_add(bot_message.block_container.add_css_class, 'dim-label')
         bot_message.block_container.prepare_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
@@ -173,11 +173,11 @@ class BaseInstance:
 
         if generate_message:
             tools.log_to_message(_("Generating message..."), bot_message, True)
-            bot_message.update_message({'remove_css': 'dim-label'})
+            GLib.idle_add(bot_message.block_container.remove_css_class, 'dim-label')
             self.generate_response(bot_message, chat, messages, model, tools_used if len(tools_used) > 0 else None)
         else:
-            bot_message.update_message({'clear': True})
-            bot_message.update_message({'done': True})
+            GLib.idle_add(bot_message.block_container.clear)
+            bot_message.finish_generation()
 
     def generate_response(self, bot_message, chat, messages:list, model:str, tools_used:list):
         if bot_message.options_button:
@@ -215,13 +215,13 @@ class BaseInstance:
 
         if chat.busy:
             try:
-                bot_message.update_message({"clear": True})
+                GLib.idle_add(bot_message.block_container.clear)
                 response = self.client.chat.completions.create(**params)
                 for chunk in response:
                     if chunk.choices and chunk.choices[0].delta:
                         delta = chunk.choices[0].delta
                         if delta.content:
-                            bot_message.update_message({"content": delta.content})
+                            bot_message.update_message(delta.content)
                     if not chat.busy:
                         break
             except Exception as e:
@@ -234,7 +234,7 @@ class BaseInstance:
                 logger.error(e)
                 if self.get_row():
                     self.get_row().get_parent().unselect_all()
-        bot_message.update_message({"done": True})
+        bot_message.finish_generation()
 
     def generate_chat_title(self, chat, prompt:str):
         class ChatTitle(BaseModel): # Pydantic

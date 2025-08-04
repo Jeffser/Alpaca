@@ -95,7 +95,7 @@ class InstancePreferencesGroup(Adw.Dialog):
         if 'think' in self.instance.properties: #THINK
             self.groups[-1].add(Adw.SwitchRow(
                 title=_('Thought Processing'),
-                subtitle=_('Have compatible reasoning models think about their response before generating a message'),
+                subtitle=_('Have compatible reasoning models think about their response before generating a message.'),
                 name='think',
                 active=self.instance.properties.get('think')
             ))
@@ -108,13 +108,21 @@ class InstancePreferencesGroup(Adw.Dialog):
             )
 
             string_list = Gtk.StringList()
-            string_list.append('Do Not Share')
-            string_list.append('Username')
-            string_list.append('Full Name')
+            string_list.append(_('Do Not Share'))
+            string_list.append(_('Username'))
+            string_list.append(_('Full Name'))
 
             share_name_el.set_model(string_list)
             share_name_el.set_selected(self.instance.properties.get('share_name'))
             self.groups[-1].add(share_name_el)
+
+        if 'show_response_metadata' in self.instance.properties: #SHOW REQUEST METADATA
+            self.groups[-1].add(Adw.SwitchRow(
+                title=_('Show Response Metadata'),
+                subtitle=_('Add the option to show reply metadata in the message as an attachment.'),
+                name='show_response_metadata',
+                active=self.instance.properties.get('show_response_metadata')
+            ))
 
         if 'max_tokens' in self.instance.properties: #MAX TOKENS
             self.groups[-1].add(Adw.SpinRow(
@@ -286,6 +294,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             'api': lambda val: self.instance.properties.get('api') if self.instance.properties.get('api') and not val else (val if val else 'empty'),
             'think': lambda val: val,
             'share_name': lambda val: val,
+            'show_response_metadata': lambda val: val,
             'max_tokens': lambda val: val,
             'temperature': lambda val: val,
             'seed': lambda val: val,

@@ -17,6 +17,38 @@ import sys
 from .constants import data_dir
 from gi.repository import Gio
 
+def nanoseconds_to_timestamp(ns:int) -> str or None:
+    if ns:
+        total_seconds = ns / 1_000_000_000
+
+        hours = int(total_seconds // 3600)
+        minutes = int((total_seconds % 3600) // 60)
+        seconds = int(total_seconds % 60)
+
+        if hours > 0:
+            return f'{hours:02}:{minutes:02}:{seconds:02}'
+        elif minutes > 0:
+            return f'{minutes:02}:{seconds:02}'
+        else:
+            return f'{seconds:02}'
+
+def dict_to_metadata_string(data:dict) -> str:
+    metadata_parameters = {
+        _('Total Duration'): nanoseconds_to_timestamp(data.get('total_duration')),
+        _('Load Duration'): nanoseconds_to_timestamp(data.get('load_duration'))
+    }
+    if data.get('prompt_eval_count') and data.get('prompt_eval_duration'):
+        metadata_parameters[_('Prompt Eval Count')] =  _('{} tokens').format(data.get('prompt_eval_count'))
+        metadata_parameters[_('Prompt Eval Duration')] = nanoseconds_to_timestamp(data.get('prompt_eval_duration'))
+        prompt_eval_rate = data.get('prompt_eval_count') / (data.get('prompt_eval_duration') / (10**9))
+        metadata_parameters[_('Prompt Eval Rate')] = _('{} tokens/s').format(round(prompt_eval_rate, 2))
+    if data.get('eval_count') and data.get('eval_duration'):
+        metadata_parameters[_('Eval Count')] = _('{} tokens').format(data.get('eval_count'))
+        metadata_parameters[_('Eval Duration')] = nanoseconds_to_timestamp(data.get('eval_duration'))
+        eval_rate = data.get('eval_count') / (data.get('eval_duration') / (10**9))
+        metadata_parameters[_('Eval Rate')] = _('{} tokens/s').format(round(eval_rate, 2))
+    return '\n'.join(['{}: {}'.format(k, vl) for k, vl in metadata_parameters.items() if vl])
+
 def generate_uuid() -> str:
     return f"{datetime.datetime.today().strftime('%Y%m%d%H%M%S%f')}{uuid.uuid4().hex}"
 

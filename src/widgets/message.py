@@ -431,46 +431,49 @@ class Message(Gtk.Box):
             self.attachment_container.add_attachment(new_attachment)
             return new_attachment
 
-    def update_message(self, data:dict):
-        if data.get('done'):
-            self.popup.change_status(True)
-            if self.get_root().get_name() == 'AlpacaWindow':
-                GLib.idle_add(self.chat.row.spinner.set_visible, False)
-                if self.get_root().chat_list_box.get_selected_row().get_name() != self.chat.get_name():
-                    GLib.idle_add(self.chat.row.indicator.set_visible, True)
-            elif self.get_root().get_name() == 'AlpacaQuickAsk':
-                GLib.idle_add(self.get_root().save_button.set_sensitive, True)
-
-            self.chat.stop_message()
-            result_text = self.get_content()
-            buffer = self.block_container.generating_block.buffer
-            GLib.idle_add(self.block_container.add_content, buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
-            GLib.idle_add(self.block_container.remove_generating_block)
-            self.dt = datetime.datetime.now()
-            GLib.idle_add(self.save)
-            GLib.idle_add(self.update_profile_picture)
-            if result_text:
-                dialog.show_notification(
-                    root_widget=self.get_root(),
-                    title=self.chat.get_name(),
-                    body=result_text[:200] + (result_text[200:] and '…'),
-                    icon=Gio.ThemedIcon.new('chat-message-new-symbolic')
-                )
-
-            sys.exit() #Exit thread
-
-        elif data.get('content', False):
+    def update_message(self, content):
+        if content:
             GLib.idle_add(self.main_stack.set_visible_child_name, 'content')
             vadjustment = self.chat.scrolledwindow.get_vadjustment()
             if vadjustment.get_value() + 150 >= vadjustment.get_upper() - vadjustment.get_page_size():
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
-            self.block_container.generating_block.append_content(data.get('content', ''))
-        elif data.get('clear', False):
-            GLib.idle_add(self.block_container.clear)
-        elif data.get('add_css', False):
-            GLib.idle_add(self.block_container.add_css_class, data.get('add_css'))
-        elif data.get('remove_css', False):
-            GLib.idle_add(self.block_container.remove_css_class, data.get('remove_css'))
+            self.block_container.generating_block.append_content(content)
+
+    def finish_generation(self, response_metadata:str=None):
+        self.popup.change_status(True)
+        if self.get_root().get_name() == 'AlpacaWindow':
+            GLib.idle_add(self.chat.row.spinner.set_visible, False)
+            if self.get_root().chat_list_box.get_selected_row().get_name() != self.chat.get_name():
+                GLib.idle_add(self.chat.row.indicator.set_visible, True)
+        elif self.get_root().get_name() == 'AlpacaQuickAsk':
+            GLib.idle_add(self.get_root().save_button.set_sensitive, True)
+
+        self.chat.stop_message()
+        result_text = self.get_content()
+        buffer = self.block_container.generating_block.buffer
+        GLib.idle_add(self.block_container.add_content, buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
+        GLib.idle_add(self.block_container.remove_generating_block)
+        self.dt = datetime.datetime.now()
+        GLib.idle_add(self.save)
+        GLib.idle_add(self.update_profile_picture)
+        if result_text:
+            dialog.show_notification(
+                root_widget=self.get_root(),
+                title=self.chat.get_name(),
+                body=result_text[:200] + (result_text[200:] and '…'),
+                icon=Gio.ThemedIcon.new('chat-message-new-symbolic')
+            )
+
+        if response_metadata:
+            attachment = self.add_attachment(
+                file_id=generate_uuid(),
+                name=_('Metadata'),
+                attachment_type='metadata',
+                content=response_metadata
+            )
+            SQL.insert_or_update_attachment(self, attachment)
+
+        sys.exit() #Exit thread
 
     def save(self):
         if self.chat.chat_id:

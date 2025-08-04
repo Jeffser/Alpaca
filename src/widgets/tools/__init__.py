@@ -7,10 +7,10 @@ from .notebook_tools import tools as NotebookTools
 
 def log_to_message(text:str, bot_message, animate:bool):
     for s in text.split(' '):
-        bot_message.update_message({"content": '{} '.format(s)})
+        bot_message.update_message('{} '.format(s))
         if animate:
             time.sleep(round(random.random()/4, 2))
-    bot_message.update_message({"content": "\n"})
+    bot_message.update_message("\n")
 
 def update_available_tools(listbox):
     tools_parameters = SQL.get_tool_parameters()

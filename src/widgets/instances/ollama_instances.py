@@ -6,7 +6,7 @@ import requests, json, logging, os, shutil, subprocess, threading, re, signal, p
 from .. import dialog, tools
 from ...ollama_models import OLLAMA_MODELS
 from ...constants import data_dir, cache_dir, TITLE_GENERATION_PROMPT_OLLAMA, MAX_TOKENS_TITLE_GENERATION
-from ...sql_manager import generate_uuid, Instance as SQL
+from ...sql_manager import generate_uuid, dict_to_metadata_string, Instance as SQL
 
 logger = logging.getLogger(__name__)
 
@@ -79,13 +79,13 @@ class BaseInstance:
         )
         SQL.insert_or_update_attachment(bot_message, attachment)
         chat.textview.set_sensitive(True)
-        bot_message.update_message({'done': True})
+        bot_message.finish_generation()##TODO Add data
 
     def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
         chat, messages = self.prepare_chat(bot_message)
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
-        bot_message.update_message({'add_css': 'dim-label'})
+        GLib.idle_add(bot_message.block_container.add_css_class, 'dim-label')
         bot_message.block_container.prepare_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
@@ -158,11 +158,14 @@ class BaseInstance:
             logger.error(e)
 
         if generate_message:
-            bot_message.update_message({'remove_css': 'dim-label'})
+            GLib.idle_add(bot_message.block_container.remove_css_class, 'dim-label')
             self.generate_response(bot_message, chat, messages, model, tools_used if len(tools_used) > 0 else None)
         else:
-            bot_message.update_message({'clear': True})
-            bot_message.update_message({'done': True})
+            GLib.idle_add(bot_message.block_container.clear)
+            metadata_string = None
+            if self.properties.get('show_response_metadata'):
+                metadata_string = dict_to_metadata_string(response.json())
+            bot_message.finish_generation(metadata_string)
 
     def generate_response(self, bot_message, chat, messages:list, model:str, tools_used:list):
         if bot_message.options_button:
@@ -205,7 +208,7 @@ class BaseInstance:
 
         if self.properties.get('seed', 0) != 0:
             params["seed"] = self.properties.get('seed')
-
+        data = {'done': True}
         if chat.busy:
             try:
                 response = requests.post(
@@ -217,13 +220,13 @@ class BaseInstance:
                     data=json.dumps(params),
                     stream=True
                 )
-                bot_message.update_message({"clear": True})
+                GLib.idle_add(bot_message.block_container.clear)
                 if response.status_code == 200:
                     for line in response.iter_lines():
                         if line:
                             data = json.loads(line.decode('utf-8'))
-                            bot_message.update_message({"content": data.get('message', {}).get('content')})
-                        if not chat.busy:
+                            bot_message.update_message(data.get('message', {}).get('content'))
+                        if not chat.busy or data.get('done'):
                             break
                 else:
                     logger.error(response.content)
@@ -237,7 +240,10 @@ class BaseInstance:
                 logger.error(e)
                 if self.get_row():
                     self.get_row().get_parent().unselect_all()
-        bot_message.update_message({"done": True})
+        metadata_string = None
+        if self.properties.get('show_response_metadata'):
+            metadata_string = dict_to_metadata_string(data)
+        bot_message.finish_generation(metadata_string)
 
     def generate_chat_title(self, chat, prompt:str):
         if not chat.row or not chat.row.get_parent():
@@ -473,7 +479,8 @@ class OllamaManaged(BaseInstance):
             'HIP_VISIBLE_DEVICES': '1'
         },
         'think': False,
-        'share_name': 0
+        'share_name': 0,
+        'show_response_metadata': False
     }
 
     def __init__(self, instance_id:str, properties:dict):
@@ -569,7 +576,8 @@ class Ollama(BaseInstance):
         'default_model': None,
         'title_model': None,
         'think': False,
-        'share_name': 0
+        'share_name': 0,
+        'show_response_metadata': False
     }
 
     def __init__(self, instance_id:str, properties:dict):
