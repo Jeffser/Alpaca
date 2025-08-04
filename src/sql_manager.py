@@ -30,7 +30,7 @@ def nanoseconds_to_timestamp(ns:int) -> str or None:
         elif minutes > 0:
             return f'{minutes:02}:{seconds:02}'
         else:
-            return f'{seconds:02}'
+            return _('{} seconds').format(seconds)
 
 def dict_to_metadata_string(data:dict) -> str:
     metadata_parameters = {
@@ -47,7 +47,9 @@ def dict_to_metadata_string(data:dict) -> str:
         metadata_parameters[_('Eval Duration')] = nanoseconds_to_timestamp(data.get('eval_duration'))
         eval_rate = data.get('eval_count') / (data.get('eval_duration') / (10**9))
         metadata_parameters[_('Eval Rate')] = _('{} tokens/s').format(round(eval_rate, 2))
-    return '\n'.join(['{}: {}'.format(k, vl) for k, vl in metadata_parameters.items() if vl])
+    metadata_result = ['| {} | {} |'.format(_('Metric'), _('Value')), '| ---- | ---- |']
+    metadata_result += ['| {} | {} |'.format(k, vl) for k, vl in metadata_parameters.items() if vl]
+    return '\n'.join(metadata_result)
 
 def generate_uuid() -> str:
     return f"{datetime.datetime.today().strftime('%Y%m%d%H%M%S%f')}{uuid.uuid4().hex}"
