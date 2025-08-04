@@ -334,11 +334,11 @@ class Chat(Gtk.Stack):
             attachments = SQL.get_attachments(message_element)
             for attachment in attachments:
                 GLib.idle_add(
-                    lambda: message_element.add_attachment(
-                        file_id=attachment[0],
-                        name=attachment[2],
-                        attachment_type=attachment[1],
-                        content=attachment[3]
+                    lambda msg=message_element, att=attachment: msg.add_attachment(
+                        file_id=att[0],
+                        name=att[2],
+                        attachment_type=att[1],
+                        content=att[3]
                     ) and False
                 )
             GLib.idle_add(message_element.block_container.set_content, message[4])
