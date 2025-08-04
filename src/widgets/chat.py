@@ -189,7 +189,7 @@ class Notebook(Gtk.Stack):
                     message_data['images'].append(image['content'])
 
                 for attachment in message.attachment_container.get_content():
-                    if attachment.get('type') != 'thought':
+                    if attachment.get('type') not in ('thought', 'metadata'):
                         message_data['content'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
                 message_data['content'] += message.get_content()
                 messages.append(message_data)
@@ -215,7 +215,7 @@ class Notebook(Gtk.Stack):
                     'text': ''
                 })
                 for attachment in message.attachment_container.get_content():
-                    if attachment.get('type') != 'thought':
+                    if attachment.get('type') not in ('thought', 'metadata'):
                         message_data['content'][0]['text'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
                 message_data['content'][0 if ("text" in message_data["content"][0]) else 1]['text'] += message.get_content()
                 if include_metadata:
@@ -372,7 +372,7 @@ class Chat(Gtk.Stack):
                     message_data['images'].append(image['content'])
 
                 for attachment in message.attachment_container.get_content():
-                    if attachment.get('type') != 'thought':
+                    if attachment.get('type') not in ('thought', 'metadata'):
                         message_data['content'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
                 message_data['content'] += message.get_content()
                 messages.append(message_data)
@@ -396,7 +396,7 @@ class Chat(Gtk.Stack):
                     'text': ''
                 })
                 for attachment in message.attachment_container.get_content():
-                    if attachment.get('type') != 'thought':
+                    if attachment.get('type') not in ('thought', 'metadata'):
                         message_data['content'][0]['text'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
                 message_data['content'][0 if ("text" in message_data.get("content", [''])[0]) else 1]['text'] += message.get_content()
                 if include_metadata:
