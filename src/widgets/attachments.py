@@ -483,7 +483,8 @@ class ImageAttachmentContainer(Gtk.ScrolledWindow):
         )
 
         super().__init__(
-            height_request = 240,
+            height_request=240,
+            min_content_width=240,
             child=self.container,
             visible=False
         )
