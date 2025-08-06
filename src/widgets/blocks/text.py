@@ -67,8 +67,8 @@ class GeneratingText(Gtk.Overlay):
 
     def append_content(self, value:str) -> None:
         text = GLib.markup_escape_text(value)
-        GLib.idle_add(self.buffer.insert_markup, self.buffer.get_end_iter(), text, len(text.encode('utf-8')))
-        GLib.idle_add(self.process_content, value)
+        self.buffer.insert_markup(self.buffer.get_end_iter(), text, len(text.encode('utf-8')))
+        self.process_content(value)
 
     def get_content(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)

@@ -455,7 +455,7 @@ class Message(Gtk.Box):
             vadjustment = self.chat.scrolledwindow.get_vadjustment()
             if vadjustment.get_value() + 150 >= vadjustment.get_upper() - vadjustment.get_page_size():
                 GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
-            self.block_container.generating_block.append_content(content)
+            GLib.idle_add(self.block_container.generating_block.append_content, content)
 
     def finish_generation(self, response_metadata:str=None):
         self.popup.change_status(True)
@@ -469,10 +469,10 @@ class Message(Gtk.Box):
         self.chat.stop_message()
         result_text = self.get_content()
         buffer = self.block_container.generating_block.buffer
-        GLib.idle_add(self.block_container.add_content, buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
-        GLib.idle_add(self.block_container.remove_generating_block)
+        self.block_container.add_content(buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
+        self.block_container.remove_generating_block()
         self.dt = datetime.datetime.now()
-        GLib.idle_add(self.save)
+        self.save()
         GLib.idle_add(self.update_profile_picture)
         if result_text:
             dialog.show_notification(
