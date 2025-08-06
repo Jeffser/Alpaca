@@ -124,15 +124,26 @@ class BaseInstance:
                 if available_tools.get(function.get('name')):
                     response = str(available_tools.get(function.get('name')).run(function.get('arguments'), messages, bot_message))
 
+                    attachment_content = []
+
+                    if len(function.get('arguments', {})) > 0:
+                        attachment_content += [
+                            '## {}'.format(_('Arguments')),
+                            '| {} | {} |'.format(_('Argument'), _('Value')),
+                            '| --- | --- |'
+                        ]
+                        attachment_content += ['| {} | {} |'.format(k, v) for k, v in function.get('arguments', {}).items()]
+
+                    attachment_content += [
+                        '## {}'.format(_('Result')),
+                        response
+                    ]
+
                     attachment = bot_message.add_attachment(
                         file_id = generate_uuid(),
                         name = available_tools.get(function.get('name')).name,
                         attachment_type = 'tool',
-                        content = '# {}\n\n## Arguments:\n\n{}\n\n## Result:\n\n{}'.format(
-                            available_tools.get(function.get('name')).name,
-                            '\n'.join(['- {}: {}'.format(k.replace('_', ' ').title(), v) for k, v in function.get('arguments').items()]),
-                            response
-                        )
+                        content = '\n'.join(attachment_content)
                     )
                     SQL.insert_or_update_attachment(bot_message, attachment)
                     messages.append({

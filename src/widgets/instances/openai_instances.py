@@ -157,15 +157,26 @@ class BaseInstance:
                         tools.log_to_message(_("Using {}").format(call.function.name), bot_message, True)
                         if available_tools.get(call.function.name):
                             response = str(available_tools.get(call.function.name).run(json.loads(call.function.arguments), messages, bot_message))
+                            attachment_content = []
+
+                            if len(json.loads(call.function.arguments)) > 0:
+                                attachment_content += [
+                                    '## {}'.format(_('Arguments')),
+                                    '| {} | {} |'.format(_('Argument'), _('Value')),
+                                    '| --- | --- |'
+                                ]
+                                attachment_content += ['| {} | {} |'.format(k, v) for k, v in json.loads(call.function.arguments).items()]
+
+                            attachment_content += [
+                                '## {}'.format(_('Result')),
+                                response
+                            ]
+
                             attachment = bot_message.add_attachment(
                                 file_id = generate_uuid(),
                                 name = available_tools.get(call.function.name).name,
                                 attachment_type = 'tool',
-                                content = '# {}\n\n## Arguments:\n\n{}\n\n## Result:\n\n{}'.format(
-                                    available_tools.get(call.function.name).name,
-                                    '\n'.join(['- {}: {}'.format(k.replace('_', ' ').title(), v) for k, v in json.loads(call.function.arguments).items()]),
-                                    response
-                                )
+                                content = '\n'.join(attachment_content)
                             )
                             SQL.insert_or_update_attachment(bot_message, attachment)
                         else:
