@@ -44,7 +44,7 @@ class BaseInstance:
                     model
                 )
             ).start()
-        self.generate_response(bot_message, chat, messages, model, None)
+        self.generate_response(bot_message, chat, messages, model)
 
     def notebook_generation(self, bot_message, model:str, available_tools:dict):
         chat, messages = self.prepare_chat(bot_message)
