@@ -100,8 +100,6 @@ class BaseInstance:
                 )
             ).start()
 
-        tools_used = []
-
         try:
             tools.log_to_message(_("Selecting tool to use..."), bot_message, True)
             params = {
@@ -137,20 +135,23 @@ class BaseInstance:
                         )
                     )
                     SQL.insert_or_update_attachment(bot_message, attachment)
-                else:
-                    response = ''
-
-                messages.append({
-                    'role': 'tool',
-                    'content': response,
-                    'tool_calls': [tc]
-                })
-                tools_used.append({
-                    "name": function.get('name'),
-                    "arguments": function.get('arguments'),
-                    "response": response
-                })
-
+                    messages.append({
+                        'role': 'assistant',
+                        'content': '',
+                        'tool_calls': [
+                            {
+                                'function': {
+                                    'name': function.get('name'),
+                                    'arguments': function.get('arguments')
+                                }
+                            }
+                        ]
+                    })
+                    messages.append({
+                        'role': 'tool',
+                        'name': function.get('name'),
+                        'content': response
+                    })
         except Exception as e:
             dialog.simple_error(
                 parent = bot_message.get_root(),
@@ -162,7 +163,7 @@ class BaseInstance:
 
         if generate_message:
             GLib.idle_add(bot_message.block_container.remove_css_class, 'dim-label')
-            self.generate_response(bot_message, chat, messages, model, tools_used if len(tools_used) > 0 else None)
+            self.generate_response(bot_message, chat, messages, model)
         else:
             GLib.idle_add(bot_message.block_container.clear)
             metadata_string = None
@@ -170,7 +171,7 @@ class BaseInstance:
                 metadata_string = dict_to_metadata_string(response.json())
             bot_message.finish_generation(metadata_string)
 
-    def generate_response(self, bot_message, chat, messages:list, model:str, tools_used:list):
+    def generate_response(self, bot_message, chat, messages:list, model:str):
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         bot_message.block_container.prepare_generating_block()

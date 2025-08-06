@@ -458,6 +458,17 @@ class Message(Gtk.Box):
             GLib.idle_add(self.block_container.generating_block.append_content, content)
 
     def finish_generation(self, response_metadata:str=None):
+        def send_notification():
+            result_text = self.get_content()
+            if result_text:
+                dialog.show_notification(
+                    root_widget=self.get_root(),
+                    title=self.chat.get_name(),
+                    body=result_text[:200] + (result_text[200:] and '…'),
+                    icon=Gio.ThemedIcon.new('chat-message-new-symbolic')
+                )
+
+
         self.popup.change_status(True)
         if self.get_root().get_name() == 'AlpacaWindow':
             GLib.idle_add(self.chat.row.spinner.set_visible, False)
@@ -467,20 +478,14 @@ class Message(Gtk.Box):
             GLib.idle_add(self.get_root().save_button.set_sensitive, True)
 
         self.chat.stop_message()
-        result_text = self.get_content()
         buffer = self.block_container.generating_block.buffer
-        self.block_container.add_content(buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
-        self.block_container.remove_generating_block()
+        final_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
+        self.block_container.add_content(final_text)
         self.dt = datetime.datetime.now()
         self.save()
+        GLib.idle_add(self.block_container.remove_generating_block)
         GLib.idle_add(self.update_profile_picture)
-        if result_text:
-            dialog.show_notification(
-                root_widget=self.get_root(),
-                title=self.chat.get_name(),
-                body=result_text[:200] + (result_text[200:] and '…'),
-                icon=Gio.ThemedIcon.new('chat-message-new-symbolic')
-            )
+        GLib.idle_add(send_notification)
 
         if response_metadata:
             attachment = self.add_attachment(
