@@ -468,7 +468,6 @@ class Message(Gtk.Box):
                     icon=Gio.ThemedIcon.new('chat-message-new-symbolic')
                 )
 
-
         self.popup.change_status(True)
         if self.get_root().get_name() == 'AlpacaWindow':
             GLib.idle_add(self.chat.row.spinner.set_visible, False)
@@ -482,10 +481,10 @@ class Message(Gtk.Box):
         final_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
         self.block_container.add_content(final_text)
         self.dt = datetime.datetime.now()
-        self.save()
         GLib.idle_add(self.block_container.remove_generating_block)
         GLib.idle_add(self.update_profile_picture)
         GLib.idle_add(send_notification)
+        GLib.idle_add(self.save)
 
         if response_metadata:
             attachment = self.add_attachment(
