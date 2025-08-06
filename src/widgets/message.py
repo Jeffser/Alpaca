@@ -7,7 +7,7 @@ import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GtkSource, Spelling
 import os, datetime, threading, sys, base64, logging, re, tempfile
 from ..sql_manager import prettify_model_name, generate_uuid, Instance as SQL
-from . import attachments, blocks, dialog, voice
+from . import attachments, blocks, dialog, voice, tools
 
 logger = logging.getLogger(__name__)
 
@@ -99,6 +99,7 @@ class OptionPopup(Gtk.Popover):
     def regenerate_message(self):
         chat = self.message_element.chat
         model = self.get_root().get_selected_model().get_name()
+        is_tool = any(a.file_type == 'tool' for a in list(self.message_element.attachment_container.container))
         for att in list(self.message_element.image_attachment_container.container):
             SQL.delete_attachment(att)
             att.get_parent().remove(att)
@@ -110,7 +111,24 @@ class OptionPopup(Gtk.Popover):
             self.message_element.author = model
             self.message_element.update_profile_picture()
             self.message_element.popup.change_status(False)
-            threading.Thread(target=self.message_element.get_root().get_current_instance().generate_message, args=(self.message_element, model)).start()
+            if is_tool:
+                threading.Thread(
+                    target=self.get_root().get_current_instance().use_tools,
+                    args=(
+                        self.message_element,
+                        model,
+                        tools.get_enabled_tools(self.get_root().get_application().main_alpaca_window.tool_listbox),
+                        True
+                    )
+                ).start()
+            else:
+                threading.Thread(
+                    target=self.message_element.get_root().get_current_instance().generate_message,
+                    args=(
+                        self.message_element,
+                        model
+                    )
+                ).start()
         else:
             dialog.show_toast(_("Message cannot be regenerated while receiving a response"), self.get_root())
 
