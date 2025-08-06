@@ -221,11 +221,11 @@ class GetCurrentDatetime(Base):
     def run(self, arguments, messages, bot_message) -> str:
         formats = {
             "date": "%A, %B %d %Y",
-            "time": "%H:%M %p",
-            "date and time": "%A, %B %d %Y, %H:%M %p"
+            "time": "%H:%M",
+            "date and time": "%A, %B %d %Y, %H:%M"
         }
         type_to_get = arguments.get("type", "date and time")
-        format_to_get = formats.get(arguments.get("type", "date and time"), "%b %d %Y, %H:%M %p")
+        format_to_get = formats.get(type_to_get, "%b %d %Y, %H:%M")
         current_datetime = datetime.datetime.now().strftime(format_to_get)
         return current_datetime
 
