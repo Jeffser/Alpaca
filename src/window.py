@@ -262,7 +262,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         buffer = self.global_footer.get_buffer()
 
         raw_message = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
-        if not raw_message:
+        if not raw_message.strip():
             return
 
         current_chat = self.chat_list_box.get_selected_row().chat
