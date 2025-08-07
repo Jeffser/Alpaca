@@ -24,12 +24,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
 
     @Gtk.Template.Callback()
     def zoom_changed(self, spinner):
-        gtk_settings = Gtk.Settings.get_default()
-        gtk_settings.reset_property('gtk-xft-dpi')
-        zoom_value = int(spinner.get_value())
-        baseline_dpi = 96 * 1024
-        dpi = baseline_dpi + (zoom_value - 100) * 400
-        gtk_settings.set_property('gtk-xft-dpi', dpi)
+        set_zoom(int(spinner.get_value()))
 
     def __init__(self):
         super().__init__()
@@ -72,3 +67,26 @@ class PreferencesDialog(Adw.PreferencesDialog):
         if sys.platform in ('win32', 'darwin'): # MacOS and Windows
             self.powersaver_warning_switch.set_visible(False)
             self.background_switch.set_visible(False)
+
+def get_zoom():
+    settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
+    return settings.get_value('zoom').unpack() or 100
+
+def set_zoom(new_value):
+    new_value = max(100, min(200, new_value))
+    new_value = (new_value // 10) * 10  # Snap to nearest 10
+    settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
+    settings.set_int('zoom', new_value)
+
+    # Baseline DPI is 96*1024 (at 100%)
+    # Always recalculate from baseline
+    gtk_settings = Gtk.Settings.get_default()
+    gtk_settings.reset_property('gtk-xft-dpi')
+    dpi = (96 * 1024) + (new_value - 100) * 400
+    gtk_settings.set_property('gtk-xft-dpi', dpi)
+
+def zoom_in(*_):
+    set_zoom(get_zoom() + 10)
+
+def zoom_out(*_):
+    set_zoom(get_zoom() - 10)
