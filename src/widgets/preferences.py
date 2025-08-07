@@ -24,9 +24,12 @@ class PreferencesDialog(Adw.PreferencesDialog):
 
     @Gtk.Template.Callback()
     def zoom_changed(self, spinner):
-        settings = Gtk.Settings.get_default()
-        settings.reset_property('gtk-xft-dpi')
-        settings.set_property('gtk-xft-dpi',  settings.get_property('gtk-xft-dpi') + (int(spinner.get_value()) - 100) * 400)
+        gtk_settings = Gtk.Settings.get_default()
+        gtk_settings.reset_property('gtk-xft-dpi')
+        zoom_value = int(spinner.get_value())
+        baseline_dpi = 96 * 1024
+        dpi = baseline_dpi + (zoom_value - 100) * 400
+        gtk_settings.set_property('gtk-xft-dpi', dpi)
 
     def __init__(self):
         super().__init__()

@@ -527,6 +527,29 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 options=options
             ).show(self)
 
+    def get_zoom(self):
+        settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
+        return settings.get_int('zoom') if settings.get_int('zoom') else 100
+
+    def set_zoom(self, new_value):
+        new_value = max(100, min(200, new_value))
+        new_value = (new_value // 10) * 10  # Snap to nearest 10
+        settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
+        settings.set_int('zoom', new_value)
+
+        # Baseline DPI is 96*1024 (at 100%)
+        # Always recalculate from baseline
+        gtk_settings = Gtk.Settings.get_default()
+        gtk_settings.reset_property('gtk-xft-dpi')
+        dpi = (96 * 1024) + (new_value - 100) * 400
+        gtk_settings.set_property('gtk-xft-dpi', dpi)
+
+    def zoom_in(self, *_):
+        self.set_zoom(self.get_zoom() + 10)
+
+    def zoom_out(self, *_):
+        self.set_zoom(self.get_zoom() - 10)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -591,7 +614,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'start_live_chat': [lambda *_: self.start_live_chat(), ['<primary><alt>l']],
             'model_creator_existing': [lambda *_: Widgets.models.common.prompt_existing(self)],
             'model_creator_gguf': [lambda *_: Widgets.models.common.prompt_gguf(self)],
-            'preferences': [lambda *_: Widgets.preferences.PreferencesDialog().present(self), ['<primary>comma']]
+            'preferences': [lambda *_: Widgets.preferences.PreferencesDialog().present(self), ['<primary>comma']],
+            'zoom_in': [lambda *_: self.zoom_in(), ['<primary>plus']],
+            'zoom_out': [lambda *_: self.zoom_out(), ['<primary>minus']]
         }
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
