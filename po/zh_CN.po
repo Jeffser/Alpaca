@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 7.5.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-30 18:14-0600\n"
+"POT-Creation-Date: 2025-08-07 16:56-0600\n"
 "PO-Revision-Date: 2025-07-28 23:08+0200\n"
 "Last-Translator: Yuehao Sui <8ar10der@amao.run>\n"
 "Language-Team: Chinese (China)\n"
@@ -592,27 +592,27 @@ msgstr ""
 msgid "New Tools"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:353 src/widgets/tools/tools.py:491
+#: data/com.jeffser.Alpaca.metainfo.xml.in:353 src/widgets/tools/tools.py:492
 msgid "Run Command (Testing)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:354 src/widgets/tools/tools.py:407
+#: data/com.jeffser.Alpaca.metainfo.xml.in:354 src/widgets/tools/tools.py:408
 msgid "Online Search"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:355 src/widgets/tools/tools.py:366
+#: data/com.jeffser.Alpaca.metainfo.xml.in:355 src/widgets/tools/tools.py:365
 msgid "Extract Wikipedia Article"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:356 src/widgets/tools/tools.py:250
+#: data/com.jeffser.Alpaca.metainfo.xml.in:356 src/widgets/tools/tools.py:249
 msgid "Get Recipe by Name"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:357 src/widgets/tools/tools.py:310
+#: data/com.jeffser.Alpaca.metainfo.xml.in:357 src/widgets/tools/tools.py:309
 msgid "Get Recipes by Category"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:358 src/widgets/tools/tools.py:218
+#: data/com.jeffser.Alpaca.metainfo.xml.in:358 src/widgets/tools/tools.py:217
 msgid "Get Current Datetime"
 msgstr ""
 
@@ -3457,6 +3457,62 @@ msgstr ""
 msgid "Quick Ask"
 msgstr "快速提问"
 
+#: src/sql_manager.py:33
+#, python-brace-format
+msgid "{} seconds"
+msgstr ""
+
+#: src/sql_manager.py:37
+msgid "Total Duration"
+msgstr ""
+
+#: src/sql_manager.py:38
+msgid "Load Duration"
+msgstr ""
+
+#: src/sql_manager.py:41
+msgid "Prompt Eval Count"
+msgstr ""
+
+#: src/sql_manager.py:41 src/sql_manager.py:46
+#, python-brace-format
+msgid "{} tokens"
+msgstr ""
+
+#: src/sql_manager.py:42
+msgid "Prompt Eval Duration"
+msgstr ""
+
+#: src/sql_manager.py:44
+msgid "Prompt Eval Rate"
+msgstr ""
+
+#: src/sql_manager.py:44 src/sql_manager.py:49
+#, python-brace-format
+msgid "{} tokens/s"
+msgstr ""
+
+#: src/sql_manager.py:46
+msgid "Eval Count"
+msgstr ""
+
+#: src/sql_manager.py:47
+msgid "Eval Duration"
+msgstr ""
+
+#: src/sql_manager.py:49
+msgid "Eval Rate"
+msgstr ""
+
+#: src/sql_manager.py:50
+msgid "Metric"
+msgstr ""
+
+#: src/sql_manager.py:50 src/widgets/instances/ollama_instances.py:132
+#: src/widgets/instances/openai_instances.py:165
+msgid "Value"
+msgstr ""
+
 #: src/window.py:94
 msgid "Ollama Was Not Found"
 msgstr "未找到 Ollama"
@@ -3487,9 +3543,9 @@ msgstr "选择要添加的实例类型"
 #: src/widgets/dialog.py:210 src/widgets/dialog.py:223 src/widgets/voice.py:307
 #: src/widgets/voice.py:310 src/widgets/models/added.py:409
 #: src/widgets/models/creator.py:140 src/widgets/models/creator.py:141
-#: src/widgets/instances/__init__.py:252 src/widgets/instances/__init__.py:253
+#: src/widgets/instances/__init__.py:263 src/widgets/instances/__init__.py:264
 #: src/widgets/blocks/code.py:138 src/widgets/blocks/text.py:151
-#: src/widgets/tools/tools.py:98 src/widgets/tools/tools.py:99
+#: src/widgets/tools/tools.py:97 src/widgets/tools/tools.py:98
 msgid "Cancel"
 msgstr "取消"
 
@@ -3523,11 +3579,11 @@ msgstr "请在对话前先选择一个模型"
 
 #: src/window.py:421 src/gtk/window.ui:51 src/gtk/window.ui:640
 #: src/widgets/chat.py:231 src/widgets/instances/ollama_instances.py:38
-#: src/widgets/instances/ollama_instances.py:54
-#: src/widgets/instances/ollama_instances.py:91
+#: src/widgets/instances/ollama_instances.py:55
+#: src/widgets/instances/ollama_instances.py:93
 #: src/widgets/instances/openai_instances.py:68
-#: src/widgets/instances/openai_instances.py:79
-#: src/widgets/instances/openai_instances.py:121
+#: src/widgets/instances/openai_instances.py:86
+#: src/widgets/instances/openai_instances.py:135
 msgid "New Chat"
 msgstr "新对话"
 
@@ -3606,77 +3662,87 @@ msgstr "切换侧边栏"
 
 #: src/gtk/help-overlay.ui:56
 msgctxt "shortcut window"
+msgid "Zoom In"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:62
+msgctxt "shortcut window"
+msgid "Zoom Out"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "退出"
 
-#: src/gtk/help-overlay.ui:64
+#: src/gtk/help-overlay.ui:76
 msgctxt "shortcut window"
 msgid "Chat Management"
 msgstr "对话管理"
 
-#: src/gtk/help-overlay.ui:67
+#: src/gtk/help-overlay.ui:79
 msgctxt "shortcut window"
 msgid "Create Chat"
 msgstr "创建对话"
 
-#: src/gtk/help-overlay.ui:73
+#: src/gtk/help-overlay.ui:85
 msgctxt "shortcut window"
 msgid "Delete Chat"
 msgstr "删除对话"
 
-#: src/gtk/help-overlay.ui:79
+#: src/gtk/help-overlay.ui:91
 msgctxt "shortcut window"
 msgid "Clear Chat"
 msgstr "清除对话"
 
-#: src/gtk/help-overlay.ui:85
+#: src/gtk/help-overlay.ui:97
 msgctxt "shortcut window"
 msgid "Rename Chat"
 msgstr "重命名对话"
 
-#: src/gtk/help-overlay.ui:91
+#: src/gtk/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Toggle Searchbars"
 msgstr "切换搜索栏"
 
-#: src/gtk/help-overlay.ui:99
+#: src/gtk/help-overlay.ui:111
 msgctxt "shortcut window"
 msgid "Message Entry"
 msgstr "消息输入框"
 
-#: src/gtk/help-overlay.ui:102
+#: src/gtk/help-overlay.ui:114
 msgid "Copy"
 msgstr "复制"
 
-#: src/gtk/help-overlay.ui:108
+#: src/gtk/help-overlay.ui:120
 msgid "Paste"
 msgstr "粘贴"
 
-#: src/gtk/help-overlay.ui:114
+#: src/gtk/help-overlay.ui:126
 msgid "Open Emoji Menu"
 msgstr "打开 Emoji 目录"
 
-#: src/gtk/help-overlay.ui:120
+#: src/gtk/help-overlay.ui:132
 msgid "Insert new line"
 msgstr "插入新行"
 
-#: src/gtk/help-overlay.ui:126
+#: src/gtk/help-overlay.ui:138
 msgid "Send Message as System"
 msgstr "以系统身份发送消息"
 
-#: src/gtk/help-overlay.ui:127
+#: src/gtk/help-overlay.ui:139
 msgid "System messages are taken as literal instructions by models"
 msgstr "系统消息会被模型视为严格的指令"
 
-#: src/gtk/help-overlay.ui:133 src/widgets/message.py:627
+#: src/gtk/help-overlay.ui:145 src/widgets/message.py:652
 msgid "Use Tools"
 msgstr "使用工具"
 
-#: src/gtk/help-overlay.ui:134
+#: src/gtk/help-overlay.ui:146
 msgid "Ask model to use tools to generate a message"
 msgstr "要求模型调用工具生成消息"
 
-#: src/gtk/help-overlay.ui:140
+#: src/gtk/help-overlay.ui:152
 msgid "Send Message as User"
 msgstr "以用户身份发送消息"
 
@@ -4198,47 +4264,47 @@ msgstr "删除图像？"
 msgid "Save Image"
 msgstr "保存图像"
 
-#: src/widgets/attachments.py:585
+#: src/widgets/attachments.py:586
 msgid "Any compatible Alpaca attachment"
 msgstr "任何与 Alpaca 兼容的附件"
 
-#: src/widgets/attachments.py:634 src/widgets/message.py:551
+#: src/widgets/attachments.py:635 src/widgets/message.py:576
 msgid "Image recognition is only available on specific models"
 msgstr "图像识别功能仅适用于特定模型"
 
-#: src/widgets/attachments.py:660
+#: src/widgets/attachments.py:661
 msgid "Attach File"
 msgstr "附加文件"
 
-#: src/widgets/attachments.py:665
+#: src/widgets/attachments.py:666
 msgid "Attach Website"
 msgstr "附加网站"
 
-#: src/widgets/attachments.py:668 src/widgets/message.py:531
+#: src/widgets/attachments.py:669 src/widgets/message.py:556
 msgid "Attach Website? (Experimental)"
 msgstr "附加网站？（试验性）"
 
-#: src/widgets/attachments.py:669
+#: src/widgets/attachments.py:670
 msgid "Please enter a website URL"
 msgstr "请输入一个网站地址"
 
-#: src/widgets/attachments.py:676
+#: src/widgets/attachments.py:677
 msgid "Attach YouTube Captions"
 msgstr "附加 YouTube 字幕"
 
-#: src/widgets/attachments.py:679
+#: src/widgets/attachments.py:680
 msgid "Attach YouTube Captions?"
 msgstr "附加上 YouTube 字幕？"
 
-#: src/widgets/attachments.py:680
+#: src/widgets/attachments.py:681
 msgid "Please enter a YouTube video URL"
 msgstr "请输入一个YouTube视频地址"
 
-#: src/widgets/attachments.py:691
+#: src/widgets/attachments.py:692
 msgid "Attach Screenshot"
 msgstr "附加屏幕截图"
 
-#: src/widgets/attachments.py:698
+#: src/widgets/attachments.py:699
 msgid "Attach Photo From Camera"
 msgstr "从相机附加照片"
 
@@ -4254,8 +4320,8 @@ msgstr "未检测到相机"
 msgid "Please check if camera is plugged in and turned on"
 msgstr "请检查相机是否已插入并开启"
 
-#: src/widgets/chat.py:86 src/widgets/instances/ollama_instances.py:76
-#: src/widgets/instances/openai_instances.py:106
+#: src/widgets/chat.py:86 src/widgets/instances/ollama_instances.py:78
+#: src/widgets/instances/openai_instances.py:120
 msgid "Notebook"
 msgstr "笔记"
 
@@ -4371,23 +4437,27 @@ msgstr "重新生成消息"
 msgid "Message copied to the clipboard"
 msgstr "消息已复制到剪切板"
 
-#: src/widgets/message.py:115
+#: src/widgets/message.py:133
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "当收到回复时无法重新生成信息"
 
-#: src/widgets/message.py:246 src/widgets/message.py:269
+#: src/widgets/message.py:264 src/widgets/message.py:287
 msgid "Thought"
 msgstr "思考\t"
 
-#: src/widgets/message.py:524
+#: src/widgets/message.py:492
+msgid "Metadata"
+msgstr ""
+
+#: src/widgets/message.py:549
 msgid "Attach YouTube Video?"
 msgstr "附加 YouTube 视频？"
 
-#: src/widgets/message.py:525
+#: src/widgets/message.py:550
 msgid "Note that YouTube might block access to captions, please check output"
 msgstr "注意：YouTube 可能会阻止访问字幕，请检查输出"
 
-#: src/widgets/message.py:532
+#: src/widgets/message.py:557
 #, python-brace-format
 msgid ""
 "Are you sure you want to attach\n"
@@ -4396,19 +4466,19 @@ msgstr ""
 "您确定要附加\n"
 "'{}'?"
 
-#: src/widgets/message.py:580
+#: src/widgets/message.py:605
 msgid "Send Message"
 msgstr "发送消息"
 
-#: src/widgets/message.py:589
+#: src/widgets/message.py:614
 msgid "Stop Message"
 msgstr "停止消息"
 
-#: src/widgets/message.py:617
+#: src/widgets/message.py:642
 msgid "Send as User"
 msgstr "以用户身份发送"
 
-#: src/widgets/message.py:622
+#: src/widgets/message.py:647
 msgid "Send as System"
 msgstr "以系统身份发送"
 
@@ -4552,7 +4622,7 @@ msgstr "语言"
 
 #: src/widgets/models/added.py:410 src/widgets/models/added.py:459
 #: src/widgets/models/speech.py:136 src/widgets/models/speech.py:279
-#: src/widgets/instances/__init__.py:396
+#: src/widgets/instances/__init__.py:408
 msgid "Remove"
 msgstr "移除"
 
@@ -4701,9 +4771,9 @@ msgid "A higher number widens the amount of possible answers. (top_p)"
 msgstr "较高的数字会增加可能的答案范围。（top_p）"
 
 #: src/widgets/models/creator.py:147 src/widgets/models/creator.py:148
-#: src/widgets/instances/__init__.py:259 src/widgets/instances/__init__.py:260
+#: src/widgets/instances/__init__.py:270 src/widgets/instances/__init__.py:271
 #: src/widgets/blocks/code.py:147 src/widgets/blocks/text.py:160
-#: src/widgets/tools/tools.py:105 src/widgets/tools/tools.py:106
+#: src/widgets/tools/tools.py:104 src/widgets/tools/tools.py:105
 msgid "Save"
 msgstr "保存"
 
@@ -4771,112 +4841,127 @@ msgstr "OpenAI Whisper 提供的本地语音转文本（STT）模型"
 msgid "Speech to Text"
 msgstr "语言转文本"
 
-#: src/widgets/instances/ollama_instances.py:68
-#: src/widgets/instances/openai_instances.py:98
+#: src/widgets/instances/ollama_instances.py:70
+#: src/widgets/instances/openai_instances.py:112
 msgid "Notebook Error"
 msgstr "笔记本发生错误"
 
-#: src/widgets/instances/ollama_instances.py:69
-#: src/widgets/instances/ollama_instances.py:155
-#: src/widgets/instances/openai_instances.py:99
-#: src/widgets/instances/openai_instances.py:169
+#: src/widgets/instances/ollama_instances.py:71
+#: src/widgets/instances/ollama_instances.py:170
+#: src/widgets/instances/openai_instances.py:113
+#: src/widgets/instances/openai_instances.py:201
 msgid "An error occurred while running tool"
 msgstr "运行工具过程中发生错误"
 
-#: src/widgets/instances/ollama_instances.py:103
-#: src/widgets/instances/openai_instances.py:127
+#: src/widgets/instances/ollama_instances.py:104
+#: src/widgets/instances/openai_instances.py:148
 msgid "Selecting tool to use..."
 msgstr "正在选择使用工具…"
 
-#: src/widgets/instances/ollama_instances.py:122
-#: src/widgets/instances/openai_instances.py:136
+#: src/widgets/instances/ollama_instances.py:123
+#: src/widgets/instances/openai_instances.py:157
 #, python-brace-format
 msgid "Using {}"
 msgstr "正在使用 {}"
 
-#: src/widgets/instances/ollama_instances.py:154
-#: src/widgets/instances/openai_instances.py:168
+#: src/widgets/instances/ollama_instances.py:131
+#: src/widgets/instances/openai_instances.py:164 src/widgets/tools/tools.py:34
+msgid "Arguments"
+msgstr "参量"
+
+#: src/widgets/instances/ollama_instances.py:132
+#: src/widgets/instances/openai_instances.py:165
+msgid "Argument"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:138
+#: src/widgets/instances/openai_instances.py:171
+msgid "Result"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:169
+#: src/widgets/instances/openai_instances.py:200
 msgid "Tool Error"
 msgstr "工具错误"
 
-#: src/widgets/instances/ollama_instances.py:233
-#: src/widgets/instances/ollama_instances.py:325
-#: src/widgets/instances/ollama_instances.py:339
-#: src/widgets/instances/ollama_instances.py:549
-#: src/widgets/instances/openai_instances.py:230
-#: src/widgets/instances/openai_instances.py:302
-#: src/widgets/instances/openai_instances.py:357
-#: src/widgets/instances/openai_instances.py:402
-#: src/widgets/instances/openai_instances.py:462
-#: src/widgets/instances/openai_instances.py:501
-#: src/widgets/instances/openai_instances.py:534
+#: src/widgets/instances/ollama_instances.py:251
+#: src/widgets/instances/ollama_instances.py:347
+#: src/widgets/instances/ollama_instances.py:361
+#: src/widgets/instances/ollama_instances.py:572
+#: src/widgets/instances/openai_instances.py:262
+#: src/widgets/instances/openai_instances.py:334
+#: src/widgets/instances/openai_instances.py:389
+#: src/widgets/instances/openai_instances.py:434
+#: src/widgets/instances/openai_instances.py:494
+#: src/widgets/instances/openai_instances.py:533
+#: src/widgets/instances/openai_instances.py:566
 msgid "Instance Error"
 msgstr "实例错误"
 
-#: src/widgets/instances/ollama_instances.py:234
-#: src/widgets/instances/openai_instances.py:231
+#: src/widgets/instances/ollama_instances.py:252
+#: src/widgets/instances/openai_instances.py:263
 msgid "Message generation failed"
 msgstr "消息生成失败"
 
-#: src/widgets/instances/ollama_instances.py:326
-#: src/widgets/instances/openai_instances.py:303
-#: src/widgets/instances/openai_instances.py:358
-#: src/widgets/instances/openai_instances.py:403
+#: src/widgets/instances/ollama_instances.py:348
+#: src/widgets/instances/openai_instances.py:335
+#: src/widgets/instances/openai_instances.py:390
+#: src/widgets/instances/openai_instances.py:435
 msgid "Could not retrieve added models"
 msgstr "无法检索到已添加的模型"
 
-#: src/widgets/instances/ollama_instances.py:340
+#: src/widgets/instances/ollama_instances.py:362
 msgid "Could not retrieve available models"
 msgstr "无法检索到可用的模型"
 
-#: src/widgets/instances/ollama_instances.py:458
+#: src/widgets/instances/ollama_instances.py:480
 msgid "Ollama (Managed)"
 msgstr "Ollama（托管版）"
 
-#: src/widgets/instances/ollama_instances.py:459
+#: src/widgets/instances/ollama_instances.py:481
 msgid "Local AI instance managed directly by Alpaca"
 msgstr "由 Alpaca 托管的本地 AI 实例"
 
-#: src/widgets/instances/ollama_instances.py:462
-#: src/widgets/instances/ollama_instances.py:564
-#: src/widgets/instances/__init__.py:283
+#: src/widgets/instances/ollama_instances.py:484
+#: src/widgets/instances/ollama_instances.py:587
+#: src/widgets/instances/__init__.py:294
 msgid "Instance"
 msgstr "实例"
 
-#: src/widgets/instances/ollama_instances.py:494
+#: src/widgets/instances/ollama_instances.py:517
 msgid "Alpaca Support"
 msgstr "Alpaca 支持文档"
 
-#: src/widgets/instances/ollama_instances.py:501
+#: src/widgets/instances/ollama_instances.py:524
 msgid "Model request too large for system"
 msgstr "模型需求太大，超出系统处理能力"
 
-#: src/widgets/instances/ollama_instances.py:504
+#: src/widgets/instances/ollama_instances.py:527
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
 msgstr "检测到 AMD GPU，但未安装支持扩展，Ollama 将使用 CPU。"
 
-#: src/widgets/instances/ollama_instances.py:506
+#: src/widgets/instances/ollama_instances.py:529
 msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
 msgstr "检测到 AMD GPU，但缺少 ROCm，Ollama 将使用 CPU。"
 
-#: src/widgets/instances/ollama_instances.py:508
+#: src/widgets/instances/ollama_instances.py:531
 #, python-brace-format
 msgid "Using AMD GPU type '{}'"
 msgstr "使用 AMD GPU 类型 '{}'"
 
-#: src/widgets/instances/ollama_instances.py:518
+#: src/widgets/instances/ollama_instances.py:541
 msgid "Integrated Ollama instance is not running"
 msgstr "集成的 Ollama 实例未运行"
 
-#: src/widgets/instances/ollama_instances.py:550
+#: src/widgets/instances/ollama_instances.py:573
 msgid "Managed Ollama instance failed to start"
 msgstr "托管的 Ollama 实例启动失败"
 
-#: src/widgets/instances/ollama_instances.py:556
+#: src/widgets/instances/ollama_instances.py:579
 msgid "Integrated Ollama instance is running"
 msgstr "集成的 Ollama 实例正在运行"
 
-#: src/widgets/instances/ollama_instances.py:561
+#: src/widgets/instances/ollama_instances.py:584
 msgid "Local or remote AI instance not managed by Alpaca"
 msgstr "本地或远程AI实例不由Alpaca管理"
 
@@ -4884,61 +4969,61 @@ msgstr "本地或远程AI实例不由Alpaca管理"
 msgid "Instances"
 msgstr "实例"
 
-#: src/widgets/instances/openai_instances.py:175
+#: src/widgets/instances/openai_instances.py:207
 msgid "Generating message..."
 msgstr "正在生成消息..."
 
-#: src/widgets/instances/openai_instances.py:463
-#: src/widgets/instances/openai_instances.py:502
-#: src/widgets/instances/openai_instances.py:535
+#: src/widgets/instances/openai_instances.py:495
+#: src/widgets/instances/openai_instances.py:534
+#: src/widgets/instances/openai_instances.py:567
 msgid "Could not retrieve models"
 msgstr "无法获取模型列表"
 
-#: src/widgets/instances/openai_instances.py:475
+#: src/widgets/instances/openai_instances.py:507
 msgid "Alibaba Cloud Qwen large language models via DashScope"
 msgstr "通过 DashScope 使用阿里云 Qwen 大语言模型"
 
-#: src/widgets/instances/openai_instances.py:481
+#: src/widgets/instances/openai_instances.py:513
 msgid "Fireworks AI inference platform"
 msgstr "Fireworks AI 推理平台"
 
-#: src/widgets/instances/openai_instances.py:514
+#: src/widgets/instances/openai_instances.py:546
 msgid "Lambda Labs cloud inference API"
 msgstr "Lambda Labs 云端推理 API"
 
-#: src/widgets/instances/openai_instances.py:547
+#: src/widgets/instances/openai_instances.py:579
 msgid "Cerebras AI cloud inference API"
 msgstr "Cerebras AI 云端推理API"
 
-#: src/widgets/instances/openai_instances.py:553
+#: src/widgets/instances/openai_instances.py:585
 msgid "Kluster AI cloud inference API"
 msgstr "Kluster AI 云端推理API"
 
-#: src/widgets/instances/openai_instances.py:559
+#: src/widgets/instances/openai_instances.py:591
 msgid "Kimi large language models by Moonshot AI"
 msgstr "由 Moonshot AI 开发的 Kimi 大语言模型"
 
-#: src/widgets/instances/openai_instances.py:566
+#: src/widgets/instances/openai_instances.py:598
 msgid "Mistral AI large language models"
 msgstr "Mistral AI 大语言模型"
 
-#: src/widgets/instances/openai_instances.py:573
+#: src/widgets/instances/openai_instances.py:605
 msgid "Meta AI Llama API"
 msgstr "Meta AI Llama API"
 
-#: src/widgets/instances/openai_instances.py:579
+#: src/widgets/instances/openai_instances.py:611
 msgid "Novita AI cloud inference API"
 msgstr "Novita AI 云端推理 API"
 
-#: src/widgets/instances/openai_instances.py:586
+#: src/widgets/instances/openai_instances.py:618
 msgid "DeepInfra cloud inference API"
 msgstr "DeepInfra AI 云端推理 API"
 
-#: src/widgets/instances/openai_instances.py:590
+#: src/widgets/instances/openai_instances.py:622
 msgid "OpenAI Compatible Instance"
 msgstr "兼容 OpenAI 的实例"
 
-#: src/widgets/instances/openai_instances.py:592
+#: src/widgets/instances/openai_instances.py:624
 msgid "AI instance compatible with OpenAI library"
 msgstr "兼容 OpenAI 库的 AI 实例"
 
@@ -4978,8 +5063,8 @@ msgstr "思维处理"
 #: src/widgets/instances/__init__.py:98
 msgid ""
 "Have compatible reasoning models think about their response before "
-"generating a message"
-msgstr "让兼容的推理模型在生成消息前对回应进行思考"
+"generating a message."
+msgstr ""
 
 #: src/widgets/instances/__init__.py:105
 msgid "Share Name"
@@ -4989,11 +5074,31 @@ msgstr "分享名称"
 msgid "Automatically share your name with the AI models."
 msgstr "自动向 AI 模型分享你的名称。"
 
+#: src/widgets/instances/__init__.py:111
+msgid "Do Not Share"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:112 src/widgets/tools/tools.py:501
+msgid "Username"
+msgstr "用户名"
+
+#: src/widgets/instances/__init__.py:113
+msgid "Full Name"
+msgstr ""
+
 #: src/widgets/instances/__init__.py:121
+msgid "Show Response Metadata"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:122
+msgid "Add the option to show reply metadata in the message as an attachment."
+msgstr ""
+
+#: src/widgets/instances/__init__.py:129
 msgid "Max Tokens"
 msgstr "最大tokens数"
 
-#: src/widgets/instances/__init__.py:122
+#: src/widgets/instances/__init__.py:130
 msgid ""
 "Defines the maximum number of tokens (words + spaces) the AI can generate in "
 "a response. More tokens allow longer replies but may take more time and cost "
@@ -5002,75 +5107,79 @@ msgstr ""
 "定义了 AI 在响应中可以生成的最大 token 数（单词+空格）。更多的 token 允许更长"
 "的回复，但可能需要更多的时间并产生更高的成本。"
 
-#: src/widgets/instances/__init__.py:137
+#: src/widgets/instances/__init__.py:145
 msgid "Temperature"
 msgstr "温度（随机性控制参数）"
 
-#: src/widgets/instances/__init__.py:138
+#: src/widgets/instances/__init__.py:146
 msgid "Increasing the temperature will make the models answer more creatively."
 msgstr "提高温度会使模型的回答更具创造性。"
 
-#: src/widgets/instances/__init__.py:153
+#: src/widgets/instances/__init__.py:161
 msgid "Seed"
 msgstr "种子值"
 
-#: src/widgets/instances/__init__.py:154
+#: src/widgets/instances/__init__.py:162
 msgid ""
 "Setting this to a specific number other than 0 will make the model generate "
 "the same text for the same prompt."
 msgstr "将其设置为除0以外的具体数字可以确保在相同提示下模型生成相同的文本。"
 
-#: src/widgets/instances/__init__.py:169
+#: src/widgets/instances/__init__.py:177
 msgid "Overrides"
 msgstr "覆盖设置"
 
-#: src/widgets/instances/__init__.py:170
+#: src/widgets/instances/__init__.py:178
 msgid ""
 "These entries are optional, they are used to troubleshoot GPU related "
 "problems with Ollama."
 msgstr "这些条目是可选的，它们用于排查与 Ollama 相关的 GPU 问题。"
 
-#: src/widgets/instances/__init__.py:192
+#: src/widgets/instances/__init__.py:200
 msgid "Model Directory"
 msgstr "模型目录"
 
-#: src/widgets/instances/__init__.py:197
+#: src/widgets/instances/__init__.py:205
 msgid "Select Directory"
 msgstr "选择目录"
 
-#: src/widgets/instances/__init__.py:217
+#: src/widgets/instances/__init__.py:225
 msgid "Default Model"
 msgstr "默认模型"
 
-#: src/widgets/instances/__init__.py:218
+#: src/widgets/instances/__init__.py:226
 msgid "Model to select when starting a new chat."
 msgstr "启动新聊天时选择的模型。"
 
-#: src/widgets/instances/__init__.py:225
+#: src/widgets/instances/__init__.py:233
 msgid "Title Model"
 msgstr "标题模型"
 
-#: src/widgets/instances/__init__.py:226
+#: src/widgets/instances/__init__.py:234
 msgid "Model to use when generating a chat title."
 msgstr "生成聊天标题时使用的模型。"
 
-#: src/widgets/instances/__init__.py:277
+#: src/widgets/instances/__init__.py:242
+msgid "Use Current Model"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:288
 msgid "Edit Instance"
 msgstr "编辑实例"
 
-#: src/widgets/instances/__init__.py:277
+#: src/widgets/instances/__init__.py:288
 msgid "Create Instance"
 msgstr "创建实例"
 
-#: src/widgets/instances/__init__.py:353
+#: src/widgets/instances/__init__.py:365
 msgid "Fallback Instance"
 msgstr "备用实例"
 
-#: src/widgets/instances/__init__.py:393
+#: src/widgets/instances/__init__.py:405
 msgid "Remove Instance?"
 msgstr "移除实例？"
 
-#: src/widgets/instances/__init__.py:394
+#: src/widgets/instances/__init__.py:406
 msgid "Are you sure you want to remove this instance?"
 msgstr "您确定要移除这个实例吗？"
 
@@ -5130,163 +5239,160 @@ msgstr "追加笔记本内容"
 msgid "Appends text to the notebook."
 msgstr "向笔记本追加文本"
 
-#: src/widgets/tools/tools.py:22
+#: src/widgets/tools/tools.py:21
 msgid "AI Description"
 msgstr "AI 描述说明"
 
-#: src/widgets/tools/tools.py:23
+#: src/widgets/tools/tools.py:22
 msgid "The description the AI model will use to understand what the tool does."
 msgstr "AI 模型用于理解工具功能的描述说明"
 
 #: src/widgets/tools/tools.py:35
-msgid "Arguments"
-msgstr "参量"
-
-#: src/widgets/tools/tools.py:36
 msgid "Variables that are filled by the AI."
 msgstr "由 AI 填充的变量"
 
-#: src/widgets/tools/tools.py:49
+#: src/widgets/tools/tools.py:48
 msgid "Variables"
 msgstr "变量"
 
-#: src/widgets/tools/tools.py:50
+#: src/widgets/tools/tools.py:49
 msgid ""
 "User filled values that the tool uses to work, the AI does not have access "
 "to these variables at all."
 msgstr "用户填写的值是用于工具工作，人工智能无法访问这些变量。"
 
-#: src/widgets/tools/tools.py:219
+#: src/widgets/tools/tools.py:218
 msgid "Gets the current date and/or time."
 msgstr "获取当前日期和（或）时间。"
 
-#: src/widgets/tools/tools.py:251
+#: src/widgets/tools/tools.py:250
 msgid "Gets a recipe by the meal's name"
 msgstr "根据餐点名称获取菜谱"
 
-#: src/widgets/tools/tools.py:266 src/widgets/tools/tools.py:332
+#: src/widgets/tools/tools.py:265 src/widgets/tools/tools.py:331
 msgid "YouTube Video"
 msgstr "YouTube 视频"
 
-#: src/widgets/tools/tools.py:274 src/widgets/tools/tools.py:341
+#: src/widgets/tools/tools.py:273 src/widgets/tools/tools.py:340
 msgid "Source"
 msgstr "来源"
 
-#: src/widgets/tools/tools.py:311
+#: src/widgets/tools/tools.py:310
 msgid "Gets a list of food recipes by a specified category"
 msgstr "按指定类别获取食物食谱列表"
 
-#: src/widgets/tools/tools.py:367
+#: src/widgets/tools/tools.py:366
 msgid "Extracts an article from Wikipedia by it's title"
 msgstr "根据标题从维基百科中提取文章"
 
-#: src/widgets/tools/tools.py:408
+#: src/widgets/tools/tools.py:409
 msgid "Search for a term online using DuckDuckGo"
 msgstr "使用 DuckDuckGo 在线搜索术语"
 
-#: src/widgets/tools/tools.py:411
+#: src/widgets/tools/tools.py:412
 msgid "Safe Search"
 msgstr "安全搜索"
 
-#: src/widgets/tools/tools.py:415
+#: src/widgets/tools/tools.py:416
 msgid "On"
 msgstr "开启"
 
-#: src/widgets/tools/tools.py:416
+#: src/widgets/tools/tools.py:417
 msgid "Moderate"
 msgstr "适度的"
 
-#: src/widgets/tools/tools.py:417
+#: src/widgets/tools/tools.py:418
 msgid "Off"
 msgstr "关闭"
 
-#: src/widgets/tools/tools.py:421
+#: src/widgets/tools/tools.py:422
 msgid "Max Results"
 msgstr "最大结果数"
 
-#: src/widgets/tools/tools.py:445
+#: src/widgets/tools/tools.py:446
 msgid "Abstract Source"
 msgstr "摘要来源"
 
-#: src/widgets/tools/tools.py:462
+#: src/widgets/tools/tools.py:463
 msgid "Web Result Image"
 msgstr "网页搜索结果图片"
 
-#: src/widgets/tools/tools.py:492
+#: src/widgets/tools/tools.py:493
 msgid "Request to run a command using SSH to connect to the device"
 msgstr "请求使用 SSH 运行命令连接设备"
 
-#: src/widgets/tools/tools.py:495
+#: src/widgets/tools/tools.py:496
 msgid "IP Address"
 msgstr "IP 地址"
 
-#: src/widgets/tools/tools.py:500
-msgid "Username"
-msgstr "用户名"
-
-#: src/widgets/tools/tools.py:505
+#: src/widgets/tools/tools.py:506
 msgid "Network Port"
 msgstr "网络端口"
 
-#: src/widgets/tools/tools.py:522
+#: src/widgets/tools/tools.py:523
 msgid "Model Requested to Run Command"
 msgstr "要求运行命令的模型"
 
-#: src/widgets/tools/tools.py:523
+#: src/widgets/tools/tools.py:524
 msgid "Command"
 msgstr "命令"
 
-#: src/widgets/tools/tools.py:525
+#: src/widgets/tools/tools.py:526
 msgid "Explanation"
 msgstr "解释"
 
-#: src/widgets/tools/tools.py:526
+#: src/widgets/tools/tools.py:527
 msgid "No explanation was provided"
 msgstr "未提供解释"
 
-#: src/widgets/tools/tools.py:527
+#: src/widgets/tools/tools.py:528
 msgid "Make sure you understand what the command does before running it."
 msgstr "在运行该命令之前，请确保您了解它的作用。"
 
-#: src/widgets/tools/tools.py:573
+#: src/widgets/tools/tools.py:574
 msgid "Spotify Controller"
 msgstr "Spotify 控制器"
 
-#: src/widgets/tools/tools.py:574
+#: src/widgets/tools/tools.py:575
 msgid "Control your music's playback"
 msgstr "控制您的音乐播放"
 
-#: src/widgets/tools/tools.py:625
+#: src/widgets/tools/tools.py:626
 msgid "Log Back In"
 msgstr "重新登录"
 
-#: src/widgets/tools/tools.py:629
+#: src/widgets/tools/tools.py:630
 msgid "Not logged in"
 msgstr "未登录"
 
-#: src/widgets/tools/tools.py:636
+#: src/widgets/tools/tools.py:637
 msgid "Tutorial"
 msgstr "教程"
 
-#: src/widgets/tools/tools.py:663
+#: src/widgets/tools/tools.py:664
 msgid "Spotify User"
 msgstr "Spotify 用户"
 
-#: src/widgets/tools/tools.py:724
+#: src/widgets/tools/tools.py:725
 msgid "Login Error"
 msgstr "登陆失败"
 
-#: src/widgets/tools/tools.py:725
+#: src/widgets/tools/tools.py:726
 msgid "Couldn't log in to Spotify"
 msgstr "无法登陆 Spotify"
 
-#: src/widgets/tools/tools.py:726
+#: src/widgets/tools/tools.py:727
 msgid "Specify a Client ID and Client Secret"
 msgstr "指定一个客户端 ID 以及客户端密码"
 
-#: src/widgets/tools/tools.py:775
+#: src/widgets/tools/tools.py:776
 msgid "Album Art"
 msgstr "专辑封面"
+
+#~ msgid ""
+#~ "Have compatible reasoning models think about their response before "
+#~ "generating a message"
+#~ msgstr "让兼容的推理模型在生成消息前对回应进行思考"
 
 #~ msgid "Attachment failed, screenshot might be too big"
 #~ msgstr "添加附件失败，截图可能太大了。"

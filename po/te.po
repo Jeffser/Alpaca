@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-30 18:14-0600\n"
+"POT-Creation-Date: 2025-08-07 16:56-0600\n"
 "PO-Revision-Date: 2025-07-23 13:49+0530\n"
 "Last-Translator: Aryan Karamtoth <aryankmmiv@outlook.com>\n"
 "Language-Team: Telugu l10n Translation Team <ubuntu-l10n-"
@@ -593,27 +593,27 @@ msgstr "మైక్రోసాఫ్ట్ ఎక్సెల్ డాక్�
 msgid "New Tools"
 msgstr "కొత్త సాధనాలు"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:353 src/widgets/tools/tools.py:491
+#: data/com.jeffser.Alpaca.metainfo.xml.in:353 src/widgets/tools/tools.py:492
 msgid "Run Command (Testing)"
 msgstr "కమాండ్ (పరీక్షించడం) అమలు చేయండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:354 src/widgets/tools/tools.py:407
+#: data/com.jeffser.Alpaca.metainfo.xml.in:354 src/widgets/tools/tools.py:408
 msgid "Online Search"
 msgstr "ఆన్‌లైన్ శోధన"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:355 src/widgets/tools/tools.py:366
+#: data/com.jeffser.Alpaca.metainfo.xml.in:355 src/widgets/tools/tools.py:365
 msgid "Extract Wikipedia Article"
 msgstr "వికీపీడియా కథనాన్ని సంగ్రహించండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:356 src/widgets/tools/tools.py:250
+#: data/com.jeffser.Alpaca.metainfo.xml.in:356 src/widgets/tools/tools.py:249
 msgid "Get Recipe by Name"
 msgstr "పేరు ద్వారా రెసిపీ పొందండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:357 src/widgets/tools/tools.py:310
+#: data/com.jeffser.Alpaca.metainfo.xml.in:357 src/widgets/tools/tools.py:309
 msgid "Get Recipes by Category"
 msgstr "వర్గం ద్వారా వంటకాలను పొందండి"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:358 src/widgets/tools/tools.py:218
+#: data/com.jeffser.Alpaca.metainfo.xml.in:358 src/widgets/tools/tools.py:217
 msgid "Get Current Datetime"
 msgstr "ప్రస్తుత తేదీ సమయాన్ని పొందండి"
 
@@ -3528,6 +3528,62 @@ msgstr ""
 msgid "Quick Ask"
 msgstr "త్వరగా అడగండి"
 
+#: src/sql_manager.py:33
+#, python-brace-format
+msgid "{} seconds"
+msgstr ""
+
+#: src/sql_manager.py:37
+msgid "Total Duration"
+msgstr ""
+
+#: src/sql_manager.py:38
+msgid "Load Duration"
+msgstr ""
+
+#: src/sql_manager.py:41
+msgid "Prompt Eval Count"
+msgstr ""
+
+#: src/sql_manager.py:41 src/sql_manager.py:46
+#, python-brace-format
+msgid "{} tokens"
+msgstr ""
+
+#: src/sql_manager.py:42
+msgid "Prompt Eval Duration"
+msgstr ""
+
+#: src/sql_manager.py:44
+msgid "Prompt Eval Rate"
+msgstr ""
+
+#: src/sql_manager.py:44 src/sql_manager.py:49
+#, python-brace-format
+msgid "{} tokens/s"
+msgstr ""
+
+#: src/sql_manager.py:46
+msgid "Eval Count"
+msgstr ""
+
+#: src/sql_manager.py:47
+msgid "Eval Duration"
+msgstr ""
+
+#: src/sql_manager.py:49
+msgid "Eval Rate"
+msgstr ""
+
+#: src/sql_manager.py:50
+msgid "Metric"
+msgstr ""
+
+#: src/sql_manager.py:50 src/widgets/instances/ollama_instances.py:132
+#: src/widgets/instances/openai_instances.py:165
+msgid "Value"
+msgstr ""
+
 #: src/window.py:94
 msgid "Ollama Was Not Found"
 msgstr "ఒల్లామా కనుగొనబడలేదు"
@@ -3558,9 +3614,9 @@ msgstr "జోడించడానికి ఉదాహరణ రకాన్�
 #: src/widgets/dialog.py:210 src/widgets/dialog.py:223 src/widgets/voice.py:307
 #: src/widgets/voice.py:310 src/widgets/models/added.py:409
 #: src/widgets/models/creator.py:140 src/widgets/models/creator.py:141
-#: src/widgets/instances/__init__.py:252 src/widgets/instances/__init__.py:253
+#: src/widgets/instances/__init__.py:263 src/widgets/instances/__init__.py:264
 #: src/widgets/blocks/code.py:138 src/widgets/blocks/text.py:151
-#: src/widgets/tools/tools.py:98 src/widgets/tools/tools.py:99
+#: src/widgets/tools/tools.py:97 src/widgets/tools/tools.py:98
 msgid "Cancel"
 msgstr "రద్దు చేయి"
 
@@ -3594,11 +3650,11 @@ msgstr "దయచేసి చాట్ చేసే ముందు మోడ�
 
 #: src/window.py:421 src/gtk/window.ui:51 src/gtk/window.ui:640
 #: src/widgets/chat.py:231 src/widgets/instances/ollama_instances.py:38
-#: src/widgets/instances/ollama_instances.py:54
-#: src/widgets/instances/ollama_instances.py:91
+#: src/widgets/instances/ollama_instances.py:55
+#: src/widgets/instances/ollama_instances.py:93
 #: src/widgets/instances/openai_instances.py:68
-#: src/widgets/instances/openai_instances.py:79
-#: src/widgets/instances/openai_instances.py:121
+#: src/widgets/instances/openai_instances.py:86
+#: src/widgets/instances/openai_instances.py:135
 msgid "New Chat"
 msgstr "కొత్త చాట్"
 
@@ -3677,77 +3733,87 @@ msgstr "సైడ్‌బార్‌ని టోగుల్ చేయండ�
 
 #: src/gtk/help-overlay.ui:56
 msgctxt "shortcut window"
+msgid "Zoom In"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:62
+msgctxt "shortcut window"
+msgid "Zoom Out"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "నిష్క్రమించు"
 
-#: src/gtk/help-overlay.ui:64
+#: src/gtk/help-overlay.ui:76
 msgctxt "shortcut window"
 msgid "Chat Management"
 msgstr "చాట్ నిర్వహణ"
 
-#: src/gtk/help-overlay.ui:67
+#: src/gtk/help-overlay.ui:79
 msgctxt "shortcut window"
 msgid "Create Chat"
 msgstr "చాట్ సృష్టించండి"
 
-#: src/gtk/help-overlay.ui:73
+#: src/gtk/help-overlay.ui:85
 msgctxt "shortcut window"
 msgid "Delete Chat"
 msgstr "చాట్‌ని తొలగించండి"
 
-#: src/gtk/help-overlay.ui:79
+#: src/gtk/help-overlay.ui:91
 msgctxt "shortcut window"
 msgid "Clear Chat"
 msgstr "చాట్ క్లియర్ చేయండి"
 
-#: src/gtk/help-overlay.ui:85
+#: src/gtk/help-overlay.ui:97
 msgctxt "shortcut window"
 msgid "Rename Chat"
 msgstr "చాట్ పేరు మార్చండి"
 
-#: src/gtk/help-overlay.ui:91
+#: src/gtk/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Toggle Searchbars"
 msgstr "శోధన పట్టీలను టోగుల్ చేయండి"
 
-#: src/gtk/help-overlay.ui:99
+#: src/gtk/help-overlay.ui:111
 msgctxt "shortcut window"
 msgid "Message Entry"
 msgstr "సందేశం నమోదు"
 
-#: src/gtk/help-overlay.ui:102
+#: src/gtk/help-overlay.ui:114
 msgid "Copy"
 msgstr "కాపీ చేయండి"
 
-#: src/gtk/help-overlay.ui:108
+#: src/gtk/help-overlay.ui:120
 msgid "Paste"
 msgstr "అతికించండి"
 
-#: src/gtk/help-overlay.ui:114
+#: src/gtk/help-overlay.ui:126
 msgid "Open Emoji Menu"
 msgstr "ఎమోజి మెనుని తెరవండి"
 
-#: src/gtk/help-overlay.ui:120
+#: src/gtk/help-overlay.ui:132
 msgid "Insert new line"
 msgstr "కొత్త పంక్తిని చొప్పించండి"
 
-#: src/gtk/help-overlay.ui:126
+#: src/gtk/help-overlay.ui:138
 msgid "Send Message as System"
 msgstr "సిస్టమ్‌గా సందేశాన్ని పంపండి"
 
-#: src/gtk/help-overlay.ui:127
+#: src/gtk/help-overlay.ui:139
 msgid "System messages are taken as literal instructions by models"
 msgstr "సిస్టమ్ సందేశాలు మోడల్‌ల ద్వారా సాహిత్యపరమైన సూచనలుగా తీసుకోబడతాయి"
 
-#: src/gtk/help-overlay.ui:133 src/widgets/message.py:627
+#: src/gtk/help-overlay.ui:145 src/widgets/message.py:652
 msgid "Use Tools"
 msgstr "సాధనాలను ఉపయోగించండి"
 
-#: src/gtk/help-overlay.ui:134
+#: src/gtk/help-overlay.ui:146
 msgid "Ask model to use tools to generate a message"
 msgstr "సందేశాన్ని రూపొందించడానికి సాధనాలను ఉపయోగించమని మోడల్‌ను అడగండి."
 
-#: src/gtk/help-overlay.ui:140
+#: src/gtk/help-overlay.ui:152
 msgid "Send Message as User"
 msgstr "వినియోగదారుగా సందేశాన్ని పంపండి"
 
@@ -4293,47 +4359,47 @@ msgstr "చిత్రాన్ని తొలగించాలా?"
 msgid "Save Image"
 msgstr "చిత్రాన్ని సేవ్ చేయండి"
 
-#: src/widgets/attachments.py:585
+#: src/widgets/attachments.py:586
 msgid "Any compatible Alpaca attachment"
 msgstr "ఏదైనా అనుకూలమైన అల్పాకా అటాచ్‌మెంట్"
 
-#: src/widgets/attachments.py:634 src/widgets/message.py:551
+#: src/widgets/attachments.py:635 src/widgets/message.py:576
 msgid "Image recognition is only available on specific models"
 msgstr "నిర్దిష్ట మోడల్‌లలో మాత్రమే చిత్ర గుర్తింపు అందుబాటులో ఉంటుంది"
 
-#: src/widgets/attachments.py:660
+#: src/widgets/attachments.py:661
 msgid "Attach File"
 msgstr "ఫైల్‌ని అటాచ్ చేయండి"
 
-#: src/widgets/attachments.py:665
+#: src/widgets/attachments.py:666
 msgid "Attach Website"
 msgstr "వెబ్‌సైట్‌ను అటాచ్ చేయండి"
 
-#: src/widgets/attachments.py:668 src/widgets/message.py:531
+#: src/widgets/attachments.py:669 src/widgets/message.py:556
 msgid "Attach Website? (Experimental)"
 msgstr "వెబ్‌సైట్‌ను జోడించాలా? (ప్రయోగాత్మకం)"
 
-#: src/widgets/attachments.py:669
+#: src/widgets/attachments.py:670
 msgid "Please enter a website URL"
 msgstr "దయచేసి వెబ్‌సైట్ URLని నమోదు చేయండి"
 
-#: src/widgets/attachments.py:676
+#: src/widgets/attachments.py:677
 msgid "Attach YouTube Captions"
 msgstr "YouTube శీర్షికలను అటాచ్ చేయండి"
 
-#: src/widgets/attachments.py:679
+#: src/widgets/attachments.py:680
 msgid "Attach YouTube Captions?"
 msgstr "YouTube శీర్షికలను జోడించాలా?"
 
-#: src/widgets/attachments.py:680
+#: src/widgets/attachments.py:681
 msgid "Please enter a YouTube video URL"
 msgstr "దయచేసి YouTube వీడియో URLని నమోదు చేయండి"
 
-#: src/widgets/attachments.py:691
+#: src/widgets/attachments.py:692
 msgid "Attach Screenshot"
 msgstr "స్క్రీన్‌షాట్‌ని అటాచ్ చేయండి"
 
-#: src/widgets/attachments.py:698
+#: src/widgets/attachments.py:699
 msgid "Attach Photo From Camera"
 msgstr "కెమెరా నుండి ఫోటోను అటాచ్ చేయండి"
 
@@ -4349,8 +4415,8 @@ msgstr "కెమెరా ఏదీ కనుగొనబడలేదు"
 msgid "Please check if camera is plugged in and turned on"
 msgstr "కెమెరా ప్లగిన్ చేయబడి ఆన్ చేయబడిందో లేదో తనిఖీ చేయండి."
 
-#: src/widgets/chat.py:86 src/widgets/instances/ollama_instances.py:76
-#: src/widgets/instances/openai_instances.py:106
+#: src/widgets/chat.py:86 src/widgets/instances/ollama_instances.py:78
+#: src/widgets/instances/openai_instances.py:120
 msgid "Notebook"
 msgstr "నోట్బుక్"
 
@@ -4466,23 +4532,27 @@ msgstr "సందేశాన్ని పునరుత్పత్తి చ�
 msgid "Message copied to the clipboard"
 msgstr "సందేశం క్లిప్‌బోర్డ్‌కి కాపీ చేయబడింది"
 
-#: src/widgets/message.py:115
+#: src/widgets/message.py:133
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "ప్రతిస్పందనను స్వీకరించేటప్పుడు సందేశాన్ని మళ్లీ రూపొందించడం సాధ్యం కాదు"
 
-#: src/widgets/message.py:246 src/widgets/message.py:269
+#: src/widgets/message.py:264 src/widgets/message.py:287
 msgid "Thought"
 msgstr "ఆలోచన"
 
-#: src/widgets/message.py:524
+#: src/widgets/message.py:492
+msgid "Metadata"
+msgstr ""
+
+#: src/widgets/message.py:549
 msgid "Attach YouTube Video?"
 msgstr "YouTube వీడియోని జోడించాలా?"
 
-#: src/widgets/message.py:525
+#: src/widgets/message.py:550
 msgid "Note that YouTube might block access to captions, please check output"
 msgstr "YouTube శీర్షికలకు యాక్సెస్‌ను బ్లాక్ చేయవచ్చని గమనించండి, దయచేసి అవుట్‌పుట్‌ను తనిఖీ చేయండి."
 
-#: src/widgets/message.py:532
+#: src/widgets/message.py:557
 #, python-brace-format
 msgid ""
 "Are you sure you want to attach\n"
@@ -4491,19 +4561,19 @@ msgstr ""
 "మీరు ఖచ్చితంగా అటాచ్ చేయాలనుకుంటున్నారా\n"
 "'{}'?"
 
-#: src/widgets/message.py:580
+#: src/widgets/message.py:605
 msgid "Send Message"
 msgstr "సందేశం పంపండి"
 
-#: src/widgets/message.py:589
+#: src/widgets/message.py:614
 msgid "Stop Message"
 msgstr "సందేశాన్ని ఆపు"
 
-#: src/widgets/message.py:617
+#: src/widgets/message.py:642
 msgid "Send as User"
 msgstr "వినియోగదారుగా పంపండి"
 
-#: src/widgets/message.py:622
+#: src/widgets/message.py:647
 msgid "Send as System"
 msgstr "సిస్టమ్‌గా పంపండి"
 
@@ -4647,7 +4717,7 @@ msgstr "భాషలు"
 
 #: src/widgets/models/added.py:410 src/widgets/models/added.py:459
 #: src/widgets/models/speech.py:136 src/widgets/models/speech.py:279
-#: src/widgets/instances/__init__.py:396
+#: src/widgets/instances/__init__.py:408
 msgid "Remove"
 msgstr "తొలగించు"
 
@@ -4797,9 +4867,9 @@ msgid "A higher number widens the amount of possible answers. (top_p)"
 msgstr "అధిక సంఖ్య సాధ్యమైన సమాధానాల మొత్తాన్ని విస్తరిస్తుంది. (top_p)"
 
 #: src/widgets/models/creator.py:147 src/widgets/models/creator.py:148
-#: src/widgets/instances/__init__.py:259 src/widgets/instances/__init__.py:260
+#: src/widgets/instances/__init__.py:270 src/widgets/instances/__init__.py:271
 #: src/widgets/blocks/code.py:147 src/widgets/blocks/text.py:160
-#: src/widgets/tools/tools.py:105 src/widgets/tools/tools.py:106
+#: src/widgets/tools/tools.py:104 src/widgets/tools/tools.py:105
 msgid "Save"
 msgstr "సేవ్ చేయండి"
 
@@ -4867,112 +4937,127 @@ msgstr "OpenAI విస్పర్ అందించిన స్థాని
 msgid "Speech to Text"
 msgstr "స్పీచ్ టు టెక్స్ట్"
 
-#: src/widgets/instances/ollama_instances.py:68
-#: src/widgets/instances/openai_instances.py:98
+#: src/widgets/instances/ollama_instances.py:70
+#: src/widgets/instances/openai_instances.py:112
 msgid "Notebook Error"
 msgstr "నోట్‌బుక్ లోపం"
 
-#: src/widgets/instances/ollama_instances.py:69
-#: src/widgets/instances/ollama_instances.py:155
-#: src/widgets/instances/openai_instances.py:99
-#: src/widgets/instances/openai_instances.py:169
+#: src/widgets/instances/ollama_instances.py:71
+#: src/widgets/instances/ollama_instances.py:170
+#: src/widgets/instances/openai_instances.py:113
+#: src/widgets/instances/openai_instances.py:201
 msgid "An error occurred while running tool"
 msgstr "సాధనాన్ని అమలు చేస్తున్నప్పుడు లోపం సంభవించింది."
 
-#: src/widgets/instances/ollama_instances.py:103
-#: src/widgets/instances/openai_instances.py:127
+#: src/widgets/instances/ollama_instances.py:104
+#: src/widgets/instances/openai_instances.py:148
 msgid "Selecting tool to use..."
 msgstr "ఉపయోగించడానికి సాధనాన్ని ఎంచుకోవడం..."
 
-#: src/widgets/instances/ollama_instances.py:122
-#: src/widgets/instances/openai_instances.py:136
+#: src/widgets/instances/ollama_instances.py:123
+#: src/widgets/instances/openai_instances.py:157
 #, python-brace-format
 msgid "Using {}"
 msgstr "{} ని ఉపయోగించడం"
 
-#: src/widgets/instances/ollama_instances.py:154
-#: src/widgets/instances/openai_instances.py:168
+#: src/widgets/instances/ollama_instances.py:131
+#: src/widgets/instances/openai_instances.py:164 src/widgets/tools/tools.py:34
+msgid "Arguments"
+msgstr "వాదనలు"
+
+#: src/widgets/instances/ollama_instances.py:132
+#: src/widgets/instances/openai_instances.py:165
+msgid "Argument"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:138
+#: src/widgets/instances/openai_instances.py:171
+msgid "Result"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:169
+#: src/widgets/instances/openai_instances.py:200
 msgid "Tool Error"
 msgstr "సాధనం లోపం"
 
-#: src/widgets/instances/ollama_instances.py:233
-#: src/widgets/instances/ollama_instances.py:325
-#: src/widgets/instances/ollama_instances.py:339
-#: src/widgets/instances/ollama_instances.py:549
-#: src/widgets/instances/openai_instances.py:230
-#: src/widgets/instances/openai_instances.py:302
-#: src/widgets/instances/openai_instances.py:357
-#: src/widgets/instances/openai_instances.py:402
-#: src/widgets/instances/openai_instances.py:462
-#: src/widgets/instances/openai_instances.py:501
-#: src/widgets/instances/openai_instances.py:534
+#: src/widgets/instances/ollama_instances.py:251
+#: src/widgets/instances/ollama_instances.py:347
+#: src/widgets/instances/ollama_instances.py:361
+#: src/widgets/instances/ollama_instances.py:572
+#: src/widgets/instances/openai_instances.py:262
+#: src/widgets/instances/openai_instances.py:334
+#: src/widgets/instances/openai_instances.py:389
+#: src/widgets/instances/openai_instances.py:434
+#: src/widgets/instances/openai_instances.py:494
+#: src/widgets/instances/openai_instances.py:533
+#: src/widgets/instances/openai_instances.py:566
 msgid "Instance Error"
 msgstr "ఉదాహరణ లోపం"
 
-#: src/widgets/instances/ollama_instances.py:234
-#: src/widgets/instances/openai_instances.py:231
+#: src/widgets/instances/ollama_instances.py:252
+#: src/widgets/instances/openai_instances.py:263
 msgid "Message generation failed"
 msgstr "సందేశ ఉత్పత్తి విఫలమైంది"
 
-#: src/widgets/instances/ollama_instances.py:326
-#: src/widgets/instances/openai_instances.py:303
-#: src/widgets/instances/openai_instances.py:358
-#: src/widgets/instances/openai_instances.py:403
+#: src/widgets/instances/ollama_instances.py:348
+#: src/widgets/instances/openai_instances.py:335
+#: src/widgets/instances/openai_instances.py:390
+#: src/widgets/instances/openai_instances.py:435
 msgid "Could not retrieve added models"
 msgstr "జోడించిన మోడల్‌లను తిరిగి పొందడం సాధ్యపడలేదు"
 
-#: src/widgets/instances/ollama_instances.py:340
+#: src/widgets/instances/ollama_instances.py:362
 msgid "Could not retrieve available models"
 msgstr "అందుబాటులో ఉన్న మోడల్‌లను తిరిగి పొందడం సాధ్యపడలేదు"
 
-#: src/widgets/instances/ollama_instances.py:458
+#: src/widgets/instances/ollama_instances.py:480
 msgid "Ollama (Managed)"
 msgstr "ఒల్లమా (నిర్వహించబడింది)"
 
-#: src/widgets/instances/ollama_instances.py:459
+#: src/widgets/instances/ollama_instances.py:481
 msgid "Local AI instance managed directly by Alpaca"
 msgstr "స్థానిక AI ఉదాహరణ అల్పాకా ద్వారా నేరుగా నిర్వహించబడుతుంది"
 
-#: src/widgets/instances/ollama_instances.py:462
-#: src/widgets/instances/ollama_instances.py:564
-#: src/widgets/instances/__init__.py:283
+#: src/widgets/instances/ollama_instances.py:484
+#: src/widgets/instances/ollama_instances.py:587
+#: src/widgets/instances/__init__.py:294
 msgid "Instance"
 msgstr "ఉదాహరణ"
 
-#: src/widgets/instances/ollama_instances.py:494
+#: src/widgets/instances/ollama_instances.py:517
 msgid "Alpaca Support"
 msgstr "అల్పాకా మద్దతు"
 
-#: src/widgets/instances/ollama_instances.py:501
+#: src/widgets/instances/ollama_instances.py:524
 msgid "Model request too large for system"
 msgstr "సిస్టమ్ కోసం మోడల్ అభ్యర్థన చాలా పెద్దది"
 
-#: src/widgets/instances/ollama_instances.py:504
+#: src/widgets/instances/ollama_instances.py:527
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
 msgstr "AMD GPU కనుగొనబడింది కానీ పొడిగింపు లేదు, Ollama CPUని ఉపయోగిస్తుంది."
 
-#: src/widgets/instances/ollama_instances.py:506
+#: src/widgets/instances/ollama_instances.py:529
 msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
 msgstr "AMD GPU కనుగొనబడింది కానీ ROCm లేదు, Ollama CPUని ఉపయోగిస్తుంది."
 
-#: src/widgets/instances/ollama_instances.py:508
+#: src/widgets/instances/ollama_instances.py:531
 #, python-brace-format
 msgid "Using AMD GPU type '{}'"
 msgstr "AMD GPUని ఉపయోగించి '{}' టైప్ చేయండి"
 
-#: src/widgets/instances/ollama_instances.py:518
+#: src/widgets/instances/ollama_instances.py:541
 msgid "Integrated Ollama instance is not running"
 msgstr "ఇంటిగ్రేటెడ్ ఒల్లామా ఉదాహరణ అమలులో లేదు"
 
-#: src/widgets/instances/ollama_instances.py:550
+#: src/widgets/instances/ollama_instances.py:573
 msgid "Managed Ollama instance failed to start"
 msgstr "నిర్వహించబడిన ఒల్లామా ఉదాహరణ ప్రారంభించడంలో విఫలమైంది"
 
-#: src/widgets/instances/ollama_instances.py:556
+#: src/widgets/instances/ollama_instances.py:579
 msgid "Integrated Ollama instance is running"
 msgstr "ఇంటిగ్రేటెడ్ ఒల్లామా ఉదాహరణ అమలవుతోంది"
 
-#: src/widgets/instances/ollama_instances.py:561
+#: src/widgets/instances/ollama_instances.py:584
 msgid "Local or remote AI instance not managed by Alpaca"
 msgstr "స్థానిక లేదా రిమోట్ AI ఉదాహరణ Alpaca ద్వారా నిర్వహించబడదు"
 
@@ -4980,61 +5065,61 @@ msgstr "స్థానిక లేదా రిమోట్ AI ఉదాహర
 msgid "Instances"
 msgstr "సందర్భాలు"
 
-#: src/widgets/instances/openai_instances.py:175
+#: src/widgets/instances/openai_instances.py:207
 msgid "Generating message..."
 msgstr "సందేశాన్ని రూపొందిస్తోంది..."
 
-#: src/widgets/instances/openai_instances.py:463
-#: src/widgets/instances/openai_instances.py:502
-#: src/widgets/instances/openai_instances.py:535
+#: src/widgets/instances/openai_instances.py:495
+#: src/widgets/instances/openai_instances.py:534
+#: src/widgets/instances/openai_instances.py:567
 msgid "Could not retrieve models"
 msgstr "మోడల్‌లను తిరిగి పొందడం సాధ్యపడలేదు"
 
-#: src/widgets/instances/openai_instances.py:475
+#: src/widgets/instances/openai_instances.py:507
 msgid "Alibaba Cloud Qwen large language models via DashScope"
 msgstr "డాష్‌స్కోప్ ద్వారా అలీబాబా క్లౌడ్ క్వెన్ పెద్ద భాషా నమూనాలు"
 
-#: src/widgets/instances/openai_instances.py:481
+#: src/widgets/instances/openai_instances.py:513
 msgid "Fireworks AI inference platform"
 msgstr "బాణసంచా AI అనుమితి వేదిక"
 
-#: src/widgets/instances/openai_instances.py:514
+#: src/widgets/instances/openai_instances.py:546
 msgid "Lambda Labs cloud inference API"
 msgstr "లాంబ్డా ల్యాబ్స్ క్లౌడ్ అనుమితి API"
 
-#: src/widgets/instances/openai_instances.py:547
+#: src/widgets/instances/openai_instances.py:579
 msgid "Cerebras AI cloud inference API"
 msgstr "సెరెబ్రాస్ AI క్లౌడ్ ఇన్ఫెరెన్స్ API"
 
-#: src/widgets/instances/openai_instances.py:553
+#: src/widgets/instances/openai_instances.py:585
 msgid "Kluster AI cloud inference API"
 msgstr "క్లస్టర్ AI క్లౌడ్ అనుమితి API"
 
-#: src/widgets/instances/openai_instances.py:559
+#: src/widgets/instances/openai_instances.py:591
 msgid "Kimi large language models by Moonshot AI"
 msgstr "మూన్‌షాట్ AI ద్వారా కిమి పెద్ద భాషా నమూనాలు"
 
-#: src/widgets/instances/openai_instances.py:566
+#: src/widgets/instances/openai_instances.py:598
 msgid "Mistral AI large language models"
 msgstr "మిస్ట్రల్ AI పెద్ద భాషా నమూనాలు"
 
-#: src/widgets/instances/openai_instances.py:573
+#: src/widgets/instances/openai_instances.py:605
 msgid "Meta AI Llama API"
 msgstr "మెటా AI లామా API"
 
-#: src/widgets/instances/openai_instances.py:579
+#: src/widgets/instances/openai_instances.py:611
 msgid "Novita AI cloud inference API"
 msgstr "నోవిటా AI క్లౌడ్ అనుమితి API"
 
-#: src/widgets/instances/openai_instances.py:586
+#: src/widgets/instances/openai_instances.py:618
 msgid "DeepInfra cloud inference API"
 msgstr "డీప్‌ఇన్‌ఫ్రా క్లౌడ్ ఇన్ఫెరెన్స్ API"
 
-#: src/widgets/instances/openai_instances.py:590
+#: src/widgets/instances/openai_instances.py:622
 msgid "OpenAI Compatible Instance"
 msgstr "OpenAI అనుకూల ఉదాహరణ"
 
-#: src/widgets/instances/openai_instances.py:592
+#: src/widgets/instances/openai_instances.py:624
 msgid "AI instance compatible with OpenAI library"
 msgstr "OpenAI లైబ్రరీతో అనుకూలమైన AI ఉదాహరణ"
 
@@ -5074,8 +5159,8 @@ msgstr "థాట్ ప్రాసెసింగ్"
 #: src/widgets/instances/__init__.py:98
 msgid ""
 "Have compatible reasoning models think about their response before "
-"generating a message"
-msgstr "అనుకూల తార్కిక నమూనాలు సందేశాన్ని రూపొందించే ముందు వాటి ప్రతిస్పందన గురించి ఆలోచించాలి"
+"generating a message."
+msgstr ""
 
 #: src/widgets/instances/__init__.py:105
 msgid "Share Name"
@@ -5085,11 +5170,31 @@ msgstr "షేర్ పేరు"
 msgid "Automatically share your name with the AI models."
 msgstr "AI మోడల్‌లతో మీ పేరును స్వయంచాలకంగా షేర్ చేయండి."
 
+#: src/widgets/instances/__init__.py:111
+msgid "Do Not Share"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:112 src/widgets/tools/tools.py:501
+msgid "Username"
+msgstr "వినియోగదారు పేరు"
+
+#: src/widgets/instances/__init__.py:113
+msgid "Full Name"
+msgstr ""
+
 #: src/widgets/instances/__init__.py:121
+msgid "Show Response Metadata"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:122
+msgid "Add the option to show reply metadata in the message as an attachment."
+msgstr ""
+
+#: src/widgets/instances/__init__.py:129
 msgid "Max Tokens"
 msgstr "గరిష్ట టోకెన్లు"
 
-#: src/widgets/instances/__init__.py:122
+#: src/widgets/instances/__init__.py:130
 msgid ""
 "Defines the maximum number of tokens (words + spaces) the AI can generate in "
 "a response. More tokens allow longer replies but may take more time and cost "
@@ -5098,19 +5203,19 @@ msgstr ""
 "ప్రతిస్పందనలో AI రూపొందించగల గరిష్ట సంఖ్యలో టోకెన్‌లను (పదాలు + ఖాళీలు) నిర్వచిస్తుంది. మరిన్ని టోకెన్‌లు "
 "సుదీర్ఘ ప్రత్యుత్తరాలను అనుమతిస్తాయి కానీ ఎక్కువ సమయం పట్టవచ్చు మరియు ఎక్కువ ఖర్చు కావచ్చు."
 
-#: src/widgets/instances/__init__.py:137
+#: src/widgets/instances/__init__.py:145
 msgid "Temperature"
 msgstr "ఉష్ణోగ్రత"
 
-#: src/widgets/instances/__init__.py:138
+#: src/widgets/instances/__init__.py:146
 msgid "Increasing the temperature will make the models answer more creatively."
 msgstr "ఉష్ణోగ్రతను పెంచడం వల్ల మోడల్‌లు మరింత సృజనాత్మకంగా సమాధానం ఇస్తాయి."
 
-#: src/widgets/instances/__init__.py:153
+#: src/widgets/instances/__init__.py:161
 msgid "Seed"
 msgstr "విత్తనం"
 
-#: src/widgets/instances/__init__.py:154
+#: src/widgets/instances/__init__.py:162
 msgid ""
 "Setting this to a specific number other than 0 will make the model generate "
 "the same text for the same prompt."
@@ -5118,57 +5223,61 @@ msgstr ""
 "దీన్ని 0 కాకుండా వేరే నిర్దిష్ట సంఖ్యకు సెట్ చేయడం వలన మోడల్ అదే ప్రాంప్ట్ కోసం అదే వచనాన్ని రూపొందించేలా "
 "చేస్తుంది."
 
-#: src/widgets/instances/__init__.py:169
+#: src/widgets/instances/__init__.py:177
 msgid "Overrides"
 msgstr "భర్తీ చేస్తుంది"
 
-#: src/widgets/instances/__init__.py:170
+#: src/widgets/instances/__init__.py:178
 msgid ""
 "These entries are optional, they are used to troubleshoot GPU related "
 "problems with Ollama."
 msgstr "ఈ ఎంట్రీలు ఐచ్ఛికం, ఇవి ఒల్లామాతో GPU సంబంధిత సమస్యలను పరిష్కరించడానికి ఉపయోగించబడతాయి."
 
-#: src/widgets/instances/__init__.py:192
+#: src/widgets/instances/__init__.py:200
 msgid "Model Directory"
 msgstr "మోడల్ డైరెక్టరీ"
 
-#: src/widgets/instances/__init__.py:197
+#: src/widgets/instances/__init__.py:205
 msgid "Select Directory"
 msgstr "డైరెక్టరీని ఎంచుకోండి"
 
-#: src/widgets/instances/__init__.py:217
+#: src/widgets/instances/__init__.py:225
 msgid "Default Model"
 msgstr "డిఫాల్ట్ మోడల్"
 
-#: src/widgets/instances/__init__.py:218
+#: src/widgets/instances/__init__.py:226
 msgid "Model to select when starting a new chat."
 msgstr "కొత్త చాట్‌ను ప్రారంభించేటప్పుడు ఎంచుకోవలసిన మోడల్."
 
-#: src/widgets/instances/__init__.py:225
+#: src/widgets/instances/__init__.py:233
 msgid "Title Model"
 msgstr "టైటిల్ మోడల్"
 
-#: src/widgets/instances/__init__.py:226
+#: src/widgets/instances/__init__.py:234
 msgid "Model to use when generating a chat title."
 msgstr "చాట్ టైటిల్‌ను రూపొందించేటప్పుడు ఉపయోగించాల్సిన మోడల్."
 
-#: src/widgets/instances/__init__.py:277
+#: src/widgets/instances/__init__.py:242
+msgid "Use Current Model"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:288
 msgid "Edit Instance"
 msgstr "ఉదాహరణను సవరించండి"
 
-#: src/widgets/instances/__init__.py:277
+#: src/widgets/instances/__init__.py:288
 msgid "Create Instance"
 msgstr "ఉదాహరణను సృష్టించండి"
 
-#: src/widgets/instances/__init__.py:353
+#: src/widgets/instances/__init__.py:365
 msgid "Fallback Instance"
 msgstr "ఫాల్‌బ్యాక్ ఇన్‌స్టాన్స్"
 
-#: src/widgets/instances/__init__.py:393
+#: src/widgets/instances/__init__.py:405
 msgid "Remove Instance?"
 msgstr "దృష్టాంతాన్ని తీసివేయాలా?"
 
-#: src/widgets/instances/__init__.py:394
+#: src/widgets/instances/__init__.py:406
 msgid "Are you sure you want to remove this instance?"
 msgstr "మీరు ఖచ్చితంగా ఈ ఉదాహరణను తీసివేయాలనుకుంటున్నారా?"
 
@@ -5228,164 +5337,161 @@ msgstr "నోట్‌బుక్‌కు జోడించు"
 msgid "Appends text to the notebook."
 msgstr "నోట్‌బుక్‌లో వచనాన్ని జోడిస్తుంది."
 
-#: src/widgets/tools/tools.py:22
+#: src/widgets/tools/tools.py:21
 msgid "AI Description"
 msgstr "AI వివరణ"
 
-#: src/widgets/tools/tools.py:23
+#: src/widgets/tools/tools.py:22
 msgid "The description the AI model will use to understand what the tool does."
 msgstr "సాధనం ఏమి చేస్తుందో అర్థం చేసుకోవడానికి AI మోడల్ ఉపయోగించే వివరణ."
 
 #: src/widgets/tools/tools.py:35
-msgid "Arguments"
-msgstr "వాదనలు"
-
-#: src/widgets/tools/tools.py:36
 msgid "Variables that are filled by the AI."
 msgstr "AI ద్వారా నింపబడిన వేరియబుల్స్."
 
-#: src/widgets/tools/tools.py:49
+#: src/widgets/tools/tools.py:48
 msgid "Variables"
 msgstr "వేరియబుల్స్"
 
-#: src/widgets/tools/tools.py:50
+#: src/widgets/tools/tools.py:49
 msgid ""
 "User filled values that the tool uses to work, the AI does not have access "
 "to these variables at all."
 msgstr ""
 "సాధనం పనిచేయడానికి ఉపయోగించే వినియోగదారు నింపిన విలువలు, AI కి ఈ వేరియబుల్స్‌కి అస్సలు యాక్సెస్ ఉండదు."
 
-#: src/widgets/tools/tools.py:219
+#: src/widgets/tools/tools.py:218
 msgid "Gets the current date and/or time."
 msgstr "ప్రస్తుత తేదీ మరియు/లేదా సమయాన్ని పొందుతుంది."
 
-#: src/widgets/tools/tools.py:251
+#: src/widgets/tools/tools.py:250
 msgid "Gets a recipe by the meal's name"
 msgstr "భోజనం పేరుతో ఒక వంటకం వస్తుంది"
 
-#: src/widgets/tools/tools.py:266 src/widgets/tools/tools.py:332
+#: src/widgets/tools/tools.py:265 src/widgets/tools/tools.py:331
 msgid "YouTube Video"
 msgstr "YouTube వీడియో"
 
-#: src/widgets/tools/tools.py:274 src/widgets/tools/tools.py:341
+#: src/widgets/tools/tools.py:273 src/widgets/tools/tools.py:340
 msgid "Source"
 msgstr "మూలం"
 
-#: src/widgets/tools/tools.py:311
+#: src/widgets/tools/tools.py:310
 msgid "Gets a list of food recipes by a specified category"
 msgstr "పేర్కొన్న వర్గం వారీగా ఆహార వంటకాల జాబితాను పొందుతుంది."
 
-#: src/widgets/tools/tools.py:367
+#: src/widgets/tools/tools.py:366
 msgid "Extracts an article from Wikipedia by it's title"
 msgstr "వికీపీడియా నుండి ఒక కథనాన్ని దాని శీర్షిక ద్వారా సంగ్రహిస్తుంది."
 
-#: src/widgets/tools/tools.py:408
+#: src/widgets/tools/tools.py:409
 msgid "Search for a term online using DuckDuckGo"
 msgstr "DuckDuckGo ఉపయోగించి ఆన్‌లైన్‌లో ఒక పదం కోసం శోధించండి"
 
-#: src/widgets/tools/tools.py:411
+#: src/widgets/tools/tools.py:412
 msgid "Safe Search"
 msgstr "సురక్షిత శోధన"
 
-#: src/widgets/tools/tools.py:415
+#: src/widgets/tools/tools.py:416
 msgid "On"
 msgstr "ఆన్"
 
-#: src/widgets/tools/tools.py:416
+#: src/widgets/tools/tools.py:417
 msgid "Moderate"
 msgstr "మితమైన"
 
-#: src/widgets/tools/tools.py:417
+#: src/widgets/tools/tools.py:418
 msgid "Off"
 msgstr "ఆఫ్"
 
-#: src/widgets/tools/tools.py:421
+#: src/widgets/tools/tools.py:422
 msgid "Max Results"
 msgstr "గరిష్ట ఫలితాలు"
 
-#: src/widgets/tools/tools.py:445
+#: src/widgets/tools/tools.py:446
 msgid "Abstract Source"
 msgstr "వియుక్త మూలం"
 
-#: src/widgets/tools/tools.py:462
+#: src/widgets/tools/tools.py:463
 msgid "Web Result Image"
 msgstr "వెబ్ ఫలితం చిత్రం"
 
-#: src/widgets/tools/tools.py:492
+#: src/widgets/tools/tools.py:493
 msgid "Request to run a command using SSH to connect to the device"
 msgstr "పరికరానికి కనెక్ట్ అవ్వడానికి SSH ఉపయోగించి కమాండ్‌ను అమలు చేయమని అభ్యర్థించండి."
 
-#: src/widgets/tools/tools.py:495
+#: src/widgets/tools/tools.py:496
 msgid "IP Address"
 msgstr "IP చిరునామా"
 
-#: src/widgets/tools/tools.py:500
-msgid "Username"
-msgstr "వినియోగదారు పేరు"
-
-#: src/widgets/tools/tools.py:505
+#: src/widgets/tools/tools.py:506
 msgid "Network Port"
 msgstr "నెట్‌వర్క్ పోర్ట్"
 
-#: src/widgets/tools/tools.py:522
+#: src/widgets/tools/tools.py:523
 msgid "Model Requested to Run Command"
 msgstr "కమాండ్ అమలు చేయడానికి మోడల్ అభ్యర్థించబడింది"
 
-#: src/widgets/tools/tools.py:523
+#: src/widgets/tools/tools.py:524
 msgid "Command"
 msgstr "ఆదేశం"
 
-#: src/widgets/tools/tools.py:525
+#: src/widgets/tools/tools.py:526
 msgid "Explanation"
 msgstr "వివరణ"
 
-#: src/widgets/tools/tools.py:526
+#: src/widgets/tools/tools.py:527
 msgid "No explanation was provided"
 msgstr "ఎలాంటి వివరణ ఇవ్వలేదు"
 
-#: src/widgets/tools/tools.py:527
+#: src/widgets/tools/tools.py:528
 msgid "Make sure you understand what the command does before running it."
 msgstr "కమాండ్ ని రన్ చేసే ముందు అది ఏమి చేస్తుందో మీరు అర్థం చేసుకున్నారని నిర్ధారించుకోండి."
 
-#: src/widgets/tools/tools.py:573
+#: src/widgets/tools/tools.py:574
 msgid "Spotify Controller"
 msgstr "Spotify కంట్రోలర్"
 
-#: src/widgets/tools/tools.py:574
+#: src/widgets/tools/tools.py:575
 msgid "Control your music's playback"
 msgstr "మీ సంగీత ప్లేబ్యాక్‌ను నియంత్రించండి"
 
-#: src/widgets/tools/tools.py:625
+#: src/widgets/tools/tools.py:626
 msgid "Log Back In"
 msgstr "తిరిగి లాగిన్ చేయండి"
 
-#: src/widgets/tools/tools.py:629
+#: src/widgets/tools/tools.py:630
 msgid "Not logged in"
 msgstr "లాగిన్ కాలేదు"
 
-#: src/widgets/tools/tools.py:636
+#: src/widgets/tools/tools.py:637
 msgid "Tutorial"
 msgstr "ట్యుటోరియల్"
 
-#: src/widgets/tools/tools.py:663
+#: src/widgets/tools/tools.py:664
 msgid "Spotify User"
 msgstr "Spotify వినియోగదారు"
 
-#: src/widgets/tools/tools.py:724
+#: src/widgets/tools/tools.py:725
 msgid "Login Error"
 msgstr "లాగిన్ లోపం"
 
-#: src/widgets/tools/tools.py:725
+#: src/widgets/tools/tools.py:726
 msgid "Couldn't log in to Spotify"
 msgstr "Spotifyకి లాగిన్ అవ్వలేకపోయింది"
 
-#: src/widgets/tools/tools.py:726
+#: src/widgets/tools/tools.py:727
 msgid "Specify a Client ID and Client Secret"
 msgstr "క్లయింట్ ID మరియు క్లయింట్ రహస్యాన్ని పేర్కొనండి"
 
-#: src/widgets/tools/tools.py:775
+#: src/widgets/tools/tools.py:776
 msgid "Album Art"
 msgstr "ఆల్బమ్ ఆర్ట్"
+
+#~ msgid ""
+#~ "Have compatible reasoning models think about their response before "
+#~ "generating a message"
+#~ msgstr "అనుకూల తార్కిక నమూనాలు సందేశాన్ని రూపొందించే ముందు వాటి ప్రతిస్పందన గురించి ఆలోచించాలి"
 
 #~ msgid "Attachment failed, screenshot might be too big"
 #~ msgstr "అటాచ్‌మెంట్ విఫలమైంది, స్క్రీన్‌షాట్ చాలా పెద్దదిగా ఉండవచ్చు"

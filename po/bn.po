@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 7.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-30 18:14-0600\n"
+"POT-Creation-Date: 2025-08-07 16:56-0600\n"
 "PO-Revision-Date: 2025-04-12 15:12-0600\n"
 "Last-Translator: aritra saha <capsaicin@tuta.io>\n"
 "Language-Team: Bengali\n"
@@ -592,27 +592,27 @@ msgstr "মাইক্রোসফট এক্সেল ডকুমেন্�
 msgid "New Tools"
 msgstr "নতুন সরঞ্জাম"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:353 src/widgets/tools/tools.py:491
+#: data/com.jeffser.Alpaca.metainfo.xml.in:353 src/widgets/tools/tools.py:492
 msgid "Run Command (Testing)"
 msgstr "কমান্ড চালান (পরীক্ষামূলক)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:354 src/widgets/tools/tools.py:407
+#: data/com.jeffser.Alpaca.metainfo.xml.in:354 src/widgets/tools/tools.py:408
 msgid "Online Search"
 msgstr "অনলাইন অনুসন্ধান"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:355 src/widgets/tools/tools.py:366
+#: data/com.jeffser.Alpaca.metainfo.xml.in:355 src/widgets/tools/tools.py:365
 msgid "Extract Wikipedia Article"
 msgstr "উইকিপিডিয়া আর্টিকেল নিষ্কাশন করুন"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:356 src/widgets/tools/tools.py:250
+#: data/com.jeffser.Alpaca.metainfo.xml.in:356 src/widgets/tools/tools.py:249
 msgid "Get Recipe by Name"
 msgstr "নাম দিয়ে রেসিপি পান"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:357 src/widgets/tools/tools.py:310
+#: data/com.jeffser.Alpaca.metainfo.xml.in:357 src/widgets/tools/tools.py:309
 msgid "Get Recipes by Category"
 msgstr "শ্রেণী অনুযায়ী রেসিপি পান"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:358 src/widgets/tools/tools.py:218
+#: data/com.jeffser.Alpaca.metainfo.xml.in:358 src/widgets/tools/tools.py:217
 msgid "Get Current Datetime"
 msgstr "বর্তমান তারিখ ও সময় পান"
 
@@ -3638,6 +3638,62 @@ msgstr ""
 msgid "Quick Ask"
 msgstr "দ্রুত জিজ্ঞাসা"
 
+#: src/sql_manager.py:33
+#, python-brace-format
+msgid "{} seconds"
+msgstr ""
+
+#: src/sql_manager.py:37
+msgid "Total Duration"
+msgstr ""
+
+#: src/sql_manager.py:38
+msgid "Load Duration"
+msgstr ""
+
+#: src/sql_manager.py:41
+msgid "Prompt Eval Count"
+msgstr ""
+
+#: src/sql_manager.py:41 src/sql_manager.py:46
+#, python-brace-format
+msgid "{} tokens"
+msgstr ""
+
+#: src/sql_manager.py:42
+msgid "Prompt Eval Duration"
+msgstr ""
+
+#: src/sql_manager.py:44
+msgid "Prompt Eval Rate"
+msgstr ""
+
+#: src/sql_manager.py:44 src/sql_manager.py:49
+#, python-brace-format
+msgid "{} tokens/s"
+msgstr ""
+
+#: src/sql_manager.py:46
+msgid "Eval Count"
+msgstr ""
+
+#: src/sql_manager.py:47
+msgid "Eval Duration"
+msgstr ""
+
+#: src/sql_manager.py:49
+msgid "Eval Rate"
+msgstr ""
+
+#: src/sql_manager.py:50
+msgid "Metric"
+msgstr ""
+
+#: src/sql_manager.py:50 src/widgets/instances/ollama_instances.py:132
+#: src/widgets/instances/openai_instances.py:165
+msgid "Value"
+msgstr ""
+
 #: src/window.py:94
 msgid "Ollama Was Not Found"
 msgstr "ওলামা খুঁজে পাওয়া যায়নি"
@@ -3668,9 +3724,9 @@ msgstr "যোগ করার জন্য একটি ইনস্ট্য�
 #: src/widgets/dialog.py:210 src/widgets/dialog.py:223 src/widgets/voice.py:307
 #: src/widgets/voice.py:310 src/widgets/models/added.py:409
 #: src/widgets/models/creator.py:140 src/widgets/models/creator.py:141
-#: src/widgets/instances/__init__.py:252 src/widgets/instances/__init__.py:253
+#: src/widgets/instances/__init__.py:263 src/widgets/instances/__init__.py:264
 #: src/widgets/blocks/code.py:138 src/widgets/blocks/text.py:151
-#: src/widgets/tools/tools.py:98 src/widgets/tools/tools.py:99
+#: src/widgets/tools/tools.py:97 src/widgets/tools/tools.py:98
 msgid "Cancel"
 msgstr "বাতিল করুন"
 
@@ -3704,11 +3760,11 @@ msgstr "চ্যাটিং আগে একটি মডেল নির্�
 
 #: src/window.py:421 src/gtk/window.ui:51 src/gtk/window.ui:640
 #: src/widgets/chat.py:231 src/widgets/instances/ollama_instances.py:38
-#: src/widgets/instances/ollama_instances.py:54
-#: src/widgets/instances/ollama_instances.py:91
+#: src/widgets/instances/ollama_instances.py:55
+#: src/widgets/instances/ollama_instances.py:93
 #: src/widgets/instances/openai_instances.py:68
-#: src/widgets/instances/openai_instances.py:79
-#: src/widgets/instances/openai_instances.py:121
+#: src/widgets/instances/openai_instances.py:86
+#: src/widgets/instances/openai_instances.py:135
 msgid "New Chat"
 msgstr "নতুন চ্যাট"
 
@@ -3787,77 +3843,87 @@ msgstr "সাইডবার টগল করুন"
 
 #: src/gtk/help-overlay.ui:56
 msgctxt "shortcut window"
+msgid "Zoom In"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:62
+msgctxt "shortcut window"
+msgid "Zoom Out"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "প্রস্থান"
 
-#: src/gtk/help-overlay.ui:64
+#: src/gtk/help-overlay.ui:76
 msgctxt "shortcut window"
 msgid "Chat Management"
 msgstr "চ্যাট পরিচালনা"
 
-#: src/gtk/help-overlay.ui:67
+#: src/gtk/help-overlay.ui:79
 msgctxt "shortcut window"
 msgid "Create Chat"
 msgstr "চ্যাট তৈরি করুন"
 
-#: src/gtk/help-overlay.ui:73
+#: src/gtk/help-overlay.ui:85
 msgctxt "shortcut window"
 msgid "Delete Chat"
 msgstr "চ্যাট মুছুন"
 
-#: src/gtk/help-overlay.ui:79
+#: src/gtk/help-overlay.ui:91
 msgctxt "shortcut window"
 msgid "Clear Chat"
 msgstr "চ্যাট পরিষ্কার করুন"
 
-#: src/gtk/help-overlay.ui:85
+#: src/gtk/help-overlay.ui:97
 msgctxt "shortcut window"
 msgid "Rename Chat"
 msgstr "চ্যাটের নাম পরিবর্তন করুন"
 
-#: src/gtk/help-overlay.ui:91
+#: src/gtk/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Toggle Searchbars"
 msgstr "সার্চবার টগল করুন"
 
-#: src/gtk/help-overlay.ui:99
+#: src/gtk/help-overlay.ui:111
 msgctxt "shortcut window"
 msgid "Message Entry"
 msgstr "বার্তা ইনপুট"
 
-#: src/gtk/help-overlay.ui:102
+#: src/gtk/help-overlay.ui:114
 msgid "Copy"
 msgstr "কপি"
 
-#: src/gtk/help-overlay.ui:108
+#: src/gtk/help-overlay.ui:120
 msgid "Paste"
 msgstr "পেস্ট"
 
-#: src/gtk/help-overlay.ui:114
+#: src/gtk/help-overlay.ui:126
 msgid "Open Emoji Menu"
 msgstr "ইমোজি মেনু খুলুন"
 
-#: src/gtk/help-overlay.ui:120
+#: src/gtk/help-overlay.ui:132
 msgid "Insert new line"
 msgstr "নতুন লাইন সন্নিবেশ করুন"
 
-#: src/gtk/help-overlay.ui:126
+#: src/gtk/help-overlay.ui:138
 msgid "Send Message as System"
 msgstr "সিস্টেম হিসাবে বার্তা পাঠান"
 
-#: src/gtk/help-overlay.ui:127
+#: src/gtk/help-overlay.ui:139
 msgid "System messages are taken as literal instructions by models"
 msgstr "সিস্টেমের বার্তাগুলি মডেল দ্বারা শাব্দিক নির্দেশনা হিসেবে গ্রহণ করা হয়"
 
-#: src/gtk/help-overlay.ui:133 src/widgets/message.py:627
+#: src/gtk/help-overlay.ui:145 src/widgets/message.py:652
 msgid "Use Tools"
 msgstr "সরঞ্জাম ব্যবহার করুন"
 
-#: src/gtk/help-overlay.ui:134
+#: src/gtk/help-overlay.ui:146
 msgid "Ask model to use tools to generate a message"
 msgstr "একটি বার্তা তৈরি করতে মডেলকে সরঞ্জাম ব্যবহার করতে বলুন"
 
-#: src/gtk/help-overlay.ui:140
+#: src/gtk/help-overlay.ui:152
 msgid "Send Message as User"
 msgstr "ব্যবহারকারী হিসাবে বার্তা পাঠান"
 
@@ -4405,47 +4471,47 @@ msgstr ""
 msgid "Save Image"
 msgstr ""
 
-#: src/widgets/attachments.py:585
+#: src/widgets/attachments.py:586
 msgid "Any compatible Alpaca attachment"
 msgstr "যেকোনো সামঞ্জস্যপূর্ণ আলপাকা সংযোজন"
 
-#: src/widgets/attachments.py:634 src/widgets/message.py:551
+#: src/widgets/attachments.py:635 src/widgets/message.py:576
 msgid "Image recognition is only available on specific models"
 msgstr "নির্দিষ্ট মডেলগুলিতে ছবি সনাক্তকরণ উপলব্ধ"
 
-#: src/widgets/attachments.py:660
+#: src/widgets/attachments.py:661
 msgid "Attach File"
 msgstr "ফাইল সংযুক্ত করুন"
 
-#: src/widgets/attachments.py:665
+#: src/widgets/attachments.py:666
 msgid "Attach Website"
 msgstr "ওয়েবসাইট সংযুক্ত করুন"
 
-#: src/widgets/attachments.py:668 src/widgets/message.py:531
+#: src/widgets/attachments.py:669 src/widgets/message.py:556
 msgid "Attach Website? (Experimental)"
 msgstr "ওয়েবসাইট সংযুক্ত করুন? (পরীক্ষামূলক)"
 
-#: src/widgets/attachments.py:669
+#: src/widgets/attachments.py:670
 msgid "Please enter a website URL"
 msgstr "দয়া করে একটি ওয়েবসাইট URL লিখুন"
 
-#: src/widgets/attachments.py:676
+#: src/widgets/attachments.py:677
 msgid "Attach YouTube Captions"
 msgstr "ইউটিউব ক্যাপশন সংযুক্ত করুন"
 
-#: src/widgets/attachments.py:679
+#: src/widgets/attachments.py:680
 msgid "Attach YouTube Captions?"
 msgstr "ইউটিউব ক্যাপশন সংযুক্ত করবেন?"
 
-#: src/widgets/attachments.py:680
+#: src/widgets/attachments.py:681
 msgid "Please enter a YouTube video URL"
 msgstr "দয়া করে একটি ইউটিউব ভিডিও URL লিখুন"
 
-#: src/widgets/attachments.py:691
+#: src/widgets/attachments.py:692
 msgid "Attach Screenshot"
 msgstr "স্ক্রীনশট সংযুক্ত করুন"
 
-#: src/widgets/attachments.py:698
+#: src/widgets/attachments.py:699
 msgid "Attach Photo From Camera"
 msgstr "ক্যামেরা থেকে ছবি সংযুক্ত করুন"
 
@@ -4461,8 +4527,8 @@ msgstr "কোনো ক্যামেরা সনাক্ত করা য�
 msgid "Please check if camera is plugged in and turned on"
 msgstr "অনুগ্রহ করে দেখুন ক্যামেরা সংযুক্ত এবং চালু আছে কি না"
 
-#: src/widgets/chat.py:86 src/widgets/instances/ollama_instances.py:76
-#: src/widgets/instances/openai_instances.py:106
+#: src/widgets/chat.py:86 src/widgets/instances/ollama_instances.py:78
+#: src/widgets/instances/openai_instances.py:120
 msgid "Notebook"
 msgstr "নোটবুক"
 
@@ -4578,25 +4644,29 @@ msgstr "বার্তা পুনরুত্পাদন করুন"
 msgid "Message copied to the clipboard"
 msgstr "ক্লিপবোর্ডে কপি করা হয়েছে"
 
-#: src/widgets/message.py:115
+#: src/widgets/message.py:133
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "একটি প্রতিক্রিয়া পাওয়ার সময় বার্তা পুনরায় তৈরি করা যাবে না৷"
 
-#: src/widgets/message.py:246 src/widgets/message.py:269
+#: src/widgets/message.py:264 src/widgets/message.py:287
 msgid "Thought"
 msgstr "চিন্তা"
 
-#: src/widgets/message.py:524
+#: src/widgets/message.py:492
+msgid "Metadata"
+msgstr ""
+
+#: src/widgets/message.py:549
 msgid "Attach YouTube Video?"
 msgstr "ইউটিউব ভিডিও সংযুক্ত করুন?"
 
-#: src/widgets/message.py:525
+#: src/widgets/message.py:550
 msgid "Note that YouTube might block access to captions, please check output"
 msgstr ""
 "নোট করুন যে YouTube ক্যাপশনগুলোর অ্যাক্সেস ব্লক করতে পারে, অনুগ্রহ করে আউটপুট যাচাই "
 "করুন"
 
-#: src/widgets/message.py:532
+#: src/widgets/message.py:557
 #, python-brace-format
 msgid ""
 "Are you sure you want to attach\n"
@@ -4605,19 +4675,19 @@ msgstr ""
 "আপনি কি নিশ্চিত যে আপনি সংযুক্ত করতে চান\n"
 "'{}'?"
 
-#: src/widgets/message.py:580
+#: src/widgets/message.py:605
 msgid "Send Message"
 msgstr "বার্তা পাঠান"
 
-#: src/widgets/message.py:589
+#: src/widgets/message.py:614
 msgid "Stop Message"
 msgstr "বার্তা থামান"
 
-#: src/widgets/message.py:617
+#: src/widgets/message.py:642
 msgid "Send as User"
 msgstr "ব্যবহারকারী হিসাবে পাঠান"
 
-#: src/widgets/message.py:622
+#: src/widgets/message.py:647
 msgid "Send as System"
 msgstr "সিস্টেম হিসাবে পাঠান"
 
@@ -4761,7 +4831,7 @@ msgstr "ভাষা"
 
 #: src/widgets/models/added.py:410 src/widgets/models/added.py:459
 #: src/widgets/models/speech.py:136 src/widgets/models/speech.py:279
-#: src/widgets/instances/__init__.py:396
+#: src/widgets/instances/__init__.py:408
 msgid "Remove"
 msgstr "মুছে ফেলুন"
 
@@ -4912,9 +4982,9 @@ msgid "A higher number widens the amount of possible answers. (top_p)"
 msgstr "উচ্চ সংখ্যা সম্ভাব্য উত্তরের পরিমাণ বাড়িয়ে দেয়। (top_p)"
 
 #: src/widgets/models/creator.py:147 src/widgets/models/creator.py:148
-#: src/widgets/instances/__init__.py:259 src/widgets/instances/__init__.py:260
+#: src/widgets/instances/__init__.py:270 src/widgets/instances/__init__.py:271
 #: src/widgets/blocks/code.py:147 src/widgets/blocks/text.py:160
-#: src/widgets/tools/tools.py:105 src/widgets/tools/tools.py:106
+#: src/widgets/tools/tools.py:104 src/widgets/tools/tools.py:105
 msgid "Save"
 msgstr "সংরক্ষণ করুন"
 
@@ -4982,112 +5052,127 @@ msgstr "ওপেনএআই হুইস্পার দ্বারা সর
 msgid "Speech to Text"
 msgstr "স্পিচ টু টেক্সট"
 
-#: src/widgets/instances/ollama_instances.py:68
-#: src/widgets/instances/openai_instances.py:98
+#: src/widgets/instances/ollama_instances.py:70
+#: src/widgets/instances/openai_instances.py:112
 msgid "Notebook Error"
 msgstr "নোটবুক ত্রুটি"
 
-#: src/widgets/instances/ollama_instances.py:69
-#: src/widgets/instances/ollama_instances.py:155
-#: src/widgets/instances/openai_instances.py:99
-#: src/widgets/instances/openai_instances.py:169
+#: src/widgets/instances/ollama_instances.py:71
+#: src/widgets/instances/ollama_instances.py:170
+#: src/widgets/instances/openai_instances.py:113
+#: src/widgets/instances/openai_instances.py:201
 msgid "An error occurred while running tool"
 msgstr "টুল চালানোর সময় একটি ত্রুটি ঘটেছে"
 
-#: src/widgets/instances/ollama_instances.py:103
-#: src/widgets/instances/openai_instances.py:127
+#: src/widgets/instances/ollama_instances.py:104
+#: src/widgets/instances/openai_instances.py:148
 msgid "Selecting tool to use..."
 msgstr "ব্যবহারের জন্য টুল নির্বাচন করা হচ্ছে..."
 
-#: src/widgets/instances/ollama_instances.py:122
-#: src/widgets/instances/openai_instances.py:136
+#: src/widgets/instances/ollama_instances.py:123
+#: src/widgets/instances/openai_instances.py:157
 #, python-brace-format
 msgid "Using {}"
 msgstr "{} ব্যবহার করা হচ্ছে"
 
-#: src/widgets/instances/ollama_instances.py:154
-#: src/widgets/instances/openai_instances.py:168
+#: src/widgets/instances/ollama_instances.py:131
+#: src/widgets/instances/openai_instances.py:164 src/widgets/tools/tools.py:34
+msgid "Arguments"
+msgstr "আর্গুমেন্ট"
+
+#: src/widgets/instances/ollama_instances.py:132
+#: src/widgets/instances/openai_instances.py:165
+msgid "Argument"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:138
+#: src/widgets/instances/openai_instances.py:171
+msgid "Result"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:169
+#: src/widgets/instances/openai_instances.py:200
 msgid "Tool Error"
 msgstr "টুল ত্রুটি"
 
-#: src/widgets/instances/ollama_instances.py:233
-#: src/widgets/instances/ollama_instances.py:325
-#: src/widgets/instances/ollama_instances.py:339
-#: src/widgets/instances/ollama_instances.py:549
-#: src/widgets/instances/openai_instances.py:230
-#: src/widgets/instances/openai_instances.py:302
-#: src/widgets/instances/openai_instances.py:357
-#: src/widgets/instances/openai_instances.py:402
-#: src/widgets/instances/openai_instances.py:462
-#: src/widgets/instances/openai_instances.py:501
-#: src/widgets/instances/openai_instances.py:534
+#: src/widgets/instances/ollama_instances.py:251
+#: src/widgets/instances/ollama_instances.py:347
+#: src/widgets/instances/ollama_instances.py:361
+#: src/widgets/instances/ollama_instances.py:572
+#: src/widgets/instances/openai_instances.py:262
+#: src/widgets/instances/openai_instances.py:334
+#: src/widgets/instances/openai_instances.py:389
+#: src/widgets/instances/openai_instances.py:434
+#: src/widgets/instances/openai_instances.py:494
+#: src/widgets/instances/openai_instances.py:533
+#: src/widgets/instances/openai_instances.py:566
 msgid "Instance Error"
 msgstr "ইনস্ট্যান্স ত্রুটি"
 
-#: src/widgets/instances/ollama_instances.py:234
-#: src/widgets/instances/openai_instances.py:231
+#: src/widgets/instances/ollama_instances.py:252
+#: src/widgets/instances/openai_instances.py:263
 msgid "Message generation failed"
 msgstr "বার্তা তৈরি ব্যর্থ হয়েছে"
 
-#: src/widgets/instances/ollama_instances.py:326
-#: src/widgets/instances/openai_instances.py:303
-#: src/widgets/instances/openai_instances.py:358
-#: src/widgets/instances/openai_instances.py:403
+#: src/widgets/instances/ollama_instances.py:348
+#: src/widgets/instances/openai_instances.py:335
+#: src/widgets/instances/openai_instances.py:390
+#: src/widgets/instances/openai_instances.py:435
 msgid "Could not retrieve added models"
 msgstr "যোগ করা মডেলগুলি পুনরুদ্ধার করা যায়নি"
 
-#: src/widgets/instances/ollama_instances.py:340
+#: src/widgets/instances/ollama_instances.py:362
 msgid "Could not retrieve available models"
 msgstr "উপলব্ধ মডেলগুলি পুনরুদ্ধার করা যায়নি"
 
-#: src/widgets/instances/ollama_instances.py:458
+#: src/widgets/instances/ollama_instances.py:480
 msgid "Ollama (Managed)"
 msgstr "Ollama (পরিচালিত)"
 
-#: src/widgets/instances/ollama_instances.py:459
+#: src/widgets/instances/ollama_instances.py:481
 msgid "Local AI instance managed directly by Alpaca"
 msgstr "স্থানীয় AI ইনস্ট্যান্স যা সরাসরি Alpaca দ্বারা পরিচালিত"
 
-#: src/widgets/instances/ollama_instances.py:462
-#: src/widgets/instances/ollama_instances.py:564
-#: src/widgets/instances/__init__.py:283
+#: src/widgets/instances/ollama_instances.py:484
+#: src/widgets/instances/ollama_instances.py:587
+#: src/widgets/instances/__init__.py:294
 msgid "Instance"
 msgstr "ইনস্ট্যান্স"
 
-#: src/widgets/instances/ollama_instances.py:494
+#: src/widgets/instances/ollama_instances.py:517
 msgid "Alpaca Support"
 msgstr "আলপাকা সহায়তা"
 
-#: src/widgets/instances/ollama_instances.py:501
+#: src/widgets/instances/ollama_instances.py:524
 msgid "Model request too large for system"
 msgstr "সিস্টেমের জন্য মডেল অনুরোধটি খুব বড়"
 
-#: src/widgets/instances/ollama_instances.py:504
+#: src/widgets/instances/ollama_instances.py:527
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
 msgstr "AMD GPU সনাক্ত হয়েছে কিন্তু এক্সটেনশনটি অনুপস্থিত, Ollama CPU ব্যবহার করবে।"
 
-#: src/widgets/instances/ollama_instances.py:506
+#: src/widgets/instances/ollama_instances.py:529
 msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
 msgstr "AMD GPU সনাক্ত হয়েছে কিন্তু ROCm অনুপস্থিত, Ollama CPU ব্যবহার করবে।"
 
-#: src/widgets/instances/ollama_instances.py:508
+#: src/widgets/instances/ollama_instances.py:531
 #, python-brace-format
 msgid "Using AMD GPU type '{}'"
 msgstr "AMD GPU টাইপ '{}' ব্যবহার করা হচ্ছে"
 
-#: src/widgets/instances/ollama_instances.py:518
+#: src/widgets/instances/ollama_instances.py:541
 msgid "Integrated Ollama instance is not running"
 msgstr "সমন্বিত অল্লামা উদাহরণ চলছে না"
 
-#: src/widgets/instances/ollama_instances.py:550
+#: src/widgets/instances/ollama_instances.py:573
 msgid "Managed Ollama instance failed to start"
 msgstr "পরিচালিত Ollama ইনস্ট্যান্স শুরু করতে ব্যর্থ হয়েছে"
 
-#: src/widgets/instances/ollama_instances.py:556
+#: src/widgets/instances/ollama_instances.py:579
 msgid "Integrated Ollama instance is running"
 msgstr "সমন্বিত Ollama ইনস্ট্যান্স চলছে"
 
-#: src/widgets/instances/ollama_instances.py:561
+#: src/widgets/instances/ollama_instances.py:584
 msgid "Local or remote AI instance not managed by Alpaca"
 msgstr "আলপাকা দ্বারা পরিচালিত নয় এমন স্থানীয় বা দূরবর্তী AI ইনস্ট্যান্স"
 
@@ -5095,61 +5180,61 @@ msgstr "আলপাকা দ্বারা পরিচালিত নয়
 msgid "Instances"
 msgstr "ইনস্ট্যান্সসমূহ"
 
-#: src/widgets/instances/openai_instances.py:175
+#: src/widgets/instances/openai_instances.py:207
 msgid "Generating message..."
 msgstr "বার্তা তৈরি করা হচ্ছে..."
 
-#: src/widgets/instances/openai_instances.py:463
-#: src/widgets/instances/openai_instances.py:502
-#: src/widgets/instances/openai_instances.py:535
+#: src/widgets/instances/openai_instances.py:495
+#: src/widgets/instances/openai_instances.py:534
+#: src/widgets/instances/openai_instances.py:567
 msgid "Could not retrieve models"
 msgstr "মডেলগুলি পুনরুদ্ধার করা যায়নি"
 
-#: src/widgets/instances/openai_instances.py:475
+#: src/widgets/instances/openai_instances.py:507
 msgid "Alibaba Cloud Qwen large language models via DashScope"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:481
+#: src/widgets/instances/openai_instances.py:513
 msgid "Fireworks AI inference platform"
 msgstr "ফায়ারওয়ার্কস এআই ইনফারেন্স প্ল্যাটফর্ম"
 
-#: src/widgets/instances/openai_instances.py:514
+#: src/widgets/instances/openai_instances.py:546
 msgid "Lambda Labs cloud inference API"
 msgstr "ল্যাম্বডা ল্যাবস ক্লাউড ইনফারেন্স এপিআই"
 
-#: src/widgets/instances/openai_instances.py:547
+#: src/widgets/instances/openai_instances.py:579
 msgid "Cerebras AI cloud inference API"
 msgstr "Cerebras AI ক্লাউড ইনফারেন্স API"
 
-#: src/widgets/instances/openai_instances.py:553
+#: src/widgets/instances/openai_instances.py:585
 msgid "Kluster AI cloud inference API"
 msgstr "Kluster AI ক্লাউড ইনফারেন্স API"
 
-#: src/widgets/instances/openai_instances.py:559
+#: src/widgets/instances/openai_instances.py:591
 msgid "Kimi large language models by Moonshot AI"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:566
+#: src/widgets/instances/openai_instances.py:598
 msgid "Mistral AI large language models"
 msgstr "মিস্ট্রাল এআই বড় ভাষা মডেল"
 
-#: src/widgets/instances/openai_instances.py:573
+#: src/widgets/instances/openai_instances.py:605
 msgid "Meta AI Llama API"
 msgstr "মেটা এআই লামা এপিআই"
 
-#: src/widgets/instances/openai_instances.py:579
+#: src/widgets/instances/openai_instances.py:611
 msgid "Novita AI cloud inference API"
 msgstr "Novita AI ক্লাউড ইনফারেন্স API"
 
-#: src/widgets/instances/openai_instances.py:586
+#: src/widgets/instances/openai_instances.py:618
 msgid "DeepInfra cloud inference API"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:590
+#: src/widgets/instances/openai_instances.py:622
 msgid "OpenAI Compatible Instance"
 msgstr "OpenAI সামঞ্জস্যপূর্ণ ইনস্ট্যান্স"
 
-#: src/widgets/instances/openai_instances.py:592
+#: src/widgets/instances/openai_instances.py:624
 msgid "AI instance compatible with OpenAI library"
 msgstr "OpenAI লাইব্রেরির সাথে সামঞ্জস্যপূর্ণ এআই ইনস্ট্যান্স"
 
@@ -5189,9 +5274,8 @@ msgstr "চিন্তা প্রক্রিয়াকরণ"
 #: src/widgets/instances/__init__.py:98
 msgid ""
 "Have compatible reasoning models think about their response before "
-"generating a message"
+"generating a message."
 msgstr ""
-"সামঞ্জস্যপূর্ণ যুক্তি মডেলগুলোকে মেসেজ তৈরি করার আগে তাদের উত্তর নিয়ে চিন্তা করতে দিন"
 
 #: src/widgets/instances/__init__.py:105
 msgid "Share Name"
@@ -5201,11 +5285,31 @@ msgstr "নাম ভাগ করুন"
 msgid "Automatically share your name with the AI models."
 msgstr "স্বয়ংক্রিয়ভাবে আপনার নাম AI মডেলগুলোর সাথে ভাগ করুন।"
 
+#: src/widgets/instances/__init__.py:111
+msgid "Do Not Share"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:112 src/widgets/tools/tools.py:501
+msgid "Username"
+msgstr "ব্যবহারকারীর নাম"
+
+#: src/widgets/instances/__init__.py:113
+msgid "Full Name"
+msgstr ""
+
 #: src/widgets/instances/__init__.py:121
+msgid "Show Response Metadata"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:122
+msgid "Add the option to show reply metadata in the message as an attachment."
+msgstr ""
+
+#: src/widgets/instances/__init__.py:129
 msgid "Max Tokens"
 msgstr "সর্বোচ্চ টোকেন"
 
-#: src/widgets/instances/__init__.py:122
+#: src/widgets/instances/__init__.py:130
 msgid ""
 "Defines the maximum number of tokens (words + spaces) the AI can generate in "
 "a response. More tokens allow longer replies but may take more time and cost "
@@ -5214,19 +5318,19 @@ msgstr ""
 "একটি উত্তরে AI কতগুলি টোকেন (শব্দ + স্পেস) তৈরি করতে পারে তা নির্ধারণ করে। আরও "
 "টোকেন দীর্ঘ উত্তর দেয় কিন্তু আরও সময় নিতে পারে এবং আরও বেশি খরচ হতে পারে"
 
-#: src/widgets/instances/__init__.py:137
+#: src/widgets/instances/__init__.py:145
 msgid "Temperature"
 msgstr "তাপমাত্রা"
 
-#: src/widgets/instances/__init__.py:138
+#: src/widgets/instances/__init__.py:146
 msgid "Increasing the temperature will make the models answer more creatively."
 msgstr "তাপমাত্রা বাড়ানো মডেলগুলিকে আরও সৃজনশীলভাবে উত্তর দিতে সাহায্য করবে"
 
-#: src/widgets/instances/__init__.py:153
+#: src/widgets/instances/__init__.py:161
 msgid "Seed"
 msgstr "বীজ"
 
-#: src/widgets/instances/__init__.py:154
+#: src/widgets/instances/__init__.py:162
 msgid ""
 "Setting this to a specific number other than 0 will make the model generate "
 "the same text for the same prompt."
@@ -5234,11 +5338,11 @@ msgstr ""
 "0 ছাড়া অন্য একটি নির্দিষ্ট সংখ্যায় এটি সেট করলে মডেলটি একই প্রম্পটের জন্য একই টেক্সট "
 "তৈরি করবে"
 
-#: src/widgets/instances/__init__.py:169
+#: src/widgets/instances/__init__.py:177
 msgid "Overrides"
 msgstr "ওভাররাইড"
 
-#: src/widgets/instances/__init__.py:170
+#: src/widgets/instances/__init__.py:178
 msgid ""
 "These entries are optional, they are used to troubleshoot GPU related "
 "problems with Ollama."
@@ -5246,47 +5350,51 @@ msgstr ""
 "এই এন্ট্রিগুলি ঐচ্ছিক, তারা Ollama এর সাথে GPU সম্পর্কিত সমস্যাগুলি সমাধান করতে "
 "ব্যবহৃত হয়"
 
-#: src/widgets/instances/__init__.py:192
+#: src/widgets/instances/__init__.py:200
 msgid "Model Directory"
 msgstr "মডেল ডিরেক্টরি"
 
-#: src/widgets/instances/__init__.py:197
+#: src/widgets/instances/__init__.py:205
 msgid "Select Directory"
 msgstr "ডিরেক্টরি নির্বাচন করুন"
 
-#: src/widgets/instances/__init__.py:217
+#: src/widgets/instances/__init__.py:225
 msgid "Default Model"
 msgstr "ডিফল্ট মডেল"
 
-#: src/widgets/instances/__init__.py:218
+#: src/widgets/instances/__init__.py:226
 msgid "Model to select when starting a new chat."
 msgstr "নতুন একটি চ্যাট শুরু করার সময় বেছে নেওয়ার জন্য মডেল"
 
-#: src/widgets/instances/__init__.py:225
+#: src/widgets/instances/__init__.py:233
 msgid "Title Model"
 msgstr "শিরোনাম মডেল"
 
-#: src/widgets/instances/__init__.py:226
+#: src/widgets/instances/__init__.py:234
 msgid "Model to use when generating a chat title."
 msgstr "একটি চ্যাট শিরোনাম তৈরি করার সময় ব্যবহার করার জন্য মডেল"
 
-#: src/widgets/instances/__init__.py:277
+#: src/widgets/instances/__init__.py:242
+msgid "Use Current Model"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:288
 msgid "Edit Instance"
 msgstr "ইনস্ট্যান্স এডিট করুন"
 
-#: src/widgets/instances/__init__.py:277
+#: src/widgets/instances/__init__.py:288
 msgid "Create Instance"
 msgstr "ইনস্ট্যান্স তৈরি করুন"
 
-#: src/widgets/instances/__init__.py:353
+#: src/widgets/instances/__init__.py:365
 msgid "Fallback Instance"
 msgstr "ব্যাকআপ ইনস্ট্যান্স"
 
-#: src/widgets/instances/__init__.py:393
+#: src/widgets/instances/__init__.py:405
 msgid "Remove Instance?"
 msgstr "ইনস্ট্যান্স অপসারণ করুন?"
 
-#: src/widgets/instances/__init__.py:394
+#: src/widgets/instances/__init__.py:406
 msgid "Are you sure you want to remove this instance?"
 msgstr "আপনি কি নিশ্চিত যে আপনি এই ইনস্ট্যান্সটি অপসারণ করতে চান?"
 
@@ -5346,27 +5454,23 @@ msgstr "নোটবুকে যোগ করুন"
 msgid "Appends text to the notebook."
 msgstr "নোটবুকে টেক্সট যোগ করে।"
 
-#: src/widgets/tools/tools.py:22
+#: src/widgets/tools/tools.py:21
 msgid "AI Description"
 msgstr "এআই বর্ণনা"
 
-#: src/widgets/tools/tools.py:23
+#: src/widgets/tools/tools.py:22
 msgid "The description the AI model will use to understand what the tool does."
 msgstr "এআই মডেল সরঞ্জামটি কী করে তা বোঝার জন্য যে বর্ণনা ব্যবহার করবে।"
 
 #: src/widgets/tools/tools.py:35
-msgid "Arguments"
-msgstr "আর্গুমেন্ট"
-
-#: src/widgets/tools/tools.py:36
 msgid "Variables that are filled by the AI."
 msgstr "এআই দ্বারা পূরণ করা ভেরিয়েবল।"
 
-#: src/widgets/tools/tools.py:49
+#: src/widgets/tools/tools.py:48
 msgid "Variables"
 msgstr "ভেরিয়েবল"
 
-#: src/widgets/tools/tools.py:50
+#: src/widgets/tools/tools.py:49
 msgid ""
 "User filled values that the tool uses to work, the AI does not have access "
 "to these variables at all."
@@ -5374,137 +5478,140 @@ msgstr ""
 "ব্যবহারকারী পূরণকৃত মান যা সরঞ্জামটি কাজ করার জন্য ব্যবহার করে, এআই এর এই "
 "ভেরিয়েবলগুলিতে কোনো অ্যাক্সেস নেই।"
 
-#: src/widgets/tools/tools.py:219
+#: src/widgets/tools/tools.py:218
 msgid "Gets the current date and/or time."
 msgstr "বর্তমান তারিখ এবং/অথবা সময় পায়।"
 
-#: src/widgets/tools/tools.py:251
+#: src/widgets/tools/tools.py:250
 msgid "Gets a recipe by the meal's name"
 msgstr "খাবারের নাম অনুসারে একটি রেসিপি পায়"
 
-#: src/widgets/tools/tools.py:266 src/widgets/tools/tools.py:332
+#: src/widgets/tools/tools.py:265 src/widgets/tools/tools.py:331
 msgid "YouTube Video"
 msgstr "ইউটিউব ভিডিও"
 
-#: src/widgets/tools/tools.py:274 src/widgets/tools/tools.py:341
+#: src/widgets/tools/tools.py:273 src/widgets/tools/tools.py:340
 msgid "Source"
 msgstr "উৎস"
 
-#: src/widgets/tools/tools.py:311
+#: src/widgets/tools/tools.py:310
 msgid "Gets a list of food recipes by a specified category"
 msgstr "একটি নির্দিষ্ট শ্রেণী দ্বারা খাদ্য রেসিপির একটি তালিকা পায়"
 
-#: src/widgets/tools/tools.py:367
+#: src/widgets/tools/tools.py:366
 msgid "Extracts an article from Wikipedia by it's title"
 msgstr "উইকিপিডিয়া থেকে এর শিরোনাম অনুসারে একটি নিবন্ধ নিষ্কাশন করে"
 
-#: src/widgets/tools/tools.py:408
+#: src/widgets/tools/tools.py:409
 msgid "Search for a term online using DuckDuckGo"
 msgstr "DuckDuckGo ব্যবহার করে অনলাইনে একটি শব্দ অনুসন্ধান করুন"
 
-#: src/widgets/tools/tools.py:411
+#: src/widgets/tools/tools.py:412
 msgid "Safe Search"
 msgstr "নিরাপদ অনুসন্ধান"
 
-#: src/widgets/tools/tools.py:415
+#: src/widgets/tools/tools.py:416
 msgid "On"
 msgstr "চালু"
 
-#: src/widgets/tools/tools.py:416
+#: src/widgets/tools/tools.py:417
 msgid "Moderate"
 msgstr "মাঝারি"
 
-#: src/widgets/tools/tools.py:417
+#: src/widgets/tools/tools.py:418
 msgid "Off"
 msgstr "বন্ধ"
 
-#: src/widgets/tools/tools.py:421
+#: src/widgets/tools/tools.py:422
 msgid "Max Results"
 msgstr "সর্বোচ্চ ফলাফল"
 
-#: src/widgets/tools/tools.py:445
+#: src/widgets/tools/tools.py:446
 msgid "Abstract Source"
 msgstr "বিমূর্ত উৎস"
 
-#: src/widgets/tools/tools.py:462
+#: src/widgets/tools/tools.py:463
 msgid "Web Result Image"
 msgstr "ওয়েব ফলাফলের ছবি"
 
-#: src/widgets/tools/tools.py:492
+#: src/widgets/tools/tools.py:493
 msgid "Request to run a command using SSH to connect to the device"
 msgstr "ডিভাইসে সংযোগ করার জন্য SSH ব্যবহার করে একটি কমান্ড চালানোর অনুরোধ"
 
-#: src/widgets/tools/tools.py:495
+#: src/widgets/tools/tools.py:496
 msgid "IP Address"
 msgstr "আইপি ঠিকানা"
 
-#: src/widgets/tools/tools.py:500
-msgid "Username"
-msgstr "ব্যবহারকারীর নাম"
-
-#: src/widgets/tools/tools.py:505
+#: src/widgets/tools/tools.py:506
 msgid "Network Port"
 msgstr "নেটওয়ার্ক পোর্ট"
 
-#: src/widgets/tools/tools.py:522
+#: src/widgets/tools/tools.py:523
 msgid "Model Requested to Run Command"
 msgstr "কমান্ড চালানোর জন্য মডেল অনুরোধ করা হয়েছে"
 
-#: src/widgets/tools/tools.py:523
+#: src/widgets/tools/tools.py:524
 msgid "Command"
 msgstr "কমান্ড"
 
-#: src/widgets/tools/tools.py:525
+#: src/widgets/tools/tools.py:526
 msgid "Explanation"
 msgstr "ব্যাখ্যা"
 
-#: src/widgets/tools/tools.py:526
+#: src/widgets/tools/tools.py:527
 msgid "No explanation was provided"
 msgstr "কোনো ব্যাখ্যা দেওয়া হয়নি"
 
-#: src/widgets/tools/tools.py:527
+#: src/widgets/tools/tools.py:528
 msgid "Make sure you understand what the command does before running it."
 msgstr "কমান্ড চালানোর আগে নিশ্চিত হয়ে নিন যে আপনি বুঝতে পেরেছেন এটি কী করে।"
 
-#: src/widgets/tools/tools.py:573
+#: src/widgets/tools/tools.py:574
 msgid "Spotify Controller"
 msgstr ""
 
-#: src/widgets/tools/tools.py:574
+#: src/widgets/tools/tools.py:575
 msgid "Control your music's playback"
 msgstr ""
 
-#: src/widgets/tools/tools.py:625
+#: src/widgets/tools/tools.py:626
 msgid "Log Back In"
 msgstr ""
 
-#: src/widgets/tools/tools.py:629
+#: src/widgets/tools/tools.py:630
 msgid "Not logged in"
 msgstr ""
 
-#: src/widgets/tools/tools.py:636
+#: src/widgets/tools/tools.py:637
 msgid "Tutorial"
 msgstr ""
 
-#: src/widgets/tools/tools.py:663
+#: src/widgets/tools/tools.py:664
 msgid "Spotify User"
 msgstr ""
 
-#: src/widgets/tools/tools.py:724
+#: src/widgets/tools/tools.py:725
 msgid "Login Error"
 msgstr ""
 
-#: src/widgets/tools/tools.py:725
+#: src/widgets/tools/tools.py:726
 msgid "Couldn't log in to Spotify"
 msgstr ""
 
-#: src/widgets/tools/tools.py:726
+#: src/widgets/tools/tools.py:727
 msgid "Specify a Client ID and Client Secret"
 msgstr ""
 
-#: src/widgets/tools/tools.py:775
+#: src/widgets/tools/tools.py:776
 msgid "Album Art"
 msgstr ""
+
+#~ msgid ""
+#~ "Have compatible reasoning models think about their response before "
+#~ "generating a message"
+#~ msgstr ""
+#~ "সামঞ্জস্যপূর্ণ যুক্তি মডেলগুলোকে মেসেজ তৈরি করার আগে তাদের উত্তর নিয়ে চিন্তা করতে "
+#~ "দিন"
 
 #~ msgid "Attachment failed, screenshot might be too big"
 #~ msgstr "সংযুক্তি ব্যর্থ, স্ক্রীনশটটি খুব বড় হতে পারে"

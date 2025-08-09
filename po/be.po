@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-30 18:14-0600\n"
+"POT-Creation-Date: 2025-08-07 16:56-0600\n"
 "PO-Revision-Date: 2025-07-30 02:15+0200\n"
 "Last-Translator: Aliaksandr Kliujeŭ <katoshrodingera@protonmail.ch>\n"
 "Language-Team: Belarusian <katoshrodingera@protonmail.ch>\n"
@@ -645,27 +645,27 @@ msgstr "Дакумент Microsoft Excel (xlsx)"
 msgid "New Tools"
 msgstr "Новыя інструменты"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:353 src/widgets/tools/tools.py:491
+#: data/com.jeffser.Alpaca.metainfo.xml.in:353 src/widgets/tools/tools.py:492
 msgid "Run Command (Testing)"
 msgstr "Выканаць каманду (тэсціруецца)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:354 src/widgets/tools/tools.py:407
+#: data/com.jeffser.Alpaca.metainfo.xml.in:354 src/widgets/tools/tools.py:408
 msgid "Online Search"
 msgstr "Анлайн-пошук"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:355 src/widgets/tools/tools.py:366
+#: data/com.jeffser.Alpaca.metainfo.xml.in:355 src/widgets/tools/tools.py:365
 msgid "Extract Wikipedia Article"
 msgstr "Вымайце артыкулы з Вікіпедыі"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:356 src/widgets/tools/tools.py:250
+#: data/com.jeffser.Alpaca.metainfo.xml.in:356 src/widgets/tools/tools.py:249
 msgid "Get Recipe by Name"
 msgstr "Атрымлівайце рэцэпт па назве"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:357 src/widgets/tools/tools.py:310
+#: data/com.jeffser.Alpaca.metainfo.xml.in:357 src/widgets/tools/tools.py:309
 msgid "Get Recipes by Category"
 msgstr "Атрымлівайце рэцэпты па катэгорыі"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:358 src/widgets/tools/tools.py:218
+#: data/com.jeffser.Alpaca.metainfo.xml.in:358 src/widgets/tools/tools.py:217
 msgid "Get Current Datetime"
 msgstr "Атрымлівайце бягучыя дату і час"
 
@@ -4145,6 +4145,62 @@ msgstr ""
 msgid "Quick Ask"
 msgstr "Хуткае пытанне"
 
+#: src/sql_manager.py:33
+#, python-brace-format
+msgid "{} seconds"
+msgstr ""
+
+#: src/sql_manager.py:37
+msgid "Total Duration"
+msgstr ""
+
+#: src/sql_manager.py:38
+msgid "Load Duration"
+msgstr ""
+
+#: src/sql_manager.py:41
+msgid "Prompt Eval Count"
+msgstr ""
+
+#: src/sql_manager.py:41 src/sql_manager.py:46
+#, python-brace-format
+msgid "{} tokens"
+msgstr ""
+
+#: src/sql_manager.py:42
+msgid "Prompt Eval Duration"
+msgstr ""
+
+#: src/sql_manager.py:44
+msgid "Prompt Eval Rate"
+msgstr ""
+
+#: src/sql_manager.py:44 src/sql_manager.py:49
+#, python-brace-format
+msgid "{} tokens/s"
+msgstr ""
+
+#: src/sql_manager.py:46
+msgid "Eval Count"
+msgstr ""
+
+#: src/sql_manager.py:47
+msgid "Eval Duration"
+msgstr ""
+
+#: src/sql_manager.py:49
+msgid "Eval Rate"
+msgstr ""
+
+#: src/sql_manager.py:50
+msgid "Metric"
+msgstr ""
+
+#: src/sql_manager.py:50 src/widgets/instances/ollama_instances.py:132
+#: src/widgets/instances/openai_instances.py:165
+msgid "Value"
+msgstr ""
+
 #: src/window.py:94
 msgid "Ollama Was Not Found"
 msgstr "Ollama не знойдзены"
@@ -4176,9 +4232,9 @@ msgstr "Выберыце, які тып экзэмпляра ШІ трэба д�
 #: src/widgets/dialog.py:210 src/widgets/dialog.py:223 src/widgets/voice.py:307
 #: src/widgets/voice.py:310 src/widgets/models/added.py:409
 #: src/widgets/models/creator.py:140 src/widgets/models/creator.py:141
-#: src/widgets/instances/__init__.py:252 src/widgets/instances/__init__.py:253
+#: src/widgets/instances/__init__.py:263 src/widgets/instances/__init__.py:264
 #: src/widgets/blocks/code.py:138 src/widgets/blocks/text.py:151
-#: src/widgets/tools/tools.py:98 src/widgets/tools/tools.py:99
+#: src/widgets/tools/tools.py:97 src/widgets/tools/tools.py:98
 msgid "Cancel"
 msgstr "Скасаваць"
 
@@ -4213,11 +4269,11 @@ msgstr "Выберыце мадэль перад тым, каб пачаць ч�
 
 #: src/window.py:421 src/gtk/window.ui:51 src/gtk/window.ui:640
 #: src/widgets/chat.py:231 src/widgets/instances/ollama_instances.py:38
-#: src/widgets/instances/ollama_instances.py:54
-#: src/widgets/instances/ollama_instances.py:91
+#: src/widgets/instances/ollama_instances.py:55
+#: src/widgets/instances/ollama_instances.py:93
 #: src/widgets/instances/openai_instances.py:68
-#: src/widgets/instances/openai_instances.py:79
-#: src/widgets/instances/openai_instances.py:121
+#: src/widgets/instances/openai_instances.py:86
+#: src/widgets/instances/openai_instances.py:135
 msgid "New Chat"
 msgstr "Новы чат"
 
@@ -4296,79 +4352,89 @@ msgstr "Паказаць/схаваць бакавую панэль"
 
 #: src/gtk/help-overlay.ui:56
 msgctxt "shortcut window"
+msgid "Zoom In"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:62
+msgctxt "shortcut window"
+msgid "Zoom Out"
+msgstr ""
+
+#: src/gtk/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Выйсці"
 
-#: src/gtk/help-overlay.ui:64
+#: src/gtk/help-overlay.ui:76
 msgctxt "shortcut window"
 msgid "Chat Management"
 msgstr "Кіраванне чатамі"
 
-#: src/gtk/help-overlay.ui:67
+#: src/gtk/help-overlay.ui:79
 msgctxt "shortcut window"
 msgid "Create Chat"
 msgstr "Стварыць чат"
 
-#: src/gtk/help-overlay.ui:73
+#: src/gtk/help-overlay.ui:85
 msgctxt "shortcut window"
 msgid "Delete Chat"
 msgstr "Выдаліць чат"
 
-#: src/gtk/help-overlay.ui:79
+#: src/gtk/help-overlay.ui:91
 msgctxt "shortcut window"
 msgid "Clear Chat"
 msgstr "Ачысціць чат"
 
-#: src/gtk/help-overlay.ui:85
+#: src/gtk/help-overlay.ui:97
 msgctxt "shortcut window"
 msgid "Rename Chat"
 msgstr "Перайменаваць чат"
 
-#: src/gtk/help-overlay.ui:91
+#: src/gtk/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Toggle Searchbars"
 msgstr "Паказаць/схаваць радкі пошуку"
 
-#: src/gtk/help-overlay.ui:99
+#: src/gtk/help-overlay.ui:111
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Message Entry"
 msgstr "Увод паведамлення"
 
-#: src/gtk/help-overlay.ui:102
+#: src/gtk/help-overlay.ui:114
 msgid "Copy"
 msgstr "Капіяваць"
 
-#: src/gtk/help-overlay.ui:108
+#: src/gtk/help-overlay.ui:120
 msgid "Paste"
 msgstr "Уставіць"
 
-#: src/gtk/help-overlay.ui:114
+#: src/gtk/help-overlay.ui:126
 msgid "Open Emoji Menu"
 msgstr "Адкрыць меню эмодзі"
 
-#: src/gtk/help-overlay.ui:120
+#: src/gtk/help-overlay.ui:132
 msgid "Insert new line"
 msgstr "Уставіць новы радок"
 
-#: src/gtk/help-overlay.ui:126
+#: src/gtk/help-overlay.ui:138
 msgid "Send Message as System"
 msgstr "Адправіць паведамленне як сістэмнае"
 
-#: src/gtk/help-overlay.ui:127
+#: src/gtk/help-overlay.ui:139
 msgid "System messages are taken as literal instructions by models"
 msgstr "Сістэмныя паведамленні ўспрымаюцца мадэлямі як дослоўныя інструкцыі"
 
-#: src/gtk/help-overlay.ui:133 src/widgets/message.py:627
+#: src/gtk/help-overlay.ui:145 src/widgets/message.py:652
 msgid "Use Tools"
 msgstr "Выкарыстоўваць інструменты"
 
-#: src/gtk/help-overlay.ui:134
+#: src/gtk/help-overlay.ui:146
 msgid "Ask model to use tools to generate a message"
 msgstr ""
 "Папрасіць мадэль выкарыстоўваць інструменты для генерыравання паведамлення"
 
-#: src/gtk/help-overlay.ui:140
+#: src/gtk/help-overlay.ui:152
 msgid "Send Message as User"
 msgstr "Адправіць паведамленне як карыстальнік"
 
@@ -4885,47 +4951,47 @@ msgstr ""
 msgid "Save Image"
 msgstr ""
 
-#: src/widgets/attachments.py:585
+#: src/widgets/attachments.py:586
 msgid "Any compatible Alpaca attachment"
 msgstr "Любое далучэнне, сумяшчальнае з Alpaca"
 
-#: src/widgets/attachments.py:634 src/widgets/message.py:551
+#: src/widgets/attachments.py:635 src/widgets/message.py:576
 msgid "Image recognition is only available on specific models"
 msgstr "Распазнанне відарысаў даступна толькі для пэўных мадэляў"
 
-#: src/widgets/attachments.py:660
+#: src/widgets/attachments.py:661
 msgid "Attach File"
 msgstr "Далучыць файл"
 
-#: src/widgets/attachments.py:665
+#: src/widgets/attachments.py:666
 msgid "Attach Website"
 msgstr "Далучыць вэб-сайт"
 
-#: src/widgets/attachments.py:668 src/widgets/message.py:531
+#: src/widgets/attachments.py:669 src/widgets/message.py:556
 msgid "Attach Website? (Experimental)"
 msgstr "Далучыць вэб-сайт? (эксперыментальная функцыя)"
 
-#: src/widgets/attachments.py:669
+#: src/widgets/attachments.py:670
 msgid "Please enter a website URL"
 msgstr "Увядзіце URL сайта"
 
-#: src/widgets/attachments.py:676
+#: src/widgets/attachments.py:677
 msgid "Attach YouTube Captions"
 msgstr "Далучыць субцітры з YouTube"
 
-#: src/widgets/attachments.py:679
+#: src/widgets/attachments.py:680
 msgid "Attach YouTube Captions?"
 msgstr "Далучыць субцітры з YouTube?"
 
-#: src/widgets/attachments.py:680
+#: src/widgets/attachments.py:681
 msgid "Please enter a YouTube video URL"
 msgstr "Увядзіце URL відэа з YouTube"
 
-#: src/widgets/attachments.py:691
+#: src/widgets/attachments.py:692
 msgid "Attach Screenshot"
 msgstr "Далучыць скрыншот"
 
-#: src/widgets/attachments.py:698
+#: src/widgets/attachments.py:699
 msgid "Attach Photo From Camera"
 msgstr "Далучыць фота з камеры"
 
@@ -4941,8 +5007,8 @@ msgstr "Камера не выяўлена"
 msgid "Please check if camera is plugged in and turned on"
 msgstr "Праверце, ці ваша камера падключана і працуе"
 
-#: src/widgets/chat.py:86 src/widgets/instances/ollama_instances.py:76
-#: src/widgets/instances/openai_instances.py:106
+#: src/widgets/chat.py:86 src/widgets/instances/ollama_instances.py:78
+#: src/widgets/instances/openai_instances.py:120
 msgid "Notebook"
 msgstr "Нататнік"
 
@@ -5059,25 +5125,29 @@ msgstr "Перагенерыраваць паведамленне"
 msgid "Message copied to the clipboard"
 msgstr "Паведамленне скапіявана ў буфер абмену"
 
-#: src/widgets/message.py:115
+#: src/widgets/message.py:133
 msgid "Message cannot be regenerated while receiving a response"
 msgstr "Немагчыма перагенерыраваць паведамленне падчас атрымання адказу"
 
-#: src/widgets/message.py:246 src/widgets/message.py:269
+#: src/widgets/message.py:264 src/widgets/message.py:287
 msgid "Thought"
 msgstr "Думка"
 
-#: src/widgets/message.py:524
+#: src/widgets/message.py:492
+msgid "Metadata"
+msgstr ""
+
+#: src/widgets/message.py:549
 msgid "Attach YouTube Video?"
 msgstr "Далучыць відэа YouTube?"
 
-#: src/widgets/message.py:525
+#: src/widgets/message.py:550
 msgid "Note that YouTube might block access to captions, please check output"
 msgstr ""
 "Звярніце ўвагу, што YouTube можа заблакіраваць доступ да субцітраў, праверце "
 "вынік"
 
-#: src/widgets/message.py:532
+#: src/widgets/message.py:557
 #, python-brace-format
 msgid ""
 "Are you sure you want to attach\n"
@@ -5086,19 +5156,19 @@ msgstr ""
 "Вы ўпэўнены, што хочаце далучыць\n"
 "'{}'?"
 
-#: src/widgets/message.py:580
+#: src/widgets/message.py:605
 msgid "Send Message"
 msgstr "Адправіць паведамленне"
 
-#: src/widgets/message.py:589
+#: src/widgets/message.py:614
 msgid "Stop Message"
 msgstr "Спыніць паведамленне"
 
-#: src/widgets/message.py:617
+#: src/widgets/message.py:642
 msgid "Send as User"
 msgstr "Адправіць як карыстальнік"
 
-#: src/widgets/message.py:622
+#: src/widgets/message.py:647
 msgid "Send as System"
 msgstr "Адправіць як сістэма"
 
@@ -5248,7 +5318,7 @@ msgstr "Мовы"
 
 #: src/widgets/models/added.py:410 src/widgets/models/added.py:459
 #: src/widgets/models/speech.py:136 src/widgets/models/speech.py:279
-#: src/widgets/instances/__init__.py:396
+#: src/widgets/instances/__init__.py:408
 msgid "Remove"
 msgstr "Выдаліць"
 
@@ -5402,9 +5472,9 @@ msgid "A higher number widens the amount of possible answers. (top_p)"
 msgstr "Большае значэнне пашырае спектр магчымых адказаў. (top_p)"
 
 #: src/widgets/models/creator.py:147 src/widgets/models/creator.py:148
-#: src/widgets/instances/__init__.py:259 src/widgets/instances/__init__.py:260
+#: src/widgets/instances/__init__.py:270 src/widgets/instances/__init__.py:271
 #: src/widgets/blocks/code.py:147 src/widgets/blocks/text.py:160
-#: src/widgets/tools/tools.py:105 src/widgets/tools/tools.py:106
+#: src/widgets/tools/tools.py:104 src/widgets/tools/tools.py:105
 msgid "Save"
 msgstr "Захаваць"
 
@@ -5472,116 +5542,131 @@ msgstr "Лакальная мадэль ператварэння маўленн�
 msgid "Speech to Text"
 msgstr "Маўленне ў тэкст"
 
-#: src/widgets/instances/ollama_instances.py:68
-#: src/widgets/instances/openai_instances.py:98
+#: src/widgets/instances/ollama_instances.py:70
+#: src/widgets/instances/openai_instances.py:112
 msgid "Notebook Error"
 msgstr "Памылка нататніка"
 
-#: src/widgets/instances/ollama_instances.py:69
-#: src/widgets/instances/ollama_instances.py:155
-#: src/widgets/instances/openai_instances.py:99
-#: src/widgets/instances/openai_instances.py:169
+#: src/widgets/instances/ollama_instances.py:71
+#: src/widgets/instances/ollama_instances.py:170
+#: src/widgets/instances/openai_instances.py:113
+#: src/widgets/instances/openai_instances.py:201
 msgid "An error occurred while running tool"
 msgstr "Адбылася памылка падчас працы інструмента"
 
-#: src/widgets/instances/ollama_instances.py:103
-#: src/widgets/instances/openai_instances.py:127
+#: src/widgets/instances/ollama_instances.py:104
+#: src/widgets/instances/openai_instances.py:148
 msgid "Selecting tool to use..."
 msgstr "Ідзе выбар інструмента..."
 
-#: src/widgets/instances/ollama_instances.py:122
-#: src/widgets/instances/openai_instances.py:136
+#: src/widgets/instances/ollama_instances.py:123
+#: src/widgets/instances/openai_instances.py:157
 #, python-brace-format
 msgid "Using {}"
 msgstr "Выкарыстоўваецца {}"
 
-#: src/widgets/instances/ollama_instances.py:154
-#: src/widgets/instances/openai_instances.py:168
+#: src/widgets/instances/ollama_instances.py:131
+#: src/widgets/instances/openai_instances.py:164 src/widgets/tools/tools.py:34
+msgid "Arguments"
+msgstr "Пераменныя"
+
+#: src/widgets/instances/ollama_instances.py:132
+#: src/widgets/instances/openai_instances.py:165
+msgid "Argument"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:138
+#: src/widgets/instances/openai_instances.py:171
+msgid "Result"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:169
+#: src/widgets/instances/openai_instances.py:200
 msgid "Tool Error"
 msgstr "Памылка інструмента"
 
-#: src/widgets/instances/ollama_instances.py:233
-#: src/widgets/instances/ollama_instances.py:325
-#: src/widgets/instances/ollama_instances.py:339
-#: src/widgets/instances/ollama_instances.py:549
-#: src/widgets/instances/openai_instances.py:230
-#: src/widgets/instances/openai_instances.py:302
-#: src/widgets/instances/openai_instances.py:357
-#: src/widgets/instances/openai_instances.py:402
-#: src/widgets/instances/openai_instances.py:462
-#: src/widgets/instances/openai_instances.py:501
-#: src/widgets/instances/openai_instances.py:534
+#: src/widgets/instances/ollama_instances.py:251
+#: src/widgets/instances/ollama_instances.py:347
+#: src/widgets/instances/ollama_instances.py:361
+#: src/widgets/instances/ollama_instances.py:572
+#: src/widgets/instances/openai_instances.py:262
+#: src/widgets/instances/openai_instances.py:334
+#: src/widgets/instances/openai_instances.py:389
+#: src/widgets/instances/openai_instances.py:434
+#: src/widgets/instances/openai_instances.py:494
+#: src/widgets/instances/openai_instances.py:533
+#: src/widgets/instances/openai_instances.py:566
 msgid "Instance Error"
 msgstr "Памылка экзэмпляра ШІ"
 
-#: src/widgets/instances/ollama_instances.py:234
-#: src/widgets/instances/openai_instances.py:231
+#: src/widgets/instances/ollama_instances.py:252
+#: src/widgets/instances/openai_instances.py:263
 msgid "Message generation failed"
 msgstr "Не атрымалася згенерыраваць паведамленне"
 
-#: src/widgets/instances/ollama_instances.py:326
-#: src/widgets/instances/openai_instances.py:303
-#: src/widgets/instances/openai_instances.py:358
-#: src/widgets/instances/openai_instances.py:403
+#: src/widgets/instances/ollama_instances.py:348
+#: src/widgets/instances/openai_instances.py:335
+#: src/widgets/instances/openai_instances.py:390
+#: src/widgets/instances/openai_instances.py:435
 msgid "Could not retrieve added models"
 msgstr "Не ўдалося атрымаць даданыя мадэлі"
 
-#: src/widgets/instances/ollama_instances.py:340
+#: src/widgets/instances/ollama_instances.py:362
 msgid "Could not retrieve available models"
 msgstr "Не ўдалося атрымаць даступныя мадэлі"
 
-#: src/widgets/instances/ollama_instances.py:458
+#: src/widgets/instances/ollama_instances.py:480
 msgid "Ollama (Managed)"
 msgstr "Ollama (кіруемая)"
 
-#: src/widgets/instances/ollama_instances.py:459
+#: src/widgets/instances/ollama_instances.py:481
 msgid "Local AI instance managed directly by Alpaca"
 msgstr "Лакальны экзэмпляр ШІ, кіруемы непасрэдна Alpaca"
 
-#: src/widgets/instances/ollama_instances.py:462
-#: src/widgets/instances/ollama_instances.py:564
-#: src/widgets/instances/__init__.py:283
+#: src/widgets/instances/ollama_instances.py:484
+#: src/widgets/instances/ollama_instances.py:587
+#: src/widgets/instances/__init__.py:294
 msgid "Instance"
 msgstr "Экзэмпляр ШІ"
 
-#: src/widgets/instances/ollama_instances.py:494
+#: src/widgets/instances/ollama_instances.py:517
 msgid "Alpaca Support"
 msgstr "Падтрымка Alpaca"
 
-#: src/widgets/instances/ollama_instances.py:501
+#: src/widgets/instances/ollama_instances.py:524
 msgid "Model request too large for system"
 msgstr "Запыт мадэлі занадта вялікі для сістэмы"
 
-#: src/widgets/instances/ollama_instances.py:504
+#: src/widgets/instances/ollama_instances.py:527
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
 msgstr ""
 "Знойдзена відэакарта AMD, але пашырэнне адсутнічае, Ollama будзе "
 "выкарыстоўваць цэнтральны працэсар."
 
-#: src/widgets/instances/ollama_instances.py:506
+#: src/widgets/instances/ollama_instances.py:529
 msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
 msgstr ""
 "Знойдзена відэакарта AMD, але ROCm адсутнічае, Ollama будзе выкарыстоўваць "
 "CPU."
 
-#: src/widgets/instances/ollama_instances.py:508
+#: src/widgets/instances/ollama_instances.py:531
 #, python-brace-format
 msgid "Using AMD GPU type '{}'"
 msgstr "Выкарыстоўваецца відэакарта AMD тыпу '{}'"
 
-#: src/widgets/instances/ollama_instances.py:518
+#: src/widgets/instances/ollama_instances.py:541
 msgid "Integrated Ollama instance is not running"
 msgstr "Інтэгрыраваны экзэмпляр Ollama не працуе"
 
-#: src/widgets/instances/ollama_instances.py:550
+#: src/widgets/instances/ollama_instances.py:573
 msgid "Managed Ollama instance failed to start"
 msgstr "Не ўдалося запусціць кіруемы экзэмпляр Ollama"
 
-#: src/widgets/instances/ollama_instances.py:556
+#: src/widgets/instances/ollama_instances.py:579
 msgid "Integrated Ollama instance is running"
 msgstr "Інтэгрыраваны экзэмпляр Ollama запушчаны"
 
-#: src/widgets/instances/ollama_instances.py:561
+#: src/widgets/instances/ollama_instances.py:584
 msgid "Local or remote AI instance not managed by Alpaca"
 msgstr "Лакальны або дыстанцыйны экзэмпляр ШІ, які не кіруецца Alpaca"
 
@@ -5589,62 +5674,62 @@ msgstr "Лакальны або дыстанцыйны экзэмпляр ШІ, 
 msgid "Instances"
 msgstr "Экзэмпляры ШІ"
 
-#: src/widgets/instances/openai_instances.py:175
+#: src/widgets/instances/openai_instances.py:207
 msgid "Generating message..."
 msgstr "Ідзе генерыраванне паведамлення..."
 
-#: src/widgets/instances/openai_instances.py:463
-#: src/widgets/instances/openai_instances.py:502
-#: src/widgets/instances/openai_instances.py:535
+#: src/widgets/instances/openai_instances.py:495
+#: src/widgets/instances/openai_instances.py:534
+#: src/widgets/instances/openai_instances.py:567
 msgid "Could not retrieve models"
 msgstr "Не ўдалося атрымаць мадэлі"
 
-#: src/widgets/instances/openai_instances.py:475
+#: src/widgets/instances/openai_instances.py:507
 msgid "Alibaba Cloud Qwen large language models via DashScope"
 msgstr "Вялікія моўныя мадэлі Alibaba Cloud Qwen праз DashScope"
 
-#: src/widgets/instances/openai_instances.py:481
+#: src/widgets/instances/openai_instances.py:513
 #, fuzzy
 msgid "Fireworks AI inference platform"
 msgstr "Платформа Fireworks AI"
 
-#: src/widgets/instances/openai_instances.py:514
+#: src/widgets/instances/openai_instances.py:546
 msgid "Lambda Labs cloud inference API"
 msgstr "API Lambda Labs"
 
-#: src/widgets/instances/openai_instances.py:547
+#: src/widgets/instances/openai_instances.py:579
 msgid "Cerebras AI cloud inference API"
 msgstr "API Cerebras AI"
 
-#: src/widgets/instances/openai_instances.py:553
+#: src/widgets/instances/openai_instances.py:585
 msgid "Kluster AI cloud inference API"
 msgstr "API Kluster AI"
 
-#: src/widgets/instances/openai_instances.py:559
+#: src/widgets/instances/openai_instances.py:591
 msgid "Kimi large language models by Moonshot AI"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:566
+#: src/widgets/instances/openai_instances.py:598
 msgid "Mistral AI large language models"
 msgstr "Вялікія моўныя мадэлі Mistral AI"
 
-#: src/widgets/instances/openai_instances.py:573
+#: src/widgets/instances/openai_instances.py:605
 msgid "Meta AI Llama API"
 msgstr "API Meta AI Llama"
 
-#: src/widgets/instances/openai_instances.py:579
+#: src/widgets/instances/openai_instances.py:611
 msgid "Novita AI cloud inference API"
 msgstr "API Novita AI"
 
-#: src/widgets/instances/openai_instances.py:586
+#: src/widgets/instances/openai_instances.py:618
 msgid "DeepInfra cloud inference API"
 msgstr "API DeepInfra"
 
-#: src/widgets/instances/openai_instances.py:590
+#: src/widgets/instances/openai_instances.py:622
 msgid "OpenAI Compatible Instance"
 msgstr "Сумяшчальны экзэмпляр ШІ OpenAI"
 
-#: src/widgets/instances/openai_instances.py:592
+#: src/widgets/instances/openai_instances.py:624
 msgid "AI instance compatible with OpenAI library"
 msgstr "Экзэмпляр ШІ, сумяшчальны з бібліятэкай OpenAI"
 
@@ -5684,10 +5769,8 @@ msgstr "Апрацоўка думак"
 #: src/widgets/instances/__init__.py:98
 msgid ""
 "Have compatible reasoning models think about their response before "
-"generating a message"
+"generating a message."
 msgstr ""
-"Дазволіць сумяшчальным мадэлям рабіць лагічны вывад для адказаў перад "
-"генерыраваннем паведамлення"
 
 #: src/widgets/instances/__init__.py:105
 msgid "Share Name"
@@ -5697,11 +5780,31 @@ msgstr "Падзяліцца імем"
 msgid "Automatically share your name with the AI models."
 msgstr "Аўтаматычна дзяліцца вашым імем з мадэлямі AI."
 
+#: src/widgets/instances/__init__.py:111
+msgid "Do Not Share"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:112 src/widgets/tools/tools.py:501
+msgid "Username"
+msgstr "Імя карыстальніка"
+
+#: src/widgets/instances/__init__.py:113
+msgid "Full Name"
+msgstr ""
+
 #: src/widgets/instances/__init__.py:121
+msgid "Show Response Metadata"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:122
+msgid "Add the option to show reply metadata in the message as an attachment."
+msgstr ""
+
+#: src/widgets/instances/__init__.py:129
 msgid "Max Tokens"
 msgstr "Максімум токенаў"
 
-#: src/widgets/instances/__init__.py:122
+#: src/widgets/instances/__init__.py:130
 msgid ""
 "Defines the maximum number of tokens (words + spaces) the AI can generate in "
 "a response. More tokens allow longer replies but may take more time and cost "
@@ -5711,20 +5814,20 @@ msgstr ""
 "згенерыраваць у адказ. Больш токенаў дазваляе даўжэйшыя адказы, але патрабуе "
 "болей часу і рэсурсаў."
 
-#: src/widgets/instances/__init__.py:137
+#: src/widgets/instances/__init__.py:145
 msgid "Temperature"
 msgstr "Тэмпература"
 
-#: src/widgets/instances/__init__.py:138
+#: src/widgets/instances/__init__.py:146
 #, fuzzy
 msgid "Increasing the temperature will make the models answer more creatively."
 msgstr "Павышэнне тэмпературы зробіць адказы мадэляў больш крэатыўнымі."
 
-#: src/widgets/instances/__init__.py:153
+#: src/widgets/instances/__init__.py:161
 msgid "Seed"
 msgstr "Пачатковае значэнне"
 
-#: src/widgets/instances/__init__.py:154
+#: src/widgets/instances/__init__.py:162
 #, fuzzy
 msgid ""
 "Setting this to a specific number other than 0 will make the model generate "
@@ -5732,11 +5835,11 @@ msgid ""
 msgstr ""
 "Калі задаць не 0, мадэль будзе генерыраваць той жа тэкст для таго ж запыту."
 
-#: src/widgets/instances/__init__.py:169
+#: src/widgets/instances/__init__.py:177
 msgid "Overrides"
 msgstr "Перазапісы"
 
-#: src/widgets/instances/__init__.py:170
+#: src/widgets/instances/__init__.py:178
 #, fuzzy
 msgid ""
 "These entries are optional, they are used to troubleshoot GPU related "
@@ -5745,47 +5848,51 @@ msgstr ""
 "Гэтыя запісы неабавязковыя і выкарыстоўваюцца для дыягностыкі праблем з GPU "
 "у Ollama."
 
-#: src/widgets/instances/__init__.py:192
+#: src/widgets/instances/__init__.py:200
 msgid "Model Directory"
 msgstr "Каталог мадэлі"
 
-#: src/widgets/instances/__init__.py:197
+#: src/widgets/instances/__init__.py:205
 msgid "Select Directory"
 msgstr "Выбраць каталог"
 
-#: src/widgets/instances/__init__.py:217
+#: src/widgets/instances/__init__.py:225
 msgid "Default Model"
 msgstr "Прадвызначаная мадэль"
 
-#: src/widgets/instances/__init__.py:218
+#: src/widgets/instances/__init__.py:226
 msgid "Model to select when starting a new chat."
 msgstr "Мадэль, якую трэба выбіраць пры запуску новага чата."
 
-#: src/widgets/instances/__init__.py:225
+#: src/widgets/instances/__init__.py:233
 msgid "Title Model"
 msgstr "Мадэль для назвы"
 
-#: src/widgets/instances/__init__.py:226
+#: src/widgets/instances/__init__.py:234
 msgid "Model to use when generating a chat title."
 msgstr "Мадэль для генерыравання назвы чата."
 
-#: src/widgets/instances/__init__.py:277
+#: src/widgets/instances/__init__.py:242
+msgid "Use Current Model"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:288
 msgid "Edit Instance"
 msgstr "Рэдагаваць экзэмпляр ШІ"
 
-#: src/widgets/instances/__init__.py:277
+#: src/widgets/instances/__init__.py:288
 msgid "Create Instance"
 msgstr "Стварыць экзэмпляр ШІ"
 
-#: src/widgets/instances/__init__.py:353
+#: src/widgets/instances/__init__.py:365
 msgid "Fallback Instance"
 msgstr "Рэзервовы экзэмпляр ШІ"
 
-#: src/widgets/instances/__init__.py:393
+#: src/widgets/instances/__init__.py:405
 msgid "Remove Instance?"
 msgstr "Выдаліць экзэмпляр ШІ?"
 
-#: src/widgets/instances/__init__.py:394
+#: src/widgets/instances/__init__.py:406
 msgid "Are you sure you want to remove this instance?"
 msgstr "Ці вы ўпэўненыя, што хочаце выдаліць гэты экзэмпляр ШІ?"
 
@@ -5845,28 +5952,24 @@ msgstr "Дабавіць у нататнік"
 msgid "Appends text to the notebook."
 msgstr "Дабаўляе тэкст у нататнік."
 
-#: src/widgets/tools/tools.py:22
+#: src/widgets/tools/tools.py:21
 msgid "AI Description"
 msgstr "Апісанне ШІ"
 
-#: src/widgets/tools/tools.py:23
+#: src/widgets/tools/tools.py:22
 msgid "The description the AI model will use to understand what the tool does."
 msgstr ""
 "Апісанне, якое мадэль ШІ выкарыстоўвае для разумення прызначэння інструмента."
 
 #: src/widgets/tools/tools.py:35
-msgid "Arguments"
-msgstr "Пераменныя"
-
-#: src/widgets/tools/tools.py:36
 msgid "Variables that are filled by the AI."
 msgstr "Пераменныя, значэнні якіх задае ШІ."
 
-#: src/widgets/tools/tools.py:49
+#: src/widgets/tools/tools.py:48
 msgid "Variables"
 msgstr "Пераменныя"
 
-#: src/widgets/tools/tools.py:50
+#: src/widgets/tools/tools.py:49
 msgid ""
 "User filled values that the tool uses to work, the AI does not have access "
 "to these variables at all."
@@ -5874,138 +5977,141 @@ msgstr ""
 "Значэнні, якія карыстальнік ўводзіць для працы інструмента; AI не мае "
 "даступу да гэтых пераменных."
 
-#: src/widgets/tools/tools.py:219
+#: src/widgets/tools/tools.py:218
 msgid "Gets the current date and/or time."
 msgstr "Атрымлівае бягучую дату і/або час."
 
-#: src/widgets/tools/tools.py:251
+#: src/widgets/tools/tools.py:250
 msgid "Gets a recipe by the meal's name"
 msgstr "Атрымлівае рэцэпт па назве стравы"
 
-#: src/widgets/tools/tools.py:266 src/widgets/tools/tools.py:332
+#: src/widgets/tools/tools.py:265 src/widgets/tools/tools.py:331
 msgid "YouTube Video"
 msgstr "Відэа з YouTube"
 
-#: src/widgets/tools/tools.py:274 src/widgets/tools/tools.py:341
+#: src/widgets/tools/tools.py:273 src/widgets/tools/tools.py:340
 msgid "Source"
 msgstr "Крыніца"
 
-#: src/widgets/tools/tools.py:311
+#: src/widgets/tools/tools.py:310
 msgid "Gets a list of food recipes by a specified category"
 msgstr "Атрымлівае спіс кулінарных рэцэптаў па зададзенай катэгорыі"
 
-#: src/widgets/tools/tools.py:367
+#: src/widgets/tools/tools.py:366
 msgid "Extracts an article from Wikipedia by it's title"
 msgstr "Атрымлівае артыкул з Вікіпедыі па яго назве"
 
-#: src/widgets/tools/tools.py:408
+#: src/widgets/tools/tools.py:409
 msgid "Search for a term online using DuckDuckGo"
 msgstr "Шукае тэрмін у інтэрнэце з дапамогай DuckDuckGo"
 
-#: src/widgets/tools/tools.py:411
+#: src/widgets/tools/tools.py:412
 msgid "Safe Search"
 msgstr "Бяспечны пошук"
 
-#: src/widgets/tools/tools.py:415
+#: src/widgets/tools/tools.py:416
 msgid "On"
 msgstr "Уключаны"
 
-#: src/widgets/tools/tools.py:416
+#: src/widgets/tools/tools.py:417
 msgid "Moderate"
 msgstr "Умераны"
 
-#: src/widgets/tools/tools.py:417
+#: src/widgets/tools/tools.py:418
 msgid "Off"
 msgstr "Выключаны"
 
-#: src/widgets/tools/tools.py:421
+#: src/widgets/tools/tools.py:422
 msgid "Max Results"
 msgstr "Максімум вынікаў"
 
-#: src/widgets/tools/tools.py:445
+#: src/widgets/tools/tools.py:446
 #, fuzzy
 msgid "Abstract Source"
 msgstr "Анатацыя крыніцы"
 
-#: src/widgets/tools/tools.py:462
+#: src/widgets/tools/tools.py:463
 msgid "Web Result Image"
 msgstr "Відарыс з вэб-пошуку"
 
-#: src/widgets/tools/tools.py:492
+#: src/widgets/tools/tools.py:493
 msgid "Request to run a command using SSH to connect to the device"
 msgstr "Запыт на выкананне каманды праз SSH для падключэння да прылады"
 
-#: src/widgets/tools/tools.py:495
+#: src/widgets/tools/tools.py:496
 msgid "IP Address"
 msgstr "IP-адрас"
 
-#: src/widgets/tools/tools.py:500
-msgid "Username"
-msgstr "Імя карыстальніка"
-
-#: src/widgets/tools/tools.py:505
+#: src/widgets/tools/tools.py:506
 msgid "Network Port"
 msgstr "Сеткавы порт"
 
-#: src/widgets/tools/tools.py:522
+#: src/widgets/tools/tools.py:523
 msgid "Model Requested to Run Command"
 msgstr "Мадэль, якая атрымлівае запыт на выкананне каманды"
 
-#: src/widgets/tools/tools.py:523
+#: src/widgets/tools/tools.py:524
 msgid "Command"
 msgstr "Каманда"
 
-#: src/widgets/tools/tools.py:525
+#: src/widgets/tools/tools.py:526
 msgid "Explanation"
 msgstr "Тлумачэнне"
 
-#: src/widgets/tools/tools.py:526
+#: src/widgets/tools/tools.py:527
 msgid "No explanation was provided"
 msgstr "Тлумачэнне не дадзена"
 
-#: src/widgets/tools/tools.py:527
+#: src/widgets/tools/tools.py:528
 msgid "Make sure you understand what the command does before running it."
 msgstr "Перад выкананнем упэўніцеся, што разумееце прызначэнне каманды."
 
-#: src/widgets/tools/tools.py:573
+#: src/widgets/tools/tools.py:574
 msgid "Spotify Controller"
 msgstr ""
 
-#: src/widgets/tools/tools.py:574
+#: src/widgets/tools/tools.py:575
 msgid "Control your music's playback"
 msgstr ""
 
-#: src/widgets/tools/tools.py:625
+#: src/widgets/tools/tools.py:626
 msgid "Log Back In"
 msgstr ""
 
-#: src/widgets/tools/tools.py:629
+#: src/widgets/tools/tools.py:630
 msgid "Not logged in"
 msgstr ""
 
-#: src/widgets/tools/tools.py:636
+#: src/widgets/tools/tools.py:637
 msgid "Tutorial"
 msgstr ""
 
-#: src/widgets/tools/tools.py:663
+#: src/widgets/tools/tools.py:664
 msgid "Spotify User"
 msgstr ""
 
-#: src/widgets/tools/tools.py:724
+#: src/widgets/tools/tools.py:725
 msgid "Login Error"
 msgstr ""
 
-#: src/widgets/tools/tools.py:725
+#: src/widgets/tools/tools.py:726
 msgid "Couldn't log in to Spotify"
 msgstr ""
 
-#: src/widgets/tools/tools.py:726
+#: src/widgets/tools/tools.py:727
 msgid "Specify a Client ID and Client Secret"
 msgstr ""
 
-#: src/widgets/tools/tools.py:775
+#: src/widgets/tools/tools.py:776
 msgid "Album Art"
 msgstr ""
+
+#~ msgid ""
+#~ "Have compatible reasoning models think about their response before "
+#~ "generating a message"
+#~ msgstr ""
+#~ "Дазволіць сумяшчальным мадэлям рабіць лагічны вывад для адказаў перад "
+#~ "генерыраваннем паведамлення"
 
 #~ msgid "Download Model?"
 #~ msgstr "Спампаваць мадэль?"
