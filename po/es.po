@@ -168,31 +168,31 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Update model list"
-msgstr ""
+msgstr "Actualizar lista de modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Changed design of tool attachments"
-msgstr ""
+msgstr "Se modificó el diseño de los adjuntos de herramientas"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Tool usage optimization"
-msgstr ""
+msgstr "Optimización del uso de herramientas"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Added metadata attachments for Ollama instances"
-msgstr ""
+msgstr "Se agregaron archivos adjuntos de metadatos para instancias de Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Changed Image Attachment Container min width to 240"
-msgstr ""
+msgstr "Se modificó el ancho mínimo del contenedor de adjuntos de imagen a 240"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Added option to use current model for title generation"
-msgstr ""
+msgstr "Se agregó la opción de usar el modelo actual para generar títulos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Added option to regenerate tool responses"
-msgstr ""
+msgstr "Se agregó una opción para regenerar las respuestas de la herramienta"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
@@ -243,23 +243,24 @@ msgstr "Arreglos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
 msgid "Made DDG_Search library optional (AUR fix)"
-msgstr ""
+msgstr "La biblioteca DDG_Search se hizo opcional (corrección de AUR)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Fixed attachments being rendered to the wrong messages"
-msgstr ""
+msgstr "Se corrigieron los adjuntos que se mostraban en mensajes incorrectos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:117
 msgid "Fixed message generation problems relating to threading"
-msgstr ""
+msgstr "Se solucionaron los problemas de generación de mensajes relacionados "
+"con los subprocesos."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:126
 msgid "Fixed message generation problems"
-msgstr ""
+msgstr "Se solucionaron problemas de generación de mensajes"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:127
 msgid "Fixed max tokens error with online instances"
-msgstr ""
+msgstr "Se solucionó el error de tokens máximos con instancias en línea"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:136
 msgid "Added option to regenerate responses when messages are edited"
@@ -3829,10 +3830,13 @@ msgid ""
 "OpenAI’s open-weight models designed for powerful reasoning, agentic tasks, "
 "and versatile developer use cases."
 msgstr ""
+"Modelos de peso abierto de OpenAI diseñados para razonamiento poderoso, "
+"tareas de agentes y casos de uso versátiles para desarrolladores."
 
 #: src/ollama_models.py:5238
 msgid "Alibaba's performant long context models for agentic and coding tasks."
-msgstr ""
+msgstr "Modelos de contexto largos de alto rendimiento de Alibaba para "
+"tareas de agencia y codificación."
 
 #: src/quick_ask.py:138 src/gtk/quick_ask.ui:11
 msgid "Quick Ask"
@@ -3841,58 +3845,58 @@ msgstr "Pregunta Rápida"
 #: src/sql_manager.py:33
 #, python-brace-format
 msgid "{} seconds"
-msgstr ""
+msgstr "{} segundos"
 
 #: src/sql_manager.py:37
 msgid "Total Duration"
-msgstr ""
+msgstr "Duración Total"
 
 #: src/sql_manager.py:38
 msgid "Load Duration"
-msgstr ""
+msgstr "Duración de Carga"
 
 #: src/sql_manager.py:41
 msgid "Prompt Eval Count"
-msgstr ""
+msgstr "Conteo de Evaluación de Instrucciones"
 
 #: src/sql_manager.py:41 src/sql_manager.py:46
 #, python-brace-format
 msgid "{} tokens"
-msgstr ""
+msgstr "{} tokens"
 
 #: src/sql_manager.py:42
 msgid "Prompt Eval Duration"
-msgstr ""
+msgstr "Duración de Evaluación de Instrucciones"
 
 #: src/sql_manager.py:44
 msgid "Prompt Eval Rate"
-msgstr ""
+msgstr "Tasa de Evaluación de Instrucciones"
 
 #: src/sql_manager.py:44 src/sql_manager.py:49
 #, python-brace-format
 msgid "{} tokens/s"
-msgstr ""
+msgstr "{} tokens/s"
 
 #: src/sql_manager.py:46
 msgid "Eval Count"
-msgstr ""
+msgstr "Conteo de Evaluación"
 
 #: src/sql_manager.py:47
 msgid "Eval Duration"
-msgstr ""
+msgstr "Duración de Evaluación"
 
 #: src/sql_manager.py:49
 msgid "Eval Rate"
-msgstr ""
+msgstr "Tasa de Evaluación"
 
 #: src/sql_manager.py:50
 msgid "Metric"
-msgstr ""
+msgstr "Metrica"
 
 #: src/sql_manager.py:50 src/widgets/instances/ollama_instances.py:132
 #: src/widgets/instances/openai_instances.py:165
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #: src/window.py:94
 msgid "Ollama Was Not Found"
@@ -4047,12 +4051,12 @@ msgstr "Alternar Barra Lateral"
 #: src/gtk/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Zoom In"
-msgstr ""
+msgstr "Zoom +"
 
 #: src/gtk/help-overlay.ui:62
 msgctxt "shortcut window"
 msgid "Zoom Out"
-msgstr ""
+msgstr "Zoom -"
 
 #: src/gtk/help-overlay.ui:68
 msgctxt "shortcut window"
@@ -4501,19 +4505,19 @@ msgstr "Zoom"
 
 #: src/gtk/preferences.ui:40
 msgid "Prefer to Use Tools"
-msgstr ""
+msgstr "Preferir Usar Herramientas"
 
 #: src/gtk/preferences.ui:41
 msgid "Always try to use tools when sending a message"
-msgstr ""
+msgstr "Intente siempre utilizar herramientas al enviar un mensaje"
 
 #: src/gtk/preferences.ui:46
 msgid "Regenerate Response After Editing Message"
-msgstr ""
+msgstr "Regenerar la Respuesta Después de Editar el Mensaje"
 
 #: src/gtk/preferences.ui:47
 msgid "Applicable when the next message was generated by an AI model"
-msgstr ""
+msgstr "Aplicable cuando el siguiente mensaje fue generado por un modelo de IA"
 
 #: src/gtk/preferences.ui:59
 msgid "Delete All Chats"
@@ -4521,7 +4525,7 @@ msgstr "Eliminar Todos Los Chats"
 
 #: src/gtk/preferences.ui:70
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #: src/gtk/preferences.ui:75
 msgid "Speech Recognition Model"
@@ -4869,7 +4873,7 @@ msgstr "Pensamiento"
 
 #: src/widgets/message.py:492
 msgid "Metadata"
-msgstr ""
+msgstr "Metadatos"
 
 #: src/widgets/message.py:549
 msgid "Attach YouTube Video?"
@@ -5303,12 +5307,12 @@ msgstr "Argumentos"
 #: src/widgets/instances/ollama_instances.py:132
 #: src/widgets/instances/openai_instances.py:165
 msgid "Argument"
-msgstr ""
+msgstr "Argumento"
 
 #: src/widgets/instances/ollama_instances.py:138
 #: src/widgets/instances/openai_instances.py:171
 msgid "Result"
-msgstr ""
+msgstr "Resultado"
 
 #: src/widgets/instances/ollama_instances.py:169
 #: src/widgets/instances/openai_instances.py:200
@@ -5497,6 +5501,8 @@ msgid ""
 "Have compatible reasoning models think about their response before "
 "generating a message."
 msgstr ""
+"Haga que los modelos de razonamiento compatibles piensen en su respuesta "
+"antes de generar un mensaje."
 
 #: src/widgets/instances/__init__.py:105
 msgid "Share Name"
@@ -5508,7 +5514,7 @@ msgstr "Comparte automáticamente tu nombre con los modelos de IA."
 
 #: src/widgets/instances/__init__.py:111
 msgid "Do Not Share"
-msgstr ""
+msgstr "No Compartir"
 
 #: src/widgets/instances/__init__.py:112 src/widgets/tools/tools.py:501
 msgid "Username"
@@ -5516,15 +5522,16 @@ msgstr "Nombre de Usuario"
 
 #: src/widgets/instances/__init__.py:113
 msgid "Full Name"
-msgstr ""
+msgstr "Nombre Completo"
 
 #: src/widgets/instances/__init__.py:121
 msgid "Show Response Metadata"
-msgstr ""
+msgstr "Mostrar Metadatos de Respuesta"
 
 #: src/widgets/instances/__init__.py:122
 msgid "Add the option to show reply metadata in the message as an attachment."
-msgstr ""
+msgstr "Añade la opción para mostrar metadatos de respuesta en el mensaje "
+"como archivo adjunto."
 
 #: src/widgets/instances/__init__.py:129
 msgid "Max Tokens"
@@ -5599,7 +5606,7 @@ msgstr "Modelo a utilizar al generar un título de chat."
 
 #: src/widgets/instances/__init__.py:242
 msgid "Use Current Model"
-msgstr ""
+msgstr "Utilice el Modelo Actual"
 
 #: src/widgets/instances/__init__.py:288
 msgid "Edit Instance"
