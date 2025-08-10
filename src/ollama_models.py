@@ -4623,7 +4623,7 @@ OLLAMA_MODELS = {
                 ],
                 [
                         "4b",
-                        "2.6 GB"
+                        "2.5 GB"
                 ],
                 [
                         "8b",
@@ -5193,6 +5193,56 @@ OLLAMA_MODELS = {
                 "huge"
         ],
         "author": "Mistral AI",
+        "languages": [
+                "en"
+        ],
+    },
+    "gpt-oss": {
+        "tags": [
+                [
+                        "latest",
+                        "14 GB"
+                ],
+                [
+                        "20b",
+                        "14 GB"
+                ],
+                [
+                        "120b",
+                        "65 GB"
+                ]
+        ],
+        "description": _("OpenAI’s open-weight models designed for powerful reasoning, agentic tasks, and versatile developer use cases."),
+        "url": "https://ollama.com/library/gpt-oss",
+        "categories": [
+                "tools",
+                "big",
+                "huge"
+        ],
+        "author": "OpenAI",
+        "languages": [
+                "en"
+        ],
+    },
+    "qwen3-coder": {
+        "tags": [
+                [
+                        "latest",
+                        "19 GB"
+                ],
+                [
+                        "30b",
+                        "19 GB"
+                ]
+        ],
+        "description": _("Alibaba's performant long context models for agentic and coding tasks."),
+        "url": "https://ollama.com/library/qwen3-coder",
+        "categories": [
+                "big",
+                "huge",
+                "code"
+        ],
+        "author": "Alibaba",
         "languages": [
                 "en"
         ],
