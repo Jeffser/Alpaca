@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alpaca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-07 16:56-0600\n"
+"POT-Creation-Date: 2025-08-10 11:31-0600\n"
 "PO-Revision-Date: 2024-09-16 14:07+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
@@ -38,17 +38,17 @@ msgid "A private AI client"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:11
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1336
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1356
 msgid "Features"
 msgstr "תכונות"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:13
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1338
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1358
 msgid "Talk to multiple models in the same conversation"
 msgstr "שיחה עם מספר מודלים באותה התכתבות"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:14
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1339
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1359
 msgid "Pull and delete models from the app"
 msgstr "משיכה ומחיקה של מודלים מהיישום"
 
@@ -130,1454 +130,1492 @@ msgid "A Live Chat conversation with a character"
 msgstr ""
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:95
-#: data/com.jeffser.Alpaca.metainfo.xml.in:104
-#: data/com.jeffser.Alpaca.metainfo.xml.in:118
-#: data/com.jeffser.Alpaca.metainfo.xml.in:127
-#: data/com.jeffser.Alpaca.metainfo.xml.in:140
-#: data/com.jeffser.Alpaca.metainfo.xml.in:157
-#: data/com.jeffser.Alpaca.metainfo.xml.in:166
-#: data/com.jeffser.Alpaca.metainfo.xml.in:193
-#: data/com.jeffser.Alpaca.metainfo.xml.in:209
-#: data/com.jeffser.Alpaca.metainfo.xml.in:218
-#: data/com.jeffser.Alpaca.metainfo.xml.in:234
-#: data/com.jeffser.Alpaca.metainfo.xml.in:255
-#: data/com.jeffser.Alpaca.metainfo.xml.in:268
-#: data/com.jeffser.Alpaca.metainfo.xml.in:283
-#: data/com.jeffser.Alpaca.metainfo.xml.in:292
-#: data/com.jeffser.Alpaca.metainfo.xml.in:303
-#: data/com.jeffser.Alpaca.metainfo.xml.in:312
-#: data/com.jeffser.Alpaca.metainfo.xml.in:360
-#: data/com.jeffser.Alpaca.metainfo.xml.in:378
-#: data/com.jeffser.Alpaca.metainfo.xml.in:394
-#: data/com.jeffser.Alpaca.metainfo.xml.in:406
-#: data/com.jeffser.Alpaca.metainfo.xml.in:456
-#: data/com.jeffser.Alpaca.metainfo.xml.in:502
-#: data/com.jeffser.Alpaca.metainfo.xml.in:533
-#: data/com.jeffser.Alpaca.metainfo.xml.in:542
-#: data/com.jeffser.Alpaca.metainfo.xml.in:605
-#: data/com.jeffser.Alpaca.metainfo.xml.in:633
-#: data/com.jeffser.Alpaca.metainfo.xml.in:647
-#: data/com.jeffser.Alpaca.metainfo.xml.in:664
-#: data/com.jeffser.Alpaca.metainfo.xml.in:675
-#: data/com.jeffser.Alpaca.metainfo.xml.in:684
-#: data/com.jeffser.Alpaca.metainfo.xml.in:701
-#: data/com.jeffser.Alpaca.metainfo.xml.in:711
-#: data/com.jeffser.Alpaca.metainfo.xml.in:728
-#: data/com.jeffser.Alpaca.metainfo.xml.in:738
-#: data/com.jeffser.Alpaca.metainfo.xml.in:785
-#: data/com.jeffser.Alpaca.metainfo.xml.in:810
-#: data/com.jeffser.Alpaca.metainfo.xml.in:835
-#: data/com.jeffser.Alpaca.metainfo.xml.in:857
-#: data/com.jeffser.Alpaca.metainfo.xml.in:875
-#: data/com.jeffser.Alpaca.metainfo.xml.in:893
-#: data/com.jeffser.Alpaca.metainfo.xml.in:905
-#: data/com.jeffser.Alpaca.metainfo.xml.in:921
-msgid "Fixes"
-msgstr "תיקונים"
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:97
-msgid "Fixed message generation problems relating to threading"
-msgstr ""
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:106
-msgid "Fixed message generation problems"
-msgstr ""
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:107
-msgid "Fixed max tokens error with online instances"
-msgstr ""
-
-#: data/com.jeffser.Alpaca.metainfo.xml.in:114
-#: data/com.jeffser.Alpaca.metainfo.xml.in:136
-#: data/com.jeffser.Alpaca.metainfo.xml.in:150
-#: data/com.jeffser.Alpaca.metainfo.xml.in:178
-#: data/com.jeffser.Alpaca.metainfo.xml.in:230
-#: data/com.jeffser.Alpaca.metainfo.xml.in:244
-#: data/com.jeffser.Alpaca.metainfo.xml.in:277
-#: data/com.jeffser.Alpaca.metainfo.xml.in:324
-#: data/com.jeffser.Alpaca.metainfo.xml.in:371
-#: data/com.jeffser.Alpaca.metainfo.xml.in:388
-#: data/com.jeffser.Alpaca.metainfo.xml.in:418
-#: data/com.jeffser.Alpaca.metainfo.xml.in:428
-#: data/com.jeffser.Alpaca.metainfo.xml.in:439
-#: data/com.jeffser.Alpaca.metainfo.xml.in:466
+#: data/com.jeffser.Alpaca.metainfo.xml.in:134
+#: data/com.jeffser.Alpaca.metainfo.xml.in:156
+#: data/com.jeffser.Alpaca.metainfo.xml.in:170
+#: data/com.jeffser.Alpaca.metainfo.xml.in:198
+#: data/com.jeffser.Alpaca.metainfo.xml.in:250
+#: data/com.jeffser.Alpaca.metainfo.xml.in:264
+#: data/com.jeffser.Alpaca.metainfo.xml.in:297
+#: data/com.jeffser.Alpaca.metainfo.xml.in:344
+#: data/com.jeffser.Alpaca.metainfo.xml.in:391
+#: data/com.jeffser.Alpaca.metainfo.xml.in:408
+#: data/com.jeffser.Alpaca.metainfo.xml.in:438
+#: data/com.jeffser.Alpaca.metainfo.xml.in:448
+#: data/com.jeffser.Alpaca.metainfo.xml.in:459
 #: data/com.jeffser.Alpaca.metainfo.xml.in:486
-#: data/com.jeffser.Alpaca.metainfo.xml.in:512
-#: data/com.jeffser.Alpaca.metainfo.xml.in:527
-#: data/com.jeffser.Alpaca.metainfo.xml.in:552
-#: data/com.jeffser.Alpaca.metainfo.xml.in:580
-#: data/com.jeffser.Alpaca.metainfo.xml.in:590
-#: data/com.jeffser.Alpaca.metainfo.xml.in:601
-#: data/com.jeffser.Alpaca.metainfo.xml.in:615
-#: data/com.jeffser.Alpaca.metainfo.xml.in:627
-#: data/com.jeffser.Alpaca.metainfo.xml.in:643
-#: data/com.jeffser.Alpaca.metainfo.xml.in:658
-#: data/com.jeffser.Alpaca.metainfo.xml.in:693
-#: data/com.jeffser.Alpaca.metainfo.xml.in:718
-#: data/com.jeffser.Alpaca.metainfo.xml.in:749
-#: data/com.jeffser.Alpaca.metainfo.xml.in:775
-#: data/com.jeffser.Alpaca.metainfo.xml.in:797
-#: data/com.jeffser.Alpaca.metainfo.xml.in:828
-#: data/com.jeffser.Alpaca.metainfo.xml.in:850
-#: data/com.jeffser.Alpaca.metainfo.xml.in:871
-#: data/com.jeffser.Alpaca.metainfo.xml.in:886
-#: data/com.jeffser.Alpaca.metainfo.xml.in:911
+#: data/com.jeffser.Alpaca.metainfo.xml.in:506
+#: data/com.jeffser.Alpaca.metainfo.xml.in:532
+#: data/com.jeffser.Alpaca.metainfo.xml.in:547
+#: data/com.jeffser.Alpaca.metainfo.xml.in:572
+#: data/com.jeffser.Alpaca.metainfo.xml.in:600
+#: data/com.jeffser.Alpaca.metainfo.xml.in:610
+#: data/com.jeffser.Alpaca.metainfo.xml.in:621
+#: data/com.jeffser.Alpaca.metainfo.xml.in:635
+#: data/com.jeffser.Alpaca.metainfo.xml.in:647
+#: data/com.jeffser.Alpaca.metainfo.xml.in:663
+#: data/com.jeffser.Alpaca.metainfo.xml.in:678
+#: data/com.jeffser.Alpaca.metainfo.xml.in:713
+#: data/com.jeffser.Alpaca.metainfo.xml.in:738
+#: data/com.jeffser.Alpaca.metainfo.xml.in:769
+#: data/com.jeffser.Alpaca.metainfo.xml.in:795
+#: data/com.jeffser.Alpaca.metainfo.xml.in:817
+#: data/com.jeffser.Alpaca.metainfo.xml.in:848
+#: data/com.jeffser.Alpaca.metainfo.xml.in:870
+#: data/com.jeffser.Alpaca.metainfo.xml.in:891
+#: data/com.jeffser.Alpaca.metainfo.xml.in:906
+#: data/com.jeffser.Alpaca.metainfo.xml.in:931
 msgid "New"
 msgstr "חדש"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:116
+#: data/com.jeffser.Alpaca.metainfo.xml.in:97
+msgid "Update model list"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:98
+msgid "Changed design of tool attachments"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:99
+msgid "Tool usage optimization"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:100
+msgid "Added metadata attachments for Ollama instances"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:101
+msgid "Changed Image Attachment Container min width to 240"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:102
+msgid "Added option to use current model for title generation"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:103
+msgid "Added option to regenerate tool responses"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:105
+#: data/com.jeffser.Alpaca.metainfo.xml.in:115
+#: data/com.jeffser.Alpaca.metainfo.xml.in:124
+#: data/com.jeffser.Alpaca.metainfo.xml.in:138
+#: data/com.jeffser.Alpaca.metainfo.xml.in:147
+#: data/com.jeffser.Alpaca.metainfo.xml.in:160
+#: data/com.jeffser.Alpaca.metainfo.xml.in:177
+#: data/com.jeffser.Alpaca.metainfo.xml.in:186
+#: data/com.jeffser.Alpaca.metainfo.xml.in:213
+#: data/com.jeffser.Alpaca.metainfo.xml.in:229
+#: data/com.jeffser.Alpaca.metainfo.xml.in:238
+#: data/com.jeffser.Alpaca.metainfo.xml.in:254
+#: data/com.jeffser.Alpaca.metainfo.xml.in:275
+#: data/com.jeffser.Alpaca.metainfo.xml.in:288
+#: data/com.jeffser.Alpaca.metainfo.xml.in:303
+#: data/com.jeffser.Alpaca.metainfo.xml.in:312
+#: data/com.jeffser.Alpaca.metainfo.xml.in:323
+#: data/com.jeffser.Alpaca.metainfo.xml.in:332
+#: data/com.jeffser.Alpaca.metainfo.xml.in:380
+#: data/com.jeffser.Alpaca.metainfo.xml.in:398
+#: data/com.jeffser.Alpaca.metainfo.xml.in:414
+#: data/com.jeffser.Alpaca.metainfo.xml.in:426
+#: data/com.jeffser.Alpaca.metainfo.xml.in:476
+#: data/com.jeffser.Alpaca.metainfo.xml.in:522
+#: data/com.jeffser.Alpaca.metainfo.xml.in:553
+#: data/com.jeffser.Alpaca.metainfo.xml.in:562
+#: data/com.jeffser.Alpaca.metainfo.xml.in:625
+#: data/com.jeffser.Alpaca.metainfo.xml.in:653
+#: data/com.jeffser.Alpaca.metainfo.xml.in:667
+#: data/com.jeffser.Alpaca.metainfo.xml.in:684
+#: data/com.jeffser.Alpaca.metainfo.xml.in:695
+#: data/com.jeffser.Alpaca.metainfo.xml.in:704
+#: data/com.jeffser.Alpaca.metainfo.xml.in:721
+#: data/com.jeffser.Alpaca.metainfo.xml.in:731
+#: data/com.jeffser.Alpaca.metainfo.xml.in:748
+#: data/com.jeffser.Alpaca.metainfo.xml.in:758
+#: data/com.jeffser.Alpaca.metainfo.xml.in:805
+#: data/com.jeffser.Alpaca.metainfo.xml.in:830
+#: data/com.jeffser.Alpaca.metainfo.xml.in:855
+#: data/com.jeffser.Alpaca.metainfo.xml.in:877
+#: data/com.jeffser.Alpaca.metainfo.xml.in:895
+#: data/com.jeffser.Alpaca.metainfo.xml.in:913
+#: data/com.jeffser.Alpaca.metainfo.xml.in:925
+#: data/com.jeffser.Alpaca.metainfo.xml.in:941
+msgid "Fixes"
+msgstr "תיקונים"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:107
+msgid "Made DDG_Search library optional (AUR fix)"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:108
+msgid "Fixed attachments being rendered to the wrong messages"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:117
+msgid "Fixed message generation problems relating to threading"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:126
+msgid "Fixed message generation problems"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:127
+msgid "Fixed max tokens error with online instances"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:136
 msgid "Added option to regenerate responses when messages are edited"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:120
+#: data/com.jeffser.Alpaca.metainfo.xml.in:140
 msgid "Fixed message rendering problems"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:129
+#: data/com.jeffser.Alpaca.metainfo.xml.in:149
 msgid "Fixed inconsistent message generation rendering"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:138
+#: data/com.jeffser.Alpaca.metainfo.xml.in:158
 msgid "Save message edit with ctrl+enter"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:142
+#: data/com.jeffser.Alpaca.metainfo.xml.in:162
 msgid "Fixed Live Chat and Quick Ask not working sometimes"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:143
+#: data/com.jeffser.Alpaca.metainfo.xml.in:163
 msgid "Fixed model creation and GGUF import"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:152
+#: data/com.jeffser.Alpaca.metainfo.xml.in:172
 msgid "Added option to use tools by default"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:153
+#: data/com.jeffser.Alpaca.metainfo.xml.in:173
 msgid "Redesign model manager"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:154
+#: data/com.jeffser.Alpaca.metainfo.xml.in:174
 msgid "Added option to attach audio and video files (audio transcription)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:155
+#: data/com.jeffser.Alpaca.metainfo.xml.in:175
 msgid "Added Spotify controller tool"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:159
+#: data/com.jeffser.Alpaca.metainfo.xml.in:179
 msgid "Fixed thinking mode being on bugs out normal models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:168
+#: data/com.jeffser.Alpaca.metainfo.xml.in:188
 msgid "Fixed Alpaca crashing when chats database has incorrect metadata (type)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:169
+#: data/com.jeffser.Alpaca.metainfo.xml.in:189
 msgid ""
 "Fixed Quick Ask and Live Chat not running when opened from terminal whilst "
 "Alpaca is running"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:170
+#: data/com.jeffser.Alpaca.metainfo.xml.in:190
 msgid ""
 "Fixed stop button not working when pressed before text generation beggins"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:171
+#: data/com.jeffser.Alpaca.metainfo.xml.in:191
 msgid "Fixed instances sometimes not appearing"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:180
+#: data/com.jeffser.Alpaca.metainfo.xml.in:200
 msgid "Live Chat (Talk to models as if you were on a call)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:181
+#: data/com.jeffser.Alpaca.metainfo.xml.in:201
 msgid "Live message rendering"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:182
+#: data/com.jeffser.Alpaca.metainfo.xml.in:202
 msgid "Faster dictation"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:183
+#: data/com.jeffser.Alpaca.metainfo.xml.in:203
 msgid "Dictation whilst message is being generated"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:184
+#: data/com.jeffser.Alpaca.metainfo.xml.in:204
 msgid "Camera picture attachment"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:185
+#: data/com.jeffser.Alpaca.metainfo.xml.in:205
 msgid "Quick Ask now supports attachments"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:186
+#: data/com.jeffser.Alpaca.metainfo.xml.in:206
 msgid "Separator element for message and attachment rendering"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:187
+#: data/com.jeffser.Alpaca.metainfo.xml.in:207
 msgid "Redesigned popups"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:188
+#: data/com.jeffser.Alpaca.metainfo.xml.in:208
 msgid "Thought switch for Ollama instances"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:189
+#: data/com.jeffser.Alpaca.metainfo.xml.in:209
 msgid "Username sharing for Ollama instances"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:190
+#: data/com.jeffser.Alpaca.metainfo.xml.in:210
 msgid "Redesign for instance manager and tool manager"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:191
+#: data/com.jeffser.Alpaca.metainfo.xml.in:211
 msgid "Better web searching tool with options"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:195
+#: data/com.jeffser.Alpaca.metainfo.xml.in:215
 msgid "Fixed duplication of thought attachments"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:196
+#: data/com.jeffser.Alpaca.metainfo.xml.in:216
 msgid "Fixed weird behavior with model selector"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:197
+#: data/com.jeffser.Alpaca.metainfo.xml.in:217
 msgid "Ollama (Managed) instances behave better"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:198
+#: data/com.jeffser.Alpaca.metainfo.xml.in:218
 msgid "Better optimizations for RAM (~2GB difference)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:199
+#: data/com.jeffser.Alpaca.metainfo.xml.in:219
 msgid "Instant chat rendering"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:200
+#: data/com.jeffser.Alpaca.metainfo.xml.in:220
 msgid "Models profile pictures are now saved at a higher resolution"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:201
+#: data/com.jeffser.Alpaca.metainfo.xml.in:221
 msgid "Quick Ask messages can now be sent by using the enter key"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:202
+#: data/com.jeffser.Alpaca.metainfo.xml.in:222
 msgid "Alpaca is less prone to crashes now"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:211
+#: data/com.jeffser.Alpaca.metainfo.xml.in:231
 msgid "Fixed new chat not being created when the chat list is empty"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:220
+#: data/com.jeffser.Alpaca.metainfo.xml.in:240
 msgid "Chat exporting now works as expected"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:221
+#: data/com.jeffser.Alpaca.metainfo.xml.in:241
 msgid "Fixed automatic creation of Ollama instance"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:222
+#: data/com.jeffser.Alpaca.metainfo.xml.in:242
 msgid "Added Hebrew and Telugu credits"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:223
+#: data/com.jeffser.Alpaca.metainfo.xml.in:243
 msgid "Fixed STT model selector"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:232
+#: data/com.jeffser.Alpaca.metainfo.xml.in:252
 msgid "Multiple QuickAsk window rendering"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:236
+#: data/com.jeffser.Alpaca.metainfo.xml.in:256
 msgid "Better stability for QuickAsk"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:237
+#: data/com.jeffser.Alpaca.metainfo.xml.in:257
 msgid "Creating a new chat now selects it"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:246
+#: data/com.jeffser.Alpaca.metainfo.xml.in:266
 msgid "Chat Search"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:247
+#: data/com.jeffser.Alpaca.metainfo.xml.in:267
 msgid "Hide \"latest\" and \"custom\" tags from model selector"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:248
+#: data/com.jeffser.Alpaca.metainfo.xml.in:268
 msgid "Hide model's languages behind popup"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:249
+#: data/com.jeffser.Alpaca.metainfo.xml.in:269
 msgid "New models listed for Ollama"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:250
+#: data/com.jeffser.Alpaca.metainfo.xml.in:270
 msgid "Added option to autodictate new mesages"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:251
+#: data/com.jeffser.Alpaca.metainfo.xml.in:271
 msgid "Added Meta Llama API to list of instances"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:252
+#: data/com.jeffser.Alpaca.metainfo.xml.in:272
 msgid ""
 "Added new env variables options (\"24H hour formatting\" and \"only Ollama "
 "mode\")"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:253
+#: data/com.jeffser.Alpaca.metainfo.xml.in:273
 msgid "Made Mermaid scripts executable using Python HTTP server"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:257
+#: data/com.jeffser.Alpaca.metainfo.xml.in:277
 msgid "Better stability when switching instances"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:258
+#: data/com.jeffser.Alpaca.metainfo.xml.in:278
 msgid "Better performance when navigating menus"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:259
+#: data/com.jeffser.Alpaca.metainfo.xml.in:279
 msgid "Fixed some dialogs not appearing in Quick Ask window"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:260
+#: data/com.jeffser.Alpaca.metainfo.xml.in:280
 msgid "Faster message search"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:261
+#: data/com.jeffser.Alpaca.metainfo.xml.in:281
 msgid "Faster message rendering"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:270
+#: data/com.jeffser.Alpaca.metainfo.xml.in:290
 msgid "Fixed whisper directory not existing causing error"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:279
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1128
+#: data/com.jeffser.Alpaca.metainfo.xml.in:299
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1148
 msgid "Updated model list"
 msgstr "עודכנה רשימת המודלים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:280
+#: data/com.jeffser.Alpaca.metainfo.xml.in:300
 msgid "Alpaca now remembers it's size"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:281
+#: data/com.jeffser.Alpaca.metainfo.xml.in:301
 msgid "Added reasoning category for Ollama models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:285
+#: data/com.jeffser.Alpaca.metainfo.xml.in:305
 msgid "Improvements in sample prompts"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:294
+#: data/com.jeffser.Alpaca.metainfo.xml.in:314
 msgid "Fixed auto creation of Ollama (Managed) instance"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:295
+#: data/com.jeffser.Alpaca.metainfo.xml.in:315
 msgid "Removed legacy JSON to SQLite3 migration code"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:296
+#: data/com.jeffser.Alpaca.metainfo.xml.in:316
 msgid "Fixed power saving mode appearing whilst using online instances"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:305
+#: data/com.jeffser.Alpaca.metainfo.xml.in:325
 msgid "Fixed Ollama (Manged) instance not being able to be created"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:314
+#: data/com.jeffser.Alpaca.metainfo.xml.in:334
 msgid "Instance manager now follows default model"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:315
+#: data/com.jeffser.Alpaca.metainfo.xml.in:335
 msgid "English text-to-speech voices not working"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:316
+#: data/com.jeffser.Alpaca.metainfo.xml.in:336
 msgid "Instance manager sometimes not saving instances"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:317
+#: data/com.jeffser.Alpaca.metainfo.xml.in:337
 msgid "Fixed Gorq and Deepseek instances not generating text"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:326
+#: data/com.jeffser.Alpaca.metainfo.xml.in:346
 msgid "Smart tools for models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:327
+#: data/com.jeffser.Alpaca.metainfo.xml.in:347
 msgid "Speech recognition (message dictation)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:328 src/widgets/models/speech.py:94
+#: data/com.jeffser.Alpaca.metainfo.xml.in:348 src/widgets/models/speech.py:94
 msgid "Text to Speech"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:329
+#: data/com.jeffser.Alpaca.metainfo.xml.in:349
 msgid "New Quick Chat system"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:330
+#: data/com.jeffser.Alpaca.metainfo.xml.in:350
 msgid "Filter Ollama models by categories"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:331
+#: data/com.jeffser.Alpaca.metainfo.xml.in:351
 msgid "Better math Latex rendering in messages"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:332
+#: data/com.jeffser.Alpaca.metainfo.xml.in:352
 msgid "Rich text rendering in attachment preview"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:333
+#: data/com.jeffser.Alpaca.metainfo.xml.in:353
 msgid "Matplotlib is now included in Python code runner"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:334
+#: data/com.jeffser.Alpaca.metainfo.xml.in:354
 msgid "Styling for messages being generated"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:336
-#: data/com.jeffser.Alpaca.metainfo.xml.in:444
+#: data/com.jeffser.Alpaca.metainfo.xml.in:356
+#: data/com.jeffser.Alpaca.metainfo.xml.in:464
 msgid "New Instances"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:338
+#: data/com.jeffser.Alpaca.metainfo.xml.in:358
 msgid "Deepseek"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:339
+#: data/com.jeffser.Alpaca.metainfo.xml.in:359
 msgid "OpenRouter AI"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:340
+#: data/com.jeffser.Alpaca.metainfo.xml.in:360
 msgid "Anthropic"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:341
+#: data/com.jeffser.Alpaca.metainfo.xml.in:361
 msgid "Groq Cloud"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:342
+#: data/com.jeffser.Alpaca.metainfo.xml.in:362
 msgid "Fireworks AI"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:343
+#: data/com.jeffser.Alpaca.metainfo.xml.in:363
 msgid "Lambda Labs"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:345
+#: data/com.jeffser.Alpaca.metainfo.xml.in:365
 msgid "New Attachment Types"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:347
+#: data/com.jeffser.Alpaca.metainfo.xml.in:367
 msgid "Microsoft Word Document (docx)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:348
+#: data/com.jeffser.Alpaca.metainfo.xml.in:368
 msgid "Microsoft PowerPoint Document (pptx)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:349
+#: data/com.jeffser.Alpaca.metainfo.xml.in:369
 msgid "Microsoft Excel Document (xlsx)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:351
+#: data/com.jeffser.Alpaca.metainfo.xml.in:371
 msgid "New Tools"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:353 src/widgets/tools/tools.py:492
+#: data/com.jeffser.Alpaca.metainfo.xml.in:373 src/widgets/tools/tools.py:492
 msgid "Run Command (Testing)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:354 src/widgets/tools/tools.py:408
+#: data/com.jeffser.Alpaca.metainfo.xml.in:374 src/widgets/tools/tools.py:408
 msgid "Online Search"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:355 src/widgets/tools/tools.py:365
+#: data/com.jeffser.Alpaca.metainfo.xml.in:375 src/widgets/tools/tools.py:365
 msgid "Extract Wikipedia Article"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:356 src/widgets/tools/tools.py:249
+#: data/com.jeffser.Alpaca.metainfo.xml.in:376 src/widgets/tools/tools.py:249
 msgid "Get Recipe by Name"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:357 src/widgets/tools/tools.py:309
+#: data/com.jeffser.Alpaca.metainfo.xml.in:377 src/widgets/tools/tools.py:309
 msgid "Get Recipes by Category"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:358 src/widgets/tools/tools.py:217
+#: data/com.jeffser.Alpaca.metainfo.xml.in:378 src/widgets/tools/tools.py:217
 msgid "Get Current Datetime"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:362
+#: data/com.jeffser.Alpaca.metainfo.xml.in:382
 msgid "Fixed welcome screen not showing sometimes when deleting a message"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:363
+#: data/com.jeffser.Alpaca.metainfo.xml.in:383
 msgid "Fixed bold text not rendering correctly in tables"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:364
+#: data/com.jeffser.Alpaca.metainfo.xml.in:384
 msgid "Fixed sample prompt buttons overflowing on small screens"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:373
+#: data/com.jeffser.Alpaca.metainfo.xml.in:393
 msgid "Updated runtime to Gnome 48"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:374
+#: data/com.jeffser.Alpaca.metainfo.xml.in:394
 msgid "Added back 'category pills' to model manager"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:375
+#: data/com.jeffser.Alpaca.metainfo.xml.in:395
 msgid "Better appearance for model manager sidebar"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:376
-#: data/com.jeffser.Alpaca.metainfo.xml.in:392
+#: data/com.jeffser.Alpaca.metainfo.xml.in:396
+#: data/com.jeffser.Alpaca.metainfo.xml.in:412
 msgid "New models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:380
+#: data/com.jeffser.Alpaca.metainfo.xml.in:400
 msgid "Fixed bad title generation with chain-of-thought models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:381
+#: data/com.jeffser.Alpaca.metainfo.xml.in:401
 msgid ""
 "Hide page switcher in model manager if there's only one page (online "
 "instances)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:390
+#: data/com.jeffser.Alpaca.metainfo.xml.in:410
 msgid "Option to delete all chats"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:391
+#: data/com.jeffser.Alpaca.metainfo.xml.in:411
 msgid "Button to refresh sample prompts"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:396
+#: data/com.jeffser.Alpaca.metainfo.xml.in:416
 msgid "Fixed saving Ollama (Managed) instance might crash it"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:397
+#: data/com.jeffser.Alpaca.metainfo.xml.in:417
 msgid "Fixed stop button"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:398
+#: data/com.jeffser.Alpaca.metainfo.xml.in:418
 msgid "Fixed model search not working if there are only pulling models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:399
+#: data/com.jeffser.Alpaca.metainfo.xml.in:419
 msgid "Fixed sample prompts sometimes not appearing"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:408
+#: data/com.jeffser.Alpaca.metainfo.xml.in:428
 msgid "Don't clear the building output of C++ scripts"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:409
+#: data/com.jeffser.Alpaca.metainfo.xml.in:429
 msgid "Better handling of attachments"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:410
+#: data/com.jeffser.Alpaca.metainfo.xml.in:430
 msgid "Handle remote Ollama instance's API Key better"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:411
+#: data/com.jeffser.Alpaca.metainfo.xml.in:431
 msgid "Remove '\\n' characters in instance edit page"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:420
+#: data/com.jeffser.Alpaca.metainfo.xml.in:440
 msgid "Dynamic chat loading"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:421
+#: data/com.jeffser.Alpaca.metainfo.xml.in:441
 msgid "Updated Ollama instance"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:430
+#: data/com.jeffser.Alpaca.metainfo.xml.in:450
 msgid "Tweaked appearance of models in model manager"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:431
+#: data/com.jeffser.Alpaca.metainfo.xml.in:451
 msgid "Updated Ollama instance to 0.5.11"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:432
+#: data/com.jeffser.Alpaca.metainfo.xml.in:452
 msgid "Added new models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:441
+#: data/com.jeffser.Alpaca.metainfo.xml.in:461
 msgid "New instance manager"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:442
+#: data/com.jeffser.Alpaca.metainfo.xml.in:462
 msgid "New welcome screen"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:446
+#: data/com.jeffser.Alpaca.metainfo.xml.in:466
 msgid "OpenAI ChatGPT"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:447
+#: data/com.jeffser.Alpaca.metainfo.xml.in:467
 msgid "Google Gemini"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:448
+#: data/com.jeffser.Alpaca.metainfo.xml.in:468
 msgid "Together AI"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:449
+#: data/com.jeffser.Alpaca.metainfo.xml.in:469
 msgid "Venice"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:458
+#: data/com.jeffser.Alpaca.metainfo.xml.in:478
 msgid "Exporting chats with 'thoughts' attachment is fixed"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:459
+#: data/com.jeffser.Alpaca.metainfo.xml.in:479
 msgid "Fixed attachment filters"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:468
+#: data/com.jeffser.Alpaca.metainfo.xml.in:488
 msgid "New model manager"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:469
+#: data/com.jeffser.Alpaca.metainfo.xml.in:489
 msgid "Changed GtkSpinner to AdwSpinner"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:470
+#: data/com.jeffser.Alpaca.metainfo.xml.in:490
 msgid "Better handling of launch process"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:471
+#: data/com.jeffser.Alpaca.metainfo.xml.in:491
 msgid "New loading screen at launch"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:472
+#: data/com.jeffser.Alpaca.metainfo.xml.in:492
 msgid "Better handling of file types"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:473
+#: data/com.jeffser.Alpaca.metainfo.xml.in:493
 msgid "Better regex expression for LaTeX equations"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:474
+#: data/com.jeffser.Alpaca.metainfo.xml.in:494
 msgid "Confirmation dialog if user closes Alpaca whilst a model is downloading"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:475
+#: data/com.jeffser.Alpaca.metainfo.xml.in:495
 msgid "Better handling of think tags in messages"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:476
+#: data/com.jeffser.Alpaca.metainfo.xml.in:496
 msgid "Default model is now in charge of generating titles"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:477
+#: data/com.jeffser.Alpaca.metainfo.xml.in:497
 msgid "Message header is now shown whilst the message is being generated"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:478
+#: data/com.jeffser.Alpaca.metainfo.xml.in:498
 msgid "Better handling of model profile pictures"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:479
+#: data/com.jeffser.Alpaca.metainfo.xml.in:499
 msgid "New models in 'available models' list"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:488
+#: data/com.jeffser.Alpaca.metainfo.xml.in:508
 msgid "Added option for attaching screenshots"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:489
+#: data/com.jeffser.Alpaca.metainfo.xml.in:509
 msgid "Basic LaTeX math equations are now rendered in messages"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:490
+#: data/com.jeffser.Alpaca.metainfo.xml.in:510
 msgid "HTML and C++ scripts can now be run inside Alpaca"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:491
+#: data/com.jeffser.Alpaca.metainfo.xml.in:511
 msgid "Added option to open the environment directory from the terminal"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:492
+#: data/com.jeffser.Alpaca.metainfo.xml.in:512
 msgid "Added option to edit code blocks directly"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:493
+#: data/com.jeffser.Alpaca.metainfo.xml.in:513
 msgid "Complete keyboard shortcut list"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:494
+#: data/com.jeffser.Alpaca.metainfo.xml.in:514
 msgid "Images are now attached in 640p resolution"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:495
+#: data/com.jeffser.Alpaca.metainfo.xml.in:515
 msgid "Website attachments now use extracted titles"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:496
+#: data/com.jeffser.Alpaca.metainfo.xml.in:516
 msgid "Better chat title generation"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:497
+#: data/com.jeffser.Alpaca.metainfo.xml.in:517
 msgid "Added option to attach any plain text files"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:498
+#: data/com.jeffser.Alpaca.metainfo.xml.in:518
 msgid "Added spellchecker to message entry"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:499
+#: data/com.jeffser.Alpaca.metainfo.xml.in:519
 msgid "Alpaca's parameters are now stored using SQLite3"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:500
+#: data/com.jeffser.Alpaca.metainfo.xml.in:520
 msgid "Small appearance changes in text entries"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:504
+#: data/com.jeffser.Alpaca.metainfo.xml.in:524
 msgid "Alpaca's launch process is more reliable"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:505
+#: data/com.jeffser.Alpaca.metainfo.xml.in:525
 msgid "Closing the terminal now kills the script subprocess"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:514
+#: data/com.jeffser.Alpaca.metainfo.xml.in:534
 msgid "Transitioned chat backend from JSON to SQLite3"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:515
+#: data/com.jeffser.Alpaca.metainfo.xml.in:535
 msgid "Changed appearance of messages"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:516
+#: data/com.jeffser.Alpaca.metainfo.xml.in:536
 msgid "Added the option to add profile pictures to models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:518
-#: data/com.jeffser.Alpaca.metainfo.xml.in:990
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1039
+#: data/com.jeffser.Alpaca.metainfo.xml.in:538
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1010
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1059
 msgid "Fix"
 msgstr "תיקון"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:520
+#: data/com.jeffser.Alpaca.metainfo.xml.in:540
 msgid "Changed override HIP_VISIBLE_DEVICES to ROCR_VISIBLE_DEVICES"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:529
+#: data/com.jeffser.Alpaca.metainfo.xml.in:549
 msgid "Added categories to models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:530
+#: data/com.jeffser.Alpaca.metainfo.xml.in:550
 msgid "Specified model's languages"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:531
+#: data/com.jeffser.Alpaca.metainfo.xml.in:551
 msgid "Added warning when downloading embedding models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:535
+#: data/com.jeffser.Alpaca.metainfo.xml.in:555
 msgid "Replaced low ram warning with big model warning"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:544
+#: data/com.jeffser.Alpaca.metainfo.xml.in:564
 msgid "Correctly escape markup before rendering message"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:545
+#: data/com.jeffser.Alpaca.metainfo.xml.in:565
 msgid "Fixed about dialog not working if log file was missing"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:554
+#: data/com.jeffser.Alpaca.metainfo.xml.in:574
 msgid "System messages can now be sent directly from Alpaca"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:555
+#: data/com.jeffser.Alpaca.metainfo.xml.in:575
 msgid "New redesign for messages and smaller minimum size"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:556
+#: data/com.jeffser.Alpaca.metainfo.xml.in:576
 msgid "New models included in 'available models list'"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:557
+#: data/com.jeffser.Alpaca.metainfo.xml.in:577
 msgid "Added symbolic icon when attaching code files"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:558
+#: data/com.jeffser.Alpaca.metainfo.xml.in:578
 msgid "When exporting a chat it now includes a markdown file"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:559
+#: data/com.jeffser.Alpaca.metainfo.xml.in:579
 msgid "Refresh button in model manager when using a remote instance"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:560
+#: data/com.jeffser.Alpaca.metainfo.xml.in:580
 msgid "Assistant messages are now editable"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:561
+#: data/com.jeffser.Alpaca.metainfo.xml.in:581
 msgid "Updated Ollama to v0.5.2"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:562
+#: data/com.jeffser.Alpaca.metainfo.xml.in:582
 msgid "New option to change model directory"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:563
+#: data/com.jeffser.Alpaca.metainfo.xml.in:583
 msgid "File previewer now resizes dynamically to content"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:564
+#: data/com.jeffser.Alpaca.metainfo.xml.in:584
 msgid "Adapted Alpaca to work without integrated Ollama instance"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:565
+#: data/com.jeffser.Alpaca.metainfo.xml.in:585
 msgid "Compatibility added with ODT files"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:568
+#: data/com.jeffser.Alpaca.metainfo.xml.in:588
 msgid "Restored ROCm compatibility"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:569
+#: data/com.jeffser.Alpaca.metainfo.xml.in:589
 msgid ""
 "Added long press gesture to chat rows so actions can be done in touchscreens"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:570
+#: data/com.jeffser.Alpaca.metainfo.xml.in:590
 msgid "Fixed edit button not saving changes"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:571
+#: data/com.jeffser.Alpaca.metainfo.xml.in:591
 msgid "Changed max temperature value to 2"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:572
+#: data/com.jeffser.Alpaca.metainfo.xml.in:592
 msgid "Made seed 0 actually random"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:573
+#: data/com.jeffser.Alpaca.metainfo.xml.in:593
 msgid ""
 "Fixed Gnome search provider not working outside of Flatpak installations"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:582
+#: data/com.jeffser.Alpaca.metainfo.xml.in:602
 msgid "New option --ask MESSAGE, to open a new 'Quick Ask' window"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:583
+#: data/com.jeffser.Alpaca.metainfo.xml.in:603
 msgid "Gnome Search integration now works whilst the app is opened"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:592
+#: data/com.jeffser.Alpaca.metainfo.xml.in:612
 msgid ""
 "Added launch paramenters --ask MESSAGE, --new-chat CHAT, --select-chat CHAT, "
 "--list-chats, --version"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:593
+#: data/com.jeffser.Alpaca.metainfo.xml.in:613
 msgid "Added integration as Gnome Search Provider"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:594
+#: data/com.jeffser.Alpaca.metainfo.xml.in:614
 msgid "Updated Ollama to v0.4.2 with new models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:603
+#: data/com.jeffser.Alpaca.metainfo.xml.in:623
 msgid "User messages are now compacted into bubbles"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:607
+#: data/com.jeffser.Alpaca.metainfo.xml.in:627
 msgid ""
 "Fixed re connection dialog not working when 'use local instance' is selected"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:608
+#: data/com.jeffser.Alpaca.metainfo.xml.in:628
 msgid "Fixed model manager not adapting to large system fonts"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:617
+#: data/com.jeffser.Alpaca.metainfo.xml.in:637
 msgid "Details page for models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:618
+#: data/com.jeffser.Alpaca.metainfo.xml.in:638
 msgid ""
 "Model selector gets replaced with 'manage models' button when there are no "
 "models downloaded"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:619
+#: data/com.jeffser.Alpaca.metainfo.xml.in:639
 msgid "Added warning when model is too big for the device"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:620
+#: data/com.jeffser.Alpaca.metainfo.xml.in:640
 msgid "Added AMD GPU indicator in preferences"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:629
+#: data/com.jeffser.Alpaca.metainfo.xml.in:649
 msgid "Better system for handling dialogs"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:630
+#: data/com.jeffser.Alpaca.metainfo.xml.in:650
 msgid "Better system for handling instance switching"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:631
+#: data/com.jeffser.Alpaca.metainfo.xml.in:651
 msgid "Remote connection dialog"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:635
+#: data/com.jeffser.Alpaca.metainfo.xml.in:655
 msgid "Fixed: Models get duplicated when switching remote and local instance"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:636
+#: data/com.jeffser.Alpaca.metainfo.xml.in:656
 msgid "Better internal instance manager"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:645
+#: data/com.jeffser.Alpaca.metainfo.xml.in:665
 msgid "Added 'Cancel' and 'Save' buttons when editing a message"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:649
+#: data/com.jeffser.Alpaca.metainfo.xml.in:669
 msgid "Better handling of image recognition"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:650
+#: data/com.jeffser.Alpaca.metainfo.xml.in:670
 msgid "Remove unused files when canceling a model download"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:651
+#: data/com.jeffser.Alpaca.metainfo.xml.in:671
 msgid "Better message blocks rendering"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:660
+#: data/com.jeffser.Alpaca.metainfo.xml.in:680
 msgid "Run bash and python scripts straight from chat"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:661
+#: data/com.jeffser.Alpaca.metainfo.xml.in:681
 msgid "Updated Ollama to 0.3.12"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:662
+#: data/com.jeffser.Alpaca.metainfo.xml.in:682
 msgid "New models!"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:666
+#: data/com.jeffser.Alpaca.metainfo.xml.in:686
 msgid "Fixed and made faster the launch sequence"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:667
+#: data/com.jeffser.Alpaca.metainfo.xml.in:687
 msgid "Better detection of code blocks in messages"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:668
+#: data/com.jeffser.Alpaca.metainfo.xml.in:688
 msgid "Fixed app not loading in certain setups with Nvidia GPUs"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:677
+#: data/com.jeffser.Alpaca.metainfo.xml.in:697
 msgid ""
 "Fixed message notification sometimes crashing text rendering because of them "
 "running on different threads"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:686
+#: data/com.jeffser.Alpaca.metainfo.xml.in:706
 msgid "Fixed message generation sometimes failing"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:695
+#: data/com.jeffser.Alpaca.metainfo.xml.in:715
 msgid "Sidebar resizes with the window"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:696
+#: data/com.jeffser.Alpaca.metainfo.xml.in:716
 msgid "New welcome dialog"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:697
+#: data/com.jeffser.Alpaca.metainfo.xml.in:717
 msgid "Message search"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:698
+#: data/com.jeffser.Alpaca.metainfo.xml.in:718
 msgid "Updated Ollama to v0.3.11"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:699
+#: data/com.jeffser.Alpaca.metainfo.xml.in:719
 msgid "A lot of new models provided by Ollama repository"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:703
+#: data/com.jeffser.Alpaca.metainfo.xml.in:723
 msgid ""
 "Fixed text inside model manager when the accessibility option 'large text' "
 "is on"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:704
+#: data/com.jeffser.Alpaca.metainfo.xml.in:724
 msgid "Fixed image recognition on unsupported models"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:713
+#: data/com.jeffser.Alpaca.metainfo.xml.in:733
 msgid "Fixed spinner not hiding if the back end fails"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:714
+#: data/com.jeffser.Alpaca.metainfo.xml.in:734
 msgid "Fixed image recognition with local images"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:715
+#: data/com.jeffser.Alpaca.metainfo.xml.in:735
 msgid "Changed appearance of delete / stop model buttons"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:716
+#: data/com.jeffser.Alpaca.metainfo.xml.in:736
 msgid "Fixed stop button crashing the app"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:720
+#: data/com.jeffser.Alpaca.metainfo.xml.in:740
 msgid "Made sidebar resize a little when the window is smaller"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:721
+#: data/com.jeffser.Alpaca.metainfo.xml.in:741
 msgid "Instant launch"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:730
+#: data/com.jeffser.Alpaca.metainfo.xml.in:750
 msgid "Fixed error on first run (welcome dialog)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:731
+#: data/com.jeffser.Alpaca.metainfo.xml.in:751
 msgid "Fixed checker for Ollama instance (used on system packages)"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:740
+#: data/com.jeffser.Alpaca.metainfo.xml.in:760
 msgid "Fixed 'clear chat' option"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:741
+#: data/com.jeffser.Alpaca.metainfo.xml.in:761
 msgid "Fixed welcome dialog causing the local instance to not launch"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:742
+#: data/com.jeffser.Alpaca.metainfo.xml.in:762
 msgid "Fixed support for AMD GPUs"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:751
+#: data/com.jeffser.Alpaca.metainfo.xml.in:771
 msgid "Model, message and chat systems have been rewritten"
 msgstr "מערכות המודל, ההודעות והשיחה נכתבו מחדש"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:752
+#: data/com.jeffser.Alpaca.metainfo.xml.in:772
 msgid "New models are available"
 msgstr "מודלים חדשים זמינים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:753
+#: data/com.jeffser.Alpaca.metainfo.xml.in:773
 msgid "Ollama updated to v0.3.9"
 msgstr "Ollama עודכן לגרסה 0.3.9"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:754
+#: data/com.jeffser.Alpaca.metainfo.xml.in:774
 msgid "Added support for multiple chat generations simultaneously"
 msgstr "נוספה תמיכה ביצירת מספר שיחות במקביל"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:755
+#: data/com.jeffser.Alpaca.metainfo.xml.in:775
 msgid "Added experimental AMD GPU support"
 msgstr "נוספה תמיכה ניסיונית ב־GPU של AMD"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:756
+#: data/com.jeffser.Alpaca.metainfo.xml.in:776
 msgid "Added message loading spinner and new message indicator to chat tab"
 msgstr "נוסף סמן טעינת הודעות ומחוון הודעות חדשות בלשונית השיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:757
+#: data/com.jeffser.Alpaca.metainfo.xml.in:777
 msgid "Added animations"
 msgstr "נוספו אנימציות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:758
+#: data/com.jeffser.Alpaca.metainfo.xml.in:778
 msgid "Changed model manager / model selector appearance"
 msgstr "שונה מראה מנהל המודלים / בורר המודלים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:759
+#: data/com.jeffser.Alpaca.metainfo.xml.in:779
 msgid "Changed message appearance"
 msgstr "שונה מראה ההודעות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:760
+#: data/com.jeffser.Alpaca.metainfo.xml.in:780
 msgid "Added markdown and code blocks to user messages"
 msgstr "נוספו בלוקי markdown וקוד להודעות המשתמש"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:761
+#: data/com.jeffser.Alpaca.metainfo.xml.in:781
 msgid "Added loading dialog at launch so the app opens faster"
 msgstr "נוסף דיאלוג טעינה בהפעלה כדי שהיישום ייפתח מהר יותר"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:762
+#: data/com.jeffser.Alpaca.metainfo.xml.in:782
 msgid "Added warning when device is on 'battery saver' mode"
 msgstr "נוספה אזהרה כאשר המכשיר במצב 'חיסכון בסוללה'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:763
+#: data/com.jeffser.Alpaca.metainfo.xml.in:783
 msgid "Added inactivity timer to integrated instance"
 msgstr "נוסף קוצב זמן חוסר פעילות למופע המשולב"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:766
+#: data/com.jeffser.Alpaca.metainfo.xml.in:786
 msgid "The chat is now scrolled to the bottom when it's changed"
 msgstr "השיחה כעת נגללת לתחתית כאשר היא משתנה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:767
+#: data/com.jeffser.Alpaca.metainfo.xml.in:787
 msgid "Better handling of focus on messages"
 msgstr "טיפול משופר במיקוד על הודעות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:768
+#: data/com.jeffser.Alpaca.metainfo.xml.in:788
 msgid "Better general performance on the app"
 msgstr "ביצועים כלליים משופרים ביישום"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:777
+#: data/com.jeffser.Alpaca.metainfo.xml.in:797
 msgid "New duplicate chat option"
 msgstr "אפשרות חדשה לשכפול שיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:778
+#: data/com.jeffser.Alpaca.metainfo.xml.in:798
 msgid "Changed model selector appearance"
 msgstr "שונה מראה בורר המודלים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:779
+#: data/com.jeffser.Alpaca.metainfo.xml.in:799
 msgid "Message entry is focused on launch and chat change"
 msgstr "כניסת הודעה ממוקדת בהפעלה ובשינוי שיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:780
+#: data/com.jeffser.Alpaca.metainfo.xml.in:800
 msgid "Message is focused when it's being edited"
 msgstr "ההודעה ממוקדת כאשר היא נערכת"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:781
+#: data/com.jeffser.Alpaca.metainfo.xml.in:801
 msgid "Added loading spinner when regenerating a message"
 msgstr "נוסף סמן טעינה בעת יצירה מחדש של הודעה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:782
+#: data/com.jeffser.Alpaca.metainfo.xml.in:802
 msgid "Added Ollama debugging to 'About Alpaca' dialog"
 msgstr "נוסף ניפוי שגיאות של Ollama לדיאלוג 'אודות Alpaca'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:783
+#: data/com.jeffser.Alpaca.metainfo.xml.in:803
 msgid "Changed YouTube transcription dialog appearance and behavior"
 msgstr "שונה מראה והתנהגות דיאלוג התמלול של YouTube"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:787
+#: data/com.jeffser.Alpaca.metainfo.xml.in:807
 msgid "CTRL+W and CTRL+Q stops local instance before closing the app"
 msgstr "‏CTRL+W ו־CTRL+Q עוצרים את המופע המקומי לפני סגירת היישום"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:788
+#: data/com.jeffser.Alpaca.metainfo.xml.in:808
 msgid "Changed appearance of 'Open Model Manager' button on welcome screen"
 msgstr "שונה מראה כפתור 'פתיחת מנהל המודלים' במסך הפתיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:789
+#: data/com.jeffser.Alpaca.metainfo.xml.in:809
 msgid "Fixed message generation not working consistently"
 msgstr "תוקנה בעיה שבה יצירת הודעות לא עבדה באופן עקבי"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:790
+#: data/com.jeffser.Alpaca.metainfo.xml.in:810
 msgid "Fixed message edition not working consistently"
 msgstr "תוקנה בעיה שבה עריכת הודעות לא עבדה באופן עקבי"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:799
+#: data/com.jeffser.Alpaca.metainfo.xml.in:819
 msgid "Model manager opens faster"
 msgstr "מנהל המודלים נפתח מהר יותר"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:800
+#: data/com.jeffser.Alpaca.metainfo.xml.in:820
 msgid "Delete chat option in secondary menu"
 msgstr "אפשרות מחיקת שיחה בתפריט המשני"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:801
+#: data/com.jeffser.Alpaca.metainfo.xml.in:821
 msgid "New model selector popup"
 msgstr "חלון קופץ חדש לבחירת מודל"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:802
+#: data/com.jeffser.Alpaca.metainfo.xml.in:822
 msgid "Standard shortcuts"
 msgstr "קיצורי דרך סטנדרטיים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:803
+#: data/com.jeffser.Alpaca.metainfo.xml.in:823
 msgid "Model manager is navigable with keyboard"
 msgstr "מנהל המודלים ניתן לניווט באמצעות המקלדת"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:804
+#: data/com.jeffser.Alpaca.metainfo.xml.in:824
 msgid "Changed sidebar collapsing behavior"
 msgstr "שונתה התנהגות כיווץ סרגל הצד"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:805
+#: data/com.jeffser.Alpaca.metainfo.xml.in:825
 msgid "Focus indicators on messages"
 msgstr "מחווני מיקוד על הודעות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:806
+#: data/com.jeffser.Alpaca.metainfo.xml.in:826
 msgid "Welcome screen"
 msgstr "מסך פתיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:807
+#: data/com.jeffser.Alpaca.metainfo.xml.in:827
 msgid "Give message entry focus at launch"
 msgstr "מתן מיקוד לכניסת הודעה בהפעלה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:808
+#: data/com.jeffser.Alpaca.metainfo.xml.in:828
 msgid "Generally better code"
 msgstr "קוד משופר באופן כללי"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:812
+#: data/com.jeffser.Alpaca.metainfo.xml.in:832
 msgid "Better width for dialogs"
 msgstr "רוחב משופר לדיאלוגים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:813
+#: data/com.jeffser.Alpaca.metainfo.xml.in:833
 msgid "Better compatibility with screen readers"
 msgstr "תאימות משופרת עם קוראי מסך"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:814
+#: data/com.jeffser.Alpaca.metainfo.xml.in:834
 msgid "Fixed message regenerator"
 msgstr "תוקן מחולל ההודעות מחדש"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:815
+#: data/com.jeffser.Alpaca.metainfo.xml.in:835
 msgid "Removed 'Featured models' from welcome dialog"
 msgstr "הוסרו 'מודלים מומלצים' מדיאלוג הפתיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:816
+#: data/com.jeffser.Alpaca.metainfo.xml.in:836
 msgid "Added default buttons to dialogs"
 msgstr "נוספו כפתורי ברירת מחדל לדיאלוגים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:817
+#: data/com.jeffser.Alpaca.metainfo.xml.in:837
 msgid "Fixed import / export of chats"
 msgstr "תוקן ייבוא / ייצוא של שיחות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:818
+#: data/com.jeffser.Alpaca.metainfo.xml.in:838
 msgid "Changed Python2 title to Python on code blocks"
 msgstr "שונתה כותרת Python2 ל־Python בבלוקי קוד"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:819
+#: data/com.jeffser.Alpaca.metainfo.xml.in:839
 msgid ""
 "Prevent regeneration of title when the user changed it to a custom title"
 msgstr "מניעת יצירה מחדש של כותרת כאשר המשתמש שינה אותה לכותרת מותאמת אישית"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:820
+#: data/com.jeffser.Alpaca.metainfo.xml.in:840
 msgid "Show date on stopped messages"
 msgstr "הצגת תאריך על הודעות שנעצרו"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:821
+#: data/com.jeffser.Alpaca.metainfo.xml.in:841
 msgid "Fix clear chat error"
 msgstr "תיקון שגיאת ניקוי שיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:830
+#: data/com.jeffser.Alpaca.metainfo.xml.in:850
 msgid "Changed shortcuts to standards"
 msgstr "שונו קיצורי הדרך לסטנדרטיים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:831
+#: data/com.jeffser.Alpaca.metainfo.xml.in:851
 msgid "Moved 'Manage Models' button to primary menu"
 msgstr "הועבר כפתור 'ניהול מודלים' לתפריט הראשי"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:832
-#: data/com.jeffser.Alpaca.metainfo.xml.in:854
+#: data/com.jeffser.Alpaca.metainfo.xml.in:852
+#: data/com.jeffser.Alpaca.metainfo.xml.in:874
 msgid "Stable support for GGUF model files"
 msgstr "תמיכה יציבה בקבצי מודל GGUF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:833
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1108
+#: data/com.jeffser.Alpaca.metainfo.xml.in:853
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1128
 msgid "General optimizations"
 msgstr "אופטימיזציות כלליות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:837
+#: data/com.jeffser.Alpaca.metainfo.xml.in:857
 msgid "Better handling of enter key (important for Japanese input)"
 msgstr "טיפול משופר במקש Enter (חשוב לקלט ביפנית)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:838
+#: data/com.jeffser.Alpaca.metainfo.xml.in:858
 msgid "Removed sponsor dialog"
 msgstr "הוסר דיאלוג החסות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:839
+#: data/com.jeffser.Alpaca.metainfo.xml.in:859
 msgid "Added sponsor link in about dialog"
 msgstr "נוסף קישור לחסות בדיאלוג 'אודות'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:840
+#: data/com.jeffser.Alpaca.metainfo.xml.in:860
 msgid "Changed window and elements dimensions"
 msgstr "שונו מימדי החלון והאלמנטים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:841
+#: data/com.jeffser.Alpaca.metainfo.xml.in:861
 msgid "Selected model changes when entering model manager"
 msgstr "המודל הנבחר משתנה בכניסה למנהל המודלים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:842
+#: data/com.jeffser.Alpaca.metainfo.xml.in:862
 msgid "Better image tooltips"
 msgstr "חלוניות מידע משופרות לתמונות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:843
+#: data/com.jeffser.Alpaca.metainfo.xml.in:863
 msgid "GGUF Support"
 msgstr "תמיכה ב־GGUF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:852
+#: data/com.jeffser.Alpaca.metainfo.xml.in:872
 msgid "Regenerate any response, even if they are incomplete"
 msgstr "יצירה מחדש של כל תגובה, גם אם היא לא שלמה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:853
+#: data/com.jeffser.Alpaca.metainfo.xml.in:873
 msgid "Support for pulling models by name:tag"
 msgstr "תמיכה במשיכת מודלים לפי שם:תג"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:855
+#: data/com.jeffser.Alpaca.metainfo.xml.in:875
 msgid "Restored sidebar toggle button"
 msgstr "שוחזר כפתור החלפת מצב סרגל הצד"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:859
+#: data/com.jeffser.Alpaca.metainfo.xml.in:879
 msgid "Reverted back to standard styles"
 msgstr "חזרה לסגנונות הסטנדרטיים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:860
+#: data/com.jeffser.Alpaca.metainfo.xml.in:880
 msgid "Fixed generated titles having \"'S\" for some reason"
 msgstr "תוקנו כותרות שנוצרו עם \"'S\" מסיבה כלשהי"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:861
+#: data/com.jeffser.Alpaca.metainfo.xml.in:881
 msgid "Changed min width for model dropdown"
 msgstr "שונה הרוחב המזערי לתפריט הנפתח של המודל"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:862
+#: data/com.jeffser.Alpaca.metainfo.xml.in:882
 msgid "Changed message entry shadow"
 msgstr "שונתה הצללת כניסת ההודעה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:863
+#: data/com.jeffser.Alpaca.metainfo.xml.in:883
 msgid "The last model used is now restored when the user changes chat"
 msgstr "המודל האחרון שהיה בשימוש משוחזר כעת כאשר המשתמש משנה שיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:864
+#: data/com.jeffser.Alpaca.metainfo.xml.in:884
 msgid "Better check for message finishing"
 msgstr "בדיקה משופרת לסיום הודעה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:873
+#: data/com.jeffser.Alpaca.metainfo.xml.in:893
 msgid "Added table rendering (Thanks Nokse)"
 msgstr "נוספה הצגת טבלאות (תודה ל-Nokse)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:877
+#: data/com.jeffser.Alpaca.metainfo.xml.in:897
 msgid "Made support dialog more common"
 msgstr "הפיכת דיאלוג התמיכה לנפוץ יותר"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:878
+#: data/com.jeffser.Alpaca.metainfo.xml.in:898
 msgid ""
 "Dialog title on tag chooser when downloading models didn't display properly"
 msgstr "כותרת הדיאלוג בבורר התגיות בעת הורדת מודלים לא הוצגה כראוי"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:879
+#: data/com.jeffser.Alpaca.metainfo.xml.in:899
 msgid "Prevent chat generation from generating a title with multiple lines"
 msgstr "מניעת יצירת שיחה מיצירת כותרת עם מספר שורות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:888
+#: data/com.jeffser.Alpaca.metainfo.xml.in:908
 msgid "Bearer Token entry on connection error dialog"
 msgstr "כניסת אסימון נושא בדיאלוג שגיאת חיבור"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:889
+#: data/com.jeffser.Alpaca.metainfo.xml.in:909
 msgid "Small appearance changes"
 msgstr "שינויי מראה קטנים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:890
+#: data/com.jeffser.Alpaca.metainfo.xml.in:910
 msgid "Compatibility with code blocks without explicit language"
 msgstr "תאימות עם בלוקי קוד ללא שפה מפורשת"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:891
+#: data/com.jeffser.Alpaca.metainfo.xml.in:911
 msgid "Rare, optional and dismissible support dialog"
 msgstr "דיאלוג תמיכה נדיר, אופציונלי וניתן לסגירה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:895
+#: data/com.jeffser.Alpaca.metainfo.xml.in:915
 msgid "Date format for Simplified Chinese translation"
 msgstr "פורמט תאריך לתרגום לסינית מפושטת"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:896
+#: data/com.jeffser.Alpaca.metainfo.xml.in:916
 msgid "Bug with unsupported localizations"
 msgstr "באג עם לוקליזציות לא נתמכות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:897
+#: data/com.jeffser.Alpaca.metainfo.xml.in:917
 msgid "Min height being too large to be used on mobile"
 msgstr "גובה מזערי גדול מדי לשימוש במכשירים ניידים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:898
+#: data/com.jeffser.Alpaca.metainfo.xml.in:918
 msgid "Remote connection checker bug"
 msgstr "באג בבודק החיבור מרחוק"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:907
+#: data/com.jeffser.Alpaca.metainfo.xml.in:927
 msgid "Models with capital letters on their tag don't work"
 msgstr "מודלים עם אותיות גדולות בתג שלהם לא עובדים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:908
+#: data/com.jeffser.Alpaca.metainfo.xml.in:928
 msgid "Ollama fails to launch on some systems"
 msgstr "Ollama נכשל בהפעלה במערכות מסוימות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:909
+#: data/com.jeffser.Alpaca.metainfo.xml.in:929
 msgid "YouTube transcripts are not being saved in the right TMP directory"
 msgstr "תמלילי YouTube לא נשמרים בתיקיית TMP הנכונה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:913
+#: data/com.jeffser.Alpaca.metainfo.xml.in:933
 msgid "Debug messages are now shown on the 'About Alpaca' dialog"
 msgstr "הודעות ניפוי שגיאות מוצגות כעת בדיאלוג 'אודות Alpaca'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:914
+#: data/com.jeffser.Alpaca.metainfo.xml.in:934
 msgid "Updated Ollama to v0.3.0 (new models)"
 msgstr "עדכון Ollama לגרסה 0.3.0 (מודלים חדשים)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:923
+#: data/com.jeffser.Alpaca.metainfo.xml.in:943
 msgid "Models with '-' in their names didn't work properly, this is now fixed"
 msgstr "מודלים עם '-' בשמותיהם לא פעלו כראוי, זה תוקן כעת"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:924
+#: data/com.jeffser.Alpaca.metainfo.xml.in:944
 msgid "Better connection check for Ollama"
 msgstr "בדיקת חיבור משופרת ל־Ollama"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:931
+#: data/com.jeffser.Alpaca.metainfo.xml.in:951
 msgid "Stable Release"
 msgstr "גרסה יציבה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:932
+#: data/com.jeffser.Alpaca.metainfo.xml.in:952
 msgid ""
 "The new icon was made by Tobias Bernard over the Gnome Gitlab, thanks for "
 "the great icon!"
 msgstr ""
 "הסמל החדש נוצר על ידי טוביאס ברנרד ב־Gitlab של Gnome, תודה על הסמל הנהדר!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:933
+#: data/com.jeffser.Alpaca.metainfo.xml.in:953
 msgid "Features and fixes"
 msgstr "תכונות ותיקונים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:935
+#: data/com.jeffser.Alpaca.metainfo.xml.in:955
 msgid "Updated Ollama instance to 0.2.8"
 msgstr "מופע Ollama עודכן לגרסה 0.2.8"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:936
+#: data/com.jeffser.Alpaca.metainfo.xml.in:956
 msgid "Better model selector"
 msgstr "בורר מודלים משופר"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:937
+#: data/com.jeffser.Alpaca.metainfo.xml.in:957
 msgid "Model manager redesign"
 msgstr "עיצוב מחדש של מנהל המודלים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:938
+#: data/com.jeffser.Alpaca.metainfo.xml.in:958
 msgid "Better tag selector when pulling a model"
 msgstr "בורר תגיות משופר בעת משיכת מודל"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:939
+#: data/com.jeffser.Alpaca.metainfo.xml.in:959
 msgid "Model search"
 msgstr "חיפוש מודלים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:940
+#: data/com.jeffser.Alpaca.metainfo.xml.in:960
 msgid "Added support for bearer tokens on remote instances"
 msgstr "נוספה תמיכה באסימוני נושא במופעים מרוחקים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:941
+#: data/com.jeffser.Alpaca.metainfo.xml.in:961
 msgid "Preferences dialog redesign"
 msgstr "עיצוב מחדש של דיאלוג ההעדפות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:942
+#: data/com.jeffser.Alpaca.metainfo.xml.in:962
 msgid "Added context menus to interact with a chat"
 msgstr "נוספו תפריטי הקשר לאינטראקציה עם שיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:943
+#: data/com.jeffser.Alpaca.metainfo.xml.in:963
 msgid "Redesigned primary and secondary menus"
 msgstr "עוצבו מחדש התפריטים הראשיים והמשניים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:944
+#: data/com.jeffser.Alpaca.metainfo.xml.in:964
 msgid ""
 "YouTube integration: Paste the URL of a video with a transcript and it will "
 "be added to the prompt"
 msgstr "שילוב YouTube: הדבקת כתובת URL של סרטון עם תמליל תוסיף אותו לפקודה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:945
+#: data/com.jeffser.Alpaca.metainfo.xml.in:965
 msgid ""
 "Website integration (Experimental): Extract the text from the body of a "
 "website by adding it's URL to the prompt"
@@ -1585,176 +1623,176 @@ msgstr ""
 "שילוב אתרים (ניסיוני): חילוץ הטקסט מגוף האתר על ידי הוספת כתובת ה־URL שלו "
 "לפקודה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:946
+#: data/com.jeffser.Alpaca.metainfo.xml.in:966
 msgid "Chat title generation"
 msgstr "יצירת כותרת שיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:947
+#: data/com.jeffser.Alpaca.metainfo.xml.in:967
 msgid "Auto resizing of message entry"
 msgstr "שינוי גודל אוטומטי של שדה ההודעה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:948
+#: data/com.jeffser.Alpaca.metainfo.xml.in:968
 msgid "Chat notifications"
 msgstr "התראות שיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:949
+#: data/com.jeffser.Alpaca.metainfo.xml.in:969
 msgid "Added indicator when an image is missing"
 msgstr "נוסף מחוון כאשר תמונה חסרה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:950
+#: data/com.jeffser.Alpaca.metainfo.xml.in:970
 msgid "Auto rearrange the order of chats when a message is received"
 msgstr "סידור מחדש אוטומטי של סדר השיחות בעת קבלת הודעה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:951
+#: data/com.jeffser.Alpaca.metainfo.xml.in:971
 msgid "Redesigned file preview dialog"
 msgstr "עוצב מחדש דיאלוג תצוגה מקדימה של קבצים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:952
+#: data/com.jeffser.Alpaca.metainfo.xml.in:972
 msgid "Credited new contributors"
 msgstr "ניתן קרדיט לתורמים חדשים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:953
+#: data/com.jeffser.Alpaca.metainfo.xml.in:973
 msgid "Better stability and optimization"
 msgstr "יציבות ואופטימיזציה משופרות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:954
+#: data/com.jeffser.Alpaca.metainfo.xml.in:974
 msgid "Edit messages to change the context of a conversation"
 msgstr "עריכת הודעות לשינוי ההקשר של שיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:955
+#: data/com.jeffser.Alpaca.metainfo.xml.in:975
 msgid "Added disclaimers when pulling models"
 msgstr "נוספו כתבי ויתור בעת משיכת מודלים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:956
+#: data/com.jeffser.Alpaca.metainfo.xml.in:976
 msgid "Preview files before sending a message"
 msgstr "תצוגה מקדימה של קבצים לפני שליחת הודעה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:957
+#: data/com.jeffser.Alpaca.metainfo.xml.in:977
 msgid "Better format for date and time on messages"
 msgstr "פורמט משופר לתאריך ושעה בהודעות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:958
+#: data/com.jeffser.Alpaca.metainfo.xml.in:978
 msgid "Error and debug logging on terminal"
 msgstr "רישום שגיאות וניפוי שגיאות במסוף"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:959
+#: data/com.jeffser.Alpaca.metainfo.xml.in:979
 msgid "Auto-hiding sidebar button"
 msgstr "כפתור סרגל צד המסתתר אוטומטית"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:960
+#: data/com.jeffser.Alpaca.metainfo.xml.in:980
 msgid "Various UI tweaks"
 msgstr "שיפורים שונים בממשק המשתמש"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:962
+#: data/com.jeffser.Alpaca.metainfo.xml.in:982
 msgid "New Models"
 msgstr "מודלים חדשים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:964
+#: data/com.jeffser.Alpaca.metainfo.xml.in:984
 msgid "Gemma2"
 msgstr "Gemma2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:965
+#: data/com.jeffser.Alpaca.metainfo.xml.in:985
 msgid "GLM4"
 msgstr "GLM4"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:966
+#: data/com.jeffser.Alpaca.metainfo.xml.in:986
 msgid "Codegeex4"
 msgstr "Codegeex4"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:967
+#: data/com.jeffser.Alpaca.metainfo.xml.in:987
 msgid "InternLM2"
 msgstr "InternLM2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:968
+#: data/com.jeffser.Alpaca.metainfo.xml.in:988
 msgid "Llama3-groq-tool-use"
 msgstr "Llama3-groq-tool-use"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:969
+#: data/com.jeffser.Alpaca.metainfo.xml.in:989
 msgid "Mathstral"
 msgstr "Mathstral"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:970
+#: data/com.jeffser.Alpaca.metainfo.xml.in:990
 msgid "Mistral-nemo"
 msgstr "Mistral-nemo"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:971
+#: data/com.jeffser.Alpaca.metainfo.xml.in:991
 msgid "Firefunction-v2"
 msgstr "Firefunction-v2"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:972
+#: data/com.jeffser.Alpaca.metainfo.xml.in:992
 msgid "Nuextract"
 msgstr "Nuextract"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:974
+#: data/com.jeffser.Alpaca.metainfo.xml.in:994
 msgid "Translations"
 msgstr "תרגומים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:975
+#: data/com.jeffser.Alpaca.metainfo.xml.in:995
 msgid ""
 "These are all the available translations on 1.0.0, thanks to all the "
 "contributors!"
 msgstr "אלה כל התרגומים הזמינים בגרסה 1.0.0, תודה לכל התורמים!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:977
+#: data/com.jeffser.Alpaca.metainfo.xml.in:997
 msgid "Russian: Alex K"
 msgstr "רוסית: Alex K"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:978
+#: data/com.jeffser.Alpaca.metainfo.xml.in:998
 msgid "Spanish: Jeffser"
 msgstr "ספרדית: Jeffser"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:979
+#: data/com.jeffser.Alpaca.metainfo.xml.in:999
 msgid "Brazilian Portuguese: Daimar Stein"
 msgstr "פורטוגזית ברזילאית: Daimar Stein"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:980
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1000
 msgid "French: Louis Chauvet-Villaret"
 msgstr "צרפתית: Louis Chauvet-Villaret"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:981
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1001
 msgid "Norwegian: CounterFlow64"
 msgstr "נורווגית: CounterFlow64"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:982
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1002
 msgid "Bengali: Aritra Saha"
 msgstr "בנגלית: Aritra Saha"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:983
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1003
 msgid "Simplified Chinese: Yuehao Sui"
 msgstr "סינית מפושטת: Yuehao Sui"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:991
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1011
 msgid ""
 "Removed DOCX compatibility temporally due to error with python-lxml "
 "dependency"
 msgstr "הוסרה זמנית תאימות DOCX עקב שגיאה עם תלות python-lxml"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:997
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1027
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1048
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1253
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1310
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1017
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1047
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1068
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1273
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1330
 msgid "Big Update"
 msgstr "עדכון גדול"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:999
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1019
 msgid "Added compatibility for PDF"
 msgstr "נוספה תאימות ל־PDF"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1000
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1020
 msgid "Added compatibility for DOCX"
 msgstr "נוספה תאימות ל־DOCX"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1001
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1021
 msgid "Merged 'file attachment' menu into one button"
 msgstr "מוזג תפריט 'צירוף קובץ' לכפתור אחד"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1008
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1201
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1028
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1221
 msgid "Quick Fix"
 msgstr "תיקון מהיר"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1009
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1029
 msgid ""
 "There were some errors when transitioning from the old version of chats to "
 "the new version. I apologize if this caused any corruption in your chat "
@@ -1764,185 +1802,185 @@ msgstr ""
 "גרם לשיבוש כלשהו בהיסטוריית השיחות שלך. זה אמור להיות הפעם היחידה שמעבר כזה "
 "נדרש."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1015
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1167
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1035
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1187
 msgid "Huge Update"
 msgstr "עדכון ענק"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1017
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1037
 msgid "Added: Support for plain text files"
 msgstr "נוסף: תמיכה בקבצי טקסט רגיל"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1018
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1038
 msgid "Added: New backend system for storing messages"
 msgstr "נוסף: מערכת צד שרת חדשה לאחסון הודעות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1019
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1039
 msgid "Added: Support for changing Ollama's overrides"
 msgstr "נוסף: תמיכה בשינוי הגדרות העקיפה של Ollama"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1020
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1040
 msgid "General Optimization"
 msgstr "ייעול כללי"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1029
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1049
 msgid "Added: Support for GGUF models (experimental)"
 msgstr "נוסף: תמיכה במודלי GGUF (ניסיוני)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1030
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1050
 msgid "Added: Support for customization and creation of models"
 msgstr "נוסף: תמיכה בהתאמה אישית ויצירה של מודלים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1031
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1051
 msgid "Fixed: Icons don't appear on non Gnome systems"
 msgstr "תוקן: סמלים לא מופיעים במערכות שאינן Gnome"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1032
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1052
 msgid "Update Ollama to v0.1.39"
 msgstr "עדכון Ollama לגרסה 0.1.39"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1041
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1061
 msgid ""
 "Fixed: app didn't open if models tweaks wasn't present in the config files"
 msgstr "תוקן: היישום לא נפתח אם התאמות המודלים לא היו קיימות בקבצי התצורה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1050
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1070
 msgid "Changed multiple icons (paper airplane for the send button)"
 msgstr "שונו מספר סמלים (מטוס נייר לכפתור השליחה)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1051
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1071
 msgid "Combined export / import chat buttons into a menu"
 msgstr "שולבו כפתורי ייצוא / ייבוא שיחה לתפריט אחד"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1052
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1072
 msgid "Added 'model tweaks' (temperature, seed, keep_alive)"
 msgstr "נוספו 'התאמות מודל' (temperature, seed, keep_alive)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1053
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1073
 msgid "Fixed send / stop button"
 msgstr "תוקן כפתור שליחה / עצירה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1054
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1074
 msgid "Fixed app not checking if remote connection works when starting"
 msgstr "תוקן: היישום לא בדק אם החיבור המרוחק עובד בעת ההפעלה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1061
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1081
 msgid "Daily Update"
 msgstr "עדכון יומי"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1063
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1083
 msgid "Added text ellipsis to chat name so it doesn't change the button width"
 msgstr "נוספו נקודות קיצור לשם השיחה כדי שלא ישנה את רוחב הכפתור"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1064
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1084
 msgid "New shortcut for creating a chat (CTRL+N)"
 msgstr "קיצור דרך חדש ליצירת שיחה (CTRL+N)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1065
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1085
 msgid "New message entry design"
 msgstr "עיצוב חדש לשדה הזנת הודעה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1066
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1086
 msgid "Fixed: Can't rename the same chat multiple times"
 msgstr "תוקן: לא ניתן לשנות שם לאותה שיחה מספר פעמים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1073
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1093
 msgid "The fix"
 msgstr "התיקון"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1075
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1095
 msgid ""
 "Fixed: Ollama instance keeps running on the background even when it is "
 "disabled"
 msgstr "תוקן: מופע Ollama ממשיך לרוץ ברקע גם כשהוא מושבת"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1076
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1096
 msgid "Fixed: Can't pull models on the integrated instance"
 msgstr "תוקן: לא ניתן למשוך מודלים במופע המשולב"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1083
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1103
 msgid "Quick tweaks"
 msgstr "התאמות מהירות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1085
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1105
 msgid "Added progress bar to models that are being pulled"
 msgstr "נוסף סרגל התקדמות למודלים שנמשכים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1086
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1106
 msgid "Added size to tags when pulling a model"
 msgstr "נוסף גודל לתגיות בעת משיכת מודל"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1087
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1107
 msgid "General optimizations on the background"
 msgstr "אופטימיזציות כלליות ברקע"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1094
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1114
 msgid "Quick fixes"
 msgstr "תיקונים מהירים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1096
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1116
 msgid "Fixed: Scroll when message is received"
 msgstr "תוקן: גלילה בעת קבלת הודעה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1097
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1117
 msgid "Fixed: Content doesn't change when creating a new chat"
 msgstr "תוקן: התוכן לא משתנה בעת יצירת שיחה חדשה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1098
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1118
 msgid "Added 'Featured Models' page on welcome dialog"
 msgstr "נוסף עמוד 'מודלים מומלצים' בדיאלוג הפתיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1105
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1125
 msgid "Nice Update"
 msgstr "עדכון נחמד"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1107
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1127
 msgid "UI tweaks (Thanks Nokse22)"
 msgstr "שיפורי ממשק משתמש (תודה ל־Nokse22)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1109
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1129
 msgid "Metadata fixes"
 msgstr "תיקוני מטא־נתונים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1116
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1136
 msgid "Quick fix"
 msgstr "תיקון מהיר"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1118
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1138
 msgid "Updated Spanish translation"
 msgstr "עודכן התרגום לספרדית"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1119
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1139
 msgid "Added compatibility for PNG"
 msgstr "נוספה תאימות ל־PNG"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1126
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1146
 msgid "New Update"
 msgstr "עדכון חדש"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1129
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1149
 msgid "Added image recognition to more models"
 msgstr "נוסף זיהוי תמונות ליותר מודלים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1130
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1150
 msgid "Added Brazilian Portuguese translation (Thanks Daimaar Stein)"
 msgstr "נוסף תרגום לפורטוגזית ברזילאית (תודה ל־Daimaar Stein)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1131
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1151
 msgid "Refined the general UI (Thanks Nokse22)"
 msgstr "שופר הממשק הכללי (תודה ל־Nokse22)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1132
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1152
 msgid "Added 'delete message' feature"
 msgstr "נוספה תכונת 'מחיקת הודעה'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1133
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1153
 msgid ""
 "Added metadata so that software distributors know that the app is compatible "
 "with mobile"
 msgstr "נוספו מטא־נתונים כדי שמפיצי תוכנה ידעו שהיישום תואם למכשירים ניידים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1134
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1154
 msgid ""
 "Changed 'send' shortcut to just the return/enter key (to add a new line use "
 "shift+return)"
@@ -1950,151 +1988,151 @@ msgstr ""
 "שונה קיצור הדרך ל'שליחה' למקש Enter/Return בלבד (להוספת שורה חדשה יש להשתמש "
 "ב־Shift+Return)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1141
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1161
 msgid "Bug Fixes"
 msgstr "תיקוני באגים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1143
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1163
 msgid "Fixed: Minor spelling mistake"
 msgstr "תוקן: שגיאת כתיב קלה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1144
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1164
 msgid "Added 'mobile' as a supported form factor"
 msgstr "נוסף 'mobile' כגורם צורה נתמך"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1145
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1165
 msgid "Fixed: 'Connection Error' dialog not working properly"
 msgstr "תוקן: דיאלוג 'Connection Error' לא פעל כראוי"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1146
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1166
 msgid "Fixed: App might freeze randomly on startup"
 msgstr "תוקן: היישום עלול לקפוא באופן אקראי בהפעלה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1147
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1167
 msgid "Changed 'chats' label on sidebar for 'Alpaca'"
 msgstr "שונתה תווית 'chats' בסרגל הצד ל־'Alpaca'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1154
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1174
 msgid "Cool Update"
 msgstr "עדכון מגניב"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1156
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1176
 msgid "Better design for chat window"
 msgstr "עיצוב משופר לחלון השיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1157
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1177
 msgid "Better design for chat sidebar"
 msgstr "עיצוב משופר לסרגל הצד של השיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1158
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1178
 msgid "Fixed remote connections"
 msgstr "תוקנו חיבורים מרוחקים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1159
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1179
 msgid "Fixed Ollama restarting in loop"
 msgstr "תוקנה הפעלה מחדש של Ollama בלולאה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1160
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1180
 msgid "Other cool backend stuff"
 msgstr "דברים מגניבים אחרים בצד השרת"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1169
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1189
 msgid "Added Ollama as part of Alpaca, Ollama will run in a sandbox"
 msgstr "נוסף Ollama כחלק מ־Alpaca, Ollama ירוץ בסביבה מבודדת"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1170
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1190
 msgid "Added option to connect to remote instances (how it worked before)"
 msgstr "נוספה אפשרות להתחבר למופעים מרוחקים (כפי שעבד קודם)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1171
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1191
 msgid "Added option to import and export chats"
 msgstr "נוספה אפשרות לייבא ולייצא שיחות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1172
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1192
 msgid "Added option to run Alpaca with Ollama in the background"
 msgstr "נוספה אפשרות להריץ את Alpaca עם Ollama ברקע"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1173
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1193
 msgid "Added preferences dialog"
 msgstr "נוסף דיאלוג העדפות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1174
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1194
 msgid "Changed the welcome dialog"
 msgstr "שונה דיאלוג הפתיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1176
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1193
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1205
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1224
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1245
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1261
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1277
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1291
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1301
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1319
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1341
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1196
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1213
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1225
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1244
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1265
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1281
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1297
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1311
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1321
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1339
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1361
 msgid "Please report any errors to the issues page, thank you."
 msgstr "אנא דווחו על כל שגיאה בדף הבעיות, תודה."
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1184
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1204
 msgid "Yet Another Daily Update"
 msgstr "עוד עדכון יומי"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1186
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1206
 msgid "Added better UI for 'Manage Models' dialog"
 msgstr "נוסף ממשק משתמש משופר לדיאלוג 'Manage Models'"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1187
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1207
 msgid "Added better UI for the chat sidebar"
 msgstr "נוסף ממשק משתמש משופר לסרגל הצד של השיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1188
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1208
 msgid ""
 "Replaced model description with a button to open Ollama's website for the "
 "model"
 msgstr "הוחלף תיאור המודל בכפתור לפתיחת אתר Ollama עבור המודל"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1189
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1209
 msgid "Added myself to the credits as the spanish translator"
 msgstr "הוספתי את עצמי לקרדיטים כמתרגם לספרדית"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1190
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1210
 msgid "Using XDG properly to get config folder"
 msgstr "שימוש נכון ב־XDG לקבלת תיקיית התצורה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1191
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1211
 msgid "Update for translations"
 msgstr "עדכון לתרגומים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1203
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1223
 msgid "The last update had some mistakes in the description of the update"
 msgstr "לעדכון האחרון היו כמה טעויות בתיאור העדכון"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1213
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1233
 msgid "Another Daily Update"
 msgstr "עוד עדכון יומי"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1215
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1235
 msgid "Added full Spanish translation"
 msgstr "נוסף תרגום מלא לספרדית"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1216
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1236
 msgid "Added support for background pulling of multiple models"
 msgstr "נוספה תמיכה במשיכת מספר מודלים ברקע"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1217
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1237
 msgid "Added interrupt button"
 msgstr "נוסף כפתור הפסקה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1218
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1238
 msgid "Added basic shortcuts"
 msgstr "נוספו קיצורי דרך בסיסיים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1219
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1239
 msgid "Better translation support"
 msgstr "תמיכה משופרת בתרגום"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1220
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1240
 msgid ""
 "User can now leave chat name empty when creating a new one, it will add a "
 "placeholder name"
@@ -2102,171 +2140,171 @@ msgstr ""
 "המשתמש יכול כעת להשאיר את שם השיחה ריק בעת יצירת שיחה חדשה, יתווסף שם ממלא "
 "מקום"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1221
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1241
 msgid "Better scalling for different window sizes"
 msgstr "התאמה טובה יותר לגדלי חלון שונים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1222
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1242
 msgid "Fixed: Can't close app if first time setup fails"
 msgstr "תוקן: לא ניתן לסגור את היישום אם ההגדרה הראשונית נכשלת"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1232
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1252
 msgid "Really Big Update"
 msgstr "עדכון גדול באמת"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1234
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1254
 msgid "Added multiple chats support!"
 msgstr "נוספה תמיכה במספר שיחות!"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1235
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1255
 msgid "Added Pango Markup support (bold, list, title, subtitle, monospace)"
 msgstr "נוספה תמיכה בסימון Pango (מודגש, רשימה, כותרת, כותרת משנה, רוחב קבוע)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1236
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1256
 msgid "Added autoscroll if the user is at the bottom of the chat"
 msgstr "נוספה גלילה אוטומטית אם המשתמש נמצא בתחתית השיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1237
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1257
 msgid "Added support for multiple tags on a single model"
 msgstr "נוספה תמיכה במספר תגיות למודל בודד"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1238
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1258
 msgid "Added better model management dialog"
 msgstr "נוסף דיאלוג משופר לניהול מודלים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1239
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1259
 msgid "Added loading spinner when sending message"
 msgstr "נוסף סמן טעינה בעת שליחת הודעה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1240
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1260
 msgid "Added notifications if app is not active and a model pull finishes"
 msgstr "נוספו התראות אם היישום אינו פעיל ומשיכת מודל מסתיימת"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1241
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1261
 msgid "Added new symbolic icon"
 msgstr "נוסף סמל סימבולי חדש"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1242
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1262
 msgid "Added frame to message textview widget"
 msgstr "נוספה מסגרת לווידג'ט תצוגת הטקסט של ההודעה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1243
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1263
 msgid "Fixed \"code blocks shouldn't be editable\""
 msgstr "תוקן \"בלוקי קוד לא צריכים להיות ניתנים לעריכה\""
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1255
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1275
 msgid "Added code highlighting"
 msgstr "נוספה הדגשת קוד"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1256
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1276
 msgid "Added image recognition (llava model)"
 msgstr "נוסף זיהוי תמונות (מודל llava)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1257
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1277
 msgid "Added multiline prompt"
 msgstr "נוספה שורת פקודה מרובת שורות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1258
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1278
 msgid "Fixed some small bugs"
 msgstr "תוקנו כמה באגים קטנים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1259
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1279
 msgid "General optimization"
 msgstr "אופטימיזציה כללית"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1269
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1289
 msgid "Fixes and features"
 msgstr "תיקונים ותכונות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1271
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1291
 msgid "Russian translation (thanks github/alexkdeveloper)"
 msgstr "תרגום לרוסית (תודה ל־github/alexkdeveloper)"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1272
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1292
 msgid "Fixed: Cannot close app on first setup"
 msgstr "תוקן: לא ניתן לסגור את היישום בהגדרה הראשונה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1273
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1293
 msgid "Fixed: Brand colors for Flathub"
 msgstr "תוקן: צבעי מותג עבור Flathub"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1274
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1294
 msgid "Fixed: App description"
 msgstr "תוקן: תיאור היישום"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1275
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1295
 msgid "Fixed: Only show 'save changes dialog' when you actually change the url"
 msgstr "תוקן: הצגת 'דיאלוג שמירת שינויים' רק כאשר באמת משנים את ה־URL"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1285
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1305
 msgid "0.2.2 Bug fixes"
 msgstr "0.2.2 תיקוני באגים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1287
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1307
 msgid "Toast messages appearing behind dialogs"
 msgstr "הודעות Toast מופיעות מאחורי דיאלוגים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1288
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1308
 msgid "Local model list not updating when changing servers"
 msgstr "רשימת המודלים המקומית לא מתעדכנת בעת החלפת שרתים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1289
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1309
 msgid "Closing the setup dialog closes the whole app"
 msgstr "סגירת דיאלוג ההגדרות סוגרת את כל היישום"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1299
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1319
 msgid "0.2.1 Data saving fix"
 msgstr "0.2.1 תיקון שמירת נתונים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1300
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1320
 msgid ""
 "The app didn't save the config files and chat history to the right "
 "directory, this is now fixed"
 msgstr ""
 "היישום לא שמר את קבצי התצורה והיסטוריית השיחות לתיקייה הנכונה, זה תוקן כעת"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1309
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1329
 msgid "0.2.0"
 msgstr "0.2.0"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1311
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1331
 msgid "New Features"
 msgstr "תכונות חדשות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1313
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1333
 msgid "Restore chat after closing the app"
 msgstr "שחזור שיחה לאחר סגירת היישום"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1314
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1334
 msgid "A button to clear the chat"
 msgstr "כפתור לניקוי השיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1315
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1335
 msgid "Fixed multiple bugs involving how messages are shown"
 msgstr "תוקנו מספר באגים הקשורים לאופן הצגת ההודעות"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1316
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1336
 msgid "Added welcome dialog"
 msgstr "נוסף דיאלוג פתיחה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1317
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1337
 msgid "More stability"
 msgstr "יציבות משופרת"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1327
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1347
 msgid "0.1.2 Quick fixes"
 msgstr "0.1.2 תיקונים מהירים"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1328
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1348
 msgid ""
 "This release fixes some metadata needed to have a proper Flatpak application"
 msgstr "גרסה זו מתקנת כמה מטא־נתונים הנדרשים ליישום Flatpak תקין"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1334
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1354
 msgid "0.1.1 Stable Release"
 msgstr "0.1.1 גרסה יציבה"
 
-#: data/com.jeffser.Alpaca.metainfo.xml.in:1335
+#: data/com.jeffser.Alpaca.metainfo.xml.in:1355
 msgid "This is the first public version of Alpaca"
 msgstr "זוהי הגרסה הציבורית הראשונה של Alpaca"
 
@@ -3428,6 +3466,16 @@ msgstr ""
 msgid ""
 "An update to Mistral Small that improves on function calling, instruction "
 "following, and less repetition errors."
+msgstr ""
+
+#: src/ollama_models.py:5215
+msgid ""
+"OpenAI’s open-weight models designed for powerful reasoning, agentic tasks, "
+"and versatile developer use cases."
+msgstr ""
+
+#: src/ollama_models.py:5238
+msgid "Alibaba's performant long context models for agentic and coding tasks."
 msgstr ""
 
 #: src/quick_ask.py:138 src/gtk/quick_ask.ui:11
