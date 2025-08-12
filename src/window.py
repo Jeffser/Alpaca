@@ -137,7 +137,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             self.chat_list_box.get_selected_row().update_profile_pictures()
         if listbox.get_sensitive():
-            GLib.idle_add(threading.Thread(target=change_instance).start)
+            GLib.idle_add(threading.Thread(target=change_instance, daemon=True).start)
 
     @Gtk.Template.Callback()
     def model_manager_stack_changed(self, viewstack, params):
@@ -154,7 +154,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.get_current_instance().stop()
             if Widgets.voice.message_dictated:
                 Widgets.voice.message_dictated.popup.tts_button.set_active(False)
-            self.get_application().quit()
+            # Quit from the GLib main loop to avoid teardown races with worker threads
+            GLib.idle_add(self.get_application().quit)
 
         def switch_to_hide():
             self.set_hide_on_close(True)
@@ -323,12 +324,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             current_chat.add_message(m_element_bot)
             SQL.insert_or_update_message(m_element_bot)
             if current_chat.chat_type == 'chat':
-                threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
+                threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model), daemon=True).start()
             elif current_chat.chat_type == 'notebook':
                 tls = Widgets.tools.NotebookTools
                 if len(current_chat.get_notebook()) == 0:
                     tls = {Widgets.tools.notebook_tools.WriteNotebook.tool_metadata.get('name'): Widgets.tools.notebook_tools.WriteNotebook()}
-                threading.Thread(target=self.get_current_instance().notebook_generation, args=(m_element_bot, current_model, tls)).start()
+                threading.Thread(target=self.get_current_instance().notebook_generation, args=(m_element_bot, current_model, tls), daemon=True).start()
         elif mode==1:
             current_chat.set_visible_child_name('content')
         elif mode==2:
@@ -341,7 +342,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             )
             current_chat.add_message(m_element_bot)
             SQL.insert_or_update_message(m_element_bot)
-            threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.tool_listbox), True)).start()
+            threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.tool_listbox), True), daemon=True).start()
 
     def auto_select_model(self):
         def find_model_index(model_name:str) -> int:
@@ -464,7 +465,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         #Chat History
         self.load_history()
 
-        threading.Thread(target=Widgets.tools.update_available_tools, args=(self.tool_listbox,)).start()
+        threading.Thread(target=Widgets.tools.update_available_tools, args=(self.tool_listbox,), daemon=True).start()
 
         if self.get_application().args.new_chat:
             self.new_chat(self.get_application().args.new_chat)
@@ -574,7 +575,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 parent=self,
                 heading=_('Pull Model'),
                 body=_('Please enter the model name following this template: name:tag'),
-                callback=lambda name: threading.Thread(target=Widgets.models.available.pull_model_confirm, args=(name, self.get_current_instance(), self)).start(),
+                callback=lambda name: threading.Thread(target=Widgets.models.available.pull_model_confirm, args=(name, self.get_current_instance(), self), daemon=True).start(),
                 entries={'placeholder': 'deepseek-r1:7b'}
             )],
             'reload_added_models': [lambda *_: GLib.idle_add(Widgets.models.update_added_model_list, self)],
