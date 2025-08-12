@@ -184,13 +184,15 @@ class Base(Adw.ActionRow):
         return variables_for_sql
 
     def attach_online_image(self, bot_message, image_title:str, image_url:str):
-        attachment = bot_message.add_attachment(
-            file_id = generate_uuid(),
-            name = image_title,
-            attachment_type = 'image',
-            content = attachments.extract_online_image(image_url, 640)
-        )
-        SQL.insert_or_update_attachment(bot_message, attachment)
+        image_data = attachments.extract_online_image(image_url, 640)
+        if image_data:
+            attachment = bot_message.add_attachment(
+                file_id = generate_uuid(),
+                name = image_title,
+                attachment_type = 'image',
+                content = image_data
+            )
+            SQL.insert_or_update_attachment(bot_message, attachment)
 
 class GetCurrentDatetime(Base):
     tool_metadata = {
