@@ -757,8 +757,8 @@ class SpotifyController(Base):
                 error_log=_("Specify a Client ID and Client Secret")
             )
             return
-    server = HTTPServer(("127.0.0.1", 8888), self.make_handler_class())
-    threading.Thread(target=server.handle_request, daemon=True).start()
+        server = HTTPServer(("127.0.0.1", 8888), self.make_handler_class())
+        threading.Thread(target=server.handle_request, daemon=True).start()
 
         SCOPE="user-read-playback-state user-modify-playback-state user-read-currently-playing"
         auth_url = (
