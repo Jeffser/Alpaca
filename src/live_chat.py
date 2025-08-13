@@ -136,7 +136,7 @@ class LiveChatWindow(Adw.ApplicationWindow):
             GLib.idle_add(self.model_avatar_animation.reset)
             GLib.idle_add(self.global_footer.microphone_button.button.set_active, False)
             if self.settings.get_value('live-chat-auto-mic').unpack() and self.get_current_instance():
-                threading.Thread(target=self.try_turning_on_mic).start()
+                threading.Thread(target=self.try_turning_on_mic, daemon=True).start()
 
     def send_message(self, mode:int=0):
         #Mode = 0 (normal), Mode = 1 (System), Mode = 2 (Use Tools)
@@ -208,9 +208,9 @@ class LiveChatWindow(Adw.ApplicationWindow):
             self.model_avatar_spinner.set_visible(True)
             chat.busy = True
             if mode == 0:
-                threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model)).start()
+                threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model), daemon=True).start()
             else:
-                threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.get_application().main_alpaca_window.tool_listbox), True)).start()
+                threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.get_application().main_alpaca_window.tool_listbox), True), daemon=True).start()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

@@ -390,6 +390,15 @@ class ExtractWikipedia(Base):
 
 if importlib.util.find_spec('duckduckgo_search'):
     from duckduckgo_search import DDGS
+    # Try to import a rate limit exception compatible with OpenWebUI's handling
+    try:
+        from duckduckgo_search.exceptions import RatelimitException as DDGRateLimitError
+    except Exception:
+        try:
+            from ddgs.exceptions import RatelimitException as DDGRateLimitError  # type: ignore
+        except Exception:
+            class DDGRateLimitError(Exception):
+                pass
     class OnlineSearch(Base):
         tool_metadata = {
             "name": "online_search",
@@ -436,35 +445,54 @@ if importlib.util.find_spec('duckduckgo_search'):
 
             result_md = []
 
-            text_results = DDGS().text(
-                keywords=search_term,
-                max_results=self.variables.get('max_results', {}).get('value', 1),
-                safesearch=('on', 'moderate', 'off')[self.variables.get('safesearch', {}).get('value', 1)]
-            )
+            max_results = int(self.variables.get('max_results', {}).get('value', 1))
+            safesearch_level = ('on', 'moderate', 'off')[self.variables.get('safesearch', {}).get('value', 1)]
 
-            for text_result in text_results:
-                attachment = bot_message.add_attachment(
-                    file_id = generate_uuid(),
-                    name = _("Abstract Source"),
-                    attachment_type = "link",
-                    content = text_result.get('href')
-                )
-                SQL.insert_or_update_attachment(bot_message, attachment)
-                result_md.append('### {}'.format(text_result.get('title')))
-                result_md.append(text_result.get('body'))
+            # Mirror OpenWebUI: use DDGS with backend='lite' and catch RatelimitException
+            try:
+                with DDGS() as ddgs:
+                    try:
+                        text_results = ddgs.text(
+                            keywords=search_term,
+                            safesearch=safesearch_level,
+                            max_results=max_results,
+                            backend='lite'
+                        )
+                    except DDGRateLimitError:
+                        return "Error: Search is temporarily unavailable (rate limited). Please try again later."
 
-            images = DDGS().images(
-                keywords=search_term,
-                max_results=self.variables.get('max_results', {}).get('value', 1),
-                safesearch=('on', 'moderate', 'off')[self.variables.get('safesearch', {}).get('value', 1)],
-                size='Medium',
-                layout='Square'
-            )
+                    for tr in text_results:
+                        attachment = bot_message.add_attachment(
+                            file_id = generate_uuid(),
+                            name = _("Abstract Source"),
+                            attachment_type = "link",
+                            content = tr.get('href')
+                        )
+                        SQL.insert_or_update_attachment(bot_message, attachment)
+                        result_md.append('### {}'.format(tr.get('title')))
+                        result_md.append(tr.get('body'))
 
-            for image_result in images:
-                self.attach_online_image(bot_message, text_result.get('title', _('Web Result Image')), image_result.get('image'))
+                    # Images are best-effort; ignore rate limit errors here
+                    try:
+                        images = ddgs.images(
+                            keywords=search_term,
+                            max_results=max_results,
+                            safesearch=safesearch_level,
+                            size='Medium',
+                            layout='Square'
+                        )
+                        for image_result in images:
+                            self.attach_online_image(
+                                bot_message,
+                                image_result.get('title', _("Web Result Image")),
+                                image_result.get('image')
+                            )
+                    except DDGRateLimitError:
+                        pass
+            except Exception:
+                return "Error: Search is temporarily unavailable (rate limited). Please try again later."
 
-            if len(result_md) == 1:
+            if len(result_md) == 0:
                 return "Error: No results found"
 
             return '\n\n'.join(result_md)
@@ -730,7 +758,7 @@ class SpotifyController(Base):
             )
             return
         server = HTTPServer(("127.0.0.1", 8888), self.make_handler_class())
-        threading.Thread(target=server.handle_request).start()
+        threading.Thread(target=server.handle_request, daemon=True).start()
 
         SCOPE="user-read-playback-state user-modify-playback-state user-read-currently-playing"
         auth_url = (

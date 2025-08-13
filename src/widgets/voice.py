@@ -36,7 +36,7 @@ def preload_heavy_libraries():
         widget.set_sensitive(True)
     library_waiting_queue = []
 
-threading.Thread(target=preload_heavy_libraries).start()
+threading.Thread(target=preload_heavy_libraries, daemon=True).start()
 
 class DictateToggleButton(Gtk.Stack):
     __gtype_name__ = 'AlpacaDictateToggleButton'
@@ -101,7 +101,7 @@ class DictateToggleButton(Gtk.Stack):
             tts_engine_language=voice[0]
 
         # Start Generation of Audio and Start Playing
-        play_thread = threading.Thread(target=self.play_audio_queue)
+        play_thread = threading.Thread(target=self.play_audio_queue, daemon=True)
         play_thread.start()
         queue_index = 0
         GLib.idle_add(self.message_element.remove_css_class, 'tts_message_loading')
@@ -147,13 +147,13 @@ class DictateToggleButton(Gtk.Stack):
                  message_dictated.popup.tts_button.set_active(False)
             message_dictated = self.message_element
             self.play_queue = queue.Queue()
-            generation_thread = threading.Thread(target=self.run_tts).start()
+            generation_thread = threading.Thread(target=self.run_tts, daemon=True).start()
         else:
             GLib.idle_add(self.message_element.remove_css_class, 'tts_message_loading')
             GLib.idle_add(self.message_element.remove_css_class, 'tts_message')
             GLib.idle_add(self.set_visible_child_name, 'button')
             message_dictated = None
-            threading.Thread(target=libraries.get('sounddevice').stop).start()
+            threading.Thread(target=libraries.get('sounddevice').stop, daemon=True).start()
 
 class MicrophoneButton(Gtk.Stack):
     __gtype_name__ = 'AlpacaMicrophoneButton'
@@ -236,7 +236,7 @@ class MicrophoneButton(Gtk.Stack):
                             data = stream.read(1024, exception_on_overflow=False)
                             frames.append(np.frombuffer(data, dtype=np.int16))
                         audio_data = np.concatenate(frames).astype(np.float32) / 32768.0
-                        threading.Thread(target=recognize_audio, args=(loaded_whisper_models.get(model_name), audio_data, buffer.get_end_iter())).start()
+                        threading.Thread(target=recognize_audio, args=(loaded_whisper_models.get(model_name), audio_data, buffer.get_end_iter()), daemon=True).start()
 
                         if self.mic_timeout >= 2 and mic_auto_send and buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False):
                             GLib.idle_add(button.get_root().send_message)
@@ -269,13 +269,13 @@ class MicrophoneButton(Gtk.Stack):
                 False
             )
             models.common.prepend_added_model(button.get_root(), pulling_model)
-            threading.Thread(target=run_mic, args=(pulling_model,)).start()
+            threading.Thread(target=run_mic, args=(pulling_model,), daemon=True).start()
 
         if button.get_active():
             if os.path.isfile(os.path.join(data_dir, 'whisper', '{}.pt'.format(model_name))):
                 if message_dictated:
                     message_dictated.popup.tts_button.set_active(False)
-                threading.Thread(target=run_mic).start()
+                threading.Thread(target=run_mic, daemon=True).start()
             else:
                 dialog.simple(
                     parent = button.get_root(),
