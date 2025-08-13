@@ -363,6 +363,7 @@ class AddedModelButton(Gtk.Button):
         return '{} {} {}'.format(self.get_name(), self.model_title, self.data.get('system', None))
 
     def get_search_categories(self) -> set:
+        available_models_data = get_available_models_data()
         return set([c for c in available_models_data.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
 
     def get_vision(self) -> bool:
