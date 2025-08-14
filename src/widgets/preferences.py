@@ -13,6 +13,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
     zoom_spin = Gtk.Template.Child()
     prefer_tools = Gtk.Template.Child()
     regenerate_after_edit = Gtk.Template.Child()
+    image_size_spin = Gtk.Template.Child()
     mic_group = Gtk.Template.Child()
     mic_model_combo = Gtk.Template.Child()
     mic_language_combo = Gtk.Template.Child()
@@ -67,6 +68,8 @@ class PreferencesDialog(Adw.PreferencesDialog):
         if sys.platform in ('win32', 'darwin'): # MacOS and Windows
             self.powersaver_warning_switch.set_visible(False)
             self.background_switch.set_visible(False)
+
+        self.settings.bind('max-image-size', self.image_size_spin, 'value', Gio.SettingsBindFlags.DEFAULT)
 
 def get_zoom():
     settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
