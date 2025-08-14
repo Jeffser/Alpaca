@@ -1,7 +1,5 @@
 # attachments.py
 
-import gi
-gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gtk, Gio, Gdk, GdkPixbuf, GLib, Xdp
 
 import odf.opendocument as odfopen

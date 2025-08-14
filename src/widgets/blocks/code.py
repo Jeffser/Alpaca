@@ -3,8 +3,6 @@
 Code block handling
 """
 
-import gi
-gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, Gdk, GtkSource
 from .. import terminal, dialog
 import re, unicodedata

@@ -26,8 +26,6 @@ import numpy as np
 
 from datetime import datetime
 
-import gi
-gi.require_version('Spelling', '1')
 from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, Spelling
 
 from .sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL

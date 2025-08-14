@@ -2,8 +2,7 @@
 """
 Manages the camera feature to send pictures to AI
 """
-import gi
-gi.require_version('Gst', '1.0')
+
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject, Gst
 from . import attachments, dialog
 import cv2, threading, base64
