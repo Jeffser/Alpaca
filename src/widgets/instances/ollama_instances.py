@@ -492,11 +492,12 @@ class OllamaManaged(BaseInstance):
             'HSA_OVERRIDE_GFX_VERSION': '',
             'CUDA_VISIBLE_DEVICES': '0',
             'ROCR_VISIBLE_DEVICES': '1',
-            'HIP_VISIBLE_DEVICES': '1'
+            'HIP_VISIBLE_DEVICES': '1',
+            'OLLAMA_ORIGINS': '127.0.0.1'
         },
         'think': False,
         'share_name': 0,
-        'show_response_metadata': False
+        'show_response_metadata': False,
     }
 
     def __init__(self, instance_id:str, properties:dict):
