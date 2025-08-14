@@ -562,7 +562,7 @@ class GlobalAttachmentContainer(AttachmentContainer):
         else:
             file_type = found_types[0]
         if file_type == 'image':
-            content = extract_image(file.get_path(), 256)
+            content = extract_image(file.get_path(), self.get_root().settings.get_value('max-image-size').unpack())
         elif file_type == 'audio':
             content = 'AUDIO NOT TRANSCRIBED'
         else:
