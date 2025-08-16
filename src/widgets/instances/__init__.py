@@ -173,6 +173,22 @@ class InstancePreferencesGroup(Adw.Dialog):
                 )
             ))
 
+        if 'response_num_ctx' in self.instance.properties: #RESPONSE CONTEXT SIZE
+            self.groups[-1].add(Adw.SpinRow(
+                title=_('Response Context Size'), 
+                subtitle=_('Context window size for chat responses. Higher values allow longer conversations but use more memory.'),
+                name='response_num_ctx',
+                digits=0,
+                numeric=True,
+                snap_to_ticks=True,
+                adjustment=Gtk.Adjustment(
+                    value=self.instance.properties.get('response_num_ctx'),
+                    lower=1024,
+                    upper=131072,
+                    step_increment=1024
+                )
+            ))
+
         if 'overrides' in self.instance.properties: #OVERRIDES
             self.groups.append(Adw.PreferencesGroup(
                 title=_('Overrides'),
@@ -302,6 +318,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             'max_tokens': lambda val: val,
             'temperature': lambda val: val,
             'seed': lambda val: val,
+            'response_num_ctx': lambda val: int(val),
             'override': lambda val: val.strip(),
             'model_directory': lambda val: val.strip(),
             'default_model': lambda val: self.instance.get_local_models()[val].get('name') if val >= 0 else None,

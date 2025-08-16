@@ -217,7 +217,7 @@ class BaseInstance:
             "stream": True,
             "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', []),
             "options": {
-                "num_ctx": 16384
+                "num_ctx": self.properties.get('response_num_ctx', 16384)   # Selectable context window
             }
         }
 
@@ -284,7 +284,10 @@ class BaseInstance:
                     "title"
                 ]
             },
-            'think': False
+            'think': False,
+            "options": {
+                "num_ctx": self.properties.get('title_num_ctx', 512)   # Limit context window to speed up title generation
+            }
         }
         try:
             response = requests.post(
@@ -488,6 +491,8 @@ class OllamaManaged(BaseInstance):
         'model_directory': os.path.join(data_dir, '.ollama', 'models'),
         'default_model': None,
         'title_model': None,
+        'title_num_ctx': 512,          # NEW: Context size for title generation
+        'response_num_ctx': 16384,     # NEW: Context size for response generation
         'overrides': {
             'HSA_OVERRIDE_GFX_VERSION': '',
             'CUDA_VISIBLE_DEVICES': '0',
@@ -592,6 +597,8 @@ class Ollama(BaseInstance):
         'seed': 0,
         'default_model': None,
         'title_model': None,
+        'title_num_ctx': 512,          # NEW: Context size for title generation
+        'response_num_ctx': 16384,     # NEW: Context size for response generation
         'think': False,
         'share_name': 0,
         'show_response_metadata': False
