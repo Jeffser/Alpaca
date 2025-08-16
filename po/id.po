@@ -167,31 +167,31 @@ msgstr "Baru"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Update model list"
-msgstr ""
+msgstr "Perbarui daftar model"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Changed design of tool attachments"
-msgstr ""
+msgstr "Mengubah desain lampiran alat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Tool usage optimization"
-msgstr ""
+msgstr "Optimisasi penggunaan alat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Added metadata attachments for Ollama instances"
-msgstr ""
+msgstr "Menambahkan lampiran metadata untuk instance Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Changed Image Attachment Container min width to 240"
-msgstr ""
+msgstr "Mengubah lebar minimum Kontainer Lampiran Gambar menjadi 240"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Added option to use current model for title generation"
-msgstr ""
+msgstr "Menambahkan opsi untuk menggunakan model saat ini dalam pembuatan judul"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Added option to regenerate tool responses"
-msgstr ""
+msgstr "Menambahkan opsi untuk membuat ulang respons alat"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
@@ -242,31 +242,31 @@ msgstr "Perbaikan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:107
 msgid "Made DDG_Search library optional (AUR fix)"
-msgstr ""
+msgstr "Menjadikan pustaka DDG_Search opsional (perbaikan AUR)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:108
 msgid "Fixed attachments being rendered to the wrong messages"
-msgstr ""
+msgstr "Memperbaiki lampiran yang ditampilkan pada pesan yang salah"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:117
 msgid "Fixed message generation problems relating to threading"
-msgstr ""
+msgstr "Memperbaiki masalah pembuatan pesan terkait threading"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:126
 msgid "Fixed message generation problems"
-msgstr ""
+msgstr "Memperbaiki masalah pembuatan pesan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:127
 msgid "Fixed max tokens error with online instances"
-msgstr ""
+msgstr "Memperbaiki kesalahan token maksimum pada instance online"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:136
 msgid "Added option to regenerate responses when messages are edited"
-msgstr ""
+msgstr "Menambahkan opsi untuk membuat ulang respons saat pesan diedit"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:140
 msgid "Fixed message rendering problems"
-msgstr ""
+msgstr "Memperbaiki masalah tampilan pesan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:149
 msgid "Fixed inconsistent message generation rendering"
@@ -3772,58 +3772,58 @@ msgstr "Tanya Cepat"
 #: src/sql_manager.py:33
 #, python-brace-format
 msgid "{} seconds"
-msgstr ""
+msgstr "{} detik"
 
 #: src/sql_manager.py:37
 msgid "Total Duration"
-msgstr ""
+msgstr "Durasi Total"
 
 #: src/sql_manager.py:38
 msgid "Load Duration"
-msgstr ""
+msgstr "Durasi Muat"
 
 #: src/sql_manager.py:41
 msgid "Prompt Eval Count"
-msgstr ""
+msgstr "Jumlah Evaluasi Prompt"
 
 #: src/sql_manager.py:41 src/sql_manager.py:46
 #, python-brace-format
 msgid "{} tokens"
-msgstr ""
+msgstr "{} token"
 
 #: src/sql_manager.py:42
 msgid "Prompt Eval Duration"
-msgstr ""
+msgstr "Durasi Evaluasi Prompt"
 
 #: src/sql_manager.py:44
 msgid "Prompt Eval Rate"
-msgstr ""
+msgstr "Laju Evaluasi Prompt"
 
 #: src/sql_manager.py:44 src/sql_manager.py:49
 #, python-brace-format
 msgid "{} tokens/s"
-msgstr ""
+msgstr "{} token/detik"
 
 #: src/sql_manager.py:46
 msgid "Eval Count"
-msgstr ""
+msgstr "Jumlah Evaluasi"
 
 #: src/sql_manager.py:47
 msgid "Eval Duration"
-msgstr ""
+msgstr "Durasi Evaluasi"
 
 #: src/sql_manager.py:49
 msgid "Eval Rate"
-msgstr ""
+msgstr "Laju Evaluasi"
 
 #: src/sql_manager.py:50
 msgid "Metric"
-msgstr ""
+msgstr "Metrik"
 
 #: src/sql_manager.py:50 src/widgets/instances/ollama_instances.py:132
 #: src/widgets/instances/openai_instances.py:165
 msgid "Value"
-msgstr ""
+msgstr "Nilai"
 
 #: src/window.py:94
 msgid "Ollama Was Not Found"
@@ -3978,12 +3978,12 @@ msgstr "Alihkan Sisi Bilah"
 #: src/gtk/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Zoom In"
-msgstr ""
+msgstr "Perbesar"
 
 #: src/gtk/help-overlay.ui:62
 msgctxt "shortcut window"
 msgid "Zoom Out"
-msgstr ""
+msgstr "Perkecil"
 
 #: src/gtk/help-overlay.ui:68
 msgctxt "shortcut window"
@@ -4018,7 +4018,7 @@ msgstr "Ganti Nama Obrolan"
 #: src/gtk/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Toggle Searchbars"
-msgstr ""
+msgstr "Alihkan Bilah Pencarian"
 
 #: src/gtk/help-overlay.ui:111
 msgctxt "shortcut window"
@@ -4335,10 +4335,13 @@ msgid ""
 "Hey Alpaca users! Get ready for a huge update packed with enhancements and "
 "exciting new features designed to make your experience even better."
 msgstr ""
+"Halo pengguna Alpaca! Bersiaplah untuk pembaruan besar yang penuh dengan "
+"peningkatan dan fitur baru yang menarik, dirancang untuk membuat pengalaman "
+"Anda semakin baik."
 
 #: src/gtk/notice.ui:34
 msgid "Introducing Live Chat"
-msgstr ""
+msgstr "Memperkenalkan Obrolan Langsung"
 
 #: src/gtk/notice.ui:35
 msgid ""
@@ -4347,10 +4350,14 @@ msgid ""
 "recognition and live message dictation. Access it easily by selecting \"Live "
 "Chat\" from the primary menu."
 msgstr ""
+"Rasakan cara baru berinteraksi dengan model AI Anda! Obrolan Langsung "
+"memungkinkan Anda bercakap seolah sedang menelepon, dengan fokus kuat pada "
+"pengenalan suara waktu nyata dan dikte pesan langsung. Akses dengan mudah "
+"dengan memilih \"Obrolan Langsung\" dari menu utama."
 
 #: src/gtk/notice.ui:42
 msgid "Live Message Rendering"
-msgstr ""
+msgstr "Tampilan Pesan Langsung"
 
 #: src/gtk/notice.ui:43
 msgid ""
@@ -4358,36 +4365,47 @@ msgid ""
 "they're being generated, and you can even use dictation simultaneously for a "
 "more fluid interaction."
 msgstr ""
+"Lihat percakapan Anda berlangsung secara langsung! Pesan kini ditampilkan "
+"saat sedang dibuat, dan Anda bahkan dapat menggunakan dikte secara bersamaan "
+"untuk interaksi yang lebih lancar."
 
 #: src/gtk/notice.ui:50
 msgid "Camera Attachment"
-msgstr ""
+msgstr "Lampiran Kamera"
 
 #: src/gtk/notice.ui:51
 msgid ""
 "You can now take pictures directly within Alpaca and attach them to your "
 "messages with the new Camera Attachment feature."
 msgstr ""
+"Sekarang Anda dapat mengambil gambar langsung di dalam Alpaca dan "
+"melampirkannya ke pesan Anda dengan fitur Lampiran Kamera yang baru."
 
 #: src/gtk/notice.ui:58
 msgid "Enhanced Web Search Tool"
-msgstr ""
+msgstr "Alat Pencarian Web yang Ditingkatkan"
 
 #: src/gtk/notice.ui:59
 msgid ""
 "Our Web Search Tool just got a major upgrade! Enjoy more accurate results "
 "and powerful new options to find exactly what you're looking for."
 msgstr ""
+"Alat Pencarian Web kami baru saja mendapat peningkatan besar! Nikmati hasil "
+"yang lebih akurat dan opsi baru yang lebih kuat untuk menemukan apa yang "
+"Anda cari."
 
 #: src/gtk/notice.ui:66
 msgid "Redesign"
-msgstr ""
+msgstr "Desain Ulang"
 
 #: src/gtk/notice.ui:67
 msgid ""
 "Alpaca has a brand new look! Enjoy a redesigned interface with updated "
-"popups and sleek new dialogs for managing your AI instances and tools."
+"popups and sleek new dialogs for managing youhr AI instances and tools."
 msgstr ""
+"Alpaca hadir dengan tampilan baru! Nikmati antarmuka yang didesain ulang "
+"dengan popup yang diperbarui dan dialog baru yang lebih elegan untuk "
+"mengelola instance AI dan alat Anda."
 
 #: src/gtk/preferences.ui:11
 msgid "General"
@@ -4403,7 +4421,7 @@ msgstr "Tampilkan Peringatan Penghemat Daya"
 
 #: src/gtk/preferences.ui:22
 msgid "When running a managed Ollama instance"
-msgstr ""
+msgstr "Saat menjalankan instance Ollama yang dikelola"
 
 #: src/gtk/preferences.ui:28
 msgid "Zoom"
@@ -4411,19 +4429,19 @@ msgstr "Perbesar"
 
 #: src/gtk/preferences.ui:40
 msgid "Prefer to Use Tools"
-msgstr ""
+msgstr "Lebih Suka Menggunakan Alat"
 
 #: src/gtk/preferences.ui:41
 msgid "Always try to use tools when sending a message"
-msgstr ""
+msgstr "Selalu coba gunakan alat saat mengirim pesan"
 
 #: src/gtk/preferences.ui:46
 msgid "Regenerate Response After Editing Message"
-msgstr ""
+msgstr "Buat Ulang Respons Setelah Mengedit Pesan"
 
 #: src/gtk/preferences.ui:47
 msgid "Applicable when the next message was generated by an AI model"
-msgstr ""
+msgstr "Berlaku ketika pesan berikutnya dihasilkan oleh model AI"
 
 #: src/gtk/preferences.ui:59
 msgid "Delete All Chats"
@@ -4431,43 +4449,46 @@ msgstr "Hapus Semua Percakapan"
 
 #: src/gtk/preferences.ui:70
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #: src/gtk/preferences.ui:75
 msgid "Speech Recognition Model"
-msgstr ""
+msgstr "Model Pengenalan Suara"
 
 #: src/gtk/preferences.ui:76
 msgid ""
 "Models are downloaded upon first use, you can delete them from the model "
 "manager"
 msgstr ""
+"Model akan diunduh saat pertama kali digunakan, Anda dapat menghapusnya dari "
+"pengelola model"
 
 #: src/gtk/preferences.ui:81
 msgid "Speech Recognition Language"
-msgstr ""
+msgstr "Bahasa Pengenalan Suara"
 
 #: src/gtk/preferences.ui:87
 msgid "Auto Send Message After Talking"
-msgstr ""
+msgstr "Kirim Pesan Otomatis Setelah Berbicara"
 
 #: src/gtk/preferences.ui:97
 msgid "Default Text to Speech Voice"
-msgstr ""
+msgstr "Suara Bawaan Teks ke Ucapan"
 
 #: src/gtk/preferences.ui:98
 msgid ""
 "Voices are downloaded upon first use, each weighing around 1 MB, and you can "
 "delete them from the model manager"
 msgstr ""
+"Suara akan diunduh saat pertama kali digunakan, masing-masing berukuran sekitar 1 MB, dan Anda dapat menghapusnya dari pengelola model"
 
 #: src/gtk/preferences.ui:103
 msgid "Dictate New Messages Automatically"
-msgstr ""
+msgstr "Dikte Pesan Baru Secara Otomatis"
 
 #: src/gtk/preferences.ui:104
 msgid "Dictate new messages as they are generated"
-msgstr ""
+msgstr "Dikte pesan baru saat sedang dibuat"
 
 #: src/gtk/welcome.ui:6
 msgid "Welcome"
@@ -4775,7 +4796,7 @@ msgstr "Pikiran"
 
 #: src/widgets/message.py:492
 msgid "Metadata"
-msgstr ""
+msgstr "Metadata"
 
 #: src/widgets/message.py:549
 msgid "Attach YouTube Video?"
@@ -4783,7 +4804,7 @@ msgstr "Lampirkan Video YouTube?"
 
 #: src/widgets/message.py:550
 msgid "Note that YouTube might block access to captions, please check output"
-msgstr ""
+msgstr "Perhatikan bahwa YouTube mungkin memblokir akses ke teks, silakan periksa keluaran"
 
 #: src/widgets/message.py:557
 #, python-brace-format
@@ -5208,12 +5229,12 @@ msgstr "Argumen"
 #: src/widgets/instances/ollama_instances.py:132
 #: src/widgets/instances/openai_instances.py:165
 msgid "Argument"
-msgstr ""
+msgstr "Argumen"
 
 #: src/widgets/instances/ollama_instances.py:138
 #: src/widgets/instances/openai_instances.py:171
 msgid "Result"
-msgstr ""
+msgstr "Hasil"
 
 #: src/widgets/instances/ollama_instances.py:169
 #: src/widgets/instances/openai_instances.py:200
@@ -5413,7 +5434,7 @@ msgstr "Secara otomatis membagikan nama Anda dengan model AI."
 
 #: src/widgets/instances/__init__.py:111
 msgid "Do Not Share"
-msgstr ""
+msgstr "Jangan Bagikan"
 
 #: src/widgets/instances/__init__.py:112 src/widgets/tools/tools.py:501
 msgid "Username"
@@ -5421,15 +5442,15 @@ msgstr "Nama Pengguna"
 
 #: src/widgets/instances/__init__.py:113
 msgid "Full Name"
-msgstr ""
+msgstr "Nama Lengkap"
 
 #: src/widgets/instances/__init__.py:121
 msgid "Show Response Metadata"
-msgstr ""
+msgstr "Tampilkan Metadata Respons"
 
 #: src/widgets/instances/__init__.py:122
 msgid "Add the option to show reply metadata in the message as an attachment."
-msgstr ""
+msgstr "Tambahkan opsi untuk menampilkan metadata balasan dalam pesan sebagai lampiran."
 
 #: src/widgets/instances/__init__.py:129
 msgid "Max Tokens"
