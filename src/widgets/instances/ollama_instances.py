@@ -260,56 +260,68 @@ class BaseInstance:
             metadata_string = dict_to_metadata_string(data)
         bot_message.finish_generation(metadata_string)
 
-    def generate_chat_title(self, chat, prompt:str, fallback_model:str):
+    def generate_chat_title(self, chat, prompt: str, fallback_model: str):
         if not chat.row or not chat.row.get_parent():
             return
-        model = self.get_title_model()
-        params = {
-            "temperature": 0.2,
-            "model": model if model else fallback_model,
-            "max_tokens": MAX_TOKENS_TITLE_GENERATION,
-            "stream": False,
-            "prompt": TITLE_GENERATION_PROMPT_OLLAMA.format(prompt),
+            model = self.get_title_model()
+            params = {
+                "model": model if model else fallback_model,
+                "messages": [
+                {
+                "role": "system",
+                "content": "You are a helpful assistant that generates concise, descriptive titles for conversations. Generate a title and optional emoji based on the user's message."
+                },
+                {
+                "role": "user",
+                "content": TITLE_GENERATION_PROMPT_OLLAMA.format(prompt)
+                }
+                ],
+        "temperature": 0.2,
+        "stream": False,
             "format": {
-                "type": "object",
-                "properties": {
-                    "title": {
-                        "type": "string"
-                    },
-                    "emoji": {
-                        "type": "string"
-                    }
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "emoji": {
+                    "type": "string"
+                }
                 },
                 "required": [
-                    "title"
+                "title"
                 ]
-            },
-            'think': False,
+                },
+            "think": False,
             "options": {
-                "num_ctx": self.properties.get('title_num_ctx', 512)   # Limit context window to speed up title generation
+            "num_ctx": self.properties.get('title_num_ctx', 512)
             }
         }
-        try:
-            response = requests.post(
-                '{}/api/generate'.format(self.properties.get('url')),
-                headers={
-                    "Authorization": "Bearer {}".format(self.properties.get('api')),
-                    "Content-Type": "application/json"
-                },
-                data=json.dumps(params)
-            )
-            data = json.loads(response.json().get('response', '{"title": ""}'))
-            generated_title = data.get('title').replace('\n', '').strip()
 
-            if len(generated_title) > 30:
-                generated_title = generated_title[:30].strip() + '...'
+    try:
+        response = requests.post(
+            '{}/api/chat'.format(self.properties.get('url')),
+            headers={
+                "Authorization": "Bearer {}".format(self.properties.get('api')),
+                "Content-Type": "application/json"
+            },
+            data=json.dumps(params)
+        )
+        content = response.json().get('message', {}).get('content', '{"title": ""}')
+        data = json.loads(content)
+        if not isinstance(data, dict):
+            data = {"title": ""}
+        generated_title = data.get('title', '').replace('\n', '').strip()
+        if len(generated_title) > 30:
+            generated_title = generated_title[:30].strip() + '...'
+        if data.get('emoji'):
+            emoji = data.get('emoji').replace('\n', '').strip()
+            chat.row.rename(f'{emoji} {generated_title}')
+        else:
+            chat.row.rename(generated_title)
+    except Exception as e:
+        logger.error(e)
 
-            if data.get('emoji'):
-                chat.row.rename('{} {}'.format(data.get('emoji').replace('\n', '').strip(), generated_title))
-            else:
-                chat.row.rename(generated_title)
-        except Exception as e:
-            logger.error(e)
 
 
     def get_default_model(self):
