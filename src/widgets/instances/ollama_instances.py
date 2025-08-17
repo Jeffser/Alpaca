@@ -263,40 +263,68 @@ class BaseInstance:
     def generate_chat_title(self, chat, prompt: str, fallback_model: str):
         if not chat.row or not chat.row.get_parent():
             return
-            model = self.get_title_model()
-            params = {
-                "model": model if model else fallback_model,
-                "messages": [
+        model = self.get_title_model()
+
+        combined_system_prompt = TITLE_GENERATION_PROMPT_OLLAMA.format(prompt)
+
+        params = {
+            "model": model if model else fallback_model,
+            "messages": [
                 {
-                "role": "system",
-                "content": "You are a helpful assistant that generates concise, descriptive titles for conversations. Generate a title and optional emoji based on the user's message."
+                    "role": "system",
+                    "content": combined_system_prompt
                 },
                 {
-                "role": "user",
-                "content": TITLE_GENERATION_PROMPT_OLLAMA.format(prompt)
+                    "role": "user",
+                    "content": ""
                 }
-                ],
-        "temperature": 0.2,
-        "stream": False,
+            ],
+            "temperature": 0.2,
+            "stream": False,
             "format": {
-            "type": "object",
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "emoji": {
-                    "type": "string"
-                }
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "emoji": {
+                        "type": "string"
+                    }
                 },
                 "required": [
-                "title"
+                    "title"
                 ]
-                },
+            },
             "think": False,
             "options": {
-            "num_ctx": self.properties.get('title_num_ctx', 512)
+                "num_ctx": self.properties.get('title_num_ctx', 512)
             }
         }
+
+        try:
+            response = requests.post(
+                f"{self.properties.get('url')}/api/chat",
+                headers={
+                    "Authorization": f"Bearer {self.properties.get('api')}",
+                    "Content-Type": "application/json"
+                },
+                data=json.dumps(params)
+            )
+            content = response.json().get('message', {}).get('content', '{"title": ""}')
+            data = json.loads(content)
+            if not isinstance(data, dict):
+                data = {"title": ""}
+            generated_title = data.get('title', '').replace('\n', '').strip()
+            if len(generated_title) > 30:
+                generated_title = generated_title[:30].strip() + "..."
+            if data.get('emoji'):
+                emoji = data.get('emoji').replace('\n', '').strip()
+                chat.row.rename(f"{emoji} {generated_title}")
+            else:
+                chat.row.rename(generated_title)
+        except Exception as e:
+            logger.error(e)
+
 
     try:
         response = requests.post(
