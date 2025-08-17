@@ -305,7 +305,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             'override': lambda val: val.strip(),
             'model_directory': lambda val: val.strip(),
             'default_model': lambda val: self.instance.get_local_models()[val].get('name') if val >= 0 else None,
-            'title_model': lambda val: self.instance.get_local_models()[val].get('name') if val >= 1 else None
+            'title_model': lambda val: self.instance.get_local_models()[val-1].get('name') if val >= 1 else None
         }
 
         for group in self.groups:
