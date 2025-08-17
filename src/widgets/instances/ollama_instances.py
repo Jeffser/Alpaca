@@ -216,6 +216,7 @@ class BaseInstance:
             "temperature": self.properties.get('temperature', 0.7),
             "stream": True,
             "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', []),
+            "keep_alive": '5h',                                             # keep model loaded
             "options": {
                 "num_ctx": self.properties.get('response_num_ctx', 16384)   # Selectable context window
             }
@@ -265,18 +266,14 @@ class BaseInstance:
             return
         model = self.get_title_model()
 
-        combined_system_prompt = TITLE_GENERATION_PROMPT_OLLAMA.format(prompt)
+        user_prompt = TITLE_GENERATION_PROMPT_OLLAMA.format(prompt)
 
         params = {
             "model": model if model else fallback_model,
             "messages": [
                 {
-                    "role": "system",
-                    "content": combined_system_prompt
-                },
-                {
                     "role": "user",
-                    "content": ""
+                    "content": user_prompt
                 }
             ],
             "temperature": 0.2,
@@ -296,8 +293,9 @@ class BaseInstance:
                 ]
             },
             "think": False,
+            "keep_alive": 0,                    # Unload title model immediately
             "options": {
-                "num_ctx": self.properties.get('title_num_ctx', 512)
+                "num_ctx": self.properties.get('response_num_ctx', 16384)          # Selectable context window
             }
         }
 
@@ -314,11 +312,11 @@ class BaseInstance:
             data = json.loads(content)
             if not isinstance(data, dict):
                 data = {"title": ""}
-            generated_title = data.get('title', '').replace('\n', '').strip()
+            generated_title = data.get('title', '').replace('\\n', '').strip()
             if len(generated_title) > 30:
                 generated_title = generated_title[:30].strip() + "..."
             if data.get('emoji'):
-                emoji = data.get('emoji').replace('\n', '').strip()
+                emoji = data.get('emoji').replace('\\n', '').strip()
                 chat.row.rename(f"{emoji} {generated_title}")
             else:
                 chat.row.rename(generated_title)
@@ -531,8 +529,7 @@ class OllamaManaged(BaseInstance):
         'model_directory': os.path.join(data_dir, '.ollama', 'models'),
         'default_model': None,
         'title_model': None,
-        'title_num_ctx': 512,          # NEW: Context size for title generation
-        'response_num_ctx': 16384,     # NEW: Context size for response generation
+        'response_num_ctx': 16384,     # Context size for response generation
         'overrides': {
             'HSA_OVERRIDE_GFX_VERSION': '',
             'CUDA_VISIBLE_DEVICES': '0',
@@ -637,8 +634,7 @@ class Ollama(BaseInstance):
         'seed': 0,
         'default_model': None,
         'title_model': None,
-        'title_num_ctx': 512,          # NEW: Context size for title generation
-        'response_num_ctx': 16384,     # NEW: Context size for response generation
+        'response_num_ctx': 16384,     # Context size for response generation
         'think': False,
         'share_name': 0,
         'show_response_metadata': False
