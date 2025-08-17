@@ -190,12 +190,24 @@ class InstancePreferencesGroup(Adw.Dialog):
             ))
 
         if 'keep_alive' in self.instance.properties: #KEEP ALIVE
-            self.groups[-1].add(Adw.EntryRow(
+            keep_alive_row = Adw.ActionRow(
                 title=_('Keep Alive'),
-                subtitle=_('How long the model stays loaded by Ollama after it generates a response. Enter number for seconds (300) or duration with units (5m, 2h). -1 keeps forever, 0 unloads immediately. Note this may keep the model running after Alpaca exits.'),
-                name='keep_alive',
-                text=str(self.instance.properties.get('keep_alive'))
-            ))
+                subtitle=_('How long the model stays loaded by Ollama after it generates a response. Enter number for seconds (300) or duration with units (5m, 2h). -1 keeps forever, 0 unloads immediately.'),
+                name='keep_alive'
+            )
+            
+            keep_alive_entry = Gtk.Entry(
+                text=str(self.instance.properties.get('keep_alive')),
+                valign=3,
+                hexpand=False,
+                width_chars=8
+            )
+            
+            # Store entry reference for save function
+            keep_alive_row.keep_alive_entry = keep_alive_entry
+            keep_alive_row.add_suffix(keep_alive_entry)
+            self.groups[-1].add(keep_alive_row)
+
 
 
         if 'overrides' in self.instance.properties: #OVERRIDES
@@ -349,6 +361,8 @@ class InstancePreferencesGroup(Adw.Dialog):
                         value = -1
                     else:
                         value = el.get_selected()
+                elif isinstance(el, Adw.ActionRow) and el.get_name() == 'keep_alive':   # new
+                        value = el.keep_alive_entry.get_text().replace('\n', '')        # new
                 elif isinstance(el, Adw.ActionRow):
                     value = el.get_subtitle()
 
