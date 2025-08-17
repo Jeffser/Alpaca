@@ -216,7 +216,7 @@ class BaseInstance:
             "temperature": self.properties.get('temperature', 0.7),
             "stream": True,
             "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', []),
-            "keep_alive": '5h',                                             # keep model loaded
+            "keep_alive": self.properties.get('keep_alive', 300),         # Keep model loaded
             "options": {
                 "num_ctx": self.properties.get('response_num_ctx', 16384)   # Selectable context window
             }
@@ -530,6 +530,8 @@ class OllamaManaged(BaseInstance):
         'default_model': None,
         'title_model': None,
         'response_num_ctx': 16384,     # Context size for response generation
+        'keep_alive': 300,             # Keep model loaded
+
         'overrides': {
             'HSA_OVERRIDE_GFX_VERSION': '',
             'CUDA_VISIBLE_DEVICES': '0',
@@ -634,7 +636,8 @@ class Ollama(BaseInstance):
         'seed': 0,
         'default_model': None,
         'title_model': None,
-        'response_num_ctx': 16384,     # Context size for response generation
+        'response_num_ctx': 16384,      # Context size for response generation
+        'keep_alive': 300,              # Keep model loaded
         'think': False,
         'share_name': 0,
         'show_response_metadata': False

@@ -189,6 +189,15 @@ class InstancePreferencesGroup(Adw.Dialog):
                 )
             ))
 
+        if 'keep_alive' in self.instance.properties: #KEEP ALIVE
+            self.groups[-1].add(Adw.EntryRow(
+                title=_('Keep Alive'),
+                subtitle=_('How long the model stays loaded by Ollama after it generates a response. Enter number for seconds (300) or duration with units (5m, 2h). -1 keeps forever, 0 unloads immediately. Note this may keep the model running after Alpaca exits.'),
+                name='keep_alive',
+                text=str(self.instance.properties.get('keep_alive'))
+            ))
+
+
         if 'overrides' in self.instance.properties: #OVERRIDES
             self.groups.append(Adw.PreferencesGroup(
                 title=_('Overrides'),
@@ -319,6 +328,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             'temperature': lambda val: val,
             'seed': lambda val: val,
             'response_num_ctx': lambda val: int(val),
+            'keep_alive': lambda val: int(val) if val.strip().lstrip('-').isdigit() else val.strip(),
             'override': lambda val: val.strip(),
             'model_directory': lambda val: val.strip(),
             'default_model': lambda val: self.instance.get_local_models()[val].get('name') if val >= 0 else None,
