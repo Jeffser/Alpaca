@@ -70,20 +70,11 @@ def update_added_model_list(root):
                     window.local_model_flowbox.prepend(model_element)
 
         # Text to Speech
-        tts_model_path = os.path.join(cache_dir, 'huggingface', 'hub')
-        if os.path.isdir(tts_model_path) and any([d for d in os.listdir(tts_model_path) if 'Kokoro' in d]):
-            # Kokoro has a directory
-            tts_model_path = os.path.join(tts_model_path, [d for d in os.listdir(tts_model_path) if 'Kokoro' in d][0], 'snapshots')
-            if os.path.isdir(tts_model_path) and len(os.listdir(tts_model_path)) > 0:
-                # Kokoro has snapshots
-                tts_model_path = os.path.join(tts_model_path, os.listdir(tts_model_path)[0], 'voices')
-                if os.path.isdir(tts_model_path):
-                    # Kokoro has voices
-                    for model in os.listdir(tts_model_path):
-                        pretty_name = [k for k, v in TTS_VOICES.items() if v == model.removesuffix('.pt')]
-                        if len(pretty_name) > 0:
-                            model_element = speech.TextToSpeechModelButton(pretty_name[0])
-                            window.local_model_flowbox.prepend(model_element)
+        tts_model_path = get_tts_path()
+        if tts_model_path:
+            for model in os.listdir(tts_model_path):
+                model_element = speech.TextToSpeechModelButton(os.path.join(tts_model_path, model))
+                window.local_model_flowbox.prepend(model_element)
 
     # Normal Models
     threads=[]
@@ -98,3 +89,20 @@ def update_added_model_list(root):
     window.local_model_stack.set_visible_child_name('content' if len(list(window.local_model_flowbox)) > 0 else 'no-models')
     window.model_dropdown.set_enable_search(len(local_models) > 10)
     GLib.idle_add(window.auto_select_model)
+
+def tts_model_exists(model_name:str) -> bool:
+    tts_model_path = get_tts_path()
+    if tts_model_path:
+        for model in os.listdir(tts_model_path):
+            if model_name == model.removesuffix('.pt'):
+                return True
+    return False
+
+def get_tts_path() -> str or None:
+    tts_model_path = os.path.join(cache_dir, 'huggingface', 'hub')
+    if os.path.isdir(tts_model_path) and any([d for d in os.listdir(tts_model_path) if 'Kokoro' in d]):
+        tts_model_path = os.path.join(tts_model_path, [d for d in os.listdir(tts_model_path) if 'Kokoro' in d][0], 'snapshots')
+        if os.path.isdir(tts_model_path) and len(os.listdir(tts_model_path)) > 0:
+            tts_model_path = os.path.join(tts_model_path, os.listdir(tts_model_path)[0], 'voices')
+            if os.path.isdir(tts_model_path):
+                return tts_model_path

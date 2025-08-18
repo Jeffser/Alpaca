@@ -51,8 +51,16 @@ class TextToSpeechModelDialog(Adw.Dialog):
 class TextToSpeechModelButton(Gtk.Button):
     __gtype_name__ = 'AlpacaTextToSpeechModelButton'
 
-    def __init__(self, name:str):
-        self.model_title = name.title()
+    def __init__(self, file_path:str):
+        self.file_path = file_path
+        model_name = os.path.basename(self.file_path).removesuffix('.pt')
+        pretty_name = [k for k, v in TTS_VOICES.items() if v == model_name]
+        if len(pretty_name) > 0:
+            pretty_name = pretty_name[0]
+        else:
+            pretty_name = model_name.replace('_', ' ').removesuffix('.pt')
+        self.model_title = pretty_name.title()
+
         container = Gtk.Box(
             spacing=5,
             margin_start=5,
@@ -62,7 +70,7 @@ class TextToSpeechModelButton(Gtk.Button):
         )
 
         super().__init__(
-            name=name,
+            name=model_name,
             child=container,
             css_classes=['p0', 'card']
         )
@@ -117,14 +125,13 @@ class TextToSpeechModelButton(Gtk.Button):
         dialog = self.get_root().get_visible_dialog()
         if dialog and isinstance(dialog, TextToSpeechModelDialog):
             dialog.close()
-        name = '{}.pt'.format(TTS_VOICES.get(self.get_name(), ''))
-        symlink_path = os.path.join(os.path.join(cache_dir, 'huggingface', 'hub'), name)
-
-        if os.path.islink(symlink_path):
-            target_path = os.readlink(symlink_path)
-            os.unlink(symlink_path)
+        if os.path.islink(self.file_path):
+            target_path = os.readlink(self.file_path)
+            os.unlink(self.file_path)
             if os.path.isfile(target_path):
                 os.remove(target_path)
+        elif os.path.isfile(self.file_path):
+            os.remove(self.file_path)
         self.get_parent().get_parent().remove(self)
 
     def prompt_remove_model(self):

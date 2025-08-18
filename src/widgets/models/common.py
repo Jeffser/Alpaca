@@ -67,6 +67,12 @@ def prepend_added_model(root, model):
     if model.__gtype_name__ == 'AlpacaAddedModelButton':
         window.model_dropdown.get_model().append(model.row)
 
+def append_added_model(root, model):
+    window = root.get_application().main_alpaca_window
+    window.local_model_flowbox.append(model)
+    if model.__gtype_name__ == 'AlpacaAddedModelButton':
+        window.model_dropdown.get_model().append(model.row)
+
 def prompt_gguf(root, instance=None):
     creator = importlib.import_module('alpaca.widgets.models.creator')
     if not instance:
