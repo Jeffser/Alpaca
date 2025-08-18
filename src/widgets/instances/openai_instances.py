@@ -21,6 +21,7 @@ class BaseInstance:
         'name': _('Instances'),
         'api': '',
         'max_tokens': 2048,
+        'override_parameters': False,
         'temperature': 0.7,
         'seed': 0,
         'default_model': None,
@@ -232,7 +233,6 @@ class BaseInstance:
         params = {
             "model": model,
             "messages": messages,
-            "temperature": self.properties.get('temperature', 0.7),
             "stream": True
         }
 
@@ -242,8 +242,10 @@ class BaseInstance:
             params["tools"] = tools_used
             params["tool_choice"] = "none"
 
-        if self.properties.get('seed', 0) != 0:
-            params["seed"] = self.properties.get('seed')
+        if self.properties.get("override_parameters"):
+            params["temperature"] = self.properties.get('temperature', 0.7)
+            if self.properties.get('seed', 0) != 0:
+                params["seed"] = self.properties.get('seed')
 
         if chat.busy:
             try:

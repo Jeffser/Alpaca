@@ -213,16 +213,17 @@ class BaseInstance:
         params = {
             "model": model,
             "messages": messages,
-            "temperature": self.properties.get('temperature', 0.7),
             "stream": True,
-            "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', []),
-            "options": {
-                "num_ctx": 16384
-            }
+            "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', [])
         }
 
-        if self.properties.get('seed', 0) != 0:
-            params["seed"] = self.properties.get('seed')
+        if self.properties.get("override_parameters"):
+            params["options"] = {}
+            params["options"]["temperature"] = self.properties.get('temperature', 0.7)
+            params["options"]["num_ctx"] = self.properties.get('num_ctx', 16384)
+            if self.properties.get('seed', 0) != 0:
+                params["options"]["seed"] = self.properties.get('seed')
+
         data = {'done': True}
         if chat.busy:
             try:
@@ -483,8 +484,10 @@ class OllamaManaged(BaseInstance):
     default_properties = {
         'name': _('Instance'),
         'url': 'http://0.0.0.0:11434',
+        'override_parameters': False,
         'temperature': 0.7,
         'seed': 0,
+        'num_ctx': 16384,
         'model_directory': os.path.join(data_dir, '.ollama', 'models'),
         'default_model': None,
         'title_model': None,
@@ -497,7 +500,7 @@ class OllamaManaged(BaseInstance):
         },
         'think': False,
         'share_name': 0,
-        'show_response_metadata': False,
+        'show_response_metadata': False
     }
 
     def __init__(self, instance_id:str, properties:dict):
@@ -588,8 +591,10 @@ class Ollama(BaseInstance):
         'name': _('Instance'),
         'url': 'http://0.0.0.0:11434',
         'api': '',
+        'override_parameters': False,
         'temperature': 0.7,
         'seed': 0,
+        'num_ctx': 16384,
         'default_model': None,
         'title_model': None,
         'think': False,

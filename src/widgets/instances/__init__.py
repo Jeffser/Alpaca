@@ -141,37 +141,74 @@ class InstancePreferencesGroup(Adw.Dialog):
                 )
             ))
 
-        if 'temperature' in self.instance.properties: #TEMPERATURE
-            self.groups[-1].add(Adw.SpinRow(
-                title=_('Temperature'),
-                subtitle=_('Increasing the temperature will make the models answer more creatively.'),
-                name='temperature',
-                digits=2,
-                numeric=True,
-                snap_to_ticks=True,
-                adjustment=Gtk.Adjustment(
-                    value=self.instance.properties.get('temperature'),
-                    lower=0.01,
-                    upper=2,
-                    step_increment=0.01
-                )
+        if any([p in ('temperature', 'seed', 'num_ctx') for p in list(self.instance.properties)]):
+            op_switch = Gtk.Switch(
+                valign=3,
+                active=self.instance.properties.get('override_parameters'),
+                name='override_parameters'
+            )
+            self.groups.append(Adw.PreferencesGroup(
+                title=_('Parameters'),
+                description=_('Override the model and instance default parameters.')
             ))
+            self.groups[-1].set_header_suffix(op_switch)
 
-        if 'seed' in self.instance.properties: #SEED
-            self.groups[-1].add(Adw.SpinRow(
-                title=_('Seed'),
-                subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'),
-                name='seed',
-                digits=0,
-                numeric=True,
-                snap_to_ticks=True,
-                adjustment=Gtk.Adjustment(
-                    value=self.instance.properties.get('seed'),
-                    lower=0,
-                    upper=99999999,
-                    step_increment=1
+            if 'temperature' in self.instance.properties: #TEMPERATURE
+                temperature_spin = Adw.SpinRow(
+                    title=_('Temperature'),
+                    subtitle=_('Increasing the temperature will make the models answer more creatively.'),
+                    name='temperature',
+                    digits=2,
+                    numeric=True,
+                    snap_to_ticks=True,
+                    sensitive=self.instance.properties.get('override_parameters'),
+                    adjustment=Gtk.Adjustment(
+                        value=self.instance.properties.get('temperature'),
+                        lower=0.01,
+                        upper=2,
+                        step_increment=0.01
+                    )
                 )
-            ))
+                self.groups[-1].add(temperature_spin)
+                op_switch.connect('notify::active', lambda *_, el=temperature_spin: el.set_sensitive(op_switch.get_active()))
+
+            if 'seed' in self.instance.properties: #SEED
+                seed_spin = Adw.SpinRow(
+                    title=_('Seed'),
+                    subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'),
+                    name='seed',
+                    digits=0,
+                    numeric=True,
+                    snap_to_ticks=True,
+                    sensitive=self.instance.properties.get('override_parameters'),
+                    adjustment=Gtk.Adjustment(
+                        value=self.instance.properties.get('seed'),
+                        lower=0,
+                        upper=99999999,
+                        step_increment=1
+                    )
+                )
+                self.groups[-1].add(seed_spin)
+                op_switch.connect('notify::active', lambda *_, el=seed_spin: el.set_sensitive(op_switch.get_active()))
+
+            if 'num_ctx' in self.instance.properties:
+                num_ctx_spin = Adw.SpinRow(
+                    title=_('Context Window Size'),
+                    subtitle=_('Controls how many tokens (pieces of text) the model can process and remember at once.'),
+                    name='num_ctx',
+                    digits=0,
+                    numeric=True,
+                    snap_to_ticks=True,
+                    sensitive=self.instance.properties.get('override_parameters'),
+                    adjustment=Gtk.Adjustment(
+                        value=self.instance.properties.get('num_ctx'),
+                        lower=512,
+                        upper=32768,
+                        step_increment=512
+                    )
+                )
+                self.groups[-1].add(num_ctx_spin)
+                op_switch.connect('notify::active', lambda *_, el=num_ctx_spin: el.set_sensitive(op_switch.get_active()))
 
         if 'overrides' in self.instance.properties: #OVERRIDES
             self.groups.append(Adw.PreferencesGroup(
@@ -305,17 +342,22 @@ class InstancePreferencesGroup(Adw.Dialog):
             'override': lambda val: val.strip(),
             'model_directory': lambda val: val.strip(),
             'default_model': lambda val: self.instance.get_local_models()[val].get('name') if val >= 0 else None,
-            'title_model': lambda val: self.instance.get_local_models()[val-1].get('name') if val >= 1 else None
+            'title_model': lambda val: self.instance.get_local_models()[val-1].get('name') if val >= 1 else None,
+            'override_parameters': lambda val: val
         }
 
+        extra_elements = []
         for group in self.groups:
-            for el in list(list(list(list(group)[0])[1])[0]):
+            if group.get_header_suffix():
+                extra_elements.append(group.get_header_suffix())
+
+            for el in list(list(list(list(group)[0])[1])[0]) + extra_elements:
                 value = None
                 if isinstance(el, Adw.EntryRow) or isinstance(el, Adw.PasswordEntryRow):
                     value = el.get_text().replace('\n', '')
                 elif isinstance(el, Adw.SpinRow):
                     value = el.get_value()
-                elif isinstance(el, Adw.SwitchRow):
+                elif isinstance(el, Adw.SwitchRow) or isinstance(el, Gtk.Switch):
                     value = el.get_active()
                 elif isinstance(el, Adw.ComboRow):
                     if len(list(el.get_model())) <= 0:
