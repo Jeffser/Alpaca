@@ -331,7 +331,7 @@ class InstancePreferencesGroup(Adw.Dialog):
                 if model.get('name') == self.instance.properties.get('default_model'):
                     default_model_index = i
                 if model.get('name') == self.instance.properties.get('title_model'):
-                    title_model_index = i
+                    title_model_index = i + 1           # For dropdown to show the right selection
 
             default_model_el.set_model(string_list_default)
             default_model_el.set_selected(default_model_index)
