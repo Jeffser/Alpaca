@@ -150,85 +150,8 @@ class InstancePreferencesGroup(Adw.Dialog):
             )
             self.groups[-1].add(override_toggle)
 
-            # Create expert settings widgets (initially hidden/shown based on toggle state)
+            # Create expert settings widgets list
             expert_widgets = []
-            
-            if 'temperature' in self.instance.properties: #TEMPERATURE
-                temp_widget = Adw.SpinRow(
-                    title=_('Temperature'),
-                    subtitle=_('Increasing the temperature will make the models answer more creatively.'),
-                    name='temperature',
-                    digits=2,
-                    numeric=True,
-                    snap_to_ticks=True,
-                    visible=self.instance.properties.get('override_model_settings', False),
-                    adjustment=Gtk.Adjustment(
-                        value=self.instance.properties.get('temperature'),
-                        lower=0.01,
-                        upper=2,
-                        step_increment=0.01
-                    )
-                )
-                self.groups[-1].add(temp_widget)
-                expert_widgets.append(temp_widget)
-
-            if 'seed' in self.instance.properties: #SEED
-                seed_widget = Adw.SpinRow(
-                    title=_('Seed'),
-                    subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'),
-                    name='seed',
-                    digits=0,
-                    numeric=True,
-                    snap_to_ticks=True,
-                    visible=self.instance.properties.get('override_model_settings', False),
-                    adjustment=Gtk.Adjustment(
-                        value=self.instance.properties.get('seed'),
-                        lower=0,
-                        upper=99999999,
-                        step_increment=1
-                    )
-                )
-                self.groups[-1].add(seed_widget)
-                expert_widgets.append(seed_widget)
-
-            if 'response_num_ctx' in self.instance.properties: #RESPONSE CONTEXT SIZE
-                ctx_widget = Adw.SpinRow(
-                    title=_('Response Context Size'), 
-                    subtitle=_('Context window size for chat responses. Higher values allow longer conversations but use more memory.'),
-                    name='response_num_ctx',
-                    digits=0,
-                    numeric=True,
-                    snap_to_ticks=True,
-                    visible=self.instance.properties.get('override_model_settings', False),
-                    adjustment=Gtk.Adjustment(
-                        value=self.instance.properties.get('response_num_ctx'),
-                        lower=1024,
-                        upper=131072,
-                        step_increment=1024
-                    )
-                )
-                self.groups[-1].add(ctx_widget)
-                expert_widgets.append(ctx_widget)
-
-            if 'keep_alive' in self.instance.properties: #KEEP ALIVE
-                keep_alive_row = Adw.ActionRow(
-                    title=_('Keep Model Active'),
-                    subtitle=_('How long the model stays loaded by Ollama after it goes idle. Enter number for seconds (300) or duration with units (5m, 2h). -1 keeps forever, 0 unloads immediately. Note this may keep the model loaded even after Alpaca exits.'),
-                    name='keep_alive',
-                    visible=self.instance.properties.get('override_model_settings', False)
-                )
-                
-                keep_alive_entry = Gtk.Entry(
-                    text=str(self.instance.properties.get('keep_alive')),
-                    valign=3,
-                    hexpand=False,
-                    width_chars=8
-                )
-                
-                keep_alive_row.keep_alive_entry = keep_alive_entry
-                keep_alive_row.add_suffix(keep_alive_entry)
-                self.groups[-1].add(keep_alive_row)
-                expert_widgets.append(keep_alive_row)
 
             # Connect toggle to show/hide expert widgets
             def on_override_toggle(switch, param):
@@ -237,6 +160,101 @@ class InstancePreferencesGroup(Adw.Dialog):
                     widget.set_visible(is_active)
             
             override_toggle.connect('notify::active', on_override_toggle)
+
+        # Show for all instances, but conditionally for Ollama
+        if 'temperature' in self.instance.properties: #TEMPERATURE
+            show_temp = True
+            if 'override_model_settings' in self.instance.properties:
+                show_temp = self.instance.properties.get('override_model_settings', False)
+                
+            temp_widget = Adw.SpinRow(
+                title=_('Temperature'),
+                subtitle=_('Increasing the temperature will make the models answer more creatively.'),
+                name='temperature',
+                digits=2,
+                numeric=True,
+                snap_to_ticks=True,
+                visible=show_temp,
+                adjustment=Gtk.Adjustment(
+                    value=self.instance.properties.get('temperature'),
+                    lower=0.01,
+                    upper=2,
+                    step_increment=0.01
+                )
+            )
+            self.groups[-1].add(temp_widget)
+            
+            # Add to expert_widgets only for Ollama
+            if 'override_model_settings' in self.instance.properties:
+                expert_widgets.append(temp_widget)
+
+        # Show for all instances, but conditionally for Ollama
+        if 'seed' in self.instance.properties: #SEED
+            show_seed = True
+            if 'override_model_settings' in self.instance.properties:
+                show_seed = self.instance.properties.get('override_model_settings', False)
+                
+            seed_widget = Adw.SpinRow(
+                title=_('Seed'),
+                subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'),
+                name='seed',
+                digits=0,
+                numeric=True,
+                snap_to_ticks=True,
+                visible=show_seed,
+                adjustment=Gtk.Adjustment(
+                    value=self.instance.properties.get('seed'),
+                    lower=0,
+                    upper=99999999,
+                    step_increment=1
+                )
+            )
+            self.groups[-1].add(seed_widget)
+            
+            if 'override_model_settings' in self.instance.properties:
+                expert_widgets.append(seed_widget)
+
+
+        if 'response_num_ctx' in self.instance.properties: #RESPONSE CONTEXT SIZE - Ollama only
+            ctx_widget = Adw.SpinRow(
+                title=_('Response Context Size'), 
+                subtitle=_('Higher values allow longer conversations without context breakage, but use more memory. Models may have limits lower than this setting. Value in tokens.'),
+                name='response_num_ctx',
+                digits=0,
+                numeric=True,
+                snap_to_ticks=True,
+                visible=self.instance.properties.get('override_model_settings', False),
+                adjustment=Gtk.Adjustment(
+                    value=self.instance.properties.get('response_num_ctx'),
+                    lower=1024,
+                    upper=131072,
+                    step_increment=1024
+                )
+            )
+            self.groups[-1].add(ctx_widget)
+            expert_widgets.append(ctx_widget)
+
+
+        if 'keep_alive' in self.instance.properties: #KEEP ALIVE - Ollama only
+            keep_alive_row = Adw.ActionRow(
+                title=_('Keep Alive'),
+                subtitle=_('Keep model loaded by Ollama after it goes idle. Enter number for seconds (300) or duration with units (5m, 2h). -1 keeps forever, 0 unloads immediately. Note that on an external instance, this will keep the model loaded even if you switch models, or after Alpaca exits.'),
+                name='keep_alive',
+                visible=self.instance.properties.get('override_model_settings', False)
+            )
+            
+            keep_alive_entry = Gtk.Entry(
+                text=str(self.instance.properties.get('keep_alive')),
+                valign=3,
+                hexpand=False,
+                width_chars=8
+            )
+            
+            keep_alive_row.keep_alive_entry = keep_alive_entry
+            keep_alive_row.add_suffix(keep_alive_entry)
+            self.groups[-1].add(keep_alive_row)
+            expert_widgets.append(keep_alive_row)
+
 
 
         if 'overrides' in self.instance.properties: #OVERRIDES

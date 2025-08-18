@@ -301,10 +301,10 @@ class BaseInstance:
                 ]
             },
             "think": False,
-            "keep_alive": 0,                    # Unload title model immediately (no effect if thesame model is used for response)
+            "keep_alive": 0,    # Unload title model immediately (no effect if the same model is used for response)
         }
 
-        # Make num_ctx conditional just like in response
+        # Make num_ctx conditional just like in response, to avoid model reload
         if self.properties.get('override_model_settings', True):
             params["options"] = {
                 "num_ctx": self.properties.get('response_num_ctx', 16384)
@@ -542,8 +542,8 @@ class OllamaManaged(BaseInstance):
         'default_model': None,
         'title_model': None,
         'response_num_ctx': 16384,           # Context size needs to be the same for response+title
-        'keep_alive': 300,                   # Keep model loaded
-        'override_model_settings': True,     # Keep Alpaca's legacy default parameters
+        'keep_alive': 300,                   # Keep model loaded (Ollamas default is 5 mins)
+        'override_model_settings': True,     # Keep Alpaca's legacy parameters by default, to not trip people up
 
         'overrides': {
             'HSA_OVERRIDE_GFX_VERSION': '',
@@ -650,8 +650,8 @@ class Ollama(BaseInstance):
         'default_model': None,
         'title_model': None,
         'response_num_ctx': 16384,          # Context size needs to be the same for response+title
-        'keep_alive': 300,                  # Keep model loaded
-        'override_model_settings': True,    # Keep Alpaca's legacy default parameters
+        'keep_alive': 300,                  # Keep model loaded (Ollamas default is 5 mins)
+        'override_model_settings': True,    # Keep Alpaca's legacy parameters by default, to not trip people up
         'think': False,
         'share_name': 0,
         'show_response_metadata': False
