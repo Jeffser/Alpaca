@@ -88,7 +88,7 @@ class DictateToggleButton(Gtk.Stack):
             voice = TTS_VOICES.get(list(TTS_VOICES.keys())[self.message_element.get_root().settings.get_value('tts-model').unpack()])
 
         # Show Voice in Model Manager if Needed
-        if not models.tts_model_exists(voice) or True:
+        if not models.tts_model_exists(voice):
             tts_path = models.get_tts_path()
             if tts_path:
                 models.common.append_added_model(self.message_element.get_root(), models.speech.TextToSpeechModelButton(os.path.join(tts_path, voice + '.pt')))

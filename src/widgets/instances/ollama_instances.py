@@ -504,10 +504,10 @@ class OllamaManaged(BaseInstance):
             'HSA_OVERRIDE_GFX_VERSION': '',
             'CUDA_VISIBLE_DEVICES': '0',
             'ROCR_VISIBLE_DEVICES': '1',
-            'HIP_VISIBLE_DEVICES': '1',
-            'OLLAMA_ORIGINS': '127.0.0.1'
+            'HIP_VISIBLE_DEVICES': '1'
         },
         'think': False,
+        'expose': False,
         'share_name': 0,
         'show_response_metadata': False
     }
@@ -561,9 +561,14 @@ class OllamaManaged(BaseInstance):
                 params = self.properties.get('overrides', {}).copy()
                 params["OLLAMA_HOST"] = self.properties.get('url')
                 params["OLLAMA_MODELS"] = self.properties.get('model_directory')
+                if self.properties.get("expose"):
+                    params["OLLAMA_ORIGINS"] = "chrome-extension://*,moz-extension://*,safari-web-extension://*,http://0.0.0.0,http://127.0.0.1"
+                else:
+                    params["OLLAMA_ORIGINS"] = params.get("OLLAMA_HOST")
                 for key in list(params):
                     if not params.get(key):
                         del params[key]
+                print(params)
                 self.process = subprocess.Popen(
                     ["ollama", "serve"],
                     env={**os.environ, **params},

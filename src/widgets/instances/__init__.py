@@ -13,8 +13,7 @@ logger = logging.getLogger(__name__)
 override_urls = {
     'HSA_OVERRIDE_GFX_VERSION': 'https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides',
     'CUDA_VISIBLE_DEVICES': 'https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection',
-    'ROCR_VISIBLE_DEVICES': 'https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection-1',
-    'OLLAMA_ORIGINS': 'https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-allow-additional-web-origins-to-access-ollama'
+    'ROCR_VISIBLE_DEVICES': 'https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection-1'
 }
 
 class InstancePreferencesGroup(Adw.Dialog):
@@ -99,6 +98,14 @@ class InstancePreferencesGroup(Adw.Dialog):
                 subtitle=_('Have compatible reasoning models think about their response before generating a message.'),
                 name='think',
                 active=self.instance.properties.get('think')
+            ))
+
+        if 'expose' in self.instance.properties: #EXPOSE
+            self.groups[-1].add(Adw.SwitchRow(
+                title=_('Expose Ollama to Network'),
+                subtitle=_('Make Ollama available for other devices and software in local network'),
+                name='expose',
+                active=self.instance.properties.get('expose')
             ))
 
         if 'share_name' in self.instance.properties: #SHARE NAME
@@ -334,6 +341,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             'url': lambda val: '{}{}'.format('http://' if not re.match(r'^(http|https)://', val) else '', val.rstrip('/')),
             'api': lambda val: self.instance.properties.get('api') if self.instance.properties.get('api') and not val else (val if val else 'empty'),
             'think': lambda val: val,
+            'expose': lambda val: val,
             'share_name': lambda val: val,
             'show_response_metadata': lambda val: val,
             'max_tokens': lambda val: val,
