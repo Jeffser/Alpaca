@@ -267,10 +267,19 @@ class BaseInstance:
         model = self.get_title_model()
         params = {
             "temperature": 0.2,
-            "model": model if model else fallback_model,
+            "model": model or fallback_model,
             "max_tokens": MAX_TOKENS_TITLE_GENERATION,
             "stream": False,
-            "prompt": TITLE_GENERATION_PROMPT_OLLAMA.format(prompt),
+            "messages": [
+                {
+                    "role": "system",
+                    "content": TITLE_GENERATION_PROMPT_OLLAMA
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
             "format": {
                 "type": "object",
                 "properties": {
@@ -289,7 +298,7 @@ class BaseInstance:
         }
         try:
             response = requests.post(
-                '{}/api/generate'.format(self.properties.get('url')),
+                '{}/api/chat'.format(self.properties.get('url')),
                 headers={
                     "Authorization": "Bearer {}".format(self.properties.get('api')),
                     "Content-Type": "application/json"
