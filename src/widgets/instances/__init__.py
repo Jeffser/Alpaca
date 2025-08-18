@@ -141,73 +141,102 @@ class InstancePreferencesGroup(Adw.Dialog):
                 )
             ))
 
-        if 'temperature' in self.instance.properties: #TEMPERATURE
-            self.groups[-1].add(Adw.SpinRow(
-                title=_('Temperature'),
-                subtitle=_('Increasing the temperature will make the models answer more creatively.'),
-                name='temperature',
-                digits=2,
-                numeric=True,
-                snap_to_ticks=True,
-                adjustment=Gtk.Adjustment(
-                    value=self.instance.properties.get('temperature'),
-                    lower=0.01,
-                    upper=2,
-                    step_increment=0.01
-                )
-            ))
-
-        if 'seed' in self.instance.properties: #SEED
-            self.groups[-1].add(Adw.SpinRow(
-                title=_('Seed'),
-                subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'),
-                name='seed',
-                digits=0,
-                numeric=True,
-                snap_to_ticks=True,
-                adjustment=Gtk.Adjustment(
-                    value=self.instance.properties.get('seed'),
-                    lower=0,
-                    upper=99999999,
-                    step_increment=1
-                )
-            ))
-
-        if 'response_num_ctx' in self.instance.properties: #RESPONSE CONTEXT SIZE
-            self.groups[-1].add(Adw.SpinRow(
-                title=_('Response Context Size'), 
-                subtitle=_('Context window size for chat responses. Higher values allow longer conversations but use more memory.'),
-                name='response_num_ctx',
-                digits=0,
-                numeric=True,
-                snap_to_ticks=True,
-                adjustment=Gtk.Adjustment(
-                    value=self.instance.properties.get('response_num_ctx'),
-                    lower=1024,
-                    upper=131072,
-                    step_increment=1024
-                )
-            ))
-
-        if 'keep_alive' in self.instance.properties: #KEEP ALIVE
-            keep_alive_row = Adw.ActionRow(
-                title=_('Keep Alive'),
-                subtitle=_('How long the model stays loaded by Ollama after it generates a response. Enter number for seconds (300) or duration with units (5m, 2h). -1 keeps forever, 0 unloads immediately.'),
-                name='keep_alive'
+        if 'override_model_settings' in self.instance.properties: #OVERRIDE MODEL SETTINGS TOGGLE
+            override_toggle = Adw.SwitchRow(
+                title=_('Override Model Settings'),
+                subtitle=_('Use custom settings instead of the model\'s defaults. When off, the model uses its own built-in settings.'),
+                name='override_model_settings',
+                active=self.instance.properties.get('override_model_settings')
             )
-            
-            keep_alive_entry = Gtk.Entry(
-                text=str(self.instance.properties.get('keep_alive')),
-                valign=3,
-                hexpand=False,
-                width_chars=8
-            )
-            
-            # Store entry reference for save function
-            keep_alive_row.keep_alive_entry = keep_alive_entry
-            keep_alive_row.add_suffix(keep_alive_entry)
-            self.groups[-1].add(keep_alive_row)
+            self.groups[-1].add(override_toggle)
 
+            # Create expert settings widgets (initially hidden/shown based on toggle state)
+            expert_widgets = []
+            
+            if 'temperature' in self.instance.properties: #TEMPERATURE
+                temp_widget = Adw.SpinRow(
+                    title=_('Temperature'),
+                    subtitle=_('Increasing the temperature will make the models answer more creatively.'),
+                    name='temperature',
+                    digits=2,
+                    numeric=True,
+                    snap_to_ticks=True,
+                    visible=self.instance.properties.get('override_model_settings', False),
+                    adjustment=Gtk.Adjustment(
+                        value=self.instance.properties.get('temperature'),
+                        lower=0.01,
+                        upper=2,
+                        step_increment=0.01
+                    )
+                )
+                self.groups[-1].add(temp_widget)
+                expert_widgets.append(temp_widget)
+
+            if 'seed' in self.instance.properties: #SEED
+                seed_widget = Adw.SpinRow(
+                    title=_('Seed'),
+                    subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'),
+                    name='seed',
+                    digits=0,
+                    numeric=True,
+                    snap_to_ticks=True,
+                    visible=self.instance.properties.get('override_model_settings', False),
+                    adjustment=Gtk.Adjustment(
+                        value=self.instance.properties.get('seed'),
+                        lower=0,
+                        upper=99999999,
+                        step_increment=1
+                    )
+                )
+                self.groups[-1].add(seed_widget)
+                expert_widgets.append(seed_widget)
+
+            if 'response_num_ctx' in self.instance.properties: #RESPONSE CONTEXT SIZE
+                ctx_widget = Adw.SpinRow(
+                    title=_('Response Context Size'), 
+                    subtitle=_('Context window size for chat responses. Higher values allow longer conversations but use more memory.'),
+                    name='response_num_ctx',
+                    digits=0,
+                    numeric=True,
+                    snap_to_ticks=True,
+                    visible=self.instance.properties.get('override_model_settings', False),
+                    adjustment=Gtk.Adjustment(
+                        value=self.instance.properties.get('response_num_ctx'),
+                        lower=1024,
+                        upper=131072,
+                        step_increment=1024
+                    )
+                )
+                self.groups[-1].add(ctx_widget)
+                expert_widgets.append(ctx_widget)
+
+            if 'keep_alive' in self.instance.properties: #KEEP ALIVE
+                keep_alive_row = Adw.ActionRow(
+                    title=_('Keep Model Active'),
+                    subtitle=_('How long the model stays loaded by Ollama after it goes idle. Enter number for seconds (300) or duration with units (5m, 2h). -1 keeps forever, 0 unloads immediately. Note this may keep the model loaded even after Alpaca exits.'),
+                    name='keep_alive',
+                    visible=self.instance.properties.get('override_model_settings', False)
+                )
+                
+                keep_alive_entry = Gtk.Entry(
+                    text=str(self.instance.properties.get('keep_alive')),
+                    valign=3,
+                    hexpand=False,
+                    width_chars=8
+                )
+                
+                keep_alive_row.keep_alive_entry = keep_alive_entry
+                keep_alive_row.add_suffix(keep_alive_entry)
+                self.groups[-1].add(keep_alive_row)
+                expert_widgets.append(keep_alive_row)
+
+            # Connect toggle to show/hide expert widgets
+            def on_override_toggle(switch, param):
+                is_active = switch.get_active()
+                for widget in expert_widgets:
+                    widget.set_visible(is_active)
+            
+            override_toggle.connect('notify::active', on_override_toggle)
 
 
         if 'overrides' in self.instance.properties: #OVERRIDES
@@ -336,6 +365,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             'think': lambda val: val,
             'share_name': lambda val: val,
             'show_response_metadata': lambda val: val,
+            'override_model_settings': lambda val: val,     # Remembers if overrides are enabled
             'max_tokens': lambda val: val,
             'temperature': lambda val: val,
             'seed': lambda val: val,

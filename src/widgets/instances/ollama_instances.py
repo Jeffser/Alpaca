@@ -213,17 +213,25 @@ class BaseInstance:
         params = {
             "model": model,
             "messages": messages,
-            "temperature": self.properties.get('temperature', 0.7),
             "stream": True,
             "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', []),
-            "keep_alive": self.properties.get('keep_alive', 300),         # Keep model loaded
-            "options": {
-                "num_ctx": self.properties.get('response_num_ctx', 16384)   # Selectable context window
-            }
         }
 
-        if self.properties.get('seed', 0) != 0:
-            params["seed"] = self.properties.get('seed')
+        # Allow overriding model's settings; defaults to True for legacy purposes
+        if self.properties.get('override_model_settings', True):
+            params["temperature"] = self.properties.get('temperature', 0.7)
+            params["keep_alive"] = self.properties.get('keep_alive', 300)
+            params["options"] = {
+                "num_ctx": self.properties.get('response_num_ctx', 16384)
+            }
+            
+            if self.properties.get('seed', 0) != 0:
+                params["seed"] = self.properties.get('seed')
+        else:
+            # Still send keep_alive to not inherit title gen's 0 if model overrides are off
+            params["keep_alive"] = 300
+            
+
         data = {'done': True}
         if chat.busy:
             try:
@@ -293,11 +301,15 @@ class BaseInstance:
                 ]
             },
             "think": False,
-            "keep_alive": 0,                    # Unload title model immediately
-            "options": {
-                "num_ctx": self.properties.get('response_num_ctx', 16384)          # Selectable context window
-            }
+            "keep_alive": 0,                    # Unload title model immediately (no effect if thesame model is used for response)
         }
+
+        # Make num_ctx conditional just like in response
+        if self.properties.get('override_model_settings', True):
+            params["options"] = {
+                "num_ctx": self.properties.get('response_num_ctx', 16384)
+            }
+
 
         try:
             response = requests.post(
@@ -529,8 +541,9 @@ class OllamaManaged(BaseInstance):
         'model_directory': os.path.join(data_dir, '.ollama', 'models'),
         'default_model': None,
         'title_model': None,
-        'response_num_ctx': 16384,     # Context size for response generation
-        'keep_alive': 300,             # Keep model loaded
+        'response_num_ctx': 16384,           # Context size needs to be the same for response+title
+        'keep_alive': 300,                   # Keep model loaded
+        'override_model_settings': True,     # Keep Alpaca's legacy default parameters
 
         'overrides': {
             'HSA_OVERRIDE_GFX_VERSION': '',
@@ -636,8 +649,9 @@ class Ollama(BaseInstance):
         'seed': 0,
         'default_model': None,
         'title_model': None,
-        'response_num_ctx': 16384,      # Context size for response generation
-        'keep_alive': 300,              # Keep model loaded
+        'response_num_ctx': 16384,          # Context size needs to be the same for response+title
+        'keep_alive': 300,                  # Keep model loaded
+        'override_model_settings': True,    # Keep Alpaca's legacy default parameters
         'think': False,
         'share_name': 0,
         'show_response_metadata': False
