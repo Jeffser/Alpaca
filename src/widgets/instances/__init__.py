@@ -141,6 +141,10 @@ class InstancePreferencesGroup(Adw.Dialog):
                 )
             ))
 
+
+        # Create expert settings widgets list
+        expert_widgets = []
+
         if 'override_model_settings' in self.instance.properties: #OVERRIDE MODEL SETTINGS TOGGLE
             override_toggle = Adw.SwitchRow(
                 title=_('Override Model Settings'),
@@ -149,9 +153,6 @@ class InstancePreferencesGroup(Adw.Dialog):
                 active=self.instance.properties.get('override_model_settings')
             )
             self.groups[-1].add(override_toggle)
-
-            # Create expert settings widgets list
-            expert_widgets = []
 
             # Connect toggle to show/hide expert widgets
             def on_override_toggle(switch, param):
