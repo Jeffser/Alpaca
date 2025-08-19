@@ -109,7 +109,8 @@ class ModelCreatorDialog(Adw.Dialog):
             title=_('Imagination'),
             subtitle=_('A higher number results in more diverse answers from the model. (top_k)'),
             digits=0,
-
+            numeric=True,
+            snap_to_ticks=True,
             adjustment=Gtk.Adjustment(
                 lower=0,
                 upper=100,
@@ -124,7 +125,8 @@ class ModelCreatorDialog(Adw.Dialog):
             title=_('Focus'),
             subtitle=_('A higher number widens the amount of possible answers. (top_p)'),
             digits=0,
-
+            numeric=True,
+            snap_to_ticks=True,
             adjustment=Gtk.Adjustment(
                 lower=0,
                 upper=100,
