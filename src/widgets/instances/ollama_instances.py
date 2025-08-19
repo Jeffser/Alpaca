@@ -266,7 +266,9 @@ class BaseInstance:
             return
         model = self.get_title_model()
         params = {
-            "temperature": 0.2,
+            "options": {
+                "temperature": 0.2
+            },
             "model": model or fallback_model,
             "max_tokens": MAX_TOKENS_TITLE_GENERATION,
             "stream": False,
@@ -296,6 +298,8 @@ class BaseInstance:
             },
             'think': False
         }
+        if self.properties.get("override_parameters"):
+            params["options"]["num_ctx"] = self.properties.get('num_ctx', 16384)
         try:
             response = requests.post(
                 '{}/api/chat'.format(self.properties.get('url')),
