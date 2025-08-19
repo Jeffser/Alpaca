@@ -559,8 +559,8 @@ class OllamaManaged(BaseInstance):
             logger.info("Stopped Alpaca's Ollama instance")
 
     def start(self):
-        self.stop()
-        if shutil.which('ollama'):
+        #self.stop()
+        if shutil.which('ollama') and not self.process:
             try:
                 params = self.properties.get('overrides', {}).copy()
                 params["OLLAMA_HOST"] = self.properties.get('url')
