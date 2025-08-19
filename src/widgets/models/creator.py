@@ -134,6 +134,22 @@ class ModelCreatorDialog(Adw.Dialog):
         )
         pg.add(self.focus_element)
 
+        self.num_ctx_element = Adw.SpinRow(
+            title=_('Context Window Size'),
+            subtitle=_('Controls how many tokens (pieces of text) the model can process and remember at once.'),
+            name='num_ctx',
+            digits=0,
+            numeric=True,
+            snap_to_ticks=True,
+            adjustment=Gtk.Adjustment(
+                value=16384,
+                lower=512,
+                upper=131072,
+                step_increment=512
+            )
+        )
+        pg.add(self.num_ctx_element)
+
         tbv=Adw.ToolbarView()
 
         cancel_button = Gtk.Button(
@@ -242,6 +258,9 @@ class ModelCreatorDialog(Adw.Dialog):
                     elif line.startswith('PARAMETER top_p'):
                         top_p = int(float(line.split(' ')[2]) * 100)
                         self.focus_element.set_value(top_p)
+                    elif line.startswith('PARAMETER num_ctx'):
+                        num_ctx = int(line.split(' ')[2])
+                        self.num_ctx_element.set_value(num_ctx)
 
     def save(self):
         main_name = self.name_element.get_text()
@@ -262,6 +281,7 @@ class ModelCreatorDialog(Adw.Dialog):
 
         top_k = self.imagination_element.get_value()
         top_p = self.focus_element.get_value() / 100
+        num_ctx = self.num_ctx_element.get_value()
 
         found_models = [model for model in list(get_local_models(self.get_root()).values()) if model.model_title == pretty_name]
         if len(found_models) == 0:
@@ -273,7 +293,8 @@ class ModelCreatorDialog(Adw.Dialog):
                 'system': system_message,
                 'parameters': {
                     'top_k': top_k,
-                    'top_p': top_p
+                    'top_p': top_p,
+                    'num_ctx': num_ctx
                 },
                 'stream': True
             }
