@@ -316,7 +316,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             tooltip_text=_('Save'),
             css_classes=['suggested-action']
         )
-        save_button.connect('clicked', lambda button: self.save())
+        save_button.connect('clicked', lambda button: self.save(self.instance.get_local_models()))
 
         hb = Adw.HeaderBar(
             show_start_title_buttons=False,
@@ -334,24 +334,16 @@ class InstancePreferencesGroup(Adw.Dialog):
             content_width=500
         )
 
-    def save(self):
+    def save(self, local_model_list:list):
         save_functions = {
             'name': lambda val: val if val else _('Instance'),
             'port': lambda val: 'http://0.0.0.0:{}'.format(int(val)),
             'url': lambda val: '{}{}'.format('http://' if not re.match(r'^(http|https)://', val) else '', val.rstrip('/')),
             'api': lambda val: self.instance.properties.get('api') if self.instance.properties.get('api') and not val else (val if val else 'empty'),
-            'think': lambda val: val,
-            'expose': lambda val: val,
-            'share_name': lambda val: val,
-            'show_response_metadata': lambda val: val,
-            'max_tokens': lambda val: val,
-            'temperature': lambda val: val,
-            'seed': lambda val: val,
             'override': lambda val: val.strip(),
             'model_directory': lambda val: val.strip(),
-            'default_model': lambda val: self.instance.get_local_models()[val].get('name') if val >= 0 else None,
-            'title_model': lambda val: self.instance.get_local_models()[val-1].get('name') if val >= 1 else None,
-            'override_parameters': lambda val: val
+            'default_model': lambda val: local_model_list[val].get('name') if val >= 0 and val < len(local_model_list) else None,
+            'title_model': lambda val: local_model_list[val-1].get('name') if val >= 1 and val < len(local_model_list) else None,
         }
 
         extra_elements = []
@@ -379,8 +371,12 @@ class InstancePreferencesGroup(Adw.Dialog):
                     if 'overrides' not in self.instance.properties:
                         self.instance.properties['overrides'] = {}
                     self.instance.properties['overrides'][el.get_name().split(':')[1]] = value
+                elif el.get_name() == 'port':
+                    self.instance.properties['url'] = save_functions.get(el.get_name())(value)
                 elif save_functions.get(el.get_name()):
                     self.instance.properties[el.get_name()] = save_functions.get(el.get_name())(value)
+                else:
+                    self.instance.properties[el.get_name()] = value
 
         if not self.instance.instance_id:
             self.instance.instance_id = generate_uuid()
