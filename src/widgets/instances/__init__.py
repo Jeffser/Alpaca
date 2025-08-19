@@ -337,7 +337,6 @@ class InstancePreferencesGroup(Adw.Dialog):
     def save(self, local_model_list:list):
         save_functions = {
             'name': lambda val: val if val else _('Instance'),
-            'port': lambda val: 'http://0.0.0.0:{}'.format(int(val)),
             'url': lambda val: '{}{}'.format('http://' if not re.match(r'^(http|https)://', val) else '', val.rstrip('/')),
             'api': lambda val: self.instance.properties.get('api') if self.instance.properties.get('api') and not val else (val if val else 'empty'),
             'override': lambda val: val.strip(),
@@ -345,7 +344,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             'default_model': lambda val: local_model_list[val].get('name') if val >= 0 and val < len(local_model_list) else None,
             'title_model': lambda val: local_model_list[val-1].get('name') if val >= 1 and val < len(local_model_list) else None,
         }
-
+        port = None
         extra_elements = []
         for group in self.groups:
             if group.get_header_suffix():
@@ -372,11 +371,16 @@ class InstancePreferencesGroup(Adw.Dialog):
                         self.instance.properties['overrides'] = {}
                     self.instance.properties['overrides'][el.get_name().split(':')[1]] = value
                 elif el.get_name() == 'port':
-                    self.instance.properties['url'] = save_functions.get(el.get_name())(value)
+                    port = int(value)
                 elif save_functions.get(el.get_name()):
                     self.instance.properties[el.get_name()] = save_functions.get(el.get_name())(value)
                 else:
                     self.instance.properties[el.get_name()] = value
+                    if el.get_name() == 'expose':
+                        if value:
+                            self.instance.properties['url'] = 'http://0.0.0.0:{}'.format(port)
+                        else:
+                            self.instance.properties['url'] = 'http://127.0.0.1:{}'.format(port)
 
         if not self.instance.instance_id:
             self.instance.instance_id = generate_uuid()
