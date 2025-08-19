@@ -21,7 +21,7 @@ class BaseInstance:
         'name': _('Instances'),
         'api': '',
         'max_tokens': 2048,
-        'override_parameters': False,
+        'override_parameters': True,
         'temperature': 0.7,
         'seed': 0,
         'default_model': None,

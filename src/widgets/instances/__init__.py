@@ -210,7 +210,7 @@ class InstancePreferencesGroup(Adw.Dialog):
                     adjustment=Gtk.Adjustment(
                         value=self.instance.properties.get('num_ctx'),
                         lower=512,
-                        upper=32768,
+                        upper=131072,
                         step_increment=512
                     )
                 )

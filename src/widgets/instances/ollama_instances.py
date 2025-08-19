@@ -493,7 +493,7 @@ class OllamaManaged(BaseInstance):
     default_properties = {
         'name': _('Instance'),
         'url': 'http://0.0.0.0:11434',
-        'override_parameters': False,
+        'override_parameters': True,
         'temperature': 0.7,
         'seed': 0,
         'num_ctx': 16384,
@@ -605,7 +605,7 @@ class Ollama(BaseInstance):
         'name': _('Instance'),
         'url': 'http://0.0.0.0:11434',
         'api': '',
-        'override_parameters': False,
+        'override_parameters': True,
         'temperature': 0.7,
         'seed': 0,
         'num_ctx': 16384,
