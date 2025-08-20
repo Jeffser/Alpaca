@@ -148,17 +148,25 @@ class InstancePreferencesGroup(Adw.Dialog):
                 )
             ))
 
-        if any([p in ('temperature', 'seed', 'num_ctx') for p in list(self.instance.properties)]):
-            op_switch = Gtk.Switch(
-                valign=3,
-                active=self.instance.properties.get('override_parameters'),
-                name='override_parameters'
-            )
-            self.groups.append(Adw.PreferencesGroup(
-                title=_('Parameters'),
-                description=_('Override the model and instance default parameters.')
-            ))
-            self.groups[-1].set_header_suffix(op_switch)
+        if any([p in ('temperature', 'seed', 'num_ctx', 'keep_alive') for p in list(self.instance.properties)]):
+            # Create expert settings widgets list for collapsible behavior
+            expert_widgets = []
+
+            if 'override_parameters' in self.instance.properties:
+                override_toggle = Adw.SwitchRow(
+                    title=_('Override Parameters'),
+                    subtitle=_('Use custom settings instead of the model\'s defaults. When off, the model uses its own built-in settings.'),
+                    name='override_parameters',
+                    active=self.instance.properties.get('override_parameters')
+                )
+                self.groups[-1].add(override_toggle)
+
+                def on_override_toggle(switch, param):
+                    is_active = switch.get_active()
+                    for widget in expert_widgets:
+                        widget.set_visible(is_active)
+                
+                override_toggle.connect('notify::active', on_override_toggle)
 
             if 'temperature' in self.instance.properties: #TEMPERATURE
                 temperature_spin = Adw.SpinRow(
@@ -168,7 +176,7 @@ class InstancePreferencesGroup(Adw.Dialog):
                     digits=2,
                     numeric=True,
                     snap_to_ticks=True,
-                    sensitive=self.instance.properties.get('override_parameters'),
+                    visible=self.instance.properties.get('override_parameters'),
                     adjustment=Gtk.Adjustment(
                         value=self.instance.properties.get('temperature'),
                         lower=0.01,
@@ -177,7 +185,7 @@ class InstancePreferencesGroup(Adw.Dialog):
                     )
                 )
                 self.groups[-1].add(temperature_spin)
-                op_switch.connect('notify::active', lambda *_, el=temperature_spin: el.set_sensitive(op_switch.get_active()))
+                expert_widgets.append(temperature_spin)
 
             if 'seed' in self.instance.properties: #SEED
                 seed_spin = Adw.SpinRow(
@@ -187,7 +195,7 @@ class InstancePreferencesGroup(Adw.Dialog):
                     digits=0,
                     numeric=True,
                     snap_to_ticks=True,
-                    sensitive=self.instance.properties.get('override_parameters'),
+                    visible=self.instance.properties.get('override_parameters'),
                     adjustment=Gtk.Adjustment(
                         value=self.instance.properties.get('seed'),
                         lower=0,
@@ -196,17 +204,17 @@ class InstancePreferencesGroup(Adw.Dialog):
                     )
                 )
                 self.groups[-1].add(seed_spin)
-                op_switch.connect('notify::active', lambda *_, el=seed_spin: el.set_sensitive(op_switch.get_active()))
+                expert_widgets.append(seed_spin)
 
             if 'num_ctx' in self.instance.properties:
                 num_ctx_spin = Adw.SpinRow(
                     title=_('Context Window Size'),
-                    subtitle=_('Controls how many tokens (pieces of text) the model can process and remember at once.'),
+                    subtitle=_('Higher values allow longer conversations without context breakage, but use more memory. Models may have limits lower than this setting. Value in tokens.'),
                     name='num_ctx',
                     digits=0,
                     numeric=True,
                     snap_to_ticks=True,
-                    sensitive=self.instance.properties.get('override_parameters'),
+                    visible=self.instance.properties.get('override_parameters'),
                     adjustment=Gtk.Adjustment(
                         value=self.instance.properties.get('num_ctx'),
                         lower=512,
@@ -215,7 +223,27 @@ class InstancePreferencesGroup(Adw.Dialog):
                     )
                 )
                 self.groups[-1].add(num_ctx_spin)
-                op_switch.connect('notify::active', lambda *_, el=num_ctx_spin: el.set_sensitive(op_switch.get_active()))
+                expert_widgets.append(num_ctx_spin)
+
+            if 'keep_alive' in self.instance.properties:
+                keep_alive_row = Adw.ActionRow(
+                    title=_('Keep Alive'),
+                    subtitle=_('Keep model loaded by Ollama after it goes idle. Enter number for seconds (300) or duration with units (5m, 2h). -1 keeps forever, 0 unloads immediately.'),
+                    name='keep_alive',
+                    visible=self.instance.properties.get('override_parameters')
+                )
+                
+                keep_alive_entry = Gtk.Entry(
+                    text=str(self.instance.properties.get('keep_alive')),
+                    valign=3,
+                    hexpand=False,
+                    width_chars=8
+                )
+                
+                keep_alive_row.keep_alive_entry = keep_alive_entry
+                keep_alive_row.add_suffix(keep_alive_entry)
+                self.groups[-1].add(keep_alive_row)
+                expert_widgets.append(keep_alive_row)
 
         if 'overrides' in self.instance.properties: #OVERRIDES
             self.groups.append(Adw.PreferencesGroup(
@@ -343,6 +371,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             'model_directory': lambda val: val.strip(),
             'default_model': lambda val: local_model_list[val].get('name') if val >= 0 and val < len(local_model_list) else None,
             'title_model': lambda val: local_model_list[val-1].get('name') if val >= 1 and val < len(local_model_list) else None,
+            'keep_alive': lambda val: int(val) if val.strip().lstrip('-').isdigit() else val.strip(),
         }
         port = None
         extra_elements = []
@@ -363,6 +392,8 @@ class InstancePreferencesGroup(Adw.Dialog):
                         value = -1
                     else:
                         value = el.get_selected()
+                elif isinstance(el, Adw.ActionRow) and el.get_name() == 'keep_alive':
+                    value = el.keep_alive_entry.get_text().replace('\n', '')
                 elif isinstance(el, Adw.ActionRow):
                     value = el.get_subtitle()
 
@@ -526,4 +557,3 @@ def update_instance_list(instance_listbox:Gtk.ListBox, selected_instance_id:str)
         if not instance_listbox.get_selected_row():
             instance_listbox.select_row(instance_listbox.get_row_at_index(0))
     GLib.idle_add(check_row_is_selected)
-

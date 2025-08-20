@@ -217,12 +217,17 @@ class BaseInstance:
             "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', [])
         }
 
-        if self.properties.get("override_parameters"):
+        if self.properties.get('override_parameters', True):
+            params["keep_alive"] = self.properties.get('keep_alive', 300)
             params["options"] = {}
             params["options"]["temperature"] = self.properties.get('temperature', 0.7)
             params["options"]["num_ctx"] = self.properties.get('num_ctx', 16384)
+
             if self.properties.get('seed', 0) != 0:
                 params["options"]["seed"] = self.properties.get('seed')
+        else:
+            # Still send keep_alive to not inherit title gen's 0 if model overrides are off
+            params["keep_alive"] = 300
 
         data = {'done': True}
         if chat.busy:
@@ -265,6 +270,9 @@ class BaseInstance:
         if not chat.row or not chat.row.get_parent():
             return
         model = self.get_title_model()
+
+        user_prompt = TITLE_GENERATION_PROMPT_OLLAMA + "\n\n" + prompt   # With api/chat, this needs to be sent as part of the user prompt
+
         params = {
             "options": {
                 "temperature": 0.2
@@ -274,12 +282,8 @@ class BaseInstance:
             "stream": False,
             "messages": [
                 {
-                    "role": "system",
-                    "content": TITLE_GENERATION_PROMPT_OLLAMA
-                },
-                {
                     "role": "user",
-                    "content": prompt
+                    "content": user_prompt
                 }
             ],
             "format": {
@@ -296,10 +300,14 @@ class BaseInstance:
                     "title"
                 ]
             },
-            'think': False
+            "think": False,
+            "keep_alive": 0    # Unload title model immediately (no effect if the same model is used for response)
         }
-        if self.properties.get("override_parameters"):
+
+        # Make num_ctx conditional just like in response, to avoid model reload
+        if self.properties.get('override_parameters', True):
             params["options"]["num_ctx"] = self.properties.get('num_ctx', 16384)
+
         try:
             response = requests.post(
                 '{}/api/chat'.format(self.properties.get('url')),
@@ -321,7 +329,6 @@ class BaseInstance:
                 chat.row.rename(generated_title)
         except Exception as e:
             logger.error(e)
-
 
     def get_default_model(self):
         local_models = self.get_local_models()
@@ -500,7 +507,8 @@ class OllamaManaged(BaseInstance):
         'override_parameters': True,
         'temperature': 0.7,
         'seed': 0,
-        'num_ctx': 16384,
+        'num_ctx': 16384,                    # Context size needs to be the same for response+title
+        'keep_alive': 300,                   # Keep model loaded (Ollamas default is 5 mins)
         'model_directory': os.path.join(data_dir, '.ollama', 'models'),
         'default_model': None,
         'title_model': None,
@@ -611,7 +619,8 @@ class Ollama(BaseInstance):
         'override_parameters': True,
         'temperature': 0.7,
         'seed': 0,
-        'num_ctx': 16384,
+        'num_ctx': 16384,                    # Context size needs to be the same for response+title
+        'keep_alive': 300,                   # Keep model loaded (Ollamas default is 5 mins)
         'default_model': None,
         'title_model': None,
         'think': False,
@@ -624,4 +633,3 @@ class Ollama(BaseInstance):
         self.properties = {}
         for key in self.default_properties:
             self.properties[key] = properties.get(key, self.default_properties.get(key))
-
