@@ -148,11 +148,11 @@ class InstancePreferencesGroup(Adw.Dialog):
                 )
             ))
 
-        if any([p in ('temperature', 'seed', 'num_ctx') for p in list(self.instance.properties)]):
+        if any([p in ('temperature', 'seed', 'num_ctx', 'keep_alive') for p in list(self.instance.properties)]):
             self.groups.append(Adw.PreferencesGroup())
             op_expander_row = Adw.ExpanderRow(
                 title=_('Override Parameters'),
-                subtitle=_('These parameters overrides the behavior of the instance and models'),
+                subtitle=_('These parameters overrides the behavior of the instance and models.'),
                 show_enable_switch=True,
                 expanded=self.instance.properties.get('override_parameters'),
                 enable_expansion=self.instance.properties.get('override_parameters'),
@@ -161,7 +161,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             self.groups[-1].add(op_expander_row)
 
             if 'temperature' in self.instance.properties: #TEMPERATURE
-                temperature_spin = Adw.SpinRow(
+                op_expander_row.add_row(Adw.SpinRow(
                     title=_('Temperature'),
                     subtitle=_('Increasing the temperature will make the models answer more creatively.'),
                     name='temperature',
@@ -174,11 +174,10 @@ class InstancePreferencesGroup(Adw.Dialog):
                         upper=2,
                         step_increment=0.01
                     )
-                )
-                op_expander_row.add_row(temperature_spin)
+                ))
 
             if 'seed' in self.instance.properties: #SEED
-                seed_spin = Adw.SpinRow(
+                op_expander_row.add_row(Adw.SpinRow(
                     title=_('Seed'),
                     subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'),
                     name='seed',
@@ -191,11 +190,10 @@ class InstancePreferencesGroup(Adw.Dialog):
                         upper=99999999,
                         step_increment=1
                     )
-                )
-                op_expander_row.add_row(seed_spin)
+                ))
 
             if 'num_ctx' in self.instance.properties:
-                num_ctx_spin = Adw.SpinRow(
+                op_expander_row.add_row(Adw.SpinRow(
                     title=_('Context Window Size'),
                     subtitle=_('Controls how many tokens (pieces of text) the model can process and remember at once.'),
                     name='num_ctx',
@@ -208,8 +206,23 @@ class InstancePreferencesGroup(Adw.Dialog):
                         upper=131072,
                         step_increment=512
                     )
-                )
-                op_expander_row.add_row(num_ctx_spin)
+                ))
+
+            if 'keep_alive' in self.instance.properties:
+                op_expander_row.add_row(Adw.SpinRow(
+                    title=_('Keep Alive'),
+                    subtitle=_('The amount of minutes Ollama should keep models loaded after they go idle, -1 keeps them alive forever and 0 unloads them after use.'),
+                    name='keep_alive',
+                    digits=0,
+                    numeric=True,
+                    snap_to_ticks=True,
+                    adjustment=Gtk.Adjustment(
+                        value=int(self.instance.properties.get('keep_alive') / 60),
+                        lower=-1,
+                        upper=1440,
+                        step_increment=1
+                    )
+                ))
 
         if 'overrides' in self.instance.properties: #OVERRIDES
             self.groups.append(Adw.PreferencesGroup(
@@ -333,6 +346,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             'name': lambda val: val if val else _('Instance'),
             'url': lambda val: '{}{}'.format('http://' if not re.match(r'^(http|https)://', val) else '', val.rstrip('/')),
             'api': lambda val: self.instance.properties.get('api') if self.instance.properties.get('api') and not val else (val if val else 'empty'),
+            'keep_alive': lambda val: val * 60,
             'override': lambda val: val.strip(),
             'model_directory': lambda val: val.strip(),
             'default_model': lambda val: local_model_list[val].get('name') if val >= 0 and val < len(local_model_list) else None,
