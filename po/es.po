@@ -169,23 +169,25 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "Added preference to change max image attachment size"
-msgstr ""
+msgstr "Se agregó preferencia para cambiar el tamaño máximo de imagenes"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "Added option to change context window in instances and model creator"
-msgstr ""
+msgstr "Se agregó la opción para cambiar la ventana de contexto en instancias "
+"y creadores de modelos."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "Changed behavior of instance preferences"
-msgstr ""
+msgstr "Se modificó el comportamiento de las preferencias de instancia"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:100
 msgid "Added option to expose a managed Ollama instance"
-msgstr ""
+msgstr "Se agregó la opción para exponer una instancia de Ollama administrada"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Added 'Keep Alive' option to Ollama instance preferences"
-msgstr ""
+msgstr "Se agregó la opción 'Mantener Vivo' a las preferencias de las "
+"instancias de Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 #: data/com.jeffser.Alpaca.metainfo.xml.in:123
@@ -237,11 +239,11 @@ msgstr "Arreglos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Reimplementation of DDG search tool"
-msgstr ""
+msgstr "Reimplementación de la herramienta de búsqueda DDG"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:106
 msgid "Fixed model filtering"
-msgstr ""
+msgstr "Se corrigió el filtrado de modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Update model list"
@@ -4553,11 +4555,11 @@ msgstr "Aplicable cuando el siguiente mensaje fue generado por un modelo de IA"
 
 #: src/gtk/preferences.ui:56
 msgid "Max Image Attachment Size"
-msgstr ""
+msgstr "Tamaño Máximo de Imagenes Adjuntas"
 
 #: src/gtk/preferences.ui:57
 msgid "This might affect the performance of vision models"
-msgstr ""
+msgstr "Esto podría afectar el rendimiento de los modelos de visión"
 
 #: src/gtk/preferences.ui:76
 msgid "Delete All Chats"
@@ -5247,13 +5249,15 @@ msgstr "Un número mayor amplía la cantidad de respuestas posibles. (top_p)"
 
 #: src/widgets/models/creator.py:140 src/widgets/instances/__init__.py:197
 msgid "Context Window Size"
-msgstr ""
+msgstr "Tamaño de la Ventana de Contexto"
 
 #: src/widgets/models/creator.py:141 src/widgets/instances/__init__.py:198
 msgid ""
 "Controls how many tokens (pieces of text) the model can process and remember "
 "at once."
 msgstr ""
+"Controla cuántos tokens (fragmentos de texto) puede procesar y recordar el "
+"modelo a la vez."
 
 #: src/widgets/models/creator.py:165 src/widgets/models/creator.py:166
 #: src/widgets/instances/__init__.py:364 src/widgets/instances/__init__.py:365
@@ -5556,11 +5560,12 @@ msgstr ""
 
 #: src/widgets/instances/__init__.py:105
 msgid "Expose Ollama to Network"
-msgstr ""
+msgstr "Exponer Ollama a la Red"
 
 #: src/widgets/instances/__init__.py:106
 msgid "Make Ollama available for other devices and software in local network"
-msgstr ""
+msgstr "Hacer que Ollama esté disponible para otros dispositivos y software "
+"en la red local"
 
 #: src/widgets/instances/__init__.py:113
 msgid "Share Name"
@@ -5608,11 +5613,12 @@ msgstr ""
 
 #: src/widgets/instances/__init__.py:154
 msgid "Override Parameters"
-msgstr ""
+msgstr "Sobrescribir Parametros"
 
 #: src/widgets/instances/__init__.py:155
 msgid "These parameters overrides the behavior of the instance and models."
-msgstr ""
+msgstr "Estos parámetros sobrescriben el comportamiento de la instancia y "
+"los modelos."
 
 #: src/widgets/instances/__init__.py:165
 msgid "Temperature"
@@ -5637,32 +5643,34 @@ msgstr ""
 
 #: src/widgets/instances/__init__.py:219
 msgid "Keep Alive Presets"
-msgstr ""
+msgstr "Presets de Mantener Vivo"
 
 #: src/widgets/instances/__init__.py:220
 msgid "How the instance should handle idle models."
-msgstr ""
+msgstr "Cómo debe la instancia manejar los modelos inactivos."
 
 #: src/widgets/instances/__init__.py:225
 msgid "Set Timer"
-msgstr ""
+msgstr "Temporizador"
 
 #: src/widgets/instances/__init__.py:226
 msgid "Keep Alive Forever"
-msgstr ""
+msgstr "Mantener Vivo Para Siempre"
 
 #: src/widgets/instances/__init__.py:227
 msgid "Unload After Use"
-msgstr ""
+msgstr "Descartar Después del Uso"
 
 #: src/widgets/instances/__init__.py:234
 msgid "Minutes"
-msgstr ""
+msgstr "Minutos"
 
 #: src/widgets/instances/__init__.py:235
 msgid ""
 "The amount of time the instance should keep models loaded after they go idle."
 msgstr ""
+"La cantidad de tiempo que la instancia debe mantener los modelos cargados "
+"después de que quedan inactivos."
 
 #: src/widgets/instances/__init__.py:271
 msgid "Overrides"
