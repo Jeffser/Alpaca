@@ -149,16 +149,16 @@ class InstancePreferencesGroup(Adw.Dialog):
             ))
 
         if any([p in ('temperature', 'seed', 'num_ctx') for p in list(self.instance.properties)]):
-            op_switch = Gtk.Switch(
-                valign=3,
-                active=self.instance.properties.get('override_parameters'),
+            self.groups.append(Adw.PreferencesGroup())
+            op_expander_row = Adw.ExpanderRow(
+                title=_('Override Parameters'),
+                subtitle=_('These parameters overrides the behavior of the instance and models'),
+                show_enable_switch=True,
+                expanded=self.instance.properties.get('override_parameters'),
+                enable_expansion=self.instance.properties.get('override_parameters'),
                 name='override_parameters'
             )
-            self.groups.append(Adw.PreferencesGroup(
-                title=_('Parameters'),
-                description=_('Override the model and instance default parameters.')
-            ))
-            self.groups[-1].set_header_suffix(op_switch)
+            self.groups[-1].add(op_expander_row)
 
             if 'temperature' in self.instance.properties: #TEMPERATURE
                 temperature_spin = Adw.SpinRow(
@@ -168,7 +168,6 @@ class InstancePreferencesGroup(Adw.Dialog):
                     digits=2,
                     numeric=True,
                     snap_to_ticks=True,
-                    sensitive=self.instance.properties.get('override_parameters'),
                     adjustment=Gtk.Adjustment(
                         value=self.instance.properties.get('temperature'),
                         lower=0.01,
@@ -176,8 +175,7 @@ class InstancePreferencesGroup(Adw.Dialog):
                         step_increment=0.01
                     )
                 )
-                self.groups[-1].add(temperature_spin)
-                op_switch.connect('notify::active', lambda *_, el=temperature_spin: el.set_sensitive(op_switch.get_active()))
+                op_expander_row.add_row(temperature_spin)
 
             if 'seed' in self.instance.properties: #SEED
                 seed_spin = Adw.SpinRow(
@@ -187,7 +185,6 @@ class InstancePreferencesGroup(Adw.Dialog):
                     digits=0,
                     numeric=True,
                     snap_to_ticks=True,
-                    sensitive=self.instance.properties.get('override_parameters'),
                     adjustment=Gtk.Adjustment(
                         value=self.instance.properties.get('seed'),
                         lower=0,
@@ -195,8 +192,7 @@ class InstancePreferencesGroup(Adw.Dialog):
                         step_increment=1
                     )
                 )
-                self.groups[-1].add(seed_spin)
-                op_switch.connect('notify::active', lambda *_, el=seed_spin: el.set_sensitive(op_switch.get_active()))
+                op_expander_row.add_row(seed_spin)
 
             if 'num_ctx' in self.instance.properties:
                 num_ctx_spin = Adw.SpinRow(
@@ -206,7 +202,6 @@ class InstancePreferencesGroup(Adw.Dialog):
                     digits=0,
                     numeric=True,
                     snap_to_ticks=True,
-                    sensitive=self.instance.properties.get('override_parameters'),
                     adjustment=Gtk.Adjustment(
                         value=self.instance.properties.get('num_ctx'),
                         lower=512,
@@ -214,8 +209,7 @@ class InstancePreferencesGroup(Adw.Dialog):
                         step_increment=512
                     )
                 )
-                self.groups[-1].add(num_ctx_spin)
-                op_switch.connect('notify::active', lambda *_, el=num_ctx_spin: el.set_sensitive(op_switch.get_active()))
+                op_expander_row.add_row(num_ctx_spin)
 
         if 'overrides' in self.instance.properties: #OVERRIDES
             self.groups.append(Adw.PreferencesGroup(
@@ -344,13 +338,9 @@ class InstancePreferencesGroup(Adw.Dialog):
             'default_model': lambda val: local_model_list[val].get('name') if val >= 0 and val < len(local_model_list) else None,
             'title_model': lambda val: local_model_list[val-1].get('name') if val >= 1 and val < len(local_model_list) else None,
         }
-        port = None
-        extra_elements = []
-        for group in self.groups:
-            if group.get_header_suffix():
-                extra_elements.append(group.get_header_suffix())
 
-            for el in list(list(list(list(group)[0])[1])[0]) + extra_elements:
+        def apply_properties(element_list):
+            for el in element_list:
                 value = None
                 if isinstance(el, Adw.EntryRow) or isinstance(el, Adw.PasswordEntryRow):
                     value = el.get_text().replace('\n', '')
@@ -365,22 +355,29 @@ class InstancePreferencesGroup(Adw.Dialog):
                         value = el.get_selected()
                 elif isinstance(el, Adw.ActionRow):
                     value = el.get_subtitle()
+                elif isinstance(el, Adw.ExpanderRow):
+                    apply_properties(list(list(list(list(el)[0])[1])[0])) # Recursive
+                    value = el.get_enable_expansion()
 
                 if el.get_name().startswith('override:'):
                     if 'overrides' not in self.instance.properties:
                         self.instance.properties['overrides'] = {}
                     self.instance.properties['overrides'][el.get_name().split(':')[1]] = value
                 elif el.get_name() == 'port':
-                    port = int(value)
+                    self.instance.properties['url'] = 'http://0.0.0.0:{}'.format(int(value))
                 elif save_functions.get(el.get_name()):
                     self.instance.properties[el.get_name()] = save_functions.get(el.get_name())(value)
                 else:
                     self.instance.properties[el.get_name()] = value
                     if el.get_name() == 'expose':
+                        port = int(self.instance.properties.get('url').split(':')[2])
                         if value:
                             self.instance.properties['url'] = 'http://0.0.0.0:{}'.format(port)
                         else:
                             self.instance.properties['url'] = 'http://127.0.0.1:{}'.format(port)
+
+        for group in self.groups:
+            apply_properties(list(list(list(list(group)[0])[1])[0]))
 
         if not self.instance.instance_id:
             self.instance.instance_id = generate_uuid()
@@ -404,6 +401,7 @@ class InstancePreferencesGroup(Adw.Dialog):
 
         else:
             self.get_root().instance_manager_stack.set_visible_child_name('no-instances')
+        self.instance.stop()
 
         self.force_close()
 

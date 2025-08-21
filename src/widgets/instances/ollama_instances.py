@@ -571,7 +571,6 @@ class OllamaManaged(BaseInstance):
                 for key in list(params):
                     if not params.get(key):
                         del params[key]
-                print(params)
                 self.process = subprocess.Popen(
                     ["ollama", "serve"],
                     env={**os.environ, **params},

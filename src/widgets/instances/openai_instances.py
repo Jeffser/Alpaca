@@ -53,6 +53,9 @@ class BaseInstance:
     def stop(self):
         pass
 
+    def start(self):
+        pass
+
     def prepare_chat(self, bot_message):
         bot_message.chat.busy = True
         if bot_message.chat.chat_id:
