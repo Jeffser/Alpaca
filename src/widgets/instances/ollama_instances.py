@@ -214,7 +214,8 @@ class BaseInstance:
             "model": model,
             "messages": messages,
             "stream": True,
-            "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', [])
+            "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', []),
+            "keep_alive": self.properties.get('keep_alive', 300)
         }
 
         if self.properties.get("override_parameters"):
@@ -296,7 +297,8 @@ class BaseInstance:
                     "title"
                 ]
             },
-            'think': False
+            'think': False,
+            "keep_alive": 0
         }
         if self.properties.get("override_parameters"):
             params["options"]["num_ctx"] = self.properties.get('num_ctx', 16384)
