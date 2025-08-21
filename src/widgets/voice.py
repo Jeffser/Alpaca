@@ -92,7 +92,7 @@ class DictateToggleButton(Gtk.Stack):
             tts_path = models.get_tts_path()
             if tts_path:
                 models.common.append_added_model(self.message_element.get_root(), models.speech.TextToSpeechModelButton(os.path.join(tts_path, voice + '.pt')))
-        return
+
         # Generate TTS_ENGINE if needed
         if not tts_engine or tts_engine_language != voice[0]:
             tts_engine = libraries.get('kokoro').KPipeline(lang_code=voice[0], repo_id='hexgrad/Kokoro-82M')
