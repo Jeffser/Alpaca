@@ -89,6 +89,24 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="7.7.0" date="2025-08-21">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/7.7.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Added preference to change max image attachment size</li>
+          <li>Added option to change context window in instances and model creator</li>
+          <li>Changed behavior of instance preferences</li>
+          <li>Added option to expose a managed Ollama instance</li>
+          <li>Added 'Keep Alive' option to Ollama instance preferences</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Reimplementation of DDG search tool</li>
+          <li>Fixed model filtering</li>
+        </ul>
+      </description>
+    </release>
     <release version="7.6.0" date="2025-08-10">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/7.6.0</url>
       <description>
