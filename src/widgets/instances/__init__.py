@@ -208,21 +208,63 @@ class InstancePreferencesGroup(Adw.Dialog):
                     )
                 ))
 
-            if 'keep_alive' in self.instance.properties:
-                op_expander_row.add_row(Adw.SpinRow(
-                    title=_('Keep Alive'),
-                    subtitle=_('The amount of minutes Ollama should keep models loaded after they go idle, -1 keeps them alive forever and 0 unloads them after use.'),
-                    name='keep_alive',
-                    digits=0,
-                    numeric=True,
-                    snap_to_ticks=True,
-                    adjustment=Gtk.Adjustment(
+        if 'keep_alive' in self.instance.properties: # KEEP_ALIVE
+            self.groups.append(Adw.PreferencesGroup())
+
+            factory = Gtk.SignalListItemFactory()
+            factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
+            factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
+
+            keep_alive_preset_el = Adw.ComboRow(
+                title=_('Keep Alive Presets'),
+                subtitle=_('How the instance should handle idle models.'),
+                name='keep_alive_selector',
+                factory=factory
+            )
+            string_list = Gtk.StringList()
+            string_list.append(_('Set Timer'))
+            string_list.append(_('Keep Alive Forever'))
+            string_list.append(_('Unload After Use'))
+            keep_alive_preset_el.set_model(string_list)
+            keep_alive_preset_el.set_selected(0 if self.instance.properties.get('keep_alive') > 0 else self.instance.properties.get('keep_alive') + 2)
+
+            self.groups[-1].add(keep_alive_preset_el)
+
+            keep_alive_el = Adw.SpinRow(
+                title=_('Minutes'),
+                subtitle=_('The amount of time the instance should keep models loaded after they go idle.'), # -1 forever, 0 instant
+                name='keep_alive',
+                digits=0,
+                numeric=True,
+                snap_to_ticks=True
+            )
+            self.groups[-1].add(keep_alive_el)
+
+            def keep_alive_preset_changed(combo, el):
+                index = combo.get_selected()
+                el.set_visible(index == 0)
+                if index == 0:
+                    el.set_adjustment(Gtk.Adjustment(
                         value=int(self.instance.properties.get('keep_alive') / 60),
-                        lower=-1,
+                        lower=1,
                         upper=1440,
                         step_increment=1
-                    )
-                ))
+                    ))
+                elif index == 1:
+                    el.set_adjustment(Gtk.Adjustment(
+                        value=-1,
+                        lower=-1,
+                        upper=-1,
+                    ))
+                else:
+                    el.set_adjustment(Gtk.Adjustment(
+                        value=0,
+                        lower=0,
+                        upper=0,
+                    ))
+
+            keep_alive_preset_changed(keep_alive_preset_el, keep_alive_el)
+            keep_alive_preset_el.connect('notify::selected', lambda combo, _, el=keep_alive_el: keep_alive_preset_changed(combo, el))
 
         if 'overrides' in self.instance.properties: #OVERRIDES
             self.groups.append(Adw.PreferencesGroup(
@@ -346,7 +388,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             'name': lambda val: val if val else _('Instance'),
             'url': lambda val: '{}{}'.format('http://' if not re.match(r'^(http|https)://', val) else '', val.rstrip('/')),
             'api': lambda val: self.instance.properties.get('api') if self.instance.properties.get('api') and not val else (val if val else 'empty'),
-            'keep_alive': lambda val: val * 60,
+            'keep_alive': lambda val: val * 60 if val > 0 else val,
             'override': lambda val: val.strip(),
             'model_directory': lambda val: val.strip(),
             'default_model': lambda val: local_model_list[val].get('name') if val >= 0 and val < len(local_model_list) else None,
