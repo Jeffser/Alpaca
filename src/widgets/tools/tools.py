@@ -946,7 +946,7 @@ if importlib.util.find_spec('rembg'):
                 SQL.insert_or_update_attachment(bot_message, attachment)
                 if self.pulling_model:
                     threading.Thread(target=self.pulling_model.update_progressbar, args=({'status': 'success'},)).start()
-                return "Background removed successfully!"
+                return "**Model Used: **{}\n\n**Status: **Background removed successfully!".format(model)
             else:
                 return "Error: User didn't attach an image"
             return "Error: Couldn't remove the image"
