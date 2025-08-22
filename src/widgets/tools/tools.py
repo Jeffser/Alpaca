@@ -10,9 +10,123 @@ from html2text import html2text
 from PIL import Image
 from io import BytesIO
 
-from .. import terminal, attachments, dialog, models
+from .. import terminal, attachments, dialog, models, chat, message
 from ...constants import data_dir, REMBG_MODELS
 from ...sql_manager import generate_uuid, Instance as SQL
+
+class ToolRunDialog(Adw.Dialog):
+    __gtype_name__ = 'AlpacaToolRunDialog'
+
+    def __init__(self, tool):
+        self.tool = tool
+        self.main_stack = Gtk.Stack(
+            transition_type=1
+        )
+        pp = Adw.PreferencesPage(valign=3)
+        self.main_stack.add_named(pp, 'arguments')
+        tool_properties = self.tool.tool_metadata.get('parameters', {}).get('properties', {})
+        self.parameter_elements = []
+        if len(tool_properties) > 0:
+            factory = Gtk.SignalListItemFactory()
+            factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
+            factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
+
+            pg = Adw.PreferencesGroup(
+                title=_("Arguments"),
+                description=_("Variables that are filled by the AI.")
+            )
+            pp.add(pg)
+            for name, data in self.tool.tool_metadata.get('parameters', {}).get('properties', {}).items():
+                if data.get('enum'):
+                    combo = Adw.ComboRow(
+                        name=name,
+                        title=name.title(),
+                        factory=factory
+                    )
+                    string_list = Gtk.StringList()
+                    for option in data.get('enum'):
+                        string_list.append(option)
+                    combo.set_model(string_list)
+                    self.parameter_elements.append(combo)
+                    pg.add(combo)
+                else:
+                    entry = Adw.EntryRow(
+                        name=name,
+                        title=name.title()
+                    )
+                    self.parameter_elements.append(entry)
+                    pg.add(entry)
+
+        pg = Adw.PreferencesGroup()
+        pp.add(pg)
+        run_button = Gtk.Button(
+            label=_('Run Tool'),
+            css_classes=['pill', 'suggested-action']
+        )
+        run_button.connect('clicked', lambda *_: self.run_tool())
+        pg.add(run_button)
+
+        temp_chat = chat.Chat()
+        self.m_element_bot = message.Message(
+            dt=datetime.datetime.now(),
+            message_id=generate_uuid(),
+            chat=temp_chat,
+            mode=1,
+            author='Tool Tester'
+        )
+        self.m_element_bot.block_container.prepare_generating_block()
+        self.m_element_bot.block_container.add_css_class('dim-label')
+        self.m_element_bot.options_button.set_visible(False)
+        temp_chat.add_message(self.m_element_bot)
+        self.main_stack.add_named(temp_chat, 'chat')
+
+        tbv=Adw.ToolbarView()
+        tbv.add_top_bar(Adw.HeaderBar())
+        tbv.set_content(self.main_stack)
+        super().__init__(
+            child=tbv,
+            title=self.tool.name,
+            content_width=500
+        )
+        self.connect('closed', lambda *_: self.on_close())
+
+    def on_close(self):
+        SQL.delete_message(self.m_element_bot)
+
+    def start(self, arguments):
+        gen_request, response = self.tool.run(arguments, [], self.m_element_bot)
+        attachment_content = []
+        if len(arguments) > 0:
+            attachment_content += [
+                '## {}'.format(_('Arguments')),
+                '| {} | {} |'.format(_('Argument'), _('Value')),
+                '| --- | --- |'
+            ]
+            attachment_content += ['| {} | {} |'.format(k, v) for k, v in arguments.items()]
+
+        attachment_content += [
+            '## {}'.format(_('Result')),
+            response
+        ]
+
+        self.m_element_bot.add_attachment(
+            file_id = generate_uuid(),
+            name = self.tool.name,
+            attachment_type = 'tool',
+            content = '\n'.join(attachment_content)
+        )
+        self.m_element_bot.main_stack.set_visible_child_name('content')
+
+    def run_tool(self):
+        arguments = {}
+        for el in self.parameter_elements:
+            if isinstance(el, Adw.ComboRow):
+                arguments[el.get_name()] = el.get_selected_item().get_string()
+            elif isinstance(el, Adw.EntryRow):
+                arguments[el.get_name()] = el.get_text()
+        self.main_stack.set_visible_child_name('chat')
+        threading.Thread(target=self.start, args=(arguments,)).start()
+
 
 class ToolPreferencesDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaToolPreferencesDialog'
@@ -176,12 +290,20 @@ class Base(Adw.ActionRow):
         info_button = Gtk.Button(icon_name='info-outline-symbolic', css_classes=['flat'], valign=3)
         info_button.connect('clicked', lambda *_: self.show_dialog())
         self.add_prefix(info_button)
+
+        run_button = Gtk.Button(icon_name='media-playback-start-symbolic', css_classes=['flat'], valign=3)
+        run_button.connect('clicked', lambda *_: self.show_run_dialog())
+        self.add_prefix(run_button)
+
         self.enable_switch = Gtk.Switch(active=enabled, valign=3)
         self.enable_switch.connect('state-set', lambda *_: self.enabled_changed())
         self.add_suffix(self.enable_switch)
 
     def show_dialog(self):
         ToolPreferencesDialog(self).present(self.get_root())
+
+    def show_run_dialog(self):
+        ToolRunDialog(self).present(self.get_root())
 
     def enabled_changed(self):
         SQL.insert_or_update_tool_parameters(self.tool_metadata.get('name'), self.extract_variables_for_sql(), self.is_enabled())
@@ -367,7 +489,7 @@ class GetRecipesByCategory(Base):
                 data.append('- {}'.format(meal.get("strMeal")))
 
             if arguments.get("mode", "list of meals") == "single recipe":
-                response2 = requests.get('www.themealdb.com/api/json/v1/1/lookup.php?i={}'.format(random.choice(data).get('id')))
+                response2 = requests.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i={}'.format(random.choice(response.json().get('meals')).get('idMeal')))
                 if response2.json().get("meals", [False])[0]:
                     data = response2.json().get("meals")[0]
                     self.attach_online_image(bot_message, data.get('strMeal', 'Meal'), data.get('strMealThumb'))
@@ -389,7 +511,7 @@ class GetRecipesByCategory(Base):
                         )
 
                         SQL.insert_or_update_attachment(bot_message, attachment)
-            return True, '\n'.join(data)
+            return True, '\n'.join(['**{}: **{}'.format(key, value) for key, value in data.items() if value])
 
 class ExtractWikipedia(Base):
     tool_metadata = {
