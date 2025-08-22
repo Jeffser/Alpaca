@@ -451,6 +451,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.chat_list_box.select_row(self.new_chat().row)
             self.chat_list_stack.set_visible_child_name('content')
 
+        if not self.chat_list_box.get_selected_row():
+            self.chat_list_box.select_row(list(self.chat_list_box)[0])
+
     def get_current_instance(self):
         if self.instance_listbox.get_selected_row():
             return self.instance_listbox.get_selected_row().instance
