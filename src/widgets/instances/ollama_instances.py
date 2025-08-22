@@ -275,12 +275,8 @@ class BaseInstance:
             "stream": False,
             "messages": [
                 {
-                    "role": "system",
-                    "content": TITLE_GENERATION_PROMPT_OLLAMA
-                },
-                {
                     "role": "user",
-                    "content": prompt
+                    "content": '{}\n\n{}'.format(TITLE_GENERATION_PROMPT_OLLAMA, prompt)
                 }
             ],
             "format": {
