@@ -179,10 +179,7 @@ class BaseInstance:
             self.generate_response(bot_message, chat, messages, model)
         else:
             GLib.idle_add(bot_message.block_container.clear)
-            metadata_string = None
-            if self.properties.get('show_response_metadata'):
-                metadata_string = dict_to_metadata_string(response.json())
-            bot_message.finish_generation(metadata_string)
+            bot_message.finish_generation('')
 
     def generate_response(self, bot_message, chat, messages:list, model:str):
         if bot_message.options_button:
