@@ -244,13 +244,13 @@ class BlockContainer(Gtk.Box):
             self.generating_block = None
 
     def clear(self) -> None:
-        self.message.main_stack.set_visible_child_name('loading')
         for child in list(self):
             if child != self.generating_block:
                 self.remove(child)
                 child.unmap()
                 child.unrealize()
-        #self.generating_block = None
+        if len(list(self)) + len(list(self.message.image_attachment_container)) + len(list(self.message.attachment_container)) == 0:
+            self.message.main_stack.set_visible_child_name('loading')
 
     def set_content(self, content:str) -> None:
         self.clear()
