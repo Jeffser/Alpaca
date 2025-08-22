@@ -40,7 +40,7 @@ class ToolRunDialog(Adw.Dialog):
                 if data.get('enum'):
                     combo = Adw.ComboRow(
                         name=name,
-                        title=name.title(),
+                        title=name.replace('_', ' ').title(),
                         factory=factory
                     )
                     string_list = Gtk.StringList()
@@ -52,7 +52,7 @@ class ToolRunDialog(Adw.Dialog):
                 else:
                     entry = Adw.EntryRow(
                         name=name,
-                        title=name.title()
+                        title=name.replace('_', ' ').title()
                     )
                     self.parameter_elements.append(entry)
                     pg.add(entry)
@@ -89,6 +89,8 @@ class ToolRunDialog(Adw.Dialog):
             content_width=500
         )
         self.connect('closed', lambda *_: self.on_close())
+        if len(self.parameter_elements) == 0:
+            self.run_tool()
 
     def on_close(self):
         SQL.delete_message(self.m_element_bot)
@@ -115,7 +117,9 @@ class ToolRunDialog(Adw.Dialog):
             attachment_type = 'tool',
             content = '\n'.join(attachment_content)
         )
-        self.m_element_bot.main_stack.set_visible_child_name('content')
+        self.m_element_bot.block_container.clear()
+        self.m_element_bot.update_message(_('The tool would have generated a message in a chat.') if gen_request else _('The tool did not request to generate a message.'))
+        GLib.idle_add(self.m_element_bot.main_stack.set_visible_child_name, 'content')
 
     def run_tool(self):
         arguments = {}
@@ -1068,7 +1072,7 @@ if importlib.util.find_spec('rembg'):
                 SQL.insert_or_update_attachment(bot_message, attachment)
                 if self.pulling_model:
                     threading.Thread(target=self.pulling_model.update_progressbar, args=({'status': 'success'},)).start()
-                return False, "**Model Used: **{}\n\n**Status: **Background removed successfully!".format(model)
+                return False, "**Model Used: **{}\n**Status: **Background removed successfully!".format(model)
             else:
                 return False, "Error: User didn't attach an image"
             return False, "Error: Couldn't remove the image"
