@@ -84,7 +84,6 @@ class BaseInstance:
         bot_message.finish_generation()##TODO Add data
 
     def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
-        generate_message = True
         chat, messages = self.prepare_chat(bot_message)
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
@@ -123,7 +122,8 @@ class BaseInstance:
                 function = tc.get('function')
                 tools.log_to_message(_("Using {}").format(function.get('name')), bot_message, True)
                 if available_tools.get(function.get('name')):
-                    generate_message, response = available_tools.get(function.get('name')).run(function.get('arguments'), messages, bot_message)
+                    gen_request, response = available_tools.get(function.get('name')).run(function.get('arguments'), messages, bot_message)
+                    generate_message = generate_message and gen_request
                     response = str(response)
                     attachment_content = []
 
