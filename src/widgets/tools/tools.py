@@ -264,7 +264,7 @@ class GetCurrentDatetime(Base):
     description = _("Gets the current date and/or time.")
     variables = {}
 
-    def run(self, arguments, messages, bot_message) -> str:
+    def run(self, arguments, messages, bot_message) -> tuple:
         formats = {
             "date": "%A, %B %d %Y",
             "time": "%H:%M",
@@ -273,7 +273,7 @@ class GetCurrentDatetime(Base):
         type_to_get = arguments.get("type", "date and time")
         format_to_get = formats.get(type_to_get, "%b %d %Y, %H:%M")
         current_datetime = datetime.datetime.now().strftime(format_to_get)
-        return current_datetime
+        return True, current_datetime
 
 class GetRecipeByName(Base):
     tool_metadata = {
@@ -296,7 +296,7 @@ class GetRecipeByName(Base):
     description = _("Gets a recipe by the meal's name")
     variables = {}
 
-    def run(self, arguments, messages, bot_message) -> str:
+    def run(self, arguments, messages, bot_message) -> tuple:
         meal = arguments.get('meal', '').replace('_', ' ').title()
         if meal:
             response = requests.get('https://www.themealdb.com/api/json/v1/1/search.php?s={}'.format(meal))
@@ -321,9 +321,9 @@ class GetRecipeByName(Base):
                             content = meal.get("strSource")
                         )
                         SQL.insert_or_update_attachment(bot_message, attachment)
-                    return json.dumps(meal, indent=2)
+                    return True, json.dumps(meal, indent=2)
                 else:
-                    return "{'error': '404: Not Found'}"
+                    return True, "{'error': '404: Not Found'}"
 
 class GetRecipesByCategory(Base):
     tool_metadata = {
@@ -356,7 +356,7 @@ class GetRecipesByCategory(Base):
     description = _("Gets a list of food recipes by a specified category")
     variables = {}
 
-    def run(self, arguments, messages, bot_message) -> str:
+    def run(self, arguments, messages, bot_message) -> tuple:
         category = arguments.get('category', 'Random')
         if category == 'Random':
             category = random.choice(self.tool_metadata.get('parameters', {}).get('properties', {}).get('category', {}).get('enum', [])[1:])
@@ -389,7 +389,7 @@ class GetRecipesByCategory(Base):
                         )
 
                         SQL.insert_or_update_attachment(bot_message, attachment)
-            return '\n'.join(data)
+            return True, '\n'.join(data)
 
 class ExtractWikipedia(Base):
     tool_metadata = {
@@ -412,7 +412,7 @@ class ExtractWikipedia(Base):
     description = _("Extracts an article from Wikipedia by it's title")
     variables = {}
 
-    def run(self, arguments, messages, bot_message) -> str:
+    def run(self, arguments, messages, bot_message) -> tuple:
         article_title = arguments.get("title")
         if not article_title:
             return "Error: Article title was not provided"
@@ -428,9 +428,9 @@ class ExtractWikipedia(Base):
             result_md.append(html2text(page.text))
 
         else:
-            return "Error: No results found"
+            return True, "Error: No results found"
 
-        return '\n\n'.join(result_md)
+        return True, '\n\n'.join(result_md)
 
 if importlib.util.find_spec('duckduckgo_search'):
     from duckduckgo_search import DDGS
@@ -482,10 +482,10 @@ if importlib.util.find_spec('duckduckgo_search'):
             }
         }
 
-        def run(self, arguments, messages, bot_message) -> str:
+        def run(self, arguments, messages, bot_message) -> tuple:
             search_term = arguments.get("search_term")
             if not search_term:
-                return "Error: Search term was not provided"
+                return True, "Error: Search term was not provided"
 
             result_md = []
 
@@ -503,7 +503,7 @@ if importlib.util.find_spec('duckduckgo_search'):
                             backend='lite'
                         )
                     except DDGRateLimitError:
-                        return "Error: Search is temporarily unavailable (rate limited). Please try again later."
+                        return True, "Error: Search is temporarily unavailable (rate limited). Please try again later."
 
                     for tr in text_results:
                         attachment = bot_message.add_attachment(
@@ -534,12 +534,12 @@ if importlib.util.find_spec('duckduckgo_search'):
                     except DDGRateLimitError:
                         pass
             except Exception:
-                return "Error: Search is temporarily unavailable (rate limited). Please try again later."
+                return True, "Error: Search is temporarily unavailable (rate limited). Please try again later."
 
             if len(result_md) == 0:
-                return "Error: No results found"
+                return True, "Error: No results found"
 
-            return '\n\n'.join(result_md)
+            return True, '\n\n'.join(result_md)
 
 class RunCommand(Base):
     tool_metadata = {
@@ -585,12 +585,12 @@ class RunCommand(Base):
         }
     }
 
-    def run(self, arguments, messages, bot_message) -> str:
+    def run(self, arguments, messages, bot_message) -> tuple:
         if os.path.isfile(os.path.join(data_dir, "ssh_output.txt")):
             os.remove(os.path.join(data_dir, "ssh_output.txt"))
 
         if not arguments.get('command'):
-            return "Error: No command was provided"
+            return True, "Error: No command was provided"
 
         commands = [
             'echo -e "🦙 {}\n\n- {}\n{}\n\n- {}\n{}\n\n⚠️ {}\n\n"'.format(
@@ -625,7 +625,7 @@ class RunCommand(Base):
             with open(os.path.join(data_dir, "ssh_output.txt"), 'r') as f:
                 command_result = f.read()
 
-        return '```\n{}\n```'.format(command_result)
+        return False, '```\n{}\n```'.format(command_result)
 
 class SpotifyController(Base):
     tool_metadata = {
@@ -814,33 +814,33 @@ class SpotifyController(Base):
         )
         Gio.AppInfo.launch_default_for_uri(auth_url)
 
-    def run(self, arguments, messages, bot_message) -> str:
+    def run(self, arguments, messages, bot_message) -> tuple:
         if not arguments.get('action'):
-            return 'Error: No action was specified'
+            return True, 'Error: No action was specified'
         if arguments.get('action') not in self.tool_metadata.get('parameters').get('properties').get('action').get('enum'):
-            return 'Error: Invalid action'
+            return True, 'Error: Invalid action'
 
         access_token = self.get_access_token()
         if not access_token:
-            return 'Error: Spotify account is not logged in'
+            return True, 'Error: Spotify account is not logged in'
         headers = {"Authorization": f"Bearer {access_token}"}
 
         if arguments.get('action') == 'next':
             response = requests.post("https://api.spotify.com/v1/me/player/next", headers=headers)
             if response.status_code == 204:
-                return 'Success: Skipped to the next track'
+                return True, 'Success: Skipped to the next track'
             elif response.status_code == 403:
-                return response.json().get('error').get('message')
+                return True, response.json().get('error').get('message')
         elif arguments.get('action') == 'previous':
             response = requests.post("https://api.spotify.com/v1/me/player/previous", headers=headers)
             if response.status_code == 204:
-                return 'Success: Skipped to the previous track'
+                return True, 'Success: Skipped to the previous track'
             elif response.status_code == 403:
-                return response.json().get('error').get('message')
+                return True, response.json().get('error').get('message')
         elif arguments.get('action') == 'get_track':
             response = requests.get("https://api.spotify.com/v1/me/player/currently-playing", headers=headers)
             if response.status_code == 204 or not response.content:
-                return 'Nothing is playing'
+                return True, 'Nothing is playing'
 
             if response.status_code == 200:
                 data = response.json()
@@ -862,9 +862,9 @@ class SpotifyController(Base):
                         f'- Artists: {", ".join([artist["name"] for artist in item.get("artists", [])])}',
                         f'- Album: {item.get("album", {}).get("name")}'
                     ]
-                    return '\n'.join(track_information)
-                return 'Nothing is playing'
-        return 'Error: Could not do action'
+                    return True, '\n'.join(track_information)
+                return True, 'Nothing is playing'
+        return True, 'Error: Could not do action'
 
 if importlib.util.find_spec('rembg'):
     class BackgroundRemover(Base):
@@ -894,7 +894,7 @@ if importlib.util.find_spec('rembg'):
             )
             models.common.prepend_added_model(self.get_root(), self.pulling_model)
 
-        def run(self, arguments, messages, bot_message) -> str:
+        def run(self, arguments, messages, bot_message) -> tuple:
             threading.Thread(target=bot_message.update_message, args=(_('Loading Image...') + '\n',)).start()
             image_b64 = self.get_latest_image(messages)
             if image_b64:
@@ -928,7 +928,7 @@ if importlib.util.find_spec('rembg'):
                         continue
 
                 if self.accept_model == 2:
-                    return 'The user canceled the operation'
+                    return False, 'The user canceled the operation'
 
                 threading.Thread(target=bot_message.update_message, args=(_('Removing Background...') + '\n',)).start()
                 from rembg import remove, new_session
@@ -946,8 +946,8 @@ if importlib.util.find_spec('rembg'):
                 SQL.insert_or_update_attachment(bot_message, attachment)
                 if self.pulling_model:
                     threading.Thread(target=self.pulling_model.update_progressbar, args=({'status': 'success'},)).start()
-                return "**Model Used: **{}\n\n**Status: **Background removed successfully!".format(model)
+                return False, "**Model Used: **{}\n\n**Status: **Background removed successfully!".format(model)
             else:
-                return "Error: User didn't attach an image"
-            return "Error: Couldn't remove the image"
+                return False, "Error: User didn't attach an image"
+            return False, "Error: Couldn't remove the image"
 
