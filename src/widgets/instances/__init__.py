@@ -28,7 +28,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             description=self.instance.description if self.instance.description else self.instance.properties.get('url')
         ))
 
-        if self.instance.instance_type == 'ollama:managed' and self.instance.get_row() and self.instance.process:
+        if self.instance.instance_type == 'ollama:managed' and self.instance.row and self.instance.process:
             suffix_button = Gtk.Button(icon_name='terminal-symbolic', valign=1, css_classes=['flat'], tooltip_text=_('Ollama Log'))
             suffix_button.connect('clicked', lambda button: dialog.simple_log(
                     parent = self.get_root(),
@@ -308,7 +308,7 @@ class InstancePreferencesGroup(Adw.Dialog):
             model_directory_el.add_suffix(open_dir_button)
             self.groups[-1].add(model_directory_el)
 
-        if self.instance.get_row() and ('default_model' in self.instance.properties or 'title_model' in self.instance.properties):
+        if self.instance.row and ('default_model' in self.instance.properties or 'title_model' in self.instance.properties):
             self.groups.append(Adw.PreferencesGroup())
 
             factory = Gtk.SignalListItemFactory()
@@ -379,7 +379,7 @@ class InstancePreferencesGroup(Adw.Dialog):
         tbv.set_content(pp)
         super().__init__(
             child=tbv,
-            title=_('Edit Instance') if self.instance.get_row() else _('Create Instance'),
+            title=_('Edit Instance') if self.instance.row else _('Create Instance'),
             content_width=500
         )
 
@@ -440,13 +440,13 @@ class InstancePreferencesGroup(Adw.Dialog):
 
         SQL.insert_or_update_instance(
             instance_id=self.instance.instance_id,
-            pinned=self.instance.get_row().pinned if self.instance.get_row() else False,
+            pinned=self.instance.row.pinned if self.instance.row else False,
             instance_type=self.instance.instance_type,
             properties=self.instance.properties
         )
 
-        if self.instance.get_row():
-            self.instance.get_row().set_title(self.instance.properties.get('name'))
+        if self.instance.row:
+            self.instance.row.set_title(self.instance.properties.get('name'))
         else:
             row = InstanceRow(instance=self.instance)
             self.get_root().instance_listbox.append(row)
@@ -566,7 +566,7 @@ def update_instance_list(instance_listbox:Gtk.ListBox, selected_instance_id:str)
         for i, ins in enumerate(instances):
             row = create_instance_row(ins)
             if row:
-                row.instance.set_row(row)
+                row.instance.row = row
                 GLib.idle_add(instance_listbox.append, row)
                 instance_added = True
                 if row.instance.instance_id == selected_instance_id:

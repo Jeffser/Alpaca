@@ -15,13 +15,6 @@ class BaseInstance:
     description = None
     process = None
 
-    def set_row(self, row):
-        self.row = row
-
-    def get_row(self):
-        if hasattr(self, 'row'):
-            return self.row
-
     def prepare_chat(self, bot_message):
         bot_message.chat.busy = True
         if bot_message.chat.chat_id:
@@ -217,8 +210,8 @@ class BaseInstance:
                     error_log = e
                 )
                 logger.error(e)
-                if self.get_row():
-                    self.get_row().get_parent().unselect_all()
+                if self.row:
+                    self.row.get_parent().unselect_all()
         metadata_string = None
         if self.properties.get('show_response_metadata'):
             metadata_string = dict_to_metadata_string(data)
@@ -317,13 +310,14 @@ class BaseInstance:
                 return json.loads(response.text).get('models')
         except Exception as e:
             dialog.simple_error(
-                parent = self.get_row().get_root(),
+                parent = self.row.get_root() if self.row else None,
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
                 error_log = e
             )
             logger.error(e)
-            self.get_row().get_parent().unselect_all()
+            if self.row:
+                self.row.get_parent().unselect_all()
         return []
 
     def get_available_models(self) -> dict:
@@ -331,7 +325,7 @@ class BaseInstance:
             return OLLAMA_MODELS
         except Exception as e:
             dialog.simple_error(
-                parent = self.get_row().get_root(),
+                parent = self.row.get_root() if self.row else None,
                 title = _('Instance Error'),
                 body = _('Could not retrieve available models'),
                 error_log = e
@@ -483,6 +477,7 @@ class OllamaManaged(BaseInstance):
         self.log_raw = ''
         self.log_summary = ('', ['dim-label'])
         self.properties = {}
+        self.row = None
         for key in self.default_properties:
             if key == 'overrides':
                 self.properties[key] = {}
@@ -498,8 +493,8 @@ class OllamaManaged(BaseInstance):
                 for line in iter(pipe.readline, ''):
                     self.log_raw += line
                     print(line, end='')
-                    if 'msg="model request too large for system"' in line:
-                        dialog.show_toast(_("Model request too large for system"), self.get_row().get_root())
+                    if 'msg="model request too large for system"' in line and self.row:
+                        dialog.show_toast(_("Model request too large for system"), self.row.get_root())
                     elif 'msg="amdgpu detected, but no compatible rocm library found.' in line:
                         if bool(os.getenv("FLATPAK_ID")):
                             self.log_summary = (_("AMD GPU detected but the extension is missing, Ollama will use CPU.") + AMD_support_label, ['dim-label', 'error'])
@@ -549,14 +544,14 @@ class OllamaManaged(BaseInstance):
                 logger.info(v_str.split('\n')[1].strip('Warning: ').strip())
             except Exception as e:
                 dialog.simple_error(
-                    parent = self.get_row().get_root(),
+                    parent = self.row.get_root() if self.row else None,
                     title = _('Instance Error'),
                     body = _('Managed Ollama instance failed to start'),
                     error_log = e
                 )
                 logger.error(e)
-                if self.get_row():
-                    self.get_row().get_parent().unselect_all()
+                if self.row:
+                    self.row.get_parent().unselect_all()
             self.log_summary = (_("Integrated Ollama instance is running"), ['dim-label', 'success'])
 
 class Ollama(BaseInstance):
@@ -583,6 +578,7 @@ class Ollama(BaseInstance):
     def __init__(self, instance_id:str, properties:dict):
         self.instance_id = instance_id
         self.properties = {}
+        self.row = None
         for key in self.default_properties:
             self.properties[key] = properties.get(key, self.default_properties.get(key))
 
