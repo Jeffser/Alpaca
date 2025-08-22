@@ -7,6 +7,7 @@ models = [
   'pulling.py',
   'speech.py',
   'creator.py',
+  'image.py',
   'common.py'
 ]
 

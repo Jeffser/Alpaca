@@ -174,6 +174,7 @@ class BaseInstance:
 
         if generate_message:
             GLib.idle_add(bot_message.block_container.remove_css_class, 'dim-label')
+            GLib.idle_add(bot_message.block_container.clear)
             self.generate_response(bot_message, chat, messages, model)
         else:
             GLib.idle_add(bot_message.block_container.clear)

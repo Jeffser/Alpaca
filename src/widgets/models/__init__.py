@@ -1,10 +1,10 @@
 # __init__.py
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
-from . import added, available, pulling, common, speech, creator
+from . import added, available, pulling, common, speech, creator, image
 from .common import set_available_models_data, get_available_models_data
 
 import os, importlib.util
-from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES
+from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS
 
 def update_available_model_list(root):
     window = root.get_application().main_alpaca_window
@@ -75,6 +75,14 @@ def update_added_model_list(root):
             for model in os.listdir(tts_model_path):
                 model_element = speech.TextToSpeechModelButton(os.path.join(tts_model_path, model))
                 window.local_model_flowbox.prepend(model_element)
+
+    if importlib.util.find_spec('rembg'):
+        model_dir = os.path.join(data_dir, '.u2net')
+        if os.path.isdir(model_dir):
+            for model in os.listdir(model_dir):
+                if model.endswith('.onnx') and REMBG_MODELS.get(model.removesuffix('.onnx')):
+                    model_element = image.BackgroundRemoverModelButton(model.removesuffix('.onnx'))
+                    window.local_model_flowbox.prepend(model_element)
 
     # Normal Models
     threads=[]

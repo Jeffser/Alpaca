@@ -561,6 +561,8 @@ class GlobalAttachmentContainer(AttachmentContainer):
             file_type = found_types[0]
         if file_type == 'image':
             content = extract_image(file.get_path(), self.get_root().settings.get_value('max-image-size').unpack())
+            if not self.get_root().get_selected_model().get_vision():
+                dialog.show_toast(_("This model might not be compatible with image recognition"), self.get_root())
         elif file_type == 'audio':
             content = 'AUDIO NOT TRANSCRIBED'
         else:
@@ -604,7 +606,7 @@ class GlobalAttachmentContainer(AttachmentContainer):
             ff.add_mime_type(mime)
             file_filters[0].add_mime_type(mime)
             file_filters.append(ff)
-        if self.get_root().get_selected_model().get_vision() and not block_images:
+        if not block_images:
             file_filters[0].add_pixbuf_formats()
             file_filter = Gtk.FileFilter()
             file_filter.add_pixbuf_formats()
@@ -616,21 +618,18 @@ class GlobalAttachmentContainer(AttachmentContainer):
         )
 
     def request_screenshot(self):
-        if self.get_root().get_selected_model().get_vision():
-            def on_response(portal, res, user_data):
-                filename = portal.take_screenshot_finish(res)
-                if filename:
-                    self.on_attachment(Gio.File.new_for_uri(filename))
+        def on_response(portal, res, user_data):
+            filename = portal.take_screenshot_finish(res)
+            if filename:
+                self.on_attachment(Gio.File.new_for_uri(filename))
 
-            Xdp.Portal().take_screenshot(
-                None,
-                Xdp.ScreenshotFlags.INTERACTIVE,
-                None,
-                on_response,
-                None
-            )
-        else:
-            dialog.show_toast(_("Image recognition is only available on specific models"), self.get_root())
+        Xdp.Portal().take_screenshot(
+            None,
+            Xdp.ScreenshotFlags.INTERACTIVE,
+            None,
+            on_response,
+            None
+        )
 
 class GlobalAttachmentButton(Gtk.Button):
     __gtype_name__ = 'AlpacaGlobalAttachmentButton'
@@ -681,24 +680,19 @@ class GlobalAttachmentButton(Gtk.Button):
                         entries={'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
                     ),
                     'icon': 'play-symbolic'
-                }
-            ]
-        ]
-        if self.get_root().get_selected_model().get_vision():
-            actions[0].append(
+                },
                 {
                     'label': _('Attach Screenshot'),
                     'callback': lambda: self.get_root().global_footer.attachment_container.request_screenshot(),
                     'icon': 'image-x-generic-symbolic'
-                }
-            )
-            actions[0].append(
+                },
                 {
                     'label': _('Attach Photo From Camera'),
                     'callback': lambda: camera.show_webcam_dialog(self.get_root()),
                     'icon': 'camera-photo-symbolic'
                 }
-            )
+            ]
+        ]
         popup = dialog.Popover(actions)
         popup.set_parent(self)
         popup.set_pointing_to(rect)

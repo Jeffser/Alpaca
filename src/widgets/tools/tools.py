@@ -7,8 +7,11 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 from html2text import html2text
 
-from .. import terminal, attachments, dialog
-from ...constants import data_dir
+from PIL import Image
+from io import BytesIO
+
+from .. import terminal, attachments, dialog, models
+from ...constants import data_dir, REMBG_MODELS
 from ...sql_manager import generate_uuid, Instance as SQL
 
 class ToolPreferencesDialog(Adw.Dialog):
@@ -59,6 +62,9 @@ class ToolPreferencesDialog(Adw.Dialog):
                 title=_("Variables"),
                 description=_("User filled values that the tool uses to work, the AI does not have access to these variables at all.")
             )
+            factory = Gtk.SignalListItemFactory()
+            factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
+            factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
             for name, data in self.tool.variables.items():
                 if data.get('type') == 'string':
                     self.variables.add(
@@ -94,7 +100,8 @@ class ToolPreferencesDialog(Adw.Dialog):
                 elif data.get('type') == 'options':
                     combo = Adw.ComboRow(
                         name=name,
-                        title=data.get('display_name')
+                        title=data.get('display_name'),
+                        factory=factory
                     )
                     string_list = Gtk.StringList()
                     for option in data.get('options'):
@@ -204,6 +211,32 @@ class Base(Adw.ActionRow):
                 content = image_data
             )
             SQL.insert_or_update_attachment(bot_message, attachment)
+
+    def get_latest_image(self, messages) -> str:
+        messages.reverse()
+        for message in messages:
+            if len(message.get('images', [])) > 0:
+                return message.get('images')[0]
+        self.image_requested = 0
+
+        def on_attachment(file:Gio.File, remove_original:bool=False):
+            if not file:
+                self.image_requested = None
+                return
+            self.image_requested = attachments.extract_image(file.get_path(), self.get_root().settings.get_value('max-image-size').unpack())
+
+        file_filter = Gtk.FileFilter()
+        file_filter.add_pixbuf_formats()
+        dialog.simple_file(
+            parent = self.get_root(),
+            file_filters = [file_filter],
+            callback = on_attachment
+        )
+
+        while self.image_requested == 0:
+            continue
+
+        return self.image_requested
 
 class GetCurrentDatetime(Base):
     tool_metadata = {
@@ -833,27 +866,88 @@ class SpotifyController(Base):
                 return 'Nothing is playing'
         return 'Error: Could not do action'
 
-class ImageEditor(Base):
-    tool_metadata = {
-        "name": "image_editor",
-        "description": "Add an effect to the image provided by the user",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "effect": {
-                    "type": "string",
-                    "description": "The effect to be applied",
-                    "enum": ["brighten", "darken", "grayscale", "sepia", "rotate", "flip", "blur", "vignette", "pixelate"]
-                }
-            },
-            "required": [
-                "effect"
-            ]
+if importlib.util.find_spec('rembg'):
+    class BackgroundRemover(Base):
+        tool_metadata = {
+            "name": "background_remover",
+            "description": "Removes the background of the image provided by the user",
+            "parameters": {}
         }
-    }
-    name = _("Image Editor")
-    description = _("Edit the last sent image with some fun effects")
+        name = _("Image Background Remover")
+        description = _("Removes the background of the last image sent")
+        variables = {
+            'model': {
+                'display_name': _("Background Remover Model"),
+                'value': 0,
+                'type': 'options',
+                'options': ['{} ({})'.format(m.get('display_name'), m.get('size')) for m in REMBG_MODELS.values()]
+            }
+        }
 
-    def run(self, arguments, messages, bot_message) -> str:
-        print(messages)
-        return "Effect applied successfully"
+        def prepare_model_download(self, model_name:str):
+            self.accept_model = 1
+            self.pulling_model = models.pulling.PullingModelButton(
+                model_name,
+                lambda model_name, window=self.get_root(): models.common.prepend_added_model(window, models.image.BackgroundRemoverModelButton(model_name)),
+                None,
+                False
+            )
+            models.common.prepend_added_model(self.get_root(), self.pulling_model)
+
+        def run(self, arguments, messages, bot_message) -> str:
+            threading.Thread(target=bot_message.update_message, args=(_('Loading Image...') + '\n',)).start()
+            image_b64 = self.get_latest_image(messages)
+            if image_b64:
+                self.accept_model = 0 #0=undecided, 1=exists/download, 2=reject
+                self.pulling_model = None
+                model = list(REMBG_MODELS)[self.variables.get('model', {}).get('value', 0)]
+                model_dir = os.path.join(data_dir, '.u2net')
+                if os.path.isdir(model_dir):
+                    if '{}.onnx'.format(model) in os.listdir(model_dir):
+                        self.accept_model = 1
+
+                if self.accept_model == 0: # Model was not found
+                    options = {
+                        _('Cancel'): {
+                            'callback': lambda: setattr(self, 'accept_model', 2)
+                        },
+                        _('Download Model'): {
+                            'appearance': 'suggested',
+                            'callback': lambda m=model: threading.Thread(target=self.prepare_model_download, args=(m,)).start(),
+                            'default': True
+                        }
+                    }
+                    GLib.idle_add(dialog.Options(
+                        _('Download Background Removal Model'),
+                        _("To use this tool you'll need to download a special model ({})").format(REMBG_MODELS.get(model, {}).get('size')),
+                        list(options.keys())[0],
+                        options
+                    ).show, self.get_root())
+
+                    while self.accept_model == 0:
+                        continue
+
+                if self.accept_model == 2:
+                    return 'The user canceled the operation'
+
+                threading.Thread(target=bot_message.update_message, args=(_('Removing Background...') + '\n',)).start()
+                from rembg import remove, new_session
+                session = new_session(model)
+                input_image = Image.open(BytesIO(base64.b64decode(image_b64)))
+                output_image = remove(input_image, session=session)
+                buffered = BytesIO()
+                output_image.save(buffered, format="PNG")
+                attachment = bot_message.add_attachment(
+                    file_id=generate_uuid(),
+                    name=_('Output'),
+                    attachment_type='image',
+                    content=base64.b64encode(buffered.getvalue()).decode("utf-8")
+                )
+                SQL.insert_or_update_attachment(bot_message, attachment)
+                if self.pulling_model:
+                    threading.Thread(target=self.pulling_model.update_progressbar, args=({'status': 'success'},)).start()
+                return "Background removed successfully!"
+            else:
+                return "Error: User didn't attach an image"
+            return "Error: Couldn't remove the image"
+

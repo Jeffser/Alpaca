@@ -162,6 +162,39 @@ STT_MODELS = {
     'large': '~2.9 GB'
 }
 
+REMBG_MODELS = {
+    'u2netp': {
+        'display_name': 'U2Net Light',
+        'size': '~5 MB',
+        'link': 'https://github.com/xuebinqin/U-2-Net',
+        'author': 'Xuebin Qin'
+    },
+    'u2net_human_seg': {
+        'display_name': 'U2Net Human Trained',
+        'size': '~168 MB',
+        'link': 'https://github.com/xuebinqin/U-2-Net',
+        'author': 'Xuebin Qin'
+    },
+    'silueta': {
+        'display_name': 'Silueta',
+        'size': '~45 MB',
+        'link': 'https://github.com/xuebinqin/U-2-Net/issues/295',
+        'author': 'Xuebin Qin'
+    },
+    'isnet-general-use': {
+        'display_name': 'Isnet General Use',
+        'size': '~170 MB',
+        'link': 'https://github.com/xuebinqin/DIS',
+        'author': 'Xuebin Qin'
+    },
+    'isnet-anime': {
+        'display_name': 'Isnet Anime',
+        'size': '~170 MB',
+        'link': 'https://github.com/SkyTNT/anime-segmentation',
+        'author': 'SkyTNT'
+    }
+}
+
 SAMPLE_PROMPTS = [
     "What can you do?",
     "Give me a pancake recipe",
