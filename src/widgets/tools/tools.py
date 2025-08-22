@@ -833,3 +833,27 @@ class SpotifyController(Base):
                 return 'Nothing is playing'
         return 'Error: Could not do action'
 
+class ImageEditor(Base):
+    tool_metadata = {
+        "name": "image_editor",
+        "description": "Add an effect to the image provided by the user",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "effect": {
+                    "type": "string",
+                    "description": "The effect to be applied",
+                    "enum": ["brighten", "darken", "grayscale", "sepia", "rotate", "flip", "blur", "vignette", "pixelate"]
+                }
+            },
+            "required": [
+                "effect"
+            ]
+        }
+    }
+    name = _("Image Editor")
+    description = _("Edit the last sent image with some fun effects")
+
+    def run(self, arguments, messages, bot_message) -> str:
+        print(messages)
+        return "Effect applied successfully"
