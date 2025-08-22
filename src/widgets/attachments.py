@@ -118,22 +118,6 @@ class AttachmentDialog(Adw.Dialog):
         download_button.connect('clicked', lambda *_: self.attachment.prompt_download())
         header.pack_start(download_button)
 
-        if self.attachment.file_type == 'notebook':
-            try:
-                chat = self.attachment.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().chat
-                if chat.chat_type == 'notebook':
-                    notebook_button = Gtk.Button(
-                        css_classes=['accent'],
-                        icon_name='open-book-symbolic',
-                        tooltip_text=_('Replace Notebook Content'),
-                        vexpand=False,
-                        valign=3
-                    )
-                    notebook_button.connect('clicked', lambda *_, notebook=chat: self.replace_notebook_content(notebook))
-                    header.pack_start(notebook_button)
-            except:
-                pass
-
         self.get_child().add_top_bar(header)
         self.get_child().set_content(
             Gtk.ScrolledWindow(
@@ -191,10 +175,6 @@ class AttachmentDialog(Adw.Dialog):
 
             self.get_child().get_content().set_child(container)
 
-    def replace_notebook_content(self, notebook):
-        notebook.set_notebook(self.attachment.file_content)
-        self.close()
-
 class Attachment(Gtk.Button):
     __gtype_name__ = 'AlpacaAttachment'
 
@@ -219,8 +199,7 @@ class Attachment(Gtk.Button):
                     "tool": "processor-symbolic",
                     "link": "globe-symbolic",
                     "image": "image-x-generic-symbolic",
-                    "audio": "music-note-single-symbolic",
-                    "notebook": "open-book-symbolic"
+                    "audio": "music-note-single-symbolic"
                 }.get(self.file_type, "document-text-symbolic")
             )
         )

@@ -13,222 +13,11 @@ from .message import Message
 
 logger = logging.getLogger(__name__)
 
-class Notebook(Gtk.Stack):
-    __gtype_name__ = 'AlpacaNotebook'
-    chat_type = 'notebook'
-
-    def __init__(self, chat_id:str=None, name:str=_("New Notebook")):
-        super().__init__(
-            name=name,
-            transition_type=1
-        )
-        self.container = Gtk.Box(
-            orientation=1,
-            hexpand=True,
-            vexpand=True,
-            spacing=12,
-            css_classes=['p10']
-        )
-        self.scrolledwindow = Gtk.ScrolledWindow(
-            child=self.container,
-            propagate_natural_height=True,
-            kinetic_scrolling=True,
-            vexpand=True,
-            hexpand=True,
-            css_classes=["undershoot-bottom"],
-            hscrollbar_policy=2,
-            margin_start=10,
-            margin_end=10,
-            margin_top=10,
-            margin_bottom=10,
-            overflow=1
-        )
-
-        self.textview = Gtk.TextView(
-            css_classes=["p10"],
-            wrap_mode=3
-        )
-        self.textview.connect('notify::has-focus', lambda *_: self.textview_focus_changed())
-        book_scrolledwindow = Gtk.ScrolledWindow(
-            child=self.textview,
-            propagate_natural_height=True,
-            kinetic_scrolling=True,
-            vexpand=True,
-            hexpand=True,
-            css_classes=["undershoot-bottom", "card"],
-            hscrollbar_policy=2,
-            margin_start=10,
-            margin_end=10,
-            margin_top=10,
-            margin_bottom=10,
-            overflow=1
-        )
-
-        paned = Gtk.Paned(
-            wide_handle=True,
-            position=400
-        )
-        paned.set_start_child(self.scrolledwindow)
-        paned.set_end_child(book_scrolledwindow)
-        list(paned)[1].add_css_class('card')
-        self.get_root().split_view_overlay.connect('notify::collapsed', lambda *_: paned.set_orientation(self.get_root().split_view_overlay.get_collapsed()))
-
-        clamp = Adw.Clamp(
-            maximum_size=1000,
-            tightening_threshold=800,
-            child=paned
-        )
-        self.add_named(Adw.Spinner(), 'loading')
-        self.add_named(clamp, 'content')
-
-        welcome_screen = Adw.StatusPage(
-            icon_name="open-book-symbolic",
-            title=_("Notebook"),
-            description=_("Start a notebook with a message"),
-            vexpand=True
-        )
-        list(welcome_screen)[0].add_css_class('undershoot-bottom')
-        self.add_named(welcome_screen, 'welcome-screen')
-
-        self.add_named(Adw.StatusPage(
-            icon_name="sad-computer-symbolic",
-            title=_("No Messages Found"),
-            description=_("Uh oh! No messages found for your search.")
-        ), 'no-results')
-
-        self.busy = False
-        self.chat_id = chat_id
-        self.row = ChatRow(self)
-
-    def textview_focus_changed(self):
-        print('focus', self.textview.get_sensitive())
-        return
-
-        if not self.textview.has_focus() and len(list(self.container)) > 0:
-            last_message = list(self.container)[-1]
-            if last_message:
-                last_notebook = None
-                for att in list(last_message.attachment_container.container):
-                    if att.file_type == 'notebook':
-                        last_notebook = att
-                if last_notebook:
-                    last_notebook.file_content = self.get_notebook()
-                    SQL.insert_or_update_attachment(last_message, last_notebook)
-
-
-    def append_notebook(self, content:str):
-        content += '\n\n'
-        buffer = self.textview.get_buffer()
-        buffer.insert(buffer.get_end_iter(), content, len(content.encode('utf8')))
-
-    def set_notebook(self, content:str):
-        content = content.replace('\n', '\n\n')
-        buffer = self.textview.get_buffer()
-        buffer.set_text(content, len(content.encode('utf8')))
-
-    def get_notebook(self) -> str:
-        buffer = self.textview.get_buffer()
-        return buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
-
-    def stop_message(self):
-        self.busy = False
-        self.get_root().global_footer.toggle_action_button(True)
-
-    def unload_messages(self):
-        for widget in list(self.container):
-            GLib.idle_add(widget.unparent)
-            GLib.idle_add(widget.unrealize)
-        self.set_visible_child_name('loading')
-
-    def add_message(self, message):
-        self.container.append(message)
-
-    def load_messages(self):
-        messages = SQL.get_messages(self)
-        last_notebook = None
-        for message in messages:
-            message_element = Message(
-                dt=datetime.datetime.strptime(message[3] + (":00" if message[3].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'),
-                message_id=message[0],
-                chat=self,
-                mode=('user', 'assistant', 'system').index(message[1]),
-                author=message[2]
-            )
-            GLib.idle_add(self.container.append, message_element)
-
-            attachments = SQL.get_attachments(message_element)
-            for attachment in attachments:
-                GLib.idle_add(
-                    lambda: message_element.add_attachment(
-                        file_id=attachment[0],
-                        name=attachment[2],
-                        attachment_type=attachment[1],
-                        content=attachment[3]
-                    ) and False
-                )
-                if attachment[1] == 'notebook' and attachment[3]:
-                    last_notebook = attachment[3]
-            GLib.idle_add(message_element.block_container.set_content, message[4])
-        GLib.idle_add(self.set_visible_child_name, 'content' if len(messages) > 0 else 'welcome-screen')
-        if last_notebook:
-            GLib.idle_add(self.set_notebook, last_notebook)
-
-    def convert_to_ollama(self) -> list:
-        messages = []
-        for message in list(self.container)[-2:]:
-            if message.get_content() and message.dt:
-                message_data = {
-                    'role': ('user', 'assistant', 'system')[message.mode],
-                    'content': ''
-                }
-
-                for image in message.image_attachment_container.get_content():
-                    if 'images' not in message_data:
-                        message_data['images'] = []
-
-                    message_data['images'].append(image['content'])
-
-                for attachment in message.attachment_container.get_content():
-                    if attachment.get('type') not in ('thought', 'metadata'):
-                        message_data['content'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
-                message_data['content'] += message.get_content()
-                messages.append(message_data)
-        return messages
-
-    def convert_to_json(self, include_metadata:bool=False) -> list:
-        messages = []
-        for message in list(self.container)[-2:]:
-            if message.get_content() and message.dt:
-                message_data = {
-                    'role': ('user', 'assistant', 'system')[message.mode],
-                    'content': []
-                }
-                for image in message.image_attachment_container.get_content():
-                    message_data['content'].append({
-                        'type': 'image_url',
-                        'image_url': {
-                            'url': f'data:image/jpeg;base64,{image["content"]}'
-                        }
-                    })
-                message_data['content'].append({
-                    'type': 'text',
-                    'text': ''
-                })
-                for attachment in message.attachment_container.get_content():
-                    if attachment.get('type') not in ('thought', 'metadata'):
-                        message_data['content'][0]['text'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
-                message_data['content'][0 if ("text" in message_data["content"][0]) else 1]['text'] += message.get_content()
-                if include_metadata:
-                    message_data['date'] = message.dt.strftime("%Y/%m/%d %H:%M:%S")
-                    message_data['model'] = message.get_model()
-                messages.append(message_data)
-        return messages
-
 class Chat(Gtk.Stack):
     __gtype_name__ = 'AlpacaChat'
     chat_type = 'chat'
 
-    def __init__(self, chat_id:str=None, name:str=_("New Chat")):
+    def __init__(self, chat_id:str=None, name:str=_("New Chat"), force_dialog_activities:bool=False):
         super().__init__(
             name=name,
             transition_type=1,
@@ -276,6 +65,7 @@ class Chat(Gtk.Stack):
 
         self.busy = False
         self.chat_id = chat_id
+        self.force_dialog_activities = force_dialog_activities
         self.row = ChatRow(self)
 
     def refresh_welcome_screen_prompts(self):
@@ -427,8 +217,6 @@ class ChatRow(Gtk.ListBoxRow):
         container = Gtk.Box(
             spacing=5
         )
-        if self.chat.chat_type == 'notebook':
-            container.append(Gtk.Image.new_from_icon_name("open-book-symbolic"))
         container.append(self.label)
         container.append(self.spinner)
         container.append(self.indicator)

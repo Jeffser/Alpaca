@@ -81,54 +81,6 @@ class BaseInstance:
 
         self.generate_response(bot_message, chat, messages, model, None)
 
-    def notebook_generation(self, bot_message, model:str, available_tools:dict):
-        chat, messages = self.prepare_chat(bot_message)
-        chat.textview.set_sensitive(False)
-        if bot_message.options_button:
-            bot_message.options_button.set_active(False)
-
-        if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
-            threading.Thread(
-                target=self.generate_chat_title,
-                args=(
-                    chat,
-                    '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']),
-                    model
-                )
-            ).start()
-
-        try:
-            completion = self.client.chat.completions.create(
-                model=model,
-                messages=messages,
-                tools=[v.get_tool() for v in available_tools.values()]
-            )
-            if completion.choices[0] and completion.choices[0].message:
-                if completion.choices[0].message.tool_calls:
-                    for call in completion.choices[0].message.tool_calls:
-                        current_tool = available_tools.get(call.function.name, None)
-                        print(call.function.name)
-                        if current_tool and call.function.arguments:
-                            current_tool.run(json.loads(call.function.arguments), bot_message)
-        except Exception as e:
-            dialog.simple_error(
-                parent = bot_message.get_root(),
-                title = _('Notebook Error'),
-                body = _('An error occurred while running tool'),
-                error_log = e
-            )
-            logger.error(e)
-
-        attachment = bot_message.add_attachment(
-            file_id = generate_uuid(),
-            name = _('Notebook'),
-            attachment_type = 'notebook',
-            content = str(bot_message.chat.get_notebook())
-        )
-        SQL.insert_or_update_attachment(bot_message, attachment)
-        bot_message.finish_generation()
-        chat.textview.set_sensitive(True)
-
     def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
         chat, messages = self.prepare_chat(bot_message)
         if bot_message.options_button:

@@ -3,7 +3,6 @@ from ...sql_manager import Instance as SQL
 import time, random
 
 from .tools import Base
-from .notebook_tools import tools as NotebookTools
 
 def log_to_message(text:str, bot_message, animate:bool):
     for s in text.split(' '):

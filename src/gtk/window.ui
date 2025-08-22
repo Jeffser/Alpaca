@@ -37,15 +37,6 @@
                     <child type="top">
                       <object class="AdwHeaderBar">
                         <child type="start">
-                          <!--<object class="AdwSplitButton">
-                            <property name="action-name">app.new_chat</property>
-                            <property name="tooltip-text" translatable="yes">New Chat</property>
-                            <property name="icon-name">chat-message-new-symbolic</property>
-                            <property name="menu-model">new_chat_menu</property>
-                            <style>
-                              <class name="flat"/>
-                            </style>
-                          </object>-->
                           <object class="GtkButton">
                             <property name="action-name">app.new_chat</property>
                             <property name="tooltip-text" translatable="yes">New Chat</property>
