@@ -170,7 +170,8 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "New tool: Image background remover with local processing"
-msgstr ""
+msgstr "Nueva herramienta: Eliminador de fondo de imágenes con procesamiento "
+"local"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 #: data/com.jeffser.Alpaca.metainfo.xml.in:109
@@ -224,15 +225,15 @@ msgstr "Arreglos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 msgid "Fixed title generation sometimes not working"
-msgstr ""
+msgstr "Se solucionó que el generador de titulos no funcionaba a veces."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:102
 msgid "Fixed chat not being selected at launch sometimes"
-msgstr ""
+msgstr "Se solucionó que a veces el chat fijo no se seleccionara al iniciar."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "Fixed TTS being disabled internally"
-msgstr ""
+msgstr "Se solucionó que el TTS se deshabilitara internamente"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:120
 msgid "Added preference to change max image attachment size"
@@ -4755,7 +4756,8 @@ msgstr "Guardar Imagen"
 
 #: src/widgets/attachments.py:565
 msgid "This model might not be compatible with image recognition"
-msgstr ""
+msgstr "Es posible que este modelo no sea compatible con el reconocimiento "
+"de imágenes."
 
 #: src/widgets/attachments.py:586
 msgid "Any compatible Alpaca attachment"
@@ -5975,36 +5977,37 @@ msgstr "Arte del Álbum"
 
 #: src/widgets/tools/tools.py:876
 msgid "Image Background Remover"
-msgstr ""
+msgstr "Eliminador de Fondo de Imagen"
 
 #: src/widgets/tools/tools.py:877
 msgid "Removes the background of the last image sent"
-msgstr ""
+msgstr "Elimina el fondo de la última imagen enviada"
 
 #: src/widgets/tools/tools.py:880
 msgid "Background Remover Model"
-msgstr ""
+msgstr "Modelo de Eliminación de Fondo"
 
 #: src/widgets/tools/tools.py:898
 msgid "Loading Image..."
-msgstr ""
+msgstr "Cargando Imagen..."
 
 #: src/widgets/tools/tools.py:921
 msgid "Download Background Removal Model"
-msgstr ""
+msgstr "Descargar Modelo de Eliminación de Fondo"
 
 #: src/widgets/tools/tools.py:922
 #, python-brace-format
 msgid "To use this tool you'll need to download a special model ({})"
-msgstr ""
+msgstr "Para utilizar esta herramienta necesitarás descargar un modelo "
+"especial ({})"
 
 #: src/widgets/tools/tools.py:933
 msgid "Removing Background..."
-msgstr ""
+msgstr "Quitando el Fondo..."
 
 #: src/widgets/tools/tools.py:942
 msgid "Output"
-msgstr ""
+msgstr "Salida"
 
 #~ msgid ""
 #~ "Have compatible reasoning models think about their response before "
