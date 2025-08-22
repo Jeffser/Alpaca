@@ -307,7 +307,8 @@ class BaseInstance:
                 },
                 data=json.dumps(params)
             )
-            data = json.loads(response.json().get('response', '{"title": ""}'))
+            data = json.loads(response.json().get('message', {}).get('content', '{"title": "New Chat"}'))
+            print(response.json() )
             generated_title = data.get('title').replace('\n', '').strip()
 
             if len(generated_title) > 30:
