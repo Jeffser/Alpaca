@@ -24,7 +24,7 @@ class ToolPreferencesDialog(Adw.Dialog):
         ai_description.add(
             Adw.Bin(
                 child=Gtk.Label(label=self.tool.tool_metadata.get('description'), wrap=True, halign=1),
-                css_classes=["card", "p10", "dim-label"]
+                css_classes=["card", "p10"]
             )
         )
         pp.add(ai_description)
@@ -35,12 +35,23 @@ class ToolPreferencesDialog(Adw.Dialog):
                 description=_("Variables that are filled by the AI.")
             )
             for name, data in self.tool.tool_metadata.get('parameters', {}).get('properties', {}).items():
-                arguments.add(
-                    Adw.ActionRow(
+                if data.get('enum'):
+                    expander_row = Adw.ExpanderRow(
+                        title=name.replace('_', ' ').title(),
+                        subtitle=data.get('description'),
+                        expanded=True
+                    )
+                    arguments.add(expander_row)
+                    for opt in data.get('enum'):
+                        expander_row.add_row(Adw.ActionRow(
+                            title=opt.replace('_', ' ').title()
+                        ))
+                else:
+                    arguments.add(Adw.ActionRow(
                         title=name.replace('_', ' ').title(),
                         subtitle=data.get('description')
-                    )
-                )
+                    ))
+
             pp.add(arguments)
 
         if len(list(self.tool.variables)) > 0:
