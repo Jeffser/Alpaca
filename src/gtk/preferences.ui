@@ -90,19 +90,6 @@
             </child>
           </object>
         </child>
-        <child>
-          <object class="AdwPreferencesGroup">
-            <child>
-              <object class="AdwButtonRow">
-                <style>
-                  <class name="destructive-action"/>
-                </style>
-                <property name="title" translatable="yes">Delete All Chats</property>
-                <property name="action-name">app.delete_all_chats</property>
-              </object>
-            </child>
-          </object>
-        </child>
       </object>
     </child>
     <child>

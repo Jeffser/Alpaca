@@ -129,6 +129,72 @@ stacksidebar {
 	filter: blur(100px) brightness(150%);
 }
 
+/*-----------FOLDER COLOURS--------*/
+
+.folder-blue headerbar, row.folder-blue {
+  background-color: color-mix(in srgb, var(--accent-blue) 30%, transparent);
+  color: color-mix(in srgb, var(--accent-blue) 30%, var(--accent-fg-color));
+}
+.button-blue {
+  color: var(--accent-blue);
+}
+.folder-teal headerbar, row.folder-teal {
+  background-color: color-mix(in srgb, var(--accent-teal) 30%, transparent);
+  color: color-mix(in srgb, var(--accent-teal) 30%, var(--accent-fg-color));
+}
+.button-teal {
+  color: var(--accent-teal);
+}
+.folder-green headerbar, row.folder-green {
+  background-color: color-mix(in srgb, var(--accent-green) 30%, transparent);
+  color: color-mix(in srgb, var(--accent-green) 30%, var(--accent-fg-color));
+}
+.button-green {
+  color: var(--accent-green);
+}
+.folder-yellow headerbar, row.folder-yellow {
+  background-color: color-mix(in srgb, var(--accent-yellow) 30%, transparent);
+  color: color-mix(in srgb, var(--accent-yellow) 30%, var(--accent-fg-color));
+}
+.button-yellow {
+  color: var(--accent-yellow);
+}
+.folder-orange headerbar, row.folder-orange {
+  background-color: color-mix(in srgb, var(--accent-orange) 30%, transparent);
+  color: color-mix(in srgb, var(--accent-orange) 30%, var(--accent-fg-color));
+}
+.button-orange {
+  color: var(--accent-orange);
+}
+.folder-red headerbar, row.folder-red {
+  background-color: color-mix(in srgb, var(--accent-red) 30%, transparent);
+  color: color-mix(in srgb, var(--accent-red) 30%, var(--accent-fg-color));
+}
+.button-red {
+  color: var(--accent-red);
+}
+.folder-pink headerbar, row.folder-pink {
+  background-color: color-mix(in srgb, var(--accent-pink) 30%, transparent);
+  color: color-mix(in srgb, var(--accent-pink) 30%, var(--accent-fg-color));
+}
+.button-pink {
+  color: var(--accent-pink);
+}
+.folder-purple headerbar, row.folder-purple {
+  background-color: color-mix(in srgb, var(--accent-purple) 30%, transparent);
+  color: color-mix(in srgb, var(--accent-purple) 30%, var(--accent-fg-color));
+}
+.button-purple {
+  color: var(--accent-purple);
+}
+.folder-slate headerbar, row.folder-slate {
+  background-color: color-mix(in srgb, var(--accent-slate) 30%, transparent);
+  color: color-mix(in srgb, var(--accent-slate) 30%, var(--accent-fg-color));
+}
+.button-slate {
+  color: var(--accent-slate);
+}
+
 /*-----------MACOS STUFF-----------*/
 
 window.macos windowcontrols > button > image {

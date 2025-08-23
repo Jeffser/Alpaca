@@ -471,7 +471,7 @@ class Message(Gtk.Box):
         self.popup.change_status(True)
         if self.get_root().get_name() == 'AlpacaWindow':
             GLib.idle_add(self.chat.row.spinner.set_visible, False)
-            if self.get_root().chat_list_box.get_selected_row().get_name() != self.chat.get_name():
+            if self.get_root().chat_bin.get_child().get_name() != self.chat.get_name():
                 GLib.idle_add(self.chat.row.indicator.set_visible, True)
         elif self.get_root().get_name() == 'AlpacaQuickAsk':
             GLib.idle_add(self.get_root().save_button.set_sensitive, True)
@@ -617,7 +617,7 @@ class GlobalActionStack(Gtk.Stack):
         )
         self.add_named(stop_button, 'stop')
 
-        stop_button.connect('clicked', lambda button: self.get_root().chat_list_box.get_selected_row().chat.stop_message())
+        stop_button.connect('clicked', lambda button: self.get_root().chat_bin.get_child().stop_message())
 
         send_button.connect('clicked', lambda button: self.use_default_mode())
         gesture_click = Gtk.GestureClick(button=3)

@@ -5,7 +5,7 @@ Handles the chat widget
 
 import gi
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
-import logging, os, datetime, random, json, threading
+import logging, os, datetime, random, json, threading, re
 from ..constants import SAMPLE_PROMPTS, cache_dir
 from ..sql_manager import generate_uuid, prettify_model_name, generate_numbered_name, Instance as SQL
 from . import dialog, voice
@@ -13,10 +13,260 @@ from .message import Message
 
 logger = logging.getLogger(__name__)
 
-class ChatList(Gtk.Box):
+class ChatList(Adw.NavigationPage):
     __gtype_name__ = 'AlpacaChatList'
 
+    def __init__(self, folder_id:str=None, folder_name:str=_('Root'), folder_color:str=None, show_bar:bool=True):
+        self.folder_id = folder_id
+        container = Gtk.Box(
+            orientation=1
+        )
+        self.list_stack = Gtk.Stack()
+        self.list_stack.add_named(
+            Gtk.ScrolledWindow(
+                child=container
+            ),
+            'content'
+        )
+        self.list_stack.add_named(
+            Adw.StatusPage(
+                title=_('No Results Found'),
+                icon_name='sad-computer-symbolic'
+            ),
+            'no-results'
+        )
+        self.list_stack.add_named(
+            Adw.StatusPage(
+                title=_('Folder is Empty'),
+                icon_name='folder-symbolic'
+            ),
+            'empty'
+        )
 
+        tbv = Adw.ToolbarView(
+            content=self.list_stack
+        )
+        super().__init__(
+            child=tbv,
+            title=folder_name
+        )
+        if show_bar:
+            header_bar = Adw.HeaderBar(
+                css_classes=['raised']
+            )
+            tbv.add_bottom_bar(header_bar)
+            drop_target_folder = Gtk.DropTarget.new(FolderRow, Gdk.DragAction.MOVE)
+            drop_target_folder.connect("drop", self.on_drop_folder)
+            header_bar.add_controller(drop_target_folder)
+            drop_target_chat = Gtk.DropTarget.new(ChatRow, Gdk.DragAction.MOVE)
+            drop_target_chat.connect("drop", self.on_drop_chat)
+            header_bar.add_controller(drop_target_chat)
+
+        self.folder_list_box = Gtk.ListBox(
+            css_classes=['navigation-sidebar'],
+            selection_mode=0,
+            name=self.folder_id
+        )
+        container.append(self.folder_list_box)
+        self.separator = Gtk.Separator(
+            margin_start=10,
+            margin_end=10
+        )
+        container.append(self.separator)
+        self.chat_list_box = Gtk.ListBox(
+            css_classes=['navigation-sidebar'],
+            name=self.folder_id
+        )
+        self.chat_list_box.connect('row-selected', self.chat_changed)
+        container.append(self.chat_list_box)
+
+        if folder_color:
+            self.add_css_class('folder-{}'.format(folder_color))
+
+    def on_drop_folder(self, target, row, x, y):
+        folder_page = self.get_root().chat_list_navigationview.get_previous_page(self)
+        if row.folder_id != folder_page.folder_id:
+            SQL.move_chat_to_folder(row.folder_id, folder_page.folder_id)
+            row.get_parent().remove(row)
+            folder_page.folder_list_box.prepend(row)
+            row.set_visible(True)
+            self.update_visibility()
+            return True
+
+    def on_drop_chat(self, target, row, x, y):
+        folder_page = self.get_root().chat_list_navigationview.get_previous_page(self)
+        SQL.move_chat_to_folder(row.chat.chat_id, folder_page.folder_id)
+        row.get_parent().remove(row)
+        folder_page.chat_list_box.prepend(row)
+        row.set_visible(True)
+        self.update_visibility()
+        return True
+
+    def update_visibility(self, searching:bool=False):
+        folder_visible = False
+        chat_visible = False
+
+        for row in list(self.folder_list_box):
+            folder_visible = folder_visible or row.get_visible()
+            if folder_visible:
+                break
+
+        for row in list(self.chat_list_box):
+            chat_visible = chat_visible or row.get_visible()
+            if chat_visible:
+                break
+
+        self.folder_list_box.set_visible(folder_visible)
+        self.chat_list_box.set_visible(chat_visible)
+        self.separator.set_visible(folder_visible and chat_visible)
+
+        if searching:
+            self.list_stack.set_visible_child_name('content' if folder_visible or chat_visible else 'no-results')
+        else:
+            self.list_stack.set_visible_child_name('content' if folder_visible or chat_visible else 'empty')
+
+    def on_search(self, query:str):
+        if len(list(self.folder_list_box)) + len(list(self.chat_list_box)) == 0:
+            self.list_stack.set_visible_child_name('empty')
+            return
+
+        for row in list(self.folder_list_box):
+            row.set_visible(re.search(query, row.get_name(), re.IGNORECASE))
+
+        for row in list(self.chat_list_box):
+            row.set_visible(re.search(query, row.get_name(), re.IGNORECASE))
+
+        self.update_visibility()
+
+    def update(self):
+        selected_chat = self.get_root().settings.get_value('default-chat').unpack()
+        chats = SQL.get_chats_by_folder(self.folder_id)
+        if len(chats) > 0:
+            if selected_chat not in [row[0] for row in chats] and not self.folder_id:
+                selected_chat = chats[0][0]
+
+            for row in chats:
+                self.add_chat(
+                    chat_name=row[1],
+                    chat_id=row[0],
+                    mode=0
+                )
+                if row[0] == selected_chat and len(list(self.chat_list_box)) > 0:
+                    self.chat_list_box.select_row(list(self.chat_list_box)[-1])
+
+        if len(list(self.chat_list_box)) == 0 and not self.folder_id:
+            self.chat_list_box.select_row(self.new_chat().row)
+
+        if not self.chat_list_box.get_selected_row() and not self.folder_id:
+            self.chat_list_box.select_row(list(self.chat_list_box)[0])
+
+        folders = SQL.get_chat_folders(self.folder_id)
+        for f in folders:
+            row = FolderRow(f[0], f[1], f[2], f[3])
+            self.folder_list_box.append(row)
+
+        self.update_visibility()
+
+    def add_chat(self, chat_name:str, chat_id:str, mode:int): #mode = 0: append, mode = 1: prepend
+        chat_name = chat_name.strip()
+        if chat_name and mode in (0, 1):
+            chat_name = generate_numbered_name(chat_name, [row.get_name() for row in list(self.chat_list_box)])
+            chat = None
+            chat = Chat(
+                chat_id=chat_id,
+                name=chat_name
+            )
+
+            if chat:
+                if mode == 0:
+                    self.chat_list_box.append(chat.row)
+                else:
+                    self.chat_list_box.prepend(chat.row)
+                self.update_visibility()
+                return chat
+
+    def new_chat(self, chat_name:str=_('New Chat')):
+        if not chat_name.strip():
+            chat_name = _('New Chat')
+        chat = self.add_chat(
+            chat_name=chat_name,
+            chat_id=generate_uuid(),
+            mode=1
+        )
+        if chat:
+            SQL.insert_or_update_chat(chat)
+            return chat
+
+    def new_folder(self):
+        row = FolderRow(
+            generate_uuid(),
+            generate_numbered_name(_('New Folder'), [row.get_name() for row in list(self.folder_list_box)]),
+            random.choice(('blue', 'teal', 'green', 'yellow', 'orange', 'red', 'pink', 'purple', 'slate')),
+            self.folder_id
+        )
+        SQL.insert_or_update_folder(
+            row.folder_id,
+            row.folder_name,
+            row.folder_color,
+            row.folder_parent
+        )
+        self.folder_list_box.prepend(row)
+        self.update_visibility()
+
+    def chat_changed(self, listbox, row):
+        if not listbox.get_root() or (row and not row.get_root()):
+            return
+
+        last_chat_id = -1
+        if listbox.get_root().chat_bin.get_child():
+            last_chat_id = listbox.get_root().chat_bin.get_child().chat_id
+
+        if row and row.chat.chat_id != last_chat_id:
+            if listbox.get_root().chat_bin.get_child():
+                list_box = listbox.get_root().chat_bin.get_child().row.get_parent()
+                if list_box and list_box != self.chat_list_box:
+                    listbox.get_root().chat_bin.get_child().row.get_parent().unselect_all()
+            # Discard Old Chat if Not Busy
+            old_chat = listbox.get_root().chat_bin.get_child()
+            if old_chat and not old_chat.busy:
+                old_chat.unload_messages()
+                old_chat.unrealize()
+
+            # Load New Chat
+            new_chat = row.chat
+            if new_chat.get_parent():
+                new_chat.get_parent().set_child(None)
+            if new_chat.busy:
+                self.get_root().global_footer.toggle_action_button(False)
+            else:
+                self.get_root().global_footer.toggle_action_button(True)
+                new_chat.load_messages()
+
+            # Show New Stack Page
+            self.get_root().chat_bin.set_child(new_chat)
+
+            # Select Model
+            GLib.idle_add(self.auto_select_model)
+
+    def auto_select_model(self):
+        def find_model_index(model_name:str) -> int:
+            if len(list(self.get_root().model_dropdown.get_model())) == 0 or not model_name:
+                return -1
+            detected_models = [i for i, future_row in enumerate(list(self.get_root().model_dropdown.get_model())) if future_row.model.get_name() == model_name]
+            if len(detected_models) > 0:
+                return detected_models[0]
+            return -1
+
+        chat = self.get_root().chat_bin.get_child()
+        if chat:
+            model_index = -1
+            if len(list(chat.container)) > 0:
+                model_index = find_model_index(list(chat.container)[-1].get_model())
+            if model_index == -1:
+                model_index = find_model_index(self.get_root().get_current_instance().get_default_model())
+
+            if model_index and model_index != -1:
+                self.get_root().model_dropdown.set_selected(model_index)
 
 class Chat(Gtk.Stack):
     __gtype_name__ = 'AlpacaChat'
@@ -199,6 +449,191 @@ class Chat(Gtk.Stack):
                 messages.append(message_data)
         return messages
 
+class FolderRow(Gtk.ListBoxRow):
+    __gtype_name__ = 'AlpacaFolderRow'
+
+    def __init__(self, folder_id:str=None, folder_name:str=_('Root'), folder_color:str=None, folder_parent:str=None):
+        self.folder_id = folder_id
+        self.folder_name = folder_name
+        self.folder_color = folder_color
+        self.folder_parent = folder_parent
+        container = Gtk.Box(
+            spacing=10
+        )
+        container.append(
+            Gtk.Image.new_from_icon_name('folder-symbolic')
+        )
+        self.label = Gtk.Label(
+            label=folder_name,
+            tooltip_text=folder_name,
+            hexpand=True,
+            halign=0,
+            wrap=True,
+            ellipsize=3,
+            wrap_mode=2,
+            xalign=0
+        )
+        container.append(self.label)
+        button = Gtk.Button(
+            child=container,
+            css_classes=['flat']
+        )
+        button.connect('clicked', lambda button: self.open_folder())
+
+        super().__init__(
+            height_request=45,
+            child=button,
+            name=folder_name,
+            css_classes=['p0']
+        )
+        if folder_color:
+            self.add_css_class('folder-{}'.format(folder_color))
+
+        self.gesture_click = Gtk.GestureClick(button=3)
+        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
+        self.add_controller(self.gesture_click)
+        #self.gesture_long_press = Gtk.GestureLongPress()
+        #self.gesture_long_press.connect("pressed", self.show_popup)
+        #self.add_controller(self.gesture_long_press) ##TODO fix
+        drop_target_folder = Gtk.DropTarget.new(FolderRow, Gdk.DragAction.MOVE)
+        drop_target_folder.connect("drop", self.on_drop_folder)
+        self.add_controller(drop_target_folder)
+        drop_target_chat = Gtk.DropTarget.new(ChatRow, Gdk.DragAction.MOVE)
+        drop_target_chat.connect("drop", self.on_drop_chat)
+        self.add_controller(drop_target_chat)
+        drag_source = Gtk.DragSource()
+        drag_source.set_actions(Gdk.DragAction.MOVE)
+        drag_source.connect("drag-cancel", lambda *_: self.set_visible(True))
+        drag_source.connect('prepare', lambda *_: Gdk.ContentProvider.new_for_value(self))
+        drag_source.connect("drag-begin", self.on_drag_begin)
+        self.add_controller(drag_source)
+
+    def on_drop_folder(self, target, row, x, y):
+        if row.folder_id != self.folder_id:
+            SQL.move_folder_to_folder(row.folder_id, self.folder_id)
+            row.get_parent().remove(row)
+            folder_page = self.get_root().chat_list_navigationview.find_page(self.folder_id)
+            if folder_page:
+                folder_page.folder_list_box.prepend(row)
+                row.set_visible(True)
+                folder_page.update_visibility()
+            return True
+
+    def on_drop_chat(self, target, row, x, y):
+        SQL.move_chat_to_folder(row.chat.chat_id, self.folder_id)
+        row.get_parent().remove(row)
+        folder_page = self.get_root().chat_list_navigationview.find_page(self.folder_id)
+        if folder_page:
+            folder_page.chat_list_box.prepend(row)
+            row.set_visible(True)
+            folder_page.update_visibility()
+        return True
+
+    def on_drag_begin(self, source, drag):
+        snapshot = Gtk.Snapshot()
+        self.snapshot_child(self.get_child(), snapshot)
+        paintable = snapshot.to_paintable()
+        source.set_icon(paintable, 0, 0)
+        self.set_visible(False)
+
+    def show_popup(self, gesture, x, y):
+        rect = Gdk.Rectangle()
+        rect.x, rect.y, = x, y
+        actions = [
+            [
+                {
+                    'label': _('Rename Folder'),
+                    'callback': self.prompt_rename,
+                    'icon': 'document-edit-symbolic'
+                }
+            ],
+            [
+                {
+                    'label': _('Delete Folder'),
+                    'callback': self.prompt_delete,
+                    'icon': 'user-trash-symbolic'
+                }
+            ]
+        ]
+        popup = dialog.Popover(actions)
+        popup.set_parent(self)
+        popup.set_pointing_to(rect)
+        popup.popup()
+
+    def open_folder(self):
+        if not self.get_root().chat_list_navigationview.find_page(self.folder_id):
+            folder_page = ChatList(self.folder_id, self.folder_name, self.folder_color, True)
+            folder_page.set_tag(self.folder_id)
+            self.get_root().chat_list_navigationview.add(folder_page)
+            folder_page.update()
+        self.get_root().chat_list_navigationview.push_by_tag(self.folder_id)
+
+    def rename(self, new_name:str, new_color:str):
+        if not new_name:
+            new_name = _('New Folder')
+        if new_name != self.folder_name:
+            new_name = generate_numbered_name(new_name, [row.get_name() for row in list(self.get_parent())])
+        self.folder_name = new_name
+        self.label.set_label(new_name)
+        self.label.set_tooltip_text(new_name)
+        self.set_name(new_name)
+
+        self.remove_css_class('folder-{}'.format(self.folder_color))
+        self.folder_color = new_color
+        self.add_css_class('folder-{}'.format(self.folder_color))
+        SQL.insert_or_update_folder(self.folder_id, self.folder_name, self.folder_color, self.folder_parent)
+        #f insert_or_update_folder(folder_id:str, folder_name:str, folder_color:str, parent:str):
+
+    def prompt_rename(self):
+        options = {
+            _('Cancel'): {},
+            _('Accept'): {
+                'appearance': 'suggested',
+                'callback': lambda name, toggle_group: self.rename(name, toggle_group.get_active_name()),
+                'default': True
+            }
+        }
+
+        d = dialog.Entry(
+            _('Rename Folder?'),
+            ("Renaming '{}'").format(self.get_name()),
+            list(options.keys())[0],
+            options,
+            {'placeholder': _('New Folder'), 'text': self.folder_name}
+        )
+        color_group = Adw.ToggleGroup()
+        for c in ('blue', 'teal', 'green', 'yellow', 'orange', 'red', 'pink', 'purple', 'slate'):
+            icon = Gtk.Image.new_from_icon_name('big-dot-symbolic')
+            icon.add_css_class('button-{}'.format(c))
+            icon.set_icon_size(2)
+            toggle = Adw.Toggle(
+                name=c,
+                child=icon
+            )
+            color_group.add(toggle)
+            if self.folder_color == c:
+                color_group.set_active_name(c)
+        d.container.append(color_group)
+
+        d.show(self.get_root())
+
+    def delete(self):
+        if len(list(self.get_parent())) == 1:
+            self.get_parent().set_visible(False)
+            list(self.get_parent().get_parent())[1].set_visible(False)
+        self.get_parent().remove(self)
+        SQL.remove_folder(self.folder_id)
+
+    def prompt_delete(self):
+        dialog.simple(
+            parent = self.get_root(),
+            heading = _('Delete Folder?'),
+            body = _("Are you sure you want to delete '{}' and all their sub-folders and chats?").format(self.get_name()),
+            callback = lambda: self.delete(),
+            button_name = _('Delete'),
+            button_appearance = 'destructive'
+        )
+
 class ChatRow(Gtk.ListBoxRow):
     __gtype_name__ = 'AlpacaChatRow'
 
@@ -225,9 +660,8 @@ class ChatRow(Gtk.ListBoxRow):
         container.append(self.spinner)
         container.append(self.indicator)
         super().__init__(
-            css_classes = ['chat_row'],
-            height_request = 45,
-            child = container,
+            height_request=45,
+            child=container,
             name=self.chat.get_name()
         )
 
@@ -237,6 +671,19 @@ class ChatRow(Gtk.ListBoxRow):
         self.gesture_long_press = Gtk.GestureLongPress()
         self.gesture_long_press.connect("pressed", self.show_popup)
         self.add_controller(self.gesture_long_press)
+        drag_source = Gtk.DragSource()
+        drag_source.set_actions(Gdk.DragAction.MOVE)
+        drag_source.connect("drag-cancel", lambda *_: self.set_visible(True))
+        drag_source.connect('prepare', lambda *_: Gdk.ContentProvider.new_for_value(self))
+        drag_source.connect("drag-begin", self.on_drag_begin)
+        self.add_controller(drag_source)
+
+    def on_drag_begin(self, source, drag):
+        snapshot = Gtk.Snapshot()
+        self.snapshot_child(self.get_child(), snapshot)
+        paintable = snapshot.to_paintable()
+        source.set_icon(paintable, 0, 0)
+        self.set_visible(False)
 
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()
@@ -277,6 +724,8 @@ class ChatRow(Gtk.ListBoxRow):
             msg.update_profile_picture()
 
     def rename(self, new_name:str):
+        if not new_name:
+            new_name = _('New Chat')
         new_name = generate_numbered_name(new_name, [row.get_name() for row in list(self.get_parent())])
         self.label.set_label(new_name)
         self.label.set_tooltip_text(new_name)
@@ -300,7 +749,14 @@ class ChatRow(Gtk.ListBoxRow):
         list_box.remove(self)
         SQL.delete_chat(self.chat)
         if len(list(list_box)) == 0:
-            window.new_chat()
+            chat_list_page = window.get_chat_list_page()
+            if chat_list_page.folder_id:
+                previous_page = window.chat_list_navigationview.get_previous_page(chat_list_page)
+                previous_page.chat_list_box.select_row(list(previous_page.chat_list_box)[0])
+                previous_page.update_visibility()
+            else:
+                chat_list_page.new_chat()
+            chat_list_page.update_visibility()
         if not list_box.get_selected_row() or list_box.get_selected_row() == self:
             list_box.select_row(list_box.get_row_at_index(0))
         if voice.message_dictated and voice.message_dictated.chat.chat_id == self.chat.chat_id:
@@ -319,7 +775,7 @@ class ChatRow(Gtk.ListBoxRow):
     def duplicate(self):
         new_chat_name = _("Copy of {}".format(self.get_name()))
         new_chat_id = generate_uuid()
-        new_chat = self.get_root().add_chat(
+        new_chat = self.get_root().get_chat_list_page().add_chat(
             chat_name=new_chat_name,
             chat_id=new_chat_id,
             mode=1

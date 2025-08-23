@@ -139,7 +139,7 @@ class Instance:
                 "chat": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
                     "name": "TEXT NOT NULL",
-                    "type": "TEXT NOT NULL"
+                    "folder": "TEXT"
                 },
                 "message": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
@@ -175,6 +175,12 @@ class Instance:
                 "online_instance_model_list": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
                     "list": "TEXT NOT NULL" #JSON
+                },
+                "chat_folder": {
+                    "id": "TEXT NOT NULL PRIMARY KEY",
+                    "name": "TEXT NOT NULL",
+                    "color": "TEXT",
+                    "parent": "TEXT"
                 }
             }
 
@@ -182,11 +188,16 @@ class Instance:
                 columns_def = ", ".join([f"{col_name} {col_def}" for col_name, col_def in columns.items()])
                 c.cursor.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_def})")
 
-            # Add type to existing chat tables
             c.cursor.execute("PRAGMA table_info(chat)")
-            if 'type' not in [col[1] for col in c.cursor.fetchall()]:
-                c.cursor.execute("ALTER TABLE chat ADD COLUMN type TEXT NOT NULL DEFAULT 'chat'")
-
+            columns = [col[1] for col in c.cursor.fetchall()]
+            if 'folder' not in columns:
+                c.cursor.execute("ALTER TABLE chat ADD COLUMN folder TEXT")
+            if 'type' in columns: # Rebuild chat table (remove type)
+                c.cursor.execute("ALTER TABLE chat RENAME to chat_old")
+                columns_def = ", ".join([f"{col_name} {col_def}" for col_name, col_def in tables.get('chat').items()])
+                c.cursor.execute(f"CREATE TABLE IF NOT EXISTS chat ({columns_def})")
+                c.cursor.execute(f"INSERT INTO chat (id, name) SELECT id, name FROM chat_old")
+                c.cursor.execute(f"DROP TABLE chat_old")
             # Remove stuff from previous versions (cleaning)
             try:
                 model_pictures = c.cursor.execute("SELECT id, picture FROM model")
@@ -253,10 +264,30 @@ class Instance:
     def get_chats() -> list:
         with SQLiteConnection() as c:
             chats = c.cursor.execute(
-                "SELECT chat.id, chat.name, chat.type, MAX(message.date_time) AS \
+                "SELECT chat.id, chat.name, MAX(message.date_time) AS \
                 latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id \
                 GROUP BY chat.id ORDER BY latest_message_time DESC"
             ).fetchall()
+
+        return chats
+
+    def get_chats_by_folder(folder_id:str=None) -> list:
+        with SQLiteConnection() as c:
+            if folder_id is None:
+                chats = c.cursor.execute(
+                    "SELECT chat.id, chat.name, MAX(message.date_time) AS \
+                    latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id \
+                    WHERE chat.folder IS NULL \
+                    GROUP BY chat.id ORDER BY latest_message_time DESC"
+                ).fetchall()
+            else:
+                chats = c.cursor.execute(
+                    "SELECT chat.id, chat.name, MAX(message.date_time) AS \
+                    latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id \
+                    WHERE chat.folder=? \
+                    GROUP BY chat.id ORDER BY latest_message_time DESC",
+                    (folder_id,)
+                ).fetchall()
 
         return chats
 
@@ -300,7 +331,7 @@ class Instance:
                 "SELECT id FROM chat WHERE id=?", (chat.chat_id,)
             ).fetchone():
                 c.cursor.execute(
-                    "UPDATE chat SET name=?, WHERE id=?",
+                    "UPDATE chat SET name=? WHERE id=?",
                     (chat.get_name(), chat.chat_id),
                 )
             else:
@@ -364,7 +395,7 @@ class Instance:
                         ),
                     )
 
-    def import_chat(import_sql_path: str, chat_names: list) -> list:
+    def import_chat(import_sql_path: str, chat_names: list, folder_id :str=None) -> list:
         with SQLiteConnection() as c:
             c.cursor.execute("ATTACH DATABASE ? AS import", (import_sql_path,))
             _chat_widgets = []
@@ -423,10 +454,7 @@ class Instance:
 
             # Import
             for chat in c.cursor.execute("SELECT * FROM import.chat").fetchall():
-                if len(chat) == 3:
-                    c.cursor.execute("INSERT INTO chat (id, name, type) VALUES (?, ?, ?)", (chat[0], chat[1], chat[2]))
-                else:
-                    c.cursor.execute("INSERT INTO chat (id, name) VALUES (?, ?)", (chat[0], chat[1]))
+                c.cursor.execute("INSERT INTO chat (id, name, folder) VALUES (?, ?, ?)", (chat[0], chat[1], folder_id))
 
             c.cursor.execute(
                 "INSERT INTO message SELECT * FROM import.message"
@@ -773,3 +801,91 @@ class Instance:
                     f"UPDATE online_instance_model_list SET list=? WHERE id=?",
                     (json.dumps(model_list), instance_id)
                 )
+
+    ##################
+    ## CHAT FOLDERS ##
+    ##################
+
+    def get_chat_folders(parent_id:str=None):
+        with SQLiteConnection() as c:
+            if parent_id is None:
+                folders = c.cursor.execute(
+                    "SELECT id, name, color, parent FROM chat_folder WHERE parent IS NULL"
+                ).fetchall()
+            else:
+                folders = c.cursor.execute(
+                    "SELECT id, name, color, parent FROM chat_folder WHERE parent=?",
+                    (parent_id,)
+                ).fetchall()
+
+        return folders
+
+    def move_folder_to_folder(folder_id:str, parent_id:str):
+        with SQLiteConnection() as c:
+            if parent_id is None:
+                c.cursor.execute(
+                    "UPDATE chat_folder SET parent=NULL WHERE id=?",
+                    (folder_id,)
+                )
+            else:
+                c.cursor.execute(
+                    "UPDATE chat_folder SET parent=? WHERE id=?",
+                    (parent_id, folder_id)
+                )
+
+    def move_chat_to_folder(chat_id:str, folder_id:str):
+        with SQLiteConnection() as c:
+            if folder_id is None:
+                c.cursor.execute(
+                    "UPDATE chat SET folder=NULL WHERE id=?",
+                    (chat_id,)
+                )
+            else:
+                c.cursor.execute(
+                    "UPDATE chat SET folder=? WHERE id=?",
+                    (folder_id, chat_id)
+                )
+
+    def insert_or_update_folder(folder_id:str, folder_name:str, folder_color:str, parent:str):
+        if folder_id is None:
+            return # Can't modify root
+        with SQLiteConnection() as c:
+            if c.cursor.execute(
+                "SELECT id FROM chat_folder WHERE id=?", (folder_id,)
+            ).fetchone():
+                c.cursor.execute(
+                    f"UPDATE chat_folder SET name=?, color=?, parent=? WHERE id=?",
+                    (folder_name, folder_color, parent, folder_id)
+                )
+            else:
+                c.cursor.execute(
+                    f"INSERT INTO chat_folder (id, name, color, parent) VALUES (?, ?, ?, ?)",
+                    (folder_id, folder_name, folder_color, parent)
+                )
+
+    def remove_folder(folder_id:str):
+        if folder_id is None:
+            return # Can't modify root
+        result = []
+        with SQLiteConnection() as c:
+            c.cursor.execute(
+                "DELETE FROM chat_folder WHERE id=?", (folder_id,)
+            )
+            result = c.cursor.execute(
+                "SELECT id FROM chat WHERE folder=?", (folder_id,)
+            ).fetchall()
+
+        for row in result:
+            class tempchat:
+                chat_id=None
+            tempchat.chat_id=row[0]
+            Instance.delete_chat(tempchat)
+
+        result = []
+        with SQLiteConnection() as c:
+            result = c.cursor.execute(
+                "SELECT id FROM chat_folder WHERE parent=?", (folder_id,)
+            ).fetchall()
+
+        for row in result:
+            Instance.remove_folder(row[0])

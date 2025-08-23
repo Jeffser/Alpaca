@@ -108,7 +108,7 @@ class AlpacaService:
     def PresentLive(self):
         self.app.create_live_chat().present()
 
-    def Open(self, chat_name:str):
+    def Open(self, chat_name:str): ##TODO ohno
         for chat_row in list(self.app.props.active_window.chat_list_box):
             if chat_row.chat_window.get_name() == chat_name:
                 self.app.props.active_window.chat_list_box.select_row(chat_row)

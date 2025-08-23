@@ -96,7 +96,7 @@ def update_added_model_list(root):
     window.title_stack.set_visible_child_name('model-selector' if len(common.get_local_models(window)) > 0 else 'no-models')
     window.local_model_stack.set_visible_child_name('content' if len(list(window.local_model_flowbox)) > 0 else 'no-models')
     window.model_dropdown.set_enable_search(len(local_models) > 10)
-    GLib.idle_add(window.auto_select_model)
+    GLib.idle_add(window.chat_list_navigationview.get_visible_page().auto_select_model)
 
 def tts_model_exists(model_name:str) -> bool:
     tts_model_path = get_tts_path()

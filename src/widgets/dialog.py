@@ -104,7 +104,10 @@ class Entry(Base):
         if 'callback' in self.options.get(result, {}):
             entry_results = []
             for entry in list(self.container):
-                entry_results.append(entry.get_text())
+                if isinstance(entry, Gtk.Entry):
+                    entry_results.append(entry.get_text())
+                else:
+                    entry_results.append(entry)
             self.options[result]['callback'](*entry_results)
 
     def show(self, parent:Gtk.Widget):

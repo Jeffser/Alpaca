@@ -57,7 +57,7 @@
                     <child type="top">
                       <object class="AdwHeaderBar">
                         <child type="start">
-                          <object class="GtkButton">
+                          <object class="AdwSplitButton" id="new_chat_splitbutton">
                             <property name="action-name">app.new_chat</property>
                             <property name="tooltip-text" translatable="yes">New Chat</property>
                             <property name="icon-name">chat-message-new-symbolic</property>
@@ -110,12 +110,22 @@
                           <object class="GtkStackPage">
                             <property name="name">content</property>
                             <property name="child">
-                              <object class="GtkScrolledWindow" id="chat_list_container">
+                              <object class="AdwNavigationView" id="chat_list_navigationview">
+                                <property name="pop-on-escape">false</property>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkStackPage">
+                            <property name="name">content-old</property>
+                            <property name="child">
+                              <object class="GtkScrolledWindow">
                                 <property name="vexpand">true</property>
                                 <property name="hexpand">true</property>
                                 <property name="child">
                                   <object class="GtkListBox" id="chat_list_box">
-                                    <signal name="row-selected" handler="chat_changed"/>
                                     <property name="selection-mode">1</property>
                                     <style>
                                       <class name="navigation-sidebar"/>
