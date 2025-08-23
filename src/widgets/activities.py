@@ -79,7 +79,48 @@ class ActivityDialog(Adw.Dialog):
 
         self.connect('closed', lambda *_: self.page.close())
 
+class ActivityTabWindow(Adw.Window):
+    __gtype_name__ = 'AlpacaActivityTabWindow'
+
+    def __init__(self):
+        self.activities_tab_view = Adw.TabView()
+        self.activities_tab_view.connect('close-page', self.tab_closed)
+        self.activities_tab_view.connect('notify::selected-page', self.tab_changed)
+        tbv = Adw.ToolbarView(
+            content=self.activities_tab_view
+        )
+        hb = Adw.HeaderBar()
+        tbv.add_top_bar(hb)
+        tbv.add_top_bar(Adw.TabBar(
+            view=self.activities_tab_view
+        ))
+        tab_overview = Adw.TabOverview(
+            child=tbv,
+            view=self.activities_tab_view
+        )
+        overview_button = Gtk.Button(
+            icon_name='view-grid-symbolic',
+            tooltip_text=_('Overview')
+        )
+        overview_button.connect('clicked', lambda btn: tab_overview.set_open(True))
+        hb.pack_start(overview_button)
+
+        super().__init__(
+            content=tab_overview,
+            title=_('Activities')
+        )
+
+    def tab_closed(self, tabview, tabpage):
+        tabpage.get_child().page.close()
+        if len(tabview.get_pages()) == 1:
+            self.close()
+
+    def tab_changed(self, tabview, gparam):
+        if tabview.get_selected_page():
+            self.set_title(tabview.get_selected_page().get_child().page.title)
+
 def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
+    global fun
     if not page.get_parent():
         if root.get_name() == 'AlpacaWindow' and root.settings.get_value('activity-mode').unpack() == 'sidebar' and not force_dialog:
             tab_page = root.activities_tab_view.append(ActivityPage(page))
@@ -88,3 +129,5 @@ def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
         else:
             dialog = ActivityDialog(page)
             dialog.present(root)
+
+

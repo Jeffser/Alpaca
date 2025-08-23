@@ -109,7 +109,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def activities_tab_closed(self, tabview, tabpage):
         tabpage.get_child().page.close()
-        if len(tabview.get_pages()) == 1:
+
+    @Gtk.Template.Callback()
+    def activities_tab_detached(self, tabview, tabpage, index):
+        if len(tabview.get_pages()) == 0:
             self.chat_splitview.set_collapsed(True)
             self.chat_splitview.set_show_content(True)
             self.show_activities_stack.set_visible(False)
@@ -125,6 +128,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.chat_splitview.set_collapsed(False)
 
         tabview.set_selected_page(tabpage)
+
+    @Gtk.Template.Callback()
+    def activities_window_create(self, tabview):
+        atw = Widgets.activities.ActivityTabWindow()
+        atw.present()
+        return atw.activities_tab_view
 
     @Gtk.Template.Callback()
     def activities_tab_changed(self, tabview, gparam):
