@@ -133,7 +133,7 @@ stacksidebar {
 
 .folder-blue headerbar, row.folder-blue {
   background-color: color-mix(in srgb, var(--accent-blue) 30%, transparent);
-  color: color-mix(in srgb, var(--accent-blue) 30%, var(--accent-fg-color));
+  color: color-mix(in srgb, var(--accent-blue) 50%, currentColor);
 }
 .button-blue {
   color: var(--accent-blue);
@@ -141,7 +141,7 @@ stacksidebar {
 
 .folder-teal headerbar, row.folder-teal {
   background-color: color-mix(in srgb, var(--accent-teal) 30%, transparent);
-  color: color-mix(in srgb, var(--accent-teal) 30%, var(--accent-fg-color));
+  color: color-mix(in srgb, var(--accent-teal) 50%, currentColor);
 }
 .button-teal {
   color: var(--accent-teal);
@@ -150,7 +150,7 @@ stacksidebar {
 
 .folder-green headerbar, row.folder-green {
   background-color: color-mix(in srgb, var(--accent-green) 30%, transparent);
-  color: color-mix(in srgb, var(--accent-green) 30%, var(--accent-fg-color));
+  color: color-mix(in srgb, var(--accent-green) 50%, currentColor);
 }
 .button-green {
   color: var(--accent-green);
@@ -159,7 +159,7 @@ stacksidebar {
 
 .folder-yellow headerbar, row.folder-yellow {
   background-color: color-mix(in srgb, var(--accent-yellow) 30%, transparent);
-  color: color-mix(in srgb, var(--accent-yellow) 30%, var(--accent-fg-color));
+  color: color-mix(in srgb, var(--accent-yellow) 50%, currentColor);
 }
 .button-yellow {
   color: var(--accent-yellow);
@@ -168,7 +168,7 @@ stacksidebar {
 
 .folder-orange headerbar, row.folder-orange {
   background-color: color-mix(in srgb, var(--accent-orange) 30%, transparent);
-  color: color-mix(in srgb, var(--accent-orange) 30%, var(--accent-fg-color));
+  color: color-mix(in srgb, var(--accent-orange) 50%, currentColor);
 }
 .button-orange {
   color: var(--accent-orange);
@@ -177,7 +177,7 @@ stacksidebar {
 
 .folder-red headerbar, row.folder-red {
   background-color: color-mix(in srgb, var(--accent-red) 30%, transparent);
-  color: color-mix(in srgb, var(--accent-red) 30%, var(--accent-fg-color));
+  color: color-mix(in srgb, var(--accent-red) 50%, currentColor);
 }
 .button-red {
   color: var(--accent-red);
@@ -186,7 +186,7 @@ stacksidebar {
 
 .folder-pink headerbar, row.folder-pink {
   background-color: color-mix(in srgb, var(--accent-pink) 30%, transparent);
-  color: color-mix(in srgb, var(--accent-pink) 30%, var(--accent-fg-color));
+  color: color-mix(in srgb, var(--accent-pink) 50%, currentColor);
 }
 .button-pink {
   color: var(--accent-pink);
@@ -195,7 +195,7 @@ stacksidebar {
 
 .folder-purple headerbar, row.folder-purple {
   background-color: color-mix(in srgb, var(--accent-purple) 30%, transparent);
-  color: color-mix(in srgb, var(--accent-purple) 30%, var(--accent-fg-color));
+  color: color-mix(in srgb, var(--accent-purple) 50%, currentColor);
 }
 .button-purple {
   color: var(--accent-purple);
@@ -204,7 +204,7 @@ stacksidebar {
 
 .folder-slate headerbar, row.folder-slate {
   background-color: color-mix(in srgb, var(--accent-slate) 30%, transparent);
-  color: color-mix(in srgb, var(--accent-slate) 30%, var(--accent-fg-color));
+  color: color-mix(in srgb, var(--accent-slate) 50%, currentColor);
 }
 .button-slate {
   color: var(--accent-slate);
