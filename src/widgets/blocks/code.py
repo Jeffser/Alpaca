@@ -4,7 +4,7 @@ Code block handling
 """
 
 from gi.repository import Gtk, Gdk, GtkSource
-from .. import terminal, dialog
+from .. import terminal, dialog, activities
 import re, unicodedata
 
 language_fallback = {
@@ -205,9 +205,9 @@ class Code(Gtk.Box):
                 'language': 'js' if blk.get_language().lower() in ('javascript', 'js') else blk.get_language().lower(),
                 'content': blk.get_code()
             })
-        dialog = terminal.TerminalDialog()
-        dialog.present(self.get_root())
-        dialog.run(
+        term = terminal.Terminal()
+        activities.show_activity(term, self.get_root())
+        term.run(
             code_language=get_language_property(self.get_language()).get('id'),
             file_content=self.get_code(),
             extra_files=extra_files

@@ -78,6 +78,7 @@ class ModelCreatorDialog(Adw.Dialog):
 
         #CONTEXT
         self.context_attachment_container = attachments.GlobalAttachmentContainer()
+        self.context_attachment_container.force_dialog = True
         self.context_attachment_container.set_margin_bottom(10)
         pg.add(self.context_attachment_container)
 

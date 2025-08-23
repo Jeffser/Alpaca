@@ -12,7 +12,7 @@ from PIL import Image
 from ..constants import cache_dir
 import requests, json, base64, tempfile, shutil, logging, threading, os, re
 
-from . import blocks, dialog, camera, voice
+from . import blocks, dialog, camera, voice, activities
 from ..sql_manager import Instance as SQL
 
 logger = logging.getLogger(__name__)
@@ -85,18 +85,17 @@ def extract_image(image_path:str, max_size:int) -> str:
             image_data = output.getvalue()
         return base64.b64encode(image_data).decode("utf-8")
 
-class AttachmentDialog(Adw.Dialog):
-    __gtype_name__ = 'AlpacaAttachmentDialog'
+class AttachmentPage(Adw.Bin):
+    __gtype_name__ = 'AlpacaAttachmentPage'
 
     def __init__(self, attachment):
         self.attachment = attachment
 
-        super().__init__(
-            title=self.attachment.file_name,
-            child=Adw.ToolbarView(),
-            follows_content_size=True
-        )
-        header = Adw.HeaderBar()
+        super().__init__()
+        # Activities
+        self.buttons = []
+        self.title = self.attachment.file_name
+        self.activity_css = []
 
         if self.attachment.file_type != 'model_context':
             delete_button = Gtk.Button(
@@ -107,7 +106,7 @@ class AttachmentDialog(Adw.Dialog):
                 valign=3
             )
             delete_button.connect('clicked', lambda *_: self.attachment.prompt_delete())
-            header.pack_start(delete_button)
+            self.buttons.append(delete_button)
 
         download_button = Gtk.Button(
             icon_name='folder-download-symbolic',
@@ -116,20 +115,7 @@ class AttachmentDialog(Adw.Dialog):
             valign=3
         )
         download_button.connect('clicked', lambda *_: self.attachment.prompt_download())
-        header.pack_start(download_button)
-
-        self.get_child().add_top_bar(header)
-        self.get_child().set_content(
-            Gtk.ScrolledWindow(
-                hexpand=True,
-                vexpand=True,
-                propagate_natural_width=True,
-                propagate_natural_height=True,
-                css_classes=['undershoot-bottom'],
-                max_content_width=500,
-                min_content_width=300
-            )
-        )
+        self.buttons.append(download_button)
 
         if self.attachment.file_type == 'image':
             image_element = Gtk.Image(
@@ -149,7 +135,7 @@ class AttachmentDialog(Adw.Dialog):
             image_element.set_from_paintable(texture)
             image_element.set_size_request(360, 360)
             image_element.set_overflow(1)
-            self.get_child().get_content().set_child(image_element)
+            self.set_child(image_element)
         else:
             container = Gtk.Box(
                 orientation=1,
@@ -172,8 +158,10 @@ class AttachmentDialog(Adw.Dialog):
                 content = self.attachment.get_content()
                 for block in blocks.text_to_block_list(content):
                     container.append(block)
+            self.set_child(container)
 
-            self.get_child().get_content().set_child(container)
+    def close(self): # Requirement for Activity
+        pass
 
 class Attachment(Gtk.Button):
     __gtype_name__ = 'AlpacaAttachment'
@@ -182,6 +170,7 @@ class Attachment(Gtk.Button):
         self.file_name = file_name
         self.file_type = file_type
         self.file_content = file_content
+        self.page = None
 
         super().__init__(
             vexpand=True,
@@ -207,7 +196,14 @@ class Attachment(Gtk.Button):
         if self.file_type == 'link':
             self.connect("clicked", lambda button, uri=self.file_content: Gio.AppInfo.launch_default_for_uri(uri))
         else:
-            self.connect("clicked", lambda button: AttachmentDialog(self).present(self.get_root()))
+            self.connect(
+                "clicked",
+                lambda button: activities.show_activity(
+                    self.get_page(),
+                    self.get_root(),
+                    self.get_parent().get_parent().get_parent().force_dialog
+                )
+            )
 
         self.gesture_click = Gtk.GestureClick(button=3)
         self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
@@ -216,13 +212,16 @@ class Attachment(Gtk.Button):
         self.gesture_long_press.connect("pressed", self.show_popup)
         self.add_controller(self.gesture_long_press)
 
+    def get_page(self):
+        self.page = AttachmentPage(self)
+        return self.page
+
     def get_content(self) -> str:
         return self.file_content
 
     def delete(self):
-        dialog = self.get_root().get_visible_dialog()
-        if dialog and isinstance(dialog, AttachmentDialog):
-            dialog.close()
+        if self.page:
+            self.page.get_parent().get_parent().get_parent().close()
         if len(list(self.get_parent())) == 1:
             self.get_parent().get_parent().get_parent().set_visible(False)
         self.get_parent().remove(self)
@@ -299,6 +298,7 @@ class ImageAttachment(Gtk.Button):
         self.file_name = file_name
         self.file_type = 'image'
         self.file_content = file_content
+        self.page = None
 
         try:
             image_data = base64.b64decode(self.file_content)
@@ -317,7 +317,14 @@ class ImageAttachment(Gtk.Button):
                 tooltip_text=_("Image"),
                 overflow=1
             )
-            self.connect("clicked", lambda button: AttachmentDialog(self).present(self.get_root()))
+            self.connect(
+                "clicked",
+                lambda button: activities.show_activity(
+                    self.get_page(),
+                    self.get_root(),
+                    self.get_parent().get_parent().get_parent().force_dialog
+                )
+            )
         except Exception as e:
             #logger.error(e)
             image_texture = Gtk.Image.new_from_icon_name("image-missing-symbolic")
@@ -349,13 +356,16 @@ class ImageAttachment(Gtk.Button):
         self.gesture_long_press.connect("pressed", self.show_popup)
         self.add_controller(self.gesture_long_press)
 
+    def get_page(self):
+        self.page = AttachmentPage(self)
+        return self.page
+
     def get_content(self) -> str:
         return self.file_content
 
     def delete(self):
-        dialog = self.get_root().get_visible_dialog()
-        if dialog and isinstance(dialog, AttachmentDialog):
-            dialog.close()
+        if self.page:
+            self.page.get_parent().get_parent().get_parent().close()
         if len(list(self.get_parent())) == 1:
             self.get_parent().get_parent().get_parent().set_visible(False)
         self.get_parent().remove(self)
@@ -418,6 +428,8 @@ class ImageAttachment(Gtk.Button):
 class AttachmentContainer(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentContainer'
 
+    force_dialog = False
+
     def __init__(self):
         self.container = Gtk.Box(
             orientation=0,
@@ -453,6 +465,8 @@ class AttachmentContainer(Gtk.ScrolledWindow):
 class ImageAttachmentContainer(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaImageAttachmentContainer'
 
+    force_dialog = False
+
     def __init__(self):
         self.container = Gtk.Box(
             orientation=0,
@@ -483,6 +497,8 @@ class ImageAttachmentContainer(Gtk.ScrolledWindow):
 
 class GlobalAttachmentContainer(AttachmentContainer):
     __gtype_name__ = 'AlpacaGlobalAttachmentContainer'
+
+    force_dialog = False
 
     def attach_website(self, url:str):
         GLib.idle_add(self.get_root().global_footer.remove_text, url)

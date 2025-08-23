@@ -83,6 +83,59 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_manager_top_view_switcher = Gtk.Template.Child()
     last_selected_instance_row = None
 
+    activities_overview = Gtk.Template.Child()
+    activities_headerbar = Gtk.Template.Child()
+    activities_tab_view = Gtk.Template.Child()
+    chat_splitview = Gtk.Template.Child()
+    activities_page = Gtk.Template.Child()
+    show_activities_stack = Gtk.Template.Child()
+    last_breakpoint_status = False
+
+    @Gtk.Template.Callback()
+    def last_breakpoint_applied(self, bp):
+        self.last_breakpoint_status = True
+
+    @Gtk.Template.Callback()
+    def last_breakpoint_unapplied(self, bp):
+        if len(self.activities_tab_view.get_pages()) > 0:
+            GLib.idle_add(self.chat_splitview.set_collapsed, False)
+        self.chat_splitview.set_show_content(True)
+        self.last_breakpoint_status = False
+
+    @Gtk.Template.Callback()
+    def show_activities_button_pressed(self, button):
+        self.chat_splitview.set_show_content(False)
+
+    @Gtk.Template.Callback()
+    def activities_tab_closed(self, tabview, tabpage):
+        tabpage.get_child().page.close()
+        if len(tabview.get_pages()) == 1:
+            self.chat_splitview.set_collapsed(True)
+            self.chat_splitview.set_show_content(True)
+            self.show_activities_stack.set_visible(False)
+
+    @Gtk.Template.Callback()
+    def activities_tab_attached(self, tabview, tabpage, index):
+        self.show_activities_stack.set_visible(True)
+        if self.last_breakpoint_status:
+            self.chat_splitview.set_show_content(False)
+        else:
+            if self.chat_splitview.get_collapsed():
+                self.split_view_overlay.set_show_sidebar(False)
+            self.chat_splitview.set_collapsed(False)
+
+        tabview.set_selected_page(tabpage)
+
+    @Gtk.Template.Callback()
+    def activities_tab_changed(self, tabview, gparam):
+        if tabview.get_selected_page():
+            self.activities_page.set_title(tabview.get_selected_page().get_child().page.title)
+            self.activities_headerbar.set_css_classes(tabview.get_selected_page().get_child().page.activity_css)
+
+    @Gtk.Template.Callback()
+    def activities_overview_switch(self, button):
+        self.activities_overview.set_open(True)
+
     @Gtk.Template.Callback()
     def add_instance(self, button):
         def selected(ins):

@@ -10,7 +10,7 @@ from html2text import html2text
 from PIL import Image
 from io import BytesIO
 
-from .. import terminal, attachments, dialog, models, chat, message
+from .. import terminal, activities, attachments, dialog, models, chat, message
 from ...constants import data_dir, REMBG_MODELS
 from ...sql_manager import generate_uuid, Instance as SQL
 
@@ -736,14 +736,17 @@ class RunCommand(Base):
             )
         ]
 
-        terminal_dialog = terminal.TerminalDialog()
-        terminal_dialog.present(self.get_root())
-        terminal_dialog.run(
+        self.waiting_terminal = True
+        term = terminal.Terminal(
+            close_callback=lambda: setattr(self, 'waiting_terminal', False)
+        )
+        GLib.idle_add(activities.show_activity, term, bot_message.get_root(), not bot_message.chat.chat_id)
+        term.run(
             code_language='ssh',
             file_content=';'.join(commands)
         )
 
-        while isinstance(self.get_root().get_visible_dialog(), terminal.TerminalDialog):
+        while self.waiting_terminal:
             time.sleep(1)
 
         command_result = '(No Output)'

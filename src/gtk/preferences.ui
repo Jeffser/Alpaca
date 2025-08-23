@@ -64,6 +64,30 @@
                 </property>
               </object>
             </child>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Preferred Activity Mode</property>
+                <property name="subtitle" translatable="yes">This affects how terminals, attachments and other activities are represented in the main window</property>
+                <child type="suffix">
+                  <object class="AdwToggleGroup" id="activity_mode">
+                    <property name="valign">3</property>
+                    <property name="active-name">sidebar</property>
+                    <child>
+                      <object class="AdwToggle">
+                        <property name="label" translatable="yes">Sidebar</property>
+                        <property name="name">sidebar</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwToggle">
+                        <property name="label" translatable="yes">Dialog</property>
+                        <property name="name">dialog</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
         </child>
         <child>

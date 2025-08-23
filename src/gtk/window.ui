@@ -12,12 +12,32 @@
     <property name="title">Alpaca</property>
     <child>
       <object class="AdwBreakpoint">
+        <condition>max-width: 720sp</condition>
+        <setter object="split_view_overlay" property="collapsed">true</setter>
+      </object>
+    </child>
+    <child>
+      <object class="AdwBreakpoint">
         <condition>max-width: 690sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
         <setter object="model_manager_header_bar" property="title-widget"/>
         <setter object="model_manager_bottom_view_switcher" property="reveal">true</setter>
         <setter object="available_model_flowbox" property="min-children-per-line">1</setter>
         <setter object="local_model_flowbox" property="max-children-per-line">2</setter>
+      </object>
+    </child>
+    <child>
+      <object class="AdwBreakpoint">
+        <condition>max-width: 520sp</condition>
+        <setter object="split_view_overlay" property="collapsed">true</setter>
+        <setter object="model_manager_header_bar" property="title-widget"/>
+        <setter object="model_manager_bottom_view_switcher" property="reveal">true</setter>
+        <setter object="available_model_flowbox" property="min-children-per-line">1</setter>
+        <setter object="local_model_flowbox" property="max-children-per-line">2</setter>
+        <setter object="chat_splitview" property="collapsed">True</setter>
+        <setter object="show_activities_stack" property="visible-child-name">button</setter>
+        <signal name="apply" handler="last_breakpoint_applied"/>
+        <signal name="unapply" handler="last_breakpoint_unapplied"/>
       </object>
     </child>
     <property name="content">
@@ -123,151 +143,227 @@
                   </object>
                 </property>
                 <child>
-                  <object class="AdwToolbarView">
-                    <property name="height-request">140</property>
-                    <child type="top">
-                      <object class="AdwHeaderBar">
-                        <child type="start">
-                          <object class="GtkToggleButton" id="show_sidebar_button">
-                            <property name="icon-name">sidebar-show-symbolic</property>
-                            <property name="tooltip-text" translatable="yes">Toggle Sidebar</property>
-                            <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
-                          </object>
-                        </child>
-                        <child type="start">
-                          <object class="GtkToggleButton" id="message_search_button">
-                            <property name="icon-name">edit-find-symbolic</property>
-                            <property name="tooltip-text" translatable="yes">Search Messages</property>
-                            <property name="active" bind-source="message_searchbar" bind-property="search-mode-enabled" bind-flags="sync-create"/>
-                          </object>
-                        </child>
-                        <child type="title">
-                          <object class="GtkStack" id="title_stack">
-                            <property name="transition_duration">100</property>
-                            <property name="transition_type">1</property>
+                  <object class="AdwNavigationSplitView" id="chat_splitview">
+                    <property name="collapsed" bind-source="show_activities_toggle" bind-property="active" bind-flags="invert-boolean"/>
+                    <property name="sidebar-width-fraction">0.4</property>
+                    <property name="sidebar-width-unit">1</property>
+                    <property name="sidebar-position">1</property>
+                    <property name="show-content">true</property>
+                    <property name="collapsed">true</property>
+                    <property name="sidebar">
+                      <object class="AdwNavigationPage" id="activities_page">
+                        <property name="title" translatable="yes">Activities</property>
+                        <property name="child">
+                          <object class="AdwTabOverview" id="activities_overview">
+                            <property name="view">activities_tab_view</property>
                             <child>
-                              <object class="GtkStackPage">
-                                <property name="name">loading</property>
-                                <property name="child">
-                                  <object class="AdwSpinner">
-                                    <style>
-                                      <class name="p10"/>
-                                    </style>
-                                  </object>
-                                </property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkStackPage">
-                                <property name="name">no-models</property>
-                                <property name="child">
-                                  <object class="GtkButton" id="title_no_model_button">
-                                    <property name="child">
-                                      <object class="AdwButtonContent">
-                                        <property name="label" translatable="yes">Add Models</property>
-                                        <property name="icon-name">brain-augemnted-symbolic</property>
-                                      </object>
-                                    </property>
-                                    <property name="tooltip-text" translatable="yes">Manage Models</property>
-                                    <property name="action-name">app.model_manager</property>
-                                    <property name="halign">3</property>
-                                  </object>
-                                </property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkStackPage">
-                                <property name="name">model-selector</property>
-                                <property name="child">
-                                  <object class="GtkBox">
-                                    <property name="halign">3</property>
+                              <object class="AdwToolbarView">
+                                <child type="top">
+                                  <object class="AdwHeaderBar" id="activities_headerbar">
                                     <child>
                                       <object class="GtkButton">
-                                        <property name="icon-name">brain-augemnted-symbolic</property>
-                                        <property name="tooltip-text" translatable="yes">Manage Models</property>
-                                        <property name="action-name">app.model_manager</property>
-                                        <style>
-                                          <class name="flat"/>
-                                        </style>
+                                        <property name="icon-name">view-grid-symbolic</property>
+                                        <property name="tooltip-text" translatable="yes">Overview</property>
+                                        <signal name="clicked" handler="activities_overview_switch"/>
                                       </object>
                                     </child>
-                                    <child>
-                                      <object class="GtkDropDown" id="model_dropdown"/>
-                                    </child>
                                   </object>
-                                </property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child type="end">
-                          <object class="GtkMenuButton">
-                            <property name="primary">False</property>
-                            <property name="icon-name">view-more-symbolic</property>
-                            <property name="tooltip-text" translatable="yes">Chat Menu</property>
-                            <property name="menu-model">secondary_menu</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child type="top">
-                      <object class="AdwClamp">
-                        <property name="maximum-size">1000</property>
-                        <property name="tightening-threshold">800</property>
-                        <child>
-                          <object class="GtkSearchBar" id="message_searchbar">
-                            <accessibility>
-                              <property name="label" translatable="yes">Message search bar</property>
-                            </accessibility>
-                            <property name="search-mode-enabled" bind-source="message_search_button" bind-property="active" bind-flags="sync-create"/>
-                            <property name="key-capture-widget">AlpacaWindow</property>
-                            <child>
-                              <object class="GtkSearchEntry" id="searchentry_messages">
-                                <signal name="search-changed" handler="message_search_changed"/>
-                                <property name="hexpand">true</property>
-                                <property name="search-delay">200</property>
-                                <property name="placeholder-text" translatable="yes">Search messages</property>
-                                <accessibility>
-                                  <property name="label" translatable="yes">Search messages</property>
-                                </accessibility>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <property name="content">
-                      <object class="GtkBox">
-                        <property name="orientation">1</property>
-                        <property name="vexpand">true</property>
-                        <property name="hexpand">true</property>
-                        <child>
-                          <object class="AdwBanner" id="banner">
-                            <property name="button-label" translatable="true">Close</property>
-                            <property name="title" translatable="yes">Warning: Power saver mode is enabled, this will slow down message generation</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="orientation">1</property>
-                            <child>
-                              <object class="AdwToastOverlay" id="toast_overlay">
+                                </child>
                                 <child>
-                                  <object class="AdwBin" id="chat_bin">
-                                    <property name="hexpand">true</property>
-                                    <property name="vexpand">true</property>
+                                  <object class="AdwTabView" id="activities_tab_view">
+                                    <signal name="notify::selected-page" handler="activities_tab_changed"/>
+                                    <signal name="close-page" handler="activities_tab_closed"/>
+                                    <signal name="page-attached" handler="activities_tab_attached"/>
                                   </object>
                                 </child>
                               </object>
                             </child>
-                            <child>
-                              <object class="AdwClamp" id="global_footer_container">
-                                <property name="maximum-size">1000</property>
-                                <property name="tightening-threshold">800</property>
+                          </object>
+                        </property>
+                      </object>
+                    </property>
+                    <property name="content">
+                      <object class="AdwNavigationPage">
+                        <property name="title" translatable="yes">Chat</property>
+                        <property name="child">
+                          <object class="AdwToolbarView">
+                            <property name="height-request">140</property>
+                            <child type="top">
+                              <object class="AdwHeaderBar">
+                                <child type="start">
+                                  <object class="GtkToggleButton" id="show_sidebar_button">
+                                    <property name="icon-name">sidebar-show-symbolic</property>
+                                    <property name="tooltip-text" translatable="yes">Toggle Sidebar</property>
+                                    <property name="active" bind-source="split_view_overlay" bind-property="show-sidebar" bind-flags="sync-create"/>
+                                  </object>
+                                </child>
+                                <child type="start">
+                                  <object class="GtkToggleButton" id="message_search_button">
+                                    <property name="icon-name">edit-find-symbolic</property>
+                                    <property name="tooltip-text" translatable="yes">Search Messages</property>
+                                    <property name="active" bind-source="message_searchbar" bind-property="search-mode-enabled" bind-flags="sync-create"/>
+                                  </object>
+                                </child>
+                                <child type="title">
+                                  <object class="GtkStack" id="title_stack">
+                                    <property name="transition_duration">100</property>
+                                    <property name="transition_type">1</property>
+                                    <child>
+                                      <object class="GtkStackPage">
+                                        <property name="name">loading</property>
+                                        <property name="child">
+                                          <object class="AdwSpinner">
+                                            <style>
+                                              <class name="p10"/>
+                                            </style>
+                                          </object>
+                                        </property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkStackPage">
+                                        <property name="name">no-models</property>
+                                        <property name="child">
+                                          <object class="GtkButton" id="title_no_model_button">
+                                            <property name="child">
+                                              <object class="AdwButtonContent">
+                                                <property name="label" translatable="yes">Add Models</property>
+                                                <property name="icon-name">brain-augemnted-symbolic</property>
+                                              </object>
+                                            </property>
+                                            <property name="tooltip-text" translatable="yes">Manage Models</property>
+                                            <property name="action-name">app.model_manager</property>
+                                            <property name="halign">3</property>
+                                          </object>
+                                        </property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkStackPage">
+                                        <property name="name">model-selector</property>
+                                        <property name="child">
+                                          <object class="GtkBox">
+                                            <property name="halign">3</property>
+                                            <child>
+                                              <object class="GtkButton">
+                                                <property name="icon-name">brain-augemnted-symbolic</property>
+                                                <property name="tooltip-text" translatable="yes">Manage Models</property>
+                                                <property name="action-name">app.model_manager</property>
+                                                <style>
+                                                  <class name="flat"/>
+                                                </style>
+                                              </object>
+                                            </child>
+                                            <child>
+                                              <object class="GtkDropDown" id="model_dropdown"/>
+                                            </child>
+                                          </object>
+                                        </property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child type="end">
+                                  <object class="GtkStack" id="show_activities_stack">
+                                    <property name="visible">false</property>
+                                    <child>
+                                      <object class="GtkStackPage">
+                                        <property name="name">toggle</property>
+                                        <property name="child">
+                                          <object class="GtkToggleButton" id="show_activities_toggle">
+                                            <property name="icon-name">sidebar-show-right-symbolic</property>
+                                            <property name="tooltip-text" translatable="yes">Toggle Activities Sidebar</property>
+                                            <property name="active" bind-source="chat_splitview" bind-property="collapsed" bind-flags="invert-boolean"/>
+                                          </object>
+                                        </property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkStackPage">
+                                        <property name="name">button</property>
+                                        <property name="child">
+                                          <object class="GtkButton" id="show_activities_button">
+                                            <property name="icon-name">sidebar-show-right-symbolic</property>
+                                            <property name="tooltip-text" translatable="yes">Show Activities</property>
+                                            <signal name="clicked" handler="show_activities_button_pressed"/>
+                                          </object>
+                                        </property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child type="end">
+                                  <object class="GtkMenuButton">
+                                    <property name="primary">False</property>
+                                    <property name="icon-name">view-more-symbolic</property>
+                                    <property name="tooltip-text" translatable="yes">Chat Menu</property>
+                                    <property name="menu-model">secondary_menu</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
+                            <child type="top">
+                              <object class="AdwClamp">
+                                <property name="maximum-size">1000</property>
+                                <property name="tightening-threshold">800</property>
+                                <child>
+                                  <object class="GtkSearchBar" id="message_searchbar">
+                                    <accessibility>
+                                      <property name="label" translatable="yes">Message search bar</property>
+                                    </accessibility>
+                                    <property name="search-mode-enabled" bind-source="message_search_button" bind-property="active" bind-flags="sync-create"/>
+                                    <property name="key-capture-widget">AlpacaWindow</property>
+                                    <child>
+                                      <object class="GtkSearchEntry" id="searchentry_messages">
+                                        <signal name="search-changed" handler="message_search_changed"/>
+                                        <property name="hexpand">true</property>
+                                        <property name="search-delay">200</property>
+                                        <property name="placeholder-text" translatable="yes">Search messages</property>
+                                        <accessibility>
+                                          <property name="label" translatable="yes">Search messages</property>
+                                        </accessibility>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <property name="content">
+                              <object class="GtkBox">
+                                <property name="orientation">1</property>
+                                <property name="vexpand">true</property>
+                                <property name="hexpand">true</property>
+                                <child>
+                                  <object class="AdwBanner" id="banner">
+                                    <property name="button-label" translatable="true">Close</property>
+                                    <property name="title" translatable="yes">Warning: Power saver mode is enabled, this will slow down message generation</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="orientation">1</property>
+                                    <child>
+                                      <object class="AdwToastOverlay" id="toast_overlay">
+                                        <child>
+                                          <object class="AdwBin" id="chat_bin">
+                                            <property name="hexpand">true</property>
+                                            <property name="vexpand">true</property>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="AdwClamp" id="global_footer_container">
+                                        <property name="maximum-size">1000</property>
+                                        <property name="tightening-threshold">800</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
                           </object>
-                        </child>
+                        </property>
                       </object>
                     </property>
                   </object>
