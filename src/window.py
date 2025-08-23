@@ -89,6 +89,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
     show_activities_stack = Gtk.Template.Child()
     last_breakpoint_status = False
 
+    chat_searchbar = Gtk.Template.Child()
+
+    @Gtk.Template.Callback()
+    def chat_list_page_changed(self, navigationview, page=None):
+        if self.chat_searchbar.get_search_mode():
+            self.chat_searchbar.set_search_mode(False)
+            previous_page = navigationview.get_previous_page(navigationview.get_visible_page())
+            if previous_page:
+                previous_page.on_search('')
+
     @Gtk.Template.Callback()
     def last_breakpoint_applied(self, bp):
         self.last_breakpoint_status = True

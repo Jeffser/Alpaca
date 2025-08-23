@@ -103,7 +103,10 @@
                       </object>
                     </child>
                     <property name="content">
-                      <object class="AdwNavigationView" id="chat_list_navigationview"/>
+                      <object class="AdwNavigationView" id="chat_list_navigationview">
+                        <signal name="popped" handler="chat_list_page_changed"/>
+                        <signal name="pushed" handler="chat_list_page_changed"/>
+                      </object>
                     </property>
                   </object>
                 </property>
