@@ -129,6 +129,7 @@ def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
         if root.get_name() == 'AlpacaWindow' and root.settings.get_value('activity-mode').unpack() == 'sidebar' and not force_dialog:
             tab_page = root.activities_tab_view.append(ActivityPage(page))
             tab_page.set_title(page.title)
+            tab_page.set_icon(Gio.ThemedIcon.new(page.activity_icon))
             tab_page.get_child().tab = tab_page
         else:
             dialog = ActivityDialog(page)

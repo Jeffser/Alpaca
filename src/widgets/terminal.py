@@ -64,6 +64,7 @@ if sys.platform != 'win32':
             self.buttons = [self.dir_button]
             self.title = _("Terminal")
             self.activity_css = ['osd']
+            self.activity_icon = 'terminal-symbolic'
 
         def on_key_press(self, controller, keyval, keycode, state):
             ctrl = state & Gdk.ModifierType.CONTROL_MASK

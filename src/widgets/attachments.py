@@ -96,6 +96,7 @@ class AttachmentPage(Adw.Bin):
         self.buttons = []
         self.title = self.attachment.file_name
         self.activity_css = []
+        self.activity_icon = 'image-x-generic-symbolic' if self.attachment.file_type == 'image' else self.attachment.get_child().get_icon_name()
 
         if self.attachment.file_type != 'model_context':
             delete_button = Gtk.Button(
