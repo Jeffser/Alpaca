@@ -582,7 +582,11 @@ class FolderRow(Gtk.ListBoxRow):
         self.folder_color = new_color
         self.add_css_class('folder-{}'.format(self.folder_color))
         SQL.insert_or_update_folder(self.folder_id, self.folder_name, self.folder_color, self.folder_parent)
-        #f insert_or_update_folder(folder_id:str, folder_name:str, folder_color:str, parent:str):
+
+        folder_page = self.get_root().chat_list_navigationview.find_page(self.folder_id)
+        if folder_page:
+            folder_page.set_title(new_name)
+            folder_page.set_css_classes(['folder-{}'.format(self.folder_color)])
 
     def prompt_rename(self):
         options = {
