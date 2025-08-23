@@ -13,7 +13,7 @@ from .. import attachments
 from ...sql_manager import generate_uuid, Instance as SQL
 
 patterns = [
-    ('code', re.compile(r'\n```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
+    ('code', re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
     ('latex', re.compile(r'\\\[\n*?(.*?)\n*?\\\]|\$+\n*?(.*?)\$+\n*?', re.DOTALL)),
     ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
     ('line', re.compile(r'^\s*-{3,}\s*$')), # For live rendering

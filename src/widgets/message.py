@@ -292,6 +292,7 @@ class BlockContainer(Gtk.Box):
             SQL.insert_or_update_attachment(self.message, attachment)
 
         clean_content = re.sub(think_pattern, '', content, flags=re.DOTALL)
+        print(clean_content)
 
         for block in blocks.text_to_block_list(clean_content):
             if len(list(self)) <= 1:
