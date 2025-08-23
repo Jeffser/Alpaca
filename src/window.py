@@ -69,8 +69,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     file_filter_db = Gtk.Template.Child()
 
-    chat_list_box = Gtk.Template.Child()
-
     banner = Gtk.Template.Child()
 
     model_dropdown = Gtk.Template.Child()
