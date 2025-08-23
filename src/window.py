@@ -119,6 +119,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def activities_tab_attached(self, tabview, tabpage, index):
+        self.activities_overview.set_open(False)
         self.show_activities_stack.set_visible(True)
         if self.last_breakpoint_status:
             self.chat_splitview.set_show_content(False)

@@ -7,6 +7,7 @@ class ActivityPage(Gtk.Overlay):
 
     def __init__(self, page:Gtk.Widget):
         self.page = page
+        self.page.set_margin_bottom(40)
         self.tab = None
         super().__init__(
             child=Gtk.ScrolledWindow(
@@ -86,6 +87,7 @@ class ActivityTabWindow(Adw.Window):
         self.activities_tab_view = Adw.TabView()
         self.activities_tab_view.connect('close-page', self.tab_closed)
         self.activities_tab_view.connect('notify::selected-page', self.tab_changed)
+        self.activities_tab_view.connect('page-detached', self.tab_detached)
         tbv = Adw.ToolbarView(
             content=self.activities_tab_view
         )
@@ -112,7 +114,9 @@ class ActivityTabWindow(Adw.Window):
 
     def tab_closed(self, tabview, tabpage):
         tabpage.get_child().page.close()
-        if len(tabview.get_pages()) == 1:
+
+    def tab_detached(self, tabview, tabpage, index):
+        if len(tabview.get_pages()) == 0:
             self.close()
 
     def tab_changed(self, tabview, gparam):
