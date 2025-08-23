@@ -300,13 +300,13 @@ class Instance:
                 "SELECT id FROM chat WHERE id=?", (chat.chat_id,)
             ).fetchone():
                 c.cursor.execute(
-                    "UPDATE chat SET name=?, type=? WHERE id=?",
-                    (chat.get_name(), chat.chat_type, chat.chat_id),
+                    "UPDATE chat SET name=?, WHERE id=?",
+                    (chat.get_name(), chat.chat_id),
                 )
             else:
                 c.cursor.execute(
-                    "INSERT INTO chat (id, name, type) VALUES (?, ?, ?)",
-                    (chat.chat_id, chat.get_name(), chat.chat_type),
+                    "INSERT INTO chat (id, name) VALUES (?, ?)",
+                    (chat.chat_id, chat.get_name()),
                 )
 
     def delete_chat(chat) -> None:
@@ -327,8 +327,8 @@ class Instance:
     def duplicate_chat(old_chat, new_chat) -> None:
         with SQLiteConnection() as c:
             c.cursor.execute(
-                "INSERT INTO chat (id, name, type) VALUES (?, ?, ?)",
-                (new_chat.chat_id, new_chat.get_name(), new_chat.chat_type),
+                "INSERT INTO chat (id, name) VALUES (?, ?)",
+                (new_chat.chat_id, new_chat.get_name()),
             )
 
             for message in c.cursor.execute(

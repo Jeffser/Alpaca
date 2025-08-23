@@ -13,9 +13,13 @@ from .message import Message
 
 logger = logging.getLogger(__name__)
 
+class ChatList(Gtk.Box):
+    __gtype_name__ = 'AlpacaChatList'
+
+
+
 class Chat(Gtk.Stack):
     __gtype_name__ = 'AlpacaChat'
-    chat_type = 'chat'
 
     def __init__(self, chat_id:str=None, name:str=_("New Chat"), force_dialog_activities:bool=False):
         super().__init__(
@@ -296,7 +300,7 @@ class ChatRow(Gtk.ListBoxRow):
         list_box.remove(self)
         SQL.delete_chat(self.chat)
         if len(list(list_box)) == 0:
-            window.new_chat(chat_type='chat')
+            window.new_chat()
         if not list_box.get_selected_row() or list_box.get_selected_row() == self:
             list_box.select_row(list_box.get_row_at_index(0))
         if voice.message_dictated and voice.message_dictated.chat.chat_id == self.chat.chat_id:
@@ -304,7 +308,7 @@ class ChatRow(Gtk.ListBoxRow):
 
     def prompt_delete(self):
         dialog.simple(
-            parent = self.chat.get_root(),
+            parent = self.get_root(),
             heading = _('Delete Chat?'),
             body = _("Are you sure you want to delete '{}'?").format(self.get_name()),
             callback = lambda: self.delete(),
@@ -318,7 +322,6 @@ class ChatRow(Gtk.ListBoxRow):
         new_chat = self.get_root().add_chat(
             chat_name=new_chat_name,
             chat_id=new_chat_id,
-            chat_type=self.chat.chat_type,
             mode=1
         )
         SQL.duplicate_chat(self.chat, new_chat)
@@ -402,7 +405,7 @@ class ChatRow(Gtk.ListBoxRow):
             _("JSON (Include Metadata)"): lambda: self.export_json(True)
         }
         dialog.simple_dropdown(
-            parent = self.chat.get_root(),
+            parent = self.get_root(),
             heading = _("Export Chat"),
             body = _("Select a method to export the chat"),
             callback = lambda option, options=options: options[option](),

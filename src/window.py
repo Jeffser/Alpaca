@@ -451,7 +451,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             return Widgets.models.added.FallbackModel
 
-    def add_chat(self, chat_name:str, chat_id:str, chat_type:str, mode:int) -> Widgets.chat.Chat or None: #mode = 0: append, mode = 1: prepend
+    def add_chat(self, chat_name:str, chat_id:str, mode:int) -> Widgets.chat.Chat or None: #mode = 0: append, mode = 1: prepend
         chat_name = chat_name.strip()
         if chat_name and mode in (0, 1):
             chat_name = generate_numbered_name(chat_name, [row.get_name() for row in list(self.chat_list_box)])
@@ -468,13 +468,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     self.chat_list_box.prepend(chat.row)
                 return chat
 
-    def new_chat(self, chat_title:str=_("New Chat"), chat_type:str='chat') -> Widgets.chat.Chat or None:
+    def new_chat(self, chat_title:str=_("New Chat")) -> Widgets.chat.Chat or None:
         chat_title = chat_title.strip()
         if chat_title:
             chat = self.add_chat(
                 chat_name=chat_title,
                 chat_id=generate_uuid(),
-                chat_type=chat_type,
                 mode=1
             )
             SQL.insert_or_update_chat(chat)
@@ -492,7 +491,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.add_chat(
                     chat_name=row[1],
                     chat_id=row[0],
-                    chat_type=row[2],
                     mode=0
                 )
                 if row[0] == selected_chat and len(list(self.chat_list_box)) > 0:
@@ -548,7 +546,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.add_chat(
                     chat_name=chat[1],
                     chat_id=chat[0],
-                    chat_type='chat' if len(chat) == 2 else chat[2],
                     mode=1
                 )
             Widgets.dialog.show_toast(_("Chat imported successfully"), self)
