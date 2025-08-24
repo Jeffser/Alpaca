@@ -4,52 +4,40 @@ Manages the camera feature to send pictures to AI
 """
 
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject, Gst
-from . import attachments, dialog
+from . import attachments, dialog, activities
 import cv2, threading, base64
 import numpy as np
 
 Gst.init(None)
 pipeline = Gst.parse_launch('pipewiresrc ! videoconvert ! appsink name=sink')
 
-class CameraDialog(Adw.Dialog):
-    __gtype_name___ = 'AlpacaCameraDialog'
+class Camera(Gtk.Picture):
+    __gtype_name___ = 'AlpacaCamera'
 
     def __init__(self, capture):
         self.capture = capture
-        self.image = Gtk.Picture(
+        super().__init__(
             content_fit=2
         )
-        overlay = Gtk.Overlay(
-            child=self.image
-        )
-
-        header_bar = Adw.HeaderBar(
-            valign=1,
-            css_classes=['osd'],
-            show_title=False
-        )
-        overlay.add_overlay(header_bar)
 
         capture_button = Gtk.Button(
+            tooltip_text=_('Capture Picture'),
             child=Gtk.Image(
                 icon_name='big-dot-symbolic',
                 icon_size=2
             ),
-            halign=3,
-            valign=2,
-            css_classes=['circular', 'flat', 'camera_button', 'accent'],
-            margin_bottom=10
+            css_classes=['circular']
         )
         capture_button.connect('clicked', lambda *_: self.take_photo())
-        overlay.add_overlay(capture_button)
 
-        super().__init__(
-            follows_content_size=True,
-            child=overlay
-        )
         self.running = False
-        self.connect('closed', lambda *_: self.on_closed())
         self.connect('realize', lambda *_: self.on_realize())
+
+        # Activity
+        self.buttons = [capture_button]
+        self.title = _('Camera')
+        self.activity_css = []
+        self.activity_icon = 'camera-photo-symbolic'
 
     def on_realize(self):
         self.running = True
@@ -70,7 +58,7 @@ class CameraDialog(Adw.Dialog):
                     h,
                     w * c
                 )
-                GLib.idle_add(self.image.set_paintable, Gdk.Texture.new_for_pixbuf(pb))
+                GLib.idle_add(self.set_paintable, Gdk.Texture.new_for_pixbuf(pb))
             else:
                 break
 
@@ -89,8 +77,7 @@ class CameraDialog(Adw.Dialog):
         return new_width, new_height
 
     def take_photo(self):
-        self.capture.release()
-        texture = self.image.get_paintable()
+        texture = self.get_paintable()
         width, height = self.get_new_resolution(texture.get_width(), texture.get_height())
         texture.compute_concrete_size(width, height, width, height)
 
@@ -103,16 +90,19 @@ class CameraDialog(Adw.Dialog):
             file_content=base64.b64encode(picture_bytes).decode('utf-8')
         )
         self.get_root().global_footer.attachment_container.add_attachment(attachment)
-        self.close()
+        self.get_parent().close()
 
-    def on_closed(self):
+    def close(self):
         self.capture.release()
         self.running = False
 
 def show_webcam_dialog(root_widget:Gtk.Widget):
     capture = cv2.VideoCapture(0)
     if capture.isOpened():
-        CameraDialog(capture).present(root_widget)
+        activities.show_activity(
+            page=Camera(capture),
+            root=root_widget
+        )
     else:
         options = {
             _('Close'): {'default': True},
@@ -124,3 +114,4 @@ def show_webcam_dialog(root_widget:Gtk.Widget):
             options=options
         ).show(root_widget)
 
+#w_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):

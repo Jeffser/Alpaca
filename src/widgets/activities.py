@@ -29,17 +29,20 @@ class ActivityPage(Gtk.Overlay):
         close_button.connect('clicked', lambda button: self.close())
 
         for btn in self.page.buttons + [Gtk.Separator(), close_button]:
+            if btn.get_parent():
+                btn.get_parent().remove(btn)
             buttons_container.append(btn)
             btn.add_css_class('flat')
 
         self.add_overlay(buttons_container)
 
     def close(self):
-        if self.tab:
-            self.get_root().activities_tab_view.close_page(self.tab)
-        self.tab = None
-        self.page = None
-        self = None
+        if self.page.get_parent():
+            if self.tab:
+                self.get_root().activities_tab_view.close_page(self.tab)
+            self.tab = None
+            self.page = None
+            self = None
 
     def reload(self):
         if self.tab:
@@ -54,6 +57,8 @@ class ActivityDialog(Adw.Dialog):
         tbv=Adw.ToolbarView(css_classes=self.page.activity_css)
         hb = Adw.HeaderBar()
         for btn in page.buttons:
+            if btn.get_parent():
+                btn.get_parent().remove(btn)
             hb.pack_start(btn)
             btn.add_css_class('flat')
         tbv.add_top_bar(hb)
@@ -66,7 +71,14 @@ class ActivityDialog(Adw.Dialog):
             content_height=600
         )
 
-        self.connect('closed', lambda *_: self.page.close())
+        self.connect('closed', lambda *_: self.close())
+
+    def close(self):
+        if self.page.get_parent():
+            self.page.close()
+            self.tab = None
+            self.page = None
+            self = None
 
     def reload(self):
         self.page.reload()
@@ -84,16 +96,13 @@ class ActivityTabWindow(Adw.Window):
         )
         hb = Adw.HeaderBar()
         tbv.add_top_bar(hb)
-        tbv.add_top_bar(Adw.TabBar(
-            view=self.activities_tab_view
-        ))
         tab_overview = Adw.TabOverview(
             child=tbv,
             view=self.activities_tab_view
         )
-        overview_button = Gtk.Button(
-            icon_name='view-grid-symbolic',
-            tooltip_text=_('Overview')
+        overview_button = Adw.TabButton(
+            view=self.activities_tab_view,
+            action_name='overview.open'
         )
         overview_button.connect('clicked', lambda btn: tab_overview.set_open(True))
         hb.pack_start(overview_button)
@@ -102,6 +111,7 @@ class ActivityTabWindow(Adw.Window):
             content=tab_overview,
             title=_('Activities')
         )
+        self.connect('close-request', lambda *_: self.close())
 
     def tab_closed(self, tabview, tabpage):
         tabpage.get_child().page.close()
@@ -113,6 +123,10 @@ class ActivityTabWindow(Adw.Window):
     def tab_changed(self, tabview, gparam):
         if tabview.get_selected_page():
             self.set_title(tabview.get_selected_page().get_child().page.title)
+
+    def close(self):
+        for page in list(self.activities_tab_view.get_pages()):
+            self.activities_tab_view.close_page(page)
 
 def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
     if not page.get_parent():

@@ -105,6 +105,7 @@ class AttachmentImagePage(Gtk.DrawingArea):
         loader.write(image_data)
         loader.close()
         self.pixbuf = loader.get_pixbuf()
+        print(self.pixbuf.get_width())
 
         drag=Gtk.GestureDrag.new()
         drag.connect("drag-begin", self.on_drag_begin)
@@ -143,7 +144,7 @@ class AttachmentImagePage(Gtk.DrawingArea):
         self.title = self.attachment.file_name
         self.activity_css = []
         self.activity_icon = 'image-x-generic-symbolic'
-        #self.connect('map', lambda *_: GLib.idle_add(self.reset_view))
+        self.connect('map', lambda *_: GLib.idle_add(self.reset_view))
 
     def reset_view(self):
         self.scale = self.fit_scale()
@@ -337,11 +338,18 @@ class Attachment(Gtk.Button):
         if self.activity and self.activity.get_root():
             self.activity.reload()
         else:
-            self.activity = activities.show_activity(
-                AttachmentPage(self),
-                self.get_root(),
-                self.get_parent().get_parent().get_parent().force_dialog
-            )
+            if self.file_type == 'image':
+                self.activity = activities.show_activity(
+                    AttachmentImagePage(self),
+                    self.get_root(),
+                    self.get_parent().get_parent().get_parent().force_dialog
+                )
+            else:
+                self.activity = activities.show_activity(
+                    AttachmentPage(self),
+                    self.get_root(),
+                    self.get_parent().get_parent().get_parent().force_dialog
+                )
 
     def get_content(self) -> str:
         return self.file_content

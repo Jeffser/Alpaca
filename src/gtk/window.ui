@@ -28,7 +28,7 @@
     </child>
     <child>
       <object class="AdwBreakpoint">
-        <condition>max-width: 520sp</condition>
+        <condition>max-width: 540sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
         <setter object="model_manager_header_bar" property="title-widget"/>
         <setter object="model_manager_bottom_view_switcher" property="reveal">true</setter>
@@ -128,11 +128,17 @@
                               <object class="AdwToolbarView">
                                 <child type="top">
                                   <object class="AdwHeaderBar" id="activities_headerbar">
-                                    <child>
+                                    <child type="start">
+                                      <object class="AdwTabButton">
+                                        <property name="view">activities_tab_view</property>
+                                        <property name="action-name">overview.open</property>
+                                      </object>
+                                    </child>
+                                    <child type="start">
                                       <object class="GtkButton">
-                                        <property name="icon-name">view-grid-symbolic</property>
-                                        <property name="tooltip-text" translatable="yes">Overview</property>
-                                        <signal name="clicked" handler="activities_overview_switch"/>
+                                        <property name="icon-name">pip-out-symbolic</property>
+                                        <property name="tooltip-text" translatable="yes">Use Activity as Dialog</property>
+                                        <signal name="clicked" handler="activity_to_dialog"/>
                                       </object>
                                     </child>
                                   </object>

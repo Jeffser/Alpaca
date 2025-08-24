@@ -151,8 +151,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.activities_headerbar.set_css_classes(tabview.get_selected_page().get_child().page.activity_css)
 
     @Gtk.Template.Callback()
-    def activities_overview_switch(self, button):
-        self.activities_overview.set_open(True)
+    def activity_to_dialog(self, button):
+        page = self.activities_tab_view.get_selected_page().get_child().page
+        self.activities_tab_view.close_page(self.activities_tab_view.get_selected_page())
+        page.get_parent().set_child()
+        Widgets.activities.show_activity(page, self, True)
 
     @Gtk.Template.Callback()
     def add_instance(self, button):
