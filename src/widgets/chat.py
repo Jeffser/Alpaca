@@ -86,7 +86,7 @@ class ChatList(Adw.NavigationPage):
     def on_drop_folder(self, target, row, x, y):
         folder_page = self.get_root().chat_list_navigationview.get_previous_page(self)
         if row.folder_id != folder_page.folder_id:
-            SQL.move_chat_to_folder(row.folder_id, folder_page.folder_id)
+            SQL.move_folder_to_folder(row.folder_id, folder_page.folder_id)
             row.get_parent().remove(row)
             folder_page.folder_list_box.prepend(row)
             row.set_visible(True)
@@ -95,7 +95,8 @@ class ChatList(Adw.NavigationPage):
 
     def on_drop_chat(self, target, row, x, y):
         folder_page = self.get_root().chat_list_navigationview.get_previous_page(self)
-        SQL.move_chat_to_folder(row.chat.chat_id, folder_page.folder_id)
+        row.chat.folder_id = folder_page.folder_id
+        SQL.insert_or_update_chat(row.chat)
         row.get_parent().remove(row)
         folder_page.chat_list_box.prepend(row)
         row.set_visible(True)
@@ -174,7 +175,8 @@ class ChatList(Adw.NavigationPage):
             chat = None
             chat = Chat(
                 chat_id=chat_id,
-                name=chat_name
+                name=chat_name,
+                folder_id=self.folder_id
             )
 
             if chat:
@@ -271,7 +273,7 @@ class ChatList(Adw.NavigationPage):
 class Chat(Gtk.Stack):
     __gtype_name__ = 'AlpacaChat'
 
-    def __init__(self, chat_id:str=None, name:str=_("New Chat"), force_dialog_activities:bool=False):
+    def __init__(self, chat_id:str=None, name:str=_("New Chat"), folder_id:str=None):
         super().__init__(
             name=name,
             transition_type=1,
@@ -319,7 +321,7 @@ class Chat(Gtk.Stack):
 
         self.busy = False
         self.chat_id = chat_id
-        self.force_dialog_activities = force_dialog_activities
+        self.folder_id = folder_id
         self.row = ChatRow(self)
 
     def refresh_welcome_screen_prompts(self):
@@ -520,7 +522,8 @@ class FolderRow(Gtk.ListBoxRow):
             return True
 
     def on_drop_chat(self, target, row, x, y):
-        SQL.move_chat_to_folder(row.chat.chat_id, self.folder_id)
+        row.chat.folder_id = self.folder_id
+        SQL.insert_or_update_chat(row.chat)
         row.get_parent().remove(row)
         folder_page = self.get_root().chat_list_navigationview.find_page(self.folder_id)
         if folder_page:

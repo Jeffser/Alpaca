@@ -330,15 +330,27 @@ class Instance:
             if c.cursor.execute(
                 "SELECT id FROM chat WHERE id=?", (chat.chat_id,)
             ).fetchone():
-                c.cursor.execute(
-                    "UPDATE chat SET name=? WHERE id=?",
-                    (chat.get_name(), chat.chat_id),
-                )
+                if chat.folder_id is None:
+                    c.cursor.execute(
+                        "UPDATE chat SET name=?, folder=NULL WHERE id=?",
+                        (chat.get_name(), chat.chat_id),
+                    )
+                else:
+                    c.cursor.execute(
+                        "UPDATE chat SET name=?, folder=? WHERE id=?",
+                        (chat.get_name(), chat.folder_id, chat.chat_id),
+                    )
             else:
-                c.cursor.execute(
-                    "INSERT INTO chat (id, name) VALUES (?, ?)",
-                    (chat.chat_id, chat.get_name()),
-                )
+                if chat.folder_id is None:
+                    c.cursor.execute(
+                        "INSERT INTO chat (id, name, folder) VALUES (?, ?, NULL)",
+                        (chat.chat_id, chat.get_name()),
+                    )
+                else:
+                    c.cursor.execute(
+                        "INSERT INTO chat (id, name, folder) VALUES (?, ?, ?)",
+                        (chat.chat_id, chat.get_name(), chat.folder_id),
+                    )
 
     def delete_chat(chat) -> None:
         with SQLiteConnection() as c:
@@ -831,19 +843,6 @@ class Instance:
                 c.cursor.execute(
                     "UPDATE chat_folder SET parent=? WHERE id=?",
                     (parent_id, folder_id)
-                )
-
-    def move_chat_to_folder(chat_id:str, folder_id:str):
-        with SQLiteConnection() as c:
-            if folder_id is None:
-                c.cursor.execute(
-                    "UPDATE chat SET folder=NULL WHERE id=?",
-                    (chat_id,)
-                )
-            else:
-                c.cursor.execute(
-                    "UPDATE chat SET folder=? WHERE id=?",
-                    (folder_id, chat_id)
                 )
 
     def insert_or_update_folder(folder_id:str, folder_name:str, folder_color:str, parent:str):
