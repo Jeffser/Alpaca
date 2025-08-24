@@ -739,8 +739,8 @@ class RunCommand(Base):
 
         self.waiting_terminal = True
         term = terminal.Terminal(
-            language_getter=lambda: 'ssh',
-            code_getter=lambda: ';'.join(commands),
+            language='ssh',
+            code_getter=lambda:';'.join(commands),
             close_callback=lambda: setattr(self, 'waiting_terminal', False)
         )
         GLib.idle_add(activities.show_activity, term, bot_message.get_root(), not bot_message.chat.chat_id)

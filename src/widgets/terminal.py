@@ -8,9 +8,10 @@ import sys
 if sys.platform != 'win32':
     gi.require_version('Vte', '3.91')
     from gi.repository import Vte
-from gi.repository import Gtk, Pango, GLib, Gdk, Gio, Adw
+from gi.repository import Gtk, Pango, GLib, Gdk, Gio, Adw, GtkSource
 import os
 from ..constants import data_dir
+from . import dialog
 
 commands = {
     'python': [
@@ -44,10 +45,10 @@ if sys.platform != 'win32':
     class Terminal(Vte.Terminal):
         __gtype_name__ = 'AlpacaTerminal'
 
-        def __init__(self, language_getter:callable, code_getter:callable, extra_files_getter:callable=lambda:[], close_callback:callable=None):
-            self.language_getter = language_getter
+        def __init__(self, language:str, code_getter:callable, extra_files:list=[], close_callback:callable=None):
+            self.language = language
             self.code_getter = code_getter
-            self.extra_files_getter = extra_files_getter
+            self.extra_files = extra_files
             self.close_callback = close_callback
 
             super().__init__(css_classes=["p10"])
@@ -108,40 +109,33 @@ if sys.platform != 'win32':
                 self.close_callback()
 
         def prepare_script(self) -> list:
-            language = self.language_getter()
-            code = self.code_getter()
-            extra_files = self.extra_files_getter()
+            runtime_code = self.code_getter()
 
-            self.sourcedir = os.path.join(data_dir, 'code runner', language)
+            for ef in self.extra_files:
+                if ef.get('language') in ('js', 'javascript'):
+                    runtime_code += '\n<script>{}</script>'.format(ef.get('code'))
+                elif ef.get('language') == 'css':
+                    runtime_code += '\n<style>{}</style>'.format(ef.get('code'))
+
+            self.sourcedir = os.path.join(data_dir, 'code runner', self.language)
             self.dir_button.set_sensitive(True)
             if not os.path.isdir(self.sourcedir):
                 if not os.path.isdir(os.path.join(data_dir, 'code runner')):
                     os.mkdir(os.path.join(data_dir, 'code runner'))
                 os.mkdir(self.sourcedir)
 
-            for file in extra_files:
-                if language == 'html':
-                    if file.get('language') == 'js':
-                        with open(os.path.join(self.sourcedir, 'script.js'), 'w') as f:
-                            f.write(file.get('content'))
-                        code += '<script src="script.js">'
-                    if file.get('language') == 'css':
-                        with open(os.path.join(self.sourcedir, 'style.css'), 'w') as f:
-                            f.write(file.get('content'))
-                        code += '<link rel="stylesheet" href="style.css" type="text/css">'
-
             script = []
-            if language == 'python':
+            if self.language == 'python':
                 sourcepath = os.path.join(self.sourcedir, 'main.py')
                 sourcename = 'main.py'
                 with open(sourcepath, 'w') as f:
-                    f.write(code)
+                    f.write(runtime_code)
                 if not os.path.isfile(os.path.join(self.sourcedir, 'requirements.txt')):
                     with open(os.path.join(self.sourcedir, 'requirements.txt'), 'w') as f:
                         f.write('')
                 for command in commands.get('python'):
                     script.append(command.format(sourcepath=sourcepath, sourcename=sourcename))
-            elif language == 'mermaid':
+            elif self.language == 'mermaid':
                 sourcepath = os.path.join(self.sourcedir, 'index.html')
                 with open(sourcepath, 'w') as f:
                     f.write("""
@@ -159,20 +153,20 @@ if sys.platform != 'win32':
 </head>
 <body><div class="mermaid">{mermaid_content}</div></body>
 </html>
-                    """.format(mermaid_content=code))
+                    """.format(mermaid_content=runtime_code))
                 for command in commands.get('html'):
                     script.append(command.format(sourcedir=self.sourcedir))
 
 
-            elif language == 'html':
+            elif self.language == 'html':
                 sourcepath = os.path.join(self.sourcedir, 'index.html')
                 with open(sourcepath, 'w') as f:
-                    f.write(code)
+                    f.write(runtime_code)
                 for command in commands.get('html'):
                     script.append(command.format(sourcedir=self.sourcedir))
-            elif language in ('bash', 'ssh'):
-                for command in commands.get(language):
-                    script.append(command.format(script=code))
+            elif self.language in ('bash', 'ssh'):
+                for command in commands.get(self.language):
+                    script.append(command.format(script=runtime_code))
 
             script.append('echo -e "\n🦙 {}"'.format(_('Script Exited')))
             return script
@@ -193,11 +187,71 @@ if sys.platform != 'win32':
                 None
             )
             self.reload_button.set_sensitive(True)
+
+    class CodeRunner(Gtk.Stack):
+        __gtype_name__ = 'AlpacaCodeRunner'
+
+        def __init__(self, original_buffer:GtkSource.Buffer, language:str, extra_files:list=[], save_func:callable=None, close_callback:callable=None, default_mode:str='terminal'):
+            super().__init__(
+                transition_type=6
+            )
+            self.close_callback = close_callback
+            self.code_editor = CodeEditor(language, original_buffer, save_func)
+            self.terminal = Terminal(language, self.code_editor.get_code, extra_files)
+            self.add_named(self.terminal, 'terminal')
+            self.add_named(self.code_editor, 'editor')
+
+            self.button_stack = Gtk.Stack(
+                transition_type=1
+            )
+            terminal_buttons_container = Gtk.Box(css_classes=['linked'])
+            for btn in self.terminal.buttons:
+                terminal_buttons_container.append(btn)
+                btn.add_css_class('flat')
+                btn.add_css_class('br0')
+            code_editor_buttons_container = Gtk.Box(css_classes=['linked'])
+            for btn in self.code_editor.buttons:
+                code_editor_buttons_container.append(btn)
+                btn.add_css_class('flat')
+                btn.add_css_class('br0')
+
+            self.button_stack.add_named(terminal_buttons_container, 'terminal')
+            self.button_stack.add_named(code_editor_buttons_container, 'editor')
+
+            view_button = Gtk.ToggleButton(
+                tooltip_text=_('Edit Code'),
+                icon_name='document-edit-symbolic'
+            )
+            view_button.connect('toggled', self.change_view)
+            view_button.set_active(default_mode == 'editor')
+
+            # Activities
+            self.buttons = [view_button, self.button_stack]
+            self.title = _("Code Runner")
+            self.activity_css = []
+            self.activity_icon = 'code-symbolic'
+
+        def change_view(self, toggle):
+            self.button_stack.set_visible_child_name('editor' if toggle.get_active() else 'terminal')
+            self.set_visible_child_name('editor' if toggle.get_active() else 'terminal')
+
+        def run(self):
+            self.terminal.run()
+
+        def close(self):
+            self.terminal.close()
+            if self.close_callback:
+                self.close_callback()
+
+        def reload(self):
+            self.code_editor.reload()
+            self.terminal.reload()
+
 else:
     class Terminal(Gtk.Label):
         __gtype_name__ = 'AlpacaWindowsTerminalFallback'
 
-        def __init__(self):
+        def __init__(self, *_):
             super().__init__(
                 label=_("Alpaca Terminal is not compatible with Windows"),
                 css_classes=['error', 'p10'],
@@ -205,3 +259,75 @@ else:
                 wrap=True
             )
 
+    class CodeRunner(Terminal):
+        __gtype_name__ = 'AlpacaWindowsCodeRunnerFallback'
+
+class CodeEditor(Gtk.ScrolledWindow):
+    __gtype_name__ = 'AlpacaCodeEditor'
+
+    def __init__(self, language:str, original_buffer:GtkSource.Buffer, save_func:callable=None, close_callback:callable=None):
+        self.original_buffer = original_buffer
+        self.save_func = save_func
+        self.close_callback = close_callback
+
+        self.buffer = GtkSource.Buffer()
+        if language:
+            self.buffer.set_language(GtkSource.LanguageManager.get_default().get_language(language))
+        self.buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark'))
+
+        view = GtkSource.View(
+            auto_indent=True,
+            indent_width=4,
+            buffer=self.buffer,
+            show_line_numbers=True,
+            editable=True,
+            css_classes=["monospace", "p10"]
+        )
+        super().__init__(
+            child=view,
+            propagate_natural_width=True,
+            propagate_natural_height=True
+        )
+
+        self.reload()
+
+        save_button = Gtk.Button(
+            tooltip_text=_("Save Script"),
+            icon_name='check-plain-symbolic',
+            sensitive=self.save_func
+        )
+        save_button.connect('clicked', lambda button: self.save())
+
+        reload_button = Gtk.Button(
+            tooltip_text=_("Undo Changes"),
+            icon_name='update-symbolic'
+        )
+        reload_button.connect('clicked', lambda button: self.reload())
+
+        # Activities
+        self.buttons = [save_button, reload_button]
+        self.title = _("Code Editor")
+        self.activity_css = []
+        self.activity_icon = 'document-edit-symbolic'
+
+    def save(self):
+        code = self.get_code()
+        self.original_buffer.set_text(code, len(code.encode('utf-8')))
+        self.save_func()
+        dialog.show_toast(_("Changes saved successfully"), self.get_root())
+        if isinstance(self.get_parent(), Adw.ToolbarView):
+            self.get_ancestor(Adw.Dialog).force_close()
+
+    def get_code(self) -> str:
+        return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
+
+    def get_original_code(self) -> str:
+        return self.original_buffer.get_text(self.original_buffer.get_start_iter(), self.original_buffer.get_end_iter(), False)
+
+    def close(self):
+        if self.close_callback:
+            self.close_callback()
+
+    def reload(self):
+        code = self.get_original_code()
+        self.buffer.set_text(code, len(code.encode('utf-8')))

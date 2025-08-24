@@ -22,38 +22,22 @@ language_properties = (
     {
         'id': 'python',
         'aliases': ['python', 'python3', 'py', 'py3'],
-        'executable': True,
         'filename': 'main.py'
     },
     {
         'id': 'mermaid',
         'aliases': ['mermaid'],
-        'executable': True,
         'filename': 'index.html'
     },
     {
         'id': 'html',
         'aliases': ['html', 'htm'],
-        'executable': True,
         'filename': 'index.html'
     },
     {
         'id': 'bash',
         'aliases': ['bash', 'sh'],
-        'executable': True,
         'filename': 'script.sh'
-    },
-    {
-        'id': 'css',
-        'aliases': ['css'],
-        'executable': False,
-        'filename': 'style.css'
-    },
-    {
-        'id': 'js',
-        'aliases': ['js', 'javascript'],
-        'executable': False,
-        'filename': 'script.js'
     }
 )
 
@@ -89,22 +73,11 @@ class Code(Gtk.Box):
         title_box.append(self.language_label)
 
         # Buttons
-        self.button_stack = Gtk.Stack()
-        title_box.append(self.button_stack)
-        self.button_stack.add_named(
-            child=Gtk.Box(
-                spacing=5,
-                halign=2
-            ),
-            name="normal"
+        self.button_container = Gtk.Box(
+            spacing=5,
+            halign=2
         )
-        self.button_stack.add_named(
-            child=Gtk.Box(
-                spacing=5,
-                halign=2
-            ),
-            name="edit"
-        )
+        title_box.append(self.button_container)
 
         self.edit_button = Gtk.Button(
             icon_name="edit-symbolic",
@@ -112,7 +85,7 @@ class Code(Gtk.Box):
             tooltip_text=_("Edit Script")
         )
         self.edit_button.connect("clicked", lambda *_: self.begin_edit())
-        self.button_stack.get_child_by_name('normal').append(self.edit_button)
+        self.button_container.append(self.edit_button)
 
         copy_button = Gtk.Button(
             icon_name="edit-copy-symbolic",
@@ -120,7 +93,7 @@ class Code(Gtk.Box):
             tooltip_text=_("Copy Script")
         )
         copy_button.connect("clicked", lambda *_: self.copy_code())
-        self.button_stack.get_child_by_name('normal').append(copy_button)
+        self.button_container.append(copy_button)
 
         self.run_button = Gtk.Button(
             icon_name="execute-from-symbolic",
@@ -129,24 +102,7 @@ class Code(Gtk.Box):
             visible=False
         )
         self.run_button.connect("clicked", lambda *_: self.run_script())
-        self.button_stack.get_child_by_name('normal').append(self.run_button)
-
-        cancel_button = Gtk.Button(
-            icon_name="cross-large-symbolic",
-            css_classes=["flat", "circular"],
-            tooltip_text=_("Cancel")
-        )
-        cancel_button.connect("clicked", lambda *_: self.cancel_edit())
-        self.button_stack.get_child_by_name('edit').append(cancel_button)
-
-
-        save_button = Gtk.Button(
-            icon_name="check-plain-symbolic",
-            css_classes=["flat", "circular", "accent"],
-            tooltip_text=_("Save")
-        )
-        save_button.connect("clicked", lambda *_: self.save_edit())
-        self.button_stack.get_child_by_name('edit').append(save_button)
+        self.button_container.append(self.run_button)
 
         self.append(title_box)
         self.append(Gtk.Separator())
@@ -154,7 +110,7 @@ class Code(Gtk.Box):
         # Code view
         self.buffer = GtkSource.Buffer()
         self.buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark'))
-        self.source_view = GtkSource.View(
+        source_view = GtkSource.View(
             auto_indent=True,
             indent_width=4,
             buffer=self.buffer,
@@ -166,34 +122,30 @@ class Code(Gtk.Box):
             right_margin=12,
             css_classes=["code_block"]
         )
-        self.append(self.source_view)
+        self.append(source_view)
         self.raw_language = language
         self.code_language = None
-        self.pre_edit_code = None
         if content:
             self.set_content(content)
         if self.raw_language:
             self.set_language(self.raw_language)
 
-        self.activity = None
+        self.activity_runner = None
+        self.activity_edit = None
 
     def begin_edit(self) -> None:
-        self.button_stack.set_visible_child_name("edit")
-        self.pre_edit_code = self.get_code()
-        self.source_view.set_editable(True)
-
-    def cancel_edit(self) -> None:
-        self.button_stack.set_visible_child_name("normal")
-        self.set_content(self.pre_edit_code)
-        self.pre_edit_code = None
-        self.source_view.set_editable(False)
+        if self.activity_edit and self.activity_edit.get_root():
+            self.activity_edit.reload()
+        else:
+            ce = terminal.CodeEditor(
+                language=get_language_property(self.get_language()).get('id'),
+                original_buffer=self.buffer,
+                save_func=self.save_edit
+            )
+            self.activity_edit = activities.show_activity(ce, self.get_root())
 
     def save_edit(self) -> None:
-        self.button_stack.set_visible_child_name("normal")
-        self.pre_edit_code = None
-        self.source_view.set_editable(False)
         self.get_parent().message.save()
-        dialog.show_toast(_("Changes saved successfully"), self.get_root())
 
     def copy_code(self) -> None:
         clipboard = Gdk.Display().get_default().get_clipboard()
@@ -201,29 +153,27 @@ class Code(Gtk.Box):
         clipboard.set(text)
         dialog.show_toast(_("Code copied to the clipboard"), self.get_root())
 
-    def get_extra_files(self) -> list:
-        extra_files = []
-        for blk in [blk for blk in list(self.get_parent().message.block_container) if isinstance(blk, Code) and blk.get_language().lower() in ('css', 'javascript', 'js') and blk != self]:
-            extra_files.append({
-                'language': 'js' if blk.get_language().lower() in ('javascript', 'js') else blk.get_language().lower(),
-                'content': blk.get_code()
-            })
-        return extra_files
-
     def run_script(self) -> None:
-        if self.activity and self.activity.get_root():
-            self.activity.reload()
+        if self.activity_runner and self.activity_runner.get_root():
+            self.activity_runner.reload()
         else:
-            term = terminal.Terminal(
-                language_getter=lambda: get_language_property(self.get_language()).get('id'),
-                code_getter=self.get_code,
-                extra_files_getter=self.get_extra_files
+            extra_files = []
+            for blk in [blk for blk in list(self.get_parent().message.block_container) if isinstance(blk, Code) and blk.get_language().lower() in ('css', 'javascript', 'js') and blk != self]:
+                blk_language = blk.get_language().lower()
+                blk_code = blk.get_code()
+                extra_files.append({
+                    'language': blk_language,
+                    'code': blk_code
+                })
+
+            cr = terminal.CodeRunner(
+                original_buffer=self.buffer,
+                language=get_language_property(self.get_language()).get('id'),
+                extra_files=extra_files,
+                save_func=self.save_edit
             )
-            self.activity = activities.show_activity(
-                term,
-                self.get_root()
-            )
-            term.run()
+            self.activity_runner = activities.show_activity(cr, self.get_root())
+            cr.run()
 
     def get_code(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
@@ -239,7 +189,7 @@ class Code(Gtk.Box):
         self.code_language = GtkSource.LanguageManager.get_default().get_language(language_fallback.get(value.lower(), value))
         self.language_label.set_label(self.get_language().title())
         self.buffer.set_language(self.code_language)
-        self.run_button.set_visible(get_language_property(self.get_language()).get('executable'))
+        self.run_button.set_visible(get_language_property(self.get_language()))
 
     def get_content(self) -> str:
         return "```{}\n{}\n```".format(self.get_language().lower(), self.get_code())

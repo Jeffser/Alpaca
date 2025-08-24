@@ -63,6 +63,12 @@ class ActivityDialog(Adw.Dialog):
         for btn in page.buttons:
             if btn.get_parent():
                 btn.get_parent().remove(btn)
+            if isinstance(btn, Gtk.Stack):
+                for box in list(btn):
+                    box.remove_css_class('linked')
+                    box.set_spacing(6)
+                    for btn2 in list(box):
+                        btn2.remove_css_class('br0')
             hb.pack_start(btn)
             btn.add_css_class('flat')
         tbv.add_top_bar(hb)

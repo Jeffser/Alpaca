@@ -90,7 +90,10 @@ class AttachmentImagePage(Gtk.DrawingArea):
 
     def __init__(self, attachment):
         self.attachment = attachment
-        super().__init__()
+        super().__init__(
+            content_width=400,
+            content_height=400
+        )
 
         self.scale = 1.0
         self.offset_x = 0
@@ -105,7 +108,6 @@ class AttachmentImagePage(Gtk.DrawingArea):
         loader.write(image_data)
         loader.close()
         self.pixbuf = loader.get_pixbuf()
-        print(self.pixbuf.get_width())
 
         drag=Gtk.GestureDrag.new()
         drag.connect("drag-begin", self.on_drag_begin)
