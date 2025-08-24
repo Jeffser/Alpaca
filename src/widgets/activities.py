@@ -142,14 +142,26 @@ class ActivityTabWindow(Adw.Window):
 
 def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
     if not page.get_parent():
-        if root.get_name() == 'AlpacaWindow' and root.settings.get_value('activity-mode').unpack() == 'sidebar' and not force_dialog:
+        if root.get_name() == 'AlpacaWindow' and root.settings.get_value('activity-mode').unpack() == 0 and not force_dialog:
             tab_page = root.activities_tab_view.append(ActivityPage(page))
             tab_page.set_title(page.title)
             tab_page.set_icon(Gio.ThemedIcon.new(page.activity_icon))
             tab_page.get_child().tab = tab_page
             return tab_page.get_child()
-        else:
+        elif root.settings.get_value('activity-mode').unpack() == 1 or force_dialog:
             dialog = ActivityDialog(page)
             dialog.present(root)
             return dialog
+        else:
+            alpaca_window = root.get_application().main_alpaca_window
+            if not alpaca_window.last_external_activity_tabview or not alpaca_window.last_external_activity_tabview.get_root():
+                alpaca_window.last_external_activity_tabview = alpaca_window.activities_window_create()
+
+            tab_page = alpaca_window.last_external_activity_tabview.append(ActivityPage(page))
+            tab_page.set_title(page.title)
+            tab_page.set_icon(Gio.ThemedIcon.new(page.activity_icon))
+            tab_page.get_child().tab = tab_page
+            alpaca_window.last_external_activity_tabview.set_selected_page(tab_page)
+            return tab_page.get_child()
+
 
