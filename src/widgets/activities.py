@@ -28,11 +28,15 @@ class ActivityPage(Gtk.Overlay):
         )
         close_button.connect('clicked', lambda button: self.close())
 
-        for btn in self.page.buttons + [Gtk.Separator(), close_button]:
+        for btn in self.page.buttons:
             if btn.get_parent():
                 btn.get_parent().remove(btn)
             buttons_container.append(btn)
             btn.add_css_class('flat')
+
+        if len(self.page.buttons) > 0:
+            buttons_container.append(Gtk.Separator())
+        buttons_container.append(close_button)
 
         self.add_overlay(buttons_container)
 
