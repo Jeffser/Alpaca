@@ -384,10 +384,10 @@ class Message(Gtk.Box):
         return root
 
     def get_content(self) -> str:
-        return '\n\n'.join(self.block_container.get_content())
+        return ''.join(self.block_container.get_content())
 
     def get_content_for_dictation(self) -> str:
-        return '\n\n'.join([c.get_content_for_dictation() for c in list(self.block_container) if c is not None])
+        return '\n'.join([c.get_content_for_dictation() for c in list(self.block_container) if c is not None])
 
     def get_model(self) -> str or None:
         """
