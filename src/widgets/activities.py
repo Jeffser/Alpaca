@@ -7,18 +7,9 @@ class ActivityPage(Gtk.Overlay):
 
     def __init__(self, page:Gtk.Widget):
         self.page = page
-        self.page.set_margin_bottom(40)
         self.tab = None
         super().__init__(
-            child=Gtk.ScrolledWindow(
-                child=self.page,
-                hexpand=True,
-                vexpand=True,
-                propagate_natural_width=True,
-                propagate_natural_height=True,
-                css_classes=['undershoot-bottom'],
-                max_content_width=500
-            ),
+            child=self.page,
             css_classes=self.page.activity_css
         )
         buttons_container = Gtk.Box(
@@ -61,15 +52,7 @@ class ActivityDialog(Adw.Dialog):
             hb.pack_start(btn)
             btn.add_css_class('flat')
         tbv.add_top_bar(hb)
-        tbv.set_content(Gtk.ScrolledWindow(
-            child=self.page,
-            hexpand=True,
-            vexpand=True,
-            propagate_natural_width=True,
-            propagate_natural_height=True,
-            css_classes=['undershoot-bottom'],
-            max_content_width=500
-        ))
+        tbv.set_content(self.page)
 
         super().__init__(
             child=tbv,

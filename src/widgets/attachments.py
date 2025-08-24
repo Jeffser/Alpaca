@@ -85,18 +85,149 @@ def extract_image(image_path:str, max_size:int) -> str:
             image_data = output.getvalue()
         return base64.b64encode(image_data).decode("utf-8")
 
-class AttachmentPage(Adw.Bin):
+class AttachmentImagePage(Gtk.DrawingArea):
+    __gtype_name__ = 'AlpacaAttachmentImagePage'
+
+    def __init__(self, attachment):
+        self.attachment = attachment
+        super().__init__()
+
+        self.scale = 1.0
+        self.offset_x = 0
+        self.offset_y = 0
+        self.start_x = 0
+        self.start_y = 0
+        self.inside_image = False
+
+        self.set_draw_func(self.on_draw)
+        image_data = base64.b64decode(self.attachment.get_content())
+        loader = GdkPixbuf.PixbufLoader.new()
+        loader.write(image_data)
+        loader.close()
+        self.pixbuf = loader.get_pixbuf()
+
+        drag=Gtk.GestureDrag.new()
+        drag.connect("drag-begin", self.on_drag_begin)
+        drag.connect('drag-update', self.on_drag_update)
+        self.add_controller(drag)
+
+        scroll = Gtk.EventControllerScroll.new(Gtk.EventControllerScrollFlags.VERTICAL)
+        scroll.connect("scroll", self.on_scroll)
+        self.add_controller(scroll)
+
+        delete_button = Gtk.Button(
+            css_classes=['error'],
+            icon_name='user-trash-symbolic',
+            tooltip_text=_('Remove Attachment'),
+            vexpand=False,
+            valign=3
+        )
+        delete_button.connect('clicked', lambda *_: self.attachment.prompt_delete())
+        download_button = Gtk.Button(
+            icon_name='folder-download-symbolic',
+            tooltip_text=_('Download Attachment'),
+            vexpand=False,
+            valign=3
+        )
+        download_button.connect('clicked', lambda *_: self.attachment.prompt_download())
+        reset_button = Gtk.Button(
+            icon_name='update-symbolic',
+            tooltip_text=_('Reset View'),
+            vexpand=False,
+            valign=3
+        )
+        reset_button.connect('clicked', lambda *_: self.reset_view())
+
+        # Activity
+        self.buttons = [delete_button, download_button, reset_button]
+        self.title = self.attachment.file_name
+        self.activity_css = ['osd']
+        self.activity_icon = 'image-x-generic-symbolic'
+        #self.connect('map', lambda *_: GLib.idle_add(self.reset_view))
+
+    def reset_view(self):
+        self.scale = self.fit_scale()
+        self.offset_x = 0.0
+        self.offset_y = 0.0
+
+        self.queue_draw()
+
+    def fit_scale(self) -> float:
+        scale_w = self.get_allocated_width() / self.pixbuf.get_width()
+        scale_h = self.get_allocated_height() / self.pixbuf.get_height()
+        return min(scale_w, scale_h)
+
+    def on_draw(self, area, cr, width, height):
+        if not self.pixbuf:
+            return
+
+        self.scale = max(self.scale, self.fit_scale())
+        cr.translate(width / 2 + self.offset_x, height / 2 + self.offset_y)
+        cr.scale(self.scale, self.scale)
+        cr.translate(-self.pixbuf.get_width() / 2, -self.pixbuf.get_height() / 2)
+        Gdk.cairo_set_source_pixbuf(cr, self.pixbuf, 0, 0)
+        cr.paint()
+
+    def on_drag_begin(self, gesture, start_x, start_y):
+        self.press_x = start_x
+        self.press_y = start_y
+        self.drag_last_offset_x = 0.0
+        self.drag_last_offset_y = 0.0
+
+        image_x = self.get_allocated_width() / 2 + self.offset_x - (self.pixbuf.get_width() / 2) * self.scale
+        image_y = self.get_allocated_height() / 2 + self.offset_y - (self.pixbuf.get_height() / 2) * self.scale
+
+        image_w = self.pixbuf.get_width() * self.scale
+        image_h = self.pixbuf.get_height() * self.scale
+
+        self.inside_image = image_x <= start_x <= image_x + image_w and image_y <= start_y <= image_y + image_h
+
+    def on_drag_update(self, gesture, offset_x, offset_y):
+        if not self.inside_image:
+            return
+        px = self.press_x + offset_x
+        py = self.press_y + offset_y
+
+        w = self.get_allocated_width()
+        h = self.get_allocated_height()
+
+        inside = (0 <= px < w) and (0 <= py < h)
+
+        dx = offset_x - self.drag_last_offset_x
+        dy = offset_y - self.drag_last_offset_y
+
+        if inside:
+            self.offset_x += dx
+            self.offset_y += dy
+            self.queue_draw()
+            self.drag_last_offset_x = offset_x
+            self.drag_last_offset_y = offset_y
+
+    def on_scroll(self, controller, dx, dy):
+        state = controller.get_current_event_state()
+        if state & Gdk.ModifierType.CONTROL_MASK:
+            if dy < 0 and self.scale * 1.1 <= 3.0:
+                self.scale *= 1.1
+            elif dy > 0 and self.scale / 1.1 >= self.fit_scale():
+                self.scale /= 1.1
+            self.queue_draw()
+            return True
+        return False
+
+    def close(self):
+        pass
+
+class AttachmentPage(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentPage'
 
     def __init__(self, attachment):
         self.attachment = attachment
 
-        super().__init__()
-        # Activities
+        # Activity
         self.buttons = []
         self.title = self.attachment.file_name
         self.activity_css = []
-        self.activity_icon = 'image-x-generic-symbolic' if self.attachment.file_type == 'image' else self.attachment.get_child().get_icon_name()
+        self.activity_icon = self.attachment.get_child().get_icon_name()
 
         if self.attachment.file_type != 'model_context':
             delete_button = Gtk.Button(
@@ -118,48 +249,36 @@ class AttachmentPage(Adw.Bin):
         download_button.connect('clicked', lambda *_: self.attachment.prompt_download())
         self.buttons.append(download_button)
 
-        if self.attachment.file_type == 'image':
-            image_element = Gtk.Image(
-                hexpand=True,
-                vexpand=True,
-                css_classes=['rounded_image'],
-                margin_start=10,
-                margin_end=10,
-                margin_bottom=10
-            )
-            image_data = base64.b64decode(self.attachment.get_content())
-            loader = GdkPixbuf.PixbufLoader.new()
-            loader.write(image_data)
-            loader.close()
-            pixbuf = loader.get_pixbuf()
-            texture = Gdk.Texture.new_for_pixbuf(pixbuf)
-            image_element.set_from_paintable(texture)
-            image_element.set_size_request(360, 360)
-            image_element.set_overflow(1)
-            self.set_child(image_element)
-        else:
-            container = Gtk.Box(
-                orientation=1,
-                margin_start=10,
-                margin_end=10,
-                margin_top=10,
-                margin_bottom=10,
-                hexpand=True
-            )
+        container = Gtk.Box(
+            orientation=1,
+            margin_start=10,
+            margin_end=10,
+            margin_top=10,
+            margin_bottom=50,
+            hexpand=True
+        )
+        super().__init__(
+            child=container,
+            hexpand=True,
+            vexpand=True,
+            propagate_natural_width=True,
+            propagate_natural_height=True,
+            css_classes=['undershoot-bottom'],
+            max_content_width=500
+        )
 
-            if self.attachment.file_type == "code":
-                extension = self.attachment.file_name.split('.')[-1]
-                block = blocks.Code(self.attachment.get_content(), extension)
-                block.edit_button.set_visible(False)
-                self.set_follows_content_size(False)
-                self.set_content_width(700)
-                self.set_content_height(800)
+        if self.attachment.file_type == "code":
+            extension = self.attachment.file_name.split('.')[-1]
+            block = blocks.Code(self.attachment.get_content(), extension)
+            block.edit_button.set_visible(False)
+            self.set_follows_content_size(False)
+            self.set_content_width(700)
+            self.set_content_height(800)
+            container.append(block)
+        else:
+            content = self.attachment.get_content()
+            for block in blocks.text_to_block_list(content):
                 container.append(block)
-            else:
-                content = self.attachment.get_content()
-                for block in blocks.text_to_block_list(content):
-                    container.append(block)
-            self.set_child(container)
 
     def close(self): # Requirement for Activity
         pass
@@ -358,7 +477,7 @@ class ImageAttachment(Gtk.Button):
         self.add_controller(self.gesture_long_press)
 
     def get_page(self):
-        self.page = AttachmentPage(self)
+        self.page = AttachmentImagePage(self)
         return self.page
 
     def get_content(self) -> str:
