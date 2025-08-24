@@ -41,6 +41,11 @@ class ActivityPage(Gtk.Overlay):
         self.page = None
         self = None
 
+    def reload(self):
+        if self.tab:
+            self.get_root().activities_tab_view.set_selected_page(self.tab)
+        self.page.reload()
+
 class ActivityDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaActivityDialog'
 
@@ -62,6 +67,9 @@ class ActivityDialog(Adw.Dialog):
         )
 
         self.connect('closed', lambda *_: self.page.close())
+
+    def reload(self):
+        self.page.reload()
 
 class ActivityTabWindow(Adw.Window):
     __gtype_name__ = 'AlpacaActivityTabWindow'
@@ -107,15 +115,15 @@ class ActivityTabWindow(Adw.Window):
             self.set_title(tabview.get_selected_page().get_child().page.title)
 
 def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
-    global fun
     if not page.get_parent():
         if root.get_name() == 'AlpacaWindow' and root.settings.get_value('activity-mode').unpack() == 'sidebar' and not force_dialog:
             tab_page = root.activities_tab_view.append(ActivityPage(page))
             tab_page.set_title(page.title)
             tab_page.set_icon(Gio.ThemedIcon.new(page.activity_icon))
             tab_page.get_child().tab = tab_page
+            return tab_page.get_child()
         else:
             dialog = ActivityDialog(page)
             dialog.present(root)
-
+            return dialog
 

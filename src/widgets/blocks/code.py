@@ -5,6 +5,7 @@ Code block handling
 
 from gi.repository import Gtk, Gdk, GtkSource
 from .. import terminal, dialog, activities
+from ...sql_manager import generate_uuid
 import re, unicodedata
 
 language_fallback = {
@@ -174,6 +175,8 @@ class Code(Gtk.Box):
         if self.raw_language:
             self.set_language(self.raw_language)
 
+        self.activity = None
+
     def begin_edit(self) -> None:
         self.button_stack.set_visible_child_name("edit")
         self.pre_edit_code = self.get_code()
@@ -198,20 +201,29 @@ class Code(Gtk.Box):
         clipboard.set(text)
         dialog.show_toast(_("Code copied to the clipboard"), self.get_root())
 
-    def run_script(self) -> None:
+    def get_extra_files(self) -> list:
         extra_files = []
         for blk in [blk for blk in list(self.get_parent().message.block_container) if isinstance(blk, Code) and blk.get_language().lower() in ('css', 'javascript', 'js') and blk != self]:
             extra_files.append({
                 'language': 'js' if blk.get_language().lower() in ('javascript', 'js') else blk.get_language().lower(),
                 'content': blk.get_code()
             })
-        term = terminal.Terminal(
-            language=get_language_property(self.get_language()).get('id'),
-            code=self.get_code(),
-            extra_files=extra_files
-        )
-        activities.show_activity(term, self.get_root())
-        term.run()
+        return extra_files
+
+    def run_script(self) -> None:
+        if self.activity and self.activity.get_root():
+            self.activity.reload()
+        else:
+            term = terminal.Terminal(
+                language_getter=lambda: get_language_property(self.get_language()).get('id'),
+                code_getter=self.get_code,
+                extra_files_getter=self.get_extra_files
+            )
+            self.activity = activities.show_activity(
+                term,
+                self.get_root()
+            )
+            term.run()
 
     def get_code(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)

@@ -141,7 +141,7 @@ class AttachmentImagePage(Gtk.DrawingArea):
         # Activity
         self.buttons = [delete_button, download_button, reset_button]
         self.title = self.attachment.file_name
-        self.activity_css = ['osd']
+        self.activity_css = []
         self.activity_icon = 'image-x-generic-symbolic'
         #self.connect('map', lambda *_: GLib.idle_add(self.reset_view))
 
@@ -214,6 +214,10 @@ class AttachmentImagePage(Gtk.DrawingArea):
             return True
         return False
 
+    # Activity
+    def reload(self):
+        self.reset_view()
+
     def close(self):
         pass
 
@@ -280,7 +284,11 @@ class AttachmentPage(Gtk.ScrolledWindow):
             for block in blocks.text_to_block_list(content):
                 container.append(block)
 
-    def close(self): # Requirement for Activity
+    # Activity
+    def reload(self):
+        pass
+
+    def close(self):
         pass
 
 class Attachment(Gtk.Button):
@@ -290,7 +298,7 @@ class Attachment(Gtk.Button):
         self.file_name = file_name
         self.file_type = file_type
         self.file_content = file_content
-        self.page = None
+        self.activity = None
 
         super().__init__(
             vexpand=True,
@@ -316,14 +324,7 @@ class Attachment(Gtk.Button):
         if self.file_type == 'link':
             self.connect("clicked", lambda button, uri=self.file_content: Gio.AppInfo.launch_default_for_uri(uri))
         else:
-            self.connect(
-                "clicked",
-                lambda button: activities.show_activity(
-                    self.get_page(),
-                    self.get_root(),
-                    self.get_parent().get_parent().get_parent().force_dialog
-                )
-            )
+            self.connect("clicked", lambda button: self.show_activity())
 
         self.gesture_click = Gtk.GestureClick(button=3)
         self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
@@ -332,9 +333,15 @@ class Attachment(Gtk.Button):
         self.gesture_long_press.connect("pressed", self.show_popup)
         self.add_controller(self.gesture_long_press)
 
-    def get_page(self):
-        self.page = AttachmentPage(self)
-        return self.page
+    def show_activity(self):
+        if self.activity and self.activity.get_root():
+            self.activity.reload()
+        else:
+            self.activity = activities.show_activity(
+                AttachmentPage(self),
+                self.get_root(),
+                self.get_parent().get_parent().get_parent().force_dialog
+            )
 
     def get_content(self) -> str:
         return self.file_content
@@ -418,7 +425,7 @@ class ImageAttachment(Gtk.Button):
         self.file_name = file_name
         self.file_type = 'image'
         self.file_content = file_content
-        self.page = None
+        self.activity = None
 
         try:
             image_data = base64.b64decode(self.file_content)
@@ -437,14 +444,7 @@ class ImageAttachment(Gtk.Button):
                 tooltip_text=_("Image"),
                 overflow=1
             )
-            self.connect(
-                "clicked",
-                lambda button: activities.show_activity(
-                    self.get_page(),
-                    self.get_root(),
-                    self.get_parent().get_parent().get_parent().force_dialog
-                )
-            )
+            self.connect("clicked", lambda button: self.show_activity())
         except Exception as e:
             #logger.error(e)
             image_texture = Gtk.Image.new_from_icon_name("image-missing-symbolic")
@@ -476,9 +476,15 @@ class ImageAttachment(Gtk.Button):
         self.gesture_long_press.connect("pressed", self.show_popup)
         self.add_controller(self.gesture_long_press)
 
-    def get_page(self):
-        self.page = AttachmentImagePage(self)
-        return self.page
+    def show_activity(self):
+        if self.activity and self.activity.get_root():
+            self.activity.reload()
+        else:
+            self.activity = activities.show_activity(
+                AttachmentImagePage(self),
+                self.get_root(),
+                self.get_parent().get_parent().get_parent().force_dialog
+            )
 
     def get_content(self) -> str:
         return self.file_content

@@ -44,10 +44,10 @@ if sys.platform != 'win32':
     class Terminal(Vte.Terminal):
         __gtype_name__ = 'AlpacaTerminal'
 
-        def __init__(self, language:str, code:str, extra_files:list=[], close_callback:callable=None):
-            self.language = language
-            self.code = code
-            self.extra_files = extra_files
+        def __init__(self, language_getter:callable, code_getter:callable, extra_files_getter:callable=lambda:[], close_callback:callable=None):
+            self.language_getter = language_getter
+            self.code_getter = code_getter
+            self.extra_files_getter = extra_files_getter
             self.close_callback = close_callback
 
             super().__init__(css_classes=["p10"])
@@ -108,36 +108,40 @@ if sys.platform != 'win32':
                 self.close_callback()
 
         def prepare_script(self) -> list:
-            self.sourcedir = os.path.join(data_dir, 'code runner', self.language)
+            language = self.language_getter()
+            code = self.code_getter()
+            extra_files = self.extra_files_getter()
+
+            self.sourcedir = os.path.join(data_dir, 'code runner', language)
             self.dir_button.set_sensitive(True)
             if not os.path.isdir(self.sourcedir):
                 if not os.path.isdir(os.path.join(data_dir, 'code runner')):
                     os.mkdir(os.path.join(data_dir, 'code runner'))
                 os.mkdir(self.sourcedir)
 
-            for file in self.extra_files:
-                if self.language == 'html':
+            for file in extra_files:
+                if language == 'html':
                     if file.get('language') == 'js':
                         with open(os.path.join(self.sourcedir, 'script.js'), 'w') as f:
                             f.write(file.get('content'))
-                        self.code += '<script src="script.js">'
+                        code += '<script src="script.js">'
                     if file.get('language') == 'css':
                         with open(os.path.join(self.sourcedir, 'style.css'), 'w') as f:
                             f.write(file.get('content'))
-                        self.code += '<link rel="stylesheet" href="style.css" type="text/css">'
+                        code += '<link rel="stylesheet" href="style.css" type="text/css">'
 
             script = []
-            if self.language == 'python':
+            if language == 'python':
                 sourcepath = os.path.join(self.sourcedir, 'main.py')
                 sourcename = 'main.py'
                 with open(sourcepath, 'w') as f:
-                    f.write(self.code)
+                    f.write(code)
                 if not os.path.isfile(os.path.join(self.sourcedir, 'requirements.txt')):
                     with open(os.path.join(self.sourcedir, 'requirements.txt'), 'w') as f:
                         f.write('')
                 for command in commands.get('python'):
                     script.append(command.format(sourcepath=sourcepath, sourcename=sourcename))
-            elif self.language == 'mermaid':
+            elif language == 'mermaid':
                 sourcepath = os.path.join(self.sourcedir, 'index.html')
                 with open(sourcepath, 'w') as f:
                     f.write("""
@@ -155,20 +159,20 @@ if sys.platform != 'win32':
 </head>
 <body><div class="mermaid">{mermaid_content}</div></body>
 </html>
-                    """.format(mermaid_content=self.code))
+                    """.format(mermaid_content=code))
                 for command in commands.get('html'):
                     script.append(command.format(sourcedir=self.sourcedir))
 
 
-            elif self.language == 'html':
+            elif language == 'html':
                 sourcepath = os.path.join(self.sourcedir, 'index.html')
                 with open(sourcepath, 'w') as f:
-                    f.write(self.code)
+                    f.write(code)
                 for command in commands.get('html'):
                     script.append(command.format(sourcedir=self.sourcedir))
-            elif self.language in ('bash', 'ssh'):
-                for command in commands.get(self.language):
-                    script.append(command.format(script=self.code))
+            elif language in ('bash', 'ssh'):
+                for command in commands.get(language):
+                    script.append(command.format(script=code))
 
             script.append('echo -e "\n🦙 {}"'.format(_('Script Exited')))
             return script
