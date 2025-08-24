@@ -346,10 +346,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         # Bring tab to top
         row = current_chat.row
-        row.get_parent().unselect_all()
-        row.get_parent().remove(row)
-        row.get_parent().prepend(row)
-        row.get_parent().select_row(row)
+        chat_list = row.get_parent()
+        chat_list.unselect_all()
+        chat_list.remove(row)
+        chat_list.prepend(row)
+        chat_list.select_row(row)
 
         m_element = Widgets.message.Message(
             dt=datetime.now(),
