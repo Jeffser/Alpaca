@@ -77,6 +77,8 @@ class ToolRunDialog(Adw.Dialog):
         self.m_element_bot.block_container.prepare_generating_block()
         self.m_element_bot.block_container.add_css_class('dim-label')
         self.m_element_bot.options_button.set_visible(False)
+        self.m_element_bot.image_attachment_container.force_dialog = True
+        self.m_element_bot.attachment_container.force_dialog = True
         temp_chat.add_message(self.m_element_bot)
         self.main_stack.add_named(temp_chat, 'chat')
 
