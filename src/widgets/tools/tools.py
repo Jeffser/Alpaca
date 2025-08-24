@@ -729,32 +729,27 @@ class RunCommand(Base):
                 arguments.get('explanation', _('No explanation was provided')),
                 _('Make sure you understand what the command does before running it.')
             ),
-            "ssh -t -p {} {}@{} -- '{}' 2>&1 | tee '{}'".format(
+            "ssh -t -p {} {}@{} -- '{}'".format(
                self.variables.get('port', {}).get('value', 22),
                self.variables.get('username', {}).get('value', os.getenv('USER')),
                self.variables.get('ip', {}).get('value', '127.0.0.1'),
-               arguments.get('command').replace("'", "\\'"),
-               os.path.join(data_dir, "ssh_output.txt")
+               'clear;' + arguments.get('command').replace("'", "\\'"),
             )
         ]
 
         self.waiting_terminal = True
         term = terminal.Terminal(
+            language='ssh',
+            code=';'.join(commands),
             close_callback=lambda: setattr(self, 'waiting_terminal', False)
         )
         GLib.idle_add(activities.show_activity, term, bot_message.get_root(), not bot_message.chat.chat_id)
-        term.run(
-            code_language='ssh',
-            file_content=';'.join(commands)
-        )
+        term.run()
 
         while self.waiting_terminal:
             time.sleep(1)
 
-        command_result = '(No Output)'
-        if os.path.isfile(os.path.join(data_dir, "ssh_output.txt")):
-            with open(os.path.join(data_dir, "ssh_output.txt"), 'r') as f:
-                command_result = f.read()
+        command_result = term.get_text() or '(No Output)'
 
         return False, '```\n{}\n```'.format(command_result)
 

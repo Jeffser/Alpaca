@@ -205,13 +205,13 @@ class Code(Gtk.Box):
                 'language': 'js' if blk.get_language().lower() in ('javascript', 'js') else blk.get_language().lower(),
                 'content': blk.get_code()
             })
-        term = terminal.Terminal()
-        activities.show_activity(term, self.get_root())
-        term.run(
-            code_language=get_language_property(self.get_language()).get('id'),
-            file_content=self.get_code(),
+        term = terminal.Terminal(
+            language=get_language_property(self.get_language()).get('id'),
+            code=self.get_code(),
             extra_files=extra_files
         )
+        activities.show_activity(term, self.get_root())
+        term.run()
 
     def get_code(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)

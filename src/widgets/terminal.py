@@ -44,7 +44,12 @@ if sys.platform != 'win32':
     class Terminal(Vte.Terminal):
         __gtype_name__ = 'AlpacaTerminal'
 
-        def __init__(self, close_callback:callable=None):
+        def __init__(self, language:str, code:str, extra_files:list=[], close_callback:callable=None):
+            self.language = language
+            self.code = code
+            self.extra_files = extra_files
+            self.close_callback = close_callback
+
             super().__init__(css_classes=["p10"])
             self.set_font(Pango.FontDescription.from_string("Monospace 12"))
             self.set_clear_background(False)
@@ -58,13 +63,30 @@ if sys.platform != 'win32':
                 sensitive=False
             )
             self.dir_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri('file://{}'.format(self.sourcedir)))
-            self.close_callback = close_callback
+
+            self.reload_button = Gtk.Button(
+                tooltip_text=_("Reload Script"),
+                icon_name='update-symbolic',
+                sensitive=False
+            )
+            self.reload_button.connect('clicked', lambda button: self.reload())
 
             # Activities
-            self.buttons = [self.dir_button]
+            self.buttons = [self.dir_button, self.reload_button]
             self.title = _("Terminal")
             self.activity_css = ['osd']
             self.activity_icon = 'terminal-symbolic'
+
+        def reload(self):
+            try:
+                self.feed_child(b"\x03")
+                self.reset(True, True)
+            except:
+                pass
+            self.run()
+
+        def get_text(self) -> str:
+            return self.get_text_format(1)
 
         def on_key_press(self, controller, keyval, keycode, state):
             ctrl = state & Gdk.ModifierType.CONTROL_MASK
@@ -85,37 +107,37 @@ if sys.platform != 'win32':
             if self.close_callback:
                 self.close_callback()
 
-        def run(self, code_language:str, file_content:str, extra_files:list=[]) -> None:
-            self.sourcedir = os.path.join(data_dir, 'code runner', code_language)
+        def prepare_script(self) -> list:
+            self.sourcedir = os.path.join(data_dir, 'code runner', self.language)
             self.dir_button.set_sensitive(True)
             if not os.path.isdir(self.sourcedir):
                 if not os.path.isdir(os.path.join(data_dir, 'code runner')):
                     os.mkdir(os.path.join(data_dir, 'code runner'))
                 os.mkdir(self.sourcedir)
 
-            for file in extra_files:
-                if code_language == 'html':
+            for file in self.extra_files:
+                if self.language == 'html':
                     if file.get('language') == 'js':
                         with open(os.path.join(self.sourcedir, 'script.js'), 'w') as f:
                             f.write(file.get('content'))
-                        file_content += '<script src="script.js">'
+                        self.code += '<script src="script.js">'
                     if file.get('language') == 'css':
                         with open(os.path.join(self.sourcedir, 'style.css'), 'w') as f:
                             f.write(file.get('content'))
-                        file_content += '<link rel="stylesheet" href="style.css" type="text/css">'
+                        self.code += '<link rel="stylesheet" href="style.css" type="text/css">'
 
             script = []
-            if code_language == 'python':
+            if self.language == 'python':
                 sourcepath = os.path.join(self.sourcedir, 'main.py')
                 sourcename = 'main.py'
                 with open(sourcepath, 'w') as f:
-                    f.write(file_content)
+                    f.write(self.code)
                 if not os.path.isfile(os.path.join(self.sourcedir, 'requirements.txt')):
                     with open(os.path.join(self.sourcedir, 'requirements.txt'), 'w') as f:
                         f.write('')
                 for command in commands.get('python'):
                     script.append(command.format(sourcepath=sourcepath, sourcename=sourcename))
-            elif code_language == 'mermaid':
+            elif self.language == 'mermaid':
                 sourcepath = os.path.join(self.sourcedir, 'index.html')
                 with open(sourcepath, 'w') as f:
                     f.write("""
@@ -133,28 +155,30 @@ if sys.platform != 'win32':
 </head>
 <body><div class="mermaid">{mermaid_content}</div></body>
 </html>
-                    """.format(mermaid_content=file_content))
+                    """.format(mermaid_content=self.code))
                 for command in commands.get('html'):
                     script.append(command.format(sourcedir=self.sourcedir))
 
 
-            elif code_language == 'html':
+            elif self.language == 'html':
                 sourcepath = os.path.join(self.sourcedir, 'index.html')
                 with open(sourcepath, 'w') as f:
-                    f.write(file_content)
+                    f.write(self.code)
                 for command in commands.get('html'):
                     script.append(command.format(sourcedir=self.sourcedir))
-            elif code_language in ('bash', 'ssh'):
-                for command in commands.get(code_language):
-                    script.append(command.format(script=file_content))
+            elif self.language in ('bash', 'ssh'):
+                for command in commands.get(self.language):
+                    script.append(command.format(script=self.code))
 
             script.append('echo -e "\n🦙 {}"'.format(_('Script Exited')))
+            return script
 
+        def run(self):
             pty = Vte.Pty.new_sync(Vte.PtyFlags.DEFAULT, None)
             self.set_pty(pty)
             pty.spawn_async(
                 GLib.get_current_dir(),
-                ['bash', '-c', ';\n'.join(script)],
+                ['bash', '-c', ';\n'.join(self.prepare_script())],
                 [],
                 GLib.SpawnFlags.DEFAULT,
                 None,
@@ -164,6 +188,7 @@ if sys.platform != 'win32':
                 None,
                 None
             )
+            self.reload_button.set_sensitive(True)
 else:
     class Terminal(Gtk.Label):
         __gtype_name__ = 'AlpacaWindowsTerminalFallback'
