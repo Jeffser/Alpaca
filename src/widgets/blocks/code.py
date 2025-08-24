@@ -139,12 +139,13 @@ class Code(Gtk.Box):
         else:
             ce = terminal.CodeEditor(
                 language=get_language_property(self.get_language()).get('id'),
-                original_buffer=self.buffer,
+                code_getter=self.get_code,
                 save_func=self.save_edit
             )
             self.activity_edit = activities.show_activity(ce, self.get_root())
 
-    def save_edit(self) -> None:
+    def save_edit(self, code:str) -> None:
+        self.buffer.set_text(code, len(code.encode('utf-8')))
         self.get_parent().message.save()
 
     def copy_code(self) -> None:
@@ -167,7 +168,7 @@ class Code(Gtk.Box):
                 })
 
             cr = terminal.CodeRunner(
-                original_buffer=self.buffer,
+                code_getter=self.get_code,
                 language=get_language_property(self.get_language()).get('id'),
                 extra_files=extra_files,
                 save_func=self.save_edit

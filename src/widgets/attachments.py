@@ -12,7 +12,7 @@ from PIL import Image
 from ..constants import cache_dir
 import requests, json, base64, tempfile, shutil, logging, threading, os, re
 
-from . import blocks, dialog, camera, voice, activities
+from . import blocks, dialog, camera, voice, activities, terminal
 from ..sql_manager import Instance as SQL
 
 logger = logging.getLogger(__name__)
@@ -346,6 +346,26 @@ class Attachment(Gtk.Button):
                     self.get_root(),
                     self.get_parent().get_parent().get_parent().force_dialog
                 )
+            elif self.file_type == 'code':
+                code = self.get_content()
+                language = None
+                try:
+                    language = self.file_name.split('.')[-1].lower()
+                except:
+                    pass
+                page = terminal.CodeEditor(
+                    language=language,
+                    code_getter=lambda:code
+                )
+                page.title = self.file_name
+                page.activity_icon = 'code-symbolic'
+
+                self.activity = activities.show_activity(
+                    page,
+                    self.get_root(),
+                    self.get_parent().get_parent().get_parent().force_dialog
+                )
+
             else:
                 self.activity = activities.show_activity(
                     AttachmentPage(self),

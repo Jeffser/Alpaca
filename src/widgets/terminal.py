@@ -191,12 +191,12 @@ if sys.platform != 'win32':
     class CodeRunner(Gtk.Stack):
         __gtype_name__ = 'AlpacaCodeRunner'
 
-        def __init__(self, original_buffer:GtkSource.Buffer, language:str, extra_files:list=[], save_func:callable=None, close_callback:callable=None, default_mode:str='terminal'):
+        def __init__(self, code_getter:callable, language:str, extra_files:list=[], save_func:callable=None, close_callback:callable=None, default_mode:str='terminal'):
             super().__init__(
                 transition_type=6
             )
             self.close_callback = close_callback
-            self.code_editor = CodeEditor(language, original_buffer, save_func)
+            self.code_editor = CodeEditor(language, code_getter, save_func)
             self.terminal = Terminal(language, self.code_editor.get_code, extra_files)
             self.add_named(self.terminal, 'terminal')
             self.add_named(self.code_editor, 'editor')
@@ -265,8 +265,8 @@ else:
 class CodeEditor(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaCodeEditor'
 
-    def __init__(self, language:str, original_buffer:GtkSource.Buffer, save_func:callable=None, close_callback:callable=None):
-        self.original_buffer = original_buffer
+    def __init__(self, language:str, code_getter:callable, save_func:callable=None, close_callback:callable=None):
+        self.get_original_code = code_getter
         self.save_func = save_func
         self.close_callback = close_callback
 
@@ -275,54 +275,51 @@ class CodeEditor(Gtk.ScrolledWindow):
             self.buffer.set_language(GtkSource.LanguageManager.get_default().get_language(language))
         self.buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark'))
 
-        view = GtkSource.View(
+        self.view = GtkSource.View(
             auto_indent=True,
             indent_width=4,
             buffer=self.buffer,
             show_line_numbers=True,
-            editable=True,
-            css_classes=["monospace", "p10"]
+            editable=bool(save_func),
+            css_classes=["monospace"]
         )
         super().__init__(
-            child=view,
+            child=self.view,
             propagate_natural_width=True,
             propagate_natural_height=True
         )
 
         self.reload()
 
-        save_button = Gtk.Button(
-            tooltip_text=_("Save Script"),
-            icon_name='check-plain-symbolic',
-            sensitive=self.save_func
-        )
-        save_button.connect('clicked', lambda button: self.save())
-
-        reload_button = Gtk.Button(
-            tooltip_text=_("Undo Changes"),
-            icon_name='update-symbolic'
-        )
-        reload_button.connect('clicked', lambda button: self.reload())
-
         # Activities
-        self.buttons = [save_button, reload_button]
+        self.buttons = []
         self.title = _("Code Editor")
         self.activity_css = []
         self.activity_icon = 'document-edit-symbolic'
 
+        if save_func:
+            save_button = Gtk.Button(
+                tooltip_text=_("Save Script"),
+                icon_name='check-plain-symbolic'
+            )
+            save_button.connect('clicked', lambda button: self.save())
+
+            reload_button = Gtk.Button(
+                tooltip_text=_("Undo Changes"),
+                icon_name='update-symbolic'
+            )
+            reload_button.connect('clicked', lambda button: self.reload())
+            self.buttons = [save_button, reload_button]
+
     def save(self):
         code = self.get_code()
-        self.original_buffer.set_text(code, len(code.encode('utf-8')))
-        self.save_func()
+        self.save_func(code)
         dialog.show_toast(_("Changes saved successfully"), self.get_root())
         if isinstance(self.get_parent(), Adw.ToolbarView):
             self.get_ancestor(Adw.Dialog).force_close()
 
     def get_code(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
-
-    def get_original_code(self) -> str:
-        return self.original_buffer.get_text(self.original_buffer.get_start_iter(), self.original_buffer.get_end_iter(), False)
 
     def close(self):
         if self.close_callback:
