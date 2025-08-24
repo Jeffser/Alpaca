@@ -137,6 +137,8 @@ class ActivityTabWindow(Adw.Window):
     def close(self):
         for page in list(self.activities_tab_view.get_pages()):
             self.activities_tab_view.close_page(page)
+        self.set_child()
+        self.activities_tab_view = None
 
 def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
     if not page.get_parent():

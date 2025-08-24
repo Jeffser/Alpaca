@@ -90,6 +90,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     last_breakpoint_status = False
 
     chat_searchbar = Gtk.Template.Child()
+    last_external_activity_tabview = None # Used when detaching activities
 
     @Gtk.Template.Callback()
     def chat_list_page_changed(self, navigationview, page=None):
@@ -139,7 +140,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         tabview.set_selected_page(tabpage)
 
     @Gtk.Template.Callback()
-    def activities_window_create(self, tabview):
+    def activities_window_create(self, tabview=None):
         atw = Widgets.activities.ActivityTabWindow()
         atw.present()
         return atw.activities_tab_view
@@ -152,10 +153,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def activity_to_dialog(self, button):
-        page = self.activities_tab_view.get_selected_page().get_child().page
-        self.activities_tab_view.close_page(self.activities_tab_view.get_selected_page())
-        page.get_parent().set_child()
-        Widgets.activities.show_activity(page, self, True)
+        if not self.last_external_activity_tabview or not self.last_external_activity_tabview.get_root():
+            self.last_external_activity_tabview = self.activities_window_create()
+        self.activities_tab_view.transfer_page(
+            self.activities_tab_view.get_selected_page(),
+            self.last_external_activity_tabview,
+            0
+        )
 
     @Gtk.Template.Callback()
     def add_instance(self, button):

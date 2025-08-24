@@ -137,7 +137,7 @@
                                     <child type="start">
                                       <object class="GtkButton">
                                         <property name="icon-name">pip-out-symbolic</property>
-                                        <property name="tooltip-text" translatable="yes">Use Activity as Dialog</property>
+                                        <property name="tooltip-text" translatable="yes">Detach Activity</property>
                                         <signal name="clicked" handler="activity_to_dialog"/>
                                       </object>
                                     </child>

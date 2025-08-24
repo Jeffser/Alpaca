@@ -281,7 +281,7 @@ class CodeEditor(Gtk.ScrolledWindow):
             buffer=self.buffer,
             show_line_numbers=True,
             editable=bool(save_func),
-            css_classes=["monospace"]
+            css_classes=["monospace", "p10-vertical"]
         )
         super().__init__(
             child=self.view,
