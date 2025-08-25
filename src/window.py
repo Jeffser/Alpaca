@@ -122,6 +122,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def activities_tab_detached(self, tabview, tabpage, index):
         if len(tabview.get_pages()) == 0:
+            self.split_view_overlay.set_show_sidebar(True)
             self.chat_splitview.set_collapsed(True)
             self.chat_splitview.set_show_content(True)
             self.show_activities_stack.set_visible(False)
