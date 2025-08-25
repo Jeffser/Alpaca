@@ -12,7 +12,7 @@
     <property name="title">Alpaca</property>
     <child>
       <object class="AdwBreakpoint">
-        <condition>max-width: 720sp</condition>
+        <condition>max-width: 740sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
       </object>
     </child>
@@ -113,7 +113,7 @@
                 <child>
                   <object class="AdwNavigationSplitView" id="chat_splitview">
                     <property name="collapsed" bind-source="show_activities_toggle" bind-property="active" bind-flags="invert-boolean"/>
-                    <property name="sidebar-width-fraction">0.4</property>
+                    <property name="sidebar-width-fraction">0.5</property>
                     <property name="sidebar-width-unit">1</property>
                     <property name="sidebar-position">1</property>
                     <property name="show-content">true</property>
