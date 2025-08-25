@@ -244,8 +244,8 @@ if sys.platform != 'win32':
                 self.close_callback()
 
         def on_reload(self):
-            self.code_editor.reload()
-            self.terminal.reload()
+            self.code_editor.on_reload()
+            self.terminal.on_reload()
 
 else:
     class Terminal(Gtk.Label):
