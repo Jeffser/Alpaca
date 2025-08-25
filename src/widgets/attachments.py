@@ -841,7 +841,8 @@ class GlobalAttachmentButton(Gtk.Button):
             vexpand=False,
             valign=3,
             icon_name='chain-link-loose-symbolic',
-            css_classes=['circular']
+            css_classes=['circular'],
+            tooltip_text=_('Attach File')
         )
         self.connect('clicked', lambda button: self.get_root().global_footer.attachment_container.attachment_request())
         gesture_click = Gtk.GestureClick(button=3)

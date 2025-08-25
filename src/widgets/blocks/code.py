@@ -62,7 +62,7 @@ class Code(Gtk.Box):
             margin_start=12,
             margin_top=3,
             margin_bottom=3,
-            margin_end=12,
+            margin_end=3,
             spacing=5
         )
         self.language_label = Gtk.Label(
@@ -74,31 +74,31 @@ class Code(Gtk.Box):
 
         # Buttons
         self.button_container = Gtk.Box(
-            spacing=5,
-            halign=2
+            halign=2,
+            css_classes=['linked']
         )
         title_box.append(self.button_container)
 
         self.edit_button = Gtk.Button(
             icon_name="edit-symbolic",
-            css_classes=["flat", "circular"],
-            tooltip_text=_("Edit Script")
+            tooltip_text=_("Edit Script"),
+            css_classes=['flat']
         )
         self.edit_button.connect("clicked", lambda *_: self.begin_edit())
         self.button_container.append(self.edit_button)
 
         copy_button = Gtk.Button(
             icon_name="edit-copy-symbolic",
-            css_classes=["flat", "circular"],
-            tooltip_text=_("Copy Script")
+            tooltip_text=_("Copy Script"),
+            css_classes=['flat']
         )
         copy_button.connect("clicked", lambda *_: self.copy_code())
         self.button_container.append(copy_button)
 
         self.run_button = Gtk.Button(
             icon_name="execute-from-symbolic",
-            css_classes=["flat", "circular", "accent"],
             tooltip_text=_("Run Script"),
+            css_classes=['accent', 'flat'],
             visible=False
         )
         self.run_button.connect("clicked", lambda *_: self.run_script())

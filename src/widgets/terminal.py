@@ -228,7 +228,7 @@ if sys.platform != 'win32':
             # Activities
             self.buttons = [view_button, self.button_stack]
             self.title = _("Code Runner")
-            self.activity_css = []
+            self.activity_css = ['osd']
             self.activity_icon = 'code-symbolic'
 
         def change_view(self, toggle):
