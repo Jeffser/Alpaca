@@ -14,8 +14,9 @@ pipeline = Gst.parse_launch('pipewiresrc ! videoconvert ! appsink name=sink')
 class Camera(Gtk.Picture):
     __gtype_name___ = 'AlpacaCamera'
 
-    def __init__(self, capture):
+    def __init__(self, capture, attachment_func:callable):
         self.capture = capture
+        self.attachment_func = attachment_func
         super().__init__(
             content_fit=2
         )
@@ -89,18 +90,21 @@ class Camera(Gtk.Picture):
             file_type='image',
             file_content=base64.b64encode(picture_bytes).decode('utf-8')
         )
-        self.get_root().global_footer.attachment_container.add_attachment(attachment)
+        self.attachment_func(attachment)
         self.get_parent().close()
 
     def close(self):
         self.capture.release()
         self.running = False
 
-def show_webcam_dialog(root_widget:Gtk.Widget):
+def show_webcam_dialog(root_widget:Gtk.Widget, attachment_func:callable):
     capture = cv2.VideoCapture(0)
     if capture.isOpened():
         activities.show_activity(
-            page=Camera(capture),
+            page=Camera(
+                capture,
+                attachment_func
+            ),
             root=root_widget
         )
     else:

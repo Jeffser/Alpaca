@@ -84,7 +84,8 @@ class ActivityDialog(Adw.Dialog):
         self.connect('closed', lambda *_: self.close())
 
     def close(self):
-        if self.page.get_parent():
+        self.force_close()
+        if self.page and self.page.get_parent():
             self.page.close()
             self.tab = None
             self.page = None
@@ -135,10 +136,12 @@ class ActivityTabWindow(Adw.Window):
             self.set_title(tabview.get_selected_page().get_child().page.title)
 
     def close(self):
-        for page in list(self.activities_tab_view.get_pages()):
-            self.activities_tab_view.close_page(page)
+        if self.activities_tab_view:
+            for page in list(self.activities_tab_view.get_pages()):
+                self.activities_tab_view.close_page(page)
         self.set_child()
         self.activities_tab_view = None
+        super().close()
 
 def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
     if not page.get_parent():

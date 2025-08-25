@@ -125,14 +125,14 @@ class AttachmentImagePage(Gtk.DrawingArea):
             vexpand=False,
             valign=3
         )
-        delete_button.connect('clicked', lambda *_: self.attachment.prompt_delete())
+        delete_button.connect('clicked', lambda *_: self.attachment.prompt_delete(self.get_root()))
         download_button = Gtk.Button(
             icon_name='folder-download-symbolic',
             tooltip_text=_('Download Attachment'),
             vexpand=False,
             valign=3
         )
-        download_button.connect('clicked', lambda *_: self.attachment.prompt_download())
+        download_button.connect('clicked', lambda *_: self.attachment.prompt_download(self.get_root()))
         reset_button = Gtk.Button(
             icon_name='update-symbolic',
             tooltip_text=_('Reset View'),
@@ -244,7 +244,7 @@ class AttachmentPage(Gtk.ScrolledWindow):
                 vexpand=False,
                 valign=3
             )
-            delete_button.connect('clicked', lambda *_: self.attachment.prompt_delete())
+            delete_button.connect('clicked', lambda *_: self.attachment.prompt_delete(self.get_root()))
             self.buttons.append(delete_button)
 
         download_button = Gtk.Button(
@@ -253,7 +253,7 @@ class AttachmentPage(Gtk.ScrolledWindow):
             vexpand=False,
             valign=3
         )
-        download_button.connect('clicked', lambda *_: self.attachment.prompt_download())
+        download_button.connect('clicked', lambda *_: self.attachment.prompt_download(self.get_root()))
         self.buttons.append(download_button)
 
         container = Gtk.Box(
@@ -359,6 +359,26 @@ class Attachment(Gtk.Button):
                 )
                 page.title = self.file_name
                 page.activity_icon = 'code-symbolic'
+                page.buttons = []
+
+                delete_button = Gtk.Button(
+                    css_classes=['error'],
+                    icon_name='user-trash-symbolic',
+                    tooltip_text=_('Remove Attachment'),
+                    vexpand=False,
+                    valign=3
+                )
+                delete_button.connect('clicked', lambda *_: self.prompt_delete(page.get_root()))
+                page.buttons.append(delete_button)
+
+                download_button = Gtk.Button(
+                    icon_name='folder-download-symbolic',
+                    tooltip_text=_('Download Attachment'),
+                    vexpand=False,
+                    valign=3
+                )
+                download_button.connect('clicked', lambda *_: self.prompt_download(page.get_root()))
+                page.buttons.append(download_button)
 
                 self.activity = activities.show_activity(
                     page,
@@ -377,17 +397,17 @@ class Attachment(Gtk.Button):
         return self.file_content
 
     def delete(self):
-        if self.page:
-            self.page.get_parent().get_parent().get_parent().close()
+        if self.activity:
+            self.activity.close()
         if len(list(self.get_parent())) == 1:
             self.get_parent().get_parent().get_parent().set_visible(False)
         self.get_parent().remove(self)
         if self.get_name() != "-1":
             SQL.delete_attachment(self)
 
-    def prompt_delete(self):
+    def prompt_delete(self, override_root=None):
         dialog.simple(
-            parent = self.get_root(),
+            parent = override_root or self.get_root(),
             heading = _('Delete Attachment?'),
             body = _("Are you sure you want to delete '{}'?").format(self.file_name),
             callback = lambda: self.delete(),
@@ -410,7 +430,7 @@ class Attachment(Gtk.Button):
         except GLib.Error as e:
             logger.error(e)
 
-    def prompt_download(self):
+    def prompt_download(self, override_root=None):
         name = os.path.splitext(self.file_name)[0]
         if self.file_type == 'image':
             name += '.png'
@@ -423,7 +443,7 @@ class Attachment(Gtk.Button):
             title=_("Save Attachment"),
             initial_name=name
         )
-        dialog.save(self.get_root(), None, self.on_download, None)
+        dialog.save(override_root or self.get_root(), None, self.on_download, None)
 
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()
@@ -520,17 +540,17 @@ class ImageAttachment(Gtk.Button):
         return self.file_content
 
     def delete(self):
-        if self.page:
-            self.page.get_parent().get_parent().get_parent().close()
+        if self.activity:
+            self.activity.close()
         if len(list(self.get_parent())) == 1:
             self.get_parent().get_parent().get_parent().set_visible(False)
         self.get_parent().remove(self)
         if self.get_name() != "-1":
             SQL.delete_attachment(self)
 
-    def prompt_delete(self):
+    def prompt_delete(self, override_root=None):
         dialog.simple(
-            parent = self.get_root(),
+            parent = override_root or self.get_root(),
             heading = _('Delete Image?'),
             body = _("Are you sure you want to delete '{}'?").format(self.file_name),
             callback = lambda: self.delete(),
@@ -549,7 +569,7 @@ class ImageAttachment(Gtk.Button):
         except GLib.Error as e:
             logger.error(e)
 
-    def prompt_download(self):
+    def prompt_download(self, override_root=None):
         name = os.path.splitext(self.file_name)[0] + '.png'
         name = re.sub(r'[<>:"/\\|?*\x00-\x1F]', '_', name)
 
@@ -557,7 +577,7 @@ class ImageAttachment(Gtk.Button):
             title=_("Save Image"),
             initial_name=name
         )
-        dialog.save(self.get_root(), None, self.on_download, None)
+        dialog.save(override_root or self.get_root(), None, self.on_download, None)
 
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()
@@ -839,7 +859,10 @@ class GlobalAttachmentButton(Gtk.Button):
                 },
                 {
                     'label': _('Attach Photo From Camera'),
-                    'callback': lambda: camera.show_webcam_dialog(self.get_root()),
+                    'callback': lambda: camera.show_webcam_dialog(
+                        self.get_root(),
+                        lambda att: self.get_root().global_footer.attachment_container.add_attachment(att)
+                    ),
                     'icon': 'camera-photo-symbolic'
                 }
             ]
