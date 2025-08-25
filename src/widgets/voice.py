@@ -8,7 +8,7 @@ import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
 from ..sql_manager import Instance as SQL
 from ..constants import data_dir, cache_dir, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
-from . import dialog, models, blocks
+from . import dialog, models, blocks, activities
 
 import os, threading, importlib.util, re, unicodedata, gc, queue, time, logging
 import numpy as np
@@ -287,52 +287,34 @@ class MicrophoneButton(Gtk.Stack):
             button.set_sensitive(False)
             GLib.timeout_add(2000, lambda button: button.set_sensitive(True) and False, button)
 
-class TranscriptionDialog(Adw.Dialog):
-    __gtype_name__ = 'AlpacaTranscriptionDialog'
+class TranscriptionPage(Adw.Bin):
+    __gtype_name__ = 'AlpacaTranscriptionPage'
 
-    def __init__(self, attachment, file_path):
-        self.attachment = attachment
+    def __init__(self, attachment_func:callable, file_path:str):
+        self.attachment_func = attachment_func
         self.file_path = file_path
         self.pulling_model = None
-
-        container = Gtk.Box(
-            orientation=1,
-            spacing=30
-        )
-        container.append(Adw.Spinner())
-
-        cancel_button = Gtk.Button(
-            tooltip_text=_('Cancel'),
-            child=Adw.ButtonContent(
-                icon_name='media-playback-stop-symbolic',
-                label=_('Cancel')
-            ),
-            halign=3,
-            css_classes=['error']
-        )
-        cancel_button.connect('clicked', self.cancel)
-        container.append(cancel_button)
 
         super().__init__(
             child=Adw.StatusPage(
                 title=_('Transcribing Audio'),
-                description=self.attachment.file_name,
-                child=container
-            ),
-            content_width=300,
-            can_close=False
+                description=os.path.basename(self.file_path),
+                child=Adw.Spinner()
+            )
         )
 
-    def cancel(self, button=None):
-        self.attachment.delete()
-        self.force_close()
+        # Activities
+        self.buttons = []
+        self.title = _("Transcriber")
+        self.activity_css = []
+        self.activity_icon = 'music-note-single-symbolic'
 
     def prepare_transcription(self, pulling_model:Gtk.Widget=None):
         self.pulling_model = pulling_model
         threading.Thread(target=self.run_transcription).start()
 
     def run_transcription(self):
-        model_name = list(STT_MODELS)[self.attachment.get_root().settings.get_value('stt-model').unpack()]
+        model_name = list(STT_MODELS)[self.get_root().settings.get_value('stt-model').unpack()]
         try:
             if not loaded_whisper_models.get(model_name):
                 loaded_whisper_models[model_name] = libraries.get('whisper').load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
@@ -346,7 +328,7 @@ class TranscriptionDialog(Adw.Dialog):
                 error_log = e
             )
             logger.error(e)
-            self.cancel()
+            self.close()
             return
         try:
             result = loaded_whisper_models.get(model_name).transcribe(self.file_path, word_timestamps=False)
@@ -363,10 +345,9 @@ class TranscriptionDialog(Adw.Dialog):
             if current_para:
                 paragraphs.append(' '.join(current_para))
 
-            if self.attachment.get_root():
-                self.attachment.file_content = '\n\n'.join(paragraphs)
-            if self.get_root():
-                self.force_close()
+            self.attachment_func('\n\n'.join(paragraphs))
+            self.close()
+
         except Exception as e:
             dialog.simple_error(
                 parent = self.get_root(),
@@ -375,34 +356,51 @@ class TranscriptionDialog(Adw.Dialog):
                 error_log = e
             )
             logger.error(e)
-            self.cancel()
+            self.close()
             return
 
-def transcribe_audio_file(attachment, file_path:str):
-    def show_dialog(pulling_model=None):
-        dialog = TranscriptionDialog(attachment, file_path)
-        dialog.present(attachment.get_root())
-        dialog.prepare_transcription(pulling_model)
+    def close(self):
+        # Try tab
+        parent = self.get_ancestor(Adw.TabView)
+        if parent:
+            parent.close_page(self.get_parent().tab)
+        else:
+            # Try dialog
+            parent = self.get_ancestor(Adw.Dialog)
+            if parent:
+                parent.close()
+
+    def on_close(self):
+        pass
+
+    def on_reload(self):
+        pass
+
+def transcribe_audio_file(root:Gtk.Widget, attachment_func:callable, file_path:str):
+    def show_activity(pulling_model=None):
+        page = TranscriptionPage(attachment_func, file_path)
+        activities.show_activity(page, root)
+        page.prepare_transcription(pulling_model)
 
     def prepare_download():
+        window=root.get_application().main_alpaca_window
         pulling_model = models.pulling.PullingModelButton(
             model_name,
-            lambda model_name, window=attachment.get_root(): models.common.prepend_added_model(window, models.speech.SpeechToTextModelButton(model_name)),
+            lambda model_name: models.common.prepend_added_model(window, models.speech.SpeechToTextModelButton(model_name)),
             None,
             False
         )
-        models.common.prepend_added_model(attachment.get_root(), pulling_model)
-        show_dialog(pulling_model)
+        models.common.prepend_added_model(window, pulling_model)
+        show_activity(pulling_model)
 
-    model_name = list(STT_MODELS)[attachment.get_root().settings.get_value('stt-model').unpack()]
+    model_name = list(STT_MODELS)[root.settings.get_value('stt-model').unpack()]
     if os.path.isfile(os.path.join(data_dir, 'whisper', '{}.pt'.format(model_name))):
-        show_dialog()
+        show_activity()
     else:
         dialog.simple(
-            parent = attachment.get_root(),
+            parent = root,
             heading = _("Download Speech Recognition Model"),
             body = _("To use speech recognition you'll need to download a special model ({})").format(STT_MODELS.get(model_name, '~151mb')),
             callback = prepare_download,
             button_name = _("Download Model")
         )
-

@@ -70,7 +70,7 @@ if sys.platform != 'win32':
                 icon_name='update-symbolic',
                 sensitive=False
             )
-            self.reload_button.connect('clicked', lambda button: self.reload())
+            self.reload_button.connect('clicked', lambda button: self.on_reload())
 
             # Activities
             self.buttons = [self.dir_button, self.reload_button]
@@ -78,7 +78,7 @@ if sys.platform != 'win32':
             self.activity_css = ['osd']
             self.activity_icon = 'terminal-symbolic'
 
-        def reload(self):
+        def on_reload(self):
             try:
                 self.feed_child(b"\x03")
                 self.reset(True, True)
@@ -100,7 +100,7 @@ if sys.platform != 'win32':
                 return True
             return False
 
-        def close(self) -> bool: # Called by activities.py
+        def on_close(self) -> bool: # Called by activities.py
             try:
                 self.feed_child(b"\x03")
             except:
@@ -238,12 +238,12 @@ if sys.platform != 'win32':
         def run(self):
             self.terminal.run()
 
-        def close(self):
+        def on_close(self):
             self.terminal.close()
             if self.close_callback:
                 self.close_callback()
 
-        def reload(self):
+        def on_reload(self):
             self.code_editor.reload()
             self.terminal.reload()
 
@@ -289,7 +289,7 @@ class CodeEditor(Gtk.ScrolledWindow):
             propagate_natural_height=True
         )
 
-        self.reload()
+        self.on_reload()
 
         # Activities
         self.buttons = []
@@ -308,7 +308,7 @@ class CodeEditor(Gtk.ScrolledWindow):
                 tooltip_text=_("Undo Changes"),
                 icon_name='update-symbolic'
             )
-            reload_button.connect('clicked', lambda button: self.reload())
+            reload_button.connect('clicked', lambda button: self.on_reload())
             self.buttons = [save_button, reload_button]
 
     def save(self):
@@ -321,10 +321,10 @@ class CodeEditor(Gtk.ScrolledWindow):
     def get_code(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
 
-    def close(self):
+    def on_close(self):
         if self.close_callback:
             self.close_callback()
 
-    def reload(self):
+    def on_reload(self):
         code = self.get_original_code()
         self.buffer.set_text(code, len(code.encode('utf-8')))

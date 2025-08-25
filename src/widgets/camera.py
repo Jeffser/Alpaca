@@ -26,8 +26,7 @@ class Camera(Gtk.Picture):
             child=Gtk.Image(
                 icon_name='big-dot-symbolic',
                 icon_size=2
-            ),
-            css_classes=['circular']
+            )
         )
         capture_button.connect('clicked', lambda *_: self.take_photo())
 
@@ -91,11 +90,23 @@ class Camera(Gtk.Picture):
             file_content=base64.b64encode(picture_bytes).decode('utf-8')
         )
         self.attachment_func(attachment)
-        self.get_parent().close()
+        self.close()
 
-    def close(self):
+    def on_close(self):
         self.capture.release()
         self.running = False
+
+    def on_reload(self):
+        pass
+
+    def close(self):
+        parent = self.get_ancestor(Adw.TabView)
+        if parent:
+            parent.close_page(self.get_parent().tab)
+        else:
+            parent = self.get_ancestor(Adw.Dialog)
+            if parent:
+                parent.close()
 
 def show_webcam_dialog(root_widget:Gtk.Widget, attachment_func:callable):
     capture = cv2.VideoCapture(0)
@@ -118,4 +129,3 @@ def show_webcam_dialog(root_widget:Gtk.Widget, attachment_func:callable):
             options=options
         ).show(root_widget)
 
-#w_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):

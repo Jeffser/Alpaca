@@ -41,6 +41,7 @@ class ActivityPage(Gtk.Overlay):
         self.add_overlay(buttons_container)
 
     def close(self):
+        self.page.on_close()
         if self.page.get_parent():
             if self.tab:
                 self.get_root().activities_tab_view.close_page(self.tab)
@@ -51,7 +52,7 @@ class ActivityPage(Gtk.Overlay):
     def reload(self):
         if self.tab:
             self.get_root().activities_tab_view.set_selected_page(self.tab)
-        self.page.reload()
+        self.page.on_reload()
 
 class ActivityDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaActivityDialog'
@@ -86,13 +87,13 @@ class ActivityDialog(Adw.Dialog):
     def close(self):
         self.force_close()
         if self.page and self.page.get_parent():
-            self.page.close()
+            self.page.on_close()
             self.tab = None
             self.page = None
             self = None
 
     def reload(self):
-        self.page.reload()
+        self.page.on_reload()
 
 class ActivityTabWindow(Adw.Window):
     __gtype_name__ = 'AlpacaActivityTabWindow'
@@ -102,6 +103,7 @@ class ActivityTabWindow(Adw.Window):
         self.activities_tab_view.connect('close-page', self.tab_closed)
         self.activities_tab_view.connect('notify::selected-page', self.tab_changed)
         self.activities_tab_view.connect('page-detached', self.tab_detached)
+        self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         tbv = Adw.ToolbarView(
             content=self.activities_tab_view
         )
@@ -125,7 +127,7 @@ class ActivityTabWindow(Adw.Window):
         self.connect('close-request', lambda *_: self.close())
 
     def tab_closed(self, tabview, tabpage):
-        tabpage.get_child().page.close()
+        tabpage.get_child().page.on_close()
 
     def tab_detached(self, tabview, tabpage, index):
         if len(tabview.get_pages()) == 0:

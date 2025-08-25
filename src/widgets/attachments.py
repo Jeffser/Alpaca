@@ -218,11 +218,20 @@ class AttachmentImagePage(Gtk.DrawingArea):
         return False
 
     # Activity
-    def reload(self):
+    def on_reload(self):
         self.reset_view()
 
-    def close(self):
+    def on_close(self):
         pass
+
+    def close(self):
+        parent = self.get_ancestor(Adw.TabView)
+        if parent:
+            parent.close_page(self.get_parent().tab)
+        else:
+            parent = self.get_ancestor(Adw.Dialog)
+            if parent:
+                parent.close()
 
 class AttachmentPage(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentPage'
@@ -288,11 +297,20 @@ class AttachmentPage(Gtk.ScrolledWindow):
                 container.append(block)
 
     # Activity
-    def reload(self):
+    def on_reload(self):
+        pass
+
+    def on_close(self):
         pass
 
     def close(self):
-        pass
+        parent = self.get_ancestor(Adw.TabView)
+        if parent:
+            parent.close_page(self.get_parent().tab)
+        else:
+            parent = self.get_ancestor(Adw.Dialog)
+            if parent:
+                parent.close()
 
 class Attachment(Gtk.Button):
     __gtype_name__ = 'AlpacaAttachment'
@@ -338,7 +356,7 @@ class Attachment(Gtk.Button):
 
     def show_activity(self):
         if self.activity and self.activity.get_root():
-            self.activity.reload()
+            self.activity.on_reload()
         else:
             if self.file_type == 'image':
                 self.activity = activities.show_activity(
@@ -528,7 +546,7 @@ class ImageAttachment(Gtk.Button):
 
     def show_activity(self):
         if self.activity and self.activity.get_root():
-            self.activity.reload()
+            self.activity.on_reload()
         else:
             self.activity = activities.show_activity(
                 AttachmentImagePage(self),
@@ -738,19 +756,32 @@ class GlobalAttachmentContainer(AttachmentContainer):
             content = 'AUDIO NOT TRANSCRIBED'
         else:
             content = extract_content(file_type, file.get_path())
-        if content and (file_type != 'audio' or voice.libraries.get('whisper')):
+        if content:
             file_name = os.path.basename(file.get_path())
-            if file_type != 'code':
+            if file_type == 'code':
                 file_name = os.path.splitext(file_name)[0]
-            attachment = Attachment(
-                file_id="-1",
-                file_name=file_name,
-                file_type=file_type,
-                file_content=content
-            )
-            self.add_attachment(attachment)
-            if file_type == 'audio':
-                threading.Thread(target=voice.transcribe_audio_file, args=(attachment, file.get_path())).start()
+            if file_type != 'audio':
+                attachment = Attachment(
+                    file_id="-1",
+                    file_name=file_name,
+                    file_type=file_type,
+                    file_content=content
+                )
+                self.add_attachment(attachment)
+            elif voice.libraries.get('whisper'):
+                def on_finish_transcription(text:str):
+                    attachment = Attachment(
+                        file_id="-1",
+                        file_name=file_name,
+                        file_type=file_type,
+                        file_content=text
+                    )
+                    self.add_attachment(attachment)
+                threading.Thread(target=voice.transcribe_audio_file, args=(
+                    self.get_root(),
+                    on_finish_transcription,
+                    file.get_path()
+                )).start()
 
     def attachment_request(self, block_images:bool=False):
         ff = Gtk.FileFilter()

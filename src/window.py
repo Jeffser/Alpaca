@@ -117,7 +117,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def activities_tab_closed(self, tabview, tabpage):
-        tabpage.get_child().page.close()
+        tabpage.get_child().page.on_close()
 
     @Gtk.Template.Callback()
     def activities_tab_detached(self, tabview, tabpage, index):
