@@ -691,7 +691,7 @@ class RunCommand(Base):
             ]
         }
     }
-    name = _("Run Command (Testing)")
+    name = _("Run Command")
     description = _("Request to run a command using SSH to connect to the device")
     variables = {
         'ip': {
