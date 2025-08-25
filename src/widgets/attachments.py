@@ -356,7 +356,7 @@ class Attachment(Gtk.Button):
 
     def show_activity(self):
         if self.activity and self.activity.get_root():
-            self.activity.on_reload()
+            self.activity.reload()
         else:
             if self.file_type == 'image':
                 self.activity = activities.show_activity(
@@ -546,7 +546,7 @@ class ImageAttachment(Gtk.Button):
 
     def show_activity(self):
         if self.activity and self.activity.get_root():
-            self.activity.on_reload()
+            self.activity.reload()
         else:
             self.activity = activities.show_activity(
                 AttachmentImagePage(self),
