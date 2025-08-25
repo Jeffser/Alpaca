@@ -239,7 +239,7 @@ if sys.platform != 'win32':
             self.terminal.run()
 
         def on_close(self):
-            self.terminal.close()
+            self.terminal.on_close()
             if self.close_callback:
                 self.close_callback()
 
