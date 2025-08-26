@@ -10,8 +10,9 @@ if sys.platform != 'win32':
     from gi.repository import Vte
 from gi.repository import Gtk, Pango, GLib, Gdk, Gio, Adw, GtkSource
 import os
+from ..sql_manager import Instance as SQL
 from ..constants import data_dir, IN_FLATPAK
-from . import dialog
+from . import dialog, attachments, message
 
 commands = {
     'python': [
@@ -260,6 +261,74 @@ else:
 
     class CodeRunner(Terminal):
         __gtype_name__ = 'AlpacaWindowsCodeRunnerFallback'
+
+class AttachmentCreator(Gtk.ScrolledWindow):
+    __gtype_name__ = 'AlpacaAttachmentCreator'
+#def __init__(self, file_id:str, file_name:str, file_type:str, file_content:str):
+    def __init__(self):
+        self.buffer = GtkSource.Buffer()
+        self.buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark'))
+        self.view = GtkSource.View(
+            auto_indent=True,
+            indent_width=4,
+            buffer=self.buffer,
+            show_line_numbers=True,
+            css_classes=["monospace", "p10-vertical"]
+        )
+
+        super().__init__(
+            child=self.view,
+            propagate_natural_width=True,
+            propagate_natural_height=True
+        )
+
+        save_button = Gtk.Button(
+            tooltip_text=_("Save Script"),
+            icon_name='check-plain-symbolic'
+        )
+        save_button.connect('clicked', lambda button: self.save_requested())
+
+        # Activities
+        self.buttons = [save_button]
+        self.title = _("New Attachment")
+        self.activity_icon = 'document-edit-symbolic'
+
+    def save(self, name:str):
+        attachment = attachments.Attachment(
+            file_id='-1',
+            file_name=name,
+            file_type='plain_text',
+            file_content=self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
+        )
+        self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(attachment)
+        self.close()
+
+    def save_requested(self):
+        dialog.simple_entry(
+            self.get_root(),
+            heading=_('Name the Attachment'),
+            body='',
+            callback=self.save,
+            entries=[{
+                'placeholder': _('New File'),
+                'text': _('New File')
+            }]
+        )
+
+    def close(self):
+        parent = self.get_ancestor(Adw.TabView)
+        if parent:
+            parent.close_page(self.get_parent().tab)
+        else:
+            parent = self.get_ancestor(Adw.Dialog)
+            if parent:
+                parent.close()
+
+    def on_close(self):
+        pass
+
+    def on_reload(self):
+        pass
 
 class CodeEditor(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaCodeEditor'

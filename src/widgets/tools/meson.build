@@ -2,8 +2,7 @@ moduledir = get_option('prefix') / get_option('datadir') / meson.project_name() 
 
 blocks = [
   '__init__.py',
-  'tools.py',
-  'background_remover.py'
+  'tools.py'
 ]
 
 install_data(blocks, install_dir: moduledir)

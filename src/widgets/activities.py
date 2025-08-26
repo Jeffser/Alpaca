@@ -155,7 +155,6 @@ class ActivityManager(Adw.Bin):
             halign=3
         )
 
-        # language:str, code_getter:callable, extra_files:list=[], close_callback:callable=None)
         default_activities = [
             {
                 'title': _('Terminal'),
@@ -168,9 +167,9 @@ class ActivityManager(Adw.Bin):
                 'runner': lambda term: term.run()
             },
             {
-                'title': _('Code Editor'),
-                'icon': 'code-symbolic',
-                'builder': lambda: None
+                'title': _('Create Attachment'),
+                'icon': 'document-text-symbolic',
+                'builder': terminal.AttachmentCreator
             },
             {
                 'title': _('Camera'),
@@ -184,7 +183,7 @@ class ActivityManager(Adw.Bin):
             {
                 'title': _('Background Remover'),
                 'icon': 'image-missing-symbolic',
-                'builder': lambda: background_remover.BackgroundRemoverPage()
+                'builder': background_remover.BackgroundRemoverPage
             }
         ]
 
@@ -217,11 +216,11 @@ class ActivityManager(Adw.Bin):
         page = activity.get('builder')()
         if page:
             tab_page = self.tabview.append(ActivityWrapper(page))
+            if activity.get('runner'):
+                activity.get('runner')(page)
             tab_page.set_title(page.title)
             tab_page.set_icon(Gio.ThemedIcon.new(page.activity_icon))
             tab_page.get_child().tab = tab_page
-            if activity.get('runner'):
-                activity.get('runner')(page)
 
     def page_closed(self, tabview, tabpage):
         tabpage.get_child().page.on_close()
