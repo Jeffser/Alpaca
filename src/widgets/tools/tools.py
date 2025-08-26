@@ -560,114 +560,52 @@ class ExtractWikipedia(Base):
 
         return True, '\n\n'.join(result_md)
 
-if importlib.util.find_spec('duckduckgo_search'):
-    from duckduckgo_search import DDGS
-    # Try to import a rate limit exception compatible with OpenWebUI's handling
-    try:
-        from duckduckgo_search.exceptions import RatelimitException as DDGRateLimitError
-    except Exception:
-        try:
-            from ddgs.exceptions import RatelimitException as DDGRateLimitError  # type: ignore
-        except Exception:
-            class DDGRateLimitError(Exception):
-                pass
-    class OnlineSearch(Base):
-        tool_metadata = {
-            "name": "online_search",
-            "description": "Search for a term online using DuckDuckGo returning results",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "search_term": {
-                        "type": "string",
-                        "description": "The term to search online, be punctual and use the least possible amount of words to get general results"
-                    }
-                },
-                "required": [
-                    "search_term"
-                ]
-            }
-        }
-        name = _("Online Search")
-        description = _("Search for a term online using DuckDuckGo")
-        variables = {
-            'safesearch': {
-                'display_name': _("Safe Search"),
-                'value': 1,
-                'type': 'options',
-                'options': [
-                    _('On'),
-                    _('Moderate'),
-                    _('Off')
-                ]
+class WebSearch(Base):
+    tool_metadata = {
+        "name": "web_search",
+        "description": "Search for a term online using StartPage returning results",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "search_term": {
+                    "type": "string",
+                    "description": "The term to search online, be punctual and use the least possible amount of words to get general results"
+                }
             },
-            'max_results': {
-                'display_name': _("Max Results"),
-                'value': 1,
-                'type': 'int',
-                'min': 1,
-                'max': 5
-            }
+            "required": [
+                "search_term"
+            ]
         }
+    }
+    name = _("Web Search")
+    description = _("Search for a term online using StartPage")
+    variables = {}
 
-        def run(self, arguments, messages, bot_message) -> tuple:
-            search_term = arguments.get("search_term")
-            if not search_term:
-                return True, "Error: Search term was not provided"
+    def on_search_finish(self, md_text:str):
+        self.result = md_text
 
-            result_md = []
+    def start_work(self, search_term:str, bot_message):
+        page = activities.WebBrowser()
+        activities.show_activity(
+            page,
+            bot_message.get_root(),
+            not bot_message.chat.chat_id
+        )
+        threading.Thread(target=page.automate_search, args=(self.on_search_finish, search_term)).start()
 
-            max_results = int(self.variables.get('max_results', {}).get('value', 1))
-            safesearch_level = ('on', 'moderate', 'off')[self.variables.get('safesearch', {}).get('value', 1)]
+    def run(self, arguments, messages, bot_message) -> tuple:
+        self.result = 0 # | 0=loading | "TEXT"=search went ok | None=ohno |
+        search_term = arguments.get("search_term").strip()
+        if not search_term:
+            return False, "Error: Search term was not provided"
 
-            # Mirror OpenWebUI: use DDGS with backend='lite' and catch RatelimitException
-            try:
-                with DDGS() as ddgs:
-                    try:
-                        text_results = ddgs.text(
-                            keywords=search_term,
-                            safesearch=safesearch_level,
-                            max_results=max_results,
-                            backend='lite'
-                        )
-                    except DDGRateLimitError:
-                        return True, "Error: Search is temporarily unavailable (rate limited). Please try again later."
+        GLib.idle_add(self.start_work, search_term, bot_message)
+        while self.result == 0:
+            continue
 
-                    for tr in text_results:
-                        attachment = bot_message.add_attachment(
-                            file_id = generate_uuid(),
-                            name = _("Abstract Source"),
-                            attachment_type = "link",
-                            content = tr.get('href')
-                        )
-                        SQL.insert_or_update_attachment(bot_message, attachment)
-                        result_md.append('### {}'.format(tr.get('title')))
-                        result_md.append(tr.get('body'))
-
-                    # Images are best-effort; ignore rate limit errors here
-                    try:
-                        images = ddgs.images(
-                            keywords=search_term,
-                            max_results=max_results,
-                            safesearch=safesearch_level,
-                            size='Medium',
-                            layout='Square'
-                        )
-                        for image_result in images:
-                            self.attach_online_image(
-                                bot_message,
-                                image_result.get('title', _("Web Result Image")),
-                                image_result.get('image')
-                            )
-                    except DDGRateLimitError:
-                        pass
-            except Exception:
-                return True, "Error: Search is temporarily unavailable (rate limited). Please try again later."
-
-            if len(result_md) == 0:
-                return True, "Error: No results found"
-
-            return True, '\n\n'.join(result_md)
+        if self.result:
+            return False, self.result
+        return False, 'An error occurred'
 
 class RunCommand(Base):
     tool_metadata = {

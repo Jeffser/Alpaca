@@ -5,15 +5,17 @@ from .. import dialog, attachments, models
 from ...sql_manager import generate_uuid, Instance as SQL
 from ...constants import cache_dir
 from markitdown import MarkItDown
-import tempfile, os, threading, requests
+from bs4 import BeautifulSoup
+import tempfile, os, threading, requests, time, random
 
 class WebBrowser(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaWebBrowser'
 
-    def __init__(self, url:str='https://duckduckgo.com'):
+    def __init__(self, url:str='https://www.startpage.com'):
         self.webview = WebKit.WebView()
         self.webview.load_uri(url)
         self.webview.connect('load-changed', self.on_load_changed)
+        self.on_load_callback=lambda:None
 
         self.back_button = Gtk.Button(
             icon_name='left-symbolic',
@@ -46,7 +48,7 @@ class WebBrowser(Gtk.ScrolledWindow):
             icon_name='chain-link-loose-symbolic',
             tooltip_text=_('Attach')
         )
-        self.attachment_button.connect("clicked", lambda button: threading.Thread(target=self.save).start())
+        self.attachment_button.connect("clicked", lambda button: threading.Thread(target=self.extract_md(self.save)).start())
 
 
         super().__init__(
@@ -60,7 +62,7 @@ class WebBrowser(Gtk.ScrolledWindow):
     def on_url_activate(self, entry):
         url = entry.get_text().strip()
         if not url.startswith("http://") and not url.startswith("https://"):
-            url = 'https://duckduckgo.com/?t=h_&q={}&ia=web'.format(url)
+            url = 'https://www.startpage.com/sp/search?query={}'.format(url)
         self.webview.load_uri(url)
 
     def on_load_changed(self, webview, event):
@@ -70,6 +72,8 @@ class WebBrowser(Gtk.ScrolledWindow):
 
         self.back_button.set_sensitive(self.webview.can_go_back())
         self.forward_button.set_sensitive(self.webview.can_go_forward())
+        if event == 3:
+            self.on_load_callback()
 
     def on_back_clicked(self, button):
         if self.webview.can_go_back():
@@ -79,25 +83,35 @@ class WebBrowser(Gtk.ScrolledWindow):
         if self.webview.can_go_forward():
             self.webview.go_forward()
 
-    def on_save(self, webview, res, user_data):
-        md = MarkItDown(enable_plugins=False)
-        raw_html = webview.evaluate_javascript_finish(res).to_string()
-        markdown_text = ''
-        with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False) as tmp_file:
-            tmp_file.write(raw_html)
-            markdown_text = md.convert(tmp_file.name).text_content
+    def extract_html(self, save_func:callable):
+        def on_evaluated(webview, res, user_data):
+            raw_html = webview.evaluate_javascript_finish(res).to_string()
+            save_func(raw_html)
 
-        markdown_text = markdown_text.replace('![](data:image/svg+xml;base64...)', '')
-
-        attachment = attachments.Attachment(
-            file_id='-1',
-            file_name=self.webview.get_title(),
-            file_type='website',
-            file_content=markdown_text
+        script = 'document.documentElement.outerHTML'
+        self.webview.evaluate_javascript(
+            script,
+            len(script.encode('utf-8')),
+            None,
+            None,
+            None,
+            on_evaluated,
+            None
         )
-        self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(attachment)
 
-    def save(self):
+    def extract_md(self, save_func:callable):
+        def on_evaluated(webview, res, user_data):
+            md = MarkItDown(enable_plugins=False)
+            raw_html = webview.evaluate_javascript_finish(res).to_string()
+            markdown_text = ''
+            with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False) as tmp_file:
+                tmp_file.write(raw_html)
+                markdown_text = md.convert(tmp_file.name).text_content
+
+            markdown_text = markdown_text.replace('![](data:image/svg+xml;base64...)', '')
+            save_func(markdown_text)
+
+
         readability_path = os.path.join(cache_dir, 'Readability.js')
         if not os.path.isfile(readability_path):
             response = requests.get('https://raw.githubusercontent.com/mozilla/readability/refs/heads/main/Readability.js', stream=True)
@@ -121,6 +135,53 @@ class WebBrowser(Gtk.ScrolledWindow):
             None,
             None,
             None,
-            self.on_save,
+            on_evaluated,
             None
         )
+
+    def save(self, result):
+        attachment = attachments.Attachment(
+            file_id='-1',
+            file_name=self.webview.get_title(),
+            file_type='website',
+            file_content=result
+        )
+        self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(attachment)
+
+    def on_close(self):
+        pass
+
+    def on_reload(self):
+        pass
+
+    # Call on different thread
+    def automate_search(self, save_func:callable, search_term:str):
+        def on_result_load():
+            self.on_load_callback = lambda: None
+            self.extract_md(save_func)
+            self.close()
+
+        def on_html_extracted(raw_html):
+            soup = BeautifulSoup(raw_html, "html.parser")
+            # I know, really sofisticated
+            result = random.choice(soup.select('a.result-title')[5:])
+            self.on_load_callback = threading.Thread(target=on_result_load).start
+            time.sleep(5)
+            self.webview.load_uri(result["href"])
+
+        def on_search_page_ready():
+            self.extract_html(on_html_extracted)
+            time.sleep(5)
+
+        time.sleep(5)
+        self.on_load_callback = threading.Thread(target=on_search_page_ready).start
+        self.webview.load_uri('https://www.startpage.com/sp/search?query={}'.format(search_term))
+
+    def close(self):
+        parent = self.get_ancestor(Adw.TabView)
+        if parent:
+            parent.close_page(self.get_parent().tab)
+        else:
+            parent = self.get_ancestor(Adw.Dialog)
+            if parent:
+                parent.close()
