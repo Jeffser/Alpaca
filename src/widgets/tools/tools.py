@@ -579,7 +579,13 @@ class WebSearch(Base):
     }
     name = _("Web Search")
     description = _("Search for a term online using StartPage")
-    variables = {}
+    variables = {
+        'auto_choice': {
+            'display_name': "Automatically Decide Which Result to Use",
+            'value': True,
+            'type': 'bool'
+        }
+    }
 
     def on_search_finish(self, md_text:str):
         self.result = md_text
@@ -591,7 +597,7 @@ class WebSearch(Base):
             bot_message.get_root(),
             not bot_message.chat.chat_id
         )
-        threading.Thread(target=page.automate_search, args=(self.on_search_finish, search_term)).start()
+        threading.Thread(target=page.automate_search, args=(self.on_search_finish, search_term, self.variables.get('auto_choice').get('value'))).start()
 
     def run(self, arguments, messages, bot_message) -> tuple:
         self.result = 0 # | 0=loading | "TEXT"=search went ok | None=ohno |
@@ -604,7 +610,7 @@ class WebSearch(Base):
             continue
 
         if self.result:
-            return False, self.result
+            return True, self.result
         return False, 'An error occurred'
 
 class RunCommand(Base):

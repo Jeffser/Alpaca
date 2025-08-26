@@ -15,6 +15,7 @@ class WebBrowser(Gtk.ScrolledWindow):
         self.webview = WebKit.WebView()
         self.webview.load_uri(url)
         self.webview.connect('load-changed', self.on_load_changed)
+        self.webview.connect('create', self.on_create)
         self.on_load_callback=lambda:None
 
         self.back_button = Gtk.Button(
@@ -46,10 +47,14 @@ class WebBrowser(Gtk.ScrolledWindow):
 
         self.attachment_button = Gtk.Button(
             icon_name='chain-link-loose-symbolic',
-            tooltip_text=_('Attach')
+            tooltip_text=_('Attach'),
+            css_classes=['br0', 'flat']
         )
         self.attachment_button.connect("clicked", lambda button: threading.Thread(target=self.extract_md(self.save)).start())
 
+        self.attachment_stack = Gtk.Stack(transition_type=1)
+        self.attachment_stack.add_named(self.attachment_button, 'button')
+        self.attachment_stack.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
 
         super().__init__(
             child=self.webview
@@ -57,13 +62,21 @@ class WebBrowser(Gtk.ScrolledWindow):
 
         self.title=_("Web Browser")
         self.activity_icon = 'globe-symbolic'
-        self.buttons = [self.back_button, self.forward_button, self.url_entry, self.attachment_button]
+        self.buttons = [self.back_button, self.forward_button, self.url_entry, self.attachment_stack]
 
     def on_url_activate(self, entry):
         url = entry.get_text().strip()
         if not url.startswith("http://") and not url.startswith("https://"):
             url = 'https://www.startpage.com/sp/search?query={}'.format(url)
         self.webview.load_uri(url)
+
+    def on_create(self, webview, navigation_action):
+        # Called when a new WebView would normally be created (new tab/window)
+        uri_request = navigation_action.get_request()
+        uri = uri_request.get_uri()
+
+        webview.load_uri(uri)
+        return None
 
     def on_load_changed(self, webview, event):
         uri = webview.get_uri()
@@ -72,7 +85,14 @@ class WebBrowser(Gtk.ScrolledWindow):
 
         self.back_button.set_sensitive(self.webview.can_go_back())
         self.forward_button.set_sensitive(self.webview.can_go_forward())
-        if event == 3:
+        if event == 0: #started
+            self.attachment_stack.set_visible_child_name('loading')
+        elif event == 1: #redirected
+            pass
+        elif event == 2: #commited
+            pass
+        if event == 3: #finished
+            self.attachment_stack.set_visible_child_name('button')
             self.on_load_callback()
 
     def on_back_clicked(self, button):
@@ -155,19 +175,21 @@ class WebBrowser(Gtk.ScrolledWindow):
         pass
 
     # Call on different thread
-    def automate_search(self, save_func:callable, search_term:str):
+    def automate_search(self, save_func:callable, search_term:str, auto_choice:bool):
         def on_result_load():
-            self.on_load_callback = lambda: None
-            self.extract_md(save_func)
-            self.close()
+            if not self.webview.get_uri().startswith('https://www.startpage.com'):
+                self.on_load_callback = lambda: None
+                self.extract_md(save_func)
+                self.close()
 
         def on_html_extracted(raw_html):
-            soup = BeautifulSoup(raw_html, "html.parser")
-            # I know, really sofisticated
-            result = random.choice(soup.select('a.result-title')[5:])
             self.on_load_callback = threading.Thread(target=on_result_load).start
-            time.sleep(5)
-            self.webview.load_uri(result["href"])
+            if auto_choice:
+                soup = BeautifulSoup(raw_html, "html.parser")
+                # I know, really sofisticated
+                result = random.choice(soup.select('a.result-title')[5:])
+                time.sleep(5)
+                self.webview.load_uri(result["href"])
 
         def on_search_page_ready():
             self.extract_html(on_html_extracted)
