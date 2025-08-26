@@ -10,7 +10,7 @@ if sys.platform != 'win32':
     from gi.repository import Vte
 from gi.repository import Gtk, Pango, GLib, Gdk, Gio, Adw, GtkSource
 import os
-from ..constants import data_dir
+from ..constants import data_dir, IN_FLATPAK
 from . import dialog
 
 commands = {
@@ -33,8 +33,9 @@ commands = {
     ],
     'bash': [
         'echo "🦙 {}\n"'.format(_('Using Flatpak contained shell...')),
+        'echo "🦙 {}\n"'.format(_('Use \\"{}\\" to use your system shell (Alpaca will need additional permissions)').format('flatpak-spawn --host bash')),
         '{script}'
-    ],
+    ] if IN_FLATPAK else ['{script}'],
     'ssh': [
         'echo "🦙 {}\n"'.format(_('Using SSH to run command')),
         '{script}'
@@ -51,7 +52,7 @@ if sys.platform != 'win32':
             self.extra_files = extra_files
             self.close_callback = close_callback
 
-            super().__init__(css_classes=["p10"])
+            super().__init__(css_classes=["p10", "black_background"])
             self.set_font(Pango.FontDescription.from_string("Monospace 12"))
             self.set_clear_background(False)
             key_controller = Gtk.EventControllerKey()
@@ -75,7 +76,6 @@ if sys.platform != 'win32':
             # Activities
             self.buttons = [self.dir_button, self.reload_button]
             self.title = _("Terminal")
-            self.activity_css = ['osd']
             self.activity_icon = 'terminal-symbolic'
 
         def on_reload(self):
@@ -175,7 +175,7 @@ if sys.platform != 'win32':
             pty = Vte.Pty.new_sync(Vte.PtyFlags.DEFAULT, None)
             self.set_pty(pty)
             pty.spawn_async(
-                GLib.get_current_dir(),
+                os.path.join(data_dir, 'code runner', self.language),
                 ['bash', '-c', ';\n'.join(self.prepare_script())],
                 [],
                 GLib.SpawnFlags.DEFAULT,
@@ -228,7 +228,6 @@ if sys.platform != 'win32':
             # Activities
             self.buttons = [view_button, self.button_stack]
             self.title = _("Code Runner")
-            self.activity_css = ['osd']
             self.activity_icon = 'code-symbolic'
 
         def change_view(self, toggle):
@@ -294,7 +293,6 @@ class CodeEditor(Gtk.ScrolledWindow):
         # Activities
         self.buttons = []
         self.title = _("Code Editor")
-        self.activity_css = []
         self.activity_icon = 'document-edit-symbolic'
 
         if save_func:
@@ -328,3 +326,4 @@ class CodeEditor(Gtk.ScrolledWindow):
     def on_reload(self):
         code = self.get_original_code()
         self.buffer.set_text(code, len(code.encode('utf-8')))
+

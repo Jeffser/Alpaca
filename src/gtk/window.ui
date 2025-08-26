@@ -113,49 +113,15 @@
                 <child>
                   <object class="AdwNavigationSplitView" id="chat_splitview">
                     <property name="collapsed" bind-source="show_activities_toggle" bind-property="active" bind-flags="invert-boolean"/>
-                    <property name="sidebar-width-fraction">0.5</property>
+                    <property name="sidebar-width-fraction">0.4</property>
                     <property name="sidebar-width-unit">1</property>
                     <property name="sidebar-position">1</property>
                     <property name="show-content">true</property>
                     <property name="collapsed">true</property>
+                    <property name="max-sidebar-width">520</property>
                     <property name="sidebar">
                       <object class="AdwNavigationPage" id="activities_page">
                         <property name="title" translatable="yes">Activities</property>
-                        <property name="child">
-                          <object class="AdwTabOverview" id="activities_overview">
-                            <property name="view">activities_tab_view</property>
-                            <child>
-                              <object class="AdwToolbarView">
-                                <child type="top">
-                                  <object class="AdwHeaderBar" id="activities_headerbar">
-                                    <child type="start">
-                                      <object class="AdwTabButton">
-                                        <property name="view">activities_tab_view</property>
-                                        <property name="action-name">overview.open</property>
-                                      </object>
-                                    </child>
-                                    <child type="start">
-                                      <object class="GtkButton">
-                                        <property name="icon-name">pip-in-symbolic</property>
-                                        <property name="tooltip-text" translatable="yes">Detach Activity</property>
-                                        <signal name="clicked" handler="activity_to_dialog"/>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="AdwTabView" id="activities_tab_view">
-                                    <signal name="notify::selected-page" handler="activities_tab_changed"/>
-                                    <signal name="close-page" handler="activities_tab_closed"/>
-                                    <signal name="page-attached" handler="activities_tab_attached"/>
-                                    <signal name="page-detached" handler="activities_tab_detached"/>
-                                    <signal name="create-window" handler="activities_window_create"/>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
-                        </property>
                       </object>
                     </property>
                     <property name="content">
@@ -241,7 +207,6 @@
                                 </child>
                                 <child type="end">
                                   <object class="GtkStack" id="show_activities_stack">
-                                    <property name="visible">false</property>
                                     <child>
                                       <object class="GtkStackPage">
                                         <property name="name">toggle</property>

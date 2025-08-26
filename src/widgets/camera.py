@@ -36,7 +36,6 @@ class Camera(Gtk.Picture):
         # Activity
         self.buttons = [capture_button]
         self.title = _('Camera')
-        self.activity_css = []
         self.activity_icon = 'camera-photo-symbolic'
 
     def on_realize(self):
@@ -108,14 +107,17 @@ class Camera(Gtk.Picture):
             if parent:
                 parent.close()
 
-def show_webcam_dialog(root_widget:Gtk.Widget, attachment_func:callable):
+def show_webcam_dialog(root_widget:Gtk.Widget, attachment_func:callable, return_page:bool=False):
     capture = cv2.VideoCapture(0)
     if capture.isOpened():
+        page=Camera(
+            capture,
+            attachment_func
+        )
+        if return_page:
+            return page
         activities.show_activity(
-            page=Camera(
-                capture,
-                attachment_func
-            ),
+            page=page,
             root=root_widget
         )
     else:

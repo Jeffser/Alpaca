@@ -144,7 +144,6 @@ class AttachmentImagePage(Gtk.DrawingArea):
         # Activity
         self.buttons = [delete_button, download_button, reset_button]
         self.title = self.attachment.file_name
-        self.activity_css = []
         self.activity_icon = 'image-x-generic-symbolic'
         self.connect('map', lambda *_: GLib.idle_add(self.reset_view))
 
@@ -242,7 +241,6 @@ class AttachmentPage(Gtk.ScrolledWindow):
         # Activity
         self.buttons = []
         self.title = self.attachment.file_name
-        self.activity_css = []
         self.activity_icon = self.attachment.get_child().get_icon_name()
 
         if self.attachment.file_type != 'model_context':
@@ -903,4 +901,5 @@ class GlobalAttachmentButton(Gtk.Button):
         popup.set_parent(self)
         popup.set_pointing_to(rect)
         popup.popup()
+
 

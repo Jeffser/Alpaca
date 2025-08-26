@@ -306,7 +306,6 @@ class TranscriptionPage(Adw.Bin):
         # Activities
         self.buttons = []
         self.title = _("Transcriber")
-        self.activity_css = []
         self.activity_icon = 'music-note-single-symbolic'
 
     def prepare_transcription(self, pulling_model:Gtk.Widget=None):

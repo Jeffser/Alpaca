@@ -81,16 +81,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_manager_top_view_switcher = Gtk.Template.Child()
     last_selected_instance_row = None
 
-    activities_overview = Gtk.Template.Child()
-    activities_headerbar = Gtk.Template.Child()
-    activities_tab_view = Gtk.Template.Child()
     chat_splitview = Gtk.Template.Child()
     activities_page = Gtk.Template.Child()
-    show_activities_stack = Gtk.Template.Child()
     last_breakpoint_status = False
 
     chat_searchbar = Gtk.Template.Child()
-    last_external_activity_tabview = None # Used when detaching activities
 
     @Gtk.Template.Callback()
     def chat_list_page_changed(self, navigationview, page=None):
@@ -106,7 +101,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def last_breakpoint_unapplied(self, bp):
-        if len(self.activities_tab_view.get_pages()) > 0:
+        if len(self.activities_page.get_child().tabview.get_pages()) > 0:
             GLib.idle_add(self.chat_splitview.set_collapsed, False)
         self.chat_splitview.set_show_content(True)
         self.last_breakpoint_status = False
@@ -114,53 +109,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def show_activities_button_pressed(self, button):
         self.chat_splitview.set_show_content(False)
-
-    @Gtk.Template.Callback()
-    def activities_tab_closed(self, tabview, tabpage):
-        tabpage.get_child().page.on_close()
-
-    @Gtk.Template.Callback()
-    def activities_tab_detached(self, tabview, tabpage, index):
-        if len(tabview.get_pages()) == 0:
-            self.split_view_overlay.set_show_sidebar(True)
-            self.chat_splitview.set_collapsed(True)
-            self.chat_splitview.set_show_content(True)
-            self.show_activities_stack.set_visible(False)
-
-    @Gtk.Template.Callback()
-    def activities_tab_attached(self, tabview, tabpage, index):
-        self.activities_overview.set_open(False)
-        self.show_activities_stack.set_visible(True)
-        if self.last_breakpoint_status:
-            self.chat_splitview.set_show_content(False)
-        else:
-            if self.chat_splitview.get_collapsed():
-                self.split_view_overlay.set_show_sidebar(False)
-            self.chat_splitview.set_collapsed(False)
-
-        tabview.set_selected_page(tabpage)
-
-    @Gtk.Template.Callback()
-    def activities_window_create(self, tabview=None):
-        atw = Widgets.activities.ActivityTabWindow()
-        atw.present()
-        return atw.activities_tab_view
-
-    @Gtk.Template.Callback()
-    def activities_tab_changed(self, tabview, gparam):
-        if tabview.get_selected_page():
-            self.activities_page.set_title(tabview.get_selected_page().get_child().page.title)
-            self.activities_headerbar.set_css_classes(tabview.get_selected_page().get_child().page.activity_css)
-
-    @Gtk.Template.Callback()
-    def activity_to_dialog(self, button):
-        if not self.last_external_activity_tabview or not self.last_external_activity_tabview.get_root():
-            self.last_external_activity_tabview = self.activities_window_create()
-        self.activities_tab_view.transfer_page(
-            self.activities_tab_view.get_selected_page(),
-            self.last_external_activity_tabview,
-            0
-        )
 
     @Gtk.Template.Callback()
     def add_instance(self, button):
@@ -501,6 +449,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        ##TESTING ZONE
+        self.activities_page.set_child(Widgets.activities.ActivityManager())
+        ##
 
         actions = [[{
             'label': _('New Chat'),
