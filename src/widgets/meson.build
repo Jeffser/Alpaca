@@ -11,11 +11,11 @@ widgets = [
   'camera.py',
   'welcome.py',
   'preferences.py',
-  'activities.py',
 ]
 
 install_data(widgets, install_dir: moduledir)
 
+subdir('activities')
 subdir('blocks')
 subdir('tools')
 subdir('instances')
