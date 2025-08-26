@@ -3,9 +3,9 @@
 from gi.repository import Gtk, Gio, Adw, GLib, GdkPixbuf, Gdk, WebKit
 from .. import dialog, attachments, models
 from ...sql_manager import generate_uuid, Instance as SQL
-from ...constants import source_dir
+from ...constants import cache_dir
 from markitdown import MarkItDown
-import tempfile, os, threading
+import tempfile, os, threading, requests
 
 class WebBrowser(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaWebBrowser'
@@ -87,6 +87,8 @@ class WebBrowser(Gtk.ScrolledWindow):
             tmp_file.write(raw_html)
             markdown_text = md.convert(tmp_file.name).text_content
 
+        markdown_text = markdown_text.replace('![](data:image/svg+xml;base64...)', '')
+
         attachment = attachments.Attachment(
             file_id='-1',
             file_name=self.webview.get_title(),
@@ -96,12 +98,20 @@ class WebBrowser(Gtk.ScrolledWindow):
         self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(attachment)
 
     def save(self):
-        with open(os.path.join(source_dir, 'widgets', 'Readability.js')) as f:
+        readability_path = os.path.join(cache_dir, 'Readability.js')
+        if not os.path.isfile(readability_path):
+            response = requests.get('https://raw.githubusercontent.com/mozilla/readability/refs/heads/main/Readability.js', stream=True)
+            with open(readability_path, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+
+        with open(readability_path) as f:
             script = f.read() + """
             (function() {
                 var docClone = document.cloneNode(true);
                 var article = new Readability(docClone).parse();
-                return article ? article.content : "";
+                return document.documentElement.outerHTML;
+                return article ? article.content : document.documentElement.outerHTML;
             })();
             """
 
