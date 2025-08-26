@@ -11,6 +11,7 @@ widgets = [
   'camera.py',
   'welcome.py',
   'preferences.py',
+  'Readability.js',
 ]
 
 install_data(widgets, install_dir: moduledir)

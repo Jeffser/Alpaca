@@ -12,6 +12,9 @@ from PIL import Image
 from ..constants import cache_dir
 import requests, json, base64, tempfile, shutil, logging, threading, os, re
 
+from urllib.robotparser import RobotFileParser
+from urllib.parse import urlparse
+
 from . import blocks, dialog, camera, voice, activities, terminal
 from ..sql_manager import Instance as SQL
 
@@ -53,9 +56,24 @@ def extract_content(file_type:str, file_path:str) -> str:
                 markdown_elements.append(table_str)
         return '\n\n'.join(markdown_elements)
     elif file_type == 'website':
-        response = requests.get(file_path)
-        if response.status_code == 200:
-            return '{}\n\n{}'.format(file_path, html2text(response.text))
+        parsed_url = urlparse(file_path)
+        base_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
+
+        # Load and parse robots.txt
+        robots_url = f"{base_url}/robots.txt"
+        rp = RobotFileParser()
+        rp.set_url(robots_url)
+        rp.read()
+
+        if rp.can_fetch("AlpacaBot", file_path):
+            headers = {"User-Agent": "AlpacaBot"}
+            response = requests.get(file_path, headers=headers)
+            if response.status_code == 200:
+                return '{}\n\n{}'.format(file_path, html2text(response.text))
+            else:
+                return "Failed to fetch the page: {}".format(response.status_code)
+        else:
+            return "Fetching this URL is disallowed by robots.txt"
 
 def extract_online_image(image_url:str, max_size:int) -> str | None:
     image_response = requests.get(image_url)
@@ -278,18 +296,9 @@ class AttachmentPage(Gtk.ScrolledWindow):
             max_content_width=500
         )
 
-        if self.attachment.file_type == "code":
-            extension = self.attachment.file_name.split('.')[-1]
-            block = blocks.Code(self.attachment.get_content(), extension)
-            block.edit_button.set_visible(False)
-            self.set_follows_content_size(False)
-            self.set_content_width(700)
-            self.set_content_height(800)
+        content = self.attachment.get_content()
+        for block in blocks.text_to_block_list(content):
             container.append(block)
-        else:
-            content = self.attachment.get_content()
-            for block in blocks.text_to_block_list(content):
-                container.append(block)
 
     # Activity
     def on_reload(self):
@@ -359,13 +368,15 @@ class Attachment(Gtk.Button):
                     self.get_root(),
                     self.get_parent().get_parent().get_parent().force_dialog
                 )
-            elif self.file_type == 'code':
+            elif self.file_type in ('code', 'website'):
                 code = self.get_content()
                 language = None
                 try:
                     language = self.file_name.split('.')[-1].lower()
                 except:
                     pass
+                if self.file_type == 'website':
+                    language='md'
                 page = terminal.CodeEditor(
                     language=language,
                     code_getter=lambda:code

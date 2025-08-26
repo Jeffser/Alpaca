@@ -2,6 +2,7 @@
 
 from gi.repository import Gtk, Gio, Adw, GLib, GdkPixbuf, Gdk
 from .background_remover import BackgroundRemoverPage
+from .web_browser import WebBrowser
 from .. import terminal, camera, dialog
 import importlib.util
 
@@ -37,6 +38,9 @@ class ActivityWrapper(Gtk.Overlay):
                 btn.get_parent().remove(btn)
             buttons_container.append(btn)
             btn.add_css_class('flat')
+            if btn.get_hexpand():
+                buttons_container.set_halign(0)
+                buttons_container.set_hexpand(True)
 
         if len(self.page.buttons) > 0:
             buttons_container.append(Gtk.Separator())
@@ -179,6 +183,11 @@ class ActivityManager(Adw.Bin):
                     attachment_func=lambda att: self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(att),
                     return_page=True
                 )
+            },
+            {
+                'title': _('Web Browser'),
+                'icon': 'globe-symbolic',
+                'builder': WebBrowser
             }
         ]
         if importlib.util.find_spec('rembg'):
