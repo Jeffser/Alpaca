@@ -178,10 +178,7 @@ class WebBrowser(Gtk.ScrolledWindow):
         self.webview.load_uri('https://www.startpage.com/sp/search?query={}'.format(search_term))
 
     def close(self):
-        parent = self.get_ancestor(Adw.TabView)
+        # Only close if it's a dialog
+        parent = self.get_ancestor(Adw.Dialog)
         if parent:
-            parent.close_page(self.get_parent().tab)
-        else:
-            parent = self.get_ancestor(Adw.Dialog)
-            if parent:
-                parent.close()
+            parent.close()
