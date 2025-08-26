@@ -90,10 +90,7 @@ class AttachmentImagePage(Gtk.DrawingArea):
 
     def __init__(self, attachment):
         self.attachment = attachment
-        super().__init__(
-            content_width=400,
-            content_height=400
-        )
+        super().__init__()
 
         self.scale = 1.0
         self.offset_x = 0
