@@ -55,8 +55,7 @@ _loaded_window_libraries = {}
 
 _window_loaders = {
     'alpaca': lambda: __import__('alpaca.window', fromlist=['AlpacaWindow']).AlpacaWindow,
-    'quick-ask': lambda: __import__('alpaca.quick_ask', fromlist=['QuickAskWindow']).QuickAskWindow,
-    'live-chat': lambda: __import__('alpaca.live_chat', fromlist=['LiveChatWindow']).LiveChatWindow,
+    'quick-ask': lambda: __import__('alpaca.quick_ask', fromlist=['QuickAskWindow']).QuickAskWindow
 }
 
 def get_window_library(name: str) -> Adw.Window:
@@ -106,8 +105,8 @@ class AlpacaService:
     def PresentAsk(self):
         self.app.create_quick_ask().present()
 
-    def PresentLive(self):
-        self.app.create_live_chat().present()
+    def PresentLive(self): ##TODO
+        pass
 
     def Open(self, chat_name:str): ##TODO ohno
         for chat_row in list(self.app.props.active_window.chat_list_box):
@@ -161,9 +160,6 @@ class AlpacaApplication(Adw.Application):
     def create_quick_ask(self):
         return get_window_library('quick-ask')(application=self)
 
-    def create_live_chat(self):
-        return get_window_library('live-chat')(application=self)
-
     def do_activate(self):
         self.main_alpaca_window = self.props.active_window
         if not self.main_alpaca_window:
@@ -171,7 +167,8 @@ class AlpacaApplication(Adw.Application):
         if self.args.quick_ask or self.args.ask:
             self.create_quick_ask().present()
         elif self.args.live_chat:
-            self.create_live_chat().present()
+            pass
+            #TODO
         else:
             self.main_alpaca_window.present()
 

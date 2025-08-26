@@ -3,6 +3,7 @@
 from gi.repository import Gtk, Gio, Adw, GLib, GdkPixbuf, Gdk
 from .background_remover import BackgroundRemoverPage
 from .web_browser import WebBrowser
+from .live_chat import LiveChatPage
 from .. import terminal, camera, dialog
 import importlib.util
 
@@ -19,10 +20,11 @@ class ActivityWrapper(Gtk.Overlay):
         )
         buttons_container = Gtk.Box(
             css_classes=['linked', 'r10', 'osd'],
+            margin_top=10,
             margin_bottom=10,
             margin_start=10,
             margin_end=10,
-            valign=2,
+            valign=1 if isinstance(page, LiveChatPage) else 2,
             halign=3,
             overflow=1
         )
@@ -190,6 +192,16 @@ class ActivityManager(Adw.Bin):
                 'builder': WebBrowser
             }
         ]
+
+        if importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'):
+            default_activities.append(
+                {
+                    'title': _('Live Chat'),
+                    'icon': 'headset-symbolic',
+                    'builder': LiveChatPage
+                }
+            )
+
         if importlib.util.find_spec('rembg'):
             default_activities.append(
                 {

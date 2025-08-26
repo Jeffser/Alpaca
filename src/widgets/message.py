@@ -308,7 +308,7 @@ class BlockContainer(Gtk.Box):
                 else:
                     GLib.idle_add(self.insert_child_after, block, list(self)[-2])
 
-        if not self.message.popup.tts_button.get_active() and (self.message.get_root().settings.get_value('tts-auto-dictate').unpack() or self.message.get_root().get_name() == 'AlpacaLiveChat'):
+        if not self.message.popup.tts_button.get_active() and (self.message.get_root().settings.get_value('tts-auto-dictate').unpack() or self.message.chat.chat_id=='LiveChat'):
             GLib.idle_add(self.message.popup.tts_button.set_active, True)
 
     def get_content(self) -> list:
@@ -504,7 +504,8 @@ class Message(Gtk.Box):
 class GlobalMessageTextView(GtkSource.View):
     __gtype_name__ = 'AlpacaGlobalMessageTextView'
 
-    def __init__(self):
+    def __init__(self, parent_footer):
+        self.parent_footer = parent_footer
         super().__init__(
             css_classes=['message_text_view'],
             top_margin=10,
@@ -516,7 +517,7 @@ class GlobalMessageTextView(GtkSource.View):
         )
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
-        drop_target.connect('drop', lambda *_: self.get_root().global_footer.on_file_drop(*_))
+        drop_target.connect('drop', lambda *_: self.parent_footer.on_file_drop(*_))
         self.add_controller(drop_target)
         self.get_buffer().set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('adwaita'))
         self.connect('paste-clipboard', self.on_clipboard_paste)
@@ -548,14 +549,14 @@ class GlobalMessageTextView(GtkSource.View):
                     parent = self.get_root(),
                     heading = _('Attach YouTube Video?'),
                     body = _('Note that YouTube might block access to captions, please check output'),
-                    callback = lambda url=text: threading.Thread(target=self.get_root().global_footer.attachment_container.attach_youtube, args=(url,)).start()
+                    callback = lambda url=text: threading.Thread(target=self.parent_footer.attachment_container.attach_youtube, args=(url,)).start()
                 )
             elif url_regex.match(text):
                 dialog.simple(
                     parent = self.get_root(),
                     heading = _('Attach Website? (Experimental)'),
                     body = _("Are you sure you want to attach\n'{}'?").format(text),
-                    callback = lambda url=text: threading.Thread(target=self.get_root().global_footer.attachment_container.attach_website, args=(url,)).start()
+                    callback = lambda url=text: threading.Thread(target=self.parent_footer.attachment_container.attach_website, args=(url,)).start()
                 )
         except Exception as e:
             pass
@@ -570,7 +571,7 @@ class GlobalMessageTextView(GtkSource.View):
                     pixbuf.savev(os.path.join(tdir.name, 'image.png'), 'png', [], [])
                     os.system('ls {}'.format(tdir.name))
                     file = Gio.File.new_for_path(os.path.join(tdir.name, 'image.png'))
-                    self.get_root().global_footer.attachment_container.on_attachment(file)
+                    self.parent_footer.attachment_container.on_attachment(file)
                     tdir.cleanup()
                 else:
                     dialog.show_toast(_("Image recognition is only available on specific models"), self.get_root())
@@ -589,13 +590,14 @@ class GlobalMessageTextView(GtkSource.View):
                 mode = 1
             elif state & Gdk.ModifierType.ALT_MASK or self.get_root().settings.get_value('prefer-tools').unpack(): # Alt, send tool message
                 mode = 2
-            self.get_root().send_message(mode)
+            self.parent_footer.send_callback(mode)
             return True
 
 class GlobalActionStack(Gtk.Stack):
     __gtype_name__ = 'AlpacaGlobalActionStack'
 
-    def __init__(self):
+    def __init__(self, parent_footer):
+        self.parent_footer = parent_footer
         super().__init__(
             transition_type=1
         )
@@ -629,9 +631,9 @@ class GlobalActionStack(Gtk.Stack):
 
     def use_default_mode(self):
         if self.get_root().settings.get_value('prefer-tools').unpack():
-            self.get_root().send_message(2)
+            self.parent_footer.send_callback(2)
         else:
-            self.get_root().send_message(0)
+            self.parent_footer.send_callback(0)
 
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()
@@ -640,17 +642,17 @@ class GlobalActionStack(Gtk.Stack):
             [
                 {
                     'label': _('Send as User'),
-                    'callback': lambda: self.get_root().send_message(0),
+                    'callback': lambda: self.parent_footer.send_callback(0),
                     'icon': None
                 },
                 {
                     'label': _('Send as System'),
-                    'callback': lambda: self.get_root().send_message(1),
+                    'callback': lambda: self.parent_footer.send_callback(1),
                     'icon': None
                 },
                 {
                     'label': _('Use Tools'),
-                    'callback': lambda: self.get_root().send_message(2),
+                    'callback': lambda: self.parent_footer.send_callback(2),
                     'icon': None
                 }
             ]
@@ -663,7 +665,8 @@ class GlobalActionStack(Gtk.Stack):
 class GlobalFooter(Gtk.Box):
     __gtype_name__ = 'AlpacaGlobalFooter'
 
-    def __init__(self):
+    def __init__(self, send_callback:callable):
+        self.send_callback = send_callback
         super().__init__(
             spacing=12,
             orientation=1,
@@ -687,7 +690,7 @@ class GlobalFooter(Gtk.Box):
             css_classes=['card']
         )
         controls_container.append(self.message_text_view_container)
-        self.message_text_view = GlobalMessageTextView()
+        self.message_text_view = GlobalMessageTextView(self)
         message_text_view_scroller = Gtk.ScrolledWindow(
             max_content_height=150,
             propagate_natural_height=True,
@@ -700,13 +703,13 @@ class GlobalFooter(Gtk.Box):
         self.microphone_button = voice.MicrophoneButton(self.message_text_view)
         self.message_text_view_container.append(self.microphone_button)
 
-        self.action_stack = GlobalActionStack()
+        self.action_stack = GlobalActionStack(self)
         controls_container.append(self.action_stack)
 
     def on_file_drop(self, drop_target, value, x, y):
         files = value.get_files()
         for file in files:
-            self.get_root().global_footer.attachment_container.on_attachment(file)
+            self.attachment_container.on_attachment(file)
 
     def toggle_action_button(self, state:bool):
         self.action_stack.set_visible_child_name('send' if state else 'stop')

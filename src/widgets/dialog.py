@@ -367,7 +367,7 @@ def show_toast(message:str, root_widget, action:str=None, action_name:str=None):
     try:
         overlay = root_widget.toast_overlay
     except Exception as e:
-        print(e)
+        print(e, message)
         return
     toast = Adw.Toast(
         title=message,

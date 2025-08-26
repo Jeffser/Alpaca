@@ -237,7 +237,7 @@ class MicrophoneButton(Gtk.Stack):
                         threading.Thread(target=recognize_audio, args=(loaded_whisper_models.get(model_name), audio_data, buffer.get_end_iter()), daemon=True).start()
 
                         if self.mic_timeout >= 2 and mic_auto_send and buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False):
-                            GLib.idle_add(button.get_root().send_message)
+                            GLib.idle_add(self.text_view.parent_footer.send_callback)
                             break
 
                 except Exception as e:

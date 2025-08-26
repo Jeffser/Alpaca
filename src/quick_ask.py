@@ -127,7 +127,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.global_footer = Widgets.message.GlobalFooter()
+        self.global_footer = Widgets.message.GlobalFooter(self.send_message)
         self.global_footer.action_stack.set_visible(False)
         self.global_footer_container.set_child(self.global_footer)
 

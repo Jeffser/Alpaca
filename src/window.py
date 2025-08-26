@@ -426,18 +426,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if searchbars.get(current_tag):
             searchbars.get(current_tag).set_search_mode(not searchbars.get(current_tag).get_search_mode())
 
-    def start_live_chat(self):
-        if importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'):
-            self.get_application().create_live_chat().present()
-        else:
-            options = {_('Cancel'): {'default': True}}
-            Widgets.dialog.Options(
-                heading=_("Can't Run Live Chat"),
-                body=_("You are missing TTS libraries"),
-                close_response=list(options.keys())[0],
-                options=options
-            ).show(self)
-
     def get_chat_list_page(self):
         return self.chat_list_navigationview.get_visible_page()
 
@@ -483,7 +471,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         list(list(self.title_no_model_button.get_child())[0])[1].set_ellipsize(3)
 
         # Global Footer
-        self.global_footer = Widgets.message.GlobalFooter()
+        self.global_footer = Widgets.message.GlobalFooter(self.send_message)
         self.global_footer_container.set_child(self.global_footer)
         self.set_focus(self.global_footer.message_text_view)
 
@@ -518,7 +506,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'reload_added_models': [lambda *_: GLib.idle_add(Widgets.models.update_added_model_list, self)],
             'tool_manager': [lambda *_: self.push_or_pop('tool_manager'), ['<primary>t']],
             'start_quick_ask': [lambda *_: self.get_application().create_quick_ask().present(), ['<primary><alt>a']],
-            'start_live_chat': [lambda *_: self.start_live_chat(), ['<primary><alt>l']],
             'model_creator_existing': [lambda *_: Widgets.models.common.prompt_existing(self)],
             'model_creator_gguf': [lambda *_: Widgets.models.common.prompt_gguf(self)],
             'preferences': [lambda *_: Widgets.preferences.PreferencesDialog().present(self), ['<primary>comma']],

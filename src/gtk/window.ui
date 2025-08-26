@@ -12,7 +12,7 @@
     <property name="title">Alpaca</property>
     <child>
       <object class="AdwBreakpoint">
-        <condition>max-width: 740sp</condition>
+        <condition>max-width: 770sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
       </object>
     </child>
@@ -697,10 +697,6 @@
       <item>
         <attribute name="label" translatable="yes">Start Quick Ask</attribute>
         <attribute name="action">app.start_quick_ask</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Start Live Chat</attribute>
-        <attribute name="action">app.start_live_chat</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">Preferences</attribute>
