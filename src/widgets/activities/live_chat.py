@@ -47,6 +47,7 @@ class LiveChatPage(Adw.Bin):
             content_fit=0,
             css_classes=['live_chat_background']
         )
+
         self.overlay = Gtk.Overlay(
             child=self.background
         )
@@ -65,7 +66,10 @@ class LiveChatPage(Adw.Bin):
             tightening_threshold=800,
             child=container
         )
-        self.overlay.add_overlay(clamp)
+        scrolled_window = Gtk.ScrolledWindow(
+            child=clamp
+        )
+        self.overlay.add_overlay(scrolled_window)
         self.get_child().set_content(self.overlay)
 
         self.pfp_avatar=Adw.Avatar(
