@@ -173,7 +173,7 @@ class ActivityManager(Adw.Bin):
                 'runner': lambda term: term.run()
             },
             {
-                'title': _('Create Attachment'),
+                'title': _('Attachment Creator'),
                 'icon': 'document-text-symbolic',
                 'builder': terminal.AttachmentCreator
             },
