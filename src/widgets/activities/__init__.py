@@ -66,7 +66,7 @@ class ActivityDialog(Adw.Dialog):
 
     def __init__(self, page:Gtk.Widget):
         self.page = page
-        tbv=Adw.ToolbarView(css_classes=page.get_css_classes())
+        tbv=Adw.ToolbarView()
         hb = Adw.HeaderBar(show_title=False)
         for btn in page.buttons:
             if btn.get_parent():
@@ -335,5 +335,6 @@ def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
             tab_page.set_icon(Gio.ThemedIcon.new(page.activity_icon))
             tab_page.get_child().tab = tab_page
             return tab_page.get_child()
+
 
 
