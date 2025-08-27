@@ -11,9 +11,8 @@ import tempfile, os, threading, requests, time, random
 class WebBrowser(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaWebBrowser'
 
-    def __init__(self, url:str='https://www.startpage.com'):
+    def __init__(self, default_url:str='https://www.startpage.com'):
         self.webview = WebKit.WebView()
-        self.webview.load_uri(url)
         self.webview.connect('load-changed', self.on_load_changed)
         self.webview.connect('create', self.on_create)
         self.on_load_callback=lambda:None
@@ -60,9 +59,15 @@ class WebBrowser(Gtk.ScrolledWindow):
             child=self.webview
         )
 
+        self.connect('map', lambda *_: self.on_map(default_url))
+
+        # Activity
         self.title=_("Web Browser")
         self.activity_icon = 'globe-symbolic'
         self.buttons = [self.back_button, self.forward_button, self.url_entry, self.attachment_stack]
+
+    def on_map(self, default_url:str):
+        self.webview.load_uri(default_url)
 
     def on_url_activate(self, entry):
         url = entry.get_text().strip()

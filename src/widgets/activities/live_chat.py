@@ -207,14 +207,14 @@ class LiveChatPage(Adw.Bin):
 
         current_instance = self.get_current_instance()
         if not current_instance:
-            dialog.show_toast(_("Please select an instance in Alpaca before chatting"), self)
+            dialog.show_toast(_("Please select an instance in Alpaca before chatting"), self.get_root())
             return
         current_model = self.get_selected_model().get_name()
         if not current_model:
-            dialog.show_toast(_("Please select add a model for this instance in Alpaca before chatting"), self)
+            dialog.show_toast(_("Please select add a model for this instance in Alpaca before chatting"), self.get_root())
             return
         if current_model not in [m.get('name') for m in current_instance.get_local_models()]:
-            dialog.show_toast(_("Selected model is not available"), self)
+            dialog.show_toast(_("Selected model is not available"), self.get_root())
             return
 
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
@@ -274,7 +274,7 @@ class LiveChatPage(Adw.Bin):
     def get_current_instance(self):
         return self.get_root().get_application().main_alpaca_window.get_current_instance()
 
-    def on_stop(self):
+    def on_close(self):
         self.get_child().get_sheet().busy = False
 
     def on_reload(self):
