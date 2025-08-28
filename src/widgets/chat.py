@@ -18,16 +18,12 @@ class ChatList(Adw.NavigationPage):
 
     def __init__(self, folder_id:str=None, folder_name:str=_('Root'), folder_color:str=None, show_bar:bool=True):
         self.folder_id = folder_id
-        container = Gtk.Box(
-            orientation=1
-        )
+        container = Gtk.Box(orientation=1)
+        self.scrolled_window = Gtk.ScrolledWindow(child=container)
+        self._scroll_timeout_id = None
+
         self.list_stack = Gtk.Stack()
-        self.list_stack.add_named(
-            Gtk.ScrolledWindow(
-                child=container
-            ),
-            'content'
-        )
+        self.list_stack.add_named(self.scrolled_window, 'content')
         self.list_stack.add_named(
             Adw.StatusPage(
                 title=_('No Results Found'),
@@ -43,9 +39,34 @@ class ChatList(Adw.NavigationPage):
             'empty'
         )
 
-        tbv = Adw.ToolbarView(
-            content=self.list_stack
+        overlay = Gtk.Overlay(child=self.list_stack)
+
+        indicator_top_drop_target = Gtk.DropTarget.new(Gtk.ListBoxRow, Gdk.DragAction.COPY)
+        indicator_top_drop_target.connect("accept", lambda *_: self.start_scrolling(-1))
+        indicator_top_drop_target.connect("leave", lambda *_: self.stop_scrolling())
+        self.top_indicator = Adw.Bin(
+            hexpand=True,
+            height_request=20,
+            valign=1,
+            visible=False
         )
+        self.top_indicator.add_controller(indicator_top_drop_target)
+        overlay.add_overlay(self.top_indicator)
+
+        indicator_bottom_drop_target = Gtk.DropTarget.new(Gtk.ListBoxRow, Gdk.DragAction.COPY)
+        indicator_bottom_drop_target.connect("accept", lambda *_: self.start_scrolling(1))
+        indicator_bottom_drop_target.connect("leave", lambda *_: self.stop_scrolling())
+        self.bottom_indicator = Adw.Bin(
+            hexpand=True,
+            height_request=20,
+            valign=2,
+            visible=False
+        )
+        self.bottom_indicator.add_controller(indicator_bottom_drop_target)
+        overlay.add_overlay(self.bottom_indicator)
+
+
+        tbv = Adw.ToolbarView(content=overlay)
         super().__init__(
             child=tbv,
             title=folder_name
@@ -82,6 +103,24 @@ class ChatList(Adw.NavigationPage):
 
         if folder_color:
             self.add_css_class('folder-{}'.format(folder_color))
+
+    def start_scrolling(self, direction):
+        if self._scroll_timeout_id:
+            GLib.source_remove(self._scroll_timeout_id)
+        self._scroll_timeout_id = GLib.timeout_add(30, self.do_scroll, direction)
+
+    def stop_scrolling(self):
+        if self._scroll_timeout_id:
+            GLib.source_remove(self._scroll_timeout_id)
+            self._scroll_timeout_id = None
+
+    def do_scroll(self, direction):
+        adj = self.scrolled_window.get_vadjustment()
+        new_value = adj.get_value() + direction * 15 # scroll speed
+        adj.set_value(max(0, min(new_value, adj.get_upper() - adj.get_page_size())))
+
+        self.top_indicator.set_visible(new_value >= 0) # Hide the top indicator so it doesn't get in the way of the top folder
+        return True
 
     def on_drop_folder(self, target, row, x, y):
         folder_page = self.get_root().chat_list_navigationview.get_previous_page(self)
@@ -508,6 +547,7 @@ class FolderRow(Gtk.ListBoxRow):
         drag_source.connect("drag-cancel", lambda *_: self.set_visible(True))
         drag_source.connect('prepare', lambda *_: Gdk.ContentProvider.new_for_value(self))
         drag_source.connect("drag-begin", self.on_drag_begin)
+        drag_source.connect("drag-end", self.on_drag_end)
         self.add_controller(drag_source)
 
     def on_drop_folder(self, target, row, x, y):
@@ -533,11 +573,22 @@ class FolderRow(Gtk.ListBoxRow):
         return True
 
     def on_drag_begin(self, source, drag):
+        page = self.get_ancestor(Adw.NavigationPage)
+        page.top_indicator.set_visible(True)
+        page.bottom_indicator.set_visible(True)
         snapshot = Gtk.Snapshot()
         self.snapshot_child(self.get_child(), snapshot)
         paintable = snapshot.to_paintable()
         source.set_icon(paintable, 0, 0)
         self.set_visible(False)
+
+    def on_drag_end(self, *_):
+        page = self.get_ancestor(Adw.NavigationPage)
+        page.top_indicator.set_visible(False)
+        page.bottom_indicator.set_visible(False)
+        if page._scroll_timeout_id:
+            GLib.source_remove(page._scroll_timeout_id)
+            page._scroll_timeout_id = None
 
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()
@@ -683,14 +734,26 @@ class ChatRow(Gtk.ListBoxRow):
         drag_source.connect("drag-cancel", lambda *_: self.set_visible(True))
         drag_source.connect('prepare', lambda *_: Gdk.ContentProvider.new_for_value(self))
         drag_source.connect("drag-begin", self.on_drag_begin)
+        drag_source.connect("drag-end", self.on_drag_end)
         self.add_controller(drag_source)
 
     def on_drag_begin(self, source, drag):
+        page = self.get_ancestor(Adw.NavigationPage)
+        page.top_indicator.set_visible(True)
+        page.bottom_indicator.set_visible(True)
         snapshot = Gtk.Snapshot()
         self.snapshot_child(self.get_child(), snapshot)
         paintable = snapshot.to_paintable()
         source.set_icon(paintable, 0, 0)
         self.set_visible(False)
+
+    def on_drag_end(self, *_):
+        page = self.get_ancestor(Adw.NavigationPage)
+        page.top_indicator.set_visible(False)
+        page.bottom_indicator.set_visible(False)
+        if page._scroll_timeout_id:
+            GLib.source_remove(page._scroll_timeout_id)
+            page._scroll_timeout_id = None
 
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()
