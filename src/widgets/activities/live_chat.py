@@ -117,6 +117,7 @@ class LiveChatPage(Adw.Bin):
         factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
         self.model_dropdown.set_factory(factory)
         self.model_dropdown.set_expression(Gtk.PropertyExpression.new(models.added.AddedModelRow, None, "name"))
+        list(list(self.model_dropdown)[1].get_child())[1].set_propagate_natural_width(True)
 
         # Prepare Global Footer
         self.global_footer = message.GlobalFooter(self.send_message)

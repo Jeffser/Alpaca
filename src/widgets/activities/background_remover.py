@@ -113,9 +113,10 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
         factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
         self.model_dropdown = Gtk.DropDown(
             model=string_list,
-            factory=factory,
-            halign=3
+            factory=factory
         )
+        list(list(self.model_dropdown)[1].get_child())[1].set_propagate_natural_width(True)
+
         self.select_button = Gtk.Button(
             icon_name="image-x-generic-symbolic",
             tooltip_text=_("Select Image")
