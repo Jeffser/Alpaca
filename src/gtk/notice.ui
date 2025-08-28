@@ -3,7 +3,7 @@
   <requires lib="gtk" version="4.0"/>
   <requires lib="Adw" version="1.0"/>
   <template class="AlpacaNotice" parent="AdwDialog">
-    <property name="name">Alpaca7</property>
+    <property name="name">Alpaca8</property>
     <property name="title" translatable="yes">Notice</property>
     <property name="content-width">400</property>
     <signal name="closed" handler="closing_notice"/>
@@ -23,48 +23,24 @@
               <object class="AdwStatusPage">
                 <property name="hexpand">true</property>
                 <property name="icon-name">com.jeffser.Alpaca</property>
-                <property name="title">Alpaca 7</property>
+                <property name="title">Alpaca 8</property>
                 <property name="description" translatable="yes">Hey Alpaca users! Get ready for a huge update packed with enhancements and exciting new features designed to make your experience even better.</property>
               </object>
             </child>
             <child>
               <object class="AdwStatusPage">
                 <property name="hexpand">true</property>
-                <property name="icon-name">audio-input-microphone-symbolic</property>
-                <property name="title" translatable="yes">Introducing Live Chat</property>
-                <property name="description" translatable="yes">Experience a whole new way to interact with your AI models! Live Chat lets you converse as if you're on a call, with a strong focus on real-time speech recognition and live message dictation. Access it easily by selecting "Live Chat" from the primary menu.</property>
+                <property name="icon-name">folder-symbolic</property>
+                <property name="title" translatable="yes">Folders</property>
+                <property name="description" translatable="yes">Keeping all your chats and subfolders in one place is now easier than ever. Folders let you neatly organize everything, so you can find exactly what you're looking for without the clutter.</property>
               </object>
             </child>
             <child>
               <object class="AdwStatusPage">
                 <property name="hexpand">true</property>
-                <property name="icon-name">chat-bubble-text-symbolic</property>
-                <property name="title" translatable="yes">Live Message Rendering</property>
-                <property name="description" translatable="yes">See your conversations unfold in real-time! Messages are now rendered as they're being generated, and you can even use dictation simultaneously for a more fluid interaction.</property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwStatusPage">
-                <property name="hexpand">true</property>
-                <property name="icon-name">camera-photo-symbolic</property>
-                <property name="title" translatable="yes">Camera Attachment</property>
-                <property name="description" translatable="yes">You can now take pictures directly within Alpaca and attach them to your messages with the new Camera Attachment feature.</property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwStatusPage">
-                <property name="hexpand">true</property>
-                <property name="icon-name">wrench-wide-symbolic</property>
-                <property name="title" translatable="yes">Enhanced Web Search Tool</property>
-                <property name="description" translatable="yes">Our Web Search Tool just got a major upgrade! Enjoy more accurate results and powerful new options to find exactly what you're looking for.</property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwStatusPage">
-                <property name="hexpand">true</property>
-                <property name="icon-name">sliders-horizontal-symbolic</property>
-                <property name="title" translatable="yes">Redesign</property>
-                <property name="description" translatable="yes">Alpaca has a brand new look! Enjoy a redesigned interface with updated popups and sleek new dialogs for managing your AI instances and tools.</property>
+                <property name="icon-name">sidebar-show-right-symbolic</property>
+                <property name="title" translatable="yes">Activities</property>
+                <property name="description" translatable="yes">There's a new way to get things done with Activities. These are like mini-apps that your AI can use to help you with tasks, from running code and using a web browser to transcribing audio and creating attachments.</property>
               </object>
             </child>
           </object>
