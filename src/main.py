@@ -31,6 +31,7 @@ gi.require_version("WebKit", "6.0")
 from gi.repository import Gtk, Gio, Adw, GtkSource
 GtkSource.init()
 
+from .widgets import activities
 from .constants import TRANSLATORS, cache_dir, data_dir, config_dir, source_dir
 from .sql_manager import Instance as SQL
 
@@ -105,8 +106,11 @@ class AlpacaService:
     def PresentAsk(self):
         self.app.create_quick_ask().present()
 
-    def PresentLive(self): ##TODO
-        pass
+    def PresentLive(self):
+        activities.show_activity(
+            activities.LiveChatPage(),
+            root=self.app.props.active_window
+        )
 
     def Open(self, chat_name:str): ##TODO ohno
         for chat_row in list(self.app.props.active_window.chat_list_box):
@@ -167,8 +171,11 @@ class AlpacaApplication(Adw.Application):
         if self.args.quick_ask or self.args.ask:
             self.create_quick_ask().present()
         elif self.args.live_chat:
-            pass
-            #TODO
+            self.main_alpaca_window.present()
+            activities.show_activity(
+                activities.LiveChatPage(),
+                root=self.props.active_window
+            )
         else:
             self.main_alpaca_window.present()
 
