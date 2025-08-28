@@ -689,7 +689,7 @@ class FolderRow(Gtk.ListBoxRow):
         dialog.simple(
             parent = self.get_root(),
             heading = _('Delete Folder?'),
-            body = _("Are you sure you want to delete '{}' and all their sub-folders and chats?").format(self.get_name()),
+            body = _("Are you sure you want to delete '{}' and all it's sub-folders and chats?").format(self.get_name()),
             callback = lambda: self.delete(),
             button_name = _('Delete'),
             button_appearance = 'destructive'

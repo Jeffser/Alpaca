@@ -15,19 +15,13 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
         self.close_callback = close_callback
         self.input_image_data = None
         self.output_image_data = None
-        container = Gtk.Box(
-            orientation=1,
-            spacing=10,
-            vexpand=True,
-            css_classes=['p10']
+
+        self.main_stack = Gtk.Stack(
+            transition_type=1
         )
 
-        super().__init__(
-            child=container,
-            hexpand=True
-        )
-
-        big_select_button = Gtk.Button(
+        # Main Button
+        main_select_button = Gtk.Button(
             child=Adw.ButtonContent(
                 label=_("Select Image"),
                 icon_name="image-x-generic-symbolic",
@@ -37,32 +31,78 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
             valign=3,
             css_classes=['suggested-action', 'pill']
         )
-        big_select_button.connect('clicked', lambda *_: self.load_image_requested())
-        self.input_container = Adw.Bin(
-            child=big_select_button,
-            halign=3,
-            vexpand=True,
-            css_classes=['p10']
+        main_select_button.connect('clicked', lambda *_: self.load_image_requested())
+        self.main_stack.add_named(
+            main_select_button,
+            'button'
         )
-        container.append(self.input_container)
-        self.output_container = Gtk.Stack(
-            visible=False,
-            halign=3,
-            vexpand=True,
-            css_classes=['p10']
+
+        # Container
+        container = Gtk.Box(
+            orientation=1,
+            spacing=10,
+            valign=3,
+            halign=3
         )
-        self.output_container.add_named(
-            Adw.Spinner(
-                width_request=140,
-                height_request=140
+        self.main_stack.add_named(
+            container,
+            'content'
+        )
+        ## Secondary Stack
+        self.image_stack = Gtk.Stack(
+            transition_type=6,
+            hexpand=True,
+            vexpand=True
+        )
+        ## Stack Switcher
+        self.stack_switcher = Adw.ToggleGroup(
+            halign=3
+        )
+        self.stack_switcher.connect('notify::active', lambda toggle_group, gparam: self.image_stack.set_visible_child_name(toggle_group.get_active_name()))
+        self.stack_switcher.add(
+            Adw.Toggle(
+                label=_("Original"),
+                name='input'
+            )
+        )
+        self.stack_switcher.add(
+            Adw.Toggle(
+                label=_("Result"),
+                name='output'
+            )
+        )
+        container.append(self.stack_switcher)
+        container.append(self.image_stack)
+        ### Input Picture
+        self.image_stack.add_named(
+            Gtk.Picture(
+                css_classes=['rounded_image'],
+                margin_start=10,
+                margin_end=10,
+                margin_bottom=10
             ),
-            'loading'
+            'input'
         )
-        self.output_container.add_named(
-            Adw.Bin(),
-            'result'
+        ### Output Picture
+        self.image_stack.add_named(
+            Gtk.Overlay(
+                child=Gtk.Picture(
+                    css_classes=['rounded_image'],
+                    margin_start=10,
+                    margin_end=10,
+                    margin_bottom=10
+                )
+            ),
+            'output'
         )
-        container.append(self.output_container)
+        self.output_spinner = Adw.Spinner()
+        self.image_stack.get_child_by_name('output').add_overlay(self.output_spinner)
+
+        super().__init__(
+            child=self.main_stack,
+            hexpand=True
+        )
+
         self.pulling_model = None
 
         string_list = Gtk.StringList()
@@ -94,8 +134,8 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
         self.activity_icon = 'image-missing-symbolic'
 
     def run(self, model_name:str):
-        self.output_container.set_visible_child_name('loading')
-        self.output_container.set_visible(True)
+        self.output_spinner.set_visible(True)
+        self.stack_switcher.set_active_name('output')
         self.select_button.set_sensitive(False)
         self.download_button.set_sensitive(False)
         from rembg import remove, new_session
@@ -106,9 +146,11 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
         output_image.save(buffered, format="PNG")
 
         self.output_image_data = base64.b64encode(buffered.getvalue()).decode("utf-8")
-        self.output_container.get_child_by_name('result').set_child(self.make_image(self.output_image_data))
-        self.output_container.set_visible_child_name('result')
-
+        texture = self.make_texture(self.output_image_data)
+        self.stack_switcher.set_active_name('output')
+        self.image_stack.get_child_by_name('output').get_child().set_paintable(texture)
+        self.image_stack.get_child_by_name('output').get_child().remove_css_class('loading_image')
+        self.output_spinner.set_visible(False)
         self.select_button.set_sensitive(True)
         self.download_button.set_sensitive(True)
         if self.pulling_model:
@@ -139,7 +181,7 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
                 lambda m=model: self.prepare_model_download(model)
             )
 
-    def make_image(self, image_data:str):
+    def make_texture(self, image_data:str):
         data = base64.b64decode(image_data)
         loader = GdkPixbuf.PixbufLoader.new()
         loader.write(data)
@@ -147,16 +189,15 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
         pixbuf = loader.get_pixbuf()
         height = int((pixbuf.get_property('height') * 240) / pixbuf.get_property('width'))
         texture = Gdk.Texture.new_for_pixbuf(pixbuf)
-        image = Gtk.Picture.new_for_paintable(texture)
-        image.set_size_request(240, height)
-        return image
+        return texture
 
     def load_image(self, image_data:str):
         self.input_image_data = image_data
-        image = self.make_image(self.input_image_data)
-        image.add_css_class('r10')
-        image.set_valign(3)
-        self.input_container.set_child(image)
+        texture = self.make_texture(self.input_image_data)
+        self.image_stack.get_child_by_name('input').set_paintable(texture)
+        self.image_stack.get_child_by_name('output').get_child().set_paintable(texture)
+        self.image_stack.get_child_by_name('output').get_child().add_css_class('loading_image')
+        self.main_stack.set_visible_child_name('content')
         self.verify_model()
 
     def on_attachment(self, file:Gio.File, remove_original:bool=False):
