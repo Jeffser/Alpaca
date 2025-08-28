@@ -326,7 +326,6 @@ class Instance:
             )
 
     def insert_or_update_chat(chat) -> None:
-        print(chat.get_name(), chat.folder_id)
         with SQLiteConnection() as c:
             if c.cursor.execute(
                 "SELECT id FROM chat WHERE id=?", (chat.chat_id,)

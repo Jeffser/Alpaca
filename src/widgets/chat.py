@@ -542,12 +542,17 @@ class FolderRow(Gtk.ListBoxRow):
         drop_target_chat = Gtk.DropTarget.new(ChatRow, Gdk.DragAction.MOVE)
         drop_target_chat.connect("drop", self.on_drop_chat)
         self.add_controller(drop_target_chat)
+        self.connect('map', lambda *_: self.on_map())
+
+    def on_map(self):
+        page = self.get_ancestor(Adw.NavigationPage)
+
         drag_source = Gtk.DragSource()
         drag_source.set_actions(Gdk.DragAction.MOVE)
         drag_source.connect("drag-cancel", lambda *_: self.set_visible(True))
         drag_source.connect('prepare', lambda *_: Gdk.ContentProvider.new_for_value(self))
-        drag_source.connect("drag-begin", self.on_drag_begin)
-        drag_source.connect("drag-end", self.on_drag_end)
+        drag_source.connect("drag-begin", lambda s,d,page=page: self.on_drag_begin(s,d,page))
+        drag_source.connect("drag-end", lambda s,d,r,page=page: self.on_drag_end(s,d,r,page))
         self.add_controller(drag_source)
 
     def on_drop_folder(self, target, row, x, y):
@@ -572,8 +577,7 @@ class FolderRow(Gtk.ListBoxRow):
             folder_page.update_visibility()
         return True
 
-    def on_drag_begin(self, source, drag):
-        page = self.get_ancestor(Adw.NavigationPage)
+    def on_drag_begin(self, source, drag, page):
         page.top_indicator.set_visible(True)
         page.bottom_indicator.set_visible(True)
         snapshot = Gtk.Snapshot()
@@ -582,8 +586,7 @@ class FolderRow(Gtk.ListBoxRow):
         source.set_icon(paintable, 0, 0)
         self.set_visible(False)
 
-    def on_drag_end(self, *_):
-        page = self.get_ancestor(Adw.NavigationPage)
+    def on_drag_end(self, source, drag, res, page):
         page.top_indicator.set_visible(False)
         page.bottom_indicator.set_visible(False)
         if page._scroll_timeout_id:
@@ -729,16 +732,20 @@ class ChatRow(Gtk.ListBoxRow):
         self.gesture_long_press = Gtk.GestureLongPress()
         self.gesture_long_press.connect("pressed", self.show_popup)
         self.add_controller(self.gesture_long_press)
+        self.connect('map', lambda *_: self.on_map())
+
+    def on_map(self):
+        page = self.get_ancestor(Adw.NavigationPage)
+
         drag_source = Gtk.DragSource()
         drag_source.set_actions(Gdk.DragAction.MOVE)
         drag_source.connect("drag-cancel", lambda *_: self.set_visible(True))
         drag_source.connect('prepare', lambda *_: Gdk.ContentProvider.new_for_value(self))
-        drag_source.connect("drag-begin", self.on_drag_begin)
-        drag_source.connect("drag-end", self.on_drag_end)
+        drag_source.connect("drag-begin", lambda s,d,page=page: self.on_drag_begin(s,d,page))
+        drag_source.connect("drag-end", lambda s,d,r,page=page: self.on_drag_end(s,d,r,page))
         self.add_controller(drag_source)
 
-    def on_drag_begin(self, source, drag):
-        page = self.get_ancestor(Adw.NavigationPage)
+    def on_drag_begin(self, source, drag, page):
         page.top_indicator.set_visible(True)
         page.bottom_indicator.set_visible(True)
         snapshot = Gtk.Snapshot()
@@ -747,8 +754,7 @@ class ChatRow(Gtk.ListBoxRow):
         source.set_icon(paintable, 0, 0)
         self.set_visible(False)
 
-    def on_drag_end(self, *_):
-        page = self.get_ancestor(Adw.NavigationPage)
+    def on_drag_end(self, source, drag, res, page):
         page.top_indicator.set_visible(False)
         page.bottom_indicator.set_visible(False)
         if page._scroll_timeout_id:
