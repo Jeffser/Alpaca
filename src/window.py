@@ -159,9 +159,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.get_application().lookup_action('model_creator_existing').set_enabled('ollama' in row.instance.instance_type)
                 self.get_application().lookup_action('model_creator_gguf').set_enabled('ollama' in row.instance.instance_type)
 
-
             self.chat_bin.get_child().row.update_profile_pictures()
+            listbox.set_sensitive(True)
         if listbox.get_sensitive():
+            listbox.set_sensitive(False)
             GLib.idle_add(threading.Thread(target=change_instance, daemon=True).start)
 
     @Gtk.Template.Callback()

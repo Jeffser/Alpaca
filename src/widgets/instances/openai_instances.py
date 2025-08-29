@@ -289,7 +289,7 @@ class BaseInstance:
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
-            return []
+            return {}
 
     def pull_model(self, model_name:str, callback:callable):
         SQL.append_online_instance_model_list(self.instance_id, model_name)
