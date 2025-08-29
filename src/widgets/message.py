@@ -62,7 +62,7 @@ class OptionPopup(Gtk.Popover):
             tooltip_text=_("Regenerate Message")
         )
         if self.message_element.get_model():
-            self.regenerate_button.connect('clicked', lambda *_: self.regenerate_message())
+            self.regenerate_button.connect('clicked', lambda *_: GLib.idle_add(self.regenerate_message))
             container.append(self.regenerate_button)
         self.tts_button = voice.DictateToggleButton(self.message_element)
         container.append(self.tts_button)
