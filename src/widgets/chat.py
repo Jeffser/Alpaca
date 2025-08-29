@@ -267,8 +267,8 @@ class ChatList(Adw.NavigationPage):
                 list_box = listbox.get_root().chat_bin.get_child().row.get_parent()
                 if list_box and list_box != self.chat_list_box:
                     listbox.get_root().chat_bin.get_child().row.get_parent().unselect_all()
-            # Discard Old Chat if Not Busy
-            old_chat = listbox.get_root().chat_bin.get_child()
+            # Discard Old Chat if Not Busy DISABLED FOR PERFORMANCE REASONS (even tho it uses more ram)
+            #old_chat = listbox.get_root().chat_bin.get_child()
             #if old_chat and not old_chat.busy:
                 #old_chat.unload_messages()
                 #old_chat.unrealize()
