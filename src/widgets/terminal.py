@@ -12,7 +12,7 @@ from gi.repository import Gtk, Pango, GLib, Gdk, Gio, Adw, GtkSource
 import os
 from ..sql_manager import Instance as SQL
 from ..constants import data_dir, IN_FLATPAK
-from . import dialog, attachments, message
+from . import dialog, attachments, message, activities
 
 commands = {
     'python': [
@@ -29,7 +29,6 @@ commands = {
     ],
     'html': [
         'echo -e "🦙 {}\n"'.format(_('Using Python HTTP server...')),
-        'xdg-open http://0.0.0.0:8080',
         'python -m http.server 8080 --directory "{sourcedir}"'
     ],
     'bash': [
@@ -157,8 +156,6 @@ if sys.platform != 'win32':
                     """.format(mermaid_content=runtime_code))
                 for command in commands.get('html'):
                     script.append(command.format(sourcedir=self.sourcedir))
-
-
             elif self.language == 'html':
                 sourcepath = os.path.join(self.sourcedir, 'index.html')
                 with open(sourcepath, 'w') as f:
@@ -188,6 +185,14 @@ if sys.platform != 'win32':
                 None
             )
             self.reload_button.set_sensitive(True)
+
+            if self.language in ('html', 'mermaid'): #Launch Browser
+                def launch_browser():
+                    activities.show_activity(
+                        page=activities.WebBrowser('http://127.0.0.1:8080'),
+                        root=self.get_root()
+                    )
+                GLib.idle_add(launch_browser)
 
     class CodeRunner(Gtk.Stack):
         __gtype_name__ = 'AlpacaCodeRunner'
