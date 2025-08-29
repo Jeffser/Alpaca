@@ -11,7 +11,7 @@ import tempfile, os, threading, requests, time, random
 class WebBrowser(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaWebBrowser'
 
-    def __init__(self, default_url:str='https://www.startpage.com'):
+    def __init__(self, default_url:str=None):
         self.webview = WebKit.WebView()
         self.webview.connect('load-changed', self.on_load_changed)
         self.webview.connect('create', self.on_create)
@@ -50,10 +50,32 @@ class WebBrowser(Gtk.ScrolledWindow):
             css_classes=['br0', 'flat']
         )
         self.attachment_button.connect("clicked", lambda button: threading.Thread(target=self.attachment_requested(self.save)).start())
-
+        #self.attachment_button.connect("clicked", lambda button:  )
         self.attachment_stack = Gtk.Stack(transition_type=1)
         self.attachment_stack.add_named(self.attachment_button, 'button')
         self.attachment_stack.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
+
+        actions = [[{
+            'label': _('Reload Page'),
+            'callback': self.webview.reload,
+            'icon': 'update-symbolic'
+        },{
+            'label': _('Open in External Browser'),
+            'callback': lambda: Gio.AppInfo.launch_default_for_uri(self.webview.get_uri()),
+            'icon': 'globe-symbolic'
+        },{
+            'label': _('Browser Preferences'),
+            'callback': lambda: WebBrowserPreferences().present(self.get_root()),
+            'icon': 'wrench-wide-symbolic'
+        }]]
+        popover = dialog.Popover(actions)
+        popover.set_has_arrow(True)
+        popover.set_halign(0)
+        menu_button = Gtk.MenuButton(
+            icon_name='view-more-symbolic',
+            popover=popover,
+            direction=0
+        )
 
         super().__init__(
             child=self.webview
@@ -64,15 +86,17 @@ class WebBrowser(Gtk.ScrolledWindow):
         # Activity
         self.title=_("Web Browser")
         self.activity_icon = 'globe-symbolic'
-        self.buttons = [self.back_button, self.forward_button, self.url_entry, self.attachment_stack]
+        self.buttons = [self.back_button, self.forward_button, self.url_entry, self.attachment_stack, menu_button]
 
     def on_map(self, default_url:str):
+        if not default_url:
+            default_url = self.get_root().settings.get_value('activity-webbrowser-homepage-url').unpack()
         self.webview.load_uri(default_url)
 
     def on_url_activate(self, entry):
         url = entry.get_text().strip()
         if not url.startswith("http://") and not url.startswith("https://"):
-            url = 'https://www.startpage.com/sp/search?query={}'.format(url)
+            url = self.get_root().settings.get_value('activity-webbrowser-query-url').unpack().format(url)
         self.webview.load_uri(url)
 
     def on_create(self, webview, navigation_action):
@@ -194,7 +218,7 @@ class WebBrowser(Gtk.ScrolledWindow):
     # Call on different thread
     def automate_search(self, save_func:callable, search_term:str, auto_choice:bool):
         def on_result_load():
-            if not self.webview.get_uri().startswith('https://www.startpage.com'):
+            if not self.webview.get_uri().startswith(self.get_root().settings.get_value('activity-webbrowser-homepage-url').unpack()):
                 self.on_load_callback = lambda: None
                 self.extract_md(save_func)
                 self.close()
@@ -214,10 +238,74 @@ class WebBrowser(Gtk.ScrolledWindow):
 
         time.sleep(5)
         self.on_load_callback = threading.Thread(target=on_search_page_ready).start
-        self.webview.load_uri('https://www.startpage.com/sp/search?query={}'.format(search_term))
+        self.webview.load_uri(self.get_root().settings.get_value('activity-webbrowser-query-url').unpack().format(search_term))
 
     def close(self):
         # Only close if it's a dialog
         parent = self.get_ancestor(Adw.Dialog)
         if parent:
             parent.close()
+
+class WebBrowserPreferences(Adw.PreferencesDialog):
+    __gtype_name__ = 'AlpacaWebBrowserPreferences'
+
+    presets = [
+        ['https://startpage.com/sp/search?query={}', 'https://startpage.com'],
+        ['https://duckduckgo.com/?q={}', 'https://duckduckgo.com/'],
+        ['https://google.com/search?q={}', 'https://google.com']
+    ]
+
+    def __init__(self):
+        super().__init__(
+            follows_content_size=True
+        )
+        settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
+
+        preferences_page = Adw.PreferencesPage()
+        self.add(preferences_page)
+
+        preferences_group = Adw.PreferencesGroup()
+        preferences_page.add(preferences_group)
+
+        search_presets_el = Adw.ComboRow(
+            title=_('Search Engine')
+        )
+
+        string_list = Gtk.StringList()
+        string_list.append('Startpage')
+        string_list.append('DuckDuckGo')
+        string_list.append('Google')
+        string_list.append(_('Custom'))
+
+        search_presets_el.set_model(string_list)
+
+        selected_index = len(self.presets)
+        for i, preset in enumerate(self.presets):
+            if preset[0] == settings.get_value('activity-webbrowser-query-url').unpack() and preset[1] == settings.get_value('activity-webbrowser-homepage-url').unpack():
+                selected_index=i
+        search_presets_el.set_selected(selected_index)
+        search_presets_el.connect('notify::selected', self.on_preset_change)
+        preferences_group.add(search_presets_el)
+
+        self.search_query_url_el = Adw.EntryRow(
+            title=_('Search Query URL'),
+            visible=search_presets_el.get_selected() == len(self.presets)
+        )
+        preferences_group.add(self.search_query_url_el)
+        settings.bind('activity-webbrowser-query-url', self.search_query_url_el, 'text', Gio.SettingsBindFlags.DEFAULT)
+
+        self.homepage_url_el = Adw.EntryRow(
+            title=_('Homepage URL'),
+            visible=search_presets_el.get_selected() == len(self.presets)
+        )
+        preferences_group.add(self.homepage_url_el)
+        settings.bind('activity-webbrowser-homepage-url', self.homepage_url_el, 'text', Gio.SettingsBindFlags.DEFAULT)
+
+    def on_preset_change(self, combo, gparam):
+        selected_index = combo.get_selected()
+        if selected_index < len(self.presets):
+            self.search_query_url_el.set_text(self.presets[selected_index][0])
+            self.homepage_url_el.set_text(self.presets[selected_index][1])
+
+        self.search_query_url_el.set_visible(not selected_index < len(self.presets))
+        self.homepage_url_el.set_visible(not selected_index < len(self.presets))

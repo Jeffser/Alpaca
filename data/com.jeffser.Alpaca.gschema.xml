@@ -58,5 +58,12 @@
 	  <key name="activity-mode" type="i">
 	    <default>0</default>
 	  </key>
+
+	  <key name="activity-webbrowser-query-url" type="s">
+	    <default>"https://startpage.com/sp/search?query={}"</default>
+	  </key>
+	  <key name="activity-webbrowser-homepage-url" type="s">
+	    <default>"https://startpage.com"</default>
+	  </key>
 	</schema>
 </schemalist>
