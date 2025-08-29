@@ -49,7 +49,7 @@ class WebBrowser(Gtk.ScrolledWindow):
             tooltip_text=_('Attach'),
             css_classes=['br0', 'flat']
         )
-        self.attachment_button.connect("clicked", lambda button: threading.Thread(target=self.extract_md(self.save)).start())
+        self.attachment_button.connect("clicked", lambda button: threading.Thread(target=self.attachment_requested(self.save)).start())
 
         self.attachment_stack = Gtk.Stack(transition_type=1)
         self.attachment_stack.add_named(self.attachment_button, 'button')
@@ -163,6 +163,18 @@ class WebBrowser(Gtk.ScrolledWindow):
             on_evaluated,
             None
         )
+
+    def attachment_requested(self, save_func:callable):
+        if self.webview.get_uri().startswith('https://www.youtube.com'):
+            attachment = attachments.Attachment(
+                file_id='-1',
+                file_name=self.webview.get_title(),
+                file_type='youtube',
+                file_content=attachments.extract_content('youtube', self.webview.get_uri())
+            )
+            self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(attachment)
+        else:
+            self.extract_md(save_func)
 
     def save(self, result):
         attachment = attachments.Attachment(
