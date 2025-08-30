@@ -112,11 +112,15 @@ class AlpacaService:
             root=self.app.props.active_window
         )
 
-    def Open(self, chat_name:str): ##TODO ohno
-        for chat_row in list(self.app.props.active_window.chat_list_box):
-            if chat_row.chat_window.get_name() == chat_name:
-                self.app.props.active_window.chat_list_box.select_row(chat_row)
+    def Open(self, chat_name:str):
+        navigationview = self.app.props.active_window.chat_list_navigationview
+        page = list(navigationview.get_navigation_stack())[0]
+        navigationview.pop_to_page(page)
+        for chat_row in list(page.chat_list_box):
+            if chat_row.get_name() == chat_name:
+                page.chat_list_box.select_row(chat_row)
                 self.Present()
+                return
 
     def Create(self, chat_name:str):
         self.app.props.active_window.new_chat(chat_name)
@@ -261,7 +265,7 @@ def main(version):
         sys.exit(0)
 
     if args.list_chats:
-        chats = SQL.get_chats()
+        chats = SQL.get_chats_by_folder(None)
         if chats:
             for chat in chats:
                 print(chat[1])

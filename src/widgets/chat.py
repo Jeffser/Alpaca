@@ -533,9 +533,6 @@ class FolderRow(Gtk.ListBoxRow):
         self.gesture_click = Gtk.GestureClick(button=3)
         self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
         self.add_controller(self.gesture_click)
-        #self.gesture_long_press = Gtk.GestureLongPress()
-        #self.gesture_long_press.connect("pressed", self.show_popup)
-        #self.add_controller(self.gesture_long_press) ##TODO fix
         drop_target_folder = Gtk.DropTarget.new(FolderRow, Gdk.DragAction.MOVE)
         drop_target_folder.connect("drop", self.on_drop_folder)
         self.add_controller(drop_target_folder)
