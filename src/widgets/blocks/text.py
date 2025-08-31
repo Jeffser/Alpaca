@@ -195,7 +195,6 @@ class EditingText(Gtk.Box):
         self.message.header_container.set_visible(True)
         self.message.main_stack.set_visible_child_name('content')
         GLib.idle_add(self.message.save)
-        return
         response_index = list(self.message.get_parent()).index(self.message) + 1
         if len(list(self.message.get_parent())) > response_index:
             next_message = list(self.message.get_parent())[response_index]
