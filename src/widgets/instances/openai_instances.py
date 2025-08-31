@@ -41,7 +41,7 @@ class BaseInstance:
 
         self.client = openai.OpenAI(
             base_url=self.properties.get('url').strip(),
-            api_key=self.properties.get('api') if self.properties.get('api') else 'NO_KEY'
+            api_key=self.properties.get('api')
         )
 
     def stop(self):
