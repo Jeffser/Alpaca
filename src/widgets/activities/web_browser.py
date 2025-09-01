@@ -12,6 +12,8 @@ class WebBrowser(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaWebBrowser'
 
     def __init__(self, default_url:str=None):
+        settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
+        self.default_url = default_url or settings.get_value('activity-webbrowser-homepage-url').unpack()
         self.webview = WebKit.WebView()
         self.webview.connect('load-changed', self.on_load_changed)
         self.webview.connect('create', self.on_create)
@@ -64,6 +66,10 @@ class WebBrowser(Gtk.ScrolledWindow):
             'callback': lambda: Gio.AppInfo.launch_default_for_uri(self.webview.get_uri()),
             'icon': 'globe-symbolic'
         },{
+            'label': _('Go to Home'),
+            'callback': lambda: self.webview.load_uri(self.default_url),
+            'icon': 'go-home-symbolic'
+        },{
             'label': _('Browser Preferences'),
             'callback': lambda: WebBrowserPreferences().present(self.get_root()),
             'icon': 'wrench-wide-symbolic'
@@ -81,23 +87,22 @@ class WebBrowser(Gtk.ScrolledWindow):
             child=self.webview
         )
 
-        self.connect('map', lambda *_: self.on_map(default_url))
+        self.webview.load_uri(self.default_url)
 
         # Activity
         self.title=_("Web Browser")
         self.activity_icon = 'globe-symbolic'
         self.buttons = [self.back_button, self.forward_button, self.url_entry, self.attachment_stack, menu_button]
 
-    def on_map(self, default_url:str):
-        if not default_url:
-            default_url = self.get_root().settings.get_value('activity-webbrowser-homepage-url').unpack()
-        self.webview.load_uri(default_url)
-
     def on_url_activate(self, entry):
         url = entry.get_text().strip()
-        if not url.startswith("http://") and not url.startswith("https://"):
+        if url.startswith("http://") or url.startswith("https://"):
+            self.webview.load_uri(url)
+        elif '.' in url and ' ' not in url:
+            self.webview.load_uri('https://{}'.format(url))
+        else:
             url = self.get_root().settings.get_value('activity-webbrowser-query-url').unpack().format(url)
-        self.webview.load_uri(url)
+
 
     def on_create(self, webview, navigation_action):
         # Called when a new WebView would normally be created (new tab/window)
@@ -190,13 +195,7 @@ class WebBrowser(Gtk.ScrolledWindow):
 
     def attachment_requested(self, save_func:callable):
         if self.webview.get_uri().startswith('https://www.youtube.com'):
-            attachment = attachments.Attachment(
-                file_id='-1',
-                file_name=self.webview.get_title(),
-                file_type='youtube',
-                file_content=attachments.extract_content('youtube', self.webview.get_uri())
-            )
-            self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(attachment)
+            save_func(attachments.extract_content('youtube', self.webview.get_uri()))
         else:
             self.extract_md(save_func)
 
@@ -204,13 +203,13 @@ class WebBrowser(Gtk.ScrolledWindow):
         attachment = attachments.Attachment(
             file_id='-1',
             file_name=self.webview.get_title(),
-            file_type='website',
+            file_type='youtube' if result.startswith('# YouTube') else 'website',
             file_content=result
         )
         self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(attachment)
 
     def on_close(self):
-        pass
+        self.webview.terminate_web_process()
 
     def on_reload(self):
         pass
@@ -220,7 +219,7 @@ class WebBrowser(Gtk.ScrolledWindow):
         def on_result_load():
             if not self.webview.get_uri().startswith(self.get_root().settings.get_value('activity-webbrowser-homepage-url').unpack()):
                 self.on_load_callback = lambda: None
-                self.extract_md(save_func)
+                self.attachment_requested(save_func)
                 self.close()
 
         def on_html_extracted(raw_html):
@@ -228,7 +227,8 @@ class WebBrowser(Gtk.ScrolledWindow):
             if auto_choice:
                 soup = BeautifulSoup(raw_html, "html.parser")
                 # I know, really sofisticated
-                result = random.choice(soup.select('a.result-title')[5:])
+                results = soup.select('a.result-title') + soup.select('a[data-testid="result-title-a"]') + soup.select('a:has(h3)')
+                result = random.choice(results[5:])
                 time.sleep(5)
                 self.webview.load_uri(result["href"])
 
