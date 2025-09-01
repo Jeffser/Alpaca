@@ -281,6 +281,9 @@ class ChatList(Adw.NavigationPage):
                 self.get_root().global_footer.toggle_action_button(False)
             else:
                 self.get_root().global_footer.toggle_action_button(True)
+
+            if len(list(new_chat.container)) == 0:
+                print('load')
                 new_chat.load_messages()
 
             # Show New Stack Page
