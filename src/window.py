@@ -175,10 +175,24 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
         def close():
-            self.settings.set_string('default-chat', self.chat_bin.get_child().chat_id)
-            self.get_current_instance().stop()
-            if Widgets.voice.message_dictated:
-                Widgets.voice.message_dictated.popup.tts_button.set_active(False)
+            try:
+                self.settings.set_string('default-chat', self.chat_bin.get_child().chat_id)
+            except Exception as e:
+                logger.warning(f"Could not save default chat: {e}")
+            
+            try:
+                current_instance = self.get_current_instance()
+                if hasattr(current_instance, 'stop'):
+                    current_instance.stop()
+            except Exception as e:
+                logger.warning(f"Error stopping current instance: {e}")
+            
+            try:
+                if Widgets.voice.message_dictated:
+                    Widgets.voice.message_dictated.popup.tts_button.set_active(False)
+            except Exception as e:
+                logger.warning(f"Error stopping voice: {e}")
+            
             # Quit from the GLib main loop to avoid teardown races with worker threads
             GLib.idle_add(self.get_application().quit)
 
