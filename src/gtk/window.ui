@@ -28,7 +28,7 @@
     </child>
     <child>
       <object class="AdwBreakpoint">
-        <condition>max-width: 540sp</condition>
+        <condition>max-width: 560sp</condition>
         <setter object="split_view_overlay" property="collapsed">true</setter>
         <setter object="model_manager_header_bar" property="title-widget"/>
         <setter object="model_manager_bottom_view_switcher" property="reveal">true</setter>
