@@ -416,7 +416,7 @@ class Chat(Gtk.Stack):
                 mode=('user', 'assistant', 'system').index(message[1]),
                 author=message[2]
             )
-            GLib.idle_add(self.container.append, message_element)
+            self.container.append(message_element)
 
             attachments = SQL.get_attachments(message_element)
             for attachment in attachments:
