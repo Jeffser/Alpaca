@@ -29,7 +29,8 @@ class QuickAskWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def closing_app(self, element):
         if self.get_application().main_alpaca_window.get_visible() == False:
-            self.get_application().quit()
+            # Use GLib.idle_add to ensure proper cleanup sequence
+            GLib.idle_add(self.get_application().quit)
 
     @Gtk.Template.Callback()
     def save_chat(self, button):

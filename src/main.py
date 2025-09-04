@@ -140,7 +140,7 @@ class AlpacaApplication(Adw.Application):
     def __init__(self, version):
         super().__init__(application_id='com.jeffser.Alpaca',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
-        self.create_action('quit', lambda *_: self.props.active_window.closing_app(None), ['<primary>q'])
+        self.create_action('quit', lambda *_: GLib.idle_add(self.props.active_window.close), ['<primary>q'])
         self.create_action('about', self.on_about_action)
         self.set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.version = version

@@ -508,11 +508,25 @@ class OllamaManaged(BaseInstance):
     def stop(self):
         if self.process:
             logger.info("Stopping Alpaca's Ollama instance")
-            os.killpg(os.getpgid(self.process.pid), signal.SIGTERM)
-            self.process.wait()
-            self.process = None
-            self.log_summary = (_("Integrated Ollama instance is not running"), ['dim-label'])
-            logger.info("Stopped Alpaca's Ollama instance")
+            try:
+                # Check if process is still alive before trying to stop it
+                if self.process.poll() is None:
+                    os.killpg(os.getpgid(self.process.pid), signal.SIGTERM)
+                    # Wait with timeout to avoid hanging indefinitely
+                    try:
+                        self.process.wait(timeout=5)
+                    except subprocess.TimeoutExpired:
+                        logger.warning("Ollama process didn't stop gracefully, forcing kill")
+                        os.killpg(os.getpgid(self.process.pid), signal.SIGKILL)
+                        self.process.wait(timeout=2)
+            except (ProcessLookupError, OSError) as e:
+                logger.info(f"Process already stopped or not accessible: {e}")
+            except Exception as e:
+                logger.error(f"Error stopping Ollama process: {e}")
+            finally:
+                self.process = None
+                self.log_summary = (_("Integrated Ollama instance is not running"), ['dim-label'])
+                logger.info("Stopped Alpaca's Ollama instance")
 
     def start(self):
         if shutil.which('ollama') and not self.process:
