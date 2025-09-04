@@ -140,7 +140,7 @@ class AlpacaApplication(Adw.Application):
     def __init__(self, version):
         super().__init__(application_id='com.jeffser.Alpaca',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
-        self.create_action('quit', lambda *_: self.safe_quit(), ['<primary>q'])
+        self.create_action('quit', lambda *_: self.props.active_window.close(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
         self.set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
         self.version = version
@@ -167,19 +167,6 @@ class AlpacaApplication(Adw.Application):
 
     def create_quick_ask(self):
         return get_window_library('quick-ask')(application=self)
-
-    def safe_quit(self):
-        """Safely quit the application with proper error handling"""
-        try:
-            if self.props.active_window:
-                self.props.active_window.closing_app(None)
-            else:
-                # No active window, quit directly
-                GLib.idle_add(self.quit)
-        except Exception as e:
-            logger.error(f"Error during quit: {e}")
-            # Force quit if normal quit fails
-            GLib.idle_add(self.quit)
 
     def do_activate(self):
         self.main_alpaca_window = self.props.active_window
