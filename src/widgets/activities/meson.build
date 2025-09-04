@@ -5,6 +5,8 @@ blocks = [
   'background_remover.py',
   'web_browser.py',
   'live_chat.py',
+  'terminal.py',
+  'camera.py',
 ]
 
 install_data(blocks, install_dir: moduledir)

@@ -10,9 +10,9 @@ if sys.platform != 'win32':
     from gi.repository import Vte
 from gi.repository import Gtk, Pango, GLib, Gdk, Gio, Adw, GtkSource
 import os
-from ..sql_manager import Instance as SQL
-from ..constants import data_dir, IN_FLATPAK
-from . import dialog, attachments, message, activities
+from ...sql_manager import Instance as SQL
+from ...constants import data_dir, IN_FLATPAK
+from .. import dialog, attachments, message, activities
 
 commands = {
     'python': [

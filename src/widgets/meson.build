@@ -4,11 +4,9 @@ widgets = [
   '__init__.py',
   'message.py',
   'chat.py',
-  'terminal.py',
   'dialog.py',
   'attachments.py',
   'voice.py',
-  'camera.py',
   'welcome.py',
   'preferences.py',
 ]

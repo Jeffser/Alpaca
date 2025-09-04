@@ -10,7 +10,7 @@ from html2text import html2text
 from PIL import Image
 from io import BytesIO
 
-from .. import terminal, activities, attachments, dialog, models, chat, message
+from .. import activities, attachments, dialog, models, chat, message
 from ...constants import data_dir, REMBG_MODELS
 from ...sql_manager import generate_uuid, Instance as SQL
 
@@ -682,7 +682,7 @@ class RunCommand(Base):
         ]
 
         self.waiting_terminal = True
-        term = terminal.Terminal(
+        term = activities.Terminal(
             language='ssh',
             code_getter=lambda:';'.join(commands),
             close_callback=lambda: setattr(self, 'waiting_terminal', False)

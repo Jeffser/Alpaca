@@ -4,7 +4,7 @@ Manages the camera feature to send pictures to AI
 """
 
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject, Gst
-from . import attachments, dialog, activities
+from .. import attachments, dialog, activities
 import cv2, threading, base64
 import numpy as np
 

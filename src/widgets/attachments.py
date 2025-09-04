@@ -15,7 +15,7 @@ import requests, json, base64, tempfile, shutil, logging, threading, os, re
 from urllib.robotparser import RobotFileParser
 from urllib.parse import urlparse
 
-from . import blocks, dialog, camera, voice, activities, terminal
+from . import blocks, dialog, voice, activities
 from ..sql_manager import Instance as SQL
 
 logger = logging.getLogger(__name__)
@@ -377,7 +377,7 @@ class Attachment(Gtk.Button):
                     pass
                 if self.file_type == 'website':
                     language='md'
-                page = terminal.CodeEditor(
+                page = activities.CodeEditor(
                     language=language,
                     code_getter=lambda:code
                 )
@@ -897,7 +897,7 @@ class GlobalAttachmentButton(Gtk.Button):
                 },
                 {
                     'label': _('Attach Photo From Camera'),
-                    'callback': lambda: camera.show_webcam_dialog(
+                    'callback': lambda: activities.show_webcam_dialog(
                         self.get_root(),
                         lambda att: self.get_root().global_footer.attachment_container.add_attachment(att)
                     ),

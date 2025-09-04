@@ -4,7 +4,9 @@ from gi.repository import Gtk, Gio, Adw, GLib, GdkPixbuf, Gdk
 from .background_remover import BackgroundRemoverPage
 from .web_browser import WebBrowser
 from .live_chat import LiveChatPage
-from .. import terminal, camera, dialog
+from .terminal import Terminal, AttachmentCreator, CodeRunner, CodeEditor
+from .camera import show_webcam_dialog
+from .. import dialog
 import importlib.util
 
 last_activity_tabview = None
@@ -166,7 +168,7 @@ class ActivityManager(Adw.Bin):
             {
                 'title': _('Terminal'),
                 'icon': 'terminal-symbolic',
-                'builder': lambda: terminal.Terminal(
+                'builder': lambda: Terminal(
                     language='bash',
                     code_getter=lambda: 'bash'
                 ),
@@ -176,12 +178,12 @@ class ActivityManager(Adw.Bin):
             {
                 'title': _('Attachment Creator'),
                 'icon': 'document-text-symbolic',
-                'builder': terminal.AttachmentCreator
+                'builder': AttachmentCreator
             },
             {
                 'title': _('Camera'),
                 'icon': 'camera-photo-symbolic',
-                'builder': lambda: camera.show_webcam_dialog(
+                'builder': lambda: show_webcam_dialog(
                     root_widget=self.get_root(),
                     attachment_func=lambda att: self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(att),
                     return_page=True

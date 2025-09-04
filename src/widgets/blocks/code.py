@@ -4,7 +4,7 @@ Code block handling
 """
 
 from gi.repository import Gtk, Gdk, GtkSource
-from .. import terminal, dialog, activities
+from .. import dialog, activities
 from ...sql_manager import generate_uuid
 import re, unicodedata
 
@@ -137,7 +137,7 @@ class Code(Gtk.Box):
         if self.activity_edit and self.activity_edit.get_root():
             self.activity_edit.reload()
         else:
-            ce = terminal.CodeEditor(
+            ce = activities.CodeEditor(
                 language=get_language_property(self.get_language()).get('id'),
                 code_getter=self.get_code,
                 save_func=self.save_edit
@@ -167,7 +167,7 @@ class Code(Gtk.Box):
                     'code': blk_code
                 })
 
-            cr = terminal.CodeRunner(
+            cr = activities.CodeRunner(
                 code_getter=self.get_code,
                 language=get_language_property(self.get_language()).get('id'),
                 extra_files=extra_files,
