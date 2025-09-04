@@ -67,14 +67,16 @@ def update_added_model_list(root):
             for model in os.listdir(os.path.join(data_dir, 'whisper')):
                 if model.endswith('.pt') and STT_MODELS.get(model.removesuffix('.pt')):
                     model_element = speech.SpeechToTextModelButton(model.removesuffix('.pt'))
-                    window.local_model_flowbox.prepend(model_element)
+                    window.local_model_flowbox.append(model_element)
+                    model_element.get_parent().set_focusable(False)
 
         # Text to Speech
         tts_model_path = get_tts_path()
         if tts_model_path:
             for model in os.listdir(tts_model_path):
                 model_element = speech.TextToSpeechModelButton(os.path.join(tts_model_path, model))
-                window.local_model_flowbox.prepend(model_element)
+                window.local_model_flowbox.append(model_element)
+                model_element.get_parent().set_focusable(False)
 
     if importlib.util.find_spec('rembg'):
         model_dir = os.path.join(data_dir, '.u2net')
@@ -82,7 +84,8 @@ def update_added_model_list(root):
             for model in os.listdir(model_dir):
                 if model.endswith('.onnx') and REMBG_MODELS.get(model.removesuffix('.onnx')):
                     model_element = image.BackgroundRemoverModelButton(model.removesuffix('.onnx'))
-                    window.local_model_flowbox.prepend(model_element)
+                    window.local_model_flowbox.append(model_element)
+                    model_element.get_parent().set_focusable(False)
 
     # Normal Models
     threads=[]
@@ -90,7 +93,8 @@ def update_added_model_list(root):
     local_models = window.get_current_instance().get_local_models()
     for model in local_models:
         model_element = added.AddedModelButton(model.get('name'), window.get_current_instance())
-        window.local_model_flowbox.prepend(model_element)
+        window.local_model_flowbox.append(model_element)
+        model_element.get_parent().set_focusable(False)
         GLib.idle_add(window.model_dropdown.get_model().append,model_element.row)
         model_element.get_parent().set_focusable(False)
     window.title_stack.set_visible_child_name('model-selector' if len(common.get_local_models(window)) > 0 else 'no-models')
