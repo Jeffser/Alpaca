@@ -6,7 +6,8 @@ from ...sql_manager import generate_uuid, Instance as SQL
 from ...constants import cache_dir
 from markitdown import MarkItDown
 from bs4 import BeautifulSoup
-import tempfile, os, threading, requests, time, random
+from urllib.parse import urlparse
+import tempfile, os, threading, requests, random
 
 class WebBrowser(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaWebBrowser'
@@ -216,29 +217,33 @@ class WebBrowser(Gtk.ScrolledWindow):
 
     # Call on different thread
     def automate_search(self, save_func:callable, search_term:str, auto_choice:bool):
+        query_url = self.get_root().settings.get_value('activity-webbrowser-query-url').unpack()
         def on_result_load():
-            if not self.webview.get_uri().startswith(self.get_root().settings.get_value('activity-webbrowser-homepage-url').unpack()):
+            query_hostname = urlparse(query_url).hostname.lower()
+            if query_hostname.startswith('www.'):
+                query_hostname = query_hostname[4:]
+            current_hostname = urlparse(self.webview.get_uri()).hostname.lower()
+            if current_hostname.startswith('www.'):
+                current_hostname = current_hostname[4:]
+            if not query_hostname == current_hostname:
                 self.on_load_callback = lambda: None
                 self.attachment_requested(save_func)
                 self.close()
 
         def on_html_extracted(raw_html):
-            self.on_load_callback = threading.Thread(target=on_result_load).start
+            self.on_load_callback = lambda: threading.Thread(target=on_result_load).start()
             if auto_choice:
                 soup = BeautifulSoup(raw_html, "html.parser")
                 # I know, really sofisticated
                 results = soup.select('a.result-title') + soup.select('a[data-testid="result-title-a"]') + soup.select('a:has(h3)')
                 result = random.choice(results[5:])
-                time.sleep(5)
-                self.webview.load_uri(result["href"])
+                GLib.timeout_add(5000, self.webview.load_uri, result["href"])
 
         def on_search_page_ready():
-            self.extract_html(on_html_extracted)
-            time.sleep(5)
+            GLib.timeout_add(5000, self.extract_html, on_html_extracted)
 
-        time.sleep(5)
-        self.on_load_callback = threading.Thread(target=on_search_page_ready).start
-        self.webview.load_uri(self.get_root().settings.get_value('activity-webbrowser-query-url').unpack().format(search_term))
+        self.on_load_callback = lambda: threading.Thread(target=on_search_page_ready).start()
+        GLib.timeout_add(5000, self.webview.load_uri, query_url.format(search_term))
 
     def close(self):
         # Only close if it's a dialog
