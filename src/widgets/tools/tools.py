@@ -563,7 +563,7 @@ class ExtractWikipedia(Base):
 class WebSearch(Base):
     tool_metadata = {
         "name": "web_search",
-        "description": "Search for a term online using StartPage returning results",
+        "description": "Search for a term online using built-in web browser returning results",
         "parameters": {
             "type": "object",
             "properties": {
@@ -578,7 +578,7 @@ class WebSearch(Base):
         }
     }
     name = _("Web Search")
-    description = _("Search for a term online using StartPage")
+    description = _("Search for a term online using built-in web browser")
     variables = {
         'auto_choice': {
             'display_name': "Automatically Decide Which Result to Use",
