@@ -61,6 +61,16 @@ def update_added_model_list(root):
     window.local_model_flowbox.remove_all()
     GLib.idle_add(window.model_dropdown.get_model().remove_all)
 
+    # Normal Models
+    window.get_current_instance().local_models = None # To reset cache
+    local_models = window.get_current_instance().get_local_models()
+    for model in local_models:
+        model_element = added.AddedModelButton(model.get('name'), window.get_current_instance())
+        window.local_model_flowbox.append(model_element)
+        model_element.get_parent().set_focusable(False)
+        GLib.idle_add(window.model_dropdown.get_model().append,model_element.row)
+        model_element.get_parent().set_focusable(False)
+
     if importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'):
         # Speech to Text
         if os.path.isdir(os.path.join(data_dir, 'whisper')):
@@ -78,6 +88,7 @@ def update_added_model_list(root):
                 window.local_model_flowbox.append(model_element)
                 model_element.get_parent().set_focusable(False)
 
+    # Background Removers
     if importlib.util.find_spec('rembg'):
         model_dir = os.path.join(data_dir, '.u2net')
         if os.path.isdir(model_dir):
@@ -87,16 +98,6 @@ def update_added_model_list(root):
                     window.local_model_flowbox.append(model_element)
                     model_element.get_parent().set_focusable(False)
 
-    # Normal Models
-    threads=[]
-    window.get_current_instance().local_models = None # To reset cache
-    local_models = window.get_current_instance().get_local_models()
-    for model in local_models:
-        model_element = added.AddedModelButton(model.get('name'), window.get_current_instance())
-        window.local_model_flowbox.append(model_element)
-        model_element.get_parent().set_focusable(False)
-        GLib.idle_add(window.model_dropdown.get_model().append,model_element.row)
-        model_element.get_parent().set_focusable(False)
     window.title_stack.set_visible_child_name('model-selector' if len(common.get_local_models(window)) > 0 else 'no-models')
     window.local_model_stack.set_visible_child_name('content' if len(list(window.local_model_flowbox)) > 0 else 'no-models')
     window.model_dropdown.set_enable_search(len(local_models) > 10)
