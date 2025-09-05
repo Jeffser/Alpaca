@@ -106,18 +106,18 @@ class BaseInstance:
                     messages.append({
                         'role': 'assistant',
                         'content': '',
-                        'tool_calls': [
-                            {
-                                'function': {
-                                    'name': function.get('name'),
-                                    'arguments': function.get('arguments')
-                                }
-                            }
-                        ]
+                        #'tool_calls': [
+                            #{
+                                #'function': {
+                                    #'name': function.get('name'),
+                                    #'arguments': function.get('arguments')
+                                #}
+                            #}
+                        #]
                     })
                     messages.append({
                         'role': 'tool',
-                        'name': function.get('name'),
+                        #'name': function.get('name'),
                         'content': response
                     })
         except Exception as e:
@@ -138,6 +138,8 @@ class BaseInstance:
             bot_message.finish_generation('')
 
     def generate_response(self, bot_message, chat, messages:list, model:str):
+        print(model, '\n', bot_message, '\n\n')
+        print(messages)
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         bot_message.block_container.prepare_generating_block()
