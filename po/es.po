@@ -101,15 +101,15 @@ msgstr "Una conversación normal con un modelo AI"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:57
 msgid "Image recognition"
-msgstr ""
+msgstr "Reconocimiento de imágenes"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:61
 msgid "Custom model"
-msgstr ""
+msgstr "Modelo personalizado"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:65
 msgid "Picture background removal"
-msgstr ""
+msgstr "Eliminación del fondo de la imagen"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:69
 msgid "A Python script running inside integrated terminal"
@@ -121,7 +121,7 @@ msgstr "Una conversación con búsqueda web"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:77
 msgid "AI model being downloaded"
-msgstr ""
+msgstr "Modelo de IA siendo descargado"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:81
 msgid "A Live Chat conversation with a character"
@@ -171,15 +171,15 @@ msgstr "Nuevo"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "New feature: Activities"
-msgstr ""
+msgstr "Nueva función: Actividades"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "New feature: Folders"
-msgstr ""
+msgstr "Nueva función: Carpetas"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "New tool: Web Search"
-msgstr ""
+msgstr "Nueva herramienta: Búsqueda Web"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
@@ -234,15 +234,15 @@ msgstr "Arreglos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Fixed code renderer"
-msgstr ""
+msgstr "Se corrigió renderizador de código"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Fixed some crashes"
-msgstr ""
+msgstr "Se corrigieron algunos fallos."
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Fixed YouTube transcriber (Flatpak)"
-msgstr ""
+msgstr "Transcriptor de YouTube corregido (Flatpak)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid "New tool: Image background remover with local processing"
@@ -4049,7 +4049,7 @@ msgstr "Nuevo Chat"
 #: src/window.py:465 src/widgets/chat.py:244 src/widgets/chat.py:629
 #: src/widgets/chat.py:662
 msgid "New Folder"
-msgstr ""
+msgstr "Nueva Carpeta"
 
 #: src/window.py:516
 msgid "Pull Model"
@@ -4204,7 +4204,7 @@ msgstr ""
 
 #: src/gtk/notice.ui:34
 msgid "Folders"
-msgstr ""
+msgstr "Carpetas"
 
 #: src/gtk/notice.ui:35
 msgid ""
@@ -4212,6 +4212,9 @@ msgid ""
 "Folders let you neatly organize everything, so you can find exactly what "
 "you're looking for without the clutter."
 msgstr ""
+"Mantener todos tus chats y subcarpetas en un solo lugar ahora es más fácil "
+"que nunca. Las carpetas te permiten organizar todo con claridad, para que "
+"encuentres justo lo que buscas sin desorden."
 
 #: src/gtk/notice.ui:42 src/gtk/window.ui:124
 #: src/widgets/activities/__init__.py:157
@@ -4219,7 +4222,7 @@ msgstr ""
 #: src/widgets/activities/__init__.py:238
 #: src/widgets/activities/__init__.py:302
 msgid "Activities"
-msgstr ""
+msgstr "Actividades"
 
 #: src/gtk/notice.ui:43
 msgid ""
@@ -4227,6 +4230,10 @@ msgid ""
 "apps that your AI can use to help you with tasks, from running code and "
 "using a web browser to transcribing audio and creating attachments."
 msgstr ""
+"Hay una nueva forma de hacer las cosas con Actividades. Son como "
+"miniaplicaciones que tu IA puede usar para ayudarte con tareas, desde "
+"ejecutar código y usar un navegador web hasta transcribir audio y crear "
+"archivos adjuntos."
 
 #: src/gtk/preferences.ui:7 src/gtk/window.ui:702
 msgid "Preferences"
@@ -4278,25 +4285,27 @@ msgstr "Esto podría afectar el rendimiento de los modelos de visión"
 
 #: src/gtk/preferences.ui:69
 msgid "Preferred Activity Mode"
-msgstr ""
+msgstr "Modo de Actividad Preferido"
 
 #: src/gtk/preferences.ui:70
 msgid ""
 "This affects how terminals, attachments and other activities are represented "
 "in the main window"
 msgstr ""
+"Esto afecta la forma en que se representan los terminales, los archivos "
+"adjuntos y otras actividades en la ventana principal."
 
 #: src/gtk/preferences.ui:74
 msgid "Sidebar"
-msgstr ""
+msgstr "Barra Lateral"
 
 #: src/gtk/preferences.ui:75
 msgid "Dialog"
-msgstr ""
+msgstr "Diálogo"
 
 #: src/gtk/preferences.ui:76
 msgid "Window"
-msgstr ""
+msgstr "Ventana"
 
 #: src/gtk/preferences.ui:89
 msgid "Audio"
@@ -4447,7 +4456,7 @@ msgstr "Buscar chats"
 
 #: src/gtk/window.ui:129
 msgid "Chat"
-msgstr ""
+msgstr "Chat"
 
 #: src/gtk/window.ui:138
 msgid "Toggle Sidebar"
@@ -4467,11 +4476,11 @@ msgstr "Gestionar Modelos"
 
 #: src/gtk/window.ui:216
 msgid "Toggle Activities Sidebar"
-msgstr ""
+msgstr "Alternar Barra Lateral de Actividades"
 
 #: src/gtk/window.ui:228
 msgid "Show Activities"
-msgstr ""
+msgstr "Mostrar Actividades"
 
 #: src/gtk/window.ui:240
 msgid "Chat Menu"
@@ -4667,7 +4676,7 @@ msgstr "Descargar Adjunto"
 
 #: src/widgets/attachments.py:153
 msgid "Reset View"
-msgstr ""
+msgstr "Restablecer Vista"
 
 #: src/widgets/attachments.py:435
 msgid "Delete Attachment?"
@@ -4753,15 +4762,15 @@ msgstr "Adjuntar Foto Desde la Cámara"
 
 #: src/widgets/chat.py:19 src/widgets/chat.py:498
 msgid "Root"
-msgstr ""
+msgstr "Raíz"
 
 #: src/widgets/chat.py:29
 msgid "No Results Found"
-msgstr ""
+msgstr "No Se Encontraron Resultados"
 
 #: src/widgets/chat.py:36
 msgid "Folder is Empty"
-msgstr ""
+msgstr "La Carpeta Está Vacía"
 
 #: src/widgets/chat.py:350
 msgid "Try one of these prompts"
@@ -4786,11 +4795,11 @@ msgstr "Refrescar Mensajes de Prueba"
 
 #: src/widgets/chat.py:601
 msgid "Rename Folder"
-msgstr ""
+msgstr "Renombrar Carpeta"
 
 #: src/widgets/chat.py:608
 msgid "Delete Folder"
-msgstr ""
+msgstr "Eliminar Carpeta"
 
 #: src/widgets/chat.py:650 src/widgets/dialog.py:198 src/widgets/dialog.py:211
 #: src/widgets/dialog.py:224
@@ -4799,17 +4808,18 @@ msgstr "Aceptar"
 
 #: src/widgets/chat.py:658
 msgid "Rename Folder?"
-msgstr ""
+msgstr "¿Renombrar Carpeta?"
 
 #: src/widgets/chat.py:690
 msgid "Delete Folder?"
-msgstr ""
+msgstr "¿Eliminar Carpeta?"
 
 #: src/widgets/chat.py:691
 #, python-brace-format
 msgid ""
 "Are you sure you want to delete '{}' and all it's sub-folders and chats?"
 msgstr ""
+"¿Estás seguro de que deseas eliminar '{}' y todas sus subcarpetas y chats?"
 
 #: src/widgets/chat.py:814
 msgid "Rename Chat?"
@@ -4986,7 +4996,7 @@ msgstr "Transcribiendo Audio"
 
 #: src/widgets/voice.py:308
 msgid "Transcriber"
-msgstr ""
+msgstr "Transcriptor"
 
 #: src/widgets/voice.py:325 src/widgets/voice.py:353
 msgid "Transcription Error"
@@ -5004,11 +5014,11 @@ msgstr "¡Ya instalado!"
 #: src/widgets/activities/background_remover.py:28
 #: src/widgets/activities/background_remover.py:122
 msgid "Select Image"
-msgstr ""
+msgstr "Seleccionar Imagen"
 
 #: src/widgets/activities/background_remover.py:64
 msgid "Original"
-msgstr ""
+msgstr "Original"
 
 #: src/widgets/activities/background_remover.py:70
 #: src/widgets/instances/ollama_instances.py:95
@@ -5018,12 +5028,12 @@ msgstr "Resultado"
 
 #: src/widgets/activities/background_remover.py:128
 msgid "Download Result"
-msgstr ""
+msgstr "Descargar Resultado"
 
 #: src/widgets/activities/background_remover.py:134
 #: src/widgets/activities/__init__.py:211 src/widgets/models/image.py:100
 msgid "Background Remover"
-msgstr ""
+msgstr "Eliminador de Fondo"
 
 #: src/widgets/activities/background_remover.py:180
 msgid "Download Background Removal Model"
@@ -5037,11 +5047,11 @@ msgstr ""
 
 #: src/widgets/activities/camera.py:25
 msgid "Capture Picture"
-msgstr ""
+msgstr "Capturar Imagen"
 
 #: src/widgets/activities/camera.py:38 src/widgets/activities/__init__.py:184
 msgid "Camera"
-msgstr ""
+msgstr "Cámara"
 
 #: src/widgets/activities/camera.py:87
 msgid "Photo"
@@ -5057,15 +5067,15 @@ msgstr "Compruebe si la cámara está enchufada y encendida"
 
 #: src/widgets/activities/__init__.py:34
 msgid "Close Activity"
-msgstr ""
+msgstr "Cerrar Actividad"
 
 #: src/widgets/activities/__init__.py:132
 msgid "Detach Activity"
-msgstr ""
+msgstr "Separar Actividad"
 
 #: src/widgets/activities/__init__.py:139
 msgid "Create Activity"
-msgstr ""
+msgstr "Crear Actividad"
 
 #: src/widgets/activities/__init__.py:169 src/widgets/activities/terminal.py:78
 msgid "Terminal"
@@ -5073,12 +5083,12 @@ msgstr "Terminal"
 
 #: src/widgets/activities/__init__.py:179
 msgid "Attachment Creator"
-msgstr ""
+msgstr "Creador de Archivos Adjuntos"
 
 #: src/widgets/activities/__init__.py:193
 #: src/widgets/activities/web_browser.py:94
 msgid "Web Browser"
-msgstr ""
+msgstr "Navegador Web"
 
 #: src/widgets/activities/__init__.py:202
 #: src/widgets/activities/live_chat.py:26
@@ -5120,6 +5130,8 @@ msgid ""
 "Use \\\"{}\\\" to use your system shell (Alpaca will need additional "
 "permissions)"
 msgstr ""
+"Utilice \\\"{}\\\" para usar el shell del sistema (Alpaca necesitará "
+"permisos adicionales)."
 
 #: src/widgets/activities/terminal.py:40
 msgid "Using SSH to run command"
@@ -5131,7 +5143,7 @@ msgstr "Abrir Directorio del Ambiente"
 
 #: src/widgets/activities/terminal.py:70
 msgid "Reload Script"
-msgstr ""
+msgstr "Recargar Script"
 
 #: src/widgets/activities/terminal.py:169
 msgid "Script Exited"
@@ -5139,11 +5151,11 @@ msgstr "El Script ha Terminado"
 
 #: src/widgets/activities/terminal.py:228
 msgid "Edit Code"
-msgstr ""
+msgstr "Editar Código"
 
 #: src/widgets/activities/terminal.py:236
 msgid "Code Runner"
-msgstr ""
+msgstr "Corredor de Código"
 
 #: src/widgets/activities/terminal.py:261
 msgid "Alpaca Terminal is not compatible with Windows"
@@ -5152,28 +5164,28 @@ msgstr "Alpaca Terminal no es compatible con Windows"
 #: src/widgets/activities/terminal.py:291
 #: src/widgets/activities/terminal.py:374
 msgid "Save Script"
-msgstr ""
+msgstr "Guardar Script"
 
 #: src/widgets/activities/terminal.py:298
 msgid "New Attachment"
-msgstr ""
+msgstr "Nuevo Archivo Adjunto"
 
 #: src/widgets/activities/terminal.py:314
 msgid "Name the Attachment"
-msgstr ""
+msgstr "Nombra el Archivo Adjunto"
 
 #: src/widgets/activities/terminal.py:318
 #: src/widgets/activities/terminal.py:319
 msgid "New File"
-msgstr ""
+msgstr "Nuevo Archivo"
 
 #: src/widgets/activities/terminal.py:369
 msgid "Code Editor"
-msgstr ""
+msgstr "Editor de Código"
 
 #: src/widgets/activities/terminal.py:380
 msgid "Undo Changes"
-msgstr ""
+msgstr "Deshacer Cambios"
 
 #: src/widgets/activities/terminal.py:389
 msgid "Changes saved successfully"
@@ -5181,51 +5193,51 @@ msgstr "Los cambios se guardaron correctamente"
 
 #: src/widgets/activities/web_browser.py:25
 msgid "Go Back"
-msgstr ""
+msgstr "Volver"
 
 #: src/widgets/activities/web_browser.py:32
 msgid "Go Next"
-msgstr ""
+msgstr "Siguiente"
 
 #: src/widgets/activities/web_browser.py:38
 msgid "Enter URL..."
-msgstr ""
+msgstr "Introducir URL..."
 
 #: src/widgets/activities/web_browser.py:52
 msgid "Attach"
-msgstr ""
+msgstr "Adjuntar"
 
 #: src/widgets/activities/web_browser.py:62
 msgid "Reload Page"
-msgstr ""
+msgstr "Recargar página"
 
 #: src/widgets/activities/web_browser.py:66
 msgid "Open in External Browser"
-msgstr ""
+msgstr "Abrir en un Navegador Externo"
 
 #: src/widgets/activities/web_browser.py:70
 msgid "Go to Home"
-msgstr ""
+msgstr "Ir a Inicio"
 
 #: src/widgets/activities/web_browser.py:74
 msgid "Browser Preferences"
-msgstr ""
+msgstr "Preferencias del Navegador"
 
 #: src/widgets/activities/web_browser.py:276
 msgid "Search Engine"
-msgstr ""
+msgstr "Motor de Búsqueda"
 
 #: src/widgets/activities/web_browser.py:283
 msgid "Custom"
-msgstr ""
+msgstr "Personalizado"
 
 #: src/widgets/activities/web_browser.py:296
 msgid "Search Query URL"
-msgstr ""
+msgstr "URL de Consulta de Búsqueda"
 
 #: src/widgets/activities/web_browser.py:303
 msgid "Homepage URL"
-msgstr ""
+msgstr "URL de la Página de Inicio"
 
 #: src/widgets/blocks/code.py:69
 msgid "Code Block"
@@ -5891,7 +5903,7 @@ msgstr "Crear Modelo"
 #: src/widgets/models/image.py:44
 #, python-brace-format
 msgid "Local background removal model provided by {}."
-msgstr ""
+msgstr "Modelo de eliminación de fondo local proporcionado por {}."
 
 #: src/widgets/models/image.py:148 src/widgets/models/speech.py:153
 #: src/widgets/models/speech.py:296
@@ -5960,15 +5972,15 @@ msgstr "Variables que son rellenadas por la IA."
 
 #: src/widgets/tools/tools.py:63
 msgid "Run Tool"
-msgstr ""
+msgstr "Ejecutar Herramienta"
 
 #: src/widgets/tools/tools.py:123
 msgid "The tool would have generated a message in a chat."
-msgstr ""
+msgstr "La herramienta habría generado un mensaje en un chat."
 
 #: src/widgets/tools/tools.py:123
 msgid "The tool did not request to generate a message."
-msgstr ""
+msgstr "La herramienta no solicitó generar un mensaje."
 
 #: src/widgets/tools/tools.py:144
 msgid "AI Description"
@@ -6018,7 +6030,7 @@ msgstr "Extrae un artículo de Wikipedia por su título."
 
 #: src/widgets/tools/tools.py:580
 msgid "Web Search"
-msgstr ""
+msgstr "Búsqueda Web"
 
 #: src/widgets/tools/tools.py:581
 msgid "Search for a term online using StartPage"
@@ -6026,7 +6038,7 @@ msgstr ""
 
 #: src/widgets/tools/tools.py:638
 msgid "Run Command"
-msgstr ""
+msgstr "Ejecutar Comando"
 
 #: src/widgets/tools/tools.py:639
 msgid "Request to run a command using SSH to connect to the device"
