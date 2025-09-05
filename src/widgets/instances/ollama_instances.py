@@ -106,18 +106,9 @@ class BaseInstance:
                     messages.append({
                         'role': 'assistant',
                         'content': '',
-                        #'tool_calls': [
-                            #{
-                                #'function': {
-                                    #'name': function.get('name'),
-                                    #'arguments': function.get('arguments')
-                                #}
-                            #}
-                        #]
                     })
                     messages.append({
                         'role': 'tool',
-                        #'name': function.get('name'),
                         'content': response
                     })
         except Exception as e:
