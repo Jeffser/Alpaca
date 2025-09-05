@@ -78,8 +78,8 @@ You can add your respective command as as keyboard shortcut in your system setti
 
 ## Translators
 
-Language               | Contributors
-:----------------------|:-----------
+Language                | Contributors
+:-----------------------|:-----------
 🇷🇺 Russian              | [Alex K](https://github.com/alexkdeveloper) [DasHi](https://github.com/col83)
 🇪🇸 Spanish              | [Jeffry Samuel](https://github.com/jeffser)
 🇫🇷 French               | [Louis Chauvet-Villaret](https://github.com/loulou64490) , [Théo FORTIN](https://github.com/topiga)
@@ -102,6 +102,7 @@ Language               | Contributors
 🇮🇳 Kannada              | [Jeethan Roche](https://github.com/roche-jeethan)
 🌐 Arabic               | [Ahmed Najmawi](https://github.com/x9a)
 🌐 Belarusian           | [Aliaksandr Kliujeŭ](https://github.com/PlagaMedicum)
+🌐 Kabyle               | [Athmane MOKRAOUI](https://github.com/BoFFire)
 
 Want to add a language? Visit [this discussion](https://github.com/Jeffser/Alpaca/discussions/153) to get started!
 

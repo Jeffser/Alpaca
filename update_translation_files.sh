@@ -48,3 +48,5 @@ echo "Updating Arabic"
 msgmerge --no-fuzzy-matching -U po/ar.po po/alpaca.pot
 echo "Updating Belarusian"
 msgmerge --no-fuzzy-matching -U po/be.po po/alpaca.pot
+echo "Updating Kabyle"
+msgmerge --no-fuzzy-matching -U po/kab.po po/alpaca.pot
