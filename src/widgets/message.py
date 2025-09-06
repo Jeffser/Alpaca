@@ -410,11 +410,7 @@ class Message(Gtk.Box):
         )
         if pfp_b64:
             image_data = base64.b64decode(pfp_b64)
-            loader = GdkPixbuf.PixbufLoader.new()
-            loader.write(image_data)
-            loader.close()
-            pixbuf = loader.get_pixbuf()
-            texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+            texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
             image_element = Gtk.Image.new_from_paintable(texture)
             image_element.set_size_request(40, 40)
             self.options_button = Gtk.MenuButton(
