@@ -1,6 +1,6 @@
 # background_remover.py
 
-from gi.repository import Gtk, Gio, Adw, GLib, GdkPixbuf, Gdk
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk
 from ...constants import IN_FLATPAK, data_dir, REMBG_MODELS
 from .. import dialog, attachments, models
 import base64, os, threading
@@ -182,14 +182,9 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
                 lambda m=model: self.prepare_model_download(model)
             )
 
-    def make_texture(self, image_data:str):
-        data = base64.b64decode(image_data)
-        loader = GdkPixbuf.PixbufLoader.new()
-        loader.write(data)
-        loader.close()
-        pixbuf = loader.get_pixbuf()
-        height = int((pixbuf.get_property('height') * 240) / pixbuf.get_property('width'))
-        texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+    def make_texture(self, data:str):
+        image_data = base64.b64decode(data)
+        texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
         return texture
 
     def load_image(self, image_data:str):

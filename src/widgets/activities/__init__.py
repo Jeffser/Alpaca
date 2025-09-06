@@ -1,6 +1,6 @@
 # __init__.py
 
-from gi.repository import Gtk, Gio, Adw, GLib, GdkPixbuf, Gdk
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk
 from .background_remover import BackgroundRemoverPage
 from .web_browser import WebBrowser
 from .live_chat import LiveChatPage

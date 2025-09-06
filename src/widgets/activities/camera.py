@@ -3,7 +3,7 @@
 Manages the camera feature to send pictures to AI
 """
 
-from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject, Gst
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GObject, Gst
 from .. import attachments, dialog, activities
 import cv2, threading, base64
 import numpy as np
@@ -46,18 +46,18 @@ class Camera(Gtk.Picture):
         while self.running and self.capture.isOpened():
             ret, frame = self.capture.read()
             if ret:
-                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB).astype(np.uint8)
                 h, w, c = frame_rgb.shape
-                pb = GdkPixbuf.Pixbuf.new_from_data(
-                    frame_rgb.tobytes(),
-                    GdkPixbuf.Colorspace.RGB,
-                    False,
-                    8,
-                    w,
-                    h,
-                    w * c
+
+                texture = Gdk.MemoryTexture.new(
+                    width=w,
+                    height=h,
+                    format=7,
+                    bytes=GLib.Bytes.new(frame_rgb.tobytes()),
+                    stride=w*c
                 )
-                GLib.idle_add(self.set_paintable, Gdk.Texture.new_for_pixbuf(pb))
+
+                GLib.idle_add(self.set_paintable, texture)
             else:
                 break
 

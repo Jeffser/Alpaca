@@ -1,6 +1,6 @@
 # tools.py
 
-from gi.repository import Adw, Gtk, Gio, Gdk, GdkPixbuf, GLib
+from gi.repository import Adw, Gtk, Gio, Gdk, GLib
 
 import datetime, time, random, requests, json, os, threading, base64, importlib.util
 from http.server import HTTPServer, BaseHTTPRequestHandler
@@ -810,11 +810,7 @@ class SpotifyController(Base):
                 image_url = response.json().get('images', [{}])[0].get('url')
                 if image_url:
                     image_data = base64.b64decode(attachments.extract_online_image(image_url, 64))
-                    loader = GdkPixbuf.PixbufLoader.new()
-                    loader.write(image_data)
-                    loader.close()
-                    pixbuf = loader.get_pixbuf()
-                    texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+                    texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
                     if self.pfp_widget:
                         self.pfp_widget.get_parent().remove(self.pfp_widget)
                     self.pfp_widget = Gtk.Picture.new_for_paintable(texture)
