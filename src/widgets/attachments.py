@@ -1,6 +1,6 @@
 # attachments.py
 
-from gi.repository import Adw, Gtk, Gio, Gdk, GdkPixbuf, GLib, Xdp
+from gi.repository import Adw, Gtk, Gio, Gdk, GLib, Xdp
 
 import odf.opendocument as odfopen
 import odf.table as odftable
@@ -10,7 +10,8 @@ from html2text import html2text
 from io import BytesIO
 from PIL import Image
 from ..constants import cache_dir
-import requests, json, base64, tempfile, shutil, logging, threading, os, re
+import numpy as np
+import requests, json, base64, tempfile, shutil, logging, threading, os, re, cairo
 
 from urllib.robotparser import RobotFileParser
 from urllib.parse import urlparse
@@ -103,35 +104,45 @@ def extract_image(image_path:str, max_size:int) -> str:
             image_data = output.getvalue()
         return base64.b64encode(image_data).decode("utf-8")
 
-class AttachmentImagePage(Gtk.DrawingArea):
+class AttachmentImagePage(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentImagePage'
 
     def __init__(self, attachment):
         self.attachment = attachment
-        super().__init__()
+        image_data = base64.b64decode(self.attachment.get_content())
+        self.texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
+        self.picture = Gtk.Picture.new_for_paintable(self.texture)
 
+        # State variables
         self.scale = 1.0
         self.offset_x = 0
         self.offset_y = 0
-        self.start_x = 0
-        self.start_y = 0
-        self.inside_image = False
+        self.drag_start = None
+        self.original_width = self.texture.get_width()
+        self.original_height = self.texture.get_height()
+        self.pointer_x = 0
+        self.pointer_y = 0
 
-        self.set_draw_func(self.on_draw)
-        image_data = base64.b64decode(self.attachment.get_content())
-        loader = GdkPixbuf.PixbufLoader.new()
-        loader.write(image_data)
-        loader.close()
-        self.pixbuf = loader.get_pixbuf()
+        self.fixed = Gtk.Fixed()
+        super().__init__(
+            child=self.fixed
+        )
 
-        drag=Gtk.GestureDrag.new()
-        drag.connect("drag-begin", self.on_drag_begin)
-        drag.connect('drag-update', self.on_drag_update)
-        self.add_controller(drag)
+        self.fixed.put(self.picture, 0, 0)
+
+        motion = Gtk.EventControllerMotion()
+        self.add_controller(motion)
+        motion.connect("motion", self.on_motion)
 
         scroll = Gtk.EventControllerScroll.new(Gtk.EventControllerScrollFlags.VERTICAL)
+        self.picture.add_controller(scroll)
         scroll.connect("scroll", self.on_scroll)
-        self.add_controller(scroll)
+
+        # Drag gesture for panning
+        drag = Gtk.GestureDrag.new()
+        self.picture.add_controller(drag)
+        #drag.connect("drag-begin", self.on_drag_begin)
+        drag.connect("drag-update", self.on_drag_update)
 
         delete_button = Gtk.Button(
             css_classes=['error'],
@@ -160,92 +171,76 @@ class AttachmentImagePage(Gtk.DrawingArea):
         self.buttons = [delete_button, download_button, reset_button]
         self.title = self.attachment.file_name
         self.activity_icon = 'image-x-generic-symbolic'
-        self.connect('map', lambda *_: GLib.idle_add(self.reset_view))
+        self.connect('map', lambda *_: GLib.idle_add(self.on_reload))
 
-    def reset_view(self):
-        self.scale = self.fit_scale()
-        self.offset_x = 0.0
-        self.offset_y = 0.0
+    def on_reload(self):
+        self.scale = self.get_min_scale()
+        self.update_picture()
 
-        self.queue_draw()
+    def on_close(self):
+        pass #ACTIVITY
 
-    def fit_scale(self) -> float:
-        scale_w = self.get_allocated_width() / self.pixbuf.get_width()
-        scale_h = self.get_allocated_height() / self.pixbuf.get_height()
-        return min(scale_w, scale_h)
+    def on_motion(self, controller, x, y):
+        self.pointer_x = x
+        self.pointer_y = y
 
-    def on_draw(self, area, cr, width, height):
-        if not self.pixbuf:
-            return
+    def get_min_scale(self):
+        viewport_width = self.get_allocated_width()
+        viewport_height = self.get_allocated_height()
 
-        self.scale = max(self.scale, self.fit_scale())
-        cr.translate(width / 2 + self.offset_x, height / 2 + self.offset_y)
-        cr.scale(self.scale, self.scale)
-        cr.translate(-self.pixbuf.get_width() / 2, -self.pixbuf.get_height() / 2)
-        Gdk.cairo_set_source_pixbuf(cr, self.pixbuf, 0, 0)
-        cr.paint()
+        if self.original_width == 0 or self.original_height == 0:
+            return 1.0
 
-    def on_drag_begin(self, gesture, start_x, start_y):
-        self.press_x = start_x
-        self.press_y = start_y
-        self.drag_last_offset_x = 0.0
-        self.drag_last_offset_y = 0.0
+        scale_x = viewport_width / self.original_width
+        scale_y = viewport_height / self.original_height
 
-        image_x = self.get_allocated_width() / 2 + self.offset_x - (self.pixbuf.get_width() / 2) * self.scale
-        image_y = self.get_allocated_height() / 2 + self.offset_y - (self.pixbuf.get_height() / 2) * self.scale
+        return min(scale_x, scale_y, 1.0)
 
-        image_w = self.pixbuf.get_width() * self.scale
-        image_h = self.pixbuf.get_height() * self.scale
+    def update_picture(self):
+        width = int(self.original_width * self.scale)
+        height = int(self.original_height * self.scale)
+        self.picture.set_size_request(width, height)
 
-        self.inside_image = image_x <= start_x <= image_x + image_w and image_y <= start_y <= image_y + image_h
+        viewport_width = self.get_allocated_width()
+        viewport_height = self.get_allocated_height()
 
-    def on_drag_update(self, gesture, offset_x, offset_y):
-        if not self.inside_image:
-            return
-        px = self.press_x + offset_x
-        py = self.press_y + offset_y
+        x_offset = max((viewport_width - width) // 2, 0)
+        y_offset = max((viewport_height - height) // 2, 0)
 
-        w = self.get_allocated_width()
-        h = self.get_allocated_height()
-
-        inside = (0 <= px < w) and (0 <= py < h)
-
-        dx = offset_x - self.drag_last_offset_x
-        dy = offset_y - self.drag_last_offset_y
-
-        if inside:
-            self.offset_x += dx
-            self.offset_y += dy
-            self.queue_draw()
-            self.drag_last_offset_x = offset_x
-            self.drag_last_offset_y = offset_y
+        self.fixed.move(self.picture, x_offset, y_offset)
 
     def on_scroll(self, controller, dx, dy):
         state = controller.get_current_event_state()
-        if state & Gdk.ModifierType.CONTROL_MASK:
-            if dy < 0 and self.scale * 1.1 <= 3.0:
-                self.scale *= 1.1
-            elif dy > 0 and self.scale / 1.1 >= self.fit_scale():
-                self.scale /= 1.1
-            self.queue_draw()
-            return True
-        return False
+        if not (state & Gdk.ModifierType.CONTROL_MASK):
+            return False
+        event = controller.get_current_event()
+        if event is None:
+            return False
 
-    # Activity
-    def on_reload(self):
-        self.reset_view()
+        mx = self.pointer_x
+        my = self.pointer_y
 
-    def on_close(self):
-        pass
+        old_scale = self.scale
+        self.scale *= 1.1 if dy < 0 else 0.9
 
-    def close(self):
-        parent = self.get_ancestor(Adw.TabView)
-        if parent:
-            parent.close_page(self.get_parent().tab)
-        else:
-            parent = self.get_ancestor(Adw.Dialog)
-            if parent:
-                parent.close()
+        min_scale = self.get_min_scale()
+        if self.scale < min_scale:
+            self.scale = min_scale
+        self.scale = min(self.scale, 4.0)
+
+        adj = self.get_hadjustment()
+        adj.set_value((adj.get_value() + mx) * self.scale / old_scale - mx)
+        vadj = self.get_vadjustment()
+        vadj.set_value((vadj.get_value() + my) * self.scale / old_scale - my)
+
+        self.update_picture()
+        return True
+
+    def on_drag_update(self, gesture, dx, dy):
+        adj = self.get_hadjustment()
+        vadj = self.get_vadjustment()
+        adj.set_value(adj.get_value() - dx)
+        vadj.set_value(vadj.get_value() - dy)
 
 class AttachmentPage(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentPage'
@@ -503,14 +498,9 @@ class ImageAttachment(Gtk.Button):
 
         try:
             image_data = base64.b64decode(self.file_content)
-            loader = GdkPixbuf.PixbufLoader.new()
-            loader.write(image_data)
-            loader.close()
-            pixbuf = loader.get_pixbuf()
-            self.width = int((pixbuf.get_property('width') * 240) / pixbuf.get_property('height'))
-            texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+            texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
             image = Gtk.Picture.new_for_paintable(texture)
-            image.set_size_request(self.width, 240)
+            image.set_size_request(int((texture.get_width() * 240) / texture.get_height()), 240)
             super().__init__(
                 child=image,
                 css_classes=["flat", "chat_image_button"],
