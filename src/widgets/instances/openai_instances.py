@@ -568,6 +568,41 @@ class DeepInfra(BaseInstance):
     instance_url = 'https://api.deepinfra.com/v1/openai'
     description = _('DeepInfra cloud inference API')
 
+class CompactifAI(BaseInstance):
+    instance_type = 'compactifai'
+    instance_type_display = 'CompactifAI'
+    instance_url = 'https://your-compactifai-api-endpoint/v1'
+    description = _('CompactifAI inference platform')
+
+    def get_available_models(self) -> dict:
+        try:
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
+                response = requests.get(
+                    f'{self.instance_url}/models',
+                    headers={
+                        'Authorization': f'Bearer {self.properties.get("api")}'
+                    }
+                )
+                for model in response.json().get('data', []):
+                    if model.get('id'):
+                        self.available_models[model.get('id')] = {
+                            'display_name': model.get('name', model.get('id'))
+                        }
+            return self.available_models
+        except Exception as e:
+            dialog.simple_error(
+                parent=self.row.get_root() if self.row else None,
+                title=_('Instance Error'),
+                body=_('Could not retrieve CompactifAI models'),
+                error_log=e
+            )
+            logger.error(e)
+            if self.row:
+                self.row.get_parent().unselect_all()
+            return {}
+
+
 class GenericOpenAI(BaseInstance):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
