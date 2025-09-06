@@ -526,7 +526,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'preferences': [lambda *_: Widgets.preferences.PreferencesDialog().present(self), ['<primary>comma']],
             'zoom_in': [lambda *_: Widgets.preferences.zoom_in(), ['<primary>plus']],
             'zoom_out': [lambda *_: Widgets.preferences.zoom_out(), ['<primary>minus']],
-            'TEST_SHORTCUTS': [lambda *_: Widgets.preferences.ShortcutsDialog().present(self), ['<primary>j']]
+            'TEST_SHORTCUTS': [lambda *_: Widgets.preferences.show_shortcuts_dialog(self), ['<primary>j']]
         }
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)

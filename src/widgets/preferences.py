@@ -4,10 +4,6 @@ from gi.repository import Adw, Gtk, Gio
 import importlib.util, icu, sys
 from ..constants import TTS_VOICES, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/shortcuts.ui')
-class ShortcutsDialog(Adw.ShortcutsDialog):
-    __gtype_name__ = 'AlpacaShortcutsDialog'
-
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/preferences.ui')
 class PreferencesDialog(Adw.PreferencesDialog):
     __gtype_name__ = 'AlpacaPreferencesDialog'

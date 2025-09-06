@@ -28,7 +28,7 @@ gi.require_version('Spelling', '1')
 gi.require_version('Gst', '1.0')
 gi.require_version('Xdp', '1.0')
 gi.require_version("WebKit", "6.0")
-from gi.repository import Gtk, Gio, Adw, GtkSource
+from gi.repository import Gtk, Gio, Adw, GLib, GtkSource
 GtkSource.init()
 
 from .widgets import activities
@@ -142,7 +142,7 @@ class AlpacaApplication(Adw.Application):
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: GLib.idle_add(self.props.active_window.close), ['<primary>q'])
         self.create_action('about', self.on_about_action)
-        self.set_accels_for_action("win.show-help-overlay", ['<primary>slash'])
+        self.create_action('shortcuts', lambda *_: GLib.idle_add(self.show_shortcuts_dialog), ['<primary>slash'])
         self.version = version
         self.args = parser.parse_args()
         if sys.platform in ('linux', 'linux2'):
@@ -164,6 +164,12 @@ class AlpacaApplication(Adw.Application):
                 elif self.args.live_chat:
                     app_service.PresentLive()
                 sys.exit(0)
+
+    def show_shortcuts_dialog(self):
+        builder = Gtk.Builder()
+        builder.add_from_resource("/com/jeffser/Alpaca/shortcuts.ui")
+        dialog = builder.get_object("shortcuts_dialog")
+        dialog.present(self.props.active_window)
 
     def create_quick_ask(self):
         return get_window_library('quick-ask')(application=self)
