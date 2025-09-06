@@ -100,15 +100,15 @@ msgstr "এআই মডেলের সাথে একটি সাধার�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:57
 msgid "Image recognition"
-msgstr ""
+msgstr "ছবি শনাক্তকরণ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:61
 msgid "Custom model"
-msgstr ""
+msgstr "কাস্টম মডেল"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:65
 msgid "Picture background removal"
-msgstr ""
+msgstr "ছবির পটভূমি অপসারণ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:69
 msgid "A Python script running inside integrated terminal"
@@ -120,7 +120,7 @@ msgstr "ওয়েব অনুসন্ধান সহ একটি কথ�
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:77
 msgid "AI model being downloaded"
-msgstr ""
+msgstr "AI মডেল ডাউনলোড হচ্ছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:81
 msgid "A Live Chat conversation with a character"
@@ -170,15 +170,15 @@ msgstr "নতুন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "New feature: Activities"
-msgstr ""
+msgstr "নতুন ফিচার: অ্যাক্টিভিটি"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "New feature: Folders"
-msgstr ""
+msgstr "নতুন ফিচার: ফোল্ডার"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "New tool: Web Search"
-msgstr ""
+msgstr "নতুন টুল: ওয়েব সার্চ"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
@@ -233,15 +233,15 @@ msgstr "সংশোধন"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Fixed code renderer"
-msgstr ""
+msgstr "কোড রেন্ডারার ঠিক করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Fixed some crashes"
-msgstr ""
+msgstr "কিছু ক্র্যাশ ঠিক করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Fixed YouTube transcriber (Flatpak)"
-msgstr ""
+msgstr "YouTube ট্রান্সক্রাইবার ঠিক করা হয়েছে (Flatpak)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid "New tool: Image background remover with local processing"
@@ -265,8 +265,7 @@ msgstr "সর্বোচ্চ ছবি সংযুক্তির আকা
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:138
 msgid "Added option to change context window in instances and model creator"
-msgstr ""
-"ইনস্ট্যান্স এবং মডেল তৈরিকারীতে কনটেক্সট উইন্ডো পরিবর্তন করার বিকল্প যোগ করা হয়েছে"
+msgstr "ইনস্ট্যান্স এবং মডেল তৈরিকারীতে কনটেক্সট উইন্ডো পরিবর্তন করার বিকল্প যোগ করা হয়েছে"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:139
 msgid "Changed behavior of instance preferences"
@@ -3134,8 +3133,7 @@ msgstr ""
 
 #: src/ollama_models.py:2797
 msgid "An extension of Mistral to support context windows of 64K or 128K."
-msgstr ""
-"মিস্ট্রালের একটি সম্প্রসারণ, ৬৪কে বা ১২৮কে কন্টেক্সট উইন্ডোগুলির সমর্থন করার জন্য।"
+msgstr "মিস্ট্রালের একটি সম্প্রসারণ, ৬৪কে বা ১২৮কে কন্টেক্সট উইন্ডোগুলির সমর্থন করার জন্য।"
 
 #: src/ollama_models.py:2825
 msgid ""
@@ -4041,7 +4039,7 @@ msgstr ""
 
 #: src/gtk/notice.ui:34
 msgid "Folders"
-msgstr ""
+msgstr "ফোল্ডার"
 
 #: src/gtk/notice.ui:35
 msgid ""
@@ -4049,6 +4047,9 @@ msgid ""
 "Folders let you neatly organize everything, so you can find exactly what "
 "you're looking for without the clutter."
 msgstr ""
+"আপনার সব চ্যাট এবং সাবফোল্ডার এক জায়গায় রাখা এখন আগের চেয়ে আরও সহজ। "
+"ফোল্ডারগুলি আপনাকে সবকিছু সুন্দরভাবে সাজাতে সাহায্য করে, যাতে আপনি "
+"বিশৃঙ্খলা ছাড়াই ঠিক যা খুঁজছেন তা খুঁজে পেতে পারেন।"
 
 #: src/gtk/notice.ui:42 src/gtk/window.ui:124
 #: src/widgets/activities/__init__.py:157
@@ -4056,7 +4057,7 @@ msgstr ""
 #: src/widgets/activities/__init__.py:238
 #: src/widgets/activities/__init__.py:302
 msgid "Activities"
-msgstr ""
+msgstr "অ্যাক্টিভিটি"
 
 #: src/gtk/notice.ui:43
 msgid ""
@@ -4064,6 +4065,10 @@ msgid ""
 "apps that your AI can use to help you with tasks, from running code and "
 "using a web browser to transcribing audio and creating attachments."
 msgstr ""
+"অ্যাক্টিভিটির সাথে কাজ করার একটি নতুন উপায় এসেছে। এগুলি মিনি-অ্যাপের মতো "
+"যা আপনার AI বিভিন্ন কাজে সহায়তা করতে ব্যবহার করতে পারে, কোড চালানো এবং "
+"ওয়েব ব্রাউজার ব্যবহার করা থেকে শুরু করে অডিও ট্রান্সক্রিপশন এবং অ্যাটাচমেন্ট "
+"তৈরি করা পর্যন্ত।"
 
 #: src/gtk/preferences.ui:7 src/gtk/window.ui:702
 msgid "Preferences"
@@ -4115,25 +4120,27 @@ msgstr "এটি ভিশন মডেলের কর্মক্ষমতা
 
 #: src/gtk/preferences.ui:69
 msgid "Preferred Activity Mode"
-msgstr ""
+msgstr "পছন্দের অ্যাক্টিভিটি মোড"
 
 #: src/gtk/preferences.ui:70
 msgid ""
 "This affects how terminals, attachments and other activities are represented "
 "in the main window"
 msgstr ""
+"এটি প্রধান উইন্ডোতে টার্মিনাল, অ্যাটাচমেন্ট এবং অন্যান্য অ্যাক্টিভিটি কীভাবে "
+"প্রদর্শিত হবে তা প্রভাবিত করে"
 
 #: src/gtk/preferences.ui:74
 msgid "Sidebar"
-msgstr ""
+msgstr "সাইডবার"
 
 #: src/gtk/preferences.ui:75
 msgid "Dialog"
-msgstr ""
+msgstr "ডায়ালগ"
 
 #: src/gtk/preferences.ui:76
 msgid "Window"
-msgstr ""
+msgstr "উইন্ডো"
 
 #: src/gtk/preferences.ui:89
 msgid "Audio"
@@ -4302,11 +4309,11 @@ msgstr "মডেল পরিচালনা করুন"
 
 #: src/gtk/window.ui:216
 msgid "Toggle Activities Sidebar"
-msgstr ""
+msgstr "অ্যাক্টিভিটি সাইডবার টগল করুন"
 
 #: src/gtk/window.ui:228
 msgid "Show Activities"
-msgstr ""
+msgstr "অ্যাক্টিভিটি দেখান"
 
 #: src/gtk/window.ui:240
 msgid "Chat Menu"
@@ -4584,15 +4591,15 @@ msgstr "ক্যামেরা থেকে ছবি সংযুক্ত �
 
 #: src/widgets/chat.py:19 src/widgets/chat.py:498
 msgid "Root"
-msgstr ""
+msgstr "রুট"
 
 #: src/widgets/chat.py:29
 msgid "No Results Found"
-msgstr ""
+msgstr "কোনো ফলাফল পাওয়া যায়নি"
 
 #: src/widgets/chat.py:36
 msgid "Folder is Empty"
-msgstr ""
+msgstr "ফোল্ডার খালি"
 
 #: src/widgets/chat.py:350
 msgid "Try one of these prompts"
@@ -4617,11 +4624,11 @@ msgstr "প্রম্পটগুলি পুনরায় লোড কর
 
 #: src/widgets/chat.py:601
 msgid "Rename Folder"
-msgstr ""
+msgstr "ফোল্ডার নাম পরিবর্তন করুন"
 
 #: src/widgets/chat.py:608
 msgid "Delete Folder"
-msgstr ""
+msgstr "ফোল্ডার মুছুন"
 
 #: src/widgets/chat.py:650 src/widgets/dialog.py:198 src/widgets/dialog.py:211
 #: src/widgets/dialog.py:224
@@ -4630,17 +4637,18 @@ msgstr "গ্রহণ করুন"
 
 #: src/widgets/chat.py:658
 msgid "Rename Folder?"
-msgstr ""
+msgstr "ফোল্ডার নাম পরিবর্তন করবেন?"
 
 #: src/widgets/chat.py:690
 msgid "Delete Folder?"
-msgstr ""
+msgstr "ফোল্ডার মুছবেন?"
 
 #: src/widgets/chat.py:691
 #, python-brace-format
 msgid ""
 "Are you sure you want to delete '{}' and all it's sub-folders and chats?"
 msgstr ""
+"আপনি কি নিশ্চিত যে আপনি '{}' এবং এর সমস্ত সাব-ফোল্ডার ও চ্যাট মুছতে চান?"
 
 #: src/widgets/chat.py:814
 msgid "Rename Chat?"
