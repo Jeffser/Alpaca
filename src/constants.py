@@ -36,7 +36,8 @@ TRANSLATORS = [
     "Jeethan Roche (Kannada) https://github.com/roche-jeethan",
     "Ahmed Najmawi (Arabic) https://github.com/x9a",
     "Aliaksandr Kliujeŭ (Belarusian) https://github.com/PlagaMedicum",
-    "Athmane MOKRAOUI (Kabyle) https://github.com/BoFFire"
+    "Athmane MOKRAOUI (Kabyle) https://github.com/BoFFire",
+    "MoonShadow (Kabyle) https://github.com/ZiriSut"
 ]
 
 # Used to populate SR language in preferences
@@ -263,3 +264,4 @@ config_dir = get_xdg_home("XDG_CONFIG_HOME", "~/.config")
 cache_dir = get_xdg_home("XDG_CACHE_HOME", "~/.cache")
 
 source_dir = os.path.abspath(os.path.dirname(__file__))
+
