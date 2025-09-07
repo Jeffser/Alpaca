@@ -107,10 +107,8 @@ def extract_image(image_path:str, max_size:int) -> str:
 class AttachmentImagePage(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentImagePage'
 
-    def __init__(self, attachment):
-        self.attachment = attachment
-        image_data = base64.b64decode(self.attachment.get_content())
-        self.texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
+    def __init__(self, texture:Gdk.Texture, title:str=_('Image'), delete_callback:callable=None, download_callback:callable=None, attachment_callback:callable=None):
+        self.texture = texture
         self.picture = Gtk.Picture.new_for_paintable(self.texture)
 
         # State variables
@@ -143,35 +141,51 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
         self.picture.add_controller(drag)
         drag.connect("drag-update", self.on_drag_update)
 
-        delete_button = Gtk.Button(
-            css_classes=['error'],
-            icon_name='user-trash-symbolic',
-            tooltip_text=_('Remove Attachment'),
-            vexpand=False,
-            valign=3
-        )
-        delete_button.connect('clicked', lambda *_: self.attachment.prompt_delete(self.get_root()))
-        download_button = Gtk.Button(
-            icon_name='folder-download-symbolic',
-            tooltip_text=_('Download Attachment'),
-            vexpand=False,
-            valign=3
-        )
-        download_button.connect('clicked', lambda *_: self.attachment.prompt_download(self.get_root()))
-        reset_button = Gtk.Button(
-            icon_name='update-symbolic',
+        # Activity
+        self.buttons = []
+        self.title = title
+        self.activity_icon = 'image-x-generic-symbolic'
+
+        self.connect('realize', lambda *_: GLib.idle_add(self.on_reload))
+        self.loop_id = GLib.timeout_add(1, lambda: (self.update_picture() if not self.scrollable else None) or True)
+
+        if delete_callback:
+            delete_button = Gtk.Button(
+                css_classes=['error'],
+                icon_name='user-trash-symbolic',
+                tooltip_text=_('Remove Image'),
+                vexpand=False,
+                valign=3
+            )
+            delete_button.connect('clicked', lambda *_, cb=delete_callback: cb(self.get_root()))
+            self.buttons.append(delete_button)
+        if download_callback:
+            download_button = Gtk.Button(
+                icon_name='folder-download-symbolic',
+                tooltip_text=_('Download Image'),
+                vexpand=False,
+                valign=3
+            )
+            download_button.connect('clicked', lambda *_, cb=download_callback: cb(self.get_root()))
+            self.buttons.append(download_button)
+        if attachment_callback:
+            attach_button = Gtk.Button(
+                icon_name='chain-link-loose-symbolic',
+                tooltip_text=_('Attach Image'),
+                vexpand=False,
+                valign=3
+            )
+            attach_button.connect('clicked', lambda *_, cb=attachment_callback: cb())
+            self.buttons.append(attach_button)
+
+        self.reset_button = Gtk.Button(
+            icon_name='zoom-fit-best-symbolic',
             tooltip_text=_('Reset View'),
             vexpand=False,
             valign=3
         )
-        reset_button.connect('clicked', lambda *_: self.on_reload())
-
-        # Activity
-        self.buttons = [delete_button, download_button, reset_button]
-        self.title = self.attachment.file_name
-        self.activity_icon = 'image-x-generic-symbolic'
-        self.connect('realize', lambda *_: GLib.idle_add(self.on_reload))
-        self.loop_id = GLib.timeout_add(1, lambda: (self.update_picture() if not self.scrollable else None) or True)
+        self.reset_button.connect('clicked', lambda *_: self.on_reload())
+        self.buttons.append(self.reset_button)
 
     def on_reload(self):
         self.scale = self.get_min_scale()
@@ -218,6 +232,7 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
 
         self.fixed.move(self.picture, x_offset, y_offset)
         self.scrollable = self.scale != min_scale
+        self.reset_button.set_sensitive(self.scrollable)
 
     def on_scroll(self, controller, dx, dy):
         state = controller.get_current_event_state()
@@ -240,6 +255,7 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
             vadj.set_value((vadj.get_value() + my) * self.scale / old_scale - my)
 
         self.scrollable = True
+        self.reset_button.set_sensitive(True)
         self.update_picture()
         return True
 
@@ -365,8 +381,16 @@ class Attachment(Gtk.Button):
             self.activity.reload()
         else:
             if self.file_type == 'image':
+                image_data = base64.b64decode(self.get_content())
+                page = AttachmentImagePage(
+                    texture=Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data)),
+                    title=self.file_name,
+                    delete_callback=self.prompt_delete,
+                    download_callback=self.prompt_download
+                )
+
                 self.activity = activities.show_activity(
-                    AttachmentImagePage(self),
+                    page,
                     self.get_root(),
                     self.get_parent().get_parent().get_parent().force_dialog
                 )
@@ -502,12 +526,12 @@ class ImageAttachment(Gtk.Button):
         self.file_type = 'image'
         self.file_content = file_content
         self.activity = None
-
+        self.texture = None
         try:
             image_data = base64.b64decode(self.file_content)
-            texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
-            image = Gtk.Picture.new_for_paintable(texture)
-            image.set_size_request(int((texture.get_width() * 240) / texture.get_height()), 240)
+            self.texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
+            image = Gtk.Picture.new_for_paintable(self.texture)
+            image.set_size_request(int((self.texture.get_width() * 240) / self.texture.get_height()), 240)
             super().__init__(
                 child=image,
                 css_classes=["flat", "chat_image_button"],
@@ -550,9 +574,15 @@ class ImageAttachment(Gtk.Button):
     def show_activity(self):
         if self.activity and self.activity.get_root():
             self.activity.reload()
-        else:
+        elif self.texture:
+            page = AttachmentImagePage(
+                texture=self.texture,
+                title=self.file_name,
+                delete_callback=self.prompt_delete,
+                download_callback=self.prompt_download
+            )
             self.activity = activities.show_activity(
-                AttachmentImagePage(self),
+                page,
                 self.get_root(),
                 self.get_parent().get_parent().get_parent().force_dialog
             )
@@ -606,12 +636,12 @@ class ImageAttachment(Gtk.Button):
         actions = [
             [
                 {
-                    'label': _('Download Attachment'),
+                    'label': _('Download Image'),
                     'callback': self.prompt_download,
                     'icon': 'folder-download-symbolic'
                 },
                 {
-                    'label': _('Remove Attachment'),
+                    'label': _('Remove Image'),
                     'callback': self.prompt_delete,
                     'icon': 'user-trash-symbolic'
                 }
