@@ -102,7 +102,7 @@ Language                | Contributors
 🇮🇳 Kannada              | [Jeethan Roche](https://github.com/roche-jeethan)
 🌐 Arabic               | [Ahmed Najmawi](https://github.com/x9a)
 🌐 Belarusian           | [Aliaksandr Kliujeŭ](https://github.com/PlagaMedicum)
-🌐 Kabyle               | [Athmane MOKRAOUI](https://github.com/BoFFire)
+🌐 Kabyle               | [Athmane MOKRAOUI](https://github.com/BoFFire) , [MoonShadow](https://github.com/ZiriSut)
 
 Want to add a language? Visit [this discussion](https://github.com/Jeffser/Alpaca/discussions/153) to get started!
 
