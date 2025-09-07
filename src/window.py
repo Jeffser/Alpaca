@@ -452,10 +452,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-
-        ##TESTING ZONE
         self.activities_page.set_child(Widgets.activities.ActivityManager())
-        ##
 
         actions = [[{
             'label': _('New Chat'),
@@ -525,8 +522,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'model_creator_gguf': [lambda *_: Widgets.models.common.prompt_gguf(self)],
             'preferences': [lambda *_: Widgets.preferences.PreferencesDialog().present(self), ['<primary>comma']],
             'zoom_in': [lambda *_: Widgets.preferences.zoom_in(), ['<primary>plus']],
-            'zoom_out': [lambda *_: Widgets.preferences.zoom_out(), ['<primary>minus']],
-            'TEST_SHORTCUTS': [lambda *_: Widgets.preferences.show_shortcuts_dialog(self), ['<primary>j']]
+            'zoom_out': [lambda *_: Widgets.preferences.zoom_out(), ['<primary>minus']]
         }
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
