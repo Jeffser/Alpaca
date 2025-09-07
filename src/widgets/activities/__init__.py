@@ -273,7 +273,8 @@ class ActivityManager(Adw.Bin):
                     self.get_root().chat_splitview.set_show_content(True)
                 else:
                     self.get_root().chat_splitview.set_collapsed(True)
-                self.get_root().split_view_overlay.set_show_sidebar(True)
+                if not self.get_root().last_breakpoint_status:
+                    self.get_root().split_view_overlay.set_show_sidebar(True)
 
     def window_create(self, tabview=None):
         atw = ActivityTabWindow(self.get_root().get_application())
