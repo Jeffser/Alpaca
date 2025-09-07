@@ -253,6 +253,11 @@ class ActivityManager(Adw.Bin):
         tabpage.get_child().page.on_close()
 
     def page_attached(self, tabview, tabpage, index):
+        tabpage.set_title(tabpage.get_child().page.title)
+        tabpage.set_icon(Gio.ThemedIcon.new(tabpage.get_child().page.activity_icon))
+        tabpage.get_child().tab = tabpage
+        tabpage.set_thumbnail_yalign(0.5)
+
         self.navigationview.replace_with_tags(['tab'])
         if self.get_root().get_name() == 'AlpacaWindow':
             if self.get_root().last_breakpoint_status:
@@ -323,9 +328,6 @@ def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
     if not page.get_parent():
         if root.get_name() == 'AlpacaWindow' and root.settings.get_value('activity-mode').unpack() == 0 and not force_dialog:
             tab_page = root.activities_page.get_child().tabview.append(ActivityWrapper(page))
-            tab_page.set_title(page.title)
-            tab_page.set_icon(Gio.ThemedIcon.new(page.activity_icon))
-            tab_page.get_child().tab = tab_page
             return tab_page.get_child()
         elif root.settings.get_value('activity-mode').unpack() == 1 or force_dialog:
             dialog = ActivityDialog(page)
@@ -339,9 +341,6 @@ def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
                 last_activity_tabview = atw.activity_manager.tabview
 
             tab_page = last_activity_tabview.append(ActivityWrapper(page))
-            tab_page.set_title(page.title)
-            tab_page.set_icon(Gio.ThemedIcon.new(page.activity_icon))
-            tab_page.get_child().tab = tab_page
             return tab_page.get_child()
 
 
