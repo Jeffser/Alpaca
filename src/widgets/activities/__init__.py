@@ -259,6 +259,9 @@ class ActivityManager(Adw.Bin):
                 self.get_root().chat_splitview.set_show_content(False)
             else:
                 self.get_root().chat_splitview.set_collapsed(False)
+            if len(tabview.get_pages()) == 1:
+                self.get_root().split_view_overlay.set_show_sidebar(False)
+
         tabview.set_selected_page(tabpage)
         self.taboverview.set_open(False)
 
@@ -270,6 +273,7 @@ class ActivityManager(Adw.Bin):
                     self.get_root().chat_splitview.set_show_content(True)
                 else:
                     self.get_root().chat_splitview.set_collapsed(True)
+                self.get_root().split_view_overlay.set_show_sidebar(True)
 
     def window_create(self, tabview=None):
         atw = ActivityTabWindow(self.get_root().get_application())
