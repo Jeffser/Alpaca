@@ -171,7 +171,7 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
         self.title = self.attachment.file_name
         self.activity_icon = 'image-x-generic-symbolic'
         self.connect('realize', lambda *_: GLib.idle_add(self.on_reload))
-        self.loop_id = GLib.timeout_add(1, lambda: self.update_picture() or True)
+        self.loop_id = GLib.timeout_add(1, lambda: (self.update_picture() if not self.scrollable else None) or True)
 
     def on_reload(self):
         self.scale = self.get_min_scale()
