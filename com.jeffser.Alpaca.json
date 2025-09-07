@@ -1363,20 +1363,6 @@
 	    ]
 	},
 	{
-            "name": "python3-lxml",
-            "buildsystem": "simple",
-            "build-commands": [
-                "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"lxml>=5.3.0\" --ignore-installed --no-build-isolation"
-            ],
-            "sources": [
-                {
-                    "type": "file",
-                    "url": "https://files.pythonhosted.org/packages/ef/f6/c15ca8e5646e937c148e147244817672cf920b56ac0bf2cc1512ae674be8/lxml-5.3.1.tar.gz",
-                    "sha256": "106b7b5d2977b339f1e97efe2778e2ab20e99994cbb0ec5e55771ed0795920c8"
-                }
-            ]
-        },
-	{
 	    "name": "python3-rembg",
 	    "buildsystem": "simple",
 	    "build-commands": [
