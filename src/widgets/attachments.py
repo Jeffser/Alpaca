@@ -122,6 +122,7 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
         self.original_height = self.texture.get_height()
         self.pointer_x = 0
         self.pointer_y = 0
+        self.scrollable = False
 
         self.fixed = Gtk.Fixed()
         super().__init__(
@@ -138,10 +139,8 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
         self.picture.add_controller(scroll)
         scroll.connect("scroll", self.on_scroll)
 
-        # Drag gesture for panning
         drag = Gtk.GestureDrag.new()
         self.picture.add_controller(drag)
-        #drag.connect("drag-begin", self.on_drag_begin)
         drag.connect("drag-update", self.on_drag_update)
 
         delete_button = Gtk.Button(
@@ -165,20 +164,23 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
             vexpand=False,
             valign=3
         )
-        reset_button.connect('clicked', lambda *_: self.reset_view())
+        reset_button.connect('clicked', lambda *_: self.on_reload())
 
         # Activity
         self.buttons = [delete_button, download_button, reset_button]
         self.title = self.attachment.file_name
         self.activity_icon = 'image-x-generic-symbolic'
-        self.connect('map', lambda *_: GLib.idle_add(self.on_reload))
+        self.connect('realize', lambda *_: GLib.idle_add(self.on_reload))
+        self.loop_id = GLib.timeout_add(1, lambda: self.update_picture() or True)
 
     def on_reload(self):
         self.scale = self.get_min_scale()
         self.update_picture()
 
     def on_close(self):
-        pass #ACTIVITY
+        if self.loop_id:
+            GLib.source_remove(self.loop_id)
+        self.loop_id = None
 
     def on_motion(self, controller, x, y):
         self.pointer_x = x
@@ -194,9 +196,16 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
         scale_x = viewport_width / self.original_width
         scale_y = viewport_height / self.original_height
 
-        return min(scale_x, scale_y, 1.0)
+        return min(scale_x, scale_y)
 
     def update_picture(self):
+        min_scale = self.get_min_scale()
+        if self.scrollable:
+            self.scale = max(self.scale, min_scale)
+            self.scale = min(self.scale, min_scale + 5.0)
+        else:
+            self.scale = min_scale
+
         width = int(self.original_width * self.scale)
         height = int(self.original_height * self.scale)
         self.picture.set_size_request(width, height)
@@ -208,6 +217,7 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
         y_offset = max((viewport_height - height) // 2, 0)
 
         self.fixed.move(self.picture, x_offset, y_offset)
+        self.scrollable = self.scale != min_scale
 
     def on_scroll(self, controller, dx, dy):
         state = controller.get_current_event_state()
@@ -223,16 +233,13 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
         old_scale = self.scale
         self.scale *= 1.1 if dy < 0 else 0.9
 
-        min_scale = self.get_min_scale()
-        if self.scale < min_scale:
-            self.scale = min_scale
-        self.scale = min(self.scale, 4.0)
+        if self.scale < self.get_min_scale() + 5.0:
+            adj = self.get_hadjustment()
+            adj.set_value((adj.get_value() + mx) * self.scale / old_scale - mx)
+            vadj = self.get_vadjustment()
+            vadj.set_value((vadj.get_value() + my) * self.scale / old_scale - my)
 
-        adj = self.get_hadjustment()
-        adj.set_value((adj.get_value() + mx) * self.scale / old_scale - mx)
-        vadj = self.get_vadjustment()
-        vadj.set_value((vadj.get_value() + my) * self.scale / old_scale - my)
-
+        self.scrollable = True
         self.update_picture()
         return True
 
