@@ -137,6 +137,7 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
     def run(self, model_name:str):
         self.output_spinner.set_visible(True)
         self.stack_switcher.set_active_name('output')
+        self.model_dropdown.set_sensitive(False)
         self.select_button.set_sensitive(False)
         self.download_button.set_sensitive(False)
         from rembg import remove, new_session
@@ -152,6 +153,7 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
         self.image_stack.get_child_by_name('output').get_child().set_paintable(texture)
         self.image_stack.get_child_by_name('output').get_child().remove_css_class('loading_image')
         self.output_spinner.set_visible(False)
+        self.model_dropdown.set_sensitive(True)
         self.select_button.set_sensitive(True)
         self.download_button.set_sensitive(True)
         if self.pulling_model:
