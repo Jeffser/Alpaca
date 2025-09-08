@@ -2,11 +2,35 @@ pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
 moduledir = pkgdatadir / 'alpaca'
 gnome = import('gnome')
 
-gnome.compile_resources('alpaca',
+blueprints = files(
+  'ui/notice.blp',
+  'ui/preferences.blp',
+  'ui/quick_ask.blp',
+  'ui/shortcuts.blp',
+  'ui/welcome.blp',
+  'ui/window.blp',
+)
+
+blueprints = custom_target('blueprints',
+  input: blueprints,
+  output: '.',
+  command: [
+    find_program('blueprint-compiler', version: '>= 0.18.0'),
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@'
+  ],
+)
+
+gnome.compile_resources(
+  'alpaca',
   'alpaca.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
+  dependencies: blueprints,
+  source_dir: meson.current_source_dir(),
 )
 
 python = import('python')
