@@ -129,8 +129,6 @@ class BaseInstance:
             bot_message.finish_generation('')
 
     def generate_response(self, bot_message, chat, messages:list, model:str):
-        print(model, '\n', bot_message, '\n\n')
-        print(messages)
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         bot_message.block_container.prepare_generating_block()
