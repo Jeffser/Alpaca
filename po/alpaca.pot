@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-05 17:23-0600\n"
+"POT-Creation-Date: 2025-09-07 12:18-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4980,6 +4980,7 @@ msgstr ""
 #: src/widgets/instances/openai_instances.py:445
 #: src/widgets/instances/openai_instances.py:484
 #: src/widgets/instances/openai_instances.py:517
+#: src/widgets/instances/openai_instances.py:596
 msgid "Instance Error"
 msgstr ""
 
@@ -5098,11 +5099,19 @@ msgstr ""
 msgid "DeepInfra cloud inference API"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:573
+#: src/widgets/instances/openai_instances.py:575
+msgid "CompactifAI inference platform"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:597
+msgid "Could not retrieve CompactifAI models"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:608
 msgid "OpenAI Compatible Instance"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:575
+#: src/widgets/instances/openai_instances.py:610
 msgid "AI instance compatible with OpenAI library"
 msgstr ""
 
