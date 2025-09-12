@@ -100,15 +100,15 @@ msgstr "Percakapan normal dengan model AI"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:57
 msgid "Image recognition"
-msgstr ""
+msgstr "Pengenalan gambar"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:61
 msgid "Custom model"
-msgstr ""
+msgstr "Model kustom"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:65
 msgid "Picture background removal"
-msgstr ""
+msgstr "Penghapusan latar belakang gambar"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:69
 msgid "A Python script running inside integrated terminal"
@@ -120,7 +120,7 @@ msgstr "Percakapan dengan pencarian web"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:77
 msgid "AI model being downloaded"
-msgstr ""
+msgstr "Model AI sedang diunduh"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:81
 msgid "A Live Chat conversation with a character"
@@ -170,15 +170,15 @@ msgstr "Baru"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:97
 msgid "New feature: Activities"
-msgstr ""
+msgstr "Fitur baru: Aktivitas"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:98
 msgid "New feature: Folders"
-msgstr ""
+msgstr "Fitur baru: Folder"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:99
 msgid "New tool: Web Search"
-msgstr ""
+msgstr "Alat baru: Pencarian Web"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:101
 #: data/com.jeffser.Alpaca.metainfo.xml.in:116
@@ -233,59 +233,59 @@ msgstr "Perbaikan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:103
 msgid "Fixed code renderer"
-msgstr ""
+msgstr "Memperbaiki perender kode"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:104
 msgid "Fixed some crashes"
-msgstr ""
+msgstr "Memperbaiki beberapa kerusakan"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:105
 msgid "Fixed YouTube transcriber (Flatpak)"
-msgstr ""
+msgstr "Memperbaiki transkrip YouTube (Flatpak)"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid "New tool: Image background remover with local processing"
-msgstr ""
+msgstr "Alat baru: Penghapus latar belakang gambar dengan pemrosesan lokal"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:118
 msgid "Fixed title generation sometimes not working"
-msgstr ""
+msgstr "Memperbaiki pembuatan judul yang terkadang tidak berfungsi"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:119
 msgid "Fixed chat not being selected at launch sometimes"
-msgstr ""
+msgstr "Memperbaiki obrolan yang terkadang tidak terpilih saat peluncuran"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:128
 msgid "Fixed TTS being disabled internally"
-msgstr ""
+msgstr "Memperbaiki TTS yang dinonaktifkan secara internal"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:137
 msgid "Added preference to change max image attachment size"
-msgstr ""
+msgstr "Menambahkan preferensi untuk mengubah ukuran lampiran gambar maksimum"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:138
 msgid "Added option to change context window in instances and model creator"
-msgstr ""
+msgstr "Menambahkan opsi untuk mengubah jendela konteks di instance dan pembuat model"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:139
 msgid "Changed behavior of instance preferences"
-msgstr ""
+msgstr "Mengubah perilaku preferensi instance"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:140
 msgid "Added option to expose a managed Ollama instance"
-msgstr ""
+msgstr "Menambahkan opsi untuk mengekspos instance Ollama yang dikelola"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:141
 msgid "Added 'Keep Alive' option to Ollama instance preferences"
-msgstr ""
+msgstr "Menambahkan opsi 'Keep Alive' ke preferensi instance Ollama"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:145
 msgid "Reimplementation of DDG search tool"
-msgstr ""
+msgstr "Implementasi ulang alat pencarian DDG"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:146
 msgid "Fixed model filtering"
-msgstr ""
+msgstr "Memperbaiki penyaringan model"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:155
 msgid "Update model list"
@@ -3972,7 +3972,7 @@ msgstr "Obrolan Baru"
 #: src/window.py:465 src/widgets/chat.py:244 src/widgets/chat.py:629
 #: src/widgets/chat.py:662
 msgid "New Folder"
-msgstr ""
+msgstr "Folder Baru"
 
 #: src/window.py:516
 msgid "Pull Model"
@@ -4123,7 +4123,7 @@ msgstr ""
 
 #: src/gtk/notice.ui:34
 msgid "Folders"
-msgstr ""
+msgstr "Folder"
 
 #: src/gtk/notice.ui:35
 msgid ""
@@ -4131,6 +4131,9 @@ msgid ""
 "Folders let you neatly organize everything, so you can find exactly what "
 "you're looking for without the clutter."
 msgstr ""
+"Menyimpan semua obrolan dan subfolder Anda di satu tempat kini lebih mudah dari sebelumnya. "
+"Folder memungkinkan Anda mengatur semuanya dengan rapi, sehingga Anda dapat menemukan "
+"apa yang Anda cari tanpa berantakan."
 
 #: src/gtk/notice.ui:42 src/gtk/window.ui:124
 #: src/widgets/activities/__init__.py:157
@@ -4138,7 +4141,7 @@ msgstr ""
 #: src/widgets/activities/__init__.py:238
 #: src/widgets/activities/__init__.py:302
 msgid "Activities"
-msgstr ""
+msgstr "Aktivitas"
 
 #: src/gtk/notice.ui:43
 msgid ""
@@ -4146,6 +4149,10 @@ msgid ""
 "apps that your AI can use to help you with tasks, from running code and "
 "using a web browser to transcribing audio and creating attachments."
 msgstr ""
+"Ada cara baru untuk menyelesaikan berbagai hal dengan Aktivitas. Ini seperti "
+"aplikasi mini yang dapat digunakan AI Anda untuk membantu menyelesaikan tugas, "
+"mulai dari menjalankan kode dan menggunakan peramban web hingga mentranskripsi audio "
+"dan membuat lampiran."
 
 #: src/gtk/preferences.ui:7 src/gtk/window.ui:702
 msgid "Preferences"
@@ -4189,33 +4196,35 @@ msgstr "Berlaku ketika pesan berikutnya dihasilkan oleh model AI"
 
 #: src/gtk/preferences.ui:56
 msgid "Max Image Attachment Size"
-msgstr ""
+msgstr "Ukuran Lampiran Gambar Maksimum"
 
 #: src/gtk/preferences.ui:57
 msgid "This might affect the performance of vision models"
-msgstr ""
+msgstr "Ini mungkin memengaruhi kinerja model visi"
 
 #: src/gtk/preferences.ui:69
 msgid "Preferred Activity Mode"
-msgstr ""
+msgstr "Mode Aktivitas yang Disukai"
 
 #: src/gtk/preferences.ui:70
 msgid ""
 "This affects how terminals, attachments and other activities are represented "
 "in the main window"
 msgstr ""
+"Ini memengaruhi bagaimana terminal, lampiran, dan aktivitas lainnya "
+"ditampilkan di jendela utama"
 
 #: src/gtk/preferences.ui:74
 msgid "Sidebar"
-msgstr ""
+msgstr "Bilah Samping"
 
 #: src/gtk/preferences.ui:75
 msgid "Dialog"
-msgstr ""
+msgstr "Dialog"
 
 #: src/gtk/preferences.ui:76
 msgid "Window"
-msgstr ""
+msgstr "Jendela"
 
 #: src/gtk/preferences.ui:89
 msgid "Audio"
@@ -4367,7 +4376,7 @@ msgstr "Cari obrolan"
 
 #: src/gtk/window.ui:129
 msgid "Chat"
-msgstr ""
+msgstr "Obrolan"
 
 #: src/gtk/window.ui:138
 msgid "Toggle Sidebar"
@@ -4387,11 +4396,11 @@ msgstr "Kelola Model"
 
 #: src/gtk/window.ui:216
 msgid "Toggle Activities Sidebar"
-msgstr ""
+msgstr "Alihkan Bilah Samping Aktivitas"
 
 #: src/gtk/window.ui:228
 msgid "Show Activities"
-msgstr ""
+msgstr "Tampilkan Aktivitas"
 
 #: src/gtk/window.ui:240
 msgid "Chat Menu"
@@ -4434,6 +4443,7 @@ msgid ""
 "Manage your AI instances, chats and messages are shared between instances "
 "when generating responses."
 msgstr ""
+"Kelola instance AI Anda; obrolan dan pesan dibagikan antar instance saat menghasilkan respons."
 
 #: src/gtk/window.ui:400
 msgid "Tool Manager"
@@ -4586,7 +4596,7 @@ msgstr "Unduh Lampiran"
 
 #: src/widgets/attachments.py:153
 msgid "Reset View"
-msgstr ""
+msgstr "Atur Ulang Tampilan"
 
 #: src/widgets/attachments.py:435
 msgid "Delete Attachment?"
@@ -4626,7 +4636,7 @@ msgstr "Simpan Gambar"
 
 #: src/widgets/attachments.py:760
 msgid "This model might not be compatible with image recognition"
-msgstr ""
+msgstr "Model ini mungkin tidak kompatibel dengan pengenalan gambar"
 
 #: src/widgets/attachments.py:794
 msgid "Any compatible Alpaca attachment"
@@ -4670,15 +4680,15 @@ msgstr "Lampirkan Foto dari Kamera"
 
 #: src/widgets/chat.py:19 src/widgets/chat.py:498
 msgid "Root"
-msgstr ""
+msgstr "Akar"
 
 #: src/widgets/chat.py:29
 msgid "No Results Found"
-msgstr ""
+msgstr "Tidak Ada Hasil Ditemukan"
 
 #: src/widgets/chat.py:36
 msgid "Folder is Empty"
-msgstr ""
+msgstr "Folder Kosong"
 
 #: src/widgets/chat.py:350
 msgid "Try one of these prompts"
@@ -4703,11 +4713,11 @@ msgstr "Segarkan Prompt"
 
 #: src/widgets/chat.py:601
 msgid "Rename Folder"
-msgstr ""
+msgstr "Ganti Nama Folder"
 
 #: src/widgets/chat.py:608
 msgid "Delete Folder"
-msgstr ""
+msgstr "Hapus Folder"
 
 #: src/widgets/chat.py:650 src/widgets/dialog.py:198 src/widgets/dialog.py:211
 #: src/widgets/dialog.py:224
@@ -4716,17 +4726,18 @@ msgstr "Terima"
 
 #: src/widgets/chat.py:658
 msgid "Rename Folder?"
-msgstr ""
+msgstr "Ganti Nama Folder?"
 
 #: src/widgets/chat.py:690
 msgid "Delete Folder?"
-msgstr ""
+msgstr "Hapus Folder?"
 
 #: src/widgets/chat.py:691
 #, python-brace-format
 msgid ""
 "Are you sure you want to delete '{}' and all it's sub-folders and chats?"
 msgstr ""
+"Apakah Anda yakin ingin menghapus '{}' beserta semua subfolder dan obrolannya?"
 
 #: src/widgets/chat.py:814
 msgid "Rename Chat?"
@@ -4901,7 +4912,7 @@ msgstr "Mentranskripsi Audio"
 
 #: src/widgets/voice.py:308
 msgid "Transcriber"
-msgstr ""
+msgstr "Transkrip"
 
 #: src/widgets/voice.py:325 src/widgets/voice.py:353
 msgid "Transcription Error"
@@ -4919,11 +4930,11 @@ msgstr "Sudah Terpasang!"
 #: src/widgets/activities/background_remover.py:28
 #: src/widgets/activities/background_remover.py:122
 msgid "Select Image"
-msgstr ""
+msgstr "Pilih Gambar"
 
 #: src/widgets/activities/background_remover.py:64
 msgid "Original"
-msgstr ""
+msgstr "Asli"
 
 #: src/widgets/activities/background_remover.py:70
 #: src/widgets/instances/ollama_instances.py:95
@@ -4933,29 +4944,29 @@ msgstr "Hasil"
 
 #: src/widgets/activities/background_remover.py:128
 msgid "Download Result"
-msgstr ""
+msgstr "Unduh Hasil"
 
 #: src/widgets/activities/background_remover.py:134
 #: src/widgets/activities/__init__.py:211 src/widgets/models/image.py:100
 msgid "Background Remover"
-msgstr ""
+msgstr "Penghapus Latar Belakang"
 
 #: src/widgets/activities/background_remover.py:180
 msgid "Download Background Removal Model"
-msgstr ""
+msgstr "Unduh Model Penghapus Latar Belakang"
 
 #: src/widgets/activities/background_remover.py:181
 #, python-brace-format
 msgid "To use this tool you'll need to download a special model ({})"
-msgstr ""
+msgstr "Untuk menggunakan alat ini, Anda perlu mengunduh model khusus ({})"
 
 #: src/widgets/activities/camera.py:25
 msgid "Capture Picture"
-msgstr ""
+msgstr "Ambil Foto"
 
 #: src/widgets/activities/camera.py:38 src/widgets/activities/__init__.py:184
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: src/widgets/activities/camera.py:87
 msgid "Photo"
@@ -4971,15 +4982,15 @@ msgstr "Harap periksa apakah kamera terpasang dan menyala"
 
 #: src/widgets/activities/__init__.py:34
 msgid "Close Activity"
-msgstr ""
+msgstr "Tutup Aktivitas"
 
 #: src/widgets/activities/__init__.py:132
 msgid "Detach Activity"
-msgstr ""
+msgstr "Lepas Aktivitas"
 
 #: src/widgets/activities/__init__.py:139
 msgid "Create Activity"
-msgstr ""
+msgstr "Buat Aktivitas"
 
 #: src/widgets/activities/__init__.py:169 src/widgets/activities/terminal.py:78
 msgid "Terminal"
@@ -4987,12 +4998,12 @@ msgstr "Terminal"
 
 #: src/widgets/activities/__init__.py:179
 msgid "Attachment Creator"
-msgstr ""
+msgstr "Pembuat Lampiran"
 
 #: src/widgets/activities/__init__.py:193
 #: src/widgets/activities/web_browser.py:94
 msgid "Web Browser"
-msgstr ""
+msgstr "Peramban Web"
 
 #: src/widgets/activities/__init__.py:202
 #: src/widgets/activities/live_chat.py:26
@@ -5034,6 +5045,7 @@ msgid ""
 "Use \\\"{}\\\" to use your system shell (Alpaca will need additional "
 "permissions)"
 msgstr ""
+"Gunakan \\\"{}\\\" untuk menggunakan shell sistem Anda (Alpaca akan memerlukan izin tambahan)"
 
 #: src/widgets/activities/terminal.py:40
 msgid "Using SSH to run command"
@@ -5045,7 +5057,7 @@ msgstr "Buka Direktori Lingkungan"
 
 #: src/widgets/activities/terminal.py:70
 msgid "Reload Script"
-msgstr ""
+msgstr "Muat Ulang Skrip"
 
 #: src/widgets/activities/terminal.py:169
 msgid "Script Exited"
@@ -5053,11 +5065,11 @@ msgstr "Skrip Keluar"
 
 #: src/widgets/activities/terminal.py:228
 msgid "Edit Code"
-msgstr ""
+msgstr "Sunting Kode"
 
 #: src/widgets/activities/terminal.py:236
 msgid "Code Runner"
-msgstr ""
+msgstr "Penjalankan Kode"
 
 #: src/widgets/activities/terminal.py:261
 msgid "Alpaca Terminal is not compatible with Windows"
@@ -5066,28 +5078,28 @@ msgstr "Alpaca Terminal tidak kompatibel dengan Windows"
 #: src/widgets/activities/terminal.py:291
 #: src/widgets/activities/terminal.py:374
 msgid "Save Script"
-msgstr ""
+msgstr "Simpan Skrip"
 
 #: src/widgets/activities/terminal.py:298
 msgid "New Attachment"
-msgstr ""
+msgstr "Lampiran Baru"
 
 #: src/widgets/activities/terminal.py:314
 msgid "Name the Attachment"
-msgstr ""
+msgstr "Beri Nama Lampiran"
 
 #: src/widgets/activities/terminal.py:318
 #: src/widgets/activities/terminal.py:319
 msgid "New File"
-msgstr ""
+msgstr "Berkas Baru"
 
 #: src/widgets/activities/terminal.py:369
 msgid "Code Editor"
-msgstr ""
+msgstr "Editor Kode"
 
 #: src/widgets/activities/terminal.py:380
 msgid "Undo Changes"
-msgstr ""
+msgstr "Batalkan Perubahan"
 
 #: src/widgets/activities/terminal.py:389
 msgid "Changes saved successfully"
@@ -5095,51 +5107,51 @@ msgstr "Perubahan berhasil disimpan"
 
 #: src/widgets/activities/web_browser.py:25
 msgid "Go Back"
-msgstr ""
+msgstr "Kembali"
 
 #: src/widgets/activities/web_browser.py:32
 msgid "Go Next"
-msgstr ""
+msgstr "Maju"
 
 #: src/widgets/activities/web_browser.py:38
 msgid "Enter URL..."
-msgstr ""
+msgstr "Masukkan URL..."
 
 #: src/widgets/activities/web_browser.py:52
 msgid "Attach"
-msgstr ""
+msgstr "Lampirkan"
 
 #: src/widgets/activities/web_browser.py:62
 msgid "Reload Page"
-msgstr ""
+msgstr "Muat Ulang Halaman"
 
 #: src/widgets/activities/web_browser.py:66
 msgid "Open in External Browser"
-msgstr ""
+msgstr "Buka di Peramban Eksternal"
 
 #: src/widgets/activities/web_browser.py:70
 msgid "Go to Home"
-msgstr ""
+msgstr "Kembali ke Beranda"
 
 #: src/widgets/activities/web_browser.py:74
 msgid "Browser Preferences"
-msgstr ""
+msgstr "Preferensi Peramban"
 
 #: src/widgets/activities/web_browser.py:276
 msgid "Search Engine"
-msgstr ""
+msgstr "Mesin Pencari"
 
 #: src/widgets/activities/web_browser.py:283
 msgid "Custom"
-msgstr ""
+msgstr "Kustom"
 
 #: src/widgets/activities/web_browser.py:296
 msgid "Search Query URL"
-msgstr ""
+msgstr "URL Kuery Pencarian"
 
 #: src/widgets/activities/web_browser.py:303
 msgid "Homepage URL"
-msgstr ""
+msgstr "URL Beranda"
 
 #: src/widgets/blocks/code.py:69
 msgid "Code Block"
@@ -5218,14 +5230,16 @@ msgid ""
 "Have compatible reasoning models think about their response before "
 "generating a message."
 msgstr ""
+"Biarkan model penalaran yang kompatibel memikirkan responsnya sebelum "
+"menghasilkan pesan."
 
 #: src/widgets/instances/__init__.py:105
 msgid "Expose Ollama to Network"
-msgstr ""
+msgstr "Buka Ollama ke Jaringan"
 
 #: src/widgets/instances/__init__.py:106
 msgid "Make Ollama available for other devices and software in local network"
-msgstr ""
+msgstr "Buat Ollama tersedia untuk perangkat dan perangkat lunak lain di jaringan lokal"
 
 #: src/widgets/instances/__init__.py:113
 msgid "Share Name"
@@ -5273,11 +5287,11 @@ msgstr ""
 
 #: src/widgets/instances/__init__.py:154
 msgid "Override Parameters"
-msgstr ""
+msgstr "Timpa Parameter"
 
 #: src/widgets/instances/__init__.py:155
 msgid "These parameters overrides the behavior of the instance and models."
-msgstr ""
+msgstr "Parameter ini menimpa perilaku instance dan model."
 
 #: src/widgets/instances/__init__.py:165
 msgid "Temperature"
@@ -5303,42 +5317,44 @@ msgstr ""
 
 #: src/widgets/instances/__init__.py:197 src/widgets/models/creator.py:141
 msgid "Context Window Size"
-msgstr ""
+msgstr "Ukuran Jendela Konteks"
 
 #: src/widgets/instances/__init__.py:198 src/widgets/models/creator.py:142
 msgid ""
 "Controls how many tokens (pieces of text) the model can process and remember "
 "at once."
 msgstr ""
+"Mengatur berapa banyak token (potongan teks) yang dapat diproses dan diingat model sekaligus."
 
 #: src/widgets/instances/__init__.py:219
 msgid "Keep Alive Presets"
-msgstr ""
+msgstr "Preset Keep Alive"
 
 #: src/widgets/instances/__init__.py:220
 msgid "How the instance should handle idle models."
-msgstr ""
+msgstr "Bagaimana instance harus menangani model yang menganggur."
 
 #: src/widgets/instances/__init__.py:225
 msgid "Set Timer"
-msgstr ""
+msgstr "Atur Timer"
 
 #: src/widgets/instances/__init__.py:226
 msgid "Keep Alive Forever"
-msgstr ""
+msgstr "Selalu Aktif"
 
 #: src/widgets/instances/__init__.py:227
 msgid "Unload After Use"
-msgstr ""
+msgstr "Lepaskan Setelah Digunakan"
 
 #: src/widgets/instances/__init__.py:234
 msgid "Minutes"
-msgstr ""
+msgstr "Menit"
 
 #: src/widgets/instances/__init__.py:235
 msgid ""
 "The amount of time the instance should keep models loaded after they go idle."
 msgstr ""
+"Jumlah waktu yang harus dijaga instance agar model tetap dimuat setelah menganggur."
 
 #: src/widgets/instances/__init__.py:271
 msgid "Overrides"
@@ -5378,7 +5394,7 @@ msgstr "Model yang digunakan saat menghasilkan judul obrolan."
 
 #: src/widgets/instances/__init__.py:336
 msgid "Use Current Model"
-msgstr ""
+msgstr "Gunakan Model Saat Ini"
 
 #: src/widgets/instances/__init__.py:382
 msgid "Edit Instance"
@@ -5867,15 +5883,15 @@ msgstr "Variabel yang diisi oleh AI."
 
 #: src/widgets/tools/tools.py:63
 msgid "Run Tool"
-msgstr ""
+msgstr "Jalankan Alat"
 
 #: src/widgets/tools/tools.py:123
 msgid "The tool would have generated a message in a chat."
-msgstr ""
+msgstr "Alat tersebut seharusnya menghasilkan pesan dalam obrolan."
 
 #: src/widgets/tools/tools.py:123
 msgid "The tool did not request to generate a message."
-msgstr ""
+msgstr "Alat tersebut tidak meminta untuk menghasilkan pesan."
 
 #: src/widgets/tools/tools.py:144
 msgid "AI Description"
@@ -5923,15 +5939,15 @@ msgstr "Mengambil artikel dari Wikipedia berdasarkan judulnya"
 
 #: src/widgets/tools/tools.py:580
 msgid "Web Search"
-msgstr ""
+msgstr "Pencarian Web"
 
 #: src/widgets/tools/tools.py:581
 msgid "Search for a term online using built-in web browser"
-msgstr ""
+msgstr "Cari istilah secara online menggunakan peramban bawaan"
 
 #: src/widgets/tools/tools.py:638
 msgid "Run Command"
-msgstr ""
+msgstr "Jalankan Perintah"
 
 #: src/widgets/tools/tools.py:639
 msgid "Request to run a command using SSH to connect to the device"
@@ -6010,23 +6026,23 @@ msgstr "Sampul Album"
 
 #: src/widgets/tools/tools.py:946
 msgid "Image Background Remover"
-msgstr ""
+msgstr "Penghapus Latar Belakang Gambar"
 
 #: src/widgets/tools/tools.py:947
 msgid "Removes the background of the last image sent"
-msgstr ""
+msgstr "Menghapus latar belakang dari gambar terakhir yang dikirim"
 
 #: src/widgets/tools/tools.py:950
 msgid "Background Remover Model"
-msgstr ""
+msgstr "Model Penghapus Latar Belakang"
 
 #: src/widgets/tools/tools.py:961
 msgid "Output"
-msgstr ""
+msgstr "Keluaran"
 
 #: src/widgets/tools/tools.py:974
 msgid "Loading Image..."
-msgstr ""
+msgstr "Memuat Gambar..."
 
 #~ msgid "A conversation involving image recognition"
 #~ msgstr "Sebuah percakapan yang melibatkan pengenalan gambar"
