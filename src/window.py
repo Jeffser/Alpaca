@@ -494,6 +494,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for el in ("default-width", "default-height", "maximized", "hide-on-close"):
             self.settings.bind(el, self, el, Gio.SettingsBindFlags.DEFAULT)
 
+        # Zoom
+        Widgets.preferences.set_zoom(Widgets.preferences.get_zoom())
 
         universal_actions = {
             'new_chat': [lambda *_: self.get_chat_list_page().new_chat(), ['<primary>n']],
