@@ -584,6 +584,7 @@ class FolderRow(Gtk.ListBoxRow):
         paintable = snapshot.to_paintable()
         source.set_icon(paintable, 0, 0)
         self.set_visible(False)
+        GLib.idle_add(self.get_root().get_chat_list_page().scrolled_window.get_vadjustment().set_value, 0)
 
     def on_drag_end(self, source, drag, res, page):
         page.top_indicator.set_visible(False)
@@ -752,6 +753,7 @@ class ChatRow(Gtk.ListBoxRow):
         paintable = snapshot.to_paintable()
         source.set_icon(paintable, 0, 0)
         self.set_visible(False)
+        GLib.idle_add(self.get_root().get_chat_list_page().scrolled_window.get_vadjustment().set_value, 0)
 
     def on_drag_end(self, source, drag, res, page):
         page.top_indicator.set_visible(False)
