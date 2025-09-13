@@ -598,7 +598,7 @@ class FolderRow(Gtk.ListBoxRow):
         actions = [
             [
                 {
-                    'label': _('Rename Folder'),
+                    'label': _('Edit Folder'),
                     'callback': self.prompt_rename,
                     'icon': 'document-edit-symbolic'
                 }
@@ -655,8 +655,8 @@ class FolderRow(Gtk.ListBoxRow):
         }
 
         d = dialog.Entry(
-            _('Rename Folder?'),
-            ("Renaming '{}'").format(self.get_name()),
+            _('Edit Folder?'),
+            ("Editing '{}'").format(self.get_name()),
             list(options.keys())[0],
             options,
             {'placeholder': _('New Folder'), 'text': self.folder_name}
