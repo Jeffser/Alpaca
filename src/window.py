@@ -499,7 +499,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         universal_actions = {
             'new_chat': [lambda *_: self.get_chat_list_page().new_chat(), ['<primary>n']],
-            'new_folder': [lambda *_: self.get_chat_list_page().new_folder(), ['<primary>d']],
+            'new_folder': [lambda *_: self.get_chat_list_page().prompt_new_folder(), ['<primary>d']],
             'import_chat': [lambda *_: Widgets.dialog.simple_file(
                 parent=self,
                 file_filters=[self.file_filter_db],

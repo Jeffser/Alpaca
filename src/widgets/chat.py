@@ -238,11 +238,12 @@ class ChatList(Adw.NavigationPage):
             SQL.insert_or_update_chat(chat)
             return chat
 
-    def new_folder(self):
+    def new_folder(self, name:str, color:str):
+        name = generate_numbered_name(name, [row.get_name() for row in list(self.folder_list_box)])
         row = FolderRow(
             generate_uuid(),
-            generate_numbered_name(_('New Folder'), [row.get_name() for row in list(self.folder_list_box)]),
-            random.choice(('blue', 'teal', 'green', 'yellow', 'orange', 'red', 'pink', 'purple', 'slate')),
+            name,
+            color,
             self.folder_id
         )
         SQL.insert_or_update_folder(
@@ -253,6 +254,40 @@ class ChatList(Adw.NavigationPage):
         )
         self.folder_list_box.prepend(row)
         self.update_visibility()
+
+    def prompt_new_folder(self):
+        options = {
+            _('Cancel'): {},
+            _('Accept'): {
+                'appearance': 'suggested',
+                'callback': lambda name, toggle_group: self.new_folder(name, toggle_group.get_active_name()),
+                'default': True
+            }
+        }
+
+        d = dialog.Entry(
+            _('New Folder'),
+            '',
+            list(options.keys())[0],
+            options,
+            {'placeholder': _('New Folder'), 'text': _('New Folder')}
+        )
+        color_group = Adw.ToggleGroup()
+        color_names = ('blue', 'teal', 'green', 'yellow', 'orange', 'red', 'pink', 'purple', 'slate')
+        for c in color_names:
+            icon = Gtk.Image.new_from_icon_name('big-dot-symbolic')
+            icon.add_css_class('button-{}'.format(c))
+            icon.set_icon_size(2)
+            toggle = Adw.Toggle(
+                name=c,
+                child=icon
+            )
+            color_group.add(toggle)
+
+        color_group.set_active_name(random.choice(color_names))
+        d.container.append(color_group)
+
+        d.show(self.get_root())
 
     def chat_changed(self, listbox, row):
         if not listbox.get_root() or (row and not row.get_root()):
