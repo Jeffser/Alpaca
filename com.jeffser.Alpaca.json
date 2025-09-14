@@ -445,7 +445,7 @@
 	    "name": "python3-markitdown",
 	    "buildsystem": "simple",
 	    "build-commands": [
-		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --no-build-isolation markitdown[pptx,docx,xlsx,pdf,youtube-transcription]"
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --no-build-isolation markitdown[pptx,docx,pdf,youtube-transcription]"
 	    ],
 	    "sources": [
 		{
@@ -572,22 +572,6 @@
 		    "type": "file",
 		    "url": "https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl",
 		    "sha256": "5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2"
-		},
-		{
-		    "type": "file",
-		    "url": "https://files.pythonhosted.org/packages/50/e2/f775ba76ecfb3424d7f5862620841cf0edb592e9abd2d2a5387d305fe7a8/pandas-2.3.2-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
-		    "sha256": "0064187b80a5be6f2f9c9d6bdde29372468751dfa89f4211a3c5871854cfbf7a",
-		    "only-arches": [
-		        "aarch64"
-		    ]
-		},
-		{
-		    "type": "file",
-		    "url": "https://files.pythonhosted.org/packages/8f/52/0634adaace9be2d8cac9ef78f05c47f3a675882e068438b9d7ec7ef0c13f/pandas-2.3.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
-		    "sha256": "4ac8c320bded4718b298281339c1a50fb00a6ba78cb2a63521c39bec95b0209b",
-		    "only-arches": [
-		        "x86_64"
-		    ]
 		},
 		{
 		    "type": "file",
@@ -832,7 +816,8 @@
 	    "name": "python3-kokoro",
 	    "buildsystem": "simple",
 	    "build-commands": [
-		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --ignore-requires-python --no-build-isolation en_core_web_sm sounddevice kokoro"
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --ignore-requires-python --no-build-isolation en_core_web_sm sounddevice kokoro",
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --no-build-isolation six"
 	    ],
 	    "sources": [
 	    	{
