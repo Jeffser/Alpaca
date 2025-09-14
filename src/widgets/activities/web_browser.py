@@ -1,6 +1,6 @@
 # web_browser.py
 
-from gi.repository import Gtk, Gio, Adw, GLib, GdkPixbuf, Gdk, WebKit
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk, WebKit
 from .. import dialog, attachments, models
 from ...sql_manager import generate_uuid, Instance as SQL
 from ...constants import cache_dir

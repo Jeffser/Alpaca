@@ -1,6 +1,6 @@
 # live_chat.py
 
-from gi.repository import Gtk, Gio, Adw, GLib, GdkPixbuf, Gdk
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk
 from ...constants import IN_FLATPAK, data_dir, REMBG_MODELS
 from .. import dialog, attachments, models, chat, message, models, instances, voice
 from ...sql_manager import generate_uuid, prettify_model_name, Instance as SQL

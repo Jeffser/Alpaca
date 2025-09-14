@@ -5,7 +5,7 @@ Manages TTS and STT code
 
 
 import gi
-from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk
 from ..sql_manager import Instance as SQL
 from ..constants import data_dir, cache_dir, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
 from . import dialog, models, blocks, activities

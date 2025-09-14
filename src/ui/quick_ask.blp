@@ -1,0 +1,43 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaQuickAskWindow: Adw.ApplicationWindow {
+  close-request => $closing_app();
+
+  accessibility {
+    label: _("Quick ask dialog");
+  }
+
+  name: "AlpacaQuickAsk";
+  title: _("Quick Ask");
+  width-request: 320;
+  height-request: 240;
+
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      [start]
+      Button save_button {
+        icon-name: "document-save-symbolic";
+        tooltip-text: _("Save Conversation to Alpaca");
+        sensitive: false;
+        clicked => $save_chat();
+      }
+    }
+
+    content: Box {
+      orientation: vertical;
+
+      Adw.ToastOverlay toast_overlay {}
+
+      Adw.Clamp global_footer_container {
+        maximum-size: 1000;
+        tightening-threshold: 800;
+
+        styles [
+          "bottom_clamp",
+        ]
+      }
+    };
+  }
+}

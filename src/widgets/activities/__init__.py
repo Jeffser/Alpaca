@@ -1,6 +1,6 @@
 # __init__.py
 
-from gi.repository import Gtk, Gio, Adw, GLib, GdkPixbuf, Gdk
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk
 from .background_remover import BackgroundRemoverPage
 from .web_browser import WebBrowser
 from .live_chat import LiveChatPage
@@ -253,12 +253,20 @@ class ActivityManager(Adw.Bin):
         tabpage.get_child().page.on_close()
 
     def page_attached(self, tabview, tabpage, index):
+        tabpage.set_title(tabpage.get_child().page.title)
+        tabpage.set_icon(Gio.ThemedIcon.new(tabpage.get_child().page.activity_icon))
+        tabpage.get_child().tab = tabpage
+        tabpage.set_thumbnail_yalign(0.5)
+
         self.navigationview.replace_with_tags(['tab'])
         if self.get_root().get_name() == 'AlpacaWindow':
             if self.get_root().last_breakpoint_status:
                 self.get_root().chat_splitview.set_show_content(False)
             else:
                 self.get_root().chat_splitview.set_collapsed(False)
+            if len(tabview.get_pages()) == 1:
+                self.get_root().split_view_overlay.set_show_sidebar(False)
+
         tabview.set_selected_page(tabpage)
         self.taboverview.set_open(False)
 
@@ -270,6 +278,8 @@ class ActivityManager(Adw.Bin):
                     self.get_root().chat_splitview.set_show_content(True)
                 else:
                     self.get_root().chat_splitview.set_collapsed(True)
+                if not self.get_root().last_breakpoint_status:
+                    self.get_root().split_view_overlay.set_show_sidebar(True)
 
     def window_create(self, tabview=None):
         atw = ActivityTabWindow(self.get_root().get_application())
@@ -318,9 +328,6 @@ def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
     if not page.get_parent():
         if root.get_name() == 'AlpacaWindow' and root.settings.get_value('activity-mode').unpack() == 0 and not force_dialog:
             tab_page = root.activities_page.get_child().tabview.append(ActivityWrapper(page))
-            tab_page.set_title(page.title)
-            tab_page.set_icon(Gio.ThemedIcon.new(page.activity_icon))
-            tab_page.get_child().tab = tab_page
             return tab_page.get_child()
         elif root.settings.get_value('activity-mode').unpack() == 1 or force_dialog:
             dialog = ActivityDialog(page)
@@ -334,9 +341,6 @@ def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
                 last_activity_tabview = atw.activity_manager.tabview
 
             tab_page = last_activity_tabview.append(ActivityWrapper(page))
-            tab_page.set_title(page.title)
-            tab_page.set_icon(Gio.ThemedIcon.new(page.activity_icon))
-            tab_page.get_child().tab = tab_page
             return tab_page.get_child()
 
 

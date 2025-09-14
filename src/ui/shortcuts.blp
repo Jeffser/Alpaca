@@ -1,0 +1,122 @@
+using Gtk 4.0;
+
+$AdwShortcutsDialog shortcuts_dialog {
+  $AdwShortcutsSection {
+    title: _("General");
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Show Shortcuts");
+      action-name: "app.shortcuts";
+    }
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Preferences");
+      action-name: "app.preferences";
+    }
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Quick Ask");
+      action-name: "app.start_quick_ask";
+    }
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Model Manager");
+      action-name: "app.model_manager";
+    }
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Instance Manager");
+      action-name: "app.instance_manager";
+    }
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Tool Manager");
+      action-name: "app.tool_manager";
+    }
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Toggle Sidebar");
+      action-name: "app.toggle_sidebar";
+    }
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Zoom In");
+      action-name: "app.zoom_in";
+    }
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Zoom Out");
+      action-name: "app.zoom_out";
+    }
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Quit");
+      action-name: "app.quit";
+    }
+  }
+
+  $AdwShortcutsSection {
+    title: C_("shortcut window", "Chat Management");
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Create Chat");
+      action-name: "app.new_chat";
+    }
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Delete Chat");
+      action-name: "app.delete_current_chat";
+    }
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Rename Chat");
+      action-name: "app.rename_current_chat";
+    }
+
+    $AdwShortcutsItem {
+      title: C_("shortcut window", "Toggle Searchbars");
+      action-name: "app.toggle_search";
+    }
+  }
+
+  $AdwShortcutsSection {
+    title: C_("shortcut window", "Message Entry");
+
+    $AdwShortcutsItem {
+      title: _("Copy");
+      accelerator: "<ctrl>C";
+    }
+
+    $AdwShortcutsItem {
+      title: _("Paste");
+      accelerator: "<ctrl>V";
+    }
+
+    $AdwShortcutsItem {
+      title: _("Open Emoji Menu");
+      accelerator: "<ctl>semicolon";
+    }
+
+    $AdwShortcutsItem {
+      title: _("Insert new line");
+      accelerator: "<shift>Return";
+    }
+
+    $AdwShortcutsItem {
+      title: _("Send Message as System");
+      subtitle: _("System messages are taken as literal instructions by models");
+      accelerator: "<ctl>Return";
+    }
+
+    $AdwShortcutsItem {
+      title: _("Use Tools");
+      subtitle: _("Ask model to use tools to generate a message");
+      accelerator: "<alt>Return";
+    }
+
+    $AdwShortcutsItem {
+      title: _("Send Message as User");
+      accelerator: "Return";
+    }
+  }
+}

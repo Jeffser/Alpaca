@@ -208,7 +208,6 @@ stacksidebar {
   color: var(--accent-purple);
 }
 
-
 .folder-slate headerbar, row.folder-slate {
   background-color: color-mix(in srgb, var(--accent-slate) 30%, transparent);
   color: color-mix(in srgb, var(--accent-slate) 50%, currentColor);
@@ -217,56 +216,3 @@ stacksidebar {
   color: var(--accent-slate);
 }
 
-/*-----------MACOS STUFF-----------*/
-
-window.macos windowcontrols > button > image {
-    background-size: contain;
-    border: none;
-    color: transparent;
-    font-size: 1px;
-}
-window.macos windowcontrols > button {
-    min-width: 10px;
-    min-height: 10px;
-    padding: 0px;
-}
-window.macos windowcontrols {
-    padding-left: 5px;
-}
-
-window.macos windowcontrols > button.close > image {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#cb4e43" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14"/><path fill="#fe6254" d="M8 14.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13"/></svg>') no-repeat center;
-}
-window.macos windowcontrols > button.maximize > image {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#20a932" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14"/><path fill="#28d33f" d="M8 14.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13"/></svg>') no-repeat center;
-}
-window.macos windowcontrols > button.minimize > image {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#caa124" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14"/><path fill="#fdc92d" d="M8 14.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13"/></svg>') no-repeat center;
-}
-
-window.macos windowcontrols:hover > button.close > image {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#cb4e43" d="M8 15.002a7 7 0 1 0 0-14 7 7 0 0 0 0 14"/><path fill="#fe6254" d="M8 14.488a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13"/><path d="M5.169 5.091a1 1 0 0 0 0 1.414L6.583 7.92 5.169 9.334a1 1 0 0 0 0 1.414 1 1 0 0 0 1.414 0l1.414-1.414 1.414 1.414a1 1 0 0 0 1.414 0 1 1 0 0 0 0-1.414L9.411 7.92l1.414-1.415a1 1 0 0 0 0-1.414 1 1 0 0 0-1.414 0L7.997 6.505 6.583 5.091a1 1 0 0 0-1.414 0" opacity=".5"/></svg>') no-repeat center;
-}
-window.macos windowcontrols:hover > button.maximize > image {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><g fill-rule="evenodd"><path fill="#20a932" d="M8.002 14.999a7 7 0 1 0 0-14 7 7 0 0 0 0 14"/><path fill="#28d33f" d="M8.002 14.507a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13"/></g><path d="m6.41 4.98 4.587 4.585V5.98c0-.415-.585-1-1-1zM4.998 6.392V9.98c0 .416.584 1 1 1h3.586z" opacity=".5"/></svg>') no-repeat center;
-}
-window.macos windowcontrols:hover > button.minimize > image {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><g transform="translate(-266 -584.52)scale(3.7795)"><g fill-rule="evenodd"><path fill="#caa124" d="M72.496 158.625a1.852 1.852 0 1 0 0-3.704 1.852 1.852 0 0 0 0 3.704"/><path fill="#fdc92d" d="M72.496 158.493a1.72 1.72 0 1 0 0-3.44 1.72 1.72 0 0 0 0 3.44"/></g><rect width="2.117" height=".529" x="71.438" y="156.51" opacity=".5" ry=".265"/></g></svg>') no-repeat center;
-}
-
-window.macos windowcontrols > button.close:active > image {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#cb4e43" d="M8 15.002a7 7 0 1 0 0-14 7 7 0 0 0 0 14" style="fill-rule:evenodd"/><path fill="#fe6254" d="M8 14.488a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13" style="fill:#cb4e43;fill-opacity:1;fill-rule:evenodd"/><path d="M5.169 5.091a1 1 0 0 0 0 1.414L6.583 7.92 5.169 9.334a1 1 0 0 0 0 1.414 1 1 0 0 0 1.414 0l1.414-1.414 1.414 1.414a1 1 0 0 0 1.414 0 1 1 0 0 0 0-1.414L9.411 7.92l1.414-1.415a1 1 0 0 0 0-1.414 1 1 0 0 0-1.414 0L7.997 6.505 6.583 5.091a1 1 0 0 0-1.414 0" opacity=".5" style="stroke-width:3.7795"/></svg>') no-repeat center;
-}
-window.macos windowcontrols > button.maximize:active > image {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#20a932" fill-rule="evenodd" d="M8.002 14.999a7 7 0 1 0 0-14 7 7 0 0 0 0 14"/><path d="m6.41 4.98 4.587 4.585V5.98c0-.415-.585-1-1-1zM4.998 6.392V9.98c0 .416.584 1 1 1h3.586z" opacity=".5"/></svg>') no-repeat center;
-}
-window.macos windowcontrols > button.minimize:active > image {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#caa124" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14" style="fill-rule:evenodd"/><rect width="8" height="2" x="3.998" y="6.992" opacity=".5" ry="1" style="stroke-width:3.7795"/></svg>') no-repeat center;
-}
-
-window.macos.maximized windowcontrols > button.maximize:hover > image {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><g fill-rule="evenodd"><path fill="#20a932" d="M8 14.999a7 7 0 1 0 0-14 7 7 0 0 0 0 14"/><path fill="#28d33f" d="M8 14.507a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13"/></g><path d="M8.025 3.414V7c0 .416.585 1 1 1h3.586zM3.39 8l4.586 4.586V9c0-.416-.585-1-1-1z" opacity=".5"/></svg>') no-repeat center;
-}
-window.macos.maximized windowcontrols > button.maximize:active > image {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="#20a932" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14" style="fill-rule:evenodd"/><path d="M8.025 3.414V7c0 .416.585 1 1 1h3.586zM3.39 8l4.586 4.586V9c0-.416-.585-1-1-1z" opacity=".5"/></svg>') no-repeat center;
-}

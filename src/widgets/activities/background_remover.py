@@ -1,11 +1,101 @@
 # background_remover.py
 
-from gi.repository import Gtk, Gio, Adw, GLib, GdkPixbuf, Gdk
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk
 from ...constants import IN_FLATPAK, data_dir, REMBG_MODELS
 from .. import dialog, attachments, models
 import base64, os, threading
 from PIL import Image
 from io import BytesIO
+
+class BackgroundRemoverImage(Gtk.Button):
+    __gtype_name__ = 'AlpacaBackgroundRemoverImage'
+
+    def __init__(self, name:str):
+        super().__init__(
+            child=Gtk.Picture(
+                css_classes=['rounded_image']
+            ),
+            margin_start=5,
+            margin_end=5,
+            margin_bottom=5,
+            css_classes=['flat'],
+            tooltip_text=_('Open in Image Viewer'),
+            name=name
+        )
+
+        self.connect('clicked', self.open_image_viewer)
+        self.gesture_click = Gtk.GestureClick(button=3)
+        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
+        self.add_controller(self.gesture_click)
+        self.gesture_long_press = Gtk.GestureLongPress()
+        self.gesture_long_press.connect("pressed", self.show_popup)
+        self.add_controller(self.gesture_long_press)
+
+    def open_image_viewer(self, button):
+        from . import show_activity
+        page = attachments.AttachmentImagePage(
+            texture=self.get_texture(),
+            title=self.get_name(),
+            download_callback=lambda ovr: self.prompt_download(ovr),
+            attachment_callback=lambda: self.on_attachment()
+        )
+        self.activity = show_activity(page, self.get_root())
+
+    def get_texture(self) -> Gdk.Texture:
+        return self.get_child().get_paintable()
+
+    def set_texture(self, texture:Gdk.Texture):
+        self.get_child().set_paintable(texture)
+
+    def on_download(self, dialog, result, user_data):
+        try:
+            file = dialog.save_finish(result)
+            path = file.get_path()
+            if path:
+                self.get_texture().save_to_png(path)
+                Gio.AppInfo.launch_default_for_uri('file://{}'.format(path))
+        except GLib.Error as e:
+            logger.error(e)
+
+    def prompt_download(self, override_root=None):
+        dialog = Gtk.FileDialog(
+            title=_("Save Image"),
+            initial_name='{}.png'.format(self.get_name())
+        )
+        dialog.save(override_root or self.get_root(), None, self.on_download, None)
+
+    def on_attachment(self):
+        image_data = self.get_texture().save_to_png_bytes().get_data()
+        attachment = attachments.Attachment(
+            file_id='-1',
+            file_name=self.get_name(),
+            file_type='image',
+            file_content=base64.b64encode(image_data).decode('utf-8')
+        )
+        self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(attachment)
+
+    def show_popup(self, gesture, x, y):
+        rect = Gdk.Rectangle()
+        rect.x, rect.y, = x, y
+        actions = [
+            [
+                {
+                    'label': _('Download Image'),
+                    'callback': self.prompt_download,
+                    'icon': 'folder-download-symbolic'
+                },
+                {
+                    'label': _('Attach Image'),
+                    'callback': self.on_attachment,
+                    'icon': 'chain-link-loose-symbolic'
+                }
+            ]
+        ]
+        popup = dialog.Popover(actions)
+        popup.set_parent(self)
+        popup.set_pointing_to(rect)
+        popup.popup()
+
 
 class BackgroundRemoverPage(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaBackgroundRemoverPage'
@@ -13,8 +103,6 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
     def __init__(self, save_func:callable=None, close_callback:callable=None):
         self.save_func = save_func
         self.close_callback = close_callback
-        self.input_image_data = None
-        self.output_image_data = None
 
         self.main_stack = Gtk.Stack(
             transition_type=1
@@ -73,25 +161,19 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
         )
         container.append(self.stack_switcher)
         container.append(self.image_stack)
+
         ### Input Picture
+        self.input_picture_button = BackgroundRemoverImage(_('Original'))
         self.image_stack.add_named(
-            Gtk.Picture(
-                css_classes=['rounded_image'],
-                margin_start=10,
-                margin_end=10,
-                margin_bottom=10
-            ),
+            self.input_picture_button,
             'input'
         )
+
         ### Output Picture
+        self.output_picture_button = BackgroundRemoverImage(_('Result'))
         self.image_stack.add_named(
             Gtk.Overlay(
-                child=Gtk.Picture(
-                    css_classes=['rounded_image'],
-                    margin_start=10,
-                    margin_end=10,
-                    margin_bottom=10
-                )
+                child=self.output_picture_button
             ),
             'output'
         )
@@ -123,43 +205,44 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
         )
         self.select_button.connect('clicked', lambda *_: self.load_image_requested())
 
-        self.download_button = Gtk.Button(
-            icon_name='folder-download-symbolic',
-            tooltip_text=_("Download Result"),
-            sensitive=False
-        )
-        self.download_button.connect('clicked', lambda *_: self.prompt_download())
-
-        self.buttons = [self.model_dropdown, self.select_button, self.download_button]
+        self.buttons = [self.model_dropdown, self.select_button]
         self.title = _("Background Remover")
         self.activity_icon = 'image-missing-symbolic'
 
-    def run(self, model_name:str):
-        self.output_spinner.set_visible(True)
-        self.stack_switcher.set_active_name('output')
-        self.select_button.set_sensitive(False)
-        self.download_button.set_sensitive(False)
+    def set_status(self, generating:bool):
+        self.output_spinner.set_visible(generating)
+        if generating:
+            self.stack_switcher.set_active_name('output')
+        self.model_dropdown.set_sensitive(not generating)
+        self.select_button.set_sensitive(not generating)
+
+        if generating:
+            self.output_picture_button.get_child().add_css_class('loading_image')
+        else:
+            self.output_picture_button.get_child().remove_css_class('loading_image')
+
+    def run(self, model_name:str, input_image_data):
+        self.set_status(True)
+
         from rembg import remove, new_session
         session = new_session(model_name)
-        input_image = Image.open(BytesIO(base64.b64decode(self.input_image_data)))
+        input_image = Image.open(BytesIO(base64.b64decode(input_image_data)))
         output_image = remove(input_image, session=session)
         buffered = BytesIO()
         output_image.save(buffered, format="PNG")
 
-        self.output_image_data = base64.b64encode(buffered.getvalue()).decode("utf-8")
-        texture = self.make_texture(self.output_image_data)
-        self.stack_switcher.set_active_name('output')
-        self.image_stack.get_child_by_name('output').get_child().set_paintable(texture)
-        self.image_stack.get_child_by_name('output').get_child().remove_css_class('loading_image')
-        self.output_spinner.set_visible(False)
-        self.select_button.set_sensitive(True)
-        self.download_button.set_sensitive(True)
+        output_image_data = base64.b64encode(buffered.getvalue()).decode("utf-8")
+        texture = self.make_texture(output_image_data)
+        self.output_picture_button.set_texture(texture)
+
+        self.set_status(False)
+
         if self.pulling_model:
             threading.Thread(target=self.pulling_model.update_progressbar, args=({'status': 'success'},)).start()
         if self.save_func:
-            self.save_func(self.output_image_data)
+            self.save_func(output_image_data)
 
-    def prepare_model_download(self, model_name:str):
+    def prepare_model_download(self, model_name:str, input_image_data):
         self.pulling_model = models.pulling.PullingModelButton(
             model_name,
             lambda model_name, window=self.get_root(): models.common.prepend_added_model(window, models.image.BackgroundRemoverModelButton(model_name)),
@@ -167,41 +250,35 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
             False
         )
         models.common.prepend_added_model(self.get_root(), self.pulling_model)
-        threading.Thread(target=self.run, args=(model_name,)).start()
+        threading.Thread(target=self.run, args=(model_name, input_image_data)).start()
 
-    def verify_model(self):
+    def verify_model(self, input_image_data):
         model = list(REMBG_MODELS)[self.model_dropdown.get_selected()]
         model_dir = os.path.join(data_dir, '.u2net')
         if os.path.isdir(model_dir) and '{}.onnx'.format(model) in os.listdir(model_dir):
-            threading.Thread(target=self.run, args=(model,)).start()
+            threading.Thread(target=self.run, args=(model, input_image_data)).start()
         else:
             GLib.idle_add(dialog.simple,
                 self.get_root(),
                 _('Download Background Removal Model'),
                 _("To use this tool you'll need to download a special model ({})").format(REMBG_MODELS.get(model, {}).get('size')),
-                lambda m=model: self.prepare_model_download(model)
+                lambda m=model: self.prepare_model_download(model, input_image_data)
             )
 
-    def make_texture(self, image_data:str):
-        data = base64.b64decode(image_data)
-        loader = GdkPixbuf.PixbufLoader.new()
-        loader.write(data)
-        loader.close()
-        pixbuf = loader.get_pixbuf()
-        height = int((pixbuf.get_property('height') * 240) / pixbuf.get_property('width'))
-        texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+    def make_texture(self, data:str):
+        image_data = base64.b64decode(data)
+        texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
         return texture
 
     def load_image(self, image_data:str):
-        self.input_image_data = image_data
-        texture = self.make_texture(self.input_image_data)
-        self.image_stack.get_child_by_name('input').set_paintable(texture)
-        self.image_stack.get_child_by_name('output').get_child().set_paintable(texture)
-        self.image_stack.get_child_by_name('output').get_child().add_css_class('loading_image')
+        input_image_data = image_data
+        texture = self.make_texture(input_image_data)
+        self.input_picture_button.set_texture(texture)
+        self.output_picture_button.set_texture(texture)
         self.main_stack.set_visible_child_name('content')
-        self.verify_model()
+        self.verify_model(input_image_data)
 
-    def on_attachment(self, file:Gio.File, remove_original:bool=False):
+    def on_loaded(self, file:Gio.File, remove_original:bool=False):
         if not file:
             return
         self.load_image(attachments.extract_image(file.get_path(), self.get_root().settings.get_value('max-image-size').unpack()))
@@ -212,26 +289,8 @@ class BackgroundRemoverPage(Gtk.ScrolledWindow):
         dialog.simple_file(
             parent = self.get_root(),
             file_filters = [file_filter],
-            callback = self.on_attachment
+            callback = self.on_loaded
         )
-
-    def on_download(self, dialog, result, user_data):
-        try:
-            file = dialog.save_finish(result)
-            path = file.get_path()
-            if path:
-                with open(path, "wb") as f:
-                    f.write(base64.b64decode(self.output_image_data))
-                Gio.AppInfo.launch_default_for_uri('file://{}'.format(path))
-        except GLib.Error as e:
-            logger.error(e)
-
-    def prompt_download(self):
-        dialog = Gtk.FileDialog(
-            title=_("Save Image"),
-            initial_name='output.png'
-        )
-        dialog.save(self.get_root(), None, self.on_download, None)
 
     def on_reload(self):
         pass

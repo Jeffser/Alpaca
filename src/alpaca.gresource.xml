@@ -70,11 +70,12 @@
     <file alias="icons/scalable/status/right-symbolic.svg">icons/right-symbolic.svg</file>
     <file alias="icons/scalable/status/headset-symbolic.svg">icons/headset-symbolic.svg</file>
     <file alias="icons/scalable/status/go-home-symbolic.svg">icons/go-home-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
-    <file preprocess="xml-stripblanks" alias="window.ui">gtk/window.ui</file>
-    <file preprocess="xml-stripblanks" alias="quick_ask.ui">gtk/quick_ask.ui</file>
-    <file preprocess="xml-stripblanks" alias="welcome.ui">gtk/welcome.ui</file>
-    <file preprocess="xml-stripblanks" alias="notice.ui">gtk/notice.ui</file>
-    <file preprocess="xml-stripblanks" alias="preferences.ui">gtk/preferences.ui</file>
+    <file alias="icons/scalable/status/zoom-fit-best-symbolic.svg">icons/zoom-fit-best-symbolic.svg</file>
+    <file alias="window.ui">ui/window.ui</file>
+    <file alias="quick_ask.ui">ui/quick_ask.ui</file>
+    <file alias="welcome.ui">ui/welcome.ui</file>
+    <file alias="notice.ui">ui/notice.ui</file>
+    <file alias="preferences.ui">ui/preferences.ui</file>
+    <file alias="shortcuts.ui">ui/shortcuts.ui</file>
   </gresource>
 </gresources>

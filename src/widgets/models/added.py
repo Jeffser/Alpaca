@@ -1,6 +1,6 @@
 # added.py
 
-from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GObject
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GObject
 import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
@@ -350,7 +350,7 @@ class AddedModelButton(Gtk.Button):
         self.row = AddedModelRow(self)
 
         self.connect('clicked', lambda btn: AddedModelDialog(self).present(self.get_root()))
-        self.update_profile_picture()
+        GLib.idle_add(self.update_profile_picture)
 
         self.gesture_click = Gtk.GestureClick(button=3)
         self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
@@ -373,11 +373,7 @@ class AddedModelButton(Gtk.Button):
         profile_picture = SQL.get_model_preferences(self.get_name()).get('picture', None)
         if profile_picture:
             image_data = base64.b64decode(profile_picture)
-            loader = GdkPixbuf.PixbufLoader.new()
-            loader.write(image_data)
-            loader.close()
-            pixbuf = loader.get_pixbuf()
-            texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+            texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
             image = Gtk.Image.new_from_paintable(texture)
             image.set_size_request(size, size)
             image.set_pixel_size(size)

@@ -1,0 +1,708 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaWindow: Adw.ApplicationWindow {
+  close-request => $closing_app();
+  resizable: true;
+  width-request: 360;
+  height-request: 240;
+  default-width: 1300;
+  default-height: 800;
+  title: "Alpaca";
+
+  Adw.Breakpoint {
+    condition ("max-width: 770sp")
+
+    setters {
+      split_view_overlay.collapsed: true;
+    }
+  }
+
+  Adw.Breakpoint {
+    condition ("max-width: 690sp")
+
+    setters {
+      split_view_overlay.collapsed: true;
+      model_manager_header_bar.title-widget: null;
+      model_manager_bottom_view_switcher.reveal: true;
+      available_model_flowbox.min-children-per-line: 1;
+      local_model_flowbox.max-children-per-line: 2;
+    }
+  }
+
+  Adw.Breakpoint {
+    condition ("max-width: 560sp")
+
+    setters {
+      split_view_overlay.collapsed: true;
+      model_manager_header_bar.title-widget: null;
+      model_manager_bottom_view_switcher.reveal: true;
+      available_model_flowbox.min-children-per-line: 1;
+      local_model_flowbox.max-children-per-line: 2;
+      chat_splitview.collapsed: true;
+      show_activities_stack.visible-child-name: "button";
+    }
+
+    apply => $last_breakpoint_applied();
+    unapply => $last_breakpoint_unapplied();
+  }
+
+  content: Adw.NavigationView main_navigation_view {
+    Adw.NavigationPage {
+      title: "Alpaca";
+      tag: "chat";
+
+      child: Adw.OverlaySplitView split_view_overlay {
+        show-sidebar: bind show_sidebar_button.active;
+        sidebar-width-fraction: 0.3;
+        enable-hide-gesture: true;
+        enable-show-gesture: true;
+
+        sidebar: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {
+            [start]
+            Adw.SplitButton new_chat_splitbutton {
+              action-name: "app.new_chat";
+              tooltip-text: _("New Chat");
+              icon-name: "chat-message-new-symbolic";
+
+              styles [
+                "flat",
+              ]
+            }
+
+            [end]
+            MenuButton {
+              primary: true;
+              icon-name: "open-menu-symbolic";
+              tooltip-text: _("Menu");
+              menu-model: primary_menu;
+            }
+
+            [end]
+            ToggleButton chat_search_button {
+              icon-name: "edit-find-symbolic";
+              tooltip-text: _("Search Chats");
+              active: bind chat_searchbar.search-mode-enabled;
+            }
+          }
+
+          [top]
+          SearchBar chat_searchbar {
+            accessibility {
+              label: _("Chat search bar");
+            }
+
+            search-mode-enabled: bind chat_search_button.active;
+
+            SearchEntry {
+              search-changed => $chat_search_changed();
+              hexpand: true;
+              search-delay: 100;
+              placeholder-text: _("Search chats");
+
+              accessibility {
+                label: _("Search chats");
+              }
+            }
+          }
+
+          content: Adw.NavigationView chat_list_navigationview {
+            popped => $chat_list_page_changed();
+            pushed => $chat_list_page_changed();
+          };
+        };
+
+        Adw.NavigationSplitView chat_splitview {
+          collapsed: bind show_activities_toggle.active sync-create inverted;
+          sidebar-width-fraction: 0.4;
+          sidebar-width-unit: pt;
+          sidebar-position: end;
+          show-content: true;
+          max-sidebar-width: 520;
+
+          sidebar: Adw.NavigationPage activities_page {
+            title: _("Activities");
+          };
+
+          content: Adw.NavigationPage {
+            title: _("Chat");
+
+            child: Adw.ToolbarView {
+              height-request: 140;
+
+              [top]
+              Adw.HeaderBar {
+                [start]
+                ToggleButton show_sidebar_button {
+                  icon-name: "sidebar-show-symbolic";
+                  tooltip-text: _("Toggle Sidebar");
+                  active: bind split_view_overlay.show-sidebar;
+                }
+
+                [start]
+                ToggleButton message_search_button {
+                  icon-name: "edit-find-symbolic";
+                  tooltip-text: _("Search Messages");
+                  active: bind message_searchbar.search-mode-enabled;
+                }
+
+                [title]
+                Stack title_stack {
+                  transition-duration: 100;
+                  transition-type: crossfade;
+
+                  StackPage {
+                    name: "loading";
+
+                    child: Adw.Spinner {
+                      styles [
+                        "p10",
+                      ]
+                    };
+                  }
+
+                  StackPage {
+                    name: "no-models";
+
+                    child: Button title_no_model_button {
+                      child: Adw.ButtonContent {
+                        label: _("Add Models");
+                        icon-name: "brain-augemnted-symbolic";
+                      };
+
+                      tooltip-text: _("Manage Models");
+                      action-name: "app.model_manager";
+                      halign: center;
+                    };
+                  }
+
+                  StackPage {
+                    name: "model-selector";
+
+                    child: Box {
+                      halign: center;
+
+                      Button {
+                        icon-name: "brain-augemnted-symbolic";
+                        tooltip-text: _("Manage Models");
+                        action-name: "app.model_manager";
+
+                        styles [
+                          "flat",
+                        ]
+                      }
+
+                      DropDown model_dropdown {}
+                    };
+                  }
+                }
+
+                [end]
+                Stack show_activities_stack {
+                  StackPage {
+                    name: "toggle";
+
+                    child: ToggleButton show_activities_toggle {
+                      icon-name: "sidebar-show-right-symbolic";
+                      tooltip-text: _("Toggle Activities Sidebar");
+                      active: bind chat_splitview.collapsed no-sync-create inverted;
+                    };
+                  }
+
+                  StackPage {
+                    name: "button";
+
+                    child: Button show_activities_button {
+                      icon-name: "sidebar-show-right-symbolic";
+                      tooltip-text: _("Show Activities");
+                      clicked => $show_activities_button_pressed();
+                    };
+                  }
+                }
+
+                [end]
+                MenuButton {
+                  primary: false;
+                  icon-name: "view-more-symbolic";
+                  tooltip-text: _("Chat Menu");
+                  menu-model: secondary_menu;
+                }
+              }
+
+              [top]
+              Adw.Clamp {
+                maximum-size: 1000;
+                tightening-threshold: 800;
+
+                SearchBar message_searchbar {
+                  accessibility {
+                    label: _("Message search bar");
+                  }
+
+                  search-mode-enabled: bind message_search_button.active;
+                  key-capture-widget: template;
+
+                  SearchEntry searchentry_messages {
+                    search-changed => $message_search_changed();
+                    hexpand: true;
+                    search-delay: 200;
+                    placeholder-text: _("Search messages");
+
+                    accessibility {
+                      label: _("Search messages");
+                    }
+                  }
+                }
+              }
+
+              content: Box {
+                orientation: vertical;
+                vexpand: true;
+                hexpand: true;
+
+                Adw.Banner banner {
+                  button-label: _("Close");
+                  title: _("Warning: Power saver mode is enabled, this will slow down message generation");
+                }
+
+                Box {
+                  orientation: vertical;
+
+                  Adw.ToastOverlay toast_overlay {
+                    Adw.Bin chat_bin {
+                      hexpand: true;
+                      vexpand: true;
+                    }
+                  }
+
+                  Adw.Clamp global_footer_container {
+                    maximum-size: 1000;
+                    tightening-threshold: 800;
+                  }
+                }
+              };
+            };
+          };
+        }
+      };
+    }
+
+    Adw.NavigationPage {
+      title: _("Instance Manager");
+      tag: "instance_manager";
+
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {}
+
+        content: Stack instance_manager_stack {
+          StackPage {
+            name: "no-instances";
+
+            child: Adw.StatusPage {
+              icon-name: "sad-computer-symbolic";
+              title: _("No Instances Found");
+              description: _("It looks a bit empty in here. Try adding an instance get started!");
+
+              child: Button {
+                tooltip-text: _("Add Instance");
+                clicked => $add_instance();
+                halign: center;
+
+                styles [
+                  "pill",
+                  "suggested-action",
+                ]
+
+                child: Adw.ButtonContent {
+                  icon-name: "list-add-symbolic";
+                  label: _("Add Instance");
+                };
+              };
+            };
+          }
+
+          StackPage {
+            name: "content";
+
+            child: Adw.PreferencesPage instance_preferences_page {
+              Adw.PreferencesGroup {
+                title: _("Added Instances");
+                description: _("Manage your AI instances, chats and messages are shared between instances when generating responses.");
+
+                header-suffix: Button {
+                  icon-name: "list-add-symbolic";
+                  valign: center;
+                  tooltip-text: _("Add Instance");
+                  clicked => $add_instance();
+
+                  styles [
+                    "flat",
+                  ]
+                };
+
+                ListBox instance_listbox {
+                  selection-mode: single;
+                  row-selected => $instance_changed();
+                  unselect-all => $instance_changed();
+
+                  styles [
+                    "boxed-list",
+                  ]
+                }
+              }
+            };
+          }
+        };
+      };
+    }
+
+    Adw.NavigationPage {
+      title: _("Tool Manager");
+      tag: "tool_manager";
+
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {}
+
+        content: Adw.PreferencesPage {
+          Adw.PreferencesGroup {
+            title: _("Available Tools");
+            description: _("Functions that AI models might use when sending a message by selecting \"Use Tools\" in the send button context menu.");
+
+            ListBox tool_listbox {
+              selection-mode: none;
+
+              styles [
+                "boxed-list",
+              ]
+            }
+
+            Label {
+              label: _("Help us build better AI tools! Submit your ideas here.");
+              wrap: true;
+              wrap-mode: word_char;
+              margin-top: 15;
+            }
+
+            LinkButton {
+              label: _("Request Form");
+              uri: "https://github.com/Jeffser/Alpaca/issues/new?template=request_tool.md";
+            }
+          }
+        };
+      };
+    }
+
+    Adw.NavigationPage {
+      title: _("Model Manager");
+      tag: "model_manager";
+
+      child: Adw.ToolbarView {
+        height-request: 140;
+
+        [top]
+        Adw.HeaderBar model_manager_header_bar {
+          [start]
+          ToggleButton model_search_button {
+            icon-name: "edit-find-symbolic";
+            tooltip-text: _("Search Model");
+            active: bind model_searchbar.search-mode-enabled;
+          }
+
+          title-widget: Adw.ViewSwitcher model_manager_top_view_switcher {
+            stack: model_manager_stack;
+            policy: wide;
+          };
+
+          [end]
+          MenuButton {
+            primary: false;
+            icon-name: "view-more-symbolic";
+            tooltip-text: _("Model Manager Menu");
+            menu-model: model_manager_menu;
+          }
+        }
+
+        [top]
+        Adw.Clamp {
+          maximum-size: 1000;
+          tightening-threshold: 800;
+
+          SearchBar model_searchbar {
+            accessibility {
+              label: _("Model search bar");
+            }
+
+            search-mode-enabled: bind model_search_button.active;
+            key-capture-widget: template;
+
+            Box {
+              spacing: 10;
+
+              SearchEntry searchentry_models {
+                hexpand: true;
+                search-changed => $model_search_changed();
+                search-delay: 100;
+                placeholder-text: _("Search models");
+
+                accessibility {
+                  label: _("Search models");
+                }
+              }
+
+              MenuButton model_filter_button {
+                icon-name: "funnel-symbolic";
+                tooltip-text: _("Filter Models");
+                visible: false;
+              }
+            }
+          }
+        }
+
+        content: Adw.ViewStack model_manager_stack {
+          enable-transitions: true;
+          notify::visible-child => $model_manager_stack_changed();
+
+          Adw.ViewStackPage {
+            name: "added_models";
+            title: _("Added");
+            icon-name: "folder-download-symbolic";
+
+            child: Stack local_model_stack {
+              StackPage {
+                name: "no-models";
+
+                child: Adw.StatusPage {
+                  icon-name: "sad-computer-symbolic";
+                  title: _("No Models Found");
+                  description: _("It looks a bit empty in here. Try downloading some models or change your AI instance to get started!");
+
+                  child: Button {
+                    tooltip-text: _("Manage Instances");
+                    action-name: "app.instance_manager";
+                    halign: center;
+
+                    styles [
+                      "pill",
+                      "suggested-action",
+                    ]
+
+                    child: Adw.ButtonContent {
+                      icon-name: "processor-symbolic";
+                      label: _("Manage Instances");
+                    };
+                  };
+                };
+              }
+
+              StackPage {
+                name: "content";
+
+                child: ScrolledWindow {
+                  child: Adw.Clamp {
+                    maximum-size: 1000;
+                    tightening-threshold: 800;
+
+                    FlowBox local_model_flowbox {
+                      row-spacing: 0;
+                      column-spacing: 0;
+                      hexpand: true;
+                      valign: start;
+                      min-children-per-line: 1;
+                      max-children-per-line: 3;
+                      selection-mode: none;
+                      homogeneous: true;
+
+                      styles [
+                        "p10",
+                      ]
+                    }
+                  };
+                };
+              }
+
+              StackPage {
+                name: "no-results";
+
+                child: Adw.StatusPage {
+                  icon-name: "sad-computer-symbolic";
+                  title: _("No Models Found");
+                  description: _("Looks like we’re fresh out of models for that search. Try tweaking your keywords, or maybe explore something new!");
+                };
+              }
+            };
+          }
+
+          Adw.ViewStackPage available_models_stack_page {
+            name: "available_models";
+            title: _("Available");
+            icon-name: "globe-symbolic";
+
+            child: Stack available_model_stack {
+              StackPage {
+                name: "content";
+
+                child: ScrolledWindow {
+                  child: Adw.Clamp {
+                    maximum-size: 1000;
+                    tightening-threshold: 800;
+
+                    FlowBox available_model_flowbox {
+                      row-spacing: 0;
+                      column-spacing: 0;
+                      hexpand: true;
+                      valign: start;
+                      min-children-per-line: 2;
+                      max-children-per-line: 3;
+                      selection-mode: none;
+
+                      styles [
+                        "p10",
+                      ]
+                    }
+                  };
+                };
+              }
+
+              StackPage {
+                name: "no-results";
+
+                child: Adw.StatusPage {
+                  icon-name: "sad-computer-symbolic";
+                  title: _("No Models Found");
+                  description: _("Looks like we’re fresh out of models for that search. Try tweaking your keywords, or maybe explore something new!");
+                };
+              }
+            };
+          }
+        };
+
+        [bottom]
+        Adw.ViewSwitcherBar model_manager_bottom_view_switcher {
+          stack: model_manager_stack;
+        }
+      };
+    }
+  };
+}
+
+menu new_chat_menu {
+  section {
+    item {
+      label: _("New Chat");
+      action: "app.new_chat";
+    }
+
+    item {
+      label: _("New Notebook");
+      action: "app.new_notebook";
+    }
+  }
+}
+
+menu primary_menu {
+  section {
+    item {
+      label: _("Import Chat");
+      action: "app.import_chat";
+    }
+
+    item {
+      label: _("Manage Instances");
+      action: "app.instance_manager";
+    }
+
+    item {
+      label: _("Manage Models");
+      action: "app.model_manager";
+    }
+
+    item {
+      label: _("Manage Tools");
+      action: "app.tool_manager";
+    }
+  }
+
+  section {
+    item {
+      label: _("Start Quick Ask");
+      action: "app.start_quick_ask";
+    }
+
+    item {
+      label: _("Preferences");
+      action: "app.preferences";
+    }
+
+    item {
+      label: _("Keyboard Shortcuts");
+      action: "app.shortcuts";
+    }
+
+    item {
+      label: _("About Alpaca");
+      action: "app.about";
+    }
+  }
+}
+
+menu secondary_menu {
+  section {
+    item {
+      label: _("Rename Chat");
+      action: "app.rename_current_chat";
+    }
+
+    item {
+      label: _("Duplicate Chat");
+      action: "app.duplicate_current_chat";
+    }
+
+    item {
+      label: _("Export Chat");
+      action: "app.export_current_chat";
+    }
+  }
+
+  section {
+    item {
+      label: _("Delete Chat");
+      action: "app.delete_current_chat";
+    }
+  }
+}
+
+menu model_manager_menu {
+  section {
+    item {
+      label: _("Reload Added Models");
+      action: "app.reload_added_models";
+    }
+
+    item {
+      label: _("Add Model by Name");
+      action: "app.add_model_by_name";
+    }
+  }
+
+  section {
+    item {
+      label: _("Create Model from Existing");
+      action: "app.model_creator_existing";
+    }
+
+    item {
+      label: _("Create Model from GGUF File");
+      action: "app.model_creator_gguf";
+    }
+  }
+}
+
+FileFilter file_filter_db {
+  mime-types [
+    "application/vnd.sqlite3",
+  ]
+}

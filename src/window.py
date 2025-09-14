@@ -452,10 +452,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-
-        ##TESTING ZONE
         self.activities_page.set_child(Widgets.activities.ActivityManager())
-        ##
 
         actions = [[{
             'label': _('New Chat'),

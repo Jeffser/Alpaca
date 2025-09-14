@@ -4,7 +4,7 @@ Handles the message widget
 """
 
 import gi
-from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GdkPixbuf, GtkSource, Spelling
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GtkSource, Spelling
 import os, datetime, threading, sys, base64, logging, re, tempfile
 from ..sql_manager import prettify_model_name, generate_uuid, Instance as SQL
 from . import attachments, blocks, dialog, voice, tools
@@ -410,11 +410,7 @@ class Message(Gtk.Box):
         )
         if pfp_b64:
             image_data = base64.b64decode(pfp_b64)
-            loader = GdkPixbuf.PixbufLoader.new()
-            loader.write(image_data)
-            loader.close()
-            pixbuf = loader.get_pixbuf()
-            texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+            texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
             image_element = Gtk.Image.new_from_paintable(texture)
             image_element.set_size_request(40, 40)
             self.options_button = Gtk.MenuButton(
@@ -565,16 +561,13 @@ class GlobalMessageTextView(GtkSource.View):
         try:
             texture = clipboard.read_texture_finish(result)
             if texture:
-                if self.get_root().get_selected_model().get_vision():
-                    pixbuf = Gdk.pixbuf_get_from_texture(texture)
-                    tdir = tempfile.TemporaryDirectory()
-                    pixbuf.savev(os.path.join(tdir.name, 'image.png'), 'png', [], [])
-                    os.system('ls {}'.format(tdir.name))
-                    file = Gio.File.new_for_path(os.path.join(tdir.name, 'image.png'))
-                    self.parent_footer.attachment_container.on_attachment(file)
-                    tdir.cleanup()
-                else:
-                    dialog.show_toast(_("Image recognition is only available on specific models"), self.get_root())
+                if not self.get_root().get_selected_model().get_vision():
+                    dialog.show_toast(_("This model might not be compatible with image recognition"), self.get_root())
+                tdir = tempfile.TemporaryDirectory()
+                texture.save_to_png(os.path.join(tdir.name, 'image.png'))
+                file = Gio.File.new_for_path(os.path.join(tdir.name, 'image.png'))
+                self.parent_footer.attachment_container.on_attachment(file)
+                tdir.cleanup()
         except Exception as e:
             pass
 

@@ -1,0 +1,52 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaNotice: Adw.Dialog {
+  name: "Alpaca8";
+  title: _("Notice");
+  content-width: 400;
+  closed => $closing_notice();
+
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.Carousel notice_carousel {
+      hexpand: true;
+      vexpand: true;
+      allow-long-swipes: true;
+      allow-scroll-wheel: true;
+      spacing: 12;
+
+      Adw.StatusPage {
+        hexpand: true;
+        icon-name: "com.jeffser.Alpaca";
+        title: "Alpaca 8";
+        description: _("Hey Alpaca users! Get ready for a huge update packed with enhancements and exciting new features designed to make your experience even better.");
+      }
+
+      Adw.StatusPage {
+        hexpand: true;
+        icon-name: "folder-symbolic";
+        title: _("Folders");
+        description: _("Keeping all your chats and subfolders in one place is now easier than ever. Folders let you neatly organize everything, so you can find exactly what you're looking for without the clutter.");
+      }
+
+      Adw.StatusPage {
+        hexpand: true;
+        icon-name: "sidebar-show-right-symbolic";
+        title: _("Activities");
+        description: _("There's a new way to get things done with Activities. These are like mini-apps that your AI can use to help you with tasks, from running code and using a web browser to transcribing audio and creating attachments.");
+      }
+    };
+
+    [bottom]
+    Adw.CarouselIndicatorDots {
+      styles [
+        "p10",
+      ]
+
+      carousel: notice_carousel;
+    }
+  }
+}
