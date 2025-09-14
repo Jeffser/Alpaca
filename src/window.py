@@ -491,10 +491,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
         for el in ("default-width", "default-height", "maximized", "hide-on-close"):
             self.settings.bind(el, self, el, Gio.SettingsBindFlags.DEFAULT)
 
+        # Zoom
+        Widgets.preferences.set_zoom(Widgets.preferences.get_zoom())
 
         universal_actions = {
             'new_chat': [lambda *_: self.get_chat_list_page().new_chat(), ['<primary>n']],
-            'new_folder': [lambda *_: self.get_chat_list_page().new_folder(), ['<primary>d']],
+            'new_folder': [lambda *_: self.get_chat_list_page().prompt_new_folder(), ['<primary>d']],
             'import_chat': [lambda *_: Widgets.dialog.simple_file(
                 parent=self,
                 file_filters=[self.file_filter_db],
