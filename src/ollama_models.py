@@ -4396,6 +4396,10 @@ OLLAMA_MODELS = {
                         "3.3 GB"
                 ],
                 [
+                        "270m",
+                        "292 MB"
+                ],
+                [
                         "1b",
                         "815 MB"
                 ],
@@ -5233,6 +5237,10 @@ OLLAMA_MODELS = {
                 [
                         "30b",
                         "19 GB"
+                ],
+                [
+                        "480b",
+                        "290 GB"
                 ]
         ],
         "description": _("Alibaba's performant long context models for agentic and coding tasks."),
@@ -5243,6 +5251,78 @@ OLLAMA_MODELS = {
                 "code"
         ],
         "author": "Alibaba",
+        "languages": [
+                "en"
+        ],
+    },
+    "embeddinggemma": {
+        "tags": [
+                [
+                        "latest",
+                        "622 MB"
+                ],
+                [
+                        "300m",
+                        "622 MB"
+                ]
+        ],
+        "description": _("EmbeddingGemma is a 300M parameter embedding model from Google."),
+        "url": "https://ollama.com/library/embeddinggemma",
+        "categories": [
+                "small",
+                "medium",
+                "embedding",
+                "multilingual"
+        ],
+        "author": "Google DeepMind",
+        "languages": [
+                "de",
+                "fr",
+                "es",
+                "pt",
+                "it",
+                "nl",
+                "ru",
+                "cs",
+                "pl",
+                "ar",
+                "fa",
+                "he",
+                "tr",
+                "ja",
+                "ko",
+                "vi",
+                "th",
+                "id",
+                "ms",
+                "lo",
+                "my",
+                "ceb",
+                "km",
+                "tl",
+                "hi",
+                "bn",
+                "ur"
+        ],
+    },
+    "deepseek-v3.1": {
+        "tags": [
+                [
+                        "latest",
+                        "404 GB"
+                ],
+                [
+                        "671b",
+                        "404 GB"
+                ]
+        ],
+        "description": _("DeepSeek-V3.1 is a hybrid model that supports both thinking mode and non-thinking mode."),
+        "url": "https://ollama.com/library/deepseek-v3.1",
+        "categories": [
+                "tools",
+                "huge"
+        ],
+        "author": "DeepSeek Team",
         "languages": [
                 "en"
         ],
