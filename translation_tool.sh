@@ -3,7 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 # Always regenerate the template first
-xgettext --output=po/alpaca.pot --files-from=po/POTFILES
+xgettext --output=po/alpaca.pot --files-from=po/POTFILES --from-code=UTF-8 --add-comments --keyword=_ --keyword=C_:1c,2
 
 echo -e "\n---🦙 Alpaca Translation Tool 🦙---\n"
 echo "Available languages:"
