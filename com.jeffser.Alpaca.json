@@ -332,6 +332,7 @@
 	    "build-commands": [
 	    	"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"maturin\" --no-build-isolation",
 	    	"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"jiter\" --no-build-isolation",
+	    	"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"httpx[socks]\" --no-build-isolation",
 		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"openai\" --no-build-isolation"
 	    ],
 	    "sources": [
@@ -447,6 +448,11 @@
 		    "only-arches": [
 		        "x86_64"
 		    ]
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/37/c3/6eeb6034408dac0fa653d126c9204ade96b819c936e136c5e8a6897eee9c/socksio-1.0.0-py3-none-any.whl",
+		    "sha256": "95dc1f15f9b34e8d7b16f06d74b8ccf48f609af32ab33c608d08761c5dcbb1f3"
 		}
 	    ]
 	},
