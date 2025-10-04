@@ -87,6 +87,8 @@ class DictateToggleButton(Gtk.Stack):
         if not voice:
             voice = TTS_VOICES.get(list(TTS_VOICES.keys())[self.message_element.get_root().settings.get_value('tts-model').unpack()])
 
+        speed = self.message_element.get_root().settings.get_value('tts-speed').unpack()
+
         # Show Voice in Model Manager if Needed
         if not models.tts_model_exists(voice):
             tts_path = models.get_tts_path()
@@ -115,7 +117,7 @@ class DictateToggleButton(Gtk.Stack):
                 generator = tts_engine(
                     text[queue_index:end_index],
                     voice=voice,
-                    speed=1.2,
+                    speed=speed,
                     split_pattern=r'\n+'
                 )
                 for gs, ps, audio in generator:

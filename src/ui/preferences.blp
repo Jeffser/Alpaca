@@ -99,6 +99,18 @@ template $AlpacaPreferencesDialog: Adw.PreferencesDialog {
         title: _("Dictate New Messages Automatically");
         subtitle: _("Dictate new messages as they are generated");
       }
+
+      Adw.SpinRow tts_speed_spin {
+        title: _("Dictation Speed");
+        subtitle: _("Modify the speed of the dictation voice");
+        digits: 1;
+
+        adjustment: Adjustment {
+          lower: 0.5;
+          upper: 2.0;
+          step-increment: 0.1;
+        };
+      }
     }
   }
 }

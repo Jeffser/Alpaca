@@ -22,6 +22,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
     tts_group = Gtk.Template.Child()
     tts_voice_combo = Gtk.Template.Child()
     tts_auto_mode_combo = Gtk.Template.Child()
+    tts_speed_spin = Gtk.Template.Child()
     audio_page = Gtk.Template.Child()
 
     @Gtk.Template.Callback()
@@ -66,6 +67,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.settings.bind('tts-model', self.tts_voice_combo, 'selected', Gio.SettingsBindFlags.DEFAULT)
 
         self.settings.bind('tts-auto-dictate', self.tts_auto_mode_combo, 'active', Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind('tts-speed', self.tts_speed_spin, 'value', Gio.SettingsBindFlags.DEFAULT)
 
         if sys.platform in ('win32', 'darwin'): # MacOS and Windows
             self.powersaver_warning_switch.set_visible(False)
