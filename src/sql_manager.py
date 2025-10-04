@@ -139,7 +139,8 @@ class Instance:
                 "chat": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
                     "name": "TEXT NOT NULL",
-                    "folder": "TEXT"
+                    "folder": "TEXT",
+                    "is_template": "INTEGER NOT NULL DEFAULT 0"
                 },
                 "message": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
@@ -192,6 +193,8 @@ class Instance:
             columns = [col[1] for col in c.cursor.fetchall()]
             if 'folder' not in columns:
                 c.cursor.execute("ALTER TABLE chat ADD COLUMN folder TEXT")
+            if 'is_template' not in columns:
+                c.cursor.execute("ALTER TABLE chat ADD COLUMN is_template INTEGER NOT NULL DEFAULT 0") # Treated as boolean 0/1
             if 'type' in columns: # Rebuild chat table (remove type)
                 c.cursor.execute("ALTER TABLE chat RENAME to chat_old")
                 columns_def = ", ".join([f"{col_name} {col_def}" for col_name, col_def in tables.get('chat').items()])
@@ -261,28 +264,18 @@ class Instance:
     ## CHATS ##
     ###########
 
-    def get_chats() -> list:
-        with SQLiteConnection() as c:
-            chats = c.cursor.execute(
-                "SELECT chat.id, chat.name, MAX(message.date_time) AS \
-                latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id \
-                GROUP BY chat.id ORDER BY latest_message_time DESC"
-            ).fetchall()
-
-        return chats
-
     def get_chats_by_folder(folder_id:str=None) -> list:
         with SQLiteConnection() as c:
             if folder_id is None:
                 chats = c.cursor.execute(
-                    "SELECT chat.id, chat.name, MAX(message.date_time) AS \
+                    "SELECT chat.id, chat.name, chat.is_template, MAX(message.date_time) AS \
                     latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id \
                     WHERE chat.folder IS NULL \
                     GROUP BY chat.id ORDER BY latest_message_time DESC"
                 ).fetchall()
             else:
                 chats = c.cursor.execute(
-                    "SELECT chat.id, chat.name, MAX(message.date_time) AS \
+                    "SELECT chat.id, chat.name, chat.is_template, MAX(message.date_time) AS \
                     latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id \
                     WHERE chat.folder=? \
                     GROUP BY chat.id ORDER BY latest_message_time DESC",
@@ -290,6 +283,16 @@ class Instance:
                 ).fetchall()
 
         return chats
+
+    def get_templates() -> list:
+        with SQLiteConnection() as c:
+            templates = c.cursor.execute(
+                "SELECT chat.id, chat.name, MAX(message.date_time) AS \
+                latest_message_time FROM chat LEFT JOIN message ON chat.id = message.chat_id \
+                WHERE chat.is_template = 1 \
+                GROUP BY chat.id ORDER BY latest_message_time DESC"
+            ).fetchall()
+        return templates
 
     def get_messages(chat) -> list:
         with SQLiteConnection() as c:
@@ -332,23 +335,23 @@ class Instance:
             ).fetchone():
                 if chat.folder_id is None:
                     c.cursor.execute(
-                        "UPDATE chat SET name=?, folder=NULL WHERE id=?",
-                        (chat.get_name(), chat.chat_id),
+                        "UPDATE chat SET name=?, folder=NULL, is_template=? WHERE id=?",
+                        (chat.get_name(), chat.is_template, chat.chat_id),
                     )
                 else:
                     c.cursor.execute(
-                        "UPDATE chat SET name=?, folder=? WHERE id=?",
-                        (chat.get_name(), chat.folder_id, chat.chat_id),
+                        "UPDATE chat SET name=?, folder=?, is_template=? WHERE id=?",
+                        (chat.get_name(), chat.folder_id, chat.is_template, chat.chat_id),
                     )
             else:
                 if chat.folder_id is None:
                     c.cursor.execute(
-                        "INSERT INTO chat (id, name, folder) VALUES (?, ?, NULL)",
+                        "INSERT INTO chat (id, name, folder, is_template) VALUES (?, ?, NULL, 0)",
                         (chat.chat_id, chat.get_name()),
                     )
                 else:
                     c.cursor.execute(
-                        "INSERT INTO chat (id, name, folder) VALUES (?, ?, ?)",
+                        "INSERT INTO chat (id, name, folder, is_template) VALUES (?, ?, ?, 0)",
                         (chat.chat_id, chat.get_name(), chat.folder_id),
                     )
 
@@ -367,16 +370,13 @@ class Instance:
                 "DELETE FROM message WHERE chat_id=?", (chat.chat_id,)
             )
 
-    def duplicate_chat(old_chat, new_chat) -> None:
+    def duplicate_chat(old_chat_id:str, new_chat) -> None:
         with SQLiteConnection() as c:
-            c.cursor.execute(
-                "INSERT INTO chat (id, name) VALUES (?, ?)",
-                (new_chat.chat_id, new_chat.get_name()),
-            )
+            Instance.insert_or_update_chat(new_chat)
 
             for message in c.cursor.execute(
                 "SELECT id, role, model, date_time, content FROM message WHERE chat_id=?",
-                (old_chat.chat_id,),
+                (old_chat_id,),
             ).fetchall():
                 new_message_id = generate_uuid()
 
