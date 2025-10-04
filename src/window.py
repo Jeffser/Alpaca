@@ -504,7 +504,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             )],
             'duplicate_current_chat': [lambda *_: self.chat_bin.get_child().row.duplicate()],
             'delete_current_chat': [lambda *_: self.chat_bin.get_child().row.prompt_delete(), ['<primary>w']],
-            'rename_current_chat': [lambda *_: self.chat_bin.get_child().row.prompt_rename(), ['F2']],
+            'edit_current_chat': [lambda *_: self.chat_bin.get_child().row.prompt_edit(), ['F2']],
             'export_current_chat': [lambda *_: self.chat_bin.get_child().row.prompt_export()],
             'toggle_sidebar': [lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9']],
             'toggle_search': [lambda *_: self.toggle_searchbar(), ['<primary>f']],

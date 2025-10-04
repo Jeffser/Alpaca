@@ -414,10 +414,7 @@ class ChatWelcomeTemplateContainer(Gtk.Box):
         )
 
         self.main_stack.add_named(
-            Gtk.ScrolledWindow(
-                propagate_natural_height=True,
-                child=self.main_container
-            ),
+            self.main_container,
             'content'
         )
 
@@ -873,8 +870,8 @@ class FolderRow(Gtk.ListBoxRow):
         }
 
         d = dialog.Entry(
-            _('Edit Folder?'),
-            ("Editing '{}'").format(self.get_name()),
+            _('Edit Folder'),
+            _("Editing '{}'").format(self.get_name()),
             list(options.keys())[0],
             options,
             {'placeholder': _('New Folder'), 'text': self.folder_name}
@@ -905,7 +902,7 @@ class FolderRow(Gtk.ListBoxRow):
     def prompt_delete(self):
         dialog.simple(
             parent = self.get_root(),
-            heading = _('Delete Folder?'),
+            heading = _('Delete Folder'),
             body = _("Are you sure you want to delete '{}' and all it's sub-folders and chats?").format(self.get_name()),
             callback = lambda: self.delete(),
             button_name = _('Delete'),
@@ -1040,8 +1037,8 @@ class ChatRow(Gtk.ListBoxRow):
         }
 
         d = dialog.Entry(
-            _('Edit Chat?'),
-            ("Editing '{}'").format(self.get_name()),
+            _('Edit Chat'),
+            _("Editing '{}'").format(self.get_name()),
             list(options.keys())[0],
             options,
             {'placeholder': _('New Chat'), 'text': self.get_name()}
@@ -1055,16 +1052,6 @@ class ChatRow(Gtk.ListBoxRow):
         d.container.append(template_switch)
 
         d.show(self.get_root())
-
-        return
-        dialog.simple_entry(
-            parent = self.get_root(),
-            heading = _('Rename Chat?'),
-            body = _("Renaming '{}'").format(self.get_name()),
-            callback = lambda new_name: self.rename(new_name),
-            entries = {'placeholder': _('Chat name'), 'default': True, 'text': self.get_name()},
-            button_name = _('Rename')
-        )
 
     def delete(self):
         window = self.get_root()
@@ -1088,7 +1075,7 @@ class ChatRow(Gtk.ListBoxRow):
     def prompt_delete(self):
         dialog.simple(
             parent = self.get_root(),
-            heading = _('Delete Chat?'),
+            heading = _('Delete Chat'),
             body = _("Are you sure you want to delete '{}'?").format(self.get_name()),
             callback = lambda: self.delete(),
             button_name = _('Delete'),

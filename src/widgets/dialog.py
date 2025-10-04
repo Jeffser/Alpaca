@@ -24,9 +24,10 @@ class Base(Adw.AlertDialog):
         self.options = options
         super().__init__(
             heading=heading,
-            body=body,
             close_response=close_response
         )
+        if body:
+            self.set_body(body)
         for option, data in self.options.items():
             self.add_response(option, option)
             if data.get('appearance'):
