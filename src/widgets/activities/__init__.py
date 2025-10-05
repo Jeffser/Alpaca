@@ -6,7 +6,7 @@ from .web_browser import WebBrowser
 from .live_chat import LiveChat
 from .terminal import Terminal, AttachmentCreator, CodeRunner, CodeEditor
 from .transcriber import Transcriber
-from .camera import get_camera
+from .camera import Camera
 from .. import dialog
 import importlib.util
 
@@ -188,10 +188,7 @@ class ActivityManager(Adw.Bin):
             {
                 'title': _('Camera'),
                 'icon': 'camera-photo-symbolic',
-                'builder': lambda: get_camera(
-                    root_widget=self.get_root(),
-                    attachment_func=lambda att: self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(att)
-                )
+                'builder': Camera
             },
             {
                 'title': _('Web Browser'),
@@ -338,25 +335,45 @@ class ActivityTabWindow(Adw.ApplicationWindow):
         super().close()
 
 def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
-    if not page:
+    if not page or page.get_parent():
         return
-    if not page.get_parent():
-        if root.get_name() == 'AlpacaWindow' and root.settings.get_value('activity-mode').unpack() == 0 and not force_dialog:
-            tab_page = root.activities_page.get_child().tabview.append(ActivityWrapper(page))
-            return tab_page.get_child()
-        elif root.settings.get_value('activity-mode').unpack() == 1 or force_dialog:
-            dialog = ActivityDialog(page)
-            dialog.present(root)
-            return dialog
-        else:
-            global last_activity_tabview
-            if not last_activity_tabview or not last_activity_tabview.get_root():
-                atw = ActivityTabWindow(root.get_application())
-                atw.present()
-                last_activity_tabview = atw.activity_manager.tabview
 
-            tab_page = last_activity_tabview.append(ActivityWrapper(page))
-            return tab_page.get_child()
+    if root.get_name() == 'AlpacaWindow' and root.settings.get_value('activity-mode').unpack() == 0 and not force_dialog:
+        tab_page = root.activities_page.get_child().tabview.append(ActivityWrapper(page))
+        return tab_page.get_child()
+    elif root.settings.get_value('activity-mode').unpack() == 1 or force_dialog:
+        dialog = ActivityDialog(page)
+        dialog.present(root)
+        return dialog
+    else:
+        global last_activity_tabview
+        if not last_activity_tabview or not last_activity_tabview.get_root():
+            atw = ActivityTabWindow(root.get_application())
+            atw.present()
+            last_activity_tabview = atw.activity_manager.tabview
 
+        tab_page = last_activity_tabview.append(ActivityWrapper(page))
+        return tab_page.get_child()
 
+def launch_detached_activity(page:Gtk.Widget, root):
+    if not page or page.get_parent():
+        return
 
+    global last_activity_tabview
+    if not last_activity_tabview or not last_activity_tabview.get_root():
+        atw = ActivityTabWindow(root.get_application())
+        atw.present()
+        last_activity_tabview = atw.activity_manager.tabview
+
+    last_activity_tabview.append(ActivityWrapper(page))
+
+# Activity names for console arguments (e.g. --activity "camera")
+ARGUMENT_ACTIVITIES = {
+    'background-remover': BackgroundRemover,
+    'web-browser': WebBrowser,
+    'live-chat': LiveChat,
+    'terminal': Terminal,
+    'attachment-creator': AttachmentCreator,
+    'transcriber': Transcriber,
+    'camera': Camera
+}

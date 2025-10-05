@@ -314,7 +314,7 @@ class ModelCreatorDialog(Adw.Dialog):
             self.close()
 
     def create_model(self, data:dict, gguf_path:str=None):
-        window = self.get_root().get_application().main_alpaca_window
+        window = self.get_root().get_application().get_main_window(present=False)
         if data.get('model') and data.get('model') not in list(get_local_models(self.get_root()).keys()):
             model = PullingModelButton(
                 data.get('model'),

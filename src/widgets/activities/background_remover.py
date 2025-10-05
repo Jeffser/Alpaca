@@ -72,7 +72,7 @@ class BackgroundRemoverImage(Gtk.Button):
             file_type='image',
             file_content=base64.b64encode(image_data).decode('utf-8')
         )
-        self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(attachment)
+        self.get_root().get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
 
     def show_popup(self, gesture, x, y):
         rect = Gdk.Rectangle()

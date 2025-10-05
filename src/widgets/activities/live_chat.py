@@ -155,7 +155,7 @@ class LiveChat(Adw.Bin):
         self.connect('map', lambda *_: self.on_map())
 
     def on_map(self):
-        self.model_dropdown.set_model(self.get_root().get_application().main_alpaca_window.model_dropdown.get_model())
+        self.model_dropdown.set_model(self.get_root().get_application().get_main_window().model_dropdown.get_model())
 
     def toggle_avatar_state(self, state:bool):
         if state:
@@ -274,10 +274,10 @@ class LiveChat(Adw.Bin):
             if mode == 0:
                 threading.Thread(target=current_instance.generate_message, args=(m_element_bot, current_model), daemon=True).start()
             else:
-                threading.Thread(target=current_instance.use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.get_application().main_alpaca_window.tool_listbox), True), daemon=True).start()
+                threading.Thread(target=current_instance.use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.get_application().get_main_window().tool_listbox), True), daemon=True).start()
 
     def get_current_instance(self):
-        return self.get_root().get_application().main_alpaca_window.get_current_instance()
+        return self.get_root().get_application().get_main_window().get_current_instance()
 
     def on_close(self):
         self.get_child().get_sheet().busy = False

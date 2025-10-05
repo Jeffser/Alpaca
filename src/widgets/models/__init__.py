@@ -7,7 +7,7 @@ import os, importlib.util
 from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS
 
 def update_available_model_list(root):
-    window = root.get_application().main_alpaca_window
+    window = root.get_application().get_main_window(present=False)
     window.available_model_flowbox.remove_all()
     instance = window.get_current_instance()
     set_available_models_data(instance.get_available_models())
@@ -57,7 +57,7 @@ def update_available_model_list(root):
     window.model_filter_button.set_visible('ollama' in instance.instance_type)
 
 def update_added_model_list(root):
-    window = root.get_application().main_alpaca_window
+    window = root.get_application().get_main_window(present=False)
     window.local_model_flowbox.remove_all()
     GLib.idle_add(window.model_dropdown.get_model().remove_all)
 

@@ -269,7 +269,6 @@ else:
 
 class AttachmentCreator(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentCreator'
-#def __init__(self, file_id:str, file_name:str, file_type:str, file_content:str):
     def __init__(self):
         self.buffer = GtkSource.Buffer()
         self.buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark'))
@@ -305,7 +304,7 @@ class AttachmentCreator(Gtk.ScrolledWindow):
             file_type='plain_text',
             file_content=self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
         )
-        self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(attachment)
+        self.get_root().get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
         self.close()
 
     def save_requested(self):

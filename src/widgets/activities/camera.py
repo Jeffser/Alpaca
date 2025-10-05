@@ -11,27 +11,41 @@ import numpy as np
 Gst.init(None)
 pipeline = Gst.parse_launch('pipewiresrc ! videoconvert ! appsink name=sink')
 
-class Camera(Gtk.Picture):
+class Camera(Adw.Bin):
     __gtype_name___ = 'AlpacaCamera'
 
-    def __init__(self, capture, attachment_func:callable):
-        self.capture = capture
-        self.attachment_func = attachment_func
-        super().__init__(
+    def __init__(self):
+        self.capture = cv2.VideoCapture(0)
+        self.picture = Gtk.Picture(
             content_fit=2
         )
+
+        if self.capture.isOpened():
+            super().__init__(
+                child=self.picture
+            )
+        else:
+            super().__init__(
+                child=Adw.StatusPage(
+                    title=_('No Camera Detected'),
+                    description=_('Please check if camera is plugged in and turned on, then restart the activity.')
+                )
+            )
+
 
         capture_button = Gtk.Button(
             tooltip_text=_('Capture Picture'),
             child=Gtk.Image(
                 icon_name='big-dot-symbolic',
                 icon_size=2
-            )
+            ),
+            visible=self.capture.isOpened()
         )
         capture_button.connect('clicked', lambda *_: self.take_photo())
 
         self.running = False
-        self.connect('realize', lambda *_: self.on_realize())
+        if self.capture.isOpened():
+            self.connect('realize', lambda *_: self.on_realize())
 
         # Activity
         self.buttons = [capture_button]
@@ -57,7 +71,7 @@ class Camera(Gtk.Picture):
                     stride=w*c
                 )
 
-                GLib.idle_add(self.set_paintable, texture)
+                GLib.idle_add(self.picture.set_paintable, texture)
             else:
                 break
 
@@ -76,7 +90,7 @@ class Camera(Gtk.Picture):
         return new_width, new_height
 
     def take_photo(self):
-        texture = self.get_paintable()
+        texture = self.picture.get_paintable()
         width, height = self.get_new_resolution(texture.get_width(), texture.get_height())
         texture.compute_concrete_size(width, height, width, height)
 
@@ -88,8 +102,7 @@ class Camera(Gtk.Picture):
             file_type='image',
             file_content=base64.b64encode(picture_bytes).decode('utf-8')
         )
-        self.attachment_func(attachment)
-        self.close()
+        self.get_root().get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
 
     def on_close(self):
         self.capture.release()
@@ -106,23 +119,4 @@ class Camera(Gtk.Picture):
             parent = self.get_ancestor(Adw.Dialog)
             if parent:
                 parent.close()
-
-def get_camera(root_widget:Gtk.Widget, attachment_func:callable):
-    capture = cv2.VideoCapture(0)
-    if capture.isOpened():
-        page=Camera(
-            capture,
-            attachment_func
-        )
-        return page
-    else:
-        options = {
-            _('Close'): {'default': True},
-        }
-        dialog.Options(
-            heading=_('No Camera Detected'),
-            body=_('Please check if camera is plugged in and turned on'),
-            close_response=list(options.keys())[0],
-            options=options
-        ).show(root_widget)
 

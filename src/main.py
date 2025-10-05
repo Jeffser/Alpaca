@@ -44,6 +44,7 @@ import sys
 import logging
 import argparse
 import time
+import threading
 
 from pydbus import SessionBus
 from datetime import datetime
@@ -90,6 +91,9 @@ class AlpacaService:
             </method>
             <method name='PresentLive'>
             </method>
+            <method name='Activity'>
+                <arg type='s' name='activity_name' direction='in'/>
+            </method>
         </interface>
     </node>
     """
@@ -105,12 +109,6 @@ class AlpacaService:
 
     def PresentAsk(self):
         self.app.create_quick_ask().present()
-
-    def PresentLive(self):
-        activities.show_activity(
-            activities.LiveChatPage(),
-            root=self.app.props.active_window
-        )
 
     def Open(self, chat_name:str):
         navigationview = self.app.props.active_window.chat_list_navigationview
@@ -132,6 +130,11 @@ class AlpacaService:
         quick_ask_window.present()
         quick_ask_window.write_and_send_message(message)
 
+    def Activity(self, activity_name:str):
+        page = activities.ARGUMENT_ACTIVITIES.get(activity_name)
+        if page:
+            activities.launch_detached_activity(page(), self.app.props.active_window)
+
 class AlpacaApplication(Adw.Application):
     __gtype_name__ = 'AlpacaApplication'
 
@@ -140,7 +143,7 @@ class AlpacaApplication(Adw.Application):
     def __init__(self, version):
         super().__init__(application_id='com.jeffser.Alpaca',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
-        self.create_action('quit', lambda *_: GLib.idle_add(self.props.active_window.close), ['<primary>q'])
+        self.create_action('quit', lambda *_: GLib.idle_add(self.main_alpaca_window.close), ['<primary>q'])
         self.create_action('about', self.on_about_action)
         self.create_action('shortcuts', lambda *_: GLib.idle_add(self.show_shortcuts_dialog), ['<primary>slash'])
         self.version = version
@@ -150,44 +153,49 @@ class AlpacaApplication(Adw.Application):
                 SessionBus().publish('com.jeffser.Alpaca', AlpacaService(self))
             except:
                 # The app is probably already running so let's use dbus to interact if needed
-                app_service = SessionBus().get("com.jeffser.Alpaca")
-                if app_service.IsRunning() == 'yeah':
-                    app_service.Present()
-                else:
-                    raise Exception('Alpaca not running')
-                if self.args.new_chat:
-                    app_service.Create(self.args.new_chat)
-                elif self.args.ask:
-                    app_service.Ask(self.args.ask)
-                elif self.args.quick_ask:
-                    app_service.PresentAsk()
-                elif self.args.live_chat:
-                    app_service.PresentLive()
+                self.run_arguments()
                 sys.exit(0)
+
+    def run_arguments(self):
+        try:
+            app_service = SessionBus().get('com.jeffser.Alpaca')
+            if app_service.IsRunning() != 'yeah':
+                raise Exception('Alpaca not running')
+        except:
+            app_service = AlpacaService(self)
+
+        if self.args.activity:
+            app_service.Activity(self.args.activity)
+        elif self.args.new_chat:
+            app_service.Create(self.args.new_chat)
+            self.main_alpaca_window.present()
+        elif self.args.quick_ask:
+            app_service.PresentAsk()
+        elif self.args.ask:
+            app_service.Ask(self.args.ask)
+        elif self.args.live_chat: #DEPRECATED
+            logger.warning('--live-chat is deprecated, use --activity live-chat')
+            app_service.Activity('live-chat')
+        else:
+            self.main_alpaca_window.present()
+
+    def get_main_window(self, present:bool=True):
+        if present:
+            self.main_alpaca_window.present()
+        return self.main_alpaca_window
 
     def show_shortcuts_dialog(self):
         builder = Gtk.Builder()
         builder.add_from_resource("/com/jeffser/Alpaca/shortcuts.ui")
         dialog = builder.get_object("shortcuts_dialog")
-        dialog.present(self.props.active_window)
+        dialog.present(self.main_alpaca_window)
 
     def create_quick_ask(self):
         return get_window_library('quick-ask')(application=self)
 
     def do_activate(self):
-        self.main_alpaca_window = self.props.active_window
-        if not self.main_alpaca_window:
-            self.main_alpaca_window = get_window_library('alpaca')(application=self)
-        if self.args.quick_ask or self.args.ask:
-            self.create_quick_ask().present()
-        elif self.args.live_chat:
-            self.main_alpaca_window.present()
-            activities.show_activity(
-                activities.LiveChatPage(),
-                root=self.props.active_window
-            )
-        else:
-            self.main_alpaca_window.present()
+        self.main_alpaca_window = get_window_library('alpaca')(application=self)
+        threading.Thread(target=self.run_arguments).start()
 
         if sys.platform == 'darwin': # MacOS
             settings = Gtk.Settings.get_default()
@@ -238,7 +246,7 @@ class AlpacaApplication(Adw.Application):
         about.add_link(_("Documentation"), "https://github.com/Jeffser/Alpaca/wiki")
         about.add_link(_("Become a Sponsor"), "https://github.com/sponsors/Jeffser")
         about.add_link(_("Discussions"), "https://github.com/Jeffser/Alpaca/discussions")
-        about.present(self.props.active_window)
+        about.present(self.main_alpaca_window)
 
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
@@ -258,12 +266,16 @@ def main(version):
         if not os.path.isdir(directory):
             os.mkdir(directory)
 
-    parser.add_argument('--version', action='store_true', help='Display the application version and exit.')
-    parser.add_argument('--new-chat', type=str, metavar='"CHAT"', help="Start a new chat with the specified title.")
-    parser.add_argument('--list-chats', action='store_true', help='Display all the current chats')
-    parser.add_argument('--ask', type=str, metavar='"MESSAGE"', help="Open Quick Ask with message")
-    parser.add_argument('--quick-ask', action='store_true', help='Open Quick Ask')
-    parser.add_argument('--live-chat', action='store_true', help='Open Live Chat')
+    parser.add_argument('--version', action='store_true', help='display the application version')
+    parser.add_argument('--quick-ask', action='store_true', help='open Quick Ask')
+    parser.add_argument('--list-chats', action='store_true', help='display all the current chats in root directory')
+    parser.add_argument('--list-activities', action='store_true', help='display all activities that can be launched with --activity')
+
+    parser.add_argument('--activity', type=str, metavar='ACTIVITY', help='open an activity directly')
+    parser.add_argument('--new-chat', type=str, metavar='CHAT', help='start a new chat with the specified title')
+    parser.add_argument('--ask', type=str, metavar='"MESSAGE"', help='open Quick Ask with a message')
+
+    parser.add_argument('--live-chat', action='store_true', help='open Live Chat (DEPRECATED, USE --activity live-chat)')
     args = parser.parse_args()
 
     if args.version:
@@ -277,6 +289,10 @@ def main(version):
                 print(chat[1])
         else:
             print()
+        sys.exit(0)
+
+    if args.list_activities:
+        print(*activities.ARGUMENT_ACTIVITIES, sep='\n')
         sys.exit(0)
 
     logger.info(f"Alpaca version: {version}")

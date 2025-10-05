@@ -28,20 +28,19 @@ class QuickAskWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def closing_app(self, element):
-        if self.get_application().main_alpaca_window.get_visible() == False:
+        if self.get_application().get_main_window(present=False).get_visible() == False:
             # Use GLib.idle_add to ensure proper cleanup sequence
             GLib.idle_add(self.get_application().quit)
 
     @Gtk.Template.Callback()
     def save_chat(self, button):
         chat = self.toast_overlay.get_child()
-        new_chat = self.get_application().main_alpaca_window.get_chat_list_page().new_chat(chat.get_name())
+        new_chat = self.get_application().get_main_window().get_chat_list_page().new_chat(chat.get_name())
         for message in list(chat.container):
             SQL.insert_or_update_message(message, new_chat.chat_id)
             for attachment in list(message.attachment_container.container) + list(message.image_attachment_container.container):
                 SQL.insert_or_update_attachment(message, attachment)
         new_chat.row.get_parent().select_row(new_chat.row)
-        self.get_application().main_alpaca_window.present()
         self.close()
 
     def get_selected_model(self, current_instance=None):

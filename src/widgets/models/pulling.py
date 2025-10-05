@@ -197,7 +197,7 @@ class PullingModelButton(Gtk.Button):
         if self.dialog.get_root():
             self.dialog.close()
         if len(list(local_model_flowbox)) == 1:
-            self.get_root().get_application().main_alpaca_window.local_model_stack.set_visible_child_name('no-models')
+            self.get_root().get_application().get_main_window(present=False).local_model_stack.set_visible_child_name('no-models')
         local_model_flowbox.remove(self.get_parent())
 
     def update_progressbar(self, data:dict):
@@ -244,7 +244,7 @@ class PullingModelButton(Gtk.Button):
             if data.get('status') == 'success':
                 new_model = self.success_callback(self.get_name())
                 if len(get_local_models(self.get_root())) > 0:
-                    self.get_root().get_application().main_alpaca_window.title_stack.set_visible_child_name('model-selector')
+                    self.get_root().get_application().get_main_window(present=False).title_stack.set_visible_child_name('model-selector')
                 if self.dialog.get_root():
                     self.dialog.close()
 

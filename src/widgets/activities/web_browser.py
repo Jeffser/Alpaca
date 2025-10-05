@@ -207,7 +207,7 @@ class WebBrowser(Gtk.ScrolledWindow):
             file_type='youtube' if result.startswith('# YouTube') else 'website',
             file_content=result
         )
-        self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(attachment)
+        self.get_root().get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
 
     def on_close(self):
         self.webview.terminate_web_process()

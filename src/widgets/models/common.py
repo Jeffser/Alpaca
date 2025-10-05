@@ -48,7 +48,7 @@ class CategoryPill(Adw.Bin):
         )
 
 def get_local_models(root) -> dict:
-    window = root.get_application().main_alpaca_window
+    window = root.get_application().get_main_window(present=False)
     results = {}
     for model in [item.get_child() for item in list(window.local_model_flowbox) if item.get_child().__gtype_name__ == 'AlpacaAddedModelButton']:
         results[model.get_name()] = model
@@ -62,13 +62,13 @@ def set_available_models_data(data:list):
     available_models_data = data
 
 def prepend_added_model(root, model):
-    window = root.get_application().main_alpaca_window
+    window = root.get_application().get_main_window(present=False)
     window.local_model_flowbox.prepend(model)
     if model.__gtype_name__ == 'AlpacaAddedModelButton':
         window.model_dropdown.get_model().append(model.row)
 
 def append_added_model(root, model):
-    window = root.get_application().main_alpaca_window
+    window = root.get_application().get_main_window(present=False)
     window.local_model_flowbox.append(model)
     if model.__gtype_name__ == 'AlpacaAddedModelButton':
         window.model_dropdown.get_model().append(model.row)
@@ -76,7 +76,7 @@ def append_added_model(root, model):
 def prompt_gguf(root, instance=None):
     creator = importlib.import_module('alpaca.widgets.models.creator')
     if not instance:
-        instance = root.get_application().main_alpaca_window.get_current_instance()
+        instance = root.get_application().get_main_window(present=False).get_current_instance()
 
     def result(file):
         try:
@@ -96,5 +96,5 @@ def prompt_gguf(root, instance=None):
 def prompt_existing(root, instance=None, model_name:str=None):
     creator = importlib.import_module('alpaca.widgets.models.creator')
     if not instance:
-        instance = root.get_application().main_alpaca_window.get_current_instance()
+        instance = root.get_application().get_main_window(present=False).get_current_instance()
     creator.ModelCreatorDialog(instance, model_name, False).present(root)

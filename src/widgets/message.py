@@ -117,7 +117,7 @@ class OptionPopup(Gtk.Popover):
                     args=(
                         self.message_element,
                         model,
-                        tools.get_enabled_tools(self.get_root().get_application().main_alpaca_window.tool_listbox),
+                        tools.get_enabled_tools(self.get_root().get_application().get_main_window(present=False).tool_listbox),
                         True
                     )
                 ).start()

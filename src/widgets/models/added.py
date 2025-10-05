@@ -385,7 +385,7 @@ class AddedModelButton(Gtk.Button):
         self.image_container.set_child(picture)
 
     def change_profile_picture(self):
-        window = self.get_root().get_application().main_alpaca_window
+        window = self.get_root().get_application().get_main_window(present=False)
         def set_profile_picture(file):
             if file:
                 picture_b64 = attachments.extract_image(file.get_path(), 480)
@@ -433,7 +433,7 @@ class AddedModelButton(Gtk.Button):
         if dialog and isinstance(dialog, AddedModelDialog):
             dialog.close()
 
-        window = self.get_root().get_application().main_alpaca_window
+        window = self.get_root().get_application().get_main_window(present=False)
 
         if self.instance.delete_model(self.get_name()):
             found_models = [i for i, row in enumerate(list(window.model_dropdown.get_model())) if row.model.get_name() == self.get_name()]

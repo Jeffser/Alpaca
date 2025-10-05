@@ -269,7 +269,7 @@ class AvailableModelButton(Gtk.Button):
         if tag_name is None:
             tag_name = ''
         model_name = '{}:{}'.format(self.get_name(), tag_name).removesuffix(':').strip()
-        window = self.get_root().get_application().main_alpaca_window
+        window = self.get_root().get_application().get_main_window(present=False)
         threading.Thread(target=pull_model_confirm, args=(
             model_name,
             window.get_current_instance(),

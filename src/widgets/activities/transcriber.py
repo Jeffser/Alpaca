@@ -121,7 +121,7 @@ class Transcriber(Gtk.Stack):
             file_type='audio',
             file_content=result_text
         )
-        self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(attachment)
+        self.get_root().get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
 
     def prepare_download(self, model_name:str, audio_file:Gio.File):
         pulling_model = models.pulling.PullingModelButton(
