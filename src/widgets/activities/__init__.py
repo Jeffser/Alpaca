@@ -6,7 +6,7 @@ from .web_browser import WebBrowser
 from .live_chat import LiveChat
 from .terminal import Terminal, AttachmentCreator, CodeRunner, CodeEditor
 from .transcriber import Transcriber
-from .camera import show_webcam_dialog
+from .camera import get_camera
 from .. import dialog
 import importlib.util
 
@@ -188,10 +188,9 @@ class ActivityManager(Adw.Bin):
             {
                 'title': _('Camera'),
                 'icon': 'camera-photo-symbolic',
-                'builder': lambda: show_webcam_dialog(
+                'builder': lambda: get_camera(
                     root_widget=self.get_root(),
-                    attachment_func=lambda att: self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(att),
-                    return_page=True
+                    attachment_func=lambda att: self.get_root().get_application().main_alpaca_window.global_footer.attachment_container.add_attachment(att)
                 )
             },
             {
@@ -339,6 +338,8 @@ class ActivityTabWindow(Adw.ApplicationWindow):
         super().close()
 
 def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
+    if not page:
+        return
     if not page.get_parent():
         if root.get_name() == 'AlpacaWindow' and root.settings.get_value('activity-mode').unpack() == 0 and not force_dialog:
             tab_page = root.activities_page.get_child().tabview.append(ActivityWrapper(page))

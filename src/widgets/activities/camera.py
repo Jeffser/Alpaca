@@ -107,19 +107,14 @@ class Camera(Gtk.Picture):
             if parent:
                 parent.close()
 
-def show_webcam_dialog(root_widget:Gtk.Widget, attachment_func:callable, return_page:bool=False):
+def get_camera(root_widget:Gtk.Widget, attachment_func:callable):
     capture = cv2.VideoCapture(0)
     if capture.isOpened():
         page=Camera(
             capture,
             attachment_func
         )
-        if return_page:
-            return page
-        activities.show_activity(
-            page=page,
-            root=root_widget
-        )
+        return page
     else:
         options = {
             _('Close'): {'default': True},

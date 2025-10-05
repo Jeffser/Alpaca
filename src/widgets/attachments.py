@@ -914,9 +914,12 @@ class GlobalAttachmentButton(Gtk.Button):
                 },
                 {
                     'label': _('Attach Photo From Camera'),
-                    'callback': lambda: activities.show_webcam_dialog(
-                        self.get_root(),
-                        lambda att: self.get_root().global_footer.attachment_container.add_attachment(att)
+                    'callback': lambda: activities.show_activity(
+                        page=activities.get_camera(
+                            self.get_root(),
+                            lambda att: self.get_root().global_footer.attachment_container.add_attachment(att)
+                        ),
+                        root=self.get_root()
                     ),
                     'icon': 'camera-photo-symbolic'
                 }
