@@ -369,11 +369,17 @@ def launch_detached_activity(page:Gtk.Widget, root):
 
 # Activity names for console arguments (e.g. --activity "camera")
 ARGUMENT_ACTIVITIES = {
-    'background-remover': BackgroundRemover,
     'web-browser': WebBrowser,
-    'live-chat': LiveChat,
     'terminal': Terminal,
     'attachment-creator': AttachmentCreator,
-    'transcriber': Transcriber,
     'camera': Camera
 }
+
+if importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'):
+    ARGUMENT_ACTIVITIES['live-chat'] = LiveChat
+
+if importlib.util.find_spec('whisper'):
+    ARGUMENT_ACTIVITIES['transcriber'] = Transcriber
+
+if importlib.util.find_spec('rembg'):
+    ARGUMENT_ACTIVITIES['background-remover'] = BackgroundRemover
