@@ -6,8 +6,8 @@ from .. import dialog, attachments, models, chat, message, models, instances, vo
 from ...sql_manager import generate_uuid, prettify_model_name, Instance as SQL
 import base64, os, threading, datetime
 
-class LiveChatPage(Adw.Bin):
-    __gtype_name__ = 'AlpacaLiveChatPage'
+class LiveChat(Adw.Bin):
+    __gtype_name__ = 'AlpacaLiveChat'
 
     animation_signals = {}
 

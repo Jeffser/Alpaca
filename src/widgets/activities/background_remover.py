@@ -97,8 +97,8 @@ class BackgroundRemoverImage(Gtk.Button):
         popup.popup()
 
 
-class BackgroundRemoverPage(Gtk.ScrolledWindow):
-    __gtype_name__ = 'AlpacaBackgroundRemoverPage'
+class BackgroundRemover(Gtk.ScrolledWindow):
+    __gtype_name__ = 'AlpacaBackgroundRemover'
 
     def __init__(self, save_func:callable=None, close_callback:callable=None):
         self.save_func = save_func

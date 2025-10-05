@@ -1,9 +1,9 @@
 # __init__.py
 
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk
-from .background_remover import BackgroundRemoverPage
+from .background_remover import BackgroundRemover
 from .web_browser import WebBrowser
-from .live_chat import LiveChatPage
+from .live_chat import LiveChat
 from .terminal import Terminal, AttachmentCreator, CodeRunner, CodeEditor
 from .camera import show_webcam_dialog
 from .. import dialog
@@ -26,7 +26,7 @@ class ActivityWrapper(Gtk.Overlay):
             margin_bottom=10,
             margin_start=10,
             margin_end=10,
-            valign=1 if isinstance(page, LiveChatPage) else 2,
+            valign=1 if isinstance(page, LiveChat) else 2,
             halign=3,
             overflow=1
         )
@@ -201,7 +201,7 @@ class ActivityManager(Adw.Bin):
                 {
                     'title': _('Live Chat'),
                     'icon': 'headset-symbolic',
-                    'builder': LiveChatPage
+                    'builder': LiveChat
                 }
             )
 
@@ -210,7 +210,7 @@ class ActivityManager(Adw.Bin):
                 {
                     'title': _('Background Remover'),
                     'icon': 'image-missing-symbolic',
-                    'builder': BackgroundRemoverPage
+                    'builder': BackgroundRemover
                 }
             )
 
