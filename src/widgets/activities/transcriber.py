@@ -74,7 +74,7 @@ class Transcriber(Gtk.Stack):
         result_scroller = Gtk.ScrolledWindow(
             propagate_natural_height=True,
             overflow=1,
-            css_classes=['card'],
+            css_classes=['card', 'undershoot-bottom'],
             child=self.result_textview,
             margin_top=10,
             margin_bottom=10,
