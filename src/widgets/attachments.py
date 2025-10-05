@@ -801,19 +801,10 @@ class GlobalAttachmentContainer(AttachmentContainer):
                 )
                 self.add_attachment(attachment)
             elif voice.libraries.get('whisper'):
-                def on_finish_transcription(text:str):
-                    attachment = Attachment(
-                        file_id="-1",
-                        file_name=file_name,
-                        file_type=file_type,
-                        file_content=text
-                    )
-                    self.add_attachment(attachment)
-                threading.Thread(target=voice.transcribe_audio_file, args=(
-                    self.get_root(),
-                    on_finish_transcription,
-                    file.get_path()
-                )).start()
+                activities.show_activity(
+                    activities.Transcriber(file),
+                    self.get_root()
+                )
 
     def attachment_request(self, block_images:bool=False):
         ff = Gtk.FileFilter()
@@ -828,7 +819,7 @@ class GlobalAttachmentContainer(AttachmentContainer):
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         ]
         if voice.libraries.get('whisper'):
-            audio_mimes = ('wav', 'x-wav', 'mpeg', 'flac', 'x-flac', 'ogg', 'mp4', 'x-m4a', 'aac', 'aiff', 'x-aiff', 'opus', 'webm')
+            audio_mimes = ('wav', 'mpeg', 'flac', 'x-flac', 'ogg', 'mp4', 'x-m4a', 'aac', 'aiff', 'x-aiff', 'opus', 'webm')
             for m in audio_mimes:
                 mimes.append('audio/{}'.format(m))
             video_mimes = ('mp4', 'x-matroska', 'quicktime', 'x-msvideo', 'webm')

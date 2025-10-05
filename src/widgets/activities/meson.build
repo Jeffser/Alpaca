@@ -7,6 +7,7 @@ blocks = [
   'live_chat.py',
   'terminal.py',
   'camera.py',
+  'transcriber.py',
 ]
 
 install_data(blocks, install_dir: moduledir)

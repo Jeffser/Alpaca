@@ -5,6 +5,7 @@ from .background_remover import BackgroundRemover
 from .web_browser import WebBrowser
 from .live_chat import LiveChat
 from .terminal import Terminal, AttachmentCreator, CodeRunner, CodeEditor
+from .transcriber import Transcriber
 from .camera import show_webcam_dialog
 from .. import dialog
 import importlib.util
@@ -56,11 +57,15 @@ class ActivityWrapper(Gtk.Overlay):
         self.page.on_close()
         if self.page.get_parent():
             if self.tab and self.page:
-                self.page.get_ancestor(Adw.TabView).close_page(self.tab)
+                tabview = self.page.get_ancestor(Adw.TabView)
+                if tabview:
+                    tabview.close_page(self.tab)
 
     def reload(self):
         if self.tab and self.page:
-            self.page.get_ancestor(Adw.TabView).set_selected_page(self.tab)
+            tabview = self.page.get_ancestor(Adw.TabView)
+            if tabview:
+                tabview.set_selected_page(self.tab)
         self.page.on_reload()
 
 class ActivityDialog(Adw.Dialog):
@@ -202,6 +207,15 @@ class ActivityManager(Adw.Bin):
                     'title': _('Live Chat'),
                     'icon': 'headset-symbolic',
                     'builder': LiveChat
+                }
+            )
+
+        if importlib.util.find_spec('whisper'):
+            default_activities.append(
+                {
+                    'title': _('Transcriber'),
+                    'icon': 'music-note-single-symbolic',
+                    'builder': Transcriber
                 }
             )
 
