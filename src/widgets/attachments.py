@@ -25,7 +25,7 @@ def extract_content(file_type:str, file_path:str) -> str:
     if file_type in ('plain_text', 'code'):
         with open(file_path, 'r') as f:
             return f.read()
-    elif file_type in ('pdf', 'docx', 'pptx', 'youtube'):
+    elif file_type in ('pdf', 'docx', 'pptx', 'xlsx', 'youtube'):
         return MarkItDown(enable_plugins=False).convert(file_path).text_content
     elif file_type == 'odt':
         doc = odfopen.load(file_path)
@@ -768,6 +768,7 @@ class GlobalAttachmentContainer(AttachmentContainer):
             "odt": ["odt"],
             "docx": ["docx"],
             "pptx": ["pptx"],
+            "xlsx": ["xlsx", "xlsm"],
             'audio': ["wav", "mp3", "flac", "ogg", "oga", "m4a", "acc", "aiff", "aif", "opus", "webm",
                     "mp4", "mkv", "mov", "avi"]
         }

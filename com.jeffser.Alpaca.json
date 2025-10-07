@@ -460,7 +460,7 @@
 	    "name": "python3-markitdown",
 	    "buildsystem": "simple",
 	    "build-commands": [
-		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --no-build-isolation markitdown[pptx,docx,pdf,youtube-transcription]"
+		"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --no-build-isolation markitdown[pptx,docx,xlsx,pdf,youtube-transcription]"
 	    ],
 	    "sources": [
 		{
@@ -665,6 +665,22 @@
 		    "type": "file",
 		    "url": "https://files.pythonhosted.org/packages/fa/34/a22e6664211f0c8879521328000bdcae9bf6dbafa94a923e531f6d5b3f73/xlsxwriter-3.2.5-py3-none-any.whl",
 		    "sha256": "4f4824234e1eaf9d95df9a8fe974585ff91d0f5e3d3f12ace5b71e443c1c6abd"
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/16/87/9472cf4a487d848476865321de18cc8c920b8cab98453ab79dbbc98db63a/pandas-2.3.3-cp313-cp313-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl",
+		    "sha256": "e32e7cc9af0f1cc15548288a51a3b681cc2a219faa838e995f7dc53dbab1062d",
+		    "only-arches": [
+		        "aarch64"
+		    ]
+		},
+		{
+		    "type": "file",
+		    "url": "https://files.pythonhosted.org/packages/15/07/284f757f63f8a8d69ed4472bfd85122bd086e637bf4ed09de572d575a693/pandas-2.3.3-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl",
+		    "sha256": "318d77e0e42a628c04dc56bcef4b40de67918f7041c2b061af1da41dcff670ac",
+		    "only-arches": [
+		        "x86_64"
+		    ]
 		}
 	    ]
 	},
