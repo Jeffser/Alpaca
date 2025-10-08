@@ -591,17 +591,19 @@ class GlobalActionStack(Gtk.Stack):
 
     def __init__(self, parent_footer):
         self.parent_footer = parent_footer
+        self.global_settings = Gio.Settings.new("com.jeffser.Alpaca")
+        self.global_settings.connect('changed::prefer-tools', self.prefer_tool_changed)
         super().__init__(
             transition_type=1
         )
-        send_button = Gtk.Button(
+        self.send_button = Gtk.Button(
             vexpand=False,
             valign=3,
             tooltip_text=_('Send Message'),
-            icon_name='paper-plane-symbolic',
+            icon_name='wrench-wide-symbolic' if self.global_settings.get_value('prefer-tools').unpack() else 'paper-plane-symbolic',
             css_classes=['accent', 'circular', 'suggested-action']
         )
-        self.add_named(send_button, 'send')
+        self.add_named(self.send_button, 'send')
 
         stop_button = Gtk.Button(
             vexpand=False,
@@ -614,13 +616,17 @@ class GlobalActionStack(Gtk.Stack):
 
         stop_button.connect('clicked', lambda button: self.get_root().chat_bin.get_child().stop_message())
 
-        send_button.connect('clicked', lambda button: self.use_default_mode())
+        self.send_button.connect('clicked', lambda button: self.use_default_mode())
         gesture_click = Gtk.GestureClick(button=3)
         gesture_click.connect("released", lambda gesture, _n_press, x, y: self.show_popup(gesture, x, y))
-        send_button.add_controller(gesture_click)
+        self.send_button.add_controller(gesture_click)
         gesture_long_press = Gtk.GestureLongPress()
         gesture_long_press.connect("pressed", self.show_popup)
-        send_button.add_controller(gesture_long_press)
+        self.send_button.add_controller(gesture_long_press)
+
+    def prefer_tool_changed(self, settings, key):
+        if key == 'prefer-tools':
+            self.send_button.set_icon_name('wrench-wide-symbolic' if settings.get_value(key).unpack() else 'paper-plane-symbolic')
 
     def use_default_mode(self):
         if self.get_root().settings.get_value('prefer-tools').unpack():
