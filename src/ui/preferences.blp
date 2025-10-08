@@ -66,6 +66,16 @@ template $AlpacaPreferencesDialog: Adw.PreferencesDialog {
         };
       }
     }
+
+    Adw.PreferencesGroup {
+      Adw.ButtonRow delete_all_chats {
+        title: _("Delete All Chats");
+        activated => $delete_all_chats_button_pressed();
+        styles [
+          "error",
+        ]
+      }
+    }
   }
 
   Adw.PreferencesPage audio_page {

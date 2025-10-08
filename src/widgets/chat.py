@@ -179,6 +179,8 @@ class ChatList(Adw.NavigationPage):
         self.update_visibility()
 
     def update(self):
+        self.chat_list_box.remove_all()
+        self.folder_list_box.remove_all()
         selected_chat = self.get_root().settings.get_value('default-chat').unpack()
         chats = SQL.get_chats_by_folder(self.folder_id)
         if len(chats) > 0:

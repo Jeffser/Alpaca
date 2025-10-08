@@ -370,6 +370,13 @@ class Instance:
                 "DELETE FROM message WHERE chat_id=?", (chat.chat_id,)
             )
 
+    def factory_reset() -> None: # Deletes all chat folders and everything inside
+        with SQLiteConnection() as c:
+            c.cursor.execute("DELETE FROM chat_folder")
+            c.cursor.execute("DELETE FROM chat")
+            c.cursor.execute("DELETE FROM message")
+            c.cursor.execute("DELETE FROM attachment")
+
     def duplicate_chat(old_chat_id:str, new_chat) -> None:
         with SQLiteConnection() as c:
             Instance.insert_or_update_chat(new_chat)

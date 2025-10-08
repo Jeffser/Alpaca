@@ -1,8 +1,10 @@
 # preferences.py
 
-from gi.repository import Adw, Gtk, Gio
+from gi.repository import Adw, Gtk, Gio, GLib
 import importlib.util, icu, sys
 from ..constants import TTS_VOICES, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES
+from . import dialog
+from ..sql_manager import Instance as SQL
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/preferences.ui')
 class PreferencesDialog(Adw.PreferencesDialog):
@@ -28,6 +30,24 @@ class PreferencesDialog(Adw.PreferencesDialog):
     @Gtk.Template.Callback()
     def zoom_changed(self, spinner):
         set_zoom(int(spinner.get_value()))
+
+    @Gtk.Template.Callback()
+    def delete_all_chats_button_pressed(self, button):
+        root = self.get_root()
+        def delete_all_chats():
+            SQL.factory_reset()
+            root_folder = list(root.chat_list_navigationview.get_navigation_stack())[0]
+            GLib.idle_add(root.chat_list_navigationview.pop_to_page, root_folder)
+            root_folder.update()
+
+        dialog.simple(
+            parent=root,
+            heading=_("Delete All Chats"),
+            body=_("Are you sure you want to delete every chat and folder?"),
+            callback=delete_all_chats,
+            button_appearance='destructive'
+        )
+        self.close()
 
     def __init__(self):
         super().__init__()
