@@ -169,7 +169,7 @@ class Table(Gtk.Box):
             rows = []
             for row in self.table.rows:
                 rows.append([])
-                for value in row.values:
+                for value in row.raw_values:
                     rows[-1].append(value.strip())
 
             df = pd.DataFrame(rows, columns=headers)
