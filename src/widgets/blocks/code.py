@@ -95,6 +95,14 @@ class Code(Gtk.Box):
         copy_button.connect("clicked", lambda *_: self.copy_code())
         self.button_container.append(copy_button)
 
+        download_button = Gtk.Button(
+            icon_name='folder-download-symbolic',
+            tooltip_text=_('Download Script'),
+            css_classes=['flat']
+        )
+        download_button.connect('clicked', lambda *_: self.prompt_download())
+        self.button_container.append(download_button)
+
         self.run_button = Gtk.Button(
             icon_name="execute-from-symbolic",
             tooltip_text=_("Run Script"),
@@ -207,3 +215,26 @@ class Code(Gtk.Box):
     def set_content(self, value:str) -> None:
         self.buffer.set_text(value, len(value.encode('utf-8')))
 
+    def download(self, file_dialog, result):
+        file = file_dialog.save_finish(result)
+        if file:
+            with open(file.get_path(), 'w+') as f:
+                f.write(self.get_code())
+            dialog.show_toast(
+                message=_('Script saved successfully'),
+                root_widget=self.get_root()
+            )
+
+    def prompt_download(self):
+        language = self.get_language()
+        filename = 'script'
+        for d in language_properties:
+            if d.get('id') == language.lower():
+                filename = d.get('filename')
+
+        file_dialog = Gtk.FileDialog(initial_name=filename)
+        file_dialog.save(
+            parent=self.get_root(),
+            cancellable=None,
+            callback=self.download
+        )
