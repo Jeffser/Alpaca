@@ -360,43 +360,6 @@ template $AlpacaWindow: Adw.ApplicationWindow {
     }
 
     Adw.NavigationPage {
-      title: _("Tool Manager");
-      tag: "tool_manager";
-
-      child: Adw.ToolbarView {
-        [top]
-        Adw.HeaderBar {}
-
-        content: Adw.PreferencesPage {
-          Adw.PreferencesGroup {
-            title: _("Available Tools");
-            description: _("Functions that AI models might use when sending a message by selecting \"Use Tools\" in the send button context menu.");
-
-            ListBox tool_listbox {
-              selection-mode: none;
-
-              styles [
-                "boxed-list",
-              ]
-            }
-
-            Label {
-              label: _("Help us build better AI tools! Submit your ideas here.");
-              wrap: true;
-              wrap-mode: word_char;
-              margin-top: 15;
-            }
-
-            LinkButton {
-              label: _("Request Form");
-              uri: "https://github.com/Jeffser/Alpaca/issues/new?template=request_tool.md";
-            }
-          }
-        };
-      };
-    }
-
-    Adw.NavigationPage {
       title: _("Model Manager");
       tag: "model_manager";
 
@@ -618,11 +581,6 @@ menu primary_menu {
     item {
       label: _("Manage Models");
       action: "app.model_manager";
-    }
-
-    item {
-      label: _("Manage Tools");
-      action: "app.tool_manager";
     }
   }
 

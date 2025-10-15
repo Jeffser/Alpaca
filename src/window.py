@@ -76,7 +76,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     instance_preferences_page = Gtk.Template.Child()
     instance_listbox = Gtk.Template.Child()
     available_models_stack_page = Gtk.Template.Child()
-    tool_listbox = Gtk.Template.Child()
     model_manager_bottom_view_switcher = Gtk.Template.Child()
     model_manager_top_view_switcher = Gtk.Template.Child()
     last_selected_instance_row = None
@@ -505,7 +504,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 entries={'placeholder': 'deepseek-r1:7b'}
             )],
             'reload_added_models': [lambda *_: GLib.idle_add(Widgets.models.update_added_model_list, self)],
-            'tool_manager': [lambda *_: self.push_or_pop('tool_manager'), ['<primary>t']],
             'start_quick_ask': [lambda *_: self.get_application().create_quick_ask().present(), ['<primary><alt>a']],
             'model_creator_existing': [lambda *_: Widgets.models.common.prompt_existing(self)],
             'model_creator_gguf': [lambda *_: Widgets.models.common.prompt_gguf(self)],
