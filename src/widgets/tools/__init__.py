@@ -1,37 +1,48 @@
 from ...sql_manager import Instance as SQL
-
-import time, random
-
+from gi.repository import Gtk, GObject, Gio, Adw
+import importlib.util
 from .tools import Base
 
-def log_to_message(text:str, bot_message, animate:bool):
-    for s in text.split(' '):
-        bot_message.update_message('{} '.format(s))
-        if animate:
-            time.sleep(round(random.random()/4, 2))
-    bot_message.update_message("\n")
+class ToolSelector(Gtk.DropDown):
+    __gtype_name__ = 'AlpacaToolSelector'
 
-def update_available_tools(listbox):
-    tools_parameters = SQL.get_tool_parameters()
-    for ac in Base.__subclasses__():
-        tool_parameters = tools_parameters.get(ac.tool_metadata.get('name'), {})
-        tool_element = ac(tool_parameters.get('variables', {}), tool_parameters.get('activated', False))
-        listbox.prepend(tool_element)
+    def __init__(self):
+        factory = Gtk.SignalListItemFactory()
+        factory.connect('setup', self.on_item_setup)
+        factory.connect('bind', self.on_item_bind)
 
-def get_enabled_tools(listbox) -> dict:
-    tools = {}
-    for t in list(listbox):
-        if t.is_enabled():
-            tools[t.tool_metadata.get('name')] = t
-    return tools
+        super().__init__(
+            factory=factory,
+            model=Gio.ListStore.new(Base)
+        )
 
-def get_tool(tool_name:str, listbox):
-    tools = [a for a in list(listbox) if a.tool_metadata.get('name') == tool_name]
-    if tools:
-        return tools[0]
+        for t in Base.__subclasses__():
+            if all(importlib.util.find_spec(lib) for lib in t.required_libraries) or len(t.required_libraries) == 0:
+                self.get_model().append(t())
 
-def run_tool(tool_name:str, arguments:dict, messages:list, bot_message, listbox):
-    tool = get_tool(tool_name, listbox)
-    if tool:
-        response = tool.run(arguments, messages, bot_message)
-        return response
+        self.connect('realize', lambda *_: self.on_realize())
+
+    def on_realize(self):
+        list(list(self)[1].get_child())[1].set_propagate_natural_width(True)
+        list(self)[0].add_css_class('flat')
+
+    def on_item_setup(self, factory, item):
+        item.set_child(Adw.Bin())
+
+    def on_item_bind(self, factory, item):
+        item_data = item.get_item()
+        icon = Gtk.Image.new_from_icon_name(
+            item_data.icon_name
+        )
+        icon.add_css_class('dim-label')
+        label = Gtk.Label(
+            label=item_data.display_name,
+            ellipsize=3,
+            xalign=0
+        )
+
+        item.get_child().set_child(
+            Gtk.Box(spacing=5)
+        )
+        item.get_child().get_child().append(icon)
+        item.get_child().get_child().append(label)

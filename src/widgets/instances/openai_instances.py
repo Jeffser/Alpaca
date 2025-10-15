@@ -95,16 +95,14 @@ class BaseInstance:
         tools_used = []
 
         try:
-            tools.log_to_message(_("Selecting tool to use..."), bot_message, True)
             completion = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
-                tools=[v.get_tool() for v in available_tools.values()]
+                tools=[v.get_metadata() for v in available_tools.values()]
             )
             if completion.choices[0] and completion.choices[0].message:
                 if completion.choices[0].message.tool_calls:
                     for call in completion.choices[0].message.tool_calls:
-                        tools.log_to_message(_("Using {}").format(call.function.name), bot_message, True)
                         if available_tools.get(call.function.name):
                             response = str(available_tools.get(call.function.name).run(json.loads(call.function.arguments), messages, bot_message))
                             attachment_content = []
@@ -154,7 +152,6 @@ class BaseInstance:
             logger.error(e)
 
         if generate_message:
-            tools.log_to_message(_("Generating message..."), bot_message, True)
             GLib.idle_add(bot_message.block_container.remove_css_class, 'dim-label')
             self.generate_response(bot_message, chat, messages, model, tools_used if len(tools_used) > 0 else None)
         else:

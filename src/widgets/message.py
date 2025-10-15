@@ -117,7 +117,7 @@ class OptionPopup(Gtk.Popover):
                     args=(
                         self.message_element,
                         model,
-                        tools.get_enabled_tools(self.get_root().get_application().get_main_window(present=False).tool_listbox),
+                        {},##TODO
                         True
                     )
                 ).start()
@@ -578,12 +578,10 @@ class GlobalMessageTextView(GtkSource.View):
 
     def enter_key_handler(self, controller, keyval, keycode, state):
         if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK): # Enter pressed without shift
-            mode = 0
             if state & Gdk.ModifierType.CONTROL_MASK: # Ctrl, send system message
-                mode = 1
-            elif state & Gdk.ModifierType.ALT_MASK or self.get_root().settings.get_value('prefer-tools').unpack(): # Alt, send tool message
-                mode = 2
-            self.parent_footer.send_callback(mode)
+                self.parent_footer.send_callback(1)
+            else:
+                self.parent_footer.action_stack.use_default_mode()
             return True
 
 class GlobalActionStack(Gtk.Stack):
@@ -591,8 +589,6 @@ class GlobalActionStack(Gtk.Stack):
 
     def __init__(self, parent_footer):
         self.parent_footer = parent_footer
-        self.global_settings = Gio.Settings.new("com.jeffser.Alpaca")
-        self.global_settings.connect('changed::prefer-tools', self.prefer_tool_changed)
         super().__init__(
             transition_type=1
         )
@@ -600,7 +596,7 @@ class GlobalActionStack(Gtk.Stack):
             vexpand=False,
             valign=3,
             tooltip_text=_('Send Message'),
-            icon_name='wrench-wide-symbolic' if self.global_settings.get_value('prefer-tools').unpack() else 'paper-plane-symbolic',
+            icon_name='paper-plane-symbolic',
             css_classes=['accent', 'circular', 'suggested-action']
         )
         self.add_named(self.send_button, 'send')
@@ -624,13 +620,10 @@ class GlobalActionStack(Gtk.Stack):
         gesture_long_press.connect("pressed", self.show_popup)
         self.send_button.add_controller(gesture_long_press)
 
-    def prefer_tool_changed(self, settings, key):
-        if key == 'prefer-tools':
-            self.send_button.set_icon_name('wrench-wide-symbolic' if settings.get_value(key).unpack() else 'paper-plane-symbolic')
-
     def use_default_mode(self):
-        if self.get_root().settings.get_value('prefer-tools').unpack():
-            self.parent_footer.send_callback(2)
+        selected_tool = self.parent_footer.tool_selector.get_selected_item()
+        if selected_tool.runnable:
+            self.parent_footer.send_callback(0, {selected_tool.name: selected_tool})
         else:
             self.parent_footer.send_callback(0)
 
@@ -641,17 +634,12 @@ class GlobalActionStack(Gtk.Stack):
             [
                 {
                     'label': _('Send as User'),
-                    'callback': lambda: self.parent_footer.send_callback(0),
+                    'callback': self.use_default_mode,
                     'icon': None
                 },
                 {
                     'label': _('Send as System'),
                     'callback': lambda: self.parent_footer.send_callback(1),
-                    'icon': None
-                },
-                {
-                    'label': _('Use Tools'),
-                    'callback': lambda: self.parent_footer.send_callback(2),
                     'icon': None
                 }
             ]
@@ -667,7 +655,7 @@ class GlobalFooter(Gtk.Box):
     def __init__(self, send_callback:callable):
         self.send_callback = send_callback
         super().__init__(
-            spacing=12,
+            spacing=10,
             orientation=1,
             css_classes=['p10']
         )
@@ -678,17 +666,11 @@ class GlobalFooter(Gtk.Box):
         self.attachment_container = attachments.GlobalAttachmentContainer()
         self.append(self.attachment_container)
 
-        controls_container = Gtk.Box(spacing=12)
-        self.append(controls_container)
-
-        self.attachment_button = attachments.GlobalAttachmentButton()
-        controls_container.append(self.attachment_button)
-
         self.message_text_view_container = Gtk.Box(
             overflow=1,
             css_classes=['card']
         )
-        controls_container.append(self.message_text_view_container)
+        self.append(self.message_text_view_container)
         self.message_text_view = GlobalMessageTextView(self)
         message_text_view_scroller = Gtk.ScrolledWindow(
             max_content_height=150,
@@ -702,8 +684,19 @@ class GlobalFooter(Gtk.Box):
         self.microphone_button = voice.MicrophoneButton(self.message_text_view)
         self.message_text_view_container.append(self.microphone_button)
 
+        bottom_container = Gtk.Box(spacing=10)
+        self.append(bottom_container)
+
+        self.attachment_button = attachments.GlobalAttachmentButton()
+        bottom_container.append(self.attachment_button)
+
+        self.tool_selector = tools.ToolSelector()
+        bottom_container.append(self.tool_selector)
+
         self.action_stack = GlobalActionStack(self)
-        controls_container.append(self.action_stack)
+        self.action_stack.set_hexpand(True)
+        self.action_stack.set_halign(2)
+        bottom_container.append(self.action_stack)
 
     def on_file_drop(self, drop_target, value, x, y):
         files = value.get_files()

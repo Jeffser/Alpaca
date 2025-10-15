@@ -14,7 +14,6 @@ class PreferencesDialog(Adw.PreferencesDialog):
     powersaver_warning_switch = Gtk.Template.Child()
     zoom_spin = Gtk.Template.Child()
     activity_mode = Gtk.Template.Child()
-    prefer_tools = Gtk.Template.Child()
     regenerate_after_edit = Gtk.Template.Child()
     image_size_spin = Gtk.Template.Child()
     mic_group = Gtk.Template.Child()
@@ -58,7 +57,6 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.settings.bind('powersaver-warning', self.powersaver_warning_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind('zoom', self.zoom_spin, 'value', Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind('activity-mode', self.activity_mode, 'selected', Gio.SettingsBindFlags.DEFAULT)
-        self.settings.bind('prefer-tools', self.prefer_tools, 'active', Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind('regenerate-after-edit', self.regenerate_after_edit, 'active', Gio.SettingsBindFlags.DEFAULT)
         self.mic_group.set_visible(importlib.util.find_spec('whisper'))
 

@@ -201,11 +201,10 @@ class LiveChat(Adw.Bin):
                 tries += 1
                 time.sleep(1)
 
-    def send_message(self, mode:int=0):
-        #Mode = 0 (normal), Mode = 1 (System), Mode = 2 (Use Tools)
+    def send_message(self, mode:int=0, available_tools:dict={}): #mode 0=user 1=system
         buffer = self.global_footer.get_buffer()
-        message_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
-        if not message_text:
+        raw_message = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
+        if not raw_message.strip():
             return
 
         self.global_footer.microphone_button.button.set_active(False)
@@ -230,7 +229,7 @@ class LiveChat(Adw.Bin):
             dt=datetime.datetime.now(),
             message_id=generate_uuid(),
             chat=chat,
-            mode=0 if mode in (0,2) else 2
+            mode=mode*2
         )
         chat.add_message(m_element)
 
@@ -243,9 +242,9 @@ class LiveChat(Adw.Bin):
             )
             old_attachment.delete()
 
-        m_element.block_container.set_content(message_text)
+        m_element.block_container.set_content(raw_message)
 
-        if mode in (0, 2):
+        if mode == 0:
             m_element_bot = message.Message(
                 dt=datetime.datetime.now(),
                 message_id=generate_uuid(),
@@ -271,10 +270,10 @@ class LiveChat(Adw.Bin):
             self.pfp_spinner.set_visible(True)
             chat.busy = True
             current_instance = self.get_current_instance()
-            if mode == 0:
-                threading.Thread(target=current_instance.generate_message, args=(m_element_bot, current_model), daemon=True).start()
+            if len(available_tools) > 0:
+                threading.Thread(target=current_instance.use_tools, args=(m_element_bot, current_model, available_tools, True), daemon=True).start()
             else:
-                threading.Thread(target=current_instance.use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.get_application().get_main_window().tool_listbox), True), daemon=True).start()
+                threading.Thread(target=current_instance.generate_message, args=(m_element_bot, current_model), daemon=True).start()
 
     def get_current_instance(self):
         return self.get_root().get_application().get_main_window().get_current_instance()

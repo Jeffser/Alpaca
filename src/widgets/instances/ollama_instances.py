@@ -57,12 +57,11 @@ class BaseInstance:
             ).start()
 
         try:
-            tools.log_to_message(_("Selecting tool to use..."), bot_message, True)
             params = {
                 "model": model,
                 "messages": messages,
                 "stream": False,
-                "tools": [v.get_tool() for v in available_tools.values()],
+                "tools": [v.get_metadata() for v in available_tools.values()],
                 "think": False
             }
             response = requests.post(
@@ -76,7 +75,6 @@ class BaseInstance:
             tool_calls = response.json().get('message', {}).get('tool_calls', [])
             for tc in tool_calls:
                 function = tc.get('function')
-                tools.log_to_message(_("Using {}").format(function.get('name')), bot_message, True)
                 if available_tools.get(function.get('name')):
                     gen_request, response = available_tools.get(function.get('name')).run(function.get('arguments'), messages, bot_message)
                     generate_message = generate_message and gen_request
@@ -98,7 +96,7 @@ class BaseInstance:
 
                     attachment = bot_message.add_attachment(
                         file_id = generate_uuid(),
-                        name = available_tools.get(function.get('name')).name,
+                        name = available_tools.get(function.get('name')).display_name,
                         attachment_type = 'tool',
                         content = '\n'.join(attachment_content)
                     )

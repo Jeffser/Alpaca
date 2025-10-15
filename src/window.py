@@ -292,7 +292,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             else:
                 current_chat.set_visible_child_name('no-results')
 
-    def send_message(self, mode:int=0): #mode 0=user 1=system 2=tool
+    def send_message(self, mode:int=0, available_tools:dict={}): #mode 0=user 1=system
         buffer = self.global_footer.get_buffer()
 
         raw_message = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
@@ -308,9 +308,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             return
 
         current_model = self.get_selected_model().get_name()
-        if mode == 2 and len(Widgets.tools.get_enabled_tools(self.tool_listbox)) == 0:
-            Widgets.dialog.show_toast(_("No tools enabled."), current_chat.get_root(), 'app.tool_manager', _('Open Tool Manager'))
-            return
         if current_model is None:
             Widgets.dialog.show_toast(_("Please select a model before chatting"), current_chat.get_root())
             return
@@ -327,7 +324,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             dt=datetime.now(),
             message_id=generate_uuid(),
             chat=current_chat,
-            mode=0 if mode in (0,2) else 2
+            mode=mode*2
         )
         current_chat.add_message(m_element)
 
@@ -357,20 +354,12 @@ class AlpacaWindow(Adw.ApplicationWindow):
             )
             current_chat.add_message(m_element_bot)
             SQL.insert_or_update_message(m_element_bot)
-            threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model), daemon=True).start()
+            if len(available_tools) > 0:
+                threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, available_tools, True), daemon=True).start()
+            else:
+                threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model), daemon=True).start()
         elif mode==1:
             current_chat.set_visible_child_name('content')
-        elif mode==2:
-            m_element_bot = Widgets.message.Message(
-                dt=datetime.now(),
-                message_id=generate_uuid(),
-                chat=current_chat,
-                mode=1,
-                author=current_model
-            )
-            current_chat.add_message(m_element_bot)
-            SQL.insert_or_update_message(m_element_bot)
-            threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, Widgets.tools.get_enabled_tools(self.tool_listbox), True), daemon=True).start()
 
     def get_selected_model(self):
         selected_item = self.model_dropdown.get_selected_item()
@@ -392,8 +381,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         root_folder = Widgets.chat.ChatList(show_bar=False)
         self.chat_list_navigationview.add(root_folder)
         root_folder.update()
-
-        threading.Thread(target=Widgets.tools.update_available_tools, args=(self.tool_listbox,), daemon=True).start()
 
         if self.get_application().args.new_chat:
             self.get_chat_list_page().new_chat(self.get_application().args.new_chat)
