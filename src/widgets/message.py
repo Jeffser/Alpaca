@@ -624,6 +624,8 @@ class GlobalActionStack(Gtk.Stack):
         selected_tool = self.parent_footer.tool_selector.get_selected_item()
         if selected_tool.runnable:
             self.parent_footer.send_callback(0, {selected_tool.name: selected_tool})
+        elif selected_tool.name == 'auto_tool':
+            self.parent_footer.send_callback(0, {t.name: t for t in list(self.parent_footer.tool_selector.get_model()) if t.runnable})
         else:
             self.parent_footer.send_callback(0)
 

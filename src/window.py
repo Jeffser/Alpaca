@@ -457,6 +457,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.model_searchbar.connect_entry(self.searchentry_models)
         self.model_searchbar.connect('notify::search-mode-enabled', lambda *_: self.model_search_changed(self.searchentry_models))
 
+        # Global Footer
+        self.global_footer = Widgets.message.GlobalFooter(self.send_message)
+        self.global_footer_container.set_child(self.global_footer)
+        self.set_focus(self.global_footer.message_text_view)
+
         # Prepare model selector
         list(self.model_dropdown)[0].add_css_class('flat')
         self.model_dropdown.set_model(Gio.ListStore.new(Widgets.models.added.AddedModelRow))
@@ -467,11 +472,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.model_dropdown.set_factory(factory)
         list(list(self.model_dropdown)[1].get_child())[1].set_propagate_natural_width(True)
         list(list(self.title_no_model_button.get_child())[0])[1].set_ellipsize(3)
-
-        # Global Footer
-        self.global_footer = Widgets.message.GlobalFooter(self.send_message)
-        self.global_footer_container.set_child(self.global_footer)
-        self.set_focus(self.global_footer.message_text_view)
+        self.model_dropdown.connect('notify::selected', lambda dropdown, gparam: self.global_footer.tool_selector.model_changed(dropdown))
 
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         for el in ("default-width", "default-height", "maximized", "hide-on-close"):

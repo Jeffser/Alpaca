@@ -53,6 +53,12 @@ class Base(GObject.Object):
 class NoTool(Base):
     display_name:str = _('No Tool')
     icon_name:str = 'cross-large-symbolic'
+    name:str = 'no_tool'
+    runnable:bool = False
+
+class AutoTool(Base):
+    display_name:str = _('Auto Detect Tool')
+    name:str = 'auto_tool'
     runnable:bool = False
 
 class WebSearch(Base):

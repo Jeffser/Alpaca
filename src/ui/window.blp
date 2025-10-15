@@ -115,7 +115,7 @@ template $AlpacaWindow: Adw.ApplicationWindow {
         };
 
         Adw.NavigationSplitView chat_splitview {
-          collapsed: bind show_activities_toggle.active sync-create inverted;
+          collapsed: bind show_activities_toggle.active inverted;
           sidebar-width-fraction: 0.4;
           sidebar-width-unit: pt;
           sidebar-position: end;
