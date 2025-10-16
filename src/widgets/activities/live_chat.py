@@ -123,6 +123,7 @@ class LiveChat(Adw.Bin):
         self.global_footer = message.GlobalFooter(self.send_message)
         self.global_footer.attachment_button.set_visible(False)
         self.global_footer.action_stack.set_visible(False)
+        self.global_footer.tool_selector.set_visible(False)
         self.global_footer.microphone_button.get_parent().remove(self.global_footer.microphone_button)
         global_footer_container.set_child(self.global_footer)
 

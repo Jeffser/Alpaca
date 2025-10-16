@@ -29,11 +29,11 @@ class ToolSelector(Gtk.DropDown):
     def model_changed(self, dropdown):
         if 'tools' in dropdown.get_selected_item().model.data.get('capabilities', ['tools']):
             self.set_sensitive(True)
-            self.set_tooltip_text(_('Select a tool to use'))
+            self.set_tooltip_text(_('Select a Tool To Use'))
         else:
             self.set_sensitive(False)
             self.set_selected(0)
-            self.set_tooltip_text(_('Selected model is not compatible with tools'))
+            self.set_tooltip_text(_('Selected Model is Not Compatible With Tools'))
 
     def on_item_setup(self, factory, item):
         item.set_child(Adw.Bin())

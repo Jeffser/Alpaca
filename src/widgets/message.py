@@ -593,20 +593,16 @@ class GlobalActionStack(Gtk.Stack):
             transition_type=1
         )
         self.send_button = Gtk.Button(
-            vexpand=False,
-            valign=3,
             tooltip_text=_('Send Message'),
             icon_name='paper-plane-symbolic',
-            css_classes=['accent', 'circular', 'suggested-action']
+            css_classes=['accent', 'br0']
         )
         self.add_named(self.send_button, 'send')
 
         stop_button = Gtk.Button(
-            vexpand=False,
-            valign=3,
             tooltip_text=_('Stop Message'),
             icon_name='media-playback-stop-symbolic',
-            css_classes=['destructive-action', 'circular']
+            css_classes=['destructive-action', 'br0']
         )
         self.add_named(stop_button, 'stop')
 
@@ -683,8 +679,8 @@ class GlobalFooter(Gtk.Box):
         )
         self.message_text_view_container.append(message_text_view_scroller)
 
-        self.microphone_button = voice.MicrophoneButton(self.message_text_view)
-        self.message_text_view_container.append(self.microphone_button)
+        self.action_stack = GlobalActionStack(self)
+        self.message_text_view_container.append(self.action_stack)
 
         bottom_container = Gtk.Box(spacing=10)
         self.append(bottom_container)
@@ -692,13 +688,11 @@ class GlobalFooter(Gtk.Box):
         self.attachment_button = attachments.GlobalAttachmentButton()
         bottom_container.append(self.attachment_button)
 
+        self.microphone_button = voice.MicrophoneButton(self.message_text_view)
+        bottom_container.append(self.microphone_button)
+
         self.tool_selector = tools.ToolSelector()
         bottom_container.append(self.tool_selector)
-
-        self.action_stack = GlobalActionStack(self)
-        self.action_stack.set_hexpand(True)
-        self.action_stack.set_halign(2)
-        bottom_container.append(self.action_stack)
 
     def on_file_drop(self, drop_target, value, x, y):
         files = value.get_files()
