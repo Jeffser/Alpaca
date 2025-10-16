@@ -162,7 +162,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             listbox.set_sensitive(True)
         if listbox.get_sensitive():
             listbox.set_sensitive(False)
-            GLib.idle_add(threading.Thread(target=change_instance, daemon=True).start)
+            threading.Thread(target=change_instance, daemon=True).start()
 
     @Gtk.Template.Callback()
     def model_manager_stack_changed(self, viewstack, params):
@@ -531,3 +531,4 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 notice_dialog.present(self)
         else:
             self.main_navigation_view.replace([Widgets.welcome.Welcome()])
+

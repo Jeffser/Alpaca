@@ -12,7 +12,6 @@ def update_available_model_list(root):
     instance = window.get_current_instance()
     set_available_models_data(instance.get_available_models())
     available_models_data = get_available_models_data()
-
     window.model_filter_button.set_visible(len(available_models_data) > 0)
     container = Gtk.Box(
         orientation=1,
@@ -48,19 +47,16 @@ def update_available_model_list(root):
                 model_element = available.AvailableModelButton(name, model_info)
                 window.available_model_flowbox.append(model_element)
                 model_element.get_parent().set_focusable(False)
-                model_element.get_parent().add_css_class('p0')
-
     window.available_models_stack_page.set_visible(len(available_models_data) > 0)
     visible_model_manger_switch = len([p for p in window.model_manager_stack.get_pages() if p.get_visible()]) > 1
     window.model_manager_bottom_view_switcher.set_visible(visible_model_manger_switch)
     window.model_manager_top_view_switcher.set_visible(visible_model_manger_switch)
-
     window.model_filter_button.set_visible('ollama' in instance.instance_type)
 
 def update_added_model_list(root):
     window = root.get_application().get_main_window(present=False)
     window.local_model_flowbox.remove_all()
-    GLib.idle_add(window.model_dropdown.get_model().remove_all)
+    window.model_dropdown.get_model().remove_all()
 
     # Normal Models
     window.get_current_instance().local_models = None # To reset cache
@@ -68,9 +64,8 @@ def update_added_model_list(root):
     for model in local_models:
         model_element = added.AddedModelButton(model.get('name'), window.get_current_instance())
         window.local_model_flowbox.append(model_element)
-        GLib.idle_add(window.model_dropdown.get_model().append,model_element.row)
+        window.model_dropdown.get_model().append(model_element.row)
         model_element.get_parent().set_focusable(False)
-        model_element.get_parent().add_css_class('p0')
 
     if importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'):
         # Speech to Text
@@ -80,7 +75,6 @@ def update_added_model_list(root):
                     model_element = speech.SpeechToTextModelButton(model.removesuffix('.pt'))
                     window.local_model_flowbox.append(model_element)
                     model_element.get_parent().set_focusable(False)
-                    model_element.get_parent().add_css_class('p0')
 
         # Text to Speech
         tts_model_path = get_tts_path()
@@ -89,7 +83,6 @@ def update_added_model_list(root):
                 model_element = speech.TextToSpeechModelButton(os.path.join(tts_model_path, model))
                 window.local_model_flowbox.append(model_element)
                 model_element.get_parent().set_focusable(False)
-                model_element.get_parent().add_css_class('p0')
 
     # Background Removers
     if importlib.util.find_spec('rembg'):
@@ -100,7 +93,6 @@ def update_added_model_list(root):
                     model_element = image.BackgroundRemoverModelButton(model.removesuffix('.onnx'))
                     window.local_model_flowbox.append(model_element)
                     model_element.get_parent().set_focusable(False)
-                    model_element.get_parent().add_css_class('p0')
 
     window.title_stack.set_visible_child_name('model-selector' if len(common.get_local_models(window)) > 0 else 'no-models')
     window.local_model_stack.set_visible_child_name('content' if len(list(window.local_model_flowbox)) > 0 else 'no-models')
