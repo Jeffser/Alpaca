@@ -117,7 +117,7 @@ class OptionPopup(Gtk.Popover):
                     args=(
                         self.message_element,
                         model,
-                        {t.name: t for t in list(self.get_root().global_footer.tool_selector.get_model()) if t.runnable}),
+                        {t.name: t for t in list(self.get_root().global_footer.tool_selector.get_model()) if t.runnable},
                         True
                     )
                 ).start()
