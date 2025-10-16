@@ -252,7 +252,10 @@ class BaseInstance:
         if len(new_chat_title) > 30:
             new_chat_title = new_chat_title[:30].strip() + '...'
 
-        chat.row.rename(new_chat_title)
+        chat.row.edit(
+            new_name=new_chat_title,
+            is_template=chat.is_template
+        )
 
     def get_default_model(self):
         local_models = self.get_local_models()
