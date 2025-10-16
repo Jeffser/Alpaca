@@ -151,17 +151,7 @@ template $AlpacaWindow: Adw.ApplicationWindow {
                 [title]
                 Stack title_stack {
                   transition-duration: 100;
-                  transition-type: crossfade;
-
-                  StackPage {
-                    name: "loading";
-
-                    child: Adw.Spinner {
-                      styles [
-                        "p10",
-                      ]
-                    };
-                  }
+                  //transition-type: crossfade;
 
                   StackPage {
                     name: "no-models";
@@ -470,8 +460,8 @@ template $AlpacaWindow: Adw.ApplicationWindow {
                     tightening-threshold: 800;
 
                     FlowBox local_model_flowbox {
-                      row-spacing: 0;
-                      column-spacing: 0;
+                      row-spacing: 6;
+                      column-spacing: 6;
                       hexpand: true;
                       valign: start;
                       min-children-per-line: 1;
@@ -514,8 +504,8 @@ template $AlpacaWindow: Adw.ApplicationWindow {
                     tightening-threshold: 800;
 
                     FlowBox available_model_flowbox {
-                      row-spacing: 0;
-                      column-spacing: 0;
+                      row-spacing: 6;
+                      column-spacing: 6;
                       hexpand: true;
                       valign: start;
                       min-children-per-line: 2;
