@@ -187,6 +187,7 @@ class BackgroundRemover(Gtk.ScrolledWindow):
 
         self.pulling_model = None
 
+        selected_index = Gio.Settings(schema_id="com.jeffser.Alpaca").get_value('activity-background-remover-model').unpack()
         string_list = Gtk.StringList()
         for m in REMBG_MODELS.values():
             string_list.append('{} ({})'.format(m.get('display_name'), m.get('size')) )
@@ -197,6 +198,7 @@ class BackgroundRemover(Gtk.ScrolledWindow):
             model=string_list,
             factory=factory
         )
+        self.model_dropdown.set_selected(selected_index)
         list(list(self.model_dropdown)[1].get_child())[1].set_propagate_natural_width(True)
 
         self.select_button = Gtk.Button(

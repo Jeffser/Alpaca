@@ -125,42 +125,36 @@ class Terminal(Base):
 
     required_libraries:list = ['gi.repository.Vte']
 
+    global_page = None
+    current_commands = []
+
     def run(self, arguments, messages, bot_message) -> tuple:
         if not arguments.get('command'):
             return True, "Error: No command was provided"
 
-        commands = [
-            'echo -e "🦙 {}\n\n- {}\n{}\n\n- {}\n{}\n\n⚠️ {}\n\n"'.format(
-                _('Model Requested to Run Command'),
-                _('Command'),
-                arguments.get('command'),
-                _('Explanation'),
-                arguments.get('explanation', _('No explanation was provided')),
-                _('Make sure you understand what the command does before running it.')
-            ),
-            "ssh -t -p {} {}@{} -- '{}'".format(
-               {}.get('port', {}).get('value', 22),
-               {}.get('username', {}).get('value', os.getenv('USER')),
-               {}.get('ip', {}).get('value', '127.0.0.1'),
-               'clear;' + arguments.get('command').replace("'", "\\'"),
-            )
+        self.current_commands = [
+            'clear',
+            'echo -e "🦙 {}" | fold -s -w "$(tput cols)"'.format(arguments.get('explanation'), _('No explanation was provided')),
+            'read -e -i "{}" cmd'.format(arguments.get('command').replace('"', '\\"')),
+            'clear',
+            'eval "$cmd"'
         ]
 
+        if not self.global_page or not self.global_page.get_root():
+            self.global_page = activities.Terminal(
+                language='auto',
+                code_getter=lambda: ';'.join(self.current_commands),
+                close_callback=lambda: setattr(self, 'waiting_terminal', False)
+            )
+            GLib.idle_add(activities.show_activity, self.global_page, bot_message.get_root(), not bot_message.chat.chat_id)
+
         self.waiting_terminal = True
-        term = activities.Terminal(
-            language='ssh',
-            code_getter=lambda:';'.join(commands),
-            close_callback=lambda: setattr(self, 'waiting_terminal', False)
-        )
-        GLib.idle_add(activities.show_activity, term, bot_message.get_root(), not bot_message.chat.chat_id)
-        term.run()
+        self.global_page.run()
 
         while self.waiting_terminal:
             continue
 
-        command_result = term.get_text() or '(No Output)'
-        term = None
-        return False, '```\n{}\n```'.format(command_result)
+        return False, '```\n{}\n```'.format(self.global_page.get_text())
 
 class BackgroundRemover(Base):
     display_name:str = _('Background Remover')

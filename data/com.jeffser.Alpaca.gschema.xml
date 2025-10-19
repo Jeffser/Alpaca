@@ -55,15 +55,30 @@
 	  <key name="regenerate-after-edit" type="b">
 			<default>false</default>
 		</key>
+
 	  <key name="activity-mode" type="i">
 	    <default>0</default>
 	  </key>
-
+    <key name="default-tool" type="i">
+	    <default>0</default>
+	  </key>
 	  <key name="activity-webbrowser-query-url" type="s">
 	    <default>"https://startpage.com/sp/search?query={}"</default>
 	  </key>
 	  <key name="activity-webbrowser-homepage-url" type="s">
 	    <default>"https://startpage.com"</default>
+	  </key>
+	  <key name="activity-terminal-type" type="i">
+	    <default>1</default>
+	  </key>
+	  <key name="activity-terminal-username" type="s">
+      <default>""</default>
+	  </key>
+	  <key name="activity-terminal-ip" type="s">
+	    <default>""</default>
+	  </key>
+	  <key name="activity-background-remover-model" type="i">
+	    <default>0</default>
 	  </key>
 	</schema>
 </schemalist>

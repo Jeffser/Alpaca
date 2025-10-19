@@ -47,19 +47,6 @@ template $AlpacaPreferencesDialog: Adw.PreferencesDialog {
           step-increment: 10;
         };
       }
-
-      Adw.ComboRow activity_mode {
-        title: _("Preferred Activity Mode");
-        subtitle: _("This affects how terminals, attachments and other activities are represented in the main window");
-
-        model: StringList {
-          strings [
-            _("Sidebar"),
-            _("Dialog"),
-            _("Window"),
-          ]
-        };
-      }
     }
 
     Adw.PreferencesGroup {
@@ -81,11 +68,13 @@ template $AlpacaPreferencesDialog: Adw.PreferencesDialog {
       Adw.ComboRow mic_model_combo {
         title: _("Speech Recognition Model");
         subtitle: _("Models are downloaded upon first use, you can delete them from the model manager");
+        model: StringList {};
       }
 
       Adw.ComboRow mic_language_combo {
         title: _("Speech Recognition Language");
         sensitive: false;
+        model: StringList {};
       }
 
       Adw.SwitchRow mic_auto_send_switch {
@@ -98,6 +87,7 @@ template $AlpacaPreferencesDialog: Adw.PreferencesDialog {
       Adw.ComboRow tts_voice_combo {
         title: _("Default Text to Speech Voice");
         subtitle: _("Voices are downloaded upon first use, each weighing around 1 MB, and you can delete them from the model manager");
+        model: StringList {};
       }
 
       Adw.SwitchRow tts_auto_mode_combo {
@@ -117,5 +107,128 @@ template $AlpacaPreferencesDialog: Adw.PreferencesDialog {
         };
       }
     }
+  }
+
+  Adw.PreferencesPage activities_page {
+    icon-name: "shapes-symbolic";
+    title: _("Activities");
+
+    Adw.PreferencesGroup {
+      Adw.ComboRow default_tool {
+        title: _("Default Tool");
+        subtitle: _("Applied when a model is compatible with tools");
+        model: StringList {
+          strings [
+            _("No Tool"),
+            _("Auto Detect Tool"),
+            _("Web Search"),
+            _("Terminal"),
+            _("Background Remover"),
+          ]
+        };
+      }
+
+      Adw.ComboRow activity_mode {
+        title: _("Preferred Activity Mode");
+        subtitle: _("This affects how terminals, attachments and other activities are represented in the main window");
+
+        model: StringList {
+          strings [
+            _("Sidebar"),
+            _("Dialog"),
+            _("Window"),
+          ]
+        };
+      }
+    }
+
+    Adw.PreferencesGroup activity_web_browser_group {
+      title: _("Web Browser");
+
+      Adw.ComboRow activity_web_browser_engine {
+        title: _("Search Engine");
+        notify::selected => $activity_web_browser_engine_changed();
+
+        model: StringList {
+          strings [
+            "Startpage",
+            "DuckDuckGo",
+            "Google",
+            _("Custom"),
+          ]
+        };
+      }
+
+      Adw.EntryRow activity_web_browser_query_url {
+        title: _("Search Query URL");
+      }
+
+      Adw.EntryRow activity_web_browser_homepage_url {
+        title: _("Homepage URL");
+      }
+    }
+
+    Adw.PreferencesGroup activity_terminal_group {
+      title: _("Terminal");
+
+      Adw.ComboRow activity_terminal_type {
+        title: _("Connection Type");
+        subtitle: _("How Alpaca will connect to your device");
+        notify::selected => $activity_terminal_type_changed();
+
+        model: StringList {
+          strings [
+            "Directly",
+            "SSH"
+          ]
+        };
+      }
+
+      Adw.EntryRow activity_terminal_ssh_user {
+        title: _("Username");
+      }
+
+      Adw.EntryRow activity_terminal_ssh_ip {
+        title: _("Device IP");
+      }
+
+      Adw.ActionRow activity_terminal_flatpak_warning {
+        child: Gtk.Label {
+          label: _("Alpaca needs an additional permission to use the terminal directly");
+          wrap: true;
+          justify: center;
+          styles [
+            "p10",
+            "dim-label",
+          ]
+        };
+      }
+
+      Adw.ActionRow activity_terminal_flatpak_warning_command {
+        child: Gtk.Label {
+          label: "flatpak override com.jeffser.Alpaca --talk-name=org.freedesktop.Flatpak";
+          selectable: true;
+          wrap: true;
+          wrap-mode: char;
+          styles [
+            "card",
+            "view",
+            "p10",
+            "br0",
+          ]
+        };
+        styles [
+          "p0",
+        ]
+      }
+    }
+
+    Adw.PreferencesGroup activity_background_remover_group {
+      title: _("Background Remover");
+        Adw.ComboRow activity_background_remover_default_model {
+          title: _("Default Model");
+          model: StringList {};
+        }
+      }
   }
 }

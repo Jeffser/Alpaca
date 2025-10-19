@@ -5,6 +5,7 @@
     "sdk": "org.gnome.Sdk",
     "command": "alpaca",
     "finish-args": [
+    	"--talk=org.freedesktop.Flatpak",
         "--share=network",
         "--share=ipc",
         "--socket=fallback-x11",

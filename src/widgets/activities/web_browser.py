@@ -70,10 +70,6 @@ class WebBrowser(Gtk.ScrolledWindow):
             'label': _('Go to Home'),
             'callback': lambda: self.webview.load_uri(self.default_url),
             'icon': 'go-home-symbolic'
-        },{
-            'label': _('Browser Preferences'),
-            'callback': lambda: WebBrowserPreferences().present(self.get_root()),
-            'icon': 'wrench-wide-symbolic'
         }]]
         popover = dialog.Popover(actions)
         popover.set_has_arrow(True)
@@ -251,66 +247,3 @@ class WebBrowser(Gtk.ScrolledWindow):
         if parent:
             parent.close()
 
-class WebBrowserPreferences(Adw.PreferencesDialog):
-    __gtype_name__ = 'AlpacaWebBrowserPreferences'
-
-    presets = [
-        ['https://startpage.com/sp/search?query={}', 'https://startpage.com'],
-        ['https://duckduckgo.com/?q={}', 'https://duckduckgo.com/'],
-        ['https://google.com/search?q={}', 'https://google.com']
-    ]
-
-    def __init__(self):
-        super().__init__(
-            follows_content_size=True
-        )
-        settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
-
-        preferences_page = Adw.PreferencesPage()
-        self.add(preferences_page)
-
-        preferences_group = Adw.PreferencesGroup()
-        preferences_page.add(preferences_group)
-
-        search_presets_el = Adw.ComboRow(
-            title=_('Search Engine')
-        )
-
-        string_list = Gtk.StringList()
-        string_list.append('Startpage')
-        string_list.append('DuckDuckGo')
-        string_list.append('Google')
-        string_list.append(_('Custom'))
-
-        search_presets_el.set_model(string_list)
-
-        selected_index = len(self.presets)
-        for i, preset in enumerate(self.presets):
-            if preset[0] == settings.get_value('activity-webbrowser-query-url').unpack() and preset[1] == settings.get_value('activity-webbrowser-homepage-url').unpack():
-                selected_index=i
-        search_presets_el.set_selected(selected_index)
-        search_presets_el.connect('notify::selected', self.on_preset_change)
-        preferences_group.add(search_presets_el)
-
-        self.search_query_url_el = Adw.EntryRow(
-            title=_('Search Query URL'),
-            visible=search_presets_el.get_selected() == len(self.presets)
-        )
-        preferences_group.add(self.search_query_url_el)
-        settings.bind('activity-webbrowser-query-url', self.search_query_url_el, 'text', Gio.SettingsBindFlags.DEFAULT)
-
-        self.homepage_url_el = Adw.EntryRow(
-            title=_('Homepage URL'),
-            visible=search_presets_el.get_selected() == len(self.presets)
-        )
-        preferences_group.add(self.homepage_url_el)
-        settings.bind('activity-webbrowser-homepage-url', self.homepage_url_el, 'text', Gio.SettingsBindFlags.DEFAULT)
-
-    def on_preset_change(self, combo, gparam):
-        selected_index = combo.get_selected()
-        if selected_index < len(self.presets):
-            self.search_query_url_el.set_text(self.presets[selected_index][0])
-            self.homepage_url_el.set_text(self.presets[selected_index][1])
-
-        self.search_query_url_el.set_visible(not selected_index < len(self.presets))
-        self.homepage_url_el.set_visible(not selected_index < len(self.presets))

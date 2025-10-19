@@ -174,7 +174,7 @@ class ActivityManager(Adw.Bin):
                 'title': _('Terminal'),
                 'icon': 'terminal-symbolic',
                 'builder': lambda: Terminal(
-                    language='bash',
+                    language='auto',
                     code_getter=lambda: 'bash'
                 ),
                 #runner is optional

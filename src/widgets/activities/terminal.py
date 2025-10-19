@@ -32,14 +32,8 @@ commands = {
         'python -m http.server 8080 --directory "{sourcedir}"'
     ],
     'bash': [
-        'echo "🦙 {}\n"'.format(_('Using Flatpak contained shell...')),
-        'echo "🦙 {}\n"'.format(_('Use \\"{}\\" to use your system shell (Alpaca will need additional permissions)').format('flatpak-spawn --host bash')),
-        '{script}'
-    ] if IN_FLATPAK else ['{script}'],
-    'ssh': [
-        'echo "🦙 {}\n"'.format(_('Using SSH to run command')),
-        '{script}'
-    ]
+        'flatpak-spawn --host \'bash -c "{script}"\''
+    ] if IN_FLATPAK else ["script'"]
 }
 
 if sys.platform != 'win32':
@@ -72,6 +66,8 @@ if sys.platform != 'win32':
                 sensitive=False
             )
             self.reload_button.connect('clicked', lambda button: self.on_reload())
+            if self.close_callback:
+                self.connect('child-exited', lambda *_: self.close_callback())
 
             # Activities
             self.buttons = [self.dir_button, self.reload_button]
@@ -162,11 +158,22 @@ if sys.platform != 'win32':
                     f.write(runtime_code)
                 for command in commands.get('html'):
                     script.append(command.format(sourcedir=self.sourcedir))
-            elif self.language in ('bash', 'ssh'):
-                for command in commands.get(self.language):
-                    script.append(command.format(script=runtime_code))
+            elif self.language in ('bash', 'auto'):
+                settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
+                if settings.get_value('activity-terminal-type').unpack() == 0:
+                    for command in commands.get('bash'):
+                        script.append(command.format(script=runtime_code))
+                else:
+                    runtime_code="ssh -t {}@{} -- '{}'".format(
+                        settings.get_value('activity-terminal-username').unpack() or os.getenv('USER'),
+                        settings.get_value('activity-terminal-ip').unpack() or '127.0.0.1',
+                        runtime_code.replace("'", "\\'")
+                    )
+                    print(runtime_code)
+                    script.append(runtime_code)
 
             script.append('echo -e "\n🦙 {}"'.format(_('Script Exited')))
+            script.append('exit')
             return script
 
         def run(self):
@@ -181,7 +188,7 @@ if sys.platform != 'win32':
                 None,
                 -1,
                 None,
-                None,
+                lambda p, t, u: self.watch_child(p.spawn_finish(t)[1]),
                 None
             )
             self.reload_button.set_sensitive(True)
