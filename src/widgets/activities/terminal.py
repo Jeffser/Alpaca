@@ -169,7 +169,6 @@ if sys.platform != 'win32':
                         settings.get_value('activity-terminal-ip').unpack() or '127.0.0.1',
                         runtime_code.replace("'", "\\'")
                     )
-                    print(runtime_code)
                     script.append(runtime_code)
 
             script.append('echo -e "\n🦙 {}"'.format(_('Script Exited')))

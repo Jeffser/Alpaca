@@ -258,12 +258,12 @@ class BaseInstance:
                 generated_title = generated_title[:30].strip() + '...'
 
             if data.get('emoji'):
-                chat.row.rename(
+                chat.row.edit(
                     new_name='{} {}'.format(data.get('emoji').replace('\n', '').strip(), generated_title),
                     is_template=chat.is_template
                 )
             else:
-                chat.row.rename(
+                chat.row.edit(
                     new_name=generated_title,
                     is_template=chat.is_template
                 )
