@@ -99,7 +99,6 @@ class OptionPopup(Gtk.Popover):
     def regenerate_message(self):
         chat = self.message_element.chat
         model = self.get_root().get_selected_model().get_name()
-        is_tool = any(a.file_type == 'tool' for a in list(self.message_element.attachment_container.container))
         for att in list(self.message_element.image_attachment_container.container):
             SQL.delete_attachment(att)
             att.get_parent().remove(att)
@@ -111,13 +110,21 @@ class OptionPopup(Gtk.Popover):
             self.message_element.author = model
             self.message_element.update_profile_picture()
             self.message_element.popup.change_status(False)
-            if is_tool:
+
+            selected_tool = self.get_root().global_footer.tool_selector.get_selected_item()
+            tools = {}
+            if selected_tool.runnable:
+                tools = {selected_tool.name: selected_tool}
+            elif selected_tool.name == 'auto_tool':
+                tools = {t.name: t for t in list(self.parent_footer.tool_selector.get_model()) if t.runnable}
+
+            if len(tools) > 0:
                 threading.Thread(
                     target=self.get_root().get_current_instance().use_tools,
                     args=(
                         self.message_element,
                         model,
-                        {t.name: t for t in list(self.get_root().global_footer.tool_selector.get_model()) if t.runnable},
+                        tools,
                         True
                     )
                 ).start()
