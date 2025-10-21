@@ -102,7 +102,10 @@ class Camera(Adw.Bin):
             file_type='image',
             file_content=base64.b64encode(picture_bytes).decode('utf-8')
         )
-        self.get_root().get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
+        if self.get_root().get_name() == 'AlpacaQuickAsk':
+            self.get_root().global_footer.attachment_container.add_attachment(attachment)
+        else:
+            self.get_root().get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
 
     def on_close(self):
         self.capture.release()

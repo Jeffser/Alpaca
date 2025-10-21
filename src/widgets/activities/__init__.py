@@ -338,6 +338,9 @@ def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
     if not page or page.get_parent():
         return
 
+    if root.get_name() == 'AlpacaQuickAsk':
+        force_dialog = True
+
     if root.get_name() == 'AlpacaWindow' and root.settings.get_value('activity-mode').unpack() == 0 and not force_dialog:
         tab_page = root.activities_page.get_child().tabview.append(ActivityWrapper(page))
         return tab_page.get_child()
@@ -383,3 +386,4 @@ if importlib.util.find_spec('whisper'):
 
 if importlib.util.find_spec('rembg'):
     ARGUMENT_ACTIVITIES['background-remover'] = BackgroundRemover
+
