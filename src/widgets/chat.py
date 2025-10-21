@@ -176,7 +176,7 @@ class ChatList(Adw.NavigationPage):
         for row in list(self.chat_list_box):
             row.set_visible(re.search(query, row.get_name(), re.IGNORECASE))
 
-        self.update_visibility()
+        self.update_visibility(True)
 
     def update(self):
         self.chat_list_box.remove_all()
@@ -351,16 +351,153 @@ class ChatList(Adw.NavigationPage):
             if model_index and model_index != -1:
                 self.get_root().model_dropdown.set_selected(model_index)
 
-class ChatWelcomePromptContainer(Gtk.Box):
-    __gtype_name__ = 'AlpacaWelcomePromptContainer'
+class TemplateSelectorDialog(Adw.Dialog):
+    __gtype_name__ = 'AlpacaTemplateSelectorDialog'
 
-    def __init__(self, chat, prompts:list):
+    def __init__(self, chat):
         self.chat = chat
+
+        self.flowbox = Gtk.FlowBox(
+            selection_mode=0,
+            css_classes=['flat', 'p10'],
+            max_children_per_line=3,
+            column_spacing=6,
+            row_spacing=6,
+            homogeneous=True
+        )
+
+        self.main_stack = Gtk.Stack(
+            transition_type=1
+        )
+        self.main_stack.add_named(
+            self.flowbox,
+            'content'
+        )
+        self.main_stack.add_named(
+            Adw.StatusPage(
+                title=_('No Templates'),
+                description=_('Add templates by editing a chat')
+            ),
+            'empty'
+        )
+        list(self.main_stack.get_child_by_name('empty'))[0].set_policy(2, 2)
+        self.main_stack.add_named(
+            Adw.StatusPage(
+                title=_('No Results Found'),
+                description=_('Uh oh! No templates found for your search.')
+            ),
+            'no-results'
+        )
+        list(self.main_stack.get_child_by_name('no-results'))[0].set_policy(2, 2)
+
+        tbv = Adw.ToolbarView(
+            content=self.main_stack
+        )
+
+        # Header Bar
+        hb = Adw.HeaderBar()
+        tbv.add_top_bar(hb)
+
+        # Search Bar
+        se = Gtk.SearchEntry()
+        se.connect('search-changed', lambda entry: self.on_search(entry.get_text()))
+        sb = Gtk.SearchBar(
+            child=se
+        )
+        self.search_toggle = Gtk.ToggleButton(
+            icon_name='edit-find-symbolic',
+            tooltip_text=_('Search Template')
+        )
+        self.search_toggle.connect('toggled', lambda btn: sb.set_search_mode(btn.get_active()))
+        hb.pack_start(self.search_toggle)
+        tbv.add_top_bar(sb)
+
         super().__init__(
+            child=tbv,
+            title=_('Template Selector')
+        )
+        self.update()
+
+    def update(self):
+        self.flowbox.remove_all()
+        templates = SQL.get_templates()
+        for t in templates:
+            template_title = GLib.markup_escape_text(t[1])
+            button = Gtk.Button(
+                label=template_title,
+                tooltip_text=_("Use '{}'").format(template_title)
+            )
+            button.connect('clicked', lambda *_, tem_name=t[1], tem_id=t[0]: self.selected_item(tem_name, tem_id))
+            self.flowbox.append(button)
+        self.flowbox.set_max_children_per_line(min(max(len(templates), 1), 3))
+        self.update_visibility()
+
+    def on_search(self, query:str):
+        for child in list(self.flowbox):
+            child.set_visible(re.search(query, child.get_child().get_label(), re.IGNORECASE))
+        self.update_visibility(True)
+
+    def update_visibility(self, searching:bool=False):
+        for child in list(self.flowbox):
+            if child.get_visible():
+                self.main_stack.set_visible_child_name('content')
+                return
+
+        self.main_stack.set_visible_child_name('no-results' if searching else 'empty')
+        self.search_toggle.set_visible(searching)
+
+    def selected_item(self, template_name:str, template_id:str):
+        SQL.duplicate_chat(template_id, self.chat)
+        self.chat.load_messages()
+        self.close()
+
+class ChatWelcomeHelper(Gtk.Box):
+    __gtype_name__ = 'AlpacaChatWelcomeHelper'
+
+    def __init__(self, chat):
+        super().__init__(
+            orientation=1,
+            spacing=10,
+            halign=3
+        )
+
+        self.prompt_bin = Adw.Bin()
+        self.append(self.prompt_bin)
+
+        self.append(Gtk.Separator())
+
+        # CONTROL BOX
+        control_box = Gtk.Box(
+            orientation=0,
+            halign=3,
+            css_classes=['linked']
+        )
+        self.append(control_box)
+
+        refresh_button = Gtk.Button(
+            icon_name='view-refresh-symbolic',
+            tooltip_text=_("Refresh Prompts"),
+            css_classes=["accent"]
+        )
+        refresh_button.connect('clicked', lambda *_: threading.Thread(target=self.update_prompts).start())
+        control_box.append(refresh_button)
+
+        template_button = Gtk.Button(
+            label=_('Use Template'),
+            tooltip_text=_('Use Template')
+        )
+        template_button.connect('clicked', lambda *_: TemplateSelectorDialog(chat).present(self.get_root()))
+        control_box.append(template_button)
+
+        self.connect('realize', lambda *_: threading.Thread(target=self.update_prompts).start())
+
+    def update_prompts(self):
+        container = Gtk.Box(
             orientation=1,
             spacing=5,
             halign=3
         )
+        prompts = random.sample(SAMPLE_PROMPTS, 3)
 
         for prompt in prompts:
             prompt_button = Gtk.Button(
@@ -373,7 +510,9 @@ class ChatWelcomePromptContainer(Gtk.Box):
                 name=prompt
             )
             prompt_button.connect('clicked', lambda *_, prompt=prompt : self.selected_item(prompt))
-            self.append(prompt_button)
+            container.append(prompt_button)
+
+        self.prompt_bin.set_child(container)
 
     def selected_item(self, prompt:str):
         if self.get_root().get_name() == 'AlpacaWindow':
@@ -386,184 +525,6 @@ class ChatWelcomePromptContainer(Gtk.Box):
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
         buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
         self.get_root().send_message()
-
-class ChatWelcomeTemplateContainer(Gtk.Box):
-    __gtype_name__ = 'AlpacaChatWelcomeTemplateContainer'
-
-    def __init__(self, chat, templates:list):
-        self.chat = chat
-        super().__init__(
-            orientation=1,
-            spacing=10,
-            halign=3
-        )
-        self.search_entry = Gtk.SearchEntry(
-            placeholder_text=_('Search templates')
-        )
-        self.search_entry.connect('search-changed', lambda entry: self.on_search(entry.get_text()))
-        self.search_entry.set_key_capture_widget(self)
-        self.append(self.search_entry)
-
-        self.main_stack = Gtk.Stack(
-            transition_type=1
-        )
-        self.append(self.main_stack)
-
-        self.main_container = Gtk.Box(
-            orientation=1,
-            spacing=5,
-            halign=3
-        )
-
-        self.main_stack.add_named(
-            self.main_container,
-            'content'
-        )
-
-        self.main_stack.add_named(
-            Adw.StatusPage(
-                title=_('No Templates'),
-                description=_('Add templates by editing a chat.')
-            ),
-            'empty'
-        )
-        list(self.main_stack.get_child_by_name('empty'))[0].set_policy(2, 2)
-
-        self.main_stack.add_named(
-            Adw.StatusPage(
-                title=_('No Results Found'),
-                description=_('Uh oh! No templates found for your search.')
-            ),
-            'no-results'
-        )
-        list(self.main_stack.get_child_by_name('no-results'))[0].set_policy(2, 2)
-
-        for template in templates:
-            template_button = Gtk.Button(
-                child=Gtk.Label(
-                    label=template[1],
-                    justify=2,
-                    wrap=True
-                ),
-                tooltip_text=_("Use template: '{}'").format(template[1]),
-                name=template[1]
-            )
-            template_button.connect('clicked', lambda *_, tem_name=template[1], tem_id=template[0]: self.selected_item(tem_name, tem_id))
-            self.main_container.append(template_button)
-
-        self.update_visibility(False)
-
-    def on_search(self, query:str):
-        for button in list(self.main_container):
-            button.set_visible(re.search(query, button.get_name(), re.IGNORECASE))
-
-        self.update_visibility(True)
-
-    def update_visibility(self, searching:bool):
-        for button in list(self.main_container):
-            if button.get_visible():
-                self.main_stack.set_visible_child_name('content')
-                return
-
-        self.main_stack.set_visible_child_name('no-results' if searching else 'empty')
-        self.search_entry.set_visible(searching)
-
-    def selected_item(self, template_name:str, template_id:str):
-        SQL.duplicate_chat(template_id, self.chat)
-        self.chat.load_messages()
-
-class ChatWelcomeHelper(Gtk.Box):
-    __gtype_name__ = 'AlpacaChatWelcomeHelper'
-
-    def __init__(self, chat):
-        self.chat = chat
-        super().__init__(
-            orientation=1,
-            spacing=10,
-            halign=3,
-            sensitive=False
-        )
-
-        # CONTROL BOX
-        control_box = Gtk.Box(
-            orientation=0,
-            spacing=5,
-            halign=3
-        )
-
-        self.refresh_button = Gtk.Button(
-            icon_name='view-refresh-symbolic',
-            tooltip_text=_("Refresh"),
-            halign=3,
-            css_classes=["accent"]
-        )
-        self.refresh_button.connect('clicked', lambda *_: threading.Thread(target=self.update_all).start())
-        control_box.append(self.refresh_button)
-        self.main_toggle = Adw.ToggleGroup()
-        self.main_toggle.add(
-            Adw.Toggle(
-                label=_("Prompts"),
-                name='prompts'
-            )
-        )
-        self.main_toggle.add(
-            Adw.Toggle(
-                label=_("Templates"),
-                name='templates'
-            )
-        )
-        self.main_toggle.connect('notify::active', lambda toggle_group, gparam: self.main_stack.set_visible_child_name(toggle_group.get_active_name()))
-        control_box.append(self.main_toggle)
-
-        self.append(control_box)
-        self.append(Gtk.Separator())
-
-        # STACK
-        self.main_stack = Gtk.Stack(
-            transition_type=1
-        )
-        self.append(self.main_stack)
-
-        # SPINNER
-        self.main_stack.add_named(
-            Adw.Spinner(),
-            'loading'
-        )
-
-        # PROMPTS
-        self.prompt_bin = Adw.Bin()
-        self.main_stack.add_named(
-            self.prompt_bin,
-            'prompts'
-        )
-
-        # TEMPLATES
-        self.template_bin = Adw.Bin()
-        self.main_stack.add_named(
-            self.template_bin,
-            'templates'
-        )
-
-        self.connect('realize', lambda *_: threading.Thread(target=self.update_all).start())
-
-    def update_all(self):
-        self.main_stack.set_visible_child_name('loading')
-        self.set_sensitive(False)
-
-        prompts = random.sample(SAMPLE_PROMPTS, 3)
-        self.prompt_bin.set_child(ChatWelcomePromptContainer(
-            chat=self.chat,
-            prompts=prompts
-        ))
-
-        templates = SQL.get_templates()
-        self.template_bin.set_child(ChatWelcomeTemplateContainer(
-            chat=self.chat,
-            templates=templates
-        ))
-
-        self.main_stack.set_visible_child_name(self.main_toggle.get_active_name())
-        self.set_sensitive(True)
 
 class Chat(Gtk.Stack):
     __gtype_name__ = 'AlpacaChat'
@@ -1047,8 +1008,8 @@ class ChatRow(Gtk.ListBoxRow):
         )
         template_switch = Adw.SwitchRow(
             title=_('Use as Template'),
-            css_classes=['card'],
-            active=self.chat.is_template
+            active=self.chat.is_template,
+            activatable=False
         )
 
         d.container.append(template_switch)

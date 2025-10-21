@@ -235,7 +235,7 @@ class ActivityManager(Adw.Bin):
 
         launcher = Adw.StatusPage(
             title=_('Activities'),
-            icon_name='com.jeffser.Alpaca',
+            icon_name='shapes-symbolic',
             child=listbox
         )
         launcher_tbv = Adw.ToolbarView(
