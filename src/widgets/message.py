@@ -420,9 +420,8 @@ class Message(Gtk.Box):
             texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
             image_element = Gtk.Image.new_from_paintable(texture)
             image_element.set_size_request(40, 40)
+            image_element.set_pixel_size(40)
             self.options_button = Gtk.MenuButton(
-                width_request=40,
-                height_request=40,
                 css_classes=['circular', 'flat'],
                 valign=1,
                 popover=self.popup,
@@ -717,6 +716,7 @@ class GlobalFooter(Gtk.Box):
         current_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
         current_text = current_text.replace(text, '')
         buffer.set_text(current_text, len(current_text.encode('utf-8')))
+
 
 
 
