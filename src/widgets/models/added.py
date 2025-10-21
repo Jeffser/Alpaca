@@ -133,8 +133,9 @@ class AddedModelDialog(Adw.Dialog):
         information_container = Gtk.FlowBox(
             selection_mode=0,
             homogeneous=True,
-            row_spacing=10,
-            max_children_per_line=2
+            max_children_per_line=2,
+            row_spacing=6,
+            column_spacing=6
         )
         metadata_container.append(information_container)
         parent_model = self.model.data.get('details', {}).get('parent_model')
@@ -234,7 +235,9 @@ class AddedModelDialog(Adw.Dialog):
         if len(available_models_data.get(self.model.get_name().split(':')[0], {}).get('languages', [])) > 1:
             languages_container = Gtk.FlowBox(
                 max_children_per_line=3,
-                selection_mode=0
+                selection_mode=0,
+                row_spacing=6,
+                column_spacing=6
             )
             for language in ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in available_models_data.get(self.model.get_name().split(':')[0], {}).get('languages', [])]:
                 languages_container.append(CategoryPill(language, True))

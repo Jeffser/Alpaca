@@ -96,7 +96,9 @@ class AvailableModelDialog(Adw.Dialog):
             hexpand=True,
             max_children_per_line=3,
             selection_mode=0,
-            halign=3
+            halign=3,
+            row_spacing=6,
+            column_spacing=6
         )
         model_list = get_local_models(self.model.get_root())
         if len(self.model.data.get('tags', [])) > 0:
@@ -141,7 +143,9 @@ class AvailableModelDialog(Adw.Dialog):
         if len(self.model.data.get('languages', [])) > 1:
             languages_container = Gtk.FlowBox(
                 max_children_per_line=3,
-                selection_mode=0
+                selection_mode=0,
+                row_spacing=6,
+                column_spacing=6
             )
             for language in ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in self.model.data.get('languages', [])]:
                 languages_container.append(CategoryPill(language, True))
