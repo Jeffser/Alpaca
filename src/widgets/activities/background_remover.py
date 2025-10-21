@@ -146,7 +146,6 @@ class BackgroundRemover(Gtk.ScrolledWindow):
         self.stack_switcher = Adw.ToggleGroup(
             halign=3
         )
-        self.stack_switcher.connect('notify::active', lambda toggle_group, gparam: self.image_stack.set_visible_child_name(toggle_group.get_active_name()))
         self.stack_switcher.add(
             Adw.Toggle(
                 label=_("Original"),
@@ -206,6 +205,7 @@ class BackgroundRemover(Gtk.ScrolledWindow):
             tooltip_text=_("Select Image")
         )
         self.select_button.connect('clicked', lambda *_: self.load_image_requested())
+        self.stack_switcher.connect('notify::active', lambda toggle_group, gparam: self.image_stack.set_visible_child_name(toggle_group.get_active_name()))
 
         self.buttons = [self.model_dropdown, self.select_button]
         self.title = _("Background Remover")
