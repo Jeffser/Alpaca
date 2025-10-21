@@ -259,6 +259,10 @@ class Instance:
                     c.cursor.execute("INSERT INTO instance (id, pinned, type, properties) VALUES (?, ?, ?, ?)", (old_ins.get('id'), old_ins.get('pinned'), old_ins.get('type'), json.dumps(properties)))
                 c.cursor.execute("DROP TABLE instances")
 
+            # Remove tool_parameters table
+            if c.cursor.execute("SELECT name FROM sqlite_master WHERE type='table' and name='tool_parameters';").fetchall() != []:
+                c.cursor.execute("DROP TABLE tool_parameters")
+
 
     ###########
     ## CHATS ##
@@ -734,41 +738,6 @@ class Instance:
             c.cursor.execute(
                 "DELETE FROM instance WHERE id=?", (instance_id,)
             )
-
-    ###########
-    ## Tools ##
-    ###########
-
-    def get_tool_parameters() -> dict:
-        with SQLiteConnection() as c:
-            result = c.cursor.execute(
-                "SELECT name, variables, activated FROM tool_parameters"
-            ).fetchall()
-
-        tools = {}
-
-        for row in result:
-            tools[row[0]] = {
-                'variables': json.loads(row[1]),
-                'activated': row[2] != 0
-            }
-
-        return tools
-
-    def insert_or_update_tool_parameters(tool_name:str, variables:dict, activated:bool):
-        with SQLiteConnection() as c:
-            if c.cursor.execute(
-                "SELECT * FROM tool_parameters WHERE name=?", (tool_name,)
-            ).fetchone():
-                c.cursor.execute(
-                    "UPDATE tool_parameters SET variables=?, activated=? WHERE name=?",
-                    (json.dumps(variables), 1 if activated else 0, tool_name)
-                )
-            else:
-                c.cursor.execute(
-                    "INSERT INTO tool_parameters (name, variables, activated) VALUES (?, ?, ?)",
-                    (tool_name, json.dumps(variables), 1 if activated else 0)
-                )
 
     ################################
     ## ONLINE INSTANCE MODEL LIST ##
