@@ -30,11 +30,6 @@ $AdwShortcutsDialog shortcuts_dialog {
     }
 
     $AdwShortcutsItem {
-      title: C_("shortcut window", "Tool Manager");
-      action-name: "app.tool_manager";
-    }
-
-    $AdwShortcutsItem {
       title: C_("shortcut window", "Toggle Sidebar");
       action-name: "app.toggle_sidebar";
     }
@@ -69,8 +64,8 @@ $AdwShortcutsDialog shortcuts_dialog {
     }
 
     $AdwShortcutsItem {
-      title: C_("shortcut window", "Rename Chat");
-      action-name: "app.rename_current_chat";
+      title: C_("shortcut window", "Edit Chat");
+      action-name: "app.edit_current_chat";
     }
 
     $AdwShortcutsItem {
@@ -106,12 +101,6 @@ $AdwShortcutsDialog shortcuts_dialog {
       title: _("Send Message as System");
       subtitle: _("System messages are taken as literal instructions by models");
       accelerator: "<ctl>Return";
-    }
-
-    $AdwShortcutsItem {
-      title: _("Use Tools");
-      subtitle: _("Ask model to use tools to generate a message");
-      accelerator: "<alt>Return";
     }
 
     $AdwShortcutsItem {
