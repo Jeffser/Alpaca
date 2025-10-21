@@ -116,7 +116,7 @@ class OptionPopup(Gtk.Popover):
             if selected_tool.runnable:
                 tools = {selected_tool.name: selected_tool}
             elif selected_tool.name == 'auto_tool':
-                tools = {t.name: t for t in list(self.parent_footer.tool_selector.get_model()) if t.runnable}
+                tools = {t.name: t for t in list(self.get_root().global_footer.tool_selector.get_model()) if t.runnable}
 
             if len(tools) > 0:
                 threading.Thread(
@@ -136,6 +136,8 @@ class OptionPopup(Gtk.Popover):
                         model
                     )
                 ).start()
+
+            self.message_element.main_stack.set_visible_child_name('loading')
         else:
             dialog.show_toast(_("Message cannot be regenerated while receiving a response"), self.get_root())
 

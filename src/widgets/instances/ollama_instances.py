@@ -43,7 +43,6 @@ class BaseInstance:
         chat, messages = self.prepare_chat(bot_message)
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
-        GLib.idle_add(bot_message.block_container.add_css_class, 'dim-label')
         bot_message.block_container.prepare_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
@@ -56,6 +55,7 @@ class BaseInstance:
                 )
             ).start()
 
+        message_response = ''
         try:
             params = {
                 "model": model,
@@ -76,9 +76,9 @@ class BaseInstance:
             for tc in tool_calls:
                 function = tc.get('function')
                 if available_tools.get(function.get('name')):
-                    gen_request, response = available_tools.get(function.get('name')).run(function.get('arguments'), messages, bot_message)
-                    generate_message = generate_message and gen_request
-                    response = str(response)
+                    message_response, tool_response = available_tools.get(function.get('name')).run(function.get('arguments'), messages, bot_message)
+                    generate_message = generate_message and not bool(message_response)
+
                     attachment_content = []
 
                     if len(function.get('arguments', {})) > 0:
@@ -91,7 +91,7 @@ class BaseInstance:
 
                     attachment_content += [
                         '## {}'.format(_('Result')),
-                        response
+                        str(tool_response)
                     ]
 
                     attachment = bot_message.add_attachment(
@@ -107,7 +107,7 @@ class BaseInstance:
                     })
                     messages.append({
                         'role': 'tool',
-                        'content': response
+                        'content': str(tool_response)
                     })
         except Exception as e:
             dialog.simple_error(
@@ -119,11 +119,10 @@ class BaseInstance:
             logger.error(e)
 
         if generate_message:
-            GLib.idle_add(bot_message.block_container.remove_css_class, 'dim-label')
             GLib.idle_add(bot_message.block_container.clear)
             self.generate_response(bot_message, chat, messages, model)
         else:
-            GLib.idle_add(bot_message.block_container.clear)
+            bot_message.block_container.set_content(str(message_response))
             bot_message.finish_generation('')
 
     def generate_response(self, bot_message, chat, messages:list, model:str):

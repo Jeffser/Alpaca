@@ -232,8 +232,9 @@ class WebBrowser(Gtk.ScrolledWindow):
                 soup = BeautifulSoup(raw_html, "html.parser")
                 # I know, really sofisticated
                 results = soup.select('a.result-title') + soup.select('a[data-testid="result-title-a"]') + soup.select('a:has(h3)')
-                result = random.choice(results[5:])
-                GLib.timeout_add(5000, self.webview.load_uri, result["href"])
+                if len(results) > 0:
+                    result = random.choice(results[min(5, len(results)):])
+                    GLib.timeout_add(5000, self.webview.load_uri, result["href"])
 
         def on_search_page_ready():
             GLib.timeout_add(5000, self.extract_html, on_html_extracted)

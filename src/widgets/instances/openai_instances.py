@@ -73,13 +73,12 @@ class BaseInstance:
                 )
             ).start()
 
-        self.generate_response(bot_message, chat, messages, model, None)
+        self.generate_response(bot_message, chat, messages, model)
 
     def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
         chat, messages = self.prepare_chat(bot_message)
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
-        GLib.idle_add(bot_message.block_container.add_css_class, 'dim-label')
         bot_message.block_container.prepare_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
@@ -92,8 +91,7 @@ class BaseInstance:
                 )
             ).start()
 
-        tools_used = []
-
+        message_response = ''
         try:
             completion = self.client.chat.completions.create(
                 model=model,
@@ -104,7 +102,9 @@ class BaseInstance:
                 if completion.choices[0].message.tool_calls:
                     for call in completion.choices[0].message.tool_calls:
                         if available_tools.get(call.function.name):
-                            response = str(available_tools.get(call.function.name).run(json.loads(call.function.arguments), messages, bot_message))
+                            message_response, tool_response = available_tools.get(call.function.name).run(call.function.arguments, messages, bot_message)
+                            generate_message = generate_message and not bool(message_response)
+
                             attachment_content = []
 
                             if len(json.loads(call.function.arguments)) > 0:
@@ -117,7 +117,7 @@ class BaseInstance:
 
                             attachment_content += [
                                 '## {}'.format(_('Result')),
-                                response
+                                tool_response
                             ]
 
                             attachment = bot_message.add_attachment(
@@ -128,18 +128,13 @@ class BaseInstance:
                             )
                             SQL.insert_or_update_attachment(bot_message, attachment)
                         else:
-                            response = ''
+                            tool_response = ''
 
                         arguments = json.loads(call.function.arguments)
                         messages.append({
                             "role": "tool",
                             "tool_call_id": call.id,
-                            "content": response
-                        })
-                        tools_used.append({
-                            "name": call.function.name,
-                            "arguments": arguments,
-                            "response": response
+                            "content": str(tool_response)
                         })
 
         except Exception as e:
@@ -152,13 +147,13 @@ class BaseInstance:
             logger.error(e)
 
         if generate_message:
-            GLib.idle_add(bot_message.block_container.remove_css_class, 'dim-label')
-            self.generate_response(bot_message, chat, messages, model, tools_used if len(tools_used) > 0 else None)
-        else:
             GLib.idle_add(bot_message.block_container.clear)
-            bot_message.finish_generation()
+            self.generate_response(bot_message, chat, messages, model)
+        else:
+            bot_message.block_container.set_content(str(message_response))
+            bot_message.finish_generation('')
 
-    def generate_response(self, bot_message, chat, messages:list, model:str, tools_used:list):
+    def generate_response(self, bot_message, chat, messages:list, model:str):
         if bot_message.options_button:
             bot_message.options_button.set_active(False)
         bot_message.block_container.prepare_generating_block()
@@ -184,9 +179,6 @@ class BaseInstance:
 
         if self.properties.get('max_tokens', 0) > 0:
             params["max_tokens"] = int(self.properties.get('max_tokens', 0))
-        if tools_used:
-            params["tools"] = tools_used
-            params["tool_choice"] = "none"
 
         if self.properties.get("override_parameters"):
             params["temperature"] = self.properties.get('temperature', 0.7)
