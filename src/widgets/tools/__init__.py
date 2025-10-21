@@ -29,10 +29,11 @@ class ToolSelector(Gtk.DropDown):
     def model_changed(self, dropdown):
         if 'tools' in dropdown.get_selected_item().model.data.get('capabilities', ['tools']):
             self.set_sensitive(True)
+            self.set_selected(self.get_root().settings.get_value('default-tool').unpack())
             self.set_tooltip_text(_('Select a Tool To Use'))
         else:
             self.set_sensitive(False)
-            self.set_selected(self.get_root().settings.get_value('default-tool').unpack())
+            self.set_selected(0)
             self.set_tooltip_text(_('Selected Model is Not Compatible With Tools'))
 
     def on_item_setup(self, factory, item):
@@ -55,3 +56,4 @@ class ToolSelector(Gtk.DropDown):
         )
         item.get_child().get_child().append(icon)
         item.get_child().get_child().append(label)
+
