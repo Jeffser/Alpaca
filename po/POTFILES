@@ -1,7 +1,10 @@
 data/com.jeffser.Alpaca.desktop.in
-data/com.jeffser.Alpaca.metainfo.xml.in
 data/com.jeffser.Alpaca.gschema.xml
+data/com.jeffser.Alpaca.metainfo.xml.in
+data/com.jeffser.Alpaca.SearchProvider.desktop.in
+data/com.jeffser.Alpaca.SearchProvider.service.in
 
+src/alpaca.gresource.xml
 src/alpaca.py.in
 src/alpaca_search_provider.py.in
 src/constants.py
@@ -18,6 +21,22 @@ src/ui/shortcuts.blp
 src/ui/welcome.blp
 src/ui/window.blp
 
+src/widgets/activities/background_remover.py
+src/widgets/activities/camera.py
+src/widgets/activities/__init__.py
+src/widgets/activities/live_chat.py
+src/widgets/activities/terminal.py
+src/widgets/activities/transcriber.py
+src/widgets/activities/web_browser.py
+
+
+src/widgets/blocks/code.py
+src/widgets/blocks/__init__.py
+src/widgets/blocks/latex.py
+src/widgets/blocks/separator.py
+src/widgets/blocks/table.py
+src/widgets/blocks/text.py
+
 src/widgets/attachments.py
 src/widgets/chat.py
 src/widgets/dialog.py
@@ -27,24 +46,12 @@ src/widgets/preferences.py
 src/widgets/voice.py
 src/widgets/welcome.py
 
-src/widgets/activities/background_remover.py
-src/widgets/activities/camera.py
-src/widgets/activities/__init__.py
-src/widgets/activities/live_chat.py
-src/widgets/activities/terminal.py
-src/widgets/activities/web_browser.py
-src/widgets/activities/transcriber.py
-
-src/widgets/blocks/code.py
-src/widgets/blocks/__init__.py
-src/widgets/blocks/latex.py
-src/widgets/blocks/separator.py
-src/widgets/blocks/table.py
-src/widgets/blocks/text.py
 
 src/widgets/instances/__init__.py
 src/widgets/instances/ollama_instances.py
 src/widgets/instances/openai_instances.py
+
+
 
 src/widgets/models/added.py
 src/widgets/models/available.py
@@ -55,5 +62,9 @@ src/widgets/models/__init__.py
 src/widgets/models/pulling.py
 src/widgets/models/speech.py
 
+
+
 src/widgets/tools/__init__.py
 src/widgets/tools/tools.py
+
+
