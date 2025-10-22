@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-22 13:11-0600\n"
+"POT-Creation-Date: 2025-10-22 13:18-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2460,6 +2460,10 @@ msgstr ""
 msgid "This is the first public version of Alpaca"
 msgstr ""
 
+#: data/com.jeffser.Alpaca.SearchProvider.desktop.in:3
+msgid "Alpaca Search Provider"
+msgstr ""
+
 #: src/alpaca_search_provider.py.in:41
 msgid "Open chat"
 msgstr ""
@@ -3594,9 +3598,9 @@ msgstr ""
 msgid "Select a type of instance to add"
 msgstr ""
 
-#: src/window.py:210 src/widgets/chat.py:265 src/widgets/chat.py:827
-#: src/widgets/chat.py:994 src/widgets/dialog.py:201 src/widgets/dialog.py:214
-#: src/widgets/dialog.py:227 src/widgets/blocks/text.py:151
+#: src/window.py:210 src/widgets/blocks/text.py:151 src/widgets/chat.py:265
+#: src/widgets/chat.py:827 src/widgets/chat.py:994 src/widgets/dialog.py:201
+#: src/widgets/dialog.py:214 src/widgets/dialog.py:227
 #: src/widgets/instances/__init__.py:357 src/widgets/instances/__init__.py:358
 #: src/widgets/models/added.py:409 src/widgets/models/creator.py:159
 #: src/widgets/models/creator.py:160
@@ -4243,22 +4247,320 @@ msgstr ""
 msgid "Create Model from GGUF File"
 msgstr ""
 
+#: src/widgets/activities/background_remover.py:22
+msgid "Open in Image Viewer"
+msgstr ""
+
+#: src/widgets/activities/background_remover.py:62
+#: src/widgets/attachments.py:628
+msgid "Save Image"
+msgstr ""
+
+#: src/widgets/activities/background_remover.py:83
+#: src/widgets/attachments.py:165 src/widgets/attachments.py:639
+msgid "Download Image"
+msgstr ""
+
+#: src/widgets/activities/background_remover.py:88
+#: src/widgets/attachments.py:174
+msgid "Attach Image"
+msgstr ""
+
+#: src/widgets/activities/background_remover.py:114
+#: src/widgets/activities/background_remover.py:116
+#: src/widgets/activities/background_remover.py:205
+msgid "Select Image"
+msgstr ""
+
+#. ## Input Picture
+#: src/widgets/activities/background_remover.py:151
+#: src/widgets/activities/background_remover.py:165
+msgid "Original"
+msgstr ""
+
+#. ## Output Picture
+#: src/widgets/activities/background_remover.py:157
+#: src/widgets/activities/background_remover.py:172
+#: src/widgets/instances/ollama_instances.py:93
+#: src/widgets/instances/openai_instances.py:119
+msgid "Result"
+msgstr ""
+
+#: src/widgets/activities/background_remover.py:265
+msgid "Download Background Removal Model"
+msgstr ""
+
+#: src/widgets/activities/background_remover.py:266
+#, python-brace-format
+msgid "To use this tool you'll need to download a special model ({})"
+msgstr ""
+
+#: src/widgets/activities/camera.py:30
+msgid "No Camera Detected"
+msgstr ""
+
+#: src/widgets/activities/camera.py:31
+msgid ""
+"Please check if camera is plugged in and turned on, then restart the "
+"activity."
+msgstr ""
+
+#: src/widgets/activities/camera.py:37
+msgid "Capture Picture"
+msgstr ""
+
+#: src/widgets/activities/camera.py:52 src/widgets/activities/__init__.py:189
+msgid "Camera"
+msgstr ""
+
+#: src/widgets/activities/camera.py:101
+msgid "Photo"
+msgstr ""
+
+#: src/widgets/activities/__init__.py:35
+msgid "Close Activity"
+msgstr ""
+
+#: src/widgets/activities/__init__.py:137
+msgid "Detach Activity"
+msgstr ""
+
+#: src/widgets/activities/__init__.py:144
+msgid "Create Activity"
+msgstr ""
+
+#: src/widgets/activities/__init__.py:184
+msgid "Attachment Creator"
+msgstr ""
+
+#. Activity
+#: src/widgets/activities/__init__.py:203
+#: src/widgets/activities/live_chat.py:26
+#: src/widgets/activities/live_chat.py:152
+msgid "Live Chat"
+msgstr ""
+
+#: src/widgets/activities/__init__.py:212
+#: src/widgets/activities/transcriber.py:49
+#: src/widgets/activities/transcriber.py:108
+msgid "Transcriber"
+msgstr ""
+
+#: src/widgets/activities/live_chat.py:29
+msgid "No Messages"
+msgstr ""
+
+#: src/widgets/activities/live_chat.py:30
+msgid "Begin by speaking to the model"
+msgstr ""
+
+#: src/widgets/activities/live_chat.py:57
+msgid "Show Messages"
+msgstr ""
+
+#: src/widgets/activities/live_chat.py:222
+msgid "Selected model is not available"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:19
+msgid "Setting up Python environment..."
+msgstr ""
+
+#: src/widgets/activities/terminal.py:31
+msgid "Using Python HTTP server..."
+msgstr ""
+
+#: src/widgets/activities/terminal.py:57
+msgid "Open Environment Directory"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:64
+msgid "Reload Script"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:174
+msgid "Script Exited"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:234
+msgid "Edit Code"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:242
+msgid "Code Runner"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:267
+msgid "Alpaca Terminal is not compatible with Windows"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:296
+#: src/widgets/activities/terminal.py:379
+msgid "Save Script"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:303
+msgid "New Attachment"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:319
+msgid "Name the Attachment"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:323
+#: src/widgets/activities/terminal.py:324
+msgid "New File"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:374
+msgid "Code Editor"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:385
+msgid "Undo Changes"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:394
+msgid "Changes saved successfully"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:27
+#: src/widgets/activities/transcriber.py:30
+msgid "Microphone"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:37
+#: src/widgets/activities/transcriber.py:40
+msgid "File"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:50
+msgid "Transcribe audio files or your voice."
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:60
+msgid "Transcribing Audio"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:95
+msgid "Transcription"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:100
+#: src/widgets/activities/web_browser.py:52
+msgid "Attach"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:150 src/widgets/voice.py:282
+msgid "Download Speech Recognition Model"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:151 src/widgets/voice.py:283
+#, python-brace-format
+msgid "To use speech recognition you'll need to download a special model ({})"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:153 src/widgets/voice.py:285
+msgid "Download Model"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:170
+msgid "Audio and video files"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:203
+#: src/widgets/activities/transcriber.py:233
+msgid "Transcription Error"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:204 src/widgets/voice.py:215
+msgid "An error occurred while pulling speech recognition model"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:234
+msgid "An error occurred while transcribing audio"
+msgstr ""
+
+#: src/widgets/activities/web_browser.py:25
+msgid "Go Back"
+msgstr ""
+
+#: src/widgets/activities/web_browser.py:32
+msgid "Go Next"
+msgstr ""
+
+#: src/widgets/activities/web_browser.py:38
+msgid "Enter URL..."
+msgstr ""
+
+#: src/widgets/activities/web_browser.py:62
+msgid "Reload Page"
+msgstr ""
+
+#: src/widgets/activities/web_browser.py:66
+msgid "Open in External Browser"
+msgstr ""
+
+#: src/widgets/activities/web_browser.py:70
+msgid "Go to Home"
+msgstr ""
+
+#: src/widgets/blocks/code.py:69
+msgid "Code Block"
+msgstr ""
+
+#: src/widgets/blocks/code.py:84
+msgid "Edit Script"
+msgstr ""
+
+#: src/widgets/blocks/code.py:92
+msgid "Copy Script"
+msgstr ""
+
+#: src/widgets/blocks/code.py:100
+msgid "Download Script"
+msgstr ""
+
+#: src/widgets/blocks/code.py:108
+msgid "Run Script"
+msgstr ""
+
+#: src/widgets/blocks/code.py:163
+msgid "Code copied to the clipboard"
+msgstr ""
+
+#: src/widgets/blocks/code.py:224
+msgid "Script saved successfully"
+msgstr ""
+
+#: src/widgets/blocks/latex.py:41
+msgid "Copy Equation"
+msgstr ""
+
+#: src/widgets/blocks/latex.py:76
+msgid "Equation copied to the clipboard"
+msgstr ""
+
+#: src/widgets/blocks/table.py:70
+msgid "Download Table"
+msgstr ""
+
+#: src/widgets/blocks/table.py:178
+msgid "Table saved successfully"
+msgstr ""
+
+#: src/widgets/blocks/text.py:160 src/widgets/instances/__init__.py:364
+#: src/widgets/instances/__init__.py:365 src/widgets/models/creator.py:166
+#: src/widgets/models/creator.py:167
+msgid "Save"
+msgstr ""
+
 #: src/widgets/attachments.py:110 src/widgets/attachments.py:539
 msgid "Image"
 msgstr ""
 
 #: src/widgets/attachments.py:156 src/widgets/attachments.py:644
 msgid "Remove Image"
-msgstr ""
-
-#: src/widgets/attachments.py:165 src/widgets/attachments.py:639
-#: src/widgets/activities/background_remover.py:83
-msgid "Download Image"
-msgstr ""
-
-#: src/widgets/attachments.py:174
-#: src/widgets/activities/background_remover.py:88
-msgid "Attach Image"
 msgstr ""
 
 #: src/widgets/attachments.py:183
@@ -4300,11 +4602,6 @@ msgstr ""
 
 #: src/widgets/attachments.py:605
 msgid "Delete Image?"
-msgstr ""
-
-#: src/widgets/attachments.py:628
-#: src/widgets/activities/background_remover.py:62
-msgid "Save Image"
 msgstr ""
 
 #: src/widgets/attachments.py:787 src/widgets/message.py:573
@@ -4562,305 +4859,12 @@ msgstr ""
 msgid "Speech Recognition Error"
 msgstr ""
 
-#: src/widgets/voice.py:215 src/widgets/activities/transcriber.py:204
-msgid "An error occurred while pulling speech recognition model"
-msgstr ""
-
 #: src/widgets/voice.py:249
 msgid "An error occurred while using speech recognition"
 msgstr ""
 
-#: src/widgets/voice.py:282 src/widgets/activities/transcriber.py:150
-msgid "Download Speech Recognition Model"
-msgstr ""
-
-#: src/widgets/voice.py:283 src/widgets/activities/transcriber.py:151
-#, python-brace-format
-msgid "To use speech recognition you'll need to download a special model ({})"
-msgstr ""
-
-#: src/widgets/voice.py:285 src/widgets/activities/transcriber.py:153
-msgid "Download Model"
-msgstr ""
-
 #: src/widgets/welcome.py:51
 msgid "Already Installed!"
-msgstr ""
-
-#: src/widgets/activities/background_remover.py:22
-msgid "Open in Image Viewer"
-msgstr ""
-
-#: src/widgets/activities/background_remover.py:114
-#: src/widgets/activities/background_remover.py:116
-#: src/widgets/activities/background_remover.py:205
-msgid "Select Image"
-msgstr ""
-
-#. ## Input Picture
-#: src/widgets/activities/background_remover.py:151
-#: src/widgets/activities/background_remover.py:165
-msgid "Original"
-msgstr ""
-
-#. ## Output Picture
-#: src/widgets/activities/background_remover.py:157
-#: src/widgets/activities/background_remover.py:172
-#: src/widgets/instances/ollama_instances.py:93
-#: src/widgets/instances/openai_instances.py:119
-msgid "Result"
-msgstr ""
-
-#: src/widgets/activities/background_remover.py:265
-msgid "Download Background Removal Model"
-msgstr ""
-
-#: src/widgets/activities/background_remover.py:266
-#, python-brace-format
-msgid "To use this tool you'll need to download a special model ({})"
-msgstr ""
-
-#: src/widgets/activities/camera.py:30
-msgid "No Camera Detected"
-msgstr ""
-
-#: src/widgets/activities/camera.py:31
-msgid ""
-"Please check if camera is plugged in and turned on, then restart the "
-"activity."
-msgstr ""
-
-#: src/widgets/activities/camera.py:37
-msgid "Capture Picture"
-msgstr ""
-
-#: src/widgets/activities/camera.py:52 src/widgets/activities/__init__.py:189
-msgid "Camera"
-msgstr ""
-
-#: src/widgets/activities/camera.py:101
-msgid "Photo"
-msgstr ""
-
-#: src/widgets/activities/__init__.py:35
-msgid "Close Activity"
-msgstr ""
-
-#: src/widgets/activities/__init__.py:137
-msgid "Detach Activity"
-msgstr ""
-
-#: src/widgets/activities/__init__.py:144
-msgid "Create Activity"
-msgstr ""
-
-#: src/widgets/activities/__init__.py:184
-msgid "Attachment Creator"
-msgstr ""
-
-#. Activity
-#: src/widgets/activities/__init__.py:203
-#: src/widgets/activities/live_chat.py:26
-#: src/widgets/activities/live_chat.py:152
-msgid "Live Chat"
-msgstr ""
-
-#: src/widgets/activities/__init__.py:212
-#: src/widgets/activities/transcriber.py:49
-#: src/widgets/activities/transcriber.py:108
-msgid "Transcriber"
-msgstr ""
-
-#: src/widgets/activities/live_chat.py:29
-msgid "No Messages"
-msgstr ""
-
-#: src/widgets/activities/live_chat.py:30
-msgid "Begin by speaking to the model"
-msgstr ""
-
-#: src/widgets/activities/live_chat.py:57
-msgid "Show Messages"
-msgstr ""
-
-#: src/widgets/activities/live_chat.py:222
-msgid "Selected model is not available"
-msgstr ""
-
-#: src/widgets/activities/terminal.py:19
-msgid "Setting up Python environment..."
-msgstr ""
-
-#: src/widgets/activities/terminal.py:31
-msgid "Using Python HTTP server..."
-msgstr ""
-
-#: src/widgets/activities/terminal.py:57
-msgid "Open Environment Directory"
-msgstr ""
-
-#: src/widgets/activities/terminal.py:64
-msgid "Reload Script"
-msgstr ""
-
-#: src/widgets/activities/terminal.py:174
-msgid "Script Exited"
-msgstr ""
-
-#: src/widgets/activities/terminal.py:234
-msgid "Edit Code"
-msgstr ""
-
-#: src/widgets/activities/terminal.py:242
-msgid "Code Runner"
-msgstr ""
-
-#: src/widgets/activities/terminal.py:267
-msgid "Alpaca Terminal is not compatible with Windows"
-msgstr ""
-
-#: src/widgets/activities/terminal.py:296
-#: src/widgets/activities/terminal.py:379
-msgid "Save Script"
-msgstr ""
-
-#: src/widgets/activities/terminal.py:303
-msgid "New Attachment"
-msgstr ""
-
-#: src/widgets/activities/terminal.py:319
-msgid "Name the Attachment"
-msgstr ""
-
-#: src/widgets/activities/terminal.py:323
-#: src/widgets/activities/terminal.py:324
-msgid "New File"
-msgstr ""
-
-#: src/widgets/activities/terminal.py:374
-msgid "Code Editor"
-msgstr ""
-
-#: src/widgets/activities/terminal.py:385
-msgid "Undo Changes"
-msgstr ""
-
-#: src/widgets/activities/terminal.py:394
-msgid "Changes saved successfully"
-msgstr ""
-
-#: src/widgets/activities/web_browser.py:25
-msgid "Go Back"
-msgstr ""
-
-#: src/widgets/activities/web_browser.py:32
-msgid "Go Next"
-msgstr ""
-
-#: src/widgets/activities/web_browser.py:38
-msgid "Enter URL..."
-msgstr ""
-
-#: src/widgets/activities/web_browser.py:52
-#: src/widgets/activities/transcriber.py:100
-msgid "Attach"
-msgstr ""
-
-#: src/widgets/activities/web_browser.py:62
-msgid "Reload Page"
-msgstr ""
-
-#: src/widgets/activities/web_browser.py:66
-msgid "Open in External Browser"
-msgstr ""
-
-#: src/widgets/activities/web_browser.py:70
-msgid "Go to Home"
-msgstr ""
-
-#: src/widgets/activities/transcriber.py:27
-#: src/widgets/activities/transcriber.py:30
-msgid "Microphone"
-msgstr ""
-
-#: src/widgets/activities/transcriber.py:37
-#: src/widgets/activities/transcriber.py:40
-msgid "File"
-msgstr ""
-
-#: src/widgets/activities/transcriber.py:50
-msgid "Transcribe audio files or your voice."
-msgstr ""
-
-#: src/widgets/activities/transcriber.py:60
-msgid "Transcribing Audio"
-msgstr ""
-
-#: src/widgets/activities/transcriber.py:95
-msgid "Transcription"
-msgstr ""
-
-#: src/widgets/activities/transcriber.py:170
-msgid "Audio and video files"
-msgstr ""
-
-#: src/widgets/activities/transcriber.py:203
-#: src/widgets/activities/transcriber.py:233
-msgid "Transcription Error"
-msgstr ""
-
-#: src/widgets/activities/transcriber.py:234
-msgid "An error occurred while transcribing audio"
-msgstr ""
-
-#: src/widgets/blocks/code.py:69
-msgid "Code Block"
-msgstr ""
-
-#: src/widgets/blocks/code.py:84
-msgid "Edit Script"
-msgstr ""
-
-#: src/widgets/blocks/code.py:92
-msgid "Copy Script"
-msgstr ""
-
-#: src/widgets/blocks/code.py:100
-msgid "Download Script"
-msgstr ""
-
-#: src/widgets/blocks/code.py:108
-msgid "Run Script"
-msgstr ""
-
-#: src/widgets/blocks/code.py:163
-msgid "Code copied to the clipboard"
-msgstr ""
-
-#: src/widgets/blocks/code.py:224
-msgid "Script saved successfully"
-msgstr ""
-
-#: src/widgets/blocks/latex.py:41
-msgid "Copy Equation"
-msgstr ""
-
-#: src/widgets/blocks/latex.py:76
-msgid "Equation copied to the clipboard"
-msgstr ""
-
-#: src/widgets/blocks/table.py:70
-msgid "Download Table"
-msgstr ""
-
-#: src/widgets/blocks/table.py:178
-msgid "Table saved successfully"
-msgstr ""
-
-#: src/widgets/blocks/text.py:160 src/widgets/instances/__init__.py:364
-#: src/widgets/instances/__init__.py:365 src/widgets/models/creator.py:166
-#: src/widgets/models/creator.py:167
-msgid "Save"
 msgstr ""
 
 #: src/widgets/instances/__init__.py:32 src/widgets/instances/__init__.py:35
