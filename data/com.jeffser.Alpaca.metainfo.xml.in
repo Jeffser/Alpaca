@@ -89,6 +89,30 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="8.2.0" date="2025-10-22">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/8.2.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>New feature: Chat templates</li>
+          <li>New command line arguments</li>
+          <li>New system for tools with manual selector</li>
+          <li>Improved transcriber tool</li>
+          <li>Added option to delete all chats</li>
+          <li>Added option to export tables as spreadsheets</li>
+          <li>Added option to export code scripts directly</li>
+          <li>General redesign of UI</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed error when filtering models being pulled</li>
+          <li>Fixed random crashes on startup caused by the model fetcher</li>
+          <li>Fixed camera activity not working properly in Quick Ask</li>
+          <li>Restore xlsx support</li>
+          <li>Added socket support to httpx library</li>
+        </ul>
+      </description>
+    </release>
     <release version="8.1.1" date="2025-09-14">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/8.1.1</url>
       <description>
