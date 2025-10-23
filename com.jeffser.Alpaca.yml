@@ -307,7 +307,7 @@ modules:
     buildsystem: simple
     build-commands:
       - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
-        --prefix=${FLATPAK_DEST} --no-build-isolation markitdown[pptx,docx,pdf,youtube-transcription]
+        --prefix=${FLATPAK_DEST} --no-build-isolation pandas markitdown[pptx,docx,pdf,youtube-transcription]
     sources:
       - type: file
         url: https://files.pythonhosted.org/packages/04/eb/f4151e0c7377a6e08a38108609ba5cede57986802757848688aeedd1b9e8/beautifulsoup4-4.13.5-py3-none-any.whl
