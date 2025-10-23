@@ -5810,14 +5810,6 @@ OLLAMA_MODELS = {
                 [
                         "120b",
                         "65 GB"
-                ],
-                [
-                        "20b-cloud",
-                        "-"
-                ],
-                [
-                        "120b-cloud",
-                        "-"
                 ]
         ],
         "description": _("OpenAI’s open-weight models designed for powerful reasoning, agentic tasks, and versatile developer use cases."),
@@ -5829,7 +5821,6 @@ OLLAMA_MODELS = {
         "languages": [
                 "en"
         ],
-        "vision": false,
     },
     "qwen3-coder": {
         "tags": [
@@ -5844,10 +5835,6 @@ OLLAMA_MODELS = {
                 [
                         "480b",
                         "290 GB"
-                ],
-                [
-                        "480b-cloud",
-                        "-"
                 ]
         ],
         "description": _("Alibaba's performant long context models for agentic and coding tasks."),
@@ -5859,7 +5846,6 @@ OLLAMA_MODELS = {
         "languages": [
                 "en"
         ],
-        "vision": false,
     },
     "embeddinggemma": {
         "tags": [
@@ -5920,10 +5906,6 @@ OLLAMA_MODELS = {
                 [
                         "671b",
                         "404 GB"
-                ],
-                [
-                        "671b-cloud",
-                        "-"
                 ]
         ],
         "description": _("DeepSeek-V3.1-Terminus is a hybrid model that supports both thinking mode and non-thinking mode."),
@@ -5935,35 +5917,6 @@ OLLAMA_MODELS = {
         "languages": [
                 "en"
         ],
-        "vision": false,
-    },
-    "qwen3-vl": {
-        "tags": [
-                [
-                        "235b-cloud",
-                        "-"
-                ]
-        ],
-        "description": _("The most powerful vision-language model in the Qwen model family to date."),
-        "vision": true,
-        "url": "https://ollama.com/library/qwen3-vl",
-        "categories": [
-                "vision"
-        ],
-        "author": "Qwen Team",
-    },
-    "glm-4.6": {
-        "tags": [
-                [
-                        "cloud",
-                        "-"
-                ]
-        ],
-        "description": _("Advanced agentic, reasoning and coding capabilities."),
-        "vision": false,
-        "url": "https://ollama.com/library/glm-4.6",
-        "categories": [],
-        "author": "THUDM",
     },
     "qwen3-embedding": {
         "tags": [
