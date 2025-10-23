@@ -213,12 +213,17 @@ OLLAMA_MODELS = {
                 [
                         "v1.5",
                         "274 MB"
+                ],
+                [
+                        "137m-v1.5-fp16",
+                        "274 MB"
                 ]
         ],
         "author": "Nomic AI",
         "categories": [
                 "small",
                 "medium",
+                "big",
                 "embedding",
                 "code"
         ],
@@ -1756,13 +1761,142 @@ OLLAMA_MODELS = {
                 [
                         "v2.5",
                         "4.1 GB"
+                ],
+                [
+                        "7b-mistral-v2-q2_K",
+                        "3.1 GB"
+                ],
+                [
+                        "7b-mistral-v2-q3_K_S",
+                        "3.2 GB"
+                ],
+                [
+                        "7b-mistral-v2-q3_K_M",
+                        "3.5 GB"
+                ],
+                [
+                        "7b-mistral-v2-q3_K_L",
+                        "3.8 GB"
+                ],
+                [
+                        "7b-mistral-v2-q4_0",
+                        "4.1 GB"
+                ],
+                [
+                        "7b-mistral-v2-q4_1",
+                        "4.6 GB"
+                ],
+                [
+                        "7b-mistral-v2-q4_K_S",
+                        "4.1 GB"
+                ],
+                [
+                        "7b-mistral-v2-q4_K_M",
+                        "4.4 GB"
+                ],
+                [
+                        "7b-mistral-v2-q5_0",
+                        "5.0 GB"
+                ],
+                [
+                        "7b-mistral-v2-q5_1",
+                        "5.4 GB"
+                ],
+                [
+                        "7b-mistral-v2-q5_K_S",
+                        "5.0 GB"
+                ],
+                [
+                        "7b-mistral-v2-q5_K_M",
+                        "5.1 GB"
+                ],
+                [
+                        "7b-mistral-v2-q6_K",
+                        "5.9 GB"
+                ],
+                [
+                        "7b-mistral-v2-q8_0",
+                        "7.7 GB"
+                ],
+                [
+                        "7b-mistral-v2-fp16",
+                        "14 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q2_K",
+                        "3.1 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q3_K_S",
+                        "3.2 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q3_K_M",
+                        "3.5 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q3_K_L",
+                        "3.8 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q4_0",
+                        "4.1 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q4_1",
+                        "4.6 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q4_K_S",
+                        "4.1 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q4_K_M",
+                        "4.4 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q5_0",
+                        "5.0 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q5_1",
+                        "5.4 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q5_K_S",
+                        "5.0 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q5_K_M",
+                        "5.1 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q6_K",
+                        "5.9 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-q8_0",
+                        "7.7 GB"
+                ],
+                [
+                        "7b-mistral-v2.5-fp16",
+                        "14 GB"
+                ],
+                [
+                        "7b-v2",
+                        "4.1 GB"
+                ],
+                [
+                        "7b-v2.5",
+                        "4.1 GB"
                 ]
         ],
         "author": "Teknium",
         "categories": [
                 "small",
                 "medium",
-                "big"
+                "big",
+                "huge"
         ],
         "languages": [
                 "en"
@@ -2265,13 +2399,294 @@ OLLAMA_MODELS = {
                 [
                         "7b-q3_K_M",
                         "3.3 GB"
+                ],
+                [
+                        "7b-q3_K_L",
+                        "3.6 GB"
+                ],
+                [
+                        "7b-q4_0",
+                        "3.8 GB"
+                ],
+                [
+                        "7b-q4_1",
+                        "4.2 GB"
+                ],
+                [
+                        "7b-q4_K_S",
+                        "3.9 GB"
+                ],
+                [
+                        "7b-q4_K_M",
+                        "4.1 GB"
+                ],
+                [
+                        "7b-q5_0",
+                        "4.7 GB"
+                ],
+                [
+                        "7b-q5_1",
+                        "5.1 GB"
+                ],
+                [
+                        "7b-q5_K_S",
+                        "4.7 GB"
+                ],
+                [
+                        "7b-q5_K_M",
+                        "4.8 GB"
+                ],
+                [
+                        "7b-q6_K",
+                        "5.5 GB"
+                ],
+                [
+                        "7b-q8_0",
+                        "7.2 GB"
+                ],
+                [
+                        "7b-fp16",
+                        "13 GB"
+                ],
+                [
+                        "13b-llama2-q2_K",
+                        "5.4 GB"
+                ],
+                [
+                        "13b-llama2-q3_K_S",
+                        "5.7 GB"
+                ],
+                [
+                        "13b-llama2-q3_K_M",
+                        "6.3 GB"
+                ],
+                [
+                        "13b-llama2-q3_K_L",
+                        "6.9 GB"
+                ],
+                [
+                        "13b-llama2-q4_0",
+                        "7.4 GB"
+                ],
+                [
+                        "13b-llama2-q4_1",
+                        "8.2 GB"
+                ],
+                [
+                        "13b-llama2-q4_K_S",
+                        "7.4 GB"
+                ],
+                [
+                        "13b-llama2-q4_K_M",
+                        "7.9 GB"
+                ],
+                [
+                        "13b-llama2-q5_0",
+                        "9.0 GB"
+                ],
+                [
+                        "13b-llama2-q5_1",
+                        "9.8 GB"
+                ],
+                [
+                        "13b-llama2-q5_K_S",
+                        "9.0 GB"
+                ],
+                [
+                        "13b-llama2-q5_K_M",
+                        "9.2 GB"
+                ],
+                [
+                        "13b-llama2-q6_K",
+                        "11 GB"
+                ],
+                [
+                        "13b-llama2-q8_0",
+                        "14 GB"
+                ],
+                [
+                        "13b-llama2-fp16",
+                        "26 GB"
+                ],
+                [
+                        "13b-q2_K",
+                        "5.4 GB"
+                ],
+                [
+                        "13b-q3_K_S",
+                        "5.7 GB"
+                ],
+                [
+                        "13b-q3_K_M",
+                        "6.3 GB"
+                ],
+                [
+                        "13b-q3_K_L",
+                        "6.9 GB"
+                ],
+                [
+                        "13b-q4_0",
+                        "7.4 GB"
+                ],
+                [
+                        "13b-q4_1",
+                        "8.2 GB"
+                ],
+                [
+                        "13b-q4_K_S",
+                        "7.4 GB"
+                ],
+                [
+                        "13b-q4_K_M",
+                        "7.9 GB"
+                ],
+                [
+                        "13b-q5_0",
+                        "9.0 GB"
+                ],
+                [
+                        "13b-q5_1",
+                        "9.8 GB"
+                ],
+                [
+                        "13b-q5_K_S",
+                        "9.0 GB"
+                ],
+                [
+                        "13b-q5_K_M",
+                        "9.2 GB"
+                ],
+                [
+                        "13b-q6_K",
+                        "11 GB"
+                ],
+                [
+                        "13b-q8_0",
+                        "14 GB"
+                ],
+                [
+                        "13b-fp16",
+                        "26 GB"
+                ],
+                [
+                        "30b-q2_K",
+                        "14 GB"
+                ],
+                [
+                        "30b-q3_K_S",
+                        "14 GB"
+                ],
+                [
+                        "30b-q3_K_M",
+                        "16 GB"
+                ],
+                [
+                        "30b-q3_K_L",
+                        "17 GB"
+                ],
+                [
+                        "30b-q4_0",
+                        "18 GB"
+                ],
+                [
+                        "30b-q4_1",
+                        "20 GB"
+                ],
+                [
+                        "30b-q4_K_S",
+                        "18 GB"
+                ],
+                [
+                        "30b-q4_K_M",
+                        "20 GB"
+                ],
+                [
+                        "30b-q5_0",
+                        "22 GB"
+                ],
+                [
+                        "30b-q5_1",
+                        "24 GB"
+                ],
+                [
+                        "30b-q5_K_S",
+                        "22 GB"
+                ],
+                [
+                        "30b-q5_K_M",
+                        "23 GB"
+                ],
+                [
+                        "30b-q6_K",
+                        "27 GB"
+                ],
+                [
+                        "30b-q8_0",
+                        "35 GB"
+                ],
+                [
+                        "30b-fp16",
+                        "65 GB"
+                ],
+                [
+                        "70b-llama2-q2_K",
+                        "29 GB"
+                ],
+                [
+                        "70b-llama2-q3_K_S",
+                        "30 GB"
+                ],
+                [
+                        "70b-llama2-q3_K_M",
+                        "33 GB"
+                ],
+                [
+                        "70b-llama2-q3_K_L",
+                        "36 GB"
+                ],
+                [
+                        "70b-llama2-q4_0",
+                        "39 GB"
+                ],
+                [
+                        "70b-llama2-q4_1",
+                        "43 GB"
+                ],
+                [
+                        "70b-llama2-q4_K_S",
+                        "39 GB"
+                ],
+                [
+                        "70b-llama2-q4_K_M",
+                        "41 GB"
+                ],
+                [
+                        "70b-llama2-q5_0",
+                        "47 GB"
+                ],
+                [
+                        "70b-llama2-q5_K_S",
+                        "47 GB"
+                ],
+                [
+                        "70b-llama2-q5_K_M",
+                        "49 GB"
+                ],
+                [
+                        "70b-llama2-q6_K",
+                        "57 GB"
+                ],
+                [
+                        "70b-llama2-q8_0",
+                        "73 GB"
                 ]
         ],
         "author": "WizardLM Team",
         "categories": [
                 "small",
                 "medium",
-                "big"
+                "big",
+                "huge"
         ],
         "languages": [
                 "en"
@@ -2810,6 +3225,126 @@ OLLAMA_MODELS = {
                 [
                         "text",
                         "4.7 GB"
+                ],
+                [
+                        "8b-instruct-q2_K",
+                        "3.5 GB"
+                ],
+                [
+                        "8b-instruct-q3_K_S",
+                        "3.6 GB"
+                ],
+                [
+                        "8b-instruct-q3_K_M",
+                        "4.1 GB"
+                ],
+                [
+                        "8b-instruct-q3_K_L",
+                        "4.5 GB"
+                ],
+                [
+                        "8b-instruct-q4_0",
+                        "4.7 GB"
+                ],
+                [
+                        "8b-instruct-q4_1",
+                        "5.3 GB"
+                ],
+                [
+                        "8b-instruct-q4_K_S",
+                        "4.8 GB"
+                ],
+                [
+                        "8b-instruct-q4_K_M",
+                        "5.1 GB"
+                ],
+                [
+                        "8b-instruct-q5_0",
+                        "5.8 GB"
+                ],
+                [
+                        "8b-instruct-q5_1",
+                        "6.3 GB"
+                ],
+                [
+                        "8b-instruct-q5_K_S",
+                        "5.8 GB"
+                ],
+                [
+                        "8b-instruct-q5_K_M",
+                        "5.9 GB"
+                ],
+                [
+                        "8b-instruct-q6_K",
+                        "6.9 GB"
+                ],
+                [
+                        "8b-instruct-q8_0",
+                        "8.9 GB"
+                ],
+                [
+                        "8b-instruct-fp16",
+                        "17 GB"
+                ],
+                [
+                        "8b-text-q2_K",
+                        "3.5 GB"
+                ],
+                [
+                        "8b-text-q3_K_S",
+                        "3.6 GB"
+                ],
+                [
+                        "8b-text-q3_K_M",
+                        "4.1 GB"
+                ],
+                [
+                        "8b-text-q3_K_L",
+                        "4.5 GB"
+                ],
+                [
+                        "8b-text-q4_0",
+                        "4.7 GB"
+                ],
+                [
+                        "8b-text-q4_1",
+                        "5.3 GB"
+                ],
+                [
+                        "8b-text-q4_K_S",
+                        "4.8 GB"
+                ],
+                [
+                        "8b-text-q4_K_M",
+                        "5.1 GB"
+                ],
+                [
+                        "8b-text-q5_0",
+                        "5.8 GB"
+                ],
+                [
+                        "8b-text-q5_1",
+                        "6.3 GB"
+                ],
+                [
+                        "8b-text-q5_K_S",
+                        "5.8 GB"
+                ],
+                [
+                        "8b-text-q5_K_M",
+                        "5.9 GB"
+                ],
+                [
+                        "8b-text-q6_K",
+                        "6.9 GB"
+                ],
+                [
+                        "8b-text-q8_0",
+                        "8.9 GB"
+                ],
+                [
+                        "8b-text-fp16",
+                        "17 GB"
                 ]
         ],
         "author": "Tencent",
@@ -2817,6 +3352,7 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "big",
+                "huge",
                 "math"
         ],
         "languages": [
@@ -3374,6 +3910,66 @@ OLLAMA_MODELS = {
                 [
                         "latest",
                         "66 GB"
+                ],
+                [
+                        "120b-q2_K",
+                        "50 GB"
+                ],
+                [
+                        "120b-q3_K_S",
+                        "51 GB"
+                ],
+                [
+                        "120b-q3_K_M",
+                        "56 GB"
+                ],
+                [
+                        "120b-q3_K_L",
+                        "62 GB"
+                ],
+                [
+                        "120b-q4_0",
+                        "66 GB"
+                ],
+                [
+                        "120b-q4_1",
+                        "74 GB"
+                ],
+                [
+                        "120b-q4_K_S",
+                        "66 GB"
+                ],
+                [
+                        "120b-q4_K_M",
+                        "71 GB"
+                ],
+                [
+                        "120b-q5_0",
+                        "81 GB"
+                ],
+                [
+                        "120b-q5_1",
+                        "88 GB"
+                ],
+                [
+                        "120b-q5_K_S",
+                        "81 GB"
+                ],
+                [
+                        "120b-q5_K_M",
+                        "83 GB"
+                ],
+                [
+                        "120b-q6_K",
+                        "97 GB"
+                ],
+                [
+                        "120b-q8_0",
+                        "125 GB"
+                ],
+                [
+                        "120b-fp16",
+                        "236 GB"
                 ]
         ],
         "author": "Alpindale",
@@ -5214,19 +5810,26 @@ OLLAMA_MODELS = {
                 [
                         "120b",
                         "65 GB"
+                ],
+                [
+                        "20b-cloud",
+                        "-"
+                ],
+                [
+                        "120b-cloud",
+                        "-"
                 ]
         ],
         "description": _("OpenAI’s open-weight models designed for powerful reasoning, agentic tasks, and versatile developer use cases."),
         "url": "https://ollama.com/library/gpt-oss",
         "categories": [
-                "tools",
-                "big",
-                "huge"
+                "tools"
         ],
         "author": "OpenAI",
         "languages": [
                 "en"
         ],
+        "vision": false,
     },
     "qwen3-coder": {
         "tags": [
@@ -5241,19 +5844,22 @@ OLLAMA_MODELS = {
                 [
                         "480b",
                         "290 GB"
+                ],
+                [
+                        "480b-cloud",
+                        "-"
                 ]
         ],
         "description": _("Alibaba's performant long context models for agentic and coding tasks."),
         "url": "https://ollama.com/library/qwen3-coder",
         "categories": [
-                "big",
-                "huge",
-                "code"
+                "tools"
         ],
         "author": "Alibaba",
         "languages": [
                 "en"
         ],
+        "vision": false,
     },
     "embeddinggemma": {
         "tags": [
@@ -5314,17 +5920,144 @@ OLLAMA_MODELS = {
                 [
                         "671b",
                         "404 GB"
+                ],
+                [
+                        "671b-cloud",
+                        "-"
                 ]
         ],
-        "description": _("DeepSeek-V3.1 is a hybrid model that supports both thinking mode and non-thinking mode."),
+        "description": _("DeepSeek-V3.1-Terminus is a hybrid model that supports both thinking mode and non-thinking mode."),
         "url": "https://ollama.com/library/deepseek-v3.1",
         "categories": [
-                "tools",
-                "huge"
+                "tools"
         ],
         "author": "DeepSeek Team",
         "languages": [
                 "en"
+        ],
+        "vision": false,
+    },
+    "qwen3-vl": {
+        "tags": [
+                [
+                        "235b-cloud",
+                        "-"
+                ]
+        ],
+        "description": _("The most powerful vision-language model in the Qwen model family to date."),
+        "vision": true,
+        "url": "https://ollama.com/library/qwen3-vl",
+        "categories": [
+                "vision"
+        ],
+        "author": "Qwen Team",
+    },
+    "glm-4.6": {
+        "tags": [
+                [
+                        "cloud",
+                        "-"
+                ]
+        ],
+        "description": _("Advanced agentic, reasoning and coding capabilities."),
+        "vision": false,
+        "url": "https://ollama.com/library/glm-4.6",
+        "categories": [],
+        "author": "THUDM",
+    },
+    "qwen3-embedding": {
+        "tags": [
+                [
+                        "latest",
+                        "4.7 GB"
+                ],
+                [
+                        "0.6b",
+                        "639 MB"
+                ],
+                [
+                        "4b",
+                        "2.5 GB"
+                ],
+                [
+                        "8b",
+                        "4.7 GB"
+                ]
+        ],
+        "description": _("Building upon the foundational models of the Qwen3 series, Qwen3 Embedding provides a comprehensive range of text embeddings models in various sizes"),
+        "url": "https://ollama.com/library/qwen3-embedding",
+        "categories": [
+                "small",
+                "medium",
+                "big",
+                "huge",
+                "embedding",
+                "code",
+                "multilingual"
+        ],
+        "author": "Qwen Team",
+        "languages": [
+                "en",
+                "de",
+                "es",
+                "fr",
+                "ja",
+                "pt",
+                "ar",
+                "cs",
+                "it",
+                "ko",
+                "nl",
+                "zh"
+        ],
+    },
+    "granite4": {
+        "tags": [
+                [
+                        "latest",
+                        "2.1 GB"
+                ],
+                [
+                        "micro",
+                        "2.1 GB"
+                ],
+                [
+                        "micro-h",
+                        "1.9 GB"
+                ],
+                [
+                        "small-h",
+                        "19 GB"
+                ],
+                [
+                        "tiny-h",
+                        "4.2 GB"
+                ]
+        ],
+        "description": _("Granite 4 features improved instruction following (IF) and tool-calling capabilities, making them more effective in enterprise applications."),
+        "url": "https://ollama.com/library/granite4",
+        "categories": [
+                "tools",
+                "small",
+                "medium",
+                "big",
+                "huge",
+                "multilingual"
+        ],
+        "author": "IBM Research",
+        "languages": [
+                "en",
+                "de",
+                "es",
+                "fr",
+                "ja",
+                "pt",
+                "ar",
+                "cs",
+                "it",
+                "ko",
+                "nl",
+                "zh"
         ],
     },
 }
