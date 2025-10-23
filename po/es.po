@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-22 13:18-0600\n"
+"POT-Creation-Date: 2025-10-22 19:52-0600\n"
 "PO-Revision-Date: 2024-05-19 19:44-0600\n"
 "Last-Translator: Jeffry Samuel Eduarte Rojas <jeffrysamuer@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -267,8 +267,9 @@ msgstr "Se corrigieron fallas aleatorias en el inicio causadas por modelos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:110
 msgid "Fixed camera activity not working properly in Quick Ask"
-msgstr "Se corrigió la actividad de la cámara que no funcionaba "
-"correctamente en Quick Ask"
+msgstr ""
+"Se corrigió la actividad de la cámara que no funcionaba correctamente en "
+"Quick Ask"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:111
 msgid "Restore xlsx support"
@@ -2670,14 +2671,14 @@ msgstr "Meta Llama 3: El LLM abierto más capaz a esta fecha."
 msgid "The 7B model released by Mistral AI, updated to version 0.3."
 msgstr "El modelo 7B lanzado por Mistral AI, actualizado a la versión 0.3."
 
-#: src/ollama_models.py:228
+#: src/ollama_models.py:233
 msgid ""
 "A high-performing open embedding model with a large token context window."
 msgstr ""
 "Un modelo de integración abierto de alto rendimiento con una gran ventana de "
 "contexto de token."
 
-#: src/ollama_models.py:257
+#: src/ollama_models.py:262
 msgid ""
 "Gemma is a family of lightweight, state-of-the-art open models built by "
 "Google DeepMind. Updated to version 1.1"
@@ -2685,7 +2686,7 @@ msgstr ""
 "Gemma es una familia de nuevos modelos abiertos livianos construidos por "
 "Google DeepMind. Actualizado a la versión 1.1."
 
-#: src/ollama_models.py:313
+#: src/ollama_models.py:318
 msgid ""
 "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
 "0.5B to 110B parameters"
@@ -2693,11 +2694,11 @@ msgstr ""
 "Qwen 1.5 es una serie de LLM por Alibaba Cloud que cubren parametros entre "
 "0.5B hasta 110B."
 
-#: src/ollama_models.py:377
+#: src/ollama_models.py:382
 msgid "Qwen2 is a new series of large language models from Alibaba group"
 msgstr "Qwen2 es una nueva serie de LLM del grupo Alibaba."
 
-#: src/ollama_models.py:406
+#: src/ollama_models.py:411
 msgid ""
 "Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art "
 "open models by Microsoft."
@@ -2705,7 +2706,7 @@ msgstr ""
 "Phi-3 es una familia de los ultimos modelos livianos de Microsoft, 3B (Mini) "
 "y 14B (Medium)."
 
-#: src/ollama_models.py:438
+#: src/ollama_models.py:443
 msgid ""
 "Llama 2 is a collection of foundation language models ranging from 7B to 70B "
 "parameters."
@@ -2713,7 +2714,7 @@ msgstr ""
 "Llama 2 es una colección de modelos bases que cubren parametros entre 7B y "
 "70B."
 
-#: src/ollama_models.py:500
+#: src/ollama_models.py:505
 msgid ""
 "Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, "
 "encompassing up to 18 trillion tokens. The model supports up to 128K tokens "
@@ -2723,7 +2724,7 @@ msgstr ""
 "datos a gran escala de Alibaba, que abarca hasta 18 billones de tokens. El "
 "modelo admite hasta 128 000 tokens y tiene soporte multilingüe."
 
-#: src/ollama_models.py:532
+#: src/ollama_models.py:537
 msgid ""
 "Google Gemma 2 is a high-performing and efficient model available in three "
 "sizes: 2B, 9B, and 27B."
@@ -2731,7 +2732,7 @@ msgstr ""
 "Google Gemma 2 es un modelo de alto rendimiento y eficiente disponible en "
 "tres tamaños: 2B, 9B y 27B."
 
-#: src/ollama_models.py:566
+#: src/ollama_models.py:571
 msgid ""
 "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines "
 "a vision encoder and Vicuna for general-purpose visual and language "
@@ -2741,13 +2742,13 @@ msgstr ""
 "encodificador visual y Vicuna para entendimiento general en lenguaje y "
 "visión. Acutalizado a la versión 1.6."
 
-#: src/ollama_models.py:603
+#: src/ollama_models.py:608
 msgid ""
 "A large language model that can use text prompts to generate and discuss "
 "code."
 msgstr "Un LLM que puede usar texto para generar y discutir sobre codigo."
 
-#: src/ollama_models.py:649
+#: src/ollama_models.py:654
 msgid ""
 "The latest series of Code-Specific Qwen models, with significant "
 "improvements in code generation, code reasoning, and code fixing."
@@ -2756,7 +2757,7 @@ msgstr ""
 "significativas en la generación de código, el razonamiento de código y la "
 "corrección de código."
 
-#: src/ollama_models.py:673
+#: src/ollama_models.py:678
 msgid ""
 "A state-of-the-art 12B model with 128k context length, built by Mistral AI "
 "in collaboration with NVIDIA."
@@ -2764,7 +2765,7 @@ msgstr ""
 "Un modelo de vanguardia de 12B con una longitud de contexto de 128k, "
 "construido por Mistral AI en colaboración con NVIDIA."
 
-#: src/ollama_models.py:695
+#: src/ollama_models.py:700
 msgid ""
 "The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
 "model on 3 trillion tokens."
@@ -2772,11 +2773,11 @@ msgstr ""
 "El proyecto TinyLlama es un esfuerzo abierto para entrenar un modelo "
 "compacto de Llama de 1.1B en 3 billones de tokens."
 
-#: src/ollama_models.py:718
+#: src/ollama_models.py:723
 msgid "State-of-the-art large embedding model from mixedbread.ai"
 msgstr "Modelo de integración grande de última generación de Mixedbread.ai"
 
-#: src/ollama_models.py:751
+#: src/ollama_models.py:756
 msgid ""
 "StarCoder2 is the next generation of transparently trained open code LLMs "
 "that comes in three sizes: 3B, 7B and 15B parameters."
@@ -2785,7 +2786,7 @@ msgstr ""
 "entrenados de manera transparente, que vienen en tres tamaños: 3B, 7B y 15B "
 "parámetros."
 
-#: src/ollama_models.py:777
+#: src/ollama_models.py:782
 msgid ""
 "A set of Mixture of Experts (MoE) model with open weights by Mistral AI in "
 "8x7b and 8x22b parameter sizes."
@@ -2793,7 +2794,7 @@ msgstr ""
 "Un set de modelos Mixture-of-Experts (MoE) con pesos abiertos por Mistral AI "
 "dispnible en tamaños de parametros 8x7b y 8x22b."
 
-#: src/ollama_models.py:803
+#: src/ollama_models.py:808
 msgid ""
 "Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
 "experts models that excels at coding tasks. Created by Eric Hartford."
@@ -2802,7 +2803,7 @@ msgstr ""
 "modelos expertos de Mixtral especializados en tareas de codigo. Creado por "
 "Eric Hartford."
 
-#: src/ollama_models.py:832
+#: src/ollama_models.py:837
 msgid ""
 "CodeGemma is a collection of powerful, lightweight models that can perform a "
 "variety of coding tasks like fill-in-the-middle code completion, code "
@@ -2814,7 +2815,7 @@ msgstr ""
 "codigo, generación de codigo, comprensión de lenguaje natural, razonamiento "
 "matematico y seguimiento de instrucciones."
 
-#: src/ollama_models.py:860
+#: src/ollama_models.py:865
 msgid ""
 "An open-source Mixture-of-Experts code language model that achieves "
 "performance comparable to GPT4-Turbo in code-specific tasks."
@@ -2822,7 +2823,7 @@ msgstr ""
 "Un modelo de lenguaje Mixturer-of-Experts abierto que consigue un "
 "rendimiento comparable a GPT4-Turbo en tareas especificas a codigo."
 
-#: src/ollama_models.py:882
+#: src/ollama_models.py:887
 msgid ""
 "Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
 "outstanding reasoning and language understanding capabilities."
@@ -2830,11 +2831,11 @@ msgstr ""
 "Phi-2: un modelo de lenguaje de 2.700 millones de Microsoft Research que "
 "demuestra excelentes capacidades de razonamiento y comprensión del lenguaje."
 
-#: src/ollama_models.py:909
+#: src/ollama_models.py:914
 msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
 msgstr "Modelo Llama 2 descensurado por George Sung y Jarrad Hope."
 
-#: src/ollama_models.py:944
+#: src/ollama_models.py:949
 msgid ""
 "DeepSeek Coder is a capable coding model trained on two trillion code and "
 "natural language tokens."
@@ -2842,14 +2843,14 @@ msgstr ""
 "DeepSeek Coder en un modelo especializado en codigo, entrenado en 2 "
 "trillones de tokens de codigo y lenguaje natural."
 
-#: src/ollama_models.py:985
+#: src/ollama_models.py:990
 msgid ""
 "A suite of text embedding models by Snowflake, optimized for performance."
 msgstr ""
 "Un conjunto de modelos de incrustación de texto por Snowflake, optimizados "
 "para el rendimiento."
 
-#: src/ollama_models.py:1013
+#: src/ollama_models.py:1018
 msgid ""
 "State of the art large language model from Microsoft AI with improved "
 "performance on complex chat, multilingual, reasoning and agent use cases."
@@ -2858,7 +2859,7 @@ msgstr ""
 "mejorado en chat complejo, multilingüe, razonamiento y casos de uso de "
 "agentes."
 
-#: src/ollama_models.py:1036
+#: src/ollama_models.py:1041
 msgid ""
 "The uncensored Dolphin model based on Mistral that excels at coding tasks. "
 "Updated to version 2.8."
@@ -2866,7 +2867,7 @@ msgstr ""
 "El modelo descensurado Dolphin, basado en Mistral que sobresale en tareas de "
 "codigo. Actualizado a la versión 2.8."
 
-#: src/ollama_models.py:1064
+#: src/ollama_models.py:1069
 msgid ""
 "Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on "
 "Llama 3 that has a variety of instruction, conversational, and coding skills."
@@ -2875,11 +2876,11 @@ msgstr ""
 "Hartford basado en Llama 3, tiene una variedad de instrucciones "
 "conversacionales y habilidades en código"
 
-#: src/ollama_models.py:1098
+#: src/ollama_models.py:1103
 msgid "Yi 1.5 is a high-performing, bilingual language model."
 msgstr "Yi 1.5 es un modelo de lenguaje bilingüe de alto rendimiento."
 
-#: src/ollama_models.py:1121
+#: src/ollama_models.py:1126
 msgid ""
 "Command R is a Large Language Model optimized for conversational interaction "
 "and long context tasks."
@@ -2887,7 +2888,7 @@ msgstr ""
 "Command R es un LLM optimizado para interacciones conversacionales y tareas "
 "que requieren un contexto largo."
 
-#: src/ollama_models.py:1158
+#: src/ollama_models.py:1163
 msgid ""
 "A general-purpose model ranging from 3 billion parameters to 70 billion, "
 "suitable for entry-level hardware."
@@ -2895,7 +2896,7 @@ msgstr ""
 "Un modelo de uso general oscilando entre 3 billones hasta 70 billones de "
 "parametros, adecuado para hardware básico."
 
-#: src/ollama_models.py:1181
+#: src/ollama_models.py:1186
 msgid ""
 "A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
 "benchmarks."
@@ -2903,7 +2904,7 @@ msgstr ""
 "Un modelo LLaVA ajustado a partir de Llama 3 Instruct con mejores "
 "puntuaciones en varios benchmarks."
 
-#: src/ollama_models.py:1208
+#: src/ollama_models.py:1213
 msgid ""
 "Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
 "that are trained to act as helpful assistants."
@@ -2911,7 +2912,7 @@ msgstr ""
 "Zephyr es una serie de versiones ajustadas de los modelos Mistral y Mixtral "
 "que están entrenados para actuar como asistentes útiles."
 
-#: src/ollama_models.py:1230
+#: src/ollama_models.py:1235
 msgid ""
 "A lightweight AI model with 3.8 billion parameters with performance "
 "overtaking similarly and larger sized models."
@@ -2919,13 +2920,13 @@ msgstr ""
 "Un modelo de IA liviano con 3.8 mil millones de parámetros con un "
 "rendimiento que supera a modelos similares y de mayor tamaño."
 
-#: src/ollama_models.py:1258
+#: src/ollama_models.py:1263
 msgid "Embedding models on very large sentence level datasets."
 msgstr ""
 "Modelos de incrustación en conjuntos de datos de nivel de oración muy "
 "grandes."
 
-#: src/ollama_models.py:1281
+#: src/ollama_models.py:1286
 msgid ""
 "Codestral is Mistral AI’s first-ever code model designed for code generation "
 "tasks."
@@ -2933,14 +2934,14 @@ msgstr ""
 "Codestral es el primer modelo de código de Mistral AI diseñado para tareas "
 "de generación de código."
 
-#: src/ollama_models.py:1318
+#: src/ollama_models.py:1323
 msgid ""
 "StarCoder is a code generation model trained on 80+ programming languages."
 msgstr ""
 "StarCoder es un modelo de generación de código entrenado en más de 80 "
 "lenguajes de programación."
 
-#: src/ollama_models.py:1350
+#: src/ollama_models.py:1355
 msgid ""
 "General use chat model based on Llama and Llama 2 with 2K to 16K context "
 "sizes."
@@ -2948,12 +2949,12 @@ msgstr ""
 "Modelo de chat de uso general basado en Llama y Llama 2 con tamaños de "
 "contexto de 2K a 16K."
 
-#: src/ollama_models.py:1387
+#: src/ollama_models.py:1392
 msgid "A family of open foundation models by IBM for Code Intelligence"
 msgstr ""
 "Una familia de modelos de base abiertos por IBM para Code Intelligence."
 
-#: src/ollama_models.py:1409
+#: src/ollama_models.py:1414
 msgid ""
 "Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
 "Mistral 7B model using the OpenOrca dataset."
@@ -2961,7 +2962,7 @@ msgstr ""
 "Mistral OpenOrca es un modelo de 7 billones de parametros, afinado con base "
 "en el modelo Mistral 7B usando el dataset de OpenOrca."
 
-#: src/ollama_models.py:1441
+#: src/ollama_models.py:1446
 msgid ""
 "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
 "a new high-quality dataset."
@@ -2969,7 +2970,7 @@ msgstr ""
 "🪐 Una familia de modelos pequeños con 135M, 360M y 1.7B de parámetros, "
 "entrenados en un nuevo conjunto de datos de alta calidad."
 
-#: src/ollama_models.py:1473
+#: src/ollama_models.py:1478
 msgid ""
 "Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
 "Llama 2 uncensored by Eric Hartford."
@@ -2977,13 +2978,13 @@ msgstr ""
 "Wizard Vicuna Uncensored es un modelo de 7B, 13B y 30B parámetros basado en "
 "Llama 2 sin censura por Eric Hartford."
 
-#: src/ollama_models.py:1502
+#: src/ollama_models.py:1507
 msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
 msgstr ""
 "Modelo basado en Llama 2 ajustado para mejorar la capacidad de diálogo en "
 "chino."
 
-#: src/ollama_models.py:1525
+#: src/ollama_models.py:1530
 msgid ""
 "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
 "Functionality, Multi-Linguality, and Multi-Granularity."
@@ -2991,7 +2992,7 @@ msgstr ""
 "BGE-M3 es un nuevo modelo de BAAI que se distingue por su versatilidad en "
 "multifuncionalidad, multilingüismo y multigranularidad."
 
-#: src/ollama_models.py:1550
+#: src/ollama_models.py:1555
 msgid ""
 "A versatile model for AI software development scenarios, including code "
 "completion."
@@ -2999,7 +3000,7 @@ msgstr ""
 "Un modelo versátil para escenarios de desarrollo de software de IA, "
 "incluyendo la finalización de código."
 
-#: src/ollama_models.py:1573
+#: src/ollama_models.py:1578
 msgid ""
 "A family of open-source models trained on a wide variety of data, surpassing "
 "ChatGPT on various benchmarks. Updated to version 3.5-0106."
@@ -3008,7 +3009,7 @@ msgstr ""
 "de datos, superando a ChatGPT en varios benchmarks. Actualizado a la versión "
 "3.5-0106."
 
-#: src/ollama_models.py:1601
+#: src/ollama_models.py:1606
 msgid ""
 "Aya 23, released by Cohere, is a new family of state-of-the-art, "
 "multilingual models that support 23 languages."
@@ -3016,7 +3017,7 @@ msgstr ""
 "Aya 23, lanzado por Cohere, es una familia de los ultimos modelos "
 "multilingües que soportan 23 lenguajes."
 
-#: src/ollama_models.py:1624
+#: src/ollama_models.py:1629
 msgid ""
 "CodeQwen1.5 is a large language model pretrained on a large amount of code "
 "data."
@@ -3024,7 +3025,7 @@ msgstr ""
 "CodeQwen1.5 es un modelo de lenguaje grande preentrenado con una gran "
 "cantidad de datos de código."
 
-#: src/ollama_models.py:1652
+#: src/ollama_models.py:1657
 msgid ""
 "The powerful family of models by Nous Research that excels at scientific "
 "discussion and coding tasks."
@@ -3032,7 +3033,7 @@ msgstr ""
 "La poderosa familia de modelos de Nous Research que sobresale en discusiones "
 "científicas y tareas de programación."
 
-#: src/ollama_models.py:1674
+#: src/ollama_models.py:1679
 msgid ""
 "Command R+ is a powerful, scalable large language model purpose-built to "
 "excel at real-world enterprise use cases."
@@ -3040,11 +3041,11 @@ msgstr ""
 "Command R+ es un poderoso, escalable LLM construido con el proposito de "
 "sobresalir en usos profesionales del mundo real."
 
-#: src/ollama_models.py:1697
+#: src/ollama_models.py:1702
 msgid "State-of-the-art code generation model"
 msgstr "Modelo de generación de código de vanguardia."
 
-#: src/ollama_models.py:1721
+#: src/ollama_models.py:1726
 msgid ""
 "Stable Code 3B is a coding model with instruct and code completion variants "
 "on par with models such as Code Llama 7B that are 2.5x larger."
@@ -3053,7 +3054,7 @@ msgstr ""
 "completado de código a la par con modelos como Code Llama 7B que son 2.5 "
 "veces más grandes."
 
-#: src/ollama_models.py:1743
+#: src/ollama_models.py:1748
 msgid ""
 "An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
 "by Eric Hartford and based on TinyLlama."
@@ -3061,7 +3062,7 @@ msgstr ""
 "Un modelo experimental de 1.1B parámetros entrenado en el nuevo conjunto de "
 "datos Dolphin 2.8 por Eric Hartford y basado en TinyLlama."
 
-#: src/ollama_models.py:1770
+#: src/ollama_models.py:1904
 msgid ""
 "OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
 "open datasets."
@@ -3069,7 +3070,7 @@ msgstr ""
 "OpenHermes 2.5 es un modelo de 7B ajustado por Teknium en Mistral con "
 "conjuntos de datos completamente abiertos."
 
-#: src/ollama_models.py:1794
+#: src/ollama_models.py:1928
 msgid ""
 "Mistral Large 2 is Mistral's new flagship model that is significantly more "
 "capable in code generation, mathematics, and reasoning with 128k context "
@@ -3080,7 +3081,7 @@ msgstr ""
 "razonamiento, con una ventana de contexto de 128k y soporte para docenas de "
 "idiomas."
 
-#: src/ollama_models.py:1827
+#: src/ollama_models.py:1961
 msgid ""
 "Qwen2 Math is a series of specialized math language models built upon the "
 "Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
@@ -3091,7 +3092,7 @@ msgstr ""
 "las capacidades matemáticas de los modelos de código abierto e incluso de "
 "los modelos de código cerrado (por ejemplo, GPT4o)."
 
-#: src/ollama_models.py:1851
+#: src/ollama_models.py:1985
 msgid ""
 "A strong multi-lingual general language model with competitive performance "
 "to Llama 3."
@@ -3099,7 +3100,7 @@ msgstr ""
 "Un modelo de lenguaje general multilingüe con un rendimiento competitivo con "
 "respecto a Llama 3."
 
-#: src/ollama_models.py:1885
+#: src/ollama_models.py:2019
 msgid ""
 "Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model "
 "trained on multilingual data in English, Spanish, German, Italian, French, "
@@ -3109,7 +3110,7 @@ msgstr ""
 "entrenado en datos multilingües en inglés, español, alemán, italiano, "
 "francés, portugués y neerlandés."
 
-#: src/ollama_models.py:1908
+#: src/ollama_models.py:2042
 msgid ""
 "BakLLaVA is a multimodal model consisting of the Mistral 7B base model "
 "augmented with the LLaVA architecture."
@@ -3117,7 +3118,7 @@ msgstr ""
 "BakLLaVA es un modelo multimodal que consiste en el modelo base Mistral 7B "
 "aumentado con la arquitectura LLaVA."
 
-#: src/ollama_models.py:1929
+#: src/ollama_models.py:2063
 msgid ""
 "A high-performing model trained with a new technique called Reflection-"
 "tuning that teaches a LLM to detect mistakes in its reasoning and correct "
@@ -3127,23 +3128,23 @@ msgstr ""
 "Reflection-tuning que enseña a un LLM a detectar errores en su razonamiento "
 "y corregir el rumbo."
 
-#: src/ollama_models.py:1960
+#: src/ollama_models.py:2094
 msgid "An advanced language model crafted with 2 trillion bilingual tokens."
 msgstr ""
 "Un modelo de lenguaje avanzado creado con 2 billones de tokens bilingües."
 
-#: src/ollama_models.py:1987
+#: src/ollama_models.py:2121
 msgid ""
 "This model extends LLama-3 8B's context length from 8k to over 1m tokens."
 msgstr ""
 "Este modelo extiende la longitud del contexto de LLama-3 8B de 8k a más de "
 "1m tokens."
 
-#: src/ollama_models.py:2020
+#: src/ollama_models.py:2154
 msgid "Model focused on math and logic problems"
 msgstr "Modelo enfocado en problemas de matemáticas y lógica."
 
-#: src/ollama_models.py:2043
+#: src/ollama_models.py:2177
 msgid ""
 "moondream2 is a small vision language model designed to run efficiently on "
 "edge devices."
@@ -3151,7 +3152,7 @@ msgstr ""
 "moondream2 es un pequeño modelo de lenguaje de visión diseñado para "
 "funcionar eficientemente en dispositivos periféricos."
 
-#: src/ollama_models.py:2065
+#: src/ollama_models.py:2199
 msgid ""
 "A fine-tuned model based on Mistral with good coverage of domain and "
 "language."
@@ -3159,7 +3160,7 @@ msgstr ""
 "Un modelo ajustado basado en Mistral con buena cobertura de dominio y "
 "lenguaje."
 
-#: src/ollama_models.py:2092
+#: src/ollama_models.py:2226
 msgid ""
 "A model from NVIDIA based on Llama 3 that excels at conversational question "
 "answering (QA) and retrieval-augmented generation (RAG)."
@@ -3167,7 +3168,7 @@ msgstr ""
 "Un modelo de NVIDIA basado en Llama 3 que sobresale en respuesta a preguntas "
 "conversacionales (QA) y generación aumentada por recuperación (RAG)."
 
-#: src/ollama_models.py:2119
+#: src/ollama_models.py:2253
 msgid ""
 "Conversational model based on Llama 2 that performs competitively on various "
 "benchmarks."
@@ -3175,7 +3176,7 @@ msgstr ""
 "Modelo conversacional basado en Llama 2 que tiene un rendimiento competitivo "
 "en varios benchmarks."
 
-#: src/ollama_models.py:2147
+#: src/ollama_models.py:2281
 msgid ""
 "SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
 "generation tasks"
@@ -3183,19 +3184,19 @@ msgstr ""
 "SQLCoder es un modelo de completado de código ajustado en StarCoder para "
 "tareas de generación de SQL."
 
-#: src/ollama_models.py:2174
+#: src/ollama_models.py:2308
 msgid "General use models based on Llama and Llama 2 from Nous Research."
 msgstr "Modelos de uso general basados en Llama y Llama 2 de Nous Research."
 
-#: src/ollama_models.py:2197
+#: src/ollama_models.py:2331
 msgid "Code generation model based on Code Llama."
 msgstr "Modelo de generación de código basado en Code Llama."
 
-#: src/ollama_models.py:2224
+#: src/ollama_models.py:2358
 msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
 msgstr "Una extensión de Llama 2 que soporta un contexto de hasta 128k tokens."
 
-#: src/ollama_models.py:2252
+#: src/ollama_models.py:2386
 msgid ""
 "A 7B and 15B uncensored variant of the Dolphin model family that excels at "
 "coding, based on StarCoder2."
@@ -3203,16 +3204,16 @@ msgstr ""
 "Una variante sin censura de 7B y 15B de la familia de modelos Dolphin que "
 "sobresale en codificación, basada en StarCoder2."
 
-#: src/ollama_models.py:2279
+#: src/ollama_models.py:2694
 msgid "General use model based on Llama 2."
 msgstr "Modelo de uso general basado en Llama 2."
 
-#: src/ollama_models.py:2308
+#: src/ollama_models.py:2723
 msgid "A strong, economical, and efficient Mixture-of-Experts language model."
 msgstr ""
 "Un modelo de lenguaje Mixture-of-Experts fuerte, económico y eficiente."
 
-#: src/ollama_models.py:2330
+#: src/ollama_models.py:2745
 msgid ""
 "Starling is a large language model trained by reinforcement learning from AI "
 "feedback focused on improving chatbot helpfulness."
@@ -3221,7 +3222,7 @@ msgstr ""
 "refuerzo a partir de retroalimentación de IA enfocado en mejorar la utilidad "
 "de los chatbots."
 
-#: src/ollama_models.py:2352
+#: src/ollama_models.py:2767
 msgid ""
 "A companion assistant trained in philosophy, psychology, and personal "
 "relationships. Based on Mistral."
@@ -3229,7 +3230,7 @@ msgstr ""
 "Un asistente compañero entrenado en filosofía, psicología y relaciones "
 "personales. Basado en Mistral."
 
-#: src/ollama_models.py:2390
+#: src/ollama_models.py:2805
 msgid ""
 "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
 "Research"
@@ -3237,7 +3238,7 @@ msgstr ""
 "Hermes 3 es la última versión de la serie insignia de LLM Hermes de Nous "
 "Research"
 
-#: src/ollama_models.py:2418
+#: src/ollama_models.py:2833
 msgid ""
 "Yi-Coder is a series of open-source code language models that delivers state-"
 "of-the-art coding performance with fewer than 10 billion parameters."
@@ -3246,7 +3247,7 @@ msgstr ""
 "ofrece un rendimiento de codificación de última generación con menos de 10 "
 "mil millones de parámetros."
 
-#: src/ollama_models.py:2449
+#: src/ollama_models.py:2864
 msgid ""
 "A large language model built by the Technology Innovation Institute (TII) "
 "for use in summarization, text generation, and chat bots."
@@ -3254,7 +3255,7 @@ msgstr ""
 "Un modelo de lenguaje grande creado por el Instituto de Innovación "
 "Tecnológica (TII) para su uso en resúmenes, generación de texto y chat bots."
 
-#: src/ollama_models.py:2486
+#: src/ollama_models.py:2901
 msgid ""
 "InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
 "outstanding reasoning capability."
@@ -3262,7 +3263,7 @@ msgstr ""
 "InternLM2.5 es un modelo de 7B parámetros adaptado para escenarios prácticos "
 "con una capacidad de razonamiento excepcional."
 
-#: src/ollama_models.py:2508
+#: src/ollama_models.py:2923
 msgid ""
 "A compact, yet powerful 10.7B large language model designed for single-turn "
 "conversation."
@@ -3270,7 +3271,7 @@ msgstr ""
 "Un modelo de lenguaje grande compacto pero poderoso de 10.7B diseñado para "
 "conversación de un solo turno."
 
-#: src/ollama_models.py:2532
+#: src/ollama_models.py:2947
 msgid ""
 "Athene-V2 is a 72B parameter model which excels at code completion, "
 "mathematics, and log extraction tasks."
@@ -3278,11 +3279,11 @@ msgstr ""
 "Athene-V2 es un modelo de parámetros 72B que se destaca en tareas de "
 "finalización de código, matemáticas y extracción de registros."
 
-#: src/ollama_models.py:2555
+#: src/ollama_models.py:2970
 msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
 msgstr "Un nuevo pequeño modelo LLaVA ajustado a partir de Phi 3 Mini."
 
-#: src/ollama_models.py:2583
+#: src/ollama_models.py:2998
 msgid ""
 "Orca 2 is built by Microsoft research, and are a fine-tuned version of "
 "Meta's Llama 2 models. The model is designed to excel particularly in "
@@ -3292,7 +3293,7 @@ msgstr ""
 "los modelos Llama 2 de Meta. El modelo está diseñado para sobresalir "
 "particularmente en razonamiento."
 
-#: src/ollama_models.py:2614
+#: src/ollama_models.py:3029
 msgid ""
 "A series of multimodal LLMs (MLLMs) designed for vision-language "
 "understanding."
@@ -3300,7 +3301,7 @@ msgstr ""
 "Una serie de LLM multimodales (MLLM) diseñados para la comprensión entre "
 "visión y lenguaje."
 
-#: src/ollama_models.py:2646
+#: src/ollama_models.py:3061
 msgid ""
 "Llama 2 based model fine tuned on an Orca-style dataset. Originally called "
 "Free Willy."
@@ -3308,7 +3309,7 @@ msgstr ""
 "Modelo basado en Llama 2 ajustado en un conjunto de datos estilo Orca. "
 "Originalmente llamado Free Willy."
 
-#: src/ollama_models.py:2675
+#: src/ollama_models.py:3090
 msgid ""
 "Mistral Small 3 sets a new benchmark in the “small” Large Language Models "
 "category below 70B."
@@ -3316,7 +3317,7 @@ msgstr ""
 "Mistral Small 3 establece un nuevo punto de referencia en la categoría de "
 "modelos de lenguaje grandes “pequeños” por debajo de 70B."
 
-#: src/ollama_models.py:2697
+#: src/ollama_models.py:3112
 msgid ""
 "2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
 "model by Microsoft Research."
@@ -3324,7 +3325,7 @@ msgstr ""
 "Modelo Dolphin sin censura de 2.7B por Eric Hartford, basado en el modelo de "
 "lenguaje Phi por Microsoft Research."
 
-#: src/ollama_models.py:2730
+#: src/ollama_models.py:3145
 msgid ""
 "SmolLM2 is a family of compact language models available in three size: "
 "135M, 360M, and 1.7B parameters."
@@ -3332,11 +3333,11 @@ msgstr ""
 "SmolLM2 es una familia de modelos de lenguaje compactos disponibles en tres "
 "tamaños: 135M, 360M y 1.7B de parámetros."
 
-#: src/ollama_models.py:2752
+#: src/ollama_models.py:3167
 msgid "Uncensored version of Wizard LM model"
 msgstr "Versión sin censura del modelo Wizard LM."
 
-#: src/ollama_models.py:2775
+#: src/ollama_models.py:3190
 msgid ""
 "A commercial-friendly small language model by NVIDIA optimized for roleplay, "
 "RAG QA, and function calling."
@@ -3344,12 +3345,12 @@ msgstr ""
 "Un modelo de lenguaje pequeño comercialmente amigable de NVIDIA optimizado "
 "para juegos de roles, control de calidad de RAG y llamada de funciones."
 
-#: src/ollama_models.py:2797
+#: src/ollama_models.py:3212
 msgid "An extension of Mistral to support context windows of 64K or 128K."
 msgstr ""
 "Una extensión de Mistral para soportar ventanas de contexto de 64K o 128K."
 
-#: src/ollama_models.py:2825
+#: src/ollama_models.py:3361
 msgid ""
 "An expansion of Llama 2 that specializes in integrating both general "
 "language understanding and domain-specific knowledge, particularly in "
@@ -3359,7 +3360,7 @@ msgstr ""
 "general del lenguaje como el conocimiento específico del dominio, "
 "particularmente en programación y matemáticas."
 
-#: src/ollama_models.py:2847
+#: src/ollama_models.py:3383
 msgid ""
 "Fine-tuned Llama 2 model to answer medical questions based on an open source "
 "medical dataset."
@@ -3367,7 +3368,7 @@ msgstr ""
 "Modelo Llama 2 ajustado para responder preguntas médicas basado en un "
 "conjunto de datos médicos de código abierto."
 
-#: src/ollama_models.py:2874
+#: src/ollama_models.py:3410
 msgid ""
 "Open-source medical large language model adapted from Llama 2 to the medical "
 "domain."
@@ -3375,7 +3376,7 @@ msgstr ""
 "Modelo de lenguaje grande médico de código abierto adaptado de Llama 2 al "
 "dominio médico."
 
-#: src/ollama_models.py:2902
+#: src/ollama_models.py:3438
 msgid ""
 "A series of models from Groq that represent a significant advancement in "
 "open-source AI capabilities for tool use/function calling."
@@ -3384,7 +3385,7 @@ msgstr ""
 "capacidades de IA de código abierto para el uso de herramientas/llamadas a "
 "funciones."
 
-#: src/ollama_models.py:2924
+#: src/ollama_models.py:3460
 msgid ""
 "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
 "NVIDIA to improve the helpfulness of LLM generated responses to user queries."
@@ -3393,28 +3394,28 @@ msgstr ""
 "personalizado por NVIDIA para mejorar la utilidad de las respuestas "
 "generadas por LLM a las consultas de los usuarios."
 
-#: src/ollama_models.py:2946
+#: src/ollama_models.py:3482
 msgid ""
 "Nexus Raven is a 13B instruction tuned model for function calling tasks."
 msgstr ""
 "Nexus Raven es un modelo ajustado de 13B para tareas de llamada de funciones."
 
-#: src/ollama_models.py:2967
+#: src/ollama_models.py:3503
 msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
 msgstr ""
 "El modelo Nous Hermes 2 de Nous Research, ahora entrenado sobre Mixtral."
 
-#: src/ollama_models.py:2990
+#: src/ollama_models.py:3526
 msgid "Great code generation model based on Llama2."
 msgstr "Gran modelo de generación de código basado en Llama2."
 
-#: src/ollama_models.py:3012
+#: src/ollama_models.py:3548
 msgid "Uncensored Llama2 based model with support for a 16K context window."
 msgstr ""
 "Modelo sin censura basado en Llama2 con soporte para una ventana de contexto "
 "de 16K."
 
-#: src/ollama_models.py:3053
+#: src/ollama_models.py:3589
 msgid ""
 "The IBM Granite 2B and 8B models are designed to support tool-based use "
 "cases and support for retrieval augmented generation (RAG), streamlining "
@@ -3425,7 +3426,7 @@ msgstr ""
 "(RAG), agilizando la generación de código, la traducción y la corrección de "
 "errores."
 
-#: src/ollama_models.py:3076
+#: src/ollama_models.py:3612
 msgid ""
 "🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic "
 "instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
@@ -3435,7 +3436,7 @@ msgstr ""
 "datos de instrucción sintética utilizando OSS-Instruct, un enfoque novedoso "
 "para iluminar a los LLMs con fragmentos de código de código abierto."
 
-#: src/ollama_models.py:3098
+#: src/ollama_models.py:3634
 msgid ""
 "A lightweight chat model allowing accurate, and responsive output without "
 "requiring high-end hardware."
@@ -3443,7 +3444,7 @@ msgstr ""
 "Un modelo de chat ligero que permite una salida precisa y receptiva sin "
 "requerir hardware de alta gama."
 
-#: src/ollama_models.py:3121
+#: src/ollama_models.py:3657
 msgid ""
 "A high-performing code instruct model created by merging two existing code "
 "models."
@@ -3451,7 +3452,7 @@ msgstr ""
 "Un modelo de instrucción de código de alto rendimiento creado mediante la "
 "fusión de dos modelos de código existentes."
 
-#: src/ollama_models.py:3144
+#: src/ollama_models.py:3680
 msgid ""
 "Falcon2 is an 11B parameters causal decoder-only model built by TII and "
 "trained over 5T tokens."
@@ -3459,7 +3460,7 @@ msgstr ""
 "Falcon2 es un modelo causal de 11B parámetros solo decodificador construido "
 "por TII y entrenado en más de 5T tokens."
 
-#: src/ollama_models.py:3166
+#: src/ollama_models.py:3702
 msgid ""
 "Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
 "MelodysDreamj."
@@ -3467,7 +3468,7 @@ msgstr ""
 "Wizard Vicuna es un modelo de 13B parámetros basado en Llama 2 entrenado por "
 "MelodysDreamj."
 
-#: src/ollama_models.py:3188
+#: src/ollama_models.py:3724
 msgid ""
 "MistralLite is a fine-tuned model based on Mistral with enhanced "
 "capabilities of processing long contexts."
@@ -3475,7 +3476,7 @@ msgstr ""
 "MistralLite es un modelo ajustado basado en Mistral con capacidades "
 "mejoradas de procesamiento de contextos largos."
 
-#: src/ollama_models.py:3211
+#: src/ollama_models.py:3747
 msgid ""
 "MathΣtral: a 7B model designed for math reasoning and scientific discovery "
 "by Mistral AI."
@@ -3483,13 +3484,13 @@ msgstr ""
 "MathΣtral: un modelo de 7B diseñado para razonamiento matemático y "
 "descubrimiento científico por Mistral AI."
 
-#: src/ollama_models.py:3233
+#: src/ollama_models.py:3769
 msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
 msgstr ""
 "Modelo de texto a SQL de 7B parámetros hecho por MotherDuck y Numbers "
 "Station."
 
-#: src/ollama_models.py:3254
+#: src/ollama_models.py:3790
 msgid ""
 "MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
 "interleaving the model with itself."
@@ -3497,7 +3498,7 @@ msgstr ""
 "MegaDolphin-2.2-120b es una transformación de Dolphin-2.2-70b creada al "
 "entrelazar el modelo consigo mismo."
 
-#: src/ollama_models.py:3276
+#: src/ollama_models.py:3812
 msgid ""
 "Solar Pro Preview: an advanced large language model (LLM) with 22 billion "
 "parameters designed to fit into a single GPU"
@@ -3505,7 +3506,7 @@ msgstr ""
 "Vista previa de Solar Pro: un modelo de lenguaje grande (LLM) avanzado con "
 "22 mil millones de parámetros diseñado para caber en una sola GPU"
 
-#: src/ollama_models.py:3303
+#: src/ollama_models.py:3839
 msgid ""
 "A series of models that convert HTML content to Markdown content, which is "
 "useful for content conversion tasks."
@@ -3513,20 +3514,20 @@ msgstr ""
 "Una serie de modelos que convierten contenido HTML en contenido Markdown, lo "
 "cual resulta útil para tareas de conversión de contenido."
 
-#: src/ollama_models.py:3324
+#: src/ollama_models.py:3860
 msgid ""
 "A top-performing mixture of experts model, fine-tuned with high-quality data."
 msgstr ""
 "Un modelo de mezcla de expertos de alto rendimiento, ajustado con datos de "
 "alta calidad."
 
-#: src/ollama_models.py:3346
+#: src/ollama_models.py:3882
 msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
 msgstr ""
 "Un modelo de chat de 7B ajustado con datos de alta calidad y basado en "
 "Zephyr."
 
-#: src/ollama_models.py:3369
+#: src/ollama_models.py:3905
 msgid ""
 "Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
 "Designed for chat and code generation."
@@ -3534,7 +3535,7 @@ msgstr ""
 "Fusión del modelo Open Orca OpenChat y el modelo Garage-bAInd Platypus 2. "
 "Diseñado para chat y generación de código."
 
-#: src/ollama_models.py:3386
+#: src/ollama_models.py:3982
 msgid ""
 "A language model created by combining two fine-tuned Llama 2 70B models into "
 "one."
@@ -3542,7 +3543,7 @@ msgstr ""
 "Un modelo de lenguaje creado combinando dos modelos ajustados de Llama 2 70B "
 "en uno."
 
-#: src/ollama_models.py:3427
+#: src/ollama_models.py:4023
 msgid ""
 "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
@@ -3550,7 +3551,7 @@ msgstr ""
 "Los modelos IBM Granite 1B y 3B son la primera mezcla de modelos Granite de "
 "expertos (MoE) de IBM diseñados para un uso de baja latencia."
 
-#: src/ollama_models.py:3449
+#: src/ollama_models.py:4045
 msgid ""
 "A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
 "information extraction, based on Phi-3."
@@ -3558,7 +3559,7 @@ msgstr ""
 "Un modelo de 3.8B ajustado con un conjunto de datos sintéticos de alta "
 "calidad para extracción de información, basado en Phi-3."
 
-#: src/ollama_models.py:3500
+#: src/ollama_models.py:4096
 msgid ""
 "Cohere For AI's language models trained to perform well across 23 different "
 "languages."
@@ -3566,11 +3567,11 @@ msgstr ""
 "Cohere Para modelos de lenguaje de IA entrenados para funcionar bien en 23 "
 "idiomas diferentes."
 
-#: src/ollama_models.py:3522
+#: src/ollama_models.py:4118
 msgid "DBRX is an open, general-purpose LLM created by Databricks."
 msgstr "DBRX es un LLM abierto de propósito general creado por Databricks."
 
-#: src/ollama_models.py:3544
+#: src/ollama_models.py:4140
 msgid ""
 "An open large reasoning model for real-world solutions by the Alibaba "
 "International Digital Commerce Group (AIDC-AI)."
@@ -3578,11 +3579,11 @@ msgstr ""
 "Un modelo de razonamiento abierto a gran escala para soluciones del mundo "
 "real del Alibaba International Digital Commerce Group (AIDC-AI)."
 
-#: src/ollama_models.py:3567
+#: src/ollama_models.py:4163
 msgid "Embedding model from BAAI mapping texts to vectors."
 msgstr "Modelo de incrustación de BAAI que mapea textos a vectores."
 
-#: src/ollama_models.py:3589
+#: src/ollama_models.py:4185
 msgid ""
 "An open weights function calling model based on Llama 3, competitive with "
 "GPT-4o function calling capabilities."
@@ -3590,7 +3591,7 @@ msgstr ""
 "Un modelo de llamadas a funciones con pesos abiertos basado en Llama 3, "
 "competitivo con las capacidades de llamadas a funciones de GPT-4o."
 
-#: src/ollama_models.py:3610
+#: src/ollama_models.py:4206
 msgid ""
 "A robust conversational model designed to be used for both chat and instruct "
 "use cases."
@@ -3598,7 +3599,7 @@ msgstr ""
 "Un modelo conversacional robusto diseñado para ser utilizado tanto en casos "
 "de uso de chat como de instrucción."
 
-#: src/ollama_models.py:3632
+#: src/ollama_models.py:4228
 msgid ""
 "An upgraded version of DeekSeek-V2 that integrates the general and coding "
 "abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
@@ -3606,7 +3607,7 @@ msgstr ""
 "Una versión mejorada de DeepSeek-V2 que integra las capacidades generales y "
 "de codificación de DeepSeek-V2-Chat y DeepSeek-Coder-V2-Instruct."
 
-#: src/ollama_models.py:3665
+#: src/ollama_models.py:4261
 msgid ""
 "ShieldGemma is set of instruction tuned models for evaluating the safety of "
 "text prompt input and text output responses against a set of defined safety "
@@ -3616,13 +3617,13 @@ msgstr ""
 "evaluar la seguridad de las respuestas de entrada y salida de texto frente a "
 "un conjunto de políticas de seguridad definidas."
 
-#: src/ollama_models.py:3687
+#: src/ollama_models.py:4283
 msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
 msgstr ""
 "Un modelo de verificación de datos de última generación desarrollado por "
 "Bespoke Labs."
 
-#: src/ollama_models.py:3715
+#: src/ollama_models.py:4311
 msgid ""
 "Llama Guard 3 is a series of models fine-tuned for content safety "
 "classification of LLM inputs and responses."
@@ -3630,7 +3631,7 @@ msgstr ""
 "Llama Guard 3 es una serie de modelos optimizados para la clasificación de "
 "seguridad de contenido de entradas y respuestas LLM."
 
-#: src/ollama_models.py:3739
+#: src/ollama_models.py:4335
 msgid ""
 "Sentence-transformers model that can be used for tasks like clustering or "
 "semantic search."
@@ -3638,7 +3639,7 @@ msgstr ""
 "Modelo de transformadores de oraciones que puede utilizarse para tareas como "
 "agrupamiento o búsqueda semántica."
 
-#: src/ollama_models.py:3769
+#: src/ollama_models.py:4365
 msgid ""
 "OpenCoder is an open and reproducible code LLM family which includes 1.5B "
 "and 8B models, supporting chat in English and Chinese languages."
@@ -3646,7 +3647,7 @@ msgstr ""
 "OpenCoder es una familia LLM de código abierto y reproducible que incluye "
 "modelos 1.5B y 8B y admite chat en los idiomas inglés y chino."
 
-#: src/ollama_models.py:3798
+#: src/ollama_models.py:4394
 msgid ""
 "Tülu 3 is a leading instruction following model family, offering fully open-"
 "source data, code, and recipes by the The Allen Institute for AI."
@@ -3655,7 +3656,7 @@ msgstr ""
 "ofrece datos, códigos y recetas de código totalmente abierto del Instituto "
 "Allen para IA."
 
-#: src/ollama_models.py:3826
+#: src/ollama_models.py:4422
 msgid ""
 "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
 "support without sacrificing English performance or scalability."
@@ -3664,7 +3665,7 @@ msgstr ""
 "compatibilidad multilingüe sin sacrificar el rendimiento ni la escalabilidad "
 "en inglés."
 
-#: src/ollama_models.py:3854
+#: src/ollama_models.py:4450
 msgid ""
 "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
 "in prompts and/or responses."
@@ -3672,7 +3673,7 @@ msgstr ""
 "Los modelos IBM Granite Guardian 3.0 2B y 8B están diseñados para detectar "
 "riesgos en indicaciones y/o respuestas."
 
-#: src/ollama_models.py:3888
+#: src/ollama_models.py:4484
 msgid ""
 "EXAONE 3.5 is a collection of instruction-tuned bilingual (English and "
 "Korean) generative models ranging from 2.4B to 32B parameters, developed and "
@@ -3682,7 +3683,7 @@ msgstr ""
 "coreano) optimizados para instrucciones que van desde 2.4B a 32B parámetros, "
 "desarrollados y lanzados por LG AI Research."
 
-#: src/ollama_models.py:3936
+#: src/ollama_models.py:4532
 msgid ""
 "Sailor2 are multilingual language models made for South-East Asia. Available "
 "in 1B, 8B, and 20B parameter sizes."
@@ -3690,7 +3691,7 @@ msgstr ""
 "Sailor2 son modelos de lenguaje multilingües diseñados para el sudeste "
 "asiático. Disponibles en tamaños de parámetros 1B, 8B y 20B."
 
-#: src/ollama_models.py:3974
+#: src/ollama_models.py:4570
 msgid ""
 "A family of efficient AI models under 10B parameters performant in science, "
 "math, and coding through innovative training techniques."
@@ -3699,7 +3700,7 @@ msgstr ""
 "parámetros en ciencias, matemáticas y codificación a través de técnicas de "
 "entrenamiento innovadoras."
 
-#: src/ollama_models.py:4015
+#: src/ollama_models.py:4611
 msgid ""
 "The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 "
 "trillion tokens of data, demonstrated significant improvements over their "
@@ -3709,7 +3710,7 @@ msgstr ""
 "trillion tokens of data, demonstrated significant improvements over their "
 "predecessors in performance and speed in IBM’s initial testing."
 
-#: src/ollama_models.py:4056
+#: src/ollama_models.py:4652
 msgid ""
 "The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) "
 "Granite models from IBM designed for low latency usage."
@@ -3717,7 +3718,7 @@ msgstr ""
 "Los modelos IBM Granite 1B y 3B son modelos Granite de mezcla de contexto "
 "largo de expertos (MoE) de IBM diseñados para un uso de baja latencia."
 
-#: src/ollama_models.py:4097
+#: src/ollama_models.py:4693
 msgid ""
 "The IBM Granite Embedding 30M and 278M models models are text-only dense "
 "biencoder embedding models, with 30M available in English only and 278M "
@@ -3727,20 +3728,20 @@ msgstr ""
 "biencoder densos de solo texto, con 30M disponible solo en inglés y 278M "
 "para casos de uso multilingües."
 
-#: src/ollama_models.py:4119
+#: src/ollama_models.py:4715
 msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
 msgstr ""
 "Phi-4 es un modelo abierto de última generación con 14B parámetros de "
 "Microsoft."
 
-#: src/ollama_models.py:4141
+#: src/ollama_models.py:4737
 msgid ""
 "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
 msgstr ""
 "Un nuevo modelo de razonamiento pequeño perfeccionado a partir del modelo "
 "Instruct 3B de Qwen 2.5."
 
-#: src/ollama_models.py:4165
+#: src/ollama_models.py:4761
 msgid ""
 "Dolphin 3.0 Llama 3.1 8B 🐬 is the next generation of the Dolphin series of "
 "instruct-tuned models designed to be the ultimate general purpose local "
@@ -3752,7 +3753,7 @@ msgstr ""
 "local de propósito general, que permite codificación, matemáticas, agentes, "
 "llamadas de funciones y casos de uso general."
 
-#: src/ollama_models.py:4215
+#: src/ollama_models.py:4811
 msgid ""
 "DeepSeek-R1 is a family of open reasoning models with performance "
 "approaching that of leading models, such as O3 and Gemini 2.5 Pro."
@@ -3761,7 +3762,7 @@ msgstr ""
 "rendimiento que se acerca al de los modelos líderes, como O3 y Gemini 2.5 "
 "Pro."
 
-#: src/ollama_models.py:4236
+#: src/ollama_models.py:4832
 msgid ""
 "A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
 "with 37B activated for each token."
@@ -3769,7 +3770,7 @@ msgstr ""
 "Un sólido modelo de lenguaje de mezcla de expertos (MoE) con 671B de "
 "parámetros totales con 37B activados para cada token."
 
-#: src/ollama_models.py:4263
+#: src/ollama_models.py:4859
 msgid ""
 "OLMo 2 is a new family of 7B and 13B models trained on up to 5T tokens. "
 "These models are on par with or better than equivalently sized fully open "
@@ -3782,7 +3783,7 @@ msgstr ""
 "de peso abierto como Llama 3.1 en los puntos de referencia académicos de "
 "inglés."
 
-#: src/ollama_models.py:4311
+#: src/ollama_models.py:4907
 msgid ""
 "The smallest model in Cohere's R series delivers top-tier speed, efficiency, "
 "and quality to build powerful AI applications on commodity GPUs and edge "
@@ -3792,7 +3793,7 @@ msgstr ""
 "calidad de primer nivel para crear potentes aplicaciones de IA en GPU "
 "comerciales y dispositivos de edge."
 
-#: src/ollama_models.py:4338
+#: src/ollama_models.py:4934
 msgid ""
 "A fully open-source family of reasoning models built using a dataset derived "
 "by distilling DeepSeek-R1."
@@ -3801,7 +3802,7 @@ msgstr ""
 "creada utilizando un conjunto de datos derivado de la destilación de "
 "DeepSeek-R1."
 
-#: src/ollama_models.py:4361
+#: src/ollama_models.py:4957
 msgid ""
 "A fine-tuned version of Deepseek-R1-Distilled-Qwen-1.5B that surpasses the "
 "performance of OpenAI’s o1-preview with just 1.5B parameters on popular math "
@@ -3811,7 +3812,7 @@ msgstr ""
 "rendimiento de o1-preview de OpenAI con solo 1.500 millones de parámetros en "
 "evaluaciones matemáticas populares."
 
-#: src/ollama_models.py:4390
+#: src/ollama_models.py:4986
 msgid ""
 "A version of the DeepSeek-R1 model that has been post trained to provide "
 "unbiased, accurate, and factual information by Perplexity."
@@ -3819,11 +3820,11 @@ msgstr ""
 "Una versión del modelo DeepSeek-R1 que ha sido entrenado posteriormente para "
 "proporcionar información imparcial, precisa y objetiva de Perplexity."
 
-#: src/ollama_models.py:4431
+#: src/ollama_models.py:5027
 msgid "The current, most capable model that runs on a single GPU."
 msgstr "El modelo actual más capaz que funciona con una sola GPU."
 
-#: src/ollama_models.py:4478
+#: src/ollama_models.py:5074
 msgid ""
 "Phi-4-mini brings significant enhancements in multilingual support, "
 "reasoning, and mathematics, and now, the long-awaited function calling "
@@ -3833,7 +3834,7 @@ msgstr ""
 "razonamiento y matemáticas, y ahora, la tan esperada función de llamada de "
 "funciones finalmente es compatible."
 
-#: src/ollama_models.py:4502
+#: src/ollama_models.py:5098
 msgid ""
 "A compact and efficient vision-language model, specifically designed for "
 "visual document understanding, enabling automated content extraction from "
@@ -3844,7 +3845,7 @@ msgstr ""
 "extracción automatizada de contenido de tablas, gráficos, infografías, "
 "gráficos, diagramas y más."
 
-#: src/ollama_models.py:4542
+#: src/ollama_models.py:5138
 msgid ""
 "Granite-3.2 is a family of long-context AI models from IBM Granite fine-"
 "tuned for thinking capabilities."
@@ -3852,7 +3853,7 @@ msgstr ""
 "Granite-3.2 es una familia de modelos de IA de contexto largo de IBM Granite "
 "optimizados para capacidades de pensamiento."
 
-#: src/ollama_models.py:4566
+#: src/ollama_models.py:5162
 msgid ""
 "A new state-of-the-art version of the lightweight Command R7B model that "
 "excels in advanced Arabic language capabilities for enterprises in the "
@@ -3862,7 +3863,7 @@ msgstr ""
 "destaca por sus capacidades avanzadas en idioma árabe para empresas en Medio "
 "Oriente y el norte de África."
 
-#: src/ollama_models.py:4612
+#: src/ollama_models.py:5208
 msgid ""
 "111 billion parameter model optimized for demanding enterprises that require "
 "fast, secure, and high-quality AI"
@@ -3870,7 +3871,7 @@ msgstr ""
 "Modelo de 111 mil millones de parámetros optimizado para empresas exigentes "
 "que requieren IA rápida, segura y de alta calidad"
 
-#: src/ollama_models.py:4653
+#: src/ollama_models.py:5249
 msgid ""
 "Qwen3 is the latest generation of large language models in Qwen series, "
 "offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
@@ -3879,15 +3880,15 @@ msgstr ""
 "Qwen y ofrece un conjunto integral de modelos densos y de mezcla de expertos "
 "(MoE)."
 
-#: src/ollama_models.py:4799
+#: src/ollama_models.py:5395
 msgid "Devstral: the best open source model for coding agents"
 msgstr "Devstral: el mejor modelo de código abierto para agentes de codigo"
 
-#: src/ollama_models.py:4827
+#: src/ollama_models.py:5423
 msgid "Meta's latest collection of multimodal models."
 msgstr "La última colección de modelos multimodales de Meta."
 
-#: src/ollama_models.py:4875
+#: src/ollama_models.py:5471
 msgid ""
 "Flagship vision-language model of Qwen and also a significant leap from the "
 "previous Qwen2-VL."
@@ -3895,7 +3896,7 @@ msgstr ""
 "Modelo insignia de lenguaje de visión de Qwen y también un salto "
 "significativo respecto al anterior Qwen2-VL."
 
-#: src/ollama_models.py:4905
+#: src/ollama_models.py:5501
 msgid ""
 "DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
 "1.5B version also available."
@@ -3903,7 +3904,7 @@ msgstr ""
 "DeepCoder es un modelo codificador 14B de código abierto a nivel O3-mini, "
 "con una versión 1.5B también disponible."
 
-#: src/ollama_models.py:4929
+#: src/ollama_models.py:5525
 msgid ""
 "Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-"
 "art vision understanding and enhances long context capabilities up to 128k "
@@ -3913,7 +3914,7 @@ msgstr ""
 "visión de última generación y mejora las capacidades de contexto largo hasta "
 "128k tokens sin comprometer el rendimiento del texto."
 
-#: src/ollama_models.py:4969
+#: src/ollama_models.py:5565
 msgid ""
 "Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that "
 "outperform the best available open models of the same size, including "
@@ -3924,7 +3925,7 @@ msgstr ""
 "tamaño, incluidos sus homólogos de LLaMA, DeepSeek y Qwen en la mayoría de "
 "los puntos de referencia estándar."
 
-#: src/ollama_models.py:4998
+#: src/ollama_models.py:5594
 msgid ""
 "IBM Granite 2B and 8B models are 128K context length language models that "
 "have been fine-tuned for improved reasoning and instruction-following "
@@ -3934,7 +3935,7 @@ msgstr ""
 "contexto de 128 K que se han perfeccionado para mejorar las capacidades de "
 "razonamiento y seguimiento de instrucciones."
 
-#: src/ollama_models.py:5036
+#: src/ollama_models.py:5632
 msgid ""
 "Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
 "reasoning models that rival much larger models on complex reasoning tasks."
@@ -3943,7 +3944,7 @@ msgstr ""
 "peso abierto de 14 mil millones de parámetros que rivalizan con modelos "
 "mucho más grandes en tareas de razonamiento complejas."
 
-#: src/ollama_models.py:5068
+#: src/ollama_models.py:5664
 msgid ""
 "EXAONE Deep exhibits superior capabilities in various reasoning tasks "
 "including math and coding benchmarks, ranging from 2.4B to 32B parameters "
@@ -3953,7 +3954,7 @@ msgstr ""
 "incluidos puntos de referencia de matemáticas y codificación, que van desde "
 "2.4B a 32B de parámetros desarrollados y publicados por LG AI Research."
 
-#: src/ollama_models.py:5094
+#: src/ollama_models.py:5690
 msgid ""
 "Phi 4 mini reasoning is a lightweight open model that balances efficiency "
 "with advanced reasoning ability."
@@ -3961,7 +3962,7 @@ msgstr ""
 "El mini razonamiento Phi 4 es un modelo abierto y liviano que equilibra la "
 "eficiencia con la capacidad de razonamiento avanzada."
 
-#: src/ollama_models.py:5121
+#: src/ollama_models.py:5717
 msgid ""
 "Gemma 3n models are designed for efficient execution on everyday devices "
 "such as laptops, tablets or phones."
@@ -3969,13 +3970,13 @@ msgstr ""
 "Los modelos Gemma 3n están diseñados para una ejecución eficiente en "
 "dispositivos cotidianos como computadoras portátiles, tabletas o teléfonos."
 
-#: src/ollama_models.py:5144
+#: src/ollama_models.py:5740
 msgid "Magistral is a small, efficient reasoning model with 24B parameters."
 msgstr ""
 "Magistral es un modelo de razonamiento pequeño y eficiente con 24B "
 "parámetros."
 
-#: src/ollama_models.py:5191
+#: src/ollama_models.py:5787
 msgid ""
 "An update to Mistral Small that improves on function calling, instruction "
 "following, and less repetition errors."
@@ -3983,7 +3984,7 @@ msgstr ""
 "Una actualización de Mistral Small que mejora la llamada de funciones, el "
 "seguimiento de instrucciones y reduce los errores de repetición."
 
-#: src/ollama_models.py:5219
+#: src/ollama_models.py:5823
 msgid ""
 "OpenAI’s open-weight models designed for powerful reasoning, agentic tasks, "
 "and versatile developer use cases."
@@ -3991,25 +3992,54 @@ msgstr ""
 "Modelos de peso abierto de OpenAI diseñados para razonamiento poderoso, "
 "tareas de agentes y casos de uso versátiles para desarrolladores."
 
-#: src/ollama_models.py:5246
+#: src/ollama_models.py:5853
 msgid "Alibaba's performant long context models for agentic and coding tasks."
 msgstr ""
 "Modelos de contexto largos de alto rendimiento de Alibaba para tareas de "
 "agencia y codificación."
 
-#: src/ollama_models.py:5269
+#: src/ollama_models.py:5875
 msgid "EmbeddingGemma is a 300M parameter embedding model from Google."
 msgstr ""
 "EmbeddingGemma es un modelo de incorporación de 300 millones de parámetros "
 "de Google."
 
-#: src/ollama_models.py:5319
+#: src/ollama_models.py:5929
 msgid ""
-"DeepSeek-V3.1 is a hybrid model that supports both thinking mode and non-"
-"thinking mode."
+"DeepSeek-V3.1-Terminus is a hybrid model that supports both thinking mode "
+"and non-thinking mode."
 msgstr ""
-"DeepSeek-V3.1 es un modelo híbrido que admite tanto el modo de pensamiento "
-"como el modo de no pensamiento."
+"DeepSeek-V3.1-Terminus es un modelo híbrido que admite tanto el modo de "
+"pensamiento como el modo de no pensamiento."
+
+#: src/ollama_models.py:5947
+msgid ""
+"The most powerful vision-language model in the Qwen model family to date."
+msgstr ""
+"El modelo de visión-lenguaje más potente de la familia de modelos Qwen "
+"hasta la fecha."
+
+#: src/ollama_models.py:5962
+msgid "Advanced agentic, reasoning and coding capabilities."
+msgstr ""
+"Capacidades avanzadas de agencia, razonamiento y codificación."
+
+#: src/ollama_models.py:5987
+msgid ""
+"Building upon the foundational models of the Qwen3 series, Qwen3 Embedding "
+"provides a comprehensive range of text embeddings models in various sizes"
+msgstr ""
+"Basándose en los modelos fundamentales de la serie Qwen3, Qwen3 Embedding "
+"ofrece una amplia gama de modelos de incrustaciones de texto en varios tamaños"
+
+#: src/ollama_models.py:6037
+msgid ""
+"Granite 4 features improved instruction following (IF) and tool-calling "
+"capabilities, making them more effective in enterprise applications."
+msgstr ""
+"Granite 4 cuenta con capacidades mejoradas de seguimiento de instrucciones "
+"(IF) y llamada de herramientas, lo que las hace más efectivas en "
+"aplicaciones empresariales."
 
 #: src/quick_ask.py:76 src/widgets/activities/live_chat.py:215
 msgid "Please select an instance in Alpaca before chatting"
@@ -4406,7 +4436,8 @@ msgstr "IP del Dispositivo"
 
 #: src/ui/preferences.blp:197
 msgid "Alpaca needs an additional permission to use the terminal directly"
-msgstr "Alpaca necesita un permiso adicional para usar la terminal directamente"
+msgstr ""
+"Alpaca necesita un permiso adicional para usar la terminal directamente"
 
 #: src/ui/preferences.blp:229 src/widgets/instances/__init__.py:319
 msgid "Default Model"
@@ -6129,6 +6160,13 @@ msgstr "Salida"
 #: src/widgets/tools/tools.py:211
 msgid "Loading Image..."
 msgstr "Cargando Imagen..."
+
+#~ msgid ""
+#~ "DeepSeek-V3.1 is a hybrid model that supports both thinking mode and non-"
+#~ "thinking mode."
+#~ msgstr ""
+#~ "DeepSeek-V3.1 es un modelo híbrido que admite tanto el modo de "
+#~ "pensamiento como el modo de no pensamiento."
 
 #~ msgid "No tools enabled."
 #~ msgstr "No hay herramientas habilitadas."
