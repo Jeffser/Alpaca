@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-22 19:57-0600\n"
+"POT-Creation-Date: 2025-10-24 21:14-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3496,42 +3496,33 @@ msgid ""
 "following, and less repetition errors."
 msgstr ""
 
-#: src/ollama_models.py:5823
+#: src/ollama_models.py:5815
 msgid ""
 "OpenAI’s open-weight models designed for powerful reasoning, agentic tasks, "
 "and versatile developer use cases."
 msgstr ""
 
-#: src/ollama_models.py:5853
+#: src/ollama_models.py:5840
 msgid "Alibaba's performant long context models for agentic and coding tasks."
 msgstr ""
 
-#: src/ollama_models.py:5875
+#: src/ollama_models.py:5861
 msgid "EmbeddingGemma is a 300M parameter embedding model from Google."
 msgstr ""
 
-#: src/ollama_models.py:5929
+#: src/ollama_models.py:5911
 msgid ""
 "DeepSeek-V3.1-Terminus is a hybrid model that supports both thinking mode "
 "and non-thinking mode."
 msgstr ""
 
-#: src/ollama_models.py:5947
-msgid ""
-"The most powerful vision-language model in the Qwen model family to date."
-msgstr ""
-
-#: src/ollama_models.py:5962
-msgid "Advanced agentic, reasoning and coding capabilities."
-msgstr ""
-
-#: src/ollama_models.py:5987
+#: src/ollama_models.py:5940
 msgid ""
 "Building upon the foundational models of the Qwen3 series, Qwen3 Embedding "
 "provides a comprehensive range of text embeddings models in various sizes"
 msgstr ""
 
-#: src/ollama_models.py:6037
+#: src/ollama_models.py:5990
 msgid ""
 "Granite 4 features improved instruction following (IF) and tool-calling "
 "capabilities, making them more effective in enterprise applications."
@@ -3550,7 +3541,6 @@ msgid "Quick Ask"
 msgstr ""
 
 #: src/sql_manager.py:33
-#, python-brace-format
 msgid "{} seconds"
 msgstr ""
 
@@ -3567,7 +3557,6 @@ msgid "Prompt Eval Count"
 msgstr ""
 
 #: src/sql_manager.py:41 src/sql_manager.py:46
-#, python-brace-format
 msgid "{} tokens"
 msgstr ""
 
@@ -3580,7 +3569,6 @@ msgid "Prompt Eval Rate"
 msgstr ""
 
 #: src/sql_manager.py:44 src/sql_manager.py:49
-#, python-brace-format
 msgid "{} tokens/s"
 msgstr ""
 
@@ -4322,7 +4310,6 @@ msgid "Download Background Removal Model"
 msgstr ""
 
 #: src/widgets/activities/background_remover.py:266
-#, python-brace-format
 msgid "To use this tool you'll need to download a special model ({})"
 msgstr ""
 
@@ -4487,7 +4474,6 @@ msgid "Download Speech Recognition Model"
 msgstr ""
 
 #: src/widgets/activities/transcriber.py:151 src/widgets/voice.py:283
-#, python-brace-format
 msgid "To use speech recognition you'll need to download a special model ({})"
 msgstr ""
 
@@ -4614,7 +4600,6 @@ msgstr ""
 
 #: src/widgets/attachments.py:462 src/widgets/attachments.py:606
 #: src/widgets/chat.py:1042
-#, python-brace-format
 msgid "Are you sure you want to delete '{}'?"
 msgstr ""
 
@@ -4718,7 +4703,6 @@ msgid "Template Selector"
 msgstr ""
 
 #: src/widgets/chat.py:428
-#, python-brace-format
 msgid "Use '{}'"
 msgstr ""
 
@@ -4731,7 +4715,6 @@ msgid "Use Template"
 msgstr ""
 
 #: src/widgets/chat.py:509
-#, python-brace-format
 msgid "Send prompt: '{}'"
 msgstr ""
 
@@ -4756,12 +4739,10 @@ msgid "Delete Folder"
 msgstr ""
 
 #: src/widgets/chat.py:837 src/widgets/chat.py:1004
-#, python-brace-format
 msgid "Editing '{}'"
 msgstr ""
 
 #: src/widgets/chat.py:869
-#, python-brace-format
 msgid ""
 "Are you sure you want to delete '{}' and all it's sub-folders and chats?"
 msgstr ""
@@ -4771,7 +4752,6 @@ msgid "Use as Template"
 msgstr ""
 
 #: src/widgets/chat.py:1049
-#, python-brace-format
 msgid "Copy of {}"
 msgstr ""
 
@@ -4852,7 +4832,6 @@ msgid "Note that YouTube might block access to captions, please check output"
 msgstr ""
 
 #: src/widgets/message.py:562
-#, python-brace-format
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
@@ -4911,7 +4890,6 @@ msgid "Port"
 msgstr ""
 
 #: src/widgets/instances/__init__.py:58
-#, python-brace-format
 msgid "Which network port will '{}' use"
 msgstr ""
 
@@ -5192,7 +5170,6 @@ msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
 msgstr ""
 
 #: src/widgets/instances/ollama_instances.py:498
-#, python-brace-format
 msgid "Using AMD GPU type '{}'"
 msgstr ""
 
@@ -5359,7 +5336,6 @@ msgstr ""
 
 #: src/widgets/models/added.py:457 src/widgets/models/image.py:136
 #: src/widgets/models/speech.py:141 src/widgets/models/speech.py:284
-#, python-brace-format
 msgid "Are you sure you want to remove '{}'?"
 msgstr ""
 
@@ -5368,7 +5344,6 @@ msgid "Already Added"
 msgstr ""
 
 #: src/widgets/models/available.py:48
-#, python-brace-format
 msgid "Pull '{}'"
 msgstr ""
 
@@ -5485,7 +5460,6 @@ msgid "Create Model"
 msgstr ""
 
 #: src/widgets/models/image.py:44
-#, python-brace-format
 msgid "Local background removal model provided by {}."
 msgstr ""
 
@@ -5513,7 +5487,6 @@ msgid "Stop Download?"
 msgstr ""
 
 #: src/widgets/models/pulling.py:189
-#, python-brace-format
 msgid "Are you sure you want to stop pulling '{}'?"
 msgstr ""
 
@@ -5526,7 +5499,6 @@ msgid "Model Manager Error"
 msgstr ""
 
 #: src/widgets/models/pulling.py:225
-#, python-brace-format
 msgid "An error occurred whilst pulling '{}'"
 msgstr ""
 
@@ -5535,7 +5507,6 @@ msgid "Download Completed"
 msgstr ""
 
 #: src/widgets/models/pulling.py:254
-#, python-brace-format
 msgid "Model '{}' downloaded successfully."
 msgstr ""
 
