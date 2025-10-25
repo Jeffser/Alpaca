@@ -52,7 +52,7 @@ class AlpacaSearchProvider:
     def ActivateResult(self, identifier, terms, uid=None):
         bus = SessionBus()
         try:
-            app_service = bus.get("com.jeffser.Alpaca")
+            app_service = bus.get("com.jeffser.Alpaca.Service")
             if app_service.IsRunning() != 'yeah':
                 raise Exception('Alpaca not running')
             if identifier.split(':')[0] == 'open':

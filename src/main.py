@@ -53,26 +53,10 @@ logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser(description="Alpaca")
 
-_loaded_window_libraries = {}
-
-_window_loaders = {
-    'alpaca': lambda: __import__('alpaca.window', fromlist=['AlpacaWindow']).AlpacaWindow,
-    'quick-ask': lambda: __import__('alpaca.quick_ask', fromlist=['QuickAskWindow']).QuickAskWindow
-}
-
-def get_window_library(name: str) -> Adw.Window:
-    if name not in _window_loaders:
-        raise ValueError(f"Unknown window library: {name}")
-
-    if name not in _loaded_window_libraries:
-        _loaded_window_libraries[name] = _window_loaders[name]()
-
-    return _loaded_window_libraries[name]
-
 class AlpacaService:
     """
     <node>
-        <interface name='com.jeffser.Alpaca'>
+        <interface name='com.jeffser.Alpaca.Service'>
             <method name='IsRunning'>
                 <arg type='s' name='result' direction='out'/>
             </method>
@@ -148,27 +132,24 @@ class AlpacaApplication(Adw.Application):
         self.create_action('shortcuts', lambda *_: GLib.idle_add(self.show_shortcuts_dialog), ['<primary>slash'])
         self.version = version
         self.args = parser.parse_args()
-        if sys.platform in ('linux', 'linux2'):
-            try:
-                SessionBus().publish('com.jeffser.Alpaca', AlpacaService(self))
-            except:
-                # The app is probably already running so let's use dbus to interact if needed
-                self.run_arguments()
-                sys.exit(0)
 
     def run_arguments(self):
-        try:
-            app_service = SessionBus().get('com.jeffser.Alpaca')
-            if app_service.IsRunning() != 'yeah':
-                raise Exception('Alpaca not running')
-        except:
+        if sys.platform in ('linux', 'linux2'):
+            try:
+                close_at_end = True
+                app_service = SessionBus().get('com.jeffser.Alpaca.Service')
+            except:
+                close_at_end = False
+                app_service = AlpacaService(self)
+                SessionBus().publish('com.jeffser.Alpaca.Service', app_service)
+        else:
             app_service = AlpacaService(self)
 
         if self.args.activity:
             app_service.Activity(self.args.activity)
         elif self.args.new_chat:
             app_service.Create(self.args.new_chat)
-            self.main_alpaca_window.present()
+            app_service.Present()
         elif self.args.quick_ask:
             app_service.PresentAsk()
         elif self.args.ask:
@@ -177,7 +158,10 @@ class AlpacaApplication(Adw.Application):
             logger.warning('--live-chat is deprecated, use --activity live-chat')
             app_service.Activity('live-chat')
         else:
-            self.main_alpaca_window.present()
+            app_service.Present()
+
+        if close_at_end:
+            sys.exit(0)
 
     def get_main_window(self, present:bool=True):
         if present:
@@ -191,11 +175,13 @@ class AlpacaApplication(Adw.Application):
         dialog.present(self.main_alpaca_window)
 
     def create_quick_ask(self):
-        return get_window_library('quick-ask')(application=self)
+        from .quick_ask import QuickAskWindow
+        return QuickAskWindow(application=self)
 
     def do_activate(self):
-        self.main_alpaca_window = get_window_library('alpaca')(application=self)
-        threading.Thread(target=self.run_arguments).start()
+        from .window import AlpacaWindow
+        self.main_alpaca_window = AlpacaWindow(application=self)
+        self.run_arguments()
 
         if sys.platform == 'darwin': # MacOS
             settings = Gtk.Settings.get_default()
