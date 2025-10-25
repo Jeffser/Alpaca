@@ -83,7 +83,7 @@ Language                | Contributors
 🇷🇺 Russian              | [Alex K](https://github.com/alexkdeveloper) [DasHi](https://github.com/col83)
 🇪🇸 Spanish              | [Jeffry Samuel](https://github.com/jeffser)
 🇫🇷 French               | [Louis Chauvet-Villaret](https://github.com/loulou64490) , [Théo FORTIN](https://github.com/topiga)
-🇧🇷 Brazilian Portuguese | [Daimar Stein](https://github.com/not-a-dev-stein) , [Bruno Antunes](https://github.com/antun3s)
+🇧🇷 Brazilian Portuguese | [Daimar Stein](https://github.com/not-a-dev-stein) , [Bruno Antunes](https://github.com/antun3s) , [Lucas Loura](https://github.com/lloura)
 🇳🇴 Norwegian            | [CounterFlow64](https://github.com/CounterFlow64)
 🇮🇳 Bengali              | [Aritra Saha](https://github.com/olumolu)
 🇨🇳 Simplified Chinese   | [Yuehao Sui](https://github.com/8ar10der) , [Aleksana](https://github.com/Aleksanaa)
