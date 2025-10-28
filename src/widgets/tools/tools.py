@@ -1,7 +1,8 @@
 # tools.py
 
-from gi.repository import GObject, GLib
-from .. import activities
+from gi.repository import GObject, GLib, Gio, Gtk
+from .. import activities, dialog, attachments
+from ...sql_manager import Instance as SQL, generate_uuid
 import os, threading
 
 class Property:
@@ -37,16 +38,14 @@ class Base(GObject.Object):
             'type': 'function',
             'function': {
                 'name': self.name,
-                'description': self.description
+                'description': self.description,
+                'parameters': {
+                    'type': 'object',
+                    'properties': properties,
+                    'required': required_properties
+                }
             }
         }
-
-        if len(properties) > 0:
-            metadata['function']['parameters'] = {
-                'type': 'object',
-                'properties': properties,
-                'required': required_properties
-            }
 
         return metadata
 
@@ -212,7 +211,7 @@ class BackgroundRemover(Base):
         image_b64 = self.get_latest_image(messages, bot_message.get_root())
         if image_b64:
             self.status = 0 # 0 waiting, 1 finished, 2 canceled / empty image
-            page = activities.BackgroundRemoverPage(
+            page = activities.BackgroundRemover(
                 save_func=lambda data, bm=bot_message: self.on_save(data, bm),
                 close_callback=self.on_close
             )
