@@ -227,7 +227,7 @@ class BaseInstance:
         new_chat_title = chat.get_name()
 
         try:
-            completion = self.client.beta.chat.completions.parse(**params, response_format=ChatTitle)
+            completion = self.client.chat.completions.parse(**params, response_format=ChatTitle)
             response = completion.choices[0].message
             if response.parsed:
                 emoji = response.parsed.emoji if len(response.parsed.emoji) == 1 else ''
