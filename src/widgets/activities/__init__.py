@@ -300,9 +300,11 @@ def generate_action_bar(page:Gtk.Widget, tabview:Gtk.Widget=None):
     )
 
     for btn in page.buttons.get('start', []):
+        btn.unparent()
         action_bar.pack_start(btn)
 
     if page.buttons.get('center'):
+        page.buttons.get('center').unparent()
         action_bar.set_center_widget(page.buttons.get('center'))
 
     if tabview:
@@ -316,6 +318,7 @@ def generate_action_bar(page:Gtk.Widget, tabview:Gtk.Widget=None):
         action_bar.pack_end(close_button)
 
     for btn in page.buttons.get('end', []):
+        btn.unparent()
         action_bar.pack_end(btn)
 
     return action_bar
