@@ -106,7 +106,7 @@ class WebBrowser(Gtk.ScrolledWindow):
         elif '.' in url and ' ' not in url:
             self.webview.load_uri('https://{}'.format(url))
         else:
-            url = self.get_root().settings.get_value('activity-webbrowser-query-url').unpack().format(url)
+            self.webview.load_uri(self.get_root().settings.get_value('activity-webbrowser-query-url').unpack().format(url))
 
 
     def on_create(self, webview, navigation_action):
