@@ -182,7 +182,8 @@ class ActivityManager(Adw.Bin):
             child=listbox
         )
         launcher_tbv = Adw.ToolbarView(
-            content=launcher
+            content=launcher,
+            extend_content_to_top_edge=True
         )
         launcher_tbv.add_top_bar(Adw.HeaderBar(show_title=False))
         self.navigationview.add(Adw.NavigationPage(
