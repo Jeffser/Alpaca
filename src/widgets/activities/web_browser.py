@@ -41,8 +41,8 @@ class WebBrowser(Gtk.ScrolledWindow):
         )
         self.url_entry.connect('activate', self.on_url_activate)
         focus_controller = Gtk.EventControllerFocus.new()
-        focus_controller.connect("enter", lambda c: GLib.idle_add(self.url_entry.select_region, 0, -1))
-        focus_controller.connect("leave", lambda c: GLib.idle_add(self.url_entry.select_region, 0, 0))
+        focus_controller.connect("enter", lambda c: self.url_entry_focus_changed(True))
+        focus_controller.connect("leave", lambda c: self.url_entry_focus_changed(False))
         self.url_entry.add_controller(focus_controller)
 
 
@@ -72,7 +72,7 @@ class WebBrowser(Gtk.ScrolledWindow):
         popover = dialog.Popover(actions)
         popover.set_has_arrow(True)
         popover.set_halign(0)
-        menu_button = Gtk.MenuButton(
+        self.menu_button = Gtk.MenuButton(
             icon_name='view-more-symbolic',
             popover=popover,
             direction=0
@@ -90,9 +90,14 @@ class WebBrowser(Gtk.ScrolledWindow):
         self.buttons = {
             'start': [self.back_button, self.forward_button],
             'center': self.url_entry,
-            'end': [self.attachment_stack, menu_button]
+            'end': [self.attachment_stack, self.menu_button]
         }
         self.extend_to_edge = False
+
+    def url_entry_focus_changed(self, focused:bool):
+        GLib.idle_add(self.url_entry.select_region, 0, -1 if focused else 0)
+        for btn in [self.forward_button, self.attachment_stack, self.menu_button]:
+            btn.set_visible(not focused)
 
     def on_url_activate(self, entry):
         url = entry.get_text().strip()
