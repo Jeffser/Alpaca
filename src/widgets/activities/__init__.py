@@ -24,6 +24,9 @@ class ActivityDialog(Adw.Dialog):
         if self.page.extend_to_edge:
             hb.add_css_class('osd')
             bb.add_css_class('osd')
+        for css_class in self.page.buttons.get('css', []):
+            bb.add_css_class(css_class)
+
         tbv.add_bottom_bar(bb)
         tbv.set_content(self.page)
 
@@ -250,7 +253,8 @@ class ActivityManager(Adw.Bin):
                 self.tab_hb.add_css_class('osd')
             else:
                 self.tab_hb.remove_css_class('osd')
-
+            for css_class in selected_child.buttons.get('css', []):
+                self.bottom_bar.add_css_class(css_class)
             self.tab_tbv.set_extend_content_to_bottom_edge(selected_child.extend_to_edge)
             self.tab_tbv.set_extend_content_to_top_edge(selected_child.extend_to_edge)
 

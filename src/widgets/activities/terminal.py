@@ -71,7 +71,8 @@ if sys.platform != 'win32':
 
             # Activities
             self.buttons = {
-                'start': [self.dir_button, self.reload_button]
+                'start': [self.dir_button, self.reload_button],
+                'css': ['black_background']
             }
             self.extend_to_edge = False
             self.title = _("Terminal")
@@ -244,7 +245,8 @@ if sys.platform != 'win32':
 
             # Activities
             self.buttons = {
-                'start': [view_button, self.button_stack]
+                'start': [view_button, self.button_stack],
+                'css': ['black_background']
             }
             self.extend_to_edge = False
             self.title = _("Code Runner")
