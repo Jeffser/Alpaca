@@ -207,7 +207,11 @@ class BackgroundRemover(Gtk.ScrolledWindow):
         self.select_button.connect('clicked', lambda *_: self.load_image_requested())
         self.stack_switcher.connect('notify::active', lambda toggle_group, gparam: self.image_stack.set_visible_child_name(toggle_group.get_active_name()))
 
-        self.buttons = [self.model_dropdown, self.select_button]
+        self.buttons = {
+            'start': [self.select_button],
+            'center': self.model_dropdown
+        }
+        self.extend_to_edge = False
         self.title = _("Background Remover")
         self.activity_icon = 'image-missing-symbolic'
 

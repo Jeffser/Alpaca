@@ -143,7 +143,7 @@ class Code(Gtk.Box):
 
     def begin_edit(self) -> None:
         if self.activity_edit and self.activity_edit.get_root():
-            self.activity_edit.reload()
+            self.activity_edit.on_reload()
         else:
             ce = activities.CodeEditor(
                 language=get_language_property(self.get_language()).get('id'),
@@ -164,7 +164,7 @@ class Code(Gtk.Box):
 
     def run_script(self) -> None:
         if self.activity_runner and self.activity_runner.get_root():
-            self.activity_runner.reload()
+            self.activity_runner.on_reload()
         else:
             extra_files = []
             for blk in [blk for blk in list(self.get_parent().message.block_container) if isinstance(blk, Code) and blk.get_language().lower() in ('css', 'javascript', 'js') and blk != self]:

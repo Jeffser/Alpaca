@@ -48,7 +48,10 @@ class Camera(Adw.Bin):
             self.connect('realize', lambda *_: self.on_realize())
 
         # Activity
-        self.buttons = [capture_button]
+        self.buttons = {
+            'center': capture_button
+        }
+        self.extend_to_edge = True
         self.title = _('Camera')
         self.activity_icon = 'camera-photo-symbolic'
 

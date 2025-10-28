@@ -70,7 +70,10 @@ if sys.platform != 'win32':
                 self.connect('child-exited', lambda *_: self.close_callback())
 
             # Activities
-            self.buttons = [self.dir_button, self.reload_button]
+            self.buttons = {
+                'start': [self.dir_button, self.reload_button]
+            }
+            self.extend_to_edge = False
             self.title = _("Terminal")
             self.activity_icon = 'terminal-symbolic'
 
@@ -214,18 +217,20 @@ if sys.platform != 'win32':
             self.add_named(self.code_editor, 'editor')
 
             self.button_stack = Gtk.Stack(
-                transition_type=1
+                transition_type=1,
+                overflow=1
             )
-            terminal_buttons_container = Gtk.Box(css_classes=['linked'])
-            for btn in self.terminal.buttons:
+            terminal_buttons_container = Gtk.Box(
+                css_classes=['linked']
+            )
+            for btn in self.terminal.buttons.get('start', []) + self.terminal.buttons.get('end', []):
                 terminal_buttons_container.append(btn)
-                btn.add_css_class('flat')
-                btn.add_css_class('br0')
-            code_editor_buttons_container = Gtk.Box(css_classes=['linked'])
-            for btn in self.code_editor.buttons:
+
+            code_editor_buttons_container = Gtk.Box(
+                css_classes=['linked']
+            )
+            for btn in self.code_editor.buttons.get('start', []) + self.code_editor.buttons.get('end', []):
                 code_editor_buttons_container.append(btn)
-                btn.add_css_class('flat')
-                btn.add_css_class('br0')
 
             self.button_stack.add_named(terminal_buttons_container, 'terminal')
             self.button_stack.add_named(code_editor_buttons_container, 'editor')
@@ -238,7 +243,10 @@ if sys.platform != 'win32':
             view_button.set_active(default_mode == 'editor')
 
             # Activities
-            self.buttons = [view_button, self.button_stack]
+            self.buttons = {
+                'start': [view_button, self.button_stack]
+            }
+            self.extend_to_edge = False
             self.title = _("Code Runner")
             self.activity_icon = 'code-symbolic'
 
@@ -299,7 +307,10 @@ class AttachmentCreator(Gtk.ScrolledWindow):
         save_button.connect('clicked', lambda button: self.save_requested())
 
         # Activities
-        self.buttons = [save_button]
+        self.buttons = {
+            'start': [save_button]
+        }
+        self.extend_to_edge = False
         self.title = _("New Attachment")
         self.activity_icon = 'document-edit-symbolic'
 
@@ -370,7 +381,8 @@ class CodeEditor(Gtk.ScrolledWindow):
         self.on_reload()
 
         # Activities
-        self.buttons = []
+        self.buttons = {}
+        self.extend_to_edge = False
         self.title = _("Code Editor")
         self.activity_icon = 'document-edit-symbolic'
 
@@ -386,7 +398,9 @@ class CodeEditor(Gtk.ScrolledWindow):
                 icon_name='update-symbolic'
             )
             reload_button.connect('clicked', lambda button: self.on_reload())
-            self.buttons = [save_button, reload_button]
+            self.buttons = {
+                'start': [save_button, reload_button]
+            }
 
     def save(self):
         code = self.get_code()

@@ -12,83 +12,20 @@ import importlib.util
 
 last_activity_tabview = None
 
-class ActivityWrapper(Gtk.Overlay):
-    __gtype_name__ = 'AlpacaActivityWrapper'
-
-    def __init__(self, page:Gtk.Widget):
-        self.page = page
-        self.tab = None
-        super().__init__(
-            child=self.page
-        )
-        buttons_container = Gtk.Box(
-            css_classes=['linked', 'r10', 'osd'],
-            margin_top=10,
-            margin_bottom=10,
-            margin_start=10,
-            margin_end=10,
-            valign=1 if isinstance(page, LiveChat) else 2,
-            halign=3,
-            overflow=1
-        )
-        close_button = Gtk.Button(
-            tooltip_text=_('Close Activity'),
-            icon_name='window-close-symbolic',
-            css_classes=['flat']
-        )
-        close_button.connect('clicked', lambda button: self.close())
-
-        for btn in self.page.buttons:
-            if btn.get_parent():
-                btn.get_parent().remove(btn)
-            buttons_container.append(btn)
-            btn.add_css_class('flat')
-            if btn.get_hexpand():
-                buttons_container.set_halign(0)
-                buttons_container.set_hexpand(True)
-
-        if len(self.page.buttons) > 0:
-            buttons_container.append(Gtk.Separator())
-        buttons_container.append(close_button)
-
-        self.add_overlay(buttons_container)
-
-    def close(self):
-        self.page.on_close()
-        if self.page.get_parent():
-            if self.tab and self.page:
-                tabview = self.page.get_ancestor(Adw.TabView)
-                if tabview:
-                    tabview.close_page(self.tab)
-
-    def reload(self):
-        if self.tab and self.page:
-            tabview = self.page.get_ancestor(Adw.TabView)
-            if tabview:
-                tabview.set_selected_page(self.tab)
-        self.page.on_reload()
-
 class ActivityDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaActivityDialog'
 
     def __init__(self, page:Gtk.Widget):
         self.page = page
         tbv=Adw.ToolbarView()
-        hb = Adw.HeaderBar(show_title=False)
-        for btn in page.buttons:
-            if btn.get_parent():
-                btn.get_parent().remove(btn)
-            if isinstance(btn, Gtk.Stack):
-                for box in list(btn):
-                    if isinstance(box, Gtk.Box):
-                        box.remove_css_class('linked')
-                        box.set_spacing(6)
-                        for btn2 in list(box):
-                            btn2.remove_css_class('br0')
-            hb.pack_start(btn)
-            btn.add_css_class('flat')
+        hb = Adw.HeaderBar()
         tbv.add_top_bar(hb)
+        bb = generate_action_bar(self.page)
+        tbv.add_bottom_bar(bb)
         tbv.set_content(self.page)
+
+        tbv.set_extend_content_to_bottom_edge(self.page.extend_to_edge)
+        tbv.set_extend_content_to_top_edge(self.page.extend_to_edge)
 
         super().__init__(
             child=tbv,
@@ -103,7 +40,6 @@ class ActivityDialog(Adw.Dialog):
         self.force_close()
         if self.page and self.page.get_parent():
             self.page.on_close()
-            self.tab = None
             self.page = None
             self = None
 
@@ -146,14 +82,15 @@ class ActivityManager(Adw.Bin):
         launcher_button.connect('clicked', lambda btn: self.navigationview.push_by_tag('launcher'))
         tab_hb.pack_end(launcher_button)
 
-        tab_tbv = Adw.ToolbarView(
+        self.tab_tbv = Adw.ToolbarView(
             content=self.tabview
         )
-        tab_tbv.add_top_bar(tab_hb)
+        self.tab_tbv.add_top_bar(tab_hb)
+        self.bottom_bar = None
 
         self.taboverview = Adw.TabOverview(
             view=self.tabview,
-            child=tab_tbv
+            child=self.tab_tbv
         )
 
         self.navigationview.add(Adw.NavigationPage(
@@ -252,20 +189,18 @@ class ActivityManager(Adw.Bin):
     def start_activity(self, activity):
         page = activity.get('builder')()
         if page:
-            tab_page = self.tabview.append(ActivityWrapper(page))
+            tab_page = self.tabview.append(page)
             if activity.get('runner'):
                 activity.get('runner')(page)
             tab_page.set_title(page.title)
             tab_page.set_icon(Gio.ThemedIcon.new(page.activity_icon))
-            tab_page.get_child().tab = tab_page
 
     def page_closed(self, tabview, tabpage):
-        tabpage.get_child().page.on_close()
+        tabpage.get_child().on_close()
 
     def page_attached(self, tabview, tabpage, index):
-        tabpage.set_title(tabpage.get_child().page.title)
-        tabpage.set_icon(Gio.ThemedIcon.new(tabpage.get_child().page.activity_icon))
-        tabpage.get_child().tab = tabpage
+        tabpage.set_title(tabpage.get_child().title)
+        tabpage.set_icon(Gio.ThemedIcon.new(tabpage.get_child().activity_icon))
         tabpage.set_thumbnail_yalign(0.5)
 
         self.navigationview.replace_with_tags(['tab'])
@@ -298,7 +233,17 @@ class ActivityManager(Adw.Bin):
 
     def page_changed(self, tabview, gparam):
         if tabview.get_selected_page():
-            self.navigationview.find_page('tab').set_title(tabview.get_selected_page().get_child().page.title)
+            selected_child = tabview.get_selected_page().get_child()
+            self.navigationview.find_page('tab').set_title(selected_child.title)
+            if self.bottom_bar:
+                self.tab_tbv.remove(self.bottom_bar)
+                self.bottom_bar = None
+
+            self.bottom_bar = generate_action_bar(selected_child, self.tabview)
+            if self.bottom_bar:
+                self.tab_tbv.add_bottom_bar(self.bottom_bar)
+            self.tab_tbv.set_extend_content_to_bottom_edge(selected_child.extend_to_edge)
+            self.tab_tbv.set_extend_content_to_top_edge(selected_child.extend_to_edge)
 
     def detach_current_activity(self, button):
         global last_activity_tabview
@@ -334,6 +279,34 @@ class ActivityTabWindow(Adw.ApplicationWindow):
         self.activity_manager = None
         super().close()
 
+def generate_action_bar(page:Gtk.Widget, tabview:Gtk.Widget=None):
+    if not page:
+        return
+    action_bar = Gtk.ActionBar(
+        valign=2
+    )
+
+    for btn in page.buttons.get('start', []):
+        action_bar.pack_start(btn)
+
+    if page.buttons.get('center'):
+        action_bar.set_center_widget(page.buttons.get('center'))
+
+    if tabview:
+        close_button = Gtk.Button(
+            tooltip_text=_('Close Activity'),
+            icon_name='window-close-symbolic',
+            css_classes=['flat', 'circular'],
+            valign=3
+        )
+        close_button.connect('clicked', lambda button, tv=tabview: tv.close_page(tabview.get_selected_page()))
+        action_bar.pack_end(close_button)
+
+    for btn in page.buttons.get('end', []):
+        action_bar.pack_end(btn)
+
+    return action_bar
+
 def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
     if not page or page.get_parent():
         return
@@ -342,7 +315,7 @@ def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
         force_dialog = True
 
     if root.get_name() == 'AlpacaWindow' and root.settings.get_value('activity-mode').unpack() == 0 and not force_dialog:
-        tab_page = root.activities_page.get_child().tabview.append(ActivityWrapper(page))
+        tab_page = root.activities_page.get_child().tabview.append(page)
         return tab_page.get_child()
     elif root.settings.get_value('activity-mode').unpack() == 1 or force_dialog:
         dialog = ActivityDialog(page)
@@ -355,7 +328,7 @@ def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
             atw.present()
             last_activity_tabview = atw.activity_manager.tabview
 
-        tab_page = last_activity_tabview.append(ActivityWrapper(page))
+        tab_page = last_activity_tabview.append(page)
         return tab_page.get_child()
 
 def launch_detached_activity(page:Gtk.Widget, root):
@@ -368,7 +341,7 @@ def launch_detached_activity(page:Gtk.Widget, root):
         atw.present()
         last_activity_tabview = atw.activity_manager.tabview
 
-    last_activity_tabview.append(ActivityWrapper(page))
+    last_activity_tabview.append(page)
 
 # Activity names for console arguments (e.g. --activity "camera")
 ARGUMENT_ACTIVITIES = {

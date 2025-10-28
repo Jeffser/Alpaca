@@ -36,7 +36,6 @@ class WebBrowser(Gtk.ScrolledWindow):
 
         self.url_entry = Gtk.Entry(
             placeholder_text=_('Enter URL...'),
-            css_classes=['p5'],
             overflow=1,
             hexpand=True
         )
@@ -50,10 +49,9 @@ class WebBrowser(Gtk.ScrolledWindow):
         self.attachment_button = Gtk.Button(
             icon_name='chain-link-loose-symbolic',
             tooltip_text=_('Attach'),
-            css_classes=['br0', 'flat']
+            css_classes=['flat']
         )
         self.attachment_button.connect("clicked", lambda button: threading.Thread(target=self.attachment_requested(self.save)).start())
-        #self.attachment_button.connect("clicked", lambda button:  )
         self.attachment_stack = Gtk.Stack(transition_type=1)
         self.attachment_stack.add_named(self.attachment_button, 'button')
         self.attachment_stack.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
@@ -89,7 +87,12 @@ class WebBrowser(Gtk.ScrolledWindow):
         # Activity
         self.title=_("Web Browser")
         self.activity_icon = 'globe-symbolic'
-        self.buttons = [self.back_button, self.forward_button, self.url_entry, self.attachment_stack, menu_button]
+        self.buttons = {
+            'start': [self.back_button, self.forward_button],
+            'center': self.url_entry,
+            'end': [self.attachment_stack, menu_button]
+        }
+        self.extend_to_edge = False
 
     def on_url_activate(self, entry):
         url = entry.get_text().strip()

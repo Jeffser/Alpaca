@@ -151,7 +151,11 @@ class LiveChat(Adw.Bin):
         # Activity
         self.title=_('Live Chat')
         self.activity_icon='headset-symbolic'
-        self.buttons=[self.model_dropdown, show_messages_button]
+        self.buttons={
+            'start': [show_messages_button],
+            'center': self.model_dropdown
+        }
+        self.extend_to_edge = False
 
         self.connect('map', lambda *_: self.on_map())
 

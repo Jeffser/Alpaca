@@ -104,7 +104,11 @@ class Transcriber(Gtk.Stack):
         self.attachment_button.connect("clicked", lambda button: self.attach_results())
 
         # Activity
-        self.buttons = [self.attachment_button, self.microphone_button]
+        self.buttons = {
+            'start': [self.attachment_button],
+            'center': self.microphone_button
+        }
+        self.extend_to_edge = False
         self.title = _('Transcriber')
         self.activity_icon = 'music-note-single-symbolic'
 
