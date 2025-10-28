@@ -21,6 +21,9 @@ class ActivityDialog(Adw.Dialog):
         hb = Adw.HeaderBar()
         tbv.add_top_bar(hb)
         bb = generate_action_bar(self.page)
+        if self.page.extend_to_edge:
+            hb.add_css_class('osd')
+            bb.add_css_class('osd')
         tbv.add_bottom_bar(bb)
         tbv.set_content(self.page)
 
@@ -60,32 +63,32 @@ class ActivityManager(Adw.Bin):
         self.tabview.connect('page-detached', self.page_detached)
         self.tabview.connect('create-window', self.window_create)
         self.tabview.connect('notify::selected-page', self.page_changed)
-        tab_hb = Adw.HeaderBar()
+        self.tab_hb = Adw.HeaderBar()
 
         overview_button = Adw.TabButton(
             view=self.tabview,
             action_name='overview.open'
         )
-        tab_hb.pack_start(overview_button)
+        self.tab_hb.pack_start(overview_button)
 
         detach_activity_button = Gtk.Button(
             icon_name='pip-in-symbolic',
             tooltip_text=_('Detach Activity')
         )
         detach_activity_button.connect('clicked', self.detach_current_activity)
-        tab_hb.pack_start(detach_activity_button)
+        self.tab_hb.pack_start(detach_activity_button)
 
         launcher_button = Gtk.Button(
             icon_name='list-add-symbolic',
             tooltip_text=_('Create Activity')
         )
         launcher_button.connect('clicked', lambda btn: self.navigationview.push_by_tag('launcher'))
-        tab_hb.pack_end(launcher_button)
+        self.tab_hb.pack_end(launcher_button)
 
         self.tab_tbv = Adw.ToolbarView(
             content=self.tabview
         )
-        self.tab_tbv.add_top_bar(tab_hb)
+        self.tab_tbv.add_top_bar(self.tab_hb)
         self.bottom_bar = None
 
         self.taboverview = Adw.TabOverview(
@@ -242,6 +245,12 @@ class ActivityManager(Adw.Bin):
             self.bottom_bar = generate_action_bar(selected_child, self.tabview)
             if self.bottom_bar:
                 self.tab_tbv.add_bottom_bar(self.bottom_bar)
+            if selected_child.extend_to_edge:
+                self.bottom_bar.add_css_class('osd')
+                self.tab_hb.add_css_class('osd')
+            else:
+                self.tab_hb.remove_css_class('osd')
+
             self.tab_tbv.set_extend_content_to_bottom_edge(selected_child.extend_to_edge)
             self.tab_tbv.set_extend_content_to_top_edge(selected_child.extend_to_edge)
 
