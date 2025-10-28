@@ -142,7 +142,11 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
         drag.connect("drag-update", self.on_drag_update)
 
         # Activity
-        self.buttons = []
+        self.buttons = {
+            'start': [],
+            'end': []
+        }
+        self.extend_to_edge = True
         self.title = title
         self.activity_icon = 'image-x-generic-symbolic'
 
@@ -158,7 +162,7 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
                 valign=3
             )
             delete_button.connect('clicked', lambda *_, cb=delete_callback: cb(self.get_root()))
-            self.buttons.append(delete_button)
+            self.buttons['start'].append(delete_button)
         if download_callback:
             download_button = Gtk.Button(
                 icon_name='folder-download-symbolic',
@@ -167,7 +171,7 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
                 valign=3
             )
             download_button.connect('clicked', lambda *_, cb=download_callback: cb(self.get_root()))
-            self.buttons.append(download_button)
+            self.buttons['start'].append(download_button)
         if attachment_callback:
             attach_button = Gtk.Button(
                 icon_name='chain-link-loose-symbolic',
@@ -176,7 +180,7 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
                 valign=3
             )
             attach_button.connect('clicked', lambda *_, cb=attachment_callback: cb())
-            self.buttons.append(attach_button)
+            self.buttons['end'].append(attach_button)
 
         self.reset_button = Gtk.Button(
             icon_name='zoom-fit-best-symbolic',
@@ -185,7 +189,7 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
             valign=3
         )
         self.reset_button.connect('clicked', lambda *_: self.on_reload())
-        self.buttons.append(self.reset_button)
+        self.buttons['end'].append(self.reset_button)
 
     def on_reload(self):
         self.scale = self.get_min_scale()
@@ -272,7 +276,11 @@ class AttachmentPage(Gtk.ScrolledWindow):
         self.attachment = attachment
 
         # Activity
-        self.buttons = []
+        self.buttons = {
+            'start': [],
+            'end': []
+        }
+        self.extend_to_edge = False
         self.title = self.attachment.file_name
         self.activity_icon = self.attachment.get_child().get_icon_name()
 
@@ -285,7 +293,7 @@ class AttachmentPage(Gtk.ScrolledWindow):
                 valign=3
             )
             delete_button.connect('clicked', lambda *_: self.attachment.prompt_delete(self.get_root()))
-            self.buttons.append(delete_button)
+            self.buttons['start'].append(delete_button)
 
         download_button = Gtk.Button(
             icon_name='folder-download-symbolic',
@@ -294,7 +302,7 @@ class AttachmentPage(Gtk.ScrolledWindow):
             valign=3
         )
         download_button.connect('clicked', lambda *_: self.attachment.prompt_download(self.get_root()))
-        self.buttons.append(download_button)
+        self.buttons['start'].append(download_button)
 
         container = Gtk.Box(
             orientation=1,
