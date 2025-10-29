@@ -55,7 +55,7 @@ class ActivityDialog(Adw.Dialog):
 class ActivityManager(Adw.Bin):
     __gtype_name__ = 'AlpacaActivityManager'
 
-    def __init__(self):
+    def __init__(self, reattach:bool=False):
         self.navigationview = Adw.NavigationView()
         super().__init__(child=self.navigationview)
 
@@ -74,12 +74,13 @@ class ActivityManager(Adw.Bin):
         )
         self.tab_hb.pack_start(overview_button)
 
-        detach_activity_button = Gtk.Button(
-            icon_name='pip-in-symbolic',
-            tooltip_text=_('Detach Activity')
+        action_activity_button = Gtk.Button(
+            icon_name='pip-out-symbolic' if reattach else 'pip-in-symbolic',
+            tooltip_text=_('Attach Activity') if reattach else _('Detach Activity')
         )
-        detach_activity_button.connect('clicked', self.detach_current_activity)
-        self.tab_hb.pack_start(detach_activity_button)
+
+        action_activity_button.connect('clicked', self.reattach_current_activity if reattach else self.detach_current_activity)
+        self.tab_hb.pack_start(action_activity_button)
 
         launcher_button = Gtk.Button(
             icon_name='list-add-symbolic',
@@ -259,6 +260,16 @@ class ActivityManager(Adw.Bin):
             self.tab_tbv.set_extend_content_to_bottom_edge(selected_child.extend_to_edge)
             self.tab_tbv.set_extend_content_to_top_edge(selected_child.extend_to_edge)
 
+    def reattach_current_activity(self, button):
+        tabview = self.get_root().application.main_alpaca_window.activities_page.get_child().tabview
+        self.tabview.transfer_page(
+            self.tabview.get_selected_page(),
+            tabview,
+            0
+        )
+        if len(self.tabview.get_pages()) == 0:
+            self.get_root().close()
+
     def detach_current_activity(self, button):
         global last_activity_tabview
         if not last_activity_tabview or not last_activity_tabview.get_root() or last_activity_tabview == self.tabview:
@@ -274,7 +285,7 @@ class ActivityTabWindow(Adw.ApplicationWindow):
 
     def __init__(self, application):
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
-        self.activity_manager = ActivityManager()
+        self.activity_manager = ActivityManager(reattach=True)
         self.application = application
         super().__init__(
             content=self.activity_manager,
@@ -286,11 +297,12 @@ class ActivityTabWindow(Adw.ApplicationWindow):
         return self.application
 
     def close(self):
-        if self.activity_manager.tabview:
-            for page in list(self.activity_manager.tabview.get_pages()):
-                self.activity_manager.tabview.close_page(page)
-        self.set_child()
-        self.activity_manager = None
+        if self.activity_manager:
+            if self.activity_manager.tabview:
+                for page in list(self.activity_manager.tabview.get_pages()):
+                    self.activity_manager.tabview.close_page(page)
+            self.set_child()
+            self.activity_manager = None
         super().close()
 
 def generate_action_bar(page:Gtk.Widget, tabview:Gtk.Widget=None):
