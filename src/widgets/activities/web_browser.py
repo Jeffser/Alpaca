@@ -18,6 +18,7 @@ class WebBrowser(Gtk.ScrolledWindow):
         self.webview = WebKit.WebView()
         self.webview.connect('load-changed', self.on_load_changed)
         self.webview.connect('create', self.on_create)
+        self.webview.connect('notify::title', lambda *_: self.title_changed())
         self.on_load_callback=lambda:None
 
         self.back_button = Gtk.Button(
@@ -94,6 +95,12 @@ class WebBrowser(Gtk.ScrolledWindow):
         }
         self.extend_to_edge = False
 
+    def title_changed(self):
+        title = self.webview.get_title() or _('Web Browser')
+        parent = self.get_ancestor(Adw.TabView)
+        if parent:
+            parent.get_page(self).set_title(title)
+
     def url_entry_focus_changed(self, focused:bool):
         GLib.idle_add(self.url_entry.select_region, 0, -1 if focused else 0)
         for btn in [self.forward_button, self.attachment_stack, self.menu_button]:
@@ -133,6 +140,10 @@ class WebBrowser(Gtk.ScrolledWindow):
         if event == 3: #finished
             self.attachment_stack.set_visible_child_name('button')
             self.on_load_callback()
+
+        parent = self.get_ancestor(Adw.TabView)
+        if parent:
+            parent.get_page(self).set_loading(not event==3)
 
     def on_back_clicked(self, button):
         if self.webview.can_go_back():
