@@ -15,11 +15,18 @@ class WebBrowser(Gtk.ScrolledWindow):
     def __init__(self, default_url:str=None):
         settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         self.default_url = default_url or settings.get_value('activity-webbrowser-homepage-url').unpack()
+
+        web_settings = WebKit.Settings()
+        web_settings.set_enable_fullscreen(False)
         self.webview = WebKit.WebView()
+        self.webview.set_settings(web_settings)
         self.webview.connect('load-changed', self.on_load_changed)
         self.webview.connect('create', self.on_create)
         self.webview.connect('notify::title', lambda *_: self.title_changed())
         self.on_load_callback=lambda:None
+
+
+        self.webview.set_settings(web_settings)
 
         self.back_button = Gtk.Button(
             icon_name='left-symbolic',
