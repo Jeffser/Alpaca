@@ -243,12 +243,10 @@ class Transcriber(Gtk.Stack):
             return
 
     def close(self):
-        # Try tab
         parent = self.get_ancestor(Adw.TabView)
         if parent:
-            parent.close_page(self.get_parent().tab)
+            parent.close_page(parent.get_page(self))
         else:
-            # Try dialog
             parent = self.get_ancestor(Adw.Dialog)
             if parent:
                 parent.close()

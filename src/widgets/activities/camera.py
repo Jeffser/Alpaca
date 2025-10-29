@@ -39,6 +39,7 @@ class Camera(Adw.Bin):
                 icon_name='big-dot-symbolic',
                 icon_size=2
             ),
+            css_classes=['circular'],
             visible=self.capture.isOpened()
         )
         capture_button.connect('clicked', lambda *_: self.take_photo())
@@ -120,9 +121,8 @@ class Camera(Adw.Bin):
     def close(self):
         parent = self.get_ancestor(Adw.TabView)
         if parent:
-            parent.close_page(self.get_parent().tab)
+            parent.close_page(parent.get_page(self))
         else:
             parent = self.get_ancestor(Adw.Dialog)
             if parent:
                 parent.close()
-

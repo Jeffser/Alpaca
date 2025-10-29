@@ -341,7 +341,7 @@ class AttachmentCreator(Gtk.ScrolledWindow):
     def close(self):
         parent = self.get_ancestor(Adw.TabView)
         if parent:
-            parent.close_page(self.get_parent().tab)
+            parent.close_page(parent.get_page(self))
         else:
             parent = self.get_ancestor(Adw.Dialog)
             if parent:
@@ -408,8 +408,13 @@ class CodeEditor(Gtk.ScrolledWindow):
         code = self.get_code()
         self.save_func(code)
         dialog.show_toast(_("Changes saved successfully"), self.get_root())
-        if isinstance(self.get_parent(), Adw.ToolbarView):
-            self.get_ancestor(Adw.Dialog).force_close()
+        self.close()
+
+    def close(self):
+        # only when dialog
+        parent = self.get_ancestor(Adw.Dialog)
+        if parent:
+            parent.close()
 
     def get_code(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)

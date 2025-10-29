@@ -269,6 +269,15 @@ class AttachmentImagePage(Gtk.ScrolledWindow):
         adj.set_value(adj.get_value() - dx)
         vadj.set_value(vadj.get_value() - dy)
 
+    def close(self):
+        parent = self.get_ancestor(Adw.TabView)
+        if parent:
+            parent.close_page(parent.get_page(self))
+        else:
+            parent = self.get_ancestor(Adw.Dialog)
+            if parent:
+                parent.close()
+
 class AttachmentPage(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentPage'
 
@@ -309,7 +318,7 @@ class AttachmentPage(Gtk.ScrolledWindow):
             margin_start=10,
             margin_end=10,
             margin_top=10,
-            margin_bottom=50,
+            margin_bottom=10,
             hexpand=True
         )
         super().__init__(
@@ -336,7 +345,7 @@ class AttachmentPage(Gtk.ScrolledWindow):
     def close(self):
         parent = self.get_ancestor(Adw.TabView)
         if parent:
-            parent.close_page(self.get_parent().tab)
+            parent.close_page(parent.get_page(self))
         else:
             parent = self.get_ancestor(Adw.Dialog)
             if parent:

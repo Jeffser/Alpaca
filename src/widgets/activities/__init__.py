@@ -312,7 +312,7 @@ def generate_action_bar(page:Gtk.Widget, tabview:Gtk.Widget=None):
         close_button = Gtk.Button(
             tooltip_text=_('Close Activity'),
             icon_name='window-close-symbolic',
-            css_classes=['flat', 'circular'],
+            css_classes=['flat'],
             valign=3
         )
         close_button.connect('clicked', lambda button, tv=tabview: tv.close_page(tabview.get_selected_page()))
