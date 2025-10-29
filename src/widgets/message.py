@@ -105,7 +105,8 @@ class OptionPopup(Gtk.Popover):
                 SQL.delete_attachment(att)
                 att.unparent()
 
-            self.message_element.block_container.clear()
+            #self.message_element.block_container.clear()
+            self.message_element.main_stack.set_visible_child_name('loading')
             self.message_element.author = model
             self.message_element.update_profile_picture()
             self.message_element.popup.change_status(False)
@@ -257,8 +258,6 @@ class BlockContainer(Gtk.Box):
         for child in list(self):
             if child != self.generating_block:
                 child.unparent()
-        if len(list(self)) + len(list(self.message.image_attachment_container)) + len(list(self.message.attachment_container)) == 0:
-            self.message.main_stack.set_visible_child_name('loading')
 
     def set_content(self, content:str) -> None:
         self.clear()

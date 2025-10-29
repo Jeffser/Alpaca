@@ -121,7 +121,6 @@ class BaseInstance:
             logger.error(e)
 
         if generate_message:
-            GLib.idle_add(bot_message.block_container.clear)
             self.generate_response(bot_message, chat, messages, model)
         else:
             bot_message.block_container.set_content(str(message_response))
@@ -182,7 +181,7 @@ class BaseInstance:
                     data=json.dumps(params),
                     stream=True
                 )
-                GLib.idle_add(bot_message.block_container.clear)
+                bot_message.block_container.clear()
                 if response.status_code == 200:
                     for line in response.iter_lines():
                         if line:

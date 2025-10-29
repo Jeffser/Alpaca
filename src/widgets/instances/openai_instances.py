@@ -149,7 +149,6 @@ class BaseInstance:
             logger.error(e)
 
         if generate_message:
-            GLib.idle_add(bot_message.block_container.clear)
             self.generate_response(bot_message, chat, messages, model)
         else:
             bot_message.block_container.set_content(str(message_response))
@@ -189,7 +188,7 @@ class BaseInstance:
 
         if chat.busy:
             try:
-                GLib.idle_add(bot_message.block_container.clear)
+                bot_message.block_container.clear()
                 response = self.client.chat.completions.create(**params)
                 for chunk in response:
                     if chunk.choices and chunk.choices[0].delta:
