@@ -5810,12 +5810,23 @@ OLLAMA_MODELS = {
                 [
                         "120b",
                         "65 GB"
+                ],
+                [
+                        "20b-cloud",
+                        "cloud"
+                ],
+                [
+                        "120b-cloud",
+                        "cloud"
                 ]
         ],
         "description": _("OpenAI’s open-weight models designed for powerful reasoning, agentic tasks, and versatile developer use cases."),
         "url": "https://ollama.com/library/gpt-oss",
         "categories": [
-                "tools"
+                "tools",
+                "big",
+                "huge",
+                "cloud"
         ],
         "author": "OpenAI",
         "languages": [
@@ -5835,12 +5846,20 @@ OLLAMA_MODELS = {
                 [
                         "480b",
                         "290 GB"
+                ],
+                [
+                        "480b-cloud",
+                        "cloud"
                 ]
         ],
         "description": _("Alibaba's performant long context models for agentic and coding tasks."),
         "url": "https://ollama.com/library/qwen3-coder",
         "categories": [
-                "tools"
+                "tools",
+                "big",
+                "huge",
+                "cloud",
+                "code"
         ],
         "author": "Alibaba",
         "languages": [
@@ -5906,14 +5925,82 @@ OLLAMA_MODELS = {
                 [
                         "671b",
                         "404 GB"
+                ],
+                [
+                        "671b-cloud",
+                        "cloud"
                 ]
         ],
         "description": _("DeepSeek-V3.1-Terminus is a hybrid model that supports both thinking mode and non-thinking mode."),
         "url": "https://ollama.com/library/deepseek-v3.1",
         "categories": [
-                "tools"
+                "tools",
+                "huge",
+                "cloud"
         ],
         "author": "DeepSeek Team",
+        "languages": [
+                "en"
+        ],
+    },
+    "qwen3-vl": {
+        "tags": [
+                [
+                        "latest",
+                        "6.1 GB"
+                ],
+                [
+                        "2b",
+                        "1.9 GB"
+                ],
+                [
+                        "4b",
+                        "3.3 GB"
+                ],
+                [
+                        "8b",
+                        "6.1 GB"
+                ],
+                [
+                        "32b",
+                        "21 GB"
+                ],
+                [
+                        "235b-cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("The most powerful vision-language model in the Qwen model family to date."),
+        "url": "https://ollama.com/library/qwen3-vl",
+        "categories": [
+                "vision",
+                "medium",
+                "small",
+                "big",
+                "huge",
+                "cloud",
+                "code",
+                "math"
+        ],
+        "author": "Qwen Team",
+        "languages": [
+                "en"
+        ],
+    },
+    "glm-4.6": {
+        "tags": [
+                [
+                        "cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("Advanced agentic, reasoning and coding capabilities."),
+        "url": "https://ollama.com/library/glm-4.6",
+        "categories": [
+                "cloud",
+                "code"
+        ],
+        "author": "THUDM",
         "languages": [
                 "en"
         ],
@@ -6010,6 +6097,46 @@ OLLAMA_MODELS = {
                 "it",
                 "ko",
                 "nl",
+                "zh"
+        ],
+    },
+    "kimi-k2": {
+        "tags": [
+                [
+                        "1t-cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("A state-of-the-art mixture-of-experts (MoE) language model. Kimi K2-Instruct-0905 demonstrates significant improvements in performance on public benchmarks and real-world coding agent tasks."),
+        "url": "https://ollama.com/library/kimi-k2",
+        "categories": [
+                "cloud",
+                "code"
+        ],
+        "author": "Kimi Team",
+        "languages": [
+                "en"
+        ],
+    },
+    "minimax-m2": {
+        "tags": [
+                [
+                        "cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("MiniMax M2 is a high-efficiency large language model built for coding and agentic workflows."),
+        "url": "https://ollama.com/library/minimax-m2",
+        "categories": [
+                "cloud",
+                "code",
+                "math",
+                "multilingual"
+        ],
+        "author": "MiniMax",
+        "languages": [
+                "en",
+                "es",
                 "zh"
         ],
     },

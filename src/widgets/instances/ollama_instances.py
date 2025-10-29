@@ -189,6 +189,16 @@ class BaseInstance:
                         if not chat.busy or data.get('done'):
                             break
                 else:
+                    response_json = response.json()
+                    if response_json.get('error') == 'unauthorized' and response_json.get('signin_url'):
+                        attachment = bot_message.add_attachment(
+                            file_id = generate_uuid(),
+                            name = 'Ollama Login',
+                            attachment_type = 'link',
+                            content = response_json.get('signin_url')
+                        )
+                        SQL.insert_or_update_attachment(bot_message, attachment)
+                        bot_message.update_message("🦙 Just a quick heads-up! To access the Ollama cloud models, you'll need to log into your Ollama account first.")
                     logger.error(response.content)
             except Exception as e:
                 dialog.simple_error(
@@ -564,7 +574,7 @@ class OllamaManaged(BaseInstance):
 
 class Ollama(BaseInstance):
     instance_type = 'ollama'
-    instance_type_display = 'Ollama'
+    instance_type_display = _('Ollama (External)')
     description = _('Local or remote AI instance not managed by Alpaca')
 
     default_properties = {
@@ -590,3 +600,91 @@ class Ollama(BaseInstance):
         for key in self.default_properties:
             self.properties[key] = properties.get(key, self.default_properties.get(key))
 
+class OllamaCloud(BaseInstance):
+    instance_type = 'ollama:cloud'
+    instance_type_display = _('Ollama (Cloud)')
+    description = _('Online instance directly managed by Ollama (Experimental)')
+
+    default_properties = {
+        'name': _('Instance'),
+        'url': 'https://ollama.com',
+        'api': '',
+        'override_parameters': True,
+        'temperature': 0.7,
+        'seed': 0,
+        'num_ctx': 16384,
+        'keep_alive': 300,
+        'default_model': None,
+        'title_model': None,
+        'think': False,
+        'share_name': 0,
+        'show_response_metadata': False
+    }
+
+    def __init__(self, instance_id:str, properties:dict):
+        self.instance_id = instance_id
+        self.properties = {}
+        self.row = None
+        for key in self.default_properties:
+            self.properties[key] = properties.get(key, self.default_properties.get(key))
+
+    def pull_model(self, model_name:str, callback:callable):
+        SQL.append_online_instance_model_list(self.instance_id, model_name)
+        callback({'status': 'success'})
+
+    def get_local_models(self) -> list:
+        local_models = []
+        for model in SQL.get_online_instance_model_list(self.instance_id):
+            local_models.append({'name': model})
+        return local_models
+
+    def get_available_models(self) -> list:
+        if not self.process:
+            self.start()
+        try:
+            response = requests.get(
+                '{}/api/tags'.format(self.properties.get('url')),
+                headers={
+                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
+                }
+            )
+            if response.status_code == 200:
+                available_models = {}
+
+                for model in [m.get('model') for m in response.json().get('models', [])]:
+                    if ':' in model:
+                        model_name, model_tag = model.split(':')
+                    else:
+                        model_name, model_tag = model, ''
+
+                    if not available_models.get(model_name):
+                        model_metadata = OLLAMA_MODELS.get(model_name)
+                        if model_metadata:
+                            available_models[model_name] = {
+                                'url': model_metadata.get('url'),
+                                'tags': [],
+                                'author': model_metadata.get('author'),
+                                'categories': model_metadata.get('categories'),
+                                'languages': model_metadata.get('languages'),
+                                'description': model_metadata.get('description')
+                            }
+                        else:
+                            available_models[model_name] = {
+                                'tags': [],
+                                'categories': ['cloud']
+                            }
+
+                    available_models[model_name]['tags'].append([model_tag, 'cloud'])
+
+                return available_models
+        except Exception as e:
+            dialog.simple_error(
+                parent = self.row.get_root() if self.row else None,
+                title = _('Instance Error'),
+                body = _('Could not retrieve added models'),
+                error_log = e
+            )
+            logger.error(e)
+            if self.row:
+                self.row.get_parent().unselect_all()
+        return []

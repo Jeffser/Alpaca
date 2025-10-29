@@ -17,6 +17,7 @@ class CategoryPill(Adw.Bin):
         'embedding': {'name': _('Embedding'), 'css': ['error'], 'icon': 'brain-augemnted-symbolic'},
         'tools': {'name': _('Tools'), 'css': ['accent'], 'icon': 'wrench-wide-symbolic'},
         'reasoning': {'name': _('Reasoning'), 'css': ['accent'], 'icon': 'brain-augemnted-symbolic'},
+        'cloud': {'name': _('Cloud'), 'css': ['accent'], 'icon': 'cloud-filled-symbolic'},
         'small': {'name': _('Small'), 'css': ['success'], 'icon': 'leaf-symbolic'},
         'medium': {'name': _('Medium'), 'css': ['brown'], 'icon': 'sprout-symbolic'},
         'big': {'name': _('Big'), 'css': ['warning'], 'icon': 'tree-circle-symbolic'},

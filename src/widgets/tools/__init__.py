@@ -27,7 +27,7 @@ class ToolSelector(Gtk.DropDown):
         list(self)[0].add_css_class('flat')
 
     def model_changed(self, dropdown):
-        if 'tools' in dropdown.get_selected_item().model.data.get('capabilities', ['tools']):
+        if dropdown.get_selected_item() and 'tools' in dropdown.get_selected_item().model.data.get('capabilities', ['tools']):
             self.set_sensitive(True)
             self.set_selected(self.get_root().settings.get_value('default-tool').unpack())
             self.set_tooltip_text(_('Select a Tool To Use'))

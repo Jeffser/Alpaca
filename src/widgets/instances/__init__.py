@@ -75,19 +75,17 @@ class InstancePreferencesGroup(Adw.Dialog):
                 ))
 
         if 'api' in self.instance.properties: #API
-            normal_api_title = _('API Key')
+            normal_api_title = _('Ollama API Key (Optional)') if self.instance.instance_type == 'ollama' else _('API Key')
             unchanged_api_title = _('API Key (Unchanged)')
             if self.instance.properties.get('api'):
                 normal_api_title = unchanged_api_title
-            elif self.instance.instance_type == 'ollama':
-                normal_api_title = _('API Key (Optional)')
 
             api_el = Adw.PasswordEntryRow(
                 title=normal_api_title,
                 name='api'
             )
 
-            api_el.connect('changed', lambda el: api_el.set_title(normal_api_title if api_el.get_text() else unchanged_api_title))
+            api_el.connect('changed', lambda el: el.set_title(normal_api_title if el.get_text() else unchanged_api_title))
             self.groups[-1].add(api_el)
 
         self.groups.append(Adw.PreferencesGroup())
@@ -387,7 +385,7 @@ class InstancePreferencesGroup(Adw.Dialog):
         save_functions = {
             'name': lambda val: val if val else _('Instance'),
             'url': lambda val: '{}{}'.format('http://' if not re.match(r'^(http|https)://', val) else '', val.rstrip('/')),
-            'api': lambda val: self.instance.properties.get('api') if self.instance.properties.get('api') and not val else (val if val else 'empty'),
+            'api': lambda val: self.instance.properties.get('api') if self.instance.properties.get('api') and not val else (val if val else ''),
             'keep_alive': lambda val: val * 60 if val > 0 else val,
             'override': lambda val: val.strip(),
             'model_directory': lambda val: val.strip(),

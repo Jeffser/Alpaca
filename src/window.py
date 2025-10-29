@@ -531,4 +531,3 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 notice_dialog.present(self)
         else:
             self.main_navigation_view.replace([Widgets.welcome.Welcome()])
-

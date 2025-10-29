@@ -18,8 +18,12 @@ class PullModelButton(Gtk.Button):
         main_container = Gtk.Box(
             spacing=10
         )
+
+        is_cloud = not size or size == 'cloud'
+
+        add_icon = 'cloud-filled-symbolic' if is_cloud else 'folder-download-symbolic'
         main_container.append(
-            Gtk.Image.new_from_icon_name('check-plain-symbolic' if downloaded else 'folder-download-symbolic')
+            Gtk.Image.new_from_icon_name('check-plain-symbolic' if downloaded else add_icon)
         )
         text_container = Gtk.Box(
             orientation=1,
@@ -28,23 +32,24 @@ class PullModelButton(Gtk.Button):
         main_container.append(text_container)
         text_container.append(
             Gtk.Label(
-                label=tag_name.title(),
+                label=tag_name.title() or 'Cloud',
                 css_classes=['title'],
                 hexpand=True
             )
         )
-        text_container.append(
-            Gtk.Label(
-                label=size,
-                css_classes=['dimmed', 'caption'],
-                hexpand=True,
-                visible=bool(size)
+        if not is_cloud:
+            text_container.append(
+                Gtk.Label(
+                    label=size,
+                    css_classes=['dimmed', 'caption'],
+                    hexpand=True,
+                    visible=bool(size)
+                )
             )
-        )
         tooltip_text = ''
         if downloaded:
             tooltip_text = _('Already Added')
-        elif size:
+        elif not is_cloud:
             tooltip_text = _("Pull '{}'").format(tag_name.title())
         else:
             tooltip_text = _('Add Model')
@@ -103,9 +108,14 @@ class AvailableModelDialog(Adw.Dialog):
         model_list = get_local_models(self.model.get_root())
         if len(self.model.data.get('tags', [])) > 0:
             for tag in self.model.data.get('tags', []):
-                downloaded = '{}:{}'.format(self.model.get_name(), tag[0]) in list(model_list.keys())
+                if tag[0]:
+                    downloaded = '{}:{}'.format(self.model.get_name(), tag[0]) in list(model_list.keys())
+                else:
+                    downloaded = self.model.get_name() in list(model_list.keys())
+
                 button = PullModelButton(tag[0], tag[1], downloaded)
-                button.connect('clicked', lambda button: self.model.pull_model(button.get_name()))
+                if button.get_sensitive():
+                    button.connect('clicked', lambda button: self.model.pull_model(button.get_name()))
                 tag_list.append(button)
                 button.get_parent().set_focusable(False)
         else:
