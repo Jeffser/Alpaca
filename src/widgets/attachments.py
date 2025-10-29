@@ -918,7 +918,7 @@ class GlobalAttachmentButton(Gtk.Button):
                         parent=self.get_root(),
                         heading=_('Attach YouTube Captions?'),
                         body=_('Please enter a YouTube video URL'),
-                        callback=lambda url: threading.Thread(target=self.get_root().global_footer.attachment_container.attach_youtube, args=(url,)).start(),
+                        callback=lambda url: threading.Thread(target=self.get_root().global_footer.attachment_container.attach_youtube, args=(url,), daemon=True).start(),
                         entries={'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
                     ),
                     'icon': 'play-symbolic'

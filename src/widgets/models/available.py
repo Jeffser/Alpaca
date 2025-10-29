@@ -288,7 +288,7 @@ class AvailableModelButton(Gtk.Button):
             model_name,
             window.get_current_instance(),
             window
-        )).start()
+        ), daemon=True).start()
 
 def pull_model_confirm(model_name:str, instance, window):
     if model_name:

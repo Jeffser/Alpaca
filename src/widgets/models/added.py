@@ -394,12 +394,12 @@ class AddedModelButton(Gtk.Button):
                 picture_b64 = attachments.extract_image(file.get_path(), 480)
                 SQL.insert_or_update_model_picture(self.get_name(), picture_b64)
                 self.update_profile_picture()
-                threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures()).start()
+                threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
 
         def remove_profile_picture():
             SQL.insert_or_update_model_picture(self.get_name(), None)
             self.update_profile_picture()
-            threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures()).start()
+            threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
 
         if SQL.get_model_preferences(self.get_name()).get('picture', None):
             file_filter = Gtk.FileFilter()
@@ -448,7 +448,7 @@ class AddedModelButton(Gtk.Button):
                 window.title_stack.set_visible_child_name('no-models')
             self.unparent()
             SQL.remove_model_preferences(self.get_name())
-            threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures()).start()
+            threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
 
     def prompt_remove_model(self):
         dialog.simple(
@@ -506,3 +506,4 @@ class LiteAddedModel: #For LiveChat and QuickChat
 
     def get_vision(self) -> bool:
         return self.vision
+

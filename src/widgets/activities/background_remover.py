@@ -244,7 +244,7 @@ class BackgroundRemover(Gtk.ScrolledWindow):
         self.set_status(False)
 
         if self.pulling_model:
-            threading.Thread(target=self.pulling_model.update_progressbar, args=({'status': 'success'},)).start()
+            threading.Thread(target=self.pulling_model.update_progressbar, args=({'status': 'success'},), daemon=True).start()
         if self.save_func:
             self.save_func(output_image_data)
 
@@ -256,13 +256,13 @@ class BackgroundRemover(Gtk.ScrolledWindow):
             False
         )
         models.common.prepend_added_model(self.get_root(), self.pulling_model)
-        threading.Thread(target=self.run, args=(model_name, input_image_data)).start()
+        threading.Thread(target=self.run, args=(model_name, input_image_data), daemon=True).start()
 
     def verify_model(self, input_image_data):
         model = list(REMBG_MODELS)[self.model_dropdown.get_selected()]
         model_dir = os.path.join(data_dir, '.u2net')
         if os.path.isdir(model_dir) and '{}.onnx'.format(model) in os.listdir(model_dir):
-            threading.Thread(target=self.run, args=(model, input_image_data)).start()
+            threading.Thread(target=self.run, args=(model, input_image_data), daemon=True).start()
         else:
             GLib.idle_add(dialog.simple,
                 self.get_root(),

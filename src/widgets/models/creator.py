@@ -304,13 +304,13 @@ class ModelCreatorDialog(Adw.Dialog):
 
             if self.base_element.get_subtitle():
                 gguf_path = self.base_element.get_subtitle()
-                threading.Thread(target=self.create_model, args=(data_json, gguf_path)).start()
+                threading.Thread(target=self.create_model, args=(data_json, gguf_path), daemon=True).start()
             else:
                 pretty_name = self.base_element.get_selected_item().get_string()
                 found_models = [model for model in list(get_local_models(self.get_root()).values()) if model.model_title == pretty_name]
                 if len(found_models) > 0:
                     data_json['from'] = found_models[0].get_name()
-                    threading.Thread(target=self.create_model, args=(data_json,)).start()
+                    threading.Thread(target=self.create_model, args=(data_json,), daemon=True).start()
             self.close()
 
     def create_model(self, data:dict, gguf_path:str=None):

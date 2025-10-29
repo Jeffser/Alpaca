@@ -479,7 +479,7 @@ class ChatWelcomeHelper(Gtk.Box):
             tooltip_text=_("Refresh Prompts"),
             css_classes=["accent"]
         )
-        refresh_button.connect('clicked', lambda *_: threading.Thread(target=self.update_prompts).start())
+        refresh_button.connect('clicked', lambda *_: threading.Thread(target=self.update_prompts, daemon=True).start())
         control_box.append(refresh_button)
 
         template_button = Gtk.Button(
@@ -489,7 +489,7 @@ class ChatWelcomeHelper(Gtk.Box):
         template_button.connect('clicked', lambda *_: TemplateSelectorDialog(chat).present(self.get_root()))
         control_box.append(template_button)
 
-        self.connect('realize', lambda *_: threading.Thread(target=self.update_prompts).start())
+        self.connect('realize', lambda *_: threading.Thread(target=self.update_prompts, daemon=True).start())
 
     def update_prompts(self):
         container = Gtk.Box(

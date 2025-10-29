@@ -44,7 +44,6 @@ import sys
 import logging
 import argparse
 import time
-import threading
 
 from pydbus import SessionBus
 from datetime import datetime

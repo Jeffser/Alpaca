@@ -207,7 +207,7 @@ class MicrophoneButton(Gtk.Stack):
                 if not loaded_whisper_models.get(model_name):
                     loaded_whisper_models[model_name] = libraries.get('whisper').load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
                 if pulling_model:
-                    threading.Thread(target=pulling_model.update_progressbar, args=({'status': 'success'},)).start()
+                    threading.Thread(target=pulling_model.update_progressbar, args=({'status': 'success'},), daemon=True).start()
             except Exception as e:
                 dialog.simple_error(
                     parent = button.get_root(),

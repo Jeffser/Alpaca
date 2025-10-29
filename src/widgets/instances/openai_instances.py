@@ -70,7 +70,8 @@ class BaseInstance:
                     chat,
                     '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']),
                     model
-                )
+                ),
+                daemon=True
             ).start()
 
         self.generate_response(bot_message, chat, messages, model)
@@ -88,7 +89,8 @@ class BaseInstance:
                     chat,
                     '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']),
                     model
-                )
+                ),
+                daemon=True
             ).start()
 
         message_response = ''

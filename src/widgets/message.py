@@ -125,7 +125,8 @@ class OptionPopup(Gtk.Popover):
                         model,
                         tools,
                         True
-                    )
+                    ),
+                    daemon=True
                 ).start()
             else:
                 threading.Thread(
@@ -133,7 +134,8 @@ class OptionPopup(Gtk.Popover):
                     args=(
                         self.message_element,
                         model
-                    )
+                    ),
+                    daemon=True
                 ).start()
 
             self.message_element.main_stack.set_visible_child_name('loading')
@@ -550,14 +552,14 @@ class GlobalMessageTextView(GtkSource.View):
                     parent = self.get_root(),
                     heading = _('Attach YouTube Video?'),
                     body = _('Note that YouTube might block access to captions, please check output'),
-                    callback = lambda url=text: threading.Thread(target=self.parent_footer.attachment_container.attach_youtube, args=(url,)).start()
+                    callback = lambda url=text: threading.Thread(target=self.parent_footer.attachment_container.attach_youtube, args=(url,), daemon=True).start()
                 )
             elif url_regex.match(text):
                 dialog.simple(
                     parent = self.get_root(),
                     heading = _('Attach Website? (Experimental)'),
                     body = _("Are you sure you want to attach\n'{}'?").format(text),
-                    callback = lambda url=text: threading.Thread(target=self.parent_footer.attachment_container.attach_website, args=(url,)).start()
+                    callback = lambda url=text: threading.Thread(target=self.parent_footer.attachment_container.attach_website, args=(url,), daemon=True).start()
                 )
         except Exception as e:
             pass

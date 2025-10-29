@@ -85,7 +85,7 @@ class WebSearch(Base):
             bot_message.get_root(),
             not bot_message.chat.chat_id
         )
-        threading.Thread(target=page.automate_search, args=(self.on_search_finish, search_term, True)).start()
+        threading.Thread(target=page.automate_search, args=(self.on_search_finish, search_term, True), daemon=True).start()
 
     def run(self, arguments, messages, bot_message) -> tuple:
         self.result = 0 # 0=loading | "TEXT"=ok | None=error |
@@ -207,7 +207,7 @@ class BackgroundRemover(Base):
         self.status = 2
 
     def run(self, arguments, messages, bot_message) -> tuple:
-        threading.Thread(target=bot_message.update_message, args=(_('Loading Image...') + '\n',)).start()
+        threading.Thread(target=bot_message.update_message, args=(_('Loading Image...') + '\n',), daemon=True).start()
         image_b64 = self.get_latest_image(messages, bot_message.get_root())
         if image_b64:
             self.status = 0 # 0 waiting, 1 finished, 2 canceled / empty image

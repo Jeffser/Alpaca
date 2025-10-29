@@ -35,7 +35,8 @@ class BaseInstance:
                     chat,
                     messages[-1].get('content'),
                     model
-                )
+                ),
+                daemon=True
             ).start()
         self.generate_response(bot_message, chat, messages, model)
 
@@ -52,7 +53,8 @@ class BaseInstance:
                     chat,
                     messages[-1].get('content'),
                     model
-                )
+                ),
+                daemon=True
             ).start()
 
         message_response = ''
@@ -554,8 +556,8 @@ class OllamaManaged(BaseInstance):
                     preexec_fn=os.setsid
                 )
 
-                threading.Thread(target=self.log_output, args=(self.process.stdout,)).start()
-                threading.Thread(target=self.log_output, args=(self.process.stderr,)).start()
+                threading.Thread(target=self.log_output, args=(self.process.stdout,), daemon=True).start()
+                threading.Thread(target=self.log_output, args=(self.process.stderr,), daemon=True).start()
                 logger.info("Starting Alpaca's Ollama instance...")
                 logger.info("Started Alpaca's Ollama instance")
                 v_str = subprocess.check_output("ollama -v", shell=True).decode('utf-8')

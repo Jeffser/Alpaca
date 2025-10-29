@@ -59,7 +59,7 @@ class WebBrowser(Gtk.ScrolledWindow):
             tooltip_text=_('Attach'),
             css_classes=['flat']
         )
-        self.attachment_button.connect("clicked", lambda button: threading.Thread(target=self.attachment_requested(self.save)).start())
+        self.attachment_button.connect("clicked", lambda button: threading.Thread(target=self.attachment_requested, args=(self.save,), daemon=True).start())
         self.attachment_stack = Gtk.Stack(transition_type=1)
         self.attachment_stack.add_named(self.attachment_button, 'button')
         self.attachment_stack.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
@@ -253,7 +253,7 @@ class WebBrowser(Gtk.ScrolledWindow):
                 self.close()
 
         def on_html_extracted(raw_html):
-            self.on_load_callback = lambda: threading.Thread(target=on_result_load).start()
+            self.on_load_callback = lambda: threading.Thread(target=on_result_load, daemon=True).start()
             if auto_choice:
                 soup = BeautifulSoup(raw_html, "html.parser")
                 # I know, really sofisticated
@@ -265,7 +265,7 @@ class WebBrowser(Gtk.ScrolledWindow):
         def on_search_page_ready():
             GLib.timeout_add(5000, self.extract_html, on_html_extracted)
 
-        self.on_load_callback = lambda: threading.Thread(target=on_search_page_ready).start()
+        self.on_load_callback = lambda: threading.Thread(target=on_search_page_ready, daemon=True).start()
         GLib.timeout_add(5000, self.webview.load_uri, query_url.format(search_term))
 
     def close(self):
