@@ -155,8 +155,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             if row:
                 self.settings.set_string('selected-instance', row.instance.instance_id)
-                self.get_application().lookup_action('model_creator_existing').set_enabled('ollama' in row.instance.instance_type)
-                self.get_application().lookup_action('model_creator_gguf').set_enabled('ollama' in row.instance.instance_type)
+                self.get_application().lookup_action('model_creator_existing').set_enabled(row.instance.instance_type in ('ollama', 'ollama:managed'))
+                self.get_application().lookup_action('model_creator_gguf').set_enabled(row.instance.instance_type in ('ollama', 'ollama:managed'))
 
             self.chat_bin.get_child().row.update_profile_pictures()
             listbox.set_sensitive(True)

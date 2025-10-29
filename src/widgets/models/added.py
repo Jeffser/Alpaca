@@ -224,7 +224,7 @@ class AddedModelDialog(Adw.Dialog):
         remove_button.connect('clicked', lambda button: self.model.prompt_remove_model())
         header_bar.pack_start(remove_button)
 
-        if 'ollama' in self.model.instance.instance_type:
+        if self.model.instance.instance_type in ('ollama', 'ollama:managed'):
             create_child_button = Gtk.Button(
                 icon_name='list-add-symbolic',
                 tooltip_text=_('Create Child')
@@ -478,7 +478,7 @@ class AddedModelButton(Gtk.Button):
                 }
             ]
         ]
-        if 'ollama' in self.instance.instance_type:
+        if self.instance.instance_type in ('ollama', 'ollama:managed'):
             actions[0].insert(0, {
                 'label': _('Create Child'),
                 'callback': self.create_child,

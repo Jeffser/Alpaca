@@ -632,6 +632,10 @@ class OllamaCloud(BaseInstance):
         SQL.append_online_instance_model_list(self.instance_id, model_name)
         callback({'status': 'success'})
 
+    def delete_model(self, model_name:str) -> bool:
+        SQL.remove_online_instance_model_list(self.instance_id, model_name)
+        return True
+
     def get_local_models(self) -> list:
         local_models = []
         for model in SQL.get_online_instance_model_list(self.instance_id):
