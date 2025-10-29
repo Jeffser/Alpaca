@@ -235,7 +235,7 @@ class ModelCreatorDialog(Adw.Dialog):
 
             if system:
                 for attachment in list(self.context_attachment_container.container):
-                    attachment.get_parent().remove(attachment)
+                    attachment.unparent()
 
                 pattern = re.compile(r"```(.+?)\n(.*?)```", re.DOTALL)
                 matches = pattern.finditer(system)

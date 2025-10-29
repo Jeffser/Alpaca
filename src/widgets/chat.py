@@ -126,7 +126,7 @@ class ChatList(Adw.NavigationPage):
         folder_page = self.get_root().chat_list_navigationview.get_previous_page(self)
         if row.folder_id != folder_page.folder_id:
             SQL.move_folder_to_folder(row.folder_id, folder_page.folder_id)
-            row.get_parent().remove(row)
+            row.unparent()
             folder_page.folder_list_box.prepend(row)
             row.set_visible(True)
             self.update_visibility()
@@ -136,7 +136,7 @@ class ChatList(Adw.NavigationPage):
         folder_page = self.get_root().chat_list_navigationview.get_previous_page(self)
         row.chat.folder_id = folder_page.folder_id
         SQL.insert_or_update_chat(row.chat)
-        row.get_parent().remove(row)
+        row.unparent()
         folder_page.chat_list_box.prepend(row)
         row.set_visible(True)
         self.update_visibility()
@@ -734,7 +734,7 @@ class FolderRow(Gtk.ListBoxRow):
     def on_drop_folder(self, target, row, x, y):
         if row.folder_id != self.folder_id:
             SQL.move_folder_to_folder(row.folder_id, self.folder_id)
-            row.get_parent().remove(row)
+            row.unparent()
             folder_page = self.get_root().chat_list_navigationview.find_page(self.folder_id)
             if folder_page:
                 folder_page.folder_list_box.prepend(row)
@@ -745,7 +745,7 @@ class FolderRow(Gtk.ListBoxRow):
     def on_drop_chat(self, target, row, x, y):
         row.chat.folder_id = self.folder_id
         SQL.insert_or_update_chat(row.chat)
-        row.get_parent().remove(row)
+        row.unparent()
         folder_page = self.get_root().chat_list_navigationview.find_page(self.folder_id)
         if folder_page:
             folder_page.chat_list_box.prepend(row)
@@ -859,7 +859,7 @@ class FolderRow(Gtk.ListBoxRow):
         if len(list(self.get_parent())) == 1:
             self.get_parent().set_visible(False)
             list(self.get_parent().get_parent())[1].set_visible(False)
-        self.get_parent().remove(self)
+        self.unparent()
         SQL.remove_folder(self.folder_id)
 
     def prompt_delete(self):

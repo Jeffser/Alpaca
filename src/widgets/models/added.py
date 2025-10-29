@@ -446,7 +446,7 @@ class AddedModelButton(Gtk.Button):
             if len(list(self.get_parent().get_parent())) == 1:
                 window.local_model_stack.set_visible_child_name('no-models')
                 window.title_stack.set_visible_child_name('no-models')
-            self.get_parent().get_parent().remove(self)
+            self.unparent()
             SQL.remove_model_preferences(self.get_name())
             threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures()).start()
 

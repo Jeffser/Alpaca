@@ -62,7 +62,7 @@ class OptionPopup(Gtk.Popover):
             tooltip_text=_("Regenerate Message")
         )
         if self.message_element.get_model():
-            self.regenerate_button.connect('clicked', lambda *_: GLib.idle_add(self.regenerate_message))
+            self.regenerate_button.connect('clicked', lambda *_: self.regenerate_message())
             container.append(self.regenerate_button)
         self.tts_button = voice.DictateToggleButton(self.message_element)
         container.append(self.tts_button)
@@ -77,7 +77,7 @@ class OptionPopup(Gtk.Popover):
         chat = self.message_element.chat
         message_id = self.message_element.message_id
         SQL.delete_message(self.message_element)
-        self.message_element.get_parent().remove(self.message_element)
+        self.message_element.unparent()
         if len(list(chat.container)) == 0:
             chat.set_visible_child_name('welcome-screen')
 
@@ -99,13 +99,12 @@ class OptionPopup(Gtk.Popover):
     def regenerate_message(self):
         chat = self.message_element.chat
         model = self.get_root().get_selected_model().get_name()
-        for att in list(self.message_element.image_attachment_container.container):
-            SQL.delete_attachment(att)
-            att.get_parent().remove(att)
-        for att in list(self.message_element.attachment_container.container):
-            SQL.delete_attachment(att)
-            att.get_parent().remove(att)
+
         if not chat.busy and model:
+            for att in list(self.message_element.image_attachment_container.container) + list(self.message_element.attachment_container.container):
+                SQL.delete_attachment(att)
+                att.unparent()
+
             self.message_element.block_container.clear()
             self.message_element.author = model
             self.message_element.update_profile_picture()
@@ -255,9 +254,7 @@ class BlockContainer(Gtk.Box):
     def clear(self) -> None:
         for child in list(self):
             if child != self.generating_block:
-                self.remove(child)
-                child.unmap()
-                child.unrealize()
+                child.unparent()
         if len(list(self)) + len(list(self.message.image_attachment_container)) + len(list(self.message.attachment_container)) == 0:
             self.message.main_stack.set_visible_child_name('loading')
 

@@ -217,7 +217,7 @@ class PullingModelButton(Gtk.Button):
         if 'error' in data:
             self.error = data['error']
             parent = self.get_root()
-            self.get_parent().get_parent().remove(self.get_parent())
+            self.get_parent().unparent()
             logger.error(self.error)
             dialog.simple_error(
                 parent = parent,
@@ -254,5 +254,5 @@ class PullingModelButton(Gtk.Button):
                     body=_("Model '{}' downloaded successfully.").format(self.model_title),
                     icon=Gio.ThemedIcon.new('document-save-symbolic')
                 )
-                self.get_parent().get_parent().remove(self.get_parent())
+                self.get_parent().unparent()
                 sys.exit()

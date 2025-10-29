@@ -468,7 +468,7 @@ class Attachment(Gtk.Button):
             self.activity.close()
         if len(list(self.get_parent())) == 1:
             self.get_parent().get_parent().get_parent().set_visible(False)
-        self.get_parent().remove(self)
+        self.unparent()
         if self.get_name() != "-1":
             SQL.delete_attachment(self)
 
@@ -612,7 +612,7 @@ class ImageAttachment(Gtk.Button):
             self.activity.close()
         if len(list(self.get_parent())) == 1:
             self.get_parent().get_parent().get_parent().set_visible(False)
-        self.get_parent().remove(self)
+        self.unparent()
         if self.get_name() != "-1":
             SQL.delete_attachment(self)
 

@@ -132,7 +132,7 @@ class TextToSpeechModelButton(Gtk.Button):
                 os.remove(target_path)
         elif os.path.isfile(self.file_path):
             os.remove(self.file_path)
-        self.get_parent().get_parent().remove(self)
+        self.unparent()
 
     def prompt_remove_model(self):
         dialog.simple(
@@ -275,7 +275,7 @@ class SpeechToTextModelButton(Gtk.Button):
         model_path = os.path.join(data_dir, 'whisper', '{}.pt'.format(self.get_name()))
         if os.path.isfile(model_path):
             os.remove(model_path)
-        self.get_parent().get_parent().remove(self)
+        self.unparent()
 
     def prompt_remove_model(self):
         dialog.simple(
