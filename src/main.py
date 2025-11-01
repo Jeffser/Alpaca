@@ -44,6 +44,7 @@ import sys
 import logging
 import argparse
 import time
+import threading
 
 from pydbus import SessionBus
 from datetime import datetime
@@ -55,27 +56,24 @@ parser = argparse.ArgumentParser(description="Alpaca")
 class AlpacaService:
     """
     <node>
-        <interface name='com.jeffser.Alpaca.Service'>
-            <method name='IsRunning'>
-                <arg type='s' name='result' direction='out'/>
+        <interface name="com.jeffser.Alpaca.Service">
+            <method name="IsRunning">
+                <arg type="s" name="result" direction="out"/>
             </method>
-            <method name='Open'>
-                <arg type='s' name='chat' direction='in'/>
+            <method name="Open">
+                <arg type="s" name="chat" direction="in"/>
             </method>
-            <method name='Create'>
-                <arg type='s' name='chat' direction='in'/>
+            <method name="Create">
+                <arg type="s" name="chat" direction="in"/>
             </method>
-            <method name='Ask'>
-                <arg type='s' name='message' direction='in'/>
+            <method name="Ask">
+                <arg type="s" name="message" direction="in"/>
             </method>
-            <method name='Present'>
-            </method>
-            <method name='PresentAsk'>
-            </method>
-            <method name='PresentLive'>
-            </method>
-            <method name='Activity'>
-                <arg type='s' name='activity_name' direction='in'/>
+            <method name="Present"/>
+            <method name="PresentAsk"/>
+            <method name="PresentLive"/>
+            <method name="Activity">
+                <arg type="s" name="activity_name" direction="in"/>
             </method>
         </interface>
     </node>
@@ -88,6 +86,7 @@ class AlpacaService:
         return 'yeah'
 
     def Present(self):
+        print('present')
         self.app.props.active_window.present()
 
     def PresentAsk(self):
@@ -132,18 +131,16 @@ class AlpacaApplication(Adw.Application):
         self.version = version
         self.args = parser.parse_args()
 
-    def run_arguments(self):
-        if sys.platform in ('linux', 'linux2'):
-            try:
-                close_at_end = True
-                app_service = SessionBus().get('com.jeffser.Alpaca.Service')
-            except:
-                close_at_end = False
-                app_service = AlpacaService(self)
-                SessionBus().publish('com.jeffser.Alpaca.Service', app_service)
-        else:
+    def run_arguments(self, app_service=None):
+        if not app_service:
             app_service = AlpacaService(self)
+            if sys.platform in ('linux', 'linux2'):
+                bus = SessionBus()
+                dbus_proxy = bus.get("org.freedesktop.DBus", "/org/freedesktop/DBus")
+                if not dbus_proxy.NameHasOwner('com.jeffser.Alpaca.Service'):
+                    bus.publish('com.jeffser.Alpaca.Service', ('/com/jeffser/Alpaca/Service', app_service))
 
+        # Handle arguments
         if self.args.activity:
             app_service.Activity(self.args.activity)
         elif self.args.new_chat:
@@ -153,14 +150,11 @@ class AlpacaApplication(Adw.Application):
             app_service.PresentAsk()
         elif self.args.ask:
             app_service.Ask(self.args.ask)
-        elif self.args.live_chat: #DEPRECATED
+        elif self.args.live_chat:  # DEPRECATED
             logger.warning('--live-chat is deprecated, use --activity live-chat')
             app_service.Activity('live-chat')
         else:
             app_service.Present()
-
-        if close_at_end:
-            sys.exit(0)
 
     def get_main_window(self, present:bool=True):
         if present:
@@ -282,4 +276,14 @@ def main(version):
 
     logger.info(f"Alpaca version: {version}")
 
-    return AlpacaApplication(version).run([])
+    application = AlpacaApplication(version)
+    # Check if Alpaca is already running and parse the args
+    try:
+        bus = SessionBus()
+        app_service = bus.get('com.jeffser.Alpaca.Service', '/com/jeffser/Alpaca/Service')
+        application.run_arguments(app_service['com.jeffser.Alpaca.Service'])
+        sys.exit(0)
+    except Exception as e:
+        pass
+
+    return application.run([])
