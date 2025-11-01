@@ -532,7 +532,7 @@ class InstanceRow(Adw.ActionRow):
             self.get_root().instance_manager_stack.set_visible_child_name('content')
         else:
             self.get_root().instance_manager_stack.set_visible_child_name('no-instances')
-        self.unparent()
+        self.get_parent().remove(self)
 
 def create_instance_row(ins:dict) -> InstanceRow or None:
     if 'ollama' in ins.get('type'):
