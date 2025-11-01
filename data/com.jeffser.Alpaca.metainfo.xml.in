@@ -89,6 +89,26 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="8.3.0" date="2025-10-31">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/8.3.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Redesigned bottom bar of activities</li>
+          <li>Redesigned dialog mode for activities</li>
+          <li>Added option to reattach activities from window mode to sidebar mode</li>
+          <li>Integration of Ollama Cloud models</li>
+          <li>Added option for templates in GGUF models</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed title generation on online instances</li>
+          <li>Fixed error relating to usage of certain tools</li>
+          <li>Simplify internal process for regenerating messages</li>
+          <li>Fixed DBus issues</li>
+        </ul>
+      </description>
+    </release>
     <release version="8.2.2" date="2025-10-25">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/8.2.2</url>
       <description>
