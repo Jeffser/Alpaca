@@ -101,6 +101,32 @@ class ModelCreatorDialog(Adw.Dialog):
         pg.add(context_sw)
 
         pg = Adw.PreferencesGroup(
+            title=_('Template'),
+            description=_("Some GGUF models require a template, please check the model's documentation for more information."),
+            #visible=self.using_gguf
+        )
+        pp.add(pg)
+
+        #TEMPLATE
+        self.template_element = Gtk.TextView(
+            wrap_mode=3,
+            accepts_tab=False,
+            overflow=1,
+            vexpand=True,
+            css_classes=['p10', 'modelfile_textview']
+        )
+
+        template_sw = Gtk.ScrolledWindow(
+            min_content_height=100,
+            vexpand=True,
+            propagate_natural_height=True,
+            child=self.template_element,
+            overflow=1,
+            css_classes=['card', 'undershoot-bottom']
+        )
+        pg.add(template_sw)
+
+        pg = Adw.PreferencesGroup(
             title=_('Behavior')
         )
         pp.add(pg)
@@ -279,8 +305,11 @@ class ModelCreatorDialog(Adw.Dialog):
         for attachment in self.context_attachment_container.get_content():
             system_message.append('```{}\n{}\n```'.format(attachment.get('name'), attachment.get('content').strip()))
 
-        system_message.append(context_buffer.get_text(context_buffer.get_start_iter(), context_buffer.get_end_iter(), False).replace('"', '\\"'))
+        system_message.append(context_buffer.get_text(context_buffer.get_start_iter(), context_buffer.get_end_iter(), False).replace('"', '\\"').strip())
         system_message = '\n\n'.join(system_message).strip()
+
+        template_buffer = self.template_element.get_buffer()
+        template_text = template_buffer.get_text(template_buffer.get_start_iter(), template_buffer.get_end_iter(), False).replace('"', '\\"').strip()
 
         top_k = self.imagination_element.get_value()
         top_p = self.focus_element.get_value() / 100
@@ -299,6 +328,7 @@ class ModelCreatorDialog(Adw.Dialog):
                     'top_p': top_p,
                     'num_ctx': num_ctx
                 },
+                "template": template_text,
                 'stream': True
             }
 
