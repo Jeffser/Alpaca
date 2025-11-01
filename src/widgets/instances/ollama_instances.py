@@ -631,7 +631,7 @@ class OllamaCloud(BaseInstance):
 
     def pull_model(self, model_name:str, callback:callable):
         SQL.append_online_instance_model_list(self.instance_id, model_name)
-        callback({'status': 'success'})
+        GLib.timeout_add(5000, lambda: callback({'status': 'success'}) and False)
 
     def delete_model(self, model_name:str) -> bool:
         SQL.remove_online_instance_model_list(self.instance_id, model_name)

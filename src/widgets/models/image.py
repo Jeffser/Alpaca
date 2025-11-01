@@ -127,7 +127,7 @@ class BackgroundRemoverModelButton(Gtk.Button):
         file_path = os.path.join(data_dir, '.u2net', '{}.onnx'.format(self.get_name()))
         if os.path.isfile(file_path):
             os.remove(file_path)
-        self.unparent()
+        self.get_parent().get_parent().remove(self.get_parent())
 
     def prompt_remove_model(self):
         dialog.simple(
