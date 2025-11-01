@@ -52,11 +52,12 @@ class LiveChat(Adw.Bin):
             child=self.background
         )
 
-        show_messages_button = Gtk.Button(
+        show_messages_button = Gtk.ToggleButton(
             icon_name='chat-bubble-text-symbolic',
             tooltip_text=_('Show Messages')
         )
-        show_messages_button.connect('clicked', lambda btn: self.get_child().set_open(True))
+        show_messages_button.connect('toggled', lambda btn: self.get_child().set_open(btn.get_active()))
+        self.get_child().connect('notify::open', lambda sheet, gparam, btn=show_messages_button: btn.set_active(sheet.get_open()))
 
         container = Gtk.Box(
             orientation=1

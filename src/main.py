@@ -86,7 +86,6 @@ class AlpacaService:
         return 'yeah'
 
     def Present(self):
-        print('present')
         self.app.props.active_window.present()
 
     def PresentAsk(self):
