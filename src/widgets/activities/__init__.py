@@ -21,11 +21,13 @@ class ActivityDialog(Adw.Dialog):
         hb = Adw.HeaderBar()
         tbv.add_top_bar(hb)
         bb = generate_action_bar(self.page)
-        if self.page.extend_to_edge:
+        if self.page.extend_to_edge and self.page.__gtype_name__ != 'AlpacaLiveChat':
             hb.add_css_class('osd')
-            bb.add_css_class('osd')
-        for css_class in self.page.buttons.get('css', []):
-            bb.add_css_class(css_class)
+            if bb:
+                bb.add_css_class('osd')
+        if bb:
+            for css_class in self.page.buttons.get('css', []):
+                bb.add_css_class(css_class)
 
         tbv.add_bottom_bar(bb)
         tbv.set_content(self.page)
@@ -250,13 +252,14 @@ class ActivityManager(Adw.Bin):
             self.bottom_bar = generate_action_bar(selected_child, self.tabview)
             if self.bottom_bar:
                 self.tab_tbv.add_bottom_bar(self.bottom_bar)
-            if selected_child.extend_to_edge:
-                self.bottom_bar.add_css_class('osd')
+                for css_class in selected_child.buttons.get('css', []):
+                    self.bottom_bar.add_css_class(css_class)
+            if selected_child.extend_to_edge and selected_child.__gtype_name__ != 'AlpacaLiveChat':
                 self.tab_hb.add_css_class('osd')
+                if self.bottom_bar:
+                    self.bottom_bar.add_css_class('osd')
             else:
                 self.tab_hb.remove_css_class('osd')
-            for css_class in selected_child.buttons.get('css', []):
-                self.bottom_bar.add_css_class(css_class)
             self.tab_tbv.set_extend_content_to_bottom_edge(selected_child.extend_to_edge)
             self.tab_tbv.set_extend_content_to_top_edge(selected_child.extend_to_edge)
 
@@ -306,7 +309,7 @@ class ActivityTabWindow(Adw.ApplicationWindow):
         super().close()
 
 def generate_action_bar(page:Gtk.Widget, tabview:Gtk.Widget=None):
-    if not page:
+    if not page or page.__gtype_name__ == 'AlpacaLiveChat':
         return
     action_bar = Gtk.ActionBar(
         valign=2

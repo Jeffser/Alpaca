@@ -13,6 +13,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
     #GENERAL
     background_switch = Gtk.Template.Child()
     powersaver_warning_switch = Gtk.Template.Child()
+    show_model_manager_shortcut_switch = Gtk.Template.Child()
     zoom_spin = Gtk.Template.Child()
     regenerate_after_edit = Gtk.Template.Child()
     image_size_spin = Gtk.Template.Child()
@@ -101,6 +102,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
         # GENERAL
         self.settings.bind('hide-on-close', self.background_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind('powersaver-warning', self.powersaver_warning_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind('show-model-manager-shortcut', self.show_model_manager_shortcut_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind('zoom', self.zoom_spin, 'value', Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind('regenerate-after-edit', self.regenerate_after_edit, 'active', Gio.SettingsBindFlags.DEFAULT)
         self.mic_group.set_visible(importlib.util.find_spec('whisper'))

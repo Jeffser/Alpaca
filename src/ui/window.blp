@@ -5,7 +5,7 @@ template $AlpacaWindow: Adw.ApplicationWindow {
   close-request => $closing_app();
   resizable: true;
   width-request: 360;
-  height-request: 240;
+  height-request: 280;
   default-width: 1300;
   default-height: 800;
   title: "Alpaca";
@@ -41,6 +41,7 @@ template $AlpacaWindow: Adw.ApplicationWindow {
       local_model_flowbox.max-children-per-line: 2;
       chat_splitview.collapsed: true;
       show_activities_stack.visible-child-name: "button";
+      //chat_headerbar.show-title: false;
     }
 
     apply => $last_breakpoint_applied();
@@ -126,14 +127,15 @@ template $AlpacaWindow: Adw.ApplicationWindow {
             title: _("Activities");
           };
 
-          content: Adw.NavigationPage {
+          content: Adw.NavigationPage chat_page {
             title: _("Chat");
 
             child: Adw.ToolbarView {
               height-request: 140;
 
               [top]
-              Adw.HeaderBar {
+              Adw.HeaderBar chat_headerbar {
+                show-title: true;
                 [start]
                 ToggleButton show_sidebar_button {
                   icon-name: "sidebar-show-symbolic";
@@ -146,47 +148,6 @@ template $AlpacaWindow: Adw.ApplicationWindow {
                   icon-name: "edit-find-symbolic";
                   tooltip-text: _("Search Messages");
                   active: bind message_searchbar.search-mode-enabled;
-                }
-
-                [title]
-                Stack title_stack {
-                  transition-duration: 100;
-                  //transition-type: crossfade;
-
-                  StackPage {
-                    name: "no-models";
-
-                    child: Button title_no_model_button {
-                      child: Adw.ButtonContent {
-                        label: _("Add Models");
-                        icon-name: "brain-augemnted-symbolic";
-                      };
-
-                      tooltip-text: _("Manage Models");
-                      action-name: "app.model_manager";
-                      halign: center;
-                    };
-                  }
-
-                  StackPage {
-                    name: "model-selector";
-
-                    child: Box {
-                      halign: center;
-
-                      Button {
-                        icon-name: "brain-augemnted-symbolic";
-                        tooltip-text: _("Manage Models");
-                        action-name: "app.model_manager";
-
-                        styles [
-                          "flat",
-                        ]
-                      }
-
-                      DropDown model_dropdown {}
-                    };
-                  }
                 }
 
                 [end]

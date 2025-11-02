@@ -43,15 +43,10 @@ class QuickAskWindow(Adw.ApplicationWindow):
         new_chat.row.get_parent().select_row(new_chat.row)
         self.close()
 
-    def get_selected_model(self, current_instance=None):
-        if not current_instance:
-            current_instance = self.get_current_instance()
-
-        if current_instance:
-            model_name = current_instance.get_default_model()
-            vision = 'vision' in current_instance.get_model_info(model_name).get('capabilities')
-            current_model = Widgets.models.added.LiteAddedModel(model_name, vision)
-            return current_model
+    def get_selected_model(self):
+        item = self.global_footer.model_selector.get_selected_item()
+        if item:
+            return item.model
 
         return Widgets.models.added.FallbackModel
 
@@ -75,7 +70,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
         if not current_instance:
             Widgets.dialog.show_toast(_("Please select an instance in Alpaca before chatting"), self)
             return
-        current_model = self.get_selected_model(current_instance).get_name()
+        current_model = self.get_selected_model().get_name()
         if current_model is None:
             Widgets.dialog.show_toast(_("Please select add a model for this instance in Alpaca before chatting"), self)
             return
@@ -126,7 +121,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.global_footer = Widgets.message.GlobalFooter(self.send_message)
+        self.global_footer = Widgets.message.GlobalFooter(self.send_message, hide_mm_shortcut=True)
         self.global_footer_container.set_child(self.global_footer)
 
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")

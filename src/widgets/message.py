@@ -7,7 +7,7 @@ import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GtkSource, Spelling
 import os, datetime, threading, sys, base64, logging, re, tempfile
 from ..sql_manager import prettify_model_name, generate_uuid, Instance as SQL
-from . import attachments, blocks, dialog, voice, tools
+from . import attachments, blocks, dialog, voice, tools, models
 
 logger = logging.getLogger(__name__)
 
@@ -656,7 +656,8 @@ class GlobalActionStack(Gtk.Stack):
 class GlobalFooter(Gtk.Box):
     __gtype_name__ = 'AlpacaGlobalFooter'
 
-    def __init__(self, send_callback:callable):
+    def __init__(self, send_callback:callable, hide_mm_shortcut:bool=False):
+        settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         self.send_callback = send_callback
         super().__init__(
             spacing=10,
@@ -688,17 +689,38 @@ class GlobalFooter(Gtk.Box):
         self.action_stack = GlobalActionStack(self)
         self.message_text_view_container.append(self.action_stack)
 
-        bottom_container = Gtk.Box(spacing=10)
-        self.append(bottom_container)
+        self.wrap_box = Adw.WrapBox(
+            child_spacing=10,
+            line_spacing=10,
+            justify_last_line=True
+        )
+        self.append(self.wrap_box)
 
         self.attachment_button = attachments.GlobalAttachmentButton()
-        bottom_container.append(self.attachment_button)
+        self.wrap_box.append(self.attachment_button)
 
         self.microphone_button = voice.MicrophoneButton(self.message_text_view)
-        bottom_container.append(self.microphone_button)
+        self.wrap_box.append(self.microphone_button)
+
+        if not hide_mm_shortcut:
+            self.model_manager_shortcut = Gtk.Button(
+                icon_name='brain-augemnted-symbolic',
+                valign=3,
+                css_classes=['circular'],
+                tooltip_text=_("Manage Models"),
+                action_name="app.model_manager"
+            )
+            settings.bind('show-model-manager-shortcut', self.model_manager_shortcut, 'visible', Gio.SettingsBindFlags.DEFAULT)
+            self.wrap_box.append(self.model_manager_shortcut)
+
+        self.model_selector = models.added.AddedModelSelector()
+        self.model_selector.set_hexpand(True)
+        self.model_selector.set_halign(1)
+        self.model_selector.connect('notify::selected', lambda dropdown, gparam: self.tool_selector.model_changed(dropdown))
+        self.wrap_box.append(self.model_selector)
 
         self.tool_selector = tools.ToolSelector()
-        bottom_container.append(self.tool_selector)
+        self.wrap_box.append(self.tool_selector)
 
     def on_file_drop(self, drop_target, value, x, y):
         files = value.get_files()

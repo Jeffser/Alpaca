@@ -8,6 +8,7 @@ from .. import dialog, attachments
 from .common import CategoryPill, get_available_models_data, prompt_existing
 
 logger = logging.getLogger(__name__)
+model_selector_model = None
 
 class AddedModelRow(GObject.Object):
     __gtype_name__ = 'AlpacaAddedModelRow'
@@ -21,6 +22,32 @@ class AddedModelRow(GObject.Object):
 
     def __str__(self):
         return self.model.model_title
+
+class AddedModelSelector(Gtk.DropDown):
+    __gtype_name__ = 'AlpacaAddedModelSelector'
+
+    def __init__(self):
+        global model_selector_model
+        if not model_selector_model:
+            model_selector_model = Gio.ListStore.new(AddedModelRow)
+        model_selector_model.connect('notify::n-items', self.n_items_changed)
+
+        super().__init__(
+            model=model_selector_model,
+            visible=len(model_selector_model) > 0
+        )
+        list(self)[0].add_css_class('flat')
+
+        self.set_expression(Gtk.PropertyExpression.new(AddedModelRow, None, "name"))
+        factory = Gtk.SignalListItemFactory()
+        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
+        factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
+        self.set_factory(factory)
+        list(list(self)[1].get_child())[1].set_propagate_natural_width(True)
+
+    def n_items_changed(self, model, gparam):
+        self.set_enable_search(len(model) > 10)
+        self.set_visible(len(model) > 0)
 
 class InfoBox(Gtk.Box):
     __gtype_name__ = 'AlpacaInformationBox'
@@ -439,13 +466,13 @@ class AddedModelButton(Gtk.Button):
         window = self.get_root().get_application().get_main_window(present=False)
 
         if self.instance.delete_model(self.get_name()):
-            found_models = [i for i, row in enumerate(list(window.model_dropdown.get_model())) if row.model.get_name() == self.get_name()]
+            global model_selector_model
+            found_models = [i for i, row in enumerate(list(model_selector_model)) if row.model.get_name() == self.get_name()]
             if found_models:
-                window.model_dropdown.get_model().remove(found_models[0])
+                model_selector_model.remove(found_models[0])
 
             if len(list(self.get_parent().get_parent())) == 1:
                 window.local_model_stack.set_visible_child_name('no-models')
-                window.title_stack.set_visible_child_name('no-models')
 
             SQL.remove_model_preferences(self.get_name())
             threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
@@ -494,17 +521,4 @@ class AddedModelButton(Gtk.Button):
 class FallbackModel:
     def get_name(): return None
     def get_vision() -> bool: return False
-
-class LiteAddedModel: #For LiveChat and QuickChat
-
-    def __init__(self, name:str, vision:bool):
-        self.name = name
-        self.vision = vision
-        self.model_title = prettify_model_name(self.name)
-
-    def get_name(self) -> str:
-        return self.name
-
-    def get_vision(self) -> bool:
-        return self.vision
 

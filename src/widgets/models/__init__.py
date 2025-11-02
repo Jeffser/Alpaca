@@ -56,7 +56,7 @@ def update_available_model_list(root):
 def update_added_model_list(root):
     window = root.get_application().get_main_window(present=False)
     window.local_model_flowbox.remove_all()
-    window.model_dropdown.get_model().remove_all()
+    added.model_selector_model.remove_all()
 
     # Normal Models
     window.get_current_instance().local_models = None # To reset cache
@@ -64,7 +64,7 @@ def update_added_model_list(root):
     for model in local_models:
         model_element = added.AddedModelButton(model.get('name'), window.get_current_instance())
         window.local_model_flowbox.append(model_element)
-        window.model_dropdown.get_model().append(model_element.row)
+        added.model_selector_model.append(model_element.row)
         model_element.get_parent().set_focusable(False)
 
     if importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'):
@@ -94,9 +94,7 @@ def update_added_model_list(root):
                     window.local_model_flowbox.append(model_element)
                     model_element.get_parent().set_focusable(False)
 
-    window.title_stack.set_visible_child_name('model-selector' if len(common.get_local_models(window)) > 0 else 'no-models')
     window.local_model_stack.set_visible_child_name('content' if len(list(window.local_model_flowbox)) > 0 else 'no-models')
-    window.model_dropdown.set_enable_search(len(local_models) > 10)
     GLib.idle_add(window.chat_list_navigationview.get_visible_page().auto_select_model)
 
 def tts_model_exists(model_name:str) -> bool:

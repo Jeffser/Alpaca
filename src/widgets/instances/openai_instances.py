@@ -54,7 +54,10 @@ class BaseInstance:
         bot_message.chat.busy = True
         if bot_message.chat.chat_id:
             bot_message.chat.row.spinner.set_visible(True)
-            bot_message.get_root().global_footer.toggle_action_button(False)
+            try:
+                bot_message.get_root().global_footer.toggle_action_button(False)
+            except:
+                pass
         bot_message.chat.set_visible_child_name('content')
 
         messages = bot_message.chat.convert_to_json()[:list(bot_message.chat.container).index(bot_message)]

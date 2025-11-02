@@ -63,15 +63,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_search_button = Gtk.Template.Child()
     message_searchbar = Gtk.Template.Child()
     searchentry_messages = Gtk.Template.Child()
-    title_stack = Gtk.Template.Child()
-    title_no_model_button = Gtk.Template.Child()
     model_filter_button = Gtk.Template.Child()
 
     file_filter_db = Gtk.Template.Child()
 
     banner = Gtk.Template.Child()
-
-    model_dropdown = Gtk.Template.Child()
 
     instance_preferences_page = Gtk.Template.Child()
     instance_listbox = Gtk.Template.Child()
@@ -82,6 +78,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     chat_splitview = Gtk.Template.Child()
     activities_page = Gtk.Template.Child()
+    chat_page = Gtk.Template.Child()
     last_breakpoint_status = False
 
     chat_searchbar = Gtk.Template.Child()
@@ -361,7 +358,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             current_chat.set_visible_child_name('content')
 
     def get_selected_model(self):
-        selected_item = self.model_dropdown.get_selected_item()
+        selected_item = self.global_footer.model_selector.get_selected_item()
         if selected_item:
             return selected_item.model
         else:
@@ -461,18 +458,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.global_footer = Widgets.message.GlobalFooter(self.send_message)
         self.global_footer_container.set_child(self.global_footer)
         self.set_focus(self.global_footer.message_text_view)
-
-        # Prepare model selector
-        list(self.model_dropdown)[0].add_css_class('flat')
-        self.model_dropdown.set_model(Gio.ListStore.new(Widgets.models.added.AddedModelRow))
-        self.model_dropdown.set_expression(Gtk.PropertyExpression.new(Widgets.models.added.AddedModelRow, None, "name"))
-        factory = Gtk.SignalListItemFactory()
-        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
-        factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
-        self.model_dropdown.set_factory(factory)
-        list(list(self.model_dropdown)[1].get_child())[1].set_propagate_natural_width(True)
-        list(list(self.title_no_model_button.get_child())[0])[1].set_ellipsize(3)
-        self.model_dropdown.connect('notify::selected', lambda dropdown, gparam: self.global_footer.tool_selector.model_changed(dropdown))
 
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         for el in ("default-width", "default-height", "maximized", "hide-on-close"):
