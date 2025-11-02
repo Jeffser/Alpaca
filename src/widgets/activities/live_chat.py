@@ -111,6 +111,7 @@ class LiveChat(Adw.Bin):
 
         # Prepare Global Footer
         self.global_footer = message.GlobalFooter(self.send_message, hide_mm_shortcut=True)
+        self.global_footer.wrap_box.set_wrap_policy(0)
         self.global_footer.attachment_button.set_visible(False)
         self.global_footer.action_stack.set_visible(False)
         self.global_footer.tool_selector.set_visible(False)
