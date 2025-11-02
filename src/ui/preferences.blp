@@ -19,6 +19,11 @@ template $AlpacaPreferencesDialog: Adw.PreferencesDialog {
         subtitle: _("When running a managed Ollama instance");
       }
 
+      Adw.SwitchRow show_model_manager_shortcut_switch {
+        title: _("Show Model Manager Shortcut");
+        subtitle: _("You can also find the model manager in the main dropdown menu");
+      }
+
       Adw.SpinRow zoom_spin {
         output => $zoom_changed();
         title: _("Zoom");

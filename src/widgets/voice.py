@@ -167,7 +167,8 @@ class MicrophoneButton(Gtk.Stack):
         self.button = Gtk.ToggleButton(
             icon_name='audio-input-microphone-symbolic',
             tooltip_text=_('Use Speech Recognition'),
-            css_classes=['circular']
+            css_classes=['circular'],
+            valign=3
         )
         self.button.connect('toggled', self.toggled)
         self.add_named(self.button, 'button')

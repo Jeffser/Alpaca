@@ -52,16 +52,15 @@ class LiveChat(Adw.Bin):
             child=self.background
         )
 
-        show_messages_button = Gtk.ToggleButton(
+        show_messages_button = Gtk.Button(
             icon_name='chat-bubble-text-symbolic',
-            tooltip_text=_('Show Messages')
+            tooltip_text=_('Show Messages'),
+            css_classes=['circular']
         )
-        show_messages_button.connect('toggled', lambda btn: self.get_child().set_open(btn.get_active()))
-        self.get_child().connect('notify::open', lambda sheet, gparam, btn=show_messages_button: btn.set_active(sheet.get_open()))
+        show_messages_button.connect('clicked', lambda btn: self.get_child().set_open(True))
 
         container = Gtk.Box(
-            orientation=1,
-            margin_bottom=25
+            orientation=1
         )
         clamp = Adw.Clamp(
             maximum_size=1000,
@@ -110,23 +109,16 @@ class LiveChat(Adw.Bin):
         )
         container.append(global_footer_container)
 
-        # Prepare Model Selector
-        self.model_dropdown = Gtk.DropDown()
-        self.model_dropdown.connect('notify::selected', self.model_dropdown_changed)
-        list(self.model_dropdown)[0].add_css_class('flat')
-        factory = Gtk.SignalListItemFactory()
-        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
-        factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
-        self.model_dropdown.set_factory(factory)
-        self.model_dropdown.set_expression(Gtk.PropertyExpression.new(models.added.AddedModelRow, None, "name"))
-        list(list(self.model_dropdown)[1].get_child())[1].set_propagate_natural_width(True)
-
         # Prepare Global Footer
-        self.global_footer = message.GlobalFooter(self.send_message)
+        self.global_footer = message.GlobalFooter(self.send_message, hide_mm_shortcut=True)
         self.global_footer.attachment_button.set_visible(False)
         self.global_footer.action_stack.set_visible(False)
         self.global_footer.tool_selector.set_visible(False)
         self.global_footer.microphone_button.unparent()
+        self.global_footer.wrap_box.prepend(show_messages_button)
+        self.global_footer.model_selector.connect('notify::selected', self.model_dropdown_changed)
+        self.global_footer.model_selector.set_hexpand(True)
+        self.global_footer.model_selector.set_halign(3)
         global_footer_container.set_child(self.global_footer)
 
         # Prepare Text To Speech
@@ -149,20 +141,31 @@ class LiveChat(Adw.Bin):
             repeat_count=0
         )
 
+        self.close_button = Gtk.Button(
+            tooltip_text=_('Close Activity'),
+            icon_name='window-close-symbolic',
+            css_classes=['circular'],
+            valign=3
+        )
+        self.connect('map', self.on_map)
 
         # Activity
         self.title=_('Live Chat')
         self.activity_icon='headset-symbolic'
-        self.buttons={
-            'start': [show_messages_button],
-            'center': self.model_dropdown
-        }
+        self.buttons={}
         self.extend_to_edge = True
 
-        self.connect('map', lambda *_: self.on_map())
+    def requested_close(self):
+        tabview = self.get_ancestor(Adw.TabView)
+        if tabview:
+            tabview.close_page(tabview.get_selected_page())
 
-    def on_map(self):
-        self.model_dropdown.set_model(self.get_root().get_application().get_main_window().model_dropdown.get_model())
+    def on_map(self, widget):
+        if not self.close_button.get_parent():
+            tabview = self.get_ancestor(Adw.TabView)
+            if tabview:
+                self.global_footer.wrap_box.append(self.close_button)
+                self.close_button.connect('clicked', lambda button: self.requested_close())
 
     def toggle_avatar_state(self, state:bool):
         if state:
@@ -192,7 +195,7 @@ class LiveChat(Adw.Bin):
                 self.pfp_avatar.set_show_initials(True)
 
     def get_selected_model(self):
-        selected_item = self.model_dropdown.get_selected_item()
+        selected_item = self.global_footer.model_selector.get_selected_item()
         if selected_item:
             return selected_item.model
         else:

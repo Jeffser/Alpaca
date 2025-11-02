@@ -8,7 +8,7 @@ from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 import logging, os, datetime, random, json, threading, re
 from ..constants import SAMPLE_PROMPTS, cache_dir
 from ..sql_manager import generate_uuid, prettify_model_name, generate_numbered_name, Instance as SQL
-from . import dialog, voice
+from . import dialog, voice, models
 from .message import Message
 
 logger = logging.getLogger(__name__)
@@ -298,6 +298,8 @@ class ChatList(Adw.NavigationPage):
         if not listbox.get_root() or (row and not row.get_root()):
             return
 
+        row.get_root().chat_page.set_title(row.get_name())
+
         last_chat_id = -1
         if listbox.get_root().chat_bin.get_child():
             last_chat_id = listbox.get_root().chat_bin.get_child().chat_id
@@ -333,9 +335,9 @@ class ChatList(Adw.NavigationPage):
 
     def auto_select_model(self):
         def find_model_index(model_name:str) -> int:
-            if len(list(self.get_root().model_dropdown.get_model())) == 0 or not model_name:
+            if len(list(models.added.model_selector_model)) == 0 or not model_name:
                 return -1
-            detected_models = [i for i, future_row in enumerate(list(self.get_root().model_dropdown.get_model())) if future_row.model.get_name() == model_name]
+            detected_models = [i for i, future_row in enumerate(list(models.added.model_selector_model)) if future_row.model.get_name() == model_name]
             if len(detected_models) > 0:
                 return detected_models[0]
             return -1
@@ -349,7 +351,7 @@ class ChatList(Adw.NavigationPage):
                 model_index = find_model_index(self.get_root().get_current_instance().get_default_model())
 
             if model_index and model_index != -1:
-                self.get_root().model_dropdown.set_selected(model_index)
+                self.get_root().global_footer.model_selector.set_selected(model_index)
 
 class TemplateSelectorDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaTemplateSelectorDialog'
@@ -988,6 +990,9 @@ class ChatRow(Gtk.ListBoxRow):
             self.set_name(new_name)
         self.chat.is_template = is_template
         SQL.insert_or_update_chat(self.chat)
+
+        if self.get_parent().get_selected_row() == self:
+            self.get_root().chat_page.set_title(self.get_name())
 
     def prompt_edit(self):
         options = {

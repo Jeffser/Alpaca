@@ -13,7 +13,8 @@ class ToolSelector(Gtk.DropDown):
 
         super().__init__(
             factory=factory,
-            model=Gio.ListStore.new(Base)
+            model=Gio.ListStore.new(Base),
+            css_classes=['raised']
         )
 
         for t in Base.__subclasses__():
@@ -44,7 +45,7 @@ class ToolSelector(Gtk.DropDown):
         icon = Gtk.Image.new_from_icon_name(
             item_data.icon_name
         )
-        icon.add_css_class('dim-label')
+        #icon.add_css_class('dim-label')
         label = Gtk.Label(
             label=item_data.display_name,
             ellipsize=3,
