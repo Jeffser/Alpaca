@@ -60,7 +60,8 @@ class LiveChat(Adw.Bin):
         self.get_child().connect('notify::open', lambda sheet, gparam, btn=show_messages_button: btn.set_active(sheet.get_open()))
 
         container = Gtk.Box(
-            orientation=1
+            orientation=1,
+            margin_bottom=25
         )
         clamp = Adw.Clamp(
             maximum_size=1000,
@@ -156,7 +157,7 @@ class LiveChat(Adw.Bin):
             'start': [show_messages_button],
             'center': self.model_dropdown
         }
-        self.extend_to_edge = False
+        self.extend_to_edge = True
 
         self.connect('map', lambda *_: self.on_map())
 

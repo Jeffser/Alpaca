@@ -21,7 +21,7 @@ class ActivityDialog(Adw.Dialog):
         hb = Adw.HeaderBar()
         tbv.add_top_bar(hb)
         bb = generate_action_bar(self.page)
-        if self.page.extend_to_edge:
+        if self.page.extend_to_edge and self.page.__gtype_name__ != 'AlpacaLiveChat':
             hb.add_css_class('osd')
             bb.add_css_class('osd')
         for css_class in self.page.buttons.get('css', []):
@@ -250,7 +250,7 @@ class ActivityManager(Adw.Bin):
             self.bottom_bar = generate_action_bar(selected_child, self.tabview)
             if self.bottom_bar:
                 self.tab_tbv.add_bottom_bar(self.bottom_bar)
-            if selected_child.extend_to_edge:
+            if selected_child.extend_to_edge and selected_child.__gtype_name__ != 'AlpacaLiveChat':
                 self.bottom_bar.add_css_class('osd')
                 self.tab_hb.add_css_class('osd')
             else:
