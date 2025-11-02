@@ -614,7 +614,6 @@ class OllamaCloud(BaseInstance):
         'temperature': 0.7,
         'seed': 0,
         'num_ctx': 16384,
-        'keep_alive': 300,
         'default_model': None,
         'title_model': None,
         'think': False,

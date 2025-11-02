@@ -9,6 +9,7 @@ blueprints = files(
   'ui/shortcuts.blp',
   'ui/welcome.blp',
   'ui/window.blp',
+  'ui/widgets/instance_preferences_dialog.blp',
 )
 
 blueprints = custom_target('blueprints',

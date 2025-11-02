@@ -122,10 +122,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 )
             else:
                 instance = ins(
-                    instance_id=generate_uuid(),
+                    instance_id=None,
                     properties={}
                 )
-                Widgets.instances.InstancePreferencesGroup(instance).present(self)
+                Widgets.instances.InstancePreferencesDialog(instance).present(self)
 
         options = {}
         instance_list = Widgets.instances.ollama_instances.BaseInstance.__subclasses__()

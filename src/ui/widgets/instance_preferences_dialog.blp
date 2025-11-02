@@ -1,0 +1,273 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaInstancePreferencesDialog: Adw.Dialog {
+  content-width: 500;
+  //closed => $closing_notice();
+
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-end-title-buttons: false;
+      show-start-title-buttons: false;
+
+      [start]
+      Gtk.Button {
+        label: _("Cancel");
+        tooltip-text: _("Cancel");
+        styles [
+          "raised",
+        ]
+        clicked => $close_requested();
+      }
+
+      [end]
+      Gtk.Button {
+        label: _("Save");
+        tooltip-text: _("Save");
+        styles [
+          "suggested-action",
+        ]
+        clicked => $save_requested();
+      }
+
+    }
+
+    content: Adw.PreferencesPage preferences_page {
+      Adw.PreferencesGroup connection_group{
+        visible: false;
+
+        Adw.EntryRow name_el {
+          title: _("Name");
+          name: "name";
+        }
+
+        Adw.SpinRow port_el {
+          title: _("Port");
+          subtitle: _("Which network port will Ollama use");
+          name: "port";
+          digits: 0;
+          numeric: true;
+          snap-to-ticks: true;
+          adjustment: Gtk.Adjustment {
+            lower: 1024;
+            upper: 65535;
+            step-increment: 1;
+          };
+        }
+
+        Adw.EntryRow url_el {
+          title: _("Instance URL");
+          name: "url";
+        }
+
+        Adw.PasswordEntryRow api_el {
+          name: "api";
+        }
+      }
+
+      Adw.PreferencesGroup tweak_group {
+        visible: false;
+
+        Adw.SwitchRow think_el {
+          title: _("Thought Processing");
+          subtitle: _("Have compatible reasoning models think about their response before generating a message");
+          name: "think";
+        }
+
+        Adw.SwitchRow expose_el {
+          title: _("Expose Ollama to Network");
+          subtitle: _("Make Ollama available for other devices and software in local network");
+          name: "expose";
+        }
+
+        Adw.ComboRow share_name_el {
+          title: _("Share Name");
+          subtitle: _("Automatically share your name with the AI models");
+          name: "share_name";
+
+          model: Gtk.StringList {
+            strings [
+              _("Do Not Share"),
+              _("Username"),
+              _("Full Name")
+            ]
+          };
+        }
+
+        Adw.SwitchRow metadata_el {
+          title: _("Show Response Metadata");
+          subtitle: _("Add the option to show reply metadata in the message as an attachment");
+          name: "show_response_metadata";
+        }
+
+        Adw.SpinRow max_tokens_el {
+          title: _("Max Tokens");
+          subtitle: _("Defines the maximum number of tokens (words + spaces) the AI can generate in a response. More tokens allow longer replies but may take more time and cost more");
+          name: "max_tokens";
+          digits: 0;
+          numeric: true;
+          snap-to-ticks: true;
+          adjustment: Gtk.Adjustment {
+            lower: 50;
+            upper: 16384;
+            step-increment: 1;
+          };
+        }
+      }
+
+      Adw.PreferencesGroup parameters_group {
+        visible: false;
+
+        Adw.ExpanderRow override_parameters_el {
+          title: _("Override Parameters");
+          subtitle: _("These parameters overrides the behavior of the instance and models");
+          show-enable-switch: true;
+          name: "override_parameters";
+
+          Adw.SpinRow temperature_el {
+            title: _("Temperature");
+            subtitle: _("Increasing the temperature will make the models answer more creatively");
+            name: "temperature";
+            digits: 2;
+            numeric: true;
+            snap-to-ticks: true;
+            adjustment: Gtk.Adjustment {
+              lower: 0.01;
+              upper: 2;
+              step-increment: 0.01;
+            };
+          }
+
+          Adw.SpinRow seed_el {
+            title: _("Seed");
+            subtitle: _("Setting this to a specific number other than 0 will make the model generate the same text for the same prompt");
+            name: "seed";
+            digits: 0;
+            numeric: true;
+            snap-to-ticks: true;
+            adjustment: Gtk.Adjustment {
+              lower: 0;
+              upper: 99999999;
+              step-increment: 1;
+            };
+          }
+
+          Adw.SpinRow context_size_el {
+            title: _("Context Window Size");
+            subtitle: _("Controls how many tokens (pieces of text) the model can process and remember at once");
+            name: "num_ctx";
+            digits: 0;
+            numeric: true;
+            snap-to-ticks: true;
+            adjustment: Gtk.Adjustment {
+              lower: 512;
+              upper: 131072;
+              step-increment: 512;
+            };
+          }
+        }
+      }
+
+      Adw.PreferencesGroup keep_alive_group {
+        visible: false;
+
+        Adw.ComboRow keep_alive_selector_el {
+          title: _("Keep Alive Presets");
+          subtitle: _("How the instance should handle idle models");
+          name: "keep_alive_selector";
+
+          notify::selected => $keep_alive_preset_changed();
+
+          model: Gtk.StringList {
+            strings [
+              _("Set Timer"),
+              _("Keep Alive Forever"),
+              _("Unload After Use")
+            ]
+          };
+        }
+
+        Adw.SpinRow keep_alive_minutes_el {
+          title: _("Minutes");
+          subtitle: _("The amount of time the instance should keep models loaded after they go idle");
+          name: "keep_alive";
+          digits: 0;
+          numeric: true;
+          snap-to-ticks: true;
+        }
+      }
+
+      Adw.PreferencesGroup overrides_group {
+        visible: false;
+
+        title: _("Overrides");
+        description: _("These entries are optional, they are used to troubleshoot GPU related problems with Ollama");
+
+        header-suffix: Gtk.Button {
+          name: "https://docs.ollama.com/gpu#overrides-on-linux";
+          tooltip-text: "https://docs.ollama.com/gpu#overrides-on-linux";
+          icon-name: "globe-symbolic";
+          valign: center;
+          styles [
+            "flat"
+          ]
+        };
+
+        Adw.EntryRow override_0_el {
+          title: "HSA_OVERRIDE_GFX_VERSION";
+          name: "override:HSA_OVERRIDE_GFX_VERSION";
+        }
+
+        Adw.EntryRow override_1_el {
+          title: "CUDA_VISIBLE_DEVICES";
+          name: "override:CUDA_VISIBLE_DEVICES";
+        }
+
+        Adw.EntryRow override_2_el {
+          title: "ROCR_VISIBLE_DEVICES";
+          name: "override:ROCR_VISIBLE_DEVICES";
+        }
+
+        Adw.EntryRow override_3_el {
+          title: "HIP_VISIBLE_DEVICES";
+          name: "override:HIP_VISIBLE_DEVICES";
+        }
+      }
+
+      Adw.PreferencesGroup model_group {
+        visible: false;
+
+        Adw.ActionRow model_directory_el {
+          title: _("Model Directory");
+          name: "model_directory";
+
+          [suffix]
+          Gtk.Button model_directory_button {
+            clicked => $model_directory_requested();
+            tooltip-text: _("Select Directory");
+            icon-name: "inode-directory-symbolic";
+            valign: center;
+            styles [
+              "flat"
+            ]
+          }
+
+          activatable-widget: model_directory_button;
+        }
+
+        Adw.ComboRow default_model_el {
+          title: _("Default Model");
+          subtitle: _("Model to select when starting a new chat");
+          name: "default_model";
+        }
+
+        Adw.ComboRow title_model_el {
+          title: _("Title Model");
+          subtitle: _("Model to use when generating a chat title");
+          name: "title_model";
+        }
+      }
+    };
+  }
+}
