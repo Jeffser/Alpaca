@@ -349,7 +349,7 @@ class InstanceRow(Adw.ActionRow):
 
 def create_instance_row(ins:dict) -> InstanceRow or None:
     if 'ollama' in ins.get('type'):
-        if ins.get('type') != 'ollama:managed' or shutil.which('ollama') or True:
+        if ins.get('type') != 'ollama:managed' or shutil.which('ollama'):
             for instance_cls in BaseOllama.__subclasses__():
                 if getattr(instance_cls, 'instance_type', None) == ins.get('type'):
                     return InstanceRow(
