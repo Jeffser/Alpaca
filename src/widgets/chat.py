@@ -298,7 +298,8 @@ class ChatList(Adw.NavigationPage):
         if not listbox.get_root() or (row and not row.get_root()):
             return
 
-        row.get_root().chat_page.set_title(row.get_name())
+        if row and row.get_root():
+            row.get_root().chat_page.set_title(row.get_name())
 
         last_chat_id = -1
         if listbox.get_root().chat_bin.get_child():
