@@ -10,12 +10,6 @@ from .openai_instances import BaseInstance as BaseOpenAI
 
 logger = logging.getLogger(__name__)
 
-override_urls = {
-    'HSA_OVERRIDE_GFX_VERSION': 'https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides',
-    'CUDA_VISIBLE_DEVICES': 'https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection',
-    'ROCR_VISIBLE_DEVICES': 'https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection-1'
-}
-
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/instance_preferences_dialog.ui')
 class InstancePreferencesDialog(Adw.Dialog):
 
