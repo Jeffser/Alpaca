@@ -299,75 +299,18 @@ class ChatList(Adw.NavigationPage):
             if model_index and model_index != -1:
                 self.get_root().global_footer.model_selector.set_selected(model_index)
 
-class TemplateSelectorDialog(Adw.Dialog):
-    __gtype_name__ = 'AlpacaTemplateSelectorDialog'
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/chat/template_selector.ui')
+class TemplateSelector(Adw.Dialog):
+    __gtype_name__ = 'AlpacaTemplateSelector'
+
+    main_stack = Gtk.Template.Child()
+    search_button = Gtk.Template.Child()
 
     def __init__(self, chat):
+        super().__init__()
         self.chat = chat
-
-        self.flowbox = Gtk.FlowBox(
-            selection_mode=0,
-            css_classes=['flat', 'p10'],
-            max_children_per_line=3,
-            column_spacing=6,
-            row_spacing=6,
-            homogeneous=True
-        )
-
-        self.main_stack = Gtk.Stack(
-            transition_type=1
-        )
-        self.main_stack.add_named(
-            self.flowbox,
-            'content'
-        )
-        self.main_stack.add_named(
-            Adw.StatusPage(
-                title=_('No Templates'),
-                description=_('Add templates by editing a chat')
-            ),
-            'empty'
-        )
-        list(self.main_stack.get_child_by_name('empty'))[0].set_policy(2, 2)
-        self.main_stack.add_named(
-            Adw.StatusPage(
-                title=_('No Results Found'),
-                description=_('Uh oh! No templates found for your search.')
-            ),
-            'no-results'
-        )
-        list(self.main_stack.get_child_by_name('no-results'))[0].set_policy(2, 2)
-
-        tbv = Adw.ToolbarView(
-            content=self.main_stack
-        )
-
-        # Header Bar
-        hb = Adw.HeaderBar()
-        tbv.add_top_bar(hb)
-
-        # Search Bar
-        se = Gtk.SearchEntry()
-        se.connect('search-changed', lambda entry: self.on_search(entry.get_text()))
-        sb = Gtk.SearchBar(
-            child=se
-        )
-        self.search_toggle = Gtk.ToggleButton(
-            icon_name='edit-find-symbolic',
-            tooltip_text=_('Search Template')
-        )
-        self.search_toggle.connect('toggled', lambda btn: sb.set_search_mode(btn.get_active()))
-        hb.pack_start(self.search_toggle)
-        tbv.add_top_bar(sb)
-
-        super().__init__(
-            child=tbv,
-            title=_('Template Selector')
-        )
-        self.update()
-
-    def update(self):
-        self.flowbox.remove_all()
+        flow_box = self.main_stack.get_child_by_name('content')
+        flow_box.remove_all()
         templates = SQL.get_templates()
         for t in templates:
             template_title = GLib.markup_escape_text(t[1])
@@ -376,23 +319,27 @@ class TemplateSelectorDialog(Adw.Dialog):
                 tooltip_text=_("Use '{}'").format(template_title)
             )
             button.connect('clicked', lambda *_, tem_name=t[1], tem_id=t[0]: self.selected_item(tem_name, tem_id))
-            self.flowbox.append(button)
-        self.flowbox.set_max_children_per_line(min(max(len(templates), 1), 3))
+            flow_box.append(button)
+        flow_box.set_max_children_per_line(min(max(len(templates), 1), 3))
         self.update_visibility()
 
-    def on_search(self, query:str):
-        for child in list(self.flowbox):
+    @Gtk.Template.Callback()
+    def on_search(self, entry:Gtk.SearchEntry):
+        query = entry.get_text()
+        flow_box = self.main_stack.get_child_by_name('content')
+        for child in list(flow_box):
             child.set_visible(re.search(query, child.get_child().get_label(), re.IGNORECASE))
         self.update_visibility(True)
 
     def update_visibility(self, searching:bool=False):
-        for child in list(self.flowbox):
+        flow_box = self.main_stack.get_child_by_name('content')
+        for child in list(flow_box):
             if child.get_visible():
                 self.main_stack.set_visible_child_name('content')
                 return
 
         self.main_stack.set_visible_child_name('no-results' if searching else 'empty')
-        self.search_toggle.set_visible(searching)
+        self.search_button.set_visible(searching)
 
     def selected_item(self, template_name:str, template_id:str):
         SQL.duplicate_chat(template_id, self.chat)
@@ -434,7 +381,7 @@ class ChatWelcomeHelper(Gtk.Box):
             label=_('Use Template'),
             tooltip_text=_('Use Template')
         )
-        template_button.connect('clicked', lambda *_: TemplateSelectorDialog(chat).present(self.get_root()))
+        template_button.connect('clicked', lambda *_: TemplateSelector(chat).present(self.get_root()))
         control_box.append(template_button)
 
         self.connect('realize', lambda *_: threading.Thread(target=self.update_prompts, daemon=True).start())

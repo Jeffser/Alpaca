@@ -13,6 +13,7 @@ blueprints = files(
   'ui/widgets/message/popup.blp',
   'ui/widgets/message/message.blp',
   'ui/widgets/chat/chat_list.blp',
+  'ui/widgets/chat/template_selector.blp',
 )
 
 blueprints = custom_target('blueprints',
