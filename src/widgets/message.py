@@ -19,11 +19,11 @@ class OptionPopup(Gtk.Popover):
     copy_button = Gtk.Template.Child()
     edit_button = Gtk.Template.Child()
     regenerate_button = Gtk.Template.Child()
+    tts_button = None
 
-    def __init__(self, message_element):
-        self.message_element = message_element
+    def __init__(self):
         super().__init__()
-        self.tts_button = voice.DictateToggleButton(self.message_element)
+        self.tts_button = voice.DictateToggleButton()
         self.get_child().append(self.tts_button)
 
     def change_status(self, status:bool):
@@ -33,42 +33,46 @@ class OptionPopup(Gtk.Popover):
 
     @Gtk.Template.Callback()
     def delete_message(self, button=None):
-        chat = self.message_element.chat
-        message_id = self.message_element.message_id
-        SQL.delete_message(self.message_element)
-        self.message_element.unparent()
+        message_element = self.get_ancestor(Message)
+        chat = message_element.chat
+        message_id = message_element.message_id
+        SQL.delete_message(message_element)
+        message_element.unparent()
         if len(list(chat.container)) == 0:
             chat.set_visible_child_name('welcome-screen')
 
     @Gtk.Template.Callback()
     def copy_message(self, button=None):
+        message_element = self.get_ancestor(Message)
         clipboard = Gdk.Display().get_default().get_clipboard()
-        clipboard.set(self.message_element.get_content())
+        clipboard.set(message_element.get_content())
         dialog.show_toast(_("Message copied to the clipboard"), self.get_root())
 
     @Gtk.Template.Callback()
     def edit_message(self, button=None):
+        message_element = self.get_ancestor(Message)
         self.popdown()
-        self.message_element.header_container.set_visible(False)
-        self.message_element.set_halign(0)
-        self.message_element.main_stack.get_child_by_name('editing').set_visible(True)
-        self.message_element.main_stack.get_child_by_name('editing').set_content(self.message_element.get_content())
-        self.message_element.main_stack.set_visible_child_name('editing')
+        message_element.header_container.set_visible(False)
+        message_element.set_halign(0)
+        message_element.main_stack.get_child_by_name('editing').set_visible(True)
+        message_element.main_stack.get_child_by_name('editing').set_content(message_element.get_content())
+        message_element.main_stack.set_visible_child_name('editing')
 
     @Gtk.Template.Callback()
     def regenerate_message(self, button=None):
-        chat = self.message_element.chat
+        message_element = self.get_ancestor(Message)
+        chat = message_element.chat
         model = self.get_root().get_selected_model().get_name()
 
         if not chat.busy and model:
-            for att in list(self.message_element.image_attachment_container.container) + list(self.message_element.attachment_container.container):
+            for att in list(message_element.image_attachment_container.container) + list(message_element.attachment_container.container):
                 SQL.delete_attachment(att)
                 att.unparent()
 
-            #self.message_element.block_container.clear()
-            self.message_element.main_stack.set_visible_child_name('loading')
-            self.message_element.author = model
-            self.message_element.update_profile_picture()
+            #message_element.block_container.clear()
+            message_element.main_stack.set_visible_child_name('loading')
+            message_element.author = model
+            message_element.update_profile_picture()
 
             selected_tool = self.get_root().global_footer.tool_selector.get_selected_item()
             tools = {}
@@ -81,7 +85,7 @@ class OptionPopup(Gtk.Popover):
                 threading.Thread(
                     target=self.get_root().get_current_instance().use_tools,
                     args=(
-                        self.message_element,
+                        message_element,
                         model,
                         tools,
                         True
@@ -90,15 +94,15 @@ class OptionPopup(Gtk.Popover):
                 ).start()
             else:
                 threading.Thread(
-                    target=self.message_element.get_root().get_current_instance().generate_message,
+                    target=message_element.get_root().get_current_instance().generate_message,
                     args=(
-                        self.message_element,
+                        message_element,
                         model
                     ),
                     daemon=True
                 ).start()
 
-            self.message_element.main_stack.set_visible_child_name('loading')
+            message_element.main_stack.set_visible_child_name('loading')
         else:
             dialog.show_toast(_("Message cannot be regenerated while receiving a response"), self.get_root())
 
@@ -366,7 +370,7 @@ class Message(Gtk.Box):
         if self.popup:
             self.popup.get_parent().set_popover()
         else:
-            self.popup = OptionPopup(self)
+            self.popup = OptionPopup()
         self.header_container.set_child(
             MessageHeader(
                 message=self,
