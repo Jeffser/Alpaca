@@ -12,6 +12,7 @@ blueprints = files(
   'ui/widgets/instances/preferences.blp',
   'ui/widgets/message/popup.blp',
   'ui/widgets/message/message.blp',
+  'ui/widgets/chat/chat_list.blp',
 )
 
 blueprints = custom_target('blueprints',

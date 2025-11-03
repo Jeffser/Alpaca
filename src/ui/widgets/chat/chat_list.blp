@@ -1,0 +1,80 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaChatList: Adw.NavigationPage {
+  //CODE set title to folder_name
+  //CODE set color css
+
+  child: Adw.ToolbarView {
+    [bottom]
+    Adw.HeaderBar bottom_bar {
+      styles [
+        "raised"
+      ]
+    }
+
+    content: Gtk.Overlay {
+      child: Gtk.Stack list_stack {
+        Gtk.StackPage {
+          name: "content";
+          child: Gtk.ScrolledWindow scrolled_window {
+            child: Gtk.Box {
+              orientation: vertical;
+
+              Gtk.ListBox folder_list_box {
+                selection-mode: none;
+                styles [
+                  "navigation-sidebar"
+                ]
+              }
+
+              Gtk.Separator separator {}
+
+              Gtk.ListBox chat_list_box {
+                selection-mode: single;
+                styles [
+                  "navigation-sidebar"
+                ]
+                row-selected => $chat_changed();
+              }
+
+            };
+          };
+        }
+
+        Gtk.StackPage {
+          name: "no-results";
+          child: Adw.StatusPage {
+            title: _("No Results Found");
+            icon-name: "sad-computer-symbolic";
+          };
+        }
+
+        Gtk.StackPage {
+          name: "empty";
+          child: Adw.StatusPage {
+            title: _("Folder is Empty");
+            icon-name: "folder-symbolic";
+          };
+        }
+      };
+
+      [overlay]
+      Adw.Bin top_indicator {
+        hexpand: true;
+        height-request: 20;
+        valign: start;
+        visible: false;
+      }
+
+      [overlay]
+      Adw.Bin bottom_indicator {
+        hexpand: true;
+        height-request: 20;
+        valign: end;
+        visible: false;
+
+      }
+    };
+  };
+}

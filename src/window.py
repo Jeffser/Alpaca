@@ -155,7 +155,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.get_application().lookup_action('model_creator_existing').set_enabled(row.instance.instance_type in ('ollama', 'ollama:managed'))
                 self.get_application().lookup_action('model_creator_gguf').set_enabled(row.instance.instance_type in ('ollama', 'ollama:managed'))
 
-            self.chat_bin.get_child().row.update_profile_pictures()
             listbox.set_sensitive(True)
         if listbox.get_sensitive():
             listbox.set_sensitive(False)
@@ -514,3 +513,4 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 notice_dialog.present(self)
         else:
             self.main_navigation_view.replace([Widgets.welcome.Welcome()])
+

@@ -13,94 +13,43 @@ from .message import Message
 
 logger = logging.getLogger(__name__)
 
+
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/chat/chat_list.ui')
 class ChatList(Adw.NavigationPage):
     __gtype_name__ = 'AlpacaChatList'
 
+    bottom_bar = Gtk.Template.Child()
+    list_stack = Gtk.Template.Child()
+    scrolled_window = Gtk.Template.Child()
+    folder_list_box = Gtk.Template.Child()
+    separator = Gtk.Template.Child()
+    chat_list_box = Gtk.Template.Child()
+    top_indicator = Gtk.Template.Child()
+    bottom_indicator = Gtk.Template.Child()
+
     def __init__(self, folder_id:str=None, folder_name:str=_('Root'), folder_color:str=None, show_bar:bool=True):
         self.folder_id = folder_id
-        container = Gtk.Box(orientation=1)
-        self.scrolled_window = Gtk.ScrolledWindow(child=container)
         self._scroll_timeout_id = None
-
-        self.list_stack = Gtk.Stack()
-        self.list_stack.add_named(self.scrolled_window, 'content')
-        self.list_stack.add_named(
-            Adw.StatusPage(
-                title=_('No Results Found'),
-                icon_name='sad-computer-symbolic'
-            ),
-            'no-results'
-        )
-        self.list_stack.add_named(
-            Adw.StatusPage(
-                title=_('Folder is Empty'),
-                icon_name='folder-symbolic'
-            ),
-            'empty'
-        )
-
-        overlay = Gtk.Overlay(child=self.list_stack)
-
+        super().__init__()
         indicator_top_drop_target = Gtk.DropTarget.new(Gtk.ListBoxRow, Gdk.DragAction.COPY)
         indicator_top_drop_target.connect("accept", lambda *_: self.start_scrolling(-1))
         indicator_top_drop_target.connect("leave", lambda *_: self.stop_scrolling())
-        self.top_indicator = Adw.Bin(
-            hexpand=True,
-            height_request=20,
-            valign=1,
-            visible=False
-        )
         self.top_indicator.add_controller(indicator_top_drop_target)
-        overlay.add_overlay(self.top_indicator)
 
         indicator_bottom_drop_target = Gtk.DropTarget.new(Gtk.ListBoxRow, Gdk.DragAction.COPY)
         indicator_bottom_drop_target.connect("accept", lambda *_: self.start_scrolling(1))
         indicator_bottom_drop_target.connect("leave", lambda *_: self.stop_scrolling())
-        self.bottom_indicator = Adw.Bin(
-            hexpand=True,
-            height_request=20,
-            valign=2,
-            visible=False
-        )
         self.bottom_indicator.add_controller(indicator_bottom_drop_target)
-        overlay.add_overlay(self.bottom_indicator)
 
+        drop_target_folder = Gtk.DropTarget.new(FolderRow, Gdk.DragAction.MOVE)
+        drop_target_folder.connect("drop", self.on_drop_folder)
+        self.bottom_bar.add_controller(drop_target_folder)
+        drop_target_chat = Gtk.DropTarget.new(ChatRow, Gdk.DragAction.MOVE)
+        drop_target_chat.connect("drop", self.on_drop_chat)
+        self.bottom_bar.add_controller(drop_target_chat)
 
-        tbv = Adw.ToolbarView(content=overlay)
-        super().__init__(
-            child=tbv,
-            title=folder_name
-        )
-        if show_bar:
-            header_bar = Adw.HeaderBar(
-                css_classes=['raised']
-            )
-            tbv.add_bottom_bar(header_bar)
-            drop_target_folder = Gtk.DropTarget.new(FolderRow, Gdk.DragAction.MOVE)
-            drop_target_folder.connect("drop", self.on_drop_folder)
-            header_bar.add_controller(drop_target_folder)
-            drop_target_chat = Gtk.DropTarget.new(ChatRow, Gdk.DragAction.MOVE)
-            drop_target_chat.connect("drop", self.on_drop_chat)
-            header_bar.add_controller(drop_target_chat)
-
-        self.folder_list_box = Gtk.ListBox(
-            css_classes=['navigation-sidebar'],
-            selection_mode=0,
-            name=self.folder_id
-        )
-        container.append(self.folder_list_box)
-        self.separator = Gtk.Separator(
-            margin_start=10,
-            margin_end=10
-        )
-        container.append(self.separator)
-        self.chat_list_box = Gtk.ListBox(
-            css_classes=['navigation-sidebar'],
-            name=self.folder_id
-        )
-        self.chat_list_box.connect('row-selected', self.chat_changed)
-        container.append(self.chat_list_box)
-
+        self.get_child().set_reveal_bottom_bars(show_bar)
+        self.set_title(folder_name)
         if folder_color:
             self.add_css_class('folder-{}'.format(folder_color))
 
@@ -294,6 +243,7 @@ class ChatList(Adw.NavigationPage):
 
         d.show(self.get_root())
 
+    @Gtk.Template.Callback()
     def chat_changed(self, listbox, row):
         if not listbox.get_root() or (row and not row.get_root()):
             return
@@ -310,11 +260,6 @@ class ChatList(Adw.NavigationPage):
                 list_box = listbox.get_root().chat_bin.get_child().row.get_parent()
                 if list_box and list_box != self.chat_list_box:
                     listbox.get_root().chat_bin.get_child().row.get_parent().unselect_all()
-            # Discard Old Chat if Not Busy DISABLED FOR PERFORMANCE REASONS (even tho it uses more ram)
-            #old_chat = listbox.get_root().chat_bin.get_child()
-            #if old_chat and not old_chat.busy:
-                #old_chat.unload_messages()
-                #old_chat.unrealize()
 
             # Load New Chat
             new_chat = row.chat
