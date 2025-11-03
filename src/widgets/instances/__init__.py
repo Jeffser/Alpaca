@@ -10,7 +10,7 @@ from .openai_instances import BaseInstance as BaseOpenAI
 
 logger = logging.getLogger(__name__)
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/instance_preferences_dialog.ui')
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/instances/preferences.ui')
 class InstancePreferencesDialog(Adw.Dialog):
 
     __gtype_name__ = 'AlpacaInstancePreferencesDialog'
