@@ -1,7 +1,7 @@
 # tools.py
 
 from gi.repository import GObject, GLib, Gio, Gtk
-from .. import activities, dialog, attachments
+from .. import activities, dialog, attachments, chat
 from ...sql_manager import Instance as SQL, generate_uuid
 import os, threading
 
@@ -80,10 +80,11 @@ class WebSearch(Base):
 
     def start_work(self, search_term:str, bot_message):
         page = activities.WebBrowser()
+        chat_element = bot_message.get_ancestor(chat.Chat)
         activities.show_activity(
             page,
             bot_message.get_root(),
-            not bot_message.chat.chat_id
+            not chat_element or not chat_element.chat_id
         )
         threading.Thread(target=page.automate_search, args=(self.on_search_finish, search_term, True), daemon=True).start()
 
@@ -145,7 +146,8 @@ class Terminal(Base):
                 code_getter=lambda: ';'.join(self.current_commands),
                 close_callback=lambda: setattr(self, 'waiting_terminal', False)
             )
-            GLib.idle_add(activities.show_activity, self.global_page, bot_message.get_root(), not bot_message.chat.chat_id)
+            chat_element = bot_message.get_ancestor(chat.Chat)
+            GLib.idle_add(activities.show_activity, self.global_page, bot_message.get_root(), not chat_element or not chat_element.chat_id)
 
         self.waiting_terminal = True
         self.global_page.run()
@@ -215,11 +217,12 @@ class BackgroundRemover(Base):
                 save_func=lambda data, bm=bot_message: self.on_save(data, bm),
                 close_callback=self.on_close
             )
+            chat_element = bot_message.get_ancestor(chat.Chat)
             GLib.idle_add(
                 activities.show_activity,
                 page,
                 bot_message.get_root(),
-                not bot_message.chat.chat_id
+                not chat_element or not chat_element.chat_id
             )
             page.load_image(image_b64)
 

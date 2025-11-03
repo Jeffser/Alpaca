@@ -11,6 +11,7 @@ blueprints = files(
   'ui/window.blp',
   'ui/widgets/instances/preferences.blp',
   'ui/widgets/message/popup.blp',
+  'ui/widgets/message/message.blp',
 )
 
 blueprints = custom_target('blueprints',

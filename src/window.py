@@ -319,7 +319,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         m_element = Widgets.message.Message(
             dt=datetime.now(),
             message_id=generate_uuid(),
-            chat=current_chat,
             mode=mode*2
         )
         current_chat.add_message(m_element)
@@ -344,7 +343,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             m_element_bot = Widgets.message.Message(
                 dt=datetime.now(),
                 message_id=generate_uuid(),
-                chat=current_chat,
                 mode=1,
                 author=current_model
             )

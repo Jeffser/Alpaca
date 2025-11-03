@@ -604,7 +604,6 @@ class Chat(Gtk.Stack):
             message_element = Message(
                 dt=datetime.datetime.strptime(message[3] + (":00" if message[3].count(":") == 1 else ""), '%Y/%m/%d %H:%M:%S'),
                 message_id=message[0],
-                chat=self,
                 mode=('user', 'assistant', 'system').index(message[1]),
                 author=message[2]
             )

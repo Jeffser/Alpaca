@@ -14,8 +14,35 @@ import shutil
 import json
 import sys
 
+from . import widgets as Widgets
 from .constants import data_dir
-from gi.repository import Gio
+from gi.repository import Gio, GLib
+
+def format_datetime(dt:datetime.datetime) -> str:
+    date = GLib.DateTime.new(
+        GLib.DateTime.new_now_local().get_timezone(),
+        dt.year,
+        dt.month,
+        dt.day,
+        dt.hour,
+        dt.minute,
+        dt.second
+    )
+    current_date = GLib.DateTime.new_now_local()
+    if date.format("%Y/%m/%d") == current_date.format("%Y/%m/%d"):
+        if os.getenv('ALPACA_USE_24H', '0') == '1':
+            return date.format("%H:%M")
+        else:
+            return date.format("%I:%M %p")
+    if date.format("%Y") == current_date.format("%Y"):
+        if os.getenv('ALPACA_USE_24H', '0') == '1':
+            return date.format("%b %d, %H:%M")
+        else:
+            return date.format("%b %d, %H:%M")
+    if os.getenv('ALPACA_USE_24H', '0') == '1':
+        return date.format("%b %d %Y, %H:%M")
+    else:
+        return date.format("%b %d %Y, %H:%M")
 
 def nanoseconds_to_timestamp(ns:int) -> str or None:
     if ns:
@@ -498,6 +525,7 @@ class Instance:
 
     def insert_or_update_message(message, force_chat_id: str = None) -> None:
         message_author = ["user", "assistant", "system"][message.mode]
+        chat_element = message.get_ancestor(Widgets.chat.Chat)
 
         with SQLiteConnection() as c:
             if c.cursor.execute(
@@ -509,7 +537,7 @@ class Instance:
                         (
                             force_chat_id
                             if force_chat_id
-                            else message.chat.chat_id
+                            else chat_element.chat_id
                         ),
                         message_author,
                         message.get_model() or "",
@@ -526,7 +554,7 @@ class Instance:
                         (
                             force_chat_id
                             if force_chat_id
-                            else message.chat.chat_id
+                            else chat_element.chat_id
                         ),
                         message_author,
                         message.get_model() or "",

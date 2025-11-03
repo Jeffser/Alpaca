@@ -3,7 +3,7 @@
 from gi.repository import Adw, Gtk, GLib
 
 import requests, json, logging, os, shutil, subprocess, threading, re, signal, pwd, getpass
-from .. import dialog, tools
+from .. import dialog, tools, chat
 from ...ollama_models import OLLAMA_MODELS
 from ...constants import data_dir, cache_dir, TITLE_GENERATION_PROMPT_OLLAMA, MAX_TOKENS_TITLE_GENERATION
 from ...sql_manager import generate_uuid, dict_to_metadata_string, Instance as SQL
@@ -16,17 +16,18 @@ class BaseInstance:
     process = None
 
     def prepare_chat(self, bot_message):
-        bot_message.chat.busy = True
-        if bot_message.chat.chat_id:
-            bot_message.chat.row.spinner.set_visible(True)
+        chat_element = bot_message.get_ancestor(chat.Chat)
+        if chat_element and chat_element.chat_id:
+            chat_element.row.spinner.set_visible(True)
             try:
                 bot_message.get_root().global_footer.toggle_action_button(False)
             except:
                 pass
-        bot_message.chat.set_visible_child_name('content')
+            chat_element.busy = True
+            chat_element.set_visible_child_name('content')
 
-        messages = bot_message.chat.convert_to_ollama()[:list(bot_message.chat.container).index(bot_message)]
-        return bot_message.chat, messages
+        messages = chat_element.convert_to_ollama()[:list(chat_element.container).index(bot_message)]
+        return chat_element, messages
 
     def generate_message(self, bot_message, model:str):
         chat, messages = self.prepare_chat(bot_message)
@@ -45,8 +46,6 @@ class BaseInstance:
 
     def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
         chat, messages = self.prepare_chat(bot_message)
-        if bot_message.options_button:
-            bot_message.options_button.set_active(False)
         bot_message.block_container.prepare_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
@@ -130,8 +129,6 @@ class BaseInstance:
             bot_message.finish_generation('')
 
     def generate_response(self, bot_message, chat, messages:list, model:str):
-        if bot_message.options_button:
-            bot_message.options_button.set_active(False)
         bot_message.block_container.prepare_generating_block()
 
         if self.properties.get('share_name', 0) > 0:

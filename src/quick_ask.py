@@ -82,7 +82,6 @@ class QuickAskWindow(Adw.ApplicationWindow):
         m_element = Widgets.message.Message(
             dt=datetime.now(),
             message_id=generate_uuid(),
-            chat=chat,
             mode=mode*2
         )
         chat.add_message(m_element)
@@ -102,7 +101,6 @@ class QuickAskWindow(Adw.ApplicationWindow):
             m_element_bot = Widgets.message.Message(
                 dt=datetime.now(),
                 message_id=generate_uuid(),
-                chat=chat,
                 mode=1,
                 author=current_model
             )

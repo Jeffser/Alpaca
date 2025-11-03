@@ -1,0 +1,78 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaMessage: Gtk.Box {
+  spacing: 2;
+  styles [
+    "message"
+  ]
+  //CODE set halign based on mode
+
+  Gtk.MenuButton pfp_options_button {
+    valign: start;
+    margin-top:5;
+    margin-start: 5;
+    overflow: hidden;
+    styles [
+      "circular",
+      "flat"
+    ]
+    //CODE set popover and child
+  }
+
+  Gtk.Box main_container {
+    orientation: vertical;
+    halign: fill;
+    spacing: 5;
+    //CODE set css and width_request based on mode
+
+    Gtk.Box {
+      hexpand: true;
+      spacing: 5;
+
+      Gtk.MenuButton header_options_button {
+        icon-name: "view-more-horizontal-symbolic";
+        styles [
+          "message_options_button",
+          "flat",
+          "circular",
+          "dim-label"
+        ]
+        //CODE set popover
+      }
+
+      Gtk.Label header_label {
+        hexpand: true;
+        wrap: true;
+        wrap-mode: word_char;
+        margin-end: 5;
+        xalign: 0;
+        focusable: true;
+        use-markup: true;
+        //CODE set css and margin_start based on header_options_button being visible
+      }
+    }
+
+    Gtk.Stack main_stack {
+      transition-type: crossfade;
+
+      Gtk.StackPage {
+        name: "loading";
+        child: Adw.Spinner {
+          styles [
+            "p10"
+          ]
+        };
+      }
+
+      Gtk.StackPage {
+        name: "content";
+        child: Gtk.Box content_container {
+          orientation: vertical;
+          spacing: 5;
+        };
+      }
+
+    }
+  }
+}

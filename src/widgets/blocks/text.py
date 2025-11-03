@@ -184,7 +184,7 @@ class EditingText(Gtk.Box):
     def cancel_edit(self):
         self.message.set_halign(2 if self.message.mode == 0 else 0)
         self.set_visible(False)
-        self.message.header_container.set_visible(True)
+        self.message.popup.change_status(True)
         self.message.main_stack.set_visible_child_name('content')
 
     def save_edit(self):
@@ -192,7 +192,7 @@ class EditingText(Gtk.Box):
         GLib.idle_add(self.message.block_container.set_content, buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
         self.message.set_halign(2 if self.message.mode == 0 else 0)
         self.set_visible(False)
-        self.message.header_container.set_visible(True)
+        self.message.popup.change_status(True)
         self.message.main_stack.set_visible_child_name('content')
         GLib.idle_add(self.message.save)
         response_index = list(self.message.get_parent()).index(self.message) + 1
