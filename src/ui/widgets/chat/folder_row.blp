@@ -1,0 +1,33 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaFolderRow: Gtk.ListBoxRow {
+  height-request: 45;
+  styles [
+    "p0"
+  ]
+  //CODE set color and name
+
+  child: Gtk.Button {
+    //CODE set tooltip-text
+    child: Gtk.Box {
+      spacing: 10;
+      Gtk.Image {
+        icon-name: "folder-symbolic";
+      }
+
+      Gtk.Label label {
+        hexpand: true;
+        wrap: true;
+        ellipsize: end;
+        wrap-mode: word_char;
+        xalign: 0;
+        //CODE set label
+      }
+    };
+    clicked => $open_folder();
+    styles [
+      "flat"
+    ]
+  };
+}

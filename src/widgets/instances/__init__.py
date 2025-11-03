@@ -51,6 +51,7 @@ class InstancePreferencesDialog(Adw.Dialog):
 
     def __init__(self, instance):
         super().__init__()
+        print(self.connection_group)
 
         self.instance = instance
         self.set_title(_('Edit Instance') if self.instance.instance_id else _('Create Instance'))

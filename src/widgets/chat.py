@@ -14,9 +14,9 @@ from .message import Message
 logger = logging.getLogger(__name__)
 
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/chat/chat_list.ui')
-class ChatList(Adw.NavigationPage):
-    __gtype_name__ = 'AlpacaChatList'
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/chat/folder.ui')
+class Folder(Adw.NavigationPage):
+    __gtype_name__ = 'AlpacaFolder'
 
     bottom_bar = Gtk.Template.Child()
     list_stack = Gtk.Template.Child()
@@ -163,7 +163,6 @@ class ChatList(Adw.NavigationPage):
         chat_name = chat_name.strip()
         if chat_name and mode in (0, 1):
             chat_name = generate_numbered_name(chat_name, [row.get_name() for row in list(self.chat_list_box)])
-            chat = None
             chat = Chat(
                 chat_id=chat_id,
                 name=chat_name,
@@ -346,135 +345,23 @@ class TemplateSelector(Adw.Dialog):
         self.chat.load_messages()
         self.close()
 
-class ChatWelcomeHelper(Gtk.Box):
-    __gtype_name__ = 'AlpacaChatWelcomeHelper'
-
-    def __init__(self, chat):
-        super().__init__(
-            orientation=1,
-            spacing=10,
-            halign=3
-        )
-
-        self.prompt_bin = Adw.Bin()
-        self.append(self.prompt_bin)
-
-        self.append(Gtk.Separator())
-
-        # CONTROL BOX
-        control_box = Gtk.Box(
-            orientation=0,
-            halign=3,
-            css_classes=['linked']
-        )
-        self.append(control_box)
-
-        refresh_button = Gtk.Button(
-            icon_name='view-refresh-symbolic',
-            tooltip_text=_("Refresh Prompts"),
-            css_classes=["accent"]
-        )
-        refresh_button.connect('clicked', lambda *_: threading.Thread(target=self.update_prompts, daemon=True).start())
-        control_box.append(refresh_button)
-
-        template_button = Gtk.Button(
-            label=_('Use Template'),
-            tooltip_text=_('Use Template')
-        )
-        template_button.connect('clicked', lambda *_: TemplateSelector(chat).present(self.get_root()))
-        control_box.append(template_button)
-
-        self.connect('realize', lambda *_: threading.Thread(target=self.update_prompts, daemon=True).start())
-
-    def update_prompts(self):
-        container = Gtk.Box(
-            orientation=1,
-            spacing=5,
-            halign=3
-        )
-        prompts = random.sample(SAMPLE_PROMPTS, 3)
-
-        for prompt in prompts:
-            prompt_button = Gtk.Button(
-                child=Gtk.Label(
-                    label=prompt,
-                    justify=2,
-                    wrap=True
-                ),
-                tooltip_text=_("Send prompt: '{}'").format(prompt),
-                name=prompt
-            )
-            prompt_button.connect('clicked', lambda *_, prompt=prompt : self.selected_item(prompt))
-            container.append(prompt_button)
-
-        self.prompt_bin.set_child(container)
-
-    def selected_item(self, prompt:str):
-        if self.get_root().get_name() == 'AlpacaWindow':
-            if len(list(self.get_root().local_model_flowbox)) == 0:
-                if self.get_root().get_current_instance().instance_type == 'empty':
-                    self.get_root().get_application().lookup_action('instance_manager').activate()
-                else:
-                    self.get_root().get_application().lookup_action('model_manager').activate()
-        buffer = self.get_root().global_footer.get_buffer()
-        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
-        buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
-        self.get_root().send_message()
-
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/chat/chat.ui')
 class Chat(Gtk.Stack):
     __gtype_name__ = 'AlpacaChat'
 
+    scrolledwindow = Gtk.Template.Child()
+    container = Gtk.Template.Child()
+    prompt_container = Gtk.Template.Child()
+
     def __init__(self, chat_id:str=None, name:str=_("New Chat"), folder_id:str=None, is_template=False):
-        super().__init__(
-            name=name,
-            transition_type=1,
-            vexpand=True
-        )
-        self.container = Gtk.Box(
-            orientation=1,
-            hexpand=True,
-            vexpand=True,
-            spacing=12,
-            css_classes=['p10']
-        )
-        clamp = Adw.Clamp(
-            maximum_size=1000,
-            tightening_threshold=800,
-            child=self.container
-        )
-        self.scrolledwindow = Gtk.ScrolledWindow(
-            child=clamp,
-            propagate_natural_height=True,
-            kinetic_scrolling=True,
-            vexpand=True,
-            hexpand=True,
-            css_classes=["undershoot-bottom"],
-            hscrollbar_policy=2
-        )
-        self.add_named(Adw.Spinner(), 'loading')
-        self.add_named(self.scrolledwindow, 'content')
-
-        self.welcome_screen = Adw.StatusPage(
-            icon_name="com.jeffser.Alpaca",
-            title="Alpaca",
-            description=_("Try one of these prompts or templates"),
-            vexpand=True,
-            child=ChatWelcomeHelper(self)
-        )
-        list(self.welcome_screen)[0].add_css_class('undershoot-bottom')
-        self.add_named(self.welcome_screen, 'welcome-screen')
-
-        self.add_named(Adw.StatusPage(
-            icon_name="sad-computer-symbolic",
-            title=_("No Messages Found"),
-            description=_("Uh oh! No messages found for your search.")
-        ), 'no-results')
-
+        super().__init__()
+        self.set_name(name)
         self.busy = False
         self.chat_id = chat_id
         self.folder_id = folder_id
         self.is_template = is_template
         self.row = ChatRow(self)
+        self.connect('realize', lambda *_: threading.Thread(target=self.update_prompts, daemon=True).start())
 
     def stop_message(self):
         self.busy = False
@@ -563,43 +450,56 @@ class Chat(Gtk.Stack):
                 messages.append(message_data)
         return messages
 
+    @Gtk.Template.Callback()
+    def update_prompts(self, button=None):
+        for el in list(self.prompt_container):
+            el.unparent()
+        prompts = random.sample(SAMPLE_PROMPTS, 3)
+
+        for prompt in prompts:
+            prompt_button = Gtk.Button(
+                child=Gtk.Label(
+                    label=prompt,
+                    justify=2,
+                    wrap=True
+                ),
+                tooltip_text=_("Send prompt: '{}'").format(prompt),
+                name=prompt
+            )
+            prompt_button.connect('clicked', lambda *_, prompt=prompt : self.selected_prompt(prompt))
+            self.prompt_container.append(prompt_button)
+
+    @Gtk.Template.Callback()
+    def show_template_selector(self, button):
+        TemplateSelector(self).present(self.get_root())
+
+    def selected_prompt(self, prompt:str):
+        if self.get_root().get_name() == 'AlpacaWindow':
+            if len(list(self.get_root().local_model_flowbox)) == 0:
+                if self.get_root().get_current_instance().instance_type == 'empty':
+                    self.get_root().get_application().lookup_action('instance_manager').activate()
+                else:
+                    self.get_root().get_application().lookup_action('model_manager').activate()
+        buffer = self.get_root().global_footer.get_buffer()
+        buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
+        buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
+        self.get_root().send_message()
+
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/chat/folder_row.ui')
 class FolderRow(Gtk.ListBoxRow):
     __gtype_name__ = 'AlpacaFolderRow'
 
+    label = Gtk.Template.Child()
+
     def __init__(self, folder_id:str=None, folder_name:str=_('Root'), folder_color:str=None, folder_parent:str=None):
+        super().__init__()
         self.folder_id = folder_id
         self.folder_name = folder_name
         self.folder_color = folder_color
         self.folder_parent = folder_parent
-        container = Gtk.Box(
-            spacing=10
-        )
-        container.append(
-            Gtk.Image.new_from_icon_name('folder-symbolic')
-        )
-        self.label = Gtk.Label(
-            label=folder_name,
-            tooltip_text=folder_name,
-            hexpand=True,
-            halign=0,
-            wrap=True,
-            ellipsize=3,
-            wrap_mode=2,
-            xalign=0
-        )
-        container.append(self.label)
-        button = Gtk.Button(
-            child=container,
-            css_classes=['flat']
-        )
-        button.connect('clicked', lambda button: self.open_folder())
 
-        super().__init__(
-            height_request=45,
-            child=button,
-            name=folder_name,
-            css_classes=['p0']
-        )
+        self.label.set_label(folder_name)
+        self.get_child().set_tooltip_text(folder_name)
         if folder_color:
             self.add_css_class('folder-{}'.format(folder_color))
 
@@ -688,9 +588,10 @@ class FolderRow(Gtk.ListBoxRow):
         popup.set_pointing_to(rect)
         popup.popup()
 
-    def open_folder(self):
+    @Gtk.Template.Callback()
+    def open_folder(self, button=None):
         if not self.get_root().chat_list_navigationview.find_page(self.folder_id):
-            folder_page = ChatList(self.folder_id, self.folder_name, self.folder_color, True)
+            folder_page = Folder(self.folder_id, self.folder_name, self.folder_color, True)
             folder_page.set_tag(self.folder_id)
             self.get_root().chat_list_navigationview.add(folder_page)
             folder_page.update()
@@ -766,36 +667,20 @@ class FolderRow(Gtk.ListBoxRow):
             button_appearance = 'destructive'
         )
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/chat/chat_row.ui')
 class ChatRow(Gtk.ListBoxRow):
     __gtype_name__ = 'AlpacaChatRow'
 
+    label = Gtk.Template.Child()
+    spinner = Gtk.Template.Child()
+    indicator = Gtk.Template.Child()
+
     def __init__(self, chat:Chat):
+        super().__init__()
         self.chat = chat
-        self.spinner = Adw.Spinner(visible=False)
-        self.label = Gtk.Label(
-            label=self.chat.get_name(),
-            tooltip_text=self.chat.get_name(),
-            hexpand=True,
-            halign=0,
-            wrap=True,
-            ellipsize=3,
-            wrap_mode=2,
-            xalign=0
-        )
-        self.indicator = Gtk.Image.new_from_icon_name("chat-bubble-text-symbolic")
-        self.indicator.set_visible(False)
-        self.indicator.set_css_classes(['accent'])
-        container = Gtk.Box(
-            spacing=5
-        )
-        container.append(self.label)
-        container.append(self.spinner)
-        container.append(self.indicator)
-        super().__init__(
-            height_request=45,
-            child=container,
-            name=self.chat.get_name()
-        )
+        self.set_name(self.chat.get_name())
+        self.set_tooltip_text(self.chat.get_name())
+        self.label.set_label(self.chat.get_name())
 
         self.gesture_click = Gtk.GestureClick(button=3)
         self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)

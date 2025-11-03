@@ -371,7 +371,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.main_navigation_view.replace_with_tags(['chat'])
 
         #Chat History
-        root_folder = Widgets.chat.ChatList(show_bar=False)
+        root_folder = Widgets.chat.Folder(show_bar=False)
         self.chat_list_navigationview.add(root_folder)
         root_folder.update()
 

@@ -1,0 +1,29 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaChatRow: Gtk.ListBoxRow {
+  height-request: 45;
+  // CODE set name and tooltip-text
+
+  child: Gtk.Box {
+    spacing: 5;
+    Gtk.Label label {
+      hexpand: true;
+      wrap: true;
+      ellipsize: end;
+      wrap-mode: word_char;
+      xalign: 0;
+      // CODE set label
+    }
+    Adw.Spinner spinner {
+      visible: false;
+    }
+    Gtk.Image indicator {
+      icon-name: "chat-bubble-text-symbolic";
+      visible: false;
+      styles [
+        "accent"
+      ]
+    }
+  };
+}
