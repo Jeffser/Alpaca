@@ -11,69 +11,28 @@ from . import attachments, blocks, dialog, voice, tools, models
 
 logger = logging.getLogger(__name__)
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/message/popup.ui')
 class OptionPopup(Gtk.Popover):
     __gtype_name__ = 'AlpacaMessagePopup'
 
+    delete_button = Gtk.Template.Child()
+    copy_button = Gtk.Template.Child()
+    edit_button = Gtk.Template.Child()
+    regenerate_button = Gtk.Template.Child()
+
     def __init__(self, message_element):
         self.message_element = message_element
-        container = Gtk.Box(
-            spacing=5
-        )
-        super().__init__(
-            has_arrow=True,
-            child=container
-        )
-
-        self.delete_button = Gtk.Button(
-            halign=1,
-            hexpand=True,
-            icon_name="user-trash-symbolic",
-            css_classes = ["flat"],
-            tooltip_text = _("Remove Message")
-        )
-        self.delete_button.connect('clicked', lambda *_: self.delete_message())
-        container.append(self.delete_button)
-
-        self.copy_button = Gtk.Button(
-            halign=1,
-            hexpand=True,
-            icon_name="edit-copy-symbolic",
-            css_classes=["flat"],
-            tooltip_text=_("Copy Message")
-        )
-        self.copy_button.connect('clicked', lambda *_: self.copy_message())
-        container.append(self.copy_button)
-
-        self.edit_button = Gtk.Button(
-            halign=1,
-            hexpand=True,
-            icon_name="edit-symbolic",
-            css_classes=["flat"],
-            tooltip_text=_("Edit Message")
-        )
-        self.edit_button.connect('clicked', lambda *_: self.edit_message())
-
-        container.append(self.edit_button)
-        self.regenerate_button = Gtk.Button(
-            halign=1,
-            hexpand=True,
-            icon_name="update-symbolic",
-            css_classes=["flat"],
-            tooltip_text=_("Regenerate Message")
-        )
-        if self.message_element.get_model():
-            self.regenerate_button.connect('clicked', lambda *_: self.regenerate_message())
-            container.append(self.regenerate_button)
+        super().__init__()
         self.tts_button = voice.DictateToggleButton(self.message_element)
-        container.append(self.tts_button)
+        self.get_child().append(self.tts_button)
 
     def change_status(self, status:bool):
         self.delete_button.set_sensitive(status)
         self.edit_button.set_sensitive(status)
         self.regenerate_button.set_sensitive(status)
 
-    def delete_message(self):
-        logger.debug("Deleting message")
+    @Gtk.Template.Callback()
+    def delete_message(self, button=None):
         chat = self.message_element.chat
         message_id = self.message_element.message_id
         SQL.delete_message(self.message_element)
@@ -81,14 +40,14 @@ class OptionPopup(Gtk.Popover):
         if len(list(chat.container)) == 0:
             chat.set_visible_child_name('welcome-screen')
 
-    def copy_message(self):
-        logger.debug("Copying message")
+    @Gtk.Template.Callback()
+    def copy_message(self, button=None):
         clipboard = Gdk.Display().get_default().get_clipboard()
         clipboard.set(self.message_element.get_content())
         dialog.show_toast(_("Message copied to the clipboard"), self.get_root())
 
-    def edit_message(self):
-        logger.debug("Editing message")
+    @Gtk.Template.Callback()
+    def edit_message(self, button=None):
         self.popdown()
         self.message_element.header_container.set_visible(False)
         self.message_element.set_halign(0)
@@ -96,7 +55,8 @@ class OptionPopup(Gtk.Popover):
         self.message_element.main_stack.get_child_by_name('editing').set_content(self.message_element.get_content())
         self.message_element.main_stack.set_visible_child_name('editing')
 
-    def regenerate_message(self):
+    @Gtk.Template.Callback()
+    def regenerate_message(self, button=None):
         chat = self.message_element.chat
         model = self.get_root().get_selected_model().get_name()
 
@@ -109,7 +69,6 @@ class OptionPopup(Gtk.Popover):
             self.message_element.main_stack.set_visible_child_name('loading')
             self.message_element.author = model
             self.message_element.update_profile_picture()
-            self.message_element.popup.change_status(False)
 
             selected_tool = self.get_root().global_footer.tool_selector.get_selected_item()
             tools = {}

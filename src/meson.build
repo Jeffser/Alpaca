@@ -10,6 +10,7 @@ blueprints = files(
   'ui/welcome.blp',
   'ui/window.blp',
   'ui/widgets/instances/preferences.blp',
+  'ui/widgets/message/popup.blp',
 )
 
 blueprints = custom_target('blueprints',

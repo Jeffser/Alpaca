@@ -1,0 +1,53 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaMessagePopup: Gtk.Popover {
+  has-arrow: true;
+  child: Gtk.Box {
+    spacing: 5;
+
+    Gtk.Button delete_button {
+      halign: start;
+      hexpand: true;
+      icon-name: "user-trash-symbolic";
+      tooltip-text: _("Remove Message");
+      clicked => $delete_message();
+      styles [
+        "flat"
+      ]
+    }
+
+    Gtk.Button copy_button {
+      halign: start;
+      hexpand: true;
+      icon-name: "edit-copy-symbolic";
+      tooltip-text: _("Copy Message");
+      clicked => $copy_message();
+      styles [
+        "flat"
+      ]
+    }
+
+    Gtk.Button edit_button {
+      halign: start;
+      hexpand: true;
+      icon-name: "edit-symbolic";
+      tooltip-text: _("Edit Message");
+      clicked => $edit_message();
+      styles [
+        "flat"
+      ]
+    }
+
+    Gtk.Button regenerate_button {
+      halign: start;
+      hexpand: true;
+      icon-name: "update-symbolic";
+      tooltip-text: _("Regenerate Message");
+      clicked => $regenerate_message();
+      styles [
+        "flat"
+      ]
+    }
+  };
+}
