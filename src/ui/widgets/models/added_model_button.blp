@@ -1,0 +1,66 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaAddedModelButton: Gtk.Button {
+  styles [
+    "p0",
+    "card"
+  ]
+  clicked => $on_click();
+  Gtk.GestureClick {
+    button: 3;
+    released => $show_popup();
+  }
+  Gtk.GestureLongPress {
+    pressed => $show_popup();
+  }
+
+  child: Gtk.Box {
+    spacing: 5;
+    margin-start: 5;
+    margin-end: 5;
+    margin-top: 5;
+    margin-bottom: 5;
+
+    Gtk.Image image {
+      visible: false;
+      valign: center;
+      halign: center;
+      overflow: hidden;
+      styles [
+        "r10"
+      ]
+    }
+
+    Gtk.Box {
+      orientation: vertical;
+      spacing: 5;
+      valign: center;
+      margin-start: 5;
+      margin-end: 5;
+      margin-top: 5;
+      margin-bottom: 5;
+
+      Gtk.Label title_label {
+        ellipsize: end;
+        hexpand: true;
+        halign: start;
+        styles [
+          "title-3"
+        ]
+        //CODE set label
+      }
+
+      Gtk.Label subtitle_label {
+        ellipsize: end;
+        hexpand: true;
+        halign: start;
+        visible: false;
+        styles [
+          "dim-label"
+        ]
+        //CODE set label and visibility
+      }
+    }
+  };
+}

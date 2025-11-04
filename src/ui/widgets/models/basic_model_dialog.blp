@@ -1,0 +1,32 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaBasicModelDialog: Adw.Dialog {
+  width-request: 360;
+  height-request: 240;
+  follows-content-size: true;
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-title: false;
+
+      [start]
+      Gtk.Button {
+        icon-name: "user-trash-symbolic";
+        tooltip-text: _("Remove Model");
+        clicked => $prompt_remove_model();
+      }
+
+      [start]
+      Gtk.Button webpage_button {
+        icon-name: "globe-symbolic";
+        //CODE set tooltip-text
+        clicked => $webpage_requested();
+      }
+    }
+
+    content: Adw.StatusPage status_page {
+      // CODE set icon-name, title, description and child
+    };
+  };
+}

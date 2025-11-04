@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $AlpacaModelButton: Gtk.Button {
+template $AlpacaBackgroundRemoverModelButton: Gtk.Button {
   styles [
     "p0",
     "card"
@@ -22,14 +22,12 @@ template $AlpacaModelButton: Gtk.Button {
     margin-top: 5;
     margin-bottom: 5;
 
-    Gtk.Image image {
-      visible: false;
+    Gtk.Image {
+      icon-name: "image-missing-symbolic";
+      margin-start: 10;
+      margin-end: 10;
       valign: center;
       halign: center;
-      overflow: hidden;
-      styles [
-        "r10"
-      ]
     }
 
     Gtk.Box {
@@ -51,21 +49,14 @@ template $AlpacaModelButton: Gtk.Button {
         //CODE set label
       }
 
-      Gtk.Label subtitle_label {
+      Gtk.Label {
         ellipsize: end;
         hexpand: true;
         halign: start;
-        visible: false;
+        label: _("Background Remover");
         styles [
           "dim-label"
         ]
-        //CODE set label and visibility
-      }
-
-      Gtk.ProgressBar progressbar {
-        hexpand: true;
-        visible: false;
-        //CODE set visibility
       }
     }
   };

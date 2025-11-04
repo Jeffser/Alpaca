@@ -99,3 +99,23 @@ def prompt_existing(root, instance=None, model_name:str=None):
     if not instance:
         instance = root.get_application().get_main_window(present=False).get_current_instance()
     creator.ModelCreatorDialog(instance, model_name, False).present(root)
+
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/basic_model_dialog.ui')
+class BasicModelDialog(Adw.Dialog):
+    __gtype_name__ = 'AlpacaBasicModelDialog'
+
+    webpage_button = Gtk.Template.Child()
+    status_page = Gtk.Template.Child()
+
+    def __init__(self, model):
+        super().__init__()
+        self.model = model
+        self.status_page.set_title(self.model.model_title)
+
+    @Gtk.Template.Callback()
+    def prompt_remove_model(self, button):
+        self.model.prompt_remove_model()
+
+    @Gtk.Template.Callback()
+    def webpage_requested(self, button):
+        Gio.AppInfo.launch_default_for_uri(button.get_tooltip_text())

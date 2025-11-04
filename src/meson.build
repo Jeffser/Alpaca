@@ -17,8 +17,10 @@ blueprints = files(
   'ui/widgets/chat/chat.blp',
   'ui/widgets/chat/folder_row.blp',
   'ui/widgets/chat/chat_row.blp',
-  'ui/widgets/models/model_button.blp',
+  'ui/widgets/models/added_model_button.blp',
   'ui/widgets/models/added_model_dialog.blp',
+  'ui/widgets/models/background_remover_model_button.blp',
+  'ui/widgets/models/basic_model_dialog.blp',
 )
 
 blueprints = custom_target('blueprints',

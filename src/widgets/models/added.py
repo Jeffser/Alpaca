@@ -246,9 +246,9 @@ class AddedModelDialog(Adw.Dialog):
                 callback = set_profile_picture
             )
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/model_button.ui')
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_model_button.ui')
 class AddedModelButton(Gtk.Button):
-    __gtype_name__ = 'AlpacaModelButton'
+    __gtype_name__ = 'AlpacaAddedModelButton'
 
     image = Gtk.Template.Child()
     title_label = Gtk.Template.Child()
