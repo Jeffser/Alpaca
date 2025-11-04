@@ -1,0 +1,160 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaAddedModelDialog: Adw.Dialog {
+  //CODE set title
+  width-request: 360;
+  height-request: 240;
+  follows-content-size: true;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-title: false;
+      [start]
+      Gtk.Button {
+        icon-name: "user-trash-symbolic";
+        tooltip-text: _("Remove Model");
+        clicked => $prompt_remove_model();
+      }
+      [start]
+      Gtk.Button create_child_button {
+        icon-name: "list-add-symbolic";
+        tooltip-text: _("Create Child");
+        visible: false;
+        clicked => $prompt_create_child();
+        //CODE set visible if Ollama:managed or Ollama:external
+      }
+      [end]
+      Gtk.MenuButton language_button {
+        icon-name: "language-symbolic";
+        tooltip-text: _("Languages");
+        visible: false;
+        //CODE set visible if needed
+        popover: Gtk.Popover {
+          child: Gtk.ScrolledWindow {
+            propagate-natural-width: true;
+            propagate-natural-height: true;
+            child: Gtk.FlowBox language_flowbox {
+              max-children-per-line: 3;
+              selection-mode: none;
+              row-spacing: 6;
+              column-spacing: 6;
+              //CODE fill flowbox
+            };
+          };
+        };
+      }
+    }
+
+    content: Gtk.ScrolledWindow {
+      propagate-natural-height: true;
+      max-content-width: 500;
+      child: Gtk.Box {
+        spacing: 10;
+        hexpand: true;
+        vexpand: true;
+        orientation: vertical;
+        styles [
+          "p10"
+        ]
+
+        Gtk.Box {
+          spacing: 20;
+          hexpand: true;
+          orientation: vertical;
+
+          Gtk.Button {
+            halign: center;
+            overflow: hidden;
+            tooltip-text: _("Change Profile Picture");
+            clicked => $pfp_clicked();
+            styles [
+              "circular"
+            ]
+            child: Gtk.Image image {
+              icon-size: large;
+              width-request: 192;
+              height-request: 192;
+              icon-name: "image-missing-symbolic";
+              //CODE set pfp texture
+            };
+          }
+
+          Gtk.Label title_label {
+            wrap: true;
+            wrap-mode: word_char;
+            justify: center;
+            styles [
+              "title-1"
+            ]
+            //CODE set label
+          }
+
+          Adw.PreferencesGroup preferences_group {
+            visible: false;
+            //CODE visible if needed
+            Adw.ComboRow voice_combo {
+              notify::selected => $update_voice();
+              title: _("Voice");
+              //CODE fill and select combo
+              model: Gtk.StringList {
+                strings [
+                  _("Default")
+                ]
+              };
+            }
+          }
+        }
+
+        Gtk.Box metadata_container {
+          spacing: 6;
+          hexpand: false;
+          orientation: vertical;
+
+          Gtk.FlowBox information_container {
+            selection-mode: none;
+            homogeneous: true;
+            max-children-per-line: 2;
+            row-spacing: 6;
+            column-spacing: 6;
+            //CODE fill
+          }
+
+          Adw.Bin description_container {}
+
+          Gtk.Box {
+            orientation: vertical;
+            spacing: 5;
+            visible: false;
+            //CODE set visible
+
+            Gtk.Label {
+              label: _("Files");
+              hexpand: true;
+              ellipsize: end;
+              halign: start;
+              styles [
+                "subtitle",
+                "caption",
+                "dim-label"
+              ]
+            }
+
+            Adw.Bin context_attachment_container {}
+          }
+
+          Adw.Bin context_system_container {}
+
+          Adw.WrapBox categories_container {
+            hexpand: true;
+            line-spacing: 6;
+            child-spacing: 6;
+            justify: none;
+            halign: start;
+          }
+        }
+      };
+    };
+  };
+}

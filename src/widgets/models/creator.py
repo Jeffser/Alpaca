@@ -246,6 +246,8 @@ class ModelCreatorDialog(Adw.Dialog):
         )
 
     def base_changed(self):
+        if not self.base_element.get_selected_item():
+            return
         pretty_name = self.base_element.get_selected_item().get_string()
         if pretty_name != 'GGUF' and not self.base_element.get_subtitle():
             self.tag_element.set_text('custom')

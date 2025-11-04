@@ -83,88 +83,44 @@ class InfoBox(Gtk.Box):
                 halign=1
             ))
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_model_dialog.ui')
 class AddedModelDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaAddedModelDialog'
 
+    create_child_button = Gtk.Template.Child()
+    language_button = Gtk.Template.Child()
+    language_flowbox = Gtk.Template.Child()
+    image = Gtk.Template.Child()
+    title_label = Gtk.Template.Child()
+    preferences_group = Gtk.Template.Child()
+    voice_combo = Gtk.Template.Child()
+    metadata_container = Gtk.Template.Child()
+    information_container = Gtk.Template.Child()
+    description_container = Gtk.Template.Child()
+    context_attachment_container = Gtk.Template.Child()
+    context_system_container = Gtk.Template.Child()
+    categories_container = Gtk.Template.Child()
+
     def __init__(self, model):
+        super().__init__()
         self.model = model
 
-        main_container = Gtk.Box(
-            spacing=10,
-            hexpand=True,
-            vexpand=True,
-            css_classes=['p10'],
-            orientation=1
-        )
+        self.create_child_button.set_visible(self.model.instance.instance_type in ('ollama', 'ollama:managed'))
 
-        main_page = Gtk.Box(
-            orientation=1,
-            spacing=20,
-            hexpand=True
-        )
+        self.update_profile_picture()
 
-        image = self.model.create_profile_picture(192)
-        if not image:
-            image = Gtk.Image.new_from_icon_name('image-missing-symbolic')
-            image.set_icon_size(2)
-            image.set_size_request(192, 192)
-        self.image_container = Gtk.Button(
-            css_classes=['circular'],
-            halign=3,
-            overflow=1,
-            child=image,
-            tooltip_text=_('Change Profile Picture')
-        )
-        main_page.append(self.image_container)
-        self.image_container.connect('clicked', lambda *_: self.model.change_profile_picture())
-        self.model.image_container.connect('notify::child', lambda *_: self.update_profile_picture())
+        self.title_label.set_label(prettify_model_name(self.model.get_name(), True)[0])
 
-        title_label = Gtk.Label(
-            label=prettify_model_name(self.model.get_name(), True)[0],
-            tooltip_text=prettify_model_name(self.model.get_name(), True)[0],
-            css_classes=['title-1'],
-            wrap=True,
-            wrap_mode=2,
-            justify=2
-        )
-        main_page.append(title_label)
+        self.preferences_group.set_visible(importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'))
 
-        preferences_group = Adw.PreferencesGroup(
-            visible=importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice')
-        )
-        main_page.append(preferences_group)
-        self.voice_combo = Adw.ComboRow(
-            title=_("Voice")
-        )
         selected_voice = SQL.get_model_preferences(self.model.get_name()).get('voice', None)
         selected_index = 0
-        string_list = Gtk.StringList()
-        string_list.append(_("Default"))
         for i, (name, value) in enumerate(TTS_VOICES.items()):
             if value == selected_voice:
                 selected_index = i + 1
-            string_list.append(name)
-        self.voice_combo.set_model(string_list)
+            self.voice_combo.get_model().append(name)
         self.voice_combo.set_selected(selected_index)
-        self.voice_combo.connect("notify::selected", lambda *_: self.update_voice())
-        preferences_group.add(self.voice_combo)
 
-        main_container.append(main_page)
-
-        metadata_container = Gtk.Box(
-            orientation=1,
-            spacing=10,
-            hexpand=False
-        )
-
-        information_container = Gtk.FlowBox(
-            selection_mode=0,
-            homogeneous=True,
-            max_children_per_line=2,
-            row_spacing=6,
-            column_spacing=6
-        )
-        metadata_container.append(information_container)
         parent_model = self.model.data.get('details', {}).get('parent_model')
         metadata={
             _('Tag'): prettify_model_name(self.model.get_name(), True)[1],
@@ -182,29 +138,16 @@ class AddedModelDialog(Adw.Dialog):
 
         for name, value in metadata.items():
             if value:
-                information_container.append(InfoBox(name, value, True))
+                self.information_container.append(InfoBox(name, value, True))
+
         if self.model.data.get('description'):
-            metadata_container.append(InfoBox(_('Description'), self.model.data.get('description'), False))
+            self.description_container.set_child(InfoBox(_('Description'), self.model.data.get('description'), False))
+
         if self.model.data.get('system'):
             system = self.model.data.get('system')
 
-            context_attachment_box = Gtk.Box(
-                orientation=1,
-                spacing=5
-            )
-            metadata_container.append(context_attachment_box)
-
-            context_attachment_box.append(Gtk.Label(
-                label=_('Files'),
-                css_classes=['subtitle', 'caption', 'dim-label'],
-                hexpand=True,
-                ellipsize=3,
-                tooltip_text=_('Files'),
-                halign=1
-            ))
-
-            context_attachment_container = attachments.GlobalAttachmentContainer()
-            context_attachment_box.append(context_attachment_container)
+            attachment_container = attachments.GlobalAttachmentContainer()
+            self.context_attachment_container.set_child(attachment_container)
 
             pattern = re.compile(r"```(.+?)\n(.*?)```", re.DOTALL)
             matches = pattern.finditer(system)
@@ -215,19 +158,13 @@ class AddedModelDialog(Adw.Dialog):
                     file_type='model_context',
                     file_content=match.group(2).strip()
                 )
-                context_attachment_container.add_attachment(attachment)
+                attachment_container.add_attachment(attachment)
+
+            self.context_attachment_container.get_parent().set_visible(len(list(attachment_container.container)) > 0)
 
             system = pattern.sub('', system).strip()
-            metadata_container.append(InfoBox(_('Context'), system, False))
+            self.context_system_container.set_child(InfoBox(_('Context'), system, False))
 
-        categories_box = Adw.WrapBox(
-            hexpand=True,
-            line_spacing=5,
-            child_spacing=5,
-            justify=0,
-            halign=1
-        )
-        metadata_container.append(categories_box)
         available_models_data = get_available_models_data()
         categories = available_models_data.get(self.model.get_name().split(':')[0], {}).get('categories', [])
         languages = available_models_data.get(self.model.get_name().split(':')[0], {}).get('languages', [])
@@ -236,202 +173,56 @@ class AddedModelDialog(Adw.Dialog):
             languages = available_models_data.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('languages', [])
         for category in set(categories):
             if category not in ('small', 'medium', 'big', 'huge'):
-                categories_box.append(CategoryPill(category, True))
+                self.categories_container.append(CategoryPill(category, True))
 
-        main_container.append(metadata_container)
-
-        tbv=Adw.ToolbarView()
-        header_bar = Adw.HeaderBar(
-            show_title=False
-        )
-        remove_button = Gtk.Button(
-            icon_name='user-trash-symbolic',
-            tooltip_text=_('Remove Model')
-        )
-        remove_button.connect('clicked', lambda button: self.model.prompt_remove_model())
-        header_bar.pack_start(remove_button)
-
-        if self.model.instance.instance_type in ('ollama', 'ollama:managed'):
-            create_child_button = Gtk.Button(
-                icon_name='list-add-symbolic',
-                tooltip_text=_('Create Child')
-            )
-            create_child_button.connect('clicked', lambda button: self.model.create_child())
-            header_bar.pack_start(create_child_button)
-
-        if len(available_models_data.get(self.model.get_name().split(':')[0], {}).get('languages', [])) > 1:
-            languages_container = Gtk.FlowBox(
-                max_children_per_line=3,
-                selection_mode=0,
-                row_spacing=6,
-                column_spacing=6
-            )
-            for language in ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in available_models_data.get(self.model.get_name().split(':')[0], {}).get('languages', [])]:
-                languages_container.append(CategoryPill(language, True))
-            languages_scroller = Gtk.ScrolledWindow(
-                child=languages_container,
-                propagate_natural_width=True,
-                propagate_natural_height=True
-            )
-
-            languages_button = Gtk.MenuButton(
-                icon_name='language-symbolic',
-                tooltip_text=_('Languages'),
-                popover=Gtk.Popover(child=languages_scroller)
-            )
-            header_bar.pack_start(languages_button)
-
-        tbv.add_top_bar(header_bar)
-        tbv.set_content(
-            Gtk.ScrolledWindow(
-                child=main_container,
-                propagate_natural_height=True,
-                max_content_width=500
-            )
-        )
-        super().__init__(
-            child=tbv,
-            title=self.model.model_title,
-            width_request=360,
-            height_request=240,
-            follows_content_size=True,
-            default_widget=self.image_container
-        )
+        for language in ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]:
+            self.language_flowbox.append(CategoryPill(language, True))
+        self.language_button.set_visible(len(languages) > 1)
 
     def update_profile_picture(self):
-        image = self.model.create_profile_picture(192)
-        if not image:
-            image = Gtk.Image.new_from_icon_name('image-missing-symbolic')
-            image.set_size_request(192, 192)
-        self.image_container.set_child(image)
+        if self.model.image.get_visible():
+            self.image.set_from_paintable(self.model.image.get_paintable())
+            self.image.set_pixel_size(192)
+        else:
+            self.image.set_from_icon_name('image-missing-symbolic')
+            self.image.set_pixel_size(-1)
 
-    def update_voice(self):
-        if self.voice_combo.get_selected() == 0:
+    @Gtk.Template.Callback()
+    def prompt_remove_model(self, button):
+        self.model.prompt_remove_model()
+
+    @Gtk.Template.Callback()
+    def prompt_create_child(self, button):
+        self.model.prompt_create_child()
+
+    @Gtk.Template.Callback()
+    def update_voice(self, comborow, gparam):
+        if comborow.get_selected() == 0:
             SQL.insert_or_update_model_voice(self.model.get_name(), None)
         else:
-            voice = TTS_VOICES.get(self.voice_combo.get_selected_item().get_string())
+            voice = TTS_VOICES.get(comborow.get_selected_item().get_string())
             SQL.insert_or_update_model_voice(self.model.get_name(), voice)
 
-class AddedModelButton(Gtk.Button):
-    __gtype_name__ = 'AlpacaAddedModelButton'
-
-    def __init__(self, model_name:str, instance):
-        self.instance = instance
-        self.data = self.instance.get_model_info(model_name)
-        self.model_title = prettify_model_name(model_name)
-        container = Gtk.Box(
-            spacing=5,
-            margin_start=5,
-            margin_end=5,
-            margin_top=5,
-            margin_bottom=5
-        )
-
-        super().__init__(
-            name=model_name,
-            child=container,
-            css_classes=['p0', 'card']
-        )
-
-        self.image_container = Adw.Bin(
-            css_classes=['r10'],
-            valign=3,
-            halign=3,
-            overflow=1,
-        )
-        container.append(self.image_container)
-
-        text_container = Gtk.Box(
-            orientation=1,
-            spacing=5,
-            valign=3,
-            margin_start=5,
-            margin_end=5,
-            margin_top=5,
-            margin_bottom=5
-        )
-        container.append(text_container)
-        title_label = Gtk.Label(
-            label=prettify_model_name(model_name, True)[0],
-            css_classes=['title-3'],
-            ellipsize=3,
-            hexpand=True,
-            halign=1
-        )
-        text_container.append(title_label)
-        subtitle_label = Gtk.Label(
-            css_classes=['dim-label'],
-            ellipsize=3,
-            hexpand=True,
-            halign=1,
-            visible=False
-        )
-        tag = prettify_model_name(self.get_name(), True)[1]
-        family = self.data.get('details', {}).get('family')
-        if family and tag:
-            subtitle_label.set_label('{} • {}'.format(prettify_model_name(family), tag))
-        elif family:
-            subtitle_label.set_label(prettify_model_name(family))
-        elif tag:
-            subtitle_label.set_label(tag)
-        subtitle_label.set_visible(subtitle_label.get_label())
-        text_container.append(subtitle_label)
-
-        self.row = AddedModelRow(self)
-
-        self.connect('clicked', lambda btn: AddedModelDialog(self).present(self.get_root()))
-        GLib.idle_add(self.update_profile_picture)
-
-        self.gesture_click = Gtk.GestureClick(button=3)
-        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
-        self.add_controller(self.gesture_click)
-        self.gesture_long_press = Gtk.GestureLongPress()
-        self.gesture_long_press.connect("pressed", self.show_popup)
-        self.add_controller(self.gesture_long_press)
-
-    def get_search_string(self) -> str:
-        return '{} {} {}'.format(self.get_name(), self.model_title, self.data.get('system', None))
-
-    def get_search_categories(self) -> set:
-        available_models_data = get_available_models_data()
-        return set([c for c in available_models_data.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
-
-    def get_vision(self) -> bool:
-        return 'vision' in self.data.get('capabilities', [])
-
-    def create_profile_picture(self, size:int):
-        profile_picture = SQL.get_model_preferences(self.get_name()).get('picture', None)
-        if profile_picture:
-            image_data = base64.b64decode(profile_picture)
-            texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
-            image = Gtk.Image.new_from_paintable(texture)
-            image.set_size_request(size, size)
-            image.set_pixel_size(size)
-            return image
-
-    def update_profile_picture(self):
-        picture = self.create_profile_picture(64)
-        self.image_container.set_visible(picture)
-        self.image_container.set_child(picture)
-
-    def change_profile_picture(self):
+    @Gtk.Template.Callback()
+    def pfp_clicked(self, button):
         window = self.get_root().get_application().get_main_window(present=False)
         def set_profile_picture(file):
             if file:
                 picture_b64 = attachments.extract_image(file.get_path(), 480)
-                SQL.insert_or_update_model_picture(self.get_name(), picture_b64)
+                SQL.insert_or_update_model_picture(self.model.get_name(), picture_b64)
+                self.model.update_profile_picture()
                 self.update_profile_picture()
                 threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
 
         def remove_profile_picture():
-            SQL.insert_or_update_model_picture(self.get_name(), None)
+            SQL.insert_or_update_model_picture(self.model.get_name(), None)
+            self.model.update_profile_picture()
             self.update_profile_picture()
             threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
 
-        if SQL.get_model_preferences(self.get_name()).get('picture', None):
-            file_filter = Gtk.FileFilter()
-            file_filter.add_pixbuf_formats()
-
+        file_filter = Gtk.FileFilter()
+        file_filter.add_pixbuf_formats()
+        if self.model.image.get_visible():
             options = {
                 _('Cancel'): {},
                 _('Remove'): {'callback': remove_profile_picture, 'appearance': 'destructive'},
@@ -449,14 +240,72 @@ class AddedModelButton(Gtk.Button):
                 options = options
             ).show(self.get_root())
         else:
-            file_filter = Gtk.FileFilter()
-            file_filter.add_pixbuf_formats()
-
             dialog.simple_file(
                 parent = self.get_root(),
                 file_filters = [file_filter],
                 callback = set_profile_picture
             )
+
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/model_button.ui')
+class AddedModelButton(Gtk.Button):
+    __gtype_name__ = 'AlpacaModelButton'
+
+    image = Gtk.Template.Child()
+    title_label = Gtk.Template.Child()
+    subtitle_label = Gtk.Template.Child()
+
+    def __init__(self, model_name:str, instance):
+        super().__init__()
+        self.instance = instance
+        self.data = self.instance.get_model_info(model_name)
+
+        self.set_name(model_name)
+        self.model_title = prettify_model_name(model_name)
+        self.title_label.set_label(self.model_title)
+
+        tag = prettify_model_name(self.get_name(), True)[1]
+        family = self.data.get('details', {}).get('family')
+        if family and tag:
+            self.set_subtitle('{} • {}'.format(prettify_model_name(family), tag))
+        elif family:
+            self.set_subtitle(prettify_model_name(family))
+        elif tag:
+            self.set_subtitle(tag)
+
+        self.row = AddedModelRow(self)
+        self.update_profile_picture()
+
+    def set_subtitle(self, subtitle:str):
+        self.subtitle_label.set_label(subtitle)
+        self.subtitle_label.set_visible(subtitle)
+
+    def get_search_string(self) -> str:
+        return '{} {} {}'.format(self.get_name(), self.model_title, self.data.get('system', None))
+
+    def get_search_categories(self) -> set:
+        available_models_data = get_available_models_data()
+        return set([c for c in available_models_data.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
+
+    def get_vision(self) -> bool:
+        return 'vision' in self.data.get('capabilities', [])
+
+    def update_profile_picture(self):
+        b64_data = SQL.get_model_preferences(self.get_name()).get('picture')
+        if b64_data:
+            image_data = base64.b64decode(b64_data)
+            texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
+            self.image.set_from_paintable(texture)
+        self.image.set_size_request(64, 64)
+        self.image.set_pixel_size(64)
+        self.image.set_visible(b64_data)
+        self.image.set_margin_start(0)
+        self.image.set_margin_end(0)
+
+    def prompt_create_child(self):
+        dialog = self.get_root().get_visible_dialog()
+        if dialog and isinstance(dialog, AddedModelDialog):
+            dialog.close()
+        prompt_existing(self.get_root(), self.instance, self.model_title)
 
     def remove_model(self):
         dialog = self.get_root().get_visible_dialog()
@@ -471,12 +320,12 @@ class AddedModelButton(Gtk.Button):
             if found_models:
                 model_selector_model.remove(found_models[0])
 
-            if len(list(self.get_parent().get_parent())) == 1:
+            if len(list(self.get_ancestor(Gtk.FlowBox))) == 1:
                 window.local_model_stack.set_visible_child_name('no-models')
 
             SQL.remove_model_preferences(self.get_name())
             threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
-            self.get_parent().get_parent().remove(self.get_parent())
+            self.get_ancestor(Gtk.FlowBox).remove(self.get_parent())
 
     def prompt_remove_model(self):
         dialog.simple(
@@ -488,15 +337,18 @@ class AddedModelButton(Gtk.Button):
             button_appearance = 'destructive'
         )
 
-    def create_child(self):
-        dialog = self.get_root().get_visible_dialog()
-        if dialog and isinstance(dialog, AddedModelDialog):
-            dialog.close()
-        prompt_existing(self.get_root(), self.instance, self.model_title)
+    @Gtk.Template.Callback()
+    def on_click(self, button):
+        AddedModelDialog(self).present(self.get_root())
 
-    def show_popup(self, gesture, x, y):
+    @Gtk.Template.Callback()
+    def show_popup(self, *args):
         rect = Gdk.Rectangle()
-        rect.x, rect.y, = x, y
+        if len(args) == 4:
+            rect.x, rect.y = args[2], args[3]
+        else:
+            rect.x, rect.y = args[1], args[2]
+
         actions = [
             [
                 {
@@ -509,7 +361,7 @@ class AddedModelButton(Gtk.Button):
         if self.instance.instance_type in ('ollama', 'ollama:managed'):
             actions[0].insert(0, {
                 'label': _('Create Child'),
-                'callback': self.create_child,
+                'callback': self.prompt_create_child,
                 'icon': 'list-add-symbolic'
             })
 
