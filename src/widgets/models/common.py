@@ -1,8 +1,9 @@
 # common.py
 
 from gi.repository import Gtk, Gio, Adw
-import importlib.util
+import importlib.util, os
 from .. import dialog
+from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS
 
 available_models_data = {}
 
@@ -48,14 +49,8 @@ class CategoryPill(Adw.Bin):
             hexpand=True
         )
 
-def get_local_models(root) -> dict:
-    window = root.get_application().get_main_window(present=False)
-    results = {}
-    for model in [item.get_child() for item in list(window.local_model_flowbox) if item.get_child().__gtype_name__ == 'AlpacaAddedModelButton']:
-        results[model.get_name()] = model
-    return results
-
 def get_available_models_data() -> list:
+    global available_models_data
     return available_models_data
 
 def set_available_models_data(data:list):
@@ -65,14 +60,12 @@ def set_available_models_data(data:list):
 def prepend_added_model(root, model):
     window = root.get_application().get_main_window(present=False)
     window.local_model_flowbox.prepend(model)
-    if model.__gtype_name__ == 'AlpacaAddedModelButton':
-        window.model_dropdown.get_model().append(model.row)
+    model.get_parent().set_focusable(False)
 
 def append_added_model(root, model):
     window = root.get_application().get_main_window(present=False)
     window.local_model_flowbox.append(model)
-    if model.__gtype_name__ == 'AlpacaAddedModelButton':
-        window.model_dropdown.get_model().append(model.row)
+    model.get_parent().set_focusable(False)
 
 def prompt_gguf(root, instance=None):
     creator = importlib.import_module('alpaca.widgets.models.creator')
@@ -100,22 +93,32 @@ def prompt_existing(root, instance=None, model_name:str=None):
         instance = root.get_application().get_main_window(present=False).get_current_instance()
     creator.ModelCreatorDialog(instance, model_name, False).present(root)
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/basic_model_dialog.ui')
-class BasicModelDialog(Adw.Dialog):
-    __gtype_name__ = 'AlpacaBasicModelDialog'
+# Callbacks for removing models
+def remove_added_model(model):
+    window = model.get_root().get_application().get_main_window(present=False)
 
-    webpage_button = Gtk.Template.Child()
-    status_page = Gtk.Template.Child()
+    if model.instance.delete_model(model.get_name()):
+        if len(list(model.get_ancestor(Gtk.FlowBox))) == 1:
+            window.local_model_stack.set_visible_child_name('no-models')
 
-    def __init__(self, model):
-        super().__init__()
-        self.model = model
-        self.status_page.set_title(self.model.model_title)
+        SQL.remove_model_preferences(model.get_name())
+        threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
 
-    @Gtk.Template.Callback()
-    def prompt_remove_model(self, button):
-        self.model.prompt_remove_model()
+def remove_stt_model(model):
+    model_path = os.path.join(data_dir, 'whisper', '{}.pt'.format(model.get_name()))
+    if os.path.isfile(model_path):
+        os.remove(model_path)
 
-    @Gtk.Template.Callback()
-    def webpage_requested(self, button):
-        Gio.AppInfo.launch_default_for_uri(button.get_tooltip_text())
+def remove_tts_model(model, file_path:str):
+    print(file_path)
+    if os.path.islink(file_path):
+        target_path = os.readlink(file_path)
+        os.unlink(file_path)
+        if os.path.isfile(target_path):
+            os.remove(target_path)
+    elif os.path.isfile(file_path):
+        os.remove(file_path)
+
+def remove_background_remover_model(model, file_path:str):
+    if os.path.isfile(file_path):
+        os.remove(file_path)

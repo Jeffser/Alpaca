@@ -92,7 +92,8 @@ class DictateToggleButton(Gtk.Stack):
         if not models.tts_model_exists(voice):
             tts_path = models.get_tts_path()
             if tts_path:
-                models.common.append_added_model(message_element.get_root(), models.speech.TextToSpeechModelButton(os.path.join(tts_path, voice + '.pt')))
+                model_element = models.create_tts_model(os.path.join(tts_path, voice + '.pt'))
+                models.common.append_added_model(message_element.get_root(), model_element)
 
         # Generate TTS_ENGINE if needed
         if not tts_engine or tts_engine_language != voice[0]:
@@ -179,6 +180,8 @@ class MicrophoneButton(Gtk.Stack):
             library_waiting_queue.append(self)
             self.set_sensitive(False)
 
+        self.pulling_model = None
+
     def toggled(self, button):
         global loaded_whisper_models
         language=SPEACH_RECOGNITION_LANGUAGES[self.get_root().settings.get_value('stt-language').unpack()]
@@ -195,7 +198,7 @@ class MicrophoneButton(Gtk.Stack):
                 GLib.idle_add(buffer.insert, current_iter, result.get("text"), len(result.get("text").encode('utf8')))
                 self.mic_timeout = 0
 
-        def run_mic(pulling_model:Gtk.Widget=None):
+        def run_mic():
             button.get_parent().set_visible_child_name("loading")
             button.add_css_class('accent')
 
@@ -207,8 +210,8 @@ class MicrophoneButton(Gtk.Stack):
             try:
                 if not loaded_whisper_models.get(model_name):
                     loaded_whisper_models[model_name] = libraries.get('whisper').load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
-                if pulling_model:
-                    threading.Thread(target=pulling_model.update_progressbar, args=({'status': 'success'},), daemon=True).start()
+                if self.pulling_model:
+                    self.pulling_model.update_progressbar(-1)
             except Exception as e:
                 dialog.simple_error(
                     parent = button.get_root(),
@@ -263,14 +266,10 @@ class MicrophoneButton(Gtk.Stack):
                 button.set_active(False)
 
         def prepare_download():
-            pulling_model = models.pulling.PullingModelButton(
-                model_name,
-                lambda model_name, window=button.get_root(): models.common.prepend_added_model(window, models.speech.SpeechToTextModelButton(model_name)),
-                None,
-                False
-            )
-            models.common.prepend_added_model(button.get_root(), pulling_model)
-            threading.Thread(target=run_mic, args=(pulling_model,), daemon=True).start()
+            self.pulling_model = models.create_stt_model(model_name)
+            self.pulling_model.update_progressbar(1)
+            models.common.prepend_added_model(button.get_root(), self.pulling_model)
+            threading.Thread(target=run_mic, daemon=True).start()
 
         if button.get_active():
             if os.path.isfile(os.path.join(data_dir, 'whisper', '{}.pt'.format(model_name))):

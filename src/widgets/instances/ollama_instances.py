@@ -359,29 +359,39 @@ class BaseInstance:
             logger.error(e)
         return {}
 
-    def pull_model(self, model_name:str, callback:callable):
+    def pull_model(self, model):
         if not self.process:
             self.start()
-        try:
-            response = requests.post(
-                '{}/api/pull'.format(self.properties.get('url')),
-                headers={
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                },
-                data=json.dumps({
-                    'name': model_name,
-                    'stream': True
-                }),
-                stream=True
-            )
-            if response.status_code == 200:
-                for line in response.iter_lines():
-                    if line:
-                        callback(json.loads(line.decode("utf-8")))
-        except Exception as e:
-            callback({'error': e})
-            logger.error(e)
+        #try:
+        response = requests.post(
+            '{}/api/pull'.format(self.properties.get('url')),
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer {}'.format(self.properties.get('api'))
+            },
+            data=json.dumps({
+                'name': model.get_name(),
+                'stream': True
+            }),
+            stream=True
+        )
+        if response.status_code == 200:
+            for line in response.iter_lines():
+                if line:
+                    data = json.loads(line.decode("utf-8"))
+                    print(data)
+                    if data.get('status'):
+                        model.append_progress_line(data.get('status'))
+                    if data.get('total') and data.get('completed'):
+                        model.update_progressbar(data.get('completed') / data.get('total'))
+                    if data.get('status') == 'success':
+                        model.update_progressbar(-1)
+                        return
+        #except Exception as e:
+            #callback({'error': e})
+
+            ##TODO delete model if error
+            #logger.error(e)
 
     def gguf_exists(self, sha256:str) -> bool:
         if not self.process:
@@ -628,9 +638,9 @@ class OllamaCloud(BaseInstance):
         for key in self.default_properties:
             self.properties[key] = properties.get(key, self.default_properties.get(key))
 
-    def pull_model(self, model_name:str, callback:callable):
-        SQL.append_online_instance_model_list(self.instance_id, model_name)
-        GLib.timeout_add(5000, lambda: callback({'status': 'success'}) and False)
+    def pull_model(self, model):
+        SQL.append_online_instance_model_list(self.instance_id, model.get_name())
+        GLib.timeout_add(5000, lambda: model.update_progressbar(-1) and False)
 
     def delete_model(self, model_name:str) -> bool:
         SQL.remove_online_instance_model_list(self.instance_id, model_name)
@@ -642,7 +652,7 @@ class OllamaCloud(BaseInstance):
             local_models.append({'name': model})
         return local_models
 
-    def get_available_models(self) -> list:
+    def get_available_models(self) -> dict:
         if not self.process:
             self.start()
         try:
@@ -691,4 +701,4 @@ class OllamaCloud(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
-        return []
+        return {}

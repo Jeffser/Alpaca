@@ -18,12 +18,12 @@ class AddedModelRow(GObject.Object):
     def __init__(self, model):
         super().__init__()
         self.model = model
-        self.name = model.model_title
+        self.name = prettify_model_name(self.model.get_name())
 
     def __str__(self):
-        return self.model.model_title
+        return prettify_model_name(self.model.get_name())
 
-class AddedModelSelector(Gtk.DropDown):
+class AddedModelSelector(Gtk.Stack):
     __gtype_name__ = 'AlpacaAddedModelSelector'
 
     def __init__(self):
@@ -33,21 +33,47 @@ class AddedModelSelector(Gtk.DropDown):
         model_selector_model.connect('notify::n-items', self.n_items_changed)
 
         super().__init__(
-            model=model_selector_model,
-            visible=len(model_selector_model) > 0
+            transition_type=1
         )
-        list(self)[0].add_css_class('flat')
 
-        self.set_expression(Gtk.PropertyExpression.new(AddedModelRow, None, "name"))
+        self.selector = Gtk.DropDown(
+            model=model_selector_model
+        )
+        list(self.selector)[0].add_css_class('flat')
+
+        self.selector.set_expression(Gtk.PropertyExpression.new(AddedModelRow, None, "name"))
         factory = Gtk.SignalListItemFactory()
         factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
         factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
-        self.set_factory(factory)
-        list(list(self)[1].get_child())[1].set_propagate_natural_width(True)
+        self.selector.set_factory(factory)
+        list(list(self.selector)[1].get_child())[1].set_propagate_natural_width(True)
+
+        #visible=len(model_selector_model) > 0
+
+        self.add_named(
+            Gtk.Label(
+                label=_('No Models'),
+                css_classes=['dim-label'],
+                wrap=True,
+                wrap_mode=2
+            ),
+            'no-models'
+        )
+
+        self.add_named(
+            self.selector,
+            'selector'
+        )
 
     def n_items_changed(self, model, gparam):
-        self.set_enable_search(len(model) > 10)
-        self.set_visible(len(model) > 0)
+        self.selector.set_enable_search(len(model) > 10)
+        self.set_visible_child_name('selector' if len(model) > 0 else 'no-models')
+
+    def set_selected(self, index:int):
+        self.selector.set_selected(index)
+
+    def get_selected_item(self):
+        return self.selector.get_selected_item()
 
 class InfoBox(Gtk.Box):
     __gtype_name__ = 'AlpacaInformationBox'
@@ -246,131 +272,24 @@ class AddedModelDialog(Adw.Dialog):
                 callback = set_profile_picture
             )
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_model_button.ui')
-class AddedModelButton(Gtk.Button):
-    __gtype_name__ = 'AlpacaAddedModelButton'
-
-    image = Gtk.Template.Child()
-    title_label = Gtk.Template.Child()
-    subtitle_label = Gtk.Template.Child()
-
-    def __init__(self, model_name:str, instance):
-        super().__init__()
-        self.instance = instance
-        self.data = self.instance.get_model_info(model_name)
-
-        self.set_name(model_name)
-        self.model_title = prettify_model_name(model_name)
-        self.title_label.set_label(self.model_title)
-
-        tag = prettify_model_name(self.get_name(), True)[1]
-        family = self.data.get('details', {}).get('family')
-        if family and tag:
-            self.set_subtitle('{} • {}'.format(prettify_model_name(family), tag))
-        elif family:
-            self.set_subtitle(prettify_model_name(family))
-        elif tag:
-            self.set_subtitle(tag)
-
-        self.row = AddedModelRow(self)
-        self.update_profile_picture()
-
-    def set_subtitle(self, subtitle:str):
-        self.subtitle_label.set_label(subtitle)
-        self.subtitle_label.set_visible(subtitle)
-
-    def get_search_string(self) -> str:
-        return '{} {} {}'.format(self.get_name(), self.model_title, self.data.get('system', None))
-
-    def get_search_categories(self) -> set:
-        available_models_data = get_available_models_data()
-        return set([c for c in available_models_data.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
-
-    def get_vision(self) -> bool:
-        return 'vision' in self.data.get('capabilities', [])
-
-    def update_profile_picture(self):
-        b64_data = SQL.get_model_preferences(self.get_name()).get('picture')
-        if b64_data:
-            image_data = base64.b64decode(b64_data)
-            texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
-            self.image.set_from_paintable(texture)
-        self.image.set_size_request(64, 64)
-        self.image.set_pixel_size(64)
-        self.image.set_visible(b64_data)
-        self.image.set_margin_start(0)
-        self.image.set_margin_end(0)
-
-    def prompt_create_child(self):
-        dialog = self.get_root().get_visible_dialog()
-        if dialog and isinstance(dialog, AddedModelDialog):
-            dialog.close()
-        prompt_existing(self.get_root(), self.instance, self.model_title)
-
-    def remove_model(self):
-        dialog = self.get_root().get_visible_dialog()
-        if dialog and isinstance(dialog, AddedModelDialog):
-            dialog.close()
-
-        window = self.get_root().get_application().get_main_window(present=False)
-
-        if self.instance.delete_model(self.get_name()):
-            global model_selector_model
-            found_models = [i for i, row in enumerate(list(model_selector_model)) if row.model.get_name() == self.get_name()]
-            if found_models:
-                model_selector_model.remove(found_models[0])
-
-            if len(list(self.get_ancestor(Gtk.FlowBox))) == 1:
-                window.local_model_stack.set_visible_child_name('no-models')
-
-            SQL.remove_model_preferences(self.get_name())
-            threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
-            self.get_ancestor(Gtk.FlowBox).remove(self.get_parent())
-
-    def prompt_remove_model(self):
-        dialog.simple(
-            parent = self.get_root(),
-            heading = _('Remove Model?'),
-            body = _("Are you sure you want to remove '{}'?").format(self.model_title),
-            callback = self.remove_model,
-            button_name = _('Remove'),
-            button_appearance = 'destructive'
-        )
-
-    @Gtk.Template.Callback()
-    def on_click(self, button):
-        AddedModelDialog(self).present(self.get_root())
-
-    @Gtk.Template.Callback()
-    def show_popup(self, *args):
-        rect = Gdk.Rectangle()
-        if len(args) == 4:
-            rect.x, rect.y = args[2], args[3]
-        else:
-            rect.x, rect.y = args[1], args[2]
-
-        actions = [
-            [
-                {
-                    'label': _('Remove Model'),
-                    'callback': self.prompt_remove_model,
-                    'icon': 'user-trash-symbolic'
-                }
-            ]
-        ]
-        if self.instance.instance_type in ('ollama', 'ollama:managed'):
-            actions[0].insert(0, {
-                'label': _('Create Child'),
-                'callback': self.prompt_create_child,
-                'icon': 'list-add-symbolic'
-            })
-
-        popup = dialog.Popover(actions)
-        popup.set_parent(self)
-        popup.set_pointing_to(rect)
-        popup.popup()
-
 class FallbackModel:
     def get_name(): return None
     def get_vision() -> bool: return False
 
+def append_to_model_selector(row):
+    global model_selector_model
+    model_selector_model.append(row)
+
+def delete_from_model_selector(model_name:str):
+    global model_selector_model
+    found_models = [i for i, row in enumerate(list(model_selector_model)) if row.model.get_name() == model_name]
+    if found_models:
+        model_selector_model.remove(found_models[0])
+
+def empty_model_selector():
+    global model_selector_model
+    model_selector_model.remove_all()
+
+def list_from_selector() -> dict:
+    global model_selector_model
+    return {m.model.get_name(): m.model for m in list(model_selector_model)}

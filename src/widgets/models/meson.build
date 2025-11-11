@@ -5,10 +5,9 @@ models = [
   'added.py',
   'available.py',
   'pulling.py',
-  'speech.py',
   'creator.py',
-  'image.py',
-  'common.py'
+  'common.py',
+  'basic.py',
 ]
 
 install_data(models, install_dir: moduledir)

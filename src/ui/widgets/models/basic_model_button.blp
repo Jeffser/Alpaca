@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $AlpacaBackgroundRemoverModelButton: Gtk.Button {
+template $AlpacaBasicModelButton: Gtk.Button {
   styles [
     "p0",
     "card"
@@ -22,12 +22,13 @@ template $AlpacaBackgroundRemoverModelButton: Gtk.Button {
     margin-top: 5;
     margin-bottom: 5;
 
-    Gtk.Image {
-      icon-name: "image-missing-symbolic";
-      margin-start: 10;
-      margin-end: 10;
+    Gtk.Image image {
       valign: center;
       halign: center;
+      overflow: hidden;
+      styles [
+        "r10"
+      ]
     }
 
     Gtk.Box {
@@ -46,17 +47,20 @@ template $AlpacaBackgroundRemoverModelButton: Gtk.Button {
         styles [
           "title-3"
         ]
-        //CODE set label
       }
 
-      Gtk.Label {
+      Gtk.Label subtitle_label {
         ellipsize: end;
         hexpand: true;
         halign: start;
-        label: _("Background Remover");
         styles [
           "dim-label"
         ]
+      }
+
+      Gtk.ProgressBar progressbar {
+        hexpand: true;
+        visible: false;
       }
     }
   };

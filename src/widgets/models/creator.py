@@ -5,9 +5,10 @@ import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, im
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
-from .common import CategoryPill, get_local_models, prepend_added_model
+from .added import list_from_selector
+from .common import CategoryPill, prepend_added_model
 from .pulling import PullingModelButton
-from .added import AddedModelButton
+#from .added import AddedModelButton ##TODO
 
 logger = logging.getLogger(__name__)
 
@@ -229,12 +230,9 @@ class ModelCreatorDialog(Adw.Dialog):
         else:
             factory = Gtk.SignalListItemFactory()
             factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
-            factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
+            factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().name))
             self.base_element.set_factory(factory)
-            string_list = Gtk.StringList()
-            for value in get_local_models(self.get_root()).values():
-                string_list.append(value.model_title)
-            self.base_element.set_model(string_list)
+            self.base_element.set_model(self.get_root().global_footer.model_selector.get_model())
 
     def load_profile_picture(self):
         file_filter = Gtk.FileFilter()
@@ -248,14 +246,14 @@ class ModelCreatorDialog(Adw.Dialog):
     def base_changed(self):
         if not self.base_element.get_selected_item():
             return
-        pretty_name = self.base_element.get_selected_item().get_string()
+        pretty_name = self.base_element.get_selected_item().name
         if pretty_name != 'GGUF' and not self.base_element.get_subtitle():
             self.tag_element.set_text('custom')
 
             system = None
             modelfile = None
 
-            found_models = [model for model in list(get_local_models(self.get_root()).values()) if model.model_title == pretty_name]
+            found_models = [model for model in list(list_from_selector().values()) if model.model_title == pretty_name]
             if len(found_models) > 0:
                 self.name_element.set_text(found_models[0].get_name().split(':')[0])
                 system = found_models[0].data.get('system')
@@ -317,7 +315,7 @@ class ModelCreatorDialog(Adw.Dialog):
         top_p = self.focus_element.get_value() / 100
         num_ctx = self.num_ctx_element.get_value()
 
-        found_models = [model for model in list(get_local_models(self.get_root()).values()) if model.model_title == pretty_name]
+        found_models = [model for model in list(list_from_selector().values()) if model.model_title == pretty_name]
         if len(found_models) == 0:
             if profile_picture:
                 SQL.insert_or_update_model_picture(model_name, attachments.extract_image(profile_picture, 480))
@@ -339,7 +337,7 @@ class ModelCreatorDialog(Adw.Dialog):
                 threading.Thread(target=self.create_model, args=(data_json, gguf_path), daemon=True).start()
             else:
                 pretty_name = self.base_element.get_selected_item().get_string()
-                found_models = [model for model in list(get_local_models(self.get_root()).values()) if model.model_title == pretty_name]
+                found_models = [model for model in list(list_from_selector().values()) if model.model_title == pretty_name]
                 if len(found_models) > 0:
                     data_json['from'] = found_models[0].get_name()
                     threading.Thread(target=self.create_model, args=(data_json,), daemon=True).start()
@@ -347,7 +345,7 @@ class ModelCreatorDialog(Adw.Dialog):
 
     def create_model(self, data:dict, gguf_path:str=None):
         window = self.get_root().get_application().get_main_window(present=False)
-        if data.get('model') and data.get('model') not in list(get_local_models(self.get_root()).keys()):
+        if data.get('model') and data.get('model') not in list(list_from_selector().keys()):
             model = PullingModelButton(
                 data.get('model'),
                 lambda model_name, window=window, instance=self.instance: prepend_added_model(window, AddedModelButton(model_name, instance)),

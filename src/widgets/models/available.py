@@ -5,9 +5,10 @@ import logging, os, datetime, threading, sys, glob, icu, base64, hashlib, import
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
-from .common import CategoryPill, get_local_models, prepend_added_model
-from .pulling import PullingModelButton
-from .added import AddedModelButton
+from .common import CategoryPill, prepend_added_model, remove_added_model
+from .basic import BasicModelButton
+from .added import AddedModelDialog, list_from_selector
+#from .added import AddedModelButton ##TODO
 
 logger = logging.getLogger(__name__)
 
@@ -105,7 +106,7 @@ class AvailableModelDialog(Adw.Dialog):
             row_spacing=6,
             column_spacing=6
         )
-        model_list = get_local_models(self.model.get_root())
+        model_list = list_from_selector()
         if len(self.model.data.get('tags', [])) > 0:
             for tag in self.model.data.get('tags', []):
                 if tag[0]:
@@ -258,7 +259,7 @@ class AvailableModelButton(Gtk.Button):
         return set(self.data.get('categories', []))
 
     def show_popup(self, gesture, x, y):
-        if '{}:latest'.format(self.get_name()) not in list(get_local_models(self.get_root())):
+        if '{}:latest'.format(self.get_name()) not in list(list_from_selector()):
             rect = Gdk.Rectangle()
             rect.x, rect.y, = x, y
             actions = [
@@ -292,14 +293,16 @@ class AvailableModelButton(Gtk.Button):
 
 def pull_model_confirm(model_name:str, instance, window):
     if model_name:
-        if model_name not in list(get_local_models(window)):
-            model = PullingModelButton(
-                model_name,
-                lambda model_name, window=window, instance=instance: prepend_added_model(window, AddedModelButton(model_name, instance)),
-                instance,
-                True
+        if model_name not in list(list_from_selector()):
+            model = BasicModelButton(
+                model_name=model_name,
+                instance=instance,
+                dialog_callback=AddedModelDialog,
+                remove_callback=remove_added_model
             )
-            window.local_model_flowbox.prepend(model)
+            model.update_progressbar(1)
+            prepend_added_model(window, model)
             GLib.idle_add(window.model_manager_stack.set_visible_child_name, 'added_models')
             GLib.idle_add(window.local_model_stack.set_visible_child_name, 'content')
-            instance.pull_model(model_name, model.update_progressbar)
+            instance.pull_model(model)
+

@@ -1,7 +1,8 @@
 # __init__.py
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
-from . import added, available, pulling, common, speech, creator, image
-from .common import set_available_models_data, get_available_models_data
+from . import added, available, pulling, common, creator, basic
+from .common import set_available_models_data, get_available_models_data, remove_added_model, remove_stt_model, remove_tts_model, remove_background_remover_model
+from ...sql_manager import Instance as SQL
 
 import os, importlib.util
 from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS
@@ -53,18 +54,84 @@ def update_available_model_list(root):
     window.model_manager_top_view_switcher.set_visible(visible_model_manger_switch)
     window.model_filter_button.set_visible('ollama' in instance.instance_type)
 
+def create_added_model(model_name:str, instance, append_row=True):
+    model_element = basic.BasicModelButton(
+        model_name=model_name,
+        instance=instance,
+        dialog_callback=added.AddedModelDialog,
+        remove_callback=remove_added_model
+    )
+    if append_row:
+        added.append_to_model_selector(model_element.row)
+    return model_element
+
+def create_stt_model(model_name:str):
+    model_element = basic.BasicModelButton(
+        model_name=model_name.removesuffix('.pt'),
+        subtitle=_("Speech to Text"),
+        icon_name="audio-input-microphone-symbolic",
+        dialog_callback=lambda model: basic.BasicModelDialog(
+            model=model,
+            description=_("Local speech to text model provided by OpenAI Whisper"),
+            size=STT_MODELS.get(model.get_name(), '~151mb'),
+            url="https://github.com/openai/whisper"
+        ),
+        remove_callback=remove_stt_model
+    )
+    return model_element
+
+def create_tts_model(model_path:str):
+    model_name = os.path.basename(model_path).removesuffix('.pt')
+    pretty_name = [k for k, v in TTS_VOICES.items() if v == model_name]
+    if len(pretty_name) > 0:
+        pretty_name = pretty_name[0]
+    else:
+        pretty_name = model_name.title()
+
+    model_element = basic.BasicModelButton(
+        model_name=pretty_name,
+        subtitle=_("Text to Speech"),
+        icon_name="bullhorn-symbolic",
+        dialog_callback=lambda model: basic.BasicModelDialog(
+            model=model,
+            description=_("Local text to speech model provided by Kokoro"),
+            url="https://github.com/hexgrad/kokoro"
+        ),
+        remove_callback=lambda model, path=model_path: remove_tts_model(model, path)
+    )
+    return model_element
+
+def create_background_remover_model(model_path:str):
+    model_name = os.path.basename(model_path).removesuffix('.onnx')
+    author = REMBG_MODELS.get(model_name, {}).get('author')
+    size = REMBG_MODELS.get(model_name, {}).get('size', '~151mb')
+    url = REMBG_MODELS.get(model_name, {}).get('link')
+
+    model_element = basic.BasicModelButton(
+        model_name=REMBG_MODELS.get(model_name, {}).get('display_name', model_name.title()),
+        subtitle=_("Background Remover"),
+        icon_name="image-missing-symbolic",
+        dialog_callback=lambda model, author=author, size=size, url=url: basic.BasicModelDialog(
+            model=model,
+            description=_("Local background removal model provided by {}.").format(author) if author else "",
+            size=size,
+            url=url
+        ),
+        remove_callback=lambda model, path=model_path: remove_background_remover_model(model, path)
+    )
+    return model_element
+
 def update_added_model_list(root):
     window = root.get_application().get_main_window(present=False)
     window.local_model_flowbox.remove_all()
-    added.model_selector_model.remove_all()
+    added.empty_model_selector()
 
     # Normal Models
     window.get_current_instance().local_models = None # To reset cache
     local_models = window.get_current_instance().get_local_models()
     for model in local_models:
-        model_element = added.AddedModelButton(model.get('name'), window.get_current_instance())
+        model_element = create_added_model(model.get('name'), window.get_current_instance())
         window.local_model_flowbox.append(model_element)
-        added.model_selector_model.append(model_element.row)
         model_element.get_parent().set_focusable(False)
 
     if importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'):
@@ -72,7 +139,7 @@ def update_added_model_list(root):
         if os.path.isdir(os.path.join(data_dir, 'whisper')):
             for model in os.listdir(os.path.join(data_dir, 'whisper')):
                 if model.endswith('.pt') and STT_MODELS.get(model.removesuffix('.pt')):
-                    model_element = speech.SpeechToTextModelButton(model.removesuffix('.pt'))
+                    model_element = create_stt_model(model)
                     window.local_model_flowbox.append(model_element)
                     model_element.get_parent().set_focusable(False)
 
@@ -80,9 +147,10 @@ def update_added_model_list(root):
         tts_model_path = get_tts_path()
         if tts_model_path:
             for model in os.listdir(tts_model_path):
-                model_element = speech.TextToSpeechModelButton(os.path.join(tts_model_path, model))
+                model_element = create_tts_model(os.path.join(tts_model_path, model))
                 window.local_model_flowbox.append(model_element)
                 model_element.get_parent().set_focusable(False)
+
 
     # Background Removers
     if importlib.util.find_spec('rembg'):
@@ -90,7 +158,8 @@ def update_added_model_list(root):
         if os.path.isdir(model_dir):
             for model in os.listdir(model_dir):
                 if model.endswith('.onnx') and REMBG_MODELS.get(model.removesuffix('.onnx')):
-                    model_element = image.BackgroundRemoverModelButton(model.removesuffix('.onnx'))
+                    model_path = os.path.join(model_dir, model)
+                    model_element = create_background_remover_model(model_path)
                     window.local_model_flowbox.append(model_element)
                     model_element.get_parent().set_focusable(False)
 

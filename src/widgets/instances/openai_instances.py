@@ -284,9 +284,9 @@ class BaseInstance:
                 self.row.get_parent().unselect_all()
             return {}
 
-    def pull_model(self, model_name:str, callback:callable):
-        SQL.append_online_instance_model_list(self.instance_id, model_name)
-        GLib.timeout_add(5000, lambda: callback({'status': 'success'}) and False)
+    def pull_model(self, model):
+        SQL.append_online_instance_model_list(self.instance_id, model.get_name())
+        GLib.timeout_add(5000, lambda: model.update_progressbar(-1) and False)
 
     def get_local_models(self) -> list:
         local_models = []
@@ -337,7 +337,7 @@ class Gemini(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
-        return []
+        return {}
 
     def get_model_info(self, model_name:str) -> dict:
         try:
@@ -382,6 +382,7 @@ class Together(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
+        return {}
 
 class Venice(BaseInstance):
     instance_type = 'venice'
@@ -422,7 +423,7 @@ class OpenRouter(BaseInstance):
     instance_type_display = 'OpenRouter AI'
     instance_url = 'https://openrouter.ai/api/v1/'
 
-    def get_available_models(self) -> list:
+    def get_available_models(self) -> dict:
         try:
             if not self.available_models or len(self.available_models) == 0:
                 self.available_models = {}
@@ -442,7 +443,7 @@ class OpenRouter(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
-            return []
+            return {}
 
 class Qwen(BaseInstance):
     instance_type = 'qwen'
@@ -456,7 +457,7 @@ class Fireworks(BaseInstance):
     instance_url = 'https://api.fireworks.ai/inference/v1/'
     description = _('Fireworks AI inference platform')
 
-    def get_available_models(self) -> list:
+    def get_available_models(self) -> dict:
         try:
             if not self.available_models or len(self.available_models) == 0:
                 self.available_models = {}
@@ -481,7 +482,7 @@ class Fireworks(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
-            return []
+            return {}
 
 class LambdaLabs(BaseInstance):
     instance_type = 'lambda_labs'
@@ -489,10 +490,10 @@ class LambdaLabs(BaseInstance):
     instance_url = 'https://api.lambdalabs.com/v1/'
     description = _('Lambda Labs cloud inference API')
 
-    def get_available_models(self) -> list:
+    def get_available_models(self) -> dict:
         try:
             if not self.available_models or len(self.available_models) == 0:
-                self.available_models = []
+                self.available_models = {}
                 response = requests.get(
                     'https://api.lambdalabs.com/v1/models',
                     headers={
@@ -514,7 +515,7 @@ class LambdaLabs(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
-            return []
+            return {}
 
 class Cerebras(BaseInstance):
     instance_type = 'cerebras'

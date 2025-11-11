@@ -5,12 +5,12 @@ import logging, os, datetime, sys, glob, icu, base64, hashlib, importlib.util
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
-from .common import get_local_models
+from .added import list_from_selector
 
 logger = logging.getLogger(__name__)
 
 class PullingModelDialog(Adw.Dialog):
-    __gtype_name__ = 'AlpacaPullingModelDialog'
+    __gtype_name__ = 'AlpacaPullingModelDialogOLD'
 
     def __init__(self, model):
         self.model = model
@@ -165,7 +165,7 @@ class PullingModelButton(Gtk.Button):
         return set([])
 
     def show_popup(self, gesture, x, y):
-        if '{}:latest'.format(self.get_name()) not in list(get_local_models(self.get_root())):
+        if '{}:latest'.format(self.get_name()) not in list(list_from_selector()):
             rect = Gdk.Rectangle()
             rect.x, rect.y, = x, y
             actions = [

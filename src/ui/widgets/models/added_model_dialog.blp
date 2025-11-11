@@ -16,6 +16,9 @@ template $AlpacaAddedModelDialog: Adw.Dialog {
         icon-name: "user-trash-symbolic";
         tooltip-text: _("Remove Model");
         clicked => $prompt_remove_model();
+        styles [
+          "error"
+        ]
       }
       [start]
       Gtk.Button create_child_button {
