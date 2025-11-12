@@ -21,6 +21,7 @@ blueprints = files(
   'ui/widgets/models/basic_model_dialog.blp',
   'ui/widgets/models/basic_model_button.blp',
   'ui/widgets/models/pulling_model_dialog.blp',
+  'ui/widgets/models/available_model_dialog.blp',
 )
 
 blueprints = custom_target('blueprints',

@@ -1,9 +1,10 @@
 # common.py
 
 from gi.repository import Gtk, Gio, Adw
-import importlib.util, os
+import importlib.util, os, threading
 from .. import dialog
 from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS
+from ...sql_manager import prettify_model_name, Instance as SQL
 
 available_models_data = {}
 
@@ -41,7 +42,7 @@ class CategoryPill(Adw.Bin):
                 use_markup=True
             ))
         super().__init__(
-            css_classes=['subtitle', 'category_pill'] + self.metadata.get(name_id, {}).get('css', []) + ([] if show_label else ['circle']),
+            css_classes=['subtitle', 'category_pill'] + self.metadata.get(name_id, {}).get('css', []),
             tooltip_text=self.metadata.get(name_id, {}).get('name'),
             child=button_content,
             halign=0 if show_label else 1,

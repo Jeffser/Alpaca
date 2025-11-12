@@ -50,7 +50,8 @@ template $AlpacaBasicModelButton: Gtk.Button {
       }
 
       Gtk.Label subtitle_label {
-        ellipsize: end;
+        wrap: true;
+        wrap-mode: word_char;
         hexpand: true;
         halign: start;
         styles [
@@ -60,6 +61,17 @@ template $AlpacaBasicModelButton: Gtk.Button {
 
       Gtk.ProgressBar progressbar {
         hexpand: true;
+        visible: false;
+      }
+
+      Adw.WrapBox category_container {
+        hexpand: true;
+        vexpand: true;
+        line-spacing: 5;
+        child-spacing: 5;
+        justify: none;
+        halign: start;
+        valign: end;
         visible: false;
       }
     }

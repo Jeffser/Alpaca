@@ -594,6 +594,8 @@ class GlobalFooter(Gtk.Box):
         self.model_selector.set_hexpand(True)
         self.model_selector.set_halign(1)
         self.model_selector.connect('notify::selected', lambda dropdown, gparam: self.tool_selector.model_changed(dropdown))
+        self.action_stack.set_sensitive(False)
+        models.added.model_selector_model.connect('notify::n-items', lambda m, p: self.action_stack.set_sensitive(len(m) > 0))
         self.wrap_box.append(self.model_selector)
 
         self.tool_selector = tools.ToolSelector()

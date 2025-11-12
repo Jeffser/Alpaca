@@ -48,8 +48,6 @@ class AddedModelSelector(Gtk.Stack):
         self.selector.set_factory(factory)
         list(list(self.selector)[1].get_child())[1].set_propagate_natural_width(True)
 
-        #visible=len(model_selector_model) > 0
-
         self.add_named(
             Gtk.Label(
                 label=_('No Models'),
@@ -293,3 +291,4 @@ def empty_model_selector():
 def list_from_selector() -> dict:
     global model_selector_model
     return {m.model.get_name(): m.model for m in list(model_selector_model)}
+

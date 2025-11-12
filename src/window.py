@@ -483,7 +483,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 parent=self,
                 heading=_('Pull Model'),
                 body=_('Please enter the model name following this template: name:tag'),
-                callback=lambda name: threading.Thread(target=Widgets.models.available.pull_model_confirm, args=(name, self.get_current_instance(), self), daemon=True).start(),
+                callback=lambda name: Widgets.models.basic.confirm_pull_model(window=self, model_name=name),
                 entries={'placeholder': 'deepseek-r1:7b'}
             )],
             'reload_added_models': [lambda *_: GLib.idle_add(Widgets.models.update_added_model_list, self)],

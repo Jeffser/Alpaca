@@ -5,8 +5,8 @@ import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, im
 from ...constants import STT_MODELS, TTS_VOICES, REMBG_MODELS, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
-from .added import AddedModelRow, AddedModelDialog, append_to_model_selector
-from .common import get_available_models_data, prompt_existing
+from .added import AddedModelRow, AddedModelDialog, append_to_model_selector, list_from_selector
+from .common import CategoryPill, get_available_models_data, prompt_existing, remove_added_model, prepend_added_model
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/basic_model_dialog.ui')
 class BasicModelDialog(Adw.Dialog):
@@ -44,6 +44,56 @@ class BasicModelDialog(Adw.Dialog):
     def webpage_requested(self, button):
         Gio.AppInfo.launch_default_for_uri(button.get_tooltip_text())
 
+class PullModelButton(Gtk.Button):
+    __gtype_name__ = 'AlpacaPullModelButton'
+
+    def __init__(self, tag_name:str, size:str, downloaded:bool):
+        main_container = Gtk.Box(
+            spacing=10
+        )
+
+        is_cloud = not size or size == 'cloud'
+
+        add_icon = 'cloud-filled-symbolic' if is_cloud else 'folder-download-symbolic'
+        main_container.append(
+            Gtk.Image.new_from_icon_name('check-plain-symbolic' if downloaded else add_icon)
+        )
+        text_container = Gtk.Box(
+            orientation=1,
+            valign=3
+        )
+        main_container.append(text_container)
+        text_container.append(
+            Gtk.Label(
+                label=tag_name.title() or 'Cloud',
+                css_classes=['title'],
+                hexpand=True
+            )
+        )
+        if not is_cloud:
+            text_container.append(
+                Gtk.Label(
+                    label=size,
+                    css_classes=['dimmed', 'caption'],
+                    hexpand=True,
+                    visible=bool(size)
+                )
+            )
+        tooltip_text = ''
+        if downloaded:
+            tooltip_text = _('Already Added')
+        elif not is_cloud:
+            tooltip_text = _("Pull '{}'").format(tag_name.title())
+        else:
+            tooltip_text = _('Add Model')
+
+        super().__init__(
+            child=main_container,
+            tooltip_text=tooltip_text,
+            sensitive=not downloaded,
+            name=tag_name
+        )
+
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/pulling_model_dialog.ui')
 class PullingModelDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaPullingModelDialog'
@@ -72,6 +122,68 @@ class PullingModelDialog(Adw.Dialog):
     def prompt_stop_download(self, button):
         pass
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/available_model_dialog.ui')
+class AvailableModelDialog(Adw.Dialog):
+    __gtype_name__ = 'AlpacaAvailableModelDialog'
+
+    web_button = Gtk.Template.Child()
+    language_button = Gtk.Template.Child()
+    language_flowbox = Gtk.Template.Child()
+    title_label = Gtk.Template.Child()
+    category_container = Gtk.Template.Child()
+    tag_container = Gtk.Template.Child()
+    license_warning = Gtk.Template.Child()
+
+    def __init__(self, model):
+        super().__init__()
+        self.model = model
+
+        self.title_label.set_label(self.model.model_title)
+        for category in set(self.model.data.get('categories', [])):
+            self.category_container.append(CategoryPill(category, True))
+
+        model_list = list_from_selector()
+        if len(self.model.data.get('tags', [])) > 0:
+            for tag in self.model.data.get('tags', []):
+                if tag[0]:
+                    downloaded = '{}:{}'.format(self.model.get_name(), tag[0]) in list(model_list.keys())
+                else:
+                    downloaded = self.model.get_name() in list(model_list.keys())
+
+                button = PullModelButton(tag[0], tag[1], downloaded)
+                if button.get_sensitive():
+                    button.connect('clicked', lambda button: self.pull_model(button.get_name()))
+                self.tag_container.append(button)
+                button.get_parent().set_focusable(False)
+        else:
+            downloaded = self.model.get_name() in list(model_list.keys())
+            button = PullModelButton(_('Added') if downloaded else _('Add'), None, downloaded)
+            button.connect('clicked', lambda button: self.pull_model())
+            self.tag_container.append(button)
+            button.get_parent().set_focusable(False)
+
+        self.license_warning.set_visible(self.model.data.get('url'))
+        self.web_button.set_visible(self.model.data.get('url'))
+        self.web_button.set_tooltip_text(self.model.data.get('url'))
+        self.language_button.set_visible(len(self.model.data.get('languages', [])) > 1)
+        for language in ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in self.model.data.get('languages', [])]:
+            self.language_flowbox.append(CategoryPill(language, True))
+
+    def pull_model(self, tag:str=None):
+        window = self.get_root().get_application().get_main_window(present=False)
+        self.close()
+        if tag is None:
+            tag = ''
+        model_name = '{}:{}'.format(self.model.get_name(), tag).removesuffix(':').strip()
+        confirm_pull_model(
+            window=window,
+            model_name=model_name
+        )
+
+    @Gtk.Template.Callback()
+    def webpage_requested(self, button):
+        Gio.AppInfo.launch_default_for_uri(button.get_tooltip_text())
+
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/basic_model_button.ui')
 class BasicModelButton(Gtk.Button):
     __gtype_name__ = 'AlpacaBasicModelButton'
@@ -80,8 +192,9 @@ class BasicModelButton(Gtk.Button):
     title_label = Gtk.Template.Child()
     subtitle_label = Gtk.Template.Child()
     progressbar = Gtk.Template.Child()
+    category_container = Gtk.Template.Child()
 
-    def __init__(self, model_name:str, subtitle:str=None, icon_name:str=None, instance=None, dialog_callback:callable=None, remove_callback:callable=None):
+    def __init__(self, model_name:str, subtitle:str=None, icon_name:str=None, instance=None, dialog_callback:callable=None, remove_callback:callable=None, data:dict={}):
         super().__init__()
         self.instance = instance
         self.dialog_callback = dialog_callback
@@ -93,12 +206,13 @@ class BasicModelButton(Gtk.Button):
         self.set_sensitive(self.dialog_callback)
         self.pulling_dialog = None # created when needed
         self.progress_lines = [] # for the pulling_dialog
+        self.set_tooltip_text(prettify_model_name(self.get_name(), False))
 
         if self.instance:
             self.data = self.instance.get_model_info(model_name)
             self.row = AddedModelRow(self)
         else:
-            self.data = {}
+            self.data = data
             self.row = None
 
         if subtitle:
@@ -111,6 +225,10 @@ class BasicModelButton(Gtk.Button):
                 self.set_subtitle(tag)
             elif family:
                 self.set_subtitle(family)
+
+        self.category_container.set_visible(len(self.data.get('categories', [])))
+        for category in set(self.data.get('categories', [])):
+            self.category_container.append(CategoryPill(category, False))
 
         if icon_name:
             self.set_image_icon_name(icon_name)
@@ -182,10 +300,12 @@ class BasicModelButton(Gtk.Button):
 
         if prc == -1:
             GLib.idle_add(self.progressbar.set_visible, False)
-            if self.pulling_dialog:
-                GLib.idle_add(self.pulling_dialog.close)
+            if self.pulling_dialog and self.pulling_dialog.get_root():
+                self.pulling_dialog.close()
             if self.row:
                 append_to_model_selector(self.row)
+            if self.instance:
+                self.data = self.instance.get_model_info(self.get_name())
         else:
             GLib.idle_add(self.progressbar.set_visible, True)
 
@@ -240,3 +360,20 @@ class BasicModelButton(Gtk.Button):
             popup.set_parent(self)
             popup.set_pointing_to(rect)
             popup.popup()
+
+def confirm_pull_model(window, model_name:str):
+    if model_name and model_name not in list(list_from_selector()):
+        instance = window.get_current_instance()
+        if instance:
+            model = BasicModelButton(
+                model_name=model_name,
+                instance=instance,
+                dialog_callback=AddedModelDialog,
+                remove_callback=remove_added_model
+            )
+            model.update_progressbar(1)
+            prepend_added_model(window, model)
+            window.model_manager_stack.set_visible_child_name('added_models')
+            window.local_model_stack.set_visible_child_name('content')
+            threading.Thread(target=instance.pull_model, args=(model,)).start()
+
