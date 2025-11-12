@@ -33,7 +33,7 @@ commands = {
     ],
     'bash': [
         'flatpak-spawn --host \'bash -c "{script}"\''
-    ] if IN_FLATPAK else ["script'"]
+    ] if IN_FLATPAK else ["script"]
 }
 
 if sys.platform != 'win32':
