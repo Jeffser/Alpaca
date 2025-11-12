@@ -232,7 +232,7 @@ class BasicModelButton(Gtk.Button):
 
         if icon_name:
             self.set_image_icon_name(icon_name)
-        else:
+        elif self.instance:
             self.update_profile_picture()
 
     def get_search_string(self) -> str:
