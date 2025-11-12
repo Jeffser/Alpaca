@@ -3,7 +3,6 @@ moduledir = get_option('prefix') / get_option('datadir') / meson.project_name() 
 models = [
   '__init__.py',
   'added.py',
-  'pulling.py',
   'creator.py',
   'common.py',
   'basic.py',
