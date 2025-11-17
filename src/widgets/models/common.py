@@ -3,52 +3,50 @@
 from gi.repository import Gtk, Gio, Adw
 import importlib.util, os, threading
 from .. import dialog
-from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS
+from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS, MODEL_CATEGORIES_METADATA
 from ...sql_manager import prettify_model_name, Instance as SQL
 
 available_models_data = {}
 
-class CategoryPill(Adw.Bin):
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/info_box.ui')
+class InfoBox(Gtk.Box):
+    __gtype_name__ = 'AlpacaInformationBox'
+
+    title_label = Gtk.Template.Child()
+    description_label = Gtk.Template.Child()
+
+    def __init__(self, title:str, description:str, single_line_description:bool):
+        super().__init__(
+            name=title
+        )
+        self.title_label.set_label(title)
+        self.title_label.set_tooltip_text(title)
+        self.description_label.set_label(description)
+        self.description_label.set_tooltip_text(description)
+        self.description_label.set_wrap(not single_line_description)
+
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/category_pill.ui')
+class CategoryPill(Gtk.Box):
     __gtype_name__ = 'AlpacaCategoryPill'
 
-    metadata = {
-        'multilingual': {'name': _('Multilingual'), 'css': ['accent'], 'icon': 'language-symbolic'},
-        'code': {'name': _('Code'), 'css': ['accent'], 'icon': 'code-symbolic'},
-        'math': {'name': _('Math'), 'css': ['accent'], 'icon': 'accessories-calculator-symbolic'},
-        'vision': {'name': _('Vision'), 'css': ['accent'], 'icon': 'eye-open-negative-filled-symbolic'},
-        'embedding': {'name': _('Embedding'), 'css': ['error'], 'icon': 'brain-augemnted-symbolic'},
-        'tools': {'name': _('Tools'), 'css': ['accent'], 'icon': 'wrench-wide-symbolic'},
-        'reasoning': {'name': _('Reasoning'), 'css': ['accent'], 'icon': 'brain-augemnted-symbolic'},
-        'cloud': {'name': _('Cloud'), 'css': ['accent'], 'icon': 'cloud-filled-symbolic'},
-        'small': {'name': _('Small'), 'css': ['success'], 'icon': 'leaf-symbolic'},
-        'medium': {'name': _('Medium'), 'css': ['brown'], 'icon': 'sprout-symbolic'},
-        'big': {'name': _('Big'), 'css': ['warning'], 'icon': 'tree-circle-symbolic'},
-        'huge': {'name': _('Huge'), 'css': ['error'], 'icon': 'weight-symbolic'},
-        'language': {'css': [], 'icon': 'language-symbolic'}
-    }
+    image = Gtk.Template.Child()
+    label = Gtk.Template.Child()
 
-    def __init__(self, name_id:str, show_label:bool):
-        if 'language:' in name_id:
-            self.metadata['language']['name'] = name_id.split(':')[1]
-            name_id = 'language'
-        button_content = Gtk.Box(
-            spacing=5,
-            halign=3
-        )
-        button_content.append(Gtk.Image.new_from_icon_name(self.metadata.get(name_id, {}).get('icon', 'language-symbolic')))
-        if show_label:
-            button_content.append(Gtk.Label(
-                label='<span weight="bold">{}</span>'.format(self.metadata.get(name_id, {}).get('name')),
-                use_markup=True
-            ))
+    def __init__(self, category_id:str, show_label:bool):
+        category_name = MODEL_CATEGORIES_METADATA.get(category_id, {}).get('name')
+        category_icon = MODEL_CATEGORIES_METADATA.get(category_id, {}).get('icon', 'language-symbolic')
         super().__init__(
-            css_classes=['subtitle', 'category_pill'] + self.metadata.get(name_id, {}).get('css', []),
-            tooltip_text=self.metadata.get(name_id, {}).get('name'),
-            child=button_content,
-            halign=0 if show_label else 1,
-            focusable=False,
-            hexpand=True
+            tooltip_text=category_name
         )
+        if category_id.startswith('language:'):
+            category_name = category_id.split(':')[1]
+
+        self.image.set_from_icon_name(category_icon)
+        self.label.set_label('<span weight="bold">{}</span>'.format(category_name))
+        self.label.set_visible(show_label)
+
+        for css in MODEL_CATEGORIES_METADATA.get(category_id, {}).get('css', []):
+            self.add_css_class(css)
 
 def get_available_models_data() -> list:
     global available_models_data

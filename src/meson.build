@@ -23,6 +23,8 @@ blueprints = files(
   'ui/widgets/models/pulling_dialog.blp',
   'ui/widgets/models/available_dialog.blp',
   'ui/widgets/models/creator_dialog.blp',
+  'ui/widgets/models/info_box.blp',
+  'ui/widgets/models/category_pill.blp',
 )
 
 blueprints = custom_target('blueprints',

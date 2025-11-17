@@ -1,0 +1,21 @@
+using Gtk 4.0;
+
+template $AlpacaInformationBox: Gtk.Box {
+  orientation: vertical;
+  spacing: 5;
+  Gtk.Label title_label {
+    hexpand: true;
+    ellipsize: end;
+    halign: start;
+    styles [
+      "subtitle", "caption", "dim-label"
+    ]
+  }
+  Gtk.Label description_label {
+    hexpand: true;
+    wrap: true;
+    wrap-mode: word_char;
+    halign: start;
+    ellipsize: end;
+  }
+}

@@ -5,7 +5,7 @@ import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, im
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
-from .common import CategoryPill, get_available_models_data
+from .common import CategoryPill, get_available_models_data, InfoBox
 
 logger = logging.getLogger(__name__)
 model_selector_model = None
@@ -75,40 +75,6 @@ class AddedModelSelector(Gtk.Stack):
 
     def get_selected_item(self):
         return self.selector.get_selected_item()
-
-class InfoBox(Gtk.Box):
-    __gtype_name__ = 'AlpacaInformationBox'
-
-    def __init__(self, title:str, description:str, single_line_description:bool):
-        super().__init__(
-            orientation=1,
-            spacing=5,
-            name=title
-        )
-        self.append(Gtk.Label(
-            label=title,
-            css_classes=['subtitle', 'caption', 'dim-label'],
-            hexpand=True,
-            ellipsize=3,
-            tooltip_text=title,
-            halign=1
-        ))
-        if single_line_description:
-            self.append(Gtk.Label(
-                label=description,
-                hexpand=True,
-                ellipsize=3,
-                tooltip_text=description,
-                halign=1
-            ))
-        else:
-            self.append(Gtk.Label(
-                label=description,
-                hexpand=True,
-                wrap=True,
-                tooltip_text=description,
-                halign=1
-            ))
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_dialog.ui')
 class AddedModelDialog(Adw.Dialog):

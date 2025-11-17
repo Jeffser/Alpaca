@@ -5,7 +5,7 @@ from .common import set_available_models_data, get_available_models_data, remove
 from ...sql_manager import Instance as SQL
 
 import os, importlib.util
-from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS
+from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS, MODEL_CATEGORIES_METADATA
 
 def update_available_model_list(root):
     window = root.get_application().get_main_window(present=False)
@@ -19,7 +19,7 @@ def update_available_model_list(root):
         spacing=5
     )
     if len(available_models_data) > 0:
-        for name, category in common.CategoryPill.metadata.items():
+        for name, category in MODEL_CATEGORIES_METADATA.items():
             if category.get('name') and (name != 'embedding' or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1'):
                 pill_container = Gtk.Box(
                     spacing=5,

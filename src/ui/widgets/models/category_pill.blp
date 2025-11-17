@@ -1,0 +1,16 @@
+using Gtk 4.0;
+
+template $AlpacaCategoryPill: Gtk.Box {
+  hexpand: true;
+  spacing: 5;
+  styles [
+    "subtitle",
+    "category_pill"
+  ]
+  Gtk.Image image {}
+  Gtk.Label label {
+    use-markup: true;
+    halign: center;
+    hexpand: true;
+  }
+}
