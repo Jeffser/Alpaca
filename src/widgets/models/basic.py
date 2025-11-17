@@ -8,7 +8,7 @@ from .. import dialog, attachments
 from .added import AddedModelRow, AddedModelDialog, append_to_model_selector, list_from_selector
 from .common import CategoryPill, get_available_models_data, prompt_existing, remove_added_model, prepend_added_model
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/basic_model_dialog.ui')
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/basic_dialog.ui')
 class BasicModelDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaBasicModelDialog'
 
@@ -94,7 +94,7 @@ class PullModelButton(Gtk.Button):
             name=tag_name
         )
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/pulling_model_dialog.ui')
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/pulling_dialog.ui')
 class PullingModelDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaPullingModelDialog'
 
@@ -122,7 +122,7 @@ class PullingModelDialog(Adw.Dialog):
     def prompt_stop_download(self, button):
         pass
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/available_model_dialog.ui')
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/available_dialog.ui')
 class AvailableModelDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaAvailableModelDialog'
 
@@ -184,7 +184,7 @@ class AvailableModelDialog(Adw.Dialog):
     def webpage_requested(self, button):
         Gio.AppInfo.launch_default_for_uri(button.get_tooltip_text())
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/basic_model_button.ui')
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/basic_button.ui')
 class BasicModelButton(Gtk.Button):
     __gtype_name__ = 'AlpacaBasicModelButton'
 

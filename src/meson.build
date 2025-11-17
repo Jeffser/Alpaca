@@ -17,11 +17,11 @@ blueprints = files(
   'ui/widgets/chat/chat.blp',
   'ui/widgets/chat/folder_row.blp',
   'ui/widgets/chat/chat_row.blp',
-  'ui/widgets/models/added_model_dialog.blp',
-  'ui/widgets/models/basic_model_dialog.blp',
-  'ui/widgets/models/basic_model_button.blp',
-  'ui/widgets/models/pulling_model_dialog.blp',
-  'ui/widgets/models/available_model_dialog.blp',
+  'ui/widgets/models/added_dialog.blp',
+  'ui/widgets/models/basic_dialog.blp',
+  'ui/widgets/models/basic_button.blp',
+  'ui/widgets/models/pulling_dialog.blp',
+  'ui/widgets/models/available_dialog.blp',
   'ui/widgets/models/creator_dialog.blp',
 )
 

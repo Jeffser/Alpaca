@@ -110,7 +110,7 @@ class InfoBox(Gtk.Box):
                 halign=1
             ))
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_model_dialog.ui')
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_dialog.ui')
 class AddedModelDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaAddedModelDialog'
 
