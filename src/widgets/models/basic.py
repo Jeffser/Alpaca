@@ -276,7 +276,7 @@ class BasicModelButton(Gtk.Button):
         dialog = self.get_root().get_visible_dialog()
         if dialog and isinstance(dialog, AddedModelDialog):
             dialog.close()
-        prompt_existing(self.get_root(), self.instance, self.model_title)
+        prompt_existing(self.get_root(), self.instance, self.row)
 
     def prompt_remove_model(self):
         dialog.simple(

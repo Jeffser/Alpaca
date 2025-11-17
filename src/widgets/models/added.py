@@ -5,7 +5,7 @@ import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, im
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
-from .common import CategoryPill, get_available_models_data, prompt_existing
+from .common import CategoryPill, get_available_models_data
 
 logger = logging.getLogger(__name__)
 model_selector_model = None
@@ -62,6 +62,9 @@ class AddedModelSelector(Gtk.Stack):
             self.selector,
             'selector'
         )
+
+    def get_model(self):
+        return self.selector.get_model()
 
     def n_items_changed(self, model, gparam):
         self.selector.set_enable_search(len(model) > 10)
@@ -292,3 +295,6 @@ def list_from_selector() -> dict:
     global model_selector_model
     return {m.model.get_name(): m.model for m in list(model_selector_model)}
 
+def get_model():
+    global model_selector_model
+    return model_selector_model

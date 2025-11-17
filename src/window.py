@@ -200,7 +200,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             logger.info("Closing app...")
             is_chat_busy = any([chat_row.chat.busy for chat_row in list(self.get_chat_list_page().chat_list_box)])
-            is_model_downloading = any([el for el in list(self.local_model_flowbox) if isinstance(el.get_child(), Widgets.models.pulling.PullingModelButton)])
+            is_model_downloading = any([el for el in list(self.local_model_flowbox) if el.get_child().progressbar.get_visible()])
             if is_chat_busy or is_model_downloading:
                 options = {
                     _('Cancel'): {'default': True},

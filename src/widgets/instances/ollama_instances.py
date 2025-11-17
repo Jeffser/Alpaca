@@ -362,36 +362,33 @@ class BaseInstance:
     def pull_model(self, model):
         if not self.process:
             self.start()
-        #try:
-        response = requests.post(
-            '{}/api/pull'.format(self.properties.get('url')),
-            headers={
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-            },
-            data=json.dumps({
-                'name': model.get_name(),
-                'stream': True
-            }),
-            stream=True
-        )
-        if response.status_code == 200:
-            for line in response.iter_lines():
-                if line:
-                    data = json.loads(line.decode("utf-8"))
-                    print(data)
-                    if data.get('status'):
-                        model.append_progress_line(data.get('status'))
-                    if data.get('total') and data.get('completed'):
-                        model.update_progressbar(data.get('completed') / data.get('total'))
-                    if data.get('status') == 'success':
-                        model.update_progressbar(-1)
-                        return
-        #except Exception as e:
-            #callback({'error': e})
-
-            ##TODO delete model if error
-            #logger.error(e)
+        try:
+            response = requests.post(
+                '{}/api/pull'.format(self.properties.get('url')),
+                headers={
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
+                },
+                data=json.dumps({
+                    'name': model.get_name(),
+                    'stream': True
+                }),
+                stream=True
+            )
+            if response.status_code == 200:
+                for line in response.iter_lines():
+                    if line:
+                        data = json.loads(line.decode("utf-8"))
+                        if data.get('status'):
+                            model.append_progress_line(data.get('status'))
+                        if data.get('total') and data.get('completed'):
+                            model.update_progressbar(data.get('completed') / data.get('total'))
+                        if data.get('status') == 'success':
+                            model.update_progressbar(-1)
+                            return
+        except Exception as e:
+            model.get_parent().get_parent().remove(model.get_parent())
+            logger.error(e)
 
     def gguf_exists(self, sha256:str) -> bool:
         if not self.process:
@@ -418,7 +415,7 @@ class BaseInstance:
                 }
             )
 
-    def create_model(self, data:dict, callback:callable):
+    def create_model(self, data:dict, model):
         if not self.process:
             self.start()
         try:
@@ -434,9 +431,16 @@ class BaseInstance:
             if response.status_code == 200:
                 for line in response.iter_lines():
                     if line:
-                        callback(json.loads(line.decode("utf-8")))
+                        data = json.loads(line.decode("utf-8"))
+                        if data.get('status'):
+                            model.append_progress_line(data.get('status'))
+                        if data.get('total') and data.get('completed'):
+                            model.update_progressbar(data.get('completed') / data.get('total'))
+                        if data.get('status') == 'success':
+                            model.update_progressbar(-1)
+                            return
         except Exception as e:
-            callback({'error': e})
+            model.get_parent().get_parent().remove(model.get_parent())
             logger.error(e)
 
     def delete_model(self, model_name:str):

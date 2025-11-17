@@ -78,7 +78,7 @@ def prompt_gguf(root, instance=None):
             file_path = file.get_path()
         except Exception as e:
             return
-        creator.ModelCreatorDialog(instance, file_path, True).present(root)
+        creator.ModelCreatorDialog(instance, None, file_path).present(root)
 
     file_filter = Gtk.FileFilter()
     file_filter.add_suffix('gguf')
@@ -88,11 +88,11 @@ def prompt_gguf(root, instance=None):
         callback = result
     )
 
-def prompt_existing(root, instance=None, model_name:str=None):
+def prompt_existing(root, instance=None, row=None):
     creator = importlib.import_module('alpaca.widgets.models.creator')
     if not instance:
         instance = root.get_application().get_main_window(present=False).get_current_instance()
-    creator.ModelCreatorDialog(instance, model_name, False).present(root)
+    creator.ModelCreatorDialog(instance, row, None).present(root)
 
 # Callbacks for removing models
 def remove_added_model(model):

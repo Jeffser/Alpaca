@@ -1,6 +1,6 @@
 # __init__.py
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
-from . import added, available, pulling, common, creator, basic
+from . import added, common, creator, basic
 from .common import set_available_models_data, get_available_models_data, remove_added_model, remove_stt_model, remove_tts_model, remove_background_remover_model
 from ...sql_manager import Instance as SQL
 
