@@ -1,0 +1,18 @@
+using Gtk 4.0;
+
+template $AlpacaAddedModelSelector: Gtk.Stack {
+  transition-type: crossfade;
+
+  Gtk.StackPage {
+    name: "no-models";
+    child: Gtk.Label {
+      label: _("No Models");
+      wrap: true;
+      wrap-mode: word_char;
+    };
+  }
+  Gtk.StackPage {
+    name: "selector";
+    child: Gtk.DropDown selector {};
+  }
+}

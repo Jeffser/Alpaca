@@ -23,8 +23,11 @@ class AddedModelRow(GObject.Object):
     def __str__(self):
         return prettify_model_name(self.model.get_name())
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_selector.ui')
 class AddedModelSelector(Gtk.Stack):
     __gtype_name__ = 'AlpacaAddedModelSelector'
+
+    selector = Gtk.Template.Child()
 
     def __init__(self):
         global model_selector_model
@@ -32,36 +35,16 @@ class AddedModelSelector(Gtk.Stack):
             model_selector_model = Gio.ListStore.new(AddedModelRow)
         model_selector_model.connect('notify::n-items', self.n_items_changed)
 
-        super().__init__(
-            transition_type=1
-        )
+        super().__init__()
 
-        self.selector = Gtk.DropDown(
-            model=model_selector_model
-        )
+        self.selector.set_model(model_selector_model)
         list(self.selector)[0].add_css_class('flat')
-
         self.selector.set_expression(Gtk.PropertyExpression.new(AddedModelRow, None, "name"))
         factory = Gtk.SignalListItemFactory()
         factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
         factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
         self.selector.set_factory(factory)
         list(list(self.selector)[1].get_child())[1].set_propagate_natural_width(True)
-
-        self.add_named(
-            Gtk.Label(
-                label=_('No Models'),
-                css_classes=['dim-label'],
-                wrap=True,
-                wrap_mode=2
-            ),
-            'no-models'
-        )
-
-        self.add_named(
-            self.selector,
-            'selector'
-        )
 
     def get_model(self):
         return self.selector.get_model()
