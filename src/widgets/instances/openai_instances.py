@@ -58,6 +58,7 @@ class BaseInstance:
                 bot_message.get_root().global_footer.toggle_action_button(False)
             except:
                 pass
+
             chat_element.busy = True
             chat_element.set_visible_child_name('content')
 
