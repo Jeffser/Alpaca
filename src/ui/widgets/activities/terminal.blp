@@ -1,0 +1,27 @@
+using Gtk 4.0;
+using Vte 3.91;
+
+template $AlpacaTerminal: Vte.Terminal {
+  styles [
+    "p10",
+    "black_background",
+    "monospace"
+  ]
+  Gtk.EventControllerKey {
+    key-pressed => $on_key_press();
+  }
+}
+
+Gtk.Button dir_button {
+  tooltip-text: _("Open Environment Directory");
+  icon-name: "document-open-symbolic";
+  sensitive: false;
+  clicked => $open_directory();
+}
+
+Gtk.Button reload_button {
+  tooltip-text: _("Reload Script");
+  icon-name: "update-symbolic";
+  sensitive: false;
+  clicked => $on_reload();
+}

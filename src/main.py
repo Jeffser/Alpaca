@@ -28,6 +28,7 @@ gi.require_version('Spelling', '1')
 gi.require_version('Gst', '1.0')
 gi.require_version('Xdp', '1.0')
 gi.require_version("WebKit", "6.0")
+gi.require_version('Vte', '3.91')
 from gi.repository import Gtk, Gio, Adw, GLib, GtkSource
 GtkSource.init()
 

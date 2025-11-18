@@ -1,0 +1,30 @@
+using Gtk 4.0;
+using GtkSource 5;
+
+template $AlpacaCodeEditor: Gtk.ScrolledWindow {
+  propagate-natural-width: true;
+  propagate-natural-height: true;
+  child: GtkSource.View view {
+    auto-indent: true;
+    indent-width: 4;
+    show-line-numbers: true;
+    editable: false;
+    buffer: GtkSource.Buffer buffer {};
+    styles [
+      "monospace",
+      "p10-vertical"
+    ]
+  };
+}
+
+Gtk.Button save_button {
+  tooltip-text: _("Save Script");
+  icon-name: "check-plain-symbolic";
+  clicked => $save();
+}
+
+Gtk.Button reload_button {
+  tooltip-text: _("Undo Changes");
+  icon-name: "update-symbolic";
+  clicked => $on_reload();
+}

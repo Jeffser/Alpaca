@@ -1,0 +1,35 @@
+using Gtk 4.0;
+
+template $AlpacaCodeRunner: Gtk.Stack {
+  transition-type: slide_left_right;
+
+}
+
+Gtk.Stack button_stack {
+  transition-type: crossfade;
+  overflow: hidden;
+
+  Gtk.StackPage {
+    name: "terminal";
+    child: Gtk.Box {
+      styles [
+        "linked"
+      ]
+    };
+  }
+
+  Gtk.StackPage {
+    name: "editor";
+    child: Gtk.Box {
+      styles [
+        "linked"
+      ]
+    };
+  }
+}
+
+Gtk.ToggleButton view_button {
+  tooltip-text: _("Edit Code");
+  icon-name: "document-edit-symbolic";
+  toggled => $change_view();
+}

@@ -1,0 +1,22 @@
+using Gtk 4.0;
+using GtkSource 5;
+
+template $AlpacaAttachmentCreator: Gtk.ScrolledWindow {
+    propagate-natural-width: true;
+    propagate-natural-height: true;
+    child: GtkSource.View {
+      auto-indent: true;
+      indent-width: 4;
+      show-line-numbers: true;
+      buffer: GtkSource.Buffer buffer {};
+    };
+    styles [
+      "monospace"
+    ]
+}
+
+Gtk.Button save_button {
+  tooltip-text: _("Save Attachment");
+  icon-name: "check-plain-symbolic";
+  clicked => $save_requested();
+}
