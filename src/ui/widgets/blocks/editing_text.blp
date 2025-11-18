@@ -1,0 +1,43 @@
+using Gtk 4.0;
+
+template $AlpacaEditingText: Gtk.Box {
+  orientation: vertical;
+  overflow: hidden;
+  visible: false;
+  spacing: 5;
+
+  Gtk.Box {
+    halign: start;
+    spacing: 5;
+    Gtk.Button {
+      icon-name: "cross-large-symbolic";
+      tooltip-text: _("Cancel");
+      clicked => $cancel_edit();
+      styles [
+        "flat"
+      ]
+    }
+    Gtk.Button {
+      icon-name: "check-plain-symbolic";
+      tooltip-text: _("Save");
+      clicked => $save_edit();
+      styles [
+        "flat",
+        "accent"
+      ]
+    }
+  }
+
+  Gtk.TextView textview {
+    wrap-mode: word_char;
+    Gtk.EventControllerKey {
+      key-pressed => $enter_key_handler();
+    }
+    styles [
+      "osd",
+      "p10",
+      "r10",
+      "lh"
+    ]
+  }
+}

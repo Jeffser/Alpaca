@@ -237,7 +237,7 @@ class Message(Gtk.Box):
         self.content_container.append(self.attachment_container)
         self.block_container = BlockContainer(message=self)
         self.content_container.append(self.block_container)
-        self.main_stack.add_named(blocks.EditingText(self), 'editing')
+        self.main_stack.add_named(blocks.EditingText(), 'editing')
         self.update_profile_picture()
 
     def get_content(self) -> str:
@@ -617,6 +617,7 @@ class GlobalFooter(Gtk.Box):
         current_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
         current_text = current_text.replace(text, '')
         buffer.set_text(current_text, len(current_text.encode('utf-8')))
+
 
 
 

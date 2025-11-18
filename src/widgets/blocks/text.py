@@ -7,6 +7,7 @@ import gi
 from gi.repository import GLib, Gtk, Gdk
 
 import re, unicodedata
+from ..message import Message
 
 def markdown_to_pango(text:str) -> str:
     """Converts Markdown text to a limited version of PangoMarkup"""
@@ -25,29 +26,16 @@ def markdown_to_pango(text:str) -> str:
     text = re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\2">\1</a>', text, flags=re.MULTILINE)
     return text
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/blocks/generating_text.ui')
 class GeneratingText(Gtk.Overlay):
     __gtype_name__ = 'AlpacaGeneratingText'
 
+    textview = Gtk.Template.Child()
+    buffer = Gtk.Template.Child()
+
     def __init__(self, content:str=None):
-        textview = Gtk.TextView(
-            hexpand=True,
-            halign=0,
-            editable=False,
-            cursor_visible=False,
-            wrap_mode=2,
-            css_classes=['flat', 'dim-label', 'p0', 'lh']
-        )
-        self.buffer = textview.get_buffer()
-        super().__init__(
-            child=textview,
-            css_classes=['p0']
-        )
-        self.add_overlay(Gtk.Box(
-            valign=2,
-            halign=0,
-            height_request=25,
-            css_classes=['generating_text_shadow', 'p0']
-        ))
+        super().__init__()
+        self.textview.remove_css_class('view')
         if content:
             self.set_content(content)
 
@@ -90,6 +78,44 @@ class GeneratingText(Gtk.Overlay):
             return '\n'.join(lines)
         return ''
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/blocks/editing_text.ui')
+class EditingText(Gtk.Box):
+    __gtype_name__ = 'AlpacaEditingText'
+
+    textview = Gtk.Template.Child()
+
+    def set_content(self, content:str):
+        self.textview.get_buffer().set_text(content, len(content.encode('utf8')))
+
+    @Gtk.Template.Callback()
+    def enter_key_handler(self, controller, keyval, keycode, state):
+        if keyval==Gdk.KEY_Return and state & Gdk.ModifierType.CONTROL_MASK:
+            self.save_edit()
+
+    @Gtk.Template.Callback()
+    def cancel_edit(self, button=None):
+        message = self.get_ancestor(Message)
+        message.set_halign(2 if message.mode == 0 else 0)
+        self.set_visible(False)
+        message.popup.change_status(True)
+        message.main_stack.set_visible_child_name('content')
+
+    @Gtk.Template.Callback()
+    def save_edit(self, button=None):
+        message = self.get_ancestor(Message)
+        buffer = self.textview.get_buffer()
+        GLib.idle_add(message.block_container.set_content, buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
+        message.set_halign(2 if message.mode == 0 else 0)
+        self.set_visible(False)
+        message.popup.change_status(True)
+        message.main_stack.set_visible_child_name('content')
+        GLib.idle_add(message.save)
+        response_index = list(message.get_parent()).index(message) + 1
+        if len(list(message.get_parent())) > response_index:
+            next_message = list(message.get_parent())[response_index]
+            if next_message.mode == 1 and next_message.get_root().settings.get_value('regenerate-after-edit').unpack():
+                next_message.popup.regenerate_message()
+
 class Text(Gtk.Label):
     __gtype_name__ = 'AlpacaText'
 
@@ -129,75 +155,4 @@ class Text(Gtk.Label):
     def set_content(self, value:str) -> None:
         self.raw_text = value
         self.set_markup(markdown_to_pango(self.raw_text))
-
-class EditingText(Gtk.Box):
-    __gtype_name__ = 'AlpacaEditingText'
-
-    def __init__(self, message):
-        self.message = message
-        super().__init__(
-            orientation=1,
-            overflow=1,
-            visible=False,
-            spacing=5
-        )
-        header_container = Gtk.Box(
-            halign=1,
-            spacing=5
-        )
-        cancel_button = Gtk.Button(
-            icon_name="cross-large-symbolic",
-            css_classes=["flat"],
-            tooltip_text=_("Cancel")
-        )
-        cancel_button.connect("clicked", lambda *_: self.cancel_edit())
-        header_container.append(cancel_button)
-
-
-        save_button = Gtk.Button(
-            icon_name="check-plain-symbolic",
-            css_classes=["flat", "accent"],
-            tooltip_text=_("Save")
-        )
-        save_button.connect("clicked", lambda *_: self.save_edit())
-        header_container.append(save_button)
-        self.append(header_container)
-
-        self.textview = Gtk.TextView(
-            halign=0,
-            css_classes=["osd", "p10", "r10", 'lh'],
-            wrap_mode=2
-        )
-        self.append(self.textview)
-
-        enter_key_controller = Gtk.EventControllerKey.new()
-        enter_key_controller.connect("key-pressed", self.enter_key_handler)
-        self.textview.add_controller(enter_key_controller)
-
-    def enter_key_handler(self, controller, keyval, keycode, state):
-        if keyval==Gdk.KEY_Return and state & Gdk.ModifierType.CONTROL_MASK:
-            self.save_edit()
-
-    def set_content(self, content:str):
-        self.textview.get_buffer().set_text(content, len(content.encode('utf8')))
-
-    def cancel_edit(self):
-        self.message.set_halign(2 if self.message.mode == 0 else 0)
-        self.set_visible(False)
-        self.message.popup.change_status(True)
-        self.message.main_stack.set_visible_child_name('content')
-
-    def save_edit(self):
-        buffer = self.textview.get_buffer()
-        GLib.idle_add(self.message.block_container.set_content, buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
-        self.message.set_halign(2 if self.message.mode == 0 else 0)
-        self.set_visible(False)
-        self.message.popup.change_status(True)
-        self.message.main_stack.set_visible_child_name('content')
-        GLib.idle_add(self.message.save)
-        response_index = list(self.message.get_parent()).index(self.message) + 1
-        if len(list(self.message.get_parent())) > response_index:
-            next_message = list(self.message.get_parent())[response_index]
-            if next_message.mode == 1 and next_message.get_root().settings.get_value('regenerate-after-edit').unpack():
-                next_message.popup.regenerate_message()
 
