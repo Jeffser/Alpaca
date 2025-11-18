@@ -39,6 +39,7 @@ blueprints = files(
   'ui/widgets/activities/attachment_creator.blp',
   'ui/widgets/activities/terminal.blp',
   'ui/widgets/activities/code_runner.blp',
+  'ui/widgets/activities/transcriber.blp',
 )
 
 blueprints = custom_target('blueprints',

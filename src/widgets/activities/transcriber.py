@@ -8,100 +8,26 @@ import base64, os, threading, datetime, logging
 
 logger = logging.getLogger(__name__)
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/activities/transcriber.ui')
 class Transcriber(Gtk.Stack):
     __gtype_name__ = 'AlpacaTranscriber'
 
+    result_textview = Gtk.Template.Child()
+    attachment_button = Gtk.Template.Child()
+
     def __init__(self, audio_file:Gio.File=None):
+        super().__init__()
+        self.pulling_model = None
 
-        super().__init__(
-            transition_type=1
-        )
-
-        button_container = Gtk.Box(
-            halign=3,
-            orientation=1,
-            spacing=10
-        )
-        select_mic_button = Gtk.Button(
-            child=Adw.ButtonContent(
-                label=_('Microphone'),
-                icon_name='audio-input-microphone-symbolic'
-            ),
-            tooltip_text=_('Microphone'),
-            css_classes=['pill']
-        )
-        select_mic_button.connect('clicked', lambda btn: self.use_microphone())
-        button_container.append(select_mic_button)
-        select_file_button = Gtk.Button(
-            child=Adw.ButtonContent(
-                label=_('File'),
-                icon_name='chain-link-loose-symbolic'
-            ),
-            tooltip_text=_('File'),
-            css_classes=['pill']
-        )
-        select_file_button.connect('clicked', lambda btn: self.use_file())
-        button_container.append(select_file_button)
-
-        # MAIN
-        self.add_named(
-            Adw.StatusPage(
-                title=_('Transcriber'),
-                description=_('Transcribe audio files or your voice.'),
-                icon_name='music-note-single-symbolic',
-                child=button_container
-            ),
-            'main'
-        )
-
-        # LOADING FILE
-        self.add_named(
-            Adw.StatusPage(
-                title=_('Transcribing Audio'),
-                child=Adw.Spinner()
-            ),
-            'loading_file'
-        )
-
-        # MICROPHONE / RESULTS
-        self.result_textview = Gtk.TextView(
-            wrap_mode=3,
-            left_margin=10,
-            right_margin=10,
-            top_margin=10,
-            bottom_margin=10
-        )
-        result_scroller = Gtk.ScrolledWindow(
-            propagate_natural_height=True,
-            overflow=1,
-            css_classes=['card', 'undershoot-bottom'],
-            child=self.result_textview,
-            margin_top=10,
-            margin_bottom=10,
-            margin_start=10,
-            margin_end=10,
-            valign=3
-        )
         self.microphone_button = voice.MicrophoneButton(
             self.result_textview
         )
         self.microphone_button.set_visible(False)
 
-        self.add_named(
-            result_scroller,
-            'results'
-        )
-
         self.attachment_name = _('Transcription')
         if audio_file:
             self.attachment_name = os.path.basename(audio_file.get_path())
-        self.attachment_button = Gtk.Button(
-            icon_name='chain-link-loose-symbolic',
-            tooltip_text=_('Attach'),
-            css_classes=['br0', 'flat'],
-            visible=False
-        )
-        self.attachment_button.connect("clicked", lambda button: self.attach_results())
+            GLib.idle_add(self.on_attachment, audio_file)
 
         # Activity
         self.buttons = {
@@ -112,12 +38,8 @@ class Transcriber(Gtk.Stack):
         self.title = _('Transcriber')
         self.activity_icon = 'music-note-single-symbolic'
 
-        if audio_file:
-            self.connect('realize', lambda *_: self.use_file(audio_file))
-
-        self.pulling_model = None
-
-    def attach_results(self):
+    @Gtk.Template.Callback()
+    def attach_results(self, button=None):
         buffer = self.result_textview.get_buffer()
         result_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
 
@@ -127,7 +49,11 @@ class Transcriber(Gtk.Stack):
             file_type='audio',
             file_content=result_text
         )
-        self.get_root().get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
+        root = self.get_root()
+        if root.get_name() == 'AlpacaQuickAsk':
+            root.global_footer.attachment_container.add_attachment(attachment)
+        else:
+            root.get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
 
     def prepare_download(self, model_name:str, audio_file:Gio.File):
         self.pulling_model = models.create_stt_model(model_name)
@@ -138,6 +64,8 @@ class Transcriber(Gtk.Stack):
     def on_attachment(self, audio_file:Gio.File):
         if not audio_file:
             return
+        self.microphone_button.set_visible(False)
+        self.attachment_button.set_visible(False)
         self.attachment_name = os.path.basename(audio_file.get_path())
         self.get_child_by_name('loading_file').set_description(self.attachment_name)
 
@@ -154,42 +82,38 @@ class Transcriber(Gtk.Stack):
                 button_name = _("Download Model")
             )
 
-    def use_microphone(self):
+    @Gtk.Template.Callback()
+    def use_microphone(self, button=None):
         self.microphone_button.set_visible(True)
         self.attachment_button.set_visible(True)
         self.set_visible_child_name('results')
         GLib.idle_add(self.microphone_button.button.set_active, True)
 
-    def use_file(self, audio_file:Gio.File=None):
-        self.microphone_button.set_visible(False)
-        self.attachment_button.set_visible(False)
+    @Gtk.Template.Callback()
+    def use_file(self, button=None):
+        ff = Gtk.FileFilter()
+        ff.set_name(_('Audio and video files'))
+        file_filters = [ff]
 
-        if audio_file:
-            self.on_attachment(audio_file)
-        else:
+        mimes = []
+        audio_mimes = ('wav', 'mpeg', 'flac', 'x-flac', 'ogg', 'mp4', 'x-m4a', 'aac', 'aiff', 'x-aiff', 'opus', 'webm')
+        for m in audio_mimes:
+            mimes.append('audio/{}'.format(m))
+        video_mimes = ('mp4', 'x-matroska', 'quicktime', 'x-msvideo', 'webm')
+        for m in video_mimes:
+            mimes.append('video/{}'.format(m))
+
+        for mime in mimes:
             ff = Gtk.FileFilter()
-            ff.set_name(_('Audio and video files'))
-            file_filters = [ff]
+            ff.add_mime_type(mime)
+            file_filters[0].add_mime_type(mime)
+            file_filters.append(ff)
 
-            mimes = []
-            audio_mimes = ('wav', 'mpeg', 'flac', 'x-flac', 'ogg', 'mp4', 'x-m4a', 'aac', 'aiff', 'x-aiff', 'opus', 'webm')
-            for m in audio_mimes:
-                mimes.append('audio/{}'.format(m))
-            video_mimes = ('mp4', 'x-matroska', 'quicktime', 'x-msvideo', 'webm')
-            for m in video_mimes:
-                mimes.append('video/{}'.format(m))
-
-            for mime in mimes:
-                ff = Gtk.FileFilter()
-                ff.add_mime_type(mime)
-                file_filters[0].add_mime_type(mime)
-                file_filters.append(ff)
-
-            dialog.simple_file(
-                parent = self.get_root(),
-                file_filters = file_filters,
-                callback = self.on_attachment
-            )
+        dialog.simple_file(
+            parent = self.get_root(),
+            file_filters = file_filters,
+            callback = self.on_attachment
+        )
 
     def run_file_transcription(self, file_path:str):
         model_name = list(STT_MODELS)[self.get_root().settings.get_value('stt-model').unpack()]

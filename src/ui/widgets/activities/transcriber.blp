@@ -1,0 +1,83 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaTranscriber: Gtk.Stack {
+  transition-type: crossfade;
+
+  Gtk.StackPage {
+    name: "main";
+    child: Adw.StatusPage {
+      title: _("Transcriber");
+      description: _("Transcribe audio files or your voice");
+      icon-name: "music-note-single-symbolic";
+      child: Gtk.Box {
+        halign: center;
+        orientation: vertical;
+        spacing: 10;
+
+        Gtk.Button {
+          tooltip-text: _("Microphone");
+          styles [
+            "pill"
+          ]
+          child: Adw.ButtonContent {
+            label: _("Microphone");
+            icon-name: "audio-input-microphone-symbolic";
+          };
+          clicked => $use_microphone();
+        }
+
+        Gtk.Button {
+          tooltip-text: _("File");
+          styles [
+            "pill"
+          ]
+          child: Adw.ButtonContent {
+            label: _("File");
+            icon-name: "chain-link-loose-symbolic";
+          };
+          clicked => $use_file();
+        }
+      };
+    };
+  }
+
+  Gtk.StackPage {
+    name: "loading_file";
+    child: Adw.StatusPage {
+      title: _("Transcribing Audio");
+      child: Adw.Spinner {};
+    };
+  }
+
+  Gtk.StackPage {
+    name: "results";
+    child: Gtk.ScrolledWindow {
+      propagate-natural-height: true;
+      overflow: hidden;
+      margin-top: 10;
+      margin-bottom: 10;
+      margin-start: 10;
+      margin-end: 10;
+      valign: center;
+      styles [
+        "card",
+        "undershoot-bottom"
+      ]
+      child: Gtk.TextView result_textview {
+        wrap-mode: word_char;
+        left-margin: 10;
+        right-margin: 10;
+        top-margin: 10;
+        bottom-margin: 10;
+      };
+    };
+  }
+}
+
+Gtk.Button attachment_button {
+  icon-name: "chain-link-loose-symbolic";
+  tooltip-text: _("Attach");
+  visible: false;
+  clicked => $attach_results();
+}
