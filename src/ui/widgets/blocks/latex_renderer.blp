@@ -3,6 +3,7 @@ using Adw 1;
 
 template $AlpacaLatexRenderer: Gtk.Button {
   tooltip-text: _("Copy Equation");
+  valign: start;
   clicked => $copy_equation();
   styles [
     "flat",

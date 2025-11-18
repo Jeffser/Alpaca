@@ -28,6 +28,7 @@ blueprints = files(
   'ui/widgets/models/added_selector.blp',
   'ui/widgets/blocks/code.blp',
   'ui/widgets/blocks/latex_renderer.blp',
+  'ui/widgets/blocks/table.blp',
 )
 
 blueprints = custom_target('blueprints',

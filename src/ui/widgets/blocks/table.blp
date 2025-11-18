@@ -1,0 +1,64 @@
+using Gtk 4.0;
+
+template $AlpacaTable: Gtk.Box {
+  orientation: vertical;
+  halign: start;
+  overflow: hidden;
+  styles [
+    "card"
+  ]
+
+  Gtk.Box {
+    spacing: 10;
+    margin-start: 5;
+    margin-end: 5;
+    margin-top: 5;
+    margin-bottom: 5;
+    Gtk.Label {
+      label: _("Spreadsheet");
+      hexpand: true;
+      halign: start;
+      margin-start: 5;
+      styles [
+        "heading"
+      ]
+    }
+    Gtk.Button {
+      icon-name: "folder-download-symbolic";
+      tooltip-text: _("Export Spreadsheet");
+      valign: center;
+      clicked => $prompt_download();
+      styles [
+        "flat"
+      ]
+    }
+  }
+
+  Gtk.ScrolledWindow {
+    vscrollbar-policy: never;
+    propagate-natural-width: true;
+    child: Gtk.Stack main_stack {
+      Gtk.StackPage {
+        name: "label";
+        child: Gtk.Label error_label {
+          margin-top: 6;
+          margin-bottom: 6;
+          margin-start: 6;
+          margin-end: 6;
+        };
+      }
+      Gtk.StackPage {
+        name: "table";
+        child: Gtk.ColumnView columnview {
+          show-column-separators: true;
+          show-row-separators: true;
+          reorderable: false;
+          styles [
+            "view",
+            "column-separators"
+          ]
+        };
+      }
+    };
+  }
+}
