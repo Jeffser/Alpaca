@@ -1,0 +1,17 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaLatexRenderer: Gtk.Button {
+  tooltip-text: _("Copy Equation");
+  clicked => $copy_equation();
+  styles [
+    "flat",
+    "p10"
+  ]
+  child: Gtk.ScrolledWindow scrolled_window {
+    propagate-natural-height: true;
+    hscrollbar-policy: never;
+    vscrollbar-policy: automatic;
+    child: Adw.Spinner {};
+  };
+}

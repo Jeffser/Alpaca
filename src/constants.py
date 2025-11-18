@@ -253,6 +253,39 @@ MODEL_CATEGORIES_METADATA = {
     'language': {'css': [], 'icon': 'language-symbolic'}
 }
 
+CODE_LANGUAGE_FALLBACK = {
+    'bash': 'sh',
+    'cmd': 'powershell',
+    'batch': 'powershell',
+    'c#': 'csharp',
+    'vb.net': 'vbnet',
+    'python': 'python3',
+    'javascript': 'js',
+}
+
+CODE_LANGUAGE_PROPERTIES = (
+    {
+        'id': 'python',
+        'aliases': ['python', 'python3', 'py', 'py3'],
+        'filename': 'main.py'
+    },
+    {
+        'id': 'mermaid',
+        'aliases': ['mermaid'],
+        'filename': 'index.html'
+    },
+    {
+        'id': 'html',
+        'aliases': ['html', 'htm'],
+        'filename': 'index.html'
+    },
+    {
+        'id': 'bash',
+        'aliases': ['bash', 'sh'],
+        'filename': 'script.sh'
+    }
+)
+
 # The identifier when inside the Flatpak runtime
 IN_FLATPAK = bool(os.getenv("FLATPAK_ID"))
 

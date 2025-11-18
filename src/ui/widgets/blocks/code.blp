@@ -1,0 +1,88 @@
+using Gtk 4.0;
+using GtkSource 5;
+
+template $AlpacaCode: Gtk.Box {
+  orientation: vertical;
+  overflow: hidden;
+  margin-start: 5;
+  margin-end: 5;
+  styles [
+    "card",
+    "code_block"
+  ]
+  Gtk.Box {
+    margin-start: 12;
+    margin-end: 3;
+    margin-top: 3;
+    margin-bottom: 3;
+    spacing: 5;
+
+    Gtk.Label language_label {
+      label: _("Code Block");
+      hexpand: true;
+      xalign: 0;
+    }
+
+    Gtk.Box button_container {
+      halign: end;
+      styles [
+        "linked"
+      ]
+
+      Gtk.Button edit_button {
+        icon-name: "edit-symbolic";
+        tooltip-text: _("Edit Script");
+        clicked => $begin_edit();
+        styles [
+          "flat"
+        ]
+      }
+
+      Gtk.Button {
+        icon-name: "edit-copy-symbolic";
+        tooltip-text: _("Copy Script");
+        clicked => $copy_code();
+        styles [
+          "flat"
+        ]
+      }
+
+      Gtk.Button {
+        icon-name: "folder-download-symbolic";
+        tooltip-text: _("Download Script");
+        clicked => $prompt_download();
+        styles [
+          "flat"
+        ]
+      }
+
+      Gtk.Button run_button {
+        icon-name: "execute-from-symbolic";
+        tooltip-text: _("Run Script");
+        clicked => $run_script();
+        visible: false;
+        styles [
+          "accent",
+          "flat"
+        ]
+      }
+    }
+  }
+
+  Gtk.Separator {}
+
+  GtkSource.View {
+    auto-indent: true;
+    indent-width: 4;
+    show-line-numbers: true;
+    editable: false;
+    top-margin: 6;
+    bottom-margin: 6;
+    left-margin: 12;
+    right-margin: 12;
+    styles [
+      "code_block"
+    ]
+    buffer: GtkSource.Buffer buffer {};
+  }
+}
