@@ -34,6 +34,7 @@ blueprints = files(
   'ui/widgets/activities/web_browser.blp',
   'ui/widgets/activities/background_remover.blp',
   'ui/widgets/activities/background_remover_image.blp',
+  'ui/widgets/activities/camera.blp',
 )
 
 blueprints = custom_target('blueprints',

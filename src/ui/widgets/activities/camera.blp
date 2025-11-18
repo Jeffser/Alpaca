@@ -1,0 +1,54 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaCamera: Gtk.Stack {
+  vexpand: true;
+  hexpand: true;
+
+  Gtk.StackPage {
+    name: "loading";
+    child: Adw.Spinner {};
+  }
+
+  Gtk.StackPage {
+    name: "error";
+    child: Adw.StatusPage {
+      title: _("No Camera Detected");
+      description: _("Please check if camera is plugged in and turned on");
+      icon-name: "sad-computer-symbolic";
+      child: Gtk.Button {
+        clicked => $check_camera();
+        child: Adw.ButtonContent {
+          label: _("Retry");
+          icon-name: "update-symbolic";
+        };
+        tooltip-text: _("Retry");
+        halign: center;
+        styles [
+          "pill",
+          "suggested-action"
+        ]
+      };
+    };
+  }
+
+  Gtk.StackPage {
+    name: "picture";
+    child: Gtk.Picture {
+      content-fit: cover;
+    };
+  }
+}
+
+Gtk.Button capture_button {
+  tooltip-text: _("Capture Picture");
+  visible: false;
+  clicked => $take_photo();
+  child: Gtk.Image {
+    icon-name: "big-dot-symbolic";
+    icon-size: large;
+  };
+  styles [
+    "circular"
+  ]
+}

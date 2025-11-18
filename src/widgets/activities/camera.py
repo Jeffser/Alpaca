@@ -11,54 +11,33 @@ import numpy as np
 Gst.init(None)
 pipeline = Gst.parse_launch('pipewiresrc ! videoconvert ! appsink name=sink')
 
-class Camera(Adw.Bin):
-    __gtype_name___ = 'AlpacaCamera'
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/activities/camera.ui')
+class Camera(Gtk.Stack):
+    __gtype_name__ = 'AlpacaCamera'
+
+    capture_button = Gtk.Template.Child()
 
     def __init__(self):
-        self.capture = cv2.VideoCapture(0)
-        self.picture = Gtk.Picture(
-            content_fit=2
-        )
-
-        if self.capture.isOpened():
-            super().__init__(
-                child=self.picture
-            )
-        else:
-            super().__init__(
-                child=Adw.StatusPage(
-                    title=_('No Camera Detected'),
-                    description=_('Please check if camera is plugged in and turned on, then restart the activity.')
-                )
-            )
-
-
-        capture_button = Gtk.Button(
-            tooltip_text=_('Capture Picture'),
-            child=Gtk.Image(
-                icon_name='big-dot-symbolic',
-                icon_size=2
-            ),
-            css_classes=['circular'],
-            visible=self.capture.isOpened()
-        )
-        capture_button.connect('clicked', lambda *_: self.take_photo())
-
-        self.running = False
-        if self.capture.isOpened():
-            self.connect('realize', lambda *_: self.on_realize())
-
-        # Activity
+        super().__init__()
         self.buttons = {
-            'center': capture_button
+            'center': self.capture_button
         }
         self.extend_to_edge = True
         self.title = _('Camera')
         self.activity_icon = 'camera-photo-symbolic'
+        GLib.idle_add(self.check_camera)
 
-    def on_realize(self):
-        self.running = True
-        threading.Thread(target=self.update_frame, daemon=True).start()
+    @Gtk.Template.Callback()
+    def check_camera(self, button=None):
+        print('check_camera')
+        self.capture = cv2.VideoCapture(0)
+        camera_available = self.capture.isOpened()
+        if camera_available:
+            self.running = True
+            threading.Thread(target=self.update_frame, daemon=True).start()
+
+        self.capture_button.set_visible(camera_available)
+        self.set_visible_child_name("picture" if camera_available else "error")
 
     def update_frame(self):
         while self.running and self.capture.isOpened():
@@ -75,7 +54,7 @@ class Camera(Adw.Bin):
                     stride=w*c
                 )
 
-                GLib.idle_add(self.picture.set_paintable, texture)
+                GLib.idle_add(self.get_child_by_name('picture').set_paintable, texture)
             else:
                 break
 
@@ -93,8 +72,9 @@ class Camera(Adw.Bin):
 
         return new_width, new_height
 
-    def take_photo(self):
-        texture = self.picture.get_paintable()
+    @Gtk.Template.Callback()
+    def take_photo(self, button=None):
+        texture = self.get_child_by_name('picture').get_paintable()
         width, height = self.get_new_resolution(texture.get_width(), texture.get_height())
         texture.compute_concrete_size(width, height, width, height)
 
