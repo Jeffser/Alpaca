@@ -272,7 +272,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
                             for block in list(message.block_container):
                                 if isinstance(block, Widgets.blocks.text.Text):
                                     if search_term:
-                                        highlighted_text = re.sub(f"({re.escape(search_term)})", r"<span background='yellow' bgalpha='30%'>\1</span>", block.get_content(),flags=re.IGNORECASE)
+                                        content = block.get_content().replace('&', '&amp;')
+                                        search_text = search_term.replace('&', '&amp;')
+                                        highlighted_text = re.sub(f"({search_text})", r"<span background='yellow' bgalpha='30%'>\1</span>", content, flags=re.IGNORECASE)
                                         block.set_markup(highlighted_text)
                                     else:
                                         block.set_content(block.get_content())
@@ -402,7 +404,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             file.copy(Gio.File.new_for_path(os.path.join(cache_dir, 'import.db')), Gio.FileCopyFlags.OVERWRITE, None, None, None, None)
             chat_names = [tab.chat.get_name() for tab in list(self.get_chat_list_page().chat_list_box)]
             for chat in SQL.import_chat(os.path.join(cache_dir, 'import.db'), chat_names, self.get_chat_list_page().folder_id):
-                print(chat)
                 self.get_chat_list_page().add_chat(
                     chat_name=chat[1],
                     chat_id=chat[0],
