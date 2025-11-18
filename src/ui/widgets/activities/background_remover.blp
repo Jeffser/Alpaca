@@ -1,0 +1,79 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaBackgroundRemover: Gtk.ScrolledWindow {
+  hexpand: true;
+  child: Gtk.Stack main_stack {
+    transition-type: crossfade;
+    Gtk.StackPage {
+      name: "button";
+      child: Gtk.Button {
+        halign: center;
+        valign: center;
+        clicked => $load_image_requested();
+        styles [
+          "suggested-action",
+          "pill"
+        ]
+        child: Adw.ButtonContent {
+          label: _("Select Image");
+          icon-name: "image-x-generic-symbolic";
+          tooltip-text: _("Select Image");
+        };
+      };
+    }
+
+    Gtk.StackPage {
+      name: "content";
+      child: Gtk.Box {
+        orientation: vertical;
+        spacing: 10;
+        valign: center;
+        halign: center;
+
+        Adw.ToggleGroup stack_switcher {
+          halign: center;
+          Adw.Toggle {
+            label: _("Original");
+            name: "input";
+          }
+          Adw.Toggle {
+            label: _("Result");
+            name: "output";
+          }
+        }
+
+        Gtk.Stack image_stack {
+          transition-type: slide_left_right;
+          hexpand: true;
+          vexpand: true;
+          Gtk.StackPage {
+            name: "input";
+            child: $AlpacaBackgroundRemoverImage input_picture_button {};
+          }
+
+          Gtk.StackPage {
+            name: "output";
+            child: Gtk.Overlay {
+              child: $AlpacaBackgroundRemoverImage output_picture_button {};
+              [overlay]
+              Adw.Spinner output_spinner {}
+            };
+          }
+
+        }
+
+      };
+    }
+  };
+}
+
+Gtk.DropDown model_dropdown {
+  model: Gtk.StringList {};
+}
+
+Gtk.Button select_button {
+  icon-name: "image-x-generic-symbolic";
+  tooltip-text: _("Select Image");
+  clicked => $load_image_requested();
+}

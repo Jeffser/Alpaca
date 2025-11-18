@@ -7,30 +7,11 @@ import base64, os, threading
 from PIL import Image
 from io import BytesIO
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/activities/background_remover_image.ui')
 class BackgroundRemoverImage(Gtk.Button):
     __gtype_name__ = 'AlpacaBackgroundRemoverImage'
 
-    def __init__(self, name:str):
-        super().__init__(
-            child=Gtk.Picture(
-                css_classes=['rounded_image']
-            ),
-            margin_start=5,
-            margin_end=5,
-            margin_bottom=5,
-            css_classes=['flat'],
-            tooltip_text=_('Open in Image Viewer'),
-            name=name
-        )
-
-        self.connect('clicked', self.open_image_viewer)
-        self.gesture_click = Gtk.GestureClick(button=3)
-        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
-        self.add_controller(self.gesture_click)
-        self.gesture_long_press = Gtk.GestureLongPress()
-        self.gesture_long_press.connect("pressed", self.show_popup)
-        self.add_controller(self.gesture_long_press)
-
+    @Gtk.Template.Callback()
     def open_image_viewer(self, button):
         from . import show_activity
         page = attachments.AttachmentImagePage(
@@ -74,9 +55,14 @@ class BackgroundRemoverImage(Gtk.Button):
         )
         self.get_root().get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
 
-    def show_popup(self, gesture, x, y):
+    @Gtk.Template.Callback()
+    def show_popup(self, *args):
         rect = Gdk.Rectangle()
-        rect.x, rect.y, = x, y
+        if len(args) == 4:
+            rect.x, rect.y = args[2], args[3]
+        else:
+            rect.x, rect.y = args[1], args[2]
+
         actions = [
             [
                 {
@@ -91,122 +77,47 @@ class BackgroundRemoverImage(Gtk.Button):
                 }
             ]
         ]
+
         popup = dialog.Popover(actions)
         popup.set_parent(self)
         popup.set_pointing_to(rect)
         popup.popup()
 
-
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/activities/background_remover.ui')
 class BackgroundRemover(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaBackgroundRemover'
+
+    main_stack = Gtk.Template.Child()
+    stack_switcher = Gtk.Template.Child()
+    image_stack = Gtk.Template.Child()
+
+    model_dropdown = Gtk.Template.Child()
+    select_button = Gtk.Template.Child()
+
+    input_picture_button = Gtk.Template.Child()
+    output_picture_button = Gtk.Template.Child()
+    output_spinner = Gtk.Template.Child()
 
     def __init__(self, save_func:callable=None, close_callback:callable=None):
         self.save_func = save_func
         self.close_callback = close_callback
-
-        self.main_stack = Gtk.Stack(
-            transition_type=1
-        )
-
-        # Main Button
-        main_select_button = Gtk.Button(
-            child=Adw.ButtonContent(
-                label=_("Select Image"),
-                icon_name="image-x-generic-symbolic",
-                tooltip_text=_("Select Image")
-            ),
-            halign=3,
-            valign=3,
-            css_classes=['suggested-action', 'pill']
-        )
-        main_select_button.connect('clicked', lambda *_: self.load_image_requested())
-        self.main_stack.add_named(
-            main_select_button,
-            'button'
-        )
-
-        # Container
-        container = Gtk.Box(
-            orientation=1,
-            spacing=10,
-            valign=3,
-            halign=3
-        )
-        self.main_stack.add_named(
-            container,
-            'content'
-        )
-        ## Secondary Stack
-        self.image_stack = Gtk.Stack(
-            transition_type=6,
-            hexpand=True,
-            vexpand=True
-        )
-        ## Stack Switcher
-        self.stack_switcher = Adw.ToggleGroup(
-            halign=3
-        )
-        self.stack_switcher.add(
-            Adw.Toggle(
-                label=_("Original"),
-                name='input'
-            )
-        )
-        self.stack_switcher.add(
-            Adw.Toggle(
-                label=_("Result"),
-                name='output'
-            )
-        )
-        container.append(self.stack_switcher)
-        container.append(self.image_stack)
-
-        ### Input Picture
-        self.input_picture_button = BackgroundRemoverImage(_('Original'))
-        self.image_stack.add_named(
-            self.input_picture_button,
-            'input'
-        )
-
-        ### Output Picture
-        self.output_picture_button = BackgroundRemoverImage(_('Result'))
-        self.image_stack.add_named(
-            Gtk.Overlay(
-                child=self.output_picture_button
-            ),
-            'output'
-        )
-        self.output_spinner = Adw.Spinner()
-        self.image_stack.get_child_by_name('output').add_overlay(self.output_spinner)
-
-        super().__init__(
-            child=self.main_stack,
-            hexpand=True
-        )
+        super().__init__()
 
         self.pulling_model = None
 
         selected_index = Gio.Settings(schema_id="com.jeffser.Alpaca").get_value('activity-background-remover-model').unpack()
-        string_list = Gtk.StringList()
-        for m in REMBG_MODELS.values():
-            string_list.append('{} ({})'.format(m.get('display_name'), m.get('size')) )
         factory = Gtk.SignalListItemFactory()
         factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
         factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
-        self.model_dropdown = Gtk.DropDown(
-            model=string_list,
-            factory=factory
-        )
+        self.model_dropdown.set_factory(factory)
+        for m in REMBG_MODELS.values():
+            self.model_dropdown.get_model().append('{} ({})'.format(m.get('display_name'), m.get('size')) )
         self.model_dropdown.set_selected(selected_index)
         list(list(self.model_dropdown)[1].get_child())[1].set_propagate_natural_width(True)
 
-        self.select_button = Gtk.Button(
-            icon_name="image-x-generic-symbolic",
-            tooltip_text=_("Select Image")
-        )
-        self.select_button.connect('clicked', lambda *_: self.load_image_requested())
         self.stack_switcher.connect('notify::active', lambda toggle_group, gparam: self.image_stack.set_visible_child_name(toggle_group.get_active_name()))
 
+        # ACTIVITY
         self.buttons = {
             'start': [self.select_button],
             'center': self.model_dropdown
@@ -281,18 +192,19 @@ class BackgroundRemover(Gtk.ScrolledWindow):
         self.main_stack.set_visible_child_name('content')
         self.verify_model(input_image_data)
 
-    def on_loaded(self, file:Gio.File, remove_original:bool=False):
-        if not file:
-            return
-        self.load_image(attachments.extract_image(file.get_path(), self.get_root().settings.get_value('max-image-size').unpack()))
+    @Gtk.Template.Callback()
+    def load_image_requested(self, button):
+        def on_loaded(file:Gio.File, remove_original:bool=False):
+            if not file:
+                return
+            self.load_image(attachments.extract_image(file.get_path(), self.get_root().settings.get_value('max-image-size').unpack()))
 
-    def load_image_requested(self):
         file_filter = Gtk.FileFilter()
         file_filter.add_pixbuf_formats()
         dialog.simple_file(
             parent = self.get_root(),
             file_filters = [file_filter],
-            callback = self.on_loaded
+            callback = on_loaded
         )
 
     def on_reload(self):

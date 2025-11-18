@@ -1,0 +1,24 @@
+using Gtk 4.0;
+
+template $AlpacaBackgroundRemoverImage: Gtk.Button {
+  margin-start: 5;
+  margin-end: 5;
+  margin-bottom: 5;
+  tooltip-text: _("Open in Image Viewer");
+  styles [
+    "flat"
+  ]
+  child: Gtk.Picture {
+    styles [
+      "rounded_image"
+    ]
+  };
+  clicked => $open_image_viewer();
+  Gtk.GestureClick {
+    button: 3;
+    released => $show_popup();
+  }
+  Gtk.GestureLongPress {
+    pressed => $show_popup();
+  }
+}
