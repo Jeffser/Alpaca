@@ -29,7 +29,6 @@ class Camera(Gtk.Stack):
 
     @Gtk.Template.Callback()
     def check_camera(self, button=None):
-        print('check_camera')
         self.capture = cv2.VideoCapture(0)
         camera_available = self.capture.isOpened()
         if camera_available:
