@@ -24,8 +24,8 @@ class BaseInstance:
             except:
                 pass
         
-        chat_element.busy = True
-        chat_element.set_visible_child_name('content')
+            chat_element.busy = True
+            chat_element.set_visible_child_name('content')
 
         messages = chat_element.convert_to_ollama()[:list(chat_element.container).index(bot_message)]
         return chat_element, messages
