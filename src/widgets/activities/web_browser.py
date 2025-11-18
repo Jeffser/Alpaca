@@ -9,88 +9,45 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import tempfile, os, threading, requests, random
 
-class WebBrowser(Gtk.ScrolledWindow):
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/activities/web_browser.ui')
+class WebBrowser(WebKit.WebView):
     __gtype_name__ = 'AlpacaWebBrowser'
 
+    back_button = Gtk.Template.Child()
+    forward_button = Gtk.Template.Child()
+    url_entry = Gtk.Template.Child()
+    attachment_stack = Gtk.Template.Child()
+    menu_button = Gtk.Template.Child()
+
     def __init__(self, default_url:str=None):
+        super().__init__()
         settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         self.default_url = default_url or settings.get_value('activity-webbrowser-homepage-url').unpack()
-
         web_settings = WebKit.Settings()
         web_settings.set_enable_fullscreen(False)
-        self.webview = WebKit.WebView()
-        self.webview.set_settings(web_settings)
-        self.webview.connect('load-changed', self.on_load_changed)
-        self.webview.connect('create', self.on_create)
-        self.webview.connect('notify::title', lambda *_: self.title_changed())
+        self.set_settings(web_settings)
+
         self.on_load_callback=lambda:None
-
-
-        self.webview.set_settings(web_settings)
-
-        self.back_button = Gtk.Button(
-            icon_name='left-symbolic',
-            tooltip_text=_('Go Back'),
-            sensitive=False
-        )
-        self.back_button.connect("clicked", self.on_back_clicked)
-
-        self.forward_button = Gtk.Button(
-            icon_name='right-symbolic',
-            tooltip_text=_('Go Next'),
-            sensitive=False
-        )
-        self.forward_button.connect("clicked", self.on_forward_clicked)
-
-        self.url_entry = Gtk.Entry(
-            placeholder_text=_('Enter URL...'),
-            overflow=1,
-            hexpand=True
-        )
-        self.url_entry.connect('activate', self.on_url_activate)
-        focus_controller = Gtk.EventControllerFocus.new()
-        focus_controller.connect("enter", lambda c: self.url_entry_focus_changed(True))
-        focus_controller.connect("leave", lambda c: self.url_entry_focus_changed(False))
-        self.url_entry.add_controller(focus_controller)
-
-
-        self.attachment_button = Gtk.Button(
-            icon_name='chain-link-loose-symbolic',
-            tooltip_text=_('Attach'),
-            css_classes=['flat']
-        )
-        self.attachment_button.connect("clicked", lambda button: threading.Thread(target=self.attachment_requested, args=(self.save,), daemon=True).start())
-        self.attachment_stack = Gtk.Stack(transition_type=1)
-        self.attachment_stack.add_named(self.attachment_button, 'button')
-        self.attachment_stack.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
 
         actions = [[{
             'label': _('Reload Page'),
-            'callback': self.webview.reload,
+            'callback': self.reload,
             'icon': 'update-symbolic'
         },{
             'label': _('Open in External Browser'),
-            'callback': lambda: Gio.AppInfo.launch_default_for_uri(self.webview.get_uri()),
+            'callback': lambda: Gio.AppInfo.launch_default_for_uri(self.get_uri()),
             'icon': 'globe-symbolic'
         },{
             'label': _('Go to Home'),
-            'callback': lambda: self.webview.load_uri(self.default_url),
+            'callback': lambda: self.load_uri(self.default_url),
             'icon': 'go-home-symbolic'
         }]]
         popover = dialog.Popover(actions)
         popover.set_has_arrow(True)
         popover.set_halign(0)
-        self.menu_button = Gtk.MenuButton(
-            icon_name='view-more-symbolic',
-            popover=popover,
-            direction=0
-        )
+        self.menu_button.set_popover(popover)
 
-        super().__init__(
-            child=self.webview
-        )
-
-        self.webview.load_uri(self.default_url)
+        self.load_uri(self.default_url)
 
         # Activity
         self.title=_("Web Browser")
@@ -102,27 +59,36 @@ class WebBrowser(Gtk.ScrolledWindow):
         }
         self.extend_to_edge = False
 
-    def title_changed(self):
-        title = self.webview.get_title() or _('Web Browser')
+    @Gtk.Template.Callback()
+    def title_changed(self, webview, gparam):
+        self.title = webview.get_title() or _('Web Browser')
         parent = self.get_ancestor(Adw.TabView)
         if parent:
-            parent.get_page(self).set_title(title)
+            parent.get_page(self).set_title(self.title)
 
-    def url_entry_focus_changed(self, focused:bool):
-        GLib.idle_add(self.url_entry.select_region, 0, -1 if focused else 0)
+    @Gtk.Template.Callback()
+    def url_entry_focus_enter(self, controller):
+        GLib.idle_add(self.url_entry.select_region, 0, -1)
         for btn in [self.forward_button, self.attachment_stack, self.menu_button]:
-            btn.set_visible(not focused)
+            btn.set_visible(False)
 
+    @Gtk.Template.Callback()
+    def url_entry_focus_leave(self, controller):
+        GLib.idle_add(self.url_entry.select_region, 0, 0)
+        for btn in [self.forward_button, self.attachment_stack, self.menu_button]:
+            btn.set_visible(True)
+
+    @Gtk.Template.Callback()
     def on_url_activate(self, entry):
         url = entry.get_text().strip()
         if url.startswith("http://") or url.startswith("https://"):
-            self.webview.load_uri(url)
+            self.load_uri(url)
         elif '.' in url and ' ' not in url:
-            self.webview.load_uri('https://{}'.format(url))
+            self.load_uri('https://{}'.format(url))
         else:
-            self.webview.load_uri(self.get_root().settings.get_value('activity-webbrowser-query-url').unpack().format(url))
+            self.load_uri(self.get_root().settings.get_value('activity-webbrowser-query-url').unpack().format(url))
 
-
+    @Gtk.Template.Callback()
     def on_create(self, webview, navigation_action):
         # Called when a new WebView would normally be created (new tab/window)
         uri_request = navigation_action.get_request()
@@ -131,13 +97,14 @@ class WebBrowser(Gtk.ScrolledWindow):
         webview.load_uri(uri)
         return None
 
+    @Gtk.Template.Callback()
     def on_load_changed(self, webview, event):
         uri = webview.get_uri()
         if uri:
             self.url_entry.set_text(uri)
 
-        self.back_button.set_sensitive(self.webview.can_go_back())
-        self.forward_button.set_sensitive(self.webview.can_go_forward())
+        self.back_button.set_sensitive(self.can_go_back())
+        self.forward_button.set_sensitive(self.can_go_forward())
         if event == 0: #started
             self.attachment_stack.set_visible_child_name('loading')
         elif event == 1: #redirected
@@ -152,13 +119,15 @@ class WebBrowser(Gtk.ScrolledWindow):
         if parent:
             parent.get_page(self).set_loading(not event==3)
 
+    @Gtk.Template.Callback()
     def on_back_clicked(self, button):
-        if self.webview.can_go_back():
-            self.webview.go_back()
+        if self.can_go_back():
+            self.go_back()
 
+    @Gtk.Template.Callback()
     def on_forward_clicked(self, button):
-        if self.webview.can_go_forward():
-            self.webview.go_forward()
+        if self.can_go_forward():
+            self.go_forward()
 
     def extract_html(self, save_func:callable):
         def on_evaluated(webview, res, user_data):
@@ -166,7 +135,7 @@ class WebBrowser(Gtk.ScrolledWindow):
             save_func(raw_html)
 
         script = 'document.documentElement.outerHTML'
-        self.webview.evaluate_javascript(
+        self.evaluate_javascript(
             script,
             len(script.encode('utf-8')),
             None,
@@ -206,7 +175,7 @@ class WebBrowser(Gtk.ScrolledWindow):
             })();
             """
 
-        self.webview.evaluate_javascript(
+        self.evaluate_javascript(
             script,
             len(script.encode('utf-8')),
             None,
@@ -216,23 +185,27 @@ class WebBrowser(Gtk.ScrolledWindow):
             None
         )
 
+    @Gtk.Template.Callback()
+    def attach_clicked(self, button):
+        self.attachment_requested(self.save)
+
     def attachment_requested(self, save_func:callable):
-        if self.webview.get_uri().startswith('https://www.youtube.com'):
-            save_func(attachments.extract_content('youtube', self.webview.get_uri()))
+        if self.get_uri().startswith('https://www.youtube.com'):
+            save_func(attachments.extract_content('youtube', self.get_uri()))
         else:
             self.extract_md(save_func)
 
     def save(self, result):
         attachment = attachments.Attachment(
             file_id='-1',
-            file_name=self.webview.get_title(),
+            file_name=self.get_title(),
             file_type='youtube' if result.startswith('# YouTube') else 'website',
             file_content=result
         )
         self.get_root().get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
 
     def on_close(self):
-        self.webview.terminate_web_process()
+        self.terminate_web_process()
 
     def on_reload(self):
         pass
@@ -244,7 +217,7 @@ class WebBrowser(Gtk.ScrolledWindow):
             query_hostname = urlparse(query_url).hostname.lower()
             if query_hostname.startswith('www.'):
                 query_hostname = query_hostname[4:]
-            current_hostname = urlparse(self.webview.get_uri()).hostname.lower()
+            current_hostname = urlparse(self.get_uri()).hostname.lower()
             if current_hostname.startswith('www.'):
                 current_hostname = current_hostname[4:]
             if not query_hostname == current_hostname:
@@ -260,13 +233,13 @@ class WebBrowser(Gtk.ScrolledWindow):
                 results = soup.select('a.result-title') + soup.select('a[data-testid="result-title-a"]') + soup.select('a:has(h3)')
                 if len(results) > 0:
                     result = random.choice(results[min(5, len(results)):])
-                    GLib.timeout_add(5000, self.webview.load_uri, result["href"])
+                    GLib.timeout_add(5000, self.load_uri, result["href"])
 
         def on_search_page_ready():
             GLib.timeout_add(5000, self.extract_html, on_html_extracted)
 
         self.on_load_callback = lambda: threading.Thread(target=on_search_page_ready, daemon=True).start()
-        GLib.timeout_add(5000, self.webview.load_uri, query_url.format(search_term))
+        GLib.timeout_add(5000, self.load_uri, query_url.format(search_term))
 
     def close(self):
         # Only close if it's a dialog

@@ -31,6 +31,7 @@ blueprints = files(
   'ui/widgets/blocks/table.blp',
   'ui/widgets/blocks/editing_text.blp',
   'ui/widgets/blocks/generating_text.blp',
+  'ui/widgets/activities/web_browser.blp',
 )
 
 blueprints = custom_target('blueprints',

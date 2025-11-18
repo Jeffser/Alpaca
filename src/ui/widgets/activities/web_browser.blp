@@ -1,0 +1,59 @@
+using Gtk 4.0;
+using Adw 1;
+using WebKit 6.0;
+
+template $AlpacaWebBrowser: WebKit.WebView {
+  load-changed => $on_load_changed();
+  create => $on_create();
+  notify::title => $title_changed();
+}
+
+Gtk.Button back_button {
+  icon-name: "left-symbolic";
+  tooltip-text: _("Go Back");
+  sensitive: false;
+  clicked => $on_back_clicked();
+}
+
+Gtk.Button forward_button {
+  icon-name: "right-symbolic";
+  tooltip-text: _("Go Next");
+  sensitive: false;
+  clicked => $on_forward_clicked();
+}
+
+Gtk.Entry url_entry {
+  placeholder-text: _("Enter URL...");
+  overflow: hidden;
+  hexpand: true;
+  activate => $on_url_activate();
+  Gtk.EventControllerFocus {
+    enter => $url_entry_focus_enter();
+    leave => $url_entry_focus_leave();
+  }
+}
+
+Gtk.Stack attachment_stack {
+  transition-type: crossfade;
+  Gtk.StackPage {
+    name: "button";
+    child: Gtk.Button attachment_button {
+      icon-name: "chain-link-loose-symbolic";
+      tooltip-text: _("Attach");
+      clicked => $attach_clicked();
+    };
+  }
+  Gtk.StackPage {
+    name: "loading";
+    child: Adw.Spinner {
+      styles [
+        "p10"
+      ]
+    };
+  }
+}
+
+Gtk.MenuButton menu_button {
+  icon-name: "view-more-symbolic";
+  direction: up;
+}
