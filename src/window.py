@@ -119,10 +119,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 )
             else:
                 instance = ins(
-                    instance_id=generate_uuid(),
+                    instance_id=None,
                     properties={}
                 )
-                Widgets.instances.InstancePreferencesGroup(instance).present(self)
+                Widgets.instances.InstancePreferencesDialog(instance).present(self)
 
         options = {}
         instance_list = Widgets.instances.ollama_instances.BaseInstance.__subclasses__()
@@ -155,7 +155,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.get_application().lookup_action('model_creator_existing').set_enabled(row.instance.instance_type in ('ollama', 'ollama:managed'))
                 self.get_application().lookup_action('model_creator_gguf').set_enabled(row.instance.instance_type in ('ollama', 'ollama:managed'))
 
-            self.chat_bin.get_child().row.update_profile_pictures()
             listbox.set_sensitive(True)
         if listbox.get_sensitive():
             listbox.set_sensitive(False)
@@ -201,7 +200,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             logger.info("Closing app...")
             is_chat_busy = any([chat_row.chat.busy for chat_row in list(self.get_chat_list_page().chat_list_box)])
-            is_model_downloading = any([el for el in list(self.local_model_flowbox) if isinstance(el.get_child(), Widgets.models.pulling.PullingModelButton)])
+            is_model_downloading = any([el for el in list(self.local_model_flowbox) if el.get_child().progressbar.get_visible()])
             if is_chat_busy or is_model_downloading:
                 options = {
                     _('Cancel'): {'default': True},
@@ -319,7 +318,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         m_element = Widgets.message.Message(
             dt=datetime.now(),
             message_id=generate_uuid(),
-            chat=current_chat,
             mode=mode*2
         )
         current_chat.add_message(m_element)
@@ -344,7 +342,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             m_element_bot = Widgets.message.Message(
                 dt=datetime.now(),
                 message_id=generate_uuid(),
-                chat=current_chat,
                 mode=1,
                 author=current_model
             )
@@ -374,7 +371,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.main_navigation_view.replace_with_tags(['chat'])
 
         #Chat History
-        root_folder = Widgets.chat.ChatList(show_bar=False)
+        root_folder = Widgets.chat.Folder(show_bar=False)
         self.chat_list_navigationview.add(root_folder)
         root_folder.update()
 
@@ -486,7 +483,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 parent=self,
                 heading=_('Pull Model'),
                 body=_('Please enter the model name following this template: name:tag'),
-                callback=lambda name: threading.Thread(target=Widgets.models.available.pull_model_confirm, args=(name, self.get_current_instance(), self), daemon=True).start(),
+                callback=lambda name: Widgets.models.basic.confirm_pull_model(window=self, model_name=name),
                 entries={'placeholder': 'deepseek-r1:7b'}
             )],
             'reload_added_models': [lambda *_: GLib.idle_add(Widgets.models.update_added_model_list, self)],
@@ -516,3 +513,4 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 notice_dialog.present(self)
         else:
             self.main_navigation_view.replace([Widgets.welcome.Welcome()])
+

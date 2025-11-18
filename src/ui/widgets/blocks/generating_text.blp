@@ -1,0 +1,26 @@
+using Gtk 4.0;
+
+template $AlpacaGeneratingText: Gtk.Overlay {
+  child: Gtk.TextView textview {
+    hexpand: true;
+    editable: false;
+    cursor-visible: false;
+    wrap-mode: word_char;
+    buffer: Gtk.TextBuffer buffer {};
+    styles [
+      "flat",
+      "dim-label",
+      "p0",
+      "lh"
+    ]
+  };
+
+  [overlay]
+  Gtk.Box {
+    valign: end;
+    height-request: 25;
+    styles [
+      "generating_text_shadow"
+    ]
+  }
+}

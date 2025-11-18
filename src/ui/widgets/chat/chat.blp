@@ -1,0 +1,89 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaChat: Gtk.Stack {
+  transition-type: crossfade;
+  vexpand: true;
+
+  Gtk.StackPage {
+    name: "content";
+    child: Gtk.ScrolledWindow scrolledwindow {
+      propagate-natural-height: true;
+      kinetic-scrolling: true;
+      vexpand: true;
+      hexpand: true;
+      hscrollbar-policy: never;
+      styles [
+        "undershoot-bottom"
+      ]
+      child: Adw.Clamp {
+        maximum-size: 1000;
+        tightening-threshold: 800;
+        child: Gtk.Box container {
+          orientation: vertical;
+          hexpand: true;
+          vexpand: true;
+          spacing: 12;
+          styles [
+            "p10"
+          ]
+        };
+      };
+    };
+  }
+
+  Gtk.StackPage {
+    name: "loading";
+    child: Adw.Spinner {};
+  }
+
+  Gtk.StackPage {
+    name: "welcome-screen";
+    child: Adw.StatusPage {
+      icon-name: "com.jeffser.Alpaca";
+      title: "Alpaca";
+      description: _("Try one of these prompts or templates");
+      child: Gtk.Box {
+        orientation: vertical;
+        spacing: 10;
+        halign: center;
+
+        Gtk.Box prompt_container {
+          orientation: vertical;
+          spacing: 5;
+          halign: center;
+        }
+        Gtk.Separator {}
+        Gtk.Box {
+          halign: center;
+          styles [
+            "linked"
+          ]
+          Gtk.Button {
+            icon-name: "view-refresh-symbolic";
+            tooltip-text: _("Refresh Prompts");
+            clicked => $update_prompts();
+            styles [
+              "accent"
+            ]
+          }
+          Gtk.Button {
+            label: _("Use Template");
+            tooltip-text: _("Use Template");
+            clicked => $show_template_selector();
+          }
+        }
+      };
+      vexpand: true;
+    };
+  }
+
+  Gtk.StackPage {
+    name: "no-results";
+    child: Adw.StatusPage {
+      icon-name: "sad-computer-symbolic";
+      title: _("No Messages Found");
+      description: _("Uh oh! No messages found for your search");
+    };
+  }
+}

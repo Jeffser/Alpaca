@@ -204,12 +204,12 @@ template $AlpacaPreferencesDialog: Adw.PreferencesDialog {
           justify: center;
           styles [
             "p10",
-            "dim-label",
           ]
         };
       }
 
       Adw.ActionRow activity_terminal_flatpak_warning_command {
+        overflow: hidden;
         child: Gtk.Label {
           label: "flatpak override com.jeffser.Alpaca --talk-name=org.freedesktop.Flatpak";
           selectable: true;
@@ -224,6 +224,7 @@ template $AlpacaPreferencesDialog: Adw.PreferencesDialog {
         };
         styles [
           "p0",
+          "osd"
         ]
       }
     }

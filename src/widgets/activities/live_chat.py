@@ -33,7 +33,6 @@ class LiveChat(Adw.Bin):
         m_element = message.Message(
             dt=datetime.datetime.now(),
             message_id=generate_uuid(),
-            chat=self.get_child().get_sheet(),
             mode=2
         )
         self.get_child().get_sheet().add_message(m_element)
@@ -239,7 +238,6 @@ class LiveChat(Adw.Bin):
         m_element = message.Message(
             dt=datetime.datetime.now(),
             message_id=generate_uuid(),
-            chat=chat,
             mode=mode*2
         )
         chat.add_message(m_element)
@@ -259,7 +257,6 @@ class LiveChat(Adw.Bin):
             m_element_bot = message.Message(
                 dt=datetime.datetime.now(),
                 message_id=generate_uuid(),
-                chat=chat,
                 mode=1,
                 author=current_model
             )

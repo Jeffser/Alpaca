@@ -10,428 +10,208 @@ from .openai_instances import BaseInstance as BaseOpenAI
 
 logger = logging.getLogger(__name__)
 
-override_urls = {
-    'HSA_OVERRIDE_GFX_VERSION': 'https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides',
-    'CUDA_VISIBLE_DEVICES': 'https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection',
-    'ROCR_VISIBLE_DEVICES': 'https://github.com/ollama/ollama/blob/main/docs/gpu.md#gpu-selection-1'
-}
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/instances/preferences.ui')
+class InstancePreferencesDialog(Adw.Dialog):
 
-class InstancePreferencesGroup(Adw.Dialog):
-    __gtype_name__ = 'AlpacaInstancePreferencesGroup'
+    __gtype_name__ = 'AlpacaInstancePreferencesDialog'
+
+    preferences_page = Gtk.Template.Child()
+
+    connection_group = Gtk.Template.Child()
+    name_el = Gtk.Template.Child()
+    port_el = Gtk.Template.Child()
+    url_el = Gtk.Template.Child()
+    api_el = Gtk.Template.Child()
+
+    tweak_group = Gtk.Template.Child()
+    think_el = Gtk.Template.Child()
+    expose_el = Gtk.Template.Child()
+    share_name_el = Gtk.Template.Child()
+    metadata_el = Gtk.Template.Child()
+    max_tokens_el = Gtk.Template.Child()
+
+    parameters_group = Gtk.Template.Child()
+    override_parameters_el = Gtk.Template.Child()
+    temperature_el = Gtk.Template.Child()
+    seed_el = Gtk.Template.Child()
+    context_size_el = Gtk.Template.Child()
+    keep_alive_selector_el = Gtk.Template.Child()
+    keep_alive_minutes_el = Gtk.Template.Child()
+
+    overrides_group = Gtk.Template.Child()
+    override_0_el = Gtk.Template.Child()
+    override_1_el = Gtk.Template.Child()
+    override_2_el = Gtk.Template.Child()
+    override_3_el = Gtk.Template.Child()
+
+    model_group = Gtk.Template.Child()
+    model_directory_el = Gtk.Template.Child()
+    default_model_el = Gtk.Template.Child()
+    title_model_el = Gtk.Template.Child()
 
     def __init__(self, instance):
+        super().__init__()
+        print(self.connection_group)
+
         self.instance = instance
-        self.groups = []
+        self.set_title(_('Edit Instance') if self.instance.instance_id else _('Create Instance'))
+        self.model_list = []
 
-        self.groups.append(Adw.PreferencesGroup(
-            title=self.instance.instance_type_display,
-            description=self.instance.description if self.instance.description else self.instance.properties.get('url')
-        ))
+        # CONNECTION GROUP
+        self.connection_group.set_title(self.instance.instance_type_display)
+        self.connection_group.set_description(self.instance.description or self.instance.properties.get('url'))
 
-        if self.instance.instance_type == 'ollama:managed' and self.instance.row and self.instance.process:
-            suffix_button = Gtk.Button(icon_name='terminal-symbolic', valign=1, css_classes=['flat'], tooltip_text=_('Ollama Log'))
-            suffix_button.connect('clicked', lambda button: dialog.simple_log(
-                    parent = self.get_root(),
-                    title = _('Ollama Log'),
-                    summary_text = self.instance.log_summary[0],
-                    summary_classes = self.instance.log_summary[1],
-                    log_text = '\n'.join(self.instance.log_raw.split('\n')[-50:])
-                )
-            )
-            self.groups[-1].set_header_suffix(suffix_button)
+        self.set_simple_element_value(self.name_el)
 
-        if 'name' in self.instance.properties: #NAME
-            self.groups[-1].add(Adw.EntryRow(
-                title=_('Name'),
-                name='name',
-                text=self.instance.properties.get('name')
-            ))
-
-        if 'url' in self.instance.properties and self.instance.instance_type in ('ollama', 'ollama:managed', 'openai:generic'):
-            if self.instance.instance_type == 'ollama:managed': #PORT
+        self.set_simple_element_value(self.url_el)
+        if self.instance.instance_type in ('ollama', 'ollama:managed', 'openai:generic'):
+            if self.instance.instance_type == 'ollama:managed':
                 try:
                     port = int(self.instance.properties.get('url').split(':')[-1])
-                except Exception as e:
+                except:
                     port = 11435
-                self.groups[-1].add(Adw.SpinRow(
-                    title=_('Port'),
-                    subtitle=_("Which network port will '{}' use").format(self.instance.instance_type_display),
-                    name='port',
-                    digits=0,
-                    numeric=True,
-                    snap_to_ticks=True,
-                    adjustment=Gtk.Adjustment(
-                        value=port,
-                        lower=1024,
-                        upper=65535,
-                        step_increment=1
-                    )
-                ))
-            else: #URL
-                self.groups[-1].add(Adw.EntryRow(
-                    title=_('Instance URL'),
-                    name='url',
-                    text=self.instance.properties.get('url')
-                ))
+                self.port_el.connect('notify::value', lambda el, gparam: self.url_el.set_text('http://127.0.0.1:{}'.format(int(el.get_value()))))
+                self.port_el.set_value(port)
+                self.url_el.set_visible(False)
+            else:
+                self.port_el.set_visible(False)
+        else:
+            self.url_el.set_visible(False)
+            self.port_el.set_visible(False)
 
-        if 'api' in self.instance.properties: #API
-            normal_api_title = _('Ollama API Key (Optional)') if self.instance.instance_type == 'ollama' else _('API Key')
+        if 'api' in self.instance.properties:
+            normal_api_title = _('API Key (Optional)' if self.instance.instance_type == 'ollama' else _('API Key'))
             unchanged_api_title = _('API Key (Unchanged)')
-            if self.instance.properties.get('api'):
-                normal_api_title = unchanged_api_title
+            self.api_el.set_title(unchanged_api_title if self.instance.properties.get('api') else normal_api_title)
+            self.api_el.connect('changed', lambda el: el.set_title(normal_api_title if el.get_text() else unchanged_api_title))
+        self.set_simple_element_value(self.api_el)
 
-            api_el = Adw.PasswordEntryRow(
-                title=normal_api_title,
-                name='api'
-            )
+        # TWEAK GROUP
+        self.set_simple_element_value(self.think_el)
+        self.set_simple_element_value(self.expose_el)
+        self.set_simple_element_value(self.share_name_el)
+        self.set_simple_element_value(self.metadata_el)
+        self.set_simple_element_value(self.max_tokens_el)
 
-            api_el.connect('changed', lambda el: el.set_title(normal_api_title if el.get_text() else unchanged_api_title))
-            self.groups[-1].add(api_el)
+        # PARAMETERS GROUP
+        self.set_simple_element_value(self.override_parameters_el)
+        self.set_simple_element_value(self.temperature_el)
+        self.set_simple_element_value(self.seed_el)
+        self.set_simple_element_value(self.context_size_el)
 
-        self.groups.append(Adw.PreferencesGroup())
+        # KEEP ALIVE GROUP
+        if 'keep_alive' in self.instance.properties:
+            self.keep_alive_selector_el.set_selected(0 if self.instance.properties.get('keep_alive', -1) > 0 else self.instance.properties.get('keep_alive') + 2)
+            self.keep_alive_preset_changed(self.keep_alive_selector_el)
+            self.keep_alive_selector_el.get_ancestor(Adw.PreferencesGroup).set_visible(True)
 
-        if 'think' in self.instance.properties: #THINK
-            self.groups[-1].add(Adw.SwitchRow(
-                title=_('Thought Processing'),
-                subtitle=_('Have compatible reasoning models think about their response before generating a message.'),
-                name='think',
-                active=self.instance.properties.get('think')
-            ))
+        # OVERRIDES GROUP
+        for el in [self.override_0_el, self.override_1_el, self.override_2_el, self.override_3_el]:
+            self.set_simple_element_value(el)
 
-        if 'expose' in self.instance.properties: #EXPOSE
-            self.groups[-1].add(Adw.SwitchRow(
-                title=_('Expose Ollama to Network'),
-                subtitle=_('Make Ollama available for other devices and software in local network'),
-                name='expose',
-                active=self.instance.properties.get('expose')
-            ))
+        #MODEL GROUP
+        self.set_simple_element_value(self.model_directory_el)
 
-        if 'share_name' in self.instance.properties: #SHARE NAME
-            share_name_el = Adw.ComboRow(
-                title=_('Share Name'),
-                subtitle=_('Automatically share your name with the AI models.'),
-                name='share_name'
-            )
+        factory = Gtk.SignalListItemFactory()
+        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
+        factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
+        self.default_model_el.set_factory(factory)
+        self.title_model_el.set_factory(factory)
 
-            string_list = Gtk.StringList()
-            string_list.append(_('Do Not Share'))
-            string_list.append(_('Username'))
-            string_list.append(_('Full Name'))
+        string_list_default = Gtk.StringList()
+        string_list_title = Gtk.StringList()
+        string_list_title.append(_('Use Current Model'))
+        self.model_list = self.instance.get_local_models()
+        for i, model in enumerate(self.model_list):
+            string_list_default.append(prettify_model_name(model.get('name')))
+            string_list_title.append(prettify_model_name(model.get('name')))
 
-            share_name_el.set_model(string_list)
-            share_name_el.set_selected(self.instance.properties.get('share_name'))
-            self.groups[-1].add(share_name_el)
+        self.default_model_el.set_model(string_list_default)
+        self.set_simple_element_value(self.default_model_el)
+        self.title_model_el.set_model(string_list_title)
+        self.set_simple_element_value(self.title_model_el)
 
-        if 'show_response_metadata' in self.instance.properties: #SHOW REQUEST METADATA
-            self.groups[-1].add(Adw.SwitchRow(
-                title=_('Show Response Metadata'),
-                subtitle=_('Add the option to show reply metadata in the message as an attachment.'),
-                name='show_response_metadata',
-                active=self.instance.properties.get('show_response_metadata')
-            ))
+    def set_simple_element_value(self, el):
+        if el.get_name().startswith('override:'):
+            in_properties = el.get_name().removeprefix('override:') in self.instance.properties.get('overrides', {})
+        else:
+            in_properties = el.get_name() in self.instance.properties
+        el.set_visible(in_properties)
 
-        if 'max_tokens' in self.instance.properties: #MAX TOKENS
-            self.groups[-1].add(Adw.SpinRow(
-                title=_('Max Tokens'),
-                subtitle=_('Defines the maximum number of tokens (words + spaces) the AI can generate in a response. More tokens allow longer replies but may take more time and cost more.'),
-                name='max_tokens',
-                digits=0,
-                numeric=True,
-                snap_to_ticks=True,
-                adjustment=Gtk.Adjustment(
-                    value=self.instance.properties.get('max_tokens'),
-                    lower=50,
-                    upper=16384,
-                    step_increment=1
-                )
-            ))
+        if in_properties:
+            if el.get_name().startswith('override:'):
+                value = self.instance.properties.get('overrides', {}).get(el.get_name().removeprefix('override:'))
+            else:
+                value = self.instance.properties.get(el.get_name())
+            if el.get_name() == 'default_model':
+                in_properties = len(list(el.get_model())) > 0
+                if value:
+                    for i, model in enumerate(list(el.get_model())):
+                        if model.get_string() == prettify_model_name(value):
+                            el.set_selected(i)
+                            break
+            elif el.get_name() == 'title_model':
+                in_properties = len(list(el.get_model())) > 1
+                if value:
+                    for i, model in enumerate(list(el.get_model())):
+                        if model.get_string() == prettify_model_name(value):
+                            el.set_selected(i+1)
+                            break
+            elif el.get_name() == 'model_directory':
+                el.set_subtitle(value)
+            elif isinstance(el, Adw.ExpanderRow):
+                el.set_enable_expansion(value)
+            elif isinstance(el, Adw.EntryRow) and not isinstance(el, Adw.PasswordEntryRow):
+                el.set_text(value)
+            elif isinstance(el, Adw.SpinRow):
+                el.set_value(value)
+            elif isinstance(el, Adw.SwitchRow):
+                el.set_active(value)
+            elif isinstance(el, Adw.ComboRow):
+                el.set_selected(value)
 
-        if any([p in ('temperature', 'seed', 'num_ctx', 'keep_alive') for p in list(self.instance.properties)]):
-            self.groups.append(Adw.PreferencesGroup())
-            op_expander_row = Adw.ExpanderRow(
-                title=_('Override Parameters'),
-                subtitle=_('These parameters overrides the behavior of the instance and models.'),
-                show_enable_switch=True,
-                expanded=self.instance.properties.get('override_parameters'),
-                enable_expansion=self.instance.properties.get('override_parameters'),
-                name='override_parameters'
-            )
-            self.groups[-1].add(op_expander_row)
+        group = el.get_ancestor(Adw.PreferencesGroup)
+        if group:
+            group.set_visible(group.get_visible() or in_properties)
 
-            if 'temperature' in self.instance.properties: #TEMPERATURE
-                op_expander_row.add_row(Adw.SpinRow(
-                    title=_('Temperature'),
-                    subtitle=_('Increasing the temperature will make the models answer more creatively.'),
-                    name='temperature',
-                    digits=2,
-                    numeric=True,
-                    snap_to_ticks=True,
-                    adjustment=Gtk.Adjustment(
-                        value=self.instance.properties.get('temperature'),
-                        lower=0.01,
-                        upper=2,
-                        step_increment=0.01
-                    )
-                ))
+    def get_value(self, el):
+        if el.get_name() == 'default_model':
+            if len(self.model_list) > 0:
+                return self.model_list[el.get_selected()]
+        elif el.get_name() == 'title_model':
+            if len(self.model_list) > 0:
+                return self.model_list[el.get_selected() + 1]
+        elif el.get_name() == 'model_directory':
+            return el.get_subtitle()
+        elif isinstance(el, Adw.PasswordEntryRow):
+            return el.get_text().strip() or self.instance.properties.get(el.get_name())
+        elif isinstance(el, Adw.ExpanderRow):
+            return el.get_enable_expansion()
+        elif isinstance(el, Adw.EntryRow):
+            return el.get_text().strip()
+        elif isinstance(el, Adw.SpinRow):
+            return el.get_value()
+        elif isinstance(el, Adw.SwitchRow):
+            return el.get_active()
+        elif isinstance(el, Adw.ComboRow):
+            return el.get_selected()
 
-            if 'seed' in self.instance.properties: #SEED
-                op_expander_row.add_row(Adw.SpinRow(
-                    title=_('Seed'),
-                    subtitle=_('Setting this to a specific number other than 0 will make the model generate the same text for the same prompt.'),
-                    name='seed',
-                    digits=0,
-                    numeric=True,
-                    snap_to_ticks=True,
-                    adjustment=Gtk.Adjustment(
-                        value=self.instance.properties.get('seed'),
-                        lower=0,
-                        upper=99999999,
-                        step_increment=1
-                    )
-                ))
+    @Gtk.Template.Callback()
+    def save_requested(self, button=None):
+        def save_elements_values(elements:list):
+            for el in elements:
+                key = el.get_name()
+                new_value = self.get_value(el)
+                if key in self.instance.properties:
+                    self.instance.properties[key] = new_value
+                elif key.removeprefix('override:') in self.instance.properties.get('overrides', {}):
+                    self.instance.properties['overrides'][key.removeprefix('override:')] = new_value
 
-            if 'num_ctx' in self.instance.properties:
-                op_expander_row.add_row(Adw.SpinRow(
-                    title=_('Context Window Size'),
-                    subtitle=_('Controls how many tokens (pieces of text) the model can process and remember at once.'),
-                    name='num_ctx',
-                    digits=0,
-                    numeric=True,
-                    snap_to_ticks=True,
-                    adjustment=Gtk.Adjustment(
-                        value=self.instance.properties.get('num_ctx'),
-                        lower=512,
-                        upper=131072,
-                        step_increment=512
-                    )
-                ))
+                if isinstance(el, Adw.ExpanderRow):
+                    save_elements_values(list(list(list(list(el)[0])[1])[0]))
 
-        if 'keep_alive' in self.instance.properties: # KEEP_ALIVE
-            self.groups.append(Adw.PreferencesGroup())
-
-            factory = Gtk.SignalListItemFactory()
-            factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
-            factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
-
-            keep_alive_preset_el = Adw.ComboRow(
-                title=_('Keep Alive Presets'),
-                subtitle=_('How the instance should handle idle models.'),
-                name='keep_alive_selector',
-                factory=factory
-            )
-            string_list = Gtk.StringList()
-            string_list.append(_('Set Timer'))
-            string_list.append(_('Keep Alive Forever'))
-            string_list.append(_('Unload After Use'))
-            keep_alive_preset_el.set_model(string_list)
-            keep_alive_preset_el.set_selected(0 if self.instance.properties.get('keep_alive') > 0 else self.instance.properties.get('keep_alive') + 2)
-
-            self.groups[-1].add(keep_alive_preset_el)
-
-            keep_alive_el = Adw.SpinRow(
-                title=_('Minutes'),
-                subtitle=_('The amount of time the instance should keep models loaded after they go idle.'), # -1 forever, 0 instant
-                name='keep_alive',
-                digits=0,
-                numeric=True,
-                snap_to_ticks=True
-            )
-            self.groups[-1].add(keep_alive_el)
-
-            def keep_alive_preset_changed(combo, el):
-                index = combo.get_selected()
-                el.set_visible(index == 0)
-                if index == 0:
-                    el.set_adjustment(Gtk.Adjustment(
-                        value=int(self.instance.properties.get('keep_alive') / 60),
-                        lower=1,
-                        upper=1440,
-                        step_increment=1
-                    ))
-                elif index == 1:
-                    el.set_adjustment(Gtk.Adjustment(
-                        value=-1,
-                        lower=-1,
-                        upper=-1,
-                    ))
-                else:
-                    el.set_adjustment(Gtk.Adjustment(
-                        value=0,
-                        lower=0,
-                        upper=0,
-                    ))
-
-            keep_alive_preset_changed(keep_alive_preset_el, keep_alive_el)
-            keep_alive_preset_el.connect('notify::selected', lambda combo, _, el=keep_alive_el: keep_alive_preset_changed(combo, el))
-
-        if 'overrides' in self.instance.properties: #OVERRIDES
-            self.groups.append(Adw.PreferencesGroup(
-                title=_('Overrides'),
-                description=_('These entries are optional, they are used to troubleshoot GPU related problems with Ollama.')
-            ))
-            for name, value in self.instance.properties.get('overrides').items():
-                override_el = Adw.EntryRow(
-                    title=name,
-                    name='override:{}'.format(name),
-                    text=value
-                )
-                if override_urls.get(name):
-                    link_button = Gtk.Button(
-                        name=override_urls.get(name),
-                        tooltip_text=override_urls.get(name),
-                        icon_name='globe-symbolic',
-                        valign=3
-                    )
-                    link_button.connect('clicked', lambda button: Gio.AppInfo.launch_default_for_uri(button.get_name()))
-                    override_el.add_suffix(link_button)
-                self.groups[-1].add(override_el)
-
-        if 'model_directory' in self.instance.properties: #MODEL DIRECTORY
-            self.groups.append(Adw.PreferencesGroup())
-            model_directory_el = Adw.ActionRow(
-                title=_('Model Directory'),
-                subtitle=self.instance.properties.get('model_directory'),
-                name="model_directory"
-            )
-            open_dir_button = Gtk.Button(
-                tooltip_text=_('Select Directory'),
-                icon_name='inode-directory-symbolic',
-                valign=3
-            )
-            open_dir_button.connect('clicked', lambda button, row=model_directory_el: dialog.simple_directory(
-                    parent = open_dir_button.get_root(),
-                    callback = lambda res, row=model_directory_el: row.set_subtitle(res.get_path())
-                )
-            )
-            model_directory_el.add_suffix(open_dir_button)
-            self.groups[-1].add(model_directory_el)
-
-        if self.instance.row and ('default_model' in self.instance.properties or 'title_model' in self.instance.properties):
-            self.groups.append(Adw.PreferencesGroup())
-
-            factory = Gtk.SignalListItemFactory()
-            factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
-            factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
-
-            default_model_el = Adw.ComboRow(
-                title=_('Default Model'),
-                subtitle=_('Model to select when starting a new chat.'),
-                name='default_model',
-                factory=factory
-            )
-            default_model_index = 0
-
-            title_model_el = Adw.ComboRow(
-                title=_('Title Model'),
-                subtitle=_('Model to use when generating a chat title.'),
-                name='title_model',
-                factory=factory
-            )
-            title_model_index = 0
-
-            string_list_default = Gtk.StringList()
-            string_list_title = Gtk.StringList()
-            string_list_title.append(_('Use Current Model'))
-            for i, model in enumerate(self.instance.get_local_models()):
-                string_list_default.append(prettify_model_name(model.get('name')))
-                string_list_title.append(prettify_model_name(model.get('name')))
-                if model.get('name') == self.instance.properties.get('default_model'):
-                    default_model_index = i
-                if model.get('name') == self.instance.properties.get('title_model'):
-                    title_model_index = i + 1
-
-            default_model_el.set_model(string_list_default)
-            default_model_el.set_selected(default_model_index)
-            title_model_el.set_model(string_list_title)
-            title_model_el.set_selected(title_model_index)
-            self.groups[-1].add(default_model_el)
-            self.groups[-1].add(title_model_el)
-
-        pp = Adw.PreferencesPage()
-        for group in self.groups:
-            pp.add(group)
-
-        cancel_button = Gtk.Button(
-            label=_('Cancel'),
-            tooltip_text=_('Cancel'),
-            css_classes=['raised']
-        )
-        cancel_button.connect('clicked', lambda button: self.close())
-
-        save_button = Gtk.Button(
-            label=_('Save'),
-            tooltip_text=_('Save'),
-            css_classes=['suggested-action']
-        )
-        save_button.connect('clicked', lambda button: self.save(self.instance.get_local_models()))
-
-        hb = Adw.HeaderBar(
-            show_start_title_buttons=False,
-            show_end_title_buttons=False
-        )
-        hb.pack_start(cancel_button)
-        hb.pack_end(save_button)
-
-        tbv=Adw.ToolbarView()
-        tbv.add_top_bar(hb)
-        tbv.set_content(pp)
-        super().__init__(
-            child=tbv,
-            title=_('Edit Instance') if self.instance.row else _('Create Instance'),
-            content_width=500
-        )
-
-    def save(self, local_model_list:list):
-        save_functions = {
-            'name': lambda val: val if val else _('Instance'),
-            'url': lambda val: '{}{}'.format('http://' if not re.match(r'^(http|https)://', val) else '', val.rstrip('/')),
-            'api': lambda val: self.instance.properties.get('api') if self.instance.properties.get('api') and not val else (val if val else ''),
-            'keep_alive': lambda val: val * 60 if val > 0 else val,
-            'override': lambda val: val.strip(),
-            'model_directory': lambda val: val.strip(),
-            'default_model': lambda val: local_model_list[val].get('name') if val >= 0 and val < len(local_model_list) else None,
-            'title_model': lambda val: local_model_list[val-1].get('name') if val >= 1 and val < len(local_model_list) else None,
-        }
-
-        def apply_properties(element_list):
-            for el in element_list:
-                value = None
-                if isinstance(el, Adw.EntryRow) or isinstance(el, Adw.PasswordEntryRow):
-                    value = el.get_text().replace('\n', '')
-                elif isinstance(el, Adw.SpinRow):
-                    value = el.get_value()
-                elif isinstance(el, Adw.SwitchRow) or isinstance(el, Gtk.Switch):
-                    value = el.get_active()
-                elif isinstance(el, Adw.ComboRow):
-                    if len(list(el.get_model())) <= 0:
-                        value = -1
-                    else:
-                        value = el.get_selected()
-                elif isinstance(el, Adw.ActionRow):
-                    value = el.get_subtitle()
-                elif isinstance(el, Adw.ExpanderRow):
-                    apply_properties(list(list(list(list(el)[0])[1])[0])) # Recursive
-                    value = el.get_enable_expansion()
-
-                if el.get_name().startswith('override:'):
-                    if 'overrides' not in self.instance.properties:
-                        self.instance.properties['overrides'] = {}
-                    self.instance.properties['overrides'][el.get_name().split(':')[1]] = value
-                elif el.get_name() == 'port':
-                    self.instance.properties['url'] = 'http://0.0.0.0:{}'.format(int(value))
-                elif save_functions.get(el.get_name()):
-                    self.instance.properties[el.get_name()] = save_functions.get(el.get_name())(value)
-                else:
-                    self.instance.properties[el.get_name()] = value
-                    if el.get_name() == 'expose':
-                        port = int(self.instance.properties.get('url').split(':')[2])
-                        if value:
-                            self.instance.properties['url'] = 'http://0.0.0.0:{}'.format(port)
-                        else:
-                            self.instance.properties['url'] = 'http://127.0.0.1:{}'.format(port)
-
-        for group in self.groups:
-            apply_properties(list(list(list(list(group)[0])[1])[0]))
+        for group in (self.connection_group, self.tweak_group, self.parameters_group, self.overrides_group, self.model_group):
+            save_elements_values(list(list(list(list(group)[0])[1])[0]))
 
         if not self.instance.instance_id:
             self.instance.instance_id = generate_uuid()
@@ -457,7 +237,42 @@ class InstancePreferencesGroup(Adw.Dialog):
             self.get_root().instance_manager_stack.set_visible_child_name('no-instances')
         self.instance.stop()
 
-        self.force_close()
+        self.close()
+
+    @Gtk.Template.Callback()
+    def keep_alive_preset_changed(self, combo, gparam=None):
+        index = combo.get_selected()
+        self.keep_alive_minutes_el.set_visible(index == 0)
+        if index == 0:
+            self.keep_alive_minutes_el.set_adjustment(Gtk.Adjustment(
+                value=int(self.instance.properties.get('keep_alive', 60) / 60),
+                lower=1,
+                upper=1440,
+                step_increment=1
+            ))
+        elif index == 1:
+            self.keep_alive_minutes_el.set_adjustment(Gtk.Adjustment(
+                value=-1,
+                lower=-1,
+                upper=-1,
+            ))
+        else:
+            self.keep_alive_minutes_el.set_adjustment(Gtk.Adjustment(
+                value=0,
+                lower=0,
+                upper=0,
+            ))
+
+    @Gtk.Template.Callback()
+    def close_requested(self, button=None):
+        self.close()
+
+    @Gtk.Template.Callback()
+    def model_directory_requested(self, button):
+        dialog.simple_directory(
+            parent = self.get_root(),
+            callback = lambda res, row=self.model_directory_el: row.set_subtitle(res.get_path() if res else row.get_subtitle())
+        )
 
 # Fallback for when there are no instances
 class Empty:
@@ -488,7 +303,6 @@ class InstanceRow(Adw.ActionRow):
 
     def __init__(self, instance, pinned:bool=False):
         self.instance = instance
-        #self.instance.set_row(self)
         self.pinned = pinned
         super().__init__(
             title = self.instance.properties.get('name'),
@@ -524,7 +338,7 @@ class InstanceRow(Adw.ActionRow):
             self.add_suffix(edit_button)
 
     def show_edit(self):
-        InstancePreferencesGroup(self.instance).present(self.get_root())
+        InstancePreferencesDialog(self.instance).present(self.get_root())
 
     def remove(self):
         SQL.delete_instance(self.instance.instance_id)

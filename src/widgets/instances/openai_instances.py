@@ -51,17 +51,19 @@ class BaseInstance:
         pass
 
     def prepare_chat(self, bot_message):
-        bot_message.chat.busy = True
-        if bot_message.chat.chat_id:
-            bot_message.chat.row.spinner.set_visible(True)
+        chat_element = bot_message.get_ancestor(chat.Chat)
+        if chat_element and chat_element.chat_id:
+            chat_element.row.spinner.set_visible(True)
             try:
                 bot_message.get_root().global_footer.toggle_action_button(False)
             except:
                 pass
-        bot_message.chat.set_visible_child_name('content')
 
-        messages = bot_message.chat.convert_to_json()[:list(bot_message.chat.container).index(bot_message)]
-        return bot_message.chat, messages
+            chat_element.busy = True
+            chat_element.set_visible_child_name('content')
+
+        messages = chat_element.convert_to_ollama()[:list(chat_element.container).index(bot_message)]
+        return chat_element, messages
 
     def generate_message(self, bot_message, model:str):
         chat, messages = self.prepare_chat(bot_message)
@@ -81,8 +83,6 @@ class BaseInstance:
 
     def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
         chat, messages = self.prepare_chat(bot_message)
-        if bot_message.options_button:
-            bot_message.options_button.set_active(False)
         bot_message.block_container.prepare_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
@@ -158,8 +158,6 @@ class BaseInstance:
             bot_message.finish_generation('')
 
     def generate_response(self, bot_message, chat, messages:list, model:str):
-        if bot_message.options_button:
-            bot_message.options_button.set_active(False)
         bot_message.block_container.prepare_generating_block()
 
         if 'no-system-messages' in self.limitations:
@@ -287,9 +285,9 @@ class BaseInstance:
                 self.row.get_parent().unselect_all()
             return {}
 
-    def pull_model(self, model_name:str, callback:callable):
-        SQL.append_online_instance_model_list(self.instance_id, model_name)
-        GLib.timeout_add(5000, lambda: callback({'status': 'success'}) and False)
+    def pull_model(self, model):
+        SQL.append_online_instance_model_list(self.instance_id, model.get_name())
+        GLib.timeout_add(5000, lambda: model.update_progressbar(-1) and False)
 
     def get_local_models(self) -> list:
         local_models = []
@@ -340,7 +338,7 @@ class Gemini(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
-        return []
+        return {}
 
     def get_model_info(self, model_name:str) -> dict:
         try:
@@ -385,6 +383,7 @@ class Together(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
+        return {}
 
 class Venice(BaseInstance):
     instance_type = 'venice'
@@ -425,7 +424,7 @@ class OpenRouter(BaseInstance):
     instance_type_display = 'OpenRouter AI'
     instance_url = 'https://openrouter.ai/api/v1/'
 
-    def get_available_models(self) -> list:
+    def get_available_models(self) -> dict:
         try:
             if not self.available_models or len(self.available_models) == 0:
                 self.available_models = {}
@@ -445,7 +444,7 @@ class OpenRouter(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
-            return []
+            return {}
 
 class Qwen(BaseInstance):
     instance_type = 'qwen'
@@ -459,7 +458,7 @@ class Fireworks(BaseInstance):
     instance_url = 'https://api.fireworks.ai/inference/v1/'
     description = _('Fireworks AI inference platform')
 
-    def get_available_models(self) -> list:
+    def get_available_models(self) -> dict:
         try:
             if not self.available_models or len(self.available_models) == 0:
                 self.available_models = {}
@@ -484,7 +483,7 @@ class Fireworks(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
-            return []
+            return {}
 
 class LambdaLabs(BaseInstance):
     instance_type = 'lambda_labs'
@@ -492,10 +491,10 @@ class LambdaLabs(BaseInstance):
     instance_url = 'https://api.lambdalabs.com/v1/'
     description = _('Lambda Labs cloud inference API')
 
-    def get_available_models(self) -> list:
+    def get_available_models(self) -> dict:
         try:
             if not self.available_models or len(self.available_models) == 0:
-                self.available_models = []
+                self.available_models = {}
                 response = requests.get(
                     'https://api.lambdalabs.com/v1/models',
                     headers={
@@ -517,7 +516,7 @@ class LambdaLabs(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
-            return []
+            return {}
 
 class Cerebras(BaseInstance):
     instance_type = 'cerebras'

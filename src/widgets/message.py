@@ -6,110 +6,73 @@ Handles the message widget
 import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GtkSource, Spelling
 import os, datetime, threading, sys, base64, logging, re, tempfile
-from ..sql_manager import prettify_model_name, generate_uuid, Instance as SQL
-from . import attachments, blocks, dialog, voice, tools, models
+from ..sql_manager import prettify_model_name, generate_uuid, format_datetime, Instance as SQL
+from . import attachments, blocks, dialog, voice, tools, models, chat
 
 logger = logging.getLogger(__name__)
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/message/popup.ui')
 class OptionPopup(Gtk.Popover):
     __gtype_name__ = 'AlpacaMessagePopup'
 
-    def __init__(self, message_element):
-        self.message_element = message_element
-        container = Gtk.Box(
-            spacing=5
-        )
-        super().__init__(
-            has_arrow=True,
-            child=container
-        )
+    delete_button = Gtk.Template.Child()
+    copy_button = Gtk.Template.Child()
+    edit_button = Gtk.Template.Child()
+    regenerate_button = Gtk.Template.Child()
+    tts_button = None
 
-        self.delete_button = Gtk.Button(
-            halign=1,
-            hexpand=True,
-            icon_name="user-trash-symbolic",
-            css_classes = ["flat"],
-            tooltip_text = _("Remove Message")
-        )
-        self.delete_button.connect('clicked', lambda *_: self.delete_message())
-        container.append(self.delete_button)
-
-        self.copy_button = Gtk.Button(
-            halign=1,
-            hexpand=True,
-            icon_name="edit-copy-symbolic",
-            css_classes=["flat"],
-            tooltip_text=_("Copy Message")
-        )
-        self.copy_button.connect('clicked', lambda *_: self.copy_message())
-        container.append(self.copy_button)
-
-        self.edit_button = Gtk.Button(
-            halign=1,
-            hexpand=True,
-            icon_name="edit-symbolic",
-            css_classes=["flat"],
-            tooltip_text=_("Edit Message")
-        )
-        self.edit_button.connect('clicked', lambda *_: self.edit_message())
-
-        container.append(self.edit_button)
-        self.regenerate_button = Gtk.Button(
-            halign=1,
-            hexpand=True,
-            icon_name="update-symbolic",
-            css_classes=["flat"],
-            tooltip_text=_("Regenerate Message")
-        )
-        if self.message_element.get_model():
-            self.regenerate_button.connect('clicked', lambda *_: self.regenerate_message())
-            container.append(self.regenerate_button)
-        self.tts_button = voice.DictateToggleButton(self.message_element)
-        container.append(self.tts_button)
+    def __init__(self):
+        super().__init__()
+        self.tts_button = voice.DictateToggleButton()
+        self.get_child().append(self.tts_button)
 
     def change_status(self, status:bool):
         self.delete_button.set_sensitive(status)
         self.edit_button.set_sensitive(status)
         self.regenerate_button.set_sensitive(status)
 
-    def delete_message(self):
-        logger.debug("Deleting message")
-        chat = self.message_element.chat
-        message_id = self.message_element.message_id
-        SQL.delete_message(self.message_element)
-        self.message_element.unparent()
-        if len(list(chat.container)) == 0:
-            chat.set_visible_child_name('welcome-screen')
+    @Gtk.Template.Callback()
+    def delete_message(self, button=None):
+        message_element = self.get_ancestor(Message)
+        chat_element = self.get_ancestor(chat.Chat)
+        message_id = message_element.message_id
+        SQL.delete_message(message_element)
+        message_element.unparent()
+        if len(list(chat_element.container)) == 0:
+            chat_element.set_visible_child_name('welcome-screen')
 
-    def copy_message(self):
-        logger.debug("Copying message")
+    @Gtk.Template.Callback()
+    def copy_message(self, button=None):
+        message_element = self.get_ancestor(Message)
         clipboard = Gdk.Display().get_default().get_clipboard()
-        clipboard.set(self.message_element.get_content())
+        clipboard.set(message_element.get_content())
         dialog.show_toast(_("Message copied to the clipboard"), self.get_root())
 
-    def edit_message(self):
-        logger.debug("Editing message")
+    @Gtk.Template.Callback()
+    def edit_message(self, button=None):
+        message_element = self.get_ancestor(Message)
         self.popdown()
-        self.message_element.header_container.set_visible(False)
-        self.message_element.set_halign(0)
-        self.message_element.main_stack.get_child_by_name('editing').set_visible(True)
-        self.message_element.main_stack.get_child_by_name('editing').set_content(self.message_element.get_content())
-        self.message_element.main_stack.set_visible_child_name('editing')
+        self.change_status(False)
+        message_element.set_halign(0)
+        message_element.main_stack.get_child_by_name('editing').set_visible(True)
+        message_element.main_stack.get_child_by_name('editing').set_content(message_element.get_content())
+        message_element.main_stack.set_visible_child_name('editing')
 
-    def regenerate_message(self):
-        chat = self.message_element.chat
+    @Gtk.Template.Callback()
+    def regenerate_message(self, button=None):
+        message_element = self.get_ancestor(Message)
+        chat_element = self.get_ancestor(chat.Chat)
         model = self.get_root().get_selected_model().get_name()
 
-        if not chat.busy and model:
-            for att in list(self.message_element.image_attachment_container.container) + list(self.message_element.attachment_container.container):
+        if not chat_element.busy and model:
+            for att in list(message_element.image_attachment_container.container) + list(message_element.attachment_container.container):
                 SQL.delete_attachment(att)
                 att.unparent()
 
-            #self.message_element.block_container.clear()
-            self.message_element.main_stack.set_visible_child_name('loading')
-            self.message_element.author = model
-            self.message_element.update_profile_picture()
-            self.message_element.popup.change_status(False)
+            #message_element.block_container.clear()
+            message_element.main_stack.set_visible_child_name('loading')
+            message_element.author = model
+            message_element.update_profile_picture()
 
             selected_tool = self.get_root().global_footer.tool_selector.get_selected_item()
             tools = {}
@@ -122,7 +85,7 @@ class OptionPopup(Gtk.Popover):
                 threading.Thread(
                     target=self.get_root().get_current_instance().use_tools,
                     args=(
-                        self.message_element,
+                        message_element,
                         model,
                         tools,
                         True
@@ -131,101 +94,17 @@ class OptionPopup(Gtk.Popover):
                 ).start()
             else:
                 threading.Thread(
-                    target=self.message_element.get_root().get_current_instance().generate_message,
+                    target=message_element.get_root().get_current_instance().generate_message,
                     args=(
-                        self.message_element,
+                        message_element,
                         model
                     ),
                     daemon=True
                 ).start()
 
-            self.message_element.main_stack.set_visible_child_name('loading')
+            message_element.main_stack.set_visible_child_name('loading')
         else:
             dialog.show_toast(_("Message cannot be regenerated while receiving a response"), self.get_root())
-
-class MessageHeader(Gtk.Box):
-    __gtype_name__ = 'AlpacaMessageHeader'
-
-    def __init__(self, message, dt:datetime.datetime, popover=None):
-        self.message = message
-        super().__init__(
-            orientation=0,
-            hexpand=True,
-            spacing=5,
-            halign=0
-        )
-        if popover:
-            self.message.options_button = Gtk.MenuButton(
-                icon_name='view-more-horizontal-symbolic',
-                css_classes=['message_options_button', 'flat', 'circular', 'dim-label'],
-                popover=popover
-            )
-            self.append(self.message.options_button)
-
-        label = Gtk.Label(
-            hexpand=True,
-            wrap=True,
-            wrap_mode=2,
-            margin_end=5,
-            margin_start=0 if popover else 5,
-            xalign=0,
-            focusable=True,
-            css_classes=['dim-label'] if popover else []
-        )
-
-        author = prettify_model_name(self.message.get_model())
-        if not author:
-            author = ""
-
-        if ':' in author:
-            author = author.split(':')
-            if author[1].lower() not in ('latest', 'custom'):
-                author = '{} ({})'.format(author[0], author[1])
-            else:
-                author = author[0]
-        author = author.title()
-
-        if popover:
-            label.set_markup(
-                "<small>{}{}</small>".format(
-                    ('{} • ' if self.message.author else '{}').format(author),
-                    GLib.markup_escape_text(self.format_datetime(dt))
-                )
-            )
-        else:
-            label.set_markup(
-                "<span weight='bold'>{}</span>\n<small>{}</small>".format(
-                    author,
-                    GLib.markup_escape_text(self.format_datetime(dt))
-                )
-            )
-        self.append(label)
-
-    def format_datetime(self, dt) -> str:
-        date = GLib.DateTime.new(
-            GLib.DateTime.new_now_local().get_timezone(),
-            dt.year,
-            dt.month,
-            dt.day,
-            dt.hour,
-            dt.minute,
-            dt.second
-        )
-        current_date = GLib.DateTime.new_now_local()
-        if date.format("%Y/%m/%d") == current_date.format("%Y/%m/%d"):
-            if os.getenv('ALPACA_USE_24H', '0') == '1':
-                return date.format("%H:%M")
-            else:
-                return date.format("%I:%M %p")
-        if date.format("%Y") == current_date.format("%Y"):
-            if os.getenv('ALPACA_USE_24H', '0') == '1':
-                return date.format("%b %d, %H:%M")
-            else:
-                return date.format("%b %d, %H:%M")
-        if os.getenv('ALPACA_USE_24H', '0') == '1':
-            return date.format("%b %d %Y, %H:%M")
-        else:
-            return date.format("%b %d %Y, %H:%M")
 
 class BlockContainer(Gtk.Box):
     __gtype_name__ = 'AlpacaBlockContainer'
@@ -315,80 +194,51 @@ class BlockContainer(Gtk.Box):
                 else:
                     GLib.idle_add(self.insert_child_after, block, list(self)[-2])
 
-        if not self.message.popup.tts_button.get_active() and (self.message.get_root().settings.get_value('tts-auto-dictate').unpack() or self.message.chat.chat_id=='LiveChat'):
+        chat_element = self.get_ancestor(chat.Chat)
+        if not self.message.popup.tts_button.get_active() and (self.message.get_root().settings.get_value('tts-auto-dictate').unpack() or (chat_element and chat_element.chat_id=='LiveChat')):
             GLib.idle_add(self.message.popup.tts_button.set_active, True)
 
     def get_content(self) -> list:
         return [block.get_content() for block in list(self)]
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/message/message.ui')
 class Message(Gtk.Box):
     __gtype_name__ = 'AlpacaMessage'
 
-    def __init__(self, dt:datetime.datetime, message_id:str=-1, chat=None, mode:int=0, author:str=None):
+    main_container = Gtk.Template.Child()
+    pfp_options_button = Gtk.Template.Child()
+    header_options_button = Gtk.Template.Child()
+    header_label = Gtk.Template.Child()
+    main_stack = Gtk.Template.Child()
+    content_container = Gtk.Template.Child()
+
+    def __init__(self, dt:datetime.datetime, message_id:str=-1, mode:int=0, author:str=None):
         """
         Mode 0: User
         Mode 1: Assistant
         Mode 2: System
         """
-        self.chat = chat
         self.mode = mode
         self.author = author
         self.dt = dt
-        self.options_button = None
+        self.option_button = None
         self.message_id = message_id
-        self.popup = None
 
-        super().__init__(
-            css_classes=["message"],
-            name=message_id,
-            halign=2 if mode == 0 else 0,
-            spacing=2
-        )
-        self.pfp_container = Adw.Bin()
-        self.append(self.pfp_container)
+        super().__init__()
+        self.popup = OptionPopup()
 
-        main_container = Gtk.Box(
-            orientation=1,
-            halign=0,
-            css_classes=["card", "user_message"] if mode==0 else ["response_message"],
-            spacing=5,
-            width_request=100 if mode==0 else -1
-        )
-        self.append(main_container)
-
-        self.header_container = Adw.Bin(
-            hexpand=True
-        )
-        main_container.append(self.header_container)
-
-        self.main_stack = Gtk.Stack(
-            transition_type=1
-        )
-        main_container.append(self.main_stack)
-        self.main_stack.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
-        content_container = Gtk.Box(
-            orientation=1,
-            spacing=5
-        )
+        self.set_halign(2 if mode == 0 else 0)
+        self.main_container.set_css_classes(['card', 'user_message'] if mode==0 else ['response_message'])
+        self.main_container.set_size_request(100 if mode==0 else -1, -1)
 
         self.image_attachment_container = attachments.ImageAttachmentContainer()
-        content_container.append(self.image_attachment_container)
+        self.content_container.append(self.image_attachment_container)
         self.attachment_container = attachments.AttachmentContainer()
-        content_container.append(self.attachment_container)
-
-        self.block_container = BlockContainer(
-            message=self
-        )
-        content_container.append(self.block_container)
-        self.main_stack.add_named(content_container, 'content')
-        self.main_stack.add_named(blocks.EditingText(self), 'editing')
+        self.content_container.append(self.attachment_container)
+        self.block_container = BlockContainer(message=self)
+        self.content_container.append(self.block_container)
+        self.main_stack.add_named(blocks.EditingText(), 'editing')
         self.update_profile_picture()
-
-    def get_root(self) -> Gtk.Widget | None:
-        root = super().get_root()
-        if not root:
-            root = self.chat.row.get_root()
-        return root
 
     def get_content(self) -> str:
         return ''.join(self.block_container.get_content())
@@ -404,37 +254,57 @@ class Message(Gtk.Box):
             return self.author
 
     def update_header(self, pfp_b64:str = None) -> None:
-        if self.popup:
-            self.popup.get_parent().set_popover()
-        else:
-            self.popup = OptionPopup(self)
-        self.header_container.set_child(
-            MessageHeader(
-                message=self,
-                dt=self.dt,
-                popover=None if pfp_b64 else self.popup
+        author = prettify_model_name(self.get_model())
+        if not author:
+            author = ""
+
+        if ':' in author:
+            author = author.split(':')
+            if author[1].lower() not in ('latest', 'custom'):
+                author = '{} ({})'.format(author[0], author[1])
+            else:
+                author = author[0]
+        author = author.title()
+
+        self.popup.unparent()
+        if pfp_b64: # There's going to be a profile picture
+            # Adjust header label
+            self.header_label.set_margin_start(5)
+            self.header_label.remove_css_class('dim-label')
+            self.header_label.set_markup(
+                "<span weight='bold'>{}</span>\n<small>{}</small>".format(
+                    author,
+                    GLib.markup_escape_text(format_datetime(self.dt))
+                )
             )
-        )
-        if pfp_b64:
+
+            # Prepare profile picture
             image_data = base64.b64decode(pfp_b64)
             texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
             image_element = Gtk.Image.new_from_paintable(texture)
             image_element.set_size_request(40, 40)
             image_element.set_pixel_size(40)
-            self.options_button = Gtk.MenuButton(
-                css_classes=['circular', 'flat'],
-                valign=1,
-                popover=self.popup,
-                margin_top=5,
-                margin_start=5
-            )
-            self.options_button.set_overflow(1)
-            self.options_button.set_child(image_element)
-            list(self.options_button)[0].add_css_class('circular')
-            list(self.options_button)[0].set_overflow(1)
-            self.pfp_container.set_child(self.options_button)
+            self.pfp_options_button.set_child(image_element)
+            list(self.pfp_options_button)[0].set_overflow(1)
+
+            # Give popup to profile picture
+            self.pfp_options_button.set_popover(self.popup)
         else:
-            self.pfp_container.set_child()
+            # Adjust header label
+            self.header_label.set_margin_start(0)
+            self.header_label.add_css_class('dim-label')
+            self.header_label.set_markup(
+                "<small>{}{}</small>".format(
+                    ('{} • ' if author else '{}').format(author),
+                    GLib.markup_escape_text(format_datetime(self.dt))
+                )
+            )
+
+            # Give popup to header ... button
+            self.header_options_button.set_popover(self.popup)
+
+        self.header_options_button.set_visible(not pfp_b64)
+        self.pfp_options_button.set_visible(pfp_b64)
 
     def update_profile_picture(self):
         self.update_header(
@@ -454,31 +324,37 @@ class Message(Gtk.Box):
     def update_message(self, content):
         if content:
             GLib.idle_add(self.main_stack.set_visible_child_name, 'content')
-            vadjustment = self.chat.scrolledwindow.get_vadjustment()
-            if vadjustment.get_value() + 150 >= vadjustment.get_upper() - vadjustment.get_page_size():
-                GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
             GLib.idle_add(self.block_container.generating_block.append_content, content)
 
+            chat_element = self.get_ancestor(chat.Chat)
+            if chat_element:
+                vadjustment = chat_element.scrolledwindow.get_vadjustment()
+                if vadjustment.get_value() + 150 >= vadjustment.get_upper() - vadjustment.get_page_size():
+                    GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
+
+
     def finish_generation(self, response_metadata:str=None):
+        chat_element = self.get_ancestor(chat.Chat)
         def send_notification():
             result_text = self.get_content()
             if result_text:
                 dialog.show_notification(
                     root_widget=self.get_root(),
-                    title=self.chat.get_name(),
+                    title=chat_element.get_name() if chat_element else _("Chat"),
                     body=result_text[:200] + (result_text[200:] and '…'),
                     icon=Gio.ThemedIcon.new('chat-message-new-symbolic')
                 )
 
         self.popup.change_status(True)
-        if self.get_root().get_name() == 'AlpacaWindow':
-            GLib.idle_add(self.chat.row.spinner.set_visible, False)
-            if self.get_root().chat_bin.get_child().get_name() != self.chat.get_name():
-                GLib.idle_add(self.chat.row.indicator.set_visible, True)
+        if self.get_root().get_name() == 'AlpacaWindow' and chat_element:
+            GLib.idle_add(chat_element.row.spinner.set_visible, False)
+            if self.get_root().chat_bin.get_child().get_name() != chat_element.get_name():
+                GLib.idle_add(chat_element.row.indicator.set_visible, True)
         elif self.get_root().get_name() == 'AlpacaQuickAsk':
             GLib.idle_add(self.get_root().save_button.set_sensitive, True)
 
-        self.chat.stop_message()
+        if chat_element:
+            chat_element.stop_message()
         buffer = self.block_container.generating_block.buffer
         final_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
         self.block_container.add_content(final_text)
@@ -500,7 +376,8 @@ class Message(Gtk.Box):
         sys.exit() #Exit thread
 
     def save(self):
-        if self.chat.chat_id:
+        chat_element = self.get_ancestor(chat.Chat)
+        if chat_element and chat_element.chat_id:
             SQL.insert_or_update_message(self)
 
 class GlobalMessageTextView(GtkSource.View):
@@ -717,6 +594,8 @@ class GlobalFooter(Gtk.Box):
         self.model_selector.set_hexpand(True)
         self.model_selector.set_halign(1)
         self.model_selector.connect('notify::selected', lambda dropdown, gparam: self.tool_selector.model_changed(dropdown))
+        self.action_stack.set_sensitive(False)
+        models.added.model_selector_model.connect('notify::n-items', lambda m, p: self.action_stack.set_sensitive(len(m) > 0))
         self.wrap_box.append(self.model_selector)
 
         self.tool_selector = tools.ToolSelector()
@@ -738,6 +617,7 @@ class GlobalFooter(Gtk.Box):
         current_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
         current_text = current_text.replace(text, '')
         buffer.set_text(current_text, len(current_text.encode('utf-8')))
+
 
 
 

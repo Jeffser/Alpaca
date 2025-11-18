@@ -8,7 +8,7 @@ import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk
 from ..sql_manager import Instance as SQL
 from ..constants import data_dir, cache_dir, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
-from . import dialog, models, blocks, activities
+from . import dialog, models, blocks, activities, message
 
 import os, threading, importlib.util, re, unicodedata, gc, queue, time, logging
 import numpy as np
@@ -41,8 +41,7 @@ threading.Thread(target=preload_heavy_libraries, daemon=True).start()
 class DictateToggleButton(Gtk.Stack):
     __gtype_name__ = 'AlpacaDictateToggleButton'
 
-    def __init__(self, message_element):
-        self.message_element = message_element
+    def __init__(self):
         super().__init__(
             visible = importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice')
         )
@@ -79,21 +78,22 @@ class DictateToggleButton(Gtk.Stack):
     def run_tts(self):
         global tts_engine, tts_engine_language
         GLib.idle_add(self.set_visible_child_name, 'loading')
-
+        message_element = self.get_ancestor(message.Message)
         # Get Voice
         voice = None
-        if self.message_element.get_model():
-            voice = SQL.get_model_preferences(self.message_element.get_model()).get('voice', None)
+        if message_element.get_model():
+            voice = SQL.get_model_preferences(message_element.get_model()).get('voice', None)
         if not voice:
-            voice = TTS_VOICES.get(list(TTS_VOICES.keys())[self.message_element.get_root().settings.get_value('tts-model').unpack()])
+            voice = TTS_VOICES.get(list(TTS_VOICES.keys())[message_element.get_root().settings.get_value('tts-model').unpack()])
 
-        speed = self.message_element.get_root().settings.get_value('tts-speed').unpack()
+        speed = message_element.get_root().settings.get_value('tts-speed').unpack()
 
         # Show Voice in Model Manager if Needed
         if not models.tts_model_exists(voice):
             tts_path = models.get_tts_path()
             if tts_path:
-                models.common.append_added_model(self.message_element.get_root(), models.speech.TextToSpeechModelButton(os.path.join(tts_path, voice + '.pt')))
+                model_element = models.create_tts_model(os.path.join(tts_path, voice + '.pt'))
+                models.common.append_added_model(message_element.get_root(), model_element)
 
         # Generate TTS_ENGINE if needed
         if not tts_engine or tts_engine_language != voice[0]:
@@ -104,12 +104,12 @@ class DictateToggleButton(Gtk.Stack):
         play_thread = threading.Thread(target=self.play_audio_queue, daemon=True)
         play_thread.start()
         queue_index = 0
-        GLib.idle_add(self.message_element.remove_css_class, 'tts_message_loading')
-        GLib.idle_add(self.message_element.add_css_class, 'tts_message')
+        GLib.idle_add(message_element.remove_css_class, 'tts_message_loading')
+        GLib.idle_add(message_element.add_css_class, 'tts_message')
         GLib.idle_add(self.set_visible_child_name, 'button')
         generator = None
-        while queue_index + 1 < len(self.message_element.get_content_for_dictation()) or any([isinstance(b, blocks.text.GeneratingText) for b in list(self.message_element.block_container)]):
-            text = self.message_element.get_content_for_dictation()
+        while queue_index + 1 < len(message_element.get_content_for_dictation()) or any([isinstance(b, blocks.text.GeneratingText) for b in list(message_element.block_container)]):
+            text = message_element.get_content_for_dictation()
             end_index = max(text.rfind("\n"), text.rfind("."), text.rfind("?"), text.rfind("!"), text.rfind(":"))
             if end_index == -1 or end_index < queue_index:
                 end_index = len(text)
@@ -124,7 +124,7 @@ class DictateToggleButton(Gtk.Stack):
                     self.play_queue.put(audio)
             else:
                 time.sleep(1)
-                if not any([isinstance(b, blocks.text.GeneratingText) for b in list(self.message_element.block_container)]):
+                if not any([isinstance(b, blocks.text.GeneratingText) for b in list(message_element.block_container)]):
                     break
             if not self.get_active():
                 return
@@ -138,19 +138,20 @@ class DictateToggleButton(Gtk.Stack):
 
     def dictate_message(self, button):
         global message_dictated
-        if not self.message_element.get_root():
+        message_element = self.get_ancestor(message.Message)
+        if not message_element.get_root():
             return
 
         if button.get_active():
-            GLib.idle_add(self.message_element.add_css_class, 'tts_message_loading')
+            GLib.idle_add(message_element.add_css_class, 'tts_message_loading')
             if message_dictated and message_dictated.popup.tts_button.get_active():
                  message_dictated.popup.tts_button.set_active(False)
-            message_dictated = self.message_element
+            message_dictated = message_element
             self.play_queue = queue.Queue()
             generation_thread = threading.Thread(target=self.run_tts, daemon=True).start()
         else:
-            GLib.idle_add(self.message_element.remove_css_class, 'tts_message_loading')
-            GLib.idle_add(self.message_element.remove_css_class, 'tts_message')
+            GLib.idle_add(message_element.remove_css_class, 'tts_message_loading')
+            GLib.idle_add(message_element.remove_css_class, 'tts_message')
             GLib.idle_add(self.set_visible_child_name, 'button')
             message_dictated = None
             threading.Thread(target=libraries.get('sounddevice').stop, daemon=True).start()
@@ -179,6 +180,8 @@ class MicrophoneButton(Gtk.Stack):
             library_waiting_queue.append(self)
             self.set_sensitive(False)
 
+        self.pulling_model = None
+
     def toggled(self, button):
         global loaded_whisper_models
         language=SPEACH_RECOGNITION_LANGUAGES[self.get_root().settings.get_value('stt-language').unpack()]
@@ -195,7 +198,7 @@ class MicrophoneButton(Gtk.Stack):
                 GLib.idle_add(buffer.insert, current_iter, result.get("text"), len(result.get("text").encode('utf8')))
                 self.mic_timeout = 0
 
-        def run_mic(pulling_model:Gtk.Widget=None):
+        def run_mic():
             button.get_parent().set_visible_child_name("loading")
             button.add_css_class('accent')
 
@@ -207,8 +210,8 @@ class MicrophoneButton(Gtk.Stack):
             try:
                 if not loaded_whisper_models.get(model_name):
                     loaded_whisper_models[model_name] = libraries.get('whisper').load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
-                if pulling_model:
-                    threading.Thread(target=pulling_model.update_progressbar, args=({'status': 'success'},), daemon=True).start()
+                if self.pulling_model:
+                    self.pulling_model.update_progressbar(-1)
             except Exception as e:
                 dialog.simple_error(
                     parent = button.get_root(),
@@ -263,14 +266,10 @@ class MicrophoneButton(Gtk.Stack):
                 button.set_active(False)
 
         def prepare_download():
-            pulling_model = models.pulling.PullingModelButton(
-                model_name,
-                lambda model_name, window=button.get_root(): models.common.prepend_added_model(window, models.speech.SpeechToTextModelButton(model_name)),
-                None,
-                False
-            )
-            models.common.prepend_added_model(button.get_root(), pulling_model)
-            threading.Thread(target=run_mic, args=(pulling_model,), daemon=True).start()
+            self.pulling_model = models.create_stt_model(model_name)
+            self.pulling_model.update_progressbar(1)
+            models.common.prepend_added_model(button.get_root(), self.pulling_model)
+            threading.Thread(target=run_mic, daemon=True).start()
 
         if button.get_active():
             if os.path.isfile(os.path.join(data_dir, 'whisper', '{}.pt'.format(model_name))):

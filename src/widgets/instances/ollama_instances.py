@@ -3,7 +3,7 @@
 from gi.repository import Adw, Gtk, GLib
 
 import requests, json, logging, os, shutil, subprocess, threading, re, signal, pwd, getpass
-from .. import dialog, tools
+from .. import dialog, tools, chat
 from ...ollama_models import OLLAMA_MODELS
 from ...constants import data_dir, cache_dir, TITLE_GENERATION_PROMPT_OLLAMA, MAX_TOKENS_TITLE_GENERATION
 from ...sql_manager import generate_uuid, dict_to_metadata_string, Instance as SQL
@@ -16,17 +16,19 @@ class BaseInstance:
     process = None
 
     def prepare_chat(self, bot_message):
-        bot_message.chat.busy = True
-        if bot_message.chat.chat_id:
-            bot_message.chat.row.spinner.set_visible(True)
+        chat_element = bot_message.get_ancestor(chat.Chat)
+        if chat_element and chat_element.chat_id:
+            chat_element.row.spinner.set_visible(True)
             try:
                 bot_message.get_root().global_footer.toggle_action_button(False)
             except:
                 pass
-        bot_message.chat.set_visible_child_name('content')
+        
+        chat_element.busy = True
+        chat_element.set_visible_child_name('content')
 
-        messages = bot_message.chat.convert_to_ollama()[:list(bot_message.chat.container).index(bot_message)]
-        return bot_message.chat, messages
+        messages = chat_element.convert_to_ollama()[:list(chat_element.container).index(bot_message)]
+        return chat_element, messages
 
     def generate_message(self, bot_message, model:str):
         chat, messages = self.prepare_chat(bot_message)
@@ -45,8 +47,6 @@ class BaseInstance:
 
     def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
         chat, messages = self.prepare_chat(bot_message)
-        if bot_message.options_button:
-            bot_message.options_button.set_active(False)
         bot_message.block_container.prepare_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
@@ -130,8 +130,6 @@ class BaseInstance:
             bot_message.finish_generation('')
 
     def generate_response(self, bot_message, chat, messages:list, model:str):
-        if bot_message.options_button:
-            bot_message.options_button.set_active(False)
         bot_message.block_container.prepare_generating_block()
 
         if self.properties.get('share_name', 0) > 0:
@@ -362,7 +360,7 @@ class BaseInstance:
             logger.error(e)
         return {}
 
-    def pull_model(self, model_name:str, callback:callable):
+    def pull_model(self, model):
         if not self.process:
             self.start()
         try:
@@ -373,7 +371,7 @@ class BaseInstance:
                     'Authorization': 'Bearer {}'.format(self.properties.get('api'))
                 },
                 data=json.dumps({
-                    'name': model_name,
+                    'name': model.get_name(),
                     'stream': True
                 }),
                 stream=True
@@ -381,9 +379,16 @@ class BaseInstance:
             if response.status_code == 200:
                 for line in response.iter_lines():
                     if line:
-                        callback(json.loads(line.decode("utf-8")))
+                        data = json.loads(line.decode("utf-8"))
+                        if data.get('status'):
+                            model.append_progress_line(data.get('status'))
+                        if data.get('total') and data.get('completed'):
+                            model.update_progressbar(data.get('completed') / data.get('total'))
+                        if data.get('status') == 'success':
+                            model.update_progressbar(-1)
+                            return
         except Exception as e:
-            callback({'error': e})
+            model.get_parent().get_parent().remove(model.get_parent())
             logger.error(e)
 
     def gguf_exists(self, sha256:str) -> bool:
@@ -411,7 +416,7 @@ class BaseInstance:
                 }
             )
 
-    def create_model(self, data:dict, callback:callable):
+    def create_model(self, data:dict, model):
         if not self.process:
             self.start()
         try:
@@ -427,9 +432,16 @@ class BaseInstance:
             if response.status_code == 200:
                 for line in response.iter_lines():
                     if line:
-                        callback(json.loads(line.decode("utf-8")))
+                        data = json.loads(line.decode("utf-8"))
+                        if data.get('status'):
+                            model.append_progress_line(data.get('status'))
+                        if data.get('total') and data.get('completed'):
+                            model.update_progressbar(data.get('completed') / data.get('total'))
+                        if data.get('status') == 'success':
+                            model.update_progressbar(-1)
+                            return
         except Exception as e:
-            callback({'error': e})
+            model.get_parent().get_parent().remove(model.get_parent())
             logger.error(e)
 
     def delete_model(self, model_name:str):
@@ -617,7 +629,6 @@ class OllamaCloud(BaseInstance):
         'temperature': 0.7,
         'seed': 0,
         'num_ctx': 16384,
-        'keep_alive': 300,
         'default_model': None,
         'title_model': None,
         'think': False,
@@ -632,9 +643,9 @@ class OllamaCloud(BaseInstance):
         for key in self.default_properties:
             self.properties[key] = properties.get(key, self.default_properties.get(key))
 
-    def pull_model(self, model_name:str, callback:callable):
-        SQL.append_online_instance_model_list(self.instance_id, model_name)
-        GLib.timeout_add(5000, lambda: callback({'status': 'success'}) and False)
+    def pull_model(self, model):
+        SQL.append_online_instance_model_list(self.instance_id, model.get_name())
+        GLib.timeout_add(5000, lambda: model.update_progressbar(-1) and False)
 
     def delete_model(self, model_name:str) -> bool:
         SQL.remove_online_instance_model_list(self.instance_id, model_name)
@@ -646,7 +657,7 @@ class OllamaCloud(BaseInstance):
             local_models.append({'name': model})
         return local_models
 
-    def get_available_models(self) -> list:
+    def get_available_models(self) -> dict:
         if not self.process:
             self.start()
         try:
@@ -695,4 +706,4 @@ class OllamaCloud(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
-        return []
+        return {}

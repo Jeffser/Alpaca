@@ -1,0 +1,59 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaTemplateSelector: Adw.Dialog {
+  title: _("Template Selector");
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      [start]
+      Gtk.ToggleButton search_button {
+        icon-name: "edit-find-symbolic";
+        tooltip-text: _("Search Template");
+        active: bind search_bar.search-mode-enabled;
+      }
+    }
+
+    [top]
+    Gtk.SearchBar search_bar {
+      child: Gtk.SearchEntry {
+        search-changed => $on_search();
+      };
+      key-capture-widget: main_stack;
+      search-mode-enabled: bind search_button.active;
+    }
+
+    content: Gtk.Stack main_stack {
+      Gtk.StackPage {
+        name: "content";
+        child: Gtk.FlowBox {
+          selection-mode: none;
+          max-children-per-line: 3;
+          column-spacing: 6;
+          row-spacing: 6;
+          homogeneous: true;
+          styles [
+            "flat",
+            "p10"
+          ]
+        };
+      }
+
+      Gtk.StackPage {
+        name: "no-results";
+        child: Adw.StatusPage {
+          title: _("No Results Found");
+          description: _("Uh oh! No templates found for your search");
+        };
+      }
+
+      Gtk.StackPage {
+        name: "empty";
+        child: Adw.StatusPage {
+          title: _("No Templates");
+          description: _("Add templates by editing a chat");
+        };
+      }
+    };
+  };
+}

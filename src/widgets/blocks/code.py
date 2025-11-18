@@ -6,131 +6,29 @@ Code block handling
 from gi.repository import Gtk, Gdk, GtkSource
 from .. import dialog, activities
 from ...sql_manager import generate_uuid
+from ...constants import CODE_LANGUAGE_FALLBACK, CODE_LANGUAGE_PROPERTIES
 import re, unicodedata
 
-language_fallback = {
-    'bash': 'sh',
-    'cmd': 'powershell',
-    'batch': 'powershell',
-    'c#': 'csharp',
-    'vb.net': 'vbnet',
-    'python': 'python3',
-    'javascript': 'js',
-}
-
-language_properties = (
-    {
-        'id': 'python',
-        'aliases': ['python', 'python3', 'py', 'py3'],
-        'filename': 'main.py'
-    },
-    {
-        'id': 'mermaid',
-        'aliases': ['mermaid'],
-        'filename': 'index.html'
-    },
-    {
-        'id': 'html',
-        'aliases': ['html', 'htm'],
-        'filename': 'index.html'
-    },
-    {
-        'id': 'bash',
-        'aliases': ['bash', 'sh'],
-        'filename': 'script.sh'
-    }
-)
-
 def get_language_property(language:str) -> dict:
-    for properties in language_properties:
+    for properties in CODE_LANGUAGE_PROPERTIES:
         if language.lower() in properties.get('aliases', []):
             return properties
     return {}
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/blocks/code.ui')
 class Code(Gtk.Box):
     __gtype_name__ = 'AlpacaCode'
 
+    language_label = Gtk.Template.Child()
+    button_container = Gtk.Template.Child()
+    edit_button = Gtk.Template.Child()
+    run_button = Gtk.Template.Child()
+    buffer = Gtk.Template.Child()
+
     def __init__(self, content:str=None, language:str=None):
-        super().__init__(
-            css_classes=["card", "code_block"],
-            orientation=1,
-            overflow=1,
-            margin_start=5,
-            margin_end=5
-        )
-        title_box = Gtk.Box(
-            margin_start=12,
-            margin_top=3,
-            margin_bottom=3,
-            margin_end=3,
-            spacing=5
-        )
-        self.language_label = Gtk.Label(
-            label=_("Code Block"),
-            hexpand=True,
-            xalign=0
-        )
-        title_box.append(self.language_label)
-
-        # Buttons
-        self.button_container = Gtk.Box(
-            halign=2,
-            css_classes=['linked']
-        )
-        title_box.append(self.button_container)
-
-        self.edit_button = Gtk.Button(
-            icon_name="edit-symbolic",
-            tooltip_text=_("Edit Script"),
-            css_classes=['flat']
-        )
-        self.edit_button.connect("clicked", lambda *_: self.begin_edit())
-        self.button_container.append(self.edit_button)
-
-        copy_button = Gtk.Button(
-            icon_name="edit-copy-symbolic",
-            tooltip_text=_("Copy Script"),
-            css_classes=['flat']
-        )
-        copy_button.connect("clicked", lambda *_: self.copy_code())
-        self.button_container.append(copy_button)
-
-        download_button = Gtk.Button(
-            icon_name='folder-download-symbolic',
-            tooltip_text=_('Download Script'),
-            css_classes=['flat']
-        )
-        download_button.connect('clicked', lambda *_: self.prompt_download())
-        self.button_container.append(download_button)
-
-        self.run_button = Gtk.Button(
-            icon_name="execute-from-symbolic",
-            tooltip_text=_("Run Script"),
-            css_classes=['accent', 'flat'],
-            visible=False
-        )
-        self.run_button.connect("clicked", lambda *_: self.run_script())
-        self.button_container.append(self.run_button)
-
-        self.append(title_box)
-        self.append(Gtk.Separator())
-
-        # Code view
-        self.buffer = GtkSource.Buffer()
+        super().__init__()
         self.buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark'))
-        source_view = GtkSource.View(
-            auto_indent=True,
-            indent_width=4,
-            buffer=self.buffer,
-            show_line_numbers=True,
-            editable=False,
-            top_margin=6,
-            bottom_margin=6,
-            left_margin=12,
-            right_margin=12,
-            css_classes=["code_block"]
-        )
-        self.append(source_view)
+
         self.raw_language = language
         self.code_language = None
         if content:
@@ -141,7 +39,8 @@ class Code(Gtk.Box):
         self.activity_runner = None
         self.activity_edit = None
 
-    def begin_edit(self) -> None:
+    @Gtk.Template.Callback()
+    def begin_edit(self, button=None) -> None:
         if self.activity_edit and self.activity_edit.get_root():
             self.activity_edit.on_reload()
         else:
@@ -156,13 +55,40 @@ class Code(Gtk.Box):
         self.buffer.set_text(code, len(code.encode('utf-8')))
         self.get_parent().message.save()
 
-    def copy_code(self) -> None:
+    @Gtk.Template.Callback()
+    def copy_code(self, button=None) -> None:
         clipboard = Gdk.Display().get_default().get_clipboard()
         text = self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
         clipboard.set(text)
         dialog.show_toast(_("Code copied to the clipboard"), self.get_root())
 
-    def run_script(self) -> None:
+    @Gtk.Template.Callback()
+    def prompt_download(self, button=None):
+        def download(file_dialog, result):
+            file = file_dialog.save_finish(result)
+            if file:
+                with open(file.get_path(), 'w+') as f:
+                    f.write(self.get_code())
+                dialog.show_toast(
+                    message=_('Script saved successfully'),
+                    root_widget=self.get_root()
+                )
+
+        language = self.get_language()
+        filename = 'script'
+        for d in language_properties:
+            if d.get('id') == language.lower():
+                filename = d.get('filename')
+
+        file_dialog = Gtk.FileDialog(initial_name=filename)
+        file_dialog.save(
+            parent=self.get_root(),
+            cancellable=None,
+            callback=download
+        )
+
+    @Gtk.Template.Callback()
+    def run_script(self, button=None) -> None:
         if self.activity_runner and self.activity_runner.get_root():
             self.activity_runner.on_reload()
         else:
@@ -195,7 +121,7 @@ class Code(Gtk.Box):
         return self.raw_language
 
     def set_language(self, value:str) -> None:
-        self.code_language = GtkSource.LanguageManager.get_default().get_language(language_fallback.get(value.lower(), value))
+        self.code_language = GtkSource.LanguageManager.get_default().get_language(CODE_LANGUAGE_FALLBACK.get(value.lower(), value))
         self.language_label.set_label(self.get_language().title())
         self.buffer.set_language(self.code_language)
         self.run_button.set_visible(get_language_property(self.get_language()))
@@ -214,27 +140,3 @@ class Code(Gtk.Box):
 
     def set_content(self, value:str) -> None:
         self.buffer.set_text(value, len(value.encode('utf-8')))
-
-    def download(self, file_dialog, result):
-        file = file_dialog.save_finish(result)
-        if file:
-            with open(file.get_path(), 'w+') as f:
-                f.write(self.get_code())
-            dialog.show_toast(
-                message=_('Script saved successfully'),
-                root_widget=self.get_root()
-            )
-
-    def prompt_download(self):
-        language = self.get_language()
-        filename = 'script'
-        for d in language_properties:
-            if d.get('id') == language.lower():
-                filename = d.get('filename')
-
-        file_dialog = Gtk.FileDialog(initial_name=filename)
-        file_dialog.save(
-            parent=self.get_root(),
-            cancellable=None,
-            callback=self.download
-        )

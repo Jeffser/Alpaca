@@ -115,6 +115,8 @@ class Transcriber(Gtk.Stack):
         if audio_file:
             self.connect('realize', lambda *_: self.use_file(audio_file))
 
+        self.pulling_model = None
+
     def attach_results(self):
         buffer = self.result_textview.get_buffer()
         result_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
@@ -128,15 +130,10 @@ class Transcriber(Gtk.Stack):
         self.get_root().get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
 
     def prepare_download(self, model_name:str, audio_file:Gio.File):
-        pulling_model = models.pulling.PullingModelButton(
-            model_name,
-            lambda model_name, window=self.get_root(): models.common.prepend_added_model(window, models.speech.SpeechToTextModelButton(model_name)),
-            None,
-            False
-        )
-        models.common.prepend_added_model(self.get_root(), pulling_model)
+        self.pulling_model = models.create_stt_model(model_name)
+        models.common.append_added_model(self.get_root(), self.pulling_model)
         self.set_visible_child_name('loading_file')
-        threading.Thread(target=self.run_file_transcription, args=(audio_file.get_path(), pulling_model,), daemon=True).start()
+        threading.Thread(target=self.run_file_transcription, args=(audio_file.get_path(),), daemon=True).start()
 
     def on_attachment(self, audio_file:Gio.File):
         if not audio_file:
@@ -194,13 +191,13 @@ class Transcriber(Gtk.Stack):
                 callback = self.on_attachment
             )
 
-    def run_file_transcription(self, file_path:str, pulling_model=None):
+    def run_file_transcription(self, file_path:str):
         model_name = list(STT_MODELS)[self.get_root().settings.get_value('stt-model').unpack()]
         try:
             if not voice.loaded_whisper_models.get(model_name):
                 voice.loaded_whisper_models[model_name] = voice.libraries.get('whisper').load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
-            if pulling_model:
-                threading.Thread(target=pulling_model.update_progressbar, args=({'status': 'success'},), daemon=True).start()
+            if self.pulling_model:
+                self.pulling_model.update_progressbar(-1)
         except Exception as e:
             dialog.simple_error(
                 parent = self.get_root(),

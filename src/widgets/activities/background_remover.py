@@ -244,18 +244,15 @@ class BackgroundRemover(Gtk.ScrolledWindow):
         self.set_status(False)
 
         if self.pulling_model:
-            threading.Thread(target=self.pulling_model.update_progressbar, args=({'status': 'success'},), daemon=True).start()
+            self.pulling_model.update_progressbar(-1)
         if self.save_func:
             self.save_func(output_image_data)
 
     def prepare_model_download(self, model_name:str, input_image_data):
-        self.pulling_model = models.pulling.PullingModelButton(
-            model_name,
-            lambda model_name, window=self.get_root(): models.common.prepend_added_model(window, models.image.BackgroundRemoverModelButton(model_name)),
-            None,
-            False
-        )
-        models.common.prepend_added_model(self.get_root(), self.pulling_model)
+        model_dir = os.path.join(data_dir, '.u2net', model_name)
+        self.pulling_model = models.create_background_remover_model(model_dir)
+        self.pulling_model.update_progressbar(1)
+        models.common.append_added_model(self.get_root(), self.pulling_model)
         threading.Thread(target=self.run, args=(model_name, input_image_data), daemon=True).start()
 
     def verify_model(self, input_image_data):

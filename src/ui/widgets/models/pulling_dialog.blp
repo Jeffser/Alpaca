@@ -1,0 +1,44 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaPullingModelDialog: Adw.Dialog {
+  width-request: 360;
+  height-request: 240;
+  follows-content-size: true;
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-title: false;
+
+      [start]
+      Gtk.Button stop_button {
+        icon-name: "media-playback-stop-symbolic";
+        tooltip-text: _("Stop Download");
+        clicked => $prompt_stop_download();
+        styles [
+          "error"
+        ]
+      }
+    }
+
+    content: Adw.StatusPage status_page {
+      // CODE set title and description
+      icon-name: "folder-download-symbolic";
+      child: Gtk.Box {
+        orientation: vertical;
+        spacing: 5;
+        styles [
+          "card",
+          "p10"
+        ]
+        Gtk.Label status_label {
+          wrap: true;
+          wrap-mode: word_char;
+          justify: center;
+          visible: false;
+        }
+        Gtk.ProgressBar progressbar {}
+      };
+    };
+  };
+}
