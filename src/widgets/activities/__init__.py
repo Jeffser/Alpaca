@@ -52,67 +52,24 @@ class ActivityDialog(Adw.Dialog):
     def reload(self):
         self.page.on_reload()
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/activities/activity_manager.ui')
 class ActivityManager(Adw.Bin):
     __gtype_name__ = 'AlpacaActivityManager'
 
-    def __init__(self, reattach:bool=False):
-        self.navigationview = Adw.NavigationView()
-        super().__init__(child=self.navigationview)
+    navigationview = Gtk.Template.Child()
+    taboverview = Gtk.Template.Child()
+    tab_tbv = Gtk.Template.Child()
+    tabview = Gtk.Template.Child()
+    tab_hb = Gtk.Template.Child()
+    action_activity_button = Gtk.Template.Child()
+    launcher_listbox = Gtk.Template.Child()
 
-        # TABS
-        self.tabview = Adw.TabView()
-        self.tabview.connect('close-page', self.page_closed)
-        self.tabview.connect('page-attached', self.page_attached)
-        self.tabview.connect('page-detached', self.page_detached)
-        self.tabview.connect('create-window', self.window_create)
-        self.tabview.connect('notify::selected-page', self.page_changed)
-        self.tab_hb = Adw.HeaderBar()
+    def __init__(self):
+        super().__init__()
 
-        overview_button = Adw.TabButton(
-            view=self.tabview,
-            action_name='overview.open'
-        )
-        self.tab_hb.pack_start(overview_button)
-
-        action_activity_button = Gtk.Button(
-            icon_name='pip-out-symbolic' if reattach else 'pip-in-symbolic',
-            tooltip_text=_('Attach Activity') if reattach else _('Detach Activity')
-        )
-
-        action_activity_button.connect('clicked', self.reattach_current_activity if reattach else self.detach_current_activity)
-        self.tab_hb.pack_start(action_activity_button)
-
-        launcher_button = Gtk.Button(
-            icon_name='list-add-symbolic',
-            tooltip_text=_('Create Activity')
-        )
-        launcher_button.connect('clicked', lambda btn: self.navigationview.push_by_tag('launcher'))
-        self.tab_hb.pack_end(launcher_button)
-
-        self.tab_tbv = Adw.ToolbarView(
-            content=self.tabview
-        )
-        self.tab_tbv.add_top_bar(self.tab_hb)
         self.bottom_bar = None
 
-        self.taboverview = Adw.TabOverview(
-            view=self.tabview,
-            child=self.tab_tbv
-        )
-
-        self.navigationview.add(Adw.NavigationPage(
-            child=self.taboverview,
-            tag='tab',
-            title=_('Activities')
-        ))
-
         # LAUNCHER
-        listbox = Gtk.ListBox(
-            selection_mode=0,
-            css_classes=['boxed-list-separate'],
-            halign=3
-        )
-
         default_activities = [
             {
                 'title': _('Terminal'),
@@ -175,24 +132,22 @@ class ActivityManager(Adw.Bin):
                 start_icon_name=activity.get('icon')
             )
             row.connect('activated', lambda *_, ac=activity: self.start_activity(ac))
-            listbox.append(row)
+            self.launcher_listbox.append(row)
 
-        launcher = Adw.StatusPage(
-            title=_('Activities'),
-            icon_name='shapes-symbolic',
-            child=listbox
-        )
-        launcher_tbv = Adw.ToolbarView(
-            content=launcher,
-            extend_content_to_top_edge=True
-        )
-        launcher_tbv.add_top_bar(Adw.HeaderBar(show_title=False))
-        self.navigationview.add(Adw.NavigationPage(
-            child=launcher_tbv,
-            tag='launcher',
-            title=_('Activities')
-        ))
         self.navigationview.replace_with_tags(['launcher'])
+
+        GLib.idle_add(self.update_mode)
+
+    def update_mode(self):
+        #whether tabs are attachable or detachable
+        reattach = self.get_root().get_name() == "AlpacaActivityTabWindow"
+        self.action_activity_button.set_icon_name('pip-out-symbolic' if reattach else 'pip-in-symbolic')
+        self.action_activity_button.set_tooltip_text(_('Attach Activity') if reattach else _('Detach Activity'))
+        self.action_activity_button.connect('clicked', self.reattach_current_activity if reattach else self.detach_current_activity)
+
+    @Gtk.Template.Callback()
+    def open_launcher(self, button=None):
+        self.navigationview.push_by_tag('launcher')
 
     def start_activity(self, activity):
         page = activity.get('builder')()
@@ -203,9 +158,11 @@ class ActivityManager(Adw.Bin):
             tab_page.set_title(page.title)
             tab_page.set_icon(Gio.ThemedIcon.new(page.activity_icon))
 
+    @Gtk.Template.Callback()
     def page_closed(self, tabview, tabpage):
         tabpage.get_child().on_close()
 
+    @Gtk.Template.Callback()
     def page_attached(self, tabview, tabpage, index):
         tabpage.set_title(tabpage.get_child().title)
         tabpage.set_icon(Gio.ThemedIcon.new(tabpage.get_child().activity_icon))
@@ -223,6 +180,7 @@ class ActivityManager(Adw.Bin):
         tabview.set_selected_page(tabpage)
         self.taboverview.set_open(False)
 
+    @Gtk.Template.Callback()
     def page_detached(self, tabview, tabpage, index):
         if len(tabview.get_pages()) == 0:
             self.navigationview.replace_with_tags(['launcher'])
@@ -234,11 +192,13 @@ class ActivityManager(Adw.Bin):
                 if not self.get_root().last_breakpoint_status:
                     self.get_root().split_view_overlay.set_show_sidebar(True)
 
+    @Gtk.Template.Callback()
     def window_create(self, tabview=None):
         atw = ActivityTabWindow(self.get_root().get_application())
         atw.present()
         return atw.activity_manager.tabview
 
+    @Gtk.Template.Callback()
     def page_changed(self, tabview, gparam):
         if tabview.get_selected_page():
             selected_child = tabview.get_selected_page().get_child()
@@ -281,23 +241,22 @@ class ActivityManager(Adw.Bin):
             0
         )
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/activities/activity_tab_window.ui')
 class ActivityTabWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'AlpacaActivityTabWindow'
 
+    activity_manager = Gtk.Template.Child()
+
     def __init__(self, application):
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
-        self.activity_manager = ActivityManager(reattach=True)
         self.application = application
-        super().__init__(
-            content=self.activity_manager,
-            title=_('Activities')
-        )
-        self.connect('close-request', lambda *_: self.close())
+        super().__init__()
 
     def get_application(self):
         return self.application
 
-    def close(self):
+    @Gtk.Template.Callback()
+    def close(self, app_window=None):
         if self.activity_manager:
             if self.activity_manager.tabview:
                 for page in list(self.activity_manager.tabview.get_pages()):

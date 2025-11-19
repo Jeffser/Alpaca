@@ -1,0 +1,66 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaActivityManager: Adw.Bin {
+  child: Adw.NavigationView navigationview {
+    Adw.NavigationPage {
+      tag: "tab";
+      title: _("Activities");
+      child: Adw.TabOverview taboverview {
+        view: tabview;
+        child: Adw.ToolbarView tab_tbv {
+          content: Adw.TabView tabview {
+            close-page => $page_closed();
+            page-attached => $page_attached();
+            page-detached => $page_detached();
+            create-window => $window_create();
+            notify::selected-page => $page_changed();
+          };
+
+          [top]
+          Adw.HeaderBar tab_hb {
+            [start]
+            Adw.TabButton {
+              view: tabview;
+              action-name: "overview.open";
+            }
+
+            [start]
+            Gtk.Button action_activity_button {}
+
+            [end]
+            Gtk.Button {
+              icon-name: "list-add-symbolic";
+              tooltip-text: _("Create Activity");
+              clicked => $open_launcher();
+            }
+          }
+        };
+      };
+    }
+
+    Adw.NavigationPage {
+      tag: "launcher";
+      title: _("Activities");
+      child: Adw.ToolbarView {
+        extend-content-to-top-edge: true;
+        [top]
+        Adw.HeaderBar {
+          show-title: false;
+        }
+
+        content: Adw.StatusPage {
+          title: _("Activities");
+          icon-name: "shapes-symbolic";
+          child: Gtk.ListBox launcher_listbox {
+            selection-mode: none;
+            halign: center;
+            styles [
+              "boxed-list-separate"
+            ]
+          };
+        };
+      };
+    }
+  };
+}

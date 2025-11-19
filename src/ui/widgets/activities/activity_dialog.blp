@@ -1,0 +1,12 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaActivityDialog: Adw.Dialog {
+  content-width: 500;
+  content-height: 600;
+  closed => $close();
+  child: Adw.ToolbarView toolbarview {
+    [top]
+    Adw.HeaderBar headerbar {}
+  };
+}
