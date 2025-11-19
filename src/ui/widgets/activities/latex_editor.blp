@@ -1,0 +1,56 @@
+using Gtk 4.0;
+
+template $AlpacaLatexEditor: Gtk.Box {
+  orientation: vertical;
+  spacing: 10;
+
+  Gtk.ScrolledWindow latex_container {
+    vexpand: true;
+  }
+
+  Gtk.ScrolledWindow {
+    propagate-natural-height: true;
+    max-content-height: 400;
+    overflow: hidden;
+    margin-top: 10;
+    margin-bottom: 10;
+    margin-start: 10;
+    margin-end: 10;
+    valign: center;
+    styles [
+      "card",
+      "undershoot-bottom"
+    ]
+    child: Gtk.TextView {
+      wrap-mode: word_char;
+      left-margin: 10;
+      right-margin: 10;
+      top-margin: 10;
+      bottom-margin: 10;
+      buffer: Gtk.TextBuffer buffer {
+        changed => $buffer_changed();
+      };
+
+    };
+  }
+
+
+}
+
+Gtk.Button save_button {
+  icon-name: "check-plain-symbolic";
+  tooltip-text: _("Save Changes");
+  clicked => $save_requested();
+}
+
+Gtk.Button reload_button {
+  icon-name: "update-symbolic";
+  tooltip-text: _("Undo Changes");
+  clicked => $on_reload();
+}
+
+Gtk.Button download_button {
+  icon-name: "folder-download-symbolic";
+  tooltip-text: _("Download as Image");
+  clicked => $download_requested();
+}

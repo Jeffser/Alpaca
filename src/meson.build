@@ -43,6 +43,7 @@ blueprints = files(
   'ui/widgets/activities/image_viewer.blp',
   'ui/widgets/activities/file_viewer.blp',
   'ui/widgets/activities/live_chat.blp',
+  'ui/widgets/activities/latex_editor.blp',
   'ui/widgets/activities/activity_dialog.blp',
   'ui/widgets/activities/activity_tab_window.blp',
   'ui/widgets/activities/activity_manager.blp',

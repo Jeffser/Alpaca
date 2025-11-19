@@ -9,6 +9,7 @@ blocks = [
   'camera.py',
   'transcriber.py',
   'viewers.py',
+  'latex_editor.py',
 ]
 
 install_data(blocks, install_dir: moduledir)

@@ -2,9 +2,16 @@ using Gtk 4.0;
 using Adw 1;
 
 template $AlpacaLatexRenderer: Gtk.Button {
-  tooltip-text: _("Copy Equation");
+  tooltip-text: _("Edit Equation");
   valign: start;
-  clicked => $copy_equation();
+  clicked => $edit_equation();
+  Gtk.GestureClick {
+    button: 3;
+    released => $show_popup();
+  }
+  Gtk.GestureLongPress {
+    pressed => $show_popup();
+  }
   styles [
     "flat",
     "p10"

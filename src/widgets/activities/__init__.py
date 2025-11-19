@@ -8,6 +8,7 @@ from .terminal import Terminal, AttachmentCreator, CodeRunner, CodeEditor
 from .transcriber import Transcriber
 from .camera import Camera
 from .viewers import ImageViewer, FileViewer
+from .latex_editor import LatexEditor
 from .. import dialog
 import importlib.util
 
@@ -95,6 +96,11 @@ class ActivityManager(Adw.Bin):
                 'title': _('Web Browser'),
                 'icon': 'globe-symbolic',
                 'builder': WebBrowser
+            },
+            {
+                'title': _('Latex Editor'),
+                'icon': 'document-edit-symbolic',
+                'builder': LatexEditor
             }
         ]
 
