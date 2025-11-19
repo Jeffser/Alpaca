@@ -1,0 +1,54 @@
+using Gtk 4.0;
+
+template $AlpacaImageViewer: Gtk.ScrolledWindow {
+  child: Gtk.Fixed fixed {
+    Gtk.Picture picture {
+      Gtk.EventControllerScroll {
+        flags: vertical;
+        scroll => $on_scroll();
+      }
+      Gtk.GestureDrag {
+        drag-update => $on_drag_update();
+      }
+    }
+  };
+
+  Gtk.EventControllerMotion {
+    motion => $on_motion();
+  }
+}
+
+Gtk.Button delete_button {
+  valign: center;
+  vexpand: false;
+  tooltip-text: _("Remove Image");
+  icon-name: "user-trash-symbolic";
+  clicked => $delete_requested();
+  styles [
+    "error"
+  ]
+}
+
+Gtk.Button download_button {
+  valign: center;
+  vexpand: false;
+  tooltip-text: _("Download Image");
+  icon-name: "folder-download-symbolic";
+  clicked => $download_requested();
+}
+
+Gtk.Button attach_button {
+  valign: center;
+  vexpand: false;
+  tooltip-text: _("Attach Image");
+  icon-name: "chain-link-loose-symbolic";
+  clicked => $attach_requested();
+}
+
+Gtk.Button reset_button {
+  valign: center;
+  vexpand: false;
+  tooltip-text: _("Reset View");
+  icon-name: "zoom-fit-best-symbolic";
+  clicked => $reset_view_requested();
+}

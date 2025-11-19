@@ -8,6 +8,7 @@ blocks = [
   'terminal.py',
   'camera.py',
   'transcriber.py',
+  'viewers.py',
 ]
 
 install_data(blocks, install_dir: moduledir)

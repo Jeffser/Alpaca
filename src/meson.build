@@ -40,6 +40,7 @@ blueprints = files(
   'ui/widgets/activities/terminal.blp',
   'ui/widgets/activities/code_runner.blp',
   'ui/widgets/activities/transcriber.blp',
+  'ui/widgets/activities/image_viewer.blp',
   'ui/widgets/message/global_message_textview.blp',
   'ui/widgets/message/global_action_stack.blp',
   'ui/widgets/message/global_footer.blp',
@@ -47,6 +48,8 @@ blueprints = files(
   'ui/widgets/attachments/attachment_container.blp',
   'ui/widgets/attachments/global_attachment_button.blp',
   'ui/widgets/attachments/image_attachment_container.blp',
+  'ui/widgets/attachments/image_attachment.blp',
+  'ui/widgets/attachments/attachment.blp',
   'ui/widgets/tools/selector.blp',
 )
 

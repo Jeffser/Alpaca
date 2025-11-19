@@ -49,20 +49,22 @@ template $AlpacaBackgroundRemover: Gtk.ScrolledWindow {
           vexpand: true;
           Gtk.StackPage {
             name: "input";
-            child: $AlpacaBackgroundRemoverImage input_picture_button {};
+            child: $AlpacaBackgroundRemoverImage input_picture_button {
+              name: _("Input");
+            };
           }
 
           Gtk.StackPage {
             name: "output";
             child: Gtk.Overlay {
-              child: $AlpacaBackgroundRemoverImage output_picture_button {};
+              child: $AlpacaBackgroundRemoverImage output_picture_button {
+                name: _("Output");
+              };
               [overlay]
               Adw.Spinner output_spinner {}
             };
           }
-
         }
-
       };
     }
   };

@@ -104,180 +104,6 @@ def extract_image(image_path:str, max_size:int) -> str:
             image_data = output.getvalue()
         return base64.b64encode(image_data).decode("utf-8")
 
-class AttachmentImagePage(Gtk.ScrolledWindow):
-    __gtype_name__ = 'AlpacaAttachmentImagePage'
-
-    def __init__(self, texture:Gdk.Texture, title:str=_('Image'), delete_callback:callable=None, download_callback:callable=None, attachment_callback:callable=None):
-        self.texture = texture
-        self.picture = Gtk.Picture.new_for_paintable(self.texture)
-
-        # State variables
-        self.scale = 1.0
-        self.offset_x = 0
-        self.offset_y = 0
-        self.drag_start = None
-        self.original_width = self.texture.get_width()
-        self.original_height = self.texture.get_height()
-        self.pointer_x = 0
-        self.pointer_y = 0
-        self.scrollable = False
-
-        self.fixed = Gtk.Fixed()
-        super().__init__(
-            child=self.fixed
-        )
-
-        self.fixed.put(self.picture, 0, 0)
-
-        motion = Gtk.EventControllerMotion()
-        self.add_controller(motion)
-        motion.connect("motion", self.on_motion)
-
-        scroll = Gtk.EventControllerScroll.new(Gtk.EventControllerScrollFlags.VERTICAL)
-        self.picture.add_controller(scroll)
-        scroll.connect("scroll", self.on_scroll)
-
-        drag = Gtk.GestureDrag.new()
-        self.picture.add_controller(drag)
-        drag.connect("drag-update", self.on_drag_update)
-
-        # Activity
-        self.buttons = {
-            'start': [],
-            'end': []
-        }
-        self.extend_to_edge = True
-        self.title = title
-        self.activity_icon = 'image-x-generic-symbolic'
-
-        self.connect('realize', lambda *_: GLib.idle_add(self.on_reload))
-        self.loop_id = GLib.timeout_add(1, lambda: (self.update_picture() if not self.scrollable else None) or True)
-
-        if delete_callback:
-            delete_button = Gtk.Button(
-                css_classes=['error'],
-                icon_name='user-trash-symbolic',
-                tooltip_text=_('Remove Image'),
-                vexpand=False,
-                valign=3
-            )
-            delete_button.connect('clicked', lambda *_, cb=delete_callback: cb(self.get_root()))
-            self.buttons['start'].append(delete_button)
-        if download_callback:
-            download_button = Gtk.Button(
-                icon_name='folder-download-symbolic',
-                tooltip_text=_('Download Image'),
-                vexpand=False,
-                valign=3
-            )
-            download_button.connect('clicked', lambda *_, cb=download_callback: cb(self.get_root()))
-            self.buttons['start'].append(download_button)
-        if attachment_callback:
-            attach_button = Gtk.Button(
-                icon_name='chain-link-loose-symbolic',
-                tooltip_text=_('Attach Image'),
-                vexpand=False,
-                valign=3
-            )
-            attach_button.connect('clicked', lambda *_, cb=attachment_callback: cb())
-            self.buttons['end'].append(attach_button)
-
-        self.reset_button = Gtk.Button(
-            icon_name='zoom-fit-best-symbolic',
-            tooltip_text=_('Reset View'),
-            vexpand=False,
-            valign=3
-        )
-        self.reset_button.connect('clicked', lambda *_: self.on_reload())
-        self.buttons['end'].append(self.reset_button)
-
-    def on_reload(self):
-        self.scale = self.get_min_scale()
-        self.update_picture()
-
-    def on_close(self):
-        if self.loop_id:
-            GLib.source_remove(self.loop_id)
-        self.loop_id = None
-
-    def on_motion(self, controller, x, y):
-        self.pointer_x = x
-        self.pointer_y = y
-
-    def get_min_scale(self):
-        viewport_width = self.get_allocated_width()
-        viewport_height = self.get_allocated_height()
-
-        if self.original_width == 0 or self.original_height == 0:
-            return 1.0
-
-        scale_x = viewport_width / self.original_width
-        scale_y = viewport_height / self.original_height
-
-        return min(scale_x, scale_y)
-
-    def update_picture(self):
-        min_scale = self.get_min_scale()
-        if self.scrollable:
-            self.scale = max(self.scale, min_scale)
-            self.scale = min(self.scale, min_scale + 5.0)
-        else:
-            self.scale = min_scale
-
-        width = int(self.original_width * self.scale)
-        height = int(self.original_height * self.scale)
-        self.picture.set_size_request(width, height)
-
-        viewport_width = self.get_allocated_width()
-        viewport_height = self.get_allocated_height()
-
-        x_offset = max((viewport_width - width) // 2, 0)
-        y_offset = max((viewport_height - height) // 2, 0)
-
-        self.fixed.move(self.picture, x_offset, y_offset)
-        self.scrollable = self.scale != min_scale
-        self.reset_button.set_sensitive(self.scrollable)
-
-    def on_scroll(self, controller, dx, dy):
-        state = controller.get_current_event_state()
-        if not (state & Gdk.ModifierType.CONTROL_MASK):
-            return False
-        event = controller.get_current_event()
-        if event is None:
-            return False
-
-        mx = self.pointer_x
-        my = self.pointer_y
-
-        old_scale = self.scale
-        self.scale *= 1.1 if dy < 0 else 0.9
-
-        if self.scale < self.get_min_scale() + 5.0:
-            adj = self.get_hadjustment()
-            adj.set_value((adj.get_value() + mx) * self.scale / old_scale - mx)
-            vadj = self.get_vadjustment()
-            vadj.set_value((vadj.get_value() + my) * self.scale / old_scale - my)
-
-        self.scrollable = True
-        self.reset_button.set_sensitive(True)
-        self.update_picture()
-        return True
-
-    def on_drag_update(self, gesture, dx, dy):
-        adj = self.get_hadjustment()
-        vadj = self.get_vadjustment()
-        adj.set_value(adj.get_value() - dx)
-        vadj.set_value(vadj.get_value() - dy)
-
-    def close(self):
-        parent = self.get_ancestor(Adw.TabView)
-        if parent:
-            parent.close_page(parent.get_page(self))
-        else:
-            parent = self.get_ancestor(Adw.Dialog)
-            if parent:
-                parent.close()
-
 class AttachmentPage(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentPage'
 
@@ -351,6 +177,7 @@ class AttachmentPage(Gtk.ScrolledWindow):
             if parent:
                 parent.close()
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/attachments/attachment.ui')
 class Attachment(Gtk.Button):
     __gtype_name__ = 'AlpacaAttachment'
 
@@ -361,45 +188,34 @@ class Attachment(Gtk.Button):
         self.activity = None
 
         super().__init__(
-            vexpand=True,
-            valign=0,
             name=file_id,
-            css_classes=["flat"],
             tooltip_text=self.file_content if self.file_type == 'link' else self.file_name,
-            child= Adw.ButtonContent(
-                label=file_name,
-                icon_name={
-                    "code": "code-symbolic",
-                    "youtube": "play-symbolic",
-                    "website": "globe-symbolic",
-                    "thought": "brain-augemnted-symbolic",
-                    "tool": "processor-symbolic",
-                    "link": "globe-symbolic",
-                    "image": "image-x-generic-symbolic",
-                    "audio": "music-note-single-symbolic"
-                }.get(self.file_type, "document-text-symbolic")
-            )
+            sensitive=bool(self.file_content)
         )
+        self.get_child().set_label(self.file_name)
+        self.get_child().set_icon_name({
+            "code": "code-symbolic",
+            "youtube": "play-symbolic",
+            "website": "globe-symbolic",
+            "thought": "brain-augemnted-symbolic",
+            "tool": "processor-symbolic",
+            "link": "globe-symbolic",
+            "image": "image-x-generic-symbolic",
+            "audio": "music-note-single-symbolic"
+        }.get(self.file_type, "document-text-symbolic"))
 
+    @Gtk.Template.Callback()
+    def show_activity(self, button=None):
         if self.file_type == 'link':
-            self.connect("clicked", lambda button, uri=self.file_content: Gio.AppInfo.launch_default_for_uri(uri))
-        else:
-            self.connect("clicked", lambda button: self.show_activity())
+            Gio.AppInfo.launch_default_for_uri(self.file_content)
+            return
 
-        self.gesture_click = Gtk.GestureClick(button=3)
-        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
-        self.add_controller(self.gesture_click)
-        self.gesture_long_press = Gtk.GestureLongPress()
-        self.gesture_long_press.connect("pressed", self.show_popup)
-        self.add_controller(self.gesture_long_press)
-
-    def show_activity(self):
         if self.activity and self.activity.get_root():
             self.activity.on_reload()
         else:
             if self.file_type == 'image':
                 image_data = base64.b64decode(self.get_content())
-                page = AttachmentImagePage(
+                page = activities.ImageViewer(
                     texture=Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data)),
                     title=self.file_name,
                     delete_callback=self.prompt_delete,
@@ -512,9 +328,14 @@ class Attachment(Gtk.Button):
         )
         dialog.save(override_root or self.get_root(), None, self.on_download, None)
 
-    def show_popup(self, gesture, x, y):
+    @Gtk.Template.Callback()
+    def show_popup(self, *args):
         rect = Gdk.Rectangle()
-        rect.x, rect.y, = x, y
+        if len(args) == 4:
+            rect.x, rect.y = args[2], args[3]
+        else:
+            rect.x, rect.y = args[1], args[2]
+
         actions = [
             [
                 {
@@ -535,64 +356,36 @@ class Attachment(Gtk.Button):
         popup.set_pointing_to(rect)
         popup.popup()
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/attachments/image_attachment.ui')
 class ImageAttachment(Gtk.Button):
     __gtype_name__ = 'AlpacaImageAttachment'
 
     def __init__(self, file_id:str, file_name:str, file_content:str):
+        super().__init__()
         self.file_name = file_name
         self.file_type = 'image'
         self.file_content = file_content
         self.activity = None
         self.texture = None
+        self.set_name(file_id)
+
         try:
             image_data = base64.b64decode(self.file_content)
             self.texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
             image = Gtk.Picture.new_for_paintable(self.texture)
             image.set_size_request(int((self.texture.get_width() * 240) / self.texture.get_height()), 240)
-            super().__init__(
-                child=image,
-                css_classes=["flat", "chat_image_button"],
-                name=file_id,
-                tooltip_text=_("Image"),
-                overflow=1
-            )
-            self.connect("clicked", lambda button: self.show_activity())
+            self.set_tooltip_text(_("Image"))
+            self.set_child(image)
+            self.set_sensitive(True)
         except Exception as e:
-            #logger.error(e)
-            image_texture = Gtk.Image.new_from_icon_name("image-missing-symbolic")
-            image_texture.set_icon_size(2)
-            image_texture.set_vexpand(True)
-            image_texture.set_pixel_size(120)
-            image_label = Gtk.Label(
-                label=_("Missing Image"),
-            )
-            image_box = Gtk.Box(
-                spacing=10,
-                orientation=1,
-            )
-            image_box.append(image_texture)
-            image_box.append(image_label)
-            image_box.set_size_request(240, 240)
-            super().__init__(
-                child=image_box,
-                css_classes=["flat", "chat_image_button"],
-                tooltip_text=_("Missing Image"),
-                overflow=1,
-                name=file_id
-            )
+            logger.error(e)
 
-        self.gesture_click = Gtk.GestureClick(button=3)
-        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
-        self.add_controller(self.gesture_click)
-        self.gesture_long_press = Gtk.GestureLongPress()
-        self.gesture_long_press.connect("pressed", self.show_popup)
-        self.add_controller(self.gesture_long_press)
-
-    def show_activity(self):
+    @Gtk.Template.Callback()
+    def show_activity(self, button=None):
         if self.activity and self.activity.get_root():
             self.activity.on_reload()
         elif self.texture:
-            page = AttachmentImagePage(
+            page = activities.ImageViewer(
                 texture=self.texture,
                 title=self.file_name,
                 delete_callback=self.prompt_delete,
@@ -647,9 +440,14 @@ class ImageAttachment(Gtk.Button):
         )
         dialog.save(override_root or self.get_root(), None, self.on_download, None)
 
-    def show_popup(self, gesture, x, y):
+    @Gtk.Template.Callback()
+    def show_popup(self, *args):
         rect = Gdk.Rectangle()
-        rect.x, rect.y, = x, y
+        if len(args) == 4:
+            rect.x, rect.y = args[2], args[3]
+        else:
+            rect.x, rect.y = args[1], args[2]
+
         actions = [
             [
                 {

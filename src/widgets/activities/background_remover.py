@@ -13,8 +13,8 @@ class BackgroundRemoverImage(Gtk.Button):
 
     @Gtk.Template.Callback()
     def open_image_viewer(self, button):
-        from . import show_activity
-        page = attachments.AttachmentImagePage(
+        from . import show_activity, ImageViewer
+        page = ImageViewer(
             texture=self.get_texture(),
             title=self.get_name(),
             download_callback=lambda ovr: self.prompt_download(ovr),

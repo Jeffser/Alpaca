@@ -1,0 +1,28 @@
+using Gtk 4.0;
+
+template $AlpacaImageAttachment: Gtk.Button {
+  overflow: hidden;
+  sensitive: false;
+  tooltip-text: _("Missing Image");
+  child: Gtk.Image {
+    icon-name: "image-missing-symbolic";
+    icon-size: large;
+    vexpand: true;
+    pixel-size: 120;
+    height-request: 240;
+    width-request: 240;
+  };
+  styles [
+    "flat",
+    "chat_image_button"
+  ]
+
+  clicked => $show_activity();
+  Gtk.GestureClick {
+    button: 3;
+    released => $show_popup();
+  }
+  Gtk.GestureLongPress {
+    pressed => $show_popup();
+  }
+}
