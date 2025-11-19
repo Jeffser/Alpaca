@@ -42,6 +42,7 @@ blueprints = files(
   'ui/widgets/activities/transcriber.blp',
   'ui/widgets/activities/image_viewer.blp',
   'ui/widgets/activities/file_viewer.blp',
+  'ui/widgets/activities/activity_dialog.blp',
   'ui/widgets/message/global_message_textview.blp',
   'ui/widgets/message/global_action_stack.blp',
   'ui/widgets/message/global_footer.blp',

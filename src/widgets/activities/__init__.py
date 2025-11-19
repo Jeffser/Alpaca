@@ -13,39 +13,36 @@ import importlib.util
 
 last_activity_tabview = None
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/activities/activity_dialog.ui')
 class ActivityDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaActivityDialog'
 
+    toolbarview = Gtk.Template.Child()
+    headerbar = Gtk.Template.Child()
+
     def __init__(self, page:Gtk.Widget):
         self.page = page
-        tbv=Adw.ToolbarView()
-        hb = Adw.HeaderBar()
-        tbv.add_top_bar(hb)
+        super().__init__(
+            title=self.page.title
+        )
+
         bb = generate_action_bar(self.page)
         if self.page.extend_to_edge and self.page.__gtype_name__ != 'AlpacaLiveChat':
-            hb.add_css_class('osd')
+            self.headerbar.add_css_class('osd')
             if bb:
                 bb.add_css_class('osd')
         if bb:
             for css_class in self.page.buttons.get('css', []):
                 bb.add_css_class(css_class)
 
-        tbv.add_bottom_bar(bb)
-        tbv.set_content(self.page)
+        self.toolbarview.add_bottom_bar(bb)
+        self.toolbarview.set_content(self.page)
 
-        tbv.set_extend_content_to_bottom_edge(self.page.extend_to_edge)
-        tbv.set_extend_content_to_top_edge(self.page.extend_to_edge)
+        self.toolbarview.set_extend_content_to_bottom_edge(self.page.extend_to_edge)
+        self.toolbarview.set_extend_content_to_top_edge(self.page.extend_to_edge)
 
-        super().__init__(
-            child=tbv,
-            title=self.page.title,
-            content_width=500,
-            content_height=600
-        )
-
-        self.connect('closed', lambda *_: self.close())
-
-    def close(self):
+    @Gtk.Template.Callback()
+    def close(self, dialog=None):
         self.force_close()
         if self.page and self.page.get_parent():
             self.page.on_close()
