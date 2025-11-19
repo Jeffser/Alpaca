@@ -7,7 +7,7 @@ from .live_chat import LiveChat
 from .terminal import Terminal, AttachmentCreator, CodeRunner, CodeEditor
 from .transcriber import Transcriber
 from .camera import Camera
-from .viewers import ImageViewer
+from .viewers import ImageViewer, FileViewer
 from .. import dialog
 import importlib.util
 

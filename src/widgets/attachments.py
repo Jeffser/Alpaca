@@ -104,79 +104,6 @@ def extract_image(image_path:str, max_size:int) -> str:
             image_data = output.getvalue()
         return base64.b64encode(image_data).decode("utf-8")
 
-class AttachmentPage(Gtk.ScrolledWindow):
-    __gtype_name__ = 'AlpacaAttachmentPage'
-
-    def __init__(self, attachment):
-        self.attachment = attachment
-
-        # Activity
-        self.buttons = {
-            'start': [],
-            'end': []
-        }
-        self.extend_to_edge = False
-        self.title = self.attachment.file_name
-        self.activity_icon = self.attachment.get_child().get_icon_name()
-
-        if self.attachment.file_type != 'model_context':
-            delete_button = Gtk.Button(
-                css_classes=['error'],
-                icon_name='user-trash-symbolic',
-                tooltip_text=_('Remove Attachment'),
-                vexpand=False,
-                valign=3
-            )
-            delete_button.connect('clicked', lambda *_: self.attachment.prompt_delete(self.get_root()))
-            self.buttons['start'].append(delete_button)
-
-        download_button = Gtk.Button(
-            icon_name='folder-download-symbolic',
-            tooltip_text=_('Download Attachment'),
-            vexpand=False,
-            valign=3
-        )
-        download_button.connect('clicked', lambda *_: self.attachment.prompt_download(self.get_root()))
-        self.buttons['start'].append(download_button)
-
-        container = Gtk.Box(
-            orientation=1,
-            margin_start=10,
-            margin_end=10,
-            margin_top=10,
-            margin_bottom=10,
-            hexpand=True
-        )
-        super().__init__(
-            child=container,
-            hexpand=True,
-            vexpand=True,
-            propagate_natural_width=True,
-            propagate_natural_height=True,
-            css_classes=['undershoot-bottom'],
-            max_content_width=500
-        )
-
-        content = self.attachment.get_content()
-        for block in blocks.text_to_block_list(content):
-            container.append(block)
-
-    # Activity
-    def on_reload(self):
-        pass
-
-    def on_close(self):
-        pass
-
-    def close(self):
-        parent = self.get_ancestor(Adw.TabView)
-        if parent:
-            parent.close_page(parent.get_page(self))
-        else:
-            parent = self.get_ancestor(Adw.Dialog)
-            if parent:
-                parent.close()
-
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/attachments/attachment.ui')
 class Attachment(Gtk.Button):
     __gtype_name__ = 'AlpacaAttachment'
@@ -271,7 +198,7 @@ class Attachment(Gtk.Button):
 
             else:
                 self.activity = activities.show_activity(
-                    AttachmentPage(self),
+                    activities.FileViewer(self),
                     self.get_root(),
                     self.get_parent().get_parent().get_parent().force_dialog
                 )

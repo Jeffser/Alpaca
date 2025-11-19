@@ -1,0 +1,38 @@
+using Gtk 4.0;
+
+template $AlpacaFileViewer: Gtk.ScrolledWindow {
+  hexpand: true;
+  vexpand: true;
+  propagate-natural-width: true;
+  propagate-natural-height: true;
+  max-content-width: 500;
+  styles [
+    "undershoot-bottom"
+  ]
+  child: Gtk.Box container {
+    orientation: vertical;
+    margin-start: 10;
+    margin-end: 10;
+    margin-top: 10;
+    margin-bottom: 10;
+  };
+}
+
+Gtk.Button delete_button {
+  valign: center;
+  vexpand: false;
+  tooltip-text: _("Remove Attachment");
+  icon-name: "user-trash-symbolic";
+  clicked => $delete_requested();
+  styles [
+    "error"
+  ]
+}
+
+Gtk.Button download_button {
+  valign: center;
+  vexpand: false;
+  tooltip-text: _("Download Attachment");
+  icon-name: "folder-download-symbolic";
+  clicked => $download_requested();
+}

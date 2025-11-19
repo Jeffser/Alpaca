@@ -1,6 +1,7 @@
 # viewers.py
 
 from gi.repository import Adw, Gtk, Gdk, GLib
+from .. import blocks
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/activities/image_viewer.ui')
 class ImageViewer(Gtk.ScrolledWindow):
@@ -156,6 +157,56 @@ class ImageViewer(Gtk.ScrolledWindow):
         vadj = self.get_vadjustment()
         adj.set_value(adj.get_value() - dx)
         vadj.set_value(vadj.get_value() - dy)
+
+    def close(self):
+        parent = self.get_ancestor(Adw.TabView)
+        if parent:
+            parent.close_page(parent.get_page(self))
+        else:
+            parent = self.get_ancestor(Adw.Dialog)
+            if parent:
+                parent.close()
+
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/activities/file_viewer.ui')
+class FileViewer(Gtk.ScrolledWindow):
+    __gtype_name__ = 'AlpacaFileViewer'
+
+    container = Gtk.Template.Child()
+    delete_button = Gtk.Template.Child()
+    download_button = Gtk.Template.Child()
+
+    def __init__(self, attachment):
+        self.attachment = attachment
+        super().__init__()
+
+        self.delete_button.set_visible(self.attachment.file_type != 'model_context')
+
+        # Activity
+        self.buttons = {
+            'start': [self.delete_button, self.download_button],
+            'end': []
+        }
+        self.extend_to_edge = False
+        self.title = self.attachment.file_name
+        self.activity_icon = self.attachment.get_child().get_icon_name()
+
+        content = self.attachment.get_content()
+        for block in blocks.text_to_block_list(content):
+            self.container.append(block)
+
+    @Gtk.Template.Callback()
+    def delete_requested(self, button):
+        self.attachment.prompt_delete(self.get_root())
+
+    @Gtk.Template.Callback()
+    def download_requested(self, button):
+        self.attachment.prompt_download(self.get_root())
+
+    def on_reload(self):
+        pass
+
+    def on_close(self):
+        pass
 
     def close(self):
         parent = self.get_ancestor(Adw.TabView)
