@@ -819,23 +819,12 @@ class AttachmentContainer(Gtk.ScrolledWindow):
             None
         )
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/attachments/image_attachment_container.ui')
 class ImageAttachmentContainer(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaImageAttachmentContainer'
 
     force_dialog = False
-
-    def __init__(self):
-        self.container = Gtk.Box(
-            orientation=0,
-            spacing=12
-        )
-
-        super().__init__(
-            height_request=240,
-            min_content_width=240,
-            child=self.container,
-            visible=False
-        )
+    container = Gtk.Template.Child()
 
     def get_content(self) -> list:
         files = []

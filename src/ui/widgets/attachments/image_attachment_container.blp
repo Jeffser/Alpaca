@@ -1,0 +1,11 @@
+using Gtk 4.0;
+
+template $AlpacaImageAttachmentContainer: Gtk.ScrolledWindow {
+  height-request: 240;
+  min-content-width: 240;
+  visible: false;
+  child: Gtk.Box container {
+    spacing: 10;
+    valign: start;
+  };
+}

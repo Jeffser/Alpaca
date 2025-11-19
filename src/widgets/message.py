@@ -106,17 +106,12 @@ class OptionPopup(Gtk.Popover):
         else:
             dialog.show_toast(_("Message cannot be regenerated while receiving a response"), self.get_root())
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/message/block_container.ui')
 class BlockContainer(Gtk.Box):
     __gtype_name__ = 'AlpacaBlockContainer'
 
-    def __init__(self, message):
-        self.message = message
-        super().__init__(
-            orientation=1,
-            halign=0,
-            spacing=5,
-            css_classes=['dim-label'] if message.mode == 2 else []
-        )
+    def __init__(self):
+        super().__init__()
         self.generating_block = None
 
     def prepare_generating_block(self):
@@ -126,7 +121,7 @@ class BlockContainer(Gtk.Box):
         if not self.generating_block:
             self.generating_block = blocks.GeneratingText()
             self.append(self.generating_block)
-            GLib.idle_add(self.message.popup.change_status, False)
+            GLib.idle_add(self.get_ancestor(Message).popup.change_status, False)
 
     def remove_generating_block(self):
         if self.generating_block:
@@ -140,6 +135,7 @@ class BlockContainer(Gtk.Box):
 
     def set_content(self, content:str) -> None:
         self.clear()
+        message = self.get_ancestor(Message)
 
         #Thought
         think_pattern = r'(<think>(.*?)</think>)|(<\|begin_of_thought\|>(.*?)<\|end_of_thought\|>)'
@@ -151,13 +147,13 @@ class BlockContainer(Gtk.Box):
                 'thought',
                 thought
             )
-            self.message.attachment_container.add_attachment(attachment)
-            SQL.insert_or_update_attachment(self.message, attachment)
+            message.attachment_container.add_attachment(attachment)
+            SQL.insert_or_update_attachment(message, attachment)
 
         clean_content = re.sub(think_pattern, '', content, flags=re.DOTALL).strip()
         for block in blocks.text_to_block_list(clean_content):
             self.append(block)
-        self.message.main_stack.set_visible_child_name('content')
+        message.main_stack.set_visible_child_name('content')
 
     def add_content(self, content:str) -> None:
         """
@@ -211,6 +207,9 @@ class Message(Gtk.Box):
     header_label = Gtk.Template.Child()
     main_stack = Gtk.Template.Child()
     content_container = Gtk.Template.Child()
+    image_attachment_container = Gtk.Template.Child()
+    attachment_container = Gtk.Template.Child()
+    block_container = Gtk.Template.Child()
 
     def __init__(self, dt:datetime.datetime, message_id:str=-1, mode:int=0, author:str=None):
         """
@@ -231,13 +230,9 @@ class Message(Gtk.Box):
         self.main_container.set_css_classes(['card', 'user_message'] if mode==0 else ['response_message'])
         self.main_container.set_size_request(100 if mode==0 else -1, -1)
 
-        self.image_attachment_container = attachments.ImageAttachmentContainer()
-        self.content_container.append(self.image_attachment_container)
-        self.attachment_container = attachments.AttachmentContainer()
-        self.content_container.append(self.attachment_container)
-        self.block_container = BlockContainer(message=self)
-        self.content_container.append(self.block_container)
-        self.main_stack.add_named(blocks.EditingText(), 'editing')
+        if self.mode == 2:
+            self.block_container.set_css_classes('dim-label')
+
         self.update_profile_picture()
 
     def get_content(self) -> str:

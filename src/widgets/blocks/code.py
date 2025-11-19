@@ -4,7 +4,7 @@ Code block handling
 """
 
 from gi.repository import Gtk, Gdk, GtkSource
-from .. import dialog, activities
+from .. import dialog, activities, message
 from ...sql_manager import generate_uuid
 from ...constants import CODE_LANGUAGE_FALLBACK, CODE_LANGUAGE_PROPERTIES
 import re, unicodedata
@@ -53,7 +53,7 @@ class Code(Gtk.Box):
 
     def save_edit(self, code:str) -> None:
         self.buffer.set_text(code, len(code.encode('utf-8')))
-        self.get_parent().message.save()
+        self.get_ancestor(message.Message).save()
 
     @Gtk.Template.Callback()
     def copy_code(self, button=None) -> None:
@@ -93,7 +93,7 @@ class Code(Gtk.Box):
             self.activity_runner.on_reload()
         else:
             extra_files = []
-            for blk in [blk for blk in list(self.get_parent().message.block_container) if isinstance(blk, Code) and blk.get_language().lower() in ('css', 'javascript', 'js') and blk != self]:
+            for blk in [blk for blk in list(self.get_parent().get_ancestor(message.Message).block_container) if isinstance(blk, Code) and blk.get_language().lower() in ('css', 'javascript', 'js') and blk != self]:
                 blk_language = blk.get_language().lower()
                 blk_code = blk.get_code()
                 extra_files.append({

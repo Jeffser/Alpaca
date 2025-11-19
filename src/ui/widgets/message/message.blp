@@ -70,9 +70,25 @@ template $AlpacaMessage: Gtk.Box {
         child: Gtk.Box content_container {
           orientation: vertical;
           spacing: 5;
+
+          Adw.Bin {
+            child: $AlpacaImageAttachmentContainer image_attachment_container {};
+          }
+
+          Adw.Bin {
+            child: $AlpacaAttachmentContainer attachment_container {};
+          }
+
+          Adw.Bin {
+            child: $AlpacaBlockContainer block_container {};
+          }
         };
       }
 
+      Gtk.StackPage {
+        name: "editing";
+        child: $AlpacaEditingText {};
+      }
     }
   }
 }
