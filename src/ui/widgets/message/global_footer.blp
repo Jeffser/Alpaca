@@ -8,9 +8,7 @@ template $AlpacaGlobalFooter: Gtk.Box {
     "p10"
   ]
 
-  Adw.Bin {
-    child: $AlpacaAttachmentContainer attachment_container {};
-  }
+  $AlpacaAttachmentContainer attachment_container {}
 
   Gtk.Box message_text_view_container {
     overflow: hidden;
@@ -28,10 +26,8 @@ template $AlpacaGlobalFooter: Gtk.Box {
       child: $AlpacaGlobalMessageTextView message_text_view {};
     }
 
-    Adw.Bin {
-      child: $AlpacaGlobalActionStack action_stack {
-        sensitive: false;
-      };
+    $AlpacaGlobalActionStack action_stack {
+      sensitive: false;
     }
   }
 
@@ -40,34 +36,25 @@ template $AlpacaGlobalFooter: Gtk.Box {
     line-spacing: 10;
     justify-last-line: true;
 
-    Adw.Bin {
-      child: $AlpacaGlobalAttachmentButton attachment_button {};
+    $AlpacaGlobalAttachmentButton attachment_button {}
+
+    $AlpacaMicrophoneButton microphone_button {}
+
+    Gtk.Button model_manager_shortcut {
+      icon-name: "brain-augemnted-symbolic";
+      valign: center;
+      tooltip-text: _("Manage Models");
+      action-name: "app.model_manager";
+      styles [
+        "circular"
+      ]
     }
 
-    Adw.Bin {
-      child: $AlpacaMicrophoneButton microphone_button {};
-    }
-
-    Adw.Bin {
-      child: Gtk.Button model_manager_shortcut {
-        icon-name: "brain-augemnted-symbolic";
-        valign: center;
-        tooltip-text: _("Manage Models");
-        action-name: "app.model_manager";
-        styles [
-          "circular"
-        ]
-      };
-    }
-
-    Adw.Bin {
-      child: $AlpacaAddedModelSelector model_selector {};
+    $AlpacaAddedModelSelector model_selector {
       hexpand: true;
       halign: start;
     }
 
-    Adw.Bin {
-      child: $AlpacaToolSelector tool_selector {};
-    }
+    $AlpacaToolSelector tool_selector {}
   }
 }

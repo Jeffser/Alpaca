@@ -71,17 +71,9 @@ template $AlpacaMessage: Gtk.Box {
           orientation: vertical;
           spacing: 5;
 
-          Adw.Bin {
-            child: $AlpacaImageAttachmentContainer image_attachment_container {};
-          }
-
-          Adw.Bin {
-            child: $AlpacaAttachmentContainer attachment_container {};
-          }
-
-          Adw.Bin {
-            child: $AlpacaBlockContainer block_container {};
-          }
+          $AlpacaImageAttachmentContainer image_attachment_container {}
+          $AlpacaAttachmentContainer attachment_container {}
+          $AlpacaBlockContainer block_container {}
         };
       }
 
