@@ -188,6 +188,7 @@ class ModelCreatorDialog(Adw.Dialog):
             data_json['from'] = self.base_el.get_selected_item().model.get_name()
 
         threading.Thread(target=self.create_model, args=(data_json,), daemon=True).start()
+        self.close()
 
     def create_model(self, data:dict):
         window = self.get_root().get_application().get_main_window(present=False)

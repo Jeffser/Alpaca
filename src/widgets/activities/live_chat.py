@@ -2,124 +2,62 @@
 
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk
 from ...constants import IN_FLATPAK, data_dir, REMBG_MODELS
-from .. import dialog, attachments, models, chat, message, models, instances, voice
+from .. import dialog, attachments, models, chat, message, instances, voice
 from ...sql_manager import generate_uuid, prettify_model_name, Instance as SQL
 import base64, os, threading, datetime
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/activities/live_chat.ui')
 class LiveChat(Adw.Bin):
     __gtype_name__ = 'AlpacaLiveChat'
 
     animation_signals = {}
 
-    def __init__(self):
-        super().__init__(
-            child=Adw.BottomSheet(
-                can_open=True,
-                can_close=True,
-                open=False,
-                show_drag_handle=True,
-            )
-        )
+    sheet = Gtk.Template.Child()
+    chat = Gtk.Template.Child()
+    overlay = Gtk.Template.Child()
+    background = Gtk.Template.Child()
+    pfp_avatar = Gtk.Template.Child()
+    pfp_spinner = Gtk.Template.Child()
+    microphone_container = Gtk.Template.Child()
+    global_footer_container = Gtk.Template.Child()
 
-        # Prepare Chat
-        self.get_child().set_sheet(
-            chat.Chat(chat_id='LiveChat', name=_('Live Chat'))
-        )
-        self.get_child().get_sheet().welcome_screen.set_icon_name('')
-        self.get_child().get_sheet().welcome_screen.set_title(_('No Messages'))
-        self.get_child().get_sheet().welcome_screen.set_description(_('Begin by speaking to the model'))
-        self.get_child().get_sheet().welcome_screen.set_child(None)
-        self.get_child().get_sheet().set_visible_child_name('welcome-screen')
+    show_messages_button = Gtk.Template.Child()
+    close_button = Gtk.Template.Child()
+
+    def __init__(self):
+        super().__init__()
+
+        self.chat.chat_id='LiveChat'
+        self.chat.welcome_screen.set_icon_name('')
+        self.chat.welcome_screen.set_title(_('No Messages'))
+        self.chat.welcome_screen.set_description(_('Begin by speaking to the model'))
+        self.chat.welcome_screen.set_child(None)
+        self.chat.set_visible_child_name('welcome-screen')
+
         m_element = message.Message(
             dt=datetime.datetime.now(),
             message_id=generate_uuid(),
             mode=2
         )
-        self.get_child().get_sheet().add_message(m_element)
+        self.chat.add_message(m_element)
         m_element.block_container.set_content("Have a natural and flowing conversation with the user. Respond in a clear, engaging, and human-like manner. Keep replies concise unless more detail is needed.")
-        list(self.get_child())[2].set_margin_start(10)
-        list(self.get_child())[2].set_margin_end(10)
-
-        self.background = Gtk.Picture(
-            vexpand=True,
-            hexpand=True,
-            content_fit=0,
-            css_classes=['live_chat_background']
-        )
-
-        self.overlay = Gtk.Overlay(
-            child=self.background
-        )
-
-        show_messages_button = Gtk.Button(
-            icon_name='chat-bubble-text-symbolic',
-            tooltip_text=_('Show Messages'),
-            css_classes=['circular']
-        )
-        show_messages_button.connect('clicked', lambda btn: self.get_child().set_open(True))
-
-        container = Gtk.Box(
-            orientation=1
-        )
-        clamp = Adw.Clamp(
-            maximum_size=1000,
-            tightening_threshold=800,
-            child=container
-        )
-        scrolled_window = Gtk.ScrolledWindow(
-            child=clamp
-        )
-        self.overlay.add_overlay(scrolled_window)
-        self.get_child().set_content(self.overlay)
-
-        self.pfp_avatar=Adw.Avatar(
-            valign=3,
-            size=200
-        )
-        pfp_overlay=Gtk.Overlay(
-            margin_top=20,
-            margin_bottom=20,
-            valign=3,
-            halign=3,
-            css_classes=['model_pfp'],
-            overflow=1,
-            child=self.pfp_avatar
-        )
-        self.pfp_spinner = Adw.Spinner(
-            visible=False,
-            overflow=1,
-            css_classes=['osd']
-        )
-        pfp_overlay.add_overlay(
-            self.pfp_spinner
-        )
-        pfp_bin=Adw.Bin(
-            child=pfp_overlay,
-            vexpand=True
-        )
-        container.append(pfp_bin)
-
-        microphone_container=Adw.Bin(
-            valign=2
-        )
-        container.append(microphone_container)
-        global_footer_container=Adw.Bin(
-            valign=2
-        )
-        container.append(global_footer_container)
+        list(self.sheet)[2].set_margin_start(10)
+        list(self.sheet)[2].set_margin_end(10)
 
         # Prepare Global Footer
-        self.global_footer = message.GlobalFooter(self.send_message, hide_mm_shortcut=True)
+        self.global_footer = message.GlobalFooter(self.send_message)
+        self.global_footer.model_manager_shortcut.set_visible(False)
         self.global_footer.wrap_box.set_wrap_policy(0)
         self.global_footer.attachment_button.set_visible(False)
         self.global_footer.action_stack.set_visible(False)
         self.global_footer.tool_selector.set_visible(False)
         self.global_footer.microphone_button.unparent()
-        self.global_footer.wrap_box.prepend(show_messages_button)
-        self.global_footer.model_selector.connect('notify::selected', self.model_dropdown_changed)
-        self.global_footer.model_selector.set_hexpand(True)
+        self.global_footer.wrap_box.prepend(self.show_messages_button)
+        self.global_footer.wrap_box.append(self.close_button)
+        self.global_footer.model_selector.selector.connect('notify::selected', self.model_dropdown_changed)
+        GLib.idle_add(self.model_dropdown_changed, self.global_footer.model_selector.selector)
         self.global_footer.model_selector.set_halign(3)
-        global_footer_container.set_child(self.global_footer)
+        self.global_footer_container.set_child(self.global_footer)
 
         # Prepare Text To Speech
         self.global_footer.microphone_button.button.add_css_class('circular')
@@ -127,7 +65,7 @@ class LiveChat(Adw.Bin):
         self.global_footer.microphone_button.button.get_child().set_icon_size(2)
         self.global_footer.microphone_button.button.remove_css_class('br0')
         self.global_footer.microphone_button.set_halign(3)
-        microphone_container.set_child(self.global_footer.microphone_button)
+        self.microphone_container.set_child(self.global_footer.microphone_button)
 
         # Prepare Avatar
         self.model_avatar_animation = Adw.TimedAnimation(
@@ -141,13 +79,7 @@ class LiveChat(Adw.Bin):
             repeat_count=0
         )
 
-        self.close_button = Gtk.Button(
-            tooltip_text=_('Close Activity'),
-            icon_name='window-close-symbolic',
-            css_classes=['circular'],
-            valign=3
-        )
-        self.connect('map', self.on_map)
+        GLib.idle_add(self.update_close_visibility)
 
         # Activity
         self.title=_('Live Chat')
@@ -155,17 +87,18 @@ class LiveChat(Adw.Bin):
         self.buttons={}
         self.extend_to_edge = True
 
-    def requested_close(self):
+    @Gtk.Template.Callback()
+    def show_messages_requested(self, button):
+        self.sheet.set_open(True)
+
+    @Gtk.Template.Callback()
+    def requested_close(self, button):
         tabview = self.get_ancestor(Adw.TabView)
         if tabview:
             tabview.close_page(tabview.get_selected_page())
 
-    def on_map(self, widget):
-        if not self.close_button.get_parent():
-            tabview = self.get_ancestor(Adw.TabView)
-            if tabview:
-                self.global_footer.wrap_box.append(self.close_button)
-                self.close_button.connect('clicked', lambda button: self.requested_close())
+    def update_close_visibility(self):
+        self.close_button.set_visible(self.get_ancestor(Adw.TabView))
 
     def toggle_avatar_state(self, state:bool):
         if state:
@@ -177,7 +110,7 @@ class LiveChat(Adw.Bin):
             if self.get_current_instance():
                 threading.Thread(target=self.try_turning_on_mic, daemon=True).start()
 
-    def model_dropdown_changed(self, dropdown, user_data):
+    def model_dropdown_changed(self, dropdown, user_data=None):
         if dropdown.get_selected_item():
             model_name = dropdown.get_selected_item().model.get_name()
             model_picture_data = SQL.get_model_preferences(model_name).get('picture')
@@ -233,7 +166,7 @@ class LiveChat(Adw.Bin):
 
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
 
-        chat = self.get_child().get_sheet()
+        chat = self.chat
 
         m_element = message.Message(
             dt=datetime.datetime.now(),
@@ -287,7 +220,7 @@ class LiveChat(Adw.Bin):
         return self.get_root().get_application().get_main_window().get_current_instance()
 
     def on_close(self):
-        self.get_child().get_sheet().busy = False
+        self.chat.busy = False
 
     def on_reload(self):
         pass

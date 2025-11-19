@@ -1,0 +1,88 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaLiveChat: Adw.Bin {
+  child: Adw.BottomSheet sheet {
+    can-open: true;
+    can-close: true;
+    open: false;
+    show-drag-handle: true;
+    sheet: $AlpacaChat chat {
+      name: _("Live Chat");
+    };
+    content: Gtk.Overlay overlay {
+      child: Gtk.Picture background {
+        vexpand: true;
+        hexpand: true;
+        content-fit: cover;
+        styles [
+          "live_chat_background"
+        ]
+      };
+
+      [overlay]
+      Gtk.ScrolledWindow {
+        child: Adw.Clamp {
+          maximum-size: 1000;
+          tightening-threshold: 800;
+          child: Gtk.Box {
+            orientation: vertical;
+
+            Adw.Bin {
+              vexpand: true;
+              child: Gtk.Overlay {
+                margin-top: 20;
+                margin-bottom: 20;
+                valign: center;
+                halign: center;
+                overflow: hidden;
+                styles [
+                  "model_pfp"
+                ]
+                child: Adw.Avatar pfp_avatar {
+                  valign: center;
+                  size: 200;
+                };
+
+                [overlay]
+                Adw.Spinner pfp_spinner {
+                  visible: false;
+                  overflow: hidden;
+                  styles [
+                    "osd"
+                  ]
+                }
+              };
+            }
+
+            Adw.Bin microphone_container {
+              valign: end;
+            }
+
+            Adw.Bin global_footer_container {
+              valign: end;
+            }
+          };
+        };
+      }
+    };
+  };
+}
+
+Gtk.Button show_messages_button {
+  icon-name: "chat-bubble-text-symbolic";
+  tooltip-text: _("Show Messages");
+  styles [
+    "circular"
+  ]
+  clicked => $show_messages_requested();
+}
+
+Gtk.Button close_button {
+  icon-name: "window-close-symbolic";
+  tooltip-text: _("Close Activity");
+  styles [
+    "circular"
+  ]
+  clicked => $requested_close();
+}

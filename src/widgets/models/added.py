@@ -45,11 +45,12 @@ class AddedModelSelector(Gtk.Stack):
         factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
         self.selector.set_factory(factory)
         list(list(self.selector)[1].get_child())[1].set_propagate_natural_width(True)
+        GLib.idle_add(self.n_items_changed, self.selector.get_model())
 
     def get_model(self):
         return self.selector.get_model()
 
-    def n_items_changed(self, model, gparam):
+    def n_items_changed(self, model, gparam=None):
         self.selector.set_enable_search(len(model) > 10)
         self.set_visible_child_name('selector' if len(model) > 0 else 'no-models')
 

@@ -352,6 +352,7 @@ class Chat(Gtk.Stack):
     scrolledwindow = Gtk.Template.Child()
     container = Gtk.Template.Child()
     prompt_container = Gtk.Template.Child()
+    welcome_screen = Gtk.Template.Child()
 
     def __init__(self, chat_id:str=None, name:str=_("New Chat"), folder_id:str=None, is_template=False):
         super().__init__()
@@ -361,7 +362,7 @@ class Chat(Gtk.Stack):
         self.folder_id = folder_id
         self.is_template = is_template
         self.row = ChatRow(self)
-        self.connect('realize', lambda *_: threading.Thread(target=self.update_prompts, daemon=True).start())
+        GLib.idle_add(self.update_prompts)
 
     def stop_message(self):
         self.busy = False

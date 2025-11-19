@@ -154,6 +154,7 @@ class BlockContainer(Gtk.Box):
         """
         Used for live generation rendering
         """
+        message = self.get_ancestor(Message)
 
         #Thought
         think_pattern = r'(<think>(.*?)</think>)|(<\|begin_of_thought\|>(.*?)<\|end_of_thought\|>)'
@@ -165,8 +166,8 @@ class BlockContainer(Gtk.Box):
                 'thought',
                 thought
             )
-            self.message.attachment_container.add_attachment(attachment)
-            SQL.insert_or_update_attachment(self.message, attachment)
+            message.attachment_container.add_attachment(attachment)
+            SQL.insert_or_update_attachment(message, attachment)
 
         clean_content = re.sub(think_pattern, '', content, flags=re.DOTALL)
 
@@ -186,8 +187,8 @@ class BlockContainer(Gtk.Box):
                     GLib.idle_add(self.insert_child_after, block, list(self)[-2])
 
         chat_element = self.get_ancestor(chat.Chat)
-        if not self.message.popup.tts_button.get_active() and (self.message.get_root().settings.get_value('tts-auto-dictate').unpack() or (chat_element and chat_element.chat_id=='LiveChat')):
-            GLib.idle_add(self.message.popup.tts_button.set_active, True)
+        if not message.popup.tts_button.get_active() and (message.get_root().settings.get_value('tts-auto-dictate').unpack() or (chat_element and chat_element.chat_id=='LiveChat')):
+            GLib.idle_add(message.popup.tts_button.set_active, True)
 
     def get_content(self) -> list:
         return [block.get_content() for block in list(self)]
@@ -507,8 +508,9 @@ class GlobalFooter(Gtk.Box):
     model_manager_shortcut = Gtk.Template.Child()
     model_selector = Gtk.Template.Child()
     tool_selector = Gtk.Template.Child()
+    wrap_box = Gtk.Template.Child()
 
-    def __init__(self, send_callback:callable, hide_mm_shortcut:bool=False):
+    def __init__(self, send_callback:callable):
         self.send_callback = send_callback
         super().__init__()
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
@@ -521,7 +523,7 @@ class GlobalFooter(Gtk.Box):
         settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         settings.bind('show-model-manager-shortcut', self.model_manager_shortcut, 'visible', Gio.SettingsBindFlags.DEFAULT)
 
-        self.model_selector.connect('notify::selected', lambda dropdown, gparam: self.tool_selector.model_changed(dropdown))
+        self.model_selector.selector.connect('notify::selected', lambda dropdown, gparam: self.tool_selector.model_changed(dropdown))
         models.added.model_selector_model.connect('notify::n-items', lambda m, p: self.action_stack.set_sensitive(len(m) > 0))
 
     def on_file_drop(self, drop_target, value, x, y):
@@ -540,8 +542,4 @@ class GlobalFooter(Gtk.Box):
         current_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
         current_text = current_text.replace(text, '')
         buffer.set_text(current_text, len(current_text.encode('utf-8')))
-
-
-
-
 

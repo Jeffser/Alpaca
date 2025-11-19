@@ -119,7 +119,8 @@ class QuickAskWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.global_footer = Widgets.message.GlobalFooter(self.send_message, hide_mm_shortcut=True)
+        self.global_footer = Widgets.message.GlobalFooter(self.send_message)
+        self.global_footer.model_manager_shortcut.set_visible(False)
         self.global_footer_container.set_child(self.global_footer)
 
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
