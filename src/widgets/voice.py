@@ -38,23 +38,16 @@ def preload_heavy_libraries():
 
 threading.Thread(target=preload_heavy_libraries, daemon=True).start()
 
-class DictateToggleButton(Gtk.Stack):
-    __gtype_name__ = 'AlpacaDictateToggleButton'
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/voice/dictate_button.ui')
+class DictateButton(Gtk.Stack):
+    __gtype_name__ = 'AlpacaDictateButton'
+
+    button = Gtk.Template.Child()
 
     def __init__(self):
         super().__init__(
             visible = importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice')
         )
-        self.button = Gtk.ToggleButton(
-            halign=1,
-            hexpand=True,
-            icon_name='bullhorn-symbolic',
-            css_classes=["flat"],
-            tooltip_text=_("Dictate Message")
-        )
-        self.button.connect('toggled', self.dictate_message)
-        self.add_named(self.button, 'button')
-        self.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
         self.play_queue = queue.Queue()
 
         if self.get_visible() and (libraries.get('kokoro') is None or libraries.get('sounddevice') is None):
@@ -136,6 +129,7 @@ class DictateToggleButton(Gtk.Stack):
         play_thread.join()
         self.set_active(False)
 
+    @Gtk.Template.Callback()
     def dictate_message(self, button):
         global message_dictated
         message_element = self.get_ancestor(message.Message)
@@ -156,35 +150,29 @@ class DictateToggleButton(Gtk.Stack):
             message_dictated = None
             threading.Thread(target=libraries.get('sounddevice').stop, daemon=True).start()
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/voice/microphone_button.ui')
 class MicrophoneButton(Gtk.Stack):
     __gtype_name__ = 'AlpacaMicrophoneButton'
 
-    def __init__(self, text_view=None):
-        self.text_view = text_view
+    button = Gtk.Template.Child()
+
+    def __init__(self):
+        self.text_view = None
+        self.mic_timeout = 0
+        self.pulling_model = None
 
         super().__init__(
             visible = importlib.util.find_spec('whisper') and importlib.util.find_spec('pyaudio')
         )
-        self.button = Gtk.ToggleButton(
-            icon_name='audio-input-microphone-symbolic',
-            tooltip_text=_('Use Speech Recognition'),
-            css_classes=['circular'],
-            valign=3
-        )
-        self.button.connect('toggled', self.toggled)
-        self.add_named(self.button, 'button')
-        self.add_named(Adw.Spinner(css_classes=['p10']), 'loading')
-        self.mic_timeout = 0
 
         if self.get_visible() and (libraries.get('whisper') is None or libraries.get('pyaudio') is None):
             library_waiting_queue.append(self)
             self.set_sensitive(False)
 
-        self.pulling_model = None
-
     def set_text_view(self, text_view):
         self.text_view = text_view
 
+    @Gtk.Template.Callback()
     def toggled(self, button):
         global loaded_whisper_models
         language=SPEACH_RECOGNITION_LANGUAGES[self.get_root().settings.get_value('stt-language').unpack()]

@@ -19,12 +19,7 @@ class OptionPopup(Gtk.Popover):
     copy_button = Gtk.Template.Child()
     edit_button = Gtk.Template.Child()
     regenerate_button = Gtk.Template.Child()
-    tts_button = None
-
-    def __init__(self):
-        super().__init__()
-        self.tts_button = voice.DictateToggleButton()
-        self.get_child().append(self.tts_button)
+    tts_button = Gtk.Template.Child()
 
     def change_status(self, status:bool):
         self.delete_button.set_sensitive(status)

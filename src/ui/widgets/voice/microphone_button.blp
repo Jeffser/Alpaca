@@ -1,0 +1,26 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaMicrophoneButton: Gtk.Stack {
+  Gtk.StackPage {
+    name: "button";
+    child: Gtk.ToggleButton button {
+      icon-name: "audio-input-microphone-symbolic";
+      tooltip-text: _("Use Speech Recognition");
+      valign: center;
+      toggled => $toggled();
+      styles [
+        "circular"
+      ]
+    };
+  }
+
+  Gtk.StackPage {
+    name: "loading";
+    child: Adw.Spinner {
+      styles [
+        "p10"
+      ]
+    };
+  }
+}

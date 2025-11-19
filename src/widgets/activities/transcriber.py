@@ -19,9 +19,8 @@ class Transcriber(Gtk.Stack):
         super().__init__()
         self.pulling_model = None
 
-        self.microphone_button = voice.MicrophoneButton(
-            self.result_textview
-        )
+        self.microphone_button = voice.MicrophoneButton()
+        self.microphone_button.set_text_view(self.result_textview)
         self.microphone_button.set_visible(False)
 
         self.attachment_name = _('Transcription')

@@ -1,0 +1,27 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaDictateButton: Gtk.Stack {
+  Gtk.StackPage {
+    name: "button";
+    child: Gtk.ToggleButton button {
+      halign: start;
+      hexpand: true;
+      icon-name: "bullhorn-symbolic";
+      tooltip-text: _("Dictate Message");
+      toggled => $dictate_message();
+      styles [
+        "flat"
+      ]
+    };
+  }
+
+  Gtk.StackPage {
+    name: "loading";
+    child: Adw.Spinner {
+      styles [
+        "p10"
+      ]
+    };
+  }
+}
