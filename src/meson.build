@@ -40,6 +40,9 @@ blueprints = files(
   'ui/widgets/activities/terminal.blp',
   'ui/widgets/activities/code_runner.blp',
   'ui/widgets/activities/transcriber.blp',
+  'ui/widgets/message/global_message_textview.blp',
+  'ui/widgets/message/global_action_stack.blp',
+  'ui/widgets/message/global_footer.blp',
 )
 
 blueprints = custom_target('blueprints',

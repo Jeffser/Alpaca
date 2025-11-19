@@ -380,31 +380,20 @@ class Message(Gtk.Box):
         if chat_element and chat_element.chat_id:
             SQL.insert_or_update_message(self)
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/message/global_message_textview.ui')
 class GlobalMessageTextView(GtkSource.View):
     __gtype_name__ = 'AlpacaGlobalMessageTextView'
 
-    def __init__(self, parent_footer):
-        self.parent_footer = parent_footer
-        super().__init__(
-            css_classes=['message_text_view'],
-            top_margin=10,
-            bottom_margin=10,
-            hexpand=True,
-            wrap_mode=3,
-            valign=3,
-            name="main_text_view"
-        )
+    def __init__(self):
+        super().__init__()
+        self.remove_css_class('view')
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
-        drop_target.connect('drop', lambda *_: self.parent_footer.on_file_drop(*_))
+        drop_target.connect('drop', lambda *_: self.get_ancestor(GlobalFooter).on_file_drop(*_))
         self.add_controller(drop_target)
         self.get_buffer().set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('adwaita'))
-        self.connect('paste-clipboard', self.on_clipboard_paste)
-        enter_key_controller = Gtk.EventControllerKey.new()
-        enter_key_controller.connect("key-pressed", self.enter_key_handler)
-        self.add_controller(enter_key_controller)
-        checker = Spelling.Checker.get_default()
-        adapter = Spelling.TextBufferAdapter.new(self.get_buffer(), checker)
+
+        adapter = Spelling.TextBufferAdapter.new(self.get_buffer(), Spelling.Checker.get_default())
         self.set_extra_menu(adapter.get_menu_model())
         self.insert_action_group('spelling', adapter)
         adapter.set_enabled(True)
@@ -428,14 +417,14 @@ class GlobalMessageTextView(GtkSource.View):
                     parent = self.get_root(),
                     heading = _('Attach YouTube Video?'),
                     body = _('Note that YouTube might block access to captions, please check output'),
-                    callback = lambda url=text: threading.Thread(target=self.parent_footer.attachment_container.attach_youtube, args=(url,), daemon=True).start()
+                    callback = lambda url=text: threading.Thread(target=self.get_ancestor(GlobalFooter).attachment_container.attach_youtube, args=(url,), daemon=True).start()
                 )
             elif url_regex.match(text):
                 dialog.simple(
                     parent = self.get_root(),
                     heading = _('Attach Website? (Experimental)'),
                     body = _("Are you sure you want to attach\n'{}'?").format(text),
-                    callback = lambda url=text: threading.Thread(target=self.parent_footer.attachment_container.attach_website, args=(url,), daemon=True).start()
+                    callback = lambda url=text: threading.Thread(target=self.get_ancestor(GlobalFooter).attachment_container.attach_website, args=(url,), daemon=True).start()
                 )
         except Exception as e:
             pass
@@ -449,68 +438,53 @@ class GlobalMessageTextView(GtkSource.View):
                 tdir = tempfile.TemporaryDirectory()
                 texture.save_to_png(os.path.join(tdir.name, 'image.png'))
                 file = Gio.File.new_for_path(os.path.join(tdir.name, 'image.png'))
-                self.parent_footer.attachment_container.on_attachment(file)
+                self.get_ancestor(GlobalFooter).attachment_container.on_attachment(file)
                 tdir.cleanup()
         except Exception as e:
             pass
 
+    @Gtk.Template.Callback()
     def on_clipboard_paste(self, textview):
         clipboard = Gdk.Display.get_default().get_clipboard()
         clipboard.read_texture_async(None, self.cb_image_received)
         clipboard.read_text_async(None, self.cb_text_received)
 
+    @Gtk.Template.Callback()
     def enter_key_handler(self, controller, keyval, keycode, state):
         if keyval==Gdk.KEY_Return and not (state & Gdk.ModifierType.SHIFT_MASK): # Enter pressed without shift
             if state & Gdk.ModifierType.CONTROL_MASK: # Ctrl, send system message
-                self.parent_footer.send_callback(1)
+                self.get_ancestor(GlobalFooter).send_callback(1)
             else:
-                self.parent_footer.action_stack.use_default_mode()
+                self.get_ancestor(GlobalFooter).action_stack.use_default_mode()
             return True
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/message/global_action_stack.ui')
 class GlobalActionStack(Gtk.Stack):
     __gtype_name__ = 'AlpacaGlobalActionStack'
 
-    def __init__(self, parent_footer):
-        self.parent_footer = parent_footer
-        super().__init__(
-            transition_type=1
-        )
-        self.send_button = Gtk.Button(
-            tooltip_text=_('Send Message'),
-            icon_name='paper-plane-symbolic',
-            css_classes=['accent', 'br0']
-        )
-        self.add_named(self.send_button, 'send')
+    @Gtk.Template.Callback()
+    def stop_message(self, button=None):
+        self.get_root().chat_bin.get_child().stop_message()
 
-        stop_button = Gtk.Button(
-            tooltip_text=_('Stop Message'),
-            icon_name='media-playback-stop-symbolic',
-            css_classes=['destructive-action', 'br0']
-        )
-        self.add_named(stop_button, 'stop')
-
-        stop_button.connect('clicked', lambda button: self.get_root().chat_bin.get_child().stop_message())
-
-        self.send_button.connect('clicked', lambda button: self.use_default_mode())
-        gesture_click = Gtk.GestureClick(button=3)
-        gesture_click.connect("released", lambda gesture, _n_press, x, y: self.show_popup(gesture, x, y))
-        self.send_button.add_controller(gesture_click)
-        gesture_long_press = Gtk.GestureLongPress()
-        gesture_long_press.connect("pressed", self.show_popup)
-        self.send_button.add_controller(gesture_long_press)
-
-    def use_default_mode(self):
-        selected_tool = self.parent_footer.tool_selector.get_selected_item()
+    @Gtk.Template.Callback()
+    def use_default_mode(self, button=None):
+        parent_footer = self.get_ancestor(GlobalFooter)
+        selected_tool = parent_footer.tool_selector.get_selected_item()
         if selected_tool.runnable:
-            self.parent_footer.send_callback(0, {selected_tool.name: selected_tool})
+            parent_footer.send_callback(0, {selected_tool.name: selected_tool})
         elif selected_tool.name == 'auto_tool':
-            self.parent_footer.send_callback(0, {t.name: t for t in list(self.parent_footer.tool_selector.get_model()) if t.runnable})
+            parent_footer.send_callback(0, {t.name: t for t in list(parent_footer.tool_selector.get_model()) if t.runnable})
         else:
-            self.parent_footer.send_callback(0)
+            parent_footer.send_callback(0)
 
-    def show_popup(self, gesture, x, y):
+    @Gtk.Template.Callback()
+    def show_popup(self, *args):
         rect = Gdk.Rectangle()
-        rect.x, rect.y, = x, y
+        if len(args) == 4:
+            rect.x, rect.y = args[2], args[3]
+        else:
+            rect.x, rect.y = args[1], args[2]
+
         actions = [
             [
                 {
@@ -520,7 +494,7 @@ class GlobalActionStack(Gtk.Stack):
                 },
                 {
                     'label': _('Send as System'),
-                    'callback': lambda: self.parent_footer.send_callback(1),
+                    'callback': lambda: self.get_ancestor(GlobalFooter).send_callback(1),
                     'icon': None
                 }
             ]
@@ -530,48 +504,25 @@ class GlobalActionStack(Gtk.Stack):
         popup.set_pointing_to(rect)
         popup.popup()
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/message/global_footer.ui')
 class GlobalFooter(Gtk.Box):
     __gtype_name__ = 'AlpacaGlobalFooter'
+
+    message_text_view_container = Gtk.Template.Child()
+    message_text_view = Gtk.Template.Child()
+    action_stack = Gtk.Template.Child()
+    wrap_box = Gtk.Template.Child()
 
     def __init__(self, send_callback:callable, hide_mm_shortcut:bool=False):
         settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         self.send_callback = send_callback
-        super().__init__(
-            spacing=10,
-            orientation=1,
-            css_classes=['p10']
-        )
+        super().__init__()
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
         self.add_controller(drop_target)
 
         self.attachment_container = attachments.GlobalAttachmentContainer()
-        self.append(self.attachment_container)
-
-        self.message_text_view_container = Gtk.Box(
-            overflow=1,
-            css_classes=['card']
-        )
-        self.append(self.message_text_view_container)
-        self.message_text_view = GlobalMessageTextView(self)
-        message_text_view_scroller = Gtk.ScrolledWindow(
-            max_content_height=150,
-            propagate_natural_height=True,
-            min_content_height=1,
-            css_classes=['undershoot-bottom'],
-            child=self.message_text_view
-        )
-        self.message_text_view_container.append(message_text_view_scroller)
-
-        self.action_stack = GlobalActionStack(self)
-        self.message_text_view_container.append(self.action_stack)
-
-        self.wrap_box = Adw.WrapBox(
-            child_spacing=10,
-            line_spacing=10,
-            justify_last_line=True
-        )
-        self.append(self.wrap_box)
+        self.prepend(self.attachment_container)
 
         self.attachment_button = attachments.GlobalAttachmentButton()
         self.wrap_box.append(self.attachment_button)
@@ -579,16 +530,16 @@ class GlobalFooter(Gtk.Box):
         self.microphone_button = voice.MicrophoneButton(self.message_text_view)
         self.wrap_box.append(self.microphone_button)
 
-        if not hide_mm_shortcut:
-            self.model_manager_shortcut = Gtk.Button(
-                icon_name='brain-augemnted-symbolic',
-                valign=3,
-                css_classes=['circular'],
-                tooltip_text=_("Manage Models"),
-                action_name="app.model_manager"
-            )
-            settings.bind('show-model-manager-shortcut', self.model_manager_shortcut, 'visible', Gio.SettingsBindFlags.DEFAULT)
-            self.wrap_box.append(self.model_manager_shortcut)
+        self.model_manager_shortcut = Gtk.Button(
+            icon_name='brain-augemnted-symbolic',
+            valign=3,
+            css_classes=['circular'],
+            tooltip_text=_("Manage Models"),
+            action_name="app.model_manager",
+            visible=not hide_mm_shortcut
+        )
+        settings.bind('show-model-manager-shortcut', self.model_manager_shortcut, 'visible', Gio.SettingsBindFlags.DEFAULT)
+        self.wrap_box.append(self.model_manager_shortcut)
 
         self.model_selector = models.added.AddedModelSelector()
         self.model_selector.set_hexpand(True)

@@ -1,0 +1,18 @@
+using Gtk 4.0;
+using GtkSource 5;
+
+template $AlpacaGlobalMessageTextView: GtkSource.View {
+  top-margin: 10;
+  bottom-margin: 10;
+  hexpand: true;
+  valign: center;
+  wrap-mode: word_char;
+  styles [
+    "message_text_view"
+  ]
+  paste-clipboard => $on_clipboard_paste();
+
+  Gtk.EventControllerKey {
+    key-pressed => $enter_key_handler();
+  }
+}

@@ -1,0 +1,40 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaGlobalFooter: Gtk.Box {
+  spacing: 10;
+  orientation: vertical;
+  styles [
+    "p10"
+  ]
+  //TODO when GlobalAttachmentContainer is blp put it here instead of prepend in code
+
+  Gtk.Box message_text_view_container {
+    overflow: hidden;
+    styles [
+      "card"
+    ]
+
+    Gtk.ScrolledWindow {
+      max-content-height: 150;
+      propagate-natural-height: true;
+      min-content-height: 1;
+      styles [
+        "undershoot-bottom"
+      ]
+      child: $AlpacaGlobalMessageTextView message_text_view {};
+    }
+
+    Adw.Bin {
+      child: $AlpacaGlobalActionStack action_stack {};
+    }
+  }
+
+  Adw.WrapBox wrap_box {
+    child-spacing: 10;
+    line-spacing: 10;
+    justify-last-line: true;
+
+    //TODO once ready add globalattachmentbutton microphonebutton modelmanagershortcut modelselector and toolselector
+  }
+}

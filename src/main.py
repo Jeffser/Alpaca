@@ -23,6 +23,7 @@ Main script run at launch, handles actions, about dialog and the app itself (not
 import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
+gi.require_version('Gdk', '4.0')
 gi.require_version('GtkSource', '5')
 gi.require_version('Spelling', '1')
 gi.require_version('Gst', '1.0')

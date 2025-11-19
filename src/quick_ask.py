@@ -129,7 +129,8 @@ class QuickAskWindow(Adw.ApplicationWindow):
             name=_('Quick Ask')
         )
         chat.set_visible_child_name('welcome-screen')
-        self.toast_overlay.set_child(chat)
+        self.chat_bin = Adw.Bin(child=chat)
+        self.toast_overlay.set_child(self.chat_bin)
         if self.get_application().args.ask:
             self.write_and_send_message(self.get_application().args.ask)
             

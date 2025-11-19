@@ -1,0 +1,38 @@
+using Gtk 4.0;
+
+template $AlpacaGlobalActionStack: Gtk.Stack {
+  transition-type: crossfade;
+  Gtk.StackPage {
+    name: "send";
+    child: Gtk.Button send_button {
+      tooltip-text: _("Send Message");
+      icon-name: "paper-plane-symbolic";
+      clicked => $use_default_mode();
+      styles [
+        "accent",
+        "br0"
+      ]
+
+      Gtk.GestureClick {
+        button: 3;
+        released => $show_popup();
+      }
+      Gtk.GestureLongPress {
+        pressed => $show_popup();
+      }
+    };
+  }
+
+  Gtk.StackPage {
+    name: "stop";
+    child: Gtk.Button stop_button {
+      tooltip-text: _("Stop Message");
+      icon-name: "media-playback-stop-symbolic";
+      clicked => $stop_message();
+      styles [
+        "destructive-action",
+        "br0"
+      ]
+    };
+  }
+}
