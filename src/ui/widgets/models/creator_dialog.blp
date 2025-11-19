@@ -74,7 +74,9 @@ template $AlpacaModelCreatorDialog: Adw.Dialog {
               "flat"
             ]
           };
-          Adw.Bin context_attachment_container {}
+          $AlpacaAttachmentContainer context_attachment_container {
+            margin-bottom: 10;
+          }
           Gtk.ScrolledWindow {
             min-content-height: 100;
             vexpand: true;

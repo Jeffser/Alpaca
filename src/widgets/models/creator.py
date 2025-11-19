@@ -37,11 +37,9 @@ class ModelCreatorDialog(Adw.Dialog):
         self.name_el.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
         self.tag_el.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
 
-        self.context_attachment_button.connect('clicked', lambda *_: self.context_attachment_container.get_child().attachment_request(True))
+        self.context_attachment_button.connect('clicked', lambda *_: self.context_attachment_container.attachment_request(True))
 
-        self.context_attachment_container.set_child(attachments.AttachmentContainer())
-        self.context_attachment_container.get_child().force_dialog = True
-        self.context_attachment_container.get_child().set_margin_bottom(10)
+        self.context_attachment_container.force_dialog = True
 
         self.template_group.set_visible(bool(self.gguf_path))
 
@@ -90,7 +88,7 @@ class ModelCreatorDialog(Adw.Dialog):
 
         system = model.data.get('system')
         if system:
-            for attachment in list(self.context_attachment_container.get_child().container):
+            for attachment in list(self.context_attachment_container.container):
                 attachment.unparent()
 
             pattern = re.compile(r"```(.+?)\n(.*?)```", re.DOTALL)
@@ -102,7 +100,7 @@ class ModelCreatorDialog(Adw.Dialog):
                     file_type='plain_text',
                     file_content=match.group(2).strip()
                 )
-                self.context_attachment_container.get_child().add_attachment(attachment)
+                self.context_attachment_container.add_attachment(attachment)
 
             system = pattern.sub('', system).strip()
             context_buffer = self.context_el.get_buffer()
@@ -156,7 +154,7 @@ class ModelCreatorDialog(Adw.Dialog):
         profile_picture_path = self.profile_picture_el.get_subtitle()
 
         system_message = []
-        for attachment in self.context_attachment_container.get_child().get_content():
+        for attachment in self.context_attachment_container.get_content():
             system_message.append('```{}\n{}\n```'.format(attachment.get('name'), attachment.get('content').strip()))
         context_buffer = self.context_el.get_buffer()
         system_message.append(context_buffer.get_text(context_buffer.get_start_iter(), context_buffer.get_end_iter(), False).replace('"', '\\"').strip())
